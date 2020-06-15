@@ -1,0 +1,23 @@
+import Callout from '../components/callout'
+
+# MDX
+
+Use [MDX](https://mdxjs.com/about) to use React components inside your Markdown file:
+
+<Callout emoji="✅">
+  MDX (the library), at its core, transforms MDX (the syntax) to JSX. It receives an MDX string and outputs a JSX string. It does this by parsing the MDX document to a syntax tree and then generates a JSX document from that tree. 
+</Callout>
+
+Syntax _highlighting_ is also supported:
+
+```jsx
+import useSWR from 'swr'
+
+function Profile() {
+  const { data, error } = useSWR('/api/user', fetcher)
+
+  if (error) return <div>failed to load</div>
+  if (!data) return <div>loading...</div>
+  return <div>hello {data.name}!</div>
+}
+```

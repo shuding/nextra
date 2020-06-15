@@ -1,0 +1,88 @@
+@tailwind base;
+
+@font-face {
+  font-family: 'Inter';
+  font-weight: 100 900;
+  font-display: block;
+  src: url('https://assets.vercel.com/raw/upload/v1587415301/fonts/2/inter-var-latin.woff2')
+    format('woff2');
+}
+
+html {
+  @apply font-display subpixel-antialiased;
+  font-size: 16px;
+  font-feature-settings: 'rlig', 'calt' 1;
+  scroll-padding-top: 84px;
+  scroll-behavior: smooth;
+}
+
+h1 {
+  @apply text-4xl font-bold tracking-tight;
+}
+h2 {
+  @apply text-3xl font-semibold tracking-tight mt-10;
+  @apply border-b;
+}
+h3 {
+  @apply text-2xl font-semibold tracking-tight mt-8;
+}
+h4 {
+  @apply text-xl font-semibold;
+}
+h5 {
+  @apply text-lg font-semibold;
+}
+h6 {
+  @apply text-base font-semibold;
+}
+a {
+  @apply text-blue-600 underline;
+}
+p {
+  @apply mt-6 leading-7;
+}
+hr {
+  @apply my-8;
+}
+code {
+  @apply p-1 text-sm text-gray-800 bg-gray-200 rounded;
+}
+pre {
+  @apply p-4 bg-gray-200 rounded-lg mt-6 mb-4 overflow-x-auto scrolling-touch;
+}
+pre code {
+  @apply p-0 text-black bg-transparent rounded-none;
+}
+
+@tailwind components;
+@tailwind utilities;
+
+.main-container {
+  min-height: 100vh;
+}
+
+.sidebar {
+  @apply select-none;
+}
+.sidebar ul ul {
+  @apply ml-5;
+}
+.sidebar a:focus, .sidebar button:focus, .sidebar button:active {
+  @apply outline-none shadow-outline;
+}
+.sidebar li.active > a {
+  @apply font-semibold text-black bg-gray-200;
+}
+.sidebar button, .sidebar a {
+  @apply block w-full text-left text-base text-black no-underline text-gray-600 mt-1 p-2 rounded;
+}
+.sidebar a:hover, .sidebar button:hover {
+  @apply text-gray-900 bg-gray-100;
+}
+
+content ul {
+  @apply list-disc ml-6 mt-6;
+}
+content li {
+  @apply mt-2;
+}

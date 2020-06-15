@@ -1,0 +1,27 @@
+{
+  "name": "nextra",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "next",
+    "build": "next build"
+  },
+  "author": "Shu Ding",
+  "license": "MIT",
+  "dependencies": {
+    "@sindresorhus/slugify": "^1.0.0",
+    "next": "^9.4.4",
+    "prism-react-renderer": "^1.1.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "@mdx-js/loader": "^1.6.5",
+    "babel-plugin-macros": "^2.8.0",
+    "postcss-preset-env": "^6.7.0",
+    "preval.macro": "^5.0.0",
+    "tailwindcss": "^1.4.6",
+    "title": "^3.4.2"
+  }
+}
