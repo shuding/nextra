@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext, createContext } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
@@ -13,6 +13,7 @@ import config from '../nextra.config'
 const directories = getDirectories()
 const TreeState = new Map()
 const titleType = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
+const MenuContext = createContext(false)
 
 function Folder ({ item, anchors }) {
   const route = useRouter().route + '/'
@@ -39,6 +40,7 @@ function Folder ({ item, anchors }) {
 }
 
 function File ({ item, anchors }) {
+  const { setMenu } = useContext(MenuContext)
   const route = useRouter().route + '/'
   const active = route.startsWith(item.route + '/')
 
@@ -51,14 +53,16 @@ function File ({ item, anchors }) {
         <Link href={item.route}><a>{title}</a></Link>
         <ul>{anchors.map(anchor => {
           const slug = slugify(anchor || '')
-          return <a href={'#' + slug} key={`a-${slug}`}><span className="flex"><span className="mr-2 opacity-25">#</span><span className="inline-block">{anchor}</span></span></a>
+          return <a href={'#' + slug} key={`a-${slug}`} onClick={() => setMenu(false)}>
+            <span className="flex"><span className="mr-2 opacity-25">#</span><span className="inline-block">{anchor}</span></span>
+          </a>
         })}</ul>
       </li>
     }
   }
   
   return <li className={active ? 'active' : ''}>
-    <Link href={item.route}><a>{title}</a></Link>
+    <Link href={item.route}><a onClick={() => setMenu(false)}>{title}</a></Link>
   </li>
 }
 
@@ -89,6 +93,14 @@ export default ({ children }) => {
   const title = titles.find(child => child.props.mdxType === 'h1')?.props.children || 'Untitled'
   const anchors = titles.filter(child => child.props.mdxType === 'h2').map(child => child.props.children)
 
+  useEffect(() => {
+    if (menu) {
+      document.body.classList.add('overflow-hidden')
+    } else {
+      document.body.classList.remove('overflow-hidden')
+    }
+  }, [menu])
+
   return <>
     <Head>
       <title>{title}{config.titleSuffix || ''}</title>
@@ -107,7 +119,9 @@ export default ({ children }) => {
         </button>
       </nav>
       <main className="flex flex-1 h-full">
+        <MenuContext.Provider value={{ setMenu }}>
         <Sidebar show={menu} anchors={anchors}/>
+        </MenuContext.Provider>
         <content className="relative pt-20 pb-16 px-6 md:px-8 w-full max-w-full overflow-x-hidden">
           <div className="max-w-screen-md">
             <Theme>{children}</Theme>

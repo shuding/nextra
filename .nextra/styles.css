@@ -12,7 +12,6 @@ html {
   @apply font-display subpixel-antialiased;
   font-size: 16px;
   font-feature-settings: 'rlig', 'calt' 1;
-  scroll-padding-top: 84px;
   scroll-behavior: smooth;
 }
 
@@ -74,7 +73,9 @@ pre code {
   @apply font-semibold text-black bg-gray-200;
 }
 .sidebar button, .sidebar a {
-  @apply block w-full text-left text-base text-black no-underline text-gray-600 mt-1 p-2 rounded;
+  @apply block w-full text-left text-base text-black no-underline text-gray-600 mt-1 p-2 rounded select-none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
 }
 .sidebar a:hover, .sidebar button:hover {
   @apply text-gray-900 bg-gray-100;
@@ -85,4 +86,10 @@ content ul {
 }
 content li {
   @apply mt-2;
+}
+.subheading-anchor {
+  margin-top: -84px;
+  display: inline-block;
+  position: absolute;
+  width: 1px;
 }

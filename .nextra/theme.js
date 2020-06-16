@@ -63,7 +63,8 @@ const THEME = {
 const H2 = ({ children, ...props }) => {
   const slug = slugify(children || '')
   return <h2 {...props}>
-    <a id={slug} href={'#' + slug} className="text-current no-underline no-outline">{children}</a>
+    <span className="subheading-anchor" id={slug}/>
+    <a href={'#' + slug} className="text-current no-underline no-outline">{children}</a>
   </h2>
 }
 
