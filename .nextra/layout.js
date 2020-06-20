@@ -8,6 +8,7 @@ import getDirectories from './directories'
 import getConfig from './config'
 import Theme from './theme'
 
+import Search from '../components/search'
 import GitHubIcon from '../components/github-icon'
 import ArrowRight from '../components/arrow-right'
 
@@ -216,6 +217,9 @@ export default ({ children }) => {
               </a>
             </Link>
           </div>
+
+          {config.search && <Search directories={flatDirectories} />}
+
           {config.github ? (
             <a
               className="text-current p-2 -mr-2"
