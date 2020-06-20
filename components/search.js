@@ -96,7 +96,7 @@ const Search = ({ directories }) => {
   const renderList = show && results.length > 0
 
   return (
-    <div className="relative">
+    <div className="relative w-full md:w-auto">
       {renderList && (
         <div className="search-overlay z-1" onClick={() => setShow(false)} />
       )}
@@ -105,16 +105,15 @@ const Search = ({ directories }) => {
           setSearch(e.target.value)
           setShow(true)
         }}
-        className="appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        className="appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full"
         type="search"
         placeholder='Search ("/" to focus)'
         onKeyDown={handleKeyDown}
-        // onBlur={() => setShow(false)}
         onFocus={() => setShow(true)}
         ref={input}
       />
       {renderList && (
-        <ul className="shadow-md list-none p-0 m-0 absolute right-0 w-64 bg-white rounded mt-1 border top-100 divide-y divide-gray-300 z-2">
+        <ul className="shadow-md list-none p-0 m-0 absolute left-0 md:right-0 bg-white rounded mt-1 border top-100 divide-y divide-gray-300 z-2">
           {results.map((res, i) => {
             return (
               <Item
