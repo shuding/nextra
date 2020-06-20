@@ -10,6 +10,7 @@ import getConfig from './config'
 import Theme from './theme'
 import SSGContext from './ssg'
 
+import Search from '../components/search'
 import GitHubIcon from '../components/github-icon'
 import ArrowRight from '../components/arrow-right'
 
@@ -218,13 +219,16 @@ const Layout = ({ filename, full, title: _title, ssg = {}, children }) => {
       </Head>
       <div className="main-container flex flex-col">
         <nav className="flex items-center bg-white z-20 fixed top-0 left-0 right-0 h-16 border-b px-6">
-          <div className="w-full flex items-center">
+          <div className="hidden md:block w-full flex items-center">
             <Link href="/">
               <a className="no-underline text-current inline-flex items-center hover:opacity-75">
                 {config.logo}
               </a>
             </Link>
           </div>
+
+          {config.search && <Search directories={flatDirectories} />}
+
           {config.github ? (
             <a
               className="text-current p-2 -mr-2"
