@@ -16,7 +16,7 @@ importAll(require.context('../pages/', true, /meta\.json$/))
 const items = preval`
   const { readdirSync, readFileSync } = require('fs')
   const { resolve, join } = require('path')
-  const extension = /(\.mdx?)$/
+  const extension = /\.(mdx?|jsx?)$/
   
   function getFiles(dir, route) {
     const files = readdirSync(dir, { withFileTypes: true })
