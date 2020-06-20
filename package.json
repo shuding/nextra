@@ -21,8 +21,13 @@
   "devDependencies": {
     "@mdx-js/loader": "^1.6.5",
     "postcss-preset-env": "^6.7.0",
+    "prettier": "^2.0.5",
     "preval.macro": "^5.0.0",
     "tailwindcss": "^1.4.6",
     "title": "^3.4.2"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
   }
 }
