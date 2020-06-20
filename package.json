@@ -11,6 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "@sindresorhus/slugify": "^1.0.0",
+    "babel-plugin-macros": "^2.8.0",
     "focus-visible": "^5.1.0",
     "next": "^9.4.4",
     "prism-react-renderer": "^1.1.1",
@@ -19,7 +20,6 @@
   },
   "devDependencies": {
     "@mdx-js/loader": "^1.6.5",
-    "babel-plugin-macros": "^2.8.0",
     "postcss-preset-env": "^6.7.0",
     "preval.macro": "^5.0.0",
     "tailwindcss": "^1.4.6",
