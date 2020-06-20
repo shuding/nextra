@@ -5,7 +5,7 @@ export default {
     <span className="mr-2 font-extrabold hidden md:inline">Nextra</span>
     <span className="text-gray-600 font-normal hidden md:inline">The Next Docs Builder</span>
   </>,
-  head: <>
+  head: () => <>
     <meta name="msapplication-TileColor" content="#ffffff" />
     <meta name="theme-color" content="#ffffff" />
     <meta
@@ -28,5 +28,14 @@ export default {
       content="Nextra: the next docs builder"
     />
     <meta name="apple-mobile-web-app-title" content="Nextra" />
+  </>,
+  footer: ({ filepath }) => <>
+    <hr/>
+    <div className="mt-24 flex justify-end flex-col-reverse md:flex-row items-center md:items-end">
+      <div className="mt-6"/>
+      <a className="text-sm" href={
+        'https://github.com/shuding/nextra/tree/master/pages' + filepath
+      } target="_blank">Edit this page on GitHub</a>
+    </div>
   </>
 }
