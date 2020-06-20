@@ -5,14 +5,14 @@ import Link from 'next/link'
 import slugify from '@sindresorhus/slugify'
 import 'focus-visible'
 
-import getDirectories from './directories'
-import getConfig from './config'
 import Theme from './theme'
 import SSGContext from './ssg'
+import Search from './search'
+import GitHubIcon from './github-icon'
+import ArrowRight from './arrow-right'
 
-import Search from '../components/search'
-import GitHubIcon from '../components/github-icon'
-import ArrowRight from '../components/arrow-right'
+import getDirectories from './directories'
+import getConfig from './config'
 
 const config = getConfig()
 const directories = getDirectories()
