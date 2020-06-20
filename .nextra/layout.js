@@ -9,12 +9,23 @@ import getConfig from './config'
 import Theme from './theme'
 
 import GitHubIcon from '../components/github-icon'
+import ArrowRight from '../components/arrow-right'
 
 const config = getConfig()
 const directories = getDirectories()
 const TreeState = new Map()
 const titleType = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
 const MenuContext = createContext(false)
+
+const flatten = (list) => {
+  return list.reduce((flat, toFlatten) => {
+    return flat.concat(
+      toFlatten.children ? flatten(toFlatten.children) : toFlatten
+    )
+  }, [])
+}
+
+const flatDirectories = flatten(directories)
 
 function Folder({ item, anchors }) {
   const route = useRouter().route + '/'
@@ -127,6 +138,40 @@ function Sidebar({ show, anchors }) {
   )
 }
 
+const NextLink = ({ currentIndex }) => {
+  let next = flatDirectories[currentIndex + 1]
+
+  if (!config.nextLinks || !next) {
+    return null
+  }
+
+  return (
+    <Link href={next.route}>
+      <a className="text-lg font-medium no-underline hover:text-blue-400 flex items-center">
+        {next.title}
+        <ArrowRight className="inline ml-1" />
+      </a>
+    </Link>
+  )
+}
+
+const PrevLink = ({ currentIndex }) => {
+  let prev = flatDirectories[currentIndex - 1]
+
+  if (!config.prevLinks || !prev) {
+    return null
+  }
+
+  return (
+    <Link href={prev.route}>
+      <a className="text-lg font-medium no-underline hover:text-blue-400 flex items-center">
+        <ArrowRight className="transform rotate-180 inline mr-1" />
+        {prev.title}
+      </a>
+    </Link>
+  )
+}
+
 export default ({ children }) => {
   const [menu, setMenu] = useState(false)
   const router = useRouter()
@@ -149,11 +194,9 @@ export default ({ children }) => {
     }
   }, [menu])
 
-  const currentIndex = directories.findIndex(
+  const currentIndex = flatDirectories.findIndex(
     (dir) => dir.route === router.pathname
   )
-  let previous = directories[currentIndex - 1] ?? null
-  let next = directories[currentIndex + 1] ?? null
 
   return (
     <>
@@ -215,53 +258,11 @@ export default ({ children }) => {
             <footer className="mt-24">
               <nav className="flex justify-between flex-col-reverse md:flex-row items-center md:items-end">
                 <div>
-                  {config.prevLinks && previous && (
-                    <Link href={previous.route}>
-                      <a className="text-lg font-medium no-underline hover:text-blue-400 flex items-center">
-                        <svg
-                          width="20"
-                          height="20"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          class="inline mr-1"
-                        >
-                          <path
-                            d="M21 12H3m0 0l6.146-6M3 12l6.146 6"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                        {previous.title}
-                      </a>
-                    </Link>
-                  )}
+                  <PrevLink currentIndex={currentIndex} />
                 </div>
 
                 <div>
-                  {config.nextLinks && next && (
-                    <Link href={next.route}>
-                      <a className="text-lg font-medium no-underline hover:text-blue-400 flex items-center">
-                        {next.title}
-                        <svg
-                          width="20"
-                          height="20"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          className="inline ml-1"
-                        >
-                          <path
-                            d="M3 12h18m0 0l-6.146-6M21 12l-6.146 6"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      </a>
-                    </Link>
-                  )}
+                  <NextLink currentIndex={currentIndex} />
                 </div>
               </nav>
 
