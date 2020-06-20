@@ -21,14 +21,14 @@ const THEME = {
       fontStyle: "italic"
     }
   }, {
-    types: ["string", "url"],
+    types: ["string", "url", "attr-value"],
     style: {
       color: "#028265"
     }
   }, {
-    types: ["variable"],
+    types: ["variable", "language-javascript"],
     style: {
-      color: "#c6c5fe"
+      color: "#000"
     }
   }, {
     types: ["builtin", "char", "constant"],
@@ -47,7 +47,7 @@ const THEME = {
       color: "#333"
     }
   }, {
-    types: ["number", "function"],
+    types: ["number", "function", "tag"],
     style: {
       color: "#0076ff"
     }

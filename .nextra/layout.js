@@ -3,9 +3,11 @@ import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
 import slugify from '@sindresorhus/slugify'
+import 'focus-visible'
 
 import getDirectories from './directories'
 import Theme from './theme'
+import SSGContext from './ssg'
 
 import GitHubIcon from '../components/github-icon'
 import config from '../nextra.config'
@@ -18,7 +20,7 @@ const MenuContext = createContext(false)
 function Folder ({ item, anchors }) {
   const route = useRouter().route + '/'
   const active = route.startsWith(item.route + '/')
-  const open = TreeState[item.route] || active
+  const open = TreeState[item.route] ?? true
   const [_, render] = useState(false)
 
   useEffect(() => {
@@ -86,11 +88,13 @@ function Sidebar ({ show, anchors }) {
   </aside>
 }
 
-export default ({ children }) => {
+const Layout = ({ filename, full, title: _title, ssg = {}, children }) => {
   const [menu, setMenu] = useState(false)
+  const route = useRouter().route 
+  const filepath = route.slice(0, route.lastIndexOf('/') + 1)
 
-  const titles = React.Children.toArray(children).filter(child => titleType.includes(child.props.mdxType))
-  const title = titles.find(child => child.props.mdxType === 'h1')?.props.children || 'Untitled'
+  const titles = React.Children.toArray(children).filter(child => titleType.includes(child.props?.mdxType))
+  const title = titles.find(child => child.props.mdxType === 'h1')?.props.children || _title || 'Untitled'
   const anchors = titles.filter(child => child.props.mdxType === 'h2').map(child => child.props.children)
 
   useEffect(() => {
@@ -101,15 +105,20 @@ export default ({ children }) => {
     }
   }, [menu])
 
+  const props = {
+    filepath: filepath + filename,
+    route
+  }
+
   return <>
     <Head>
       <title>{title}{config.titleSuffix || ''}</title>
-      {config.head}
+      {config.head ? config.head(props) : null}
     </Head>
     <div className="main-container flex flex-col">
       <nav className="flex items-center bg-white z-20 fixed top-0 left-0 right-0 h-16 border-b px-6">
         <div className="w-full flex items-center">
-          <Link href="/"><a className="no-underline text-current inline-flex items-center hover:opacity-75">
+          <Link href="/"><a className="no-underline text-current inline-flex items-center py-2 hover:opacity-75">
             {config.logo}
           </a></Link>
         </div>
@@ -120,14 +129,25 @@ export default ({ children }) => {
       </nav>
       <main className="flex flex-1 h-full">
         <MenuContext.Provider value={{ setMenu }}>
-        <Sidebar show={menu} anchors={anchors}/>
+          <Sidebar show={menu} anchors={anchors}/>
         </MenuContext.Provider>
-        <content className="relative pt-20 pb-16 px-6 md:px-8 w-full max-w-full overflow-x-hidden">
-          <div className="max-w-screen-md">
-            <Theme>{children}</Theme>
-          </div>
-        </content>
+        <SSGContext.Provider value={ssg}>
+          {
+            full
+              ? <content className="relative pt-16 w-full overflow-x-hidden">{children}</content>
+              : <content className="relative pt-20 pb-16 px-6 md:px-8 w-full max-w-full overflow-x-hidden">
+                  <div className="max-w-screen-md">
+                    <Theme>{children}</Theme>
+                    {config.footer ? config.footer(props) : null}
+                  </div>
+                </content>
+          }
+        </SSGContext.Provider>
       </main>
     </div>
   </>
+}
+
+export default filename => {
+  return props => <Layout filename={filename} {...props}/>
 }
