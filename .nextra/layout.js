@@ -1,12 +1,14 @@
-import React, { useState, useEffect, useContext, createContext } from 'react'
+import React, { useState, useEffect, useMemo, useContext, createContext } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
 import slugify from '@sindresorhus/slugify'
+import 'focus-visible'
 
 import getDirectories from './directories'
 import getConfig from './config'
 import Theme from './theme'
+import SSGContext from './ssg'
 
 import GitHubIcon from '../components/github-icon'
 import ArrowRight from '../components/arrow-right'
@@ -30,7 +32,7 @@ const flatDirectories = flatten(directories)
 function Folder({ item, anchors }) {
   const route = useRouter().route + '/'
   const active = route.startsWith(item.route + '/')
-  const open = TreeState[item.route] || active
+  const open = TreeState[item.route] ?? true
   const [_, render] = useState(false)
 
   useEffect(() => {
@@ -147,7 +149,7 @@ const NextLink = ({ currentIndex }) => {
 
   return (
     <Link href={next.route}>
-      <a className="text-lg font-medium no-underline hover:text-blue-400 flex items-center ml-2">
+      <a className="text-lg font-medium p-4 -m-4 no-underline text-gray-600 hover:text-blue-600 flex items-center ml-2">
         {next.title}
         <ArrowRight className="inline ml-1 flex-shrink-0" />
       </a>
@@ -164,7 +166,7 @@ const PrevLink = ({ currentIndex }) => {
 
   return (
     <Link href={prev.route}>
-      <a className="text-lg font-medium no-underline hover:text-blue-400 flex items-center mr-2">
+      <a className="text-lg font-medium p-4 -m-4 no-underline text-gray-600 hover:text-blue-600 flex items-center mr-2">
         <ArrowRight className="transform rotate-180 inline mr-1 flex-shrink-0" />
         {prev.title}
       </a>
@@ -172,10 +174,12 @@ const PrevLink = ({ currentIndex }) => {
   )
 }
 
-export default ({ children }) => {
+const Layout = ({ filename, full, title: _title, ssg = {}, children }) => {
   const [menu, setMenu] = useState(false)
   const router = useRouter()
+  const { route, pathname } = router
 
+  const filepath = route.slice(0, route.lastIndexOf('/') + 1)
   const titles = React.Children.toArray(children).filter((child) =>
     titleType.includes(child.props.mdxType)
   )
@@ -194,9 +198,14 @@ export default ({ children }) => {
     }
   }, [menu])
 
-  const currentIndex = flatDirectories.findIndex(
-    (dir) => dir.route === router.pathname
-  )
+  const currentIndex = useMemo(() => flatDirectories.findIndex(
+    (dir) => dir.route === pathname
+  ), [flatDirectories, pathname])
+
+  const props = {
+    filepath: filepath + filename,
+    route
+  }
 
   return (
     <>
@@ -205,7 +214,7 @@ export default ({ children }) => {
           {title}
           {config.titleSuffix || ''}
         </title>
-        {config.head}
+        {config.head ? config.head(props) : null}
       </Head>
       <div className="main-container flex flex-col">
         <nav className="flex items-center bg-white z-20 fixed top-0 left-0 right-0 h-16 border-b px-6">
@@ -249,30 +258,38 @@ export default ({ children }) => {
           <MenuContext.Provider value={{ setMenu }}>
             <Sidebar show={menu} anchors={anchors} />
           </MenuContext.Provider>
+          <SSGContext.Provider value={ssg}>
+            {
+              full
+                ? <content className="relative pt-16 w-full overflow-x-hidden">{children}</content>
+                : <content className="relative pt-20 pb-16 px-6 md:px-8 w-full max-w-full overflow-x-hidden">
+                    <main className="max-w-screen-md">
+                      <Theme>{children}</Theme>
+                      <footer className="mt-24">
+                        <nav className="flex flex-row items-center justify-between">
+                          <div>
+                            <PrevLink currentIndex={currentIndex} />
+                          </div>
 
-          <div className="relative pt-20 pb-16 px-6 md:px-8 w-full max-w-full overflow-x-hidden">
-            <main className="max-w-screen-md">
-              <Theme>{children}</Theme>
-            </main>
+                          <div>
+                            <NextLink currentIndex={currentIndex} />
+                          </div>
+                        </nav>
 
-            <footer className="mt-24">
-              <nav className="flex flex-row items-center justify-between">
-                <div>
-                  <PrevLink currentIndex={currentIndex} />
-                </div>
+                        <hr />
 
-                <div>
-                  <NextLink currentIndex={currentIndex} />
-                </div>
-              </nav>
-
-              <hr />
-
-              {config.footer}
-            </footer>
-          </div>
+                        {config.footer ? config.footer(props) : null}
+                      </footer>
+                    </main>
+                  </content>
+            }
+          </SSGContext.Provider>
         </div>
       </div>
     </>
   )
+}
+
+export default filename => {
+  return props => <Layout filename={filename} {...props}/>
 }

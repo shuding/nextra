@@ -9,7 +9,7 @@ export default {
       </span>
     </>
   ),
-  head: (
+  head: () => (
     <>
       <meta name="msapplication-TileColor" content="#ffffff" />
       <meta name="theme-color" content="#ffffff" />
@@ -23,9 +23,15 @@ export default {
       <meta name="apple-mobile-web-app-title" content="Nextra" />
     </>
   ),
-  footer: (
-    <span className="text-gray-600">
-      MIT {new Date().getFullYear()} © Shu Ding.
-    </span>
-  ),
+  footer: ({ filepath }) => <>
+    <div className="mt-24 flex justify-between flex-col-reverse md:flex-row items-center md:items-end">
+      <span className="text-gray-600">
+        MIT {new Date().getFullYear()} © Shu Ding.
+      </span>
+      <div className="mt-6"/>
+      <a className="text-sm" href={
+        'https://github.com/shuding/nextra/tree/master/pages' + filepath
+      } target="_blank">Edit this page on GitHub</a>
+    </div>
+  </>
 }
