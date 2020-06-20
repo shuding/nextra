@@ -1,75 +1,76 @@
-import React, { useState, useEffect, useContext, createContext } from "react";
-import { useRouter } from "next/router";
-import Head from "next/head";
-import Link from "next/link";
-import slugify from "@sindresorhus/slugify";
+import React, { useState, useEffect, useContext, createContext } from 'react'
+import { useRouter } from 'next/router'
+import Head from 'next/head'
+import Link from 'next/link'
+import slugify from '@sindresorhus/slugify'
 
-import getDirectories from "./directories";
-import Theme from "./theme";
+import getDirectories from './directories'
+import getConfig from './config'
+import Theme from './theme'
 
-import GitHubIcon from "../components/github-icon";
-import config from "../nextra.config";
+import GitHubIcon from '../components/github-icon'
 
-const directories = getDirectories();
-const TreeState = new Map();
-const titleType = ["h1", "h2", "h3", "h4", "h5", "h6"];
-const MenuContext = createContext(false);
+const config = getConfig()
+const directories = getDirectories()
+const TreeState = new Map()
+const titleType = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
+const MenuContext = createContext(false)
 
 function Folder({ item, anchors }) {
-  const route = useRouter().route + "/";
-  const active = route.startsWith(item.route + "/");
-  const open = TreeState[item.route] || active;
-  const [_, render] = useState(false);
+  const route = useRouter().route + '/'
+  const active = route.startsWith(item.route + '/')
+  const open = TreeState[item.route] || active
+  const [_, render] = useState(false)
 
   useEffect(() => {
     if (active) {
-      TreeState[item.route] = true;
+      TreeState[item.route] = true
     }
-  }, [active]);
+  }, [active])
 
   return (
-    <li className={open ? "active" : ""}>
+    <li className={open ? 'active' : ''}>
       <button
         onClick={() => {
-          if (active) return;
-          TreeState[item.route] = !open;
-          render((x) => !x);
+          if (active) return
+          TreeState[item.route] = !open
+          render((x) => !x)
         }}
       >
         {item.title}
       </button>
       <div
         style={{
-          display: open ? "" : "none",
+          display: open ? '' : 'none',
         }}
       >
         <Menu dir={item.children} base={item.route} anchors={anchors} />
       </div>
     </li>
-  );
+  )
 }
 
 function File({ item, anchors }) {
-  const { setMenu } = useContext(MenuContext);
-  const route = useRouter().route + "/";
-  const active = route.startsWith(item.route + "/");
+  const { setMenu } = useContext(MenuContext)
+  const route = useRouter().route + '/'
+  const active = route.startsWith(item.route + '/')
 
-  let title = item.title;
+  let title = item.title
   // if (item.title.startsWith('> ')) {
   // title = title.substr(2)
   if (anchors?.length) {
     if (active) {
       return (
-        <li className={active ? "active" : ""}>
+        <li className={active ? 'active' : ''}>
           <Link href={item.route}>
             <a>{title}</a>
           </Link>
           <ul>
             {anchors.map((anchor) => {
-              const slug = slugify(anchor || "");
+              const slug = slugify(anchor || '')
               return (
                 <a
-                  href={"#" + slug}
+                  href={'#' + slug}
                   key={`a-${slug}`}
                   onClick={() => setMenu(false)}
                 >
@@ -78,21 +79,21 @@ function File({ item, anchors }) {
                     <span className="inline-block">{anchor}</span>
                   </span>
                 </a>
-              );
+              )
             })}
           </ul>
         </li>
-      );
+      )
     }
   }
 
   return (
-    <li className={active ? "active" : ""}>
+    <li className={active ? 'active' : ''}>
       <Link href={item.route}>
         <a onClick={() => setMenu(false)}>{title}</a>
       </Link>
     </li>
-  );
+  )
 }
 
 function Menu({ dir, anchors }) {
@@ -100,69 +101,66 @@ function Menu({ dir, anchors }) {
     <ul>
       {dir.map((item) => {
         if (item.children) {
-          return <Folder key={item.name} item={item} anchors={anchors} />;
+          return <Folder key={item.name} item={item} anchors={anchors} />
         }
-        return <File key={item.name} item={item} anchors={anchors} />;
+        return <File key={item.name} item={item} anchors={anchors} />
       })}
     </ul>
-  );
+  )
 }
 
 function Sidebar({ show, anchors }) {
   return (
     <aside
       className={`h-screen bg-white flex-shrink-0 w-full md:w-64 md:border-r md:block fixed md:sticky z-10 ${
-        show ? "" : "hidden"
+        show ? '' : 'hidden'
       }`}
       style={{
-        top: "4rem",
-        height: "calc(100vh - 4rem)",
+        top: '4rem',
+        height: 'calc(100vh - 4rem)',
       }}
     >
       <div className="sidebar w-full p-4 pb-40 md:pb-16 h-full overflow-y-auto">
         <Menu dir={directories} anchors={anchors} />
       </div>
     </aside>
-  );
+  )
 }
 
 export default ({ children }) => {
-  const [menu, setMenu] = useState(false);
-  const router = useRouter();
+  const [menu, setMenu] = useState(false)
+  const router = useRouter()
 
   const titles = React.Children.toArray(children).filter((child) =>
     titleType.includes(child.props.mdxType)
-  );
+  )
   const title =
-    titles.find((child) => child.props.mdxType === "h1")?.props.children ||
-    "Untitled";
+    titles.find((child) => child.props.mdxType === 'h1')?.props.children ||
+    'Untitled'
   const anchors = titles
-    .filter((child) => child.props.mdxType === "h2")
-    .map((child) => child.props.children);
+    .filter((child) => child.props.mdxType === 'h2')
+    .map((child) => child.props.children)
 
   useEffect(() => {
     if (menu) {
-      document.body.classList.add("overflow-hidden");
+      document.body.classList.add('overflow-hidden')
     } else {
-      document.body.classList.remove("overflow-hidden");
+      document.body.classList.remove('overflow-hidden')
     }
-  }, [menu]);
+  }, [menu])
 
-  console.log(directories, title);
   const currentIndex = directories.findIndex(
     (dir) => dir.route === router.pathname
-  );
-  let previous = directories[currentIndex - 1] ?? null;
-  // if (previous.children) previous = previous.children[0]
-  let next = directories[currentIndex + 1] ?? null;
-  // if (next.children) next = next.children[0]
+  )
+  let previous = directories[currentIndex - 1] ?? null
+  let next = directories[currentIndex + 1] ?? null
 
   return (
     <>
       <Head>
         <title>
           {title}
-          {config.titleSuffix || ""}
+          {config.titleSuffix || ''}
         </title>
         {config.head}
       </Head>
@@ -217,7 +215,7 @@ export default ({ children }) => {
             <footer className="mt-24">
               <nav className="flex justify-between flex-col-reverse md:flex-row items-center md:items-end">
                 <div>
-                  {previous && (
+                  {config.prevLinks && previous && (
                     <Link href={previous.route}>
                       <a className="text-lg font-medium no-underline hover:text-blue-400 flex items-center">
                         <svg
@@ -242,7 +240,7 @@ export default ({ children }) => {
                 </div>
 
                 <div>
-                  {next && (
+                  {config.nextLinks && next && (
                     <Link href={next.route}>
                       <a className="text-lg font-medium no-underline hover:text-blue-400 flex items-center">
                         {next.title}
@@ -275,5 +273,5 @@ export default ({ children }) => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
