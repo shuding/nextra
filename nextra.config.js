@@ -28,5 +28,8 @@ export default {
       content="Nextra: the next docs builder"
     />
     <meta name="apple-mobile-web-app-title" content="Nextra" />
-  </>
+  </>,
+  footer: <span className="text-gray-600">
+    MIT {new Date().getFullYear()} © Shu Ding.
+  </span>
 }
