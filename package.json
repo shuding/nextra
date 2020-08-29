@@ -1,13 +1,17 @@
 {
   "name": "nextra",
-  "version": "0.1.0-1",
+  "version": "0.1.0-4",
   "description": "Next.js and MDX based site generator.",
-  "main": "dist/nextra.js",
-  "files": ["dist/*"],
+  "main": "index.js",
+  "files": [
+    "dist/*",
+    "index.js",
+    "ssg.js"
+  ],
   "repository": "https://github.com/shuding/nextra",
   "license": "MIT",
   "scripts": {
-    "build": "microbundle src/index.js src/loader.js src/ssg.js -o dist --no-sourcemap --target=node"
+    "build": "microbundle src/index.js src/ssg.js src/loader.js -o dist --no-sourcemap --target=node"
   },
   "dependencies": {
     "gray-matter": "^4.0.2",

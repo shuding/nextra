@@ -2,8 +2,6 @@ import path from 'path'
 import { getOptions } from 'loader-utils'
 import grayMatter from 'gray-matter'
 
-const ssgHOC = path.resolve(__dirname, 'ssg')
-
 export default function (source, map) {
   this.cacheable()
 
@@ -32,7 +30,7 @@ export default function (source, map) {
   const fileName = this.resourcePath.slice(
     this.resourcePath.lastIndexOf('/') + 1
   )
-  const prefix = `import withLayout from '${layout}'\nimport { withSSG } from '${ssgHOC}'\n\n`
+  const prefix = `import withLayout from '${layout}'\nimport { withSSG } from 'nextra/ssg'\n\n`
   const suffix = `\n\nexport default withSSG(withLayout({
     fileName: "${fileName}",
     frontMatter: ${JSON.stringify(data)}
