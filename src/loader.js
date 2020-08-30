@@ -27,13 +27,14 @@ export default function (source, map) {
     layout = path.resolve(theme)
   }
 
-  const fileName = this.resourcePath.slice(
+  const filename = this.resourcePath.slice(
     this.resourcePath.lastIndexOf('/') + 1
   )
+
   const prefix = `import withLayout from '${layout}'\nimport { withSSG } from 'nextra/ssg'\n\n`
   const suffix = `\n\nexport default withSSG(withLayout({
-    fileName: "${fileName}",
-    frontMatter: ${JSON.stringify(data)}
+    filename: "${filename}",
+    meta: ${JSON.stringify(data)}
   }))`
 
   // Add imports and exports to the source

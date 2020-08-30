@@ -3,12 +3,12 @@ import path from 'path'
 export default (
   theme
 ) => (
-  nextConfig = {
-    pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx']
-  }
+  nextConfig = {}
 ) => {
   const markdownExtension = /\.mdx?$/
-  return Object.assign({}, nextConfig, {
+  return Object.assign({
+      pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx']
+    }, nextConfig, {
     webpack(config, options) {
       config.module.rules.push({
         test: markdownExtension,
@@ -18,7 +18,7 @@ export default (
             loader: 'mdx-next-loader-test',
           },
           {
-            loader: path.resolve(__dirname, 'loader'),
+            loader: 'nextra/loader',
             options: { theme }
           }
         ]
