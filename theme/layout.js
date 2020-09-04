@@ -3,19 +3,19 @@ import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
 import slugify from '@sindresorhus/slugify'
+import { SSGContext } from 'nextra/ssg'
 import 'focus-visible'
 
 import Theme from './theme'
-import SSGContext from './ssg'
 import Search from './search'
 import GitHubIcon from './github-icon'
 import ArrowRight from './arrow-right'
 
-import getDirectories from './directories'
+// import getDirectories from './directories'
 import getConfig from './config'
 
 const config = getConfig()
-const directories = getDirectories()
+const directories = [] // getDirectories()
 const TreeState = new Map()
 const titleType = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
 const MenuContext = createContext(false)

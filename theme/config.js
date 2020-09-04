@@ -1,4 +1,4 @@
-import userConfig from '../nextra.config'
+import userConfig from '../theme.config'
 
 const defaultConfig = {
   nextLinks: true,
