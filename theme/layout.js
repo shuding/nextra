@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
 import slugify from '@sindresorhus/slugify'
-import { SSGContext } from 'nextra/ssg'
+import getTitle from 'title'
 import 'focus-visible'
 
 import Theme from './theme'
@@ -11,11 +11,9 @@ import Search from './search'
 import GitHubIcon from './github-icon'
 import ArrowRight from './arrow-right'
 
-// import getDirectories from './directories'
 import getConfig from './config'
 
 const config = getConfig()
-const directories = [] // getDirectories()
 const TreeState = new Map()
 const titleType = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
 const MenuContext = createContext(false)
@@ -28,7 +26,28 @@ const flatten = (list) => {
   }, [])
 }
 
-const flatDirectories = flatten(directories)
+const reorderBasedOnMeta = (list) => {
+  let meta = list.find(item => item.name === 'meta.json')
+  if (!meta) {
+    meta = {}
+  } else {
+    meta = meta.meta
+  }
+
+  const metaKeys = Object.keys(meta)
+
+  return list.filter(a => {
+    return a.name !== 'meta.json' && a.name !== '_app'
+  }).sort((a, b) => {
+    return metaKeys.indexOf(a.name) - metaKeys.indexOf(b.name)
+  }).map(a => {
+    return {
+      ...a,
+      children: a.children ? reorderBasedOnMeta(a.children) : undefined,
+      title: meta[a.name] || getTitle(a.name)
+    }
+  })
+}
 
 function Folder({ item, anchors }) {
   const route = useRouter().route + '/'
@@ -69,7 +88,7 @@ function File({ item, anchors }) {
   const route = useRouter().route + '/'
   const active = route.startsWith(item.route + '/')
 
-  let title = item.title
+  const title = item.title
   // if (item.title.startsWith('> ')) {
   // title = title.substr(2)
   if (anchors?.length) {
@@ -123,7 +142,7 @@ function Menu({ dir, anchors }) {
   )
 }
 
-function Sidebar({ show, anchors }) {
+function Sidebar({ show, directories, anchors }) {
   return (
     <aside
       className={`h-screen bg-white flex-shrink-0 w-full md:w-64 md:border-r md:block fixed md:sticky z-10 ${
@@ -141,7 +160,7 @@ function Sidebar({ show, anchors }) {
   )
 }
 
-const NextLink = ({ currentIndex }) => {
+const NextLink = ({ flatDirectories, currentIndex }) => {
   let next = flatDirectories[currentIndex + 1]
 
   if (!config.nextLinks || !next) {
@@ -158,7 +177,7 @@ const NextLink = ({ currentIndex }) => {
   )
 }
 
-const PrevLink = ({ currentIndex }) => {
+const PrevLink = ({ flatDirectories, currentIndex }) => {
   let prev = flatDirectories[currentIndex - 1]
 
   if (!config.prevLinks || !prev) {
@@ -175,10 +194,13 @@ const PrevLink = ({ currentIndex }) => {
   )
 }
 
-const Layout = ({ filename, full, title: _title, ssg = {}, children }) => {
+const Layout = ({ filename, meta, pageMap, children }) => {
   const [menu, setMenu] = useState(false)
   const router = useRouter()
   const { route, pathname } = router
+
+  const directories = useMemo(() => reorderBasedOnMeta(pageMap), [pageMap])
+  const flatDirectories = useMemo(() => flatten(directories), [directories])
 
   const filepath = route.slice(0, route.lastIndexOf('/') + 1)
   const titles = React.Children.toArray(children).filter((child) =>
@@ -260,40 +282,32 @@ const Layout = ({ filename, full, title: _title, ssg = {}, children }) => {
         </nav>
         <div className="flex flex-1 h-full">
           <MenuContext.Provider value={{ setMenu }}>
-            <Sidebar show={menu} anchors={anchors} />
+            <Sidebar show={menu} anchors={anchors} directories={directories} />
           </MenuContext.Provider>
-          <SSGContext.Provider value={ssg}>
-            {
-              full
-                ? <content className="relative pt-16 w-full overflow-x-hidden">{children}</content>
-                : <content className="relative pt-20 pb-16 px-6 md:px-8 w-full max-w-full overflow-x-hidden">
-                    <main className="max-w-screen-md">
-                      <Theme>{children}</Theme>
-                      <footer className="mt-24">
-                        <nav className="flex flex-row items-center justify-between">
-                          <div>
-                            <PrevLink currentIndex={currentIndex} />
-                          </div>
+          <content className="relative pt-20 pb-16 px-6 md:px-8 w-full max-w-full overflow-x-hidden">
+            <main className="max-w-screen-md">
+              <Theme>{children}</Theme>
+              <footer className="mt-24">
+                <nav className="flex flex-row items-center justify-between">
+                  <div>
+                    <PrevLink flatDirectories={flatDirectories} currentIndex={currentIndex} />
+                  </div>
 
-                          <div>
-                            <NextLink currentIndex={currentIndex} />
-                          </div>
-                        </nav>
+                  <div>
+                    <NextLink flatDirectories={flatDirectories} currentIndex={currentIndex} />
+                  </div>
+                </nav>
 
-                        <hr />
+                <hr />
 
-                        {config.footer ? config.footer(props) : null}
-                      </footer>
-                    </main>
-                  </content>
-            }
-          </SSGContext.Provider>
+                {config.footer ? config.footer(props) : null}
+              </footer>
+            </main>
+          </content>
         </div>
       </div>
     </>
   )
 }
 
-export default filename => {
-  return props => <Layout filename={filename} {...props}/>
-}
+export default opts => props => <Layout {...opts} {...props}/>

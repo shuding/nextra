@@ -1,0 +1,23 @@
+# Next.js SSG + MDX
+
+import { useSSG } from 'nextra/ssg'
+
+export const getStaticProps = ({ params }) => {
+  return fetch('https://api.github.com/repos/shuding/nextra')
+    .then(res => res.json())
+    // we keep the most recent 3 releases here
+    .then(repo => ({ props: { ssg: {
+      stars: repo.stargazers_count
+    } } }))
+}
+
+export const StarsRenderer = () => {
+  const { stars } = useSSG()
+  return <strong>{stars}</strong>
+}
+
+The [Nextra repository](https://github.com/shuding/nextra) has <StarsRenderer/> stars!
+
+---
+
+The data is prerendered with this page.
