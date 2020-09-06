@@ -103,7 +103,7 @@ export default function (source, map) {
     filename: "${filename}",
     meta: ${JSON.stringify(data)},
     pageMap: ${JSON.stringify(pageMap)}
-  }, ${layoutConfig ? 'layoutConfig' : 'null'})`
+  }, ${layoutConfig ? 'layoutConfig' : 'null'}))`
 
   // Add imports and exports to the source
   source = prefix + source + suffix
