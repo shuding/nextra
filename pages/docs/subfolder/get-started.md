@@ -1,3 +1,15 @@
+# Get Started
+
+It has never been easier to create the routes and organize the sidebar structure!
+
+```js
+// next.config.js
+const withNextra = require('nextra')('nextra-theme-docs', './theme.config.js')
+module.exports = withNextra()
+```
+
+```jsx
+// theme.config.js
 export default {
   github: 'https://github.com/shuding/nextra',
   titleSuffix: ' – Nextra',
@@ -24,3 +36,4 @@ export default {
     </>
   )
 }
+```

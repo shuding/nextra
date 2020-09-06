@@ -10,22 +10,14 @@
   "author": "Shu Ding",
   "license": "MIT",
   "dependencies": {
-    "@sindresorhus/slugify": "^1.0.0",
-    "classnames": "^2.2.6",
-    "focus-visible": "^5.1.0",
-    "match-sorter": "^4.1.0",
     "next": "^9.4.4",
-    "nextra": "^0.2.0",
-    "prism-react-renderer": "^1.1.1",
+    "nextra": "^0.2.4",
+    "nextra-theme-docs": "^0.1.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
   "devDependencies": {
-    "@mdx-js/loader": "^1.6.5",
-    "postcss-preset-env": "^6.7.0",
-    "prettier": "^2.0.5",
-    "tailwindcss": "^1.4.6",
-    "title": "^3.4.2"
+    "prettier": "^2.0.5"
   },
   "prettier": {
     "semi": false,
