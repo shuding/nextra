@@ -60,7 +60,7 @@ export default function (source, map) {
   this.cacheable()
 
   const options = getOptions(this)
-  const { theme } = options
+  const { theme, themeConfig } = options
 
   // Add the entire directory `pages` as the dependency
   // so we can generate the correct page map
@@ -82,6 +82,7 @@ export default function (source, map) {
   }
 
   let layout = theme
+  const layoutConfig = themeConfig || null
 
   // Relative path instead of a package name
   if (theme.startsWith('.') || theme.startsWith('/')) {
@@ -97,7 +98,7 @@ export default function (source, map) {
     filename: "${filename}",
     meta: ${JSON.stringify(data)},
     pageMap: ${JSON.stringify(pageMap)}
-  }))`
+  }, ${JSON.stringify(layoutConfig)}))`
 
   // Add imports and exports to the source
   source = prefix + source + suffix

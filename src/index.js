@@ -1,5 +1,5 @@
 export default (
-  theme
+  theme, themeConfig
 ) => (
   nextConfig = {}
 ) => {
@@ -17,7 +17,7 @@ export default (
           },
           {
             loader: 'nextra/loader',
-            options: { theme }
+            options: { theme, themeConfig }
           }
         ]
       })
