@@ -9,3 +9,7 @@ Warning: this project is not production ready, use it on your own risk.
 It supports MDX, anchor links, file-system based routing and built-in syntax highlighting.
 
 ![](/public/demo.png)
+
+## Themes
+
+- [nextra-theme-docs](https://github.com/shuding/nextra-theme-docs)
