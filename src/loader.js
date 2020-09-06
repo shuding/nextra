@@ -82,23 +82,28 @@ export default function (source, map) {
   }
 
   let layout = theme
-  const layoutConfig = themeConfig || null
+  let layoutConfig = themeConfig || null
 
   // Relative path instead of a package name
   if (theme.startsWith('.') || theme.startsWith('/')) {
     layout = path.resolve(theme)
+  }
+  if (layoutConfig) {
+    layoutConfig = path.resolve(layoutConfig)
   }
 
   const filename = this.resourcePath.slice(
     this.resourcePath.lastIndexOf('/') + 1
   )
 
-  const prefix = `import withLayout from '${layout}'\nimport { withSSG } from 'nextra/ssg'\n\n`
+  const prefix = `import withLayout from '${layout}'\nimport { withSSG } from 'nextra/ssg'\n${
+    layoutConfig ? `import layoutConfig from '${layoutConfig}'\n` : ''
+  }\n`
   const suffix = `\n\nexport default withSSG(withLayout({
     filename: "${filename}",
     meta: ${JSON.stringify(data)},
     pageMap: ${JSON.stringify(pageMap)}
-  }, ${JSON.stringify(layoutConfig)}))`
+  }, ${layoutConfig ? 'layoutConfig' : 'null'})`
 
   // Add imports and exports to the source
   source = prefix + source + suffix
