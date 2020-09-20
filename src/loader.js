@@ -3,10 +3,11 @@ import fs from 'fs'
 import { getOptions } from 'loader-utils'
 import grayMatter from 'gray-matter'
 
-function getPageMap() {
+function getPageMap(currentResourcePath) {
   const extension = /\.(mdx?|jsx?)$/
   const mdxExtension = /\.mdx?$/
   const metaExtension = /meta\.json$/
+  let activeRoute = ''
 
   function getFiles(dir, route) {
     const files = fs.readdirSync(dir, { withFileTypes: true })
@@ -19,6 +20,10 @@ function getPageMap() {
           route,
           f.name.replace(extension, '').replace(/^index$/, '')
         )
+
+        if (filePath === currentResourcePath) {
+          activeRoute = fileRoute
+        }
 
         if (f.isDirectory()) {
           const children = getFiles(filePath, fileRoute)
@@ -53,7 +58,7 @@ function getPageMap() {
     return items
   }
 
-  return getFiles(path.join(process.cwd(), 'pages'), '/')
+  return [getFiles(path.join(process.cwd(), 'pages'), '/'), activeRoute]
 }
 
 export default function (source, map) {
@@ -67,7 +72,7 @@ export default function (source, map) {
   this.addContextDependency(path.resolve('pages'))
 
   // Generate the page map
-  const pageMap = getPageMap()
+  const [pageMap, route] = getPageMap(this.resourcePath)
 
   // Extract frontMatter information if it exists
   const { data, content } = grayMatter(source)
@@ -101,7 +106,7 @@ export default function (source, map) {
   }\n`
   const suffix = `\n\nexport default withSSG(withLayout({
     filename: "${filename}",
-    filepath: "${this.resourcePath}",
+    route: "${route}",
     meta: ${JSON.stringify(data)},
     pageMap: ${JSON.stringify(pageMap)}
   }, ${layoutConfig ? 'layoutConfig' : 'null'}))`
