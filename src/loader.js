@@ -101,6 +101,7 @@ export default function (source, map) {
   }\n`
   const suffix = `\n\nexport default withSSG(withLayout({
     filename: "${filename}",
+    filepath: "${this.resourcePath}",
     meta: ${JSON.stringify(data)},
     pageMap: ${JSON.stringify(pageMap)}
   }, ${layoutConfig ? 'layoutConfig' : 'null'}))`
