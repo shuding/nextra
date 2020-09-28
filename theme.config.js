@@ -9,7 +9,7 @@ export default {
       </span>
     </>
   ),
-  head: () => (
+  head: (
     <>
       <meta name="msapplication-TileColor" content="#ffffff" />
       <meta name="theme-color" content="#ffffff" />
@@ -22,5 +22,11 @@ export default {
       <meta name="og:title" content="Nextra: the next site builder" />
       <meta name="apple-mobile-web-app-title" content="Nextra" />
     </>
-  )
+  ),
+  search: true,
+  prevLinks: true,
+  nextLinks: true,
+  footer: true,
+  footerEditOnGitHubLink: true,
+  footerText: <>MIT {new Date().getFullYear()} © Shu Ding.</>
 }
