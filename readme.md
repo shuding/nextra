@@ -13,3 +13,4 @@ It supports MDX, anchor links, file-system based routing and built-in syntax hig
 ## Themes
 
 - [nextra-theme-docs](https://github.com/shuding/nextra-theme-docs)
+- [nextra-theme-blog](https://github.com/shuding/nextra-theme-blog)
