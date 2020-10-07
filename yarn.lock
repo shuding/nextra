@@ -1254,6 +1254,23 @@
   resolved "https://registry.yarnpkg.com/@next/react-refresh-utils/-/react-refresh-utils-9.4.4.tgz#d94cbb3b354a07f1f5b80e554d6b9e34aba99e41"
   integrity sha512-9nKENeWRI6kQk44TbeqleIVtNLfcS3klVUepzl/ZCqzR5Bi06uqBCD277hdVvG/wL1pxA+R/pgJQLqnF5E2wPQ==
 
+"@reach/skip-nav@^0.11.2":
+  version "0.11.2"
+  resolved "https://registry.yarnpkg.com/@reach/skip-nav/-/skip-nav-0.11.2.tgz#015498b2125ad8ef1e48cb8ab33dca93925fcbc8"
+  integrity sha512-cXGQJodYcyUBLBv59oxB4ywwgFDHnoyt8+W+ZgdR1LR9eDxx6170shP0yPcwf/5KV2tXJtNF2McRUObkUW90+Q==
+  dependencies:
+    "@reach/utils" "0.11.2"
+    tslib "^2.0.0"
+
+"@reach/utils@0.11.2":
+  version "0.11.2"
+  resolved "https://registry.yarnpkg.com/@reach/utils/-/utils-0.11.2.tgz#be1f03650db56fd67a16d3fc70e5262cdb139cec"
+  integrity sha512-fBTolYj+rKTROXmf0zHO0rCWSvw7J0ALmYj5QxW4DmITMOH5uyRuWDWOfqohIGFbOtF/sum50WTB3tvx76d+Aw==
+  dependencies:
+    "@types/warning" "^3.0.0"
+    tslib "^2.0.0"
+    warning "^4.0.3"
+
 "@sindresorhus/slugify@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/slugify/-/slugify-1.1.0.tgz#2f195365d9b953384305b62664b44b4036c49430"
@@ -1308,6 +1325,11 @@
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/@types/unist/-/unist-2.0.3.tgz#9c088679876f374eb5983f150d4787aa6fb32d7e"
   integrity sha512-FvUupuM3rlRsRtCN+fDudtmytGO6iHJuuRKS1Ss0pG5z8oX0diNEw94UEL7hgDbpN94rgaK5R7sWm6RrSkZuAQ==
+
+"@types/warning@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@types/warning/-/warning-3.0.0.tgz#0d2501268ad8f9962b740d387c4654f5f8e23e52"
+  integrity sha1-DSUBJorY+ZYrdA04fEZU9fjiPlI=
 
 "@webassemblyjs/ast@1.9.0":
   version "1.9.0"
@@ -4481,12 +4503,13 @@ next@^9.4.4:
     webpack "4.43.0"
     webpack-sources "1.4.3"
 
-nextra-theme-docs@^0.1.5:
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/nextra-theme-docs/-/nextra-theme-docs-0.1.5.tgz#3f1c0db2467f566ccf62d6688ce89e7e1df38f23"
-  integrity sha512-2s7aNZPKycLBJte6KNqkuHIMnXtwl2RNAIFAket0X4mOcsXwfx6cuIczUTenmSq0dMs7eoLEH/z4b4LLGKkiMg==
+nextra-theme-docs@^0.1.12:
+  version "0.1.12"
+  resolved "https://registry.yarnpkg.com/nextra-theme-docs/-/nextra-theme-docs-0.1.12.tgz#4ffa0aaa3a57e81fe028552fc0a944391782cc10"
+  integrity sha512-x3P0fkiiLodyPO3dum1/es5whe8J2wHnqkTU4ARWaDbLdYtE2PqMnPWZZPzRC8kXO/OMQiH3Ooy7XhwST2PCoA==
   dependencies:
     "@mdx-js/react" "^1.6.16"
+    "@reach/skip-nav" "^0.11.2"
     "@sindresorhus/slugify" "^1.1.0"
     classnames "^2.2.6"
     focus-visible "^5.1.0"
@@ -4495,10 +4518,10 @@ nextra-theme-docs@^0.1.5:
     tailwindcss "^1.8.3"
     title "^3.4.2"
 
-nextra@^0.2.4:
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/nextra/-/nextra-0.2.4.tgz#813b57d9bcb282f056e17bbdb48ee6c5f4b47ca8"
-  integrity sha512-5BFpkeKf78nhmnSQYh59+rQC2qV8a4nT7n1xhSkzITCIMrOI6wm+N6jPpex2eZKx7ibime/rDS421GWeVeCi3w==
+nextra@^0.2.6:
+  version "0.2.6"
+  resolved "https://registry.yarnpkg.com/nextra/-/nextra-0.2.6.tgz#efacbbd9284f519b6c8352324bfdf48be924b95c"
+  integrity sha512-IOCyvA0rkbKrYAAQknDCEhG1pQ013mAXwpLo4Lpdj+m/9kXZbUfMmnugwKLyZPk2GcwkLUL9JWU+VN2AXNT0ug==
   dependencies:
     gray-matter "^4.0.2"
     loader-utils "^2.0.0"
@@ -6484,6 +6507,11 @@ tslib@^1.9.0:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.13.0.tgz#c881e13cc7015894ed914862d276436fa9a47043"
   integrity sha512-i/6DQjL8Xf3be4K/E6Wgpekn5Qasl1usyw++dAA35Ue5orEn65VIxOA+YvNNl9HV3qv70T7CNwjODHZrLwvd1Q==
 
+tslib@^2.0.0:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.0.2.tgz#462295631185db44b21b1ea3615b63cd1c038242"
+  integrity sha512-wAH28hcEKwna96/UacuWaVspVLkg4x1aDM9JlzqaQTOFczCktkVAb5fmXChgandR1EraDPs2w8P+ozM+oafwxg==
+
 tty-browserify@0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/tty-browserify/-/tty-browserify-0.0.0.tgz#a157ba402da24e9bf957f9aa69d524eed42901a6"
@@ -6770,6 +6798,13 @@ vm-browserify@^1.0.1:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-1.1.2.tgz#78641c488b8e6ca91a75f511e7a3b32a86e5dda0"
   integrity sha512-2ham8XPWTONajOR0ohOKOHXkm3+gaBmGut3SRuu75xLd/RRaY6vqgh8NBYYk7+RW3u5AtzPQZG8F10LHkl0lAQ==
+
+warning@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/warning/-/warning-4.0.3.tgz#16e9e077eb8a86d6af7d64aa1e05fd85b4678ca3"
+  integrity sha512-rpJyN222KWIvHJ/F53XSZv0Zl/accqHR8et1kpaMTD/fLCRxtV8iX8czMzY7sVZupTI3zcUTg8eycS2kNF9l6w==
+  dependencies:
+    loose-envify "^1.0.0"
 
 watchpack-chokidar2@^2.0.0:
   version "2.0.0"
