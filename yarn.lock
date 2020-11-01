@@ -4504,6 +4504,11 @@ neo-async@^2.6.2:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
+next-themes@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/next-themes/-/next-themes-0.0.8.tgz#2a1748317085afbc2509e2c32bd04af4f0f6cb7d"
+  integrity sha512-dyrh+/bZW4hkecFEg2rfwOLLzU2UnE7KfiwcV0mIwkPrO+1n1WvwkC8nabgKA5Eoi8stkYfjmA72FxTaWEOHtg==
+
 next-tick@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.0.0.tgz#ca86d1fe8828169b0120208e3dc8424b9db8342c"
@@ -4577,10 +4582,10 @@ next@^10.0.0:
   optionalDependencies:
     sharp "0.26.2"
 
-nextra-theme-docs@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/nextra-theme-docs/-/nextra-theme-docs-0.2.0.tgz#305d36a2a37c7546ef864161d24b8d6bd274face"
-  integrity sha512-9AUARNjX/Do+LWuaNImVskVJfLwRmwR7GpiJT+3JWGY/m3olxOHX7RS918K0ZTvrRcMDgvyAEbBSYkrjJQpqdA==
+nextra-theme-docs@^0.2.4:
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/nextra-theme-docs/-/nextra-theme-docs-0.2.4.tgz#1d66a127ad503531252fc6facb0356ff6c0b2f56"
+  integrity sha512-z1Z5tRopCAt8V7ghP+0bPLE8iD80ct8RAQKhXw5sOl7YLz91LBcLhQHm1OkUAvQuu2RtjNrCEMkLIVKIJ6bQCg==
   dependencies:
     "@mdx-js/react" "^1.6.16"
     "@reach/skip-nav" "^0.11.2"
@@ -4588,6 +4593,7 @@ nextra-theme-docs@^0.2.0:
     classnames "^2.2.6"
     focus-visible "^5.1.0"
     match-sorter "^4.2.0"
+    next-themes "^0.0.8"
     prism-react-renderer "^1.1.1"
     tailwindcss "^1.8.3"
     title "^3.4.2"
