@@ -1,6 +1,6 @@
 {
   "name": "nextra",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "Next.js and MDX based site generator.",
   "main": "index.js",
   "files": [
@@ -15,9 +15,9 @@
     "build": "microbundle src/index.js src/ssg.js src/loader.js -o dist --no-sourcemap --target=node"
   },
   "dependencies": {
+    "@mdx-js/loader": "^2.0.0-next.8",
     "gray-matter": "^4.0.2",
-    "loader-utils": "^2.0.0",
-    "mdx-next-loader-test": "^2.0.0-next.7"
+    "loader-utils": "^2.0.0"
   },
   "peerDependencies": {
     "react": "^16.13.1"

@@ -13,7 +13,7 @@ export default (
         use: [
           options.defaultLoaders.babel,
           {
-            loader: 'mdx-next-loader-test',
+            loader: '@mdx-js/loader',
           },
           {
             loader: 'nextra/loader',
