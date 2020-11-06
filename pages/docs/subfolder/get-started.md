@@ -17,17 +17,17 @@ module.exports = withNextra()
 ```jsx
 // theme.config.js
 export default {
-  github: 'https://github.com/shuding/nextra',      // link of the project repo
-  siteGithub: 'https://github.com/vercel/swr-site', // link of the docs repo path
+  github: 'https://github.com/shuding/nextra',     // link of the project repo
+  siteGithub: 'https://github.com/shuding/nextra', // link of the docs repo path
   titleSuffix: ' – Nextra',
   nextLinks: true,
   prevLinks: true,
   search: true,
-  customSearch: null,                               // <- customizable, you can use algolia for example
+  customSearch: null,                              // <- customizable, you can use algolia for example
   darkMode: true,
   footer: true,
   footerText: 'MIT 2020 © Shu Ding.',
-  footerEditOnGitHubLink: true,                     // will link to the docs repo
+  footerEditOnGitHubLink: true,                    // will link to the docs repo
   logo: (
     <React.Fragment>
       <span className="mr-2 font-extrabold hidden md:inline">Nextra</span>
