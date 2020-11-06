@@ -2,6 +2,7 @@ import path from 'path'
 import fs from 'fs'
 import { getOptions } from 'loader-utils'
 import grayMatter from 'gray-matter'
+import slash from 'slash'
 
 function getPageMap(currentResourcePath) {
   const extension = /\.(mdx?|jsx?)$/
@@ -94,7 +95,7 @@ export default function (source, map) {
     layout = path.resolve(theme)
   }
   if (layoutConfig) {
-    layoutConfig = path.resolve(layoutConfig)
+    layoutConfig = slash(path.resolve(layoutConfig))
   }
 
   const filename = this.resourcePath.slice(
@@ -105,8 +106,8 @@ export default function (source, map) {
     layoutConfig ? `import layoutConfig from '${layoutConfig}'\n` : ''
   }\n`
   const suffix = `\n\nexport default withSSG(withLayout({
-    filename: "${filename}",
-    route: "${route}",
+    filename: "${slash(filename)}",
+    route: "${slash(route)}",
     meta: ${JSON.stringify(data)},
     pageMap: ${JSON.stringify(pageMap)}
   }, ${layoutConfig ? 'layoutConfig' : 'null'}))`
