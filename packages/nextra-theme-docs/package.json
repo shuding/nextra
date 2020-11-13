@@ -1,0 +1,43 @@
+{
+  "name": "nextra-theme-docs",
+  "version": "0.2.8",
+  "description": "A Nextra theme for documentation sites.",
+  "main": "index.js",
+  "repository": "https://github.com/shuding/nextra-theme-docs.git",
+  "author": "Shu Ding <g@shud.in>",
+  "license": "MIT",
+  "files": [
+    "dist/*",
+    "index.js",
+    "callout.js",
+    "style.css"
+  ],
+  "scripts": {
+    "build": "yarn run build:clean && yarn run build:tailwind && yarn run build:layout",
+    "build:clean": "rm -rf dist",
+    "build:tailwind": "NODE_ENV=production tailwindcss build src/styles.css -o style.css -c tailwind.config.js",
+    "build:layout": "NODE_ENV=production microbundle src/*.js -f cjs -o dist --no-sourcemap --jsx React.createElement --target node",
+    "dev:layout": "microbundle watch src/*.js -f cjs -o dist --no-sourcemap --jsx React.createElement --target node"
+  },
+  "dependencies": {
+    "@mdx-js/react": "^1.6.16",
+    "@reach/skip-nav": "^0.11.2",
+    "@sindresorhus/slugify": "^1.1.0",
+    "classnames": "^2.2.6",
+    "focus-visible": "^5.1.0",
+    "match-sorter": "^4.2.0",
+    "next-themes": "^0.0.8",
+    "prism-react-renderer": "^1.1.1",
+    "react-innertext": "^1.1.5",
+    "title": "^3.4.2"
+  },
+  "peerDependencies": {
+    "next": "^9.5.3",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "microbundle": "^0.12.4",
+    "tailwindcss": "^1.8.10"
+  }
+}

@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply px-4;
+}
+
+article {
+  @apply block mx-auto pt-20 pb-32;
+}
+
+article img {
+  @apply mx-auto;
+}
+
+a.subheading {
+  text-decoration: none !important;
+}
+
+.subheading-anchor {
+  margin-top: -84px;
+  display: inline-block;
+  position: absolute;
+  width: 1px;
+}
+
+.subheading-anchor + a:hover .anchor-icon {
+  opacity: 1;
+}
+.anchor-icon {
+  opacity: 0;
+  @apply ml-2 text-gray-500;
+}
+
+.meta-line {
+  @apply flex justify-between items-start mb-8;
+}
+.meta {
+  @apply text-gray-600 mr-8;
+}
+.meta .tag {
+  @apply inline-block px-1 rounded-md mr-1 text-sm leading-5 no-underline bg-gray-300 text-gray-600 select-none;
+}
+.meta .tag:hover {
+  @apply text-gray-800;
+}
+.meta .tag:active {
+  @apply bg-gray-400;
+}
+.meta-line .meta-back {
+  @apply text-gray-600;
+}
+
+.nav-line {
+  @apply mb-8 text-right;
+}
+.nav-line .nav-link {
+  @apply ml-3 text-gray-600;
+}
+.nav-line span.nav-link {
+  @apply ml-3 text-gray-900 cursor-default;
+}
+
+.post-item .post-item-date {
+  @apply text-sm text-gray-600;
+}
+.post-item .post-item-more {
+  @apply ml-1;
+}
+.post-item .post-item-title {
+  @apply no-underline;
+}
