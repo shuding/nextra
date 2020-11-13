@@ -1,5 +1,7 @@
 # Nextra
 
+Nextra is a Next.js plugin. Besides all the features that Next.js supports, it renders your **MDX files** with specific themes.
+
 ## Development
 
 ### Installation
