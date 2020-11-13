@@ -3,3 +3,6 @@
 node_modules
 yarn-error.log
 dist
+
+# Theme styles
+packages/nextra-theme-*/style.css
