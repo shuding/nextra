@@ -4,7 +4,7 @@
 
 ### Installation
 
-The Nextra repository uses [Yarn Workspaces](https://classic.yarnpkg.com/en/docs/workspaces), npm won't work. To install dependencies, just simply run `yarn` in the project root directory.
+The Nextra repository uses [Yarn Workspaces](https://classic.yarnpkg.com/en/docs/workspaces). To install dependencies, just simply run `yarn` in the project root directory.
 
 ### Build Nextra Core
 
@@ -34,8 +34,11 @@ yarn build
 
 ### Development
 
-Once you have the core and theme built, you can debug them with the corresponding example locally.
+Once you have core and theme built, you can debug them with the corresponding example locally. For instance, to start examples/docs locally, run 
 
-For instance, to start examples/docs locally, cd into `examples/docs` and run `yarn dev`.
+```
+cd examples/docs
+yarn dev
+```
 
 Any change to the example, `nextra` or `nextra-theme-docs` packages (rebuild required) will be re-rendered instantly.
