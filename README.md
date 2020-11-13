@@ -11,12 +11,6 @@ The Nextra repository uses [Yarn Workspaces](https://classic.yarnpkg.com/en/docs
 ### Build Nextra Core
 
 ```
-yarn build:core
-```
-
-or
-
-```
 cd packages/nextra
 yarn build
 ```
@@ -24,23 +18,21 @@ yarn build
 ### Build Nextra Theme
 
 ```
-yarn build:theme-docs
-```
-
-or
-
-```
 cd packages/nextra-theme-docs
 yarn build
 ```
 
+Watch mode: `yarn dev:layout`
+
 ### Development
 
-Once you have core and theme built, you can debug them with the corresponding example locally. For instance, to start examples/docs locally, run 
+You can also debug them toegther with a website locally. For instance, to start examples/docs locally, run 
 
 ```
 cd examples/docs
 yarn dev
 ```
 
-Any change to the example, `nextra` or `nextra-theme-docs` packages (rebuild required) will be re-rendered instantly.
+Any change to example/docs will be re-rendered instantly. 
+
+If you update the core or theme packages, a rebuild is required. Or you can use the watch mode for the theme.
