@@ -10,6 +10,7 @@ import innerText from 'react-innertext'
 
 import flatten from './utils/flatten'
 import reorderBasedOnMeta from './utils/reorder'
+import filterRouteLocale from './utils/filter-route-locale'
 
 import Search from './search'
 import GitHubIcon from './github-icon'
@@ -302,7 +303,13 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
   )
 }
 
-export default (opts, config) => props => 
-  <ThemeProvider attribute="class">
-    <Layout config={config} {...opts} {...props}/>
-  </ThemeProvider>
+export default ({pageMap, ...opts}, config) => props => {
+  const { locale, defaultLocale } = useRouter()
+  const filteredPageMap = filterRouteLocale(pageMap, locale, defaultLocale)
+
+  return (
+    <ThemeProvider attribute="class">
+      <Layout config={config} pageMap={filteredPageMap} {...opts} {...props}/>
+    </ThemeProvider>
+  )
+}
