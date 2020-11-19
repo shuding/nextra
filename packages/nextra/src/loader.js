@@ -4,7 +4,7 @@ import { getOptions } from 'loader-utils'
 import grayMatter from 'gray-matter'
 import slash from 'slash'
 
-function getLocalFromFilename (name) {
+function getLocaleFromFilename (name) {
   const localeRegex = /\.([a-zA-Z-]+)?\.(mdx?|jsx?|json)$/
   const match = name.match(localeRegex)
   if (match) return match[1]
@@ -13,6 +13,10 @@ function getLocalFromFilename (name) {
 
 function removeExtension (name) {
   return name.match(/^([^.]+)/)[1]
+}
+
+function getFileName (resourcePath) {
+  return removeExtension(path.basename(resourcePath))
 }
 
 async function getPageMap(currentResourcePath) {
@@ -59,7 +63,7 @@ async function getPageMap(currentResourcePath) {
                     name: removeExtension(f.name),
                     route: fileRoute,
                     frontMatter: data,
-                    locale: getLocalFromFilename(f.name)
+                    locale: getLocaleFromFilename(f.name)
                   }
                 }
               }
@@ -67,7 +71,7 @@ async function getPageMap(currentResourcePath) {
               return {
                 name: removeExtension(f.name),
                 route: fileRoute, 
-                locale: getLocalFromFilename(f.name)
+                locale: getLocaleFromFilename(f.name)
               }
             } else if (metaExtension.test(f.name)) {
               const meta = JSON.parse(await fs.readFile(filePath, 'utf-8'))
@@ -91,6 +95,23 @@ async function getPageMap(currentResourcePath) {
   }
 
   return [await getFiles(path.join(process.cwd(), 'pages'), '/'), activeRoute]
+}
+
+async function getLocalizedEntries(currentResourcePath) {
+  const filename = getFileName(currentResourcePath)
+  const dir = path.dirname(currentResourcePath)
+
+  const fileRe = new RegExp('^' + filename + '\.[a-zA-Z-]+\.(mdx?|jsx?|json)$')
+
+  const files = await fs.readdir(dir, { withFileTypes: true })
+  return files.filter(file => {
+    return fileRe.test(file.name)
+  }).map(file => {
+    return {
+      name: file.name,
+      locale: getLocaleFromFilename(file.name)
+    }
+  })
 }
 
 export default async function (source) {
@@ -134,6 +155,35 @@ export default async function (source) {
     this.resourcePath.lastIndexOf('/') + 1
   )
 
+  const notI18nEntry = this.resourceQuery.includes('nextra-raw')
+  if (locales && !notI18nEntry) {
+    // we need to handle i18n here
+
+    const i18nFiles = await getLocalizedEntries(this.resourcePath)
+    const i18nSwitcher = `
+import { useRouter } from 'next/router'
+${
+  i18nFiles.map((file, index) => {
+    return `import Page_${index} from './${file.name}?nextra-raw'`
+  }).join('\n')
+}
+
+export default function I18NPage () {
+  const { locale } = useRouter()
+  ${
+  i18nFiles.map((file, index) => {
+    return `if (locale === '${file.locale}') {
+    return <Page_${index}/>
+  } else `
+  }).join('')
+} {
+    return null
+  }
+}`
+
+    return callback(null, i18nSwitcher)
+  }
+
   const prefix = `
 import withLayout from '${layout}'
 import { withSSG } from 'nextra/ssg'
@@ -146,8 +196,7 @@ ${layoutConfig ? `import layoutConfig from '${layoutConfig}'` : ''}
       filename: "${slash(filename)}",
       route: "${slash(route)}",
       meta: ${JSON.stringify(data)},
-      pageMap: ${JSON.stringify(pageMap)},
-      locales: ${JSON.stringify(locales)}
+      pageMap: ${JSON.stringify(pageMap)}
     }, ${layoutConfig ? 'layoutConfig' : 'null'}))(props)
 }`
 
