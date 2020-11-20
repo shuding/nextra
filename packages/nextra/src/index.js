@@ -36,7 +36,7 @@ export default (
           },
           {
             loader: 'nextra/loader',
-            options: { theme, themeConfig, locales }
+            options: { theme, themeConfig, locales, defaultLocale }
           }
         ]
       })

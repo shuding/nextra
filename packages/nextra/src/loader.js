@@ -4,6 +4,8 @@ import { getOptions } from 'loader-utils'
 import grayMatter from 'gray-matter'
 import slash from 'slash'
 
+import filterRouteLocale from './filter-route-locale'
+
 function getLocaleFromFilename (name) {
   const localeRegex = /\.([a-zA-Z-]+)?\.(mdx?|jsx?|json)$/
   const match = name.match(localeRegex)
@@ -120,14 +122,14 @@ export default async function (source) {
   this.cacheable()
 
   const options = getOptions(this)
-  const { theme, themeConfig, locales } = options
+  const { theme, themeConfig, locales, defaultLocale } = options
 
   // Add the entire directory `pages` as the dependency
   // so we can generate the correct page map
   this.addContextDependency(path.resolve('pages'))
 
   // Generate the page map
-  const [pageMap, route] = await getPageMap(this.resourcePath, locales)
+  let [pageMap, route] = await getPageMap(this.resourcePath, locales)
 
   // Extract frontMatter information if it exists
   const { data, content } = grayMatter(source)
@@ -182,6 +184,13 @@ export default function I18NPage () {
 }`
 
     return callback(null, i18nSwitcher)
+  }
+
+  if (locales) {
+    const locale = getLocaleFromFilename(filename)
+    if (locale) {
+      pageMap = filterRouteLocale(pageMap, locale, defaultLocale)
+    }
   }
 
   const prefix = `
