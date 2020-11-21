@@ -28,5 +28,12 @@ export default {
   nextLinks: true,
   footer: true,
   footerEditOnGitHubLink: true,
-  footerText: <>MIT {new Date().getFullYear()} © Shu Ding.</>
+  footerEditOnGitHubText: ({ locale }) => (
+    locale === 'en' ? 'Edit this page on GitHub' : '前往 GitHub 编辑此页'
+  ),
+  footerText: <>MIT {new Date().getFullYear()} © Shu Ding.</>,
+  i18n: [
+    { locale: 'en', text: 'English' },
+    { locale: 'zh', text: '简体中文' }
+  ]
 }

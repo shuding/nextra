@@ -1,0 +1,28 @@
+import React from 'react'
+import { useRouter } from 'next/router'
+import Link from 'next/link'
+import cn from 'classnames'
+
+export default function LocaleSwitch ({ options }) {
+  const { locale, asPath } = useRouter()
+
+  return <details className="locale-switch relative">
+    <summary className="text-current p-2 cursor-pointer outline-none">
+      <svg fill="none" viewBox="0 0 24 24" width="24" height="24"stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+      </svg>
+    </summary>
+    <ul className="locale-dropdown absolute right-0 block bg-white dark:bg-dark dark:border-gray-700 py-1 rounded border">
+      {options.map(l => 
+        <Link key={l.locale} href={asPath} locale={l.locale}>
+          <a className={
+            cn("block no-underline text-current py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-800 whitespace-nowrap", {
+              'font-semibold': locale === l.locale,
+              'bg-gray-100 dark:bg-gray-900': locale === l.locale
+            })
+          }>{l.text}</a>
+        </Link>
+      )}
+    </ul>
+  </details>
+}

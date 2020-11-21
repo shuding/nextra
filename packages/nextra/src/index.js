@@ -1,23 +1,42 @@
+const defaultExtensions = ['js', 'jsx', 'ts', 'tsx']
+const markdownExtensions = ['md', 'mdx']
+const markdownExtensionTest = /\.mdx?$/
+
 export default (
   theme, themeConfig
 ) => (
   nextConfig = {}
 ) => {
-  const markdownExtension = /\.mdx?$/
+  const locales = nextConfig.i18n ? nextConfig.i18n.locales : null
+  const defaultLocale = nextConfig.i18n ? nextConfig.i18n.defaultLocale : null
+
+  let pageExtensions = [...defaultExtensions]
+  if (locales) {
+    console.log('You have i18n enabled for Nextra.')
+    if (!defaultLocale) {
+      console.error('Default locale is missing.')
+    }
+
+    // Exclude other locales to ensure there's no route conflicts.
+    pageExtensions = pageExtensions.concat(markdownExtensions.map(extension => defaultLocale + '.' + extension))
+  } else {
+    pageExtensions = pageExtensions.concat(markdownExtensions)
+  }
+
   return Object.assign({
-      pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx']
+      pageExtensions
     }, nextConfig, {
     webpack(config, options) {
       config.module.rules.push({
-        test: markdownExtension,
+        test: markdownExtensionTest,
         use: [
           options.defaultLoaders.babel,
           {
-            loader: '@mdx-js/loader',
+            loader: '@mdx-js/loader'
           },
           {
             loader: 'nextra/loader',
-            options: { theme, themeConfig }
+            options: { theme, themeConfig, locales, defaultLocale }
           }
         ]
       })
