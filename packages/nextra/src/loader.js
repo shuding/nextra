@@ -162,10 +162,15 @@ export default async function (source) {
     // we need to handle i18n here
 
     const i18nFiles = await getLocalizedEntries(this.resourcePath)
+    let defaultLocaleIndex = 0
+
     const i18nSwitcher = `
 import { useRouter } from 'next/router'
 ${
   i18nFiles.map((file, index) => {
+    if (file.locale === defaultLocale) {
+      defaultLocaleIndex = index
+    }
     return `import Page_${index} from './${file.name}?nextra-raw'`
   }).join('\n')
 }
@@ -179,7 +184,7 @@ export default function I18NPage () {
   } else `
   }).join('')
 } {
-    return null
+    return <Page_${defaultLocaleIndex}/>
   }
 }`
 
