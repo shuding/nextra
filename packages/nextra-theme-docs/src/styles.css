@@ -58,7 +58,7 @@ code {
   @apply text-gray-300 bg-gray-800;
 }
 pre {
-  @apply p-4 bg-gray-200 rounded-lg mt-6 mb-4 overflow-x-auto scrolling-touch;
+  @apply p-4 bg-gray-200 rounded-lg mt-6 mb-4 overflow-x-auto;
 }
 pre code {
   @apply p-0 text-sm text-black bg-transparent rounded-none inline-block min-w-full;
@@ -101,7 +101,7 @@ figure figcaption {
   @apply ml-5;
 }
 .sidebar a:focus-visible, .sidebar button:focus-visible {
-  @apply shadow-outline;
+  @apply ring;
 }
 .sidebar li.active > a {
   @apply font-semibold text-black bg-gray-200 transition-colors duration-200;
@@ -170,4 +170,26 @@ input[type='search']::-webkit-search-results-decoration {
 
 code {
   font-size: .9em;
+}
+
+.locale-switch summary::-webkit-details-marker {
+  display:none;
+}
+
+.locale-switch[open] summary:before {
+  content: " ";
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  display: block;
+  cursor: default;
+  background: transparent;
+}
+
+.locale-switch .locale-dropdown {
+  position: absolute;
+  z-index: 11;
 }

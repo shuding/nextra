@@ -22,8 +22,5 @@ module.exports = {
       }
     }
   },
-  experimental: {
-    darkModeVariant: true
-  },
-  dark: 'class'
+  darkMode: 'class'
 }

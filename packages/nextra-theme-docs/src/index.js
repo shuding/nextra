@@ -15,6 +15,7 @@ import Search from './search'
 import GitHubIcon from './github-icon'
 import ArrowRight from './arrow-right'
 import ThemeSwitch from './theme-switch'
+import LocaleSwitch from './locale-switch'
 
 import Theme from './misc/theme'
 import defaultConfig from './misc/default.config'
@@ -170,10 +171,18 @@ const PrevLink = ({ config, flatDirectories, currentIndex }) => {
   )
 }
 
+const renderComponent = (ComponentOrNode, opts) => {
+  if (!ComponentOrNode) return null
+  if (typeof ComponentOrNode === 'function') {
+    return <ComponentOrNode {...opts} />
+  }
+  return ComponentOrNode
+}
+
 const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
   const [menu, setMenu] = useState(false)
   const router = useRouter()
-  const { route, pathname } = router
+  const { route, pathname, locale } = router
 
   const directories = useMemo(() => reorderBasedOnMeta(pageMap), [pageMap])
   const flatDirectories = useMemo(() => flatten(directories), [directories])
@@ -209,16 +218,16 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
         <title>
           {title}
-          {config.titleSuffix || ''}
+          {renderComponent(config.titleSuffix, { locale })}
         </title>
-        {config.head || null}
+        {renderComponent(config.head, { locale })}
       </Head>
       <div className="main-container flex flex-col">
         <nav className="flex items-center bg-white z-20 fixed top-0 left-0 right-0 h-16 border-b px-6 dark:bg-dark dark:border-gray-800 transition-colors duration-200">
           <div className="hidden md:block w-full flex items-center">
             <Link href="/">
               <a className="no-underline text-current inline-flex items-center hover:opacity-75">
-                {config.logo}
+                {renderComponent(config.logo, { locale })}
               </a>
             </Link>
           </div>
@@ -226,6 +235,8 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
           {config.customSearch || (config.search ? <Search directories={flatDirectories} /> : null)}
 
           {config.darkMode ? <ThemeSwitch /> : null}
+
+          {config.i18n ? <LocaleSwitch options={config.i18n} /> : null}
 
           {config.github ? (
             <a
@@ -242,18 +253,18 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
             onClick={() => setMenu(!menu)}
           >
             <svg
+              fill="none"
               width="24"
               height="24"
               viewBox="0 0 24 24"
-              fill="none"
               stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
             >
-              <line x1="3" y1="12" x2="21" y2="12"></line>
-              <line x1="3" y1="6" x2="21" y2="6"></line>
-              <line x1="3" y1="18" x2="21" y2="18"></line>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
             </svg>
           </button>
         </nav>
@@ -285,12 +296,14 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
 
                   {config.footer ? <div className="mt-24 flex justify-between flex-col-reverse md:flex-row items-center md:items-end">
                     <span className="text-gray-600">
-                      {config.footerText}
+                      {renderComponent(config.footerText, { locale })}
                     </span>
                     <div className="mt-6"/>
                     {config.footerEditOnGitHubLink ? <a className="text-sm" href={
                       (config.siteGithub || config.github) + '/edit/master/pages' + filepathWithName
-                    } target="_blank">Edit this page on GitHub</a> : null}
+                    } target="_blank">{
+                      config.footerEditOnGitHubText ? renderComponent(config.footerEditOnGitHubText, { locale }) : 'Edit this page on GitHub'
+                    }</a> : null}
                   </div> : null}
                 </footer>
               </main>
