@@ -5,7 +5,6 @@ import { useSSG } from 'nextra/ssg'
 export const getStaticProps = ({ params }) => {
   return fetch('https://api.github.com/repos/shuding/nextra')
     .then(res => res.json())
-    // we keep the most recent 3 releases here
     .then(repo => ({ props: { ssg: {
       stars: repo.stargazers_count
     } } }))
@@ -20,4 +19,4 @@ The [Nextra repository](https://github.com/shuding/nextra) has <StarsRenderer/> 
 
 ---
 
-The data is prerendered with this page.
+The page is prerendered at build time with `getStaticProps`. Check the source code for more information.

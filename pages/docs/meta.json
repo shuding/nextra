@@ -1,4 +1,8 @@
 {
-  "subfolder": "Subfolder",
-  "subpage": "Subpage"
+  "get-started": "Get Started",
+  "structure": "Structure",
+  "mdx": "MDX Support",
+  "ssg": "SSG Support",
+  "anchors": "Anchor Links",
+  "i18n": "I18n"
 }

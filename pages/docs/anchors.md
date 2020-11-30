@@ -1,4 +1,6 @@
-# Poets by W. B. Yeats
+# Anchor Links
+
+`h2` tags will become anchors in the sidebar automatically.
 
 ## When You Are Old
 

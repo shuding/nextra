@@ -10,9 +10,9 @@ Warning: this project is not production ready, use it on your own risk.
 
 ## Development
 
-The code of the plugin is on the `core` branch.
+The code of the plugin is on the [`core`](https://github.com/shuding/nextra/tree/core) branch.
 
 ## Themes
 
-- [nextra-theme-docs](https://github.com/shuding/nextra-theme-docs) ([demo](https://swr.vercel.app))
-- [nextra-theme-blog](https://github.com/shuding/nextra-theme-blog) ([demo](https://shud.in))
+- [nextra-theme-docs](https://github.com/vercel/swr-site) ([demo](https://swr.vercel.app))
+- [nextra-theme-blog](https://github.com/shuding/site) ([demo](https://shud.in))
