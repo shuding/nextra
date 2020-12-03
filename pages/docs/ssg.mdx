@@ -5,9 +5,12 @@ import { useSSG } from 'nextra/ssg'
 export const getStaticProps = ({ params }) => {
   return fetch('https://api.github.com/repos/shuding/nextra')
     .then(res => res.json())
-    .then(repo => ({ props: { ssg: {
-      stars: repo.stargazers_count
-    } } }))
+    .then(repo => ({
+      props: { ssg: {
+        stars: repo.stargazers_count
+      }},
+      revalidate: 10
+    }))
 }
 
 export const StarsRenderer = () => {
