@@ -1,7 +1,7 @@
 {
   "get-started": "Get Started",
   "structure": "Structure",
-  "mdx": "MDX Support",
+  "mdx": "Markdown and React",
   "ssg": "SSG Support",
   "anchors": "Anchor Links",
   "i18n": "I18n"
