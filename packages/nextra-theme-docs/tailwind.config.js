@@ -135,6 +135,9 @@ module.exports = {
     extend: {
       colors: {
         dark: '#111'
+      },
+      transitionProperty: {
+        theme: 'color, background-color, border-color'
       }
     }
   },
