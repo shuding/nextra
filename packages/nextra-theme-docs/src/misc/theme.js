@@ -7,7 +7,6 @@ import Highlight, { defaultProps } from 'prism-react-renderer'
 
 const THEME = {
   plain: {
-    color: '#000',
     backgroundColor: 'transparent',
   },
   styles: [
@@ -26,21 +25,9 @@ const THEME = {
       },
     },
     {
-      types: ['string', 'url', 'attr-value'],
-      style: {
-        color: '#028265',
-      },
-    },
-    {
       types: ['variable', 'language-javascript'],
       style: {
         color: '#0076ff',
-      },
-    },
-    {
-      types: ['builtin', 'char', 'constant'],
-      style: {
-        color: '#000',
       },
     },
     {
@@ -48,18 +35,6 @@ const THEME = {
       style: {
         color: '#d9931e',
         fontStyle: 'normal',
-      },
-    },
-    {
-      types: ['punctuation', 'operator'],
-      style: {
-        color: '#333',
-      },
-    },
-    {
-      types: ['number', 'function', 'tag'],
-      style: {
-        color: '#0076ff',
       },
     },
     {
@@ -165,7 +140,7 @@ const Code = ({ children, className, highlight, ...props }) => {
               style={
                 highlightedLines.includes(i + 1)
                   ? {
-                      background: '#cce0f5',
+                      background: 'var(--c-highlight)',
                       margin: '0 -1rem',
                       padding: '0 1rem',
                     }

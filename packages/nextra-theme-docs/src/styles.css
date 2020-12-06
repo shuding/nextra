@@ -52,19 +52,17 @@ hr {
   @apply border-gray-800;
 }
 code {
-  @apply text-gray-800 bg-gray-500 bg-opacity-25 rounded transition-theme duration-100;
+  @apply text-gray-800 bg-gray-500 bg-opacity-25 rounded;
 }
 .dark code {
   @apply text-gray-300 bg-gray-800;
 }
 pre {
   @apply p-4 bg-gray-200 rounded-lg mt-6 mb-4 overflow-x-auto;
+  @apply dark:bg-gray-800;
 }
 pre code {
   @apply p-0 text-sm text-black bg-transparent rounded-none inline-block min-w-full;
-}
-.dark pre code {
-  @apply bg-gray-200 text-gray-800;
 }
 a code {
   @apply text-current no-underline;
@@ -239,4 +237,35 @@ table tr th, table tr td {
 
 .contains-task-list input[type=checkbox] {
   @apply mr-1;
+}
+
+pre .prism-code {
+  --c-highlight: #cce0f5;
+}
+.dark pre .prism-code {
+  --c-highlight: #3d4b61;
+}
+pre .prism-code .token.plain, pre .prism-code .token.builtin,  pre .prism-code .token.char,  pre .prism-code .token.constant {
+  color: #000 !important;
+}
+.dark pre .prism-code .token.plain, .dark pre .prism-code .token.builtin, .dark pre .prism-code .token.char, .dark pre .prism-code .token.constant {
+  color: #fff !important;
+}
+pre .prism-code .token.string, pre .prism-code .token.url, pre .prism-code .token.attr-value {
+  color: #028265 !important;
+}
+.dark pre .prism-code .token.string, .dark pre .prism-code .token.url, .dark pre .prism-code .token.attr-value {
+  color: #20bb98 !important;
+}
+pre .prism-code .token.punctuation, pre .prism-code .token.operator {
+  color: #333 !important;
+}
+.dark pre .prism-code .token.punctuation, .dark pre .prism-code .token.operator {
+  color: #bbb !important;
+}
+pre .prism-code .token.number, pre .prism-code .token.function, pre .prism-code .token.tag {
+  color: #0076ff !important;
+}
+.dark pre .prism-code .token.number, .dark pre .prism-code .token.function, .dark pre .prism-code .token.tag {
+  color: #1e86ff !important;
 }
