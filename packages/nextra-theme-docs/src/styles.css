@@ -135,6 +135,7 @@ content ol {
 
 content blockquote {
   @apply italic pl-6 border-l-2 border-gray-300 text-gray-700;
+  @apply dark:border-gray-700 dark:text-gray-400;
 }
 
 .subheading-anchor {
@@ -198,4 +199,44 @@ code {
 .locale-switch .locale-dropdown {
   position: absolute;
   z-index: 11;
+}
+
+table {
+  @apply p-0 mt-6;
+}
+
+table tr {
+  @apply m-0 p-0 border-t border-gray-300;
+  @apply dark:border-gray-700;
+}
+
+table tr:nth-child(2n) {
+  @apply bg-gray-100;
+  @apply dark:bg-gray-900;
+}
+
+table tr th {
+  @apply font-semibold;
+}
+
+table tr th[align=center], table tr td[align=center] {
+  @apply text-center;
+}
+
+table tr th[align=right], table tr td[align=right] {
+  @apply text-right;
+}
+
+table tr th, table tr td {
+  @apply text-left;
+  @apply m-0 px-4 py-2 border border-gray-300;
+  @apply dark:border-gray-700;
+}
+
+.contains-task-list {
+  @apply list-none ml-0;
+}
+
+.contains-task-list input[type=checkbox] {
+  @apply mr-1;
 }
