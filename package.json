@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "next",
+    "dev": "next",
+    "start": "next start",
     "build": "next build"
   },
   "author": "Shu Ding",
