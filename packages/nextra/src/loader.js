@@ -21,12 +21,12 @@ function getFileName (resourcePath) {
   return removeExtension(path.basename(resourcePath))
 }
 
-const parseJsonFile = (path) => {
+const parseJsonFile = (content, path) => {
   let parsed
   try {
-    parsed = JSON.parse(file)
+    parsed = JSON.parse(content)
   } catch (err) {
-    throw Error(`Error parsing ${path}, make sure it's a valid JSON \n` + err)
+    console.error(`Error parsing ${path}, make sure it's a valid JSON \n` + err)
   }
 
   return parsed
@@ -87,8 +87,8 @@ async function getPageMap(currentResourcePath) {
                 locale: getLocaleFromFilename(f.name)
               }
             } else if (metaExtension.test(f.name)) {
-              const metaContent = await fs.readFile(path, 'utf-8')
-              const meta = parseJsonFile(metaContent)
+              const content = await fs.readFile(filePath, 'utf-8')
+              const meta = parseJsonFile(content, filePath)
 
               const locale = f.name.match(metaExtension)[1]
 
