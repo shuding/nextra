@@ -21,6 +21,17 @@ function getFileName (resourcePath) {
   return removeExtension(path.basename(resourcePath))
 }
 
+const parseJsonFile = (path) => {
+  let parsed
+  try {
+    parsed = JSON.parse(file)
+  } catch (err) {
+    throw Error(`Error parsing ${path}, make sure it's a valid JSON \n` + err)
+  }
+
+  return parsed
+}
+
 async function getPageMap(currentResourcePath) {
   const extension = /\.(mdx?|jsx?)$/
   const mdxExtension = /\.mdx?$/
@@ -31,7 +42,7 @@ async function getPageMap(currentResourcePath) {
     const files = await fs.readdir(dir, { withFileTypes: true })
 
     // go through the directory
-    const items = 
+    const items =
       (await Promise.all(
         files
           .map(async f => {
@@ -72,11 +83,13 @@ async function getPageMap(currentResourcePath) {
 
               return {
                 name: removeExtension(f.name),
-                route: fileRoute, 
+                route: fileRoute,
                 locale: getLocaleFromFilename(f.name)
               }
             } else if (metaExtension.test(f.name)) {
-              const meta = JSON.parse(await fs.readFile(filePath, 'utf-8'))
+              const metaContent = await fs.readFile(path, 'utf-8')
+              const meta = parseJsonFile(metaContent)
+
               const locale = f.name.match(metaExtension)[1]
 
               return {
