@@ -22,7 +22,7 @@ function getFileName (resourcePath) {
 }
 
 const parseJsonFile = (content, path) => {
-  let parsed
+  let parsed = {}
   try {
     parsed = JSON.parse(content)
   } catch (err) {
