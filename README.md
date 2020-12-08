@@ -15,6 +15,8 @@ cd packages/nextra
 yarn build
 ```
 
+Watch mode: `yarn dev:layout`
+
 ### Build Nextra Theme
 
 ```
@@ -26,13 +28,13 @@ Watch mode: `yarn dev:layout`
 
 ### Development
 
-You can also debug them toegther with a website locally. For instance, to start examples/docs locally, run 
+You can also debug them toegther with a website locally. For instance, to start examples/docs locally, run
 
 ```
 cd examples/docs
 yarn dev
 ```
 
-Any change to example/docs will be re-rendered instantly. 
+Any change to example/docs will be re-rendered instantly.
 
-If you update the core or theme packages, a rebuild is required. Or you can use the watch mode for the theme.
+If you update the core or theme packages, a rebuild is required. Or you can use the watch mode for both nextra and the theme in separated terminals.

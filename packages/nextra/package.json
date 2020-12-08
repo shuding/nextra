@@ -12,7 +12,8 @@
   "repository": "https://github.com/shuding/nextra",
   "license": "MIT",
   "scripts": {
-    "build": "microbundle src/index.js src/ssg.js src/loader.js -o dist --no-sourcemap --target=node"
+    "build": "microbundle src/index.js src/ssg.js src/loader.js -o dist --no-sourcemap --target=node",
+    "watch": "microbundle watch src/index.js src/ssg.js src/loader.js -o dist --no-sourcemap --target=node"
   },
   "dependencies": {
     "@mdx-js/loader": "^2.0.0-next.8",
