@@ -71,10 +71,6 @@ const Footer = ({
   let prev = flatDirectories[currentIndex - 1]
   let next = flatDirectories[currentIndex + 1]
 
-  if (!config.nextLinks || !next) {
-    return null
-  }
-
   return (
     <footer className="mt-24">
       <nav className="flex flex-row items-center justify-between">
