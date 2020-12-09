@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo, useContext, createContext } from '
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
-import slugify from '@sindresorhus/slugify'
+import Slugger from 'github-slugger'
 import 'focus-visible'
 import { SkipNavContent } from '@reach/skip-nav'
 import { ThemeProvider } from 'next-themes'
@@ -62,6 +62,7 @@ function File({ item, anchors }) {
   const { setMenu } = useContext(MenuContext)
   const route = useRouter().route + '/'
   const active = route.startsWith(item.route + '/')
+  const slugger = new Slugger()
 
   const title = item.title
   // if (item.title.startsWith('> ')) {
@@ -76,7 +77,7 @@ function File({ item, anchors }) {
           <ul>
             {anchors.map((anchor) => {
               const anchorText = innerText(anchor) || ''
-              const slug = slugify(anchorText)
+              const slug = slugger.slug(anchorText)
 
               return (
                 <a
