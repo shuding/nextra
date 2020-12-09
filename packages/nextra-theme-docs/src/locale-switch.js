@@ -7,7 +7,7 @@ export default function LocaleSwitch ({ options }) {
   const { locale, asPath } = useRouter()
 
   return <details className="locale-switch relative">
-    <summary className="text-current p-2 cursor-pointer outline-none">
+    <summary className="text-current p-2 cursor-pointer outline-none" tabIndex="0">
       <svg fill="none" viewBox="0 0 24 24" width="24" height="24"stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
       </svg>

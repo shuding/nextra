@@ -11,12 +11,10 @@ const Item = ({ title, active, href, onMouseOver, search }) => {
     <Link href={href}>
       <a className="block no-underline" onMouseOver={onMouseOver}>
         <li
-          className={cn('p-2 text-gray-800', {
-            'bg-gray-100': active,
-          })}
+          className={cn('p-2', { active })}
         >
           {title.substring(0, highlight)}
-          <span className="bg-yellow-300">
+          <span className="highlight">
             {title.substring(highlight, highlight + search.length)}
           </span>
           {title.substring(highlight + search.length)}
@@ -96,7 +94,7 @@ const Search = ({ directories }) => {
   const renderList = show && results.length > 0
 
   return (
-    <div className="relative w-full md:w-64 mr-2">
+    <div className="nextra-search relative w-full md:w-64 mr-2">
       {renderList && (
         <div className="search-overlay z-1" onClick={() => setShow(false)} />
       )}
@@ -105,7 +103,7 @@ const Search = ({ directories }) => {
           setSearch(e.target.value)
           setShow(true)
         }}
-        className="appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring w-full"
+        className="appearance-none border rounded py-2 px-3 leading-tight focus:outline-none focus:ring w-full"
         type="search"
         placeholder='Search ("/" to focus)'
         onKeyDown={handleKeyDown}
@@ -113,7 +111,7 @@ const Search = ({ directories }) => {
         ref={input}
       />
       {renderList && (
-        <ul className="shadow-md list-none p-0 m-0 absolute left-0 md:right-0 bg-white rounded mt-1 border top-100 divide-y divide-gray-300 z-2">
+        <ul className="shadow-md list-none p-0 m-0 absolute left-0 md:right-0 rounded mt-1 border top-100 divide-y z-2">
           {results.map((res, i) => {
             return (
               <Item
