@@ -1,8 +1,8 @@
 export default {
-  repository: 'https://github.com/shuding/nextra',
-  branch: 'core',
-  path: '/examples/docs',
-  titleSuffix: ' – Nextra',
+  repository: "https://github.com/shuding/nextra",
+  branch: "core",
+  path: "/examples/docs",
+  titleSuffix: " – Nextra",
   logo: (
     <>
       <span className="mr-2 font-extrabold hidden md:inline">Nextra</span>
@@ -31,10 +31,10 @@ export default {
   footer: true,
   footerEditOnGitHubLink: true,
   footerEditOnGitHubText: ({ locale }) =>
-    locale === 'en' ? 'Edit this page on GitHub' : '前往 GitHub 编辑此页',
+    locale === "en" ? "Edit this page on GitHub" : "前往 GitHub 编辑此页",
   footerText: <>MIT {new Date().getFullYear()} © Shu Ding.</>,
   i18n: [
-    { locale: 'en', text: 'English' },
-    { locale: 'zh', text: '简体中文' },
+    { locale: "en", text: "English" },
+    { locale: "zh", text: "简体中文" },
   ],
-};
+}

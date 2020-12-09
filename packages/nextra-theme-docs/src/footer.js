@@ -75,7 +75,7 @@ const Footer = ({
     <footer className="mt-24">
       <nav className="flex flex-row items-center justify-between">
         <div>
-          {prev && config.PrevLink ? (
+          {prev && config.prevLinks ? (
             <PrevLink route={prev.route} title={prev.route} />
           ) : null}
         </div>
