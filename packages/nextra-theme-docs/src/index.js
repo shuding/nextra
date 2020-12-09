@@ -123,7 +123,7 @@ function Menu({ dir, anchors }) {
 function Sidebar({ show, directories, anchors }) {
   return (
     <aside
-      className={`h-screen bg-white dark:bg-dark flex-shrink-0 w-full md:w-64 md:border-r border-gray-200 dark:border-gray-800 md:block fixed md:sticky z-10 transition-theme duration-100 ${
+      className={`h-screen bg-white dark:bg-dark flex-shrink-0 w-full md:w-64 md:border-r border-gray-200 dark:border-gray-900 md:block fixed md:sticky z-10 ${
         show ? '' : 'hidden'
       }`}
       style={{
@@ -224,7 +224,7 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
         {renderComponent(config.head, { locale })}
       </Head>
       <div className="main-container flex flex-col">
-        <nav className="flex items-center bg-white z-20 fixed top-0 left-0 right-0 h-16 border-b border-gray-200 px-6 dark:bg-dark dark:border-gray-800 transition-theme duration-100">
+        <nav className="flex items-center bg-white z-20 fixed top-0 left-0 right-0 h-16 border-b border-gray-200 px-6 dark:bg-dark dark:border-gray-900">
           <div className="hidden md:block w-full flex items-center">
             <Link href="/">
               <a className="no-underline text-current inline-flex items-center hover:opacity-75">

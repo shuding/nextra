@@ -11,7 +11,7 @@ html {
   font-feature-settings: 'rlig' 1, 'calt' 1, 'ss01' 1;
 }
 body {
-  @apply bg-white transition-theme duration-100;
+  @apply bg-white;
 }
 .dark body {
   @apply bg-dark text-gray-100;
@@ -21,11 +21,11 @@ h1 {
   @apply text-4xl font-bold tracking-tight mt-2;
 }
 h2 {
-  @apply text-3xl font-semibold tracking-tight mt-10 transition-theme duration-100;
+  @apply text-3xl font-semibold tracking-tight mt-10;
   @apply pb-1 border-b;
 }
 .dark h2 {
-  @apply border-gray-800;
+  @apply border-gray-900;
 }
 h3 {
   @apply text-2xl font-semibold tracking-tight mt-8;
@@ -46,10 +46,10 @@ p {
   @apply mt-6 leading-7;
 }
 hr {
-  @apply my-8 transition-theme duration-100;
+  @apply my-8;
 }
 .dark hr {
-  @apply border-gray-800;
+  @apply border-gray-900;
 }
 code {
   @apply text-gray-800 bg-gray-500 bg-opacity-25 rounded;
@@ -102,13 +102,13 @@ figure figcaption {
   @apply ring;
 }
 .sidebar li.active > a {
-  @apply font-semibold text-black bg-gray-200 transition-theme duration-100;
+  @apply font-semibold text-black bg-gray-200;
 }
 .dark .sidebar li.active > a {
   @apply text-white bg-gray-800;
 }
 .sidebar button, .sidebar a {
-  @apply block w-full text-left text-base no-underline text-gray-600 mt-1 p-2 rounded select-none outline-none transition-theme duration-100;
+  @apply block w-full text-left text-base no-underline text-gray-600 mt-1 p-2 rounded select-none outline-none;
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
 }
