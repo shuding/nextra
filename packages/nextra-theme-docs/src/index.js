@@ -7,6 +7,7 @@ import 'focus-visible'
 import { SkipNavContent } from '@reach/skip-nav'
 import { ThemeProvider } from 'next-themes'
 import innerText from 'react-innertext'
+import cn from 'classnames'
 
 import flatten from './utils/flatten'
 import reorderBasedOnMeta from './utils/reorder'
@@ -86,7 +87,8 @@ function File({ item, anchors }) {
                   onClick={() => setMenu(false)}
                 >
                   <span className="flex">
-                    <span className="mr-2 opacity-25">#</span>
+                    <span className="opacity-25">#</span>
+                    <span className="mr-2"></span>
                     <span className="inline-block">{anchorText}</span>
                   </span>
                 </a>
@@ -138,7 +140,7 @@ function Sidebar({ show, directories, anchors }) {
   )
 }
 
-const NextLink = ({ config, flatDirectories, currentIndex }) => {
+const NextLink = ({ config, flatDirectories, currentIndex, isRTL }) => {
   let next = flatDirectories[currentIndex + 1]
 
   if (!config.nextLinks || !next) {
@@ -147,15 +149,15 @@ const NextLink = ({ config, flatDirectories, currentIndex }) => {
 
   return (
     <Link href={next.route}>
-      <a className="text-lg font-medium p-4 -m-4 no-underline text-gray-600 hover:text-blue-600 flex items-center ml-2">
+      <a className={cn('text-lg font-medium p-4 -m-4 no-underline text-gray-600 hover:text-blue-600 flex items-center', { 'ml-2': !isRTL, 'mr-2': isRTL })}>
         {next.title}
-        <ArrowRight className="inline ml-1 flex-shrink-0" />
+        <ArrowRight className={cn('transform inline flex-shrink-0', { 'rotate-180 mr-1': isRTL, 'ml-1': !isRTL })} />
       </a>
     </Link>
   )
 }
 
-const PrevLink = ({ config, flatDirectories, currentIndex }) => {
+const PrevLink = ({ config, flatDirectories, currentIndex, isRTL }) => {
   let prev = flatDirectories[currentIndex - 1]
 
   if (!config.prevLinks || !prev) {
@@ -164,8 +166,8 @@ const PrevLink = ({ config, flatDirectories, currentIndex }) => {
 
   return (
     <Link href={prev.route}>
-      <a className="text-lg font-medium p-4 -m-4 no-underline text-gray-600 hover:text-blue-600 flex items-center mr-2">
-        <ArrowRight className="transform rotate-180 inline mr-1 flex-shrink-0" />
+      <a className={cn('text-lg font-medium p-4 -m-4 no-underline text-gray-600 hover:text-blue-600 flex items-center', { 'mr-2': !isRTL, 'ml-2': isRTL })}>
+        <ArrowRight className={cn('transform inline flex-shrink-0', { 'rotate-180 mr-1': !isRTL, 'ml-1': isRTL })} />
         {prev.title}
       </a>
     </Link>
@@ -213,6 +215,12 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
     (dir) => dir.route === pathname
   ), [flatDirectories, pathname])
 
+  const isRTL = useMemo(() => {
+    if (!config.i18n) return null
+    const localeConfig = config.i18n.find(l => l.locale === locale)
+    return localeConfig && localeConfig.direction === 'rtl'
+  }, [config.i18n, locale])
+
   return (
     <React.Fragment>
       <Head>
@@ -223,7 +231,7 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
         </title>
         {renderComponent(config.head, { locale })}
       </Head>
-      <div className="nextra-container main-container flex flex-col">
+      <div className={cn('nextra-container main-container flex flex-col', { rtl: isRTL })}>
         <nav className="flex items-center bg-white z-20 fixed top-0 left-0 right-0 h-16 border-b border-gray-200 px-6 dark:bg-dark dark:border-gray-900">
           <div className="hidden md:block w-full flex items-center">
             <Link href="/">
@@ -237,11 +245,11 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
 
           {config.darkMode ? <ThemeSwitch /> : null}
 
-          {config.i18n ? <LocaleSwitch options={config.i18n} /> : null}
+          {config.i18n ? <LocaleSwitch options={config.i18n} isRTL={isRTL} /> : null}
 
           {config.github ? (
             <a
-              className="text-current p-2 -mr-2"
+              className="text-current p-2"
               href={config.github}
               target="_blank"
             >
@@ -250,7 +258,7 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
           ) : null}
 
           <button
-            className="block md:hidden p-2 -mr-2 ml-2"
+            className="block md:hidden p-2"
             onClick={() => setMenu(!menu)}
           >
             <svg
@@ -268,6 +276,8 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
               />
             </svg>
           </button>
+
+          <div className="-mr-2"/>
         </nav>
         <div className="flex flex-1 h-full">
           <MenuContext.Provider value={{ setMenu }}>
@@ -285,11 +295,11 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
                 <footer className="mt-24">
                   <nav className="flex flex-row items-center justify-between">
                     <div>
-                      <PrevLink config={config} flatDirectories={flatDirectories} currentIndex={currentIndex} />
+                      <PrevLink config={config} flatDirectories={flatDirectories} currentIndex={currentIndex} isRTL={isRTL} />
                     </div>
 
                     <div>
-                      <NextLink config={config} flatDirectories={flatDirectories} currentIndex={currentIndex} />
+                      <NextLink config={config} flatDirectories={flatDirectories} currentIndex={currentIndex} isRTL={isRTL} />
                     </div>
                   </nav>
 

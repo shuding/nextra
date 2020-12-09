@@ -158,6 +158,7 @@ h2 a {
   @apply no-underline;
 }
 
+/* Navbar */
 .nextra-container nav a:focus, .nextra-container nav summary:focus {
   @apply select-none outline-none;
 }
@@ -242,32 +243,27 @@ code {
   z-index: 11;
 }
 
+/* Table */
 table {
   @apply p-0 mt-6;
 }
-
 table tr {
   @apply m-0 p-0 border-t border-gray-300;
   @apply dark:border-gray-700;
 }
-
 table tr:nth-child(2n) {
   @apply bg-gray-100;
   @apply dark:bg-gray-900;
 }
-
 table tr th {
   @apply font-semibold;
 }
-
 table tr th[align=center], table tr td[align=center] {
   @apply text-center;
 }
-
 table tr th[align=right], table tr td[align=right] {
   @apply text-right;
 }
-
 table tr th, table tr td {
   @apply text-left;
   @apply m-0 px-4 py-2 border border-gray-300;
@@ -311,4 +307,27 @@ pre .prism-code .token.number, pre .prism-code .token.function, pre .prism-code 
 }
 .dark pre .prism-code .token.number, .dark pre .prism-code .token.function, .dark pre .prism-code .token.tag {
   color: #1e86ff !important;
+}
+
+/* RTL */
+.nextra-container.rtl {
+  direction: rtl;
+}
+.nextra-container.rtl .sidebar ul ul {
+  @apply mr-5 ml-0;
+}
+.nextra-container.rtl .sidebar button, .nextra-container.rtl .sidebar a {
+  @apply text-right;
+}
+.nextra-container.rtl content blockquote {
+  @apply pr-6 border-r-2 pl-0 border-l-0;
+}
+.nextra-container.rtl code {
+  direction: ltr;
+}
+.nextra-container.rtl .anchor-icon {
+  @apply ml-0 mr-2 inline-block;
+}
+.nextra-container.rtl content ul, .nextra-container.rtl content ol {
+  @apply ml-0 mr-6;
 }

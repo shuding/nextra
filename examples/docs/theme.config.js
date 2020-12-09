@@ -3,8 +3,8 @@ export default {
   titleSuffix: ' – Nextra',
   logo: (
     <>
-      <span className="mr-2 font-extrabold hidden md:inline">Nextra</span>
-      <span className="text-gray-600 font-normal hidden md:inline">
+      <span className="font-extrabold hidden md:inline">Nextra</span>
+      <span className="mr-2 ml-2 text-gray-600 font-normal hidden md:inline">
         The Next Site Builder
       </span>
     </>
@@ -29,11 +29,12 @@ export default {
   footer: true,
   footerEditOnGitHubLink: true,
   footerEditOnGitHubText: ({ locale }) => (
-    locale === 'en' ? 'Edit this page on GitHub' : '前往 GitHub 编辑此页'
+    locale === 'zh' ? '前往 GitHub 编辑此页' : 'Edit this page on GitHub'
   ),
   footerText: <>MIT {new Date().getFullYear()} © Shu Ding.</>,
   i18n: [
     { locale: 'en', text: 'English' },
-    { locale: 'zh', text: '简体中文' }
+    { locale: 'zh', text: '简体中文' },
+    { locale: 'ar', text: 'العربية', direction: 'rtl' }
   ]
 }

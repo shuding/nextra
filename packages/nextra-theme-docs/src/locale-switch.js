@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import cn from 'classnames'
 
-export default function LocaleSwitch ({ options }) {
+export default function LocaleSwitch ({ options, isRTL }) {
   const { locale, asPath } = useRouter()
 
   return <details className="locale-switch relative">
@@ -12,7 +12,7 @@ export default function LocaleSwitch ({ options }) {
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
       </svg>
     </summary>
-    <ul className="locale-dropdown absolute right-0 block bg-white dark:bg-dark dark:border-gray-700 py-1 rounded border">
+    <ul className={cn('locale-dropdown absolute block bg-white dark:bg-dark dark:border-gray-700 py-1 rounded border', { 'right-0': !isRTL, 'left-0': isRTL })}>
       {options.map(l => 
         <Link key={l.locale} href={asPath} locale={l.locale}>
           <a className={
