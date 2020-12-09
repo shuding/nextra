@@ -137,48 +137,6 @@ function Sidebar({ show, directories, anchors }) {
   )
 }
 
-const NextLink = ({ config, flatDirectories, currentIndex }) => {
-  let next = flatDirectories[currentIndex + 1]
-
-  if (!config.nextLinks || !next) {
-    return null
-  }
-
-  return (
-    <Link href={next.route}>
-      <a className="text-lg font-medium p-4 -m-4 no-underline text-gray-600 hover:text-blue-600 flex items-center ml-2">
-        {next.title}
-        <ArrowRight className="inline ml-1 flex-shrink-0" />
-      </a>
-    </Link>
-  )
-}
-
-const PrevLink = ({ config, flatDirectories, currentIndex }) => {
-  let prev = flatDirectories[currentIndex - 1]
-
-  if (!config.prevLinks || !prev) {
-    return null
-  }
-
-  return (
-    <Link href={prev.route}>
-      <a className="text-lg font-medium p-4 -m-4 no-underline text-gray-600 hover:text-blue-600 flex items-center mr-2">
-        <ArrowRight className="transform rotate-180 inline mr-1 flex-shrink-0" />
-        {prev.title}
-      </a>
-    </Link>
-  )
-}
-
-const renderComponent = (ComponentOrNode, opts) => {
-  if (!ComponentOrNode) return null
-  if (typeof ComponentOrNode === 'function') {
-    return <ComponentOrNode {...opts} />
-  }
-  return ComponentOrNode
-}
-
 const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
   const [menu, setMenu] = useState(false)
   const router = useRouter()
@@ -232,16 +190,17 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
             </Link>
           </div>
 
-          {config.customSearch || (config.search ? <Search directories={flatDirectories} /> : null)}
+          {config.customSearch ||
+            (config.search ? <Search directories={flatDirectories} /> : null)}
 
           {config.darkMode ? <ThemeSwitch /> : null}
 
           {config.i18n ? <LocaleSwitch options={config.i18n} /> : null}
 
-          {config.github ? (
+          {config.repository ? (
             <a
               className="text-current p-2 -mr-2"
-              href={config.github}
+              href={config.repository}
               target="_blank"
             >
               <GitHubIcon height={28} />
@@ -281,31 +240,12 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
             <content className="relative pt-20 pb-16 px-6 md:px-8 w-full max-w-full overflow-x-hidden xl:pr-64">
               <main className="max-w-screen-md mx-auto">
                 <Theme>{children}</Theme>
-                <footer className="mt-24">
-                  <nav className="flex flex-row items-center justify-between">
-                    <div>
-                      <PrevLink config={config} flatDirectories={flatDirectories} currentIndex={currentIndex} />
-                    </div>
-
-                    <div>
-                      <NextLink config={config} flatDirectories={flatDirectories} currentIndex={currentIndex} />
-                    </div>
-                  </nav>
-
-                  <hr />
-
-                  {config.footer ? <div className="mt-24 flex justify-between flex-col-reverse md:flex-row items-center md:items-end">
-                    <span className="text-gray-600">
-                      {renderComponent(config.footerText, { locale })}
-                    </span>
-                    <div className="mt-6"/>
-                    {config.footerEditOnGitHubLink ? <a className="text-sm" href={
-                      (config.siteGithub || config.github) + '/tree/master/pages' + filepathWithName
-                    } target="_blank">{
-                      config.footerEditOnGitHubText ? renderComponent(config.footerEditOnGitHubText, { locale }) : 'Edit this page on GitHub'
-                    }</a> : null}
-                  </div> : null}
-                </footer>
+                <Footer
+                  config={config}
+                  flatDirectories={flatDirectories}
+                  currentIndex={currentIndex}
+                  filepathWithName={filepathWithName}
+                />
               </main>
             </content>
           )}

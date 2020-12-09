@@ -1,14 +1,16 @@
-import React from 'react'
+import React from "react"
 
 export default {
-  github: 'https://github.com/shuding/nextra',
-  titleSuffix: ' – Nextra',
+  repository: "https://github.com/shuding/nextra",
+  branch: "master",
+  path: "/",
+  titleSuffix: " – Nextra",
   nextLinks: true,
   prevLinks: true,
   search: true,
   darkMode: true,
   footer: true,
-  footerText: 'MIT 2020 © Shu Ding.',
+  footerText: "MIT 2020 © Shu Ding.",
   footerEditOnGitHubLink: true,
   logo: (
     <React.Fragment>
