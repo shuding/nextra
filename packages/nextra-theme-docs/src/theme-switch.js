@@ -3,9 +3,18 @@ import { useTheme } from 'next-themes'
 
 export default function ThemeSwitch () {
   const { theme, setTheme } = useTheme()
-  return <a className="text-current p-2 cursor-pointer" onClick={() => {
+
+  // @TODO: system theme
+  const toggleTheme = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark')
-  }}>{
+  }
+
+  return <a className="text-current p-2 cursor-pointer" tabIndex="0"
+    onClick={toggleTheme}
+    onKeyDown={e => {
+      if (e.key === 'Enter') toggleTheme()
+    }}
+  >{
     theme === 'dark' ? 
       <svg fill="none" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />

@@ -1,5 +1,5 @@
 import { MDXProvider } from '@mdx-js/react'
-import slugify from '@sindresorhus/slugify'
+import Slugger from 'github-slugger'
 import Link from 'next/link'
 import React from 'react'
 import innerText from 'react-innertext'
@@ -48,8 +48,8 @@ const THEME = {
 
 // Anchor links
 
-const HeaderLink = ({ tag: Tag, children, ...props }) => {
-  const slug = slugify(innerText(children) || '')
+const HeaderLink = ({ tag: Tag, children, slugger, ...props }) => {
+  const slug = slugger.slug(innerText(children) || '')
   return (
     <Tag {...props}>
       <span className="subheading-anchor" id={slug} />
@@ -61,41 +61,41 @@ const HeaderLink = ({ tag: Tag, children, ...props }) => {
   )
 }
 
-const H2 = ({ children, ...props }) => {
+const H2 = ({ slugger }) => ({ children, ...props }) => {
   return (
-    <HeaderLink tag="h2" {...props}>
+    <HeaderLink tag="h2" slugger={slugger} {...props}>
       {children}
     </HeaderLink>
   )
 }
 
-const H3 = ({ children, ...props }) => {
+const H3 = ({ slugger }) => ({ children, ...props }) => {
   return (
-    <HeaderLink tag="h3" {...props}>
+    <HeaderLink tag="h3" slugger={slugger} {...props}>
       {children}
     </HeaderLink>
   )
 }
 
-const H4 = ({ children, ...props }) => {
+const H4 = ({ slugger }) => ({ children, ...props }) => {
   return (
-    <HeaderLink tag="h4" {...props}>
+    <HeaderLink tag="h4" slugger={slugger} {...props}>
       {children}
     </HeaderLink>
   )
 }
 
-const H5 = ({ children, ...props }) => {
+const H5 = ({ slugger }) => ({ children, ...props }) => {
   return (
-    <HeaderLink tag="h5" {...props}>
+    <HeaderLink tag="h5" slugger={slugger} {...props}>
       {children}
     </HeaderLink>
   )
 }
 
-const H6 = ({ children, ...props }) => {
+const H6 = ({ slugger }) => ({ children, ...props }) => {
   return (
-    <HeaderLink tag="h6" {...props}>
+    <HeaderLink tag="h6" slugger={slugger} {...props}>
       {children}
     </HeaderLink>
   )
@@ -158,16 +158,17 @@ const Code = ({ children, className, highlight, ...props }) => {
   )
 }
 
-const components = {
-  h2: H2,
-  h3: H3,
-  h4: H4,
-  h5: H5,
-  h6: H6,
+const getComponents = args => ({
+  h2: H2(args),
+  h3: H3(args),
+  h4: H4(args),
+  h5: H5(args),
+  h6: H6(args),
   a: A,
   code: Code,
-}
+})
 
 export default ({ children }) => {
-  return <MDXProvider components={components}>{children}</MDXProvider>
+  const slugger = new Slugger()
+  return <MDXProvider components={getComponents({slugger})}>{children}</MDXProvider>
 }
