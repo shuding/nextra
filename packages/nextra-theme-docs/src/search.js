@@ -10,9 +10,7 @@ const Item = ({ title, active, href, onMouseOver, search }) => {
   return (
     <Link href={href}>
       <a className="block no-underline" onMouseOver={onMouseOver}>
-        <li
-          className={cn('p-2', { active })}
-        >
+        <li className={cn('p-2', { active })}>
           {title.substring(0, highlight)}
           <span className="highlight">
             {title.substring(highlight, highlight + search.length)}
@@ -41,7 +39,7 @@ const Search = ({ directories }) => {
   }, [search])
 
   const handleKeyDown = useCallback(
-    (e) => {
+    e => {
       switch (e.key) {
         case 'ArrowDown': {
           e.preventDefault()
@@ -73,7 +71,7 @@ const Search = ({ directories }) => {
   useEffect(() => {
     const inputs = ['input', 'select', 'button', 'textarea']
 
-    const down = (e) => {
+    const down = e => {
       if (
         document.activeElement &&
         inputs.indexOf(document.activeElement.tagName.toLowerCase() !== -1)
@@ -99,7 +97,7 @@ const Search = ({ directories }) => {
         <div className="search-overlay z-1" onClick={() => setShow(false)} />
       )}
       <input
-        onChange={(e) => {
+        onChange={e => {
           setSearch(e.target.value)
           setShow(true)
         }}

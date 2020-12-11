@@ -1,5 +1,5 @@
 // BFS traverse the page map tree
-export default function traverse (pageMap, matcher) {
+export default function traverse(pageMap, matcher) {
   for (let i = 0; i < pageMap.length; i++) {
     if (matcher(pageMap[i])) {
       return pageMap[i]

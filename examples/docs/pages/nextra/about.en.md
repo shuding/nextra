@@ -13,10 +13,15 @@ Nextra also supports .md files.
 ---
 
 # **Hello**, This Is a _Title_ Inside `h1`
+
 ## **Hello**, This Is a _Title_ Inside `h2`
+
 ### **Hello**, This Is a _Title_ Inside `h3`
+
 #### **Hello**, This Is a _Title_ Inside `h4`
+
 ##### **Hello**, This Is a _Title_ Inside `h5`
+
 ###### **Hello**, This Is a _Title_ Inside `h6`
 
 Use [MDX](https://mdxjs.com/about) to use React components inside your Markdown file:
@@ -54,24 +59,24 @@ Inline code: `let x = 1`.
 Multiple lines: `x += 1`.
 
 > Where some people measure progress in answers-right per test or tests-passed per year, we are more interested in Sistine-Chapel-Ceilings per Lifetime.
-> 
+>
 > — Alan Kay, A Personal Computer for Children of All Ages
 
 And quote inside quote:
 
 > > Where some people measure progress in answers-right per test or tests-passed per year, we are more interested in Sistine-Chapel-Ceilings per Lifetime.
-> > 
+> >
 > > — Alan Kay, A Personal Computer for Children of All Ages
-> 
+>
 > This is **great**.
-> 
+>
 > — Shu Ding.
 
-| Syntax        | Description | Test Text     |
-| :---          |    :----:   |          ---: |
-| Header        | Title       | Here's this   |
-| Paragraph     | Text        | And more      |
-| Strikethrough |             | ~~Text~~      |
+| Syntax        | Description |   Test Text |
+| :------------ | :---------: | ----------: |
+| Header        |    Title    | Here's this |
+| Paragraph     |    Text     |    And more |
+| Strikethrough |             |    ~~Text~~ |
 
 Task list
 

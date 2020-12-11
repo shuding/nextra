@@ -1,16 +1,16 @@
-import React from "react"
+import React from 'react'
 
 export default {
-  repository: "https://github.com/shuding/nextra",
-  branch: "master",
-  path: "/",
-  titleSuffix: " – Nextra",
+  repository: 'https://github.com/shuding/nextra',
+  branch: 'master',
+  path: '/',
+  titleSuffix: ' – Nextra',
   nextLinks: true,
   prevLinks: true,
   search: true,
   darkMode: true,
   footer: true,
-  footerText: "MIT 2020 © Shu Ding.",
+  footerText: 'MIT 2020 © Shu Ding.',
   footerEditOnGitHubLink: true,
   logo: (
     <React.Fragment>
@@ -33,6 +33,6 @@ export default {
       <meta name="og:title" content="Nextra: the next docs builder" />
       <meta name="apple-mobile-web-app-title" content="Nextra" />
     </React.Fragment>
-  ),
+  )
   // i18n: [{ locale: 'en-US', text: 'English' }]
 }
