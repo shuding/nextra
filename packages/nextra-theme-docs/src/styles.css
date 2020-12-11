@@ -93,7 +93,7 @@ figure figcaption {
 }
 
 .sidebar {
-  @apply select-none;
+  @apply select-none md:border-r;
 }
 .sidebar ul ul {
   @apply ml-5;
@@ -330,4 +330,7 @@ pre .prism-code .token.number, pre .prism-code .token.function, pre .prism-code 
 }
 .nextra-container.rtl content ul, .nextra-container.rtl content ol {
   @apply ml-0 mr-6;
+}
+.nextra-container.rtl .sidebar {
+  @apply md:border-l;
 }

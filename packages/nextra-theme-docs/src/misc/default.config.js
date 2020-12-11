@@ -10,7 +10,7 @@ export default {
   search: true,
   darkMode: true,
   footer: true,
-  footerText: 'MIT 2020 © Shu Ding.',
+  footerText: 'MIT 2020 © Nextra.',
   footerEditOnGitHubLink: true,
   logo: (
     <React.Fragment>

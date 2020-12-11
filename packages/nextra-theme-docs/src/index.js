@@ -132,7 +132,7 @@ function Menu({ dir, anchors }) {
 function Sidebar({ show, directories, anchors }) {
   return (
     <aside
-      className={`h-screen bg-white dark:bg-dark flex-shrink-0 w-full md:w-64 md:border-r border-gray-200 dark:border-gray-900 md:block fixed md:sticky z-10 ${
+      className={`h-screen bg-white dark:bg-dark flex-shrink-0 w-full md:w-64 md:block fixed md:sticky z-10 ${
         show ? '' : 'hidden'
       }`}
       style={{
@@ -140,7 +140,7 @@ function Sidebar({ show, directories, anchors }) {
         height: 'calc(100vh - 4rem)'
       }}
     >
-      <div className="sidebar w-full p-4 pb-40 md:pb-16 h-full overflow-y-auto">
+      <div className="sidebar border-gray-200 dark:border-gray-900 w-full p-4 pb-40 md:pb-16 h-full overflow-y-auto">
         <Menu dir={directories} anchors={anchors} />
       </div>
     </aside>
@@ -213,6 +213,8 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
 
           {config.customSearch ||
             (config.search ? <Search directories={flatDirectories} /> : null)}
+
+          <div className="mr-2" />
 
           {config.darkMode ? <ThemeSwitch /> : null}
 

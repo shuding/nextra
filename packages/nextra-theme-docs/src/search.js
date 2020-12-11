@@ -92,7 +92,7 @@ const Search = ({ directories }) => {
   const renderList = show && results.length > 0
 
   return (
-    <div className="nextra-search relative w-full md:w-64 mx-2">
+    <div className="nextra-search relative w-full md:w-64">
       {renderList && (
         <div className="search-overlay z-1" onClick={() => setShow(false)} />
       )}
