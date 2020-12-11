@@ -272,6 +272,7 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
                   flatDirectories={flatDirectories}
                   currentIndex={currentIndex}
                   filepathWithName={filepathWithName}
+                  isRTL={isRTL}
                 />
               </main>
             </content>

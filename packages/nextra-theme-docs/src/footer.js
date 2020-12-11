@@ -2,27 +2,28 @@ import React from 'react'
 import ArrowRight from './arrow-right'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import cn from 'classnames'
 
 import renderComponent from './utils/render-component'
 
-const NextLink = ({ route, title }) => {
+const NextLink = ({ route, title, isRTL }) => {
   return (
     <Link href={route}>
-      <span className="text-lg font-medium p-4 -m-4 no-underline text-gray-600 hover:text-blue-600 flex items-center ml-2">
+      <a className={cn('text-lg font-medium p-4 -m-4 no-underline text-gray-600 hover:text-blue-600 flex items-center', { 'ml-2': !isRTL, 'mr-2': isRTL })} title={title}>
         {title}
-        <ArrowRight className="inline ml-1 flex-shrink-0" />
-      </span>
+        <ArrowRight className={cn('transform inline flex-shrink-0', { 'rotate-180 mr-1': isRTL, 'ml-1': !isRTL })} />
+      </a>
     </Link>
   )
 }
 
-const PrevLink = ({ route, title }) => {
+const PrevLink = ({ route, title, isRTL }) => {
   return (
     <Link href={route}>
-      <span className="text-lg font-medium p-4 -m-4 no-underline text-gray-600 hover:text-blue-600 flex items-center mr-2">
-        <ArrowRight className="transform rotate-180 inline mr-1 flex-shrink-0" />
+      <a className={cn('text-lg font-medium p-4 -m-4 no-underline text-gray-600 hover:text-blue-600 flex items-center', { 'mr-2': !isRTL, 'ml-2': isRTL })} title={title}>
+        <ArrowRight className={cn('transform inline flex-shrink-0', { 'rotate-180 mr-1': !isRTL, 'ml-1': isRTL })} />
         {title}
-      </span>
+      </a>
     </Link>
   )
 }
@@ -67,7 +68,8 @@ const Footer = ({
   config,
   flatDirectories,
   currentIndex,
-  filepathWithName
+  filepathWithName,
+  isRTL
 }) => {
   let prev = flatDirectories[currentIndex - 1]
   let next = flatDirectories[currentIndex + 1]
@@ -78,12 +80,12 @@ const Footer = ({
       <nav className="flex flex-row items-center justify-between">
         <div>
           {prev && config.prevLinks ? (
-            <PrevLink route={prev.route} title={prev.route} />
+            <PrevLink route={prev.route} title={prev.title} isRTL={isRTL} />
           ) : null}
         </div>
         <div>
           {config.nextLinks && next ? (
-            <NextLink route={next.route} title={next.route} />
+            <NextLink route={next.route} title={next.title} isRTL={isRTL} />
           ) : null}
         </div>
       </nav>
