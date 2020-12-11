@@ -1,8 +1,8 @@
-import React from "react"
-import ArrowRight from "./arrow-right"
-import Link from "next/link"
+import React from 'react'
+import ArrowRight from './arrow-right'
+import Link from 'next/link'
 
-import renderComponent from "./utils/render-component"
+import renderComponent from './utils/render-component'
 
 const NextLink = ({ route, title }) => {
   return (
@@ -28,9 +28,9 @@ const PrevLink = ({ route, title }) => {
 
 // Make sure path is a valid url path,
 // adding / in front or in the back if missing
-const fixPath = (path) => {
-  const pathWithFrontSlash = path.startsWith("/") ? path : `/${path}`
-  const pathWithBackSlash = pathWithFrontSlash.endsWith("/")
+const fixPath = path => {
+  const pathWithFrontSlash = path.startsWith('/') ? path : `/${path}`
+  const pathWithBackSlash = pathWithFrontSlash.endsWith('/')
     ? pathWithFrontSlash
     : `${pathWithFrontSlash}/`
 
@@ -47,7 +47,7 @@ const EditOnGithubLink = ({
   branch,
   path,
   footerEditOnGitHubText,
-  filepathWithName,
+  filepathWithName
 }) => {
   const href = createEditUrl(repository, branch, path, filepathWithName)
   console.log({ href })
@@ -55,9 +55,9 @@ const EditOnGithubLink = ({
     <a className="text-sm" href={href} target="_blank">
       {footerEditOnGitHubText
         ? renderComponent(footerEditOnGitHubText, {
-            locale,
+            locale
           })
-        : "Edit this page on GitHub"}
+        : 'Edit this page on GitHub'}
     </a>
   )
 }
@@ -66,7 +66,7 @@ const Footer = ({
   config,
   flatDirectories,
   currentIndex,
-  filepathWithName,
+  filepathWithName
 }) => {
   let prev = flatDirectories[currentIndex - 1]
   let next = flatDirectories[currentIndex + 1]

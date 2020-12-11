@@ -3,93 +3,93 @@ import React, {
   useEffect,
   useMemo,
   useContext,
-  createContext,
-} from "react";
-import { useRouter } from "next/router";
-import Head from "next/head";
-import Link from "next/link";
-import slugify from "@sindresorhus/slugify";
-import "focus-visible";
-import { SkipNavContent } from "@reach/skip-nav";
-import { ThemeProvider } from "next-themes";
-import innerText from "react-innertext";
-import cn from "classnames";
+  createContext
+} from 'react'
+import { useRouter } from 'next/router'
+import Head from 'next/head'
+import Link from 'next/link'
+import slugify from '@sindresorhus/slugify'
+import 'focus-visible'
+import { SkipNavContent } from '@reach/skip-nav'
+import { ThemeProvider } from 'next-themes'
+import innerText from 'react-innertext'
+import cn from 'classnames'
 
-import flatten from "./utils/flatten";
-import reorderBasedOnMeta from "./utils/reorder";
+import flatten from './utils/flatten'
+import reorderBasedOnMeta from './utils/reorder'
 
-import Search from "./search";
-import GitHubIcon from "./github-icon";
-import ThemeSwitch from "./theme-switch";
-import LocaleSwitch from "./locale-switch";
-import Footer from "./footer";
-import renderComponent from "./utils/render-component";
+import Search from './search'
+import GitHubIcon from './github-icon'
+import ThemeSwitch from './theme-switch'
+import LocaleSwitch from './locale-switch'
+import Footer from './footer'
+import renderComponent from './utils/render-component'
 
-import Theme from "./misc/theme";
-import defaultConfig from "./misc/default.config";
+import Theme from './misc/theme'
+import defaultConfig from './misc/default.config'
 
-const TreeState = new Map();
-const titleType = ["h1", "h2", "h3", "h4", "h5", "h6"];
-const MenuContext = createContext(false);
+const TreeState = new Map()
+const titleType = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
+const MenuContext = createContext(false)
 
 function Folder({ item, anchors }) {
-  const route = useRouter().route + "/";
-  const active = route.startsWith(item.route + "/");
-  const open = TreeState[item.route] ?? true;
-  const [_, render] = useState(false);
+  const route = useRouter().route + '/'
+  const active = route.startsWith(item.route + '/')
+  const open = TreeState[item.route] ?? true
+  const [_, render] = useState(false)
 
   useEffect(() => {
     if (active) {
-      TreeState[item.route] = true;
+      TreeState[item.route] = true
     }
-  }, [active]);
+  }, [active])
 
   return (
-    <li className={open ? "active" : ""}>
+    <li className={open ? 'active' : ''}>
       <button
         onClick={() => {
-          if (active) return;
-          TreeState[item.route] = !open;
-          render((x) => !x);
+          if (active) return
+          TreeState[item.route] = !open
+          render(x => !x)
         }}
       >
         {item.title}
       </button>
       <div
         style={{
-          display: open ? undefined : "none",
+          display: open ? undefined : 'none'
         }}
       >
         <Menu dir={item.children} base={item.route} anchors={anchors} />
       </div>
     </li>
-  );
+  )
 }
 
 function File({ item, anchors }) {
-  const { setMenu } = useContext(MenuContext);
-  const route = useRouter().route + "/";
-  const active = route.startsWith(item.route + "/");
-  const slugger = new Slugger();
+  const { setMenu } = useContext(MenuContext)
+  const route = useRouter().route + '/'
+  const active = route.startsWith(item.route + '/')
+  const slugger = new Slugger()
 
-  const title = item.title;
+  const title = item.title
   // if (item.title.startsWith('> ')) {
   // title = title.substr(2)
   if (anchors && anchors.length) {
     if (active) {
       return (
-        <li className={active ? "active" : ""}>
+        <li className={active ? 'active' : ''}>
           <Link href={item.route}>
             <a>{title}</a>
           </Link>
           <ul>
-            {anchors.map((anchor) => {
-              const anchorText = innerText(anchor) || "";
-              const slug = slugger.slug(anchorText);
+            {anchors.map(anchor => {
+              const anchorText = innerText(anchor) || ''
+              const slug = slugger.slug(anchorText)
 
               return (
                 <a
-                  href={"#" + slug}
+                  href={'#' + slug}
                   key={`a-${slug}`}
                   onClick={() => setMenu(false)}
                 >
@@ -99,93 +99,93 @@ function File({ item, anchors }) {
                     <span className="inline-block">{anchorText}</span>
                   </span>
                 </a>
-              );
+              )
             })}
           </ul>
         </li>
-      );
+      )
     }
   }
 
   return (
-    <li className={active ? "active" : ""}>
+    <li className={active ? 'active' : ''}>
       <Link href={item.route}>
         <a onClick={() => setMenu(false)}>{title}</a>
       </Link>
     </li>
-  );
+  )
 }
 
 function Menu({ dir, anchors }) {
   return (
     <ul>
-      {dir.map((item) => {
+      {dir.map(item => {
         if (item.children) {
-          return <Folder key={item.name} item={item} anchors={anchors} />;
+          return <Folder key={item.name} item={item} anchors={anchors} />
         }
-        return <File key={item.name} item={item} anchors={anchors} />;
+        return <File key={item.name} item={item} anchors={anchors} />
       })}
     </ul>
-  );
+  )
 }
 
 function Sidebar({ show, directories, anchors }) {
   return (
     <aside
       className={`h-screen bg-white dark:bg-dark flex-shrink-0 w-full md:w-64 md:border-r border-gray-200 dark:border-gray-900 md:block fixed md:sticky z-10 ${
-        show ? "" : "hidden"
+        show ? '' : 'hidden'
       }`}
       style={{
-        top: "4rem",
-        height: "calc(100vh - 4rem)",
+        top: '4rem',
+        height: 'calc(100vh - 4rem)'
       }}
     >
       <div className="sidebar w-full p-4 pb-40 md:pb-16 h-full overflow-y-auto">
         <Menu dir={directories} anchors={anchors} />
       </div>
     </aside>
-  );
+  )
 }
 
 const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
-  const [menu, setMenu] = useState(false);
-  const router = useRouter();
-  const { route, pathname, locale } = router;
+  const [menu, setMenu] = useState(false)
+  const router = useRouter()
+  const { route, pathname, locale } = router
 
-  const directories = useMemo(() => reorderBasedOnMeta(pageMap), [pageMap]);
-  const flatDirectories = useMemo(() => flatten(directories), [directories]);
-  const config = Object.assign({}, defaultConfig, _config);
+  const directories = useMemo(() => reorderBasedOnMeta(pageMap), [pageMap])
+  const flatDirectories = useMemo(() => flatten(directories), [directories])
+  const config = Object.assign({}, defaultConfig, _config)
 
-  const filepath = route.slice(0, route.lastIndexOf("/") + 1);
-  const filepathWithName = filepath + filename;
-  const titles = React.Children.toArray(children).filter((child) =>
+  const filepath = route.slice(0, route.lastIndexOf('/') + 1)
+  const filepathWithName = filepath + filename
+  const titles = React.Children.toArray(children).filter(child =>
     titleType.includes(child.props.mdxType)
-  );
-  const titleEl = titles.find((child) => child.props.mdxType === "h1");
+  )
+  const titleEl = titles.find(child => child.props.mdxType === 'h1')
   const title =
-    meta.title || (titleEl ? innerText(titleEl.props.children) : "Untitled");
+    meta.title || (titleEl ? innerText(titleEl.props.children) : 'Untitled')
   const anchors = titles
-    .filter((child) => child.props.mdxType === "h2")
-    .map((child) => child.props.children);
+    .filter(child => child.props.mdxType === 'h2')
+    .map(child => child.props.children)
 
   useEffect(() => {
     if (menu) {
-      document.body.classList.add("overflow-hidden");
+      document.body.classList.add('overflow-hidden')
     } else {
-      document.body.classList.remove("overflow-hidden");
+      document.body.classList.remove('overflow-hidden')
     }
-  }, [menu]);
+  }, [menu])
 
   const currentIndex = useMemo(
-    () => flatDirectories.findIndex((dir) => dir.route === pathname),
+    () => flatDirectories.findIndex(dir => dir.route === pathname),
     [flatDirectories, pathname]
-  );
+  )
 
   const isRTL = useMemo(() => {
-    if (!config.i18n) return null;
-    const localeConfig = config.i18n.find((l) => l.locale === locale);
-    return localeConfig && localeConfig.direction === "rtl";
-  }, [config.i18n, locale]);
+    if (!config.i18n) return null
+    const localeConfig = config.i18n.find(l => l.locale === locale)
+    return localeConfig && localeConfig.direction === 'rtl'
+  }, [config.i18n, locale])
 
   return (
     <React.Fragment>
@@ -198,8 +198,8 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
         {renderComponent(config.head, { locale })}
       </Head>
       <div
-        className={cn("nextra-container main-container flex flex-col", {
-          rtl: isRTL,
+        className={cn('nextra-container main-container flex flex-col', {
+          rtl: isRTL
         })}
       >
         <nav className="flex items-center bg-white z-20 fixed top-0 left-0 right-0 h-16 border-b border-gray-200 px-6 dark:bg-dark dark:border-gray-900">
@@ -277,13 +277,13 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
         </div>
       </div>
     </React.Fragment>
-  );
-};
+  )
+}
 
-export default (opts, config) => (props) => {
+export default (opts, config) => props => {
   return (
     <ThemeProvider attribute="class">
       <Layout config={config} {...opts} {...props} />
     </ThemeProvider>
-  );
-};
+  )
+}

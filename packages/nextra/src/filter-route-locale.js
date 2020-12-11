@@ -1,4 +1,4 @@
-export default function filterRouteLocale (pageMap, locale, defaultLocale) {
+export default function filterRouteLocale(pageMap, locale, defaultLocale) {
   const isDefaultLocale = !locale || locale === defaultLocale
 
   const filteredPageMap = []
@@ -15,13 +15,17 @@ export default function filterRouteLocale (pageMap, locale, defaultLocale) {
       continue
     }
 
-    const localDoesMatch = (!page.locale && isDefaultLocale) || page.locale === locale
+    const localDoesMatch =
+      (!page.locale && isDefaultLocale) || page.locale === locale
 
     if (localDoesMatch) {
       fallbackPages[page.name] = null
       filteredPageMap.push(page)
     } else {
-      if (fallbackPages[page.name] !== null && (!page.locale || page.locale === defaultLocale)) {
+      if (
+        fallbackPages[page.name] !== null &&
+        (!page.locale || page.locale === defaultLocale)
+      ) {
         fallbackPages[page.name] = page
       }
     }

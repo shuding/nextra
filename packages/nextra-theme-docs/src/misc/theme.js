@@ -7,43 +7,43 @@ import Highlight, { defaultProps } from 'prism-react-renderer'
 
 const THEME = {
   plain: {
-    backgroundColor: 'transparent',
+    backgroundColor: 'transparent'
   },
   styles: [
     {
       types: ['keyword'],
       style: {
         color: '#ff0078',
-        fontWeight: 'bold',
-      },
+        fontWeight: 'bold'
+      }
     },
     {
       types: ['comment'],
       style: {
         color: '#999',
-        fontStyle: 'italic',
-      },
+        fontStyle: 'italic'
+      }
     },
     {
       types: ['variable', 'language-javascript'],
       style: {
-        color: '#0076ff',
-      },
+        color: '#0076ff'
+      }
     },
     {
       types: ['attr-name'],
       style: {
         color: '#d9931e',
-        fontStyle: 'normal',
-      },
+        fontStyle: 'normal'
+      }
     },
     {
       types: ['boolean', 'regex'],
       style: {
-        color: '#d9931e',
-      },
-    },
-  ],
+        color: '#d9931e'
+      }
+    }
+  ]
 }
 
 // Anchor links
@@ -55,7 +55,9 @@ const HeaderLink = ({ tag: Tag, children, slugger, ...props }) => {
       <span className="subheading-anchor" id={slug} />
       <a href={'#' + slug} className="text-current no-underline no-outline">
         {children}
-        <span className="anchor-icon" aria-hidden>#</span>
+        <span className="anchor-icon" aria-hidden>
+          #
+        </span>
       </a>
     </Tag>
   )
@@ -142,7 +144,7 @@ const Code = ({ children, className, highlight, ...props }) => {
                   ? {
                       background: 'var(--c-highlight)',
                       margin: '0 -1rem',
-                      padding: '0 1rem',
+                      padding: '0 1rem'
                     }
                   : null
               }
@@ -165,10 +167,14 @@ const getComponents = args => ({
   h5: H5(args),
   h6: H6(args),
   a: A,
-  code: Code,
+  code: Code
 })
 
 export default ({ children }) => {
   const slugger = new Slugger()
-  return <MDXProvider components={getComponents({slugger})}>{children}</MDXProvider>
+  return (
+    <MDXProvider components={getComponents({ slugger })}>
+      {children}
+    </MDXProvider>
+  )
 }

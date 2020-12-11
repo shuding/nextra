@@ -8,81 +8,81 @@ import Highlight, { defaultProps } from 'prism-react-renderer'
 const THEME = {
   plain: {
     color: '#000',
-    backgroundColor: 'transparent',
+    backgroundColor: 'transparent'
   },
   styles: [
     {
       types: ['keyword'],
       style: {
         color: '#ff0078',
-        fontWeight: 'bold',
-      },
+        fontWeight: 'bold'
+      }
     },
     {
       types: ['comment'],
       style: {
         color: '#999',
-        fontStyle: 'italic',
-      },
+        fontStyle: 'italic'
+      }
     },
     {
       types: ['string', 'url', 'attr-value'],
       style: {
-        color: '#028265',
-      },
+        color: '#028265'
+      }
     },
     {
       types: ['variable', 'language-javascript'],
       style: {
-        color: '#c6c5fe',
-      },
+        color: '#c6c5fe'
+      }
     },
     {
       types: ['builtin', 'char', 'constant'],
       style: {
-        color: '#000',
-      },
+        color: '#000'
+      }
     },
     {
       types: ['attr-name'],
       style: {
         color: '#d9931e',
-        fontStyle: 'normal',
-      },
+        fontStyle: 'normal'
+      }
     },
     {
       types: ['punctuation', 'operator'],
       style: {
-        color: '#333',
-      },
+        color: '#333'
+      }
     },
     {
       types: ['number', 'function', 'tag'],
       style: {
-        color: '#0076ff',
-      },
+        color: '#0076ff'
+      }
     },
     {
       types: ['boolean', 'regex'],
       style: {
-        color: '#d9931e',
-      },
-    },
-  ],
+        color: '#d9931e'
+      }
+    }
+  ]
 }
 
 // Anchor links
 
 const HeaderLink = ({ tag: Tag, children, ...props }) => {
-  const slug = slugify(
-    ReactDOMServer.renderToStaticMarkup(children)
-  )
+  const slug = slugify(ReactDOMServer.renderToStaticMarkup(children))
   return (
     <Tag {...props}>
       <span className="subheading-anchor" id={slug} />
       <a href={'#' + slug} className="subheading">
         {children}
-        <span className="anchor-icon" aria-hidden>#</span>
+        <span className="anchor-icon" aria-hidden>
+          #
+        </span>
       </a>
     </Tag>
   )
@@ -169,7 +169,7 @@ const Code = ({ children, className, highlight, ...props }) => {
                   ? {
                       background: '#cce0f5',
                       margin: '0 -1rem',
-                      padding: '0 1rem',
+                      padding: '0 1rem'
                     }
                   : null
               }
@@ -192,7 +192,7 @@ const components = {
   h5: H5,
   h6: H6,
   a: A,
-  code: Code,
+  code: Code
 }
 
 export default ({ children }) => {

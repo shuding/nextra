@@ -1,11 +1,11 @@
-import React from 'react';
+import React from 'react'
 
 const renderComponent = (ComponentOrNode, props) => {
-  if (!ComponentOrNode) return null;
+  if (!ComponentOrNode) return null
   if (typeof ComponentOrNode === 'function') {
-    return <ComponentOrNode {...props} />;
+    return <ComponentOrNode {...props} />
   }
-  return ComponentOrNode;
-};
+  return ComponentOrNode
+}
 
-export default renderComponent;
+export default renderComponent

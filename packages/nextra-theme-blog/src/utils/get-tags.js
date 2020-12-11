@@ -1,4 +1,4 @@
-export default function getTags (page) {
+export default function getTags(page) {
   if (!page.frontMatter) {
     return []
   }
