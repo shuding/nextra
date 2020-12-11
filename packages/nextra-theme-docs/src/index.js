@@ -93,7 +93,7 @@ function File({ item, anchors }) {
                   key={`a-${slug}`}
                   onClick={() => setMenu(false)}
                 >
-                  <span className="flex">
+                  <span className="flex text-sm">
                     <span className="opacity-25">#</span>
                     <span className="mr-2"></span>
                     <span className="inline-block">{anchorText}</span>
