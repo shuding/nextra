@@ -13,7 +13,7 @@
   "dependencies": {
     "next": "^10.0.0",
     "nextra": "^0.3.1",
-    "nextra-theme-docs": "^0.3.4",
+    "nextra-theme-docs": "^1.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },

@@ -4455,10 +4455,10 @@ next@^10.0.0:
   optionalDependencies:
     sharp "0.26.2"
 
-nextra-theme-docs@^0.3.4:
-  version "0.3.4"
-  resolved "https://registry.yarnpkg.com/nextra-theme-docs/-/nextra-theme-docs-0.3.4.tgz#0d4d531384453ec304857d3a2208c40e400aada9"
-  integrity sha512-/8m0Pea6pd17jy6qo4rgTVV44d7WcjI756k9ROhG8fSOUyumuCRjzUSlFZ2addAmjaINNpNs3FVmx0KIJxkrdQ==
+nextra-theme-docs@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/nextra-theme-docs/-/nextra-theme-docs-1.0.1.tgz#f335a432bdb3d3b76712a68be31aa8bff5ffd25d"
+  integrity sha512-hTGnp/OcqkCiaVJTIjOiyXdvzcHawwCF2w5jM7woLoOpMLE2KwFLPYumt9LMTXr0pWDQ/wt5vKMer/IpU/VApw==
   dependencies:
     "@mdx-js/react" "^1.6.16"
     "@reach/skip-nav" "^0.11.2"

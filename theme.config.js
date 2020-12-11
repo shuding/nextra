@@ -1,5 +1,5 @@
 export default {
-  github: 'https://github.com/shuding/nextra',
+  repository: 'https://github.com/shuding/nextra',
   titleSuffix: ' – Nextra',
   logo: (
     <>
@@ -18,7 +18,6 @@ export default {
       <meta name="description" content="Nextra: the next site builder" />
       <meta name="og:description" content="Nextra: the next site builder" />
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content="@shuding_" />
       <meta name="twitter:image" content="https://nextra.vercel.app/og.png" />
       <meta name="twitter:site:domain" content="nextra.vercel.app" />
       <meta name="twitter:url" content="https://nextra.vercel.app" />
@@ -32,5 +31,5 @@ export default {
   nextLinks: true,
   footer: true,
   footerEditOnGitHubLink: true,
-  footerText: <>MIT {new Date().getFullYear()} © Shu Ding.</>
+  footerText: <>MIT {new Date().getFullYear()} © Nextra.</>
 }
