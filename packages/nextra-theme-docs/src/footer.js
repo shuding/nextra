@@ -1,6 +1,7 @@
 import React from 'react'
 import ArrowRight from './arrow-right'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 import renderComponent from './utils/render-component'
 
@@ -50,7 +51,7 @@ const EditOnGithubLink = ({
   filepathWithName
 }) => {
   const href = createEditUrl(repository, branch, path, filepathWithName)
-  console.log({ href })
+  const { locale } = useRouter()
   return (
     <a className="text-sm" href={href} target="_blank">
       {footerEditOnGitHubText
@@ -70,6 +71,7 @@ const Footer = ({
 }) => {
   let prev = flatDirectories[currentIndex - 1]
   let next = flatDirectories[currentIndex + 1]
+  const { locale } = useRouter()
 
   return (
     <footer className="mt-24">

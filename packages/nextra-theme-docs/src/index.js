@@ -8,12 +8,12 @@ import React, {
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
-import slugify from '@sindresorhus/slugify'
 import 'focus-visible'
 import { SkipNavContent } from '@reach/skip-nav'
 import { ThemeProvider } from 'next-themes'
 import innerText from 'react-innertext'
 import cn from 'classnames'
+import Slugger from 'github-slugger'
 
 import flatten from './utils/flatten'
 import reorderBasedOnMeta from './utils/reorder'
