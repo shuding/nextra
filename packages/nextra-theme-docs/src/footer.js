@@ -100,7 +100,7 @@ const Footer = ({
           <div className="mt-6" />
           {config.footerEditOnGitHubLink ? (
             <EditOnGithubLink
-              repository={config.repository}
+              repository={config.docsRepository || config.repository}
               branch={config.branch}
               path={config.path}
               footerEditOnGitHubText={config.footerEditOnGitHubText}

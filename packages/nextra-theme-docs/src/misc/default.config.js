@@ -2,6 +2,7 @@ import React from 'react'
 
 export default {
   repository: 'https://github.com/shuding/nextra',
+  docsRepository: 'https://github.com/shuding/nextra',
   branch: 'master',
   path: '/',
   titleSuffix: ' – Nextra',
