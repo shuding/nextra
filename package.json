@@ -11,5 +11,14 @@
     "build:core": "yarn workspace nextra run build",
     "build:theme-docs": "yarn workspace nextra-theme-docs run build",
     "build:theme-blog": "yarn workspace nextra-theme-blog run build"
+  },
+  "devDependencies": {
+    "prettier": "^2.2.1"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "none",
+    "arrowParens": "avoid"
   }
 }
