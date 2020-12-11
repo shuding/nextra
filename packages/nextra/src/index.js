@@ -2,11 +2,7 @@ const defaultExtensions = ['js', 'jsx', 'ts', 'tsx']
 const markdownExtensions = ['md', 'mdx']
 const markdownExtensionTest = /\.mdx?$/
 
-export default (
-  theme, themeConfig
-) => (
-  nextConfig = {}
-) => {
+export default (theme, themeConfig) => (nextConfig = {}) => {
   const locales = nextConfig.i18n ? nextConfig.i18n.locales : null
   const defaultLocale = nextConfig.i18n ? nextConfig.i18n.defaultLocale : null
 
@@ -18,34 +14,40 @@ export default (
     }
 
     // Exclude other locales to ensure there's no route conflicts.
-    pageExtensions = pageExtensions.concat(markdownExtensions.map(extension => defaultLocale + '.' + extension))
+    pageExtensions = pageExtensions.concat(
+      markdownExtensions.map(extension => defaultLocale + '.' + extension)
+    )
   } else {
     pageExtensions = pageExtensions.concat(markdownExtensions)
   }
 
-  return Object.assign({
+  return Object.assign(
+    {
       pageExtensions
-    }, nextConfig, {
-    webpack(config, options) {
-      config.module.rules.push({
-        test: markdownExtensionTest,
-        use: [
-          options.defaultLoaders.babel,
-          {
-            loader: '@mdx-js/loader'
-          },
-          {
-            loader: 'nextra/loader',
-            options: { theme, themeConfig, locales, defaultLocale }
-          }
-        ]
-      })
+    },
+    nextConfig,
+    {
+      webpack(config, options) {
+        config.module.rules.push({
+          test: markdownExtensionTest,
+          use: [
+            options.defaultLoaders.babel,
+            {
+              loader: '@mdx-js/loader'
+            },
+            {
+              loader: 'nextra/loader',
+              options: { theme, themeConfig, locales, defaultLocale }
+            }
+          ]
+        })
 
-      if (typeof nextConfig.webpack === 'function') {
-        return nextConfig.webpack(config, options)
+        if (typeof nextConfig.webpack === 'function') {
+          return nextConfig.webpack(config, options)
+        }
+
+        return config
       }
-
-      return config
     }
-  })
+  )
 }

@@ -3,7 +3,7 @@ import React, {
   useEffect,
   useMemo,
   useContext,
-  createContext,
+  createContext
 } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
@@ -50,14 +50,14 @@ function Folder({ item, anchors }) {
         onClick={() => {
           if (active) return
           TreeState[item.route] = !open
-          render((x) => !x)
+          render(x => !x)
         }}
       >
         {item.title}
       </button>
       <div
         style={{
-          display: open ? undefined : 'none',
+          display: open ? undefined : 'none'
         }}
       >
         <Menu dir={item.children} base={item.route} anchors={anchors} />
@@ -83,7 +83,7 @@ function File({ item, anchors }) {
             <a>{title}</a>
           </Link>
           <ul>
-            {anchors.map((anchor) => {
+            {anchors.map(anchor => {
               const anchorText = innerText(anchor) || ''
               const slug = slugger.slug(anchorText)
 
@@ -119,7 +119,7 @@ function File({ item, anchors }) {
 function Menu({ dir, anchors }) {
   return (
     <ul>
-      {dir.map((item) => {
+      {dir.map(item => {
         if (item.children) {
           return <Folder key={item.name} item={item} anchors={anchors} />
         }
@@ -137,7 +137,7 @@ function Sidebar({ show, directories, anchors }) {
       }`}
       style={{
         top: '4rem',
-        height: 'calc(100vh - 4rem)',
+        height: 'calc(100vh - 4rem)'
       }}
     >
       <div className="sidebar w-full p-4 pb-40 md:pb-16 h-full overflow-y-auto">
@@ -158,15 +158,15 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
 
   const filepath = route.slice(0, route.lastIndexOf('/') + 1)
   const filepathWithName = filepath + filename
-  const titles = React.Children.toArray(children).filter((child) =>
+  const titles = React.Children.toArray(children).filter(child =>
     titleType.includes(child.props.mdxType)
   )
-  const titleEl = titles.find((child) => child.props.mdxType === 'h1')
+  const titleEl = titles.find(child => child.props.mdxType === 'h1')
   const title =
     meta.title || (titleEl ? innerText(titleEl.props.children) : 'Untitled')
   const anchors = titles
-    .filter((child) => child.props.mdxType === 'h2')
-    .map((child) => child.props.children)
+    .filter(child => child.props.mdxType === 'h2')
+    .map(child => child.props.children)
 
   useEffect(() => {
     if (menu) {
@@ -177,13 +177,13 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
   }, [menu])
 
   const currentIndex = useMemo(
-    () => flatDirectories.findIndex((dir) => dir.route === pathname),
+    () => flatDirectories.findIndex(dir => dir.route === pathname),
     [flatDirectories, pathname]
   )
 
   const isRTL = useMemo(() => {
     if (!config.i18n) return null
-    const localeConfig = config.i18n.find((l) => l.locale === locale)
+    const localeConfig = config.i18n.find(l => l.locale === locale)
     return localeConfig && localeConfig.direction === 'rtl'
   }, [config.i18n, locale])
 
@@ -199,7 +199,7 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
       </Head>
       <div
         className={cn('nextra-container main-container flex flex-col', {
-          rtl: isRTL,
+          rtl: isRTL
         })}
       >
         <nav className="flex items-center bg-white z-20 fixed top-0 left-0 right-0 h-16 border-b border-gray-200 px-6 dark:bg-dark dark:border-gray-900">
@@ -280,7 +280,7 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
   )
 }
 
-export default (opts, config) => (props) => {
+export default (opts, config) => props => {
   return (
     <ThemeProvider attribute="class">
       <Layout config={config} {...opts} {...props} />

@@ -1,8 +1,5 @@
 module.exports = {
-  purge: [
-    './src/**/*.js',
-    './src/**/*.css',
-  ],
+  purge: ['./src/**/*.js', './src/**/*.css'],
   theme: {
     typography: {
       default: {
@@ -12,11 +9,9 @@ module.exports = {
             backgroundColor: 'whitesmoke',
             border: '1px solid #eaeaea'
           }
-        },
-      },
-    },
+        }
+      }
+    }
   },
-  plugins: [
-    require('@tailwindcss/typography'),
-  ]
+  plugins: [require('@tailwindcss/typography')]
 }
