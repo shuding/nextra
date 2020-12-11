@@ -15,7 +15,7 @@ cd packages/nextra
 yarn build
 ```
 
-Watch mode: `yarn dev:layout`
+Watch mode: `yarn dev`
 
 ### Build Nextra Theme
 
@@ -24,7 +24,9 @@ cd packages/nextra-theme-docs
 yarn build
 ```
 
-Watch mode: `yarn dev:layout`
+Watch mode: `yarn dev`
+Watch mode (layout only): `yarn dev:layout`
+Watch mode (style only): `yarn dev:tailwind`
 
 ### Development
 
