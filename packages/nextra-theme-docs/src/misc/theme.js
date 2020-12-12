@@ -4,6 +4,10 @@ import Link from 'next/link'
 import React from 'react'
 import innerText from 'react-innertext'
 import Highlight, { defaultProps } from 'prism-react-renderer'
+import 'intersection-observer'
+import Observer from '@researchgate/react-intersection-observer'
+
+import { useActiveAnchorSet } from './active-anchor'
 
 const THEME = {
   plain: {
@@ -48,11 +52,28 @@ const THEME = {
 
 // Anchor links
 
-const HeaderLink = ({ tag: Tag, children, slugger, ...props }) => {
+const HeaderLink = ({ tag: Tag, children, slugger, withObserver, ...props }) => {
+  const setActiveAnchor = useActiveAnchorSet()
+
   const slug = slugger.slug(innerText(children) || '')
+  const anchor = <span className="subheading-anchor" id={slug} />
+  const anchorWithObserver = withObserver
+    ? <Observer
+        onChange={e => {
+          // if the element is above the 70% of height of the viewport
+          // we don't use e.isIntersecting
+          const isAboveViewport = e.boundingClientRect.y + e.boundingClientRect.height <= e.rootBounds.y + e.rootBounds.height
+          setActiveAnchor(f => ({ ...f, [slug]: isAboveViewport }))
+        }}
+        rootMargin="1000% 0% -70%"
+        threshold={[0, 1]}
+        children={anchor}
+      />
+    : anchor;
+
   return (
     <Tag {...props}>
-      <span className="subheading-anchor" id={slug} />
+      {anchorWithObserver}
       <a href={'#' + slug} className="text-current no-underline no-outline">
         {children}
         <span className="anchor-icon" aria-hidden>
@@ -65,7 +86,7 @@ const HeaderLink = ({ tag: Tag, children, slugger, ...props }) => {
 
 const H2 = ({ slugger }) => ({ children, ...props }) => {
   return (
-    <HeaderLink tag="h2" slugger={slugger} {...props}>
+    <HeaderLink tag="h2" slugger={slugger} withObserver {...props}>
       {children}
     </HeaderLink>
   )

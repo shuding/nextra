@@ -26,6 +26,7 @@ import Footer from './footer'
 import renderComponent from './utils/render-component'
 
 import Theme from './misc/theme'
+import { ActiveAnchor, useActiveAnchor } from './misc/active-anchor'
 import defaultConfig from './misc/default.config'
 
 const TreeState = new Map()
@@ -71,32 +72,44 @@ function File({ item, anchors }) {
   const route = useRouter().route + '/'
   const active = route.startsWith(item.route + '/')
   const slugger = new Slugger()
+  const activeAnchor = useActiveAnchor()
 
   const title = item.title
   // if (item.title.startsWith('> ')) {
   // title = title.substr(2)
   if (anchors && anchors.length) {
     if (active) {
+      let activeIndex = 0
+      const anchorInfo = anchors.map((anchor, i) => {
+        const text = innerText(anchor) || ''
+        const slug = slugger.slug(text)
+        if (activeAnchor[slug]) {
+          activeIndex = i
+        }
+        return { text, slug }
+      })
+
       return (
         <li className={active ? 'active' : ''}>
           <Link href={item.route}>
             <a>{title}</a>
           </Link>
           <ul>
-            {anchors.map(anchor => {
-              const anchorText = innerText(anchor) || ''
-              const slug = slugger.slug(anchorText)
+            {anchors.map((_, i) => {
+              const { slug, text } = anchorInfo[i]
+              const isActive = i === activeIndex
 
               return (
                 <a
                   href={'#' + slug}
                   key={`a-${slug}`}
                   onClick={() => setMenu(false)}
+                  className={isActive ? 'active-anchor' : ''}
                 >
                   <span className="flex text-sm">
                     <span className="opacity-25">#</span>
                     <span className="mr-2"></span>
-                    <span className="inline-block">{anchorText}</span>
+                    <span className="inline-block">{text}</span>
                   </span>
                 </a>
               )
@@ -254,30 +267,32 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
 
           <div className="-mr-2" />
         </nav>
-        <div className="flex flex-1 h-full">
-          <MenuContext.Provider value={{ setMenu }}>
-            <Sidebar show={menu} anchors={anchors} directories={directories} />
-          </MenuContext.Provider>
-          <SkipNavContent />
-          {meta.full ? (
-            <content className="relative pt-16 w-full overflow-x-hidden">
-              {children}
-            </content>
-          ) : (
-            <content className="docs-container relative pt-20 pb-16 px-6 md:px-8 w-full max-w-full overflow-x-hidden">
-              <main className="max-w-screen-md mx-auto">
-                <Theme>{children}</Theme>
-                <Footer
-                  config={config}
-                  flatDirectories={flatDirectories}
-                  currentIndex={currentIndex}
-                  filepathWithName={filepathWithName}
-                  isRTL={isRTL}
-                />
-              </main>
-            </content>
-          )}
-        </div>
+        <ActiveAnchor>
+          <div className="flex flex-1 h-full">
+            <MenuContext.Provider value={{ setMenu }}>
+              <Sidebar show={menu} anchors={anchors} directories={directories} />
+            </MenuContext.Provider>
+            <SkipNavContent />
+            {meta.full ? (
+              <content className="relative pt-16 w-full overflow-x-hidden">
+                {children}
+              </content>
+            ) : (
+              <content className="docs-container relative pt-20 pb-16 px-6 md:px-8 w-full max-w-full overflow-x-hidden">
+                <main className="max-w-screen-md mx-auto">
+                  <Theme>{children}</Theme>
+                  <Footer
+                    config={config}
+                    flatDirectories={flatDirectories}
+                    currentIndex={currentIndex}
+                    filepathWithName={filepathWithName}
+                    isRTL={isRTL}
+                  />
+                </main>
+              </content>
+            )}
+          </div>
+        </ActiveAnchor>
       </div>
     </React.Fragment>
   )

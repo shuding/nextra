@@ -96,10 +96,13 @@ figure figcaption {
   @apply select-none md:border-r;
 }
 .sidebar ul ul {
-  @apply ml-5;
+  @apply ml-5 relative;
 }
 .sidebar a:focus-visible, .sidebar button:focus-visible {
   @apply ring;
+}
+.sidebar .active-anchor {
+  @apply font-semibold text-gray-900 dark:text-white;
 }
 .sidebar li.active > a {
   @apply font-semibold text-black bg-gray-200;
