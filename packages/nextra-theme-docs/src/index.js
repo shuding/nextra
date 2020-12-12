@@ -182,7 +182,7 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
   )
 
   const isRTL = useMemo(() => {
-    if (!config.i18n) return null
+    if (!config.i18n) return config.direction === 'rtl' || null
     const localeConfig = config.i18n.find(l => l.locale === locale)
     return localeConfig && localeConfig.direction === 'rtl'
   }, [config.i18n, locale])

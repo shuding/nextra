@@ -34,6 +34,7 @@ export default {
       <meta name="og:title" content="Nextra: the next docs builder" />
       <meta name="apple-mobile-web-app-title" content="Nextra" />
     </React.Fragment>
-  )
-  // i18n: [{ locale: 'en-US', text: 'English' }]
+  ),
+  // direction: 'ltr',
+  // i18n: [{ locale: 'en-US', text: 'English', direction: 'ltr' }],
 }
