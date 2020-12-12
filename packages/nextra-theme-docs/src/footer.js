@@ -41,7 +41,7 @@ const fixPath = path => {
 
 const createEditUrl = (repository, branch, path, filepathWithName) => {
   const normalizedPath = fixPath(path)
-  return `${repository}/tree/${branch}${normalizedPath}${filepathWithName}`
+  return `${repository}/tree/${branch}${normalizedPath}pages${filepathWithName}`
 }
 
 const EditOnGithubLink = ({
