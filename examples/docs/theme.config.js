@@ -1,7 +1,7 @@
 export default {
   repository: 'https://github.com/shuding/nextra',
   branch: 'core',
-  path: '/examples/docs',
+  path: '/examples/docs/pages',
   titleSuffix: ' – Nextra',
   logo: (
     <>

@@ -156,7 +156,7 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
   const flatDirectories = useMemo(() => flatten(directories), [directories])
   const config = Object.assign({}, defaultConfig, _config)
 
-  const filepath = route.slice(0, route.lastIndexOf('/') + 1)
+  const filepath = route.slice(1, route.lastIndexOf('/') + 1)
   const filepathWithName = filepath + filename
   const titles = React.Children.toArray(children).filter(child =>
     titleType.includes(child.props.mdxType)
