@@ -130,10 +130,12 @@ content li {
 content ol {
   @apply list-decimal ml-6 mt-6;
 }
-
 content blockquote {
   @apply italic pl-6 border-l-2 border-gray-300 text-gray-700;
   @apply dark:border-gray-700 dark:text-gray-400;
+}
+content.docs-container {
+  @apply xl:pr-64;
 }
 
 .subheading-anchor {
@@ -321,6 +323,9 @@ pre .prism-code .token.number, pre .prism-code .token.function, pre .prism-code 
 }
 .nextra-container.rtl content blockquote {
   @apply pr-6 border-r-2 pl-0 border-l-0;
+}
+.nextra-container.rtl .docs-container {
+  @apply xl:pl-64 xl:pr-0;
 }
 .nextra-container.rtl code {
   direction: ltr;

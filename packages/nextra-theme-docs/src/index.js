@@ -264,7 +264,7 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
               {children}
             </content>
           ) : (
-            <content className="relative pt-20 pb-16 px-6 md:px-8 w-full max-w-full overflow-x-hidden xl:pr-64">
+            <content className="docs-container relative pt-20 pb-16 px-6 md:px-8 w-full max-w-full overflow-x-hidden">
               <main className="max-w-screen-md mx-auto">
                 <Theme>{children}</Theme>
                 <Footer
