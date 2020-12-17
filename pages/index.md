@@ -1,6 +1,7 @@
 # Nextra
 
-**Nextra** is a [Next.js](https://nextjs.org) based static site generator. 0 line of code needed, just write Markdown.  
-It supports [MDX](/docs/mdx), [anchor links](/docs/anchors), file-system based routing and built-in syntax highlighting.
+**Nextra** is a [Next.js](https://nextjs.org) based static site generator. 0 line of code needed.  
+
+It supports Markdown with React components ([MDX](/docs/mdx)), automatically generated [sidebar and anchor links](/docs/anchors), file-system based routing, built-in syntax highlighting, i18n and more.
 
 ![](/demo.png)
