@@ -3253,10 +3253,10 @@ nextra-theme-docs@^1.0.2:
     react-innertext "^1.1.5"
     title "^3.4.2"
 
-nextra@^0.3.1:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/nextra/-/nextra-0.3.1.tgz#61b2d0ac86f5fedb6cf50ad88727cb880e245ebe"
-  integrity sha512-P/PcHKqz1SrXqWf21TNFUGMJtfM4/yG5CYpV3BW7EJnIihBELd2oKNVm47RsDLNQ0ycpb6iS6vexwWAuymb8Zw==
+nextra@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/nextra/-/nextra-0.3.2.tgz#a13098d05be46b14383eac874f08a6062cab825b"
+  integrity sha512-Mf7s0YTmf/ZZXOL/X1mjs7hY/W05PoeZsxDt/2NNMH+BZsMcy3qjhqdZyNDNFb7VDJrCirPYw67znZS0P+2gHw==
   dependencies:
     "@mdx-js/loader" "^2.0.0-next.8"
     gray-matter "^4.0.2"
