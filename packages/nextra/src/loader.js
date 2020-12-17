@@ -14,8 +14,8 @@ function getLocaleFromFilename(name) {
 }
 
 function removeExtension(name) {
-  const p = name.match(/^([^.]+)/)
-  return p != null ? p[1] : ''
+  const match = name.match(/^([^.]+)/)
+  return match !== null ? match[1] : ''
 }
 
 function getFileName(resourcePath) {
