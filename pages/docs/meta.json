@@ -2,6 +2,7 @@
   "get-started": "Get Started",
   "structure": "Structure",
   "mdx": "Markdown and React",
+  "built-in-components": "Built-In Components",
   "ssg": "SSG Support",
   "anchors": "Anchor Links",
   "i18n": "I18n"
