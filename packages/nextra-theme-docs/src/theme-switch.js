@@ -1,8 +1,11 @@
 import React from 'react'
 import { useTheme } from 'next-themes'
 
+import useMounted from './utils/use-mounted'
+
 export default function ThemeSwitch() {
   const { theme, setTheme } = useTheme()
+  const mounted = useMounted()
 
   // @TODO: system theme
   const toggleTheme = () => {
@@ -18,7 +21,7 @@ export default function ThemeSwitch() {
         if (e.key === 'Enter') toggleTheme()
       }}
     >
-      {theme === 'dark' ? (
+      {mounted && theme === 'dark' ? (
         <svg
           fill="none"
           viewBox="0 0 24 24"
@@ -33,7 +36,7 @@ export default function ThemeSwitch() {
             d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
           />
         </svg>
-      ) : theme === 'light' ? (
+      ) : mounted && theme === 'light' ? (
         <svg
           fill="none"
           viewBox="0 0 24 24"
