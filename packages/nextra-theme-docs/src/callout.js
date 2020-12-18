@@ -9,7 +9,7 @@ export default ({
   return (
     <div className={`${background} flex rounded-lg callout mt-6`}>
       <div className="pl-3 pr-2 py-2 select-none text-xl">{emoji}</div>
-      <div className="pr-4 py-2 -mt-6">{children}</div>
+      <div className="pr-4 py-2">{children}</div>
     </div>
   )
 }

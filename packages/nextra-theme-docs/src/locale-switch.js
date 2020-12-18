@@ -3,8 +3,11 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import cn from 'classnames'
 
+import useMounted from './utils/use-mounted'
+
 export default function LocaleSwitch({ options, isRTL }) {
   const { locale, asPath } = useRouter()
+  const mounted = useMounted()
 
   return (
     <details className="locale-switch relative">
@@ -27,28 +30,31 @@ export default function LocaleSwitch({ options, isRTL }) {
           />
         </svg>
       </summary>
-      <ul
-        className={cn(
-          'locale-dropdown absolute block bg-white dark:bg-dark dark:border-gray-700 py-1 rounded border',
-          { 'right-0': !isRTL, 'left-0': isRTL }
-        )}
-      >
-        {options.map(l => (
-          <Link key={l.locale} href={asPath} locale={l.locale}>
-            <a
-              className={cn(
-                'block no-underline text-current py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-800 whitespace-nowrap',
-                {
-                  'font-semibold': locale === l.locale,
-                  'bg-gray-100 dark:bg-gray-900': locale === l.locale
-                }
-              )}
-            >
-              {l.text}
-            </a>
-          </Link>
-        ))}
-      </ul>
+      {mounted ?
+        <ul
+          className={cn(
+            'locale-dropdown absolute block bg-white dark:bg-dark dark:border-gray-700 py-1 rounded border',
+            { 'right-0': !isRTL, 'left-0': isRTL }
+          )}
+        >
+          {options.map(l => (
+            <Link key={l.locale} href={asPath} locale={l.locale}>
+              <a
+                className={cn(
+                  'block no-underline text-current py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-800 whitespace-nowrap',
+                  {
+                    'font-semibold': locale === l.locale,
+                    'bg-gray-100 dark:bg-gray-900': locale === l.locale
+                  }
+                )}
+              >
+                {l.text}
+              </a>
+            </Link>
+          ))}
+        </ul> :
+        null
+      }
     </details>
   )
 }

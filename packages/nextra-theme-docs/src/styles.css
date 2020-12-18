@@ -43,7 +43,10 @@ a {
   @apply text-blue-500 underline;
 }
 p {
-  @apply mt-6 leading-7;
+  @apply leading-7;
+}
+p:not(:first-child), blockquote:not(:first-child), table:not(:first-child) {
+  @apply mt-6;
 }
 hr {
   @apply my-8;
@@ -136,9 +139,6 @@ content ol {
 content blockquote {
   @apply italic pl-6 border-l-2 border-gray-300 text-gray-700;
   @apply dark:border-gray-700 dark:text-gray-400;
-}
-content.docs-container {
-  @apply xl:pr-64;
 }
 
 .subheading-anchor {
@@ -250,7 +250,7 @@ code {
 
 /* Table */
 table {
-  @apply p-0 mt-6;
+  @apply p-0;
 }
 table tr {
   @apply m-0 p-0 border-t border-gray-300;
@@ -327,8 +327,27 @@ pre .prism-code .token.number, pre .prism-code .token.function, pre .prism-code 
 .nextra-container.rtl content blockquote {
   @apply pr-6 border-r-2 pl-0 border-l-0;
 }
+.nextra-container:not(.rtl) content.docs-container {
+  @apply xl:pr-72;
+}
 .nextra-container.rtl .docs-container {
-  @apply xl:pl-64 xl:pr-0;
+  @apply xl:pl-72;
+}
+@screen md {
+  .nextra-container content.docs-container .bleed.full {
+    margin-left: calc(-50vw + 50% + 8rem);
+    margin-right: calc(-50vw + 50% + 8rem);
+  }
+}
+@screen xl {
+  .nextra-container:not(.rtl) content.docs-container .bleed.full {
+    margin-left: calc(50% - 50vw + 16rem);
+    margin-right: calc(50% - 50vw);
+  }
+  .nextra-container.rtl .docs-container .bleed.full {
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw + 16rem);
+  }
 }
 .nextra-container.rtl code {
   direction: ltr;
