@@ -70,23 +70,6 @@ pre code {
 a code {
   @apply text-current no-underline;
 }
-figure {
-  @apply mb-8 relative;
-}
-video {
-  @apply absolute top-0 left-0;
-  cursor: pointer;
-}
-figure figcaption {
-  @apply text-sm text-gray-600;
-}
-@media (min-width: 768px) {
-  figure {
-    /* allow figures to overflow, but not exceeding the viewport width */
-    @apply -mr-56;
-    max-width: calc(100vw - 20rem);
-  }
-}
 
 @tailwind components;
 @tailwind utilities;
@@ -307,10 +290,10 @@ pre .prism-code .token.punctuation, pre .prism-code .token.operator {
 .dark pre .prism-code .token.punctuation, .dark pre .prism-code .token.operator {
   color: #bbb !important;
 }
-pre .prism-code .token.number, pre .prism-code .token.function, pre .prism-code .token.tag {
+pre .prism-code .token.number, pre .prism-code .token.function, pre .prism-code .token.tag:not(.script) {
   color: #0076ff !important;
 }
-.dark pre .prism-code .token.number, .dark pre .prism-code .token.function, .dark pre .prism-code .token.tag {
+.dark pre .prism-code .token.number, .dark pre .prism-code .token.function, .dark pre .prism-code .token.tag:not(.script) {
   color: #1e86ff !important;
 }
 
