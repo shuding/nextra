@@ -12,6 +12,8 @@ export type Options = {
   route: string;
 };
 export type WithLayout = (opts: Options, config: Config) => ComponentType<PropsWithChildren<{}>>;
+const WithNextra: (theme: string, themeConfig: string) => (nextConf: any) => any;
+export default WithNextra;
 
 export type Config = any;
 export type Meta = any;
