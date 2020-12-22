@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "next": "^10.0.1",
+    "prism-react-renderer": "^1.1.1",
+    "prismjs": "^1.22.0",
     "react": "16.13.1",
     "react-dom": "16.13.1"
   }

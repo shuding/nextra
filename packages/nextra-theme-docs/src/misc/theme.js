@@ -15,7 +15,7 @@ const THEME = {
   },
   styles: [
     {
-      types: ['keyword'],
+      types: ['keyword', 'builtin'],
       style: {
         color: '#ff0078',
         fontWeight: 'bold'
