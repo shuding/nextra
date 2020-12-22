@@ -5,5 +5,6 @@
   "built-in-components": "Built-In Components",
   "ssg": "SSG Support",
   "anchors": "Anchor Links",
-  "i18n": "I18n"
+  "i18n": "I18n",
+  "advanced": "Advanced"
 }
