@@ -3,6 +3,10 @@ const markdownExtensions = ['md', 'mdx']
 const markdownExtensionTest = /\.mdx?$/
 
 export default (theme, themeConfig) => (nextConfig = {}) => {
+  const config = typeof theme === "string" ? {
+    theme,
+    themeConfig
+  } : theme;
   const locales = nextConfig.i18n ? nextConfig.i18n.locales : null
   const defaultLocale = nextConfig.i18n ? nextConfig.i18n.defaultLocale : null
 
@@ -33,11 +37,12 @@ export default (theme, themeConfig) => (nextConfig = {}) => {
           use: [
             options.defaultLoaders.babel,
             {
-              loader: '@mdx-js/loader'
+              loader: '@mdx-js/loader',
+              options: config.mdxOptions
             },
             {
               loader: 'nextra/loader',
-              options: { theme, themeConfig, locales, defaultLocale }
+              options: { theme: config.theme, themeConfig: config.themeConfig, locales, defaultLocale }
             }
           ]
         })
