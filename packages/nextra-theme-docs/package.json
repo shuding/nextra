@@ -11,7 +11,8 @@
     "index.js",
     "callout.js",
     "bleed.js",
-    "style.css"
+    "style.css",
+    "index.d.ts"
   ],
   "scripts": {
     "dev": "yarn dev:layout & yarn dev:tailwind",

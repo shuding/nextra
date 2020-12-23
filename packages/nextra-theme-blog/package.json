@@ -9,7 +9,8 @@
   "files": [
     "dist/*",
     "index.js",
-    "style.css"
+    "style.css",
+    "index.d.ts"
   ],
   "scripts": {
     "build": "yarn run build:clean && yarn run build:tailwind && yarn run build:layout",

@@ -7,7 +7,8 @@
     "dist/*",
     "index.js",
     "ssg.js",
-    "loader.js"
+    "loader.js",
+    "index.d.ts"
   ],
   "repository": "https://github.com/shuding/nextra",
   "license": "MIT",
