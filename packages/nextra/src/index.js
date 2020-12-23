@@ -10,7 +10,7 @@ export default (theme, themeConfig) => (nextConfig = {}) => {
   const locales = nextConfig.i18n ? nextConfig.i18n.locales : null
   const defaultLocale = nextConfig.i18n ? nextConfig.i18n.defaultLocale : null
 
-  let pageExtensions = [...defaultExtensions]
+  let pageExtensions = nextConfig.pathExtensions || [...defaultExtensions]
   if (locales) {
     console.log('You have i18n enabled for Nextra.')
     if (!defaultLocale) {
@@ -26,11 +26,10 @@ export default (theme, themeConfig) => (nextConfig = {}) => {
   }
 
   return Object.assign(
-    {
-      pageExtensions
-    },
+    {},
     nextConfig,
     {
+      pageExtensions,
       webpack(config, options) {
         config.module.rules.push({
           test: markdownExtensionTest,
