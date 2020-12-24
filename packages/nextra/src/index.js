@@ -3,10 +3,14 @@ const markdownExtensions = ['md', 'mdx']
 const markdownExtensionTest = /\.mdx?$/
 
 export default (theme, themeConfig) => (nextConfig = {}) => {
+  const config = typeof theme === "string" ? {
+    theme,
+    themeConfig
+  } : theme;
   const locales = nextConfig.i18n ? nextConfig.i18n.locales : null
   const defaultLocale = nextConfig.i18n ? nextConfig.i18n.defaultLocale : null
 
-  let pageExtensions = [...defaultExtensions]
+  let pageExtensions = nextConfig.pageExtensions || [...defaultExtensions]
   if (locales) {
     console.log('You have i18n enabled for Nextra.')
     if (!defaultLocale) {
@@ -22,22 +26,22 @@ export default (theme, themeConfig) => (nextConfig = {}) => {
   }
 
   return Object.assign(
-    {
-      pageExtensions
-    },
+    {},
     nextConfig,
     {
+      pageExtensions,
       webpack(config, options) {
         config.module.rules.push({
           test: markdownExtensionTest,
           use: [
             options.defaultLoaders.babel,
             {
-              loader: '@mdx-js/loader'
+              loader: '@mdx-js/loader',
+              options: config.mdxOptions
             },
             {
               loader: 'nextra/loader',
-              options: { theme, themeConfig, locales, defaultLocale }
+              options: { theme: config.theme, themeConfig: config.themeConfig, locales, defaultLocale }
             }
           ]
         })
