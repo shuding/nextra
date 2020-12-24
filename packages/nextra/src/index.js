@@ -10,7 +10,7 @@ export default (theme, themeConfig) => (nextConfig = {}) => {
   const locales = nextConfig.i18n ? nextConfig.i18n.locales : null
   const defaultLocale = nextConfig.i18n ? nextConfig.i18n.defaultLocale : null
 
-  let pageExtensions = nextConfig.pathExtensions || [...defaultExtensions]
+  let pageExtensions = nextConfig.pageExtensions || [...defaultExtensions]
   if (locales) {
     console.log('You have i18n enabled for Nextra.')
     if (!defaultLocale) {
