@@ -22,7 +22,7 @@
     "slash": "^3.0.0"
   },
   "peerDependencies": {
-    "react": "^16.13.1"
+    "react": "^16.13.1 || ^17.0.1"
   },
   "devDependencies": {
     "microbundle": "^0.12.4"

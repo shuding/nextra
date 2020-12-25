@@ -26,8 +26,8 @@
   },
   "peerDependencies": {
     "next": "^9.5.3",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react": "^16.13.1 || ^17.0.1",
+    "react-dom": "^16.13.1 || ^17.0.1"
   },
   "devDependencies": {
     "microbundle": "^0.12.4",
