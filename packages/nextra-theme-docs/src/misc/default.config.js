@@ -28,10 +28,10 @@ export default {
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta httpEquiv="Content-Language" content="en" />
       <meta name="description" content="Nextra: the next docs builder" />
-      <meta name="og:description" content="Nextra: the next docs builder" />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content="@shuding_" />
-      <meta name="og:title" content="Nextra: the next docs builder" />
+      <meta property="og:title" content="Nextra: the next docs builder" />
+      <meta property="og:description" content="Nextra: the next docs builder" />
       <meta name="apple-mobile-web-app-title" content="Nextra" />
     </React.Fragment>
   ),
