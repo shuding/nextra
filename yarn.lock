@@ -3235,10 +3235,10 @@ next@^10.0.3:
   optionalDependencies:
     sharp "0.26.2"
 
-nextra-theme-docs@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/nextra-theme-docs/-/nextra-theme-docs-1.0.3.tgz#c851c51c26a9139768aef0377a05ae49eca88933"
-  integrity sha512-VTTJbvJhO3I87dygYi5+q2EEGwuRVxl6mRheJfW/iHkiiTJInSVIHPmAEh9syJhOE62qCTFW6VZKRH/nRZA1Rw==
+nextra-theme-docs@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/nextra-theme-docs/-/nextra-theme-docs-1.1.0.tgz#1be1dadaa5086c15e471b176f21d539e6ecc0777"
+  integrity sha512-J5k7Mpk/hdWYcFcN8u5mTzFoXyyfoA/9uAqTRK7tBWxEx37sdhf0fv1nzHN7Zv6iR2hOskfE/0R4xrPMnLCq/Q==
   dependencies:
     "@mdx-js/react" "^1.6.16"
     "@reach/skip-nav" "^0.11.2"
@@ -3253,10 +3253,10 @@ nextra-theme-docs@^1.0.3:
     react-innertext "^1.1.5"
     title "^3.4.2"
 
-nextra@^0.3.2:
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/nextra/-/nextra-0.3.2.tgz#a13098d05be46b14383eac874f08a6062cab825b"
-  integrity sha512-Mf7s0YTmf/ZZXOL/X1mjs7hY/W05PoeZsxDt/2NNMH+BZsMcy3qjhqdZyNDNFb7VDJrCirPYw67znZS0P+2gHw==
+nextra@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/nextra/-/nextra-0.4.0.tgz#e8c3db6c88d6f349d48430192d44a64c5a53a707"
+  integrity sha512-WtjKjtZePStewteuoBcqwPepzfNdMxwfVlV0Z90pIko5lOfBSjT0uHTLO6uLt7xhDqmJd3QvJwenPuiwG9UItQ==
   dependencies:
     "@mdx-js/loader" "^2.0.0-next.8"
     gray-matter "^4.0.2"
