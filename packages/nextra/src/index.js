@@ -3,7 +3,7 @@ const markdownExtensions = ['md', 'mdx']
 const markdownExtensionTest = /\.mdx?$/
 
 export default (theme, themeConfig) => (nextConfig = {}) => {
-  const config = typeof theme === "string" ? {
+  const nextraConfig = typeof theme === "string" ? {
     theme,
     themeConfig
   } : theme;
@@ -62,11 +62,11 @@ export default (theme, themeConfig) => (nextConfig = {}) => {
             options.defaultLoaders.babel,
             {
               loader: '@mdx-js/loader',
-              options: config.mdxOptions
+              options: nextraConfig.mdxOptions
             },
             {
               loader: 'nextra/loader',
-              options: { theme: config.theme, themeConfig: config.themeConfig, locales, defaultLocale }
+              options: { theme: nextraConfig.theme, themeConfig: nextraConfig.themeConfig, locales, defaultLocale }
             }
           ]
         })
