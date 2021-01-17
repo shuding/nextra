@@ -18,10 +18,6 @@ function removeExtension(name) {
   return match !== null ? match[1] : ''
 }
 
-function getFileName(resourcePath) {
-  return removeExtension(path.basename(resourcePath))
-}
-
 const parseJsonFile = (content, path) => {
   let parsed = {}
   try {
@@ -113,25 +109,6 @@ async function getPageMap(currentResourcePath) {
   return [await getFiles(path.join(process.cwd(), 'pages'), '/'), activeRoute]
 }
 
-async function getLocalizedEntries(currentResourcePath) {
-  const filename = getFileName(currentResourcePath)
-  const dir = path.dirname(currentResourcePath)
-
-  const fileRe = new RegExp('^' + filename + '.[a-zA-Z-]+.(mdx?|jsx?|json)$')
-
-  const files = await fs.readdir(dir, { withFileTypes: true })
-  return files
-    .filter(file => {
-      return fileRe.test(file.name)
-    })
-    .map(file => {
-      return {
-        name: file.name,
-        locale: getLocaleFromFilename(file.name)
-      }
-    })
-}
-
 export default async function (source) {
   const callback = this.async()
 
@@ -172,40 +149,6 @@ export default async function (source) {
   const filename = this.resourcePath.slice(
     this.resourcePath.lastIndexOf('/') + 1
   )
-
-  const notI18nEntry = this.resourceQuery.includes('nextra-raw')
-  if (locales && !notI18nEntry) {
-    // we need to handle i18n here
-
-    const i18nFiles = await getLocalizedEntries(this.resourcePath)
-    let defaultLocaleIndex = 0
-
-    const i18nSwitcher = `
-import { useRouter } from 'next/router'
-${i18nFiles
-  .map((file, index) => {
-    if (file.locale === defaultLocale) {
-      defaultLocaleIndex = index
-    }
-    return `import Page_${index} from './${file.name}?nextra-raw'`
-  })
-  .join('\n')}
-
-export default function I18NPage () {
-  const { locale } = useRouter()
-  ${i18nFiles
-    .map((file, index) => {
-      return `if (locale === '${file.locale}') {
-    return <Page_${index}/>
-  } else `
-    })
-    .join('')} {
-    return <Page_${defaultLocaleIndex}/>
-  }
-}`
-
-    return callback(null, i18nSwitcher)
-  }
 
   if (locales) {
     const locale = getLocaleFromFilename(filename)

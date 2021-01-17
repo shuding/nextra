@@ -110,16 +110,16 @@ a code {
 .dark .sidebar a:hover, .dark .sidebar button:hover {
   @apply text-white bg-gray-900;
 }
-content ul {
+article ul {
   @apply list-disc ml-6 mt-6;
 }
-content li {
+article li {
   @apply mt-2;
 }
-content ol {
+article ol {
   @apply list-decimal ml-6 mt-6;
 }
-content blockquote {
+article blockquote {
   @apply italic pl-6 border-l-2 border-gray-300 text-gray-700;
   @apply dark:border-gray-700 dark:text-gray-400;
 }
@@ -307,23 +307,23 @@ pre .prism-code .token.number, pre .prism-code .token.function, pre .prism-code 
 .nextra-container.rtl .sidebar button, .nextra-container.rtl .sidebar a {
   @apply text-right;
 }
-.nextra-container.rtl content blockquote {
+.nextra-container.rtl article blockquote {
   @apply pr-6 border-r-2 pl-0 border-l-0;
 }
-.nextra-container:not(.rtl) content.docs-container {
+.nextra-container:not(.rtl) article.docs-container {
   @apply xl:pr-72;
 }
 .nextra-container.rtl .docs-container {
   @apply xl:pl-72;
 }
 @screen md {
-  .nextra-container content.docs-container .bleed.full {
+  .nextra-container article.docs-container .bleed.full {
     margin-left: calc(-50vw + 50% + 8rem);
     margin-right: calc(-50vw + 50% + 8rem);
   }
 }
 @screen xl {
-  .nextra-container:not(.rtl) content.docs-container .bleed.full {
+  .nextra-container:not(.rtl) article.docs-container .bleed.full {
     margin-left: calc(50% - 50vw + 16rem);
     margin-right: calc(50% - 50vw);
   }
@@ -338,7 +338,7 @@ pre .prism-code .token.number, pre .prism-code .token.function, pre .prism-code 
 .nextra-container.rtl .anchor-icon {
   @apply ml-0 mr-2 inline-block;
 }
-.nextra-container.rtl content ul, .nextra-container.rtl content ol {
+.nextra-container.rtl article ul, .nextra-container.rtl article ol {
   @apply ml-0 mr-6;
 }
 .nextra-container.rtl .sidebar {

@@ -16,7 +16,7 @@ import cn from 'classnames'
 import Slugger from 'github-slugger'
 
 import flatten from './utils/flatten'
-import reorderBasedOnMeta from './utils/reorder'
+import cleanupAndReorder from './utils/cleanup-and-reorder'
 
 import Search from './search'
 import GitHubIcon from './github-icon'
@@ -33,8 +33,17 @@ const TreeState = new Map()
 const titleType = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
 const MenuContext = createContext(false)
 
+const getFSRoute = (asPath, locale) => {
+  if (!locale) return asPath.replace(new RegExp('\/index(\/|$)'), '$1')
+
+  return asPath
+    .replace(new RegExp(`\.${locale}(\/|$)`), '$1')
+    .replace(new RegExp('\/index(\/|$)'), '$1')
+}
+
 function Folder({ item, anchors }) {
-  const route = useRouter().route + '/'
+  const { asPath, locale } = useRouter()
+  const route = getFSRoute(asPath, locale) + '/'
   const active = route.startsWith(item.route + '/')
   const open = TreeState[item.route] ?? true
   const [_, render] = useState(false)
@@ -69,7 +78,8 @@ function Folder({ item, anchors }) {
 
 function File({ item, anchors }) {
   const { setMenu } = useContext(MenuContext)
-  const route = useRouter().route + '/'
+  const { asPath, locale } = useRouter()
+  const route = getFSRoute(asPath, locale) + '/'
   const active = route.startsWith(item.route + '/')
   const slugger = new Slugger()
   const activeAnchor = useActiveAnchor()
@@ -163,9 +173,10 @@ function Sidebar({ show, directories, anchors }) {
 const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
   const [menu, setMenu] = useState(false)
   const router = useRouter()
-  const { route, pathname, locale } = router
+  const { route, asPath, locale } = router
+  const fsPath = getFSRoute(asPath, locale)
 
-  const directories = useMemo(() => reorderBasedOnMeta(pageMap), [pageMap])
+  const directories = useMemo(() => cleanupAndReorder(pageMap, locale), [pageMap, locale])
   const flatDirectories = useMemo(() => flatten(directories), [directories])
   const config = Object.assign({}, defaultConfig, _config)
 
@@ -190,10 +201,10 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
   }, [menu])
 
   const currentIndex = useMemo(
-    () => flatDirectories.findIndex(dir => dir.route === pathname),
-    [flatDirectories, pathname]
+    () => flatDirectories.findIndex(dir => dir.route === fsPath),
+    [flatDirectories, fsPath]
   )
-
+  
   const isRTL = useMemo(() => {
     if (!config.i18n) return config.direction === 'rtl' || null
     const localeConfig = config.i18n.find(l => l.locale === locale)
@@ -274,11 +285,11 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
             </MenuContext.Provider>
             <SkipNavContent />
             {meta.full ? (
-              <content className="relative pt-16 w-full overflow-x-hidden">
+              <article className="relative pt-16 w-full overflow-x-hidden">
                 {children}
-              </content>
+              </article>
             ) : (
-              <content className="docs-container relative pt-20 pb-16 px-6 md:px-8 w-full max-w-full overflow-x-hidden">
+              <article className="docs-container relative pt-20 pb-16 px-6 md:px-8 w-full max-w-full overflow-x-hidden">
                 <main className="max-w-screen-md mx-auto">
                   <Theme>{children}</Theme>
                   <Footer
@@ -289,7 +300,7 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
                     isRTL={isRTL}
                   />
                 </main>
-              </content>
+              </article>
             )}
           </div>
         </ActiveAnchor>
