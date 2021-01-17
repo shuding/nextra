@@ -18,10 +18,14 @@ export default function cleanupAndReorder(list, locale) {
   }
 
   const metaKeys = Object.keys(meta)
+  const hasLocale = new Map()
+  if (locale) {
+    list.forEach(a => a.locale === locale ? hasLocale.set(a.name, true) : null)
+  }
 
   return list
     .filter(a => {
-      return a.name !== 'meta.json' && !a.name.startsWith('_') && (a.locale === locale || !a.locale)
+      return a.name !== 'meta.json' && !a.name.startsWith('_') && (a.locale === locale || (!a.locale && !hasLocale.get(a.name)))
     })
     .sort((a, b) => {
       return metaKeys.indexOf(a.name) - metaKeys.indexOf(b.name)
