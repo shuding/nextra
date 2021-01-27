@@ -214,11 +214,12 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
   return (
     <React.Fragment>
       <Head>
-        <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+        {config.font ? <link rel="stylesheet" href="https://rsms.me/inter/inter.css" /> : null}
         <title>
           {title}
           {renderComponent(config.titleSuffix, { locale })}
         </title>
+        {config.font ? <style dangerouslySetInnerHTML={{__html: `html{font-family:Inter,sans-serif}@supports(font-variation-settings:normal){html{font-family:'Inter var',sans-serif}}`}}/> : null}
         {renderComponent(config.head, { locale })}
       </Head>
       <div

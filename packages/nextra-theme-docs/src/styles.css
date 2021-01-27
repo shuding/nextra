@@ -1,10 +1,5 @@
 @tailwind base;
 
-html { font-family: 'Inter', sans-serif; }
-@supports (font-variation-settings: normal) {
-  html { font-family: 'Inter var', sans-serif; }
-}
-
 html {
   @apply subpixel-antialiased;
   font-size: 16px;
