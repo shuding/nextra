@@ -1,78 +1,233 @@
-# Get Started
+# Nextcloud Server Ubuntu 20.04
 
-Create your own Nextra site and deploy to Vercel:
-
-[![](https://vercel.com/button)](https://vercel.com/import/git?s=https%3A%2F%2Fgithub.com%2Fshuding%2Fnextra&c=1)
-
-Vercel will create the Nextra repository and deploy the site for you with just a few clicks.  
-Once done, every change in the repository will be deployed automatically.
+In my desire to regain information privacy from big tech and their incessant tracking i've decided to setup a Nextcloud server so that I may find some peace of mind and help others to do the same. The server features a domain name, Nginx reverse proxy, SSL encryption, 2FA, Android connectivity, and VNC for remote maintenance.
 
 ---
 
-### Configurations
+##### Requirements
 
-1. Install Next.js and React: `yarn add next react react-dom`
+1. A computer to use as a server (I'm using an old Surface Pro).
 
-2. Install Nextra and the docs theme: `yarn add nextra nextra-theme-docs`
+2. A static IP and domain name or DynamicDNS.
 
-3. Create the following Next.js config and theme config under the root directory:
+3. Access to your router's control panel.
 
+### Local Cloud Setup
+
+##### Virtual Machines
+
+There will be 2 virtual machines that will be responsible for hosting your server. The first of these machines will store your Nextcloud instance, while the second will store the NginX reverse proxy. I decided to install Ubuntu 20.04 on my host machine but you may use whatever OS you prefer. Once the server has a fresh OS installation, install VirtualBox or your preferred virtualization software and download the latest image of Ubuntu Server (.iso).
+
+Once the virutalization software is installed create 2 new virtual machines. Set both the server hard drives to dynamically allocated, giving the NginX server a max of 8gb and the Nextcloud server whatever remaining space is available preferably leaving around 10gb free for the host OS.
+
+After creating the virtual machines, go into the network settings of each and set the mode to "bridged". This sets the machines as independent hosts on the network allowing visibility.
+
+##### Nextcloud Server Setup
+
+Start up the nextcloud server and select the ubuntu server image when prompted for a startup disk. This will load up the ubuntu server iso and begin the installation process. The only extra step to do during the installation is to select the Nextcloud snap when prompted with commonly installed snaps.
+
+### Reverse Proxy Server Setup
+
+Start up the reverse proxy server and go through the motions of installing ubuntu server, this time not selecting any snaps when prompted. Once logged in, install nginx with `sudo apt install nginx`
+
+Once NginX is installed create a config file for your domain (replacing <your-domain.url>) `sudo nano /etc/nginx/sites-enabled/<your-domain.url>`
+
+and edit it to appear as follows (replacing <your-domain.url> and <your-nextcloud-ip> as needed):
+  
 ```jsx
-// next.config.js
-const withNextra = require('nextra')('nextra-theme-docs', './theme.config.js')
-module.exports = withNextra()
-```
+server {
+     listen 80;
+     server_name <your-domain.url>;
+     return 301 https://$server_name:443$request_uri;
+}
 
-```jsx
-// theme.config.js
-export default {
-  repository: 'https://github.com/shuding/nextra', // project repo
-  docsRepository: 'https://github.com/shuding/nextra', // docs repo
-  branch: 'master', // branch of docs
-  path: '/', // path of docs
-  titleSuffix: ' – Nextra',
-  nextLinks: true,
-  prevLinks: true,
-  search: true,
-  customSearch: null, // customizable, you can use algolia for example
-  darkMode: true,
-  footer: true,
-  footerText: 'MIT 2020 © Shu Ding.',
-  footerEditOnGitHubLink: true, // will link to the docs repo
-  logo: <>
-    <svg>...</svg>
-    <span>Next.js Static Site Generator</span>
-  </>,
-  head: <>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Nextra: the next docs builder" />
-    <meta name="og:title" content="Nextra: the next docs builder" />
-  </>
+server {
+     listen 443 ssl;
+     server_name <your-domain.url>;
+
+     ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;
+     ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.com;
+
+     add_header Strict-Transport-Security 'max-age=31536000; includeSubDomains; preload';
+     add_header X-XSS-Protection "1; mode=block" always;
+     add_header X-Frame-Options "SAMEORIGIN" always;
+     add_header X-Content-Type-Options "nosniff" always;
+     add_header X-Permitted-Cross-Domain
+
+     add_header X-Robots-Tag "none" always;
+     add_header Referrer-Policy "no-referrer" always;
+
+     client_max_body_size 10G;
+     client_body_buffer_size 400M;
+
+     location = /.well-known/carddav {
+        return 301 $scheme://$host/remote.php/dav;
+     }
+
+     location = /.well-known/caldav {
+        return 301 $scheme://$host/remote.php/dav;
+     }
+
+     location = / {
+          proxy_headers_hash_max_size 512;
+          proxy_headers_hash_bucket_size 64;
+          proxy_set_header Host $host;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+          add_header Front-End-Https on;
+          proxy_pass http://<your-nextcloud-ip>;
+     }
 }
 ```
+NOTE: This configuration file is designed for a HTTPS connection and will not function correctly until SSL encryption has been configured.
 
-4. Create `pages/_app.js` and include the theme stylesheet:
+### Setting Static IP's for the VM's
+
+To set a static IP on each of the virtual machines boot them up and run the following command to install net-tools. `sudo apt install net-tools`
+
+Once net-tools is installed run `ifconfig` and note down the current IP address of the virtual machine.
+
+Next we will modify the netplan .yaml file. `sudo nano /etc/netplan/00-installer-config.yaml`
+
+Modifying the file to appear as follows (replacing <ip-address> and <gateway>):
 
 ```jsx
-import 'nextra-theme-docs/style.css'
-
-export default function Nextra({ Component, pageProps }) {
-  return <Component {...pageProps} />
-}
+network:
+version: 2
+renderer: network
+     ethernets:
+         ens3:
+             dhcp4: no
+             addresses:
+                 - <ip-address>/24
+             gateway4: <gateway>
+             nameservers:
+                 addresses: [8.8.8.8, 1.1.1.1]
 ```
 
-5. You are good to go! 
+Ctrl-X, Y, Enter to save and exit. Then run: `sudo netplan apply`
+
+### Remote Maintenance
+
+##### RealVNC Server Setup
+
+RealVNC Server can be found [here](https://www.realvnc.com/en/connect/download/vnc/)
+
+##### RealVNC Viewer Setup
+
+RealVNC Viewer can be found [here](https://www.realvnc.com/en/connect/download/viewer/)
+
+### Exposing Server to the Internet
+
+##### Port Forwarding
+
+In your router’s settings, configure port 80 to forward all traffic to the NginX server and port 443 to forward TCP traffic to the NginX server. For additional help please refer to your router's online manual.
+
+### Static IP or Dynamic DNS
+
+##### Option 1: Static IP & Domain Name
+
+Configure A records in your domain's DNS configuration portal to point at your static IP address. For help finding your public IP address click [here](https://www.whatismyip.com/).
+
+##### Option 2: Dynamic DNS
+
+Free dynamic DNS services such as [NoIP](https://www.noip.com/) are available and may provide a suitable replacement for a domain name and static IP.
+
+### Securing the Server
+
+##### Enable Firewall
+
+Enable UFW on the Host, Nextcloud, and NginX server and forward all traffic on port 80 and all TCP traffic on 443.
+
+```jsx
+sudo ufw enable && sudo ufw allow 80 && sudo ufw allow 443/tcp
+```
+
+Allow realVNC traffic on the Host machine.
+
+```jsx
+sudo ufw allow realvnc-vnc-server
+```
+
+##### SSL Encryption
+
+The last step that should really be done if the nextcloud will be accessed over the internet is to set up SSL encryption so that the server can be accessed through HTTPS. This will ensure that your files etc will be encrypted en route to and from the server though not on the server, which is fine since an account with a password is required to access it.
+
+This is actually pretty easy to do thanks to Let's Encrypt. Ensure port 443 is forwarding in your router's configuration as that's the port used for ssl.
+
+The certificates need to be set up on the nginx server, because that will be the terminal for ssl connections. So log into the nginx server and install Let's Encrypt's certbot by typing:
+
+```jsx
+sudo snap install --classic certbot
+```
+
+Once certbot is installed, create a config file for NginX.
+
+```jsx
+sudo certbot --nginx -d <your-domain.url>
+```
+
+Install the proxy's config file
+
+```jsx
+sudo ln -s /etc/nginx/sites-available/<your-domain.url> /etc/nginx/sites-enabled/
+```
+
+Finally, restart nginx
+
+```jsx
+sudo service nginx restart
+```
+
+### Automatic Certificate Renewal
+
+The ssl certificates expire every 90 days, but they can be easily and non-interactively renewed with
+
+```jsx
+sudo certbot renew
+```
+
+So just set up a cron job to do this every other month or so.
+
+```jsx
+sudo crontab -e
+```
+
+Adding the line
+
+```jsx
+0 0 1 */2 * /usr/bin/certbot -q renew
+```
+
+Which will automatically renew the certificates at midnight on the first of every other month.
+
+### Enable 2-Factor Authentication
+
+Install FreeOTP+ from [Playstore](https://play.google.com/store/apps/details?id=org.liberty.android.freeotpplus&hl=en_US&gl=US) or [F-Droid](https://f-droid.org/en/packages/org.liberty.android.freeotpplus/) or your chosen 2FA code generator.
+
+### Android Connectivity
+
+##### Nextcloud App Code
+
+Navigate to your Nextcloud portal, go to settings -> personal -> Security. Scroll to the bottom of the page and type the name of the app you would like to grant access to. Click create new app password. Go back to the application you want to connect to your Nextcloud server, type in your username and the 29 character one time app password.
+
+##### Calendar, Contact, and Task Syncronization Client
+
+Install DAVx⁵ from [Playstore](https://play.google.com/store/apps/details?id=at.bitfire.davdroid&hl=en_US&gl=US) or [F-Droid](https://f-droid.org/en/packages/at.bitfire.davdroid/).
+
+##### Recommended Applications
+
+A list of useful open-source Android applications that extend the usability of the Nextcloud server.
+
+- Nextcloud Syncronization Client available on F-Droid
+- Nextcloud Notes available on F-Droid
+- Tasks.org available on F-Droid
+- Simple Calendar Pro available on F-Droid
+
+### References
+
+- https://llazarek.github.io/2018/08/setting-up-a-home-cloud-server-with-nextcloud.html
+- https://linuxize.com/post/how-to-configure-static-ip-address-on-ubuntu-20-04/
+- https://certbot.eff.org/lets-encrypt/ubuntufocal-nginx
 
 ---
-
-import Callout from 'nextra-theme-docs/callout'
-
-<Callout>
-Any `.md` or `.mdx` file will turn into a doc page and be displayed in sidebar. You can also create a `meta.json` file to customize the page order and title.
-
-Check the source code: https://github.com/shuding/nextra for more information.
-</Callout>
-
-<Callout>
-You can also use [`<style jsx>`](https://nextjs.org/docs/basic-features/built-in-css-support#css-in-js) to style elements inside `theme.config.js`.
-</Callout>
