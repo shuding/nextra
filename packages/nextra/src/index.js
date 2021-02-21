@@ -27,7 +27,7 @@ export default (theme, themeConfig) => (nextConfig = {}) => {
     nextConfig.rewrites = async () => {
       return [
         ...originalRewrites,
-        ...locales.flatMap(locale => [
+        ...locales.filter(locale => locale !== defaultLocale).flatMap(locale => [
           {
             source: `/${locale}`,
             destination: `/index.${locale}`,
@@ -56,7 +56,6 @@ export default (theme, themeConfig) => (nextConfig = {}) => {
     {
       pageExtensions,
       webpack(config, options) {
-        console.log(options.defaultLoaders.babel)
         config.module.rules.push({
           test: markdownExtensionTest,
           use: [
