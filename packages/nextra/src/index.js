@@ -56,10 +56,17 @@ export default (theme, themeConfig) => (nextConfig = {}) => {
     {
       pageExtensions,
       webpack(config, options) {
+        console.log(options.defaultLoaders.babel)
         config.module.rules.push({
           test: markdownExtensionTest,
           use: [
-            options.defaultLoaders.babel,
+            { 
+              ...options.defaultLoaders.babel,
+              options: {
+                ...options.defaultLoaders.babel.options,
+                hasJsxRuntime: false
+              }
+            },
             {
               loader: '@mdx-js/loader',
               options: nextraConfig.mdxOptions
