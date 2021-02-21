@@ -30,12 +30,12 @@ export default (theme, themeConfig) => (nextConfig = {}) => {
         ...locales.filter(locale => locale !== defaultLocale).flatMap(locale => [
           {
             source: `/${locale}`,
-            destination: `/index.${locale}`,
+            destination: `/${locale}/index.${locale}`,
             locale: false
           },
           {
             source: `/${locale}/:path*`,
-            destination: `/:path*.${locale}`,
+            destination: `/${locale}/:path*.${locale}`,
             locale: false
           }
         ])
