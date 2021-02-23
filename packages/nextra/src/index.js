@@ -27,7 +27,7 @@ export default (theme, themeConfig) => (nextConfig = {}) => {
     nextConfig.rewrites = async () => {
       return [
         ...originalRewrites,
-        ...locales.filter(locale => locale !== defaultLocale).flatMap(locale => [
+        ...locales.flatMap(locale => [
           {
             source: `/${locale}`,
             destination: `/${locale}/index.${locale}`,
