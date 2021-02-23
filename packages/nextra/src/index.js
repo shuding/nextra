@@ -59,12 +59,9 @@ export default (theme, themeConfig) => (nextConfig = {}) => {
         config.module.rules.push({
           test: markdownExtensionTest,
           use: [
-            { 
-              ...options.defaultLoaders.babel,
-              options: {
-                ...options.defaultLoaders.babel.options,
-                hasJsxRuntime: false
-              }
+            options.defaultLoaders.babel,
+            {
+              loader: 'nextra/react17-loader',
             },
             {
               loader: '@mdx-js/loader',
