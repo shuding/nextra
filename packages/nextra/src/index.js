@@ -33,11 +33,11 @@ export default (theme, themeConfig) => (nextConfig = {}) => {
             destination: `/${locale}/index.${locale}`,
             locale: false
           },
-          {
-            source: `/${locale}/:path*`,
-            destination: `/${locale}/:path*.${locale}`,
-            locale: false
-          }
+          // {
+          //   source: `/${locale}/:path*`,
+          //   destination: `/${locale}/:path*.${locale}`,
+          //   locale: false
+          // }
         ])
       ]
     }
