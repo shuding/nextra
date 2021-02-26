@@ -5,29 +5,7 @@ import grayMatter from 'gray-matter'
 import slash from 'slash'
 
 import filterRouteLocale from './filter-route-locale'
-
-function getLocaleFromFilename(name) {
-  const localeRegex = /\.([a-zA-Z-]+)?\.(mdx?|jsx?|json)$/
-  const match = name.match(localeRegex)
-  if (match) return match[1]
-  return undefined
-}
-
-function removeExtension(name) {
-  const match = name.match(/^([^.]+)/)
-  return match !== null ? match[1] : ''
-}
-
-const parseJsonFile = (content, path) => {
-  let parsed = {}
-  try {
-    parsed = JSON.parse(content)
-  } catch (err) {
-    console.error(`Error parsing ${path}, make sure it's a valid JSON \n` + err)
-  }
-
-  return parsed
-}
+import { getLocaleFromFilename, removeExtension, getFileName, parseJsonFile } from './utils'
 
 async function getPageMap(currentResourcePath) {
   const extension = /\.(mdx?|jsx?)$/
@@ -109,20 +87,62 @@ async function getPageMap(currentResourcePath) {
   return [await getFiles(path.join(process.cwd(), 'pages'), '/'), activeRoute]
 }
 
+async function analyzeLocalizedEntries(currentResourcePath, defaultLocale) {	
+  const filename = getFileName(currentResourcePath)	
+  const dir = path.dirname(currentResourcePath)	
+
+  const filenameRe = new RegExp('^' + filename + '.[a-zA-Z-]+.(mdx?|jsx?|tsx?|json)$')	
+  const files = await fs.readdir(dir, { withFileTypes: true })	
+  
+  let hasSSR = false, hasSSG = false, defaultIndex = 0
+  const filteredFiles = []
+
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i]
+    if (!filenameRe.test(file.name)) continue
+
+    const content = await fs.readFile(path.join(dir, file.name), 'utf-8')
+    const locale = getLocaleFromFilename(file.name)
+
+    // Note: this is definitely not correct, we have to use MDX tokenizer here.
+    const exportSSR = /^export .+ getServerSideProps[=| |\(]/m.test(content)
+    const exportSSG = /^export .+ getStaticProps[=| |\(]/m.test(content)
+
+    hasSSR = hasSSR || exportSSR
+    hasSSG = hasSSG || exportSSG
+
+    if (locale === defaultLocale) defaultIndex = filteredFiles.length
+
+    filteredFiles.push({	
+      name: file.name,	
+      locale,
+      ssr: exportSSR,
+      ssg: exportSSG
+    })
+  }
+
+  return {
+    ssr: hasSSR,
+    ssg: hasSSG,
+    files: filteredFiles,
+    defaultIndex
+  }
+}
+
 export default async function (source) {
   const callback = this.async()
-
   this.cacheable()
 
   const options = getOptions(this)
   const { theme, themeConfig, locales, defaultLocale } = options
+  const { resourcePath, resourceQuery } = this
 
   // Add the entire directory `pages` as the dependency
   // so we can generate the correct page map
   this.addContextDependency(path.resolve('pages'))
 
   // Generate the page map
-  let [pageMap, route] = await getPageMap(this.resourcePath, locales)
+  let [pageMap, route] = await getPageMap(resourcePath, locales)
 
   // Extract frontMatter information if it exists
   const { data, content } = grayMatter(source)
@@ -130,6 +150,7 @@ export default async function (source) {
   // Remove frontMatter from the source
   source = content
 
+  // Check if there's a theme provided
   if (!theme) {
     console.error('No Nextra theme found!')
     return callback(null, source)
@@ -146,9 +167,57 @@ export default async function (source) {
     layoutConfig = slash(path.resolve(layoutConfig))
   }
 
-  const filename = this.resourcePath.slice(
-    this.resourcePath.lastIndexOf('/') + 1
-  )
+  const filename = resourcePath.slice(resourcePath.lastIndexOf('/') + 1)
+  const notI18nEntry = resourceQuery.includes('nextra-raw')
+
+  if (locales && !notI18nEntry) {	
+    // We need to handle the locale router here
+    const {
+      files,
+      defaultIndex,
+      ssr,
+      ssg
+    } = await analyzeLocalizedEntries(resourcePath, defaultLocale)
+
+    const i18nEntry = `	
+import { useRouter } from 'next/router'	
+${files	
+  .map((file, index) => 
+    `import Page_${index}${
+      file.ssg || file.ssr ? `, { ${file.ssg ? 'getStaticProps' : 'getServerSideProps'} as page_data_${index} }` : ''
+    } from './${file.name}?nextra-raw'`	
+  )	
+  .join('\n')}
+
+export default function I18NPage (props) {	
+  const { locale } = useRouter()	
+  ${files
+    .map((file, index) => 
+      `if (locale === '${file.locale}') {
+    return <Page_${index} {...props}/>
+  } else `
+    )	
+    .join('')} {	
+    return <Page_${defaultIndex} {...props}/>	
+  }
+}
+
+${ssg || ssr ? `export async function ${ssg ? 'getStaticProps' : 'getServerSideProps'} (context) {
+  const locale = context.locale
+  ${files
+    .map((file, index) => 
+      `if (locale === '${file.locale}' && ${ssg ? file.ssg : file.ssr}) {
+    return page_data_${index}(context)
+  } else `
+    )	
+    .join('')} {	
+    return { props: {} }
+  }
+}` : ''}
+`
+
+    return callback(null, i18nEntry)	
+  }
 
   if (locales) {
     const locale = getLocaleFromFilename(filename)
