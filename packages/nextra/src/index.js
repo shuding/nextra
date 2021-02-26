@@ -16,39 +16,10 @@ export default (theme, themeConfig) => (nextConfig = {}) => {
     if (!defaultLocale) {
       console.error('Default locale is missing.')
     }
-
-    // Exclude other locales to ensure there're no route conflicts.
-    // pageExtensions = pageExtensions.concat(
-    //   markdownExtensions.map(extension => defaultLocale + '.' + extension)
-    // )
-
-    // We have to map locales in the path to their correct pages.
-    const originalRewrites = nextConfig.rewrites ? nextConfig.rewrites() : []
-    nextConfig.rewrites = async () => {
-      return [
-        ...originalRewrites,
-        ...locales.flatMap(locale => [
-          {
-            source: `/${locale}`,
-            destination: `/${locale}/index.${locale}`,
-            locale: false
-          },
-          // {
-          //   source: `/${locale}/:path*`,
-          //   destination: `/${locale}/:path*.${locale}`,
-          //   locale: false
-          // }
-        ])
-      ]
-    }
-
-    // TODO: We have to redirect page with locale ententions,
-    // for example /page.en to /en/page.
-
-    // TODO: We don't have a good way to redirect missing locales
-    // to the default locale. Which is fine for now.
+    pageExtensions = pageExtensions.concat(markdownExtensions.map(ext => defaultLocale + '.' + ext))
+  } else {
+    pageExtensions = pageExtensions.concat(markdownExtensions)
   }
-  pageExtensions = pageExtensions.concat(markdownExtensions)
 
   return Object.assign(
     {},

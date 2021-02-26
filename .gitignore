@@ -6,3 +6,5 @@ dist
 
 # Theme styles
 packages/nextra-theme-*/style.css
+
+.vercel
