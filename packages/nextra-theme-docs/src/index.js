@@ -44,7 +44,7 @@ const getFSRoute = (asPath, locale) => {
 function Folder({ item, anchors }) {
   const { asPath, locale } = useRouter()
   const route = getFSRoute(asPath, locale) + '/'
-  const active = route.startsWith(item.route + '/')
+  const active = route === item.route + '/'
   const open = TreeState[item.route] ?? true
   const [_, render] = useState(false)
 
@@ -80,7 +80,7 @@ function File({ item, anchors }) {
   const { setMenu } = useContext(MenuContext)
   const { asPath, locale } = useRouter()
   const route = getFSRoute(asPath, locale) + '/'
-  const active = route.startsWith(item.route + '/')
+  const active = route === item.route + '/'
   const slugger = new Slugger()
   const activeAnchor = useActiveAnchor()
 
@@ -173,10 +173,10 @@ function Sidebar({ show, directories, anchors }) {
 const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
   const [menu, setMenu] = useState(false)
   const router = useRouter()
-  const { route, asPath, locale } = router
+  const { route, asPath, locale, defaultLocale } = router
   const fsPath = getFSRoute(asPath, locale)
 
-  const directories = useMemo(() => cleanupAndReorder(pageMap, locale), [pageMap, locale])
+  const directories = useMemo(() => cleanupAndReorder(pageMap, locale, defaultLocale), [pageMap, locale, defaultLocale])
   const flatDirectories = useMemo(() => flatten(directories), [directories])
   const config = Object.assign({}, defaultConfig, _config)
 

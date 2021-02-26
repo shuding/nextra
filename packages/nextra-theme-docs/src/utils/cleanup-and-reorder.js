@@ -1,12 +1,13 @@
 import getTitle from 'title'
 
-export default function cleanupAndReorder(list, locale) {
+export default function cleanupAndReorder(list, locale, defaultLocale) {
   let meta
   for (let item of list) {
     if (item.name === 'meta.json' && locale === item.locale) {
       meta = item
       break
     }
+    // fallback
     if (!meta && item.name === 'meta') {
       meta = item
     }
@@ -24,16 +25,26 @@ export default function cleanupAndReorder(list, locale) {
   }
 
   return list
-    .filter(a => {
-      return a.name !== 'meta.json' && !a.name.startsWith('_') && (a.locale === locale || (!a.locale && !hasLocale.get(a.name)))
-    })
+    .filter(a => 
+      // not meta
+      a.name !== 'meta.json' &&
+        // not hidden routes
+        !a.name.startsWith('_') &&
+        // locale matches, or fallback to default locale
+        (a.locale === locale || ((a.locale === defaultLocale || !a.locale) && !hasLocale.get(a.name)))
+    )
     .sort((a, b) => {
-      return metaKeys.indexOf(a.name) - metaKeys.indexOf(b.name)
+      const indexA = metaKeys.indexOf(a.name) 
+      const indexB = metaKeys.indexOf(b.name)
+      if (indexA === -1 && indexB === -1) return a.name < b.name ? -1 : 1
+      if (indexA === -1) return 1
+      if (indexB === -1) return -1
+      return indexA - indexB
     })
     .map(a => {
       return {
         ...a,
-        children: a.children ? cleanupAndReorder(a.children, locale) : undefined,
+        children: a.children ? cleanupAndReorder(a.children, locale, defaultLocale) : undefined,
         title: meta[a.name] || getTitle(a.name)
       }
     })
