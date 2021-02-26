@@ -104,14 +104,14 @@ async function analyzeLocalizedEntries(currentResourcePath, defaultLocale) {
     const content = await fs.readFile(path.join(dir, file.name), 'utf-8')
     const locale = getLocaleFromFilename(file.name)
 
-    if (locale === defaultLocale) defaultIndex = i
-
     // Note: this is definitely not correct, we have to use MDX tokenizer here.
     const exportSSR = /^export .+ getServerSideProps[=| |\(]/m.test(content)
     const exportSSG = /^export .+ getStaticProps[=| |\(]/m.test(content)
 
     hasSSR = hasSSR || exportSSR
     hasSSG = hasSSG || exportSSG
+
+    if (locale === defaultLocale) defaultIndex = filteredFiles.length
 
     filteredFiles.push({	
       name: file.name,	
