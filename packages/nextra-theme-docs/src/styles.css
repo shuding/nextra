@@ -36,6 +36,7 @@ h6 {
 }
 a {
   @apply text-blue-500 underline;
+  text-underline-position: under;
 }
 p {
   @apply leading-7;
