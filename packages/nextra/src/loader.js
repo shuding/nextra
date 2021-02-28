@@ -1,5 +1,5 @@
 import path from 'path'
-import { promises as fs } from 'fs'
+import { promises as fs } from 'graceful-fs'
 import { getOptions } from 'loader-utils'
 import grayMatter from 'gray-matter'
 import slash from 'slash'
