@@ -2,11 +2,12 @@ const defaultExtensions = ['js', 'jsx', 'ts', 'tsx']
 const markdownExtensions = ['md', 'mdx']
 const markdownExtensionTest = /\.mdx?$/
 
-export default (theme, themeConfig) => (nextConfig = {}) => {
-  const nextraConfig = typeof theme === "string" ? {
-    theme,
-    themeConfig
-  } : theme;
+export default (...args) => (nextConfig = {}) => {
+  const nextraConfig = typeof args[0] === 'string' ? {
+    theme: args[0],
+    themeConfig: args[1]
+  } : args[0];
+
   const locales = nextConfig.i18n ? nextConfig.i18n.locales : null
   const defaultLocale = nextConfig.i18n ? nextConfig.i18n.defaultLocale : null
 
