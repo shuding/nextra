@@ -26,6 +26,7 @@ export default {
     </>
   ),
   search: true,
+  UNSTABLE_stork: true,
   prevLinks: true,
   nextLinks: true,
   footer: true,

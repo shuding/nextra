@@ -4,6 +4,7 @@ html {
   @apply subpixel-antialiased;
   font-size: 16px;
   font-feature-settings: 'rlig' 1, 'calt' 1, 'ss01' 1;
+  scroll-behavior: smooth;
 }
 body {
   @apply bg-white;

@@ -5,6 +5,7 @@ import grayMatter from 'gray-matter'
 import slash from 'slash'
 
 import filterRouteLocale from './filter-route-locale'
+import { addStorkIndex } from './stork-index'
 import { getLocaleFromFilename, removeExtension, getFileName, parseJsonFile } from './utils'
 
 async function getPageMap(currentResourcePath) {
@@ -136,6 +137,8 @@ export default async function (source) {
   const options = getOptions(this)
   const { theme, themeConfig, locales, defaultLocale } = options
   const { resourcePath, resourceQuery } = this
+  const filename = resourcePath.slice(resourcePath.lastIndexOf('/') + 1)
+  const fileLocale = getLocaleFromFilename(filename) || 'default'
 
   // Add the entire directory `pages` as the dependency
   // so we can generate the correct page map
@@ -149,6 +152,13 @@ export default async function (source) {
 
   // Remove frontMatter from the source
   source = content
+
+  // Add content to stork indexes
+  if (options.stork) {
+    await addStorkIndex({
+      pageMap, filename, fileLocale, route, data, content, locales
+    })
+  }
 
   // Check if there's a theme provided
   if (!theme) {
@@ -167,7 +177,6 @@ export default async function (source) {
     layoutConfig = slash(path.resolve(layoutConfig))
   }
 
-  const filename = resourcePath.slice(resourcePath.lastIndexOf('/') + 1)
   const notI18nEntry = resourceQuery.includes('nextra-raw')
 
   if (locales && !notI18nEntry) {	

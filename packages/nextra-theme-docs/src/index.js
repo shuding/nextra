@@ -19,6 +19,7 @@ import flatten from './utils/flatten'
 import cleanupAndReorder from './utils/cleanup-and-reorder'
 
 import Search from './search'
+import StorkSearch from './stork-search'
 import GitHubIcon from './github-icon'
 import ThemeSwitch from './theme-switch'
 import LocaleSwitch from './locale-switch'
@@ -237,7 +238,9 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
           </div>
 
           {config.customSearch ||
-            (config.search ? <Search directories={flatDirectories} /> : null)}
+            (config.search ?
+              (config.UNSTABLE_stork ? <StorkSearch /> : <Search directories={flatDirectories} />) :
+              null)}
 
           <div className="mr-2" />
 

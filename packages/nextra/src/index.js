@@ -1,6 +1,9 @@
+import { buildStorkIndex } from './stork-index'
+
 const defaultExtensions = ['js', 'jsx', 'ts', 'tsx']
 const markdownExtensions = ['md', 'mdx']
 const markdownExtensionTest = /\.mdx?$/
+const STORK_PATH = process.env.STORK_PATH || 'stork'
 
 export default (...args) => (nextConfig = {}) => {
   const nextraConfig = typeof args[0] === 'string' ? {
@@ -22,6 +25,27 @@ export default (...args) => (nextConfig = {}) => {
     pageExtensions = pageExtensions.concat(markdownExtensions)
   }
 
+  if (nextraConfig.stork) {
+    console.log('You have Stork indexing enabled for Nextra. Stork binary:', STORK_PATH)
+
+    // Add header for .st
+    const originalHeaders = nextConfig.headers || (() => [])
+    nextConfig.headers = async () => {
+      return [
+        ...await originalHeaders(),
+        {
+          source: `/:index(index-.+\.st)`,
+          headers: [
+            {
+              key: 'content-type',
+              value: 'application/wasm'
+            }
+          ]
+        }
+      ]
+    }
+  }
+
   return Object.assign(
     {},
     nextConfig,
@@ -41,9 +65,18 @@ export default (...args) => (nextConfig = {}) => {
             },
             {
               loader: 'nextra/loader',
-              options: { theme: nextraConfig.theme, themeConfig: nextraConfig.themeConfig, locales, defaultLocale }
+              options: { ...nextraConfig, locales, defaultLocale }
             }
           ]
+        })
+
+        if (!config.plugins) config.plugins = []
+        config.plugins.push({
+          apply: (compiler) => {
+            compiler.hooks.done.tap('buildStorkIndex', () => {
+              buildStorkIndex(STORK_PATH, locales)
+            });
+          }
         })
 
         if (typeof nextConfig.webpack === 'function') {
