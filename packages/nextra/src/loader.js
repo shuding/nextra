@@ -12,10 +12,14 @@ async function getPageMap(currentResourcePath) {
   const extension = /\.(mdx?|jsx?)$/
   const mdxExtension = /\.mdx?$/
   const metaExtension = /meta\.?([a-zA-Z-]+)?\.json/
+
+  const activeRouteLocale = getLocaleFromFilename(currentResourcePath)
   let activeRoute = ''
+  let activeRouteTitle = ''
 
   async function getFiles(dir, route) {
     const files = await fs.readdir(dir, { withFileTypes: true })
+    let dirMeta = {}
 
     // go through the directory
     const items = (
@@ -27,10 +31,6 @@ async function getPageMap(currentResourcePath) {
             removeExtension(f.name).replace(/^index$/, '')
           )
 
-          if (filePath === currentResourcePath) {
-            activeRoute = fileRoute
-          }
-
           if (f.isDirectory()) {
             const children = await getFiles(filePath, fileRoute)
             if (!children.length) return null
@@ -41,6 +41,12 @@ async function getPageMap(currentResourcePath) {
               route: fileRoute
             }
           } else if (extension.test(f.name)) {
+            const locale = getLocaleFromFilename(f.name)
+
+            if (filePath === currentResourcePath) {
+              activeRoute = fileRoute
+            }
+  
             // MDX or MD
             if (mdxExtension.test(f.name)) {
               const fileContents = await fs.readFile(filePath, 'utf-8')
@@ -51,7 +57,7 @@ async function getPageMap(currentResourcePath) {
                   name: removeExtension(f.name),
                   route: fileRoute,
                   frontMatter: data,
-                  locale: getLocaleFromFilename(f.name)
+                  locale
                 }
               }
             }
@@ -59,13 +65,16 @@ async function getPageMap(currentResourcePath) {
             return {
               name: removeExtension(f.name),
               route: fileRoute,
-              locale: getLocaleFromFilename(f.name)
+              locale
             }
           } else if (metaExtension.test(f.name)) {
             const content = await fs.readFile(filePath, 'utf-8')
             const meta = parseJsonFile(content, filePath)
-
             const locale = f.name.match(metaExtension)[1]
+
+            if (!activeRouteLocale || locale === activeRouteLocale) {
+              dirMeta = meta
+            }
 
             return {
               name: 'meta.json',
@@ -78,6 +87,9 @@ async function getPageMap(currentResourcePath) {
     )
       .map(item => {
         if (!item) return
+        if (item.route === activeRoute) {
+          activeRouteTitle = dirMeta[item.name] || item.name
+        }
         return { ...item }
       })
       .filter(Boolean)
@@ -85,7 +97,7 @@ async function getPageMap(currentResourcePath) {
     return items
   }
 
-  return [await getFiles(path.join(process.cwd(), 'pages'), '/'), activeRoute]
+  return [await getFiles(path.join(process.cwd(), 'pages'), '/'), activeRoute, activeRouteTitle]
 }
 
 async function analyzeLocalizedEntries(currentResourcePath, defaultLocale) {	
@@ -145,7 +157,7 @@ export default async function (source) {
   this.addContextDependency(path.resolve('pages'))
 
   // Generate the page map
-  let [pageMap, route] = await getPageMap(resourcePath, locales)
+  let [pageMap, route, title] = await getPageMap(resourcePath, locales)
 
   // Extract frontMatter information if it exists
   const { data, content } = grayMatter(source)
@@ -156,7 +168,7 @@ export default async function (source) {
   // Add content to stork indexes
   if (options.stork) {
     await addStorkIndex({
-      pageMap, filename, fileLocale, route, data, content, locales
+      pageMap, filename, fileLocale, route, title, data, content, locales
     })
   }
 

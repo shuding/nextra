@@ -13,7 +13,7 @@ const files = {}
 const escapeQuote = str => str.replace(/"/g, '\\"')
 
 export async function addStorkIndex ({
-  filename, fileLocale, route, data, content
+  fileLocale, route, title, data, content
 }) {
   if (!isProduction) return
 
@@ -23,7 +23,7 @@ export async function addStorkIndex ({
   if (!files[fileLocale][route]) {
     files[fileLocale][route] = true
     files[fileLocale].toml += `[[input.files]]\n`
-    files[fileLocale].toml += `title = "${escapeQuote(data.title || filename)}"\n`
+    files[fileLocale].toml += `title = "${escapeQuote(data.title || title)}"\n`
     files[fileLocale].toml += `url = "${escapeQuote(route)}"\n`
     files[fileLocale].toml += `contents = "${escapeQuote(content.replace(/\n/g, ' '))}"\n`
     files[fileLocale].toml += `filetype = "PlainText"\n`
