@@ -36,12 +36,15 @@ const Item = ({ title, active, href, onMouseOver, excerpt }) => {
   )
 }
 
+// This can be global for better caching.
+const stork = {}
+
 export default function Search () {
   const router = useRouter()
   const [show, setShow] = useState(false)
   const [search, setSearch] = useState('')
   const [active, setActive] = useState(0)
-  const [stork, setStork] = useState({})
+  const setStork = useState({})[1]
   const input = useRef(null)
 
   const results = useMemo(() => {
@@ -53,6 +56,7 @@ export default function Search () {
     const json = stork[localeCode].wasm_search(`index-${localeCode}`, search)
     const obj = JSON.parse(json)
     
+    if (!obj.results) return []
     return obj.results.map(result => {
       return {
         title: result.entry.title,
@@ -92,7 +96,7 @@ export default function Search () {
     const localeCode = Router.locale || 'default'
     if (!stork[localeCode]) {
       stork[localeCode] = await import('./wasm-loader')
-      setStork(stork[localeCode])
+      setStork({})
 
       const init = stork[localeCode].init('/stork.wasm')
       const res = await fetch(`/index-${localeCode}.st`)
