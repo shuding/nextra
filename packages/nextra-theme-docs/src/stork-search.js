@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback, useRef, useState, useEffect } from 'react'
+import React, { useMemo, useCallback, useRef, useState, useEffect, Fragment } from 'react'
 import Router, { useRouter } from 'next/router'
 import cn from 'classnames'
 import Link from 'next/link'
@@ -6,18 +6,29 @@ import GraphemeSplitter from 'grapheme-splitter'
 
 const splitter = new GraphemeSplitter()
 
-const Item = ({ title, active, href, onMouseOver, excerpt }) => {
-  const excerptText = excerpt ? splitter.splitGraphemes(excerpt.text) : null
+const TextWithHighlights = React.memo(({ content, ranges }) => {
+  const splittedText = content ? splitter.splitGraphemes(content) : []
+  const res = []
 
+  let id = 0, index = 0
+  for (const range of ranges) {
+    res.push(<Fragment key={id++}>{splittedText.splice(0, range.beginning - index).join('')}</Fragment>)
+    res.push(<span className="highlight" key={id++}>{splittedText.splice(0, range.end - range.beginning).join('')}</span>)
+    index = range.end
+  }
+  res.push(<Fragment key={id++}>{splittedText.join('')}</Fragment>)
+
+  return res
+})
+
+const Item = ({ title, active, href, onMouseOver, excerpt }) => {
   return (
     <Link href={href}>
       <a className="block no-underline" onMouseOver={onMouseOver}>
         <li className={cn('p-2', { active })}>
-          {title}
-          {excerptText ? <div>
-            {excerptText.slice(0, excerpt.highlight_ranges[0].beginning).join('')}
-            <span className="highlight">{excerptText.slice(excerpt.highlight_ranges[0].beginning, excerpt.highlight_ranges[0].end).join('')}</span>
-            {excerptText.slice(excerpt.highlight_ranges[0].end).join('')}
+          <span className="font-semibold">{title}</span>
+          {excerpt ? <div className="text-gray-600">
+            <TextWithHighlights content={excerpt.text} ranges={excerpt.highlight_ranges} />
           </div> : null}
         </li>
       </a>
@@ -49,7 +60,6 @@ export default function Search () {
         excerpt: result.excerpts[0]
       }
     })
-    return []
   }, [search])
 
   const handleKeyDown = useCallback(
