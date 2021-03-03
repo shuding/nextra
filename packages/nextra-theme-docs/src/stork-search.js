@@ -116,7 +116,7 @@ export default function Search () {
     const down = e => {
       if (
         document.activeElement &&
-        inputs.indexOf(document.activeElement.tagName.toLowerCase() !== -1)
+        inputs.indexOf(document.activeElement.tagName.toLowerCase()) === -1
       ) {
         if (e.key === '/') {
           e.preventDefault()
