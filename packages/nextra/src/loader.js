@@ -8,11 +8,11 @@ import filterRouteLocale from './filter-route-locale'
 import { addStorkIndex } from './stork-index'
 import { getLocaleFromFilename, removeExtension, getFileName, parseJsonFile } from './utils'
 
-async function getPageMap(currentResourcePath) {
-  const extension = /\.(mdx?|jsx?)$/
-  const mdxExtension = /\.mdx?$/
-  const metaExtension = /meta\.?([a-zA-Z-]+)?\.json/
+const extension = /\.(mdx?|jsx?|tsx?)$/
+const mdxExtension = /\.mdx?$/
+const metaExtension = /meta\.?([a-zA-Z-]+)?\.json/
 
+async function getPageMap(currentResourcePath) {
   const activeRouteLocale = getLocaleFromFilename(currentResourcePath)
   let activeRoute = ''
   let activeRouteTitle = ''
@@ -167,9 +167,12 @@ export default async function (source) {
 
   // Add content to stork indexes
   if (options.stork) {
-    await addStorkIndex({
-      pageMap, filename, fileLocale, route, title, data, content, locales
-    })
+    // We only index .MD and .MDX files
+    if (mdxExtension.test(filename)) {
+      await addStorkIndex({
+        pageMap, filename, fileLocale, route, title, data, content, locales
+      })
+    }
   }
 
   // Check if there's a theme provided

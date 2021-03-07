@@ -53,17 +53,22 @@ export default function Search () {
     const localeCode = Router.locale || 'default'
     if (!stork[localeCode]) return []
 
-    const json = stork[localeCode].wasm_search(`index-${localeCode}`, search)
-    const obj = JSON.parse(json)
-    
-    if (!obj.results) return []
-    return obj.results.map(result => {
-      return {
-        title: result.entry.title,
-        route: result.entry.url,
-        excerpt: result.excerpts[0]
-      }
-    })
+    try {
+      const json = stork[localeCode].wasm_search(`index-${localeCode}`, search)
+      const obj = JSON.parse(json)
+
+      if (!obj.results) return []
+      return obj.results.slice(0, 20).map(result => {
+        return {
+          title: result.entry.title,
+          route: result.entry.url,
+          excerpt: result.excerpts[0]
+        }
+      })
+    } catch (err) {
+      console.error(err)
+      return []
+    }
   }, [search])
 
   const handleKeyDown = useCallback(
@@ -73,6 +78,10 @@ export default function Search () {
           e.preventDefault()
           if (active + 1 < results.length) {
             setActive(active + 1)
+            const activeElement = document.querySelector(`.nextra-stork ul > :nth-child(${active + 2})`)
+            if (activeElement && activeElement.scrollIntoViewIfNeeded) {
+              activeElement.scrollIntoViewIfNeeded()
+            }
           }
           break
         }
@@ -80,6 +89,10 @@ export default function Search () {
           e.preventDefault()
           if (active - 1 >= 0) {
             setActive(active - 1)
+            const activeElement = document.querySelector(`.nextra-stork ul > :nth-child(${active})`)
+            if (activeElement && activeElement.scrollIntoViewIfNeeded) {
+              activeElement.scrollIntoViewIfNeeded()
+            }
           }
           break
         }
@@ -134,7 +147,7 @@ export default function Search () {
   const renderList = show && results.length > 0
 
   return (
-    <div className="nextra-search relative w-full md:w-64">
+    <div className="nextra-search nextra-stork relative w-full md:w-64">
       {renderList && (
         <div className="search-overlay z-1" onClick={() => setShow(false)} />
       )}
@@ -152,9 +165,12 @@ export default function Search () {
           setShow(true)
         }}
         ref={input}
+        spellCheck={false}
       />
       {renderList && (
-        <ul className="shadow-md list-none p-0 m-0 absolute left-0 md:right-0 rounded mt-1 border top-100 divide-y z-2">
+        <ul
+          className="p-0 m-0 mt-1 top-full absolute divide-y z-2"
+        >
           {results.map((res, i) => {
             return (
               <Item

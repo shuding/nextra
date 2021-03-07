@@ -42,7 +42,9 @@ a {
 p {
   @apply leading-7;
 }
-p:not(:first-child), blockquote:not(:first-child), table:not(:first-child) {
+p:not(:first-child),
+blockquote:not(:first-child),
+table:not(:first-child) {
   @apply mt-6;
 }
 hr {
@@ -81,7 +83,8 @@ a code {
 .sidebar ul ul {
   @apply ml-5 relative;
 }
-.sidebar a:focus-visible, .sidebar button:focus-visible {
+.sidebar a:focus-visible,
+.sidebar button:focus-visible {
   @apply ring;
 }
 .sidebar .active-anchor {
@@ -93,18 +96,22 @@ a code {
 .dark .sidebar li.active > a {
   @apply text-white bg-gray-800;
 }
-.sidebar button, .sidebar a {
+.sidebar button,
+.sidebar a {
   @apply block w-full text-left text-base no-underline text-gray-600 mt-1 p-2 rounded select-none outline-none;
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
 }
-.dark .sidebar button, .dark .sidebar a {
+.dark .sidebar button,
+.dark .sidebar a {
   @apply text-gray-500;
 }
-.sidebar a:hover, .sidebar button:hover {
+.sidebar a:hover,
+.sidebar button:hover {
   @apply text-gray-900 bg-gray-100;
 }
-.dark .sidebar a:hover, .dark .sidebar button:hover {
+.dark .sidebar a:hover,
+.dark .sidebar button:hover {
   @apply text-white bg-gray-900;
 }
 article ul {
@@ -144,10 +151,12 @@ h2 a {
 }
 
 /* Navbar */
-.nextra-container nav a:focus, .nextra-container nav summary:focus {
+.nextra-container nav a:focus,
+.nextra-container nav summary:focus {
   @apply select-none outline-none;
 }
-.nextra-container nav a:focus-visible, .nextra-container nav summary:focus-visible {
+.nextra-container nav a:focus-visible,
+.nextra-container nav summary:focus-visible {
   @apply ring select-none outline-none;
 }
 
@@ -165,7 +174,7 @@ h2 a {
   @apply text-gray-700;
 }
 .nextra-search ul {
-  @apply bg-white text-gray-100 border-gray-300 divide-gray-300 overflow-hidden;
+  @apply rounded border bg-white text-gray-100 border-gray-300 divide-gray-300 overflow-hidden shadow-lg list-none;
 }
 .dark .nextra-search ul {
   @apply bg-dark text-gray-100 border-gray-700 divide-gray-700;
@@ -173,14 +182,16 @@ h2 a {
 .nextra-search ul li {
   @apply text-gray-800;
 }
-.nextra-search ul li.active {
-  @apply bg-gray-100;
+.nextra-search ul li.active,
+.nextra-search ul a:focus li {
+  @apply bg-gray-200;
 }
 .dark .nextra-search ul li {
   @apply text-gray-300;
 }
-.dark .nextra-search ul li.active {
-  @apply bg-gray-900;
+.dark .nextra-search ul li.active,
+.dark .nextra-search ul a:focus li {
+  @apply bg-gray-800;
 }
 .nextra-search ul li .highlight {
   @apply bg-yellow-300;
@@ -201,18 +212,29 @@ input[type='search']::-webkit-search-results-button,
 input[type='search']::-webkit-search-results-decoration {
   -webkit-appearance: none;
 }
+.nextra-search.nextra-stork ul {
+  @apply overflow-auto left-0 md:-left-80 md:right-0;
+  max-height: min(calc(100vh - 80px), 400px);
+  max-width: min(calc(100vw - 3rem), calc(100% + 20rem));
+  width: 100vw;
+}
 
 code {
-  font-size: .9em;
-  padding: 2px .25em;
+  font-size: 0.9em;
+  padding: 2px 0.25em;
 }
 
 /* Locale */
 .locale-switch summary::-webkit-details-marker {
-  display:none;
+  content: '';
+  display: none;
+}
+.locale-switch summary::marker {
+  content: '';
+  display: none;
 }
 .locale-switch[open] summary:before {
-  content: " ";
+  content: ' ';
   position: fixed;
   top: 0;
   right: 0;
@@ -243,13 +265,16 @@ table tr:nth-child(2n) {
 table tr th {
   @apply font-semibold;
 }
-table tr th[align=center], table tr td[align=center] {
+table tr th[align='center'],
+table tr td[align='center'] {
   @apply text-center;
 }
-table tr th[align=right], table tr td[align=right] {
+table tr th[align='right'],
+table tr td[align='right'] {
   @apply text-right;
 }
-table tr th, table tr td {
+table tr th,
+table tr td {
   @apply text-left;
   @apply m-0 px-4 py-2 border border-gray-300;
   @apply dark:border-gray-700;
@@ -259,7 +284,7 @@ table tr th, table tr td {
   @apply list-none ml-0;
 }
 
-.contains-task-list input[type=checkbox] {
+.contains-task-list input[type='checkbox'] {
   @apply mr-1;
 }
 
@@ -269,28 +294,44 @@ pre .prism-code {
 .dark pre .prism-code {
   --c-highlight: #3d4b61;
 }
-pre .prism-code .token.plain, pre .prism-code .token.builtin,  pre .prism-code .token.char,  pre .prism-code .token.constant {
+pre .prism-code .token.plain,
+pre .prism-code .token.builtin,
+pre .prism-code .token.char,
+pre .prism-code .token.constant {
   color: #000 !important;
 }
-.dark pre .prism-code .token.plain, .dark pre .prism-code .token.builtin, .dark pre .prism-code .token.char, .dark pre .prism-code .token.constant {
+.dark pre .prism-code .token.plain,
+.dark pre .prism-code .token.builtin,
+.dark pre .prism-code .token.char,
+.dark pre .prism-code .token.constant {
   color: #fff !important;
 }
-pre .prism-code .token.string, pre .prism-code .token.url, pre .prism-code .token.attr-value {
+pre .prism-code .token.string,
+pre .prism-code .token.url,
+pre .prism-code .token.attr-value {
   color: #028265 !important;
 }
-.dark pre .prism-code .token.string, .dark pre .prism-code .token.url, .dark pre .prism-code .token.attr-value {
+.dark pre .prism-code .token.string,
+.dark pre .prism-code .token.url,
+.dark pre .prism-code .token.attr-value {
   color: #20bb98 !important;
 }
-pre .prism-code .token.punctuation, pre .prism-code .token.operator {
+pre .prism-code .token.punctuation,
+pre .prism-code .token.operator {
   color: #333 !important;
 }
-.dark pre .prism-code .token.punctuation, .dark pre .prism-code .token.operator {
+.dark pre .prism-code .token.punctuation,
+.dark pre .prism-code .token.operator {
   color: #bbb !important;
 }
-pre .prism-code .token.number, pre .prism-code .token.function, pre .prism-code .token.tag:not(.script) {
+pre .prism-code .token.number,
+pre .prism-code .token.function,
+pre .prism-code .token.tag:not(.script) {
   color: #0076ff !important;
 }
-.dark pre .prism-code .token.number, .dark pre .prism-code .token.function, .dark pre .prism-code .token.tag:not(.script) {
+.dark pre .prism-code .token.number,
+.dark pre .prism-code .token.function,
+.dark pre .prism-code .token.tag:not(.script) {
   color: #1e86ff !important;
 }
 
@@ -301,7 +342,8 @@ pre .prism-code .token.number, pre .prism-code .token.function, pre .prism-code 
 .nextra-container.rtl .sidebar ul ul {
   @apply mr-5 ml-0;
 }
-.nextra-container.rtl .sidebar button, .nextra-container.rtl .sidebar a {
+.nextra-container.rtl .sidebar button,
+.nextra-container.rtl .sidebar a {
   @apply text-right;
 }
 .nextra-container.rtl article blockquote {
@@ -335,7 +377,8 @@ pre .prism-code .token.number, pre .prism-code .token.function, pre .prism-code 
 .nextra-container.rtl .anchor-icon {
   @apply ml-0 mr-2 inline-block;
 }
-.nextra-container.rtl article ul, .nextra-container.rtl article ol {
+.nextra-container.rtl article ul,
+.nextra-container.rtl article ol {
   @apply ml-0 mr-6;
 }
 .nextra-container.rtl .sidebar {
