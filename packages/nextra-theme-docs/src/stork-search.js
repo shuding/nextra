@@ -25,7 +25,7 @@ const Item = ({ title, active, href, onMouseOver, excerpt }) => {
   return (
     <Link href={href}>
       <a className="block no-underline" onMouseOver={onMouseOver}>
-        <li className={cn('p-2', { active })}>
+        <li className={cn('py-2 px-4', { active })}>
           <span className="font-semibold">{title}</span>
           {excerpt ? <div className="text-gray-600">
             <TextWithHighlights content={excerpt.text} ranges={excerpt.highlight_ranges} />

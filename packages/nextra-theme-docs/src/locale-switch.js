@@ -33,7 +33,7 @@ export default function LocaleSwitch({ options, isRTL }) {
       {mounted ?
         <ul
           className={cn(
-            'locale-dropdown absolute block bg-white dark:bg-dark dark:border-gray-700 py-1 rounded border',
+            'locale-dropdown absolute block bg-white dark:bg-dark border dark:border-gray-700 py-1 rounded shadow-lg',
             { 'right-0': !isRTL, 'left-0': isRTL }
           )}
         >
