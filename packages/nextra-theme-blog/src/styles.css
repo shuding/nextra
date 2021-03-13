@@ -16,10 +16,15 @@ article img {
 
 a.subheading {
   text-decoration: none !important;
+  color: unset !important;
+}
+
+h1 {
+  letter-spacing: -0.03em;
 }
 
 .subheading-anchor {
-  margin-top: -84px;
+  margin-top: -2em;
   display: inline-block;
   position: absolute;
   width: 1px;
@@ -66,8 +71,12 @@ a.subheading {
   @apply text-sm text-gray-600;
 }
 .post-item .post-item-more {
-  @apply ml-1;
+  @apply ml-1 text-gray-600;
+}
+.post-item .post-item-desc {
+  margin-bottom: .5em;
 }
 .post-item .post-item-title {
   @apply no-underline;
+  color: unset;
 }

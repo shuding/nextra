@@ -1,6 +1,7 @@
 import ReactDOMServer from 'react-dom/server'
+import { createContext, useContext } from 'react'
 import { MDXProvider } from '@mdx-js/react'
-import slugify from '@sindresorhus/slugify'
+import Slugger from 'github-slugger'
 import Link from 'next/link'
 import React from 'react'
 import Highlight, { defaultProps } from 'prism-react-renderer'
@@ -73,8 +74,11 @@ const THEME = {
 
 // Anchor links
 
+const SluggerContext = createContext()
+
 const HeaderLink = ({ tag: Tag, children, ...props }) => {
-  const slug = slugify(ReactDOMServer.renderToStaticMarkup(children))
+  const slugger = useContext(SluggerContext)
+  const slug = slugger.slug(ReactDOMServer.renderToStaticMarkup(children) || '')
   return (
     <Tag {...props}>
       <span className="subheading-anchor" id={slug} />
@@ -196,5 +200,8 @@ const components = {
 }
 
 export default ({ children }) => {
-  return <MDXProvider components={components}>{children}</MDXProvider>
+  const slugger = new Slugger()
+  return <SluggerContext.Provider value={slugger}>
+    <MDXProvider components={components}>{children}</MDXProvider>
+  </SluggerContext.Provider>
 }
