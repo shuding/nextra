@@ -181,6 +181,14 @@ const Code = ({ children, className, highlight, ...props }) => {
   )
 }
 
+const Table = ({ children }) => {
+  return (
+    <div className="table-container">
+      <table>{children}</table>
+    </div>
+  )
+}
+
 const getComponents = args => ({
   h2: H2(args),
   h3: H3(args),
@@ -188,7 +196,8 @@ const getComponents = args => ({
   h5: H5(args),
   h6: H6(args),
   a: A,
-  code: Code
+  code: Code,
+  table: Table
 })
 
 export default ({ children }) => {
