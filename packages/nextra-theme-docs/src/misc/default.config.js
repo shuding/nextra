@@ -36,6 +36,8 @@ export default {
       <meta name="apple-mobile-web-app-title" content="Nextra" />
     </React.Fragment>
   ),
+  // hiddenDirectories: [], // directories hidden in sidebar
+  // filterPage: (v) => v, // filter pageMap before render in sidebar
   // direction: 'ltr',
   // i18n: [{ locale: 'en-US', text: 'English', direction: 'ltr' }],
 }

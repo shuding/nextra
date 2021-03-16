@@ -177,7 +177,21 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
   const { route, asPath, locale, defaultLocale } = router
   const fsPath = getFSRoute(asPath, locale)
 
-  const directories = useMemo(() => cleanupAndReorder(pageMap, locale, defaultLocale), [pageMap, locale, defaultLocale])
+  const directories = useMemo(() => {
+    let _pageMap = pageMap
+    // filter hiddenDirectories
+    if (_config.hiddenDirectories) {
+      const hiddenDirectories = Array.isArray(_config.hiddenDirectories) ? _config.hiddenDirectories : [_config.hiddenDirectories]
+      _pageMap = _pageMap.filter((item) => {
+        return !hiddenDirectories.includes(item.name)
+      })
+    }
+    // custom filter function
+    if (typeof _config.filterPage === 'function') {
+      _pageMap = _config.filterPage(_pageMap)
+    }
+    return cleanupAndReorder(_pageMap, locale, defaultLocale)
+  }, [_config, pageMap, locale, defaultLocale])
   const flatDirectories = useMemo(() => flatten(directories), [directories])
   const config = Object.assign({}, defaultConfig, _config)
 
@@ -205,7 +219,7 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
     () => flatDirectories.findIndex(dir => dir.route === fsPath),
     [flatDirectories, fsPath]
   )
-  
+
   const isRTL = useMemo(() => {
     if (!config.i18n) return config.direction === 'rtl' || null
     const localeConfig = config.i18n.find(l => l.locale === locale)
