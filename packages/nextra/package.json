@@ -27,7 +27,7 @@
     "strip-markdown": "^4.0.0"
   },
   "peerDependencies": {
-    "react": "^16.13.1 || ^17.0.1"
+    "react": ">=16.13.1"
   },
   "devDependencies": {
     "microbundle": "^0.12.4"

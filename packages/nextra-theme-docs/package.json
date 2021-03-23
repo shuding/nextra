@@ -38,9 +38,9 @@
     "title": "^3.4.2"
   },
   "peerDependencies": {
-    "next": "^9.5.3",
-    "react": "^16.13.1 || ^17.0.1",
-    "react-dom": "^16.13.1 || ^17.0.1"
+    "next": ">=9.5.3",
+    "react": ">=16.13.1",
+    "react-dom": ">=16.13.1"
   },
   "devDependencies": {
     "autoprefixer": "^10.0.2",
