@@ -1,4 +1,7 @@
 {
   "index": "What is Nextra",
-  "docs": "Nextra Docs"
+  "features": "Features",
+  "advanced": "Advanced",
+  "docs": "Docs Theme",
+  "blog": "Blog Theme"
 }
