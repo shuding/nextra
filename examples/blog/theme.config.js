@@ -15,5 +15,6 @@ export default {
         }
       }
     `}</style>
-  </small>
+  </small>,
+  darkMode: true
 }

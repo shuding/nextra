@@ -22,11 +22,15 @@ module.exports = {
             color: '#000',
             a: {
               color: '#3093ef'
-            },
-          },
-        },
+            }
+          }
+        }
+      },
+      colors: {
+        dark: '#111'
       }
-    },
+    }
   },
-  plugins: [require('@tailwindcss/typography')]
+  plugins: [require('@tailwindcss/typography')],
+  darkMode: 'class'
 }

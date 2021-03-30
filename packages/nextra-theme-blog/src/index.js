@@ -3,10 +3,12 @@ import ReactDOMServer from 'react-dom/server'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { ThemeProvider } from 'next-themes'
 
 import Meta from './meta'
 import Nav from './nav'
 import MDXTheme from './mdx-theme'
+import ThemeSwitch from './theme-switch'
 
 import traverse from './utils/traverse'
 import getTitle from './utils/get-title'
@@ -45,6 +47,8 @@ const Layout = ({
         {postList}
 
         {config.footer}
+        {config.darkMode ? <ThemeSwitch /> : null}
+
       </article>
     </React.Fragment>
   )
@@ -191,15 +195,17 @@ export default (opts, _config) => {
     ) : null
 
     return (
-      <Layout
-        config={config}
-        postList={postList}
-        navPages={navPages}
-        back={back}
-        title={title}
-        {...opts}
-        {...props}
-      />
+      <ThemeProvider attribute="class">
+        <Layout
+          config={config}
+          postList={postList}
+          navPages={navPages}
+          back={back}
+          title={title}
+          {...opts}
+          {...props}
+        />
+      </ThemeProvider>
     )
   }
 }
