@@ -1,0 +1,47 @@
+# Get Started
+
+### Configurations
+
+1. Install Next.js and React: `yarn add next react react-dom`
+
+2. Install Nextra and the blog theme: `yarn add nextra nextra-theme-blog`
+
+3. Create the following Next.js config and theme config under the root directory:
+
+```jsx
+// next.config.js
+const withNextra = require('nextra')('nextra-theme-blog', './theme.config.js')
+module.exports = withNextra()
+```
+
+```jsx
+// theme.config.js
+export default {
+  footer: <p>MIT 2020 © Shu Ding.</p>,
+  head: <>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Nextra: the next blog builder" />
+    <meta name="og:title" content="Nextra: the next blog builder" />
+  </>
+}
+```
+
+4. Create `pages/_app.js` and include the theme stylesheet:
+
+```jsx
+import 'nextra-theme-blog/style.css'
+
+export default function Nextra({ Component, pageProps }) {
+  return <Component {...pageProps} />
+}
+```
+
+5. You are good to go! 
+
+---
+
+import Callout from 'nextra-theme-docs/callout'
+
+<Callout>
+You can also use [`<style jsx>`](https://nextjs.org/docs/basic-features/built-in-css-support#css-in-js) to style elements inside `theme.config.js`.
+</Callout>
