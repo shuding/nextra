@@ -88,6 +88,8 @@ export async function buildStorkIndex (storkPath, locales) {
   for (const locale of locales) {
     const tomlFile = path.join(assetDir, `index-${locale}.toml`)
     let toml = await fs.readFile(tomlFile, 'utf-8')
+    const index = toml.indexOf("[output]")
+    if(index < 0) return
     toml += '[output]\n'
     toml += `filename = "${path.join(assetDir, `index-${locale}.st`)}"\n`
     toml += `excerpts_per_result = 1\n`
