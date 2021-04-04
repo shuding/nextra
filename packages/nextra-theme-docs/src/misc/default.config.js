@@ -10,6 +10,7 @@ export default {
   prevLinks: true,
   search: true,
   darkMode: true,
+  collapsed: false,
   font: true,
   footer: true,
   footerText: 'MIT 2020 © Nextra.',
