@@ -71,14 +71,16 @@ export default (...args) => (nextConfig = {}) => {
         })
 
         if (!config.plugins) config.plugins = []
-        config.plugins.push({
-          apply: (compiler) => {
-            compiler.hooks.done.tap('buildStorkIndex', () => {
-              buildStorkIndex(STORK_PATH, locales)
-            });
-          }
-        })
-
+        if(nextraConfig.stork) {
+          config.plugins.push({
+            apply: (compiler) => {
+              compiler.hooks.done.tap('buildStorkIndex', () => {
+                buildStorkIndex(STORK_PATH, locales)
+              });
+            }
+          })
+        }
+        
         if (typeof nextConfig.webpack === 'function') {
           return nextConfig.webpack(config, options)
         }
