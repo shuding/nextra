@@ -46,8 +46,8 @@ function Folder({ item, anchors }) {
   const { asPath, locale } = useRouter()
   const route = getFSRoute(asPath, locale) + '/'
   const active = route === item.route + '/'
-  const { collapsed } = useContext(MenuContext)
-  const open = TreeState[item.route] ?? !collapsed
+  const { defaultMenuCollapsed } = useContext(MenuContext)
+  const open = TreeState[item.route] ?? !defaultMenuCollapsed
   const [_, render] = useState(false)
 
   useEffect(() => {
@@ -285,7 +285,9 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
         </nav>
         <ActiveAnchor>
           <div className="flex flex-1 h-full">
-            <MenuContext.Provider value={{ setMenu, collapsed: !!config.collapsed }}>
+            <MenuContext.Provider value={{
+              setMenu, defaultMenuCollapsed: !!config.defaultMenuCollapsed
+            }}>
               <Sidebar show={menu} anchors={anchors} directories={directories} /> 
             </MenuContext.Provider>
             <SkipNavContent />
