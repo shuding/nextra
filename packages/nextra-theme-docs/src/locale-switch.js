@@ -38,19 +38,21 @@ export default function LocaleSwitch({ options, isRTL }) {
           )}
         >
           {options.map(l => (
-            <Link key={l.locale} href={asPath} locale={l.locale}>
-              <a
-                className={cn(
-                  'block no-underline text-current py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-800 whitespace-nowrap',
-                  {
-                    'font-semibold': locale === l.locale,
-                    'bg-gray-100 dark:bg-gray-900': locale === l.locale
-                  }
-                )}
-              >
-                {l.text}
-              </a>
-            </Link>
+            <li key={l.locale}>
+              <Link href={asPath} locale={l.locale}>
+                <a
+                  className={cn(
+                    'block no-underline text-current py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-800 whitespace-nowrap',
+                    {
+                      'font-semibold': locale === l.locale,
+                      'bg-gray-100 dark:bg-gray-900': locale === l.locale
+                    }
+                  )}
+                >
+                  {l.text}
+                </a>
+              </Link>
+            </li>
           ))}
         </ul> :
         null

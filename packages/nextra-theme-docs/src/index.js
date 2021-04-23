@@ -112,18 +112,19 @@ function File({ item, anchors }) {
               const isActive = i === activeIndex
 
               return (
-                <a
-                  href={'#' + slug}
-                  key={`a-${slug}`}
-                  onClick={() => setMenu(false)}
-                  className={isActive ? 'active-anchor' : ''}
-                >
-                  <span className="flex text-sm">
-                    <span className="opacity-25">#</span>
-                    <span className="mr-2"></span>
-                    <span className="inline-block">{text}</span>
-                  </span>
-                </a>
+                <li key={`a-${slug}`}>
+                  <a
+                    href={'#' + slug}
+                    onClick={() => setMenu(false)}
+                    className={isActive ? 'active-anchor' : ''}
+                  >
+                    <span className="flex text-sm">
+                      <span className="opacity-25">#</span>
+                      <span className="mr-2"></span>
+                      <span className="inline-block">{text}</span>
+                    </span>
+                  </a>
+                </li>
               )
             })}
           </ul>
