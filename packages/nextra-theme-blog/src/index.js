@@ -45,10 +45,10 @@ const Layout = ({
         <MDXTheme>
           {contentNodes}
           {type === 'post' ? config.postFooter : null}
+          {type === 'post' ? comments : null}
         </MDXTheme>
         {postList}
 
-        {comments}
         {config.footer}
       </article>
     </React.Fragment>
@@ -157,6 +157,9 @@ export default (opts, _config) => {
       } else {
         comments = (
           <ReactCusdis
+            style={{
+              marginTop: '4rem'
+            }}
             attrs={{
               host: config.cusdis.host || 'https://cusdis.com',
               appId: config.cusdis.appId,

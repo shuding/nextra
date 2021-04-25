@@ -2363,6 +2363,11 @@ csso@^4.0.2:
   dependencies:
     css-tree "^1.0.0"
 
+cusdis@^1.0.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/cusdis/-/cusdis-1.1.0.tgz#74c81d8b8735869744d77507b057dd47f04e3bc2"
+  integrity sha512-0K+NC3XAiJ6QbxuwFlPRM2s0rIdYpgLzgRmLTca0YC/digPVxX+3X24KJfamuQQsOuJXj5pFuZLQ6Fp2Kg6TJw==
+
 data-uri-to-buffer@3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/data-uri-to-buffer/-/data-uri-to-buffer-3.0.1.tgz#594b8973938c5bc2c33046535785341abc4f3636"
@@ -5377,6 +5382,13 @@ raw-body@2.4.1:
     http-errors "1.7.3"
     iconv-lite "0.4.24"
     unpipe "1.0.0"
+
+react-cusdis@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-cusdis/-/react-cusdis-1.0.1.tgz#12979ba8a2ab10aee42b68ae563f03fe2001a1c5"
+  integrity sha512-2BrqH2oKKnvyEse07lhcy/BKpXprvceOiWGuD7z/+ew/MOEAeXXayVAIuPqCS0vifZFrsQY5HuvdwoDgvhbHJQ==
+  dependencies:
+    cusdis "^1.0.0"
 
 react-dom@17:
   version "17.0.1"
