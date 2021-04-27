@@ -22,6 +22,9 @@ const Item = ({ title, active, href, onMouseOver, search }) => {
   )
 }
 
+const UP = true
+const DOWN = false
+
 const Search = ({ directories }) => {
   const router = useRouter()
   const [show, setShow] = useState(false)
@@ -38,27 +41,32 @@ const Search = ({ directories }) => {
     return matchSorter(directories, search, { keys: ['title'] })
   }, [search])
 
+  const moveActiveItem = up => {
+    const position = active + (up ? -1 : 1)
+    const { length } = results
+
+    // Modulo instead of remainder,
+    // see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Remainder
+    const next = ((position % length) + length) % length
+    setActive(next)
+  }
+
   const handleKeyDown = useCallback(
     e => {
-      switch (e.key) {
-        case 'ArrowDown': {
-          e.preventDefault()
-          if (active + 1 < results.length) {
-            setActive(active + 1)
-          }
-          break
-        }
-        case 'ArrowUp': {
-          e.preventDefault()
-          if (active - 1 >= 0) {
-            setActive(active - 1)
-          }
-          break
-        }
-        case 'Enter': {
-          router.push(results[active].route)
-          break
-        }
+      const { key, ctrlKey } = e
+
+      if ((ctrlKey && key === 'n') || key === 'ArrowDown') {
+        e.preventDefault()
+        moveActiveItem(DOWN)
+      }
+
+      if ((ctrlKey && key === 'p') || key === 'ArrowUp') {
+        e.preventDefault()
+        moveActiveItem(UP)
+      }
+
+      if (key === 'Enter') {
+        router.push(results[active].route)
       }
     },
     [active, results, router]
