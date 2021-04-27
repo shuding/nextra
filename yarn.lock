@@ -5378,10 +5378,10 @@ raw-body@2.4.1:
     iconv-lite "0.4.24"
     unpipe "1.0.0"
 
-react-cusdis@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/react-cusdis/-/react-cusdis-2.0.0.tgz#81f6dc0efc1fc84d924c206281e45a305aec9c5d"
-  integrity sha512-kvy+hvjtxyQZcAQ7TzpihXYRTXmEtZMSUO9fFYu9tdd2FZI8/fgLRyIEKvsQqKVXqJV3ntfCG1KGPgLd7IAU6w==
+react-cusdis@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/react-cusdis/-/react-cusdis-2.0.1.tgz#88d8a8e88be9c8a80b33974d151311c3378acc7a"
+  integrity sha512-8oWF5GdsKUx+l9A58GkYJc6yiYNiF7vw9cZHGLcX0z2MyznwLXizBgPfIFvVV7kdsapdjeium/Ox1J3rR+ZQnw==
 
 react-dom@17:
   version "17.0.1"

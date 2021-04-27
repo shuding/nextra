@@ -161,6 +161,7 @@ export default (opts, _config) => {
       } else {
         comments = (
           <ReactCusdis
+            lang={config.cusdis.lang}
             style={{
               marginTop: '4rem'
             }}
