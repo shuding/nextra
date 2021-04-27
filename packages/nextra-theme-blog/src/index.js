@@ -3,6 +3,7 @@ import ReactDOMServer from 'react-dom/server'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import dynamic from 'next/dynamic'
 
 import Meta from './meta'
 import Nav from './nav'
@@ -14,7 +15,10 @@ import getTags from './utils/get-tags'
 import sortDate from './utils/sort-date'
 
 // comments
-import { ReactCusdis } from 'react-cusdis'
+const ReactCusdis = dynamic(
+  () => import('react-cusdis').then(mod => mod.ReactCusdis),
+  { ssr: false }
+)
 
 const Layout = ({
   config,
