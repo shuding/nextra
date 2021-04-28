@@ -47,7 +47,7 @@ const Search = ({ directories }) => {
 
     // Modulo instead of remainder,
     // see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Remainder
-    const next = ((position % length) + length) % length
+    const next = (position + length) % length
     setActive(next)
   }
 
