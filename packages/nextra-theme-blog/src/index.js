@@ -3,6 +3,7 @@ import ReactDOMServer from 'react-dom/server'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import dynamic from 'next/dynamic'
 
 import Meta from './meta'
 import Nav from './nav'
@@ -13,6 +14,12 @@ import getTitle from './utils/get-title'
 import getTags from './utils/get-tags'
 import sortDate from './utils/sort-date'
 
+// comments
+const ReactCusdis = dynamic(
+  () => import('react-cusdis').then(mod => mod.ReactCusdis),
+  { ssr: false }
+)
+
 const Layout = ({
   config,
   meta,
@@ -20,6 +27,7 @@ const Layout = ({
   postList,
   back,
   title,
+  comments,
   children
 }) => {
   const [titleNode, contentNodes] = getTitle(children)
@@ -41,6 +49,7 @@ const Layout = ({
         <MDXTheme>
           {contentNodes}
           {type === 'post' ? config.postFooter : null}
+          {type === 'post' ? comments : null}
         </MDXTheme>
         {postList}
 
@@ -144,6 +153,29 @@ export default (opts, _config) => {
         : null) ||
       ''
 
+    let comments
+
+    if (config.cusdis) {
+      if (!config.cusdis.appId) {
+        console.warn('[cusdis]', '`appId` is required')
+      } else {
+        comments = (
+          <ReactCusdis
+            lang={config.cusdis.lang}
+            style={{
+              marginTop: '4rem'
+            }}
+            attrs={{
+              host: config.cusdis.host || 'https://cusdis.com',
+              appId: config.cusdis.appId,
+              pageId: router.pathname,
+              pageTitle: title
+            }}
+          />
+        )
+      }
+    }
+
     const postList = posts ? (
       <ul>
         {posts.map(post => {
@@ -197,6 +229,7 @@ export default (opts, _config) => {
         navPages={navPages}
         back={back}
         title={title}
+        comments={comments}
         {...opts}
         {...props}
       />
