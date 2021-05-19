@@ -13,7 +13,7 @@ export default {
   defaultMenuCollapsed: false,
   font: true,
   footer: true,
-  footerText: 'MIT 2020 © Nextra.',
+  footerText: `MIT ${new Date().getFullYear()} © Nextra.`,
   footerEditOnGitHubLink: true,
   logo: (
     <React.Fragment>
