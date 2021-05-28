@@ -44,8 +44,8 @@ const getFSRoute = (asPath, locale) => {
 
 function Folder({ item, anchors }) {
   const { asPath, locale } = useRouter()
-  const routeOriginal = getFSRoute(asPath, locale) + '/'
-	const route = routeOriginal.split('#')[0] + '/';
+  const routeOriginal = getFSRoute(asPath, locale)
+	const route = routeOriginal.split('#')[0] + '/'
   const active = route === item.route + '/'
   const { defaultMenuCollapsed } = useContext(MenuContext)
   const open = TreeState[item.route] ?? !defaultMenuCollapsed
