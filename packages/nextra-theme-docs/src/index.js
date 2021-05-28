@@ -177,7 +177,7 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
   const [menu, setMenu] = useState(false)
   const router = useRouter()
   const { route, asPath, locale, defaultLocale } = router
-  const fsPath = getFSRoute(asPath, locale)
+  const fsPath = getFSRoute(asPath, locale).split('#')[0]
 
   const directories = useMemo(() => cleanupAndReorder(pageMap, locale, defaultLocale), [pageMap, locale, defaultLocale])
   const flatDirectories = useMemo(() => flatten(directories), [directories])
