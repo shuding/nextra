@@ -44,7 +44,8 @@ const getFSRoute = (asPath, locale) => {
 
 function Folder({ item, anchors }) {
   const { asPath, locale } = useRouter()
-  const route = getFSRoute(asPath, locale) + '/'
+  const routeOriginal = getFSRoute(asPath, locale)
+	const route = routeOriginal.split('#')[0] + '/'
   const active = route === item.route + '/'
   const { defaultMenuCollapsed } = useContext(MenuContext)
   const open = TreeState[item.route] ?? !defaultMenuCollapsed
@@ -177,7 +178,7 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
   const [menu, setMenu] = useState(false)
   const router = useRouter()
   const { route, asPath, locale, defaultLocale } = router
-  const fsPath = getFSRoute(asPath, locale)
+  const fsPath = getFSRoute(asPath, locale).split('#')[0]
 
   const directories = useMemo(() => cleanupAndReorder(pageMap, locale, defaultLocale), [pageMap, locale, defaultLocale])
   const flatDirectories = useMemo(() => flatten(directories), [directories])
