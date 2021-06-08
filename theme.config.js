@@ -18,7 +18,7 @@ export default {
       <meta name="description" content="Nextra: the Next.js site builder" />
       <meta name="og:description" content="Nextra: the Next.js site builder" />
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:image" content="https://nextra.vercel.app/og.png" />
+      <meta name="twitter:image" content="https://github.com/shuding/nextra/raw/master/public/demo.png" />
       <meta name="twitter:site:domain" content="nextra.vercel.app" />
       <meta name="twitter:url" content="https://nextra.vercel.app" />
       <meta name="og:title" content="Nextra: Next.js static site generator" />
