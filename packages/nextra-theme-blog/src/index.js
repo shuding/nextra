@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 
+import { ThemeProvider } from 'next-themes'
 import Meta from './meta'
 import Nav from './nav'
 import MDXTheme from './mdx-theme'
@@ -223,6 +224,7 @@ export default (opts, _config) => {
     ) : null
 
     return (
+      <ThemeProvider attribute='class'>
       <Layout
         config={config}
         postList={postList}
@@ -233,6 +235,7 @@ export default (opts, _config) => {
         {...opts}
         {...props}
       />
+      </ThemeProvider>
     )
   }
 }
