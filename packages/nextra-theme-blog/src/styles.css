@@ -3,7 +3,11 @@
 @tailwind utilities;
 
 body {
-  @apply px-4;
+  @apply px-4 bg-white;
+}
+
+.dark body {
+  @apply bg-dark text-gray-100;
 }
 
 article {
