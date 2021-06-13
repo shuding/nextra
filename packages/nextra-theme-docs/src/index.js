@@ -324,24 +324,14 @@ const LayoutMain = ({ filename, config: _config, pageMap, meta, children }) => {
   )
 }
 
-const LayoutTranscluded = ({ filename, config: _config, pageMap, meta, children }) => {
+
+// const LayoutMain = ({ filename, config: _config, pageMap, meta, children }) => {
+const LayoutTranscluded = ({ children }) => {
+
   const [menu, setMenu] = useState(false)
-  const router = useRouter()
-  const { route, asPath, locale, defaultLocale } = router
-  const fsPath = getFSRoute(asPath, locale).split('#')[0]
-
-  const directories = useMemo(() => cleanupAndReorder(pageMap, locale, defaultLocale), [pageMap, locale, defaultLocale])
-  const flatDirectories = useMemo(() => flatten(directories), [directories])
-  const config = Object.assign({}, defaultConfig, _config)
-
-  const filepath = route.slice(0, route.lastIndexOf('/') + 1)
-  const filepathWithName = filepath + filename
   const titles = React.Children.toArray(children).filter(child =>
     titleType.includes(child.props.mdxType)
   )
-  const titleEl = titles.find(child => child.props.mdxType === 'h1')
-  const title =
-    meta.title || (titleEl ? innerText(titleEl.props.children) : 'Untitled')
   const anchors = titles
     .filter(child => child.props.mdxType === 'h2')
     .map(child => child.props.children)
@@ -357,17 +347,6 @@ const LayoutTranscluded = ({ filename, config: _config, pageMap, meta, children 
       document.body.classList.remove('overflow-hidden')
     }
   }, [menu])
-
-  const currentIndex = useMemo(
-    () => flatDirectories.findIndex(dir => dir.route === fsPath),
-    [flatDirectories, fsPath]
-  )
-  
-  const isRTL = useMemo(() => {
-    if (!config.i18n) return config.direction === 'rtl' || null
-    const localeConfig = config.i18n.find(l => l.locale === locale)
-    return localeConfig && localeConfig.direction === 'rtl'
-  }, [config.i18n, locale])
 
   return <Theme>{children}</Theme>
 }
