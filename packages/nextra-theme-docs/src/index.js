@@ -377,11 +377,9 @@ var isMain = true;
 export default (opts, config) => props => {
 	var LayoutOutput;
 	if (isMain) {
-		console.log("this is the main one");
 		isMain = false;
 		LayoutOutput = LayoutMain;
 	} else {
-		console.log("this is the transcluded one");
 		LayoutOutput = LayoutTranscluded;
 	}
   return (
