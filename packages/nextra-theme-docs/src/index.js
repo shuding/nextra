@@ -30,6 +30,8 @@ import Theme from './misc/theme'
 import { ActiveAnchor, useActiveAnchor } from './misc/active-anchor'
 import defaultConfig from './misc/default.config'
 
+var AllSideBarAnchors = [];
+
 const TreeState = new Map()
 const titleType = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
 const MenuContext = createContext(false)
@@ -174,7 +176,7 @@ function Sidebar({ show, directories, anchors }) {
   )
 }
 
-const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
+const LayoutMain = ({ filename, config: _config, pageMap, meta, children }) => {
   const [menu, setMenu] = useState(false)
   const router = useRouter()
   const { route, asPath, locale, defaultLocale } = router
@@ -195,6 +197,10 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
   const anchors = titles
     .filter(child => child.props.mdxType === 'h2')
     .map(child => child.props.children)
+
+	anchors.forEach(function( item ) {
+		AllSideBarAnchors.push(item)
+	})
 
   useEffect(() => {
     if (menu) {
@@ -290,7 +296,7 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
             <MenuContext.Provider value={{
               setMenu, defaultMenuCollapsed: !!config.defaultMenuCollapsed
             }}>
-              <Sidebar show={menu} anchors={anchors} directories={directories} /> 
+              <Sidebar show={menu} anchors={AllSideBarAnchors} directories={directories} /> 
             </MenuContext.Provider>
             <SkipNavContent />
             {meta.full ? (
@@ -318,10 +324,69 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
   )
 }
 
+const LayoutTranscluded = ({ filename, config: _config, pageMap, meta, children }) => {
+  const [menu, setMenu] = useState(false)
+  const router = useRouter()
+  const { route, asPath, locale, defaultLocale } = router
+  const fsPath = getFSRoute(asPath, locale).split('#')[0]
+
+  const directories = useMemo(() => cleanupAndReorder(pageMap, locale, defaultLocale), [pageMap, locale, defaultLocale])
+  const flatDirectories = useMemo(() => flatten(directories), [directories])
+  const config = Object.assign({}, defaultConfig, _config)
+
+  const filepath = route.slice(0, route.lastIndexOf('/') + 1)
+  const filepathWithName = filepath + filename
+  const titles = React.Children.toArray(children).filter(child =>
+    titleType.includes(child.props.mdxType)
+  )
+  const titleEl = titles.find(child => child.props.mdxType === 'h1')
+  const title =
+    meta.title || (titleEl ? innerText(titleEl.props.children) : 'Untitled')
+  const anchors = titles
+    .filter(child => child.props.mdxType === 'h2')
+    .map(child => child.props.children)
+
+	anchors.forEach(function( item ) {
+		AllSideBarAnchors.push(item)
+	})
+
+  useEffect(() => {
+    if (menu) {
+      document.body.classList.add('overflow-hidden')
+    } else {
+      document.body.classList.remove('overflow-hidden')
+    }
+  }, [menu])
+
+  const currentIndex = useMemo(
+    () => flatDirectories.findIndex(dir => dir.route === fsPath),
+    [flatDirectories, fsPath]
+  )
+  
+  const isRTL = useMemo(() => {
+    if (!config.i18n) return config.direction === 'rtl' || null
+    const localeConfig = config.i18n.find(l => l.locale === locale)
+    return localeConfig && localeConfig.direction === 'rtl'
+  }, [config.i18n, locale])
+
+  return <Theme>{children}</Theme>
+}
+
+var isMain = true;
+
 export default (opts, config) => props => {
+	var LayoutOutput;
+	if (isMain) {
+		console.log("this is the main one");
+		isMain = false;
+		LayoutOutput = LayoutMain;
+	} else {
+		console.log("this is the transcluded one");
+		LayoutOutput = LayoutTranscluded;
+	}
   return (
     <ThemeProvider attribute="class">
-      <Layout config={config} {...opts} {...props} />
+      <LayoutOutput config={config} {...opts} {...props} />
     </ThemeProvider>
   )
 }
