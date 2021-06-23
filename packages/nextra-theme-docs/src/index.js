@@ -35,17 +35,17 @@ const titleType = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
 const MenuContext = createContext(false)
 
 const getFSRoute = (asPath, locale) => {
-  if (!locale) return asPath.replace(new RegExp('\/index(\/|$)'), '$1')
+  if (!locale) return asPath.replace(new RegExp('/index(/|$)'), '$1')
 
   return asPath
     .replace(new RegExp(`\.${locale}(\/|$)`), '$1')
-    .replace(new RegExp('\/index(\/|$)'), '$1')
+    .replace(new RegExp('/index(/|$)'), '$1')
 }
 
 function Folder({ item, anchors }) {
   const { asPath, locale } = useRouter()
   const routeOriginal = getFSRoute(asPath, locale)
-	const route = routeOriginal.split('#')[0] + '/'
+  const route = routeOriginal.split('#')[0] + '/'
   const active = route === item.route + '/'
   const { defaultMenuCollapsed } = useContext(MenuContext)
   const open = TreeState[item.route] ?? !defaultMenuCollapsed
@@ -180,20 +180,25 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
   const { route, asPath, locale, defaultLocale } = router
   const fsPath = getFSRoute(asPath, locale).split('#')[0]
 
-  const directories = useMemo(() => cleanupAndReorder(pageMap, locale, defaultLocale), [pageMap, locale, defaultLocale])
+  const directories = useMemo(
+    () => cleanupAndReorder(pageMap, locale, defaultLocale),
+    [pageMap, locale, defaultLocale]
+  )
   const flatDirectories = useMemo(() => flatten(directories), [directories])
   const config = Object.assign({}, defaultConfig, _config)
 
   const filepath = route.slice(0, route.lastIndexOf('/') + 1)
   const filepathWithName = filepath + filename
-  const titles = React.Children.toArray(children).filter(child =>
-    titleType.includes(child.props.mdxType)
+  const titles = React.Children.toArray(children).filter(
+    child => child.props && titleType.includes(child.props.mdxType)
   )
-  const titleEl = titles.find(child => child.props.mdxType === 'h1')
+  const titleEl = titles.find(
+    child => child.props && child.props.mdxType === 'h1'
+  )
   const title =
     meta.title || (titleEl ? innerText(titleEl.props.children) : 'Untitled')
   const anchors = titles
-    .filter(child => child.props.mdxType === 'h2')
+    .filter(child => child.props && child.props.mdxType === 'h2')
     .map(child => child.props.children)
 
   useEffect(() => {
@@ -208,7 +213,7 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
     () => flatDirectories.findIndex(dir => dir.route === fsPath),
     [flatDirectories, fsPath]
   )
-  
+
   const isRTL = useMemo(() => {
     if (!config.i18n) return config.direction === 'rtl' || null
     const localeConfig = config.i18n.find(l => l.locale === locale)
@@ -218,12 +223,20 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
   return (
     <React.Fragment>
       <Head>
-        {config.font ? <link rel="stylesheet" href="https://rsms.me/inter/inter.css" /> : null}
+        {config.font ? (
+          <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+        ) : null}
         <title>
           {title}
           {renderComponent(config.titleSuffix, { locale })}
         </title>
-        {config.font ? <style dangerouslySetInnerHTML={{__html: `html{font-family:Inter,sans-serif}@supports(font-variation-settings:normal){html{font-family:'Inter var',sans-serif}}`}}/> : null}
+        {config.font ? (
+          <style
+            dangerouslySetInnerHTML={{
+              __html: `html{font-family:Inter,sans-serif}@supports(font-variation-settings:normal){html{font-family:'Inter var',sans-serif}}`
+            }}
+          />
+        ) : null}
         {renderComponent(config.head, { locale })}
       </Head>
       <div
@@ -241,9 +254,13 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
           </div>
 
           {config.customSearch ||
-            (config.search ?
-              (config.UNSTABLE_stork ? <StorkSearch /> : <Search directories={flatDirectories} />) :
-              null)}
+            (config.search ? (
+              config.UNSTABLE_stork ? (
+                <StorkSearch />
+              ) : (
+                <Search directories={flatDirectories} />
+              )
+            ) : null)}
 
           <div className="mr-2" />
 
@@ -287,10 +304,17 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
         </nav>
         <ActiveAnchor>
           <div className="flex flex-1 h-full">
-            <MenuContext.Provider value={{
-              setMenu, defaultMenuCollapsed: !!config.defaultMenuCollapsed
-            }}>
-              <Sidebar show={menu} anchors={anchors} directories={directories} /> 
+            <MenuContext.Provider
+              value={{
+                setMenu,
+                defaultMenuCollapsed: !!config.defaultMenuCollapsed
+              }}
+            >
+              <Sidebar
+                show={menu}
+                anchors={anchors}
+                directories={directories}
+              />
             </MenuContext.Provider>
             <SkipNavContent />
             {meta.full ? (
