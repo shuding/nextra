@@ -1,4 +1,5 @@
 module.exports = {
+  mode: 'jit',
   purge: ['./src/**/*.js', './src/**/*.css'],
   theme: {
     screens: {

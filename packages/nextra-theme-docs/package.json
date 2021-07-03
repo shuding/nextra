@@ -20,7 +20,7 @@
     "build:tailwind": "NODE_ENV=production yarn postcss src/styles.css -o style.css --verbose",
     "build:layout": "NODE_ENV=production microbundle src/*.js -f cjs -o dist --no-sourcemap --jsx React.createElement --target node",
     "dev:layout": "microbundle watch src/*.js -f cjs -o dist --no-sourcemap --jsx React.createElement --target node",
-    "dev:tailwind": "yarn postcss src/styles.css -o style.css -w --verbose"
+    "dev:tailwind": "TAILWIND_MODE=watch yarn postcss src/styles.css -o style.css -w --verbose"
   },
   "dependencies": {
     "@mdx-js/react": "^1.6.16",
@@ -48,6 +48,6 @@
     "microbundle": "^0.12.4",
     "postcss": "^8.2.1",
     "postcss-cli": "^8.3.0",
-    "tailwindcss": "^2.0.1"
+    "tailwindcss": "^2.2.4"
   }
 }
