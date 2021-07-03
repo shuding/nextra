@@ -1,5 +1,4 @@
 import remark from 'remark'
-import sluga from 'sluga'
 
 // Part of this script comes from the remark-embed-images project.
 // https://github.com/remarkjs/remark-embed-images
@@ -15,7 +14,10 @@ function transformStaticNextImage() {
   }
 
   return function transformer(tree, file, done) {
+    const importsToInject = []
+
     visit(tree, 'image', visitor)
+    tree.children.unshift(...importsToInject)
     done()
 
     function visitor(node) {
@@ -23,16 +25,16 @@ function transformStaticNextImage() {
 
       if (url && relative.test(url)) {
         // Unique variable name for the given static image URL.
-        const tempVariableName = `nextra_image_${sluga(url).replace(/-/g, '_')}`
+        const tempVariableName = `$nextraImage${importsToInject.length}`
 
         // Replace the image node with a MDX component node, which is the Next.js image.
         node.type = 'html'
-        node.value = `<NextImage_nextra src={${tempVariableName}} alt="${
+        node.value = `<$NextImageNextra src={${tempVariableName}} alt="${
           node.alt || ''
         }" placeholder="blur" />`
 
         // Inject the static image import into the root node.
-        tree.children.unshift({
+        importsToInject.push({
           type: 'paragraph',
           children: [
             {
@@ -51,8 +53,9 @@ export function transformStaticImage(source) {
     remark()
       .use(transformStaticNextImage)
       .process(
-        'import NextImage_nextra from "next/image"\n' + source,
+        'import $NextImageNextra from "next/image"\n' + source,
         (err, file) => {
+          // console.log(file)
           if (err) return reject(err)
           return resolve(String(file))
         }

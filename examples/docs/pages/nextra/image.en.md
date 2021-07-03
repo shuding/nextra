@@ -17,4 +17,4 @@ Example:
 
 <br/>
 
-![Powered by Next.js Image](../../public/img.jpeg)
+![An image](../../public/img.jpeg)
