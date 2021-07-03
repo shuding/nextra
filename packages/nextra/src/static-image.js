@@ -1,8 +1,10 @@
 import remark from 'remark'
+import remarkGfm from 'remark-gfm'
 
 // Part of this script comes from the remark-embed-images project.
 // https://github.com/remarkjs/remark-embed-images
-let relative = /^\.{1,2}\//
+const relative = /^\.{1,2}\//
+
 function transformStaticNextImage() {
   function visit(node, type, handler) {
     if (node.type === type) {
@@ -18,6 +20,15 @@ function transformStaticNextImage() {
 
     visit(tree, 'image', visitor)
     tree.children.unshift(...importsToInject)
+    tree.children.unshift({
+      type: 'paragraph',
+      children: [
+        {
+          type: 'text',
+          value: 'import $NextImageNextra from "next/image"'
+        }
+      ]
+    })
     done()
 
     function visitor(node) {
@@ -51,13 +62,11 @@ function transformStaticNextImage() {
 export function transformStaticImage(source) {
   return new Promise((resolve, reject) => {
     remark()
+      .use(remarkGfm)
       .use(transformStaticNextImage)
-      .process(
-        'import $NextImageNextra from "next/image"\n' + source,
-        (err, file) => {
-          if (err) return reject(err)
-          return resolve(String(file))
-        }
-      )
+      .process(source, (err, file) => {
+        if (err) return reject(err)
+        return resolve(String(file))
+      })
   })
 }

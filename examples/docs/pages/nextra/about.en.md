@@ -84,6 +84,4 @@ Task list
 - [ ] Update the website
 - [ ] Contact the media
 
----
-
 Click the "Edit on GitHub" link below to see the code.
