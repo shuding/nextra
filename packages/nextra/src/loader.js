@@ -311,6 +311,5 @@ ${layoutConfig ? `import layoutConfig from '${layoutConfig}'` : ''}
 
   // Add imports and exports to the source
   source = prefix + '\n' + source + '\n' + suffix
-
   return callback(null, source)
 }
