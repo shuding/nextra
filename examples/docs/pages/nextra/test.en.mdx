@@ -15,9 +15,10 @@ Nam _sodales_ **consectetur** velit, quis fermentum ipsum molestie sed. Nam frin
 - ante eu lobortis commodo
 - diam lacus consequat diam
 
-> Vestibulum suscipit scelerisque enim placerat lobortis. 
+> Vestibulum suscipit scelerisque enim placerat lobortis.
 
-Phasellus condimentum in ligula eu mollis. Praesent faucibus iaculis nibh sit amet cursus. 
+Phasellus condimentum in ligula eu mollis. Praesent faucibus iaculis nibh sit amet cursus.
+
 </Callout>
 
 Dvel elementum purus tortor eget diam. Maecenas ac orci neque. Aenean congue nulla nec pharetra interdum. Nullam a dolor id massa semper mattis. Etiam eget bibendum dui. Curabitur justo sem, congue nec placerat at, imperdiet at elit. Donec at sapien id massa mattis rhoncus. Pellentesque ut porta mauris. Phasellus fermentum urna mollis magna feugiat condimentum quis quis mauris.
@@ -33,46 +34,33 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris luctus dolor lig
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris luctus dolor ligula, at congue arcu condimentum sit amet. Maecenas dapibus feugiat semper. Aenean eget urna metus. Pellentesque laoreet, sapien eu consectetur tristique, lectus purus porttitor lacus, in imperdiet metus dolor et elit. Mauris scelerisque euismod nibh. Vestibulum et tristique velit. Fusce feugiat nulla eu velit porttitor, vitae semper sem pellentesque. Vestibulum interdum ligula commodo, imperdiet eros facilisis, luctus mauris. Integer sapien velit, facilisis et justo vitae, malesuada consequat orci. Maecenas eu libero vestibulum, interdum lectus accumsan, egestas elit.
 
 import Bleed from 'nextra-theme-docs/bleed'
-
-{/* <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe> */}
   
 Bleed:
 
-<Bleed>
-![](https://nextra.vercel.app/og.png)
-</Bleed>
+<Bleed>![](https://nextra.vercel.app/og.png)</Bleed>
 
 Full bleed:
 
 <Bleed full>
   <div style={{ background: 'rgba(123, 123, 123, 14%)', padding: '2.5rem 0' }}>
-    <div className="marquee">
-      _There is nothing to writing. All you do is sit down at a typewriter and **bleed**._ — Ernest Hemingway
-    </div>
-    <style jsx>{`
-      /* Here it shows how you can mix CSS, React and Markdown! */
-      .marquee {
-        width: fit-content;
-        text-align: center;
-        white-space: nowrap;
-        animation: marquee 20s linear -3s infinite;
-      }
-      @keyframes marquee {
-        0% {
-          transform: translate3d(100%, 0, 0);
-        }
-        100% {
-          transform: translate3d(-100%, 0, 0);
-        }
-      }
-    `}</style>
+    <marquee scrollamount="10">
+      _There is nothing to writing. All you do is sit down at a typewriter and
+      **bleed**._ — Ernest Hemingway
+    </marquee>
   </div>
 </Bleed>
 
 With iframe:
 
 <Bleed full>
-  <iframe width="100%" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+  <iframe
+    width="100%"
+    height="315"
+    src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
 </Bleed>
 
 ## 天地玄黃／いい天気／사계절이

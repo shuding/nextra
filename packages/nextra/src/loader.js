@@ -6,7 +6,13 @@ import slash from 'slash'
 
 import filterRouteLocale from './filter-route-locale'
 import { addStorkIndex } from './stork-index'
-import { getLocaleFromFilename, removeExtension, getFileName, parseJsonFile } from './utils'
+import {
+  getLocaleFromFilename,
+  removeExtension,
+  getFileName,
+  parseJsonFile
+} from './utils'
+import { transformStaticImage } from './static-image'
 
 const extension = /\.(mdx?|jsx?|tsx?)$/
 const mdxExtension = /\.mdx?$/
@@ -46,7 +52,7 @@ async function getPageMap(currentResourcePath) {
             if (filePath === currentResourcePath) {
               activeRoute = fileRoute
             }
-  
+
             // MDX or MD
             if (mdxExtension.test(f.name)) {
               const fileContents = await fs.readFile(filePath, 'utf-8')
@@ -97,17 +103,25 @@ async function getPageMap(currentResourcePath) {
     return items
   }
 
-  return [await getFiles(path.join(process.cwd(), 'pages'), '/'), activeRoute, activeRouteTitle]
+  return [
+    await getFiles(path.join(process.cwd(), 'pages'), '/'),
+    activeRoute,
+    activeRouteTitle
+  ]
 }
 
-async function analyzeLocalizedEntries(currentResourcePath, defaultLocale) {	
-  const filename = getFileName(currentResourcePath)	
-  const dir = path.dirname(currentResourcePath)	
+async function analyzeLocalizedEntries(currentResourcePath, defaultLocale) {
+  const filename = getFileName(currentResourcePath)
+  const dir = path.dirname(currentResourcePath)
 
-  const filenameRe = new RegExp('^' + filename + '.[a-zA-Z-]+.(mdx?|jsx?|tsx?|json)$')	
-  const files = await fs.readdir(dir, { withFileTypes: true })	
-  
-  let hasSSR = false, hasSSG = false, defaultIndex = 0
+  const filenameRe = new RegExp(
+    '^' + filename + '.[a-zA-Z-]+.(mdx?|jsx?|tsx?|json)$'
+  )
+  const files = await fs.readdir(dir, { withFileTypes: true })
+
+  let hasSSR = false,
+    hasSSG = false,
+    defaultIndex = 0
   const filteredFiles = []
 
   for (let i = 0; i < files.length; i++) {
@@ -126,8 +140,8 @@ async function analyzeLocalizedEntries(currentResourcePath, defaultLocale) {
 
     if (locale === defaultLocale) defaultIndex = filteredFiles.length
 
-    filteredFiles.push({	
-      name: file.name,	
+    filteredFiles.push({
+      name: file.name,
       locale,
       ssr: exportSSR,
       ssg: exportSSG
@@ -147,7 +161,14 @@ export default async function (source) {
   this.cacheable()
 
   const options = getOptions(this)
-  const { theme, themeConfig, locales, defaultLocale } = options
+  const {
+    theme,
+    themeConfig,
+    locales,
+    defaultLocale,
+    stork,
+    unstable_staticImage
+  } = options
   const { resourcePath, resourceQuery } = this
   const filename = resourcePath.slice(resourcePath.lastIndexOf('/') + 1)
   const fileLocale = getLocaleFromFilename(filename) || 'default'
@@ -166,11 +187,18 @@ export default async function (source) {
   source = content
 
   // Add content to stork indexes
-  if (options.stork) {
+  if (stork) {
     // We only index .MD and .MDX files
     if (mdxExtension.test(filename)) {
       await addStorkIndex({
-        pageMap, filename, fileLocale, route, title, data, content, locales
+        pageMap,
+        filename,
+        fileLocale,
+        route,
+        title,
+        data,
+        content,
+        locales
       })
     }
   }
@@ -194,53 +222,64 @@ export default async function (source) {
 
   const notI18nEntry = resourceQuery.includes('nextra-raw')
 
-  if (locales && !notI18nEntry) {	
+  if (locales && !notI18nEntry) {
     // We need to handle the locale router here
-    const {
-      files,
-      defaultIndex,
-      ssr,
-      ssg
-    } = await analyzeLocalizedEntries(resourcePath, defaultLocale)
+    const { files, defaultIndex, ssr, ssg } = await analyzeLocalizedEntries(
+      resourcePath,
+      defaultLocale
+    )
 
     const i18nEntry = `	
 import { useRouter } from 'next/router'	
-${files	
-  .map((file, index) => 
-    `import Page_${index}${
-      file.ssg || file.ssr ? `, { ${file.ssg ? 'getStaticProps' : 'getServerSideProps'} as page_data_${index} }` : ''
-    } from './${file.name}?nextra-raw'`	
-  )	
+${files
+  .map(
+    (file, index) =>
+      `import Page_${index}${
+        file.ssg || file.ssr
+          ? `, { ${
+              file.ssg ? 'getStaticProps' : 'getServerSideProps'
+            } as page_data_${index} }`
+          : ''
+      } from './${file.name}?nextra-raw'`
+  )
   .join('\n')}
 
 export default function I18NPage (props) {	
   const { locale } = useRouter()	
   ${files
-    .map((file, index) => 
-      `if (locale === '${file.locale}') {
+    .map(
+      (file, index) =>
+        `if (locale === '${file.locale}') {
     return <Page_${index} {...props}/>
   } else `
-    )	
+    )
     .join('')} {	
     return <Page_${defaultIndex} {...props}/>	
   }
 }
 
-${ssg || ssr ? `export async function ${ssg ? 'getStaticProps' : 'getServerSideProps'} (context) {
+${
+  ssg || ssr
+    ? `export async function ${
+        ssg ? 'getStaticProps' : 'getServerSideProps'
+      } (context) {
   const locale = context.locale
   ${files
-    .map((file, index) => 
-      `if (locale === '${file.locale}' && ${ssg ? file.ssg : file.ssr}) {
+    .map(
+      (file, index) =>
+        `if (locale === '${file.locale}' && ${ssg ? file.ssg : file.ssr}) {
     return page_data_${index}(context)
   } else `
-    )	
+    )
     .join('')} {	
     return { props: {} }
   }
-}` : ''}
+}`
+    : ''
+}
 `
 
-    return callback(null, i18nEntry)	
+    return callback(null, i18nEntry)
   }
 
   if (locales) {
@@ -266,8 +305,11 @@ ${layoutConfig ? `import layoutConfig from '${layoutConfig}'` : ''}
     }, ${layoutConfig ? 'layoutConfig' : 'null'}))(props)
 }`
 
+  if (unstable_staticImage) {
+    source = await transformStaticImage(source)
+  }
+
   // Add imports and exports to the source
   source = prefix + '\n' + source + '\n' + suffix
-
   return callback(null, source)
 }

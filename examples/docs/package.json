@@ -10,7 +10,7 @@
     "vercel-build": "yarn workspace nextra run build && yarn workspace nextra-theme-docs run build && yarn build"
   },
   "dependencies": {
-    "next": "^10.0.8-canary.5",
+    "next": "^11.0.1",
     "prism-react-renderer": "^1.1.1",
     "prismjs": "^1.22.0",
     "react": "17",
