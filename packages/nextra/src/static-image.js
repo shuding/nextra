@@ -55,7 +55,6 @@ export function transformStaticImage(source) {
       .process(
         'import $NextImageNextra from "next/image"\n' + source,
         (err, file) => {
-          // console.log(file)
           if (err) return reject(err)
           return resolve(String(file))
         }
