@@ -38,6 +38,8 @@ async function getPageMap(currentResourcePath) {
           )
 
           if (f.isDirectory()) {
+            if (fileRoute === "/api") return null
+
             const children = await getFiles(filePath, fileRoute)
             if (!children.length) return null
 
