@@ -276,10 +276,10 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
             <LocaleSwitch options={config.i18n} isRTL={isRTL} />
           ) : null}
 
-          {config.repository ? (
+          {config.github ? (
             <a
               className="text-current p-2"
-              href={config.repository}
+              href={config.github}
               target="_blank"
             >
               <GitHubIcon height={24} />

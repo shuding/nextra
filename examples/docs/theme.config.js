@@ -1,5 +1,5 @@
 export default {
-  repository: 'https://github.com/shuding/nextra',
+  github: 'https://github.com/shuding/nextra',
   docsRepositoryBase:
     'https://github.com/shuding/nextra/tree/core/examples/docs/pages',
   titleSuffix: ' – Nextra',
