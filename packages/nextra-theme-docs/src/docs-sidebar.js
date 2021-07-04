@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, createContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import Slugger from 'github-slugger'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
@@ -6,16 +6,16 @@ import innerText from 'react-innertext'
 
 import { useActiveAnchor } from './misc/active-anchor'
 import { getFSRoute } from './utils/get-fs-route'
+import useMenuContext from './utils/menu-context'
 
 const TreeState = new Map()
-const MenuContext = createContext(false)
 
 function Folder({ item, anchors }) {
   const { asPath, locale } = useRouter()
   const routeOriginal = getFSRoute(asPath, locale)
   const route = routeOriginal.split('#')[0] + '/'
   const active = route === item.route + '/'
-  const { defaultMenuCollapsed } = useContext(MenuContext)
+  const { defaultMenuCollapsed } = useMenuContext()
   const open = TreeState[item.route] ?? !defaultMenuCollapsed
   const [_, render] = useState(false)
 
@@ -48,7 +48,7 @@ function Folder({ item, anchors }) {
 }
 
 function File({ item, anchors }) {
-  const { setMenu } = useContext(MenuContext)
+  const { setMenu } = useMenuContext()
   const { asPath, locale } = useRouter()
   const route = getFSRoute(asPath, locale) + '/'
   const active = route === item.route + '/'
@@ -142,8 +142,8 @@ function Sidebar({ show, directories, anchors }) {
   )
 }
 
-export default function DocsSidebar({ directories, anchors, config }) {
-  const [menu, setMenu] = useState(false)
+export default function DocsSidebar({ directories, anchors }) {
+  const { menu } = useMenuContext()
 
   useEffect(() => {
     if (menu) {
@@ -153,14 +153,5 @@ export default function DocsSidebar({ directories, anchors, config }) {
     }
   }, [menu])
 
-  return (
-    <MenuContext.Provider
-      value={{
-        setMenu,
-        defaultMenuCollapsed: !!config.defaultMenuCollapsed
-      }}
-    >
-      <Sidebar show={menu} anchors={anchors} directories={directories} />
-    </MenuContext.Provider>
-  )
+  return <Sidebar show={menu} anchors={anchors} directories={directories} />
 }

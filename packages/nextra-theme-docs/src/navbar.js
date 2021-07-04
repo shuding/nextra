@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 
 import renderComponent from './utils/render-component'
 import { getFSRoute } from './utils/get-fs-route'
+import useMenuContext from './utils/menu-context'
 
 import Search from './search'
 import StorkSearch from './stork-search'
@@ -15,10 +16,11 @@ import LocaleSwitch from './locale-switch'
 export default function Navbar({ config, isRTL, flatDirectories }) {
   const { locale, asPath } = useRouter()
   const activeRoute = getFSRoute(asPath, locale).split('#')[0]
+  const { menu, setMenu } = useMenuContext()
 
   return (
     <nav className="flex items-center bg-white z-20 fixed top-0 left-0 right-0 h-16 border-b border-gray-200 px-6 dark:bg-dark dark:border-gray-900 bg-opacity-[.97] dark:bg-opacity-100">
-      <div className="hidden md:block w-full flex items-center mr-2">
+      <div className="w-full flex items-center mr-2">
         <Link href="/">
           <a className="no-underline text-current inline-flex items-center hover:opacity-75">
             {renderComponent(config.logo, { locale })}
@@ -28,6 +30,8 @@ export default function Navbar({ config, isRTL, flatDirectories }) {
 
       {flatDirectories
         ? flatDirectories.map(page => {
+            if (page.hide) return null
+
             let href = page.route
 
             // If it's a directory
@@ -53,16 +57,18 @@ export default function Navbar({ config, isRTL, flatDirectories }) {
           })
         : null}
 
-      {config.customSearch ||
-        (config.search ? (
-          config.unstable_stork ? (
-            <StorkSearch />
-          ) : (
-            <Search directories={flatDirectories} />
-          )
-        ) : null)}
-
-      <div className="mr-2" />
+      <div className="flex-1">
+        <div className="hidden md:inline-block mr-2">
+          {config.customSearch ||
+            (config.search ? (
+              config.unstable_stork ? (
+                <StorkSearch />
+              ) : (
+                <Search directories={flatDirectories} />
+              )
+            ) : null)}
+        </div>
+      </div>
 
       {config.darkMode ? <ThemeSwitch /> : null}
 

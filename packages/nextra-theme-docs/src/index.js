@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import { useRouter } from 'next/router'
 import 'focus-visible'
 import { SkipNavContent } from '@reach/skip-nav'
@@ -16,6 +16,7 @@ import DocsSidebar from './docs-sidebar'
 import { ActiveAnchor } from './misc/active-anchor'
 import defaultConfig from './misc/default.config'
 import { getFSRoute } from './utils/get-fs-route'
+import { MenuContext } from './utils/menu-context'
 
 const titleType = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
 
@@ -87,14 +88,62 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
     return localeConfig && localeConfig.direction === 'rtl'
   }, [config.i18n, locale])
 
+  const [menu, setMenu] = useState(false)
+
   if (activeType === 'nav') {
     return (
       <React.Fragment>
         <Head config={config} title={title} locale={locale} />
+        <MenuContext.Provider
+          value={{
+            menu,
+            setMenu,
+            defaultMenuCollapsed: !!config.defaultMenuCollapsed
+          }}
+        >
+          <div
+            className={cn('nextra-container main-container flex flex-col', {
+              rtl: isRTL,
+              page: true
+            })}
+          >
+            <Navbar
+              config={config}
+              isRTL={isRTL}
+              flatDirectories={flatPageDirectories}
+            />
+            <ActiveAnchor>
+              <div className="flex flex-1 h-full">
+                <Body
+                  meta={meta}
+                  config={config}
+                  filepathWithName={filepathWithName}
+                  navLinks={null}
+                >
+                  {children}
+                </Body>
+              </div>
+            </ActiveAnchor>
+          </div>
+        </MenuContext.Provider>
+      </React.Fragment>
+    )
+  }
+
+  // Docs layout
+  return (
+    <React.Fragment>
+      <Head config={config} title={title} locale={locale} />
+      <MenuContext.Provider
+        value={{
+          menu,
+          setMenu,
+          defaultMenuCollapsed: !!config.defaultMenuCollapsed
+        }}
+      >
         <div
           className={cn('nextra-container main-container flex flex-col', {
-            rtl: isRTL,
-            page: true
+            rtl: isRTL
           })}
         >
           <Navbar
@@ -104,60 +153,26 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
           />
           <ActiveAnchor>
             <div className="flex flex-1 h-full">
+              <DocsSidebar directories={docsDirectories} anchors={anchors} />
               <Body
                 meta={meta}
                 config={config}
                 filepathWithName={filepathWithName}
-                navLinks={null}
+                navLinks={
+                  <NavLinks
+                    flatDirectories={flatDocsDirectories}
+                    currentIndex={activeIndex}
+                    config={config}
+                    isRTL={isRTL}
+                  />
+                }
               >
                 {children}
               </Body>
             </div>
           </ActiveAnchor>
         </div>
-      </React.Fragment>
-    )
-  }
-
-  // Docs layout
-  return (
-    <React.Fragment>
-      <Head config={config} title={title} locale={locale} />
-      <div
-        className={cn('nextra-container main-container flex flex-col', {
-          rtl: isRTL
-        })}
-      >
-        <Navbar
-          config={config}
-          isRTL={isRTL}
-          flatDirectories={flatPageDirectories}
-        />
-        <ActiveAnchor>
-          <div className="flex flex-1 h-full">
-            <DocsSidebar
-              config={config}
-              directories={docsDirectories}
-              anchors={anchors}
-            />
-            <Body
-              meta={meta}
-              config={config}
-              filepathWithName={filepathWithName}
-              navLinks={
-                <NavLinks
-                  flatDirectories={flatDocsDirectories}
-                  currentIndex={activeIndex}
-                  config={config}
-                  isRTL={isRTL}
-                />
-              }
-            >
-              {children}
-            </Body>
-          </div>
-        </ActiveAnchor>
-      </div>
+      </MenuContext.Provider>
     </React.Fragment>
   )
 }

@@ -5,7 +5,7 @@ export default {
   titleSuffix: ' – Nextra',
   logo: (
     <>
-      <span className="font-extrabold hidden md:inline">Nextra</span>
+      <span className="font-extrabold">Nextra</span>
       <span className="mr-2 ml-2 text-gray-500 font-normal hidden md:inline">
         The Next Site Builder
       </span>

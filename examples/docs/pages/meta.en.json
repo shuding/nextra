@@ -1,7 +1,8 @@
 {
   "index": {
     "title": "Akira",
-    "type": "nav"
+    "type": "nav",
+    "hide": true
   },
   "nextra": {
     "title": "Docs",
