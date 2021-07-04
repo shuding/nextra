@@ -14,8 +14,7 @@ import {
 } from './utils'
 import { transformStaticImage } from './static-image'
 
-const extension = /\.(mdx?|jsx?|tsx?)$/
-const mdxExtension = /\.mdx?$/
+const extension = /\.mdx?$/
 const metaExtension = /meta\.?([a-zA-Z-]+)?\.json/
 
 async function getPageMap(currentResourcePath) {
@@ -47,24 +46,23 @@ async function getPageMap(currentResourcePath) {
               route: fileRoute
             }
           } else if (extension.test(f.name)) {
+            // MDX or MD
+
             const locale = getLocaleFromFilename(f.name)
 
             if (filePath === currentResourcePath) {
               activeRoute = fileRoute
             }
 
-            // MDX or MD
-            if (mdxExtension.test(f.name)) {
-              const fileContents = await fs.readFile(filePath, 'utf-8')
-              const { data } = grayMatter(fileContents)
+            const fileContents = await fs.readFile(filePath, 'utf-8')
+            const { data } = grayMatter(fileContents)
 
-              if (Object.keys(data).length) {
-                return {
-                  name: removeExtension(f.name),
-                  route: fileRoute,
-                  frontMatter: data,
-                  locale
-                }
+            if (Object.keys(data).length) {
+              return {
+                name: removeExtension(f.name),
+                route: fileRoute,
+                frontMatter: data,
+                locale
               }
             }
 
@@ -189,7 +187,7 @@ export default async function (source) {
   // Add content to stork indexes
   if (unstable_stork) {
     // We only index .MD and .MDX files
-    if (mdxExtension.test(filename)) {
+    if (extension.test(filename)) {
       await addStorkIndex({
         pageMap,
         filename,

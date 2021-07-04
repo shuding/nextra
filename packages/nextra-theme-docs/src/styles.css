@@ -152,6 +152,9 @@ h2 a {
 }
 
 /* Navbar */
+.nextra-container nav {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
 .nextra-container nav a:focus,
 .nextra-container nav summary:focus {
   @apply select-none outline-none;
