@@ -261,7 +261,7 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
 
           {config.customSearch ||
             (config.search ? (
-              config.UNSTABLE_stork ? (
+              config.unstable_stork ? (
                 <StorkSearch />
               ) : (
                 <Search directories={flatDirectories} />
