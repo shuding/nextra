@@ -1,10 +1,8 @@
 import React from 'react'
 
 export default {
-  repository: 'https://github.com/shuding/nextra',
-  docsRepository: 'https://github.com/shuding/nextra',
-  branch: 'master',
-  path: '/',
+  github: 'https://github.com/shuding/nextra',
+  docsRepositoryBase: 'https://github.com/shuding/nextra',
   titleSuffix: ' – Nextra',
   nextLinks: true,
   prevLinks: true,
@@ -14,7 +12,7 @@ export default {
   font: true,
   footer: true,
   footerText: `MIT ${new Date().getFullYear()} © Nextra.`,
-  footerEditOnGitHubLink: true,
+  footerEditLink: 'Edit this page',
   logo: (
     <React.Fragment>
       <span className="mr-2 font-extrabold hidden md:inline">Nextra</span>
@@ -36,7 +34,7 @@ export default {
       <meta property="og:description" content="Nextra: the next docs builder" />
       <meta name="apple-mobile-web-app-title" content="Nextra" />
     </React.Fragment>
-  ),
+  )
   // direction: 'ltr',
   // i18n: [{ locale: 'en-US', text: 'English', direction: 'ltr' }],
 }
