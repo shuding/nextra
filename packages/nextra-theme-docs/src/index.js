@@ -6,12 +6,11 @@ import { ThemeProvider } from 'next-themes'
 import innerText from 'react-innertext'
 import cn from 'classnames'
 
-import flatten from './utils/flatten'
-import cleanupAndReorder from './utils/cleanup-and-reorder'
+import normalizePages from './utils/normalize-pages'
 
 import Head from './head'
 import Navbar from './navbar'
-import Footer from './footer'
+import Footer, { NavLinks } from './footer'
 import Theme from './misc/theme'
 import DocsSidebar from './docs-sidebar'
 import { ActiveAnchor } from './misc/active-anchor'
@@ -25,31 +24,43 @@ function useDirectoryInfo(pageMap) {
 
   return useMemo(() => {
     const fsPath = getFSRoute(asPath, locale).split('#')[0]
-    const directories = cleanupAndReorder(pageMap, locale, defaultLocale)
-    const flatDirectories = flatten(directories)
-    const currentIndex = flatDirectories.findIndex(dir => dir.route === fsPath)
-    const layoutType = flatDirectories[currentIndex].type || 'docs'
-
-    return {
-      directories,
-      flatDirectories,
-      currentIndex,
-      layoutType
-    }
+    return normalizePages(pageMap, locale, defaultLocale, fsPath)
   }, [pageMap, locale, defaultLocale, asPath])
+}
+
+function Body({ meta, config, filepathWithName, navLinks, children }) {
+  return (
+    <React.Fragment>
+      <SkipNavContent />
+      {meta.full ? (
+        <article className="relative pt-16 w-full overflow-x-hidden">
+          {children}
+        </article>
+      ) : (
+        <article className="docs-container relative pt-20 pb-16 px-6 md:px-8 w-full max-w-full overflow-x-hidden">
+          <main className="max-w-screen-md mx-auto">
+            <Theme>{children}</Theme>
+            <Footer config={config} filepathWithName={filepathWithName}>
+              {navLinks}
+            </Footer>
+          </main>
+        </article>
+      )}
+    </React.Fragment>
+  )
 }
 
 const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
   const { route, locale } = useRouter()
   const config = Object.assign({}, defaultConfig, _config)
   const {
-    directories,
-    flatDirectories,
-    currentIndex,
-    layoutType
+    activeType,
+    activeIndex,
+    pageDirectories,
+    flatPageDirectories,
+    docsDirectories,
+    flatDocsDirectories
   } = useDirectoryInfo(pageMap)
-
-  console.log(layoutType)
 
   const filepath = route.slice(0, route.lastIndexOf('/') + 1)
   const filepathWithName = filepath + filename
@@ -71,6 +82,35 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
     return localeConfig && localeConfig.direction === 'rtl'
   }, [config.i18n, locale])
 
+  if (activeType === 'page') {
+    return (
+      <React.Fragment>
+        <Head config={config} title={title} locale={locale} />
+        <div
+          className={cn('nextra-container main-container flex flex-col', {
+            rtl: isRTL,
+            page: true
+          })}
+        >
+          <Navbar config={config} locale={locale} isRTL={isRTL} />
+          <ActiveAnchor>
+            <div className="flex flex-1 h-full">
+              <Body
+                meta={meta}
+                config={config}
+                filepathWithName={filepathWithName}
+                navLinks={null}
+              >
+                {children}
+              </Body>
+            </div>
+          </ActiveAnchor>
+        </div>
+      </React.Fragment>
+    )
+  }
+
+  // Docs layout
   return (
     <React.Fragment>
       <Head config={config} title={title} locale={locale} />
@@ -84,28 +124,24 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
           <div className="flex flex-1 h-full">
             <DocsSidebar
               config={config}
-              directories={directories}
+              directories={docsDirectories}
               anchors={anchors}
             />
-            <SkipNavContent />
-            {meta.full ? (
-              <article className="relative pt-16 w-full overflow-x-hidden">
-                {children}
-              </article>
-            ) : (
-              <article className="docs-container relative pt-20 pb-16 px-6 md:px-8 w-full max-w-full overflow-x-hidden">
-                <main className="max-w-screen-md mx-auto">
-                  <Theme>{children}</Theme>
-                  <Footer
-                    config={config}
-                    flatDirectories={flatDirectories}
-                    currentIndex={currentIndex}
-                    filepathWithName={filepathWithName}
-                    isRTL={isRTL}
-                  />
-                </main>
-              </article>
-            )}
+            <Body
+              meta={meta}
+              config={config}
+              filepathWithName={filepathWithName}
+              navLinks={
+                <NavLinks
+                  flatDirectories={flatDocsDirectories}
+                  currentIndex={activeIndex}
+                  config={config}
+                  isRTL={isRTL}
+                />
+              }
+            >
+              {children}
+            </Body>
           </div>
         </ActiveAnchor>
       </div>

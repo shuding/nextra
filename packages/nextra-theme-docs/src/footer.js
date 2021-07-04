@@ -83,34 +83,33 @@ const EditPageLink = ({ repository, text, filepath }) => {
   )
 }
 
-const Footer = ({
-  config,
-  flatDirectories,
-  currentIndex,
-  filepathWithName,
-  isRTL
-}) => {
+export const NavLinks = ({ config, flatDirectories, currentIndex, isRTL }) => {
   let prev = flatDirectories[currentIndex - 1]
   let next = flatDirectories[currentIndex + 1]
+
+  return (
+    <div className="flex flex-row items-center justify-between">
+      <div>
+        {prev && config.prevLinks ? (
+          <PrevLink route={prev.route} title={prev.title} isRTL={isRTL} />
+        ) : null}
+      </div>
+      <div>
+        {config.nextLinks && next ? (
+          <NextLink route={next.route} title={next.title} isRTL={isRTL} />
+        ) : null}
+      </div>
+    </div>
+  )
+}
+
+const Footer = ({ config, filepathWithName, children }) => {
   const { locale } = useRouter()
 
   return (
     <footer className="mt-24">
-      <div className="flex flex-row items-center justify-between">
-        <div>
-          {prev && config.prevLinks ? (
-            <PrevLink route={prev.route} title={prev.title} isRTL={isRTL} />
-          ) : null}
-        </div>
-        <div>
-          {config.nextLinks && next ? (
-            <NextLink route={next.route} title={next.title} isRTL={isRTL} />
-          ) : null}
-        </div>
-      </div>
-
+      {children}
       <hr />
-
       {config.footer ? (
         <div className="mt-24 flex justify-between flex-col-reverse md:flex-row items-center md:items-end">
           <span className="text-gray-600">

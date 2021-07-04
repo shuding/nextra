@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext, createContext } from 'react'
 import Slugger from 'github-slugger'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+import innerText from 'react-innertext'
 
 import { useActiveAnchor } from './misc/active-anchor'
 import { getFSRoute } from './utils/get-fs-route'
