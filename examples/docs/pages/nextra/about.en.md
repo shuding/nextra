@@ -32,18 +32,23 @@ import Callout from 'nextra-theme-docs/callout'
   MDX (the library), at its core, transforms MDX (the syntax) to JSX. It receives an MDX string and outputs a JSX string. It does this by parsing the MDX document to a syntax tree and then generates a JSX document from that tree. 
 </Callout>
 
-Code highlighting with focused lines using
+Code highlighting with highlighed lines using
 
 ````markdown
-```jsx highlight=2,3
+```jsx highlight=1,4,6-8
+import useSWR from 'swr'
+
 function App() {
-  // these 2 lines will be highlighted
-  return <App>My JSX Code</App>
+  const { data, error } = useSWR('/api/user', fetcher)
+
+  if (error) return <div>failed to load</div>
+  if (!data) return <div>loading...</div>
+  return <div>hello {data.name}!</div>
 }
 ```
 ````
 
-```jsx highlight=4,8
+```jsx highlight=1,4,6-8
 import useSWR from 'swr'
 
 function Profile() {

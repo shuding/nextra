@@ -1,7 +1,7 @@
 import { MDXProvider } from '@mdx-js/react'
 import Slugger from 'github-slugger'
 import Link from 'next/link'
-import React from 'react'
+import React, { useMemo } from 'react'
 import innerText from 'react-innertext'
 import Highlight, { defaultProps } from 'prism-react-renderer'
 import 'intersection-observer'
@@ -52,24 +52,34 @@ const THEME = {
 
 // Anchor links
 
-const HeaderLink = ({ tag: Tag, children, slugger, withObserver, ...props }) => {
+const HeaderLink = ({
+  tag: Tag,
+  children,
+  slugger,
+  withObserver,
+  ...props
+}) => {
   const setActiveAnchor = useActiveAnchorSet()
 
   const slug = slugger.slug(innerText(children) || '')
   const anchor = <span className="subheading-anchor" id={slug} />
-  const anchorWithObserver = withObserver
-    ? <Observer
-        onChange={e => {
-          // if the element is above the 70% of height of the viewport
-          // we don't use e.isIntersecting
-          const isAboveViewport = e.boundingClientRect.y + e.boundingClientRect.height <= e.rootBounds.y + e.rootBounds.height
-          setActiveAnchor(f => ({ ...f, [slug]: isAboveViewport }))
-        }}
-        rootMargin="1000% 0% -70%"
-        threshold={[0, 1]}
-        children={anchor}
-      />
-    : anchor;
+  const anchorWithObserver = withObserver ? (
+    <Observer
+      onChange={e => {
+        // if the element is above the 70% of height of the viewport
+        // we don't use e.isIntersecting
+        const isAboveViewport =
+          e.boundingClientRect.y + e.boundingClientRect.height <=
+          e.rootBounds.y + e.rootBounds.height
+        setActiveAnchor(f => ({ ...f, [slug]: isAboveViewport }))
+      }}
+      rootMargin="1000% 0% -70%"
+      threshold={[0, 1]}
+      children={anchor}
+    />
+  ) : (
+    anchor
+  )
 
   return (
     <Tag {...props}>
@@ -141,9 +151,18 @@ const A = ({ children, ...props }) => {
 }
 
 const Code = ({ children, className, highlight, ...props }) => {
-  if (!className) return <code {...props}>{children}</code>
+  const highlightedRanges = useMemo(() => {
+    return highlight
+      ? highlight.split(',').map(r => {
+          if (r.includes('-')) {
+            return r.split('-')
+          }
+          return +r
+        })
+      : []
+  }, [highlight])
 
-  const highlightedLines = highlight ? highlight.split(',').map(Number) : []
+  if (!className) return <code {...props}>{children}</code>
 
   // https://mdxjs.com/guides/syntax-highlighting#all-together
   const language = className.replace(/language-/, '')
@@ -161,7 +180,11 @@ const Code = ({ children, className, highlight, ...props }) => {
               key={i}
               {...getLineProps({ line, key: i })}
               style={
-                highlightedLines.includes(i + 1)
+                highlightedRanges.some(r =>
+                  Array.isArray(r)
+                    ? r[0] <= i + 1 && i + 1 <= r[1]
+                    : r === i + 1
+                )
                   ? {
                       background: 'var(--c-highlight)',
                       margin: '0 -1rem',
