@@ -1,5 +1,5 @@
 import ReactDOMServer from 'react-dom/server'
-import { createContext, useContext } from 'react'
+import { createContext, useContext, useMemo } from 'react'
 import { MDXProvider } from '@mdx-js/react'
 import Slugger from 'github-slugger'
 import Link from 'next/link'
@@ -149,9 +149,18 @@ const A = ({ children, ...props }) => {
 }
 
 const Code = ({ children, className, highlight, ...props }) => {
-  if (!className) return <code {...props}>{children}</code>
+  const highlightedRanges = useMemo(() => {
+    return highlight
+      ? highlight.split(',').map(r => {
+          if (r.includes('-')) {
+            return r.split('-')
+          }
+          return +r
+        })
+      : []
+  }, [highlight])
 
-  const highlightedLines = highlight ? highlight.split(',').map(Number) : []
+  if (!className) return <code {...props}>{children}</code>
 
   // https://mdxjs.com/guides/syntax-highlighting#all-together
   const language = className.replace(/language-/, '')
@@ -169,7 +178,11 @@ const Code = ({ children, className, highlight, ...props }) => {
               key={i}
               {...getLineProps({ line, key: i })}
               style={
-                highlightedLines.includes(i + 1)
+                highlightedRanges.some(r =>
+                  Array.isArray(r)
+                    ? r[0] <= i + 1 && i + 1 <= r[1]
+                    : r === i + 1
+                )
                   ? {
                       background: '#cce0f5',
                       margin: '0 -1rem',
@@ -201,7 +214,9 @@ const components = {
 
 export default ({ children }) => {
   const slugger = new Slugger()
-  return <SluggerContext.Provider value={slugger}>
-    <MDXProvider components={components}>{children}</MDXProvider>
-  </SluggerContext.Provider>
+  return (
+    <SluggerContext.Provider value={slugger}>
+      <MDXProvider components={components}>{children}</MDXProvider>
+    </SluggerContext.Provider>
+  )
 }
