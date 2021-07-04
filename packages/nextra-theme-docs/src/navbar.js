@@ -1,7 +1,10 @@
 import React from 'react'
+import cn from 'classnames'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 import renderComponent from './utils/render-component'
+import { getFSRoute } from './utils/get-fs-route'
 
 import Search from './search'
 import StorkSearch from './stork-search'
@@ -9,16 +12,46 @@ import GitHubIcon from './github-icon'
 import ThemeSwitch from './theme-switch'
 import LocaleSwitch from './locale-switch'
 
-export default function Navbar({ config, locale, isRTL }) {
+export default function Navbar({ config, isRTL, flatDirectories }) {
+  const { locale, asPath } = useRouter()
+  const activeRoute = getFSRoute(asPath, locale).split('#')[0]
+
   return (
     <nav className="flex items-center bg-white z-20 fixed top-0 left-0 right-0 h-16 border-b border-gray-200 px-6 dark:bg-dark dark:border-gray-900 bg-opacity-[.97] dark:bg-opacity-100">
-      <div className="hidden md:block w-full flex items-center">
+      <div className="hidden md:block w-full flex items-center mr-2">
         <Link href="/">
-          <a className="no-underline text-current flex items-center hover:opacity-75">
+          <a className="no-underline text-current inline-flex items-center hover:opacity-75">
             {renderComponent(config.logo, { locale })}
           </a>
         </Link>
       </div>
+
+      {flatDirectories
+        ? flatDirectories.map(page => {
+            let href = page.route
+
+            // If it's a directory
+            if (page.children) {
+              href = page.firstChildRoute
+            }
+
+            return (
+              <Link href={href} key={page.route}>
+                <a
+                  className={cn(
+                    'no-underline mr-4',
+                    page.route === activeRoute ||
+                      activeRoute.startsWith(page.route + '/')
+                      ? 'text-current'
+                      : 'text-gray-500'
+                  )}
+                >
+                  {page.title}
+                </a>
+              </Link>
+            )
+          })
+        : null}
 
       {config.customSearch ||
         (config.search ? (

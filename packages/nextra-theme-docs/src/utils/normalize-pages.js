@@ -11,7 +11,13 @@ function getMetaItemType(meta) {
   return 'docs'
 }
 
-export default function normalizePages(list, locale, defaultLocale, route) {
+export default function normalizePages({
+  list,
+  locale,
+  defaultLocale,
+  route,
+  docsRoot = ''
+}) {
   let meta
   for (let item of list) {
     if (item.name === 'meta.json' && locale === item.locale) {
@@ -75,25 +81,40 @@ export default function normalizePages(list, locale, defaultLocale, route) {
       const title = getMetaTitle(meta[a.name]) || getTitle(a.name)
       const type = getMetaItemType(meta[a.name]) || 'docs'
 
+      // If the doc is under the active page root.
+      const isCurrentDocsTree = type === 'docs' && route.startsWith(docsRoot)
+
       if (a.route === route) {
         activeType = type
         switch (type) {
-          case 'page':
+          case 'nav':
             activeIndex = flatPageDirectories.length
             break
           case 'docs':
           default:
-            activeIndex = flatDocsDirectories.length
+            if (isCurrentDocsTree) {
+              activeIndex = flatDocsDirectories.length
+            }
         }
       }
 
       const normalizedChildren = a.children
-        ? normalizePages(a.children, locale, defaultLocale, route)
+        ? normalizePages({
+            list: a.children,
+            locale,
+            defaultLocale,
+            route,
+            docsRoot: type === 'nav' ? a.route : docsRoot
+          })
         : undefined
 
       if (normalizedChildren) {
-        activeType = activeType || normalizedChildren.activeType
-        activeIndex = activeIndex || normalizedChildren.activeIndex
+        activeType =
+          activeType === undefined ? normalizedChildren.activeType : activeType
+        activeIndex =
+          activeIndex === undefined
+            ? normalizedChildren.activeIndex
+            : activeIndex
       }
 
       const item = {
@@ -116,42 +137,60 @@ export default function normalizePages(list, locale, defaultLocale, route) {
       }
 
       if (normalizedChildren) {
-        flatDirectories.push(...normalizedChildren.flatDirectories)
-        flatPageDirectories.push(...normalizedChildren.flatPageDirectories)
-        flatDocsDirectories.push(...normalizedChildren.flatDocsDirectories)
-
-        item.children.push(...normalizedChildren.directories)
-
         switch (type) {
-          case 'page':
+          case 'nav':
             pageItem.children.push(...normalizedChildren.pageDirectories)
             docsDirectories.push(...normalizedChildren.docsDirectories)
+
+            // If it's a page with non-page children, we inject itself as a page too.
+            if (
+              !normalizedChildren.flatPageDirectories.length &&
+              normalizedChildren.flatDirectories.length
+            ) {
+              pageItem.firstChildRoute =
+                normalizedChildren.flatDirectories[0].route
+              flatPageDirectories.push(pageItem)
+            }
+
             break
           case 'docs':
           default:
-            docsItem.children.push(...normalizedChildren.docsDirectories)
-            pageDirectories.push(...normalizedChildren.pageDirectories)
+            if (isCurrentDocsTree) {
+              docsItem.children.push(...normalizedChildren.docsDirectories)
+              pageDirectories.push(...normalizedChildren.pageDirectories)
+            }
         }
+
+        flatDirectories.push(...normalizedChildren.flatDirectories)
+        flatPageDirectories.push(...normalizedChildren.flatPageDirectories)
+
+        flatDocsDirectories.push(...normalizedChildren.flatDocsDirectories)
+
+        item.children.push(...normalizedChildren.directories)
       } else {
         flatDirectories.push(item)
         switch (type) {
-          case 'page':
+          case 'nav':
             flatPageDirectories.push(pageItem)
             break
           case 'docs':
           default:
-            flatDocsDirectories.push(docsItem)
+            if (isCurrentDocsTree) {
+              flatDocsDirectories.push(docsItem)
+            }
         }
       }
 
       directories.push(item)
       switch (type) {
-        case 'page':
+        case 'nav':
           pageDirectories.push(pageItem)
           break
         case 'docs':
         default:
-          docsDirectories.push(docsItem)
+          if (isCurrentDocsTree) {
+            docsDirectories.push(docsItem)
+          }
       }
     })
 

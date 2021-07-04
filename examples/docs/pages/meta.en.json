@@ -1,10 +1,14 @@
 {
   "index": {
     "title": "Akira",
-    "type": "page"
+    "type": "nav"
   },
   "nextra": {
-    "title": "Nextra",
-    "type": "page"
+    "title": "Docs",
+    "type": "nav"
+  },
+  "blog": {
+    "title": "Blog",
+    "type": "nav"
   }
 }

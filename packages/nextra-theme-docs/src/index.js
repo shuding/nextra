@@ -24,7 +24,12 @@ function useDirectoryInfo(pageMap) {
 
   return useMemo(() => {
     const fsPath = getFSRoute(asPath, locale).split('#')[0]
-    return normalizePages(pageMap, locale, defaultLocale, fsPath)
+    return normalizePages({
+      list: pageMap,
+      locale,
+      defaultLocale,
+      route: fsPath
+    })
   }, [pageMap, locale, defaultLocale, asPath])
 }
 
@@ -82,7 +87,7 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
     return localeConfig && localeConfig.direction === 'rtl'
   }, [config.i18n, locale])
 
-  if (activeType === 'page') {
+  if (activeType === 'nav') {
     return (
       <React.Fragment>
         <Head config={config} title={title} locale={locale} />
@@ -92,7 +97,11 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
             page: true
           })}
         >
-          <Navbar config={config} locale={locale} isRTL={isRTL} />
+          <Navbar
+            config={config}
+            isRTL={isRTL}
+            flatDirectories={flatPageDirectories}
+          />
           <ActiveAnchor>
             <div className="flex flex-1 h-full">
               <Body
@@ -119,7 +128,11 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
           rtl: isRTL
         })}
       >
-        <Navbar config={config} locale={locale} isRTL={isRTL} />
+        <Navbar
+          config={config}
+          isRTL={isRTL}
+          flatDirectories={flatPageDirectories}
+        />
         <ActiveAnchor>
           <div className="flex flex-1 h-full">
             <DocsSidebar
