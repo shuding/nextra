@@ -1,5 +1,16 @@
 import getTitle from 'title'
 
+function getMetaTitle(meta) {
+  if (typeof meta === 'string') return meta
+  if (typeof meta === 'object') return meta.title
+  return ''
+}
+
+function getMetaItemType(meta) {
+  if (typeof meta === 'object') return meta.type
+  return 'docs'
+}
+
 export default function cleanupAndReorder(list, locale, defaultLocale) {
   let meta
   for (let item of list) {
@@ -21,20 +32,24 @@ export default function cleanupAndReorder(list, locale, defaultLocale) {
   const metaKeys = Object.keys(meta)
   const hasLocale = new Map()
   if (locale) {
-    list.forEach(a => a.locale === locale ? hasLocale.set(a.name, true) : null)
+    list.forEach(a =>
+      a.locale === locale ? hasLocale.set(a.name, true) : null
+    )
   }
 
   return list
-    .filter(a => 
-      // not meta
-      a.name !== 'meta.json' &&
+    .filter(
+      a =>
+        // not meta
+        a.name !== 'meta.json' &&
         // not hidden routes
         !a.name.startsWith('_') &&
         // locale matches, or fallback to default locale
-        (a.locale === locale || ((a.locale === defaultLocale || !a.locale) && !hasLocale.get(a.name)))
+        (a.locale === locale ||
+          ((a.locale === defaultLocale || !a.locale) && !hasLocale.get(a.name)))
     )
     .sort((a, b) => {
-      const indexA = metaKeys.indexOf(a.name) 
+      const indexA = metaKeys.indexOf(a.name)
       const indexB = metaKeys.indexOf(b.name)
       if (indexA === -1 && indexB === -1) return a.name < b.name ? -1 : 1
       if (indexA === -1) return 1
@@ -44,8 +59,11 @@ export default function cleanupAndReorder(list, locale, defaultLocale) {
     .map(a => {
       return {
         ...a,
-        children: a.children ? cleanupAndReorder(a.children, locale, defaultLocale) : undefined,
-        title: meta[a.name] || getTitle(a.name)
+        children: a.children
+          ? cleanupAndReorder(a.children, locale, defaultLocale)
+          : undefined,
+        title: getMetaTitle(meta[a.name]) || getTitle(a.name),
+        type: getMetaItemType(meta[a.name])
       }
     })
 }

@@ -96,7 +96,7 @@ const Footer = ({
 
   return (
     <footer className="mt-24">
-      <nav className="flex flex-row items-center justify-between">
+      <div className="flex flex-row items-center justify-between">
         <div>
           {prev && config.prevLinks ? (
             <PrevLink route={prev.route} title={prev.title} isRTL={isRTL} />
@@ -107,7 +107,7 @@ const Footer = ({
             <NextLink route={next.route} title={next.title} isRTL={isRTL} />
           ) : null}
         </div>
-      </nav>
+      </div>
 
       <hr />
 

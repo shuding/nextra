@@ -1,4 +1,9 @@
 {
-  "index": "Akira",
-  "nextra": "Nextra"
+  "index": {
+    "title": "Akira",
+    "type": "page"
+  },
+  "nextra": {
+    "title": "Nextra"
+  }
 }
