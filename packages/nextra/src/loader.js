@@ -166,7 +166,7 @@ export default async function (source) {
     themeConfig,
     locales,
     defaultLocale,
-    stork,
+    unstable_stork,
     unstable_staticImage
   } = options
   const { resourcePath, resourceQuery } = this
@@ -187,7 +187,7 @@ export default async function (source) {
   source = content
 
   // Add content to stork indexes
-  if (stork) {
+  if (unstable_stork) {
     // We only index .MD and .MDX files
     if (mdxExtension.test(filename)) {
       await addStorkIndex({

@@ -32,7 +32,7 @@ export default (...args) => (nextConfig = {}) => {
     pageExtensions = pageExtensions.concat(markdownExtensions)
   }
 
-  if (nextraConfig.stork) {
+  if (nextraConfig.unstable_stork) {
     console.log(
       'You have Stork indexing enabled for Nextra. Stork binary:',
       STORK_PATH
@@ -82,7 +82,7 @@ export default (...args) => (nextConfig = {}) => {
       })
 
       if (!config.plugins) config.plugins = []
-      if (nextraConfig.stork) {
+      if (nextraConfig.unstable_stork) {
         config.plugins.push({
           apply: compiler => {
             compiler.hooks.done.tap('buildStorkIndex', () => {
