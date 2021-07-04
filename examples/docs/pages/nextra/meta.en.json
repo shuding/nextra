@@ -1,3 +1,6 @@
 {
-  "about": "About"
+  "about": "About",
+  "test": {
+    "title": "🟡"
+  }
 }

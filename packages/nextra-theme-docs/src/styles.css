@@ -152,6 +152,9 @@ h2 a {
 }
 
 /* Navbar */
+.nextra-container nav {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
 .nextra-container nav a:focus,
 .nextra-container nav summary:focus {
   @apply select-none outline-none;
@@ -353,26 +356,34 @@ pre .prism-code .token.tag:not(.script) {
 .nextra-container.rtl article blockquote {
   @apply pr-6 border-r-2 pl-0 border-l-0;
 }
-.nextra-container:not(.rtl) article.docs-container {
+.nextra-container:not(.rtl):not(.page) article.docs-container {
   @apply xl:pr-72;
 }
-.nextra-container.rtl .docs-container {
+.nextra-container.rtl:not(.page) .docs-container {
   @apply xl:pl-72;
 }
 @screen md {
-  .nextra-container article.docs-container .bleed.full {
+  .nextra-container:not(.page) article.docs-container .bleed.full {
     margin-left: calc(-50vw + 50% + 8rem);
     margin-right: calc(-50vw + 50% + 8rem);
   }
+  .nextra-container.page article.docs-container .bleed.full {
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+  }
 }
 @screen xl {
-  .nextra-container:not(.rtl) article.docs-container .bleed.full {
+  .nextra-container:not(.rtl):not(.page) article.docs-container .bleed.full {
     margin-left: calc(50% - 50vw + 16rem);
     margin-right: calc(50% - 50vw);
   }
-  .nextra-container.rtl .docs-container .bleed.full {
+  .nextra-container.rtl:not(.page) .docs-container .bleed.full {
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw + 16rem);
+  }
+  .nextra-container.page .docs-container .bleed.full {
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
   }
 }
 .nextra-container.rtl code {
