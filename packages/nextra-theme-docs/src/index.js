@@ -12,7 +12,7 @@ import Head from './head'
 import Navbar from './navbar'
 import Footer, { NavLinks } from './footer'
 import Theme from './misc/theme'
-import DocsSidebar from './docs-sidebar'
+import Sidebar from './sidebar'
 import { ActiveAnchor } from './misc/active-anchor'
 import defaultConfig from './misc/default.config'
 import { getFSRoute } from './utils/get-fs-route'
@@ -114,6 +114,7 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
             />
             <ActiveAnchor>
               <div className="flex flex-1 h-full">
+                <Sidebar directories={flatPageDirectories} mdShow={false} />
                 <Body
                   meta={meta}
                   config={config}
@@ -153,7 +154,7 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
           />
           <ActiveAnchor>
             <div className="flex flex-1 h-full">
-              <DocsSidebar directories={docsDirectories} anchors={anchors} />
+              <Sidebar directories={docsDirectories} anchors={anchors} />
               <Body
                 meta={meta}
                 config={config}

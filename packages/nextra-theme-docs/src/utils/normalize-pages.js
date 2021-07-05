@@ -11,8 +11,8 @@ function getMetaItemType(meta) {
   return 'docs'
 }
 
-function getMetaHide(meta) {
-  if (typeof meta === 'object') return meta.hide || false
+function getMetaHidden(meta) {
+  if (typeof meta === 'object') return meta.hidden || false
   return false
 }
 
@@ -85,7 +85,7 @@ export default function normalizePages({
     .forEach(a => {
       const title = getMetaTitle(meta[a.name]) || getTitle(a.name)
       const type = getMetaItemType(meta[a.name]) || 'docs'
-      const hide = getMetaHide(meta[a.name])
+      const hidden = getMetaHidden(meta[a.name])
 
       // If the doc is under the active page root.
       const isCurrentDocsTree = type === 'docs' && route.startsWith(docsRoot)
@@ -139,7 +139,7 @@ export default function normalizePages({
         ...a,
         title,
         type,
-        hide,
+        hidden,
         children: normalizedChildren ? [] : undefined
       }
 

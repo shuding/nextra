@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import cn from 'classnames'
 import Slugger from 'github-slugger'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
@@ -124,25 +125,7 @@ function Menu({ dir, anchors }) {
   )
 }
 
-function Sidebar({ show, directories, anchors }) {
-  return (
-    <aside
-      className={`h-screen bg-white dark:bg-dark flex-shrink-0 w-full md:w-64 md:block fixed md:sticky z-10 ${
-        show ? '' : 'hidden'
-      }`}
-      style={{
-        top: '4rem',
-        height: 'calc(100vh - 4rem)'
-      }}
-    >
-      <div className="sidebar border-gray-200 dark:border-gray-900 w-full p-4 pb-40 md:pb-16 h-full overflow-y-auto">
-        <Menu dir={directories} anchors={anchors} />
-      </div>
-    </aside>
-  )
-}
-
-export default function DocsSidebar({ directories, anchors }) {
+export default function Sidebar({ directories, anchors = [], mdShow = true }) {
   const { menu } = useMenuContext()
 
   useEffect(() => {
@@ -153,5 +136,21 @@ export default function DocsSidebar({ directories, anchors }) {
     }
   }, [menu])
 
-  return <Sidebar show={menu} anchors={anchors} directories={directories} />
+  return (
+    <aside
+      className={cn(
+        'fixed h-screen bg-white dark:bg-dark flex-shrink-0 w-full md:w-64 md:sticky z-10',
+        menu ? '' : 'hidden',
+        mdShow ? 'md:block' : ''
+      )}
+      style={{
+        top: '4rem',
+        height: 'calc(100vh - 4rem)'
+      }}
+    >
+      <div className="sidebar border-gray-200 dark:border-gray-900 w-full p-4 pb-40 md:pb-16 h-full overflow-y-auto">
+        <Menu dir={directories} anchors={anchors} />
+      </div>
+    </aside>
+  )
 }
