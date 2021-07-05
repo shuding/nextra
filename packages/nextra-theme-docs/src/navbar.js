@@ -43,7 +43,7 @@ export default function Navbar({ config, isRTL, flatDirectories }) {
               <Link href={href} key={page.route}>
                 <a
                   className={cn(
-                    'no-underline mr-4',
+                    'no-underline whitespace-nowrap mr-4 hidden md:inline-block',
                     page.route === activeRoute ||
                       activeRoute.startsWith(page.route + '/')
                       ? 'text-current'

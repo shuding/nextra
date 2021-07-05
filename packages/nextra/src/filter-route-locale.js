@@ -16,7 +16,9 @@ export default function filterRouteLocale(pageMap, locale, defaultLocale) {
     }
 
     const localDoesMatch =
-      (!page.locale && isDefaultLocale) || page.locale === locale
+      (!page.locale && isDefaultLocale) ||
+      page.locale === locale ||
+      page.name === 'meta.json'
 
     if (localDoesMatch) {
       fallbackPages[page.name] = null

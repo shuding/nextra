@@ -25,19 +25,19 @@ export default function normalizePages({
 }) {
   let meta
   for (let item of list) {
-    if (item.name === 'meta.json' && locale === item.locale) {
-      meta = item
-      break
-    }
-    // fallback
-    if (!meta && item.name === 'meta') {
-      meta = item
+    if (item.name === 'meta.json') {
+      if (locale === item.locale) {
+        meta = item.meta
+        break
+      }
+      // fallback
+      if (!meta) {
+        meta = item.meta
+      }
     }
   }
   if (!meta) {
     meta = {}
-  } else {
-    meta = meta.meta
   }
 
   const metaKeys = Object.keys(meta)
@@ -115,12 +115,22 @@ export default function normalizePages({
         : undefined
 
       if (normalizedChildren) {
-        activeType =
-          activeType === undefined ? normalizedChildren.activeType : activeType
-        activeIndex =
-          activeIndex === undefined
-            ? normalizedChildren.activeIndex
-            : activeIndex
+        if (
+          normalizedChildren.activeIndex !== undefined &&
+          normalizedChildren.activeType !== undefined
+        ) {
+          activeType = normalizedChildren.activeType
+          switch (activeType) {
+            case 'nav':
+              activeIndex =
+                flatPageDirectories.length + normalizedChildren.activeIndex
+              break
+            case 'docs':
+              activeIndex =
+                flatDocsDirectories.length + normalizedChildren.activeIndex
+              break
+          }
+        }
       }
 
       const item = {

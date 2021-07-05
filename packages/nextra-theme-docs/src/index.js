@@ -65,11 +65,12 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
   const {
     activeType,
     activeIndex,
-    pageDirectories,
+    // pageDirectories,
     flatPageDirectories,
     docsDirectories,
     flatDirectories,
-    flatDocsDirectories
+    flatDocsDirectories,
+    directories
   } = useDirectoryInfo(pageMap)
 
   const filepath = route.slice(0, route.lastIndexOf('/') + 1)
@@ -121,6 +122,7 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
                 <Sidebar
                   directories={flatPageDirectories}
                   flatDirectories={flatDirectories}
+                  fullDirectories={directories}
                   mdShow={false}
                   config={config}
                 />
@@ -166,6 +168,7 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
               <Sidebar
                 directories={docsDirectories}
                 flatDirectories={flatDirectories}
+                fullDirectories={directories}
                 anchors={anchors}
                 config={config}
               />
