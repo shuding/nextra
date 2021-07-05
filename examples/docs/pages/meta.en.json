@@ -2,7 +2,7 @@
   "index": {
     "title": "Akira",
     "type": "nav",
-    "hide": true
+    "hidden": true
   },
   "nextra": {
     "title": "Docs",

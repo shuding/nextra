@@ -30,7 +30,7 @@ export default function Navbar({ config, isRTL, flatDirectories }) {
 
       {flatDirectories
         ? flatDirectories.map(page => {
-            if (page.hide) return null
+            if (page.hidden) return null
 
             let href = page.route
 

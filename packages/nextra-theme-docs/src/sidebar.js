@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import cn from 'classnames'
 import Slugger from 'github-slugger'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
@@ -7,6 +8,9 @@ import innerText from 'react-innertext'
 import { useActiveAnchor } from './misc/active-anchor'
 import { getFSRoute } from './utils/get-fs-route'
 import useMenuContext from './utils/menu-context'
+
+import Search from './search'
+import StorkSearch from './stork-search'
 
 const TreeState = new Map()
 
@@ -41,7 +45,7 @@ function Folder({ item, anchors }) {
           display: open ? 'initial' : 'none'
         }}
       >
-        <Menu dir={item.children} base={item.route} anchors={anchors} />
+        <Menu directories={item.children} base={item.route} anchors={anchors} />
       </div>
     </li>
   )
@@ -111,10 +115,10 @@ function File({ item, anchors }) {
   )
 }
 
-function Menu({ dir, anchors }) {
+function Menu({ directories, anchors }) {
   return (
     <ul>
-      {dir.map(item => {
+      {directories.map(item => {
         if (item.children) {
           return <Folder key={item.name} item={item} anchors={anchors} />
         }
@@ -124,25 +128,13 @@ function Menu({ dir, anchors }) {
   )
 }
 
-function Sidebar({ show, directories, anchors }) {
-  return (
-    <aside
-      className={`h-screen bg-white dark:bg-dark flex-shrink-0 w-full md:w-64 md:block fixed md:sticky z-10 ${
-        show ? '' : 'hidden'
-      }`}
-      style={{
-        top: '4rem',
-        height: 'calc(100vh - 4rem)'
-      }}
-    >
-      <div className="sidebar border-gray-200 dark:border-gray-900 w-full p-4 pb-40 md:pb-16 h-full overflow-y-auto">
-        <Menu dir={directories} anchors={anchors} />
-      </div>
-    </aside>
-  )
-}
-
-export default function DocsSidebar({ directories, anchors }) {
+export default function Sidebar({
+  directories,
+  flatDirectories,
+  anchors = [],
+  mdShow = true,
+  config
+}) {
   const { menu } = useMenuContext()
 
   useEffect(() => {
@@ -153,5 +145,31 @@ export default function DocsSidebar({ directories, anchors }) {
     }
   }, [menu])
 
-  return <Sidebar show={menu} anchors={anchors} directories={directories} />
+  return (
+    <aside
+      className={cn(
+        'fixed h-screen bg-white dark:bg-dark flex-shrink-0 w-full md:w-64 md:sticky z-10',
+        menu ? '' : 'hidden',
+        mdShow ? 'md:block' : ''
+      )}
+      style={{
+        top: '4rem',
+        height: 'calc(100vh - 4rem)'
+      }}
+    >
+      <div className="sidebar border-gray-200 dark:border-gray-900 w-full p-4 pb-40 md:pb-16 h-full overflow-y-auto">
+        <div className="mb-4 block md:hidden">
+          {config.customSearch ||
+            (config.search ? (
+              config.unstable_stork ? (
+                <StorkSearch />
+              ) : (
+                <Search directories={flatDirectories} />
+              )
+            ) : null)}
+        </div>
+        <Menu directories={directories} anchors={anchors} />
+      </div>
+    </aside>
+  )
 }

@@ -25,7 +25,7 @@ const Item = ({ title, active, href, onMouseOver, search }) => {
 const UP = true
 const DOWN = false
 
-const Search = ({ directories }) => {
+const Search = ({ directories = [] }) => {
   const router = useRouter()
   const [show, setShow] = useState(false)
   const [search, setSearch] = useState('')
@@ -102,7 +102,7 @@ const Search = ({ directories }) => {
   return (
     <div className="nextra-search relative w-full md:w-64">
       {renderList && (
-        <div className="search-overlay z-1" onClick={() => setShow(false)} />
+        <div className="search-overlay z-10" onClick={() => setShow(false)} />
       )}
       <input
         onChange={e => {
@@ -117,7 +117,7 @@ const Search = ({ directories }) => {
         ref={input}
       />
       {renderList && (
-        <ul className="shadow-md list-none p-0 m-0 absolute left-0 md:right-0 rounded mt-1 border top-100 divide-y z-2">
+        <ul className="shadow-md list-none p-0 m-0 absolute left-0 md:right-0 rounded mt-1 border top-100 divide-y z-20 w-full md:w-auto">
           {results.map((res, i) => {
             return (
               <Item
