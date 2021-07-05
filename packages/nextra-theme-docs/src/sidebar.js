@@ -9,6 +9,9 @@ import { useActiveAnchor } from './misc/active-anchor'
 import { getFSRoute } from './utils/get-fs-route'
 import useMenuContext from './utils/menu-context'
 
+import Search from './search'
+import StorkSearch from './stork-search'
+
 const TreeState = new Map()
 
 function Folder({ item, anchors }) {
@@ -42,7 +45,7 @@ function Folder({ item, anchors }) {
           display: open ? 'initial' : 'none'
         }}
       >
-        <Menu dir={item.children} base={item.route} anchors={anchors} />
+        <Menu directories={item.children} base={item.route} anchors={anchors} />
       </div>
     </li>
   )
@@ -112,10 +115,10 @@ function File({ item, anchors }) {
   )
 }
 
-function Menu({ dir, anchors }) {
+function Menu({ directories, anchors }) {
   return (
     <ul>
-      {dir.map(item => {
+      {directories.map(item => {
         if (item.children) {
           return <Folder key={item.name} item={item} anchors={anchors} />
         }
@@ -125,7 +128,13 @@ function Menu({ dir, anchors }) {
   )
 }
 
-export default function Sidebar({ directories, anchors = [], mdShow = true }) {
+export default function Sidebar({
+  directories,
+  flatDirectories,
+  anchors = [],
+  mdShow = true,
+  config
+}) {
   const { menu } = useMenuContext()
 
   useEffect(() => {
@@ -149,7 +158,17 @@ export default function Sidebar({ directories, anchors = [], mdShow = true }) {
       }}
     >
       <div className="sidebar border-gray-200 dark:border-gray-900 w-full p-4 pb-40 md:pb-16 h-full overflow-y-auto">
-        <Menu dir={directories} anchors={anchors} />
+        <div className="mb-4 block md:hidden">
+          {config.customSearch ||
+            (config.search ? (
+              config.unstable_stork ? (
+                <StorkSearch />
+              ) : (
+                <Search directories={flatDirectories} />
+              )
+            ) : null)}
+        </div>
+        <Menu directories={directories} anchors={anchors} />
       </div>
     </aside>
   )

@@ -219,7 +219,7 @@ input[type='search']::-webkit-search-results-decoration {
 .nextra-search.nextra-stork ul {
   @apply overflow-auto left-0 md:-left-80 md:right-0;
   max-height: min(calc(100vh - 80px), 400px);
-  max-width: min(calc(100vw - 3rem), calc(100% + 20rem));
+  max-width: min(calc(100vw - 2rem), calc(100% + 20rem));
   width: 100vw;
 }
 

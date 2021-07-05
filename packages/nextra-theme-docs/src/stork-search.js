@@ -1,4 +1,11 @@
-import React, { useMemo, useCallback, useRef, useState, useEffect, Fragment } from 'react'
+import React, {
+  useMemo,
+  useCallback,
+  useRef,
+  useState,
+  useEffect,
+  Fragment
+} from 'react'
 import Router, { useRouter } from 'next/router'
 import cn from 'classnames'
 import Link from 'next/link'
@@ -10,10 +17,19 @@ const TextWithHighlights = React.memo(({ content, ranges }) => {
   const splittedText = content ? splitter.splitGraphemes(content) : []
   const res = []
 
-  let id = 0, index = 0
+  let id = 0,
+    index = 0
   for (const range of ranges) {
-    res.push(<Fragment key={id++}>{splittedText.splice(0, range.beginning - index).join('')}</Fragment>)
-    res.push(<span className="highlight" key={id++}>{splittedText.splice(0, range.end - range.beginning).join('')}</span>)
+    res.push(
+      <Fragment key={id++}>
+        {splittedText.splice(0, range.beginning - index).join('')}
+      </Fragment>
+    )
+    res.push(
+      <span className="highlight" key={id++}>
+        {splittedText.splice(0, range.end - range.beginning).join('')}
+      </span>
+    )
     index = range.end
   }
   res.push(<Fragment key={id++}>{splittedText.join('')}</Fragment>)
@@ -27,9 +43,14 @@ const Item = ({ title, active, href, onMouseOver, excerpt }) => {
       <a className="block no-underline" onMouseOver={onMouseOver}>
         <li className={cn('py-2 px-4', { active })}>
           <span className="font-semibold">{title}</span>
-          {excerpt ? <div className="text-gray-600">
-            <TextWithHighlights content={excerpt.text} ranges={excerpt.highlight_ranges} />
-          </div> : null}
+          {excerpt ? (
+            <div className="text-gray-600">
+              <TextWithHighlights
+                content={excerpt.text}
+                ranges={excerpt.highlight_ranges}
+              />
+            </div>
+          ) : null}
         </li>
       </a>
     </Link>
@@ -39,7 +60,7 @@ const Item = ({ title, active, href, onMouseOver, excerpt }) => {
 // This can be global for better caching.
 const stork = {}
 
-export default function Search () {
+export default function Search() {
   const router = useRouter()
   const [show, setShow] = useState(false)
   const [search, setSearch] = useState('')
@@ -78,7 +99,9 @@ export default function Search () {
           e.preventDefault()
           if (active + 1 < results.length) {
             setActive(active + 1)
-            const activeElement = document.querySelector(`.nextra-stork ul > :nth-child(${active + 2})`)
+            const activeElement = document.querySelector(
+              `.nextra-stork ul > :nth-child(${active + 2})`
+            )
             if (activeElement && activeElement.scrollIntoViewIfNeeded) {
               activeElement.scrollIntoViewIfNeeded()
             }
@@ -89,7 +112,9 @@ export default function Search () {
           e.preventDefault()
           if (active - 1 >= 0) {
             setActive(active - 1)
-            const activeElement = document.querySelector(`.nextra-stork ul > :nth-child(${active})`)
+            const activeElement = document.querySelector(
+              `.nextra-stork ul > :nth-child(${active})`
+            )
             if (activeElement && activeElement.scrollIntoViewIfNeeded) {
               activeElement.scrollIntoViewIfNeeded()
             }
@@ -115,7 +140,10 @@ export default function Search () {
       const res = await fetch(`/index-${localeCode}.st`)
       const buf = await res.arrayBuffer()
       await init
-      stork[localeCode].wasm_register_index(`index-${localeCode}`, new Uint8Array(buf))
+      stork[localeCode].wasm_register_index(
+        `index-${localeCode}`,
+        new Uint8Array(buf)
+      )
     }
   }
 
@@ -149,7 +177,7 @@ export default function Search () {
   return (
     <div className="nextra-search nextra-stork relative w-full md:w-64">
       {renderList && (
-        <div className="search-overlay z-1" onClick={() => setShow(false)} />
+        <div className="search-overlay z-10" onClick={() => setShow(false)} />
       )}
       <input
         onChange={e => {
@@ -168,9 +196,7 @@ export default function Search () {
         spellCheck={false}
       />
       {renderList && (
-        <ul
-          className="p-0 m-0 mt-1 top-full absolute divide-y z-2"
-        >
+        <ul className="p-0 m-0 mt-1 top-full absolute divide-y z-20">
           {results.map((res, i) => {
             return (
               <Item

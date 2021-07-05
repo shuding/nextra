@@ -58,13 +58,17 @@ function Body({ meta, config, filepathWithName, navLinks, children }) {
 
 const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
   const { route, locale } = useRouter()
+
+  // @TODO: config should be in a context.
   const config = Object.assign({}, defaultConfig, _config)
+
   const {
     activeType,
     activeIndex,
     pageDirectories,
     flatPageDirectories,
     docsDirectories,
+    flatDirectories,
     flatDocsDirectories
   } = useDirectoryInfo(pageMap)
 
@@ -114,7 +118,12 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
             />
             <ActiveAnchor>
               <div className="flex flex-1 h-full">
-                <Sidebar directories={flatPageDirectories} mdShow={false} />
+                <Sidebar
+                  directories={flatPageDirectories}
+                  flatDirectories={flatDirectories}
+                  mdShow={false}
+                  config={config}
+                />
                 <Body
                   meta={meta}
                   config={config}
@@ -154,7 +163,12 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
           />
           <ActiveAnchor>
             <div className="flex flex-1 h-full">
-              <Sidebar directories={docsDirectories} anchors={anchors} />
+              <Sidebar
+                directories={docsDirectories}
+                flatDirectories={flatDirectories}
+                anchors={anchors}
+                config={config}
+              />
               <Body
                 meta={meta}
                 config={config}
