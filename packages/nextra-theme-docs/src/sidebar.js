@@ -131,6 +131,7 @@ function Menu({ directories, anchors }) {
 export default function Sidebar({
   directories,
   flatDirectories,
+  fullDirectories,
   anchors = [],
   mdShow = true,
   config
@@ -168,7 +169,12 @@ export default function Sidebar({
               )
             ) : null)}
         </div>
-        <Menu directories={directories} anchors={anchors} />
+        <div className="hidden md:block">
+          <Menu directories={directories} anchors={anchors} />
+        </div>
+        <div className="md:hidden">
+          <Menu directories={fullDirectories} anchors={anchors} />
+        </div>
       </div>
     </aside>
   )
