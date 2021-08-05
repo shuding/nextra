@@ -1,13 +1,14 @@
-# Markdown and React
+# MDX
 
-You can write normal `.md` files or the more powerful `.mdx` format.
+With Nextra, all your `.md` and `.mdx` files under the pages directory will be rendered with [MDX](https://mdxjs.com/about), it's an
+advanced Markdown format with React component support.
 
-Use [MDX](https://mdxjs.com/about) to import and use React components inside your Markdown file:
+You can use import and use React components inside your Markdown files like this:
 
 ```markdown
 import Callout from 'nextra-theme-docs/callout'
 
-### Markdown With React Components
+**Markdown With React Components**
 
 <Callout emoji="✅">
   **MDX** (the library), at its core, transforms MDX (the syntax) to JSX.
@@ -20,13 +21,33 @@ Generates:
 
 import Callout from 'nextra-theme-docs/callout'
 
-### Markdown With React Components
+<div className="p-4 border border-gray-200 dark:border-gray-900 rounded mt-6">
+**Markdown With React Components**
 
 <Callout emoji="✅">
-  **MDX** (the library), at its core, transforms MDX (the syntax) to JSX.
-  It receives an MDX string and outputs a _JSX string_. It does this by parsing
-  the MDX document to a syntax tree and then generates a JSX document from that tree. 
+  **MDX** (the library), at its core, transforms MDX (the syntax) to JSX. It
+  receives an MDX string and outputs a _JSX string_. It does this by parsing the
+  MDX document to a syntax tree and then generates a JSX document from that
+  tree.
 </Callout>
+</div>
+
+## Heading
+
+<br />
+
+# **Hello**, This Is a _Title_ Inside `h1`
+
+<h2>**Hello**, This Is a _Title_ Inside `h2`</h2>
+{/* using html tag to avoid being rendered in the sidebar */}
+
+### **Hello**, This Is a _Title_ Inside `h3`
+
+#### **Hello**, This Is a _Title_ Inside `h4`
+
+##### **Hello**, This Is a _Title_ Inside `h5`
+
+###### **Hello**, This Is a _Title_ Inside `h6`
 
 ## List
 
@@ -38,29 +59,53 @@ import Callout from 'nextra-theme-docs/callout'
 - two
 - three
 
----
+## Task List
 
-# **Hello**, This Is a _Title_ Inside `h1`
-## **Hello**, This Is a _Title_ Inside `h2`
-### **Hello**, This Is a _Title_ Inside `h3`
-#### **Hello**, This Is a _Title_ Inside `h4`
-##### **Hello**, This Is a _Title_ Inside `h5`
-###### **Hello**, This Is a _Title_ Inside `h6`
+```markdown
+- [x] Write the press release
+- [ ] Update the website
+- [ ] Contact the media
+```
 
-## Code Highlighting
+Renders
 
-Code highlighting with focused lines using
+- [x] Write the press release
+- [ ] Update the website
+- [ ] Contact the media
+
+## Syntax Highlighting
+
+Automatica syntax highlighting:
 
 ````markdown
-```jsx highlight=2,3
-function App() {
-  // these 2 lines will be highlighted
-  return <App>My JSX Code</App>
+```js
+console.log('hello, world')
+```
+````
+
+Renders:
+
+```js
+console.log('hello, world')
+```
+
+You can also add the `highlight=<line|range>` modifier to highlight specific lines:
+
+````markdown
+```jsx highlight=4,6-8
+import useSWR from 'swr'
+
+function Profile() {
+  const { data, error } = useSWR('/api/user', fetcher)
+
+  if (error) return <div>failed to load</div>
+  if (!data) return <div>loading...</div>
+  return <div>hello {data.name}!</div>
 }
 ```
 ````
 
-```jsx highlight=4,8
+```jsx highlight=4,6-8
 import useSWR from 'swr'
 
 function Profile() {
@@ -72,48 +117,46 @@ function Profile() {
 }
 ```
 
-Inline code: `let x = 1`.  
-Multiple lines: `x += 1`.
+## Inline Code
+
+You can use \`content\` to wrap inline code content like: `let x = 1`.
 
 ## Blockquote
 
 > Where some people measure progress in answers-right per test or tests-passed per year, we are more interested in Sistine-Chapel-Ceilings per Lifetime.
-> 
+>
 > — Alan Kay, A Personal Computer for Children of All Ages
 
-And nested quotes:
+Nested quotes:
 
 > > Where some people measure progress in answers-right per test or tests-passed per year, we are more interested in Sistine-Chapel-Ceilings per Lifetime.
-> > 
+> >
 > > — Alan Kay, A Personal Computer for Children of All Ages
-> 
+>
 > This is **great**.
-> 
+>
 > — Shu Ding.
 
 ## Table
 
-| Syntax        | Description | Test Text     |
-| :---          |    :----:   |          ---: |
-| Header        | Title       | Here's this   |
-| Paragraph     | Text        | And more      |
-| Strikethrough |             | ~~Text~~      |
+| Syntax        | Description |   Test Text |
+| :------------ | :---------: | ----------: |
+| Header        |    Title    | Here's this |
+| Paragraph     |    Text     |    And more |
+| Strikethrough |             |    ~~Text~~ |
 
-With `next/image`:
+## React Components
 
-import Image from 'next/image'
+React components and Markdown can be **mixed together**, for instance:
 
-| Image |
-| :--- |
-| <Image src="/og.png" alt="Nextra" width={1536/2} height={768/2} layout="intrinsic"/> |
-| `<Image src="/og.png" alt="Nextra" width={1536/2} height={768/2} layout="intrinsic"/>` |
+```markdown
+> <Callout>
+>   Give [**Nextra**](https://github.com/shuding/nextra) a star!
+> </Callout>
+```
 
-## Task List
+Renders:
 
-- [x] Write the press release
-- [ ] Update the website
-- [ ] Contact the media
-
----
-
-Click the "Edit this page on GitHub" link below to see the code.
+> <Callout>
+>   Give [**Nextra**](https://github.com/shuding/nextra) a star!
+> </Callout>

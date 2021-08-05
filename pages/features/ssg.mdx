@@ -1,32 +1,68 @@
-# Next.js SSG in MDX
+# Next.js SSG
+
+With Next.js, you can pre-render your page using [Static Generation (SSG)](https://nextjs.org/docs/basic-features/pages#static-generation-recommended). Your pages will be generated at build time and statically served to visitors. It can also be cached by a CDN to maximize the performance.
+
+This is supported by Nextra too. Here's an example:
 
 import { useSSG } from 'nextra/ssg'
 
 export const getStaticProps = ({ params }) => {
-  return fetch('https://api.github.com/repos/shuding/nextra')
-    .then(res => res.json())
-    .then(repo => ({
+  return fetch(`https://api.github.com/repos/shuding/nextra`)
+    .then((res) => res.json())
+    .then((repo) => ({
       props: {
-        // We return an `ssg` object in the props.
+        // We add an `ssg` field to the page props,
+        // which will be provided to the Nextra `useSSG` hook.
         ssg: {
-          stars: repo.stargazers_count
-        }
+          stars: repo.stargazers_count,
+        },
       },
-      revalidate: 5
+      // The page will be considered as stale and regenerated every 60 seconds.
+      revalidate: 60,
     }))
 }
 
-export const StarsRenderer = () => {
-  // And later we can get it inside MDX.
+export const Stars = () => {
+  // Get the data from SSG, and render it as a component.
   const { stars } = useSSG()
   return <strong>{stars}</strong>
 }
 
-The [Nextra repository](https://github.com/shuding/nextra) has <StarsRenderer/> stars!
+<div className="p-4 border border-gray-200 dark:border-gray-900 rounded mt-6">
+  Nextra has <Stars /> stars on GitHub!
+</div>
+
+The number above was generated at build time via `getStaticProps`. With [Incremental Static Regeneration](https://nextjs.org/docs/basic-features/data-fetching#incremental-static-regeneration) enabled, it will keep up to dated.
 
 ---
 
-The page is prerendered at build time with [`getStaticProps`](https://nextjs.org/docs/basic-features/data-fetching#getstaticprops-static-generation)
-and [Incremental Static Regeneration](https://nextjs.org/docs/basic-features/data-fetching#incremental-static-regeneration).
+Here's the MDX code for the example above:
 
-Check the source code for more information.
+```js
+import { useSSG } from 'nextra/ssg'
+
+export const getStaticProps = ({ params }) => {
+  return fetch(`https://api.github.com/repos/shuding/nextra`)
+    .then((res) => res.json())
+    .then((repo) => ({
+      props: {
+        // We add an `ssg` field to the page props,
+        // which will be provided to the Nextra `useSSG` hook.
+        ssg: {
+          stars: repo.stargazers_count,
+        },
+      },
+      // The page will be considered as stale and regenerated every 60 seconds.
+      revalidate: 60,
+    }))
+}
+
+export const Stars = () => {
+  // Get the data from SSG, and render it as a component.
+  const { stars } = useSSG()
+  return <strong>{stars}</strong>
+}
+
+
+Nextra has <Stars /> stars on GitHub!
+```
