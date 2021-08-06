@@ -1,7 +1,7 @@
 {
-  "index": "What is Nextra",
+  "index": "Introduction",
+  "get-started": "Get Started",
   "features": "Features",
-  "docs": "Docs Theme",
-  "blog": "Blog Theme",
+  "themes": "Themes",
   "advanced": "Advanced"
 }
