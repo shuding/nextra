@@ -28,7 +28,10 @@ const Layout = ({
   return (
     <React.Fragment>
       <Head>
-        <title>{title}</title>
+        <title>
+          {title}
+          {config.titleSuffix}
+        </title>
         {config.head || null}
       </Head>
       <article className="container prose prose-sm md:prose">
@@ -59,6 +62,7 @@ export default (opts, _config) => {
           CC BY-NC 4.0 2020 © Shu Ding.
         </small>
       ),
+      titleSuffix: null,
       postFooter: null
     },
     _config
