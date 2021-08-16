@@ -115,7 +115,8 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
             <Navbar
               config={config}
               isRTL={isRTL}
-              flatDirectories={flatPageDirectories}
+              flatDirectories={flatDirectories}
+              flatPageDirectories={flatPageDirectories}
             />
             <ActiveAnchor>
               <div className="flex flex-1 h-full">
@@ -161,7 +162,8 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
           <Navbar
             config={config}
             isRTL={isRTL}
-            flatDirectories={flatPageDirectories}
+            flatDirectories={flatDirectories}
+            flatPageDirectories={flatPageDirectories}
           />
           <ActiveAnchor>
             <div className="flex flex-1 h-full">

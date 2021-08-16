@@ -13,7 +13,7 @@ import GitHubIcon from './github-icon'
 import ThemeSwitch from './theme-switch'
 import LocaleSwitch from './locale-switch'
 
-export default function Navbar({ config, isRTL, flatDirectories }) {
+export default function Navbar({ config, isRTL, flatDirectories, flatPageDirectories }) {
   const { locale, asPath } = useRouter()
   const activeRoute = getFSRoute(asPath, locale).split('#')[0]
   const { menu, setMenu } = useMenuContext()
@@ -28,8 +28,8 @@ export default function Navbar({ config, isRTL, flatDirectories }) {
         </Link>
       </div>
 
-      {flatDirectories
-        ? flatDirectories.map(page => {
+      {flatPageDirectories
+        ? flatPageDirectories.map(page => {
             if (page.hidden) return null
 
             let href = page.route
