@@ -2243,10 +2243,10 @@ next@^11.0.1:
     vm-browserify "1.1.2"
     watchpack "2.1.1"
 
-nextra-theme-docs@^1.2.0-beta.2:
-  version "1.2.0-beta.2"
-  resolved "https://registry.yarnpkg.com/nextra-theme-docs/-/nextra-theme-docs-1.2.0-beta.2.tgz#bc1f8440173b2ee705967c3802ec27d80b0d293e"
-  integrity sha512-xXAVF5jAFLGXGdBcgSnUpIG677aXofl9ZSrnjPDOVzqQepX67/7VikCx4BCCZd4HeqeO2E3KDE7nBGjT6HpcZA==
+nextra-theme-docs@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/nextra-theme-docs/-/nextra-theme-docs-1.2.2.tgz#b45181d428000ee65946426a1c0c5464906b2824"
+  integrity sha512-NS/2OzHHAtAlbbMZyyWkRCPWY38MT2RP6YVviZGWhDXXuklmaNBRRfhS7TFFAIhShoWw9YHuAkG5EropaNoKmg==
   dependencies:
     "@mdx-js/react" "^1.6.16"
     "@reach/skip-nav" "^0.11.2"
@@ -2263,10 +2263,10 @@ nextra-theme-docs@^1.2.0-beta.2:
     react-innertext "^1.1.5"
     title "^3.4.2"
 
-nextra@^1.0.0-beta.2:
-  version "1.0.0-beta.2"
-  resolved "https://registry.yarnpkg.com/nextra/-/nextra-1.0.0-beta.2.tgz#0687598c9915b05a888f3cf9f26b55ae51a8f255"
-  integrity sha512-wQ4gwr3CYtmQKbJFln7G/MKOzDRBksUZa7WaBaCqr1zz99pgYPEfYWBGqAKypOfmA2n0JzmB39IonV2XklPaHg==
+nextra@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/nextra/-/nextra-1.1.0.tgz#94df0d975537f3e538d91a9b61101a4bc3e93fc8"
+  integrity sha512-WxD1c05gs4cyPHWvqOei9ofIQkLjtzQaDQo8+56f5ss7yJ6ZyI7Ohx7nyyjm6yTo1fO8gfj3v1l/AZmLnjh4FA==
   dependencies:
     "@mdx-js/loader" "^2.0.0-next.9"
     download "^8.0.0"
