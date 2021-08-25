@@ -13,6 +13,7 @@ import Navbar from './navbar'
 import Footer, { NavLinks } from './footer'
 import Theme from './misc/theme'
 import Sidebar from './sidebar'
+import ToC from './toc'
 import { ActiveAnchor } from './misc/active-anchor'
 import defaultConfig from './misc/default.config'
 import { getFSRoute } from './utils/get-fs-route'
@@ -34,7 +35,7 @@ function useDirectoryInfo(pageMap) {
   }, [pageMap, locale, defaultLocale, asPath])
 }
 
-function Body({ meta, config, filepathWithName, navLinks, children }) {
+function Body({ meta, config, toc, filepathWithName, navLinks, children }) {
   return (
     <React.Fragment>
       <SkipNavContent />
@@ -43,13 +44,14 @@ function Body({ meta, config, filepathWithName, navLinks, children }) {
           {children}
         </article>
       ) : (
-        <article className="docs-container relative pt-20 pb-16 px-6 md:px-8 w-full max-w-full overflow-x-hidden">
-          <main className="max-w-screen-md mx-auto">
+        <article className="docs-container relative pt-16 pb-16 px-6 md:px-8 w-full max-w-full flex">
+          <main className="max-w-screen-md mx-auto pt-4 z-10">
             <Theme>{children}</Theme>
             <Footer config={config} filepathWithName={filepathWithName}>
               {navLinks}
             </Footer>
           </main>
+          {toc}
         </article>
       )}
     </React.Fragment>
@@ -84,7 +86,7 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
   const title =
     meta.title || (titleEl ? innerText(titleEl.props.children) : 'Untitled')
   const anchors = titles
-    .filter(child => child.props && child.props.mdxType === 'h2')
+    .filter(child => child.props && (config.floatTOC || child.props.mdxType === 'h2'))
     .map(child => child.props.children)
 
   const isRTL = useMemo(() => {
@@ -171,13 +173,14 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
                 directories={docsDirectories}
                 flatDirectories={flatDirectories}
                 fullDirectories={directories}
-                anchors={anchors}
+                anchors={config.floatTOC ? [] : anchors}
                 config={config}
               />
               <Body
                 meta={meta}
                 config={config}
                 filepathWithName={filepathWithName}
+                toc={<ToC titles={config.floatTOC ? titles: null}/>}
                 navLinks={
                   <NavLinks
                     flatDirectories={flatDocsDirectories}

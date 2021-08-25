@@ -357,10 +357,10 @@ pre .prism-code .token.tag:not(.script) {
   @apply pr-6 border-r-2 pl-0 border-l-0;
 }
 .nextra-container:not(.rtl):not(.page) article.docs-container {
-  @apply xl:pr-72;
+  @apply xl:pr-8;
 }
 .nextra-container.rtl:not(.page) .docs-container {
-  @apply xl:pl-72;
+  @apply xl:pl-8;
 }
 @screen md {
   .nextra-container:not(.page) article.docs-container .bleed.full {
