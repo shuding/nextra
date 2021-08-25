@@ -104,7 +104,7 @@ const H2 = ({ slugger }) => ({ children, ...props }) => {
 
 const H3 = ({ slugger }) => ({ children, ...props }) => {
   return (
-    <HeaderLink tag="h3" slugger={slugger} {...props}>
+    <HeaderLink tag="h3" slugger={slugger} withObserver {...props}>
       {children}
     </HeaderLink>
   )
@@ -112,7 +112,7 @@ const H3 = ({ slugger }) => ({ children, ...props }) => {
 
 const H4 = ({ slugger }) => ({ children, ...props }) => {
   return (
-    <HeaderLink tag="h4" slugger={slugger} {...props}>
+    <HeaderLink tag="h4" slugger={slugger} withObserver {...props}>
       {children}
     </HeaderLink>
   )
@@ -120,7 +120,7 @@ const H4 = ({ slugger }) => ({ children, ...props }) => {
 
 const H5 = ({ slugger }) => ({ children, ...props }) => {
   return (
-    <HeaderLink tag="h5" slugger={slugger} {...props}>
+    <HeaderLink tag="h5" slugger={slugger} withObserver {...props}>
       {children}
     </HeaderLink>
   )
@@ -128,7 +128,7 @@ const H5 = ({ slugger }) => ({ children, ...props }) => {
 
 const H6 = ({ slugger }) => ({ children, ...props }) => {
   return (
-    <HeaderLink tag="h6" slugger={slugger} {...props}>
+    <HeaderLink tag="h6" slugger={slugger} withObserver {...props}>
       {children}
     </HeaderLink>
   )
