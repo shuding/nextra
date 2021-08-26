@@ -68,7 +68,7 @@ function File({ item, anchors }) {
       const anchorInfo = anchors.map((anchor, i) => {
         const text = innerText(anchor) || ''
         const slug = slugger.slug(text)
-        if (activeAnchor[slug]) {
+        if (activeAnchor[slug] && activeAnchor[slug].isActive) {
           activeIndex = i
         }
         return { text, slug }

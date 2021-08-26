@@ -30,6 +30,7 @@ export default {
   unstable_faviconGlyph: '👋',
   prevLinks: true,
   nextLinks: true,
+  floatTOC: true,
   footer: true,
   footerEditLink: ({ locale }) =>
     locale === 'zh' ? '前往 GitHub 编辑此页' : 'Edit this page on GitHub',

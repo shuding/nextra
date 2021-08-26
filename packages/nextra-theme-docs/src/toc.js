@@ -22,7 +22,6 @@ const indent = level => {
 export default function ToC({ titles }) {
   const slugger = new Slugger()
   const activeAnchor = useActiveAnchor()
-  let previouslyActive = true
 
   return (
     <div className="w-64 hidden xl:block text-sm pl-4">
@@ -30,14 +29,10 @@ export default function ToC({ titles }) {
         <ul className="overflow-y-auto sticky max-h-[calc(100vh-4rem)] top-16 pt-8 pb-10 m-0 list-none">
           {titles
             .filter(item => item.props.mdxType !== 'h1')
-            .map((item, i, arr) => {
+            .map(item => {
               const text = innerText(item.props.children) || ''
               const slug = slugger.slug(text)
-
               const state = activeAnchor[slug]
-              const highlight =
-                previouslyActive && (!state || i === arr.length - 1)
-              previouslyActive = state
 
               return (
                 <li key={slug} style={indent(item.props.mdxType)}>
@@ -45,7 +40,7 @@ export default function ToC({ titles }) {
                     href={`#${slug}`}
                     className={cn(
                       'no-underline hover:text-gray-900 dark:hover:text-gray-100',
-                      highlight
+                      state && state.isActive
                         ? 'text-gray-900 dark:text-gray-100 font-semibold'
                         : 'text-gray-600'
                     )}

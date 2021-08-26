@@ -25,7 +25,6 @@
   "dependencies": {
     "@mdx-js/react": "^1.6.16",
     "@reach/skip-nav": "^0.11.2",
-    "@researchgate/react-intersection-observer": "^1.3.5",
     "classnames": "^2.2.6",
     "focus-visible": "^5.1.0",
     "github-slugger": "^1.3.0",
