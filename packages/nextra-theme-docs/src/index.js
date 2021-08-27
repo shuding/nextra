@@ -100,7 +100,7 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
   if (activeType === 'nav') {
     return (
       <React.Fragment>
-        <Head config={config} title={title} locale={locale} />
+        <Head config={config} title={title} locale={locale} meta={meta} />
         <MenuContext.Provider
           value={{
             menu,
@@ -148,7 +148,7 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
   // Docs layout
   return (
     <React.Fragment>
-      <Head config={config} title={title} locale={locale} />
+      <Head config={config} title={title} locale={locale} meta={meta} />
       <MenuContext.Provider
         value={{
           menu,

@@ -3,7 +3,7 @@ import NextHead from 'next/head'
 
 import renderComponent from './utils/render-component'
 
-export default function Head({ config, title, locale }) {
+export default function Head({ config, title, locale, meta }) {
   return (
     <NextHead>
       {config.font ? (
@@ -11,7 +11,7 @@ export default function Head({ config, title, locale }) {
       ) : null}
       <title>
         {title}
-        {renderComponent(config.titleSuffix, { locale })}
+        {renderComponent(config.titleSuffix, { locale, config, title, meta })}
       </title>
       {config.font ? (
         <style
@@ -20,7 +20,7 @@ export default function Head({ config, title, locale }) {
           }}
         />
       ) : null}
-      {renderComponent(config.head, { locale })}
+      {renderComponent(config.head, { locale, config, title, meta })}
       {config.unstable_faviconGlyph ? (
         <link
           rel="icon"
