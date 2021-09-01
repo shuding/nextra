@@ -31,10 +31,10 @@ async function getPageMap(currentResourcePath) {
       await Promise.all(
         files.map(async f => {
           const filePath = path.resolve(dir, f.name)
-          const fileRoute = path.join(
+          const fileRoute = slash(path.join(
             route,
             removeExtension(f.name).replace(/^index$/, '')
-          )
+          ))
 
           if (f.isDirectory()) {
             if (fileRoute === "/api") return null
