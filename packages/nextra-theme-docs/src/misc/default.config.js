@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default {
-  github: 'https://github.com/shuding/nextra',
+  gitLink: 'https://github.com/shuding/nextra',
   docsRepositoryBase: 'https://github.com/shuding/nextra',
   titleSuffix: ' – Nextra',
   nextLinks: true,
