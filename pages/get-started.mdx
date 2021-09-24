@@ -34,7 +34,7 @@ module.exports = withNextra()
 ```jsx
 // theme.config.js
 export default {
-  github: 'https://github.com/shuding/nextra', // GitHub link in the navbar
+  projectLink: 'https://github.com/shuding/nextra', // GitHub link in the navbar
   docsRepositoryBase: 'https://github.com/shuding/nextra/blob/master', // base URL for the docs repository
   titleSuffix: ' – Nextra',
   nextLinks: true,
@@ -61,6 +61,13 @@ export default {
 }
 ```
 
+import Callout from 'nextra-theme-docs/callout'
+
+<Callout>
+  More configuration options for the docs theme can be found
+  [here](/themes/docs/configuration).
+</Callout>
+
 5. Create `pages/_app.js` and include the theme stylesheet:
 
 ```jsx
@@ -74,8 +81,6 @@ export default function Nextra({ Component, pageProps }) {
 6. You are good to go! Run `yarn next` to start.
 
 ---
-
-import Callout from 'nextra-theme-docs/callout'
 
 <span id="sidebar-and-anchor-links" />
 <Callout>
