@@ -81,14 +81,14 @@ export default function Navbar({
         <LocaleSwitch options={config.i18n} isRTL={isRTL} />
       ) : null}
 
-      {(config.github || config.gitLink) !== null ? (
+      {config.projectLink || config.github ? (
         <a
           className="text-current p-2"
-          href={config.github || config.gitLink}
+          href={config.projectLink || config.github}
           target="_blank"
         >
-          {config.gitIcon ? (
-            renderComponent(config.gitIcon, { locale })
+          {config.projectLinkIcon ? (
+            renderComponent(config.projectLinkIcon, { locale })
           ) : (
             <GitHubIcon height={24} />
           )}
