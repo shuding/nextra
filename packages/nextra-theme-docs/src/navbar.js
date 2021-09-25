@@ -13,7 +13,12 @@ import GitHubIcon from './github-icon'
 import ThemeSwitch from './theme-switch'
 import LocaleSwitch from './locale-switch'
 
-export default function Navbar({ config, isRTL, flatDirectories, flatPageDirectories }) {
+export default function Navbar({
+  config,
+  isRTL,
+  flatDirectories,
+  flatPageDirectories
+}) {
   const { locale, asPath } = useRouter()
   const activeRoute = getFSRoute(asPath, locale).split('#')[0]
   const { menu, setMenu } = useMenuContext()
@@ -76,9 +81,17 @@ export default function Navbar({ config, isRTL, flatDirectories, flatPageDirecto
         <LocaleSwitch options={config.i18n} isRTL={isRTL} />
       ) : null}
 
-      {config.github ? (
-        <a className="text-current p-2" href={config.github} target="_blank">
-          <GitHubIcon height={24} />
+      {config.projectLink || config.github ? (
+        <a
+          className="text-current p-2"
+          href={config.projectLink || config.github}
+          target="_blank"
+        >
+          {config.projectLinkIcon ? (
+            renderComponent(config.projectLinkIcon, { locale })
+          ) : (
+            <GitHubIcon height={24} />
+          )}
         </a>
       ) : null}
 
