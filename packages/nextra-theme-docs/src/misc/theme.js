@@ -284,11 +284,11 @@ const getComponents = args => ({
   table: Table
 })
 
-export default ({ children }) => {
+export default ({ components, children }) => {
   const slugger = new Slugger()
   slugger.index = 0
   return (
-    <MDXProvider components={getComponents({ slugger })}>
+    <MDXProvider components={{ ...getComponents({ slugger }), ...components }}>
       {children}
     </MDXProvider>
   )
