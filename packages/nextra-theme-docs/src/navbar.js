@@ -86,6 +86,7 @@ export default function Navbar({
           className="text-current p-2"
           href={config.projectLink || config.github}
           target="_blank"
+          rel="noreferrer"
         >
           {config.projectLinkIcon ? (
             renderComponent(config.projectLinkIcon, { locale })

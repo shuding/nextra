@@ -73,7 +73,7 @@ const EditPageLink = ({ repository, text, filepath }) => {
   const url = createEditUrl(repository, filepath)
   const { locale } = useRouter()
   return (
-    <a className="text-sm" href={url} target="_blank">
+    <a className="text-sm" href={url} target="_blank" rel="noreferrer">
       {text
         ? renderComponent(text, {
             locale

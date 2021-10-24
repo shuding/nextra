@@ -136,7 +136,7 @@ const A = ({ children, ...props }) => {
   const isExternal = props.href && props.href.startsWith('https://')
   if (isExternal) {
     return (
-      <a target="_blank" rel="noopener" {...props}>
+      <a target="_blank" rel="noreferrer" {...props}>
         {children}
       </a>
     )
