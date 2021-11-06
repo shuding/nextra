@@ -43,7 +43,7 @@ const Layout = ({
         {config.head || null}
       </Head>
       <article className="container prose prose-sm md:prose">
-        {titleNode}
+        {titleNode || (<h1>{title}</h1>)}
         {type === 'post' ? (
           <Meta {...meta} back={back} config={config} />
         ) : (
