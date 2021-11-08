@@ -40,7 +40,7 @@ const Layout = ({
           {title}
           {config.titleSuffix}
         </title>
-        {config.head || null}
+        {config.head ? config.head({ title, meta }) : null}
       </Head>
       <article className="container prose prose-sm md:prose">
         {titleNode || (<h1>{title}</h1>)}
