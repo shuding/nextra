@@ -39,10 +39,10 @@ h1 {
 }
 
 .meta-line {
-  @apply flex justify-between items-start mb-8;
+  @apply flex justify-end items-center mb-8;
 }
 .meta {
-  @apply text-gray-600 mr-8;
+  @apply flex-1 text-gray-600 mr-8;
 }
 .meta .tag {
   @apply inline-block px-1 rounded-md mr-1 text-sm leading-5 no-underline bg-gray-300 text-gray-600 select-none;
@@ -58,13 +58,13 @@ h1 {
 }
 
 .nav-line {
-  @apply mb-8 text-right;
+  @apply flex justify-end items-center flex-row mb-8 text-right;
 }
 .nav-line .nav-link {
   @apply ml-3 text-gray-600;
 }
 .nav-line span.nav-link {
-  @apply ml-3 text-gray-900 cursor-default;
+  @apply ml-3 text-gray-600 cursor-default;
 }
 
 .post-item .post-item-date {

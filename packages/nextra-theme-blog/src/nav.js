@@ -1,7 +1,8 @@
 import React from 'react'
 import Link from 'next/link'
+import ThemeSwitch from './theme-switch'
 
-export default function Nav({ navPages }) {
+export default function Nav({ navPages, config }) {
   return (
     <div className="nav-line">
       {navPages.map(page => {
@@ -13,11 +14,14 @@ export default function Nav({ navPages }) {
           )
         }
         return (
-          <Link key={page.route} href={page.route}>
-            <a className="nav-link">{page.frontMatter.title || page.name}</a>
-          </Link>
+          <React.Fragment>
+            <Link key={page.route} href={page.route}>
+              <a className="nav-link">{page.frontMatter.title || page.name}</a>
+            </Link>
+          </React.Fragment>
         )
       })}
+      {config.darkMode && <ThemeSwitch />}
     </div>
   )
 }
