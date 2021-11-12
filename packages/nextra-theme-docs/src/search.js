@@ -122,7 +122,7 @@ const Search = ({ directories = [] }) => {
         />
         {show ? null : (
           <div className="hidden sm:flex absolute inset-y-0 right-0 py-1.5 pr-1.5">
-            <kbd className="inline-flex items-center px-2 font-sans text-sm font-medium text-gray-400 border border-gray-200 rounded bg-gray-50">
+            <kbd className="inline-flex items-center px-2 font-sans text-sm font-medium text-gray-400 dark:text-gray-800 dark:border-gray-800 border rounded">
               /
             </kbd>
           </div>
