@@ -14,7 +14,7 @@ export default function ThemeSwitch() {
 
   return (
     <button
-      className="text-current p-2 cursor-pointer"
+      className="text-current p-2 cursor-pointer focus:ring outline-none"
       onClick={toggleTheme}
       aria-label="Toggle theme"
       onKeyDown={e => {
