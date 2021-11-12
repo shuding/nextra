@@ -1,5 +1,6 @@
 export default {
   github: 'https://github.com/shuding/nextra',
+  projectChatLink: 'https://discord.gg/hEM84NMkRv', // Next.js discord server
   docsRepositoryBase:
     'https://github.com/shuding/nextra/tree/core/examples/docs/pages',
   titleSuffix: ' – Nextra',
