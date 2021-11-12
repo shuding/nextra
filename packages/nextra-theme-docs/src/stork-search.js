@@ -179,23 +179,6 @@ export default function Search() {
       {renderList && (
         <div className="z-10 search-overlay" onClick={() => setShow(false)} />
       )}
-      <input
-        onChange={e => {
-          setSearch(e.target.value)
-          setShow(true)
-        }}
-        className="w-full px-3 py-2 leading-tight border rounded appearance-none focus:outline-none focus:ring"
-        type="search"
-        placeholder='Search ("/" to focus)'
-        onKeyDown={handleKeyDown}
-        onFocus={() => {
-          load()
-          setShow(true)
-        }}
-        ref={input}
-        spellCheck={false}
-      />
-
       <div className="relative flex items-center">
         <input
           onChange={e => {
