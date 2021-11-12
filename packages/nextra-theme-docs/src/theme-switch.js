@@ -13,10 +13,10 @@ export default function ThemeSwitch() {
   }
 
   return (
-    <a
+    <button
       className="text-current p-2 cursor-pointer"
-      tabIndex="0"
       onClick={toggleTheme}
+      aria-label="Toggle theme"
       onKeyDown={e => {
         if (e.key === 'Enter') toggleTheme()
       }}
@@ -28,6 +28,7 @@ export default function ThemeSwitch() {
           width="24"
           height="24"
           stroke="currentColor"
+          aria-hidden="true"
         >
           <path
             strokeLinecap="round"
@@ -43,6 +44,7 @@ export default function ThemeSwitch() {
           width="24"
           height="24"
           stroke="currentColor"
+          aria-hidden="true"
         >
           <path
             strokeLinecap="round"
@@ -63,8 +65,9 @@ export default function ThemeSwitch() {
           strokeLinejoin="round"
           fill="none"
           shapeRendering="geometricPrecision"
+          aria-hidden="true"
         ></svg>
       )}
-    </a>
+    </button>
   )
 }
