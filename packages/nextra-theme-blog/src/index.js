@@ -226,7 +226,7 @@ export default (opts, _config) => {
     ) : null
 
     return (
-      <ThemeProvider attribute="class">
+      <ThemeProvider attribute="class" defaultTheme="light">
         <Layout
           config={config}
           postList={postList}
