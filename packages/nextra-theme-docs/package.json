@@ -1,7 +1,7 @@
 {
-  "name": "nextra-theme-docs",
-  "version": "1.2.6",
-  "description": "A Nextra theme for documentation sites.",
+  "name": "@chiw/nextra-theme-docs",
+  "version": "0.0.1",
+  "description": "**Fork Version** A Nextra theme for documentation sites.",
   "main": "index.js",
   "repository": "https://github.com/shuding/nextra-theme-docs.git",
   "author": "Shu Ding <g@shud.in>",
