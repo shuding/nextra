@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "build:core": "yarn workspace nextra run build",
-    "build:theme-docs": "yarn workspace nextra-theme-docs run build",
+    "build:theme-docs": "yarn workspace @chiw/nextra-theme-docs run build",
     "build:theme-blog": "yarn workspace nextra-theme-blog run build"
   },
   "devDependencies": {

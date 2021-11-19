@@ -16,7 +16,7 @@
     "dev": "microbundle watch src/index.js src/ssg.js src/loader.js -o dist --no-sourcemap --target=node"
   },
   "dependencies": {
-    "@mdx-js/loader": "^2.0.0-next.9",
+    "@mdx-js/loader": "^1.6.22",
     "download": "^8.0.0",
     "graceful-fs": "^4.2.6",
     "gray-matter": "^4.0.3",
