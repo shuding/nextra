@@ -7,102 +7,97 @@ const markdownExtensions = ['md', 'mdx']
 const markdownExtensionTest = /\.mdx?$/
 const STORK_PATH = process.env.STORK_PATH || 'stork'
 
-export default (...args) =>
-  (nextConfig = {}) => {
-    const nextraConfig =
-      typeof args[0] === 'string'
-        ? {
-            theme: args[0],
-            themeConfig: args[1]
-          }
-        : args[0]
+export default (...args) => (nextConfig = {}) => {
+  const nextraConfig =
+    typeof args[0] === 'string'
+      ? {
+          theme: args[0],
+          themeConfig: args[1]
+        }
+      : args[0]
 
-    const locales = nextConfig.i18n ? nextConfig.i18n.locales : null
-    const defaultLocale = nextConfig.i18n ? nextConfig.i18n.defaultLocale : null
+  const locales = nextConfig.i18n ? nextConfig.i18n.locales : null
+  const defaultLocale = nextConfig.i18n ? nextConfig.i18n.defaultLocale : null
 
-    let pageExtensions = nextConfig.pageExtensions || [...defaultExtensions]
-    if (locales) {
-      console.log('You have i18n enabled for Nextra.')
-      if (!defaultLocale) {
-        console.error('Default locale is missing.')
-      }
-      pageExtensions = pageExtensions.concat(
-        markdownExtensions.map(ext => defaultLocale + '.' + ext)
-      )
-    } else {
-      pageExtensions = pageExtensions.concat(markdownExtensions)
+  let pageExtensions = nextConfig.pageExtensions || [...defaultExtensions]
+  if (locales) {
+    console.log('You have i18n enabled for Nextra.')
+    if (!defaultLocale) {
+      console.error('Default locale is missing.')
     }
+    pageExtensions = pageExtensions.concat(
+      markdownExtensions.map(ext => defaultLocale + '.' + ext)
+    )
+  } else {
+    pageExtensions = pageExtensions.concat(markdownExtensions)
+  }
 
-    if (nextraConfig.unstable_stork) {
-      console.log(
-        'You have Stork indexing enabled for Nextra. Stork binary:',
-        STORK_PATH
-      )
+  if (nextraConfig.unstable_stork) {
+    console.log(
+      'You have Stork indexing enabled for Nextra. Stork binary:',
+      STORK_PATH
+    )
 
-      // Add header for .st
-      const originalHeaders = nextConfig.headers || (() => [])
-      nextConfig.headers = async () => {
-        return [
-          ...(await originalHeaders()),
-          {
-            source: `/:index(index-.+\.st)`,
-            headers: [
-              {
-                key: 'content-type',
-                value: 'application/wasm'
-              }
-            ]
-          }
-        ]
-      }
-    }
-    let mdxOptions = {
-      ...nextraConfig.mdxOptions,
-      remarkPlugins: (nextraConfig.mdxOptions &&
-      nextraConfig.mdxOptions.remarkPlugins
-        ? nextraConfig.mdxOptions.remarkPlugins
-        : []
-      ).concat([remarkGfm])
-    }
-    mdxOptions = {
-      providerImportSource: '@mdx-js/react',
-      ...mdxOptions
-    }
-
-    return Object.assign({}, nextConfig, {
-      pageExtensions,
-      webpack(config, options) {
-        config.module.rules.push({
-          test: markdownExtensionTest,
-          use: [
-            options.defaultLoaders.babel,
+    // Add header for .st
+    const originalHeaders = nextConfig.headers || (() => [])
+    nextConfig.headers = async () => {
+      return [
+        ...(await originalHeaders()),
+        {
+          source: `/:index(index-.+\.st)`,
+          headers: [
             {
-              loader: '@mdx-js/loader',
-              options: mdxOptions
-            },
-            {
-              loader: 'nextra/loader',
-              options: { ...nextraConfig, locales, defaultLocale }
+              key: 'content-type',
+              value: 'application/wasm'
             }
           ]
-        })
-
-        if (!config.plugins) config.plugins = []
-        if (nextraConfig.unstable_stork) {
-          config.plugins.push({
-            apply: compiler => {
-              compiler.hooks.done.tap('buildStorkIndex', () => {
-                buildStorkIndex(STORK_PATH, locales)
-              })
-            }
-          })
         }
-
-        if (typeof nextConfig.webpack === 'function') {
-          return nextConfig.webpack(config, options)
-        }
-
-        return config
-      }
-    })
+      ]
+    }
   }
+
+  return Object.assign({}, nextConfig, {
+    pageExtensions,
+    webpack(config, options) {
+      config.module.rules.push({
+        test: markdownExtensionTest,
+        use: [
+          options.defaultLoaders.babel,
+          {
+            loader: '@mdx-js/loader',
+            options: {
+              providerImportSource: '@mdx-js/react',
+              ...nextraConfig.mdxOptions,
+              remarkPlugins: (nextraConfig.mdxOptions &&
+              nextraConfig.mdxOptions.remarkPlugins
+                ? nextraConfig.mdxOptions.remarkPlugins
+                : []
+              ).concat([remarkGfm])
+            }
+          },
+          {
+            loader: 'nextra/loader',
+            options: { ...nextraConfig, locales, defaultLocale }
+          }
+        ]
+      })
+
+      if (!config.plugins) config.plugins = []
+      if (nextraConfig.unstable_stork) {
+        config.plugins.push({
+          apply: compiler => {
+            compiler.hooks.done.tap('buildStorkIndex', () => {
+              buildStorkIndex(STORK_PATH, locales)
+            })
+          }
+        })
+      }
+
+      if (typeof nextConfig.webpack === 'function') {
+        return nextConfig.webpack(config, options)
+      }
+
+      return config
+    }
+  })
+}
