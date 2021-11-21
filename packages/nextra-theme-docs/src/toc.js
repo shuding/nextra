@@ -22,7 +22,6 @@ const indent = level => {
 export default function ToC({ titles }) {
   const slugger = new Slugger()
   const activeAnchor = useActiveAnchor()
-  // console.log('ToC', titles);
 
   return (
     <div className="w-64 hidden xl:block text-sm pl-4">
