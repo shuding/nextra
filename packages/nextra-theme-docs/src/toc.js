@@ -28,14 +28,14 @@ export default function ToC({ titles }) {
       {titles ? (
         <ul className="overflow-y-auto sticky max-h-[calc(100vh-4rem)] top-16 pt-8 pb-10 m-0 list-none">
           {titles
-            .filter(item => item.props.mdxType !== 'h1')
+            .filter(item => item.type !== 'h1')
             .map(item => {
               const text = innerText(item.props.children) || ''
               const slug = slugger.slug(text)
               const state = activeAnchor[slug]
 
               return (
-                <li key={slug} style={indent(item.props.mdxType)}>
+                <li key={slug} style={indent(item.type)}>
                   <a
                     href={`#${slug}`}
                     className={cn(

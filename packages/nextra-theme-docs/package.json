@@ -1,6 +1,6 @@
 {
   "name": "nextra-theme-docs",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "description": "A Nextra theme for documentation sites.",
   "main": "index.js",
   "repository": "https://github.com/shuding/nextra-theme-docs.git",
@@ -23,7 +23,7 @@
     "dev:tailwind": "TAILWIND_MODE=watch yarn postcss src/styles.css -o style.css -w --verbose"
   },
   "dependencies": {
-    "@mdx-js/react": "^1.6.16",
+    "@mdx-js/react": "^2.0.0-rc.2",
     "@reach/skip-nav": "^0.11.2",
     "classnames": "^2.2.6",
     "focus-visible": "^5.1.0",

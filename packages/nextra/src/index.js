@@ -66,6 +66,7 @@ export default (...args) => (nextConfig = {}) => {
           {
             loader: '@mdx-js/loader',
             options: {
+              providerImportSource: '@mdx-js/react',
               ...nextraConfig.mdxOptions,
               remarkPlugins: (nextraConfig.mdxOptions &&
               nextraConfig.mdxOptions.remarkPlugins
