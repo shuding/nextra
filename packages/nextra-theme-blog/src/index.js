@@ -4,7 +4,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
-import { ThemeProvider } from 'next-themes'
+import { ThemeProvider, useTheme } from 'next-themes'
 
 import Meta from './meta'
 import Nav from './nav'
@@ -65,6 +65,7 @@ const Layout = ({
 
 export default (opts, _config) => {
   const router = useRouter()
+  const { theme, resolvedTheme } = useTheme()
   const config = Object.assign(
     {
       readMore: 'Read More →',
@@ -172,7 +173,9 @@ export default (opts, _config) => {
               host: config.cusdis.host || 'https://cusdis.com',
               appId: config.cusdis.appId,
               pageId: router.pathname,
-              pageTitle: title
+              pageTitle: title,
+              theme:
+                theme === 'dark' || resolvedTheme === 'dark' ? 'dark' : 'light'
             }}
           />
         )
@@ -226,7 +229,11 @@ export default (opts, _config) => {
     ) : null
 
     return (
-      <ThemeProvider attribute="class" defaultTheme="light">
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        enableSystem={true}
+      >
         <Layout
           config={config}
           postList={postList}

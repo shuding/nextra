@@ -42,11 +42,15 @@ h1 {
   @apply flex justify-end items-center mb-8;
 }
 .meta {
-  @apply flex-1 text-gray-600 mr-8;
+  @apply flex-1 text-gray-400 mr-8;
 }
 .meta .tag {
-  @apply inline-block px-1 rounded-md mr-1 text-sm leading-5 no-underline bg-gray-300 text-gray-600 select-none;
+  @apply inline-block px-1 rounded-md mr-1 text-sm leading-5 no-underline bg-gray-200 text-gray-400 select-none;
 }
+.dark .meta .tag {
+  @apply bg-gray-400 text-gray-100;
+}
+
 .meta .tag:hover {
   @apply text-gray-800;
 }
@@ -64,17 +68,18 @@ h1 {
   @apply ml-3 text-gray-600;
 }
 .nav-line span.nav-link {
-  @apply ml-3 text-gray-600 cursor-default;
+  @apply ml-3 text-gray-400 cursor-default;
 }
 
 .post-item .post-item-date {
-  @apply text-sm text-gray-600;
+  @apply text-sm text-gray-300;
 }
 .post-item .post-item-more {
   @apply ml-1 text-gray-600;
 }
 .post-item .post-item-desc {
   margin-bottom: .5em;
+  @apply text-gray-400;
 }
 .post-item .post-item-title {
   @apply no-underline;
