@@ -100,24 +100,36 @@ const Search = ({ directories = [] }) => {
   const renderList = show && results.length > 0
 
   return (
-    <div className="nextra-search relative w-full md:w-64">
+    <div className="relative w-full nextra-search md:w-64">
       {renderList && (
-        <div className="search-overlay z-10" onClick={() => setShow(false)} />
+        <div className="z-10 search-overlay" onClick={() => setShow(false)} />
       )}
-      <input
-        onChange={e => {
-          setSearch(e.target.value)
-          setShow(true)
-        }}
-        className="appearance-none border rounded py-2 px-3 leading-tight focus:outline-none focus:ring w-full"
-        type="search"
-        placeholder='Search ("/" to focus)'
-        onKeyDown={handleKeyDown}
-        onFocus={() => setShow(true)}
-        ref={input}
-      />
+
+      <div className="relative flex items-center">
+        <input
+          onChange={e => {
+            setSearch(e.target.value)
+            setShow(true)
+          }}
+          className="block w-full px-3 py-2 leading-tight border rounded appearance-none focus:outline-none focus:ring"
+          type="search"
+          placeholder="Search documentation..."
+          onKeyDown={handleKeyDown}
+          onFocus={() => setShow(true)}
+          onBlur={() => setShow(false)}
+          ref={input}
+          spellCheck={false}
+        />
+        {show ? null : (
+          <div className="hidden sm:flex absolute inset-y-0 right-0 py-1.5 pr-1.5">
+            <kbd className="inline-flex items-center px-2 font-sans text-sm font-medium text-gray-400 dark:text-gray-800 dark:border-gray-800 border rounded">
+              /
+            </kbd>
+          </div>
+        )}
+      </div>
       {renderList && (
-        <ul className="shadow-md list-none p-0 m-0 absolute left-0 md:right-0 rounded mt-1 border top-100 divide-y z-20 w-full md:w-auto">
+        <ul className="absolute left-0 z-20 w-full p-0 m-0 mt-1 list-none border divide-y rounded shadow-md md:right-0 top-100 md:w-auto">
           {results.map((res, i) => {
             return (
               <Item

@@ -10,6 +10,7 @@ import useMenuContext from './utils/menu-context'
 import Search from './search'
 import StorkSearch from './stork-search'
 import GitHubIcon from './github-icon'
+import DiscordIcon from './discord-icon'
 import ThemeSwitch from './theme-switch'
 import LocaleSwitch from './locale-switch'
 
@@ -91,7 +92,27 @@ export default function Navbar({
           {config.projectLinkIcon ? (
             renderComponent(config.projectLinkIcon, { locale })
           ) : (
-            <GitHubIcon height={24} />
+            <React.Fragment>
+              <GitHubIcon height={24} />
+              <span className="sr-only">GitHub</span>
+            </React.Fragment>
+          )}
+        </a>
+      ) : null}
+      {config.projectChatLink ? (
+        <a
+          className="text-current p-2"
+          href={config.projectChatLink}
+          target="_blank"
+          rel="noreferrer"
+        >
+          {config.projectChatLinkIcon ? (
+            renderComponent(config.projectChatLinkIcon, { locale })
+          ) : (
+            <React.Fragment>
+              <DiscordIcon height={24} />
+              <span className="sr-only">Discord</span>
+            </React.Fragment>
           )}
         </a>
       ) : null}

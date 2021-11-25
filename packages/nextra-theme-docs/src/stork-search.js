@@ -175,28 +175,38 @@ export default function Search() {
   const renderList = show && results.length > 0
 
   return (
-    <div className="nextra-search nextra-stork relative w-full md:w-64">
+    <div className="relative w-full nextra-search nextra-stork md:w-64">
       {renderList && (
-        <div className="search-overlay z-10" onClick={() => setShow(false)} />
+        <div className="z-10 search-overlay" onClick={() => setShow(false)} />
       )}
-      <input
-        onChange={e => {
-          setSearch(e.target.value)
-          setShow(true)
-        }}
-        className="appearance-none border rounded py-2 px-3 leading-tight focus:outline-none focus:ring w-full"
-        type="search"
-        placeholder='Search ("/" to focus)'
-        onKeyDown={handleKeyDown}
-        onFocus={() => {
-          load()
-          setShow(true)
-        }}
-        ref={input}
-        spellCheck={false}
-      />
+      <div className="relative flex items-center">
+        <input
+          onChange={e => {
+            setSearch(e.target.value)
+            setShow(true)
+          }}
+          className="block w-full px-3 py-2 leading-tight border rounded appearance-none focus:outline-none focus:ring"
+          type="search"
+          placeholder="Search documentation..."
+          onKeyDown={handleKeyDown}
+          onFocus={() => {
+            load()
+            setShow(true)
+          }}
+          onBlur={() => setShow(false)}
+          ref={input}
+          spellCheck={false}
+        />
+        {show ? null : (
+          <div className="hidden sm:flex absolute inset-y-0 right-0 py-1.5 pr-1.5">
+            <kbd className="inline-flex items-center px-2 font-sans text-sm font-medium text-gray-400 dark:text-gray-800 dark:border-gray-800 border rounded">
+              /
+            </kbd>
+          </div>
+        )}
+      </div>
       {renderList && (
-        <ul className="p-0 m-0 mt-1 top-full absolute divide-y z-20">
+        <ul className="absolute z-20 p-0 m-0 mt-1 divide-y top-full">
           {results.map((res, i) => {
             return (
               <Item
