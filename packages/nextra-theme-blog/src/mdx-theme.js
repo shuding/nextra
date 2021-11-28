@@ -8,12 +8,11 @@ import Highlight, { defaultProps } from 'prism-react-renderer'
 
 const THEME = {
   plain: {
-    color: '#000',
     backgroundColor: 'transparent'
   },
   styles: [
     {
-      types: ['keyword'],
+      types: ['keyword', 'builtin'],
       style: {
         color: '#ff0078',
         fontWeight: 'bold'
@@ -27,21 +26,9 @@ const THEME = {
       }
     },
     {
-      types: ['string', 'url', 'attr-value'],
-      style: {
-        color: '#028265'
-      }
-    },
-    {
       types: ['variable', 'language-javascript'],
       style: {
-        color: '#c6c5fe'
-      }
-    },
-    {
-      types: ['builtin', 'char', 'constant'],
-      style: {
-        color: '#000'
+        color: '#0076ff'
       }
     },
     {
@@ -49,18 +36,6 @@ const THEME = {
       style: {
         color: '#d9931e',
         fontStyle: 'normal'
-      }
-    },
-    {
-      types: ['punctuation', 'operator'],
-      style: {
-        color: '#333'
-      }
-    },
-    {
-      types: ['number', 'function', 'tag'],
-      style: {
-        color: '#0076ff'
       }
     },
     {

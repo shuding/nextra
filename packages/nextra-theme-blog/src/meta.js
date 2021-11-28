@@ -1,7 +1,8 @@
 import React from 'react'
 import Link from 'next/link'
+import ThemeSwitch from './theme-switch'
 
-export default function Meta({ author, date, tag, back }) {
+export default function Meta({ author, date, tag, back, config }) {
   const authorNode = author ? author : null
   const dateNode = date ? <time>{new Date(date).toDateString()}</time> : null
   const tags = tag ? tag.split(',').map(s => s.trim()) : []
@@ -26,6 +27,7 @@ export default function Meta({ author, date, tag, back }) {
           <a className="meta-back">Back</a>
         </Link>
       ) : null}
+      {config.darkMode && <ThemeSwitch />}
     </div>
   )
 }
