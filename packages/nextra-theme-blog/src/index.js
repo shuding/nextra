@@ -148,7 +148,7 @@ export default (opts, _config) => {
     const tagName = type === 'tag' ? query.tag : null
 
     const content = props.children.type()
-    const [titleNode, contentNodes] = getTitle(content.props.children)
+    const [titleNode, contentNodes] = getTitle(content)
     const pageTitle =
       opts.meta.title ||
       (typeof tagName === 'undefined'
