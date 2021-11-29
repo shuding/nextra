@@ -9,8 +9,8 @@ import useMenuContext from './utils/menu-context'
 
 import Search from './search'
 import StorkSearch from './stork-search'
-import GitHubIcon from './github-icon'
-import DiscordIcon from './discord-icon'
+import GitHubIcon from './icons/github'
+import DiscordIcon from './icons/discord'
 import ThemeSwitch from './theme-switch'
 import LocaleSwitch from './locale-switch'
 

@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import parseGitUrl from 'parse-git-url'
 
-import ArrowRight from './arrow-right'
+import ArrowRight from './icons/arrow-right'
 import renderComponent from './utils/render-component'
 
 const NextLink = ({ route, title, isRTL }) => {
