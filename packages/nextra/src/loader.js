@@ -305,7 +305,10 @@ ${layoutConfig ? `import layoutConfig from '${layoutConfig}'` : ''}
 `
 
   content = await compileMdx(content, mdxOptions)
-  content = content.replace('export default MDXContent;', '')
+  content = content.replace(
+    'export default MDXContent;',
+    'const _mdxContent = <MDXContent/>;'
+  )
 
   const suffix = `\n\nexport default function NextraPage (props) {
     return withSSG(withLayout({
@@ -315,7 +318,7 @@ ${layoutConfig ? `import layoutConfig from '${layoutConfig}'` : ''}
       pageMap: ${JSON.stringify(pageMap)}
     }, ${layoutConfig ? 'layoutConfig' : 'null'}))({
       ...props,
-      children: <MDXContent/>
+      children: _mdxContent
     })
 }`
 

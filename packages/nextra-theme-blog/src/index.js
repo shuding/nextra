@@ -27,24 +27,24 @@ const Layout = ({
   navPages,
   postList,
   back,
-  title,
-  comments,
-  children
+  pageTitle,
+  titleNode,
+  contentNodes,
+  comments
 }) => {
-  const [titleNode, contentNodes] = getTitle(children)
   const type = meta.type || 'post'
 
   return (
     <React.Fragment>
       <Head>
         <title>
-          {title}
+          {pageTitle}
           {config.titleSuffix}
         </title>
         {config.head ? config.head({ title, meta }) : null}
       </Head>
       <article className="container prose prose-sm md:prose dark:prose-dark">
-        {titleNode || <h1>{title}</h1>}
+        {titleNode || <h1>{pageTitle}</h1>}
         {type === 'post' ? (
           <Meta {...meta} back={back} config={config} />
         ) : (
@@ -147,8 +147,9 @@ export default (opts, _config) => {
     const { query } = router
     const tagName = type === 'tag' ? query.tag : null
 
-    const [titleNode] = getTitle(props.children)
-    const title =
+    const content = props.children.type()
+    const [titleNode, contentNodes] = getTitle(content.props.children)
+    const pageTitle =
       opts.meta.title ||
       (typeof tagName === 'undefined'
         ? null
@@ -173,7 +174,7 @@ export default (opts, _config) => {
               host: config.cusdis.host || 'https://cusdis.com',
               appId: config.cusdis.appId,
               pageId: router.pathname,
-              pageTitle: title,
+              pageTitle,
               theme:
                 theme === 'dark' || resolvedTheme === 'dark' ? 'dark' : 'light'
             }}
@@ -239,7 +240,9 @@ export default (opts, _config) => {
           postList={postList}
           navPages={navPages}
           back={back}
-          title={title}
+          pageTitle={pageTitle}
+          titleNode={titleNode}
+          contentNodes={contentNodes}
           comments={comments}
           {...opts}
           {...props}

@@ -1,1 +1,1 @@
-module.exports = require('./dist/nextra-theme-blog')
+export { default } from './dist/index'
