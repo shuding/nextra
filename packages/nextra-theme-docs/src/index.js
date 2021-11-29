@@ -11,6 +11,7 @@ import Footer, { NavLinks } from './footer'
 import Theme from './misc/theme'
 import Sidebar from './sidebar'
 import ToC from './toc'
+import { ThemeConfigContext, useConfig } from './config'
 import { ActiveAnchor } from './misc/active-anchor'
 import defaultConfig from './misc/default.config'
 import { getFSRoute } from './utils/get-fs-route'
@@ -33,7 +34,8 @@ function useDirectoryInfo(pageMap) {
   }, [pageMap, locale, defaultLocale, asPath])
 }
 
-function Body({ meta, config, toc, filepathWithName, navLinks, children }) {
+function Body({ meta, toc, filepathWithName, navLinks, children }) {
+  const config = useConfig()
   return (
     <React.Fragment>
       <SkipNavContent />
@@ -45,9 +47,7 @@ function Body({ meta, config, toc, filepathWithName, navLinks, children }) {
         <article className="docs-container relative pt-16 pb-16 px-6 md:px-8 w-full max-w-full flex min-w-0">
           <main className="max-w-screen-md mx-auto pt-4 z-10 min-w-0 w-full">
             <Theme>{children}</Theme>
-            <Footer config={config} filepathWithName={filepathWithName}>
-              {navLinks}
-            </Footer>
+            <Footer filepathWithName={filepathWithName}>{navLinks}</Footer>
           </main>
           {toc}
         </article>
@@ -56,11 +56,9 @@ function Body({ meta, config, toc, filepathWithName, navLinks, children }) {
   )
 }
 
-const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
+const Layout = ({ filename, pageMap, meta, children }) => {
   const { route, locale } = useRouter()
-
-  // @TODO: config should be in a context.
-  const config = Object.assign({}, defaultConfig, _config)
+  const config = useConfig()
 
   const {
     activeType,
@@ -90,7 +88,7 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
   if (activeType === 'nav') {
     return (
       <React.Fragment>
-        <Head config={config} title={title} locale={locale} meta={meta} />
+        <Head title={title} locale={locale} meta={meta} />
         <MenuContext.Provider
           value={{
             menu,
@@ -105,7 +103,6 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
             })}
           >
             <Navbar
-              config={config}
               isRTL={isRTL}
               flatDirectories={flatDirectories}
               flatPageDirectories={flatPageDirectories}
@@ -118,11 +115,9 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
                   fullDirectories={directories}
                   mdShow={false}
                   headings={headings}
-                  config={config}
                 />
                 <Body
                   meta={meta}
-                  config={config}
                   filepathWithName={filepathWithName}
                   navLinks={null}
                 >
@@ -139,7 +134,7 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
   // Docs layout
   return (
     <React.Fragment>
-      <Head config={config} title={title} locale={locale} meta={meta} />
+      <Head title={title} locale={locale} meta={meta} />
       <MenuContext.Provider
         value={{
           menu,
@@ -153,7 +148,6 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
           })}
         >
           <Navbar
-            config={config}
             isRTL={isRTL}
             flatDirectories={flatDirectories}
             flatPageDirectories={flatPageDirectories}
@@ -165,18 +159,15 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
                 flatDirectories={flatDirectories}
                 fullDirectories={directories}
                 headings={headings}
-                config={config}
               />
               <Body
                 meta={meta}
-                config={config}
                 filepathWithName={filepathWithName}
                 toc={<ToC headings={config.floatTOC ? headings : null} />}
                 navLinks={
                   <NavLinks
                     flatDirectories={flatDocsDirectories}
                     currentIndex={activeIndex}
-                    config={config}
                     isRTL={isRTL}
                   />
                 }
@@ -191,10 +182,16 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
   )
 }
 
-export default (opts, config) => props => {
-  return (
-    <ThemeProvider attribute="class">
-      <Layout config={config} {...opts} {...props} />
-    </ThemeProvider>
-  )
+export default (opts, config) => {
+  const extendedConfig = Object.assign({}, defaultConfig, config)
+
+  return props => {
+    return (
+      <ThemeConfigContext.Provider value={extendedConfig}>
+        <ThemeProvider attribute="class">
+          <Layout {...opts} {...props} />
+        </ThemeProvider>
+      </ThemeConfigContext.Provider>
+    )
+  }
 }
