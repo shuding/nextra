@@ -1,34 +1,53 @@
-import remark from 'remark'
-import remarkGfm from 'remark-gfm'
-
-// Part of this script comes from the remark-embed-images project.
+// Based on the remark-embed-images project
 // https://github.com/remarkjs/remark-embed-images
+
 const relative = /^\.{1,2}\//
 
-function transformStaticNextImage() {
-  function visit(node, type, handler) {
-    if (node.type === type) {
-      handler(node)
-    }
-    if (node.children) {
-      node.children.forEach(n => visit(n, type, handler))
+function visit(node, type, handler) {
+  if (node.type === type) {
+    handler(node)
+  }
+  if (node.children) {
+    node.children.forEach(n => visit(n, type, handler))
+  }
+}
+
+function ASTNodeImport(name, from) {
+  return {
+    type: 'mdxjsEsm',
+    value: `import ${name} from "${from}"`,
+    data: {
+      estree: {
+        type: 'Program',
+        body: [
+          {
+            type: 'ImportDeclaration',
+            specifiers: [
+              {
+                type: 'ImportDefaultSpecifier',
+                local: { type: 'Identifier', name }
+              }
+            ],
+            source: {
+              type: 'Literal',
+              value: from,
+              raw: `"${from}"`
+            }
+          }
+        ],
+        sourceType: 'module'
+      }
     }
   }
+}
 
-  return function transformer(tree, file, done) {
+export function remarkStaticImage() {
+  return (tree, _file, done) => {
     const importsToInject = []
 
     visit(tree, 'image', visitor)
     tree.children.unshift(...importsToInject)
-    tree.children.unshift({
-      type: 'paragraph',
-      children: [
-        {
-          type: 'text',
-          value: 'import $NextImageNextra from "next/image"'
-        }
-      ]
-    })
+    tree.children.unshift(ASTNodeImport('$NextImageNextra', 'next/image'))
     done()
 
     function visitor(node) {
@@ -38,35 +57,51 @@ function transformStaticNextImage() {
         // Unique variable name for the given static image URL.
         const tempVariableName = `$nextraImage${importsToInject.length}`
 
-        // Replace the image node with a MDX component node, which is the Next.js image.
-        node.type = 'html'
-        node.value = `<$NextImageNextra src={${tempVariableName}} alt="${
-          node.alt || ''
-        }" placeholder="blur" />`
+        // Replace the image node with a MDX component node (Next.js Image).
+        Object.assign(node, {
+          type: 'mdxJsxFlowElement',
+          name: '$NextImageNextra',
+          attributes: [
+            {
+              type: 'mdxJsxAttribute',
+              name: 'alt',
+              value: node.alt || ''
+            },
+            {
+              type: 'mdxJsxAttribute',
+              name: 'placeholder',
+              value: 'blur'
+            },
+            {
+              type: 'mdxJsxAttribute',
+              name: 'src',
+              value: {
+                type: 'mdxJsxAttributeValueExpression',
+                value: tempVariableName,
+                data: {
+                  estree: {
+                    type: 'Program',
+                    body: [
+                      {
+                        type: 'ExpressionStatement',
+                        expression: {
+                          type: 'Identifier',
+                          name: tempVariableName
+                        }
+                      }
+                    ],
+                    sourceType: 'module'
+                  }
+                }
+              }
+            }
+          ],
+          children: []
+        })
 
         // Inject the static image import into the root node.
-        importsToInject.push({
-          type: 'paragraph',
-          children: [
-            {
-              type: 'text',
-              value: `import ${tempVariableName} from "${url}"`
-            }
-          ]
-        })
+        importsToInject.push(ASTNodeImport(tempVariableName, url))
       }
     }
   }
-}
-
-export function transformStaticImage(source) {
-  return new Promise((resolve, reject) => {
-    remark()
-      .use(remarkGfm)
-      .use(transformStaticNextImage)
-      .process(source, (err, file) => {
-        if (err) return reject(err)
-        return resolve(String(file))
-      })
-  })
 }

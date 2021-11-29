@@ -12,7 +12,6 @@ import {
   getFileName,
   parseJsonFile
 } from './utils'
-import { transformStaticImage } from './static-image'
 import { compileMdx } from './compile'
 
 const { promises: fs } = gracefulFs
@@ -293,11 +292,7 @@ ${layoutConfig ? `import layoutConfig from '${layoutConfig}'` : ''}
 
 `
 
-  if (unstable_staticImage) {
-    content = await transformStaticImage(content)
-  }
-
-  content = await compileMdx(content, mdxOptions)
+  content = await compileMdx(content, mdxOptions, { unstable_staticImage })
   content = content.replace(
     'export default MDXContent;',
     'const _mdxContent = <MDXContent/>;'

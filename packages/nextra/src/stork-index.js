@@ -3,8 +3,8 @@ import gracefulFs from 'graceful-fs'
 import cp from 'child_process'
 import { promisify } from 'util'
 import download from 'download'
-import remark from 'remark'
-import strip from 'strip-markdown'
+// import remark from 'remark'
+// import strip from 'strip-markdown'
 
 const { promises: fs, statSync, mkdirSync } = gracefulFs
 const execFile = promisify(cp.execFile)
@@ -25,24 +25,25 @@ const getStemmingLanguage = locale => {
 }
 
 const getPlainText = async content => {
-  let plainText = ''
+  // let plainText = ''
 
-  await remark()
-    .use(strip)
-    .use(() => tree => {
-      for (let i = 0; i < tree.children.length; i++) {
-        try {
-          const value = tree.children[i].children[0].value
-          if (/^(import|export) /.test(value)) {
-            continue
-          }
-          plainText += value + '\n'
-        } catch (e) {}
-      }
-    })
-    .process(content)
+  // await remark()
+  //   .use(strip)
+  //   .use(() => tree => {
+  //     for (let i = 0; i < tree.children.length; i++) {
+  //       try {
+  //         const value = tree.children[i].children[0].value
+  //         if (/^(import|export) /.test(value)) {
+  //           continue
+  //         }
+  //         plainText += value + '\n'
+  //       } catch (e) {}
+  //     }
+  //   })
+  //   .process(content)
 
-  return plainText
+  // return plainText
+  return content
 }
 
 export async function addStorkIndex({

@@ -65,7 +65,7 @@ About TBL
 
 Instead, they used the clone created by a team at the University of Illinois Urbana-Champaign (UIUC), which never supported editing because programmer Marc Andreesen was too dumb to figure out how to do page editing with inline pictures, something Tim Berners-Lee's version had no problem with.
 
-(related: [{'http://www.aaronsw.com/weblog/mylifewithtim'}](http://www.aaronsw.com/weblog/mylifewithtim))
+(related: http://www.aaronsw.com/weblog/mylifewithtim)
 
 ## External links
 
