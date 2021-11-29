@@ -12,7 +12,7 @@
     "build:core": "yarn workspace nextra run build",
     "build:theme-docs": "yarn workspace nextra-theme-docs run build",
     "build:theme-blog": "yarn workspace nextra-theme-blog run build",
-    "version-beta": "lerna version --preid beta",
+    "version-beta": "lerna version --preid beta --force-publish",
     "publish-beta": "lerna publish from-package --canary --preid beta --pre-dist-tag beta"
   },
   "devDependencies": {
