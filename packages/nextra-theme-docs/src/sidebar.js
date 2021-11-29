@@ -11,6 +11,7 @@ import useMenuContext from './utils/menu-context'
 
 import Search from './search'
 import StorkSearch from './stork-search'
+import { useConfig } from './config'
 
 const TreeState = new Map()
 
@@ -133,9 +134,9 @@ export default function Sidebar({
   flatDirectories,
   fullDirectories,
   mdShow = true,
-  headings = [],
-  config
+  headings = []
 }) {
+  const config = useConfig()
   const anchors = useMemo(
     () =>
       headings

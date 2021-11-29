@@ -6,6 +6,7 @@ import parseGitUrl from 'parse-git-url'
 
 import ArrowRight from './icons/arrow-right'
 import renderComponent from './utils/render-component'
+import { useConfig } from './config'
 
 const NextLink = ({ route, title, isRTL }) => {
   return (
@@ -83,7 +84,8 @@ const EditPageLink = ({ repository, text, filepath }) => {
   )
 }
 
-export const NavLinks = ({ config, flatDirectories, currentIndex, isRTL }) => {
+export const NavLinks = ({ flatDirectories, currentIndex, isRTL }) => {
+  const config = useConfig()
   let prev = flatDirectories[currentIndex - 1]
   let next = flatDirectories[currentIndex + 1]
 
@@ -103,8 +105,9 @@ export const NavLinks = ({ config, flatDirectories, currentIndex, isRTL }) => {
   )
 }
 
-const Footer = ({ config, filepathWithName, children }) => {
+const Footer = ({ filepathWithName, children }) => {
   const { locale } = useRouter()
+  const config = useConfig()
 
   return (
     <footer className="mt-24">
