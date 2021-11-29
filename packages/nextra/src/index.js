@@ -1,4 +1,4 @@
-import remarkGfm from 'remark-gfm'
+// import remarkGfm from 'remark-gfm'
 
 import { buildStorkIndex } from './stork-index'
 
@@ -7,7 +7,7 @@ const markdownExtensions = ['md', 'mdx']
 const markdownExtensionTest = /\.mdx?$/
 const STORK_PATH = process.env.STORK_PATH || 'stork'
 
-export default (...args) => (nextConfig = {}) => {
+module.exports = (...args) => (nextConfig = {}) => {
   const nextraConfig =
     typeof args[0] === 'string'
       ? {
@@ -16,8 +16,8 @@ export default (...args) => (nextConfig = {}) => {
         }
       : args[0]
 
-  const locales = nextConfig.i18n ? nextConfig.i18n.locales : null
-  const defaultLocale = nextConfig.i18n ? nextConfig.i18n.defaultLocale : null
+  const locales = nextConfig.i18n?.locales || null
+  const defaultLocale = nextConfig.i18n?.defaultLocale || null
 
   let pageExtensions = nextConfig.pageExtensions || [...defaultExtensions]
   if (locales) {
@@ -63,18 +63,6 @@ export default (...args) => (nextConfig = {}) => {
         test: markdownExtensionTest,
         use: [
           options.defaultLoaders.babel,
-          {
-            loader: '@mdx-js/loader',
-            options: {
-              providerImportSource: '@mdx-js/react',
-              ...nextraConfig.mdxOptions,
-              remarkPlugins: (nextraConfig.mdxOptions &&
-              nextraConfig.mdxOptions.remarkPlugins
-                ? nextraConfig.mdxOptions.remarkPlugins
-                : []
-              ).concat([remarkGfm])
-            }
-          },
           {
             loader: 'nextra/loader',
             options: { ...nextraConfig, locales, defaultLocale }

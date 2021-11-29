@@ -1,1 +1,1 @@
-module.exports = require('./dist/bleed')
+export { default } from './dist/bleed'

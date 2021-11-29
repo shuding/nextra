@@ -1,1 +1,1 @@
-module.exports = require('./dist/callout')
+export { default } from './dist/callout'

@@ -1,1 +1,1 @@
-module.exports = require('./dist/nextra')
+module.exports = require('./dist/index')

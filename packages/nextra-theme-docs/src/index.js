@@ -45,7 +45,7 @@ function Body({ meta, config, toc, filepathWithName, navLinks, children }) {
         </article>
       ) : (
         <article className="docs-container relative pt-16 pb-16 px-6 md:px-8 w-full max-w-full flex min-w-0">
-          <main className="max-w-screen-md mx-auto pt-4 z-10 min-w-0">
+          <main className="max-w-screen-md mx-auto pt-4 z-10 min-w-0 w-full">
             <Theme>{children}</Theme>
             <Footer config={config} filepathWithName={filepathWithName}>
               {navLinks}

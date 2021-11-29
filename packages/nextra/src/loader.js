@@ -1,8 +1,10 @@
 import path from 'path'
-import { promises as fs } from 'graceful-fs'
+import gracefulFs from 'graceful-fs'
 import { getOptions } from 'loader-utils'
 import grayMatter from 'gray-matter'
 import slash from 'slash'
+import { compile } from '@mdx-js/mdx'
+import remarkGfm from 'remark-gfm'
 
 import filterRouteLocale from './filter-route-locale'
 import { addStorkIndex } from './stork-index'
@@ -14,6 +16,7 @@ import {
 } from './utils'
 import { transformStaticImage } from './static-image'
 
+const { promises: fs } = gracefulFs
 const extension = /\.mdx?$/
 const metaExtension = /meta\.?([a-zA-Z-]+)?\.json/
 
@@ -31,13 +34,12 @@ async function getPageMap(currentResourcePath) {
       await Promise.all(
         files.map(async f => {
           const filePath = path.resolve(dir, f.name)
-          const fileRoute = slash(path.join(
-            route,
-            removeExtension(f.name).replace(/^index$/, '')
-          ))
+          const fileRoute = slash(
+            path.join(route, removeExtension(f.name).replace(/^index$/, ''))
+          )
 
           if (f.isDirectory()) {
-            if (fileRoute === "/api") return null
+            if (fileRoute === '/api') return null
 
             const children = await getFiles(filePath, fileRoute)
             if (!children.length) return null
@@ -156,9 +158,23 @@ async function analyzeLocalizedEntries(currentResourcePath, defaultLocale) {
   }
 }
 
+async function compileMdx(source, mdxOptions = {}) {
+  return String(
+    await compile(source, {
+      jsx: true,
+      providerImportSource: '@mdx-js/react',
+      remarkPlugins: [...(mdxOptions.remarkPlugins || []), remarkGfm]
+    })
+  )
+}
+
 export default async function (source) {
   const callback = this.async()
   this.cacheable()
+
+  // Add the entire directory `pages` as the dependency
+  // so we can generate the correct page map
+  this.addContextDependency(path.resolve('pages'))
 
   const options = getOptions(this)
   const {
@@ -169,60 +185,17 @@ export default async function (source) {
     unstable_stork,
     unstable_staticImage
   } = options
-  const { resourcePath, resourceQuery } = this
+  const { resourcePath, resourceQuery, mdxOptions } = this
   const filename = resourcePath.slice(resourcePath.lastIndexOf('/') + 1)
   const fileLocale = getLocaleFromFilename(filename) || 'default'
-
-  // Add the entire directory `pages` as the dependency
-  // so we can generate the correct page map
-  this.addContextDependency(path.resolve('pages'))
-
-  // Generate the page map
-  let [pageMap, route, title] = await getPageMap(resourcePath, locales)
-
-  // Extract frontMatter information if it exists
-  const { data, content } = grayMatter(source)
-
-  // Remove frontMatter from the source
-  source = content
-
-  // Add content to stork indexes
-  if (unstable_stork) {
-    // We only index .MD and .MDX files
-    if (extension.test(filename)) {
-      await addStorkIndex({
-        pageMap,
-        filename,
-        fileLocale,
-        route,
-        title,
-        data,
-        content,
-        locales
-      })
-    }
-  }
+  const rawEntry = resourceQuery.includes('nextra-raw')
 
   // Check if there's a theme provided
   if (!theme) {
-    console.error('No Nextra theme found!')
-    return callback(null, source)
+    throw new Error('No Nextra theme found!')
   }
 
-  let layout = theme
-  let layoutConfig = themeConfig || null
-
-  // Relative path instead of a package name
-  if (theme.startsWith('.') || theme.startsWith('/')) {
-    layout = path.resolve(theme)
-  }
-  if (layoutConfig) {
-    layoutConfig = slash(path.resolve(layoutConfig))
-  }
-
-  const notI18nEntry = resourceQuery.includes('nextra-raw')
-
-  if (locales && !notI18nEntry) {
+  if (locales && !rawEntry) {
     // We need to handle the locale router here
     const { files, defaultIndex, ssr, ssg } = await analyzeLocalizedEntries(
       resourcePath,
@@ -231,6 +204,7 @@ export default async function (source) {
 
     const i18nEntry = `	
 import { useRouter } from 'next/router'	
+
 ${files
   .map(
     (file, index) =>
@@ -282,11 +256,45 @@ ${
     return callback(null, i18nEntry)
   }
 
+  // Generate the page map
+  let [pageMap, route, title] = await getPageMap(resourcePath, locales)
+
   if (locales) {
     const locale = getLocaleFromFilename(filename)
     if (locale) {
       pageMap = filterRouteLocale(pageMap, locale, defaultLocale)
     }
+  }
+
+  // Extract frontMatter information if it exists
+  let { data, content } = grayMatter(source)
+
+  // Add content to stork indexes
+  if (unstable_stork) {
+    // We only index .MD and .MDX files
+    if (extension.test(filename)) {
+      await addStorkIndex({
+        pageMap,
+        filename,
+        fileLocale,
+        route,
+        title,
+        data,
+        content,
+        locales
+      })
+    }
+  }
+
+  let layout = theme
+  let layoutConfig = themeConfig || null
+
+  // Relative path instead of a package name
+  if (theme.startsWith('.') || theme.startsWith('/')) {
+    layout = path.resolve(theme)
+  }
+  if (layoutConfig) {
+    layoutConfig = slash(path.resolve(layoutConfig))
   }
 
   const prefix = `
@@ -296,21 +304,26 @@ ${layoutConfig ? `import layoutConfig from '${layoutConfig}'` : ''}
 
 `
 
+  content = await compileMdx(content, mdxOptions)
+  content = content.replace('export default MDXContent;', '')
+
   const suffix = `\n\nexport default function NextraPage (props) {
     return withSSG(withLayout({
       filename: "${slash(filename)}",
       route: "${slash(route)}",
       meta: ${JSON.stringify(data)},
       pageMap: ${JSON.stringify(pageMap)}
-    }, ${layoutConfig ? 'layoutConfig' : 'null'}))(props)
+    }, ${layoutConfig ? 'layoutConfig' : 'null'}))({
+      ...props,
+      children: <MDXContent/>
+    })
 }`
 
-  if (unstable_staticImage) {
-    source = await transformStaticImage(source)
-  }
+  // FIXME
+  // if (unstable_staticImage) {
+  //   content = await transformStaticImage(content)
+  // }
 
   // Add imports and exports to the source
-  source = prefix + '\n' + source + '\n' + suffix
-
-  return callback(null, source)
+  return callback(null, prefix + '\n' + content + '\n' + suffix)
 }

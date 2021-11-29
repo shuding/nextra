@@ -1,15 +1,17 @@
 import path from 'path'
-import { promises as fs, statSync, mkdirSync } from 'graceful-fs'
+import gracefulFs from 'graceful-fs'
 import cp from 'child_process'
 import { promisify } from 'util'
 import download from 'download'
 import remark from 'remark'
 import strip from 'strip-markdown'
 
+const { promises: fs, statSync, mkdirSync } = gracefulFs
 const execFile = promisify(cp.execFile)
 const isProduction = process.env.NODE_ENV === 'production'
 
-const STORK_WASM = 'https://github.com/jameslittle230/stork/releases/download/v1.1.0/stork.wasm'
+const STORK_WASM =
+  'https://github.com/jameslittle230/stork/releases/download/v1.1.0/stork.wasm'
 
 const files = {}
 const escapeQuote = str => str.replace(/"/g, '\\"')
@@ -43,17 +45,23 @@ const getPlainText = async content => {
   return plainText
 }
 
-export async function addStorkIndex ({
-  fileLocale, route, title, data, content
+export async function addStorkIndex({
+  fileLocale,
+  route,
+  title,
+  data,
+  content
 }) {
   if (!isProduction) return
 
-  if (!files[fileLocale]) files[fileLocale] = {
-    toml: `[input]\n` +
-      `minimum_indexed_substring_length = 2\n` +
-      `title_boost = "Ridiculous"\n` +
-      `stemming = "${getStemmingLanguage(fileLocale)}"\n\n`
-  }
+  if (!files[fileLocale])
+    files[fileLocale] = {
+      toml:
+        `[input]\n` +
+        `minimum_indexed_substring_length = 2\n` +
+        `title_boost = "Ridiculous"\n` +
+        `stemming = "${getStemmingLanguage(fileLocale)}"\n\n`
+    }
   if (!files[fileLocale][route]) {
     const plainText = await getPlainText(content)
 
@@ -61,7 +69,9 @@ export async function addStorkIndex ({
     files[fileLocale].toml += `[[input.files]]\n`
     files[fileLocale].toml += `title = "${escapeQuote(data.title || title)}"\n`
     files[fileLocale].toml += `url = "${escapeQuote(route)}"\n`
-    files[fileLocale].toml += `contents = "${escapeQuote(plainText.replace(/\n/g, '\\n'))}"\n`
+    files[fileLocale].toml += `contents = "${escapeQuote(
+      plainText.replace(/\n/g, '\\n')
+    )}"\n`
     files[fileLocale].toml += `filetype = "PlainText"`
     files[fileLocale].toml += `\n`
 
@@ -77,7 +87,7 @@ export async function addStorkIndex ({
 }
 
 let indexed = false
-export async function buildStorkIndex (storkPath, locales) {
+export async function buildStorkIndex(storkPath, locales) {
   if (indexed) return
   if (!isProduction) return
 

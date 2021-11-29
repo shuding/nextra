@@ -3,6 +3,7 @@
   "version": "1.2.7",
   "description": "A Nextra theme for documentation sites.",
   "main": "index.js",
+  "module": "index.js",
   "repository": "https://github.com/shuding/nextra-theme-docs.git",
   "author": "Shu Ding <g@shud.in>",
   "license": "MIT",
@@ -17,9 +18,9 @@
     "dev": "yarn dev:layout & yarn dev:tailwind",
     "build": "yarn run build:clean && yarn run build:tailwind && yarn run build:layout",
     "build:clean": "rm -rf dist",
+    "build:layout": "node scripts/build.js",
     "build:tailwind": "NODE_ENV=production yarn postcss src/styles.css -o style.css --verbose",
-    "build:layout": "NODE_ENV=production microbundle src/*.js -f cjs -o dist --no-sourcemap --jsx React.createElement --target node",
-    "dev:layout": "microbundle watch src/*.js -f cjs -o dist --no-sourcemap --jsx React.createElement --target node",
+    "dev:layout": "node scripts/dev.js",
     "dev:tailwind": "TAILWIND_MODE=watch yarn postcss src/styles.css -o style.css -w --verbose"
   },
   "dependencies": {
@@ -45,7 +46,7 @@
   "devDependencies": {
     "autoprefixer": "^10.0.2",
     "cssnano": "^4.1.10",
-    "microbundle": "^0.12.4",
+    "esbuild": "^0.14.0",
     "postcss": "^8.2.1",
     "postcss-cli": "^8.3.0",
     "tailwindcss": "^2.2.4"
