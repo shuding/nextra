@@ -11,6 +11,12 @@
     "index.js",
     "style.css"
   ],
+  "exports": {
+    "./style.css": "./style.css",
+    ".": {
+      "import": "./dist/index.js"
+    }
+  },
   "scripts": {
     "build": "yarn run build:tailwind && yarn run build:layout",
     "build:layout": "node scripts/build.js",
