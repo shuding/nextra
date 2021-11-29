@@ -1,12 +1,12 @@
 # Nextra
 
-Nextra is a Next.js plugin. Besides all the features that Next.js supports, it renders your **MDX files** with specific themes.
+Nextra is a Next.js plugin that renders your **MDX files** with custom themes.
 
 ## Development
 
 ### Installation
 
-The Nextra repository uses [Yarn Workspaces](https://classic.yarnpkg.com/en/docs/workspaces). To install dependencies, just simply run `yarn` in the project root directory.
+The Nextra repository uses [Yarn Workspaces](https://classic.yarnpkg.com/en/docs/workspaces) and [Lerna](https://github.com/lerna/lerna). To install dependencies, just simply run `yarn` in the project root directory.
 
 ### Build Nextra Core
 
