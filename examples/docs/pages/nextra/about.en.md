@@ -35,7 +35,7 @@ import Callout from 'nextra-theme-docs/callout'
 Code highlighting with highlighed lines using
 
 ````markdown
-```jsx highlight=1,4,6-8
+```jsx highlight="1,4,6-8"
 import useSWR from 'swr'
 
 function App() {
@@ -48,7 +48,7 @@ function App() {
 ```
 ````
 
-```jsx highlight=1,4,6-8
+```jsx highlight="1,4,6-8"
 import useSWR from 'swr'
 
 function Profile() {

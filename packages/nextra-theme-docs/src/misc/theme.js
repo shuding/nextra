@@ -1,7 +1,7 @@
 import { MDXProvider } from '@mdx-js/react'
 import Slugger from 'github-slugger'
 import Link from 'next/link'
-import React, { useEffect, useMemo, useRef } from 'react'
+import React, { useContext, useEffect, useMemo, useRef } from 'react'
 import innerText from 'react-innertext'
 import Highlight, { defaultProps } from 'prism-react-renderer'
 import 'intersection-observer'
@@ -223,7 +223,18 @@ const A = ({ children, ...props }) => {
   )
 }
 
-const Code = ({ children, className, highlight, ...props }) => {
+const PreContext = React.createContext({})
+const Pre = ({ children, ...props }) => {
+  return (
+    <PreContext.Provider value={props}>
+      <pre>{children}</pre>
+    </PreContext.Provider>
+  )
+}
+
+const Code = ({ children, className }) => {
+  const { highlight, ...props } = useContext(PreContext)
+
   const highlightedRanges = useMemo(() => {
     return highlight
       ? highlight.split(',').map(r => {
@@ -292,6 +303,7 @@ const getComponents = args => ({
   h5: H5(args),
   h6: H6(args),
   a: A,
+  pre: Pre,
   code: Code,
   table: Table
 })

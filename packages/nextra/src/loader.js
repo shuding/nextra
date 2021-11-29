@@ -3,8 +3,6 @@ import gracefulFs from 'graceful-fs'
 import { getOptions } from 'loader-utils'
 import grayMatter from 'gray-matter'
 import slash from 'slash'
-import { compile } from '@mdx-js/mdx'
-import remarkGfm from 'remark-gfm'
 
 import filterRouteLocale from './filter-route-locale'
 import { addStorkIndex } from './stork-index'
@@ -15,6 +13,7 @@ import {
   parseJsonFile
 } from './utils'
 import { transformStaticImage } from './static-image'
+import { compileMdx } from './compile'
 
 const { promises: fs } = gracefulFs
 const extension = /\.mdx?$/
@@ -158,16 +157,6 @@ async function analyzeLocalizedEntries(currentResourcePath, defaultLocale) {
   }
 }
 
-async function compileMdx(source, mdxOptions = {}) {
-  return String(
-    await compile(source, {
-      jsx: true,
-      providerImportSource: '@mdx-js/react',
-      remarkPlugins: [...(mdxOptions.remarkPlugins || []), remarkGfm]
-    })
-  )
-}
-
 export default async function (source) {
   const callback = this.async()
   this.cacheable()
@@ -304,6 +293,10 @@ ${layoutConfig ? `import layoutConfig from '${layoutConfig}'` : ''}
 
 `
 
+  if (unstable_staticImage) {
+    content = await transformStaticImage(content)
+  }
+
   content = await compileMdx(content, mdxOptions)
   content = content.replace(
     'export default MDXContent;',
@@ -321,11 +314,6 @@ ${layoutConfig ? `import layoutConfig from '${layoutConfig}'` : ''}
       children: _mdxContent
     })
 }`
-
-  // FIXME
-  // if (unstable_staticImage) {
-  //   content = await transformStaticImage(content)
-  // }
 
   // Add imports and exports to the source
   return callback(null, prefix + '\n' + content + '\n' + suffix)
