@@ -14,6 +14,18 @@
     "bleed.js",
     "style.css"
   ],
+  "exports": {
+    "./style.css": "./style.css",
+    ".": {
+      "import": "./dist/index.js"
+    },
+    "./callout": {
+      "import": "./dist/callout.js"
+    },
+    "./bleed": {
+      "import": "./dist/bleed.js"
+    }
+  },
   "scripts": {
     "dev": "yarn dev:layout & yarn dev:tailwind",
     "build": "yarn run build:tailwind && yarn run build:layout",
