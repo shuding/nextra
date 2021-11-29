@@ -19,23 +19,23 @@ const indent = level => {
   return {}
 }
 
-export default function ToC({ titles }) {
+export default function ToC({ headings }) {
   const slugger = new Slugger()
   const activeAnchor = useActiveAnchor()
 
   return (
     <div className="w-64 hidden xl:block text-sm pl-4">
-      {titles ? (
+      {headings ? (
         <ul className="overflow-y-auto sticky max-h-[calc(100vh-4rem)] top-16 pt-8 pb-10 m-0 list-none">
-          {titles
-            .filter(item => item.type !== 'h1')
-            .map(item => {
-              const text = innerText(item.props.children) || ''
+          {headings
+            .filter(heading => heading.type !== 'h1')
+            .map(heading => {
+              const text = innerText(heading.props.children) || ''
               const slug = slugger.slug(text)
               const state = activeAnchor[slug]
 
               return (
-                <li key={slug} style={indent(item.type)}>
+                <li key={slug} style={indent(heading.type)}>
                   <a
                     href={`#${slug}`}
                     className={cn(

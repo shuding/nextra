@@ -3,10 +3,7 @@ import { useRouter } from 'next/router'
 import 'focus-visible'
 import { SkipNavContent } from '@reach/skip-nav'
 import { ThemeProvider } from 'next-themes'
-import innerText from 'react-innertext'
 import cn from 'classnames'
-
-import normalizePages from './utils/normalize-pages'
 
 import Head from './head'
 import Navbar from './navbar'
@@ -18,8 +15,9 @@ import { ActiveAnchor } from './misc/active-anchor'
 import defaultConfig from './misc/default.config'
 import { getFSRoute } from './utils/get-fs-route'
 import { MenuContext } from './utils/menu-context'
-
-const titleType = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
+import normalizePages from './utils/normalize-pages'
+import { getHeadings } from './utils/get-headings'
+import { getTitle } from './utils/get-title'
 
 function useDirectoryInfo(pageMap) {
   const { locale, defaultLocale, asPath } = useRouter()
@@ -58,13 +56,6 @@ function Body({ meta, config, toc, filepathWithName, navLinks, children }) {
   )
 }
 
-const getHeadline = (titles, meta) => {
-  const titleEl = titles.find(child => child.type === 'h1')
-  const headline =
-    meta.title || (titleEl ? innerText(titleEl.props.children) : 'Untitled')
-  return headline
-}
-
 const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
   const { route, locale } = useRouter()
 
@@ -85,13 +76,9 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
   const content = children.type()
   const filepath = route.slice(0, route.lastIndexOf('/') + 1)
   const filepathWithName = filepath + filename
-  const titles =
-    content.props.children.filter?.(child => titleType.includes(child.type)) ||
-    []
-  const headline = getHeadline(titles, meta)
-  const anchors = titles
-    .filter(child => child.props && (config.floatTOC || child.type === 'h2'))
-    .map(child => child.props.children)
+  const headings = getHeadings(content.props.children)
+  const title = meta.title || getTitle(headings) || 'Untitled'
+
   const isRTL = useMemo(() => {
     if (!config.i18n) return config.direction === 'rtl' || null
     const localeConfig = config.i18n.find(l => l.locale === locale)
@@ -103,7 +90,7 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
   if (activeType === 'nav') {
     return (
       <React.Fragment>
-        <Head config={config} title={headline} locale={locale} meta={meta} />
+        <Head config={config} title={title} locale={locale} meta={meta} />
         <MenuContext.Provider
           value={{
             menu,
@@ -130,6 +117,7 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
                   flatDirectories={flatDirectories}
                   fullDirectories={directories}
                   mdShow={false}
+                  headings={headings}
                   config={config}
                 />
                 <Body
@@ -151,7 +139,7 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
   // Docs layout
   return (
     <React.Fragment>
-      <Head config={config} title={headline} locale={locale} meta={meta} />
+      <Head config={config} title={title} locale={locale} meta={meta} />
       <MenuContext.Provider
         value={{
           menu,
@@ -176,14 +164,14 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
                 directories={docsDirectories}
                 flatDirectories={flatDirectories}
                 fullDirectories={directories}
-                anchors={config.floatTOC ? [] : anchors}
+                headings={headings}
                 config={config}
               />
               <Body
                 meta={meta}
                 config={config}
                 filepathWithName={filepathWithName}
-                toc={<ToC titles={config.floatTOC ? titles : null} />}
+                toc={<ToC headings={config.floatTOC ? headings : null} />}
                 navLinks={
                   <NavLinks
                     flatDirectories={flatDocsDirectories}
