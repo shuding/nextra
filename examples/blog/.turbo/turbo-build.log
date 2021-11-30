@@ -1,0 +1,33 @@
+
+> blog@1.0.0 build /Users/promer94/workspace/nextra/examples/blog
+> next build
+
+info  - Checking validity of types...
+info  - Creating an optimized production build...
+info  - Compiled successfully
+info  - Collecting page data...
+info  - Generating static pages (0/6)
+info  - Generating static pages (1/6)
+info  - Generating static pages (2/6)
+highlight undefined {}
+info  - Generating static pages (4/6)
+info  - Generating static pages (6/6)
+info  - Finalizing page optimization...
+
+Page                                        Size     First Load JS
+┌ ○ /                                       1.6 kB          117 kB
+├   /_app                                   0 B            76.9 kB
+├ ○ /404                                    193 B          77.1 kB
+├ ○ /posts                                  1.03 kB         116 kB
+├ ○ /posts/aaron-swartz-a-programmable-web  3.86 kB         119 kB
+└ ○ /tags/[tag]                             1.11 kB         116 kB
++ First Load JS shared by all               76.9 kB
+  ├ chunks/framework-238733f3287e7d3e.js    46.7 kB
+  ├ chunks/main-71330c2f7c08348f.js         28.2 kB
+  ├ chunks/pages/_app-8a4dcdd9ecf61512.js   510 B
+  ├ chunks/webpack-c8d7818910fd6b49.js      1.45 kB
+  └ css/1116098f27d9dc14.css                4.01 kB
+
+○  (Static)  automatically rendered as static HTML (uses no initial props)
+
+warn  - No ESLint configuration detected. Run next lint to begin setup

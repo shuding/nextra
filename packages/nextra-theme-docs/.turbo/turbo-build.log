@@ -1,0 +1,12 @@
+
+> nextra-theme-docs@2.0.0-beta.5 build /Users/promer94/workspace/nextra/packages/nextra-theme-docs
+> yarn run build:tailwind && yarn run build:layout
+
+$ NODE_ENV=production yarn postcss src/styles.css -o style.css --verbose
+$ /Users/promer94/workspace/nextra/packages/nextra-theme-docs/node_modules/.bin/postcss src/styles.css -o style.css --verbose
+$ node scripts/build.js
+Processing src/styles.css...
+
+warn - You have enabled the JIT engine which is currently in preview.
+warn - Preview features are not covered by semver, may introduce breaking changes, and can change at any time.
+Finished src/styles.css in 478 ms

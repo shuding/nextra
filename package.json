@@ -9,10 +9,10 @@
     "examples/blog"
   ],
   "scripts": {
-    "build:core": "yarn workspace nextra run build",
-    "build:theme-docs": "yarn workspace nextra-theme-docs run build",
-    "build:theme-blog": "yarn workspace nextra-theme-blog run build",
-    "version-beta": "lerna version --preid beta --force-publish",
+    "build:core": "pnpm run build --filter nextra",
+    "build:theme-blog": "pnpm run build --filter nextra-theme-blog",
+    "build:theme-docs": "pnpm run build --filter nextra-theme-docs",
+    "version-beta": "lerna version --preid beta",
     "publish-beta": "lerna publish from-package --canary --preid beta --pre-dist-tag beta"
   },
   "devDependencies": {

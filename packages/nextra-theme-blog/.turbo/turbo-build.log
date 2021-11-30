@@ -1,0 +1,13 @@
+
+> nextra-theme-blog@2.0.0-beta.5 build /Users/promer94/workspace/nextra/packages/nextra-theme-blog
+> yarn run build:tailwind && yarn run build:layout
+
+yarn run v1.22.15
+$ NODE_ENV=production tailwindcss build src/styles.css -o style.css -c tailwind.config.js
+Done in 4.26s.
+yarn run v1.22.15
+$ node scripts/build.js
+Done in 0.13s.
+[deprecation] Running tailwindcss without -i, please provide an input file.
+
+Done in 3857ms.
