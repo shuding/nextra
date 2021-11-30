@@ -14,11 +14,9 @@ export default function Nav({ navPages, config }) {
           )
         }
         return (
-          <React.Fragment>
-            <Link key={page.route} href={page.route}>
-              <a className="nav-link">{page.frontMatter.title || page.name}</a>
-            </Link>
-          </React.Fragment>
+          <Link key={page.route} href={page.route}>
+            <a className="nav-link">{page.frontMatter.title || page.name}</a>
+          </Link>
         )
       })}
       {config.darkMode && <ThemeSwitch />}
