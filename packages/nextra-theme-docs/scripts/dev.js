@@ -13,6 +13,7 @@ esbuild.build({
   platform: 'node',
   outdir: 'dist',
   color: true,
+  target: 'es2016',
   watch: {
     onRebuild(error) {
       if (error) console.error('Watch build failed:', error)

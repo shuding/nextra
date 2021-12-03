@@ -9,6 +9,7 @@ esbuild.buildSync({
   format: 'cjs',
   outdir: 'dist',
   color: true,
+  target: 'es2016',
   external: [
     ...Object.keys(package.dependencies),
     ...Object.keys(package.peerDependencies || {})
@@ -23,6 +24,7 @@ esbuild.buildSync({
   platform: 'node',
   outfile: 'dist/loader.mjs',
   color: true,
+  target: 'es2016',
   external: [
     ...Object.keys(package.dependencies),
     ...Object.keys(package.peerDependencies || {})

@@ -11,6 +11,7 @@ esbuild.buildSync({
   platform: 'node',
   outdir: 'dist',
   color: true,
+  target: 'es2016',
   external: [
     ...Object.keys(package.dependencies),
     ...Object.keys(package.peerDependencies || {})
