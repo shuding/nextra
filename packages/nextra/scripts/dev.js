@@ -11,6 +11,7 @@ esbuild.build({
   format: 'cjs',
   outdir: 'dist',
   color: true,
+  target: 'es2016',
   watch: {
     onRebuild(error) {
       if (error) console.error('Watch build failed:', error)
@@ -31,6 +32,7 @@ esbuild.build({
   bundle: true,
   outfile: 'dist/loader.mjs',
   color: true,
+  target: 'es2016',
   watch: {
     onRebuild(error) {
       if (error) console.error('Watch build failed:', error)
