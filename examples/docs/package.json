@@ -17,6 +17,6 @@
     "react": "17",
     "react-dom": "17",
     "nextra": "workspace:*",
-    "nextra-theme-blog": "workspace:*"
+    "nextra-theme-docs": "workspace:*"
   }
 }

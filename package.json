@@ -1,14 +1,12 @@
 {
   "name": "nextra-monorepo",
   "private": true,
-  "workspaces": [
-    "packages/nextra",
-    "packages/nextra-theme-docs",
-    "packages/nextra-theme-blog",
-    "examples/docs",
-    "examples/blog"
-  ],
   "scripts": {
+    "dev": "turbo run dev",
+    "dev:core": "pnpm run dev --filter nextra",
+    "dev:theme-blog": "pnpm run dev --filter nextra-theme-blog",
+    "dev:theme-docs": "pnpm run dev --filter nextra-theme-docs",
+    "build": "turbo run build",
     "build:core": "pnpm run build --filter nextra",
     "build:theme-blog": "pnpm run build --filter nextra-theme-blog",
     "build:theme-docs": "pnpm run build --filter nextra-theme-docs",
@@ -16,8 +14,8 @@
     "publish-beta": "lerna publish from-package --canary --preid beta --pre-dist-tag beta"
   },
   "devDependencies": {
-    "lerna": "^4.0.0",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "turbo": "^1.0.1"
   },
   "prettier": {
     "semi": false,
@@ -25,5 +23,28 @@
     "trailingComma": "none",
     "arrowParens": "avoid"
   },
-  "version": "0.0.0"
+  "version": "0.0.0",
+  "turbo": {
+    "baseBranch": "origin/core",
+    "pipeline": {
+      "build": {
+        "dependsOn": [
+          "^build"
+        ],
+        "outputs": [
+          "dist/**",
+          ".next/**",
+          "style.css",
+          "index.js",
+          "callout.js",
+          "bleed.js",
+          "ssg.js",
+          "loader.js"
+        ]
+      },
+      "dev": {
+        "cache": false
+      }
+    }
+  }
 }

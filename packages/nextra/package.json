@@ -19,6 +19,10 @@
   "dependencies": {
     "@mdx-js/loader": "^2.0.0-rc.2",
     "@mdx-js/mdx": "^2.0.0-rc.2",
+    "@types/graceful-fs": "^4.1.5",
+    "@types/loader-utils": "^2.0.3",
+    "@types/slash": "^3.0.0",
+    "@types/webpack": "^5.28.0",
     "download": "^8.0.0",
     "graceful-fs": "^4.2.6",
     "gray-matter": "^4.0.3",
