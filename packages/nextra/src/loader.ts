@@ -1,6 +1,5 @@
 import path from 'path'
 import gracefulFs from 'graceful-fs'
-import { getOptions } from 'loader-utils'
 import grayMatter from 'gray-matter'
 import slash from 'slash'
 
@@ -13,19 +12,43 @@ import {
   parseJsonFile
 } from './utils'
 import { compileMdx } from './compile'
+import { LoaderContext } from 'webpack'
 
 const { promises: fs } = gracefulFs
 const extension = /\.mdx?$/
 const metaExtension = /meta\.?([a-zA-Z-]+)?\.json/
 
-async function getPageMap(currentResourcePath) {
+interface FileResult {
+  name: string
+  route: string
+  locale?: string
+  children?: FileResult[]
+  frontMatter?: Record<string, any>
+  meta?: Record<string, any>
+}
+
+interface LoaderOptions {
+  theme: string
+  themeConfig: string
+  locales: string[]
+  defaultLocale: string
+  unstable_stork: boolean
+  unstable_staticImage: boolean
+}
+
+async function getPageMap(
+  currentResourcePath: string
+): Promise<[FileResult[], string, string | { title: string }]> {
   const activeRouteLocale = getLocaleFromFilename(currentResourcePath)
   let activeRoute = ''
-  let activeRouteTitle = ''
+  let activeRouteTitle: string | { [key: string]: string; title: string } = ''
 
-  async function getFiles(dir, route) {
+  async function getFiles(dir: string, route: string): Promise<FileResult[]> {
     const files = await fs.readdir(dir, { withFileTypes: true })
-    let dirMeta = {}
+    let dirMeta: Record<
+      string,
+      string | { [key: string]: string; title: string }
+    > = {}
 
     // go through the directory
     const items = (
@@ -40,7 +63,7 @@ async function getPageMap(currentResourcePath) {
             if (fileRoute === '/api') return null
 
             const children = await getFiles(filePath, fileRoute)
-            if (!children.length) return null
+            if (!children || !children.length) return null
 
             return {
               name: f.name,
@@ -76,6 +99,7 @@ async function getPageMap(currentResourcePath) {
           } else if (metaExtension.test(f.name)) {
             const content = await fs.readFile(filePath, 'utf-8')
             const meta = parseJsonFile(content, filePath)
+            // @ts-expect-error since metaExtension.test(f.name) === true
             const locale = f.name.match(metaExtension)[1]
 
             if (!activeRouteLocale || locale === activeRouteLocale) {
@@ -100,6 +124,7 @@ async function getPageMap(currentResourcePath) {
       })
       .filter(Boolean)
 
+    // @ts-expect-error since filter remove all the null and undefined item
     return items
   }
 
@@ -110,7 +135,10 @@ async function getPageMap(currentResourcePath) {
   ]
 }
 
-async function analyzeLocalizedEntries(currentResourcePath, defaultLocale) {
+async function analyzeLocalizedEntries(
+  currentResourcePath: string,
+  defaultLocale: string
+) {
   const filename = getFileName(currentResourcePath)
   const dir = path.dirname(currentResourcePath)
 
@@ -156,7 +184,10 @@ async function analyzeLocalizedEntries(currentResourcePath, defaultLocale) {
   }
 }
 
-export default async function (source) {
+export default async function (
+  this: LoaderContext<LoaderOptions>,
+  source: string
+) {
   const callback = this.async()
   this.cacheable()
 
@@ -164,7 +195,7 @@ export default async function (source) {
   // so we can generate the correct page map
   this.addContextDependency(path.resolve('pages'))
 
-  const options = getOptions(this)
+  const options = this.getOptions()
   const {
     theme,
     themeConfig,
@@ -173,6 +204,7 @@ export default async function (source) {
     unstable_stork,
     unstable_staticImage
   } = options
+  // @ts-expect-error FIXME: mdxOptions
   const { resourcePath, resourceQuery, mdxOptions } = this
   const filename = resourcePath.slice(resourcePath.lastIndexOf('/') + 1)
   const fileLocale = getLocaleFromFilename(filename) || 'default'
@@ -245,7 +277,7 @@ ${
   }
 
   // Generate the page map
-  let [pageMap, route, title] = await getPageMap(resourcePath, locales)
+  let [pageMap, route, title] = await getPageMap(resourcePath)
 
   if (locales) {
     const locale = getLocaleFromFilename(filename)
@@ -262,14 +294,11 @@ ${
     // We only index .MD and .MDX files
     if (extension.test(filename)) {
       await addStorkIndex({
-        pageMap,
-        filename,
         fileLocale,
         route,
         title,
         data,
-        content,
-        locales
+        content
       })
     }
   }

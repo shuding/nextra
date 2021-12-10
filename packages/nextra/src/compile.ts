@@ -1,10 +1,16 @@
-import { compile } from '@mdx-js/mdx'
+import { compile, CompileOptions } from '@mdx-js/mdx'
 import remarkGfm from 'remark-gfm'
 import { remarkMdxCodeMeta } from 'remark-mdx-code-meta'
 
 import { remarkStaticImage } from './static-image'
 
-export async function compileMdx(source, mdxOptions = {}, nextraOptions = {}) {
+export async function compileMdx(
+  source: string,
+  mdxOptions: CompileOptions = {},
+  nextraOptions: { unstable_staticImage: boolean } = {
+    unstable_staticImage: false
+  }
+) {
   return String(
     await compile(source, {
       jsx: true,
@@ -13,7 +19,7 @@ export async function compileMdx(source, mdxOptions = {}, nextraOptions = {}) {
         ...(mdxOptions.remarkPlugins || []),
         remarkGfm,
         remarkMdxCodeMeta,
-        nextraOptions.unstable_staticImage && remarkStaticImage
+        ...(nextraOptions.unstable_staticImage ? [remarkStaticImage] : [])
       ].filter(Boolean)
     })
   )

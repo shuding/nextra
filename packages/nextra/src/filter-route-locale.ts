@@ -1,10 +1,23 @@
-export default function filterRouteLocale(pageMap, locale, defaultLocale) {
+interface FileResult {
+  name: string
+  route: string
+  locale?: string
+  children?: FileResult[]
+  frontMatter?: Record<string, any>
+  meta?: Record<string, any>
+}
+
+export default function filterRouteLocale(
+  pageMap: FileResult[],
+  locale: string,
+  defaultLocale: string
+): FileResult[] {
   const isDefaultLocale = !locale || locale === defaultLocale
 
   const filteredPageMap = []
 
   // We fallback to the default locale
-  const fallbackPages = {}
+  const fallbackPages: Record<string, FileResult | null> = {}
 
   for (const page of pageMap) {
     if (page.children) {
@@ -35,7 +48,7 @@ export default function filterRouteLocale(pageMap, locale, defaultLocale) {
 
   for (const name in fallbackPages) {
     if (fallbackPages[name]) {
-      filteredPageMap.push(fallbackPages[name])
+      filteredPageMap.push(fallbackPages[name] as FileResult)
     }
   }
 

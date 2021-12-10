@@ -13,10 +13,13 @@ const isProduction = process.env.NODE_ENV === 'production'
 const STORK_WASM =
   'https://github.com/jameslittle230/stork/releases/download/v1.1.0/stork.wasm'
 
-const files = {}
-const escapeQuote = str => str.replace(/"/g, '\\"')
+const files: Record<string, Record<string, any>> = {}
+const escapeQuote = (str: string | { [key: string]: string; title: string }) =>
+  typeof str === 'string'
+    ? str.replace(/"/g, '\\"')
+    : str.title.replace(/"/g, '\\"')
 
-const getStemmingLanguage = locale => {
+const getStemmingLanguage = (locale: string) => {
   // en, en-US
   if (locale.toLowerCase().startsWith('en')) {
     return 'English'
@@ -24,7 +27,7 @@ const getStemmingLanguage = locale => {
   return 'None'
 }
 
-const getPlainText = async content => {
+const getPlainText = async (content: string) => {
   // let plainText = ''
 
   // await remark()
@@ -46,13 +49,21 @@ const getPlainText = async content => {
   return content
 }
 
+interface Param {
+  fileLocale: string
+  route: string
+  title: string | { title: string }
+  data: Record<string, any>
+  content: string
+}
+
 export async function addStorkIndex({
   fileLocale,
   route,
   title,
   data,
   content
-}) {
+}: Param) {
   if (!isProduction) return
 
   if (!files[fileLocale])
@@ -65,7 +76,6 @@ export async function addStorkIndex({
     }
   if (!files[fileLocale][route]) {
     const plainText = await getPlainText(content)
-
     files[fileLocale][route] = true
     files[fileLocale].toml += `[[input.files]]\n`
     files[fileLocale].toml += `title = "${escapeQuote(data.title || title)}"\n`
@@ -88,7 +98,7 @@ export async function addStorkIndex({
 }
 
 let indexed = false
-export async function buildStorkIndex(storkPath, locales) {
+export async function buildStorkIndex(storkPath: string, locales: string[]) {
   if (indexed) return
   if (!isProduction) return
 
