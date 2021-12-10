@@ -1,7 +1,10 @@
 import React from 'react'
 import cn from 'classnames'
+interface BleedProps {
+  full: boolean
+}
 
-export default ({
+const Bleed: React.FC<BleedProps> = ({
   full,
   children,
 }) => {
@@ -11,3 +14,5 @@ export default ({
     </div>
   )
 }
+
+export default Bleed

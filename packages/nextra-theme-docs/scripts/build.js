@@ -2,7 +2,7 @@ const esbuild = require('esbuild')
 const package = require('../package.json')
 
 esbuild.buildSync({
-  entryPoints: ['src/index.js', 'src/bleed.js', 'src/callout.js'],
+  entryPoints: ['src/index.js', 'src/bleed.tsx', 'src/callout.tsx'],
   format: 'esm',
   bundle: true,
   loader: {
