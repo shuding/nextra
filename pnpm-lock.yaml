@@ -5,10 +5,10 @@ importers:
   .:
     specifiers:
       prettier: ^2.2.1
-      turbo: ^1.0.1
+      turbo: ^1.0.4
     devDependencies:
       prettier: 2.5.0
-      turbo: 1.0.1
+      turbo: 1.0.4
 
   examples/blog:
     specifiers:
@@ -5633,8 +5633,8 @@ packages:
     resolution: {integrity: sha512-C3TaO7K81YvjCgQH9Q1S3R3P3BtN3RIM8n+OvX4il1K1zgE8ZhI0op7kClgkxtutIE8hQrcrHBXvIheqKUUCxw==}
     dev: false
 
-  /turbo/1.0.1:
-    resolution: {integrity: sha512-FRrRH0Z+fVdv1OyvcklGWAEhN0OD1ViMLbSp1YQ5aeQ37o22p7J+mAFad8CrvHx8XCBLCiRtg0256CQyxHnjhQ==}
+  /turbo/1.0.4:
+    resolution: {integrity: sha512-lPT/DNI7FiD+BBAjugyL5A24PA9g2DmLaErUCz6bGHfIlzPg1pawlX8GbZUCeCHA/DX/gCP8VP0BxGKb71c1Jw==}
     hasBin: true
     requiresBuild: true
     dependencies:
