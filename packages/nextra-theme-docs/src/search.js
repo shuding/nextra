@@ -65,7 +65,7 @@ const Search = ({ directories = [] }) => {
         moveActiveItem(UP)
       }
 
-      if (key === 'Enter') {
+      if (key === 'Enter' && results && results[active]) {
         router.push(results[active].route)
       }
     },
