@@ -121,7 +121,7 @@ const Layout = ({ filename, pageMap, meta, children }) => {
                   filepathWithName={filepathWithName}
                   navLinks={null}
                 >
-                  {content}
+                  {children}
                 </Body>
               </div>
             </ActiveAnchor>
