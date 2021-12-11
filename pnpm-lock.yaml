@@ -84,6 +84,7 @@ importers:
       esbuild: ^0.14.0
       github-slugger: ^1.3.0
       next-themes: ^0.0.15
+      nextra: workspace:*
       postcss: ^8.2.8
       postcss-cli: ^8.3.1
       prism-react-renderer: ^1.1.1
@@ -101,6 +102,7 @@ importers:
       typescript: 4.5.2
     devDependencies:
       esbuild: 0.14.2
+      nextra: link:../nextra
       postcss: 8.4.4
       tailwindcss: 2.2.19_postcss@8.4.4
 
@@ -118,6 +120,7 @@ importers:
       intersection-observer: ^0.12.0
       match-sorter: ^4.2.0
       next-themes: ^0.0.8
+      nextra: workspace:*
       parse-git-url: ^1.0.1
       postcss: ^8.2.1
       postcss-cli: ^8.3.1
@@ -145,6 +148,7 @@ importers:
       autoprefixer: 10.4.0_postcss@8.4.4
       cssnano: 4.1.11
       esbuild: 0.14.2
+      nextra: link:../nextra
       postcss: 8.4.4
       postcss-cli: 8.3.1_postcss@8.4.4
       tailwindcss: 2.2.19_6b4e3d148bdcb715d5f821ed0a9c268b

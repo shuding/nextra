@@ -45,6 +45,7 @@
   "devDependencies": {
     "esbuild": "^0.14.0",
     "postcss": "^8.2.8",
-    "tailwindcss": "^2.2.19"
+    "tailwindcss": "^2.2.19",
+    "nextra": "workspace:*"
   }
 }
