@@ -5,7 +5,7 @@ import React, {
   useContext
 } from 'react'
 
-export const SSGContext = createContext({})
+export const SSGContext = createContext<boolean>(false)
 export const useSSG = () => useContext(SSGContext)
 
 export const withSSG = <T extends { ssg: boolean } = any>(

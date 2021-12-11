@@ -2,7 +2,6 @@ import path from 'path'
 import gracefulFs from 'graceful-fs'
 import grayMatter from 'gray-matter'
 import slash from 'slash'
-
 import filterRouteLocale from './filter-route-locale'
 import { addStorkIndex } from './stork-index'
 import {
@@ -13,37 +12,18 @@ import {
 } from './utils'
 import { compileMdx } from './compile'
 import { LoaderContext } from 'webpack'
+import type { LoaderOptions, PageMapItem, PageMapResult } from './types'
 
 const { promises: fs } = gracefulFs
 const extension = /\.mdx?$/
 const metaExtension = /meta\.?([a-zA-Z-]+)?\.json/
 
-interface FileResult {
-  name: string
-  route: string
-  locale?: string
-  children?: FileResult[]
-  frontMatter?: Record<string, any>
-  meta?: Record<string, any>
-}
-
-interface LoaderOptions {
-  theme: string
-  themeConfig: string
-  locales: string[]
-  defaultLocale: string
-  unstable_stork: boolean
-  unstable_staticImage: boolean
-}
-
-async function getPageMap(
-  currentResourcePath: string
-): Promise<[FileResult[], string, string | { title: string }]> {
+async function getPageMap(currentResourcePath: string): Promise<PageMapResult> {
   const activeRouteLocale = getLocaleFromFilename(currentResourcePath)
   let activeRoute = ''
   let activeRouteTitle: string | { [key: string]: string; title: string } = ''
 
-  async function getFiles(dir: string, route: string): Promise<FileResult[]> {
+  async function getFiles(dir: string, route: string): Promise<PageMapItem[]> {
     const files = await fs.readdir(dir, { withFileTypes: true })
     let dirMeta: Record<
       string,

@@ -3,6 +3,7 @@ import gracefulFs from 'graceful-fs'
 import cp from 'child_process'
 import { promisify } from 'util'
 import download from 'download'
+import { Title } from './types'
 // import remark from 'remark'
 // import strip from 'strip-markdown'
 
@@ -52,7 +53,7 @@ const getPlainText = async (content: string) => {
 interface Param {
   fileLocale: string
   route: string
-  title: string | { title: string }
+  title: Title
   data: Record<string, any>
   content: string
 }
