@@ -17,8 +17,6 @@ import defaultConfig from './misc/default.config'
 import { getFSRoute } from './utils/get-fs-route'
 import { MenuContext } from './utils/menu-context'
 import normalizePages from './utils/normalize-pages'
-import { getHeadings } from './utils/get-headings'
-import { getTitle } from './utils/get-title'
 
 function useDirectoryInfo(pageMap) {
   const { locale, defaultLocale, asPath } = useRouter()
@@ -56,7 +54,7 @@ function Body({ meta, toc, filepathWithName, navLinks, children }) {
   )
 }
 
-const Layout = ({ filename, pageMap, meta, children }) => {
+const Layout = ({ filename, pageMap, meta, children, titleText }) => {
   const { route, locale } = useRouter()
   const config = useConfig()
 
@@ -74,9 +72,8 @@ const Layout = ({ filename, pageMap, meta, children }) => {
   const content = children.type()
   const filepath = route.slice(0, route.lastIndexOf('/') + 1)
   const filepathWithName = filepath + filename
-  const headings = getHeadings(content.props.children)
-  const title = meta.title || getTitle(headings) || 'Untitled'
-
+  const title = meta.title || titleText || 'Untitled'
+  console.log('title', titleText)
   const isRTL = useMemo(() => {
     if (!config.i18n) return config.direction === 'rtl' || null
     const localeConfig = config.i18n.find(l => l.locale === locale)
@@ -184,7 +181,7 @@ const Layout = ({ filename, pageMap, meta, children }) => {
 
 export default (opts, config) => {
   const extendedConfig = Object.assign({}, defaultConfig, config)
-
+  console.log('opts', opts)
   return props => {
     return (
       <ThemeConfigContext.Provider value={extendedConfig}>

@@ -52,6 +52,8 @@ const THEME: PrismTheme = {
 
 const SluggerContext = createContext<Slugger | null>(null)
 
+const H1 = () => <></>
+
 const HeaderLink = ({
   tag: Tag,
   children,
@@ -146,6 +148,7 @@ const Code = ({
   highlight?: string
   children?: React.ReactNode
 }) => {
+  console.log('highlight', highlight, props)
   const highlightedRanges = useMemo(() => {
     return highlight
       ? highlight.split(',').map(r => {
@@ -164,7 +167,7 @@ const Code = ({
   return (
     <Highlight
       {...defaultProps}
-      code={children.trim()}
+      code={children}
       language={language}
       theme={THEME}
     >
@@ -201,6 +204,7 @@ const Code = ({
 }
 
 const components = {
+  h1: H1,
   h2: H2,
   h3: H3,
   h4: H4,

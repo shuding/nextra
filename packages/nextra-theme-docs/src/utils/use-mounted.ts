@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-export default () => {
+const useMounted = () => {
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
@@ -9,3 +9,5 @@ export default () => {
 
   return mounted
 }
+
+export default useMounted

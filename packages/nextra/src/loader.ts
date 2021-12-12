@@ -301,7 +301,10 @@ ${layoutConfig ? `import layoutConfig from '${layoutConfig}'` : ''}
 
 `
 
-  content = await compileMdx(content, mdxOptions, { unstable_staticImage })
+  const { result, titleText } = await compileMdx(content, mdxOptions, {
+    unstable_staticImage
+  })
+  content = result
   content = content.replace(
     'export default MDXContent;',
     'const _mdxContent = <MDXContent/>;'
@@ -312,7 +315,8 @@ ${layoutConfig ? `import layoutConfig from '${layoutConfig}'` : ''}
       filename: "${slash(filename)}",
       route: "${slash(route)}",
       meta: ${JSON.stringify(data)},
-      pageMap: ${JSON.stringify(pageMap)}
+      pageMap: ${JSON.stringify(pageMap)},
+      titleText: ${JSON.stringify(titleText)}
     }, ${layoutConfig ? 'layoutConfig' : 'null'}))({
       ...props,
       children: _mdxContent

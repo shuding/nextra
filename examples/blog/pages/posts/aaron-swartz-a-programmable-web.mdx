@@ -21,11 +21,14 @@ Let's see if they can do it again.
 
 Read Aaron's original post: [Building Programmable Web Sites by Aaron Swartz, 2009](http://www.cs.rpi.edu/~hendler/ProgrammableWebSwartz2009.html).
 
-```typescript highlight="1,3-4"
-console.log('123')
-console.log('123')
-console.log('123')
-console.log('123')
+```jsx highlight="1,3-4"
+import useSWR from 'swr'
+function Profile() {
+  const { data, error } = useSWR('/api/user', fetcher)
+  if (error) return <div>failed to load</div>
+  if (!data) return <div>loading...</div>
+  return <div>hello {data.name}!</div>
+}
 ```
 
 

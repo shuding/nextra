@@ -11,7 +11,6 @@ import Nav from './nav'
 import MDXTheme from './mdx-theme'
 
 import traverse from './utils/traverse'
-import getTitle from './utils/get-title'
 import getTags from './utils/get-tags'
 import sortDate from './utils/sort-date'
 import type { NextraBlogTheme, PageMapItem, PageOpt } from 'nextra'
@@ -28,8 +27,8 @@ interface LayoutProps {
   postList: JSX.Element | null
   back: string
   navPages: PageMapItem[]
-  titleNode: null | React.ReactElement
-  contentNodes: React.ReactElement[]
+  title: string
+  contentNodes: React.ReactNode
   comments: boolean
   pageTitle: string
   meta: {
@@ -47,7 +46,7 @@ const Layout = ({
   postList,
   back,
   pageTitle,
-  titleNode,
+  title,
   contentNodes,
   comments
 }: LayoutProps) => {
@@ -64,7 +63,7 @@ const Layout = ({
           : null}
       </Head>
       <article className="container prose prose-sm md:prose dark:prose-dark">
-        {titleNode || <h1>{pageTitle}</h1>}
+        {<h1>{title}</h1> || <h1>{pageTitle}</h1>}
         {type === 'post' ? (
           <Meta {...meta} back={back} config={config} />
         ) : (
@@ -166,17 +165,11 @@ const NextraBlog = (opts: PageOpt, _config: NextraBlogTheme) => {
   return (props: any) => {
     const { query } = router
     const tagName = type === 'tag' ? query.tag : null
-    // FIXME: render content with context
-    const content = props.children.type()
-    const [titleNode] = getTitle(content)
+    const title = opts.titleText
+
     const pageTitle =
       opts.meta.title ||
-      (typeof tagName === 'undefined'
-        ? null
-        : titleNode
-        ? ReactDOMServer.renderToStaticMarkup(titleNode.props.children)
-        : null) ||
-      ''
+      (typeof tagName === 'undefined' ? null : title ? title : '')
 
     let comments
 
@@ -261,7 +254,7 @@ const NextraBlog = (opts: PageOpt, _config: NextraBlogTheme) => {
           navPages={navPages}
           back={back}
           pageTitle={pageTitle}
-          titleNode={titleNode}
+          title={title}
           contentNodes={props.children}
           comments={comments}
           {...opts}

@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Heading } from 'mdast'
 export interface LoaderOptions {
   theme: Theme
   themeConfig: string
@@ -24,6 +24,7 @@ export interface PageOpt {
   route: string
   meta: Record<string, any>
   pageMap: PageMapItem[]
+  titleText: string
 }
 
 export type Title = string | { [key: string]: string; title: string }

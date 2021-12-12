@@ -1,6 +1,6 @@
 module.exports = {
   mode: 'jit',
-  purge: ['./src/**/*.js', './src/**/*.css'],
+  purge: ['./src/**/*.js', './src/**/*.css', './src/**/*.tsx'],
   theme: {
     screens: {
       sm: '640px',

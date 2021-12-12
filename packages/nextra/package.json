@@ -37,6 +37,7 @@
     "react": ">=16.13.1"
   },
   "devDependencies": {
+    "@types/mdast": "^3.0.10",
     "esbuild": "^0.14.0"
   }
 }

@@ -61,6 +61,7 @@ importers:
       '@mdx-js/loader': ^2.0.0-rc.2
       '@mdx-js/mdx': ^2.0.0-rc.2
       '@types/graceful-fs': ^4.1.5
+      '@types/mdast': ^3.0.10
       '@types/slash': ^3.0.0
       '@types/webpack': ^5.28.0
       download: ^8.0.0
@@ -87,6 +88,7 @@ importers:
       slash: 3.0.0
       typescript: 4.5.2
     devDependencies:
+      '@types/mdast': 3.0.10
       esbuild: 0.14.2
 
   packages/nextra-theme-blog:
@@ -534,7 +536,6 @@ packages:
     resolution: {integrity: sha512-W864tg/Osz1+9f4lrGTZpCSO5/z4608eUp19tbozkq2HJK6i3z1kT0H9tlADXuYIb1YYOBByU4Jsqkk75q48qA==}
     dependencies:
       '@types/unist': 2.0.6
-    dev: false
 
   /@types/mdurl/1.0.2:
     resolution: {integrity: sha512-eC4U9MlIcu2q0KQmXszyn5Akca/0jrQmwDRgpAMJai7qBWq4amIQhZyNau4VYGtCeALvW1/NtjzJJ567aZxfKA==}
@@ -587,7 +588,6 @@ packages:
 
   /@types/unist/2.0.6:
     resolution: {integrity: sha512-PBjIUxZHOuj0R15/xuwJYjFi+KZdNFrehocChv4g5hu6aFroHue8m0lBP0POdK2nKzbw0cgV1mws8+V/JAcEkQ==}
-    dev: false
 
   /@types/warning/3.0.0:
     resolution: {integrity: sha1-DSUBJorY+ZYrdA04fEZU9fjiPlI=}
