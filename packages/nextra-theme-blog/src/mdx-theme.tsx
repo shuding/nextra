@@ -5,8 +5,9 @@ import Slugger from 'github-slugger'
 import Link from 'next/link'
 import React from 'react'
 import Highlight, { defaultProps } from 'prism-react-renderer'
+import type { Language, PrismTheme } from 'prism-react-renderer'
 
-const THEME = {
+const THEME: PrismTheme = {
   plain: {
     backgroundColor: 'transparent'
   },
@@ -49,11 +50,18 @@ const THEME = {
 
 // Anchor links
 
-const SluggerContext = createContext()
+const SluggerContext = createContext<Slugger | null>(null)
 
-const HeaderLink = ({ tag: Tag, children, ...props }) => {
+const HeaderLink = ({
+  tag: Tag,
+  children,
+  ...props
+}: {
+  tag: any
+  children: any
+}) => {
   const slugger = useContext(SluggerContext)
-  const slug = slugger.slug(ReactDOMServer.renderToStaticMarkup(children) || '')
+  const slug = slugger!.slug(ReactDOMServer.renderToStaticMarkup(children))
   return (
     <Tag {...props}>
       <span className="subheading-anchor" id={slug} />
@@ -67,7 +75,7 @@ const HeaderLink = ({ tag: Tag, children, ...props }) => {
   )
 }
 
-const H2 = ({ children, ...props }) => {
+const H2 = ({ children, ...props }: { children?: React.ReactNode }) => {
   return (
     <HeaderLink tag="h2" {...props}>
       {children}
@@ -75,7 +83,7 @@ const H2 = ({ children, ...props }) => {
   )
 }
 
-const H3 = ({ children, ...props }) => {
+const H3 = ({ children, ...props }: { children?: React.ReactNode }) => {
   return (
     <HeaderLink tag="h3" {...props}>
       {children}
@@ -83,7 +91,7 @@ const H3 = ({ children, ...props }) => {
   )
 }
 
-const H4 = ({ children, ...props }) => {
+const H4 = ({ children, ...props }: { children?: React.ReactNode }) => {
   return (
     <HeaderLink tag="h4" {...props}>
       {children}
@@ -91,7 +99,7 @@ const H4 = ({ children, ...props }) => {
   )
 }
 
-const H5 = ({ children, ...props }) => {
+const H5 = ({ children, ...props }: { children?: React.ReactNode }) => {
   return (
     <HeaderLink tag="h5" {...props}>
       {children}
@@ -99,15 +107,20 @@ const H5 = ({ children, ...props }) => {
   )
 }
 
-const H6 = ({ children, ...props }) => {
+const H6 = ({ children, ...props }: { children?: React.ReactNode }) => {
   return (
     <HeaderLink tag="h6" {...props}>
       {children}
     </HeaderLink>
   )
 }
-
-const A = ({ children, ...props }) => {
+const A = ({
+  children,
+  ...props
+}: {
+  children?: React.ReactNode
+  href?: string
+}) => {
   const isExternal = props.href && props.href.startsWith('https://')
   if (isExternal) {
     return (
@@ -117,28 +130,37 @@ const A = ({ children, ...props }) => {
     )
   }
   return (
-    <Link href={props.href}>
+    <Link href={props.href || '/'}>
       <a {...props}>{children}</a>
     </Link>
   )
 }
 
-const Code = ({ children, className, highlight, ...props }) => {
+const Code = ({
+  children,
+  className,
+  highlight,
+  ...props
+}: {
+  className?: string
+  highlight?: string
+  children?: React.ReactNode
+}) => {
   const highlightedRanges = useMemo(() => {
     return highlight
       ? highlight.split(',').map(r => {
           if (r.includes('-')) {
-            return r.split('-')
+            return r.split('-').map(v => parseInt(v, 10))
           }
           return +r
         })
       : []
   }, [highlight])
-
   if (!className) return <code {...props}>{children}</code>
-
+  if (typeof children !== 'string') return <code {...props}>{children}</code>
   // https://mdxjs.com/guides/syntax-highlighting#all-together
-  const language = className.replace(/language-/, '')
+  const language = className.replace(/language-/, '') as Language
+
   return (
     <Highlight
       {...defaultProps}
@@ -153,17 +175,18 @@ const Code = ({ children, className, highlight, ...props }) => {
               key={i}
               {...getLineProps({ line, key: i })}
               style={
-                highlightedRanges.some(r =>
-                  Array.isArray(r)
+                highlightedRanges.some(r => {
+                  console.log('what is R', r)
+                  return Array.isArray(r)
                     ? r[0] <= i + 1 && i + 1 <= r[1]
                     : r === i + 1
-                )
+                })
                   ? {
                       background: '#cce0f5',
                       margin: '0 -1rem',
                       padding: '0 1rem'
                     }
-                  : null
+                  : {}
               }
             >
               {line.map((token, key) => (
@@ -187,7 +210,7 @@ const components = {
   code: Code
 }
 
-export default ({ children }) => {
+const MDXTheme: React.FC = ({ children }) => {
   const slugger = new Slugger()
   return (
     <SluggerContext.Provider value={slugger}>
@@ -195,3 +218,5 @@ export default ({ children }) => {
     </SluggerContext.Provider>
   )
 }
+
+export default MDXTheme

@@ -1,3 +1,5 @@
+import React from 'react'
+
 export interface LoaderOptions {
   theme: Theme
   themeConfig: string
@@ -14,6 +16,7 @@ export interface PageMapItem {
   children?: PageMapItem[]
   frontMatter?: Record<string, any>
   meta?: Record<string, any>
+  active?: boolean
 }
 
 export interface PageOpt {
@@ -43,5 +46,25 @@ export type NextraConfig = {
 export type withNextra = (
   ...args: [NextraConfig] | [theme: Theme, themeConfig: string]
 ) => (nextConfig: Record<string, any>) => {}
+
+export interface NextraBlogTheme {
+  readMore?: string
+  footer?: React.ReactNode
+  titleSuffix?: string
+  postFooter?: string
+  head?: ({
+    title,
+    meta
+  }: {
+    title: string
+    meta: Record<string, any>
+  }) => React.ReactNode
+  cusdis?: {
+    appId: string
+    host?: string
+    lang: string
+  }
+  darkMode?: boolean
+}
 
 export default withNextra

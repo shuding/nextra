@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 import { ThemeProvider, useTheme } from 'next-themes'
-
+import { ReactCusdis } from 'react-cusdis'
 import Meta from './meta'
 import Nav from './nav'
 import MDXTheme from './mdx-theme'
@@ -14,13 +14,32 @@ import traverse from './utils/traverse'
 import getTitle from './utils/get-title'
 import getTags from './utils/get-tags'
 import sortDate from './utils/sort-date'
+import type { NextraBlogTheme, PageMapItem, PageOpt } from 'nextra'
 
 // comments
-const ReactCusdis = dynamic(
+const Cusdis = dynamic(
+  // @ts-ignore
   () => import('react-cusdis').then(mod => mod.ReactCusdis),
   { ssr: false }
-)
+) as typeof ReactCusdis
 
+interface LayoutProps {
+  config: NextraBlogTheme
+  postList: JSX.Element | null
+  back: string
+  navPages: PageMapItem[]
+  titleNode: null | React.ReactElement
+  contentNodes: React.ReactElement[]
+  comments: boolean
+  pageTitle: string
+  meta: {
+    author: string
+    date: string
+    tag: string
+    type: string
+    [key: string]: any
+  }
+}
 const Layout = ({
   config,
   meta,
@@ -31,9 +50,8 @@ const Layout = ({
   titleNode,
   contentNodes,
   comments
-}) => {
+}: LayoutProps) => {
   const type = meta.type || 'post'
-
   return (
     <React.Fragment>
       <Head>
@@ -41,7 +59,9 @@ const Layout = ({
           {pageTitle}
           {config.titleSuffix}
         </title>
-        {config.head ? config.head({ title, meta }) : null}
+        {config.head
+          ? config.head({ title: `${pageTitle} ${config.titleSuffix}`, meta })
+          : null}
       </Head>
       <article className="container prose prose-sm md:prose dark:prose-dark">
         {titleNode || <h1>{pageTitle}</h1>}
@@ -63,10 +83,10 @@ const Layout = ({
   )
 }
 
-export default (opts, _config) => {
+const NextraBlog = (opts: PageOpt, _config: NextraBlogTheme) => {
   const router = useRouter()
   const { theme, resolvedTheme } = useTheme()
-  const config = Object.assign(
+  const config: NextraBlogTheme = Object.assign(
     {
       readMore: 'Read More →',
       footer: (
@@ -81,8 +101,8 @@ export default (opts, _config) => {
   )
 
   // gather info for tag/posts pages
-  let posts = null
-  let navPages = []
+  let posts: PageMapItem[]
+  let navPages: PageMapItem[] = []
   const type = opts.meta.type || 'post'
   const route = opts.route
 
@@ -122,11 +142,11 @@ export default (opts, _config) => {
   }
 
   // back button
-  let back = null
+  let back: React.ReactNode = null
   if (type !== 'post') {
     back = null
   } else {
-    const parentPages = []
+    const parentPages: PageMapItem[] = []
     traverse(opts.pageMap, page => {
       if (
         route !== page.route &&
@@ -143,12 +163,12 @@ export default (opts, _config) => {
     }
   }
 
-  return props => {
+  return (props: any) => {
     const { query } = router
     const tagName = type === 'tag' ? query.tag : null
-
+    // FIXME: render content with context
     const content = props.children.type()
-    const [titleNode, contentNodes] = getTitle(content)
+    const [titleNode] = getTitle(content)
     const pageTitle =
       opts.meta.title ||
       (typeof tagName === 'undefined'
@@ -165,7 +185,7 @@ export default (opts, _config) => {
         console.warn('[cusdis]', '`appId` is required')
       } else {
         comments = (
-          <ReactCusdis
+          <Cusdis
             lang={config.cusdis.lang}
             style={{
               marginTop: '4rem'
@@ -188,7 +208,7 @@ export default (opts, _config) => {
         {posts.map(post => {
           if (tagName) {
             const tags = getTags(post)
-            if (!tags.includes(tagName)) {
+            if (!Array.isArray(tagName) && !tags.includes(tagName)) {
               return null
             }
           } else if (type === 'tag') {
@@ -242,7 +262,7 @@ export default (opts, _config) => {
           back={back}
           pageTitle={pageTitle}
           titleNode={titleNode}
-          contentNodes={contentNodes}
+          contentNodes={props.children}
           comments={comments}
           {...opts}
           {...props}
@@ -251,3 +271,5 @@ export default (opts, _config) => {
     )
   }
 }
+
+export default NextraBlog

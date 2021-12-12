@@ -1,8 +1,16 @@
 import React from 'react'
 import Link from 'next/link'
 import ThemeSwitch from './theme-switch'
+import type { NextraBlogTheme } from 'nextra'
 
-export default function Meta({ author, date, tag, back, config }) {
+interface MeatProps {
+  author: string
+  date: string
+  tag: string
+  back: string
+  config: NextraBlogTheme
+}
+export default function Meta({ author, date, tag, back, config }: MeatProps) {
   const authorNode = author ? author : null
   const dateNode = date ? <time>{new Date(date).toDateString()}</time> : null
   const tags = tag ? tag.split(',').map(s => s.trim()) : []

@@ -4,7 +4,7 @@ const package = require('../package.json')
 console.log('Watching...')
 
 esbuild.build({
-  entryPoints: ['src/index.js'],
+  entryPoints: ['src/index.tsx'],
   format: 'esm',
   bundle: true,
   loader: {

@@ -1,5 +1,6 @@
 import React from 'react'
 import cn from 'classnames'
+
 interface BleedProps {
   full: boolean
 }
