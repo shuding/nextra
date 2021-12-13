@@ -3,10 +3,11 @@
   "private": true,
   "scripts": {
     "dev": "turbo run dev",
+    "build": "turbo run build",
+    "types": "turbo run types",
     "dev:core": "pnpm run dev --filter nextra",
     "dev:theme-blog": "pnpm run dev --filter nextra-theme-blog",
     "dev:theme-docs": "pnpm run dev --filter nextra-theme-docs",
-    "build": "turbo run build",
     "build:core": "pnpm run build --filter nextra",
     "build:theme-blog": "pnpm run build --filter nextra-theme-blog",
     "build:theme-docs": "pnpm run build --filter nextra-theme-docs",
@@ -46,6 +47,11 @@
           "bleed.js",
           "ssg.js",
           "loader.js"
+        ]
+      },
+      "types": {
+        "dependsOn": [
+          "^types"
         ]
       },
       "dev": {
