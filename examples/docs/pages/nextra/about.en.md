@@ -12,6 +12,8 @@ Nextra also supports .md files.
 
 ---
 
+## Title
+
 # **Hello**, This Is a _Title_ Inside `h1`
 
 ## **Hello**, This Is a _Title_ Inside `h2`

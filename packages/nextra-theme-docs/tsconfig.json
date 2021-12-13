@@ -3,11 +3,10 @@
     "target": "es2016",
     "module": "ESNext",
     "declaration": true,
-    "emitDeclarationOnly": true,
+    "noEmit": true,
     "esModuleInterop": true,
-    "outDir": "dist",
     "strict": true,
-    "skipLibCheck": true ,
+    "skipLibCheck": true,
     "allowJs": true,
     "jsx": "react-jsx",
     "moduleResolution": "Node"

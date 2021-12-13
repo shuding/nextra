@@ -25,6 +25,7 @@ export interface PageOpt {
   meta: Record<string, any>
   pageMap: PageMapItem[]
   titleText: string
+  headings: Heading[]
 }
 
 export type Title = string | { [key: string]: string; title: string }

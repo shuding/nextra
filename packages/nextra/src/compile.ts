@@ -12,7 +12,7 @@ export async function compileMdx(
     unstable_staticImage: false
   }
 ) {
-  let headers: Heading[] = []
+  let headings: Heading[] = []
   let titleText: string | null = null
   const result = await compile(source, {
     jsx: true,
@@ -21,12 +21,12 @@ export async function compileMdx(
       ...(mdxOptions.remarkPlugins || []),
       remarkGfm,
       remarkMdxCodeMeta,
-      getHeaders(headers),
+      getHeaders(headings),
       ...(nextraOptions.unstable_staticImage ? [remarkStaticImage] : [])
     ].filter(Boolean)
   })
-  if (Array.isArray(headers) && headers.length > 0) {
-    const h1 = headers.find(v => v.depth === 1)
+  if (Array.isArray(headings) && headings.length > 0) {
+    const h1 = headings.find(v => v.depth === 1)
     if (h1 && Array.isArray(h1.children)) {
       const child = h1.children[0]
       if (child.type === 'text') {
@@ -36,6 +36,7 @@ export async function compileMdx(
   }
   return {
     result: String(result),
-    titleText
+    titleText,
+    headings
   }
 }

@@ -54,7 +54,15 @@ function Body({ meta, toc, filepathWithName, navLinks, children }) {
   )
 }
 
-const Layout = ({ filename, pageMap, meta, children, titleText }) => {
+
+const Layout = ({
+  filename,
+  pageMap,
+  meta,
+  children,
+  titleText,
+  headings
+}) => {
   const { route, locale } = useRouter()
   const config = useConfig()
 
@@ -69,11 +77,9 @@ const Layout = ({ filename, pageMap, meta, children, titleText }) => {
     directories
   } = useDirectoryInfo(pageMap)
 
-  const content = children.type()
   const filepath = route.slice(0, route.lastIndexOf('/') + 1)
   const filepathWithName = filepath + filename
   const title = meta.title || titleText || 'Untitled'
-  const headings = []
   const isRTL = useMemo(() => {
     if (!config.i18n) return config.direction === 'rtl' || null
     const localeConfig = config.i18n.find(l => l.locale === locale)

@@ -67,7 +67,7 @@ function File({ item, anchors }) {
     if (active) {
       let activeIndex = 0
       const anchorInfo = anchors.map((anchor, i) => {
-        const text = innerText(anchor) || ''
+        const text = anchor
         const slug = slugger.slug(text)
         if (activeAnchor[slug] && activeAnchor[slug].isActive) {
           activeIndex = i
@@ -140,8 +140,13 @@ export default function Sidebar({
   const anchors = useMemo(
     () =>
       headings
-        .filter(child => child.props && child.type === 'h2')
-        .map(child => child.props.children),
+        .filter(v => v.children && v.depth === '2' && v.type === 'heading')
+        .map(v => {
+          if (Array.isArray(v.children) && v.children.lenght === 1) {
+            const content = v.children[0]
+            if (content.type === 'text') return content.value
+          }
+        }).filter(Boolean),
     [headings]
   )
 
