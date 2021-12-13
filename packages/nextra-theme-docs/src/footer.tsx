@@ -7,8 +7,15 @@ import parseGitUrl from 'parse-git-url'
 import ArrowRight from './icons/arrow-right'
 import renderComponent from './utils/render-component'
 import { useConfig } from './config'
+import { Item } from './utils/normalize-pages'
 
-const NextLink = ({ route, title, isRTL }) => {
+interface LinkProps {
+  route: string
+  title: string
+  isRTL?: boolean | null
+}
+
+const NextLink = ({ route, title, isRTL }: LinkProps) => {
   return (
     <Link href={route}>
       <a
@@ -30,7 +37,7 @@ const NextLink = ({ route, title, isRTL }) => {
   )
 }
 
-const PrevLink = ({ route, title, isRTL }) => {
+const PrevLink = ({ route, title, isRTL }: LinkProps) => {
   return (
     <Link href={route}>
       <a
@@ -52,8 +59,8 @@ const PrevLink = ({ route, title, isRTL }) => {
   )
 }
 
-const createEditUrl = (repository, filepath) => {
-  const repo = parseGitUrl(repository)
+const createEditUrl = (repository?: string, filepath?: string) => {
+  const repo = parseGitUrl(repository || '')
   if (!repo) throw new Error('Invalid `docsRepositoryBase` URL!')
 
   switch (repo.type) {
@@ -70,7 +77,15 @@ const createEditUrl = (repository, filepath) => {
   return '#'
 }
 
-const EditPageLink = ({ repository, text, filepath }) => {
+const EditPageLink = ({
+  repository,
+  text,
+  filepath
+}: {
+  repository?: string
+  text: string
+  filepath: string
+}) => {
   const url = createEditUrl(repository, filepath)
   const { locale } = useRouter()
   return (
@@ -83,8 +98,16 @@ const EditPageLink = ({ repository, text, filepath }) => {
     </a>
   )
 }
-
-export const NavLinks = ({ flatDirectories, currentIndex, isRTL }) => {
+interface NavLinkProps {
+  isRTL?: boolean | null
+  currentIndex: number
+  flatDirectories: Item[]
+}
+export const NavLinks = ({
+  flatDirectories,
+  currentIndex,
+  isRTL
+}: NavLinkProps) => {
   const config = useConfig()
   let prev = flatDirectories[currentIndex - 1]
   let next = flatDirectories[currentIndex + 1]
@@ -105,7 +128,10 @@ export const NavLinks = ({ flatDirectories, currentIndex, isRTL }) => {
   )
 }
 
-const Footer = ({ filepathWithName, children }) => {
+const Footer: React.FC<{ filepathWithName: string }> = ({
+  filepathWithName,
+  children
+}) => {
   const { locale } = useRouter()
   const config = useConfig()
 

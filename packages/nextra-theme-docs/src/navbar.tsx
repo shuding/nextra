@@ -14,12 +14,15 @@ import GitHubIcon from './icons/github'
 import DiscordIcon from './icons/discord'
 import ThemeSwitch from './theme-switch'
 import LocaleSwitch from './locale-switch'
+import { Item, PageItem } from './utils/normalize-pages'
 
-export default function Navbar({
-  isRTL,
-  flatDirectories,
-  flatPageDirectories
-}) {
+interface NavBarProps {
+  isRTL?: boolean | null
+  flatDirectories: Item[]
+  flatPageDirectories: PageItem[]
+}
+
+export default function Navbar({ isRTL, flatDirectories, flatPageDirectories }: NavBarProps) {
   const config = useConfig()
   const { locale, asPath } = useRouter()
   const activeRoute = getFSRoute(asPath, locale).split('#')[0]
@@ -43,7 +46,7 @@ export default function Navbar({
 
             // If it's a directory
             if (page.children) {
-              href = page.firstChildRoute
+              href = page.firstChildRoute ?? href
             }
 
             return (

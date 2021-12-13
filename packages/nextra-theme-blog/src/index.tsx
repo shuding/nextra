@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOMServer from 'react-dom/server'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'

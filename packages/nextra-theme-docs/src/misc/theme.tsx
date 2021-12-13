@@ -2,13 +2,13 @@ import { MDXProvider } from '@mdx-js/react'
 import Slugger from 'github-slugger'
 import Link from 'next/link'
 import React, { useContext, useEffect, useMemo, useRef } from 'react'
-import innerText from 'react-innertext'
 import Highlight, { defaultProps } from 'prism-react-renderer'
+import type { Language, PrismTheme } from 'prism-react-renderer'
 import 'intersection-observer'
 
-import { useActiveAnchorSet } from './active-anchor'
+import { ActiveAnchor, useActiveAnchorSet } from './active-anchor'
 
-const THEME = {
+const THEME: PrismTheme = {
   plain: {
     backgroundColor: 'transparent'
   },
@@ -49,9 +49,10 @@ const THEME = {
   ]
 }
 
-const ob = {}
-const obCallback = {}
-const createOrGetObserver = rootMargin => {
+const ob: Record<string, IntersectionObserver> = {}
+const obCallback: Record<string, ((e: IntersectionObserverEntry[]) => void)[]> =
+  {}
+const createOrGetObserver = (rootMargin: string) => {
   // Only create 1 instance for performance reasons
   if (!ob[rootMargin]) {
     obCallback[rootMargin] = []
@@ -68,9 +69,13 @@ const createOrGetObserver = rootMargin => {
   return ob[rootMargin]
 }
 
-function useIntersect(margin, ref, cb) {
+function useIntersect(
+  margin: string,
+  ref: React.RefObject<HTMLSpanElement>,
+  cb: (e: IntersectionObserverEntry) => void
+) {
   useEffect(() => {
-    const callback = entries => {
+    const callback = (entries: IntersectionObserverEntry[]) => {
       let e
       for (let i = 0; i < entries.length; i++) {
         if (entries[i].target === ref.current) {
@@ -100,25 +105,33 @@ const HeaderLink = ({
   slugger,
   withObserver = true,
   ...props
+}: {
+  tag: any
+  children: any
+  slugger: Slugger
+  withObserver?: boolean
 }) => {
   const setActiveAnchor = useActiveAnchorSet()
-  const obRef = useRef()
+  const obRef = useRef<HTMLSpanElement>(null)
 
-  const slug = slugger.slug(innerText(children) || '')
+  const slug = slugger.slug(children)
   const anchor = <span className="subheading-anchor" id={slug} ref={obRef} />
 
   // We are pretty sure that this header link component will not be rerendered
   // separately, so we attach a mutable index property to slugger.
+  // @ts-expect-error
   const index = slugger.index++
 
   useIntersect('0px 0px -50%', obRef, e => {
     const aboveHalfViewport =
       e.boundingClientRect.y + e.boundingClientRect.height <=
+      // FIXME:
+      // @ts-expect-error
       e.rootBounds.y + e.rootBounds.height
     const insideHalfViewport = e.intersectionRatio > 0
 
     setActiveAnchor(f => {
-      const ret = {
+      const ret: ActiveAnchor = {
         ...f,
         [slug]: {
           index,
@@ -127,7 +140,7 @@ const HeaderLink = ({
         }
       }
 
-      let activeSlug
+      let activeSlug = ''
       let smallestIndexInViewport = Infinity
       let largestIndexAboveViewport = -1
       for (let s in f) {
@@ -167,47 +180,68 @@ const HeaderLink = ({
   )
 }
 
-const H2 = ({ slugger }) => ({ children, ...props }) => {
-  return (
-    <HeaderLink tag="h2" slugger={slugger} {...props}>
-      {children}
-    </HeaderLink>
-  )
+interface HeadingProps {
+  children?: React.ReactNode
+  href?: string
 }
 
-const H3 = ({ slugger }) => ({ children, ...props }) => {
-  return (
-    <HeaderLink tag="h3" slugger={slugger} {...props}>
-      {children}
-    </HeaderLink>
-  )
-}
+const H2 =
+  ({ slugger }: { slugger: Slugger }) =>
+  ({ children, ...props }: HeadingProps) => {
+    return (
+      <HeaderLink tag="h2" slugger={slugger} {...props}>
+        {children}
+      </HeaderLink>
+    )
+  }
 
-const H4 = ({ slugger }) => ({ children, ...props }) => {
-  return (
-    <HeaderLink tag="h4" slugger={slugger} {...props}>
-      {children}
-    </HeaderLink>
-  )
-}
+const H3 =
+  ({ slugger }: { slugger: Slugger }) =>
+  ({ children, ...props }: HeadingProps) => {
+    return (
+      <HeaderLink tag="h3" slugger={slugger} {...props}>
+        {children}
+      </HeaderLink>
+    )
+  }
 
-const H5 = ({ slugger }) => ({ children, ...props }) => {
-  return (
-    <HeaderLink tag="h5" slugger={slugger} {...props}>
-      {children}
-    </HeaderLink>
-  )
-}
+const H4 =
+  ({ slugger }: { slugger: Slugger }) =>
+  ({ children, ...props }: HeadingProps) => {
+    return (
+      <HeaderLink tag="h4" slugger={slugger} {...props}>
+        {children}
+      </HeaderLink>
+    )
+  }
 
-const H6 = ({ slugger }) => ({ children, ...props }) => {
-  return (
-    <HeaderLink tag="h6" slugger={slugger} {...props}>
-      {children}
-    </HeaderLink>
-  )
-}
+const H5 =
+  ({ slugger }: { slugger: Slugger }) =>
+  ({ children, ...props }: HeadingProps) => {
+    return (
+      <HeaderLink tag="h5" slugger={slugger} {...props}>
+        {children}
+      </HeaderLink>
+    )
+  }
 
-const A = ({ children, ...props }) => {
+const H6 =
+  ({ slugger }: { slugger: Slugger }) =>
+  ({ children, ...props }: HeadingProps) => {
+    return (
+      <HeaderLink tag="h6" slugger={slugger} {...props}>
+        {children}
+      </HeaderLink>
+    )
+  }
+
+const A = ({
+  children,
+  ...props
+}: {
+  children?: React.ReactNode
+  href?: string
+}) => {
   const isExternal = props.href && props.href.startsWith('https://')
   if (isExternal) {
     return (
@@ -216,15 +250,25 @@ const A = ({ children, ...props }) => {
       </a>
     )
   }
-  return (
+  return props.href ? (
     <Link href={props.href}>
       <a {...props}>{children}</a>
     </Link>
+  ) : (
+    <></>
   )
 }
 
-const PreContext = React.createContext({})
-const Pre = ({ children, ...props }) => {
+const PreContext = React.createContext<{
+  highlight?: string
+}>({})
+const Pre = ({
+  children,
+  ...props
+}: {
+  children?: React.ReactNode
+  highlight?: string
+}) => {
   return (
     <PreContext.Provider value={props}>
       <pre>{children}</pre>
@@ -232,24 +276,31 @@ const Pre = ({ children, ...props }) => {
   )
 }
 
-const Code = ({ children, className }) => {
-  const { highlight, ...props } = useContext(PreContext)
+const Code = ({
+  children,
+  className
+}: {
+  children?: React.ReactNode
+  className?: string
+}) => {
+  const { highlight } = useContext(PreContext)
 
   const highlightedRanges = useMemo(() => {
     return highlight
       ? highlight.split(',').map(r => {
           if (r.includes('-')) {
-            return r.split('-')
+            return r.split('-').map(v => parseInt(v, 10))
           }
           return +r
         })
       : []
   }, [highlight])
 
-  if (!className) return <code {...props}>{children}</code>
-
+  if (!className) return <code>{children}</code>
+  if (typeof children !== 'string') return <code>{children}</code>
   // https://mdxjs.com/guides/syntax-highlighting#all-together
-  const language = className.replace(/language-/, '')
+  const language = className.replace(/language-/, '') as Language
+
   return (
     <Highlight
       {...defaultProps}
@@ -274,7 +325,7 @@ const Code = ({ children, className }) => {
                       margin: '0 -1rem',
                       padding: '0 1rem'
                     }
-                  : null
+                  : {}
               }
             >
               {line.map((token, key) => (
@@ -288,7 +339,7 @@ const Code = ({ children, className }) => {
   )
 }
 
-const Table = ({ children }) => {
+const Table = ({ children }: { children?: React.ReactNode }) => {
   return (
     <div className="table-container">
       <table>{children}</table>
@@ -296,7 +347,7 @@ const Table = ({ children }) => {
   )
 }
 
-const getComponents = args => ({
+const getComponents = (args: { slugger: Slugger }) => ({
   h2: H2(args),
   h3: H3(args),
   h4: H4(args),
@@ -308,8 +359,9 @@ const getComponents = args => ({
   table: Table
 })
 
-export default ({ children }) => {
+const MDXTheme = ({ children }: { children?: React.ReactNode }) => {
   const slugger = new Slugger()
+  // @ts-expect-error
   slugger.index = 0
   return (
     <MDXProvider components={getComponents({ slugger })}>
@@ -317,3 +369,5 @@ export default ({ children }) => {
     </MDXProvider>
   )
 }
+
+export default MDXTheme

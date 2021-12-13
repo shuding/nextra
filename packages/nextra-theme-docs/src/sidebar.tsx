@@ -3,19 +3,24 @@ import cn from 'classnames'
 import Slugger from 'github-slugger'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import innerText from 'react-innertext'
-
 import { useActiveAnchor } from './misc/active-anchor'
 import { getFSRoute } from './utils/get-fs-route'
 import useMenuContext from './utils/menu-context'
-
 import Search from './search'
 import StorkSearch from './stork-search'
 import { useConfig } from './config'
+import getHeadingText from './utils/getHeadingText'
+import { Heading } from 'nextra'
+import { Item, PageItem } from './utils/normalize-pages'
 
-const TreeState = new Map()
+const TreeState: Record<string, boolean> = {}
 
-function Folder({ item, anchors }) {
+interface FolderProps {
+  item: PageItem | Item
+  anchors: string[]
+}
+
+function Folder({ item, anchors }: FolderProps) {
   const { asPath, locale } = useRouter()
   const routeOriginal = getFSRoute(asPath, locale)
   const route = routeOriginal.split('#')[0]
@@ -46,13 +51,22 @@ function Folder({ item, anchors }) {
           display: open ? 'initial' : 'none'
         }}
       >
-        <Menu directories={item.children} base={item.route} anchors={anchors} />
+        {Array.isArray(item.children) && (
+          <Menu
+            directories={item.children}
+            base={item.route}
+            anchors={anchors}
+          />
+        )}
       </div>
     </li>
   )
 }
-
-function File({ item, anchors }) {
+interface FileProps {
+  item: PageItem | Item
+  anchors: string[]
+}
+function File({ item, anchors }: FileProps) {
   const { setMenu } = useMenuContext()
   const { asPath, locale } = useRouter()
   const route = getFSRoute(asPath, locale)
@@ -74,7 +88,6 @@ function File({ item, anchors }) {
         }
         return { text, slug }
       })
-
       return (
         <li className={active ? 'active' : ''}>
           <Link href={item.route}>
@@ -115,8 +128,13 @@ function File({ item, anchors }) {
     </li>
   )
 }
-
-function Menu({ directories, anchors }) {
+interface MenuProps {
+  directories: PageItem[] | Item[]
+  anchors: string[]
+  base?: string
+}
+const emptyItem: any[] = []
+function Menu({ directories, anchors }: MenuProps) {
   return (
     <ul>
       {directories.map(item => {
@@ -129,27 +147,30 @@ function Menu({ directories, anchors }) {
   )
 }
 
+interface SideBarProps {
+  directories: PageItem[]
+  flatDirectories: Item[]
+  fullDirectories: Item[]
+  mdShow?: boolean
+  headings?: Heading[]
+}
+const emptyHeading: any[] = []
 export default function Sidebar({
   directories,
   flatDirectories,
   fullDirectories,
   mdShow = true,
-  headings = []
-}) {
+  headings = emptyHeading
+}: SideBarProps) {
   const config = useConfig()
   const anchors = useMemo(
     () =>
       headings
-        .filter(v => v.children && v.depth === '2' && v.type === 'heading')
-        .map(v => {
-          if (Array.isArray(v.children) && v.children.lenght === 1) {
-            const content = v.children[0]
-            if (content.type === 'text') return content.value
-          }
-        }).filter(Boolean),
+        .filter(v => v.children && v.depth === 2 && v.type === 'heading')
+        .map(v => getHeadingText(v))
+        .filter(Boolean),
     [headings]
   )
-
   const { menu } = useMenuContext()
   useEffect(() => {
     if (menu) {

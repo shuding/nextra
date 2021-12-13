@@ -1,4 +1,4 @@
-export const getFSRoute = (asPath: string, locale: string) => {
+export const getFSRoute = (asPath: string, locale?: string | undefined) => {
   if (!locale) return asPath.replace(new RegExp('/index(/|$)'), '$1')
 
   return asPath

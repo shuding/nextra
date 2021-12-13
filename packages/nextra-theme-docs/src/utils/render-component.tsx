@@ -1,6 +1,9 @@
 import React from 'react'
 
-const renderComponent = (ComponentOrNode, props) => {
+const renderComponent = <T,>(
+  ComponentOrNode: React.FC<T> | React.ReactNode,
+  props: T
+) => {
   if (!ComponentOrNode) return null
   if (typeof ComponentOrNode === 'function') {
     return <ComponentOrNode {...props} />

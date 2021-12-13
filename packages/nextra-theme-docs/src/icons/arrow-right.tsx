@@ -1,5 +1,3 @@
-import React from 'react'
-
 const ArrowRight = ({ height = 24, ...props }) => {
   return (
     <svg

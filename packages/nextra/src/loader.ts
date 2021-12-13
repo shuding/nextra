@@ -184,7 +184,7 @@ export default async function (
     unstable_stork,
     unstable_staticImage
   } = options
-  // @ts-expect-error FIXME: mdxOptions
+  // @ts-expect-error mdxOptions
   const { resourcePath, resourceQuery, mdxOptions } = this
   const filename = resourcePath.slice(resourcePath.lastIndexOf('/') + 1)
   const fileLocale = getLocaleFromFilename(filename) || 'default'

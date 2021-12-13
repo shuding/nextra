@@ -27,7 +27,7 @@ export async function compileMdx(
   })
   if (Array.isArray(headings) && headings.length > 0) {
     const h1 = headings.find(v => v.depth === 1)
-    if (h1 && Array.isArray(h1.children)) {
+    if (h1 && Array.isArray(h1.children) && h1.children.length === 1) {
       const child = h1.children[0]
       if (child.type === 'text') {
         titleText = child.value

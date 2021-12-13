@@ -4,21 +4,21 @@ import 'focus-visible'
 import { SkipNavContent } from '@reach/skip-nav'
 import { ThemeProvider } from 'next-themes'
 import cn from 'classnames'
-
 import Head from './head'
 import Navbar from './navbar'
 import Footer, { NavLinks } from './footer'
 import Theme from './misc/theme'
 import Sidebar from './sidebar'
 import ToC from './toc'
-import { ThemeConfigContext, useConfig } from './config'
+import { DocsThemeConfig, ThemeConfigContext, useConfig } from './config'
 import { ActiveAnchor } from './misc/active-anchor'
 import defaultConfig from './misc/default.config'
 import { getFSRoute } from './utils/get-fs-route'
 import { MenuContext } from './utils/menu-context'
 import normalizePages from './utils/normalize-pages'
+import { Heading, PageMapItem, PageOpt } from 'nextra'
 
-function useDirectoryInfo(pageMap) {
+function useDirectoryInfo(pageMap: PageMapItem[]) {
   const { locale, defaultLocale, asPath } = useRouter()
 
   return useMemo(() => {
@@ -32,8 +32,15 @@ function useDirectoryInfo(pageMap) {
   }, [pageMap, locale, defaultLocale, asPath])
 }
 
-function Body({ meta, toc, filepathWithName, navLinks, children }) {
-  const config = useConfig()
+interface BodyProps {
+  meta: Record<string, any>
+  toc?: React.ReactNode
+  filepathWithName: string
+  navLinks: React.ReactNode
+  children: React.ReactNode
+}
+
+function Body({ meta, toc, filepathWithName, navLinks, children }: BodyProps) {
   return (
     <React.Fragment>
       <SkipNavContent />
@@ -54,6 +61,14 @@ function Body({ meta, toc, filepathWithName, navLinks, children }) {
   )
 }
 
+interface LayoutProps {
+  filename: string
+  pageMap: PageMapItem[]
+  meta: Record<string, any>
+  children: React.ReactNode
+  titleText: string
+  headings: Heading[]
+}
 
 const Layout = ({
   filename,
@@ -62,7 +77,7 @@ const Layout = ({
   children,
   titleText,
   headings
-}) => {
+}: LayoutProps) => {
   const { route, locale } = useRouter()
   const config = useConfig()
 
@@ -185,10 +200,9 @@ const Layout = ({
   )
 }
 
-export default (opts, config) => {
+export default (opts: PageOpt, config: DocsThemeConfig) => {
   const extendedConfig = Object.assign({}, defaultConfig, config)
-  console.log('opts', opts)
-  return props => {
+  return (props: any) => {
     return (
       <ThemeConfigContext.Provider value={extendedConfig}>
         <ThemeProvider attribute="class">

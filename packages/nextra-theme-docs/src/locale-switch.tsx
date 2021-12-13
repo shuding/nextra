@@ -1,11 +1,15 @@
-import React from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import cn from 'classnames'
 
 import useMounted from './utils/use-mounted'
+import { DocsThemeConfig } from './config'
 
-export default function LocaleSwitch({ options, isRTL }) {
+interface LocaleSwitchProps {
+  options: DocsThemeConfig['i18n']
+  isRTL?: boolean | null
+}
+export default function LocaleSwitch({ options, isRTL }: LocaleSwitchProps) {
   const { locale, asPath } = useRouter()
   const mounted = useMounted()
 
@@ -13,7 +17,7 @@ export default function LocaleSwitch({ options, isRTL }) {
     <details className="locale-switch relative">
       <summary
         className="text-current p-2 cursor-pointer outline-none"
-        tabIndex="0"
+        tabIndex={0}
       >
         <svg
           fill="none"
@@ -39,23 +43,24 @@ export default function LocaleSwitch({ options, isRTL }) {
             { 'right-0': !isRTL, 'left-0': isRTL }
           )}
         >
-          {options.map(l => (
-            <li key={l.locale}>
-              <Link href={asPath} locale={l.locale}>
-                <a
-                  className={cn(
-                    'block no-underline text-current py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-800 whitespace-nowrap',
-                    {
-                      'font-semibold': locale === l.locale,
-                      'bg-gray-100 dark:bg-gray-900': locale === l.locale
-                    }
-                  )}
-                >
-                  {l.text}
-                </a>
-              </Link>
-            </li>
-          ))}
+          {Array.isArray(options) &&
+            options.map(l => (
+              <li key={l.locale}>
+                <Link href={asPath} locale={l.locale}>
+                  <a
+                    className={cn(
+                      'block no-underline text-current py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-800 whitespace-nowrap',
+                      {
+                        'font-semibold': locale === l.locale,
+                        'bg-gray-100 dark:bg-gray-900': locale === l.locale
+                      }
+                    )}
+                  >
+                    {l.text}
+                  </a>
+                </Link>
+              </li>
+            ))}
         </ul>
       ) : null}
     </details>

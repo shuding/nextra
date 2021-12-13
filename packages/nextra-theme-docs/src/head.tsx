@@ -4,7 +4,13 @@ import NextHead from 'next/head'
 import renderComponent from './utils/render-component'
 import { useConfig } from './config'
 
-export default function Head({ title, locale, meta }) {
+interface HeadProps {
+  title: string
+  locale?: string
+  meta: Record<string, any>
+}
+
+export default function Head({ title, locale, meta }: HeadProps) {
   const config = useConfig()
   return (
     <NextHead>

@@ -1,25 +1,29 @@
 import React from 'react'
 import cn from 'classnames'
 import Slugger from 'github-slugger'
-import innerText from 'react-innertext'
-
+import getHeadingText from './utils/getHeadingText'
 import { useActiveAnchor } from './misc/active-anchor'
+import { Heading } from 'nextra'
 
-const indent = level => {
+const indent = (level: number) => {
   switch (level) {
-    case 'h3':
+    case 3:
       return { marginLeft: '1rem ' }
-    case 'h4':
+    case 4:
       return { marginLeft: '2rem ' }
-    case 'h5':
+    case 5:
       return { marginLeft: '3rem ' }
-    case 'h6':
+    case 6:
       return { marginLeft: '4rem ' }
   }
   return {}
 }
-
-export default function ToC({ headings }) {
+const emptyHeader: any[] = []
+export default function ToC({
+  headings = emptyHeader
+}: {
+  headings: Heading[] | null
+}) {
   const slugger = new Slugger()
   const activeAnchor = useActiveAnchor()
 
@@ -28,14 +32,13 @@ export default function ToC({ headings }) {
       {headings ? (
         <ul className="overflow-y-auto sticky max-h-[calc(100vh-4rem)] top-16 pt-8 pb-10 m-0 list-none">
           {headings
-            .filter(heading => heading.type !== 'h1')
+            .filter(heading => heading.type !== 'heading')
             .map(heading => {
-              const text = innerText(heading.props.children) || ''
+              const text = getHeadingText(heading)
               const slug = slugger.slug(text)
               const state = activeAnchor[slug]
-
               return (
-                <li key={slug} style={indent(heading.type)}>
+                <li key={slug} style={indent(heading.depth)}>
                   <a
                     href={`#${slug}`}
                     className={cn(

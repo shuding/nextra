@@ -4,7 +4,7 @@ const package = require('../package.json')
 console.log('Watching...')
 
 esbuild.build({
-  entryPoints: ['src/index.js', 'src/bleed.tsx', 'src/callout.tsx'],
+  entryPoints: ['src/index.tsx', 'src/bleed.tsx', 'src/callout.tsx'],
   format: 'esm',
   bundle: true,
   loader: {

@@ -1,12 +1,20 @@
-import React, { useMemo, useCallback, useRef, useState, useEffect } from 'react'
+import { useMemo, useCallback, useRef, useState, useEffect } from 'react'
 import matchSorter from 'match-sorter'
 import cn from 'classnames'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+import type { MouseEventHandler } from 'react'
+import type { Item as NormalItem } from './utils/normalize-pages'
+interface ItemProps {
+  title: string
+  active: boolean
+  href: string
+  search: string
+  onMouseOver: MouseEventHandler
+}
 
-const Item = ({ title, active, href, onMouseOver, search }) => {
+const Item = ({ title, active, href, onMouseOver, search }: ItemProps) => {
   const highlight = title.toLowerCase().indexOf(search.toLowerCase())
-
   return (
     <Link href={href}>
       <a className="block no-underline" onMouseOver={onMouseOver}>
@@ -25,14 +33,18 @@ const Item = ({ title, active, href, onMouseOver, search }) => {
 const UP = true
 const DOWN = false
 
-const Search = ({ directories = [] }) => {
+interface SearchProps {
+  directories: NormalItem[]
+}
+
+const Search = ({ directories = [] }: SearchProps) => {
   const router = useRouter()
   const [show, setShow] = useState(false)
   const [search, setSearch] = useState('')
   const [active, setActive] = useState(0)
-  const input = useRef(null)
+  const input = useRef<HTMLInputElement | null>(null)
 
-  const results = useMemo(() => {
+  const results = useMemo<{ route: string; title: string }[]>(() => {
     if (!search) return []
 
     // Will need to scrape all the headers from each page and search through them here
@@ -41,7 +53,7 @@ const Search = ({ directories = [] }) => {
     return matchSorter(directories, search, { keys: ['title'] })
   }, [search])
 
-  const moveActiveItem = up => {
+  const moveActiveItem = (up: boolean) => {
     const position = active + (up ? -1 : 1)
     const { length } = results
 
@@ -79,14 +91,14 @@ const Search = ({ directories = [] }) => {
   useEffect(() => {
     const inputs = ['input', 'select', 'button', 'textarea']
 
-    const down = e => {
+    const down = (e: KeyboardEvent) => {
       if (
         document.activeElement &&
         inputs.indexOf(document.activeElement.tagName.toLowerCase()) === -1
       ) {
         if (e.key === '/') {
           e.preventDefault()
-          input.current.focus()
+          input.current?.focus()
         } else if (e.key === 'Escape') {
           setShow(false)
         }

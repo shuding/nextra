@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default {
+const defaultTheme = {
   docsRepositoryBase: 'https://github.com/shuding/nextra',
   titleSuffix: ' – Nextra',
   nextLinks: true,
@@ -37,3 +37,5 @@ export default {
   // direction: 'ltr',
   // i18n: [{ locale: 'en-US', text: 'English', direction: 'ltr' }],
 }
+
+export default defaultTheme

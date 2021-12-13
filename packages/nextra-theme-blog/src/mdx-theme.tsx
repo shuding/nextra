@@ -131,11 +131,11 @@ const A = ({
       </a>
     )
   }
-  return (
-    <Link href={props.href || '/'}>
+  return props.href ?(
+    <Link href={props.href}>
       <a {...props}>{children}</a>
     </Link>
-  )
+  ) : <></>
 }
 
 const Code = ({
@@ -148,7 +148,6 @@ const Code = ({
   highlight?: string
   children?: React.ReactNode
 }) => {
-  console.log('highlight', highlight, props)
   const highlightedRanges = useMemo(() => {
     return highlight
       ? highlight.split(',').map(r => {
@@ -179,7 +178,6 @@ const Code = ({
               {...getLineProps({ line, key: i })}
               style={
                 highlightedRanges.some(r => {
-                  console.log('what is R', r)
                   return Array.isArray(r)
                     ? r[0] <= i + 1 && i + 1 <= r[1]
                     : r === i + 1

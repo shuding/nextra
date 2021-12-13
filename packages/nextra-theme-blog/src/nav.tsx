@@ -1,4 +1,3 @@
-import React from 'react'
 import Link from 'next/link'
 import ThemeSwitch from './theme-switch'
 import type { NextraBlogTheme, PageMapItem } from 'nextra'

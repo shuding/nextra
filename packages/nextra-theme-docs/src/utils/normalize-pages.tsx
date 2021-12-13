@@ -1,19 +1,39 @@
+import { PageMapItem } from 'nextra'
 import getTitle from 'title'
 
-function getMetaTitle(meta) {
+function getMetaTitle(meta: string | Record<string, any>) {
   if (typeof meta === 'string') return meta
   if (typeof meta === 'object') return meta.title
   return ''
 }
 
-function getMetaItemType(meta) {
+function getMetaItemType(meta: string | Record<string, any>) {
   if (typeof meta === 'object') return meta.type
   return 'docs'
 }
 
-function getMetaHidden(meta) {
+function getMetaHidden(meta: string | Record<string, any>) {
   if (typeof meta === 'object') return meta.hidden || false
   return false
+}
+
+export interface Item extends Omit<PageMapItem, 'children'> {
+  title: string
+  type: string
+  children?: Item[]
+}
+export interface PageItem extends Omit<PageMapItem, 'children'> {
+  title: string
+  type: string
+  children?: PageItem[]
+  firstChildRoute?: string
+  hidden?: boolean
+}
+export interface DocsItem extends Omit<PageMapItem, 'children'> {
+  title: string
+  type: string
+  children?: DocsItem[]
+  firstChildRoute?: string
 }
 
 export default function normalizePages({
@@ -22,8 +42,14 @@ export default function normalizePages({
   defaultLocale,
   route,
   docsRoot = ''
+}: {
+  list: PageMapItem[]
+  locale?: string
+  defaultLocale?: string
+  route: string
+  docsRoot?: string
 }) {
-  let meta
+  let meta: string | Record<string, any> | undefined = ''
   for (let item of list) {
     if (item.name === 'meta.json') {
       if (locale === item.locale) {
@@ -49,19 +75,19 @@ export default function normalizePages({
   }
 
   // All directories
-  const directories = []
-  const flatDirectories = []
+  const directories: Item[] = []
+  const flatDirectories: Item[] = []
 
   // Docs directories
-  const docsDirectories = []
-  const flatDocsDirectories = []
+  const docsDirectories: DocsItem[] = []
+  const flatDocsDirectories: DocsItem[] = []
 
   // Page directories
-  const pageDirectories = []
-  const flatPageDirectories = []
+  const pageDirectories: PageItem[] = []
+  const flatPageDirectories: PageItem[] = []
 
-  let activeType
-  let activeIndex
+  let activeType: string = ''
+  let activeIndex: number  = 0
 
   list
     .filter(
@@ -83,6 +109,7 @@ export default function normalizePages({
       return indexA - indexB
     })
     .forEach(a => {
+      if (typeof meta !== 'object') return
       const title = getMetaTitle(meta[a.name]) || getTitle(a.name)
       const type = getMetaItemType(meta[a.name]) || 'docs'
       const hidden = getMetaHidden(meta[a.name])
@@ -133,19 +160,19 @@ export default function normalizePages({
         }
       }
 
-      const item = {
+      const item: Item = {
         ...a,
         title,
         type,
         children: normalizedChildren ? [] : undefined
       }
-      const docsItem = {
+      const docsItem: DocsItem = {
         ...a,
         title,
         type,
         children: normalizedChildren ? [] : undefined
       }
-      const pageItem = {
+      const pageItem: PageItem = {
         ...a,
         title,
         type,
@@ -156,6 +183,7 @@ export default function normalizePages({
       if (normalizedChildren) {
         switch (type) {
           case 'nav':
+            // @ts-expect-error normalizedChildren === true
             pageItem.children.push(...normalizedChildren.pageDirectories)
             docsDirectories.push(...normalizedChildren.docsDirectories)
 
@@ -173,7 +201,8 @@ export default function normalizePages({
           case 'docs':
           default:
             if (isCurrentDocsTree) {
-              docsItem.children.push(...normalizedChildren.docsDirectories)
+              Array.isArray(docsItem.children) &&
+                docsItem.children.push(...normalizedChildren.docsDirectories)
               pageDirectories.push(...normalizedChildren.pageDirectories)
             }
         }
@@ -183,7 +212,8 @@ export default function normalizePages({
 
         flatDocsDirectories.push(...normalizedChildren.flatDocsDirectories)
 
-        item.children.push(...normalizedChildren.directories)
+        Array.isArray(item.children) &&
+          item.children.push(...normalizedChildren.directories)
       } else {
         flatDirectories.push(item)
         switch (type) {
