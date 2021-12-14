@@ -131,23 +131,42 @@ const A = ({
       </a>
     )
   }
-  return props.href ?(
+  return props.href ? (
     <Link href={props.href}>
       <a {...props}>{children}</a>
     </Link>
-  ) : <></>
+  ) : (
+    <></>
+  )
+}
+
+const HightlightContext = React.createContext<{
+  highlight?: string
+}>({})
+
+const Pre = ({
+  children,
+  ...props
+}: {
+  children?: React.ReactNode
+  highlight?: string
+}) => {
+  return (
+    <HightlightContext.Provider value={props}>
+      <pre>{children}</pre>
+    </HightlightContext.Provider>
+  )
 }
 
 const Code = ({
   children,
   className,
-  highlight,
   ...props
 }: {
   className?: string
-  highlight?: string
   children?: React.ReactNode
 }) => {
+  const { highlight } = useContext(HightlightContext)
   const highlightedRanges = useMemo(() => {
     return highlight
       ? highlight.split(',').map(r => {
@@ -183,7 +202,7 @@ const Code = ({
                     : r === i + 1
                 })
                   ? {
-                      background: '#cce0f5',
+                      background: 'var(--c-highlight)',
                       margin: '0 -1rem',
                       padding: '0 1rem'
                     }
@@ -209,6 +228,7 @@ const components = {
   h5: H5,
   h6: H6,
   a: A,
+  pre: Pre,
   code: Code
 }
 

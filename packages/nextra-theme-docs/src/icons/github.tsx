@@ -1,3 +1,4 @@
+import React from 'react'
 const Github = ({ height = 40 }) => {
   return (
     <svg height={height} viewBox="2 2 20 20" fill="none" aria-hidden="true">

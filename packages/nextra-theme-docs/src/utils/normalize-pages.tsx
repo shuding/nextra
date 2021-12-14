@@ -1,3 +1,4 @@
+import React from 'react'
 import { PageMapItem } from 'nextra'
 import getTitle from 'title'
 

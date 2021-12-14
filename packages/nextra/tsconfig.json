@@ -8,7 +8,7 @@
     "strict": true,
     "skipLibCheck": true,
     "allowJs": true,
-    "jsx": "react-jsx",
+    "jsx": "react",
     "moduleResolution": "node"
   },
   "include": ["src"]
