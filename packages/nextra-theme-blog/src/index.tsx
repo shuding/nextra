@@ -7,7 +7,7 @@ import { ThemeProvider, useTheme } from 'next-themes'
 import { ReactCusdis } from 'react-cusdis'
 import Meta from './meta'
 import Nav from './nav'
-import MDXTheme from './mdx-theme'
+import MDXTheme, { HeadingContext } from './mdx-theme'
 
 import traverse from './utils/traverse'
 import getTags from './utils/get-tags'
@@ -26,7 +26,7 @@ interface LayoutProps {
   postList: JSX.Element | null
   back: string
   navPages: PageMapItem[]
-  title: string
+  hasH1: boolean
   contentNodes: React.ReactNode
   comments: boolean
   pageTitle: string
@@ -45,13 +45,14 @@ const Layout = ({
   postList,
   back,
   pageTitle,
-  title,
+  hasH1,
   contentNodes,
   comments
 }: LayoutProps) => {
   const type = meta.type || 'post'
+  const ref = React.useRef<HTMLHeadingElement>(null)
   return (
-    <React.Fragment>
+    <>
       <Head>
         <title>
           {pageTitle}
@@ -62,22 +63,23 @@ const Layout = ({
           : null}
       </Head>
       <article className="container prose prose-sm md:prose dark:prose-dark">
-        {<h1>{title}</h1> || <h1>{pageTitle}</h1>}
-        {type === 'post' ? (
-          <Meta {...meta} back={back} config={config} />
-        ) : (
-          <Nav navPages={navPages} config={config} />
-        )}
-        <MDXTheme>
-          {contentNodes}
-          {type === 'post' ? config.postFooter : null}
-          {type === 'post' ? comments : null}
-        </MDXTheme>
-        {postList}
-
-        {config.footer}
+        <HeadingContext.Provider value={ref}>
+          {hasH1 ? <h1 ref={ref}></h1> : <h1>{pageTitle}</h1>}
+          {type === 'post' ? (
+            <Meta {...meta} back={back} config={config} />
+          ) : (
+            <Nav navPages={navPages} config={config} />
+          )}
+          <MDXTheme>
+            {contentNodes}
+            {type === 'post' ? config.postFooter : null}
+            {type === 'post' ? comments : null}
+          </MDXTheme>
+          {postList}
+          {config.footer}
+        </HeadingContext.Provider>
       </article>
-    </React.Fragment>
+    </>
   )
 }
 
@@ -164,11 +166,7 @@ const NextraBlog = (opts: PageOpt, _config: NextraBlogTheme) => {
   return (props: any) => {
     const { query } = router
     const tagName = type === 'tag' ? query.tag : null
-    const title = opts.titleText
-
-    const pageTitle =
-      opts.meta.title ||
-      (typeof tagName === 'undefined' ? null : title ? title : '')
+    const pageTitle = opts.meta.title || opts.titleText || ''
 
     let comments
 
@@ -240,7 +238,6 @@ const NextraBlog = (opts: PageOpt, _config: NextraBlogTheme) => {
         })}
       </ul>
     ) : null
-
     return (
       <ThemeProvider
         attribute="class"
@@ -253,7 +250,6 @@ const NextraBlog = (opts: PageOpt, _config: NextraBlogTheme) => {
           navPages={navPages}
           back={back}
           pageTitle={pageTitle}
-          title={title}
           contentNodes={props.children}
           comments={comments}
           {...opts}

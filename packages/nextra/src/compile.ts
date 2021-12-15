@@ -13,7 +13,6 @@ export async function compileMdx(
   }
 ) {
   let headings: Heading[] = []
-  let titleText: string | null = null
   const result = await compile(source, {
     jsx: true,
     providerImportSource: '@mdx-js/react',
@@ -30,13 +29,22 @@ export async function compileMdx(
     if (h1 && Array.isArray(h1.children) && h1.children.length === 1) {
       const child = h1.children[0]
       if (child.type === 'text') {
-        titleText = child.value
+        return {
+          result: String(result),
+          titleText: child.value,
+          headings: headings,
+          hasH1: true
+        }
       }
+    }
+    return {
+      result: String(result),
+      headings: headings,
+      hasH1: h1 ? true : false
     }
   }
   return {
     result: String(result),
-    titleText,
-    headings
+    hasH1: false
   }
 }

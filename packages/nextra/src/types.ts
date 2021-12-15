@@ -24,8 +24,9 @@ export interface PageOpt {
   route: string
   meta: Record<string, any>
   pageMap: PageMapItem[]
-  titleText: string
-  headings: Heading[]
+  titleText: string | null
+  headings?: Heading[]
+  hasH1: boolean
 }
 export { Heading }
 

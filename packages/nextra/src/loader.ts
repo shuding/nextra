@@ -301,7 +301,7 @@ ${layoutConfig ? `import layoutConfig from '${layoutConfig}'` : ''}
 
 `
 
-  const { result, titleText, headings } = await compileMdx(content, mdxOptions, {
+  const { result, titleText, headings, hasH1 } = await compileMdx(content, mdxOptions, {
     unstable_staticImage
   })
   content = result
@@ -317,7 +317,8 @@ ${layoutConfig ? `import layoutConfig from '${layoutConfig}'` : ''}
       meta: ${JSON.stringify(data)},
       pageMap: ${JSON.stringify(pageMap)},
       titleText: ${JSON.stringify(titleText)},
-      headings: ${JSON.stringify(headings)}
+      headings: ${JSON.stringify(headings)},
+      hasH1: ${JSON.stringify(hasH1)}
     }, ${layoutConfig ? 'layoutConfig' : 'null'}))({
       ...props,
       children: _mdxContent

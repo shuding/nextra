@@ -1,11 +1,12 @@
 import ReactDOMServer from 'react-dom/server'
-import { createContext, useContext, useMemo } from 'react'
+import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { MDXProvider } from '@mdx-js/react'
 import Slugger from 'github-slugger'
 import Link from 'next/link'
 import React from 'react'
 import Highlight, { defaultProps } from 'prism-react-renderer'
 import type { Language, PrismTheme } from 'prism-react-renderer'
+import ReactDOM from 'react-dom'
 
 const THEME: PrismTheme = {
   plain: {
@@ -52,7 +53,27 @@ const THEME: PrismTheme = {
 
 const SluggerContext = createContext<Slugger | null>(null)
 
-const H1 = () => <></>
+export const HeadingContext = createContext<
+  React.RefObject<HTMLHeadingElement | null>
+>(React.createRef())
+
+const useHeadingRef = () => {
+  const ref = useContext(HeadingContext)
+  return ref
+}
+
+const H1 = ({ children }: { children?: React.ReactNode }) => {
+  const ref = useHeadingRef()
+  const [showHeading, setShowHeading] = useState(false)
+  useEffect(() => {
+    if (ref.current) {
+      setShowHeading(true)
+    }
+  }, [])
+  return (
+    <>{showHeading ? ReactDOM.createPortal(children, ref.current!) : null}</>
+  )
+}
 
 const HeaderLink = ({
   tag: Tag,
