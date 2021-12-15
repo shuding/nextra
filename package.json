@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "turbo run dev",
-    "build": "turbo run build",
+    "build": "turbo run build && turbo run types",
     "types": "turbo run types",
     "dev:core": "pnpm run dev --filter nextra",
     "dev:theme-blog": "pnpm run dev --filter nextra-theme-blog",
