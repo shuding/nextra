@@ -43,8 +43,6 @@
           ".next/**",
           "style.css",
           "index.js",
-          "callout.js",
-          "bleed.js",
           "ssg.js",
           "loader.js"
         ]
@@ -52,6 +50,9 @@
       "types": {
         "dependsOn": [
           "^types"
+        ],
+        "outputs": [
+          "dist/**"
         ]
       },
       "dev": {

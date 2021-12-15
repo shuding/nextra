@@ -31,6 +31,7 @@
     "build": "yarn run build:tailwind && yarn run build:layout",
     "build:layout": "node scripts/build.js",
     "build:tailwind": "NODE_ENV=production yarn postcss src/styles.css -o style.css --verbose",
+    "types": "tsc -p tsconfig.types.json",
     "dev:layout": "node scripts/dev.js",
     "dev:tailwind": "TAILWIND_MODE=watch yarn postcss src/styles.css -o style.css -w --verbose",
     "prepublishOnly": "rm -rf dist && yarn build"
@@ -47,7 +48,6 @@
     "next-themes": "^0.0.8",
     "parse-git-url": "^1.0.1",
     "prism-react-renderer": "^1.1.1",
-    "react-innertext": "^1.1.5",
     "title": "^3.4.2",
     "typescript": "^4.5.2"
   },

@@ -63,7 +63,8 @@ const HeaderLink = ({
   children: any
 }) => {
   const slugger = useContext(SluggerContext)
-  const slug = slugger!.slug(ReactDOMServer.renderToStaticMarkup(children))
+  // @ts-expect-error safe slugger from context
+  const slug = slugger.slug(ReactDOMServer.renderToStaticMarkup(children))
   return (
     <Tag {...props}>
       <span className="subheading-anchor" id={slug} />

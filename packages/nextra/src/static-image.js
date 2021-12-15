@@ -3,7 +3,7 @@
 
 const relative = /^\.{1,2}\//
 
-export function visit(node, type, handler) {
+function visit(node, type, handler) {
   if (node.type === type) {
     handler(node)
   }
