@@ -87,7 +87,7 @@ export default function normalizePages({
   const pageDirectories: PageItem[] = []
   const flatPageDirectories: PageItem[] = []
 
-  let activeType: string = ''
+  let activeType: string | undefined = undefined
   let activeIndex: number  = 0
 
   list

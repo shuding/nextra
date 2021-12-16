@@ -32,7 +32,7 @@ export default function ToC({
       {headings ? (
         <ul className="overflow-y-auto sticky max-h-[calc(100vh-4rem)] top-16 pt-8 pb-10 m-0 list-none">
           {headings
-            .filter(heading => heading.type === 'heading')
+            .filter(heading => heading.type === 'heading' && heading.depth > 1)
             .map(heading => {
               const text = getHeadingText(heading)
               const slug = slugger.slug(text)
