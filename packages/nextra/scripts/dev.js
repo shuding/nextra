@@ -5,7 +5,7 @@ console.log('Watching...')
 
 // Build CJS entrypoints
 esbuild.build({
-  entryPoints: ['src/index.js', 'src/ssg.js'],
+  entryPoints: ['src/index.js', 'src/ssg.ts'],
   platform: 'node',
   bundle: true,
   format: 'cjs',
@@ -26,7 +26,7 @@ esbuild.build({
 
 // Build the loader as ESM
 esbuild.build({
-  entryPoints: ['src/loader.js'],
+  entryPoints: ['src/loader.ts'],
   format: 'esm',
   platform: 'node',
   bundle: true,

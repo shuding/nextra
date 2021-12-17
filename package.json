@@ -1,23 +1,28 @@
 {
   "name": "nextra-monorepo",
   "private": true,
-  "workspaces": [
-    "packages/nextra",
-    "packages/nextra-theme-docs",
-    "packages/nextra-theme-blog",
-    "examples/docs",
-    "examples/blog"
-  ],
   "scripts": {
-    "build:core": "yarn workspace nextra run build",
-    "build:theme-docs": "yarn workspace nextra-theme-docs run build",
-    "build:theme-blog": "yarn workspace nextra-theme-blog run build",
-    "version-beta": "lerna version --preid beta --force-publish",
+    "dev": "turbo run dev",
+    "build": "turbo run build && turbo run types",
+    "types": "turbo run types",
+    "dev:core": "pnpm run dev --filter nextra",
+    "dev:theme-blog": "pnpm run dev --filter nextra-theme-blog",
+    "dev:theme-docs": "pnpm run dev --filter nextra-theme-docs",
+    "build:core": "pnpm run build --filter nextra",
+    "build:theme-blog": "pnpm run build --filter nextra-theme-blog",
+    "build:theme-docs": "pnpm run build --filter nextra-theme-docs",
+    "version-beta": "lerna version --preid beta",
     "publish-beta": "lerna publish from-package --canary --preid beta --pre-dist-tag beta"
   },
   "devDependencies": {
-    "lerna": "^4.0.0",
-    "prettier": "^2.2.1"
+    "@types/react": "^17.0.37",
+    "@types/react-dom": "^17.0.11",
+    "next": "^12.0.4",
+    "nextra": "workspace:*",
+    "prettier": "^2.2.1",
+    "react": "17",
+    "react-dom": "17",
+    "turbo": "^1.0.4"
   },
   "prettier": {
     "semi": false,
@@ -25,5 +30,34 @@
     "trailingComma": "none",
     "arrowParens": "avoid"
   },
-  "version": "0.0.0"
+  "version": "0.0.0",
+  "turbo": {
+    "baseBranch": "origin/core",
+    "pipeline": {
+      "build": {
+        "dependsOn": [
+          "^build"
+        ],
+        "outputs": [
+          "dist/**",
+          ".next/**",
+          "style.css",
+          "index.js",
+          "ssg.js",
+          "loader.js"
+        ]
+      },
+      "types": {
+        "dependsOn": [
+          "^types"
+        ],
+        "outputs": [
+          "dist/**"
+        ]
+      },
+      "dev": {
+        "cache": false
+      }
+    }
+  }
 }

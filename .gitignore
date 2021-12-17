@@ -2,8 +2,9 @@
 .next
 node_modules
 yarn-error.log
+.pnpm-debug.log
 dist
-
+*/**/.turbo
 # Theme styles
 packages/nextra-theme-*/style.css
 

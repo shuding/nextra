@@ -85,3 +85,10 @@ h1 {
   @apply no-underline;
   color: unset;
 }
+
+pre .prism-code {
+  --c-highlight: #cce0f5;
+}
+.dark pre .prism-code {
+  --c-highlight: #3d4b61;
+}

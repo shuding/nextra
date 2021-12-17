@@ -3,7 +3,7 @@ const package = require('../package.json')
 
 // Build CJS entrypoints
 esbuild.buildSync({
-  entryPoints: ['src/index.js', 'src/ssg.js'],
+  entryPoints: ['src/index.js', 'src/ssg.ts'],
   platform: 'node',
   bundle: true,
   format: 'cjs',
@@ -18,7 +18,7 @@ esbuild.buildSync({
 
 // Build the loader as ESM
 esbuild.buildSync({
-  entryPoints: ['src/loader.js'],
+  entryPoints: ['src/loader.ts'],
   format: 'esm',
   bundle: true,
   platform: 'node',

@@ -9,11 +9,13 @@
     "ssg.js",
     "loader.js"
   ],
+  "types": "./dist/types.d.ts",
   "repository": "https://github.com/shuding/nextra",
   "license": "MIT",
   "scripts": {
     "build": "node scripts/build.js",
     "dev": "node scripts/dev.js",
+    "types": "tsc --project tsconfig.type.json",
     "prepublishOnly": "rm -rf dist && yarn build"
   },
   "dependencies": {
@@ -22,15 +24,18 @@
     "download": "^8.0.0",
     "graceful-fs": "^4.2.6",
     "gray-matter": "^4.0.3",
-    "loader-utils": "^2.0.0",
     "remark-gfm": "^1.0.0",
     "remark-mdx-code-meta": "^1.0.0",
-    "slash": "^3.0.0"
+    "slash": "^3.0.0",
+    "typescript": "^4.5.2"
   },
   "peerDependencies": {
     "react": ">=16.13.1"
   },
   "devDependencies": {
-    "esbuild": "^0.14.0"
+    "@types/mdast": "^3.0.10",
+    "esbuild": "^0.14.0",
+    "@types/graceful-fs": "^4.1.5",
+    "@types/webpack": "^5.28.0"
   }
 }
