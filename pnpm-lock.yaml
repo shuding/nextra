@@ -11,7 +11,7 @@ importers:
       prettier: ^2.2.1
       react: '17'
       react-dom: '17'
-      turbo: ^1.0.4
+      turbo: ^1.0.17
     devDependencies:
       '@types/react': 17.0.37
       '@types/react-dom': 17.0.11
@@ -20,7 +20,7 @@ importers:
       prettier: 2.5.0
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
-      turbo: 1.0.4
+      turbo: 1.0.17
 
   examples/blog:
     specifiers:
@@ -5408,12 +5408,10 @@ packages:
   /tty-browserify/0.0.1:
     resolution: {integrity: sha512-C3TaO7K81YvjCgQH9Q1S3R3P3BtN3RIM8n+OvX4il1K1zgE8ZhI0op7kClgkxtutIE8hQrcrHBXvIheqKUUCxw==}
 
-  /turbo/1.0.4:
-    resolution: {integrity: sha512-lPT/DNI7FiD+BBAjugyL5A24PA9g2DmLaErUCz6bGHfIlzPg1pawlX8GbZUCeCHA/DX/gCP8VP0BxGKb71c1Jw==}
+  /turbo/1.0.17:
+    resolution: {integrity: sha512-59oUN8xaLH5EEgUGbYSA/PGvGZTL3zJq4vJeUDtCZEYBcUx3sr+7ugws+cTb0jiPTllT1h+EprLcA9JN2MHUwg==}
     hasBin: true
     requiresBuild: true
-    dependencies:
-      zlib: 1.0.5
     dev: true
 
   /type-fest/0.7.1:
@@ -5798,11 +5796,6 @@ packages:
   /yocto-queue/0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
-
-  /zlib/1.0.5:
-    resolution: {integrity: sha1-bnyXL8NxxkWmr7A6sUdp3vEU/MA=}
-    engines: {node: '>=0.2.0'}
-    dev: true
 
   /zwitch/1.0.5:
     resolution: {integrity: sha512-V50KMwwzqJV0NpZIZFwfOD5/lyny3WlSzRiXgA0G7VUnRlqttta1L6UQIHzd6EuBY/cHGfwTIck7w1yH6Q5zUw==}

@@ -1,8 +1,8 @@
 import React from 'react'
 import Link from 'next/link'
 import ThemeSwitch from './theme-switch'
-import type { NextraBlogTheme, PageMapItem } from 'nextra'
-
+import type { PageMapItem } from 'nextra'
+import { NextraBlogTheme } from './types'
 export default function Nav({
   navPages,
   config

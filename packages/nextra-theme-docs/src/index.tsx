@@ -10,13 +10,14 @@ import Footer, { NavLinks } from './footer'
 import Theme from './misc/theme'
 import Sidebar from './sidebar'
 import ToC from './toc'
-import { DocsThemeConfig, ThemeConfigContext, useConfig } from './config'
+import { ThemeConfigContext, useConfig } from './config'
 import { ActiveAnchor } from './misc/active-anchor'
 import defaultConfig from './misc/default.config'
 import { getFSRoute } from './utils/get-fs-route'
 import { MenuContext } from './utils/menu-context'
 import normalizePages from './utils/normalize-pages'
 import { Heading, PageMapItem, PageOpt } from 'nextra'
+import { DocsThemeConfig } from './types'
 
 function useDirectoryInfo(pageMap: PageMapItem[]) {
   const { locale, defaultLocale, asPath } = useRouter()

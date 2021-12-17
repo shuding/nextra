@@ -1,13 +1,13 @@
-import { compile, CompileOptions } from '@mdx-js/mdx'
+import { compile } from '@mdx-js/mdx'
 import remarkGfm from 'remark-gfm'
 import { remarkMdxCodeMeta } from 'remark-mdx-code-meta'
 import { remarkStaticImage } from './static-image'
 import getHeaders from './get-headers'
 import { Heading } from 'mdast'
-
+import { LoaderOptions } from './types'
 export async function compileMdx(
   source: string,
-  mdxOptions: CompileOptions = {},
+  mdxOptions: LoaderOptions['mdxOptions'] = {},
   nextraOptions: { unstable_staticImage: boolean } = {
     unstable_staticImage: false
   }
@@ -22,7 +22,8 @@ export async function compileMdx(
       remarkMdxCodeMeta,
       getHeaders(headings),
       ...(nextraOptions.unstable_staticImage ? [remarkStaticImage] : [])
-    ].filter(Boolean)
+    ].filter(Boolean),
+    rehypePlugins: [...(mdxOptions.rehypePlugins || [])].filter(Boolean)
   })
   if (Array.isArray(headings) && headings.length > 0) {
     const h1 = headings.find(v => v.depth === 1)

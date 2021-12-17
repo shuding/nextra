@@ -12,7 +12,8 @@ import MDXTheme, { HeadingContext } from './mdx-theme'
 import traverse from './utils/traverse'
 import getTags from './utils/get-tags'
 import sortDate from './utils/sort-date'
-import type { NextraBlogTheme, PageMapItem, PageOpt } from 'nextra'
+import type { PageMapItem, PageOpt } from 'nextra'
+import type { NextraBlogTheme } from './types'
 
 // comments
 const Cusdis = dynamic(
