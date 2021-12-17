@@ -39,7 +39,8 @@
           "^build"
         ],
         "outputs": [
-          "dist/**",
+          "dist/**/*.js",
+          "dist/**/*.css",
           ".next/**",
           "style.css",
           "index.js",
@@ -52,7 +53,7 @@
           "^types"
         ],
         "outputs": [
-          "dist/**"
+          "dist/**/*.d.ts"
         ]
       },
       "dev": {
