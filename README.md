@@ -6,13 +6,13 @@ Nextra is a Next.js plugin that renders your **MDX files** with custom themes.
 
 ### Installation
 
-The Nextra repository uses [Yarn Workspaces](https://classic.yarnpkg.com/en/docs/workspaces) and [Lerna](https://github.com/lerna/lerna). To install dependencies, just simply run `yarn` in the project root directory.
+The Nextra repository uses [PNPM Workspaces](https://pnpm.io/workspaces) and [Lerna](https://github.com/lerna/lerna). To install dependencies, just simply run `pnpm` in the project root directory.
 
 ### Build Nextra Core
 
 ```
 cd packages/nextra
-yarn build
+pnpm build
 ```
 
 Watch mode: `yarn dev`
@@ -21,12 +21,12 @@ Watch mode: `yarn dev`
 
 ```
 cd packages/nextra-theme-docs
-yarn build
+pnpm build
 ```
 
-Watch mode: `yarn dev`
-Watch mode (layout only): `yarn dev:layout`
-Watch mode (style only): `yarn dev:tailwind`
+Watch mode: `pnpm dev`
+Watch mode (layout only): `pnpm dev:layout`
+Watch mode (style only): `pnpm dev:tailwind`
 
 ### Development
 
@@ -34,7 +34,7 @@ You can also debug them toegther with a website locally. For instance, to start 
 
 ```
 cd examples/docs
-yarn dev
+pnpm dev
 ```
 
 Any change to example/docs will be re-rendered instantly.
