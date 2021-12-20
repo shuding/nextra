@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import ThemeSwitch from './theme-switch'
-import type { NextraBlogTheme } from 'nextra'
+import type { NextraBlogTheme } from './types'
 
 interface MeatProps {
   author: string

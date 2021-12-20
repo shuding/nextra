@@ -11,6 +11,7 @@
     "index.js",
     "style.css"
   ],
+  "types": "./dist/types.d.ts",
   "exports": {
     "./style.css": "./style.css",
     ".": {
@@ -21,6 +22,7 @@
     "build": "yarn run build:tailwind && yarn run build:layout",
     "build:layout": "node scripts/build.js",
     "build:tailwind": "NODE_ENV=production tailwindcss build src/styles.css -o style.css -c tailwind.config.js",
+    "types": "tsc -p tsconfig.types.json",
     "dev": "yarn dev:layout & yarn dev:tailwind",
     "dev:layout": "node scripts/dev.js",
     "dev:tailwind": "yarn postcss src/styles.css -o style.css -w --verbose",

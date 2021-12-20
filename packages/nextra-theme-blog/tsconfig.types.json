@@ -11,5 +11,5 @@
     "jsx": "react",
     "outDir": "dist"
   },
-  "files": ["src/bleed.tsx", "src/callout.tsx", "src/types.ts"]
+  "files": ["src/types.ts"]
 }

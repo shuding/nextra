@@ -14,6 +14,7 @@
     "bleed.js",
     "style.css"
   ],
+  "types": "./dist/types.d.ts",
   "exports": {
     "./style.css": "./style.css",
     ".": {

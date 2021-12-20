@@ -4,7 +4,7 @@ import Link from 'next/link'
 import cn from 'classnames'
 
 import useMounted from './utils/use-mounted'
-import { DocsThemeConfig } from './config'
+import { DocsThemeConfig } from './types'
 
 interface LocaleSwitchProps {
   options: DocsThemeConfig['i18n']

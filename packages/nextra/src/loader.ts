@@ -182,10 +182,11 @@ export default async function (
     locales,
     defaultLocale,
     unstable_stork,
-    unstable_staticImage
+    unstable_staticImage,
+    mdxOptions
   } = options
-  // @ts-expect-error mdxOptions
-  const { resourcePath, resourceQuery, mdxOptions } = this
+
+  const { resourcePath, resourceQuery } = this
   const filename = resourcePath.slice(resourcePath.lastIndexOf('/') + 1)
   const fileLocale = getLocaleFromFilename(filename) || 'default'
   const rawEntry = resourceQuery.includes('nextra-raw')
@@ -301,9 +302,13 @@ ${layoutConfig ? `import layoutConfig from '${layoutConfig}'` : ''}
 
 `
 
-  const { result, titleText, headings, hasH1 } = await compileMdx(content, mdxOptions, {
-    unstable_staticImage
-  })
+  const { result, titleText, headings, hasH1 } = await compileMdx(
+    content,
+    mdxOptions,
+    {
+      unstable_staticImage
+    }
+  )
   content = result
   content = content.replace(
     'export default MDXContent;',
