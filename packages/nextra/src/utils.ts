@@ -1,3 +1,4 @@
+import fs from 'fs';
 import path from 'path'
 
 export function getLocaleFromFilename(name: string) {
@@ -28,4 +29,13 @@ export const parseJsonFile: (
   }
 
   return parsed
+}
+
+export const existsSync = (f: string): boolean => {
+  try {
+    fs.accessSync(f, fs.constants.F_OK)
+    return true
+  } catch (_) {
+    return false
+  }
 }
