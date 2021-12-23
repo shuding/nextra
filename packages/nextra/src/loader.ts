@@ -5,6 +5,7 @@ import slash from 'slash'
 import filterRouteLocale from './filter-route-locale'
 import { addStorkIndex } from './stork-index'
 import {
+  existsSync,
   getLocaleFromFilename,
   removeExtension,
   getFileName,
@@ -17,6 +18,16 @@ import type { LoaderOptions, PageMapItem, PageMapResult } from './types'
 const { promises: fs } = gracefulFs
 const extension = /\.mdx?$/
 const metaExtension = /meta\.?([a-zA-Z-]+)?\.json/
+
+function findPagesDir(dir: string = process.cwd()): string {
+  // prioritize ./pages over ./src/pages
+  if (existsSync(path.join(dir, 'pages'))) return 'pages'
+  if (existsSync(path.join(dir, 'src/pages'))) return 'src/pages'
+
+  throw new Error(
+    "> Couldn't find a `pages` directory. Please create one under the project root"
+  )
+}
 
 async function getPageMap(currentResourcePath: string): Promise<PageMapResult> {
   const activeRouteLocale = getLocaleFromFilename(currentResourcePath)
@@ -109,7 +120,7 @@ async function getPageMap(currentResourcePath: string): Promise<PageMapResult> {
   }
 
   return [
-    await getFiles(path.join(process.cwd(), 'pages'), '/'),
+    await getFiles(path.join(process.cwd(), findPagesDir()), '/'),
     activeRoute,
     activeRouteTitle
   ]
@@ -173,7 +184,7 @@ export default async function (
 
   // Add the entire directory `pages` as the dependency
   // so we can generate the correct page map
-  this.addContextDependency(path.resolve('pages'))
+  this.addContextDependency(path.resolve(findPagesDir()))
 
   const options = this.getOptions()
   const {
