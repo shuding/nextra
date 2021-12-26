@@ -24,7 +24,7 @@
     "download": "^8.0.0",
     "graceful-fs": "^4.2.6",
     "gray-matter": "^4.0.3",
-    "remark-gfm": "^1.0.0",
+    "remark-gfm": "^3.0.1",
     "remark-mdx-code-meta": "^1.0.0",
     "slash": "^3.0.0",
     "typescript": "^4.5.2"
