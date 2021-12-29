@@ -2,18 +2,19 @@ import React from 'react'
 import Link from 'next/link'
 import ThemeSwitch from './theme-switch'
 import type { NextraBlogTheme } from './types'
+import { split } from './utils/get-tags'
 
 interface MeatProps {
   author: string
   date: string
-  tag: string
+  tag: string | string[]
   back: string
   config: NextraBlogTheme
 }
 export default function Meta({ author, date, tag, back, config }: MeatProps) {
   const authorNode = author ? author : null
   const dateNode = date ? <time>{new Date(date).toDateString()}</time> : null
-  const tags = tag ? tag.split(',').map(s => s.trim()) : []
+  const tags = tag ? split(tag) : []
 
   return (
     <div className="meta-line">
