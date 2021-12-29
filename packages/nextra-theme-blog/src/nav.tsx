@@ -28,6 +28,12 @@ export default function Nav({
           </Link>
         )
       })}
+      {config.navs &&
+        config.navs.map(nav => (
+          <Link key={nav.url} href={nav.url}>
+            <a className="nav-link" {...nav}>{nav.name}</a>
+          </Link>
+        ))}
       {config.darkMode && <ThemeSwitch />}
     </div>
   )
