@@ -16,4 +16,8 @@ export interface NextraBlogTheme {
     lang: string
   }
   darkMode?: boolean
+  navs?: {
+    url: string
+    name: string
+  }[]
 }
