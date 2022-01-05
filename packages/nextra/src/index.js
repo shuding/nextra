@@ -1,11 +1,6 @@
-// import remarkGfm from 'remark-gfm'
-
-// import { buildStorkIndex } from './stork-index'
-
 const defaultExtensions = ['js', 'jsx', 'ts', 'tsx']
 const markdownExtensions = ['md', 'mdx']
 const markdownExtensionTest = /\.mdx?$/
-const STORK_PATH = process.env.STORK_PATH || 'stork'
 
 module.exports =
   (...args) =>
