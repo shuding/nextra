@@ -89,7 +89,7 @@ importers:
 
   packages/nextra:
     specifiers:
-      '@atomiks/mdx-pretty-code': ^0.0.5
+      '@atomiks/mdx-pretty-code': ^0.1.0
       '@mdx-js/loader': ^2.0.0-rc.2
       '@mdx-js/mdx': ^2.0.0-rc.2
       '@types/graceful-fs': ^4.1.5
@@ -106,7 +106,7 @@ importers:
       slash: ^3.0.0
       typescript: ^4.5.2
     dependencies:
-      '@atomiks/mdx-pretty-code': 0.0.5_shiki@0.10.0
+      '@atomiks/mdx-pretty-code': 0.1.0_shiki@0.10.0
       '@mdx-js/loader': 2.0.0-rc.2
       '@mdx-js/mdx': 2.0.0-rc.2
       download: 8.0.0
@@ -204,8 +204,8 @@ importers:
 
 packages:
 
-  /@atomiks/mdx-pretty-code/0.0.5_shiki@0.10.0:
-    resolution: {integrity: sha512-ZsSr/ROF+4W08ASGyE47A63sb3aEpZp2CV8Wv42+bn+TtbtuWlhU3IVs4GLLi647EU/40C/7w/x1Bi6kNXAXOg==}
+  /@atomiks/mdx-pretty-code/0.1.0_shiki@0.10.0:
+    resolution: {integrity: sha512-s6L3XBgqE9J9MlNQWbETxY5srrv4rN2B+c46o5KHg7W8+VrAAu0NInci1F6AwcEzaV+/vlc6WO6lPSucCwpngA==}
     peerDependencies:
       shiki: '*'
     dependencies:

@@ -19,7 +19,7 @@
     "prepublishOnly": "rm -rf dist && yarn build"
   },
   "dependencies": {
-    "@atomiks/mdx-pretty-code": "^0.0.5",
+    "@atomiks/mdx-pretty-code": "^0.1.0",
     "@mdx-js/loader": "^2.0.0-rc.2",
     "@mdx-js/mdx": "^2.0.0-rc.2",
     "download": "^8.0.0",
