@@ -1,0 +1,19 @@
+{
+  "index": {
+    "title": "Введение",
+    "type": "nav",
+    "hidden": true
+  },
+  "docs": {
+    "title": "Документация",
+    "type": "nav"
+  },
+  "examples": {
+    "title": "Примеры",
+    "type": "nav"
+  },
+  "blog": {
+    "title": "Блог",
+    "type": "nav"
+  }
+}

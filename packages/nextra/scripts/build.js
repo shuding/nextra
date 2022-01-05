@@ -28,5 +28,5 @@ esbuild.buildSync({
   external: [
     ...Object.keys(package.dependencies),
     ...Object.keys(package.peerDependencies || {})
-  ]
+  ].filter(d => d !== 'shiki')
 })

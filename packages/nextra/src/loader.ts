@@ -2,8 +2,10 @@ import path from 'path'
 import gracefulFs from 'graceful-fs'
 import grayMatter from 'gray-matter'
 import slash from 'slash'
+import { LoaderContext } from 'webpack'
+
 import filterRouteLocale from './filter-route-locale'
-import { addStorkIndex } from './stork-index'
+import { addPage } from './content-dump'
 import {
   existsSync,
   getLocaleFromFilename,
@@ -12,12 +14,15 @@ import {
   parseJsonFile
 } from './utils'
 import { compileMdx } from './compile'
-import { LoaderContext } from 'webpack'
 import type { LoaderOptions, PageMapItem, PageMapResult } from './types'
 
 const { promises: fs } = gracefulFs
 const extension = /\.mdx?$/
 const metaExtension = /meta\.?([a-zA-Z-]+)?\.json/
+const isProductionBuild = process.env.NODE_ENV === 'production'
+
+// TODO: create this as a webpack plugin.
+const indexContentEmitted = new Set()
 
 function findPagesDir(dir: string = process.cwd()): string {
   // prioritize ./pages over ./src/pages
@@ -180,19 +185,21 @@ export default async function (
   source: string
 ) {
   const callback = this.async()
-  this.cacheable()
+  this.cacheable(true)
 
-  // Add the entire directory `pages` as the dependency
-  // so we can generate the correct page map
-  this.addContextDependency(path.resolve(findPagesDir()))
+  if (!isProductionBuild) {
+    // Add the entire directory `pages` as the dependency
+    // so we can generate the correct page map
+    this.addContextDependency(path.resolve(findPagesDir()))
+  }
 
   const options = this.getOptions()
-  const {
+  let {
     theme,
     themeConfig,
     locales,
     defaultLocale,
-    unstable_stork,
+    unstable_contentDump,
     unstable_staticImage,
     mdxOptions
   } = options
@@ -257,7 +264,7 @@ ${
     return page_data_${index}(context)
   } else `
     )
-    .join('')} {	
+    .join('')} {
     return { props: {} }
   }
 }`
@@ -281,20 +288,6 @@ ${
   // Extract frontMatter information if it exists
   let { data, content } = grayMatter(source)
 
-  // Add content to stork indexes
-  if (unstable_stork) {
-    // We only index .MD and .MDX files
-    if (extension.test(filename)) {
-      await addStorkIndex({
-        fileLocale,
-        route,
-        title,
-        data,
-        content
-      })
-    }
-  }
-
   let layout = theme
   let layoutConfig = themeConfig || null
 
@@ -313,18 +306,32 @@ ${layoutConfig ? `import layoutConfig from '${layoutConfig}'` : ''}
 
 `
 
-  const { result, titleText, headings, hasH1 } = await compileMdx(
-    content,
-    mdxOptions,
-    {
-      unstable_staticImage
-    }
-  )
+  if (isProductionBuild && indexContentEmitted.has(filename)) {
+    unstable_contentDump = false
+  }
+
+  const { result, titleText, headings, hasH1, structurizedData } =
+    await compileMdx(content, mdxOptions, {
+      unstable_staticImage,
+      unstable_contentDump
+    })
   content = result
-  content = content.replace(
-    'export default MDXContent;',
-    'const _mdxContent = <MDXContent/>;'
-  )
+  content = content.replace('export default MDXContent;', '')
+
+  if (unstable_contentDump) {
+    // We only add .MD and .MDX contents
+    if (extension.test(filename)) {
+      await addPage({
+        fileLocale,
+        route,
+        title,
+        data,
+        structurizedData
+      })
+    }
+
+    indexContentEmitted.add(filename)
+  }
 
   const suffix = `\n\nexport default function NextraPage (props) {
     return withSSG(withLayout({
@@ -337,9 +344,12 @@ ${layoutConfig ? `import layoutConfig from '${layoutConfig}'` : ''}
       hasH1: ${JSON.stringify(hasH1)}
     }, ${layoutConfig ? 'layoutConfig' : 'null'}))({
       ...props,
-      children: _mdxContent
+      MDXContent,
+      children: <MDXContent/>
     })
 }`
+
+  // console.log(prefix, content, suffix)
 
   // Add imports and exports to the source
   return callback(null, prefix + '\n' + content + '\n' + suffix)

@@ -3,15 +3,19 @@ import cn from 'classnames'
 import Slugger from 'github-slugger'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+import { Heading } from 'nextra'
+
 import { useActiveAnchor } from './misc/active-anchor'
 import { getFSRoute } from './utils/get-fs-route'
 import useMenuContext from './utils/menu-context'
 import Search from './search'
-import StorkSearch from './stork-search'
+import Flexsearch from './flexsearch'
 import { useConfig } from './config'
 import getHeadingText from './utils/getHeadingText'
-import { Heading } from 'nextra'
 import { Item, PageItem } from './utils/normalize-pages'
+import LocaleSwitch from './locale-switch'
+import ThemeSwitch from './theme-switch'
+import ArrowRight from './icons/arrow-right'
 
 const TreeState: Record<string, boolean> = {}
 
@@ -44,7 +48,13 @@ function Folder({ item, anchors }: FolderProps) {
           render(x => !x)
         }}
       >
-        {item.title}
+        <span className="flex items-center justify-between gap-2">
+          {item.title}
+          <ArrowRight
+            height="1em"
+            className={cn(open ? 'rotate-90' : '', 'transition-transform')}
+          />
+        </span>
       </button>
       <div
         style={{
@@ -153,7 +163,9 @@ interface SideBarProps {
   fullDirectories: Item[]
   mdShow?: boolean
   headings?: Heading[]
+  isRTL?: boolean
 }
+
 const emptyHeading: any[] = []
 export default function Sidebar({
   directories,
@@ -174,53 +186,69 @@ export default function Sidebar({
   const { menu } = useMenuContext()
   useEffect(() => {
     if (menu) {
-      document.body.classList.add('overflow-hidden')
+      document.body.classList.add('overflow-hidden', 'md:overflow-auto')
     } else {
-      document.body.classList.remove('overflow-hidden')
+      document.body.classList.remove('overflow-hidden', 'md:overflow-auto')
     }
   }, [menu])
 
   return (
     <aside
       className={cn(
-        'fixed h-screen bg-white dark:bg-dark flex-shrink-0 w-full md:w-64 md:sticky z-20',
+        'fixed flex-shrink-0 w-full md:w-64 md:sticky z-[15] top-[4rem] self-start overflow-y-auto h-full md:h-auto bg-white dark:bg-dark md:bg-transparent',
         menu ? '' : 'hidden',
         mdShow ? 'md:block' : ''
       )}
       style={{
-        top: '4rem',
-        height: 'calc(100vh - 4rem)'
+        maxHeight: 'calc(100vh - 4rem)'
       }}
     >
-      <div className="sidebar border-gray-200 dark:border-gray-900 w-full p-4 pb-40 md:pb-16 h-full overflow-y-auto">
-        <div className="mb-4 block md:hidden">
-          {config.customSearch ||
-            (config.search ? (
-              config.unstable_stork ? (
-                <StorkSearch />
-              ) : (
-                <Search directories={flatDirectories} />
-              )
-            ) : null)}
+      <div className="sidebar w-full h-full md:h-auto">
+        <div className="p-4">
+          <div className="mb-4 block md:hidden">
+            {config.customSearch ||
+              (config.search ? (
+                config.unstable_flexsearch ? (
+                  <Flexsearch />
+                ) : (
+                  <Search directories={flatDirectories} />
+                )
+              ) : null)}
+          </div>
+          <div className="hidden md:block">
+            <Menu
+              directories={directories}
+              anchors={
+                // When the viewport size is larger than `md`, hide the anchors in
+                // the sidebar when `floatTOC` is enabled.
+                config.floatTOC ? [] : anchors
+              }
+            />
+          </div>
+          <div className="md:hidden">
+            <Menu
+              directories={fullDirectories}
+              anchors={
+                // Always show the anchor links on mobile (`md`).
+                anchors
+              }
+            />
+          </div>
         </div>
-        <div className="hidden md:block">
-          <Menu
-            directories={directories}
-            anchors={
-              // When the viewport size is larger than `md`, hide the anchors in
-              // the sidebar when `floatTOC` is enabled.
-              config.floatTOC ? [] : anchors
-            }
-          />
-        </div>
-        <div className="md:hidden">
-          <Menu
-            directories={fullDirectories}
-            anchors={
-              // Always show the anchor links on mobile (`md`).
-              anchors
-            }
-          />
+
+        <div className="sticky bottom-0 mx-4 border-t dark:border-prime-100 dark:border-opacity-10 shadow-[0_-12px_12px_white] dark:shadow-none">
+          <div className="bg-white dark:bg-dark py-4 flex gap-1">
+            {config.i18n ? (
+              <div className="flex-1 relative">
+                <LocaleSwitch options={config.i18n} />
+              </div>
+            ) : null}
+            {config.darkMode ? (
+              <div className="flex-grow-0 relative">
+                <ThemeSwitch />
+              </div>
+            ) : null}
+          </div>
         </div>
       </div>
     </aside>

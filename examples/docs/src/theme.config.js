@@ -28,17 +28,12 @@ export default {
   ),
   search: true,
   unstable_stork: false,
-  unstable_faviconGlyph: '👋',
+  unstable_faviconGlyph: '✦',
   prevLinks: true,
   nextLinks: true,
   floatTOC: true,
   footer: true,
   footerEditLink: ({ locale }) =>
     locale === 'zh' ? '前往 GitHub 编辑此页' : 'Edit this page on GitHub',
-  footerText: <>MIT {new Date().getFullYear()} © Shu Ding.</>,
-  i18n: [
-    { locale: 'en', text: 'English' },
-    { locale: 'zh', text: '简体中文' },
-    { locale: 'ar', text: 'العربية', direction: 'rtl' }
-  ]
+  footerText: <>MIT {new Date().getFullYear()} © Shu Ding.</>
 }

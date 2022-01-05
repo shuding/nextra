@@ -1,0 +1,19 @@
+{
+  "index": {
+    "title": "소개",
+    "type": "nav",
+    "hidden": true
+  },
+  "docs": {
+    "title": "문서",
+    "type": "nav"
+  },
+  "examples": {
+    "title": "예시",
+    "type": "nav"
+  },
+  "blog": {
+    "title": "블로그",
+    "type": "nav"
+  }
+}
