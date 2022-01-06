@@ -144,7 +144,7 @@ export default function ToC({
 
   return (
     <div className="w-64 hidden xl:block text-sm px-4">
-      <div className="overflow-y-auto sticky max-h-[calc(100vh-4rem)] top-16 pt-8 pb-10">
+      <div className="overflow-y-auto sticky max-h-[calc(var(--vh)-4rem)] top-16 pt-8 pb-10">
         {headings ? (
           <ul className="m-0 list-none">
             <p className="font-semibold tracking-tight mb-4">On This Page</p>

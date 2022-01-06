@@ -18,6 +18,7 @@ import { getFSRoute } from './utils/get-fs-route'
 import { MenuContext } from './utils/menu-context'
 import normalizePages from './utils/normalize-pages'
 import { DocsThemeConfig } from './types'
+import './polyfill'
 
 function useDirectoryInfo(pageMap: PageMapItem[]) {
   const { locale, defaultLocale, asPath } = useRouter()
@@ -141,7 +142,7 @@ const Layout = ({
                 </div>
               </div>
             </ActiveAnchor>
-            {config.footer ? <Footer /> : null}
+            {config.footer ? <Footer menu /> : null}
           </div>
         </MenuContext.Provider>
       </React.Fragment>
@@ -199,7 +200,7 @@ const Layout = ({
               </div>
             </div>
           </ActiveAnchor>
-          {config.footer ? <Footer /> : null}
+          {config.footer ? <Footer menu={false} /> : null}
         </div>
       </MenuContext.Provider>
     </React.Fragment>

@@ -38,7 +38,7 @@ export default function Menu({ options, selected, onChange }: MenuProps) {
           >
             <Listbox.Options
               className={
-                'absolute bottom-[130%] right-0 min-w-full z-10 mt-1 bg-white dark:bg-neutral-800 dark:ring-white dark:ring-opacity-20 shadow-lg max-h-64 rounded-md py-1 ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none text-sm'
+                'menu absolute bottom-[130%] min-w-full z-20 mt-1 bg-white dark:bg-neutral-800 dark:ring-white dark:ring-opacity-20 shadow-lg max-h-64 rounded-md py-1 ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none text-sm'
               }
             >
               {options.map(option => (
@@ -51,7 +51,7 @@ export default function Menu({ options, selected, onChange }: MenuProps) {
                       active
                         ? 'text-prime-500 bg-prime-50 dark:bg-prime-500 dark:bg-opacity-10'
                         : 'text-gray-800 dark:text-gray-100',
-                      'cursor-default select-none relative py-1.5 pl-3 pr-9'
+                      'cursor-default select-none relative py-1.5 pl-3 pr-9 whitespace-nowrap'
                     )
                   }
                 >

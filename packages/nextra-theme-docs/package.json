@@ -28,14 +28,14 @@
     }
   },
   "scripts": {
-    "dev": "yarn dev:layout & yarn dev:tailwind",
-    "build": "yarn run build:tailwind && yarn run build:layout",
+    "dev": "concurrently \"pnpm dev:layout\" \"pnpm dev:tailwind\"",
+    "build": "pnpm build:tailwind && pnpm build:layout",
     "build:layout": "node scripts/build.js",
-    "build:tailwind": "NODE_ENV=production yarn postcss src/styles.css -o style.css --verbose",
+    "build:tailwind": "NODE_ENV=production pnpm postcss src/styles.css -o style.css --verbose",
     "types": "tsc -p tsconfig.types.json",
     "dev:layout": "node scripts/dev.js",
-    "dev:tailwind": "TAILWIND_MODE=watch yarn postcss src/styles.css -o style.css -w --verbose",
-    "prepublishOnly": "rm -rf dist && yarn build"
+    "dev:tailwind": "TAILWIND_MODE=watch pnpm postcss src/styles.css -o style.css --watch",
+    "prepublishOnly": "rm -rf dist && pnpm build"
   },
   "dependencies": {
     "@headlessui/react": "^1.4.2",
@@ -61,6 +61,7 @@
   "devDependencies": {
     "@types/flexsearch": "^0.7.2",
     "autoprefixer": "^10.0.2",
+    "concurrently": "^7.0.0",
     "cssnano": "^4.1.10",
     "esbuild": "^0.14.0",
     "nextra": "workspace:*",

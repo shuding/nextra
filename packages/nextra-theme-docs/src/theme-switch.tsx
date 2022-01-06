@@ -5,7 +5,7 @@ import Menu from './select'
 import Sun from './icons/sun'
 import Moon from './icons/moon'
 
-export default function ThemeSwitch() {
+export default function ThemeSwitch({ lite = true }) {
   const { theme, setTheme, systemTheme } = useTheme()
 
   return (
@@ -15,7 +15,12 @@ export default function ThemeSwitch() {
       }}
       selected={{
         key: theme || '',
-        name: theme === 'dark' || systemTheme === 'dark' ? <Moon /> : <Sun />
+        name: (
+          <div className="flex items-center gap-2 capitalize">
+            {theme === 'dark' || systemTheme === 'dark' ? <Moon /> : <Sun />}
+            {lite ? '' : <span>{theme}</span>}
+          </div>
+        )
       }}
       options={[
         {

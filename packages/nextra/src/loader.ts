@@ -299,13 +299,6 @@ ${
     layoutConfig = slash(path.resolve(layoutConfig))
   }
 
-  const prefix = `
-import withLayout from '${layout}'
-import { withSSG } from 'nextra/ssg'
-${layoutConfig ? `import layoutConfig from '${layoutConfig}'` : ''}
-
-`
-
   if (isProductionBuild && indexContentEmitted.has(filename)) {
     unstable_contentDump = false
   }
@@ -333,7 +326,11 @@ ${layoutConfig ? `import layoutConfig from '${layoutConfig}'` : ''}
     indexContentEmitted.add(filename)
   }
 
-  const suffix = `\n\nexport default function NextraPage (props) {
+  const prefix = `import withLayout from '${layout}'
+import { withSSG } from 'nextra/ssg'
+${layoutConfig ? `import layoutConfig from '${layoutConfig}'` : ''}`
+
+  const suffix = `export default function NextraPage (props) {
     return withSSG(withLayout({
       filename: "${slash(filename)}",
       route: "${slash(route)}",
@@ -349,8 +346,6 @@ ${layoutConfig ? `import layoutConfig from '${layoutConfig}'` : ''}
     })
 }`
 
-  // console.log(prefix, content, suffix)
-
   // Add imports and exports to the source
-  return callback(null, prefix + '\n' + content + '\n' + suffix)
+  return callback(null, prefix + '\n\n' + content + '\n\n' + suffix)
 }

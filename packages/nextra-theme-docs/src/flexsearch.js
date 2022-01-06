@@ -16,7 +16,7 @@ const Item = ({ page, title, active, href, onMouseOver, excerpt }) => {
   return (
     <Link href={href}>
       <a className="block no-underline" onMouseOver={onMouseOver}>
-        <li className={cn('py-2.5 px-4', { active })}>
+        <li className={cn({ active })}>
           <div className="font-bold uppercase text-xs text-gray-400">
             {page}
           </div>
@@ -269,10 +269,10 @@ export default function Search() {
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
       >
-        <ul className="absolute z-20 p-0 m-0 mt-2 divide-y top-full">
+        <ul className="absolute z-20 p-0 m-0 mt-2 top-full">
           {results.length === 0 ? (
             <span className="block p-4 text-center text-gray-400 text-sm select-none">
-              No result found.
+              No results found.
             </span>
           ) : (
             results.map((res, i) => {

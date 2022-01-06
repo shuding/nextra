@@ -1,7 +1,7 @@
 @tailwind base;
 
 html {
-  @apply antialiased scroll-smooth;
+  @apply antialiased;
   font-size: 16px;
   font-feature-settings: 'rlig' 1, 'calt' 1, 'ss01' 1;
 }
@@ -29,7 +29,7 @@ blockquote:not(:first-child),
 @tailwind utilities;
 
 .main-container {
-  min-height: 100vh;
+  min-height: var(--vh);
 }
 
 .sidebar {
@@ -63,6 +63,9 @@ blockquote:not(:first-child),
         @apply dark:text-gray-50 dark:bg-prime-100 dark:bg-opacity-5;
       }
     }
+  }
+  .menu {
+    @apply right-0;
   }
 }
 
@@ -191,14 +194,14 @@ article {
   }
   &.nextra-flexsearch ul {
     @apply overflow-auto left-0 md:-left-80 md:right-0;
-    max-height: min(calc(100vh - 80px), 600px);
+    max-height: min(calc(var(--vh) - 9rem), 600px);
     max-width: min(calc(100vw - 2rem), calc(100% + 20rem));
     width: 100vw;
   }
   ul {
-    @apply rounded-xl backdrop-blur-lg bg-white bg-opacity-[.7] text-gray-100 ring-1 ring-black ring-opacity-5 divide-gray-500/10 py-2 overflow-hidden overscroll-contain shadow-xl list-none;
+    @apply rounded-xl backdrop-blur-lg bg-white bg-opacity-[.7] text-gray-100 ring-1 ring-black ring-opacity-5 py-2.5 overflow-hidden overscroll-contain shadow-xl list-none;
     li {
-      @apply text-gray-800 break-words;
+      @apply text-gray-800 break-words mx-2.5 p-2.5 rounded-md;
       .highlight {
         @apply underline decoration-2 decoration-prime-400 text-prime-500;
       }
@@ -388,7 +391,7 @@ table tr td {
   --shiki-token-keyword: #f97583;
   --shiki-token-parameter: #ff9800;
   --shiki-token-function: #b392f0;
-  --shiki-token-string-expression: #22863a;
+  --shiki-token-string-expression: #4bb74a;
   --shiki-token-punctuation: #bbbbbb;
   --shiki-token-link: #ffab70;
 }

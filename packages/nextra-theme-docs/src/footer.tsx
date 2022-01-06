@@ -7,6 +7,8 @@ import ArrowRight from './icons/arrow-right'
 import renderComponent from './utils/render-component'
 import { useConfig } from './config'
 import { Item } from './utils/normalize-pages'
+import LocaleSwitch from './locale-switch'
+import ThemeSwitch from './theme-switch'
 
 interface LinkProps {
   route: string
@@ -90,12 +92,30 @@ export const NavLinks = ({
   )
 }
 
-const Footer: React.FC = () => {
+const Footer: React.FC<{ menu?: boolean }> = ({ menu }) => {
   const { locale } = useRouter()
   const config = useConfig()
 
   return (
     <footer className="bg-gray-100 dark:bg-neutral-900">
+      {menu ? (
+        <div className="py-2 border-b dark:border-neutral-800">
+          <div className="max-w-[90rem] mx-auto">
+            <div className="inline-flex px-4">
+              {config.i18n ? (
+                <div className="flex-1 relative">
+                  <LocaleSwitch options={config.i18n} />
+                </div>
+              ) : null}
+              {config.darkMode ? (
+                <div className="grow-0 relative">
+                  <ThemeSwitch lite={false} />
+                </div>
+              ) : null}
+            </div>
+          </div>
+        </div>
+      ) : null}
       <div className="max-w-[90rem] mx-auto px-6 py-12">
         <div className="flex justify-between flex-col-reverse md:flex-row items-center md:items-end">
           <span className="text-gray-600 dark:text-gray-400">

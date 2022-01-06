@@ -200,7 +200,7 @@ export default function Sidebar({
         mdShow ? 'md:block' : ''
       )}
       style={{
-        maxHeight: 'calc(100vh - 4rem)'
+        maxHeight: 'calc(var(--vh) - 4rem)'
       }}
     >
       <div className="sidebar w-full h-full md:h-auto">
@@ -244,7 +244,7 @@ export default function Sidebar({
               </div>
             ) : null}
             {config.darkMode ? (
-              <div className="flex-grow-0 relative">
+              <div className="grow-0 relative">
                 <ThemeSwitch />
               </div>
             ) : null}
