@@ -33,12 +33,10 @@ export interface PageOpt {
   hasH1: boolean
 }
 
-export type Title = string | { [key: string]: string; title: string }
-
 export type PageMapResult = [
   pageMap: PageMapItem[],
   route: string,
-  title: Title
+  title: string
 ]
 
 type Theme = string

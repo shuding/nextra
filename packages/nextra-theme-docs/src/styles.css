@@ -203,7 +203,7 @@ article {
     li {
       @apply text-gray-800 break-words mx-2.5 p-2.5 rounded-md;
       .highlight {
-        @apply underline decoration-2 decoration-prime-400 text-prime-500;
+        @apply underline decoration-prime-400 text-prime-500;
       }
     }
     li.active,
@@ -217,7 +217,7 @@ article {
       li {
         @apply text-gray-300;
         .highlight {
-          @apply underline decoration-2 decoration-prime-400 text-prime-500;
+          @apply underline decoration-prime-400 text-prime-500;
         }
       }
       li.active,

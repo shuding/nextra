@@ -37,7 +37,7 @@ function findPagesDir(dir: string = process.cwd()): string {
 async function getPageMap(currentResourcePath: string): Promise<PageMapResult> {
   const activeRouteLocale = getLocaleFromFilename(currentResourcePath)
   let activeRoute = ''
-  let activeRouteTitle: string | { [key: string]: string; title: string } = ''
+  let activeRouteTitle: string = ''
 
   async function getFiles(dir: string, route: string): Promise<PageMapItem[]> {
     const files = await fs.readdir(dir, { withFileTypes: true })
@@ -114,7 +114,10 @@ async function getPageMap(currentResourcePath: string): Promise<PageMapResult> {
       .map(item => {
         if (!item) return
         if (item.route === activeRoute) {
-          activeRouteTitle = dirMeta[item.name] || item.name
+          const metadata = dirMeta[item.name]
+          activeRouteTitle =
+            (typeof metadata === 'string' ? metadata : metadata.title) ||
+            item.name
         }
         return { ...item }
       })

@@ -1,8 +1,6 @@
 import gracefulFs from 'graceful-fs'
 import path from 'path'
 
-import { Title } from './types'
-
 const { promises: fs, statSync, mkdirSync } = gracefulFs
 
 const assetDir = path.join(process.cwd(), 'public', '_nextra')
@@ -23,7 +21,7 @@ export async function addPage({
 }: {
   fileLocale: string
   route: string
-  title: Title
+  title: string
   data: any
   structurizedData: any
 }) {
@@ -31,7 +29,7 @@ export async function addPage({
     asset[fileLocale] = {}
   }
   asset[fileLocale][route] = {
-    title: data.title || title,
+    title: title || data.title,
     data: structurizedData
   }
   const dataFile = path.join(assetDir, `data-${fileLocale}.json`)

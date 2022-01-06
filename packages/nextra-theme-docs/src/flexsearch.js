@@ -100,7 +100,7 @@ export default function Search() {
           excerpt:
             item.doc.title !== item.doc.content ? (
               <MemoedStringWithMatchHighlights
-                content={item.doc.content}
+                content={item.doc.content.replace(/ _NEXTRA_ .*$/, '')}
                 search={search}
               />
             ) : null
@@ -156,8 +156,8 @@ export default function Search() {
       ).json()
 
       const index = new FlexSearch.Document({
+        cache: 100,
         tokenize: 'full',
-        // charset: 'latin:advanced',
         document: {
           id: 'id',
           index: 'content',
@@ -167,7 +167,8 @@ export default function Search() {
           resolution: 9,
           depth: 1,
           bidirectional: true
-        }
+        },
+        filter: ['_NEXTRA_']
       })
 
       for (let route in data) {
@@ -180,20 +181,22 @@ export default function Search() {
             .split('\n')
             .filter(Boolean)
 
-          index.add({
-            id: url,
-            url: url,
-            title,
-            content: title,
-            page: data[route].title
-          })
+          if (!paragraphs.length) {
+            index.add({
+              id: url,
+              url: url,
+              title,
+              content: title,
+              page: data[route].title
+            })
+          }
 
           for (let i = 0; i < paragraphs.length; i++) {
             index.add({
               id: url + '_' + i,
               url: url,
               title: title,
-              content: paragraphs[i],
+              content: paragraphs[i] + (i === 0 ? ' _NEXTRA_ ' + title : ''),
               page: data[route].title
             })
           }

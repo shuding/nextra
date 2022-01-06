@@ -161,7 +161,7 @@ export default function ToC({
                     <a
                       href={`#${slug}`}
                       className={cn(
-                        'no-underline',
+                        'no-underline inline-block',
                         heading.depth === 2 ? 'font-semibold' : '',
                         state && state.isActive
                           ? 'text-prime-500 subpixel-antialiased'

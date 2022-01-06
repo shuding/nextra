@@ -204,7 +204,10 @@ export default function Sidebar({
       }}
     >
       <div className="sidebar w-full h-full md:h-auto">
-        <div className="p-4">
+        <div
+          className="p-4"
+          style={{ minHeight: 'calc(var(--vh) - 4rem - 61px)' }}
+        >
           <div className="mb-4 block md:hidden">
             {config.customSearch ||
               (config.search ? (
