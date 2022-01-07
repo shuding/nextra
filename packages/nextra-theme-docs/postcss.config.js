@@ -2,6 +2,7 @@ module.exports = ctx => ({
   plugins: [
     require('tailwindcss'),
     require('autoprefixer'),
-    ctx.env === 'production' ? require('cssnano') : false
+    ctx.env === 'production' ? require('cssnano') : false,
+    require('postcss-scopify')('.nextra-container')
   ]
 })
