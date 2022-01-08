@@ -7,6 +7,9 @@ import Moon from './icons/moon'
 
 export default function ThemeSwitch({ lite = true }) {
   const { theme, setTheme, systemTheme } = useTheme()
+  const renderedTheme = theme === 'system' ? systemTheme : theme
+  const [mounted, setMounted] = React.useState(false)
+  React.useEffect(() => setMounted(true), [])
 
   return (
     <Menu
@@ -15,11 +18,13 @@ export default function ThemeSwitch({ lite = true }) {
       }}
       selected={{
         key: theme || '',
-        name: (
+        name: mounted ? (
           <div className="flex items-center gap-2 capitalize">
-            {theme === 'dark' || systemTheme === 'dark' ? <Moon /> : <Sun />}
+            {renderedTheme === 'dark' ? <Moon /> : <Sun />}
             {lite ? '' : <span>{theme}</span>}
           </div>
+        ) : (
+          ''
         )
       }}
       options={[

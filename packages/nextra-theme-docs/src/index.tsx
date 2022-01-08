@@ -50,7 +50,7 @@ function Body({ meta, toc, navLinks, MDXContent }: BodyProps) {
           <MDXContent />
         </article>
       ) : (
-        <article className="docs-container relative pb-8 w-full max-w-full flex min-w-0">
+        <article className="docs-container relative pb-8 w-full max-w-full flex min-w-0 pr-[calc(env(safe-area-inset-right)-1.5rem)]">
           <main className="mx-auto max-w-4xl px-6 md:px-8 pt-4 z-10 min-w-0 w-full">
             <MDXTheme MDXContent={MDXContent} />
             {navLinks}
@@ -134,7 +134,6 @@ const Layout = ({
                     directories={flatPageDirectories}
                     flatDirectories={flatDirectories}
                     fullDirectories={directories}
-                    mdShow={false}
                     headings={headings}
                     isRTL={isRTL}
                   />
@@ -179,6 +178,7 @@ const Layout = ({
                   fullDirectories={directories}
                   headings={headings}
                   isRTL={isRTL}
+                  asPopover
                 />
                 <Body
                   meta={meta}

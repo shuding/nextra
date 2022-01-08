@@ -161,7 +161,7 @@ interface SideBarProps {
   directories: PageItem[]
   flatDirectories: Item[]
   fullDirectories: Item[]
-  mdShow?: boolean
+  asPopover?: boolean
   headings?: Heading[]
   isRTL?: boolean
 }
@@ -171,7 +171,7 @@ export default function Sidebar({
   directories,
   flatDirectories,
   fullDirectories,
-  mdShow = true,
+  asPopover = false,
   headings = emptyHeading
 }: SideBarProps) {
   const config = useConfig()
@@ -197,16 +197,18 @@ export default function Sidebar({
       className={cn(
         'fixed flex-shrink-0 w-full md:w-64 md:sticky z-[15] top-[4rem] self-start overflow-y-auto h-full md:h-auto bg-white dark:bg-dark md:bg-transparent',
         menu ? '' : 'hidden',
-        mdShow ? 'md:block' : ''
+        asPopover ? 'md:block' : ''
       )}
       style={{
-        maxHeight: 'calc(var(--vh) - 4rem)'
+        height: 'calc(var(--vh) - 4rem)'
       }}
     >
-      <div className="sidebar w-full h-full md:h-auto">
+      <div className="sidebar w-full h-full md:h-auto pl-[calc(env(safe-area-inset-left)-1.5rem)]">
         <div
           className="p-4"
-          style={{ minHeight: 'calc(var(--vh) - 4rem - 61px)' }}
+          style={{
+            minHeight: 'calc(var(--vh) - 4rem - 61px)'
+          }}
         >
           <div className="mb-4 block md:hidden">
             {config.customSearch ||
@@ -240,7 +242,12 @@ export default function Sidebar({
         </div>
 
         <div className="sticky bottom-0 mx-4 border-t dark:border-prime-100 dark:border-opacity-10 shadow-[0_-12px_12px_white] dark:shadow-none">
-          <div className="bg-white dark:bg-dark py-4 flex gap-1">
+          <div
+            className="bg-white dark:bg-dark py-4 flex gap-1"
+            style={{
+              paddingBottom: 'calc(env(safe-area-inset-bottom) + 1rem)'
+            }}
+          >
             {config.i18n ? (
               <div className="flex-1 relative">
                 <LocaleSwitch options={config.i18n} />

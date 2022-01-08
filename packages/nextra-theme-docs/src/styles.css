@@ -4,6 +4,7 @@ html {
   @apply antialiased;
   font-size: 16px;
   font-feature-settings: 'rlig' 1, 'calt' 1, 'ss01' 1;
+  -webkit-tap-highlight-color: transparent;
 }
 body {
   @apply bg-white;
@@ -194,8 +195,9 @@ article {
   }
   &.nextra-flexsearch ul {
     @apply overflow-auto left-0 md:-left-80 md:right-0;
-    max-height: min(calc(var(--vh) - 9rem), 600px);
+    max-height: min(calc(var(--vh) - 12.5rem), 600px);
     max-width: min(calc(100vw - 2rem), calc(100% + 20rem));
+    transition: max-height 0.2s ease;
     width: 100vw;
   }
   ul {
@@ -225,6 +227,17 @@ article {
         @apply text-prime-500 bg-prime-500 bg-opacity-[.1];
       }
     }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .nextra-search .excerpt {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
   }
 }
 
