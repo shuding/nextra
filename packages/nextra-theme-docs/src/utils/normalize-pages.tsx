@@ -88,7 +88,7 @@ export default function normalizePages({
   const flatPageDirectories: PageItem[] = []
 
   let activeType: string | undefined = undefined
-  let activeIndex: number  = 0
+  let activeIndex: number = 0
 
   list
     .filter(
@@ -118,7 +118,7 @@ export default function normalizePages({
       // If the doc is under the active page root.
       const isCurrentDocsTree = type === 'docs' && route.startsWith(docsRoot)
 
-      if (a.route === route) {
+      if (a.route === route || a.route + '/' === route) {
         activeType = type
         switch (type) {
           case 'nav':
