@@ -6,7 +6,7 @@ import parseGitUrl from 'parse-git-url'
 import { useRouter } from 'next/router'
 
 import renderComponent from './utils/render-component'
-import getHeadingText from './utils/getHeadingText'
+import getHeadingText from './utils/get-heading-text'
 import { useActiveAnchor } from './misc/active-anchor'
 import { useConfig } from './config'
 import useMounted from './utils/use-mounted'

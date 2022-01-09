@@ -1,4 +1,4 @@
-import { Root, Heading } from 'mdast'
+import { Root, Heading, Parent } from 'mdast'
 
 function isHeading(node: any): node is Heading {
   return node.type === 'heading'
@@ -13,12 +13,24 @@ function visit(node: any, handler: (node: Heading) => any) {
   }
 }
 
+function getFlattenedValue(node: Parent): string {
+  return node.children
+    .map(child =>
+      'children' in child
+        ? getFlattenedValue(child)
+        : 'value' in child
+        ? child.value
+        : ''
+    )
+    .join('')
+}
+
 export default function getHeaders(headers: Heading[]) {
   return () => (tree: Root, _file: any, done: () => void) => {
     visit(tree, node => {
       const heading = {
         ...node,
-        value: node.children.map(child => (child as any).value).join('')
+        value: getFlattenedValue(node)
       }
       headers.push(heading)
     })

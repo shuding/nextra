@@ -117,7 +117,7 @@ async function getPageMap(currentResourcePath: string): Promise<PageMapResult> {
         if (item.route === activeRoute) {
           const metadata = dirMeta[item.name]
           activeRouteTitle =
-            (typeof metadata === 'string' ? metadata : metadata.title) ||
+            (typeof metadata === 'string' ? metadata : metadata?.title) ||
             item.name
         }
         return { ...item }
