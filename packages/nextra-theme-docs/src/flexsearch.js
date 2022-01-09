@@ -20,9 +20,9 @@ const Item = ({ page, title, active, href, onMouseOver, excerpt }) => {
           <div className="font-bold uppercase text-xs text-gray-400">
             {page}
           </div>
-          <div className="font-semibold mb-1 dark:text-white">{title}</div>
+          <div className="font-semibold dark:text-white">{title}</div>
           {excerpt ? (
-            <div className="excerpt text-gray-600 text-sm leading-[1.35rem] dark:text-gray-400">
+            <div className="excerpt mt-1 text-gray-600 text-sm leading-[1.35rem] dark:text-gray-400">
               {excerpt}
             </div>
           ) : null}

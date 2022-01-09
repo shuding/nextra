@@ -26,7 +26,7 @@ export default function Navbar({
 }: NavBarProps) {
   const config = useConfig()
   const { locale, asPath } = useRouter()
-  const activeRoute = getFSRoute(asPath, locale).split('#')[0]
+  const activeRoute = getFSRoute(asPath, locale)
   const { menu, setMenu } = useMenuContext()
 
   return (

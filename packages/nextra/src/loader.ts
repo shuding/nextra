@@ -10,7 +10,6 @@ import {
   existsSync,
   getLocaleFromFilename,
   removeExtension,
-  getFileName,
   parseJsonFile
 } from './utils'
 import { compileMdx } from './compile'
@@ -134,55 +133,6 @@ async function getPageMap(currentResourcePath: string): Promise<PageMapResult> {
   ]
 }
 
-async function analyzeLocalizedEntries(
-  currentResourcePath: string,
-  defaultLocale: string
-) {
-  const filename = getFileName(currentResourcePath)
-  const dir = path.dirname(currentResourcePath)
-
-  const filenameRe = new RegExp(
-    '^' + filename + '.[a-zA-Z-]+.(mdx?|jsx?|tsx?|json)$'
-  )
-  const files = await fs.readdir(dir, { withFileTypes: true })
-
-  let hasSSR = false,
-    hasSSG = false,
-    defaultIndex = 0
-  const filteredFiles = []
-
-  for (let i = 0; i < files.length; i++) {
-    const file = files[i]
-    if (!filenameRe.test(file.name)) continue
-
-    const content = await fs.readFile(path.join(dir, file.name), 'utf-8')
-    const locale = getLocaleFromFilename(file.name)
-
-    // Note: this is definitely not correct, we have to use MDX tokenizer here.
-    const exportSSR = /^export .+ getServerSideProps[=| |\(]/m.test(content)
-    const exportSSG = /^export .+ getStaticProps[=| |\(]/m.test(content)
-
-    hasSSR = hasSSR || exportSSR
-    hasSSG = hasSSG || exportSSG
-
-    if (locale === defaultLocale) defaultIndex = filteredFiles.length
-
-    filteredFiles.push({
-      name: file.name,
-      locale,
-      ssr: exportSSR,
-      ssg: exportSSG
-    })
-  }
-
-  return {
-    ssr: hasSSR,
-    ssg: hasSSG,
-    files: filteredFiles,
-    defaultIndex
-  }
-}
-
 export default async function (
   this: LoaderContext<LoaderOptions>,
   source: string
@@ -207,75 +157,13 @@ export default async function (
     mdxOptions
   } = options
 
-  const { resourcePath, resourceQuery } = this
+  const { resourcePath } = this
   const filename = resourcePath.slice(resourcePath.lastIndexOf('/') + 1)
   const fileLocale = getLocaleFromFilename(filename) || 'default'
-  const rawEntry = resourceQuery.includes('nextra-raw')
 
   // Check if there's a theme provided
   if (!theme) {
     throw new Error('No Nextra theme found!')
-  }
-
-  if (locales && !rawEntry) {
-    // We need to handle the locale router here
-    const { files, defaultIndex, ssr, ssg } = await analyzeLocalizedEntries(
-      resourcePath,
-      defaultLocale
-    )
-
-    const i18nEntry = `	
-import { useRouter } from 'next/router'	
-
-${files
-  .map(
-    (file, index) =>
-      `import Page_${index}${
-        file.ssg || file.ssr
-          ? `, { ${
-              file.ssg ? 'getStaticProps' : 'getServerSideProps'
-            } as page_data_${index} }`
-          : ''
-      } from './${file.name}?nextra-raw'`
-  )
-  .join('\n')}
-
-export default function I18NPage (props) {	
-  const { locale } = useRouter()	
-  ${files
-    .map(
-      (file, index) =>
-        `if (locale === '${file.locale}') {
-    return <Page_${index} {...props}/>
-  } else `
-    )
-    .join('')} {	
-    return <Page_${defaultIndex} {...props}/>	
-  }
-}
-
-${
-  ssg || ssr
-    ? `export async function ${
-        ssg ? 'getStaticProps' : 'getServerSideProps'
-      } (context) {
-  const locale = context.locale
-  ${files
-    .map(
-      (file, index) =>
-        `if (locale === '${file.locale}' && ${ssg ? file.ssg : file.ssr}) {
-    return page_data_${index}(context)
-  } else `
-    )
-    .join('')} {
-    return { props: {} }
-  }
-}`
-    : ''
-}
-`
-
-    return callback(null, i18nEntry)
   }
 
   // Generate the page map

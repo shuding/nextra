@@ -3,7 +3,7 @@ const package = require('../package.json')
 
 // Build CJS entrypoints
 esbuild.buildSync({
-  entryPoints: ['src/index.js', 'src/ssg.ts'],
+  entryPoints: ['src/index.js', 'src/ssg.ts', 'src/locales.ts'],
   platform: 'node',
   bundle: true,
   format: 'cjs',
@@ -11,6 +11,7 @@ esbuild.buildSync({
   color: true,
   target: 'es2016',
   external: [
+    'next/server',
     ...Object.keys(package.dependencies),
     ...Object.keys(package.peerDependencies || {})
   ]

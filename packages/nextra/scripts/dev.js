@@ -5,7 +5,7 @@ console.log('Watching...')
 
 // Build CJS entrypoints
 esbuild.build({
-  entryPoints: ['src/index.js', 'src/ssg.ts'],
+  entryPoints: ['src/index.js', 'src/ssg.ts', 'src/locales.ts'],
   platform: 'node',
   bundle: true,
   format: 'cjs',
@@ -19,6 +19,7 @@ esbuild.build({
     }
   },
   external: [
+    'next/server',
     ...Object.keys(package.dependencies),
     ...Object.keys(package.peerDependencies || {})
   ]

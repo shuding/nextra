@@ -24,7 +24,7 @@ function useDirectoryInfo(pageMap: PageMapItem[]) {
   const { locale, defaultLocale, asPath } = useRouter()
 
   return useMemo(() => {
-    const fsPath = getFSRoute(asPath, locale).split('#')[0]
+    const fsPath = getFSRoute(asPath, locale)
     return normalizePages({
       list: pageMap,
       locale,

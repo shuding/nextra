@@ -32,7 +32,6 @@ export default {
   docsRepositoryBase: "https://github.com/vercel/swr-site/blob/master/pages",
   titleSuffix: " – SWR",
   search: true,
-  unstable_stork: false,
   unstable_flexsearch: true,
   floatTOC: true,
   feedbackLink: "Question? Give us feedback →",
@@ -42,7 +41,10 @@ export default {
     return (
       <>
         <Logo height={12} />
-        <span className="mx-2 font-extrabold hidden md:inline select-none">
+        <span
+          className="mx-2 font-extrabold hidden md:inline select-none"
+          title={"SWR: " + (TITLE_WITH_TRANSLATIONS[locale] || "")}
+        >
           SWR
         </span>
       </>

@@ -17,16 +17,12 @@ module.exports =
     const defaultLocale = nextConfig.i18n?.defaultLocale || null
 
     let pageExtensions = nextConfig.pageExtensions || [...defaultExtensions]
+    pageExtensions = pageExtensions.concat(markdownExtensions)
+
     if (locales) {
-      console.log('You have i18n enabled for Nextra.')
-      if (!defaultLocale) {
-        console.error('Default locale is missing.')
-      }
-      pageExtensions = pageExtensions.concat(
-        markdownExtensions.map(ext => defaultLocale + '.' + ext)
+      console.log(
+        '[Nextra] You have Next.js i18n enabled, read here (TODO: link) for the docs.'
       )
-    } else {
-      pageExtensions = pageExtensions.concat(markdownExtensions)
     }
 
     return Object.assign({}, nextConfig, {

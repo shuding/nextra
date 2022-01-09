@@ -1,53 +1,10 @@
 import Slugger from 'github-slugger'
 import Link from 'next/link'
-import React, { useContext, useEffect, useMemo, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import innerText from 'react-innertext'
-// import Highlight, { defaultProps } from 'prism-react-renderer'
-// import type { Language, PrismTheme } from 'prism-react-renderer'
 import 'intersection-observer'
 
 import { ActiveAnchor, useActiveAnchorSet } from './active-anchor'
-
-// const THEME: PrismTheme = {
-//   plain: {
-//     backgroundColor: 'transparent'
-//   },
-//   styles: [
-//     {
-//       types: ['keyword', 'builtin'],
-//       style: {
-//         color: '#ff0078',
-//         fontWeight: 'bold'
-//       }
-//     },
-//     {
-//       types: ['comment'],
-//       style: {
-//         color: '#999',
-//         fontStyle: 'italic'
-//       }
-//     },
-//     {
-//       types: ['variable', 'language-javascript'],
-//       style: {
-//         color: '#0076ff'
-//       }
-//     },
-//     {
-//       types: ['attr-name'],
-//       style: {
-//         color: '#d9931e',
-//         fontStyle: 'normal'
-//       }
-//     },
-//     {
-//       types: ['boolean', 'regex'],
-//       style: {
-//         color: '#d9931e'
-//       }
-//     }
-//   ]
-// }
 
 const ob: Record<string, IntersectionObserver> = {}
 const obCallback: Record<string, ((e: IntersectionObserverEntry[]) => void)[]> =
@@ -275,69 +232,6 @@ const Pre = ({
     </PreContext.Provider>
   )
 }
-
-// const Code = ({
-//   children,
-//   className
-// }: {
-//   children?: React.ReactNode
-//   className?: string
-// }) => {
-//   const { highlight } = useContext(PreContext)
-
-//   const highlightedRanges = useMemo(() => {
-//     return highlight
-//       ? highlight.split(',').map(r => {
-//           if (r.includes('-')) {
-//             return r.split('-').map(v => parseInt(v, 10))
-//           }
-//           return +r
-//         })
-//       : []
-//   }, [highlight])
-
-//   if (!className) return <code>{children}</code>
-//   if (typeof children !== 'string') return <code>{children}</code>
-//   // https://mdxjs.com/guides/syntax-highlighting#all-together
-//   const language = className.replace(/language-/, '') as Language
-
-//   return (
-//     <Highlight
-//       {...defaultProps}
-//       code={children.trim()}
-//       language={language}
-//       theme={THEME}
-//     >
-//       {({ className, style, tokens, getLineProps, getTokenProps }) => (
-//         <code className={className} style={{ ...style }}>
-//           {tokens.map((line, i) => (
-//             <div
-//               key={i}
-//               {...getLineProps({ line, key: i })}
-//               style={
-//                 highlightedRanges.some(r =>
-//                   Array.isArray(r)
-//                     ? r[0] <= i + 1 && i + 1 <= r[1]
-//                     : r === i + 1
-//                 )
-//                   ? {
-//                       background: 'var(--c-highlight)',
-//                       margin: '0 -1rem',
-//                       padding: '0 1rem'
-//                     }
-//                   : {}
-//               }
-//             >
-//               {line.map((token, key) => (
-//                 <span key={key} {...getTokenProps({ token, key })} />
-//               ))}
-//             </div>
-//           ))}
-//         </code>
-//       )}
-//     </Highlight>
-//   )
-// }
 
 const Table = ({ children }: { children?: React.ReactNode }) => {
   return (

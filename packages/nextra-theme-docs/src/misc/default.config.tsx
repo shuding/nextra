@@ -1,6 +1,7 @@
 import React from 'react'
 
 const defaultTheme = {
+  projectLink: 'https://github.com/shuding/nextra',
   docsRepositoryBase: 'https://github.com/shuding/nextra',
   titleSuffix: ' – Nextra',
   nextLinks: true,

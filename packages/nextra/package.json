@@ -1,13 +1,14 @@
 {
   "name": "nextra",
-  "version": "2.0.0-alpha.4",
+  "version": "2.0.0-alpha.7",
   "description": "Next.js and MDX based site generator.",
   "main": "index.js",
   "files": [
     "dist/*",
     "index.js",
     "ssg.js",
-    "loader.js"
+    "loader.js",
+    "locales.js"
   ],
   "types": "./dist/types.d.ts",
   "repository": "https://github.com/shuding/nextra",
