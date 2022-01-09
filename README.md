@@ -30,7 +30,7 @@ Watch mode (style only): `pnpm dev:tailwind`
 
 ### Development
 
-You can also debug them toegther with a website locally. For instance, to start examples/docs locally, run
+You can also debug them together with a website locally. For instance, to start examples/docs locally, run
 
 ```
 cd examples/docs
