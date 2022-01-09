@@ -33,6 +33,8 @@ function findPagesDir(dir: string = process.cwd()): string {
   )
 }
 
+const pagesDir = findPagesDir()
+
 async function getPageMap(currentResourcePath: string): Promise<PageMapResult> {
   const activeRouteLocale = getLocaleFromFilename(currentResourcePath)
   let activeRoute = ''
@@ -127,7 +129,7 @@ async function getPageMap(currentResourcePath: string): Promise<PageMapResult> {
   }
 
   return [
-    await getFiles(path.join(process.cwd(), findPagesDir()), '/'),
+    await getFiles(path.join(process.cwd(), pagesDir), '/'),
     activeRoute,
     activeRouteTitle
   ]
@@ -143,7 +145,7 @@ export default async function (
   if (!isProductionBuild) {
     // Add the entire directory `pages` as the dependency
     // so we can generate the correct page map
-    this.addContextDependency(path.resolve(findPagesDir()))
+    this.addContextDependency(path.resolve(pagesDir))
   }
 
   const options = this.getOptions()

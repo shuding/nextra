@@ -152,7 +152,7 @@ export default function Search() {
     const localeCode = Router.locale || 'default'
     if (!indexes[localeCode]) {
       const data = await (
-        await fetch(`/_nextra/data-${localeCode}.json`)
+        await fetch(`/.nextra/data-${localeCode}.json`)
       ).json()
 
       const index = new FlexSearch.Document({

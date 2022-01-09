@@ -3,7 +3,7 @@ import path from 'path'
 
 const { promises: fs, statSync, mkdirSync } = gracefulFs
 
-const assetDir = path.join(process.cwd(), 'public', '_nextra')
+const assetDir = path.join(process.cwd(), 'public', '.nextra')
 const asset: { [locale: string]: any } = {}
 
 try {

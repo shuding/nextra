@@ -5,7 +5,8 @@ const PUBLIC_FILE = /\.(.*)$/
 export function locales(request: NextRequest) {
   const shouldHandleLocale =
     !PUBLIC_FILE.test(request.nextUrl.pathname) &&
-    !request.nextUrl.pathname.includes('/api/')
+    !request.nextUrl.pathname.includes('/api/') &&
+    !request.nextUrl.pathname.includes('/.nextra/')
 
   if (shouldHandleLocale) {
     let href = request.nextUrl.href || '/'
