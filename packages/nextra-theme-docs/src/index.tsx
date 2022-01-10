@@ -136,6 +136,7 @@ const Layout = ({
                     fullDirectories={directories}
                     headings={headings}
                     isRTL={isRTL}
+                    asPopover
                   />
                   <Body meta={meta} navLinks={null} MDXContent={MDXContent} />
                 </div>
@@ -178,7 +179,6 @@ const Layout = ({
                   fullDirectories={directories}
                   headings={headings}
                   isRTL={isRTL}
-                  asPopover
                 />
                 <Body
                   meta={meta}

@@ -98,24 +98,27 @@ const Footer: React.FC<{ menu?: boolean }> = ({ menu }) => {
 
   return (
     <footer className="bg-gray-100 dark:bg-neutral-900">
-      {menu ? (
-        <div className="py-2 border-b dark:border-neutral-800">
-          <div className="max-w-[90rem] mx-auto">
-            <div className="inline-flex px-4">
-              {config.i18n ? (
-                <div className="flex-1 relative">
-                  <LocaleSwitch options={config.i18n} />
-                </div>
-              ) : null}
-              {config.darkMode ? (
-                <div className="grow-0 relative">
-                  <ThemeSwitch lite={false} />
-                </div>
-              ) : null}
-            </div>
+      <div
+        className={cn(
+          'py-2 border-b dark:border-neutral-800',
+          menu ? '' : 'md:hidden'
+        )}
+      >
+        <div className="max-w-[90rem] mx-auto">
+          <div className="inline-flex px-4">
+            {config.i18n ? (
+              <div className="flex-1 relative">
+                <LocaleSwitch options={config.i18n} />
+              </div>
+            ) : null}
+            {config.darkMode ? (
+              <div className="grow-0 relative">
+                <ThemeSwitch lite={false} />
+              </div>
+            ) : null}
           </div>
         </div>
-      ) : null}
+      </div>
       <div className="max-w-[90rem] mx-auto pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)] py-12">
         <div className="flex justify-between flex-col-reverse md:flex-row items-center md:items-end">
           <span className="text-gray-600 dark:text-gray-400">

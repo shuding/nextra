@@ -197,7 +197,7 @@ export default function Sidebar({
       className={cn(
         'fixed flex-shrink-0 w-full md:w-64 md:sticky z-[15] top-[4rem] self-start overflow-y-auto h-full md:h-auto bg-white dark:bg-dark md:bg-transparent',
         menu ? '' : 'hidden',
-        asPopover ? 'md:block' : ''
+        asPopover ? 'md:hidden' : 'md:block'
       )}
       style={{
         height: 'calc(var(--vh) - 4rem)'
