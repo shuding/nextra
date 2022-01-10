@@ -17,9 +17,12 @@ export default function LocaleSwitch({ options }: LocaleSwitchProps) {
   return (
     <Menu
       onChange={option => {
-        router.push(asPath, asPath, {
-          locale: option.key,
-          scroll: false
+        const date = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000)
+        document.cookie = `NEXT_LOCALE=${
+          option.key
+        }; expires=${date.toUTCString()}; path=/`
+        router.push(asPath, undefined, {
+          locale: option.key
         })
       }}
       selected={{
