@@ -1,5 +1,6 @@
 import path from 'path'
 import gracefulFs from 'graceful-fs'
+import { promisify } from 'util'
 import { getOptions } from 'loader-utils'
 import grayMatter from 'gray-matter'
 import slash from 'slash'
@@ -14,7 +15,7 @@ import {
 } from './utils'
 import { compileMdx } from './compile'
 
-const { promises: fs } = gracefulFs
+const fs = gracefulFs
 const extension = /\.mdx?$/
 const metaExtension = /meta\.?([a-zA-Z-]+)?\.json/
 
@@ -24,7 +25,7 @@ async function getPageMap(currentResourcePath) {
   let activeRouteTitle = ''
 
   async function getFiles(dir, route) {
-    const files = await fs.readdir(dir, { withFileTypes: true })
+    const files = await promisify(fs.readdir)(dir, { withFileTypes: true })
     let dirMeta = {}
 
     // go through the directory
@@ -56,7 +57,7 @@ async function getPageMap(currentResourcePath) {
               activeRoute = fileRoute
             }
 
-            const fileContents = await fs.readFile(filePath, 'utf-8')
+            const fileContents = await promisify(fs.readFile)(filePath, 'utf-8')
             const { data } = grayMatter(fileContents)
 
             if (Object.keys(data).length) {
@@ -74,7 +75,7 @@ async function getPageMap(currentResourcePath) {
               locale
             }
           } else if (metaExtension.test(f.name)) {
-            const content = await fs.readFile(filePath, 'utf-8')
+            const content = await promisify(fs.readFile)(filePath, 'utf-8')
             const meta = parseJsonFile(content, filePath)
             const locale = f.name.match(metaExtension)[1]
 
@@ -117,7 +118,7 @@ async function analyzeLocalizedEntries(currentResourcePath, defaultLocale) {
   const filenameRe = new RegExp(
     '^' + filename + '.[a-zA-Z-]+.(mdx?|jsx?|tsx?|json)$'
   )
-  const files = await fs.readdir(dir, { withFileTypes: true })
+  const files = await promisify(fs.readdir)(dir, { withFileTypes: true })
 
   let hasSSR = false,
     hasSSG = false,
@@ -128,7 +129,7 @@ async function analyzeLocalizedEntries(currentResourcePath, defaultLocale) {
     const file = files[i]
     if (!filenameRe.test(file.name)) continue
 
-    const content = await fs.readFile(path.join(dir, file.name), 'utf-8')
+    const content = await promisify(fs.readFile)(path.join(dir, file.name), 'utf-8')
     const locale = getLocaleFromFilename(file.name)
 
     // Note: this is definitely not correct, we have to use MDX tokenizer here.
@@ -190,8 +191,8 @@ export default async function (source) {
       defaultLocale
     )
 
-    const i18nEntry = `	
-import { useRouter } from 'next/router'	
+    const i18nEntry = `
+import { useRouter } from 'next/router'
 
 ${files
   .map(
@@ -206,8 +207,8 @@ ${files
   )
   .join('\n')}
 
-export default function I18NPage (props) {	
-  const { locale } = useRouter()	
+export default function I18NPage (props) {
+  const { locale } = useRouter()
   ${files
     .map(
       (file, index) =>
@@ -215,8 +216,8 @@ export default function I18NPage (props) {
     return <Page_${index} {...props}/>
   } else `
     )
-    .join('')} {	
-    return <Page_${defaultIndex} {...props}/>	
+    .join('')} {
+    return <Page_${defaultIndex} {...props}/>
   }
 }
 
@@ -233,7 +234,7 @@ ${
     return page_data_${index}(context)
   } else `
     )
-    .join('')} {	
+    .join('')} {
     return { props: {} }
   }
 }`
