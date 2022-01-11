@@ -13,7 +13,7 @@ export function locales(request: NextRequest) {
     if (href.endsWith('/' + request.nextUrl.locale)) href += '/'
     if (href.endsWith('/')) href += 'index'
 
-    const locale = '.' + request.nextUrl.locale
+const locale = '.' + (request.cookies['NEXT_LOCALE'] || request.nextUrl.locale)
     if (!href.endsWith(locale)) {
       return NextResponse.rewrite(href + locale)
     }
