@@ -20,10 +20,16 @@ const rehypePrettyCodeOptions = {
   // },
   onVisitHighlightedLine(node: any) {
     // Style a highlighted line node.
+    if (!node.properties.className) {
+      node.properties.className = []
+    }
     node.properties.className.push('highlighted')
   },
   onVisitHighlightedWord(node: any) {
     // Style a highlighted word node.
+    if (!node.properties.className) {
+      node.properties.className = []
+    }
     node.properties.className.push('highlighted')
   }
 }
