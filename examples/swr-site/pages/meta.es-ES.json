@@ -1,0 +1,19 @@
+{
+  "index": {
+    "title": "Introducción",
+    "type": "nav",
+    "hidden": true
+  },
+  "docs": {
+    "title": "Docs",
+    "type": "nav"
+  },
+  "examples": {
+    "title": "Ejemplos",
+    "type": "nav"
+  },
+  "blog": {
+    "title": "Blog",
+    "type": "nav"
+  }
+}

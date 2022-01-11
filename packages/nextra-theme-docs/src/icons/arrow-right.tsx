@@ -1,14 +1,8 @@
 import React from 'react'
 
-const ArrowRight = ({ height = 24, ...props }) => {
+const ArrowRight = (props: any) => {
   return (
-    <svg
-      height={height}
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      {...props}
-    >
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" {...props}>
       <path
         strokeLinecap="round"
         strokeLinejoin="round"

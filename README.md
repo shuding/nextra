@@ -10,7 +10,7 @@ The Nextra repository uses [PNPM Workspaces](https://pnpm.io/workspaces) and [Le
 
 ### Build Nextra Core
 
-```
+```bash
 cd packages/nextra
 pnpm build
 ```
@@ -19,7 +19,7 @@ Watch mode: `yarn dev`
 
 ### Build Nextra Theme
 
-```
+```bash
 cd packages/nextra-theme-docs
 pnpm build
 ```
@@ -32,7 +32,7 @@ Watch mode (style only): `pnpm dev:tailwind`
 
 You can also debug them toegther with a website locally. For instance, to start examples/docs locally, run
 
-```
+```bash
 cd examples/docs
 pnpm dev
 ```

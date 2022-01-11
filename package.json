@@ -15,14 +15,13 @@
     "publish-beta": "lerna publish from-package --canary --preid beta --pre-dist-tag beta"
   },
   "devDependencies": {
-    "@types/react": "^17.0.37",
+    "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
-    "next": "^12.0.4",
-    "nextra": "workspace:*",
-    "prettier": "^2.2.1",
-    "react": "17",
-    "react-dom": "17",
-    "turbo": "^1.0.17"
+    "next": "^12.0.7",
+    "prettier": "^2.5.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "turbo": "^1.0.23"
   },
   "prettier": {
     "semi": false,

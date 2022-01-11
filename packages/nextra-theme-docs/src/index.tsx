@@ -3,11 +3,12 @@ import { useRouter } from 'next/router'
 import 'focus-visible'
 import { SkipNavContent } from '@reach/skip-nav'
 import { ThemeProvider } from 'next-themes'
+import { Heading, PageMapItem, PageOpt } from 'nextra'
 import cn from 'classnames'
 import Head from './head'
 import Navbar from './navbar'
 import Footer, { NavLinks } from './footer'
-import Theme from './misc/theme'
+import { MDXTheme } from './misc/theme'
 import Sidebar from './sidebar'
 import ToC from './toc'
 import { ThemeConfigContext, useConfig } from './config'
@@ -16,14 +17,14 @@ import defaultConfig from './misc/default.config'
 import { getFSRoute } from './utils/get-fs-route'
 import { MenuContext } from './utils/menu-context'
 import normalizePages from './utils/normalize-pages'
-import { Heading, PageMapItem, PageOpt } from 'nextra'
 import { DocsThemeConfig } from './types'
+import './polyfill'
 
 function useDirectoryInfo(pageMap: PageMapItem[]) {
   const { locale, defaultLocale, asPath } = useRouter()
 
   return useMemo(() => {
-    const fsPath = getFSRoute(asPath, locale).split('#')[0]
+    const fsPath = getFSRoute(asPath, locale)
     return normalizePages({
       list: pageMap,
       locale,
@@ -36,24 +37,23 @@ function useDirectoryInfo(pageMap: PageMapItem[]) {
 interface BodyProps {
   meta: Record<string, any>
   toc?: React.ReactNode
-  filepathWithName: string
   navLinks: React.ReactNode
-  children: React.ReactNode
+  MDXContent: React.FC
 }
 
-function Body({ meta, toc, filepathWithName, navLinks, children }: BodyProps) {
+function Body({ meta, toc, navLinks, MDXContent }: BodyProps) {
   return (
     <React.Fragment>
       <SkipNavContent />
       {meta.full ? (
-        <article className="relative pt-16 w-full overflow-x-hidden">
-          {children}
+        <article className="relative w-full overflow-x-hidden">
+          <MDXContent />
         </article>
       ) : (
-        <article className="docs-container relative pt-16 pb-16 px-6 md:px-8 w-full max-w-full flex min-w-0">
-          <main className="max-w-screen-md mx-auto pt-4 z-10 min-w-0 w-full">
-            <Theme>{children}</Theme>
-            <Footer filepathWithName={filepathWithName}>{navLinks}</Footer>
+        <article className="docs-container relative pb-8 w-full max-w-full flex min-w-0 pr-[calc(env(safe-area-inset-right)-1.5rem)]">
+          <main className="mx-auto max-w-4xl px-6 md:px-8 pt-4 z-10 min-w-0 w-full">
+            <MDXTheme MDXContent={MDXContent} />
+            {navLinks}
           </main>
           {toc}
         </article>
@@ -67,6 +67,7 @@ interface LayoutProps {
   pageMap: PageMapItem[]
   meta: Record<string, any>
   children: React.ReactNode
+  MDXContent: React.FC
   titleText: string
   headings: Heading[]
 }
@@ -75,8 +76,8 @@ const Layout = ({
   filename,
   pageMap,
   meta,
-  children,
   titleText,
+  MDXContent,
   headings
 }: LayoutProps) => {
   const { route, locale } = useRouter()
@@ -97,7 +98,7 @@ const Layout = ({
   const filepathWithName = filepath + filename
   const title = meta.title || titleText || 'Untitled'
   const isRTL = useMemo(() => {
-    if (!config.i18n) return config.direction === 'rtl' || null
+    if (!config.i18n) return config.direction === 'rtl'
     const localeConfig = config.i18n.find(l => l.locale === locale)
     return localeConfig && localeConfig.direction === 'rtl'
   }, [config.i18n, locale])
@@ -127,23 +128,21 @@ const Layout = ({
               flatPageDirectories={flatPageDirectories}
             />
             <ActiveAnchor>
-              <div className="flex flex-1 h-full">
-                <Sidebar
-                  directories={flatPageDirectories}
-                  flatDirectories={flatDirectories}
-                  fullDirectories={directories}
-                  mdShow={false}
-                  headings={headings}
-                />
-                <Body
-                  meta={meta}
-                  filepathWithName={filepathWithName}
-                  navLinks={null}
-                >
-                  {children}
-                </Body>
+              <div className="max-w-[90rem] w-full mx-auto">
+                <div className="flex flex-1 h-full">
+                  <Sidebar
+                    directories={flatPageDirectories}
+                    flatDirectories={flatDirectories}
+                    fullDirectories={directories}
+                    headings={headings}
+                    isRTL={isRTL}
+                    asPopover
+                  />
+                  <Body meta={meta} navLinks={null} MDXContent={MDXContent} />
+                </div>
               </div>
             </ActiveAnchor>
+            {config.footer ? <Footer menu /> : null}
           </div>
         </MenuContext.Provider>
       </React.Fragment>
@@ -172,29 +171,36 @@ const Layout = ({
             flatPageDirectories={flatPageDirectories}
           />
           <ActiveAnchor>
-            <div className="flex flex-1 h-full">
-              <Sidebar
-                directories={docsDirectories}
-                flatDirectories={flatDirectories}
-                fullDirectories={directories}
-                headings={headings}
-              />
-              <Body
-                meta={meta}
-                filepathWithName={filepathWithName}
-                toc={<ToC headings={config.floatTOC ? headings : null} />}
-                navLinks={
-                  <NavLinks
-                    flatDirectories={flatDocsDirectories}
-                    currentIndex={activeIndex}
-                    isRTL={isRTL}
-                  />
-                }
-              >
-                {children}
-              </Body>
+            <div className="max-w-[90rem] w-full mx-auto">
+              <div className="flex flex-1 h-full">
+                <Sidebar
+                  directories={docsDirectories}
+                  flatDirectories={flatDirectories}
+                  fullDirectories={directories}
+                  headings={headings}
+                  isRTL={isRTL}
+                />
+                <Body
+                  meta={meta}
+                  toc={
+                    <ToC
+                      headings={config.floatTOC ? headings : null}
+                      filepathWithName={filepathWithName}
+                    />
+                  }
+                  navLinks={
+                    <NavLinks
+                      flatDirectories={flatDocsDirectories}
+                      currentIndex={activeIndex}
+                      isRTL={isRTL}
+                    />
+                  }
+                  MDXContent={MDXContent}
+                />
+              </div>
             </div>
           </ActiveAnchor>
+          {config.footer ? <Footer menu={false} /> : null}
         </div>
       </MenuContext.Provider>
     </React.Fragment>
@@ -206,7 +212,7 @@ export default (opts: PageOpt, config: DocsThemeConfig) => {
   return (props: any) => {
     return (
       <ThemeConfigContext.Provider value={extendedConfig}>
-        <ThemeProvider attribute="class">
+        <ThemeProvider attribute="class" disableTransitionOnChange={true}>
           <Layout {...opts} {...props} />
         </ThemeProvider>
       </ThemeConfigContext.Provider>

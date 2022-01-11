@@ -123,7 +123,7 @@ const Search = ({ directories = [] }: SearchProps) => {
             setSearch(e.target.value)
             setShow(true)
           }}
-          className="block w-full px-3 py-2 leading-tight border rounded appearance-none focus:outline-none focus:ring"
+          className="block w-full px-3 py-2 leading-tight bg-black bg-opacity-[.03] rounded-lg appearance-none focus:outline-none focus:ring hover:bg-opacity-5 transition-colors"
           type="search"
           placeholder="Search documentation..."
           onKeyDown={handleKeyDown}
@@ -133,8 +133,8 @@ const Search = ({ directories = [] }: SearchProps) => {
           spellCheck={false}
         />
         {show ? null : (
-          <div className="hidden sm:flex absolute inset-y-0 right-0 py-1.5 pr-1.5">
-            <kbd className="inline-flex items-center px-2 font-sans text-sm font-medium text-gray-400 dark:text-gray-800 dark:border-gray-800 border rounded">
+          <div className="hidden sm:flex absolute inset-y-0 right-0 py-1.5 pr-1.5 select-none pointer-events-none">
+            <kbd className="inline-flex items-center px-2 font-mono text-sm font-medium bg-white text-gray-400 dark:text-gray-800 dark:border-gray-400 border rounded">
               /
             </kbd>
           </div>

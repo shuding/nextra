@@ -17,6 +17,8 @@ export interface DocsThemeConfig {
   footer?: boolean
   footerText?: string
   footerEditLink?: string
+  feedbackLink?: string
+  feedbackLabels?: string
   head?:
     | React.ReactNode
     | React.FC<{
@@ -30,7 +32,7 @@ export interface DocsThemeConfig {
   i18n?: { locale: string; text: string; direction: string }[]
   unstable_faviconGlyph?: string
   customSearch?: boolean
-  unstable_stork?: boolean
+  unstable_flexsearch?: boolean
   projectLink?: string
   github?: string
   projectLinkIcon?: React.FC<{ locale: string }>
