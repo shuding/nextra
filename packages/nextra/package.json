@@ -1,6 +1,6 @@
 {
   "name": "nextra",
-  "version": "2.0.0-alpha.11",
+  "version": "2.0.0-alpha.12",
   "description": "Next.js and MDX based site generator.",
   "main": "index.js",
   "files": [
@@ -20,13 +20,12 @@
     "prepublishOnly": "rm -rf dist && yarn build"
   },
   "dependencies": {
-    "@atomiks/mdx-pretty-code": "^0.1.0",
     "@mdx-js/mdx": "^2.0.0-rc.2",
     "download": "^8.0.0",
     "github-slugger": "^1.3.0",
     "graceful-fs": "^4.2.6",
     "gray-matter": "^4.0.3",
-    "rehype-raw": "^6.1.1",
+    "rehype-pretty-code": "^0.0.6",
     "remark-gfm": "^3.0.1",
     "shiki": "0.10.0",
     "slash": "^3.0.0",

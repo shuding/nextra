@@ -115,6 +115,7 @@ article {
     font-size: 0.9em;
     padding: 2px 0.25em;
     box-decoration-break: clone;
+    font-feature-settings: 'rlig' 1, 'calt' 1, 'ss01' 1;
     .dark & {
       @apply bg-white bg-opacity-10 border-white border-opacity-10;
     }
@@ -125,6 +126,7 @@ article {
     @apply p-4 bg-slate-100 rounded-xl mt-6 mb-4 overflow-x-auto font-medium subpixel-antialiased;
     @apply dark:bg-prime-300 dark:bg-opacity-10;
     code {
+      line-height: 1.25rem;
       @apply relative p-0 text-sm text-current bg-transparent dark:bg-transparent rounded-none border-none inline-block min-w-full;
       .line.highlighted {
         @apply before:block before:absolute before:h-5 before:bg-gray-500 before:bg-opacity-10 before:-inset-x-4 before:pointer-events-none before:select-none;
@@ -136,6 +138,18 @@ article {
   }
   a code {
     @apply text-current no-underline;
+  }
+  span[data-nextra-code][data-filename] {
+    @apply block relative;
+
+    &::before {
+      content: attr(data-filename);
+      position: absolute;
+      @apply absolute truncate top-0 z-[1] text-xs py-2 px-4 w-full text-gray-700 bg-slate-200 dark:bg-gray-700 dark:text-gray-200 rounded-t-xl;
+    }
+    pre {
+      @apply pt-12;
+    }
   }
   hr {
     @apply my-8;

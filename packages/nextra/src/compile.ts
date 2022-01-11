@@ -1,21 +1,18 @@
 import { compile, nodeTypes } from '@mdx-js/mdx'
 import remarkGfm from 'remark-gfm'
-import { createRemarkPlugin } from '@atomiks/mdx-pretty-code'
-import { remarkStaticImage } from './static-image'
-import getHeaders from './get-headers'
+import rehypePrettyCode from 'rehype-pretty-code'
+import { remarkStaticImage } from './mdx-plugins/static-image'
+import getHeaders from './mdx-plugins/get-headers'
 import { Heading } from 'mdast'
 import { LoaderOptions } from './types'
-
-import rehypeRaw from 'rehype-raw'
-import structurize from './structurize'
+import structurize from './mdx-plugins/structurize'
+import { parseCodeMeta, attachCodeMeta } from './mdx-plugins/add-code-meta'
 
 // @ts-ignore
 import theme from './theme.json'
 
-const prettyCode = createRemarkPlugin({
-  shikiOptions: {
-    theme: theme as any
-  },
+const rehypePrettyCodeOptions = {
+  theme: theme,
   // onVisitLine(node: any) {
   //   // Style a line node.
   //   Object.assign(node.style, {
@@ -23,13 +20,13 @@ const prettyCode = createRemarkPlugin({
   // },
   onVisitHighlightedLine(node: any) {
     // Style a highlighted line node.
-    node.classList.add('highlighted')
+    node.properties.className.push('highlighted')
   },
   onVisitHighlightedWord(node: any) {
     // Style a highlighted word node.
-    node.classList.add('highlighted')
+    node.properties.className.push('highlighted')
   }
-})
+}
 
 export async function compileMdx(
   source: string,
@@ -55,13 +52,14 @@ export async function compileMdx(
       ...(nextraOptions.unstable_staticImage ? [remarkStaticImage] : []),
       ...(nextraOptions.unstable_contentDump
         ? [structurize(structurizedData)]
-        : []),
-      prettyCode
+        : [])
     ].filter(Boolean),
     // @ts-ignore
     rehypePlugins: [
       ...(mdxOptions.rehypePlugins || []),
-      [rehypeRaw, { passThrough: nodeTypes }]
+      parseCodeMeta,
+      [rehypePrettyCode, rehypePrettyCodeOptions],
+      attachCodeMeta
     ].filter(Boolean)
   })
 
