@@ -65,7 +65,7 @@ blockquote:not(:first-child),
       }
     }
   }
-  .menu {
+  .locale .menu {
     @apply right-0;
   }
 }
