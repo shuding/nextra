@@ -1,6 +1,6 @@
-import { compile, nodeTypes } from '@mdx-js/mdx'
+import { compile } from '@mdx-js/mdx'
 import remarkGfm from 'remark-gfm'
-import rehypePrettyCode from 'rehype-pretty-code'
+import rehypePrettyCode from '@shuding/rehype-pretty-code'
 import { remarkStaticImage } from './mdx-plugins/static-image'
 import getHeaders from './mdx-plugins/get-headers'
 import { Heading } from 'mdast'
@@ -12,7 +12,7 @@ import { parseCodeMeta, attachCodeMeta } from './mdx-plugins/add-code-meta'
 import theme from './theme.json'
 
 const rehypePrettyCodeOptions = {
-  theme: theme,
+  theme,
   // onVisitLine(node: any) {
   //   // Style a line node.
   //   Object.assign(node.style, {
