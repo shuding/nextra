@@ -1,0 +1,199 @@
+import Callout from 'nextra-theme-docs/callout'
+
+# 缓存
+
+<Callout>
+  升级到最新版本（≥ 1.0.0）来使用该功能。
+</Callout>
+
+<Callout emoji="⚠️">
+  在大多数情况下，你不应该直接*写入*缓存，这可能会导致 SWR 不可预知的行为。如果你需要手动操作一个 key，请考虑使用 SWR API。<br/>
+  参见：[数据更改](/docs/mutation)，[重置测试用例之间的缓存](#reset-cache-between-test-cases)。
+</Callout>
+
+默认情况下，SWR 使用全局缓存在所有组件之间存储和共享数据。但你也可以通过 `SWRConfig` 的 `provider` 选项来自定义这个行为。
+
+缓存 provider 旨在通过更多自定义存储启用 SWR。
+
+## 缓存 Provider
+
+缓存 provider 是类似 Map 的对象，它匹配以下 TypeScript 定义（可以从 `swr` 导入）：
+
+```typescript
+interface Cache<Data> {
+  get(key: string): Data | undefined
+  set(key: string, value: Data): void
+  delete(key: string): void
+}
+```
+
+例如，一个 [JavaScript Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) 实例可以直接用作 SWR 的缓存 provider。
+
+## 创建缓存 Provider
+
+`SWRConfig` 的 `provider` 选项接收一个返回[缓存 provider](#cache-provider) 的函数。该 provider 将被 `SWRConfig` 范围内的所有 SWR hook 使用。例如：
+
+```jsx
+import useSWR, { SWRConfig } from 'swr'
+
+function App() {
+  return (
+    <SWRConfig value={{ provider: () => new Map() }}>
+      <Page/>
+    </SWRConfig>
+  )
+}
+```
+
+`<Page/>` 中的所有 SWR hook 都将从该 Map 实例读取和写入。你还可以针对你的特定用例使用其他缓存 provider 实现。
+
+<Callout>
+  在上面的例子中，当 `<App/>` 组件重新挂载时，provider 也会被重新创建。缓存 provider 应该放在组件树的更高位置，或者放在渲染之外。
+</Callout>
+
+import { Cache } from 'components/diagrams/cache'
+
+<div className="my-8">
+  <Cache/>
+</div>
+
+当嵌套时，SWR hook 将使用上层缓存 provider。如果没有上层缓存 provider，则回退到默认 provider，即一个空 `Map`。
+
+<Callout emoji="⚠️">
+   如果使用了缓存 provider，则全局 `mutate` 将**不**适用于 `<SWRConfig>` 范围内的 SWR hook。请使用[访问当前缓存 Provider](#access-current-cache-provider) 代替。
+</Callout>
+
+## 访问当前缓存 Provider
+
+在 React 组件内部，你需要使用 [`useSWRConfig`](/docs/global-configuration#access-to-global-configurations) hook 来访问当前缓存 provider 以及其他配置，包括 `mutate`：
+
+```jsx
+import { useSWRConfig } from 'swr'
+
+function Avatar() {
+  const { cache, mutate, ...extraConfig } = useSWRConfig()
+  // ...
+}
+```
+
+如果不在任何 `<SWRConfig>` 中，将返回默认配置。
+
+## 实验性：扩展缓存 provider
+
+<Callout emoji="🧪">
+   这是一个实验性的功能，在未来的升级中可能会发生变化。
+</Callout>
+
+当多个 `<SWRConfig>` 组件嵌套时，可以扩展缓存 provider。
+
+`provider` 函数的第一个参数是上层 `<SWRConfig>` 的缓存 provider（如果没有父级 `<SWRConfig>`，则为默认缓存），你可以使用它来扩展缓存 provider：  
+
+```jsx
+<SWRConfig value={{ provider: (cache) => newCache }}>
+  ...
+</SWRConfig>
+```
+
+## 示例
+
+### 根据正则更改多个 Key
+
+借助缓存 provider API 的灵活性，你甚至可以构建一个“部分更改”的助手函数。
+
+在下面的示例中，`matchMutate` 可以接收一个正则表达式作为 key，并用于更改匹配该模式的。
+
+```js
+function useMatchMutate() {
+  const { cache, mutate } = useSWRConfig()
+  return (matcher, ...args) => {
+    if (!(cache instanceof Map)) {
+      throw new Error('matchMutate requires the cache provider to be a Map instance')
+    }
+
+    const keys = []
+
+    for (const key of cache.keys()) {
+      if (matcher.test(key)) {
+        keys.push(key)
+      }
+    }
+
+    const mutations = keys.map((key) => mutate(key, ...args))
+    return Promise.all(mutations)
+  }
+}
+```
+
+在你的组件内：
+
+```jsx
+function Button() {
+  const matchMutate = useMatchMutate()
+  return <button onClick={() => matchMutate(/^\/api\//)}>
+    重新请求所有以 `/api/` 开头的 key
+  </button>
+}
+```
+
+<Callout>
+  注意，该示例要求缓存 provider 为 Map 实例。
+</Callout>
+
+### 基于 LocalStorage 的持久缓存
+
+你可能希望将缓存同步到 `localStorage`。下面是一个示例实现：
+
+```jsx
+function localStorageProvider() {
+  // 初始化时，我们将数据从 `localStorage` 恢复到一个 map 中。
+  const map = new Map(JSON.parse(localStorage.getItem('app-cache') || '[]'))
+
+  // 在卸载 app 之前，我们将所有数据写回 `localStorage` 中。
+  window.addEventListener('beforeunload', () => {
+    const appCache = JSON.stringify(Array.from(map.entries()))
+    localStorage.setItem('app-cache', appCache)
+  })
+
+  // 我们仍然使用 map 进行读写以提高性能。
+  return map
+}
+```
+
+然后将其作为 provider 使用：
+
+```jsx
+<SWRConfig value={{ provider: localStorageProvider }}>
+  <App/>
+</SWRConfig>
+```
+
+<Callout>
+  作为一种改进，你还可以使用内存缓存作为缓冲区，并定期写入 `localStorage`。你还可以使用 IndexedDB 或 WebSQL 实现类似的分层缓存。
+</Callout>
+
+### 重置测试用例之间的缓存
+
+在测试应用程序时，你可能希望重置测试用例之间的 SWR 缓存。你可以简单地使用空缓存 provider 包装你的应用程序。下面是一个使用 Jest 的例子：
+
+```jsx
+describe('test suite', async () => {
+  it('test case', async () => {
+    render(
+      <SWRConfig value={{ provider: () => new Map() }}>
+        <App/>
+      </SWRConfig>
+    )
+  })
+})
+```
+
+### 访问缓存
+
+警告：你不应该直接写入缓存，那样可能会导致不可预知的行为。
+
+```jsx
+const { cache } = useSWRConfig()
+
+cache.get(key) // 获取 key 的当前数据。
+cache.clear()  // ⚠️ 清除所有缓存。SWR 将在重新渲染时重新请求。
+```

@@ -2,13 +2,17 @@
 .next
 node_modules
 yarn-error.log
+.pnpm-debug.log
 dist
-
+*/**/.turbo
 # Theme styles
 packages/nextra-theme-*/style.css
 
 # Stork related
 */**/public/*.st
 */**/public/*.toml
+
+# Nextra index
+*/**/public/.nextra
 
 .vercel

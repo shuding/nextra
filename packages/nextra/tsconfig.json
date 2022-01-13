@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "module": "ESNext",
+    "declaration": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "allowJs": true,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "resolveJsonModule": true
+  },
+  "include": ["src"]
+}

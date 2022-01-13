@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "module": "ESNext",
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "jsx": "react",
+    "outDir": "dist"
+  },
+  "files": ["src/bleed.tsx", "src/callout.tsx", "src/types.ts"]
+}

@@ -1,0 +1,75 @@
+import Callout from 'nextra-theme-docs/callout'
+
+# 서스펜스
+
+<Callout emoji="🚨" type="error">
+  서스펜스는 현재 React의 <strong>실험적인</strong> 기능입니다. 이러한 API는 React의 일부가 되기 전에 경고 없이 크게 변경될 수 있습니다.<br/>
+  <a href="https://reactjs.org/docs/concurrent-mode-suspense.html" target="_blank" rel="noopener">더 상세한 정보</a>
+</Callout>
+
+<Callout>
+  React 서스펜스는 SSR 모드를 아직 지원하지 않습니다.
+</Callout>
+
+React 서스펜스를 SWR과 함께 사용하려면 `suspense` 옵션을 활성화하세요.
+
+```jsx
+import { Suspense } from 'react'
+import useSWR from 'swr'
+
+function Profile () {
+  const { data } = useSWR('/api/user', fetcher, { suspense: true })
+  return <div>hello, {data.name}</div>
+}
+
+function App () {
+  return (
+    <Suspense fallback={<div>loading...</div>}>
+      <Profile/>
+    </Suspense>
+  )
+}
+```
+
+<Callout>
+  `suspense` 옵션은 생명 주기 내에서 변경을 허용하지 않습니다.
+</Callout>
+
+서스펜스 모드에서 `data`는 항상 응답을 가져옵니다(따라서 `undefined`를 검사할 필요가 없습니다).
+하지만 에러가 발생할 경우 [에러 경계](https://reactjs.org/docs/concurrent-mode-suspense.html#handling-errors)를 사용해 캐치해야 합니다.
+
+```jsx
+<ErrorBoundary fallback={<h2>Could not fetch posts.</h2>}>
+  <Suspense fallback={<h1>Loading posts...</h1>}>
+    <Profile />
+  </Suspense>
+</ErrorBoundary>
+```
+
+---
+
+### 노트: 조건부 가져오기와 함께
+
+일반적으로 `suspense`를 활성화하면 렌더링 시에 `data`가 항상 준비됩니다.
+
+```jsx
+function Profile () {
+  const { data } = useSWR('/api/user', fetcher, { suspense: true })
+
+  // `data`는 절대 `undefined`가 되지 않습니다
+  // ...
+}
+```
+
+하지만 조건부 가져오기나 의존적 가져오기와 함께 사용되면 `data`는 요청이 **일시 중단**된 경우 `undefined`가 됩니다.
+
+```jsx
+function Profile () {
+  const { data } = useSWR(isReady ? '/api/user' : null, fetcher, { suspense: true })
+
+  // `isReady`가 false이면 `data`는 `undefined`입니다
+  // ...
+}
+```
+
+이 제한에 대한 더 기술적인 상세 내용을 읽으려면 [여기 discussion](https://github.com/vercel/swr/pull/357#issuecomment-627089889)을 확인해 보세요.
