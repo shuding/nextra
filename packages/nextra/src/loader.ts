@@ -1,5 +1,6 @@
 import path from 'path'
 import gracefulFs from 'graceful-fs'
+import { promisify } from 'util'
 import grayMatter from 'gray-matter'
 import slash from 'slash'
 import { LoaderContext } from 'webpack'
@@ -15,7 +16,7 @@ import {
 import { compileMdx } from './compile'
 import type { LoaderOptions, PageMapItem, PageMapResult } from './types'
 
-const { promises: fs } = gracefulFs
+const fs = gracefulFs
 const extension = /\.mdx?$/
 const metaExtension = /meta\.?([a-zA-Z-]+)?\.json/
 const isProductionBuild = process.env.NODE_ENV === 'production'
@@ -41,7 +42,7 @@ async function getPageMap(currentResourcePath: string): Promise<PageMapResult> {
   let activeRouteTitle: string = ''
 
   async function getFiles(dir: string, route: string): Promise<PageMapItem[]> {
-    const files = await fs.readdir(dir, { withFileTypes: true })
+    const files = await promisify(fs.readdir)(dir, { withFileTypes: true })
     let dirMeta: Record<
       string,
       string | { [key: string]: string; title: string }
@@ -76,7 +77,7 @@ async function getPageMap(currentResourcePath: string): Promise<PageMapResult> {
               activeRoute = fileRoute
             }
 
-            const fileContents = await fs.readFile(filePath, 'utf-8')
+            const fileContents = await promisify(fs.readFile)(filePath, 'utf-8')
             const { data } = grayMatter(fileContents)
 
             if (Object.keys(data).length) {
@@ -94,7 +95,7 @@ async function getPageMap(currentResourcePath: string): Promise<PageMapResult> {
               locale
             }
           } else if (metaExtension.test(f.name)) {
-            const content = await fs.readFile(filePath, 'utf-8')
+            const content = await promisify(fs.readFile)(filePath, 'utf-8')
             const meta = parseJsonFile(content, filePath)
             // @ts-expect-error since metaExtension.test(f.name) === true
             const locale = f.name.match(metaExtension)[1]
