@@ -1,19 +1,19 @@
 import { PageMapItem } from './types'
-import gracefulFs from 'graceful-fs'
+import { readdir, readFile } from 'graceful-fs'
+import util from 'util'
 import { getLocaleFromFilename, parseJsonFile, removeExtension } from './utils'
 import path from 'path'
 import slash from 'slash'
 import grayMatter from 'gray-matter'
 import { extension, findPagesDir, metaExtension } from './page-map'
 import { Compiler } from 'webpack'
-const { promises: fs } = gracefulFs
 
 export async function collectFiles(
   dir: string,
   route: string = '/',
   fileMap: Record<string, any> = {}
 ): Promise<{ items: PageMapItem[]; fileMap: Record<string, any> }> {
-  const files = await fs.readdir(dir, { withFileTypes: true })
+  const files = await util.promisify(readdir)(dir, { withFileTypes: true })
 
   const items = (
     await Promise.all(
@@ -38,7 +38,7 @@ export async function collectFiles(
           }
         } else if (extension.test(f.name)) {
           const locale = getLocaleFromFilename(f.name)
-          const fileContents = await fs.readFile(filePath, 'utf-8')
+          const fileContents = await util.promisify(readFile)(filePath, 'utf-8')
           const { data } = grayMatter(fileContents)
           if (Object.keys(data).length) {
             fileMap[filePath] = {
@@ -56,7 +56,7 @@ export async function collectFiles(
           }
           return fileMap[filePath]
         } else if (metaExtension.test(f.name)) {
-          const content = await fs.readFile(filePath, 'utf-8')
+          const content = await util.promisify(readFile)(filePath, 'utf-8')
           const meta = parseJsonFile(content, filePath)
           // @ts-expect-error since metaExtension.test(f.name) === true
           const locale = f.name.match(metaExtension)[1]
