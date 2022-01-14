@@ -17,8 +17,8 @@
     "build": "node scripts/build.js",
     "dev": "node scripts/dev.js",
     "types": "tsc --project tsconfig.type.json",
-    "prepublishOnly": "rm -rf dist && yarn build",
-    "test": "vitest run"
+    "test": "vitest run",
+    "prepublishOnly": "rm -rf dist && yarn build && yarn types"
   },
   "dependencies": {
     "@mdx-js/mdx": "^2.0.0-rc.2",
