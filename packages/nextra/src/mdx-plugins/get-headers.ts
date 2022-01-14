@@ -40,6 +40,15 @@ export default function remarkHeadings(this: Processor, headers: Heading[]) {
         value: getFlattenedValue(node)
       }
       const headingMeta = data.headingMeta as HeadingMeta
+      if (node.depth === 1) {
+        headingMeta.hasH1 = true
+        if (Array.isArray(node.children) && node.children.length === 1) {
+          const child = node.children[0]
+          if (child.type === 'text') {
+            headingMeta.titleText = child.value
+          }
+        }
+      }
       headingMeta.headings.push(heading)
     })
     done()

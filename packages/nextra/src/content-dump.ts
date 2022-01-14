@@ -1,9 +1,9 @@
-import gracefulFs from 'graceful-fs'
+import fs from 'graceful-fs'
 import path from 'path'
 import { promisify } from 'util'
 
-const { statSync, mkdirSync } = gracefulFs
-const fs = gracefulFs
+const { statSync, mkdirSync } = fs
+
 
 const assetDir = path.join(process.cwd(), 'public', '.nextra')
 const asset: { [locale: string]: any } = {}

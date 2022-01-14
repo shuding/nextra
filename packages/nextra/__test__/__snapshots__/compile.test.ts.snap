@@ -74,6 +74,7 @@ exports[`process heading > dynamic-h1 1`] = `
         },
       },
       "type": "heading",
+      "value": "Posts Tagged with “”",
     },
   ],
   "result": "/*@jsxRuntime automatic @jsxImportSource react*/
@@ -136,6 +137,7 @@ exports[`process heading > no-h1 1`] = `
         },
       },
       "type": "heading",
+      "value": "H2",
     },
   ],
   "result": "/*@jsxRuntime automatic @jsxImportSource react*/
@@ -193,6 +195,7 @@ exports[`process heading > static-h1 1`] = `
         },
       },
       "type": "heading",
+      "value": "Hello World",
     },
   ],
   "result": "/*@jsxRuntime automatic @jsxImportSource react*/
