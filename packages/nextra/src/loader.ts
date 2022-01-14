@@ -6,12 +6,8 @@ import { addPage } from './content-dump'
 import { getLocaleFromFilename } from './utils'
 import { compileMdx } from './compile'
 import type { LoaderOptions } from './types'
-import {
-  getPageMap,
-  findPagesDir,
-  collectFiles,
-  filterFileLocale
-} from './page-map'
+import { getPageMap, findPagesDir } from './page-map'
+import { collectFiles } from './plugin'
 const extension = /\.mdx?$/
 const isProductionBuild = process.env.NODE_ENV === 'production'
 
@@ -20,9 +16,9 @@ const indexContentEmitted = new Set()
 
 export default async function (
   this: LoaderContext<LoaderOptions>,
-  source: string
+  source: string,
+  callback: (err?: null | Error, content?: string | Buffer) => void
 ) {
-  const callback = this.async()
   this.cacheable(true)
 
   if (!isProductionBuild) {
@@ -35,11 +31,11 @@ export default async function (
   let {
     theme,
     themeConfig,
-    locales,
     defaultLocale,
     unstable_contentDump,
     unstable_staticImage,
-    mdxOptions
+    mdxOptions,
+    pageMapCache
   } = options
 
   const { resourcePath } = this
@@ -50,21 +46,26 @@ export default async function (
   if (!theme) {
     throw new Error('No Nextra theme found!')
   }
-  const files = await collectFiles(findPagesDir())
-  const newResult = await filterFileLocale(
+  let pageMapResult, fileMap
+
+  if (process.env.NODE_ENV === 'development') {
+    const data = await collectFiles(
+      path.join(process.cwd(), findPagesDir()),
+      '/'
+    )
+    pageMapResult = data.items
+    fileMap = data.fileMap
+  } else {
+    const data = pageMapCache.get()!
+    pageMapResult = data.items
+    fileMap = data.fileMap
+  }
+  const [pageMap, route, title] = getPageMap(
     resourcePath,
-    files.items,
-    files.fileMap,
+    pageMapResult,
+    fileMap,
     defaultLocale
   )
-  console.log('newResult', newResult[0], newResult[2])
-  // Generate the page map
-  let [pageMap, route, title] = await getPageMap(
-    resourcePath,
-    locales,
-    defaultLocale
-  )
-  console.log('pageMap', pageMap, title)
   // Extract frontMatter information if it exists
   let { data, content } = grayMatter(source)
 

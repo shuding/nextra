@@ -66,6 +66,11 @@ exports[`Page Process > pageMap en-US 1`] = `
           "children": [
             {
               "locale": "en-US",
+              "name": "cache",
+              "route": "/docs/advanced/cache",
+            },
+            {
+              "locale": "en-US",
               "meta": {
                 "cache": "Cache",
                 "performance": "Performance",
@@ -120,11 +125,6 @@ exports[`Page Process > pageMap en-US 1`] = `
             },
             {
               "locale": "en-US",
-              "name": "cache",
-              "route": "/docs/advanced/cache",
-            },
-            {
-              "locale": "en-US",
               "name": "performance",
               "route": "/docs/advanced/performance",
             },
@@ -136,6 +136,41 @@ exports[`Page Process > pageMap en-US 1`] = `
           ],
           "name": "advanced",
           "route": "/docs/advanced",
+        },
+        {
+          "locale": "en-US",
+          "name": "arguments",
+          "route": "/docs/arguments",
+        },
+        {
+          "locale": "en-US",
+          "name": "change-log",
+          "route": "/docs/change-log",
+        },
+        {
+          "locale": "en-US",
+          "name": "conditional-fetching",
+          "route": "/docs/conditional-fetching",
+        },
+        {
+          "locale": "en-US",
+          "name": "data-fetching",
+          "route": "/docs/data-fetching",
+        },
+        {
+          "locale": "en-US",
+          "name": "error-handling",
+          "route": "/docs/error-handling",
+        },
+        {
+          "locale": "en-US",
+          "name": "getting-started",
+          "route": "/docs/getting-started",
+        },
+        {
+          "locale": "en-US",
+          "name": "global-configuration",
+          "route": "/docs/global-configuration",
         },
         {
           "locale": "en-US",
@@ -277,41 +312,6 @@ exports[`Page Process > pageMap en-US 1`] = `
         },
         {
           "locale": "en-US",
-          "name": "arguments",
-          "route": "/docs/arguments",
-        },
-        {
-          "locale": "en-US",
-          "name": "change-log",
-          "route": "/docs/change-log",
-        },
-        {
-          "locale": "en-US",
-          "name": "conditional-fetching",
-          "route": "/docs/conditional-fetching",
-        },
-        {
-          "locale": "en-US",
-          "name": "data-fetching",
-          "route": "/docs/data-fetching",
-        },
-        {
-          "locale": "en-US",
-          "name": "error-handling",
-          "route": "/docs/error-handling",
-        },
-        {
-          "locale": "en-US",
-          "name": "getting-started",
-          "route": "/docs/getting-started",
-        },
-        {
-          "locale": "en-US",
-          "name": "global-configuration",
-          "route": "/docs/global-configuration",
-        },
-        {
-          "locale": "en-US",
           "name": "middleware",
           "route": "/docs/middleware",
         },
@@ -361,6 +361,42 @@ exports[`Page Process > pageMap en-US 1`] = `
     },
     {
       "children": [
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Authentication",
+          },
+          "locale": "en-US",
+          "name": "auth",
+          "route": "/examples/auth",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Basic Usage",
+          },
+          "locale": "en-US",
+          "name": "basic",
+          "route": "/examples/basic",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Error Handling",
+          },
+          "locale": "en-US",
+          "name": "error-handling",
+          "route": "/examples/error-handling",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Infinite Loading",
+          },
+          "locale": "en-US",
+          "name": "infinite-loading",
+          "route": "/examples/infinite-loading",
+        },
         {
           "locale": "en-US",
           "meta": {
@@ -430,42 +466,6 @@ exports[`Page Process > pageMap en-US 1`] = `
         {
           "frontMatter": {
             "full": true,
-            "title": "Authentication",
-          },
-          "locale": "en-US",
-          "name": "auth",
-          "route": "/examples/auth",
-        },
-        {
-          "frontMatter": {
-            "full": true,
-            "title": "Basic Usage",
-          },
-          "locale": "en-US",
-          "name": "basic",
-          "route": "/examples/basic",
-        },
-        {
-          "frontMatter": {
-            "full": true,
-            "title": "Error Handling",
-          },
-          "locale": "en-US",
-          "name": "error-handling",
-          "route": "/examples/error-handling",
-        },
-        {
-          "frontMatter": {
-            "full": true,
-            "title": "Infinite Loading",
-          },
-          "locale": "en-US",
-          "name": "infinite-loading",
-          "route": "/examples/infinite-loading",
-        },
-        {
-          "frontMatter": {
-            "full": true,
             "title": "Next.js SSR",
           },
           "locale": "en-US",
@@ -475,6 +475,14 @@ exports[`Page Process > pageMap en-US 1`] = `
       ],
       "name": "examples",
       "route": "/examples",
+    },
+    {
+      "frontMatter": {
+        "title": "React Hooks for Data Fetching",
+      },
+      "locale": "en-US",
+      "name": "index",
+      "route": "/",
     },
     {
       "locale": "en-US",
@@ -613,14 +621,6 @@ exports[`Page Process > pageMap en-US 1`] = `
         },
       },
       "name": "meta.json",
-    },
-    {
-      "frontMatter": {
-        "title": "React Hooks for Data Fetching",
-      },
-      "locale": "en-US",
-      "name": "index",
-      "route": "/",
     },
   ],
   "/docs/data-fetching",
@@ -677,10 +677,10 @@ exports[`Page Process > pageMap zh-CN 1`] = `
         },
         {
           "frontMatter": {
-            "description": "Almost 2 years ago we open sourced SWR, the tiny data-fetching React library that people love. Today we are reaching another milestone: the 1.0 version of SWR.",
+            "description": "大约两年前，我们开源了 SWR，大家喜爱的小型数据请求 React 库。今天，我们迎来了另一个里程碑：SWR 1.0 版本发布。",
             "image": "https://assets.vercel.com/image/upload/v1630059453/swr/v1.png",
           },
-          "locale": "en-US",
+          "locale": "zh-CN",
           "name": "swr-v1",
           "route": "/blog/swr-v1",
         },
@@ -692,6 +692,11 @@ exports[`Page Process > pageMap zh-CN 1`] = `
       "children": [
         {
           "children": [
+            {
+              "locale": "zh-CN",
+              "name": "cache",
+              "route": "/docs/advanced/cache",
+            },
             {
               "locale": "en-US",
               "meta": {
@@ -747,23 +752,53 @@ exports[`Page Process > pageMap zh-CN 1`] = `
               "name": "meta.json",
             },
             {
-              "locale": "en-US",
-              "name": "cache",
-              "route": "/docs/advanced/cache",
-            },
-            {
-              "locale": "en-US",
+              "locale": "zh-CN",
               "name": "performance",
               "route": "/docs/advanced/performance",
             },
             {
-              "locale": "en-US",
+              "locale": "zh-CN",
               "name": "react-native",
               "route": "/docs/advanced/react-native",
             },
           ],
           "name": "advanced",
           "route": "/docs/advanced",
+        },
+        {
+          "locale": "zh-CN",
+          "name": "arguments",
+          "route": "/docs/arguments",
+        },
+        {
+          "locale": "zh-CN",
+          "name": "change-log",
+          "route": "/docs/change-log",
+        },
+        {
+          "locale": "zh-CN",
+          "name": "conditional-fetching",
+          "route": "/docs/conditional-fetching",
+        },
+        {
+          "locale": "zh-CN",
+          "name": "data-fetching",
+          "route": "/docs/data-fetching",
+        },
+        {
+          "locale": "zh-CN",
+          "name": "error-handling",
+          "route": "/docs/error-handling",
+        },
+        {
+          "locale": "zh-CN",
+          "name": "getting-started",
+          "route": "/docs/getting-started",
+        },
+        {
+          "locale": "zh-CN",
+          "name": "global-configuration",
+          "route": "/docs/global-configuration",
         },
         {
           "locale": "en-US",
@@ -904,84 +939,49 @@ exports[`Page Process > pageMap zh-CN 1`] = `
           "name": "meta.json",
         },
         {
-          "locale": "en-US",
-          "name": "arguments",
-          "route": "/docs/arguments",
-        },
-        {
-          "locale": "en-US",
-          "name": "change-log",
-          "route": "/docs/change-log",
-        },
-        {
-          "locale": "en-US",
-          "name": "conditional-fetching",
-          "route": "/docs/conditional-fetching",
-        },
-        {
-          "locale": "en-US",
-          "name": "data-fetching",
-          "route": "/docs/data-fetching",
-        },
-        {
-          "locale": "en-US",
-          "name": "error-handling",
-          "route": "/docs/error-handling",
-        },
-        {
-          "locale": "en-US",
-          "name": "getting-started",
-          "route": "/docs/getting-started",
-        },
-        {
-          "locale": "en-US",
-          "name": "global-configuration",
-          "route": "/docs/global-configuration",
-        },
-        {
-          "locale": "en-US",
+          "locale": "zh-CN",
           "name": "middleware",
           "route": "/docs/middleware",
         },
         {
-          "locale": "en-US",
+          "locale": "zh-CN",
           "name": "mutation",
           "route": "/docs/mutation",
         },
         {
-          "locale": "en-US",
+          "locale": "zh-CN",
           "name": "options",
           "route": "/docs/options",
         },
         {
-          "locale": "en-US",
+          "locale": "zh-CN",
           "name": "pagination",
           "route": "/docs/pagination",
         },
         {
-          "locale": "en-US",
+          "locale": "zh-CN",
           "name": "prefetching",
           "route": "/docs/prefetching",
         },
         {
-          "locale": "en-US",
+          "locale": "zh-CN",
           "name": "revalidation",
           "route": "/docs/revalidation",
         },
         {
-          "locale": "en-US",
+          "locale": "zh-CN",
           "name": "suspense",
           "route": "/docs/suspense",
+        },
+        {
+          "locale": "zh-CN",
+          "name": "with-nextjs",
+          "route": "/docs/with-nextjs",
         },
         {
           "locale": "en-US",
           "name": "typescript",
           "route": "/docs/typescript",
-        },
-        {
-          "locale": "en-US",
-          "name": "with-nextjs",
-          "route": "/docs/with-nextjs",
         },
       ],
       "name": "docs",
@@ -989,6 +989,42 @@ exports[`Page Process > pageMap zh-CN 1`] = `
     },
     {
       "children": [
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "身份验证",
+          },
+          "locale": "zh-CN",
+          "name": "auth",
+          "route": "/examples/auth",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "基本用法",
+          },
+          "locale": "zh-CN",
+          "name": "basic",
+          "route": "/examples/basic",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "错误处理",
+          },
+          "locale": "zh-CN",
+          "name": "error-handling",
+          "route": "/examples/error-handling",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "无限加载",
+          },
+          "locale": "zh-CN",
+          "name": "infinite-loading",
+          "route": "/examples/infinite-loading",
+        },
         {
           "locale": "en-US",
           "meta": {
@@ -1058,42 +1094,6 @@ exports[`Page Process > pageMap zh-CN 1`] = `
         {
           "frontMatter": {
             "full": true,
-            "title": "Authentication",
-          },
-          "locale": "en-US",
-          "name": "auth",
-          "route": "/examples/auth",
-        },
-        {
-          "frontMatter": {
-            "full": true,
-            "title": "Basic Usage",
-          },
-          "locale": "en-US",
-          "name": "basic",
-          "route": "/examples/basic",
-        },
-        {
-          "frontMatter": {
-            "full": true,
-            "title": "Error Handling",
-          },
-          "locale": "en-US",
-          "name": "error-handling",
-          "route": "/examples/error-handling",
-        },
-        {
-          "frontMatter": {
-            "full": true,
-            "title": "Infinite Loading",
-          },
-          "locale": "en-US",
-          "name": "infinite-loading",
-          "route": "/examples/infinite-loading",
-        },
-        {
-          "frontMatter": {
-            "full": true,
             "title": "Next.js SSR",
           },
           "locale": "en-US",
@@ -1103,6 +1103,14 @@ exports[`Page Process > pageMap zh-CN 1`] = `
       ],
       "name": "examples",
       "route": "/examples",
+    },
+    {
+      "frontMatter": {
+        "title": "用于数据请求的 React Hooks 库",
+      },
+      "locale": "zh-CN",
+      "name": "index",
+      "route": "/",
     },
     {
       "locale": "en-US",
@@ -1241,14 +1249,6 @@ exports[`Page Process > pageMap zh-CN 1`] = `
         },
       },
       "name": "meta.json",
-    },
-    {
-      "frontMatter": {
-        "title": "React Hooks for Data Fetching",
-      },
-      "locale": "en-US",
-      "name": "index",
-      "route": "/",
     },
   ],
   "/docs/data-fetching",
