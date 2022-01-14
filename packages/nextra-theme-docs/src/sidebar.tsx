@@ -22,8 +22,7 @@ interface FolderProps {
 
 function Folder({ item, anchors }: FolderProps) {
   const { asPath, locale } = useRouter()
-  const routeOriginal = getFSRoute(asPath, locale)
-  const route = routeOriginal.split('#')[0]
+  const route = getFSRoute(asPath, locale).split('#')[0]
   const active = route === item.route + '/' || route + '/' === item.route + '/'
   const { defaultMenuCollapsed } = useMenuContext()
   const open = TreeState[item.route] ?? !defaultMenuCollapsed
@@ -69,7 +68,7 @@ interface FileProps {
 function File({ item, anchors }: FileProps) {
   const { setMenu } = useMenuContext()
   const { asPath, locale } = useRouter()
-  const route = getFSRoute(asPath, locale)
+  const route = getFSRoute(asPath, locale).split('#')[0]
   const active = route === item.route + '/' || route + '/' === item.route + '/'
   const slugger = new Slugger()
   const activeAnchor = useActiveAnchor()
