@@ -1,163 +1,41 @@
 import path from 'path'
-import gracefulFs from 'graceful-fs'
-import { promisify } from 'util'
 import grayMatter from 'gray-matter'
 import slash from 'slash'
 import { LoaderContext } from 'webpack'
-
-import filterRouteLocale from './filter-route-locale'
 import { addPage } from './content-dump'
-import {
-  existsSync,
-  getLocaleFromFilename,
-  removeExtension,
-  parseJsonFile
-} from './utils'
+import { getLocaleFromFilename } from './utils'
 import { compileMdx } from './compile'
-import type { LoaderOptions, PageMapItem, PageMapResult } from './types'
-
-const fs = gracefulFs
+import type { LoaderOptions } from './types'
+import { getPageMap, findPagesDir } from './page-map'
+import { collectFiles } from './plugin'
 const extension = /\.mdx?$/
-const metaExtension = /meta\.?([a-zA-Z-]+)?\.json/
 const isProductionBuild = process.env.NODE_ENV === 'production'
 
 // TODO: create this as a webpack plugin.
 const indexContentEmitted = new Set()
 
-function findPagesDir(dir: string = process.cwd()): string {
-  // prioritize ./pages over ./src/pages
-  if (existsSync(path.join(dir, 'pages'))) return 'pages'
-  if (existsSync(path.join(dir, 'src/pages'))) return 'src/pages'
-
-  throw new Error(
-    "> Couldn't find a `pages` directory. Please create one under the project root"
-  )
-}
-
-const pagesDir = findPagesDir()
-
-async function getPageMap(currentResourcePath: string): Promise<PageMapResult> {
-  const activeRouteLocale = getLocaleFromFilename(currentResourcePath)
-  let activeRoute = ''
-  let activeRouteTitle: string = ''
-
-  async function getFiles(dir: string, route: string): Promise<PageMapItem[]> {
-    const files = await promisify(fs.readdir)(dir, { withFileTypes: true })
-    let dirMeta: Record<
-      string,
-      string | { [key: string]: string; title: string }
-    > = {}
-
-    // go through the directory
-    const items = (
-      await Promise.all(
-        files.map(async f => {
-          const filePath = path.resolve(dir, f.name)
-          const fileRoute = slash(
-            path.join(route, removeExtension(f.name).replace(/^index$/, ''))
-          )
-
-          if (f.isDirectory()) {
-            if (fileRoute === '/api') return null
-
-            const children = await getFiles(filePath, fileRoute)
-            if (!children || !children.length) return null
-
-            return {
-              name: f.name,
-              children,
-              route: fileRoute
-            }
-          } else if (extension.test(f.name)) {
-            // MDX or MD
-
-            const locale = getLocaleFromFilename(f.name)
-
-            if (filePath === currentResourcePath) {
-              activeRoute = fileRoute
-            }
-
-            const fileContents = await promisify(fs.readFile)(filePath, 'utf-8')
-            const { data } = grayMatter(fileContents)
-
-            if (Object.keys(data).length) {
-              return {
-                name: removeExtension(f.name),
-                route: fileRoute,
-                frontMatter: data,
-                locale
-              }
-            }
-
-            return {
-              name: removeExtension(f.name),
-              route: fileRoute,
-              locale
-            }
-          } else if (metaExtension.test(f.name)) {
-            const content = await promisify(fs.readFile)(filePath, 'utf-8')
-            const meta = parseJsonFile(content, filePath)
-            // @ts-expect-error since metaExtension.test(f.name) === true
-            const locale = f.name.match(metaExtension)[1]
-
-            if (!activeRouteLocale || locale === activeRouteLocale) {
-              dirMeta = meta
-            }
-
-            return {
-              name: 'meta.json',
-              meta,
-              locale
-            }
-          }
-        })
-      )
-    )
-      .map(item => {
-        if (!item) return
-        if (item.route === activeRoute) {
-          const metadata = dirMeta[item.name]
-          activeRouteTitle =
-            (typeof metadata === 'string' ? metadata : metadata?.title) ||
-            item.name
-        }
-        return { ...item }
-      })
-      .filter(Boolean)
-
-    // @ts-expect-error since filter remove all the null and undefined item
-    return items
-  }
-
-  return [
-    await getFiles(path.join(process.cwd(), pagesDir), '/'),
-    activeRoute,
-    activeRouteTitle
-  ]
-}
-
 export default async function (
   this: LoaderContext<LoaderOptions>,
-  source: string
+  source: string,
+  callback: (err?: null | Error, content?: string | Buffer) => void
 ) {
-  const callback = this.async()
   this.cacheable(true)
 
   if (!isProductionBuild) {
     // Add the entire directory `pages` as the dependency
     // so we can generate the correct page map
-    this.addContextDependency(path.resolve(pagesDir))
+    this.addContextDependency(path.resolve(findPagesDir()))
   }
 
   const options = this.getOptions()
   let {
     theme,
     themeConfig,
-    locales,
     defaultLocale,
     unstable_contentDump,
     unstable_staticImage,
-    mdxOptions
+    mdxOptions,
+    pageMapCache
   } = options
 
   const { resourcePath } = this
@@ -168,16 +46,26 @@ export default async function (
   if (!theme) {
     throw new Error('No Nextra theme found!')
   }
+  let pageMapResult, fileMap
 
-  // Generate the page map
-  let [pageMap, route, title] = await getPageMap(resourcePath)
-
-  if (locales) {
-    const locale = getLocaleFromFilename(filename)
-    if (locale) {
-      pageMap = filterRouteLocale(pageMap, locale, defaultLocale)
-    }
+  if (isProductionBuild) {
+    const data = pageMapCache.get()!
+    pageMapResult = data.items
+    fileMap = data.fileMap
+  } else {
+    const data = await collectFiles(
+      path.join(process.cwd(), findPagesDir()),
+      '/'
+    )
+    pageMapResult = data.items
+    fileMap = data.fileMap
   }
+  const [pageMap, route, title] = getPageMap(
+    resourcePath,
+    pageMapResult,
+    fileMap,
+    defaultLocale
+  )
 
   // Extract frontMatter information if it exists
   let { data, content } = grayMatter(source)
