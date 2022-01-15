@@ -48,15 +48,15 @@ export default async function (
   }
   let pageMapResult, fileMap
 
-  if (process.env.NODE_ENV === 'development') {
+  if (isProductionBuild) {
+    const data = pageMapCache.get()!
+    pageMapResult = data.items
+    fileMap = data.fileMap
+  } else {
     const data = await collectFiles(
       path.join(process.cwd(), findPagesDir()),
       '/'
     )
-    pageMapResult = data.items
-    fileMap = data.fileMap
-  } else {
-    const data = pageMapCache.get()!
     pageMapResult = data.items
     fileMap = data.fileMap
   }
@@ -66,6 +66,7 @@ export default async function (
     fileMap,
     defaultLocale
   )
+
   // Extract frontMatter information if it exists
   let { data, content } = grayMatter(source)
 
