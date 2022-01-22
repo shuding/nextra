@@ -123,7 +123,6 @@ ${layoutConfig ? `import layoutConfig from '${layoutConfig}'` : ''}`
       hasH1: ${JSON.stringify(hasH1)}
     }, ${layoutConfig ? 'layoutConfig' : 'null'}))({
       ...props,
-      MDXContent,
       children: <MDXContent/>
     })
 }`

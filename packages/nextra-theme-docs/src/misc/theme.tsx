@@ -5,6 +5,7 @@ import innerText from 'react-innertext'
 import 'intersection-observer'
 
 import { ActiveAnchor, useActiveAnchorSet } from './active-anchor'
+import { MDXProvider } from '@mdx-js/react'
 
 const ob: Record<string, IntersectionObserver> = {}
 const obCallback: Record<string, ((e: IntersectionObserverEntry[]) => void)[]> =
@@ -216,23 +217,6 @@ const A = ({
   )
 }
 
-const PreContext = React.createContext<{
-  highlight?: string
-}>({})
-const Pre = ({
-  children,
-  ...props
-}: {
-  children?: React.ReactNode
-  highlight?: string
-}) => {
-  return (
-    <PreContext.Provider value={props}>
-      <pre>{children}</pre>
-    </PreContext.Provider>
-  )
-}
-
 const Table = ({ children }: { children?: React.ReactNode }) => {
   return (
     <div className="table-container">
@@ -248,18 +232,16 @@ const getComponents = (args: { slugger: Slugger }) => ({
   h5: H5(args),
   h6: H6(args),
   a: A,
-  pre: Pre,
-  // code: Code,
   table: Table
 })
 
-export const MDXTheme = ({
-  MDXContent
-}: {
-  MDXContent: React.FC<{ components?: any }>
-}) => {
+export const MDXTheme: React.FC<{}> = ({ children }) => {
   const slugger = new Slugger()
   // @ts-expect-error
   slugger.index = 0
-  return <MDXContent components={getComponents({ slugger })} />
+  return (
+    <MDXProvider components={getComponents({ slugger })}>
+      {children}
+    </MDXProvider>
+  )
 }

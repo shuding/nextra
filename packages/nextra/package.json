@@ -28,9 +28,7 @@
     "rehype-pretty-code": "^0.1.0",
     "remark-gfm": "^3.0.1",
     "shiki": "0.10.0",
-    "slash": "^3.0.0",
-    "typescript": "^4.5.2",
-    "vitest": "^0.0.141"
+    "slash": "^3.0.0"
   },
   "peerDependencies": {
     "react": ">=16.13.1"
@@ -38,7 +36,6 @@
   "devDependencies": {
     "@types/graceful-fs": "^4.1.5",
     "@types/mdast": "^3.0.10",
-    "@types/webpack": "^5.28.0",
-    "esbuild": "^0.14.0"
+    "@types/webpack": "^5.28.0"
   }
 }
