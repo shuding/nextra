@@ -1,13 +1,13 @@
 {
-  "name": "nextra-monorepo",
+  "version": "0.0.0",
   "private": true,
   "scripts": {
     "dev": "turbo run dev",
     "build": "turbo run build types",
     "types": "turbo run types",
-    "dev:core": "pnpm run dev --filter nextra",
-    "dev:theme-blog": "pnpm run dev --filter nextra-theme-blog",
-    "dev:theme-docs": "pnpm run dev --filter nextra-theme-docs",
+    "dev:core": "turbo run dev --scope=\"nextra\"",
+    "dev:theme-blog": "turbo run dev --scope=\"blog\" --include-dependencies",
+    "dev:theme-docs": "turbo run dev --scope=\"swr-site\" --include-dependencies",
     "build:core": "pnpm run build --filter nextra",
     "build:theme-blog": "pnpm run build --filter nextra-theme-blog",
     "build:theme-docs": "pnpm run build --filter nextra-theme-docs",
@@ -17,11 +17,11 @@
   "devDependencies": {
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
-    "next": "^12.0.7",
+    "next": "^12.0.8",
     "prettier": "^2.5.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "turbo": "^1.0.23"
+    "turbo": "^1.1.0-canary.1"
   },
   "prettier": {
     "semi": false,
@@ -29,7 +29,7 @@
     "trailingComma": "none",
     "arrowParens": "avoid"
   },
-  "version": "0.0.0",
+  "packageManager": "pnpm@6.27.1",
   "turbo": {
     "baseBranch": "origin/core",
     "pipeline": {

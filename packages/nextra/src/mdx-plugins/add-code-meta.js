@@ -34,7 +34,7 @@ export function parseCodeMeta() {
 
 export function attachCodeMeta() {
   return tree => {
-    visit(tree, 'span', node => {
+    visit(tree, 'div', node => {
       if (!('data-rehype-pretty-code-fragment' in node.properties)) return
       node.properties['data-nextra-code'] = ''
       if ('__nextra_filename__' in node) {

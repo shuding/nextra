@@ -139,7 +139,7 @@ article {
   a code {
     @apply text-current no-underline;
   }
-  span[data-nextra-code][data-filename] {
+  [data-nextra-code][data-filename] {
     @apply block relative;
 
     &::before {
