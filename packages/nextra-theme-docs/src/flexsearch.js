@@ -12,6 +12,9 @@ import Link from 'next/link'
 import FlexSearch from 'flexsearch'
 import { Transition } from '@headlessui/react/dist/index.esm'
 
+import { useConfig } from './config'
+import renderComponent from './utils/render-component'
+
 const Item = ({ page, title, active, href, onMouseOver, excerpt }) => {
   return (
     <Link href={href}>
@@ -66,14 +69,16 @@ const MemoedStringWithMatchHighlights = memo(
 const indexes = {}
 
 export default function Search() {
+  const config = useConfig()
   const router = useRouter()
+  const [loading, setLoading] = useState(false)
   const [show, setShow] = useState(false)
   const [search, setSearch] = useState('')
   const [active, setActive] = useState(0)
   const [results, setResults] = useState([])
   const input = useRef(null)
 
-  useEffect(() => {
+  const doSearch = () => {
     if (!search) return
 
     const localeCode = Router.locale || 'default'
@@ -108,7 +113,8 @@ export default function Search() {
       })
 
     setResults(results)
-  }, [search])
+  }
+  useEffect(doSearch, [search])
 
   const handleKeyDown = useCallback(
     e => {
@@ -150,10 +156,12 @@ export default function Search() {
 
   const load = async () => {
     const localeCode = Router.locale || 'default'
-    if (!indexes[localeCode]) {
+    if (!indexes[localeCode] && !loading) {
+      setLoading(true)
       const data = await (
         await fetch(`/.nextra/data-${localeCode}.json`)
       ).json()
+      await new Promise(res => setTimeout(res, 3000))
 
       const index = new FlexSearch.Document({
         cache: 100,
@@ -204,6 +212,8 @@ export default function Search() {
       }
 
       indexes[localeCode] = index
+      setLoading(false)
+      setSearch(s => s + ' ') // Trigger the effect
     }
   }
 
@@ -247,7 +257,13 @@ export default function Search() {
           }}
           className="block w-full px-3 py-2 leading-tight rounded-lg appearance-none focus:outline-none focus:ring-1 focus:ring-gray-200 focus:bg-white hover:bg-opacity-5 transition-colors dark:focus:bg-dark dark:focus:ring-gray-100 dark:focus:ring-opacity-20"
           type="search"
-          placeholder="Search documentation..."
+          placeholder={renderComponent(
+            config.searchPlaceholder,
+            {
+              locale: router.locale
+            },
+            true
+          )}
           onKeyDown={handleKeyDown}
           onFocus={() => {
             load()
@@ -273,10 +289,34 @@ export default function Search() {
         leaveTo="opacity-0"
       >
         <ul className="absolute z-20 p-0 m-0 mt-2 top-full">
-          {results.length === 0 ? (
-            <span className="block p-4 text-center text-gray-400 text-sm select-none">
-              No results found.
+          {loading ? (
+            <span className="p-8 text-center text-gray-400 text-sm select-none flex justify-center">
+              <svg
+                className="animate-spin -ml-1 mr-2 h-5 w-5 text-gray-400"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                ></circle>
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                ></path>
+              </svg>
+              <span>Loading...</span>
             </span>
+          ) : results.length === 0 ? (
+            renderComponent(config.unstable_searchResultEmpty, {
+              locale: router.locale
+            })
           ) : (
             results.map((res, i) => {
               return (
