@@ -21,9 +21,7 @@ export default function LocaleSwitch({ options }: LocaleSwitchProps) {
         document.cookie = `NEXT_LOCALE=${
           option.key
         }; expires=${date.toUTCString()}; path=/`
-        router.push(asPath, undefined, {
-          locale: option.key
-        })
+        window.location.href = asPath
       }}
       selected={{
         key: selected.locale,
