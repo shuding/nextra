@@ -1,0 +1,218 @@
+// Vitest Snapshot v1
+
+exports[`process heading > dynamic-h1 1`] = `
+{
+  "hasH1": true,
+  "headings": [
+    {
+      "children": [
+        {
+          "position": {
+            "end": {
+              "column": 22,
+              "line": 8,
+              "offset": 153,
+            },
+            "start": {
+              "column": 3,
+              "line": 8,
+              "offset": 134,
+            },
+          },
+          "type": "text",
+          "value": "Posts Tagged with “",
+        },
+        {
+          "attributes": [],
+          "children": [],
+          "data": {
+            "_mdxExplicitJsx": true,
+          },
+          "name": "TagName",
+          "position": {
+            "end": {
+              "column": 32,
+              "line": 8,
+              "offset": 163,
+            },
+            "start": {
+              "column": 22,
+              "line": 8,
+              "offset": 153,
+            },
+          },
+          "type": "mdxJsxTextElement",
+        },
+        {
+          "position": {
+            "end": {
+              "column": 33,
+              "line": 8,
+              "offset": 164,
+            },
+            "start": {
+              "column": 32,
+              "line": 8,
+              "offset": 163,
+            },
+          },
+          "type": "text",
+          "value": "”",
+        },
+      ],
+      "depth": 1,
+      "position": {
+        "end": {
+          "column": 33,
+          "line": 8,
+          "offset": 164,
+        },
+        "start": {
+          "column": 1,
+          "line": 8,
+          "offset": 132,
+        },
+      },
+      "type": "heading",
+      "value": "Posts Tagged with “”",
+    },
+  ],
+  "result": "/*@jsxRuntime automatic @jsxImportSource react*/
+import {useMDXComponents as _provideComponents} from \\"@mdx-js/react\\";
+import {useRouter} from 'next/router';
+export const TagName = () => {
+  const {tag} = useRouter().query;
+  return tag || null;
+};
+function MDXContent(props = {}) {
+  const {wrapper: MDXLayout} = Object.assign({}, _provideComponents(), props.components);
+  return MDXLayout ? <MDXLayout {...props}><_createMdxContent /></MDXLayout> : _createMdxContent();
+  function _createMdxContent() {
+    const _components = Object.assign({
+      h1: \\"h1\\"
+    }, _provideComponents(), props.components);
+    return <_components.h1>{\\"Posts Tagged with “\\"}<TagName />{\\"”\\"}</_components.h1>;
+  }
+}
+export default MDXContent;
+",
+  "structurizedData": {},
+}
+`;
+
+exports[`process heading > no-h1 1`] = `
+{
+  "hasH1": false,
+  "headings": [
+    {
+      "children": [
+        {
+          "position": {
+            "end": {
+              "column": 6,
+              "line": 1,
+              "offset": 5,
+            },
+            "start": {
+              "column": 4,
+              "line": 1,
+              "offset": 3,
+            },
+          },
+          "type": "text",
+          "value": "H2",
+        },
+      ],
+      "depth": 2,
+      "position": {
+        "end": {
+          "column": 6,
+          "line": 1,
+          "offset": 5,
+        },
+        "start": {
+          "column": 1,
+          "line": 1,
+          "offset": 0,
+        },
+      },
+      "type": "heading",
+      "value": "H2",
+    },
+  ],
+  "result": "/*@jsxRuntime automatic @jsxImportSource react*/
+import {useMDXComponents as _provideComponents} from \\"@mdx-js/react\\";
+function MDXContent(props = {}) {
+  const {wrapper: MDXLayout} = Object.assign({}, _provideComponents(), props.components);
+  return MDXLayout ? <MDXLayout {...props}><_createMdxContent /></MDXLayout> : _createMdxContent();
+  function _createMdxContent() {
+    const _components = Object.assign({
+      h2: \\"h2\\"
+    }, _provideComponents(), props.components);
+    return <_components.h2>{\\"H2\\"}</_components.h2>;
+  }
+}
+export default MDXContent;
+",
+  "structurizedData": {},
+}
+`;
+
+exports[`process heading > static-h1 1`] = `
+{
+  "hasH1": true,
+  "headings": [
+    {
+      "children": [
+        {
+          "position": {
+            "end": {
+              "column": 14,
+              "line": 1,
+              "offset": 13,
+            },
+            "start": {
+              "column": 3,
+              "line": 1,
+              "offset": 2,
+            },
+          },
+          "type": "text",
+          "value": "Hello World",
+        },
+      ],
+      "depth": 1,
+      "position": {
+        "end": {
+          "column": 14,
+          "line": 1,
+          "offset": 13,
+        },
+        "start": {
+          "column": 1,
+          "line": 1,
+          "offset": 0,
+        },
+      },
+      "type": "heading",
+      "value": "Hello World",
+    },
+  ],
+  "result": "/*@jsxRuntime automatic @jsxImportSource react*/
+import {useMDXComponents as _provideComponents} from \\"@mdx-js/react\\";
+function MDXContent(props = {}) {
+  const {wrapper: MDXLayout} = Object.assign({}, _provideComponents(), props.components);
+  return MDXLayout ? <MDXLayout {...props}><_createMdxContent /></MDXLayout> : _createMdxContent();
+  function _createMdxContent() {
+    const _components = Object.assign({
+      h1: \\"h1\\"
+    }, _provideComponents(), props.components);
+    return <_components.h1>{\\"Hello World\\"}</_components.h1>;
+  }
+}
+export default MDXContent;
+",
+  "structurizedData": {},
+  "titleText": "Hello World",
+}
+`;

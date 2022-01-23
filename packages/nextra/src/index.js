@@ -1,3 +1,4 @@
+import { NextraPlugin, pageMapCache } from './plugin'
 const defaultExtensions = ['js', 'jsx', 'ts', 'tsx']
 const markdownExtensions = ['md', 'mdx']
 const markdownExtensionTest = /\.mdx?$/
@@ -28,18 +29,23 @@ module.exports =
     return Object.assign({}, nextConfig, {
       pageExtensions,
       webpack(config, options) {
+        const nextra = new NextraPlugin()
+        if (!config.plugins) {
+          config.plugins = [nextra]
+        } else {
+          config.plugins.push(nextra)
+        }
+
         config.module.rules.push({
           test: markdownExtensionTest,
           use: [
             options.defaultLoaders.babel,
             {
               loader: 'nextra/loader',
-              options: { ...nextraConfig, locales, defaultLocale }
+              options: { ...nextraConfig, locales, defaultLocale, pageMapCache }
             }
           ]
         })
-
-        if (!config.plugins) config.plugins = []
 
         if (typeof nextConfig.webpack === 'function') {
           return nextConfig.webpack(config, options)

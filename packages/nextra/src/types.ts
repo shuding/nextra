@@ -1,5 +1,6 @@
 import { Heading as MDASTHeading } from 'mdast'
 import { ProcessorOptions } from '@mdx-js/mdx'
+import { PageMapCache } from './plugin'
 export interface LoaderOptions {
   theme: Theme
   themeConfig: string
@@ -8,6 +9,7 @@ export interface LoaderOptions {
   unstable_staticImage: boolean
   unstable_contentDump: boolean
   mdxOptions: Pick<ProcessorOptions, 'rehypePlugins' | 'remarkPlugins'>
+  pageMapCache: PageMapCache
 }
 
 export interface PageMapItem {

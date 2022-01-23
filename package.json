@@ -12,7 +12,8 @@
     "build:theme-blog": "pnpm run build --filter nextra-theme-blog",
     "build:theme-docs": "pnpm run build --filter nextra-theme-docs",
     "version-beta": "lerna version --preid beta",
-    "publish-beta": "lerna publish from-package --canary --preid beta --pre-dist-tag beta"
+    "publish-beta": "lerna publish from-package --canary --preid beta --pre-dist-tag beta",
+    "test": "turbo run test"
   },
   "devDependencies": {
     "@types/react": "^17.0.38",
@@ -32,6 +33,7 @@
   "packageManager": "pnpm@6.27.1",
   "turbo": {
     "baseBranch": "origin/core",
+    "npmClient": "pnpm",
     "pipeline": {
       "build": {
         "dependsOn": [
@@ -47,6 +49,8 @@
           "ssg.js",
           "loader.js"
         ]
+      },
+      "test": {
       },
       "types": {
         "outputs": [

@@ -1,7 +1,9 @@
-import gracefulFs from 'graceful-fs'
+import fs from 'graceful-fs'
 import path from 'path'
+import { promisify } from 'util'
 
-const { promises: fs, statSync, mkdirSync } = gracefulFs
+const { statSync, mkdirSync } = fs
+
 
 const assetDir = path.join(process.cwd(), 'public', '.nextra')
 const asset: { [locale: string]: any } = {}
@@ -33,5 +35,5 @@ export async function addPage({
     data: structurizedData
   }
   const dataFile = path.join(assetDir, `data-${fileLocale}.json`)
-  await fs.writeFile(dataFile, JSON.stringify(asset[fileLocale]))
+  await promisify(fs.writeFile)(dataFile, JSON.stringify(asset[fileLocale]))
 }
