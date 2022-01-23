@@ -22,10 +22,10 @@
   },
   "dependencies": {
     "@mdx-js/mdx": "^2.0.0-rc.2",
-    "@shuding/rehype-pretty-code": "^0.0.1",
     "github-slugger": "^1.4.0",
     "graceful-fs": "^4.2.6",
     "gray-matter": "^4.0.3",
+    "rehype-pretty-code": "^0.1.0",
     "remark-gfm": "^3.0.1",
     "shiki": "0.10.0",
     "slash": "^3.0.0",

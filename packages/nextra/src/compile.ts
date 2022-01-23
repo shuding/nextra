@@ -1,6 +1,6 @@
 import { createProcessor, ProcessorOptions } from '@mdx-js/mdx'
 import remarkGfm from 'remark-gfm'
-import rehypePrettyCode from '@shuding/rehype-pretty-code'
+import rehypePrettyCode from 'rehype-pretty-code'
 import { remarkStaticImage } from './mdx-plugins/static-image'
 import remarkHeadings, { HeadingMeta } from './mdx-plugins/get-headers'
 import { LoaderOptions } from './types'
