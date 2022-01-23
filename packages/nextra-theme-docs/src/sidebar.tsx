@@ -195,8 +195,8 @@ export default function Sidebar({
   return (
     <aside
       className={cn(
-        'fixed flex-shrink-0 w-full md:w-64 md:sticky z-[15] top-[4rem] self-start overflow-y-auto h-full md:h-auto bg-white dark:bg-dark md:bg-transparent',
-        menu ? '' : 'hidden',
+        'fixed flex-shrink-0 w-full md:w-64 md:sticky z-[15] top-[4rem] self-start overflow-y-auto h-full md:h-auto',
+        menu ? 'bg-white dark:bg-dark' : 'bg-transparent hidden',
         asPopover ? 'md:hidden' : 'md:block'
       )}
       style={{
