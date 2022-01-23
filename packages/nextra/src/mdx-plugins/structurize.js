@@ -1,5 +1,13 @@
 import Slugger from 'github-slugger'
 
+function cleanup(content) {
+  return content
+    .trim()
+    .split('\n')
+    .map(line => line.trim())
+    .join('\n')
+}
+
 export default structurizedData => {
   const slugger = new Slugger()
   let activeSlug = ''
@@ -10,7 +18,7 @@ export default structurizedData => {
     // @ts-expect-error: assume content model (for root) matches.
     return node => {
       walk(node)
-      structurizedData[activeSlug] = content
+      structurizedData[activeSlug] = cleanup(content)
       return node
     }
 
@@ -66,7 +74,7 @@ export default structurizedData => {
       if (type === 'heading') skip = false
 
       if (type === 'heading' && node.depth > 1) {
-        structurizedData[activeSlug] = content
+        structurizedData[activeSlug] = cleanup(content)
         content = ''
         activeSlug = slugger.slug(result) + '#' + result
       }

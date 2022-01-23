@@ -216,9 +216,9 @@ article {
     width: 100vw;
   }
   ul {
-    @apply rounded-xl backdrop-blur-lg bg-white bg-opacity-[.7] text-gray-100 ring-1 ring-black ring-opacity-5 py-2.5 overflow-hidden overscroll-contain shadow-xl list-none;
+    @apply rounded-xl backdrop-blur-lg bg-white bg-opacity-[.7] text-gray-100 ring-1 ring-black ring-opacity-5 overflow-hidden overscroll-contain shadow-xl list-none;
     li {
-      @apply text-gray-800 break-words mx-2.5 p-2.5 rounded-md;
+      @apply text-gray-800 break-words mx-2.5 px-2.5 py-2 rounded-md;
       .highlight {
         @apply underline decoration-prime-400 text-prime-500;
       }

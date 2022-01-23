@@ -150,7 +150,7 @@ const Search = ({ directories = [] }: SearchProps) => {
         )}
       </div>
       {renderList && (
-        <ul className="absolute left-0 z-20 w-full p-0 m-0 mt-1 list-none border divide-y rounded shadow-md md:right-0 top-100 md:w-auto">
+        <ul className="absolute left-0 z-20 w-full p-0 py-2.5 m-0 mt-1 list-none border divide-y rounded shadow-md md:right-0 top-100 md:w-auto">
           {results.map((res, i) => {
             return (
               <Item

@@ -15,23 +15,29 @@ import { Transition } from '@headlessui/react/dist/index.esm'
 import { useConfig } from './config'
 import renderComponent from './utils/render-component'
 
-const Item = ({ page, title, active, href, onMouseOver, excerpt }) => {
+const Item = ({ page, first, title, active, href, onHover, excerpt }) => {
   return (
-    <Link href={href}>
-      <a className="block no-underline" onMouseOver={onMouseOver}>
-        <li className={cn({ active })}>
-          <div className="font-bold uppercase text-xs text-gray-400">
-            {page}
-          </div>
-          <div className="font-semibold dark:text-white">{title}</div>
-          {excerpt ? (
-            <div className="excerpt mt-1 text-gray-600 text-sm leading-[1.35rem] dark:text-gray-400">
-              {excerpt}
+    <>
+      {first ? (
+        <div className="mx-2.5 px-2.5 pb-1.5 mb-2 mt-6 first:mt-0 border-b font-semibold uppercase text-xs text-gray-500 select-none dark:text-gray-300 dark:border-opacity-10">
+          {page}
+        </div>
+      ) : null}
+      <Link href={href}>
+        <a className="block no-underline" onMouseMove={onHover}>
+          <li className={cn({ active })}>
+            <div className="font-semibold dark:text-white leading-5">
+              {title}
             </div>
-          ) : null}
-        </li>
-      </a>
-    </Link>
+            {excerpt ? (
+              <div className="excerpt mt-1 text-gray-600 text-sm leading-[1.35rem] dark:text-gray-400">
+                {excerpt}
+              </div>
+            ) : null}
+          </li>
+        </a>
+      </Link>
+    </>
   )
 }
 
@@ -86,14 +92,24 @@ export default function Search() {
 
     if (!index) return
 
+    const pages = {}
     const results = []
       .concat(
         ...index
           .search(search, { enrich: true, limit: 10, suggest: true })
           .map(r => r.result)
       )
+      .map((r, i) => ({ ...r, index: i }))
+      .sort((a, b) => {
+        if (a.doc.page !== b.doc.page) return a.doc.page > b.doc.page ? 1 : -1
+        return a.index - b.index
+      })
       .map(item => {
+        const firstItemOfPage = !pages[item.doc.page]
+        pages[item.doc.page] = true
+
         return {
+          first: firstItemOfPage,
           route: item.doc.url,
           page: item.doc.page,
           title: (
@@ -124,10 +140,13 @@ export default function Search() {
           if (active + 1 < results.length) {
             setActive(active + 1)
             const activeElement = document.querySelector(
-              `.nextra-flexsearch ul > :nth-child(${active + 2})`
+              `.nextra-flexsearch ul > a:nth-of-type(${active + 2})`
             )
-            if (activeElement && activeElement.scrollIntoViewIfNeeded) {
-              activeElement.scrollIntoViewIfNeeded()
+            if (activeElement && activeElement.scrollIntoView) {
+              activeElement.scrollIntoView({
+                behavior: 'smooth',
+                block: 'nearest'
+              })
             }
           }
           break
@@ -137,10 +156,13 @@ export default function Search() {
           if (active - 1 >= 0) {
             setActive(active - 1)
             const activeElement = document.querySelector(
-              `.nextra-flexsearch ul > :nth-child(${active})`
+              `.nextra-flexsearch ul > a:nth-of-type(${active})`
             )
-            if (activeElement && activeElement.scrollIntoViewIfNeeded) {
-              activeElement.scrollIntoViewIfNeeded()
+            if (activeElement && activeElement.scrollIntoView) {
+              activeElement.scrollIntoView({
+                behavior: 'smooth',
+                block: 'nearest'
+              })
             }
           }
           break
@@ -161,7 +183,6 @@ export default function Search() {
       const data = await (
         await fetch(`/.nextra/data-${localeCode}.json`)
       ).json()
-      await new Promise(res => setTimeout(res, 3000))
 
       const index = new FlexSearch.Document({
         cache: 100,
@@ -288,7 +309,7 @@ export default function Search() {
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
       >
-        <ul className="absolute z-20 p-0 m-0 mt-2 top-full">
+        <ul className="absolute z-20 p-0 m-0 mt-2 top-full py-2.5">
           {loading ? (
             <span className="p-8 text-center text-gray-400 text-sm select-none flex justify-center">
               <svg
@@ -321,13 +342,14 @@ export default function Search() {
             results.map((res, i) => {
               return (
                 <Item
+                  first={res.first}
                   key={`search-item-${i}`}
                   page={res.page}
                   title={res.title}
                   href={res.route}
                   excerpt={res.excerpt}
                   active={i === active}
-                  onMouseOver={() => setActive(i)}
+                  onHover={() => setActive(i)}
                 />
               )
             })
