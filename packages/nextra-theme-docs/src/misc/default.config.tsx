@@ -32,6 +32,15 @@ const defaultTheme = {
       <meta property="og:description" content="Nextra: the next docs builder" />
       <meta name="apple-mobile-web-app-title" content="Nextra" />
     </React.Fragment>
+  ),
+  searchPlaceholder: ({ locale }: { locale?: string }) => {
+    if (locale === 'zh-CN') return '搜索文档...'
+    return 'Search documentation...'
+  },
+  unstable_searchResultEmpty: () => (
+    <span className="block p-8 text-center text-gray-400 text-sm select-none">
+      No results found.
+    </span>
   )
   // direction: 'ltr',
   // i18n: [{ locale: 'en-US', text: 'English', direction: 'ltr' }],

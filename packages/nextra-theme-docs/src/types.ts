@@ -30,13 +30,22 @@ export interface DocsThemeConfig {
   logo?: React.ReactNode
   direction?: string
   i18n?: { locale: string; text: string; direction: string }[]
-  unstable_faviconGlyph?: string
   customSearch?: boolean
-  unstable_flexsearch?: boolean
+  searchPlaceholder?: string | ((props: { locale?: string }) => string)
   projectLink?: string
   github?: string
   projectLinkIcon?: React.FC<{ locale: string }>
   projectChatLink?: string
   projectChatLinkIcon?: React.FC<{ locale: string }>
   floatTOC?: boolean
+  unstable_faviconGlyph?: string
+  unstable_flexsearch?: boolean
+  unstable_searchResultEmpty?:
+    | React.ReactNode
+    | React.FC<{
+        locale: string
+        config: DocsThemeConfig
+        title: string
+        meta: Record<string, any>
+      }>
 }

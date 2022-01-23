@@ -5,6 +5,8 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import type { MouseEventHandler } from 'react'
 import type { Item as NormalItem } from './utils/normalize-pages'
+import renderComponent from './utils/render-component'
+import { useConfig } from './config'
 interface ItemProps {
   title: string
   active: boolean
@@ -39,6 +41,7 @@ interface SearchProps {
 
 const Search = ({ directories = [] }: SearchProps) => {
   const router = useRouter()
+  const config = useConfig()
   const [show, setShow] = useState(false)
   const [search, setSearch] = useState('')
   const [active, setActive] = useState(0)
@@ -125,7 +128,13 @@ const Search = ({ directories = [] }: SearchProps) => {
           }}
           className="block w-full px-3 py-2 leading-tight bg-black bg-opacity-[.03] rounded-lg appearance-none focus:outline-none focus:ring hover:bg-opacity-5 transition-colors"
           type="search"
-          placeholder="Search documentation..."
+          placeholder={renderComponent(
+            config.searchPlaceholder,
+            {
+              locale: router.locale
+            },
+            true
+          )}
           onKeyDown={handleKeyDown}
           onFocus={() => setShow(true)}
           onBlur={() => setShow(false)}
@@ -141,7 +150,7 @@ const Search = ({ directories = [] }: SearchProps) => {
         )}
       </div>
       {renderList && (
-        <ul className="absolute left-0 z-20 w-full p-0 m-0 mt-1 list-none border divide-y rounded shadow-md md:right-0 top-100 md:w-auto">
+        <ul className="absolute left-0 z-20 w-full p-0 py-2.5 m-0 mt-1 list-none border divide-y rounded shadow-md md:right-0 top-100 md:w-auto">
           {results.map((res, i) => {
             return (
               <Item
