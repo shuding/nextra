@@ -8,6 +8,7 @@ importers:
       '@types/react-dom': ^17.0.11
       next: ^12.0.8
       prettier: ^2.5.1
+      prettier-plugin-tailwindcss: ^0.1.1
       react: ^17.0.2
       react-dom: ^17.0.2
       turbo: ^1.1.0-canary.1
@@ -16,6 +17,7 @@ importers:
       '@types/react-dom': 17.0.11
       next: 12.0.8_react-dom@17.0.2+react@17.0.2
       prettier: 2.5.1
+      prettier-plugin-tailwindcss: 0.1.1_prettier@2.5.1
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       turbo: 1.1.0-canary.1
@@ -4551,6 +4553,14 @@ packages:
       nanoid: 3.1.30
       picocolors: 1.0.0
       source-map-js: 1.0.1
+
+  /prettier-plugin-tailwindcss/0.1.1_prettier@2.5.1:
+    resolution: {integrity: sha512-mjwWE0fswYMiYw4KlcINXw5It6nXfJl3N0+eVFtuvjw+cJjFmErE7hXYJZnUSFSWXJacpCjx1KVkxSOolu4zBw==}
+    peerDependencies:
+      prettier: '>=2.2.0'
+    dependencies:
+      prettier: 2.5.1
+    dev: true
 
   /prettier/2.5.1:
     resolution: {integrity: sha512-vBZcPRUR5MZJwoyi3ZoyQlc1rXeEck8KgeC9AwwOn+exuxLxq5toTRDTSaVrXHxelDMHy9zlicw8u66yxoSUFg==}

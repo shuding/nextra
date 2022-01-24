@@ -234,7 +234,7 @@ export default function Search() {
 
       indexes[localeCode] = index
       setLoading(false)
-      setSearch(s => s + ' ') // Trigger the effect
+      setSearch(s => (s ? s + ' ' : s)) // Trigger the effect
     }
   }
 
