@@ -1,9 +1,7 @@
 import fs from 'graceful-fs'
 import path from 'path'
-import { promisify } from 'util'
 
 const { statSync, mkdirSync } = fs
-
 
 const assetDir = path.join(process.cwd(), 'public', '.nextra')
 const asset: { [locale: string]: any } = {}
@@ -35,5 +33,8 @@ export async function addPage({
     data: structurizedData
   }
   const dataFile = path.join(assetDir, `data-${fileLocale}.json`)
-  await promisify(fs.writeFile)(dataFile, JSON.stringify(asset[fileLocale]))
+  // To prevent race conditions, we temporarily use the sync method to flush.
+  // @TODO: introduce mutex lock, or only generate the asset when finishing the
+  // entire build.
+  fs.writeFileSync(dataFile, JSON.stringify(asset[fileLocale]))
 }
