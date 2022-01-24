@@ -23,9 +23,10 @@ export function getPageMap(
 ) {
   const activeRouteLocale = getLocaleFromFilename(currentResourcePath)
   const pageItem = fileMap[currentResourcePath]
-  const metaName = path.dirname(currentResourcePath)
+  const metaPath = path.dirname(currentResourcePath)
+  const metaExtension = activeRouteLocale ? `${activeRouteLocale}.json` : `json`
   const pageMeta =
-    fileMap[`${metaName}/meta.${activeRouteLocale}.json`]?.meta?.[pageItem.name]
+    fileMap[`${metaPath}/meta.${metaExtension}`]?.meta?.[pageItem.name]
   const title =
     (typeof pageMeta === 'string' ? pageMeta : pageMeta?.title) || pageItem.name
   if (activeRouteLocale) {
