@@ -95,7 +95,7 @@ export default async function (
 
   if (unstable_contentDump) {
     // We only add .MD and .MDX contents
-    if (extension.test(filename)) {
+    if (extension.test(filename) && data.searchable !== false) {
       await addPage({
         fileLocale,
         route,
