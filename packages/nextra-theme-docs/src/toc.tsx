@@ -29,7 +29,7 @@ const createEditUrl = (repository?: string, filepath?: string) => {
   return '#'
 }
 
-const createFeedbackUrl = (
+const useCreateFeedbackUrl = (
   repository?: string,
   filepath?: string,
   labels?: string
@@ -96,7 +96,7 @@ const FeedbackLink = ({
   filepath: string
   labels?: string
 }) => {
-  const url = createFeedbackUrl(repository, filepath, labels)
+  const url = useCreateFeedbackUrl(repository, filepath, labels)
   const { locale } = useRouter()
   return (
     <a
