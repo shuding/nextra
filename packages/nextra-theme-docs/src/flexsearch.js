@@ -99,8 +99,14 @@ export default function Search() {
           .search(search, { enrich: true, limit: 10, suggest: true })
           .map(r => r.result)
       )
-      .map((r, i) => ({ ...r, index: i }))
+      .map((r, i) => ({
+        ...r,
+        index: i,
+        matchTitle:
+          r.doc.content.indexOf(search) > r.doc.content.indexOf(' _NEXTRA_ ')
+      }))
       .sort((a, b) => {
+        if (a.matchTitle !== b.matchTitle) return a.matchTitle ? -1 : 1
         if (a.doc.page !== b.doc.page) return a.doc.page > b.doc.page ? 1 : -1
         return a.index - b.index
       })
@@ -181,7 +187,7 @@ export default function Search() {
     if (!indexes[localeCode] && !loading) {
       setLoading(true)
       const data = await (
-        await fetch(`/.nextra/data-${localeCode}.json`)
+        await fetch(`/_next/static/chunks/nextra-data-${localeCode}.json`)
       ).json()
 
       const index = new FlexSearch.Document({
@@ -234,7 +240,7 @@ export default function Search() {
 
       indexes[localeCode] = index
       setLoading(false)
-      setSearch(s => s + ' ') // Trigger the effect
+      setSearch(s => (s ? s + ' ' : s)) // Trigger the effect
     }
   }
 

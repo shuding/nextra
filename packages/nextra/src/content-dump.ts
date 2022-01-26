@@ -3,7 +3,7 @@ import path from 'path'
 
 const { statSync, mkdirSync } = fs
 
-const assetDir = path.join(process.cwd(), 'public', '.nextra')
+const assetDir = path.join(process.cwd(), '.next', 'static', 'chunks')
 const asset: { [locale: string]: any } = {}
 
 try {
@@ -32,7 +32,7 @@ export async function addPage({
     title: title || data.title,
     data: structurizedData
   }
-  const dataFile = path.join(assetDir, `data-${fileLocale}.json`)
+  const dataFile = path.join(assetDir, `nextra-data-${fileLocale}.json`)
   // To prevent race conditions, we temporarily use the sync method to flush.
   // @TODO: introduce mutex lock, or only generate the asset when finishing the
   // entire build.

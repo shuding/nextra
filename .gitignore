@@ -12,7 +12,4 @@ packages/nextra-theme-*/style.css
 */**/public/*.st
 */**/public/*.toml
 
-# Nextra index
-*/**/public/.nextra
-
 .vercel
