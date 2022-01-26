@@ -8,7 +8,7 @@ export function locales(request: NextRequest) {
   const shouldHandleLocale =
     !PUBLIC_FILE.test(nextUrl.pathname) &&
     !nextUrl.pathname.includes('/api/') &&
-    !nextUrl.pathname.includes('/.nextra/') &&
+    !nextUrl.pathname.includes('/_next/') &&
     nextUrl.locale !== ''
   if (!shouldHandleLocale) return
 
