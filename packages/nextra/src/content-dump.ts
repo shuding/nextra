@@ -9,7 +9,7 @@ const asset: { [locale: string]: any } = {}
 try {
   statSync(assetDir)
 } catch (err) {
-  mkdirSync(assetDir)
+  mkdirSync(assetDir, { recursive: true })
 }
 
 export async function addPage({
