@@ -21,23 +21,6 @@
   @apply not-sr-only fixed ml-6 top-0 bg-white text-lg px-6 py-2 mt-2 outline-none focus:ring z-50;
 }
 
-code {
-  @apply text-sm;
-}
-
-.prism-code.language-diff .inserted.prefix,
-.prism-code.language-diff .deleted.prefix {
-  user-select: none;
-  @apply opacity-30;
-}
-
-.prism-code.language-diff .inserted.line {
-  @apply text-green-600;
-}
-.prism-code.language-diff .deleted.line {
-  @apply text-red-600;
-}
-
 .dark .invert-on-dark {
   filter: invert(1) brightness(1.8);
 }

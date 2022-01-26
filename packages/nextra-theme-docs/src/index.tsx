@@ -38,21 +38,20 @@ interface BodyProps {
   meta: Record<string, any>
   toc?: React.ReactNode
   navLinks: React.ReactNode
-  MDXContent: React.FC
 }
 
-function Body({ meta, toc, navLinks, MDXContent }: BodyProps) {
+const Body: React.FC<BodyProps> = ({ meta, toc, navLinks, children }) => {
   return (
     <React.Fragment>
       <SkipNavContent />
       {meta.full ? (
         <article className="relative w-full overflow-x-hidden">
-          <MDXContent />
+          <MDXTheme>{children}</MDXTheme>
         </article>
       ) : (
         <article className="docs-container relative pb-8 w-full max-w-full flex min-w-0 pr-[calc(env(safe-area-inset-right)-1.5rem)]">
           <main className="mx-auto max-w-4xl px-6 md:px-8 pt-4 z-10 min-w-0 w-full">
-            <MDXTheme MDXContent={MDXContent} />
+            <MDXTheme>{children}</MDXTheme>
             {navLinks}
           </main>
           {toc}
@@ -66,20 +65,18 @@ interface LayoutProps {
   filename: string
   pageMap: PageMapItem[]
   meta: Record<string, any>
-  children: React.ReactNode
-  MDXContent: React.FC
   titleText: string
   headings: Heading[]
 }
 
-const Layout = ({
+const Layout: React.FC<LayoutProps> = ({
   filename,
   pageMap,
   meta,
   titleText,
-  MDXContent,
-  headings
-}: LayoutProps) => {
+  headings,
+  children
+}) => {
   const { route, locale } = useRouter()
   const config = useConfig()
 
@@ -138,7 +135,9 @@ const Layout = ({
                     isRTL={isRTL}
                     asPopover
                   />
-                  <Body meta={meta} navLinks={null} MDXContent={MDXContent} />
+                  <Body meta={meta} navLinks={null}>
+                    {children}
+                  </Body>
                 </div>
               </div>
             </ActiveAnchor>
@@ -195,8 +194,9 @@ const Layout = ({
                       isRTL={isRTL}
                     />
                   }
-                  MDXContent={MDXContent}
-                />
+                >
+                  {children}
+                </Body>
               </div>
             </div>
           </ActiveAnchor>
