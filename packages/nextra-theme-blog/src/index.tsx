@@ -242,8 +242,8 @@ const NextraBlog = (opts: PageOpt, _config: NextraBlogTheme) => {
     return (
       <ThemeProvider
         attribute="class"
-        defaultTheme="system"
-        enableSystem={true}
+        defaultTheme={config.forceTheme ? config.forceTheme : "system"}
+        enableSystem={config.forceTheme ? false : true}
       >
         <Layout
           config={config}
