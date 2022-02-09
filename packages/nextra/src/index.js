@@ -1,4 +1,5 @@
 import { NextraPlugin, pageMapCache } from './plugin'
+
 const defaultExtensions = ['js', 'jsx', 'ts', 'tsx']
 const markdownExtensions = ['md', 'mdx']
 const markdownExtensionTest = /\.mdx?$/
@@ -29,7 +30,7 @@ module.exports =
     return Object.assign({}, nextConfig, {
       pageExtensions,
       webpack(config, options) {
-        const nextra = new NextraPlugin()
+        const nextra = new NextraPlugin(nextraConfig)
         if (!config.plugins) {
           config.plugins = [nextra]
         } else {

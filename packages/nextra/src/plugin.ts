@@ -1,4 +1,5 @@
 import { PageMapItem } from './types'
+const { readdir, readFile } = fs
 import fs from 'graceful-fs'
 import util from 'util'
 import { getLocaleFromFilename, parseJsonFile, removeExtension } from './utils'
@@ -7,7 +8,7 @@ import slash from 'slash'
 import grayMatter from 'gray-matter'
 import { extension, findPagesDir, metaExtension } from './page-map'
 import { Compiler } from 'webpack'
-const { readdir, readFile } = fs
+import { restoreCache } from './content-dump'
 
 export async function collectFiles(
   dir: string,
@@ -98,10 +99,19 @@ export class PageMapCache {
 export const pageMapCache = new PageMapCache()
 
 class NextraPlugin {
+  config: any
+  constructor(nextraConfig: any) {
+    this.config = nextraConfig
+  }
   apply(compiler: Compiler) {
     compiler.hooks.beforeCompile.tapAsync(
       'NextraPlugin',
       async (_, callback) => {
+        if (this.config && this.config.unstable_contentDump) {
+          // Restore the search data from the cache.
+          restoreCache()
+        }
+
         const result = await collectFiles(
           path.join(process.cwd(), findPagesDir()),
           '/'
