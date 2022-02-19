@@ -25,7 +25,7 @@
     "title": "Blog",
     "type": "page",
     "theme": {
-      "sidebar": true,
+      "sidebar": false,
       "toc": false,
       "footer": true
     }

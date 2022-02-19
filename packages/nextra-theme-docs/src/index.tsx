@@ -129,16 +129,14 @@ const Layout: React.FC<LayoutProps> = ({
           <ActiveAnchor>
             <div className="max-w-[90rem] w-full mx-auto">
               <div className="flex flex-1 h-full">
-                {themeContext.sidebar ? (
-                  <Sidebar
-                    directories={docsDirectories}
-                    flatDirectories={flatDirectories}
-                    fullDirectories={directories}
-                    headings={headings}
-                    isRTL={isRTL}
-                    asPopover={activeType === 'page'}
-                  />
-                ) : null}
+                <Sidebar
+                  directories={docsDirectories}
+                  flatDirectories={flatDirectories}
+                  fullDirectories={directories}
+                  headings={headings}
+                  isRTL={isRTL}
+                  asPopover={activeType === 'page' || !themeContext.sidebar}
+                />
                 <Body
                   meta={meta}
                   toc={
