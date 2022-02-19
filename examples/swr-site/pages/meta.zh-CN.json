@@ -1,19 +1,19 @@
 {
   "index": {
     "title": "简介",
-    "type": "nav",
+    "type": "page",
     "hidden": true
   },
   "docs": {
     "title": "文档",
-    "type": "nav"
+    "type": "page"
   },
   "examples": {
     "title": "示例",
-    "type": "nav"
+    "type": "page"
   },
   "blog": {
     "title": "博客",
-    "type": "nav"
+    "type": "page"
   }
 }

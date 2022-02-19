@@ -1,19 +1,19 @@
 {
   "index": {
     "title": "소개",
-    "type": "nav",
+    "type": "page",
     "hidden": true
   },
   "docs": {
     "title": "문서",
-    "type": "nav"
+    "type": "page"
   },
   "examples": {
     "title": "예시",
-    "type": "nav"
+    "type": "page"
   },
   "blog": {
     "title": "블로그",
-    "type": "nav"
+    "type": "page"
   }
 }

@@ -45,7 +45,7 @@ const Body: React.FC<BodyProps> = ({ meta, toc, navLinks, children }) => {
     <React.Fragment>
       <SkipNavContent />
       {meta.full ? (
-        <article className="relative w-full overflow-x-hidden">
+        <article className="full relative overflow-x-hidden">
           <MDXTheme>{children}</MDXTheme>
         </article>
       ) : (
@@ -83,6 +83,7 @@ const Layout: React.FC<LayoutProps> = ({
   const {
     activeType,
     activeIndex,
+    activeThemeContext,
     // pageDirectories,
     flatPageDirectories,
     docsDirectories,
@@ -101,54 +102,8 @@ const Layout: React.FC<LayoutProps> = ({
   }, [config.i18n, locale])
 
   const [menu, setMenu] = useState(false)
+  const themeContext = { ...activeThemeContext, ...meta }
 
-  if (activeType === 'nav') {
-    return (
-      <React.Fragment>
-        <Head title={title} locale={locale} meta={meta} />
-        <MenuContext.Provider
-          value={{
-            menu,
-            setMenu,
-            defaultMenuCollapsed: !!config.defaultMenuCollapsed
-          }}
-        >
-          <div
-            className={cn('nextra-container main-container flex flex-col', {
-              rtl: isRTL,
-              page: true
-            })}
-          >
-            <Navbar
-              isRTL={isRTL}
-              flatDirectories={flatDirectories}
-              flatPageDirectories={flatPageDirectories}
-            />
-            <ActiveAnchor>
-              <div className="max-w-[90rem] w-full mx-auto">
-                <div className="flex flex-1 h-full">
-                  <Sidebar
-                    directories={flatPageDirectories}
-                    flatDirectories={flatDirectories}
-                    fullDirectories={directories}
-                    headings={headings}
-                    isRTL={isRTL}
-                    asPopover
-                  />
-                  <Body meta={meta} navLinks={null}>
-                    {children}
-                  </Body>
-                </div>
-              </div>
-            </ActiveAnchor>
-            {config.footer ? <Footer menu /> : null}
-          </div>
-        </MenuContext.Provider>
-      </React.Fragment>
-    )
-  }
-
-  // Docs layout
   return (
     <React.Fragment>
       <Head title={title} locale={locale} meta={meta} />
@@ -164,35 +119,44 @@ const Layout: React.FC<LayoutProps> = ({
             rtl: isRTL
           })}
         >
-          <Navbar
-            isRTL={isRTL}
-            flatDirectories={flatDirectories}
-            flatPageDirectories={flatPageDirectories}
-          />
+          {themeContext.navbar ? (
+            <Navbar
+              isRTL={isRTL}
+              flatDirectories={flatDirectories}
+              flatPageDirectories={flatPageDirectories}
+            />
+          ) : null}
           <ActiveAnchor>
             <div className="max-w-[90rem] w-full mx-auto">
               <div className="flex flex-1 h-full">
-                <Sidebar
-                  directories={docsDirectories}
-                  flatDirectories={flatDirectories}
-                  fullDirectories={directories}
-                  headings={headings}
-                  isRTL={isRTL}
-                />
+                {themeContext.sidebar ? (
+                  <Sidebar
+                    directories={docsDirectories}
+                    flatDirectories={flatDirectories}
+                    fullDirectories={directories}
+                    headings={headings}
+                    isRTL={isRTL}
+                    asPopover={activeType === 'page'}
+                  />
+                ) : null}
                 <Body
                   meta={meta}
                   toc={
-                    <ToC
-                      headings={config.floatTOC ? headings : null}
-                      filepathWithName={filepathWithName}
-                    />
+                    activeType === 'page' ? null : themeContext.toc ? (
+                      <ToC
+                        headings={config.floatTOC ? headings : null}
+                        filepathWithName={filepathWithName}
+                      />
+                    ) : null
                   }
                   navLinks={
-                    <NavLinks
-                      flatDirectories={flatDocsDirectories}
-                      currentIndex={activeIndex}
-                      isRTL={isRTL}
-                    />
+                    activeType === 'page' ? null : themeContext.pagination ? (
+                      <NavLinks
+                        flatDirectories={flatDocsDirectories}
+                        currentIndex={activeIndex}
+                        isRTL={isRTL}
+                      />
+                    ) : null
                   }
                 >
                   {children}
@@ -200,7 +164,9 @@ const Layout: React.FC<LayoutProps> = ({
               </div>
             </div>
           </ActiveAnchor>
-          {config.footer ? <Footer menu={false} /> : null}
+          {themeContext.footer && config.footer ? (
+            <Footer menu={activeType === 'page' || !themeContext.sidebar} />
+          ) : null}
         </div>
       </MenuContext.Provider>
     </React.Fragment>

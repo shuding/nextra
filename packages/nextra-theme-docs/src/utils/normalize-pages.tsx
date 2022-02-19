@@ -2,6 +2,8 @@ import React from 'react'
 import { PageMapItem } from 'nextra'
 import getTitle from 'title'
 
+import defaultThemeContext from '../misc/theme-context'
+
 function getMetaTitle(meta: string | Record<string, any>) {
   if (typeof meta === 'string') return meta
   if (typeof meta === 'object') return meta.title
@@ -10,7 +12,7 @@ function getMetaTitle(meta: string | Record<string, any>) {
 
 function getMetaItemType(meta: string | Record<string, any>) {
   if (typeof meta === 'object') return meta.type
-  return 'docs'
+  return 'doc'
 }
 
 function getMetaHidden(meta: string | Record<string, any>) {
@@ -42,13 +44,15 @@ export default function normalizePages({
   locale,
   defaultLocale,
   route,
-  docsRoot = ''
+  docsRoot = '',
+  pageThemeContext = defaultThemeContext
 }: {
   list: PageMapItem[]
   locale?: string
   defaultLocale?: string
   route: string
   docsRoot?: string
+  pageThemeContext?: Record<keyof typeof defaultThemeContext, boolean>
 }) {
   let meta: string | Record<string, any> | undefined = ''
   for (let item of list) {
@@ -88,7 +92,8 @@ export default function normalizePages({
   const flatPageDirectories: PageItem[] = []
 
   let activeType: string | undefined = undefined
-  let activeIndex: number  = 0
+  let activeIndex: number = 0
+  let activeThemeContext = pageThemeContext
 
   list
     .filter(
@@ -112,19 +117,25 @@ export default function normalizePages({
     .forEach(a => {
       if (typeof meta !== 'object') return
       const title = getMetaTitle(meta[a.name]) || getTitle(a.name)
-      const type = getMetaItemType(meta[a.name]) || 'docs'
+      const type = getMetaItemType(meta[a.name]) || 'doc'
       const hidden = getMetaHidden(meta[a.name])
 
+      const extendedPageThemeContext = {
+        ...pageThemeContext,
+        ...meta[a.name]?.theme
+      }
+
       // If the doc is under the active page root.
-      const isCurrentDocsTree = type === 'docs' && route.startsWith(docsRoot)
+      const isCurrentDocsTree = type === 'doc' && route.startsWith(docsRoot)
 
       if (a.route === route) {
         activeType = type
+        activeThemeContext = extendedPageThemeContext
         switch (type) {
-          case 'nav':
+          case 'page':
             activeIndex = flatPageDirectories.length
             break
-          case 'docs':
+          case 'doc':
           default:
             if (isCurrentDocsTree) {
               activeIndex = flatDocsDirectories.length
@@ -138,7 +149,8 @@ export default function normalizePages({
             locale,
             defaultLocale,
             route,
-            docsRoot: type === 'nav' ? a.route : docsRoot
+            docsRoot: type === 'page' ? a.route : docsRoot,
+            pageThemeContext: extendedPageThemeContext
           })
         : undefined
 
@@ -147,13 +159,14 @@ export default function normalizePages({
           normalizedChildren.activeIndex !== undefined &&
           normalizedChildren.activeType !== undefined
         ) {
+          activeThemeContext = normalizedChildren.activeThemeContext
           activeType = normalizedChildren.activeType
           switch (activeType) {
-            case 'nav':
+            case 'page':
               activeIndex =
                 flatPageDirectories.length + normalizedChildren.activeIndex
               break
-            case 'docs':
+            case 'doc':
               activeIndex =
                 flatDocsDirectories.length + normalizedChildren.activeIndex
               break
@@ -183,7 +196,7 @@ export default function normalizePages({
 
       if (normalizedChildren) {
         switch (type) {
-          case 'nav':
+          case 'page':
             // @ts-expect-error normalizedChildren === true
             pageItem.children.push(...normalizedChildren.pageDirectories)
             docsDirectories.push(...normalizedChildren.docsDirectories)
@@ -199,7 +212,7 @@ export default function normalizePages({
             }
 
             break
-          case 'docs':
+          case 'doc':
           default:
             if (isCurrentDocsTree) {
               Array.isArray(docsItem.children) &&
@@ -218,10 +231,10 @@ export default function normalizePages({
       } else {
         flatDirectories.push(item)
         switch (type) {
-          case 'nav':
+          case 'page':
             flatPageDirectories.push(pageItem)
             break
-          case 'docs':
+          case 'doc':
           default:
             if (isCurrentDocsTree) {
               flatDocsDirectories.push(docsItem)
@@ -231,10 +244,10 @@ export default function normalizePages({
 
       directories.push(item)
       switch (type) {
-        case 'nav':
+        case 'page':
           pageDirectories.push(pageItem)
           break
-        case 'docs':
+        case 'doc':
         default:
           if (isCurrentDocsTree) {
             docsDirectories.push(docsItem)
@@ -245,6 +258,7 @@ export default function normalizePages({
   return {
     activeType,
     activeIndex,
+    activeThemeContext,
     directories,
     flatDirectories,
     docsDirectories,
