@@ -1,6 +1,6 @@
 {
   "name": "nextra",
-  "version": "2.0.0-alpha.24",
+  "version": "2.0.0-alpha.25",
   "description": "Next.js and MDX based site generator.",
   "main": "index.js",
   "files": [
@@ -18,7 +18,7 @@
     "dev": "node scripts/dev.js",
     "types": "tsc --project tsconfig.type.json",
     "test": "vitest run",
-    "prepublishOnly": "rm -rf dist && yarn build && yarn types"
+    "prepublishOnly": "rm -rf dist && pnpm build && pnpm types"
   },
   "dependencies": {
     "@mdx-js/mdx": "^2.0.0-rc.2",
@@ -36,6 +36,7 @@
   "devDependencies": {
     "@types/graceful-fs": "^4.1.5",
     "@types/mdast": "^3.0.10",
-    "@types/webpack": "^5.28.0"
+    "@types/webpack": "^5.28.0",
+    "typescript": "^4.5.5"
   }
 }

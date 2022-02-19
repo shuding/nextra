@@ -102,6 +102,7 @@ importers:
       remark-gfm: ^3.0.1
       shiki: 0.10.0
       slash: ^3.0.0
+      typescript: ^4.5.5
     dependencies:
       '@mdx-js/mdx': 2.0.0-rc.2
       github-slugger: 1.4.0
@@ -115,6 +116,7 @@ importers:
       '@types/graceful-fs': 4.1.5
       '@types/mdast': 3.0.10
       '@types/webpack': 5.28.0_esbuild@0.14.10
+      typescript: 4.5.5
 
   packages/nextra-theme-blog:
     specifiers:
@@ -137,6 +139,7 @@ importers:
       '@mdx-js/react': ^2.0.0-rc.2
       '@reach/skip-nav': ^0.16.0
       '@types/flexsearch': ^0.7.2
+      autoprefixer: ^10.2.6
       classnames: ^2.2.6
       flexsearch: ^0.7.21
       focus-visible: ^5.1.0
@@ -148,6 +151,7 @@ importers:
       parse-git-url: ^1.0.1
       react-innertext: ^1.1.5
       title: ^3.4.2
+      typescript: ^4.5.5
     dependencies:
       '@headlessui/react': 1.4.2_react-dom@17.0.2+react@17.0.2
       '@mdx-js/react': 2.0.0-rc.2_react@17.0.2
@@ -164,7 +168,9 @@ importers:
       title: 3.4.3
     devDependencies:
       '@types/flexsearch': 0.7.2
+      autoprefixer: 10.4.1_postcss@8.4.5
       nextra: link:../nextra
+      typescript: 4.5.5
 
 packages:
 
