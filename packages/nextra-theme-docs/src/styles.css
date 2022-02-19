@@ -72,6 +72,11 @@ blockquote:not(:first-child),
 
 /* Content Typography */
 article {
+  &.full {
+    width: 100vw;
+    min-height: calc(100vh - 64px);
+    margin: 0 calc(50% - 50vw);
+  }
   h1 {
     @apply text-4xl font-bold tracking-tight mt-2;
   }

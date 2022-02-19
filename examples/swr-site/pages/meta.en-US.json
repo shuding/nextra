@@ -1,19 +1,33 @@
 {
   "index": {
     "title": "Introduction",
-    "type": "nav",
-    "hidden": true
+    "type": "page",
+    "hidden": true,
+    "theme": {}
   },
   "docs": {
     "title": "Docs",
-    "type": "nav"
+    "type": "page",
+    "theme": {
+      "pagination": true,
+      "sidebar": true
+    }
   },
   "examples": {
     "title": "Examples",
-    "type": "nav"
+    "type": "page",
+    "theme": {
+      "full": true,
+      "sidebar": false
+    }
   },
   "blog": {
     "title": "Blog",
-    "type": "nav"
+    "type": "page",
+    "theme": {
+      "sidebar": false,
+      "toc": false,
+      "footer": true
+    }
   }
 }

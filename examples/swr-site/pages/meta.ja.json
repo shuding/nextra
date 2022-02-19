@@ -1,19 +1,19 @@
 {
   "index": {
     "title": "前書き",
-    "type": "nav",
+    "type": "page",
     "hidden": true
   },
   "docs": {
     "title": "ドキュメント",
-    "type": "nav"
+    "type": "page"
   },
   "examples": {
     "title": "例",
-    "type": "nav"
+    "type": "page"
   },
   "blog": {
     "title": "ブログ",
-    "type": "nav"
+    "type": "page"
   }
 }
