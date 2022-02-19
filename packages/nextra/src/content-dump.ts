@@ -19,7 +19,9 @@ let cacheDirExist = false
 try {
   statSync(cacheDir)
   cacheDirExist = true
-} catch (err) {}
+} catch (err) {
+  mkdirSync(cacheDir, { recursive: true })
+}
 
 function initFromCache(filename: string) {
   if (!cached.has(filename)) {
