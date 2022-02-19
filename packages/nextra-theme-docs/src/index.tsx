@@ -35,17 +35,27 @@ function useDirectoryInfo(pageMap: PageMapItem[]) {
 }
 
 interface BodyProps {
-  meta: Record<string, any>
+  themeContext: Record<string, any>
   toc?: React.ReactNode
   navLinks: React.ReactNode
 }
 
-const Body: React.FC<BodyProps> = ({ meta, toc, navLinks, children }) => {
+const Body: React.FC<BodyProps> = ({
+  themeContext,
+  toc,
+  navLinks,
+  children
+}) => {
   return (
     <React.Fragment>
       <SkipNavContent />
-      {meta.full ? (
-        <article className="full relative overflow-x-hidden">
+      {themeContext.full ? (
+        <article
+          className={cn(
+            'full relative overflow-x-hidden',
+            !themeContext.sidebar ? 'expand' : ''
+          )}
+        >
           <MDXTheme>{children}</MDXTheme>
         </article>
       ) : (
@@ -138,7 +148,7 @@ const Layout: React.FC<LayoutProps> = ({
                   asPopover={activeType === 'page' || !themeContext.sidebar}
                 />
                 <Body
-                  meta={meta}
+                  themeContext={themeContext}
                   toc={
                     activeType === 'page' ? null : themeContext.toc ? (
                       <ToC
