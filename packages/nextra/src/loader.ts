@@ -1,3 +1,5 @@
+import type { LoaderOptions } from './types'
+
 import path from 'path'
 import grayMatter from 'gray-matter'
 import slash from 'slash'
@@ -5,7 +7,6 @@ import { LoaderContext } from 'webpack'
 import { addPage } from './content-dump'
 import { getLocaleFromFilename } from './utils'
 import { compileMdx } from './compile'
-import type { LoaderOptions } from './types'
 import { getPageMap, findPagesDir } from './page-map'
 import { collectFiles } from './plugin'
 const extension = /\.mdx?$/
@@ -14,18 +15,14 @@ const isProductionBuild = process.env.NODE_ENV === 'production'
 // TODO: create this as a webpack plugin.
 const indexContentEmitted = new Set()
 
+const pagesDir = path.resolve(findPagesDir())
+
 export default async function (
   this: LoaderContext<LoaderOptions>,
   source: string,
   callback: (err?: null | Error, content?: string | Buffer) => void
 ) {
   this.cacheable(true)
-
-  if (!isProductionBuild) {
-    // Add the entire directory `pages` as the dependency
-    // so we can generate the correct page map
-    this.addContextDependency(path.resolve(findPagesDir()))
-  }
 
   const options = this.getOptions()
   let {
@@ -40,23 +37,20 @@ export default async function (
 
   const { resourcePath } = this
   const filename = resourcePath.slice(resourcePath.lastIndexOf('/') + 1)
-  const fileLocale = getLocaleFromFilename(filename) || 'default'
+  const fileLocale = getLocaleFromFilename(filename)
 
   // Check if there's a theme provided
   if (!theme) {
     throw new Error('No Nextra theme found!')
   }
-  let pageMapResult, fileMap
 
+  let pageMapResult, fileMap
   if (isProductionBuild) {
     const data = pageMapCache.get()!
     pageMapResult = data.items
     fileMap = data.fileMap
   } else {
-    const data = await collectFiles(
-      path.join(process.cwd(), findPagesDir()),
-      '/'
-    )
+    const data = await collectFiles(pagesDir, '/')
     pageMapResult = data.items
     fileMap = data.fileMap
   }
@@ -66,6 +60,24 @@ export default async function (
     fileMap,
     defaultLocale
   )
+
+  if (!isProductionBuild) {
+    // Add the entire directory `pages` as the dependency
+    // so we can generate the correct page map.
+    this.addContextDependency(pagesDir)
+  } else {
+    // We only add meta files as dependencies for prodution build,
+    // so we can do incremental builds.
+    Object.entries(fileMap).forEach(([filePath, { name, meta, locale }]) => {
+      if (
+        name === 'meta.json' &&
+        meta &&
+        (!fileLocale || locale === fileLocale)
+      ) {
+        this.addDependency(filePath)
+      }
+    })
+  }
 
   // Extract frontMatter information if it exists
   let { data, content } = grayMatter(source)
@@ -97,7 +109,7 @@ export default async function (
     // We only add .MD and .MDX contents
     if (extension.test(filename) && data.searchable !== false) {
       await addPage({
-        fileLocale,
+        fileLocale: fileLocale || 'default',
         route,
         title,
         data,
@@ -108,23 +120,24 @@ export default async function (
     indexContentEmitted.add(filename)
   }
 
-  const prefix = `import withLayout from '${layout}'
-import { withSSG } from 'nextra/ssg'
-${layoutConfig ? `import layoutConfig from '${layoutConfig}'` : ''}`
+  const prefix =
+    `import withLayout from '${layout}'\n` +
+    `import { withSSG } from 'nextra/ssg'\n` +
+    `${layoutConfig ? `import layoutConfig from '${layoutConfig}'` : ''}\n`
 
   const suffix = `export default function NextraPage (props) {
-    return withSSG(withLayout({
-      filename: "${slash(filename)}",
-      route: "${slash(route)}",
-      meta: ${JSON.stringify(data)},
-      pageMap: ${JSON.stringify(pageMap)},
-      titleText: ${JSON.stringify(titleText)},
-      headings: ${JSON.stringify(headings)},
-      hasH1: ${JSON.stringify(hasH1)}
-    }, ${layoutConfig ? 'layoutConfig' : 'null'}))({
-      ...props,
-      children: <MDXContent/>
-    })
+  return withSSG(withLayout({
+    filename: "${slash(filename)}",
+    route: "${slash(route)}",
+    meta: ${JSON.stringify(data)},
+    pageMap: ${JSON.stringify(pageMap)},
+    titleText: ${JSON.stringify(titleText)},
+    headings: ${JSON.stringify(headings)},
+    hasH1: ${JSON.stringify(hasH1)}
+  }, ${layoutConfig ? 'layoutConfig' : 'null'}))({
+    ...props,
+    children: <MDXContent/>
+  })
 }`
 
   // Add imports and exports to the source
