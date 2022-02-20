@@ -1,5 +1,14 @@
 @tailwind base;
 
+:root {
+  --primeColor50: theme('colors.blue.50');
+  --primeColor100: theme('colors.blue.100');
+  --primeColor200: theme('colors.blue.200');
+  --primeColor300: theme('colors.blue.300');
+  --primeColor400: theme('colors.blue.400');
+  --primeColor500: theme('colors.blue.500');
+}
+
 html {
   @apply antialiased;
   font-size: 16px;

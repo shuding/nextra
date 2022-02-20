@@ -40,7 +40,6 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.4.2",
-    "@heroicons/react": "^1.0.5",
     "@mdx-js/react": "^2.0.0-rc.2",
     "@reach/skip-nav": "^0.16.0",
     "classnames": "^2.2.6",

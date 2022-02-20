@@ -14,6 +14,14 @@ export interface DocsThemeConfig {
   darkMode?: boolean
   defaultMenuCollapsed?: boolean
   font?: boolean
+  primeColor?: {
+    50: string
+    100: string
+    200: string
+    300: string
+    400: string
+    500: string
+  }
   footer?: boolean
   footerText?: string
   footerEditLink?: string
