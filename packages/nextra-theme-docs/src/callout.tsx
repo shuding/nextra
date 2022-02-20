@@ -1,35 +1,61 @@
 import React from 'react'
+import {
+  InformationCircleIcon,
+  LightBulbIcon,
+  CheckCircleIcon,
+  ExclamationIcon,
+  XCircleIcon
+} from '@heroicons/react/solid/'
 
 const themes = {
-  default:
-    'bg-orange-50 border border-orange-100 text-orange-800 dark:text-orange-300 dark:bg-orange-400 dark:border-orange-400 dark:bg-opacity-20 dark:border-opacity-30',
-  error:
-    'bg-red-100 border border-red-200 text-red-900 dark:text-red-200 dark:bg-red-900 dark:bg-opacity-30 dark:border-opacity-30',
-  warning:
-    'bg-yellow-50 border border-yellow-100 text-yellow-900 dark:text-yellow-200 dark:bg-yellow-700 dark:bg-opacity-30'
+  info: {
+    className:
+      'bg-blue-100 text-blue-800 dark:text-blue-300 dark:bg-blue-200 dark:bg-opacity-10',
+    icon: <InformationCircleIcon className="w-5 h-5 mt-1" />
+  },
+  idea: {
+    className:
+      'bg-gray-100 text-gray-800 dark:text-gray-300 dark:bg-gray-200 dark:bg-opacity-10',
+    icon: <LightBulbIcon className="w-5 h-5 mt-1" />
+  },
+  success: {
+    className:
+      'bg-green-100 text-green-800 dark:text-green-300 dark:bg-green-200 dark:bg-opacity-10',
+    icon: <CheckCircleIcon className="w-5 h-5 mt-1" />
+  },
+  warning: {
+    className:
+      'bg-orange-100 text-orange-800 dark:text-orange-300 dark:bg-orange-200 dark:bg-opacity-10',
+    icon: <ExclamationIcon className="w-5 h-5 mt-1" />
+  },
+  error: {
+    className:
+      'bg-red-100 text-red-800 dark:text-red-300 dark:bg-red-200 dark:bg-opacity-10',
+    icon: <XCircleIcon className="w-5 h-5 mt-1" />
+  }
 }
 
 interface CalloutProps {
-  /** Callout Theme default to 'default'  */
+  /** Callout Theme default to 'default' **/
   type?: keyof typeof themes
-  /** default emoji 💡*/
+  /** no emoji by default **/
   emoji: string
 }
 
 const Callout: React.FC<CalloutProps> = ({
   children,
-  type = 'default',
-  emoji = '💡'
+  type = 'idea',
+  emoji
 }) => {
   return (
-    <div className={`${themes[type]} flex rounded-lg callout mt-6`}>
+    <div className={`${themes[type].className} flex rounded-lg callout mt-6`}>
       <div
         className="pl-3 pr-2 py-2 select-none text-xl"
         style={{
           fontFamily: '"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
         }}
       >
-        {emoji}
+        {emoji || themes[type].icon}
       </div>
       <div className="pr-4 py-2">{children}</div>
     </div>
