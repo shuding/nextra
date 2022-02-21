@@ -15,7 +15,3 @@ declare module 'title' {
   )
 }
 
-declare module '@headlessui/react/dist/index.esm' {
-  export * from '@headlessui/react/dist/index'
-  export * from '@headlessui/react/dist/types'
-}
