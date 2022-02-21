@@ -10,7 +10,7 @@ import Router, { useRouter } from 'next/router'
 import cn from 'classnames'
 import Link from 'next/link'
 import FlexSearch from 'flexsearch'
-import { Transition } from '@headlessui/react/dist/index.esm'
+import { Transition } from '@headlessui/react'
 
 import { useConfig } from './config'
 import renderComponent from './utils/render-component'
