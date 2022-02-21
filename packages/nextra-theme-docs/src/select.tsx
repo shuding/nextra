@@ -1,6 +1,6 @@
 import React from 'react'
 import cn from 'classnames'
-import { Listbox, Transition } from '@headlessui/react/dist/index.esm'
+import { Listbox, Transition } from '@headlessui/react'
 import Check from './icons/check'
 
 interface MenuOption {

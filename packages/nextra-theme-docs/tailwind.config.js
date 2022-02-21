@@ -41,7 +41,14 @@ module.exports = {
       red: colors.red,
       orange: colors.orange,
       yellow: colors.yellow,
-      prime: colors.blue
+      prime: {
+        50: 'var(--primeColor50)',
+        100: 'var(--primeColor100)',
+        200: 'var(--primeColor200)',
+        300: 'var(--primeColor300)',
+        400: 'var(--primeColor400)',
+        500: 'var(--primeColor500)'
+      }
     },
     extend: {
       colors: {
