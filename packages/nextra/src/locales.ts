@@ -42,7 +42,10 @@ export function locales(request: NextRequest) {
     // locale can be missing from there for consistency.
     if (finalLocale !== nextUrl.defaultLocale) {
       return NextResponse.redirect(
-        '/' + finalLocale + nextUrl.pathname + nextUrl.search
+        new URL(
+          '/' + finalLocale + nextUrl.pathname + nextUrl.search,
+          request.url
+        )
       )
     }
   }
@@ -53,7 +56,10 @@ export function locales(request: NextRequest) {
   // If we are not showing the correct localed page, rewrite the current request.
   if (!pathname.endsWith('.' + finalLocale)) {
     return NextResponse.rewrite(
-      '/' + finalLocale + pathname + '.' + finalLocale + nextUrl.search
+      new URL(
+        '/' + finalLocale + pathname + '.' + finalLocale + nextUrl.search,
+        request.url
+      )
     )
   }
 }
