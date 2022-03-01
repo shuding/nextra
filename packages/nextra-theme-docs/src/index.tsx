@@ -183,6 +183,18 @@ const Layout: React.FC<LayoutProps> = ({
 
 export default (opts: PageOpt, config: DocsThemeConfig) => {
   const extendedConfig = Object.assign({}, defaultConfig, config)
+
+  if (typeof window === 'object') {
+    for (const key in extendedConfig.primeColor) {
+      document.documentElement.style.setProperty(
+        `--primeColor${key}`,
+        extendedConfig.primeColor[
+          key as unknown as keyof typeof extendedConfig.primeColor
+        ]
+      )
+    }
+  }
+
   return (props: any) => {
     return (
       <ThemeConfigContext.Provider value={extendedConfig}>
