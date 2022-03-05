@@ -30,7 +30,8 @@ export default function Navbar({
   const { menu, setMenu } = useMenuContext()
 
   return (
-    <div className="nextra-nav-container z-20 sticky top-0 before:bg-white before:bg-opacity-[.85] before:backdrop-blur-md before:absolute before:block before:w-full before:h-full before:z-[-1] dark:before:bg-dark dark:before:bg-opacity-80 dark:before:border-b dark:before:border-white dark:before:border-opacity-10">
+    <div className="nextra-nav-container z-20 sticky top-0 bg-transparent w-full">
+      <div className="nextra-nav-container-blur absolute w-full h-full bg-white dark:bg-dark pointer-events-none" />
       <nav className="flex max-w-[90rem] mx-auto items-center left-0 right-0 h-16 pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
         <div className="w-full flex items-center mr-2">
           <Link href="/">

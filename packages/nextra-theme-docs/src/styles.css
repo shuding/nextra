@@ -3,7 +3,7 @@
 html {
   @apply antialiased;
   font-size: 16px;
-  font-feature-settings: 'rlig' 1, 'calt' 1, 'ss01' 1;
+  font-feature-settings: 'rlig' 1, 'calt' 1, 'ss01' 1, 'ss06' 1;
   -webkit-tap-highlight-color: transparent;
 }
 body {
@@ -150,7 +150,7 @@ article {
   [data-nextra-code][data-filename] {
     @apply block relative;
 
-    &::before {
+    &:before {
       content: attr(data-filename);
       position: absolute;
       @apply absolute truncate top-0 z-[1] text-xs py-2 px-4 w-full text-gray-700 bg-slate-200 dark:bg-gray-700 dark:text-gray-200 rounded-t-xl;
@@ -188,11 +188,6 @@ article {
 .nextra-container {
   /* Navbar */
   .nextra-nav-container {
-    &:before {
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02),
-        0 -1px 0 rgba(0, 0, 0, 0.06) inset;
-    }
-
     a:focus,
     summary:focus {
       @apply select-none outline-none;
@@ -200,6 +195,23 @@ article {
     a:focus-visible,
     summary:focus-visible {
       @apply ring ring-prime-200 select-none outline-none;
+    }
+
+    .nextra-nav-container-blur {
+      z-index: -1;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02),
+        0 -1px 0 rgba(0, 0, 0, 0.06) inset;
+      .dark & {
+        box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+      }
+    }
+    @supports (
+      (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))
+    ) {
+      .nextra-nav-container-blur {
+        backdrop-filter: blur(12px);
+        @apply bg-opacity-[.85] dark:bg-opacity-80;
+      }
     }
   }
 }
@@ -225,7 +237,7 @@ article {
   }
   ul {
     /* Using bg-white as background-color when the browser didn't support backdrop-filter */
-    @apply rounded-xl bg-white text-gray-100 ring-1 ring-black ring-opacity-5 overflow-hidden overscroll-contain shadow-xl list-none;
+    @apply bg-white text-gray-100 ring-1 ring-black ring-opacity-5;
     li {
       @apply text-gray-800 break-words mx-2.5 px-2.5 py-2 rounded-md;
       .highlight {
@@ -236,16 +248,17 @@ article {
     a:focus li {
       @apply text-prime-500 bg-prime-400 bg-opacity-[.1];
     }
-  }
-  @supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
-    ul {
-      @apply rounded-xl backdrop-blur-lg bg-white bg-opacity-[.7] text-gray-100 ring-1 ring-black ring-opacity-5 overflow-hidden overscroll-contain shadow-xl list-none;
+    .nextra-search-section {
+      @apply border-b border-black border-opacity-10;
+      .dark & {
+        @apply border-b border-white border-opacity-20;
+      }
     }
   }
   .dark & {
     /* Using bg-white as background-color when the browser didn't support backdrop-filter */
     ul {
-      @apply bg-neutral-800 text-gray-100 ring-white ring-opacity-10 divide-gray-200/10;
+      @apply bg-neutral-900 text-gray-100 ring-white ring-opacity-10;
       li {
         @apply text-gray-300;
         .highlight {
@@ -258,10 +271,16 @@ article {
       }
     }
   }
-  @supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  @supports (
+    (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))
+  ) {
+    ul {
+      backdrop-filter: blur(16px);
+      @apply bg-opacity-[.7];
+    }
     .dark & {
       ul {
-        @apply bg-neutral-800 backdrop-blur-xl bg-opacity-60 text-gray-100 ring-white ring-opacity-10 divide-gray-200/10;
+        @apply bg-opacity-[.8];
       }
     }
   }

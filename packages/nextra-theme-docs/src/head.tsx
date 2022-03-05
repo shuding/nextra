@@ -20,20 +20,10 @@ export default function Head({ title, locale, meta }: HeadProps) {
 
   return (
     <NextHead>
-      {config.font ? (
-        <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
-      ) : null}
       <title>
         {title}
         {renderComponent(config.titleSuffix, { locale, config, title, meta })}
       </title>
-      {config.font ? (
-        <style
-          dangerouslySetInnerHTML={{
-            __html: `html{font-family:Inter,sans-serif}@supports(font-variation-settings:normal){html{font-family:'Inter var',sans-serif}}`
-          }}
-        />
-      ) : null}
       {renderComponent(config.head, { locale, config, title, meta })}
       {config.unstable_faviconGlyph ? (
         <link

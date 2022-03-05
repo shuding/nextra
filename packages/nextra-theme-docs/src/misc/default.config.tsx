@@ -9,7 +9,8 @@ const defaultTheme = {
   search: true,
   darkMode: true,
   defaultMenuCollapsed: false,
-  font: true,
+  // @TODO: Can probably introduce a set of options to use Google Fonts directly
+  // font: true,
   footer: true,
   footerText: `MIT ${new Date().getFullYear()} © Nextra.`,
   footerEditLink: 'Edit this page',
