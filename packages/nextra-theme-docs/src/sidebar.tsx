@@ -143,7 +143,6 @@ interface MenuProps {
   anchors: string[]
   base?: string
 }
-const emptyItem: any[] = []
 function Menu({ directories, anchors }: MenuProps) {
   return (
     <ul>

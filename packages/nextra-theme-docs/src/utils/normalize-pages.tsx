@@ -24,10 +24,13 @@ export interface Item extends Omit<PageMapItem, 'children'> {
   title: string
   type: string
   children?: Item[]
+  hidden?: boolean
 }
 export interface PageItem extends Omit<PageMapItem, 'children'> {
   title: string
   type: string
+  href?: string
+  newWindow?: boolean
   children?: PageItem[]
   firstChildRoute?: string
   hidden?: boolean
@@ -54,22 +57,20 @@ export default function normalizePages({
   docsRoot?: string
   pageThemeContext?: Record<keyof typeof defaultThemeContext, boolean>
 }) {
-  let meta: string | Record<string, any> | undefined = ''
+  let _meta: Record<string, any> | undefined
   for (let item of list) {
     if (item.name === 'meta.json') {
       if (locale === item.locale) {
-        meta = item.meta
+        _meta = item.meta
         break
       }
       // fallback
-      if (!meta) {
-        meta = item.meta
+      if (!_meta) {
+        _meta = item.meta
       }
     }
   }
-  if (!meta) {
-    meta = {}
-  }
+  const meta = _meta || {}
 
   const metaKeys = Object.keys(meta)
   const hasLocale = new Map()
@@ -89,11 +90,13 @@ export default function normalizePages({
 
   // Page directories
   const pageDirectories: PageItem[] = []
-  const flatPageDirectories: PageItem[] = []
+  const topLevelPageItems: PageItem[] = []
 
   let activeType: string | undefined = undefined
   let activeIndex: number = 0
   let activeThemeContext = pageThemeContext
+
+  let metaKeyIndex = 0
 
   list
     .filter(
@@ -114,11 +117,31 @@ export default function normalizePages({
       if (indexB === -1) return -1
       return indexA - indexB
     })
+    .flatMap(a => {
+      const items = []
+      const index = metaKeys.indexOf(a.name)
+
+      // Fill all skipped items in meta.
+      for (let i = metaKeyIndex + 1; i < index; i++) {
+        const key = metaKeys[i]
+        items.push({
+          name: key,
+          route: '#',
+          ...meta[key]
+        })
+      }
+
+      items.push(a)
+      metaKeyIndex = index
+
+      return items
+    })
     .forEach(a => {
-      if (typeof meta !== 'object') return
+      const hidden = getMetaHidden(meta[a.name])
+      if (hidden) return
+
       const title = getMetaTitle(meta[a.name]) || getTitle(a.name)
       const type = getMetaItemType(meta[a.name]) || 'doc'
-      const hidden = getMetaHidden(meta[a.name])
 
       const extendedPageThemeContext = {
         ...pageThemeContext,
@@ -133,7 +156,7 @@ export default function normalizePages({
         activeThemeContext = extendedPageThemeContext
         switch (type) {
           case 'page':
-            activeIndex = flatPageDirectories.length
+            activeIndex = topLevelPageItems.length
             break
           case 'doc':
           default:
@@ -164,7 +187,7 @@ export default function normalizePages({
           switch (activeType) {
             case 'page':
               activeIndex =
-                flatPageDirectories.length + normalizedChildren.activeIndex
+                topLevelPageItems.length + normalizedChildren.activeIndex
               break
             case 'doc':
               activeIndex =
@@ -178,12 +201,14 @@ export default function normalizePages({
         ...a,
         title,
         type,
+        hidden,
         children: normalizedChildren ? [] : undefined
       }
       const docsItem: DocsItem = {
         ...a,
         title,
         type,
+        hidden,
         children: normalizedChildren ? [] : undefined
       }
       const pageItem: PageItem = {
@@ -201,14 +226,11 @@ export default function normalizePages({
             pageItem.children.push(...normalizedChildren.pageDirectories)
             docsDirectories.push(...normalizedChildren.docsDirectories)
 
-            // If it's a page with non-page children, we inject itself as a page too.
-            if (
-              !normalizedChildren.flatPageDirectories.length &&
-              normalizedChildren.flatDirectories.length
-            ) {
+            // If it's a page with children inside, we inject itself as a page too.
+            if (normalizedChildren.flatDirectories.length) {
               pageItem.firstChildRoute =
                 normalizedChildren.flatDirectories[0].route
-              flatPageDirectories.push(pageItem)
+              topLevelPageItems.push(pageItem)
             }
 
             break
@@ -222,8 +244,6 @@ export default function normalizePages({
         }
 
         flatDirectories.push(...normalizedChildren.flatDirectories)
-        flatPageDirectories.push(...normalizedChildren.flatPageDirectories)
-
         flatDocsDirectories.push(...normalizedChildren.flatDocsDirectories)
 
         Array.isArray(item.children) &&
@@ -232,7 +252,7 @@ export default function normalizePages({
         flatDirectories.push(item)
         switch (type) {
           case 'page':
-            flatPageDirectories.push(pageItem)
+            topLevelPageItems.push(pageItem)
             break
           case 'doc':
           default:
@@ -264,6 +284,6 @@ export default function normalizePages({
     docsDirectories,
     flatDocsDirectories,
     pageDirectories,
-    flatPageDirectories
+    topLevelPageItems
   }
 }
