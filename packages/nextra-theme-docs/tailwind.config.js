@@ -10,9 +10,6 @@ module.exports = {
       xl: '1280px',
       '2xl': '1536px'
     },
-    fontFamily: {
-      display: ['inter', 'sans-serif']
-    },
     fontSize: {
       xs: '.75rem',
       sm: '.875rem',

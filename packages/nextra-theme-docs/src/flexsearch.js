@@ -19,7 +19,7 @@ const Item = ({ page, first, title, active, href, onHover, excerpt }) => {
   return (
     <>
       {first ? (
-        <div className="mx-2.5 px-2.5 pb-1.5 mb-2 mt-6 first:mt-0 border-b font-semibold uppercase text-xs text-gray-500 select-none dark:text-gray-300 dark:border-opacity-10">
+        <div className="nextra-search-section mx-2.5 px-2.5 pb-1.5 mb-2 mt-6 first:mt-0 font-semibold uppercase text-xs text-gray-500 select-none dark:text-gray-300">
           {page}
         </div>
       ) : null}
@@ -315,7 +315,7 @@ export default function Search() {
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
       >
-        <ul className="absolute z-20 p-0 m-0 mt-2 top-full py-2.5">
+        <ul className="absolute z-20 px-0 py-2.5 m-0 mt-2 top-full rounded-xl overflow-hidden overscroll-contain shadow-xl list-none">
           {loading ? (
             <span className="p-8 text-center text-gray-400 text-sm select-none flex justify-center">
               <svg

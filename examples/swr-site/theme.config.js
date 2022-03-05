@@ -116,12 +116,6 @@ export default {
           }
         />
         <meta name="apple-mobile-web-app-title" content="SWR" />
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css"
-          media="print"
-          onLoad="this.media='all'"
-        />
       </>
     );
   },
