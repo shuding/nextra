@@ -7,7 +7,7 @@ export interface LoaderOptions {
   locales: string[]
   defaultLocale: string
   unstable_staticImage: boolean
-  unstable_contentDump: boolean
+  unstable_flexsearch: boolean
   mdxOptions: Pick<ProcessorOptions, 'rehypePlugins' | 'remarkPlugins'>
   pageMapCache: PageMapCache
 }
@@ -46,7 +46,7 @@ type Theme = string
 export type NextraConfig = {
   theme: Theme
   themeConfig: string
-  unstable_contentDump: boolean
+  unstable_flexsearch: boolean
   unstable_staticImage?: boolean
 }
 

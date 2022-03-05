@@ -27,7 +27,6 @@ export default {
     </>
   ),
   search: true,
-  unstable_stork: false,
   unstable_faviconGlyph: '✦',
   prevLinks: true,
   nextLinks: true,

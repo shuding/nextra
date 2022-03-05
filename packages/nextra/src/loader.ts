@@ -29,7 +29,7 @@ export default async function (
     theme,
     themeConfig,
     defaultLocale,
-    unstable_contentDump,
+    unstable_flexsearch,
     unstable_staticImage,
     mdxOptions,
     pageMapCache
@@ -94,18 +94,18 @@ export default async function (
   }
 
   if (isProductionBuild && indexContentEmitted.has(filename)) {
-    unstable_contentDump = false
+    unstable_flexsearch = false
   }
 
   const { result, titleText, headings, hasH1, structurizedData } =
     await compileMdx(content, mdxOptions, {
       unstable_staticImage,
-      unstable_contentDump
+      unstable_flexsearch
     })
   content = result
   content = content.replace('export default MDXContent;', '')
 
-  if (unstable_contentDump) {
+  if (unstable_flexsearch) {
     // We only add .MD and .MDX contents
     if (extension.test(filename) && data.searchable !== false) {
       await addPage({
