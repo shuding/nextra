@@ -186,7 +186,15 @@ export default (opts: PageOpt, config: DocsThemeConfig) => {
   return (props: any) => {
     return (
       <ThemeConfigContext.Provider value={extendedConfig}>
-        <ThemeProvider attribute="class" disableTransitionOnChange={true}>
+        <ThemeProvider
+          attribute="class"
+          disableTransitionOnChange={true}
+          {...{
+            defaultTheme: extendedConfig.nextThemes.defaultTheme,
+            storageKey: extendedConfig.nextThemes.storageKey,
+            forcedTheme: extendedConfig.nextThemes.forcedTheme
+          }}
+        >
           <Layout {...opts} {...props} />
         </ThemeProvider>
       </ThemeConfigContext.Provider>

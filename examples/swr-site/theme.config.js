@@ -34,6 +34,10 @@ export default {
   search: true,
   unstable_flexsearch: true,
   floatTOC: true,
+  darkMode: true,
+  nextThemes: {
+    // defaultTheme: "dark",
+  },
   feedbackLink: "Question? Give us feedback →",
   feedbackLabels: "feedback",
   logo: () => {
