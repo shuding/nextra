@@ -4,16 +4,13 @@ title: 用于数据请求的 React Hooks 库
 
 import Callout from "nextra-theme-docs/callout"
 import Features from "components/features"
-import Bleed from 'nextra-theme-docs/bleed'
 
 {
 // wrapped with {} to mark it as javascript so mdx will not put it under a p tag
 }
 {<h1 className="text-center font-extrabold md:text-5xl mt-8">SWR</h1>}
 
-<Bleed full>
-  <Features/>
-</Bleed>
+<Features/>
 
 “SWR” 这个名字来自于 `stale-while-revalidate`：一种由 [HTTP RFC 5861](https://tools.ietf.org/html/rfc5861) 推广的 HTTP 缓存失效策略。这种策略首先从缓存中返回数据（过期的），同时发送 fetch 请求（重新验证），最后得到最新数据。
 
