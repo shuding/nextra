@@ -18,17 +18,17 @@ interface ItemProps {
 const Item = ({ title, active, href, onMouseOver, search }: ItemProps) => {
   const highlight = title.toLowerCase().indexOf(search.toLowerCase())
   return (
-    <Link href={href}>
-      <a className="block no-underline" onMouseOver={onMouseOver}>
-        <li className={cn('p-2', { active })}>
+    <li className={cn('p-2', { active })}>
+      <Link href={href} passHref>
+        <a className="block no-underline" onMouseOver={onMouseOver}>
           {title.substring(0, highlight)}
           <span className="highlight">
             {title.substring(highlight, highlight + search.length)}
           </span>
           {title.substring(highlight + search.length)}
-        </li>
-      </a>
-    </Link>
+        </a>
+      </Link>
+    </li>
   )
 }
 
@@ -44,7 +44,7 @@ const Search = ({ directories = [] }: SearchProps) => {
   const config = useConfig()
   const [show, setShow] = useState(false)
   const [search, setSearch] = useState('')
-  const [active, setActive] = useState(0)
+  const [active, setActive] = useState<number | null>(null)
   const input = useRef<HTMLInputElement | null>(null)
 
   const results = useMemo<{ route: string; title: string }[]>(() => {
@@ -57,7 +57,7 @@ const Search = ({ directories = [] }: SearchProps) => {
   }, [search])
 
   const moveActiveItem = (up: boolean) => {
-    const position = active + (up ? -1 : 1)
+    const position = active !== null ? active + (up ? -1 : 1) : 0
     const { length } = results
 
     // Modulo instead of remainder,
@@ -80,15 +80,24 @@ const Search = ({ directories = [] }: SearchProps) => {
         moveActiveItem(UP)
       }
 
-      if (key === 'Enter' && results && results[active]) {
+      if (active !== null && key === 'Enter' && results && results[active]) {
         router.push(results[active].route)
       }
     },
     [active, results, router]
   )
 
+  const handleOnBlur = useCallback(
+    e => {
+      if (active === null) {
+        setShow(false)
+      }
+    },
+    [active]
+  )
+
   useEffect(() => {
-    setActive(0)
+    setActive(null)
   }, [search])
 
   useEffect(() => {
@@ -137,7 +146,7 @@ const Search = ({ directories = [] }: SearchProps) => {
           )}
           onKeyDown={handleKeyDown}
           onFocus={() => setShow(true)}
-          onBlur={() => setShow(false)}
+          onBlur={handleOnBlur}
           ref={input}
           spellCheck={false}
         />
