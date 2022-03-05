@@ -8,6 +8,11 @@ const defaultTheme = {
   prevLinks: true,
   search: true,
   darkMode: true,
+  nextThemes: {
+    defaultTheme: 'system',
+    storageKey: 'theme',
+    forcedTheme: undefined
+  },
   defaultMenuCollapsed: false,
   // @TODO: Can probably introduce a set of options to use Google Fonts directly
   // font: true,

@@ -12,6 +12,13 @@ export interface DocsThemeConfig {
   prevLinks?: boolean
   search?: boolean
   darkMode?: boolean
+  /**
+   * A subset of configurations for https://github.com/pacocoursey/next-themes#themeprovider
+   * - defaultTheme
+   * - storageKey
+   * - forcedTheme
+   */
+  nextThemes?: object
   defaultMenuCollapsed?: boolean
   font?: boolean
   footer?: boolean
