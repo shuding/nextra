@@ -8,7 +8,10 @@ function cleanup(content) {
     .join('\n')
 }
 
-export default structurizedData => {
+export default (structurizedData, options) => {
+  if (typeof options === 'boolean') options = {}
+  options = Object.assign({ codeblocks: true }, options)
+
   const slugger = new Slugger()
   let activeSlug = ''
   let skip = false
@@ -47,7 +50,14 @@ export default structurizedData => {
         for (let i = 0; i < node.children.length; i++) {
           result += walk(node.children[i])
         }
-      } else if (['code', 'text', 'inlineCode', 'tableCell'].includes(type)) {
+      } else if (
+        [
+          options.codeblocks ? 'code' : '',
+          'text',
+          'inlineCode',
+          'tableCell'
+        ].includes(type)
+      ) {
         result += node.value
         if (!skip) content += node.value
       }
