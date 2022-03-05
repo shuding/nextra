@@ -224,7 +224,8 @@ article {
     width: 100vw;
   }
   ul {
-    @apply rounded-xl backdrop-blur-lg bg-white bg-opacity-[.7] text-gray-100 ring-1 ring-black ring-opacity-5 overflow-hidden overscroll-contain shadow-xl list-none;
+    /* Using bg-white as background-color when the browser didn't support backdrop-filter */
+    @apply rounded-xl bg-white text-gray-100 ring-1 ring-black ring-opacity-5 overflow-hidden overscroll-contain shadow-xl list-none;
     li {
       @apply text-gray-800 break-words mx-2.5 px-2.5 py-2 rounded-md;
       .highlight {
@@ -236,9 +237,15 @@ article {
       @apply text-prime-500 bg-prime-400 bg-opacity-[.1];
     }
   }
-  .dark & {
+  @supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
     ul {
-      @apply bg-neutral-800 backdrop-blur-xl bg-opacity-60 text-gray-100 ring-white ring-opacity-10 divide-gray-200/10;
+      @apply rounded-xl backdrop-blur-lg bg-white bg-opacity-[.7] text-gray-100 ring-1 ring-black ring-opacity-5 overflow-hidden overscroll-contain shadow-xl list-none;
+    }
+  }
+  .dark & {
+    /* Using bg-white as background-color when the browser didn't support backdrop-filter */
+    ul {
+      @apply bg-neutral-800 text-gray-100 ring-white ring-opacity-10 divide-gray-200/10;
       li {
         @apply text-gray-300;
         .highlight {
@@ -248,6 +255,13 @@ article {
       li.active,
       a:focus li {
         @apply text-prime-500 bg-prime-500 bg-opacity-[.1];
+      }
+    }
+  }
+  @supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+    .dark & {
+      ul {
+        @apply bg-neutral-800 backdrop-blur-xl bg-opacity-60 text-gray-100 ring-white ring-opacity-10 divide-gray-200/10;
       }
     }
   }
