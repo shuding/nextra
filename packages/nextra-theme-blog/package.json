@@ -29,7 +29,7 @@
     "prepublishOnly": "rm -rf dist && pnpm build"
   },
   "dependencies": {
-    "@mdx-js/react": "^2.0.0-rc.2",
+    "@mdx-js/react": "^2.0.0",
     "github-slugger": "^1.3.0",
     "next-themes": "^0.0.15",
     "react-cusdis": "^2.1.3"

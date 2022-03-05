@@ -21,7 +21,7 @@
     "prepublishOnly": "rm -rf dist && pnpm build && pnpm types"
   },
   "dependencies": {
-    "@mdx-js/mdx": "^2.0.0-rc.2",
+    "@mdx-js/mdx": "^2.0.0",
     "github-slugger": "^1.4.0",
     "graceful-fs": "^4.2.6",
     "gray-matter": "^4.0.3",
