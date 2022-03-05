@@ -47,10 +47,10 @@ export async function compileMdx(
   mdxOptions: LoaderOptions['mdxOptions'] = {},
   nextraOptions: {
     unstable_staticImage: boolean
-    unstable_contentDump: boolean
+    unstable_flexsearch: boolean
   } = {
     unstable_staticImage: false,
-    unstable_contentDump: false
+    unstable_flexsearch: false
   }
 ) {
   let structurizedData = {}
@@ -62,7 +62,7 @@ export async function compileMdx(
       remarkGfm,
       remarkHeadings,
       ...(nextraOptions.unstable_staticImage ? [remarkStaticImage] : []),
-      ...(nextraOptions.unstable_contentDump
+      ...(nextraOptions.unstable_flexsearch
         ? [structurize(structurizedData)]
         : [])
     ].filter(Boolean),
