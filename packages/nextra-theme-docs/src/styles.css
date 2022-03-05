@@ -209,7 +209,8 @@ article {
       (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))
     ) {
       .nextra-nav-container-blur {
-        @apply backdrop-blur-md bg-opacity-[.85] dark:bg-opacity-80;
+        backdrop-filter: blur(12px);
+        @apply bg-opacity-[.85] dark:bg-opacity-80;
       }
     }
   }
@@ -274,11 +275,12 @@ article {
     (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))
   ) {
     ul {
-      @apply backdrop-blur-lg bg-opacity-[.7];
+      backdrop-filter: blur(16px);
+      @apply bg-opacity-[.7];
     }
     .dark & {
       ul {
-        @apply backdrop-blur-lg bg-opacity-[.8];
+        @apply bg-opacity-[.8];
       }
     }
   }
