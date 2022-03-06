@@ -72,9 +72,9 @@ blockquote:not(:first-child),
 
 /* Content Typography */
 article {
+  min-height: calc(100vh - 64px);
   &.full {
     width: 100%;
-    min-height: calc(100vh - 64px);
     &.expand {
       width: 100vw;
       margin: 0 calc(50% - 50vw);

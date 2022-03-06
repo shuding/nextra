@@ -31,7 +31,7 @@ function Folder({ item, anchors }: FolderProps) {
   const active = route === item.route + '/' || route + '/' === item.route + '/'
   const { defaultMenuCollapsed } = useMenuContext()
   const open = TreeState[item.route] ?? !defaultMenuCollapsed
-  const [_, render] = useState(false)
+  const rerender = useState({})[1]
 
   useEffect(() => {
     if (active) {
@@ -39,23 +39,33 @@ function Folder({ item, anchors }: FolderProps) {
     }
   }, [active])
 
+  const link = (
+    <a
+      onClick={() => {
+        if (item.withIndexPage) {
+          // If it's focused, we toggle it. Otherwise always open it.
+          TreeState[item.route] = active ? !open : true
+          rerender({})
+          return
+        }
+        if (active) return
+        TreeState[item.route] = !open
+        rerender({})
+      }}
+    >
+      <span className="flex items-center justify-between gap-2">
+        {item.title}
+        <ArrowRight
+          height="1em"
+          className={cn(open ? 'rotate-90' : '', 'transition-transform')}
+        />
+      </span>
+    </a>
+  )
+
   return (
-    <li className={open ? 'active' : ''}>
-      <button
-        onClick={() => {
-          if (active) return
-          TreeState[item.route] = !open
-          render(x => !x)
-        }}
-      >
-        <span className="flex items-center justify-between gap-2">
-          {item.title}
-          <ArrowRight
-            height="1em"
-            className={cn(open ? 'rotate-90' : '', 'transition-transform')}
-          />
-        </span>
-      </button>
+    <li className={cn({ open, active })}>
+      {item.withIndexPage ? <Link href={item.route}>{link}</Link> : link}
       <div
         style={{
           display: open ? 'initial' : 'none'
@@ -266,7 +276,10 @@ export default function Sidebar({
               </div>
             ) : null}
             {config.darkMode ? (
-              <div className={cn('grow-0 relative', { locale: config.i18n })}>
+              <div
+                className={cn('grow-0 relative', { locale: config.i18n })}
+                key="theme-switch"
+              >
                 <ThemeSwitch />
               </div>
             ) : null}

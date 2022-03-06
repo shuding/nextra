@@ -132,21 +132,22 @@ export default async function (
     `globalThis.__nextra_internal__ = {\n` +
     `  pageMap: __nextra_pageMap__,\n` +
     `  route: ${JSON.stringify(route)},\n` +
-    `}\n`
+    `}\n` +
+    `
+    const __nextra_content__ = <MDXContent/>
+    const NextraLayout = __nextra_withSSG__(__nextra_withLayout__({
+      filename: "${slash(filename)}",
+      route: "${slash(route)}",
+      meta: ${JSON.stringify(data)},
+      pageMap: __nextra_pageMap__,
+      titleText: ${JSON.stringify(titleText)},
+      headings: ${JSON.stringify(headings)},
+      hasH1: ${JSON.stringify(hasH1)}
+    }, ${layoutConfig ? '__nextra_layoutConfig__' : 'null'}))
+    `
 
   const suffix = `export default function NextraPage (props) {
-  return __nextra_withSSG__(__nextra_withLayout__({
-    filename: "${slash(filename)}",
-    route: "${slash(route)}",
-    meta: ${JSON.stringify(data)},
-    pageMap: __nextra_pageMap__,
-    titleText: ${JSON.stringify(titleText)},
-    headings: ${JSON.stringify(headings)},
-    hasH1: ${JSON.stringify(hasH1)}
-  }, ${layoutConfig ? '__nextra_layoutConfig__' : 'null'}))({
-    ...props,
-    children: <MDXContent/>
-  })
+  return <NextraLayout {...props}>{__nextra_content__}</NextraLayout>
 }`
 
   // Add imports and exports to the source
