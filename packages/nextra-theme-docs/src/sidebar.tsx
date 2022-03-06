@@ -100,8 +100,14 @@ function File({ item, anchors }: FileProps) {
       })
       return (
         <li className={active ? 'active' : ''}>
-          <Link href={item.route}>
-            <a>{title}</a>
+          <Link href={(item as PageItem).href || item.route}>
+            <a
+              {...((item as PageItem).newWindow
+                ? { target: '_blank', rel: 'noopener noreferrer' }
+                : {})}
+            >
+              {title}
+            </a>
           </Link>
           <ul>
             {anchors.map((_, i) => {
@@ -132,8 +138,15 @@ function File({ item, anchors }: FileProps) {
 
   return (
     <li className={active ? 'active' : ''}>
-      <Link href={item.route}>
-        <a onClick={() => setMenu(false)}>{title}</a>
+      <Link href={(item as PageItem).href || item.route}>
+        <a
+          onClick={() => setMenu(false)}
+          {...((item as PageItem).newWindow
+            ? { target: '_blank', rel: 'noopener noreferrer' }
+            : {})}
+        >
+          {title}
+        </a>
       </Link>
     </li>
   )
@@ -143,7 +156,6 @@ interface MenuProps {
   anchors: string[]
   base?: string
 }
-const emptyItem: any[] = []
 function Menu({ directories, anchors }: MenuProps) {
   return (
     <ul>

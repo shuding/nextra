@@ -17,13 +17,10 @@ import { Item, PageItem } from './utils/normalize-pages'
 interface NavBarProps {
   isRTL?: boolean | null
   flatDirectories: Item[]
-  flatPageDirectories: PageItem[]
+  items: PageItem[]
 }
 
-export default function Navbar({
-  flatDirectories,
-  flatPageDirectories
-}: NavBarProps) {
+export default function Navbar({ flatDirectories, items }: NavBarProps) {
   const config = useConfig()
   const { locale, asPath } = useRouter()
   const activeRoute = getFSRoute(asPath, locale)
@@ -41,11 +38,11 @@ export default function Navbar({
           </Link>
         </div>
 
-        {flatPageDirectories
-          ? flatPageDirectories.map(page => {
+        {items
+          ? items.map(page => {
               if (page.hidden) return null
 
-              let href = page.route
+              let href = page.href || page.route || '#'
 
               // If it's a directory
               if (page.children) {
@@ -64,6 +61,9 @@ export default function Navbar({
                       isActive ? 'text-current' : 'text-gray-500'
                     )}
                     aria-selected={isActive}
+                    {...(page.newWindow
+                      ? { target: '_blank', rel: 'noopener noreferrer' }
+                      : {})}
                   >
                     {page.title}
                   </a>
