@@ -124,14 +124,14 @@ export default async function (
     `import withLayout from '${layout}'\n` +
     `import { withSSG } from 'nextra/ssg'\n` +
     `${layoutConfig ? `import layoutConfig from '${layoutConfig}'` : ''}\n` +
-    `const NEXTRA_PAGE_MAP = ${JSON.stringify(pageMap)}\n`
+    `const unstable_pageMap = ${JSON.stringify(pageMap)}\n`
 
   const suffix = `export default function NextraPage (props) {
   return withSSG(withLayout({
     filename: "${slash(filename)}",
     route: "${slash(route)}",
     meta: ${JSON.stringify(data)},
-    pageMap: NEXTRA_PAGE_MAP,
+    pageMap: unstable_pageMap,
     titleText: ${JSON.stringify(titleText)},
     headings: ${JSON.stringify(headings)},
     hasH1: ${JSON.stringify(hasH1)}
