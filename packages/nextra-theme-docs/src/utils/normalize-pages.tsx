@@ -25,6 +25,7 @@ export interface Item extends Omit<PageMapItem, 'children'> {
   type: string
   children?: Item[]
   hidden?: boolean
+  withIndexPage?: boolean
 }
 export interface PageItem extends Omit<PageMapItem, 'children'> {
   title: string
@@ -34,12 +35,14 @@ export interface PageItem extends Omit<PageMapItem, 'children'> {
   children?: PageItem[]
   firstChildRoute?: string
   hidden?: boolean
+  withIndexPage?: boolean
 }
 export interface DocsItem extends Omit<PageMapItem, 'children'> {
   title: string
   type: string
   children?: DocsItem[]
   firstChildRoute?: string
+  withIndexPage?: boolean
 }
 
 export default function normalizePages({
@@ -75,12 +78,6 @@ export default function normalizePages({
   const meta = _meta || {}
 
   const metaKeys = Object.keys(meta)
-  const hasLocale = new Map()
-  if (locale) {
-    list.forEach(a =>
-      a.locale === locale ? hasLocale.set(a.name, true) : null
-    )
-  }
 
   // All directories
   const directories: Item[] = []
@@ -108,8 +105,7 @@ export default function normalizePages({
         // not hidden routes
         !a.name.startsWith('_') &&
         // locale matches, or fallback to default locale
-        (a.locale === locale ||
-          ((a.locale === defaultLocale || !a.locale) && !hasLocale.get(a.name)))
+        (a.locale === locale || a.locale === defaultLocale || !a.locale)
     )
     .sort((a, b) => {
       const indexA = metaKeys.indexOf(a.name)
@@ -139,7 +135,19 @@ export default function normalizePages({
       return items
     })
 
-  for (const a of items) {
+  for (let i = 0; i < items.length; i++) {
+    const a = items[i]
+
+    // If there are two items with the same name, they must be a directory and a
+    // page. In that case we merge them, and use the page's link.
+    if (i + 1 < items.length && a.name === items[i + 1].name) {
+      items[i + 1] = { ...items[i + 1], withIndexPage: true }
+      if (a.children && !items[i + 1].children) {
+        items[i + 1].children = a.children
+      }
+      continue
+    }
+
     const title = getMetaTitle(meta[a.name]) || getTitle(a.name)
     const type = getMetaItemType(meta[a.name]) || 'doc'
     const hidden = getMetaHidden(meta[a.name])
@@ -154,7 +162,11 @@ export default function normalizePages({
 
     if (a.route === route) {
       activeType = type
-      activeThemeContext = extendedPageThemeContext
+      // There can be multiple matches.
+      activeThemeContext = {
+        ...activeThemeContext,
+        ...extendedPageThemeContext
+      }
       switch (type) {
         case 'page':
           activeIndex = topLevelPageItems.length
@@ -196,6 +208,9 @@ export default function normalizePages({
             activeIndex =
               flatDocsDirectories.length + normalizedChildren.activeIndex
             break
+        }
+        if (a.withIndexPage) {
+          activeIndex++
         }
       }
     }
@@ -242,6 +257,11 @@ export default function normalizePages({
             Array.isArray(docsItem.children) &&
               docsItem.children.push(...normalizedChildren.docsDirectories)
             pageDirectories.push(...normalizedChildren.pageDirectories)
+
+            // Itself is a doc page.
+            if (item.withIndexPage) {
+              flatDocsDirectories.push(docsItem)
+            }
           }
       }
 

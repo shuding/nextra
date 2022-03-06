@@ -46,7 +46,9 @@ export default function Navbar({ flatDirectories, items }: NavBarProps) {
 
               // If it's a directory
               if (page.children) {
-                href = page.firstChildRoute ?? href
+                href =
+                  (page.withIndexPage ? page.route : page.firstChildRoute) ||
+                  href
               }
 
               const isActive =
