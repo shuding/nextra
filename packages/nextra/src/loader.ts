@@ -121,21 +121,29 @@ export default async function (
   }
 
   const prefix =
-    `import withLayout from '${layout}'\n` +
-    `import { withSSG } from 'nextra/ssg'\n` +
-    `${layoutConfig ? `import layoutConfig from '${layoutConfig}'` : ''}\n` +
-    `const unstable_pageMap = ${JSON.stringify(pageMap)}\n`
+    `import __nextra_withLayout__ from '${layout}'\n` +
+    `import { withSSG as __nextra_withSSG__ } from 'nextra/ssg'\n` +
+    `${
+      layoutConfig
+        ? `import __nextra_layoutConfig__ from '${layoutConfig}'`
+        : ''
+    }\n\n` +
+    `const __nextra_pageMap__ = ${JSON.stringify(pageMap)}\n` +
+    `globalThis.__nextra_internal__ = {\n` +
+    `  pageMap: __nextra_pageMap__,\n` +
+    `  route: ${JSON.stringify(route)},\n` +
+    `}\n`
 
   const suffix = `export default function NextraPage (props) {
-  return withSSG(withLayout({
+  return __nextra_withSSG__(__nextra_withLayout__({
     filename: "${slash(filename)}",
     route: "${slash(route)}",
     meta: ${JSON.stringify(data)},
-    pageMap: unstable_pageMap,
+    pageMap: __nextra_pageMap__,
     titleText: ${JSON.stringify(titleText)},
     headings: ${JSON.stringify(headings)},
     hasH1: ${JSON.stringify(hasH1)}
-  }, ${layoutConfig ? 'layoutConfig' : 'null'}))({
+  }, ${layoutConfig ? '__nextra_layoutConfig__' : 'null'}))({
     ...props,
     children: <MDXContent/>
   })
