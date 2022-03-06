@@ -48,6 +48,7 @@ export default function normalizePages({
   defaultLocale,
   route,
   docsRoot = '',
+  underCurrentDocsRoot = false,
   pageThemeContext = defaultThemeContext
 }: {
   list: PageMapItem[]
@@ -55,6 +56,7 @@ export default function normalizePages({
   defaultLocale?: string
   route: string
   docsRoot?: string
+  underCurrentDocsRoot?: boolean
   pageThemeContext?: Record<keyof typeof defaultThemeContext, boolean>
 }) {
   let _meta: Record<string, any> | undefined
@@ -98,7 +100,7 @@ export default function normalizePages({
 
   let metaKeyIndex = 0
 
-  list
+  const items = list
     .filter(
       a =>
         // not meta
@@ -136,144 +138,145 @@ export default function normalizePages({
 
       return items
     })
-    .forEach(a => {
-      const hidden = getMetaHidden(meta[a.name])
-      if (hidden) return
 
-      const title = getMetaTitle(meta[a.name]) || getTitle(a.name)
-      const type = getMetaItemType(meta[a.name]) || 'doc'
+  for (const a of items) {
+    const title = getMetaTitle(meta[a.name]) || getTitle(a.name)
+    const type = getMetaItemType(meta[a.name]) || 'doc'
+    const hidden = getMetaHidden(meta[a.name])
 
-      const extendedPageThemeContext = {
-        ...pageThemeContext,
-        ...meta[a.name]?.theme
-      }
+    const extendedPageThemeContext = {
+      ...pageThemeContext,
+      ...meta[a.name]?.theme
+    }
 
-      // If the doc is under the active page root.
-      const isCurrentDocsTree = type === 'doc' && route.startsWith(docsRoot)
+    // If the doc is under the active page root.
+    const isCurrentDocsTree = route.startsWith(docsRoot)
 
-      if (a.route === route) {
-        activeType = type
-        activeThemeContext = extendedPageThemeContext
-        switch (type) {
-          case 'page':
-            activeIndex = topLevelPageItems.length
-            break
-          case 'doc':
-          default:
-            if (isCurrentDocsTree) {
-              activeIndex = flatDocsDirectories.length
-            }
-        }
-      }
-
-      const normalizedChildren = a.children
-        ? normalizePages({
-            list: a.children,
-            locale,
-            defaultLocale,
-            route,
-            docsRoot: type === 'page' ? a.route : docsRoot,
-            pageThemeContext: extendedPageThemeContext
-          })
-        : undefined
-
-      if (normalizedChildren) {
-        if (
-          normalizedChildren.activeIndex !== undefined &&
-          normalizedChildren.activeType !== undefined
-        ) {
-          activeThemeContext = normalizedChildren.activeThemeContext
-          activeType = normalizedChildren.activeType
-          switch (activeType) {
-            case 'page':
-              activeIndex =
-                topLevelPageItems.length + normalizedChildren.activeIndex
-              break
-            case 'doc':
-              activeIndex =
-                flatDocsDirectories.length + normalizedChildren.activeIndex
-              break
-          }
-        }
-      }
-
-      const item: Item = {
-        ...a,
-        title,
-        type,
-        hidden,
-        children: normalizedChildren ? [] : undefined
-      }
-      const docsItem: DocsItem = {
-        ...a,
-        title,
-        type,
-        hidden,
-        children: normalizedChildren ? [] : undefined
-      }
-      const pageItem: PageItem = {
-        ...a,
-        title,
-        type,
-        hidden,
-        children: normalizedChildren ? [] : undefined
-      }
-
-      if (normalizedChildren) {
-        switch (type) {
-          case 'page':
-            // @ts-expect-error normalizedChildren === true
-            pageItem.children.push(...normalizedChildren.pageDirectories)
-            docsDirectories.push(...normalizedChildren.docsDirectories)
-
-            // If it's a page with children inside, we inject itself as a page too.
-            if (normalizedChildren.flatDirectories.length) {
-              pageItem.firstChildRoute =
-                normalizedChildren.flatDirectories[0].route
-              topLevelPageItems.push(pageItem)
-            }
-
-            break
-          case 'doc':
-          default:
-            if (isCurrentDocsTree) {
-              Array.isArray(docsItem.children) &&
-                docsItem.children.push(...normalizedChildren.docsDirectories)
-              pageDirectories.push(...normalizedChildren.pageDirectories)
-            }
-        }
-
-        flatDirectories.push(...normalizedChildren.flatDirectories)
-        flatDocsDirectories.push(...normalizedChildren.flatDocsDirectories)
-
-        Array.isArray(item.children) &&
-          item.children.push(...normalizedChildren.directories)
-      } else {
-        flatDirectories.push(item)
-        switch (type) {
-          case 'page':
-            topLevelPageItems.push(pageItem)
-            break
-          case 'doc':
-          default:
-            if (isCurrentDocsTree) {
-              flatDocsDirectories.push(docsItem)
-            }
-        }
-      }
-
-      directories.push(item)
+    if (a.route === route) {
+      activeType = type
+      activeThemeContext = extendedPageThemeContext
       switch (type) {
         case 'page':
-          pageDirectories.push(pageItem)
+          activeIndex = topLevelPageItems.length
           break
         case 'doc':
-        default:
           if (isCurrentDocsTree) {
-            docsDirectories.push(docsItem)
+            activeIndex = flatDocsDirectories.length
           }
       }
-    })
+    }
+
+    const normalizedChildren: any = a.children
+      ? normalizePages({
+          list: a.children,
+          locale,
+          defaultLocale,
+          route,
+          docsRoot: type === 'page' ? a.route : docsRoot,
+          underCurrentDocsRoot: underCurrentDocsRoot || isCurrentDocsTree,
+          pageThemeContext: extendedPageThemeContext
+        })
+      : undefined
+
+    if (hidden) continue
+
+    if (normalizedChildren) {
+      if (
+        normalizedChildren.activeIndex !== undefined &&
+        normalizedChildren.activeType !== undefined
+      ) {
+        activeThemeContext = normalizedChildren.activeThemeContext
+        activeType = normalizedChildren.activeType
+        switch (activeType) {
+          case 'page':
+            activeIndex =
+              topLevelPageItems.length + normalizedChildren.activeIndex
+            break
+          case 'doc':
+            activeIndex =
+              flatDocsDirectories.length + normalizedChildren.activeIndex
+            break
+        }
+      }
+    }
+
+    const item: Item = {
+      ...a,
+      title,
+      type,
+      hidden,
+      children: normalizedChildren ? [] : undefined
+    }
+    const docsItem: DocsItem = {
+      ...a,
+      title,
+      type,
+      hidden,
+      children: normalizedChildren ? [] : undefined
+    }
+    const pageItem: PageItem = {
+      ...a,
+      title,
+      type,
+      hidden,
+      children: normalizedChildren ? [] : undefined
+    }
+
+    if (normalizedChildren) {
+      switch (type) {
+        case 'page':
+          // @ts-expect-error normalizedChildren === true
+          pageItem.children.push(...normalizedChildren.pageDirectories)
+          docsDirectories.push(...normalizedChildren.docsDirectories)
+
+          // If it's a page with children inside, we inject itself as a page too.
+          if (normalizedChildren.flatDirectories.length) {
+            pageItem.firstChildRoute =
+              normalizedChildren.flatDirectories[0].route
+            topLevelPageItems.push(pageItem)
+          }
+
+          break
+        case 'doc':
+          if (isCurrentDocsTree) {
+            Array.isArray(docsItem.children) &&
+              docsItem.children.push(...normalizedChildren.docsDirectories)
+            pageDirectories.push(...normalizedChildren.pageDirectories)
+          }
+      }
+
+      flatDirectories.push(...normalizedChildren.flatDirectories)
+      flatDocsDirectories.push(...normalizedChildren.flatDocsDirectories)
+
+      Array.isArray(item.children) &&
+        item.children.push(...normalizedChildren.directories)
+    } else {
+      flatDirectories.push(item)
+      switch (type) {
+        case 'page':
+          topLevelPageItems.push(pageItem)
+          break
+        case 'doc':
+          if (isCurrentDocsTree) {
+            flatDocsDirectories.push(docsItem)
+          }
+      }
+    }
+
+    directories.push(item)
+    switch (type) {
+      case 'page':
+        pageDirectories.push(pageItem)
+        if (isCurrentDocsTree && underCurrentDocsRoot) {
+          docsDirectories.push(pageItem)
+        }
+        break
+      case 'doc':
+        if (isCurrentDocsTree) {
+          docsDirectories.push(docsItem)
+        }
+    }
+  }
 
   return {
     activeType,

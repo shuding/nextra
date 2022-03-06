@@ -7,8 +7,8 @@
     "title": "Error Handling",
     "hidden": true
   },
-  "nextra_link": {
-    "title": "Nextra ↗",
+  "github_link": {
+    "title": "GitHub 🐙 →",
     "href": "https://github.com/shuding/nextra",
     "type": "page",
     "newWindow": true
