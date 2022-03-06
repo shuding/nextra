@@ -45,12 +45,11 @@ function filter(pageMap: any, activeLevel?: string) {
       page.children = filteredChildren[0]
       if (filteredChildren[1]) {
         activeLevelPages = filteredChildren[1]
+      } else if (page.route === activeLevel) {
+        activeLevelPages = activeLevelPages || page.children
       }
     }
     items.push(page)
-    if (page.route === activeLevel) {
-      activeLevelPages = items
-    }
   }
 
   return [
