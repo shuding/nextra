@@ -1,6 +1,6 @@
 {
   "name": "nextra-theme-docs",
-  "version": "2.0.0-alpha.31",
+  "version": "2.0.0-alpha.32",
   "description": "A Nextra theme for documentation sites.",
   "main": "index.js",
   "module": "index.js",
@@ -60,6 +60,7 @@
   },
   "devDependencies": {
     "@types/flexsearch": "^0.7.2",
+    "@types/react": "^17.0.39",
     "nextra": "workspace:*"
   }
 }

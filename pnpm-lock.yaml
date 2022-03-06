@@ -137,6 +137,7 @@ importers:
       '@mdx-js/react': ^2.0.0
       '@reach/skip-nav': ^0.16.0
       '@types/flexsearch': ^0.7.2
+      '@types/react': ^17.0.39
       classnames: ^2.2.6
       flexsearch: ^0.7.21
       focus-visible: ^5.1.0
@@ -160,10 +161,11 @@ importers:
       match-sorter: 4.2.1
       next-themes: 0.0.15_caa633a00319350dbda42996613fe26c
       parse-git-url: 1.0.1
-      react-innertext: 1.1.5_b08e3c15324cbe90a6ff8fcd416c932c
+      react-innertext: 1.1.5_a0c521d4794c7ad97f5f4c1c4a7d5818
       title: 3.4.3
     devDependencies:
       '@types/flexsearch': 0.7.2
+      '@types/react': 17.0.39
       nextra: link:../nextra
 
 packages:
@@ -237,7 +239,7 @@ packages:
       react: '>=16'
     dependencies:
       '@types/mdx': 2.0.1
-      '@types/react': 17.0.38
+      '@types/react': 17.0.39
       react: 17.0.2
     dev: false
 
@@ -544,6 +546,14 @@ packages:
 
   /@types/react/17.0.38:
     resolution: {integrity: sha512-SI92X1IA+FMnP3qM5m4QReluXzhcmovhZnLNm3pyeQlooi02qI7sLiepEYqT678uNiyc25XfCqxREFpy3W7YhQ==}
+    dependencies:
+      '@types/prop-types': 15.7.4
+      '@types/scheduler': 0.16.2
+      csstype: 3.0.10
+    dev: true
+
+  /@types/react/17.0.39:
+    resolution: {integrity: sha512-UVavlfAxDd/AgAacMa60Azl7ygyQNRwC/DsHZmKgNvPmRR5p70AJ5Q9EAmL2NWOJmeV+vVUI4IAP7GZrN8h8Ug==}
     dependencies:
       '@types/prop-types': 15.7.4
       '@types/scheduler': 0.16.2
@@ -3917,13 +3927,13 @@ packages:
       scheduler: 0.20.2
     dev: true
 
-  /react-innertext/1.1.5_b08e3c15324cbe90a6ff8fcd416c932c:
+  /react-innertext/1.1.5_a0c521d4794c7ad97f5f4c1c4a7d5818:
     resolution: {integrity: sha512-PWAqdqhxhHIv80dT9znP2KvS+hfkbRovFp4zFYHFFlOoQLRiawIic81gKb3U1wEyJZgMwgs3JoLtwryASRWP3Q==}
     peerDependencies:
       '@types/react': '>=0.0.0 <=99'
       react: '>=0.0.0 <=99'
     dependencies:
-      '@types/react': 17.0.38
+      '@types/react': 17.0.39
       react: 17.0.2
     dev: false
 

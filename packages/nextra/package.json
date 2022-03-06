@@ -1,6 +1,6 @@
 {
   "name": "nextra",
-  "version": "2.0.0-alpha.31",
+  "version": "2.0.0-alpha.32",
   "description": "Next.js and MDX based site generator.",
   "main": "index.js",
   "files": [
@@ -8,7 +8,8 @@
     "index.js",
     "ssg.js",
     "loader.js",
-    "locales.js"
+    "locales.js",
+    "context.js"
   ],
   "types": "./dist/types.d.ts",
   "repository": "https://github.com/shuding/nextra",
