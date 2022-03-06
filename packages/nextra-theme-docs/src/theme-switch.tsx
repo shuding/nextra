@@ -18,13 +18,11 @@ function ThemeSwitch({ lite = true }) {
       }}
       selected={{
         key: theme || '',
-        name: mounted ? (
+        name: (
           <div className="flex items-center gap-2 capitalize">
-            {renderedTheme === 'dark' ? <Moon /> : <Sun />}
-            {lite ? '' : <span>{theme}</span>}
+            {mounted && renderedTheme === 'dark' ? <Moon /> : <Sun />}
+            {lite ? '' : <span>{mounted ? theme : 'light'}</span>}
           </div>
-        ) : (
-          <div className="flex items-center gap-2 capitalize" />
         )
       }}
       options={[
