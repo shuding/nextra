@@ -3,7 +3,12 @@ const package = require('../package.json')
 
 // Build CJS entrypoints
 esbuild.buildSync({
-  entryPoints: ['src/index.js', 'src/ssg.ts', 'src/locales.ts'],
+  entryPoints: [
+    'src/index.js',
+    'src/ssg.ts',
+    'src/locales.ts',
+    'src/context.ts'
+  ],
   platform: 'node',
   bundle: true,
   format: 'cjs',
