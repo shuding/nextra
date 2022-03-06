@@ -183,7 +183,7 @@ const Layout: React.FC<LayoutProps> = ({
 
 export default (opts: PageOpt, config: DocsThemeConfig) => {
   const extendedConfig = Object.assign({}, defaultConfig, config)
-  return (props: any) => {
+  return function (props: any) {
     return (
       <ThemeConfigContext.Provider value={extendedConfig}>
         <ThemeProvider

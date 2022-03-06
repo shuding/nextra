@@ -276,7 +276,10 @@ export default function Sidebar({
               </div>
             ) : null}
             {config.darkMode ? (
-              <div className={cn('grow-0 relative', { locale: config.i18n })}>
+              <div
+                className={cn('grow-0 relative', { locale: config.i18n })}
+                key="theme-switch"
+              >
                 <ThemeSwitch />
               </div>
             ) : null}

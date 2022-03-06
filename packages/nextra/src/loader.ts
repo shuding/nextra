@@ -135,7 +135,7 @@ export default async function (
     `}\n` +
     `
     const __nextra_content__ = <MDXContent/>
-    const __nextra_layout__ = __nextra_withLayout__({
+    const NextraLayout = __nextra_withSSG__(__nextra_withLayout__({
       filename: "${slash(filename)}",
       route: "${slash(route)}",
       meta: ${JSON.stringify(data)},
@@ -143,14 +143,11 @@ export default async function (
       titleText: ${JSON.stringify(titleText)},
       headings: ${JSON.stringify(headings)},
       hasH1: ${JSON.stringify(hasH1)}
-    }, ${layoutConfig ? '__nextra_layoutConfig__' : 'null'})
+    }, ${layoutConfig ? '__nextra_layoutConfig__' : 'null'}))
     `
 
   const suffix = `export default function NextraPage (props) {
-  return __nextra_withSSG__(__nextra_layout__)({
-    ...props,
-    children: __nextra_content__
-  })
+  return <NextraLayout {...props}>{__nextra_content__}</NextraLayout>
 }`
 
   // Add imports and exports to the source

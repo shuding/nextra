@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { useTheme } from 'next-themes'
 
 import Menu from './select'
 import Sun from './icons/sun'
 import Moon from './icons/moon'
 
-export default function ThemeSwitch({ lite = true }) {
+function ThemeSwitch({ lite = true }) {
   const { theme, setTheme, systemTheme } = useTheme()
   const renderedTheme = theme === 'system' ? systemTheme : theme
   const [mounted, setMounted] = React.useState(false)
@@ -24,7 +24,7 @@ export default function ThemeSwitch({ lite = true }) {
             {lite ? '' : <span>{theme}</span>}
           </div>
         ) : (
-          ''
+          <div className="flex items-center gap-2 capitalize" />
         )
       }}
       options={[
@@ -44,3 +44,5 @@ export default function ThemeSwitch({ lite = true }) {
     ></Menu>
   )
 }
+
+export default memo(ThemeSwitch)
