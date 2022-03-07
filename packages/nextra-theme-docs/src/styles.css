@@ -100,17 +100,25 @@ blockquote:not(:first-child),
     }
   }
 }
-@screen mobile {
+@media (max-width: 767px) {
   .nextra-sidebar-container {
-    @apply top-0 pt-16 bg-white dark:bg-dark hidden;
+    @apply top-0 pt-16 bg-white dark:bg-dark;
     height: var(--vh);
-    /* box-shadow: 0 0 0 100vh rgb(0 0 0 / 0); */
-    /* transition: opacity 1.2s cubic-bezier(0.52, 0.16, 0.24, 1),
-      box-shadow 1.2s ease; */
+    opacity: 0;
+    box-shadow: 0 0 0 110vh rgba(0, 0, 0, 0);
+    transform: translate3d(0, -110%, 0);
+    transition: transform 0.8s cubic-bezier(0.52, 0.16, 0.04, 1),
+      box-shadow 1.5s ease, opacity 1.5s step-end;
+
     &.open {
-      /* opacity: 1;
-      box-shadow: 0 0 0 100vh rgb(0 0 0 / 50%); */
-      display: block;
+      opacity: 1;
+      box-shadow: 0 0 0 110vh rgba(0, 0, 0, 0.5);
+      transform: translate3d(0, 0, 0);
+      transition: transform 0.8s cubic-bezier(0.52, 0.16, 0.04, 1),
+        box-shadow 0.8s ease;
+    }
+    body.resizing & {
+      transition: none;
     }
   }
 }
