@@ -34,6 +34,7 @@ function FolderImpl({ item, anchors }: FolderProps) {
   const { defaultMenuCollapsed } = useMenuContext()
   const open = TreeState[item.route] ?? !defaultMenuCollapsed
   const rerender = useState({})[1]
+  const { setMenu } = useMenuContext()
 
   useEffect(() => {
     if (active) {
@@ -43,6 +44,7 @@ function FolderImpl({ item, anchors }: FolderProps) {
 
   const link = (
     <a
+      className="cursor-pointer"
       onClick={e => {
         const clickedToggleIcon = ['svg', 'path'].includes(
           (e.target as HTMLElement).tagName.toLowerCase()
@@ -55,8 +57,8 @@ function FolderImpl({ item, anchors }: FolderProps) {
           if (active || clickedToggleIcon) {
             TreeState[item.route] = !open
           } else {
-            // fromMenuOpen = !TreeState[item.route]
             TreeState[item.route] = true
+            setMenu(false)
           }
           rerender({})
           return
@@ -96,19 +98,26 @@ function FolderImpl({ item, anchors }: FolderProps) {
         enter="transition-all ease-in-out duration-300 overflow-hidden"
         leave="transition-all ease-in-out duration-500 overflow-hidden"
         leaveFrom="opacity-100"
-        enterFrom="!h-0 opacity-0"
-        leaveTo="!h-0 opacity-0"
+        enterFrom="!max-h-0 opacity-0"
+        leaveTo="!max-h-0 opacity-0"
         enterTo="opacity-100"
         afterEnter={() => {
           if (containerRef.current) {
             const height = containerRef.current.clientHeight
-            containerRef.current.parentElement!.style.height = height + 'px'
+            containerRef.current.parentElement!.style.maxHeight = height + 'px'
+            setTimeout(() => {
+              if (containerRef.current) {
+                containerRef.current.parentElement!.style.removeProperty(
+                  'max-height'
+                )
+              }
+            }, 300)
           }
         }}
         beforeLeave={() => {
           if (containerRef.current) {
             const height = containerRef.current.clientHeight
-            containerRef.current.parentElement!.style.height = height + 'px'
+            containerRef.current.parentElement!.style.maxHeight = height + 'px'
           }
         }}
       >
@@ -135,6 +144,7 @@ function File({ item, anchors }: FileProps) {
   const active = route === item.route + '/' || route + '/' === item.route + '/'
   const slugger = new Slugger()
   const activeAnchor = useActiveAnchor()
+  const { setMenu } = useMenuContext()
 
   const title = item.title
   // if (item.title.startsWith('> ')) {
@@ -157,6 +167,9 @@ function File({ item, anchors }: FileProps) {
               {...((item as PageItem).newWindow
                 ? { target: '_blank', rel: 'noopener noreferrer' }
                 : {})}
+              onClick={() => {
+                setMenu(false)
+              }}
             >
               {title}
             </a>
@@ -171,6 +184,9 @@ function File({ item, anchors }: FileProps) {
                   <a
                     href={'#' + slug}
                     className={isActive ? 'active-anchor' : ''}
+                    onClick={() => {
+                      setMenu(false)
+                    }}
                   >
                     <span className="flex text-sm">
                       <span className="opacity-25">#</span>
@@ -194,6 +210,9 @@ function File({ item, anchors }: FileProps) {
           {...((item as PageItem).newWindow
             ? { target: '_blank', rel: 'noopener noreferrer' }
             : {})}
+          onClick={() => {
+            setMenu(false)
+          }}
         >
           {title}
         </a>

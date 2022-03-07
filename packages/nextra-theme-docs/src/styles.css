@@ -164,7 +164,7 @@ blockquote:not(:first-child),
 }
 
 /* Content Typography */
-.nextra-body {
+article {
   min-height: calc(100vh - 64px);
   &.full {
     width: 100%;
