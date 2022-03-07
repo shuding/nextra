@@ -143,10 +143,10 @@ export default function ToC({
   const hasMetaInfo = config.feedbackLink || config.footerEditLink
 
   return (
-    <div className="w-64 hidden xl:block text-sm px-4">
+    <div className="nextra-toc w-64 hidden xl:block text-sm px-4">
       <div className="overflow-y-auto sticky max-h-[calc(var(--vh)-4rem)] top-16 pt-8 pb-10">
         {headings ? (
-          <ul className="m-0 list-none">
+          <ul>
             <p className="font-semibold tracking-tight mb-4">On This Page</p>
             {headings
               .filter(

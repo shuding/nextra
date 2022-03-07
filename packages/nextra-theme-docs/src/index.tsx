@@ -52,14 +52,14 @@ const Body: React.FC<BodyProps> = ({
       {themeContext.full ? (
         <article
           className={cn(
-            'full relative overflow-x-hidden',
+            'nextra-body full relative overflow-x-hidden',
             !themeContext.sidebar ? 'expand' : ''
           )}
         >
           <MDXTheme>{children}</MDXTheme>
         </article>
       ) : (
-        <article className="docs-container relative pb-8 w-full max-w-full flex min-w-0 pr-[calc(env(safe-area-inset-right)-1.5rem)]">
+        <article className="nextra-body relative pb-8 w-full max-w-full flex min-w-0 pr-[calc(env(safe-area-inset-right)-1.5rem)]">
           <main className="mx-auto max-w-4xl px-6 md:px-8 pt-4 z-10 min-w-0 w-full">
             <MDXTheme>{children}</MDXTheme>
             {navLinks}
@@ -79,7 +79,7 @@ interface LayoutProps {
   headings: Heading[]
 }
 
-const Layout: React.FC<LayoutProps> = ({
+const Content: React.FC<LayoutProps> = ({
   filename,
   pageMap,
   meta,
@@ -181,23 +181,55 @@ const Layout: React.FC<LayoutProps> = ({
   )
 }
 
-export default (opts: PageOpt, config: DocsThemeConfig) => {
-  const extendedConfig = Object.assign({}, defaultConfig, config)
-  return function (props: any) {
+// The layout component must be shared globally, we only initialize it once.
+let GlobalLayout: any
+
+export default (opts: PageOpt, _config: DocsThemeConfig) => {
+  const extendedConfig = Object.assign({}, defaultConfig, _config)
+
+  if (!GlobalLayout) {
+    GlobalLayout = function ({
+      children,
+      opts,
+      config
+    }: {
+      opts: any
+      children: any
+      config: DocsThemeConfig & typeof defaultConfig
+    }) {
+      ;(globalThis as any).__nextra_layout__ = true
+      return (
+        <ThemeConfigContext.Provider value={config}>
+          <ThemeProvider
+            attribute="class"
+            disableTransitionOnChange={true}
+            {...{
+              defaultTheme: config.nextThemes.defaultTheme,
+              storageKey: config.nextThemes.storageKey,
+              forcedTheme: config.nextThemes.forcedTheme
+            }}
+          >
+            <Content {...opts}>{children}</Content>
+          </ThemeProvider>
+        </ThemeConfigContext.Provider>
+      )
+    }
+  }
+
+  function Page({ children }: any) {
+    if (!(globalThis as any).__nextra_layout__) {
+      throw new Error(
+        '[Nextra] Please add the `getLayout` logic to your _app.js, see https://nextjs.org/docs/basic-features/layouts#per-page-layouts.'
+      )
+    }
+    return children
+  }
+  Page.withLayout = (page: any) => {
     return (
-      <ThemeConfigContext.Provider value={extendedConfig}>
-        <ThemeProvider
-          attribute="class"
-          disableTransitionOnChange={true}
-          {...{
-            defaultTheme: extendedConfig.nextThemes.defaultTheme,
-            storageKey: extendedConfig.nextThemes.storageKey,
-            forcedTheme: extendedConfig.nextThemes.forcedTheme
-          }}
-        >
-          <Layout {...opts} {...props} />
-        </ThemeProvider>
-      </ThemeConfigContext.Provider>
+      <GlobalLayout opts={opts} config={extendedConfig}>
+        {page}
+      </GlobalLayout>
     )
   }
+  return Page
 }

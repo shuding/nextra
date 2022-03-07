@@ -9,9 +9,6 @@
   "license": "MIT",
   "files": [
     "dist/*",
-    "index.js",
-    "callout.js",
-    "bleed.js",
     "style.css"
   ],
   "types": "./dist/types.d.ts",
