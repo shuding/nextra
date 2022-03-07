@@ -87,7 +87,6 @@ interface FileProps {
   anchors: string[]
 }
 function File({ item, anchors }: FileProps) {
-  const { setMenu } = useMenuContext()
   const { asPath, locale } = useRouter()
   const route = getFSRoute(asPath, locale)
   const active = route === item.route + '/' || route + '/' === item.route + '/'
@@ -128,7 +127,6 @@ function File({ item, anchors }: FileProps) {
                 <li key={`a-${slug}`}>
                   <a
                     href={'#' + slug}
-                    onClick={() => setMenu(false)}
                     className={isActive ? 'active-anchor' : ''}
                   >
                     <span className="flex text-sm">
@@ -150,7 +148,6 @@ function File({ item, anchors }: FileProps) {
     <li className={active ? 'active' : ''}>
       <Link href={(item as PageItem).href || item.route}>
         <a
-          onClick={() => setMenu(false)}
           {...((item as PageItem).newWindow
             ? { target: '_blank', rel: 'noopener noreferrer' }
             : {})}
