@@ -52,14 +52,14 @@ const Body: React.FC<BodyProps> = ({
       {themeContext.full ? (
         <article
           className={cn(
-            'full relative overflow-x-hidden',
+            'nextra-body full relative overflow-x-hidden',
             !themeContext.sidebar ? 'expand' : ''
           )}
         >
           <MDXTheme>{children}</MDXTheme>
         </article>
       ) : (
-        <article className="docs-container relative pb-8 w-full max-w-full flex min-w-0 pr-[calc(env(safe-area-inset-right)-1.5rem)]">
+        <article className="nextra-body relative pb-8 w-full max-w-full flex min-w-0 pr-[calc(env(safe-area-inset-right)-1.5rem)]">
           <main className="mx-auto max-w-4xl px-6 md:px-8 pt-4 z-10 min-w-0 w-full">
             <MDXTheme>{children}</MDXTheme>
             {navLinks}

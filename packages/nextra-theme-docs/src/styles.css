@@ -33,45 +33,90 @@ blockquote:not(:first-child),
   min-height: var(--vh);
 }
 
-.sidebar {
-  @apply select-none;
-  ul ul {
-    @apply ml-5 relative;
-  }
-  ul {
+.nextra-container {
+  /* Navbar */
+  .nextra-nav-container {
+    a:focus,
+    summary:focus {
+      @apply select-none outline-none;
+    }
     a:focus-visible,
-    button:focus-visible {
-      @apply ring ring-prime-200;
+    summary:focus-visible {
+      @apply ring ring-prime-200 select-none outline-none;
     }
-    .active-anchor {
-      @apply font-semibold text-gray-900;
-      @apply dark:text-white;
+
+    .nextra-nav-container-blur {
+      z-index: -1;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02),
+        0 -1px 0 rgba(0, 0, 0, 0.06) inset;
+      .dark & {
+        box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+      }
     }
-    li.active > a,
-    li.active > a:hover {
-      @apply font-bold text-prime-500 bg-prime-50;
-      @apply dark:text-prime-500 dark:bg-prime-500 dark:bg-opacity-10;
-    }
-    button,
-    summary,
-    li a {
-      @apply block w-full text-left text-sm no-underline text-gray-700 mt-1 px-2 py-1.5 rounded select-none outline-none transition-colors;
-      @apply dark:text-gray-400;
-      -webkit-tap-highlight-color: transparent;
-      -webkit-touch-callout: none;
-      &:hover {
-        @apply text-gray-900 bg-gray-100;
-        @apply dark:text-gray-50 dark:bg-prime-100 dark:bg-opacity-5;
+    @supports (
+      (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))
+    ) {
+      .nextra-nav-container-blur {
+        backdrop-filter: blur(12px);
+        @apply bg-opacity-[.85] dark:bg-opacity-80;
       }
     }
   }
-  .locale .menu {
-    @apply right-0;
+
+  /* Sidebar */
+  .nextra-sidebar {
+    ul {
+      a:focus-visible,
+      button:focus-visible {
+        @apply ring ring-prime-200;
+      }
+      .active-anchor {
+        @apply font-semibold text-gray-900;
+        @apply dark:text-white;
+      }
+      li.active > a,
+      li.active > a:hover {
+        @apply font-bold text-prime-500 bg-prime-50;
+        @apply dark:text-prime-500 dark:bg-prime-500 dark:bg-opacity-10;
+      }
+      button,
+      summary,
+      li a {
+        @apply block w-full text-left text-sm no-underline text-gray-700 mt-1 px-2 py-1.5 rounded select-none outline-none transition-colors;
+        @apply dark:text-gray-400;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+        &:hover {
+          @apply text-gray-900 bg-gray-100;
+          @apply dark:text-gray-50 dark:bg-prime-100 dark:bg-opacity-5;
+        }
+      }
+      ul {
+        @apply ml-5 relative;
+      }
+    }
+    .locale .menu {
+      @apply right-0;
+    }
+  }
+}
+@screen mobile {
+  .nextra-sidebar-container {
+    @apply top-0 pt-16 bg-white dark:bg-dark hidden;
+    height: var(--vh);
+    /* box-shadow: 0 0 0 100vh rgb(0 0 0 / 0); */
+    /* transition: opacity 1.2s cubic-bezier(0.52, 0.16, 0.24, 1),
+      box-shadow 1.2s ease; */
+    &.open {
+      /* opacity: 1;
+      box-shadow: 0 0 0 100vh rgb(0 0 0 / 50%); */
+      display: block;
+    }
   }
 }
 
 /* Content Typography */
-article {
+.nextra-body {
   min-height: calc(100vh - 64px);
   &.full {
     width: 100%;
@@ -80,6 +125,7 @@ article {
       margin: 0 calc(50% - 50vw);
     }
   }
+
   h1 {
     @apply text-4xl font-bold tracking-tight mt-2;
   }
@@ -174,44 +220,19 @@ article {
   }
 
   .subheading-anchor + a:hover .anchor-icon {
-    opacity: 1;
+    @apply opacity-100;
   }
+  .subheading-anchor:target + a .anchor-icon {
+    @apply opacity-100 text-gray-400 dark:text-neutral-500;
+  }
+
   .anchor-icon {
-    opacity: 0;
-    @apply ml-2 text-gray-300 select-none;
+    @apply pl-2 text-gray-300 dark:text-neutral-700 select-none transition-opacity absolute opacity-0;
   }
-  .dark & .anchor-icon {
-    @apply text-gray-600;
-  }
-}
 
-.nextra-container {
-  /* Navbar */
-  .nextra-nav-container {
-    a:focus,
-    summary:focus {
-      @apply select-none outline-none;
-    }
-    a:focus-visible,
-    summary:focus-visible {
-      @apply ring ring-prime-200 select-none outline-none;
-    }
-
-    .nextra-nav-container-blur {
-      z-index: -1;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02),
-        0 -1px 0 rgba(0, 0, 0, 0.06) inset;
-      .dark & {
-        box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
-      }
-    }
-    @supports (
-      (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))
-    ) {
-      .nextra-nav-container-blur {
-        backdrop-filter: blur(12px);
-        @apply bg-opacity-[.85] dark:bg-opacity-80;
-      }
+  .nextra-toc {
+    ul {
+      @apply m-0 list-none;
     }
   }
 }
@@ -381,41 +402,41 @@ table tr td {
 /* RTL */
 .nextra-container.rtl {
   direction: rtl;
-  .sidebar ul ul {
+  .nextra-sidebar ul ul {
     @apply mr-5 ml-0;
   }
-  .sidebar button,
-  .sidebar a {
+  .nextra-sidebar button,
+  .nextra-sidebar a {
     @apply text-right;
   }
   article blockquote {
     @apply pr-6 border-r-2 pl-0 border-l-0;
   }
 }
-.nextra-container:not(.rtl):not(.page) article.docs-container {
+.nextra-container:not(.rtl):not(.page) article.nextra-body {
 }
-.nextra-container.rtl:not(.page) .docs-container {
+.nextra-container.rtl:not(.page) .nextra-body {
 }
 @screen md {
-  .nextra-container:not(.page) article.docs-container .bleed.full {
+  .nextra-container:not(.page) article.nextra-body .bleed.full {
     margin-left: calc(-50vw + 50% + 8rem);
     margin-right: calc(-50vw + 50% + 8rem);
   }
-  .nextra-container.page article.docs-container .bleed.full {
+  .nextra-container.page article.nextra-body .bleed.full {
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
   }
 }
 @screen xl {
-  .nextra-container:not(.rtl):not(.page) article.docs-container .bleed.full {
+  .nextra-container:not(.rtl):not(.page) article.nextra-body .bleed.full {
     margin-left: calc(50% - 50vw + 16rem);
     margin-right: calc(50% - 50vw);
   }
-  .nextra-container.rtl:not(.page) .docs-container .bleed.full {
+  .nextra-container.rtl:not(.page) .nextra-body .bleed.full {
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw + 16rem);
   }
-  .nextra-container.page .docs-container .bleed.full {
+  .nextra-container.page .nextra-body .bleed.full {
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
   }
@@ -431,7 +452,7 @@ table tr td {
   article ol {
     @apply ml-0 mr-6;
   }
-  .sidebar {
+  .nextra-sidebar {
     @apply md:border-l;
   }
 }

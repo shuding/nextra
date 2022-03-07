@@ -217,21 +217,13 @@ export default function Sidebar({
   return (
     <aside
       className={cn(
-        'fixed flex-shrink-0 w-full md:w-64 md:sticky z-[15] top-[4rem] self-start overflow-y-auto h-full md:h-auto',
-        menu ? 'bg-white dark:bg-dark' : 'bg-transparent hidden',
-        asPopover ? 'md:hidden' : 'md:block'
+        'nextra-sidebar-container fixed flex-shrink-0 w-full md:w-64 md:sticky z-[15] top-16 self-start overflow-y-auto h-[calc(var(--vh)-4rem)] transform-none',
+        asPopover ? 'md:hidden' : 'md:block',
+        { open: menu }
       )}
-      style={{
-        height: 'calc(var(--vh) - 4rem)'
-      }}
     >
-      <div className="sidebar w-full h-full md:h-auto pl-[calc(env(safe-area-inset-left)-1.5rem)]">
-        <div
-          className="p-4"
-          style={{
-            minHeight: 'calc(var(--vh) - 4rem - 61px)'
-          }}
-        >
+      <div className="nextra-sidebar select-none w-full h-full md:h-auto pl-[calc(env(safe-area-inset-left)-1.5rem)]">
+        <div className="p-4 min-h-[calc(var(--vh)-4rem-61px)]">
           <div className="mb-4 block md:hidden">
             {config.customSearch ||
               (config.search ? (
