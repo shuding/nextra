@@ -276,12 +276,27 @@ export default function Sidebar({
               </div>
             ) : null}
             {config.darkMode ? (
-              <div
-                className={cn('grow-0 relative', { locale: config.i18n })}
-                key="theme-switch"
-              >
-                <ThemeSwitch />
-              </div>
+              <>
+                <div
+                  className={cn('relative md:hidden', {
+                    locale: config.i18n,
+                    'flex-1': !config.i18n
+                  })}
+                >
+                  <ThemeSwitch lite={false} />
+                </div>
+                <div
+                  className={cn(
+                    'relative hidden md:block',
+                    {
+                      locale: config.i18n
+                    },
+                    config.i18n ? 'grow-0' : 'flex-1'
+                  )}
+                >
+                  <ThemeSwitch lite={!!config.i18n} />
+                </div>
+              </>
             ) : null}
           </div>
         </div>
