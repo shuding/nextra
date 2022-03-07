@@ -148,7 +148,8 @@ export default async function (
 
   const suffix = `export default function NextraPage (props) {
   return <NextraLayout {...props}>{__nextra_content__}</NextraLayout>
-}`
+}
+NextraPage.getLayout = NextraLayout.withLayout`
 
   // Add imports and exports to the source
   return callback(null, prefix + '\n\n' + content + '\n\n' + suffix)

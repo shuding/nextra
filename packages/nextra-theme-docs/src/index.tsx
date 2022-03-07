@@ -79,7 +79,7 @@ interface LayoutProps {
   headings: Heading[]
 }
 
-const Layout: React.FC<LayoutProps> = ({
+const Content: React.FC<LayoutProps> = ({
   filename,
   pageMap,
   meta,
@@ -181,23 +181,57 @@ const Layout: React.FC<LayoutProps> = ({
   )
 }
 
-export default (opts: PageOpt, config: DocsThemeConfig) => {
-  const extendedConfig = Object.assign({}, defaultConfig, config)
-  return function (props: any) {
+// The layout component must be shared globally, we only initialize it once.
+let GlobalLayout: any
+const LayoutContext = React.createContext(false)
+
+export default (opts: PageOpt, _config: DocsThemeConfig) => {
+  const extendedConfig = Object.assign({}, defaultConfig, _config)
+
+  if (!GlobalLayout) {
+    GlobalLayout = function ({
+      children,
+      opts,
+      config
+    }: {
+      opts: any
+      children: any
+      config: DocsThemeConfig & typeof defaultConfig
+    }) {
+      return (
+        <LayoutContext.Provider value={true}>
+          <ThemeConfigContext.Provider value={config}>
+            <ThemeProvider
+              attribute="class"
+              disableTransitionOnChange={true}
+              {...{
+                defaultTheme: config.nextThemes.defaultTheme,
+                storageKey: config.nextThemes.storageKey,
+                forcedTheme: config.nextThemes.forcedTheme
+              }}
+            >
+              <Content {...opts}>{children}</Content>
+            </ThemeProvider>
+          </ThemeConfigContext.Provider>
+        </LayoutContext.Provider>
+      )
+    }
+  }
+
+  function Page({ children }: any) {
+    if (!React.useContext(LayoutContext)) {
+      throw new Error(
+        '[Nextra] Please add the `getLayout` logic to your _app.js, see https://nextjs.org/docs/basic-features/layouts#per-page-layouts.'
+      )
+    }
+    return children
+  }
+  Page.withLayout = (page: any) => {
     return (
-      <ThemeConfigContext.Provider value={extendedConfig}>
-        <ThemeProvider
-          attribute="class"
-          disableTransitionOnChange={true}
-          {...{
-            defaultTheme: extendedConfig.nextThemes.defaultTheme,
-            storageKey: extendedConfig.nextThemes.storageKey,
-            forcedTheme: extendedConfig.nextThemes.forcedTheme
-          }}
-        >
-          <Layout {...opts} {...props} />
-        </ThemeProvider>
-      </ThemeConfigContext.Provider>
+      <GlobalLayout opts={opts} config={extendedConfig}>
+        {page}
+      </GlobalLayout>
     )
   }
+  return Page
 }

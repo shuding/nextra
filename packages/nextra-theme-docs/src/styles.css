@@ -122,7 +122,7 @@ blockquote:not(:first-child),
       button,
       summary,
       li a {
-        @apply block w-full text-left text-sm no-underline text-gray-700 mt-1 px-2 py-1.5 rounded select-none outline-none transition-colors;
+        @apply block w-full text-left text-sm no-underline text-gray-700 mt-1 px-2 py-1.5 rounded select-none outline-none transition-[background-color];
         @apply dark:text-gray-400;
         -webkit-tap-highlight-color: transparent;
         -webkit-touch-callout: none;
@@ -280,7 +280,8 @@ blockquote:not(:first-child),
 
   .nextra-toc {
     ul {
-      @apply m-0 list-none;
+      @apply m-0 list-none break-words;
+      hyphens: auto;
     }
   }
 }

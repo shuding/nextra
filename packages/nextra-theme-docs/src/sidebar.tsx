@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect, useMemo, useRef } from 'react'
 import cn from 'classnames'
 import Slugger from 'github-slugger'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { Heading } from 'nextra'
+import { Transition } from '@headlessui/react'
 
 import { useActiveAnchor } from './misc/active-anchor'
 import { getFSRoute } from './utils/get-fs-route'
@@ -24,7 +25,8 @@ interface FolderProps {
   anchors: string[]
 }
 
-function Folder({ item, anchors }: FolderProps) {
+const Folder = React.memo(FolderImpl)
+function FolderImpl({ item, anchors }: FolderProps) {
   const { asPath, locale } = useRouter()
   const routeOriginal = getFSRoute(asPath, locale)
   const route = routeOriginal.split('#')[0]
@@ -41,10 +43,21 @@ function Folder({ item, anchors }: FolderProps) {
 
   const link = (
     <a
-      onClick={() => {
+      onClick={e => {
+        const clickedToggleIcon = ['svg', 'path'].includes(
+          (e.target as HTMLElement).tagName.toLowerCase()
+        )
+        if (clickedToggleIcon) {
+          e.preventDefault()
+        }
         if (item.withIndexPage) {
           // If it's focused, we toggle it. Otherwise always open it.
-          TreeState[item.route] = active ? !open : true
+          if (active || clickedToggleIcon) {
+            TreeState[item.route] = !open
+          } else {
+            // fromMenuOpen = !TreeState[item.route]
+            TreeState[item.route] = true
+          }
           rerender({})
           return
         }
@@ -53,32 +66,62 @@ function Folder({ item, anchors }: FolderProps) {
         rerender({})
       }}
     >
-      <span className="flex items-center justify-between gap-2">
+      <span className="flex items-center justify-between">
         {item.title}
         <ArrowRight
           height="1em"
-          className={cn(open ? 'rotate-90' : '', 'transition-transform')}
+          className={
+            'ml-2 p-[2px] rounded-sm w-[18px] h-[18px] dark:hover:bg-gray-100 hover:bg-gray-800 hover:bg-opacity-5 dark:hover:bg-opacity-5'
+          }
+          childProps={{
+            className: cn(
+              'transition-transform origin-center',
+              open ? 'rotate-90' : ''
+            )
+          }}
         />
       </span>
     </a>
   )
 
+  const containerRef = useRef<HTMLDivElement>(null)
+
   return (
     <li className={cn({ open, active })}>
       {item.withIndexPage ? <Link href={item.route}>{link}</Link> : link}
-      <div
-        style={{
-          display: open ? 'initial' : 'none'
+      <Transition
+        show={open}
+        unmount={false}
+        as={'div'}
+        enter="transition-all ease-in-out duration-300 overflow-hidden"
+        leave="transition-all ease-in-out duration-500 overflow-hidden"
+        leaveFrom="opacity-100"
+        enterFrom="!h-0 opacity-0"
+        leaveTo="!h-0 opacity-0"
+        enterTo="opacity-100"
+        afterEnter={() => {
+          if (containerRef.current) {
+            const height = containerRef.current.clientHeight
+            containerRef.current.parentElement!.style.height = height + 'px'
+          }
+        }}
+        beforeLeave={() => {
+          if (containerRef.current) {
+            const height = containerRef.current.clientHeight
+            containerRef.current.parentElement!.style.height = height + 'px'
+          }
         }}
       >
-        {Array.isArray(item.children) && (
-          <Menu
-            directories={item.children}
-            base={item.route}
-            anchors={anchors}
-          />
-        )}
-      </div>
+        <div ref={containerRef} className="overflow-hidden">
+          {Array.isArray(item.children) && (
+            <Menu
+              directories={item.children}
+              base={item.route}
+              anchors={anchors}
+            />
+          )}
+        </div>
+      </Transition>
     </li>
   )
 }
@@ -252,7 +295,7 @@ export default function Sidebar({
           </div>
         </div>
 
-        <div className="sticky bottom-0 mx-4 border-t dark:border-prime-100 dark:border-opacity-10 shadow-[0_-12px_12px_white] dark:shadow-none">
+        <div className="sticky bottom-0 mx-4 border-t dark:border-prime-100 dark:border-opacity-10 shadow-[0_-12px_16px_white] dark:shadow-none">
           <div
             className="bg-white dark:bg-dark py-4 flex gap-1"
             style={{
