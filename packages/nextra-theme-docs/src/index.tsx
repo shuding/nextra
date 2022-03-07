@@ -183,7 +183,6 @@ const Content: React.FC<LayoutProps> = ({
 
 // The layout component must be shared globally, we only initialize it once.
 let GlobalLayout: any
-const LayoutContext = React.createContext(false)
 
 export default (opts: PageOpt, _config: DocsThemeConfig) => {
   const extendedConfig = Object.assign({}, defaultConfig, _config)
@@ -198,28 +197,27 @@ export default (opts: PageOpt, _config: DocsThemeConfig) => {
       children: any
       config: DocsThemeConfig & typeof defaultConfig
     }) {
+      ;(globalThis as any).__nextra_layout__ = true
       return (
-        <LayoutContext.Provider value={true}>
-          <ThemeConfigContext.Provider value={config}>
-            <ThemeProvider
-              attribute="class"
-              disableTransitionOnChange={true}
-              {...{
-                defaultTheme: config.nextThemes.defaultTheme,
-                storageKey: config.nextThemes.storageKey,
-                forcedTheme: config.nextThemes.forcedTheme
-              }}
-            >
-              <Content {...opts}>{children}</Content>
-            </ThemeProvider>
-          </ThemeConfigContext.Provider>
-        </LayoutContext.Provider>
+        <ThemeConfigContext.Provider value={config}>
+          <ThemeProvider
+            attribute="class"
+            disableTransitionOnChange={true}
+            {...{
+              defaultTheme: config.nextThemes.defaultTheme,
+              storageKey: config.nextThemes.storageKey,
+              forcedTheme: config.nextThemes.forcedTheme
+            }}
+          >
+            <Content {...opts}>{children}</Content>
+          </ThemeProvider>
+        </ThemeConfigContext.Provider>
       )
     }
   }
 
   function Page({ children }: any) {
-    if (!React.useContext(LayoutContext)) {
+    if (!(globalThis as any).__nextra_layout__) {
       throw new Error(
         '[Nextra] Please add the `getLayout` logic to your _app.js, see https://nextjs.org/docs/basic-features/layouts#per-page-layouts.'
       )

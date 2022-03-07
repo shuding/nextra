@@ -210,7 +210,9 @@ export default function normalizePages({
             break
         }
         if (a.withIndexPage) {
-          activeIndex++
+          if (type === 'doc') {
+            activeIndex++
+          }
         }
       }
     }
