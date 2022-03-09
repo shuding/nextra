@@ -97,7 +97,7 @@ const Footer: React.FC<{ menu?: boolean }> = ({ menu }) => {
   const config = useConfig()
 
   return (
-    <footer className="bg-gray-100 dark:bg-neutral-900">
+    <footer className="bg-gray-100 dark:bg-neutral-900 pb-[env(safe-area-inset-bottom)]">
       <div
         className={cn(
           'py-2 border-b dark:border-neutral-800',

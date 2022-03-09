@@ -1,5 +1,4 @@
 if (typeof window !== 'undefined') {
-  let onResize
   let resizeTimer: any
 
   const addResizingClass = () => {
@@ -10,21 +9,5 @@ if (typeof window !== 'undefined') {
     }, 200)
   }
 
-  if (window.visualViewport) {
-    onResize = () => {
-      const vh = window.visualViewport.height
-      document.documentElement.style.setProperty('--vh', `${vh}px`)
-      addResizingClass()
-    }
-    onResize()
-    window.visualViewport.addEventListener('resize', onResize)
-  } else {
-    onResize = () => {
-      const vh = window.innerHeight
-      document.documentElement.style.setProperty('--vh', `${vh}px`)
-      addResizingClass()
-    }
-    onResize()
-    window.addEventListener('resize', onResize)
-  }
+  window.addEventListener('resize', addResizingClass)
 }
