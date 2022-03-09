@@ -144,7 +144,7 @@ export default function ToC({
 
   return (
     <div className="nextra-toc w-64 hidden xl:block text-sm px-4">
-      <div className="overflow-y-auto sticky max-h-[calc(100vh-4rem-env(safe-area-inset-bottom))] top-16 pt-8 pb-10">
+      <div className="overflow-y-auto sticky max-h-[calc(100vh-4rem-env(safe-area-inset-bottom))] top-16 pt-8">
         {headings ? (
           <ul>
             <p className="font-semibold tracking-tight mb-4">On This Page</p>
@@ -163,7 +163,7 @@ export default function ToC({
                       className={cn(
                         'no-underline inline-block',
                         heading.depth === 2 ? 'font-semibold' : '',
-                        state && state.isActive
+                        state?.isActive
                           ? 'text-prime-500 subpixel-antialiased'
                           : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-300'
                       )}
@@ -178,24 +178,24 @@ export default function ToC({
         ) : null}
 
         {hasMetaInfo ? (
-          <hr className="dark:border-prime-100 dark:border-opacity-10" />
-        ) : null}
+          <div className="sticky py-8 bottom-0 border-t mt-8 dark:border-prime-100 dark:border-opacity-10 bg-white dark:bg-dark shadow-[0_-12px_16px_white] dark:shadow-none">
+            {config.feedbackLink ? (
+              <FeedbackLink
+                filepath={filepathWithName}
+                repository={config.docsRepositoryBase}
+                labels={config.feedbackLabels}
+                text={config.feedbackLink}
+              />
+            ) : null}
 
-        {config.feedbackLink ? (
-          <FeedbackLink
-            filepath={filepathWithName}
-            repository={config.docsRepositoryBase}
-            labels={config.feedbackLabels}
-            text={config.feedbackLink}
-          />
-        ) : null}
-
-        {config.footerEditLink ? (
-          <EditPageLink
-            filepath={filepathWithName}
-            repository={config.docsRepositoryBase}
-            text={config.footerEditLink}
-          />
+            {config.footerEditLink ? (
+              <EditPageLink
+                filepath={filepathWithName}
+                repository={config.docsRepositoryBase}
+                text={config.footerEditLink}
+              />
+            ) : null}
+          </div>
         ) : null}
       </div>
     </div>
