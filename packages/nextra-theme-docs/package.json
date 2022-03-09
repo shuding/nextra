@@ -57,6 +57,7 @@
   "devDependencies": {
     "@types/flexsearch": "^0.7.2",
     "@types/react": "^17.0.39",
+    "autoprefixer": "^10.2.6",
     "nextra": "workspace:*"
   }
 }
