@@ -2,10 +2,10 @@ import { createProcessor, ProcessorOptions } from '@mdx-js/mdx'
 import remarkGfm from 'remark-gfm'
 import rehypePrettyCode from 'rehype-pretty-code'
 import { remarkStaticImage } from './mdx-plugins/static-image'
-import remarkHeadings, { HeadingMeta } from './mdx-plugins/get-headers'
+import remarkHeadings, { HeadingMeta } from './mdx-plugins/heading'
 import { LoaderOptions } from './types'
 import structurize from './mdx-plugins/structurize'
-import { parseCodeMeta, attachCodeMeta } from './mdx-plugins/add-code-meta'
+import { parseMeta, attachMeta } from './mdx-plugins/rehype-handler'
 
 // @ts-ignore
 import theme from './theme.json'
@@ -73,9 +73,9 @@ export async function compileMdx(
     // @ts-ignore
     rehypePlugins: [
       ...(mdxOptions.rehypePlugins || []),
-      parseCodeMeta,
+      parseMeta,
       [rehypePrettyCode, rehypePrettyCodeOptions],
-      attachCodeMeta
+      attachMeta
     ].filter(Boolean)
   })
   const result = await compiler.process(source)

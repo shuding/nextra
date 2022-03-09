@@ -19,7 +19,8 @@ function visit(node: any, handler: (node: Heading) => any) {
     node.children.forEach((n: any) => visit(n, handler))
   }
 }
-function getFlattenedValue(node: Parent): string {
+
+export function getFlattenedValue(node: Parent): string {
   return node.children
     .map(child =>
       'children' in child
@@ -31,7 +32,7 @@ function getFlattenedValue(node: Parent): string {
     .join('')
 }
 
-export default function remarkHeadings(this: Processor, headers: Heading[]) {
+export default function remarkHeadings(this: Processor) {
   const data = this.data() as any
   return (tree: Root, _file: any, done: () => void) => {
     visit(tree, node => {
@@ -49,6 +50,7 @@ export default function remarkHeadings(this: Processor, headers: Heading[]) {
           }
         }
       }
+
       headingMeta.headings.push(heading)
     })
     done()

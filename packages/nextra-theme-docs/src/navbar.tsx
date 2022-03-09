@@ -122,14 +122,17 @@ export default function Navbar({ flatDirectories, items }: NavBarProps) {
           </a>
         ) : null}
 
-        <button className="block md:hidden p-2" onClick={() => setMenu(!menu)}>
+        <button
+          className="nextra-menu-icon block md:hidden p-2"
+          onClick={() => setMenu(!menu)}
+        >
           <svg
             fill="none"
             width="24"
             height="24"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            className={cn('nextra-menu-icon', { open: menu })}
+            className={cn({ open: menu })}
           >
             <g>
               <path

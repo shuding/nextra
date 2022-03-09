@@ -138,6 +138,7 @@ importers:
       '@reach/skip-nav': ^0.16.0
       '@types/flexsearch': ^0.7.2
       '@types/react': ^17.0.39
+      autoprefixer: ^10.2.6
       classnames: ^2.2.6
       flexsearch: ^0.7.21
       focus-visible: ^5.1.0
@@ -147,7 +148,6 @@ importers:
       next-themes: ^0.2.0-beta.0
       nextra: workspace:*
       parse-git-url: ^1.0.1
-      react-innertext: ^1.1.5
       title: ^3.4.2
     dependencies:
       '@headlessui/react': 1.5.0_react-dom@17.0.2+react@17.0.2
@@ -161,11 +161,11 @@ importers:
       match-sorter: 4.2.1
       next-themes: 0.2.0-beta.0_caa633a00319350dbda42996613fe26c
       parse-git-url: 1.0.1
-      react-innertext: 1.1.5_a0c521d4794c7ad97f5f4c1c4a7d5818
       title: 3.4.3
     devDependencies:
       '@types/flexsearch': 0.7.2
       '@types/react': 17.0.39
+      autoprefixer: 10.4.1_postcss@8.4.5
       nextra: link:../nextra
 
 packages:
@@ -3938,16 +3938,6 @@ packages:
       react: 17.0.2
       scheduler: 0.20.2
     dev: true
-
-  /react-innertext/1.1.5_a0c521d4794c7ad97f5f4c1c4a7d5818:
-    resolution: {integrity: sha512-PWAqdqhxhHIv80dT9znP2KvS+hfkbRovFp4zFYHFFlOoQLRiawIic81gKb3U1wEyJZgMwgs3JoLtwryASRWP3Q==}
-    peerDependencies:
-      '@types/react': '>=0.0.0 <=99'
-      react: '>=0.0.0 <=99'
-    dependencies:
-      '@types/react': 17.0.39
-      react: 17.0.2
-    dev: false
 
   /react-intersection-observer/8.33.1_react@17.0.2:
     resolution: {integrity: sha512-3v+qaJvp3D1MlGHyM+KISVg/CMhPiOlO6FgPHcluqHkx4YFCLuyXNlQ/LE6UkbODXlQcLOppfX6UMxCEkUhDLw==}

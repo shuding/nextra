@@ -30,7 +30,7 @@ blockquote:not(:first-child),
 @tailwind utilities;
 
 .main-container {
-  min-height: var(--vh);
+  min-height: 100vh;
 }
 
 .nextra-container {
@@ -63,24 +63,30 @@ blockquote:not(:first-child),
     }
 
     .nextra-menu-icon {
+      @apply select-none outline-none rounded;
+      &:active {
+        @apply bg-gray-400 bg-opacity-20;
+      }
+    }
+    .nextra-menu-icon svg {
       g {
         transform-origin: center;
       }
       path {
         opacity: 1;
-        transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1) 0.4s,
-          opacity 0.4s ease 0.4s;
+        transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1) 0.2s,
+          opacity 0.2s ease 0.2s;
       }
       g {
-        transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
       }
       &.open {
         path {
-          transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
-            opacity 0s ease 0.4s;
+          transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1),
+            opacity 0s ease 0.2s;
         }
         g {
-          transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1) 0.4s;
+          transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1) 0.2s;
         }
       }
       &.open > {
@@ -105,6 +111,7 @@ blockquote:not(:first-child),
 
   /* Sidebar */
   .nextra-sidebar {
+    -webkit-touch-callout: none;
     ul {
       a:focus-visible,
       button:focus-visible {
@@ -143,7 +150,7 @@ blockquote:not(:first-child),
 @media (max-width: 767px) {
   .nextra-sidebar-container {
     @apply top-0 pt-16 bg-white dark:bg-dark;
-    height: var(--vh);
+    height: 100%;
     opacity: 0;
     box-shadow: 0 0 0 110vh rgba(0, 0, 0, 0);
     transform: translate3d(0, -110%, 0);
@@ -164,7 +171,7 @@ blockquote:not(:first-child),
 }
 
 /* Content Typography */
-.nextra-body {
+article {
   min-height: calc(100vh - 64px);
   &.full {
     width: 100%;
@@ -300,7 +307,7 @@ blockquote:not(:first-child),
   &.nextra-flexsearch ul {
     @apply overflow-auto left-0 md:-left-80 md:right-0;
     min-height: 100px;
-    max-height: min(calc(var(--vh) - 12.5rem), 600px);
+    max-height: min(calc(100vh - 12.5rem - env(safe-area-inset-bottom))), 600px);
     max-width: min(calc(100vw - 2rem), calc(100% + 20rem));
     transition: max-height 0.2s ease;
     width: 100vw;

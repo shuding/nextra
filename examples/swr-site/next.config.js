@@ -15,26 +15,26 @@ module.exports = withNextra({
   },
   redirects: () => {
     return [
-      {
-        source: "/docs",
-        destination: "/docs/getting-started",
-        statusCode: 301,
-      },
-      {
-        source: "/advanced/performance",
-        destination: "/docs/advanced/performance",
-        statusCode: 301,
-      },
-      {
-        source: "/advanced/cache",
-        destination: "/docs/advanced/cache",
-        statusCode: 301,
-      },
-      {
-        source: "/docs/cache",
-        destination: "/docs/advanced/cache",
-        statusCode: 301,
-      },
+      // {
+      //   source: "/docs.([a-zA-Z-]+)",
+      //   destination: "/docs/getting-started",
+      //   statusCode: 301,
+      // },
+      // {
+      //   source: "/advanced/performance",
+      //   destination: "/docs/advanced/performance",
+      //   statusCode: 301,
+      // },
+      // {
+      //   source: "/advanced/cache",
+      //   destination: "/docs/advanced/cache",
+      //   statusCode: 301,
+      // },
+      // {
+      //   source: "/docs/cache",
+      //   destination: "/docs/advanced/cache",
+      //   statusCode: 301,
+      // },
       {
         source: "/change-log",
         destination: "/docs/change-log",
@@ -44,6 +44,11 @@ module.exports = withNextra({
         source: "/blog/swr-1",
         destination: "/blog/swr-v1",
         statusCode: 301,
+      },
+      {
+        source: "/docs.([a-zA-Z-]+)",
+        destination: "/docs/getting-started",
+        statusCode: 302,
       },
       {
         source: "/docs",
