@@ -15,7 +15,16 @@ import { Transition } from '@headlessui/react'
 import { useConfig } from './config'
 import renderComponent from './utils/render-component'
 
-const Item = ({ page, first, title, active, href, onHover, excerpt }) => {
+const Item = ({
+  page,
+  first,
+  title,
+  active,
+  href,
+  onHover,
+  onClick,
+  excerpt
+}) => {
   return (
     <>
       {first ? (
@@ -24,7 +33,11 @@ const Item = ({ page, first, title, active, href, onHover, excerpt }) => {
         </div>
       ) : null}
       <Link href={href}>
-        <a className="block no-underline" onMouseMove={onHover}>
+        <a
+          className="block no-underline"
+          onMouseMove={onHover}
+          onClick={onClick}
+        >
           <li className={cn({ active })}>
             <div className="font-semibold dark:text-white leading-5">
               {title}
@@ -175,6 +188,7 @@ export default function Search() {
         }
         case 'Enter': {
           router.push(results[active].route)
+          setShow(false)
           break
         }
       }
@@ -296,7 +310,6 @@ export default function Search() {
             load()
             setShow(true)
           }}
-          // onBlur={() => setShow(false)}
           ref={input}
           spellCheck={false}
         />
@@ -356,6 +369,7 @@ export default function Search() {
                   excerpt={res.excerpt}
                   active={i === active}
                   onHover={() => setActive(i)}
+                  onClick={() => setShow(false)}
                 />
               )
             })
