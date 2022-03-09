@@ -105,47 +105,52 @@ export default function Search() {
 
     if (!index) return
 
-    const pages = {}
-    const results = []
-      .concat(
-        ...index
-          .search(search, { enrich: true, limit: 10, suggest: true })
-          .map(r => r.result)
-      )
-      .map((r, i) => ({
-        ...r,
-        index: i,
-        matchTitle:
-          r.doc.content.indexOf(search) > r.doc.content.indexOf(' _NEXTRA_ ')
-      }))
-      .sort((a, b) => {
-        if (a.matchTitle !== b.matchTitle) return a.matchTitle ? -1 : 1
-        if (a.doc.page !== b.doc.page) return a.doc.page > b.doc.page ? 1 : -1
-        return a.index - b.index
-      })
-      .map(item => {
-        const firstItemOfPage = !pages[item.doc.page]
-        pages[item.doc.page] = true
+    const [pageIndex, sectionIndex] = index
 
-        return {
+    // Show the results for the top 5 pages
+    const pageResults =
+      pageIndex.search(search, {
+        enrich: true,
+        limit: 5,
+        suggest: true
+      })[0]?.result || []
+
+    const results = []
+
+    for (const result of pageResults) {
+      // Show the top 5 results for each page
+      const sectionResults =
+        sectionIndex.search(search, {
+          enrich: true,
+          limit: 5,
+          suggest: true,
+          tag: result.doc.route
+        })[0]?.result || []
+
+      let firstItemOfPage = true
+      for (const section of sectionResults) {
+        results.push({
           first: firstItemOfPage,
-          route: item.doc.url,
-          page: item.doc.page,
+          route: section.doc.url,
+          page: result.doc.title,
           title: (
             <MemoedStringWithMatchHighlights
-              content={item.doc.title}
+              content={section.doc.title}
               search={search}
             />
           ),
           excerpt:
-            item.doc.title !== item.doc.content ? (
+            section.doc.title !== section.doc.content ? (
               <MemoedStringWithMatchHighlights
-                content={item.doc.content.replace(/ _NEXTRA_ .*$/, '')}
+                content={section.doc.content.replace(/ _NEXTRA_ .*$/, '')}
                 search={search}
               />
             ) : null
-        }
-      })
+        })
+
+        firstItemOfPage = false
+      }
+    }
 
     setResults(results)
   }
@@ -204,13 +209,14 @@ export default function Search() {
         await fetch(`/_next/static/chunks/nextra-data-${localeCode}.json`)
       ).json()
 
-      const index = new FlexSearch.Document({
+      const sectionIndex = new FlexSearch.Document({
         cache: 100,
         tokenize: 'full',
         document: {
           id: 'id',
           index: 'content',
-          store: ['title', 'content', 'url', 'page']
+          tag: 'route',
+          store: ['title', 'content', 'url']
         },
         context: {
           resolution: 9,
@@ -220,39 +226,66 @@ export default function Search() {
         filter: ['_NEXTRA_']
       })
 
+      const pageIndex = new FlexSearch.Document({
+        cache: 100,
+        tokenize: 'full',
+        document: {
+          id: 'id',
+          index: 'content',
+          store: ['title', 'route']
+        },
+        context: {
+          resolution: 9,
+          depth: 1,
+          bidirectional: true
+        }
+      })
+
       for (let route in data) {
+        let pageContent = ''
+
         for (let heading in data[route].data) {
           const [hash, text] = heading.split('#')
-          const title = text || data[route].title
           const url = route + (hash ? '#' + hash : '')
+          const title = text || data[route].title
 
           const paragraphs = (data[route].data[heading] || '')
             .split('\n')
             .filter(Boolean)
 
           if (!paragraphs.length) {
-            index.add({
-              id: url,
-              url: url,
+            sectionIndex.add({
+              id: url + '@',
+              url,
               title,
-              content: title,
-              page: data[route].title
+              route,
+              content: title
             })
           }
 
           for (let i = 0; i < paragraphs.length; i++) {
-            index.add({
-              id: url + '_' + i,
-              url: url,
-              title: title,
-              content: paragraphs[i] + (i === 0 ? ' _NEXTRA_ ' + title : ''),
-              page: data[route].title
+            sectionIndex.add({
+              id: url + '@' + i,
+              url,
+              title,
+              route,
+              content: paragraphs[i] + (i === 0 ? ' _NEXTRA_ ' + title : '')
             })
           }
+
+          // Add the page itself.
+          pageContent += title + ' ' + (data[route].data[heading] || '')
         }
+
+        pageIndex.add({
+          id: route,
+          title: data[route].title,
+          route,
+          content: pageContent
+        })
       }
 
-      indexes[localeCode] = index
+      indexes[localeCode] = [pageIndex, sectionIndex]
       setLoading(false)
       setSearch(s => (s ? s + ' ' : s)) // Trigger the effect
     }
