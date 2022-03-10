@@ -14,6 +14,7 @@ import { Transition } from '@headlessui/react'
 
 import { useConfig } from './config'
 import renderComponent from './utils/render-component'
+import useMenuContext from './utils/menu-context'
 
 const Item = ({
   page,
@@ -57,8 +58,8 @@ const Item = ({
 const MemoedStringWithMatchHighlights = memo(
   function StringWithMatchHighlights({ content, search }) {
     const splittedText = content.split('')
-    const escappedSearch = search.trim().replace(/[|\\{}()[\]^$+*?.]/g, '\\$&')
-    const regexp = RegExp('(' + escappedSearch.split(' ').join('|') + ')', 'ig')
+    const escapedSearch = search.trim().replace(/[|\\{}()[\]^$+*?.]/g, '\\$&')
+    const regexp = RegExp('(' + escapedSearch.split(' ').join('|') + ')', 'ig')
     let match
     let id = 0
     let index = 0
@@ -96,6 +97,7 @@ export default function Search() {
   const [active, setActive] = useState(0)
   const [results, setResults] = useState([])
   const input = useRef(null)
+  const { setMenu } = useMenuContext()
 
   const doSearch = () => {
     if (!search) return
@@ -108,30 +110,51 @@ export default function Search() {
     const [pageIndex, sectionIndex] = index
 
     // Show the results for the top 5 pages
-    const pageResults =
+    const pageResults = (
       pageIndex.search(search, {
         enrich: true,
-        limit: 5,
         suggest: true
       })[0]?.result || []
+    ).slice(0, 5)
 
     const results = []
 
-    for (const result of pageResults) {
+    const pageTitleMatches = {}
+
+    for (let i = 0; i < pageResults.length; i++) {
+      const result = pageResults[i]
+      pageTitleMatches[i] = 0
+
       // Show the top 5 results for each page
-      const sectionResults =
+      const sectionResults = (
         sectionIndex.search(search, {
           enrich: true,
-          limit: 5,
           suggest: true,
-          tag: result.doc.route
+          tag: 'page_' + result.id
         })[0]?.result || []
+      ).slice(0, 5)
 
       let firstItemOfPage = true
-      for (const section of sectionResults) {
+      const occurred = {}
+
+      for (let j = 0; j < sectionResults.length; j++) {
+        const section = sectionResults[j]
+        const isMatchingTitle = typeof section.doc.display !== 'undefined'
+        const content = section.doc.display || section.doc.content
+        const url = section.doc.url
+
+        if (isMatchingTitle) {
+          pageTitleMatches[i]++
+        }
+
+        if (occurred[url + '@' + content]) continue
+        occurred[url + '@' + content] = true
+
         results.push({
+          _page_rk: i,
+          _section_rk: j,
           first: firstItemOfPage,
-          route: section.doc.url,
+          route: url,
           page: result.doc.title,
           title: (
             <MemoedStringWithMatchHighlights
@@ -139,20 +162,30 @@ export default function Search() {
               search={search}
             />
           ),
-          excerpt:
-            section.doc.title !== section.doc.content ? (
-              <MemoedStringWithMatchHighlights
-                content={section.doc.content.replace(/ _NEXTRA_ .*$/, '')}
-                search={search}
-              />
-            ) : null
+          excerpt: content ? (
+            <MemoedStringWithMatchHighlights
+              content={content}
+              search={search}
+            />
+          ) : null
         })
 
         firstItemOfPage = false
       }
     }
 
-    setResults(results)
+    setResults(
+      results.sort((a, b) => {
+        // Sort by number of matches in the title.
+        if (a._page_rk === b._page_rk) {
+          return a._section_rk - b._section_rk
+        }
+        if (pageTitleMatches[a._page_rk] !== pageTitleMatches[b._page_rk]) {
+          return pageTitleMatches[b._page_rk] - pageTitleMatches[a._page_rk]
+        }
+        return a._page_rk - b._page_rk
+      })
+    )
   }
   useEffect(doSearch, [search])
 
@@ -194,6 +227,7 @@ export default function Search() {
         case 'Enter': {
           router.push(results[active].route)
           setShow(false)
+          setMenu(false)
           break
         }
       }
@@ -209,40 +243,41 @@ export default function Search() {
         await fetch(`/_next/static/chunks/nextra-data-${localeCode}.json`)
       ).json()
 
-      const sectionIndex = new FlexSearch.Document({
-        cache: 100,
-        tokenize: 'full',
-        document: {
-          id: 'id',
-          index: 'content',
-          tag: 'route',
-          store: ['title', 'content', 'url']
-        },
-        context: {
-          resolution: 9,
-          depth: 1,
-          bidirectional: true
-        },
-        filter: ['_NEXTRA_']
-      })
-
       const pageIndex = new FlexSearch.Document({
         cache: 100,
         tokenize: 'full',
         document: {
           id: 'id',
           index: 'content',
-          store: ['title', 'route']
+          store: ['title']
         },
         context: {
           resolution: 9,
-          depth: 1,
+          depth: 2,
           bidirectional: true
         }
       })
 
+      const sectionIndex = new FlexSearch.Document({
+        cache: 100,
+        tokenize: 'full',
+        document: {
+          id: 'id',
+          index: 'content',
+          tag: 'pageId',
+          store: ['title', 'content', 'url', 'display']
+        },
+        context: {
+          resolution: 9,
+          depth: 2,
+          bidirectional: true
+        }
+      })
+
+      let pageId = 0
       for (let route in data) {
         let pageContent = ''
+        ++pageId
 
         for (let heading in data[route].data) {
           const [hash, text] = heading.split('#')
@@ -253,39 +288,38 @@ export default function Search() {
             .split('\n')
             .filter(Boolean)
 
-          if (!paragraphs.length) {
-            sectionIndex.add({
-              id: url + '@',
-              url,
-              title,
-              route,
-              content: title
-            })
-          }
+          sectionIndex.add({
+            id: url,
+            url,
+            title,
+            pageId: `page_${pageId}`,
+            content: title,
+            display: paragraphs[0] || ''
+          })
 
           for (let i = 0; i < paragraphs.length; i++) {
             sectionIndex.add({
-              id: url + '@' + i,
+              id: url + '_' + i,
               url,
               title,
-              route,
-              content: paragraphs[i] + (i === 0 ? ' _NEXTRA_ ' + title : '')
+              pageId: `page_${pageId}`,
+              content: paragraphs[i]
             })
           }
 
           // Add the page itself.
-          pageContent += title + ' ' + (data[route].data[heading] || '')
+          pageContent += ' ' + title + ' ' + (data[route].data[heading] || '')
         }
 
         pageIndex.add({
-          id: route,
+          id: pageId,
           title: data[route].title,
-          route,
           content: pageContent
         })
       }
 
       indexes[localeCode] = [pageIndex, sectionIndex]
+
       setLoading(false)
       setSearch(s => (s ? s + ' ' : s)) // Trigger the effect
     }
@@ -402,7 +436,10 @@ export default function Search() {
                   excerpt={res.excerpt}
                   active={i === active}
                   onHover={() => setActive(i)}
-                  onClick={() => setShow(false)}
+                  onClick={() => {
+                    setShow(false)
+                    setMenu(false)
+                  }}
                 />
               )
             })

@@ -307,12 +307,16 @@ article {
   &.nextra-flexsearch ul {
     @apply overflow-auto left-0 md:-left-80 md:right-0;
     min-height: 100px;
-    max-height: min(calc(100vh - 12.5rem - env(safe-area-inset-bottom))), 600px);
+    max-height: min(calc(100vh - 12.5rem - env(safe-area-inset-bottom)), 600px);
     max-width: min(calc(100vw - 2rem), calc(100% + 20rem));
     transition: max-height 0.2s ease;
     width: 100vw;
   }
   ul {
+    a {
+      scroll-margin: 50px;
+    }
+
     /* Using bg-white as background-color when the browser didn't support backdrop-filter */
     @apply bg-white text-gray-100 ring-1 ring-black ring-opacity-5;
     li {
