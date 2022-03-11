@@ -135,6 +135,16 @@ export default function normalizePages({
       return items
     })
 
+  // Fill all skipped items in meta.
+  for (let i = metaKeyIndex + 1; i < metaKeys.length; i++) {
+    const key = metaKeys[i]
+    items.push({
+      name: key,
+      route: '#',
+      ...meta[key]
+    })
+  }
+
   for (let i = 0; i < items.length; i++) {
     const a = items[i]
 

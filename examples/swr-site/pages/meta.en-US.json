@@ -13,12 +13,6 @@
       "sidebar": true
     }
   },
-  "nextra_link": {
-    "title": "Nextra ↗",
-    "href": "https://github.com/shuding/nextra",
-    "type": "page",
-    "newWindow": true
-  },
   "examples": {
     "title": "Examples",
     "type": "page",
@@ -34,5 +28,11 @@
       "toc": true,
       "footer": true
     }
+  },
+  "nextra_link": {
+    "title": "Nextra ↗",
+    "href": "https://github.com/shuding/nextra",
+    "type": "page",
+    "newWindow": true
   }
 }
