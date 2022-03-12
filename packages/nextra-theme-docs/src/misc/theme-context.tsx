@@ -4,5 +4,6 @@ export default {
   toc: true,
   pagination: true,
   footer: true,
-  full: false
+  full: false,
+  breadcrumb: true
 }
