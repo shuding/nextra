@@ -109,6 +109,21 @@ blockquote:not(:first-child),
     }
   }
 
+  /* .nextra-sidebar-container {
+    &::-webkit-scrollbar {
+      -webkit-appearance: none;
+      width: 7px;
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 4px;
+      background-color: rgba(0, 0, 0, 0.2);
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.3);
+      }
+    }
+  } */
+
   /* Sidebar */
   .nextra-sidebar {
     -webkit-touch-callout: none;

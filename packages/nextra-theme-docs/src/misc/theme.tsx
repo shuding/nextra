@@ -265,7 +265,6 @@ const Summary = ({ children, ...props }: { children?: React.ReactNode }) => {
     <summary
       {...props}
       onClick={e => {
-        console.log('click!!')
         e.preventDefault()
         setOpen((v: boolean) => !v)
       }}
