@@ -12,7 +12,7 @@ export default function Breadcrumb({ activePath }: { activePath: Item[] }) {
         const isActive = index === activePath.length - 1
 
         return (
-          <>
+          <React.Fragment key={item.route}>
             {index ? <span className="mx-2 select-none">/</span> : null}
             <div
               key={item.route}
@@ -29,7 +29,7 @@ export default function Breadcrumb({ activePath }: { activePath: Item[] }) {
                 item.title
               )}
             </div>
-          </>
+          </React.Fragment>
         )
       })}
     </div>

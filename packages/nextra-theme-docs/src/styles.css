@@ -220,6 +220,9 @@ article {
   }
   ul {
     @apply list-disc ml-6 mt-6;
+    &:first-child {
+      @apply mt-0;
+    }
   }
   li {
     @apply mt-2;
@@ -285,9 +288,6 @@ article {
     @apply my-4 p-2 border border-gray-200 rounded;
     .dark & {
       @apply border-neutral-800;
-    }
-    .nextra-collapse-content {
-      @apply pt-2;
     }
     &:first-child {
       @apply mt-0;
@@ -480,7 +480,10 @@ input[type='search']::-webkit-search-results-decoration {
 
 /* Table */
 table {
-  @apply p-0;
+  @apply p-0 mt-2;
+  &:first-child {
+    @apply mt-0;
+  }
 }
 table tr {
   @apply m-0 p-0 border-t border-gray-300;
