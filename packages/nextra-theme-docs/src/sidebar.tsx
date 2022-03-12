@@ -31,28 +31,22 @@ function FolderImpl({ item, anchors }: FolderProps) {
   const routeOriginal = getFSRoute(asPath, locale)
   const route = routeOriginal.split('#')[0]
   const active = route === item.route + '/' || route + '/' === item.route + '/'
-  const activeRouteInside = route.startsWith(item.route + '/')
+  const activeRouteInside = active || route.startsWith(item.route + '/')
 
   const { defaultMenuCollapsed } = useMenuContext()
   const open =
     typeof TreeState[item.route] !== 'undefined'
       ? TreeState[item.route]
-      : activeRouteInside || !defaultMenuCollapsed
+      : active || activeRouteInside || !defaultMenuCollapsed
 
   const rerender = useState({})[1]
   const { setMenu } = useMenuContext()
 
   useEffect(() => {
-    if (activeRouteInside && typeof TreeState[item.route] === 'undefined') {
+    if (activeRouteInside) {
       TreeState[item.route] = true
     }
   }, [activeRouteInside])
-
-  useEffect(() => {
-    if (active) {
-      TreeState[item.route] = true
-    }
-  }, [active])
 
   const link = (
     <a

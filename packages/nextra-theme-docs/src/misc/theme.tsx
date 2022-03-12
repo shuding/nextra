@@ -233,17 +233,6 @@ const Details = ({
   const [openState, setOpen] = useState(!!open)
   const ref = useRef<HTMLDetailsElement>(null)
 
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-
-    const onToggle = function (e: Event) {
-      e.preventDefault()
-      setOpen(el.open)
-    }
-    el.addEventListener('toggle', onToggle)
-  }, [])
-
   let summary = null
   let restChildren: ReactNode[] = []
 
@@ -276,6 +265,7 @@ const Summary = ({ children, ...props }: { children?: React.ReactNode }) => {
     <summary
       {...props}
       onClick={e => {
+        console.log('click!!')
         e.preventDefault()
         setOpen((v: boolean) => !v)
       }}
