@@ -6,7 +6,7 @@ import { Item } from './utils/normalize-pages'
 
 export default function Breadcrumb({ activePath }: { activePath: Item[] }) {
   return (
-    <div className="text-sm font-normal flex mt-2.5 text-gray-500 transition-colors cursor-default">
+    <div className="text-sm font-normal flex mt-2.5 text-gray-500 transition-colors cursor-default overflow-hidden">
       {activePath.map((item, index) => {
         const isLink = !item.children || item.withIndexPage
         const isActive = index === activePath.length - 1
@@ -17,7 +17,8 @@ export default function Breadcrumb({ activePath }: { activePath: Item[] }) {
             <div
               key={item.route}
               className={cn('transition-colors hover:text-gray-900', {
-                'text-gray-600': isActive
+                'text-gray-600': isActive,
+                'text-ellipsis whitespace-nowrap overflow-hidden': !isActive
               })}
             >
               {isLink && !isActive ? (
