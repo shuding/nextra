@@ -1,10 +1,9 @@
 export const getFSRoute = (asPath: string, locale?: string | undefined) => {
-  if (!locale) return asPath.replace(new RegExp('/index(/|$)'), '$1')
+  const cleanedPath = locale
+    ? asPath.replace(new RegExp(`\.${locale}(\/|$)`), '$1')
+    : asPath
 
   return (
-    asPath
-      .replace(new RegExp(`\.${locale}(\/|$)`), '$1')
-      .replace(new RegExp('/index(/|$)'), '$1')
-      .split('#')[0] || '/'
+    cleanedPath.replace(new RegExp('/index(/|$)'), '$1').split('#')[0] || '/'
   )
 }
