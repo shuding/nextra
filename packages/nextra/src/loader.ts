@@ -151,6 +151,8 @@ export default async function (
 }
 NextraPage.getLayout = NextraLayout.withLayout`
 
+  // console.log(content)
+
   // Add imports and exports to the source
   return callback(null, prefix + '\n\n' + content + '\n\n' + suffix)
 }

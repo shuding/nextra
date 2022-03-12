@@ -2,7 +2,7 @@ import { createProcessor, ProcessorOptions } from '@mdx-js/mdx'
 import remarkGfm from 'remark-gfm'
 import rehypePrettyCode from 'rehype-pretty-code'
 import { remarkStaticImage } from './mdx-plugins/static-image'
-import remarkHeadings, { HeadingMeta } from './mdx-plugins/heading'
+import remarkHandler, { HeadingMeta } from './mdx-plugins/remark'
 import { LoaderOptions } from './types'
 import structurize from './mdx-plugins/structurize'
 import { parseMeta, attachMeta } from './mdx-plugins/rehype-handler'
@@ -64,7 +64,7 @@ export async function compileMdx(
     remarkPlugins: [
       ...(mdxOptions.remarkPlugins || []),
       remarkGfm,
-      remarkHeadings,
+      remarkHandler,
       ...(nextraOptions.unstable_staticImage ? [remarkStaticImage] : []),
       ...(nextraOptions.unstable_flexsearch
         ? [structurize(structurizedData, nextraOptions.unstable_flexsearch)]

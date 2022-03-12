@@ -1,9 +1,16 @@
 import Link from 'next/link'
-import React, { useEffect, useRef } from 'react'
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  ReactNode,
+  useContext
+} from 'react'
 import 'intersection-observer'
 
 import { ActiveAnchor, useActiveAnchorSet } from './active-anchor'
 import { MDXProvider } from '@mdx-js/react'
+import Collapse from '../collapse'
 
 // Anchor links
 const HeaderLink = ({
@@ -213,6 +220,71 @@ const Table = ({ children }: { children?: React.ReactNode }) => {
   )
 }
 
+const DetailsContext = React.createContext<any>(() => {})
+
+const Details = ({
+  children,
+  open,
+  ...props
+}: {
+  children?: React.ReactNode
+  open?: boolean
+}) => {
+  const [openState, setOpen] = useState(!!open)
+  const ref = useRef<HTMLDetailsElement>(null)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+
+    const onToggle = function (e: Event) {
+      e.preventDefault()
+      setOpen(el.open)
+    }
+    el.addEventListener('toggle', onToggle)
+  }, [])
+
+  let summary = null
+  let restChildren: ReactNode[] = []
+
+  React.Children.forEach(children, child => {
+    if (child && (child as React.ReactElement).type === Summary) {
+      summary = child
+    } else {
+      restChildren.push(child)
+    }
+  })
+
+  return (
+    <details
+      {...props}
+      ref={ref}
+      open
+      {...(openState ? { 'data-open': '' } : null)}
+    >
+      <DetailsContext.Provider value={setOpen}>
+        {summary}
+      </DetailsContext.Provider>
+      <Collapse open={openState}>{restChildren}</Collapse>
+    </details>
+  )
+}
+
+const Summary = ({ children, ...props }: { children?: React.ReactNode }) => {
+  const setOpen = useContext(DetailsContext)
+  return (
+    <summary
+      {...props}
+      onClick={e => {
+        e.preventDefault()
+        setOpen((v: boolean) => !v)
+      }}
+    >
+      {children}
+    </summary>
+  )
+}
+
 const getComponents = (context: { index: number }) => ({
   h2: H2(context),
   h3: H3(context),
@@ -220,7 +292,9 @@ const getComponents = (context: { index: number }) => ({
   h5: H5(context),
   h6: H6(context),
   a: A,
-  table: Table
+  table: Table,
+  details: Details,
+  summary: Summary
 })
 
 export const MDXTheme: React.FC<{}> = ({ children }) => {

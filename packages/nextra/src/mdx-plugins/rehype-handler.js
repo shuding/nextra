@@ -1,6 +1,6 @@
 import Slugger from 'github-slugger'
 
-import { getFlattenedValue } from './heading'
+import { getFlattenedValue } from './remark'
 
 function visit(node, tagNames, handler) {
   if (tagNames.includes(node.tagName)) {

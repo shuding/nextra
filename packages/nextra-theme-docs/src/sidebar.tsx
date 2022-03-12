@@ -4,7 +4,6 @@ import Slugger from 'github-slugger'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { Heading } from 'nextra'
-import { Transition } from '@headlessui/react'
 
 import { useActiveAnchor } from './misc/active-anchor'
 import { getFSRoute } from './utils/get-fs-route'
@@ -17,6 +16,7 @@ import { Item, PageItem } from './utils/normalize-pages'
 import LocaleSwitch from './locale-switch'
 import ThemeSwitch from './theme-switch'
 import ArrowRight from './icons/arrow-right'
+import Collapse from './collapse'
 
 const TreeState: Record<string, boolean> = {}
 
@@ -31,10 +31,22 @@ function FolderImpl({ item, anchors }: FolderProps) {
   const routeOriginal = getFSRoute(asPath, locale)
   const route = routeOriginal.split('#')[0]
   const active = route === item.route + '/' || route + '/' === item.route + '/'
+  const activeRouteInside = route.startsWith(item.route + '/')
+
   const { defaultMenuCollapsed } = useMenuContext()
-  const open = TreeState[item.route] ?? !defaultMenuCollapsed
+  const open =
+    typeof TreeState[item.route] !== 'undefined'
+      ? TreeState[item.route]
+      : activeRouteInside || !defaultMenuCollapsed
+
   const rerender = useState({})[1]
   const { setMenu } = useMenuContext()
+
+  useEffect(() => {
+    if (activeRouteInside && typeof TreeState[item.route] === 'undefined') {
+      TreeState[item.route] = true
+    }
+  }, [activeRouteInside])
 
   useEffect(() => {
     if (active) {
@@ -86,51 +98,18 @@ function FolderImpl({ item, anchors }: FolderProps) {
     </a>
   )
 
-  const containerRef = useRef<HTMLDivElement>(null)
-
   return (
     <li className={cn({ open, active })}>
       {item.withIndexPage ? <Link href={item.route}>{link}</Link> : link}
-      <Transition
-        show={open}
-        unmount={false}
-        as={'div'}
-        enter="transition-all ease-in-out duration-300 overflow-hidden"
-        leave="transition-all ease-in-out duration-500 overflow-hidden"
-        leaveFrom="opacity-100"
-        enterFrom="!max-h-0 opacity-0"
-        leaveTo="!max-h-0 opacity-0"
-        enterTo="opacity-100"
-        afterEnter={() => {
-          if (containerRef.current) {
-            const height = containerRef.current.clientHeight
-            containerRef.current.parentElement!.style.maxHeight = height + 'px'
-            setTimeout(() => {
-              if (containerRef.current) {
-                containerRef.current.parentElement!.style.removeProperty(
-                  'max-height'
-                )
-              }
-            }, 300)
-          }
-        }}
-        beforeLeave={() => {
-          if (containerRef.current) {
-            const height = containerRef.current.clientHeight
-            containerRef.current.parentElement!.style.maxHeight = height + 'px'
-          }
-        }}
-      >
-        <div ref={containerRef} className="overflow-hidden">
-          {Array.isArray(item.children) && (
-            <Menu
-              directories={item.children}
-              base={item.route}
-              anchors={anchors}
-            />
-          )}
-        </div>
-      </Transition>
+      <Collapse open={open}>
+        {Array.isArray(item.children) && (
+          <Menu
+            directories={item.children}
+            base={item.route}
+            anchors={anchors}
+          />
+        )}
+      </Collapse>
     </li>
   )
 }
