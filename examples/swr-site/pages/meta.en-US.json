@@ -26,7 +26,8 @@
     "theme": {
       "sidebar": false,
       "toc": true,
-      "footer": true
+      "footer": true,
+      "breadcrumb": false
     }
   },
   "nextra_link": {

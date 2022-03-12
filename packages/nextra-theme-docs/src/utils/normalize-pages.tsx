@@ -94,6 +94,7 @@ export default function normalizePages({
   let activeType: string | undefined = undefined
   let activeIndex: number = 0
   let activeThemeContext = pageThemeContext
+  let activePath: Item[] = []
 
   let metaKeyIndex = 0
 
@@ -171,24 +172,6 @@ export default function normalizePages({
     // If the doc is under the active page root.
     const isCurrentDocsTree = route.startsWith(docsRoot)
 
-    if (a.route === route) {
-      activeType = type
-      // There can be multiple matches.
-      activeThemeContext = {
-        ...activeThemeContext,
-        ...extendedPageThemeContext
-      }
-      switch (type) {
-        case 'page':
-          activeIndex = topLevelPageItems.length
-          break
-        case 'doc':
-          if (isCurrentDocsTree) {
-            activeIndex = flatDocsDirectories.length
-          }
-      }
-    }
-
     const normalizedChildren: any = a.children
       ? normalizePages({
           list: a.children,
@@ -200,33 +183,6 @@ export default function normalizePages({
           pageThemeContext: extendedPageThemeContext
         })
       : undefined
-
-    if (hidden) continue
-
-    if (normalizedChildren) {
-      if (
-        normalizedChildren.activeIndex !== undefined &&
-        normalizedChildren.activeType !== undefined
-      ) {
-        activeThemeContext = normalizedChildren.activeThemeContext
-        activeType = normalizedChildren.activeType
-        switch (activeType) {
-          case 'page':
-            activeIndex =
-              topLevelPageItems.length + normalizedChildren.activeIndex
-            break
-          case 'doc':
-            activeIndex =
-              flatDocsDirectories.length + normalizedChildren.activeIndex
-            break
-        }
-        if (a.withIndexPage) {
-          if (type === 'doc') {
-            activeIndex++
-          }
-        }
-      }
-    }
 
     const item: Item = {
       ...a,
@@ -248,6 +204,53 @@ export default function normalizePages({
       type,
       hidden,
       children: normalizedChildren ? [] : undefined
+    }
+
+    if (a.route === route) {
+      activePath = [item]
+      activeType = type
+      // There can be multiple matches.
+      activeThemeContext = {
+        ...activeThemeContext,
+        ...extendedPageThemeContext
+      }
+      switch (type) {
+        case 'page':
+          activeIndex = topLevelPageItems.length
+          break
+        case 'doc':
+          if (isCurrentDocsTree) {
+            activeIndex = flatDocsDirectories.length
+          }
+      }
+    }
+
+    if (hidden) continue
+
+    if (normalizedChildren) {
+      if (
+        normalizedChildren.activeIndex !== undefined &&
+        normalizedChildren.activeType !== undefined
+      ) {
+        activeThemeContext = normalizedChildren.activeThemeContext
+        activeType = normalizedChildren.activeType
+        activePath = [item, ...normalizedChildren.activePath]
+        switch (activeType) {
+          case 'page':
+            activeIndex =
+              topLevelPageItems.length + normalizedChildren.activeIndex
+            break
+          case 'doc':
+            activeIndex =
+              flatDocsDirectories.length + normalizedChildren.activeIndex
+            break
+        }
+        if (a.withIndexPage) {
+          if (type === 'doc') {
+            activeIndex++
+          }
+        }
+      }
     }
 
     if (normalizedChildren) {
@@ -315,6 +318,7 @@ export default function normalizePages({
     activeType,
     activeIndex,
     activeThemeContext,
+    activePath,
     directories,
     flatDirectories,
     docsDirectories,

@@ -19,6 +19,7 @@ import { MenuContext } from './utils/menu-context'
 import normalizePages from './utils/normalize-pages'
 import { DocsThemeConfig } from './types'
 import './polyfill'
+import Breadcrumb from './breadcrumb'
 
 function useDirectoryInfo(pageMap: PageMapItem[]) {
   const { locale, defaultLocale, asPath } = useRouter()
@@ -36,12 +37,14 @@ function useDirectoryInfo(pageMap: PageMapItem[]) {
 
 interface BodyProps {
   themeContext: Record<string, any>
+  breadcrumb?: React.ReactNode
   toc?: React.ReactNode
   navLinks: React.ReactNode
 }
 
 const Body: React.FC<BodyProps> = ({
   themeContext,
+  breadcrumb,
   toc,
   navLinks,
   children
@@ -61,6 +64,7 @@ const Body: React.FC<BodyProps> = ({
       ) : (
         <article className="nextra-body relative pb-8 w-full max-w-full flex min-w-0 pr-[calc(env(safe-area-inset-right)-1.5rem)]">
           <main className="mx-auto max-w-4xl px-6 md:px-8 pt-4 z-10 min-w-0 w-full">
+            {breadcrumb}
             <MDXTheme>{children}</MDXTheme>
             {navLinks}
           </main>
@@ -94,6 +98,7 @@ const Content: React.FC<LayoutProps> = ({
     activeType,
     activeIndex,
     activeThemeContext,
+    activePath,
     // pageDirectories,
     topLevelPageItems,
     docsDirectories,
@@ -149,6 +154,11 @@ const Content: React.FC<LayoutProps> = ({
                 />
                 <Body
                   themeContext={themeContext}
+                  breadcrumb={
+                    activeType === 'page' ? null : themeContext.breadcrumb ? (
+                      <Breadcrumb activePath={activePath} />
+                    ) : null
+                  }
                   toc={
                     activeType === 'page' ? null : themeContext.toc ? (
                       <ToC
