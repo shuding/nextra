@@ -109,6 +109,21 @@ blockquote:not(:first-child),
     }
   }
 
+  /* .nextra-sidebar-container {
+    &::-webkit-scrollbar {
+      -webkit-appearance: none;
+      width: 7px;
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 4px;
+      background-color: rgba(0, 0, 0, 0.2);
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.3);
+      }
+    }
+  } */
+
   /* Sidebar */
   .nextra-sidebar {
     -webkit-touch-callout: none;
@@ -262,9 +277,54 @@ article {
   }
   hr {
     @apply my-8;
+    .dark & {
+      @apply border-gray-900;
+    }
   }
-  .dark & hr {
-    @apply border-gray-900;
+  details {
+    @apply my-4 p-2 border border-gray-200 rounded;
+    .dark & {
+      @apply border-neutral-800;
+    }
+    .nextra-collapse-content {
+      @apply pt-2;
+    }
+    &:first-child {
+      @apply mt-0;
+    }
+    &:last-child {
+      @apply mb-0;
+    }
+  }
+  summary {
+    @apply p-1 rounded cursor-pointer transition-colors;
+    &:hover {
+      @apply bg-gray-100;
+    }
+    .dark &:hover {
+      @apply bg-neutral-800;
+    }
+  }
+  details > summary {
+    list-style-type: none;
+    &::before {
+      content: '';
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'%3E%3Cpath fill-rule='evenodd' d='M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z' clip-rule='evenodd' /%3E%3C/svg%3E");
+      height: 1.2em;
+      width: 1.2em;
+      margin-right: 0.125em;
+      vertical-align: -4px;
+      @apply transition-transform inline-block;
+    }
+    .dark &::before {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='white'%3E%3Cpath fill-rule='evenodd' d='M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z' clip-rule='evenodd' /%3E%3C/svg%3E");
+    }
+  }
+  details[data-open] > summary {
+    list-style-type: none;
+    &::before {
+      @apply rotate-90;
+    }
   }
 
   .subheading-anchor {

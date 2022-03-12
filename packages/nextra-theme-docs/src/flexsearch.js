@@ -439,6 +439,7 @@ export default function Search() {
                   onClick={() => {
                     setShow(false)
                     setMenu(false)
+                    setSearch('')
                   }}
                 />
               )

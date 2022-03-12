@@ -119,19 +119,20 @@ export default function normalizePages({
       const items = []
       const index = metaKeys.indexOf(a.name)
 
-      // Fill all skipped items in meta.
-      for (let i = metaKeyIndex + 1; i < index; i++) {
-        const key = metaKeys[i]
-        items.push({
-          name: key,
-          route: '#',
-          ...meta[key]
-        })
+      if (index !== -1) {
+        // Fill all skipped items in meta.
+        for (let i = metaKeyIndex + 1; i < index; i++) {
+          const key = metaKeys[i]
+          items.push({
+            name: key,
+            route: '#',
+            ...meta[key]
+          })
+        }
+        metaKeyIndex = index
       }
 
       items.push(a)
-      metaKeyIndex = index
-
       return items
     })
 

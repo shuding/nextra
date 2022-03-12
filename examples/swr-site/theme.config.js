@@ -35,6 +35,7 @@ export default {
   unstable_flexsearch: true,
   floatTOC: true,
   darkMode: true,
+  defaultMenuCollapsed: true,
   nextThemes: {
     // defaultTheme: "dark",
   },
