@@ -1,6 +1,6 @@
 {
   "name": "nextra-theme-docs",
-  "version": "2.0.0-alpha.38",
+  "version": "2.0.0-alpha.39",
   "description": "A Nextra theme for documentation sites.",
   "main": "index.js",
   "module": "index.js",
