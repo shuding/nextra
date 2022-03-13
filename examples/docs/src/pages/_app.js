@@ -1,11 +1,8 @@
 import 'nextra-theme-docs/style.css'
-import Prism from 'prism-react-renderer/prism'
-;(typeof global !== 'undefined' ? global : window).Prism = Prism
 
-// Scala extends Java in Prism.
-require('prismjs/components/prism-java')
-require('prismjs/components/prism-scala')
+export default function MyApp({ Component, pageProps }) {
+  // Use the layout defined at the page level, if available
+  const getLayout = Component.getLayout || (page => page)
 
-export default function Nextra({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return getLayout(<Component {...pageProps} />)
 }
