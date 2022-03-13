@@ -140,45 +140,56 @@ export default function ToC({
   const slugger = new Slugger()
   const activeAnchor = useActiveAnchor()
   const config = useConfig()
+
+  headings = headings
+    ? headings.filter(
+        heading => heading.type === 'heading' && heading.depth > 1
+      )
+    : headings
+
+  const hasHeadings = headings && headings.length > 0
   const hasMetaInfo = config.feedbackLink || config.footerEditLink
 
   return (
     <div className="nextra-toc w-64 hidden xl:block text-sm px-4">
       <div className="overflow-y-auto sticky max-h-[calc(100vh-4rem-env(safe-area-inset-bottom))] top-16 pt-8">
-        {headings ? (
+        {hasHeadings && headings ? (
           <ul>
             <p className="font-semibold tracking-tight mb-4">On This Page</p>
-            {headings
-              .filter(
-                heading => heading.type === 'heading' && heading.depth > 1
+            {headings.map(heading => {
+              const text = getHeadingText(heading)
+              const slug = slugger.slug(text)
+              const state = activeAnchor[slug]
+              return (
+                <li key={slug} style={indent(heading.depth)}>
+                  <a
+                    href={`#${slug}`}
+                    className={cn(
+                      'no-underline inline-block',
+                      heading.depth === 2 ? 'font-semibold' : '',
+                      state?.isActive
+                        ? 'text-prime-500 subpixel-antialiased'
+                        : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-300'
+                    )}
+                    aria-selected={state?.isActive}
+                  >
+                    {text}
+                  </a>
+                </li>
               )
-              .map(heading => {
-                const text = getHeadingText(heading)
-                const slug = slugger.slug(text)
-                const state = activeAnchor[slug]
-                return (
-                  <li key={slug} style={indent(heading.depth)}>
-                    <a
-                      href={`#${slug}`}
-                      className={cn(
-                        'no-underline inline-block',
-                        heading.depth === 2 ? 'font-semibold' : '',
-                        state?.isActive
-                          ? 'text-prime-500 subpixel-antialiased'
-                          : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-300'
-                      )}
-                      aria-selected={state?.isActive}
-                    >
-                      {text}
-                    </a>
-                  </li>
-                )
-              })}
+            })}
           </ul>
         ) : null}
 
         {hasMetaInfo ? (
-          <div className="sticky py-8 bottom-0 border-t mt-8 dark:border-prime-100 dark:border-opacity-10 bg-white dark:bg-dark shadow-[0_-12px_16px_white] dark:shadow-none">
+          <div
+            className={cn(
+              hasHeadings
+                ? 'border-t mt-8 pt-8 shadow-[0_-12px_16px_white] dark:shadow-none bg-white dark:bg-dark'
+                : '',
+              'sticky pb-8 bottom-0 dark:border-prime-100 dark:border-opacity-10'
+            )}
+          >
             {config.feedbackLink ? (
               <FeedbackLink
                 filepath={filepathWithName}

@@ -7,7 +7,7 @@ html {
   -webkit-tap-highlight-color: transparent;
 }
 body {
-  @apply bg-white;
+  @apply bg-white w-full;
 }
 .dark body {
   @apply bg-dark text-gray-100;
@@ -163,21 +163,38 @@ blockquote:not(:first-child),
   }
 }
 @media (max-width: 767px) {
+  .nextra-body:before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    transition: opacity 1.5s ease;
+    opacity: 0;
+    z-index: 14;
+    background-color: black;
+    .nextra-container.menu-active & {
+      opacity: 0.8;
+    }
+  }
   .nextra-sidebar-container {
-    @apply top-0 pt-16 bg-white dark:bg-dark;
+    @apply top-0 pt-16 bg-white dark:bg-dark overscroll-contain;
     height: 100%;
     opacity: 0;
-    box-shadow: 0 0 0 110vh rgba(0, 0, 0, 0);
+    overscroll-behavior-y: contain;
     transform: translate3d(0, -110%, 0);
     transition: transform 0.8s cubic-bezier(0.52, 0.16, 0.04, 1),
-      box-shadow 1.5s ease, opacity 1.5s step-end;
+      opacity 0s linear 1s;
+    will-change: transform, opacity;
+    contain: layout style;
+    backface-visibility: hidden;
 
     &.open {
       opacity: 1;
-      box-shadow: 0 0 0 110vh rgba(0, 0, 0, 0.5);
       transform: translate3d(0, 0, 0);
-      transition: transform 0.8s cubic-bezier(0.52, 0.16, 0.04, 1),
-        box-shadow 0.8s ease;
+      transition: transform 0.8s cubic-bezier(0.52, 0.16, 0.04, 1);
     }
     body.resizing & {
       transition: none;
