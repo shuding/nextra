@@ -79,7 +79,7 @@ function FolderImpl({ item, anchors }: FolderProps) {
         <ArrowRight
           height="1em"
           className={
-            'ml-2 p-[2px] rounded-sm w-[18px] h-[18px] dark:hover:bg-gray-100 hover:bg-gray-800 hover:bg-opacity-5 dark:hover:bg-opacity-5'
+            'ml-2 p-[2px] rounded-sm min-w-[18px] h-[18px] dark:hover:bg-gray-100 hover:bg-gray-800 hover:bg-opacity-5 dark:hover:bg-opacity-5'
           }
           childProps={{
             className: cn(
