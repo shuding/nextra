@@ -99,6 +99,13 @@ export default function Search() {
   const input = useRef(null)
   const { setMenu } = useMenuContext()
 
+  const finishSearch = () => {
+    if (input.current) input.current.value = ''
+    setSearch('')
+    setShow(false)
+    setMenu(false)
+  }
+
   const doSearch = () => {
     if (!search) return
 
@@ -226,8 +233,12 @@ export default function Search() {
         }
         case 'Enter': {
           router.push(results[active].route)
+          finishSearch()
+          break
+        }
+        case 'Escape': {
           setShow(false)
-          setMenu(false)
+          input.current.blur()
           break
         }
       }
@@ -342,6 +353,7 @@ export default function Search() {
           input.current.focus()
         } else if (e.key === 'Escape') {
           setShow(false)
+          input.current.blur()
         }
       }
     }
@@ -437,9 +449,7 @@ export default function Search() {
                   active={i === active}
                   onHover={() => setActive(i)}
                   onClick={() => {
-                    setShow(false)
-                    setMenu(false)
-                    setSearch('')
+                    finishSearch()
                   }}
                 />
               )
