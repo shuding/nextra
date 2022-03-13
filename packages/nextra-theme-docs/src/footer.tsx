@@ -78,12 +78,12 @@ export const NavLinks = ({
 
   return (
     <div className="pt-8 mt-16 mb-8 border-t dark:border-neutral-800 flex flex-row items-center justify-between">
-      <div>
+      <div className="flex-1 min-w-0">
         {prev && config.prevLinks ? (
           <PrevLink route={prev.route} title={prev.title} isRTL={isRTL} />
         ) : null}
       </div>
-      <div>
+      <div className="flex-1 min-w-0">
         {config.nextLinks && next ? (
           <NextLink route={next.route} title={next.title} isRTL={isRTL} />
         ) : null}

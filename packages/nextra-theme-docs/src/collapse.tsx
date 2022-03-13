@@ -24,8 +24,9 @@ export default function Collapse({
       const inner = innerRef.current
       if (container && inner) {
         const contentHeight = innerRef.current.clientHeight
-        // container.style.maxHeight = '0px'
         container.style.maxHeight = contentHeight + 'px'
+        container.classList.remove('duration-500')
+        container.classList.add('duration-300')
 
         inner.style.opacity = '1'
         animationRef.current = setTimeout(() => {
@@ -41,6 +42,9 @@ export default function Collapse({
       if (container && inner) {
         const contentHeight = innerRef.current.clientHeight
         container.style.maxHeight = contentHeight + 'px'
+        container.classList.remove('duration-300')
+        container.classList.add('duration-500')
+
         inner.style.opacity = '0'
         setTimeout(() => {
           const container = containerRef.current
@@ -59,14 +63,14 @@ export default function Collapse({
   return (
     <div
       ref={containerRef}
-      className="transition-all ease-in-out duration-300 overflow-hidden"
+      className="transition-all ease-in-out duration-300 overflow-hidden transform-gpu"
       style={{
         maxHeight: initialState.current ? undefined : 0
       }}
     >
       <div
         ref={innerRef}
-        className="nextra-collapse-content transition-opacity ease-in-out duration-300 overflow-hidden"
+        className="nextra-collapse-content transition-opacity ease-in-out duration-500 overflow-hidden transform-gpu"
         style={{
           opacity: initialState.current ? 1 : 0
         }}

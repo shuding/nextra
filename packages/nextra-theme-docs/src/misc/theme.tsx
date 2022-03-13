@@ -222,6 +222,32 @@ const Table = ({ children }: { children?: React.ReactNode }) => {
 
 const DetailsContext = React.createContext<any>(() => {})
 
+const findSummary = (children: React.ReactNode) => {
+  let summary: React.ReactNode = null
+  let restChildren: ReactNode[] = []
+
+  React.Children.forEach(children, child => {
+    if (child && (child as React.ReactElement).type === Summary) {
+      summary = summary || child
+    } else {
+      let c = child
+      if (
+        typeof child === 'object' &&
+        child &&
+        'props' in child &&
+        child.props
+      ) {
+        const result = findSummary(child.props.children)
+        summary = summary || result[0]
+        c = React.cloneElement(child, { ...child.props, children: result[1] })
+      }
+      restChildren.push(c)
+    }
+  })
+
+  return [summary, restChildren]
+}
+
 const Details = ({
   children,
   open,
@@ -232,17 +258,7 @@ const Details = ({
 }) => {
   const [openState, setOpen] = useState(!!open)
   const ref = useRef<HTMLDetailsElement>(null)
-
-  let summary = null
-  let restChildren: ReactNode[] = []
-
-  React.Children.forEach(children, child => {
-    if (child && (child as React.ReactElement).type === Summary) {
-      summary = child
-    } else {
-      restChildren.push(child)
-    }
-  })
+  const [summary, restChildren] = findSummary(children)
 
   return (
     <details

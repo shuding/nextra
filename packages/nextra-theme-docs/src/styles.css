@@ -225,7 +225,7 @@ article {
     }
   }
   li {
-    @apply mt-2;
+    @apply my-2;
   }
   ol {
     @apply list-decimal ml-6 mt-6;
@@ -238,7 +238,7 @@ article {
     @apply no-underline;
   }
   code {
-    @apply bg-black bg-opacity-5 border border-black border-opacity-5 rounded-md;
+    @apply bg-black bg-opacity-5 border border-black border-opacity-5 rounded-md break-words;
     font-size: 0.9em;
     padding: 2px 0.25em;
     box-decoration-break: clone;
@@ -294,6 +294,12 @@ article {
     }
     &:last-child {
       @apply mb-0;
+    }
+    .nextra-collapse-content {
+      @apply p-2;
+      & > *:first-child {
+        @apply mt-2;
+      }
     }
   }
   summary {
