@@ -7,7 +7,7 @@ html {
   -webkit-tap-highlight-color: transparent;
 }
 body {
-  @apply bg-white;
+  @apply bg-white w-full;
 }
 .dark body {
   @apply bg-dark text-gray-100;
@@ -163,21 +163,38 @@ blockquote:not(:first-child),
   }
 }
 @media (max-width: 767px) {
+  .nextra-body:before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    transition: opacity 1.5s ease;
+    opacity: 0;
+    z-index: 14;
+    background-color: black;
+    .nextra-container.menu-active & {
+      opacity: 0.8;
+    }
+  }
   .nextra-sidebar-container {
-    @apply top-0 pt-16 bg-white dark:bg-dark;
+    @apply top-0 pt-16 bg-white dark:bg-dark overscroll-contain;
     height: 100%;
     opacity: 0;
-    box-shadow: 0 0 0 110vh rgba(0, 0, 0, 0);
+    overscroll-behavior-y: contain;
     transform: translate3d(0, -110%, 0);
     transition: transform 0.8s cubic-bezier(0.52, 0.16, 0.04, 1),
-      box-shadow 1.5s ease, opacity 1.5s step-end;
+      opacity 0s linear 1s;
+    will-change: transform, opacity;
+    contain: layout style;
+    backface-visibility: hidden;
 
     &.open {
       opacity: 1;
-      box-shadow: 0 0 0 110vh rgba(0, 0, 0, 0.5);
       transform: translate3d(0, 0, 0);
-      transition: transform 0.8s cubic-bezier(0.52, 0.16, 0.04, 1),
-        box-shadow 0.8s ease;
+      transition: transform 0.8s cubic-bezier(0.52, 0.16, 0.04, 1);
     }
     body.resizing & {
       transition: none;
@@ -225,7 +242,7 @@ article {
     }
   }
   li {
-    @apply mt-2;
+    @apply my-2;
   }
   ol {
     @apply list-decimal ml-6 mt-6;
@@ -238,7 +255,7 @@ article {
     @apply no-underline;
   }
   code {
-    @apply bg-black bg-opacity-5 border border-black border-opacity-5 rounded-md;
+    @apply bg-black bg-opacity-5 border border-black border-opacity-5 rounded-md break-words;
     font-size: 0.9em;
     padding: 2px 0.25em;
     box-decoration-break: clone;
@@ -285,9 +302,9 @@ article {
     }
   }
   details {
-    @apply my-4 p-2 border border-gray-200 rounded;
+    @apply my-4 p-2 border border-gray-200 rounded shadow-sm bg-white;
     .dark & {
-      @apply border-neutral-800;
+      @apply border-neutral-800 bg-neutral-900;
     }
     &:first-child {
       @apply mt-0;
@@ -295,14 +312,20 @@ article {
     &:last-child {
       @apply mb-0;
     }
+    .nextra-collapse-content {
+      @apply p-2;
+    }
   }
   summary {
-    @apply p-1 rounded cursor-pointer transition-colors;
+    @apply p-1 rounded cursor-pointer transition-colors outline-none;
     &:hover {
       @apply bg-gray-100;
     }
     .dark &:hover {
       @apply bg-neutral-800;
+    }
+    &::-webkit-details-marker {
+      display: none;
     }
   }
   details > summary {

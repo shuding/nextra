@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import cn from 'classnames'
 import Slugger from 'github-slugger'
 import { useRouter } from 'next/router'

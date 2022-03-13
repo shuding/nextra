@@ -131,7 +131,8 @@ const Content: React.FC<LayoutProps> = ({
       >
         <div
           className={cn('nextra-container main-container flex flex-col', {
-            rtl: isRTL
+            rtl: isRTL,
+            'menu-active': menu
           })}
         >
           {themeContext.navbar ? (

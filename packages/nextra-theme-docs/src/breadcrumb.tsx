@@ -16,10 +16,13 @@ export default function Breadcrumb({ activePath }: { activePath: Item[] }) {
             {index ? <span className="mx-2 select-none">/</span> : null}
             <div
               key={item.route}
-              className={cn('transition-colors hover:text-gray-900', {
-                'text-gray-600': isActive,
-                'text-ellipsis whitespace-nowrap overflow-hidden': !isActive
-              })}
+              className={cn(
+                'transition-colors hover:text-gray-900 dark:hover:text-gray-200',
+                {
+                  'text-gray-600 dark:text-gray-400': isActive,
+                  'text-ellipsis whitespace-nowrap overflow-hidden': !isActive
+                }
+              )}
             >
               {isLink && !isActive ? (
                 <Link href={item.route}>

@@ -21,7 +21,7 @@ const NextLink = ({ route, title, isRTL }: LinkProps) => {
     <Link href={route}>
       <a
         className={cn(
-          'text-lg font-medium p-4 -m-4 no-underline transition-colors text-gray-600 dark:text-gray-300 dark:hover:text-prime-500 hover:text-prime-500 flex items-center',
+          'text-lg font-medium p-4 -m-4 no-underline transition-colors text-gray-600 dark:text-gray-300 dark:hover:text-prime-500 hover:text-prime-500 inline-flex items-center',
           { 'ml-2': !isRTL, 'mr-2': isRTL }
         )}
         title={title}
@@ -78,12 +78,12 @@ export const NavLinks = ({
 
   return (
     <div className="pt-8 mt-16 mb-8 border-t dark:border-neutral-800 flex flex-row items-center justify-between">
-      <div>
+      <div className="flex-1 min-w-0">
         {prev && config.prevLinks ? (
           <PrevLink route={prev.route} title={prev.title} isRTL={isRTL} />
         ) : null}
       </div>
-      <div>
+      <div className="flex-1 min-w-0 text-right">
         {config.nextLinks && next ? (
           <NextLink route={next.route} title={next.title} isRTL={isRTL} />
         ) : null}
