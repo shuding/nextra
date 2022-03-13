@@ -234,6 +234,7 @@ const findSummary = (children: React.ReactNode) => {
       if (
         typeof child === 'object' &&
         child &&
+        (child as React.ReactElement).type !== Details &&
         'props' in child &&
         child.props
       ) {

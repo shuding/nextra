@@ -285,9 +285,9 @@ article {
     }
   }
   details {
-    @apply my-4 p-2 border border-gray-200 rounded;
+    @apply my-4 p-2 border border-gray-200 rounded shadow-sm bg-white;
     .dark & {
-      @apply border-neutral-800;
+      @apply border-neutral-800 bg-neutral-900;
     }
     &:first-child {
       @apply mt-0;
@@ -297,18 +297,18 @@ article {
     }
     .nextra-collapse-content {
       @apply p-2;
-      & > *:first-child {
-        @apply mt-2;
-      }
     }
   }
   summary {
-    @apply p-1 rounded cursor-pointer transition-colors;
+    @apply p-1 rounded cursor-pointer transition-colors outline-none;
     &:hover {
       @apply bg-gray-100;
     }
     .dark &:hover {
       @apply bg-neutral-800;
+    }
+    &::-webkit-details-marker {
+      display: none;
     }
   }
   details > summary {
