@@ -24,7 +24,7 @@ export default function Head({ title, locale, meta }: HeadProps) {
         {title}
         {renderComponent(config.titleSuffix, { locale, config, title, meta })}
       </title>
-      {renderComponent(config.head, { locale, config, title, meta })}
+      {renderComponent(config.head, { locale, config, title, meta }, true)}
       {config.unstable_faviconGlyph ? (
         <link
           rel="icon"
