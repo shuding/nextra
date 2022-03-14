@@ -185,9 +185,9 @@ export default function ToC({
           <div
             className={cn(
               hasHeadings
-                ? 'border-t mt-8 pt-8 shadow-[0_-12px_16px_white] dark:shadow-none bg-white dark:bg-dark'
+                ? 'border-t mt-8 pt-8 shadow-[0_-12px_16px_white] dark:shadow-[0_-12px_16px_#111] bg-white dark:bg-dark'
                 : '',
-              'sticky pb-8 bottom-0 dark:border-prime-100 dark:border-opacity-10'
+              'sticky pb-8 bottom-0 dark:border-neutral-800'
             )}
           >
             {config.feedbackLink ? (

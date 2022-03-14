@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect, useMemo, useRef } from 'react'
 import cn from 'classnames'
 import Slugger from 'github-slugger'
 import { useRouter } from 'next/router'
@@ -237,6 +237,7 @@ export default function Sidebar({
         .filter(Boolean),
     [headings]
   )
+
   const { menu } = useMenuContext()
   useEffect(() => {
     if (menu) {
@@ -254,9 +255,9 @@ export default function Sidebar({
         { open: menu }
       )}
     >
-      <div className="nextra-sidebar select-none w-full h-full md:h-auto pl-[calc(env(safe-area-inset-left)-1.5rem)] pb-[env(safe-area-inset-bottom)]">
+      <div className="nextra-sidebar select-none w-full h-full md:h-auto pl-[calc(env(safe-area-inset-left)-1.5rem)]">
         <div className="p-4 min-h-[calc(100vh-4rem-61px)]">
-          <div className="mb-4 block md:hidden">
+          <div className="nextra-sidebar-search mb-4 block md:hidden">
             {config.customSearch ||
               (config.search ? (
                 config.unstable_flexsearch ? (
@@ -287,8 +288,8 @@ export default function Sidebar({
           </div>
         </div>
 
-        <div className="sticky bottom-0 mx-4 border-t dark:border-prime-100 dark:border-opacity-10 shadow-[0_-12px_16px_white] dark:shadow-none">
-          <div className="bg-white dark:bg-dark py-4 flex gap-1 pb-[calc(env(safe-area-inset-bottom)+1rem)]">
+        <div className="nextra-sidebar-menu mx-4 border-t dark:border-neutral-800 shadow-[0_-12px_16px_white] dark:shadow-[0_-12px_16px_#111]">
+          <div className="bg-white dark:bg-dark py-4 flex gap-1 pb-4">
             {config.i18n ? (
               <div className="flex-1 relative">
                 <LocaleSwitch options={config.i18n} />
