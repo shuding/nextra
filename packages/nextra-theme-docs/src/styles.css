@@ -160,6 +160,18 @@ blockquote:not(:first-child),
     .locale .menu {
       @apply right-0;
     }
+    .nextra-sidebar-search {
+      @apply sticky pt-4 bg-white dark:bg-dark top-0 -mt-4;
+      box-shadow: 0 2px 14px 6px white;
+      z-index: 1;
+      .dark & {
+        box-shadow: 0 2px 14px 6px #111;
+      }
+    }
+
+    .nextra-sidebar-menu {
+      @apply sticky bottom-0;
+    }
   }
 }
 @media (max-width: 767px) {
@@ -184,13 +196,9 @@ blockquote:not(:first-child),
     height: 100vh;
     height: -webkit-fill-available;
 
-    .nextra-sidebar-menu {
-      @apply sticky bottom-0;
-    }
-
     opacity: 0;
     transform: translate3d(0, -110%, 0);
-    transition: transform 0.6s cubic-bezier(0.52, 0.16, 0.04, 1),
+    transition: transform 0.8s cubic-bezier(0.52, 0.16, 0.04, 1),
       opacity 0s linear 1s;
     will-change: transform, opacity;
     contain: layout style;
@@ -199,7 +207,7 @@ blockquote:not(:first-child),
     &.open {
       opacity: 1;
       transform: translate3d(0, 0, 0);
-      transition: transform 0.6s cubic-bezier(0.52, 0.16, 0.04, 1);
+      transition: transform 0.8s cubic-bezier(0.52, 0.16, 0.04, 1);
     }
     body.resizing & {
       transition: none;
@@ -407,7 +415,7 @@ article {
   &.nextra-flexsearch ul {
     @apply overflow-auto left-0 md:-left-80 md:right-0;
     min-height: 100px;
-    max-height: min(calc(50vh - 11rem - env(safe-area-inset-bottom)), 400px);
+    max-height: min(calc(100vh - 5rem - env(safe-area-inset-bottom)), 400px);
     max-width: min(calc(100vw - 2rem), calc(100% + 20rem));
     transition: max-height 0.2s ease;
     width: 100vw;
@@ -467,7 +475,7 @@ article {
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
   .nextra-search .excerpt {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -475,6 +483,9 @@ article {
     -webkit-line-clamp: 1;
     line-clamp: 1;
     -webkit-box-orient: vertical;
+  }
+  .nextra-search.nextra-flexsearch ul {
+    max-height: min(calc(50vh - 11rem - env(safe-area-inset-bottom)), 400px);
   }
 }
 
