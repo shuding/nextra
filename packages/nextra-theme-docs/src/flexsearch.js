@@ -100,7 +100,10 @@ export default function Search() {
   const { setMenu } = useMenuContext()
 
   const finishSearch = () => {
-    if (input.current) input.current.value = ''
+    if (input.current) {
+      input.current.value = ''
+      input.current.blur()
+    }
     setSearch('')
     setShow(false)
     setMenu(false)

@@ -20,7 +20,8 @@ export default function Breadcrumb({ activePath }: { activePath: Item[] }) {
                 'transition-colors hover:text-gray-900 dark:hover:text-gray-200',
                 {
                   'text-gray-600 dark:text-gray-400': isActive,
-                  'text-ellipsis whitespace-nowrap overflow-hidden': !isActive
+                  'text-ellipsis whitespace-nowrap overflow-hidden min-w-[24px]':
+                    !isActive
                 }
               )}
             >

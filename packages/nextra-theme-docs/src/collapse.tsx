@@ -63,14 +63,14 @@ export default function Collapse({
   return (
     <div
       ref={containerRef}
-      className="transition-all ease-in-out duration-300 overflow-hidden transform-gpu"
+      className="transition-all ease-in-out duration-300 overflow-hidden transform-gpu motion-reduce:transition-none"
       style={{
         maxHeight: initialState.current ? undefined : 0
       }}
     >
       <div
         ref={innerRef}
-        className="nextra-collapse-content transition-opacity ease-in-out duration-500 overflow-hidden transform-gpu"
+        className="nextra-collapse-content transition-opacity ease-in-out duration-500 overflow-hidden transform-gpu motion-reduce:transition-none"
         style={{
           opacity: initialState.current ? 1 : 0
         }}

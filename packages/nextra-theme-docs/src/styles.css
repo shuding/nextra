@@ -169,7 +169,7 @@ blockquote:not(:first-child),
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
+    bottom: -200px;
     pointer-events: none;
     transition: opacity 1.5s ease;
     opacity: 0;
@@ -181,11 +181,16 @@ blockquote:not(:first-child),
   }
   .nextra-sidebar-container {
     @apply top-0 pt-16 bg-white dark:bg-dark overscroll-contain;
-    height: 100%;
+    height: 100vh;
+    height: -webkit-fill-available;
+
+    .nextra-sidebar-menu {
+      @apply sticky bottom-0;
+    }
+
     opacity: 0;
-    overscroll-behavior-y: contain;
     transform: translate3d(0, -110%, 0);
-    transition: transform 0.8s cubic-bezier(0.52, 0.16, 0.04, 1),
+    transition: transform 0.6s cubic-bezier(0.52, 0.16, 0.04, 1),
       opacity 0s linear 1s;
     will-change: transform, opacity;
     contain: layout style;
@@ -194,9 +199,21 @@ blockquote:not(:first-child),
     &.open {
       opacity: 1;
       transform: translate3d(0, 0, 0);
-      transition: transform 0.8s cubic-bezier(0.52, 0.16, 0.04, 1);
+      transition: transform 0.6s cubic-bezier(0.52, 0.16, 0.04, 1);
     }
     body.resizing & {
+      transition: none;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) and (max-width: 767px) {
+  .nextra-body:before {
+    transition: none;
+  }
+  .nextra-sidebar-container {
+    transition: none;
+    &.open {
       transition: none;
     }
   }
@@ -390,7 +407,7 @@ article {
   &.nextra-flexsearch ul {
     @apply overflow-auto left-0 md:-left-80 md:right-0;
     min-height: 100px;
-    max-height: min(calc(100vh - 12.5rem - env(safe-area-inset-bottom)), 600px);
+    max-height: min(calc(50vh - 11rem - env(safe-area-inset-bottom)), 400px);
     max-width: min(calc(100vw - 2rem), calc(100% + 20rem));
     transition: max-height 0.2s ease;
     width: 100vw;
