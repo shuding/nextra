@@ -7,6 +7,7 @@
     "dist/*",
     "index.js",
     "ssg.js",
+    "data.js",
     "loader.js",
     "locales.js",
     "context.js"

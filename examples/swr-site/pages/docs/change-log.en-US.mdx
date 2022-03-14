@@ -1,15 +1,20 @@
 import Markdown from 'markdown-to-jsx'
-import { useSSG } from 'nextra/ssg'
+import { useData } from 'nextra/data'
 
 export const getStaticProps = ({ params }) => {
   return fetch(`https://api.github.com/repos/vercel/swr/releases`)
     .then(res => res.json())
     // we keep the most recent 5 releases here
-    .then(releases => ({ props: { ssg: releases.slice(0, 5) }, revalidate: 10 }))
+    .then(releases => ({
+      props: {
+        releases: releases.slice(0, 5)
+      },
+      revalidate: 60
+    }))
 }
 
 export const ReleasesRenderer = () => {
-  const releases = useSSG()
+  const releases = useData('releases')
   return <Markdown>{
     releases.map(release => {
       const body = release.body
