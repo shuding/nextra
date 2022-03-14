@@ -85,8 +85,6 @@ const Layout = ({
 }
 
 const NextraBlog = (opts: PageOpt, _config: NextraBlogTheme) => {
-  const router = useRouter()
-  const { theme, resolvedTheme } = useTheme()
   const config: NextraBlogTheme = Object.assign(
     {
       readMore: 'Read More →',
@@ -165,6 +163,8 @@ const NextraBlog = (opts: PageOpt, _config: NextraBlogTheme) => {
   }
 
   return (props: any) => {
+    const router = useRouter()
+    const { theme, resolvedTheme } = useTheme()
     const { query } = router
     const tagName = type === 'tag' ? query.tag : null
     const pageTitle = opts.meta.title || opts.titleText || ''

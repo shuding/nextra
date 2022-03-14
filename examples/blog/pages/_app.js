@@ -1,5 +1,8 @@
 import 'nextra-theme-blog/style.css'
 
-export default function Nextra({ Component, pageProps }) {
-  return <Component {...pageProps} />
+export default function MyApp({ Component, pageProps }) {
+  // Use the layout defined at the page level, if available
+  const getLayout = Component.getLayout || (page => page)
+
+  return getLayout(<Component {...pageProps} />)
 }

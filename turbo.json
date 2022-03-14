@@ -1,0 +1,30 @@
+{
+  "baseBranch": "origin/core",
+  "npmClient": "pnpm",
+  "pipeline": {
+    "build": {
+      "dependsOn": [
+        "types",
+        "^build"
+      ],
+      "outputs": [
+        "dist/**/*.js",
+        "dist/**/*.css",
+        ".next/**",
+        "style.css",
+        "index.js",
+        "ssg.js",
+        "loader.js"
+      ]
+    },
+    "test": {},
+    "types": {
+      "outputs": [
+        "dist/**/*.d.ts"
+      ]
+    },
+    "dev": {
+      "cache": false
+    }
+  }
+}
