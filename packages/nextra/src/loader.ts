@@ -1,21 +1,37 @@
 import type { LoaderOptions } from './types'
 
+import fs from 'fs'
 import path from 'path'
 import grayMatter from 'gray-matter'
 import slash from 'slash'
 import { LoaderContext } from 'webpack'
+import { getFileLatestModifiedDateByGitAsync } from '@napi-rs/simple-git'
+
 import { addPage } from './content-dump'
 import { getLocaleFromFilename } from './utils'
 import { compileMdx } from './compile'
 import { getPageMap, findPagesDir } from './page-map'
 import { collectFiles } from './plugin'
+
 const extension = /\.mdx?$/
 const isProductionBuild = process.env.NODE_ENV === 'production'
 
 // TODO: create this as a webpack plugin.
 const indexContentEmitted = new Set()
+const initialBuild = new Set()
 
 const pagesDir = path.resolve(findPagesDir())
+const gitRoot = (() => {
+  const dir = process.cwd().split(path.sep)
+  try {
+    while (dir && !fs.existsSync(path.join(dir.join(path.sep), '.git'))) {
+      dir.pop()
+    }
+    return dir.join(path.sep)
+  } catch (e) {
+    return null
+  }
+})()
 
 export default async function (
   this: LoaderContext<LoaderOptions>,
@@ -39,21 +55,25 @@ export default async function (
   const filename = resourcePath.slice(resourcePath.lastIndexOf('/') + 1)
   const fileLocale = getLocaleFromFilename(filename)
 
+  const isInitialBuild = !initialBuild.has(resourcePath)
+  initialBuild.add(resourcePath)
+
   // Check if there's a theme provided
   if (!theme) {
     throw new Error('No Nextra theme found!')
   }
 
   let pageMapResult, fileMap
-  if (isProductionBuild) {
+  if (isProductionBuild || isInitialBuild) {
     const data = pageMapCache.get()!
     pageMapResult = data.items
     fileMap = data.fileMap
   } else {
-    const data = await collectFiles(pagesDir, '/')
+    const data = await collectFiles(pagesDir, '/', {}, resourcePath)
     pageMapResult = data.items
     fileMap = data.fileMap
   }
+
   const [pageMap, route, title] = getPageMap(
     resourcePath,
     pageMapResult,
@@ -120,6 +140,18 @@ export default async function (
     indexContentEmitted.add(filename)
   }
 
+  let timestamp: number | undefined
+  if (gitRoot) {
+    try {
+      timestamp = await getFileLatestModifiedDateByGitAsync(
+        gitRoot,
+        path.relative(gitRoot, resourcePath)
+      )
+    } catch (e) {
+      // Failed to get timestamp for this file. Silently ignore it.
+    }
+  }
+
   const prefix =
     `import __nextra_withLayout__ from '${layout}'\n` +
     `import { withSSG as __nextra_withSSG__ } from 'nextra/ssg'\n` +
@@ -142,7 +174,8 @@ export default async function (
       pageMap: __nextra_pageMap__,
       titleText: ${JSON.stringify(titleText)},
       headings: ${JSON.stringify(headings)},
-      hasH1: ${JSON.stringify(hasH1)}
+      hasH1: ${JSON.stringify(hasH1)},
+      ${timestamp ? `timestamp: ${timestamp},\n` : ''}
     }, ${layoutConfig ? '__nextra_layoutConfig__' : 'null'}))
     `
 
