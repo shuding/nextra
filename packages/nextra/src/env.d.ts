@@ -11,3 +11,10 @@ declare module 'github-slugger' {
     slug(data: string): string
   }
 }
+
+declare module '@napi-rs/simple-git' {
+  export function getFileLatestModifiedDateByGitAsync(
+    gitDir: stirng,
+    filePath: string
+  ): number
+}

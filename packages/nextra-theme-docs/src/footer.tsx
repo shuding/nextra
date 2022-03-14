@@ -77,7 +77,7 @@ export const NavLinks = ({
   let next = flatDirectories[currentIndex + 1]
 
   return (
-    <div className="pt-8 mt-16 mb-8 border-t dark:border-neutral-800 flex flex-row items-center justify-between">
+    <div className="pt-8 mb-8 border-t dark:border-neutral-800 flex flex-row items-center justify-between">
       <div className="flex-1 min-w-0">
         {prev && config.prevLinks ? (
           <PrevLink route={prev.route} title={prev.title} isRTL={isRTL} />
