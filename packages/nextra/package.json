@@ -29,7 +29,7 @@
     "gray-matter": "^4.0.3",
     "rehype-pretty-code": "^0.1.0",
     "remark-gfm": "^3.0.1",
-    "shiki": "0.10.0",
+    "shiki": "0.10.1",
     "slash": "^3.0.0"
   },
   "peerDependencies": {
