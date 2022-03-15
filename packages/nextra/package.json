@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@mdx-js/mdx": "^2.0.0",
-    "@napi-rs/simple-git": "^0.1.0",
+    "@napi-rs/simple-git": "^0.1.1",
     "github-slugger": "^1.4.0",
     "graceful-fs": "^4.2.6",
     "gray-matter": "^4.0.3",
