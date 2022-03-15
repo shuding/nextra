@@ -13,8 +13,8 @@ declare module 'github-slugger' {
 }
 
 declare module '@napi-rs/simple-git' {
-  export function getFileLatestModifiedDateByGitAsync(
-    gitDir: stirng,
-    filePath: string
-  ): number
+  export class Repository {
+    constructor(path: string) {}
+    getFileLatestModifiedDateAsync(path: string): Promise<number>
+  }
 }
