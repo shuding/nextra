@@ -5,7 +5,7 @@ import path from 'path'
 import grayMatter from 'gray-matter'
 import slash from 'slash'
 import { LoaderContext } from 'webpack'
-import { getFileLatestModifiedDateByGitAsync } from '@napi-rs/simple-git'
+import { Repository } from '@napi-rs/simple-git'
 
 import { addPage } from './content-dump'
 import { getLocaleFromFilename } from './utils'
@@ -32,6 +32,7 @@ const gitRoot = (() => {
     return null
   }
 })()
+const repository = gitRoot ? new Repository(gitRoot) : null
 
 export default async function (
   this: LoaderContext<LoaderOptions>,
@@ -141,10 +142,9 @@ export default async function (
   }
 
   let timestamp: number | undefined
-  if (gitRoot) {
+  if (gitRoot && repository) {
     try {
-      timestamp = await getFileLatestModifiedDateByGitAsync(
-        gitRoot,
+      timestamp = await repository.getFileLatestModifiedDateAsync(
         path.relative(gitRoot, resourcePath)
       )
     } catch (e) {
