@@ -101,7 +101,7 @@ export default async function (
     await compileMdx(content, mdxOptions, {
       unstable_staticImage,
       unstable_flexsearch
-    })
+    }, resourcePath)
   content = result
   content = content.replace('export default MDXContent;', '')
 

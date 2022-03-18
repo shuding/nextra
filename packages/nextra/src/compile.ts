@@ -55,7 +55,8 @@ export async function compileMdx(
   } = {
     unstable_staticImage: false,
     unstable_flexsearch: false
-  }
+  },
+  resourcePath: string
 ) {
   let structurizedData = {}
   const compiler = createCompiler({
@@ -78,10 +79,16 @@ export async function compileMdx(
       attachMeta
     ].filter(Boolean)
   })
-  const result = await compiler.process(source)
-  return {
-    result: String(result),
-    ...(compiler.data('headingMeta') as HeadingMeta),
-    structurizedData
+  try {
+    const result = await compiler.process(source)
+    return {
+      result: String(result),
+      ...(compiler.data('headingMeta') as HeadingMeta),
+      structurizedData
+    }
+  } catch (err) {
+    console.error(`\nError compiling ${resourcePath}`)
+    console.error(`${err}\n`)
+    throw err
   }
 }
