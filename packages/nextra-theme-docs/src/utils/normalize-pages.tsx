@@ -1,23 +1,17 @@
-import React from 'react'
 import { PageMapItem } from 'nextra'
 import getTitle from 'title'
 
 import defaultThemeContext from '../misc/theme-context'
 
-function getMetaTitle(meta: string | Record<string, any>) {
-  if (typeof meta === 'string') return meta
-  if (typeof meta === 'object') return meta.title
-  return ''
-}
-
-function getMetaItemType(meta: string | Record<string, any>) {
-  if (typeof meta === 'object') return meta.type
-  return 'doc'
-}
-
-function getMetaHidden(meta: string | Record<string, any>) {
-  if (typeof meta === 'object') return meta.hidden || false
-  return false
+function extendMeta(
+  meta: string | Record<string, any> = {},
+  fallback: Record<string, any>
+) {
+  if (typeof meta === 'string') {
+    meta = { title: meta }
+  }
+  const theme = Object.assign({}, fallback.theme, meta.theme)
+  return Object.assign({}, fallback, meta, { theme })
 }
 
 export interface Item extends Omit<PageMapItem, 'children'> {
@@ -60,7 +54,7 @@ export default function normalizePages({
   route: string
   docsRoot?: string
   underCurrentDocsRoot?: boolean
-  pageThemeContext?: Record<keyof typeof defaultThemeContext, boolean>
+  pageThemeContext?: typeof defaultThemeContext
 }) {
   let _meta: Record<string, any> | undefined
   for (let item of list) {
@@ -98,6 +92,10 @@ export default function normalizePages({
 
   let metaKeyIndex = 0
 
+  const fallbackMeta = meta['*'] || {}
+  delete fallbackMeta.title
+  delete fallbackMeta.href
+
   const items = list
     .filter(
       a =>
@@ -124,11 +122,13 @@ export default function normalizePages({
         // Fill all skipped items in meta.
         for (let i = metaKeyIndex + 1; i < index; i++) {
           const key = metaKeys[i]
-          items.push({
-            name: key,
-            route: '#',
-            ...meta[key]
-          })
+          if (key !== '*') {
+            items.push({
+              name: key,
+              route: '#',
+              ...meta[key]
+            })
+          }
         }
         metaKeyIndex = index
       }
@@ -140,11 +140,13 @@ export default function normalizePages({
   // Fill all skipped items in meta.
   for (let i = metaKeyIndex + 1; i < metaKeys.length; i++) {
     const key = metaKeys[i]
-    items.push({
-      name: key,
-      route: '#',
-      ...meta[key]
-    })
+    if (key !== '*') {
+      items.push({
+        name: key,
+        route: '#',
+        ...meta[key]
+      })
+    }
   }
 
   for (let i = 0; i < items.length; i++) {
@@ -160,13 +162,15 @@ export default function normalizePages({
       continue
     }
 
-    const title = getMetaTitle(meta[a.name]) || getTitle(a.name)
-    const type = getMetaItemType(meta[a.name]) || 'doc'
-    const hidden = getMetaHidden(meta[a.name])
+    const extendedMeta = extendMeta(meta[a.name], fallbackMeta)
+
+    const title = extendedMeta.title || getTitle(a.name)
+    const type = extendedMeta.type || 'doc'
+    const hidden = extendedMeta.hidden
 
     const extendedPageThemeContext = {
       ...pageThemeContext,
-      ...meta[a.name]?.theme
+      ...extendedMeta.theme
     }
 
     // If the doc is under the active page root.

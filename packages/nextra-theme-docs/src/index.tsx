@@ -52,7 +52,7 @@ const Body: React.FC<BodyProps> = ({
   return (
     <React.Fragment>
       <SkipNavContent />
-      {themeContext.full ? (
+      {themeContext.layout === 'full' ? (
         <article
           className={cn(
             'nextra-body full relative overflow-x-hidden',
@@ -61,6 +61,10 @@ const Body: React.FC<BodyProps> = ({
         >
           <MDXTheme>{children}</MDXTheme>
         </article>
+      ) : themeContext.layout === 'raw' ? (
+        <div className="nextra-body full relative overflow-x-hidden expand">
+          {children}
+        </div>
       ) : (
         <article className="nextra-body relative pb-8 w-full max-w-full flex min-w-0 pr-[calc(env(safe-area-inset-right)-1.5rem)]">
           <main className="mx-auto max-w-4xl px-6 md:px-8 pt-4 z-10 min-w-0 w-full">
@@ -119,6 +123,8 @@ const Content: React.FC<LayoutProps> = ({
   const [menu, setMenu] = useState(false)
   const themeContext = { ...activeThemeContext, ...meta }
 
+  const hideSidebar = !themeContext.sidebar || themeContext.layout === 'raw'
+
   return (
     <React.Fragment>
       <Head title={title} locale={locale} meta={meta} />
@@ -151,7 +157,7 @@ const Content: React.FC<LayoutProps> = ({
                   fullDirectories={directories}
                   headings={headings}
                   isRTL={isRTL}
-                  asPopover={activeType === 'page' || !themeContext.sidebar}
+                  asPopover={activeType === 'page' || hideSidebar}
                 />
                 <Body
                   themeContext={themeContext}
@@ -184,7 +190,7 @@ const Content: React.FC<LayoutProps> = ({
             </div>
           </ActiveAnchor>
           {themeContext.footer && config.footer ? (
-            <Footer menu={activeType === 'page' || !themeContext.sidebar} />
+            <Footer menu={activeType === 'page' || hideSidebar} />
           ) : null}
         </div>
       </MenuContext.Provider>

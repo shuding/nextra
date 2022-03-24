@@ -4,6 +4,14 @@ export default {
   toc: true,
   pagination: true,
   footer: true,
-  full: false,
+  layout: 'default',
   breadcrumb: true
+} as {
+  navbar: Boolean
+  sidebar: Boolean
+  toc: Boolean
+  pagination: Boolean
+  footer: Boolean
+  layout: 'default' | 'full' | 'raw'
+  breadcrumb: Boolean
 }

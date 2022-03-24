@@ -228,7 +228,7 @@ blockquote:not(:first-child),
 }
 
 /* Content Typography */
-article {
+article.nextra-body {
   min-height: calc(100vh - 64px);
   &.full {
     width: 100%;
@@ -583,13 +583,13 @@ table tr td {
   .nextra-sidebar a {
     @apply text-right;
   }
-  article blockquote {
+  article.nextra-body blockquote {
     @apply pr-6 border-r-2 pl-0 border-l-0;
   }
 }
 .nextra-container:not(.rtl):not(.page) article.nextra-body {
 }
-.nextra-container.rtl:not(.page) .nextra-body {
+.nextra-container.rtl:not(.page) article.nextra-body {
 }
 @screen md {
   .nextra-container:not(.page) article.nextra-body .bleed.full {
@@ -606,11 +606,11 @@ table tr td {
     margin-left: calc(50% - 50vw + 16rem);
     margin-right: calc(50% - 50vw);
   }
-  .nextra-container.rtl:not(.page) .nextra-body .bleed.full {
+  .nextra-container.rtl:not(.page) article.nextra-body .bleed.full {
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw + 16rem);
   }
-  .nextra-container.page .nextra-body .bleed.full {
+  .nextra-container.page article.nextra-body .bleed.full {
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
   }
@@ -622,8 +622,8 @@ table tr td {
   .anchor-icon {
     @apply ml-0 mr-2 inline-block;
   }
-  article ul,
-  article ol {
+  article.nextra-body ul,
+  article.nextra-body ol {
     @apply ml-0 mr-6;
   }
   .nextra-sidebar {

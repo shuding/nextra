@@ -17,7 +17,7 @@
     "title": "Examples",
     "type": "page",
     "theme": {
-      "full": true
+      "layout": "full"
     }
   },
   "blog": {
