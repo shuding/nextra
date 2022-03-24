@@ -1,6 +1,6 @@
 import type { LoaderOptions } from './types'
 
-import fs from 'fs'
+import { execSync } from 'child_process'
 import path from 'path'
 import grayMatter from 'gray-matter'
 import slash from 'slash'
@@ -21,18 +21,18 @@ const indexContentEmitted = new Set()
 const initialBuild = new Set()
 
 const pagesDir = path.resolve(findPagesDir())
-const gitRoot = (() => {
-  const dir = process.cwd().split(path.sep)
+
+let [repository, gitRoot] = (function () {
   try {
-    while (dir && !fs.existsSync(path.join(dir.join(path.sep), '.git'))) {
-      dir.pop()
-    }
-    return dir.join(path.sep)
+    const repo = Repository.discover(process.cwd())
+    // repository.path() returns the `/path/to/repo/.git`, we need the parent directory of it
+    const gitRoot = path.join(repo.path(), '..')
+    return [repo, gitRoot]
   } catch (e) {
-    return null
+    console.error('Init git repository failed', e)
+    return []
   }
 })()
-const repository = gitRoot ? new Repository(gitRoot) : null
 
 export default async function (
   this: LoaderContext<LoaderOptions>,
@@ -48,6 +48,7 @@ export default async function (
     defaultLocale,
     unstable_flexsearch,
     unstable_staticImage,
+    unstable_git_fetch_on_shallow,
     mdxOptions,
     pageMapCache
   } = options
@@ -119,10 +120,15 @@ export default async function (
   }
 
   const { result, titleText, headings, hasH1, structurizedData } =
-    await compileMdx(content, mdxOptions, {
-      unstable_staticImage,
-      unstable_flexsearch
-    }, resourcePath)
+    await compileMdx(
+      content,
+      mdxOptions,
+      {
+        unstable_staticImage,
+        unstable_flexsearch
+      },
+      resourcePath
+    )
   content = result
   content = content.replace('export default MDXContent;', '')
 
@@ -142,13 +148,56 @@ export default async function (
   }
 
   let timestamp: number | undefined
-  if (gitRoot && repository) {
+  if (repository && gitRoot) {
+    if (
+      repository.isShallow() &&
+      unstable_git_fetch_on_shallow &&
+      process.env.VERCEL &&
+      process.env.VERCEL_GIT_PROVIDER === 'github'
+    ) {
+      const {
+        VERCEL_GIT_REPO_OWNER,
+        VERCEL_GIT_REPO_SLUG,
+        VERCEL_GIT_COMMIT_REF,
+        VERCEL_GIT_COMMIT_SHA
+      } = process.env
+      function execInGitRoot(command: string) {
+        execSync(command, {
+          stdio: 'inherit',
+          cwd: gitRoot
+        })
+      }
+      try {
+        execInGitRoot(
+          `git remote add origin https://github.com/${VERCEL_GIT_REPO_OWNER}/${VERCEL_GIT_REPO_SLUG}.git`
+        )
+        execInGitRoot(
+          `git fetch origin ${
+            VERCEL_GIT_COMMIT_REF ?? repository.head().name()
+          } --unshallow`
+        )
+        execInGitRoot(`git checkout ${VERCEL_GIT_COMMIT_REF}`)
+        execInGitRoot(`git reset --hard ${VERCEL_GIT_COMMIT_SHA}`)
+        console.log(`Git head name ${repository.head().name()}`)
+        repository = Repository.discover(gitRoot)
+      } catch (e) {
+        // Failed to fetch unshallow git repository.
+      }
+    }
     try {
       timestamp = await repository.getFileLatestModifiedDateAsync(
         path.relative(gitRoot, resourcePath)
       )
+      console.log(new Date(timestamp))
     } catch (e) {
       // Failed to get timestamp for this file. Silently ignore it.
+      console.log(path.relative(gitRoot, resourcePath), gitRoot)
+      try {
+        execSync(`git log -1 ${path.relative(gitRoot, resourcePath)}`, {
+          stdio: 'inherit',
+          cwd: gitRoot
+        })
+      } catch (e) {}
     }
   }
 

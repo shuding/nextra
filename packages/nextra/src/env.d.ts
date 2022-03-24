@@ -11,10 +11,3 @@ declare module 'github-slugger' {
     slug(data: string): string
   }
 }
-
-declare module '@napi-rs/simple-git' {
-  export class Repository {
-    constructor(path: string) {}
-    getFileLatestModifiedDateAsync(path: string): Promise<number>
-  }
-}

@@ -23,7 +23,7 @@
     "concurrently": "^7.0.0",
     "cssnano": "^4.1.10",
     "esbuild": "^0.14.0",
-    "next": "^12.1.0",
+    "next": "^12.1.1",
     "postcss": "^8.4.5",
     "postcss-cli": "^8.3.1",
     "prettier": "^2.5.1",
