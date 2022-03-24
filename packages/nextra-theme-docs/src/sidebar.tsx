@@ -202,7 +202,7 @@ function Menu({ directories, anchors }: MenuProps) {
   return (
     <ul>
       {directories.map(item => {
-        if (item.children) {
+        if (item.children && (item.children.length || !item.withIndexPage)) {
           return <Folder key={item.name} item={item} anchors={anchors} />
         }
         return <File key={item.name} item={item} anchors={anchors} />

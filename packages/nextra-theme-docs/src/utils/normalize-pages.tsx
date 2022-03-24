@@ -269,6 +269,8 @@ export default function normalizePages({
             pageItem.firstChildRoute =
               normalizedChildren.flatDirectories[0].route
             topLevelPageItems.push(pageItem)
+          } else if (pageItem.withIndexPage) {
+            topLevelPageItems.push(pageItem)
           }
 
           break
