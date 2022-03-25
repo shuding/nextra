@@ -226,12 +226,13 @@ const findSummary = (children: React.ReactNode) => {
   let summary: React.ReactNode = null
   let restChildren: ReactNode[] = []
 
-  React.Children.forEach(children, child => {
+  React.Children.forEach(children, (child, index) => {
     if (child && (child as React.ReactElement).type === Summary) {
       summary = summary || child
     } else {
       let c = child
       if (
+        !summary &&
         typeof child === 'object' &&
         child &&
         (child as React.ReactElement).type !== Details &&
@@ -240,7 +241,11 @@ const findSummary = (children: React.ReactNode) => {
       ) {
         const result = findSummary(child.props.children)
         summary = summary || result[0]
-        c = React.cloneElement(child, { ...child.props, children: result[1] })
+        c = React.cloneElement(child, {
+          ...child.props,
+          children: result[1]?.length ? result[1] : undefined,
+          key: index
+        })
       }
       restChildren.push(c)
     }
