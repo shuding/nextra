@@ -167,12 +167,16 @@ const Content: React.FC<LayoutProps> = ({
                     ) : null
                   }
                   toc={
-                    activeType === 'page' ? null : themeContext.toc ? (
+                    activeType === 'page' || !themeContext.toc ? (
+                      hideSidebar ? null : (
+                        <div className="nextra-toc w-64 hidden xl:block text-sm px-4" />
+                      )
+                    ) : (
                       <ToC
                         headings={config.floatTOC ? headings : null}
                         filepathWithName={filepathWithName}
                       />
-                    ) : null
+                    )
                   }
                   navLinks={
                     activeType === 'page' ? null : themeContext.pagination ? (

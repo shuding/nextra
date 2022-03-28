@@ -47,6 +47,7 @@
     "match-sorter": "^4.2.0",
     "next-themes": "^0.2.0-beta.0",
     "parse-git-url": "^1.0.1",
+    "scroll-into-view-if-needed": "^2.2.29",
     "title": "^3.4.2"
   },
   "peerDependencies": {
