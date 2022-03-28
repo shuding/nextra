@@ -12,63 +12,47 @@ import { ActiveAnchor, useActiveAnchorSet } from './active-anchor'
 import { MDXProvider } from '@mdx-js/react'
 import Collapse from '../collapse'
 
-// Anchor links
-const HeaderLink = ({
-  tag: Tag,
-  children,
-  context,
-  id,
-  withObserver = true,
-  ...props
-}: {
-  tag: any
-  children: any
-  context: { index: number }
-  id: string
-  withObserver?: boolean
-}) => {
-  const setActiveAnchor = useActiveAnchorSet()
-  const obRef = useRef<HTMLSpanElement>(null)
+let observer: IntersectionObserver
+let setActiveAnchor: (
+  value: ActiveAnchor | ((prevState: ActiveAnchor) => ActiveAnchor)
+) => void
+const slugs = new WeakMap()
 
-  const slug = id
-  const anchor = <span className="subheading-anchor" id={slug} ref={obRef} />
+if (typeof window !== 'undefined') {
+  observer =
+    observer! ||
+    new IntersectionObserver(
+      entries => {
+        const headers: [string, number, boolean, boolean][] = []
 
-  // We are pretty sure that this header link component will not be rerendered
-  // separately, so we mutable this index property.
-  const index = context.index++
+        for (let i = 0; i < entries.length; i++) {
+          const entry = entries[i]
+          if (entry && entry.rootBounds && slugs.has(entry.target)) {
+            const [slug, index] = slugs.get(entry.target)
+            const aboveHalfViewport =
+              entry.boundingClientRect.y + entry.boundingClientRect.height <=
+              entry.rootBounds.y + entry.rootBounds.height
+            const insideHalfViewport = entry.intersectionRatio > 0
 
-  useEffect(() => {
-    const ref = obRef
-    const callback = (entries: IntersectionObserverEntry[]) => {
-      let e
-      for (let i = 0; i < entries.length; i++) {
-        if (entries[i].target === ref.current) {
-          e = entries[i]
-          break
+            headers.push([slug, index, aboveHalfViewport, insideHalfViewport])
+          }
         }
-      }
-      if (e) {
-        const aboveHalfViewport =
-          e.boundingClientRect.y + e.boundingClientRect.height <=
-          // FIXME:
-          // @ts-expect-error
-          e.rootBounds.y + e.rootBounds.height
-        const insideHalfViewport = e.intersectionRatio > 0
 
         setActiveAnchor(f => {
-          const ret: ActiveAnchor = {
-            ...f,
-            [slug]: {
-              index,
-              aboveHalfViewport,
-              insideHalfViewport
+          const ret: ActiveAnchor = { ...f }
+
+          for (const header of headers) {
+            ret[header[0]] = {
+              index: header[1],
+              aboveHalfViewport: header[2],
+              insideHalfViewport: header[3]
             }
           }
 
           let activeSlug = ''
           let smallestIndexInViewport = Infinity
           let largestIndexAboveViewport = -1
-          for (let s in f) {
+          for (let s in ret) {
             ret[s].isActive = false
             if (
               ret[s].insideHalfViewport &&
@@ -90,17 +74,47 @@ const HeaderLink = ({
           if (ret[activeSlug]) ret[activeSlug].isActive = true
           return ret
         })
+      },
+      {
+        rootMargin: '0px 0px -50%',
+        threshold: [0, 1]
       }
-    }
+    )
+}
 
-    const observer = new IntersectionObserver(callback, {
-      rootMargin: '0px 0px -50%',
-      threshold: [0, 1]
-    })
+// Anchor links
+const HeaderLink = ({
+  tag: Tag,
+  children,
+  id,
+  context,
+  withObserver = true,
+  ...props
+}: {
+  tag: any
+  children: any
+  id: string
+  context: { index: number }
+  withObserver?: boolean
+}) => {
+  setActiveAnchor = useActiveAnchorSet()
+  const obRef = useRef<HTMLSpanElement>(null)
+
+  const slug = id
+  const anchor = <span className="subheading-anchor" id={slug} ref={obRef} />
+
+  const index = context.index++
+
+  useEffect(() => {
+    const ref = obRef
+    if (!ref.current) return
+
+    slugs.set(ref.current, [slug, index])
     if (ref.current) observer.observe(ref.current)
 
     return () => {
       observer.disconnect()
+      slugs.delete(ref.current!)
       setActiveAnchor(f => {
         const ret: ActiveAnchor = { ...f }
         delete ret[slug]
@@ -108,16 +122,6 @@ const HeaderLink = ({
       })
     }
   }, [])
-
-  // useEffect(() => {
-  //   ;() => {
-  //     setActiveAnchor(f => {
-  //       const ret: ActiveAnchor = { ...f }
-  //       delete ret[slug]
-  //       return ret
-  //     })
-  //   }
-  // }, [])
 
   return (
     <Tag {...props}>

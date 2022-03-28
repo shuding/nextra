@@ -1,6 +1,6 @@
 {
   "name": "nextra-theme-docs",
-  "version": "2.0.0-alpha.47",
+  "version": "2.0.0-alpha.48",
   "description": "A Nextra theme for documentation sites.",
   "main": "index.js",
   "module": "index.js",
@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.5.0",
-    "@mdx-js/react": "^2.0.0",
+    "@mdx-js/react": "^2.1.0",
     "@reach/skip-nav": "^0.16.0",
     "classnames": "^2.2.6",
     "flexsearch": "^0.7.21",
@@ -47,6 +47,7 @@
     "match-sorter": "^4.2.0",
     "next-themes": "^0.2.0-beta.0",
     "parse-git-url": "^1.0.1",
+    "scroll-into-view-if-needed": "^2.2.29",
     "title": "^3.4.2"
   },
   "peerDependencies": {

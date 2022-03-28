@@ -4,10 +4,11 @@ import Slugger from 'github-slugger'
 import { Heading } from 'nextra'
 import parseGitUrl from 'parse-git-url'
 import { useRouter } from 'next/router'
+import scrollIntoView from 'scroll-into-view-if-needed'
 
 import renderComponent from './utils/render-component'
 import getHeadingText from './utils/get-heading-text'
-import { useActiveAnchor } from './misc/active-anchor'
+import { ActiveAnchor, useActiveAnchor } from './misc/active-anchor'
 import { useConfig } from './config'
 import useMounted from './utils/use-mounted'
 
@@ -130,6 +131,56 @@ const indent = (level: number) => {
 
 const emptyHeader: any[] = []
 
+function Item({
+  heading,
+  slug,
+  activeAnchor
+}: {
+  heading: Heading
+  slug: string
+  activeAnchor: ActiveAnchor
+}) {
+  const text = getHeadingText(heading)
+  const state = activeAnchor[slug]
+  const ref = React.useRef<HTMLLIElement>(null)
+
+  React.useEffect(() => {
+    const el = ref.current
+    const toc = document.getElementsByClassName('nextra-toc')[0]
+    if (state?.isActive && el && toc) {
+      scrollIntoView(el, {
+        behavior: 'smooth',
+        block: 'center',
+        inline: 'center',
+        scrollMode: 'always',
+        boundary: toc
+      })
+    }
+  }, [state?.isActive])
+
+  return (
+    <li
+      className="scroll-py-6 scroll-my-6"
+      style={indent(heading.depth)}
+      ref={ref}
+    >
+      <a
+        href={`#${slug}`}
+        className={cn(
+          'no-underline inline-block',
+          heading.depth === 2 ? 'font-semibold' : '',
+          state?.isActive
+            ? 'text-prime-500 subpixel-antialiased'
+            : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-300'
+        )}
+        aria-selected={state?.isActive}
+      >
+        {text}
+      </a>
+    </li>
+  )
+}
+
 export default function ToC({
   headings = emptyHeader,
   filepathWithName
@@ -152,30 +203,21 @@ export default function ToC({
 
   return (
     <div className="nextra-toc w-64 hidden xl:block text-sm px-4">
-      <div className="overflow-y-auto sticky max-h-[calc(100vh-4rem-env(safe-area-inset-bottom))] top-16 pt-8">
+      <div className="overflow-y-auto pr-4 -mr-4 sticky max-h-[calc(100vh-4rem-env(safe-area-inset-bottom))] top-16 pt-8">
         {hasHeadings && headings ? (
           <ul>
             <p className="font-semibold tracking-tight mb-4">On This Page</p>
             {headings.map(heading => {
               const text = getHeadingText(heading)
               const slug = slugger.slug(text)
-              const state = activeAnchor[slug]
+
               return (
-                <li key={slug} style={indent(heading.depth)}>
-                  <a
-                    href={`#${slug}`}
-                    className={cn(
-                      'no-underline inline-block',
-                      heading.depth === 2 ? 'font-semibold' : '',
-                      state?.isActive
-                        ? 'text-prime-500 subpixel-antialiased'
-                        : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-300'
-                    )}
-                    aria-selected={state?.isActive}
-                  >
-                    {text}
-                  </a>
-                </li>
+                <Item
+                  heading={heading}
+                  activeAnchor={activeAnchor}
+                  slug={slug}
+                  key={slug}
+                />
               )
             })}
           </ul>
