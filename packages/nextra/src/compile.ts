@@ -5,7 +5,7 @@ import { remarkStaticImage } from './mdx-plugins/static-image'
 import remarkHandler, { HeadingMeta } from './mdx-plugins/remark'
 import { LoaderOptions } from './types'
 import structurize from './mdx-plugins/structurize'
-import { parseMeta, attachMeta } from './mdx-plugins/rehype-handler'
+import { attachMeta } from './mdx-plugins/rehype-handler'
 
 // @ts-ignore
 import theme from './theme.json'
@@ -74,7 +74,6 @@ export async function compileMdx(
     // @ts-ignore
     rehypePlugins: [
       ...(mdxOptions.rehypePlugins || []),
-      parseMeta,
       [rehypePrettyCode, rehypePrettyCodeOptions],
       attachMeta
     ].filter(Boolean)

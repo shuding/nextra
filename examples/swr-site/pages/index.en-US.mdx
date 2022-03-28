@@ -27,7 +27,9 @@ SWR is a strategy to first return the data from cache (stale), then send the fet
 
 ## Overview
 
-```jsx
+Just 1 line of code `{ data, error } = useSWR('/api/user', fetcher){:js}` for data fetching!
+
+```jsx title="app.js"
 import useSWR from 'swr'
 
 function Profile() {

@@ -308,15 +308,13 @@ article.nextra-body {
   a code {
     @apply text-current no-underline;
   }
-  [data-nextra-code][data-filename] {
-    @apply block relative;
+  div[data-rehype-pretty-code-fragment] {
+    @apply relative block;
+  }
+  [data-rehype-pretty-code-title] {
+    @apply absolute truncate top-0 z-[1] text-xs py-2 px-4 w-full text-gray-700 bg-slate-200 dark:bg-gray-700 dark:text-gray-200 rounded-t-xl;
 
-    &:before {
-      content: attr(data-filename);
-      position: absolute;
-      @apply absolute truncate top-0 z-[1] text-xs py-2 px-4 w-full text-gray-700 bg-slate-200 dark:bg-gray-700 dark:text-gray-200 rounded-t-xl;
-    }
-    pre {
+    & + pre {
       @apply pt-12;
     }
   }

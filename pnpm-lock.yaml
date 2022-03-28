@@ -100,7 +100,7 @@ importers:
       github-slugger: ^1.4.0
       graceful-fs: ^4.2.6
       gray-matter: ^4.0.3
-      rehype-pretty-code: ^0.1.0
+      rehype-pretty-code: ^0.2.5
       remark-gfm: ^3.0.1
       shiki: 0.10.1
       slash: ^3.0.0
@@ -109,7 +109,7 @@ importers:
       github-slugger: 1.4.0
       graceful-fs: 4.2.9
       gray-matter: 4.0.3
-      rehype-pretty-code: 0.1.0_shiki@0.10.1
+      rehype-pretty-code: 0.2.5_shiki@0.10.1
       remark-gfm: 3.0.1
       shiki: 0.10.1
       slash: 3.0.0
@@ -3854,8 +3854,8 @@ packages:
     resolution: {integrity: sha512-p3VT+cOEgxFsRRA9X4lkI1E+k2/CtnKtU4gcxyaCUreilL/vqI6CdZ3wxVUx3UOUg+gnUOQQcRI7BmSI656MYA==}
     dev: false
 
-  /rehype-pretty-code/0.1.0_shiki@0.10.1:
-    resolution: {integrity: sha512-7SaedCOn5VcDGdllQeu3kBWC+/zbkD6ZE7iOALJzK79+v0K0qQpa1WqBwoxetTbCLwBTY9wC4CabEsDS3qj55g==}
+  /rehype-pretty-code/0.2.5_shiki@0.10.1:
+    resolution: {integrity: sha512-Gm7EquFGiM8ucJ2neHKzSmV5Nb1b6dBQlTEXyWbGUZZQF5sJc5RI8yw2v9C1swomqyINil4vk5T6jNOkbHtEDA==}
     engines: {node: ^12.16.0 || >=13.2.0}
     peerDependencies:
       shiki: '*'
