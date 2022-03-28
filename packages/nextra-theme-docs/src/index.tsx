@@ -168,7 +168,7 @@ const Content: React.FC<LayoutProps> = ({
                   }
                   toc={
                     activeType === 'page' || !themeContext.toc ? (
-                      hideSidebar ? null : (
+                      activeType === 'page' || hideSidebar ? null : (
                         <div className="nextra-toc w-64 hidden xl:block text-sm px-4" />
                       )
                     ) : (
