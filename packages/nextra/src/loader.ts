@@ -17,14 +17,13 @@ const indexContentEmitted = new Set()
 
 const pagesDir = path.resolve(findPagesDir())
 
-export default async function (
-  this: LoaderContext<LoaderOptions>,
-  source: string,
-  callback: (err?: null | Error, content?: string | Buffer) => void
-) {
-  this.cacheable(true)
+async function loader(
+  context: LoaderContext<LoaderOptions>,
+  source: string
+): Promise<string | Buffer> {
+  context.cacheable(true)
 
-  const options = this.getOptions()
+  const options = context.getOptions()
   let {
     theme,
     themeConfig,
@@ -35,7 +34,7 @@ export default async function (
     pageMapCache
   } = options
 
-  const { resourcePath } = this
+  const { resourcePath } = context
   const filename = resourcePath.slice(resourcePath.lastIndexOf('/') + 1)
   const fileLocale = getLocaleFromFilename(filename)
 
@@ -64,7 +63,7 @@ export default async function (
   if (!isProductionBuild) {
     // Add the entire directory `pages` as the dependency
     // so we can generate the correct page map.
-    this.addContextDependency(pagesDir)
+    context.addContextDependency(pagesDir)
   } else {
     // We only add meta files as dependencies for prodution build,
     // so we can do incremental builds.
@@ -74,7 +73,7 @@ export default async function (
         meta &&
         (!fileLocale || locale === fileLocale)
       ) {
-        this.addDependency(filePath)
+        context.addDependency(filePath)
       }
     })
   }
@@ -98,10 +97,15 @@ export default async function (
   }
 
   const { result, titleText, headings, hasH1, structurizedData } =
-    await compileMdx(content, mdxOptions, {
-      unstable_staticImage,
-      unstable_flexsearch
-    }, resourcePath)
+    await compileMdx(
+      content,
+      mdxOptions,
+      {
+        unstable_staticImage,
+        unstable_flexsearch
+      },
+      resourcePath
+    )
   content = result
   content = content.replace('export default MDXContent;', '')
 
@@ -154,5 +158,15 @@ NextraPage.getLayout = NextraLayout.withLayout`
   // console.log(content)
 
   // Add imports and exports to the source
-  return callback(null, prefix + '\n\n' + content + '\n\n' + suffix)
+  return prefix + '\n\n' + content + '\n\n' + suffix
+}
+
+export default function syncLoader(
+  this: LoaderContext<LoaderOptions>,
+  source: string,
+  callback: (err?: null | Error, content?: string | Buffer) => void
+) {
+  loader(this, source)
+    .then(result => callback(null, result))
+    .catch(err => callback(err))
 }
