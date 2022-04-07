@@ -20,6 +20,7 @@ import normalizePages from './utils/normalize-pages'
 import { DocsThemeConfig } from './types'
 import './polyfill'
 import Breadcrumb from './breadcrumb'
+import renderComponent from './utils/render-component'
 
 function useDirectoryInfo(pageMap: PageMapItem[]) {
   const { locale, defaultLocale, asPath } = useRouter()
@@ -39,6 +40,7 @@ interface BodyProps {
   themeContext: Record<string, any>
   breadcrumb?: React.ReactNode
   toc?: React.ReactNode
+  timestamp?: number
   navLinks: React.ReactNode
 }
 
@@ -47,8 +49,13 @@ const Body: React.FC<BodyProps> = ({
   breadcrumb,
   toc,
   navLinks,
+  timestamp,
   children
 }) => {
+  const config = useConfig()
+  const { locale } = useRouter()
+  const date = timestamp ? new Date(timestamp) : null
+
   return (
     <React.Fragment>
       <SkipNavContent />
@@ -70,6 +77,18 @@ const Body: React.FC<BodyProps> = ({
           <main className="mx-auto max-w-4xl px-6 md:px-8 pt-4 z-10 min-w-0 w-full">
             {breadcrumb}
             <MDXTheme>{children}</MDXTheme>
+            {date && config.gitTimestamp ? (
+              <div className="text-xs text-right block text-gray-500 mt-12 mb-8 dark:text-gray-400 pointer-default">
+                {typeof config.gitTimestamp === 'string'
+                  ? config.gitTimestamp + ' ' + date.toLocaleDateString()
+                  : renderComponent(config.gitTimestamp, {
+                      timestamp: date,
+                      locale
+                    })}
+              </div>
+            ) : (
+              <div className="mt-16" />
+            )}
             {navLinks}
           </main>
           {toc}
@@ -85,6 +104,7 @@ interface LayoutProps {
   meta: Record<string, any>
   titleText: string
   headings: Heading[]
+  timestamp?: number
 }
 
 const Content: React.FC<LayoutProps> = ({
@@ -93,6 +113,7 @@ const Content: React.FC<LayoutProps> = ({
   meta,
   titleText,
   headings,
+  timestamp,
   children
 }) => {
   const { route, locale } = useRouter()
@@ -187,6 +208,7 @@ const Content: React.FC<LayoutProps> = ({
                       />
                     ) : null
                   }
+                  timestamp={timestamp}
                 >
                   {children}
                 </Body>
@@ -207,7 +229,6 @@ let GlobalLayout: any
 
 export default (opts: PageOpt, _config: DocsThemeConfig) => {
   const extendedConfig = Object.assign({}, defaultConfig, _config)
-
   if (!GlobalLayout) {
     GlobalLayout = function ({
       children,
@@ -219,6 +240,7 @@ export default (opts: PageOpt, _config: DocsThemeConfig) => {
       config: DocsThemeConfig & typeof defaultConfig
     }) {
       // ;(globalThis as any).__nextra_layout__ = true
+
       return (
         <ThemeConfigContext.Provider value={config}>
           <ThemeProvider

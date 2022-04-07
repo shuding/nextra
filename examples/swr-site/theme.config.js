@@ -237,4 +237,5 @@ export default {
     { locale: "ko", text: "한국어" },
     { locale: "ru", text: "Русский" },
   ],
+  gitTimestamp: "Last updated on",
 };
