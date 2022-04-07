@@ -24,9 +24,11 @@
   },
   "dependencies": {
     "@mdx-js/mdx": "^2.1.0",
+    "@napi-rs/simple-git": "^0.1.7",
     "github-slugger": "^1.4.0",
     "graceful-fs": "^4.2.6",
     "gray-matter": "^4.0.3",
+    "p-limit": "^4.0.0",
     "rehype-pretty-code": "^0.1.0",
     "remark-gfm": "^3.0.1",
     "shiki": "0.10.1",

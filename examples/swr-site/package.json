@@ -16,6 +16,7 @@
     "focus-visible": "^5.1.0",
     "intersection-observer": "^0.10.0",
     "markdown-to-jsx": "^6.11.4",
+    "next": "^12.1.1",
     "nextra": "workspace:*",
     "nextra-theme-docs": "workspace:*",
     "react-intersection-observer": "^8.26.2"
