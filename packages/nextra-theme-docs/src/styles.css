@@ -16,6 +16,7 @@ body {
 a {
   @apply text-prime-500 underline;
   text-underline-position: under;
+  text-decoration-thickness: from-font;
 }
 p {
   @apply leading-7;
@@ -304,6 +305,9 @@ article.nextra-body {
         }
       }
     }
+  }
+  a {
+    @apply focus:outline-none focus-visible:ring-2;
   }
   a code {
     @apply text-current no-underline;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import cn from 'classnames'
 import Slugger from 'github-slugger'
 import { useRouter } from 'next/router'
@@ -16,7 +16,7 @@ import { Item, PageItem } from './utils/normalize-pages'
 import LocaleSwitch from './locale-switch'
 import ThemeSwitch from './theme-switch'
 import ArrowRight from './icons/arrow-right'
-import Collapse from './collapse'
+import Collapse from './components/collapse'
 
 const TreeState: Record<string, boolean> = {}
 

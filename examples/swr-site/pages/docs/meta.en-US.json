@@ -7,12 +7,6 @@
     "title": "Error Handling",
     "hidden": true
   },
-  "github_link": {
-    "title": "GitHub 🐙 →",
-    "href": "https://github.com/shuding/nextra",
-    "type": "page",
-    "newWindow": true
-  },
   "revalidation": "Auto Revalidation",
   "conditional-fetching": "Conditional Data Fetching",
   "arguments": "Arguments",
@@ -26,5 +20,11 @@
   "advanced": {
     "title": "Advanced"
   },
-  "change-log": "Change Log"
+  "change-log": "Change Log",
+  "github_link": {
+    "title": "GitHub 🐙 →",
+    "href": "https://github.com/shuding/nextra",
+    "type": "page",
+    "newWindow": true
+  }
 }

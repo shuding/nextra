@@ -10,7 +10,12 @@ import 'intersection-observer'
 
 import { ActiveAnchor, useActiveAnchorSet } from './active-anchor'
 import { MDXProvider } from '@mdx-js/react'
-import Collapse from '../collapse'
+
+import Collapse from '../components/collapse'
+
+import { Tabs, Tab } from '../components/tabs'
+import Bleed from '../bleed'
+import Callout from '../callout'
 
 let observer: IntersectionObserver
 let setActiveAnchor: (
@@ -309,7 +314,13 @@ const getComponents = (context: { index: number }) => ({
   a: A,
   table: Table,
   details: Details,
-  summary: Summary
+  summary: Summary,
+  Nextra: {
+    Bleed,
+    Callout,
+    Tabs,
+    Tab
+  }
 })
 
 export const MDXTheme: React.FC<{}> = ({ children }) => {

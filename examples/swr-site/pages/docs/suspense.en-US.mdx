@@ -1,15 +1,13 @@
-import Callout from 'nextra-theme-docs/callout'
-
 # Suspense
 
-<Callout emoji="🚨" type="error">
+<Nextra.Callout emoji="🚨" type="error">
   Suspense is currently an <strong>experimental</strong> feature of React. These APIs may change significantly and without a warning before they become a part of React.<br/>
   <a href="https://reactjs.org/docs/concurrent-mode-suspense.html" target="_blank" rel="noopener">More information</a>
-</Callout>
+</Nextra.Callout>
 
-<Callout>
+<Nextra.Callout>
   Note that React Suspense is not yet supported in SSR mode.
-</Callout>
+</Nextra.Callout>
 
 You can enable the `suspense` option to use SWR with React Suspense:
 
@@ -31,9 +29,9 @@ function App () {
 }
 ```
 
-<Callout>
+<Nextra.Callout>
   Note that the `suspense` option is not allowed to change in the lifecycle.
-</Callout>
+</Nextra.Callout>
 
 In Suspense mode, `data` is always the fetch response (so you don't need to check if it's `undefined`).
 But if an error occurred, you need to use an [error boundary](https://reactjs.org/docs/concurrent-mode-suspense.html#handling-errors) to catch it:
