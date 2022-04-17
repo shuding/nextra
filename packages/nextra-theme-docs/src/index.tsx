@@ -80,7 +80,13 @@ const Body: React.FC<BodyProps> = ({
             {date && config.gitTimestamp ? (
               <div className="text-xs text-right block text-gray-500 mt-12 mb-8 dark:text-gray-400 pointer-default">
                 {typeof config.gitTimestamp === 'string'
-                  ? config.gitTimestamp + ' ' + date.toLocaleDateString()
+                  ? config.gitTimestamp +
+                    ' ' +
+                    date.toLocaleDateString(locale, {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })
                   : renderComponent(config.gitTimestamp, {
                       timestamp: date,
                       locale
