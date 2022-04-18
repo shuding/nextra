@@ -22,6 +22,9 @@
     },
     "./bleed": {
       "import": "./dist/bleed.js"
+    },
+    "./tabs": {
+      "import": "./dist/components/tabs.js"
     }
   },
   "scripts": {
