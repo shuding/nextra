@@ -9,17 +9,23 @@ type TabItem = {
 
 export function Tabs({
   items,
+  selectedIndex,
   defaultIndex,
   onChange,
   children
 }: {
   items: React.ReactNode[] | TabItem[]
+  selectedIndex?: number
   defaultIndex?: number
   onChange?: (index: number) => void
   children: React.ReactNode
 }) {
   return (
-    <HeadlessTab.Group defaultIndex={defaultIndex} onChange={onChange}>
+    <HeadlessTab.Group
+      selectedIndex={selectedIndex}
+      defaultIndex={defaultIndex}
+      onChange={onChange}
+    >
       <div className="p-2 -m-2 overscroll-x-contain overflow-x-auto overflow-y-hidden no-scrollbar">
         <HeadlessTab.List className="flex mt-4 pb-[1px] border-b border-gray-200 dark:border-neutral-800 w-max min-w-full">
           {items.map((item, index) => {
