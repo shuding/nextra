@@ -131,7 +131,10 @@ const HeaderLink = ({
   return (
     <Tag {...props}>
       {anchor}
-      <a href={'#' + slug} className="text-current no-underline no-outline">
+      <a
+        href={'#' + slug}
+        className="anchor text-current no-underline no-outline"
+      >
         {children}
         <span className="anchor-icon" aria-hidden>
           #

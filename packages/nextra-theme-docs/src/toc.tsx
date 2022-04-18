@@ -170,7 +170,7 @@ function Item({
           'no-underline inline-block',
           heading.depth === 2 ? 'font-semibold' : '',
           state?.isActive
-            ? 'text-prime-500 subpixel-antialiased'
+            ? 'text-primary-500 subpixel-antialiased'
             : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-300'
         )}
         aria-selected={state?.isActive}
@@ -191,6 +191,7 @@ export default function ToC({
   const slugger = new Slugger()
   const activeAnchor = useActiveAnchor()
   const config = useConfig()
+  const { locale } = useRouter()
 
   headings = headings
     ? headings.filter(
@@ -199,7 +200,8 @@ export default function ToC({
     : headings
 
   const hasHeadings = headings && headings.length > 0
-  const hasMetaInfo = config.feedbackLink || config.footerEditLink
+  const hasMetaInfo =
+    config.feedbackLink || config.footerEditLink || config.tocExtraContent
 
   return (
     <div className="nextra-toc w-64 hidden xl:block text-sm px-4">
@@ -226,6 +228,7 @@ export default function ToC({
         {hasMetaInfo ? (
           <div
             className={cn(
+              'nextra-toc-meta',
               hasHeadings
                 ? 'border-t mt-8 pt-8 shadow-[0_-12px_16px_white] dark:shadow-[0_-12px_16px_#111] bg-white dark:bg-dark'
                 : '',
@@ -247,6 +250,12 @@ export default function ToC({
                 repository={config.docsRepositoryBase}
                 text={config.footerEditLink}
               />
+            ) : null}
+
+            {config.tocExtraContent ? (
+              <div className="pt-4 leading-4">
+                {renderComponent(config.tocExtraContent, { locale })}
+              </div>
             ) : null}
           </div>
         ) : null}

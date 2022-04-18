@@ -4,6 +4,7 @@ import Slugger from 'github-slugger'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { Heading } from 'nextra'
+import scrollIntoView from 'scroll-into-view-if-needed'
 
 import { useActiveAnchor } from './misc/active-anchor'
 import { getFSRoute } from './utils/get-fs-route'
@@ -247,11 +248,27 @@ export default function Sidebar({
     }
   }, [menu])
 
+  useEffect(() => {
+    const activeElement = document.querySelector('.nextra-sidebar li.active')
+
+    if (activeElement) {
+      scrollIntoView(activeElement, {
+        block: 'center',
+        inline: 'center',
+        scrollMode: 'always',
+        boundary: document.querySelector('.nextra-sidebar-container')
+      })
+    }
+  }, [])
+
+  const hasMenu = !!(config.i18n || config.darkMode)
+
   return (
     <aside
       className={cn(
-        'nextra-sidebar-container fixed flex-shrink-0 w-full md:w-64 md:sticky z-[15] top-16 self-start overflow-y-auto transform-none h-[calc(100vh-4rem)]',
+        'nextra-sidebar-container nextra-scrollbar fixed flex-shrink-0 w-full md:w-64 md:sticky z-[15] top-16 self-start overflow-y-auto transform-none h-[calc(100vh-4rem)]',
         asPopover ? 'md:hidden' : 'md:block',
+        hasMenu ? 'with-menu' : '',
         { open: menu }
       )}
     >
@@ -288,38 +305,40 @@ export default function Sidebar({
           </div>
         </div>
 
-        <div className="nextra-sidebar-menu mx-4 border-t dark:border-neutral-800 shadow-[0_-12px_16px_white] dark:shadow-[0_-12px_16px_#111]">
-          <div className="bg-white dark:bg-dark py-4 flex gap-1 pb-4">
-            {config.i18n ? (
-              <div className="flex-1 relative">
-                <LocaleSwitch options={config.i18n} />
-              </div>
-            ) : null}
-            {config.darkMode ? (
-              <>
-                <div
-                  className={cn('relative md:hidden', {
-                    locale: config.i18n,
-                    'flex-1': !config.i18n
-                  })}
-                >
-                  <ThemeSwitch lite={false} />
+        {!hasMenu ? null : (
+          <div className="nextra-sidebar-menu mx-4 border-t dark:border-neutral-800 shadow-[0_-12px_16px_white] dark:shadow-[0_-12px_16px_#111]">
+            <div className="bg-white dark:bg-dark py-4 flex gap-1 pb-4">
+              {config.i18n ? (
+                <div className="flex-1 relative">
+                  <LocaleSwitch options={config.i18n} />
                 </div>
-                <div
-                  className={cn(
-                    'relative hidden md:block',
-                    {
-                      locale: config.i18n
-                    },
-                    config.i18n ? 'grow-0' : 'flex-1'
-                  )}
-                >
-                  <ThemeSwitch lite={!!config.i18n} />
-                </div>
-              </>
-            ) : null}
+              ) : null}
+              {config.darkMode ? (
+                <>
+                  <div
+                    className={cn('relative md:hidden', {
+                      locale: config.i18n,
+                      'flex-1': !config.i18n
+                    })}
+                  >
+                    <ThemeSwitch lite={false} />
+                  </div>
+                  <div
+                    className={cn(
+                      'relative hidden md:block',
+                      {
+                        locale: config.i18n
+                      },
+                      config.i18n ? 'grow-0' : 'flex-1'
+                    )}
+                  >
+                    <ThemeSwitch lite={!!config.i18n} />
+                  </div>
+                </>
+              ) : null}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </aside>
   )

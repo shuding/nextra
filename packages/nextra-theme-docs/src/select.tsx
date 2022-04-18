@@ -23,8 +23,8 @@ export default function Menu({ options, selected, onChange }: MenuProps) {
             className={cn(
               'rounded-md px-2 w-full text-left font-medium cursor-default text-xs h-7 transition-colors text-gray-600 dark:text-gray-400 focus:outline-none',
               open
-                ? 'bg-gray-200 dark:bg-prime-100 dark:bg-opacity-10 text-gray-900 dark:text-gray-50'
-                : 'hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-prime-100 dark:hover:bg-opacity-5 dark:hover:text-gray-50'
+                ? 'bg-gray-200 dark:bg-primary-100 dark:bg-opacity-10 text-gray-900 dark:text-gray-50'
+                : 'hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-primary-100 dark:hover:bg-opacity-5 dark:hover:text-gray-50'
             )}
           >
             {selected.name}
@@ -49,7 +49,7 @@ export default function Menu({ options, selected, onChange }: MenuProps) {
                     cn(
                       option.key === selected.key ? '' : '',
                       active
-                        ? 'text-prime-500 bg-prime-50 dark:bg-prime-500 dark:bg-opacity-10'
+                        ? 'text-primary-500 bg-primary-50 dark:bg-primary-500 dark:bg-opacity-10'
                         : 'text-gray-800 dark:text-gray-100',
                       'cursor-default select-none relative py-1.5 pl-3 pr-9 whitespace-nowrap'
                     )

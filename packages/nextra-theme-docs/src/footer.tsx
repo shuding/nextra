@@ -21,7 +21,7 @@ const NextLink = ({ route, title, isRTL }: LinkProps) => {
     <Link href={route}>
       <a
         className={cn(
-          'w-full text-lg font-medium p-4 -m-4 no-underline transition-colors text-gray-600 dark:text-gray-300 dark:hover:text-prime-500 hover:text-prime-500 inline-flex items-center justify-end rounded',
+          'w-full text-lg font-medium p-4 -m-4 no-underline transition-colors text-gray-600 dark:text-gray-300 dark:hover:text-primary-500 hover:text-primary-500 inline-flex items-center justify-end rounded',
           { 'ml-2': !isRTL, 'mr-2': isRTL }
         )}
         title={title}
@@ -44,7 +44,7 @@ const PrevLink = ({ route, title, isRTL }: LinkProps) => {
     <Link href={route}>
       <a
         className={cn(
-          'text-lg font-medium p-4 -m-4 no-underline transition-colors text-gray-600 dark:text-gray-300 dark:hover:text-prime-500 hover:text-prime-500 flex items-center rounded',
+          'text-lg font-medium p-4 -m-4 no-underline transition-colors text-gray-600 dark:text-gray-300 dark:hover:text-primary-500 hover:text-primary-500 flex items-center rounded',
           { 'mr-2': !isRTL, 'ml-2': isRTL }
         )}
         title={title}
@@ -73,18 +73,20 @@ export const NavLinks = ({
   isRTL
 }: NavLinkProps) => {
   const config = useConfig()
-  let prev = flatDirectories[currentIndex - 1]
-  let next = flatDirectories[currentIndex + 1]
+  const prev = config.prevLinks ? flatDirectories[currentIndex - 1] : null
+  const next = config.nextLinks ? flatDirectories[currentIndex + 1] : null
+
+  if (!prev && !next) return null
 
   return (
-    <div className="pt-8 mb-8 border-t dark:border-neutral-800 flex flex-row items-center justify-between">
+    <div className="nextra-navigation-links pt-8 mb-8 border-t dark:border-neutral-800 flex flex-row items-center justify-between">
       <div className="flex-1 min-w-0">
-        {prev && config.prevLinks ? (
+        {prev ? (
           <PrevLink route={prev.route} title={prev.title} isRTL={isRTL} />
         ) : null}
       </div>
       <div className="flex-1 min-w-0 text-right">
-        {config.nextLinks && next ? (
+        {next ? (
           <NextLink route={next.route} title={next.title} isRTL={isRTL} />
         ) : null}
       </div>

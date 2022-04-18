@@ -27,7 +27,8 @@
       "sidebar": false,
       "toc": true,
       "footer": true,
-      "breadcrumb": false
+      "breadcrumb": false,
+      "typesetting": "article"
     }
   },
   "nextra_link": {

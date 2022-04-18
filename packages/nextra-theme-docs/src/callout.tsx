@@ -22,7 +22,7 @@ const Callout: React.FC<CalloutProps> = ({
   emoji = '💡'
 }) => {
   return (
-    <div className={`${themes[type]} flex rounded-lg callout mt-6`}>
+    <div className={`${themes[type]} flex rounded-lg nextra-callout mt-6`}>
       <div
         className="pl-3 pr-2 py-2 select-none text-xl"
         style={{
