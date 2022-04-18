@@ -100,7 +100,7 @@ pre {
   /* content-visibility: auto; */
   contain: paint;
   @apply p-4 bg-slate-100 rounded-xl mt-6 mb-4 overflow-x-auto font-medium subpixel-antialiased;
-  @apply dark:bg-prime-300 dark:bg-opacity-10;
+  @apply dark:bg-primary-300 dark:bg-opacity-10;
   code {
     line-height: 1.25rem;
     @apply relative p-0 text-sm text-current bg-transparent dark:bg-transparent rounded-none border-none inline-block min-w-full;

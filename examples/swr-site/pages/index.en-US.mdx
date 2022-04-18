@@ -62,6 +62,18 @@ function Profile() {
 }
 ```
 
+```diff
+import useSWR from 'swr'
+
+function Profile() {
+  const { data, error } = useSWR('/api/user', fetcher)
+
+-  if (error) return <div>failed to load</div>
++  if (!data) return <div>loading...</div>
+  return <div>hello {data.name}!</div>
+}
+```
+
 In this example, the `useSWR` hook accepts a `key` string and a `fetcher` function. `key` is a unique identifier of the data (normally the API URL)
 and will be passed to `fetcher`. `fetcher` can be any asynchronous function which returns the data, you can use the native fetch or tools like Axios.
 

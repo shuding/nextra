@@ -21,6 +21,7 @@ import { DocsThemeConfig } from './types'
 import './polyfill'
 import Breadcrumb from './breadcrumb'
 import renderComponent from './utils/render-component'
+import { PageTheme } from './misc/theme-context'
 
 function useDirectoryInfo(pageMap: PageMapItem[]) {
   const { locale, defaultLocale, asPath } = useRouter()
@@ -37,7 +38,7 @@ function useDirectoryInfo(pageMap: PageMapItem[]) {
 }
 
 interface BodyProps {
-  themeContext: Record<string, any>
+  themeContext: PageTheme
   breadcrumb?: React.ReactNode
   toc?: React.ReactNode
   timestamp?: number
@@ -73,7 +74,14 @@ const Body: React.FC<BodyProps> = ({
           {children}
         </div>
       ) : (
-        <article className="nextra-body relative pb-8 w-full max-w-full flex min-w-0 pr-[calc(env(safe-area-inset-right)-1.5rem)]">
+        <article
+          className={cn(
+            'nextra-body relative pb-8 w-full max-w-full flex min-w-0 pr-[calc(env(safe-area-inset-right)-1.5rem)]',
+            themeContext.typesetting
+              ? 'nextra-body-typesetting-' + themeContext.typesetting
+              : ''
+          )}
+        >
           <main className="mx-auto max-w-4xl px-6 md:px-8 pt-4 z-10 min-w-0 w-full">
             {breadcrumb}
             <MDXTheme>{children}</MDXTheme>
