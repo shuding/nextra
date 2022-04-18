@@ -7,12 +7,6 @@
     "title": "Error Handling",
     "hidden": true
   },
-  "github_link": {
-    "title": "GitHub 🐙 →",
-    "href": "https://github.com/shuding/nextra",
-    "type": "page",
-    "newWindow": true
-  },
   "revalidation": "Auto Revalidation",
   "conditional-fetching": "Conditional Data Fetching",
   "arguments": "Arguments",
@@ -20,11 +14,17 @@
   "pagination": "Pagination",
   "prefetching": "Prefetching",
   "with-nextjs": "Next.js SSG and SSR",
-  "typescript": "Typescript",
+  "typescript": "TypeScript :)",
   "suspense": "Suspense",
   "middleware": "Middleware",
   "advanced": {
     "title": "Advanced"
   },
-  "change-log": "Change Log"
+  "change-log": "Change Log",
+  "github_link": {
+    "title": "GitHub 🐙 →",
+    "href": "https://github.com/shuding/nextra",
+    "type": "page",
+    "newWindow": true
+  }
 }

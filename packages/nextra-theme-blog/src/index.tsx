@@ -31,6 +31,7 @@ interface LayoutProps {
   contentNodes: React.ReactNode
   comments: boolean
   pageTitle: string
+  timestamp?: number
   meta: {
     author: string
     date: string
@@ -39,6 +40,7 @@ interface LayoutProps {
     [key: string]: any
   }
 }
+
 const Layout = ({
   config,
   meta,

@@ -4,6 +4,8 @@ import path from 'path'
 import grayMatter from 'gray-matter'
 import slash from 'slash'
 import { LoaderContext } from 'webpack'
+import { Repository } from '@napi-rs/simple-git'
+
 import { addPage } from './content-dump'
 import { getLocaleFromFilename } from './utils'
 import { compileMdx } from './compile'
@@ -16,6 +18,18 @@ const isProductionBuild = process.env.NODE_ENV === 'production'
 const indexContentEmitted = new Set()
 
 const pagesDir = path.resolve(findPagesDir())
+
+let [repository, gitRoot] = (function () {
+  try {
+    const repo = Repository.discover(process.cwd())
+    // repository.path() returns the `/path/to/repo/.git`, we need the parent directory of it
+    const gitRoot = path.join(repo.path(), '..')
+    return [repo, gitRoot]
+  } catch (e) {
+    console.warn('Init git repository failed', e)
+    return []
+  }
+})()
 
 async function loader(
   context: LoaderContext<LoaderOptions>,
@@ -124,6 +138,32 @@ async function loader(
     indexContentEmitted.add(filename)
   }
 
+  let timestamp: number | undefined
+  if (repository && gitRoot) {
+    if (repository.isShallow()) {
+      if (process.env.VERCEL) {
+        console.warn(
+          `The repository is shallow cloned, so the latest modified time will not be presented. Set the VERCEL_DEEP_CLONE=true environment variable to enable deep cloning.`
+        )
+      } else if (process.env.GITHUB_ACTION) {
+        console.warn(
+          `The repository is shallow cloned, so the latest modified time will not be presented. See https://github.com/actions/checkout#fetch-all-history-for-all-tags-and-branches to fetch all the history.`
+        )
+      } else {
+        console.warn(
+          `The repository is shallow cloned, so the latest modified time will not be presented.`
+        )
+      }
+    }
+    try {
+      timestamp = await repository.getFileLatestModifiedDateAsync(
+        path.relative(gitRoot, resourcePath)
+      )
+    } catch (e) {
+      // Failed to get timestamp for this file. Silently ignore it.
+    }
+  }
+
   const prefix =
     `import __nextra_withLayout__ from '${layout}'\n` +
     `import { withSSG as __nextra_withSSG__ } from 'nextra/ssg'\n` +
@@ -146,7 +186,8 @@ async function loader(
       pageMap: __nextra_pageMap__,
       titleText: ${JSON.stringify(titleText)},
       headings: ${JSON.stringify(headings)},
-      hasH1: ${JSON.stringify(hasH1)}
+      hasH1: ${JSON.stringify(hasH1)},
+      ${timestamp ? `timestamp: ${timestamp},\n` : ''}
     }, ${layoutConfig ? '__nextra_layoutConfig__' : 'null'}))
     `
 

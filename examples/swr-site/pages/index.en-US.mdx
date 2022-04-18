@@ -11,6 +11,29 @@ import Features from 'components/features'
 }
 {<h1 className="text-center font-extrabold md:text-5xl mt-8">SWR</h1>}
 
+<Nextra.Tabs items={['JavaScript', 'C++', {label:'C', disabled: true}, 'Python']} defaultIndex={1}>
+  <Nextra.Tab>
+    ```js filename="hi.js"
+    import { useState, useEffect } from 'react';
+    ```
+  </Nextra.Tab>
+  <Nextra.Tab>
+    ```cpp filename="hi.cpp"
+    #include <iostream>
+    ```
+  </Nextra.Tab>
+  <Nextra.Tab>
+    ```c filename="hi.c"
+    #include <stdio.h>
+    ```
+  </Nextra.Tab>
+  <Nextra.Tab>
+    ```c filename="hi.c"
+    #include <stdio.h>
+    ```
+  </Nextra.Tab>
+</Nextra.Tabs>
+
 <Features/>
 
 The name “SWR” is derived from `stale-while-revalidate`, a HTTP cache invalidation strategy popularized by [HTTP RFC 5861](https://tools.ietf.org/html/rfc5861).

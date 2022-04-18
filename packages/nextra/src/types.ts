@@ -17,6 +17,7 @@ export interface PageMapItem {
   route: string
   locale?: string
   children?: PageMapItem[]
+  timestamp?: number
   frontMatter?: Record<string, any>
   meta?: Record<string, any>
   active?: boolean
