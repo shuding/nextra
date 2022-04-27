@@ -1,5 +1,4 @@
 const colors = require('tailwindcss/colors')
-
 module.exports = {
   content: ['./src/**/*.{js,css,tsx}'],
   theme: {
@@ -14,7 +13,7 @@ module.exports = {
       red: colors.red,
       orange: colors.orange,
       yellow: colors.yellow,
-      prime: colors.blue
+      primary: colors.blue
     },
     extend: {
       typography: theme => ({

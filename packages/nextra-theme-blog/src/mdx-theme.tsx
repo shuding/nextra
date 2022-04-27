@@ -10,8 +10,26 @@ import ReactDOM from 'react-dom'
 
 const SluggerContext = createContext<Slugger | null>(null)
 
-const H1 = () => {
-  return null as any
+export const HeadingContext = createContext<
+  React.RefObject<HTMLHeadingElement | null>
+>(React.createRef())
+
+const useHeadingRef = () => {
+  const ref = useContext(HeadingContext)
+  return ref
+}
+
+const H1 = ({ children }: { children?: React.ReactNode }) => {
+  const ref = useHeadingRef()
+  const [showHeading, setShowHeading] = useState(false)
+  useEffect(() => {
+    if (ref.current) {
+      setShowHeading(true)
+    }
+  }, [])
+  return (
+    <>{showHeading ? ReactDOM.createPortal(children, ref.current!) : null}</>
+  )
 }
 
 const HeaderLink = ({

@@ -18,7 +18,7 @@ export const withSSG = <T extends { ssg: boolean } = any>(
       React.createElement(Page, props)
     )
   }
-  WithSSG.withLayout = (Page as any).withLayout
+  WithSSG.getLayout = (Page as any).getLayout
   return WithSSG
 }
 
