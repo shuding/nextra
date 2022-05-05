@@ -135,7 +135,7 @@ importers:
     dependencies:
       '@mdx-js/react': 2.1.0_react@17.0.2
       github-slugger: 1.4.0
-      next-themes: 0.2.0-beta.0_8c3675119e28db7583641618775c51dc
+      next-themes: 0.2.0-beta.0_f3299b186fe279e9e6c95022815bb28f
       react-cusdis: 2.1.3_react-dom@17.0.2+react@17.0.2
     devDependencies:
       cross-env: 7.0.3
@@ -143,7 +143,7 @@ importers:
 
   packages/nextra-theme-docs:
     specifiers:
-      '@headlessui/react': ^1.5.0
+      '@headlessui/react': ^1.6.1
       '@mdx-js/react': ^2.1.0
       '@reach/skip-nav': ^0.16.0
       '@types/flexsearch': ^0.7.2
@@ -162,7 +162,7 @@ importers:
       scroll-into-view-if-needed: ^2.2.29
       title: ^3.4.2
     dependencies:
-      '@headlessui/react': 1.5.0_react-dom@17.0.2+react@17.0.2
+      '@headlessui/react': 1.6.1_react-dom@17.0.2+react@17.0.2
       '@mdx-js/react': 2.1.0_react@17.0.2
       '@reach/skip-nav': 0.16.0_react-dom@17.0.2+react@17.0.2
       classnames: 2.3.1
@@ -212,8 +212,8 @@ packages:
       regenerator-runtime: 0.13.9
     dev: false
 
-  /@headlessui/react/1.5.0_react-dom@17.0.2+react@17.0.2:
-    resolution: {integrity: sha512-aaRnYxBb3MU2FNJf3Ut9RMTUqqU3as0aI1lQhgo2n9Fa67wRu14iOGqx93xB+uMNVfNwZ5B3y/Ndm7qZGuFeMQ==}
+  /@headlessui/react/1.6.1_react-dom@17.0.2+react@17.0.2:
+    resolution: {integrity: sha512-gMd6uIs1U4Oz718Z5gFoV0o/vD43/4zvbyiJN9Dt7PK9Ubxn+TmJwTmYwyNJc5KxxU1t0CmgTNgwZX9+4NjCnQ==}
     engines: {node: '>=10'}
     peerDependencies:
       react: ^16 || ^17 || ^18
@@ -3171,14 +3171,14 @@ packages:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
     dev: true
 
-  /next-themes/0.2.0-beta.0_8c3675119e28db7583641618775c51dc:
+  /next-themes/0.2.0-beta.0_f3299b186fe279e9e6c95022815bb28f:
     resolution: {integrity: sha512-vzF6V1cWo6LVuMZkTpsP3+7roc14X8VTRgyiZT/6TWzcd7sLdE+y/6F1WiXEvKg+IqwdUb8g3KwC20Fo1yUYqw==}
     peerDependencies:
       next: '>=11.1.1'
       react: '*'
       react-dom: '*'
     dependencies:
-      next: 12.1.1_react-dom@17.0.2+react@17.0.2
+      next: 12.1.4_react-dom@17.0.2+react@17.0.2
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
     dev: false
