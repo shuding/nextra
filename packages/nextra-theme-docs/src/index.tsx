@@ -253,8 +253,6 @@ export default (opts: PageOpt, _config: DocsThemeConfig) => {
       children: any
       config: DocsThemeConfig & typeof defaultConfig
     }) {
-      // ;(globalThis as any).__nextra_layout__ = true
-
       return (
         <ThemeConfigContext.Provider value={config}>
           <ThemeProvider
@@ -274,11 +272,6 @@ export default (opts: PageOpt, _config: DocsThemeConfig) => {
   }
 
   function Page({ children }: any) {
-    // if (!(globalThis as any).__nextra_layout__) {
-    //   throw new Error(
-    //     '[Nextra] Please add the `getLayout` logic to your _app.js, see https://nextjs.org/docs/basic-features/layouts#per-page-layouts.'
-    //   )
-    // }
     return children
   }
   Page.withLayout = (page: any) => {
