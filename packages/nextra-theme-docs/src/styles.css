@@ -1,3 +1,5 @@
+@tailwind base;
+
 html {
   @apply antialiased;
   font-size: 16px;
@@ -25,7 +27,6 @@ blockquote:not(:first-child),
   @apply mt-6;
 }
 
-@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
