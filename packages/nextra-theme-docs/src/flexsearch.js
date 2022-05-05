@@ -254,7 +254,7 @@ export default function Search() {
     if (!indexes[localeCode] && !loading) {
       setLoading(true)
       const data = await (
-        await fetch(`/_next/static/chunks/nextra-data-${localeCode}.json`)
+        await fetch(`${Router.basePath}/_next/static/chunks/nextra-data-${localeCode}.json`)
       ).json()
 
       const pageIndex = new FlexSearch.Document({
