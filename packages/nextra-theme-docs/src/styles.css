@@ -1,5 +1,3 @@
-@tailwind base;
-
 html {
   @apply antialiased;
   font-size: 16px;
@@ -27,6 +25,7 @@ blockquote:not(:first-child),
   @apply mt-6;
 }
 
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -230,7 +229,7 @@ blockquote:not(:first-child),
 }
 
 @media (max-width: 767px) {
-  .nextra-body:before {
+  article:before {
     content: '';
     position: fixed;
     top: 0;
@@ -287,7 +286,7 @@ blockquote:not(:first-child),
 }
 
 @media (prefers-reduced-motion: reduce) and (max-width: 767px) {
-  .nextra-body:before {
+  article:before {
     transition: none;
   }
   .nextra-sidebar-container {
@@ -306,7 +305,7 @@ blockquote:not(:first-child),
       @apply text-gray-800 dark:!text-gray-50;
     }
   }
-  article.nextra-body h2 {
+  article h2 {
     border-color: #999 !important;
   }
   .nextra-nav-container nav .nextra-nav-link {
@@ -315,7 +314,7 @@ blockquote:not(:first-child),
       @apply font-bold;
     }
   }
-  article.nextra-body pre {
+  article pre {
     @apply contrast-150 border border-opacity-20 border-primary-900 dark:border-primary-100 dark:border-opacity-40;
   }
   .nextra-callout {
@@ -365,7 +364,7 @@ blockquote:not(:first-child),
 }
 
 /* Content Typography */
-article.nextra-body {
+article {
   min-height: calc(100vh - 64px);
   &.full {
     width: 100%;
@@ -754,34 +753,34 @@ table tr td {
   .nextra-sidebar a {
     @apply text-right;
   }
-  article.nextra-body blockquote {
+  article blockquote {
     @apply pr-6 border-r-2 pl-0 border-l-0;
   }
 }
-.nextra-container:not(.rtl):not(.page) article.nextra-body {
+.nextra-container:not(.rtl):not(.page) article {
 }
-.nextra-container.rtl:not(.page) article.nextra-body {
+.nextra-container.rtl:not(.page) article {
 }
 @screen md {
-  .nextra-container:not(.page) article.nextra-body .bleed.full {
+  .nextra-container:not(.page) article .bleed.full {
     margin-left: calc(-50vw + 50% + 8rem);
     margin-right: calc(-50vw + 50% + 8rem);
   }
-  .nextra-container.page article.nextra-body .bleed.full {
+  .nextra-container.page article .bleed.full {
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
   }
 }
 @screen xl {
-  .nextra-container:not(.rtl):not(.page) article.nextra-body .bleed.full {
+  .nextra-container:not(.rtl):not(.page) article .bleed.full {
     margin-left: calc(50% - 50vw + 16rem);
     margin-right: calc(50% - 50vw);
   }
-  .nextra-container.rtl:not(.page) article.nextra-body .bleed.full {
+  .nextra-container.rtl:not(.page) article .bleed.full {
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw + 16rem);
   }
-  .nextra-container.page article.nextra-body .bleed.full {
+  .nextra-container.page article .bleed.full {
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
   }
@@ -793,8 +792,8 @@ table tr td {
   .anchor-icon {
     @apply ml-0 mr-2 inline-block;
   }
-  article.nextra-body ul,
-  article.nextra-body ol {
+  article ul,
+  article ol {
     @apply ml-0 mr-6;
   }
   .nextra-sidebar {
