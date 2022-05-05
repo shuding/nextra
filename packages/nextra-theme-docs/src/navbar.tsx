@@ -32,15 +32,13 @@ export default function Navbar({ flatDirectories, items }: NavBarProps) {
     <>
       <script
         dangerouslySetInnerHTML={{
-          __html: `try {
-        if (localStorage.getItem(${JSON.stringify(bannerKey)}) === '0') {
-          document.body.classList.add('nextra-banner-hidden')
-        }
-      } catch (e) {}`
+          __html: `try{if(localStorage.getItem(${JSON.stringify(
+            bannerKey
+          )})==='0'){document.body.classList.add('nextra-banner-hidden')}}catch(e){}`
         }}
       />
       {config.banner ? (
-        <div className="nextra-banner-container text-sm h-10 sticky top-0 md:relative pl-10 flex items-center text-slate-50 bg-neutral-900 dark:bg-neutral-700 dark:text-white z-20">
+        <div className="nextra-banner-container text-sm h-10 sticky top-0 md:relative pl-10 flex items-center text-slate-50 bg-neutral-900  dark:text-white z-20 dark:bg-[linear-gradient(1deg,#383838,#212121)]">
           <div className="max-w-[90rem] mx-auto w-full py-1 text-center font-medium pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)] truncate whitespace-nowrap">
             {renderComponent(config.banner, {
               locale
@@ -77,7 +75,7 @@ export default function Navbar({ flatDirectories, items }: NavBarProps) {
       >
         <div className="nextra-nav-container-blur absolute w-full h-full bg-white dark:bg-dark pointer-events-none" />
         <nav className="flex max-w-[90rem] mx-auto items-center left-0 right-0 h-16 pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
-          <div className="flex items-center mr-2">
+          <div className="w-full flex items-center mr-2">
             <Link href="/">
               <a className="no-underline text-current inline-flex items-center hover:opacity-75">
                 {renderComponent(config.logo, { locale })}

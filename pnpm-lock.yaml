@@ -156,7 +156,7 @@ importers:
       github-slugger: ^1.4.0
       intersection-observer: ^0.12.0
       match-sorter: ^4.2.0
-      next-themes: ^0.2.0-beta.0
+      next-themes: ^0.2.0-beta.2
       nextra: workspace:*
       parse-git-url: ^1.0.1
       scroll-into-view-if-needed: ^2.2.29
@@ -171,7 +171,7 @@ importers:
       github-slugger: 1.4.0
       intersection-observer: 0.12.0
       match-sorter: 4.2.1
-      next-themes: 0.2.0-beta.0_8c3675119e28db7583641618775c51dc
+      next-themes: 0.2.0-beta.2_f3299b186fe279e9e6c95022815bb28f
       parse-git-url: 1.0.1
       scroll-into-view-if-needed: 2.2.29
       title: 3.4.3
@@ -3179,6 +3179,18 @@ packages:
       react-dom: '*'
     dependencies:
       next: 12.1.1_react-dom@17.0.2+react@17.0.2
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+    dev: false
+
+  /next-themes/0.2.0-beta.2_f3299b186fe279e9e6c95022815bb28f:
+    resolution: {integrity: sha512-eioRsDeJCxI+LkyQ+xEP8A6b94wcrdk9CVPxjMO35C0oYUfPAXTfSX28pEEWzf/LXQOWfZcQd2g2ATrTfOuy+g==}
+    peerDependencies:
+      next: '*'
+      react: '*'
+      react-dom: '*'
+    dependencies:
+      next: 12.1.4_react-dom@17.0.2+react@17.0.2
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
     dev: false
