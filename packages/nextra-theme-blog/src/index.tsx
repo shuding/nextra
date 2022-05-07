@@ -7,7 +7,7 @@ import { ThemeProvider, useTheme } from 'next-themes'
 import { ReactCusdis } from 'react-cusdis'
 import Meta from './meta'
 import Nav from './nav'
-import MDXTheme, { HeadingContext } from './mdx-theme'
+import MDXTheme from './mdx-theme'
 
 import traverse from './utils/traverse'
 import getTags from './utils/get-tags'
@@ -53,7 +53,6 @@ const Layout = ({
   comments
 }: LayoutProps) => {
   const type = meta.type || 'post'
-  const ref = React.useRef<HTMLHeadingElement>(null)
   return (
     <>
       <Head>
@@ -66,21 +65,19 @@ const Layout = ({
           : null}
       </Head>
       <article className="container prose prose-sm md:prose dark:prose-dark">
-        <HeadingContext.Provider value={ref}>
-          {hasH1 ? <h1 ref={ref}></h1> : <h1>{pageTitle}</h1>}
-          {type === 'post' ? (
-            <Meta {...meta} back={back} config={config} />
-          ) : (
-            <Nav navPages={navPages} config={config} />
-          )}
-          <MDXTheme>
-            {contentNodes}
-            {type === 'post' ? config.postFooter : null}
-            {type === 'post' ? comments : null}
-          </MDXTheme>
-          {postList}
-          {config.footer}
-        </HeadingContext.Provider>
+        <h1>{pageTitle}</h1>
+        {type === 'post' ? (
+          <Meta {...meta} back={back} config={config} />
+        ) : (
+          <Nav navPages={navPages} config={config} />
+        )}
+        <MDXTheme>
+          {contentNodes}
+          {type === 'post' ? config.postFooter : null}
+          {type === 'post' ? comments : null}
+        </MDXTheme>
+        {postList}
+        {config.footer}
       </article>
     </>
   )
@@ -197,7 +194,7 @@ const NextraBlog = (opts: PageOpt, _config: NextraBlogTheme) => {
     }
 
     const postList = posts ? (
-      <ul>
+      <ul className="nextra-post-list">
         {posts.map(post => {
           if (tagName) {
             const tags = getTags(post)

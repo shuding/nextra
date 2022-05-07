@@ -3,6 +3,4 @@ const withNextra = require('nextra')({
   themeConfig: './theme.config.js',
   unstable_staticImage: true
 })
-module.exports = withNextra({
-  reactStrictMode: true
-})
+module.exports = withNextra({})
