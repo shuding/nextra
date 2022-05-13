@@ -184,8 +184,8 @@ const Content: React.FC<LayoutProps> = ({
             />
           ) : null}
           <ActiveAnchor>
-            <div className="max-w-[90rem] w-full mx-auto">
-              <div className="flex flex-1 h-full">
+            <div className="max-w-[90rem] w-full mx-auto flex flex-1 items-stretch">
+              <div className="flex flex-1">
                 <Sidebar
                   directories={docsDirectories}
                   flatDirectories={flatDirectories}

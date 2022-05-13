@@ -3,5 +3,11 @@
   "auth": "Authentication",
   "infinite-loading": "Infinite Loading",
   "error-handling": "Error Handling",
-  "ssr": "Next.js SSR"
+  "ssr": "Next.js SSR",
+  "full": {
+    "title": "Full",
+    "theme": {
+      "layout": "raw"
+    }
+  }
 }

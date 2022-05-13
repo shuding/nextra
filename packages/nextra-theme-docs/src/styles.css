@@ -365,8 +365,7 @@ blockquote:not(:first-child),
 }
 
 /* Content Typography */
-article {
-  min-height: calc(100vh - 64px);
+.nextra-body {
   &.full {
     width: 100%;
     &.expand {
@@ -374,7 +373,9 @@ article {
       margin: 0 calc(50% - 50vw);
     }
   }
-
+}
+article {
+  min-height: calc(100vh - 64px);
   h1 {
     @apply text-4xl font-bold tracking-tight mt-2;
   }
