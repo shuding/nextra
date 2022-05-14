@@ -98,6 +98,7 @@ const BlogLayout = ({
   const { query } = router
   const tagName = type === 'tag' ? query.tag : null
   const pageTitle = opts.meta.title || opts.titleText || ''
+  const mdxTitle = hasH1 && !pageTitle
   let comments
 
   if (config.cusdis) {
@@ -184,7 +185,8 @@ const BlogLayout = ({
       </Head>
       <article className="container prose prose-sm md:prose dark:prose-dark">
         <HeadingContext.Provider value={ref}>
-          {hasH1 ? <h1 ref={ref}></h1> : <h1>{pageTitle}</h1>}
+          {pageTitle ? <h1>{pageTitle}</h1> : null}
+          {mdxTitle ? <h1 ref={ref}></h1> : null}
           {type === 'post' ? (
             /** @ts-expect-error */
             <Meta {...meta} back={back} config={config} />
