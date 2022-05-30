@@ -194,7 +194,7 @@ async function loader(
   const suffix = `export default function NextraPage (props) {
   return <NextraLayout {...props}>{__nextra_content__}</NextraLayout>
 }
-NextraPage.getLayout = NextraLayout.withLayout`
+NextraPage.getLayout = NextraLayout.getLayout`
 
   // console.log(content)
 

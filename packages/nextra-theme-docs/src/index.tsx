@@ -23,6 +23,8 @@ import Breadcrumb from './breadcrumb'
 import renderComponent from './utils/render-component'
 import { PageTheme } from './misc/theme-context'
 
+const isProduction = process.env.NODE_ENV === 'production'
+
 function useDirectoryInfo(pageMap: PageMapItem[]) {
   const { locale, defaultLocale, asPath } = useRouter()
 
@@ -89,16 +91,16 @@ const Body: React.FC<BodyProps> = ({
               <div className="text-xs text-right block text-gray-500 mt-12 mb-8 dark:text-gray-400 pointer-default">
                 {typeof config.gitTimestamp === 'string'
                   ? config.gitTimestamp +
-                    ' ' +
-                    date.toLocaleDateString(locale, {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric'
-                    })
+                  ' ' +
+                  date.toLocaleDateString(locale, {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  })
                   : renderComponent(config.gitTimestamp, {
-                      timestamp: date,
-                      locale
-                    })}
+                    timestamp: date,
+                    locale
+                  })}
               </div>
             ) : (
               <div className="mt-16" />
@@ -116,8 +118,8 @@ interface LayoutProps {
   filename: string
   pageMap: PageMapItem[]
   meta: Record<string, any>
-  titleText: string
-  headings: Heading[]
+  titleText: string | null
+  headings?: Heading[]
   timestamp?: number
 }
 
@@ -159,7 +161,7 @@ const Content: React.FC<LayoutProps> = ({
   const themeContext = { ...activeThemeContext, ...meta }
 
   const hideSidebar = !themeContext.sidebar || themeContext.layout === 'raw'
-
+  const headingArr = headings ?? []
   return (
     <React.Fragment>
       <Head title={title} locale={locale} meta={meta} />
@@ -207,7 +209,7 @@ const Content: React.FC<LayoutProps> = ({
                       <div className="nextra-toc w-64 hidden xl:block text-sm px-4" />
                     ) : (
                       <ToC
-                        headings={config.floatTOC ? headings : null}
+                        headings={config.floatTOC ? headingArr : null}
                         filepathWithName={filepathWithName}
                       />
                     )
@@ -237,48 +239,36 @@ const Content: React.FC<LayoutProps> = ({
   )
 }
 
-// The layout component must be shared globally, we only initialize it once.
-let GlobalLayout: any
-
-export default (opts: PageOpt, _config: DocsThemeConfig) => {
+const createLayout = (opts: PageOpt, _config: DocsThemeConfig) => {
   const extendedConfig = Object.assign({}, defaultConfig, _config)
-  if (!GlobalLayout) {
-    GlobalLayout = function ({
-      children,
-      opts,
-      config
-    }: {
-      opts: any
-      children: any
-      config: DocsThemeConfig & typeof defaultConfig
-    }) {
-      return (
-        <ThemeConfigContext.Provider value={config}>
-          <ThemeProvider
-            attribute="class"
-            disableTransitionOnChange={true}
-            {...{
-              defaultTheme: config.nextThemes.defaultTheme,
-              storageKey: config.nextThemes.storageKey,
-              forcedTheme: config.nextThemes.forcedTheme
-            }}
-          >
-            <Content {...opts}>{children}</Content>
-          </ThemeProvider>
-        </ThemeConfigContext.Provider>
+  let layoutUsed = false
+  const Page = ({ children }: { children: React.ReactChildren }) => {
+    if (!layoutUsed && isProduction) {
+      throw new Error(
+        '[Nextra] Please add the `getLayout` logic to your _app.js, see https://nextjs.org/docs/basic-features/layouts#per-page-layouts.'
       )
     }
-  }
-
-  function Page({ children }: any) {
     return children
   }
-  Page.withLayout = (page: any) => {
+  Page.getLayout = (page: any) => {
+    layoutUsed = true
     return (
-      <GlobalLayout opts={opts} config={extendedConfig}>
-        {page}
-      </GlobalLayout>
+      <ThemeConfigContext.Provider value={extendedConfig}>
+        <ThemeProvider
+          attribute="class"
+          disableTransitionOnChange={true}
+          {...{
+            defaultTheme: extendedConfig.nextThemes.defaultTheme,
+            storageKey: extendedConfig.nextThemes.storageKey,
+            forcedTheme: extendedConfig.nextThemes.forcedTheme
+          }}
+        >
+          <Content {...opts}>{page}</Content>
+        </ThemeProvider>
+      </ThemeConfigContext.Provider>
     )
   }
   return Page
 }
+
+export default createLayout
