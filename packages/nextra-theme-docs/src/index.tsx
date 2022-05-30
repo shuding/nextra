@@ -195,6 +195,18 @@ const Content: React.FC<LayoutProps> = ({
                   asPopover={activeType === 'page' || hideSidebar}
                   includePlaceholder={themeContext.layout === 'default'}
                 />
+                {activeType === 'page' ||
+                !themeContext.toc ||
+                themeContext.layout !== 'default' ? (
+                  themeContext.layout === 'full' ? null : (
+                    <div className="nextra-toc w-64 hidden xl:block text-sm px-4 order-last flex-shrink-0" />
+                  )
+                ) : (
+                  <ToC
+                    headings={config.floatTOC ? headingArr : null}
+                    filepathWithName={filepathWithName}
+                  />
+                )}
                 <Body
                   themeContext={themeContext}
                   breadcrumb={
@@ -215,18 +227,6 @@ const Content: React.FC<LayoutProps> = ({
                 >
                   {children}
                 </Body>
-                {activeType === 'page' ||
-                !themeContext.toc ||
-                themeContext.layout !== 'default' ? (
-                  themeContext.layout === 'full' ? null : (
-                    <div className="nextra-toc w-64 hidden xl:block text-sm px-4 flex-shrink-0" />
-                  )
-                ) : (
-                  <ToC
-                    headings={config.floatTOC ? headingArr : null}
-                    filepathWithName={filepathWithName}
-                  />
-                )}
               </div>
             </div>
           </ActiveAnchor>
