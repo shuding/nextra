@@ -20,7 +20,12 @@
   "advanced": {
     "title": "Advanced"
   },
-  "change-log": "Change Log",
+  "change-log": {
+    "title": "Change Log",
+    "theme": {
+      "sidebar": false
+    }
+  },
   "github_link": {
     "title": "GitHub 🐙 →",
     "href": "https://github.com/shuding/nextra",

@@ -219,6 +219,7 @@ interface SideBarProps {
   asPopover?: boolean
   headings?: Heading[]
   isRTL?: boolean
+  includePlaceholder: boolean
 }
 
 const emptyHeading: any[] = []
@@ -227,7 +228,8 @@ export default function Sidebar({
   flatDirectories,
   fullDirectories,
   asPopover = false,
-  headings = emptyHeading
+  headings = emptyHeading,
+  includePlaceholder
 }: SideBarProps) {
   const config = useConfig()
   const anchors = useMemo(
@@ -264,82 +266,87 @@ export default function Sidebar({
   const hasMenu = !!(config.i18n || config.darkMode)
 
   return (
-    <aside
-      className={cn(
-        'nextra-sidebar-container nextra-scrollbar fixed flex-shrink-0 w-full md:w-64 md:sticky z-[15] top-16 self-start overflow-y-auto transform-none h-[calc(100vh-4rem)]',
-        asPopover ? 'md:hidden' : 'md:block',
-        hasMenu ? 'with-menu' : '',
-        { open: menu }
-      )}
-    >
-      <div className="nextra-sidebar select-none w-full h-full md:h-auto pl-[calc(env(safe-area-inset-left)-1.5rem)]">
-        <div className="p-4 min-h-[calc(100vh-4rem-61px)]">
-          <div className="nextra-sidebar-search mb-4 block md:hidden">
-            {config.customSearch ||
-              (config.search ? (
-                config.unstable_flexsearch ? (
-                  <Flexsearch />
-                ) : (
-                  <Search directories={flatDirectories} />
-                )
-              ) : null)}
-          </div>
-          <div className="hidden md:block">
-            <Menu
-              directories={directories}
-              anchors={
-                // When the viewport size is larger than `md`, hide the anchors in
-                // the sidebar when `floatTOC` is enabled.
-                config.floatTOC ? [] : anchors
-              }
-            />
-          </div>
-          <div className="md:hidden">
-            <Menu
-              directories={fullDirectories}
-              anchors={
-                // Always show the anchor links on mobile (`md`).
-                anchors
-              }
-            />
-          </div>
-        </div>
-
-        {!hasMenu ? null : (
-          <div className="nextra-sidebar-menu mx-4 border-t dark:border-neutral-800 shadow-[0_-12px_16px_white] dark:shadow-[0_-12px_16px_#111]">
-            <div className="bg-white dark:bg-dark py-4 flex gap-1 pb-4">
-              {config.i18n ? (
-                <div className="flex-1 relative">
-                  <LocaleSwitch options={config.i18n} />
-                </div>
-              ) : null}
-              {config.darkMode ? (
-                <>
-                  <div
-                    className={cn('relative md:hidden', {
-                      locale: config.i18n,
-                      'flex-1': !config.i18n
-                    })}
-                  >
-                    <ThemeSwitch lite={false} />
-                  </div>
-                  <div
-                    className={cn(
-                      'relative hidden md:block',
-                      {
-                        locale: config.i18n
-                      },
-                      config.i18n ? 'grow-0' : 'flex-1'
-                    )}
-                  >
-                    <ThemeSwitch lite={!!config.i18n} />
-                  </div>
-                </>
-              ) : null}
+    <>
+      {includePlaceholder && asPopover ? (
+        <div className="hidden md:block md:w-64 h-0" />
+      ) : null}
+      <aside
+        className={cn(
+          'nextra-sidebar-container nextra-scrollbar fixed flex-shrink-0 w-full md:w-64 md:sticky z-[15] top-16 self-start overflow-y-auto transform-none h-[calc(100vh-4rem)]',
+          asPopover ? 'md:hidden' : 'md:block',
+          hasMenu ? 'with-menu' : '',
+          { open: menu }
+        )}
+      >
+        <div className="nextra-sidebar select-none w-full h-full md:h-auto pl-[calc(env(safe-area-inset-left)-1.5rem)]">
+          <div className="p-4 min-h-[calc(100vh-4rem-61px)]">
+            <div className="nextra-sidebar-search mb-4 block md:hidden">
+              {config.customSearch ||
+                (config.search ? (
+                  config.unstable_flexsearch ? (
+                    <Flexsearch />
+                  ) : (
+                    <Search directories={flatDirectories} />
+                  )
+                ) : null)}
+            </div>
+            <div className="hidden md:block">
+              <Menu
+                directories={directories}
+                anchors={
+                  // When the viewport size is larger than `md`, hide the anchors in
+                  // the sidebar when `floatTOC` is enabled.
+                  config.floatTOC ? [] : anchors
+                }
+              />
+            </div>
+            <div className="md:hidden">
+              <Menu
+                directories={fullDirectories}
+                anchors={
+                  // Always show the anchor links on mobile (`md`).
+                  anchors
+                }
+              />
             </div>
           </div>
-        )}
-      </div>
-    </aside>
+
+          {!hasMenu ? null : (
+            <div className="nextra-sidebar-menu mx-4 border-t dark:border-neutral-800 shadow-[0_-12px_16px_white] dark:shadow-[0_-12px_16px_#111]">
+              <div className="bg-white dark:bg-dark py-4 flex gap-1 pb-4">
+                {config.i18n ? (
+                  <div className="flex-1 relative">
+                    <LocaleSwitch options={config.i18n} />
+                  </div>
+                ) : null}
+                {config.darkMode ? (
+                  <>
+                    <div
+                      className={cn('relative md:hidden', {
+                        locale: config.i18n,
+                        'flex-1': !config.i18n
+                      })}
+                    >
+                      <ThemeSwitch lite={false} />
+                    </div>
+                    <div
+                      className={cn(
+                        'relative hidden md:block',
+                        {
+                          locale: config.i18n
+                        },
+                        config.i18n ? 'grow-0' : 'flex-1'
+                      )}
+                    >
+                      <ThemeSwitch lite={!!config.i18n} />
+                    </div>
+                  </>
+                ) : null}
+              </div>
+            </div>
+          )}
+        </div>
+      </aside>
+    </>
   )
 }

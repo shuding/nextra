@@ -76,13 +76,13 @@ const Body: React.FC<BodyProps> = ({
       ) : (
         <article
           className={cn(
-            'nextra-body relative pb-8 w-full max-w-full flex min-w-0 pr-[calc(env(safe-area-inset-right)-1.5rem)]',
+            'nextra-body relative pb-8 w-full max-w-full flex justify-center min-w-0 pr-[calc(env(safe-area-inset-right)-1.5rem)]',
             themeContext.typesetting
               ? 'nextra-body-typesetting-' + themeContext.typesetting
               : ''
           )}
         >
-          <main className="mx-auto max-w-4xl px-6 md:px-8 pt-4 z-10 min-w-0 w-full">
+          <main className="max-w-4xl px-6 md:px-8 pt-4 z-10 min-w-0 w-full">
             {breadcrumb}
             <MDXTheme>{children}</MDXTheme>
             {date && config.gitTimestamp ? (
@@ -193,6 +193,7 @@ const Content: React.FC<LayoutProps> = ({
                   headings={headings}
                   isRTL={isRTL}
                   asPopover={activeType === 'page' || hideSidebar}
+                  includePlaceholder={themeContext.layout === 'default'}
                 />
                 <Body
                   themeContext={themeContext}
@@ -203,9 +204,7 @@ const Content: React.FC<LayoutProps> = ({
                   }
                   toc={
                     activeType === 'page' || !themeContext.toc ? (
-                      activeType === 'page' || hideSidebar ? null : (
-                        <div className="nextra-toc w-64 hidden xl:block text-sm px-4" />
-                      )
+                      <div className="nextra-toc w-64 hidden xl:block text-sm px-4" />
                     ) : (
                       <ToC
                         headings={config.floatTOC ? headings : null}
