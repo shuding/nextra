@@ -268,7 +268,7 @@ export default function Sidebar({
   return (
     <>
       {includePlaceholder && asPopover ? (
-        <div className="hidden md:block md:w-64 h-0" />
+        <div className="hidden md:block md:w-64 h-0 flex-shrink-0" />
       ) : null}
       <aside
         className={cn(

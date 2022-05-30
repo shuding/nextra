@@ -50,7 +50,6 @@ interface BodyProps {
 const Body: React.FC<BodyProps> = ({
   themeContext,
   breadcrumb,
-  toc,
   navLinks,
   timestamp,
   children
@@ -65,7 +64,7 @@ const Body: React.FC<BodyProps> = ({
       {themeContext.layout === 'full' ? (
         <article
           className={cn(
-            'nextra-body full relative overflow-x-hidden',
+            'nextra-body full relative justify-center overflow-x-hidden',
             !themeContext.sidebar ? 'expand' : ''
           )}
         >
@@ -78,7 +77,7 @@ const Body: React.FC<BodyProps> = ({
       ) : (
         <article
           className={cn(
-            'nextra-body relative pb-8 w-full max-w-full flex justify-center min-w-0 pr-[calc(env(safe-area-inset-right)-1.5rem)]',
+            'nextra-body relative pb-8 w-full justify-center max-w-full flex min-w-0 pr-[calc(env(safe-area-inset-right)-1.5rem)]',
             themeContext.typesetting
               ? 'nextra-body-typesetting-' + themeContext.typesetting
               : ''
@@ -91,23 +90,22 @@ const Body: React.FC<BodyProps> = ({
               <div className="text-xs text-right block text-gray-500 mt-12 mb-8 dark:text-gray-400 pointer-default">
                 {typeof config.gitTimestamp === 'string'
                   ? config.gitTimestamp +
-                  ' ' +
-                  date.toLocaleDateString(locale, {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                  })
+                    ' ' +
+                    date.toLocaleDateString(locale, {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })
                   : renderComponent(config.gitTimestamp, {
-                    timestamp: date,
-                    locale
-                  })}
+                      timestamp: date,
+                      locale
+                    })}
               </div>
             ) : (
               <div className="mt-16" />
             )}
             {navLinks}
           </main>
-          {toc}
         </article>
       )}
     </React.Fragment>
@@ -187,7 +185,7 @@ const Content: React.FC<LayoutProps> = ({
           ) : null}
           <ActiveAnchor>
             <div className="max-w-[90rem] w-full mx-auto flex flex-1 items-stretch">
-              <div className="flex flex-1">
+              <div className="flex flex-1 w-full">
                 <Sidebar
                   directories={docsDirectories}
                   flatDirectories={flatDirectories}
@@ -204,16 +202,6 @@ const Content: React.FC<LayoutProps> = ({
                       <Breadcrumb activePath={activePath} />
                     ) : null
                   }
-                  toc={
-                    activeType === 'page' || !themeContext.toc ? (
-                      <div className="nextra-toc w-64 hidden xl:block text-sm px-4" />
-                    ) : (
-                      <ToC
-                        headings={config.floatTOC ? headingArr : null}
-                        filepathWithName={filepathWithName}
-                      />
-                    )
-                  }
                   navLinks={
                     activeType === 'page' ? null : themeContext.pagination ? (
                       <NavLinks
@@ -227,6 +215,18 @@ const Content: React.FC<LayoutProps> = ({
                 >
                   {children}
                 </Body>
+                {activeType === 'page' ||
+                !themeContext.toc ||
+                themeContext.layout !== 'default' ? (
+                  themeContext.layout === 'full' ? null : (
+                    <div className="nextra-toc w-64 hidden xl:block text-sm px-4 flex-shrink-0" />
+                  )
+                ) : (
+                  <ToC
+                    headings={config.floatTOC ? headingArr : null}
+                    filepathWithName={filepathWithName}
+                  />
+                )}
               </div>
             </div>
           </ActiveAnchor>
