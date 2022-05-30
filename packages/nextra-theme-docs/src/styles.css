@@ -534,17 +534,6 @@ article {
     @apply pl-2 text-gray-300 dark:text-neutral-700 select-none transition-opacity absolute opacity-0;
   }
 
-  .nextra-toc {
-    .nextra-toc-content {
-      mask-image: linear-gradient(to bottom, transparent, #000 20px),
-        linear-gradient(to left, #000 10px, transparent 10px);
-    }
-    ul {
-      @apply m-0 list-none break-words;
-      hyphens: auto;
-    }
-  }
-
   &.nextra-body-typesetting-article {
     font-size: 17px;
     font-feature-settings: 'rlig' 1, 'calt' 1;
@@ -570,6 +559,23 @@ article {
     .anchor-icon {
       display: none;
     }
+  }
+}
+
+.nextra-toc {
+  .nextra-toc-content {
+    mask-image: linear-gradient(to bottom, transparent, #000 20px),
+      linear-gradient(to left, #000 10px, transparent 10px);
+  }
+  ul {
+    @apply m-0 list-none break-words;
+    hyphens: auto;
+    &:first-child {
+      @apply mt-0;
+    }
+  }
+  li {
+    @apply my-2;
   }
 }
 

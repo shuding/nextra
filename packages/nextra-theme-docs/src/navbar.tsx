@@ -122,7 +122,7 @@ export default function Navbar({ flatDirectories, items }: NavBarProps) {
               })
             : null}
 
-          <div className="flex-1">
+          <div>
             <div className="hidden md:inline-block mr-2">
               {config.customSearch ||
                 (config.search ? (
