@@ -152,7 +152,7 @@ const Search = ({ directories = [] }: SearchProps) => {
         />
         {show ? null : (
           <div className="hidden sm:flex absolute inset-y-0 right-0 py-1.5 pr-1.5 select-none pointer-events-none">
-            <kbd className="inline-flex items-center px-2 font-mono text-sm font-medium bg-white text-gray-400 dark:text-gray-800 dark:border-gray-400 border rounded">
+            <kbd className="inline-flex items-center px-1.5 font-mono text-sm font-medium bg-white text-gray-400 dark:text-gray-800 dark:border-gray-400 border rounded">
               /
             </kbd>
           </div>

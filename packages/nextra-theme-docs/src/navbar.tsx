@@ -107,8 +107,10 @@ export default function Navbar({ flatDirectories, items }: NavBarProps) {
                     <a
                       className={cn(
                         'nextra-nav-link',
-                        'no-underline whitespace-nowrap mr-4 hidden md:inline-block',
-                        isActive ? 'active text-current' : 'text-gray-500'
+                        'no-underline whitespace-nowrap pr-4 hidden md:inline-block',
+                        isActive
+                          ? 'active text-current font-medium'
+                          : 'text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200'
                       )}
                       aria-selected={isActive}
                       {...(page.newWindow

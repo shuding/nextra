@@ -21,14 +21,14 @@ const NextLink = ({ route, title, isRTL }: LinkProps) => {
     <Link href={route}>
       <a
         className={cn(
-          'w-full text-lg font-medium p-4 -m-4 no-underline transition-colors text-gray-600 dark:text-gray-300 dark:hover:text-primary-500 hover:text-primary-500 inline-flex items-center justify-end rounded',
+          'text-base md:text-lg font-medium p-4 -m-4 no-underline transition-colors text-gray-600 dark:text-gray-300 dark:hover:text-primary-500 hover:text-primary-500 inline-flex items-center justify-end rounded',
           { 'ml-2': !isRTL, 'mr-2': isRTL }
         )}
         title={title}
       >
         {title}
         <ArrowRight
-          height={24}
+          height={20}
           className={cn('transform inline flex-shrink-0', {
             'rotate-180 mr-1': isRTL,
             'ml-1': !isRTL
@@ -44,13 +44,13 @@ const PrevLink = ({ route, title, isRTL }: LinkProps) => {
     <Link href={route}>
       <a
         className={cn(
-          'text-lg font-medium p-4 -m-4 no-underline transition-colors text-gray-600 dark:text-gray-300 dark:hover:text-primary-500 hover:text-primary-500 flex items-center rounded',
+          'text-base md:text-lg font-medium p-4 -m-4 no-underline transition-colors text-gray-600 dark:text-gray-300 dark:hover:text-primary-500 hover:text-primary-500 flex items-center rounded',
           { 'mr-2': !isRTL, 'ml-2': isRTL }
         )}
         title={title}
       >
         <ArrowRight
-          height={24}
+          height={20}
           className={cn('transform inline flex-shrink-0', {
             'rotate-180 mr-1': !isRTL,
             'ml-1': isRTL
@@ -80,12 +80,12 @@ export const NavLinks = ({
 
   return (
     <div className="nextra-navigation-links pt-8 mb-8 border-t dark:border-neutral-800 flex flex-row items-center justify-between">
-      <div className="flex-1 min-w-0">
+      <div className="flex-1 min-w-0 flex justify-start">
         {prev ? (
           <PrevLink route={prev.route} title={prev.title} isRTL={isRTL} />
         ) : null}
       </div>
-      <div className="flex-1 min-w-0 text-right">
+      <div className="flex-1 min-w-0 flex justify-end">
         {next ? (
           <NextLink route={next.route} title={next.title} isRTL={isRTL} />
         ) : null}

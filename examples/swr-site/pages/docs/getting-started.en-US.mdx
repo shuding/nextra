@@ -51,10 +51,12 @@ determine the current state of the request, and return the corresponding UI.
 
 ## Make It Reusable
 
+Here's a JavaScript expression: `const a = 1 + 2{:js}`.
+
 When building a web app, you might need to reuse the data in many places of the UI. It is incredibly easy to create reusable data hooks
 on top of SWR:
 
-```jsx
+```jsx /data/
 function useUser (id) {
   const { data, error } = useSWR(`/api/user/${id}`, fetcher)
 

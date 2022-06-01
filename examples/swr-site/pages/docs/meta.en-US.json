@@ -1,4 +1,8 @@
 {
+  "--- hey": {
+    "title": "Getting Started",
+    "type": "separator"
+  },
   "getting-started": "Getting Started",
   "options": "Options",
   "global-configuration": "Global Configuration",
@@ -12,6 +16,10 @@
   "arguments": "Arguments",
   "mutation": "Mutation",
   "pagination": "Pagination",
+  "--- my_new_separator": {
+    "title": "Advanced",
+    "type": "separator"
+  },
   "prefetching": "Prefetching",
   "with-nextjs": "Next.js SSG and SSR",
   "typescript": "TypeScript :)",
