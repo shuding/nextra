@@ -18,6 +18,7 @@ import LocaleSwitch from './locale-switch'
 import ThemeSwitch from './theme-switch'
 import ArrowRight from './icons/arrow-right'
 import Collapse from './components/collapse'
+import renderComponent from './utils/render-component'
 
 const TreeState: Record<string, boolean> = {}
 
@@ -99,6 +100,7 @@ function FolderImpl({ item, anchors }: FolderProps) {
       <Collapse open={open}>
         {Array.isArray(item.children) && (
           <Menu
+            submenu
             directories={item.children}
             base={item.route}
             anchors={anchors}
@@ -108,11 +110,42 @@ function FolderImpl({ item, anchors }: FolderProps) {
     </li>
   )
 }
+
+interface SeparatorProps {
+  title: string | undefined
+  topLevel: boolean
+}
+function Separator({ title, topLevel }: SeparatorProps) {
+  const hasTitle = typeof title !== 'undefined'
+
+  const { sidebarSubtitle } = useConfig()
+
+  return (
+    <li
+      className={cn(
+        topLevel ? 'first:mt-1' : 'first:mt-2',
+        hasTitle ? 'mt-5 mb-2' : 'my-4'
+      )}
+    >
+      {hasTitle ? (
+        <div className="text-sm mx-2 py-1.5 font-semibold no-underline text-gray-900 dark:text-gray-100">
+          {sidebarSubtitle
+            ? renderComponent(sidebarSubtitle, { title })
+            : title}
+        </div>
+      ) : (
+        <hr className="mx-2 border-t border-gray-200 dark:border-primary-100 dark:border-opacity-10" />
+      )}
+    </li>
+  )
+}
+
 interface FileProps {
   item: PageItem | Item
   anchors: string[]
+  topLevel: boolean
 }
-function File({ item, anchors }: FileProps) {
+function File({ item, anchors, topLevel }: FileProps) {
   const { asPath, locale } = useRouter()
   const route = getFSRoute(asPath, locale)
   const active = route === item.route + '/' || route + '/' === item.route + '/'
@@ -121,8 +154,11 @@ function File({ item, anchors }: FileProps) {
   const { setMenu } = useMenuContext()
 
   const title = item.title
-  // if (item.title.startsWith('> ')) {
-  // title = title.substr(2)
+
+  if (item.type === 'separator') {
+    return <Separator title={title} topLevel={topLevel} />
+  }
+
   if (anchors && anchors.length) {
     if (active) {
       let activeIndex = 0
@@ -134,6 +170,7 @@ function File({ item, anchors }: FileProps) {
         }
         return { text, slug }
       })
+
       return (
         <li className={active ? 'active' : ''}>
           <Link href={(item as PageItem).href || item.route}>
@@ -194,19 +231,28 @@ function File({ item, anchors }: FileProps) {
     </li>
   )
 }
+
 interface MenuProps {
   directories: PageItem[] | Item[]
   anchors: string[]
   base?: string
+  submenu?: boolean
 }
-function Menu({ directories, anchors }: MenuProps) {
+function Menu({ directories, anchors, submenu }: MenuProps) {
   return (
     <ul>
       {directories.map(item => {
         if (item.children && (item.children.length || !item.withIndexPage)) {
           return <Folder key={item.name} item={item} anchors={anchors} />
         }
-        return <File key={item.name} item={item} anchors={anchors} />
+        return (
+          <File
+            key={item.name}
+            item={item}
+            anchors={anchors}
+            topLevel={!submenu}
+          />
+        )
       })}
     </ul>
   )
@@ -268,7 +314,7 @@ export default function Sidebar({
   return (
     <>
       {includePlaceholder && asPopover ? (
-        <div className="hidden md:block md:w-64 h-0 flex-shrink-0" />
+        <div className="hidden xl:block w-64 h-0 flex-shrink-0" />
       ) : null}
       <aside
         className={cn(

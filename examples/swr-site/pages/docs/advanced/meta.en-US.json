@@ -4,6 +4,10 @@
       "footer": false
     }
   },
+  "--- yoo": {
+    "title": "Do Not Use",
+    "type": "separator"
+  },
   "cache": "Cache",
   "performance": "Performance",
   "react-native": "React Native",

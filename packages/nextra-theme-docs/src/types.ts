@@ -44,6 +44,7 @@ export interface DocsThemeConfig {
   projectLinkIcon?: React.FC<{ locale: string }>
   projectChatLink?: string
   projectChatLinkIcon?: React.FC<{ locale: string }>
+  sidebarSubtitle?: React.FC<{ title: string }>
   floatTOC?: boolean
   banner?: React.FC<{ locale: string }>
   bannerKey?: string

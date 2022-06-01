@@ -39,6 +39,16 @@ export interface DocsItem extends Omit<PageMapItem, 'children'> {
   withIndexPage?: boolean
 }
 
+function findFirstRoute(items: DocsItem[]): string | undefined {
+  for (const item of items) {
+    if (item.route) return item.route
+    if (item.children) {
+      const route = findFirstRoute(item.children)
+      if (route) return route
+    }
+  }
+}
+
 export default function normalizePages({
   list,
   locale,
@@ -90,7 +100,7 @@ export default function normalizePages({
   let activeThemeContext = pageThemeContext
   let activePath: Item[] = []
 
-  let metaKeyIndex = 0
+  let metaKeyIndex = -1
 
   const fallbackMeta = meta['*'] || {}
   delete fallbackMeta.title
@@ -125,7 +135,7 @@ export default function normalizePages({
           if (key !== '*') {
             items.push({
               name: key,
-              route: '#',
+              route: '',
               ...meta[key]
             })
           }
@@ -164,8 +174,10 @@ export default function normalizePages({
 
     const extendedMeta = extendMeta(meta[a.name], fallbackMeta)
 
-    const title = extendedMeta.title || getTitle(a.name)
     const type = extendedMeta.type || 'doc'
+    const title =
+      extendedMeta.title ||
+      (type === 'separator' ? undefined : getTitle(a.name))
     const hidden = extendedMeta.hidden
 
     const extendedPageThemeContext = {
@@ -266,8 +278,9 @@ export default function normalizePages({
 
           // If it's a page with children inside, we inject itself as a page too.
           if (normalizedChildren.flatDirectories.length) {
-            pageItem.firstChildRoute =
-              normalizedChildren.flatDirectories[0].route
+            pageItem.firstChildRoute = findFirstRoute(
+              normalizedChildren.flatDirectories
+            )
             topLevelPageItems.push(pageItem)
           } else if (pageItem.withIndexPage) {
             topLevelPageItems.push(pageItem)
@@ -314,6 +327,7 @@ export default function normalizePages({
         }
         break
       case 'doc':
+      case 'separator':
         if (isCurrentDocsTree) {
           docsDirectories.push(docsItem)
         }

@@ -129,6 +129,14 @@ export default {
       </>
     );
   },
+  sidebarSubtitle: ({ title }) => {
+    return (
+      <div style={{ display: "flex", gap: ".5rem", alignItems: "center" }}>
+        <Logo height={6} />
+        {title}
+      </div>
+    );
+  },
   footerEditLink: ({ locale }) => {
     switch (locale) {
       case "zh-CN":
