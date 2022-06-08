@@ -9,8 +9,7 @@
     "title": "Docs",
     "type": "page",
     "theme": {
-      "pagination": true,
-      "sidebar": true
+      "toc": true
     }
   },
   "examples": {
