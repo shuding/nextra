@@ -45,7 +45,6 @@ const HeaderLink = ({
   const slug = slugger.slug(ReactDOMServer.renderToStaticMarkup(children))
   return (
     <Tag {...props}>
-      <span className="subheading-anchor" id={slug} />
       <a href={'#' + slug} className="subheading">
         {children}
         <span className="anchor-icon" aria-hidden>

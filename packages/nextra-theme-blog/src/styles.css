@@ -17,22 +17,16 @@ article img {
 a.subheading {
   text-decoration: none !important;
   color: unset !important;
+
+  &:hover .anchor-icon {
+    opacity: 1;
+  }
 }
 
 h1 {
   letter-spacing: -0.03em;
 }
 
-.subheading-anchor {
-  margin-top: -2em;
-  display: inline-block;
-  position: absolute;
-  width: 1px;
-}
-
-.subheading-anchor + a:hover .anchor-icon {
-  opacity: 1;
-}
 .anchor-icon {
   opacity: 0;
   @apply ml-2 text-gray-500;
