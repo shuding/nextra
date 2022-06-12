@@ -1,6 +1,6 @@
 {
   "name": "nextra-theme-blog",
-  "version": "2.0.0-alpha.54",
+  "version": "2.0.0-alpha.55",
   "description": "A Nextra theme for blogs.",
   "main": "index.js",
   "repository": "https://github.com/shuding/nextra-theme-blog.git",
