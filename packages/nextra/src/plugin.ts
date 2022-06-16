@@ -1,4 +1,4 @@
-import { PageMapItem } from './types'
+import { NextraConfig, PageMapItem } from './types'
 const { readdir, readFile } = fs
 import fs from 'graceful-fs'
 import util from 'util'
@@ -99,10 +99,8 @@ export class PageMapCache {
 export const pageMapCache = new PageMapCache()
 
 class NextraPlugin {
-  config: any
-  constructor(nextraConfig: any) {
-    this.config = nextraConfig
-  }
+  constructor(private config: NextraConfig) {}
+
   apply(compiler: Compiler) {
     compiler.hooks.beforeCompile.tapAsync(
       'NextraPlugin',
