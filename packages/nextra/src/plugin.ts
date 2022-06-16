@@ -1,4 +1,4 @@
-import { PageMapItem } from './types'
+import { NextraConfig, PageMapItem } from './types'
 import fs from 'graceful-fs'
 import util from 'util'
 import { getLocaleFromFilename, parseJsonFile, removeExtension } from './utils'
@@ -98,16 +98,14 @@ export class PageMapCache {
 
 export const pageMapCache = new PageMapCache()
 
-class NextraPlugin {
-  config: any
-  constructor(nextraConfig: any) {
-    this.config = nextraConfig
-  }
+export class NextraPlugin {
+  constructor(private config: NextraConfig) {}
+
   apply(compiler: Compiler) {
     compiler.hooks.beforeCompile.tapAsync(
       'NextraPlugin',
       async (_, callback) => {
-        if (this.config && this.config.unstable_flexsearch) {
+        if (this.config?.unstable_flexsearch) {
           // Restore the search data from the cache.
           restoreCache()
         }
@@ -122,5 +120,3 @@ class NextraPlugin {
     )
   }
 }
-
-export { NextraPlugin }
