@@ -23,7 +23,7 @@ module.exports =
 
     if (locales) {
       console.log(
-        '[Nextra] You have Next.js i18n enabled, read here (TODO: link) for the docs.'
+        '[Nextra] You have Next.js i18n enabled, read here (https://nextjs.org/docs/advanced-features/i18n-routing) for the docs.'
       )
     }
 
