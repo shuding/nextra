@@ -108,13 +108,17 @@ export default function Navbar({ flatDirectories, items }: NavBarProps) {
                       className={cn(
                         'nextra-nav-link',
                         'no-underline whitespace-nowrap p-2 -ml-2 hidden md:inline-block',
-                        isActive
-                          ? 'active text-current font-medium'
-                          : 'text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200'
+                        !isActive || page.newWindow
+                          ? 'text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200'
+                          : 'active text-current font-medium'
                       )}
                       aria-selected={isActive}
                       {...(page.newWindow
-                        ? { target: '_blank', rel: 'noopener noreferrer' }
+                        ? {
+                            target: '_blank',
+                            rel: 'noopener noreferrer',
+                            'aria-selected': false
+                          }
                         : {})}
                     >
                       {page.title}
