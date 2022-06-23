@@ -214,7 +214,8 @@ const Content: React.FC<LayoutProps> = ({
                 {activeType === 'page' ||
                 hideToc ||
                 themeContext.layout !== 'default' ? (
-                  themeContext.layout === 'full' ? null : (
+                  themeContext.layout === 'full' ||
+                  themeContext.layout === 'raw' ? null : (
                     <div className="nextra-toc w-64 hidden xl:block text-sm px-4 order-last flex-shrink-0" />
                   )
                 ) : (
