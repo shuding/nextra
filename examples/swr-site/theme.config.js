@@ -26,7 +26,9 @@ const TITLE_WITH_TRANSLATIONS = {
   ko: "데이터 가져오기를 위한 React Hooks",
   ru: "React хуки для выборки данных",
 };
-
+/**
+ * @type {import('nextra-theme-docs').DocsThemeConfig}
+ */
 export default {
   github: "https://github.com/vercel/swr",
   docsRepositoryBase: "https://github.com/vercel/swr-site/blob/master/pages",
@@ -250,5 +252,5 @@ export default {
     { locale: "ko", text: "한국어" },
     { locale: "ru", text: "Русский" },
   ],
-  gitTimestamp: "Last updated on",
+  gitTimestamp: "Last updated on"
 };

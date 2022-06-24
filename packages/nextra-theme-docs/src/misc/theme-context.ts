@@ -1,3 +1,5 @@
+import { PageTheme } from '../types';
+
 export default <PageTheme>{
   navbar: true,
   sidebar: true,
@@ -9,13 +11,3 @@ export default <PageTheme>{
   breadcrumb: true
 }
 
-export type PageTheme = {
-  navbar: boolean
-  sidebar: boolean
-  toc: boolean
-  pagination: boolean
-  footer: boolean
-  layout: 'default' | 'full' | 'raw'
-  typesetting: 'default' | 'article'
-  breadcrumb: boolean
-}

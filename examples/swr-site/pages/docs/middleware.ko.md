@@ -113,7 +113,7 @@ useSWR(key, fetcher, { use: [logger] })
 
 요청이 발생할 때마다, SWR 키가 콘솔에 출력됩니다.
 
-```txt
+```plaintext
 SWR Request: /api/user1
 SWR Request: /api/user2
 ```

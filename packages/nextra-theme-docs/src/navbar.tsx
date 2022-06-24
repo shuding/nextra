@@ -75,45 +75,46 @@ export default function Navbar({ flatDirectories, items }: NavBarProps) {
 
           {items
             ? items.map(page => {
-                if (page.hidden) return null
+              if (page.hidden) return null
 
-                let href = page.href || page.route || '#'
+              let href = page.href || page.route || '#'
 
-                // If it's a directory
-                if (page.children) {
-                  href =
-                    (page.withIndexPage ? page.route : page.firstChildRoute) ||
-                    href
-                }
+              // If it's a directory
+              if (page.children) {
+                href =
+                  (page.withIndexPage ? page.route : page.firstChildRoute) ||
+                  href
+              }
 
-                const isActive =
-                  page.route === activeRoute ||
-                  activeRoute.startsWith(page.route + '/')
+              const isActive =
+                page.route === activeRoute ||
+                activeRoute.startsWith(page.route + '/')
 
-                return (
-                  <Link href={href} key={page.route}>
-                    <a
-                      className={cn(
-                        'nextra-nav-link',
-                        'no-underline whitespace-nowrap p-2 -ml-2 hidden md:inline-block',
-                        !isActive || page.newWindow
-                          ? 'text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200'
-                          : 'active text-current font-medium'
-                      )}
-                      aria-selected={isActive}
-                      {...(page.newWindow
-                        ? {
-                            target: '_blank',
-                            rel: 'noopener noreferrer',
-                            'aria-selected': false
-                          }
-                        : {})}
-                    >
-                      {page.title}
-                    </a>
-                  </Link>
-                )
-              })
+              return (
+                <Link href={href} key={page.route}>
+                  <a
+                    className={cn(
+                      'nextra-nav-link',
+                      'no-underline whitespace-nowrap p-2 -ml-2 hidden md:inline-block',
+                      !isActive || page.newWindow
+                        ? 'text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200'
+                        : 'active text-current font-medium'
+                    )}
+                    {...(page.newWindow
+                      ? {
+                        target: '_blank',
+                        rel: 'noopener noreferrer',
+                        'aria-selected': false
+                      }
+                      : {
+                        'aria-selected': isActive
+                      })}
+                  >
+                    {page.title}
+                  </a>
+                </Link>
+              )
+            })
             : null}
 
           <div>

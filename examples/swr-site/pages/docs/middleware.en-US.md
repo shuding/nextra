@@ -112,7 +112,7 @@ useSWR(key, fetcher, { use: [logger] })
 
 Every time the request is fired, it outputs the SWR key to the console:
 
-```bash
+```plaintext
 SWR Request: /api/user1
 SWR Request: /api/user2
 ```

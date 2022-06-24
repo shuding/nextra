@@ -89,7 +89,7 @@ import { Welcome } from 'components/diagrams/welcome'
 
 传统上，我们在顶级组件中使用 `useEffect` 请求一次数据，然后通过 props 将其传递给子组件（注意，我们现在不处理错误状态）：
 
-```jsx bg=7:11,17,18,27
+```jsx {7-11,17-18,27}
 // 页面组件
 
 function Page() {
@@ -135,7 +135,7 @@ function Avatar({ user }) {
 
 SWR 完美地解决了这个问题。使用我们刚刚创建的 `useUser` hook，可以将代码重构为:
 
-```jsx bg=20,26
+```jsx {20,26}
 // 页面组件
 
 function Page() {

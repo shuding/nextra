@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import cn from 'classnames'
 import Slugger from 'github-slugger'
 import { Heading } from 'nextra'
@@ -18,13 +18,11 @@ const createEditUrl = (repository?: string, filepath?: string) => {
 
   switch (repo.type) {
     case 'github':
-      return `https://github.com/${repo.owner}/${repo.name}/blob/${
-        repo.branch || 'main'
-      }/${repo.subdir || 'pages'}${filepath}`
+      return `https://github.com/${repo.owner}/${repo.name}/blob/${repo.branch || 'main'
+        }/${repo.subdir || 'pages'}${filepath}`
     case 'gitlab':
-      return `https://gitlab.com/${repo.owner}/${repo.name}/-/blob/${
-        repo.branch || 'master'
-      }/${repo.subdir || 'pages'}${filepath}`
+      return `https://gitlab.com/${repo.owner}/${repo.name}/-/blob/${repo.branch || 'master'
+        }/${repo.subdir || 'pages'}${filepath}`
   }
 
   return '#'
@@ -45,15 +43,13 @@ const useCreateFeedbackUrl = (
 
   switch (repo.type) {
     case 'github':
-      return `https://github.com/${repo.owner}/${
-        repo.name
-      }/issues/new?title=${encodeURIComponent(
-        `Feedback for “${pageTitle}”`
-      )}&labels=${labels || ''}`
+      return `https://github.com/${repo.owner}/${repo.name
+        }/issues/new?title=${encodeURIComponent(
+          `Feedback for “${pageTitle}”`
+        )}&labels=${labels || ''}`
     case 'gitlab':
-      return `https://gitlab.com/${repo.owner}/${repo.name}/-/blob/${
-        repo.branch || 'master'
-      }/${repo.subdir || 'pages'}${filepath}`
+      return `https://gitlab.com/${repo.owner}/${repo.name}/-/blob/${repo.branch || 'master'
+        }/${repo.subdir || 'pages'}${filepath}`
   }
 
   return '#'
@@ -65,7 +61,9 @@ const EditPageLink = ({
   filepath
 }: {
   repository?: string
-  text: string
+  text: React.ReactNode | React.FC<{
+    locale?: string
+  }>
   filepath: string
 }) => {
   const url = createEditUrl(repository, filepath)
@@ -79,8 +77,8 @@ const EditPageLink = ({
     >
       {text
         ? renderComponent(text, {
-            locale
-          })
+          locale
+        })
         : 'Edit this page'}
     </a>
   )
@@ -88,12 +86,12 @@ const EditPageLink = ({
 
 const FeedbackLink = ({
   repository,
-  text,
+  feedbackLink,
   filepath,
   labels
 }: {
   repository?: string
-  text: string
+  feedbackLink: ReactNode | React.FC<{ locale?: string }>
   filepath: string
   labels?: string
 }) => {
@@ -106,10 +104,10 @@ const FeedbackLink = ({
       target="_blank"
       rel="noreferrer"
     >
-      {text
-        ? renderComponent(text, {
-            locale
-          })
+      {feedbackLink
+        ? renderComponent(feedbackLink, {
+          locale
+        })
         : 'Feedback'}
     </a>
   )
@@ -195,8 +193,8 @@ export default function ToC({
 
   headings = headings
     ? headings.filter(
-        heading => heading.type === 'heading' && heading.depth > 1
-      )
+      heading => heading.type === 'heading' && heading.depth > 1
+    )
     : headings
 
   const hasHeadings = headings && headings.length > 0
@@ -240,7 +238,7 @@ export default function ToC({
                 filepath={filepathWithName}
                 repository={config.docsRepositoryBase}
                 labels={config.feedbackLabels}
-                text={config.feedbackLink}
+                feedbackLink={config.feedbackLink}
               />
             ) : null}
 

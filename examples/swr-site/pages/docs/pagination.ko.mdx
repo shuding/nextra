@@ -23,7 +23,7 @@ import { Pagination } from 'components/diagrams/pagination'
 ...전형적인 페이지네이션 UI입니다. `useSWR`을 사용해 쉽게 구현하는 방법을
 확인해 봅시다.
 
-```jsx bg=5
+```jsx {5}
 function App () {
   const [pageIndex, setPageIndex] = useState(0);
 
@@ -42,7 +42,7 @@ function App () {
 
 이 "페이지 컴포넌트"를 위한 추상화를 생성할 수도 있습니다.
 
-```jsx bg=13
+```jsx {13}
 function Page ({ index }) {
   const { data } = useSWR(`/api/data?page=${index}`, fetcher);
 
@@ -65,7 +65,7 @@ function App () {
 SWR의 캐시로 인해 다음 페이지를 프리로드할 수 있는 이점을 갖습니다. 숨겨진 div 내에 다음 페이지를 렌더링하므로 SWR이 다음 페이지의 데이터 가져오기를 트리거할 수 있습니다.
 사용자가 다음 페이지로 이동하면 데이터가 이미 있습니다.
 
-```jsx bg=6
+```jsx {6}
 function App () {
   const [pageIndex, setPageIndex] = useState(0);
 
@@ -95,7 +95,7 @@ import { Infinite } from 'components/diagrams/infinite'
 이를 구현하기 위해선 페이지에 **동적인 수의 요청**을 만들어야 합니다.
 React Hook은 [몇 가지 규칙](https://reactjs.org/docs/hooks-rules.html)을 갖고 있어, 뭔가 다음과 같이 할 수 **없습니다**.
 
-```jsx bg=5,6,7,8,9
+```jsx {5-9}
 function App () {
   const [cnt, setCnt] = useState(1)
 
@@ -118,7 +118,7 @@ function App () {
 
 대신에 이를 위해 생성했던 `<Page />` 추상화를 사용합니다.
 
-```jsx bg=5,6,7
+```jsx {5-7}
 function App () {
   const [cnt, setCnt] = useState(1)
 
@@ -142,7 +142,7 @@ function App () {
 최상위 레벨 UI(`<App />`)가 각 페이지 내의 데이터를 필요로하므로,
 `<Page />` 해결책을 더는 사용할 수 없습니다.
 
-```jsx bg=10
+```jsx {10}
 function App () {
   const [cnt, setCnt] = useState(1)
 
@@ -226,7 +226,7 @@ GET /users?page=0&limit=10
 ]
 ```
 
-```jsx bg=4,5,6,7,10
+```jsx {4-7,10}
 // 각 페이지의 SWR 키를 얻기 위한 함수,
 // `fetcher`에 의해 허용된 값을 반환합니다.
 // `null`이 반환된다면, 페이지의 요청은 시작되지 않습니다.
@@ -285,7 +285,7 @@ function App () {
 
 이제 API가 커서를 요구하고 데이터와 함께 다음 커서를 반환한다고 해봅시다.
 
-```
+```plaintext
 GET /users?cursor=123&limit=10
 {
   data: [

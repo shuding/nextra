@@ -17,11 +17,11 @@ import defaultConfig from './misc/default.config'
 import { getFSRoute } from './utils/get-fs-route'
 import { MenuContext } from './utils/menu-context'
 import normalizePages from './utils/normalize-pages'
-import { DocsThemeConfig } from './types'
+import { DocsThemeConfig, Meta, PageTheme } from './types'
 import './polyfill'
 import Breadcrumb from './breadcrumb'
 import renderComponent from './utils/render-component'
-import { PageTheme } from './misc/theme-context'
+
 
 const isProduction = process.env.NODE_ENV === 'production'
 
@@ -125,11 +125,10 @@ const Body: React.FC<BodyProps> = ({
     </React.Fragment>
   )
 }
-
 interface LayoutProps {
   filename: string
   pageMap: PageMapItem[]
-  meta: Record<string, any>
+  meta: Meta
   titleText: string | null
   headings?: Heading[]
   timestamp?: number
@@ -255,8 +254,10 @@ const Content: React.FC<LayoutProps> = ({
     </React.Fragment>
   )
 }
-
-const createLayout = (opts: PageOpt, _config: DocsThemeConfig) => {
+interface DocsLayoutProps extends PageOpt {
+  meta: Meta
+}
+const createLayout = (opts: DocsLayoutProps, _config: DocsThemeConfig) => {
   const extendedConfig = Object.assign({}, defaultConfig, _config)
   let layoutUsed = false
   const Page = ({ children }: { children: React.ReactChildren }) => {

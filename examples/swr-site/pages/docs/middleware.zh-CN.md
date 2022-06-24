@@ -112,7 +112,7 @@ useSWR(key, fetcher, { use: [logger] })
 
 每次触发请求时，它都会将 SWR key 输出到控制台：
 
-```
+```plaintext
 SWR Request: /api/user1
 SWR Request: /api/user2
 ```
