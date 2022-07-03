@@ -26,7 +26,7 @@ const fetcher = (...args) => fetch(...args).then(res => res.json())
 ```
 
 <Callout emoji="💡">
-  GraphQL API 또는 Axios와 같은 라이브러리를 사용하려면 여러분만의 fetcher 함수를 생성하면 됩니다. 
+  GraphQL API 또는 Axios와 같은 라이브러리를 사용하려면 여러분만의 fetcher 함수를 생성하면 됩니다.
   <Link href="/docs/data-fetching"><a href="/docs/data-fetching">여기</a></Link>에서 더 많은 예시를 확인하세요.
 </Callout>
 
@@ -93,7 +93,7 @@ import { Welcome } from 'components/diagrams/welcome'
 
 전통적으로는 최상위 레벨 컴포넌트에서 `useEffect`를 사용해 데이터를 한 번 가져오고, 이를 props를 통해 자식 컴포넌트에 전달합니다(현재는 에러 상태를 처리하지 않습니다)
 
-```jsx bg=7:11,17,18,27
+```jsx {7-11,17-18,27}
 // 페이지 컴포넌트
 
 function Page () {
@@ -141,7 +141,7 @@ function Avatar ({ user }) {
 
 SWR은 이 문제를 완벽하게 해결합니다. 우리가 막 생성한 `useUser` hook을 사용해 다음과 같이 리팩토링할 수 있습니다.
 
-```jsx bg=20,26
+```jsx {20,26}
 // 페이지 컴포넌트
 
 function Page () {

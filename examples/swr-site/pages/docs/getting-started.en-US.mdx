@@ -26,7 +26,7 @@ const fetcher = (...args) => fetch(...args).then(res => res.json())
 ```
 
 <Callout emoji="💡">
-  If you want to use GraphQL API or libs like Axios, you can create your own fetcher function. 
+  If you want to use GraphQL API or libs like Axios, you can create your own fetcher function.
   Check <Link href="/docs/data-fetching"><a href="/docs/data-fetching">here</a></Link> for more examples.
 </Callout>
 
@@ -95,7 +95,7 @@ import { Welcome } from 'components/diagrams/welcome'
 
 Traditionally, we fetch data once using `useEffect` in the top level component, and pass it to child components via props (notice that we don't handle error state for now):
 
-```jsx {7-11,17,18,27}
+```jsx {7-11,17-18,27}
 // page component
 
 function Page () {
@@ -143,7 +143,7 @@ components inside the page content can be dynamic, and the top level component m
 
 SWR solves the problem perfectly. With the `useUser` hook we just created, the code can be refactored to:
 
-```jsx bg=20,26
+```jsx {20,26}
 // page component
 function Page () {
   return <div>

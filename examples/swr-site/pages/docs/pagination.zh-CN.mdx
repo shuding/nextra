@@ -22,7 +22,7 @@ import { Pagination } from 'components/diagrams/pagination'
 
 ...这是一个典型的分页 UI。我们来看看如何用 `useSWR` 轻松实现它：
 
-```jsx bg=5
+```jsx {5}
 function App () {
   const [pageIndex, setPageIndex] = useState(0);
 
@@ -41,7 +41,7 @@ function App () {
 
 此外，我们可以为这个 "page 组件" 创建一个抽象：
 
-```jsx bg=13
+```jsx {13}
 function Page ({ index }) {
   const { data } = useSWR(`/api/data?page=${index}`, fetcher);
 
@@ -63,7 +63,7 @@ function App () {
 
 SWR 的缓存会让我们在预先加载下一页方面受益匪浅。我们在一个 hidden 的 div 中渲染下一页，所以 SWR 将触发对下一页的数据请求。当用户导航到下一页时，数据已经加载好了：
 
-```jsx bg=6
+```jsx {6}
 function App () {
   const [pageIndex, setPageIndex] = useState(0);
 
@@ -90,7 +90,7 @@ import { Infinite } from 'components/diagrams/infinite'
 
 要实现这一点，我们需要在这个页面 **动态生成请求数**。React Hooks 有 [2 个规则](https://reactjs.org/docs/hooks-rules.html)，所以我们 **不能** 写下面的代码：
 
-```jsx bg=5,6,7,8,9
+```jsx {5-9}
 function App () {
   const [cnt, setCnt] = useState(1)
 
@@ -113,7 +113,7 @@ function App () {
 
 相反，我们可以使用创建的 `<Page />` 抽象来实现它：
 
-```jsx bg=5,6,7
+```jsx {5-7}
 function App () {
   const [cnt, setCnt] = useState(1)
 
@@ -135,7 +135,7 @@ function App () {
 
 比如，我们仍然实现相同的 "Load More" UI，但还需要显示一个 item 总数的数字。我们不能再使用 `<Page />` 这个解决方案了，因为顶级 UI (`<App />`) 需要每个页面的数据：
 
-```jsx bg=10
+```jsx {10}
 function App () {
   const [cnt, setCnt] = useState(1)
 
@@ -217,7 +217,7 @@ GET /users?page=0&limit=10
 ]
 ```
 
-```jsx bg=4,5,6,7,10
+```jsx {4-7,10}
 // 一个函数，拿到每个页面的 key，
 // `fetcher` 接受它的返回值。
 // 如果返回是 `null`，该页面不会开始请求。

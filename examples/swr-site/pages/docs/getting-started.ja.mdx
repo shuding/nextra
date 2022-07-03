@@ -27,7 +27,7 @@ const fetcher = (...args) => fetch(...args).then(res => res.json())
 
 <Callout emoji="💡">
   もし GraphQL API または Axios のようなライブラリを使いたい場合は、独自のフェッチャー関数を作ることができます。
-  その他の例は<Link href="/docs/data-fetching"><a href="/docs/data-fetching">こちら</a></Link>をご覧ください。  
+  その他の例は<Link href="/docs/data-fetching"><a href="/docs/data-fetching">こちら</a></Link>をご覧ください。
 </Callout>
 
 そして、 `useSWR` をインポートして、任意の関数コンポーネント内で使用することができます：
@@ -92,7 +92,7 @@ import { Welcome } from 'components/diagrams/welcome'
 
 従来では、トップレベルのコンポーネントで `useEffect` を使用してデータを一度だけ取得し、 props を介して子コンポーネントに渡しています（現時点ではエラー状態を処理してないことに注意してください）:
 
-```jsx bg=7:11,17,18,27
+```jsx {7-11,17-18,27}
 // ページコンポーネント
 
 function Page () {
@@ -140,7 +140,7 @@ function Avatar ({ user }) {
 
 SWR はその問題を完璧に解決してくれます。 先ほど作成した `useUser` フックを使って、コードをリファクタリングしましょう：
 
-```jsx bg=20,26
+```jsx {20,26}
 // ページコンポーネント
 
 function Page () {
