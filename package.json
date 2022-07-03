@@ -6,22 +6,34 @@
   "scripts": {
     "dev": "next",
     "start": "next start",
-    "build": "next build"
+    "build": "next build ",
+    "lint": "next lint",
+    "schema": "ts-json-schema-generator -f tsconfig.json -p ./schema.d.ts -o ./public/schema.json -t Schema --minify"
   },
   "author": "Shu Ding",
   "license": "MIT",
   "dependencies": {
-    "next": "^12.1.0",
-    "nextra": "^1.1.0",
-    "nextra-theme-docs": "^1.2.2",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "next": "12.1.6",
+    "nextra": "2.0.0-alpha.56",
+    "nextra-theme-docs": "2.0.0-alpha.59",
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
   },
   "devDependencies": {
-    "prettier": "^2.0.5"
+    "@babel/core": "7.16.7",
+    "@types/node": "^18.0.1",
+    "@types/react": "17.0.37",
+    "autoprefixer": "10.2.6",
+    "csstype": "3.1.0",
+    "eslint": "8.10.0",
+    "eslint-config-next": "12.1.6",
+    "eslint-config-prettier": "8.4.0",
+    "postcss": "8.3.5",
+    "tailwindcss": "3.1.3",
+    "typescript": "4.7.4"
   },
   "prettier": {
-    "semi": false,
-    "singleQuote": true
+    "embeddedLanguageFormatting": "off",
+    "htmlWhitespaceSensitivity": "strict"
   }
 }
