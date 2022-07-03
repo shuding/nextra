@@ -11,8 +11,6 @@
     "vercel-build": "yarn workspace nextra run build && yarn workspace nextra-theme-docs run build && yarn build"
   },
   "dependencies": {
-    "prism-react-renderer": "^1.1.1",
-    "prismjs": "^1.22.0",
     "nextra": "workspace:*",
     "nextra-theme-docs": "workspace:*"
   }

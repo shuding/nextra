@@ -58,13 +58,9 @@ importers:
     specifiers:
       nextra: workspace:*
       nextra-theme-docs: workspace:*
-      prism-react-renderer: ^1.1.1
-      prismjs: ^1.22.0
     dependencies:
       nextra: link:../../packages/nextra
       nextra-theme-docs: link:../../packages/nextra-theme-docs
-      prism-react-renderer: 1.2.1
-      prismjs: 1.25.0
 
   examples/swr-site:
     specifiers:
@@ -104,7 +100,7 @@ importers:
       graceful-fs: ^4.2.6
       gray-matter: ^4.0.3
       p-limit: ^4.0.0
-      rehype-pretty-code: ^0.1.0
+      rehype-pretty-code: ^0.3.2
       remark-gfm: ^3.0.1
       shiki: 0.10.1
       slash: ^3.0.0
@@ -115,7 +111,7 @@ importers:
       graceful-fs: 4.2.9
       gray-matter: 4.0.3
       p-limit: 4.0.0
-      rehype-pretty-code: 0.1.0_shiki@0.10.1
+      rehype-pretty-code: 0.3.2_shiki@0.10.1
       remark-gfm: 3.0.1
       shiki: 0.10.1
       slash: 3.0.0
@@ -4078,16 +4074,6 @@ packages:
     engines: {node: '>= 0.8'}
     dev: true
 
-  /prism-react-renderer/1.2.1:
-    resolution: {integrity: sha512-w23ch4f75V1Tnz8DajsYKvY5lF7H1+WvzvLUcF0paFxkTHSp42RS0H5CttdN2Q8RR3DRGZ9v5xD/h3n8C8kGmg==}
-    peerDependencies:
-      react: '>=0.14.9'
-    dev: false
-
-  /prismjs/1.25.0:
-    resolution: {integrity: sha512-WCjJHl1KEWbnkQom1+SzftbtXMKQoezOCYs5rECqMN+jP+apI7ftoflyqigqzopSO3hMhTEb0mFClA8lkolgEg==}
-    dev: false
-
   /prop-types/15.8.1:
     resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==}
     dependencies:
@@ -4182,8 +4168,8 @@ packages:
     resolution: {integrity: sha512-p3VT+cOEgxFsRRA9X4lkI1E+k2/CtnKtU4gcxyaCUreilL/vqI6CdZ3wxVUx3UOUg+gnUOQQcRI7BmSI656MYA==}
     dev: false
 
-  /rehype-pretty-code/0.1.0_shiki@0.10.1:
-    resolution: {integrity: sha512-7SaedCOn5VcDGdllQeu3kBWC+/zbkD6ZE7iOALJzK79+v0K0qQpa1WqBwoxetTbCLwBTY9wC4CabEsDS3qj55g==}
+  /rehype-pretty-code/0.3.2_shiki@0.10.1:
+    resolution: {integrity: sha512-G7JZDlbaw22QqjuaQ46c+fkQhXC/AD9nMQO3bbnj86jD54uv1QcpyUtSd/elp49vRafM/wZI1XPrOvca0LTt/Q==}
     engines: {node: ^12.16.0 || >=13.2.0}
     peerDependencies:
       shiki: '*'

@@ -6,16 +6,35 @@ and Izo Hashimoto, based on Otomo's 1982 manga of the same name. The film had a 
 budget of ¥700 million ($5.5 million), making it the most expensive anime film at the time
 (until it was surpassed a year later by Kiki's Delivery Service).
 
-```js
-// test js
-console.log('hello, world')
+### Test `filename`, line highlighting and empty lines
+
+```js filename="test.js" {1}
+console.log('hello world')
+
+
+
+
+
+
+console.log('goodbye world')
 ```
 
-```scala
-// test scala (custom prism language)
+### Test `showLineNumbers` and word highlighting
+
+```scala showLineNumbers {2-4} /println/
 object Hello {
-    def main(args: Array[String]) = {
-        println("hello, world")
-    }
+  def main(args: Array[String]) = {
+    println("hello, world")
+  }
+}
+
+object Hello {
+  def main(args: Array[String]) = {
+    println("hello, world")
+  }
 }
 ```
+
+### Test highlighting inline code
+
+`import React from 'react'{:js}`
