@@ -1,5 +1,4 @@
 import { PageMapItem } from './types'
-const { readdir, readFile } = fs
 import fs from 'graceful-fs'
 import util from 'util'
 import { getLocaleFromFilename, parseJsonFile, removeExtension } from './utils'
@@ -9,6 +8,7 @@ import grayMatter from 'gray-matter'
 import { extension, findPagesDir, metaExtension } from './page-map'
 import { Compiler } from 'webpack'
 import { restoreCache } from './content-dump'
+const { readdir, readFile } = fs
 
 export async function collectFiles(
   dir: string,
