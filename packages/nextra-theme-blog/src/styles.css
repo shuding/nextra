@@ -42,13 +42,13 @@ h1 {
   @apply flex justify-end items-center mb-8;
 }
 .meta {
-  @apply flex-1 text-gray-400 mr-8;
+  @apply flex-1 text-gray-500 mr-8;
 }
 .meta .tag {
-  @apply inline-block px-1 rounded-md mr-1 text-sm leading-5 no-underline bg-gray-200 text-gray-400 select-none;
+  @apply inline-block px-1 rounded-md mr-1 text-sm leading-5 no-underline bg-gray-200 text-gray-600 select-none;
 }
 .dark .meta .tag {
-  @apply bg-gray-400 text-gray-100;
+  @apply bg-gray-700 text-gray-100;
 }
 
 .meta .tag:hover {
