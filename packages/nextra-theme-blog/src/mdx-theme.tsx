@@ -1,5 +1,5 @@
 import ReactDOMServer from 'react-dom/server'
-import { createContext, useContext, useEffect, useMemo, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import { MDXProvider } from '@mdx-js/react'
 import Slugger from 'github-slugger'
 import Link from 'next/link'
@@ -32,20 +32,19 @@ const H1 = ({ children }: { children?: React.ReactNode }) => {
   )
 }
 
-const HeaderLink = ({
-  tag: Tag,
-  children,
-  ...props
-}: {
-  tag: any
-  children: any
-}) => {
-  const slugger = useContext(SluggerContext)
-  // @ts-expect-error safe slugger from context
-  const slug = slugger.slug(ReactDOMServer.renderToStaticMarkup(children))
+interface ElementProps {
+  children?: React.ReactNode
+  id?: string
+}
+
+interface HeaderLinkProps extends ElementProps {
+  tag: keyof JSX.IntrinsicElements
+}
+
+const HeaderLink = ({ tag: Tag, children, ...props }: HeaderLinkProps) => {
   return (
     <Tag {...props}>
-      <a href={'#' + slug} className="subheading">
+      <a href={'#' + props.id} className="subheading">
         {children}
         <span className="anchor-icon" aria-hidden>
           #
@@ -55,7 +54,7 @@ const HeaderLink = ({
   )
 }
 
-const H2 = ({ children, ...props }: { children?: React.ReactNode }) => {
+const H2 = ({ children, ...props }: ElementProps) => {
   return (
     <HeaderLink tag="h2" {...props}>
       {children}
@@ -63,7 +62,7 @@ const H2 = ({ children, ...props }: { children?: React.ReactNode }) => {
   )
 }
 
-const H3 = ({ children, ...props }: { children?: React.ReactNode }) => {
+const H3 = ({ children, ...props }: ElementProps) => {
   return (
     <HeaderLink tag="h3" {...props}>
       {children}
@@ -71,7 +70,7 @@ const H3 = ({ children, ...props }: { children?: React.ReactNode }) => {
   )
 }
 
-const H4 = ({ children, ...props }: { children?: React.ReactNode }) => {
+const H4 = ({ children, ...props }: ElementProps) => {
   return (
     <HeaderLink tag="h4" {...props}>
       {children}
@@ -79,7 +78,7 @@ const H4 = ({ children, ...props }: { children?: React.ReactNode }) => {
   )
 }
 
-const H5 = ({ children, ...props }: { children?: React.ReactNode }) => {
+const H5 = ({ children, ...props }: ElementProps) => {
   return (
     <HeaderLink tag="h5" {...props}>
       {children}
@@ -87,7 +86,7 @@ const H5 = ({ children, ...props }: { children?: React.ReactNode }) => {
   )
 }
 
-const H6 = ({ children, ...props }: { children?: React.ReactNode }) => {
+const H6 = ({ children, ...props }: ElementProps) => {
   return (
     <HeaderLink tag="h6" {...props}>
       {children}
