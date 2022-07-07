@@ -34,6 +34,7 @@ export interface DocsThemeConfig {
         title: string
         meta: Record<string, any>
       }>
+  metaDescription?: string;
   logo?: React.ReactNode
   direction?: string
   i18n?: { locale: string; text: string; direction: string }[]

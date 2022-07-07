@@ -163,6 +163,7 @@ const Content: React.FC<LayoutProps> = ({
   const filepath = route.slice(0, route.lastIndexOf('/') + 1)
   const filepathWithName = filepath + filename
   const title = meta.title || titleText || 'Untitled'
+  const description = meta.description || config.metaDescription
   const isRTL = useMemo(() => {
     if (!config.i18n) return config.direction === 'rtl'
     const localeConfig = config.i18n.find(l => l.locale === locale)
@@ -178,7 +179,12 @@ const Content: React.FC<LayoutProps> = ({
   const headingArr = headings ?? []
   return (
     <React.Fragment>
-      <Head title={title} locale={locale} meta={meta} />
+      <Head
+        description={description}
+        title={title}
+        locale={locale}
+        meta={meta}
+      />
       <MenuContext.Provider
         value={{
           menu,

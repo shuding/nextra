@@ -7,11 +7,12 @@ import { useConfig } from './config'
 
 interface HeadProps {
   title: string
+  description?: string
   locale?: string
   meta: Record<string, any>
 }
 
-export default function Head({ title, locale, meta }: HeadProps) {
+export default function Head({ title, description, locale, meta }: HeadProps) {
   const config = useConfig()
   const { theme, systemTheme } = useTheme()
   const renderedTheme = theme === 'system' ? systemTheme : theme
@@ -25,6 +26,7 @@ export default function Head({ title, locale, meta }: HeadProps) {
         {renderComponent(config.titleSuffix, { locale, config, title, meta })}
       </title>
       {renderComponent(config.head, { locale, config, title, meta }, true)}
+      {description ? <meta name="description" content={description} /> : null}
       {config.unstable_faviconGlyph ? (
         <link
           rel="icon"
