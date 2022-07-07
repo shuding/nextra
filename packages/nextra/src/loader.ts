@@ -35,7 +35,7 @@ const [repository, gitRoot] = (function () {
 async function loader(
   context: LoaderContext<LoaderOptions>,
   source: string
-): Promise<string | Buffer> {
+): Promise<string> {
   context.cacheable(true)
 
   const options = context.getOptions()
