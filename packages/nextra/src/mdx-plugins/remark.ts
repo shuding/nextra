@@ -2,8 +2,6 @@ import { Processor } from '@mdx-js/mdx/lib/core'
 import { Root, Heading, Parent } from 'mdast'
 
 export interface HeadingMeta {
-  titleText?: string
-  hasH1: boolean
   headings: Heading[]
 }
 
@@ -32,7 +30,7 @@ export function getFlattenedValue(node: Parent): string {
     .join('')
 }
 
-export default function remarkHeadings(this: Processor) {
+export function remarkHeadings(this: Processor) {
   const data = this.data() as any
   return (tree: Root, _file: any, done: () => void) => {
     visit(
@@ -51,18 +49,7 @@ export default function remarkHeadings(this: Processor) {
             ...(node as Heading),
             value: getFlattenedValue(node)
           }
-          const headingMeta = data.headingMeta as HeadingMeta
-          if (node.depth === 1) {
-            headingMeta.hasH1 = true
-            if (Array.isArray(node.children) && node.children.length === 1) {
-              const child = node.children[0]
-              if (child.type === 'text') {
-                headingMeta.titleText = child.value
-              }
-            }
-          }
-
-          headingMeta.headings.push(heading)
+          data.headingMeta.headings.push(heading)
         } else if (node.name === 'summary' || node.name === 'details') {
           // Replace the <summary> and <details> with customized components.
           if (node.data) {

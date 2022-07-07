@@ -14,7 +14,7 @@ import { collectFiles } from './plugin'
 import { MARKDOWN_EXTENSION_REGEX, IS_PRODUCTION } from './constants'
 
 // TODO: create this as a webpack plugin.
-const indexContentEmitted = new Set()
+const indexContentEmitted = new Set<string>()
 
 const pagesDir = path.resolve(findPagesDir())
 
@@ -93,7 +93,7 @@ async function loader(
   }
 
   // Extract frontMatter information if it exists
-  let { data, content } = grayMatter(source)
+  const { data, content } = grayMatter(source)
 
   let layout = theme
   let layoutConfig = themeConfig || null
@@ -110,17 +110,15 @@ async function loader(
     unstable_flexsearch = false
   }
 
-  const { result, titleText, headings, hasH1, structurizedData } =
-    await compileMdx(
-      content,
-      mdxOptions,
-      {
-        unstable_staticImage,
-        unstable_flexsearch
-      },
-      resourcePath
-    )
-  content = result.replace('export default MDXContent;', '')
+  const { result, headings, structurizedData } = await compileMdx(
+    content,
+    mdxOptions,
+    {
+      unstable_staticImage,
+      unstable_flexsearch
+    },
+    resourcePath
+  )
 
   if (unstable_flexsearch) {
     // We only add .MD and .MDX contents
@@ -171,6 +169,7 @@ async function loader(
 import __nextra_withLayout__ from '${layout}'
 import { withSSG as __nextra_withSSG__ } from 'nextra/ssg'
 ${layoutConfigImport}
+${result.replace('export default MDXContent;', '')}
 
 const __nextra_pageMap__ = ${JSON.stringify(pageMap)}
 
@@ -184,9 +183,8 @@ const NextraLayout = __nextra_withSSG__(__nextra_withLayout__({
   route: "${slash(route)}",
   meta: ${JSON.stringify(data)},
   pageMap: __nextra_pageMap__,
-  titleText: ${JSON.stringify(titleText)},
+  titleText,
   headings: ${JSON.stringify(headings)},
-  hasH1: ${JSON.stringify(hasH1)},
   ${timestamp ? `timestamp: ${timestamp},\n` : ''}
   ${
     unstable_flexsearch
@@ -194,8 +192,6 @@ const NextraLayout = __nextra_withSSG__(__nextra_withLayout__({
       : ''
   }
 }, ${layoutConfig ? '__nextra_layoutConfig__' : 'null'}))
-
-${content}
 
 function NextraPage(props) {
   return (
@@ -213,8 +209,8 @@ export default NextraPage
 export default function syncLoader(
   this: LoaderContext<LoaderOptions>,
   source: string,
-  callback: (err?: null | Error, content?: string | Buffer) => void
-) {
+  callback: (err?: null | Error, content?: string) => void
+): void {
   loader(this, source)
     .then(result => callback(null, result))
     .catch(err => callback(err))

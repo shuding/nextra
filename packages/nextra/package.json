@@ -32,6 +32,7 @@
     "github-slugger": "^1.4.0",
     "graceful-fs": "^4.2.10",
     "gray-matter": "^4.0.3",
+    "rehype-mdx-title": "^1.0.0",
     "rehype-pretty-code": "^0.1.0",
     "remark-gfm": "^3.0.1",
     "shiki": "0.10.1",
