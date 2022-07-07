@@ -120,8 +120,7 @@ async function loader(
       },
       resourcePath
     )
-  content = result
-  content = content.replace('export default MDXContent;', '')
+  content = result.replace('export default MDXContent;', '')
 
   if (unstable_flexsearch) {
     // We only add .MD and .MDX contents
