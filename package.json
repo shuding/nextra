@@ -42,5 +42,5 @@
     "trailingComma": "none",
     "arrowParens": "avoid"
   },
-  "packageManager": "pnpm@6.27.1"
+  "packageManager": "pnpm@7.3.0"
 }

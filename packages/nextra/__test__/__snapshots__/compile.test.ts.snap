@@ -149,7 +149,7 @@ function MDXContent(props = {}) {
     const _components = Object.assign({
       h2: \\"h2\\"
     }, _provideComponents(), props.components);
-    return <_components.h2>{\\"H2\\"}</_components.h2>;
+    return <_components.h2 id=\\"h2\\">{\\"H2\\"}</_components.h2>;
   }
 }
 export default MDXContent;
