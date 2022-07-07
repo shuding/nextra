@@ -1,4 +1,4 @@
-export default {
+export default <PageTheme>{
   navbar: true,
   sidebar: true,
   toc: true,
@@ -7,15 +7,15 @@ export default {
   layout: 'default',
   typesetting: 'default',
   breadcrumb: true
-} as PageTheme
+}
 
 export type PageTheme = {
-  navbar: Boolean
-  sidebar: Boolean
-  toc: Boolean
-  pagination: Boolean
-  footer: Boolean
+  navbar: boolean
+  sidebar: boolean
+  toc: boolean
+  pagination: boolean
+  footer: boolean
   layout: 'default' | 'full' | 'raw'
   typesetting: 'default' | 'article'
-  breadcrumb: Boolean
+  breadcrumb: boolean
 }
