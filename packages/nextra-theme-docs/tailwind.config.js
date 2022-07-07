@@ -10,7 +10,7 @@ const makePrimaryColor =
   }
 
 module.exports = {
-  content: ['./src/**/*.{js,css,tsx}'],
+  content: ['./src/**/*.{js,tsx}'],
   theme: {
     screens: {
       sm: '640px',
