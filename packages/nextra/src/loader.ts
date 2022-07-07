@@ -183,7 +183,7 @@ const NextraLayout = __nextra_withSSG__(__nextra_withLayout__({
   route: "${slash(route)}",
   meta: ${JSON.stringify(data)},
   pageMap: __nextra_pageMap__,
-  titleText,
+  titleText: typeof titleText === 'string' ? titleText : undefined,
   headings: ${JSON.stringify(headings)},
   ${timestamp ? `timestamp: ${timestamp},\n` : ''}
   ${
