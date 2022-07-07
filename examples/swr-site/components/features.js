@@ -18,7 +18,7 @@ const TITLE_WITH_TRANSLATIONS = {
   ru: "React хуки для выборки данных",
 };
 
-// Transaltions for Features
+// Translations for Features
 const FEATURES_WITH_TRANSLATIONS = {
   "en-US": {
     lightweight: "Lightweight",
