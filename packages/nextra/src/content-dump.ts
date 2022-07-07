@@ -7,11 +7,11 @@ const cacheDir = path.join(process.cwd(), '.next', 'cache')
 const assetDir = path.join(process.cwd(), '.next', 'static', 'chunks')
 
 const asset: { [locale: string]: any } = {}
-const cached: Map<string, boolean> = new Map()
+const cached = new Map<string, boolean>()
 
 try {
   statSync(assetDir)
-} catch (err) {
+} catch {
   mkdirSync(assetDir, { recursive: true })
 }
 
@@ -19,7 +19,7 @@ let cacheDirExist = false
 try {
   statSync(cacheDir)
   cacheDirExist = true
-} catch (err) {
+} catch {
   mkdirSync(cacheDir, { recursive: true })
 }
 
@@ -36,7 +36,7 @@ function initFromCache(filename: string) {
   return {}
 }
 
-export async function addPage({
+export function addPage({
   fileLocale,
   route,
   title,
@@ -48,12 +48,10 @@ export async function addPage({
   title: string
   data: any
   structurizedData: any
-}) {
+}): void {
   const dataFilename = `nextra-data-${fileLocale}.json`
 
-  if (!asset[fileLocale]) {
-    asset[fileLocale] = initFromCache(dataFilename)
-  }
+  asset[fileLocale] ||= initFromCache(dataFilename)
   asset[fileLocale][route] = {
     title: title || data.title,
     data: structurizedData
@@ -72,7 +70,7 @@ export async function restoreCache() {
   if (cacheDirExist) {
     try {
       statSync(assetDir)
-    } catch (err) {
+    } catch {
       mkdirSync(assetDir, { recursive: true })
     }
 
