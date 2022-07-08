@@ -126,7 +126,7 @@ const BlogLayout = ({
   const meta = opts.meta
 
   const postList = posts.length > 0 ? (
-    <ul>
+    <div>
       {posts.map(post => {
         if (tagName) {
           const tags = getTags(post)
@@ -168,7 +168,7 @@ const BlogLayout = ({
           </div>
         )
       })}
-    </ul>
+    </div>
   ) : null
   const ref = React.useRef<HTMLHeadingElement>(null)
 
