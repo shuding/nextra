@@ -10,7 +10,7 @@ const themes = {
     'bg-yellow-50 border border-yellow-100 text-yellow-900 dark:text-yellow-200 dark:bg-yellow-700/30'
 }
 
-interface CalloutProps {
+type CalloutProps = {
   /** Callout Theme default to 'default'  */
   type?: keyof typeof themes
   /** default emoji 💡*/

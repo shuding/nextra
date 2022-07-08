@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from 'react'
 import cn from 'classnames'
 
-interface BleedProps {
+type BleedProps = {
   full: boolean
 }
 

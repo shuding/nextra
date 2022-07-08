@@ -5,15 +5,12 @@ import React, {
   useState,
   ReactNode,
   useContext,
-  PropsWithChildren
+  ReactElement
 } from 'react'
 import 'intersection-observer'
-
 import { ActiveAnchor, useActiveAnchorSet } from './active-anchor'
 import { MDXProvider } from '@mdx-js/react'
-
 import Collapse from '../components/collapse'
-
 import { Tabs, Tab } from '../components/tabs'
 import Bleed from '../bleed'
 import Callout from '../callout'
@@ -31,9 +28,8 @@ if (typeof window !== 'undefined') {
       entries => {
         const headers: [string, number, boolean, boolean][] = []
 
-        for (let i = 0; i < entries.length; i++) {
-          const entry = entries[i]
-          if (entry && entry.rootBounds && slugs.has(entry.target)) {
+        for (const entry of entries) {
+          if (entry?.rootBounds && slugs.has(entry.target)) {
             const [slug, index] = slugs.get(entry.target)
             const aboveHalfViewport =
               entry.boundingClientRect.y + entry.boundingClientRect.height <=
@@ -89,41 +85,30 @@ if (typeof window !== 'undefined') {
 }
 
 // Anchor links
-const HeaderLink = ({
-  tag: Tag,
+const createHeaderLink = (Tag: `h${2 | 3 | 4 | 5 | 6}`, context: { index: number }) => function HeaderLink({
   children,
   id,
-  context,
-  withObserver = true,
   ...props
 }: {
   tag: any
-  children: any
+  children: ReactNode
   id: string
-  context: { index: number }
-  withObserver?: boolean
-}) => {
+}): ReactElement {
   setActiveAnchor = useActiveAnchorSet()
   const obRef = useRef<HTMLSpanElement>(null)
 
-  const slug = id
-  const anchor = <span className="subheading-anchor" id={slug} ref={obRef} />
-
-  const index = context.index++
-
   useEffect(() => {
-    const ref = obRef
-    if (!ref.current) return
+    if (!obRef.current) return
 
-    slugs.set(ref.current, [slug, index])
-    if (ref.current) observer.observe(ref.current)
+    slugs.set(obRef.current, [id, context.index += 1])
+    if (obRef.current) observer.observe(obRef.current)
 
     return () => {
       observer.disconnect()
-      slugs.delete(ref.current!)
+      slugs.delete(obRef.current!)
       setActiveAnchor(f => {
         const ret: ActiveAnchor = { ...f }
-        delete ret[slug]
+        delete ret[id]
         return ret
       })
     }
@@ -131,75 +116,11 @@ const HeaderLink = ({
 
   return (
     <Tag {...props}>
-      {anchor}
-      <a
-        href={'#' + slug}
-        className="anchor no-outline text-current no-underline"
-      >
-        {children}
-        <span className="anchor-icon" aria-hidden>
-          #
-        </span>
-      </a>
+      <span className="subheading-anchor -mt-20" id={id} ref={obRef} />
+      <a href={`#${id}`}>{children}</a>
     </Tag>
   )
 }
-
-interface HeadingProps {
-  children?: React.ReactNode
-  href?: string
-  id: string
-}
-
-const H2 =
-  (context: { index: number }) =>
-  ({ children, ...props }: HeadingProps) => {
-    return (
-      <HeaderLink tag="h2" context={context} {...props}>
-        {children}
-      </HeaderLink>
-    )
-  }
-
-const H3 =
-  (context: { index: number }) =>
-  ({ children, ...props }: HeadingProps) => {
-    return (
-      <HeaderLink tag="h3" context={context} {...props}>
-        {children}
-      </HeaderLink>
-    )
-  }
-
-const H4 =
-  (context: { index: number }) =>
-  ({ children, ...props }: HeadingProps) => {
-    return (
-      <HeaderLink tag="h4" context={context} {...props}>
-        {children}
-      </HeaderLink>
-    )
-  }
-
-const H5 =
-  (context: { index: number }) =>
-  ({ children, ...props }: HeadingProps) => {
-    return (
-      <HeaderLink tag="h5" context={context} {...props}>
-        {children}
-      </HeaderLink>
-    )
-  }
-
-const H6 =
-  (context: { index: number }) =>
-  ({ children, ...props }: HeadingProps) => {
-    return (
-      <HeaderLink tag="h6" context={context} {...props}>
-        {children}
-      </HeaderLink>
-    )
-  }
 
 const A = ({
   children,
@@ -225,7 +146,7 @@ const A = ({
   )
 }
 
-const Table = ({ children }: { children?: React.ReactNode }) => {
+const Table = ({ children }: { children: ReactNode }) => {
   return (
     <div className="table-container">
       <table>{children}</table>
@@ -235,33 +156,34 @@ const Table = ({ children }: { children?: React.ReactNode }) => {
 
 const DetailsContext = React.createContext<any>(() => {})
 
-const findSummary = (children: React.ReactNode) => {
-  let summary: React.ReactNode = null
+const findSummary = (children: ReactNode) => {
+  let summary: ReactNode = null
   let restChildren: ReactNode[] = []
 
   React.Children.forEach(children, (child, index) => {
-    if (child && (child as React.ReactElement).type === Summary) {
+    if (child && (child as ReactElement).type === Summary) {
       summary = summary || child
-    } else {
-      let c = child
-      if (
-        !summary &&
-        typeof child === 'object' &&
-        child &&
-        (child as React.ReactElement).type !== Details &&
-        'props' in child &&
-        child.props
-      ) {
-        const result = findSummary(child.props.children)
-        summary = summary || result[0]
-        c = React.cloneElement(child, {
-          ...child.props,
-          children: result[1]?.length ? result[1] : undefined,
-          key: index
-        })
-      }
-      restChildren.push(c)
+      return
     }
+
+    let c = child
+    if (
+      !summary &&
+      typeof child === 'object' &&
+      child &&
+      (child as ReactElement).type !== Details &&
+      'props' in child &&
+      child.props
+    ) {
+      const result = findSummary(child.props.children)
+      summary = summary || result[0]
+      c = React.cloneElement(child, {
+        ...child.props,
+        children: result[1]?.length ? result[1] : undefined,
+        key: index
+      })
+    }
+    restChildren.push(c)
   })
 
   return [summary, restChildren]
@@ -272,20 +194,15 @@ const Details = ({
   open,
   ...props
 }: {
-  children?: React.ReactNode
+  children: ReactNode
   open?: boolean
-}) => {
+}): ReactElement => {
   const [openState, setOpen] = useState(!!open)
   const ref = useRef<HTMLDetailsElement>(null)
   const [summary, restChildren] = findSummary(children)
 
   return (
-    <details
-      {...props}
-      ref={ref}
-      open
-      {...(openState ? { 'data-open': '' } : null)}
-    >
+    <details {...props} ref={ref} open {...(openState && { 'data-open': '' })}>
       <DetailsContext.Provider value={setOpen}>
         {summary}
       </DetailsContext.Provider>
@@ -294,7 +211,12 @@ const Details = ({
   )
 }
 
-const Summary = ({ children, ...props }: { children?: React.ReactNode }) => {
+const Summary = ({
+  children,
+  ...props
+}: {
+  children: ReactNode
+}): ReactElement => {
   const setOpen = useContext(DetailsContext)
   return (
     <summary
@@ -309,12 +231,12 @@ const Summary = ({ children, ...props }: { children?: React.ReactNode }) => {
   )
 }
 
-const getComponents = (context: { index: number }) => ({
-  h2: H2(context),
-  h3: H3(context),
-  h4: H4(context),
-  h5: H5(context),
-  h6: H6(context),
+export const getComponents = (context: { index: number } = { index: 0 }) => ({
+  h2: createHeaderLink('h2', context),
+  h3: createHeaderLink('h3', context),
+  h4: createHeaderLink('h4', context),
+  h5: createHeaderLink('h5', context),
+  h6: createHeaderLink('h6', context),
   a: A,
   table: Table,
   details: Details,
@@ -328,9 +250,13 @@ const getComponents = (context: { index: number }) => ({
   }
 })
 
-export const MDXTheme: React.FC<PropsWithChildren<{}>> = ({ children }) => {
+export const MDXTheme = ({
+  children
+}: {
+  children: ReactNode
+}): ReactElement => {
   return (
-    <MDXProvider components={getComponents({ index: 0 }) as any}>
+    <MDXProvider components={getComponents() as any}>
       {children}
     </MDXProvider>
   )

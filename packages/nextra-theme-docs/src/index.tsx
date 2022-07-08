@@ -304,4 +304,5 @@ const createLayout = (opts: PageOpts, config: DocsThemeConfig) => {
   return Page
 }
 export * from './types'
+export { getComponents } from './misc/theme'
 export default createLayout
