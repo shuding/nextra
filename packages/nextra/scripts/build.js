@@ -1,38 +1,46 @@
 const esbuild = require('esbuild')
-const package = require('../package.json')
+const packageJson = require('../package.json')
+
+const BUILD_OPTIONS = {
+  platform: 'node',
+  bundle: true,
+  color: true,
+  target: 'es2016'
+}
+
+const externalDeps = [
+  ...Object.keys(packageJson.dependencies),
+  ...Object.keys(packageJson.peerDependencies || {})
+]
 
 // Build CJS entrypoints
 esbuild.buildSync({
+  ...BUILD_OPTIONS,
   entryPoints: [
     'src/index.js',
     'src/ssg.ts',
     'src/locales.ts',
     'src/context.ts'
   ],
-  platform: 'node',
-  bundle: true,
   format: 'cjs',
   outdir: 'dist',
-  color: true,
-  target: 'es2016',
-  external: [
-    'next/server',
-    ...Object.keys(package.dependencies),
-    ...Object.keys(package.peerDependencies || {})
-  ]
+  external: ['next/server', ...externalDeps]
 })
 
 // Build the loader as ESM
 esbuild.buildSync({
+  ...BUILD_OPTIONS,
   entryPoints: ['src/loader.ts'],
   format: 'esm',
-  bundle: true,
-  platform: 'node',
   outfile: 'dist/loader.mjs',
-  color: true,
-  target: 'es2016',
-  external: [
-    ...Object.keys(package.dependencies),
-    ...Object.keys(package.peerDependencies || {})
-  ].filter(d => d !== 'shiki')
+  external: externalDeps.filter(d => d !== 'shiki')
+})
+
+// Build compile as ESM
+esbuild.buildSync({
+  ...BUILD_OPTIONS,
+  entryPoints: ['src/compile.ts'],
+  format: 'esm',
+  outfile: 'dist/compile.mjs',
+  external: externalDeps
 })

@@ -60,7 +60,8 @@ export async function compileMdx(
 ) {
   let structurizedData = {}
   const compiler = createCompiler({
-    jsx: true,
+    jsx: mdxOptions.jsx ?? true,
+    outputFormat: mdxOptions.outputFormat,
     providerImportSource: '@mdx-js/react',
     remarkPlugins: [
       ...(mdxOptions.remarkPlugins || []),
