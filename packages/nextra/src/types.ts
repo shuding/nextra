@@ -9,10 +9,7 @@ export interface LoaderOptions {
   defaultLocale: string
   unstable_staticImage: boolean
   unstable_flexsearch: boolean
-  mdxOptions: Pick<
-    ProcessorOptions,
-    'rehypePlugins' | 'remarkPlugins' | 'jsx' | 'outputFormat'
-  >
+  mdxOptions: Pick<ProcessorOptions, 'rehypePlugins' | 'remarkPlugins'>
   pageMapCache: PageMapCache
 }
 

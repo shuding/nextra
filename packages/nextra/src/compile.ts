@@ -44,7 +44,8 @@ const rehypePrettyCodeOptions = {
 
 export async function compileMdx(
   source: string,
-  mdxOptions: LoaderOptions['mdxOptions'] = {},
+  mdxOptions: LoaderOptions['mdxOptions'] &
+    Pick<ProcessorOptions, 'jsx' | 'outputFormat'> = {},
   nextraOptions: {
     unstable_staticImage: boolean
     unstable_flexsearch:
