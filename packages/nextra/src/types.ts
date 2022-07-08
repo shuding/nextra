@@ -1,6 +1,7 @@
 import { Heading as MDASTHeading } from 'mdast'
 import { ProcessorOptions } from '@mdx-js/mdx'
 import { PageMapCache } from './plugin'
+
 export interface LoaderOptions {
   theme: Theme
   themeConfig: string
@@ -26,6 +27,7 @@ export interface PageMapItem {
 export type Heading = MDASTHeading & {
   value: string
 }
+
 export interface PageOpt {
   filename: string
   route: string

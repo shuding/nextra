@@ -5,13 +5,17 @@
   "main": "index.js",
   "files": [
     "dist/*",
-    "index.js",
-    "ssg.js",
-    "data.js",
-    "loader.js",
-    "locales.js",
-    "context.js"
+    "loader.js"
   ],
+  "exports": {
+    ".": "./dist/index.js",
+    "./compile": "./dist/compile.mjs",
+    "./context": "./dist/context.js",
+    "./data": "./dist/ssg.js",
+    "./loader": "./loader.js",
+    "./locales": "./dist/locales.js",
+    "./ssg": "./dist/ssg.js"
+  },
   "types": "./dist/types.d.ts",
   "repository": "https://github.com/shuding/nextra",
   "license": "MIT",
