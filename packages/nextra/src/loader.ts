@@ -11,6 +11,7 @@ import { getLocaleFromFilename } from './utils'
 import { compileMdx } from './compile'
 import { getPageMap, findPagesDir } from './page-map'
 import { collectFiles } from './plugin'
+
 const extension = /\.mdx?$/
 const isProductionBuild = process.env.NODE_ENV === 'production'
 
@@ -19,7 +20,7 @@ const indexContentEmitted = new Set()
 
 const pagesDir = path.resolve(findPagesDir())
 
-let [repository, gitRoot] = (function () {
+const [repository, gitRoot] = (function () {
   try {
     const repo = Repository.discover(process.cwd())
     // repository.path() returns the `/path/to/repo/.git`, we need the parent directory of it
@@ -34,7 +35,7 @@ let [repository, gitRoot] = (function () {
 async function loader(
   context: LoaderContext<LoaderOptions>,
   source: string
-): Promise<string | Buffer> {
+): Promise<string> {
   context.cacheable(true)
 
   const options = context.getOptions()
@@ -57,16 +58,10 @@ async function loader(
     throw new Error('No Nextra theme found!')
   }
 
-  let pageMapResult, fileMap
-  if (isProductionBuild) {
-    const data = pageMapCache.get()!
-    pageMapResult = data.items
-    fileMap = data.fileMap
-  } else {
-    const data = await collectFiles(pagesDir, '/')
-    pageMapResult = data.items
-    fileMap = data.fileMap
-  }
+  const { items: pageMapResult, fileMap } = isProductionBuild
+    ? pageMapCache.get()!
+    : await collectFiles(pagesDir, '/')
+
   const [pageMap, route, title] = getPageMap(
     resourcePath,
     pageMapResult,
@@ -79,7 +74,7 @@ async function loader(
     // so we can generate the correct page map.
     context.addContextDependency(pagesDir)
   } else {
-    // We only add meta files as dependencies for prodution build,
+    // We only add meta files as dependencies for production build,
     // so we can do incremental builds.
     Object.entries(fileMap).forEach(([filePath, { name, meta, locale }]) => {
       if (
@@ -125,7 +120,7 @@ async function loader(
   if (unstable_flexsearch) {
     // We only add .MD and .MDX contents
     if (extension.test(filename) && data.searchable !== false) {
-      await addPage({
+      addPage({
         fileLocale: fileLocale || 'default',
         route,
         title,
@@ -158,47 +153,51 @@ async function loader(
       timestamp = await repository.getFileLatestModifiedDateAsync(
         path.relative(gitRoot, resourcePath)
       )
-    } catch (e) {
+    } catch {
       // Failed to get timestamp for this file. Silently ignore it.
     }
   }
 
-  const prefix =
-    `import __nextra_withLayout__ from '${layout}'\n` +
-    `import { withSSG as __nextra_withSSG__ } from 'nextra/ssg'\n` +
-    `${
-      layoutConfig
-        ? `import __nextra_layoutConfig__ from '${layoutConfig}'`
-        : ''
-    }\n\n` +
-    `const __nextra_pageMap__ = ${JSON.stringify(pageMap)}\n` +
-    `globalThis.__nextra_internal__ = {\n` +
-    `  pageMap: __nextra_pageMap__,\n` +
-    `  route: ${JSON.stringify(route)},\n` +
-    `}\n` +
-    `
-    const __nextra_content__ = <MDXContent/>
-    const NextraLayout = __nextra_withSSG__(__nextra_withLayout__({
-      filename: "${slash(filename)}",
-      route: "${slash(route)}",
-      meta: ${JSON.stringify(data)},
-      pageMap: __nextra_pageMap__,
-      titleText: ${JSON.stringify(titleText)},
-      headings: ${JSON.stringify(headings)},
-      hasH1: ${JSON.stringify(hasH1)},
-      ${timestamp ? `timestamp: ${timestamp},\n` : ''}
-    }, ${layoutConfig ? '__nextra_layoutConfig__' : 'null'}))
-    `
+  const layoutConfigImport = layoutConfig
+    ? `import __nextra_layoutConfig__ from '${layoutConfig}'`
+    : ''
 
-  const suffix = `export default function NextraPage (props) {
-  return <NextraLayout {...props}>{__nextra_content__}</NextraLayout>
+  return `
+import __nextra_withLayout__ from '${layout}'
+import { withSSG as __nextra_withSSG__ } from 'nextra/ssg'
+${layoutConfigImport}
+
+const __nextra_pageMap__ = ${JSON.stringify(pageMap)}
+
+globalThis.__nextra_internal__ = {
+  pageMap: __nextra_pageMap__,
+  route: ${JSON.stringify(route)}
 }
-NextraPage.getLayout = NextraLayout.getLayout`
 
-  // console.log(content)
+const NextraLayout = __nextra_withSSG__(__nextra_withLayout__({
+  filename: "${slash(filename)}",
+  route: "${slash(route)}",
+  meta: ${JSON.stringify(data)},
+  pageMap: __nextra_pageMap__,
+  titleText: ${JSON.stringify(titleText)},
+  headings: ${JSON.stringify(headings)},
+  hasH1: ${JSON.stringify(hasH1)},
+  ${timestamp ? `timestamp: ${timestamp},\n` : ''}
+}, ${layoutConfig ? '__nextra_layoutConfig__' : 'null'}))
 
-  // Add imports and exports to the source
-  return prefix + '\n\n' + content + '\n\n' + suffix
+${content}
+
+function NextraPage(props) {
+  return (
+    <NextraLayout {...props}>
+      <MDXContent />
+    </NextraLayout>
+  )
+}
+NextraPage.getLayout = NextraLayout.getLayout
+
+export default NextraPage
+`.trimStart()
 }
 
 export default function syncLoader(
