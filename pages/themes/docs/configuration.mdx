@@ -1,14 +1,14 @@
 # Configuration
 
 To configure the theme, edit or create
-the `theme.config.js` file in the root
+the `theme.config.jsx` file in the root
 directory. The file looks something like this:
 
-```ts
+```jsx filename="theme.config.jsx"
 export default {
   projectLink: 'https://gitlab.com/librewolf-community/browser',
   titleSuffix: ' – Nextra',
-  footerText: `MIT ${new Date().getFullYear()} © Nextra.`,
+  footerText: `MIT ${new Date().getFullYear()} © Nextra.`
   // ...
 }
 ```
@@ -33,7 +33,7 @@ Changes the icon that is shown in the top right.
 import Gitlab from '@geist-ui/react-icons/gitlab'
 
 export default {
-  projectLinkIcon: <Gitlab />,
+  projectLinkIcon: <Gitlab />
 }
 ```
 
@@ -111,7 +111,7 @@ The text that is shown on the left of the footer.
 
 ```js
 export default {
-  footerText: `MIT ${new Date().getFullYear()} © Nextra.`,
+  footerText: `MIT ${new Date().getFullYear()} © Nextra.`
 }
 ```
 
@@ -135,13 +135,13 @@ The logo in the top left.
 ```jsx
 export default {
   logo: (
-    <React.Fragment>
+    <>
       <span className="mr-2 font-extrabold hidden md:inline">Nextra</span>
       <span className="text-gray-600 font-normal hidden md:inline">
         The Next Docs Builder
       </span>
-    </React.Fragment>
-  ),
+    </>
+  )
 }
 ```
 
@@ -156,7 +156,7 @@ The head that should be inserted into the html document.
 ```jsx
 export default {
   head: (
-    <React.Fragment>
+    <>
       <meta name="msapplication-TileColor" content="#ffffff" />
       <meta name="theme-color" content="#ffffff" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -167,8 +167,8 @@ export default {
       <meta property="og:title" content="Nextra: the next docs builder" />
       <meta property="og:description" content="Nextra: the next docs builder" />
       <meta name="apple-mobile-web-app-title" content="Nextra" />
-    </React.Fragment>
-  ),
+    </>
+  )
 }
 ```
 

@@ -17,23 +17,23 @@ Similar to the docs theme, you can install the blog theme with the following com
 
 3. Create the following Next.js config and theme config under the root directory:
 
-```jsx
-// next.config.js
+```js filename="next.config.js"
 const withNextra = require('nextra')({
   theme: 'nextra-theme-blog',
-  themeConfig: './theme.config.js',
+  themeConfig: './theme.config.jsx'
   // optional: add `unstable_staticImage: true` to enable Nextra's auto image import
 })
 module.exports = withNextra()
 ```
 
-```jsx
-// theme.config.js
+```jsx filename="theme.config.jsx"
 export default {
-  footer: <p>MIT 2021 © Nextra.</p>,
+  footer: <p>MIT 2022 © Nextra.</p>,
   head: ({ title, meta }) => (
     <>
-      {meta.description && <meta name="description" content={meta.description} />}
+      {meta.description && (
+        <meta name="description" content={meta.description} />
+      )}
       {meta.tag && <meta name="keywords" content={meta.tag} />}
       {meta.author && <meta name="author" content={meta.author} />}
     </>
@@ -56,9 +56,9 @@ export default {
 }
 ```
 
-4. Create `pages/_app.js` and include the theme stylesheet:
+4. Create `pages/_app.jsx` and include the theme stylesheet:
 
-```jsx
+```jsx filename="_app.jsx"
 import 'nextra-theme-blog/style.css'
 
 export default function Nextra({ Component, pageProps }) {
@@ -71,5 +71,5 @@ export default function Nextra({ Component, pageProps }) {
 ---
 
 <Callout>
-You can also use [`<style jsx>`](https://nextjs.org/docs/basic-features/built-in-css-support#css-in-js) to style elements inside `theme.config.js`.
+You can also use [`<style jsx>`](https://nextjs.org/docs/basic-features/built-in-css-support#css-in-js) to style elements inside `theme.config.jsx`.
 </Callout>

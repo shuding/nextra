@@ -8,17 +8,17 @@ import { useSSG } from 'nextra/ssg'
 
 export const getStaticProps = ({ params }) => {
   return fetch(`https://api.github.com/repos/shuding/nextra`)
-    .then((res) => res.json())
-    .then((repo) => ({
+    .then(res => res.json())
+    .then(repo => ({
       props: {
         // We add an `ssg` field to the page props,
         // which will be provided to the Nextra `useSSG` hook.
         ssg: {
-          stars: repo.stargazers_count,
-        },
+          stars: repo.stargazers_count
+        }
       },
       // The page will be considered as stale and regenerated every 60 seconds.
-      revalidate: 60,
+      revalidate: 60
     }))
 }
 
@@ -38,22 +38,22 @@ The number above was generated at build time via `getStaticProps`. With [Increme
 
 Here's the MDX code for the example above:
 
-```js
+```mdx
 import { useSSG } from 'nextra/ssg'
 
 export const getStaticProps = ({ params }) => {
   return fetch(`https://api.github.com/repos/shuding/nextra`)
-    .then((res) => res.json())
-    .then((repo) => ({
+    .then(res => res.json())
+    .then(repo => ({
       props: {
         // We add an `ssg` field to the page props,
         // which will be provided to the Nextra `useSSG` hook.
         ssg: {
-          stars: repo.stargazers_count,
-        },
+          stars: repo.stargazers_count
+        }
       },
       // The page will be considered as stale and regenerated every 60 seconds.
-      revalidate: 60,
+      revalidate: 60
     }))
 }
 
@@ -62,7 +62,6 @@ export const Stars = () => {
   const { stars } = useSSG()
   return <strong>{stars}</strong>
 }
-
 
 Nextra has <Stars /> stars on GitHub!
 ```

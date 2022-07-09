@@ -5,7 +5,7 @@ advanced Markdown format with React component support.
 
 You can use import and use React components inside your Markdown files like this:
 
-```markdown
+```md
 import Callout from 'nextra-theme-docs/callout'
 
 **Markdown With React Components**
@@ -13,7 +13,7 @@ import Callout from 'nextra-theme-docs/callout'
 <Callout emoji="✅">
   **MDX** (the library), at its core, transforms MDX (the syntax) to JSX.
   It receives an MDX string and outputs a _JSX string_. It does this by parsing
-  the MDX document to a syntax tree and then generates a JSX document from that tree. 
+  the MDX document to a syntax tree and then generates a JSX document from that tree.
 </Callout>
 ```
 
@@ -61,7 +61,7 @@ import Callout from 'nextra-theme-docs/callout'
 
 ## Task List
 
-```markdown
+```md
 - [x] Write the press release
 - [ ] Update the website
 - [ ] Contact the media
@@ -77,7 +77,7 @@ Renders
 
 Automatic syntax highlighting:
 
-````markdown
+````md
 ```js
 console.log('hello, world')
 ```
@@ -91,7 +91,7 @@ console.log('hello, world')
 
 You can also add the `highlight=<line|range>` modifier to highlight specific lines:
 
-````markdown
+````md
 ```jsx highlight=4,6-8
 import useSWR from 'swr'
 
@@ -149,7 +149,7 @@ Nested quotes:
 
 React components and Markdown can be **mixed together**, for instance:
 
-```markdown
+```md
 > <Callout>
 >   Give [**Nextra**](https://github.com/shuding/nextra) a star!
 > </Callout>
