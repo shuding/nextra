@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import cn from 'classnames'
 
-import ArrowRight from './icons/arrow-right'
+import { ArrowRightIcon } from './icons'
 
 import { Item } from './utils/normalize-pages'
 
@@ -16,7 +16,7 @@ export default function Breadcrumb({ activePath }: { activePath: Item[] }) {
         return (
           <React.Fragment key={item.route}>
             {index ? (
-              <ArrowRight width={14} className="mx-1 select-none" />
+              <ArrowRightIcon width={14} className="mx-1 select-none" />
             ) : null}
             <div
               key={item.route}

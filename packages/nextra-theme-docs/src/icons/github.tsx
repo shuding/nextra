@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 
-const Github = ({ height = 40 }) => {
+export function GitHubIcon({ height = 40 }): ReactElement {
   return (
     <svg height={height} viewBox="2 2 20 20" fill="none" aria-hidden="true">
       <path
@@ -12,5 +12,3 @@ const Github = ({ height = 40 }) => {
     </svg>
   )
 }
-
-export default Github

@@ -1,5 +1,6 @@
-import React from 'react'
-const DiscordIcon = ({ height = 40 }) => {
+import React, { ReactElement } from 'react'
+
+export function DiscordIcon({ height = 40 }): ReactElement {
   return (
     <svg
       height={height}
@@ -17,5 +18,3 @@ const DiscordIcon = ({ height = 40 }) => {
     </svg>
   )
 }
-
-export default DiscordIcon

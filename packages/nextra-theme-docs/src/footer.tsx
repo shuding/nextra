@@ -3,7 +3,7 @@ import cn from 'classnames'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import ArrowRight from './icons/arrow-right'
+import { ArrowRightIcon } from './icons'
 import renderComponent from './utils/render-component'
 import { useConfig } from './config'
 import { Item } from './utils/normalize-pages'
@@ -27,7 +27,7 @@ const NextLink = ({ route, title, isRTL }: LinkProps) => {
         title={title}
       >
         {title}
-        <ArrowRight
+        <ArrowRightIcon
           height={20}
           className={cn('transform inline flex-shrink-0', {
             'rotate-180 mr-1': isRTL,
@@ -49,7 +49,7 @@ const PrevLink = ({ route, title, isRTL }: LinkProps) => {
         )}
         title={title}
       >
-        <ArrowRight
+        <ArrowRightIcon
           height={20}
           className={cn('transform inline flex-shrink-0', {
             'rotate-180 mr-1': !isRTL,
