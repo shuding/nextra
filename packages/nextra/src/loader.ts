@@ -209,7 +209,7 @@ export default NextraPage
 export default function syncLoader(
   this: LoaderContext<LoaderOptions>,
   source: string,
-  callback: (err?: null | Error, content?: string) => void
+  callback: (err?: null | Error, content?: string | Buffer) => void
 ): void {
   loader(this, source)
     .then(result => callback(null, result))
