@@ -21,7 +21,7 @@
   "license": "MIT",
   "scripts": {
     "build": "node scripts/build.js",
-    "dev": "node scripts/dev.js",
+    "dev": "node scripts/build.js --dev",
     "types": "tsc --project tsconfig.type.json",
     "test": "vitest run",
     "prepublishOnly": "rm -rf dist && pnpm build && pnpm types"

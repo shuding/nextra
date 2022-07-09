@@ -1,7 +1,13 @@
 const esbuild = require('esbuild')
-const package = require('../package.json')
+const packageJson = require('../package.json')
 
-esbuild.buildSync({
+const IS_DEV = process.argv[2] === '--dev'
+
+if (IS_DEV) {
+  console.log('Watching...')
+}
+
+esbuild.build({
   entryPoints: [
     'src/index.tsx',
     'src/bleed.tsx',
@@ -18,7 +24,18 @@ esbuild.buildSync({
   color: true,
   target: 'es2016',
   external: [
-    ...Object.keys(package.dependencies),
-    ...Object.keys(package.peerDependencies || {})
-  ]
+    ...Object.keys(packageJson.dependencies),
+    ...Object.keys(packageJson.peerDependencies || {})
+  ],
+  ...(IS_DEV && {
+    watch: {
+      onRebuild(error) {
+        if (error) {
+          console.error('Watch build failed:', error)
+        } else {
+          console.log('Watch build succeeded.')
+        }
+      }
+    }
+  })
 })

@@ -1,11 +1,28 @@
 const esbuild = require('esbuild')
 const packageJson = require('../package.json')
 
+const IS_DEV = process.argv[2] === '--dev'
+
+if (IS_DEV) {
+  console.log('Watching...')
+}
+
 const BUILD_OPTIONS = {
   platform: 'node',
   bundle: true,
   color: true,
-  target: 'es2016'
+  target: 'es2016',
+  ...(IS_DEV && {
+    watch: {
+      onRebuild(error) {
+        if (error) {
+          console.error('Watch build failed:', error)
+        } else {
+          console.log('Watch build succeeded.')
+        }
+      }
+    }
+  })
 }
 
 const externalDeps = [
@@ -14,7 +31,7 @@ const externalDeps = [
 ]
 
 // Build CJS entrypoints
-esbuild.buildSync({
+esbuild.build({
   ...BUILD_OPTIONS,
   entryPoints: [
     'src/index.js',
@@ -28,7 +45,7 @@ esbuild.buildSync({
 })
 
 // Build the loader as ESM
-esbuild.buildSync({
+esbuild.build({
   ...BUILD_OPTIONS,
   entryPoints: ['src/loader.ts'],
   format: 'esm',
@@ -37,7 +54,7 @@ esbuild.buildSync({
 })
 
 // Build compile as ESM
-esbuild.buildSync({
+esbuild.build({
   ...BUILD_OPTIONS,
   entryPoints: ['src/compile.ts'],
   format: 'esm',

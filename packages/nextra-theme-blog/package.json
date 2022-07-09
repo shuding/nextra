@@ -24,7 +24,7 @@
     "build:tailwind": "cross-env NODE_ENV=production pnpm postcss src/styles.css -o style.css --verbose",
     "types": "tsc -p tsconfig.types.json",
     "dev": "concurrently \"pnpm dev:layout\" \"pnpm dev:tailwind\"",
-    "dev:layout": "node scripts/dev.js",
+    "dev:layout": "node scripts/build.js --dev",
     "dev:tailwind": "cross-env TAILWIND_MODE=watch pnpm postcss src/styles.css -o style.css --watch",
     "prepublishOnly": "rm -rf dist && pnpm build && pnpm types"
   },
