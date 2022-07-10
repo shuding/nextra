@@ -10,7 +10,7 @@ import useMenuContext from './utils/menu-context'
 import { useConfig } from './config'
 import Search from './search'
 import Flexsearch from './flexsearch'
-import { GitHubIcon, DiscordIcon } from './icons'
+import { GitHubIcon, DiscordIcon, XIcon } from './icons'
 import { Item, PageItem } from './utils/normalize-pages'
 
 interface NavBarProps {
@@ -48,22 +48,11 @@ export default function Navbar({ flatDirectories, items }: NavBarProps) {
             onClick={() => {
               try {
                 localStorage.setItem(bannerKey, '0')
-              } catch (e) {}
+              } catch {}
               document.body.classList.add('nextra-banner-hidden')
             }}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-4 w-4 mx-auto"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fillRule="evenodd"
-                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                clipRule="evenodd"
-              />
-            </svg>
+            <XIcon className="h4 w-4 mx-auto" />
           </button>
         </div>
       ) : null}
@@ -150,10 +139,10 @@ export default function Navbar({ flatDirectories, items }: NavBarProps) {
               {config.projectLinkIcon ? (
                 renderComponent(config.projectLinkIcon, { locale })
               ) : (
-                <React.Fragment>
+                <>
                   <GitHubIcon height={24} />
                   <span className="sr-only">GitHub</span>
-                </React.Fragment>
+                </>
               )}
             </a>
           ) : null}
@@ -167,10 +156,10 @@ export default function Navbar({ flatDirectories, items }: NavBarProps) {
               {config.projectChatLinkIcon ? (
                 renderComponent(config.projectChatLinkIcon, { locale })
               ) : (
-                <React.Fragment>
+                <>
                   <DiscordIcon height={24} />
                   <span className="sr-only">Discord</span>
-                </React.Fragment>
+                </>
               )}
             </a>
           ) : null}
