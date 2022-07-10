@@ -10,7 +10,7 @@ import useMenuContext from './utils/menu-context'
 import { useConfig } from './config'
 import Search from './search'
 import Flexsearch from './flexsearch'
-import { GitHubIcon, DiscordIcon, XIcon } from './icons'
+import { GitHubIcon, DiscordIcon, XIcon, MenuIcon } from './icons'
 import { Item, PageItem } from './utils/normalize-pages'
 
 interface NavBarProps {
@@ -168,37 +168,7 @@ export default function Navbar({ flatDirectories, items }: NavBarProps) {
             className="nextra-menu-icon block md:hidden p-2"
             onClick={() => setMenu(!menu)}
           >
-            <svg
-              fill="none"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              className={cn({ open: menu })}
-            >
-              <g>
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16"
-                />
-              </g>
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 12h16"
-              />
-              <g>
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 18h16"
-                />
-              </g>
-            </svg>
+            <MenuIcon className={cn({ open: menu })} />
           </button>
         </nav>
       </div>
