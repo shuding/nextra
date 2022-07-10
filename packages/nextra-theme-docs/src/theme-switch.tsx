@@ -1,14 +1,14 @@
 import React, { memo } from 'react'
 import { useTheme } from 'next-themes'
 
+import { useMounted } from './utils/use-mounted'
 import Menu from './select'
 import { SunIcon, MoonIcon } from './icons'
 
 function ThemeSwitch({ lite = true }) {
   const { theme, setTheme, systemTheme } = useTheme()
   const renderedTheme = theme === 'system' ? systemTheme : theme
-  const [mounted, setMounted] = React.useState(false)
-  React.useEffect(() => setMounted(true), [])
+  const mounted = useMounted()
 
   return (
     <Menu

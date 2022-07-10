@@ -3,6 +3,7 @@ import NextHead from 'next/head'
 import { useTheme } from 'next-themes'
 
 import renderComponent from './utils/render-component'
+import { useMounted } from './utils/use-mounted'
 import { useConfig } from './config'
 
 interface HeadProps {
@@ -15,8 +16,7 @@ export default function Head({ title, locale, meta }: HeadProps) {
   const config = useConfig()
   const { theme, systemTheme } = useTheme()
   const renderedTheme = theme === 'system' ? systemTheme : theme
-  const [mounted, setMounted] = React.useState(false)
-  React.useEffect(() => setMounted(true), [])
+  const mounted = useMounted()
 
   return (
     <NextHead>

@@ -10,7 +10,7 @@ import renderComponent from './utils/render-component'
 import getHeadingText from './utils/get-heading-text'
 import { ActiveAnchor, useActiveAnchor } from './misc/active-anchor'
 import { useConfig } from './config'
-import useMounted from './utils/use-mounted'
+import { useMounted } from './utils/use-mounted'
 
 const createEditUrl = (repository?: string, filepath?: string) => {
   const repo = parseGitUrl(repository || '')
