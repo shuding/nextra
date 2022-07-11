@@ -314,7 +314,7 @@ export default function Sidebar({
       ) : null}
       <aside
         className={cn(
-          'nextra-sidebar-container nextra-scrollbar fixed flex-shrink-0 w-full md:w-64 md:sticky z-[15] top-16 self-start overflow-y-auto transform-none h-[calc(100vh-4rem)]',
+          'nextra-sidebar-container nextra-scrollbar fixed flex-shrink-0 w-full md:w-64 md:sticky z-[15] top-16 self-start overflow-y-auto h-[calc(100vh-4rem)]',
           asPopover ? 'md:hidden' : 'md:block',
           hasMenu ? 'with-menu' : '',
           { open: menu }
