@@ -35,7 +35,7 @@
     "types": "tsc -p tsconfig.types.json",
     "dev:layout": "node scripts/dev.js",
     "dev:tailwind": "cross-env TAILWIND_MODE=watch pnpm postcss src/styles.css -o style.css --watch",
-    "prepublishOnly": "rm -rf dist && pnpm build",
+    "prepublishOnly": "rm -rf dist && pnpm build && pnpm types",
     "test": "vitest --run"
   },
   "dependencies": {
