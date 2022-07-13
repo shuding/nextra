@@ -1,5 +1,5 @@
 import ReactDOMServer from 'react-dom/server'
-import { createContext, useContext, useEffect, useMemo, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import { MDXProvider } from '@mdx-js/react'
 import Slugger from 'github-slugger'
 import Link from 'next/link'
@@ -7,7 +7,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 // Anchor links
-
 const SluggerContext = createContext<Slugger | null>(null)
 
 export const HeadingContext = createContext<
@@ -45,12 +44,18 @@ const HeaderLink = ({
   const slug = slugger.slug(ReactDOMServer.renderToStaticMarkup(children))
   return (
     <Tag {...props}>
-      <span className="subheading-anchor" id={slug} />
-      <a href={'#' + slug} className="subheading">
+      <a
+        href={`#${slug}`}
+        className="
+          !no-underline
+          after:content-['#']
+          after:ml-2
+          after:text-gray-500
+          after:opacity-0
+          hover:after:opacity-100
+        "
+      >
         {children}
-        <span className="anchor-icon" aria-hidden>
-          #
-        </span>
       </a>
     </Tag>
   )
