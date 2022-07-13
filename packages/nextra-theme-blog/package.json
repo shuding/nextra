@@ -30,7 +30,6 @@
   },
   "dependencies": {
     "@mdx-js/react": "^2.1.2",
-    "github-slugger": "^1.4.0",
     "next-themes": "^0.2.0",
     "react-cusdis": "^2.1.3"
   },
