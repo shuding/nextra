@@ -58,7 +58,7 @@ export default function Meta({
       </div>
       {back && (
         <Link href={back} passHref>
-          <a className="text-gray-600">Back</a>
+          <a>Back</a>
         </Link>
       )}
       {config.darkMode && <ThemeSwitch />}
