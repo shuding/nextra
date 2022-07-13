@@ -24,17 +24,13 @@ export default function Nav({
           }
           return (
             <Link key={page.route} href={page.route} passHref>
-              <a className="text-gray-600">
-                {page.frontMatter?.title || page.name}
-              </a>
+              <a>{page.frontMatter?.title || page.name}</a>
             </Link>
           )
         })}
         {config.navs?.map(nav => (
           <Link key={nav.url} href={nav.url} passHref>
-            <a className="text-gray-600" {...nav}>
-              {nav.name}
-            </a>
+            <a {...nav}>{nav.name}</a>
           </Link>
         ))}
       </div>
