@@ -89,8 +89,7 @@ export async function compileMdx(
       structurizedData
     }
   } catch (err) {
-    console.error(`\nError compiling ${resourcePath}`)
-    console.error(`${err}\n`)
+    console.error(`[nextra] Error compiling ${resourcePath}.`)
     throw err
   }
 }
