@@ -30,7 +30,7 @@ export default function Nav({
         })}
         {config.navs?.map(nav => (
           <Link key={nav.url} href={nav.url} passHref>
-            <a {...nav}>{nav.name}</a>
+            <a>{nav.name}</a>
           </Link>
         ))}
       </div>
