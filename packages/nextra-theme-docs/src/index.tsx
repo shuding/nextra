@@ -254,7 +254,7 @@ interface DocsLayoutProps extends PageOpt {
 }
 const createLayout = (opts: DocsLayoutProps, _config: DocsThemeConfig) => {
   const extendedConfig = Object.assign({}, defaultConfig, _config, opts)
-
+  const nextThemes = extendedConfig.nextThemes || {}
   const Page = ({ children }: { children: React.ReactChildren }) => children
 
   Page.getLayout = (page: any) => (
@@ -262,7 +262,9 @@ const createLayout = (opts: DocsLayoutProps, _config: DocsThemeConfig) => {
         <ThemeProvider
           attribute="class"
           disableTransitionOnChange
-          {...extendedConfig.nextThemes}
+          defaultTheme={nextThemes.defaultTheme}
+          storageKey={nextThemes.storageKey}
+          forcedTheme={nextThemes.forcedTheme}
         >
           <Content {...opts}>{page}</Content>
         </ThemeProvider>
