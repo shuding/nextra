@@ -50,7 +50,7 @@ async function loader(
   } = options
 
   const { resourcePath } = context
-  if (resourcePath.includes('pages/api')) {
+  if (resourcePath.includes('/pages/api/')) {
     console.warn(`[nextra] Ignoring ${resourcePath} because it is located in the "pages/api" folder.`)
     return ''
   }
