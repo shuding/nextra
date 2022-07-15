@@ -173,8 +173,6 @@ const Content: React.FC<LayoutProps> = ({
 
   const headingArr = headings ?? []
   return (
-    <React.Fragment>
-      <Head title={title} locale={locale} meta={meta} />
       <MenuContext.Provider
         value={{
           menu,
@@ -182,19 +180,20 @@ const Content: React.FC<LayoutProps> = ({
           defaultMenuCollapsed: !!config.defaultMenuCollapsed
         }}
       >
+        <Head title={title} locale={locale} meta={meta} />
         <div
           className={cn('nextra-container main-container flex flex-col', {
             rtl: isRTL,
             'menu-active': menu
           })}
         >
-          {themeContext.navbar ? (
+          {themeContext.navbar && (
             <Navbar
               isRTL={isRTL}
               flatDirectories={flatDirectories}
               items={topLevelPageItems}
             />
-          ) : null}
+          )}
           <ActiveAnchor>
             <div className="max-w-[90rem] w-full mx-auto flex flex-1 items-stretch">
               <div className="flex flex-1 w-full">
@@ -223,18 +222,18 @@ const Content: React.FC<LayoutProps> = ({
                 <Body
                   themeContext={themeContext}
                   breadcrumb={
-                    activeType === 'page' ? null : themeContext.breadcrumb ? (
+                    activeType !== 'page' && themeContext.breadcrumb && (
                       <Breadcrumb activePath={activePath} />
-                    ) : null
+                    )
                   }
                   navLinks={
-                    activeType === 'page' ? null : themeContext.pagination ? (
+                    activeType !== 'page' && themeContext.pagination && (
                       <NavLinks
                         flatDirectories={flatDocsDirectories}
                         currentIndex={activeIndex}
                         isRTL={isRTL}
                       />
-                    ) : null
+                    )
                   }
                   timestamp={timestamp}
                 >
@@ -243,12 +242,11 @@ const Content: React.FC<LayoutProps> = ({
               </div>
             </div>
           </ActiveAnchor>
-          {themeContext.footer && config.footer ? (
+          {themeContext.footer && config.footer && (
             <Footer menu={activeType === 'page' || hideSidebar} />
-          ) : null}
+          )}
         </div>
       </MenuContext.Provider>
-    </React.Fragment>
   )
 }
 interface DocsLayoutProps extends PageOpt {
@@ -263,12 +261,8 @@ const createLayout = (opts: DocsLayoutProps, _config: DocsThemeConfig) => {
       <ThemeConfigContext.Provider value={extendedConfig}>
         <ThemeProvider
           attribute="class"
-          disableTransitionOnChange={true}
-          {...{
-            defaultTheme: extendedConfig.nextThemes.defaultTheme,
-            storageKey: extendedConfig.nextThemes.storageKey,
-            forcedTheme: extendedConfig.nextThemes.forcedTheme
-          }}
+          disableTransitionOnChange
+          {...extendedConfig.nextThemes}
         >
           <Content {...opts}>{page}</Content>
         </ThemeProvider>
