@@ -2,6 +2,11 @@ import { NextRequest, NextResponse } from 'next/server'
 
 const PUBLIC_FILE = /\.(.*)$/
 
+function getCookie(cookies: NextRequest['cookies'] | Map<string, string>, key: string) {
+  if (typeof cookies.get === 'function') return cookies.get(key)
+  return (cookies as NextRequest['cookies'])[key]
+}
+
 export function locales(request: NextRequest) {
   const { nextUrl } = request
 
@@ -27,9 +32,9 @@ export function locales(request: NextRequest) {
     // If there is a locale cookie, we try to use it. If it doesn't exist or
     // it's invalid, `nextUrl.locale` will be automatically figured out by Next
     // via the `accept-languages` header.
-    if (request.cookies['NEXT_LOCALE']) {
+    if (getCookie(request.cookies, 'NEXT_LOCALE')) {
       try {
-        nextUrl.locale = request.cookies['NEXT_LOCALE']
+        nextUrl.locale = getCookie(request.cookies, 'NEXT_LOCALE') as string
       } catch (err) {
         // The locale from the cookie isn't valid.
         // https://github.com/vercel/next.js/blob/e5dee17f776dcc79ebb269f7b7341fa6e2b6c3f1/packages/next/server/web/next-url.ts#L122-L129
