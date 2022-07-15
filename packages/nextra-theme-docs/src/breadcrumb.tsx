@@ -19,7 +19,6 @@ export default function Breadcrumb({ activePath }: { activePath: Item[] }) {
               <ArrowRight width={14} className="mx-1 select-none" />
             ) : null}
             <div
-              key={item.route}
               className={cn(
                 'transition-colors hover:text-gray-900 dark:hover:text-gray-200',
                 {
