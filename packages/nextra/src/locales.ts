@@ -4,6 +4,7 @@ const PUBLIC_FILE = /\.(.*)$/
 
 type LegacyMiddlewareCookies = { [key: string]: string }
 type StableMiddlewareCookies = Map<string, string>
+
 function getCookie(cookies: LegacyMiddlewareCookies | StableMiddlewareCookies, key: string) {
   if (typeof cookies.get === 'function') {
     return cookies.get(key)
@@ -11,7 +12,9 @@ function getCookie(cookies: LegacyMiddlewareCookies | StableMiddlewareCookies, k
   return (cookies as LegacyMiddlewareCookies)[key]
 }
 
-export function locales(request: NextRequest) {
+type NextResult = { type: 'next', url: undefined } | { type: 'rewrite', url: URL } | { type: 'redirect', url: URL }
+
+export function next(request: NextRequest): NextResult {
   const { nextUrl } = request
 
   const shouldHandleLocale =
@@ -20,25 +23,20 @@ export function locales(request: NextRequest) {
     !nextUrl.pathname.includes('/_next/') &&
     nextUrl.locale !== ''
 
-  if (!shouldHandleLocale) return
+  if (!shouldHandleLocale) return {
+    type: 'next',
+    url: undefined
+  }
 
   // The locale code prefixed in the current URL, which can be empty.
   const fullUrl = nextUrl.toString()
-  let localeInPath = fullUrl
-    // remove host and first slash from url
-    .slice(fullUrl.indexOf('//' + nextUrl.host) + nextUrl.host.length + 2)
+  const localeInPath = fullUrl
+    .slice(fullUrl.indexOf("//" + nextUrl.host) + nextUrl.host.length + 2)
+    .replace(nextUrl.pathname + nextUrl.search, "");
 
-  // remove pathname and search from url
-  localeInPath = localeInPath
-    .replace((nextUrl.pathname + nextUrl.search), '')
-  if (localeInPath[0] === '/')
-    localeInPath = localeInPath.slice(1)
-
-  let finalLocale
-
+  let finalLocale;
   if (localeInPath) {
-    // If a locale is explicitly set, we don't do any modifications.
-    finalLocale = localeInPath
+    finalLocale = localeInPath.replace("/", "");
   } else {
     // If there is a locale cookie, we try to use it. If it doesn't exist or
     // it's invalid, `nextUrl.locale` will be automatically figured out by Next
@@ -58,26 +56,41 @@ export function locales(request: NextRequest) {
     // to prefix the URL with that locale since it's missing. Only the default
     // locale can be missing from there for consistency.
     if (finalLocale !== nextUrl.defaultLocale) {
-      return NextResponse.redirect(
-        new URL(
+      return {
+        type: 'redirect',
+        url: new URL(
           '/' + finalLocale + nextUrl.pathname + nextUrl.search,
           request.url
         )
-      )
+      }
     }
   }
-
   let pathname = nextUrl.pathname || '/'
   if (pathname === '/') pathname += 'index'
   // If we are not showing the correct localed page, rewrite the current request.
   if (!pathname.endsWith('.' + finalLocale)) {
-    return NextResponse.rewrite(
-      new URL(
-        '/' + finalLocale + pathname + '.' + finalLocale + nextUrl.search,
+    const originHref = finalLocale + pathname
+    const href = originHref.endsWith('/') ? originHref.slice(0, -1) : originHref
+    return {
+      type: 'rewrite',
+      url: new URL(
+        '/' + href + '.' + finalLocale + nextUrl.search,
         request.url
       )
-    )
+    }
   }
+  return {
+    type: 'next',
+    url: undefined
+  }
+}
+
+export function locales(request: NextRequest) {
+  const result = next(request)
+  if (result.type === 'next') {
+    return
+  }
+  return NextResponse[result.type](result.url)
 }
 
 export function withLocales(middleware: any) {
