@@ -21,8 +21,6 @@ export function locales(request: NextRequest) {
     .slice(0, -(nextUrl.pathname + nextUrl.search).length + (hasEndingSlash ? 1 : 0))
 
   let finalLocale
-  let pathname = nextUrl.pathname || '/'
-  if (pathname === '/') pathname += 'index'
 
   if (localeInPath) {
     // If a locale is explicitly set, we don't do any modifications.
@@ -33,26 +31,17 @@ export function locales(request: NextRequest) {
     // via the `accept-languages` header.
     if (request.cookies.has('NEXT_LOCALE')) {
       try {
-        nextUrl.locale = request.cookies.get('NEXT_LOCALE') as string
+        nextUrl.locale = request.cookies.get('NEXT_LOCALE')!
       } catch (err) {
         // The locale from the cookie isn't valid.
         // https://github.com/vercel/next.js/blob/e5dee17f776dcc79ebb269f7b7341fa6e2b6c3f1/packages/next/server/web/next-url.ts#L122-L129
       }
     }
     finalLocale = nextUrl.locale
-    // Now we want to display the locale. If it's not the default one, we have
-    // to prefix the URL with that locale since it's missing. Only the default
-    // locale can be missing from there for consistency.
-    if (finalLocale !== nextUrl.defaultLocale) {
-      return NextResponse.redirect(
-        new URL(
-          '/' + finalLocale + pathname + nextUrl.search,
-          request.url
-        )
-      )
-    }
   }
 
+  let pathname = nextUrl.pathname
+  if (pathname === '/') pathname += 'index'
   // If we are not showing the correct localed page, rewrite the current request.
   if (!pathname.endsWith('.' + finalLocale)) {
     return NextResponse.rewrite(
