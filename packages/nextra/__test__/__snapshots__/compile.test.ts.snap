@@ -84,15 +84,15 @@ export const TagName = () => {
   const {tag} = useRouter().query;
   return tag || null;
 };
+function _createMdxContent(props) {
+  const _components = Object.assign({
+    h1: \\"h1\\"
+  }, _provideComponents(), props.components);
+  return <_components.h1>{\\"Posts Tagged with “\\"}<TagName />{\\"”\\"}</_components.h1>;
+}
 function MDXContent(props = {}) {
   const {wrapper: MDXLayout} = Object.assign({}, _provideComponents(), props.components);
-  return MDXLayout ? <MDXLayout {...props}><_createMdxContent /></MDXLayout> : _createMdxContent();
-  function _createMdxContent() {
-    const _components = Object.assign({
-      h1: \\"h1\\"
-    }, _provideComponents(), props.components);
-    return <_components.h1>{\\"Posts Tagged with “\\"}<TagName />{\\"”\\"}</_components.h1>;
-  }
+  return MDXLayout ? <MDXLayout {...props}><_createMdxContent {...props} /></MDXLayout> : _createMdxContent(props);
 }
 export default MDXContent;
 ",
@@ -142,15 +142,15 @@ exports[`process heading > no-h1 1`] = `
   ],
   "result": "/*@jsxRuntime automatic @jsxImportSource react*/
 import {useMDXComponents as _provideComponents} from \\"@mdx-js/react\\";
+function _createMdxContent(props) {
+  const _components = Object.assign({
+    h2: \\"h2\\"
+  }, _provideComponents(), props.components);
+  return <_components.h2 id=\\"h2\\">{\\"H2\\"}</_components.h2>;
+}
 function MDXContent(props = {}) {
   const {wrapper: MDXLayout} = Object.assign({}, _provideComponents(), props.components);
-  return MDXLayout ? <MDXLayout {...props}><_createMdxContent /></MDXLayout> : _createMdxContent();
-  function _createMdxContent() {
-    const _components = Object.assign({
-      h2: \\"h2\\"
-    }, _provideComponents(), props.components);
-    return <_components.h2 id=\\"h2\\">{\\"H2\\"}</_components.h2>;
-  }
+  return MDXLayout ? <MDXLayout {...props}><_createMdxContent {...props} /></MDXLayout> : _createMdxContent(props);
 }
 export default MDXContent;
 ",
@@ -200,15 +200,15 @@ exports[`process heading > static-h1 1`] = `
   ],
   "result": "/*@jsxRuntime automatic @jsxImportSource react*/
 import {useMDXComponents as _provideComponents} from \\"@mdx-js/react\\";
+function _createMdxContent(props) {
+  const _components = Object.assign({
+    h1: \\"h1\\"
+  }, _provideComponents(), props.components);
+  return <_components.h1>{\\"Hello World\\"}</_components.h1>;
+}
 function MDXContent(props = {}) {
   const {wrapper: MDXLayout} = Object.assign({}, _provideComponents(), props.components);
-  return MDXLayout ? <MDXLayout {...props}><_createMdxContent /></MDXLayout> : _createMdxContent();
-  function _createMdxContent() {
-    const _components = Object.assign({
-      h1: \\"h1\\"
-    }, _provideComponents(), props.components);
-    return <_components.h1>{\\"Hello World\\"}</_components.h1>;
-  }
+  return MDXLayout ? <MDXLayout {...props}><_createMdxContent {...props} /></MDXLayout> : _createMdxContent(props);
 }
 export default MDXContent;
 ",
