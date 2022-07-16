@@ -1,29 +1,31 @@
 import { NextraConfig, PageMapItem } from './types'
 import fs from 'graceful-fs'
-import util from 'util'
-import { getLocaleFromFilename, parseJsonFile, removeExtension } from './utils'
+import { promisify } from 'util'
+import { parseFileName, parseJsonFile } from './utils'
 import path from 'path'
 import slash from 'slash'
 import grayMatter from 'gray-matter'
-import { extension, findPagesDir, metaExtension } from './page-map'
+import { findPagesDir } from './page-map'
 import { Compiler } from 'webpack'
 import { restoreCache } from './content-dump'
-const { readdir, readFile } = fs
+import { MARKDOWN_EXTENSION_REGEX } from './constants'
+
+const readdir = promisify(fs.readdir)
+const readFile = promisify(fs.readFile)
 
 export async function collectFiles(
   dir: string,
-  route: string = '/',
+  route = '/',
   fileMap: Record<string, any> = {}
 ): Promise<{ items: PageMapItem[]; fileMap: Record<string, any> }> {
-  const files = await util.promisify(readdir)(dir, { withFileTypes: true })
+  const files = await readdir(dir, { withFileTypes: true })
 
   const items = (
     await Promise.all(
       files.map(async f => {
         const filePath = path.resolve(dir, f.name)
-        const fileRoute = slash(
-          path.join(route, removeExtension(f.name).replace(/^index$/, ''))
-        )
+        const { name, locale, ext } = parseFileName(f.name)
+        const fileRoute = slash(path.join(route, name.replace(/^index$/, '')))
 
         if (f.isDirectory()) {
           if (fileRoute === '/api') return null
@@ -38,34 +40,22 @@ export async function collectFiles(
             children,
             route: fileRoute
           }
-        } else if (extension.test(f.name)) {
-          const locale = getLocaleFromFilename(f.name)
-          const fileContents = await util.promisify(readFile)(filePath, 'utf-8')
-          const { data } = grayMatter(fileContents)
-          if (Object.keys(data).length) {
-            fileMap[filePath] = {
-              name: removeExtension(f.name),
-              route: fileRoute,
-              frontMatter: data,
-              locale
-            }
-            return fileMap[filePath]
-          }
+        } else if (MARKDOWN_EXTENSION_REGEX.test(ext)) {
+          const content = await readFile(filePath, 'utf8')
+          const { data } = grayMatter(content)
           fileMap[filePath] = {
-            name: removeExtension(f.name),
+            name,
             route: fileRoute,
-            locale
+            locale,
+            ...(Object.keys(data).length && { frontMatter: data })
           }
           return fileMap[filePath]
-        } else if (metaExtension.test(f.name)) {
-          const content = await util.promisify(readFile)(filePath, 'utf-8')
-          const meta = parseJsonFile(content, filePath)
-          // @ts-expect-error since metaExtension.test(f.name) === true
-          const locale = f.name.match(metaExtension)[1]
+        } else if (ext === '.json' && name === 'meta') {
+          const content = await readFile(filePath, 'utf8')
           fileMap[filePath] = {
             name: 'meta.json',
-            meta,
-            locale
+            locale,
+            meta: parseJsonFile(content, filePath)
           }
           return fileMap[filePath]
         }
@@ -81,16 +71,20 @@ export async function collectFiles(
 
 export class PageMapCache {
   public cache: { items: PageMapItem[]; fileMap: Record<string, any> } | null
+
   constructor() {
     this.cache = { items: [], fileMap: {} }
   }
+
   set(data: { items: PageMapItem[]; fileMap: Record<string, any> }) {
     this.cache!.items = data.items
     this.cache!.fileMap = data.fileMap
   }
+
   clear() {
     this.cache = null
   }
+
   get() {
     return this.cache
   }

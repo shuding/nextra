@@ -1,8 +1,6 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
-const PUBLIC_FILE = /\.(.*)$/
-
 type LegacyMiddlewareCookies = { [key: string]: string }
 type StableMiddlewareCookies = Map<string, string>
 
@@ -20,9 +18,8 @@ export function locales(request: NextRequest) {
   const { nextUrl } = request
 
   const shouldHandleLocale =
-    !PUBLIC_FILE.test(nextUrl.pathname) &&
-    !nextUrl.pathname.includes('/api/') &&
-    !nextUrl.pathname.includes('/_next/') &&
+    !/^\/(api|_next)\//.test(nextUrl.pathname) &&
+    !/\.(jpe?g|svg|png|webmanifest)$/.test(nextUrl.pathname) &&
     nextUrl.locale !== ''
 
   if (!shouldHandleLocale) return

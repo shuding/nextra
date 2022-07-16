@@ -7,13 +7,11 @@ import { LoaderContext } from 'webpack'
 import { Repository } from '@napi-rs/simple-git'
 
 import { addPage } from './content-dump'
-import { getLocaleFromFilename } from './utils'
+import { parseFileName } from './utils'
 import { compileMdx } from './compile'
 import { getPageMap, findPagesDir } from './page-map'
 import { collectFiles } from './plugin'
-
-const extension = /\.mdx?$/
-const isProductionBuild = process.env.NODE_ENV === 'production'
+import { MARKDOWN_EXTENSION_REGEX, IS_PRODUCTION } from './constants'
 
 // TODO: create this as a webpack plugin.
 const indexContentEmitted = new Set()
@@ -55,15 +53,15 @@ async function loader(
     return ''
   }
 
-  const filename = resourcePath.slice(resourcePath.lastIndexOf('/') + 1)
-  const fileLocale = getLocaleFromFilename(filename)
+  const filename = path.basename(resourcePath)
+  const fileLocale = parseFileName(filename).locale
 
   // Check if there's a theme provided
   if (!theme) {
     throw new Error('No Nextra theme found!')
   }
 
-  const { items: pageMapResult, fileMap } = isProductionBuild
+  const { items: pageMapResult, fileMap } = IS_PRODUCTION
     ? pageMapCache.get()!
     : await collectFiles(pagesDir, '/')
 
@@ -74,7 +72,7 @@ async function loader(
     defaultLocale
   )
 
-  if (!isProductionBuild) {
+  if (!IS_PRODUCTION) {
     // Add the entire directory `pages` as the dependency
     // so we can generate the correct page map.
     context.addContextDependency(pagesDir)
@@ -106,7 +104,7 @@ async function loader(
     layoutConfig = slash(path.resolve(layoutConfig))
   }
 
-  if (isProductionBuild && indexContentEmitted.has(filename)) {
+  if (IS_PRODUCTION && indexContentEmitted.has(filename)) {
     unstable_flexsearch = false
   }
 
@@ -124,7 +122,7 @@ async function loader(
 
   if (unstable_flexsearch) {
     // We only add .MD and .MDX contents
-    if (extension.test(filename) && data.searchable !== false) {
+    if (MARKDOWN_EXTENSION_REGEX.test(filename) && data.searchable !== false) {
       addPage({
         fileLocale: fileLocale || 'default',
         route,

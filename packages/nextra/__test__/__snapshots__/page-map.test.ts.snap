@@ -49,6 +49,11 @@ exports[`Page Process > pageMap en-US 1`] = `
             },
             {
               "locale": "en-US",
+              "name": "file-name.with.DOTS",
+              "route": "/docs/advanced/file-name.with.DOTS",
+            },
+            {
+              "locale": "en-US",
               "meta": {
                 "*": {
                   "theme": {
@@ -60,6 +65,7 @@ exports[`Page Process > pageMap en-US 1`] = `
                   "type": "separator",
                 },
                 "cache": "Cache",
+                "file-name.with.DOTS": "Filenames with dots",
                 "more": "More: A Super Super Super Super Long Directory",
                 "performance": "Performance",
                 "react-native": "React Native",
@@ -394,8 +400,14 @@ exports[`Page Process > pageMap zh-CN 1`] = `
             },
             {
               "locale": "zh-CN",
+              "name": "file-name.with.DOTS",
+              "route": "/docs/advanced/file-name.with.DOTS",
+            },
+            {
+              "locale": "zh-CN",
               "meta": {
                 "cache": "缓存",
+                "file-name.with.DOTS": "带点的文件名",
                 "performance": "性能",
                 "react-native": "React Native",
               },
