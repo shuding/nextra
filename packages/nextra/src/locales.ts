@@ -26,13 +26,13 @@ export function locales(request: NextRequest) {
   const fullUrl = nextUrl.toString()
   let localeInPath = fullUrl
     // remove host and first slash from url
-    .slice(fullUrl.indexOf('//' + nextUrl.host) + nextUrl.host.length + 3)
+    .slice(fullUrl.indexOf('//' + nextUrl.host) + nextUrl.host.length + 2)
 
   // remove pathname and search from url
-  const firstSlashIndex = localeInPath.indexOf('/')
-  if (firstSlashIndex !== -1) {
-    localeInPath = localeInPath.slice(0, firstSlashIndex)
-  }
+  localeInPath = localeInPath
+    .replace((nextUrl.pathname + nextUrl.search), '')
+  if (localeInPath[0] === '/')
+    localeInPath = localeInPath.slice(1)
 
   let finalLocale
 
@@ -43,9 +43,10 @@ export function locales(request: NextRequest) {
     // If there is a locale cookie, we try to use it. If it doesn't exist or
     // it's invalid, `nextUrl.locale` will be automatically figured out by Next
     // via the `accept-languages` header.
-    if (getCookie(request.cookies, 'NEXT_LOCALE')) {
+    const clientLocale = getCookie(request.cookies, 'NEXT_LOCALE')
+    if (clientLocale) {
       try {
-        nextUrl.locale = getCookie(request.cookies, 'NEXT_LOCALE')!
+        nextUrl.locale = clientLocale
       } catch (err) {
         // The locale from the cookie isn't valid.
         // https://github.com/vercel/next.js/blob/e5dee17f776dcc79ebb269f7b7341fa6e2b6c3f1/packages/next/server/web/next-url.ts#L122-L129
