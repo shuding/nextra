@@ -2,11 +2,6 @@ import { NextRequest, NextResponse } from 'next/server'
 
 const PUBLIC_FILE = /\.(.*)$/
 
-function getCookie(cookies: NextRequest['cookies'] | Map<string, string>, key: string) {
-  if (typeof cookies.get === 'function') return cookies.get(key)
-  return (cookies as NextRequest['cookies'])[key]
-}
-
 export function locales(request: NextRequest) {
   const { nextUrl } = request
 
@@ -15,15 +10,19 @@ export function locales(request: NextRequest) {
     !nextUrl.pathname.includes('/api/') &&
     !nextUrl.pathname.includes('/_next/') &&
     nextUrl.locale !== ''
+
   if (!shouldHandleLocale) return
 
   // The locale code prefixed in the current URL, which can be empty.
   const fullUrl = nextUrl.toString()
-  const localeInPath = fullUrl
+  const hasEndingSlash = nextUrl.pathname.endsWith('/')
+  let localeInPath = fullUrl
     .slice(fullUrl.indexOf('//' + nextUrl.host) + nextUrl.host.length + 3)
-    .slice(0, -(nextUrl.pathname + nextUrl.search).length)
+    .slice(0, -(nextUrl.pathname + nextUrl.search).length + (hasEndingSlash ? 1 : 0))
 
   let finalLocale
+  let pathname = nextUrl.pathname || '/'
+  if (pathname === '/') pathname += 'index'
 
   if (localeInPath) {
     // If a locale is explicitly set, we don't do any modifications.
@@ -32,31 +31,27 @@ export function locales(request: NextRequest) {
     // If there is a locale cookie, we try to use it. If it doesn't exist or
     // it's invalid, `nextUrl.locale` will be automatically figured out by Next
     // via the `accept-languages` header.
-    if (getCookie(request.cookies, 'NEXT_LOCALE')) {
+    if (request.cookies.has('NEXT_LOCALE')) {
       try {
-        nextUrl.locale = getCookie(request.cookies, 'NEXT_LOCALE') as string
+        nextUrl.locale = request.cookies.get('NEXT_LOCALE') as string
       } catch (err) {
         // The locale from the cookie isn't valid.
         // https://github.com/vercel/next.js/blob/e5dee17f776dcc79ebb269f7b7341fa6e2b6c3f1/packages/next/server/web/next-url.ts#L122-L129
       }
     }
     finalLocale = nextUrl.locale
-
     // Now we want to display the locale. If it's not the default one, we have
     // to prefix the URL with that locale since it's missing. Only the default
     // locale can be missing from there for consistency.
     if (finalLocale !== nextUrl.defaultLocale) {
       return NextResponse.redirect(
         new URL(
-          '/' + finalLocale + nextUrl.pathname + nextUrl.search,
+          '/' + finalLocale + pathname + nextUrl.search,
           request.url
         )
       )
     }
   }
-
-  let pathname = nextUrl.pathname || '/'
-  if (pathname === '/') pathname += 'index'
 
   // If we are not showing the correct localed page, rewrite the current request.
   if (!pathname.endsWith('.' + finalLocale)) {
