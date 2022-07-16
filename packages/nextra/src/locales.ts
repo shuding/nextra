@@ -24,10 +24,15 @@ export function locales(request: NextRequest) {
 
   // The locale code prefixed in the current URL, which can be empty.
   const fullUrl = nextUrl.toString()
-  const hasEndingSlash = nextUrl.pathname.endsWith('/')
-  const localeInPath = fullUrl
+  let localeInPath = fullUrl
+    // remove host from url
     .slice(fullUrl.indexOf('//' + nextUrl.host) + nextUrl.host.length + 3)
-    .slice(0, hasEndingSlash ? undefined : -(nextUrl.pathname + nextUrl.search).length)
+
+  // remove pathname and search from url
+  const firstSlashIndex = localeInPath.indexOf('/')
+  if (firstSlashIndex !== -1) {
+    localeInPath = localeInPath.slice(0, firstSlashIndex)
+  }
 
   let finalLocale
 
