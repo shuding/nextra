@@ -25,7 +25,7 @@ export function locales(request: NextRequest) {
   // The locale code prefixed in the current URL, which can be empty.
   const fullUrl = nextUrl.toString()
   let localeInPath = fullUrl
-    // remove host from url
+    // remove host and first slash from url
     .slice(fullUrl.indexOf('//' + nextUrl.host) + nextUrl.host.length + 3)
 
   // remove pathname and search from url

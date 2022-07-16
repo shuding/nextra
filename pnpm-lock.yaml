@@ -12,7 +12,7 @@ importers:
       concurrently: ^7.0.0
       cssnano: ^4.1.11
       esbuild: ^0.14.10
-      next: 12.2.2
+      next: ^12.2.2
       postcss: ^8.4.5
       postcss-cli: ^8.3.1
       prettier: ^2.5.1
@@ -73,7 +73,7 @@ importers:
       focus-visible: ^5.1.0
       intersection-observer: ^0.10.0
       markdown-to-jsx: ^6.11.4
-      next: 12.2.2
+      next: ^12.2.2
       nextra: workspace:*
       nextra-theme-docs: workspace:*
       postcss: ^8.3.5
