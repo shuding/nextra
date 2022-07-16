@@ -30,6 +30,7 @@ export function locales(request: NextRequest) {
     .slice(0, hasEndingSlash ? undefined : -(nextUrl.pathname + nextUrl.search).length)
 
   let finalLocale
+
   if (localeInPath) {
     // If a locale is explicitly set, we don't do any modifications.
     finalLocale = localeInPath
@@ -46,6 +47,7 @@ export function locales(request: NextRequest) {
       }
     }
     finalLocale = nextUrl.locale
+
     // Now we want to display the locale. If it's not the default one, we have
     // to prefix the URL with that locale since it's missing. Only the default
     // locale can be missing from there for consistency.
@@ -59,7 +61,7 @@ export function locales(request: NextRequest) {
     }
   }
 
-  let pathname = nextUrl.pathname
+  let pathname = nextUrl.pathname || '/'
   if (pathname === '/') pathname += 'index'
   // If we are not showing the correct localed page, rewrite the current request.
   if (!pathname.endsWith('.' + finalLocale)) {
