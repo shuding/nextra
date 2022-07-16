@@ -252,8 +252,8 @@ const Content: React.FC<LayoutProps> = ({
 interface DocsLayoutProps extends PageOpt {
   meta: Meta
 }
-const createLayout = (opts: DocsLayoutProps, _config: DocsThemeConfig) => {
-  const extendedConfig = Object.assign({}, defaultConfig, _config, opts)
+const createLayout = (opts: DocsLayoutProps, config: DocsThemeConfig) => {
+  const extendedConfig = Object.assign({}, defaultConfig, config, opts)
   const nextThemes = extendedConfig.nextThemes || {}
   const Page = ({ children }: { children: React.ReactChildren }) => children
 
