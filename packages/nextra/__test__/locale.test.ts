@@ -74,14 +74,13 @@ describe('locale process', () => {
     expect(result?.type).toBe('rewrite')
     expect(result?.url?.href).toBe('http://localhost:3000/zh-CN/index.zh-CN')
   })
-
   it('url without locale', () => {
     const request = createRequest('http://localhost:3000/docs/getting-started')
     const result = locales(request)
     expect(result?.type).toBe('rewrite')
     expect(result?.url?.href).toBe('http://localhost:3000/en-US/docs/getting-started.en-US')
   })
-  it('slash root url without locale', () => {
+  it('slash url without locale', () => {
     const request = createRequest('http://localhost:3000/docs/getting-started/')
     const result = locales(request)
     expect(result?.type).toBe('rewrite')
@@ -105,7 +104,7 @@ describe('locale process', () => {
     expect(result.type).toBe('rewrite')
     expect(result.url?.href).toBe('http://localhost:3000/zh-CN/docs/getting-started.zh-CN')
   })
-  it('slash root url with locale', () => {
+  it('slash url with locale', () => {
     const request = createRequest('http://localhost:3000/zh-CN/docs/getting-started/')
     const result = locales(request)
     expect(result.type).toBe('rewrite')
