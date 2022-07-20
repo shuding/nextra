@@ -211,7 +211,7 @@ export default function ToC({
             <p className="font-semibold tracking-tight mb-4">On This Page</p>
             {headings.map(heading => {
               const text = getHeadingText(heading)
-              const slug = slugger.slug(text)
+              const slug = heading?.data?.id || slugger.slug(text)
 
               return (
                 <Item
