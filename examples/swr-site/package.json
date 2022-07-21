@@ -1,7 +1,6 @@
 {
   "name": "swr-site",
-  "version": "1.0.0",
-  "description": "",
+  "private": true,
   "main": "index.js",
   "scripts": {
     "dev": "next",
