@@ -1,9 +1,9 @@
 {
   "name": "nextra-theme-blog",
-  "version": "2.0.0-alpha.55",
+  "version": "2.0.0-beta.8",
   "description": "A Nextra theme for blogs.",
   "main": "index.js",
-  "repository": "https://github.com/shuding/nextra-theme-blog.git",
+  "repository": "https://github.com/shuding/nextra",
   "author": "Shu Ding <g@shud.in>",
   "license": "MIT",
   "files": [
@@ -26,7 +26,7 @@
     "dev": "concurrently \"pnpm dev:layout\" \"pnpm dev:tailwind\"",
     "dev:layout": "node scripts/dev.js",
     "dev:tailwind": "cross-env TAILWIND_MODE=watch pnpm postcss src/styles.css -o style.css --watch",
-    "prepublishOnly": "rm -rf dist && pnpm build"
+    "prepublishOnly": "rm -rf dist && pnpm build && pnpm types"
   },
   "dependencies": {
     "@mdx-js/react": "^2.1.0",

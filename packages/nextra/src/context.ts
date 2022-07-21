@@ -11,12 +11,13 @@ interface Page {
 }
 
 function getContext(name: string) {
-  if (!(globalThis as any).__nextra_internal__) {
+  const context = globalThis.__nextra_internal__
+  if (!context) {
     throw new Error(
       `Nextra context not found. Please make sure you are using "${name}" of "nextra/context" on a Nextra page.`
     )
   }
-  return (globalThis as any).__nextra_internal__
+  return context
 }
 
 function normalizeMeta(meta: any) {
