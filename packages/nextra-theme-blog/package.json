@@ -26,7 +26,7 @@
     "dev": "concurrently \"pnpm dev:layout\" \"pnpm dev:tailwind\"",
     "dev:layout": "node scripts/dev.js",
     "dev:tailwind": "cross-env TAILWIND_MODE=watch pnpm postcss src/styles.css -o style.css --watch",
-    "prepublishOnly": "rm -rf dist && pnpm build"
+    "prepublishOnly": "rm -rf dist && pnpm build && pnpm types"
   },
   "dependencies": {
     "@mdx-js/react": "^2.1.0",
