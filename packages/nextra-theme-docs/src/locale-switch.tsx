@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 
 import Menu from './select'
 import { DocsThemeConfig } from './types'
-import Globe from './icons/globe'
+import { GlobeIcon } from './icons'
 
 interface LocaleSwitchProps {
   options: NonNullable<DocsThemeConfig['i18n']>
@@ -27,7 +27,7 @@ export default function LocaleSwitch({ options }: LocaleSwitchProps) {
         key: selected.locale,
         name: (
           <div className="flex items-center gap-2">
-            <Globe />
+            <GlobeIcon />
             <span>{selected.text}</span>
           </div>
         )

@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 
-export default function Globe() {
+export function GlobeIcon(): ReactElement {
   return (
     <svg viewBox="0 0 20 20" width="1em" height="1em" fill="currentColor">
       <path
