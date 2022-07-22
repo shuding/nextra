@@ -15,6 +15,7 @@ import { Transition } from '@headlessui/react'
 import { useConfig } from './config'
 import renderComponent from './utils/render-component'
 import useMenuContext from './utils/menu-context'
+import { SpinnerIcon } from './icons'
 
 const Item = ({
   page,
@@ -253,11 +254,8 @@ export default function Search() {
     const localeCode = Router.locale || 'default'
     if (!indexes[localeCode] && !loading) {
       setLoading(true)
-      const data = await (
-        await fetch(
-          `${Router.basePath}/_next/static/chunks/nextra-data-${localeCode}.json`
-        )
-      ).json()
+      const response = await fetch(`${Router.basePath}/_next/static/chunks/nextra-data-${localeCode}.json`)
+      const data = await response.json()
 
       const pageIndex = new FlexSearch.Document({
         cache: 100,
@@ -397,7 +395,7 @@ export default function Search() {
           ref={input}
           spellCheck={false}
         />
-        {renderList ? null : (
+        {!renderList && (
           <div className="hidden sm:flex absolute inset-y-0 right-0 py-1.5 pr-1.5 select-none pointer-events-none">
             <kbd className="inline-flex items-center px-1.5 font-mono text-sm font-medium bg-white dark:bg-dark dark:bg-opacity-50 text-gray-400 dark:text-gray-500 dark:border-gray-100 dark:border-opacity-20 border rounded">
               /
@@ -415,26 +413,7 @@ export default function Search() {
         <ul className="absolute z-20 px-0 py-2.5 m-0 mt-2 top-full rounded-xl overflow-hidden overscroll-contain shadow-xl list-none">
           {loading ? (
             <span className="p-8 text-center text-gray-400 text-sm select-none flex justify-center">
-              <svg
-                className="animate-spin -ml-1 mr-2 h-5 w-5 text-gray-400"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <circle
-                  className="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                ></circle>
-                <path
-                  className="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                ></path>
-              </svg>
+              <SpinnerIcon className="animate-spin -ml-1 mr-2 h-5 w-5 text-gray-400" />
               <span>Loading...</span>
             </span>
           ) : results.length === 0 ? (
@@ -453,9 +432,7 @@ export default function Search() {
                   excerpt={res.excerpt}
                   active={i === active}
                   onHover={() => setActive(i)}
-                  onClick={() => {
-                    finishSearch()
-                  }}
+                  onClick={finishSearch}
                 />
               )
             })
