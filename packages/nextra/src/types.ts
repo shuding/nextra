@@ -32,6 +32,9 @@ export interface PageOpt {
   titleText: string | null
   headings?: Heading[]
   hasH1: boolean
+  unstable_flexsearch?: boolean | {
+    codeblocks: boolean;
+  };
 }
 
 export type PageMapResult = [

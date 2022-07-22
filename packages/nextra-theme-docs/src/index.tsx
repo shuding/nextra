@@ -258,7 +258,7 @@ interface DocsLayoutProps extends PageOpt {
   meta: Meta
 }
 const createLayout = (opts: DocsLayoutProps, _config: DocsThemeConfig) => {
-  const extendedConfig = Object.assign({}, defaultConfig, _config)
+  const extendedConfig = Object.assign({}, defaultConfig, _config, opts)
   let layoutUsed = false
   const Page = ({ children }: { children: React.ReactChildren }) => {
     if (!layoutUsed && isProduction) {

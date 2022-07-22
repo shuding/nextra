@@ -186,6 +186,7 @@ const NextraLayout = __nextra_withSSG__(__nextra_withLayout__({
   headings: ${JSON.stringify(headings)},
   hasH1: ${JSON.stringify(hasH1)},
   ${timestamp ? `timestamp: ${timestamp},\n` : ''}
+  ${unstable_flexsearch ? `unstable_flexsearch: ${JSON.stringify(unstable_flexsearch)}` : ''}
 }, ${layoutConfig ? '__nextra_layoutConfig__' : 'null'}))
 
 ${content}
