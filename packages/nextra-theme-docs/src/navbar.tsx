@@ -140,7 +140,7 @@ export default function Navbar({ flatDirectories, items }: NavBarProps) {
                 renderComponent(config.projectLinkIcon, { locale })
               ) : (
                 <>
-                  <GitHubIcon height={24} />
+                  <GitHubIcon />
                   <span className="sr-only">GitHub</span>
                 </>
               )}
@@ -157,7 +157,7 @@ export default function Navbar({ flatDirectories, items }: NavBarProps) {
                 renderComponent(config.projectChatLinkIcon, { locale })
               ) : (
                 <>
-                  <DiscordIcon height={24} />
+                  <DiscordIcon />
                   <span className="sr-only">Discord</span>
                 </>
               )}
