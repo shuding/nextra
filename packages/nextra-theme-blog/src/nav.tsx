@@ -12,7 +12,7 @@ export default function Nav({
   config: NextraBlogTheme
 }): ReactElement {
   return (
-    <div className="flex items-start mb-8 gap-3">
+    <div className="flex items-center mb-8 gap-3">
       <div className="grow flex items-center flex-wrap justify-end gap-3">
         {navPages.map(page => {
           if (page.active) {
