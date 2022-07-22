@@ -46,17 +46,10 @@ export async function compileMdx(
   source: string,
   mdxOptions: LoaderOptions['mdxOptions'] &
     Pick<ProcessorOptions, 'jsx' | 'outputFormat'> = {},
-  nextraOptions: {
-    unstable_staticImage: boolean
-    unstable_flexsearch:
-      | boolean
-      | {
-          codeblocks: boolean
-        }
-  } = {
-    unstable_staticImage: false,
-    unstable_flexsearch: false
-  },
+  nextraOptions: Pick<
+    LoaderOptions,
+    'unstable_staticImage' | 'unstable_flexsearch'
+  > = {},
   resourcePath: string
 ) {
   let structurizedData = {}
@@ -77,7 +70,10 @@ export async function compileMdx(
     rehypePlugins: [
       ...(mdxOptions.rehypePlugins || []),
       parseMeta,
-      [rehypePrettyCode, rehypePrettyCodeOptions],
+      [
+        rehypePrettyCode,
+        { ...rehypePrettyCodeOptions, ...mdxOptions.rehypePrettyCodeOptions }
+      ],
       attachMeta
     ].filter(Boolean)
   })
