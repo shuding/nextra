@@ -28,7 +28,7 @@ const externalDeps = [
 esbuild.build({
   ...BUILD_OPTIONS,
   entryPoints: [
-    'src/index.js',
+    'src/index.ts',
     'src/ssg.ts',
     'src/locales.ts',
     'src/context.ts'
