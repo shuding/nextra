@@ -27,7 +27,7 @@ const [repository, gitRoot] = (function () {
     const gitRoot = path.join(repo.path(), '..')
     return [repo, gitRoot]
   } catch (e) {
-    console.warn('Init git repository failed', e)
+    console.warn('[nextra] Init git repository failed', e)
     return []
   }
 })()
@@ -50,6 +50,11 @@ async function loader(
   } = options
 
   const { resourcePath } = context
+  if (resourcePath.includes('/pages/api/')) {
+    console.warn(`[nextra] Ignoring ${resourcePath} because it is located in the "pages/api" folder.`)
+    return ''
+  }
+
   const filename = resourcePath.slice(resourcePath.lastIndexOf('/') + 1)
   const fileLocale = getLocaleFromFilename(filename)
 
@@ -137,15 +142,15 @@ async function loader(
     if (repository.isShallow()) {
       if (process.env.VERCEL) {
         console.warn(
-          `The repository is shallow cloned, so the latest modified time will not be presented. Set the VERCEL_DEEP_CLONE=true environment variable to enable deep cloning.`
+          '[nextra] The repository is shallow cloned, so the latest modified time will not be presented. Set the VERCEL_DEEP_CLONE=true environment variable to enable deep cloning.'
         )
       } else if (process.env.GITHUB_ACTION) {
         console.warn(
-          `The repository is shallow cloned, so the latest modified time will not be presented. See https://github.com/actions/checkout#fetch-all-history-for-all-tags-and-branches to fetch all the history.`
+          '[nextra] The repository is shallow cloned, so the latest modified time will not be presented. See https://github.com/actions/checkout#fetch-all-history-for-all-tags-and-branches to fetch all the history.'
         )
       } else {
         console.warn(
-          `The repository is shallow cloned, so the latest modified time will not be presented.`
+          '[nextra] The repository is shallow cloned, so the latest modified time will not be presented.'
         )
       }
     }

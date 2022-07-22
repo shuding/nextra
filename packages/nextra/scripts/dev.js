@@ -1,7 +1,7 @@
 const esbuild = require('esbuild')
 const packageJson = require('../package.json')
 
-console.log('Watching...')
+console.log('[nextra] Watching...')
 
 const BUILD_OPTIONS = {
   platform: 'node',
@@ -11,9 +11,9 @@ const BUILD_OPTIONS = {
   watch: {
     onRebuild(error) {
       if (error) {
-        console.error('Watch build failed:', error)
+        console.error('[nextra] Watch build failed:', error)
       } else {
-        console.log('Watch build succeeded.')
+        console.log('[nextra] Watch build succeeded.')
       }
     }
   }
