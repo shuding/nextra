@@ -20,7 +20,7 @@ Similar to the docs theme, you can install the blog theme with the following com
 ```jsx filename="next.config.js"
 const withNextra = require('nextra')({
   theme: 'nextra-theme-blog',
-  themeConfig: './theme.config.js',
+  themeConfig: './theme.config.js'
   // optional: add `unstable_staticImage: true` to enable Nextra's auto image import
 })
 module.exports = withNextra()
@@ -44,15 +44,15 @@ export default {
   cusdis: {
     appId: 'your_app_id',
     host: 'your_host(optional)',
-    lang: 'your_lang',
+    lang: 'your_lang'
   },
   darkMode: false,
   navs: [
     {
       url: 'https://github.com/shuding/nextra',
-      name: 'Nextra',
-    },
-  ],
+      name: 'Nextra'
+    }
+  ]
 }
 ```
 
@@ -62,7 +62,7 @@ export default {
 import 'nextra-theme-blog/style.css'
 
 export default function Nextra({ Component, pageProps }) {
-  const getLayout = Component.getLayout || ((page) => page)
+  const getLayout = Component.getLayout || (page => page)
   return <Component {...pageProps} />
 }
 ```

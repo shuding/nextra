@@ -19,7 +19,7 @@ import Callout from 'nextra-theme-docs/callout'
 function myMiddleware (useSWRNext) {
   return (key, fetcher, config) => {
     // hook을 실행하기 전...
-    
+
     // 다음 미들웨어를 처리하거나, 마지막인 경우 `useSWR` hook을 처리합니다.
     const swr = useSWRNext(key, fetcher, config)
 
@@ -91,7 +91,6 @@ exit  a
 ### Request Logger
 
 예시로 간단한 request logger 미들웨어를 만들어봅시다. 이 SWR hook으로부터 전송된 모든 가져오기 요청을 출력합니다. 이 미들웨어를 `SWRConfig`에 추가하여 모든 SWR hook에 대해 사용할 수도 있습니다.
-
 
 ```jsx
 function logger(useSWRNext) {

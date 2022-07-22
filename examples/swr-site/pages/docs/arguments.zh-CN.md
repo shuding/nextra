@@ -24,7 +24,7 @@ useSWR('/api/user', url => fetchWithToken(url, token))
 const { data: user } = useSWR(['/api/user', token], fetchWithToken)
 ```
 
-`fetchWithToken` 函数仍然接受同样的2个参数，但现在缓存 key 也将与 `token` 相关联。
+`fetchWithToken` 函数仍然接受同样的 2 个参数，但现在缓存 key 也将与 `token` 相关联。
 
 ## 传入对象
 

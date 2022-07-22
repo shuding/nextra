@@ -11,9 +11,10 @@ import Callout from 'nextra-theme-docs/callout'
 **Markdown With React Components**
 
 <Callout emoji="✅">
-  **MDX** (the library), at its core, transforms MDX (the syntax) to JSX.
-  It receives an MDX string and outputs a _JSX string_. It does this by parsing
-  the MDX document to a syntax tree and then generates a JSX document from that tree. 
+  **MDX** (the library), at its core, transforms MDX (the syntax) to JSX. It
+  receives an MDX string and outputs a _JSX string_. It does this by parsing the
+  MDX document to a syntax tree and then generates a JSX document from that
+  tree.
 </Callout>
 ```
 
@@ -75,7 +76,7 @@ Renders
 
 ## Syntax Highlighting
 
-Automatica syntax highlighting:
+Automatic syntax highlighting
 
 ````mdx
 ```js
@@ -89,7 +90,7 @@ Renders:
 console.log('hello, world')
 ```
 
-You can also add the `highlight=<line|range>` modifier to highlight specific lines:
+You can also add the `{line|range}` modifier to highlight specific lines:
 
 ````mdx
 ```jsx {4,6-8}
@@ -150,9 +151,7 @@ Nested quotes:
 React components and Markdown can be **mixed together**, for instance:
 
 ```mdx
-<Callout>
-   Give [**Nextra**](https://github.com/shuding/nextra) a star!
-</Callout>
+<Callout>Give [**Nextra**](https://github.com/shuding/nextra) a star!</Callout>
 ```
 
 Renders:

@@ -18,11 +18,13 @@ const createEditUrl = (repository?: string, filepath?: string) => {
 
   switch (repo.type) {
     case 'github':
-      return `https://github.com/${repo.owner}/${repo.name}/blob/${repo.branch || 'main'
-        }/${repo.subdir || 'pages'}${filepath}`
+      return `https://github.com/${repo.owner}/${repo.name}/blob/${
+        repo.branch || 'main'
+      }/${repo.subdir || 'pages'}${filepath}`
     case 'gitlab':
-      return `https://gitlab.com/${repo.owner}/${repo.name}/-/blob/${repo.branch || 'master'
-        }/${repo.subdir || 'pages'}${filepath}`
+      return `https://gitlab.com/${repo.owner}/${repo.name}/-/blob/${
+        repo.branch || 'master'
+      }/${repo.subdir || 'pages'}${filepath}`
   }
 
   return '#'
@@ -43,13 +45,15 @@ const useCreateFeedbackUrl = (
 
   switch (repo.type) {
     case 'github':
-      return `https://github.com/${repo.owner}/${repo.name
-        }/issues/new?title=${encodeURIComponent(
-          `Feedback for “${pageTitle}”`
-        )}&labels=${labels || ''}`
+      return `https://github.com/${repo.owner}/${
+        repo.name
+      }/issues/new?title=${encodeURIComponent(
+        `Feedback for “${pageTitle}”`
+      )}&labels=${labels || ''}`
     case 'gitlab':
-      return `https://gitlab.com/${repo.owner}/${repo.name}/-/blob/${repo.branch || 'master'
-        }/${repo.subdir || 'pages'}${filepath}`
+      return `https://gitlab.com/${repo.owner}/${repo.name}/-/blob/${
+        repo.branch || 'master'
+      }/${repo.subdir || 'pages'}${filepath}`
   }
 
   return '#'
@@ -61,9 +65,11 @@ const EditPageLink = ({
   filepath
 }: {
   repository?: string
-  text: React.ReactNode | React.FC<{
-    locale?: string
-  }>
+  text:
+    | React.ReactNode
+    | React.FC<{
+        locale?: string
+      }>
   filepath: string
 }) => {
   const url = createEditUrl(repository, filepath)
@@ -77,8 +83,8 @@ const EditPageLink = ({
     >
       {text
         ? renderComponent(text, {
-          locale
-        })
+            locale
+          })
         : 'Edit this page'}
     </a>
   )
@@ -106,8 +112,8 @@ const FeedbackLink = ({
     >
       {feedbackLink
         ? renderComponent(feedbackLink, {
-          locale
-        })
+            locale
+          })
         : 'Feedback'}
     </a>
   )
@@ -193,8 +199,8 @@ export default function ToC({
 
   headings = headings
     ? headings.filter(
-      heading => heading.type === 'heading' && heading.depth > 1
-    )
+        heading => heading.type === 'heading' && heading.depth > 1
+      )
     : headings
 
   const hasHeadings = headings && headings.length > 0

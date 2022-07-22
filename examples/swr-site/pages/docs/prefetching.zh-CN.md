@@ -8,9 +8,9 @@
 <link rel="preload" href="/api/data" as="fetch" crossorigin="anonymous">
 ```
 
-只需把它放在HTML的 `<head>` 里即可。简单、快速、原生。
+只需把它放在 HTML 的 `<head>` 里即可。简单、快速、原生。
 
-它将在 HTML 加载时预请求数据，甚至是在 JavaScript 开始下载之前。使用相同 URL 的所有传入 fetch 请求都将重用结果(当然包括SWR)。
+它将在 HTML 加载时预请求数据，甚至是在 JavaScript 开始下载之前。使用相同 URL 的所有传入 fetch 请求都将重用结果(当然包括 SWR)。
 
 ## 手动预请求
 
@@ -38,6 +38,6 @@ function prefetch () {
 useSWR('/api/data', fetcher, { fallbackData: prefetchedData })
 ```
 
-当 SWR 还没有获取此次数据的时候， 这个 hook 将返回 `prefetchedData` 作为 fallback 。 
+当 SWR 还没有获取此次数据的时候， 这个 hook 将返回 `prefetchedData` 作为 fallback 。
 
 你也可以为所有的 SWR hooks 和不同的 key 配置 `<SWRConfig>` 和它的 `fallback` 选项。 查看 [Next.js SSG 和 SSR](/docs/with-nextjs) 了解更多详细信息。

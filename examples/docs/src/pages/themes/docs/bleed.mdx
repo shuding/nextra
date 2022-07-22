@@ -4,7 +4,6 @@ A built-in component provided by `nextra-theme-docs`.
 
 ## Example
 
-
 When wrapping your content with `<Bleed>`, it will be slightly wider than the container
 and will overflow on both sides.
 
@@ -27,9 +26,9 @@ For example you can put text, image, video or any component inside:
     width="100%"
     height="430"
     src="https://www.youtube.com/embed/3hccXiXI0u8"
-    frameborder="0"
+    frameBorder="0"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen
+    allowFullscreen
   />
 </Nextra.Bleed>
 
@@ -42,8 +41,8 @@ You can even make it full-bleed using `<Bleed full>`:
 ## Usage
 
 ### MDX component
-```mdx filename="bleed.mdx"
 
+```mdx filename="bleed.mdx"
 <Nextra.Bleed>Hey, I can use **Markdown** syntax here.</Nextra.Bleed>
 
 <Nextra.Bleed full>
@@ -56,7 +55,7 @@ You can even make it full-bleed using `<Bleed full>`:
     width="100%"
     height="500px"
     title="SWR-States"
-  ></iframe>
+  />
 </Nextra.Bleed>
 ```
 
@@ -77,6 +76,6 @@ import Bleed from 'nextra-theme-docs/bleed'
     width="100%"
     height="500px"
     title="SWR-States"
-  ></iframe>
+  />
 </Bleed>
 ```

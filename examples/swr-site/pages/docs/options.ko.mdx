@@ -29,7 +29,7 @@ const { data, error, isValidating, mutate } = useSWR(key, fetcher, options)
 - `revalidateOnReconnect = true`: 브라우저가 네트워크 연결을 다시 얻었을 때 자동으로 갱신(`navigator.onLine`을 통해) [(상세내용)](/docs/revalidation)
 - `refreshInterval` [(상세내용)](/docs/revalidation):
   - 기본적으로는 비활성화: `refreshInterval = 0`
-  - If set to a number, 인터벌 폴링 
+  - If set to a number, 인터벌 폴링
   - If set to a function, the function will receive the latest data and should return the interval in milliseconds
 - `refreshWhenHidden = false`: 창이 보이지 않을 때 폴링(`refreshInterval`이 활성화된 경우)
 - `refreshWhenOffline = false`: 브라우저가 오프라인일 때 폴링(`navigator.onLine`에 의해 결정됨)

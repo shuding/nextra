@@ -4,4 +4,4 @@
 "nextra-theme-docs": patch
 ---
 
-Fix release workflow.
+pass unstable_flexsearch

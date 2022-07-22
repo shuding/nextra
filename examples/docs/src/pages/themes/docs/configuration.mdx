@@ -238,7 +238,7 @@ export default {
 }
 ```
 
-## `font`
+<!-- ## `font`
 
 Specifies if nextra should load its own fonts. Disable this if you want to use a custom font.
 
@@ -255,7 +255,7 @@ Specifies if nextra should load its own fonts. Disable this if you want to use a
 export default {
   font: true
 }
-```
+``` -->
 
 ## `footer`
 
@@ -318,7 +318,7 @@ The components that should be shown on the link that leads to the issues or disc
 
 **Type:** `ReactNode | React.FC<{ locale?: string }>{:ts}`
 
-**Default:** `Edit this page`
+**Default:** ``
 
 **Example:**
 
@@ -337,7 +337,7 @@ Label used for create issue or discussion.
 
 **Type:** `string`
 
-**Default:** `feedback`
+**Default:** ``
 
 **Example:**
 
@@ -364,12 +364,12 @@ The logo in the top left.
  */
 export default {
   logo: ({ locale }) => (
-    <React.Fragment>
+    <>
       <span className="mr-2 font-extrabold hidden md:inline">Nextra</span>
       <span className="text-gray-600 font-normal hidden md:inline">
         The Next Docs Builder
       </span>
-    </React.Fragment>
+    </>
   )
 }
 ```
@@ -388,7 +388,7 @@ The head that should be inserted into the html document.
  */
 export default {
   head: ({ locale, title, config, meta }) => (
-    <React.Fragment>
+    <>
       <meta name="msapplication-TileColor" content="#ffffff" />
       <meta name="theme-color" content="#ffffff" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -399,7 +399,7 @@ export default {
       <meta property="og:title" content="Nextra: the next docs builder" />
       <meta property="og:description" content="Nextra: the next docs builder" />
       <meta name="apple-mobile-web-app-title" content="Nextra" />
-    </React.Fragment>
+    </>
   )
 }
 ```
@@ -451,8 +451,6 @@ The URL that the chat button in the top right will point to.
 
 **Type:** `string`
 
-**Default:** `https://discord.gg/hEM84NMkRv`
-
 **Example:**
 
 ```js filename="theme.config.js"
@@ -503,6 +501,8 @@ export default {
 The key that is used to control the display of banner in localStorage.
 
 **Type:** `string`
+
+**Default:** `'nextra-banner'`
 
 **Example:**
 

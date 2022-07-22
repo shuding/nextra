@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 # Error Handling
 
-If an error is thrown inside [`fetcher`](/docs/data-fetching), it will be returned as `error` by the hook. 
+If an error is thrown inside [`fetcher`](/docs/data-fetching), it will be returned as `error` by the hook.
 
 ```js
 const fetcher = url => fetch(url).then(r => r.json())
@@ -16,10 +16,10 @@ The `error` object will be defined if the fetch promise is rejected.
 
 ## Status Code and Error Object
 
-Sometimes we want an API to return an error object alongside the status code. 
+Sometimes we want an API to return an error object alongside the status code.
 Both of them are useful for the client.
 
-We can customize our `fetcher` to return more information. If the status code is not `2xx`, 
+We can customize our `fetcher` to return more information. If the status code is not `2xx`,
 we consider it an error even if it can be parsed as JSON:
 
 ```js
@@ -86,7 +86,7 @@ It's also possible to provide it via the [Global Configuration](/docs/global-con
 
 ## Global Error Report
 
-You can always get the `error` object inside the component reactively. 
+You can always get the `error` object inside the component reactively.
 But in case you want to handle the error globally, to notify the UI to show a [toast](https://vercel.com/design/toast) or a [snackbar](https://material.io/components/snackbars), or report it somewhere such as [Sentry](https://sentry.io),
 there's an [`onError`](/docs/options#options) event:
 

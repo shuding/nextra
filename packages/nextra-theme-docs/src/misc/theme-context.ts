@@ -1,4 +1,4 @@
-import { PageTheme } from '../types';
+import { PageTheme } from '../types'
 
 export default <PageTheme>{
   navbar: true,
@@ -10,4 +10,3 @@ export default <PageTheme>{
   typesetting: 'default',
   breadcrumb: true
 }
-

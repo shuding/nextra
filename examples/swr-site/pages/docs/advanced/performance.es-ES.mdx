@@ -46,7 +46,7 @@ function App() {
 
 ```
 
-Cada componente `<Avatar/>` tiene un hook `useSWR` en su interior. Dado que tienen el mismo key SWR y 
+Cada componente `<Avatar/>` tiene un hook `useSWR` en su interior. Dado que tienen el mismo key SWR y
 que se renderizan casi al mismo tiempo, **sólo se hará 1 solicitud de red**.
 
 Se pueden reutilizar los hooks de datos (como `useUser` en el ejemplo anterior) en todas partes, sin preocuparse por el rendimiento
@@ -56,7 +56,7 @@ También existe la [opción `dedupingInterval`](/docs/options) para anular el in
 
 ## Comparación profunda
 
-SWR por defecto tiene  **deep compares** al cambio de datos. Si el valor de `data` no ha cambiado, no se
+SWR por defecto tiene **deep compares** al cambio de datos. Si el valor de `data` no ha cambiado, no se
 activará una nueva renderización.
 
 También puede personalizar la función de comparación mediante la [opción `compare`](/docs/options) si quieres cambiar el comportamiento.
@@ -112,11 +112,10 @@ Data      // => end retrying, get the data
 El mismo proceso ha ocurrido internamente, hubo un error de la primera solicitud, entonces tenemos los datos del reintento.
 Sin embargo, **SWR sólo actualiza los estados que utiliza el componente**, que ahora sólo es `data`.
 
-Si no se utilizan siempre estos 3 estados, ya se está beneficiando de esta función. En [Vercel](https://vercel.com), esta optimización se 
+Si no se utilizan siempre estos 3 estados, ya se está beneficiando de esta función. En [Vercel](https://vercel.com), esta optimización se
 traduce en un 60% menos de repeticiones.
 
 ## Tree Shaking
 
 El paquete SWR es [tree-shakeable](https://webpack.js.org/guides/tree-shaking) y no tiene efectos secundarios.
 Esto significa que si sólo se importa `useSWR` core API, las APIs no utilizadas, como `useSWRInfinite`, no se incluirán en la aplicación.
-
