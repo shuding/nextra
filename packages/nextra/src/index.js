@@ -1,8 +1,8 @@
 import { NextraPlugin, pageMapCache } from './plugin'
+import { MARKDOWN_EXTENSION_REGEX } from './constants'
 
 const defaultExtensions = ['js', 'jsx', 'ts', 'tsx']
 const markdownExtensions = ['md', 'mdx']
-const markdownExtensionTest = /\.mdx?$/
 
 module.exports =
   (...args) =>
@@ -38,7 +38,7 @@ module.exports =
         }
 
         config.module.rules.push({
-          test: markdownExtensionTest,
+          test: MARKDOWN_EXTENSION_REGEX,
           use: [
             options.defaultLoaders.babel,
             {
