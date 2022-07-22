@@ -34,11 +34,12 @@ const H1 = ({ children }: { children?: ReactNode }): ReactElement => {
 }
 const createHeaderLink =
   (Tag: `h${2 | 3 | 4 | 5 | 6}`) =>
-  ({ children, ...props }: ComponentProps<'h2'>): ReactElement => {
+  ({ children, id, ...props }: ComponentProps<'h2'>): ReactElement => {
     return (
       <Tag {...props}>
+        <span className="-mt-8 absolute" id={id} />
         <a
-          href={`#${props.id}`}
+          href={`#${id}`}
           className="
           !no-underline
           after:content-['#']
