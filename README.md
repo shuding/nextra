@@ -6,7 +6,7 @@ Nextra is a Next.js plugin that renders your **MDX files** with custom themes.
 
 ### Installation
 
-The Nextra repository uses [PNPM Workspaces](https://pnpm.io/workspaces) and [Lerna](https://github.com/lerna/lerna). To install dependencies, just simply run `pnpm` in the project root directory.
+The Nextra repository uses [PNPM Workspaces](https://pnpm.io/workspaces) and [Turborepo](https://github.com/vercel/turborepo). To install dependencies, just simply run `pnpm` in the project root directory.
 
 ### Build Nextra Core
 
