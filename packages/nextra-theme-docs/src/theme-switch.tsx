@@ -2,7 +2,7 @@ import React, { memo } from 'react'
 import { useTheme } from 'next-themes'
 
 import Menu from './select'
-import { SunIcon, MoonIcon } from './icons'
+import { SunIcon, MoonIcon } from 'nextra/icons'
 
 function ThemeSwitch({ lite = true }) {
   const { theme, setTheme, systemTheme } = useTheme()

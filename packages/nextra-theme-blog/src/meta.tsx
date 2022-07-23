@@ -4,11 +4,11 @@ import ThemeSwitch from './theme-switch'
 import type { NextraBlogTheme } from './types'
 import { split } from './utils/get-tags'
 
-interface MeatProps {
+interface MetaProps {
   author: string
   date: string
   tag: string | string[]
-  back: string
+  back?: string | null
   config: NextraBlogTheme
 }
 
@@ -18,7 +18,7 @@ export default function Meta({
   tag,
   back,
   config
-}: MeatProps): ReactElement {
+}: MetaProps): ReactElement {
   const tags = tag ? split(tag) : []
 
   return (

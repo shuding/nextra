@@ -10,7 +10,7 @@ import useMenuContext from './utils/menu-context'
 import { useConfig } from './config'
 import Search from './search'
 import Flexsearch from './flexsearch'
-import { GitHubIcon, DiscordIcon, XIcon, MenuIcon } from './icons'
+import { GitHubIcon, DiscordIcon, XIcon, MenuIcon } from 'nextra/icons'
 import { Item, PageItem } from './utils/normalize-pages'
 
 interface NavBarProps {

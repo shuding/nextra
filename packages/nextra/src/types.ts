@@ -3,7 +3,6 @@ import { Heading as MDASTHeading } from 'mdast'
 import { ProcessorOptions } from '@mdx-js/mdx'
 import { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
 import { PageMapCache } from './plugin'
-
 export interface LoaderOptions extends NextraConfig {
   locales: string[]
   defaultLocale: string
@@ -49,7 +48,7 @@ type Theme = string
 
 export type NextraConfig = {
   theme: Theme
-  themeConfig: string
+  themeConfig?: string
   unstable_flexsearch?: boolean | { codeblocks: boolean }
   unstable_staticImage?: boolean
   mdxOptions?: Pick<ProcessorOptions, 'rehypePlugins' | 'remarkPlugins'> & {
@@ -57,6 +56,6 @@ export type NextraConfig = {
   }
 }
 
-export type Nextra = (
+export type WithNextra = (
   ...args: [NextraConfig] | [theme: Theme, themeConfig: string]
 ) => (nextConfig: NextConfig) => NextConfig

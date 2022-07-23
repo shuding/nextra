@@ -16,7 +16,7 @@ import getHeadingText from './utils/get-heading-text'
 import { Item, PageItem } from './utils/normalize-pages'
 import LocaleSwitch from './locale-switch'
 import ThemeSwitch from './theme-switch'
-import { ArrowRightIcon } from './icons'
+import { ArrowRightIcon } from 'nextra/icons'
 import Collapse from './components/collapse'
 import renderComponent from './utils/render-component'
 

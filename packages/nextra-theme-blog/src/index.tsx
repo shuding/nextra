@@ -8,7 +8,6 @@ import { ReactCusdis } from 'react-cusdis'
 import Meta from './meta'
 import Nav from './nav'
 import MDXTheme, { HeadingContext } from './mdx-theme'
-
 import traverse from './utils/traverse'
 import getTags from './utils/get-tags'
 import sortDate from './utils/sort-date'
@@ -162,6 +161,7 @@ const BlogLayout = ({
         <HeadingContext.Provider value={ref}>
           {pageTitle && <h1>{pageTitle}</h1>}
           {type === 'post' ? (
+            // @ts-expect-error
             <Meta {...opts.meta} back={back} config={config} />
           ) : (
             <Nav navPages={navPages} config={config} />
@@ -200,5 +200,5 @@ const createLayout = (opts: PageOpt, _config: NextraBlogTheme) => {
   Page.getLayout = Layout
   return Page
 }
-
+export * from './types'
 export default createLayout

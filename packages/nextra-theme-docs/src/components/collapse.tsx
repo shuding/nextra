@@ -9,7 +9,7 @@ export default function Collapse({
 }) {
   const containerRef = useRef<HTMLDivElement>(null)
   const innerRef = useRef<HTMLDivElement>(null)
-  const animationRef = useRef<NodeJS.Timeout>()
+  const animationRef = useRef<any>()
   const initialRender = useRef(true)
   const initialState = useRef(open)
 

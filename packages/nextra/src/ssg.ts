@@ -1,10 +1,10 @@
-import React, {
-  ComponentClass,
+import {
   createContext,
+  useContext,
+  ComponentClass, 
   FunctionComponent,
-  useContext
+  createElement
 } from 'react'
-
 export const SSGContext = createContext<any>(false)
 export const useSSG = (key = 'ssg') => useContext(SSGContext)?.[key]
 
@@ -12,10 +12,10 @@ export const withSSG = <T extends { ssg: boolean } = any>(
   Page: FunctionComponent<T> | ComponentClass<T>
 ) => {
   function WithSSG(props: T) {
-    return React.createElement(
+    return createElement(
       SSGContext.Provider,
       { value: props },
-      React.createElement(Page, props)
+      createElement(Page, props)
     )
   }
   WithSSG.getLayout = (Page as any).getLayout

@@ -8,7 +8,7 @@ export interface DocsThemeConfig {
   titleSuffix?:
     | React.ReactNode
     | React.FC<{
-        locale: string
+        locale?: string
         config: DocsThemeConfig
         title: string
         meta: Meta
@@ -45,7 +45,7 @@ export interface DocsThemeConfig {
   head?:
     | React.ReactNode
     | React.FC<{
-        locale: string
+        locale?: string
         config: DocsThemeConfig
         title: string
         meta: Meta

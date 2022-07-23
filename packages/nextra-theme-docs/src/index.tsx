@@ -277,5 +277,5 @@ const createLayout = (opts: DocsLayoutProps, _config: DocsThemeConfig) => {
 
   return Page
 }
-
+export * from './types'
 export default createLayout

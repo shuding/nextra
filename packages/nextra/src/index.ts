@@ -1,11 +1,11 @@
 import { NextraPlugin, pageMapCache } from './plugin'
 import { MARKDOWN_EXTENSION_REGEX } from './constants'
-import { LoaderOptions, Nextra } from './types'
+import { LoaderOptions, WithNextra } from './types'
 
 const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx'] as const
 const MARKDOWN_EXTENSIONS = ['md', 'mdx'] as const
 
-const nextra: Nextra = (...args) =>
+const nextra: WithNextra = (...args) =>
   function withNextra(nextConfig = {}) {
     const nextraConfig =
       typeof args[0] === 'string'
@@ -65,5 +65,5 @@ const nextra: Nextra = (...args) =>
       }
     }
   }
-
+export * from './types'
 module.exports = nextra

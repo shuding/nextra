@@ -6,7 +6,8 @@
     "dev": "next",
     "start": "next start",
     "build": "next build",
-    "debug": "NODE_OPTIONS='--inspect' next dev"
+    "debug": "NODE_OPTIONS='--inspect' next dev",
+    "clean": "rimraf .next .turbo"
   },
   "author": "Shu Ding",
   "license": "Apache-2.0",

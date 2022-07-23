@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es2016",
     "module": "ESNext",
-    "declaration": true,
+    "declaration": false,
     "noEmit": true,
     "esModuleInterop": true,
     "strict": true,

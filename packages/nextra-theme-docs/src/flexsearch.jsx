@@ -15,7 +15,7 @@ import { Transition } from '@headlessui/react'
 import { useConfig } from './config'
 import renderComponent from './utils/render-component'
 import useMenuContext from './utils/menu-context'
-import { SpinnerIcon } from './icons'
+import { SpinnerIcon } from 'nextra/icons'
 
 const Item = ({
   page,
