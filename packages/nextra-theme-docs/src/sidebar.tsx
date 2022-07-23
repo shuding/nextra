@@ -148,7 +148,6 @@ function File({ item, anchors, topLevel }: FileProps) {
   const slugger = new Slugger()
   const activeAnchor = useActiveAnchor()
   const { setMenu } = useMenuContext()
-
   const title = item.title
 
   if (item.type === 'separator') {
