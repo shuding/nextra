@@ -222,18 +222,18 @@ const Content: React.FC<LayoutProps> = ({
                 <Body
                   themeContext={themeContext}
                   breadcrumb={
-                    activeType !== 'page' && themeContext.breadcrumb && (
+                    activeType !== 'page' && themeContext.breadcrumb ? (
                       <Breadcrumb activePath={activePath} />
-                    )
+                    ) : null
                   }
                   navLinks={
-                    activeType !== 'page' && themeContext.pagination && (
+                    activeType !== 'page' && themeContext.pagination ? (
                       <NavLinks
                         flatDirectories={flatDocsDirectories}
                         currentIndex={activeIndex}
                         isRTL={isRTL}
                       />
-                    )
+                    ) : null
                   }
                   timestamp={timestamp}
                 >
@@ -242,9 +242,9 @@ const Content: React.FC<LayoutProps> = ({
               </div>
             </div>
           </ActiveAnchor>
-          {themeContext.footer && config.footer && (
+          {themeContext.footer && config.footer ? (
             <Footer menu={activeType === 'page' || hideSidebar} />
-          )}
+          ) : null}
         </div>
       </MenuContext.Provider>
   )
