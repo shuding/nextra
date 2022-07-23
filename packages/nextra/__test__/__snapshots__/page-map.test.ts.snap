@@ -49,6 +49,11 @@ exports[`Page Process > pageMap en-US 1`] = `
             },
             {
               "locale": "en-US",
+              "name": "code-highlighting",
+              "route": "/docs/advanced/code-highlighting",
+            },
+            {
+              "locale": "en-US",
               "name": "file-name.with.DOTS",
               "route": "/docs/advanced/file-name.with.DOTS",
             },
@@ -70,6 +75,7 @@ exports[`Page Process > pageMap en-US 1`] = `
                   "type": "separator",
                 },
                 "cache": "Cache",
+                "code-highlighting": "Code highlighting",
                 "file-name.with.DOTS": "Filenames with dots",
                 "markdown-import": "Markdown import",
                 "more": "More: A Super Super Super Super Long Directory",
@@ -439,6 +445,11 @@ exports[`Page Process > pageMap zh-CN 1`] = `
               "locale": "zh-CN",
               "name": "react-native",
               "route": "/docs/advanced/react-native",
+            },
+            {
+              "locale": "en-US",
+              "name": "code-highlighting",
+              "route": "/docs/advanced/code-highlighting",
             },
             {
               "locale": "en-US",
