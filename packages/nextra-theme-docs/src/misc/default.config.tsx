@@ -1,6 +1,7 @@
 import React from 'react'
+import { DocsThemeConfig } from '../types'
 
-const defaultTheme = {
+const defaultTheme: DocsThemeConfig = {
   projectLink: 'https://github.com/shuding/nextra',
   docsRepositoryBase: 'https://github.com/shuding/nextra',
   titleSuffix: ' – Nextra',
@@ -11,7 +12,6 @@ const defaultTheme = {
   nextThemes: {
     defaultTheme: 'system',
     storageKey: 'theme',
-    forcedTheme: undefined
   },
   defaultMenuCollapsed: false,
   // @TODO: Can probably introduce a set of options to use Google Fonts directly
@@ -21,15 +21,15 @@ const defaultTheme = {
   footerEditLink: 'Edit this page',
   gitTimestamp: 'Last updated on',
   logo: (
-    <React.Fragment>
+    <>
       <span className="mr-2 font-extrabold hidden md:inline">Nextra</span>
       <span className="text-gray-600 font-normal hidden md:inline">
         The Next Docs Builder
       </span>
-    </React.Fragment>
+    </>
   ),
   head: (
-    <React.Fragment>
+    <>
       <meta name="msapplication-TileColor" content="#ffffff" />
       <meta httpEquiv="Content-Language" content="en" />
       <meta name="description" content="Nextra: the next docs builder" />
@@ -38,9 +38,9 @@ const defaultTheme = {
       <meta property="og:title" content="Nextra: the next docs builder" />
       <meta property="og:description" content="Nextra: the next docs builder" />
       <meta name="apple-mobile-web-app-title" content="Nextra" />
-    </React.Fragment>
+    </>
   ),
-  searchPlaceholder: ({ locale }: { locale?: string }) => {
+  searchPlaceholder({ locale }: { locale?: string }) {
     if (locale === 'zh-CN') return '搜索文档...'
     return 'Search documentation...'
   },
