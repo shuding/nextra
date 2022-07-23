@@ -8,14 +8,15 @@
   "author": "Shu Ding <g@shud.in>",
   "license": "MIT",
   "files": [
-    "dist/*",
+    "dist",
     "style.css"
   ],
   "types": "./dist/types.d.ts",
   "exports": {
     "./style.css": "./style.css",
     ".": {
-      "import": "./dist/index.js"
+      "import": "./dist/index.js",
+      "types": "./dist/types.d.ts"
     },
     "./callout": {
       "import": "./dist/callout.js"
@@ -25,6 +26,9 @@
     },
     "./tabs": {
       "import": "./dist/components/tabs.js"
+    },
+    "./collapse": {
+      "import": "./dist/components/collapse.js"
     }
   },
   "scripts": {
@@ -39,14 +43,14 @@
     "test": "vitest --run"
   },
   "dependencies": {
-    "@headlessui/react": "^1.6.1",
-    "@mdx-js/react": "^2.1.0",
-    "@reach/skip-nav": "^0.16.0",
-    "classnames": "^2.2.6",
+    "@headlessui/react": "^1.6.5",
+    "@mdx-js/react": "^2.1.2",
+    "@reach/skip-nav": "^0.17.0",
+    "classnames": "^2.3.1",
     "flexsearch": "^0.7.21",
-    "focus-visible": "^5.1.0",
+    "focus-visible": "^5.2.0",
     "github-slugger": "^1.4.0",
-    "intersection-observer": "^0.12.0",
+    "intersection-observer": "^0.12.2",
     "match-sorter": "^4.2.0",
     "next-themes": "^0.2.0-beta.2",
     "parse-git-url": "^1.0.1",

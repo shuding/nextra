@@ -97,7 +97,7 @@ import { Welcome } from 'components/diagrams/welcome'
 Tradicionalmente, obtenemos los datos una vez utilizando `useEffect` en el componente de nivel superiror, y pasarlo a los componentes hijos
 a través de props (fíjate que por ahora no manejamos el estado de error):
 
-```jsx bg=7:11,17,18,27
+```jsx {7-11,17,18,27}
 // componente de la página
 
 function Page() {
@@ -150,7 +150,7 @@ Los componentes dentro del contenido de la página pueden ser dinámicos, y comp
 
 SWR resuelve el problema perfectamente, Con el hook `useUser` que acabamos de crear, el código puede ser refactorizado a:
 
-```jsx bg=20,26
+```jsx {20,26}
 
 // componente de la página
 

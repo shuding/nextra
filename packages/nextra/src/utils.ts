@@ -24,7 +24,10 @@ export const parseJsonFile = (
   try {
     return JSON.parse(content)
   } catch (err) {
-    console.error(`[nextra] Error parsing ${path}, make sure it's a valid JSON`, err)
+    console.error(
+      `[nextra] Error parsing ${path}, make sure it's a valid JSON`,
+      err
+    )
     return {}
   }
 }

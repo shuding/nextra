@@ -9,16 +9,14 @@ import Callout from 'nextra-theme-docs/callout'
 Unlike React running inside the browsers, React Native has a very different user experience. For example there is no “tab focus”, switching from the background to the app is considered as a “focus” instead.
 To customize these behaviors, you can replace the default browser `focus` and `online` events listeners with React Native’s app state detection and other native ported API, and configure SWR to use them.
 
-
 ## Example
-
 
 ### Global Setup
 
 You can wrap your app under `SWRConfig` and preconfig all configurations there
 
 ```jsx
-<SWRConfig 
+<SWRConfig
   value={{
     /* ... */
   }}
@@ -61,7 +59,6 @@ When using `initFocus` and `initReconnect`, it's required to also set up a [cust
 
 Let's take `initFocus` as example:
 
-
 ```jsx
 import { AppState } from 'react-native'
 
@@ -73,7 +70,7 @@ import { AppState } from 'react-native'
     isVisible: () => { return true },
     initFocus(callback) {
       let appState = AppState.currentState
-      
+
       const onAppStateChange = (nextAppState) => {
         /* If it's resuming from background or inactive mode to active one */
         if (appState.match(/inactive|background/) && nextAppState === 'active') {
@@ -84,7 +81,7 @@ import { AppState } from 'react-native'
 
       // Subscribe to the app state change events
       const subscription = AppState.addEventListener('change', onAppStateChange)
-      
+
       return () => {
         subscription.remove()
       }

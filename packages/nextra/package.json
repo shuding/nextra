@@ -27,10 +27,10 @@
     "prepublishOnly": "rm -rf dist && pnpm build && pnpm types"
   },
   "dependencies": {
-    "@mdx-js/mdx": "^2.1.0",
-    "@napi-rs/simple-git": "^0.1.7",
+    "@mdx-js/mdx": "^2.1.2",
+    "@napi-rs/simple-git": "^0.1.8",
     "github-slugger": "^1.4.0",
-    "graceful-fs": "^4.2.6",
+    "graceful-fs": "^4.2.10",
     "gray-matter": "^4.0.3",
     "rehype-pretty-code": "^0.1.0",
     "remark-gfm": "^3.0.1",

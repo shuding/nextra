@@ -27,7 +27,7 @@ const { data, error, isValidating, mutate } = useSWR(key, fetcher, options)
 - `revalidateOnMount`: コンポーネントのマウント時に行われる自動再検証を有効または無効にします
 - `revalidateOnFocus = true`: ウィンドウがフォーカスされたときに自動的に再検証します [（ 詳細 ）](/docs/revalidation)
 - `revalidateOnReconnect = true`: ブラウザがネットワーク接続を回復すると自動的に再検証します（ `navigator.onLine` 経由） [（ 詳細 ）](/docs/revalidation)
-- `refreshInterval` [（ 詳細 ）](/docs/revalidation): 
+- `refreshInterval` [（ 詳細 ）](/docs/revalidation):
   - デフォルトでは無効: `refreshInterval = 0`
   - 数値が設定されている場合、ミリ秒単位のポーリングの間隔
   - 関数を設定した場合、その関数は最新のデータを受け取り、ミリ秒単位の間隔で返す必要があります

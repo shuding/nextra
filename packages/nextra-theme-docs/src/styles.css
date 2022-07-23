@@ -184,9 +184,17 @@ blockquote:not(:first-child),
         @apply relative;
         padding-left: 0.75rem;
         margin-left: 0.75rem;
-        background-image: linear-gradient(to right, #e5e7eb 1px, transparent 1px);
+        background-image: linear-gradient(
+          to right,
+          #e5e7eb 1px,
+          transparent 1px
+        );
         .dark & {
-          background-image: linear-gradient(to right, rgba(224, 243, 255, 0.1) 1px, transparent 1px);
+          background-image: linear-gradient(
+            to right,
+            rgba(224, 243, 255, 0.1) 1px,
+            transparent 1px
+          );
         }
         background-size: 1px calc(100% - 12px);
         background-position: 0 6px;

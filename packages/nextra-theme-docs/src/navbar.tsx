@@ -100,14 +100,15 @@ export default function Navbar({ flatDirectories, items }: NavBarProps) {
                           ? 'text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200'
                           : 'active text-current font-medium'
                       )}
-                      aria-selected={isActive}
                       {...(page.newWindow
                         ? {
                             target: '_blank',
                             rel: 'noopener noreferrer',
                             'aria-selected': false
                           }
-                        : {})}
+                        : {
+                            'aria-selected': isActive
+                          })}
                     >
                       {page.title}
                     </a>

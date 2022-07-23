@@ -27,9 +27,9 @@ const { data, error, isValidating, mutate } = useSWR(key, fetcher, options)
 - `revalidateOnMount`: 在挂载组件时启用或禁用自动重新验证
 - `revalidateOnFocus = true`: 窗口聚焦时自动重新验证 [（详情）](/docs/revalidation)
 - `revalidateOnReconnect = true`: 浏览器恢复网络连接时自动重新验证（通过 `navigator.onLine`） [（详情）](/docs/revalidation)
-- `refreshInterval` [（详情）](/docs/revalidation): 
+- `refreshInterval` [（详情）](/docs/revalidation):
   - 默认 disabled: `refreshInterval = 0`
-  - 如果设置为数字，轮询间隔（以毫秒为单位） 
+  - 如果设置为数字，轮询间隔（以毫秒为单位）
   - 如果设置为函数，该函数将接收最新数据，并且应以毫秒为单位返回间隔
 - `refreshWhenHidden = false`: 窗口不可见时进行轮询（如果启用了 `refreshInterval`）
 - `refreshWhenOffline = false`: 浏览器离线时轮询（由 `navigator.onLine` 确定）

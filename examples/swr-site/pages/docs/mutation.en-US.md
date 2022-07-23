@@ -3,7 +3,7 @@
 ## Revalidate
 
 You can get the `mutate` function from the `useSWRConfig()` hook, and broadcast a revalidation message
-globally to other SWR hooks<sup>*</sup> using the same key by calling `mutate(key)`.
+globally to other SWR hooks<sup>\*</sup> using the same key by calling `mutate(key)`.
 
 This example shows how to automatically refetch the login info (e.g. inside `<Profile/>`)
 when the user clicks the “Logout” button.
@@ -31,7 +31,7 @@ function App () {
 }
 ```
 
-*: _It broadcasts to SWR hooks under the same [cache provider](/docs/cache) scope. If no cache provider exists, it will broadcast to all SWR hooks._
+\*: _It broadcasts to SWR hooks under the same [cache provider](/docs/cache) scope. If no cache provider exists, it will broadcast to all SWR hooks._
 
 ## Mutation and POST Request
 
@@ -53,13 +53,13 @@ function Profile () {
       <h1>My name is {data.name}.</h1>
       <button onClick={async () => {
         const newName = data.name.toUpperCase()
-        
+
         // update the local data immediately, but disable the revalidation
         mutate('/api/user', { ...data, name: newName }, false)
-        
+
         // send a request to the API to update the source
         await requestUpdateUsername(newName)
-        
+
         // trigger a revalidation (refetch) to make sure our local data is correct
         mutate('/api/user')
       }}>Uppercase my name!</button>

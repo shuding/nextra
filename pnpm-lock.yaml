@@ -7,7 +7,7 @@ importers:
       '@changesets/cli': ^2.23.2
       '@edge-runtime/vm': 1.1.0-beta.11
       '@tailwindcss/nesting': ^0.0.0-insiders.565cd3e
-      '@tailwindcss/typography': ^0.5.0
+      '@tailwindcss/typography': ^0.5.2
       '@types/react': ^17.0.38
       '@types/react-dom': ^17.0.11
       autoprefixer: ^10.4.7
@@ -22,11 +22,11 @@ importers:
       react: ^17.0.2
       react-dom: ^17.0.2
       tailwindcss: ^3.1.5
-      turbo: ^1.2.9
-      typescript: ^4.6.2
+      turbo: ^1.3.4
+      typescript: ^4.7.4
       vitest: ^0.18.1
     devDependencies:
-      '@changesets/cli': 2.23.2
+      '@changesets/cli': 2.24.0
       '@edge-runtime/vm': 1.1.0-beta.11
       '@tailwindcss/nesting': 0.0.0-insiders.565cd3e_postcss@8.4.14
       '@tailwindcss/typography': 0.5.4_tailwindcss@3.1.6
@@ -44,7 +44,7 @@ importers:
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       tailwindcss: 3.1.6
-      turbo: 1.3.1
+      turbo: 1.3.4
       typescript: 4.7.4
       vitest: 0.18.1_paefl3vj327xlamon474kiif6i
 
@@ -73,16 +73,16 @@ importers:
   examples/swr-site:
     specifiers:
       '@reach/skip-nav': ^0.16.0
-      autoprefixer: ^10.2.6
+      autoprefixer: ^10.4.7
       focus-visible: ^5.1.0
       intersection-observer: ^0.10.0
       markdown-to-jsx: ^6.11.4
       next: ^12.2.2
       nextra: workspace:*
       nextra-theme-docs: workspace:*
-      postcss: ^8.3.5
+      postcss: ^8.4.14
       react-intersection-observer: ^8.26.2
-      tailwindcss: ^3.0.23
+      tailwindcss: ^3.1.4
     dependencies:
       '@reach/skip-nav': 0.16.0
       focus-visible: 5.2.0
@@ -99,13 +99,13 @@ importers:
 
   packages/nextra:
     specifiers:
-      '@mdx-js/mdx': ^2.1.0
-      '@napi-rs/simple-git': ^0.1.7
+      '@mdx-js/mdx': ^2.1.2
+      '@napi-rs/simple-git': ^0.1.8
       '@types/graceful-fs': ^4.1.5
       '@types/mdast': ^3.0.10
       '@types/webpack': ^5.28.0
       github-slugger: ^1.4.0
-      graceful-fs: ^4.2.6
+      graceful-fs: ^4.2.10
       gray-matter: ^4.0.3
       rehype-pretty-code: ^0.1.0
       remark-gfm: ^3.0.1
@@ -128,9 +128,10 @@ importers:
 
   packages/nextra-theme-blog:
     specifiers:
-      '@mdx-js/react': ^2.1.0
+      '@mdx-js/react': ^2.1.2
+      '@types/react': ^17.0.39
       cross-env: ^7.0.2
-      github-slugger: ^1.3.0
+      github-slugger: ^1.4.0
       next-themes: ^0.2.0
       nextra: workspace:*
       react-cusdis: ^2.1.3
@@ -140,23 +141,24 @@ importers:
       next-themes: 0.2.0
       react-cusdis: 2.1.3
     devDependencies:
+      '@types/react': 17.0.47
       cross-env: 7.0.3
       nextra: link:../nextra
 
   packages/nextra-theme-docs:
     specifiers:
-      '@headlessui/react': ^1.6.1
-      '@mdx-js/react': ^2.1.0
-      '@reach/skip-nav': ^0.16.0
+      '@headlessui/react': ^1.6.5
+      '@mdx-js/react': ^2.1.2
+      '@reach/skip-nav': ^0.17.0
       '@types/flexsearch': ^0.7.2
       '@types/react': ^17.0.39
       autoprefixer: ^10.2.6
-      classnames: ^2.2.6
+      classnames: ^2.3.1
       cross-env: ^7.0.2
       flexsearch: ^0.7.21
-      focus-visible: ^5.1.0
+      focus-visible: ^5.2.0
       github-slugger: ^1.4.0
-      intersection-observer: ^0.12.0
+      intersection-observer: ^0.12.2
       match-sorter: ^4.2.0
       next-themes: ^0.2.0-beta.2
       nextra: workspace:*
@@ -166,7 +168,7 @@ importers:
     dependencies:
       '@headlessui/react': 1.6.6
       '@mdx-js/react': 2.1.2
-      '@reach/skip-nav': 0.16.0
+      '@reach/skip-nav': 0.17.0
       classnames: 2.3.1
       flexsearch: 0.7.21
       focus-visible: 5.2.0
@@ -213,14 +215,14 @@ packages:
     dependencies:
       regenerator-runtime: 0.13.9
 
-  /@changesets/apply-release-plan/6.0.1:
-    resolution: {integrity: sha512-KGtai19+Uo7k8uco9m+hIPGoet9E6eZq15RIeHoivvgwwI66AC6ievbUO5h0NqGlZjBWnYJQNkuT66kvBYzxsA==}
+  /@changesets/apply-release-plan/6.0.2:
+    resolution: {integrity: sha512-s+rYNUTyC3FhTn8Gt35h65Bw/pwFevXLP/yOwzfrlfCd8Hj2FkX+1l3zPVkP+OpeMq7BAYtB6YfSkQe9awl4DQ==}
     dependencies:
       '@babel/runtime': 7.18.6
-      '@changesets/config': 2.0.1
+      '@changesets/config': 2.1.0
       '@changesets/get-version-range-type': 0.3.2
-      '@changesets/git': 1.3.2
-      '@changesets/types': 5.0.0
+      '@changesets/git': 1.4.0
+      '@changesets/types': 5.1.0
       '@manypkg/get-packages': 1.1.3
       detect-indent: 6.1.0
       fs-extra: 7.0.1
@@ -231,41 +233,41 @@ packages:
       semver: 5.7.1
     dev: true
 
-  /@changesets/assemble-release-plan/5.1.3:
-    resolution: {integrity: sha512-I+TTkUoqvxBEuDLoJfJYKDXIJ+nyiTbVJ8KGhpXEsLq4N/ms/AStSbouJwF2d/p3cB+RCPr5+gXh31GSN4kA7w==}
+  /@changesets/assemble-release-plan/5.2.0:
+    resolution: {integrity: sha512-ewY24PEbSec2eKX0+KM7eyENA2hUUp6s4LF9p/iBxTtc+TX2Xbx5rZnlLKZkc8tpuQ3PZbyjLFXWhd1PP6SjCg==}
     dependencies:
       '@babel/runtime': 7.18.6
       '@changesets/errors': 0.1.4
-      '@changesets/get-dependents-graph': 1.3.2
-      '@changesets/types': 5.0.0
+      '@changesets/get-dependents-graph': 1.3.3
+      '@changesets/types': 5.1.0
       '@manypkg/get-packages': 1.1.3
       semver: 5.7.1
     dev: true
 
-  /@changesets/changelog-git/0.1.11:
-    resolution: {integrity: sha512-sWJvAm+raRPeES9usNpZRkooeEB93lOpUN0Lmjz5vhVAb7XGIZrHEJ93155bpE1S0c4oJ5Di9ZWgzIwqhWP/Wg==}
+  /@changesets/changelog-git/0.1.12:
+    resolution: {integrity: sha512-Xv2CPjTBmwjl8l4ZyQ3xrsXZMq8WafPUpEonDpTmcb24XY8keVzt7ZSCJuDz035EiqrjmDKDhODoQ6XiHudlig==}
     dependencies:
-      '@changesets/types': 5.0.0
+      '@changesets/types': 5.1.0
     dev: true
 
-  /@changesets/cli/2.23.2:
-    resolution: {integrity: sha512-o7CWC+mcwOmA3yK5axqHOSYPYEjX/x+nq/s9aX78AyzH1SQZa6L5HX4P9uUXibyjcKynklkmusxv8vN8+hJggA==}
+  /@changesets/cli/2.24.0:
+    resolution: {integrity: sha512-GlY8OGkwoTRupdV9L46NUhAZScJacRpY/ZUNHf+IQ65HoxgeT/OmgMIUnnippW4BtjlikayNV/HhkI/2HLsXcA==}
     hasBin: true
     dependencies:
       '@babel/runtime': 7.18.6
-      '@changesets/apply-release-plan': 6.0.1
-      '@changesets/assemble-release-plan': 5.1.3
-      '@changesets/changelog-git': 0.1.11
-      '@changesets/config': 2.0.1
+      '@changesets/apply-release-plan': 6.0.2
+      '@changesets/assemble-release-plan': 5.2.0
+      '@changesets/changelog-git': 0.1.12
+      '@changesets/config': 2.1.0
       '@changesets/errors': 0.1.4
-      '@changesets/get-dependents-graph': 1.3.2
-      '@changesets/get-release-plan': 3.0.10
-      '@changesets/git': 1.3.2
+      '@changesets/get-dependents-graph': 1.3.3
+      '@changesets/get-release-plan': 3.0.11
+      '@changesets/git': 1.4.0
       '@changesets/logger': 0.0.5
-      '@changesets/pre': 1.0.11
-      '@changesets/read': 0.5.5
-      '@changesets/types': 5.0.0
-      '@changesets/write': 0.1.8
+      '@changesets/pre': 1.0.12
+      '@changesets/read': 0.5.6
+      '@changesets/types': 5.1.0
+      '@changesets/write': 0.1.9
       '@manypkg/get-packages': 1.1.3
       '@types/is-ci': 3.0.0
       '@types/semver': 6.2.3
@@ -287,13 +289,13 @@ packages:
       tty-table: 4.1.6
     dev: true
 
-  /@changesets/config/2.0.1:
-    resolution: {integrity: sha512-rJaQWqsjM54T7bDiCoMDcgOuY2HzyovvRs68C//C+tYgbHyjs00JcNVcScjlV47hATrNG1AI8qTD7V9bcO/1cg==}
+  /@changesets/config/2.1.0:
+    resolution: {integrity: sha512-43potf+DwYHmH7EY19vxtCq6fqj7UUIrZ4DTwM3pVBqCKxFIytm7GPy7wNAsH06UvMw7NRuOu4QK5HN02GsIrw==}
     dependencies:
       '@changesets/errors': 0.1.4
-      '@changesets/get-dependents-graph': 1.3.2
+      '@changesets/get-dependents-graph': 1.3.3
       '@changesets/logger': 0.0.5
-      '@changesets/types': 5.0.0
+      '@changesets/types': 5.1.0
       '@manypkg/get-packages': 1.1.3
       fs-extra: 7.0.1
       micromatch: 4.0.5
@@ -305,25 +307,25 @@ packages:
       extendable-error: 0.1.7
     dev: true
 
-  /@changesets/get-dependents-graph/1.3.2:
-    resolution: {integrity: sha512-tsqA6qZRB86SQuApSoDvI8yEWdyIlo/WLI4NUEdhhxLMJ0dapdeT6rUZRgSZzK1X2nv5YwR0MxQBbDAiDibKrg==}
+  /@changesets/get-dependents-graph/1.3.3:
+    resolution: {integrity: sha512-h4fHEIt6X+zbxdcznt1e8QD7xgsXRAXd2qzLlyxoRDFSa6SxJrDAUyh7ZUNdhjBU4Byvp4+6acVWVgzmTy4UNQ==}
     dependencies:
-      '@changesets/types': 5.0.0
+      '@changesets/types': 5.1.0
       '@manypkg/get-packages': 1.1.3
       chalk: 2.4.2
       fs-extra: 7.0.1
       semver: 5.7.1
     dev: true
 
-  /@changesets/get-release-plan/3.0.10:
-    resolution: {integrity: sha512-QeKHeo+mX1baRy3OIHQePMPebPFymq/ZxS6Bk3Y3FXiU+pXVnjrfqARj1E4xQT5c+48u6ISqJ8tW5f3EZ1/hng==}
+  /@changesets/get-release-plan/3.0.11:
+    resolution: {integrity: sha512-WDVCuPIdIxLlITsCUEgQiiBitrcAqoOkyEkhkCGgzv4QBf87pJN15McOPKVy7Q2eiU3BfRDwYp4YtOPh4RUgCA==}
     dependencies:
       '@babel/runtime': 7.18.6
-      '@changesets/assemble-release-plan': 5.1.3
-      '@changesets/config': 2.0.1
-      '@changesets/pre': 1.0.11
-      '@changesets/read': 0.5.5
-      '@changesets/types': 5.0.0
+      '@changesets/assemble-release-plan': 5.2.0
+      '@changesets/config': 2.1.0
+      '@changesets/pre': 1.0.12
+      '@changesets/read': 0.5.6
+      '@changesets/types': 5.1.0
       '@manypkg/get-packages': 1.1.3
     dev: true
 
@@ -331,12 +333,12 @@ packages:
     resolution: {integrity: sha512-SVqwYs5pULYjYT4op21F2pVbcrca4qA/bAA3FmFXKMN7Y+HcO8sbZUTx3TAy2VXulP2FACd1aC7f2nTuqSPbqg==}
     dev: true
 
-  /@changesets/git/1.3.2:
-    resolution: {integrity: sha512-p5UL+urAg0Nnpt70DLiBe2iSsMcDubTo9fTOD/61krmcJ466MGh71OHwdAwu1xG5+NKzeysdy1joRTg8CXcEXA==}
+  /@changesets/git/1.4.0:
+    resolution: {integrity: sha512-uaFWaxVSotgbqnc0DxBtqJl940QDNlzGaaGJUEhPuNiw6CrpFMKPV9Q4wgiDMGVaIkoUpDbLnLRYjVu/FlqLhA==}
     dependencies:
       '@babel/runtime': 7.18.6
       '@changesets/errors': 0.1.4
-      '@changesets/types': 5.0.0
+      '@changesets/types': 5.1.0
       '@manypkg/get-packages': 1.1.3
       is-subdir: 1.2.0
       spawndamnit: 2.0.0
@@ -348,31 +350,31 @@ packages:
       chalk: 2.4.2
     dev: true
 
-  /@changesets/parse/0.3.13:
-    resolution: {integrity: sha512-wh9Ifa0dungY6d2nMz6XxF6FZ/1I7j+mEgPAqrIyKS64nifTh1Ua82qKKMMK05CL7i4wiB2NYc3SfnnCX3RVeA==}
+  /@changesets/parse/0.3.14:
+    resolution: {integrity: sha512-SWnNVyC9vz61ueTbuxvA6b4HXcSx2iaWr2VEa37lPg1Vw+cEyQp7lOB219P7uow1xFfdtIEEsxbzXnqLAAaY8w==}
     dependencies:
-      '@changesets/types': 5.0.0
+      '@changesets/types': 5.1.0
       js-yaml: 3.14.1
     dev: true
 
-  /@changesets/pre/1.0.11:
-    resolution: {integrity: sha512-CXZnt4SV9waaC9cPLm7818+SxvLKIDHUxaiTXnJYDp1c56xIexx1BNfC1yMuOdzO2a3rAIcZua5Odxr3dwSKfg==}
+  /@changesets/pre/1.0.12:
+    resolution: {integrity: sha512-RFzWYBZx56MtgMesXjxx7ymyI829/rcIw/41hvz3VJPnY8mDscN7RJyYu7Xm7vts2Fcd+SRcO0T/Ws3I1/6J7g==}
     dependencies:
       '@babel/runtime': 7.18.6
       '@changesets/errors': 0.1.4
-      '@changesets/types': 5.0.0
+      '@changesets/types': 5.1.0
       '@manypkg/get-packages': 1.1.3
       fs-extra: 7.0.1
     dev: true
 
-  /@changesets/read/0.5.5:
-    resolution: {integrity: sha512-bzonrPWc29Tsjvgh+8CqJ0apQOwWim0zheeD4ZK44ApSa/GudnZJTODtA3yNOOuQzeZmL0NUebVoHIurtIkA7w==}
+  /@changesets/read/0.5.6:
+    resolution: {integrity: sha512-0Y2/ym46Vv78Yp4vUuqkQRHo2wdDYvDLtD1t4yoNDZ3ELzgC9kkWYywncxi9rj9nilLrgaVujKfEVNyFYefFoQ==}
     dependencies:
       '@babel/runtime': 7.18.6
-      '@changesets/git': 1.3.2
+      '@changesets/git': 1.4.0
       '@changesets/logger': 0.0.5
-      '@changesets/parse': 0.3.13
-      '@changesets/types': 5.0.0
+      '@changesets/parse': 0.3.14
+      '@changesets/types': 5.1.0
       chalk: 2.4.2
       fs-extra: 7.0.1
       p-filter: 2.1.0
@@ -382,15 +384,15 @@ packages:
     resolution: {integrity: sha512-LDQvVDv5Kb50ny2s25Fhm3d9QSZimsoUGBsUioj6MC3qbMUCuC8GPIvk/M6IvXx3lYhAs0lwWUQLb+VIEUCECw==}
     dev: true
 
-  /@changesets/types/5.0.0:
-    resolution: {integrity: sha512-IT1kBLSbAgTS4WtpU6P5ko054hq12vk4tgeIFRVE7Vnm4a/wgbNvBalgiKP0MjEXbCkZbItiGQHkCGxYWR55sA==}
+  /@changesets/types/5.1.0:
+    resolution: {integrity: sha512-uUByGATZCdaPkaO9JkBsgGDjEvHyY2Sb0e/J23+cwxBi5h0fxpLF/HObggO/Fw8T2nxK6zDfJbPsdQt5RwYFJA==}
     dev: true
 
-  /@changesets/write/0.1.8:
-    resolution: {integrity: sha512-oIHeFVMuP6jf0TPnKPpaFpvvAf3JBc+s2pmVChbeEgQTBTALoF51Z9kqxQfG4XONZPHZnqkmy564c7qohhhhTQ==}
+  /@changesets/write/0.1.9:
+    resolution: {integrity: sha512-E90ZrsrfJVOOQaP3Mm5Xd7uDwBAqq3z5paVEavTHKA8wxi7NAL8CmjgbGxSFuiP7ubnJA2BuHlrdE4z86voGOg==}
     dependencies:
       '@babel/runtime': 7.18.6
-      '@changesets/types': 5.0.0
+      '@changesets/types': 5.1.0
       fs-extra: 7.0.1
       human-id: 1.0.2
       prettier: 1.19.1
@@ -758,8 +760,28 @@ packages:
       tslib: 2.4.0
     dev: false
 
+  /@reach/skip-nav/0.17.0:
+    resolution: {integrity: sha512-wkkpQK3ffczzGHis6TaUvpOabuAL9n9Kh5vr4h56XPIJP3X77VcHUDk7MK3HbV1mTgamGxc9Hbd1sXKSWLu3yA==}
+    peerDependencies:
+      react: ^16.8.0 || 17.x
+      react-dom: ^16.8.0 || 17.x
+    dependencies:
+      '@reach/utils': 0.17.0
+      tslib: 2.4.0
+    dev: false
+
   /@reach/utils/0.16.0:
     resolution: {integrity: sha512-PCggBet3qaQmwFNcmQ/GqHSefadAFyNCUekq9RrWoaU9hh/S4iaFgf2MBMdM47eQj5i/Bk0Mm07cP/XPFlkN+Q==}
+    peerDependencies:
+      react: ^16.8.0 || 17.x
+      react-dom: ^16.8.0 || 17.x
+    dependencies:
+      tiny-warning: 1.0.3
+      tslib: 2.4.0
+    dev: false
+
+  /@reach/utils/0.17.0:
+    resolution: {integrity: sha512-M5y8fCBbrWeIsxedgcSw6oDlAMQDkl5uv3VnMVJ7guwpf4E48Xlh1v66z/1BgN/WYe2y8mB/ilFD2nysEfdGeA==}
     peerDependencies:
       react: ^16.8.0 || 17.x
       react-dom: ^16.8.0 || 17.x
@@ -5182,137 +5204,137 @@ packages:
       yargs: 17.5.1
     dev: true
 
-  /turbo-android-arm64/1.3.1:
-    resolution: {integrity: sha512-JcnZh9tLbZDpKaXaao/s/k4qXt3TbNEc1xEYYXurVWnqiMueGeS7QAtThVB85ZSqzj7djk+ngSrZabPy5RG25Q==}
+  /turbo-android-arm64/1.3.4:
+    resolution: {integrity: sha512-rAbfiw5dT2rKV7L8XCL6nKwBxSz0TNknUT8F64pE+h3ESiT4y6Ow/hCdNxlb+hcee6lvZ8tB0cynXCVM5bthAA==}
     cpu: [arm64]
     os: [android]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-darwin-64/1.3.1:
-    resolution: {integrity: sha512-TIGDradVFoGck86VIuM38KaDeNxdKaP2ti93UpQeFw26ZhPIeTAa6wUgnz4DQP6bjIvQmXlYJ16ETZb4tFYygg==}
+  /turbo-darwin-64/1.3.4:
+    resolution: {integrity: sha512-DZbRwVHH3nKOzVtijKWzkiKLLY+pBjawK90po7VRKMwdN2Db+JkWdu9+6wIqaxQ4WEYnYpwnTm0Aiyua0U/dNg==}
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-darwin-arm64/1.3.1:
-    resolution: {integrity: sha512-aLBq8KiMMmop7uKBkvDt/y+eER2UzxZyUzh1KWcZ7DZB5tFZnknEUyf2qggY2vd2WcDVfQ1EUjZ0MFxhhVaVzA==}
+  /turbo-darwin-arm64/1.3.4:
+    resolution: {integrity: sha512-Qfe7iBad/XM4G22G0XAnEQnHiSUO1WR4MgvyHV022WABIf7CgGDsW6DUu/4DOWFlfTO+xCC0Qgu93w6Kli/9uw==}
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-freebsd-64/1.3.1:
-    resolution: {integrity: sha512-BOr/ifmxjlBeuDkDQLUJtzqzXQ2zPHHcI14U9Ys+z4Mza1uzQn/oSJqQvU5RuyRBVai7noMrpPS7QuKtDz0Cyg==}
+  /turbo-freebsd-64/1.3.4:
+    resolution: {integrity: sha512-lXFViR0fnoTRtnRtkeSA/10Q41h+fLgnYC62wzHNzPsq/kCYmiaXBg+gWRJom8Ka2nh+xWQdLG2Dh/uxK/+1Og==}
     cpu: [x64]
     os: [freebsd]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-freebsd-arm64/1.3.1:
-    resolution: {integrity: sha512-bHPZjK4xnGLz6/oxl5XmWhdYOdtBMSadrGhptWSZ0wBGNn/gQzDTeZAkQeqhh25AD0eM1hzDe8QUz8GlS43lrA==}
+  /turbo-freebsd-arm64/1.3.4:
+    resolution: {integrity: sha512-VN9gPZcRaYhQOIo+NlIDIDNlJjhnyM7i+3WvWAK8y5p5GoZoDAahM36GDX05JNjVdPq95WJPnWcxoiQvwnctxg==}
     cpu: [arm64]
     os: [freebsd]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-linux-32/1.3.1:
-    resolution: {integrity: sha512-c5okimusfvivu9wS8MKSr+rXpQAV+M4TyR9JX+spIK8B1I7AjfECAqiK2D5WFWO1bQ33bUAuxXOEpUuLpgEm+g==}
+  /turbo-linux-32/1.3.4:
+    resolution: {integrity: sha512-h1oVx85jovYnAaP+KxSmFIPhlKFQmBwVkJBngALnHNU7HTN9+1t/VJ1WKjHEeLXrQ7ujeCMd/+TBm9XRd73RdA==}
     cpu: [ia32]
     os: [linux]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-linux-64/1.3.1:
-    resolution: {integrity: sha512-O0pNX+N5gbmRcyZT+jsCPUNCN3DpIZHqNN35j7MT5nr0IkZa83CGbZnrEc+7Qws//jFJ26EngqD/JyRB2E8nwQ==}
+  /turbo-linux-64/1.3.4:
+    resolution: {integrity: sha512-QJJeksggK9/s3VzS+iMTQh8gO6JLDxKBSc3qnpP1Kaq8hF+M1upfP9KhDFNguz8UEFlOvTblplNdqZdk/wtkXQ==}
     cpu: [x64]
     os: [linux]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-linux-arm/1.3.1:
-    resolution: {integrity: sha512-f+r6JIwv/7ylxxJtgVi8cVw+6oNoD/r1IMTU6ejH8bfyMZZko4kkNwH9VYribQ44KDkJEgzdltnzFG5f6Hz10g==}
+  /turbo-linux-arm/1.3.4:
+    resolution: {integrity: sha512-vCVDcO4KNJak//UKsss/TnJw0ywYc8OyV88ZlSWyP3WtA+9D8DJNPOKodcR8IbKuV7Tqpr+f7cP+J9jGDkHjQw==}
     cpu: [arm]
     os: [linux]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-linux-arm64/1.3.1:
-    resolution: {integrity: sha512-D6+1MeS/x+/VCCooHPU4NIpB8qI/eW70eMRA79bqTPaxxluP0g2CaxXgucco05P51YtNsSxeVcH7X76iadON6Q==}
+  /turbo-linux-arm64/1.3.4:
+    resolution: {integrity: sha512-SSyUvBxZmlS44LQ2hzX5gfDlQueH1Hx5/rFS9mJZKFdgMnAB2g7btxxEvnpm0lgpfP/c3LH0VRks3xYEoQvILg==}
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-linux-mips64le/1.3.1:
-    resolution: {integrity: sha512-yL64jgwVCziOpBcdpMxIsczkgwwOvmaqKObFKWyCNlk/LOl5NKODLwXEaryLaALtpwUAoS4ltMSI64gKqmLrOA==}
+  /turbo-linux-mips64le/1.3.4:
+    resolution: {integrity: sha512-w7Ib7i/GZhyJRdvQSLA1Be7AOIPgJpuLLjrtT2gUl3wXd4JuiHDvhOS7E0B9izaxeD/2iygU2kQjqD4o9tejlw==}
     cpu: [mips64el]
     os: [linux]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-linux-ppc64le/1.3.1:
-    resolution: {integrity: sha512-tjnM+8RosykS1lBpOPLDXGOz/Po2h796ty17uBd7IFslWPOI16a/akFOFoLH8PCiGGJMe3CYgRhEKn4sPWNxFA==}
+  /turbo-linux-ppc64le/1.3.4:
+    resolution: {integrity: sha512-xATyouJSGmfgQM6lLk4Da5HrsAw8qoPUArrBuDK1p3Rw1gcRnmlJL10mr6ZmZyRu+3o4M8UlThfus5q8eETmBw==}
     cpu: [ppc64]
     os: [linux]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-windows-32/1.3.1:
-    resolution: {integrity: sha512-Snnv+TVigulqwK6guHKndMlrLw88NXj8BtHRGrEksPR0QkyuHlwLf+tHYB4HmvpUl4W9lnXQf4hsljWP64BEdw==}
+  /turbo-windows-32/1.3.4:
+    resolution: {integrity: sha512-1oXgiGxkWuC/7rlBZTng7qC2zjAZ7lYLDDh3ePAycZzp6BprlxqT5+xA0kFJo+WqGRdAQVhanlET2bLGOdBQBQ==}
     cpu: [ia32]
     os: [win32]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-windows-64/1.3.1:
-    resolution: {integrity: sha512-gLeohHG07yIhON1Pp0YNE00i/yzip2GFhkA6HdJaK95uE5bKULpqxuO414hOS/WzGwrGVXBKCImfe24XXh5T+Q==}
+  /turbo-windows-64/1.3.4:
+    resolution: {integrity: sha512-k7K/oC+399Gtwol42ALvt0espWmZZR7qlRwfgFS3BF4pEetxjGFJMXKNWUMDkOqsHhMxvLIiDbWPmY3fTIWL7g==}
     cpu: [x64]
     os: [win32]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-windows-arm64/1.3.1:
-    resolution: {integrity: sha512-0MWcHLvYgs/qdcoTFZ55nu8HhrpeiwXEMw9cbNfgqTlzy3OsrAsovYEJFyQ8KSxeploiD+QJlCdvhxx+5C0tlA==}
+  /turbo-windows-arm64/1.3.4:
+    resolution: {integrity: sha512-jHBuTvQ3t/OElxn//kwHZR2mlPdmpcV7BZy+n18+wwx6ydGj5QDOrer7Dwk81YbA5KtOkp086Xpgr75T73wsSA==}
     cpu: [arm64]
     os: [win32]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo/1.3.1:
-    resolution: {integrity: sha512-DXckoGKlZgvTn/PrHpBI/57aeXR7tfyPf2dK+4LmBczt24ELA3o6eYHeA7KzfpSYhB2LE9qveYFQ6mJ1OzGjjg==}
+  /turbo/1.3.4:
+    resolution: {integrity: sha512-MsjlfAL29leQaIMdHGnIpK6IKZA4HwSAwDSIoBAs9EAKfAXIsnjLoF50dKDnBlaq5d4aVmiHsT6RYVcTKhSgBQ==}
     hasBin: true
     requiresBuild: true
     optionalDependencies:
-      turbo-android-arm64: 1.3.1
-      turbo-darwin-64: 1.3.1
-      turbo-darwin-arm64: 1.3.1
-      turbo-freebsd-64: 1.3.1
-      turbo-freebsd-arm64: 1.3.1
-      turbo-linux-32: 1.3.1
-      turbo-linux-64: 1.3.1
-      turbo-linux-arm: 1.3.1
-      turbo-linux-arm64: 1.3.1
-      turbo-linux-mips64le: 1.3.1
-      turbo-linux-ppc64le: 1.3.1
-      turbo-windows-32: 1.3.1
-      turbo-windows-64: 1.3.1
-      turbo-windows-arm64: 1.3.1
+      turbo-android-arm64: 1.3.4
+      turbo-darwin-64: 1.3.4
+      turbo-darwin-arm64: 1.3.4
+      turbo-freebsd-64: 1.3.4
+      turbo-freebsd-arm64: 1.3.4
+      turbo-linux-32: 1.3.4
+      turbo-linux-64: 1.3.4
+      turbo-linux-arm: 1.3.4
+      turbo-linux-arm64: 1.3.4
+      turbo-linux-mips64le: 1.3.4
+      turbo-linux-ppc64le: 1.3.4
+      turbo-windows-32: 1.3.4
+      turbo-windows-64: 1.3.4
+      turbo-windows-arm64: 1.3.4
     dev: true
 
   /type-detect/4.0.8:

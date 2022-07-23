@@ -91,7 +91,6 @@ exit  a
 
 我们以构建一个简单的请求日志记录器中间件为例。它打印出从这个 SWR hook 发送的所有 fetcher 请求。你也可以将这个中间件添加到 `SWRConfig` 中，以用于所有的 SWR hook。
 
-
 ```jsx
 function logger(useSWRNext) {
   return (key, fetcher, config) => {
@@ -112,7 +111,7 @@ useSWR(key, fetcher, { use: [logger] })
 
 每次触发请求时，它都会将 SWR key 输出到控制台：
 
-```
+```plaintext
 SWR Request: /api/user1
 SWR Request: /api/user2
 ```
@@ -149,10 +148,10 @@ function laggy(useSWRNext) {
 
     // 如果当前数据是 undefined，则回退到之前的数据。
     const dataOrLaggyData = swr.data === undefined ? laggyDataRef.current : swr.data
-    
+
     // 是否显示之前的数据？
     const isLagging = swr.data === undefined && laggyDataRef.current !== undefined
-    
+
     // 同时将 `isLagging` 字段添加到 SWR 中。
     return Object.assign({}, swr, {
       data: dataOrLaggyData,

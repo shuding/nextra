@@ -32,7 +32,7 @@ export function locales(request: NextRequest) {
 
   // remove pathname, search, and extra slashes from url
   localeInPath = localeInPath
-    .replace((nextUrl.pathname + nextUrl.search), '')
+    .replace(nextUrl.pathname + nextUrl.search, '')
     .replace('/', '')
 
   let finalLocale

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import cn from 'classnames'
 import Slugger from 'github-slugger'
 import { Heading } from 'nextra'
@@ -65,7 +65,11 @@ const EditPageLink = ({
   filepath
 }: {
   repository?: string
-  text: string
+  text:
+    | React.ReactNode
+    | React.FC<{
+        locale?: string
+      }>
   filepath: string
 }) => {
   const url = createEditUrl(repository, filepath)
@@ -88,12 +92,12 @@ const EditPageLink = ({
 
 const FeedbackLink = ({
   repository,
-  text,
+  feedbackLink,
   filepath,
   labels
 }: {
   repository?: string
-  text: string
+  feedbackLink: ReactNode | React.FC<{ locale?: string }>
   filepath: string
   labels?: string
 }) => {
@@ -106,8 +110,8 @@ const FeedbackLink = ({
       target="_blank"
       rel="noreferrer"
     >
-      {text
-        ? renderComponent(text, {
+      {feedbackLink
+        ? renderComponent(feedbackLink, {
             locale
           })
         : 'Feedback'}
@@ -240,7 +244,7 @@ export default function ToC({
                 filepath={filepathWithName}
                 repository={config.docsRepositoryBase}
                 labels={config.feedbackLabels}
-                text={config.feedbackLink}
+                feedbackLink={config.feedbackLink}
               />
             ) : null}
 
