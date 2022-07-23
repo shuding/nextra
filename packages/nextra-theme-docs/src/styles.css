@@ -452,16 +452,34 @@ article {
       @apply bg-white bg-opacity-10 border-white border-opacity-10;
     }
   }
+
   pre {
     /* content-visibility: auto; */
     contain: paint;
-    @apply p-4 bg-primary-750 bg-opacity-5 rounded-xl mt-6 mb-4 overflow-x-auto font-medium subpixel-antialiased;
+    @apply py-4 bg-primary-750 bg-opacity-5 rounded-xl mt-6 mb-4 overflow-x-auto font-medium subpixel-antialiased;
     @apply dark:bg-primary-300 dark:bg-opacity-10;
+
+    code[data-line-numbers] {
+      counter-reset: line;
+  
+      & > .line::before {
+        counter-increment: line;
+        content: counter(line);
+        @apply inline-block w-4 mr-8 text-right text-slate-500;
+      }
+    }
+
     code {
-      line-height: 1.25rem;
-      @apply relative p-0 text-sm text-current bg-transparent dark:bg-transparent rounded-none border-none inline-block min-w-full;
+      @apply p-0 text-sm text-current bg-transparent dark:bg-transparent rounded-none border-none grid min-w-full leading-5;
+      .line {
+        @apply px-4 border-l-2 border-transparent;
+      }
+      /* code blocks without languages don't have children that have px-4 */
+      &:not([data-language]) {
+        @apply px-4;
+      }
       .line.highlighted {
-        @apply before:block before:absolute before:h-5 before:bg-primary-600 before:bg-opacity-10 before:-inset-x-4 before:pointer-events-none before:select-none;
+        @apply bg-primary-600/10 border-primary-600/60;
         span {
           @apply relative;
         }
