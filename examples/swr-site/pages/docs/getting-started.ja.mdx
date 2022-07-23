@@ -92,7 +92,7 @@ import { Welcome } from 'components/diagrams/welcome'
 
 従来では、トップレベルのコンポーネントで `useEffect` を使用してデータを一度だけ取得し、 props を介して子コンポーネントに渡しています（現時点ではエラー状態を処理してないことに注意してください）:
 
-```jsx bg=7:11,17,18,27
+```jsx {7-11,17-18,27}
 // ページコンポーネント
 
 function Page () {
@@ -140,7 +140,7 @@ function Avatar ({ user }) {
 
 SWR はその問題を完璧に解決してくれます。 先ほど作成した `useUser` フックを使って、コードをリファクタリングしましょう：
 
-```jsx bg=20,26
+```jsx {20,26}
 // ページコンポーネント
 
 function Page () {

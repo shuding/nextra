@@ -1,17 +1,21 @@
 {
   "name": "nextra",
-  "version": "2.0.0-alpha.56",
+  "version": "2.0.0-beta.8",
   "description": "Next.js and MDX based site generator.",
   "main": "index.js",
   "files": [
     "dist/*",
-    "index.js",
-    "ssg.js",
-    "data.js",
-    "loader.js",
-    "locales.js",
-    "context.js"
+    "loader.js"
   ],
+  "exports": {
+    ".": "./dist/index.js",
+    "./compile": "./dist/compile.mjs",
+    "./context": "./dist/context.js",
+    "./data": "./dist/ssg.js",
+    "./loader": "./loader.js",
+    "./locales": "./dist/locales.js",
+    "./ssg": "./dist/ssg.js"
+  },
   "types": "./dist/types.d.ts",
   "repository": "https://github.com/shuding/nextra",
   "license": "MIT",
@@ -23,12 +27,11 @@
     "prepublishOnly": "rm -rf dist && pnpm build && pnpm types"
   },
   "dependencies": {
-    "@mdx-js/mdx": "^2.1.0",
-    "@napi-rs/simple-git": "^0.1.7",
+    "@mdx-js/mdx": "^2.1.2",
+    "@napi-rs/simple-git": "^0.1.8",
     "github-slugger": "^1.4.0",
-    "graceful-fs": "^4.2.6",
+    "graceful-fs": "^4.2.10",
     "gray-matter": "^4.0.3",
-    "p-limit": "^4.0.0",
     "rehype-pretty-code": "^0.1.0",
     "remark-gfm": "^3.0.1",
     "shiki": "0.10.1",

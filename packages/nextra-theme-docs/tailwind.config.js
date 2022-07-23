@@ -10,7 +10,7 @@ const makePrimaryColor =
   }
 
 module.exports = {
-  content: ['./src/**/*.{js,css,tsx}'],
+  content: ['./src/**/*.{js,tsx}'],
   theme: {
     screens: {
       sm: '640px',
@@ -44,7 +44,7 @@ module.exports = {
       neutral: colors.neutral,
       red: colors.red,
       orange: colors.orange,
-	  blue: colors.blue,
+      blue: colors.blue,
       yellow: colors.yellow,
       primary: {
         50: makePrimaryColor(97),

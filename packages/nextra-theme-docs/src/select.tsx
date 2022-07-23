@@ -1,7 +1,7 @@
 import React from 'react'
 import cn from 'classnames'
 import { Listbox, Transition } from '@headlessui/react'
-import Check from './icons/check'
+import { CheckIcon } from './icons'
 
 interface MenuOption {
   key: string
@@ -62,7 +62,7 @@ export default function Menu({ options, selected, onChange }: MenuProps) {
                         'absolute inset-y-0 right-0 flex items-center pr-3'
                       )}
                     >
-                      <Check />
+                      <CheckIcon />
                     </span>
                   ) : null}
                 </Listbox.Option>

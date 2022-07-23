@@ -5,13 +5,14 @@ export default function traverse(
   pageMap: PageMapItem[],
   matcher: (page: PageMapItem) => boolean | void
 ): PageMapItem | null {
-  for (let i = 0; i < pageMap.length; i++) {
-    if (matcher(pageMap[i])) {
-      return pageMap[i]
+  for (const pageMapItem of pageMap) {
+    if (matcher(pageMapItem)) {
+      return pageMapItem
     }
   }
-  for (let i = 0; i < pageMap.length; i++) {
-    const { children } = pageMap[i]
+
+  for (const pageMapItem of pageMap) {
+    const { children } = pageMapItem
     if (children) {
       const matched = traverse(children, matcher)
       if (matched) {

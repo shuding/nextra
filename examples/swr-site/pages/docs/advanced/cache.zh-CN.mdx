@@ -86,7 +86,7 @@ function Avatar() {
 
 当多个 `<SWRConfig>` 组件嵌套时，可以扩展缓存 provider。
 
-`provider` 函数的第一个参数是上层 `<SWRConfig>` 的缓存 provider（如果没有父级 `<SWRConfig>`，则为默认缓存），你可以使用它来扩展缓存 provider：  
+`provider` 函数的第一个参数是上层 `<SWRConfig>` 的缓存 provider（如果没有父级 `<SWRConfig>`，则为默认缓存），你可以使用它来扩展缓存 provider：
 
 ```jsx
 <SWRConfig value={{ provider: (cache) => newCache }}>

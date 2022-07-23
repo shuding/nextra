@@ -23,7 +23,7 @@ import { Pagination } from 'components/diagrams/pagination'
 ...which is a typical pagination UI. Let's see how it can be easily implemented with
 `useSWR`:
 
-```jsx bg=5
+```jsx {5}
 function App () {
   const [pageIndex, setPageIndex] = useState(0);
 
@@ -42,7 +42,7 @@ function App () {
 
 Furthermore, we can create an abstraction for this "page component":
 
-```jsx bg=13
+```jsx {13}
 function Page ({ index }) {
   const { data } = useSWR(`/api/data?page=${index}`, fetcher);
 
@@ -65,7 +65,7 @@ function App () {
 Because of SWR's cache, we get the benefit to preload the next page. We render the next page inside
 a hidden div, so SWR will trigger the data fetching of the next page. When the user navigates to the next page, the data is already there:
 
-```jsx bg=6
+```jsx {6}
 function App () {
   const [pageIndex, setPageIndex] = useState(0);
 
@@ -95,7 +95,7 @@ import { Infinite } from 'components/diagrams/infinite'
 To implement this, we need to make **dynamic number of requests** on this page. React Hooks have [a couple of rules](https://reactjs.org/docs/hooks-rules.html),
 so we **CANNOT** do something like this:
 
-```jsx bg=5,6,7,8,9
+```jsx {5,6,7,8,9}
 function App () {
   const [cnt, setCnt] = useState(1)
 
@@ -118,7 +118,7 @@ function App () {
 
 Instead, we can use the `<Page />` abstraction that we created to achieve it:
 
-```jsx bg=5,6,7
+```jsx {5,6,7}
 function App () {
   const [cnt, setCnt] = useState(1)
 
@@ -142,7 +142,7 @@ For example, we are still implementing the same "Load More" UI, but also need to
 about how many items are there in total. We can't use the `<Page />` solution anymore because
 the top level UI (`<App />`) needs the data inside each page:
 
-```jsx bg=10
+```jsx {10}
 function App () {
   const [cnt, setCnt] = useState(1)
 
@@ -226,7 +226,7 @@ GET /users?page=0&limit=10
 ]
 ```
 
-```jsx bg=4,5,6,7,10
+```jsx {4-7,10}
 // A function to get the SWR key of each page,
 // its return value will be accepted by `fetcher`.
 // If `null` is returned, the request of that page won't start.
@@ -285,7 +285,7 @@ Also `data` is no longer just one API response. It's an array of multiple API re
 
 Let's say the API now requires a cursor and returns the next cursor alongside with the data:
 
-```
+```plaintext
 GET /users?cursor=123&limit=10
 {
   data: [

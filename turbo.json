@@ -3,10 +3,7 @@
   "npmClient": "pnpm",
   "pipeline": {
     "build": {
-      "dependsOn": [
-        "types",
-        "^build"
-      ],
+      "dependsOn": ["types", "^build"],
       "outputs": [
         "dist/**/*.js",
         "dist/**/*.css",
@@ -19,9 +16,7 @@
     },
     "test": {},
     "types": {
-      "outputs": [
-        "dist/**/*.d.ts"
-      ]
+      "outputs": ["dist/**/*.d.ts"]
     },
     "dev": {
       "cache": false

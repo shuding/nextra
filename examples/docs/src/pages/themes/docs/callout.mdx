@@ -1,0 +1,63 @@
+# Callout Component
+
+A built-in component provided by `nextra-theme-docs`.
+
+## Example
+
+<Nextra.Callout>
+  A **callout** is a short piece of text intended to attract attention.
+</Nextra.Callout>
+
+## Usage
+
+### Default
+
+<Nextra.Callout emoji="👾">
+  **Space Invaders** is a 1978 shoot 'em up arcade game developed by Tomohiro
+  Nishikado.
+</Nextra.Callout>
+
+```mdx
+<Nextra.Callout emoji="👾">
+  **Space Invaders** is a 1978 shoot 'em up arcade game developed by Tomohiro
+  Nishikado.
+</Nextra.Callout>
+```
+
+### Warning
+
+<Nextra.Callout type="warning" emoji="⚠️">
+  This API will be deprecated soon.
+</Nextra.Callout>
+
+```mdx
+<Nextra.Callout type="warning" emoji="⚠️">
+  This API will be deprecated soon.
+</Nextra.Callout>
+```
+
+### Error
+
+<Nextra.Callout type="error" emoji="🚫">
+  This is a dangerous feature that can cause everything to explode.
+</Nextra.Callout>
+
+```mdx
+<Nextra.Callout type="error" emoji="️🚫">
+  This is a dangerous feature that can cause everything to explode.
+</Nextra.Callout>
+```
+
+### React Component
+
+```jsx filename="callout.jsx"
+import Callout from 'nextra-theme-docs/Callout'
+const Component = () => {
+  return (
+    <Callout emoji="👾">
+      **Space Invaders** is a 1978 shoot 'em up arcade game developed by
+      Tomohiro Nishikado.
+    </Callout>
+  )
+}
+```

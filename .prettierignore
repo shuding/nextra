@@ -1,0 +1,5 @@
+dist
+.next
+pnpm-lock.yaml
+pnpm-workspace.yaml
+.changeset

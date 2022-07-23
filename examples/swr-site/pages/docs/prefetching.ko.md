@@ -30,12 +30,12 @@ Next.js내의 [페이지 프리패칭](https://nextjs.org/docs/api-reference/nex
 
 ## 데이터 프리필
 
-이미 존재하는 데이터를 SWR 캐시에 미리 채우길 원한다면, `fallbackData` 옵션을 사용할 수 있습니다. 예를 들면: 
+이미 존재하는 데이터를 SWR 캐시에 미리 채우길 원한다면, `fallbackData` 옵션을 사용할 수 있습니다. 예를 들면:
 
 ```jsx
 useSWR('/api/data', fetcher, { fallbackData: prefetchedData })
 ```
 
-SWR가 데이터를 아직 가져오지 않았다면, 이 hook은 폴백으로 `prefetchedData` 를 반환할 것입니다. 
+SWR가 데이터를 아직 가져오지 않았다면, 이 hook은 폴백으로 `prefetchedData` 를 반환할 것입니다.
 
 `<SWRConfig>` 및 `fallback` 옵션을 사용하여 모든 SWR hooks 및 다중 키에 대해서도 이것을 구성할 수 있습니다. 자세한 내용은 [Next.js SSG 및 SSR](/docs/with-nextjs)을 확인하세요.

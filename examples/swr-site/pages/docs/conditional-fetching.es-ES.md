@@ -2,9 +2,8 @@
 
 ## Condicional
 
-Utilice `null` o pase una función como `key` para obtener datos de forma condicional. 
+Utilice `null` o pase una función como `key` para obtener datos de forma condicional.
 Si la función lanza o devuelve un falsy value, SWR no iniciará la petición.
-
 
 ```js
 // conditionally fetch

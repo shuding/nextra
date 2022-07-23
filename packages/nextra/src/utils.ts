@@ -1,41 +1,42 @@
-import fs from 'fs';
+import fs from 'fs'
 import path from 'path'
+import { LOCALE_REGEX } from './constants'
 
-export function getLocaleFromFilename(name: string) {
-  const localeRegex = /\.([a-zA-Z-]+)?\.(mdx?|jsx?|json)$/
-  const match = name.match(localeRegex)
-  if (match) return match[1]
-  return undefined
+export function parseFileName(filePath: string): {
+  name: string
+  locale: string
+  ext: string
+} {
+  // Get file name and extension from file path
+  const { name, ext } = path.parse(filePath)
+  const locale = name.match(LOCALE_REGEX)?.[1] || ''
+  return {
+    name: locale ? name.replace(LOCALE_REGEX, '') : name,
+    locale,
+    ext
+  }
 }
 
-export function removeExtension(name: string) {
-  const match = name.match(/^([^.]+)/)
-  return match !== null ? match[1] : ''
-}
-
-export function getFileName(resourcePath: string) {
-  return removeExtension(path.basename(resourcePath))
-}
-
-export const parseJsonFile: (
+export const parseJsonFile = (
   content: string,
   path: string
-) => Record<string, any> = (content: string, path: string) => {
-  let parsed = {}
+): Record<string, any> => {
   try {
-    parsed = JSON.parse(content)
+    return JSON.parse(content)
   } catch (err) {
-    console.error(`Error parsing ${path}, make sure it's a valid JSON \n` + err)
+    console.error(
+      `[nextra] Error parsing ${path}, make sure it's a valid JSON`,
+      err
+    )
+    return {}
   }
-
-  return parsed
 }
 
-export const existsSync = (f: string): boolean => {
+export const existsSync = (filePath: string): boolean => {
   try {
-    fs.accessSync(f, fs.constants.F_OK)
+    fs.accessSync(filePath, fs.constants.F_OK)
     return true
-  } catch (_) {
+  } catch {
     return false
   }
 }

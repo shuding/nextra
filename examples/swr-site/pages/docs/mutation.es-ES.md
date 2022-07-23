@@ -3,9 +3,9 @@
 ## Revalidar
 
 You can get the `mutate` function from the `useSWRConfig()` hook, and broadcast a revalidation message
-globally to other SWR hooks<sup>*</sup> using the same key by calling `mutate(key)`.
+globally to other SWR hooks<sup>\*</sup> using the same key by calling `mutate(key)`.
 
-Este ejemplo muestra cómo recuperar automáticamente la información de login (por ejemplo, dentro de `<Profile/>`) 
+Este ejemplo muestra cómo recuperar automáticamente la información de login (por ejemplo, dentro de `<Profile/>`)
 cuando el usuario hace clic en el botón "Logout".
 
 ```jsx
@@ -33,10 +33,10 @@ function App () {
 
 ## Mutación y solicitud POST
 
-En muchos casos, la aplicación de mutations locales a los datos es una buena forma de agilizar los cambios, 
+En muchos casos, la aplicación de mutations locales a los datos es una buena forma de agilizar los cambios,
 sin necesidad de esperar a la fuente de datos remota.
 
-Con `mutate`, puedes actualizar tus datos locales mediante programación, mientras los revalidas y finalmente los 
+Con `mutate`, puedes actualizar tus datos locales mediante programación, mientras los revalidas y finalmente los
 sustituyes por los datos más recientes.
 
 ```jsx
@@ -51,13 +51,13 @@ function Profile () {
       <h1>My name is {data.name}.</h1>
       <button onClick={async () => {
         const newName = data.name.toUpperCase()
-        
+
         // actualiza los datos locales inmediatamente, pero desactiva la revalidación
         mutate('/api/user', { ...data, name: newName }, false)
-        
+
         // envía una solicitud a la API para actualizar la fuente
         await requestUpdateUsername(newName)
-        
+
         // activar una revalidación (refetch) para asegurarse de que nuestros datos locales son correctos
         mutate('/api/user')
       }}>Uppercase my name!</button>
@@ -66,12 +66,11 @@ function Profile () {
 }
 ```
 
-Al hacer click en el botón del ejemplo anterior, se actualizarán localmente los datos del cliente, se enviará una solicitud POST 
+Al hacer click en el botón del ejemplo anterior, se actualizarán localmente los datos del cliente, se enviará una solicitud POST
 para modificar los datos remotos y se intentará obtener la última (revalidar).
 
-Pero muchas APIs POST simplemente devolverán los datos actualizados directamente, por lo que no necesitamos revalidar de nuevo. 
+Pero muchas APIs POST simplemente devolverán los datos actualizados directamente, por lo que no necesitamos revalidar de nuevo.
 Aquí hay un ejemplo que muestra el uso de "local mutate - request - update":
-
 
 ```jsx
 mutate('/api/user', newUser, false)             // utilice `false` para mutate sin revalidar
@@ -102,11 +101,10 @@ mutate('/api/todos', async todos => {
 
 ## Datos devueltos por Mutate
 
-Lo más probable es que necesites algunos datos para actualizar la caché. Los datos se resuelven o se devuelven 
+Lo más probable es que necesites algunos datos para actualizar la caché. Los datos se resuelven o se devuelven
 desde la promise o función asíncrona que pasaste para `mutate`.
 
 La función devolverá update document para que `mutate` actualice el valor de la caché correspondiente. Podría arrojar un error de alguna manera, cada vez que se llame.
-
 
 ```jsx
 try {

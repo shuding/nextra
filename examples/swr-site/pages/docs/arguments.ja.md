@@ -54,4 +54,3 @@ const { data: orders } = useSWR({ url: '/api/orders', args: user }, fetcher)
 <Callout emoji="⚠️">
   古いバージョン（< 1.1.0）では、SWR はすべてのレンダリングで引数を**浅く**比較し、いずれかが変更された場合は再検証を実行します。
 </Callout>
-  

@@ -44,23 +44,18 @@ const rehypePrettyCodeOptions = {
 
 export async function compileMdx(
   source: string,
-  mdxOptions: LoaderOptions['mdxOptions'] = {},
-  nextraOptions: {
-    unstable_staticImage: boolean
-    unstable_flexsearch:
-      | boolean
-      | {
-          codeblocks: boolean
-        }
-  } = {
-    unstable_staticImage: false,
-    unstable_flexsearch: false
-  },
+  mdxOptions: LoaderOptions['mdxOptions'] &
+    Pick<ProcessorOptions, 'jsx' | 'outputFormat'> = {},
+  nextraOptions: Pick<
+    LoaderOptions,
+    'unstable_staticImage' | 'unstable_flexsearch'
+  > = {},
   resourcePath: string
 ) {
   let structurizedData = {}
   const compiler = createCompiler({
-    jsx: true,
+    jsx: mdxOptions.jsx ?? true,
+    outputFormat: mdxOptions.outputFormat,
     providerImportSource: '@mdx-js/react',
     remarkPlugins: [
       ...(mdxOptions.remarkPlugins || []),
@@ -75,7 +70,10 @@ export async function compileMdx(
     rehypePlugins: [
       ...(mdxOptions.rehypePlugins || []),
       parseMeta,
-      [rehypePrettyCode, rehypePrettyCodeOptions],
+      [
+        rehypePrettyCode,
+        { ...rehypePrettyCodeOptions, ...mdxOptions.rehypePrettyCodeOptions }
+      ],
       attachMeta
     ].filter(Boolean)
   })
@@ -87,8 +85,7 @@ export async function compileMdx(
       structurizedData
     }
   } catch (err) {
-    console.error(`\nError compiling ${resourcePath}`)
-    console.error(`${err}\n`)
+    console.error(`[nextra] Error compiling ${resourcePath}.`)
     throw err
   }
 }

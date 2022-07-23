@@ -1,0 +1,663 @@
+// Vitest Snapshot v1
+
+exports[`Page Process > pageMap en-US 1`] = `
+[
+  [
+    {
+      "children": [
+        {
+          "locale": "en-US",
+          "meta": {
+            "swr-v1": {
+              "theme": {
+                "breadcrumb": true,
+              },
+              "title": "Announcing SWR 1.0",
+            },
+          },
+          "name": "meta.json",
+        },
+        {
+          "frontMatter": {
+            "description": "Almost 2 years ago we open sourced SWR, the tiny data-fetching React library that people love. Today we are reaching another milestone: the 1.0 version of SWR.",
+            "image": "https://assets.vercel.com/image/upload/v1630059453/swr/v1.png",
+          },
+          "locale": "en-US",
+          "name": "swr-v1",
+          "route": "/blog/swr-v1",
+        },
+      ],
+      "name": "blog",
+      "route": "/blog",
+    },
+    {
+      "frontMatter": {
+        "searchable": false,
+      },
+      "locale": "en-US",
+      "name": "blog",
+      "route": "/blog",
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "locale": "en-US",
+              "name": "cache",
+              "route": "/docs/advanced/cache",
+            },
+            {
+              "locale": "en-US",
+              "name": "file-name.with.DOTS",
+              "route": "/docs/advanced/file-name.with.DOTS",
+            },
+            {
+              "locale": "en-US",
+              "meta": {
+                "*": {
+                  "theme": {
+                    "footer": false,
+                  },
+                },
+                "--- yoo": {
+                  "title": "Do Not Use",
+                  "type": "separator",
+                },
+                "cache": "Cache",
+                "file-name.with.DOTS": "Filenames with dots",
+                "more": "More: A Super Super Super Super Long Directory",
+                "performance": "Performance",
+                "react-native": "React Native",
+              },
+              "name": "meta.json",
+            },
+            {
+              "children": [
+                {
+                  "locale": "en-US",
+                  "name": "cache",
+                  "route": "/docs/advanced/more/cache",
+                },
+              ],
+              "name": "more",
+              "route": "/docs/advanced/more",
+            },
+            {
+              "locale": "en-US",
+              "name": "performance",
+              "route": "/docs/advanced/performance",
+            },
+            {
+              "locale": "en-US",
+              "name": "react-native",
+              "route": "/docs/advanced/react-native",
+            },
+          ],
+          "name": "advanced",
+          "route": "/docs/advanced",
+        },
+        {
+          "locale": "en-US",
+          "name": "advanced",
+          "route": "/docs/advanced",
+        },
+        {
+          "locale": "en-US",
+          "name": "arguments",
+          "route": "/docs/arguments",
+        },
+        {
+          "locale": "en-US",
+          "name": "change-log",
+          "route": "/docs/change-log",
+        },
+        {
+          "locale": "en-US",
+          "name": "conditional-fetching",
+          "route": "/docs/conditional-fetching",
+        },
+        {
+          "locale": "en-US",
+          "name": "data-fetching",
+          "route": "/docs/data-fetching",
+        },
+        {
+          "locale": "en-US",
+          "name": "error-handling",
+          "route": "/docs/error-handling",
+        },
+        {
+          "locale": "en-US",
+          "name": "getting-started",
+          "route": "/docs/getting-started",
+        },
+        {
+          "locale": "en-US",
+          "name": "global-configuration",
+          "route": "/docs/global-configuration",
+        },
+        {
+          "locale": "en-US",
+          "meta": {
+            "--- hey": {
+              "title": "Getting Started",
+              "type": "separator",
+            },
+            "--- my_new_separator": {
+              "title": "Advanced",
+              "type": "separator",
+            },
+            "advanced": {
+              "title": "Advanced",
+            },
+            "arguments": "Arguments",
+            "change-log": {
+              "theme": {
+                "sidebar": false,
+              },
+              "title": "Change Log",
+            },
+            "conditional-fetching": "Conditional Data Fetching",
+            "data-fetching": "Data Fetching",
+            "error-handling": {
+              "hidden": true,
+              "title": "Error Handling",
+            },
+            "getting-started": "Getting Started",
+            "github_link": {
+              "href": "https://github.com/shuding/nextra",
+              "newWindow": true,
+              "title": "GitHub 🐙 →",
+              "type": "page",
+            },
+            "global-configuration": "Global Configuration",
+            "middleware": "Middleware",
+            "mutation": "Mutation",
+            "options": "Options",
+            "pagination": "Pagination",
+            "prefetching": "Prefetching",
+            "revalidation": "Auto Revalidation",
+            "suspense": "Suspense",
+            "typescript": "TypeScript :)",
+            "with-nextjs": "Next.js SSG and SSR",
+          },
+          "name": "meta.json",
+        },
+        {
+          "locale": "en-US",
+          "name": "middleware",
+          "route": "/docs/middleware",
+        },
+        {
+          "locale": "en-US",
+          "name": "mutation",
+          "route": "/docs/mutation",
+        },
+        {
+          "locale": "en-US",
+          "name": "options",
+          "route": "/docs/options",
+        },
+        {
+          "locale": "en-US",
+          "name": "pagination",
+          "route": "/docs/pagination",
+        },
+        {
+          "locale": "en-US",
+          "name": "prefetching",
+          "route": "/docs/prefetching",
+        },
+        {
+          "locale": "en-US",
+          "name": "revalidation",
+          "route": "/docs/revalidation",
+        },
+        {
+          "locale": "en-US",
+          "name": "suspense",
+          "route": "/docs/suspense",
+        },
+        {
+          "locale": "en-US",
+          "name": "typescript",
+          "route": "/docs/typescript",
+        },
+        {
+          "locale": "en-US",
+          "name": "with-nextjs",
+          "route": "/docs/with-nextjs",
+        },
+      ],
+      "name": "docs",
+      "route": "/docs",
+    },
+    {
+      "children": [
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Authentication",
+          },
+          "locale": "en-US",
+          "name": "auth",
+          "route": "/examples/auth",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Basic Usage",
+          },
+          "locale": "en-US",
+          "name": "basic",
+          "route": "/examples/basic",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Error Handling",
+          },
+          "locale": "en-US",
+          "name": "error-handling",
+          "route": "/examples/error-handling",
+        },
+        {
+          "locale": "en-US",
+          "name": "full",
+          "route": "/examples/full",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Infinite Loading",
+          },
+          "locale": "en-US",
+          "name": "infinite-loading",
+          "route": "/examples/infinite-loading",
+        },
+        {
+          "locale": "en-US",
+          "meta": {
+            "auth": "Authentication",
+            "basic": "Basic Usage",
+            "error-handling": "Error Handling",
+            "full": {
+              "theme": {
+                "layout": "raw",
+              },
+              "title": "Full",
+            },
+            "infinite-loading": "Infinite Loading",
+            "ssr": "Next.js SSR",
+          },
+          "name": "meta.json",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Next.js SSR",
+          },
+          "locale": "en-US",
+          "name": "ssr",
+          "route": "/examples/ssr",
+        },
+      ],
+      "name": "examples",
+      "route": "/examples",
+    },
+    {
+      "frontMatter": {
+        "searchable": false,
+        "title": "React Hooks for Data Fetching",
+      },
+      "locale": "en-US",
+      "name": "index",
+      "route": "/",
+    },
+    {
+      "locale": "en-US",
+      "meta": {
+        "blog": {
+          "theme": {
+            "breadcrumb": false,
+            "footer": true,
+            "sidebar": false,
+            "toc": true,
+            "typesetting": "article",
+          },
+          "title": "Blog",
+          "type": "page",
+        },
+        "docs": {
+          "theme": {
+            "toc": true,
+          },
+          "title": "Docs",
+          "type": "page",
+        },
+        "examples": {
+          "theme": {
+            "layout": "full",
+          },
+          "title": "Examples",
+          "type": "page",
+        },
+        "index": {
+          "hidden": true,
+          "theme": {},
+          "title": "Introduction",
+          "type": "page",
+        },
+        "nextra_link": {
+          "href": "https://github.com/shuding/nextra",
+          "newWindow": true,
+          "title": "Nextra ↗",
+          "type": "page",
+        },
+      },
+      "name": "meta.json",
+    },
+  ],
+  "/docs/data-fetching",
+  "Data Fetching",
+]
+`;
+
+exports[`Page Process > pageMap zh-CN 1`] = `
+[
+  [
+    {
+      "children": [
+        {
+          "locale": "zh-CN",
+          "meta": {
+            "swr-v1": "SWR 1.0 发布",
+          },
+          "name": "meta.json",
+        },
+        {
+          "frontMatter": {
+            "description": "大约两年前，我们开源了 SWR，大家喜爱的小型数据请求 React 库。今天，我们迎来了另一个里程碑：SWR 1.0 版本发布。",
+            "image": "https://assets.vercel.com/image/upload/v1630059453/swr/v1.png",
+          },
+          "locale": "zh-CN",
+          "name": "swr-v1",
+          "route": "/blog/swr-v1",
+        },
+      ],
+      "name": "blog",
+      "route": "/blog",
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "locale": "zh-CN",
+              "name": "cache",
+              "route": "/docs/advanced/cache",
+            },
+            {
+              "locale": "zh-CN",
+              "name": "file-name.with.DOTS",
+              "route": "/docs/advanced/file-name.with.DOTS",
+            },
+            {
+              "locale": "zh-CN",
+              "meta": {
+                "cache": "缓存",
+                "file-name.with.DOTS": "带点的文件名",
+                "performance": "性能",
+                "react-native": "React Native",
+              },
+              "name": "meta.json",
+            },
+            {
+              "children": [
+                {
+                  "locale": "en-US",
+                  "name": "cache",
+                  "route": "/docs/advanced/more/cache",
+                },
+              ],
+              "name": "more",
+              "route": "/docs/advanced/more",
+            },
+            {
+              "locale": "zh-CN",
+              "name": "performance",
+              "route": "/docs/advanced/performance",
+            },
+            {
+              "locale": "zh-CN",
+              "name": "react-native",
+              "route": "/docs/advanced/react-native",
+            },
+          ],
+          "name": "advanced",
+          "route": "/docs/advanced",
+        },
+        {
+          "locale": "zh-CN",
+          "name": "arguments",
+          "route": "/docs/arguments",
+        },
+        {
+          "locale": "zh-CN",
+          "name": "change-log",
+          "route": "/docs/change-log",
+        },
+        {
+          "locale": "zh-CN",
+          "name": "conditional-fetching",
+          "route": "/docs/conditional-fetching",
+        },
+        {
+          "locale": "zh-CN",
+          "name": "data-fetching",
+          "route": "/docs/data-fetching",
+        },
+        {
+          "locale": "zh-CN",
+          "name": "error-handling",
+          "route": "/docs/error-handling",
+        },
+        {
+          "locale": "zh-CN",
+          "name": "getting-started",
+          "route": "/docs/getting-started",
+        },
+        {
+          "locale": "zh-CN",
+          "name": "global-configuration",
+          "route": "/docs/global-configuration",
+        },
+        {
+          "locale": "zh-CN",
+          "meta": {
+            "advanced": "高级",
+            "arguments": "传入参数",
+            "change-log": "更新日志",
+            "conditional-fetching": "条件数据请求",
+            "data-fetching": "数据请求",
+            "error-handling": "错误处理",
+            "getting-started": "入门",
+            "global-configuration": "全局配置",
+            "middleware": "中间件",
+            "mutation": "数据更改",
+            "options": "选项",
+            "pagination": "分页",
+            "prefetching": "预请求",
+            "revalidation": "自动重新请求",
+            "suspense": "Suspense",
+            "typescript": "Typescript",
+            "with-nextjs": "Next.js SSG 和 SSR",
+          },
+          "name": "meta.json",
+        },
+        {
+          "locale": "zh-CN",
+          "name": "middleware",
+          "route": "/docs/middleware",
+        },
+        {
+          "locale": "zh-CN",
+          "name": "mutation",
+          "route": "/docs/mutation",
+        },
+        {
+          "locale": "zh-CN",
+          "name": "options",
+          "route": "/docs/options",
+        },
+        {
+          "locale": "zh-CN",
+          "name": "pagination",
+          "route": "/docs/pagination",
+        },
+        {
+          "locale": "zh-CN",
+          "name": "prefetching",
+          "route": "/docs/prefetching",
+        },
+        {
+          "locale": "zh-CN",
+          "name": "revalidation",
+          "route": "/docs/revalidation",
+        },
+        {
+          "locale": "zh-CN",
+          "name": "suspense",
+          "route": "/docs/suspense",
+        },
+        {
+          "locale": "zh-CN",
+          "name": "with-nextjs",
+          "route": "/docs/with-nextjs",
+        },
+        {
+          "locale": "en-US",
+          "name": "advanced",
+          "route": "/docs/advanced",
+        },
+        {
+          "locale": "en-US",
+          "name": "typescript",
+          "route": "/docs/typescript",
+        },
+      ],
+      "name": "docs",
+      "route": "/docs",
+    },
+    {
+      "children": [
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "身份验证",
+          },
+          "locale": "zh-CN",
+          "name": "auth",
+          "route": "/examples/auth",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "基本用法",
+          },
+          "locale": "zh-CN",
+          "name": "basic",
+          "route": "/examples/basic",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "错误处理",
+          },
+          "locale": "zh-CN",
+          "name": "error-handling",
+          "route": "/examples/error-handling",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "无限加载",
+          },
+          "locale": "zh-CN",
+          "name": "infinite-loading",
+          "route": "/examples/infinite-loading",
+        },
+        {
+          "locale": "zh-CN",
+          "meta": {
+            "auth": "身份验证",
+            "basic": "基本用法",
+            "error-handling": "错误处理",
+            "infinite-loading": "无限加载",
+            "ssr": "Next.js SSR",
+          },
+          "name": "meta.json",
+        },
+        {
+          "locale": "en-US",
+          "name": "full",
+          "route": "/examples/full",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Next.js SSR",
+          },
+          "locale": "en-US",
+          "name": "ssr",
+          "route": "/examples/ssr",
+        },
+      ],
+      "name": "examples",
+      "route": "/examples",
+    },
+    {
+      "frontMatter": {
+        "title": "用于数据请求的 React Hooks 库",
+      },
+      "locale": "zh-CN",
+      "name": "index",
+      "route": "/",
+    },
+    {
+      "locale": "zh-CN",
+      "meta": {
+        "blog": {
+          "title": "博客",
+          "type": "page",
+        },
+        "docs": {
+          "title": "文档",
+          "type": "page",
+        },
+        "examples": {
+          "title": "示例",
+          "type": "page",
+        },
+        "index": {
+          "hidden": true,
+          "title": "简介",
+          "type": "page",
+        },
+      },
+      "name": "meta.json",
+    },
+    {
+      "frontMatter": {
+        "searchable": false,
+      },
+      "locale": "en-US",
+      "name": "blog",
+      "route": "/blog",
+    },
+  ],
+  "/docs/data-fetching",
+  "数据请求",
+]
+`;

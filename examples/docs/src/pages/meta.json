@@ -1,15 +1,7 @@
 {
-  "index": {
-    "title": "Akira",
-    "type": "page",
-    "hidden": true
-  },
-  "nextra": {
-    "title": "Docs",
-    "type": "page"
-  },
-  "blog": {
-    "title": "Blog",
-    "type": "page"
-  }
+  "index": "Introduction",
+  "get-started": "Get Started",
+  "features": "Features",
+  "themes": "Themes",
+  "advanced": "Advanced"
 }

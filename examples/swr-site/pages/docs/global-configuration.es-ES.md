@@ -8,7 +8,7 @@ El contexto `SWRConfig` puede proporcionar configuraciones globales ([opciones](
 </SWRConfig>
 ```
 
-En este ejemplo, todos los hooks de SWR utilizarán el mismo fetcher proporcionando para cargar datos JSON, 
+En este ejemplo, todos los hooks de SWR utilizarán el mismo fetcher proporcionando para cargar datos JSON,
 y se actualizarán cada 3 segundos por defecto:
 
 ```jsx
@@ -24,7 +24,7 @@ function Dashboard () {
 
 function App () {
   return (
-    <SWRConfig 
+    <SWRConfig
       value={{
         refreshInterval: 3000,
         fetcher: (resource, init) => fetch(resource, init).then(res => res.json())

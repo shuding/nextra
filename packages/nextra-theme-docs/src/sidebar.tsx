@@ -16,7 +16,7 @@ import getHeadingText from './utils/get-heading-text'
 import { Item, PageItem } from './utils/normalize-pages'
 import LocaleSwitch from './locale-switch'
 import ThemeSwitch from './theme-switch'
-import ArrowRight from './icons/arrow-right'
+import { ArrowRightIcon } from './icons'
 import Collapse from './components/collapse'
 import renderComponent from './utils/render-component'
 
@@ -78,17 +78,13 @@ function FolderImpl({ item, anchors }: FolderProps) {
     >
       <span className="flex items-center justify-between">
         {item.title}
-        <ArrowRight
+        <ArrowRightIcon
           height="1em"
-          className={
-            'ml-2 p-[2px] rounded-sm min-w-[18px] h-[18px] dark:hover:bg-gray-100 hover:bg-gray-800 hover:bg-opacity-5 dark:hover:bg-opacity-5'
-          }
-          childProps={{
-            className: cn(
-              'transition-transform origin-center',
-              open ? 'rotate-90' : ''
-            )
-          }}
+          className={cn(
+            'ml-2 p-[2px] rounded-sm min-w-[18px] h-[18px] dark:hover:bg-gray-100 hover:bg-gray-800 hover:bg-opacity-5 dark:hover:bg-opacity-5',
+            '[&>path]:transition-transform [&>path]:origin-center',
+            open && '[&>path]:rotate-90'
+          )}
         />
       </span>
     </a>
@@ -318,7 +314,7 @@ export default function Sidebar({
       ) : null}
       <aside
         className={cn(
-          'nextra-sidebar-container nextra-scrollbar fixed flex-shrink-0 w-full md:w-64 md:sticky z-[15] top-16 self-start overflow-y-auto transform-none h-[calc(100vh-4rem)]',
+          'nextra-sidebar-container nextra-scrollbar fixed flex-shrink-0 w-full md:w-64 md:sticky z-[15] top-16 self-start overflow-y-auto h-[calc(100vh-4rem)]',
           asPopover ? 'md:hidden' : 'md:block',
           hasMenu ? 'with-menu' : '',
           { open: menu }

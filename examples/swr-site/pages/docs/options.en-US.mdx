@@ -27,9 +27,9 @@ const { data, error, isValidating, mutate } = useSWR(key, fetcher, options)
 - `revalidateOnMount`: enable or disable automatic revalidation when component is mounted
 - `revalidateOnFocus = true`: automatically revalidate when window gets focused [(details)](/docs/revalidation)
 - `revalidateOnReconnect = true`: automatically revalidate when the browser regains a network connection (via `navigator.onLine`) [(details)](/docs/revalidation)
-- `refreshInterval` [(details)](/docs/revalidation): 
+- `refreshInterval` [(details)](/docs/revalidation):
   - Disabled by default: `refreshInterval = 0`
-  - If set to a number, polling interval in milliseconds 
+  - If set to a number, polling interval in milliseconds
   - If set to a function, the function will receive the latest data and should return the interval in milliseconds
 - `refreshWhenHidden = false`: polling when the window is invisible (if `refreshInterval` is enabled)
 - `refreshWhenOffline = false`: polling when the browser is offline (determined by `navigator.onLine`)

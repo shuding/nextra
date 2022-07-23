@@ -1,8 +1,8 @@
 import { NextraPlugin, pageMapCache } from './plugin'
+import { MARKDOWN_EXTENSION_REGEX } from './constants'
 
 const defaultExtensions = ['js', 'jsx', 'ts', 'tsx']
 const markdownExtensions = ['md', 'mdx']
-const markdownExtensionTest = /\.mdx?$/
 
 module.exports =
   (...args) =>
@@ -23,7 +23,7 @@ module.exports =
 
     if (locales) {
       console.log(
-        '[Nextra] You have Next.js i18n enabled, read here (TODO: link) for the docs.'
+        '[nextra] You have Next.js i18n enabled, read here (TODO: link) for the docs.'
       )
     }
 
@@ -38,7 +38,7 @@ module.exports =
         }
 
         config.module.rules.push({
-          test: markdownExtensionTest,
+          test: MARKDOWN_EXTENSION_REGEX,
           use: [
             options.defaultLoaders.babel,
             {

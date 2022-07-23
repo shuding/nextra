@@ -28,11 +28,7 @@ interface LayoutProps {
   opts: PageOpt
 }
 
-const BlogLayout = ({
-  config,
-  contentNodes,
-  opts
-}: LayoutProps) => {
+const BlogLayout = ({ config, contentNodes, opts }: LayoutProps) => {
   // gather info for tag/posts pages
   let posts: PageMapItem[] = []
   let navPages: PageMapItem[] = []
@@ -125,51 +121,52 @@ const BlogLayout = ({
   }
   const meta = opts.meta
 
-  const postList = posts.length > 0 ? (
-    <ul>
-      {posts.map(post => {
-        if (tagName) {
-          const tags = getTags(post)
-          if (!Array.isArray(tagName) && !tags.includes(tagName)) {
+  const postList =
+    posts.length > 0 ? (
+      <div>
+        {posts.map(post => {
+          if (tagName) {
+            const tags = getTags(post)
+            if (!Array.isArray(tagName) && !tags.includes(tagName)) {
+              return null
+            }
+          } else if (type === 'tag') {
             return null
           }
-        } else if (type === 'tag') {
-          return null
-        }
 
-        const postTitle =
-          (post.frontMatter ? post.frontMatter.title : null) || post.name
-        const postDate = post.frontMatter ? (
-          <time className="post-item-date">
-            {new Date(post.frontMatter.date).toDateString()}
-          </time>
-        ) : null
-        const postDescription =
-          post.frontMatter && post.frontMatter.description ? (
-            <p className="post-item-desc">
-              {post.frontMatter.description}
-              {config.readMore ? (
-                <Link href={post.route}>
-                  <a className="post-item-more">{config.readMore}</a>
-                </Link>
-              ) : null}
-            </p>
+          const postTitle =
+            (post.frontMatter ? post.frontMatter.title : null) || post.name
+          const postDate = post.frontMatter ? (
+            <time className="post-item-date">
+              {new Date(post.frontMatter.date).toDateString()}
+            </time>
           ) : null
+          const postDescription =
+            post.frontMatter && post.frontMatter.description ? (
+              <p className="post-item-desc">
+                {post.frontMatter.description}
+                {config.readMore ? (
+                  <Link href={post.route}>
+                    <a className="post-item-more">{config.readMore}</a>
+                  </Link>
+                ) : null}
+              </p>
+            ) : null
 
-        return (
-          <div key={post.route} className="post-item">
-            <h3>
-              <Link href={post.route}>
-                <a className="post-item-title">{postTitle}</a>
-              </Link>
-            </h3>
-            {postDescription}
-            {postDate}
-          </div>
-        )
-      })}
-    </ul>
-  ) : null
+          return (
+            <div key={post.route} className="post-item">
+              <h3>
+                <Link href={post.route}>
+                  <a className="post-item-title">{postTitle}</a>
+                </Link>
+              </h3>
+              {postDescription}
+              {postDate}
+            </div>
+          )
+        })}
+      </div>
+    ) : null
   const ref = React.useRef<HTMLHeadingElement>(null)
 
   return (
@@ -180,7 +177,10 @@ const BlogLayout = ({
           {config.titleSuffix}
         </title>
         {config.head
-          ? config.head({ title: `${pageTitle} ${config.titleSuffix}`, meta: opts.meta })
+          ? config.head({
+              title: `${pageTitle} ${config.titleSuffix}`,
+              meta: opts.meta
+            })
           : null}
       </Head>
       <article className="container prose prose-sm md:prose dark:prose-dark">
@@ -205,7 +205,6 @@ const BlogLayout = ({
     </>
   )
 }
-
 
 const createLayout = (opts: PageOpt, _config: NextraBlogTheme) => {
   const config: NextraBlogTheme = Object.assign(
@@ -238,17 +237,12 @@ const createLayout = (opts: PageOpt, _config: NextraBlogTheme) => {
         defaultTheme="system"
         enableSystem={true}
       >
-        <BlogLayout
-          config={config}
-          contentNodes={page}
-          opts={opts}
-        />
+        <BlogLayout config={config} contentNodes={page} opts={opts} />
       </ThemeProvider>
     )
   }
   Page.getLayout = Layout
   return Page
 }
-
 
 export default createLayout

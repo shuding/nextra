@@ -322,7 +322,8 @@ const getComponents = (context: { index: number }) => ({
     Bleed,
     Callout,
     Tabs,
-    Tab
+    Tab,
+    Collapse
   }
 })
 

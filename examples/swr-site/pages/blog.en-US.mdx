@@ -8,15 +8,17 @@ import { getPagesUnderRoute } from 'nextra/context'
 import Link from 'next/link'
 
 {getPagesUnderRoute('/blog').map(page => {
-  // Alias `<a>` to avoid it being replaced by MDX components.
-  const A = 'a'
-  return <div>
-    <Link href={page.route}>
-      <A style={{
+// Alias `<a>` to avoid it being replaced by MDX components.
+const A = 'a'
+return <div>
+
+<Link href={page.route}>
+<A style={{
         color: '#000',
       }}>{page.meta.title || page.frontMatter?.title || page.name}</A>
-    </Link>
-    <p>{page.frontMatter?.description}</p>
-    <p>{page.date}</p>
+</Link>
+<p>{page.frontMatter?.description}</p>
+<p>{page.date}</p>
+
   </div>
 })}
