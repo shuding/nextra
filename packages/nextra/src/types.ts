@@ -2,11 +2,32 @@ import { NextConfig } from 'next'
 import { Heading as MDASTHeading } from 'mdast'
 import { ProcessorOptions } from '@mdx-js/mdx'
 import { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
-import { PageMapCache } from './plugin'
+
+
+export abstract class NextraPluginCache {
+  public cache: { items: PageMapItem[]; fileMap: Record<string, any> } | null
+
+  constructor() {
+    this.cache = { items: [], fileMap: {} }
+  }
+
+  set(data: { items: PageMapItem[]; fileMap: Record<string, any> }) {
+    this.cache!.items = data.items
+    this.cache!.fileMap = data.fileMap
+  }
+
+  clear() {
+    this.cache = null
+  }
+
+  get() {
+    return this.cache
+  }
+}
 export interface LoaderOptions extends NextraConfig {
   locales: string[]
   defaultLocale: string
-  pageMapCache: PageMapCache
+  pageMapCache: NextraPluginCache
 }
 
 export interface PageMapItem {
@@ -56,6 +77,10 @@ export type NextraConfig = {
   }
 }
 
-export type WithNextra = (
+export type Nextra = (
   ...args: [NextraConfig] | [theme: Theme, themeConfig: string]
 ) => (nextConfig: NextConfig) => NextConfig
+
+const nextra: Nextra = (...args) => (nextConfig) => ({})
+
+export default nextra

@@ -7,9 +7,11 @@
     "icons/*",
     "loader.js"
   ],
+  "types": "./dist/types.d.ts",
+  "main": "./dist/index.js",
   "typesVersions": {
     "*": {
-      ".": ["./dist/index.d.ts"],
+      ".": ["./dist/types.d.ts"],
       "compile": [
         "./dist/compile.d.ts"
       ],
@@ -59,7 +61,6 @@
       "types": "./dist/icons.d.ts"
     }
   },
-  "types": "./dist/index.d.ts",
   "repository": "https://github.com/shuding/nextra",
   "license": "MIT",
   "scripts": {
