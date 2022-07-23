@@ -39,7 +39,6 @@ export default function Meta({
                 px-1
                 rounded-md
                 text-sm
-                leading-5
                 bg-gray-200
                 select-none
                 !no-underline

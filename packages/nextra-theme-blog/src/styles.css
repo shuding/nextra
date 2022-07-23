@@ -14,46 +14,8 @@ article img {
   @apply mx-auto;
 }
 
-a.subheading {
-  text-decoration: none !important;
-  color: unset !important;
-}
-
 h1 {
   letter-spacing: -0.03em;
-}
-
-.subheading-anchor {
-  margin-top: -2em;
-  display: inline-block;
-  position: absolute;
-  width: 1px;
-}
-
-.subheading-anchor + a:hover .anchor-icon {
-  opacity: 1;
-}
-.anchor-icon {
-  opacity: 0;
-  @apply ml-2 text-gray-500;
-}
-
-.post-item .post-item-date {
-  @apply text-sm text-gray-300;
-}
-.post-item .post-item-more {
-  @apply ml-1 text-gray-600;
-}
-.post-item .post-item-desc {
-  margin-bottom: 0.5em;
-  @apply text-gray-400;
-}
-.post-item .post-item-title {
-  @apply no-underline;
-  color: unset;
-}
-ul.nextra-post-list {
-  @apply pl-0;
 }
 
 code {

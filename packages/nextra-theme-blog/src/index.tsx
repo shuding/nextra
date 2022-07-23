@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -16,7 +16,6 @@ import type { PageMapItem, PageOpt } from 'nextra'
 import type { NextraBlogTheme } from './types'
 // comments
 const Cusdis = dynamic(
-  // @ts-ignore
   () => import('react-cusdis').then(mod => mod.ReactCusdis),
   { ssr: false }
 ) as typeof ReactCusdis
@@ -27,7 +26,11 @@ interface LayoutProps {
   opts: PageOpt
 }
 
-const BlogLayout = ({ config, contentNodes, opts }: LayoutProps) => {
+const BlogLayout = ({
+  config,
+  contentNodes,
+  opts
+}: LayoutProps): ReactElement => {
   // gather info for tag/posts pages
   let posts: PageMapItem[] = []
   let navPages: PageMapItem[] = []
@@ -89,116 +92,89 @@ const BlogLayout = ({ config, contentNodes, opts }: LayoutProps) => {
   }
   const router = useRouter()
   const { theme, resolvedTheme } = useTheme()
-  const { query } = router
-  const tagName = type === 'tag' ? query.tag : null
-  let comments
+  const tagName = type === 'tag' ? router.query.tag : null
 
-  if (config.cusdis) {
-    if (!config.cusdis.appId) {
-      console.warn('[cusdis]', '`appId` is required')
-    } else {
-      comments = (
-        <Cusdis
-          lang={config.cusdis.lang}
-          style={{
-            marginTop: '4rem'
-          }}
-          attrs={{
-            host: config.cusdis.host || 'https://cusdis.com',
-            appId: config.cusdis.appId,
-            pageId: router.pathname,
-            pageTitle,
-            theme:
-              theme === 'dark' || resolvedTheme === 'dark' ? 'dark' : 'light'
-          }}
-        />
-      )
+  const postList = posts.map(post => {
+    if (tagName) {
+      const tags = getTags(post)
+      if (!Array.isArray(tagName) && !tags.includes(tagName)) {
+        return null
+      }
+    } else if (type === 'tag') {
+      return null
     }
-  }
-  const meta = opts.meta
 
-  const postList =
-    posts.length > 0 ? (
-      <div>
-        {posts.map(post => {
-          if (tagName) {
-            const tags = getTags(post)
-            if (!Array.isArray(tagName) && !tags.includes(tagName)) {
-              return null
-            }
-          } else if (type === 'tag') {
-            return null
-          }
+    const postTitle = post.frontMatter?.title || post.name
+    const date = post.frontMatter?.date && new Date(post.frontMatter.date)
+    const description = post.frontMatter?.description
 
-          const postTitle =
-            (post.frontMatter ? post.frontMatter.title : null) || post.name
-          const postDate = post.frontMatter ? (
-            <time className="post-item-date">
-              {new Date(post.frontMatter.date).toDateString()}
-            </time>
-          ) : null
-          const postDescription =
-            post.frontMatter && post.frontMatter.description ? (
-              <p className="post-item-desc">
-                {post.frontMatter.description}
-                {config.readMore ? (
-                  <Link href={post.route}>
-                    <a className="post-item-more">{config.readMore}</a>
-                  </Link>
-                ) : null}
-              </p>
-            ) : null
-
-          return (
-            <div key={post.route} className="post-item">
-              <h3>
-                <Link href={post.route}>
-                  <a className="post-item-title">{postTitle}</a>
-                </Link>
-              </h3>
-              {postDescription}
-              {postDate}
-            </div>
-          )
-        })}
+    return (
+      <div key={post.route}>
+        <h3>
+          <Link href={post.route} passHref>
+            <a className="!no-underline">{postTitle}</a>
+          </Link>
+        </h3>
+        {description && (
+          <p className="text-gray-400 mb-2">
+            {description}
+            {config.readMore && (
+              <Link href={post.route} passHref>
+                <a className="ml-1">{config.readMore}</a>
+              </Link>
+            )}
+          </p>
+        )}
+        {date && (
+          <time className="text-sm text-gray-300" dateTime={date.toISOString()}>
+            {date.toDateString()}
+          </time>
+        )}
       </div>
-    ) : null
+    )
+  })
   const ref = React.useRef<HTMLHeadingElement>(null)
   const pageTitle = opts.meta.title || opts.titleText || ''
+  const title = `${pageTitle}${config.titleSuffix || ''}`
 
+  if (config.cusdis && !config.cusdis.appId) {
+    console.warn('[cusdis]', '`appId` is required')
+  }
+  const comments = config.cusdis?.appId && (
+    <Cusdis
+      lang={config.cusdis.lang}
+      style={{ marginTop: '4rem' }}
+      attrs={{
+        host: config.cusdis.host || 'https://cusdis.com',
+        appId: config.cusdis.appId,
+        pageId: router.pathname,
+        pageTitle,
+        theme: theme === 'dark' || resolvedTheme === 'dark' ? 'dark' : 'light'
+      }}
+    />
+  )
   return (
-    <>
-      <Head>
-        <title>
-          {pageTitle}
-          {config.titleSuffix}
-        </title>
-        {config.head
-          ? config.head({
-              title: `${pageTitle} ${config.titleSuffix}`,
-              meta: opts.meta
-            })
-          : null}
-      </Head>
       <article className="container prose prose-sm md:prose dark:prose-dark">
+        <Head>
+          <title>{title}</title>
+          {config.head?.({ title, meta: opts.meta })}
+        </Head>
         <HeadingContext.Provider value={ref}>
-          {pageTitle ? <h1>{pageTitle}</h1> : null}
+          {pageTitle && <h1>{pageTitle}</h1>}
           {type === 'post' ? (
-            /** @ts-expect-error */
-            <Meta {...meta} back={back} config={config} />
+            <Meta {...opts.meta} back={back} config={config} />
           ) : (
             <Nav navPages={navPages} config={config} />
           )}
           <MDXTheme>
             {contentNodes}
-            {type === 'post' ? config.postFooter : null}
-            {type === 'post' ? comments : null}
+            {type === 'post' && config.postFooter}
+            {type === 'post' && comments}
           </MDXTheme>
           {postList}
           {config.footer}
         </HeadingContext.Provider>
       </article>
-    </>
   )
 }
 
@@ -207,9 +183,7 @@ const createLayout = (opts: PageOpt, _config: NextraBlogTheme) => {
     {
       readMore: 'Read More →',
       footer: (
-        <small style={{ display: 'block', marginTop: '8rem' }}>
-          CC BY-NC 4.0 2020 © Shu Ding.
-        </small>
+        <small className="block mt-32">CC BY-NC 4.0 2022 © Shu Ding.</small>
       ),
       titleSuffix: null,
       postFooter: null
