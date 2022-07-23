@@ -4,7 +4,6 @@ declare module 'github-slugger' {
   }
 }
 
-declare module 'rehype-mdx-title'
 
 declare module globalThis {
   import { PageMapItem } from './types'

@@ -40,7 +40,7 @@ const defaultTheme = {
       <meta name="apple-mobile-web-app-title" content="Nextra" />
     </React.Fragment>
   ),
-  searchPlaceholder: ({ locale }: { locale?: string }) => {
+  searchPlaceholder: ({ locale }: { locale: string }) => {
     if (locale === 'zh-CN') return '搜索文档...'
     return 'Search documentation...'
   },

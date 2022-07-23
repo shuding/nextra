@@ -68,7 +68,7 @@ const EditPageLink = ({
   text:
     | React.ReactNode
     | React.FC<{
-        locale?: string
+        locale: string
       }>
   filepath: string
 }) => {
@@ -97,7 +97,7 @@ const FeedbackLink = ({
   labels
 }: {
   repository?: string
-  feedbackLink: ReactNode | React.FC<{ locale?: string }>
+  feedbackLink: ReactNode | React.FC<{ locale: string }>
   filepath: string
   labels?: string
 }) => {

@@ -8,7 +8,7 @@ import { Meta } from './types'
 
 interface HeadProps {
   title: string
-  locale?: string
+  locale: string
   meta: Meta
 }
 

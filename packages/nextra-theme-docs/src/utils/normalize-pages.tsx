@@ -59,7 +59,7 @@ export default function normalizePages({
   pageThemeContext = defaultThemeContext
 }: {
   list: PageMapItem[]
-  locale?: string
+  locale: string
   defaultLocale?: string
   route: string
   docsRoot?: string

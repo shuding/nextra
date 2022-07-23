@@ -3,12 +3,12 @@ import React from 'react'
 export interface DocsThemeConfig {
   projectLink?: string
   github?: string
-  projectLinkIcon?: React.ReactNode | React.FC<{ locale?: string }>
+  projectLinkIcon?: React.ReactNode | React.FC<{ locale: string }>
   docsRepositoryBase?: string
   titleSuffix?:
     | React.ReactNode
     | React.FC<{
-        locale?: string
+        locale: string
         config: DocsThemeConfig
         title: string
         meta: Meta
@@ -30,22 +30,22 @@ export interface DocsThemeConfig {
   footerText?:
     | React.ReactNode
     | React.FC<{
-        locale?: string
+        locale: string
       }>
   footerEditLink?:
     | React.ReactNode
     | React.FC<{
-        locale?: string
+        locale: string
       }>
   logo?:
     | React.ReactNode
     | React.FC<{
-        locale?: string
+        locale: string
       }>
   head?:
     | React.ReactNode
     | React.FC<{
-        locale?: string
+        locale: string
         config: DocsThemeConfig
         title: string
         meta: Meta
@@ -57,22 +57,22 @@ export interface DocsThemeConfig {
   feedbackLink?:
     | React.ReactNode
     | React.FC<{
-        locale?: string
+        locale: string
       }>
   feedbackLabels?: string
   customSearch?: React.ReactNode | false
-  searchPlaceholder?: string | ((props: { locale?: string }) => string)
+  searchPlaceholder?: string | ((props: { locale: string }) => string)
   projectChatLink?: string
-  projectChatLinkIcon?: React.FC<{ locale?: string }>
+  projectChatLinkIcon?: React.FC<{ locale: string }>
   sidebarSubtitle?: React.FC<{ title: string }>
-  banner?: React.FC<{ locale?: string }>
+  banner?: React.FC<{ locale: string }>
   bannerKey?: string
-  gitTimestamp?: string | React.FC<{ locale?: string; timestamp: Date }>
-  tocExtraContent?: React.FC<{ locale?: string }>
+  gitTimestamp?: string | React.FC<{ locale: string; timestamp: Date }>
+  tocExtraContent?: React.FC<{ locale: string }>
   unstable_searchResultEmpty?:
     | React.ReactNode
     | React.FC<{
-        locale?: string
+        locale: string
       }>
 }
 
