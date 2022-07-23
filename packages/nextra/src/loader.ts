@@ -11,7 +11,7 @@ import { parseFileName } from './utils'
 import { compileMdx } from './compile'
 import { getPageMap, findPagesDir } from './page-map'
 import { collectFiles, collectMdx } from './plugin'
-import { MARKDOWN_EXTENSION_REGEX, IS_PRODUCTION } from './constants'
+import { MARKDOWN_EXTENSION_REGEX, IS_PRODUCTION, DEFAULT_LOCALE } from './constants'
 
 // TODO: create this as a webpack plugin.
 const indexContentEmitted = new Set<string>()
@@ -130,7 +130,7 @@ async function loader(
     // We only add .MD and .MDX contents
     if (MARKDOWN_EXTENSION_REGEX.test(filename) && data.searchable !== false) {
       addPage({
-        fileLocale: fileLocale || 'default',
+        fileLocale: fileLocale || DEFAULT_LOCALE,
         route,
         title,
         data,
