@@ -13,7 +13,7 @@ const defaultTheme = {
     storageKey: 'theme',
     forcedTheme: undefined
   },
-  defaultMenuCollapsed: false,
+  defaultMenuCollapsed: true,
   // @TODO: Can probably introduce a set of options to use Google Fonts directly
   // font: true,
   footer: true,

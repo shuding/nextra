@@ -1,0 +1,2847 @@
+001. TODO.md(5239):
+- Learning
+- Books:
+  - 写一本书，从前端到后端到算法（南川从0到1编程开发串讲，配套视频）
+- Projects:
+  - markdown实时渲染引擎（marked + webpack + iframe ？）从而允许开发模式下将微信公众号排版做好
+  - ★★★★★ 聚合搜索，同时展示google、github、搜索微信、知乎的搜索结果
+  - ★★★ 支持跳转的拓扑知识网络可视化系统
+  - ★★★★ 豆瓣租房油猴脚本
+  - vscode relative
+  - MKL relative:
+    - 控制mkl仓库的体积
+  - wechat relative
+  - OS relative:
+    - 一款可以展示环境配置（尤其是全局和局部镜像源）的gui（参考baobab）
+    - Mac Dictionary add more powerful chinese translation (from chinese to english)
+  - 基于 b-ok 实现 online reader
+  - 参考 http://videolectures.net/nipsworkshops2010_urtasun_gpv/ 实现字幕与视频联动
+  - 'TODO: 电商分析系统'
+  - 'TODO: 超级账本'
+  - 'TODO: 王者荣耀自动系统'
+  - 'TODO: IMPORTANT: 全平台发布'
+  - 'TODO: change the default TOC config of `depth_from` from 1 to 2, of `depth_to`
+    from 6 to 4'
+  - 'TODO: change `index.yaml` to be `index.md`'
+  - 'TODO: add color support for `build/init.zsh`'
+- Articles:
+  - 'TODO: 博客生成工具对比'
+  - 'TODO: 梳理markdown的工作流，理出最佳实践，实现每个环节'
+  - 'TODO: ASCII ART'
+  - 'TODO: Prisma is not suitable for electron'
+  - 'TODO: about remark'
+  - 'TODO: alfred'
+  - 'TODO: LinkToText'
+  - '[The World From A Coder''s Eye](mark_notes/mark-theWorldFromACoder''sEye.md)'
+- History:
+  - 修复git仓库、删除MP4 (finished, 2022-06-20, Mon)
+  - shortcuts comparison(finished)
+  - linux core intro (finished, 2022-02-04)
+  - adobe photoshop export (disappeared, 2022-06-20, Mon)
+002. readme.md(1906):
+- Background
+- How to master this repo:
+  - environment
+  - scripts (python dependent)
+  - todo feature support
+  - markdown feature support
+  - python feature support
+  - check file size
+- changes
+003. core/softwares/mark-recommended-softwares.md(1602):
+- recommended pdf reader:
+  - test pdf reader of `wps`
+  - test pdf reader of `Adobe Acrobat`
+  - test pdf reader of `pdf expert`
+  - test pdf reader of `福昕`
+  - conclusion
+  - extended discussion
+004. core/softwares/Vim/vim-howto.md(20524):
+- 'BEST-PRACTICE: init/config vim':
+  - 'vim plugin: `Vundle`'
+  - 'color scheme: `monokai`'
+  - 'vim plugin: `file-line`: go/jump to line after name'
+  - 'autocomplete support: `YouCompleteMe`':
+    - 'bugfix: `No .ycm_extra_conf.py file detected. #415`'
+  - Add custom input:
+    - Add date input
+    - Add arpara signature input
+  - Add edit control
+  - Add display control
+- 'BEST-PRACTICE: diff2html':
+  - recommended html render solution of `diff2html-cli` based on `npm`
+  - a simpler solution to have a look at basic html style (based on vim)
+  - gerrit render effect:
+    - under file list view
+    - under file content view
+- copy selected lines to clipboard
+- how to delete from current position to the end of line
+- 'BEST-PRACTICE: vim force tab to be spaces (so that the git diff won''t have errors)'
+- vim filter matched lines:
+  - resolution 1. just to display (no buffer)
+  - resolution 2. write into current files
+  - 'BEST-PRACTICE: resolution 3. open a new vim window'
+- vim resize height and width:
+  - resolution 1. use commands
+  - resolution 2. use mouse
+- vim highlight line or column
+- vim mouse mode
+- vimdiff:
+  - ':white_check_mark: force `vimdiff` to wrap line'
+  - 'TODO: vimdiff show only differences'
+- bookmarks
+- files relative:
+  - open other file
+  - copy between two vim files
+- how to update `vim`
+- multi-line insert under `visual mode`
+- Copy-Paste in Vim:
+  - copy paste of line
+  - copy paste of selected
+- column selection
+- undo changes after file saved
+- search for selected text
+- 'BEST-PRACTICE: fold(collapse) and unfold(expand)'
+005. core/softwares/Database/Mysql/Mysql-howto.md(1171):
+- 'FIXED: mysql command not found'
+- login
+- mysql change password:
+  - Step 1. login
+  - Step 2. change password
+006. core/softwares/MiniProgramme/MiniProgramme-howto.md(1497):
+- how to parse exif info from image:
+  - 图片转base64
+- 微信文件位置相关
+007. core/softwares/Google/ChromeExtensions/mark-recommended-chrome-extensions.md(1314):
+- '`Reader View`':
+  - 推荐语
+  - 插件地址
+  - 效果对比
+  - 与safari阅读模式的对比
+008. core/softwares/Google/ChromeExtensions/chrome-extensions-todo.md(234):
+- ':white_check_mark: Chrome-text2md'
+009. core/softwares/Google/ChromeExtensions/chrome_extensions.md(381):
+- develop a chrome extension:
+  - start up
+010. core/softwares/Google/ChromeExtensions/chrome-extension_link-to-text-fragment_nc/README.md(2600):
+- Installation
+- Usage
+- Background
+- Acknowledgements
+- License
+011. core/softwares/Google/ChromeExtensions/archive-copy-selected-text-as-markdown/readme.md(532):
+- design:
+  - 'know what are selected '
+012. core/softwares/Google/ChromeUsage/chrome-howto.md(230):
+- shortcut for navigating to bottom or top
+013. core/softwares/Google/ChromeUsage/chrome-bugfix.md(777):
+- 'FIXME: chrome search wizard'
+014. core/softwares/Google/GoogleSearch/google-search-howto.md(395):
+- google advanced search:
+  - search target words in title
+015. core/softwares/JetBrains/jetbrains-howto.md(3515):
+- nbsp空格显示设置
+- jetbrains各版本下载链接生成脚本
+- 'BEST-PRACTICE: jetbrains version manage':
+  - 1. the plugin of `eval restart`
+  - 2. the approach to manage versions
+- improve jetbrains efficiency
+016. core/softwares/JetBrains/Clion/clion-howto.md(1276):
+- 'FIXED: `file does not belong to any project target, code insight features might not work properly`':
+  - resolution 1. mark project dir as sources and headers
+  - 'BEST-PRACTICE: resolution 2. reset cache and build'
+- how to jump to implementation from virtual interface
+017. core/softwares/JetBrains/Pycharm/pycharm-bugfix.md(1512):
+- terminal中的venv-py与project中的venv-py不同:
+  - 问题复现
+  - 解决方案
+018. core/softwares/JetBrains/Pycharm/pycharm-howto.md(9023):
+- 'FIXED: pycharm中创建test测例，但默认target_directory定位异常'
+- 在pycharm中的opencv智能提示:
+  - 最终解决方案
+  - 研究概要
+  - 研究细节
+  - 剩余疑惑
+- console output colorful log
+- doc stub on class
+- pycharm vs vscode:
+  - when configure test
+- create pycharm shortcut
+- How to sort parameters of a function call:
+  - Parameter Info
+  - Parameter Suggestions
+019. core/softwares/JetBrains/WebStorm/webstorm-bugfix.md(9735):
+- 'FIXED: taro TS2304: cannot find name `definePageConfig` or `defineAppConfig`'
+- 'FIXED: `XXX Component cannot be used as a JSX component`'
+- 'FIXED: `TypeError: this.cliEngine is not a constructor`'
+- 'FIXME: solve `named capture` problem of webstorm'
+- webstorm refactor(rename) too long time
+- ':white_check_mark: IDE prettier not work'
+- breakpoint does not work when debug typescript:
+  - settings
+  - usage:
+    - correct usage
+    - wrong usage
+    - commands comparison
+- 'PASS: webstorm terminal overflow when log `json.stringify`'
+- suppress TS7016 Could not find a declaration file for module
+- alias between eslint and webpack
+- '`tailwindcss` auto-completion not work with WebStorm'
+020. core/softwares/JetBrains/WebStorm/webstorm-howto.md(7713):
+- 'BEST-PRACTICE: dependencies circle analysis'
+- 'BEST-PRACTICE: live template with case transform'
+- do not display type info(type annotation)
+- suppress ts-lint/inspections problems of file
+- '`js-doc` in webstorm'
+- hide '.js' file generated by '.ts' file
+- distraction mode and zen mode
+- 'remove specific package.json '
+- How to suppress annoying intellisense from certain package, such as `antd`
+- How to debug a create-react-app  in webstorm?
+021. core/softwares/JetBrains/Idea/idea-howto.md(786):
+- Format Java Code
+022. core/softwares/JetBrains/AndroidStudio/android-studio.md(448):
+- config:
+  - stuck at `configure gradle project`
+023. core/softwares/mongodb/mongodb-bugfix.md(1518):
+- mongodb killed by OS
+- brew can't restart mongod
+024. core/softwares/mongodb/mongodb-howto.md(3819):
+- install mongodb in Ubuntu
+- configure mongodb remote connection via 0.0.0.0
+- Mongodb create superuser
+- Mongodb Auth JS
+- Mongodb Auth PY:
+  - 'approach 1 '
+  - approach 2
+  - approach 3
+025. core/softwares/Charles/charles-howto.md(1417):
+- config:
+  - install root certificate
+- charles and vpn
+026. core/softwares/nginx/nginx-howto.md(1377):
+- nginx config file
+- how to install and configure nginx on Ubuntu
+- configure for fastapi
+- configure for react, so the react app lies on the domain
+- break through the default max size limit (1m)
+027. core/softwares/Tencent/wechat-todo.md(1190):
+- 'TODO: 基于微信群的社交系统（适用于相亲、运营等）':
+  - 需求背景
+  - 竞品分析
+  - 基本模式
+  - 权限控制模式
+  - 潜在问题
+- 'TODO: wechat article copy to note/favorite'
+- 'TODO: mobile-wechat: switch-view 访客视角/好友视角':
+  - 目标
+  - 路径（可能）
+- 'TODO: mac-wechat: simulate mouse scroll when pressing up/down, for viewing articles'
+- 'FIXME: mac-wechat: fix the bizarre noise problem playing video or calling phones
+  when playing the music'
+028. core/softwares/Tencent/weapp-dev.md(850):
+- UI框架:
+  - 基于vue
+  - 基于react
+029. core/softwares/VSCode/vscode-bugfix.md(4887):
+- 'FIXED: vscode auto indent using 2 spaces'
+- 'FIXED: `Vscode "Unable to open [file]: Unable to read file"`'
+- git clone repo as workspace
+- about markdown image link not display:
+  - be careful about soft-link
+  - absolute path refer only works in src
+- 1. why markdown `.ts` link rendered as a video (but cannot open, since it's not)
+030. core/softwares/VSCode/vscode-todo.md(2073):
+- 'TODO: vscode markdown synchronized scroll algorithm'
+- 'TODO: vscode python auto-import `pprint`'
+- 'TODO: VSCode-ConditionalCommentCursorDown'
+- 'TODO: VSCode-AutoCompletion-ForHeadingsOfOtherFiles'
+- ':white_check_mark: vscode markdown container support'
+- ':white_check_mark: vscode lag when input'
+- ':white_check_mark: VSCode-md-flex'
+- ':white_check_mark: vscode markdown image upload (finished: 2022-01-06)'
+031. core/softwares/VSCode/vscode-extensions-howto.md(2526):
+- extension:markdown-pdf:
+  - how to use custom styles in markdown-pdf
+- extension:markdown-image:
+  - diy the image path
+  - 'TODO: Script of migrating all the images in different sub-folders everywhere
+    to the central image asserts directory'
+032. core/softwares/VSCode/vscode-howto.md(19713):
+- python 索引跳转问题
+- extensions
+- 'BEST-PRACTICE: vscode enable markdown suggestion'
+- configure python interpreter and auto activate
+- ':white_check_mark: vscode markdown image upload'
+- 'TODO: add multi circle'
+- ':white_circle: python auto import not work: `indexing: true`'
+- how to custom vscode theme/css
+- suppress `autopep8` of `sort import` for python `sys.insert`
+- snippets:
+  - vscode snippet documentation/tutorials
+  - resolution of vscode develop snippet extensions
+  - can snippets use variables
+  - can snippets cannot use functions
+  - can snippet use regex in prefix
+- how to trigger open via 'double click'
+- 'TODO: In VSCode, how to render shell commands in markdown (not under preview mode)'
+- add commentLine-cursorDown support like jetbrains:
+  - step 1. install plugin of 'multi-command', which allows you diy your key and commands
+    like a `macro`
+  - step 2. diy my own comment line and cursor down
+- double click to select a whole word with '-'
+- about 'new file' when right click on a file
+- about switch tab view
+- about definition suggestion
+- how to start vscode using `code .`
+- how to ignore/hide/exclude files in vscode:
+  - 'SOLVED: what''s `files.exclude` mean?'
+033. core/softwares/TamperMonkey/TamperMonkey-howto.md(3166):
+- Overview
+- 豆瓣筛房系统:
+  - 前后对比
+- 油猴脚本开发环境搭建:
+  - Step 1：【必须】油猴自动读取本地文件
+  - Step 2：【必须】灵活使用mdn，jquery其实并无太大必要
+  - Step 3：【推荐】vscode/WebStorm使用typescript开发
+  - Step 4：【推荐】配置webpack，实现无忧打包
+  - Step 5：【推荐】配置一个拿手的前端框架，例如：React
+- 油猴涉及技术概览:
+  - 使用iframe
+034. core/softwares/Git/git-bugfix.md(2338):
+- 'FIXED: `Fatal: Not possible to fast-forward, aborting`':
+  - conclusion
+  - 'BEST-PRACTICE: git branch/lola'
+- 'FIXME: `git-fls` not found'
+- cannot git pull since file path invalid
+035. core/softwares/Git/git-howto.md(23612):
+- 'BEST-PRACTICE: improve git pull speed':
+  - 'resolution 1: config proxy (vpn required)'
+  - 'resolution 2: change url'
+- 'BEST-PRACTICE: improve terminal speed (lagged/delayed by git)'
+- git auth:
+  - gitlab 每次都要输入密码的解决方案
+  - official password and authentication
+  - 'FIXED: `GitHub does not provide shell access`'
+- 'BEST-PRACTICE: git merge':
+  - resolution 1
+  - 'FIXME: resolution 2 (maybe can be merged with 1)'
+- '`git apply/am` (git patch)':
+  - 'BEST-PRACTICE: git patch workflow':
+    - Step 1. 下载patch文件
+    - Step 2. 解压
+    - Step 3. （可选）显示有哪些文件会被改动
+    - Step 4. 检测patch是否可行
+    - Step 5.1 `git am --signoff < `
+    - 'step 5.2 `git apply -3 ` (solving error: `fatal: empty ident name (for <>)
+      not allowed`)'
+  - 'BEST-PRACTICE: merge git patch files':
+    - Step 1. download `combinediff`
+    - Step 2. build `combinediff`:
+      - Step 3. use `combinediff`
+      - Usage of `combinediff --interpolate`
+- '`git submodule`':
+  - config submodule
+  - init and push submodule
+  - add submodule
+- '`git commit`':
+  - git remove a specific from specific commits:
+    - conclusion
+    - detail
+  - git remove specific file from history
+  - git merge commits (reset):
+    - Step 1. reset
+    - Step 2. push
+  - git commit amend
+  - generate diff file from commit
+- '`git reflog`':
+  - 'BEST-PRACTICE: customized git reflog'
+  - clean reflog (unreachable)
+  - delete one specific reflog entry
+- git diff:
+  - only show file names
+  - set tab width to be 4
+- show config info (global)
+- github cli
+- 'BEST-PRACTICE: `git lfs`: About Erasing Large File Commit in the Git History':
+  - Conclusion:
+    - clear commands
+    - check if file exists in history
+    - check log history
+    - push if ok
+  - 'PR: update to use git filter-repo'
+  - Details
+- git cancel `reset --hard`
+- git pull --ff-only
+- git exclude `.gitignore` file
+036. core/AndroidFramework/mark_vr-principle-and-implementation.md(1236):
+- VR 概要:
+  - VR的定义
+  - VR的优势
+- 反畸变:
+  - 反畸变原理
+  - 反畸变实现
+- Timewarp:
+  - timewarp原理
+- info:
+  - 'version: 0.0.2'
+  - 'version: 0.0.1'
+037. core/AndroidFramework/arpara-vr-logic.md(3808):
+- 'anti-distortion: implementation'
+- data:
+  - package names
+- info
+038. core/AndroidFramework/frameworks-howto.md(16473):
+- instruction
+- AOSP
+- IDE review java frameworks:
+  - compile `idegen`
+  - config `ulimit`
+  - android-studio `.vmoption` config
+  - android-studio `inotify limit` config
+  - use custom framework/jdk
+  - use `facets/gradle`
+  - debug java frameworks
+- IDE review native frameworks:
+  - 'read native Frameworks '
+  - 导入 `out/**/CMakeLists.txt` 工程后的编译
+- debug native frameworks:
+  - 生成debug版本的framework文件
+  - debug `.so` file
+  - debug native
+  - LLDB relative
+  - 'FIXED: `ld.lld: error: undefined symbol: graphic_policy(int)`'
+- 属性详解:
+  - 官方参考
+  - 系统属性解决方案对照表
+  - 属性命令
+  - 属性列表
+  - 属性在adb中的访问
+  - 属性在代码中的访问
+  - '`SystemProperties` 和 `SettingsProvider`'
+  - 'TODO: 配置系统全局固定属性'
+  - '`SystemProperties` 逻辑'
+  - '`SystemProperties` 可配置区域'
+  - 在 `build.prop` 中配置实例
+  - 'FIXME: 修改完sysprop后api不匹配的问题'
+039. core/AndroidFramework/adb-howto.md(11355):
+- overview
+- fast push
+- sys relative:
+  - get android/sdk(API) version
+  - '`dumpsys`'
+  - '`getprop | setprop`'
+  - 'TODO: `sysprop(api)`'
+- log relative:
+  - config log level
+  - 'bugfix: log datetime'
+- package relative
+- activity relative:
+  - get activity name from specific package
+  - trigger an intent for choosing activity
+  - play a video/movie/mp4
+  - start/stop activity(package)
+  - 'TODO: kill app/process/package'
+  - list all package names
+  - find current activity names
+- screen relative:
+  - change window size
+  - screenshot/screencap
+  - layer相关
+- permission:
+  - 官方文档：权限控制
+  - adb启用读写SD卡权限
+- tool:
+  - 'TODO: `autoadb`'
+  - edit file in adb shell
+- input:
+  - input show `trackball`
+- debug
+040. core/AndroidFramework/TaskC2-opengl/opengl-howto.md(2183):
+- documentation
+- config `opengl | glfw | glad`
+- '`glUniform*`'
+- shader language:
+  - 'FIXED: `glGetUniformLocation() returning -1 even though used in vertex shader`'
+041. core/AndroidFramework/TaskA1-aosp-pull/aosp-pull.md(6902):
+- prepare
+- fetch aosp source codes:
+  - 成功拉取的完美表现
+  - aosp镜像的大小
+  - 什么环节最吃cpu：checkout的时候
+  - aosp 编译成功的表现
+- repo steps:
+  - repo detailed steps:
+    - Step 1. download repo
+    - Step 2. change repo mirror
+    - Step 3. change python version used via repo
+    - Step 4. `repo init`
+    - Step 5. `repo sync`
+    - Step 6. build (make)
+  - repo howto:
+    - how to get the revision(tag / version number) of repo
+    - how to download/sync specific part of aosp
+  - repo bugfix:
+    - ':white_check_mark: `error: Unable to fully sync the tree. error: Downloading
+      network changes failed.`'
+    - 'FIXME: TEST `A TLS packet with unexpected length was received.`'
+    - 'FIXME: `The remote end hung up unexpectedly`'
+  - ':white_check_mark: `prior sync failed; rebase still in progress`'
+- discussion:
+  - why not support macos
+042. core/AndroidFramework/TaskA3-aosp-changes/aosp-changes.md(16143):
+- aosp surfaceflinger changes:
+  - conclusion
+  - 7 -> 8
+  - 8 -> 9
+  - 9 -> 10
+  - 10 -> 11
+  - 7 -> 11
+- aosp code changes of native/service/surfaceflinger:
+  - aosp diff 7 vs 8:
+    - diff 7-8 `./native`:
+      - ':warning: aosp 8 started using `Android.bp` (with `Android.mk`)'
+    - diff 7-8 `../service`
+    - diff 7-8 `.../surfaceflinger`
+  - 'aosp diff: 8 vs 9':
+    - diff 8-9 `./native`
+    - diff 8-9 `../service`
+    - diff 8-9 `.../surfaceflinger`:
+      - ':warning: removed `SurfaceFlingerConsumer` and `SurfaceFlinger_hwc1` and
+        `Android.mk`'
+  - 'aosp diff: 9 vs 10':
+    - v10 change:
+      - ':warning: `.h` and `.cpp` separated into `include` and `src`'
+    - diff 9-10 `./native`
+    - diff 9-10 `../service`
+    - diff 9-10 `.../surfaceflinger`
+    - diff 9-10 `..../RenderEngine`:
+      - '"warning: `RenderEngine` is under `native/libs/renderengine/gl` in AOSP 10'
+  - 'aosp diff: 10 vs 11':
+    - 'diff 10-11: `./native`'
+    - 'diff 10-11: `../service`'
+    - 'diff 10-11: `.../surfaceflinger`':
+      - ':warning: aosp 11 added back the `FrameTracer`, and added `SurfaceFlingerDefaultFactory`'
+  - 'aosp diff: 7 vs 11':
+    - diff 7-11 `./native`
+    - diff 7-11 `../service`
+    - diff 7-11 `.../surfaceflinger`
+- aosp version changes about 架构、图形、安全、性能、测试:
+  - aosp 11 changes:
+    - '[IMPORTANT: 图形](https://developer.android.com/about/versions/11/features#graphics)'
+  - aosp 10 changes
+  - aosp 9 changes
+  - aosp 8 changes:
+    - '[IMPORTANT: 多显示器支持](https://developer.android.com/about/versions/oreo/android-8.0#mds)'
+  - aosp 7 changes:
+    - '[IMPORTANT: Vulkan API](https://developer.android.com/about/versions/nougat/android-7.0#vulkan)'
+    - '[IMPORTANT: OpenGL™ ES 3.2 API](https://developer.android.com/about/versions/nougat/android-7.0#gles_32)'
+    - '[IMPORTANT: VR support](https://developer.android.com/about/versions/nougat/android-7.0#vr)'
+043. core/AndroidFramework/TaskA4-sf-research/arpara-distortion-logic.md(1268): arpara
+  distortion logic
+044. core/AndroidFramework/TaskA4-sf-research/sf-howto.md(18613):
+- 核心文章:
+  - 谷歌官方
+  - 推荐系列一：[Android图形系统 - YuLong的专栏 - 掘金](https://juejin.cn/column/7021525822439686174)
+  - 推荐系列二
+  - 推荐系列三
+  - 其他阅读
+- core logic:
+  - '`createDisplay | destroyDisplay`'
+  - '`getPhysicalDisplayIds | getPhysicalDisplayToken`'
+  - '`getHwComposer | getRenderEngine | getCompositionEngine`'
+  - '`mVrFlingerRequestDisplay`'
+  - '`initializeDisplays`'
+  - '`SurfaceFlinger::SurfaceFlinger`'
+  - '`doComposition`'
+  - '`SurfaceFlinger::doDisplayComposition`'
+  - '`SurfaceFlinger::handleMessageRefresh`'
+  - 接收到新应用切换信息，开始准备新的图层的绘制:
+    - 'FIXME: (一分钟后?) 开始创建新应用的图层'
+    - 应用交替，完成后后将持续绘制新应用，不再有旧应用信息
+    - 完成新的应用/图层绘制后，应用如无更新，图层将不再绘制
+    - 'IMPORTANT: 关于display下layer的绘制分析结论'
+  - 修改逻辑:
+    - 'TODO: 什么是 `handleRoundedCorners`，我目前不管它，直接渲染了'
+    - 'FIXED: 如果走原先系统渲染的分支，导致画面不正常 (No! It''s all because of Scrcpy!)'
+    - 加入我们的屏幕逻辑
+- 屏幕基本信息:
+  - '`DisplayId`'
+  - '`Display | DisplayDevice::getDebugName`'
+  - '`Mesh | Mesh::Builder`'
+- 属性:
+  - 关于属性的官方参考
+  - '`property_get | property_set`'
+- 投屏 (`scrcpy`):
+  - '`adb server version (41) doesn''t match this client (40) #527`'
+  - 多窗口支持（虚拟副屏）:
+    - 在Android模拟器上启动双屏异显
+    - 'BEST-PRACTICE: disable `simulate secondary display`'
+045. core/AndroidFramework/TaskC1-timewarp/tw-research.md(23532):
+- Timewarp Guide
+- Source Code Research:
+  - decide the target code
+- SDK Logic Backward-track
+- SDK Logic Forward-implementation:
+  - step 1. `vertexShader` and `fragmentShader`:
+    - 1.1. definition of `vertexShader` and `fragmentShader`
+    - 1.2. usage of `vertexShader` and `fragmentShader`
+    - 1.3. dependencies of `vertexShader` and `fragmentShader`
+  - step 2. `setWrapMatrix`:
+    - 2.1 call/set `u_enable_time_warp` and `u_timewarp_mat`
+    - 2.2 `setWrapMatrix`
+    - 2.3 `Pose`（姿态）
+    - '2.4. PASS: `[CG]PU_PROFILE_(BEGIN|END)`'
+  - 2.5. 初始化 `Pose`
+  - 2.6 获取 `Pose`
+- SDK custom:
+  - implementation
+  - 'FIXME: `glUniformMatrix4fv is depreciated`'
+  - 'TODO: 获取的姿态不等于我们对buffer要做的操作'
+  - 'FIXED: how to init C++ class'
+  - 'FIXED: how to "import" `GLint`'
+- Framework Logic:
+  - 'intro: `ProgramCache.cpp`'
+  - filter out `uniform` Logic
+  - add `vertexShader` and `fragmentShader`
+- Timewarp Forecast:
+  - documentation
+  - workflow
+- Timewarp Algo
+- 'mark::update@2022-02-25: timewarp framework test':
+  - 打印 timewarp matrix
+- can we change log level?
+- can we debug shader?
+046. core/AndroidFramework/TaskC1-timewarp/tw-bugfix.md(2301):
+- atw sdk:
+  - ':white_check_mark: sdk not found'
+  - ':white_check_mark: ndk not found'
+  - 'FIXME: `error: use of undeclared identifier ''IVR_LOG_VERBOSE''`'
+047. core/AndroidFramework/mark_learns_opengl/glfw-3.3.6.bin.MACOS/LICENSE.md(903): LICENSE
+048. core/AndroidFramework/mark_learns_opengl/glfw-3.3.6.bin.MACOS/README.md(248): GLFW
+  binaries for macOS
+049. core/AndroidFramework/TaskD1-arpara-glass/arpara-glass-howto.md(1646):
+- connect to mac:
+  - refresh rate setting
+050. core/AndroidFramework/TaskA6-aosp-read/aosp-read-howto.md(948):
+- read native framework based on clion
+051. core/AndroidFramework/TaskA5-sf-patches/sf-patch-research-2021.md(37526):
+- gerrit codes:
+  - search the target gerrit
+- patch 1 & 2 analysis:
+  - definition
+  - classification
+  - 'EASY: suppress `#error` problem of imported `gls2.h`'
+  - 'EASY: `services/surfaceflinger/Android.mk`'
+  - 'PASS: `libs/gui/GLConsumer.cpp`'
+  - 'EASY: `services/surfaceflinger/Layer.h`'
+  - '`services/surfaceflinger/Layer.cpp`':
+    - 'HARD: `win.right = hw->getWidth();`':
+      - 可疑1. `Layer::prepareClientComposition()`
+      - 可疑2. `InputWindowInfo Layer::fillInputInfo()`
+    - 'MID: `position`'
+  - 'EASY: `libs/gui/include/gui/ISurfaceComposerClient.h`':
+    - 'MID: `services/surfaceflinger/HmdType6DistortionMesh.h`'
+    - 'EASY: `services/surfaceflinger/HmdType6DistortionMesh.cpp`'
+  - 'MID: `services/surfaceflinger/SurfaceFlinger.h`':
+    - variable initialization
+  - '`services/surfaceflinger/SurfaceFlinger.cpp`':
+    - part 1. initFB
+    - part 2. function of `initFB`
+    - 'HARD: part 3. `doComposeSurfaces`'
+    - drawing flow
+    - doComposeSurfaces code flow
+    - rendering client layers
+- 编译:
+  - 目前策略
+  - 目前策略更新@2022-01-27 15:16:38
+  - ':white_check_mark: `error: use of undeclared identifier ''dirty''`'
+  - ':white_check_mark: `error: use of undeclared identifier ''displayTransform''`'
+  - ':white_check_mark: `error: unknown type name ''Transform''`'
+  - ':white_check_mark: `error: no member named ''draw'' in ''android::Layer''`'
+  - ':white_check_mark: `error: use of undeclared identifier ''mRenderEngine''; did
+    you mean ''renderEngine''?`'
+  - ':white_check_mark: `error: too few arguments to function call, expected 5, have
+    3 (RenderEngine->setupLayerBlending)`'
+  - ':white_check_mark: `error: use of undeclared identifier ''renderArea''`'
+  - 终于成功了！2022-01-27 23:37:03
+- 年前主要工作目标:
+  - pre-check list
+  - core 1 list
+  - core 2 list
+  - core 3 list
+- 年前主要困难分析:
+  - '`Layer.cpp`中关于`win`和`position`':
+    - 可疑1. `Layer::prepareClientComposition()`
+    - 可疑2. `InputWindowInfo Layer::fillInputInfo()`
+    - position似乎没有被调用的困惑
+  - '`surfaceflinger.cpp`中关于 `doComposeSurfaces`'
+052. core/AndroidFramework/TaskA5-sf-patches/sf-patch-research-2022.md(1021): surfaceflinger
+  patch research 2022
+053. core/AndroidFramework/TaskA7-aosp-coding/aosp-coding-howto.md(608):
+- use `androidmk` to change `mk` file into `bp` file
+054. core/AndroidFramework/depreciated/depreciated-surfaceflinger-patch-research.md(1525):
+- depreciated analysis of `Layer.cpp`
+- 'depreciated: apply patch on distortion':
+  - patch vr on AOSP 7
+055. core/AndroidFramework/depreciated/TaskA6-emulator/emulator-howto.md(3217):
+- prepare 1. `emulator`:
+  - general steps
+  - extent steps
+- prepare 2. `kvm`:
+  - how to check `kvm`
+  - how to enable `kvm`
+- config emulator:
+  - how to know emulator config path ?
+  - adjust vm heap size
+056. core/AndroidFramework/TaskB2-hmdservice-integration/native-service-integration-howto.md(1146):
+- repos
+- native service:
+  - framework
+- SeLinux
+057. core/AndroidFramework/TaskA2-aosp-compile/aosp-compile-howto.md(7575):
+- make commands
+- 'target product: `eng/userdebug/user`'
+- 'BEST-PRACTICE: install preparations if in need'
+- 'BEST-PRACTICE: auto make: `make || make -j3`'
+- how to check detailed log in file (when building)
+- why ninja start so slow?
+- A totally failed attempt to compile rk codes/patch onto AOSP:
+  - conflicts of meson python version requirements
+  - compile `librga`
+  - realization of impossibility
+- run aosp in avd:
+  - resolution 1. use build version of `full-eng`
+  - resolution 2. use avd
+  - resolution 3. run arm on qemu
+  - how to increase partition size
+058. core/AndroidFramework/TaskA2-aosp-compile/aosp-compile-bugfix.md(9564):
+- 'error: `soong bootstrap failed with: exit status 1`'
+- '`Killed`, such as when building `Metalava`'
+- 'FIXED: build error of `build/core/ninja.mk:148: recipe for target ''ninja_wrapper''
+  **failed`'
+- 'FIXED: build error of `java`':
+  - conclusion of installing java openjdk-8
+  - detail (learned from hbw)
+- 'FIXED: jack-server error'
+- 'FIXED: 去除本地化编译'
+- 'FIXED: `libclang_rt.scudo-aarch64-android.so: No such file or directory`':
+  - 'solution: `make clean`'
+  - failed try
+- 'FIXME: `FAILED: ** android.test.mock.docs.system_removed.txt`'
+059. core/AndroidFramework/TaskB1-hmdservice-compile/how-to-compile-arpara-hmdservice-on-AOSP10.md(16090):
+- 环境要求
+- 全局变量（本地示例）
+- 编译总览
+- step 1. 初始化项目:
+  - fix 1. `glm` 路径修正
+  - 项目拷贝
+  - '`Android.mk` 配置':
+    - fix 2. `libusbhost`
+    - fix 3. `LOCAL_CFLAGS`
+    - Android.mk 事先编辑的重要性
+- step 2. usb 接口修复:
+  - 修复需要新增`timeout`的三个接口`manufacture | product | serial`，单位是毫秒，目前改成了5000
+  - 删除`*name`没有用到，接口也变了的一句代码
+- step 3. 代码语法修复:
+  - ':white_check_mark: `fall through`'
+  - ':white_check_mark: 删除空指针问题，转为赋值为空指针'
+  - ':white_check_mark: 其他一些类型转换'
+- 编译成功效果:
+  - ':sparkles: build success of `libhmdservice`'
+  - ':sparkles::sparkles: build success of `hmdservice`'
+- 引申阅读/其他分析:
+  - translate `Android.mk`
+  - ':white_check_mark: `Android.bp: Path is outside directory`'
+  - ':white_check_mark: `error: frameworks/native/services/hmdservice/service: MODULE.TARGET.SHARED_LIBRARIES.libhmdservice
+    already defined by frameworks/native/services/hmdservice/service.`'
+  - ':white_check_mark: `fatal error: ''usbhost/usbhost.h'' file not found`'
+  - usb cover progress:
+    - ':white_check_mark: `error: no matching function for call to ''usb_device_get_manufacturer_name''`'
+    - ':white_check_mark: `error: no matching function for call to ''usb_device_get_string''`'
+  - ':white_check_mark: `error: unknown type name ''usb_device''; did you mean ''UsbDevice''?`'
+  - ':white_check_mark: 变量没有使用的情况与手动修复过程（放弃，后来直接配mk了）'
+  - ':white_check_mark: `FAILED: ninja: ''frameworks/native/services/hmdservice/service/frameworks/native/services/hmdservice/service/common/IHmdServer.cpp'',
+    needed by ''out/target/product/generic_arm64/obj/SHARED_LIBRARIES/libhmdservice_intermediates/frameworks/native/services/hmdservice/service/common/IHmdServer.o'',
+    missing and no known rule to make it`'
+060. core/AndroidFramework/TaskE1-rockchip4/rockchip4-vr-manual.md(14447):
+- test diy and compile surfaceflinger:
+  - '1. :white_check_mark: 虚拟机找不到adb设备'
+  - '2. :white_check_mark: 启用投屏'
+  - '3. :white_check_mark: 修改源码，尝试在`surfaceflinger`部分加入几句log'
+  - '4. :white_check_mark: 推入系统'
+  - '5. :white_check_mark: 测试是否编译通过成功'
+- compile and run the first vr mode:
+  - error of null pointer
+- output 4k:
+  - 分辨率输出逻辑
+  - 'TODO: check supported resolutions'
+  - 'TODO: 自定义分辨率输出参数'
+  - change hdmi output resolution:
+    - resolution 1. set `framebuffer` and `resolution`:
+      - approach 1. define in device and burn
+      - approach 2. use adb
+    - resolution 2. change dts
+    - 'PASSED: change `RkConfig`'
+  - 主板支持4k60hz输出修改
+  - 测试edid修改结果
+- HDMI 相关介绍:
+  - EDID
+  - HDMI比例
+  - ':sparkles::sparkles: VOP(`vopb` | `vopl`)':
+    - 启用`vopb`
+    - 绑定`pll`
+    - VOP调试（hdmi 图层显示）
+  - ':sparkles::sparkles: 主副屏':
+    - 启用HDMI为副屏
+    - 查看主副屏输出接口
+  - HDMI引脚
+  - 显示桥接芯片
+061. core/AndroidFramework/TaskE1-rockchip4/rockchip4-howto.md(1049):
+- relative documentation
+062. core/AndroidFramework/TaskE1-rockchip4/rockchip4-flash-manual.md(11079):
+- 'documentation '
+- 记一次糟糕的刷机经历:
+  - intro
+  - step 1. 生成 `gpt.img`
+  - step 2. install `rkdeveloptool`
+  - step 3. 基于`rkdeveloptool`的`emmc`刷机要点
+  - 基于`adb`的`scrcpy`投屏
+  - 关于sd卡刷
+  - 其他关于rc的吐槽
+- 'FIXED: `No configuration exists for this target on this architecture. Stop.`'
+- 'FIXED:  `error: ''commit_id.xml'', needed by ''out/target/product/rk3399/vendor/commit_id.xml'',
+  missing and no known rule to make it`'
+- 'FIXED: `error: prebuilts/clang/host/linux-x86/: platform/prebuilts/clang/host/linux-x86
+  checkout`'
+- 'FIXED: `awk: line 2: function strtonum never defined`'
+- 'FIXED: `fatal error: openssl/bio.h: No such file or directory`'
+- 'FIXED: `"Creating Comm Object failed!"`'
+063. core/AndroidFramework/TaskE1-rockchip4/depreciated/depreciated-rockchip4-howto.md(9970):
+- repo rk3399 source code
+- build kernel:
+  - 'error: `FAILED: ninja: ''kernel/arch/arm64/boot/Image'', needed by ''out/target/product/rk3399_Android10/kernel'',
+    missing and no known rule to make it`'
+  - 'error: `/bin/sh: 1: lz4c: not found`'
+  - build kernel success
+- build AOSP:
+  - 'error: `FAILED: ninja: ''out/commit_id.xml'', needed by ''out/target/product/rk3399_Android10/vendor/commit_id.xml'',
+    missing and no known rule to make it`'
+  - 'error: `Not compatible: For config CONFIG_DEVMEM, value = y but required n`'
+  - 'error: `//frameworks/base:test-api-stubs-docs Metalava Check API [common]`'
+- flash:
+  - (optional) download `IO Registry Explorer` on MacOS
+  - install flashing tool on mac/win/linux
+  - flash into SD card
+  - install system from SD card into rockpi4
+- 刷机:
+  - mac install `adb`
+  - adb connect
+  - '`rkdeveloptool`'
+  - test flash
+  - test the rc adb reaction on plug in/out
+064. core/SLAM/`g2o`.md(67): '`g2o`'
+065. core/SLAM/slambook2_coding-part.md(127):
+- ch13
+066. core/SLAM/slam-research.md(1088):
+- logic
+067. core/SLAM/slambook2-ch13.md(14112):
+- 准备:
+  - 解决编译问题
+  - kiti数据集准备
+  - 运行`run_kitti_stereo`
+- 理解:
+  - '`run_kitti_stereo.cpp` 中 `DEFINE_string` 和 `google::ParseCommandLineFlags` 的用意'
+  - 读取配置文件的过程
+  - 数据集初始化过程
+  - 相机的初始化
+  - 跑图 - 数据集遍历
+  - 跑图 - 前端帧处理
+- 测试与实现:
+  - 发现1：ch13的代码检测特征点的办法不符合我们的场景需求
+- 其他:
+  - 如何 debug
+068. core/SLAM/slambook2_learning.md(3103):
+- 3rdparty:
+  - fetch submodules of 3rdparty
+  - '`Pangolin`':
+    - build Pangolin
+    - 'fixed: `fatal error: Python.h: No such file or directory`'
+  - '`Sopus`':
+    - build Sopus
+    - 'fixed: compile error'
+  - opencv:
+    - 'fixed: `make`: `stdlib.h: No such file or directory`'
+    - '!!! fixed: `unmet`'
+  - '`g2o`':
+    - pre-install
+- slambook2_theoretical-part
+- slambook2_coding-part
+- business problems
+- review
+069. core/SLAM/ORB-SLAM3_learning.md(185):
+- BUGFIX:
+  - 'fix: `fatal error: librealsense2/rs.hpp: No such file or directory` when running
+    `g++ Examples/Stereo-Inertial/stereo_inertial_realsense_D435i.cc`'
+070. core/SLAM/slambook2_theoretical-part.md(123):
+- 四元数
+- 李代数
+- 最小二乘法
+- LK光流法
+071. core/projects/hjxh/hjxh-maintainance.md(766):
+- 'FIXME: mock 404 while browser ok'
+- 'FIXME: table of `userd` or `user`':
+  - 'TODO: 确认数据库user表表名是否是`userd`'
+072. core/projects/hjxh/hjxh-express-v3.0.1.md(2922):
+- 命令行版（V3）系统使用说明:
+  - 入门指引:
+    - 什么是 `cmd`
+    - 在windows中如何启动 `cmd`
+    - 如何在 `cmd` 中定位到项目目录
+  - 环境配置（由南川操作与确认）
+  - 项目结构
+  - 程序运行:
+    - 测试启动
+    - 检查文件是否符合系统规范
+    - 'TODO: 录入 ERP/TRD 文件'
+    - 'TODO: 加入算法比对'
+- 项目开发纵览:
+  - V1 - 网页版
+  - V2 - 桌面版
+  - V3 - 命令行版
+073. core/projects/mock_huluxinan/implementation.md(734):
+- 设计思考
+- 开发问题:
+  - 'solved: `Can''t resolve ''./style/index.scss''`'
+  - 'solved(part):  AtForm 提交按钮点击后报错'
+074. core/projects/mock_huluxinan/requirements.md(639):
+- gui:
+  - page of bill list
+  - page of bill post
+  - page of personal home
+  - page of personal post
+075. core/projects/小星星-ps/readme.md(97): readme
+076. core/projects/仿FCPX的字幕拼图器/readme.md(355):
+- overview
+077. core/projects/jkb_bj_forge/jkb_bj_forge-howoto.md(4688):
+- 'TODO: 了解小程序的运行逻辑'
+- 方案分析
+- 接口:
+  - 核酸检测 （hsjc）
+  - 疫苗接种 （ymjz）
+- 方案一：基于电脑端的抓包软件修改返回包
+- 方案二：基于vpn在服务端修改返回包:
+  - mitmproxy:
+    - 版本不够：`http module has no Response`
+    - centos 安装 `python 3.9`
+    - json响应里中文乱码
+    - 被肉鸡扫描
+  - squid
+  - OpenVpn
+- 方案三：使用移动端网络框架修改返回包
+- 方案四：使用移动端数据修改工具修改本机数据
+- 方案五：原生仿制开发一款小程序或者app
+078. core/projects/南川骑行川藏线/readme.md(1863):
+- overview
+- FCPX 全局技巧:
+  - 更改library名字
+- FCPX 片段技巧:
+  - 更改片段播放速度
+  - 合并片段
+  - 单独导出clip片段
+  - 更改视频比例：从4:3到16:9
+  - 去除片段噪音
+- 字幕（`caption`）:
+  - 看不见片段里的字幕
+  - 看不见复合片段`compound clip`里的字幕
+- 标题（Title）:
+  - 无法调节标题位置
+- 设计:
+  - 封面设计
+079. core/life/resources-private.md(142):
+- history:
+  - 'date: 2022-03-17'
+080. core/life/shamghai-rent-lesson.md(1109):
+- 2021年03月12日18:24:27 关于宽带网费
+- 2021年03月12日19:41:05 关于热水问题
+081. core/life/life-daily-private.md(81861):
+- 2022-07-10, Sun:
+  - 配置pm2以后台运行mitm:
+    - pm2使用要点
+    - 一些注意点
+- 2022-07-08, Fri:
+  - 厨房漏水引发纠纷:
+    - 准备
+    - 事态
+- 2022-07-07, Thu:
+  - 在没有食欲的日子里坚定信仰
+- 2022-07-05, Tue:
+  - 凌晨emo
+  - 软件创业大败退
+- 2022-07-04, Mon:
+  - “数据三法”之殇 被删
+- 2022-07-03, Sun:
+  - 从webstorm迁移到vscode
+- 2022-06-28, Tue:
+  - 小程序生态就是烂
+- 2022-06-26, Sun:
+  - 丢眼镜
+- 2022-06-24, Fri:
+  - 张姐的难题：亚美尼亚文
+  - 理想L9
+- 2022-06-21, Tue:
+  - 百变狸猫关于平庸与死亡
+- 2022-06-20, Mon:
+  - 开始基于numbers记录日常，本文档暂停更新
+- 2022-06-17, Fri:
+  - 南川定制快拆便桶 + 南川一体式硬盘
+- 2022-06-12, Sun:
+  - 唐山打人事件
+- 2022-06-11, Sat:
+  - GoPro延时摄影
+- 2022-06-07, Tue:
+  - WWDC2022 - StageManager
+- 2022-06-06, Mon:
+  - 账号解封：”夫处世之道，亦即应变之术，岂可偏执一端“
+  - 王者荣耀iOS自动化
+- 2022-05-31, Tue:
+  - 三层置物架到了，收纳较为满意
+- 2022-05-27, Fri:
+  - 研究ipad和A4、16开尺寸关系
+  - 研究投影仪：极光、小米
+- 2022-05-26, Thu:
+  - 学习辣子鸡
+- 2022-05-25, Wed:
+  - 川藏线素材迁移
+- 2022-05-24, Tue:
+  - 安装了300M的宽带，网速飞起
+- 2022-05-22, Sun:
+  - 账号被封
+  - B站视频整理:
+    - 4k video downloader
+    - 删BV1hx41117Tf-【东邪西毒】3首bgm带你进入王家卫的爱情三境界y
+    - 删
+    - 删BV1at41117bF-How to Learn Anything... Fast - Josh Kaufman
+    - 删BV164411a7zp-【迪士尼超清录制】风暴来临：杰克船长之惊天特技大冒险
+    - 删BV1Ax411p7nK-【个人宣传片精选】“国内有史以来最好的云南旅拍微电影”——《远方，你好》_超清
+    - 删BV1is411b7P4-【燃向】此生无悔入拳皇
+    - 删BV1Bs411h7Vv-【童年慎入】催泪向十大经典动漫，哪一部让你想起了童年
+    - 删BV1W4411P7JR-【超神之路】4分钟带你看完何同学
+    - 删BV1Sx411i7tJ-【巨制】年轻人，你有看过史诗级的大学宣传片吗？
+    - 删BV1Nx411s7Jh-南审EFIT2017宣传片
+    - 删
+    - 删BV1rs41187sC-【受不了系列】少主调教无敌是多么寂寞
+    - 删BV1ix41117NC-【自恋刑警】两倍速观影体验
+    - 删
+    - 删BV1Wx411H74J-证投2017新生宣传片
+    - 删BV1qx411J7aH-PS极光南审：最美遇见你，不负韶华不负卿
+    - 删【南川数据分析小灶】一周掌握Python数据分析01_BV1vK4y1f7zP
+    - 删以我的名字等你——证投2017，我们不见不散_BV1Yx411p7yy
+    - 删少主调教无敌是多么寂寞_BV1rs41187sC
+    - 删我用AU弹奏你的名字_BV1ds411b7Ds
+    - 删闻香识女人
+    - 删除爆刘继芬
+- 2022-05-21, Sat:
+  - 床头睡眠工具箱齐活（后续被废弃）
+- '2022-05-19':
+  - 解封了
+- '2022-05-18':
+  - 关于沿海赛洛城王新书记的见面会
+  - 人民合法合理的权益不容侵犯
+- '2022-05-17':
+  - NAS与硬盘柜
+- '2022-05-16':
+  - 君要臣死，臣焉得活
+  - 命运的铡刀
+  - 我们不配
+  - 关键时刻，还得看北大
+- '2022-05-15':
+  - 花谢花飞花满天，无风无月无人眠
+- '2022-05-14':
+  - voice2srt
+- '2022-05-12':
+  - 只有上海，才会终结强制入户消杀
+  - 起与落是别人的注脚
+  - 抖腿的原因
+- '2022-05-11':
+  - 小星星的奶茶
+  - 清理黑色移动硬盘（往期资料）
+  - 梦到国际大会+WHO认为动态清零政策不可行
+- '2022-05-09':
+  - 想见人
+- '2022-05-08':
+  - breo按摩仪评测
+- '2022-05-01':
+  - 小区第一次做核酸
+  - 钟薛高
+  - 高楼对蓝天的仰望
+- '2022-05-05':
+  - 视频购物时代
+- '2022-05-04':
+  - 我为了什么
+- '2022-05-02'
+- '2022-04-30':
+  - 总感觉自己长不大
+  - 完成电饭煲尽调与选型
+- '2022-04-28':
+  - 出售大疆无人机
+- '2022-04-27':
+  - 中概股消退
+- '2022-04-26':
+  - 关于自由和政府
+- '2022-04-25':
+  - 再度重相逢
+  - 声生不息
+  - 太难了，你们不要过来啊
+- '2022-04-24':
+  - 北京囤货
+- '2022-04-23':
+  - 四月之声被删除
+  - 审视四月之声
+- '2022-04-22':
+  - 四月之声
+- '2022-04-21':
+  - 意大利面：好好吃饭，吃饱了才有力气
+- '2022-04-18':
+  - 三句义
+  - ★★★★★ 表白金亦然 ★★★★★
+- '2022-04-17':
+  - 手艺人小石
+  - 跑步3公里进20分钟了
+- '2022-04-16':
+  - 交友帖
+- '2022-04-15':
+  - 我不够红也不够黑
+  - 两杯咖啡会不幸+基利安墨菲
+- '2022-04-14':
+  - 关于上海老人
+- '2022-04-13':
+  - 希望国运不要就此扭转
+  - 居委会贴告示警告拒运将导致永久红码
+- '2022-04-12':
+  - 大白实在太累了
+- '2022-04-11':
+  - iOS15支持面罩解锁
+  - 上海承载了太多
+- '2022-04-06':
+  - 拍照滤镜还是冷色调好看
+  - 网盘不需要太大
+- '2022-04-05':
+  - 看上海母子分离政策而联想到钢琴家有感
+- '2022-04-03':
+  - 菊花夜行军
+  - 竟然没有删的上海疾控录音
+- '2022-04-02'
+- '2022-04-01':
+  - 哥哥演唱会
+- '2022-03-31':
+  - 大海为什么是蓝色的
+- '2022-03-27':
+  - 321文章纪念
+- '2022-03-25'
+- '2022-03-24'
+- '2022-03-23':
+  - 重力被
+- '2022-03-21':
+  - 文章 + 背疼 + 东航
+- '2022-03-20':
+  - 循环《人世间》 + 治抖腿
+- '2022-03-19':
+  - 看完《人世间》
+- '2022-03-17'
+- '2022-03-16':
+  - SLAM书到 + 初步接触《人世间》
+- '2022-03-15'
+- '2022-03-14':
+  - slam兴趣小组招募
+- '2022-03-13':
+  - 关于hbw对我人身攻击后的反思与启示
+- '2022-03-09':
+  - 完成租房文章
+- '2022-03-06':
+  - 研究北京房价
+- '2022-03-04':
+  - 大风和小狗
+- '2022-03-02'
+- '2022-02-28':
+  - 正式来北京了
+- '2022-02-27':
+  - 感慨银行五点下班
+- '2022-02-25':
+  - timewarp的logic测试通过，应该说一期工作完美结束了
+- '2022-02-23':
+  - 一天持续工作，完成了opengl的timewarp集成
+- '2022-02-22':
+  - 凌晨通宵完成了opengl的timewarp demo
+- '2022-02-21':
+  - 凌晨加餐研究tw sdk
+- '2022-02-20':
+  - 开始跑通第一个 opengl 渲染demo
+- '2022-02-17':
+  - 徐州，徐州
+- '2022-02-15':
+  - 帮超然兄招人
+- '2022-02-09'
+- '2022-02-07':
+  - 创办了计算机小群
+- '2022-01-31':
+  - 开发板到货
+- '2022-01-28'
+- '2022-01-26'
+- '2022-01-15':
+  - 关于望京买房
+- '2022-01-14 ':
+  - 第一天上班
+- '2022-01-08':
+  - 关于清棚
+082. core/life/poets.md(386):
+- 《友谊之光》
+- 代码大厦
+- 晚霞、冢与犬
+083. core/life/coding-philosophy.md(988):
+- 慢就是快：使用css、scss、jsx等的启示
+- where to declare the filename in code blocks
+- Macro Control and Interface decoupling(解耦)
+084. core/life/shopping.md(886):
+- 日用品购买:
+  - 牙膏
+  - 洗面奶
+  - 护发素
+085. core/life/songs.md(761):
+- だいせんじがけだらなよさ, by カルメン・マキ
+- 旷野上盛开的小黄花
+- 曾燃烧的光，可曾熄灭
+086. core/life/recipe/油焖大虾.md(2567):
+- source
+- overview
+- materials:
+  - 虾子
+  - 调味
+  - 配菜
+- steps:
+  - 虾子预处理
+  - 下锅【不要放一滴水！】
+  - 出锅
+087. core/life/recipe/辣子鸡.md(970):
+- 一、炒菜前准备的辅料
+- 二、开始制作
+088. core/docs/python-relative.md(332):
+- how to set default python interpreter in vscode
+089. core/docs/vscode-relative.md(1204):
+- 'vscode extension: Todo Tree':
+  - usage
+  - configuration
+  - effect
+090. core/docs/markdown-relative.md(6766):
+- vscode markdown plugins:
+  - ★★★ `Markdown All in One`
+  - ★★★ `Markdown Image`:
+    - usage of `Markdown Image`
+    - advantages of `Markdown Image`
+    - disadvantages of `Markdown IMage`
+    - 'dependencies of `Markdown Preview Extended (MPE)`: `princes`'
+    - advantages of `Markdown Preview Enhanced`
+  - ★★★ `Markdown Preview Enhanced`:
+    - custom-css_for-sidebar(toc)-wider
+    - export pdf via chrome
+  - ★★★ `Markdown Lint`:
+    - advantages
+    - configurations
+  - ':x: `Markdown PDF`'
+  - ':x: Markdown Extended'
+  - ':x: Markdown Notes'
+- markdown image links invalid
+- ':white_check_mark: markdown containers support'
+091. core/docs/changes.md(601):
+- ':sparkles::sparkles: 2022-02-07'
+092. core/notes/mark_the-world-from-the-eye-of-a-coder.md(3115):
+- different and usually better choice from a coder
+- 持续整理之道
+- 一个比较极客的TODO
+- 'discuss: "Always On Top" window design between macOS and windows'
+- 如何调试（debug）
+093. core/notes/wechat-moments-dump.md(2437):
+- 背景
+- 需求分析
+- 方案分析:
+  - 解决方案一：基于爬虫
+  - 解决方案二：基于运行时逆向
+  - 解决方案三：基于本地数据库破解
+  - 解决方案四：基于自动化技术
+- 自动化实现分析
+094. core/notes/ios-ssh.md(7023):
+- AppleScript Relative:
+  - 发送按键事件
+- XCode Relative:
+  - 针对 Simulator 和 Device 使用不同的 framework 分别编译
+  - 在XCode中重命名一个变量
+- '`NMSSH` relative':
+  - 在Xcode中配置`NMSSH`
+  - 在 `swift` 中使用 `objective-c`，从而调用`NMSSH`
+  - 基于`NMSSH`执行mac命令
+- Swift Relative
+- SwiftUI relative:
+  - change background color
+  - 'fixed: button only respond to text part'
+- Objevtive-C relative:
+  - obejctive-C function (especially multi args)
+  - '`NSString` relative'
+  - 在 `objective-c` 中合并字符串
+095. core/notes/uploaded/mark_massage_breo-dream6.md(5551): 南川评测 | Breo Dream6按摩仪
+096. core/notes/uploaded/DataAnalysis-Gaokao.md(9165):
+- 背景
+- 设计
+- 投档线数据清洗
+- 考分数据结构设计
+- 考分录入、年份修正、风险偏好
+- 基于学科进行筛选
+- 基于985、211筛选
+- 基于双一流筛选
+- 基于软科排名筛选
+- 复盘
+097. core/notes/uploaded/my-gopro.md(15925):
+- 背景
+- 概述
+- 基于GoPro的全天候自动4K延时摄影系统设计:
+  - 设备依赖
+  - 全自动化流程
+- PC端直接控制gopro拍摄、下载、清空的实现方案
+- 基于`crontab`自动化的定时程序:
+  - 自动化的必要性
+  - 自动化的充分性
+  - 自动化方案选择
+  - '`crontab`自动化的核心难点'
+- 说在最后的话
+098. core/notes/uploaded/mark_eidt-mp3-meta.md(4646): 南川技术分享 | 逼哥的音乐元数据修复
+099. core/notes/uploaded/mark_12h-struggle-with-webpack.md(9343):
+- Content
+- Former Record
+- 真正唯一的收获
+100. core/notes/uploaded/mark_im-working-now.md(2271): 是的，我入职了
+101. core/notes/uploaded/mark_my2021.md(15719):
+- 启
+- 顾:
+  - 整理之道
+  - 如何定义
+  - 西行之旅
+- 本
+102. core/notes/uploaded/ios-automation.md(17404):
+- 概要
+- 秒换装概念与分析:
+  - 秒换装的难度阶梯
+  - 备战出装换装的优点
+  - 备战出装换装的缺点
+  - 换指定装的实现分析
+- iOS秒换装实现之语音控制（Voice Control）实现自定义手势
+- iOS秒换装实现之越狱、第三方应用
+- 秒换装实现之基于外设硬件
+- iOS秒换装实现之基于iOS自动化：`facebook-wda`（WebDriverAgent）
+- UI自动化的缺点（行走中的触控集成问题）:
+  - 多点触控集成
+  - 封号的风险
+  - 需要USB接入
+103. core/notes/uploaded/gopro-timestamp.md(14122):
+- 方案1：物理手段解决
+- 方案2：借助**OpenCV**基于文件创建时间进行推算
+- 方案3：借助**GoPro Labs**添加时间戳浮层:
+  - 浮层大小
+  - 浮层内容
+  - 浮层位置
+  - 二维码生成
+  - 二维码使用
+  - 缺陷
+  - 其他用处
+- '*方案3个人笔记':
+  - 'LAB01: how to install the labs firmware'
+  - 'LAB02: QR Controls For Settings'
+  - 'LAB03: add an overlay to viedeo'
+- 最后一点感受
+104. core/notes/uploaded/mark_happy-new-year-of-2022.md(2469):
+- 写文章总需要一点理由，实在没有就只好编造一个如下
+- 是的，现在是百年未有之大变局，所以，然后呢？
+- 我们需要花多久才能明白，生活平淡如水，才是人生的终极命题
+105. core/notes/uploaded/mark_beike-hr.md(1545):
+- 工作职责
+- 工作地点：base 北京
+- 工作福利
+- 任职要求
+- 联系方式
+- 公司简介
+106. core/notes/uploaded/mark_our-lives.md(3623): 愿逝者安息生者坚强，你我迎风奔跑向阳而生
+107. core/notes/uploaded/life-is-not-easy.md(2040): 南川流思录 | 须知，活好是很不容易的
+108. core/notes/uploaded/auto-voice2srt.md(13410):
+- 语音转写市场概览
+- 网易见外的缺点:
+  - FCPX不支持网易见外导出的srt字幕文件
+  - 网易见外的转写结果需要手动进行长度切割
+  - 网易见外只支持后期文本替换，而不支持前期预设词库
+  - 网易见外不支持基于鼠标点击的文本位置智能跳转语音并播放
+- 讯飞转写:
+  - 讯飞服务价格
+  - 讯飞语音转写控制台
+  - 讯飞语音转写的使用
+  - 讯飞语音转写使用分词
+  - 讯飞语音转写程序
+- 基于Automator实现右键语音文件后台自动转写
+109. core/notes/uploaded/mark_self-cultivation_of_engineer.md(1847): 一位工程师的自我修养（序）
+110. core/notes/uploaded/mark_core-notes-of-linux.md(80095):
+- 首先，linux是什么
+- 其次，如何拥有一台linux
+- 接着，如何登录linux
+- 最后，如何掌控Linux，以下给出一部分经验笔记
+- '-------------------------------------'
+- 'BEST-PRACTICE: ubuntu initialization':
+  - step 0. install
+  - step 1. config apt source:
+    - 1. change apt source:
+      - 'fastest/script way: 直接修改`/etc/apt/sources.list`'
+      - 'robustest/recommend-for-newbie way: 在`softwares & update`里修改server'
+      - 'use others way: 使用别人写好的 git仓库进行配置'
+    - 2. update apt
+  - step 2. config git
+  - step 3. config terminal
+  - step 4. config language:
+    - 'resolution 1: config chinese input source via ibus'
+    - 'FIXME: resolution 2: config chinese input source via sougou'
+    - how to switch language input source
+    - how to change language to english
+  - 'IMPROVE: a script to init ubuntu (may not work)'
+- 'BEST-PRACTICE: linux connection (`ssh`)':
+  - ssh no secret/password
+  - ssh keep connection alive
+- 'BEST-PRACTICE: linux env management':
+  - how to change apt source:
+    - 'resolution 1: manual change from the App of `Softwares & Updates`'
+    - 'resolution 2: modify the configuration manually from the terminal'
+  - how to know what's the os platform
+  - how to configure python environment
+  - ':white_check_mark: cannot use `sudo apt-get install xxx` to install packages'
+- 'BEST-PRACTICE: linux file system management':
+  - mkdir if not exist
+  - ls and delete files
+  - fastest delete file
+  - how to show absolute path of file from relative
+  - how to copy file into clipboard:
+    - it's easy to copy a text file
+    - but it cannot be done for a binary file
+  - how to show file size
+  - how to compare between files (`diff` & `vimdiff`):
+    - 'resolution 1: `diff F1 F2`'
+    - 'resolution 2: `diff -y F1 F2` or `sdiff F1 F2`'
+    - 'resolution 3: `vimdiff F1 F2`'
+    - 'TODO: resolution 4: git diff'
+  - 'FIXME: how to copy/move directory files correctly to soft links under target
+    directory without affecting git?'
+- 'BEST-PRACTICE: linux disk management':
+  - '`ncdu`, disk space tui'
+  - '`baobab`, disk space gui':
+    - install problem
+    - effects
+- 'BEST-PRACTICE: linux shells management':
+  - list all the shells
+  - 'background: `sh` is different with `bash`'
+  - see what's the current Shell
+  - switch shell
+  - set zsh as the default terminal (need re-login)
+- 'BEST-PRACTICE: linux terminal management':
+  - ':white_check_mark: the terminal cannot up down after editing'
+  - 'TODO: bind `option + arrow` to jump word in zsh on ubuntu vmware on MacOS'
+- 'BEST-PRACTICE: linux commands management':
+  - how to auto input in command:
+    - auto input password for sudo commands
+    - auto yes for some command (`yes | `)
+    - auto yes for `apt` installing packages (`-y`)
+  - how to search commands by prefix (`history-search-backward/forward`)
+  - how to repeat command
+  - how to use variable as multi args
+  - how to set an alias:
+    - 'resolution 1: in terminal'
+    - 'resolution 2: write into `~/.bash_aliases`'
+    - ':sparkles: resolution 3: use `.bash_aliases` with `zsh`'
+    - unalias
+  - how to compare between outputs from two commands
+- 'BEST-PRACTICE: linux accounts management':
+  - how to create user
+  - how to log out:
+    - resolution 1 (11.10 and above)
+    - resolution 2
+  - set a shorter password for ubuntu
+- 'BEST-PRACTICE: linux net management':
+  - how to know my public ip address
+  - how to monitor network traffic
+  - 'FIXME: check proxy'
+- 'BEST-PRACTICE: linux date/time management':
+  - how to format date in terminal
+  - how to change timezone (and time):
+    - 'resolution 1 (conclusion): directly export'
+    - 'resolution 2 (detail): choose following directions'
+- 'BEST-PRACTICE: linux system management':
+  - ':white_check_mark: `A stop job is running for Session c2 of user ... (1min 30s)`'
+- '-----------------------------------'
+- 'BEST-PRACTICE: linux common commands':
+  - command:tar
+  - command:perl:
+    - how to use perl to replace multi-lines
+  - command:find:
+    - how to ignore case
+    - how to specify search type
+    - how to exclude dir
+    - 'TODO: how to find file with time used'
+    - 'tip: find efficiency comparison'
+  - command:grep:
+    - how to exclude dir (`--exclude-dir=dir`)
+    - how to limit depth (`-maxdepth`)
+    - 'tip: grep by lines context is MUCH FASTER than grep by words context, and even
+      better for output'
+    - 'tip: grep by negative captured group needs to use `ggrep`'
+  - command:tree:
+    - how to display chinese (`-N`)
+    - how to exclude dir(`-I`)
+  - command:head:
+    - head basic usage
+    - how to exclude the last k rows
+    - 'discuss: use `head` or `sed`'
+  - command:top
+  - command:cat:
+    - how to write raw string into file using `cat`
+    - 'usage: how to know what''s the bash string'
+  - command:Unzip:
+    - how to unzip to specific directory
+  - command:kill
+  - command:scp
+  - command:lsof
+  - command:ufw
+  - command:time
+  - command:tr
+  - command:cd:
+    - 'usage: a superb scene using `cd .`'
+  - command:sed:
+    - how to print only matched lines
+    - ':sparkles: how to increment version number':
+      - 'resolution 1: use `echo` based on `//e`'
+      - 'resolution 2: answer'
+    - how to match digits (`[0-9]` or `:digit:`)
+    - how to insert text before first line of file:
+      - 'resolution 1: use `cat` and `;`'
+      - 'resolution 2: use `cat` and `|`'
+      - 'resolution 3: use sed s-command'
+      - 'resolution 4: use sed e-command'
+111. core/notes/uploaded/mark_2022-live.md(7554):
+- 行动的力量：不要让遗憾永远都只是遗憾
+- 平凡的答案：我们为什么要活着
+- 控熵的艺术：我们如何更好地活着
+- 当下的价值：既然我们可能永远也准备不好
+- 感谢的意义：大声告诉你们其实我很在乎
+112. core/notes/uploaded/mbti/mark_mbti.md(24633):
+- 什么是MBTI:
+  - 能量（E/I）
+  - 感知（S/N）
+  - 决策（T/F）
+  - 行动（J/P）
+- 我的MBTI分析:
+  - 1. You regularly make new friends
+  - 2. You spend a lot of your free time exploring various random topics that pique
+    your interest
+  - 3. Seeing other people cry can easily make you feel like you want to cry too
+  - 4. You often make a backup plan for a backup plan
+  - 5. You usually stay calm, even under a lot of pressure
+  - 6. At social events, you rarely try to introduce yourself to new people and mostly
+    talk to the ones you already know
+  - 7. You prefer to completely finish one project before starting another
+  - 8. You are very sentimental
+  - 9. You like to use organizing tools like schedules and lists
+  - 10. Even a small mistake can cause you to doubt your overall abilities and knowledge
+  - 11. You feel comfortable just walking up to someone you find interesting and striking
+    up a conversation
+  - 12. You are not too interested in discussing various interpretations and analyses
+    of creative works
+  - 13. You are more inclined to follow your head than your heart
+  - 14. You usually prefer just doing what you feel like at any given moment instead
+    of planning a particular daily routine
+  - 15. You rarely worry about whether you make a good impression on people you meet
+  - 16. You enjoy participating in group activities
+  - 17. You like books and movies that make you come up with your own interpretation
+    of the ending
+  - 18. Your happiness comes more from helping others accomplish things than your
+    own accomplishments
+  - 19. You are interested in so many things that you find it difficult to choose
+    what to try next
+  - 20. You are prone to worrying that things will take a turn for the worse
+  - 21. You avoid leadership roles in group settings
+  - 22. You are definitely not an artistic type of person
+  - 23. You think the world would be a better place if people relied more on rationality
+    and less on their feelings
+  - 24. You prefer to do your chores before allowing yourself to relax
+  - 25. You enjoy watching people argue
+  - 26. You tend to avoid drawing attention to yourself
+  - 27. Your mood can change very quickly
+  - 28. You lose patience with people who are not as efficient as you
+  - 29. You often end up doing things at the last possible moment
+  - 30. You have always been fascinated by the question of what, if anything, happens
+    after death
+  - 31. You usually prefer to be around others rather than on your own
+  - 32. You become bored or lose interest when the discussion gets highly theoretical
+  - 33. You find it easy to empathize with a person whose experiences are very different
+    from yours
+  - 34. You usually postpone finalizing decisions for as long as possible
+  - 35. You rarely second-guess the choices that you have made
+  - 36. After a long and exhausting week, a lively social event is just what you need
+  - 37. You enjoy going to art museums
+  - 38. You often have a hard time understanding other people’s feelings
+  - 39. You like to have a to-do list for each day
+  - 40. You rarely feel insecure
+  - 41. You avoid making phone calls
+  - 42. You often spend a lot of time trying to understand views that are very different
+    from your own
+  - 43. In your social circle, you are often the one who contacts your friends and
+    initiates activities
+  - 44. If your plans are interrupted, your top priority is to get back on track as
+    soon as possible
+  - 45. You are still bothered by mistakes that you made a long time ago
+  - 46. You rarely contemplate the reasons for human existence or the meaning of life
+  - 47. Your emotions control you more than you control them
+  - 48. You take great care not to make people look bad, even when it is completely
+    their fault
+  - 49. Your personal work style is closer to spontaneous bursts of energy than organized
+    and consistent efforts
+  - 50. When someone thinks highly of you, you wonder how long it will take them to
+    feel disappointed in you
+  - 51. You would love a job that requires you to work alone most of the time
+  - 52. You believe that pondering abstract philosophical questions is a waste of
+    time
+  - 53. You feel more drawn to places with busy, bustling atmospheres than quiet,
+    intimate places
+  - 54. You know at first glance how someone is feeling
+  - 55. You often feel overwhelmed
+  - 56. You complete things methodically without skipping over any steps
+  - 57. You are very intrigued by things labeled as controversial
+  - 58. You would pass along a good opportunity if you thought someone else needed
+    it more
+  - 59. You struggle with deadlines
+  - 60. You feel confident that things will work out for you
+113. core/notes/uploaded/douban-hirehouses/mark_hire-house-research.md(33476):
+- 个人背景概要
+- 租房方案设计:
+  - 个人需求分析
+  - 公寓 vs 民宅
+  - 线上 vs 线下:
+    - 纯线下方案
+    - 纯线上方案
+    - 线上转线下方案
+  - 线上平台选择
+  - 总体设计
+- 租房前期准备:
+  - 了解行政区域规划
+  - 了解地铁线路规划
+  - 了解周遭小区分布
+  - 小区的选择依据
+- 豆瓣小组租房条目的数据获取:
+  - 豆瓣小组租房信息获取的目标设计
+  - 豆瓣小组API方案之分析与准备
+  - 豆瓣小组API方案之设计与实现
+  - 豆瓣小组爬虫方案之设计与实现
+- 豆瓣小组租房条目的数据分析:
+  - 筛选条件分析
+  - 高德API之申请Key配置
+  - 高德API调用之地理编码与逆地理编码
+  - 高德API调用之公线路规划与步行规划
+  - 高德API封装设计与实现
+  - 基于pandas进行筛选
+- 人工筛选环节:
+  - 表格迭代标注法
+  - 线上联系也有一些困难
+- 线下跑房环节:
+  - 时间与路线规划
+  - '跑房（1/10）: 望京附近，3000'
+  - 跑房（2/10）：3-3_1_陆翔佳园_3200
+  - 跑房（3/10）：3-3_2_珠江绿洲_3800
+  - 跑房（4/10）：3-3_3_周井大院_2900
+  - 跑房（5/10）：3-3_4_珠江帝景_3500
+  - 跑房（6/10）：3-4_1_劲松七区_3000
+  - 跑房（7/10）：3-4_2_惠生园_3300
+  - 跑房（8/10）：3-4_3_沿海赛洛城_2200
+  - 跑房（9/10）：3-4_4_百子湾家园_2500
+  - 跑房（10/10）：3-4_5_垂杨柳百里_3500
+- 投票环节
+- info:
+  - 'version: 0.1.0'
+  - 'version: 0.0.4'
+  - 'version: 0.0.3'
+  - 'version: 0.0.2'
+  - 'version: 0.0.1'
+114. core/notes/uploaded/mark_2022-live/mark_2022-the-last-words-to-say.md(431):
+- 准备好了吗
+- 当下的价值
+- 徒劳的量化
+- 程序的边界
+- 控熵的艺术
+- 爱人的核心
+- 共同富裕的逻辑:
+  - 积极纳税是共同富裕的第一步
+- 华夏文明的进程
+- 平凡的意义
+- 感谢
+115. core/notes/uploaded/mark_2022-live/mark_2022-live.md(7554):
+- 行动的力量：不要让遗憾永远都只是遗憾
+- 平凡的答案：我们为什么要活着
+- 控熵的艺术：我们如何更好地活着
+- 当下的价值：既然我们可能永远也准备不好
+- 感谢的意义：大声告诉你们其实我很在乎
+116. core/notes/discarded/mark_wxmp-dev-note.md(200):
+- 微信小程序本质是什么
+117. core/notes/discarded/gopro-wireless-communication-research.md(2299):
+- 背景
+- 如何实现mac电脑上直连gopro：基于`Open-GoPro`:
+  - 'fixed: pass: `macOS 12 requires non-empty service_uuids`'
+  - 'fixed: cannot receive response when executing `tutorial_2_send_ble_commands/ble_command_set_shutter.py.py`'
+  - 'fixed: wifi无法连接上'
+  - 'TODO: 提个gopro的pr'
+- 'PASS: 另一种解决方案：`GoPro WebCam`'
+118. core/notes/discarded/mark_0519.md(1057): 南川流思录 | 从反持续封控聚众视频被删说起
+119. core/notes/discarded/fengxian/mark_fengxian.md(561):
+- 丰县事件历史溯源
+- 丰县事件回顾：民众与政府的博弈:
+  - 事件的开始
+  - 事件的发展
+  - 事件的高潮
+  - 事件的结局
+- 丰县事件后续：人民为何不相信政府
+- 丰县事件启示展望
+- 丰县事件渠道汇总
+120. core/notes/discarded/fengxian/mark_fengxian_design.md(360):
+- 为什么要写这篇文章
+- 准备如何写这篇文章
+121. core/notes/discarded/soulmate/mark_soulmate_v0.5.0.md(51): 交个朋友
+122. core/notes/discarded/soulmate/mark_soulmate_v0.4.0.md(3140):
+- 什么是友
+- 什么是交友
+- 为什么交友
+- 我为什么要交友
+- 要交什么友
+- 该如何交友
+123. core/notes/discarded/soulmate/mark_soulmate_v0.3.0.md(184): 这一次，我想谈谈感情
+124. core/notes/discarded/soulmate/mark_soulmate_v0.2.0.md(599):
+- 前言
+- 契机
+- 目的
+- 个人概要:
+  - 教育经历
+  - 实习经历
+  - 项目经历
+  - 工作经历
+  - 兴趣爱好
+  - 未来规划
+- 交友轮廓:
+  - 业务交友
+  - 同城交友
+  - 灵魂交友
+- ref
+125. core/notes/discarded/soulmate/mark_soulmate_v0.1.0.md(1112):
+- 说在前面的话
+- 直播间记录
+126. core/notes/finished-but-not-uploaded/mark_assist-zkj-flask-route_record.md(2295):
+- 1. 网页搜索
+- 2. 文本搜索
+- 3. 结论交流
+127. core/work/work@arpara/WorkReview-SLAM.md(3850):
+- 项目目标
+- 理论基础:
+  - 单目摄像头能干什么
+  - 双目摄像头能干什么
+  - 单目+imu
+  - 如何确定两张图内的像素点之间的匹配对应关系
+  - 理解与使用ORB-SLAM
+  - 物体检测技术（基于yolo）
+  - 如何测算imu位姿
+- ORB-SLAM
+- 项目条件:
+  - 四目摄像头
+- 路径分析
+- 会议记录:
+  - 2022-07-08, Fri
+128. core/work/work@arpara/slam-overview-2022.md(63980):
+- 摘要
+- 一、简介
+- 二、基于视觉的 SLAM 概念:
+  - '2.1. 纯视觉 SLAM ':
+    - 2.1.1 特征法
+    - 2.1.2 直接法
+  - 2.2. 视觉惯性SLAM
+  - '2.3. RGB‑D SLAM '
+- '三、视觉SLAM算法 ':
+  - 3.1. 纯视觉 SLAM:
+    - 3.1.1 MonoSLAM (2007)
+    - '3.1.2 并行跟踪和建图(PTAM, Parallel Tracking and Mapping) (2007) '
+    - 3.1.3 稠密跟踪和建图（DTAM, Dense Tracking and Mapping） (2011)
+    - 3.1.4 半直接视觉里程计（SVO, Semi-Direct Visual Odometry, 2014）
+    - 3.1.5 大规模直接单目SLAM（LSD-SLAM, Large-Scale Direct Monocular SLAM, 2014）
+    - 3.1.6 ORB-SLAM 2.0 (2017)
+    - 3.1.7 CNN-SLAM (2017)
+    - 3.1.8 直接稀疏测距法 (DSO, Direct Sparse Odometry, 2018)
+    - 3.1.9 小结
+  - 3.2 视觉惯性SLAM (VI-SLAM, Visual-Inertial SLAM):
+    - 3.2.1 多状态约束卡尔曼滤波器（MSCKF, Multi-State Constraint Kalman Filter, 2007）
+    - 3.2.2. 基于开放关键帧的视觉-惯性SLAM (OKVIS, Open Keyframe-Based Visual-Inertial SLAM (2014)
+    - 3.2.3. Robust Visual Inertial Odometry (2015)
+    - 3.2.4. 视觉-惯性ORB-SLAM (VIORB, Visual Inertial ORB-SLAM, 2017)
+    - 3.2.5. 单目视觉惯性系统 (VINS-Mono, Monocular Visual-Inertial System, 2018)
+    - 3.2.6. 视觉惯性直接稀疏测距 (VI-DSO, Visual-Inertial Direct Sparse Odometry, 2018)
+    - 3.2.7. ORB-SLAM3 (2020)
+    - 3.2.8 小结
+  - 3.3. RGB-D SLAM
+  - 3.3.1. KinectFusion (2011):
+    - 3.3.2. SLAM++ (2013)
+    - 3.3.3. Dense Visual Odometry (2013)
+    - 3.3.4. RGBDSLAMv2 (2014)
+    - 3.3.5. General Comments
+- 四、主要问题与未来方向:
+  - 4.1. 基于深度学习的算法
+  - 4.2. 基于语义的算法
+  - 4.3. 动态SLAM算法
+- 五、数据集和标定
+- 六、结论
+- References
+129. core/work/work@arpara/diary-public.md(11201):
+- Agenda
+- Schedule
+- Diary:
+  - '2022-02-25: :sparkles::sparkles: timewarp本地测试通过'
+  - '2022-02-22: :sparkles::sparkles::sparkles: timewarp全部集成完毕（~~待测试，待组合~~，测试结果不行，已于25日修复）'
+  - '2022-02-16: :sparkles::sparkles::sparkles: 终于干净、完美地实现了反畸变'
+  - '2022-02-13'
+  - '2022-02-12 :sparkles::sparkles: 终于确定了vr播放器没有`opengl`的逻辑'
+  - '2022-02-11'
+  - '2022-02-10'
+  - '2022-02-09':
+    - report to lixiang
+    - ':sparkles::sparkles: talk with xiaoyan, and found out how to modify mesh'
+  - '2022-02-08'
+  - '2022-02-07: 年后首会'
+  - '2022-01-26'
+  - '2022-01-25'
+  - '2022-01-21'
+  - '2022-01-20'
+  - '2022-01-19'
+  - 2022-01-15~19
+  - 2022-01-17~18
+  - '2022-01-14'
+- Finished Tasks / Bugfixes:
+  - ':white_check_mark: :sparkles::sparkles::sparkles: 使新加入的代码能在车机上运行 '
+  - ':white_check_mark: [2022-01-19] 梳理目前 gerrit history，送发一份给刘志刚'
+  - ':white_check_mark: 在ubuntu(vmware/virtualbox)中下载并编译aosp'
+  - ':white_check_mark: ubuntu切换中英文（ubuntu内置智能拼音，暂不考虑搜狗）'
+  - ':white_check_mark: ubuntu安装微信(electronic-wechat)'
+  - ':white_check_mark: ubuntu安装vscode，同步插件（pass）'
+  - ':white_check_mark: ubuntu安装chrome，同步插件等（pass）'
+  - ':white_check_mark: 在ubuntu中导入并启动Android Studio（pass）'
+130. core/work/work@arpara/WorkReview-Distortion.md(603):
+- 项目阶段实现划分
+- 畸变产生的光学原理
+- 反畸变的目标与算法原理
+- 反畸变逻辑在Android系统上的实现
+- 总结与展望
+- 关于安卓系统从7到11在图形系统上的变迁分析
+- 关于应对大规模代码移植工作的最佳实践
+131. core/work/work@arpara/confidential/arpara-resources.md(2181):
+- vpn(pritunl):
+  - step 1. download pritunl client
+  - step 2. import profile file (from relative employee)
+  - step 3. input pin code (from relative employee)
+  - 'expected result: successfully connected'
+- ssh (vpn required)
+- gerrit (vpn required)
+- Email
+132. core/work/work@arpara/confidential/mark_debriefing-report.md(1117):
+- 试用期工作回顾:
+  - 理想车机反畸变移植
+  - 理想车机timewarp移植
+  - slam研究与cv计算
+- 取得工作成绩的原因和经验:
+  - 宽广的个人技能栈
+  - 完整的影创项目经验
+  - 高效的笔记流习惯
+- 不足之处及原因分析:
+  - 客观原因1：理想资源的不够配合
+  - 客观原因2：团队合作的模式与经验不够成熟
+  - 主观原因1：个人技能方向与实际项目目标有出入
+- 当前形势分析及建议:
+  - 车机后排vr娱乐系统与前排vr辅助系统
+  - vr相关军工、医疗、党建等行业应用
+  - ar相关研发投入
+- 下一步工作规划:
+  - 进一步研究slam理论与应用
+  - 更加关注vr、ar与元宇宙生态
+  - 为后续团队搭建做好思想上与范式上的准备
+133. core/work/work@arpara/confidential/dream-start.md(393): 理想项目 - 需求笔记
+134. core/scripts/boilerplate_electron_archive/readme.md(457):
+- 注意事项:
+  - 遇到需要确认安装`webpack-dev-server`
+  - 遇到安装过程中出错的问题
+  - 关于`document`、`window`等非关键依赖，WebStorm `cannot find name`的问题
+135. core/scripts/fast_cnki_translate/readme.md(606):
+- 'TODO: API call fail'
+- History
+- 'meta '
+136. core/scripts/my-pdf-parser/readme.md(67):
+- 解析引用与超链接
+137. core/scripts/my-pdf-parser/data/refs.md(32708): refs
+138. core/scripts/my-pdf-parser/src/extract_refs/readme.md(177): 解析学术论文的引用，并提取其超链接进行自由组合
+139. core/scripts/boilerplate_electron_ts_react_antd_tailwindcss/boilerplate_electron_ts_react_antd_tailwindcss.md(2978):
+- Boilerplate of `electron-typescript-react-antd-tailwindcss`:
+  - 'Step 1. Using Boilerplate of `electron-typescript-react` ':
+    - test
+  - Step 2. Add Antd:
+    - install `style-loader` and `css-loader` needed for `antd`
+    - add `mjs, css(style-loader)` support since antd used mjs
+    - 'add css import '
+  - Step 3. Add TailwindCSS:
+    - add `postcss-loader` otherwise no effect (based on antd initialization)
+  - All in One Script
+140. core/coding/coding-design.md(9079):
+- 快捷键设计:
+  - 与代码块相关的快捷键设计:
+    - 对比分析与总结
+    - 跳转与选中代码块
+    - 折叠与展开代码块
+    - 快捷键修改前后对比
+  - 'bugfix: why `cmd + alt + \` converted to be `cmd + c`'
+141. core/coding/coding-best-practice.md(4464):
+- check usb type 2/3
+- test read/write (IO) speed of hard drivers
+- the cost to compat Chinese
+- API design
+142. core/coding/Unity/unity-howto.md(425):
+- what's `half4`
+143. core/coding/Go/go-howto.md(2256):
+- download and install:
+  - 'BEST-PRACTICE: how to install `go` in ubuntu'
+  - how to update `go` on ubuntu
+- config go env:
+  - config proxy for go
+  - 'resolution 1: `go env -w`'
+  - 'resolution 2: config `~/.profile`'
+144. core/coding/Python/python开发笔记.md(272):
+- 技巧
+- install specific python version:
+  - 在注解中标注正在使用的类
+145. core/coding/Python/pandas-howto.md(363):
+- how to use `query`:
+  - use `query` to perform a `LIKE`
+146. core/coding/Python/python-howto.md(6312):
+- module:log
+- module:hashlib:
+  - md5
+- module:re:
+  - multi-line match
+- module:typing:
+  - TypedDict NotRequired VS Optional
+  - TypedDict self-reference
+- module:virtualenv:
+  - how to install and use virtualenv in python
+- conda:
+  - change default startup behavior in zsh
+- how to print colorful text in terminal, mac and windows:
+  - print in general operating system
+  - print in windows
+- how to install specific python in mac
+- how to print colored text to console/terminal in python
+147. core/coding/Python/python-bugfix.md(2303):
+- 'FIXME: `Python is deprecating distutils.cfg`'
+- 'FIXED: `virtualenv` not work'
+- 'FIXED: `pip` not work'
+- 'BEST-PRACTICE: move the virtual python environment then not working'
+- pip freeze wield path
+- python virtualenv conflicts with anaconda
+148. core/coding/Python/jupyter-howto.md(1061):
+- matplotlib 画图中文显示问题【mac】
+- comparison before and after clearing jupyter file output
+149. core/coding/Python/Python-Finance/README.md(1276):
+- Project Structure
+- todo
+- About Me:
+  - Public
+  - Private
+150. core/coding/Python/Python-Finance/jianwei/README.md(1476):
+- 该项目的开发用途？
+- 该项目的配置要求？
+- 该项目的启动设置？
+- TO-DO
+151. core/coding/Python/Python-Finance/frm/README.md(338):
+- 如何运行
+- todo
+152. core/coding/Python/Python-Finance/NC-PFA/README.md(186):
+- Preface
+153. core/coding/Python/Python-Finance/NC-PFA/ch01_introduction-to-python/CH01_The-Very-Intro-to-Python.md(18675):
+- CH01 - The Very Intro to Python:
+  - Overview
+  - What's python and what's python for?:
+    - 为什么要学Python？
+    - Python到底是什么？
+    - 部分编程语言基本信息
+    - 各大编程语言排名信息
+  - Know more about your operating system:
+    - 什么是系统调用：cmd | bash?
+    - Windows中的cmd启动
+    - Windows中的环境变量
+    - Mac OS中的环境变量
+  - Reference and Recommendation:
+    - 图灵Python图书一览表
+    - 参考网址
+    - 书籍导航
+    - 教程导航
+    - 技术手册
+154. core/coding/Python/Python-Finance/NC-PFA/Appendix/A02-编程作业自动测试插件说明.md(1710):
+- EduTools教学方案说明:
+  - 安装过程
+  - 使用过程
+155. core/coding/Python/Python-Finance/NC-PFA/Appendix/A01-南川P.F.A教程之核心开发软件安装手册.md(3902):
+- Install:
+  - ==说在前面，必看！==
+  - ==安装火狐浏览器==：一款优秀的、程序员专用的、快速的、免费的、不用翻墙的、特别适合学习爬虫的浏览器
+  - ==安装Sublime Text 3==： 一款优秀的、程序员专用的、高颜值的、快速的、支持所有语言的、不用保存的、一用就会爱上的编辑器
+  - ==安装Anaconda 3==：一款革命性的、交互体验的、数据分析必备的、受众群体巨大的、十分强大的包管理平台、集成开发环境
+  - ==安装PyCharm==：一款专业的、Python网站开发首选的、变态般强大的、沉浸式的、对学生友好的集成开发环境:
+    - ==安装Github Desktop==
+156. core/coding/Python/Python-Finance/NC-PFA/references/md-emoji-refs.md(55646):
+- How to use
+- Most Useful
+- Scenario
+- People
+- Nature
+- Objects
+- Places
+- Symbols
+157. core/coding/Python/Python-Finance/NC-PFA/ch02_introduction-to-IDE/readme_1579446860.md(20501):
+- H02 - The Guidance to Install and Configure IDEs:
+  - Overview
+  - Install:
+    - ==说在前面，必看！==
+    - ==安装火狐浏览器==：一款优秀的、程序员专用的、快速的、免费的、不用翻墙的、特别适合学习爬虫的浏览器
+    - ==安装Sublime Text 3==： 一款优秀的、程序员专用的、高颜值的、快速的、支持所有语言的、不用保存的、一用就会爱上的编辑器
+    - ==安装Anaconda 3==：一款革命性的、交互体验的、数据分析必备的、受众群体巨大的、十分强大的包管理平台、集成开发环境
+    - ==安装PyCharm==：一款专业的、Python网站开发首选的、变态般强大的、沉浸式的、对学生友好的集成开发环境
+    - ==安装Github Desktop==：
+  - Configure:
+    - 火狐插件安装
+    - Sublime Text 3使用介绍与插件安装
+    - Anaconda配置与插件安装:
+      - 修改Jupyter Notebook启动位置与默认浏览器
+      - 修改智能提示：取消使用jedi
+      - 强烈建议研究一下Jupyter Notebook的快捷键，在help菜单里
+      - pip更换镜像源
+      - 推荐阅读的一些关于Jupyter Notbeook的资料
+    - PyCharm的配置与插件安装:
+      - 关于UI
+      - 关于代理
+      - 关于预设脚本模板
+      - 关于编码
+      - 关于插件
+      - 关于程序编译器：最重要！
+    - Github Desktop
+  - Practical Problem： Tab or Space
+  - Reference:
+    - 参考网址
+    - Documentation
+158. core/coding/Python/Python-Finance/NC-PFA/ch02_introduction-to-IDE/readme.md(19195):
+- Overview
+- Install:
+  - ==说在前面，必看！==
+  - ==安装火狐浏览器==：一款优秀的、程序员专用的、快速的、免费的、不用翻墙的、特别适合学习爬虫的浏览器
+  - ==安装Sublime Text 3==： 一款优秀的、程序员专用的、高颜值的、快速的、支持所有语言的、不用保存的、一用就会爱上的编辑器
+  - ==安装Anaconda 3==：一款革命性的、交互体验的、数据分析必备的、受众群体巨大的、十分强大的包管理平台、集成开发环境
+  - ==安装PyCharm==：一款专业的、Python网站开发首选的、变态般强大的、沉浸式的、对学生友好的集成开发环境
+  - ==安装Github Desktop==
+- Configure:
+  - 火狐插件安装
+  - Sublime Text 3使用介绍与插件安装
+  - Anaconda配置与插件安装:
+    - 修改Jupyter Notebook启动位置与默认浏览器
+    - 修改智能提示：取消使用jedi
+    - 强烈建议研究一下Jupyter Notebook的快捷键，在help菜单里
+    - pip更换镜像源
+    - 推荐阅读的一些关于Jupyter Notbeook的资料
+  - PyCharm的配置与插件安装:
+    - 关于UI
+    - 关于代理
+    - 关于预设脚本模板
+    - 关于编码
+    - 关于插件
+    - 关于程序编译器：最重要
+  - Github Desktop
+- Practical Problem： Tab or Space
+- Reference:
+  - 参考网址
+  - Documentation
+159. core/coding/Python/fastapi/fastapi-howto.md(1446):
+- when `root_path` meets with `doc_url`
+- How to save uploaded files
+- How to write unit test?
+160. core/coding/Python/fastapi/uvicorn-howto.md(99):
+- uvicorn deployment
+161. core/coding/CSS/css-howto.md(5314):
+- shrink flex item to the remaining space
+- set height to equal to its sibling:
+  - use `table`
+  - use `absolute position`
+  - 'use `flex-shrink` with `min-w/h: 0`'
+- text-intent settings:
+  - only first line indent (like chinese  paragraph)
+  - start indent from second line (hanging indent)
+  - conclusion
+162. core/coding/CSS/scss/scss-howto.md(538):
+- mixin example
+163. core/coding/CSS/flex/flex.md(1738):
+- Why are there no `justify-items` and `justify-self` properties?
+164. core/coding/JS/js-bugfix.md(3486):
+- prettier:
+  - prettier plugin not work
+  - recommend prettier plugins
+- eslint:
+  - eslint google or standard
+- tailwindcss autocompletion:
+  - enable tailwindcss autocompletion
+  - fasten tailwindcss autocompletion
+165. core/coding/JS/js-discuss.md(10470):
+- '`then-catch` vs `try-catch`'
+- Prettier comment alignment
+- Excel Select
+- 'TODO: Database Select: `node-sqlite3`, `better-sqlite3`, `typeorm`, `prisma`'
+- '[ERR_REQUEST_ESM]'
+- cjs和mjs不要混用
+- babel的失败尝试
+- 'database-orm: prisma vs typeorm'
+- '`interface` vs `abstract class`'
+- eslint catch/then/return
+- Avoid hardcoding of Prisma Error codes
+- '`Enum` or `Union / Array`'
+- '`for...of` or `.forEach`'
+166. core/coding/JS/develop-remark-plugin.md(8950):
+- develop own markdown parser or renderer:
+  - where does code fence define
+  - re-read `remark-parse`
+  - from 'remark-parse' to 'madst-util-from-markdown'
+  - from 'mdast-util-directive' to 'remark-util-directive'
+  - codes
+- For markdown plugin develop, what I installed...
+- add plugin of `remark-admonitions`
+167. core/coding/JS/redux.md(1004):
+- react-redux typescript best practice:
+  - react-redux ts doc
+  - redux toolkit doc
+  - examples of typing actions and reducers in ts:
+    - based on `PayloadAction`
+168. core/coding/JS/npm_yarn-bugfix.md(1809):
+- 'FIXME: npm i version +1 problem':
+  - problem and background
+  - 'My current solution: specify the detailed version'
+169. core/coding/JS/npm_yarn-howto.md(13181):
+- 'BEST-PRACTICE: nvm':
+  - install
+  - use
+- 'BEST-PRACTICE: `mirror-config-china`':
+  - 'a chinese mirror practice: how does it save an electron project'
+  - config npm mirrors:
+    - approach 1 (recommend)
+    - approach 2
+  - config yarn mirrors
+- 'BEST-PRACTICE: how to install `node-sass`':
+  - Step 1. ensure `sass-binary-site` enabled in `.npmrc`:
+    - 'Option 1: use `mirror-config-china`'
+    - 'Option 2: set directly'
+  - Step 2. change node/npm version
+- npm commands:
+  - update package
+  - check exist, locally and globally, with and without dependencies
+- 'TUTORIAL: modify `diff2html-cli` html logo':
+  - Step 1. locate the package position
+  - Step 2. modify the template html file, since the inner code generates dependent
+    on it
+  - Ref 1. check tree structure
+170. core/coding/JS/js-howto.md(15083):
+- 'BEST-PRACTICE: js parse float to int'
+- 'TODO: prettier plugin of `decorators`'
+- jsdoc
+- modify `process.env`
+- node exec sub commands
+- webpack
+- receive arg from command line [Standard Method (no library)]
+- change string to number [DON'T]
+- best practice to use Exceptions:
+  - catch error
+  - extend error
+- '[HANDBOOK] fs read file, async and part'
+- csv read and parse:
+  - modify header:
+    - then, what about repeatability?
+  - '`node-csv` or `fast-csv`'
+  - fast-csv problem of quotes
+  - csv not closed
+- run js in different envs:
+  - browser env
+  - node env
+  - node + esm
+  - node + esm + ts
+- use `__filename` and `__dirname`  in ESM
+171. core/coding/JS/.ts-bugfix.md(1667):
+- ':ballet_box_with_check: TS4023 error of using (Database) name from external module'
+172. core/coding/JS/database.md(7005):
+- typeorm join table:
+  - ':white_check_mark: join using id(string) other than Entity'
+  - ':x: join return flatted list other than nested'
+- typeorm not null constraint failed
+- 'PASS:  better-sqlite3 `NODE_MODULE_VERSION` mismatch | rebuild failed'
+- 'PASS: better-sqlite3 ReferenceError: better_sqlite3_1 is not defined, both `jest` and `mocha`':
+  - mocha + ts + esm
+173. core/coding/JS/CodeQuality_eslint_prettier_jest/eslint-howto.md(3233):
+- '`div` element with `onClick`'
+- Alias error
+174. core/coding/JS/CodeQuality_eslint_prettier_jest/eslint-prettier-typescript.md(1252):
+- eslint - prettier difference
+- eslint - prettier max-len
+175. core/coding/JS/CodeQuality_eslint_prettier_jest/jest-howto.md(1747):
+- top js test frameworks
+- '`jest` ESM support'
+- '`jest`  + `typescript` + `ESM`'
+176. core/coding/JS/Vue/vue-howto.md(870):
+- 'FIXME: vue config proxy'
+177. core/coding/JS/Electron/electron-howto.md(14640):
+- electron best practice:
+  - 'design of dependency workflow '
+  - app path, storing db, log, etc
+  - log into file
+- electron test
+- sqlite best practice:
+  - don't use relative path as sqlite position
+- log electron:
+  - 'TODO: idealog color configuration'
+- build for Windows on Mac
+- build native dependencies and for multi platforms
+- custom app logo:
+  - a good start
+  - customize icon for unpacked app
+  - square .icon
+- electron-builder `files` map
+- ⭐️⭐️⭐️ debug binary electron
+- '`ipcRenderer` communication'
+- 'hwo to use `preload.ts` ':
+  - the `preload` script won't run if we just start the main process
+  - it's ok when we just use `preload.js`
+  - what about using a `preload.ts`:
+    - remedy 1, the `tsc` solution
+  - how to remedy the  `electron-react-boilerplate` project
+178. core/coding/JS/Electron/electron-prisma-sqlite-2.md(26879):
+- 'PASS: test putting `prisma | @prisma/client` under release package.json'
+- ':white_check_mark: cannot start when integrated with sqlite in packed version':
+  - step 1. add dependency in `APP/package.json`
+  - step 2. rebuild project
+  - step 3. build and pack again
+  - 'step 4. PLUS: if we don''t pack `sqlite3` into $APP, then we won''t pass the
+    webpack build process only if we add this'
+- ':white_check_mark: can normally open if no database connection in source code'
+- using pure `sqlite3` and the programme goes well under prod, then failed with a
+  popup suggesting me to integrate sqlite3
+- integrate prisma like sqlite
+- 'I am quite sure now the problem is about package import with `prisma` '
+- Yeah, thanks Mac's console, I saw the dawn :sparkles::sparkles::sparkles
+- Finally found the problem, it's about the block of searching path:
+  - I finally understand why programme start by `double click` would be so slow
+  - what's the `findSync`
+- 'Current Solution: avoid `findSync'''
+- make binary can use `prisma db push`:
+  - 若在`release/package.json`里指定了`@prisma/client`，则打包里没有`.prisma/client/index.js`
+  - 若未指定（只指定一个`sqlite3`），则有
+  - 若直接指定两个（2022-01-06 02:15:12），则像一个一样还是报错了，但是我联想到了`rebuild`
+  - '`rebuild` 确实是一大解药，`rebuild`完之后还要把`prisma`移到对应的`node_modules`目录旁，运行一遍`prisma generate`，目前我一套流程走下来，将`prisma`一步步同步，效果还行；只不过最后一步还是有问题，感觉双击程序启动找不到路径的问题还是存在。既然这样，步步同步的方式似乎也没啥性价比了'
+  - 再测试一下步步同步的方式是否可以装windows，如果也不行，我就直接放弃prisma了
+  - 在binary里需要用`npm i prisma`安装脚本
+  - 指定prisma文件
+  - '`prisma/client`'
+  - '最后一个问题，`query-engine` （2022-01-06 02:07:34 update: obviously not the last）'
+- query-engine in Windows, another not positive problem:
+  - 极小自动化程序搭建
+- ':ballot_box_with_check: `prisma` in binary'
+- 最大的问题，不同启动方式，程序运行结果不一样，prisma在可执行程序中找不到
+179. core/coding/JS/Electron/marknote-electron-prisma-sqlite.md(13226):
+- 目标
+- 在生产环境下可以读取`.env`变量:
+  - 目前已经实现在生产环境下，拥有环境变量，prisma可以读取
+  - 实现方式
+  - 实现细节
+- 在打包环境下，没有环境变量
+- 不考虑环境变量，直接硬编码数据库文件地址
+- electron-builder load `.env`
+- 打包环境下，竟然读到了环境变量
+- 重开项目进行分段测试！
+- 摊牌了
+180. core/coding/JS/Electron/electron-bugfix.md(10107):
+- ? ':white_check_mark: when mock/test, ''Electron failed to install correctly, please
+    delete node_modules/electron and try installing again'''
+  : - conclusion
+- electron-rebuild error
+- ':white_check_mark: can''t resolve `rebuild` in `postinstall`'
+- ':white_check_mark: webpack dev server'
+- ':white_check_mark: registry diff caused build error'
+- ':white_check_mark: native module':
+  - electron build sqlite3
+  - '`electron-builder install-app-deps` error'
+- ':white_check_mark: windows cannot select file'
+- ':white_check_mark: Can''t use `ContextBridge` which `ContextIsolation is true`':
+  - Official Documentation
+  - 'A simple solution: give up using `ContextBridge`'
+  - 'A seemly good solution: `nodeIntegration: true; contextIsolation:false`'
+  - 'A more sophisticated solution: based on `WebPack`':
+    - add `global = globalThis` in `index.html`
+181. core/coding/JS/React/react-whyso.md(734):
+- why react not render into body directly?
+182. core/coding/JS/React/react-howto.md(4338):
+- '`forceUpdate`'
+- component and re-render
+- IMPORTANT ⭐️ function as hook, the async understanding
+- get host
+- configure fs node
+- configure proxy pass
+- how to always scroll bottom
+183. core/coding/Markdown/markdown-howto.md(3644):
+- markdown image size
+- check box alternative:
+  - 'update: use `:white_circle:` instead of `:white_large_square:`'
+  - recommended emojis:
+    - numbers
+    - tips
+  - checks
+  - emotions
+184. core/coding/Java/maven-howto.md(2080):
+- use mirrors for repositories
+- config mysql in `application.yml`
+- config mysql in pom
+185. core/coding/Java/java-howto.md(1920):
+- 'BEST-PRACTICE: Database/Tables Initialization'
+- Mybatis Generate UI
+- '`baomidou/mybatis-plus`'
+186. core/coding/HTML/html-howto.md(200):
+- 六种网页空格
+187. core/coding/regex/regex-howto.md(3532):
+- lookahead / lookbehind:
+  - conclusion
+  - detail
+188. core/coding/CPP/cpp-howto.md(2761):
+- grammar relative:
+  - compare between strings
+  - '`optional`'
+- what's `stdafx.h` (预编译头)
+- how to call C++ functions in C
+189. core/coding/TS/ts-bugfix.md(2720):
+- 'PASS: TS1259: Module ''"path"'' can only be default-imported using the ''esModuleInterop''
+  flag'
+- ':white_check_mark: tsc not work, `tsc -b --clean` not work too'
+- ':ballot_box_with_check: TS4023 error of using (Database) name from external module
+  (pass)'
+190. core/coding/TS/ts-howto.md(18703):
+- react声明state（`ReadOnly`）属性
+- 'TODO: research on `.d.ts`'
+- 'BEST-PRACTICE: how to define const array with types':
+  - webstorm typescript live template
+  - sample source code
+  - a little reflection
+- '`htmlFor` in `label`'
+- private property in interface
+- '[Give Up] typeorm find error types'
+- instanceof --> istypeof ?
+- 'PASS: declare const array in d.ts'
+- hwo to define `useImperativeHandler` interface:
+  - ReturnType of a function
+- how to design interface with default value
+- what's `TS_NODE_TRANSPILE_ONLY`
+- 'TODO: cast enum to string'
+- how to import `.md` like resources
+- how to check object's specific type when defined as a union type
+191. core/OS/iOS.md(4887):
+- 短信拦截:
+  - 方法1：回0000或者00000退订
+  - 方法2：启用sms过滤中介:
+    - app：VeroSMS（可能不支持中文关键词）
+    - app：短信别烦我（免费）
+    - sms过滤中介原理
+  - 自己开发sms app的可行性
+- 一键换装方法汇总:
+  - 辅助触控，不可行
+  - Frida方案，不确定
+- Appium + WebDriverAgent:
+  - 'TODO: session id null'
+  - 'FIXED: 解决13.3 高版本xcode 提示Could not build module ''RoutingHTTPServer'' 导致不能编译'
+  - 'FIXED: 返回的 json 串 sessionId 为什么是 null'
+192. core/OS/cross-platform-howto.md(4778):
+- 多机共享系统:
+  - 使用smb共享mac与ubuntu的文件系统
+  - 使用hgfs传输:
+    - 配置hgfs
+    - 传输效果
+- 'mouse/keyboard sharing solution: synergy'
+- 移动硬盘双系统:
+  - download url
+  - make the usb driver:
+    - 1. Erase
+    - 2. Partition
+    - 3. burn
+  - start up the driver:
+    - 1. security level
+    - 2. mouse and keyboard
+193. core/OS/virtual-machine/vmware-howto.md(21600):
+- installation
+- configuration:
+  - cpu
+  - memories
+  - disk storage
+  - disk type
+- vmware best practice:
+  - retina solution
+  - config keyboards:
+    - '1. :sparkles: mac host key'
+    - 2. copy paste
+  - vpn proxy:
+    - 1. know what's your ip and vpn port of host machine
+    - 2. ensure the net type in vm
+    - 3. specify the vpn manually in vm
+  - share files between host(mac) and guest(ubuntu):
+    - 'BEST-PRACTICE: use `vmhgfs-fuse` and auto-complete supported'
+    - resolution 1. use `/mnt/~`
+    - mount host user folder to guest (transfer file from guest to host)
+    - umount user folder in guest
+    - 'TODO: transfer file from host to guest'
+    - 'TODO: the `scp` resolution'
+- vmware bugfix:
+  - 'vmware '
+  - ':white_check_mark: `fuse: bad mount point ''mnt/hgfs'': Transport endpoint is
+    not connected`'
+  - vmware ubuntu filesystem startup:
+    - ':white_check_mark: `initramfs` problem'
+    - ':white_check_mark: `Stuck at fsck "/dev/sda1: clean xxx/xxx files [...] " after
+      upgrade to Ubuntu 16 from 14`'
+  - ':white_check_mark: vmware change `super` key, so that the `command` key won''t
+    make the ubuntu react as ''showing all the active applications'''
+  - disk storage not enough since there are too many deleted versions:
+    - Step 0.1. enable usb driver disk manage (read/write permission)
+    - Step 0.2. umount driver
+    - Step 0.3. unplug and plug driver
+    - Step 1. find and go to target driver
+    - Step 2. go to trash dir under driver
+    - Step 3. list all the trash files and rm them (need permission)
+- run emulator on ubuntu vmware:
+  - 'FIXME: unable to run `emulator` after building AOSP'
+  - 'FIXME: `emulator: WARNING: system partition size adjusted to match image file
+    (3083 MB > 800 MB)`'
+  - 'FIXME: `Error "context mismatch in svga_sampler_view_destroy" running GUI programs
+    on Ubuntu in a VM`'
+  - 'FIXME: `TSC frequency mismatch between VM and host`'
+- 'BEST-PRACTICE: disable side channel mitigations for performance'
+194. core/OS/virtual-machine/virtualbox-howto.md(3920):
+- 盘符切换（盘已满）
+- ':white_check_mark: 分辨率切换'
+- ':white_check_mark: Fixed: `Develop on a Linux computer that supports VT-x or SVM`'
+- ':white_check_mark: Fixed: `emulator: ERROR: Can''t get kernel version from the
+  kernel image file: ''/home/mark/android/prebuilts/qemu-kernel/arm/ranchu/kernel-qemu''`'
+- 启用Hypervisor(虚拟机加速)
+- 运行模拟器
+195. core/OS/Mac/mac-wechat-hack.md(35613):
+- 项目展示:
+  - 获取所有微信好友信息
+  - 导出与微信好友的聊天记录
+  - 监控实时聊天
+  - 其他
+- 动机背景
+- 技术概览:
+  - github search until `wechat-decipher-macos`
+  - '`macos/eavesdropper.d`'
+  - '`macos/dbcracker.d`'
+  - '`pcbakchat/gather.d`'
+  - '`devel/xlogger.d`'
+  - 总结
+  - 'update@2022-02-08: 关于加密字段'
+- reference:
+  - 各大平台仓库合集
+  - mac版
+  - windows版
+  - ios版
+  - '`sqlcipher` 相关'
+  - '`pragma` 相关'
+  - '`frida` 相关'
+- hack manual:
+  - download sqlite
+  - test sqlite
+  - install `openssl` to replace the built-in `libressl` on MacOS:
+    - install `openssl` via `brew`
+    - config `openssl` into path
+    - confirm openssl
+  - compile `sqlcipher`
+  - 'UPDATE: 静态编译'
+  - test `sqlcipher` workflow:
+    - step 1. crypto a plain database (which is generated by our `sqlite` before)
+    - 'step2. test: operate on an encrypted database without key (expect: failure)'
+    - 'step3. test: dump the encrypted database into plain with key (expect: success)'
+    - 'step4. test: open the decrypted database without key (expect: success)'
+  - ':sparkles::sparkles: decrypt database':
+    - 'DEPRECIATED: pragma config of sqlcipher 3 defaults'
+    - 'BEST-PRACTICE: pragma config of sqlcipher 3 defaults'
+    - check salt of specific database file
+    - decrypt and dump specific database file
+    - test dumped database file (via `sqlcipher` or `sqlite3`)
+- wechat design:
+  - design of contact fields
+  - 'design of user id to contact id: `md5`'
+  - 'IMPROVE: get self id'
+  - 'TODO: get image from xml'
+- py-sqlcipher instruction:
+  - compile
+  - connection
+  - table:
+    - list all the tables
+    - list the columns of table (get table schema)
+    - format rows display
+    - list rows in one table
+- extended:
+  - how to know my openssl version/info
+  - 'bugfix: `error: C compiler cannot create executables`'
+- 本项目合作伙伴
+196. core/OS/Mac/mac-bugfix.md(8307):
+- 'FIXED: adobe acrobat save-as blank'
+- 'FIXED: mac静电问题'
+- 'FIXED: `date -d` not work on Mac'
+- 'FIXED: `/etc/sudoers` file broken'
+- 'FIXME: need double confirm/password when boot/restart mac':
+  - FAILED try of switching from `List of Users` to `name and password`
+  - another FAILED try of deleting old archive
+  - another FAILED try of creating new user and then deleting the older user
+  - another PASSED try of decrypting volume
+  - final resolution based on reinstalling system
+- bashrc messy code:
+  - when using `bash` and see the messy code
+  - 'when using `bash` and see the `bash: git_prompt_info: command not found`'
+197. core/OS/Mac/mac-todo.md(725):
+- 'TODO: configure python3 as the default python with no harm to the MacOS system'
+- ':white_check_mark: Mac-CopyClip'
+198. core/OS/Mac/ios-hack.md(1142):
+- MonkeyDev:
+  - instruction
+  - 'FIXED: `failed to connect to  ''raw.githubusercontent.com''`'
+  - 'FIXED: `xcode 12 Types.xcspec not found`'
+199. core/OS/Mac/alfred-howto.md(3143):
+- create interactive shell:
+  - alfred documentation
+  - alfred create script
+  - alfred repo
+- script filter
+- generate icon based on number
+200. core/OS/Mac/mac-migrate.md(26498):
+- backup and reinstall mac:
+  - motivation / background
+  - step 1. how to backup old machine:
+    - 移动硬盘要求与选择
+    - 备份内容要求与选择
+  - step 2. how to reinstall system:
+    - Do you need to erase all the raw file system?
+    - Do you want to install a specific OS version?
+    - it's quite easy to install the current os version
+- install basic softwares:
+  - 'vpn support: `clash`'
+  - 'web support: `google chrome`'
+  - 'workflow support: `alfred`'
+  - 'input method support: `sogou`'
+  - 'screenshot support: `xnip`'
+  - other apps
+- install development relative tools:
+  - 'coding/note support: `vscode`'
+  - 'packages support: `git` and `brew`':
+    - 正常安装（如果一切顺利地话）
+    - 关于 git 很慢
+    - 关于 brew 很慢
+    - '关于清华镜像源中提到的`xcode clt`问题 (`clt: command line tool`)'
+    - 所以最快的流程是？
+  - 'terminal support 1: `iTerm`':
+    - iterm config tab width to 4
+    - how to open iTerm in Finder (click a folder and then using shortcut to trigger)
+    - 'TODO: open iTerm in Finder (not need to click a folder first)'
+  - 'terminal support 2: `oh-my-zsh`':
+    - 1. 关于proxy
+    - 2. 关于使用zsh前后对比
+    - 3. 关于zsh切换主题
+  - 'TODO: terminal support 3: `tmux`'
+  - 'TODO: terminal support 4: `vim`'
+  - custom terminal shortcuts
+  - 'TODO: 合并`mac-howto`'
+- 'TODO: final killer on MacOS'
+- mac experience:
+  - mac用熟的体现
+201. core/OS/Mac/mac-howto.md(7299):
+- ipad air 5 64G 选购依据
+- numbers:
+  - trigger applescript within numbers
+- mac switch between hidden/minimized tabs
+- mac 录屏:
+  - 为什么mac录屏无法录制耳机（系统输出）
+- 'mac dict config '
+- how to disable `iphone copy ...`
+- how to disable floating window after macOS screenshot
+- mac file system management:
+  - trash
+- 远程控制windows
+- add filepath into python path permanently
+- how to configure permanent environment variable?
+- Can local dns set and work for chrome? [No, it can't]
+- how to uninstall Microsoft AutoUpdate and microsoft worksuits
+202. core/OS/Mac/mac-what.md(796):
+- mac file system
+203. core/OS/Mac/mac-automation.md(1349):
+- applescript:
+  - 与shellscript的互相调用
+  - 注释
+  - 快捷键
+  - 输出产品
+  - 更换图标
+204. core/OS/Mac/mac-apps.md(2492):
+- recommended apps:
+  - Afloat
+  - iTerm
+  - 'cheatsheet: customize app shortcuts'
+- app:iTerm:
+  - set selection with ":" for vim
+- app:afloat
+- app:calculator:
+  - 显示历史记录
+- 安装历史
+205. core/OS/Linux/linux-init-manual.md(4894):
+- step 0. install
+- step 1. config apt source:
+  - 1. change apt source:
+    - 'fastest/script way: 直接修改`/etc/apt/sources.list`'
+    - 'robustest/recommend-for-newbie way: 在`softwares & update`里修改server'
+    - 'use others way: 使用别人写好的 git仓库进行配置'
+  - 2. update apt
+- step 2. config git
+- step 3. config terminal
+- step 4. config language:
+  - 'resolution 1: config chinese input source via ibus'
+  - 'FIXME: resolution 2: config chinese input source via sougou'
+  - how to switch language input source
+  - how to change language to english
+206. core/OS/Linux/linux-commands.md(52788):
+- command:zip/unzip:
+  - add file into zipped file
+  - list structure of zipped file:
+    - 'TODO: list structure of zipped file with limited level'
+- command:tar
+- command:find:
+  - find and show file size
+  - how to ignore case in find
+  - how to specify search type
+  - how to exclude dir
+  - 'TODO: how to find file with time used'
+  - 'tip: find efficiency comparison'
+- command:grep:
+  - only display file name
+  - display lines before or after or surround specific lines
+  - skip binary files
+  - good articles of grep relative
+  - how to match raw string
+  - how to combine `grep` with `if`
+  - how to exclude pattern
+  - how to exclude dir (`--exclude-dir=dir`)
+  - how to limit depth (`-maxdepth`)
+  - 'tip: grep by lines context is MUCH FASTER than grep by words context, and even
+    better for output'
+  - 'tip: grep by negative captured group needs to use `ggrep`'
+  - grep filter in/out files via `l | v | L`
+- command:tree:
+  - 筛选文件:
+    - 法一：标准做法是使用`--prune -P PATTERN`
+    - 法二：基于grep
+  - how to display chinese (`-N`)
+  - how to exclude dir(`-I`)
+  - how to change  default char style
+- command:head/tail:
+  - head basic usage
+  - 'BEST-PRACTICE: skip lines'
+  - how to exclude the last k rows
+  - 'discuss: use `head` or `sed`'
+- command:top
+- command:cat|tac:
+  - reverse order of lines
+  - how to write raw string into file using `cat`
+  - 'usage: how to know what''s the bash string'
+- command:zip|unzip|gunzip:
+  - (g)unzip a gzip file
+  - how to unzip to specific directory
+- command:kill
+- command:scp
+- command:lsof
+- command:ufw
+- command:time
+- command:tr
+- command:cd:
+  - 'usage: a superb scene using `cd .`'
+- command:sed:
+  - 'how to replace a couple of files '
+  - how to ignore case in sed
+  - how to print only matched lines
+  - ':sparkles: how to increment version number':
+    - 'resolution 1: use `echo` based on `//e`'
+    - 'resolution 2: answer'
+  - how to match digits (`[0-9]` or `:digit:`)
+  - how to insert text before first line of file:
+    - 'resolution 1: use `cat` and `;`'
+    - 'resolution 2: use `cat` and `|`'
+    - 'resolution 3: use sed s-command'
+    - 'resolution 4: use sed e-command'
+  - how to replace multi-lines
+  - how to trim line
+- command:perl:
+  - only print matched lines
+  - how to use perl to replace multi-lines
+- command:xargs:
+  - '`xargs` for `cp` to copy from stdin'
+- command:history:
+  - how to not display the number of `history` output
+- command:cut:
+  - cut column of list from XX to YY
+- command:sort/uniq:
+  - sort by column/key
+  - drop duplicated
+- command:nl:
+  - 'FIXME: why there is extra spaces'
+- gnu:command:rename
+- mac:command:iostat
+- command:less|more|most|vim
+- command:echo|printf
+- command:updatedb|locate
+207. core/OS/Linux/linux-howto.md(48029):
+- linux init manual
+- 'BEST-PRACTICE: linux connection (`ssh`)':
+  - ssh without password
+  - ssh keep connection alive
+  - 'DEPRECIATED: scp no secret/password'
+- 'BEST-PRACTICE: linux env management':
+  - how to change apt source:
+    - 'resolution 1: manual change from the App of `Softwares & Updates`'
+    - 'resolution 2: modify the configuration manually from the terminal'
+  - how to know what's the os platform
+  - how to configure python environment
+  - ':white_check_mark: cannot use `sudo apt-get install xxx` to install packages'
+- 'BEST-PRACTICE: linux file system management':
+  - mkdir if not exist
+  - ls and delete files
+  - fastest delete file
+  - 'DEPRECIATED: how to show absolute path of file from relative'
+  - 'UPDATE-2022-02-05: how to show absolute path of file from relative'
+  - how to copy file into clipboard:
+    - it's easy to copy a text file
+    - but it cannot be done for a binary file
+  - how to show file size
+  - how to compare between files (`diff` & `vimdiff`):
+    - 'resolution 1: `diff F1 F2`'
+    - 'resolution 2: `diff -y F1 F2` or `sdiff F1 F2`'
+    - 'resolution 3: `vimdiff F1 F2`'
+    - 'TODO: resolution 4: git diff'
+  - 'FIXME: how to copy/move directory files correctly to soft links under target
+    directory without affecting git?'
+- 'BEST-PRACTICE: linux disk management':
+  - '`ncdu`, disk space tui'
+  - '`baobab`, disk space gui':
+    - install problem
+    - effects
+- 'BEST-PRACTICE: linux shells management':
+  - 'FIXED: `bash navigate to directory without cd`'
+  - shell common aliases
+  - list all the shells
+  - 'background: `sh` is different with `bash`'
+  - see what's the current Shell
+  - switch shell
+  - set zsh as the default terminal (need re-login):
+    - 'FIXED: can''t work even after re-login'
+  - how to prefix any output in a bash script?:
+    - 'resolution 1. use function: easiest but side effect'
+    - 'RECOMMENDED: resolution 2. redirect stdin/err'
+  - ':white_check_mark: the terminal cannot up down after editing'
+  - 'TODO: bind `option + arrow` to jump word in zsh on ubuntu vmware on MacOS'
+  - how to clear broken soft links
+- 'BEST-PRACTICE: linux commands management':
+  - linux quotes
+  - pip uninstall multi packages
+  - Ternary operator (三元运算符)、短路运算符（`a=${VAR:-DEFAULT}`）
+  - 'BEST-PRACTICE: `|` , `||`, `&`, `&&`, `;`'
+  - '`&&` and `;`'
+  - '`alias` vs `variable`':
+    - 'BEST-PRACTICE: auto-translate'
+    - 'bugfix: alias in script file can''t use in the outer shell'
+  - incremental variable
+  - conditions:
+    - sample of testing file readable and read
+    - 在条件中执行某些语句要用 `(( CONDITION ))`
+  - how to auto input in command:
+    - auto input password for sudo commands
+    - auto yes for some command (`yes | `)
+    - auto yes for `apt` installing packages (`-y`)
+  - how to search commands by prefix (`history-search-backward/forward`)
+  - how to repeat command
+  - how to use variable as multi args
+  - how to set an alias:
+    - 'resolution 1: in terminal'
+    - 'resolution 2: write into `~/.bash_aliases`'
+    - ':sparkles: resolution 3: use `.bash_aliases` with `zsh`'
+    - unalias
+  - how to compare between outputs from two commands
+  - how to check if a string contains another string:
+    - using `==`
+    - ':sparkles: using `grep`'
+- 'BEST-PRACTICE: linux accounts management':
+  - how to create user
+  - how to log out:
+    - resolution 1 (11.10 and above)
+    - resolution 2
+  - set a shorter password for ubuntu
+- 'BEST-PRACTICE: linux net management':
+  - how to know my public ip address
+  - how to monitor network traffic
+  - 'FIXME: check proxy'
+- 'BEST-PRACTICE: linux date/time management':
+  - how to format date
+  - how to change timezone (and time):
+    - 'resolution 1 (conclusion): directly export'
+    - 'resolution 2 (detail): choose following directions'
+- 'BEST-PRACTICE: linux system management'
+- 'FIXED: `apt-get /var/lib/dpkg/lock-frontend`':
+  - ':white_check_mark: `A stop job is running for Session c2 of user ... (1min 30s)`'
+- Linux commands
+- Linux Is Awesome:
+  - awesome discussions
+  - awesome design philosophy
+208. core/OS/Linux/linux-terminator-howto.md(662):
+- 'config file place: `~/.config/terminator/config`'
+- config scroll lines (see more lines)
+209. core/OS/Linux/linux-debug.md(475):
+- android props
+- '`add2line` debug crash'
+210. core/OS/Linux/depreciated/depreciated-linux-bugfix.md(507):
+- linux bugfix:
+  - 'FIXME: why there''s a chance that I can''t use `# xxx` in Terminal':
+    - 'test passed: use `# xxx` in macos (under zsh)'
+    - 'test passed: use `# xxx` in ubuntu (under zsh)'
+    - 'test passed: use `# xxx` in ubuntu (raw under bash)'
+    - 'test passed: use `# !IMPORTANT xxx` in ubuntu (raw under bash)'
+211. core/OS/Windows/windows-howto.md(612):
+- download windows 10 iso
+- portable apps
+212. whats-the-best-to-learn/readme.md(2865):
+- Index
+- 分类:
+  - 综合
+  - 民生
+  - CS-书籍
+  - CS-考研
+  - CS-OI
+  - CS-经典
+  - VR/AR/XR:
+    - SLAM算法
+  - Coding-Best-Practice
+- 指引:
+  - 仓库修改指引
+  - 链接新增指引
+- 规范
