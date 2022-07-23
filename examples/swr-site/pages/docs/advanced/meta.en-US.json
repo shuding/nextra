@@ -13,5 +13,6 @@
   "react-native": "React Native",
   "markdown-import": "Markdown import",
   "more": "More: A Super Super Super Super Long Directory",
-  "file-name.with.DOTS": "Filenames with dots"
+  "file-name.with.DOTS": "Filenames with dots",
+  "code-highlighting": "Code highlighting"
 }
