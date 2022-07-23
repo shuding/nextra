@@ -43,5 +43,8 @@
     "trailingComma": "none",
     "arrowParens": "avoid"
   },
-  "packageManager": "pnpm@7.3.0"
+  "packageManager": "pnpm@7.3.0",
+  "workspaces": [
+    "packages/*"
+  ]
 }
