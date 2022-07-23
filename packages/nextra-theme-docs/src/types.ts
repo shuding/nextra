@@ -75,14 +75,14 @@ export interface DocsThemeConfig {
 }
 
 export type PageTheme = {
-  navbar: Boolean
-  sidebar: Boolean
-  toc: Boolean
-  pagination: Boolean
-  footer: Boolean
+  navbar: boolean
+  sidebar: boolean
+  toc: boolean
+  pagination: boolean
+  footer: boolean
   layout: 'default' | 'full' | 'raw'
   typesetting: 'default' | 'article'
-  breadcrumb: Boolean
+  breadcrumb: boolean
 }
 export interface Meta extends PageTheme {
   title: string

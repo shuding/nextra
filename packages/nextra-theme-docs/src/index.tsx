@@ -187,13 +187,13 @@ const Content: React.FC<LayoutProps> = ({
             'menu-active': menu
           })}
         >
-          {themeContext.navbar && (
+          {themeContext.navbar ? (
             <Navbar
               isRTL={isRTL}
               flatDirectories={flatDirectories}
               items={topLevelPageItems}
             />
-          )}
+          ) : null}
           <ActiveAnchor>
             <div className="max-w-[90rem] w-full mx-auto flex flex-1 items-stretch">
               <div className="flex flex-1 w-full">
