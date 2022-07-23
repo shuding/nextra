@@ -6,7 +6,7 @@ import React, {
   useEffect,
   Fragment
 } from 'react'
-import Router, { useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import cn from 'classnames'
 import Link from 'next/link'
 import FlexSearch from 'flexsearch'
@@ -34,7 +34,7 @@ const Item = ({
           {page}
         </div>
       ) : null}
-      <Link href={Router.basePath + href}>
+      <Link href={href}>
         <a
           className="block no-underline"
           onMouseMove={onHover}
@@ -113,7 +113,7 @@ export default function Search() {
   const doSearch = () => {
     if (!search) return
 
-    const localeCode = Router.locale || 'default'
+    const localeCode = router.locale
     const index = indexes[localeCode]
 
     if (!index) return
@@ -251,11 +251,11 @@ export default function Search() {
   )
 
   const load = async () => {
-    const localeCode = Router.locale || 'default'
+    const localeCode = router.locale
     if (!indexes[localeCode] && !loading) {
       setLoading(true)
       const response = await fetch(
-        `${Router.basePath}/_next/static/chunks/nextra-data-${localeCode}.json`
+        `${router.basePath}/_next/static/chunks/nextra-data-${localeCode}.json`
       )
       const data = await response.json()
 
@@ -430,7 +430,7 @@ export default function Search() {
                   key={`search-item-${i}`}
                   page={res.page}
                   title={res.title}
-                  href={res.route}
+                  href={router.basePath + res.route}
                   excerpt={res.excerpt}
                   active={i === active}
                   onHover={() => setActive(i)}
