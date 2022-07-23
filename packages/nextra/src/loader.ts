@@ -10,7 +10,7 @@ import { addPage } from './content-dump'
 import { parseFileName } from './utils'
 import { compileMdx } from './compile'
 import { getPageMap, findPagesDir } from './page-map'
-import { collectFiles } from './plugin'
+import { collectFiles, collectMdx } from './plugin'
 import { MARKDOWN_EXTENSION_REGEX, IS_PRODUCTION } from './constants'
 
 // TODO: create this as a webpack plugin.
@@ -67,6 +67,12 @@ async function loader(
     ? pageMapCache.get()!
     : await collectFiles(pagesDir, '/')
 
+  // mdx is imported but is outside the `pages` directory
+  if (!fileMap[resourcePath]) {
+    fileMap[resourcePath] = await collectMdx(resourcePath)
+    context.addMissingDependency(resourcePath)
+  }
+
   const [pageMap, route, title] = getPageMap(
     resourcePath,
     pageMapResult,
@@ -74,11 +80,7 @@ async function loader(
     defaultLocale
   )
 
-  if (!IS_PRODUCTION) {
-    // Add the entire directory `pages` as the dependency
-    // so we can generate the correct page map.
-    context.addContextDependency(pagesDir)
-  } else {
+  if (IS_PRODUCTION) {
     // We only add meta files as dependencies for production build,
     // so we can do incremental builds.
     Object.entries(fileMap).forEach(([filePath, { name, meta, locale }]) => {
@@ -90,6 +92,10 @@ async function loader(
         context.addDependency(filePath)
       }
     })
+  } else {
+    // Add the entire directory `pages` as the dependency,
+    // so we can generate the correct page map.
+    context.addContextDependency(pagesDir)
   }
 
   // Extract frontMatter information if it exists
