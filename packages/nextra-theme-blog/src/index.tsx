@@ -34,7 +34,6 @@ const BlogLayout = ({ config, contentNodes, opts }: LayoutProps) => {
   let navPages: PageMapItem[] = []
   const type = opts.meta.type || 'post'
   const route = opts.route
-  const hasH1 = opts.hasH1
   let back: string | null = null
   // This only renders once per page
   if (type === 'posts' || type === 'tag' || type === 'page') {
@@ -93,8 +92,6 @@ const BlogLayout = ({ config, contentNodes, opts }: LayoutProps) => {
   const { theme, resolvedTheme } = useTheme()
   const { query } = router
   const tagName = type === 'tag' ? query.tag : null
-  const pageTitle = opts.meta.title || opts.titleText || ''
-  const mdxTitle = hasH1 && !pageTitle
   let comments
 
   if (config.cusdis) {
@@ -168,6 +165,7 @@ const BlogLayout = ({ config, contentNodes, opts }: LayoutProps) => {
       </div>
     ) : null
   const ref = React.useRef<HTMLHeadingElement>(null)
+  const pageTitle = opts.meta.title || opts.titleText || ''
 
   return (
     <>
@@ -186,7 +184,6 @@ const BlogLayout = ({ config, contentNodes, opts }: LayoutProps) => {
       <article className="container prose prose-sm md:prose dark:prose-dark">
         <HeadingContext.Provider value={ref}>
           {pageTitle ? <h1>{pageTitle}</h1> : null}
-          {mdxTitle ? <h1 ref={ref}></h1> : null}
           {type === 'post' ? (
             /** @ts-expect-error */
             <Meta {...meta} back={back} config={config} />

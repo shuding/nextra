@@ -1,8 +1,9 @@
 import { createProcessor, ProcessorOptions } from '@mdx-js/mdx'
 import remarkGfm from 'remark-gfm'
 import rehypePrettyCode from 'rehype-pretty-code'
+import { rehypeMdxTitle } from 'rehype-mdx-title';
 import { remarkStaticImage } from './mdx-plugins/static-image'
-import remarkHandler, { HeadingMeta } from './mdx-plugins/remark'
+import { remarkHeadings, HeadingMeta } from './mdx-plugins/remark'
 import { LoaderOptions } from './types'
 import structurize from './mdx-plugins/structurize'
 import { parseMeta, attachMeta } from './mdx-plugins/rehype-handler'
@@ -13,7 +14,6 @@ import theme from './theme.json'
 const createCompiler = (mdxOptions: ProcessorOptions) => {
   const compiler = createProcessor(mdxOptions)
   compiler.data('headingMeta', {
-    hasH1: false,
     headings: []
   })
   return compiler
@@ -50,9 +50,9 @@ export async function compileMdx(
     LoaderOptions,
     'unstable_staticImage' | 'unstable_flexsearch'
   > = {},
-  resourcePath: string
+  resourcePath = ''
 ) {
-  let structurizedData = {}
+  const structurizedData = {}
   const compiler = createCompiler({
     jsx: mdxOptions.jsx ?? true,
     outputFormat: mdxOptions.outputFormat,
@@ -60,7 +60,7 @@ export async function compileMdx(
     remarkPlugins: [
       ...(mdxOptions.remarkPlugins || []),
       remarkGfm,
-      remarkHandler,
+      remarkHeadings,
       ...(nextraOptions.unstable_staticImage ? [remarkStaticImage] : []),
       ...(nextraOptions.unstable_flexsearch
         ? [structurize(structurizedData, nextraOptions.unstable_flexsearch)]
@@ -74,6 +74,7 @@ export async function compileMdx(
         rehypePrettyCode,
         { ...rehypePrettyCodeOptions, ...mdxOptions.rehypePrettyCodeOptions }
       ],
+      [rehypeMdxTitle, { name: 'titleText' }],
       attachMeta
     ].filter(Boolean)
   })

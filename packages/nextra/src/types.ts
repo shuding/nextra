@@ -32,7 +32,6 @@ export interface PageOpt {
   pageMap: PageMapItem[]
   titleText: string | null
   headings?: Heading[]
-  hasH1: boolean
   unstable_flexsearch?:
     | boolean
     | {
