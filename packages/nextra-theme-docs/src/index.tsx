@@ -173,8 +173,6 @@ const Content: React.FC<LayoutProps> = ({
 
   const headingArr = headings ?? []
   return (
-    <React.Fragment>
-      <Head title={title} locale={locale} meta={meta} />
       <MenuContext.Provider
         value={{
           menu,
@@ -182,6 +180,7 @@ const Content: React.FC<LayoutProps> = ({
           defaultMenuCollapsed: !!config.defaultMenuCollapsed
         }}
       >
+        <Head title={title} locale={locale} meta={meta} />
         <div
           className={cn('nextra-container main-container flex flex-col', {
             rtl: isRTL,
@@ -223,12 +222,12 @@ const Content: React.FC<LayoutProps> = ({
                 <Body
                   themeContext={themeContext}
                   breadcrumb={
-                    activeType === 'page' ? null : themeContext.breadcrumb ? (
+                    activeType !== 'page' && themeContext.breadcrumb ? (
                       <Breadcrumb activePath={activePath} />
                     ) : null
                   }
                   navLinks={
-                    activeType === 'page' ? null : themeContext.pagination ? (
+                    activeType !== 'page' && themeContext.pagination ? (
                       <NavLinks
                         flatDirectories={flatDocsDirectories}
                         currentIndex={activeIndex}
@@ -248,27 +247,24 @@ const Content: React.FC<LayoutProps> = ({
           ) : null}
         </div>
       </MenuContext.Provider>
-    </React.Fragment>
   )
 }
 interface DocsLayoutProps extends PageOpt {
   meta: Meta
 }
-const createLayout = (opts: DocsLayoutProps, _config: DocsThemeConfig) => {
-  const extendedConfig = Object.assign({}, defaultConfig, _config, opts)
-
+const createLayout = (opts: DocsLayoutProps, config: DocsThemeConfig) => {
+  const extendedConfig = Object.assign({}, defaultConfig, config, opts)
+  const nextThemes = extendedConfig.nextThemes || {}
   const Page = ({ children }: { children: React.ReactChildren }) => children
 
   Page.getLayout = (page: any) => (
       <ThemeConfigContext.Provider value={extendedConfig}>
         <ThemeProvider
           attribute="class"
-          disableTransitionOnChange={true}
-          {...{
-            defaultTheme: extendedConfig.nextThemes.defaultTheme,
-            storageKey: extendedConfig.nextThemes.storageKey,
-            forcedTheme: extendedConfig.nextThemes.forcedTheme
-          }}
+          disableTransitionOnChange
+          defaultTheme={nextThemes.defaultTheme}
+          storageKey={nextThemes.storageKey}
+          forcedTheme={nextThemes.forcedTheme}
         >
           <Content {...opts}>{page}</Content>
         </ThemeProvider>

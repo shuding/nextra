@@ -1,4 +1,5 @@
 import React from 'react'
+import { ThemeProviderProps } from 'next-themes/dist/types'
 
 export interface DocsThemeConfig {
   projectLink?: string
@@ -17,13 +18,10 @@ export interface DocsThemeConfig {
   prevLinks?: boolean
   search?: boolean
   darkMode?: boolean
-  /**
-   * A subset of configurations for https://github.com/pacocoursey/next-themes#themeprovider
-   * - defaultTheme
-   * - storageKey
-   * - forcedTheme
-   */
-  nextThemes?: object
+  nextThemes?: Pick<
+    ThemeProviderProps,
+    'defaultTheme' | 'storageKey' | 'forcedTheme'
+  >
   defaultMenuCollapsed?: boolean
   font?: boolean
   footer?: boolean
@@ -77,14 +75,14 @@ export interface DocsThemeConfig {
 }
 
 export type PageTheme = {
-  navbar: Boolean
-  sidebar: Boolean
-  toc: Boolean
-  pagination: Boolean
-  footer: Boolean
+  navbar: boolean
+  sidebar: boolean
+  toc: boolean
+  pagination: boolean
+  footer: boolean
   layout: 'default' | 'full' | 'raw'
   typesetting: 'default' | 'article'
-  breadcrumb: Boolean
+  breadcrumb: boolean
 }
 export interface Meta extends PageTheme {
   title: string
