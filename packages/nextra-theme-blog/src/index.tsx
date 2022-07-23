@@ -14,7 +14,6 @@ import getTags from './utils/get-tags'
 import sortDate from './utils/sort-date'
 import type { PageMapItem, PageOpt } from 'nextra'
 import type { NextraBlogTheme } from './types'
-const isProduction = process.env.NODE_ENV === 'production'
 // comments
 const Cusdis = dynamic(
   // @ts-ignore
@@ -220,27 +219,13 @@ const createLayout = (opts: PageOpt, _config: NextraBlogTheme) => {
     },
     _config
   )
-  let layoutUsed = false
-  const Page = ({ children }: { children: React.ReactChildren }) => {
-    if (!layoutUsed && isProduction) {
-      throw new Error(
-        '[Nextra] Please add the `getLayout` logic to your _app.js, see https://nextjs.org/docs/basic-features/layouts#per-page-layouts.'
-      )
-    }
-    return children
-  }
-  const Layout = (page: React.ReactChildren) => {
-    layoutUsed = true
-    return (
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        enableSystem={true}
-      >
-        <BlogLayout config={config} contentNodes={page} opts={opts} />
-      </ThemeProvider>
-    )
-  }
+
+  const Page = ({ children }: { children: React.ReactChildren }) => children
+  const Layout = (page: React.ReactChildren) => (
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      <BlogLayout config={config} contentNodes={page} opts={opts} />
+    </ThemeProvider>
+  )
   Page.getLayout = Layout
   return Page
 }

@@ -54,6 +54,11 @@ exports[`Page Process > pageMap en-US 1`] = `
             },
             {
               "locale": "en-US",
+              "name": "markdown-import",
+              "route": "/docs/advanced/markdown-import",
+            },
+            {
+              "locale": "en-US",
               "meta": {
                 "*": {
                   "theme": {
@@ -66,6 +71,7 @@ exports[`Page Process > pageMap en-US 1`] = `
                 },
                 "cache": "Cache",
                 "file-name.with.DOTS": "Filenames with dots",
+                "markdown-import": "Markdown import",
                 "more": "More: A Super Super Super Super Long Directory",
                 "performance": "Performance",
                 "react-native": "React Native",
@@ -433,6 +439,11 @@ exports[`Page Process > pageMap zh-CN 1`] = `
               "locale": "zh-CN",
               "name": "react-native",
               "route": "/docs/advanced/react-native",
+            },
+            {
+              "locale": "en-US",
+              "name": "markdown-import",
+              "route": "/docs/advanced/markdown-import",
             },
           ],
           "name": "advanced",

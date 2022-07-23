@@ -22,8 +22,6 @@ import './polyfill'
 import Breadcrumb from './breadcrumb'
 import renderComponent from './utils/render-component'
 
-const isProduction = process.env.NODE_ENV === 'production'
-
 function useDirectoryInfo(pageMap: PageMapItem[]) {
   const { locale, defaultLocale, asPath } = useRouter()
 
@@ -258,18 +256,10 @@ interface DocsLayoutProps extends PageOpt {
 }
 const createLayout = (opts: DocsLayoutProps, _config: DocsThemeConfig) => {
   const extendedConfig = Object.assign({}, defaultConfig, _config, opts)
-  let layoutUsed = false
-  const Page = ({ children }: { children: React.ReactChildren }) => {
-    if (!layoutUsed && isProduction) {
-      throw new Error(
-        '[Nextra] Please add the `getLayout` logic to your _app.js, see https://nextjs.org/docs/basic-features/layouts#per-page-layouts.'
-      )
-    }
-    return children
-  }
-  Page.getLayout = (page: any) => {
-    layoutUsed = true
-    return (
+
+  const Page = ({ children }: { children: React.ReactChildren }) => children
+
+  Page.getLayout = (page: any) => (
       <ThemeConfigContext.Provider value={extendedConfig}>
         <ThemeProvider
           attribute="class"
@@ -284,7 +274,7 @@ const createLayout = (opts: DocsLayoutProps, _config: DocsThemeConfig) => {
         </ThemeProvider>
       </ThemeConfigContext.Provider>
     )
-  }
+
   return Page
 }
 
