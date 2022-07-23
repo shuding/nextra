@@ -1,3 +1,4 @@
+import { NextConfig } from 'next'
 import { Heading as MDASTHeading } from 'mdast'
 import { ProcessorOptions } from '@mdx-js/mdx'
 import { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
@@ -57,8 +58,6 @@ export type NextraConfig = {
   }
 }
 
-export type withNextra = (
+export type Nextra = (
   ...args: [NextraConfig] | [theme: Theme, themeConfig: string]
-) => (nextConfig: Record<string, any>) => {}
-
-export default withNextra
+) => (nextConfig: NextConfig) => NextConfig
