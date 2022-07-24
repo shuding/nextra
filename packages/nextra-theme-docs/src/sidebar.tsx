@@ -168,7 +168,7 @@ function File({ item, anchors, topLevel }: FileProps) {
       })
 
       return (
-        <li className={cn(active ? 'active' : '', 'break-words')}>
+        <li className={cn(active && 'active', 'break-words')}>
           <Link href={(item as PageItem).href || item.route}>
             <a
               {...((item as PageItem).newWindow
@@ -214,7 +214,7 @@ function File({ item, anchors, topLevel }: FileProps) {
   }
 
   return (
-    <li className={cn(active ? 'active' : '', 'break-words')}>
+    <li className={cn(active && 'active', 'break-words')}>
       <Link href={(item as PageItem).href || item.route}>
         <a
           {...((item as PageItem).newWindow
