@@ -11,7 +11,7 @@ const defaultTheme: DocsThemeConfig = {
   darkMode: true,
   nextThemes: {
     defaultTheme: 'system',
-    storageKey: 'theme',
+    storageKey: 'theme'
   },
   defaultMenuCollapsed: false,
   // @TODO: Can probably introduce a set of options to use Google Fonts directly
@@ -22,8 +22,8 @@ const defaultTheme: DocsThemeConfig = {
   gitTimestamp: 'Last updated on',
   logo: (
     <>
-      <span className="mr-2 font-extrabold hidden md:inline">Nextra</span>
-      <span className="text-gray-600 font-normal hidden md:inline">
+      <span className="mr-2 hidden font-extrabold md:inline">Nextra</span>
+      <span className="hidden font-normal text-gray-600 md:inline">
         The Next Docs Builder
       </span>
     </>
@@ -45,7 +45,7 @@ const defaultTheme: DocsThemeConfig = {
     return 'Search documentation...'
   },
   unstable_searchResultEmpty: () => (
-    <span className="block p-8 text-center text-gray-400 text-sm select-none">
+    <span className="block select-none p-8 text-center text-sm text-gray-400">
       No results found.
     </span>
   )

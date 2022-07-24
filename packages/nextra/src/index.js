@@ -63,5 +63,5 @@ const nextra = (...args) =>
         return config
       }
     }
-}
+  }
 module.exports = nextra

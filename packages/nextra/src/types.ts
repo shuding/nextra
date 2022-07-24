@@ -3,7 +3,6 @@ import { Heading as MDASTHeading } from 'mdast'
 import { ProcessorOptions } from '@mdx-js/mdx'
 import { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
 
-
 export abstract class NextraPluginCache {
   public cache: { items: PageMapItem[]; fileMap: Record<string, any> } | null
 
@@ -81,6 +80,8 @@ export type Nextra = (
   ...args: [NextraConfig] | [theme: Theme, themeConfig: string]
 ) => (nextConfig: NextConfig) => NextConfig
 
-const nextra: Nextra = (...args) => (nextConfig) => ({})
+const nextra: Nextra =
+  (...args) =>
+  nextConfig => ({})
 
 export default nextra

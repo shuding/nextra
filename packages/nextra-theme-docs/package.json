@@ -61,7 +61,8 @@
     "dev:tailwind": "cross-env TAILWIND_MODE=watch pnpm postcss src/styles.css -o style.css --watch",
     "prepublishOnly": "pnpm build",
     "test": "vitest --run",
-    "clean": "rimraf ./dist ./style.css"
+    "clean": "rimraf ./dist ./style.css",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@headlessui/react": "^1.6.5",
@@ -90,5 +91,11 @@
     "cross-env": "^7.0.2",
     "nextra": "workspace:*",
     "tsup": "^6.1.3"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "none",
+    "arrowParens": "avoid"
   }
 }

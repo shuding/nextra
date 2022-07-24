@@ -62,7 +62,7 @@ const Body: React.FC<BodyProps> = ({
         <article className="nextra-body full relative justify-center overflow-x-hidden pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
           <MDXTheme>{children}</MDXTheme>
           {date && config.gitTimestamp ? (
-            <div className="text-xs text-right block text-gray-500 mt-12 mb-8 dark:text-gray-400 pointer-default">
+            <div className="pointer-default mt-12 mb-8 block text-right text-xs text-gray-500 dark:text-gray-400">
               {typeof config.gitTimestamp === 'string'
                 ? config.gitTimestamp +
                   ' ' +
@@ -82,23 +82,23 @@ const Body: React.FC<BodyProps> = ({
           {navLinks}
         </article>
       ) : themeContext.layout === 'raw' ? (
-        <div className="nextra-body full relative overflow-x-hidden expand">
+        <div className="nextra-body full expand relative overflow-x-hidden">
           {children}
         </div>
       ) : (
         <article
           className={cn(
-            'nextra-body relative pb-8 w-full justify-center max-w-full flex min-w-0 pr-[calc(env(safe-area-inset-right)-1.5rem)]',
+            'nextra-body relative flex w-full min-w-0 max-w-full justify-center pb-8 pr-[calc(env(safe-area-inset-right)-1.5rem)]',
             themeContext.typesetting
               ? 'nextra-body-typesetting-' + themeContext.typesetting
               : ''
           )}
         >
-          <main className="max-w-4xl px-6 md:px-8 pt-4 z-10 min-w-0 w-full">
+          <main className="z-10 w-full min-w-0 max-w-4xl px-6 pt-4 md:px-8">
             {breadcrumb}
             <MDXTheme>{children}</MDXTheme>
             {date && config.gitTimestamp ? (
-              <div className="text-xs text-right block text-gray-500 mt-12 mb-8 dark:text-gray-400 pointer-default">
+              <div className="pointer-default mt-12 mb-8 block text-right text-xs text-gray-500 dark:text-gray-400">
                 {typeof config.gitTimestamp === 'string'
                   ? config.gitTimestamp +
                     ' ' +
@@ -173,80 +173,80 @@ const Content: React.FC<LayoutProps> = ({
 
   const headingArr = headings ?? []
   return (
-      <MenuContext.Provider
-        value={{
-          menu,
-          setMenu,
-          defaultMenuCollapsed: !!config.defaultMenuCollapsed
-        }}
+    <MenuContext.Provider
+      value={{
+        menu,
+        setMenu,
+        defaultMenuCollapsed: !!config.defaultMenuCollapsed
+      }}
+    >
+      <Head title={title} locale={locale} meta={meta} />
+      <div
+        className={cn('nextra-container main-container flex flex-col', {
+          rtl: isRTL,
+          'menu-active': menu
+        })}
       >
-        <Head title={title} locale={locale} meta={meta} />
-        <div
-          className={cn('nextra-container main-container flex flex-col', {
-            rtl: isRTL,
-            'menu-active': menu
-          })}
-        >
-          {themeContext.navbar ? (
-            <Navbar
-              isRTL={isRTL}
-              flatDirectories={flatDirectories}
-              items={topLevelPageItems}
-            />
-          ) : null}
-          <ActiveAnchor>
-            <div className="max-w-[90rem] w-full mx-auto flex flex-1 items-stretch">
-              <div className="flex flex-1 w-full">
-                <Sidebar
-                  directories={docsDirectories}
-                  flatDirectories={flatDirectories}
-                  fullDirectories={directories}
-                  headings={headings}
-                  isRTL={isRTL}
-                  asPopover={activeType === 'page' || hideSidebar}
-                  includePlaceholder={themeContext.layout === 'default'}
+        {themeContext.navbar ? (
+          <Navbar
+            isRTL={isRTL}
+            flatDirectories={flatDirectories}
+            items={topLevelPageItems}
+          />
+        ) : null}
+        <ActiveAnchor>
+          <div className="mx-auto flex w-full max-w-[90rem] flex-1 items-stretch">
+            <div className="flex w-full flex-1">
+              <Sidebar
+                directories={docsDirectories}
+                flatDirectories={flatDirectories}
+                fullDirectories={directories}
+                headings={headings}
+                isRTL={isRTL}
+                asPopover={activeType === 'page' || hideSidebar}
+                includePlaceholder={themeContext.layout === 'default'}
+              />
+              {activeType === 'page' ||
+              hideToc ||
+              themeContext.layout !== 'default' ? (
+                themeContext.layout === 'full' ||
+                themeContext.layout === 'raw' ? null : (
+                  <div className="nextra-toc order-last hidden w-64 flex-shrink-0 px-4 text-sm xl:block" />
+                )
+              ) : (
+                <ToC
+                  headings={config.floatTOC ? headingArr : null}
+                  filepathWithName={filepathWithName}
                 />
-                {activeType === 'page' ||
-                hideToc ||
-                themeContext.layout !== 'default' ? (
-                  themeContext.layout === 'full' ||
-                  themeContext.layout === 'raw' ? null : (
-                    <div className="nextra-toc w-64 hidden xl:block text-sm px-4 order-last flex-shrink-0" />
-                  )
-                ) : (
-                  <ToC
-                    headings={config.floatTOC ? headingArr : null}
-                    filepathWithName={filepathWithName}
-                  />
-                )}
-                <Body
-                  themeContext={themeContext}
-                  breadcrumb={
-                    activeType !== 'page' && themeContext.breadcrumb ? (
-                      <Breadcrumb activePath={activePath} />
-                    ) : null
-                  }
-                  navLinks={
-                    activeType !== 'page' && themeContext.pagination ? (
-                      <NavLinks
-                        flatDirectories={flatDocsDirectories}
-                        currentIndex={activeIndex}
-                        isRTL={isRTL}
-                      />
-                    ) : null
-                  }
-                  timestamp={timestamp}
-                >
-                  {children}
-                </Body>
-              </div>
+              )}
+              <Body
+                themeContext={themeContext}
+                breadcrumb={
+                  activeType !== 'page' && themeContext.breadcrumb ? (
+                    <Breadcrumb activePath={activePath} />
+                  ) : null
+                }
+                navLinks={
+                  activeType !== 'page' && themeContext.pagination ? (
+                    <NavLinks
+                      flatDirectories={flatDocsDirectories}
+                      currentIndex={activeIndex}
+                      isRTL={isRTL}
+                    />
+                  ) : null
+                }
+                timestamp={timestamp}
+              >
+                {children}
+              </Body>
             </div>
-          </ActiveAnchor>
-          {themeContext.footer && config.footer ? (
-            <Footer menu={activeType === 'page' || hideSidebar} />
-          ) : null}
-        </div>
-      </MenuContext.Provider>
+          </div>
+        </ActiveAnchor>
+        {themeContext.footer && config.footer ? (
+          <Footer menu={activeType === 'page' || hideSidebar} />
+        ) : null}
+      </div>
+    </MenuContext.Provider>
   )
 }
 interface DocsLayoutProps extends PageOpt {
@@ -258,18 +258,18 @@ const createLayout = (opts: DocsLayoutProps, config: DocsThemeConfig) => {
   const Page = ({ children }: { children: React.ReactChildren }) => children
 
   Page.getLayout = (page: any) => (
-      <ThemeConfigContext.Provider value={extendedConfig}>
-        <ThemeProvider
-          attribute="class"
-          disableTransitionOnChange
-          defaultTheme={nextThemes.defaultTheme}
-          storageKey={nextThemes.storageKey}
-          forcedTheme={nextThemes.forcedTheme}
-        >
-          <Content {...opts}>{page}</Content>
-        </ThemeProvider>
-      </ThemeConfigContext.Provider>
-    )
+    <ThemeConfigContext.Provider value={extendedConfig}>
+      <ThemeProvider
+        attribute="class"
+        disableTransitionOnChange
+        defaultTheme={nextThemes.defaultTheme}
+        storageKey={nextThemes.storageKey}
+        forcedTheme={nextThemes.forcedTheme}
+      >
+        <Content {...opts}>{page}</Content>
+      </ThemeProvider>
+    </ThemeConfigContext.Provider>
+  )
 
   return Page
 }

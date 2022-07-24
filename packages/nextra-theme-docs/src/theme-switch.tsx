@@ -20,9 +20,9 @@ function ThemeSwitch({ lite = true }) {
         name: (
           <div className="flex items-center gap-2 capitalize">
             {mounted && renderedTheme === 'dark' ? (
-              <MoonIcon className="[&>path]:fill-current h-4 w-4" />
+              <MoonIcon className="h-4 w-4 [&>path]:fill-current" />
             ) : (
-              <SunIcon className="[&>path]:fill-current h-4 w-4" />
+              <SunIcon className="h-4 w-4 [&>path]:fill-current" />
             )}
             {lite ? '' : <span>{mounted ? theme : 'light'}</span>}
           </div>

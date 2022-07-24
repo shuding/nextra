@@ -71,7 +71,8 @@
     "types": "tsup --dts-only",
     "test": "vitest run",
     "prepublishOnly": "pnpm build",
-    "clean": "rimraf ./dist ./style.css"
+    "clean": "rimraf ./dist ./style.css",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@mdx-js/mdx": "^2.1.2",
@@ -87,6 +88,12 @@
   },
   "peerDependencies": {
     "react": ">=16.13.1"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "none",
+    "arrowParens": "avoid"
   },
   "devDependencies": {
     "@types/graceful-fs": "^4.1.5",

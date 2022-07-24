@@ -37,15 +37,15 @@ const createHeaderLink =
   ({ children, id, ...props }: ComponentProps<'h2'>): ReactElement => {
     return (
       <Tag {...props}>
-        <span className="-mt-8 absolute" id={id} />
+        <span className="absolute -mt-8" id={id} />
         <a
           href={`#${id}`}
           className="
           !no-underline
-          after:content-['#']
           after:ml-2
           after:text-gray-500
           after:opacity-0
+          after:content-['#']
           hover:after:opacity-100
         "
         >

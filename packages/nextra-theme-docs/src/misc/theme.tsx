@@ -133,7 +133,7 @@ const HeaderLink = ({
       {anchor}
       <a
         href={'#' + slug}
-        className="anchor text-current no-underline no-outline"
+        className="anchor no-outline text-current no-underline"
       >
         {children}
         <span className="anchor-icon" aria-hidden>

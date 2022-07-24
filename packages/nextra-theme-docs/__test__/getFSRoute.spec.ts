@@ -16,10 +16,16 @@ describe('getFSRoute', () => {
     const withQuery = getFSRoute('/getting-started?query=1')
     expect(withQuery).toEqual('/getting-started')
 
-    const withQueryLocale = getFSRoute('/getting-started.en-US?query=1', 'en-US')
+    const withQueryLocale = getFSRoute(
+      '/getting-started.en-US?query=1',
+      'en-US'
+    )
     expect(withQueryLocale).toEqual('/getting-started')
 
-    const withIndexLocaleQuery = getFSRoute('/getting-started/index.en-US?query=1', 'en-US')
+    const withIndexLocaleQuery = getFSRoute(
+      '/getting-started/index.en-US?query=1',
+      'en-US'
+    )
     expect(withIndexLocaleQuery).toEqual('/getting-started')
   })
 })

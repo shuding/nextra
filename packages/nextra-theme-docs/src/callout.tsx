@@ -23,16 +23,16 @@ const Callout: React.FC<CalloutProps> = ({
   emoji = '💡'
 }) => {
   return (
-    <div className={`${themes[type]} flex rounded-lg nextra-callout mt-6`}>
+    <div className={`${themes[type]} nextra-callout mt-6 flex rounded-lg`}>
       <div
-        className="pl-3 pr-2 py-2 select-none text-xl"
+        className="select-none py-2 pl-3 pr-2 text-xl"
         style={{
           fontFamily: '"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
         }}
       >
         {emoji}
       </div>
-      <div className="pr-4 py-2">{children}</div>
+      <div className="py-2 pr-4">{children}</div>
     </div>
   )
 }
