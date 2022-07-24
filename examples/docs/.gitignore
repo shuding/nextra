@@ -1,1 +1,4 @@
 .vercel
+
+src/pages/*
+!src/pages/*.js
