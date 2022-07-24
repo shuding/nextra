@@ -46,7 +46,7 @@ const Search = ({ directories = [] }: SearchProps) => {
   const [search, setSearch] = useState('')
   const [active, setActive] = useState<number | null>(null)
   const input = useRef<HTMLInputElement | null>(null)
-  const { locale = 'en-US'} = useRouter()
+  const { locale = 'en-US' } = router
   const results = useMemo<{ route: string; title: string }[]>(() => {
     if (!search) return []
 
