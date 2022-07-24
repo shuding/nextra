@@ -88,8 +88,8 @@ exports[`Page Process > pageMap en-US 1`] = `
               "children": [
                 {
                   "locale": "en-US",
-                  "name": "cache",
-                  "route": "/docs/advanced/more/cache",
+                  "name": "loooooooooooooooooooong-title",
+                  "route": "/docs/advanced/more/loooooooooooooooooooong-title",
                 },
               ],
               "name": "more",
@@ -429,8 +429,8 @@ exports[`Page Process > pageMap zh-CN 1`] = `
               "children": [
                 {
                   "locale": "en-US",
-                  "name": "cache",
-                  "route": "/docs/advanced/more/cache",
+                  "name": "loooooooooooooooooooong-title",
+                  "route": "/docs/advanced/more/loooooooooooooooooooong-title",
                 },
               ],
               "name": "more",
