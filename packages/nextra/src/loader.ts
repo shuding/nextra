@@ -18,6 +18,8 @@ const indexContentEmitted = new Set<string>()
 
 const pagesDir = path.resolve(findPagesDir())
 
+let wasShallowWarningPrinted = false
+
 const [repository, gitRoot] = (function () {
   try {
     const repo = Repository.discover(process.cwd())
@@ -143,7 +145,7 @@ async function loader(
 
   let timestamp: number | undefined
   if (repository && gitRoot) {
-    if (repository.isShallow()) {
+    if (repository.isShallow() && !wasShallowWarningPrinted) {
       if (process.env.VERCEL) {
         console.warn(
           '[nextra] The repository is shallow cloned, so the latest modified time will not be presented. Set the VERCEL_DEEP_CLONE=true environment variable to enable deep cloning.'
@@ -157,6 +159,7 @@ async function loader(
           '[nextra] The repository is shallow cloned, so the latest modified time will not be presented.'
         )
       }
+      wasShallowWarningPrinted = true
     }
     try {
       timestamp = await repository.getFileLatestModifiedDateAsync(
