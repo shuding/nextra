@@ -14,7 +14,8 @@
     "version": "changeset version",
     "release": "changeset publish",
     "test": "turbo run test",
-    "clean": "turbo run clean"
+    "clean": "turbo run clean",
+    "format": "prettier --write ./**/*.{ts,tsx}"
   },
   "devDependencies": {
     "@changesets/cli": "^2.23.2",
