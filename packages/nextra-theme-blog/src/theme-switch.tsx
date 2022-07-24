@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useTheme } from 'next-themes'
-import { MoonIcon, SunIcon } from '../../nextra-theme-docs/src/icons'
+import { MoonIcon, SunIcon } from 'nextra/icons'
 
 export default function ThemeSwitch() {
   const { theme, setTheme, resolvedTheme } = useTheme()

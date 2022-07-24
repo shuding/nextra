@@ -4,11 +4,12 @@ import { useTheme } from 'next-themes'
 
 import renderComponent from './utils/render-component'
 import { useConfig } from './config'
+import { Meta } from './types'
 
 interface HeadProps {
   title: string
-  locale?: string
-  meta: Record<string, any>
+  locale: string
+  meta: Meta
 }
 
 export default function Head({ title, locale, meta }: HeadProps) {

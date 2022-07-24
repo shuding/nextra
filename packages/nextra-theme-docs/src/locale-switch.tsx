@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 
 import Menu from './select'
 import { DocsThemeConfig } from './types'
-import { GlobeIcon } from './icons'
+import { GlobeIcon } from 'nextra/icons'
 
 interface LocaleSwitchProps {
   options: NonNullable<DocsThemeConfig['i18n']>

@@ -29,7 +29,7 @@ function useDirectoryInfo(pageMap: PageMapItem[]) {
     const fsPath = getFSRoute(asPath, locale)
     return normalizePages({
       list: pageMap,
-      locale,
+      locale: locale ? locale : 'en-US',
       defaultLocale,
       route: fsPath
     })
@@ -140,7 +140,7 @@ const Content: React.FC<LayoutProps> = ({
   timestamp,
   children
 }) => {
-  const { route, locale } = useRouter()
+  const { route, locale = 'en-US' } = useRouter()
   const config = useConfig()
 
   const {
@@ -273,5 +273,5 @@ const createLayout = (opts: DocsLayoutProps, config: DocsThemeConfig) => {
 
   return Page
 }
-
+export * from './types'
 export default createLayout

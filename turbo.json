@@ -3,20 +3,36 @@
   "npmClient": "pnpm",
   "pipeline": {
     "build": {
-      "dependsOn": ["types", "^build"],
+      "dependsOn": [
+        "^build"
+      ],
       "outputs": [
+        "dist/**/*.mjs",
         "dist/**/*.js",
         "dist/**/*.css",
         ".next/**",
-        "style.css",
         "index.js",
         "ssg.js",
         "loader.js"
       ]
     },
+    "build:tailwind": {
+      "dependsOn": [],
+      "outputs": [
+        "style.css"
+      ]
+    },
     "test": {},
     "types": {
-      "outputs": ["dist/**/*.d.ts"]
+      "dependsOn": [
+        "^types"
+      ],
+      "outputs": [
+        "dist/**/*.d.ts"
+      ]
+    },
+    "clean": {
+      "cache": false
     },
     "dev": {
       "cache": false

@@ -1,4 +1,4 @@
-import { NextraConfig, PageMapItem } from './types'
+import { NextraConfig, PageMapItem, NextraPluginCache } from './types'
 import fs from 'graceful-fs'
 import { promisify } from 'util'
 import { parseFileName, parseJsonFile } from './utils'
@@ -75,7 +75,7 @@ export async function collectFiles(
   }
 }
 
-export class PageMapCache {
+class PageMapCache implements NextraPluginCache {
   public cache: { items: PageMapItem[]; fileMap: Record<string, any> } | null
 
   constructor() {

@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import cn from 'classnames'
 
-import { ArrowRightIcon } from './icons'
+import { ArrowRightIcon } from 'nextra/icons'
 
 import { Item } from './utils/normalize-pages'
 

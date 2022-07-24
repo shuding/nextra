@@ -27,7 +27,10 @@ jobs:
 
       - name: Install Dependencies
         run: pnpm i
-
+      
+      - name: Clean
+        run: pnpm clean
+      
       - name: Build
         run: pnpm build
 

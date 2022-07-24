@@ -3,7 +3,7 @@ import cn from 'classnames'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import { ArrowRightIcon } from './icons'
+import { ArrowRightIcon } from 'nextra/icons'
 import renderComponent from './utils/render-component'
 import { useConfig } from './config'
 import { Item } from './utils/normalize-pages'
