@@ -1,6 +1,6 @@
 {
   "name": "nextra",
-  "version": "2.0.0-beta.9",
+  "version": "2.0.0-beta.10",
   "description": "Next.js and MDX based site generator.",
   "files": [
     "dist/*",
@@ -11,7 +11,9 @@
   "main": "./dist/index.js",
   "typesVersions": {
     "*": {
-      ".": ["./dist/types.d.ts"],
+      ".": [
+        "./dist/types.d.ts"
+      ],
       "compile": [
         "./dist/compile.d.ts"
       ],

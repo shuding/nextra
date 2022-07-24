@@ -1,5 +1,14 @@
 # nextra-theme-docs
 
+## 2.0.0-beta.10
+
+### Patch Changes
+
+- af72f85: chore(nextra-theme-docs): provide type for `DocsThemeConfig.nextThemes` instead of `object`
+- 97e6141: fix(nextra/docs): fallback search to `en-US` instead `default`
+- 699d131: feat(nextra/docs/blog): allow import `.md`/`.mdx` as well
+- 03e90d8: refresh build system with tsup and fix nextra type
+
 ## 2.0.0-beta.9
 
 ### Patch Changes

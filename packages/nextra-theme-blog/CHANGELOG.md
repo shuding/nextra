@@ -1,5 +1,13 @@
 # nextra-theme-blog
 
+## 2.0.0-beta.10
+
+### Patch Changes
+
+- 3ef42cb: fix(nextra-theme-blog): move css to `className`s, fix duplicate id issue
+- 699d131: feat(nextra/docs/blog): allow import `.md`/`.mdx` as well
+- 03e90d8: refresh build system with tsup and fix nextra type
+
 ## 2.0.0-beta.9
 
 ### Patch Changes
