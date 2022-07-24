@@ -1,5 +1,5 @@
 import { NextraPlugin, pageMapCache } from './plugin'
-import { MARKDOWN_EXTENSION_REGEX } from './constants'
+import { DEFAULT_LOCALE, MARKDOWN_EXTENSION_REGEX } from './constants'
 
 const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
 const MARKDOWN_EXTENSIONS = ['md', 'mdx']
@@ -24,12 +24,12 @@ const nextra = (...args) =>
     } else if (!i18n?.defaultLocale) {
       // If `i18n.locales` and `i18n.defaultLocale` were not specified,
       // client will receive error - Text content does not match server-rendered HTML.
-      // Due to `const { locales } = useRouter()` where `locales` will be `undefined`
+      // Due to `const { locale } = useRouter()` where `locale` will be `undefined`
       // To fix it we need to explicitly specify `i18n.locales` and `i18n.defaultLocale`
       nextConfig.i18n = {
         ...i18n,
-        locales: ['en-US'],
-        defaultLocale: 'en-US'
+        locales: [DEFAULT_LOCALE],
+        defaultLocale: DEFAULT_LOCALE
       }
     }
 
