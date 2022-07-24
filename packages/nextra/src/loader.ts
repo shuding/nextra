@@ -11,7 +11,11 @@ import { parseFileName } from './utils'
 import { compileMdx } from './compile'
 import { getPageMap, findPagesDir } from './page-map'
 import { collectFiles, collectMdx } from './plugin'
-import { MARKDOWN_EXTENSION_REGEX, IS_PRODUCTION, DEFAULT_LOCALE } from './constants'
+import {
+  MARKDOWN_EXTENSION_REGEX,
+  IS_PRODUCTION,
+  DEFAULT_LOCALE
+} from './constants'
 
 // TODO: create this as a webpack plugin.
 const indexContentEmitted = new Set<string>()

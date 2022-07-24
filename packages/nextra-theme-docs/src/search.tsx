@@ -46,7 +46,7 @@ const Search = ({ directories = [] }: SearchProps) => {
   const [search, setSearch] = useState('')
   const [active, setActive] = useState<number | null>(null)
   const input = useRef<HTMLInputElement | null>(null)
-
+  const { locale = 'en-US'} = useRouter()
   const results = useMemo<{ route: string; title: string }[]>(() => {
     if (!search) return []
 
@@ -124,9 +124,9 @@ const Search = ({ directories = [] }: SearchProps) => {
   const renderList = show && results.length > 0
 
   return (
-    <div className="relative w-full nextra-search md:w-64">
+    <div className="nextra-search relative w-full md:w-64">
       {renderList && (
-        <div className="z-10 search-overlay" onClick={() => setShow(false)} />
+        <div className="search-overlay z-10" onClick={() => setShow(false)} />
       )}
 
       <div className="relative flex items-center">
@@ -135,12 +135,12 @@ const Search = ({ directories = [] }: SearchProps) => {
             setSearch(e.target.value)
             setShow(true)
           }}
-          className="block w-full px-3 py-2 leading-tight bg-black bg-opacity-[.03] rounded-lg appearance-none focus:outline-none focus:ring hover:bg-opacity-5 transition-colors"
+          className="block w-full appearance-none rounded-lg bg-black bg-opacity-[.03] px-3 py-2 leading-tight transition-colors hover:bg-opacity-5 focus:outline-none focus:ring"
           type="search"
           placeholder={renderComponent(
             config.searchPlaceholder,
             {
-              locale: router.locale
+              locale
             },
             true
           )}
@@ -151,15 +151,15 @@ const Search = ({ directories = [] }: SearchProps) => {
           spellCheck={false}
         />
         {show ? null : (
-          <div className="hidden sm:flex absolute inset-y-0 right-0 py-1.5 pr-1.5 select-none pointer-events-none">
-            <kbd className="inline-flex items-center px-1.5 font-mono text-sm font-medium bg-white text-gray-400 dark:text-gray-800 dark:border-gray-400 border rounded">
+          <div className="pointer-events-none absolute inset-y-0 right-0 hidden select-none py-1.5 pr-1.5 sm:flex">
+            <kbd className="inline-flex items-center rounded border bg-white px-1.5 font-mono text-sm font-medium text-gray-400 dark:border-gray-400 dark:text-gray-800">
               /
             </kbd>
           </div>
         )}
       </div>
       {renderList && (
-        <ul className="absolute left-0 z-20 w-full p-0 py-2.5 m-0 mt-1 list-none border divide-y rounded shadow-md md:right-0 top-100 md:w-auto">
+        <ul className="top-100 absolute left-0 z-20 m-0 mt-1 w-full list-none divide-y rounded border p-0 py-2.5 shadow-md md:right-0 md:w-auto">
           {results.map((res, i) => {
             return (
               <Item

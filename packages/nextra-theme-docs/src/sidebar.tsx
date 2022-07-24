@@ -81,8 +81,8 @@ function FolderImpl({ item, anchors }: FolderProps) {
         <ArrowRightIcon
           height="1em"
           className={cn(
-            'ml-2 p-[2px] rounded-sm min-w-[18px] h-[18px] dark:hover:bg-gray-100 hover:bg-gray-800 hover:bg-opacity-5 dark:hover:bg-opacity-5',
-            '[&>path]:transition-transform [&>path]:origin-center',
+            'ml-2 h-[18px] min-w-[18px] rounded-sm p-[2px] hover:bg-gray-800 hover:bg-opacity-5 dark:hover:bg-gray-100 dark:hover:bg-opacity-5',
+            '[&>path]:origin-center [&>path]:transition-transform',
             open && '[&>path]:rotate-90'
           )}
         />
@@ -124,7 +124,7 @@ function Separator({ title, topLevel }: SeparatorProps) {
       )}
     >
       {hasTitle ? (
-        <div className="text-sm mx-2 py-1.5 font-semibold no-underline text-gray-900 dark:text-gray-100">
+        <div className="mx-2 py-1.5 text-sm font-semibold text-gray-900 no-underline dark:text-gray-100">
           {sidebarSubtitle
             ? renderComponent(sidebarSubtitle, { title })
             : title}
@@ -309,18 +309,18 @@ export default function Sidebar({
   return (
     <>
       {includePlaceholder && asPopover ? (
-        <div className="hidden xl:block w-64 h-0 flex-shrink-0" />
+        <div className="hidden h-0 w-64 flex-shrink-0 xl:block" />
       ) : null}
       <aside
         className={cn(
-          'nextra-sidebar-container nextra-scrollbar fixed flex-shrink-0 w-full md:w-64 md:sticky z-[15] top-16 self-start overflow-y-auto h-[calc(100vh-4rem)]',
+          'nextra-sidebar-container nextra-scrollbar fixed top-16 z-[15] h-[calc(100vh-4rem)] w-full flex-shrink-0 self-start overflow-y-auto md:sticky md:w-64',
           asPopover ? 'md:hidden' : 'md:block',
           hasMenu ? 'with-menu' : '',
           { open: menu }
         )}
       >
-        <div className="nextra-sidebar select-none w-full h-full md:h-auto pl-[calc(env(safe-area-inset-left)-1.5rem)]">
-          <div className="p-4 min-h-[calc(100vh-4rem-61px)]">
+        <div className="nextra-sidebar h-full w-full select-none pl-[calc(env(safe-area-inset-left)-1.5rem)] md:h-auto">
+          <div className="min-h-[calc(100vh-4rem-61px)] p-4">
             <div className="nextra-sidebar-search mb-4 block md:hidden">
               {config.customSearch ||
                 (config.search ? (
@@ -353,10 +353,10 @@ export default function Sidebar({
           </div>
 
           {!hasMenu ? null : (
-            <div className="nextra-sidebar-menu mx-4 border-t dark:border-neutral-800 shadow-[0_-12px_16px_white] dark:shadow-[0_-12px_16px_#111]">
-              <div className="bg-white dark:bg-dark py-4 flex gap-1 pb-4">
+            <div className="nextra-sidebar-menu mx-4 border-t shadow-[0_-12px_16px_white] dark:border-neutral-800 dark:shadow-[0_-12px_16px_#111]">
+              <div className="flex gap-1 bg-white py-4 pb-4 dark:bg-dark">
                 {config.i18n ? (
-                  <div className="flex-1 relative">
+                  <div className="relative flex-1">
                     <LocaleSwitch options={config.i18n} />
                   </div>
                 ) : null}

@@ -115,7 +115,7 @@ const BlogLayout = ({
           </Link>
         </h3>
         {description && (
-          <p className="text-gray-400 mb-2">
+          <p className="mb-2 text-gray-400">
             {description}
             {config.readMore && (
               <Link href={post.route} passHref>
@@ -153,28 +153,28 @@ const BlogLayout = ({
     />
   )
   return (
-      <article className="container prose prose-sm md:prose dark:prose-dark">
-        <Head>
-          <title>{title}</title>
-          {config.head?.({ title, meta: opts.meta })}
-        </Head>
-        <HeadingContext.Provider value={ref}>
-          {pageTitle && <h1>{pageTitle}</h1>}
-          {type === 'post' ? (
-            // @ts-expect-error
-            <Meta {...opts.meta} back={back} config={config} />
-          ) : (
-            <Nav navPages={navPages} config={config} />
-          )}
-          <MDXTheme>
-            {contentNodes}
-            {type === 'post' && config.postFooter}
-            {type === 'post' && comments}
-          </MDXTheme>
-          {postList}
-          {config.footer}
-        </HeadingContext.Provider>
-      </article>
+    <article className="container prose prose-sm dark:prose-dark md:prose">
+      <Head>
+        <title>{title}</title>
+        {config.head?.({ title, meta: opts.meta })}
+      </Head>
+      <HeadingContext.Provider value={ref}>
+        {pageTitle && <h1>{pageTitle}</h1>}
+        {type === 'post' ? (
+          // @ts-expect-error
+          <Meta {...opts.meta} back={back} config={config} />
+        ) : (
+          <Nav navPages={navPages} config={config} />
+        )}
+        <MDXTheme>
+          {contentNodes}
+          {type === 'post' && config.postFooter}
+          {type === 'post' && comments}
+        </MDXTheme>
+        {postList}
+        {config.footer}
+      </HeadingContext.Provider>
+    </article>
   )
 }
 
@@ -183,7 +183,7 @@ const createLayout = (opts: PageOpt, _config: NextraBlogTheme) => {
     {
       readMore: 'Read More →',
       footer: (
-        <small className="block mt-32">CC BY-NC 4.0 2022 © Shu Ding.</small>
+        <small className="mt-32 block">CC BY-NC 4.0 2022 © Shu Ding.</small>
       ),
       titleSuffix: null,
       postFooter: null

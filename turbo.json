@@ -31,6 +31,9 @@
         "dist/**/*.d.ts"
       ]
     },
+    "format": {
+      "cache": false
+    },
     "clean": {
       "cache": false
     },

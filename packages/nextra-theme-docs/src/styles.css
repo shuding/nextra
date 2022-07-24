@@ -7,7 +7,7 @@ html {
   -webkit-tap-highlight-color: transparent;
 }
 body {
-  @apply bg-white w-full;
+  @apply w-full bg-white;
 }
 .dark body {
   @apply bg-dark text-gray-100;
@@ -43,7 +43,7 @@ blockquote:not(:first-child),
     }
     a:focus-visible,
     summary:focus-visible {
-      @apply ring ring-primary-200 select-none outline-none;
+      @apply select-none outline-none ring ring-primary-200;
     }
 
     .nextra-nav-container-blur {
@@ -75,7 +75,7 @@ blockquote:not(:first-child),
       @apply text-sm;
     }
     .nextra-menu-icon {
-      @apply select-none outline-none rounded;
+      @apply select-none rounded outline-none;
       &:active {
         @apply bg-gray-400 bg-opacity-20;
       }
@@ -146,8 +146,8 @@ blockquote:not(:first-child),
       }
       li.active > a,
       li.active > a:hover {
-        @apply font-bold text-primary-500 bg-primary-50;
-        @apply dark:text-primary-500 dark:bg-primary-500 dark:bg-opacity-10;
+        @apply bg-primary-50 font-bold text-primary-500;
+        @apply dark:bg-primary-500 dark:bg-opacity-10 dark:text-primary-500;
       }
       @media (prefers-contrast: more) {
         li.active > a {
@@ -157,23 +157,23 @@ blockquote:not(:first-child),
       button,
       summary,
       li a {
-        @apply block w-full text-left text-sm no-underline text-gray-500 mt-1 px-2 py-1.5 rounded select-none outline-none transition-[background-color];
+        @apply mt-1 block w-full select-none rounded px-2 py-1.5 text-left text-sm text-gray-500 no-underline outline-none transition-[background-color];
         @apply dark:text-neutral-500;
         -webkit-tap-highlight-color: transparent;
         -webkit-touch-callout: none;
         &:hover {
-          @apply text-gray-900 bg-gray-100;
-          @apply dark:text-gray-50 dark:bg-primary-100 dark:bg-opacity-5;
+          @apply bg-gray-100 text-gray-900;
+          @apply dark:bg-primary-100 dark:bg-opacity-5 dark:text-gray-50;
         }
         @media (prefers-contrast: more) {
           & {
-            @apply text-gray-900 border border-transparent;
+            @apply border border-transparent text-gray-900;
             &:hover {
               @apply border-gray-900;
             }
           }
           .dark & {
-            @apply text-gray-50 border border-transparent;
+            @apply border border-transparent text-gray-50;
             &:hover {
               @apply border-gray-50;
             }
@@ -205,7 +205,7 @@ blockquote:not(:first-child),
       @apply right-0;
     }
     .nextra-sidebar-search {
-      @apply sticky pt-4 bg-white dark:bg-dark top-0 -mt-4;
+      @apply sticky top-0 -mt-4 bg-white pt-4 dark:bg-dark;
       box-shadow: 0 2px 14px 6px white;
       z-index: 1;
       .dark & {
@@ -267,7 +267,7 @@ blockquote:not(:first-child),
     }
   }
   .nextra-sidebar-container {
-    @apply top-0 pt-16 bg-white dark:bg-dark overscroll-contain;
+    @apply top-0 overscroll-contain bg-white pt-16 dark:bg-dark;
     height: 100vh;
     height: -webkit-fill-available;
 
@@ -341,7 +341,7 @@ blockquote:not(:first-child),
     }
   }
   article pre {
-    @apply contrast-150 border border-opacity-20 border-primary-900 dark:border-primary-100 dark:border-opacity-40;
+    @apply border border-primary-900 border-opacity-20 contrast-150 dark:border-primary-100 dark:border-opacity-40;
   }
   .nextra-callout {
     @apply border-current dark:!border-current;
@@ -354,21 +354,21 @@ blockquote:not(:first-child),
       @apply !text-gray-600 dark:!text-gray-400;
     }
     kbd {
-      @apply text-gray-900 dark:text-gray-100 border-gray-900 dark:border-gray-100;
+      @apply border-gray-900 text-gray-900 dark:border-gray-100 dark:text-gray-100;
     }
     ul {
-      @apply border-gray-900 border dark:border-gray-50;
+      @apply border border-gray-900 dark:border-gray-50;
       div.nextra-search-section {
         @apply border-gray-600 text-gray-900 dark:border-gray-50 dark:text-gray-50;
       }
       li {
-        @apply border-transparent border;
+        @apply border border-transparent;
         .excerpt {
           @apply dark:text-gray-50;
         }
       }
       li.active {
-        @apply border-primary-500 border;
+        @apply border border-primary-500;
       }
     }
   }
@@ -382,7 +382,7 @@ blockquote:not(:first-child),
     }
   }
   .nextra-toc ul li a {
-    @apply underline text-gray-900 dark:text-gray-50;
+    @apply text-gray-900 underline dark:text-gray-50;
     &[aria-selected='true'] {
       @apply text-primary-500;
     }
@@ -402,29 +402,29 @@ blockquote:not(:first-child),
 article {
   min-height: calc(100vh - 64px);
   h1 {
-    @apply text-4xl font-bold tracking-tight mt-2;
+    @apply mt-2 text-4xl font-bold tracking-tight;
   }
   h2 {
-    @apply text-3xl font-semibold tracking-tight mt-10;
-    @apply pb-1 border-b;
+    @apply mt-10 text-3xl font-semibold tracking-tight;
+    @apply border-b pb-1;
     .dark & {
       @apply border-primary-100 border-opacity-10;
     }
   }
   h3 {
-    @apply text-2xl font-semibold tracking-tight mt-8;
+    @apply mt-8 text-2xl font-semibold tracking-tight;
   }
   h4 {
-    @apply text-xl font-semibold tracking-tight mt-8;
+    @apply mt-8 text-xl font-semibold tracking-tight;
   }
   h5 {
-    @apply text-lg font-semibold tracking-tight mt-8;
+    @apply mt-8 text-lg font-semibold tracking-tight;
   }
   h6 {
-    @apply text-base font-semibold tracking-tight mt-8;
+    @apply mt-8 text-base font-semibold tracking-tight;
   }
   ul {
-    @apply list-disc ml-6 mt-6;
+    @apply ml-6 mt-6 list-disc;
     &:first-child {
       @apply mt-0;
     }
@@ -433,76 +433,76 @@ article {
     @apply my-2;
   }
   ol {
-    @apply list-decimal ml-6 mt-6;
+    @apply ml-6 mt-6 list-decimal;
   }
   blockquote {
-    @apply italic pl-6 border-l-2 border-gray-300 text-gray-700;
+    @apply border-l-2 border-gray-300 pl-6 italic text-gray-700;
     @apply dark:border-gray-700 dark:text-gray-400;
   }
   h2 a {
     @apply no-underline;
   }
   code {
-    @apply bg-black bg-opacity-5 border border-black border-opacity-5 rounded-md break-words;
+    @apply break-words rounded-md border border-black border-opacity-5 bg-black bg-opacity-5;
     font-size: 0.9em;
     padding: 2px 0.25em;
     box-decoration-break: clone;
     font-feature-settings: 'rlig' 1, 'calt' 1, 'ss01' 1;
     .dark & {
-      @apply bg-white bg-opacity-10 border-white border-opacity-10;
+      @apply border-white border-opacity-10 bg-white bg-opacity-10;
     }
   }
 
   pre {
     /* content-visibility: auto; */
     contain: paint;
-    @apply py-4 bg-primary-750 bg-opacity-5 rounded-xl mt-6 mb-4 overflow-x-auto font-medium subpixel-antialiased;
+    @apply mt-6 mb-4 overflow-x-auto rounded-xl bg-primary-750 bg-opacity-5 py-4 font-medium subpixel-antialiased;
     @apply dark:bg-primary-300 dark:bg-opacity-10;
 
     code[data-line-numbers] {
       counter-reset: line;
-  
+
       & > .line::before {
         counter-increment: line;
         content: counter(line);
-        @apply inline-block w-4 mr-8 text-right text-slate-500;
+        @apply mr-8 inline-block w-4 text-right text-slate-500;
       }
     }
 
     code {
-      @apply p-0 text-sm text-current bg-transparent dark:bg-transparent rounded-none border-none grid min-w-full leading-5;
+      @apply grid min-w-full rounded-none border-none bg-transparent p-0 text-sm leading-5 text-current dark:bg-transparent;
       .line {
-        @apply px-4 border-l-2 border-transparent;
+        @apply border-l-2 border-transparent px-4;
       }
       /* code blocks without languages don't have children that have px-4 */
       &:not([data-language]) {
         @apply px-4;
       }
       .line.highlighted {
-        @apply bg-primary-600/10 border-primary-600/60;
+        @apply border-primary-600/60 bg-primary-600/10;
         span {
           @apply relative;
         }
       }
       .line .highlighted {
         @apply bg-primary-800 bg-opacity-10 dark:bg-primary-300 dark:bg-opacity-10;
-        @apply shadow-[0_0_0_3px_rgba(0,0,0,0.3)] shadow-primary-800/10 dark:shadow-primary-300/10 rounded-sm;
+        @apply rounded-sm shadow-[0_0_0_3px_rgba(0,0,0,0.3)] shadow-primary-800/10 dark:shadow-primary-300/10;
       }
     }
   }
   a {
-    @apply focus:outline-none focus-visible:ring ring-primary-500 ring-opacity-30;
+    @apply ring-primary-500 ring-opacity-30 focus:outline-none focus-visible:ring;
   }
   a code {
     @apply text-current no-underline;
   }
   [data-nextra-code][data-filename] {
-    @apply block relative;
+    @apply relative block;
 
     &:before {
       content: attr(data-filename);
       position: absolute;
-      @apply absolute truncate top-0 z-[1] text-xs py-2 px-4 w-full text-primary-1000 bg-primary-700 bg-opacity-5 dark:bg-primary-300 dark:bg-opacity-10 dark:text-gray-200 rounded-t-xl;
+      @apply absolute top-0 z-[1] w-full truncate rounded-t-xl bg-primary-700 bg-opacity-5 py-2 px-4 text-xs text-primary-1000 dark:bg-primary-300 dark:bg-opacity-10 dark:text-gray-200;
     }
     pre {
       @apply pt-12;
@@ -515,7 +515,7 @@ article {
     }
   }
   details {
-    @apply my-4 p-2 border border-gray-200 rounded shadow-sm bg-white;
+    @apply my-4 rounded border border-gray-200 bg-white p-2 shadow-sm;
     .dark & {
       @apply border-neutral-800 bg-neutral-900;
     }
@@ -530,7 +530,7 @@ article {
     }
   }
   summary {
-    @apply p-1 rounded cursor-pointer transition-colors outline-none;
+    @apply cursor-pointer rounded p-1 outline-none transition-colors;
     &:hover {
       @apply bg-gray-100;
     }
@@ -550,7 +550,7 @@ article {
       width: 1.2em;
       margin-right: 0.125em;
       vertical-align: -4px;
-      @apply transition-transform inline-block;
+      @apply inline-block transition-transform;
     }
     .dark &::before {
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='white'%3E%3Cpath fill-rule='evenodd' d='M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z' clip-rule='evenodd' /%3E%3C/svg%3E");
@@ -574,18 +574,18 @@ article {
     @apply opacity-100;
   }
   .subheading-anchor:target + a .anchor-icon {
-    @apply opacity-100 text-gray-400 dark:text-neutral-500;
+    @apply text-gray-400 opacity-100 dark:text-neutral-500;
   }
 
   .anchor-icon {
-    @apply pl-2 text-gray-300 dark:text-neutral-700 select-none transition-opacity absolute opacity-0;
+    @apply absolute select-none pl-2 text-gray-300 opacity-0 transition-opacity dark:text-neutral-700;
   }
 
   &.nextra-body-typesetting-article {
     font-size: 17px;
     font-feature-settings: 'rlig' 1, 'calt' 1;
     h1 {
-      @apply text-center mt-6 mb-4;
+      @apply mt-6 mb-4 text-center;
       font-size: 2.5rem;
     }
     h2 {
@@ -629,8 +629,8 @@ article {
 /* Search */
 .nextra-search {
   input {
-    @apply text-sm text-gray-900 bg-black bg-opacity-[.03];
-    @apply dark:text-gray-300 dark:bg-gray-50 dark:bg-opacity-10;
+    @apply bg-black bg-opacity-[.03] text-sm text-gray-900;
+    @apply dark:bg-gray-50 dark:bg-opacity-10 dark:text-gray-300;
     @apply dark:border-gray-800;
   }
   input::placeholder {
@@ -638,7 +638,7 @@ article {
     @apply dark:text-gray-500;
   }
   &.nextra-flexsearch ul {
-    @apply overflow-auto left-0 md:-left-80 md:right-0;
+    @apply left-0 overflow-auto md:-left-80 md:right-0;
     min-height: 100px;
     max-height: min(calc(100vh - 5rem - env(safe-area-inset-bottom)), 400px);
     max-width: min(calc(100vw - 2rem), calc(100% + 20rem));
@@ -653,14 +653,14 @@ article {
     /* Using bg-white as background-color when the browser didn't support backdrop-filter */
     @apply bg-white text-gray-100 ring-1 ring-black ring-opacity-5;
     li {
-      @apply text-gray-800 break-words mx-2.5 px-2.5 py-2 rounded-md;
+      @apply mx-2.5 break-words rounded-md px-2.5 py-2 text-gray-800;
       .highlight {
-        @apply underline decoration-primary-400 text-primary-500;
+        @apply text-primary-500 underline decoration-primary-400;
       }
     }
     li.active,
     a:focus li {
-      @apply text-primary-500 bg-primary-400 bg-opacity-[.1];
+      @apply bg-primary-400 bg-opacity-[.1] text-primary-500;
     }
     .nextra-search-section {
       @apply border-b border-black border-opacity-10;
@@ -676,12 +676,12 @@ article {
       li {
         @apply text-gray-300;
         .highlight {
-          @apply underline decoration-primary-400 text-primary-500;
+          @apply text-primary-500 underline decoration-primary-400;
         }
       }
       li.active,
       a:focus li {
-        @apply text-primary-500 bg-primary-500 bg-opacity-[.1];
+        @apply bg-primary-500 bg-opacity-[.1] text-primary-500;
       }
     }
   }
@@ -756,13 +756,13 @@ input[type='search']::-webkit-search-results-decoration {
 
 /* Table */
 table {
-  @apply p-0 mt-2;
+  @apply mt-2 p-0;
   &:first-child {
     @apply mt-0;
   }
 }
 table tr {
-  @apply m-0 p-0 border-t border-gray-300;
+  @apply m-0 border-t border-gray-300 p-0;
   @apply dark:border-gray-600;
 }
 table tr:nth-child(2n) {
@@ -783,7 +783,7 @@ table tr td[align='right'] {
 table tr th,
 table tr td {
   @apply text-left;
-  @apply m-0 px-4 py-2 border border-gray-300;
+  @apply m-0 border border-gray-300 px-4 py-2;
   @apply dark:border-gray-600;
 }
 .table-container {
@@ -791,7 +791,7 @@ table tr td {
 }
 
 .contains-task-list {
-  @apply list-none ml-0;
+  @apply ml-0 list-none;
 }
 
 .contains-task-list input[type='checkbox'] {
@@ -809,7 +809,7 @@ table tr td {
     @apply text-right;
   }
   article blockquote {
-    @apply pr-6 border-r-2 pl-0 border-l-0;
+    @apply border-r-2 border-l-0 pr-6 pl-0;
   }
 }
 .nextra-container:not(.rtl):not(.page) article {

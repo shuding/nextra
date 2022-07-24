@@ -1,7 +1,7 @@
 import {
   createContext,
   useContext,
-  ComponentClass, 
+  ComponentClass,
   FunctionComponent,
   createElement
 } from 'react'
