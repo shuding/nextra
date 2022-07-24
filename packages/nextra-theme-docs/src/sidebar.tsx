@@ -120,7 +120,8 @@ function Separator({ title, topLevel }: SeparatorProps) {
     <li
       className={cn(
         topLevel ? 'first:mt-1' : 'first:mt-2',
-        hasTitle ? 'mt-5 mb-2' : 'my-4'
+        hasTitle ? 'mt-5 mb-2' : 'my-4',
+        'break-words'
       )}
     >
       {hasTitle ? (
@@ -167,12 +168,13 @@ function File({ item, anchors, topLevel }: FileProps) {
       })
 
       return (
-        <li className={active ? 'active' : ''}>
+        <li className={cn(active ? 'active' : '', 'break-words')}>
           <Link href={(item as PageItem).href || item.route}>
             <a
               {...((item as PageItem).newWindow
                 ? { target: '_blank', rel: 'noopener noreferrer' }
                 : {})}
+              className="break-words"
               onClick={() => {
                 setMenu(false)
               }}
@@ -194,10 +196,12 @@ function File({ item, anchors, topLevel }: FileProps) {
                       setMenu(false)
                     }}
                   >
-                    <span className="flex text-sm">
+                    <span className="flex text-sm w-full">
                       <span className="opacity-25">#</span>
                       <span className="mr-2"></span>
-                      <span className="inline-block">{text}</span>
+                      <span className="inline-block w-full break-words">
+                        {text}
+                      </span>
                     </span>
                   </a>
                 </li>
@@ -210,7 +214,7 @@ function File({ item, anchors, topLevel }: FileProps) {
   }
 
   return (
-    <li className={active ? 'active' : ''}>
+    <li className={cn(active ? 'active' : '', 'break-words')}>
       <Link href={(item as PageItem).href || item.route}>
         <a
           {...((item as PageItem).newWindow

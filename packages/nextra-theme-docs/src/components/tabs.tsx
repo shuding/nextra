@@ -7,7 +7,6 @@ type TabItem = {
   disabled?: boolean
 }
 
-
 function isTabItem(item: unknown): item is TabItem {
   if (item && typeof item === 'object' && 'label' in item) return true
   return false
