@@ -4,6 +4,7 @@ searchable: false
 ---
 
 import Callout from 'nextra-theme-docs/callout'
+import { Tabs, Tab } from 'nextra-theme-docs/tabs'
 import Features from 'components/features'
 
 {
@@ -11,28 +12,28 @@ import Features from 'components/features'
 }
 {<h1 className="text-center font-extrabold md:text-5xl mt-8">SWR</h1>}
 
-<Nextra.Tabs items={['JavaScript', 'C++', {label:'C', disabled: true}, 'Python']} defaultIndex={1}>
-  <Nextra.Tab>
+<Tabs items={['JavaScript', 'C++', {label:'C', disabled: true}, 'Python']} defaultIndex={1}>
+  <Tab>
     ```js filename="hi.js"
     import { useState, useEffect } from 'react';
     ```
-  </Nextra.Tab>
-  <Nextra.Tab>
+  </Tab>
+  <Tab>
     ```cpp filename="hi.cpp"
     #include <iostream>
     ```
-  </Nextra.Tab>
-  <Nextra.Tab>
+  </Tab>
+  <Tab>
     ```c filename="hi.c"
     #include <stdio.h>
     ```
-  </Nextra.Tab>
-  <Nextra.Tab>
+  </Tab>
+  <Tab>
     ```c filename="hi.c"
     #include <stdio.h>
     ```
-  </Nextra.Tab>
-</Nextra.Tabs>
+  </Tab>
+</Tabs>
 
 <Features/>
 
@@ -113,7 +114,7 @@ And a lot [more](/docs/getting-started).
   <img alt="license" src="https://badgen.net/npm/license/swr" className="inline-block mr-2"/>
 </p>
 
-SWR is created by the same team behind [Next.js](https://nextjs.org), the React framework.  
+SWR is created by the same team behind [Next.js](https://nextjs.org), the React framework.
 Follow [@vercel](https://twitter.com/vercel) on Twitter for future project updates.
 
 Feel free to join the [discussions on GitHub](https://github.com/vercel/swr/discussions)!
