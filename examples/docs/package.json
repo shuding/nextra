@@ -13,8 +13,10 @@
   },
   "dependencies": {
     "prism-react-renderer": "^1.1.1",
-    "prismjs": "^1.22.0",
-    "nextra": "workspace:*",
-    "nextra-theme-docs": "workspace:*"
-  }
+    "prismjs": "^1.22.0"
+  },
+  "workspaces": [
+    "../../packages/nextra",
+    "../../packages/nextra-theme-docs"
+  ]
 }

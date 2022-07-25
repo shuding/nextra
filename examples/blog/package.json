@@ -12,8 +12,10 @@
     "clean": "rimraf .next .turbo"
   },
   "dependencies": {
-    "gray-matter": "^4.0.2",
-    "nextra": "workspace:*",
-    "nextra-theme-blog": "workspace:*"
-  }
+    "gray-matter": "^4.0.2"
+  },
+  "workspaces": [
+    "../../packages/nextra",
+    "../../packages/nextra-theme-docs"
+  ]
 }
