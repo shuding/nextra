@@ -1,52 +1,78 @@
 {
   "name": "nextra-theme-docs",
-  "version": "2.0.0-beta.8",
+  "version": "2.0.0-beta.10",
   "description": "A Nextra theme for documentation sites.",
-  "main": "index.js",
-  "module": "index.js",
   "repository": "https://github.com/shuding/nextra",
   "author": "Shu Ding <g@shud.in>",
   "license": "MIT",
   "files": [
-    "dist/*",
+    "dist",
     "style.css"
   ],
-  "types": "./dist/types.d.ts",
+  "typesVersions": {
+    "*": {
+      ".": [
+        "./dist/index.d.ts"
+      ],
+      "callout": [
+        "./dist/callout.d.ts"
+      ],
+      "bleed": [
+        "./dist/bleed.d.ts"
+      ],
+      "tabs": [
+        "./dist/tabs.d.ts"
+      ],
+      "collapse": [
+        "./dist/collapse.d.ts"
+      ]
+    }
+  },
+  "types": "./dist/index.d.ts",
   "exports": {
     "./style.css": "./style.css",
     ".": {
-      "import": "./dist/index.js"
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
     },
     "./callout": {
-      "import": "./dist/callout.js"
+      "import": "./dist/callout.js",
+      "types": "./dist/callout.d.ts"
     },
     "./bleed": {
-      "import": "./dist/bleed.js"
+      "import": "./dist/bleed.js",
+      "types": "./dist/bleed.d.ts"
     },
     "./tabs": {
-      "import": "./dist/components/tabs.js"
+      "import": "./dist/tabs.js",
+      "types": "./dist/tabs.d.ts"
+    },
+    "./collapse": {
+      "import": "./dist/collapse.js",
+      "types": "./dist/collapse.d.ts"
     }
   },
   "scripts": {
     "dev": "concurrently \"pnpm dev:layout\" \"pnpm dev:tailwind\"",
-    "build": "pnpm build:tailwind && pnpm build:layout",
-    "build:layout": "node scripts/build.js",
+    "build": "tsup",
     "build:tailwind": "cross-env NODE_ENV=production pnpm postcss src/styles.css -o style.css --verbose",
-    "types": "tsc -p tsconfig.types.json",
-    "dev:layout": "node scripts/dev.js",
+    "types": "tsup --dts-only",
+    "dev:layout": "tsup --watch",
     "dev:tailwind": "cross-env TAILWIND_MODE=watch pnpm postcss src/styles.css -o style.css --watch",
-    "prepublishOnly": "rm -rf dist && pnpm build && pnpm types",
-    "test": "vitest --run"
+    "prepublishOnly": "pnpm build",
+    "test": "vitest --run",
+    "clean": "rimraf ./dist ./style.css",
+    "format": "prettier --write ."
   },
   "dependencies": {
-    "@headlessui/react": "^1.6.1",
-    "@mdx-js/react": "^2.1.0",
-    "@reach/skip-nav": "^0.16.0",
-    "classnames": "^2.2.6",
+    "@headlessui/react": "^1.6.5",
+    "@mdx-js/react": "^2.1.2",
+    "@reach/skip-nav": "^0.17.0",
+    "classnames": "^2.3.1",
     "flexsearch": "^0.7.21",
-    "focus-visible": "^5.1.0",
+    "focus-visible": "^5.2.0",
     "github-slugger": "^1.4.0",
-    "intersection-observer": "^0.12.0",
+    "intersection-observer": "^0.12.2",
     "match-sorter": "^4.2.0",
     "next-themes": "^0.2.0-beta.2",
     "parse-git-url": "^1.0.1",
@@ -63,6 +89,13 @@
     "@types/react": "^17.0.39",
     "autoprefixer": "^10.2.6",
     "cross-env": "^7.0.2",
-    "nextra": "workspace:*"
+    "nextra": "workspace:*",
+    "tsup": "^6.1.3"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "none",
+    "arrowParens": "avoid"
   }
 }

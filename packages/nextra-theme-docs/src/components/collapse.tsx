@@ -9,7 +9,7 @@ export default function Collapse({
 }) {
   const containerRef = useRef<HTMLDivElement>(null)
   const innerRef = useRef<HTMLDivElement>(null)
-  const animationRef = useRef<NodeJS.Timeout>()
+  const animationRef = useRef<any>()
   const initialRender = useRef(true)
   const initialState = useRef(open)
 
@@ -63,14 +63,14 @@ export default function Collapse({
   return (
     <div
       ref={containerRef}
-      className="transition-all ease-in-out duration-300 overflow-hidden transform-gpu motion-reduce:transition-none"
+      className="transform-gpu overflow-hidden transition-all duration-300 ease-in-out motion-reduce:transition-none"
       style={{
         maxHeight: initialState.current ? undefined : 0
       }}
     >
       <div
         ref={innerRef}
-        className="nextra-collapse-content transition-opacity ease-in-out duration-500 overflow-hidden transform-gpu motion-reduce:transition-none"
+        className="nextra-collapse-content transform-gpu overflow-hidden transition-opacity duration-500 ease-in-out motion-reduce:transition-none"
         style={{
           opacity: initialState.current ? 1 : 0
         }}

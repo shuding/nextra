@@ -2,13 +2,13 @@ import React from 'react'
 import Link from 'next/link'
 import cn from 'classnames'
 
-import { ArrowRightIcon } from './icons'
+import { ArrowRightIcon } from 'nextra/icons'
 
 import { Item } from './utils/normalize-pages'
 
 export default function Breadcrumb({ activePath }: { activePath: Item[] }) {
   return (
-    <div className="nextra-breadcrumb text-sm font-normal flex mt-2.5 text-gray-500 transition-colors cursor-default overflow-hidden">
+    <div className="nextra-breadcrumb mt-2.5 flex cursor-default overflow-hidden text-sm font-normal text-gray-500 transition-colors">
       {activePath.map((item, index) => {
         const isLink = !item.children || item.withIndexPage
         const isActive = index === activePath.length - 1
@@ -19,12 +19,11 @@ export default function Breadcrumb({ activePath }: { activePath: Item[] }) {
               <ArrowRightIcon width={14} className="mx-1 select-none" />
             ) : null}
             <div
-              key={item.route}
               className={cn(
                 'transition-colors hover:text-gray-900 dark:hover:text-gray-200',
                 {
-                  'text-gray-600 dark:text-gray-400 active': isActive,
-                  'text-ellipsis whitespace-nowrap overflow-hidden min-w-[24px]':
+                  'active text-gray-600 dark:text-gray-400': isActive,
+                  'min-w-[24px] overflow-hidden text-ellipsis whitespace-nowrap':
                     !isActive
                 }
               )}

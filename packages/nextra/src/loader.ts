@@ -10,13 +10,19 @@ import { addPage } from './content-dump'
 import { parseFileName } from './utils'
 import { compileMdx } from './compile'
 import { getPageMap, findPagesDir } from './page-map'
-import { collectFiles } from './plugin'
-import { MARKDOWN_EXTENSION_REGEX, IS_PRODUCTION } from './constants'
+import { collectFiles, collectMdx } from './plugin'
+import {
+  MARKDOWN_EXTENSION_REGEX,
+  IS_PRODUCTION,
+  DEFAULT_LOCALE
+} from './constants'
 
 // TODO: create this as a webpack plugin.
-const indexContentEmitted = new Set()
+const indexContentEmitted = new Set<string>()
 
 const pagesDir = path.resolve(findPagesDir())
+
+let wasShallowWarningPrinted = false
 
 const [repository, gitRoot] = (function () {
   try {
@@ -49,7 +55,9 @@ async function loader(
 
   const { resourcePath } = context
   if (resourcePath.includes('/pages/api/')) {
-    console.warn(`[nextra] Ignoring ${resourcePath} because it is located in the "pages/api" folder.`)
+    console.warn(
+      `[nextra] Ignoring ${resourcePath} because it is located in the "pages/api" folder.`
+    )
     return ''
   }
 
@@ -65,6 +73,12 @@ async function loader(
     ? pageMapCache.get()!
     : await collectFiles(pagesDir, '/')
 
+  // mdx is imported but is outside the `pages` directory
+  if (!fileMap[resourcePath]) {
+    fileMap[resourcePath] = await collectMdx(resourcePath)
+    context.addMissingDependency(resourcePath)
+  }
+
   const [pageMap, route, title] = getPageMap(
     resourcePath,
     pageMapResult,
@@ -72,11 +86,7 @@ async function loader(
     defaultLocale
   )
 
-  if (!IS_PRODUCTION) {
-    // Add the entire directory `pages` as the dependency
-    // so we can generate the correct page map.
-    context.addContextDependency(pagesDir)
-  } else {
+  if (IS_PRODUCTION) {
     // We only add meta files as dependencies for production build,
     // so we can do incremental builds.
     Object.entries(fileMap).forEach(([filePath, { name, meta, locale }]) => {
@@ -88,10 +98,14 @@ async function loader(
         context.addDependency(filePath)
       }
     })
+  } else {
+    // Add the entire directory `pages` as the dependency,
+    // so we can generate the correct page map.
+    context.addContextDependency(pagesDir)
   }
 
   // Extract frontMatter information if it exists
-  let { data, content } = grayMatter(source)
+  const { data, content } = grayMatter(source)
 
   let layout = theme
   let layoutConfig = themeConfig || null
@@ -108,23 +122,21 @@ async function loader(
     unstable_flexsearch = false
   }
 
-  const { result, titleText, headings, hasH1, structurizedData } =
-    await compileMdx(
-      content,
-      mdxOptions,
-      {
-        unstable_staticImage,
-        unstable_flexsearch
-      },
-      resourcePath
-    )
-  content = result.replace('export default MDXContent;', '')
+  const { result, headings, structurizedData } = await compileMdx(
+    content,
+    mdxOptions,
+    {
+      unstable_staticImage,
+      unstable_flexsearch
+    },
+    resourcePath
+  )
 
   if (unstable_flexsearch) {
     // We only add .MD and .MDX contents
     if (MARKDOWN_EXTENSION_REGEX.test(filename) && data.searchable !== false) {
       addPage({
-        fileLocale: fileLocale || 'default',
+        fileLocale: fileLocale || DEFAULT_LOCALE,
         route,
         title,
         data,
@@ -137,7 +149,7 @@ async function loader(
 
   let timestamp: number | undefined
   if (repository && gitRoot) {
-    if (repository.isShallow()) {
+    if (repository.isShallow() && !wasShallowWarningPrinted) {
       if (process.env.VERCEL) {
         console.warn(
           '[nextra] The repository is shallow cloned, so the latest modified time will not be presented. Set the VERCEL_DEEP_CLONE=true environment variable to enable deep cloning.'
@@ -151,6 +163,7 @@ async function loader(
           '[nextra] The repository is shallow cloned, so the latest modified time will not be presented.'
         )
       }
+      wasShallowWarningPrinted = true
     }
     try {
       timestamp = await repository.getFileLatestModifiedDateAsync(
@@ -169,6 +182,7 @@ async function loader(
 import __nextra_withLayout__ from '${layout}'
 import { withSSG as __nextra_withSSG__ } from 'nextra/ssg'
 ${layoutConfigImport}
+${result.replace('export default MDXContent;', '')}
 
 const __nextra_pageMap__ = ${JSON.stringify(pageMap)}
 
@@ -182,13 +196,15 @@ const NextraLayout = __nextra_withSSG__(__nextra_withLayout__({
   route: "${slash(route)}",
   meta: ${JSON.stringify(data)},
   pageMap: __nextra_pageMap__,
-  titleText: ${JSON.stringify(titleText)},
+  titleText: typeof titleText === 'string' ? titleText : undefined,
   headings: ${JSON.stringify(headings)},
-  hasH1: ${JSON.stringify(hasH1)},
   ${timestamp ? `timestamp: ${timestamp},\n` : ''}
+  ${
+    unstable_flexsearch
+      ? `unstable_flexsearch: ${JSON.stringify(unstable_flexsearch)}`
+      : ''
+  }
 }, ${layoutConfig ? '__nextra_layoutConfig__' : 'null'}))
-
-${content}
 
 function NextraPage(props) {
   return (
@@ -207,7 +223,7 @@ export default function syncLoader(
   this: LoaderContext<LoaderOptions>,
   source: string,
   callback: (err?: null | Error, content?: string | Buffer) => void
-) {
+): void {
   loader(this, source)
     .then(result => callback(null, result))
     .catch(err => callback(err))

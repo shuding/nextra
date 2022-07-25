@@ -18,7 +18,7 @@ Middleware receive the SWR hook and can execute logic before and after running i
 function myMiddleware (useSWRNext) {
   return (key, fetcher, config) => {
     // Before hook runs...
-    
+
     // Handle the next middleware, or the `useSWR` hook if this is the last one.
     const swr = useSWRNext(key, fetcher, config)
 
@@ -91,7 +91,6 @@ exit  a
 
 Let's build a simple request logger middleware as an example. It prints out all the fetcher requests sent from this SWR hook. You can also use this middleware for all SWR hooks by adding it to `SWRConfig`.
 
-
 ```jsx
 function logger(useSWRNext) {
   return (key, fetcher, config) => {
@@ -112,7 +111,7 @@ useSWR(key, fetcher, { use: [logger] })
 
 Every time the request is fired, it outputs the SWR key to the console:
 
-```bash
+```plaintext
 SWR Request: /api/user1
 SWR Request: /api/user2
 ```

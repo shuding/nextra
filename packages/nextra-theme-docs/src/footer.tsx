@@ -3,7 +3,7 @@ import cn from 'classnames'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import { ArrowRightIcon } from './icons'
+import { ArrowRightIcon } from 'nextra/icons'
 import renderComponent from './utils/render-component'
 import { useConfig } from './config'
 import { Item } from './utils/normalize-pages'
@@ -21,7 +21,7 @@ const NextLink = ({ route, title, isRTL }: LinkProps) => {
     <Link href={route}>
       <a
         className={cn(
-          'text-base md:text-lg font-medium p-4 -m-4 no-underline transition-colors text-gray-600 dark:text-gray-300 dark:hover:text-primary-500 hover:text-primary-500 inline-flex items-center justify-end rounded',
+          '-m-4 inline-flex items-center justify-end rounded p-4 text-base font-medium text-gray-600 no-underline transition-colors hover:text-primary-500 dark:text-gray-300 dark:hover:text-primary-500 md:text-lg',
           { 'ml-2': !isRTL, 'mr-2': isRTL }
         )}
         title={title}
@@ -29,8 +29,8 @@ const NextLink = ({ route, title, isRTL }: LinkProps) => {
         {title}
         <ArrowRightIcon
           height={20}
-          className={cn('transform inline flex-shrink-0', {
-            'rotate-180 mr-1': isRTL,
+          className={cn('inline flex-shrink-0 transform', {
+            'mr-1 rotate-180': isRTL,
             'ml-1': !isRTL
           })}
         />
@@ -44,15 +44,15 @@ const PrevLink = ({ route, title, isRTL }: LinkProps) => {
     <Link href={route}>
       <a
         className={cn(
-          'text-base md:text-lg font-medium p-4 -m-4 no-underline transition-colors text-gray-600 dark:text-gray-300 dark:hover:text-primary-500 hover:text-primary-500 flex items-center rounded',
+          '-m-4 flex items-center rounded p-4 text-base font-medium text-gray-600 no-underline transition-colors hover:text-primary-500 dark:text-gray-300 dark:hover:text-primary-500 md:text-lg',
           { 'mr-2': !isRTL, 'ml-2': isRTL }
         )}
         title={title}
       >
         <ArrowRightIcon
           height={20}
-          className={cn('transform inline flex-shrink-0', {
-            'rotate-180 mr-1': !isRTL,
+          className={cn('inline flex-shrink-0 transform', {
+            'mr-1 rotate-180': !isRTL,
             'ml-1': isRTL
           })}
         />
@@ -79,13 +79,13 @@ export const NavLinks = ({
   if (!prev && !next) return null
 
   return (
-    <div className="nextra-navigation-links pt-8 mb-8 border-t dark:border-neutral-800 flex flex-row items-center justify-between">
-      <div className="flex-1 min-w-0 flex justify-start">
+    <div className="nextra-navigation-links mb-8 flex flex-row items-center justify-between border-t pt-8 dark:border-neutral-800">
+      <div className="flex min-w-0 flex-1 justify-start">
         {prev ? (
           <PrevLink route={prev.route} title={prev.title} isRTL={isRTL} />
         ) : null}
       </div>
-      <div className="flex-1 min-w-0 flex justify-end">
+      <div className="flex min-w-0 flex-1 justify-end">
         {next ? (
           <NextLink route={next.route} title={next.title} isRTL={isRTL} />
         ) : null}
@@ -99,30 +99,30 @@ const Footer: React.FC<{ menu?: boolean }> = ({ menu }) => {
   const config = useConfig()
 
   return (
-    <footer className="bg-gray-100 dark:bg-neutral-900 pb-[env(safe-area-inset-bottom)]">
+    <footer className="bg-gray-100 pb-[env(safe-area-inset-bottom)] dark:bg-neutral-900">
       <div
         className={cn(
-          'py-2 border-b dark:border-neutral-800 hidden md:block',
+          'hidden border-b py-2 dark:border-neutral-800 md:block',
           menu ? '' : 'md:hidden'
         )}
       >
-        <div className="max-w-[90rem] mx-auto">
+        <div className="mx-auto max-w-[90rem]">
           <div className="inline-flex px-4">
             {config.i18n ? (
-              <div className="flex-1 relative">
+              <div className="relative flex-1">
                 <LocaleSwitch options={config.i18n} />
               </div>
             ) : null}
             {config.darkMode ? (
-              <div className="grow-0 relative">
+              <div className="relative grow-0">
                 <ThemeSwitch lite={false} />
               </div>
             ) : null}
           </div>
         </div>
       </div>
-      <div className="max-w-[90rem] mx-auto pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)] py-12">
-        <div className="flex justify-between flex-col-reverse md:flex-row items-center md:items-end">
+      <div className="mx-auto max-w-[90rem] py-12 pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
+        <div className="flex flex-col-reverse items-center justify-between md:flex-row md:items-end">
           <span className="text-gray-600 dark:text-gray-400">
             {renderComponent(config.footerText, { locale })}
           </span>

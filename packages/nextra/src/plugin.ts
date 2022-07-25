@@ -1,4 +1,4 @@
-import { NextraConfig, PageMapItem } from './types'
+import { NextraConfig, PageMapItem, NextraPluginCache } from './types'
 import fs from 'graceful-fs'
 import { promisify } from 'util'
 import { parseFileName, parseJsonFile } from './utils'
@@ -13,6 +13,19 @@ import { MARKDOWN_EXTENSION_REGEX } from './constants'
 const readdir = promisify(fs.readdir)
 const readFile = promisify(fs.readFile)
 
+export const collectMdx = async (filePath: string, route = '') => {
+  const { name, locale } = parseFileName(filePath)
+
+  const content = await readFile(filePath, 'utf8')
+  const { data } = grayMatter(content)
+  return {
+    name,
+    route,
+    locale,
+    ...(Object.keys(data).length && { frontMatter: data })
+  }
+}
+
 export async function collectFiles(
   dir: string,
   route = '/',
@@ -24,33 +37,26 @@ export async function collectFiles(
     await Promise.all(
       files.map(async f => {
         const filePath = path.resolve(dir, f.name)
-        const { name, locale, ext } = parseFileName(f.name)
+        const { name, locale, ext } = parseFileName(filePath)
         const fileRoute = slash(path.join(route, name.replace(/^index$/, '')))
 
         if (f.isDirectory()) {
-          if (fileRoute === '/api') return null
-          const { items: children } = await collectFiles(
-            filePath,
-            fileRoute,
-            fileMap
-          )
-          if (!children || !children.length) return null
+          if (fileRoute === '/api') return
+          const { items } = await collectFiles(filePath, fileRoute, fileMap)
+          if (!items.length) return
           return {
             name: f.name,
-            children,
+            children: items,
             route: fileRoute
           }
-        } else if (MARKDOWN_EXTENSION_REGEX.test(ext)) {
-          const content = await readFile(filePath, 'utf8')
-          const { data } = grayMatter(content)
-          fileMap[filePath] = {
-            name,
-            route: fileRoute,
-            locale,
-            ...(Object.keys(data).length && { frontMatter: data })
-          }
+        }
+
+        if (MARKDOWN_EXTENSION_REGEX.test(ext)) {
+          fileMap[filePath] = await collectMdx(filePath, fileRoute)
           return fileMap[filePath]
-        } else if (ext === '.json' && name === 'meta') {
+        }
+
+        if (ext === '.json' && name === 'meta') {
           const content = await readFile(filePath, 'utf8')
           fileMap[filePath] = {
             name: 'meta.json',
@@ -69,7 +75,7 @@ export async function collectFiles(
   }
 }
 
-export class PageMapCache {
+class PageMapCache implements NextraPluginCache {
   public cache: { items: PageMapItem[]; fileMap: Record<string, any> } | null
 
   constructor() {

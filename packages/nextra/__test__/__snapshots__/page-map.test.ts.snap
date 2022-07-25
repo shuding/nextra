@@ -49,8 +49,18 @@ exports[`Page Process > pageMap en-US 1`] = `
             },
             {
               "locale": "en-US",
+              "name": "code-highlighting",
+              "route": "/docs/advanced/code-highlighting",
+            },
+            {
+              "locale": "en-US",
               "name": "file-name.with.DOTS",
               "route": "/docs/advanced/file-name.with.DOTS",
+            },
+            {
+              "locale": "en-US",
+              "name": "markdown-import",
+              "route": "/docs/advanced/markdown-import",
             },
             {
               "locale": "en-US",
@@ -65,7 +75,9 @@ exports[`Page Process > pageMap en-US 1`] = `
                   "type": "separator",
                 },
                 "cache": "Cache",
+                "code-highlighting": "Code highlighting",
                 "file-name.with.DOTS": "Filenames with dots",
+                "markdown-import": "Markdown import",
                 "more": "More: A Super Super Super Super Long Directory",
                 "performance": "Performance",
                 "react-native": "React Native",
@@ -76,8 +88,8 @@ exports[`Page Process > pageMap en-US 1`] = `
               "children": [
                 {
                   "locale": "en-US",
-                  "name": "cache",
-                  "route": "/docs/advanced/more/cache",
+                  "name": "loooooooooooooooooooong-title",
+                  "route": "/docs/advanced/more/loooooooooooooooooooong-title",
                 },
               ],
               "name": "more",
@@ -417,8 +429,8 @@ exports[`Page Process > pageMap zh-CN 1`] = `
               "children": [
                 {
                   "locale": "en-US",
-                  "name": "cache",
-                  "route": "/docs/advanced/more/cache",
+                  "name": "loooooooooooooooooooong-title",
+                  "route": "/docs/advanced/more/loooooooooooooooooooong-title",
                 },
               ],
               "name": "more",
@@ -433,6 +445,16 @@ exports[`Page Process > pageMap zh-CN 1`] = `
               "locale": "zh-CN",
               "name": "react-native",
               "route": "/docs/advanced/react-native",
+            },
+            {
+              "locale": "en-US",
+              "name": "code-highlighting",
+              "route": "/docs/advanced/code-highlighting",
+            },
+            {
+              "locale": "en-US",
+              "name": "markdown-import",
+              "route": "/docs/advanced/markdown-import",
             },
           ],
           "name": "advanced",

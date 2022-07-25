@@ -10,7 +10,7 @@ import useMenuContext from './utils/menu-context'
 import { useConfig } from './config'
 import Search from './search'
 import Flexsearch from './flexsearch'
-import { GitHubIcon, DiscordIcon, XIcon, MenuIcon } from './icons'
+import { GitHubIcon, DiscordIcon, XIcon, MenuIcon } from 'nextra/icons'
 import { Item, PageItem } from './utils/normalize-pages'
 
 interface NavBarProps {
@@ -37,8 +37,8 @@ export default function Navbar({ flatDirectories, items }: NavBarProps) {
         }}
       />
       {config.banner ? (
-        <div className="nextra-banner-container text-sm h-10 sticky top-0 md:relative pl-10 flex items-center text-slate-50 bg-neutral-900  dark:text-white z-20 dark:bg-[linear-gradient(1deg,#383838,#212121)]">
-          <div className="max-w-[90rem] mx-auto w-full py-1 text-center font-medium pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)] truncate whitespace-nowrap">
+        <div className="nextra-banner-container sticky top-0 z-20 flex h-10 items-center bg-neutral-900 pl-10 text-sm text-slate-50  dark:bg-[linear-gradient(1deg,#383838,#212121)] dark:text-white md:relative">
+          <div className="mx-auto w-full max-w-[90rem] truncate whitespace-nowrap py-1 pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)] text-center font-medium">
             {renderComponent(config.banner, {
               locale
             })}
@@ -52,20 +52,20 @@ export default function Navbar({ flatDirectories, items }: NavBarProps) {
               document.body.classList.add('nextra-banner-hidden')
             }}
           >
-            <XIcon className="h4 w-4 mx-auto" />
+            <XIcon className="h4 mx-auto w-4" />
           </button>
         </div>
       ) : null}
       <div
         className={
-          'nextra-nav-container z-20 sticky bg-transparent w-full top-0'
+          'nextra-nav-container sticky top-0 z-20 w-full bg-transparent'
         }
       >
-        <div className="nextra-nav-container-blur absolute w-full h-full bg-white dark:bg-dark pointer-events-none" />
-        <nav className="flex gap-2 max-w-[90rem] mx-auto items-center left-0 right-0 h-16 pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
-          <div className="flex items-center mr-2 flex-auto">
+        <div className="nextra-nav-container-blur pointer-events-none absolute h-full w-full bg-white dark:bg-dark" />
+        <nav className="left-0 right-0 mx-auto flex h-16 max-w-[90rem] items-center gap-2 pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
+          <div className="mr-2 flex flex-auto items-center">
             <Link href="/">
-              <a className="no-underline text-current inline-flex items-center hover:opacity-75">
+              <a className="inline-flex items-center text-current no-underline hover:opacity-75">
                 {renderComponent(config.logo, { locale })}
               </a>
             </Link>
@@ -95,19 +95,20 @@ export default function Navbar({ flatDirectories, items }: NavBarProps) {
                     <a
                       className={cn(
                         'nextra-nav-link',
-                        'no-underline whitespace-nowrap p-2 -ml-2 hidden md:inline-block',
+                        '-ml-2 hidden whitespace-nowrap p-2 no-underline md:inline-block',
                         !isActive || page.newWindow
                           ? 'text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200'
-                          : 'active text-current font-medium'
+                          : 'active font-medium text-current'
                       )}
-                      aria-selected={isActive}
                       {...(page.newWindow
                         ? {
                             target: '_blank',
                             rel: 'noopener noreferrer',
                             'aria-selected': false
                           }
-                        : {})}
+                        : {
+                            'aria-selected': isActive
+                          })}
                     >
                       {page.title}
                     </a>
@@ -131,7 +132,7 @@ export default function Navbar({ flatDirectories, items }: NavBarProps) {
 
           {config.projectLink || config.github ? (
             <a
-              className="text-current p-2"
+              className="p-2 text-current"
               href={config.projectLink || config.github}
               target="_blank"
               rel="noreferrer"
@@ -148,7 +149,7 @@ export default function Navbar({ flatDirectories, items }: NavBarProps) {
           ) : null}
           {config.projectChatLink ? (
             <a
-              className="text-current p-2"
+              className="p-2 text-current"
               href={config.projectChatLink}
               target="_blank"
               rel="noreferrer"
@@ -165,7 +166,7 @@ export default function Navbar({ flatDirectories, items }: NavBarProps) {
           ) : null}
 
           <button
-            className="nextra-menu-icon block md:hidden p-2"
+            className="nextra-menu-icon block p-2 md:hidden"
             onClick={() => setMenu(!menu)}
           >
             <MenuIcon className={cn({ open: menu })} />

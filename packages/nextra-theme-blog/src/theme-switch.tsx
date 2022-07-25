@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useTheme } from 'next-themes'
-import { MoonIcon, SunIcon } from '../../nextra-theme-docs/src/icons'
+import { MoonIcon, SunIcon } from 'nextra/icons'
 
 export default function ThemeSwitch() {
   const { theme, setTheme, resolvedTheme } = useTheme()
@@ -18,7 +18,7 @@ export default function ThemeSwitch() {
     <span
       role="button"
       aria-label="Toggle Dark Mode"
-      className="text-current p-2 cursor-pointer"
+      className="cursor-pointer p-2 text-current"
       tabIndex={0}
       onClick={toggleTheme}
       onKeyDown={e => {

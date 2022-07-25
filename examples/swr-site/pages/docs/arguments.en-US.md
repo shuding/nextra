@@ -10,15 +10,15 @@ useSWR('/api/user', fetcher)
 
 ## Multiple Arguments
 
-In some scenarios, it's useful to pass multiple arguments (can be any value or object) to the `fetcher` function. 
+In some scenarios, it's useful to pass multiple arguments (can be any value or object) to the `fetcher` function.
 For example an authorized fetch request:
 
 ```js
 useSWR('/api/user', url => fetchWithToken(url, token))
 ```
 
-This is **incorrect**. Because the identifier (also the cache key) of the data is `'/api/user'`, 
-even if `token` changes, SWR will still use the same key and return the wrong data. 
+This is **incorrect**. Because the identifier (also the cache key) of the data is `'/api/user'`,
+even if `token` changes, SWR will still use the same key and return the wrong data.
 
 Instead, you can use an **array** as the `key` parameter, which contains multiple arguments of `fetcher`:
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -8,16 +8,13 @@ import { ReactCusdis } from 'react-cusdis'
 import Meta from './meta'
 import Nav from './nav'
 import MDXTheme, { HeadingContext } from './mdx-theme'
-
 import traverse from './utils/traverse'
 import getTags from './utils/get-tags'
 import sortDate from './utils/sort-date'
 import type { PageMapItem, PageOpt } from 'nextra'
 import type { NextraBlogTheme } from './types'
-const isProduction = process.env.NODE_ENV === 'production'
 // comments
 const Cusdis = dynamic(
-  // @ts-ignore
   () => import('react-cusdis').then(mod => mod.ReactCusdis),
   { ssr: false }
 ) as typeof ReactCusdis
@@ -32,13 +29,12 @@ const BlogLayout = ({
   config,
   contentNodes,
   opts
-}: LayoutProps) => {
+}: LayoutProps): ReactElement => {
   // gather info for tag/posts pages
   let posts: PageMapItem[] = []
   let navPages: PageMapItem[] = []
   const type = opts.meta.type || 'post'
   const route = opts.route
-  const hasH1 = opts.hasH1
   let back: string | null = null
   // This only renders once per page
   if (type === 'posts' || type === 'tag' || type === 'page') {
@@ -95,160 +91,114 @@ const BlogLayout = ({
   }
   const router = useRouter()
   const { theme, resolvedTheme } = useTheme()
-  const { query } = router
-  const tagName = type === 'tag' ? query.tag : null
-  const pageTitle = opts.meta.title || opts.titleText || ''
-  const mdxTitle = hasH1 && !pageTitle
-  let comments
+  const tagName = type === 'tag' ? router.query.tag : null
 
-  if (config.cusdis) {
-    if (!config.cusdis.appId) {
-      console.warn('[cusdis]', '`appId` is required')
-    } else {
-      comments = (
-        <Cusdis
-          lang={config.cusdis.lang}
-          style={{
-            marginTop: '4rem'
-          }}
-          attrs={{
-            host: config.cusdis.host || 'https://cusdis.com',
-            appId: config.cusdis.appId,
-            pageId: router.pathname,
-            pageTitle,
-            theme:
-              theme === 'dark' || resolvedTheme === 'dark' ? 'dark' : 'light'
-          }}
-        />
-      )
+  const postList = posts.map(post => {
+    if (tagName) {
+      const tags = getTags(post)
+      if (!Array.isArray(tagName) && !tags.includes(tagName)) {
+        return null
+      }
+    } else if (type === 'tag') {
+      return null
     }
-  }
-  const meta = opts.meta
 
-  const postList = posts.length > 0 ? (
-    <div>
-      {posts.map(post => {
-        if (tagName) {
-          const tags = getTags(post)
-          if (!Array.isArray(tagName) && !tags.includes(tagName)) {
-            return null
-          }
-        } else if (type === 'tag') {
-          return null
-        }
+    const postTitle = post.frontMatter?.title || post.name
+    const date = post.frontMatter?.date && new Date(post.frontMatter.date)
+    const description = post.frontMatter?.description
 
-        const postTitle =
-          (post.frontMatter ? post.frontMatter.title : null) || post.name
-        const postDate = post.frontMatter ? (
-          <time className="post-item-date">
-            {new Date(post.frontMatter.date).toDateString()}
-          </time>
-        ) : null
-        const postDescription =
-          post.frontMatter && post.frontMatter.description ? (
-            <p className="post-item-desc">
-              {post.frontMatter.description}
-              {config.readMore ? (
-                <Link href={post.route}>
-                  <a className="post-item-more">{config.readMore}</a>
-                </Link>
-              ) : null}
-            </p>
-          ) : null
-
-        return (
-          <div key={post.route} className="post-item">
-            <h3>
-              <Link href={post.route}>
-                <a className="post-item-title">{postTitle}</a>
+    return (
+      <div key={post.route}>
+        <h3>
+          <Link href={post.route} passHref>
+            <a className="!no-underline">{postTitle}</a>
+          </Link>
+        </h3>
+        {description && (
+          <p className="mb-2 text-gray-400">
+            {description}
+            {config.readMore && (
+              <Link href={post.route} passHref>
+                <a className="ml-1">{config.readMore}</a>
               </Link>
-            </h3>
-            {postDescription}
-            {postDate}
-          </div>
-        )
-      })}
-    </div>
-  ) : null
+            )}
+          </p>
+        )}
+        {date && (
+          <time className="text-sm text-gray-300" dateTime={date.toISOString()}>
+            {date.toDateString()}
+          </time>
+        )}
+      </div>
+    )
+  })
   const ref = React.useRef<HTMLHeadingElement>(null)
+  const pageTitle = opts.meta.title || opts.titleText || ''
+  const title = `${pageTitle}${config.titleSuffix || ''}`
 
+  if (config.cusdis && !config.cusdis.appId) {
+    console.warn('[cusdis]', '`appId` is required')
+  }
+  const comments = config.cusdis?.appId && (
+    <Cusdis
+      lang={config.cusdis.lang}
+      style={{ marginTop: '4rem' }}
+      attrs={{
+        host: config.cusdis.host || 'https://cusdis.com',
+        appId: config.cusdis.appId,
+        pageId: router.pathname,
+        pageTitle,
+        theme: theme === 'dark' || resolvedTheme === 'dark' ? 'dark' : 'light'
+      }}
+    />
+  )
   return (
-    <>
+    <article className="container prose prose-sm dark:prose-dark md:prose">
       <Head>
-        <title>
-          {pageTitle}
-          {config.titleSuffix}
-        </title>
-        {config.head
-          ? config.head({ title: `${pageTitle} ${config.titleSuffix}`, meta: opts.meta })
-          : null}
+        <title>{title}</title>
+        {config.head?.({ title, meta: opts.meta })}
       </Head>
-      <article className="container prose prose-sm md:prose dark:prose-dark">
-        <HeadingContext.Provider value={ref}>
-          {pageTitle ? <h1>{pageTitle}</h1> : null}
-          {mdxTitle ? <h1 ref={ref}></h1> : null}
-          {type === 'post' ? (
-            /** @ts-expect-error */
-            <Meta {...meta} back={back} config={config} />
-          ) : (
-            <Nav navPages={navPages} config={config} />
-          )}
-          <MDXTheme>
-            {contentNodes}
-            {type === 'post' ? config.postFooter : null}
-            {type === 'post' ? comments : null}
-          </MDXTheme>
-          {postList}
-          {config.footer}
-        </HeadingContext.Provider>
-      </article>
-    </>
+      <HeadingContext.Provider value={ref}>
+        {pageTitle && <h1>{pageTitle}</h1>}
+        {type === 'post' ? (
+          // @ts-expect-error
+          <Meta {...opts.meta} back={back} config={config} />
+        ) : (
+          <Nav navPages={navPages} config={config} />
+        )}
+        <MDXTheme>
+          {contentNodes}
+          {type === 'post' && config.postFooter}
+          {type === 'post' && comments}
+        </MDXTheme>
+        {postList}
+        {config.footer}
+      </HeadingContext.Provider>
+    </article>
   )
 }
-
 
 const createLayout = (opts: PageOpt, _config: NextraBlogTheme) => {
   const config: NextraBlogTheme = Object.assign(
     {
       readMore: 'Read More →',
       footer: (
-        <small style={{ display: 'block', marginTop: '8rem' }}>
-          CC BY-NC 4.0 2020 © Shu Ding.
-        </small>
+        <small className="mt-32 block">CC BY-NC 4.0 2022 © Shu Ding.</small>
       ),
       titleSuffix: null,
       postFooter: null
     },
     _config
   )
-  let layoutUsed = false
-  const Page = ({ children }: { children: React.ReactChildren }) => {
-    if (!layoutUsed && isProduction) {
-      throw new Error(
-        '[Nextra] Please add the `getLayout` logic to your _app.js, see https://nextjs.org/docs/basic-features/layouts#per-page-layouts.'
-      )
-    }
-    return children
-  }
-  const Layout = (page: React.ReactChildren) => {
-    layoutUsed = true
-    return (
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        enableSystem={true}
-      >
-        <BlogLayout
-          config={config}
-          contentNodes={page}
-          opts={opts}
-        />
-      </ThemeProvider>
-    )
-  }
+
+  const Page = ({ children }: { children: React.ReactChildren }) => children
+  const Layout = (page: React.ReactChildren) => (
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      <BlogLayout config={config} contentNodes={page} opts={opts} />
+    </ThemeProvider>
+  )
   Page.getLayout = Layout
   return Page
 }
-
-
+export * from './types'
 export default createLayout

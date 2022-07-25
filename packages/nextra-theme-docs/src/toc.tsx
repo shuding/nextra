@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import cn from 'classnames'
 import Slugger from 'github-slugger'
 import { Heading } from 'nextra'
@@ -65,14 +65,18 @@ const EditPageLink = ({
   filepath
 }: {
   repository?: string
-  text: string
+  text:
+    | React.ReactNode
+    | React.FC<{
+        locale: string
+      }>
   filepath: string
 }) => {
   const url = createEditUrl(repository, filepath)
   const { locale } = useRouter()
   return (
     <a
-      className="text-xs font-medium no-underline block text-gray-500 mb-2 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
+      className="mb-2 block text-xs font-medium text-gray-500 no-underline hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
       href={url}
       target="_blank"
       rel="noreferrer"
@@ -88,12 +92,12 @@ const EditPageLink = ({
 
 const FeedbackLink = ({
   repository,
-  text,
+  feedbackLink,
   filepath,
   labels
 }: {
   repository?: string
-  text: string
+  feedbackLink: ReactNode | React.FC<{ locale: string }>
   filepath: string
   labels?: string
 }) => {
@@ -101,13 +105,13 @@ const FeedbackLink = ({
   const { locale } = useRouter()
   return (
     <a
-      className="text-xs font-medium no-underline block text-gray-500 mb-2 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
+      className="mb-2 block text-xs font-medium text-gray-500 no-underline hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
       href={url}
       target="_blank"
       rel="noreferrer"
     >
-      {text
-        ? renderComponent(text, {
+      {feedbackLink
+        ? renderComponent(feedbackLink, {
             locale
           })
         : 'Feedback'}
@@ -160,18 +164,18 @@ function Item({
 
   return (
     <li
-      className="scroll-py-6 scroll-my-6"
+      className="scroll-my-6 scroll-py-6"
       style={indent(heading.depth)}
       ref={ref}
     >
       <a
         href={`#${slug}`}
         className={cn(
-          'no-underline inline-block',
+          'inline-block no-underline',
           heading.depth === 2 ? 'font-semibold' : '',
           state?.isActive
             ? 'text-primary-500 subpixel-antialiased'
-            : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-300'
+            : 'text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300'
         )}
         aria-selected={state?.isActive}
       >
@@ -204,11 +208,11 @@ export default function ToC({
     config.feedbackLink || config.footerEditLink || config.tocExtraContent
 
   return (
-    <div className="nextra-toc w-64 hidden xl:block text-sm px-4 order-last flex-shrink-0">
-      <div className="nextra-toc-content overflow-y-auto pr-4 -mr-4 sticky max-h-[calc(100vh-4rem-env(safe-area-inset-bottom))] top-16 pt-8">
+    <div className="nextra-toc order-last hidden w-64 flex-shrink-0 px-4 text-sm xl:block">
+      <div className="nextra-toc-content sticky top-16 -mr-4 max-h-[calc(100vh-4rem-env(safe-area-inset-bottom))] overflow-y-auto pr-4 pt-8">
         {hasHeadings && headings ? (
           <ul>
-            <p className="font-semibold tracking-tight mb-4">On This Page</p>
+            <p className="mb-4 font-semibold tracking-tight">On This Page</p>
             {headings.map(heading => {
               const text = getHeadingText(heading)
               const slug = slugger.slug(text)
@@ -230,9 +234,9 @@ export default function ToC({
             className={cn(
               'nextra-toc-meta',
               hasHeadings
-                ? 'border-t mt-8 pt-8 shadow-[0_-12px_16px_white] dark:shadow-[0_-12px_16px_#111] bg-white dark:bg-dark'
+                ? 'mt-8 border-t bg-white pt-8 shadow-[0_-12px_16px_white] dark:bg-dark dark:shadow-[0_-12px_16px_#111]'
                 : '',
-              'sticky pb-8 bottom-0 dark:border-neutral-800'
+              'sticky bottom-0 pb-8 dark:border-neutral-800'
             )}
           >
             {config.feedbackLink ? (
@@ -240,7 +244,7 @@ export default function ToC({
                 filepath={filepathWithName}
                 repository={config.docsRepositoryBase}
                 labels={config.feedbackLabels}
-                text={config.feedbackLink}
+                feedbackLink={config.feedbackLink}
               />
             ) : null}
 

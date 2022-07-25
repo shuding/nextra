@@ -6,7 +6,8 @@
     "dev": "next",
     "start": "next start",
     "build": "next build",
-    "debug": "NODE_OPTIONS='--inspect' next dev"
+    "debug": "NODE_OPTIONS='--inspect' next dev",
+    "clean": "rimraf .next .turbo"
   },
   "author": "Shu Ding",
   "license": "Apache-2.0",
@@ -21,9 +22,9 @@
     "react-intersection-observer": "^8.26.2"
   },
   "devDependencies": {
-    "autoprefixer": "^10.2.6",
-    "postcss": "^8.3.5",
-    "tailwindcss": "^3.0.23"
+    "autoprefixer": "^10.4.7",
+    "postcss": "^8.4.14",
+    "tailwindcss": "^3.1.4"
   },
   "prettier": {
     "embeddedLanguageFormatting": "off",

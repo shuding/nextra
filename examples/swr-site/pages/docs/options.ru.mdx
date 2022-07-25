@@ -27,7 +27,7 @@ const { data, error, isValidating, mutate } = useSWR(key, fetcher, options)
 - `revalidateOnMount`: включить или отключить автоматическую ревалидацию при монтировании компонента
 - `revalidateOnFocus = true`: автоматически ревалидировать, когда окно фокусируется [(подробнее)](/docs/revalidation)
 - `revalidateOnReconnect = true`: автоматически ревалидировать, когда браузер восстанавливает сетевое подключение (через `navigator.onLine`) [(подробнее)](/docs/revalidation)
-- `refreshInterval` [(подробнее)](/docs/revalidation): 
+- `refreshInterval` [(подробнее)](/docs/revalidation):
   - по умолчанию отключен: `refreshInterval = 0`
   - If set to a number, интервал поллинга в миллисекундах
   - If set to a function, the function will receive the latest data and should return the interval in milliseconds

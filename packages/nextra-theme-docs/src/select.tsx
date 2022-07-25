@@ -21,9 +21,9 @@ export default function Menu({ options, selected, onChange }: MenuProps) {
         <>
           <Listbox.Button
             className={cn(
-              'rounded-md px-2 w-full text-left font-medium cursor-default text-xs h-7 transition-colors text-gray-600 dark:text-gray-400 focus:outline-none',
+              'h-7 w-full cursor-default rounded-md px-2 text-left text-xs font-medium text-gray-600 transition-colors focus:outline-none dark:text-gray-400',
               open
-                ? 'bg-gray-200 dark:bg-primary-100 dark:bg-opacity-10 text-gray-900 dark:text-gray-50'
+                ? 'bg-gray-200 text-gray-900 dark:bg-primary-100 dark:bg-opacity-10 dark:text-gray-50'
                 : 'hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-primary-100 dark:hover:bg-opacity-5 dark:hover:text-gray-50'
             )}
           >
@@ -38,7 +38,7 @@ export default function Menu({ options, selected, onChange }: MenuProps) {
           >
             <Listbox.Options
               className={
-                'menu absolute bottom-[130%] min-w-full z-20 mt-1 bg-white dark:bg-neutral-800 dark:ring-white dark:ring-opacity-20 shadow-lg max-h-64 rounded-md py-1 ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none text-sm'
+                'menu absolute bottom-[130%] z-20 mt-1 max-h-64 min-w-full overflow-auto rounded-md bg-white py-1 text-sm shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-neutral-800 dark:ring-white dark:ring-opacity-20'
               }
             >
               {options.map(option => (
@@ -49,9 +49,9 @@ export default function Menu({ options, selected, onChange }: MenuProps) {
                     cn(
                       option.key === selected.key ? '' : '',
                       active
-                        ? 'text-primary-500 bg-primary-50 dark:bg-primary-500 dark:bg-opacity-10'
+                        ? 'bg-primary-50 text-primary-500 dark:bg-primary-500 dark:bg-opacity-10'
                         : 'text-gray-800 dark:text-gray-100',
-                      'cursor-default select-none relative py-1.5 pl-3 pr-9 whitespace-nowrap'
+                      'relative cursor-default select-none whitespace-nowrap py-1.5 pl-3 pr-9'
                     )
                   }
                 >

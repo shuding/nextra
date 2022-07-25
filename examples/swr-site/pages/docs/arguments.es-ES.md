@@ -53,4 +53,3 @@ const { data: orders } = useSWR({ url: '/api/orders', args: user }, fetcher)
 <Callout emoji="⚠️">
   In older versions (< 1.1.0), SWR **shallowly** compares the arguments on every render, and triggers revalidation if any of them has changed. 
 </Callout>
-

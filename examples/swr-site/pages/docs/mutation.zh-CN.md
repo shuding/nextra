@@ -2,7 +2,7 @@
 
 ## 重新验证
 
-你可以使用 `useSWRConfig()` 所返回的 `mutate` 函数，来广播重新验证的消息给其他的 SWR hook<sup>*</sup>。使用同一个 key 调用 `mutate(key)` 即可。
+你可以使用 `useSWRConfig()` 所返回的 `mutate` 函数，来广播重新验证的消息给其他的 SWR hook<sup>\*</sup>。使用同一个 key 调用 `mutate(key)` 即可。
 
 以下示例显示了当用户点击 “注销” 按钮时如何自动重新请求登录信息（例如在 `<Profile/>` 内）：
 
@@ -29,7 +29,7 @@ function App () {
 }
 ```
 
-*: _通常情况下 mutate 会广播给同一个 [cache provider](/docs/cache) 下面的 SWR hooks。如果没有设置 cache provider，即会广播给所有的 SWR hooks。_
+\*: _通常情况下 mutate 会广播给同一个 [cache provider](/docs/cache) 下面的 SWR hooks。如果没有设置 cache provider，即会广播给所有的 SWR hooks。_
 
 ## 与 POST 请求配合使用
 
@@ -49,13 +49,13 @@ function Profile () {
       <h1>My name is {data.name}.</h1>
       <button onClick={async () => {
         const newName = data.name.toUpperCase()
-        
+
         // 立即更新本地数据，但禁用重新验证
         mutate('/api/user', { ...data, name: newName }, false)
-        
+
         // 向 API 发送请求更新源
         await requestUpdateUsername(newName)
-        
+
         // 触发重新验证（重新请求）以确保本地数据是正确的
         mutate('/api/user')
       }}>Uppercase my name!</button>

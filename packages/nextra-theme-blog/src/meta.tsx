@@ -4,11 +4,11 @@ import ThemeSwitch from './theme-switch'
 import type { NextraBlogTheme } from './types'
 import { split } from './utils/get-tags'
 
-interface MeatProps {
+interface MetaProps {
   author: string
   date: string
   tag: string | string[]
-  back: string
+  back?: string | null
   config: NextraBlogTheme
 }
 
@@ -18,12 +18,12 @@ export default function Meta({
   tag,
   back,
   config
-}: MeatProps): ReactElement {
+}: MetaProps): ReactElement {
   const tags = tag ? split(tag) : []
 
   return (
-    <div className="flex items-center mb-8 gap-3">
-      <div className="flex-1 text-gray-400 gap-1 flex items-center flex-wrap">
+    <div className="mb-8 flex items-center gap-3">
+      <div className="flex flex-1 flex-wrap items-center gap-1 text-gray-400">
         {author}
         {author && date && ','}
         {date && (
@@ -36,19 +36,18 @@ export default function Meta({
           <Link key={t} href="/tags/[tag]" as={`/tags/${t}`}>
             <a
               className="
-                px-1
-                rounded-md
-                text-sm
-                leading-5
-                bg-gray-200
                 select-none
-                !no-underline
+                rounded-md
+                bg-gray-200
+                px-1
+                text-sm
                 !text-gray-400
-                dark:!text-gray-100
+                !no-underline
                 hover:!text-gray-800
-                dark:hover:!text-gray-800
-                dark:bg-gray-400
                 active:bg-gray-400
+                dark:bg-gray-400
+                dark:!text-gray-100
+                dark:hover:!text-gray-800
               "
             >
               {t}

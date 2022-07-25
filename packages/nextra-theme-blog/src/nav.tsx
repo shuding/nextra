@@ -12,12 +12,12 @@ export default function Nav({
   config: NextraBlogTheme
 }): ReactElement {
   return (
-    <div className="flex items-center mb-8 gap-3">
-      <div className="grow flex items-center flex-wrap justify-end gap-3">
+    <div className="mb-8 flex items-center gap-3">
+      <div className="flex grow flex-wrap items-center justify-end gap-3">
         {navPages.map(page => {
           if (page.active) {
             return (
-              <span key={page.route} className="text-gray-400 cursor-default">
+              <span key={page.route} className="cursor-default text-gray-400">
                 {page.frontMatter?.title || page.name}
               </span>
             )

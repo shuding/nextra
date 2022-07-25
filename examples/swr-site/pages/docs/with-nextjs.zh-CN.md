@@ -17,7 +17,7 @@ import Callout from 'nextra-theme-docs/callout'
 
 如果页面必须进行预渲染, Next.js 支持 [两种形式](https://nextjs.org/docs/basic-features/data-fetching)： **静态生成 (SSG)** 和 **服务器渲染 (SSR)**。
 
-与SWR一起使用，你可以通过预渲染页面来获得 SEO , 并且还可以拥有缓存，重新验证，焦点跟踪，客户端周期性请求数据的功能。
+与 SWR 一起使用，你可以通过预渲染页面来获得 SEO , 并且还可以拥有缓存，重新验证，焦点跟踪，客户端周期性请求数据的功能。
 
 你可以使用 [`SWRConfig`](/docs/global-configuration) 的 `fallback` 选项将预先请求的数据作为所有 SWR hooks 的初始值传递。
 例如使用 `getStaticProps` :
@@ -51,7 +51,7 @@ export default function Page({ fallback }) {
 }
 ```
 
-该页面仍然是预渲染的。 它对SEO友好，并能够快速的响应。同时在客户端方面获得了来自SWR的完全支持。随着时间的推移，窗口中的数据将持续是动态且自我更新的。
+该页面仍然是预渲染的。 它对 SEO 友好，并能够快速的响应。同时在客户端方面获得了来自 SWR 的完全支持。随着时间的推移，窗口中的数据将持续是动态且自我更新的。
 
 <Callout emoji="💡">
   `Article` 组件会先渲染预先生成的数据，并且在页面 hydrate 后，它将再次获取最新数据，以保持数据的时效性。

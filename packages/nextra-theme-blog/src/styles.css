@@ -7,75 +7,37 @@ body {
 }
 
 article {
-  @apply block mx-auto pt-20 pb-32;
+  @apply mx-auto block pt-20 pb-32;
 }
 
 article img {
   @apply mx-auto;
 }
 
-a.subheading {
-  text-decoration: none !important;
-  color: unset !important;
-}
-
 h1 {
   letter-spacing: -0.03em;
 }
 
-.subheading-anchor {
-  margin-top: -2em;
-  display: inline-block;
-  position: absolute;
-  width: 1px;
-}
-
-.subheading-anchor + a:hover .anchor-icon {
-  opacity: 1;
-}
-.anchor-icon {
-  opacity: 0;
-  @apply ml-2 text-gray-500;
-}
-
-.post-item .post-item-date {
-  @apply text-sm text-gray-300;
-}
-.post-item .post-item-more {
-  @apply ml-1 text-gray-600;
-}
-.post-item .post-item-desc {
-  margin-bottom: 0.5em;
-  @apply text-gray-400;
-}
-.post-item .post-item-title {
-  @apply no-underline;
-  color: unset;
-}
-ul.nextra-post-list {
-  @apply pl-0;
-}
-
 code {
-  @apply bg-black bg-opacity-5 border border-black border-opacity-5 rounded-md;
+  @apply rounded-md border border-black border-opacity-5 bg-black bg-opacity-5;
   font-size: 0.9em;
   padding: 2px 0.25em;
   box-decoration-break: clone;
   font-feature-settings: 'rlig' 1, 'calt' 1, 'ss01' 1;
   .dark & {
-    @apply bg-white bg-opacity-10 border-white border-opacity-10;
+    @apply border-white border-opacity-10 bg-white bg-opacity-10;
   }
 }
 pre {
   /* content-visibility: auto; */
   contain: paint;
-  @apply p-4 bg-slate-100 rounded-xl mt-6 mb-4 overflow-x-auto font-medium subpixel-antialiased;
+  @apply mt-6 mb-4 overflow-x-auto rounded-xl bg-slate-100 p-4 font-medium subpixel-antialiased;
   @apply dark:bg-gray-300 dark:bg-opacity-10;
   code {
     line-height: 1.25rem;
-    @apply relative p-0 text-sm text-current bg-transparent dark:bg-transparent rounded-none border-none inline-block min-w-full;
+    @apply relative inline-block min-w-full rounded-none border-none bg-transparent p-0 text-sm text-current dark:bg-transparent;
     .line.highlighted {
-      @apply before:block before:absolute before:h-5 before:bg-gray-500 before:bg-opacity-10 before:-inset-x-4 before:pointer-events-none before:select-none;
+      @apply before:pointer-events-none before:absolute before:-inset-x-4 before:block before:h-5 before:select-none before:bg-gray-500 before:bg-opacity-10;
       span {
         @apply relative;
       }
@@ -86,12 +48,12 @@ a code {
   @apply text-current no-underline;
 }
 [data-nextra-code][data-filename] {
-  @apply block relative;
+  @apply relative block;
 
   &::before {
     content: attr(data-filename);
     position: absolute;
-    @apply absolute truncate top-0 z-[1] text-xs py-2 px-4 w-full text-gray-700 bg-slate-200 dark:bg-gray-700 dark:text-gray-200 rounded-t-xl;
+    @apply absolute top-0 z-[1] w-full truncate rounded-t-xl bg-slate-200 py-2 px-4 text-xs text-gray-700 dark:bg-gray-700 dark:text-gray-200;
   }
   pre {
     @apply pt-12;

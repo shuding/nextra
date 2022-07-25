@@ -133,7 +133,7 @@ const HeaderLink = ({
       {anchor}
       <a
         href={'#' + slug}
-        className="anchor text-current no-underline no-outline"
+        className="anchor no-outline text-current no-underline"
       >
         {children}
         <span className="anchor-icon" aria-hidden>
@@ -322,7 +322,8 @@ const getComponents = (context: { index: number }) => ({
     Bleed,
     Callout,
     Tabs,
-    Tab
+    Tab,
+    Collapse
   }
 })
 

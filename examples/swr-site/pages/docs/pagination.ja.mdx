@@ -23,7 +23,7 @@ import { Pagination } from 'components/diagrams/pagination'
 ...これは典型的なページネーション UI です。`useSWR` を使って簡単に実装する方法を
 みてみましょう：
 
-```jsx bg=5
+```jsx {5}
 function App () {
   const [pageIndex, setPageIndex] = useState(0);
 
@@ -42,7 +42,7 @@ function App () {
 
 さらに、この「ページコンポーネント」を抽象化できます：
 
-```jsx bg=13
+```jsx {13}
 function Page ({ index }) {
   const { data } = useSWR(`/api/data?page=${index}`, fetcher);
 
@@ -65,7 +65,7 @@ function App () {
 SWR のキャッシュがあるため、次のページを事前にロードできるという利点があります。次のページを非表示の div 内にレンダリングすると、
 SWR は次のページのデータフェッチを開始します。ユーザーが次のページに移動したときには、データはすでにそこにあります。
 
-```jsx bg=6
+```jsx {6}
 function App () {
   const [pageIndex, setPageIndex] = useState(0);
 
@@ -95,7 +95,7 @@ import { Infinite } from 'components/diagrams/infinite'
 実装するには、このページで**動的な多くのリクエスト**を行う必要があります。
 React フックには[いくつかのルール](https://reactjs.org/docs/hooks-rules.html)があるため、次のようなことは**できません**：
 
-```jsx bg=5,6,7,8,9
+```jsx {5-9}
 function App () {
   const [cnt, setCnt] = useState(1)
 
@@ -118,7 +118,7 @@ function App () {
 
 代わりに、抽象化して作成した `<Page />` を使うことができます：
 
-```jsx bg=5,6,7
+```jsx {5-7}
 function App () {
   const [cnt, setCnt] = useState(1)
 
@@ -142,7 +142,7 @@ function App () {
 表示する必要がでてきました。トップレベルの UI （`<App />`）が各ページ内のデータを必要とするため、
 `<Page />` を使ったソリューションは使えなくなってしまいました：
 
-```jsx bg=10
+```jsx {10}
 function App () {
   const [cnt, setCnt] = useState(1)
 
@@ -226,7 +226,7 @@ GET /users?page=0&limit=10
 ]
 ```
 
-```jsx bg=4,5,6,7,10
+```jsx {4-7,10}
 // 各ページの SWR キーを取得する関数であり、
 // その返り値は `fetcher` に渡されます。
 // `null` が返ってきた場合は、そのページのリクエストは開始されません。
@@ -285,7 +285,7 @@ function App () {
 
 API がカーソルを必要とし、データと一緒に次のカーソルを返すとしましょう：
 
-```
+```plaintext
 GET /users?cursor=123&limit=10
 {
   data: [
