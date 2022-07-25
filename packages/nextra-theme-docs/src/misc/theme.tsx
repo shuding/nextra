@@ -4,7 +4,8 @@ import React, {
   useRef,
   useState,
   ReactNode,
-  useContext
+  useContext,
+  PropsWithChildren
 } from 'react'
 import 'intersection-observer'
 
@@ -327,7 +328,7 @@ const getComponents = (context: { index: number }) => ({
   }
 })
 
-export const MDXTheme: React.FC<{}> = ({ children }) => {
+export const MDXTheme: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   return (
     <MDXProvider components={getComponents({ index: 0 }) as any}>
       {children}

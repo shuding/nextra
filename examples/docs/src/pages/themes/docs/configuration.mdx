@@ -67,7 +67,7 @@ export default {
 
 Changes the icon that is shown in the top right.
 
-**Type:** `ReactNode | React.FC<{ locale?: string }>{:ts}`
+**Type:** `ReactNode | React.FC<{ locale: string }>{:ts}`
 
 **Default:** GitHub icon
 
@@ -166,7 +166,7 @@ export default {
 
 Specifies if a search box should be shown in the top right.
 
-**Type:** `string | ((props: { locale?: string }) => string){:ts}`
+**Type:** `string | ((props: { locale: string }) => string){:ts}`
 
 **Example:**
 
@@ -261,7 +261,7 @@ export default {
 
 The text that is shown on the left of the footer.
 
-**Type:** `ReactNode | React.FC<{ locale?: string }>{:ts}`
+**Type:** `ReactNode | React.FC<PropsWithChildren<{ locale: string }>>{:ts}`
 
 **Example:**
 
@@ -278,7 +278,7 @@ export default {
 
 The components that should be shown on the link that leads to the editable page on the repository.
 
-**Type:** `ReactNode | React.FC<{ locale?: string }>{:ts}`
+**Type:** `ReactNode | React.FC<PropsWithChildren<{ locale: string }>>{:ts}`
 
 **Default:** `Edit this page`
 
@@ -297,7 +297,7 @@ export default {
 
 The components that should be shown on the link that leads to the issues or discussions of the repository.
 
-**Type:** `ReactNode | React.FC<{ locale?: string }>{:ts}`
+**Type:** `ReactNode | React.FC<PropsWithChildren<{ locale: string }>>{:ts}`
 
 **Default:** ``
 
@@ -335,7 +335,7 @@ export default {
 
 The logo in the top left.
 
-**Type:** `ReactNode | React.FC<{ locale?: string }>{:ts}`
+**Type:** `ReactNode | React.FC<PropsWithChildren<{ locale: string }>>{:ts}`
 
 **Example:**
 
@@ -359,7 +359,7 @@ export default {
 
 The head that should be inserted into the html document.
 
-**Type:** `ReactNode | React.FC<{ locale?: string; config: DocsThemeConfig; title: string; meta: Record<string, any> }>{:ts}`
+**Type:** `ReactNode | React.FC<PropsWithChildren<{ locale: string; config: DocsThemeConfig; title: string; meta: Record<string, any> }>>{:ts}`
 
 **Example:**
 
@@ -464,7 +464,7 @@ export default {
 
 The banner content that will display at top of the page.
 
-**Type:** `ReactNode | React.FC<{ locale?: string }>{:ts}`
+**Type:** `ReactNode | React.FC<PropsWithChildren<{ locale: string }>>{:ts}`
 
 **Example:**
 
@@ -500,7 +500,7 @@ export default {
 
 The component that is used to display timestamp of the last commit of current page.
 
-**Type:** `string | React.FC<{ locale?: string; timestamp: Date }>{:ts}`
+**Type:** `string | React.FC<PropsWithChildren<{ locale: string; timestamp: Date }>>{:ts}`
 
 **Example:**
 
@@ -517,7 +517,7 @@ export default {
 
 The extra content that is displayed under the table of contents.
 
-**Type:** `ReactNode | React.FC<unknown>{:ts}`
+**Type:** `ReactNode | React.FC<PropsWithChildren<unknown>>{:ts}`
 
 **Example:**
 

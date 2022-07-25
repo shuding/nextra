@@ -21,7 +21,7 @@ interface NavBarProps {
 
 export default function Navbar({ flatDirectories, items }: NavBarProps) {
   const config = useConfig()
-  const { locale, asPath } = useRouter()
+  const { locale = 'en-US', asPath } = useRouter()
   const activeRoute = getFSRoute(asPath, locale)
   const { menu, setMenu } = useMenuContext()
 

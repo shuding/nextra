@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { PropsWithChildren, ReactNode } from 'react'
 import cn from 'classnames'
 import Slugger from 'github-slugger'
 import { Heading } from 'nextra'
@@ -67,13 +67,15 @@ const EditPageLink = ({
   repository?: string
   text:
     | React.ReactNode
-    | React.FC<{
-        locale: string
-      }>
+    | React.FC<
+        PropsWithChildren<{
+          locale: string
+        }>
+      >
   filepath: string
 }) => {
   const url = createEditUrl(repository, filepath)
-  const { locale } = useRouter()
+  const { locale = 'en-US' } = useRouter()
   return (
     <a
       className="mb-2 block text-xs font-medium text-gray-500 no-underline hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
@@ -97,12 +99,12 @@ const FeedbackLink = ({
   labels
 }: {
   repository?: string
-  feedbackLink: ReactNode | React.FC<{ locale: string }>
+  feedbackLink: ReactNode | React.FC<PropsWithChildren<{ locale: string }>>
   filepath: string
   labels?: string
 }) => {
   const url = useCreateFeedbackUrl(repository, filepath, labels)
-  const { locale } = useRouter()
+  const { locale = 'en-US' } = useRouter()
   return (
     <a
       className="mb-2 block text-xs font-medium text-gray-500 no-underline hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
@@ -195,7 +197,7 @@ export default function ToC({
   const slugger = new Slugger()
   const activeAnchor = useActiveAnchor()
   const config = useConfig()
-  const { locale } = useRouter()
+  const { locale = 'en-US' } = useRouter()
 
   headings = headings
     ? headings.filter(

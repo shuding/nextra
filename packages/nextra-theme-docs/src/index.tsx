@@ -1,4 +1,10 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, {
+  PropsWithChildren,
+  useEffect,
+  useMemo,
+  useRef,
+  useState
+} from 'react'
 import { useRouter } from 'next/router'
 import 'focus-visible'
 import { SkipNavContent } from '@reach/skip-nav'
@@ -29,13 +35,12 @@ if (typeof window !== 'undefined') {
     resizeObserver! ||
     new ResizeObserver(entries => {
       if (window.location.hash) {
-        const node = entries[0]
-        .target
-        .ownerDocument
-        .querySelector(window.location.hash);
+        const node = entries[0].target.ownerDocument.querySelector(
+          window.location.hash
+        )
 
         if (node) {
-          scrollIntoView(node);
+          scrollIntoView(node)
         }
       }
     })
@@ -63,7 +68,7 @@ interface BodyProps {
   navLinks: React.ReactNode
 }
 
-const Body: React.FC<BodyProps> = ({
+const Body: React.FC<PropsWithChildren<BodyProps>> = ({
   themeContext,
   breadcrumb,
   navLinks,
@@ -71,7 +76,7 @@ const Body: React.FC<BodyProps> = ({
   children
 }) => {
   const config = useConfig()
-  const { locale } = useRouter()
+  const { locale = 'en-US' } = useRouter()
   const date = timestamp ? new Date(timestamp) : null
   const mainElement = useRef<HTMLElement>(null)
 
@@ -124,7 +129,10 @@ const Body: React.FC<BodyProps> = ({
               : ''
           )}
         >
-          <main className="z-10 w-full min-w-0 max-w-4xl px-6 pt-4 md:px-8" ref={mainElement}>
+          <main
+            className="z-10 w-full min-w-0 max-w-4xl px-6 pt-4 md:px-8"
+            ref={mainElement}
+          >
             {breadcrumb}
             <MDXTheme>{children}</MDXTheme>
             {date && config.gitTimestamp ? (
@@ -161,7 +169,7 @@ interface LayoutProps {
   timestamp?: number
 }
 
-const Content: React.FC<LayoutProps> = ({
+const Content: React.FC<PropsWithChildren<LayoutProps>> = ({
   filename,
   pageMap,
   meta,

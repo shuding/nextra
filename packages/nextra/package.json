@@ -11,9 +11,6 @@
   "main": "./dist/index.js",
   "typesVersions": {
     "*": {
-      ".": [
-        "./dist/types.d.ts"
-      ],
       "compile": [
         "./dist/compile.d.ts"
       ],
@@ -69,6 +66,7 @@
     "build": "tsup",
     "dev": "tsup --watch",
     "types": "tsup --dts-only",
+    "types:check": "tsc --noEmit",
     "test": "vitest run",
     "prepublishOnly": "pnpm build",
     "clean": "rimraf ./dist ./style.css",
@@ -87,7 +85,9 @@
     "slash": "^3.0.0"
   },
   "peerDependencies": {
-    "react": ">=16.13.1"
+    "next": ">=9.5.3",
+    "react": ">=16.13.1",
+    "react-dom": ">=18.2.0"
   },
   "prettier": {
     "semi": false,
@@ -98,7 +98,12 @@
   "devDependencies": {
     "@types/graceful-fs": "^4.1.5",
     "@types/mdast": "^3.0.10",
+    "@types/react": "*",
+    "@types/react-dom": "*",
     "@types/webpack": "^5.28.0",
-    "tsup": "^6.1.3"
+    "next": "*",
+    "react": "*",
+    "react-dom": "*",
+    "tsup": "*"
   }
 }

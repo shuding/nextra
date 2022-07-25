@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react'
+import React, { createContext, ReactNode, useContext, useState } from 'react'
 
 export type ActiveAnchor = Record<
   string,
@@ -18,7 +18,7 @@ const ActiveAnchorSetterContext = createContext<
 // re-renders of the content triggered by the state update.
 export const useActiveAnchor = () => useContext(ActiveAnchorContext)
 export const useActiveAnchorSet = () => useContext(ActiveAnchorSetterContext)
-export const ActiveAnchor: React.FC = ({ children }) => {
+export const ActiveAnchor = ({ children }: { children: ReactNode }) => {
   const state = useState<ActiveAnchor>({})
   return (
     <ActiveAnchorContext.Provider value={state[0]}>

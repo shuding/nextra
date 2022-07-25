@@ -31,6 +31,10 @@
         "dist/**/*.d.ts"
       ]
     },
+    "types:check": {
+      "dependsOn": [],
+      "outputs": []
+    },
     "format": {
       "cache": false
     },

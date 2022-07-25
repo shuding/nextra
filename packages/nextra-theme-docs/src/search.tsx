@@ -1,11 +1,17 @@
-import React, { useMemo, useCallback, useRef, useState, useEffect } from 'react'
+import React, {
+  useMemo,
+  useCallback,
+  useRef,
+  useState,
+  useEffect,
+  EventHandler
+} from 'react'
 import matchSorter from 'match-sorter'
 import cn from 'classnames'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import type { MouseEventHandler } from 'react'
 import type { Item as NormalItem } from './utils/normalize-pages'
-import renderComponent from './utils/render-component'
 import { useConfig } from './config'
 interface ItemProps {
   title: string
@@ -66,7 +72,9 @@ const Search = ({ directories = [] }: SearchProps) => {
     setActive(next)
   }
 
-  const handleKeyDown = useCallback(
+  const handleKeyDown = useCallback<
+    React.KeyboardEventHandler<HTMLInputElement>
+  >(
     e => {
       const { key, ctrlKey } = e
 
@@ -87,7 +95,7 @@ const Search = ({ directories = [] }: SearchProps) => {
     [active, results, router]
   )
 
-  const handleOnBlur = useCallback(
+  const handleOnBlur = useCallback<React.FocusEventHandler<HTMLInputElement>>(
     e => {
       if (active === null) {
         setShow(false)
@@ -122,7 +130,11 @@ const Search = ({ directories = [] }: SearchProps) => {
   }, [])
 
   const renderList = show && results.length > 0
-
+  const placeholder =
+    config.searchPlaceholder &&
+    (typeof config.searchPlaceholder === 'string'
+      ? config.searchPlaceholder
+      : config.searchPlaceholder({ locale }))
   return (
     <div className="nextra-search relative w-full md:w-64">
       {renderList && (
@@ -137,13 +149,7 @@ const Search = ({ directories = [] }: SearchProps) => {
           }}
           className="block w-full appearance-none rounded-lg bg-black bg-opacity-[.03] px-3 py-2 leading-tight transition-colors hover:bg-opacity-5 focus:outline-none focus:ring"
           type="search"
-          placeholder={renderComponent(
-            config.searchPlaceholder,
-            {
-              locale
-            },
-            true
-          )}
+          placeholder={placeholder}
           onKeyDown={handleKeyDown}
           onFocus={() => setShow(true)}
           onBlur={handleOnBlur}

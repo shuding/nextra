@@ -12,7 +12,9 @@
     "clean": "rimraf .next .turbo"
   },
   "dependencies": {
-    "gray-matter": "^4.0.2",
+    "react": "*",
+    "react-dom": "*",
+    "next": "*",
     "nextra": "workspace:*",
     "nextra-theme-blog": "workspace:*"
   }
