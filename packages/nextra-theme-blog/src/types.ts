@@ -1,15 +1,14 @@
+interface Props {
+  title: string,
+  meta: Record<string, unknown>
+}
+
 export interface NextraBlogTheme {
   readMore?: string
-  footer?: React.ReactNode
+  footer?: (props: Props) => React.ReactNode
   titleSuffix?: string
   postFooter?: string
-  head?: ({
-    title,
-    meta
-  }: {
-    title: string
-    meta: Record<string, any>
-  }) => React.ReactNode
+  head?: (props: Props) => React.ReactNode
   cusdis?: {
     appId: string
     host?: string

@@ -172,7 +172,7 @@ const BlogLayout = ({
           {type === 'post' && comments}
         </MDXTheme>
         {postList}
-        {config.footer}
+        {config.footer?.({ title, meta: opts.meta })}
       </HeadingContext.Provider>
     </article>
   )
