@@ -15,5 +15,6 @@
   "suspense": "Suspense",
   "middleware": "Middleware",
   "advanced": "Avanzado",
-  "change-log": "Registro de cambios"
+  "change-log": "Registro de cambios",
+  "scroll-with-dynamic-height": "Desplazarse con altura dinámica"
 }

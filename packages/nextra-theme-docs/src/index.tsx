@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import 'focus-visible'
 import { SkipNavContent } from '@reach/skip-nav'
@@ -21,6 +21,25 @@ import { DocsThemeConfig, Meta, PageTheme } from './types'
 import './polyfill'
 import Breadcrumb from './breadcrumb'
 import renderComponent from './utils/render-component'
+import scrollIntoView from 'scroll-into-view-if-needed'
+
+let resizeObserver: ResizeObserver
+if (typeof window !== 'undefined') {
+  resizeObserver =
+    resizeObserver! ||
+    new ResizeObserver(entries => {
+      if (window.location.hash) {
+        const node = entries[0]
+        .target
+        .ownerDocument
+        .querySelector(window.location.hash);
+
+        if (node) {
+          scrollIntoView(node);
+        }
+      }
+    })
+}
 
 function useDirectoryInfo(pageMap: PageMapItem[]) {
   const { locale, defaultLocale, asPath } = useRouter()
@@ -54,6 +73,17 @@ const Body: React.FC<BodyProps> = ({
   const config = useConfig()
   const { locale } = useRouter()
   const date = timestamp ? new Date(timestamp) : null
+  const mainElement = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    if (mainElement.current) {
+      resizeObserver.observe(mainElement.current)
+    }
+
+    return () => {
+      resizeObserver.disconnect()
+    }
+  }, [])
 
   return (
     <React.Fragment>
@@ -94,7 +124,7 @@ const Body: React.FC<BodyProps> = ({
               : ''
           )}
         >
-          <main className="z-10 w-full min-w-0 max-w-4xl px-6 pt-4 md:px-8">
+          <main className="z-10 w-full min-w-0 max-w-4xl px-6 pt-4 md:px-8" ref={mainElement}>
             {breadcrumb}
             <MDXTheme>{children}</MDXTheme>
             {date && config.gitTimestamp ? (
