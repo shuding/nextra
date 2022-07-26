@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropsWithChildren } from 'react'
 
 const themes = {
   default:
@@ -17,7 +17,7 @@ interface CalloutProps {
   emoji: string
 }
 
-const Callout: React.FC<CalloutProps> = ({
+const Callout: React.FC<PropsWithChildren<CalloutProps>> = ({
   children,
   type = 'default',
   emoji = '💡'

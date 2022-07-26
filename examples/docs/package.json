@@ -12,8 +12,9 @@
     "clean": "rimraf .next .turbo"
   },
   "dependencies": {
-    "prism-react-renderer": "^1.1.1",
-    "prismjs": "^1.22.0",
+    "react": "*",
+    "react-dom": "*",
+    "next": "*",
     "nextra": "workspace:*",
     "nextra-theme-docs": "workspace:*"
   }
