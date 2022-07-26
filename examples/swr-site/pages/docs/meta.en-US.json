@@ -39,5 +39,6 @@
     "href": "https://github.com/shuding/nextra",
     "type": "page",
     "newWindow": true
-  }
+  },
+  "scroll-with-dynamic-height": "Scroll With Dynamic Height"
 }

@@ -21,6 +21,7 @@ import { DocsThemeConfig, Meta, PageTheme } from './types'
 import './polyfill'
 import Breadcrumb from './breadcrumb'
 import renderComponent from './utils/render-component'
+import scrollIntoView from 'scroll-into-view-if-needed'
 
 let resizeObserver: ResizeObserver
 if (typeof window !== 'undefined') {
@@ -28,10 +29,14 @@ if (typeof window !== 'undefined') {
     resizeObserver! ||
     new ResizeObserver(entries => {
       if (window.location.hash) {
-        entries[0]
+        const node = entries[0]
         .target
         .ownerDocument
-        .querySelector(window.location.hash)?.scrollIntoView()
+        .querySelector(window.location.hash);
+
+        if (node) {
+          scrollIntoView(node);
+        }
       }
     })
 }
