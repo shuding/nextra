@@ -14,7 +14,7 @@
   "dependencies": {
     "react": "*",
     "react-dom": "*",
-    "next": "*",
+    "next": ">=12",
     "nextra": "workspace:*",
     "nextra-theme-docs": "workspace:*"
   }
