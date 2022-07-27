@@ -7,15 +7,14 @@
   "license": "MIT",
   "files": [
     "dist/*",
-    "index.js",
     "style.css"
   ],
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     "./style.css": "./style.css",
     ".": {
-      "import": "./dist/index.mjs",
-      "module": "./dist/index.mjs",
+      "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
     }
   },
