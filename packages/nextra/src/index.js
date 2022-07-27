@@ -50,8 +50,8 @@ const nextra = (...args) =>
               loader: 'nextra/loader',
               options: {
                 ...nextraConfig,
-                locales: nextConfig.i18n?.locales,
-                defaultLocale: nextConfig.i18n?.defaultLocale,
+                locales: defaulti18n.locales,
+                defaultLocale: defaulti18n.defaultLocale,
                 pageMapCache
               }
             }
