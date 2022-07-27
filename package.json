@@ -2,8 +2,8 @@
   "private": true,
   "scripts": {
     "dev": "turbo run dev",
-    "build": "turbo run build:tailwind build --filter=./packages/*",
-    "types": "turbo run types",
+    "build": "turbo run build:tailwind types --filter=./packages/*",
+    "types": "turbo run types --filter=./packages/*",
     "types:check": "turbo run types:check",
     "dev:core": "turbo run dev --filter=nextra...",
     "dev:theme-blog": "turbo run dev --filter=blog...",
