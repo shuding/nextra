@@ -1,18 +1,19 @@
 import { NextraPlugin, pageMapCache } from './plugin'
 import { DEFAULT_LOCALE, MARKDOWN_EXTENSION_REGEX } from './constants'
+import type { Nextra } from "./types"
 
 const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
 const MARKDOWN_EXTENSIONS = ['md', 'mdx']
 
-const nextra = (...args) =>
+const nextra: Nextra = (...config) =>
   function withNextra(nextConfig = {}) {
     const nextraConfig =
-      typeof args[0] === 'string'
+      typeof config[0] === "string"
         ? {
-            theme: args[0],
-            themeConfig: args[1]
+            theme: config[0],
+            themeConfig: config[1]
           }
-        : args[0]
+        : config[0]
 
     const nextraPlugin = new NextraPlugin(nextraConfig)
     const { pageExtensions = DEFAULT_EXTENSIONS } = nextConfig
@@ -23,14 +24,17 @@ const nextra = (...args) =>
       )
     }
 
-    const i18n = nextConfig.i18n || {
-      // If `i18n.locales` and `i18n.defaultLocale` were not specified,
-      // client will receive error - Text content does not match server-rendered HTML.
-      // Due to `const { locale } = useRouter()` where `locale` will be `undefined`
-      // To fix it we need to explicitly specify `i18n.locales` and `i18n.defaultLocale`
-      ...nextConfig.i18n,
-      locales: nextConfig.i18n.locales || [DEFAULT_LOCALE],
-      defaultLocale: nextConfig.i18n.defaultLocale || DEFAULT_LOCALE
+    const defaultI18n = {
+      locales: [DEFAULT_LOCALE],
+      defaultLocale: DEFAULT_LOCALE,
+    }
+    // If `i18n.locales` and `i18n.defaultLocale` were not specified,
+    // client will receive error - Text content does not match server-rendered HTML.
+    // Due to `const { locale } = useRouter()` where `locale` will be `undefined`
+    // To fix it we need to explicitly specify `i18n.locales` and `i18n.defaultLocale`
+    const i18n = {
+      locales: nextConfig.i18n?.locales || defaultI18n.locales,
+      defaultLocale: nextConfig.i18n?.defaultLocale || defaultI18n.defaultLocale
     }
 
     return {
@@ -65,4 +69,5 @@ const nextra = (...args) =>
       }
     }
   }
-module.exports = nextra
+
+export default nextra
