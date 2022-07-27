@@ -1,5 +1,15 @@
 # nextra
 
+## 2.0.0-beta.11
+
+### Patch Changes
+
+- a0398e0: fix: avoid mutating nextConfig
+- fe2b714: upgrade to react 18
+- 78f1519: chore: Add strict-peer-dependencies=false
+- 1942a2e: chore: Fix build script
+- 044721d: chore: Update turbo filters
+
 ## 2.0.0-beta.10
 
 ### Patch Changes

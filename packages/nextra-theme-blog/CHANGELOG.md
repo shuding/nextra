@@ -1,5 +1,13 @@
 # nextra-theme-blog
 
+## 2.0.0-beta.11
+
+### Patch Changes
+
+- a0398e0: fix: avoid mutating nextConfig
+- fe2b714: upgrade to react 18
+- 78f1519: chore: Add strict-peer-dependencies=false
+
 ## 2.0.0-beta.10
 
 ### Patch Changes
