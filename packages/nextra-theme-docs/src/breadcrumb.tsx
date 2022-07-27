@@ -20,13 +20,13 @@ export default function Breadcrumb({ activePath }: { activePath: Item[] }) {
             ) : null}
             <div
               className={cn(
-                'transition-colors hover:text-gray-900 dark:hover:text-gray-200',
+                'transition-colors hover:text-gray-900 dark:hover:text-gray-200 whitespace-nowrap',
                 {
                   'active text-gray-600 dark:text-gray-400': isActive,
-                  'min-w-[24px] overflow-hidden text-ellipsis whitespace-nowrap':
-                    !isActive
+                  'min-w-[24px] overflow-hidden text-ellipsis': !isActive
                 }
               )}
+              title={item.title}
             >
               {isLink && !isActive ? (
                 <Link href={item.route}>
