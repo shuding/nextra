@@ -1,5 +1,20 @@
 # nextra-theme-docs
 
+## 2.0.0-beta.11
+
+### Patch Changes
+
+- 903ddf0: fix: should update scroll when height is dynamic
+- 3e3b0a9: feat: add cursor pointer to locale and theme menu
+- a0398e0: fix: avoid mutating nextConfig
+- 38ccce8: feat(docs): allow `Tabs.items` as `ReadonlyArray<ReactNode>`
+- fe2b714: upgrade to react 18
+- 6bdb9bf: fix: broken flexsearch styles
+- 78f1519: chore: Add strict-peer-dependencies=false
+- 582ad96: feat: bump `rehype-pretty-code` version, support `showLineNumbers`
+- c8bb94f: UI adjustments
+- 707fdc2: fix: Anchor links are not wrapping on the sidebar
+
 ## 2.0.0-beta.10
 
 ### Patch Changes
