@@ -23,17 +23,13 @@ const nextra = (...config) =>
       )
     }
 
-    const defaultI18n = {
-      locales: [DEFAULT_LOCALE],
-      defaultLocale: DEFAULT_LOCALE,
-    }
     // If `i18n.locales` and `i18n.defaultLocale` were not specified,
     // client will receive error - Text content does not match server-rendered HTML.
     // Due to `const { locale } = useRouter()` where `locale` will be `undefined`
     // To fix it we need to explicitly specify `i18n.locales` and `i18n.defaultLocale`
     const i18n = {
-      locales: nextConfig.i18n?.locales || defaultI18n.locales,
-      defaultLocale: nextConfig.i18n?.defaultLocale || defaultI18n.defaultLocale
+      locales: nextConfig.i18n?.locales || [DEFAULT_LOCALE],
+      defaultLocale: nextConfig.i18n?.defaultLocale || DEFAULT_LOCALE
     }
 
     return {
