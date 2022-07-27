@@ -86,7 +86,7 @@
     "react-dom": ">=16.13.1"
   },
   "devDependencies": {
-    "next": "*",
+    "next": ">=12",
     "react": "*",
     "react-dom": "*",
     "nextra": "workspace:*",

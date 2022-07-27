@@ -101,7 +101,7 @@
     "@types/react": "*",
     "@types/react-dom": "*",
     "@types/webpack": "^5.28.0",
-    "next": "*",
+    "next": ">=12",
     "react": "*",
     "react-dom": "*",
     "tsup": "*"
