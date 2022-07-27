@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "nextra": "workspace:*",
-    "next": "*",
+    "next": ">=12",
     "react": "*",
     "react-dom": "*",
     "concurrently": "*",

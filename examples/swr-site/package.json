@@ -14,7 +14,7 @@
   "dependencies": {
     "react": "*",
     "react-dom": "*",
-    "next": "*",
+    "next": ">=12",
     "@reach/skip-nav": "^0.16.0",
     "focus-visible": "^5.1.0",
     "intersection-observer": "^0.10.0",
