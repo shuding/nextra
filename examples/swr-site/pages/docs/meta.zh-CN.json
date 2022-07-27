@@ -15,5 +15,6 @@
   "suspense": "Suspense",
   "middleware": "中间件",
   "advanced": "高级",
-  "change-log": "更新日志"
+  "change-log": "更新日志",
+  "scroll-with-dynamic-height": "以動態高度滾動"
 }

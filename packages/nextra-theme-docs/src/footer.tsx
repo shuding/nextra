@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropsWithChildren } from 'react'
 import cn from 'classnames'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -94,8 +94,8 @@ export const NavLinks = ({
   )
 }
 
-const Footer: React.FC<{ menu?: boolean }> = ({ menu }) => {
-  const { locale } = useRouter()
+const Footer: React.FC<PropsWithChildren<{ menu?: boolean }>> = ({ menu }) => {
+  const { locale = 'en-US' } = useRouter()
   const config = useConfig()
 
   return (

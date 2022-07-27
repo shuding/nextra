@@ -21,7 +21,7 @@ interface NavBarProps {
 
 export default function Navbar({ flatDirectories, items }: NavBarProps) {
   const config = useConfig()
-  const { locale, asPath } = useRouter()
+  const { locale = 'en-US', asPath } = useRouter()
   const activeRoute = getFSRoute(asPath, locale)
   const { menu, setMenu } = useMenuContext()
 
@@ -166,7 +166,7 @@ export default function Navbar({ flatDirectories, items }: NavBarProps) {
           ) : null}
 
           <button
-            className="nextra-menu-icon block p-2 md:hidden"
+            className="nextra-menu-icon block p-2 -mr-2 md:hidden"
             onClick={() => setMenu(!menu)}
           >
             <MenuIcon className={cn({ open: menu })} />

@@ -15,5 +15,6 @@
   "suspense": "Задержка (Suspense)",
   "middleware": "Промежуточное ПО (Middleware)",
   "advanced": "Продвинутые",
-  "change-log": "Журнал изменений"
+  "change-log": "Журнал изменений",
+  "scroll-with-dynamic-height": "Прокрутка с динамической высотой"
 }

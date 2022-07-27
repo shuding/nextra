@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import React, { ReactElement, ReactNode } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -191,8 +191,8 @@ const createLayout = (opts: PageOpt, _config: NextraBlogTheme) => {
     _config
   )
 
-  const Page = ({ children }: { children: React.ReactChildren }) => children
-  const Layout = (page: React.ReactChildren) => (
+  const Page = ({ children }: { children: ReactNode }) => children
+  const Layout = (page: ReactNode) => (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <BlogLayout config={config} contentNodes={page} opts={opts} />
     </ThemeProvider>
