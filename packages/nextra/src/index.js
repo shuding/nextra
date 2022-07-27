@@ -16,6 +16,7 @@ const nextra = (...args) =>
 
     const nextraPlugin = new NextraPlugin(nextraConfig)
     const { i18n, pageExtensions = DEFAULT_EXTENSIONS } = nextConfig
+    let defaulti18n = i18n || {};
 
     if (i18n?.locales) {
       console.log(
@@ -26,7 +27,7 @@ const nextra = (...args) =>
       // client will receive error - Text content does not match server-rendered HTML.
       // Due to `const { locale } = useRouter()` where `locale` will be `undefined`
       // To fix it we need to explicitly specify `i18n.locales` and `i18n.defaultLocale`
-      nextConfig.i18n = {
+      defaulti18n = {
         ...i18n,
         locales: [DEFAULT_LOCALE],
         defaultLocale: DEFAULT_LOCALE
@@ -35,6 +36,7 @@ const nextra = (...args) =>
 
     return {
       ...nextConfig,
+      i18n: defaulti18n,
       pageExtensions: [...pageExtensions, ...MARKDOWN_EXTENSIONS],
       webpack(config, options) {
         config.plugins ||= []
