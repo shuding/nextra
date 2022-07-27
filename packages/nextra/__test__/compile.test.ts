@@ -10,7 +10,7 @@ type Name =
   | 'no-h1.mdx'
   | 'static-h1.mdx'
 
-function loadFixture(name: Name): string {
+function loadFixture(name: Name) {
   const filePath = path.join(
     process.cwd(),
     '__test__',

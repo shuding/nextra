@@ -12,13 +12,13 @@ vi.mock('next/server', async () => {
   return {
     ...(mod as any),
     NextResponse: {
-      redirect(url) {
+      redirect(url: string) {
         return {
           type: 'redirect',
           url
         }
       },
-      rewrite(url) {
+      rewrite(url: string) {
         return {
           type: 'rewrite',
           url

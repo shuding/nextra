@@ -136,6 +136,7 @@ export default MDXContent;
 
 exports[`process heading > dynamic-h1 1`] = `
 {
+  "hasJsxInH1": true,
   "headings": [
     {
       "children": [
