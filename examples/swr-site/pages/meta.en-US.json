@@ -12,6 +12,22 @@
       "toc": true
     }
   },
+  "about": {
+    "title": "About",
+    "type": "menu",
+    "items": {
+      "contributors": {
+        "title": "Contributors",
+        "href": "https://github.com/shuding/nextra",
+        "newWindow": true
+      },
+      "team": {
+        "title": "Team",
+        "href": "https://github.com/shuding/nextra",
+        "newWindow": true
+      }
+    }
+  },
   "examples": {
     "title": "Examples",
     "type": "page",

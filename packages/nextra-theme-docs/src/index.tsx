@@ -187,7 +187,7 @@ const Content: React.FC<PropsWithChildren<LayoutProps>> = ({
     activeThemeContext,
     activePath,
     // pageDirectories,
-    topLevelPageItems,
+    topLevelNavbarItems,
     docsDirectories,
     flatDirectories,
     flatDocsDirectories,
@@ -229,7 +229,7 @@ const Content: React.FC<PropsWithChildren<LayoutProps>> = ({
           <Navbar
             isRTL={isRTL}
             flatDirectories={flatDirectories}
-            items={topLevelPageItems}
+            items={topLevelNavbarItems}
           />
         ) : null}
         <ActiveAnchor>

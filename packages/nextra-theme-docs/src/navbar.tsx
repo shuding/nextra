@@ -2,6 +2,8 @@ import React from 'react'
 import cn from 'classnames'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { Listbox, Transition } from '@headlessui/react'
+import { ArrowRightIcon } from 'nextra/icons'
 
 import renderComponent from './utils/render-component'
 import { getFSRoute } from './utils/get-fs-route'
@@ -11,12 +13,12 @@ import { useConfig } from './config'
 import Search from './search'
 import Flexsearch from './flexsearch'
 import { GitHubIcon, DiscordIcon, XIcon, MenuIcon } from 'nextra/icons'
-import { Item, PageItem } from './utils/normalize-pages'
+import { Item, PageItem, MenuItem } from './utils/normalize-pages'
 
 interface NavBarProps {
   isRTL?: boolean | null
   flatDirectories: Item[]
-  items: PageItem[]
+  items: (PageItem | MenuItem)[]
 }
 
 export default function Navbar({ flatDirectories, items }: NavBarProps) {
@@ -74,46 +76,123 @@ export default function Navbar({ flatDirectories, items }: NavBarProps) {
           <div className="flex-1" />
 
           {items
-            ? items.map(page => {
-                if (page.hidden) return null
+            ? items.map(pageOrMenu => {
+                if (pageOrMenu.hidden) return null
 
-                let href = page.href || page.route || '#'
+                if (pageOrMenu.type === 'menu') {
+                  const menu = pageOrMenu as MenuItem
 
-                // If it's a directory
-                if (page.children) {
-                  href =
-                    (page.withIndexPage ? page.route : page.firstChildRoute) ||
-                    href
+                  return (
+                    <div className="inline-block relative">
+                      <Listbox value={''} onChange={() => {}}>
+                        {({ open }) => (
+                          <>
+                            <Listbox.Button
+                              className={cn(
+                                'nextra-nav-link items-center',
+                                '-ml-2 hidden whitespace-nowrap p-2 no-underline md:inline-flex',
+                                'text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200'
+                              )}
+                            >
+                              {menu.title}
+                              <ArrowRightIcon
+                                height="1em"
+                                className={cn(
+                                  'ml-1 h-[18px] min-w-[18px] rounded-sm p-[2px]',
+                                  '[&>path]:origin-center [&>path]:transition-transform',
+                                  '[&>path]:rotate-90'
+                                )}
+                              />
+                            </Listbox.Button>
+                            <Transition
+                              show={open}
+                              as={React.Fragment}
+                              leave="transition"
+                              leaveFrom="opacity-100"
+                              leaveTo="opacity-0"
+                            >
+                              <Listbox.Options
+                                className={
+                                  'menu absolute right-0 z-20 mt-1 max-h-64 min-w-full overflow-auto rounded-md bg-white py-1 text-sm shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-neutral-800 dark:ring-white dark:ring-opacity-20'
+                                }
+                              >
+                                {Object.entries(menu.items || {}).map(
+                                  ([key, item]) => (
+                                    <Listbox.Option
+                                      key={key}
+                                      value={key}
+                                      className={
+                                        'text-gray-800 dark:text-gray-100 relative cursor-pointer select-none whitespace-nowrap py-1.5 pl-3 pr-9'
+                                      }
+                                    >
+                                      <Link href={item.href || '#'} key={key}>
+                                        <a
+                                          className={cn(
+                                            'hidden whitespace-nowrap no-underline md:inline-block',
+                                            'text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200'
+                                          )}
+                                          {...(item.newWindow
+                                            ? {
+                                                target: '_blank',
+                                                rel: 'noopener noreferrer',
+                                                'aria-selected': false
+                                              }
+                                            : {})}
+                                        >
+                                          {item.title || key}
+                                        </a>
+                                      </Link>
+                                    </Listbox.Option>
+                                  )
+                                )}
+                              </Listbox.Options>
+                            </Transition>
+                          </>
+                        )}
+                      </Listbox>
+                    </div>
+                  )
+                } else {
+                  const page = pageOrMenu as PageItem
+                  let href = page.href || page.route || '#'
+
+                  // If it's a directory
+                  if (page.children) {
+                    href =
+                      (page.withIndexPage
+                        ? page.route
+                        : page.firstChildRoute) || href
+                  }
+
+                  const isActive =
+                    page.route === activeRoute ||
+                    activeRoute.startsWith(page.route + '/')
+
+                  return (
+                    <Link href={href} key={page.route}>
+                      <a
+                        className={cn(
+                          'nextra-nav-link',
+                          '-ml-2 hidden whitespace-nowrap p-2 no-underline md:inline-block',
+                          !isActive || page.newWindow
+                            ? 'text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200'
+                            : 'active font-medium text-current'
+                        )}
+                        {...(page.newWindow
+                          ? {
+                              target: '_blank',
+                              rel: 'noopener noreferrer',
+                              'aria-selected': false
+                            }
+                          : {
+                              'aria-selected': isActive
+                            })}
+                      >
+                        {page.title}
+                      </a>
+                    </Link>
+                  )
                 }
-
-                const isActive =
-                  page.route === activeRoute ||
-                  activeRoute.startsWith(page.route + '/')
-
-                return (
-                  <Link href={href} key={page.route}>
-                    <a
-                      className={cn(
-                        'nextra-nav-link',
-                        '-ml-2 hidden whitespace-nowrap p-2 no-underline md:inline-block',
-                        !isActive || page.newWindow
-                          ? 'text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200'
-                          : 'active font-medium text-current'
-                      )}
-                      {...(page.newWindow
-                        ? {
-                            target: '_blank',
-                            rel: 'noopener noreferrer',
-                            'aria-selected': false
-                          }
-                        : {
-                            'aria-selected': isActive
-                          })}
-                    >
-                      {page.title}
-                    </a>
-                  </Link>
-                )
               })
             : null}
 

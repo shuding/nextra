@@ -31,6 +31,19 @@ export interface PageItem extends Omit<PageMapItem, 'children'> {
   hidden?: boolean
   withIndexPage?: boolean
 }
+export interface MenuItem extends Omit<PageMapItem, 'children'> {
+  title: string
+  type: 'menu'
+  hidden?: boolean
+  items?: Record<
+    string,
+    {
+      title: string
+      href?: string
+      newWindow?: boolean
+    }
+  >
+}
 export interface DocsItem extends Omit<PageMapItem, 'children'> {
   title: string
   type: string
@@ -93,7 +106,7 @@ export default function normalizePages({
 
   // Page directories
   const pageDirectories: PageItem[] = []
-  const topLevelPageItems: PageItem[] = []
+  const topLevelNavbarItems: PageItem[] = []
 
   let activeType: string | undefined = undefined
   let activeIndex: number = 0
@@ -106,6 +119,7 @@ export default function normalizePages({
   delete fallbackMeta.title
   delete fallbackMeta.href
 
+  // Normalize items based on files and meta.json.
   const items = list
     .filter(
       a =>
@@ -172,6 +186,7 @@ export default function normalizePages({
       continue
     }
 
+    // Get the item's meta information.
     const extendedMeta = extendMeta(meta[a.name], fallbackMeta)
 
     const type = extendedMeta.type || 'doc'
@@ -222,6 +237,7 @@ export default function normalizePages({
       children: normalizedChildren ? [] : undefined
     }
 
+    // This item is currently active, we collect the active path etc.
     if (a.route === route) {
       activePath = [item]
       activeType = type
@@ -232,9 +248,12 @@ export default function normalizePages({
       }
       switch (type) {
         case 'page':
-          activeIndex = topLevelPageItems.length
+        case 'menu':
+          // Active on the navbar
+          activeIndex = topLevelNavbarItems.length
           break
         case 'doc':
+          // Active in the docs tree
           if (isCurrentDocsTree) {
             activeIndex = flatDocsDirectories.length
           }
@@ -253,8 +272,9 @@ export default function normalizePages({
         activePath = [item, ...normalizedChildren.activePath]
         switch (activeType) {
           case 'page':
+          case 'menu':
             activeIndex =
-              topLevelPageItems.length + normalizedChildren.activeIndex
+              topLevelNavbarItems.length + normalizedChildren.activeIndex
             break
           case 'doc':
             activeIndex =
@@ -267,11 +287,10 @@ export default function normalizePages({
           }
         }
       }
-    }
 
-    if (normalizedChildren) {
       switch (type) {
         case 'page':
+        case 'menu':
           // @ts-expect-error normalizedChildren === true
           pageItem.children.push(...normalizedChildren.pageDirectories)
           docsDirectories.push(...normalizedChildren.docsDirectories)
@@ -281,9 +300,9 @@ export default function normalizePages({
             pageItem.firstChildRoute = findFirstRoute(
               normalizedChildren.flatDirectories
             )
-            topLevelPageItems.push(pageItem)
+            topLevelNavbarItems.push(pageItem)
           } else if (pageItem.withIndexPage) {
-            topLevelPageItems.push(pageItem)
+            topLevelNavbarItems.push(pageItem)
           }
 
           break
@@ -309,7 +328,8 @@ export default function normalizePages({
       flatDirectories.push(item)
       switch (type) {
         case 'page':
-          topLevelPageItems.push(pageItem)
+        case 'menu':
+          topLevelNavbarItems.push(pageItem)
           break
         case 'doc':
           if (isCurrentDocsTree) {
@@ -321,6 +341,7 @@ export default function normalizePages({
     directories.push(item)
     switch (type) {
       case 'page':
+      case 'menu':
         pageDirectories.push(pageItem)
         if (isCurrentDocsTree && underCurrentDocsRoot) {
           docsDirectories.push(pageItem)
@@ -344,6 +365,6 @@ export default function normalizePages({
     docsDirectories,
     flatDocsDirectories,
     pageDirectories,
-    topLevelPageItems
+    topLevelNavbarItems
   }
 }
