@@ -21,7 +21,7 @@ export default function Menu({ options, selected, onChange }: MenuProps) {
         <>
           <Listbox.Button
             className={cn(
-              'h-7 w-full cursor-default rounded-md px-2 text-left text-xs font-medium text-gray-600 transition-colors focus:outline-none dark:text-gray-400',
+              'h-7 w-full cursor-pointer rounded-md px-2 text-left text-xs font-medium text-gray-600 transition-colors focus:outline-none dark:text-gray-400',
               open
                 ? 'bg-gray-200 text-gray-900 dark:bg-primary-100 dark:bg-opacity-10 dark:text-gray-50'
                 : 'hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-primary-100 dark:hover:bg-opacity-5 dark:hover:text-gray-50'
@@ -51,7 +51,7 @@ export default function Menu({ options, selected, onChange }: MenuProps) {
                       active
                         ? 'bg-primary-50 text-primary-500 dark:bg-primary-500 dark:bg-opacity-10'
                         : 'text-gray-800 dark:text-gray-100',
-                      'relative cursor-default select-none whitespace-nowrap py-1.5 pl-3 pr-9'
+                      'relative cursor-pointer select-none whitespace-nowrap py-1.5 pl-3 pr-9'
                     )
                   }
                 >
