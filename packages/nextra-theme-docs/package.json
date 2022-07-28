@@ -89,6 +89,7 @@
     "next": ">=12",
     "react": "*",
     "react-dom": "*",
+    "vitest": "*",
     "nextra": "workspace:*",
     "@types/flexsearch": "^0.7.3",
     "concurrently": "*",

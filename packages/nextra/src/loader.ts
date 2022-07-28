@@ -109,7 +109,7 @@ async function loader(
     unstable_flexsearch = false
   }
 
-  const { result, headings, structurizedData } = await compileMdx(
+  const { result, headings, structurizedData, hasJsxInH1 } = await compileMdx(
     content,
     mdxOptions,
     {
@@ -184,6 +184,7 @@ const NextraLayout = __nextra_withSSG__(__nextra_withLayout__({
   pageMap: __nextra_pageMap__,
   titleText: typeof titleText === 'string' ? titleText : undefined,
   headings: ${JSON.stringify(headings)},
+  hasJsxInH1: ${JSON.stringify(hasJsxInH1)},
   ${timestamp ? `timestamp: ${timestamp},\n` : ''}
   ${
     unstable_flexsearch

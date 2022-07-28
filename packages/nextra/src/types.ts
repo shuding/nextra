@@ -56,6 +56,7 @@ export interface PageOpt {
     | {
         codeblocks: boolean
       }
+  hasJsxInH1?: boolean
 }
 
 export type PageMapResult = [

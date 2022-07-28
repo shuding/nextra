@@ -1,16 +1,12 @@
 import React, { ReactElement } from 'react'
 import Link from 'next/link'
 import ThemeSwitch from './theme-switch'
-import type { PageMapItem } from 'nextra'
-import { NextraBlogTheme } from './types'
+import { useBlogContext } from './blog-context'
+import { collectPostsAndNavs } from './utils/collect'
 
-export default function Nav({
-  navPages,
-  config
-}: {
-  navPages: PageMapItem[]
-  config: NextraBlogTheme
-}): ReactElement {
+export default function Nav(): ReactElement {
+  const { opts, config } = useBlogContext()
+  const { navPages } = collectPostsAndNavs({ opts, config })
   return (
     <div className="mb-8 flex items-center gap-3">
       <div className="flex grow flex-wrap items-center justify-end gap-3">

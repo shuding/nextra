@@ -104,6 +104,7 @@
     "next": ">=12",
     "react": "*",
     "react-dom": "*",
-    "tsup": "*"
+    "tsup": "*",
+    "vitest": "*"
   }
 }

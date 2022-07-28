@@ -5,9 +5,9 @@ import type { NextraBlogTheme } from './types'
 import { split } from './utils/get-tags'
 
 interface MetaProps {
-  author: string
-  date: string
-  tag: string | string[]
+  author?: string
+  date?: string
+  tag?: string | string[]
   back?: string | null
   config: NextraBlogTheme
 }
