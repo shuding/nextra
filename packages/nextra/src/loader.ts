@@ -86,23 +86,14 @@ async function loader(
     defaultLocale
   )
 
-  if (IS_PRODUCTION) {
-    // We only add meta files as dependencies for production build,
-    // so we can do incremental builds.
-    Object.entries(fileMap).forEach(([filePath, { name, meta, locale }]) => {
-      if (
-        name === 'meta.json' &&
-        meta &&
-        (!fileLocale || locale === fileLocale)
-      ) {
-        context.addDependency(filePath)
-      }
-    })
-  } else {
-    // Add the entire directory `pages` as the dependency,
-    // so we can generate the correct page map.
-    context.addContextDependency(pagesDir)
+  for (const [filePath, { name, locale }] of Object.entries(fileMap)) {
+    if (name === 'meta.json' && (!fileLocale || locale === fileLocale)) {
+      context.addDependency(filePath)
+    }
   }
+  // Add the entire directory `pages` as the dependency,
+  // so we can generate the correct page map.
+  context.addContextDependency(pagesDir)
 
   // Extract frontMatter information if it exists
   const { data, content } = grayMatter(source)
