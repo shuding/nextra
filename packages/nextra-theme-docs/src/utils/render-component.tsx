@@ -1,16 +1,14 @@
-import React, { PropsWithChildren } from 'react'
+import React, { FC, PropsWithChildren, ReactNode } from 'react'
 
-const renderComponent = <T,>(
-  ComponentOrNode: React.FC<PropsWithChildren<T>> | React.ReactNode,
+function renderComponent<T>(
+  ComponentOrNode: FC<PropsWithChildren<T>> | ReactNode,
   props: PropsWithChildren<T>,
-  functionOnly?: boolean
-) => {
+  functionOnly = false
+) {
   if (!ComponentOrNode) return null
-  if (typeof ComponentOrNode === 'function') {
-    if (functionOnly) return ComponentOrNode(props)
-    return <ComponentOrNode {...props} />
-  }
-  return ComponentOrNode
+  if (typeof ComponentOrNode !== 'function') return ComponentOrNode
+  if (functionOnly) return ComponentOrNode(props)
+  return <ComponentOrNode {...props} />
 }
 
 export default renderComponent
