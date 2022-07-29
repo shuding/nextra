@@ -1,4 +1,15 @@
-@tailwind base;
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import './variables.css';
+
+:root {
+  --nextra-primary-hue: 212deg;
+}
+
+.dark {
+  --nextra-primary-hue: 204deg;
+}
 
 html {
   @apply antialiased;
@@ -26,9 +37,6 @@ blockquote:not(:first-child),
 .table-container:not(:first-child) {
   @apply mt-6;
 }
-
-@tailwind components;
-@tailwind utilities;
 
 .main-container {
   min-height: 100vh;
@@ -869,35 +877,4 @@ table tr td {
 
 .nextra-banner-hidden .nextra-banner-container {
   display: none;
-}
-
-:root {
-  --shiki-color-text: #414141;
-  --shiki-color-background: transparent;
-  --shiki-token-constant: #1976d2;
-  --shiki-token-string: #22863a;
-  --shiki-token-comment: #aaa;
-  --shiki-token-keyword: #d32f2f;
-  --shiki-token-parameter: #ff9800;
-  --shiki-token-function: #6f42c1;
-  --shiki-token-string-expression: #22863a;
-  --shiki-token-punctuation: #212121;
-  --shiki-token-link: #22863a;
-  --nextra-shiki-deleted: #f00;
-  --nextra-shiki-inserted: #f00;
-  --nextra-primary-hue: 212deg;
-}
-
-.dark {
-  --shiki-color-text: #d1d1d1;
-  --shiki-token-constant: #79b8ff;
-  --shiki-token-string: #ffab70;
-  --shiki-token-comment: #6b737c;
-  --shiki-token-keyword: #f97583;
-  --shiki-token-parameter: #ff9800;
-  --shiki-token-function: #b392f0;
-  --shiki-token-string-expression: #4bb74a;
-  --shiki-token-punctuation: #bbbbbb;
-  --shiki-token-link: #ffab70;
-  --nextra-primary-hue: 204deg;
 }
