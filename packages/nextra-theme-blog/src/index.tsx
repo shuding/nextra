@@ -1,11 +1,12 @@
-import React, { PropsWithChildren, ReactNode } from 'react'
+import React, { ReactElement, ReactNode } from 'react'
 import { ThemeProvider } from 'next-themes'
-import type { PageOpt } from 'nextra'
+import type { PageOpts } from 'nextra'
 import type { LayoutProps, NextraBlogTheme } from './types'
 import { BlogProvider } from './blog-context'
 import { ArticleLayout } from './article-layout'
 import { PostsLayout } from './posts-layout'
 import { PageLayout } from './page-layout'
+import { DEFAULT_CONFIG } from './constants'
 
 const layoutMap = {
   post: ArticleLayout,
@@ -14,11 +15,11 @@ const layoutMap = {
   tag: PostsLayout
 }
 
-const BlogLayout: React.FC<PropsWithChildren<LayoutProps>> = ({
+const BlogLayout = ({
   config,
   children,
   opts
-}) => {
+}: LayoutProps & { children: ReactNode }): ReactElement => {
   const type = opts.meta.type || 'post'
   const Layout = layoutMap[type]
   if (!Layout) {
@@ -33,27 +34,17 @@ const BlogLayout: React.FC<PropsWithChildren<LayoutProps>> = ({
   )
 }
 
-const createLayout = (opts: PageOpt, _config: NextraBlogTheme) => {
-  const config: NextraBlogTheme = Object.assign(
-    {
-      readMore: 'Read More →',
-      footer: (
-        <small className="mt-32 block">CC BY-NC 4.0 2022 © Shu Ding.</small>
-      ),
-      titleSuffix: null,
-      postFooter: null
-    },
-    _config
-  )
-  const Page = ({ children }: { children: ReactNode }) => children
-  const Layout = (page: ReactNode) => (
+const createLayout = (opts: PageOpts, config: NextraBlogTheme) => {
+  const extendedConfig = { ...DEFAULT_CONFIG, ...config }
+
+  const Page = ({ children }: { children: ReactNode }): ReactNode => children
+  Page.getLayout = (page: ReactNode): ReactElement => (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-      <BlogLayout config={config} opts={opts}>
+      <BlogLayout config={extendedConfig} opts={opts}>
         {page}
       </BlogLayout>
     </ThemeProvider>
   )
-  Page.getLayout = Layout
   return Page
 }
 

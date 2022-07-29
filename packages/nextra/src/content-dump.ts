@@ -26,10 +26,10 @@ try {
 function initFromCache(filename: string) {
   if (!cached.has(filename)) {
     try {
-      const content = fs.readFileSync(path.join(assetDir, filename)).toString()
+      const content = fs.readFileSync(path.join(assetDir, filename), 'utf8')
       cached.set(filename, true)
       return JSON.parse(content)
-    } catch (err) {
+    } catch {
       cached.set(filename, false)
     }
   }
@@ -40,20 +40,20 @@ export function addPage({
   fileLocale,
   route,
   title,
-  data,
+  meta,
   structurizedData
 }: {
   fileLocale: string
   route: string
   title: string
-  data: any
+  meta: Record<string, any>
   structurizedData: any
 }): void {
   const dataFilename = `nextra-data-${fileLocale}.json`
 
   asset[fileLocale] ||= initFromCache(dataFilename)
   asset[fileLocale][route] = {
-    title: title || data.title,
+    title: title || meta.title,
     data: structurizedData
   }
 

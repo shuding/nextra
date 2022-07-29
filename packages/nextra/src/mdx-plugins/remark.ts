@@ -1,10 +1,6 @@
 import { Processor } from '@mdx-js/mdx/lib/core'
 import { Root, Heading, Parent } from 'mdast'
-
-export interface HeadingMeta {
-  headings: Heading[]
-  hasJsxInH1: boolean
-}
+import { PageOpts } from '../types'
 
 function visit(
   node: any,
@@ -14,9 +10,7 @@ function visit(
   if (tester(node)) {
     handler(node)
   }
-  if (node.children) {
-    node.children.forEach((n: any) => visit(n, tester, handler))
-  }
+  node.children?.forEach((n: any) => visit(n, tester, handler))
 }
 
 export function getFlattenedValue(node: Parent): string {
@@ -32,7 +26,9 @@ export function getFlattenedValue(node: Parent): string {
 }
 
 export function remarkHeadings(this: Processor) {
-  const data = this.data() as any
+  const data = this.data() as {
+    headingMeta: Pick<PageOpts, 'headings' | 'hasJsxInH1'>
+  }
   return (tree: Root, _file: any, done: () => void) => {
     visit(
       tree,
@@ -50,7 +46,7 @@ export function remarkHeadings(this: Processor) {
             node.depth === 1 &&
             Array.isArray(node.children) &&
             node.children.some(
-              (child: any) => (child.type as string) === 'mdxJsxTextElement'
+              (child: { type: string }) => child.type === 'mdxJsxTextElement'
             )
           const heading = {
             ...(node as Heading),

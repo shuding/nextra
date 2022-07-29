@@ -4,8 +4,8 @@ import remarkGfm from 'remark-gfm'
 import rehypePrettyCode from 'rehype-pretty-code'
 import { rehypeMdxTitle } from 'rehype-mdx-title'
 import { remarkStaticImage } from './mdx-plugins/static-image'
-import { remarkHeadings, HeadingMeta } from './mdx-plugins/remark'
-import { LoaderOptions } from './types'
+import { remarkHeadings } from './mdx-plugins/remark'
+import { LoaderOptions, PageOpts } from './types'
 import structurize from './mdx-plugins/structurize'
 import { parseMeta, attachMeta } from './mdx-plugins/rehype-handler'
 import theme from './theme.json'
@@ -75,7 +75,10 @@ export async function compileMdx(
     const result = await compiler.process(source)
     return {
       result: String(result),
-      ...(compiler.data('headingMeta') as HeadingMeta),
+      ...(compiler.data('headingMeta') as Pick<
+        PageOpts,
+        'headings' | 'hasJsxInH1'
+      >),
       structurizedData
     }
   } catch (err) {

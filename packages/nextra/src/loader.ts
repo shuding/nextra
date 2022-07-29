@@ -1,4 +1,4 @@
-import type { LoaderOptions } from './types'
+import type { LoaderOptions, PageOpts } from './types'
 
 import path from 'path'
 import grayMatter from 'gray-matter'
@@ -92,7 +92,7 @@ async function loader(
   context.addContextDependency(pagesDir)
 
   // Extract frontMatter information if it exists
-  const { data, content } = grayMatter(source)
+  const { data: meta, content } = grayMatter(source)
 
   let layout = theme
   let layoutConfig = themeConfig || null
@@ -120,12 +120,12 @@ async function loader(
   )
 
   if (unstable_flexsearch) {
-    if (data.searchable !== false) {
+    if (meta.searchable !== false) {
       addPage({
         fileLocale: fileLocale || DEFAULT_LOCALE,
         route,
         title,
-        data,
+        meta,
         structurizedData
       })
     }
@@ -133,7 +133,7 @@ async function loader(
     indexContentEmitted.add(filename)
   }
 
-  let timestamp: number | undefined
+  let timestamp: PageOpts['timestamp']
   if (repository && gitRoot) {
     if (repository.isShallow() && !wasShallowWarningPrinted) {
       if (process.env.VERCEL) {
@@ -164,6 +164,16 @@ async function loader(
     ? `import __nextra_layoutConfig__ from '${layoutConfig}'`
     : ''
 
+  const pageOpts: Omit<PageOpts, 'pageMap' | 'titleText'> = {
+    filename: slash(filename),
+    route: slash(route),
+    meta,
+    headings,
+    hasJsxInH1,
+    timestamp,
+    unstable_flexsearch,
+  }
+
   return `
 import __nextra_withLayout__ from '${layout}'
 import { withSSG as __nextra_withSSG__ } from 'nextra/ssg'
@@ -178,19 +188,9 @@ globalThis.__nextra_internal__ = {
 }
 
 const NextraLayout = __nextra_withSSG__(__nextra_withLayout__({
-  filename: "${slash(filename)}",
-  route: "${slash(route)}",
-  meta: ${JSON.stringify(data)},
   pageMap: __nextra_pageMap__,
   titleText: typeof titleText === 'string' ? titleText : undefined,
-  headings: ${JSON.stringify(headings)},
-  hasJsxInH1: ${JSON.stringify(hasJsxInH1)},
-  ${timestamp ? `timestamp: ${timestamp},\n` : ''}
-  ${
-    unstable_flexsearch
-      ? `unstable_flexsearch: ${JSON.stringify(unstable_flexsearch)}`
-      : ''
-  }
+  ...${JSON.stringify(pageOpts)}
 }, ${layoutConfig ? '__nextra_layoutConfig__' : 'null'}))
 
 function NextraPage(props) {

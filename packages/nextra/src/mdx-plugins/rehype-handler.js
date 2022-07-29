@@ -1,5 +1,4 @@
 import Slugger from 'github-slugger'
-
 import { getFlattenedValue } from './remark'
 
 function visit(node, tagNames, handler) {
@@ -7,9 +6,7 @@ function visit(node, tagNames, handler) {
     handler(node)
     return
   }
-  if (node.children) {
-    node.children.forEach(n => visit(n, tagNames, handler))
-  }
+  node.children?.forEach(n => visit(n, tagNames, handler))
 }
 
 export function parseMeta() {
@@ -50,8 +47,7 @@ export function attachMeta() {
         }
       } else {
         // Attach slug
-        node.properties.id =
-          node.properties.id || slugger.slug(getFlattenedValue(node))
+        node.properties.id ||= slugger.slug(getFlattenedValue(node))
       }
     })
   }

@@ -1,5 +1,5 @@
-import { BlogPageOpt } from '../../src/types'
-export const indexOpts: BlogPageOpt = {
+import { BlogPageOpts } from '../../src/types'
+export const indexOpts: BlogPageOpts = {
   filename: 'index.mdx',
   route: '/',
   meta: {
@@ -102,7 +102,7 @@ export const indexOpts: BlogPageOpt = {
   ]
 }
 
-export const postsOpts: BlogPageOpt = {
+export const postsOpts: BlogPageOpts = {
   filename: 'index.md',
   route: '/posts',
   meta: {
@@ -205,7 +205,7 @@ export const postsOpts: BlogPageOpt = {
   ]
 }
 
-export const articleOpts: BlogPageOpt = {
+export const articleOpts: BlogPageOpts = {
   filename: 'aaron-swartz-a-programmable-web.mdx',
   route: '/posts/aaron-swartz-a-programmable-web',
   meta: {

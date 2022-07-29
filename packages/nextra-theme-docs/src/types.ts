@@ -102,6 +102,5 @@ export type PageTheme = {
   typesetting: 'default' | 'article'
   breadcrumb: boolean
 }
-export interface Meta extends PageTheme {
-  title: string
-}
+
+type Meta = Record<string, any>
