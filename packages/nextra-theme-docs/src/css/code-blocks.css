@@ -13,6 +13,23 @@ code {
       @apply mr-6 inline-block w-4 text-right text-gray-500;
     }
   }
+
+  .line {
+    @apply border-l-2 border-transparent px-4;
+  }
+
+  .line.highlighted {
+    @apply border-primary-600/60 bg-primary-600/10;
+    span {
+      @apply relative;
+    }
+  }
+
+  .line .highlighted {
+    @apply rounded-sm shadow-[0_0_0_3px_rgba(0,0,0,0.3)];
+    @apply bg-primary-800/10 shadow-primary-800/10;
+    @apply dark:bg-primary-300/10 dark:shadow-primary-300/10;
+  }
 }
 
 pre {
@@ -26,20 +43,6 @@ pre {
     /* code blocks without languages don't have children that have px-4 */
     &:not([data-language]) {
       @apply px-4;
-    }
-    .line {
-      @apply border-l-2 border-transparent px-4;
-    }
-    .line.highlighted {
-      @apply border-primary-600/60 bg-primary-600/10;
-      span {
-        @apply relative;
-      }
-    }
-    .line .highlighted {
-      @apply rounded-sm shadow-[0_0_0_3px_rgba(0,0,0,0.3)];
-      @apply bg-primary-800/10 shadow-primary-800/10;
-      @apply dark:bg-primary-300/10 dark:shadow-primary-300/10;
     }
   }
 }
