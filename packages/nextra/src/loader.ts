@@ -11,11 +11,7 @@ import { parseFileName } from './utils'
 import { compileMdx } from './compile'
 import { getPageMap, findPagesDir } from './page-map'
 import { collectFiles, collectMdx } from './plugin'
-import {
-  MARKDOWN_EXTENSION_REGEX,
-  IS_PRODUCTION,
-  DEFAULT_LOCALE
-} from './constants'
+import { IS_PRODUCTION, DEFAULT_LOCALE } from './constants'
 
 // TODO: create this as a webpack plugin.
 const indexContentEmitted = new Set<string>()
@@ -86,23 +82,14 @@ async function loader(
     defaultLocale
   )
 
-  if (IS_PRODUCTION) {
-    // We only add meta files as dependencies for production build,
-    // so we can do incremental builds.
-    Object.entries(fileMap).forEach(([filePath, { name, meta, locale }]) => {
-      if (
-        name === 'meta.json' &&
-        meta &&
-        (!fileLocale || locale === fileLocale)
-      ) {
-        context.addDependency(filePath)
-      }
-    })
-  } else {
-    // Add the entire directory `pages` as the dependency,
-    // so we can generate the correct page map.
-    context.addContextDependency(pagesDir)
+  for (const [filePath, { name, locale }] of Object.entries(fileMap)) {
+    if (name === 'meta.json' && (!fileLocale || locale === fileLocale)) {
+      context.addDependency(filePath)
+    }
   }
+  // Add the entire directory `pages` as the dependency,
+  // so we can generate the correct page map.
+  context.addContextDependency(pagesDir)
 
   // Extract frontMatter information if it exists
   const { data, content } = grayMatter(source)
@@ -122,7 +109,7 @@ async function loader(
     unstable_flexsearch = false
   }
 
-  const { result, headings, structurizedData } = await compileMdx(
+  const { result, headings, structurizedData, hasJsxInH1 } = await compileMdx(
     content,
     mdxOptions,
     {
@@ -133,8 +120,7 @@ async function loader(
   )
 
   if (unstable_flexsearch) {
-    // We only add .MD and .MDX contents
-    if (MARKDOWN_EXTENSION_REGEX.test(filename) && data.searchable !== false) {
+    if (data.searchable !== false) {
       addPage({
         fileLocale: fileLocale || DEFAULT_LOCALE,
         route,
@@ -198,6 +184,7 @@ const NextraLayout = __nextra_withSSG__(__nextra_withLayout__({
   pageMap: __nextra_pageMap__,
   titleText: typeof titleText === 'string' ? titleText : undefined,
   headings: ${JSON.stringify(headings)},
+  hasJsxInH1: ${JSON.stringify(hasJsxInH1)},
   ${timestamp ? `timestamp: ${timestamp},\n` : ''}
   ${
     unstable_flexsearch

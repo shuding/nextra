@@ -3,6 +3,7 @@ import { Root, Heading, Parent } from 'mdast'
 
 export interface HeadingMeta {
   headings: Heading[]
+  hasJsxInH1: boolean
 }
 
 function visit(
@@ -45,11 +46,20 @@ export function remarkHeadings(this: Processor) {
       },
       node => {
         if (node.type === 'heading') {
+          const hasJsxInH1 =
+            node.depth === 1 &&
+            Array.isArray(node.children) &&
+            node.children.some(
+              (child: any) => (child.type as string) === 'mdxJsxTextElement'
+            )
           const heading = {
             ...(node as Heading),
             value: getFlattenedValue(node)
           }
           data.headingMeta.headings.push(heading)
+          if (hasJsxInH1) {
+            data.headingMeta.hasJsxInH1 = true
+          }
         } else if (node.name === 'summary' || node.name === 'details') {
           // Replace the <summary> and <details> with customized components.
           if (node.data) {

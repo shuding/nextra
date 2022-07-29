@@ -85,9 +85,11 @@ export interface DocsThemeConfig {
   tocExtraContent?: React.FC<PropsWithChildren<{ locale: string }>>
   unstable_searchResultEmpty?:
     | React.ReactNode
-    | React.FC<PropsWithChildren<{
-        locale: string
-      }>>
+    | React.FC<
+        PropsWithChildren<{
+          locale: string
+        }>
+      >
 }
 
 export type PageTheme = {

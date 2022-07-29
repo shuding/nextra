@@ -9,7 +9,7 @@
     "skipLibCheck": true,
     "allowJs": true,
     "jsx": "react",
-    "moduleResolution": "Node"
-  },
-  "include": ["src"]
+    "moduleResolution": "Node",
+    "types": ["vitest/globals"]
+  }
 }

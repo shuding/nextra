@@ -10,6 +10,7 @@ import React, {
 import { MDXProvider } from '@mdx-js/react'
 import Link from 'next/link'
 import ReactDOM from 'react-dom'
+import { useBlogContext } from './blog-context'
 
 export const HeadingContext = createContext<
   React.RefObject<HTMLHeadingElement | null>
@@ -22,9 +23,12 @@ const useHeadingRef = () => {
 
 const H1 = ({ children }: { children?: ReactNode }): ReactElement => {
   const ref = useHeadingRef()
+  const {
+    opts: { hasJsxInH1 }
+  } = useBlogContext()
   const [showHeading, setShowHeading] = useState(false)
   useEffect(() => {
-    if (ref.current) {
+    if (ref.current && hasJsxInH1) {
       setShowHeading(true)
     }
   }, [])

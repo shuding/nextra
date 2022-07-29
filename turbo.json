@@ -7,6 +7,7 @@
         "^build"
       ],
       "outputs": [
+        "dist/**/*.d.ts",
         "dist/**/*.mjs",
         "dist/**/*.js",
         "dist/**/*.css",
@@ -23,14 +24,6 @@
       ]
     },
     "test": {},
-    "types": {
-      "dependsOn": [
-        "^types"
-      ],
-      "outputs": [
-        "dist/**/*.d.ts"
-      ]
-    },
     "types:check": {
       "dependsOn": [],
       "outputs": []
