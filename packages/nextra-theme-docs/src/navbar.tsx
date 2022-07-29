@@ -2,7 +2,7 @@ import React from 'react'
 import cn from 'classnames'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { Listbox, Transition } from '@headlessui/react'
+import { Menu, Transition } from '@headlessui/react'
 import { ArrowRightIcon } from 'nextra/icons'
 
 import renderComponent from './utils/render-component'
@@ -19,6 +19,81 @@ interface NavBarProps {
   isRTL?: boolean | null
   flatDirectories: Item[]
   items: (PageItem | MenuItem)[]
+}
+
+const NavbarMenuLink = React.forwardRef((props: any, ref) => {
+  let { href, children, ...rest } = props
+  return (
+    <Link href={href}>
+      <a ref={ref} {...rest}>
+        {children}
+      </a>
+    </Link>
+  )
+})
+
+function NavbarMenu({
+  className,
+  menu,
+  children
+}: {
+  className?: string
+  menu: MenuItem
+  children: React.ReactNode
+}) {
+  const items = menu.items
+  const routes = Object.fromEntries(
+    (menu.children || []).map(route => [route.name, route])
+  )
+
+  return (
+    <Menu>
+      <Menu.Button
+        className={cn(
+          className,
+          'items-center -ml-2 hidden whitespace-nowrap p-2 no-underline md:inline-flex',
+          'text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200'
+        )}
+      >
+        {children}
+      </Menu.Button>
+      <Transition
+        leave="transition"
+        leaveFrom="opacity-100"
+        leaveTo="opacity-0"
+      >
+        <Menu.Items
+          className={
+            'menu absolute right-0 z-20 mt-1 max-h-64 min-w-full overflow-auto rounded-md bg-white py-1 text-sm shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-neutral-800 dark:ring-white dark:ring-opacity-20'
+          }
+        >
+          {Object.entries(items || {}).map(([key, item]) => {
+            const href = item.href || routes[key]?.route || '#'
+
+            return (
+              <Menu.Item key={key}>
+                <NavbarMenuLink
+                  href={href}
+                  className={
+                    'hidden whitespace-nowrap no-underline md:inline-block text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 relative cursor-pointer select-none py-1.5 pl-3 pr-9 w-full'
+                  }
+                  {...(item.newWindow
+                    ? {
+                        target: '_blank',
+                        rel: 'noopener noreferrer',
+                        'aria-selected': false
+                      }
+                    : {})}
+                >
+                  {item.title || key}
+                </NavbarMenuLink>
+              </Menu.Item>
+            )
+          })}
+        </Menu.Items>
+      </Transition>
+    </Menu>
+  )
 }
 
 export default function Navbar({ flatDirectories, items }: NavBarProps) {
@@ -82,74 +157,34 @@ export default function Navbar({ flatDirectories, items }: NavBarProps) {
                 if (pageOrMenu.type === 'menu') {
                   const menu = pageOrMenu as MenuItem
 
+                  const isActive =
+                    menu.route === activeRoute ||
+                    activeRoute.startsWith(menu.route + '/')
+
                   return (
-                    <div className="inline-block relative">
-                      <Listbox value={''} onChange={() => {}}>
-                        {({ open }) => (
-                          <>
-                            <Listbox.Button
-                              className={cn(
-                                'nextra-nav-link items-center',
-                                '-ml-2 hidden whitespace-nowrap p-2 no-underline md:inline-flex',
-                                'text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200'
-                              )}
-                            >
-                              {menu.title}
-                              <ArrowRightIcon
-                                height="1em"
-                                className={cn(
-                                  'ml-1 h-[18px] min-w-[18px] rounded-sm p-[2px]',
-                                  '[&>path]:origin-center [&>path]:transition-transform',
-                                  '[&>path]:rotate-90'
-                                )}
-                              />
-                            </Listbox.Button>
-                            <Transition
-                              show={open}
-                              as={React.Fragment}
-                              leave="transition"
-                              leaveFrom="opacity-100"
-                              leaveTo="opacity-0"
-                            >
-                              <Listbox.Options
-                                className={
-                                  'menu absolute right-0 z-20 mt-1 max-h-64 min-w-full overflow-auto rounded-md bg-white py-1 text-sm shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-neutral-800 dark:ring-white dark:ring-opacity-20'
-                                }
-                              >
-                                {Object.entries(menu.items || {}).map(
-                                  ([key, item]) => (
-                                    <Listbox.Option
-                                      key={key}
-                                      value={key}
-                                      className={
-                                        'text-gray-800 dark:text-gray-100 relative cursor-pointer select-none whitespace-nowrap py-1.5 pl-3 pr-9'
-                                      }
-                                    >
-                                      <Link href={item.href || '#'} key={key}>
-                                        <a
-                                          className={cn(
-                                            'hidden whitespace-nowrap no-underline md:inline-block',
-                                            'text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200'
-                                          )}
-                                          {...(item.newWindow
-                                            ? {
-                                                target: '_blank',
-                                                rel: 'noopener noreferrer',
-                                                'aria-selected': false
-                                              }
-                                            : {})}
-                                        >
-                                          {item.title || key}
-                                        </a>
-                                      </Link>
-                                    </Listbox.Option>
-                                  )
-                                )}
-                              </Listbox.Options>
-                            </Transition>
-                          </>
+                    <div
+                      className="inline-block relative"
+                      key={'menu-' + menu.title}
+                    >
+                      <NavbarMenu
+                        className={cn(
+                          'nextra-nav-link',
+                          !isActive
+                            ? 'text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200'
+                            : 'active subpixel-antialiased text-current'
                         )}
-                      </Listbox>
+                        menu={menu}
+                      >
+                        {menu.title}
+                        <ArrowRightIcon
+                          height="1em"
+                          className={cn(
+                            'ml-1 h-[18px] min-w-[18px] rounded-sm p-[2px]',
+                            '[&>path]:origin-center [&>path]:transition-transform',
+                            '[&>path]:rotate-90'
+                          )}
+                        />
+                      </NavbarMenu>
                     </div>
                   )
                 } else {
@@ -176,7 +211,7 @@ export default function Navbar({ flatDirectories, items }: NavBarProps) {
                           '-ml-2 hidden whitespace-nowrap p-2 no-underline md:inline-block',
                           !isActive || page.newWindow
                             ? 'text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200'
-                            : 'active font-medium text-current'
+                            : 'active subpixel-antialiased text-current'
                         )}
                         {...(page.newWindow
                           ? {

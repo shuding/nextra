@@ -35,6 +35,7 @@ export interface MenuItem extends Omit<PageMapItem, 'children'> {
   title: string
   type: 'menu'
   hidden?: boolean
+  children?: PageItem[]
   items?: Record<
     string,
     {
@@ -93,10 +94,19 @@ export default function normalizePages({
     }
   }
   const meta = _meta || {}
-
   const metaKeys = Object.keys(meta)
 
+  for (let key of metaKeys) {
+    if (typeof meta[key] === 'string') {
+      meta[key] = {
+        title: meta[key]
+      }
+    }
+  }
+
   // All directories
+  // - directories: all directories in the tree structure
+  // - flatDirectories: all directories in the flat structure, used by search
   const directories: Item[] = []
   const flatDirectories: Item[] = []
 
@@ -105,7 +115,6 @@ export default function normalizePages({
   const flatDocsDirectories: DocsItem[] = []
 
   // Page directories
-  const pageDirectories: PageItem[] = []
   const topLevelNavbarItems: PageItem[] = []
 
   let activeType: string | undefined = undefined
@@ -138,9 +147,9 @@ export default function normalizePages({
       if (indexB === -1) return -1
       return indexA - indexB
     })
-    .flatMap(a => {
+    .flatMap(item => {
       const items = []
-      const index = metaKeys.indexOf(a.name)
+      const index = metaKeys.indexOf(item.name)
 
       if (index !== -1) {
         // Fill all skipped items in meta.
@@ -157,7 +166,8 @@ export default function normalizePages({
         metaKeyIndex = index
       }
 
-      items.push(a)
+      const extendedItem = index !== -1 ? { ...meta[item.name], ...item } : item
+      items.push(extendedItem)
       return items
     })
 
@@ -209,7 +219,7 @@ export default function normalizePages({
           locale,
           defaultLocale,
           route,
-          docsRoot: type === 'page' ? a.route : docsRoot,
+          docsRoot: type === 'page' || type === 'menu' ? a.route : docsRoot,
           underCurrentDocsRoot: underCurrentDocsRoot || isCurrentDocsTree,
           pageThemeContext: extendedPageThemeContext
         })
@@ -292,7 +302,7 @@ export default function normalizePages({
         case 'page':
         case 'menu':
           // @ts-expect-error normalizedChildren === true
-          pageItem.children.push(...normalizedChildren.pageDirectories)
+          pageItem.children.push(...normalizedChildren.directories)
           docsDirectories.push(...normalizedChildren.docsDirectories)
 
           // If it's a page with children inside, we inject itself as a page too.
@@ -310,7 +320,6 @@ export default function normalizePages({
           if (isCurrentDocsTree) {
             Array.isArray(docsItem.children) &&
               docsItem.children.push(...normalizedChildren.docsDirectories)
-            pageDirectories.push(...normalizedChildren.pageDirectories)
 
             // Itself is a doc page.
             if (item.withIndexPage) {
@@ -342,7 +351,6 @@ export default function normalizePages({
     switch (type) {
       case 'page':
       case 'menu':
-        pageDirectories.push(pageItem)
         if (isCurrentDocsTree && underCurrentDocsRoot) {
           docsDirectories.push(pageItem)
         }
@@ -364,7 +372,6 @@ export default function normalizePages({
     flatDirectories,
     docsDirectories,
     flatDocsDirectories,
-    pageDirectories,
     topLevelNavbarItems
   }
 }

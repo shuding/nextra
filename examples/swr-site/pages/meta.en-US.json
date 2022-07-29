@@ -18,13 +18,14 @@
     "items": {
       "contributors": {
         "title": "Contributors",
-        "href": "https://github.com/shuding/nextra",
+        "href": "https://github.com/vercel/swr/graphs/contributors",
         "newWindow": true
       },
       "team": {
-        "title": "Team",
-        "href": "https://github.com/shuding/nextra",
-        "newWindow": true
+        "title": "Team"
+      },
+      "acknowledgement": {
+        "title": "Acknowledgement"
       }
     }
   },

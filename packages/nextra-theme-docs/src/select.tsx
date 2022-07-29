@@ -47,7 +47,6 @@ export default function Menu({ options, selected, onChange }: MenuProps) {
                   value={option}
                   className={({ active }) =>
                     cn(
-                      option.key === selected.key ? '' : '',
                       active
                         ? 'bg-primary-50 text-primary-500 dark:bg-primary-500 dark:bg-opacity-10'
                         : 'text-gray-800 dark:text-gray-100',
