@@ -1,6 +1,6 @@
 import { PageMapItem } from 'nextra'
 import { LayoutProps } from '../types'
-import sortDate from './sort-date'
+import { sortDate } from './date'
 import traverse from './traverse'
 
 const isNav = (page: PageMapItem) => {
