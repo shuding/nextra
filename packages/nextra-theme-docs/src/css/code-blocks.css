@@ -44,10 +44,6 @@ pre {
   }
 }
 
-a code {
-  @apply text-current no-underline;
-}
-
 [data-nextra-code][data-filename] {
   @apply relative block;
 
