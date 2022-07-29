@@ -14,10 +14,6 @@ code {
     }
   }
 
-  .line {
-    @apply border-l-2 border-transparent px-4;
-  }
-
   .line.highlighted {
     @apply border-primary-600/60 bg-primary-600/10;
     span {
@@ -43,6 +39,10 @@ pre {
     /* code blocks without languages don't have children that have px-4 */
     &:not([data-language]) {
       @apply px-4;
+    }
+
+    .line {
+      @apply border-l-2 border-transparent px-4;
     }
   }
 }
