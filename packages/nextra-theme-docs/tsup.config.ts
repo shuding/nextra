@@ -1,37 +1,38 @@
 import { defineConfig } from 'tsup'
+import tsconfig from './tsconfig.json'
 
 function outExtension() {
   return {
     js: `.js`
   }
 }
+const { compilerOptions: { target } } = tsconfig
+
+const sharedConfig = defineConfig({
+  format: 'esm',
+  dts: true,
+  outExtension,
+  target
+})
 export default defineConfig([
   {
     entry: ['src/bleed.tsx', 'src/callout.tsx'],
-    format: 'esm',
-    outExtension,
-    dts: true,
-    name: 'nextra-theme-docs/components'
+    name: 'nextra-theme-docs/components',
+    ...sharedConfig
   },
   {
+    name: 'nextra-theme-docs',
     entry: ['src/index.tsx'],
-    format: 'esm',
-    outExtension,
-    dts: true,
-    name: 'nextra-theme-docs'
+    ...sharedConfig
   },
   {
+    name: 'nextra-theme-docs/tabs',
     entry: ['src/components/tabs.tsx'],
-    format: 'esm',
-    outExtension,
-    dts: true,
-    name: 'nextra-theme-docs/tabs'
+    ...sharedConfig
   },
   {
+    name: 'nextra-theme-docs/collapse',
     entry: ['src/components/collapse.tsx'],
-    format: 'esm',
-    outExtension,
-    dts: true,
-    name: 'nextra-theme-docs/collapse'
+    ...sharedConfig
   }
 ])

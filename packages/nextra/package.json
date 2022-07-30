@@ -5,7 +5,8 @@
   "files": [
     "dist/*",
     "icons/*",
-    "loader.js"
+    "loader.js",
+    "code-highlighting/*"
   ],
   "types": "./dist/types.d.ts",
   "main": "./dist/index.js",

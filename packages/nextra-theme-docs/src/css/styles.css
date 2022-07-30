@@ -1,8 +1,8 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
-@import './variables.css';
-@import './code-blocks.css';
+@import 'nextra/code-highlighting/variables.css';
+@import 'nextra/code-highlighting/code-blocks.css';
 
 :root {
   --nextra-primary-hue: 212deg;
