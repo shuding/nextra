@@ -1,5 +1,4 @@
 import Callout from 'nextra-theme-docs/callout'
-import Link from 'next/link'
 
 # Выборка данных
 
@@ -13,7 +12,7 @@ const { data, error } = useSWR(key, fetcher)
 
 <Callout emoji="💡">
   Обратите внимание, что <code>fetcher</code> можно не указывать в параметрах, если он{' '}
-  <Link href="/docs/global-configuration"><a href="/docs/global-configuration">предоставляется глобально</a></Link>.
+  [предоставляется глобально](/docs/global-configuration).
 </Callout>
 
 ## Выборка (Fetch)

@@ -59,7 +59,8 @@ async function loader(
     unstable_flexsearch,
     unstable_staticImage,
     mdxOptions,
-    pageMapCache
+    pageMapCache,
+    newNextLinkBehavior
   } = context.getOptions()
 
   // Check if there's a theme provided
@@ -157,7 +158,8 @@ async function loader(
     headings,
     hasJsxInH1,
     timestamp,
-    unstable_flexsearch
+    unstable_flexsearch,
+    newNextLinkBehavior
   }
 
   return `

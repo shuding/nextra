@@ -28,6 +28,7 @@ export interface LoaderOptions extends NextraConfig {
   locales: string[]
   defaultLocale: string
   pageMapCache: NextraPluginCache
+  newNextLinkBehavior?: boolean
 }
 
 export interface PageMapItem {
@@ -55,6 +56,7 @@ export type PageOpts = {
   hasJsxInH1?: boolean
   timestamp?: number
   unstable_flexsearch?: Flexsearch
+  newNextLinkBehavior?: boolean
 }
 
 export type PageMapResult = [

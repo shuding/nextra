@@ -47,6 +47,9 @@ jobs:
       - name: Test
         run: pnpm test
 
+      - name: Lint ESLint
+        run: pnpm lint
+
       - name: Clean
         run: pnpm clean
 

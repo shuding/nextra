@@ -1,5 +1,4 @@
 import Callout from 'nextra-theme-docs/callout'
-import Link from 'next/link'
 
 # 数据请求
 
@@ -12,7 +11,7 @@ const { data, error } = useSWR(key, fetcher)
 返回值将作为 `data` 传递，如果抛出错误，将作为 `error` 被捕获。
 
 <Callout emoji="💡">
-  注意：如果 <code>fetcher</code> 是<Link href="/docs/global-configuration"><a href="/docs/global-configuration">全局配置</a></Link>提供的，可以从参数中忽略。
+  注意：如果 <code>fetcher</code> 是[全局配置](/docs/global-configuration)提供的，可以从参数中忽略。
 </Callout>
 
 ## Fetch
