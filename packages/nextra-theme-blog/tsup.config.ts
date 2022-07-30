@@ -7,7 +7,7 @@ function outExtension() {
 }
 
 export default defineConfig({
-  entry: ['src/index.tsx'],
+  entry: ['src/index.tsx', "src/cusdis.tsx"],
   format: 'esm',
   dts: true,
   name: 'nextra-theme-blog',

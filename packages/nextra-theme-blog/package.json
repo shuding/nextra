@@ -11,11 +11,22 @@
   ],
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "cusdis": [
+        "./dist/cusdis.d.ts"
+      ]
+    }
+  },
   "exports": {
     "./style.css": "./style.css",
     ".": {
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
+    },
+    "./cusdis": {
+      "import": "./dist/cusdis.js",
+      "types": "./dist/cusdis.d.ts"
     }
   },
   "scripts": {
