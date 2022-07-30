@@ -1,0 +1,61 @@
+code {
+  @apply border-black/5 bg-black/5 break-words rounded-md border py-0.5 px-[0.25em] text-[0.9em];
+  @apply dark:border-white/10 dark:bg-white/10;
+  box-decoration-break: clone;
+  font-feature-settings: 'rlig' 1, 'calt' 1, 'ss01' 1;
+
+  &[data-line-numbers] {
+    counter-reset: line;
+  
+    & > .line::before {
+      counter-increment: line;
+      content: counter(line);
+      @apply mr-6 inline-block w-4 text-right text-gray-500;
+    }
+  }
+
+  .line.highlighted {
+    @apply border-primary-600/60 bg-primary-600/10;
+    span {
+      @apply relative;
+    }
+  }
+
+  .line .highlighted {
+    @apply rounded-sm shadow-[0_0_0_3px_rgba(0,0,0,0.3)];
+    @apply bg-primary-800/10 shadow-primary-800/10;
+    @apply dark:bg-primary-300/10 dark:shadow-primary-300/10;
+  }
+}
+
+pre {
+  /* content-visibility: auto; */
+  contain: paint;
+  @apply bg-primary-700/5 mt-6 mb-4 overflow-x-auto rounded-xl py-4 font-medium subpixel-antialiased;
+  @apply dark:bg-primary-300/10;
+
+  code {
+    @apply grid min-w-full rounded-none border-none bg-transparent p-0 text-sm leading-5 text-current dark:bg-transparent;
+    /* code blocks without languages don't have children that have px-4 */
+    &:not([data-language]) {
+      @apply px-4;
+    }
+
+    .line {
+      @apply border-l-2 border-transparent px-4;
+    }
+  }
+}
+
+[data-nextra-code][data-filename] {
+  @apply relative block;
+
+  &:before {
+    content: attr(data-filename);
+    @apply bg-primary-700/5 text-gray-700 absolute top-0 z-[1] w-full truncate rounded-t-xl py-2 px-4 text-xs;
+    @apply dark:bg-primary-300/10 dark:text-gray-200;
+  }
+  pre {
+    @apply pt-12;
+  }
+}

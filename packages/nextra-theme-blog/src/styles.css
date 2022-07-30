@@ -1,7 +1,8 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
-@import '../../nextra-theme-docs/src/variables.css';
+@import '../../nextra-theme-docs/src/css/variables.css';
+@import '../../nextra-theme-docs/src/css/code-blocks.css';
 
 body {
   @apply px-4;
@@ -19,44 +20,12 @@ h1 {
   letter-spacing: -0.03em;
 }
 
-code {
-  @apply rounded-md border border-black border-opacity-5 bg-black bg-opacity-5;
-  font-size: 0.9em;
-  padding: 2px 0.25em;
-  box-decoration-break: clone;
-  font-feature-settings: 'rlig' 1, 'calt' 1, 'ss01' 1;
-  .dark & {
-    @apply border-white border-opacity-10 bg-white bg-opacity-10;
+.prose code {
+  &:before,
+  &:after {
+    @apply hidden;
   }
-}
-pre {
-  /* content-visibility: auto; */
-  contain: paint;
-  @apply mt-6 mb-4 overflow-x-auto rounded-xl bg-slate-100 p-4 font-medium subpixel-antialiased;
-  @apply dark:bg-gray-300 dark:bg-opacity-10;
-  code {
-    line-height: 1.25rem;
-    @apply relative inline-block min-w-full rounded-none border-none bg-transparent p-0 text-sm text-current dark:bg-transparent;
-    .line.highlighted {
-      @apply before:pointer-events-none before:absolute before:-inset-x-4 before:block before:h-5 before:select-none before:bg-gray-500 before:bg-opacity-10;
-      span {
-        @apply relative;
-      }
-    }
-  }
-}
-a code {
-  @apply text-current no-underline;
-}
-[data-nextra-code][data-filename] {
-  @apply relative block;
-
-  &::before {
-    content: attr(data-filename);
-    position: absolute;
-    @apply absolute top-0 z-[1] w-full truncate rounded-t-xl bg-slate-200 py-2 px-4 text-xs text-gray-700 dark:bg-gray-700 dark:text-gray-200;
-  }
-  pre {
-    @apply pt-12;
+  .line {
+    @apply font-normal;
   }
 }
