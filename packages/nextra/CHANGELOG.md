@@ -1,5 +1,13 @@
 # nextra
 
+## 2.0.0-beta.12
+
+### Patch Changes
+
+- cc1379c: fix `Hydration failed because the initial UI...` while modifying `meta.json` on dev env and react 18
+- 512953f: chore: remove redundant check for `MARKDOWN_EXTENSION_REGEX.test(filename)` in loader
+- 0f4795f: chore(nextra/blog/docs): provide types for PageOpts in loader
+
 ## 2.0.0-beta.11
 
 ### Patch Changes

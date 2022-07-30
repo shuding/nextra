@@ -1,5 +1,16 @@
 # nextra-theme-docs
 
+## 2.0.0-beta.12
+
+### Patch Changes
+
+- a5cac21: [docs/blog]: extract code styles and import in both themes
+- 3de0f41: chore(blog/docs): use `postcss-import` to import css variables styles
+- 97ca2e3: New feature: menu type
+- 76d1e30: [nextra-theme-docs]: fix `Warning: A title element received an array` and possible `[object Object]` in title
+- bf74201: [nextra-theme-docs]: use new opacity modifier syntax for tailwindcss
+- 0f4795f: chore(nextra/blog/docs): provide types for PageOpts in loader
+
 ## 2.0.0-beta.11
 
 ### Patch Changes

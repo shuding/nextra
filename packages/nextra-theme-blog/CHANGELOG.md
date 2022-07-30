@@ -1,5 +1,16 @@
 # nextra-theme-blog
 
+## 2.0.0-beta.12
+
+### Patch Changes
+
+- a5cac21: [blog]: add support for `showLineNumbers` prop in code-blocks
+- 29dc746: fix blog build error
+- a5cac21: [docs/blog]: extract code styles and import in both themes
+- 3de0f41: chore(blog/docs): use `postcss-import` to import css variables styles
+- 0f4795f: chore(nextra/blog/docs): provide types for PageOpts in loader
+- 07e4732: [nextra-theme-blog]: fix `Application error: a client-side exception has occurred` when invalid date was provided in frontmatter + TESTS
+
 ## 2.0.0-beta.11
 
 ### Patch Changes
