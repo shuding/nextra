@@ -68,7 +68,8 @@ function NavbarMenu({
           }
         >
           {Object.entries(items || {}).map(([key, item]) => {
-            const href = item.href || routes[key]?.route || '#'
+            const href =
+              item.href || routes[key]?.route || menu.route + '/' + key
 
             return (
               <Menu.Item key={key}>

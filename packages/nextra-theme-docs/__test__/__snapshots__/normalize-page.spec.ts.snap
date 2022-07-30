@@ -1004,8 +1004,7 @@ exports[`normalize-page > en-US getting-started 1`] = `
       "type": "doc",
     },
   ],
-  "pageDirectories": [],
-  "topLevelPageItems": [],
+  "topLevelNavbarItems": [],
 }
 `;
 
@@ -1827,8 +1826,7 @@ exports[`normalize-page > en-US home 1`] = `
       "type": "doc",
     },
   ],
-  "pageDirectories": [],
-  "topLevelPageItems": [],
+  "topLevelNavbarItems": [],
 }
 `;
 
@@ -2836,8 +2834,7 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
       "type": "doc",
     },
   ],
-  "pageDirectories": [],
-  "topLevelPageItems": [],
+  "topLevelNavbarItems": [],
 }
 `;
 
@@ -3659,7 +3656,6 @@ exports[`normalize-page > zh-CN home 1`] = `
       "type": "doc",
     },
   ],
-  "pageDirectories": [],
-  "topLevelPageItems": [],
+  "topLevelNavbarItems": [],
 }
 `;

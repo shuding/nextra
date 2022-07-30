@@ -96,8 +96,13 @@ function FolderImpl({ item, anchors }: FolderProps) {
       (menu.children || []).map(route => [route.name, route])
     )
     const directories = Object.entries(menu.items || {}).map(([key, item]) => {
+      const route = routes[key] || {
+        name: key,
+        locale: menu.locale,
+        route: menu.route + '/' + key
+      }
       return {
-        ...routes[key],
+        ...route,
         ...item
       }
     })
