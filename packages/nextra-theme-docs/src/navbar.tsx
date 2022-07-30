@@ -63,9 +63,7 @@ function NavbarMenu({
         leaveTo="opacity-0"
       >
         <Menu.Items
-          className={
-            'menu absolute right-0 z-20 mt-1 max-h-64 min-w-full overflow-auto rounded-md bg-white py-1 text-sm shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-neutral-800 dark:ring-white dark:ring-opacity-20'
-          }
+          className="menu absolute right-0 z-20 mt-1 max-h-64 min-w-full overflow-auto rounded-md bg-white py-1 text-sm shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-neutral-800 dark:ring-white dark:ring-opacity-20"
         >
           {Object.entries(items || {}).map(([key, item]) => {
             const href =
