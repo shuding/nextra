@@ -18,13 +18,27 @@ const indexContentEmitted = new Set<string>()
 
 const pagesDir = path.resolve(findPagesDir())
 
-let wasShallowWarningPrinted = false
-
 const [repository, gitRoot] = (function () {
   try {
     const repo = Repository.discover(process.cwd())
+    if (repo.isShallow()) {
+      if (process.env.VERCEL) {
+        console.warn(
+          '[nextra] The repository is shallow cloned, so the latest modified time will not be presented. Set the VERCEL_DEEP_CLONE=true environment variable to enable deep cloning.'
+        )
+      } else if (process.env.GITHUB_ACTION) {
+        console.warn(
+          '[nextra] The repository is shallow cloned, so the latest modified time will not be presented. See https://github.com/actions/checkout#fetch-all-history-for-all-tags-and-branches to fetch all the history.'
+        )
+      } else {
+        console.warn(
+          '[nextra] The repository is shallow cloned, so the latest modified time will not be presented.'
+        )
+      }
+    }
     // repository.path() returns the `/path/to/repo/.git`, we need the parent directory of it
     const gitRoot = path.join(repo.path(), '..')
+
     return [repo, gitRoot]
   } catch (e) {
     console.warn('[nextra] Init git repository failed', e)
@@ -122,22 +136,6 @@ async function loader(
 
   let timestamp: PageOpts['timestamp']
   if (repository && gitRoot) {
-    if (repository.isShallow() && !wasShallowWarningPrinted) {
-      if (process.env.VERCEL) {
-        console.warn(
-          '[nextra] The repository is shallow cloned, so the latest modified time will not be presented. Set the VERCEL_DEEP_CLONE=true environment variable to enable deep cloning.'
-        )
-      } else if (process.env.GITHUB_ACTION) {
-        console.warn(
-          '[nextra] The repository is shallow cloned, so the latest modified time will not be presented. See https://github.com/actions/checkout#fetch-all-history-for-all-tags-and-branches to fetch all the history.'
-        )
-      } else {
-        console.warn(
-          '[nextra] The repository is shallow cloned, so the latest modified time will not be presented.'
-        )
-      }
-      wasShallowWarningPrinted = true
-    }
     try {
       timestamp = await repository.getFileLatestModifiedDateAsync(
         path.relative(gitRoot, resourcePath)
