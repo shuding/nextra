@@ -26,6 +26,7 @@ importers:
     specifiers:
       '@changesets/cli': ^2.24.1
       '@edge-runtime/vm': 1.1.0-beta.19
+      postcss-import: ^14.1.0
       prettier: ^2.7.1
       prettier-plugin-tailwindcss: ^0.1.13
       rimraf: ^3.0.2
@@ -34,6 +35,7 @@ importers:
     devDependencies:
       '@changesets/cli': 2.24.1
       '@edge-runtime/vm': 1.1.0-beta.19
+      postcss-import: 14.1.0
       prettier: 2.7.1
       prettier-plugin-tailwindcss: 0.1.13_prettier@2.7.1
       rimraf: 3.0.2
@@ -4103,6 +4105,17 @@ packages:
       postcss: ^8.2.15
     dependencies:
       postcss: 8.4.14
+    dev: true
+
+  /postcss-import/14.1.0:
+    resolution: {integrity: sha512-flwI+Vgm4SElObFVPpTIT7SU7R3qk2L7PyduMcokiaVKuWv9d/U+Gm/QAd8NDLuykTWTkcrjOeD2Pp1rMeBTGw==}
+    engines: {node: '>=10.0.0'}
+    peerDependencies:
+      postcss: ^8.0.0
+    dependencies:
+      postcss-value-parser: 4.2.0
+      read-cache: 1.0.0
+      resolve: 1.22.1
     dev: true
 
   /postcss-import/14.1.0_postcss@8.4.14:

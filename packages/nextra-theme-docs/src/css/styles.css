@@ -1,4 +1,16 @@
-@tailwind base;
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import './variables.css';
+@import './code-blocks.css';
+
+:root {
+  --nextra-primary-hue: 212deg;
+}
+
+.dark {
+  --nextra-primary-hue: 204deg;
+}
 
 html {
   @apply antialiased;
@@ -26,9 +38,6 @@ blockquote:not(:first-child),
 .table-container:not(:first-child) {
   @apply mt-6;
 }
-
-@tailwind components;
-@tailwind utilities;
 
 .main-container {
   min-height: 100vh;
@@ -442,71 +451,8 @@ article {
   h2 a {
     @apply no-underline;
   }
-  code {
-    @apply break-words rounded-md border border-black border-opacity-5 bg-black bg-opacity-5;
-    font-size: 0.9em;
-    padding: 2px 0.25em;
-    box-decoration-break: clone;
-    font-feature-settings: 'rlig' 1, 'calt' 1, 'ss01' 1;
-    .dark & {
-      @apply border-white border-opacity-10 bg-white bg-opacity-10;
-    }
-  }
-
-  pre {
-    /* content-visibility: auto; */
-    contain: paint;
-    @apply mt-6 mb-4 overflow-x-auto rounded-xl bg-primary-750 bg-opacity-5 py-4 font-medium subpixel-antialiased;
-    @apply dark:bg-primary-300 dark:bg-opacity-10;
-
-    code[data-line-numbers] {
-      counter-reset: line;
-
-      & > .line::before {
-        counter-increment: line;
-        content: counter(line);
-        @apply mr-8 inline-block w-4 text-right text-slate-500;
-      }
-    }
-
-    code {
-      @apply grid min-w-full rounded-none border-none bg-transparent p-0 text-sm leading-5 text-current dark:bg-transparent;
-      .line {
-        @apply border-l-2 border-transparent px-4;
-      }
-      /* code blocks without languages don't have children that have px-4 */
-      &:not([data-language]) {
-        @apply px-4;
-      }
-      .line.highlighted {
-        @apply border-primary-600/60 bg-primary-600/10;
-        span {
-          @apply relative;
-        }
-      }
-      .line .highlighted {
-        @apply bg-primary-800 bg-opacity-10 dark:bg-primary-300 dark:bg-opacity-10;
-        @apply rounded-sm shadow-[0_0_0_3px_rgba(0,0,0,0.3)] shadow-primary-800/10 dark:shadow-primary-300/10;
-      }
-    }
-  }
   a {
     @apply ring-primary-500 ring-opacity-30 focus:outline-none focus-visible:ring;
-  }
-  a code {
-    @apply text-current no-underline;
-  }
-  [data-nextra-code][data-filename] {
-    @apply relative block;
-
-    &:before {
-      content: attr(data-filename);
-      position: absolute;
-      @apply absolute top-0 z-[1] w-full truncate rounded-t-xl bg-primary-700 bg-opacity-5 py-2 px-4 text-xs text-primary-1000 dark:bg-primary-300 dark:bg-opacity-10 dark:text-gray-200;
-    }
-    pre {
-      @apply pt-12;
-    }
   }
   hr {
     @apply my-8;
@@ -869,35 +815,4 @@ table tr td {
 
 .nextra-banner-hidden .nextra-banner-container {
   display: none;
-}
-
-:root {
-  --shiki-color-text: #414141;
-  --shiki-color-background: transparent;
-  --shiki-token-constant: #1976d2;
-  --shiki-token-string: #22863a;
-  --shiki-token-comment: #aaa;
-  --shiki-token-keyword: #d32f2f;
-  --shiki-token-parameter: #ff9800;
-  --shiki-token-function: #6f42c1;
-  --shiki-token-string-expression: #22863a;
-  --shiki-token-punctuation: #212121;
-  --shiki-token-link: #22863a;
-  --nextra-shiki-deleted: #f00;
-  --nextra-shiki-inserted: #f00;
-  --nextra-primary-hue: 212deg;
-}
-
-.dark {
-  --shiki-color-text: #d1d1d1;
-  --shiki-token-constant: #79b8ff;
-  --shiki-token-string: #ffab70;
-  --shiki-token-comment: #6b737c;
-  --shiki-token-keyword: #f97583;
-  --shiki-token-parameter: #ff9800;
-  --shiki-token-function: #b392f0;
-  --shiki-token-string-expression: #4bb74a;
-  --shiki-token-punctuation: #bbbbbb;
-  --shiki-token-link: #ffab70;
-  --nextra-primary-hue: 204deg;
 }

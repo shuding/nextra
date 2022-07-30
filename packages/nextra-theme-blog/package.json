@@ -29,7 +29,7 @@
     "prepublishOnly": "pnpm build",
     "clean": "rimraf ./dist ./style.css",
     "test": "vitest run",
-    "format": "prettier --write ."
+    "format": "prettier --ignore-path ../../.gitignore --write --list-different ."
   },
   "dependencies": {
     "@mdx-js/react": "^2.1.2",
