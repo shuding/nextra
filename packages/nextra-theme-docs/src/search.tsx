@@ -147,7 +147,7 @@ const Search = ({ directories = [] }: SearchProps) => {
             setSearch(e.target.value)
             setShow(true)
           }}
-          className="block w-full appearance-none rounded-lg bg-black bg-opacity-[.03] px-3 py-2 leading-tight transition-colors hover:bg-opacity-5 focus:outline-none focus:ring"
+          className="block w-full appearance-none rounded-lg bg-black/[.03] px-3 py-2 leading-tight transition-colors hover:bg-black/5 focus:outline-none focus:ring"
           type="search"
           placeholder={placeholder}
           onKeyDown={handleKeyDown}

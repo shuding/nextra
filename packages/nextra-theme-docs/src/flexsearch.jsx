@@ -380,7 +380,7 @@ export default function Search() {
             setSearch(e.target.value)
             setShow(true)
           }}
-          className="block w-full appearance-none rounded-lg px-3 py-2 leading-tight transition-colors hover:bg-opacity-5 focus:bg-white focus:outline-none focus:ring-1 focus:ring-gray-200 dark:focus:bg-dark dark:focus:ring-gray-100 dark:focus:ring-opacity-20"
+          className="block w-full appearance-none rounded-lg px-3 py-2 leading-tight transition-colors focus:bg-white focus:outline-none focus:ring-1 focus:ring-gray-200 dark:focus:bg-dark dark:focus:ring-gray-100/20"
           type="search"
           placeholder={renderComponent(
             config.searchPlaceholder,
@@ -399,7 +399,7 @@ export default function Search() {
         />
         {!renderList && (
           <div className="pointer-events-none absolute inset-y-0 right-0 hidden select-none py-1.5 pr-1.5 sm:flex">
-            <kbd className="inline-flex items-center rounded border bg-white px-1.5 font-mono text-sm font-medium text-gray-400 dark:border-gray-100 dark:border-opacity-20 dark:bg-dark dark:bg-opacity-50 dark:text-gray-500">
+            <kbd className="inline-flex items-center rounded border bg-white px-1.5 font-mono text-sm font-medium text-gray-400 dark:border-gray-100/20 dark:bg-dark/50 dark:text-gray-500">
               /
             </kbd>
           </div>

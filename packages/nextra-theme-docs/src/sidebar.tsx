@@ -81,7 +81,7 @@ function FolderImpl({ item, anchors }: FolderProps) {
         <ArrowRightIcon
           height="1em"
           className={cn(
-            'ml-2 h-[18px] min-w-[18px] rounded-sm p-[2px] hover:bg-gray-800 hover:bg-opacity-5 dark:hover:bg-gray-100 dark:hover:bg-opacity-5',
+            'ml-2 h-[18px] min-w-[18px] rounded-sm p-[2px] hover:bg-gray-800/5 dark:hover:bg-gray-100/5',
             '[&>path]:origin-center [&>path]:transition-transform',
             open && '[&>path]:rotate-90'
           )}
@@ -131,7 +131,7 @@ function Separator({ title, topLevel }: SeparatorProps) {
             : title}
         </div>
       ) : (
-        <hr className="mx-2 border-t border-gray-200 dark:border-primary-100 dark:border-opacity-10" />
+        <hr className="mx-2 border-t border-gray-200 dark:border-primary-100/10" />
       )}
     </li>
   )
