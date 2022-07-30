@@ -2,6 +2,7 @@ import { NextConfig } from 'next'
 import { Heading as MDASTHeading } from 'mdast'
 import { ProcessorOptions } from '@mdx-js/mdx'
 import { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
+import { GrayMatterFile } from 'gray-matter'
 
 export abstract class NextraPluginCache {
   public cache: { items: PageMapItem[]; fileMap: Record<string, any> } | null
@@ -44,19 +45,16 @@ export type Heading = MDASTHeading & {
   value: string
 }
 
-export interface PageOpt {
+export type PageOpts = {
   filename: string
   route: string
-  meta: Record<string, any>
+  meta: GrayMatterFile<string>['data']
   pageMap: PageMapItem[]
-  titleText: string | null
-  headings?: Heading[]
-  unstable_flexsearch?:
-    | boolean
-    | {
-        codeblocks: boolean
-      }
+  titleText?: string
+  headings: Heading[]
   hasJsxInH1?: boolean
+  timestamp?: number
+  unstable_flexsearch?: Flexsearch
 }
 
 export type PageMapResult = [
@@ -66,11 +64,12 @@ export type PageMapResult = [
 ]
 
 type Theme = string
+type Flexsearch = boolean | { codeblocks: boolean }
 
 export type NextraConfig = {
   theme: Theme
   themeConfig?: string
-  unstable_flexsearch?: boolean | { codeblocks: boolean }
+  unstable_flexsearch?: Flexsearch
   unstable_staticImage?: boolean
   mdxOptions?: Pick<ProcessorOptions, 'rehypePlugins' | 'remarkPlugins'> & {
     rehypePrettyCodeOptions?: Partial<RehypePrettyCodeOptions>

@@ -4,12 +4,12 @@ import { useTheme } from 'next-themes'
 
 import renderComponent from './utils/render-component'
 import { useConfig } from './config'
-import { Meta } from './types'
+import { PageOpts } from 'nextra'
 
 interface HeadProps {
   title: string
   locale: string
-  meta: Meta
+  meta: PageOpts['meta']
 }
 
 export default function Head({ title, locale, meta }: HeadProps) {

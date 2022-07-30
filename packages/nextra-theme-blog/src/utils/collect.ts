@@ -10,8 +10,7 @@ const isPost = (page: PageMapItem) => {
   if (page.children) return false
   if (page.name.startsWith('_')) return false
   return (
-    !page.frontMatter ||
-    !page.frontMatter.type ||
+    !page.frontMatter?.type ||
     page.frontMatter.type === 'post'
   )
 }

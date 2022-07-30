@@ -1,8 +1,10 @@
-import { PageOpt } from 'nextra'
-import React from 'react'
+import { PageOpts } from 'nextra'
+import { createContext, useContext } from 'react'
 import { DocsThemeConfig } from './types'
+
 interface Config extends DocsThemeConfig {
-  unstable_flexsearch?: PageOpt['unstable_flexsearch']
+  unstable_flexsearch?: PageOpts['unstable_flexsearch']
 }
-export const ThemeConfigContext = React.createContext<Config>({})
-export const useConfig = () => React.useContext(ThemeConfigContext)
+
+export const ThemeConfigContext = createContext<Config>({})
+export const useConfig = () => useContext(ThemeConfigContext)

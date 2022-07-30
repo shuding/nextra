@@ -1,4 +1,4 @@
-import { PageOpt } from 'nextra'
+import { PageOpts } from 'nextra'
 
 export interface NextraBlogTheme {
   readMore?: string
@@ -23,18 +23,22 @@ export interface NextraBlogTheme {
     name: string
   }[]
 }
-export interface BlogPageOpt extends PageOpt {
-  meta: {
-    title?: string
-    type?: 'post' | 'page' | 'posts' | 'tag'
-    tag?: string | string[]
-    back?: string
-    date?: string
-    description?: string
-    author?: string
-  }
+
+export interface BlogPageOpts extends PageOpts {
+  meta: Meta
 }
+
+type Meta = {
+  title?: string
+  type?: 'post' | 'page' | 'posts' | 'tag'
+  tag?: string | string[]
+  back?: string
+  date?: string
+  description?: string
+  author?: string
+}
+
 export interface LayoutProps {
   config: NextraBlogTheme
-  opts: BlogPageOpt
+  opts: BlogPageOpts
 }

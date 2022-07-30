@@ -1,15 +1,14 @@
-import React, { useContext } from 'react'
-import { createContext, PropsWithChildren } from 'react'
+import React, { ReactElement, useContext, createContext, ReactNode } from 'react'
 import { LayoutProps } from './types'
 import { isValidDate } from './utils/date'
 
 const BlogContext = createContext<LayoutProps | null>(null)
 
-export const BlogProvider: React.FC<PropsWithChildren<LayoutProps>> = ({
+export const BlogProvider = ({
   config,
   children,
   opts
-}) => {
+}: LayoutProps & { children: ReactNode }): ReactElement => {
   const { date } = opts.meta
 
   if (date && !isValidDate(date)) {

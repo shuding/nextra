@@ -1,5 +1,6 @@
 import React, {
-  PropsWithChildren,
+  ReactElement,
+  ReactNode,
   useEffect,
   useMemo,
   useRef,
@@ -9,7 +10,7 @@ import { useRouter } from 'next/router'
 import 'focus-visible'
 import { SkipNavContent } from '@reach/skip-nav'
 import { ThemeProvider } from 'next-themes'
-import { Heading, PageMapItem, PageOpt } from 'nextra'
+import { PageMapItem, PageOpts } from 'nextra'
 import cn from 'classnames'
 import Head from './head'
 import Navbar from './navbar'
@@ -23,7 +24,7 @@ import defaultConfig from './misc/default.config'
 import { getFSRoute } from './utils/get-fs-route'
 import { MenuContext } from './utils/menu-context'
 import normalizePages from './utils/normalize-pages'
-import { DocsThemeConfig, Meta, PageTheme } from './types'
+import { DocsThemeConfig, PageTheme } from './types'
 import './polyfill'
 import Breadcrumb from './breadcrumb'
 import renderComponent from './utils/render-component'
@@ -47,13 +48,13 @@ if (typeof window !== 'undefined') {
 }
 
 function useDirectoryInfo(pageMap: PageMapItem[]) {
-  const { locale, defaultLocale, asPath } = useRouter()
+  const { locale = 'en-US', defaultLocale, asPath } = useRouter()
 
   return useMemo(() => {
     const fsPath = getFSRoute(asPath, locale)
     return normalizePages({
       list: pageMap,
-      locale: locale ? locale : 'en-US',
+      locale,
       defaultLocale,
       route: fsPath
     })
@@ -62,19 +63,20 @@ function useDirectoryInfo(pageMap: PageMapItem[]) {
 
 interface BodyProps {
   themeContext: PageTheme
-  breadcrumb?: React.ReactNode
-  toc?: React.ReactNode
+  breadcrumb?: ReactNode
+  toc?: ReactNode
   timestamp?: number
-  navLinks: React.ReactNode
+  navLinks: ReactNode
+  children: ReactNode
 }
 
-const Body: React.FC<PropsWithChildren<BodyProps>> = ({
+const Body = ({
   themeContext,
   breadcrumb,
   navLinks,
   timestamp,
   children
-}) => {
+}: BodyProps): ReactElement => {
   const config = useConfig()
   const { locale = 'en-US' } = useRouter()
   const date = timestamp ? new Date(timestamp) : null
@@ -91,7 +93,7 @@ const Body: React.FC<PropsWithChildren<BodyProps>> = ({
   }, [])
 
   return (
-    <React.Fragment>
+    <>
       <SkipNavContent />
       {themeContext.layout === 'full' ? (
         <article className="nextra-body full relative justify-center overflow-x-hidden pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
@@ -157,19 +159,11 @@ const Body: React.FC<PropsWithChildren<BodyProps>> = ({
           </main>
         </article>
       )}
-    </React.Fragment>
+    </>
   )
 }
-interface LayoutProps {
-  filename: string
-  pageMap: PageMapItem[]
-  meta: Meta
-  titleText: string | null
-  headings?: Heading[]
-  timestamp?: number
-}
 
-const Content: React.FC<PropsWithChildren<LayoutProps>> = ({
+const Content = ({
   filename,
   pageMap,
   meta,
@@ -177,7 +171,7 @@ const Content: React.FC<PropsWithChildren<LayoutProps>> = ({
   headings,
   timestamp,
   children
-}) => {
+}: PageOpts & { children: ReactNode }): ReactElement => {
   const { route, locale = 'en-US' } = useRouter()
   const config = useConfig()
 
@@ -207,8 +201,6 @@ const Content: React.FC<PropsWithChildren<LayoutProps>> = ({
 
   const hideSidebar = !themeContext.sidebar || themeContext.layout === 'raw'
   const hideToc = !themeContext.toc || themeContext.layout === 'raw'
-
-  const headingArr = headings ?? []
   return (
     <MenuContext.Provider
       value={{
@@ -252,7 +244,7 @@ const Content: React.FC<PropsWithChildren<LayoutProps>> = ({
                 )
               ) : (
                 <ToC
-                  headings={config.floatTOC ? headingArr : null}
+                  headings={config.floatTOC ? headings : null}
                   filepathWithName={filepathWithName}
                 />
               )}
@@ -286,15 +278,16 @@ const Content: React.FC<PropsWithChildren<LayoutProps>> = ({
     </MenuContext.Provider>
   )
 }
-interface DocsLayoutProps extends PageOpt {
-  meta: Meta
-}
-const createLayout = (opts: DocsLayoutProps, config: DocsThemeConfig) => {
-  const extendedConfig = Object.assign({}, defaultConfig, config, opts)
-  const nextThemes = extendedConfig.nextThemes || {}
-  const Page = ({ children }: { children: React.ReactChildren }) => children
 
-  Page.getLayout = (page: any) => (
+const createLayout = (opts: PageOpts, config: DocsThemeConfig) => {
+  const extendedConfig = {
+    ...defaultConfig,
+    ...config,
+    unstable_flexsearch: opts.unstable_flexsearch
+  }
+  const nextThemes = extendedConfig.nextThemes || {}
+  const Page = ({ children }: { children: ReactNode }): ReactNode => children
+  Page.getLayout = (page: ReactNode): ReactElement => (
     <ThemeConfigContext.Provider value={extendedConfig}>
       <ThemeProvider
         attribute="class"
