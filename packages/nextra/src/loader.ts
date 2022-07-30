@@ -38,7 +38,6 @@ async function loader(
 ): Promise<string> {
   context.cacheable(true)
 
-  const options = context.getOptions()
   let {
     theme,
     themeConfig,
@@ -47,7 +46,12 @@ async function loader(
     unstable_staticImage,
     mdxOptions,
     pageMapCache
-  } = options
+  } = context.getOptions()
+
+  // Check if there's a theme provided
+  if (!theme) {
+    throw new Error('No Nextra theme found!')
+  }
 
   const { resourcePath } = context
   if (resourcePath.includes('/pages/api/')) {
@@ -55,14 +59,6 @@ async function loader(
       `[nextra] Ignoring ${resourcePath} because it is located in the "pages/api" folder.`
     )
     return ''
-  }
-
-  const filename = path.basename(resourcePath)
-  const fileLocale = parseFileName(filename).locale
-
-  // Check if there's a theme provided
-  if (!theme) {
-    throw new Error('No Nextra theme found!')
   }
 
   const { items: pageMapResult, fileMap } = IS_PRODUCTION
@@ -75,12 +71,8 @@ async function loader(
     context.addMissingDependency(resourcePath)
   }
 
-  const [pageMap, route, title] = getPageMap(
-    resourcePath,
-    pageMapResult,
-    fileMap,
-    defaultLocale
-  )
+  const filename = path.basename(resourcePath)
+  const fileLocale = parseFileName(filename).locale
 
   for (const [filePath, { name, locale }] of Object.entries(fileMap)) {
     if (name === 'meta.json' && (!fileLocale || locale === fileLocale)) {
@@ -94,17 +86,6 @@ async function loader(
   // Extract frontMatter information if it exists
   const { data: meta, content } = grayMatter(source)
 
-  let layout = theme
-  let layoutConfig = themeConfig || null
-
-  // Relative path instead of a package name
-  if (theme.startsWith('.') || theme.startsWith('/')) {
-    layout = path.resolve(theme)
-  }
-  if (layoutConfig) {
-    layoutConfig = slash(path.resolve(layoutConfig))
-  }
-
   if (IS_PRODUCTION && indexContentEmitted.has(filename)) {
     unstable_flexsearch = false
   }
@@ -117,6 +98,12 @@ async function loader(
       unstable_flexsearch
     },
     resourcePath
+  )
+  const [pageMap, route, title] = getPageMap(
+    resourcePath,
+    pageMapResult,
+    fileMap,
+    defaultLocale
   )
 
   if (unstable_flexsearch) {
@@ -160,37 +147,37 @@ async function loader(
     }
   }
 
-  const layoutConfigImport = layoutConfig
-    ? `import __nextra_layoutConfig__ from '${layoutConfig}'`
-    : ''
-
-  const pageOpts: Omit<PageOpts, 'pageMap' | 'titleText'> = {
+  // Relative path instead of a package name
+  const layout =
+    theme.startsWith('.') || theme.startsWith('/') ? path.resolve(theme) : theme
+  const layoutConfig = themeConfig ? slash(path.resolve(themeConfig)) : ''
+  const pageOpts: Omit<PageOpts, 'titleText'> = {
     filename: slash(filename),
     route: slash(route),
     meta,
+    pageMap,
     headings,
     hasJsxInH1,
     timestamp,
-    unstable_flexsearch,
+    unstable_flexsearch
   }
 
   return `
-import __nextra_withLayout__ from '${layout}'
 import { withSSG as __nextra_withSSG__ } from 'nextra/ssg'
-${layoutConfigImport}
+import __nextra_withLayout__ from '${layout}'
+${layoutConfig && `import __nextra_layoutConfig__ from '${layoutConfig}'`}
 ${result.replace('export default MDXContent;', '')}
 
-const __nextra_pageMap__ = ${JSON.stringify(pageMap)}
+const __nextra_pageOpts__ = ${JSON.stringify(pageOpts)}
 
 globalThis.__nextra_internal__ = {
-  pageMap: __nextra_pageMap__,
-  route: ${JSON.stringify(route)}
+  pageMap: __nextra_pageOpts__.pageMap,
+  route: __nextra_pageOpts__.route
 }
 
 const NextraLayout = __nextra_withSSG__(__nextra_withLayout__({
-  pageMap: __nextra_pageMap__,
   titleText: typeof titleText === 'string' ? titleText : undefined,
-  ...${JSON.stringify(pageOpts)}
+  ...__nextra_pageOpts__
 }, ${layoutConfig ? '__nextra_layoutConfig__' : 'null'}))
 
 function NextraPage(props) {
@@ -202,8 +189,7 @@ function NextraPage(props) {
 }
 NextraPage.getLayout = NextraLayout.getLayout
 
-export default NextraPage
-`.trimStart()
+export default NextraPage`.trimStart()
 }
 
 export default function syncLoader(
