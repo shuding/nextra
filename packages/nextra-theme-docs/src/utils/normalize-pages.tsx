@@ -31,6 +31,20 @@ export interface PageItem extends Omit<PageMapItem, 'children'> {
   hidden?: boolean
   withIndexPage?: boolean
 }
+export interface MenuItem extends Omit<PageMapItem, 'children'> {
+  title: string
+  type: 'menu'
+  hidden?: boolean
+  children?: PageItem[]
+  items?: Record<
+    string,
+    {
+      title: string
+      href?: string
+      newWindow?: boolean
+    }
+  >
+}
 export interface DocsItem extends Omit<PageMapItem, 'children'> {
   title: string
   type: string
@@ -80,10 +94,19 @@ export default function normalizePages({
     }
   }
   const meta = _meta || {}
-
   const metaKeys = Object.keys(meta)
 
+  for (let key of metaKeys) {
+    if (typeof meta[key] === 'string') {
+      meta[key] = {
+        title: meta[key]
+      }
+    }
+  }
+
   // All directories
+  // - directories: all directories in the tree structure
+  // - flatDirectories: all directories in the flat structure, used by search
   const directories: Item[] = []
   const flatDirectories: Item[] = []
 
@@ -92,8 +115,7 @@ export default function normalizePages({
   const flatDocsDirectories: DocsItem[] = []
 
   // Page directories
-  const pageDirectories: PageItem[] = []
-  const topLevelPageItems: PageItem[] = []
+  const topLevelNavbarItems: PageItem[] = []
 
   let activeType: string | undefined = undefined
   let activeIndex: number = 0
@@ -106,6 +128,7 @@ export default function normalizePages({
   delete fallbackMeta.title
   delete fallbackMeta.href
 
+  // Normalize items based on files and meta.json.
   const items = list
     .filter(
       a =>
@@ -124,9 +147,9 @@ export default function normalizePages({
       if (indexB === -1) return -1
       return indexA - indexB
     })
-    .flatMap(a => {
+    .flatMap(item => {
       const items = []
-      const index = metaKeys.indexOf(a.name)
+      const index = metaKeys.indexOf(item.name)
 
       if (index !== -1) {
         // Fill all skipped items in meta.
@@ -143,7 +166,8 @@ export default function normalizePages({
         metaKeyIndex = index
       }
 
-      items.push(a)
+      const extendedItem = index === -1 ? item : { ...meta[item.name], ...item }
+      items.push(extendedItem)
       return items
     })
 
@@ -172,6 +196,7 @@ export default function normalizePages({
       continue
     }
 
+    // Get the item's meta information.
     const extendedMeta = extendMeta(meta[a.name], fallbackMeta)
 
     const type = extendedMeta.type || 'doc'
@@ -194,7 +219,7 @@ export default function normalizePages({
           locale,
           defaultLocale,
           route,
-          docsRoot: type === 'page' ? a.route : docsRoot,
+          docsRoot: type === 'page' || type === 'menu' ? a.route : docsRoot,
           underCurrentDocsRoot: underCurrentDocsRoot || isCurrentDocsTree,
           pageThemeContext: extendedPageThemeContext
         })
@@ -222,6 +247,7 @@ export default function normalizePages({
       children: normalizedChildren ? [] : undefined
     }
 
+    // This item is currently active, we collect the active path etc.
     if (a.route === route) {
       activePath = [item]
       activeType = type
@@ -232,9 +258,12 @@ export default function normalizePages({
       }
       switch (type) {
         case 'page':
-          activeIndex = topLevelPageItems.length
+        case 'menu':
+          // Active on the navbar
+          activeIndex = topLevelNavbarItems.length
           break
         case 'doc':
+          // Active in the docs tree
           if (isCurrentDocsTree) {
             activeIndex = flatDocsDirectories.length
           }
@@ -253,8 +282,9 @@ export default function normalizePages({
         activePath = [item, ...normalizedChildren.activePath]
         switch (activeType) {
           case 'page':
+          case 'menu':
             activeIndex =
-              topLevelPageItems.length + normalizedChildren.activeIndex
+              topLevelNavbarItems.length + normalizedChildren.activeIndex
             break
           case 'doc':
             activeIndex =
@@ -267,13 +297,12 @@ export default function normalizePages({
           }
         }
       }
-    }
 
-    if (normalizedChildren) {
       switch (type) {
         case 'page':
+        case 'menu':
           // @ts-expect-error normalizedChildren === true
-          pageItem.children.push(...normalizedChildren.pageDirectories)
+          pageItem.children.push(...normalizedChildren.directories)
           docsDirectories.push(...normalizedChildren.docsDirectories)
 
           // If it's a page with children inside, we inject itself as a page too.
@@ -281,9 +310,9 @@ export default function normalizePages({
             pageItem.firstChildRoute = findFirstRoute(
               normalizedChildren.flatDirectories
             )
-            topLevelPageItems.push(pageItem)
+            topLevelNavbarItems.push(pageItem)
           } else if (pageItem.withIndexPage) {
-            topLevelPageItems.push(pageItem)
+            topLevelNavbarItems.push(pageItem)
           }
 
           break
@@ -291,7 +320,6 @@ export default function normalizePages({
           if (isCurrentDocsTree) {
             Array.isArray(docsItem.children) &&
               docsItem.children.push(...normalizedChildren.docsDirectories)
-            pageDirectories.push(...normalizedChildren.pageDirectories)
 
             // Itself is a doc page.
             if (item.withIndexPage) {
@@ -309,7 +337,8 @@ export default function normalizePages({
       flatDirectories.push(item)
       switch (type) {
         case 'page':
-          topLevelPageItems.push(pageItem)
+        case 'menu':
+          topLevelNavbarItems.push(pageItem)
           break
         case 'doc':
           if (isCurrentDocsTree) {
@@ -321,7 +350,7 @@ export default function normalizePages({
     directories.push(item)
     switch (type) {
       case 'page':
-        pageDirectories.push(pageItem)
+      case 'menu':
         if (isCurrentDocsTree && underCurrentDocsRoot) {
           docsDirectories.push(pageItem)
         }
@@ -343,7 +372,6 @@ export default function normalizePages({
     flatDirectories,
     docsDirectories,
     flatDocsDirectories,
-    pageDirectories,
-    topLevelPageItems
+    topLevelNavbarItems
   }
 }

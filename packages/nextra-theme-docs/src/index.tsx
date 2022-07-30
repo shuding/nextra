@@ -186,8 +186,7 @@ const Content: React.FC<PropsWithChildren<LayoutProps>> = ({
     activeIndex,
     activeThemeContext,
     activePath,
-    // pageDirectories,
-    topLevelPageItems,
+    topLevelNavbarItems,
     docsDirectories,
     flatDirectories,
     flatDocsDirectories,
@@ -229,14 +228,14 @@ const Content: React.FC<PropsWithChildren<LayoutProps>> = ({
           <Navbar
             isRTL={isRTL}
             flatDirectories={flatDirectories}
-            items={topLevelPageItems}
+            items={topLevelNavbarItems}
           />
         ) : null}
         <ActiveAnchor>
           <div className="mx-auto flex w-full max-w-[90rem] flex-1 items-stretch">
             <div className="flex w-full flex-1">
               <Sidebar
-                directories={docsDirectories}
+                docsDirectories={docsDirectories}
                 flatDirectories={flatDirectories}
                 fullDirectories={directories}
                 headings={headings}

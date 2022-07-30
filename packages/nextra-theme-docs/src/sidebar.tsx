@@ -13,7 +13,7 @@ import Search from './search'
 import Flexsearch from './flexsearch'
 import { useConfig } from './config'
 import getHeadingText from './utils/get-heading-text'
-import { Item, PageItem } from './utils/normalize-pages'
+import { Item, MenuItem, PageItem } from './utils/normalize-pages'
 import LocaleSwitch from './locale-switch'
 import ThemeSwitch from './theme-switch'
 import { ArrowRightIcon } from 'nextra/icons'
@@ -23,7 +23,7 @@ import renderComponent from './utils/render-component'
 const TreeState: Record<string, boolean> = {}
 
 interface FolderProps {
-  item: PageItem | Item
+  item: PageItem | MenuItem | Item
   anchors: string[]
 }
 
@@ -60,7 +60,7 @@ function FolderImpl({ item, anchors }: FolderProps) {
         if (clickedToggleIcon) {
           e.preventDefault()
         }
-        if (item.withIndexPage) {
+        if ((item as Item).withIndexPage) {
           // If it's focused, we toggle it. Otherwise always open it.
           if (active || clickedToggleIcon) {
             TreeState[item.route] = !open
@@ -90,18 +90,54 @@ function FolderImpl({ item, anchors }: FolderProps) {
     </a>
   )
 
+  if (item.type === 'menu') {
+    const menu = item as MenuItem
+    const routes = Object.fromEntries(
+      (menu.children || []).map(route => [route.name, route])
+    )
+    const directories = Object.entries(menu.items || {}).map(([key, item]) => {
+      const route = routes[key] || {
+        name: key,
+        locale: menu.locale,
+        route: menu.route + '/' + key
+      }
+      return {
+        ...route,
+        ...item
+      }
+    })
+
+    return (
+      <li className={cn({ open, active })}>
+        {link}
+        <Collapse open={open}>
+          <Menu
+            submenu
+            directories={directories}
+            base={item.route}
+            anchors={anchors}
+          />
+        </Collapse>
+      </li>
+    )
+  }
+
   return (
     <li className={cn({ open, active })}>
-      {item.withIndexPage ? <Link href={item.route}>{link}</Link> : link}
+      {(item as Item).withIndexPage ? (
+        <Link href={item.route}>{link}</Link>
+      ) : (
+        link
+      )}
       <Collapse open={open}>
-        {Array.isArray(item.children) && (
+        {Array.isArray(item.children) ? (
           <Menu
             submenu
             directories={item.children}
             base={item.route}
             anchors={anchors}
           />
-        )}
+        ) : null}
       </Collapse>
     </li>
   )
@@ -241,7 +277,10 @@ function Menu({ directories, anchors, submenu }: MenuProps) {
   return (
     <ul>
       {directories.map(item => {
-        if (item.children && (item.children.length || !item.withIndexPage)) {
+        if (
+          item.type === 'menu' ||
+          (item.children && (item.children.length || !item.withIndexPage))
+        ) {
           return <Folder key={item.name} item={item} anchors={anchors} />
         }
         return (
@@ -258,7 +297,7 @@ function Menu({ directories, anchors, submenu }: MenuProps) {
 }
 
 interface SideBarProps {
-  directories: PageItem[]
+  docsDirectories: PageItem[]
   flatDirectories: Item[]
   fullDirectories: Item[]
   asPopover?: boolean
@@ -269,7 +308,7 @@ interface SideBarProps {
 
 const emptyHeading: any[] = []
 export default function Sidebar({
-  directories,
+  docsDirectories,
   flatDirectories,
   fullDirectories,
   asPopover = false,
@@ -337,7 +376,8 @@ export default function Sidebar({
             </div>
             <div className="hidden md:block">
               <Menu
-                directories={directories}
+                // The sidebar menu, shows only the docs directories.
+                directories={docsDirectories}
                 anchors={
                   // When the viewport size is larger than `md`, hide the anchors in
                   // the sidebar when `floatTOC` is enabled.
@@ -347,6 +387,7 @@ export default function Sidebar({
             </div>
             <div className="md:hidden">
               <Menu
+                // The mobile dropdown menu, shows all the directories.
                 directories={fullDirectories}
                 anchors={
                   // Always show the anchor links on mobile (`md`).
