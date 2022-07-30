@@ -9,15 +9,14 @@ export interface DocsThemeConfig {
     | React.FC<PropsWithChildren<{ locale: string }>>
   docsRepositoryBase?: string
   titleSuffix?:
-    | React.ReactNode
-    | React.FC<
-        PropsWithChildren<{
-          locale: string
-          config: DocsThemeConfig
-          title: string
-          meta: Meta
-        }>
-      >
+    | string
+    // Can't be React component, otherwise will get Warning: A title element received an array with more than 1 element as children.
+    | ((props: {
+        locale: string
+        config: DocsThemeConfig
+        title: string
+        meta: Meta
+      }) => string)
   nextLinks?: boolean
   prevLinks?: boolean
   search?: boolean
@@ -73,6 +72,7 @@ export interface DocsThemeConfig {
       >
   feedbackLabels?: string
   customSearch?: React.ReactNode | false
+  // Can't be React component
   searchPlaceholder?: string | ((props: { locale: string }) => string)
   projectChatLink?: string
   projectChatLinkIcon?: React.FC<PropsWithChildren<{ locale: string }>>

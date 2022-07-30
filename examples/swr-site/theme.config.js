@@ -32,7 +32,9 @@ const TITLE_WITH_TRANSLATIONS = {
 export default {
   github: "https://github.com/vercel/swr",
   docsRepositoryBase: "https://github.com/vercel/swr-site/blob/master/pages",
-  titleSuffix: " – SWR",
+  titleSuffix({ locale }) {
+    return ` – SWR (${locale})`
+  },
   search: true,
   unstable_flexsearch: true,
   floatTOC: true,
