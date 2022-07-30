@@ -166,9 +166,10 @@ export default function Navbar({ flatDirectories, items }: NavBarProps) {
                       <NavbarMenu
                         className={cn(
                           'nextra-nav-link',
-                          !isActive
-                            ? 'text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200'
-                            : 'active subpixel-antialiased text-current'
+                          isActive
+                            ? 'active subpixel-antialiased text-current'
+                            : 'text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200'
+                            
                         )}
                         menu={menu}
                       >
