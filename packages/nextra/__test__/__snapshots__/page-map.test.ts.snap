@@ -7,6 +7,40 @@ exports[`Page Process > pageMap en-US 1`] = `
       "children": [
         {
           "locale": "en-US",
+          "name": "a-page",
+          "route": "/about/a-page",
+        },
+        {
+          "locale": "en-US",
+          "name": "acknowledgement",
+          "route": "/about/acknowledgement",
+        },
+        {
+          "locale": "en-US",
+          "meta": {
+            "a-page": {
+              "hidden": true,
+              "title": "A Page",
+              "type": "page",
+            },
+            "acknowledgement": "🧩 Acknowledgement",
+            "team": "👥 Team",
+          },
+          "name": "meta.json",
+        },
+        {
+          "locale": "en-US",
+          "name": "team",
+          "route": "/about/team",
+        },
+      ],
+      "name": "about",
+      "route": "/about",
+    },
+    {
+      "children": [
+        {
+          "locale": "en-US",
           "meta": {
             "swr-v1": {
               "theme": {
@@ -336,6 +370,26 @@ exports[`Page Process > pageMap en-US 1`] = `
     {
       "locale": "en-US",
       "meta": {
+        "about": {
+          "items": {
+            "a-page": {
+              "title": "A Page",
+            },
+            "acknowledgement": {
+              "title": "Acknowledgement",
+            },
+            "contributors": {
+              "href": "https://github.com/vercel/swr/graphs/contributors",
+              "newWindow": true,
+              "title": "Contributors",
+            },
+            "team": {
+              "title": "Team",
+            },
+          },
+          "title": "About",
+          "type": "menu",
+        },
         "blog": {
           "theme": {
             "breadcrumb": false,
@@ -385,6 +439,40 @@ exports[`Page Process > pageMap en-US 1`] = `
 exports[`Page Process > pageMap zh-CN 1`] = `
 [
   [
+    {
+      "children": [
+        {
+          "locale": "en-US",
+          "name": "a-page",
+          "route": "/about/a-page",
+        },
+        {
+          "locale": "en-US",
+          "name": "acknowledgement",
+          "route": "/about/acknowledgement",
+        },
+        {
+          "locale": "en-US",
+          "meta": {
+            "a-page": {
+              "hidden": true,
+              "title": "A Page",
+              "type": "page",
+            },
+            "acknowledgement": "🧩 Acknowledgement",
+            "team": "👥 Team",
+          },
+          "name": "meta.json",
+        },
+        {
+          "locale": "en-US",
+          "name": "team",
+          "route": "/about/team",
+        },
+      ],
+      "name": "about",
+      "route": "/about",
+    },
     {
       "children": [
         {
