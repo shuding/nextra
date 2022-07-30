@@ -166,7 +166,7 @@ export default function normalizePages({
         metaKeyIndex = index
       }
 
-      const extendedItem = index !== -1 ? { ...meta[item.name], ...item } : item
+      const extendedItem = index === -1 ? item : { ...meta[item.name], ...item }
       items.push(extendedItem)
       return items
     })
