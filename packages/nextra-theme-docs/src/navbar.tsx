@@ -73,9 +73,7 @@ function NavbarMenu({
               <Menu.Item key={key}>
                 <NavbarMenuLink
                   href={href}
-                  className={
-                    'hidden whitespace-nowrap no-underline md:inline-block text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 relative cursor-pointer select-none py-1.5 pl-3 pr-9 w-full'
-                  }
+                  className="hidden whitespace-nowrap no-underline md:inline-block text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 relative cursor-pointer select-none py-1.5 pl-3 pr-9 w-full"
                   {...(item.newWindow
                     ? {
                         target: '_blank',
