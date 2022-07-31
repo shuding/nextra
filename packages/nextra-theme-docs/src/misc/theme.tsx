@@ -231,24 +231,27 @@ const Summary = ({
   )
 }
 
-export const getComponents = (context: { index: number } = { index: 0 }) => ({
-  h2: createHeaderLink('h2', context),
-  h3: createHeaderLink('h3', context),
-  h4: createHeaderLink('h4', context),
-  h5: createHeaderLink('h5', context),
-  h6: createHeaderLink('h6', context),
-  a: A,
-  table: Table,
-  details: Details,
-  summary: Summary,
-  Nextra: {
-    Bleed,
-    Callout,
-    Tabs,
-    Tab,
-    Collapse
+export const getComponents = () => {
+  const context = { index: 0 }
+  return {
+    h2: createHeaderLink('h2', context),
+    h3: createHeaderLink('h3', context),
+    h4: createHeaderLink('h4', context),
+    h5: createHeaderLink('h5', context),
+    h6: createHeaderLink('h6', context),
+    a: A,
+    table: Table,
+    details: Details,
+    summary: Summary,
+    Nextra: {
+      Bleed,
+      Callout,
+      Tabs,
+      Tab,
+      Collapse
+    }
   }
-})
+}
 
 export const MDXTheme = ({
   children
