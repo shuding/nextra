@@ -1,7 +1,18 @@
 {
-  "index": "Introduction",
-  "get-started": "Get Started",
-  "features": "Features",
-  "themes": "Themes",
-  "advanced": "Advanced"
+  "index": {
+    "title": "Nextra",
+    "type": "page",
+    "hidden": true,
+    "theme": {
+      "layout": "raw"
+    }
+  },
+  "docs": {
+    "title": "Docs",
+    "type": "page"
+  },
+  "showcase": {
+    "title": "Showcase",
+    "type": "page"
+  }
 }

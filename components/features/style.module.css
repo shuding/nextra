@@ -1,0 +1,44 @@
+.feature {
+  position: relative;
+  padding: 1.5rem 1.75rem;
+  border-radius: 1em;
+  color: #000;
+  background-color: white;
+  overflow: hidden;
+}
+.feature.large {
+  grid-column: span 2;
+}
+.feature.centered {
+  text-align: center;
+}
+.feature h3 {
+  position: relative;
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.02rem;
+  z-index: 2;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 2em;
+  font-feature-settings: initial;
+}
+
+@media screen and (max-width: 920px) {
+  .features {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .feature.large {
+    grid-column: span 1;
+  }
+  .features {
+    grid-template-columns: 1fr;
+  }
+}

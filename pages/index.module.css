@@ -1,0 +1,11 @@
+.file {
+  font-size: 0.9em;
+  margin: 2px 0 0;
+  padding: 2px 3px;
+  border-radius: 0.375rem;
+  border: 1px solid;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    Liberation Mono, Courier New, monospace;
+  color: #0077ff;
+  font-weight: 600;
+}
