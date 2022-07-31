@@ -20,10 +20,11 @@ export default function Breadcrumb({ activePath }: { activePath: Item[] }) {
             ) : null}
             <div
               className={cn(
-                'transition-colors hover:text-gray-900 dark:hover:text-gray-200 whitespace-nowrap',
+                'transition-colors whitespace-nowrap',
                 {
                   'active text-gray-600 dark:text-gray-400': isActive,
-                  'min-w-[24px] overflow-hidden text-ellipsis': !isActive
+                  'min-w-[24px] overflow-hidden text-ellipsis': !isActive,
+                  'hover:text-gray-900 dark:hover:text-gray-200': isLink && !isActive
                 }
               )}
               title={item.title}
