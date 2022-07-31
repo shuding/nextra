@@ -33,13 +33,14 @@ p {
 .nextra-container {
   /* Navbar */
   .nextra-nav-container {
-    a:focus,
-    summary:focus {
-      @apply select-none outline-none;
-    }
-    a:focus-visible,
-    summary:focus-visible {
-      @apply select-none outline-none ring ring-primary-200;
+    a,
+    summary {
+      &:focus, &:focus-visible {
+        @apply select-none outline-none;
+      }
+      &:focus-visible {
+        @apply ring ring-primary-200;
+      }
     }
 
     .nextra-nav-container-blur {
@@ -62,8 +63,7 @@ p {
       (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))
     ) {
       .nextra-nav-container-blur {
-        backdrop-filter: blur(12px);
-        @apply bg-opacity-[.85] dark:bg-opacity-80;
+        @apply backdrop-blur-md bg-opacity-[.85] dark:bg-opacity-80;
       }
     }
 
@@ -72,9 +72,7 @@ p {
     }
     .nextra-menu-icon {
       @apply select-none rounded outline-none;
-      &:active {
-        @apply bg-gray-400/20;
-      }
+      @apply active:bg-gray-400/20;
     }
     .nextra-menu-icon svg {
       g {
@@ -119,10 +117,8 @@ p {
     mask-image: linear-gradient(to bottom, transparent, #000 20px),
       linear-gradient(to left, #000 10px, transparent 10px);
 
-    &.with-menu.nextra-scrollbar {
-      &::-webkit-scrollbar-track {
-        margin-bottom: 76px;
-      }
+    &.with-menu.nextra-scrollbar::-webkit-scrollbar-track {
+      margin-bottom: 76px;
     }
   }
 
@@ -157,12 +153,8 @@ p {
         }
         @media (prefers-contrast: more) {
           & {
-            @apply border border-transparent text-gray-900;
-            @apply hover:border-gray-900;
-          }
-          .dark & {
-            @apply border border-transparent text-gray-50;
-            @apply hover:border-gray-50;
+            @apply border border-transparent text-gray-900 hover:border-gray-900;
+            @apply dark:border dark:border-transparent dark:text-gray-50 dark:hover:border-gray-50;
           }
         }
       }
@@ -205,12 +197,10 @@ p {
       box-shadow: inset 0 0 0 5px rgba(128, 128, 128, 0);
       border-radius: 20px;
     }
-    &:hover {
-      &::-webkit-scrollbar-thumb {
-        box-shadow: inset 0 0 0 5px rgba(128, 128, 128, 0.2);
-        &:hover {
-          box-shadow: inset 0 0 0 5px rgba(128, 128, 128, 0.4);
-        }
+    &:hover::-webkit-scrollbar-thumb {
+      box-shadow: inset 0 0 0 5px rgba(128, 128, 128, 0.2);
+      &:hover {
+        box-shadow: inset 0 0 0 5px rgba(128, 128, 128, 0.4);
       }
     }
   }
@@ -218,27 +208,17 @@ p {
 
 @media (max-width: 767px) {
   article:before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+    @apply content-[''] fixed top-0 left-0 right-0 pointer-events-none opacity-0 bg-black;
     bottom: -200px;
-    pointer-events: none;
     transition: opacity 1.5s ease;
-    opacity: 0;
     z-index: 14;
-    background-color: black;
     .nextra-container.menu-active & {
       opacity: 0.8;
     }
   }
   .nextra-sidebar-container {
-    @apply top-0 overscroll-contain bg-white pt-16 dark:bg-dark;
-    height: 100vh;
+    @apply h-screen opacity-0 top-0 overscroll-contain bg-white pt-16 dark:bg-dark;
     height: -webkit-fill-available;
-
-    opacity: 0;
     transform: translate3d(0, -110%, 0);
     transition: transform 0.8s cubic-bezier(0.52, 0.16, 0.04, 1),
       opacity 0s linear 1s;
@@ -263,18 +243,14 @@ p {
       @apply top-10 md:top-0;
     }
   }
-  .nextra-banner-hidden .nextra-banner-container ~ div {
-    .nextra-sidebar-container {
-      @apply pt-16;
-    }
+  .nextra-banner-hidden .nextra-banner-container ~ div .nextra-sidebar-container {
+    @apply pt-16;
   }
   .nextra-banner-hidden div.nextra-nav-container {
     @apply top-0;
   }
-  .nextra-container {
-    .nextra-scrollbar {
-      scrollbar-gutter: auto;
-    }
+  .nextra-container .nextra-scrollbar {
+    scrollbar-gutter: auto;
   }
 }
 
@@ -361,6 +337,21 @@ article {
       vertical-align: -4px;
     }
   }
+  details[data-open] > summary {
+    @apply list-none before:rotate-90;
+  }
+
+  .subheading-anchor {
+    @apply absolute inline-block w-px;
+    margin-top: -84px;
+  }
+
+  .subheading-anchor + a:hover .anchor-icon {
+    @apply opacity-100;
+  }
+  .subheading-anchor:target + a .anchor-icon {
+    @apply text-gray-400 opacity-100 dark:text-neutral-500;
+  }
 
   /* Typesettings */
   &.nextra-body-typesetting-article {
@@ -399,9 +390,7 @@ article {
   ul {
     @apply m-0 list-none break-words;
     hyphens: auto;
-    &:first-child {
-      @apply mt-0;
-    }
+    @apply first:mt-0;
   }
   li {
     @apply my-2;
@@ -424,8 +413,10 @@ article {
 
     /* Using bg-white as background-color when the browser didn't support backdrop-filter */
     @apply bg-white text-gray-100 ring-1 ring-black/5;
+    @apply dark:bg-neutral-900 dark:ring-white/10;
     li {
       @apply mx-2.5 break-words rounded-md px-2.5 py-2 text-gray-800;
+      @apply dark:text-gray-300;
       .highlight {
         @apply text-primary-500 underline decoration-primary-400;
       }
@@ -433,41 +424,19 @@ article {
     li.active,
     a:focus li {
       @apply bg-primary-400/10 text-primary-500;
+      @apply dark:bg-primary-500/10;
     }
     .nextra-search-section {
       @apply border-b border-black/10;
-      .dark & {
-        @apply border-b border-white/20;
-      }
-    }
-  }
-  .dark & {
-    /* Using bg-white as background-color when the browser didn't support backdrop-filter */
-    ul {
-      @apply bg-neutral-900 text-gray-100 ring-white/10;
-      li {
-        @apply text-gray-300;
-        .highlight {
-          @apply text-primary-500 underline decoration-primary-400;
-        }
-      }
-      li.active,
-      a:focus li {
-        @apply bg-primary-500/10 text-primary-500;
-      }
+      @apply dark:border-b dark:border-white/20;
     }
   }
   @supports (
     (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))
   ) {
     ul {
-      backdrop-filter: blur(16px);
-      @apply bg-opacity-70;
-    }
-    .dark & {
-      ul {
-        @apply bg-opacity-80;
-      }
+      @apply bg-opacity-70 backdrop-blur-lg;
+      @apply dark:bg-opacity-80;
     }
   }
 }
@@ -496,8 +465,7 @@ input[type='search']::-webkit-search-results-decoration {
 /* Locale */
 .locale-switch summary::-webkit-details-marker,
 .locale-switch summary::marker {
-  content: '';
-  display: none;
+  @apply hidden content-[''];
 }
 .locale-switch[open] summary:before {
   content: ' ';
