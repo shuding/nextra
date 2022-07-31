@@ -1,5 +1,5 @@
 import { defineConfig } from 'tsup'
-
+import tsconfig from './tsconfig.json'
 function outExtension() {
   return {
     js: `.js`
@@ -7,9 +7,10 @@ function outExtension() {
 }
 
 export default defineConfig({
-  entry: ['src/index.tsx'],
+  entry: ['src/index.tsx', "src/cusdis.tsx"],
   format: 'esm',
   dts: true,
   name: 'nextra-theme-blog',
-  outExtension
+  outExtension,
+  target: tsconfig.compilerOptions.target
 })

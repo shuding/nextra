@@ -1,4 +1,5 @@
 import { PageOpts } from 'nextra'
+import React from 'react'
 
 export interface NextraBlogTheme {
   readMore?: string
@@ -22,6 +23,7 @@ export interface NextraBlogTheme {
     url: string
     name: string
   }[]
+  comments?: React.ReactNode
 }
 
 export interface BlogPageOpts extends PageOpts {

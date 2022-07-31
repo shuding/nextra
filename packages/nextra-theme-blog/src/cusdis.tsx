@@ -11,7 +11,7 @@ const Cusdis = dynamic(
   { ssr: false }
 ) as typeof ReactCusdis
 
-export const Comments = () => {
+const Comments = () => {
   const { config, opts } = useBlogContext()
   const router = useRouter()
   const { pageTitle } = getTitle({ opts, config })
@@ -33,3 +33,5 @@ export const Comments = () => {
     />
   ) : null
 }
+
+export default Comments

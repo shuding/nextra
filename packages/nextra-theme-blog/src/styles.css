@@ -1,8 +1,8 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
-@import '../../nextra-theme-docs/src/css/variables.css';
-@import '../../nextra-theme-docs/src/css/code-blocks.css';
+@import 'nextra/code-highlighting/variables.css';
+@import 'nextra/code-highlighting/code-blocks.css';
 
 body {
   @apply px-4;
@@ -21,10 +21,12 @@ h1 {
 }
 
 .prose code {
+
   &:before,
   &:after {
     @apply hidden;
   }
+
   .line {
     @apply font-normal;
   }

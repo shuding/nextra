@@ -1,35 +1,43 @@
 import { defineConfig } from 'tsup'
+import tsconfig from './tsconfig.json'
+const { compilerOptions: { target } } = tsconfig
+
 export default defineConfig([
   {
+    name: 'nextra',
     entry: ['src/index.js'],
     format: 'cjs',
-    name: 'nextra',
-    dts: false
+    dts: false,
+    target
   },
   {
+    name: 'nextra-utils',
     entry: ['src/ssg.ts', 'src/locales.ts', 'src/context.ts'],
     format: 'cjs',
-    name: 'nextra-utils',
     external: ['next/server'],
-    dts: true
+    dts: true,
+    target
   },
   {
+    name: 'nextra-loader',
     entry: ['src/loader.ts'],
     format: 'esm',
-    name: 'nextra-loader',
-    dts: true
+    dts: true,
+    target
   },
   {
     entry: ['src/compile.ts'],
     format: 'esm',
     name: 'nextra-mdx-compiler',
-    dts: true
+    dts: true,
+    target
   },
   {
     entry: ['src/icons.ts'],
     name: 'nextra-icons',
     format: 'esm',
-    dts: true
+    dts: true,
+    target
   },
   {
     entry: ['src/types.ts'],
