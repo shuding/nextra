@@ -3,13 +3,12 @@ import React, { forwardRef, ComponentProps, ReactElement } from 'react'
 import NextLink from 'next/link'
 import { useConfig } from '../config'
 
-type AnchorProps = Omit<ComponentProps<'a'>, 'href' | 'ref'> & {
-  href: string
+type AnchorProps = Omit<ComponentProps<'a'>, 'ref'> & {
   newWindow?: boolean
 }
 
 const Anchor = forwardRef<HTMLAnchorElement, AnchorProps>(function (
-  { href, children, newWindow, ...props },
+  { href = '', children, newWindow, ...props },
   // ref is used in <NavbarMenu />
   forwardedRef
 ): ReactElement {
