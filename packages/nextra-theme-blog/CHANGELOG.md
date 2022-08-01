@@ -1,5 +1,12 @@
 # nextra-theme-blog
 
+## 2.0.0-beta.13
+
+### Patch Changes
+
+- 4157b71: fix: make cusdis a component
+- 4157b71: set lower build target and share code highlight theme through nextra
+
 ## 2.0.0-beta.12
 
 ### Patch Changes

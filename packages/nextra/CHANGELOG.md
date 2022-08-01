@@ -1,5 +1,11 @@
 # nextra
 
+## 2.0.0-beta.13
+
+### Patch Changes
+
+- 4157b71: set lower build target and share code highlight theme through nextra
+
 ## 2.0.0-beta.12
 
 ### Patch Changes
