@@ -7,7 +7,7 @@ const MARKDOWN_EXTENSIONS = ['md', 'mdx']
 const nextra = (...config) =>
   function withNextra(nextConfig = {}) {
     const nextraConfig =
-      typeof config[0] === "string"
+      typeof config[0] === 'string'
         ? {
             theme: config[0],
             themeConfig: config[1]

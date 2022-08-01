@@ -100,10 +100,6 @@ async function loader(
   // Extract frontMatter information if it exists
   const { data: meta, content } = grayMatter(source)
 
-  if (IS_PRODUCTION && indexContentEmitted.has(filename)) {
-    unstable_flexsearch = false
-  }
-
   const { result, headings, structurizedData, hasJsxInH1 } = await compileMdx(
     content,
     mdxOptions,
@@ -120,7 +116,9 @@ async function loader(
     defaultLocale
   )
 
-  if (unstable_flexsearch) {
+  const skipFlexsearchIndexing =
+    IS_PRODUCTION && indexContentEmitted.has(filename)
+  if (unstable_flexsearch && !skipFlexsearchIndexing) {
     if (meta.searchable !== false) {
       addPage({
         fileLocale: fileLocale || DEFAULT_LOCALE,
@@ -130,7 +128,6 @@ async function loader(
         structurizedData
       })
     }
-
     indexContentEmitted.add(filename)
   }
 
