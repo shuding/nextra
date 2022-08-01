@@ -20,6 +20,10 @@
   letter-spacing: -0.02rem;
   z-index: 2;
 }
+:global(.dark) .feature:not(.light-only) {
+  color: #fff;
+  background-color: #202020;
+}
 
 .features {
   display: grid;
