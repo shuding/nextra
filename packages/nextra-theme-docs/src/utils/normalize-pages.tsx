@@ -63,6 +63,8 @@ function findFirstRoute(items: DocsItem[]): string | undefined {
   }
 }
 
+const CUSTOM_ERROR_PAGES = ['/404', '/500']
+
 export default function normalizePages({
   list,
   locale,
@@ -117,8 +119,8 @@ export default function normalizePages({
   // Page directories
   const topLevelNavbarItems: PageItem[] = []
 
-  let activeType: string | undefined = undefined
-  let activeIndex: number = 0
+  let activeType: string | undefined
+  let activeIndex = 0
   let activeThemeContext = pageThemeContext
   let activePath: Item[] = []
 
@@ -150,7 +152,7 @@ export default function normalizePages({
     .flatMap(item => {
       const items = []
       const index = metaKeys.indexOf(item.name)
-
+      let extendedItem
       if (index !== -1) {
         // Fill all skipped items in meta.
         for (let i = metaKeyIndex + 1; i < index; i++) {
@@ -164,10 +166,9 @@ export default function normalizePages({
           }
         }
         metaKeyIndex = index
+        extendedItem = { ...meta[item.name], ...item }
       }
-
-      const extendedItem = index === -1 ? item : { ...meta[item.name], ...item }
-      items.push(extendedItem)
+      items.push(extendedItem || item)
       return items
     })
 
@@ -198,54 +199,38 @@ export default function normalizePages({
 
     // Get the item's meta information.
     const extendedMeta = extendMeta(meta[a.name], fallbackMeta)
-
-    const type = extendedMeta.type || 'doc'
-    const title =
-      extendedMeta.title ||
-      (type === 'separator' ? undefined : getTitle(a.name))
-    const hidden = extendedMeta.hidden
-
+    const { title, hidden, type = 'doc' } = extendedMeta
     const extendedPageThemeContext = {
       ...pageThemeContext,
       ...extendedMeta.theme
     }
-
     // If the doc is under the active page root.
     const isCurrentDocsTree = route.startsWith(docsRoot)
 
-    const normalizedChildren: any = a.children
-      ? normalizePages({
-          list: a.children,
-          locale,
-          defaultLocale,
-          route,
-          docsRoot: type === 'page' || type === 'menu' ? a.route : docsRoot,
-          underCurrentDocsRoot: underCurrentDocsRoot || isCurrentDocsTree,
-          pageThemeContext: extendedPageThemeContext
-        })
-      : undefined
+    const normalizedChildren: any =
+      a.children &&
+      normalizePages({
+        list: a.children,
+        locale,
+        defaultLocale,
+        route,
+        docsRoot: type === 'page' || type === 'menu' ? a.route : docsRoot,
+        underCurrentDocsRoot: underCurrentDocsRoot || isCurrentDocsTree,
+        pageThemeContext: extendedPageThemeContext
+      })
 
-    const item: Item = {
-      ...a,
-      title,
+    const { locale: pageLocale, ...fields } = a
+    const getItem = (): Item => ({
+      ...fields,
       type,
-      hidden,
-      children: normalizedChildren ? [] : undefined
-    }
-    const docsItem: DocsItem = {
-      ...a,
-      title,
-      type,
-      hidden,
-      children: normalizedChildren ? [] : undefined
-    }
-    const pageItem: PageItem = {
-      ...a,
-      title,
-      type,
-      hidden,
-      children: normalizedChildren ? [] : undefined
-    }
+      title: title || (type === 'separator' ? undefined : getTitle(a.name)),
+      ...(pageLocale && { locale: pageLocale }),
+      ...(hidden && { hidden }),
+      ...(normalizedChildren && { children: [] })
+    })
+    const item: Item = getItem()
+    const docsItem: DocsItem = getItem()
+    const pageItem: PageItem = getItem()
 
     // This item is currently active, we collect the active path etc.
     if (a.route === route) {
@@ -269,8 +254,7 @@ export default function normalizePages({
           }
       }
     }
-
-    if (hidden) continue
+    if (hidden || CUSTOM_ERROR_PAGES.includes(a.route)) continue
 
     if (normalizedChildren) {
       if (
@@ -318,9 +302,9 @@ export default function normalizePages({
           break
         case 'doc':
           if (isCurrentDocsTree) {
-            Array.isArray(docsItem.children) &&
+            if (Array.isArray(docsItem.children)) {
               docsItem.children.push(...normalizedChildren.docsDirectories)
-
+            }
             // Itself is a doc page.
             if (item.withIndexPage) {
               flatDocsDirectories.push(docsItem)
@@ -330,9 +314,9 @@ export default function normalizePages({
 
       flatDirectories.push(...normalizedChildren.flatDirectories)
       flatDocsDirectories.push(...normalizedChildren.flatDocsDirectories)
-
-      Array.isArray(item.children) &&
+      if (Array.isArray(item.children)) {
         item.children.push(...normalizedChildren.directories)
+      }
     } else {
       flatDirectories.push(item)
       switch (type) {

@@ -1,6 +1,10 @@
 import React from 'react'
 import { DocsThemeConfig, PageTheme } from './types'
 import { useRouter } from 'next/router'
+import { Anchor } from './components'
+import { getGitIssueUrl } from './utils/get-git-issue-url'
+import useMounted from './utils/use-mounted'
+import { useConfig } from './config'
 
 export const DEFAULT_LOCALE = 'en-US'
 
@@ -46,7 +50,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     </>
   ),
   searchPlaceholder() {
-    const { locale } = useRouter();
+    const { locale } = useRouter()
     if (locale === 'zh-CN') return '搜索文档...'
     return 'Search documentation...'
   },
@@ -56,6 +60,42 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     </span>
   ),
   bannerKey: 'nextra-banner',
+  notFoundLink() {
+    const config = useConfig()
+    const mounted = useMounted()
+    const { asPath } = useRouter()
+    return mounted ? (
+      <Anchor
+        href={getGitIssueUrl({
+          repository: config.docsRepositoryBase,
+          title: `Found broken \`${asPath}\` link. Please fix!`,
+          labels: config.notFoundLabels
+        })}
+        newWindow
+      >
+        Submit an issue about broken "{asPath}" link
+      </Anchor>
+    ) : null
+  },
+  notFoundLabels: 'bug',
+  serverSideErrorLink() {
+    const config = useConfig()
+    const mounted = useMounted()
+    const { asPath } = useRouter()
+    return mounted ? (
+      <Anchor
+        href={getGitIssueUrl({
+          repository: config.docsRepositoryBase,
+          title: `Got server-side error in \`${asPath}\` url. Please fix!`,
+          labels: config.serverSideErrorLabels
+        })}
+        newWindow
+      >
+        Submit an issue about error in "{asPath}" url
+      </Anchor>
+    ) : null
+  },
+  serverSideErrorLabels: 'bug'
   // direction: 'ltr',
   // i18n: [{ locale: 'en-US', text: 'English', direction: 'ltr' }],
 }

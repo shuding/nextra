@@ -1,2 +1,1 @@
-import { locales } from "nextra/locales";
-export const middleware = locales;
+export { locales as middleware } from "nextra/locales";

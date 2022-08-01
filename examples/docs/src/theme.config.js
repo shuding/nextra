@@ -65,7 +65,6 @@ export default {
   unstable_faviconGlyph: '✦',
   prevLinks: true,
   nextLinks: true,
-  floatTOC: true,
   footer: true,
   footerEditLink: 'Edit this page on GitHub',
   footerText: `MIT ${new Date().getFullYear()} © Nextra.`,

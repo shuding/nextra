@@ -20,7 +20,9 @@ export function locales(request: NextRequest) {
   const shouldHandleLocale =
     !/^\/(api|_next)\//.test(nextUrl.pathname) &&
     !/\.(jpe?g|svg|png|webmanifest)$/.test(nextUrl.pathname) &&
-    nextUrl.locale !== ''
+    nextUrl.locale !== '' &&
+    // not Server-Side Error page
+    nextUrl.pathname !== '/500'
 
   if (!shouldHandleLocale) return
 

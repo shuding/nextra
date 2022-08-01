@@ -55,5 +55,14 @@
     "href": "https://github.com/shuding/nextra",
     "type": "page",
     "newWindow": true
+  },
+  "404": {
+    "type": "page"
+  },
+  "500": {
+    "type":"page",
+    "theme": {
+      "layout": "full"
+    }
   }
 }
