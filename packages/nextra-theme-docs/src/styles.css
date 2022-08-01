@@ -1,9 +1,9 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
-@import 'nextra/code-highlighting/variables.css';
-@import 'nextra/code-highlighting/code-blocks.css';
-
+@import 'nextra/styles/variables.css';
+@import 'nextra/styles/code-block.css';
+@import 'nextra/styles/subheading-anchor.css';
 :root {
   --nextra-primary-hue: 212deg;
 }
@@ -508,51 +508,6 @@ article {
       @apply rotate-90;
     }
   }
-
-  .subheading-anchor {
-    margin-top: -84px;
-    display: inline-block;
-    position: absolute;
-    width: 1px;
-  }
-
-  .subheading-anchor + a:hover .anchor-icon {
-    @apply opacity-100;
-  }
-  .subheading-anchor:target + a .anchor-icon {
-    @apply text-gray-400 opacity-100 dark:text-neutral-500;
-  }
-
-  .anchor-icon {
-    @apply absolute select-none pl-2 text-gray-300 opacity-0 transition-opacity dark:text-neutral-700;
-  }
-
-  &.nextra-body-typesetting-article {
-    font-size: 17px;
-    font-feature-settings: 'rlig' 1, 'calt' 1;
-    h1 {
-      @apply mt-6 mb-4 text-center;
-      font-size: 2.5rem;
-    }
-    h2 {
-      @apply border-none;
-    }
-    a:not(.anchor) {
-      @apply no-underline hover:underline;
-    }
-    p {
-      @apply leading-8;
-    }
-    code {
-      @apply border-none dark:bg-neutral-700;
-    }
-    pre code {
-      @apply dark:bg-transparent;
-    }
-    .anchor-icon {
-      display: none;
-    }
-  }
 }
 
 .nextra-toc {
@@ -758,10 +713,7 @@ table tr td {
     @apply border-r-2 border-l-0 pr-6 pl-0;
   }
 }
-.nextra-container:not(.rtl):not(.page) article {
-}
-.nextra-container.rtl:not(.page) article {
-}
+
 @screen md {
   .nextra-container:not(.page) article .bleed.full {
     margin-left: calc(-50vw + 50% + 8rem);
@@ -789,9 +741,6 @@ table tr td {
 .nextra-container.rtl {
   code {
     direction: ltr;
-  }
-  .anchor-icon {
-    @apply ml-0 mr-2 inline-block;
   }
   article ul,
   article ol {
