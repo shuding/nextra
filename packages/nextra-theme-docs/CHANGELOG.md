@@ -1,5 +1,14 @@
 # nextra-theme-docs
 
+## 2.0.0-beta.13
+
+### Patch Changes
+
+- cb87709: Fix flexsearch option being overridden
+- 4157b71: set lower build target and share code highlight theme through nextra
+- 6a4a593: fix: #531 unclickable breadcrumb
+- 06aa62f: feat: allow `import { getComponents } from 'nextra-theme-docs'`
+
 ## 2.0.0-beta.12
 
 ### Patch Changes
