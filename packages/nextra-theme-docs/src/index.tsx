@@ -282,8 +282,7 @@ const Content = ({
 const createLayout = (opts: PageOpts, config: DocsThemeConfig) => {
   const extendedConfig = {
     ...defaultConfig,
-    ...config,
-    unstable_flexsearch: opts.unstable_flexsearch
+    ...config
   }
   const nextThemes = extendedConfig.nextThemes || {}
   const Page = ({ children }: { children: ReactNode }): ReactNode => children
