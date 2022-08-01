@@ -2,7 +2,7 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 @import 'nextra/styles/variables.css';
-@import 'nextra/styles/code-blocks.css';
+@import 'nextra/styles/code-block.css';
 @import 'nextra/styles/subheading-anchor.css';
 
 body {

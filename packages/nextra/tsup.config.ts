@@ -1,6 +1,6 @@
 import { defineConfig } from 'tsup'
 import tsconfig from './tsconfig.json'
-const { compilerOptions: { target } } = tsconfig
+const { target } = tsconfig.compilerOptions
 
 export default defineConfig([
   {

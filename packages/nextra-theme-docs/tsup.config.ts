@@ -6,7 +6,7 @@ function outExtension() {
     js: `.js`
   }
 }
-const { compilerOptions: { target } } = tsconfig
+const { target } = tsconfig.compilerOptions
 
 const sharedConfig = defineConfig({
   format: 'esm',
