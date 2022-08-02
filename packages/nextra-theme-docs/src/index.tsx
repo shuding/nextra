@@ -120,7 +120,7 @@ const Body = ({
         </article>
       ) : themeContext.layout === 'raw' ? (
         <div className="nextra-body full expand relative overflow-x-hidden">
-          {children}
+          <MDXTheme>{children}</MDXTheme>
         </div>
       ) : (
         <article
