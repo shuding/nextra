@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect, useMemo, ReactElement } from 'react'
 import cn from 'classnames'
 import Slugger from 'github-slugger'
 import { useRouter } from 'next/router'
-import Link from 'next/link'
 import { Heading } from 'nextra'
 import scrollIntoView from 'scroll-into-view-if-needed'
 
@@ -19,6 +18,7 @@ import ThemeSwitch from './theme-switch'
 import { ArrowRightIcon } from 'nextra/icons'
 import Collapse from './components/collapse'
 import renderComponent from './utils/render-component'
+import Anchor from './components/anchor'
 
 const TreeState: Record<string, boolean> = {}
 
@@ -28,6 +28,7 @@ interface FolderProps {
 }
 
 const Folder = React.memo(FolderImpl)
+
 function FolderImpl({ item, anchors }: FolderProps) {
   const { asPath, locale } = useRouter()
   const routeOriginal = getFSRoute(asPath, locale)
@@ -51,7 +52,8 @@ function FolderImpl({ item, anchors }: FolderProps) {
   }, [activeRouteInside])
 
   const link = (
-    <a
+    <Anchor
+      href={(item as Item).withIndexPage ? item.route : ''}
       className="cursor-pointer"
       onClick={e => {
         const clickedToggleIcon = ['svg', 'path'].includes(
@@ -87,7 +89,7 @@ function FolderImpl({ item, anchors }: FolderProps) {
           )}
         />
       </span>
-    </a>
+    </Anchor>
   )
 
   if (item.type === 'menu') {
@@ -124,11 +126,7 @@ function FolderImpl({ item, anchors }: FolderProps) {
 
   return (
     <li className={cn({ open, active })}>
-      {(item as Item).withIndexPage ? (
-        <Link href={item.route}>{link}</Link>
-      ) : (
-        link
-      )}
+      {link}
       <Collapse open={open}>
         {Array.isArray(item.children) ? (
           <Menu
@@ -144,11 +142,12 @@ function FolderImpl({ item, anchors }: FolderProps) {
 }
 
 interface SeparatorProps {
-  title: string | undefined
+  title?: string
   topLevel: boolean
 }
+
 function Separator({ title, topLevel }: SeparatorProps) {
-  const hasTitle = typeof title !== 'undefined'
+  const hasTitle = title !== undefined
 
   const { sidebarSubtitle } = useConfig()
 
@@ -178,26 +177,25 @@ interface FileProps {
   anchors: string[]
   topLevel: boolean
 }
-function File({ item, anchors, topLevel }: FileProps) {
+
+function File({ item, anchors, topLevel }: FileProps): ReactElement {
   const { asPath, locale } = useRouter()
   const route = getFSRoute(asPath, locale)
-  const active = route === item.route + '/' || route + '/' === item.route + '/'
+  const active = [route, route + '/'].includes(item.route + '/')
   const slugger = new Slugger()
   const activeAnchor = useActiveAnchor()
   const { setMenu } = useMenuContext()
-  const title = item.title
 
   if (item.type === 'separator') {
-    return <Separator title={title} topLevel={topLevel} />
+    return <Separator title={item.title} topLevel={topLevel} />
   }
 
-  if (anchors && anchors.length) {
+  if (anchors?.length) {
     if (active) {
       let activeIndex = 0
-      const anchorInfo = anchors.map((anchor, i) => {
-        const text = anchor
+      const anchorInfo = anchors.map((text, i) => {
         const slug = slugger.slug(text)
-        if (activeAnchor[slug] && activeAnchor[slug].isActive) {
+        if (activeAnchor[slug]?.isActive) {
           activeIndex = i
         }
         return { text, slug }
@@ -205,19 +203,16 @@ function File({ item, anchors, topLevel }: FileProps) {
 
       return (
         <li className={cn(active && 'active', 'break-words')}>
-          <Link href={(item as PageItem).href || item.route}>
-            <a
-              {...((item as PageItem).newWindow
-                ? { target: '_blank', rel: 'noopener noreferrer' }
-                : {})}
-              className="break-words"
-              onClick={() => {
-                setMenu(false)
-              }}
-            >
-              {title}
-            </a>
-          </Link>
+          <Anchor
+            href={(item as PageItem).href || item.route}
+            newWindow={(item as PageItem).newWindow}
+            className="break-words"
+            onClick={() => {
+              setMenu(false)
+            }}
+          >
+            {item.title}
+          </Anchor>
           <ul>
             {anchors.map((_, i) => {
               const { slug, text } = anchorInfo[i]
@@ -234,7 +229,7 @@ function File({ item, anchors, topLevel }: FileProps) {
                   >
                     <span className="flex text-sm w-full">
                       <span className="opacity-25">#</span>
-                      <span className="mr-2"></span>
+                      <span className="mr-2" />
                       <span className="inline-block w-full break-words">
                         {text}
                       </span>
@@ -251,18 +246,15 @@ function File({ item, anchors, topLevel }: FileProps) {
 
   return (
     <li className={cn(active && 'active', 'break-words')}>
-      <Link href={(item as PageItem).href || item.route}>
-        <a
-          {...((item as PageItem).newWindow
-            ? { target: '_blank', rel: 'noopener noreferrer' }
-            : {})}
-          onClick={() => {
-            setMenu(false)
-          }}
-        >
-          {title}
-        </a>
-      </Link>
+      <Anchor
+        href={(item as PageItem).href || item.route}
+        newWindow={(item as PageItem).newWindow}
+        onClick={() => {
+          setMenu(false)
+        }}
+      >
+        {item.title}
+      </Anchor>
     </li>
   )
 }
@@ -273,7 +265,8 @@ interface MenuProps {
   base?: string
   submenu?: boolean
 }
-function Menu({ directories, anchors, submenu }: MenuProps) {
+
+function Menu({ directories, anchors, submenu }: MenuProps): ReactElement {
   return (
     <ul>
       {directories.map(item => {
@@ -358,7 +351,7 @@ export default function Sidebar({
         className={cn(
           'nextra-sidebar-container nextra-scrollbar fixed top-16 z-[15] h-[calc(100vh-4rem)] w-full flex-shrink-0 self-start overflow-y-auto md:sticky md:w-64',
           asPopover ? 'md:hidden' : 'md:block',
-          hasMenu ? 'with-menu' : '',
+          hasMenu && 'with-menu',
           { open: menu }
         )}
       >

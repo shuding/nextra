@@ -1,10 +1,8 @@
 module.exports = {
-  mode: "jit",
+  darkMode: "class",
   content: [
     "./components/**/*.js",
-    "./pages/**/*.md",
-    "./pages/**/*.mdx",
+    "./pages/**/*.{md,mdx}",
     "./theme.config.js",
-    "./styles.css",
   ],
 };

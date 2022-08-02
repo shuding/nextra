@@ -4,6 +4,7 @@
     "dev": "turbo run dev",
     "build": "turbo run build:tailwind build --filter=./packages/*",
     "types:check": "turbo run types:check",
+    "lint": "eslint --ignore-path .gitignore .",
     "dev:core": "turbo run dev --filter=nextra...",
     "dev:theme-blog": "turbo run dev --filter=blog...",
     "dev:theme-docs": "turbo run dev --filter=swr-site...",
@@ -18,6 +19,8 @@
     "format": "turbo run format"
   },
   "devDependencies": {
+    "@typescript-eslint/parser": "^5.31.0",
+    "eslint": "^8.20.0",
     "@changesets/cli": "^2.24.1",
     "@edge-runtime/vm": "1.1.0-beta.23",
     "postcss-import": "^14.1.0",

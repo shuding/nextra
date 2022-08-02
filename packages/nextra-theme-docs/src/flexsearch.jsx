@@ -8,7 +8,6 @@ import React, {
 } from 'react'
 import { useRouter } from 'next/router'
 import cn from 'classnames'
-import Link from 'next/link'
 import FlexSearch from 'flexsearch'
 import { Transition } from '@headlessui/react'
 
@@ -16,6 +15,7 @@ import { useConfig } from './config'
 import renderComponent from './utils/render-component'
 import useMenuContext from './utils/menu-context'
 import { SpinnerIcon } from 'nextra/icons'
+import Anchor from './components/anchor'
 
 const Item = ({
   page,
@@ -34,24 +34,21 @@ const Item = ({
           {page}
         </div>
       ) : null}
-      <Link href={href}>
-        <a
-          className="block no-underline"
-          onMouseMove={onHover}
-          onClick={onClick}
-        >
-          <li className={cn({ active })}>
-            <div className="font-semibold leading-5 dark:text-white">
-              {title}
+      <Anchor
+        href={href}
+        className="block no-underline"
+        onMouseMove={onHover}
+        onClick={onClick}
+      >
+        <li className={cn({ active })}>
+          <div className="font-semibold leading-5 dark:text-white">{title}</div>
+          {excerpt ? (
+            <div className="excerpt mt-1 text-sm leading-[1.35rem] text-gray-600 dark:text-gray-400">
+              {excerpt}
             </div>
-            {excerpt ? (
-              <div className="excerpt mt-1 text-sm leading-[1.35rem] text-gray-600 dark:text-gray-400">
-                {excerpt}
-              </div>
-            ) : null}
-          </li>
-        </a>
-      </Link>
+          ) : null}
+        </li>
+      </Anchor>
     </>
   )
 }

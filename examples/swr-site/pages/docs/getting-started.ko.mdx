@@ -1,5 +1,4 @@
 import Callout from 'nextra-theme-docs/callout'
-import Link from 'next/link'
 
 # 시작하기
 
@@ -26,8 +25,8 @@ const fetcher = (...args) => fetch(...args).then(res => res.json())
 ```
 
 <Callout emoji="💡">
-  GraphQL API 또는 Axios와 같은 라이브러리를 사용하려면 여러분만의 fetcher 함수를 생성하면 됩니다. 
-  <Link href="/docs/data-fetching"><a href="/docs/data-fetching">여기</a></Link>에서 더 많은 예시를 확인하세요.
+  GraphQL API 또는 Axios와 같은 라이브러리를 사용하려면 여러분만의 fetcher 함수를 생성하면 됩니다.
+  [여기](/docs/data-fetching)에서 더 많은 예시를 확인하세요.
 </Callout>
 
 그 다음, `useSWR`을 임포트하고 함수 컴포넌트 내에서 사용하여 시작하면 됩니다.

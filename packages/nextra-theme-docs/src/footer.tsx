@@ -1,6 +1,5 @@
-import React, { PropsWithChildren } from 'react'
+import React, { ReactElement } from 'react'
 import cn from 'classnames'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import { ArrowRightIcon } from 'nextra/icons'
@@ -9,6 +8,7 @@ import { useConfig } from './config'
 import { Item } from './utils/normalize-pages'
 import LocaleSwitch from './locale-switch'
 import ThemeSwitch from './theme-switch'
+import Anchor from './components/anchor'
 
 interface LinkProps {
   route: string
@@ -18,47 +18,45 @@ interface LinkProps {
 
 const NextLink = ({ route, title, isRTL }: LinkProps) => {
   return (
-    <Link href={route}>
-      <a
-        className={cn(
-          '-m-4 inline-flex items-center justify-end rounded p-4 text-base font-medium text-gray-600 no-underline transition-colors hover:text-primary-500 dark:text-gray-300 dark:hover:text-primary-500 md:text-lg',
-          { 'ml-2': !isRTL, 'mr-2': isRTL }
-        )}
-        title={title}
-      >
-        {title}
-        <ArrowRightIcon
-          height={20}
-          className={cn('inline flex-shrink-0 transform', {
-            'mr-1 rotate-180': isRTL,
-            'ml-1': !isRTL
-          })}
-        />
-      </a>
-    </Link>
+    <Anchor
+      href={route}
+      className={cn(
+        '-m-4 inline-flex items-center justify-end rounded p-4 text-base font-medium text-gray-600 no-underline transition-colors hover:text-primary-500 dark:text-gray-300 dark:hover:text-primary-500 md:text-lg',
+        { 'ml-2': !isRTL, 'mr-2': isRTL }
+      )}
+      title={title}
+    >
+      {title}
+      <ArrowRightIcon
+        height={20}
+        className={cn('inline flex-shrink-0 transform', {
+          'mr-1 rotate-180': isRTL,
+          'ml-1': !isRTL
+        })}
+      />
+    </Anchor>
   )
 }
 
 const PrevLink = ({ route, title, isRTL }: LinkProps) => {
   return (
-    <Link href={route}>
-      <a
-        className={cn(
-          '-m-4 flex items-center rounded p-4 text-base font-medium text-gray-600 no-underline transition-colors hover:text-primary-500 dark:text-gray-300 dark:hover:text-primary-500 md:text-lg',
-          { 'mr-2': !isRTL, 'ml-2': isRTL }
-        )}
-        title={title}
-      >
-        <ArrowRightIcon
-          height={20}
-          className={cn('inline flex-shrink-0 transform', {
-            'mr-1 rotate-180': !isRTL,
-            'ml-1': isRTL
-          })}
-        />
-        {title}
-      </a>
-    </Link>
+    <Anchor
+      href={route}
+      className={cn(
+        '-m-4 flex items-center rounded p-4 text-base font-medium text-gray-600 no-underline transition-colors hover:text-primary-500 dark:text-gray-300 dark:hover:text-primary-500 md:text-lg',
+        { 'mr-2': !isRTL, 'ml-2': isRTL }
+      )}
+      title={title}
+    >
+      <ArrowRightIcon
+        height={20}
+        className={cn('inline flex-shrink-0 transform', {
+          'mr-1 rotate-180': !isRTL,
+          'ml-1': isRTL
+        })}
+      />
+      {title}
+    </Anchor>
   )
 }
 
@@ -67,11 +65,12 @@ interface NavLinkProps {
   currentIndex: number
   flatDirectories: Item[]
 }
+
 export const NavLinks = ({
   flatDirectories,
   currentIndex,
   isRTL
-}: NavLinkProps) => {
+}: NavLinkProps): ReactElement | null => {
   const config = useConfig()
   const prev = config.prevLinks ? flatDirectories[currentIndex - 1] : null
   const next = config.nextLinks ? flatDirectories[currentIndex + 1] : null
@@ -94,7 +93,7 @@ export const NavLinks = ({
   )
 }
 
-const Footer: React.FC<PropsWithChildren<{ menu?: boolean }>> = ({ menu }) => {
+const Footer = ({ menu }: { menu?: boolean }): ReactElement => {
   const { locale = 'en-US' } = useRouter()
   const config = useConfig()
 
@@ -103,7 +102,7 @@ const Footer: React.FC<PropsWithChildren<{ menu?: boolean }>> = ({ menu }) => {
       <div
         className={cn(
           'hidden border-b py-2 dark:border-neutral-800 md:block',
-          menu ? '' : 'md:hidden'
+          !menu && 'md:hidden'
         )}
       >
         <div className="mx-auto max-w-[90rem]">
