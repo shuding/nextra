@@ -32,7 +32,7 @@ export const PostsLayout = ({ children }: { children: ReactNode }) => {
 
     return (
       <div key={post.route} className="post-item">
-        <h3 className="post-item-heading">
+        <h3>
           <Link href={post.route} passHref>
             <a className="post-item-title !no-underline">{postTitle}</a>
           </Link>
