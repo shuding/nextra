@@ -1,17 +1,14 @@
-import React, {
-  ReactElement,
-  ReactNode,
-  useEffect,
-  useMemo,
-  useRef,
-  useState
-} from 'react'
+import type { PageMapItem, PageOpts } from 'nextra'
+import type { FC, ReactElement, ReactNode } from 'react'
+
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import 'focus-visible'
+import scrollIntoView from 'scroll-into-view-if-needed'
 import { SkipNavContent } from '@reach/skip-nav'
 import { ThemeProvider } from 'next-themes'
-import { PageMapItem, PageOpts } from 'nextra'
 import cn from 'classnames'
+
 import Head from './head'
 import Navbar from './navbar'
 import Footer, { NavLinks } from './footer'
@@ -28,7 +25,6 @@ import { DocsThemeConfig, PageTheme } from './types'
 import './polyfill'
 import Breadcrumb from './breadcrumb'
 import renderComponent from './utils/render-component'
-import scrollIntoView from 'scroll-into-view-if-needed'
 
 let resizeObserver: ResizeObserver
 if (typeof window !== 'undefined') {
@@ -163,7 +159,7 @@ const Body = ({
   )
 }
 
-const Content = ({
+const InnerLayout = ({
   filename,
   pageMap,
   meta,
@@ -279,15 +275,28 @@ const Content = ({
   )
 }
 
-const createLayout = (opts: PageOpts, config: DocsThemeConfig) => {
+const nextraPageContext: {
+  [key: string]: {
+    Content: FC
+    pageOpts: PageOpts
+    themeConfig: DocsThemeConfig
+  }
+} = {}
+
+function Layout(props: any) {
+  const { route } = useRouter()
+  const context = nextraPageContext[route]
+
+  if (!context) throw new Error(`No content found for ${route}.`)
+
   const extendedConfig = {
     ...defaultConfig,
-    ...config,
-    unstable_flexsearch: opts.unstable_flexsearch
+    ...context.themeConfig,
+    unstable_flexsearch: context.pageOpts.unstable_flexsearch
   }
   const nextThemes = extendedConfig.nextThemes || {}
-  const Page = ({ children }: { children: ReactNode }): ReactNode => children
-  Page.getLayout = (page: ReactNode): ReactElement => (
+
+  return (
     <ThemeConfigContext.Provider value={extendedConfig}>
       <ThemeProvider
         attribute="class"
@@ -296,13 +305,31 @@ const createLayout = (opts: PageOpts, config: DocsThemeConfig) => {
         storageKey={nextThemes.storageKey}
         forcedTheme={nextThemes.forcedTheme}
       >
-        <Content {...opts}>{page}</Content>
+        <InnerLayout {...context.pageOpts}>
+          <context.Content {...props} />
+        </InnerLayout>
       </ThemeProvider>
     </ThemeConfigContext.Provider>
   )
-
-  return Page
 }
+
+// Make sure the same component is always returned so Next.js will render the
+// stable layout. We then put the actual content into a global store and use
+// the route to identify it.
+export default function withLayout(
+  route: string,
+  Content: FC,
+  pageOpts: PageOpts,
+  themeConfig: DocsThemeConfig
+) {
+  nextraPageContext[route] = {
+    Content,
+    pageOpts,
+    themeConfig
+  }
+
+  return Layout
+}
+
 export * from './types'
 export { getComponents } from './misc/theme'
-export default createLayout

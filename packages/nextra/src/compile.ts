@@ -72,9 +72,12 @@ export async function compileMdx(
     ].filter(Boolean)
   })
   try {
-    const result = await compiler.process(source)
+    const result = String(await compiler.process(source))
+      .replace('export const titleText =', 'const titleText =')
+      .replace('export default MDXContent', '')
+
     return {
-      result: String(result),
+      result,
       ...(compiler.data('headingMeta') as Pick<
         PageOpts,
         'headings' | 'hasJsxInH1'

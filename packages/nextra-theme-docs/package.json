@@ -66,9 +66,8 @@
     "format": "prettier --ignore-path ../../.gitignore --write --list-different ."
   },
   "dependencies": {
-    "@mdx-js/react": "^2.1.2",
-    "next-themes": "^0.2.0-beta.2",
     "@headlessui/react": "^1.6.5",
+    "@mdx-js/react": "^2.1.2",
     "@reach/skip-nav": "^0.17.0",
     "classnames": "^2.3.1",
     "flexsearch": "^0.7.21",
@@ -76,6 +75,7 @@
     "github-slugger": "^1.4.0",
     "intersection-observer": "^0.12.2",
     "match-sorter": "^4.2.0",
+    "next-themes": "^0.2.0-beta.2",
     "parse-git-url": "^1.0.1",
     "scroll-into-view-if-needed": "^2.2.29",
     "title": "^3.4.2"
@@ -86,24 +86,25 @@
     "react-dom": ">=16.13.1"
   },
   "devDependencies": {
-    "next": ">=12",
-    "react": "*",
-    "react-dom": "*",
-    "vitest": "*",
-    "nextra": "workspace:*",
+    "@tailwindcss/nesting": "*",
+    "@tailwindcss/typography": "*",
     "@types/flexsearch": "^0.7.3",
-    "concurrently": "*",
-    "cross-env": "*",
     "@types/react": "*",
     "@types/react-dom": "*",
-    "tsup": "*",
+    "autoprefixer": "*",
+    "concurrently": "*",
+    "cross-env": "*",
+    "cssnano": "*",
+    "cssnano-preset-advanced": "^5.3.8",
+    "next": ">=12",
+    "nextra": "workspace:*",
     "postcss": "*",
     "postcss-cli": "*",
-    "autoprefixer": "*",
-    "cssnano": "*",
+    "react": "*",
+    "react-dom": "*",
     "tailwindcss": "*",
-    "@tailwindcss/nesting": "*",
-    "@tailwindcss/typography": "*"
+    "tsup": "*",
+    "vitest": "*"
   },
   "prettier": {
     "semi": false,
