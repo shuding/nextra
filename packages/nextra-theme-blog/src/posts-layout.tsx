@@ -38,7 +38,7 @@ export const PostsLayout = ({ children }: { children: ReactNode }) => {
           </Link>
         </h3>
         {description && (
-          <p className="post-item-description mb-2 text-gray-400">
+          <p className="mb-2 text-gray-400">
             {description}
             {config.readMore && (
               <Link href={post.route} passHref>
