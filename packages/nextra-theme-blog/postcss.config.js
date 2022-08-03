@@ -4,6 +4,10 @@ module.exports = ctx => ({
     require('tailwindcss/nesting'),
     require('tailwindcss'),
     require('autoprefixer'),
-    ctx.env === 'production' ? require('cssnano') : false
+    ctx.env === 'production'
+      ? require('cssnano')({
+          preset: 'advanced'
+        })
+      : false
   ]
 })

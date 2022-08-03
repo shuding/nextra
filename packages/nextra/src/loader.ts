@@ -11,7 +11,12 @@ import { parseFileName } from './utils'
 import { compileMdx } from './compile'
 import { getPageMap, findPagesDir } from './page-map'
 import { collectFiles, collectMdx } from './plugin'
-import { IS_PRODUCTION, DEFAULT_LOCALE } from './constants'
+import {
+  IS_PRODUCTION,
+  DEFAULT_LOCALE,
+  OFFICIAL_THEMES,
+  MARKDOWN_EXTENSION_REGEX
+} from './constants'
 
 // TODO: create this as a webpack plugin.
 const indexContentEmitted = new Set<string>()
@@ -50,9 +55,9 @@ async function loader(
   context: LoaderContext<LoaderOptions>,
   source: string
 ): Promise<string> {
-  context.cacheable(true)
-
+  const { resourcePath } = context
   let {
+    pageImport,
     theme,
     themeConfig,
     defaultLocale,
@@ -63,12 +68,14 @@ async function loader(
     newNextLinkBehavior
   } = context.getOptions()
 
+  context.cacheable(true)
+
   // Check if there's a theme provided
   if (!theme) {
     throw new Error('No Nextra theme found!')
   }
+  const themeIncludeStyles = OFFICIAL_THEMES.includes(theme)
 
-  const { resourcePath } = context
   if (resourcePath.includes('/pages/api/')) {
     console.warn(
       `[nextra] Ignoring ${resourcePath} because it is located in the "pages/api" folder.`
@@ -110,6 +117,15 @@ async function loader(
     },
     resourcePath
   )
+
+  // Imported as a normal component, no need to add the layout.
+  if (!pageImport) {
+    return `
+${themeIncludeStyles ? `import '${theme}/style.css'` : ''}
+${result}
+export default MDXContent`.trimStart()
+  }
+
   const [pageMap, route, title] = getPageMap(
     resourcePath,
     pageMapResult,
@@ -146,6 +162,7 @@ async function loader(
   // Relative path instead of a package name
   const layout =
     theme.startsWith('.') || theme.startsWith('/') ? path.resolve(theme) : theme
+
   const layoutConfig = themeConfig ? slash(path.resolve(themeConfig)) : ''
   const pageOpts: Omit<PageOpts, 'titleText'> = {
     filename: slash(filename),
@@ -159,34 +176,50 @@ async function loader(
     newNextLinkBehavior
   }
 
+  const pageNextRoute =
+    '/' +
+    path
+      .relative(pagesDir, resourcePath)
+      // Remove the `mdx?` extension
+      .replace(MARKDOWN_EXTENSION_REGEX, '')
+      // Remove the `*/index` suffix
+      .replace(/\/index$/, '')
+      // Remove the only `index` route
+      .replace(/^index$/, '')
+
   return `
-import { withSSG as __nextra_withSSG__ } from 'nextra/ssg'
+import { SSGContext as __nextra_SSGContext__ } from 'nextra/ssg'
+
 import __nextra_withLayout__ from '${layout}'
-${layoutConfig && `import __nextra_layoutConfig__ from '${layoutConfig}'`}
-${result.replace('export default MDXContent;', '')}
+${themeIncludeStyles ? `import '${layout}/style.css'` : ''}
+${layoutConfig ? `import __nextra_layoutConfig__ from '${layoutConfig}'` : ''}
+
+${result}
 
 const __nextra_pageOpts__ = ${JSON.stringify(pageOpts)}
 
 globalThis.__nextra_internal__ = {
   pageMap: __nextra_pageOpts__.pageMap,
-  route: __nextra_pageOpts__.route
+  route: __nextra_pageOpts__.route,
 }
 
-const NextraLayout = __nextra_withSSG__(__nextra_withLayout__({
-  titleText: typeof titleText === 'string' ? titleText : undefined,
-  ...__nextra_pageOpts__
-}, ${layoutConfig ? '__nextra_layoutConfig__' : 'null'}))
-
-function NextraPage(props) {
+function Content(props) {
   return (
-    <NextraLayout {...props}>
+    <__nextra_SSGContext__.Provider value={props}>
       <MDXContent />
-    </NextraLayout>
+    </__nextra_SSGContext__.Provider>
   )
 }
-NextraPage.getLayout = NextraLayout.getLayout
 
-export default NextraPage`.trimStart()
+export default __nextra_withLayout__(
+  ${JSON.stringify(pageNextRoute)},
+  Content,
+  {
+    titleText: typeof titleText === 'string' ? titleText : undefined,
+    ...__nextra_pageOpts__
+  },
+  ${layoutConfig ? '__nextra_layoutConfig__' : 'null'},
+)`.trimStart()
 }
 
 export default function syncLoader(

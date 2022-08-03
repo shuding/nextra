@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from 'react'
+import React, { ReactElement, ReactNode, FC } from 'react'
 import { ThemeProvider } from 'next-themes'
 import type { PageOpts } from 'nextra'
 import type { LayoutProps, NextraBlogTheme } from './types'
@@ -7,6 +7,7 @@ import { ArticleLayout } from './article-layout'
 import { PostsLayout } from './posts-layout'
 import { PageLayout } from './page-layout'
 import { DEFAULT_CONFIG } from './constants'
+import { useRouter } from 'next/router'
 
 const layoutMap = {
   post: ArticleLayout,
@@ -24,8 +25,8 @@ const BlogLayout = ({
   const Layout = layoutMap[type]
   if (!Layout) {
     throw new Error(
-        `Nextra-themes-blog does not support the layout type "${type}" It only supports "post", "page", "posts" and "tag"`
-      )
+      `Nextra-themes-blog does not support the layout type "${type}" It only supports "post", "page", "posts" and "tag"`
+    )
   }
   return (
     <BlogProvider opts={opts} config={config}>
@@ -34,20 +35,47 @@ const BlogLayout = ({
   )
 }
 
-const createLayout = (opts: PageOpts, config: NextraBlogTheme) => {
-  const extendedConfig = { ...DEFAULT_CONFIG, ...config }
+const nextraPageContext: {
+  [key: string]: {
+    Content: FC
+    pageOpts: PageOpts
+    themeConfig: NextraBlogTheme
+  }
+} = {}
 
-  const Page = ({ children }: { children: ReactNode }): ReactNode => children
-  Page.getLayout = (page: ReactNode): ReactElement => (
+function Layout(props: any) {
+  const { route } = useRouter()
+  const context = nextraPageContext[route]
+  if (!context) throw new Error(`No content found for ${route}.`)
+
+  const extendedConfig = { ...DEFAULT_CONFIG, ...context.themeConfig }
+
+  return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-      <BlogLayout config={extendedConfig} opts={opts}>
-        {page}
+      <BlogLayout config={extendedConfig} opts={context.pageOpts}>
+        <context.Content {...props} />
       </BlogLayout>
     </ThemeProvider>
   )
-  return Page
+}
+
+// Make sure the same component is always returned so Next.js will render the
+// stable layout. We then put the actual content into a global store and use
+// the route to identify it.
+export default function withLayout(
+  route: string,
+  Content: FC,
+  pageOpts: PageOpts,
+  themeConfig: NextraBlogTheme
+) {
+  nextraPageContext[route] = {
+    Content,
+    pageOpts,
+    themeConfig
+  }
+
+  return Layout
 }
 
 export { useBlogContext } from './blog-context'
 export * from './types'
-export default createLayout

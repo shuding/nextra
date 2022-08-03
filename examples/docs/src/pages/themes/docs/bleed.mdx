@@ -7,21 +7,23 @@ A built-in component provided by `nextra-theme-docs`.
 When wrapping your content with `<Bleed>`, it will be slightly wider than the container
 and will overflow on both sides.
 
-<Nextra.Bleed>
+import Bleed from 'nextra-theme-docs/bleed'
+
+<Bleed>
   <div style={{ border: '1px solid #888', padding: '4rem 2.5rem', textAlign: 'center' }}>
     _There is nothing to writing. All you do is sit down at a typewriter and **bleed**._
 
     — Ernest Hemingway
 
   </div>
-</Nextra.Bleed>
+</Bleed>
 
 It provides a better reading experience when you want to present some graphical information, which normally
 looks nicer in a larger size.
 
 For example you can put text, image, video or any component inside:
 
-<Nextra.Bleed>
+<Bleed>
   <iframe
     width="100%"
     height="430"
@@ -30,33 +32,33 @@ For example you can put text, image, video or any component inside:
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
     allowFullscreen
   />
-</Nextra.Bleed>
+</Bleed>
 
 You can even make it full-bleed using `<Bleed full>`:
 
-<Nextra.Bleed full>
+<Bleed full>
   ![Landscape](https://source.unsplash.com/eaxwP9J_V6s/1600x398)
-</Nextra.Bleed>
+</Bleed>
 
 ## Usage
 
 ### MDX component
 
 ```mdx filename="bleed.mdx"
-<Nextra.Bleed>Hey, I can use **Markdown** syntax here.</Nextra.Bleed>
+<Bleed>Hey, I can use **Markdown** syntax here.</Bleed>
 
-<Nextra.Bleed full>
+<Bleed full>
   ![Landscape](https://source.unsplash.com/eaxwP9J_V6s/1600x398)
-</Nextra.Bleed>
+</Bleed>
 
-<Nextra.Bleed full>
+<Bleed full>
   <iframe
     src="https://codesandbox.io/embed/swr-states-4une7"
     width="100%"
     height="500px"
     title="SWR-States"
   />
-</Nextra.Bleed>
+</Bleed>
 ```
 
 ### React Component

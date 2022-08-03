@@ -25,6 +25,7 @@ export abstract class NextraPluginCache {
   }
 }
 export interface LoaderOptions extends NextraConfig {
+  pageImport?: boolean
   locales: string[]
   defaultLocale: string
   pageMapCache: NextraPluginCache

@@ -40,23 +40,44 @@ const nextra = (...config) =>
         config.plugins ||= []
         config.plugins.push(nextraPlugin)
 
-        config.module.rules.push({
-          test: MARKDOWN_EXTENSION_REGEX,
-          use: [
-            options.defaultLoaders.babel,
-            {
-              loader: 'nextra/loader',
-              options: {
-                ...nextraConfig,
-                locales: i18n.locales,
-                defaultLocale: i18n.defaultLocale,
-                pageMapCache,
-                newNextLinkBehavior:
-                  nextConfig.experimental?.newNextLinkBehavior
+        const nextraLoaderOptions = {
+          ...nextraConfig,
+          locales: i18n.locales,
+          defaultLocale: i18n.defaultLocale,
+          pageMapCache,
+          newNextLinkBehavior: nextConfig.experimental?.newNextLinkBehavior
+        }
+
+        config.module.rules.push(
+          {
+            // Match Markdown imports from non-pages. These imports have an
+            // issuer, which can be anything as long as it's not empty.
+            test: MARKDOWN_EXTENSION_REGEX,
+            issuer: request => !!request,
+            use: [
+              options.defaultLoaders.babel,
+              {
+                loader: 'nextra/loader',
+                options: nextraLoaderOptions
               }
-            }
-          ]
-        })
+            ]
+          },
+          {
+            // Match pages (imports without an issuer).
+            test: MARKDOWN_EXTENSION_REGEX,
+            issuer: request => !request,
+            use: [
+              options.defaultLoaders.babel,
+              {
+                loader: 'nextra/loader',
+                options: {
+                  ...nextraLoaderOptions,
+                  pageImport: true
+                }
+              }
+            ]
+          }
+        )
 
         if (typeof nextConfig.webpack === 'function') {
           return nextConfig.webpack(config, options)
