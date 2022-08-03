@@ -3,8 +3,6 @@ import type { LoaderOptions, PageOpts } from './types'
 import path from 'path'
 import grayMatter from 'gray-matter'
 import slash from 'slash'
-import { promisify } from 'util'
-import { readFileSync } from 'fs'
 import { LoaderContext } from 'webpack'
 import { Repository } from '@napi-rs/simple-git'
 
@@ -52,8 +50,6 @@ const [repository, gitRoot] = (function () {
     return []
   }
 })()
-
-let cachedGlobalThemeStyle: string | null
 
 async function loader(
   context: LoaderContext<LoaderOptions>,
@@ -166,29 +162,7 @@ async function loader(
     unstable_flexsearch
   }
 
-  if (typeof cachedGlobalThemeStyle === 'undefined') {
-    const themeIncludeStyles = OFFICIAL_THEMES.includes(theme)
-    if (themeIncludeStyles) {
-      try {
-        const globalStylePath = await promisify(context.resolve)(
-          context.rootContext,
-          theme + '/style.css'
-        )
-        if (globalStylePath) {
-          cachedGlobalThemeStyle = readFileSync(globalStylePath).toString()
-          cachedGlobalThemeStyle = `<style jsx global>{${JSON.stringify(
-            cachedGlobalThemeStyle
-          )}}</style>`
-        } else {
-          cachedGlobalThemeStyle = null
-        }
-      } catch (e) {
-        cachedGlobalThemeStyle = null
-      }
-    } else {
-      cachedGlobalThemeStyle = null
-    }
-  }
+  const themeIncludeStyles = OFFICIAL_THEMES.includes(theme)
 
   const pageNextRoute =
     '/' +
@@ -203,7 +177,9 @@ async function loader(
 
   return `
 import { SSGContext as __nextra_SSGContext__ } from 'nextra/ssg'
+
 import __nextra_withLayout__ from '${layout}'
+${themeIncludeStyles && `import '${layout}/style.css'`}
 ${layoutConfig && `import __nextra_layoutConfig__ from '${layoutConfig}'`}
 
 ${result}
@@ -217,7 +193,6 @@ globalThis.__nextra_internal__ = {
 
 function Content(props) {
   return <>
-    ${cachedGlobalThemeStyle || ''}
     <__nextra_SSGContext__.Provider value={props}>
       <MDXContent />
     </__nextra_SSGContext__.Provider>
