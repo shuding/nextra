@@ -10,9 +10,6 @@ import 'intersection-observer'
 import { ActiveAnchor, useActiveAnchorSet } from './active-anchor'
 import { MDXProvider } from '@mdx-js/react'
 import Collapse from '../components/collapse'
-import { Tabs, Tab } from '../components/tabs'
-import Bleed from '../bleed'
-import Callout from '../callout'
 import Anchor from '../components/anchor'
 
 let observer: IntersectionObserver
@@ -85,42 +82,46 @@ if (typeof window !== 'undefined') {
 }
 
 // Anchor links
-const createHeaderLink = (Tag: `h${2 | 3 | 4 | 5 | 6}`, context: { index: number }) => function HeaderLink({
-  children,
-  id,
-  ...props
-}: {
-  tag: any
-  children: ReactNode
-  id: string
-}): ReactElement {
-  setActiveAnchor = useActiveAnchorSet()
-  const obRef = useRef<HTMLSpanElement>(null)
+const createHeaderLink = (
+  Tag: `h${2 | 3 | 4 | 5 | 6}`,
+  context: { index: number }
+) =>
+  function HeaderLink({
+    children,
+    id,
+    ...props
+  }: {
+    tag: any
+    children: ReactNode
+    id: string
+  }): ReactElement {
+    setActiveAnchor = useActiveAnchorSet()
+    const obRef = useRef<HTMLSpanElement>(null)
 
-  useEffect(() => {
-    if (!obRef.current) return
+    useEffect(() => {
+      if (!obRef.current) return
 
-    slugs.set(obRef.current, [id, (context.index += 1)])
-    if (obRef.current) observer.observe(obRef.current)
+      slugs.set(obRef.current, [id, (context.index += 1)])
+      if (obRef.current) observer.observe(obRef.current)
 
-    return () => {
-      observer.disconnect()
-      slugs.delete(obRef.current!)
-      setActiveAnchor(f => {
-        const ret: ActiveAnchor = { ...f }
-        delete ret[id]
-        return ret
-      })
-    }
-  }, [])
+      return () => {
+        observer.disconnect()
+        slugs.delete(obRef.current!)
+        setActiveAnchor(f => {
+          const ret: ActiveAnchor = { ...f }
+          delete ret[id]
+          return ret
+        })
+      }
+    }, [])
 
-  return (
-    <Tag {...props}>
-      <span className="subheading-anchor -mt-20" id={id} ref={obRef} />
-      <a href={`#${id}`}>{children}</a>
-    </Tag>
-  )
-}
+    return (
+      <Tag {...props}>
+        <span className="subheading-anchor -mt-20" id={id} ref={obRef} />
+        <a href={`#${id}`}>{children}</a>
+      </Tag>
+    )
+  }
 
 const Table = ({ children }: { children: ReactNode }) => {
   return (
@@ -220,14 +221,7 @@ export const getComponents = () => {
     ),
     table: Table,
     details: Details,
-    summary: Summary,
-    Nextra: {
-      Bleed,
-      Callout,
-      Tabs,
-      Tab,
-      Collapse
-    }
+    summary: Summary
   }
 }
 
