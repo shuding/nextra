@@ -1,7 +1,7 @@
 import { compileMdx } from '../src/compile'
 import { it, describe, expect } from 'vitest'
 import path from 'path'
-import fs from 'fs/promises'
+import { promises as fs } from 'fs'
 
 type Name =
   | 'code-h1.mdx'
