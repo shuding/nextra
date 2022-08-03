@@ -4,56 +4,58 @@ A built-in component provided by `nextra-theme-docs`.
 
 ## Example
 
-<Nextra.Tabs items={['JavaScript', 'C++', {label:'C', disabled: true}, 'Python']} defaultIndex={1}>
-  <Nextra.Tab>
+import { Tabs, Tab } from 'nextra-theme-docs/tabs'
+
+<Tabs items={['JavaScript', 'C++', {label:'C', disabled: true}, 'Python']} defaultIndex={1}>
+  <Tab>
     ```js filename="hi.js"
     import { useState, useEffect } from 'react';
     ```
-  </Nextra.Tab>
-  <Nextra.Tab>
+  </Tab>
+  <Tab>
     ```cpp filename="hi.cpp"
     #include <iostream>
     ```
-  </Nextra.Tab>
-  <Nextra.Tab>
+  </Tab>
+  <Tab>
     ```c filename="hi.c"
     #include <stdio.h>
     ```
-  </Nextra.Tab>
-  <Nextra.Tab>
+  </Tab>
+  <Tab>
      ```python filename="hello.py"
     print('Hello, world!')
     ```
-  </Nextra.Tab>
-</Nextra.Tabs>
+  </Tab>
+</Tabs>
 
 ## Usage
 
 ### MDX component
 
 ````mdx filename="tabs.mdx"
-<Nextra.Tabs items={['JavaScript', 'C++', {label:'C', disabled: true}, 'Python']} defaultIndex={1}>
-  <Nextra.Tab>
+<Tabs items={['JavaScript', 'C++', {label:'C', disabled: true}, 'Python']} defaultIndex={1}>
+  <Tab>
     ```js filename="hi.js"
     import { useState, useEffect } from 'react';
     ```
-  </Nextra.Tab>
-  <Nextra.Tab>
+  </Tab>
+  <Tab>
     ```cpp filename="hi.cpp"
     #include <iostream>
     ```
-  </Nextra.Tab>
-  <Nextra.Tab>
+  </Tab>
+  <Tab>
     ```c filename="hi.c"
     #include <stdio.h>
     ```
-  </Nextra.Tab>
-  <Nextra.Tab>
+  </Tab>
+  <Tab>
     ```python filename="hello.py"
     print('Hello, world!')
     ```
-  </Nextra.Tab>
-</Nextra.Tabs>
+  </Tab>
+</Tabs>
 ````
 
 ### React Component

@@ -1,6 +1,9 @@
 # Docs Theme
 
-<Nextra.Callout>This website is built with the docs theme.</Nextra.Callout>
+import Callout from 'nextra-theme-docs/callout'
+import { Tabs, Tab } from 'nextra-theme-docs/tabs'
+
+<Callout>This website is built with the docs theme.</Callout>
 
 you can install the blog theme with the following commands:
 
@@ -8,43 +11,43 @@ you can install the blog theme with the following commands:
 
 1. Install Next.js, Nextra and React
 
-<Nextra.Tabs items={['npm', 'yarn', 'pnpm']} defaultIndex={1}>
-  <Nextra.Tab>
+<Tabs items={['npm', 'yarn', 'pnpm']} defaultIndex={1}>
+  <Tab>
     ```bash 
     npm i react react-dom next nextra 
     ```
-  </Nextra.Tab>
-  <Nextra.Tab>
+  </Tab>
+  <Tab>
     ```bash 
     yarn add react react-dom next nextra 
     ```
-  </Nextra.Tab>
-  <Nextra.Tab>
+  </Tab>
+  <Tab>
     ```bash 
     pnpm i react react-dom next nextra
     ```
-  </Nextra.Tab>
-</Nextra.Tabs>
+  </Tab>
+</Tabs>
 
 2. Install the docs theme
 
-<Nextra.Tabs items={['npm', 'yarn', 'pnpm']} defaultIndex={1}>
-  <Nextra.Tab>
+<Tabs items={['npm', 'yarn', 'pnpm']} defaultIndex={1}>
+  <Tab>
     ```bash 
     npm i nextra-theme-docs 
     ```
-  </Nextra.Tab>
-  <Nextra.Tab>
+  </Tab>
+  <Tab>
     ```bash 
     yarn add nextra-theme-docs 
     ```
-  </Nextra.Tab>
-  <Nextra.Tab>
+  </Tab>
+  <Tab>
     ```bash 
     pnpm i nextra-theme-docs 
     ```
-  </Nextra.Tab>
-</Nextra.Tabs>
+  </Tab>
+</Tabs>
 
 3. Create the following Next.js config and theme config under the root directory:
 
@@ -104,6 +107,6 @@ export default function Nextra({ Component, pageProps }) {
 
 ---
 
-<Nextra.Callout>
+<Callout>
 You can also use [`<style jsx>`](https://nextjs.org/docs/basic-features/built-in-css-support#css-in-js) to style elements inside `theme.config.js`.
-</Nextra.Callout>
+</Callout>
