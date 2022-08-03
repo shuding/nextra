@@ -63,7 +63,8 @@ async function loader(
     unstable_flexsearch,
     unstable_staticImage,
     mdxOptions,
-    pageMapCache
+    pageMapCache,
+    __nextra_page_import__
   } = context.getOptions()
 
   context.cacheable(true)
@@ -72,6 +73,7 @@ async function loader(
   if (!theme) {
     throw new Error('No Nextra theme found!')
   }
+  const themeIncludeStyles = OFFICIAL_THEMES.includes(theme)
 
   if (resourcePath.includes('/pages/api/')) {
     console.warn(
@@ -114,6 +116,15 @@ async function loader(
     },
     resourcePath
   )
+
+  // Imported as a normal component, no need to add the layout.
+  if (!__nextra_page_import__) {
+    return `
+${themeIncludeStyles && `import '${theme}/style.css'`}
+${result}
+export default MDXContent`.trimStart()
+  }
+
   const [pageMap, route, title] = getPageMap(
     resourcePath,
     pageMapResult,
@@ -150,6 +161,7 @@ async function loader(
   // Relative path instead of a package name
   const layout =
     theme.startsWith('.') || theme.startsWith('/') ? path.resolve(theme) : theme
+
   const layoutConfig = themeConfig ? slash(path.resolve(themeConfig)) : ''
   const pageOpts: Omit<PageOpts, 'titleText'> = {
     filename: slash(filename),
@@ -161,8 +173,6 @@ async function loader(
     timestamp,
     unstable_flexsearch
   }
-
-  const themeIncludeStyles = OFFICIAL_THEMES.includes(theme)
 
   const pageNextRoute =
     '/' +

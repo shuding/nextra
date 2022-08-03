@@ -28,6 +28,7 @@ export interface LoaderOptions extends NextraConfig {
   locales: string[]
   defaultLocale: string
   pageMapCache: NextraPluginCache
+  __nextra_page_import__?: boolean
 }
 
 export interface PageMapItem {
