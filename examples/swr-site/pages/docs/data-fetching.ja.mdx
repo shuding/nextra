@@ -1,5 +1,4 @@
 import Callout from 'nextra-theme-docs/callout'
-import Link from 'next/link'
 
 # データフェッチ
 
@@ -13,7 +12,7 @@ const { data, error } = useSWR(key, fetcher)
 
 <Callout emoji="💡">
   <code>fetcher</code> が{' '}
-  <Link href="/docs/global-configuration"><a href="/docs/global-configuration">グローバルで提供されている</a></Link>{' '}
+  [グローバルで提供されている](/docs/global-configuration){' '}
   場合は、パラメーターから省略できることに注意してください。
 </Callout>
 

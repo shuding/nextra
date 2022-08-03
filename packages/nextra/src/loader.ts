@@ -57,6 +57,7 @@ async function loader(
 ): Promise<string> {
   const { resourcePath } = context
   let {
+    __nextra_page_import__,
     theme,
     themeConfig,
     defaultLocale,
@@ -64,7 +65,7 @@ async function loader(
     unstable_staticImage,
     mdxOptions,
     pageMapCache,
-    __nextra_page_import__
+    newNextLinkBehavior
   } = context.getOptions()
 
   context.cacheable(true)
@@ -171,7 +172,8 @@ export default MDXContent`.trimStart()
     headings,
     hasJsxInH1,
     timestamp,
-    unstable_flexsearch
+    unstable_flexsearch,
+    newNextLinkBehavior
   }
 
   const pageNextRoute =

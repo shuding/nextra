@@ -78,4 +78,7 @@ module.exports = withNextra({
     };
     return config;
   },
+  experimental: {
+    newNextLinkBehavior: true,
+  },
 });

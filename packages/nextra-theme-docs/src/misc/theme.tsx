@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import React, {
   useEffect,
   useRef,
@@ -14,6 +13,7 @@ import Collapse from '../components/collapse'
 import { Tabs, Tab } from '../components/tabs'
 import Bleed from '../bleed'
 import Callout from '../callout'
+import Anchor from '../components/anchor'
 
 let observer: IntersectionObserver
 let setActiveAnchor: (
@@ -100,7 +100,7 @@ const createHeaderLink = (Tag: `h${2 | 3 | 4 | 5 | 6}`, context: { index: number
   useEffect(() => {
     if (!obRef.current) return
 
-    slugs.set(obRef.current, [id, context.index += 1])
+    slugs.set(obRef.current, [id, (context.index += 1)])
     if (obRef.current) observer.observe(obRef.current)
 
     return () => {
@@ -119,30 +119,6 @@ const createHeaderLink = (Tag: `h${2 | 3 | 4 | 5 | 6}`, context: { index: number
       <span className="subheading-anchor -mt-20" id={id} ref={obRef} />
       <a href={`#${id}`}>{children}</a>
     </Tag>
-  )
-}
-
-const A = ({
-  children,
-  ...props
-}: {
-  children?: React.ReactNode
-  href?: string
-}) => {
-  const isExternal = props.href && props.href.startsWith('https://')
-  if (isExternal) {
-    return (
-      <a target="_blank" rel="noreferrer" {...props}>
-        {children}
-      </a>
-    )
-  }
-  return props.href ? (
-    <Link href={props.href}>
-      <a {...props}>{children}</a>
-    </Link>
-  ) : (
-    <></>
   )
 }
 
@@ -239,7 +215,9 @@ export const getComponents = () => {
     h4: createHeaderLink('h4', context),
     h5: createHeaderLink('h5', context),
     h6: createHeaderLink('h6', context),
-    a: A,
+    a: ({ href = '', ...props }): ReactElement => (
+      <Anchor href={href} newWindow={href.startsWith('https://')} {...props} />
+    ),
     table: Table,
     details: Details,
     summary: Summary,
@@ -259,8 +237,6 @@ export const MDXTheme = ({
   children: ReactNode
 }): ReactElement => {
   return (
-    <MDXProvider components={getComponents() as any}>
-      {children}
-    </MDXProvider>
+    <MDXProvider components={getComponents() as any}>{children}</MDXProvider>
   )
 }

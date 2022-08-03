@@ -292,7 +292,8 @@ function Layout(props: any) {
   const extendedConfig = {
     ...defaultConfig,
     ...context.themeConfig,
-    unstable_flexsearch: context.pageOpts.unstable_flexsearch
+    unstable_flexsearch: context.pageOpts.unstable_flexsearch,
+    newNextLinkBehavior: context.pageOpts.newNextLinkBehavior
   }
   const nextThemes = extendedConfig.nextThemes || {}
 

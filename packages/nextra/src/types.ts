@@ -25,10 +25,11 @@ export abstract class NextraPluginCache {
   }
 }
 export interface LoaderOptions extends NextraConfig {
+  __nextra_page_import__?: boolean
   locales: string[]
   defaultLocale: string
   pageMapCache: NextraPluginCache
-  __nextra_page_import__?: boolean
+  newNextLinkBehavior?: boolean
 }
 
 export interface PageMapItem {
@@ -56,6 +57,7 @@ export type PageOpts = {
   hasJsxInH1?: boolean
   timestamp?: number
   unstable_flexsearch?: Flexsearch
+  newNextLinkBehavior?: boolean
 }
 
 export type PageMapResult = [

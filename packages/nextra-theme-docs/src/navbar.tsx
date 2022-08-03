@@ -1,6 +1,5 @@
 import React from 'react'
 import cn from 'classnames'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Menu, Transition } from '@headlessui/react'
 import { ArrowRightIcon } from 'nextra/icons'
@@ -14,23 +13,13 @@ import Search from './search'
 import Flexsearch from './flexsearch'
 import { GitHubIcon, DiscordIcon, XIcon, MenuIcon } from 'nextra/icons'
 import { Item, PageItem, MenuItem } from './utils/normalize-pages'
+import Anchor from './components/anchor'
 
 interface NavBarProps {
   isRTL?: boolean | null
   flatDirectories: Item[]
   items: (PageItem | MenuItem)[]
 }
-
-const NavbarMenuLink = React.forwardRef((props: any, ref) => {
-  let { href, children, ...rest } = props
-  return (
-    <Link href={href}>
-      <a ref={ref} {...rest}>
-        {children}
-      </a>
-    </Link>
-  )
-})
 
 function NavbarMenu({
   className,
@@ -62,28 +51,20 @@ function NavbarMenu({
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
       >
-        <Menu.Items
-          className="menu absolute right-0 z-20 mt-1 max-h-64 min-w-full overflow-auto rounded-md bg-white py-1 text-sm shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-neutral-800 dark:ring-white dark:ring-opacity-20"
-        >
+        <Menu.Items className="menu absolute right-0 z-20 mt-1 max-h-64 min-w-full overflow-auto rounded-md bg-white py-1 text-sm shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-neutral-800 dark:ring-white dark:ring-opacity-20">
           {Object.entries(items || {}).map(([key, item]) => {
             const href =
               item.href || routes[key]?.route || menu.route + '/' + key
 
             return (
               <Menu.Item key={key}>
-                <NavbarMenuLink
+                <Anchor
                   href={href}
                   className="hidden whitespace-nowrap no-underline md:inline-block text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 relative cursor-pointer select-none py-1.5 pl-3 pr-9 w-full"
-                  {...(item.newWindow
-                    ? {
-                        target: '_blank',
-                        rel: 'noopener noreferrer',
-                        'aria-selected': false
-                      }
-                    : {})}
+                  newWindow={item.newWindow}
                 >
                   {item.title || key}
-                </NavbarMenuLink>
+                </Anchor>
               </Menu.Item>
             )
           })}
@@ -138,11 +119,12 @@ export default function Navbar({ flatDirectories, items }: NavBarProps) {
         <div className="nextra-nav-container-blur pointer-events-none absolute h-full w-full bg-white dark:bg-dark" />
         <nav className="left-0 right-0 mx-auto flex h-16 max-w-[90rem] items-center gap-2 pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
           <div className="mr-2 flex flex-auto items-center">
-            <Link href="/">
-              <a className="inline-flex items-center text-current no-underline hover:opacity-75">
-                {renderComponent(config.logo, { locale })}
-              </a>
-            </Link>
+            <Anchor
+              href="/"
+              className="inline-flex items-center text-current no-underline hover:opacity-75"
+            >
+              {renderComponent(config.logo, { locale })}
+            </Anchor>
           </div>
 
           <div className="flex-1" />
@@ -169,7 +151,6 @@ export default function Navbar({ flatDirectories, items }: NavBarProps) {
                           isActive
                             ? 'active subpixel-antialiased text-current'
                             : 'text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200'
-                            
                         )}
                         menu={menu}
                       >
@@ -202,28 +183,21 @@ export default function Navbar({ flatDirectories, items }: NavBarProps) {
                     activeRoute.startsWith(page.route + '/')
 
                   return (
-                    <Link href={href} key={page.route}>
-                      <a
-                        className={cn(
-                          'nextra-nav-link',
-                          '-ml-2 hidden whitespace-nowrap p-2 no-underline md:inline-block',
-                          !isActive || page.newWindow
-                            ? 'text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200'
-                            : 'active subpixel-antialiased text-current'
-                        )}
-                        {...(page.newWindow
-                          ? {
-                              target: '_blank',
-                              rel: 'noopener noreferrer',
-                              'aria-selected': false
-                            }
-                          : {
-                              'aria-selected': isActive
-                            })}
-                      >
-                        {page.title}
-                      </a>
-                    </Link>
+                    <Anchor
+                      href={href}
+                      key={page.route}
+                      className={cn(
+                        'nextra-nav-link',
+                        '-ml-2 hidden whitespace-nowrap p-2 no-underline md:inline-block',
+                        !isActive || page.newWindow
+                          ? 'text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200'
+                          : 'active subpixel-antialiased text-current'
+                      )}
+                      newWindow={page.newWindow}
+                      aria-selected={!page.newWindow && isActive}
+                    >
+                      {page.title}
+                    </Anchor>
                   )
                 }
               })
@@ -243,11 +217,10 @@ export default function Navbar({ flatDirectories, items }: NavBarProps) {
           </div>
 
           {config.projectLink || config.github ? (
-            <a
+            <Anchor
               className="p-2 text-current"
               href={config.projectLink || config.github}
-              target="_blank"
-              rel="noreferrer"
+              newWindow
             >
               {config.projectLinkIcon ? (
                 renderComponent(config.projectLinkIcon, { locale })
@@ -257,14 +230,13 @@ export default function Navbar({ flatDirectories, items }: NavBarProps) {
                   <span className="sr-only">GitHub</span>
                 </>
               )}
-            </a>
+            </Anchor>
           ) : null}
           {config.projectChatLink ? (
-            <a
+            <Anchor
               className="p-2 text-current"
               href={config.projectChatLink}
-              target="_blank"
-              rel="noreferrer"
+              newWindow
             >
               {config.projectChatLinkIcon ? (
                 renderComponent(config.projectChatLinkIcon, { locale })
@@ -274,7 +246,7 @@ export default function Navbar({ flatDirectories, items }: NavBarProps) {
                   <span className="sr-only">Discord</span>
                 </>
               )}
-            </a>
+            </Anchor>
           ) : null}
 
           <button

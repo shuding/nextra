@@ -44,7 +44,8 @@ const nextra = (...config) =>
           ...nextraConfig,
           locales: i18n.locales,
           defaultLocale: i18n.defaultLocale,
-          pageMapCache
+          pageMapCache,
+          newNextLinkBehavior: nextConfig.experimental?.newNextLinkBehavior
         }
 
         config.module.rules.push(

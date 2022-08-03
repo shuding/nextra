@@ -11,6 +11,7 @@ import getHeadingText from './utils/get-heading-text'
 import { ActiveAnchor, useActiveAnchor } from './misc/active-anchor'
 import { useConfig } from './config'
 import useMounted from './utils/use-mounted'
+import Anchor from './components/anchor'
 
 const createEditUrl = (repository?: string, filepath?: string) => {
   const repo = parseGitUrl(repository || '')
@@ -77,18 +78,17 @@ const EditPageLink = ({
   const url = createEditUrl(repository, filepath)
   const { locale = 'en-US' } = useRouter()
   return (
-    <a
+    <Anchor
       className="mb-2 block text-xs font-medium text-gray-500 no-underline hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
       href={url}
-      target="_blank"
-      rel="noreferrer"
+      newWindow
     >
       {text
         ? renderComponent(text, {
             locale
           })
         : 'Edit this page'}
-    </a>
+    </Anchor>
   )
 }
 
@@ -106,18 +106,17 @@ const FeedbackLink = ({
   const url = useCreateFeedbackUrl(repository, filepath, labels)
   const { locale = 'en-US' } = useRouter()
   return (
-    <a
+    <Anchor
       className="mb-2 block text-xs font-medium text-gray-500 no-underline hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
       href={url}
-      target="_blank"
-      rel="noreferrer"
+      newWindow
     >
       {feedbackLink
         ? renderComponent(feedbackLink, {
             locale
           })
         : 'Feedback'}
-    </a>
+    </Anchor>
   )
 }
 

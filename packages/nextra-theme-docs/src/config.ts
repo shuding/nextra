@@ -4,6 +4,7 @@ import { DocsThemeConfig } from './types'
 
 interface Config extends DocsThemeConfig {
   unstable_flexsearch?: PageOpts['unstable_flexsearch']
+  newNextLinkBehavior?: PageOpts['newNextLinkBehavior']
 }
 
 export const ThemeConfigContext = createContext<Config>({})
