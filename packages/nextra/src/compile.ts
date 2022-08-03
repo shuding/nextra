@@ -74,7 +74,7 @@ export async function compileMdx(
   try {
     const result = String(await compiler.process(source))
       .replace('export const titleText =', 'const titleText =')
-      .replace('export default MDXContent', '')
+      .replace('export default MDXContent;', '')
 
     return {
       result,

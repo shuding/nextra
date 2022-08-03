@@ -72,7 +72,7 @@ const nextra = (...config) =>
                 loader: 'nextra/loader',
                 options: {
                   ...nextraLoaderOptions,
-                  __nextra_page_import__: true
+                  pageImport: true
                 }
               }
             ]

@@ -57,7 +57,7 @@ async function loader(
 ): Promise<string> {
   const { resourcePath } = context
   let {
-    __nextra_page_import__,
+    pageImport,
     theme,
     themeConfig,
     defaultLocale,
@@ -119,7 +119,7 @@ async function loader(
   )
 
   // Imported as a normal component, no need to add the layout.
-  if (!__nextra_page_import__) {
+  if (!pageImport) {
     return `
 ${themeIncludeStyles && `import '${theme}/style.css'`}
 ${result}
@@ -204,11 +204,11 @@ globalThis.__nextra_internal__ = {
 }
 
 function Content(props) {
-  return <>
+  return (
     <__nextra_SSGContext__.Provider value={props}>
       <MDXContent />
     </__nextra_SSGContext__.Provider>
-  </>
+  )
 }
 
 export default __nextra_withLayout__(
