@@ -53,7 +53,7 @@ function MDXContent(props = {}) {
   const {wrapper: MDXLayout} = Object.assign({}, _provideComponents(), props.components);
   return MDXLayout ? <MDXLayout {...props}><_createMdxContent {...props} /></MDXLayout> : _createMdxContent(props);
 }
-;
+
 ",
   "structurizedData": {},
 }
@@ -128,7 +128,7 @@ function MDXContent(props = {}) {
   const {wrapper: MDXLayout} = Object.assign({}, _provideComponents(), props.components);
   return MDXLayout ? <MDXLayout {...props}><_createMdxContent {...props} /></MDXLayout> : _createMdxContent(props);
 }
-;
+
 ",
   "structurizedData": {},
 }
@@ -229,7 +229,7 @@ function MDXContent(props = {}) {
   const {wrapper: MDXLayout} = Object.assign({}, _provideComponents(), props.components);
   return MDXLayout ? <MDXLayout {...props}><_createMdxContent {...props} /></MDXLayout> : _createMdxContent(props);
 }
-;
+
 ",
   "structurizedData": {},
 }
@@ -286,7 +286,7 @@ function MDXContent(props = {}) {
   const {wrapper: MDXLayout} = Object.assign({}, _provideComponents(), props.components);
   return MDXLayout ? <MDXLayout {...props}><_createMdxContent {...props} /></MDXLayout> : _createMdxContent(props);
 }
-;
+
 ",
   "structurizedData": {},
 }
@@ -344,7 +344,7 @@ function MDXContent(props = {}) {
   const {wrapper: MDXLayout} = Object.assign({}, _provideComponents(), props.components);
   return MDXLayout ? <MDXLayout {...props}><_createMdxContent {...props} /></MDXLayout> : _createMdxContent(props);
 }
-;
+
 ",
   "structurizedData": {},
 }
