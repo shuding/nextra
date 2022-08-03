@@ -121,7 +121,7 @@ async function loader(
   // Imported as a normal component, no need to add the layout.
   if (!pageImport) {
     return `
-${themeIncludeStyles && `import '${theme}/style.css'`}
+${themeIncludeStyles ? `import '${theme}/style.css'` : ''}
 ${result}
 export default MDXContent`.trimStart()
   }
@@ -191,8 +191,8 @@ export default MDXContent`.trimStart()
 import { SSGContext as __nextra_SSGContext__ } from 'nextra/ssg'
 
 import __nextra_withLayout__ from '${layout}'
-${themeIncludeStyles && `import '${layout}/style.css'`}
-${layoutConfig && `import __nextra_layoutConfig__ from '${layoutConfig}'`}
+${themeIncludeStyles ? `import '${layout}/style.css'` : ''}
+${layoutConfig ? `import __nextra_layoutConfig__ from '${layoutConfig}'` : ''}
 
 ${result}
 
