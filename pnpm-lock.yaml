@@ -25,6 +25,7 @@ importers:
   .:
     specifiers:
       '@changesets/cli': ^2.24.1
+      '@edge-runtime/vm': 1.1.0-beta.23
       '@typescript-eslint/parser': ^5.31.0
       eslint: ^8.20.0
       postcss-import: ^14.1.0
@@ -35,6 +36,7 @@ importers:
       typescript: ^4.7.4
     devDependencies:
       '@changesets/cli': 2.24.1
+      '@edge-runtime/vm': 1.1.0-beta.23
       '@typescript-eslint/parser': 5.32.0_qugx7qdu5zevzvxaiqyxfiwquq
       eslint: 8.21.0
       postcss-import: 14.1.0
@@ -474,6 +476,16 @@ packages:
       fs-extra: 7.0.1
       human-id: 1.0.2
       prettier: 1.19.1
+    dev: true
+
+  /@edge-runtime/primitives/1.1.0-beta.25:
+    resolution: {integrity: sha512-+lKore2sAuGD2AMa2GZviLMHKfFmw5k2BzhvyatKPuJ/frIFpb1OdluxGHfqmVBtNIJwnn7IJoJd9jm8r/6Flg==}
+    dev: true
+
+  /@edge-runtime/vm/1.1.0-beta.23:
+    resolution: {integrity: sha512-XBp3rCuX4scJVOo2KconAotL5XGX3zdd8IkfDNr5VVSQ/B6HkiTNuf+EvzSQTpplF+fiyLTpfcP9EbNLibwLTA==}
+    dependencies:
+      '@edge-runtime/primitives': 1.1.0-beta.25
     dev: true
 
   /@esbuild/linux-loong64/0.14.53:
