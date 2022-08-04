@@ -7,11 +7,10 @@ import React, {
   useEffect,
   useState
 } from 'react'
-import { MDXProvider } from '@mdx-js/react'
 import Link from 'next/link'
 import ReactDOM from 'react-dom'
 import { useBlogContext } from './blog-context'
-
+import { Components } from '@mdx-js/react/lib'
 export const HeadingContext = createContext<
   React.RefObject<HTMLHeadingElement | null>
 >(React.createRef())
@@ -42,9 +41,7 @@ const createHeaderLink =
     return (
       <Tag className={`subheading-${Tag}`} {...props}>
         <span className="subheading-anchor -mt-8" id={id} />
-        <a href={`#${id}`}>
-          {children}
-        </a>
+        <a href={`#${id}`}>{children}</a>
       </Tag>
     )
   }
@@ -80,7 +77,7 @@ const Pre = ({ children }: { children?: ReactNode }): ReactElement => {
     </div>
   )
 }
-const components = {
+export const components: Components = {
   h1: H1,
   h2: createHeaderLink('h2'),
   h3: createHeaderLink('h3'),
@@ -90,9 +87,3 @@ const components = {
   a: A,
   pre: Pre
 }
-
-const MDXTheme = ({ children }: { children: ReactNode }): ReactElement => {
-  return <MDXProvider components={components}>{children}</MDXProvider>
-}
-
-export default MDXTheme

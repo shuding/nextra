@@ -176,20 +176,8 @@ export default MDXContent`.trimStart()
     newNextLinkBehavior
   }
 
-  const pageNextRoute =
-    '/' +
-    path
-      .relative(pagesDir, resourcePath)
-      // Remove the `mdx?` extension
-      .replace(MARKDOWN_EXTENSION_REGEX, '')
-      // Remove the `*/index` suffix
-      .replace(/\/index$/, '')
-      // Remove the only `index` route
-      .replace(/^index$/, '')
-
   return `
 import { SSGContext as __nextra_SSGContext__ } from 'nextra/ssg'
-
 import __nextra_withLayout__ from '${layout}'
 ${themeIncludeStyles ? `import '${layout}/style.css'` : ''}
 ${layoutConfig ? `import __nextra_layoutConfig__ from '${layoutConfig}'` : ''}
@@ -203,23 +191,22 @@ globalThis.__nextra_internal__ = {
   route: __nextra_pageOpts__.route,
 }
 
-function Content(props) {
+function Page(props) {
   return (
     <__nextra_SSGContext__.Provider value={props}>
-      <MDXContent />
+      {__nextra_withLayout__(
+        MDXContent,
+        {
+          titleText: typeof titleText === 'string' ? titleText : undefined,
+          ...__nextra_pageOpts__
+        },
+      ${layoutConfig ? '__nextra_layoutConfig__' : 'null'},
+      )}
     </__nextra_SSGContext__.Provider>
   )
 }
 
-export default __nextra_withLayout__(
-  ${JSON.stringify(pageNextRoute)},
-  Content,
-  {
-    titleText: typeof titleText === 'string' ? titleText : undefined,
-    ...__nextra_pageOpts__
-  },
-  ${layoutConfig ? '__nextra_layoutConfig__' : 'null'},
-)`.trimStart()
+export default Page;`.trimStart()
 }
 
 export default function syncLoader(

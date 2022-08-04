@@ -1,4 +1,9 @@
-import React, { ReactElement, useContext, createContext, ReactNode } from 'react'
+import React, {
+  ReactElement,
+  useContext,
+  createContext,
+  ReactNode
+} from 'react'
 import { LayoutProps } from './types'
 import { isValidDate } from './utils/date'
 
@@ -12,7 +17,9 @@ export const BlogProvider = ({
   const { date } = opts.meta
 
   if (date && !isValidDate(date)) {
-    throw new Error(`Invalid date "${date}". Provide date in "YYYY/M/D", "YYYY/M/D H:m", "YYYY-MM-DD", "[YYYY-MM-DD]T[HH:mm]" or "[YYYY-MM-DD]T[HH:mm:ss.SSS]Z" format.`)
+    throw new Error(
+      `Invalid date "${date}". Provide date in "YYYY/M/D", "YYYY/M/D H:m", "YYYY-MM-DD", "[YYYY-MM-DD]T[HH:mm]" or "[YYYY-MM-DD]T[HH:mm:ss.SSS]Z" format.`
+    )
   }
   return (
     <BlogContext.Provider value={{ config, opts }}>

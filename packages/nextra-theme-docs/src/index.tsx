@@ -1,6 +1,6 @@
 import type { PageMapItem, PageOpts } from 'nextra'
 import type { FC, ReactElement, ReactNode } from 'react'
-
+import { getComponents } from './misc/theme'
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import 'focus-visible'
@@ -8,11 +8,9 @@ import scrollIntoView from 'scroll-into-view-if-needed'
 import { SkipNavContent } from '@reach/skip-nav'
 import { ThemeProvider } from 'next-themes'
 import cn from 'classnames'
-
 import Head from './head'
 import Navbar from './navbar'
 import Footer, { NavLinks } from './footer'
-import { MDXTheme } from './misc/theme'
 import Sidebar from './sidebar'
 import ToC from './toc'
 import { ThemeConfigContext, useConfig } from './config'
@@ -93,7 +91,7 @@ const Body = ({
       <SkipNavContent />
       {themeContext.layout === 'full' ? (
         <article className="nextra-body full relative justify-center overflow-x-hidden pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
-          <MDXTheme>{children}</MDXTheme>
+          {children}
           {date && config.gitTimestamp ? (
             <div className="pointer-default mt-12 mb-8 block text-right text-xs text-gray-500 dark:text-gray-400">
               {typeof config.gitTimestamp === 'string'
@@ -132,7 +130,7 @@ const Body = ({
             ref={mainElement}
           >
             {breadcrumb}
-            <MDXTheme>{children}</MDXTheme>
+            {children}
             {date && config.gitTimestamp ? (
               <div className="pointer-default mt-12 mb-8 block text-right text-xs text-gray-500 dark:text-gray-400">
                 {typeof config.gitTimestamp === 'string'
@@ -275,25 +273,18 @@ const InnerLayout = ({
   )
 }
 
-const nextraPageContext: {
-  [key: string]: {
-    Content: FC
-    pageOpts: PageOpts
-    themeConfig: DocsThemeConfig
-  }
-} = {}
+interface Props {
+  children?: ReactNode
+  pageOpts: PageOpts
+  themeConfig: DocsThemeConfig
+}
 
-function Layout(props: any) {
-  const { route } = useRouter()
-  const context = nextraPageContext[route]
-
-  if (!context) throw new Error(`No content found for ${route}.`)
-
+function Layout({ children, pageOpts, themeConfig }: Props) {
   const extendedConfig = {
     ...defaultConfig,
-    ...context.themeConfig,
-    unstable_flexsearch: context.pageOpts.unstable_flexsearch,
-    newNextLinkBehavior: context.pageOpts.newNextLinkBehavior
+    ...themeConfig,
+    unstable_flexsearch: pageOpts.unstable_flexsearch,
+    newNextLinkBehavior: pageOpts.newNextLinkBehavior
   }
   const nextThemes = extendedConfig.nextThemes || {}
 
@@ -306,31 +297,23 @@ function Layout(props: any) {
         storageKey={nextThemes.storageKey}
         forcedTheme={nextThemes.forcedTheme}
       >
-        <InnerLayout {...context.pageOpts}>
-          <context.Content {...props} />
-        </InnerLayout>
+        <InnerLayout {...pageOpts}>{children}</InnerLayout>
       </ThemeProvider>
     </ThemeConfigContext.Provider>
   )
 }
 
-// Make sure the same component is always returned so Next.js will render the
-// stable layout. We then put the actual content into a global store and use
-// the route to identify it.
 export default function withLayout(
-  route: string,
-  Content: FC,
+  MdxContent: FC<{ components: any }>,
   pageOpts: PageOpts,
   themeConfig: DocsThemeConfig
 ) {
-  nextraPageContext[route] = {
-    Content,
-    pageOpts,
-    themeConfig
-  }
-
-  return Layout
+  return (
+    <Layout pageOpts={pageOpts} themeConfig={themeConfig}>
+      <MdxContent components={getComponents()} />
+    </Layout>
+  )
 }
 
 export * from './types'
-export { getComponents } from './misc/theme'
+export { getComponents }

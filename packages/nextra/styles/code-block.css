@@ -6,7 +6,7 @@ code {
 
   &[data-line-numbers] {
     counter-reset: line;
-  
+
     & > .line::before {
       counter-increment: line;
       content: counter(line);

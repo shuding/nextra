@@ -8,7 +8,6 @@ import React, {
 } from 'react'
 import 'intersection-observer'
 import { ActiveAnchor, useActiveAnchorSet } from './active-anchor'
-import { MDXProvider } from '@mdx-js/react'
 import Collapse from '../components/collapse'
 import Anchor from '../components/anchor'
 
@@ -94,7 +93,7 @@ const createHeaderLink = (
     tag: any
     children: ReactNode
     id: string
-  }): ReactElement {
+  }) {
     setActiveAnchor = useActiveAnchorSet()
     const obRef = useRef<HTMLSpanElement>(null)
 
@@ -173,7 +172,7 @@ const Details = ({
 }: {
   children: ReactNode
   open?: boolean
-}): ReactElement => {
+}) => {
   const [openState, setOpen] = useState(!!open)
   const ref = useRef<HTMLDetailsElement>(null)
   const [summary, restChildren] = findSummary(children)
@@ -188,12 +187,7 @@ const Details = ({
   )
 }
 
-const Summary = ({
-  children,
-  ...props
-}: {
-  children: ReactNode
-}): ReactElement => {
+const Summary = ({ children, ...props }: { children: ReactNode }) => {
   const setOpen = useContext(DetailsContext)
   return (
     <summary
@@ -216,21 +210,11 @@ export const getComponents = () => {
     h4: createHeaderLink('h4', context),
     h5: createHeaderLink('h5', context),
     h6: createHeaderLink('h6', context),
-    a: ({ href = '', ...props }): ReactElement => (
+    a: ({ href = '', ...props }) => (
       <Anchor href={href} newWindow={href.startsWith('https://')} {...props} />
     ),
     table: Table,
     details: Details,
     summary: Summary
   }
-}
-
-export const MDXTheme = ({
-  children
-}: {
-  children: ReactNode
-}): ReactElement => {
-  return (
-    <MDXProvider components={getComponents() as any}>{children}</MDXProvider>
-  )
 }
