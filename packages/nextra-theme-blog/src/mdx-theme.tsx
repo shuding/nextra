@@ -40,7 +40,7 @@ const createHeaderLink =
   (Tag: `h${2 | 3 | 4 | 5 | 6}`) =>
   ({ children, id, ...props }: ComponentProps<'h2'>): ReactElement => {
     return (
-      <Tag {...props}>
+      <Tag className={`subheading-${Tag}`} {...props}>
         <span className="subheading-anchor -mt-8" id={id} />
         <a href={`#${id}`}>
           {children}

@@ -12,7 +12,9 @@ export const PostsLayout = ({ children }: { children: ReactNode }) => {
   const { config, opts } = useBlogContext()
   const { posts } = collectPostsAndNavs({ config, opts })
   const router = useRouter()
-  const { meta: { type } } = opts
+  const {
+    meta: { type }
+  } = opts
   const tagName = type === 'tag' ? router.query.tag : null
   const postList = posts.map(post => {
     if (tagName) {
@@ -29,7 +31,7 @@ export const PostsLayout = ({ children }: { children: ReactNode }) => {
     const description = post.frontMatter?.description
 
     return (
-      <div key={post.route}>
+      <div key={post.route} className="post-item">
         <h3>
           <Link href={post.route} passHref>
             <a className="!no-underline">{postTitle}</a>
@@ -40,13 +42,16 @@ export const PostsLayout = ({ children }: { children: ReactNode }) => {
             {description}
             {config.readMore && (
               <Link href={post.route} passHref>
-                <a className="ml-1">{config.readMore}</a>
+                <a className="post-item-more ml-2">{config.readMore}</a>
               </Link>
             )}
           </p>
         )}
         {date && (
-          <time className="text-sm text-gray-300" dateTime={date.toISOString()}>
+          <time
+            className="text-sm text-gray-300"
+            dateTime={date.toISOString()}
+          >
             {date.toDateString()}
           </time>
         )}
