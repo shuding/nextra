@@ -1,5 +1,12 @@
 # nextra-theme-docs
 
+## 2.0.0-beta.14
+
+### Patch Changes
+
+- 96ed5c2: [nextra/nextra-theme-docs]: support both `experimental.newNextLinkBehavior` - `true` and `false`
+- c8605d6: feat: New layout implementation
+
 ## 2.0.0-beta.13
 
 ### Patch Changes
