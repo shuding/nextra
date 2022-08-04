@@ -1,5 +1,12 @@
 # nextra-theme-blog
 
+## 2.0.0-beta.14
+
+### Patch Changes
+
+- c8605d6: feat: New layout implementation
+- e596d3d: add missing class names to override styles
+
 ## 2.0.0-beta.13
 
 ### Patch Changes
