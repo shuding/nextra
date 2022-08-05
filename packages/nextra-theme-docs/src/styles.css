@@ -530,7 +530,7 @@ article {
 /* Search */
 .nextra-search {
   input {
-    @apply bg-black/[.03] text-sm text-gray-900;
+    @apply bg-black/[.03] md:text-sm text-base text-gray-900;
     @apply dark:bg-gray-50/10 dark:text-gray-300;
     @apply dark:border-gray-800;
   }
