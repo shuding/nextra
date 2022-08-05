@@ -38,16 +38,18 @@ export default function Meta({
               className="
                 select-none
                 rounded-md
-                bg-gray-200
                 px-1
                 text-sm
-                !text-gray-400
                 !no-underline
-                hover:!text-gray-800
+                bg-gray-200
+                !text-gray-400
+                hover:!bg-gray-300
+                hover:!text-gray-500
                 active:bg-gray-400
-                dark:bg-gray-400
-                dark:!text-gray-100
-                dark:hover:!text-gray-800
+                dark:bg-gray-600
+                dark:!text-gray-300
+                dark:hover:!bg-gray-700
+                dark:hover:!text-gray-200
               "
             >
               {t}
