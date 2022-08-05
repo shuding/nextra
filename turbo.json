@@ -3,7 +3,9 @@
   "npmClient": "pnpm",
   "pipeline": {
     "build": {
-      "dependsOn": ["^build"],
+      "dependsOn": [
+        "^build"
+      ],
       "outputs": [
         "dist/**/*.d.ts",
         "dist/**/*.mjs",
@@ -17,7 +19,9 @@
     },
     "build:tailwind": {
       "dependsOn": [],
-      "outputs": ["style.css"]
+      "outputs": [
+        "style.css"
+      ]
     },
     "test": {},
     "types:check": {

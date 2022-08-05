@@ -23,14 +23,12 @@ export default function Breadcrumb({
               <ArrowRightIcon width={14} className="mx-1 select-none" />
             ) : null}
             <div
-              className={cn(
-                'transition-colors whitespace-nowrap',
-                {
-                  'active text-gray-600 dark:text-gray-400': isActive,
-                  'min-w-[24px] overflow-hidden text-ellipsis': !isActive,
-                  'hover:text-gray-900 dark:hover:text-gray-200': isLink && !isActive
-                }
-              )}
+              className={cn('transition-colors whitespace-nowrap', {
+                'active text-gray-600 dark:text-gray-400': isActive,
+                'min-w-[24px] overflow-hidden text-ellipsis': !isActive,
+                'hover:text-gray-900 dark:hover:text-gray-200':
+                  isLink && !isActive
+              })}
               title={item.title}
             >
               {isLink && !isActive ? (

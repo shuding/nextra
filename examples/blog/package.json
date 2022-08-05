@@ -17,5 +17,13 @@
     "next": ">=12",
     "nextra": "workspace:*",
     "nextra-theme-blog": "workspace:*"
+  },
+  "dependenciesMeta": {
+    "nextra": {
+      "injected": true
+    },
+    "nextra-theme-blog": {
+      "injected": true
+    }
   }
 }
