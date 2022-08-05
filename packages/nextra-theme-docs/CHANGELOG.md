@@ -1,5 +1,11 @@
 # nextra-theme-docs
 
+## 2.0.0-beta.15
+
+### Patch Changes
+
+- 88f999d: fix: UI improvements
+
 ## 2.0.0-beta.14
 
 ### Patch Changes
