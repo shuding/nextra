@@ -7,7 +7,7 @@ import 'focus-visible'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import { SkipNavContent } from '@reach/skip-nav'
 import { ThemeProvider } from 'next-themes'
-import cn from 'classnames'
+import cn from 'clsx'
 
 import {
   Head,
@@ -124,9 +124,8 @@ const Body = ({
         <article
           className={cn(
             'nextra-body relative flex w-full min-w-0 max-w-full justify-center pb-8 pr-[calc(env(safe-area-inset-right)-1.5rem)]',
-            themeContext.typesetting
-              ? 'nextra-body-typesetting-' + themeContext.typesetting
-              : ''
+            themeContext.typesetting &&
+              'nextra-body-typesetting-' + themeContext.typesetting
           )}
         >
           <main

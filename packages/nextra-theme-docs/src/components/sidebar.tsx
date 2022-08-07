@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, ReactElement } from 'react'
-import cn from 'classnames'
+import cn from 'clsx'
 import Slugger from 'github-slugger'
 import { useRouter } from 'next/router'
 import { Heading } from 'nextra'
@@ -403,10 +403,10 @@ export function Sidebar({
                 {config.darkMode ? (
                   <>
                     <div
-                      className={cn('relative md:hidden', {
-                        locale: config.i18n,
-                        'flex-1': !config.i18n
-                      })}
+                      className={cn(
+                        'relative md:hidden',
+                        config.i18n ? 'locale' : 'flex-1'
+                      )}
                     >
                       <ThemeSwitch lite={false} />
                     </div>

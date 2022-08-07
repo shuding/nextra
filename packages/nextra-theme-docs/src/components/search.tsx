@@ -8,7 +8,7 @@ import React, {
   ReactElement
 } from 'react'
 import matchSorter from 'match-sorter'
-import cn from 'classnames'
+import cn from 'clsx'
 import { useRouter } from 'next/router'
 import { Anchor } from './anchor'
 import type { Item as NormalItem } from '../utils/normalize-pages'

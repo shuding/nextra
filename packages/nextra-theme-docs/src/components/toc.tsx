@@ -1,5 +1,5 @@
 import React, { PropsWithChildren, ReactElement, ReactNode } from 'react'
-import cn from 'classnames'
+import cn from 'clsx'
 import Slugger from 'github-slugger'
 import { Heading } from 'nextra'
 import parseGitUrl from 'parse-git-url'
@@ -174,7 +174,7 @@ function Item({
         href={`#${slug}`}
         className={cn(
           'inline-block no-underline',
-          heading.depth === 2 ? 'font-semibold' : '',
+          heading.depth === 2 && 'font-semibold',
           state?.isActive
             ? 'text-primary-500 subpixel-antialiased'
             : 'text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300'
@@ -235,9 +235,8 @@ export function TOC({
           <div
             className={cn(
               'nextra-toc-meta',
-              hasHeadings
-                ? 'mt-8 border-t bg-white pt-8 shadow-[0_-12px_16px_white] dark:bg-dark dark:shadow-[0_-12px_16px_#111]'
-                : '',
+              hasHeadings &&
+                'mt-8 border-t bg-white pt-8 shadow-[0_-12px_16px_white] dark:bg-dark dark:shadow-[0_-12px_16px_#111]',
               'sticky bottom-0 pb-8 dark:border-neutral-800'
             )}
           >
