@@ -48,10 +48,7 @@ export const PostsLayout = ({ children }: { children: ReactNode }) => {
           </p>
         )}
         {date && (
-          <time
-            className="text-sm text-gray-300"
-            dateTime={date.toISOString()}
-          >
+          <time className="text-sm text-gray-300" dateTime={date.toISOString()}>
             {date.toDateString()}
           </time>
         )}

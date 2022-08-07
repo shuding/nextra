@@ -9,10 +9,7 @@ const isNav = (page: PageMapItem) => {
 const isPost = (page: PageMapItem) => {
   if (page.children) return false
   if (page.name.startsWith('_')) return false
-  return (
-    !page.frontMatter?.type ||
-    page.frontMatter.type === 'post'
-  )
+  return !page.frontMatter?.type || page.frontMatter.type === 'post'
 }
 
 export const collectPostsAndNavs = ({ opts }: LayoutProps) => {

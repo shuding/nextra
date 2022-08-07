@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { NextRequest } from 'next/server'
+import Nextserver from 'next/server'
 import { locales as originalLocales } from '../src/locales'
 
 const i18n = {
@@ -28,13 +28,13 @@ vi.mock('next/server', async () => {
   }
 })
 
-const locales = originalLocales as unknown as (req: NextRequest) => {
+const locales = originalLocales as unknown as (req: Nextserver.NextRequest) => {
   type: string
   url: URL
 }
 
 const createRequest = (url: string, localeCookie = '') => {
-  return new NextRequest(url, {
+  return new Nextserver.NextRequest(url, {
     headers: { cookie: localeCookie },
     nextConfig: { i18n }
   })

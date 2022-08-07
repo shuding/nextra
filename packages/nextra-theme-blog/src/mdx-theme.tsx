@@ -42,9 +42,7 @@ const createHeaderLink =
     return (
       <Tag className={`subheading-${Tag}`} {...props}>
         <span className="subheading-anchor -mt-8" id={id} />
-        <a href={`#${id}`}>
-          {children}
-        </a>
+        <a href={`#${id}`}>{children}</a>
       </Tag>
     )
   }

@@ -23,6 +23,14 @@
     "nextra-theme-docs": "workspace:*",
     "react-intersection-observer": "^8.26.2"
   },
+  "dependenciesMeta": {
+    "nextra": {
+      "injected": true
+    },
+    "nextra-theme-docs": {
+      "injected": true
+    }
+  },
   "devDependencies": {
     "autoprefixer": "*",
     "postcss": "*",

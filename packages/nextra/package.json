@@ -99,13 +99,13 @@
   "devDependencies": {
     "@types/graceful-fs": "^4.1.5",
     "@types/mdast": "^3.0.10",
-    "@types/react": "*",
-    "@types/react-dom": "*",
+    "@types/react": "^18.0.15",
+    "@types/react-dom": "^18.0.6",
     "@types/webpack": "^5.28.0",
-    "next": ">=12",
-    "react": "*",
-    "react-dom": "*",
-    "tsup": "*",
-    "vitest": "*"
+    "next": "^12.2.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tsup": "^6.2.1",
+    "vitest": "^0.21.0"
   }
 }
