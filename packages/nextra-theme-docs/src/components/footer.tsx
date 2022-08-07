@@ -5,9 +5,10 @@ import { useConfig } from '../config'
 import { LocaleSwitch } from './locale-switch'
 import { ThemeSwitch } from './theme-switch'
 import renderComponent from '../utils/render-component'
+import { DEFAULT_LOCALE } from '../constants'
 
 export function Footer({ menu }: { menu?: boolean }): ReactElement {
-  const { locale = 'en-US' } = useRouter()
+  const { locale = DEFAULT_LOCALE } = useRouter()
   const config = useConfig()
 
   return (

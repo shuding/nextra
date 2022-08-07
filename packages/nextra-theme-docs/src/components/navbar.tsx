@@ -14,6 +14,7 @@ import { Flexsearch } from './flexsearch'
 import { GitHubIcon, DiscordIcon, MenuIcon } from 'nextra/icons'
 import { Item, PageItem, MenuItem } from '../utils/normalize-pages'
 import { Anchor } from './anchor'
+import { DEFAULT_LOCALE } from '../constants'
 
 interface NavBarProps {
   isRTL?: boolean | null
@@ -76,7 +77,7 @@ function NavbarMenu({
 
 export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
   const config = useConfig()
-  const { locale = 'en-US', asPath } = useRouter()
+  const { locale = DEFAULT_LOCALE, asPath } = useRouter()
   const activeRoute = getFSRoute(asPath, locale)
   const { menu, setMenu } = useMenuContext()
 

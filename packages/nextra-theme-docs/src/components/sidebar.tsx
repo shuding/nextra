@@ -19,6 +19,7 @@ import { ArrowRightIcon } from 'nextra/icons'
 import { Collapse } from './collapse'
 import renderComponent from '../utils/render-component'
 import { Anchor } from './anchor'
+import { DEFAULT_LOCALE } from '../constants'
 
 const TreeState: Record<string, boolean> = {}
 
@@ -30,10 +31,10 @@ interface FolderProps {
 const Folder = React.memo(FolderImpl)
 
 function FolderImpl({ item, anchors }: FolderProps) {
-  const { asPath, locale } = useRouter()
+  const { asPath, locale = DEFAULT_LOCALE } = useRouter()
   const routeOriginal = getFSRoute(asPath, locale)
   const route = routeOriginal.split('#')[0]
-  const active = route === item.route + '/' || route + '/' === item.route + '/'
+  const active = [route, route + '/'].includes(item.route + '/')
   const activeRouteInside = active || route.startsWith(item.route + '/')
 
   const { defaultMenuCollapsed } = useMenuContext()
@@ -179,7 +180,7 @@ interface FileProps {
 }
 
 function File({ item, anchors, topLevel }: FileProps): ReactElement {
-  const { asPath, locale } = useRouter()
+  const { asPath, locale = DEFAULT_LOCALE } = useRouter()
   const route = getFSRoute(asPath, locale)
   const active = [route, route + '/'].includes(item.route + '/')
   const slugger = new Slugger()

@@ -22,7 +22,7 @@ import {
 import { MDXTheme } from './mdx-theme'
 import { ThemeConfigContext, useConfig } from './config'
 import { ActiveAnchor } from './active-anchor'
-import { DEFAULT_THEME } from './constants'
+import { DEFAULT_LOCALE, DEFAULT_THEME, IS_BROWSER } from './constants'
 import { getFSRoute } from './utils/get-fs-route'
 import { MenuContext } from './utils/menu-context'
 import normalizePages from './utils/normalize-pages'
@@ -31,24 +31,22 @@ import './polyfill'
 import renderComponent from './utils/render-component'
 
 let resizeObserver: ResizeObserver
-if (typeof window !== 'undefined') {
-  resizeObserver =
-    resizeObserver! ||
-    new ResizeObserver(entries => {
-      if (window.location.hash) {
-        const node = entries[0].target.ownerDocument.querySelector(
-          window.location.hash
-        )
+if (IS_BROWSER) {
+  resizeObserver ||= new ResizeObserver(entries => {
+    if (window.location.hash) {
+      const node = entries[0].target.ownerDocument.querySelector(
+        window.location.hash
+      )
 
-        if (node) {
-          scrollIntoView(node)
-        }
+      if (node) {
+        scrollIntoView(node)
       }
-    })
+    }
+  })
 }
 
 function useDirectoryInfo(pageMap: PageMapItem[]) {
-  const { locale = 'en-US', defaultLocale, asPath } = useRouter()
+  const { locale = DEFAULT_LOCALE, defaultLocale, asPath } = useRouter()
 
   return useMemo(() => {
     const fsPath = getFSRoute(asPath, locale)
@@ -78,7 +76,7 @@ const Body = ({
   children
 }: BodyProps): ReactElement => {
   const config = useConfig()
-  const { locale = 'en-US' } = useRouter()
+  const { locale = DEFAULT_LOCALE } = useRouter()
   const date = timestamp ? new Date(timestamp) : null
   const mainElement = useRef<HTMLElement>(null)
 
@@ -172,7 +170,7 @@ const InnerLayout = ({
   timestamp,
   children
 }: PageOpts & { children: ReactNode }): ReactElement => {
-  const { route, locale = 'en-US' } = useRouter()
+  const { route, locale = DEFAULT_LOCALE } = useRouter()
   const config = useConfig()
 
   const {

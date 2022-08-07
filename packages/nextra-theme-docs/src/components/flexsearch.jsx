@@ -16,6 +16,7 @@ import renderComponent from '../utils/render-component'
 import useMenuContext from '../utils/menu-context'
 import { SpinnerIcon } from 'nextra/icons'
 import { Anchor } from './anchor'
+import { DEFAULT_LOCALE } from '../constants'
 
 const Item = ({
   page,
@@ -89,6 +90,7 @@ const indexes = {}
 export function Flexsearch() {
   const config = useConfig()
   const router = useRouter()
+  const { locale = DEFAULT_LOCALE } = router
   const [loading, setLoading] = useState(false)
   const [show, setShow] = useState(false)
   const [search, setSearch] = useState('')
@@ -109,10 +111,7 @@ export function Flexsearch() {
 
   const doSearch = () => {
     if (!search) return
-
-    const localeCode = router.locale
-    const index = indexes[localeCode]
-
+    const index = indexes[locale]
     if (!index) return
 
     const [pageIndex, sectionIndex] = index
@@ -248,11 +247,10 @@ export function Flexsearch() {
   )
 
   const load = async () => {
-    const localeCode = router.locale
-    if (!indexes[localeCode] && !loading) {
+    if (!indexes[locale] && !loading) {
       setLoading(true)
       const response = await fetch(
-        `${router.basePath}/_next/static/chunks/nextra-data-${localeCode}.json`
+        `${router.basePath}/_next/static/chunks/nextra-data-${locale}.json`
       )
       const data = await response.json()
 
@@ -331,7 +329,7 @@ export function Flexsearch() {
         })
       }
 
-      indexes[localeCode] = [pageIndex, sectionIndex]
+      indexes[locale] = [pageIndex, sectionIndex]
 
       setLoading(false)
       setSearch(s => (s ? s + ' ' : s)) // Trigger the effect
@@ -381,9 +379,7 @@ export function Flexsearch() {
           type="search"
           placeholder={renderComponent(
             config.searchPlaceholder,
-            {
-              locale: router.locale
-            },
+            { locale },
             true
           )}
           onKeyDown={handleKeyDown}
@@ -417,25 +413,21 @@ export function Flexsearch() {
                 <span>Loading...</span>
               </span>
             ) : results.length === 0 ? (
-              renderComponent(config.unstable_searchResultEmpty, {
-                locale: router.locale
-              })
+              renderComponent(config.unstable_searchResultEmpty, { locale })
             ) : (
-              results.map((res, i) => {
-                return (
-                  <Item
-                    first={res.first}
-                    key={`search-item-${i}`}
-                    page={res.page}
-                    title={res.title}
-                    href={router.basePath + res.route}
-                    excerpt={res.excerpt}
-                    active={i === active}
-                    onHover={() => setActive(i)}
-                    onClick={finishSearch}
-                  />
-                )
-              })
+              results.map((res, i) => (
+                <Item
+                  first={res.first}
+                  key={`search-item-${i}`}
+                  page={res.page}
+                  title={res.title}
+                  href={router.basePath + res.route}
+                  excerpt={res.excerpt}
+                  active={i === active}
+                  onHover={() => setActive(i)}
+                  onClick={finishSearch}
+                />
+              ))
             )}
           </ul>
         </Transition.Child>

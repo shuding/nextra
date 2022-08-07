@@ -10,6 +10,7 @@ import 'intersection-observer'
 import { ActiveAnchor, useActiveAnchorSet } from './active-anchor'
 import { MDXProvider } from '@mdx-js/react'
 import { Collapse, Anchor } from './components'
+import { IS_BROWSER } from './constants'
 
 let observer: IntersectionObserver
 let setActiveAnchor: (
@@ -17,67 +18,65 @@ let setActiveAnchor: (
 ) => void
 const slugs = new WeakMap()
 
-if (typeof window !== 'undefined') {
-  observer =
-    observer! ||
-    new IntersectionObserver(
-      entries => {
-        const headers: [string, number, boolean, boolean][] = []
+if (IS_BROWSER) {
+  observer ||= new IntersectionObserver(
+    entries => {
+      const headers: [string, number, boolean, boolean][] = []
 
-        for (const entry of entries) {
-          if (entry?.rootBounds && slugs.has(entry.target)) {
-            const [slug, index] = slugs.get(entry.target)
-            const aboveHalfViewport =
-              entry.boundingClientRect.y + entry.boundingClientRect.height <=
-              entry.rootBounds.y + entry.rootBounds.height
-            const insideHalfViewport = entry.intersectionRatio > 0
+      for (const entry of entries) {
+        if (entry?.rootBounds && slugs.has(entry.target)) {
+          const [slug, index] = slugs.get(entry.target)
+          const aboveHalfViewport =
+            entry.boundingClientRect.y + entry.boundingClientRect.height <=
+            entry.rootBounds.y + entry.rootBounds.height
+          const insideHalfViewport = entry.intersectionRatio > 0
 
-            headers.push([slug, index, aboveHalfViewport, insideHalfViewport])
+          headers.push([slug, index, aboveHalfViewport, insideHalfViewport])
+        }
+      }
+
+      setActiveAnchor(f => {
+        const ret: ActiveAnchor = { ...f }
+
+        for (const header of headers) {
+          ret[header[0]] = {
+            index: header[1],
+            aboveHalfViewport: header[2],
+            insideHalfViewport: header[3]
           }
         }
 
-        setActiveAnchor(f => {
-          const ret: ActiveAnchor = { ...f }
-
-          for (const header of headers) {
-            ret[header[0]] = {
-              index: header[1],
-              aboveHalfViewport: header[2],
-              insideHalfViewport: header[3]
-            }
+        let activeSlug = ''
+        let smallestIndexInViewport = Infinity
+        let largestIndexAboveViewport = -1
+        for (let s in ret) {
+          ret[s].isActive = false
+          if (
+            ret[s].insideHalfViewport &&
+            ret[s].index < smallestIndexInViewport
+          ) {
+            smallestIndexInViewport = ret[s].index
+            activeSlug = s
           }
-
-          let activeSlug = ''
-          let smallestIndexInViewport = Infinity
-          let largestIndexAboveViewport = -1
-          for (let s in ret) {
-            ret[s].isActive = false
-            if (
-              ret[s].insideHalfViewport &&
-              ret[s].index < smallestIndexInViewport
-            ) {
-              smallestIndexInViewport = ret[s].index
-              activeSlug = s
-            }
-            if (
-              smallestIndexInViewport === Infinity &&
-              ret[s].aboveHalfViewport &&
-              ret[s].index > largestIndexAboveViewport
-            ) {
-              largestIndexAboveViewport = ret[s].index
-              activeSlug = s
-            }
+          if (
+            smallestIndexInViewport === Infinity &&
+            ret[s].aboveHalfViewport &&
+            ret[s].index > largestIndexAboveViewport
+          ) {
+            largestIndexAboveViewport = ret[s].index
+            activeSlug = s
           }
+        }
 
-          if (ret[activeSlug]) ret[activeSlug].isActive = true
-          return ret
-        })
-      },
-      {
-        rootMargin: '0px 0px -50%',
-        threshold: [0, 1]
-      }
-    )
+        if (ret[activeSlug]) ret[activeSlug].isActive = true
+        return ret
+      })
+    },
+    {
+      rootMargin: '0px 0px -50%',
+      threshold: [0, 1]
+    }
+  )
 }
 
 // Anchor links

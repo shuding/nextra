@@ -12,6 +12,7 @@ import { ActiveAnchor, useActiveAnchor } from '../active-anchor'
 import { useConfig } from '../config'
 import useMounted from '../utils/use-mounted'
 import { Anchor } from './anchor'
+import { DEFAULT_LOCALE } from '../constants'
 
 const createEditUrl = (repository?: string, filepath?: string) => {
   const repo = parseGitUrl(repository || '')
@@ -76,7 +77,7 @@ const EditPageLink = ({
   filepath: string
 }) => {
   const url = createEditUrl(repository, filepath)
-  const { locale = 'en-US' } = useRouter()
+  const { locale = DEFAULT_LOCALE } = useRouter()
   return (
     <Anchor
       className="mb-2 block text-xs font-medium text-gray-500 no-underline hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
@@ -104,7 +105,7 @@ const FeedbackLink = ({
   labels?: string
 }) => {
   const url = useCreateFeedbackUrl(repository, filepath, labels)
-  const { locale = 'en-US' } = useRouter()
+  const { locale = DEFAULT_LOCALE } = useRouter()
   return (
     <Anchor
       className="mb-2 block text-xs font-medium text-gray-500 no-underline hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
@@ -196,7 +197,7 @@ export function TOC({
   const slugger = new Slugger()
   const activeAnchor = useActiveAnchor()
   const config = useConfig()
-  const { locale = 'en-US' } = useRouter()
+  const { locale = DEFAULT_LOCALE } = useRouter()
 
   headings = headings
     ? headings.filter(
