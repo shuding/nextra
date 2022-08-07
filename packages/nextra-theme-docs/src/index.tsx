@@ -25,6 +25,7 @@ import { DocsThemeConfig, PageTheme } from './types'
 import './polyfill'
 import Breadcrumb from './breadcrumb'
 import renderComponent from './utils/render-component'
+import Banner from './components/banner'
 
 let resizeObserver: ResizeObserver
 if (typeof window !== 'undefined') {
@@ -212,6 +213,7 @@ const InnerLayout = ({
           'menu-active': menu
         })}
       >
+        <Banner />
         {themeContext.navbar ? (
           <Navbar
             isRTL={isRTL}

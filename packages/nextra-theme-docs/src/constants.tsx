@@ -48,7 +48,8 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     <span className="block select-none p-8 text-center text-sm text-gray-400">
       No results found.
     </span>
-  )
+  ),
+  bannerKey: 'nextra-banner',
   // direction: 'ltr',
   // i18n: [{ locale: 'en-US', text: 'English', direction: 'ltr' }],
 }
