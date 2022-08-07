@@ -17,7 +17,7 @@ import Sidebar from './sidebar'
 import ToC from './toc'
 import { ThemeConfigContext, useConfig } from './config'
 import { ActiveAnchor } from './misc/active-anchor'
-import defaultConfig from './misc/default.config'
+import { DEFAULT_THEME } from './constants'
 import { getFSRoute } from './utils/get-fs-route'
 import { MenuContext } from './utils/menu-context'
 import normalizePages from './utils/normalize-pages'
@@ -290,7 +290,7 @@ function Layout(props: any) {
   if (!context) throw new Error(`No content found for ${route}.`)
 
   const extendedConfig = {
-    ...defaultConfig,
+    ...DEFAULT_THEME,
     ...context.themeConfig,
     unstable_flexsearch: context.pageOpts.unstable_flexsearch,
     newNextLinkBehavior: context.pageOpts.newNextLinkBehavior

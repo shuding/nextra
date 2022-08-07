@@ -1,7 +1,7 @@
 import { PageMapItem } from 'nextra'
 import getTitle from 'title'
-
-import defaultThemeContext from '../misc/theme-context'
+import { DEFAULT_PAGE_THEME } from '../constants'
+import { PageTheme } from '../types'
 
 function extendMeta(
   meta: string | Record<string, any> = {},
@@ -70,7 +70,7 @@ export default function normalizePages({
   route,
   docsRoot = '',
   underCurrentDocsRoot = false,
-  pageThemeContext = defaultThemeContext
+  pageThemeContext = DEFAULT_PAGE_THEME
 }: {
   list: PageMapItem[]
   locale: string
@@ -78,7 +78,7 @@ export default function normalizePages({
   route: string
   docsRoot?: string
   underCurrentDocsRoot?: boolean
-  pageThemeContext?: typeof defaultThemeContext
+  pageThemeContext?: PageTheme
 }) {
   let _meta: Record<string, any> | undefined
   for (let item of list) {

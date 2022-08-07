@@ -1,7 +1,7 @@
 import React from 'react'
-import { DocsThemeConfig } from '../types'
+import { DocsThemeConfig, PageTheme } from './types'
 
-const defaultTheme: DocsThemeConfig = {
+export const DEFAULT_THEME: DocsThemeConfig = {
   projectLink: 'https://github.com/shuding/nextra',
   docsRepositoryBase: 'https://github.com/shuding/nextra',
   titleSuffix: ' – Nextra',
@@ -40,11 +40,11 @@ const defaultTheme: DocsThemeConfig = {
       <meta name="apple-mobile-web-app-title" content="Nextra" />
     </>
   ),
-  searchPlaceholder: ({ locale }: { locale: string }) => {
+  searchPlaceholder({ locale }) {
     if (locale === 'zh-CN') return '搜索文档...'
     return 'Search documentation...'
   },
-  unstable_searchResultEmpty: () => (
+  unstable_searchResultEmpty: (
     <span className="block select-none p-8 text-center text-sm text-gray-400">
       No results found.
     </span>
@@ -53,4 +53,13 @@ const defaultTheme: DocsThemeConfig = {
   // i18n: [{ locale: 'en-US', text: 'English', direction: 'ltr' }],
 }
 
-export default defaultTheme
+export const DEFAULT_PAGE_THEME: PageTheme = {
+  navbar: true,
+  sidebar: true,
+  toc: true,
+  pagination: true,
+  footer: true,
+  layout: 'default',
+  typesetting: 'default',
+  breadcrumb: true
+}
