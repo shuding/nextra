@@ -9,6 +9,7 @@ import { SkipNavContent } from '@reach/skip-nav'
 import { ThemeProvider } from 'next-themes'
 import cn from 'classnames'
 
+import './polyfill'
 import {
   Head,
   Navbar,
@@ -27,7 +28,6 @@ import { getFSRoute } from './utils/get-fs-route'
 import { MenuContext } from './utils/menu-context'
 import normalizePages from './utils/normalize-pages'
 import { DocsThemeConfig, PageTheme } from './types'
-import './polyfill'
 import renderComponent from './utils/render-component'
 
 let resizeObserver: ResizeObserver
