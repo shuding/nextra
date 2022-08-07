@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react'
 import { useRouter } from 'next/router'
-import cn from 'classnames'
+import cn from 'clsx'
 import { useConfig } from '../config'
 import { LocaleSwitch } from './locale-switch'
 import { ThemeSwitch } from './theme-switch'

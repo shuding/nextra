@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react'
-import cn from 'classnames'
+import cn from 'clsx'
 import { ArrowRightIcon } from 'nextra/icons'
 import { useConfig } from '../config'
 import { Item } from '../utils/normalize-pages'
