@@ -14,7 +14,7 @@ const Banner = () => {
         dangerouslySetInnerHTML={{
           __html: `try{if(localStorage.getItem(${JSON.stringify(
             bannerKey
-          )})==='0'){document.body.classList.add('nextra-banner-hidden')}}catch(){}`
+          )})==='0'){document.body.classList.add('nextra-banner-hidden')}}catch(e){}`
         }}
       />
       {banner && bannerKey ? (
