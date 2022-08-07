@@ -77,5 +77,6 @@ export default function withLayout(
   return Layout
 }
 
+export { useTheme } from 'next-themes'
 export { useBlogContext } from './blog-context'
 export * from './types'
