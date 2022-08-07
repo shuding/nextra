@@ -3,10 +3,11 @@ import { useRouter } from 'next/router'
 import { XIcon } from 'nextra/icons'
 import { useConfig } from '../config'
 import renderComponent from '../utils/render-component'
+import { DEFAULT_LOCALE } from '../constants'
 
 export function Banner(): ReactElement {
   const { bannerKey, banner } = useConfig()
-  const { locale = 'en-US' } = useRouter()
+  const { locale = DEFAULT_LOCALE } = useRouter()
 
   return (
     <>

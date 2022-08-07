@@ -1,4 +1,6 @@
-if (typeof window !== 'undefined') {
+import { IS_BROWSER } from './constants'
+
+if (IS_BROWSER) {
   let resizeTimer: any
 
   const addResizingClass = () => {
