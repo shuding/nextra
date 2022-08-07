@@ -1,4 +1,4 @@
-import Callout from 'nextra-theme-docs/callout'
+import { Callout } from 'nextra-theme-docs'
 
 # ページネーション
 
@@ -183,7 +183,7 @@ const { data, error, isValidating, mutate, size, setSize } = useSWRInfinite(
 無限ローディングでは、1 *ページ*が一つのリクエストであり、目標は複数ページをフェッチしてレンダリングすることです。
 
 <Callout emoji="⚠️">
-  もし SWR 0.x バージョンを使っている場合は、 `swr` から `useSWRInfinite` をインポートする必要があります：<br/> 
+  もし SWR 0.x バージョンを使っている場合は、 `swr` から `useSWRInfinite` をインポートする必要があります：<br/>
   `import { useSWRInfinite } from 'swr'`
 </Callout>
 

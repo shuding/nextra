@@ -30,7 +30,7 @@ The function `fetchWithToken` still accepts the same 2 arguments, but the cache 
 
 ## Passing Objects
 
-import Callout from 'nextra-theme-docs/callout'
+import { Callout } from 'nextra-theme-docs'
 
 <Callout>
   Since SWR 1.1.0, object-like keys will be serialized under the hood automatically. 

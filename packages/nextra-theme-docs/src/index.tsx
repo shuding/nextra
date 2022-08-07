@@ -339,3 +339,4 @@ export default function withLayout(
 
 export * from './types'
 export { getComponents } from './mdx-theme'
+export { Bleed, Callout, Collapse, Tabs, Tab } from './components'
