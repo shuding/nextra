@@ -1,7 +1,7 @@
 import React from 'react'
 import cn from 'classnames'
 import { Listbox, Transition } from '@headlessui/react'
-import { CheckIcon } from './icons'
+import { CheckIcon } from 'nextra/icons'
 
 interface MenuOption {
   key: string
