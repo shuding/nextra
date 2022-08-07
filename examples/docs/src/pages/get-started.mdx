@@ -6,7 +6,7 @@ You can start by creating your own Nextra site and deploying to Vercel by clicki
 
 [![](https://vercel.com/button)](https://vercel.com/new/clone?demo-description=Markdown%20powered%20docs%20site.%20Built%20with%20Next.js.&demo-image=https%3A%2F%2Fnextra.vercel.app%2Fdemo.png&demo-title=Documentation%20Starter%20Kit&demo-url=https%3A%2F%2Fnextra.vercel.app%2F&project-name=nextjs-docs&repository-name=nextjs-docs&s=https%3A%2F%2Fgithub.com%2Fshuding%2Fnextra&from=templates)
 
-Vercel will create the Nextra repository and deploy the site for you with just a few clicks.  
+Vercel will create the Nextra repository and deploy the site for you with just a few clicks.
 Once done, every change in the repository will be deployed automatically.
 
 ## Create Manually
@@ -15,22 +15,22 @@ Nextra works like a Next.js plugin, and it accepts a theme config (layout) to re
 
 1. Install Next.js, Nextra and React
 
-import { Tabs, Tab } from 'nextra-theme-docs/tabs'
+import { Tabs, Tab, Callout } from 'nextra-theme-docs'
 
 <Tabs items={['npm', 'yarn', 'pnpm']} defaultIndex={1}>
   <Tab>
-    ```bash 
-    npm i react react-dom next nextra 
+    ```bash
+    npm i react react-dom next nextra
     ```
   </Tab>
   <Tab>
-    ```bash 
-    yarn add react react-dom next nextra 
+    ```bash
+    yarn add react react-dom next nextra
     ```
   </Tab>
   <Tab>
-    ```bash 
-    pnpm i react react-dom next nextra 
+    ```bash
+    pnpm i react react-dom next nextra
     ```
   </Tab>
 </Tabs>
@@ -39,18 +39,18 @@ import { Tabs, Tab } from 'nextra-theme-docs/tabs'
 
 <Tabs items={['npm', 'yarn', 'pnpm']} defaultIndex={1}>
   <Tab>
-    ```bash 
-    npm i nextra-theme-docs 
+    ```bash
+    npm i nextra-theme-docs
     ```
   </Tab>
   <Tab>
-    ```bash 
-    yarn add nextra-theme-docs 
+    ```bash
+    yarn add nextra-theme-docs
     ```
   </Tab>
   <Tab>
-    ```bash 
-    pnpm i nextra-theme-docs 
+    ```bash
+    pnpm i nextra-theme-docs
     ```
   </Tab>
 </Tabs>
@@ -99,8 +99,6 @@ export default {
   )
 }
 ```
-
-import Callout from 'nextra-theme-docs/callout'
 
 <Callout>
   More configuration options for the docs theme can be found

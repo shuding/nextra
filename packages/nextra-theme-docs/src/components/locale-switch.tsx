@@ -1,21 +1,19 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { useRouter } from 'next/router'
-
-import Menu from './select'
-import { DocsThemeConfig } from './types'
+import { Select } from './select'
+import { DocsThemeConfig } from '../types'
 import { GlobeIcon } from 'nextra/icons'
 
 interface LocaleSwitchProps {
   options: NonNullable<DocsThemeConfig['i18n']>
 }
-export default function LocaleSwitch({ options }: LocaleSwitchProps) {
-  const router = useRouter()
 
-  const { locale, asPath } = router
+export function LocaleSwitch({ options }: LocaleSwitchProps): ReactElement {
+  const { locale, asPath } = useRouter()
   const selected = options.find(l => locale === l.locale)!
 
   return (
-    <Menu
+    <Select
       onChange={option => {
         const date = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000)
         document.cookie = `NEXT_LOCALE=${
@@ -36,6 +34,6 @@ export default function LocaleSwitch({ options }: LocaleSwitchProps) {
         key: l.locale,
         name: l.text
       }))}
-    ></Menu>
+    />
   )
 }

@@ -30,7 +30,7 @@ const { data: user } = useSWR(['/api/user', token], fetchWithToken)
 
 ## オブジェクトの受け渡し
 
-import Callout from 'nextra-theme-docs/callout'
+import { Callout } from 'nextra-theme-docs'
 
 <Callout>
   SWR 1.1.0 からは、オブジェクトのようなキーは内部で自動的にシリアライズされます。

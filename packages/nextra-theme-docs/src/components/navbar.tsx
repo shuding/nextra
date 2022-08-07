@@ -1,19 +1,19 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import cn from 'classnames'
 import { useRouter } from 'next/router'
 import { Menu, Transition } from '@headlessui/react'
 import { ArrowRightIcon } from 'nextra/icons'
 
-import renderComponent from './utils/render-component'
-import { getFSRoute } from './utils/get-fs-route'
-import useMenuContext from './utils/menu-context'
+import renderComponent from '../utils/render-component'
+import { getFSRoute } from '../utils/get-fs-route'
+import useMenuContext from '../utils/menu-context'
 
-import { useConfig } from './config'
-import Search from './search'
-import Flexsearch from './flexsearch'
+import { useConfig } from '../config'
+import { Search } from './search'
+import { Flexsearch } from './flexsearch'
 import { GitHubIcon, DiscordIcon, MenuIcon } from 'nextra/icons'
-import { Item, PageItem, MenuItem } from './utils/normalize-pages'
-import Anchor from './components/anchor'
+import { Item, PageItem, MenuItem } from '../utils/normalize-pages'
+import { Anchor } from './anchor'
 
 interface NavBarProps {
   isRTL?: boolean | null
@@ -74,7 +74,7 @@ function NavbarMenu({
   )
 }
 
-export default function Navbar({ flatDirectories, items }: NavBarProps) {
+export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
   const config = useConfig()
   const { locale = 'en-US', asPath } = useRouter()
   const activeRoute = getFSRoute(asPath, locale)

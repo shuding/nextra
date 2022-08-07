@@ -7,7 +7,7 @@ A built-in component provided by `nextra-theme-docs`.
 When wrapping your content with `<Bleed>`, it will be slightly wider than the container
 and will overflow on both sides.
 
-import Bleed from 'nextra-theme-docs/bleed'
+import { Bleed } from 'nextra-theme-docs'
 
 <Bleed>
   <div style={{ border: '1px solid #888', padding: '4rem 2.5rem', textAlign: 'center' }}>
@@ -64,7 +64,7 @@ You can even make it full-bleed using `<Bleed full>`:
 ### React Component
 
 ```jsx filename="bleed.jsx"
-import Bleed from 'nextra-theme-docs/bleed'
+import { Bleed } from 'nextra-theme-docs'
 
 <Bleed>Hey, I can use **Markdown** syntax here.</Bleed>
 

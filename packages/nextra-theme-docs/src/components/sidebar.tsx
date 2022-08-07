@@ -5,20 +5,20 @@ import { useRouter } from 'next/router'
 import { Heading } from 'nextra'
 import scrollIntoView from 'scroll-into-view-if-needed'
 
-import { useActiveAnchor } from './misc/active-anchor'
-import { getFSRoute } from './utils/get-fs-route'
-import useMenuContext from './utils/menu-context'
-import Search from './search'
-import Flexsearch from './flexsearch'
-import { useConfig } from './config'
-import getHeadingText from './utils/get-heading-text'
-import { Item, MenuItem, PageItem } from './utils/normalize-pages'
-import LocaleSwitch from './locale-switch'
+import { useActiveAnchor } from '../active-anchor'
+import { getFSRoute } from '../utils/get-fs-route'
+import useMenuContext from '../utils/menu-context'
+import { Search } from './search'
+import { Flexsearch } from './flexsearch'
+import { useConfig } from '../config'
+import getHeadingText from '../utils/get-heading-text'
+import { Item, MenuItem, PageItem } from '../utils/normalize-pages'
+import { LocaleSwitch } from './locale-switch'
 import ThemeSwitch from './theme-switch'
 import { ArrowRightIcon } from 'nextra/icons'
-import Collapse from './components/collapse'
-import renderComponent from './utils/render-component'
-import Anchor from './components/anchor'
+import { Collapse } from './collapse'
+import renderComponent from '../utils/render-component'
+import { Anchor } from './anchor'
 
 const TreeState: Record<string, boolean> = {}
 
@@ -300,14 +300,15 @@ interface SideBarProps {
 }
 
 const emptyHeading: any[] = []
-export default function Sidebar({
+
+export function Sidebar({
   docsDirectories,
   flatDirectories,
   fullDirectories,
   asPopover = false,
   headings = emptyHeading,
   includePlaceholder
-}: SideBarProps) {
+}: SideBarProps): ReactElement {
   const config = useConfig()
   const anchors = useMemo(
     () =>

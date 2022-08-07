@@ -1,16 +1,11 @@
 import { defineConfig } from 'tsup'
 import tsconfig from './tsconfig.json'
-function outExtension() {
-  return {
-    js: `.js`
-  }
-}
 
 export default defineConfig({
   entry: ['src/index.tsx', 'src/cusdis.tsx'],
   format: 'esm',
   dts: true,
   name: 'nextra-theme-blog',
-  outExtension,
+  outExtension: () => ({ js: '.js' }),
   target: tsconfig.compilerOptions.target
 })

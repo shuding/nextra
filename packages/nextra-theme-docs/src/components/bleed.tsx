@@ -1,11 +1,13 @@
-import React, { PropsWithChildren } from 'react'
+import React, { ReactElement, ReactNode } from 'react'
 import cn from 'classnames'
 
-type BleedProps = {
+export function Bleed({
+  full,
+  children
+}: {
   full: boolean
-}
-
-const Bleed: React.FC<PropsWithChildren<BleedProps>> = ({ full, children }) => {
+  children: ReactNode
+}): ReactElement {
   return (
     <div
       className={cn('bleed relative -mx-6 mt-6 md:-mx-8 2xl:-mx-24', { full })}
@@ -14,5 +16,3 @@ const Bleed: React.FC<PropsWithChildren<BleedProps>> = ({ full, children }) => {
     </div>
   )
 }
-
-export default Bleed

@@ -1,5 +1,4 @@
-import Callout from 'nextra-theme-docs/callout'
-import Link from 'next/link'
+import { Callout } from 'nextra-theme-docs'
 
 # Error Handling
 
@@ -50,7 +49,7 @@ const { data, error } = useSWR('/api/user', fetcher)
 
 <Callout emoji="💡">
   Note that <code>data</code> and <code>error</code> can exist at the same time. So the UI can display the existing data,
-  while knowing the upcoming request has failed. 
+  while knowing the upcoming request has failed.
 </Callout>
 
 [Here](/examples/error-handling) we have an example.

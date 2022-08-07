@@ -1,12 +1,10 @@
 import React, { ReactElement } from 'react'
-import Anchor from './components/anchor'
+import { Anchor } from './anchor'
 import cn from 'classnames'
-
 import { ArrowRightIcon } from 'nextra/icons'
+import { Item } from '../utils/normalize-pages'
 
-import { Item } from './utils/normalize-pages'
-
-export default function Breadcrumb({
+export function Breadcrumb({
   activePath
 }: {
   activePath: Item[]

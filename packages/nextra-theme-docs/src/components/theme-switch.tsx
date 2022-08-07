@@ -1,17 +1,16 @@
-import React, { memo } from 'react'
+import React, { memo, ReactElement } from 'react'
 import { useTheme } from 'next-themes'
-
-import Menu from './select'
+import { Select } from './select'
 import { SunIcon, MoonIcon } from 'nextra/icons'
 
-function ThemeSwitch({ lite = true }) {
+export function ThemeSwitch({ lite = true }): ReactElement {
   const { theme, setTheme, systemTheme } = useTheme()
   const renderedTheme = theme === 'system' ? systemTheme : theme
   const [mounted, setMounted] = React.useState(false)
   React.useEffect(() => setMounted(true), [])
 
   return (
-    <Menu
+    <Select
       onChange={option => {
         setTheme(option.key)
       }}

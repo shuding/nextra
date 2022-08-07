@@ -4,15 +4,15 @@ import React, {
   useRef,
   useState,
   useEffect,
-  EventHandler
+  MouseEventHandler,
+  ReactElement
 } from 'react'
 import matchSorter from 'match-sorter'
 import cn from 'classnames'
 import { useRouter } from 'next/router'
-import Anchor from './components/anchor'
-import type { MouseEventHandler } from 'react'
-import type { Item as NormalItem } from './utils/normalize-pages'
-import { useConfig } from './config'
+import { Anchor } from './anchor'
+import type { Item as NormalItem } from '../utils/normalize-pages'
+import { useConfig } from '../config'
 
 interface ItemProps {
   title: string
@@ -48,7 +48,7 @@ interface SearchProps {
   directories: NormalItem[]
 }
 
-const Search = ({ directories = [] }: SearchProps) => {
+export function Search({ directories = [] }: SearchProps): ReactElement {
   const router = useRouter()
   const config = useConfig()
   const [show, setShow] = useState(false)
@@ -186,5 +186,3 @@ const Search = ({ directories = [] }: SearchProps) => {
     </div>
   )
 }
-
-export default Search

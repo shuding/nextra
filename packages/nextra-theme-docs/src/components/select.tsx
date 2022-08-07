@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import cn from 'classnames'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon } from 'nextra/icons'
@@ -14,7 +14,11 @@ interface MenuProps {
   options: MenuOption[]
 }
 
-export default function Menu({ options, selected, onChange }: MenuProps) {
+export function Select({
+  options,
+  selected,
+  onChange
+}: MenuProps): ReactElement {
   return (
     <Listbox value={selected} onChange={onChange}>
       {({ open }) => (

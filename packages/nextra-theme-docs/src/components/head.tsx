@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, ReactElement } from 'react'
 import NextHead from 'next/head'
 import { useTheme } from 'next-themes'
 
-import renderComponent from './utils/render-component'
-import { useConfig } from './config'
+import renderComponent from '../utils/render-component'
+import { useConfig } from '../config'
 import { PageOpts } from 'nextra'
 
 interface HeadProps {
@@ -12,7 +12,7 @@ interface HeadProps {
   meta: PageOpts['meta']
 }
 
-export default function Head({ title, locale, meta }: HeadProps) {
+export function Head({ title, locale, meta }: HeadProps): ReactElement {
   const config = useConfig()
   const { theme, systemTheme } = useTheme()
   const renderedTheme = theme === 'system' ? systemTheme : theme

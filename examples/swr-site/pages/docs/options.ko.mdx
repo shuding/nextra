@@ -1,4 +1,4 @@
-import Callout from 'nextra-theme-docs/callout'
+import { Callout } from 'nextra-theme-docs'
 
 # API 옵션
 
@@ -50,7 +50,7 @@ const { data, error, isValidating, mutate } = useSWR(key, fetcher, options)
 - `use`: 미들웨어 함수의 배열 [(상세내용)](/docs/middleware)
 
 <Callout emoji="💡">
-  느린 네트워크(2G, {'<='} 70Kbps)에서는, 기본적으로 <code>errorRetryInterval</code>이 10초이며, 
+  느린 네트워크(2G, {'<='} 70Kbps)에서는, 기본적으로 <code>errorRetryInterval</code>이 10초이며,
   <code>loadingTimeout</code>은 5초입니다.
 </Callout>
 

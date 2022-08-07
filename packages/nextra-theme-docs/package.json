@@ -9,22 +9,11 @@
     "dist",
     "style.css"
   ],
+  "sideEffects": false,
   "typesVersions": {
     "*": {
       ".": [
         "./dist/index.d.ts"
-      ],
-      "callout": [
-        "./dist/callout.d.ts"
-      ],
-      "bleed": [
-        "./dist/bleed.d.ts"
-      ],
-      "tabs": [
-        "./dist/tabs.d.ts"
-      ],
-      "collapse": [
-        "./dist/collapse.d.ts"
       ]
     }
   },
@@ -34,22 +23,6 @@
     ".": {
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
-    },
-    "./callout": {
-      "import": "./dist/callout.js",
-      "types": "./dist/callout.d.ts"
-    },
-    "./bleed": {
-      "import": "./dist/bleed.js",
-      "types": "./dist/bleed.d.ts"
-    },
-    "./tabs": {
-      "import": "./dist/tabs.js",
-      "types": "./dist/tabs.d.ts"
-    },
-    "./collapse": {
-      "import": "./dist/collapse.js",
-      "types": "./dist/collapse.d.ts"
     }
   },
   "scripts": {

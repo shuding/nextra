@@ -7,7 +7,7 @@ type AnchorProps = Omit<ComponentProps<'a'>, 'ref'> & {
   newWindow?: boolean
 }
 
-const Anchor = forwardRef<HTMLAnchorElement, AnchorProps>(function (
+export const Anchor = forwardRef<HTMLAnchorElement, AnchorProps>(function (
   { href = '', children, newWindow, ...props },
   // ref is used in <NavbarMenu />
   forwardedRef
@@ -45,5 +45,3 @@ const Anchor = forwardRef<HTMLAnchorElement, AnchorProps>(function (
     </NextLink>
   )
 })
-
-export default Anchor

@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react'
+import React, { ReactElement, ReactNode } from 'react'
 
 const themes = {
   default:
@@ -15,13 +15,14 @@ type CalloutProps = {
   type?: keyof typeof themes
   /** default emoji 💡*/
   emoji: string
+  children: ReactNode
 }
 
-const Callout: React.FC<PropsWithChildren<CalloutProps>> = ({
+export function Callout ({
   children,
   type = 'default',
   emoji = '💡'
-}) => {
+}: CalloutProps): ReactElement {
   return (
     <div className={`${themes[type]} nextra-callout mt-6 flex rounded-lg`}>
       <div
@@ -36,5 +37,3 @@ const Callout: React.FC<PropsWithChildren<CalloutProps>> = ({
     </div>
   )
 }
-
-export default Callout

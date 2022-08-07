@@ -1,4 +1,4 @@
-import Callout from 'nextra-theme-docs/callout'
+import { Callout } from 'nextra-theme-docs'
 
 # Cache
 
@@ -60,7 +60,7 @@ import { Cache } from 'components/diagrams/cache'
 When nested, SWR hooks will use the upper-level cache provider. If there is no upper-level cache provider, it fallbacks to the default cache provider, which is an empty `Map`.
 
 <Callout emoji="⚠️">
-   If a cache provider is used, the global `mutate` will **not** work for SWR hooks under that `<SWRConfig>` boundary. Please use [this](#access-current-cache-provider) instead. 
+   If a cache provider is used, the global `mutate` will **not** work for SWR hooks under that `<SWRConfig>` boundary. Please use [this](#access-current-cache-provider) instead.
 </Callout>
 
 ## Access Current Cache Provider
