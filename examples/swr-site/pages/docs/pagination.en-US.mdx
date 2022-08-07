@@ -14,7 +14,7 @@ SWR provides a dedicated API `useSWRInfinite` to support common UI patterns such
 
 First of all, we might **NOT** need `useSWRInfinite` but can use just `useSWR` if we are building something like this:
 
-import { Pagination } from 'components/diagrams/pagination'
+import { Pagination } from '@components/diagrams/pagination'
 
 <div className="mt-8">
   <Pagination/>
@@ -86,7 +86,7 @@ that most scenarios are covered by it.
 Sometimes we want to build an **infinite loading** UI, with a "Load More" button that appends data
 to the list (or done automatically when you scroll):
 
-import { Infinite } from 'components/diagrams/infinite'
+import { Infinite } from '@components/diagrams/infinite'
 
 <div className="mt-8">
   <Infinite/>
@@ -95,7 +95,7 @@ import { Infinite } from 'components/diagrams/infinite'
 To implement this, we need to make **dynamic number of requests** on this page. React Hooks have [a couple of rules](https://reactjs.org/docs/hooks-rules.html),
 so we **CANNOT** do something like this:
 
-```jsx {5,6,7,8,9}
+```jsx {5-9}
 function App () {
   const [cnt, setCnt] = useState(1)
 

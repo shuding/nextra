@@ -1,18 +1,15 @@
-import React, { PropsWithChildren } from 'react'
+import { FC, ReactNode } from 'react'
 import { ThemeProviderProps } from 'next-themes/dist/types'
 
 export interface DocsThemeConfig {
   projectLink?: string
   github?: string
-  projectLinkIcon?:
-    | React.ReactNode
-    | React.FC<PropsWithChildren<{ locale: string }>>
+  projectLinkIcon?: ReactNode | FC
   docsRepositoryBase?: string
   titleSuffix?:
     | string
     // Can't be React component, otherwise will get Warning: A title element received an array with more than 1 element as children.
     | ((props: {
-        locale: string
         config: DocsThemeConfig
         title: string
         meta: Meta
@@ -28,68 +25,33 @@ export interface DocsThemeConfig {
   defaultMenuCollapsed?: boolean
   font?: boolean
   footer?: boolean
-  footerText?:
-    | React.ReactNode
-    | React.FC<
-        PropsWithChildren<{
-          locale: string
-        }>
-      >
-  footerEditLink?:
-    | React.ReactNode
-    | React.FC<
-        PropsWithChildren<{
-          locale: string
-        }>
-      >
-  logo?:
-    | React.ReactNode
-    | React.FC<
-        PropsWithChildren<{
-          locale: string
-        }>
-      >
+  footerText?: ReactNode | FC
+  footerEditLink?: ReactNode | FC
+  logo?: ReactNode | FC
   head?:
-    | React.ReactNode
-    | React.FC<
-        PropsWithChildren<{
-          locale: string
-          config: DocsThemeConfig
-          title: string
-          meta: Meta
-        }>
-      >
+    | ReactNode
+    | FC<{
+        config: DocsThemeConfig
+        title: string
+        meta: Meta
+      }>
   direction?: 'ltr' | 'rtl'
-  i18n?: { locale: string; text: string; direction: string }[]
+  i18n?: { locale: string; text: string; direction?: string }[]
   floatTOC?: boolean
   unstable_faviconGlyph?: string
-  feedbackLink?:
-    | React.ReactNode
-    | React.FC<
-        PropsWithChildren<{
-          locale: string
-        }>
-      >
+  feedbackLink?: ReactNode | FC
   feedbackLabels?: string
-  customSearch?: React.ReactNode | false
+  customSearch?: ReactNode | false
   // Can't be React component
-  searchPlaceholder?: string | ((props: { locale: string }) => string)
+  searchPlaceholder?: string | (() => string)
   projectChatLink?: string
-  projectChatLinkIcon?: React.FC<PropsWithChildren<{ locale: string }>>
-  sidebarSubtitle?: React.FC<PropsWithChildren<{ title: string }>>
-  banner?: React.FC<PropsWithChildren<{ locale: string }>>
+  projectChatLinkIcon?: ReactNode | FC
+  sidebarSubtitle?: ReactNode| FC<{ title: string }>
+  banner?: ReactNode | FC
   bannerKey?: string
-  gitTimestamp?:
-    | string
-    | React.FC<PropsWithChildren<{ locale: string; timestamp: Date }>>
-  tocExtraContent?: React.FC<PropsWithChildren<{ locale: string }>>
-  unstable_searchResultEmpty?:
-    | React.ReactNode
-    | React.FC<
-        PropsWithChildren<{
-          locale: string
-        }>
-      >
+  gitTimestamp?: string | FC<{ timestamp: Date }>
+  tocExtraContent?: ReactNode | FC
+  unstable_searchResultEmpty?: ReactNode | FC
 }
 
 export type PageTheme = {

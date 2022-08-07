@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { Menu, Transition } from '@headlessui/react'
 import { ArrowRightIcon } from 'nextra/icons'
 
-import renderComponent from '../utils/render-component'
+import { renderComponent } from '../utils/render'
 import { getFSRoute } from '../utils/get-fs-route'
 import useMenuContext from '../utils/menu-context'
 
@@ -90,7 +90,7 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
             href="/"
             className="inline-flex items-center text-current no-underline hover:opacity-75"
           >
-            {renderComponent(config.logo, { locale })}
+            {renderComponent(config.logo)}
           </Anchor>
         </div>
 
@@ -129,38 +129,37 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
                 </NavbarMenu>
               </div>
             )
-          } else {
-            const page = pageOrMenu as PageItem
-            let href = page.href || page.route || '#'
-
-            // If it's a directory
-            if (page.children) {
-              href =
-                (page.withIndexPage ? page.route : page.firstChildRoute) || href
-            }
-
-            const isActive =
-              page.route === activeRoute ||
-              activeRoute.startsWith(page.route + '/')
-
-            return (
-              <Anchor
-                href={href}
-                key={page.route}
-                className={cn(
-                  'nextra-nav-link',
-                  '-ml-2 hidden whitespace-nowrap p-2 no-underline md:inline-block',
-                  !isActive || page.newWindow
-                    ? 'text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200'
-                    : 'active subpixel-antialiased text-current'
-                )}
-                newWindow={page.newWindow}
-                aria-selected={!page.newWindow && isActive}
-              >
-                {page.title}
-              </Anchor>
-            )
           }
+          const page = pageOrMenu as PageItem
+          let href = page.href || page.route || '#'
+
+          // If it's a directory
+          if (page.children) {
+            href =
+              (page.withIndexPage ? page.route : page.firstChildRoute) || href
+          }
+
+          const isActive =
+            page.route === activeRoute ||
+            activeRoute.startsWith(page.route + '/')
+
+          return (
+            <Anchor
+              href={href}
+              key={page.route}
+              className={cn(
+                'nextra-nav-link',
+                '-ml-2 hidden whitespace-nowrap p-2 no-underline md:inline-block',
+                !isActive || page.newWindow
+                  ? 'text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200'
+                  : 'active subpixel-antialiased text-current'
+              )}
+              newWindow={page.newWindow}
+              aria-selected={!page.newWindow && isActive}
+            >
+              {page.title}
+            </Anchor>
+          )
         })}
 
         <div>
@@ -183,7 +182,7 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
             newWindow
           >
             {config.projectLinkIcon ? (
-              renderComponent(config.projectLinkIcon, { locale })
+              renderComponent(config.projectLinkIcon)
             ) : (
               <>
                 <GitHubIcon />
@@ -199,7 +198,7 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
             newWindow
           >
             {config.projectChatLinkIcon ? (
-              renderComponent(config.projectChatLinkIcon, { locale })
+              renderComponent(config.projectChatLinkIcon)
             ) : (
               <>
                 <DiscordIcon />

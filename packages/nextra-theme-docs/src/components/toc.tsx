@@ -1,20 +1,18 @@
-import React, { PropsWithChildren, ReactElement, ReactNode } from 'react'
+import React, { ReactElement } from 'react'
 import cn from 'clsx'
 import Slugger from 'github-slugger'
 import { Heading } from 'nextra'
 import parseGitUrl from 'parse-git-url'
-import { useRouter } from 'next/router'
 import scrollIntoView from 'scroll-into-view-if-needed'
 
-import renderComponent from '../utils/render-component'
+import { renderComponent } from '../utils/render'
 import getHeadingText from '../utils/get-heading-text'
 import { ActiveAnchor, useActiveAnchor } from '../active-anchor'
 import { useConfig } from '../config'
-import useMounted from '../utils/use-mounted'
 import { Anchor } from './anchor'
-import { DEFAULT_LOCALE } from '../constants'
+import useMounted from '../utils/use-mounted'
 
-const createEditUrl = (repository?: string, filepath?: string) => {
+const getEditUrl = (repository?: string, filepath?: string): string => {
   const repo = parseGitUrl(repository || '')
   if (!repo) throw new Error('Invalid `docsRepositoryBase` URL!')
 
@@ -32,11 +30,11 @@ const createEditUrl = (repository?: string, filepath?: string) => {
   return '#'
 }
 
-const useCreateFeedbackUrl = (
+const getCreateFeedbackUrl = (
   repository?: string,
   filepath?: string,
   labels?: string
-) => {
+): string => {
   const mounted = useMounted()
   if (!mounted) return '#'
 
@@ -61,82 +59,6 @@ const useCreateFeedbackUrl = (
   return '#'
 }
 
-const EditPageLink = ({
-  repository,
-  text,
-  filepath
-}: {
-  repository?: string
-  text:
-    | React.ReactNode
-    | React.FC<
-        PropsWithChildren<{
-          locale: string
-        }>
-      >
-  filepath: string
-}) => {
-  const url = createEditUrl(repository, filepath)
-  const { locale = DEFAULT_LOCALE } = useRouter()
-  return (
-    <Anchor
-      className="mb-2 block text-xs font-medium text-gray-500 no-underline hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
-      href={url}
-      newWindow
-    >
-      {text
-        ? renderComponent(text, {
-            locale
-          })
-        : 'Edit this page'}
-    </Anchor>
-  )
-}
-
-const FeedbackLink = ({
-  repository,
-  feedbackLink,
-  filepath,
-  labels
-}: {
-  repository?: string
-  feedbackLink: ReactNode | React.FC<PropsWithChildren<{ locale: string }>>
-  filepath: string
-  labels?: string
-}) => {
-  const url = useCreateFeedbackUrl(repository, filepath, labels)
-  const { locale = DEFAULT_LOCALE } = useRouter()
-  return (
-    <Anchor
-      className="mb-2 block text-xs font-medium text-gray-500 no-underline hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
-      href={url}
-      newWindow
-    >
-      {feedbackLink
-        ? renderComponent(feedbackLink, {
-            locale
-          })
-        : 'Feedback'}
-    </Anchor>
-  )
-}
-
-const indent = (level: number) => {
-  switch (level) {
-    case 3:
-      return { marginLeft: '1rem ' }
-    case 4:
-      return { marginLeft: '2rem ' }
-    case 5:
-      return { marginLeft: '3rem ' }
-    case 6:
-      return { marginLeft: '4rem ' }
-  }
-  return {}
-}
-
-const emptyHeader: any[] = []
-
 function Item({
   heading,
   slug,
@@ -145,14 +67,14 @@ function Item({
   heading: Heading
   slug: string
   activeAnchor: ActiveAnchor
-}) {
+}): ReactElement {
   const text = getHeadingText(heading)
   const state = activeAnchor[slug]
   const ref = React.useRef<HTMLLIElement>(null)
 
   React.useEffect(() => {
     const el = ref.current
-    const toc = document.getElementsByClassName('nextra-toc')[0]
+    const [toc] = document.getElementsByClassName('nextra-toc')
     if (state?.isActive && el && toc) {
       scrollIntoView(el, {
         behavior: 'smooth',
@@ -166,8 +88,17 @@ function Item({
 
   return (
     <li
-      className="scroll-my-6 scroll-py-6"
-      style={indent(heading.depth)}
+      className={cn(
+        'scroll-my-6 scroll-py-6',
+        {
+          1: '',
+          2: '',
+          3: 'ml-4',
+          4: 'ml-8',
+          5: 'ml-12',
+          6: 'ml-16'
+        }[heading.depth]
+      )}
       ref={ref}
     >
       <a
@@ -188,31 +119,28 @@ function Item({
 }
 
 export function TOC({
-  headings = emptyHeader,
+  headings,
   filepathWithName
 }: {
-  headings: Heading[] | null
+  headings: Heading[]
   filepathWithName: string
 }): ReactElement {
   const slugger = new Slugger()
   const activeAnchor = useActiveAnchor()
   const config = useConfig()
-  const { locale = DEFAULT_LOCALE } = useRouter()
 
-  headings = headings
-    ? headings.filter(
-        heading => heading.type === 'heading' && heading.depth > 1
-      )
-    : headings
+  headings = headings.filter(
+    heading => heading.type === 'heading' && heading.depth > 1
+  )
 
-  const hasHeadings = headings && headings.length > 0
+  const hasHeadings = headings.length > 0
   const hasMetaInfo =
     config.feedbackLink || config.footerEditLink || config.tocExtraContent
 
   return (
     <div className="nextra-toc order-last hidden w-64 flex-shrink-0 px-4 text-sm xl:block">
       <div className="nextra-toc-content sticky top-16 -mr-4 max-h-[calc(100vh-4rem-env(safe-area-inset-bottom))] overflow-y-auto pr-4 pt-8">
-        {hasHeadings && headings ? (
+        {hasHeadings && (
           <ul>
             <p className="mb-4 font-semibold tracking-tight">On This Page</p>
             {headings.map(heading => {
@@ -229,7 +157,7 @@ export function TOC({
               )
             })}
           </ul>
-        ) : null}
+        )}
 
         {hasMetaInfo ? (
           <div
@@ -241,25 +169,32 @@ export function TOC({
             )}
           >
             {config.feedbackLink ? (
-              <FeedbackLink
-                filepath={filepathWithName}
-                repository={config.docsRepositoryBase}
-                labels={config.feedbackLabels}
-                feedbackLink={config.feedbackLink}
-              />
+              <Anchor
+                className="mb-2 block text-xs font-medium text-gray-500 no-underline hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
+                href={getCreateFeedbackUrl(
+                  config.docsRepositoryBase,
+                  filepathWithName,
+                  config.feedbackLabels
+                )}
+                newWindow
+              >
+                {renderComponent(config.feedbackLink)}
+              </Anchor>
             ) : null}
 
             {config.footerEditLink ? (
-              <EditPageLink
-                filepath={filepathWithName}
-                repository={config.docsRepositoryBase}
-                text={config.footerEditLink}
-              />
+              <Anchor
+                className="mb-2 block text-xs font-medium text-gray-500 no-underline hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
+                href={getEditUrl(config.docsRepositoryBase, filepathWithName)}
+                newWindow
+              >
+                {renderComponent(config.footerEditLink)}
+              </Anchor>
             ) : null}
 
             {config.tocExtraContent ? (
               <div className="pt-4 leading-4">
-                {renderComponent(config.tocExtraContent, { locale })}
+                {renderComponent(config.tocExtraContent)}
               </div>
             ) : null}
           </div>

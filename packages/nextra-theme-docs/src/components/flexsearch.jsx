@@ -12,53 +12,17 @@ import FlexSearch from 'flexsearch'
 import { Transition } from '@headlessui/react'
 
 import { useConfig } from '../config'
-import renderComponent from '../utils/render-component'
+import { renderComponent, renderString } from '../utils/render'
 import useMenuContext from '../utils/menu-context'
 import { SpinnerIcon } from 'nextra/icons'
 import { Anchor } from './anchor'
 import { DEFAULT_LOCALE } from '../constants'
 
-const Item = ({
-  page,
-  first,
-  title,
-  active,
-  href,
-  onHover,
-  onClick,
-  excerpt
-}) => {
-  return (
-    <>
-      {first ? (
-        <div className="nextra-search-section mx-2.5 mb-2 mt-6 select-none px-2.5 pb-1.5 text-xs font-semibold uppercase text-gray-500 first:mt-0 dark:text-gray-300">
-          {page}
-        </div>
-      ) : null}
-      <Anchor
-        href={href}
-        className="block no-underline"
-        onMouseMove={onHover}
-        onClick={onClick}
-      >
-        <li className={cn({ active })}>
-          <div className="font-semibold leading-5 dark:text-white">{title}</div>
-          {excerpt ? (
-            <div className="excerpt mt-1 text-sm leading-[1.35rem] text-gray-600 dark:text-gray-400">
-              {excerpt}
-            </div>
-          ) : null}
-        </li>
-      </Anchor>
-    </>
-  )
-}
-
 const MemoedStringWithMatchHighlights = memo(
   function StringWithMatchHighlights({ content, search }) {
     const splittedText = content.split('')
     const escapedSearch = search.trim().replace(/[|\\{}()[\]^$+*?.]/g, '\\$&')
-    const regexp = RegExp('(' + escapedSearch.split(' ').join('|') + ')', 'ig')
+    const regexp = RegExp('(' + escapedSearch.replaceAll(' ', '|') + ')', 'ig')
     let match
     let id = 0
     let index = 0
@@ -206,7 +170,7 @@ export function Flexsearch() {
             const activeElement = document.querySelector(
               `.nextra-flexsearch ul > a:nth-of-type(${active + 2})`
             )
-            if (activeElement && activeElement.scrollIntoView) {
+            if (activeElement?.scrollIntoView) {
               activeElement.scrollIntoView({
                 behavior: 'smooth',
                 block: 'nearest'
@@ -222,7 +186,7 @@ export function Flexsearch() {
             const activeElement = document.querySelector(
               `.nextra-flexsearch ul > a:nth-of-type(${active})`
             )
-            if (activeElement && activeElement.scrollIntoView) {
+            if (activeElement?.scrollIntoView) {
               activeElement.scrollIntoView({
                 behavior: 'smooth',
                 block: 'nearest'
@@ -377,11 +341,7 @@ export function Flexsearch() {
           }}
           className="block w-full appearance-none rounded-lg px-3 py-2 leading-tight transition-colors focus:bg-white focus:outline-none focus:ring-1 focus:ring-gray-200 dark:focus:bg-dark dark:focus:ring-gray-100/20"
           type="search"
-          placeholder={renderComponent(
-            config.searchPlaceholder,
-            { locale },
-            true
-          )}
+          placeholder={renderString(config.searchPlaceholder)}
           onKeyDown={handleKeyDown}
           onFocus={() => {
             load()
@@ -413,20 +373,33 @@ export function Flexsearch() {
                 <span>Loading...</span>
               </span>
             ) : results.length === 0 ? (
-              renderComponent(config.unstable_searchResultEmpty, { locale })
+              renderComponent(config.unstable_searchResultEmpty)
             ) : (
               results.map((res, i) => (
-                <Item
-                  first={res.first}
-                  key={`search-item-${i}`}
-                  page={res.page}
-                  title={res.title}
-                  href={router.basePath + res.route}
-                  excerpt={res.excerpt}
-                  active={i === active}
-                  onHover={() => setActive(i)}
-                  onClick={finishSearch}
-                />
+                <Fragment key={`search-item-${i}`}>
+                  {res.first ? (
+                    <div className="nextra-search-section mx-2.5 mb-2 mt-6 select-none px-2.5 pb-1.5 text-xs font-semibold uppercase text-gray-500 first:mt-0 dark:text-gray-300">
+                      {res.page}
+                    </div>
+                  ) : null}
+                  <Anchor
+                    href={router.basePath + res.route}
+                    className="block no-underline"
+                    onMouseMove={() => setActive(i)}
+                    onClick={finishSearch}
+                  >
+                    <li className={cn({ active: i === active })}>
+                      <div className="font-semibold leading-5 dark:text-white">
+                        {res.title}
+                      </div>
+                      {res.excerpt ? (
+                        <div className="excerpt mt-1 text-sm leading-[1.35rem] text-gray-600 dark:text-gray-400">
+                          {res.excerpt}
+                        </div>
+                      ) : null}
+                    </li>
+                  </Anchor>
+                </Fragment>
               ))
             )}
           </ul>
