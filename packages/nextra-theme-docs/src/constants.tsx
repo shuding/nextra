@@ -1,5 +1,6 @@
 import React from 'react'
 import { DocsThemeConfig, PageTheme } from './types'
+import { useRouter } from 'next/router'
 
 export const DEFAULT_LOCALE = 'en-US'
 
@@ -44,7 +45,8 @@ export const DEFAULT_THEME: DocsThemeConfig = {
       <meta name="apple-mobile-web-app-title" content="Nextra" />
     </>
   ),
-  searchPlaceholder({ locale }) {
+  searchPlaceholder() {
+    const { locale } = useRouter();
     if (locale === 'zh-CN') return '搜索文档...'
     return 'Search documentation...'
   },

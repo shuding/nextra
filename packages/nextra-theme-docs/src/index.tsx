@@ -28,16 +28,13 @@ import { MenuContext } from './utils/menu-context'
 import normalizePages from './utils/normalize-pages'
 import { DocsThemeConfig, PageTheme } from './types'
 import './polyfill'
-import renderComponent from './utils/render-component'
+import { renderComponent } from './utils/render'
 
 let resizeObserver: ResizeObserver
 if (IS_BROWSER) {
   resizeObserver ||= new ResizeObserver(entries => {
-    if (window.location.hash) {
-      const node = entries[0].target.ownerDocument.querySelector(
-        window.location.hash
-      )
-
+    if (location.hash) {
+      const node = entries[0].target.ownerDocument.querySelector(location.hash)
       if (node) {
         scrollIntoView(node)
       }
@@ -90,73 +87,57 @@ const Body = ({
     }
   }, [])
 
+  if (themeContext.layout === 'raw') {
+    return (
+      <div className="nextra-body full expand relative overflow-x-hidden">
+        {children}
+      </div>
+    )
+  }
+
+  const gitTimestampEl =
+    date && config.gitTimestamp ? (
+      <div className="pointer-default mt-12 mb-8 block text-right text-xs text-gray-500 dark:text-gray-400">
+        {typeof config.gitTimestamp === 'string'
+          ? `${config.gitTimestamp} ${date.toLocaleDateString(locale, {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            })}`
+          : renderComponent(config.gitTimestamp, { timestamp: date })}
+      </div>
+    ) : (
+      <div className="mt-16" />
+    )
+
+  if (themeContext.layout === 'full') {
+    return (
+      <article className="nextra-body full relative justify-center overflow-x-hidden pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
+        <MDXTheme>{children}</MDXTheme>
+        {gitTimestampEl}
+        {navLinks}
+      </article>
+    )
+  }
+
   return (
-    <>
-      <SkipNavContent />
-      {themeContext.layout === 'full' ? (
-        <article className="nextra-body full relative justify-center overflow-x-hidden pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
-          <MDXTheme>{children}</MDXTheme>
-          {date && config.gitTimestamp ? (
-            <div className="pointer-default mt-12 mb-8 block text-right text-xs text-gray-500 dark:text-gray-400">
-              {typeof config.gitTimestamp === 'string'
-                ? config.gitTimestamp +
-                  ' ' +
-                  date.toLocaleDateString(locale, {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                  })
-                : renderComponent(config.gitTimestamp, {
-                    timestamp: date,
-                    locale
-                  })}
-            </div>
-          ) : (
-            <div className="mt-16" />
-          )}
-          {navLinks}
-        </article>
-      ) : themeContext.layout === 'raw' ? (
-        <div className="nextra-body full expand relative overflow-x-hidden">
-          {children}
-        </div>
-      ) : (
-        <article
-          className={cn(
-            'nextra-body relative flex w-full min-w-0 max-w-full justify-center pb-8 pr-[calc(env(safe-area-inset-right)-1.5rem)]',
-            themeContext.typesetting &&
-              'nextra-body-typesetting-' + themeContext.typesetting
-          )}
-        >
-          <main
-            className="z-10 w-full min-w-0 max-w-4xl px-6 pt-4 md:px-8"
-            ref={mainElement}
-          >
-            {breadcrumb}
-            <MDXTheme>{children}</MDXTheme>
-            {date && config.gitTimestamp ? (
-              <div className="pointer-default mt-12 mb-8 block text-right text-xs text-gray-500 dark:text-gray-400">
-                {typeof config.gitTimestamp === 'string'
-                  ? config.gitTimestamp +
-                    ' ' +
-                    date.toLocaleDateString(locale, {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric'
-                    })
-                  : renderComponent(config.gitTimestamp, {
-                      timestamp: date,
-                      locale
-                    })}
-              </div>
-            ) : (
-              <div className="mt-16" />
-            )}
-            {navLinks}
-          </main>
-        </article>
+    <article
+      className={cn(
+        'nextra-body relative flex w-full min-w-0 max-w-full justify-center pb-8 pr-[calc(env(safe-area-inset-right)-1.5rem)]',
+        themeContext.typesetting &&
+          `nextra-body-typesetting-${themeContext.typesetting}`
       )}
-    </>
+    >
+      <main
+        className="z-10 w-full min-w-0 max-w-4xl px-6 pt-4 md:px-8"
+        ref={mainElement}
+      >
+        {breadcrumb}
+        <MDXTheme>{children}</MDXTheme>
+        {gitTimestampEl}
+        {navLinks}
+      </main>
+    </article>
   )
 }
 
@@ -185,7 +166,6 @@ const InnerLayout = ({
   } = useDirectoryInfo(pageMap)
 
   const filepath = route.slice(0, route.lastIndexOf('/') + 1)
-  const filepathWithName = filepath + filename
   const title = meta.title || titleText || 'Untitled'
   const isRTL = useMemo(() => {
     if (!config.i18n) return config.direction === 'rtl'
@@ -206,7 +186,7 @@ const InnerLayout = ({
         defaultMenuCollapsed: !!config.defaultMenuCollapsed
       }}
     >
-      <Head title={title} locale={locale} meta={meta} />
+      <Head title={title} meta={meta} />
       <div
         className={cn('nextra-container main-container flex flex-col', {
           rtl: isRTL,
@@ -242,10 +222,11 @@ const InnerLayout = ({
                 )
               ) : (
                 <TOC
-                  headings={config.floatTOC ? headings : null}
-                  filepathWithName={filepathWithName}
+                  headings={config.floatTOC ? headings : []}
+                  filepathWithName={filepath + filename}
                 />
               )}
+              <SkipNavContent />
               <Body
                 themeContext={themeContext}
                 breadcrumb={
@@ -285,7 +266,7 @@ const nextraPageContext: {
   }
 } = {}
 
-function Layout(props: any) {
+function Layout(props: any): ReactElement {
   const { route } = useRouter()
   const context = nextraPageContext[route]
 

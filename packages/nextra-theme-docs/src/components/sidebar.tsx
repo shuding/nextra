@@ -17,7 +17,7 @@ import { LocaleSwitch } from './locale-switch'
 import ThemeSwitch from './theme-switch'
 import { ArrowRightIcon } from 'nextra/icons'
 import { Collapse } from './collapse'
-import renderComponent from '../utils/render-component'
+import { renderComponent } from '../utils/render'
 import { Anchor } from './anchor'
 import { DEFAULT_LOCALE } from '../constants'
 

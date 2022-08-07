@@ -20,7 +20,7 @@ export function LocaleSwitch({ options }: LocaleSwitchProps): ReactElement {
         document.cookie = `NEXT_LOCALE=${
           option.key
         }; expires=${date.toUTCString()}; path=/`
-        window.location.href = asPath
+        location.href = asPath
       }}
       selected={{
         key: selected.locale,

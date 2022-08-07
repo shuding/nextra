@@ -13,6 +13,7 @@ import { useRouter } from 'next/router'
 import { Anchor } from './anchor'
 import type { Item as NormalItem } from '../utils/normalize-pages'
 import { useConfig } from '../config'
+import { renderString } from '../utils/render'
 
 interface ItemProps {
   title: string
@@ -22,7 +23,13 @@ interface ItemProps {
   onMouseOver: MouseEventHandler
 }
 
-const Item = ({ title, active, href, onMouseOver, search }: ItemProps) => {
+const Item = ({
+  title,
+  active,
+  href,
+  onMouseOver,
+  search
+}: ItemProps): ReactElement => {
   const highlight = title.toLowerCase().indexOf(search.toLowerCase())
   return (
     <li className={cn('p-2', { active })}>
@@ -55,7 +62,6 @@ export function Search({ directories = [] }: SearchProps): ReactElement {
   const [search, setSearch] = useState('')
   const [active, setActive] = useState<number | null>(null)
   const input = useRef<HTMLInputElement | null>(null)
-  const { locale = 'en-US' } = router
   const results = useMemo<{ route: string; title: string }[]>(() => {
     if (!search) return []
 
@@ -91,7 +97,7 @@ export function Search({ directories = [] }: SearchProps): ReactElement {
         moveActiveItem(UP)
       }
 
-      if (active !== null && key === 'Enter' && results && results[active]) {
+      if (active !== null && key === 'Enter' && results[active]) {
         router.push(results[active].route)
       }
     },
@@ -114,7 +120,7 @@ export function Search({ directories = [] }: SearchProps): ReactElement {
   useEffect(() => {
     const inputs = ['input', 'select', 'button', 'textarea']
 
-    const down = (e: KeyboardEvent) => {
+    const down = (e: KeyboardEvent): void => {
       if (
         document.activeElement &&
         inputs.indexOf(document.activeElement.tagName.toLowerCase()) === -1
@@ -133,11 +139,7 @@ export function Search({ directories = [] }: SearchProps): ReactElement {
   }, [])
 
   const renderList = show && results.length > 0
-  const placeholder =
-    config.searchPlaceholder &&
-    (typeof config.searchPlaceholder === 'string'
-      ? config.searchPlaceholder
-      : config.searchPlaceholder({ locale }))
+
   return (
     <div className="nextra-search relative w-full md:w-64">
       {renderList && (
@@ -152,14 +154,14 @@ export function Search({ directories = [] }: SearchProps): ReactElement {
           }}
           className="block w-full appearance-none rounded-lg bg-black/[.03] px-3 py-2 leading-tight transition-colors hover:bg-black/5 focus:outline-none focus:ring"
           type="search"
-          placeholder={placeholder}
+          placeholder={renderString(config.searchPlaceholder)}
           onKeyDown={handleKeyDown}
           onFocus={() => setShow(true)}
           onBlur={handleOnBlur}
           ref={input}
           spellCheck={false}
         />
-        {show ? null : (
+        {!show && (
           <div className="pointer-events-none absolute inset-y-0 right-0 hidden select-none py-1.5 pr-1.5 sm:flex">
             <kbd className="inline-flex items-center rounded border bg-white px-1.5 font-mono text-sm font-medium text-gray-400 dark:border-gray-400 dark:text-gray-800">
               /
