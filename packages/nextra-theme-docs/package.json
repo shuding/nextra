@@ -9,7 +9,9 @@
     "dist",
     "style.css"
   ],
-  "sideEffects": false,
+  "sideEffects": [
+    "./src/polyfill.ts"
+  ],
   "typesVersions": {
     "*": {
       ".": [
