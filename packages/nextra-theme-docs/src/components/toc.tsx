@@ -10,6 +10,7 @@ import getHeadingText from '../utils/get-heading-text'
 import { ActiveAnchor, useActiveAnchor } from '../active-anchor'
 import { useConfig } from '../config'
 import { Anchor } from './anchor'
+import useMounted from '../utils/use-mounted'
 
 const getEditUrl = (repository?: string, filepath?: string): string => {
   const repo = parseGitUrl(repository || '')
@@ -34,15 +35,20 @@ const getCreateFeedbackUrl = (
   filepath?: string,
   labels?: string
 ): string => {
+  const mounted = useMounted()
+  if (!mounted) return '#'
+
   const repo = parseGitUrl(repository || '')
   if (!repo) throw new Error('Invalid `docsRepositoryBase` URL!')
+
+  const pageTitle = document.title
 
   switch (repo.type) {
     case 'github':
       return `https://github.com/${repo.owner}/${
         repo.name
       }/issues/new?title=${encodeURIComponent(
-        `Feedback for “${document.title}”`
+        `Feedback for “${pageTitle}”`
       )}&labels=${labels || ''}`
     case 'gitlab':
       return `https://gitlab.com/${repo.owner}/${repo.name}/-/blob/${
