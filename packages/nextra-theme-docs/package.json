@@ -63,7 +63,7 @@
     "dev:tailwind": "cross-env TAILWIND_MODE=watch pnpm postcss src/styles.css -o style.css --watch",
     "prepublishOnly": "pnpm build:all",
     "test": "vitest --run",
-    "clean": "rimraf ./dist ./style.css ./style_node_modules.css",
+    "clean": "rimraf ./dist ./style.css",
     "format": "prettier --ignore-path ../../.gitignore --write --list-different ."
   },
   "dependencies": {
