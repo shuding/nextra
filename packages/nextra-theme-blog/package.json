@@ -39,7 +39,7 @@
     "dev:layout": "tsup --watch",
     "dev:tailwind": "cross-env TAILWIND_MODE=watch pnpm postcss src/styles.css -o style.css --watch",
     "prepublishOnly": "pnpm build:all",
-    "clean": "rimraf ./dist ./style.css ./style_node_modules.css",
+    "clean": "rimraf ./dist ./style.css",
     "test": "vitest run",
     "format": "prettier --ignore-path ../../.gitignore --write --list-different ."
   },
