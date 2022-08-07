@@ -1,6 +1,10 @@
 import React from 'react'
 import { DocsThemeConfig, PageTheme } from './types'
 
+export const DEFAULT_LOCALE = 'en-US'
+
+export const IS_BROWSER = typeof window !== 'undefined'
+
 export const DEFAULT_THEME: DocsThemeConfig = {
   projectLink: 'https://github.com/shuding/nextra',
   docsRepositoryBase: 'https://github.com/shuding/nextra',
