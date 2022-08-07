@@ -68,7 +68,7 @@ export default {
   floatTOC: true,
   footer: true,
   footerEditLink: 'Edit this page on GitHub',
-  footerText: <>MIT {new Date().getFullYear()} © Nextra.</>,
+  footerText: `MIT ${new Date().getFullYear()} © Nextra.`,
   darkMode: true,
   bannerKey: 'Nextra 2',
   banner: 'Nextra 2 Alpha'

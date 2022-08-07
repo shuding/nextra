@@ -1,35 +1,28 @@
-import React, { useState, useEffect, ReactElement } from 'react'
+import React, { ReactElement } from 'react'
 import NextHead from 'next/head'
 import { useTheme } from 'next-themes'
 
-import renderComponent from '../utils/render-component'
+import { renderComponent, renderString } from '../utils/render'
 import { useConfig } from '../config'
 import { PageOpts } from 'nextra'
+import useMounted from '../utils/use-mounted'
 
 interface HeadProps {
   title: string
-  locale: string
   meta: PageOpts['meta']
 }
 
-export function Head({ title, locale, meta }: HeadProps): ReactElement {
+export function Head({ title, meta }: HeadProps): ReactElement {
   const config = useConfig()
   const { theme, systemTheme } = useTheme()
   const renderedTheme = theme === 'system' ? systemTheme : theme
-  const [mounted, setMounted] = useState(false)
-  useEffect(() => setMounted(true), [])
-
-  const suffix = renderComponent(
-    // @ts-expect-error -- Type 'string' is not assignable to type 'ReactElement<any, any>'
-    config.titleSuffix,
-    { locale, config, title, meta },
-    true
-  )
+  const mounted = useMounted()
+  const suffix = renderString(config.titleSuffix, { config, title, meta })
 
   return (
     <NextHead>
-      <title>{title + (suffix || '')}</title>
-      {renderComponent(config.head, { locale, config, title, meta })}
+      <title>{title + suffix}</title>
+      {renderComponent(config.head, { config, title, meta })}
       {config.unstable_faviconGlyph ? (
         <link
           rel="icon"
