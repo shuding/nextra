@@ -334,5 +334,7 @@ export default function withLayout(
   return Layout
 }
 
+export { useConfig }
+export { useTheme } from 'next-themes'
 export * from './types'
 export { getComponents } from './misc/theme'
