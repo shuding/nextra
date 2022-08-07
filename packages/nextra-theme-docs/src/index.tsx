@@ -9,23 +9,26 @@ import { SkipNavContent } from '@reach/skip-nav'
 import { ThemeProvider } from 'next-themes'
 import cn from 'classnames'
 
-import Head from './head'
-import Navbar from './navbar'
-import Footer, { NavLinks } from './footer'
-import { MDXTheme } from './misc/theme'
-import Sidebar from './sidebar'
-import ToC from './toc'
+import {
+  Head,
+  Navbar,
+  Footer,
+  NavLinks,
+  Sidebar,
+  TOC,
+  Breadcrumb,
+  Banner
+} from './components'
+import { MDXTheme } from './mdx-theme'
 import { ThemeConfigContext, useConfig } from './config'
-import { ActiveAnchor } from './misc/active-anchor'
+import { ActiveAnchor } from './active-anchor'
 import { DEFAULT_THEME } from './constants'
 import { getFSRoute } from './utils/get-fs-route'
 import { MenuContext } from './utils/menu-context'
 import normalizePages from './utils/normalize-pages'
 import { DocsThemeConfig, PageTheme } from './types'
 import './polyfill'
-import Breadcrumb from './breadcrumb'
 import renderComponent from './utils/render-component'
-import Banner from './components/banner'
 
 let resizeObserver: ResizeObserver
 if (typeof window !== 'undefined') {
@@ -241,7 +244,7 @@ const InnerLayout = ({
                   <div className="nextra-toc order-last hidden w-64 flex-shrink-0 px-4 text-sm xl:block" />
                 )
               ) : (
-                <ToC
+                <TOC
                   headings={config.floatTOC ? headings : null}
                   filepathWithName={filepathWithName}
                 />
@@ -335,4 +338,4 @@ export default function withLayout(
 }
 
 export * from './types'
-export { getComponents } from './misc/theme'
+export { getComponents } from './mdx-theme'

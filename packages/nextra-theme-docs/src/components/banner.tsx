@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { useRouter } from 'next/router'
 import { XIcon } from 'nextra/icons'
 import { useConfig } from '../config'
 import renderComponent from '../utils/render-component'
 
-const Banner = () => {
+export function Banner(): ReactElement {
   const { bannerKey, banner } = useConfig()
   const { locale = 'en-US' } = useRouter()
 
@@ -38,5 +38,3 @@ const Banner = () => {
     </>
   )
 }
-
-export default Banner

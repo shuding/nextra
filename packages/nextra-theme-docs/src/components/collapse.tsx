@@ -1,12 +1,12 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, ReactElement } from 'react'
 
-export default function Collapse({
+export function Collapse({
   children,
   open
 }: {
   children: React.ReactNode
   open: boolean
-}) {
+}): ReactElement {
   const containerRef = useRef<HTMLDivElement>(null)
   const innerRef = useRef<HTMLDivElement>(null)
   const animationRef = useRef<any>()

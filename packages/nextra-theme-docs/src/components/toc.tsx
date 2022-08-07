@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, ReactNode } from 'react'
+import React, { PropsWithChildren, ReactElement, ReactNode } from 'react'
 import cn from 'classnames'
 import Slugger from 'github-slugger'
 import { Heading } from 'nextra'
@@ -6,12 +6,12 @@ import parseGitUrl from 'parse-git-url'
 import { useRouter } from 'next/router'
 import scrollIntoView from 'scroll-into-view-if-needed'
 
-import renderComponent from './utils/render-component'
-import getHeadingText from './utils/get-heading-text'
-import { ActiveAnchor, useActiveAnchor } from './misc/active-anchor'
-import { useConfig } from './config'
-import useMounted from './utils/use-mounted'
-import Anchor from './components/anchor'
+import renderComponent from '../utils/render-component'
+import getHeadingText from '../utils/get-heading-text'
+import { ActiveAnchor, useActiveAnchor } from '../active-anchor'
+import { useConfig } from '../config'
+import useMounted from '../utils/use-mounted'
+import { Anchor } from './anchor'
 
 const createEditUrl = (repository?: string, filepath?: string) => {
   const repo = parseGitUrl(repository || '')
@@ -186,13 +186,13 @@ function Item({
   )
 }
 
-export default function ToC({
+export function TOC({
   headings = emptyHeader,
   filepathWithName
 }: {
   headings: Heading[] | null
   filepathWithName: string
-}) {
+}): ReactElement {
   const slugger = new Slugger()
   const activeAnchor = useActiveAnchor()
   const config = useConfig()

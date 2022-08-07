@@ -11,11 +11,11 @@ import cn from 'classnames'
 import FlexSearch from 'flexsearch'
 import { Transition } from '@headlessui/react'
 
-import { useConfig } from './config'
-import renderComponent from './utils/render-component'
-import useMenuContext from './utils/menu-context'
+import { useConfig } from '../config'
+import renderComponent from '../utils/render-component'
+import useMenuContext from '../utils/menu-context'
 import { SpinnerIcon } from 'nextra/icons'
-import Anchor from './components/anchor'
+import { Anchor } from './anchor'
 
 const Item = ({
   page,
@@ -86,7 +86,7 @@ const MemoedStringWithMatchHighlights = memo(
 // This can be global for better caching.
 const indexes = {}
 
-export default function Search() {
+export function Flexsearch() {
   const config = useConfig()
   const router = useRouter()
   const [loading, setLoading] = useState(false)

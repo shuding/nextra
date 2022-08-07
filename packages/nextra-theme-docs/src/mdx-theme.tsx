@@ -9,8 +9,7 @@ import React, {
 import 'intersection-observer'
 import { ActiveAnchor, useActiveAnchorSet } from './active-anchor'
 import { MDXProvider } from '@mdx-js/react'
-import Collapse from '../components/collapse'
-import Anchor from '../components/anchor'
+import { Collapse, Anchor } from './components'
 
 let observer: IntersectionObserver
 let setActiveAnchor: (

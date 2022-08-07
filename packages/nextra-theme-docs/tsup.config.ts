@@ -6,33 +6,28 @@ function outExtension() {
     js: `.js`
   }
 }
-const { target } = tsconfig.compilerOptions
 
 const sharedConfig = defineConfig({
   format: 'esm',
   dts: true,
   outExtension,
-  target
+  target: tsconfig.compilerOptions.target
 })
+
 export default defineConfig([
   {
-    entry: ['src/bleed.tsx', 'src/callout.tsx'],
+    entry: [
+      'src/components/bleed.tsx',
+      'src/components/callout.tsx',
+      'src/components/collapse.tsx',
+      'src/components/tabs.tsx',
+    ],
     name: 'nextra-theme-docs/components',
     ...sharedConfig
   },
   {
     name: 'nextra-theme-docs',
     entry: ['src/index.tsx'],
-    ...sharedConfig
-  },
-  {
-    name: 'nextra-theme-docs/tabs',
-    entry: ['src/components/tabs.tsx'],
-    ...sharedConfig
-  },
-  {
-    name: 'nextra-theme-docs/collapse',
-    entry: ['src/components/collapse.tsx'],
     ...sharedConfig
   }
 ])
