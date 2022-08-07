@@ -6,7 +6,7 @@ import { BlogProvider } from './blog-context'
 import { ArticleLayout } from './article-layout'
 import { PostsLayout } from './posts-layout'
 import { PageLayout } from './page-layout'
-import { DEFAULT_CONFIG } from './constants'
+import { DEFAULT_THEME } from './constants'
 import { useRouter } from 'next/router'
 
 const layoutMap = {
@@ -48,7 +48,7 @@ function Layout(props: any) {
   const context = nextraPageContext[route]
   if (!context) throw new Error(`No content found for ${route}.`)
 
-  const extendedConfig = { ...DEFAULT_CONFIG, ...context.themeConfig }
+  const extendedConfig = { ...DEFAULT_THEME, ...context.themeConfig }
 
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
