@@ -9,6 +9,7 @@
     "dist",
     "style.css"
   ],
+  "sideEffects": false,
   "typesVersions": {
     "*": {
       ".": [
