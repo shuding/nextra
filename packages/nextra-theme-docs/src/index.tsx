@@ -119,7 +119,7 @@ const Body = ({
           {navLinks}
         </article>
       ) : themeContext.layout === 'raw' ? (
-        <div className="nextra-body full expand relative overflow-x-hidden">
+        <div className="nextra-body full relative overflow-x-hidden">
           {children}
         </div>
       ) : (
@@ -225,7 +225,12 @@ const InnerLayout = ({
           />
         ) : null}
         <ActiveAnchor>
-          <div className="mx-auto flex w-full max-w-[90rem] flex-1 items-stretch">
+          <div
+            className={cn(
+              'mx-auto flex w-full flex-1 items-stretch',
+              themeContext.layout === 'raw' ? '' : 'max-w-[90rem]'
+            )}
+          >
             <div className="flex w-full flex-1">
               <Sidebar
                 docsDirectories={docsDirectories}

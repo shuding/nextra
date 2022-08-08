@@ -402,10 +402,6 @@ blockquote:not(:first-child),
 .nextra-body {
   &.full {
     width: 100%;
-    &.expand {
-      width: 100vw;
-      margin: 0 calc(50% - 50vw);
-    }
   }
 }
 article {
