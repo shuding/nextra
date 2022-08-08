@@ -4,6 +4,9 @@
   "a-page": {
     "title": "A Page",
     "type": "page",
-    "hidden": true
+    "hidden": true,
+    "theme": {
+      "layout": "raw"
+    }
   }
 }
