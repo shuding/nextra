@@ -4,25 +4,18 @@ import { useTheme } from 'next-themes'
 
 import { renderComponent, renderString } from '../utils/render'
 import { useConfig } from '../config'
-import { PageOpts } from 'nextra'
 import useMounted from '../utils/use-mounted'
 
-interface HeadProps {
-  title: string
-  meta: PageOpts['meta']
-}
-
-export function Head({ title, meta }: HeadProps): ReactElement {
+export function Head(): ReactElement {
   const config = useConfig()
   const { theme, systemTheme } = useTheme()
   const renderedTheme = theme === 'system' ? systemTheme : theme
   const mounted = useMounted()
-  const suffix = renderString(config.titleSuffix, { config, title, meta })
 
   return (
     <NextHead>
-      <title>{title + suffix}</title>
-      {renderComponent(config.head, { config, title, meta })}
+      <title>{config.title + renderString(config.titleSuffix)}</title>
+      {renderComponent(config.head)}
       {config.unstable_faviconGlyph ? (
         <link
           rel="icon"

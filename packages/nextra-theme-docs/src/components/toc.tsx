@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import React, { ReactElement, useRef, useEffect } from 'react'
 import cn from 'clsx'
 import Slugger from 'github-slugger'
 import { Heading } from 'nextra'
@@ -10,7 +10,6 @@ import getHeadingText from '../utils/get-heading-text'
 import { ActiveAnchor, useActiveAnchor } from '../active-anchor'
 import { useConfig } from '../config'
 import { Anchor } from './anchor'
-import useMounted from '../utils/use-mounted'
 
 const getEditUrl = (repository?: string, filepath?: string): string => {
   const repo = parseGitUrl(repository || '')
@@ -35,20 +34,16 @@ const getCreateFeedbackUrl = (
   filepath?: string,
   labels?: string
 ): string => {
-  const mounted = useMounted()
-  if (!mounted) return '#'
-
   const repo = parseGitUrl(repository || '')
   if (!repo) throw new Error('Invalid `docsRepositoryBase` URL!')
-
-  const pageTitle = document.title
+  const config = useConfig()
 
   switch (repo.type) {
     case 'github':
       return `https://github.com/${repo.owner}/${
         repo.name
       }/issues/new?title=${encodeURIComponent(
-        `Feedback for “${pageTitle}”`
+        `Feedback for “${config.title}”`
       )}&labels=${labels || ''}`
     case 'gitlab':
       return `https://gitlab.com/${repo.owner}/${repo.name}/-/blob/${
@@ -70,9 +65,9 @@ function Item({
 }): ReactElement {
   const text = getHeadingText(heading)
   const state = activeAnchor[slug]
-  const ref = React.useRef<HTMLLIElement>(null)
+  const ref = useRef<HTMLLIElement>(null)
 
-  React.useEffect(() => {
+  useEffect(() => {
     const el = ref.current
     const [toc] = document.getElementsByClassName('nextra-toc')
     if (state?.isActive && el && toc) {
@@ -129,9 +124,7 @@ export function TOC({
   const activeAnchor = useActiveAnchor()
   const config = useConfig()
 
-  headings = headings.filter(
-    heading => heading.type === 'heading' && heading.depth > 1
-  )
+  headings = headings.filter(h => h.type === 'heading' && h.depth > 1)
 
   const hasHeadings = headings.length > 0
   const hasMetaInfo =
