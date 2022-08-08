@@ -1,5 +1,29 @@
 # nextra-theme-docs
 
+## 2.0.0-beta.16
+
+### Patch Changes
+
+- 8bcb5e6: fix sideEffects in package.json
+- da2bea7: remove no longer used `icons` folder
+- 4825365: add `@types/github-slugger` instead of manually declaring type
+- dfbe996: extract `<Banner />` from `<Navbar />` to `components/banner.tsx`
+- a007c64: move DEFAULT_THEME and DEFAULT_PAGE_THEME to constants.tsx
+- b219821: fix body overflow
+- 48e0ac2: export `useConfig` and `useTheme`
+- da998e6: move react components to `components` folder and replace exports:
+  ```ts
+  import Callout from 'nextra-theme-docs/callout'
+  import Collapse from 'nextra-theme-docs/collapse'
+  import Bleed from 'nextra-theme-docs/bleed'
+  import { Tabs, Tab } from 'nextra-theme-docs/tabs'
+  ```
+  by
+  ```ts
+  import { Callout, Collapse, Bleed, Tabs, Tab } from 'nextra-theme-docs'
+  ```
+- 43409ad: fix: mdx theme is missing
+
 ## 2.0.0-beta.15
 
 ### Patch Changes

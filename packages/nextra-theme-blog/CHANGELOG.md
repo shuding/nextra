@@ -1,5 +1,12 @@
 # nextra-theme-blog
 
+## 2.0.0-beta.16
+
+### Patch Changes
+
+- 48e0ac2: export `useConfig` and `useTheme`
+- 43409ad: fix: mdx theme is missing
+
 ## 2.0.0-beta.15
 
 ## 2.0.0-beta.14
