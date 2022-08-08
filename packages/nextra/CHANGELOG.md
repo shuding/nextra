@@ -1,5 +1,11 @@
 # nextra
 
+## 2.0.0-beta.16
+
+### Patch Changes
+
+- 4825365: add `@types/github-slugger` instead of manually declaring type
+
 ## 2.0.0-beta.15
 
 ## 2.0.0-beta.14
