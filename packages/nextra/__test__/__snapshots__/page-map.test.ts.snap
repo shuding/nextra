@@ -20,6 +20,9 @@ exports[`Page Process > pageMap en-US 1`] = `
           "meta": {
             "a-page": {
               "hidden": true,
+              "theme": {
+                "layout": "raw",
+              },
               "title": "A Page",
               "type": "page",
             },
@@ -417,7 +420,6 @@ exports[`Page Process > pageMap en-US 1`] = `
         },
         "index": {
           "hidden": true,
-          "theme": {},
           "title": "Introduction",
           "type": "page",
         },
@@ -456,6 +458,9 @@ exports[`Page Process > pageMap zh-CN 1`] = `
           "meta": {
             "a-page": {
               "hidden": true,
+              "theme": {
+                "layout": "raw",
+              },
               "title": "A Page",
               "type": "page",
             },
