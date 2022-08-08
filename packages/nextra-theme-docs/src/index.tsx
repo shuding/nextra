@@ -145,7 +145,6 @@ const InnerLayout = ({
   filename,
   pageMap,
   meta,
-  titleText,
   headings,
   timestamp,
   children
@@ -166,7 +165,6 @@ const InnerLayout = ({
   } = useDirectoryInfo(pageMap)
 
   const filepath = route.slice(0, route.lastIndexOf('/') + 1)
-  const title = meta.title || titleText || 'Untitled'
   const isRTL = useMemo(() => {
     if (!config.i18n) return config.direction === 'rtl'
     const localeConfig = config.i18n.find(l => l.locale === locale)
@@ -186,7 +184,7 @@ const InnerLayout = ({
         defaultMenuCollapsed: !!config.defaultMenuCollapsed
       }}
     >
-      <Head title={title} meta={meta} />
+      <Head />
       <div
         className={cn('nextra-container main-container flex flex-col', {
           rtl: isRTL,
@@ -271,12 +269,14 @@ function Layout(props: any): ReactElement {
   const context = nextraPageContext[route]
 
   if (!context) throw new Error(`No content found for ${route}.`)
-
+  const { themeConfig, pageOpts, Content } = context
   const extendedConfig = {
     ...DEFAULT_THEME,
-    ...context.themeConfig,
-    unstable_flexsearch: context.pageOpts.unstable_flexsearch,
-    newNextLinkBehavior: context.pageOpts.newNextLinkBehavior
+    ...themeConfig,
+    unstable_flexsearch: pageOpts.unstable_flexsearch,
+    newNextLinkBehavior: pageOpts.newNextLinkBehavior,
+    title: pageOpts.title,
+    meta: pageOpts.meta
   }
   const nextThemes = extendedConfig.nextThemes || {}
 
@@ -289,8 +289,8 @@ function Layout(props: any): ReactElement {
         storageKey={nextThemes.storageKey}
         forcedTheme={nextThemes.forcedTheme}
       >
-        <InnerLayout {...context.pageOpts}>
-          <context.Content {...props} />
+        <InnerLayout {...pageOpts}>
+          <Content {...props} />
         </InnerLayout>
       </ThemeProvider>
     </ThemeConfigContext.Provider>

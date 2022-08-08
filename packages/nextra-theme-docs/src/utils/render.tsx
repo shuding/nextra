@@ -16,7 +16,8 @@ export function renderComponent<T>(
 
 export function renderString<T>(
   stringOrFunction?: string | ((props: WithoutLocale<T>) => string),
-  props: T = {} as any
+  // @ts-expect-error TS2322: Type '{}' is not assignable to type 'T'.
+  props: T = {}
 ): string {
   const result =
     typeof stringOrFunction === 'function'

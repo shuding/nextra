@@ -52,7 +52,7 @@ export type PageOpts = {
   route: string
   meta: GrayMatterFile<string>['data']
   pageMap: PageMapItem[]
-  titleText?: string
+  title: string
   headings: Heading[]
   hasJsxInH1?: boolean
   timestamp?: number

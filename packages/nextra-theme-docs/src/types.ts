@@ -1,4 +1,5 @@
 import { FC, ReactNode } from 'react'
+import { PageOpts } from 'nextra'
 import { ThemeProviderProps } from 'next-themes/dist/types'
 
 export interface DocsThemeConfig {
@@ -6,14 +7,8 @@ export interface DocsThemeConfig {
   github?: string
   projectLinkIcon?: ReactNode | FC
   docsRepositoryBase?: string
-  titleSuffix?:
-    | string
-    // Can't be React component, otherwise will get Warning: A title element received an array with more than 1 element as children.
-    | ((props: {
-        config: DocsThemeConfig
-        title: string
-        meta: Meta
-      }) => string)
+  // Can't be React component, otherwise will get Warning: A title element received an array with more than 1 element as children.
+  titleSuffix?: string | (() => string)
   nextLinks?: boolean
   prevLinks?: boolean
   search?: boolean
@@ -28,13 +23,7 @@ export interface DocsThemeConfig {
   footerText?: ReactNode | FC
   footerEditLink?: ReactNode | FC
   logo?: ReactNode | FC
-  head?:
-    | ReactNode
-    | FC<{
-        config: DocsThemeConfig
-        title: string
-        meta: Meta
-      }>
+  head?: ReactNode | FC
   direction?: 'ltr' | 'rtl'
   i18n?: { locale: string; text: string; direction?: string }[]
   floatTOC?: boolean
@@ -46,7 +35,7 @@ export interface DocsThemeConfig {
   searchPlaceholder?: string | (() => string)
   projectChatLink?: string
   projectChatLinkIcon?: ReactNode | FC
-  sidebarSubtitle?: ReactNode| FC<{ title: string }>
+  sidebarSubtitle?: ReactNode | FC<{ title: string }>
   banner?: ReactNode | FC
   bannerKey?: string
   gitTimestamp?: string | FC<{ timestamp: Date }>
@@ -66,3 +55,9 @@ export type PageTheme = {
 }
 
 type Meta = Record<string, any>
+
+export type Config = DocsThemeConfig &
+  Pick<
+    PageOpts,
+    'unstable_flexsearch' | 'newNextLinkBehavior' | 'title' | 'meta'
+  >
