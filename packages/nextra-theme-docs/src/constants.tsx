@@ -64,36 +64,38 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     const config = useConfig()
     const mounted = useMounted()
     const { asPath } = useRouter()
-    return mounted ? (
+    return (
       <Anchor
         href={getGitIssueUrl({
           repository: config.docsRepositoryBase,
-          title: `Found broken \`${asPath}\` link. Please fix!`,
+          title: `Found broken \`${mounted ? asPath : ''}\` link. Please fix!`,
           labels: config.notFoundLabels
         })}
         newWindow
       >
-        Submit an issue about broken "{asPath}" link
+        Submit an issue about broken link.
       </Anchor>
-    ) : null
+    )
   },
   notFoundLabels: 'bug',
   serverSideErrorLink() {
     const config = useConfig()
     const mounted = useMounted()
     const { asPath } = useRouter()
-    return mounted ? (
+    return (
       <Anchor
         href={getGitIssueUrl({
           repository: config.docsRepositoryBase,
-          title: `Got server-side error in \`${asPath}\` url. Please fix!`,
+          title: `Got server-side error in \`${
+            mounted ? asPath : ''
+          }\` url. Please fix!`,
           labels: config.serverSideErrorLabels
         })}
         newWindow
       >
-        Submit an issue about error in "{asPath}" url
+        Submit an issue about error in url.
       </Anchor>
-    ) : null
+    )
   },
   serverSideErrorLabels: 'bug'
   // direction: 'ltr',
