@@ -146,16 +146,18 @@ interface SeparatorProps {
 }
 
 function Separator({ title, topLevel }: SeparatorProps): ReactElement {
+  // since title can be empty string ''
+  const hasTitle = title !== undefined
   const { sidebarSubtitle } = useConfig()
   return (
     <li
       className={cn(
         topLevel ? 'first:mt-1' : 'first:mt-2',
-        title ? 'mt-5 mb-2' : 'my-4',
+        hasTitle ? 'mt-5 mb-2' : 'my-4',
         'break-words'
       )}
     >
-      {title ? (
+      {hasTitle ? (
         <div className="mx-2 py-1.5 text-sm font-semibold text-gray-900 no-underline dark:text-gray-100">
           {sidebarSubtitle
             ? renderComponent(sidebarSubtitle, { title })
