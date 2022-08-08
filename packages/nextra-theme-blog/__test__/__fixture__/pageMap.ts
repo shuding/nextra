@@ -62,7 +62,7 @@ export const indexOpts: BlogPageOpts = {
       route: '/tags'
     }
   ],
-  titleText: 'Nextra',
+  title: 'Nextra',
   headings: [
     {
       type: 'heading',
@@ -165,7 +165,7 @@ export const postsOpts: BlogPageOpts = {
       route: '/tags'
     }
   ],
-  titleText: 'Random Thoughts',
+  title: 'Random Thoughts',
   headings: [
     {
       type: 'heading',
@@ -271,7 +271,7 @@ export const articleOpts: BlogPageOpts = {
       route: '/tags'
     }
   ],
-  titleText: 'Notes on A Programmable Web by Aaron Swartz',
+  title: 'Notes on A Programmable Web by Aaron Swartz',
   headings: [
     {
       type: 'heading',
