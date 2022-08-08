@@ -15,14 +15,5 @@
   "blog": {
     "title": "블로그",
     "type": "page"
-  },
-  "404": {
-    "type": "page"
-  },
-  "500": {
-    "type":"page",
-    "theme": {
-      "layout": "full"
-    }
   }
 }
