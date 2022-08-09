@@ -52,12 +52,11 @@ describe('normalize-page', () => {
   it('/404 page', () => {
     const data = {
       list: [
-        { name: '404', route: '/404', locale: '' },
-        { name: 'get-started', route: '/get-started', locale: '' },
-        { name: 'index', route: '/', locale: '' },
+        { name: '404', route: '/404' },
+        { name: 'get-started', route: '/get-started' },
+        { name: 'index', route: '/' },
         {
           name: 'meta.json',
-          locale: '',
           meta: {
             '404': {
               type: 'page',
@@ -85,12 +84,11 @@ describe('normalize-page', () => {
   it('/500 page', () => {
     const data = {
       list: [
-        { name: '500', route: '/500', locale: '' },
-        { name: 'get-started', route: '/get-started', locale: '' },
-        { name: 'index', route: '/', locale: '' },
+        { name: '500', route: '/500', },
+        { name: 'get-started', route: '/get-started' },
+        { name: 'index', route: '/' },
         {
           name: 'meta.json',
-          locale: '',
           meta: {
             '500': {
               type: 'page',

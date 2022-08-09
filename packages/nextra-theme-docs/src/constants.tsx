@@ -60,43 +60,9 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     </span>
   ),
   bannerKey: 'nextra-banner',
-  notFoundLink() {
-    const config = useConfig()
-    const mounted = useMounted()
-    const { asPath } = useRouter()
-    return (
-      <Anchor
-        href={getGitIssueUrl({
-          repository: config.docsRepositoryBase,
-          title: `Found broken \`${mounted ? asPath : ''}\` link. Please fix!`,
-          labels: config.notFoundLabels
-        })}
-        newWindow
-      >
-        Submit an issue about broken link.
-      </Anchor>
-    )
-  },
+  notFoundLink: 'Submit an issue about broken link →',
   notFoundLabels: 'bug',
-  serverSideErrorLink() {
-    const config = useConfig()
-    const mounted = useMounted()
-    const { asPath } = useRouter()
-    return (
-      <Anchor
-        href={getGitIssueUrl({
-          repository: config.docsRepositoryBase,
-          title: `Got server-side error in \`${
-            mounted ? asPath : ''
-          }\` url. Please fix!`,
-          labels: config.serverSideErrorLabels
-        })}
-        newWindow
-      >
-        Submit an issue about error in url.
-      </Anchor>
-    )
-  },
+  serverSideErrorLink: 'Submit an issue about error in url →',
   serverSideErrorLabels: 'bug'
   // direction: 'ltr',
   // i18n: [{ locale: 'en-US', text: 'English', direction: 'ltr' }],

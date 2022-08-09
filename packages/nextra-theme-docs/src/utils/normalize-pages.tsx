@@ -219,12 +219,10 @@ export default function normalizePages({
         pageThemeContext: extendedPageThemeContext
       })
 
-    const { locale: pageLocale, ...fields } = a
     const getItem = (): Item => ({
-      ...fields,
+      ...a,
       type,
       title: title || (type === 'separator' ? undefined : getTitle(a.name)),
-      ...(pageLocale && { locale: pageLocale }),
       ...(hidden && { hidden }),
       ...(normalizedChildren && { children: [] })
     })
