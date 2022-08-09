@@ -54,7 +54,7 @@
     "next-themes": "^0.2.0-beta.2",
     "parse-git-url": "^1.0.1",
     "scroll-into-view-if-needed": "^2.2.29",
-    "title": "^3.4.2"
+    "title": "^3.5.1"
   },
   "peerDependencies": {
     "next": ">=9.5.3",
