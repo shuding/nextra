@@ -500,6 +500,38 @@ article {
       @apply rotate-90;
     }
   }
+
+  /* Typesettings */
+  &.nextra-body-typesetting-article {
+    font-size: 17px;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+    h1 {
+      @apply mt-6 mb-4 text-center;
+      font-size: 2.5rem;
+    }
+    h2 {
+      @apply border-none;
+    }
+    a:not(.anchor) {
+      @apply no-underline hover:underline;
+    }
+    p {
+      @apply leading-8;
+    }
+    code {
+      @apply border-none dark:bg-neutral-700;
+    }
+    pre code {
+      @apply dark:bg-transparent;
+    }
+    .subheading-anchor + a {
+      @apply no-underline hover:no-underline;
+
+      &::after {
+        display: none;
+      }
+    }
+  }
 }
 
 .nextra-toc {
