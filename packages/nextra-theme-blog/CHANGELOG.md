@@ -1,5 +1,11 @@
 # nextra-theme-blog
 
+## 2.0.0-beta.17
+
+### Patch Changes
+
+- 2217f9c: fix `Warning: Prop`href`did not match. Server: "#" Client: ...`
+
 ## 2.0.0-beta.16
 
 ### Patch Changes

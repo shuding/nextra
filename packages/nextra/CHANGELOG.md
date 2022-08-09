@@ -1,5 +1,13 @@
 # nextra
 
+## 2.0.0-beta.17
+
+### Patch Changes
+
+- 2217f9c: fix `Warning: Prop`href`did not match. Server: "#" Client: ...`
+- 2217f9c: fix `next export` command
+- 6dc4dee: fix `Unhandled Runtime Error: No content found for <route>`
+
 ## 2.0.0-beta.16
 
 ### Patch Changes
