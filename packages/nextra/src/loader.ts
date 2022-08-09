@@ -169,7 +169,7 @@ export default MDXContent`.trimStart()
     ? `import __nextra_themeConfig__ from '${slash(path.resolve(themeConfig))}'`
     : ''
   const pageOpts: Omit<PageOpts, 'title'> = {
-    filename: slash(filename),
+    filename,
     route: slash(route),
     meta,
     pageMap,
@@ -182,8 +182,7 @@ export default MDXContent`.trimStart()
 
   const pageNextRoute =
     '/' +
-    path
-      .relative(pagesDir, resourcePath)
+    slash(path.relative(pagesDir, resourcePath))
       // Remove the `mdx?` extension
       .replace(MARKDOWN_EXTENSION_REGEX, '')
       // Remove the `*/index` suffix
