@@ -57,6 +57,7 @@ describe('normalize-page', () => {
         { name: 'index', route: '/' },
         {
           name: 'meta.json',
+          route: '',
           meta: {
             '404': {
               type: 'page',
@@ -89,6 +90,7 @@ describe('normalize-page', () => {
         { name: 'index', route: '/' },
         {
           name: 'meta.json',
+          route: '',
           meta: {
             '500': {
               type: 'page',
