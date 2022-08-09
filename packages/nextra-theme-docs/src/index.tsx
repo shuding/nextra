@@ -204,7 +204,7 @@ const InnerLayout = ({
           <div
             className={cn(
               'mx-auto flex w-full flex-1 items-stretch',
-              themeContext.layout === 'raw' ? '' : 'max-w-[90rem]'
+              themeContext.layout !== 'raw' && 'max-w-[90rem]'
             )}
           >
             <div className="flex w-full flex-1">
