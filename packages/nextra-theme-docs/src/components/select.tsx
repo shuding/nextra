@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react'
-import cn from 'classnames'
+import cn from 'clsx'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon } from 'nextra/icons'
 
@@ -60,11 +60,7 @@ export function Select({
                 >
                   {option.name}
                   {option.key === selected.key ? (
-                    <span
-                      className={cn(
-                        'absolute inset-y-0 right-0 flex items-center pr-3'
-                      )}
-                    >
+                    <span className="absolute inset-y-0 right-0 flex items-center pr-3">
                       <CheckIcon />
                     </span>
                   ) : null}

@@ -45,7 +45,7 @@
     "@headlessui/react": "^1.6.5",
     "@mdx-js/react": "^2.1.2",
     "@reach/skip-nav": "^0.17.0",
-    "classnames": "^2.3.1",
+    "clsx": "^1.2.1",
     "flexsearch": "^0.7.21",
     "focus-visible": "^5.2.0",
     "github-slugger": "^1.4.0",
@@ -77,12 +77,12 @@
     "nextra": "workspace:*",
     "postcss": "^8.4.14",
     "postcss-cli": "^8.3.1",
+    "postcss-import": "^14.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tailwindcss": "^3.1.8",
     "tsup": "^6.2.1",
-    "vitest": "^0.21.0",
-    "postcss-import": "^14.1.0"
+    "vitest": "^0.21.0"
   },
   "prettier": {
     "semi": false,

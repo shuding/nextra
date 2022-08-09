@@ -7,7 +7,7 @@ import 'focus-visible'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import { SkipNavContent } from '@reach/skip-nav'
 import { ThemeProvider } from 'next-themes'
-import cn from 'classnames'
+import cn from 'clsx'
 
 import './polyfill'
 import {
@@ -23,42 +23,38 @@ import {
 import { MDXTheme } from './mdx-theme'
 import { ThemeConfigContext, useConfig } from './config'
 import { ActiveAnchor } from './active-anchor'
-import { DEFAULT_THEME } from './constants'
+import { DEFAULT_LOCALE, DEFAULT_THEME, IS_BROWSER } from './constants'
 import { getFSRoute } from './utils/get-fs-route'
 import { MenuContext } from './utils/menu-context'
 import normalizePages from './utils/normalize-pages'
 import { DocsThemeConfig, PageTheme } from './types'
-import renderComponent from './utils/render-component'
+import { renderComponent } from './utils/render'
 
 let resizeObserver: ResizeObserver
-if (typeof window !== 'undefined') {
-  resizeObserver =
-    resizeObserver! ||
-    new ResizeObserver(entries => {
-      if (window.location.hash) {
-        const node = entries[0].target.ownerDocument.querySelector(
-          window.location.hash
-        )
-
-        if (node) {
-          scrollIntoView(node)
-        }
+if (IS_BROWSER) {
+  resizeObserver ||= new ResizeObserver(entries => {
+    if (location.hash) {
+      const node = entries[0].target.ownerDocument.querySelector(location.hash)
+      if (node) {
+        scrollIntoView(node)
       }
-    })
+    }
+  })
 }
 
 function useDirectoryInfo(pageMap: PageMapItem[]) {
-  const { locale = 'en-US', defaultLocale, asPath } = useRouter()
+  const { locale = DEFAULT_LOCALE, defaultLocale, route } = useRouter()
 
   return useMemo(() => {
-    const fsPath = getFSRoute(asPath, locale)
+    // asPath can return redirected url
+    const fsPath = getFSRoute(route, locale)
     return normalizePages({
       list: pageMap,
       locale,
       defaultLocale,
       route: fsPath
     })
-  }, [pageMap, locale, defaultLocale, asPath])
+  }, [pageMap, locale, defaultLocale, route])
 }
 
 interface BodyProps {
@@ -78,7 +74,7 @@ const Body = ({
   children
 }: BodyProps): ReactElement => {
   const config = useConfig()
-  const { locale = 'en-US' } = useRouter()
+  const { locale = DEFAULT_LOCALE } = useRouter()
   const date = timestamp ? new Date(timestamp) : null
   const mainElement = useRef<HTMLElement>(null)
 
@@ -92,74 +88,57 @@ const Body = ({
     }
   }, [])
 
+  if (themeContext.layout === 'raw') {
+    return (
+      <div className="nextra-body full relative overflow-x-hidden">
+        {children}
+      </div>
+    )
+  }
+
+  const gitTimestampEl =
+    date && config.gitTimestamp ? (
+      <div className="pointer-default mt-12 mb-8 block text-right text-xs text-gray-500 dark:text-gray-400">
+        {typeof config.gitTimestamp === 'string'
+          ? `${config.gitTimestamp} ${date.toLocaleDateString(locale, {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            })}`
+          : renderComponent(config.gitTimestamp, { timestamp: date })}
+      </div>
+    ) : (
+      <div className="mt-16" />
+    )
+
+  if (themeContext.layout === 'full') {
+    return (
+      <article className="nextra-body full relative justify-center overflow-x-hidden pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
+        <MDXTheme>{children}</MDXTheme>
+        {gitTimestampEl}
+        {navLinks}
+      </article>
+    )
+  }
+
   return (
-    <>
-      <SkipNavContent />
-      {themeContext.layout === 'full' ? (
-        <article className="nextra-body full relative justify-center overflow-x-hidden pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
-          <MDXTheme>{children}</MDXTheme>
-          {date && config.gitTimestamp ? (
-            <div className="pointer-default mt-12 mb-8 block text-right text-xs text-gray-500 dark:text-gray-400">
-              {typeof config.gitTimestamp === 'string'
-                ? config.gitTimestamp +
-                  ' ' +
-                  date.toLocaleDateString(locale, {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                  })
-                : renderComponent(config.gitTimestamp, {
-                    timestamp: date,
-                    locale
-                  })}
-            </div>
-          ) : (
-            <div className="mt-16" />
-          )}
-          {navLinks}
-        </article>
-      ) : themeContext.layout === 'raw' ? (
-        <div className="nextra-body full relative overflow-x-hidden">
-          {children}
-        </div>
-      ) : (
-        <article
-          className={cn(
-            'nextra-body relative flex w-full min-w-0 max-w-full justify-center pb-8 pr-[calc(env(safe-area-inset-right)-1.5rem)]',
-            themeContext.typesetting
-              ? 'nextra-body-typesetting-' + themeContext.typesetting
-              : ''
-          )}
-        >
-          <main
-            className="z-10 w-full min-w-0 max-w-4xl px-6 pt-4 md:px-8"
-            ref={mainElement}
-          >
-            {breadcrumb}
-            <MDXTheme>{children}</MDXTheme>
-            {date && config.gitTimestamp ? (
-              <div className="pointer-default mt-12 mb-8 block text-right text-xs text-gray-500 dark:text-gray-400">
-                {typeof config.gitTimestamp === 'string'
-                  ? config.gitTimestamp +
-                    ' ' +
-                    date.toLocaleDateString(locale, {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric'
-                    })
-                  : renderComponent(config.gitTimestamp, {
-                      timestamp: date,
-                      locale
-                    })}
-              </div>
-            ) : (
-              <div className="mt-16" />
-            )}
-            {navLinks}
-          </main>
-        </article>
+    <article
+      className={cn(
+        'nextra-body relative flex w-full min-w-0 max-w-full justify-center pb-8 pr-[calc(env(safe-area-inset-right)-1.5rem)]',
+        themeContext.typesetting &&
+          `nextra-body-typesetting-${themeContext.typesetting}`
       )}
-    </>
+    >
+      <main
+        className="z-10 w-full min-w-0 max-w-4xl px-6 pt-4 md:px-8"
+        ref={mainElement}
+      >
+        {breadcrumb}
+        <MDXTheme>{children}</MDXTheme>
+        {gitTimestampEl}
+        {navLinks}
+      </main>
+    </article>
   )
 }
 
@@ -167,12 +146,11 @@ const InnerLayout = ({
   filename,
   pageMap,
   meta,
-  titleText,
   headings,
   timestamp,
   children
 }: PageOpts & { children: ReactNode }): ReactElement => {
-  const { route, locale = 'en-US' } = useRouter()
+  const { route, locale = DEFAULT_LOCALE } = useRouter()
   const config = useConfig()
 
   const {
@@ -188,8 +166,6 @@ const InnerLayout = ({
   } = useDirectoryInfo(pageMap)
 
   const filepath = route.slice(0, route.lastIndexOf('/') + 1)
-  const filepathWithName = filepath + filename
-  const title = meta.title || titleText || 'Untitled'
   const isRTL = useMemo(() => {
     if (!config.i18n) return config.direction === 'rtl'
     const localeConfig = config.i18n.find(l => l.locale === locale)
@@ -209,7 +185,7 @@ const InnerLayout = ({
         defaultMenuCollapsed: !!config.defaultMenuCollapsed
       }}
     >
-      <Head title={title} locale={locale} meta={meta} />
+      <Head />
       <div
         className={cn('nextra-container main-container flex flex-col', {
           rtl: isRTL,
@@ -228,7 +204,7 @@ const InnerLayout = ({
           <div
             className={cn(
               'mx-auto flex w-full flex-1 items-stretch',
-              themeContext.layout === 'raw' ? '' : 'max-w-[90rem]'
+              themeContext.layout !== 'raw' && 'max-w-[90rem]'
             )}
           >
             <div className="flex w-full flex-1">
@@ -250,10 +226,11 @@ const InnerLayout = ({
                 )
               ) : (
                 <TOC
-                  headings={config.floatTOC ? headings : null}
-                  filepathWithName={filepathWithName}
+                  headings={config.floatTOC ? headings : []}
+                  filepathWithName={filepath + filename}
                 />
               )}
+              <SkipNavContent />
               <Body
                 themeContext={themeContext}
                 breadcrumb={
@@ -293,17 +270,19 @@ const nextraPageContext: {
   }
 } = {}
 
-function Layout(props: any) {
+function Layout(props: any): ReactElement {
   const { route } = useRouter()
   const context = nextraPageContext[route]
 
   if (!context) throw new Error(`No content found for ${route}.`)
-
+  const { themeConfig, pageOpts, Content } = context
   const extendedConfig = {
     ...DEFAULT_THEME,
-    ...context.themeConfig,
-    unstable_flexsearch: context.pageOpts.unstable_flexsearch,
-    newNextLinkBehavior: context.pageOpts.newNextLinkBehavior
+    ...themeConfig,
+    unstable_flexsearch: pageOpts.unstable_flexsearch,
+    newNextLinkBehavior: pageOpts.newNextLinkBehavior,
+    title: pageOpts.title,
+    meta: pageOpts.meta
   }
   const nextThemes = extendedConfig.nextThemes || {}
 
@@ -316,8 +295,8 @@ function Layout(props: any) {
         storageKey={nextThemes.storageKey}
         forcedTheme={nextThemes.forcedTheme}
       >
-        <InnerLayout {...context.pageOpts}>
-          <context.Content {...props} />
+        <InnerLayout {...pageOpts}>
+          <Content {...props} />
         </InnerLayout>
       </ThemeProvider>
     </ThemeConfigContext.Provider>
@@ -346,4 +325,12 @@ export { useConfig }
 export { useTheme } from 'next-themes'
 export * from './types'
 export { getComponents } from './mdx-theme'
-export { Bleed, Callout, Collapse, Tabs, Tab } from './components'
+export {
+  Bleed,
+  Callout,
+  Collapse,
+  NotFoundPage,
+  ServerSideErrorPage,
+  Tabs,
+  Tab
+} from './components'

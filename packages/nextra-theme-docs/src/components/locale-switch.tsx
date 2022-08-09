@@ -3,13 +3,14 @@ import { useRouter } from 'next/router'
 import { Select } from './select'
 import { DocsThemeConfig } from '../types'
 import { GlobeIcon } from 'nextra/icons'
+import { DEFAULT_LOCALE } from '../constants'
 
 interface LocaleSwitchProps {
   options: NonNullable<DocsThemeConfig['i18n']>
 }
 
 export function LocaleSwitch({ options }: LocaleSwitchProps): ReactElement {
-  const { locale, asPath } = useRouter()
+  const { locale = DEFAULT_LOCALE, asPath } = useRouter()
   const selected = options.find(l => locale === l.locale)!
 
   return (
@@ -19,7 +20,7 @@ export function LocaleSwitch({ options }: LocaleSwitchProps): ReactElement {
         document.cookie = `NEXT_LOCALE=${
           option.key
         }; expires=${date.toUTCString()}; path=/`
-        window.location.href = asPath
+        location.href = asPath
       }}
       selected={{
         key: selected.locale,

@@ -39,7 +39,7 @@ function App () {
 
 ### Cache Provider
 
-Besides all the [options](/docs/options) listed, `SWRConfig` also accepts an optional `provider` function. Please refer to the [Cache](/docs/cache) section for more details.
+Besides, all the [options](/docs/options) listed, `SWRConfig` also accepts an optional `provider` function. Please refer to the [Cache](/docs/cache) section for more details.
 
 ```jsx
 <SWRConfig value={{ provider: () => new Map() }}>

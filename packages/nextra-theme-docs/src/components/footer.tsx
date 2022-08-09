@@ -1,13 +1,11 @@
 import React, { ReactElement } from 'react'
-import { useRouter } from 'next/router'
-import cn from 'classnames'
+import cn from 'clsx'
 import { useConfig } from '../config'
 import { LocaleSwitch } from './locale-switch'
 import { ThemeSwitch } from './theme-switch'
-import renderComponent from '../utils/render-component'
+import { renderComponent } from '../utils/render'
 
 export function Footer({ menu }: { menu?: boolean }): ReactElement {
-  const { locale = 'en-US' } = useRouter()
   const config = useConfig()
 
   return (
@@ -36,7 +34,7 @@ export function Footer({ menu }: { menu?: boolean }): ReactElement {
       <div className="mx-auto max-w-[90rem] py-12 pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
         <div className="flex flex-col-reverse items-center justify-between md:flex-row md:items-end">
           <span className="text-gray-600 dark:text-gray-400">
-            {renderComponent(config.footerText, { locale })}
+            {renderComponent(config.footerText)}
           </span>
           <div className="mt-6" />
         </div>

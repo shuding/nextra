@@ -67,13 +67,13 @@ export async function compileMdx(
         rehypePrettyCode,
         { ...rehypePrettyCodeOptions, ...mdxOptions.rehypePrettyCodeOptions }
       ],
-      [rehypeMdxTitle, { name: 'titleText' }],
+      [rehypeMdxTitle, { name: '__nextra_title__' }],
       attachMeta
     ].filter(Boolean)
   })
   try {
     const result = String(await compiler.process(source))
-      .replace('export const titleText =', 'const titleText =')
+      .replace('export const __nextra_title__', 'const __nextra_title__')
       .replace('export default MDXContent;', '')
 
     return {

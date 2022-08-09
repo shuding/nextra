@@ -41,7 +41,7 @@ exports[`process heading > code-h1 1`] = `
   ],
   "result": "/*@jsxRuntime automatic @jsxImportSource react*/
 import {useMDXComponents as _provideComponents} from \\"@mdx-js/react\\";
-const titleText = \\"codegen.yml\\";
+const __nextra_title__ = \\"codegen.yml\\";
 function _createMdxContent(props) {
   const _components = Object.assign({
     h1: \\"h1\\",
@@ -116,7 +116,7 @@ exports[`process heading > code-with-text-h1 1`] = `
   ],
   "result": "/*@jsxRuntime automatic @jsxImportSource react*/
 import {useMDXComponents as _provideComponents} from \\"@mdx-js/react\\";
-const titleText = \\"codegen.yml file\\";
+const __nextra_title__ = \\"codegen.yml file\\";
 function _createMdxContent(props) {
   const _components = Object.assign({
     h1: \\"h1\\",
@@ -213,7 +213,7 @@ exports[`process heading > dynamic-h1 1`] = `
   ],
   "result": "/*@jsxRuntime automatic @jsxImportSource react*/
 import {useMDXComponents as _provideComponents} from \\"@mdx-js/react\\";
-const titleText = \\"Posts Tagged with “”\\";
+const __nextra_title__ = \\"Posts Tagged with “”\\";
 import {useRouter} from 'next/router';
 export const TagName = () => {
   const {tag} = useRouter().query;
@@ -333,7 +333,7 @@ exports[`process heading > static-h1 1`] = `
   ],
   "result": "/*@jsxRuntime automatic @jsxImportSource react*/
 import {useMDXComponents as _provideComponents} from \\"@mdx-js/react\\";
-const titleText = \\"Hello World\\";
+const __nextra_title__ = \\"Hello World\\";
 function _createMdxContent(props) {
   const _components = Object.assign({
     h1: \\"h1\\"

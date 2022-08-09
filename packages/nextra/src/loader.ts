@@ -56,7 +56,7 @@ async function loader(
   source: string
 ): Promise<string> {
   const { resourcePath } = context
-  let {
+  const {
     pageImport,
     theme,
     themeConfig,
@@ -74,7 +74,6 @@ async function loader(
   if (!theme) {
     throw new Error('No Nextra theme found!')
   }
-  const themeIncludeStyles = OFFICIAL_THEMES.includes(theme)
 
   if (resourcePath.includes('/pages/api/')) {
     console.warn(
@@ -117,11 +116,14 @@ async function loader(
     },
     resourcePath
   )
+  const cssImport = OFFICIAL_THEMES.includes(theme)
+    ? `import '${theme}/style.css'`
+    : ''
 
   // Imported as a normal component, no need to add the layout.
   if (!pageImport) {
     return `
-${themeIncludeStyles ? `import '${theme}/style.css'` : ''}
+${cssImport}
 ${result}
 export default MDXContent`.trimStart()
   }
@@ -163,8 +165,10 @@ export default MDXContent`.trimStart()
   const layout =
     theme.startsWith('.') || theme.startsWith('/') ? path.resolve(theme) : theme
 
-  const layoutConfig = themeConfig ? slash(path.resolve(themeConfig)) : ''
-  const pageOpts: Omit<PageOpts, 'titleText'> = {
+  const themeConfigImport = themeConfig
+    ? `import __nextra_themeConfig__ from '${slash(path.resolve(themeConfig))}'`
+    : ''
+  const pageOpts: Omit<PageOpts, 'title'> = {
     filename: slash(filename),
     route: slash(route),
     meta,
@@ -189,10 +193,9 @@ export default MDXContent`.trimStart()
 
   return `
 import { SSGContext as __nextra_SSGContext__ } from 'nextra/ssg'
-
 import __nextra_withLayout__ from '${layout}'
-${themeIncludeStyles ? `import '${layout}/style.css'` : ''}
-${layoutConfig ? `import __nextra_layoutConfig__ from '${layoutConfig}'` : ''}
+${themeConfigImport}
+${cssImport}
 
 ${result}
 
@@ -200,25 +203,25 @@ const __nextra_pageOpts__ = ${JSON.stringify(pageOpts)}
 
 globalThis.__nextra_internal__ = {
   pageMap: __nextra_pageOpts__.pageMap,
-  route: __nextra_pageOpts__.route,
+  route: __nextra_pageOpts__.route
 }
 
-function Content(props) {
-  return (
-    <__nextra_SSGContext__.Provider value={props}>
-      <MDXContent />
-    </__nextra_SSGContext__.Provider>
-  )
-}
+const Content = props => (
+  <__nextra_SSGContext__.Provider value={props}>
+    <MDXContent />
+  </__nextra_SSGContext__.Provider>
+)
 
 export default __nextra_withLayout__(
   ${JSON.stringify(pageNextRoute)},
   Content,
   {
-    titleText: typeof titleText === 'string' ? titleText : undefined,
+    title: __nextra_pageOpts__.meta.title
+      || (typeof __nextra_title__ === 'string' && __nextra_title__)
+      || 'Untitled',
     ...__nextra_pageOpts__
   },
-  ${layoutConfig ? '__nextra_layoutConfig__' : 'null'},
+  ${themeConfigImport ? '__nextra_themeConfig__' : 'null'},
 )`.trimStart()
 }
 
