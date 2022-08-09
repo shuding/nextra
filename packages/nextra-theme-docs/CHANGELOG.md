@@ -1,5 +1,14 @@
 # nextra-theme-docs
 
+## 2.0.0-beta.17
+
+### Patch Changes
+
+- 2217f9c: fix `Warning: Prop`href`did not match. Server: "#" Client: ...`
+- 2217f9c: fix `next export` command
+- 2217f9c: replace `classnames` package with `clsx` as he's faster
+- 2217f9c: remove `locale` prop from theme config, forbid passing in `renderComponent`
+
 ## 2.0.0-beta.16
 
 ### Patch Changes
