@@ -4,6 +4,16 @@ exports[`Page Process > pageMap en-US 1`] = `
 [
   [
     {
+      "locale": "",
+      "name": "404",
+      "route": "/404",
+    },
+    {
+      "locale": "",
+      "name": "500",
+      "route": "/500",
+    },
+    {
       "children": [
         {
           "locale": "en-US",
@@ -77,6 +87,11 @@ exports[`Page Process > pageMap en-US 1`] = `
     },
     {
       "children": [
+        {
+          "locale": "en-US",
+          "name": "404-500",
+          "route": "/docs/404-500",
+        },
         {
           "children": [
             {
@@ -197,6 +212,7 @@ exports[`Page Process > pageMap en-US 1`] = `
               "title": "Advanced",
               "type": "separator",
             },
+            "404-500": "404/500 Custom Error Pages",
             "advanced": {
               "title": "Advanced",
             },
@@ -373,6 +389,15 @@ exports[`Page Process > pageMap en-US 1`] = `
     {
       "locale": "en-US",
       "meta": {
+        "404": {
+          "type": "page",
+        },
+        "500": {
+          "theme": {
+            "layout": "full",
+          },
+          "type": "page",
+        },
         "about": {
           "items": {
             "a-page": {
@@ -665,6 +690,11 @@ exports[`Page Process > pageMap zh-CN 1`] = `
         },
         {
           "locale": "en-US",
+          "name": "404-500",
+          "route": "/docs/404-500",
+        },
+        {
+          "locale": "en-US",
           "name": "advanced",
           "route": "/docs/advanced",
         },
@@ -774,6 +804,16 @@ exports[`Page Process > pageMap zh-CN 1`] = `
         },
       },
       "name": "meta.json",
+    },
+    {
+      "locale": "",
+      "name": "404",
+      "route": "/404",
+    },
+    {
+      "locale": "",
+      "name": "500",
+      "route": "/500",
     },
     {
       "frontMatter": {

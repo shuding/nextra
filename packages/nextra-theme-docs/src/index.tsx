@@ -43,17 +43,18 @@ if (IS_BROWSER) {
 }
 
 function useDirectoryInfo(pageMap: PageMapItem[]) {
-  const { locale = DEFAULT_LOCALE, defaultLocale, asPath } = useRouter()
+  const { locale = DEFAULT_LOCALE, defaultLocale, route } = useRouter()
 
   return useMemo(() => {
-    const fsPath = getFSRoute(asPath, locale)
+    // asPath can return redirected url
+    const fsPath = getFSRoute(route, locale)
     return normalizePages({
       list: pageMap,
       locale,
       defaultLocale,
       route: fsPath
     })
-  }, [pageMap, locale, defaultLocale, asPath])
+  }, [pageMap, locale, defaultLocale, route])
 }
 
 interface BodyProps {
@@ -324,4 +325,12 @@ export { useConfig }
 export { useTheme } from 'next-themes'
 export * from './types'
 export { getComponents } from './mdx-theme'
-export { Bleed, Callout, Collapse, Tabs, Tab } from './components'
+export {
+  Bleed,
+  Callout,
+  Collapse,
+  NotFoundPage,
+  ServerSideErrorPage,
+  Tabs,
+  Tab
+} from './components'

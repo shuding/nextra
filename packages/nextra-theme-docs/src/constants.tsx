@@ -1,6 +1,10 @@
 import React from 'react'
 import { DocsThemeConfig, PageTheme } from './types'
 import { useRouter } from 'next/router'
+import { Anchor } from './components'
+import { getGitIssueUrl } from './utils/get-git-issue-url'
+import useMounted from './utils/use-mounted'
+import { useConfig } from './config'
 
 export const DEFAULT_LOCALE = 'en-US'
 
@@ -46,7 +50,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     </>
   ),
   searchPlaceholder() {
-    const { locale } = useRouter();
+    const { locale } = useRouter()
     if (locale === 'zh-CN') return '搜索文档...'
     return 'Search documentation...'
   },
@@ -56,6 +60,10 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     </span>
   ),
   bannerKey: 'nextra-banner',
+  notFoundLink: 'Submit an issue about broken link →',
+  notFoundLabels: 'bug',
+  serverSideErrorLink: 'Submit an issue about error in url →',
+  serverSideErrorLabels: 'bug'
   // direction: 'ltr',
   // i18n: [{ locale: 'en-US', text: 'English', direction: 'ltr' }],
 }

@@ -149,10 +149,6 @@ blockquote:not(:first-child),
       button:focus-visible {
         @apply ring ring-primary-200;
       }
-      .active-anchor {
-        @apply font-semibold text-gray-900;
-        @apply dark:text-white;
-      }
       li.active > a,
       li.active > a:hover {
         @apply bg-primary-50 font-bold text-primary-500;

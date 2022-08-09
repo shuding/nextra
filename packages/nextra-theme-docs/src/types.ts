@@ -41,6 +41,10 @@ export interface DocsThemeConfig {
   gitTimestamp?: string | FC<{ timestamp: Date }>
   tocExtraContent?: ReactNode | FC
   unstable_searchResultEmpty?: ReactNode | FC
+  notFoundLink?: ReactNode | FC
+  notFoundLabels?: string
+  serverSideErrorLink?: ReactNode | FC
+  serverSideErrorLabels?: string
 }
 
 export type PageTheme = {

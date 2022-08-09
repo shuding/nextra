@@ -10,9 +10,11 @@ import getHeadingText from '../utils/get-heading-text'
 import { ActiveAnchor, useActiveAnchor } from '../active-anchor'
 import { useConfig } from '../config'
 import { Anchor } from './anchor'
+import { getGitIssueUrl } from '../utils/get-git-issue-url'
 
-const getEditUrl = (repository?: string, filepath?: string): string => {
-  const repo = parseGitUrl(repository || '')
+const getEditUrl = (filepath?: string): string => {
+  const config = useConfig()
+  const repo = parseGitUrl(config.docsRepositoryBase || '')
   if (!repo) throw new Error('Invalid `docsRepositoryBase` URL!')
 
   switch (repo.type) {
@@ -20,31 +22,6 @@ const getEditUrl = (repository?: string, filepath?: string): string => {
       return `https://github.com/${repo.owner}/${repo.name}/blob/${
         repo.branch || 'main'
       }/${repo.subdir || 'pages'}${filepath}`
-    case 'gitlab':
-      return `https://gitlab.com/${repo.owner}/${repo.name}/-/blob/${
-        repo.branch || 'master'
-      }/${repo.subdir || 'pages'}${filepath}`
-  }
-
-  return '#'
-}
-
-const getCreateFeedbackUrl = (
-  repository?: string,
-  filepath?: string,
-  labels?: string
-): string => {
-  const repo = parseGitUrl(repository || '')
-  if (!repo) throw new Error('Invalid `docsRepositoryBase` URL!')
-  const config = useConfig()
-
-  switch (repo.type) {
-    case 'github':
-      return `https://github.com/${repo.owner}/${
-        repo.name
-      }/issues/new?title=${encodeURIComponent(
-        `Feedback for “${config.title}”`
-      )}&labels=${labels || ''}`
     case 'gitlab':
       return `https://gitlab.com/${repo.owner}/${repo.name}/-/blob/${
         repo.branch || 'master'
@@ -164,11 +141,11 @@ export function TOC({
             {config.feedbackLink ? (
               <Anchor
                 className="mb-2 block text-xs font-medium text-gray-500 no-underline hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
-                href={getCreateFeedbackUrl(
-                  config.docsRepositoryBase,
-                  filepathWithName,
-                  config.feedbackLabels
-                )}
+                href={getGitIssueUrl({
+                  repository: config.docsRepositoryBase,
+                  title: `Feedback for “${config.title}”`,
+                  labels: config.feedbackLabels
+                })}
                 newWindow
               >
                 {renderComponent(config.feedbackLink)}
@@ -178,7 +155,7 @@ export function TOC({
             {config.footerEditLink ? (
               <Anchor
                 className="mb-2 block text-xs font-medium text-gray-500 no-underline hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
-                href={getEditUrl(config.docsRepositoryBase, filepathWithName)}
+                href={getEditUrl(filepathWithName)}
                 newWindow
               >
                 {renderComponent(config.footerEditLink)}
