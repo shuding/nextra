@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react'
-import { PageOpts } from 'nextra'
 import { ThemeProviderProps } from 'next-themes/dist/types'
+import { PageOpts } from 'nextra'
 
 export interface DocsThemeConfig {
   projectLink?: string
@@ -58,10 +58,8 @@ export type PageTheme = {
   breadcrumb: boolean
 }
 
-type Meta = Record<string, any>
-
-export type Config = DocsThemeConfig &
-  Pick<
-    PageOpts,
-    'unstable_flexsearch' | 'newNextLinkBehavior' | 'title' | 'meta'
-  >
+export type Context = {
+  Content: FC
+  pageOpts: PageOpts
+  themeConfig: DocsThemeConfig
+}

@@ -5,19 +5,21 @@ import { useRouter } from 'next/router'
 import { Heading } from 'nextra'
 import scrollIntoView from 'scroll-into-view-if-needed'
 
-import { useActiveAnchor } from '../active-anchor'
-import { getFSRoute } from '../utils/get-fs-route'
-import useMenuContext from '../utils/menu-context'
 import { Search } from './search'
 import { Flexsearch } from './flexsearch'
-import { useConfig } from '../config'
-import getHeadingText from '../utils/get-heading-text'
-import { Item, MenuItem, PageItem } from '../utils/normalize-pages'
+import { useConfig, useMenu, useActiveAnchor } from '../contexts'
+import {
+  Item,
+  MenuItem,
+  PageItem,
+  getFSRoute,
+  getHeadingText,
+  renderComponent
+} from '../utils'
 import { LocaleSwitch } from './locale-switch'
 import ThemeSwitch from './theme-switch'
 import { ArrowRightIcon } from 'nextra/icons'
 import { Collapse } from './collapse'
-import { renderComponent } from '../utils/render'
 import { Anchor } from './anchor'
 import { DEFAULT_LOCALE } from '../constants'
 
@@ -37,14 +39,13 @@ function FolderImpl({ item, anchors }: FolderProps) {
   const active = [route, route + '/'].includes(item.route + '/')
   const activeRouteInside = active || route.startsWith(item.route + '/')
 
-  const { defaultMenuCollapsed } = useMenuContext()
+  const { defaultMenuCollapsed, setMenu } = useMenu()
   const open =
     TreeState[item.route] !== undefined
       ? TreeState[item.route]
       : active || activeRouteInside || !defaultMenuCollapsed
 
   const rerender = useState({})[1]
-  const { setMenu } = useMenuContext()
 
   useEffect(() => {
     if (activeRouteInside) {
@@ -182,7 +183,7 @@ function File({ item, anchors, topLevel }: FileProps): ReactElement {
   const active = [route, route + '/'].includes(item.route + '/')
   const slugger = new Slugger()
   const activeAnchor = useActiveAnchor()
-  const { setMenu } = useMenuContext()
+  const { setMenu } = useMenu()
 
   if (item.type === 'separator') {
     return <Separator title={item.title} topLevel={topLevel} />
@@ -280,7 +281,7 @@ export function Sidebar({
   includePlaceholder
 }: SideBarProps): ReactElement {
   const config = useConfig()
-  const { menu } = useMenuContext()
+  const { menu } = useMenu()
   const anchors = useMemo(
     () =>
       headings

@@ -2,47 +2,39 @@ import React, {
   useEffect,
   useRef,
   useState,
+  cloneElement,
+  Children,
   ReactNode,
-  useContext,
   ReactElement
 } from 'react'
 import 'intersection-observer'
-import { ActiveAnchor, useActiveAnchorSet } from './active-anchor'
+import { useSetActiveAnchor, DetailsProvider, useDetails } from './contexts'
 import { MDXProvider } from '@mdx-js/react'
 import { Collapse, Anchor } from './components'
 import { IS_BROWSER } from './constants'
 
 let observer: IntersectionObserver
-let setActiveAnchor: (
-  value: ActiveAnchor | ((prevState: ActiveAnchor) => ActiveAnchor)
-) => void
+let setActiveAnchor: ReturnType<typeof useSetActiveAnchor>
 const slugs = new WeakMap()
 
 if (IS_BROWSER) {
   observer ||= new IntersectionObserver(
     entries => {
-      const headers: [string, number, boolean, boolean][] = []
-
-      for (const entry of entries) {
-        if (entry?.rootBounds && slugs.has(entry.target)) {
-          const [slug, index] = slugs.get(entry.target)
-          const aboveHalfViewport =
-            entry.boundingClientRect.y + entry.boundingClientRect.height <=
-            entry.rootBounds.y + entry.rootBounds.height
-          const insideHalfViewport = entry.intersectionRatio > 0
-
-          headers.push([slug, index, aboveHalfViewport, insideHalfViewport])
-        }
-      }
-
       setActiveAnchor(f => {
-        const ret: ActiveAnchor = { ...f }
+        const ret = { ...f }
 
-        for (const header of headers) {
-          ret[header[0]] = {
-            index: header[1],
-            aboveHalfViewport: header[2],
-            insideHalfViewport: header[3]
+        for (const entry of entries) {
+          if (entry?.rootBounds && slugs.has(entry.target)) {
+            const [slug, index] = slugs.get(entry.target)
+            const aboveHalfViewport =
+              entry.boundingClientRect.y + entry.boundingClientRect.height <=
+              entry.rootBounds.y + entry.rootBounds.height
+            const insideHalfViewport = entry.intersectionRatio > 0
+            ret[slug] = {
+              index,
+              aboveHalfViewport,
+              insideHalfViewport
+            }
           }
         }
 
@@ -93,7 +85,7 @@ const createHeaderLink = (
     children: ReactNode
     id: string
   }): ReactElement {
-    setActiveAnchor = useActiveAnchorSet()
+    setActiveAnchor = useSetActiveAnchor()
     const obRef = useRef<HTMLSpanElement>(null)
 
     useEffect(() => {
@@ -106,7 +98,7 @@ const createHeaderLink = (
         observer.disconnect()
         slugs.delete(obRef.current!)
         setActiveAnchor(f => {
-          const ret: ActiveAnchor = { ...f }
+          const ret = { ...f }
           delete ret[id]
           return ret
         })
@@ -129,30 +121,28 @@ const Table = ({ children }: { children: ReactNode }) => {
   )
 }
 
-const DetailsContext = React.createContext<any>(() => {})
-
 const findSummary = (children: ReactNode) => {
   let summary: ReactNode = null
-  let restChildren: ReactNode[] = []
+  const restChildren: ReactNode[] = []
 
-  React.Children.forEach(children, (child, index) => {
+  Children.forEach(children, (child, index) => {
     if (child && (child as ReactElement).type === Summary) {
-      summary = summary || child
+      summary ||= child
       return
     }
 
     let c = child
     if (
       !summary &&
-      typeof child === 'object' &&
       child &&
+      typeof child === 'object' &&
       (child as ReactElement).type !== Details &&
       'props' in child &&
       child.props
     ) {
       const result = findSummary(child.props.children)
-      summary = summary || result[0]
-      c = React.cloneElement(child, {
+      summary = result[0]
+      c = cloneElement(child, {
         ...child.props,
         children: result[1]?.length ? result[1] : undefined,
         key: index
@@ -178,9 +168,7 @@ const Details = ({
 
   return (
     <details {...props} ref={ref} open {...(openState && { 'data-open': '' })}>
-      <DetailsContext.Provider value={setOpen}>
-        {summary}
-      </DetailsContext.Provider>
+      <DetailsProvider value={setOpen}>{summary}</DetailsProvider>
       <Collapse open={openState}>{restChildren}</Collapse>
     </details>
   )
@@ -192,13 +180,13 @@ const Summary = ({
 }: {
   children: ReactNode
 }): ReactElement => {
-  const setOpen = useContext(DetailsContext)
+  const setOpen = useDetails()
   return (
     <summary
       {...props}
       onClick={e => {
         e.preventDefault()
-        setOpen((v: boolean) => !v)
+        setOpen(v => !v)
       }}
     >
       {children}

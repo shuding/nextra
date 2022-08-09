@@ -4,15 +4,11 @@ import { useRouter } from 'next/router'
 import { Menu, Transition } from '@headlessui/react'
 import { ArrowRightIcon } from 'nextra/icons'
 
-import { renderComponent } from '../utils/render'
-import { getFSRoute } from '../utils/get-fs-route'
-import useMenuContext from '../utils/menu-context'
-
-import { useConfig } from '../config'
+import { useConfig, useMenu } from '../contexts'
 import { Search } from './search'
 import { Flexsearch } from './flexsearch'
 import { GitHubIcon, DiscordIcon, MenuIcon } from 'nextra/icons'
-import { Item, PageItem, MenuItem } from '../utils/normalize-pages'
+import { Item, PageItem, MenuItem, renderComponent, getFSRoute } from '../utils'
 import { Anchor } from './anchor'
 import { DEFAULT_LOCALE } from '../constants'
 
@@ -79,7 +75,7 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
   const config = useConfig()
   const { locale = DEFAULT_LOCALE, asPath } = useRouter()
   const activeRoute = getFSRoute(asPath, locale)
-  const { menu, setMenu } = useMenuContext()
+  const { menu, setMenu } = useMenu()
 
   return (
     <div className="nextra-nav-container sticky top-0 z-20 w-full bg-transparent">

@@ -12,9 +12,8 @@ import cn from 'clsx'
 import { useRouter } from 'next/router'
 import { Anchor } from './anchor'
 import { Input } from './input'
-import type { Item as NormalItem } from '../utils/normalize-pages'
-import { useConfig } from '../config'
-import { renderString } from '../utils/render'
+import { useConfig } from '../contexts'
+import { renderString, Item as NormalItem } from '../utils'
 
 interface ItemProps {
   title: string

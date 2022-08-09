@@ -11,9 +11,8 @@ import cn from 'clsx'
 import FlexSearch from 'flexsearch'
 import { Transition } from '@headlessui/react'
 
-import { useConfig } from '../config'
-import { renderComponent, renderString } from '../utils/render'
-import useMenuContext from '../utils/menu-context'
+import { useConfig, useMenu } from '../contexts'
+import { renderComponent, renderString } from '../utils'
 import { SpinnerIcon } from 'nextra/icons'
 import { Anchor } from './anchor'
 import { Input } from './input'
@@ -62,7 +61,7 @@ export function Flexsearch() {
   const [active, setActive] = useState(0)
   const [results, setResults] = useState([])
   const input = useRef(null)
-  const { setMenu } = useMenuContext()
+  const { setMenu } = useMenu()
 
   const finishSearch = () => {
     if (input.current) {

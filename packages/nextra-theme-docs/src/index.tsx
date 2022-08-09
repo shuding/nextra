@@ -1,12 +1,11 @@
 import type { PageMapItem, PageOpts } from 'nextra'
 import type { FC, ReactElement, ReactNode } from 'react'
 
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef } from 'react'
 import { useRouter } from 'next/router'
 import 'focus-visible'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import { SkipNavContent } from '@reach/skip-nav'
-import { ThemeProvider } from 'next-themes'
 import cn from 'clsx'
 
 import './polyfill'
@@ -21,14 +20,15 @@ import {
   Banner
 } from './components'
 import { MDXTheme } from './mdx-theme'
-import { ThemeConfigContext, useConfig } from './config'
-import { ActiveAnchor } from './active-anchor'
-import { DEFAULT_LOCALE, DEFAULT_THEME, IS_BROWSER } from './constants'
-import { getFSRoute } from './utils/get-fs-route'
-import { MenuContext } from './utils/menu-context'
-import normalizePages from './utils/normalize-pages'
-import { DocsThemeConfig, PageTheme } from './types'
-import { renderComponent } from './utils/render'
+import {
+  ActiveAnchorProvider,
+  ConfigProvider,
+  useConfig,
+  useMenu
+} from './contexts'
+import { DEFAULT_LOCALE, IS_BROWSER } from './constants'
+import { getFSRoute, normalizePages, renderComponent } from './utils'
+import { Context, DocsThemeConfig, PageTheme } from './types'
 
 let resizeObserver: ResizeObserver
 if (IS_BROWSER) {
@@ -152,7 +152,7 @@ const InnerLayout = ({
 }: PageOpts & { children: ReactNode }): ReactElement => {
   const { route, locale = DEFAULT_LOCALE } = useRouter()
   const config = useConfig()
-
+  const { menu } = useMenu()
   const {
     activeType,
     activeIndex,
@@ -172,134 +172,102 @@ const InnerLayout = ({
     return localeConfig && localeConfig.direction === 'rtl'
   }, [config.i18n, locale])
 
-  const [menu, setMenu] = useState(false)
   const themeContext = { ...activeThemeContext, ...meta }
 
   const hideSidebar = !themeContext.sidebar || themeContext.layout === 'raw'
   const hideToc = !themeContext.toc || themeContext.layout === 'raw'
+  const asPopover = activeType === 'page' || hideSidebar
   return (
-    <MenuContext.Provider
-      value={{
-        menu,
-        setMenu,
-        defaultMenuCollapsed: !!config.defaultMenuCollapsed
-      }}
+    <div
+      className={cn('nextra-container main-container flex flex-col', {
+        rtl: isRTL,
+        'menu-active': menu
+      })}
     >
       <Head />
+      <Banner />
+      {themeContext.navbar ? (
+        <Navbar
+          isRTL={isRTL}
+          flatDirectories={flatDirectories}
+          items={topLevelNavbarItems}
+        />
+      ) : null}
       <div
-        className={cn('nextra-container main-container flex flex-col', {
-          rtl: isRTL,
-          'menu-active': menu
-        })}
+        className={cn(
+          'mx-auto flex w-full flex-1 items-stretch',
+          themeContext.layout !== 'raw' && 'max-w-[90rem]'
+        )}
       >
-        <Banner />
-        {themeContext.navbar ? (
-          <Navbar
-            isRTL={isRTL}
-            flatDirectories={flatDirectories}
-            items={topLevelNavbarItems}
-          />
-        ) : null}
-        <ActiveAnchor>
-          <div
-            className={cn(
-              'mx-auto flex w-full flex-1 items-stretch',
-              themeContext.layout !== 'raw' && 'max-w-[90rem]'
-            )}
-          >
-            <div className="flex w-full flex-1">
-              <Sidebar
-                docsDirectories={docsDirectories}
-                flatDirectories={flatDirectories}
-                fullDirectories={directories}
-                headings={headings}
-                isRTL={isRTL}
-                asPopover={activeType === 'page' || hideSidebar}
-                includePlaceholder={themeContext.layout === 'default'}
+        <div className="flex w-full flex-1">
+          <ActiveAnchorProvider>
+            <Sidebar
+              docsDirectories={docsDirectories}
+              flatDirectories={flatDirectories}
+              fullDirectories={directories}
+              headings={headings}
+              isRTL={isRTL}
+              asPopover={asPopover}
+              includePlaceholder={themeContext.layout === 'default'}
+            />
+            {activeType === 'page' ||
+            hideToc ||
+            themeContext.layout !== 'default' ? (
+              themeContext.layout === 'full' ||
+              themeContext.layout === 'raw' ? null : (
+                <div className="nextra-toc order-last hidden w-64 flex-shrink-0 px-4 text-sm xl:block" />
+              )
+            ) : (
+              <TOC
+                headings={config.floatTOC ? headings : []}
+                filepathWithName={filepath + filename}
               />
-              {activeType === 'page' ||
-              hideToc ||
-              themeContext.layout !== 'default' ? (
-                themeContext.layout === 'full' ||
-                themeContext.layout === 'raw' ? null : (
-                  <div className="nextra-toc order-last hidden w-64 flex-shrink-0 px-4 text-sm xl:block" />
-                )
-              ) : (
-                <TOC
-                  headings={config.floatTOC ? headings : []}
-                  filepathWithName={filepath + filename}
-                />
-              )}
-              <SkipNavContent />
-              <Body
-                themeContext={themeContext}
-                breadcrumb={
-                  activeType !== 'page' && themeContext.breadcrumb ? (
-                    <Breadcrumb activePath={activePath} />
-                  ) : null
-                }
-                navLinks={
-                  activeType !== 'page' && themeContext.pagination ? (
-                    <NavLinks
-                      flatDirectories={flatDocsDirectories}
-                      currentIndex={activeIndex}
-                      isRTL={isRTL}
-                    />
-                  ) : null
-                }
-                timestamp={timestamp}
-              >
-                {children}
-              </Body>
-            </div>
-          </div>
-        </ActiveAnchor>
-        {themeContext.footer && config.footer ? (
-          <Footer menu={activeType === 'page' || hideSidebar} />
-        ) : null}
+            )}
+            <SkipNavContent />
+            <Body
+              themeContext={themeContext}
+              breadcrumb={
+                activeType !== 'page' && themeContext.breadcrumb ? (
+                  <Breadcrumb activePath={activePath} />
+                ) : null
+              }
+              navLinks={
+                activeType !== 'page' && themeContext.pagination ? (
+                  <NavLinks
+                    flatDirectories={flatDocsDirectories}
+                    currentIndex={activeIndex}
+                    isRTL={isRTL}
+                  />
+                ) : null
+              }
+              timestamp={timestamp}
+            >
+              {children}
+            </Body>
+          </ActiveAnchorProvider>
+        </div>
       </div>
-    </MenuContext.Provider>
+      {themeContext.footer && config.footer ? (
+        <Footer menu={asPopover} />
+      ) : null}
+    </div>
   )
 }
 
-const nextraPageContext: {
-  [key: string]: {
-    Content: FC
-    pageOpts: PageOpts
-    themeConfig: DocsThemeConfig
-  }
-} = {}
+const nextraPageContext: Record<string, Context> = {}
 
 function Layout(props: any): ReactElement {
   const { route } = useRouter()
   const context = nextraPageContext[route]
 
   if (!context) throw new Error(`No content found for ${route}.`)
-  const { themeConfig, pageOpts, Content } = context
-  const extendedConfig = {
-    ...DEFAULT_THEME,
-    ...themeConfig,
-    unstable_flexsearch: pageOpts.unstable_flexsearch,
-    newNextLinkBehavior: pageOpts.newNextLinkBehavior,
-    title: pageOpts.title,
-    meta: pageOpts.meta
-  }
-  const nextThemes = extendedConfig.nextThemes || {}
-
+  const { pageOpts, Content } = context
   return (
-    <ThemeConfigContext.Provider value={extendedConfig}>
-      <ThemeProvider
-        attribute="class"
-        disableTransitionOnChange
-        defaultTheme={nextThemes.defaultTheme}
-        storageKey={nextThemes.storageKey}
-        forcedTheme={nextThemes.forcedTheme}
-      >
-        <InnerLayout {...pageOpts}>
-          <Content {...props} />
-        </InnerLayout>
-      </ThemeProvider>
-    </ThemeConfigContext.Provider>
+    <ConfigProvider value={context}>
+      <InnerLayout {...pageOpts}>
+        <Content {...props} />
+      </InnerLayout>
+    </ConfigProvider>
   )
 }
 

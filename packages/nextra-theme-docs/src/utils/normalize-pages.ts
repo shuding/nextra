@@ -21,6 +21,7 @@ export interface Item extends Omit<PageMapItem, 'children'> {
   hidden?: boolean
   withIndexPage?: boolean
 }
+
 export interface PageItem extends Omit<PageMapItem, 'children'> {
   title: string
   type: string
@@ -31,6 +32,7 @@ export interface PageItem extends Omit<PageMapItem, 'children'> {
   hidden?: boolean
   withIndexPage?: boolean
 }
+
 export interface MenuItem extends Omit<PageMapItem, 'children'> {
   title: string
   type: 'menu'
@@ -45,7 +47,8 @@ export interface MenuItem extends Omit<PageMapItem, 'children'> {
     }
   >
 }
-export interface DocsItem extends Omit<PageMapItem, 'children'> {
+
+interface DocsItem extends Omit<PageMapItem, 'children'> {
   title: string
   type: string
   children?: DocsItem[]
@@ -65,7 +68,7 @@ function findFirstRoute(items: DocsItem[]): string | undefined {
 
 const CUSTOM_ERROR_PAGES = ['/404', '/500']
 
-export default function normalizePages({
+export function normalizePages({
   list,
   locale,
   defaultLocale,
