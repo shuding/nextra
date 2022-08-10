@@ -352,15 +352,6 @@ blockquote:not(:first-child),
     @apply border-current dark:!border-current;
   }
   .nextra-search {
-    input {
-      box-shadow: 0 0 0 1px !important;
-    }
-    input::placeholder {
-      @apply !text-gray-600 dark:!text-gray-400;
-    }
-    kbd {
-      @apply border-gray-900 text-gray-900 dark:border-gray-100 dark:text-gray-100;
-    }
     ul {
       @apply border border-gray-900 dark:border-gray-50;
       div.nextra-search-section {
@@ -521,15 +512,6 @@ article {
 
 /* Search */
 .nextra-search {
-  input {
-    @apply bg-black/[.03] md:text-sm text-base text-gray-900;
-    @apply dark:bg-gray-50/10 dark:text-gray-300;
-    @apply dark:border-gray-800;
-  }
-  input::placeholder {
-    @apply text-gray-400;
-    @apply dark:text-gray-500;
-  }
   &.nextra-flexsearch ul {
     @apply left-0 overflow-auto md:-left-80 md:right-0;
     min-height: 100px;
@@ -607,13 +589,6 @@ article {
   }
 }
 
-.search-overlay {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
 input[type='search']::-webkit-search-decoration,
 input[type='search']::-webkit-search-cancel-button,
 input[type='search']::-webkit-search-results-button,

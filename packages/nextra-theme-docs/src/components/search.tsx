@@ -11,6 +11,7 @@ import matchSorter from 'match-sorter'
 import cn from 'clsx'
 import { useRouter } from 'next/router'
 import { Anchor } from './anchor'
+import { Input } from './input'
 import type { Item as NormalItem } from '../utils/normalize-pages'
 import { useConfig } from '../config'
 import { renderString } from '../utils/render'
@@ -143,46 +144,35 @@ export function Search({ directories = [] }: SearchProps): ReactElement {
   return (
     <div className="nextra-search relative w-full md:w-64">
       {renderList && (
-        <div className="search-overlay z-10" onClick={() => setShow(false)} />
+        <div className="fixed inset-0 z-10" onClick={() => setShow(false)} />
       )}
 
-      <div className="relative flex items-center">
-        <input
-          onChange={e => {
-            setSearch(e.target.value)
-            setShow(true)
-          }}
-          className="block w-full appearance-none rounded-lg bg-black/[.03] px-3 py-2 leading-tight transition-colors hover:bg-black/5 focus:outline-none focus:ring"
-          type="search"
-          placeholder={renderString(config.searchPlaceholder)}
-          onKeyDown={handleKeyDown}
-          onFocus={() => setShow(true)}
-          onBlur={handleOnBlur}
-          ref={input}
-          spellCheck={false}
-        />
-        {!show && (
-          <div className="pointer-events-none absolute inset-y-0 right-0 hidden select-none py-1.5 pr-1.5 sm:flex">
-            <kbd className="inline-flex items-center rounded border bg-white px-1.5 font-mono text-sm font-medium text-gray-400 dark:border-gray-400 dark:text-gray-800">
-              /
-            </kbd>
-          </div>
-        )}
-      </div>
+      <Input
+        show={show}
+        onChange={e => {
+          setSearch(e.target.value)
+          setShow(true)
+        }}
+        type="search"
+        placeholder={renderString(config.searchPlaceholder)}
+        onKeyDown={handleKeyDown}
+        onFocus={() => setShow(true)}
+        onBlur={handleOnBlur}
+        ref={input}
+      />
+
       {renderList && (
         <ul className="top-100 absolute left-0 z-20 m-0 mt-1 w-full list-none divide-y rounded border p-0 py-2.5 shadow-md md:right-0 md:w-auto">
-          {results.map((res, i) => {
-            return (
-              <Item
-                key={`search-item-${i}`}
-                title={res.title}
-                href={res.route}
-                active={i === active}
-                search={search}
-                onMouseOver={() => setActive(i)}
-              />
-            )
-          })}
+          {results.map((res, i) => (
+            <Item
+              key={`search-item-${i}`}
+              title={res.title}
+              href={res.route}
+              active={i === active}
+              search={search}
+              onMouseOver={() => setActive(i)}
+            />
+          ))}
         </ul>
       )}
     </div>
