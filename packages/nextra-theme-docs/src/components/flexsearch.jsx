@@ -16,6 +16,7 @@ import { renderComponent, renderString } from '../utils/render'
 import useMenuContext from '../utils/menu-context'
 import { SpinnerIcon } from 'nextra/icons'
 import { Anchor } from './anchor'
+import { Input } from './input'
 import { DEFAULT_LOCALE } from '../constants'
 
 const MemoedStringWithMatchHighlights = memo(
@@ -331,33 +332,25 @@ export function Flexsearch() {
   return (
     <div className="nextra-search nextra-flexsearch relative w-full md:w-64">
       {renderList && (
-        <div className="search-overlay z-10" onClick={() => setShow(false)} />
+        <div className="fixed inset-0 z-10" onClick={() => setShow(false)} />
       )}
-      <div className="relative flex items-center">
-        <input
-          onChange={e => {
-            setSearch(e.target.value)
-            setShow(true)
-          }}
-          className="block w-full appearance-none rounded-lg px-3 py-2 leading-tight transition-colors focus:bg-white focus:outline-none focus:ring-1 focus:ring-gray-200 dark:focus:bg-dark dark:focus:ring-gray-100/20"
-          type="search"
-          placeholder={renderString(config.searchPlaceholder)}
-          onKeyDown={handleKeyDown}
-          onFocus={() => {
-            load()
-            setShow(true)
-          }}
-          ref={input}
-          spellCheck={false}
-        />
-        {!renderList && (
-          <div className="pointer-events-none absolute inset-y-0 right-0 hidden select-none py-1.5 pr-1.5 sm:flex">
-            <kbd className="inline-flex items-center rounded border bg-white px-1.5 font-mono text-sm font-medium text-gray-400 dark:border-gray-100/20 dark:bg-dark/50 dark:text-gray-500">
-              /
-            </kbd>
-          </div>
-        )}
-      </div>
+
+      <Input
+        onChange={e => {
+          setSearch(e.target.value)
+          setShow(true)
+        }}
+        type="search"
+        placeholder={renderString(config.searchPlaceholder)}
+        onKeyDown={handleKeyDown}
+        onFocus={() => {
+          load()
+          setShow(true)
+        }}
+        ref={input}
+        show={renderList}
+      />
+
       <Transition
         show={renderList}
         as={React.Fragment}
