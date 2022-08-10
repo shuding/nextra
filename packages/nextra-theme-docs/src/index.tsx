@@ -125,7 +125,15 @@ const Body = ({
   }
 
   return (
-    <article className="nextra-body relative flex w-full min-w-0 max-w-full justify-center pb-8 pr-[calc(env(safe-area-inset-right)-1.5rem)]">
+    <article
+      className={cn(
+        'nextra-body relative flex w-full min-w-0 max-w-full justify-center pb-8 pr-[calc(env(safe-area-inset-right)-1.5rem)]',
+        {
+          default: '',
+          article: 'nextra-body-typesetting-article'
+        }[themeContext.typesetting]
+      )}
+    >
       <main
         className="z-10 w-full min-w-0 max-w-4xl px-6 pt-4 md:px-8"
         ref={mainElement}
