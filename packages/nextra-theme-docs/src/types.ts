@@ -56,6 +56,7 @@ export type PageTheme = {
   layout: 'default' | 'full' | 'raw'
   typesetting: 'default' | 'article'
   breadcrumb: boolean
+  timestamp: boolean
 }
 
 type Meta = Record<string, any>

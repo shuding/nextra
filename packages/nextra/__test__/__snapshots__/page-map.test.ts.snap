@@ -390,11 +390,15 @@ exports[`Page Process > pageMap en-US 1`] = `
       "locale": "en-US",
       "meta": {
         "404": {
+          "theme": {
+            "timestamp": false,
+          },
           "type": "page",
         },
         "500": {
           "theme": {
             "layout": "full",
+            "timestamp": false,
           },
           "type": "page",
         },
