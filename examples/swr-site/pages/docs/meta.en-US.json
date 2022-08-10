@@ -41,5 +41,11 @@
     "newWindow": true
   },
   "scroll-with-dynamic-height": "Scroll With Dynamic Height",
-  "404-500": "404/500 Custom Error Pages"
+  "404-500": "404/500 Custom Error Pages",
+  "raw-layout": {
+    "title": "Raw Layout",
+    "theme": {
+      "layout": "raw"
+    }
+  }
 }

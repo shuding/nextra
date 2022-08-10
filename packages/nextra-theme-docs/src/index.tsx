@@ -89,8 +89,8 @@ const Body = ({
 
   if (themeContext.layout === 'raw') {
     return (
-      <div className="nextra-body full relative overflow-x-hidden">
-        {children}
+      <div className="nextra-body w-full relative overflow-x-hidden">
+        <MDXTheme isRaw>{children}</MDXTheme>
       </div>
     )
   }
@@ -116,7 +116,7 @@ const Body = ({
 
   if (themeContext.layout === 'full') {
     return (
-      <article className="nextra-body full relative justify-center overflow-x-hidden pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
+      <article className="nextra-body w-full relative justify-center overflow-x-hidden pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
         <MDXTheme>{children}</MDXTheme>
         {gitTimestampEl}
         {navLinks}
@@ -125,13 +125,7 @@ const Body = ({
   }
 
   return (
-    <article
-      className={cn(
-        'nextra-body relative flex w-full min-w-0 max-w-full justify-center pb-8 pr-[calc(env(safe-area-inset-right)-1.5rem)]',
-        themeContext.typesetting &&
-          `nextra-body-typesetting-${themeContext.typesetting}`
-      )}
-    >
+    <article className="nextra-body relative flex w-full min-w-0 max-w-full justify-center pb-8 pr-[calc(env(safe-area-inset-right)-1.5rem)]">
       <main
         className="z-10 w-full min-w-0 max-w-4xl px-6 pt-4 md:px-8"
         ref={mainElement}

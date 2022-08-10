@@ -13,16 +13,12 @@
 }
 
 html {
-  @apply antialiased;
-  font-size: 16px;
+  @apply antialiased text-base;
   font-feature-settings: 'rlig' 1, 'calt' 1, 'ss01' 1, 'ss06' 1;
   -webkit-tap-highlight-color: transparent;
 }
 body {
-  @apply w-full bg-white;
-}
-.dark body {
-  @apply bg-dark text-gray-100;
+  @apply w-full bg-white dark:bg-dark dark:text-gray-100;
 }
 
 a {
@@ -32,15 +28,6 @@ a {
 }
 p {
   @apply leading-7;
-}
-p:not(:first-child),
-blockquote:not(:first-child),
-.table-container:not(:first-child) {
-  @apply mt-6;
-}
-
-.main-container {
-  min-height: 100vh;
 }
 
 .nextra-container {
@@ -386,109 +373,18 @@ blockquote:not(:first-child),
 }
 
 /* Content Typography */
-.nextra-body {
-  &.full {
-    width: 100%;
-  }
-}
 article {
   min-height: calc(100vh - 64px);
-  h1 {
-    @apply mt-2 text-4xl font-bold tracking-tight;
-  }
-  h2 {
-    @apply mt-10 text-3xl font-semibold tracking-tight;
-    @apply border-b pb-1;
-    .dark & {
-      @apply border-primary-100/10;
-    }
-  }
-  h3 {
-    @apply mt-8 text-2xl font-semibold tracking-tight;
-  }
-  h4 {
-    @apply mt-8 text-xl font-semibold tracking-tight;
-  }
-  h5 {
-    @apply mt-8 text-lg font-semibold tracking-tight;
-  }
-  h6 {
-    @apply mt-8 text-base font-semibold tracking-tight;
-  }
-  ul {
-    @apply ml-6 mt-6 list-disc;
-    &:first-child {
-      @apply mt-0;
-    }
-  }
-  li {
-    @apply my-2;
-  }
-  ol {
-    @apply ml-6 mt-6 list-decimal;
-  }
-  blockquote {
-    @apply border-l-2 border-gray-300 pl-6 italic text-gray-700;
-    @apply dark:border-gray-700 dark:text-gray-400;
-  }
-  h2 a {
-    @apply no-underline;
-  }
-  a {
-    @apply ring-primary-500/30 focus:outline-none focus-visible:ring;
-  }
-  hr {
-    @apply my-8;
-    .dark & {
-      @apply border-gray-900;
-    }
-  }
-  details {
-    @apply my-4 rounded border border-gray-200 bg-white p-2 shadow-sm;
-    .dark & {
-      @apply border-neutral-800 bg-neutral-900;
-    }
-    &:first-child {
-      @apply mt-0;
-    }
-    &:last-child {
-      @apply mb-0;
-    }
-    .nextra-collapse-content {
-      @apply p-2;
-    }
-  }
-  summary {
-    @apply cursor-pointer rounded p-1 outline-none transition-colors;
-    &:hover {
-      @apply bg-gray-100;
-    }
-    .dark &:hover {
-      @apply bg-neutral-800;
-    }
-    &::-webkit-details-marker {
-      display: none;
-    }
-  }
   details > summary {
-    list-style-type: none;
+    &::-webkit-details-marker {
+      @apply hidden;
+    }
     &::before {
-      content: '';
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'%3E%3Cpath fill-rule='evenodd' d='M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z' clip-rule='evenodd' /%3E%3C/svg%3E");
       height: 1.2em;
       width: 1.2em;
       margin-right: 0.125em;
       vertical-align: -4px;
-      @apply inline-block transition-transform;
-    }
-    .dark &::before {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='white'%3E%3Cpath fill-rule='evenodd' d='M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z' clip-rule='evenodd' /%3E%3C/svg%3E");
-    }
-  }
-  details[data-open] > summary {
-    list-style-type: none;
-    &::before {
-      @apply rotate-90;
     }
   }
 
@@ -652,42 +548,6 @@ input[type='search']::-webkit-search-results-decoration {
 .locale-switch .locale-dropdown {
   position: absolute;
   z-index: 11;
-}
-
-/* Table */
-table {
-  @apply mt-2 p-0;
-  &:first-child {
-    @apply mt-0;
-  }
-}
-table tr {
-  @apply m-0 border-t border-gray-300 p-0;
-  @apply dark:border-gray-600;
-}
-table tr:nth-child(2n) {
-  @apply bg-gray-100;
-  @apply dark:bg-gray-600/20;
-}
-table tr th {
-  @apply font-semibold;
-}
-table tr th[align='center'],
-table tr td[align='center'] {
-  @apply text-center;
-}
-table tr th[align='right'],
-table tr td[align='right'] {
-  @apply text-right;
-}
-table tr th,
-table tr td {
-  @apply text-left;
-  @apply m-0 border border-gray-300 px-4 py-2;
-  @apply dark:border-gray-600;
-}
-.table-container {
-  overflow: auto;
 }
 
 .contains-task-list {
