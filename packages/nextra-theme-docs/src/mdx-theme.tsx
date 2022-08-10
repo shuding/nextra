@@ -281,31 +281,17 @@ export const getComponents = () => {
         {children}
       </tr>
     ),
-    th: ({ children, align, ...props }: ComponentProps<'th'>) => (
+    th: ({ children, ...props }: ComponentProps<'th'>) => (
       <th
-        className={cn(
-          'text-left m-0 border border-gray-300 px-4 py-2 dark:border-gray-600 font-semibold',
-          {
-            center: 'text-center',
-            right: 'text-right'
-          }[align as 'center' | 'right']
-        )}
-        align={align}
+        className="m-0 border border-gray-300 px-4 py-2 dark:border-gray-600 font-semibold"
         {...props}
       >
         {children}
       </th>
     ),
-    td: ({ children, align, ...props }: ComponentProps<'td'>) => (
+    td: ({ children, ...props }: ComponentProps<'td'>) => (
       <td
-        className={cn(
-          'text-left m-0 border border-gray-300 px-4 py-2 dark:border-gray-600',
-          {
-            center: 'text-center',
-            right: 'text-right'
-          }[align as 'center' | 'right']
-        )}
-        align={align}
+        className="m-0 border border-gray-300 px-4 py-2 dark:border-gray-600"
         {...props}
       >
         {children}
