@@ -76,5 +76,6 @@ export const DEFAULT_PAGE_THEME: PageTheme = {
   footer: true,
   layout: 'default',
   typesetting: 'default',
-  breadcrumb: true
+  breadcrumb: true,
+  timestamp: true
 }

@@ -56,11 +56,15 @@
     "newWindow": true
   },
   "404": {
-    "type": "page"
+    "type": "page",
+    "theme": {
+      "timestamp": false
+    }
   },
   "500": {
     "type":"page",
     "theme": {
+      "timestamp": false,
       "layout": "full"
     }
   }

@@ -75,7 +75,6 @@ const Body = ({
 }: BodyProps): ReactElement => {
   const config = useConfig()
   const { locale = DEFAULT_LOCALE } = useRouter()
-  const date = timestamp ? new Date(timestamp) : null
   const mainElement = useRef<HTMLElement>(null)
 
   useEffect(() => {
@@ -96,20 +95,24 @@ const Body = ({
     )
   }
 
-  const gitTimestampEl =
-    date && config.gitTimestamp ? (
-      <div className="pointer-default mt-12 mb-8 block text-right text-xs text-gray-500 dark:text-gray-400">
-        {typeof config.gitTimestamp === 'string'
-          ? `${config.gitTimestamp} ${date.toLocaleDateString(locale, {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric'
-            })}`
-          : renderComponent(config.gitTimestamp, { timestamp: date })}
-      </div>
-    ) : (
-      <div className="mt-16" />
-    )
+  const date =
+    themeContext.timestamp && config.gitTimestamp && timestamp
+      ? new Date(timestamp)
+      : null
+
+  const gitTimestampEl = date ? (
+    <div className="pointer-default mt-12 mb-8 block text-right text-xs text-gray-500 dark:text-gray-400">
+      {typeof config.gitTimestamp === 'string'
+        ? `${config.gitTimestamp} ${date.toLocaleDateString(locale, {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          })}`
+        : renderComponent(config.gitTimestamp, { timestamp: date })}
+    </div>
+  ) : (
+    <div className="mt-16" />
+  )
 
   if (themeContext.layout === 'full') {
     return (
