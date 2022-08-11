@@ -176,9 +176,7 @@ const Details = ({
       open
       {...(openState && { 'data-open': '' })}
     >
-      <DetailsProvider value={setOpen}>
-        {summary}
-      </DetailsProvider>
+      <DetailsProvider value={setOpen}>{summary}</DetailsProvider>
       <Collapse open={openState}>{restChildren}</Collapse>
     </details>
   )
@@ -221,81 +219,57 @@ const A = ({ href = '', ...props }) => (
 export const getComponents = () => {
   const context = { index: 0 }
   return {
-    h1: ({ children, ...props }: ComponentProps<'h1'>) => (
-      <h1 className="mt-2 text-4xl font-bold tracking-tight" {...props}>
-        {children}
-      </h1>
+    h1: (props: ComponentProps<'h1'>) => (
+      <h1 className="mt-2 text-4xl font-bold tracking-tight" {...props} />
     ),
     h2: createHeaderLink('h2', context),
     h3: createHeaderLink('h3', context),
     h4: createHeaderLink('h4', context),
     h5: createHeaderLink('h5', context),
     h6: createHeaderLink('h6', context),
-    ul: ({ children, ...props }: ComponentProps<'ul'>) => (
-      <ul className="ml-6 mt-6 list-disc first:mt-0" {...props}>
-        {children}
-      </ul>
+    ul: (props: ComponentProps<'ul'>) => (
+      <ul className="ml-6 mt-6 list-disc first:mt-0" {...props} />
     ),
-    ol: ({ children, ...props }: ComponentProps<'ol'>) => (
-      <ol className="ml-6 mt-6 list-decimal" {...props}>
-        {children}
-      </ol>
+    ol: (props: ComponentProps<'ol'>) => (
+      <ol className="ml-6 mt-6 list-decimal" {...props} />
     ),
-    li: ({ children, ...props }: ComponentProps<'li'>) => (
-      <li className="my-2" {...props}>
-        {children}
-      </li>
-    ),
-    blockquote: ({ children, ...props }: ComponentProps<'blockquote'>) => (
+    li: (props: ComponentProps<'li'>) => <li className="my-2" {...props} />,
+    blockquote: (props: ComponentProps<'blockquote'>) => (
       <blockquote
         className="mt-6 first:mt-0 border-l-2 border-gray-300 pl-6 italic text-gray-700 dark:border-gray-700 dark:text-gray-400"
         {...props}
-      >
-        {children}
-      </blockquote>
+      />
     ),
-    hr: ({ children, ...props }: ComponentProps<'hr'>) => (
-      <hr className="my-8 dark:border-gray-900" {...props}>
-        {children}
-      </hr>
+    hr: (props: ComponentProps<'hr'>) => (
+      <hr className="my-8 dark:border-gray-900" {...props} />
     ),
     a: A,
-    table: ({ children, ...props }: ComponentProps<'table'>) => (
-      <table className="mt-6 first:mt-0 p-0" {...props}>
-        {children}
-      </table>
+    table: (props: ComponentProps<'table'>) => (
+      <table className="mt-6 first:mt-0 p-0" {...props} />
     ),
-    p: ({ children, ...props }: ComponentProps<'p'>) => (
-      <p className="mt-6 first:mt-0" {...props}>
-        {children}
-      </p>
+    p: (props: ComponentProps<'p'>) => (
+      <p className="mt-6 first:mt-0" {...props} />
     ),
-    tr: ({ children, ...props }: ComponentProps<'tr'>) => (
+    tr: (props: ComponentProps<'tr'>) => (
       <tr
         className={cn(
           'm-0 border-t border-gray-300 p-0 dark:border-gray-600',
           'even:bg-gray-100 even:dark:bg-gray-600/20'
         )}
         {...props}
-      >
-        {children}
-      </tr>
+      />
     ),
-    th: ({ children, ...props }: ComponentProps<'th'>) => (
+    th: (props: ComponentProps<'th'>) => (
       <th
         className="m-0 border border-gray-300 px-4 py-2 dark:border-gray-600 font-semibold"
         {...props}
-      >
-        {children}
-      </th>
+      />
     ),
-    td: ({ children, ...props }: ComponentProps<'td'>) => (
+    td: (props: ComponentProps<'td'>) => (
       <td
         className="m-0 border border-gray-300 px-4 py-2 dark:border-gray-600"
         {...props}
-      >
-        {children}
-      </td>
+      />
     ),
     details: Details,
     summary: Summary
