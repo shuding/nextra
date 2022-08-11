@@ -242,6 +242,12 @@ exports[`Page Process > pageMap en-US 1`] = `
             "options": "Options",
             "pagination": "Pagination",
             "prefetching": "Prefetching",
+            "raw-layout": {
+              "theme": {
+                "layout": "raw",
+              },
+              "title": "Raw Layout",
+            },
             "revalidation": "Auto Revalidation",
             "scroll-with-dynamic-height": "Scroll With Dynamic Height",
             "suspense": "Suspense",
@@ -274,6 +280,11 @@ exports[`Page Process > pageMap en-US 1`] = `
           "locale": "en-US",
           "name": "prefetching",
           "route": "/docs/prefetching",
+        },
+        {
+          "locale": "en-US",
+          "name": "raw-layout",
+          "route": "/docs/raw-layout",
         },
         {
           "locale": "en-US",
@@ -701,6 +712,11 @@ exports[`Page Process > pageMap zh-CN 1`] = `
           "locale": "en-US",
           "name": "advanced",
           "route": "/docs/advanced",
+        },
+        {
+          "locale": "en-US",
+          "name": "raw-layout",
+          "route": "/docs/raw-layout",
         },
         {
           "locale": "en-US",
