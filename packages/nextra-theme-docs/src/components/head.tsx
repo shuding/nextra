@@ -2,9 +2,8 @@ import React, { ReactElement } from 'react'
 import NextHead from 'next/head'
 import { useTheme } from 'next-themes'
 
-import { renderComponent, renderString } from '../utils/render'
-import { useConfig } from '../config'
-import useMounted from '../utils/use-mounted'
+import { renderComponent, renderString, useMounted } from '../utils'
+import { useConfig } from '../contexts'
 
 export function Head(): ReactElement {
   const config = useConfig()

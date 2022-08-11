@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { getFSRoute } from '../src/utils/get-fs-route'
+import { getFSRoute } from '../src/utils'
 
 describe('getFSRoute', () => {
   it('replace locale', () => {

@@ -1,5 +1,5 @@
 import { Heading } from 'nextra'
 
-export default function getHeadingText(heading: Heading) {
+export function getHeadingText(heading: Heading) {
   return heading.value || ''
 }

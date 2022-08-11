@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react'
 import { XIcon } from 'nextra/icons'
-import { useConfig } from '../config'
-import { renderComponent } from '../utils/render'
+import { useConfig } from '../contexts'
+import { renderComponent } from '../utils'
 
 export function Banner(): ReactElement {
   const { bannerKey, banner } = useConfig()

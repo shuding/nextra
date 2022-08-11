@@ -1,10 +1,6 @@
 import React from 'react'
 import { DocsThemeConfig, PageTheme } from './types'
 import { useRouter } from 'next/router'
-import { Anchor } from './components'
-import { getGitIssueUrl } from './utils/get-git-issue-url'
-import useMounted from './utils/use-mounted'
-import { useConfig } from './config'
 
 export const DEFAULT_LOCALE = 'en-US'
 

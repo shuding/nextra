@@ -1,4 +1,5 @@
 const template = 'https://nextra.vercel.app'
+
 export const getFSRoute = (asPath: string, locale?: string | undefined) => {
   const pathname = new URL(asPath, template).pathname
   const cleanedPath = locale

@@ -5,12 +5,9 @@ import { Heading } from 'nextra'
 import parseGitUrl from 'parse-git-url'
 import scrollIntoView from 'scroll-into-view-if-needed'
 
-import { renderComponent } from '../utils/render'
-import getHeadingText from '../utils/get-heading-text'
-import { ActiveAnchor, useActiveAnchor } from '../active-anchor'
-import { useConfig } from '../config'
+import { renderComponent, getHeadingText, getGitIssueUrl } from '../utils'
+import { useConfig, ActiveAnchor, useActiveAnchor } from '../contexts'
 import { Anchor } from './anchor'
-import { getGitIssueUrl } from '../utils/get-git-issue-url'
 
 const getEditUrl = (filepath?: string): string => {
   const config = useConfig()

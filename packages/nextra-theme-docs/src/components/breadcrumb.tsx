@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react'
 import { Anchor } from './anchor'
 import cn from 'clsx'
 import { ArrowRightIcon } from 'nextra/icons'
-import { Item } from '../utils/normalize-pages'
+import { Item } from '../utils'
 
 export function Breadcrumb({
   activePath
