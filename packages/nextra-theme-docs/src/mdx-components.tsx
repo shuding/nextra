@@ -207,7 +207,10 @@ const A = ({ href = '', ...props }) => (
 )
 
 export const getComponents = ({
-  isRawLayout = false,
+  isRawLayout,
+  components
+}: {
+  isRawLayout?: boolean
   components?: DocsThemeConfig['components']
 }): DocsThemeConfig['components'] => {
   if (isRawLayout) {

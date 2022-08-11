@@ -249,10 +249,10 @@ const InnerLayout = ({
               timestamp={timestamp}
             >
               <MDXProvider
-                components={getComponents(
-                  themeContext.layout === 'raw',
-                  config.components
-                )}
+                components={getComponents({
+                  isRawLayout: themeContext.layout === 'raw',
+                  components: config.components
+                })}
               >
                 {children}
               </MDXProvider>
