@@ -206,10 +206,10 @@ const A = ({ href = '', ...props }) => (
   />
 )
 
-export const getComponents = (
+export const getComponents = ({
   isRawLayout = false,
   components?: DocsThemeConfig['components']
-): DocsThemeConfig['components'] => {
+}): DocsThemeConfig['components'] => {
   if (isRawLayout) {
     return { a: A }
   }
