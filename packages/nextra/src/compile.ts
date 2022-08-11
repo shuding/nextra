@@ -3,9 +3,10 @@ import { Processor } from '@mdx-js/mdx/lib/core'
 import remarkGfm from 'remark-gfm'
 import rehypePrettyCode from 'rehype-pretty-code'
 import { rehypeMdxTitle } from 'rehype-mdx-title'
+import readingTime from 'remark-reading-time'
 import { remarkStaticImage } from './mdx-plugins/static-image'
 import { remarkHeadings } from './mdx-plugins/remark'
-import { LoaderOptions, PageOpts } from './types'
+import { LoaderOptions, PageOpts, ReadingTime } from './types'
 import structurize from './mdx-plugins/structurize'
 import { parseMeta, attachMeta } from './mdx-plugins/rehype-handler'
 import theme from './theme.json'
@@ -45,6 +46,7 @@ export async function compileMdx(
     | 'unstable_staticImage'
     | 'unstable_flexsearch'
     | 'unstable_defaultShowCopyCode'
+    | 'unstable_readingTime'
   > = {},
   filePath = ''
 ) {
@@ -59,7 +61,8 @@ export async function compileMdx(
       remarkHeadings,
       nextraOptions.unstable_staticImage && remarkStaticImage,
       nextraOptions.unstable_flexsearch &&
-        structurize(structurizedData, nextraOptions.unstable_flexsearch)
+        structurize(structurizedData, nextraOptions.unstable_flexsearch),
+      nextraOptions.unstable_readingTime && readingTime
     ].filter(truthy),
     rehypePlugins: [
       ...(mdxOptions.rehypePlugins || []),
@@ -76,16 +79,18 @@ export async function compileMdx(
     ]
   })
   try {
-    const result = String(await compiler.process(source))
+    const vFile = await compiler.process(source)
+    const result = String(vFile)
       .replace('export const __nextra_title__', 'const __nextra_title__')
       .replace('export default MDXContent;', '')
-
+    const readingTime = vFile.data.readingTime as ReadingTime | undefined
     return {
       result,
       ...(compiler.data('headingMeta') as Pick<
         PageOpts,
         'headings' | 'hasJsxInH1'
       >),
+      ...(readingTime && { readingTime }),
       structurizedData
     }
   } catch (err) {

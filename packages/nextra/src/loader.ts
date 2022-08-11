@@ -66,6 +66,7 @@ async function loader(
     unstable_defaultShowCopyCode,
     unstable_flexsearch,
     unstable_staticImage,
+    unstable_readingTime,
     mdxOptions,
     pageMapCache,
     newNextLinkBehavior
@@ -111,16 +112,18 @@ async function loader(
   // Extract frontMatter information if it exists
   const { data: frontMatter, content } = grayMatter(source)
 
-  const { result, headings, structurizedData, hasJsxInH1 } = await compileMdx(
-    content,
-    mdxOptions,
-    {
-      unstable_defaultShowCopyCode,
-      unstable_staticImage,
-      unstable_flexsearch
-    },
-    mdxPath
-  )
+  const { result, headings, structurizedData, hasJsxInH1, readingTime } =
+    await compileMdx(
+      content,
+      mdxOptions,
+      {
+        unstable_readingTime,
+        unstable_defaultShowCopyCode,
+        unstable_staticImage,
+        unstable_flexsearch
+      },
+      mdxPath
+    )
   // @ts-expect-error
   const cssImport = OFFICIAL_THEMES.includes(theme)
     ? `import '${theme}/style.css'`
@@ -184,7 +187,8 @@ export default MDXContent`.trimStart()
     hasJsxInH1,
     timestamp,
     unstable_flexsearch,
-    newNextLinkBehavior
+    newNextLinkBehavior,
+    readingTime
   }
 
   const pageNextRoute =

@@ -90,6 +90,7 @@
     "rehype-mdx-title": "^1.0.0",
     "rehype-pretty-code": "0.2.4",
     "remark-gfm": "^3.0.1",
+    "remark-reading-time": "^2.0.1",
     "shiki": "0.10.1",
     "slash": "^3.0.0"
   },
