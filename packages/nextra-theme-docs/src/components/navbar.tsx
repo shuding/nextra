@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import React, { ReactElement, ReactNode } from 'react'
 import cn from 'clsx'
 import { useRouter } from 'next/router'
 import { Menu, Transition } from '@headlessui/react'
@@ -13,7 +13,6 @@ import { Anchor } from './anchor'
 import { DEFAULT_LOCALE } from '../constants'
 
 interface NavBarProps {
-  isRTL?: boolean | null
   flatDirectories: Item[]
   items: (PageItem | MenuItem)[]
 }
@@ -25,9 +24,9 @@ function NavbarMenu({
 }: {
   className?: string
   menu: MenuItem
-  children: React.ReactNode
-}) {
-  const items = menu.items
+  children: ReactNode
+}): ReactElement {
+  const { items } = menu
   const routes = Object.fromEntries(
     (menu.children || []).map(route => [route.name, route])
   )
@@ -48,7 +47,7 @@ function NavbarMenu({
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
       >
-        <Menu.Items className="menu absolute right-0 z-20 mt-1 max-h-64 min-w-full overflow-auto rounded-md bg-white py-1 text-sm shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-neutral-800 dark:ring-white dark:ring-opacity-20">
+        <Menu.Items className="absolute right-0 z-20 mt-1 max-h-64 min-w-full overflow-auto rounded-md bg-white py-1 text-sm shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-neutral-800 dark:ring-white dark:ring-opacity-20">
           {Object.entries(items || {}).map(([key, item]) => {
             const href =
               item.href || routes[key]?.route || menu.route + '/' + key
@@ -57,7 +56,10 @@ function NavbarMenu({
               <Menu.Item key={key}>
                 <Anchor
                   href={href}
-                  className="hidden whitespace-nowrap no-underline md:inline-block text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 relative cursor-pointer select-none py-1.5 pl-3 pr-9 w-full"
+                  className={cn(
+                    'hidden whitespace-nowrap no-underline md:inline-block text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 relative cursor-pointer select-none w-full',
+                    'py-1.5 ltr:pl-3 ltr:pr-9 rtl:pr-3 rtl:pl-9'
+                  )}
                   newWindow={item.newWindow}
                 >
                   {item.title || key}
@@ -83,7 +85,7 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
       <nav className="mx-auto flex h-16 max-w-[90rem] items-center justify-end gap-2 pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
         <Anchor
           href="/"
-          className="flex mr-auto items-center text-current no-underline hover:opacity-75"
+          className="flex ltr:mr-auto rtl:ml-auto items-center text-current no-underline hover:opacity-75"
         >
           {renderComponent(config.logo)}
         </Anchor>
@@ -102,7 +104,7 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
               <div className="inline-block relative" key={'menu-' + menu.title}>
                 <NavbarMenu
                   className={cn(
-                    'nextra-nav-link',
+                    'nextra-nav-link flex gap-1',
                     isActive
                       ? 'active subpixel-antialiased text-current'
                       : 'text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200'
@@ -112,11 +114,10 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
                   {menu.title}
                   <ArrowRightIcon
                     height="1em"
-                    className="
-                      ml-1 h-[18px] min-w-[18px] rounded-sm p-[2px]
-                      [&>path]:origin-center [&>path]:transition-transform
-                      [&>path]:rotate-90
-                    "
+                    className={cn(
+                      'h-[18px] min-w-[18px] rounded-sm p-0.5',
+                      '[&>path]:origin-center [&>path]:transition-transform [&>path]:rotate-90'
+                    )}
                   />
                 </NavbarMenu>
               </div>

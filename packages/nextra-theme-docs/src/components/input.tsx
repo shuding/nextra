@@ -21,7 +21,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         {...props}
       />
       {!show && (
-        <div className="pointer-events-none absolute inset-y-0 right-0 hidden select-none py-1.5 pr-1.5 sm:flex">
+        <div className="pointer-events-none absolute inset-y-0 ltr:right-0 rtl:left-0 hidden select-none p-1.5 sm:flex">
           <kbd
             className={cn(
               'inline-flex items-center rounded border bg-white px-1.5 font-mono text-sm font-medium text-gray-400',

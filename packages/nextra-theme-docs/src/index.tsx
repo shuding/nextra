@@ -86,16 +86,12 @@ const Body = ({
   }, [])
 
   if (themeContext.layout === 'raw') {
-    return (
-      <div className="nextra-body w-full relative overflow-x-hidden">
-        {children}
-      </div>
-    )
+    return <div className="w-full overflow-x-hidden">{children}</div>
   }
 
   if (themeContext.layout === 'full') {
     return (
-      <article className="nextra-body w-full relative justify-center overflow-x-hidden pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
+      <article className="w-full justify-center overflow-x-hidden pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
         {children}
         {timestamp}
         {navigation}
@@ -106,7 +102,7 @@ const Body = ({
   return (
     <article
       className={cn(
-        'nextra-body relative flex w-full min-w-0 max-w-full justify-center pb-8 pr-[calc(env(safe-area-inset-right)-1.5rem)]',
+        'flex w-full min-w-0 max-w-full justify-center pb-8 pr-[calc(env(safe-area-inset-right)-1.5rem)]',
         {
           default: '',
           article: 'nextra-body-typesetting-article'
@@ -114,7 +110,7 @@ const Body = ({
       )}
     >
       <main
-        className="z-10 w-full min-w-0 max-w-4xl px-6 pt-4 md:px-8"
+        className="w-full min-w-0 max-w-4xl px-6 pt-4 md:px-8"
         ref={mainElement}
       >
         {breadcrumb}
@@ -150,18 +146,14 @@ const InnerLayout = ({
   } = useDirectoryInfo(pageMap)
 
   const filepath = route.slice(0, route.lastIndexOf('/') + 1)
-  const isRTL = useMemo(() => {
-    if (!config.i18n) return config.direction === 'rtl'
-    const localeConfig = config.i18n.find(l => l.locale === locale)
-    return localeConfig && localeConfig.direction === 'rtl'
-  }, [config.i18n, locale])
-
   const themeContext = { ...activeThemeContext, ...meta }
   const hideSidebar = !themeContext.sidebar || themeContext.layout === 'raw'
   const asPopover = activeType === 'page' || hideSidebar
 
   const tocEl =
-    activeType === 'page' || !themeContext.toc || themeContext.layout !== 'default' ? (
+    activeType === 'page' ||
+    !themeContext.toc ||
+    themeContext.layout !== 'default' ? (
       themeContext.layout === 'full' || themeContext.layout === 'raw' ? null : (
         <div className="nextra-toc order-last hidden w-64 flex-shrink-0 px-4 text-sm xl:block" />
       )
@@ -178,7 +170,7 @@ const InnerLayout = ({
       : null
 
   const gitTimestampEl = date ? (
-    <div className="pointer-default mt-12 mb-8 block text-right text-xs text-gray-500 dark:text-gray-400">
+    <div className="pointer-default mt-12 mb-8 block ltr:text-right rtl:text-left text-xs text-gray-500 dark:text-gray-400">
       {typeof config.gitTimestamp === 'string'
         ? `${config.gitTimestamp} ${date.toLocaleDateString(locale, {
             year: 'numeric',
@@ -194,18 +186,13 @@ const InnerLayout = ({
   return (
     <div
       className={cn('nextra-container main-container flex flex-col', {
-        rtl: isRTL,
         'menu-active': menu
       })}
     >
       <Head />
       <Banner />
       {themeContext.navbar ? (
-        <Navbar
-          isRTL={isRTL}
-          flatDirectories={flatDirectories}
-          items={topLevelNavbarItems}
-        />
+        <Navbar flatDirectories={flatDirectories} items={topLevelNavbarItems} />
       ) : null}
       <div
         className={cn(
@@ -213,48 +200,44 @@ const InnerLayout = ({
           themeContext.layout !== 'raw' && 'max-w-[90rem]'
         )}
       >
-        <div className="flex w-full flex-1">
-          <ActiveAnchorProvider>
-            <Sidebar
-              docsDirectories={docsDirectories}
-              flatDirectories={flatDirectories}
-              fullDirectories={directories}
-              headings={headings}
-              isRTL={isRTL}
-              asPopover={asPopover}
-              includePlaceholder={themeContext.layout === 'default'}
-            />
-            {tocEl}
-            <SkipNavContent />
-            <Body
-              themeContext={themeContext}
-              breadcrumb={
-                activeType !== 'page' && themeContext.breadcrumb ? (
-                  <Breadcrumb activePath={activePath} />
-                ) : null
-              }
-              timestamp={gitTimestampEl}
-              navigation={
-                activeType !== 'page' && themeContext.pagination ? (
-                  <NavLinks
-                    flatDirectories={flatDocsDirectories}
-                    currentIndex={activeIndex}
-                    isRTL={isRTL}
-                  />
-                ) : null
-              }
+        <ActiveAnchorProvider>
+          <Sidebar
+            docsDirectories={docsDirectories}
+            flatDirectories={flatDirectories}
+            fullDirectories={directories}
+            headings={headings}
+            asPopover={asPopover}
+            includePlaceholder={themeContext.layout === 'default'}
+          />
+          {tocEl}
+          <SkipNavContent />
+          <Body
+            themeContext={themeContext}
+            breadcrumb={
+              activeType !== 'page' && themeContext.breadcrumb ? (
+                <Breadcrumb activePath={activePath} />
+              ) : null
+            }
+            timestamp={gitTimestampEl}
+            navigation={
+              activeType !== 'page' && themeContext.pagination ? (
+                <NavLinks
+                  flatDirectories={flatDocsDirectories}
+                  currentIndex={activeIndex}
+                />
+              ) : null
+            }
+          >
+            <MDXProvider
+              components={getComponents({
+                isRawLayout: themeContext.layout === 'raw',
+                components: config.components
+              })}
             >
-              <MDXProvider
-                components={getComponents({
-                  isRawLayout: themeContext.layout === 'raw',
-                  components: config.components
-                })}
-              >
-                {children}
-              </MDXProvider>
-            </Body>
-          </ActiveAnchorProvider>
-        </div>
+              {children}
+            </MDXProvider>
+          </Body>
+        </ActiveAnchorProvider>
       </div>
       {themeContext.footer && config.footer ? (
         <Footer menu={asPopover} />

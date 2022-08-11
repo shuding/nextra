@@ -3,9 +3,11 @@ import React, {
   ReactElement,
   ReactNode,
   useContext,
+  useEffect,
   useState
 } from 'react'
 import { PageOpts } from 'nextra'
+import { useRouter } from 'next/router'
 import { ThemeProvider } from 'next-themes'
 import { Context, DocsThemeConfig } from '../types'
 import { DEFAULT_THEME } from '../constants'
@@ -42,6 +44,21 @@ export const ConfigProvider = ({
     meta: pageOpts.meta
   }
   const nextThemes = extendedConfig.nextThemes || {}
+
+  const { locale } = useRouter()
+  const { i18n, direction } = extendedConfig
+
+  useEffect(() => {
+    if (typeof document === 'undefined') return
+    let isRTL: boolean
+    if (i18n) {
+      const localeConfig = i18n.find(l => l.locale === locale)
+      isRTL = !!localeConfig && localeConfig.direction === 'rtl'
+    } else {
+      isRTL = direction === 'rtl'
+    }
+    document.documentElement.setAttribute('dir', isRTL ? 'rtl' : 'ltr')
+  }, [i18n, direction])
 
   return (
     <ThemeProvider

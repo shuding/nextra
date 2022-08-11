@@ -6,15 +6,13 @@ import { Item } from '../utils'
 import { Anchor } from './anchor'
 
 interface NavLinkProps {
-  isRTL?: boolean | null
   currentIndex: number
   flatDirectories: Item[]
 }
 
 export const NavLinks = ({
   flatDirectories,
-  currentIndex,
-  isRTL
+  currentIndex
 }: NavLinkProps): ReactElement | null => {
   const config = useConfig()
   const prev = config.prevLinks ? flatDirectories[currentIndex - 1] : null
@@ -31,14 +29,14 @@ export const NavLinks = ({
             title={prev.title}
             className={cn(
               '-m-4 flex items-center rounded p-4 text-base font-medium text-gray-600 no-underline transition-colors hover:text-primary-500 dark:text-gray-300 dark:hover:text-primary-500 md:text-lg',
-              isRTL ? 'ml-2' : 'mr-2'
+              'rtl:ml-2 ltr:mr-2'
             )}
           >
             <ArrowRightIcon
               height={20}
               className={cn(
                 'inline flex-shrink-0 transform',
-                isRTL ? 'ml-1' : 'mr-1 rotate-180'
+                'rtl:ml-1 ltr:mr-1 ltr:rotate-180'
               )}
             />
             {prev.title}
@@ -52,7 +50,7 @@ export const NavLinks = ({
             title={next.title}
             className={cn(
               '-m-4 inline-flex items-center justify-end rounded p-4 text-base font-medium text-gray-600 no-underline transition-colors hover:text-primary-500 dark:text-gray-300 dark:hover:text-primary-500 md:text-lg',
-              isRTL ? 'mr-2' : 'ml-2'
+              'rtl:mr-2 ltr:ml-2'
             )}
           >
             {next.title}
@@ -60,7 +58,7 @@ export const NavLinks = ({
               height={20}
               className={cn(
                 'inline flex-shrink-0 transform',
-                isRTL ? 'mr-1 rotate-180' : 'ml-1'
+                'rtl:mr-1 rtl:rotate-180 ltr:ml-1'
               )}
             />
           </Anchor>
