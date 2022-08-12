@@ -413,7 +413,7 @@ article {
     }
     .nextra-search-section {
       @apply border-b border-black/10;
-      @apply dark:border-b dark:border-white/20;
+      @apply dark:border-white/20;
     }
   }
   @supports (
