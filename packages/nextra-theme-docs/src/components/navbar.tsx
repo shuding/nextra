@@ -80,17 +80,13 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
   return (
     <div className="nextra-nav-container sticky top-0 z-20 w-full bg-transparent">
       <div className="nextra-nav-container-blur pointer-events-none absolute h-full w-full bg-white dark:bg-dark" />
-      <nav className="left-0 right-0 mx-auto flex h-16 max-w-[90rem] items-center gap-2 pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
-        <div className="mr-2 flex flex-auto items-center">
-          <Anchor
-            href="/"
-            className="inline-flex items-center text-current no-underline hover:opacity-75"
-          >
-            {renderComponent(config.logo)}
-          </Anchor>
-        </div>
-
-        <div className="flex-1" />
+      <nav className="mx-auto flex h-16 max-w-[90rem] items-center justify-end gap-2 pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
+        <Anchor
+          href="/"
+          className="flex mr-auto items-center text-current no-underline hover:opacity-75"
+        >
+          {renderComponent(config.logo)}
+        </Anchor>
 
         {items.map(pageOrMenu => {
           if (pageOrMenu.hidden) return null
@@ -158,17 +154,15 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
           )
         })}
 
-        <div>
-          <div className="hidden md:inline-block">
-            {config.customSearch ||
-              (config.search ? (
-                config.unstable_flexsearch ? (
-                  <Flexsearch />
-                ) : (
-                  <Search directories={flatDirectories} />
-                )
-              ) : null)}
-          </div>
+        <div className="hidden md:inline-block">
+          {config.customSearch ||
+            (config.search ? (
+              config.unstable_flexsearch ? (
+                <Flexsearch />
+              ) : (
+                <Search directories={flatDirectories} />
+              )
+            ) : null)}
         </div>
 
         {config.projectLink || config.github ? (
@@ -187,6 +181,7 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
             )}
           </Anchor>
         ) : null}
+
         {config.projectChatLink ? (
           <Anchor
             className="p-2 text-current"
