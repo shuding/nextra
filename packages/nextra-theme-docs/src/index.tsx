@@ -60,22 +60,19 @@ function useDirectoryInfo(pageMap: PageMapItem[]) {
 
 interface BodyProps {
   themeContext: PageTheme
-  breadcrumb?: ReactNode
-  toc?: ReactNode
-  timestamp?: number
-  navLinks: ReactNode
+  breadcrumb: ReactNode
+  timestamp: ReactNode
+  navigation: ReactNode
   children: ReactNode
 }
 
 const Body = ({
   themeContext,
   breadcrumb,
-  navLinks,
   timestamp,
+  navigation,
   children
 }: BodyProps): ReactElement => {
-  const config = useConfig()
-  const { locale = DEFAULT_LOCALE } = useRouter()
   const mainElement = useRef<HTMLElement>(null)
 
   useEffect(() => {
@@ -96,31 +93,12 @@ const Body = ({
     )
   }
 
-  const date =
-    themeContext.timestamp && config.gitTimestamp && timestamp
-      ? new Date(timestamp)
-      : null
-
-  const gitTimestampEl = date ? (
-    <div className="pointer-default mt-12 mb-8 block text-right text-xs text-gray-500 dark:text-gray-400">
-      {typeof config.gitTimestamp === 'string'
-        ? `${config.gitTimestamp} ${date.toLocaleDateString(locale, {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-          })}`
-        : renderComponent(config.gitTimestamp, { timestamp: date })}
-    </div>
-  ) : (
-    <div className="mt-16" />
-  )
-
   if (themeContext.layout === 'full') {
     return (
       <article className="nextra-body w-full relative justify-center overflow-x-hidden pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
         {children}
-        {gitTimestampEl}
-        {navLinks}
+        {timestamp}
+        {navigation}
       </article>
     )
   }
@@ -141,8 +119,8 @@ const Body = ({
       >
         {breadcrumb}
         {children}
-        {gitTimestampEl}
-        {navLinks}
+        {timestamp}
+        {navigation}
       </main>
     </article>
   )
@@ -195,6 +173,25 @@ const InnerLayout = ({
       />
     )
 
+  const date =
+    themeContext.timestamp && config.gitTimestamp && timestamp
+      ? new Date(timestamp)
+      : null
+
+  const gitTimestampEl = date ? (
+    <div className="pointer-default mt-12 mb-8 block text-right text-xs text-gray-500 dark:text-gray-400">
+      {typeof config.gitTimestamp === 'string'
+        ? `${config.gitTimestamp} ${date.toLocaleDateString(locale, {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          })}`
+        : renderComponent(config.gitTimestamp, { timestamp: date })}
+    </div>
+  ) : (
+    <div className="mt-16" />
+  )
+
   return (
     <div
       className={cn('nextra-container main-container flex flex-col', {
@@ -237,7 +234,8 @@ const InnerLayout = ({
                   <Breadcrumb activePath={activePath} />
                 ) : null
               }
-              navLinks={
+              timestamp={gitTimestampEl}
+              navigation={
                 activeType !== 'page' && themeContext.pagination ? (
                   <NavLinks
                     flatDirectories={flatDocsDirectories}
@@ -246,7 +244,6 @@ const InnerLayout = ({
                   />
                 ) : null
               }
-              timestamp={timestamp}
             >
               <MDXProvider
                 components={getComponents({
