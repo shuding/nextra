@@ -447,20 +447,6 @@ input[type='search']::-webkit-search-results-decoration {
   -webkit-appearance: none;
 }
 
-/* Locale */
-.locale-switch summary::-webkit-details-marker,
-.locale-switch summary::marker {
-  @apply hidden content-[''];
-}
-.locale-switch[open] summary:before {
-  content: ' ';
-  @apply fixed inset-0 z-10 block cursor-default bg-transparent;
-}
-.locale-switch .locale-dropdown {
-  position: absolute;
-  z-index: 11;
-}
-
 .contains-task-list {
   @apply ml-0 list-none;
 }
