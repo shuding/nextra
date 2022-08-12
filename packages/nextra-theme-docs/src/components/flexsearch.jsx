@@ -329,7 +329,7 @@ export function Flexsearch() {
   const renderList = show && !!search
 
   return (
-    <div className="nextra-search nextra-flexsearch relative w-full md:w-64">
+    <div className="nextra-search nextra-flexsearch relative w-full max-w-full md:w-64">
       {renderList && (
         <div className="fixed inset-0 z-10" onClick={() => setShow(false)} />
       )}

@@ -154,7 +154,7 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
           )
         })}
 
-        <div className="hidden md:inline-block">
+        <div className="hidden md:inline-block min-w-[200px]">
           {config.customSearch ||
             (config.search ? (
               config.unstable_flexsearch ? (
