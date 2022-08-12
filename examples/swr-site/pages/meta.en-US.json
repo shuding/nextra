@@ -62,7 +62,7 @@
     }
   },
   "500": {
-    "type":"page",
+    "type": "page",
     "theme": {
       "timestamp": false,
       "layout": "full"
