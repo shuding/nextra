@@ -7,6 +7,7 @@ import 'focus-visible'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import { SkipNavContent } from '@reach/skip-nav'
 import cn from 'clsx'
+import { MDXProvider } from '@mdx-js/react'
 
 import './polyfill'
 import {
@@ -19,7 +20,7 @@ import {
   Breadcrumb,
   Banner
 } from './components'
-import { MDXTheme } from './mdx-theme'
+import { getComponents } from './mdx-components'
 import {
   ActiveAnchorProvider,
   ConfigProvider,
@@ -59,22 +60,19 @@ function useDirectoryInfo(pageMap: PageMapItem[]) {
 
 interface BodyProps {
   themeContext: PageTheme
-  breadcrumb?: ReactNode
-  toc?: ReactNode
-  timestamp?: number
-  navLinks: ReactNode
+  breadcrumb: ReactNode
+  timestamp: ReactNode
+  navigation: ReactNode
   children: ReactNode
 }
 
 const Body = ({
   themeContext,
   breadcrumb,
-  navLinks,
   timestamp,
+  navigation,
   children
 }: BodyProps): ReactElement => {
-  const config = useConfig()
-  const { locale = DEFAULT_LOCALE } = useRouter()
   const mainElement = useRef<HTMLElement>(null)
 
   useEffect(() => {
@@ -90,36 +88,17 @@ const Body = ({
   if (themeContext.layout === 'raw') {
     return (
       <div className="nextra-body w-full relative overflow-x-hidden">
-        <MDXTheme isRaw>{children}</MDXTheme>
+        {children}
       </div>
     )
   }
 
-  const date =
-    themeContext.timestamp && config.gitTimestamp && timestamp
-      ? new Date(timestamp)
-      : null
-
-  const gitTimestampEl = date ? (
-    <div className="pointer-default mt-12 mb-8 block text-right text-xs text-gray-500 dark:text-gray-400">
-      {typeof config.gitTimestamp === 'string'
-        ? `${config.gitTimestamp} ${date.toLocaleDateString(locale, {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-          })}`
-        : renderComponent(config.gitTimestamp, { timestamp: date })}
-    </div>
-  ) : (
-    <div className="mt-16" />
-  )
-
   if (themeContext.layout === 'full') {
     return (
       <article className="nextra-body w-full relative justify-center overflow-x-hidden pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
-        <MDXTheme>{children}</MDXTheme>
-        {gitTimestampEl}
-        {navLinks}
+        {children}
+        {timestamp}
+        {navigation}
       </article>
     )
   }
@@ -139,9 +118,9 @@ const Body = ({
         ref={mainElement}
       >
         {breadcrumb}
-        <MDXTheme>{children}</MDXTheme>
-        {gitTimestampEl}
-        {navLinks}
+        {children}
+        {timestamp}
+        {navigation}
       </main>
     </article>
   )
@@ -178,10 +157,40 @@ const InnerLayout = ({
   }, [config.i18n, locale])
 
   const themeContext = { ...activeThemeContext, ...meta }
-
   const hideSidebar = !themeContext.sidebar || themeContext.layout === 'raw'
-  const hideToc = !themeContext.toc || themeContext.layout === 'raw'
   const asPopover = activeType === 'page' || hideSidebar
+
+  const tocEl =
+    activeType === 'page' || !themeContext.toc || themeContext.layout !== 'default' ? (
+      themeContext.layout === 'full' || themeContext.layout === 'raw' ? null : (
+        <div className="nextra-toc order-last hidden w-64 flex-shrink-0 px-4 text-sm xl:block" />
+      )
+    ) : (
+      <TOC
+        headings={config.floatTOC ? headings : []}
+        filepathWithName={filepath + filename}
+      />
+    )
+
+  const date =
+    themeContext.timestamp && config.gitTimestamp && timestamp
+      ? new Date(timestamp)
+      : null
+
+  const gitTimestampEl = date ? (
+    <div className="pointer-default mt-12 mb-8 block text-right text-xs text-gray-500 dark:text-gray-400">
+      {typeof config.gitTimestamp === 'string'
+        ? `${config.gitTimestamp} ${date.toLocaleDateString(locale, {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          })}`
+        : renderComponent(config.gitTimestamp, { timestamp: date })}
+    </div>
+  ) : (
+    <div className="mt-16" />
+  )
+
   return (
     <div
       className={cn('nextra-container main-container flex flex-col', {
@@ -215,19 +224,7 @@ const InnerLayout = ({
               asPopover={asPopover}
               includePlaceholder={themeContext.layout === 'default'}
             />
-            {activeType === 'page' ||
-            hideToc ||
-            themeContext.layout !== 'default' ? (
-              themeContext.layout === 'full' ||
-              themeContext.layout === 'raw' ? null : (
-                <div className="nextra-toc order-last hidden w-64 flex-shrink-0 px-4 text-sm xl:block" />
-              )
-            ) : (
-              <TOC
-                headings={config.floatTOC ? headings : []}
-                filepathWithName={filepath + filename}
-              />
-            )}
+            {tocEl}
             <SkipNavContent />
             <Body
               themeContext={themeContext}
@@ -236,7 +233,8 @@ const InnerLayout = ({
                   <Breadcrumb activePath={activePath} />
                 ) : null
               }
-              navLinks={
+              timestamp={gitTimestampEl}
+              navigation={
                 activeType !== 'page' && themeContext.pagination ? (
                   <NavLinks
                     flatDirectories={flatDocsDirectories}
@@ -245,9 +243,15 @@ const InnerLayout = ({
                   />
                 ) : null
               }
-              timestamp={timestamp}
             >
-              {children}
+              <MDXProvider
+                components={getComponents({
+                  isRawLayout: themeContext.layout === 'raw',
+                  components: config.components
+                })}
+              >
+                {children}
+              </MDXProvider>
             </Body>
           </ActiveAnchorProvider>
         </div>
@@ -294,10 +298,9 @@ export default function withLayout(
   return Layout
 }
 
-export { useConfig }
+export { useConfig, getComponents }
 export { useTheme } from 'next-themes'
 export * from './types'
-export { getComponents } from './mdx-theme'
 export {
   Bleed,
   Callout,

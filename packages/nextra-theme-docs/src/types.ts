@@ -3,6 +3,7 @@ import { ThemeProviderProps } from 'next-themes/dist/types'
 import { PageOpts } from 'nextra'
 
 export interface DocsThemeConfig {
+  components?: Record<string, FC>
   projectLink?: string
   github?: string
   projectLinkIcon?: ReactNode | FC

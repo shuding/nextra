@@ -10,10 +10,10 @@ import React, {
 } from 'react'
 import 'intersection-observer'
 import { useSetActiveAnchor, DetailsProvider, useDetails } from './contexts'
-import { MDXProvider } from '@mdx-js/react'
 import { Collapse, Anchor } from './components'
 import { IS_BROWSER } from './constants'
 import cn from 'clsx'
+import { DocsThemeConfig } from './types'
 
 let observer: IntersectionObserver
 let setActiveAnchor: ReturnType<typeof useSetActiveAnchor>
@@ -82,7 +82,7 @@ const createHeaderLink = (
     children,
     id,
     ...props
-  }: ComponentProps<'h2'> & { id: string }): ReactElement {
+  }: ComponentProps<'h2'>): ReactElement {
     setActiveAnchor = useSetActiveAnchor()
     const obRef = useRef<HTMLSpanElement>(null)
 
@@ -97,7 +97,7 @@ const createHeaderLink = (
         slugs.delete(obRef.current!)
         setActiveAnchor(f => {
           const ret = { ...f }
-          delete ret[id]
+          delete ret[id!]
           return ret
         })
       }
@@ -160,10 +160,7 @@ const Details = ({
   children,
   open,
   ...props
-}: {
-  children: ReactNode
-  open?: boolean
-}): ReactElement => {
+}: ComponentProps<'details'>): ReactElement => {
   const [openState, setOpen] = useState(!!open)
   const [summary, restChildren] = findSummary(children)
 
@@ -180,12 +177,7 @@ const Details = ({
   )
 }
 
-const Summary = ({
-  children,
-  ...props
-}: {
-  children: ReactNode
-}): ReactElement => {
+const Summary = (props: ComponentProps<'summary'>): ReactElement => {
   const setOpen = useDetails()
   return (
     <summary
@@ -199,9 +191,7 @@ const Summary = ({
         e.preventDefault()
         setOpen(v => !v)
       }}
-    >
-      {children}
-    </summary>
+    />
   )
 }
 
@@ -214,7 +204,17 @@ const A = ({ href = '', ...props }) => (
   />
 )
 
-export const getComponents = () => {
+export const getComponents = ({
+  isRawLayout,
+  components
+}: {
+  isRawLayout?: boolean
+  components?: DocsThemeConfig['components']
+}): DocsThemeConfig['components'] => {
+  if (isRawLayout) {
+    return { a: A }
+  }
+
   const context = { index: 0 }
   return {
     h1: (props: ComponentProps<'h1'>) => (
@@ -270,20 +270,7 @@ export const getComponents = () => {
       />
     ),
     details: Details,
-    summary: Summary
+    summary: Summary,
+    ...components
   }
-}
-
-export const MDXTheme = ({
-  children,
-  isRaw
-}: {
-  children: ReactNode
-  isRaw?: boolean
-}): ReactElement => {
-  return (
-    <MDXProvider components={isRaw ? { a: A } : (getComponents() as any)}>
-      {children}
-    </MDXProvider>
-  )
 }
