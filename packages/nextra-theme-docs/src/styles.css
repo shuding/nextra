@@ -337,21 +337,6 @@ article {
       vertical-align: -4px;
     }
   }
-  details[data-open] > summary {
-    @apply list-none before:rotate-90;
-  }
-
-  .subheading-anchor {
-    @apply absolute inline-block w-px;
-    margin-top: -84px;
-  }
-
-  .subheading-anchor + a:hover .anchor-icon {
-    @apply opacity-100;
-  }
-  .subheading-anchor:target + a .anchor-icon {
-    @apply text-gray-400 opacity-100 dark:text-neutral-500;
-  }
 
   /* Typesettings */
   &.nextra-body-typesetting-article {
