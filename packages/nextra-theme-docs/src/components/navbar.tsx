@@ -83,7 +83,7 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
       <nav className="mx-auto flex h-16 max-w-[90rem] items-center justify-end gap-2 pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
         <Anchor
           href="/"
-          className="mr-2 flex mr-auto items-center text-current no-underline hover:opacity-75"
+          className="flex mr-auto items-center text-current no-underline hover:opacity-75"
         >
           {renderComponent(config.logo)}
         </Anchor>
