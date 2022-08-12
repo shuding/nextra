@@ -23,7 +23,7 @@ export default function Meta({
 
   return (
     <div className="mb-8 flex items-center gap-3">
-      <div className="flex flex-1 flex-wrap items-center gap-1 text-gray-400">
+      <div className="flex flex-1 flex-wrap items-center gap-1 text-gray-400 not-prose">
         {author}
         {author && date && ','}
         {date && (
@@ -38,16 +38,17 @@ export default function Meta({
               className="
                 select-none
                 rounded-md
-                bg-gray-200
                 px-1
+                transition-colors
                 text-sm
-                !text-gray-400
-                !no-underline
-                hover:!text-gray-800
-                active:bg-gray-400
-                dark:bg-gray-400
-                dark:!text-gray-100
-                dark:hover:!text-gray-800
+                text-gray-400
+                hover:text-gray-500
+                dark:text-gray-300
+                dark:hover:text-gray-200
+                bg-gray-200
+                hover:bg-gray-300
+                dark:bg-gray-600
+                dark:hover:bg-gray-700
               "
             >
               {t}
