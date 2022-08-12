@@ -61,7 +61,7 @@ const config: DocsThemeConfig = {
       <>
         <Logo height={12} />
         <span
-          className="ltr:ml-2 rtl:mr-1 font-extrabold hidden md:inline select-none"
+          className="ltr:ml-2 rtl:mr-2 font-extrabold hidden md:inline select-none"
           title={"SWR: " + (TITLE_WITH_TRANSLATIONS[locale] || "")}
         >
           SWR
