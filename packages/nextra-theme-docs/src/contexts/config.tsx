@@ -50,13 +50,10 @@ export const ConfigProvider = ({
 
   useEffect(() => {
     if (typeof document === 'undefined') return
-    let isRTL: boolean
-    if (i18n) {
-      const localeConfig = i18n.find(l => l.locale === locale)
-      isRTL = !!localeConfig && localeConfig.direction === 'rtl'
-    } else {
-      isRTL = direction === 'rtl'
-    }
+    const localeConfig = i18n?.find(l => l.locale === locale)
+    const isRTL = localeConfig
+      ? localeConfig.direction === 'rtl'
+      : direction === 'rtl'
     document.documentElement.setAttribute('dir', isRTL ? 'rtl' : 'ltr')
   }, [i18n, direction])
 
