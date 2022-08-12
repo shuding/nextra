@@ -180,11 +180,10 @@ const InnerLayout = ({
 
   const themeContext = { ...activeThemeContext, ...meta }
   const hideSidebar = !themeContext.sidebar || themeContext.layout === 'raw'
-  const hideToc = !themeContext.toc || themeContext.layout === 'raw'
   const asPopover = activeType === 'page' || hideSidebar
 
   const tocEl =
-    activeType === 'page' || hideToc || themeContext.layout !== 'default' ? (
+    activeType === 'page' || !themeContext.toc || themeContext.layout !== 'default' ? (
       themeContext.layout === 'full' || themeContext.layout === 'raw' ? null : (
         <div className="nextra-toc order-last hidden w-64 flex-shrink-0 px-4 text-sm xl:block" />
       )
