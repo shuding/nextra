@@ -145,6 +145,11 @@ const InnerLayout = ({
     directories
   } = useDirectoryInfo(pageMap)
 
+  const localeConfig = config.i18n?.find(l => l.locale === locale)
+  const isRTL = localeConfig
+    ? localeConfig.direction === 'rtl'
+    : config.direction === 'rtl'
+
   const filepath = route.slice(0, route.lastIndexOf('/') + 1)
   const themeContext = { ...activeThemeContext, ...meta }
   const hideSidebar = !themeContext.sidebar || themeContext.layout === 'raw'
@@ -185,6 +190,7 @@ const InnerLayout = ({
 
   return (
     <div
+      dir={isRTL ? 'rtl' : 'ltr'}
       className={cn('nextra-container main-container flex flex-col', {
         'menu-active': menu
       })}
