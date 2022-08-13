@@ -1,7 +1,17 @@
 {
   "index": "Introduction",
   "get-started": "Get Started",
-  "features": "Features",
-  "themes": "Themes",
-  "advanced": "Advanced"
+  "guide": "Guide",
+  "-- Themes --": {
+    "type": "separator",
+    "title": "Themes"
+  },
+  "docs-theme": "Docs",
+  "blog": "Blog",
+  "your-own-theme": "Your Own Theme",
+  "-- About --": {
+    "type": "separator",
+    "title": "About"
+  },
+  "about": "About"
 }

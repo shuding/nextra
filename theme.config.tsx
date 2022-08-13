@@ -78,11 +78,14 @@ export default {
       />
     </>
   ),
+  banner:
+    '❗️ This is a work-in-progress docs for Nextra 2.0 (currently under beta). Content may be incomplete or inaccurate.',
   search: true,
   prevLinks: true,
   nextLinks: true,
   footer: true,
   footerEditLink: 'Edit this page on GitHub',
   footerText: `MIT ${new Date().getFullYear()} © Nextra.`,
-  floatTOC: true
+  floatTOC: true,
+  defaultMenuCollapsed: true
 }

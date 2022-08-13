@@ -1,0 +1,38 @@
+.cards {
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 1rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 1rem;
+  text-decoration: none;
+  background-color: #f5f6f7;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: box-shadow 0.1s ease;
+}
+
+.card:hover {
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.card svg {
+  width: 1.5rem;
+  color: #00000055;
+}
+
+.card p {
+  margin-top: 0.5rem;
+}
+
+.card .title {
+  display: flex;
+  gap: 0.5rem;
+  font-weight: 600;
+  align-items: flex-start;
+}

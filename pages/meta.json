@@ -8,11 +8,16 @@
     }
   },
   "docs": {
-    "title": "Docs",
+    "title": "Documentation",
     "type": "page"
   },
   "showcase": {
     "title": "Showcase",
     "type": "page"
+  },
+  "about": {
+    "title": "About",
+    "type": "page",
+    "href": "/docs/about"
   }
 }

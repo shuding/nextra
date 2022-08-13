@@ -1,0 +1,11 @@
+{
+  "general": "General Requirements",
+  "mdx": "MDX",
+  "ssg": "Next.js SSG",
+  "i18n": "Next.js I18n",
+  "image": "Next.js Image",
+  "link": "Next.js Link",
+  "themes": "Themes",
+  "typescript": "TypeScript",
+  "advanced": "Advanced"
+}

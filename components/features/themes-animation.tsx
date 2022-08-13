@@ -69,6 +69,7 @@ export function ThemesAnimation(props) {
         .theme-2,
         .theme-3,
         .theme-4 {
+          will-change: opacity, transform;
           animation: switching 8s ease infinite;
         }
         .theme-2 {

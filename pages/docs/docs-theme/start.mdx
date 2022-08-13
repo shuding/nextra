@@ -1,0 +1,113 @@
+# Docs Theme
+
+import Callout from 'nextra-theme-docs/callout'
+
+<Callout type="info">
+  This website is built with the docs theme.
+</Callout>
+
+## Quick Start with Vercel
+
+(todo)
+
+{/* You can start by creating your own Nextra site and deploying to Vercel by clicking the link: */}
+
+{/* [![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/new/clone?demo-description=Markdown%20powered%20docs%20site.%20Built%20with%20Next.js.&demo-image=https%3A%2F%2Fnextra.vercel.app%2Fdemo.png&demo-title=Documentation%20Starter%20Kit&demo-url=https%3A%2F%2Fnextra.vercel.app%2F&project-name=nextjs-docs&repository-name=nextjs-docs&s=https%3A%2F%2Fgithub.com%2Fshuding%2Fnextra&from=templates) */}
+
+{/* Vercel will fork the Nextra Docs template and deploy the site for you. Once done, every commit in the repository will be deployed automatically. */}
+
+## Fork the Template
+
+(todo)
+
+## Start From Scratch
+
+### 1. Install
+
+To create a Nextra Docs site manually, you have to install **Next.js**, **React**, **Nextra**, and **Nextra Docs Theme**. In your project directory, run the following command to install the dependencies:
+
+import { Tab, Tabs } from 'nextra-theme-docs/tabs'
+
+<Tabs items={['pnpm', 'npm', 'yarn']}>
+  <Tab>
+    ```bash
+    pnpm i next react react-dom nextra nextra-theme-docs
+    ```
+  </Tab>
+  <Tab>
+    ```bash
+    npm i next react react-dom nextra nextra-theme-docs
+    ```
+  </Tab>
+  <Tab>
+    ```bash
+    yarn add next react react-dom nextra nextra-theme-docs
+    ```
+  </Tab>
+</Tabs>
+
+If you already have Next.js installed, you only need to install `nextra` and `nextra-theme-docs`. 
+
+### 2. Create Next.js Config
+
+Create the following `next.config.js` file in your project’s root directory:
+
+```js
+const withNextra = require('nextra')({
+  theme: 'nextra-theme-docs',
+  themeConfig: './theme.config.jsx',
+})
+
+module.exports = withNextra()
+// or module.exports = withNextra({ /* other next.js config */ })
+```
+
+<Callout>
+  Full Nextra configurations can be found [here](/themes/docs/configuration).
+</Callout>
+
+This way, Nextra will handle MDX compilation and use the configured theme to render the site.
+
+### 3. Create Theme Config
+
+Then, create the corresponding `theme.config.jsx` file in your project’s root directory:
+
+```jsx
+export default {
+  projectLink: 'https://github.com/shuding/nextra', // GitHub link in the navbar
+  docsRepositoryBase: 'https://github.com/shuding/nextra/blob/master', // base URL for the docs repository
+  titleSuffix: ' – Nextra',
+  nextLinks: true,
+  prevLinks: true,
+  search: true,
+  customSearch: null, // customizable, you can use algolia for example
+  darkMode: true,
+  footer: true,
+  footerText: `Powered by Nextra.`,
+  footerEditLink: `Edit this page on GitHub`,
+  logo: (
+    <>
+      <svg>...</svg>
+      <span>Next.js Static Site Generator</span>
+    </>
+  ),
+  head: (
+    <>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="description" content="Nextra: the next docs builder" />
+      <meta name="og:title" content="Nextra: the next docs builder" />
+    </>
+  )
+}
+```
+
+More configuration options for the docs theme can be found in the next section:
+
+import { Card, Cards } from '@components/card'
+
+<Cards>
+  <Card icon={
+   <svg viewBox="0 0 24 24"><path fill="currentColor" d="M7 18q-2.5 0-4.25-1.75T1 12q0-2.5 1.75-4.25T7 6h10q2.5 0 4.25 1.75T23 12q0 2.5-1.75 4.25T17 18Zm0-2h10q1.65 0 2.825-1.175Q21 13.65 21 12q0-1.65-1.175-2.825Q18.65 8 17 8H7Q5.35 8 4.175 9.175Q3 10.35 3 12q0 1.65 1.175 2.825Q5.35 16 7 16Zm0-1q1.25 0 2.125-.875T10 12q0-1.25-.875-2.125T7 9q-1.25 0-2.125.875T4 12q0 1.25.875 2.125T7 15Zm5-3Z"></path></svg>
+  } title="Configure docs theme" href="/docs/docs-theme/configuration">
+  </Card>
+</Cards>
