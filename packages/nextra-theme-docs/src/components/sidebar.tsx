@@ -86,7 +86,7 @@ function FolderImpl({ item, anchors }: FolderProps) {
         className={cn(
           'h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5',
           '[&>path]:origin-center [&>path]:transition-transform rtl:[&>path]:-rotate-180',
-          open && 'ltr:[&>path]:rotate-90 rtl:[&>path]:-rotate-90'
+          open && 'ltr:[&>path]:rotate-90 rtl:[&>path]:rotate-[-270deg]'
         )}
       />
     </Anchor>
