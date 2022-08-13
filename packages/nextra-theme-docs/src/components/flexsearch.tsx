@@ -5,7 +5,7 @@ import cn from 'clsx'
 import { Search } from './search'
 import { DEFAULT_LOCALE } from '../constants'
 
-const MemoizedStringWithMatch = memo<{
+const MemoizedStringWithMatchHighlights = memo<{
   content: string
   search: string
   // @ts-expect-error -- Is totally valid return array of ReactElement's from component
@@ -129,8 +129,18 @@ export function Flexsearch() {
           first: firstItemOfPage,
           route: url,
           page: result.doc.title,
-          title: <MemoizedStringWithMatch content={title} search={search} />,
-          excerpt: <MemoizedStringWithMatch content={content} search={search} />
+          title: (
+            <MemoizedStringWithMatchHighlights
+              content={title}
+              search={search}
+            />
+          ),
+          excerpt: (
+            <MemoizedStringWithMatchHighlights
+              content={content}
+              search={search}
+            />
+          )
         })
 
         firstItemOfPage = false
