@@ -204,18 +204,17 @@ export function Flexsearch() {
       })
 
       let pageId = 0
-      for (let route in data) {
+      for (const route in data) {
         let pageContent = ''
         ++pageId
 
-        for (let heading in data[route].data) {
+        for (const heading in data[route].data) {
           const [hash, text] = heading.split('#')
           const url = route + (hash ? '#' + hash : '')
           const title = text || data[route].title
 
-          const paragraphs = (data[route].data[heading] || '')
-            .split('\n')
-            .filter(Boolean)
+          const content = data[route].data[heading] || ''
+          const paragraphs = content.split('\n').filter(Boolean)
 
           sectionIndex.add({
             id: url,
@@ -237,7 +236,7 @@ export function Flexsearch() {
           }
 
           // Add the page itself.
-          pageContent += ' ' + title + ' ' + (data[route].data[heading] || '')
+          pageContent += ' ' + title + ' ' + content
         }
 
         pageIndex.add({
