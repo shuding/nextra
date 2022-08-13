@@ -26,8 +26,7 @@ const MemoedStringWithMatchHighlights = memo(
       )
       index = regexp.lastIndex
     }
-
-    res.push(<Fragment key={id++}>{content}</Fragment>)
+    res.push(<Fragment key={id++}>{splittedText.join('')}</Fragment>)
 
     return res
   }
