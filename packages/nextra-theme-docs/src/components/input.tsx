@@ -1,10 +1,10 @@
-import React, { ComponentProps, forwardRef } from 'react'
+import React, { ComponentProps, forwardRef, ReactNode } from 'react'
 import cn from 'clsx'
 
-type InputProps = ComponentProps<'input'> & { show?: boolean }
+type InputProps = ComponentProps<'input'> & { suffix?: ReactNode }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ className, show, ...props }, forwardedRef) => (
+  ({ className, suffix, ...props }, forwardedRef) => (
     <div className="relative flex items-center text-gray-900 dark:text-gray-300 contrast-more:text-gray-800 contrast-more:dark:text-gray-300">
       <input
         ref={forwardedRef}
@@ -21,19 +21,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         )}
         {...props}
       />
-      {!show && (
-        <kbd
-          className={cn(
-            'pointer-events-none absolute ltr:right-1.5 rtl:left-1.5 my-1.5 hidden select-none sm:flex',
-            'rounded bg-white px-1.5 font-mono text-sm font-medium',
-            'text-gray-500',
-            'border dark:bg-dark/50 dark:border-gray-100/20',
-            'contrast-more:border-current contrast-more:text-current contrast-more:dark:border-current'
-          )}
-        >
-          /
-        </kbd>
-      )}
+      {suffix}
     </div>
   )
 )

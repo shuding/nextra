@@ -5,8 +5,7 @@ import React, {
   useCallback,
   useState,
   useEffect,
-  useRef,
-  ReactNode
+  useRef
 } from 'react'
 import cn from 'clsx'
 import { Transition } from '@headlessui/react'
@@ -16,14 +15,15 @@ import { Anchor } from './anchor'
 import { renderComponent, renderString } from '../utils'
 import { useConfig, useMenu } from '../contexts'
 import { useRouter } from 'next/router'
+import { SearchResult } from '../types'
 
 type SearchProps = {
   className?: string
   value: string
   onChange: (newValue: string) => void
   load?: () => Promise<void>
-  loading: boolean
-  results: { route: string; prefix?: ReactNode; children: ReactNode }[]
+  loading?: boolean
+  results: SearchResult[]
 }
 
 export function Search({
@@ -147,7 +147,21 @@ export function Search({
           load?.()
           setShow(true)
         }}
-        show={renderList}
+        suffix={
+          !renderList && (
+            <kbd
+              className={cn(
+                'pointer-events-none absolute ltr:right-1.5 rtl:left-1.5 my-1.5 hidden select-none sm:flex',
+                'rounded bg-white px-1.5 font-mono text-sm font-medium',
+                'text-gray-500',
+                'border dark:bg-dark/50 dark:border-gray-100/20',
+                'contrast-more:border-current contrast-more:text-current contrast-more:dark:border-current'
+              )}
+            >
+              /
+            </kbd>
+          )
+        }
       />
 
       <Transition
@@ -163,7 +177,7 @@ export function Search({
               // Using bg-white as background-color when the browser didn't support backdrop-filter
               'bg-white text-gray-100 ring-1 ring-black/5',
               'dark:bg-neutral-900 dark:ring-white/10',
-              'absolute top-full z-20 mt-2 overscroll-contain rounded-xl py-2.5 shadow-xl overflow-auto min-h-[100px]',
+              'absolute top-full z-20 mt-2 overscroll-contain rounded-xl py-2.5 shadow-xl overflow-auto',
               'right-0 left-0 ltr:md:left-auto rtl:md:right-auto',
               'contrast-more:border contrast-more:border-gray-900 contrast-more:dark:border-gray-50',
               className
@@ -175,8 +189,8 @@ export function Search({
                 Loading...
               </span>
             ) : results.length > 0 ? (
-              results.map(({ route, prefix, children }, i) => (
-                <Fragment key={`search-item-${i}`}>
+              results.map(({ route, prefix, children, id }, i) => (
+                <Fragment key={id}>
                   {prefix}
                   <li
                     className={cn(
@@ -188,7 +202,7 @@ export function Search({
                     )}
                   >
                     <Anchor
-                      className="block no-underline !text-current hover:!bg-transparent !p-0"
+                      className="block no-underline scroll-m-12 !text-current hover:!bg-transparent !p-0"
                       href={router.basePath + route}
                       onMouseMove={() => setActive(i)}
                       onClick={finishSearch}

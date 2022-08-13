@@ -388,12 +388,6 @@ article {
 .nextra-search ul {
   max-height: min(calc(100vh - 5rem - env(safe-area-inset-bottom)), 400px);
   transition: max-height 0.2s ease;
-  a {
-    scroll-margin: 50px;
-    .highlight {
-      @apply text-primary-500 underline decoration-primary-400;
-    }
-  }
   @supports (
     (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))
   ) {
@@ -405,16 +399,18 @@ article {
 }
 
 @media screen and (max-width: 767px) {
-  .nextra-search .excerpt {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    line-clamp: 1;
-    -webkit-box-orient: vertical;
-  }
-  .nextra-search ul {
-    max-height: min(calc(50vh - 11rem - env(safe-area-inset-bottom)), 400px);
+  .nextra-search {
+    .excerpt {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      line-clamp: 1;
+      -webkit-box-orient: vertical;
+    }
+    ul {
+      max-height: min(calc(50vh - 11rem - env(safe-area-inset-bottom)), 400px);
+    }
   }
 }
 

@@ -50,7 +50,7 @@
     "focus-visible": "^5.2.0",
     "github-slugger": "^1.4.0",
     "intersection-observer": "^0.12.2",
-    "match-sorter": "^4.2.0",
+    "match-sorter": "^6.3.1",
     "next-themes": "^0.2.0-beta.2",
     "parse-git-url": "^1.0.1",
     "scroll-into-view-if-needed": "^2.2.29",
