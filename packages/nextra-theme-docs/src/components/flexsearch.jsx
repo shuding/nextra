@@ -1,21 +1,8 @@
-import React, {
-  memo,
-  useCallback,
-  useRef,
-  useState,
-  useEffect,
-  Fragment
-} from 'react'
+import React, { memo, useState, useEffect, Fragment } from 'react'
 import { useRouter } from 'next/router'
-import cn from 'clsx'
 import FlexSearch from 'flexsearch'
-import { Transition } from '@headlessui/react'
-
-import { useConfig, useMenu } from '../contexts'
-import { renderComponent, renderString } from '../utils'
-import { SpinnerIcon } from 'nextra/icons'
-import { Anchor } from './anchor'
-import { Input } from './input'
+import cn from 'clsx'
+import { Search } from './search'
 import { DEFAULT_LOCALE } from '../constants'
 
 const MemoedStringWithMatchHighlights = memo(
@@ -32,9 +19,7 @@ const MemoedStringWithMatchHighlights = memo(
       res.push(
         <Fragment key={id++}>
           {splittedText.splice(0, match.index - index).join('')}
-        </Fragment>
-      )
-      res.push(
+        </Fragment>,
         <span className="highlight" key={id++}>
           {splittedText.splice(0, regexp.lastIndex - match.index).join('')}
         </span>
@@ -42,7 +27,7 @@ const MemoedStringWithMatchHighlights = memo(
       index = regexp.lastIndex
     }
 
-    res.push(<Fragment key={id++}>{splittedText.join('')}</Fragment>)
+    res.push(<Fragment key={id++}>{content}</Fragment>)
 
     return res
   }
@@ -52,28 +37,13 @@ const MemoedStringWithMatchHighlights = memo(
 const indexes = {}
 
 export function Flexsearch() {
-  const config = useConfig()
   const router = useRouter()
   const { locale = DEFAULT_LOCALE } = router
   const [loading, setLoading] = useState(false)
-  const [show, setShow] = useState(false)
   const [search, setSearch] = useState('')
-  const [active, setActive] = useState(0)
   const [results, setResults] = useState([])
-  const input = useRef(null)
-  const { setMenu } = useMenu()
 
-  const finishSearch = () => {
-    if (input.current) {
-      input.current.value = ''
-      input.current.blur()
-    }
-    setSearch('')
-    setShow(false)
-    setMenu(false)
-  }
-
-  const doSearch = () => {
+  useEffect(() => {
     if (!search) return
     const index = indexes[locale]
     if (!index) return
@@ -157,58 +127,7 @@ export function Flexsearch() {
         return a._page_rk - b._page_rk
       })
     )
-  }
-  useEffect(doSearch, [search])
-
-  const handleKeyDown = useCallback(
-    e => {
-      switch (e.key) {
-        case 'ArrowDown': {
-          e.preventDefault()
-          if (active + 1 < results.length) {
-            setActive(active + 1)
-            const activeElement = document.querySelector(
-              `.nextra-flexsearch ul > a:nth-of-type(${active + 2})`
-            )
-            if (activeElement?.scrollIntoView) {
-              activeElement.scrollIntoView({
-                behavior: 'smooth',
-                block: 'nearest'
-              })
-            }
-          }
-          break
-        }
-        case 'ArrowUp': {
-          e.preventDefault()
-          if (active - 1 >= 0) {
-            setActive(active - 1)
-            const activeElement = document.querySelector(
-              `.nextra-flexsearch ul > a:nth-of-type(${active})`
-            )
-            if (activeElement?.scrollIntoView) {
-              activeElement.scrollIntoView({
-                behavior: 'smooth',
-                block: 'nearest'
-              })
-            }
-          }
-          break
-        }
-        case 'Enter': {
-          router.push(results[active].route)
-          finishSearch()
-          break
-        }
-        case 'Escape': {
-          setShow(false)
-          input.current.blur()
-          break
-        }
-      }
-    },
-    [active, results, router]
-  )
+  }, [search])
 
   const load = async () => {
     if (!indexes[locale] && !loading) {
@@ -300,109 +219,42 @@ export function Flexsearch() {
     }
   }
 
-  useEffect(() => {
-    setActive(0)
-  }, [search])
-
-  useEffect(() => {
-    const inputs = ['input', 'select', 'button', 'textarea']
-
-    const down = e => {
-      if (
-        document.activeElement &&
-        inputs.indexOf(document.activeElement.tagName.toLowerCase()) === -1
-      ) {
-        if (e.key === '/' || (e.key === 'k' && e.metaKey)) {
-          e.preventDefault()
-          input.current.focus()
-        } else if (e.key === 'Escape') {
-          setShow(false)
-          input.current.blur()
-        }
-      }
-    }
-
-    window.addEventListener('keydown', down)
-    return () => window.removeEventListener('keydown', down)
-  }, [])
-
-  const renderList = show && !!search
-
   return (
-    <div className="nextra-search nextra-flexsearch relative w-full max-w-full md:w-64">
-      {renderList && (
-        <div className="fixed inset-0 z-10" onClick={() => setShow(false)} />
-      )}
-
-      <Input
-        onChange={e => {
-          setSearch(e.target.value)
-          setShow(true)
-        }}
-        type="search"
-        placeholder={renderString(config.searchPlaceholder)}
-        onKeyDown={handleKeyDown}
-        onFocus={() => {
-          load()
-          setShow(true)
-        }}
-        ref={input}
-        show={renderList}
-      />
-
-      <Transition
-        show={renderList}
-        as={React.Fragment}
-        leave="transition duration-100"
-        leaveFrom="opacity-100"
-        leaveTo="opacity-0"
-      >
-        <Transition.Child>
-          <ul
-            className={cn(
-              'absolute top-full z-20 m-0 mt-2 list-none overscroll-contain rounded-xl px-0 py-2.5 shadow-xl',
-              'overflow-auto w-screen min-h-[100px]',
-              'ltr:right-0 rtl:left-0'
-            )}
-          >
-            {loading ? (
-              <span className="flex select-none justify-center p-8 text-center text-sm text-gray-400">
-                <SpinnerIcon className="-ml-1 mr-2 h-5 w-5 animate-spin text-gray-400" />
-                <span>Loading...</span>
-              </span>
-            ) : results.length === 0 ? (
-              renderComponent(config.unstable_searchResultEmpty)
-            ) : (
-              results.map((res, i) => (
-                <Fragment key={`search-item-${i}`}>
-                  {res.first ? (
-                    <div className="nextra-search-section mx-2.5 mb-2 mt-6 select-none px-2.5 pb-1.5 text-xs font-semibold uppercase text-gray-500 first:mt-0 dark:text-gray-300">
-                      {res.page}
-                    </div>
-                  ) : null}
-                  <Anchor
-                    href={router.basePath + res.route}
-                    className="block no-underline"
-                    onMouseMove={() => setActive(i)}
-                    onClick={finishSearch}
-                  >
-                    <li className={cn({ active: i === active })}>
-                      <div className="font-semibold leading-5 dark:text-white">
-                        {res.title}
-                      </div>
-                      {res.excerpt ? (
-                        <div className="excerpt mt-1 text-sm leading-[1.35rem] text-gray-600 dark:text-gray-400">
-                          {res.excerpt}
-                        </div>
-                      ) : null}
-                    </li>
-                  </Anchor>
-                </Fragment>
-              ))
-            )}
-          </ul>
-        </Transition.Child>
-      </Transition>
-    </div>
+    <Search
+      load={load}
+      loading={loading}
+      value={search}
+      onChange={setSearch}
+      className="w-screen max-w-[min(calc(100vw-2rem),calc(100%+20rem))]"
+      results={results.map(res => ({
+        route: res.route,
+        prefix: (
+          <>
+            {res.first ? (
+              <div
+                className={cn(
+                  'border-b border-black/10 dark:border-white/20 mx-2.5 mb-2 mt-6 select-none px-2.5 pb-1.5 text-xs font-semibold uppercase text-gray-500 first:mt-0 dark:text-gray-300',
+                  'contrast-more:border-gray-600 contrast-more:text-gray-900 contrast-more:dark:border-gray-50 contrast-more:dark:text-gray-50'
+                )}
+              >
+                {res.page}
+              </div>
+            ) : null}
+          </>
+        ),
+        children: (
+          <>
+            <div className="font-semibold leading-5 text-base">
+              {res.title}
+            </div>
+            {res.excerpt ? (
+              <div className="excerpt mt-1 text-sm leading-[1.35rem] text-gray-600 dark:text-gray-400">
+                {res.excerpt}
+              </div>
+            ) : null}
+          </>
+        )
+      }))}
+    />
   )
 }

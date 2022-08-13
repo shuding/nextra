@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import { Heading } from 'nextra'
 import scrollIntoView from 'scroll-into-view-if-needed'
 
-import { Search } from './search'
+import { MatchSorterSearch } from './match-sorter-search'
 import { Flexsearch } from './flexsearch'
 import { useConfig, useMenu, useActiveAnchor } from '../contexts'
 import {
@@ -334,7 +334,7 @@ export function Sidebar({
                   config.unstable_flexsearch ? (
                     <Flexsearch />
                   ) : (
-                    <Search directories={flatDirectories} />
+                    <MatchSorterSearch directories={flatDirectories} />
                   )
                 ) : null)}
             </div>

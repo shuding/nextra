@@ -5,7 +5,7 @@ import { Menu, Transition } from '@headlessui/react'
 import { ArrowRightIcon } from 'nextra/icons'
 
 import { useConfig, useMenu } from '../contexts'
-import { Search } from './search'
+import { MatchSorterSearch } from './match-sorter-search'
 import { Flexsearch } from './flexsearch'
 import { GitHubIcon, DiscordIcon, MenuIcon } from 'nextra/icons'
 import { Item, PageItem, MenuItem, renderComponent, getFSRoute } from '../utils'
@@ -161,7 +161,7 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
               config.unstable_flexsearch ? (
                 <Flexsearch />
               ) : (
-                <Search directories={flatDirectories} />
+                <MatchSorterSearch directories={flatDirectories} />
               )
             ) : null)}
         </div>

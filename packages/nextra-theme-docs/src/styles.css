@@ -134,16 +134,6 @@ p {
       button:focus-visible {
         @apply ring ring-primary-200;
       }
-      li.active > a,
-      li.active > a:hover {
-        @apply bg-primary-50 font-bold text-primary-500;
-        @apply dark:bg-primary-500/10 dark:text-primary-500;
-      }
-      @media (prefers-contrast: more) {
-        li.active > a {
-          @apply border border-primary-500 dark:border-primary-500;
-        }
-      }
       button,
       summary,
       li a {
@@ -313,22 +303,8 @@ p {
   .nextra-callout {
     @apply border-current dark:!border-current;
   }
-  .nextra-search {
-    ul {
-      @apply border border-gray-900 dark:border-gray-50;
-      div.nextra-search-section {
-        @apply border-gray-600 text-gray-900 dark:border-gray-50 dark:text-gray-50;
-      }
-      li {
-        @apply border border-transparent;
-        .excerpt {
-          @apply dark:text-gray-50;
-        }
-      }
-      li.active {
-        @apply border border-primary-500;
-      }
-    }
+  .nextra-search ul li .excerpt {
+    @apply dark:text-gray-50;
   }
   .nextra-navigation-links {
     border-color: #999 !important;
@@ -409,63 +385,21 @@ article {
 }
 
 /* Search */
-.nextra-search {
-  &.nextra-flexsearch ul {
-    max-height: min(calc(100vh - 5rem - env(safe-area-inset-bottom)), 400px);
-    max-width: min(calc(100vw - 2rem), calc(100% + 20rem));
-    transition: max-height 0.2s ease;
-  }
-  ul {
-    a {
-      scroll-margin: 50px;
-    }
-
-    /* Using bg-white as background-color when the browser didn't support backdrop-filter */
-    @apply bg-white text-gray-100 ring-1 ring-black/5;
-    li {
-      @apply mx-2.5 break-words rounded-md px-2.5 py-2 text-gray-800;
-      .highlight {
-        @apply text-primary-500 underline decoration-primary-400;
-      }
-    }
-    li.active,
-    a:focus li {
-      @apply bg-primary-400/10 text-primary-500;
-    }
-    .nextra-search-section {
-      @apply border-b border-black/10;
-      .dark & {
-        @apply border-b border-white/20;
-      }
-    }
-  }
-  .dark & {
-    /* Using bg-white as background-color when the browser didn't support backdrop-filter */
-    ul {
-      @apply bg-neutral-900 text-gray-100 ring-white/10;
-      li {
-        @apply text-gray-300;
-        .highlight {
-          @apply text-primary-500 underline decoration-primary-400;
-        }
-      }
-      li.active,
-      a:focus li {
-        @apply bg-primary-500/10 text-primary-500;
-      }
+.nextra-search ul {
+  max-height: min(calc(100vh - 5rem - env(safe-area-inset-bottom)), 400px);
+  transition: max-height 0.2s ease;
+  a {
+    scroll-margin: 50px;
+    .highlight {
+      @apply text-primary-500 underline decoration-primary-400;
     }
   }
   @supports (
     (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))
   ) {
-    ul {
+    & {
       backdrop-filter: blur(16px);
-      @apply bg-opacity-70;
-    }
-    .dark & {
-      ul {
-        @apply bg-opacity-80;
-      }
+      @apply bg-opacity-70 dark:bg-opacity-80;
     }
   }
 }
@@ -479,7 +413,7 @@ article {
     line-clamp: 1;
     -webkit-box-orient: vertical;
   }
-  .nextra-search.nextra-flexsearch ul {
+  .nextra-search ul {
     max-height: min(calc(50vh - 11rem - env(safe-area-inset-bottom)), 400px);
   }
 }
