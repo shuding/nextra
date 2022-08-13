@@ -154,7 +154,7 @@ p {
         @media (prefers-contrast: more) {
           & {
             @apply border border-transparent text-gray-900 hover:border-gray-900;
-            @apply dark:border dark:border-transparent dark:text-gray-50 dark:hover:border-gray-50;
+            @apply dark:text-gray-50 dark:hover:border-gray-50;
           }
         }
       }
