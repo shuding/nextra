@@ -358,7 +358,13 @@ export function Flexsearch() {
         leaveTo="opacity-0"
       >
         <Transition.Child>
-          <ul className="absolute top-full z-20 m-0 mt-2 list-none overflow-hidden overscroll-contain rounded-xl px-0 py-2.5 shadow-xl">
+          <ul
+            className={cn(
+              'absolute top-full z-20 m-0 mt-2 list-none overscroll-contain rounded-xl px-0 py-2.5 shadow-xl',
+              'overflow-auto w-screen min-h-[100px]',
+              'ltr:right-0 rtl:left-0'
+            )}
+          >
             {loading ? (
               <span className="flex select-none justify-center p-8 text-center text-sm text-gray-400">
                 <SpinnerIcon className="-ml-1 mr-2 h-5 w-5 animate-spin text-gray-400" />

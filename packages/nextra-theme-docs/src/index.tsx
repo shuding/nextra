@@ -149,6 +149,12 @@ const InnerLayout = ({
   const isRTL = localeConfig
     ? localeConfig.direction === 'rtl'
     : config.direction === 'rtl'
+  const direction = isRTL ? 'rtl' : 'ltr'
+  useEffect(() => {
+    if (typeof document === 'undefined') return
+    // needs for `ltr:/rtl:` modifiers inside `styles.css` file
+    document.documentElement.setAttribute('dir', direction)
+  }, [])
 
   const filepath = route.slice(0, route.lastIndexOf('/') + 1)
   const themeContext = { ...activeThemeContext, ...meta }
@@ -190,7 +196,7 @@ const InnerLayout = ({
 
   return (
     <div
-      dir={isRTL ? 'rtl' : 'ltr'}
+      dir={direction}
       className={cn('nextra-container main-container flex flex-col', {
         'menu-active': menu
       })}

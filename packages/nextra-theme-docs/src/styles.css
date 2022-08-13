@@ -411,8 +411,6 @@ article {
 /* Search */
 .nextra-search {
   &.nextra-flexsearch ul {
-    @apply overflow-auto w-screen min-h-[100px];
-    @apply ltr:right-0 rtl:left-0;
     max-height: min(calc(100vh - 5rem - env(safe-area-inset-bottom)), 400px);
     max-width: min(calc(100vw - 2rem), calc(100% + 20rem));
     transition: max-height 0.2s ease;
