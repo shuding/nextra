@@ -14,21 +14,24 @@ const MemoizedStringWithMatchHighlights = memo<{
   const escapedSearch = search.trim().replace(/[|\\{}()[\]^$+*?.]/g, '\\$&')
   const regexp = RegExp('(' + escapedSearch.replaceAll(' ', '|') + ')', 'ig')
   let match
+  let id = 0
   let index = 0
   const res = []
 
   while ((match = regexp.exec(content)) !== null) {
     res.push(
-      splittedText.splice(0, match.index - index).join(''),
-      <span className="highlight">
-        {splittedText.splice(0, regexp.lastIndex - match.index).join('')}
-      </span>
+      <Fragment key={id++}>
+        {splittedText.splice(0, match.index - index).join('')}
+        <span className="highlight">
+          {splittedText.splice(0, regexp.lastIndex - match.index).join('')}
+        </span>
+      </Fragment>
     )
     index = regexp.lastIndex
   }
-  res.push(splittedText.join(''))
+  res.push(<Fragment key={id++}>{splittedText.join('')}</Fragment>)
 
-  return res.map((item, index) => <Fragment key={index}>{item}</Fragment>)
+  return res
 })
 
 type SectionIndex = FlexSearch.Document<
