@@ -2,11 +2,29 @@
 type: tag
 ---
 
-import { useRouter } from 'next/router'
+import { useSSG } from 'nextra/ssg'
+import { getStaticTags } from 'nextra-theme-blog'
 
 export const TagName = () => {
-  const { tag } = useRouter().query
+  const { tag } = useSSG()
   return tag || null
 }
 
 # Posts Tagged with “<TagName/>”
+
+export const getStaticPaths = () => {
+  const tags = getStaticTags(__nextra_pageOpts__)
+  return {
+    paths: tags.map(v => ({ params: { tag: v } })),
+    fallback: false
+  }
+}
+export const getStaticProps = ({ params: { tag } }) => {
+  return {
+    props: {
+      ssg: {
+        tag
+      }
+    }
+  }
+}

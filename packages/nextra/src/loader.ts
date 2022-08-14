@@ -189,7 +189,6 @@ export default MDXContent`.trimStart()
       .replace(/\/index$/, '')
       // Remove the only `index` route
       .replace(/^index$/, '')
-
   return `
 import { SSGContext as __nextra_SSGContext__ } from 'nextra/ssg'
 import __nextra_withLayout__ from '${layout}'
@@ -210,7 +209,6 @@ const Content = props => (
     <MDXContent />
   </__nextra_SSGContext__.Provider>
 )
-
 export default __nextra_withLayout__(
   ${JSON.stringify(pageNextRoute)},
   Content,

@@ -9,10 +9,7 @@ export const BasicLayout = ({ children }: { children: ReactNode }) => {
   const ref = useRef<HTMLHeadingElement>(null)
   return (
     <article className="container prose prose-sm dark:prose-dark md:prose">
-      <Head>
-        <title>{title}</title>
-        {config.head?.({ title, meta: opts.meta })}
-      </Head>
+      <Head>{config.head?.({ title, meta: opts.meta })}</Head>
       <HeadingContext.Provider value={ref}>
         {opts.hasJsxInH1 ? <h1 ref={ref} /> : null}
         {!opts.hasJsxInH1 ? <h1>{opts.title}</h1> : null}

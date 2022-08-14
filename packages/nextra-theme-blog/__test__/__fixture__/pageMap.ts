@@ -133,7 +133,7 @@ export const postsOpts: BlogPageOpts = {
             date: '2016/5/21',
             description:
               "At the time when I was getting into web development, I had the chance to read one of the most inspiring book about the web, Aaron Swartz's A Programmable Web. And it completely changed my mind.",
-            tag: 'web development',
+            tag: 'web development, code, shiki',
             author: 'Shu'
           }
         },
@@ -239,7 +239,7 @@ export const articleOpts: BlogPageOpts = {
             date: '2016/5/21',
             description:
               "At the time when I was getting into web development, I had the chance to read one of the most inspiring book about the web, Aaron Swartz's A Programmable Web. And it completely changed my mind.",
-            tag: 'web development',
+            tag: ['web development', 'code', 'shiki'],
             author: 'Shu'
           }
         },

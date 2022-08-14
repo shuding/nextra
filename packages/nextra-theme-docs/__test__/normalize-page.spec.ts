@@ -85,7 +85,7 @@ describe('normalize-page', () => {
   it('/500 page', () => {
     const data = {
       list: [
-        { name: '500', route: '/500', },
+        { name: '500', route: '/500' },
         { name: 'get-started', route: '/get-started' },
         { name: 'index', route: '/' },
         {

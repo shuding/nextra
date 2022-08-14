@@ -1,4 +1,8 @@
-import React, { ReactElement, ReactNode, FC } from 'react'
+import React, {
+  ReactElement,
+  ReactNode,
+  FC,
+} from 'react'
 import { ThemeProvider } from 'next-themes'
 import type { PageOpts } from 'nextra'
 import type { LayoutProps, NextraBlogTheme } from './types'
@@ -8,6 +12,7 @@ import { PostsLayout } from './posts-layout'
 import { PageLayout } from './page-layout'
 import { DEFAULT_THEME } from './constants'
 import { useRouter } from 'next/router'
+import { SggProvider } from './ssg-context'
 
 const layoutMap = {
   post: ArticleLayout,
@@ -16,11 +21,11 @@ const layoutMap = {
   tag: PostsLayout
 }
 
-const BlogLayout = ({
-  config,
-  children,
-  opts
-}: LayoutProps & { children: ReactNode }): ReactElement => {
+interface Props extends LayoutProps {
+  children: ReactNode
+  ssg: any
+}
+const BlogLayout = ({ config, children, opts, ssg }: Props): ReactElement => {
   const type = opts.meta.type || 'post'
   const Layout = layoutMap[type]
   if (!Layout) {
@@ -29,9 +34,11 @@ const BlogLayout = ({
     )
   }
   return (
-    <BlogProvider opts={opts} config={config}>
-      <Layout>{children}</Layout>
-    </BlogProvider>
+    <SggProvider ssg={ssg}>
+      <BlogProvider opts={opts} config={config}>
+        <Layout>{children}</Layout>
+      </BlogProvider>
+    </SggProvider>
   )
 }
 
@@ -47,12 +54,10 @@ function Layout(props: any) {
   const { route } = useRouter()
   const context = nextraPageContext[route]
   if (!context) throw new Error(`No content found for ${route}.`)
-
   const extendedConfig = { ...DEFAULT_THEME, ...context.themeConfig }
-
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-      <BlogLayout config={extendedConfig} opts={context.pageOpts}>
+      <BlogLayout config={extendedConfig} opts={context.pageOpts} {...props}>
         <context.Content {...props} />
       </BlogLayout>
     </ThemeProvider>
@@ -79,4 +84,5 @@ export default function withLayout(
 
 export { useTheme } from 'next-themes'
 export { useBlogContext } from './blog-context'
+export { getStaticTags } from './utils/get-tags'
 export * from './types'

@@ -18,7 +18,7 @@ type CalloutProps = {
   children: ReactNode
 }
 
-export function Callout ({
+export function Callout({
   children,
   type = 'default',
   emoji = '💡'

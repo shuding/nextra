@@ -5,6 +5,7 @@ export interface NextraBlogTheme {
   readMore?: string
   footer?: React.ReactNode
   titleSuffix?: string
+  tagTitle?: (props: { title: string; tag: string }) => string
   postFooter?: string
   head?: ({
     title,

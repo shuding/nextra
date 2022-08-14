@@ -7,6 +7,7 @@ import MDXTheme from './mdx-theme'
 import Nav from './nav'
 import { collectPostsAndNavs } from './utils/collect'
 import getTags from './utils/get-tags'
+import { TagTitle, StaticTitle } from './title'
 
 export const PostsLayout = ({ children }: { children: ReactNode }) => {
   const { config, opts } = useBlogContext()
@@ -57,6 +58,7 @@ export const PostsLayout = ({ children }: { children: ReactNode }) => {
   })
   return (
     <BasicLayout>
+      {type === 'tag' ? <TagTitle /> : <StaticTitle />}
       <Nav />
       <MDXTheme>{children}</MDXTheme>
       {postList}
