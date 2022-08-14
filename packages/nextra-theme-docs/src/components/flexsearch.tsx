@@ -1,46 +1,86 @@
-import React, { memo, useState, useEffect, Fragment } from 'react'
+import React, { memo, useState, useEffect, Fragment, ReactElement } from 'react'
 import { useRouter } from 'next/router'
 import FlexSearch from 'flexsearch'
 import cn from 'clsx'
 import { Search } from './search'
 import { DEFAULT_LOCALE } from '../constants'
 
-const MemoedStringWithMatchHighlights = memo(
-  function StringWithMatchHighlights({ content, search }) {
-    const splittedText = content.split('')
-    const escapedSearch = search.trim().replace(/[|\\{}()[\]^$+*?.]/g, '\\$&')
-    const regexp = RegExp('(' + escapedSearch.replaceAll(' ', '|') + ')', 'ig')
-    let match
-    let id = 0
-    let index = 0
-    const res = []
+const MemoizedStringWithMatchHighlights = memo<{
+  content: string
+  search: string
+  // @ts-expect-error -- Is totally valid return array of ReactElement's from component
+}>(function StringWithMatchHighlights({ content, search }) {
+  const splittedText = content.split('')
+  const escapedSearch = search.trim().replace(/[|\\{}()[\]^$+*?.]/g, '\\$&')
+  const regexp = RegExp('(' + escapedSearch.replaceAll(' ', '|') + ')', 'ig')
+  let match
+  let id = 0
+  let index = 0
+  const res = []
 
-    while ((match = regexp.exec(content)) !== null) {
-      res.push(
-        <Fragment key={id++}>
-          {splittedText.splice(0, match.index - index).join('')}
-        </Fragment>,
-        <span className="highlight" key={id++}>
+  while ((match = regexp.exec(content)) !== null) {
+    res.push(
+      <Fragment key={id++}>
+        {splittedText.splice(0, match.index - index).join('')}
+        <span className="highlight">
           {splittedText.splice(0, regexp.lastIndex - match.index).join('')}
         </span>
-      )
-      index = regexp.lastIndex
-    }
-    res.push(<Fragment key={id++}>{splittedText.join('')}</Fragment>)
-
-    return res
+      </Fragment>
+    )
+    index = regexp.lastIndex
   }
-)
+  res.push(<Fragment key={id++}>{splittedText.join('')}</Fragment>)
+
+  return res
+})
+
+type SectionIndex = FlexSearch.Document<
+  {
+    id: string
+    url: string
+    title: string
+    pageId: string
+    content: string
+    display?: string
+  },
+  ['title', 'content', 'url', 'display']
+>
+
+type PageIndex = FlexSearch.Document<
+  {
+    id: number
+    title: string
+    content: string
+  },
+  ['title']
+>
+
+type Result = {
+  _page_rk: number
+  _section_rk: number
+  first: boolean
+  route: string
+  page: string
+  title: ReactElement
+  excerpt: ReactElement | null
+}
+
+type NextraData = {
+  [route: string]: {
+    title: string
+    data: Record<string, string>
+  }
+}
 
 // This can be global for better caching.
-const indexes = {}
+const indexes: Record<string, [PageIndex, SectionIndex]> = {}
 
 export function Flexsearch() {
   const router = useRouter()
   const { locale = DEFAULT_LOCALE } = router
   const [loading, setLoading] = useState(false)
   const [search, setSearch] = useState('')
-  const [results, setResults] = useState([])
+  const [results, setResults] = useState<Result[]>([])
 
   useEffect(() => {
     if (!search) return
@@ -50,39 +90,35 @@ export function Flexsearch() {
     const [pageIndex, sectionIndex] = index
 
     // Show the results for the top 5 pages
-    const pageResults = (
-      pageIndex.search(search, {
+    const pageResults =
+      pageIndex.search<true>(search, 5, {
         enrich: true,
         suggest: true
       })[0]?.result || []
-    ).slice(0, 5)
 
-    const results = []
-
-    const pageTitleMatches = {}
+    const results: Result[] = []
+    const pageTitleMatches: Record<number, number> = {}
 
     for (let i = 0; i < pageResults.length; i++) {
       const result = pageResults[i]
       pageTitleMatches[i] = 0
 
       // Show the top 5 results for each page
-      const sectionResults = (
-        sectionIndex.search(search, {
+      const sectionResults =
+        sectionIndex.search<true>(search, 5, {
           enrich: true,
           suggest: true,
           tag: 'page_' + result.id
         })[0]?.result || []
-      ).slice(0, 5)
 
       let firstItemOfPage = true
-      const occurred = {}
+      const occurred: Record<string, boolean> = {}
 
       for (let j = 0; j < sectionResults.length; j++) {
-        const section = sectionResults[j]
-        const isMatchingTitle = typeof section.doc.display !== 'undefined'
-        const content = section.doc.display || section.doc.content
-        const url = section.doc.url
-
+        const { doc } = sectionResults[j]
+        const isMatchingTitle = doc.display !== undefined
+        const content = doc.display || doc.content
+        const { url, title } = doc
         if (isMatchingTitle) {
           pageTitleMatches[i]++
         }
@@ -97,17 +133,17 @@ export function Flexsearch() {
           route: url,
           page: result.doc.title,
           title: (
-            <MemoedStringWithMatchHighlights
-              content={section.doc.title}
+            <MemoizedStringWithMatchHighlights
+              content={title}
               search={search}
             />
           ),
-          excerpt: content ? (
-            <MemoedStringWithMatchHighlights
+          excerpt: (
+            <MemoizedStringWithMatchHighlights
               content={content}
               search={search}
             />
-          ) : null
+          )
         })
 
         firstItemOfPage = false
@@ -134,9 +170,9 @@ export function Flexsearch() {
       const response = await fetch(
         `${router.basePath}/_next/static/chunks/nextra-data-${locale}.json`
       )
-      const data = await response.json()
+      const data = (await response.json()) as NextraData
 
-      const pageIndex = new FlexSearch.Document({
+      const pageIndex: PageIndex = new FlexSearch.Document({
         cache: 100,
         tokenize: 'full',
         document: {
@@ -151,7 +187,7 @@ export function Flexsearch() {
         }
       })
 
-      const sectionIndex = new FlexSearch.Document({
+      const sectionIndex: SectionIndex = new FlexSearch.Document({
         cache: 100,
         tokenize: 'full',
         document: {
@@ -168,18 +204,17 @@ export function Flexsearch() {
       })
 
       let pageId = 0
-      for (let route in data) {
+      for (const route in data) {
         let pageContent = ''
         ++pageId
 
-        for (let heading in data[route].data) {
+        for (const heading in data[route].data) {
           const [hash, text] = heading.split('#')
           const url = route + (hash ? '#' + hash : '')
           const title = text || data[route].title
 
-          const paragraphs = (data[route].data[heading] || '')
-            .split('\n')
-            .filter(Boolean)
+          const content = data[route].data[heading] || ''
+          const paragraphs = content.split('\n').filter(Boolean)
 
           sectionIndex.add({
             id: url,
@@ -187,7 +222,7 @@ export function Flexsearch() {
             title,
             pageId: `page_${pageId}`,
             content: title,
-            display: paragraphs[0] || ''
+            ...(paragraphs[0] && { display: paragraphs[0] })
           })
 
           for (let i = 0; i < paragraphs.length; i++) {
@@ -201,7 +236,7 @@ export function Flexsearch() {
           }
 
           // Add the page itself.
-          pageContent += ' ' + title + ' ' + (data[route].data[heading] || '')
+          pageContent += ' ' + title + ' ' + content
         }
 
         pageIndex.add({
@@ -243,9 +278,7 @@ export function Flexsearch() {
         ),
         children: (
           <>
-            <div className="font-semibold leading-5 text-base">
-              {res.title}
-            </div>
+            <div className="font-semibold leading-5 text-base">{res.title}</div>
             {res.excerpt ? (
               <div className="excerpt mt-1 text-sm leading-[1.35rem] text-gray-600 dark:text-gray-400">
                 {res.excerpt}
