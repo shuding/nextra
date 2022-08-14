@@ -43,7 +43,7 @@ function NavbarMenu({
         {children}
       </Menu.Button>
       <Transition
-        leave="transition"
+        leave="transition-opacity"
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
       >

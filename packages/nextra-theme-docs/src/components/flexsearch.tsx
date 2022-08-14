@@ -216,7 +216,7 @@ export function Flexsearch(): ReactElement {
 
         for (let i = 0; i < paragraphs.length; i++) {
           sectionIndex.add({
-            id: url + '_' + i,
+            id: `${url}_${i}`,
             url,
             title,
             pageId: `page_${pageId}`,
@@ -225,7 +225,7 @@ export function Flexsearch(): ReactElement {
         }
 
         // Add the page itself.
-        pageContent += ' ' + title + ' ' + content
+        pageContent += ` ${title} ${content}`
       }
 
       pageIndex.add({
