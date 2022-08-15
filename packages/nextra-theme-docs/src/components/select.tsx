@@ -12,11 +12,13 @@ interface MenuProps {
   selected: MenuOption
   onChange: (option: MenuOption) => void
   options: MenuOption[]
+  position?: 'left' | 'right'
 }
 
 export function Select({
   options,
   selected,
+  position = 'left',
   onChange
 }: MenuProps): ReactElement {
   return (
@@ -41,9 +43,13 @@ export function Select({
             leaveTo="opacity-0"
           >
             <Listbox.Options
-              className={
-                'menu absolute bottom-[130%] z-20 mt-1 max-h-64 min-w-full overflow-auto rounded-md bg-white py-1 text-sm shadow-lg ring-1 ring-black/5 focus:outline-none dark:bg-neutral-800 dark:ring-white/20'
-              }
+              className={cn(
+                'absolute bottom-[130%] z-20 mt-1 max-h-64 min-w-full overflow-auto rounded-md bg-white py-1 text-sm shadow-lg ring-1 ring-black/5 focus:outline-none dark:bg-neutral-800 dark:ring-white/20',
+                {
+                  left: 'rtl:right-0 ltr:left-0',
+                  right: 'ltr:right-0 rtl:left-0'
+                }[position]
+              )}
             >
               {options.map(option => (
                 <Listbox.Option
@@ -54,13 +60,14 @@ export function Select({
                       active
                         ? 'bg-primary-50 text-primary-500 dark:bg-primary-500/10'
                         : 'text-gray-800 dark:text-gray-100',
-                      'relative cursor-pointer select-none whitespace-nowrap py-1.5 pl-3 pr-9'
+                      'relative cursor-pointer select-none whitespace-nowrap py-1.5',
+                      'ltr:pl-3 ltr:pr-9 rtl:pr-3 rtl:pl-9'
                     )
                   }
                 >
                   {option.name}
                   {option.key === selected.key ? (
-                    <span className="absolute inset-y-0 right-0 flex items-center pr-3">
+                    <span className="absolute inset-y-0 ltr:right-3 rtl:left-3 flex items-center">
                       <CheckIcon />
                     </span>
                   ) : null}

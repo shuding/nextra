@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import { Heading } from 'nextra'
 import scrollIntoView from 'scroll-into-view-if-needed'
 
-import { Search } from './search'
+import { MatchSorterSearch } from './match-sorter-search'
 import { Flexsearch } from './flexsearch'
 import { useConfig, useMenu, useActiveAnchor } from '../contexts'
 import {
@@ -56,7 +56,7 @@ function FolderImpl({ item, anchors }: FolderProps) {
   const link = (
     <Anchor
       href={(item as Item).withIndexPage ? item.route : ''}
-      className="cursor-pointer !flex items-center justify-between [word-break:break-word]"
+      className="cursor-pointer !flex gap-2 items-center justify-between [word-break:break-word]"
       onClick={e => {
         const clickedToggleIcon = ['svg', 'path'].includes(
           (e.target as HTMLElement).tagName.toLowerCase()
@@ -84,9 +84,9 @@ function FolderImpl({ item, anchors }: FolderProps) {
       <ArrowRightIcon
         height="1em"
         className={cn(
-          'ml-2 h-[18px] min-w-[18px] rounded-sm p-[2px] hover:bg-gray-800/5 dark:hover:bg-gray-100/5',
-          '[&>path]:origin-center [&>path]:transition-transform',
-          open && '[&>path]:rotate-90'
+          'h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5',
+          '[&>path]:origin-center [&>path]:transition-transform rtl:[&>path]:-rotate-180',
+          open && 'ltr:[&>path]:rotate-90 rtl:[&>path]:rotate-[-270deg]'
         )}
       />
     </Anchor>
@@ -266,7 +266,6 @@ interface SideBarProps {
   fullDirectories: Item[]
   asPopover?: boolean
   headings?: Heading[]
-  isRTL?: boolean
   includePlaceholder: boolean
 }
 
@@ -335,7 +334,7 @@ export function Sidebar({
                   config.unstable_flexsearch ? (
                     <Flexsearch />
                   ) : (
-                    <Search directories={flatDirectories} />
+                    <MatchSorterSearch directories={flatDirectories} />
                   )
                 ) : null)}
             </div>
@@ -358,33 +357,18 @@ export function Sidebar({
             </div>
           </div>
 
-          {!hasMenu ? null : (
+          {hasMenu && (
             <div className="nextra-sidebar-menu mx-4 border-t shadow-[0_-12px_16px_white] dark:border-neutral-800 dark:shadow-[0_-12px_16px_#111]">
-              <div className="flex gap-1 bg-white py-4 pb-4 dark:bg-dark">
+              <div className="flex gap-1 bg-white py-4 pb-4 dark:bg-dark justify-between">
                 {config.i18n ? (
-                  <div className="relative flex-1">
+                  <div className="relative">
                     <LocaleSwitch options={config.i18n} />
                   </div>
                 ) : null}
                 {config.darkMode ? (
-                  <>
-                    <div
-                      className={cn(
-                        'relative md:hidden',
-                        config.i18n ? 'locale' : 'flex-1'
-                      )}
-                    >
-                      <ThemeSwitch lite={false} />
-                    </div>
-                    <div
-                      className={cn(
-                        'relative hidden md:block',
-                        config.i18n ? 'locale grow-0' : 'flex-1'
-                      )}
-                    >
-                      <ThemeSwitch lite={!!config.i18n} />
-                    </div>
-                  </>
+                  <div className="relative">
+                    <ThemeSwitch lite={!!config.i18n} />
+                  </div>
                 ) : null}
               </div>
             </div>

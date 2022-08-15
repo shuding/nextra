@@ -168,8 +168,7 @@ const Details = ({
     <details
       className="my-4 rounded border border-gray-200 bg-white p-2 shadow-sm dark:border-neutral-800 dark:bg-neutral-900 first:mt-0 last:mb-0"
       {...props}
-      open
-      {...(openState && { 'data-open': '' })}
+      {...(openState && { open: true })}
     >
       <DetailsProvider value={setOpen}>{summary}</DetailsProvider>
       <Collapse open={openState}>{restChildren}</Collapse>
@@ -184,7 +183,7 @@ const Summary = (props: ComponentProps<'summary'>): ReactElement => {
       className={cn(
         'list-none cursor-pointer rounded p-1 outline-none transition-colors hover:bg-gray-100 dark:hover:bg-neutral-800',
         "before:content-[''] before:inline-block before:transition-transform dark:before:invert",
-        '[[data-open]>&]:before:rotate-90'
+        '[[open]>&]:before:rotate-90 rtl:before:rotate-180'
       )}
       {...props}
       onClick={e => {
@@ -226,15 +225,18 @@ export const getComponents = ({
     h5: createHeaderLink('h5', context),
     h6: createHeaderLink('h6', context),
     ul: (props: ComponentProps<'ul'>) => (
-      <ul className="ml-6 mt-6 list-disc first:mt-0" {...props} />
+      <ul className="ltr:ml-6 rtl:mr-6 mt-6 list-disc first:mt-0" {...props} />
     ),
     ol: (props: ComponentProps<'ol'>) => (
-      <ol className="ml-6 mt-6 list-decimal" {...props} />
+      <ol className="ltr:ml-6 rtl:mr-6 mt-6 list-decimal" {...props} />
     ),
     li: (props: ComponentProps<'li'>) => <li className="my-2" {...props} />,
     blockquote: (props: ComponentProps<'blockquote'>) => (
       <blockquote
-        className="mt-6 first:mt-0 border-l-2 border-gray-300 pl-6 italic text-gray-700 dark:border-gray-700 dark:text-gray-400"
+        className={cn(
+          'mt-6 first:mt-0 border-gray-300 italic text-gray-700 dark:border-gray-700 dark:text-gray-400',
+          'rtl:border-r-2 rtl:pr-6 ltr:border-l-2 ltr:pl-6'
+        )}
         {...props}
       />
     ),
@@ -268,6 +270,10 @@ export const getComponents = ({
         className="m-0 border border-gray-300 px-4 py-2 dark:border-gray-600"
         {...props}
       />
+    ),
+    code: (props: ComponentProps<'code'>) => (
+      // always show code blocks in ltr
+      <code dir="ltr" {...props} />
     ),
     details: Details,
     summary: Summary,

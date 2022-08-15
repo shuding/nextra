@@ -236,7 +236,7 @@ importers:
       focus-visible: ^5.2.0
       github-slugger: ^1.4.0
       intersection-observer: ^0.12.2
-      match-sorter: ^4.2.0
+      match-sorter: ^6.3.1
       next: ^12.2.4
       next-themes: ^0.2.0-beta.2
       nextra: workspace:*
@@ -260,7 +260,7 @@ importers:
       focus-visible: 5.2.0
       github-slugger: 1.4.0
       intersection-observer: 0.12.2
-      match-sorter: 4.2.1
+      match-sorter: 6.3.1
       next-themes: 0.2.0_vyccxgqxcnj5vudpssiumaxlme
       parse-git-url: 1.0.1
       scroll-into-view-if-needed: 2.2.29
@@ -3457,8 +3457,8 @@ packages:
       unquote: 1.1.1
     dev: false
 
-  /match-sorter/4.2.1:
-    resolution: {integrity: sha512-s+3h9TiZU9U1pWhIERHf8/f4LmBN6IXaRgo2CI17+XGByGS1GvG5VvXK9pcGyCjGe3WM3mSYRC3ipGrd5UEVgw==}
+  /match-sorter/6.3.1:
+    resolution: {integrity: sha512-mxybbo3pPNuA+ZuCUhm5bwNkXrJTbsk5VWbR5wiwz/GC6LIiegBGn2w3O08UG/jdbYLinw51fSQ5xNU1U3MgBw==}
     dependencies:
       '@babel/runtime': 7.18.6
       remove-accents: 0.4.2
@@ -6462,7 +6462,7 @@ packages:
     resolution: {directory: packages/nextra-theme-blog, type: directory}
     id: file:packages/nextra-theme-blog
     name: nextra-theme-blog
-    version: 2.0.0-beta.16
+    version: 2.0.0-beta.17
     peerDependencies:
       next: '>=9.5.3'
       react: '>=16.13.1'
@@ -6483,7 +6483,7 @@ packages:
     resolution: {directory: packages/nextra-theme-docs, type: directory}
     id: file:packages/nextra-theme-docs
     name: nextra-theme-docs
-    version: 2.0.0-beta.16
+    version: 2.0.0-beta.17
     peerDependencies:
       next: '>=9.5.3'
       react: '>=16.13.1'
@@ -6498,7 +6498,7 @@ packages:
       focus-visible: 5.2.0
       github-slugger: 1.4.0
       intersection-observer: 0.12.2
-      match-sorter: 4.2.1
+      match-sorter: 6.3.1
       next: 12.2.4_biqbaboplfbrettd7655fr4n2y
       next-themes: 0.2.0_vyccxgqxcnj5vudpssiumaxlme
       parse-git-url: 1.0.1
@@ -6512,7 +6512,7 @@ packages:
     resolution: {directory: packages/nextra, type: directory}
     id: file:packages/nextra
     name: nextra
-    version: 2.0.0-beta.16
+    version: 2.0.0-beta.17
     peerDependencies:
       next: '>=9.5.3'
       react: '>=16.13.1'

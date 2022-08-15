@@ -1,37 +1,27 @@
-import React, { ComponentProps, forwardRef } from 'react'
+import React, { ComponentProps, forwardRef, ReactNode } from 'react'
 import cn from 'clsx'
 
-type InputProps = ComponentProps<'input'> & { show?: boolean }
+type InputProps = ComponentProps<'input'> & { suffix?: ReactNode }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ className, show, ...props }, forwardedRef) => (
-    <div className="relative flex items-center">
+  ({ className, suffix, ...props }, forwardedRef) => (
+    <div className="relative flex items-center text-gray-900 dark:text-gray-300 contrast-more:text-gray-800 contrast-more:dark:text-gray-300">
       <input
         ref={forwardedRef}
         spellCheck={false}
         className={cn(
           className,
-          'block w-full appearance-none rounded-lg px-3 py-2 leading-tight transition-colors',
+          'block w-full appearance-none rounded-lg px-3 py-2 transition-colors',
+          'md:text-sm text-base leading-tight',
+          'bg-black/[.03] dark:bg-gray-50/10',
           'focus:bg-white focus:outline-none focus:ring-1 focus:ring-gray-200',
           'dark:focus:bg-dark dark:focus:ring-gray-100/20',
-          'bg-black/[.03] text-gray-900 md:text-sm text-base',
-          'dark:bg-gray-50/10 dark:text-gray-300 dark:border-gray-800',
-          'placeholder:text-gray-400 dark:placeholder:text-gray-500'
+          'placeholder:text-gray-400 dark:placeholder:text-gray-500',
+          'contrast-more:border contrast-more:border-current'
         )}
         {...props}
       />
-      {!show && (
-        <div className="pointer-events-none absolute inset-y-0 right-0 hidden select-none py-1.5 pr-1.5 sm:flex">
-          <kbd
-            className={cn(
-              'inline-flex items-center rounded border bg-white px-1.5 font-mono text-sm font-medium text-gray-400',
-              'dark:border-gray-100/20 dark:bg-dark/50 dark:text-gray-500'
-            )}
-          >
-            /
-          </kbd>
-        </div>
-      )}
+      {suffix}
     </div>
   )
 )

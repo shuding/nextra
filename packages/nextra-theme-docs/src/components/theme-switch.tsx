@@ -11,6 +11,7 @@ export function ThemeSwitch({ lite = true }): ReactElement {
 
   return (
     <Select
+      position={lite ? 'right' : 'left'}
       onChange={option => {
         setTheme(option.key)
       }}
@@ -23,7 +24,9 @@ export function ThemeSwitch({ lite = true }): ReactElement {
             ) : (
               <SunIcon className="h-4 w-4 [&>path]:fill-current" />
             )}
-            {lite ? '' : <span>{mounted ? theme : 'light'}</span>}
+            <span className={lite ? 'md:hidden' : ''}>
+              {mounted ? theme : 'light'}
+            </span>
           </div>
         )
       }}

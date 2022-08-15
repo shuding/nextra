@@ -10,7 +10,7 @@ const makePrimaryColor =
   }
 
 module.exports = {
-  content: ['./src/**/*.{jsx,tsx}'],
+  content: ['./src/**/*.tsx', '../nextra/src/icons/*.tsx'],
   theme: {
     screens: {
       sm: '640px',
