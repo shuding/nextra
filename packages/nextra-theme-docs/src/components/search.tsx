@@ -148,7 +148,7 @@ export function Search({
             ? 'cursor-pointer hover:opacity-70 z-20 flex'
             : 'hidden sm:flex pointer-events-none'
         )}
-        title="Clear"
+        title={value ? 'Clear' : undefined}
         onClick={() => {
           onChange('')
         }}
