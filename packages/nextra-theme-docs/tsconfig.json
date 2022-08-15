@@ -9,7 +9,8 @@
     "skipLibCheck": true,
     "allowJs": true,
     "jsx": "react",
-    "moduleResolution": "Node",
+    "moduleResolution": "node",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "types": ["vitest/globals"],
     "resolveJsonModule": true
   }
