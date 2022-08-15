@@ -65,3 +65,10 @@ export type Context = {
   pageOpts: PageOpts
   themeConfig: DocsThemeConfig
 }
+
+export type SearchResult = {
+  id: string
+  route: string
+  prefix?: ReactNode
+  children: ReactNode
+}
