@@ -46,6 +46,7 @@ export interface DocsThemeConfig {
   notFoundLabels?: string
   serverSideErrorLink?: ReactNode | FC
   serverSideErrorLabels?: string
+  bodyExtraContent?: ReactNode | FC
 }
 
 export type PageTheme = {

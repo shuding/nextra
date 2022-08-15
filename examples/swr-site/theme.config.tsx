@@ -199,6 +199,7 @@ const config: DocsThemeConfig = {
     { locale: "ru", text: "Русский" },
   ],
   gitTimestamp: "Last updated on",
+  bodyExtraContent: '💪 content from `config.bodyExtraContent`'
 };
 
 export default config;

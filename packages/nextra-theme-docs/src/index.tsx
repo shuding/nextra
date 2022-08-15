@@ -61,7 +61,7 @@ function useDirectoryInfo(pageMap: PageMapItem[]) {
 interface BodyProps {
   themeContext: PageTheme
   breadcrumb: ReactNode
-  timestamp: ReactNode
+  timestamp?: number
   navigation: ReactNode
   children: ReactNode
 }
@@ -74,6 +74,8 @@ const Body = ({
   children
 }: BodyProps): ReactElement => {
   const mainElement = useRef<HTMLElement>(null)
+  const config = useConfig()
+  const { locale = DEFAULT_LOCALE } = useRouter()
 
   useEffect(() => {
     if (mainElement.current) {
@@ -89,12 +91,38 @@ const Body = ({
     return <div className="w-full overflow-x-hidden">{children}</div>
   }
 
+  const date =
+    themeContext.timestamp && config.gitTimestamp && timestamp
+      ? new Date(timestamp)
+      : null
+
+  const gitTimestampEl = date ? (
+    <div className="pointer-default mt-12 mb-8 block ltr:text-right rtl:text-left text-xs text-gray-500 dark:text-gray-400">
+      {typeof config.gitTimestamp === 'string'
+        ? `${config.gitTimestamp} ${date.toLocaleDateString(locale, {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          })}`
+        : renderComponent(config.gitTimestamp, { timestamp: date })}
+    </div>
+  ) : (
+    <div className="mt-16" />
+  )
+
+  const body = (
+    <>
+      {children}
+      {gitTimestampEl}
+      {navigation}
+      {renderComponent(config.bodyExtraContent)}
+    </>
+  )
+
   if (themeContext.layout === 'full') {
     return (
       <article className="w-full justify-center overflow-x-hidden pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
-        {children}
-        {timestamp}
-        {navigation}
+        {body}
       </article>
     )
   }
@@ -103,10 +131,8 @@ const Body = ({
     <article
       className={cn(
         'flex w-full min-w-0 max-w-full justify-center pb-8 pr-[calc(env(safe-area-inset-right)-1.5rem)]',
-        {
-          default: '',
-          article: 'nextra-body-typesetting-article'
-        }[themeContext.typesetting]
+        themeContext.typesetting === 'article' &&
+          'nextra-body-typesetting-article'
       )}
     >
       <main
@@ -114,9 +140,7 @@ const Body = ({
         ref={mainElement}
       >
         {breadcrumb}
-        {children}
-        {timestamp}
-        {navigation}
+        {body}
       </main>
     </article>
   )
@@ -175,25 +199,6 @@ const InnerLayout = ({
       />
     )
 
-  const date =
-    themeContext.timestamp && config.gitTimestamp && timestamp
-      ? new Date(timestamp)
-      : null
-
-  const gitTimestampEl = date ? (
-    <div className="pointer-default mt-12 mb-8 block ltr:text-right rtl:text-left text-xs text-gray-500 dark:text-gray-400">
-      {typeof config.gitTimestamp === 'string'
-        ? `${config.gitTimestamp} ${date.toLocaleDateString(locale, {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-          })}`
-        : renderComponent(config.gitTimestamp, { timestamp: date })}
-    </div>
-  ) : (
-    <div className="mt-16" />
-  )
-
   return (
     <div
       dir={direction}
@@ -230,7 +235,7 @@ const InnerLayout = ({
                 <Breadcrumb activePath={activePath} />
               ) : null
             }
-            timestamp={gitTimestampEl}
+            timestamp={timestamp}
             navigation={
               activeType !== 'page' && themeContext.pagination ? (
                 <NavLinks
