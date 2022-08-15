@@ -203,7 +203,7 @@ export function Search({
                   >
                     <Anchor
                       className="block no-underline scroll-m-12 !text-current hover:!bg-transparent !p-0"
-                      href={router.basePath + route}
+                      href={route}
                       onMouseMove={() => setActive(i)}
                       onClick={finishSearch}
                     >
