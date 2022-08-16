@@ -5,11 +5,12 @@ import grayMatter from 'gray-matter'
 import slash from 'slash'
 import { LoaderContext } from 'webpack'
 import { Repository } from '@napi-rs/simple-git'
+import { findPagesDir } from 'next/dist/lib/find-pages-dir.js'
 
 import { addPage } from './content-dump'
 import { parseFileName } from './utils'
 import { compileMdx } from './compile'
-import { getPageMap, findPagesDir } from './page-map'
+import { getPageMap } from './page-map'
 import { collectFiles, collectMdx } from './plugin'
 import {
   IS_PRODUCTION,
@@ -21,7 +22,7 @@ import {
 // TODO: create this as a webpack plugin.
 const indexContentEmitted = new Set<string>()
 
-const pagesDir = path.resolve(findPagesDir())
+const pagesDir = findPagesDir(process.cwd()).pages
 
 const [repository, gitRoot] = (function () {
   try {
