@@ -1,17 +1,7 @@
 import { PageMapItem } from './types'
-import { parseFileName, existsSync } from './utils'
+import { parseFileName } from './utils'
 import path from 'path'
 import filterRouteLocale from './filter-route-locale'
-
-export function findPagesDir(dir = process.cwd()): string {
-  // prioritize ./pages over ./src/pages
-  if (existsSync(path.join(dir, 'pages'))) return 'pages'
-  if (existsSync(path.join(dir, 'src/pages'))) return 'src/pages'
-
-  throw new Error(
-    "> Couldn't find a `pages` directory. Please create one under the project root"
-  )
-}
 
 export function getPageMap(
   currentResourcePath: string,

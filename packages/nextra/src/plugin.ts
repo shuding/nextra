@@ -5,8 +5,9 @@ import { parseFileName, parseJsonFile } from './utils'
 import path from 'path'
 import slash from 'slash'
 import grayMatter from 'gray-matter'
-import { findPagesDir } from './page-map'
+import { findPagesDir } from 'next/dist/lib/find-pages-dir.js'
 import { Compiler } from 'webpack'
+
 import { restoreCache } from './content-dump'
 import { MARKDOWN_EXTENSION_REGEX } from './constants'
 
@@ -109,9 +110,8 @@ export class NextraPlugin {
           // Restore the search data from the cache.
           restoreCache()
         }
-
         const result = await collectFiles(
-          path.join(process.cwd(), findPagesDir()),
+          findPagesDir(process.cwd()).pages,
           '/'
         )
         pageMapCache.set(result)
