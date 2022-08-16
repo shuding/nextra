@@ -3,11 +3,15 @@ import { Processor } from '@mdx-js/mdx/lib/core'
 import remarkGfm from 'remark-gfm'
 import rehypePrettyCode from 'rehype-pretty-code'
 import { rehypeMdxTitle } from 'rehype-mdx-title'
-import { remarkStaticImage } from './mdx-plugins/static-image'
-import { remarkHeadings } from './mdx-plugins/remark'
+import {
+  remarkStaticImage,
+  remarkHeadings,
+  structurize,
+  parseMeta,
+  attachMeta,
+  remarkMermaid
+} from './mdx-plugins'
 import { LoaderOptions, PageOpts } from './types'
-import structurize from './mdx-plugins/structurize'
-import { parseMeta, attachMeta } from './mdx-plugins/rehype-handler'
 import theme from './theme.json'
 
 const createCompiler = (mdxOptions: ProcessorOptions): Processor => {
@@ -41,7 +45,7 @@ export async function compileMdx(
     Pick<ProcessorOptions, 'jsx' | 'outputFormat'> = {},
   nextraOptions: Pick<
     LoaderOptions,
-    'unstable_staticImage' | 'unstable_flexsearch'
+    'unstable_staticImage' | 'unstable_flexsearch' | 'unstable_mermaid'
   > = {},
   resourcePath = ''
 ) {
@@ -57,7 +61,8 @@ export async function compileMdx(
       ...(nextraOptions.unstable_staticImage ? [remarkStaticImage] : []),
       ...(nextraOptions.unstable_flexsearch
         ? [structurize(structurizedData, nextraOptions.unstable_flexsearch)]
-        : [])
+        : []),
+      ...(nextraOptions.unstable_mermaid ? [remarkMermaid] : [])
     ].filter(Boolean),
     // @ts-ignore
     rehypePlugins: [

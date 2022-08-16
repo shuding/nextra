@@ -8,7 +8,7 @@ function cleanup(content) {
     .join('\n')
 }
 
-export default (structurizedData, options) => {
+export function structurize(structurizedData, options) {
   if (typeof options === 'boolean') options = {}
   options = Object.assign({ codeblocks: true }, options)
 
@@ -76,7 +76,7 @@ export default (structurizedData, options) => {
         result += '\n'
         if (!skip) content += '\n'
       }
-      if (['tableCell'].includes(type)) {
+      if (type === 'tableCell') {
         result += '\t'
         if (!skip) content += '\t'
       }

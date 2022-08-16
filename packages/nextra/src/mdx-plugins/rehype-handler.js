@@ -1,5 +1,5 @@
 import Slugger from 'github-slugger'
-import { getFlattenedValue } from './remark'
+import { getFlattenedValue } from './utils'
 
 function visit(node, tagNames, handler) {
   if (tagNames.includes(node.tagName)) {
@@ -9,8 +9,7 @@ function visit(node, tagNames, handler) {
   node.children?.forEach(n => visit(n, tagNames, handler))
 }
 
-export function parseMeta() {
-  return tree => {
+export const parseMeta = () => tree => {
     visit(tree, ['pre'], node => {
       if (
         // Block code
@@ -30,11 +29,9 @@ export function parseMeta() {
         }
       }
     })
-  }
 }
 
-export function attachMeta() {
-  return tree => {
+export const attachMeta = () => tree => {
     const slugger = new Slugger()
 
     visit(tree, ['div', 'h2', 'h3', 'h4', 'h5', 'h6'], node => {
@@ -50,5 +47,4 @@ export function attachMeta() {
         node.properties.id ||= slugger.slug(getFlattenedValue(node))
       }
     })
-  }
 }

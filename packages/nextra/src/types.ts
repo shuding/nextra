@@ -74,6 +74,7 @@ export type NextraConfig = {
   themeConfig?: string
   unstable_flexsearch?: Flexsearch
   unstable_staticImage?: boolean
+  unstable_mermaid?: boolean
   mdxOptions?: Pick<ProcessorOptions, 'rehypePlugins' | 'remarkPlugins'> & {
     rehypePrettyCodeOptions?: Partial<RehypePrettyCodeOptions>
   }

@@ -1,6 +1,7 @@
 import { Processor } from '@mdx-js/mdx/lib/core'
-import { Root, Heading, Parent } from 'mdast'
+import { Root, Heading } from 'mdast'
 import { PageOpts } from '../types'
+import { getFlattenedValue } from './utils'
 
 function visit(
   node: any,
@@ -11,18 +12,6 @@ function visit(
     handler(node)
   }
   node.children?.forEach((n: any) => visit(n, tester, handler))
-}
-
-export function getFlattenedValue(node: Parent): string {
-  return node.children
-    .map(child =>
-      'children' in child
-        ? getFlattenedValue(child)
-        : 'value' in child
-        ? child.value
-        : ''
-    )
-    .join('')
 }
 
 export function remarkHeadings(this: Processor) {

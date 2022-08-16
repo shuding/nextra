@@ -1,5 +1,6 @@
 import { defineConfig } from 'tsup'
 import tsconfig from './tsconfig.json'
+
 const { target } = tsconfig.compilerOptions
 
 export default defineConfig([
@@ -19,22 +20,13 @@ export default defineConfig([
     target
   },
   {
-    name: 'nextra-loader',
-    entry: ['src/loader.ts'],
-    format: 'esm',
-    dts: true,
-    target
-  },
-  {
-    entry: ['src/compile.ts'],
-    format: 'esm',
-    name: 'nextra-mdx-compiler',
-    dts: true,
-    target
-  },
-  {
-    entry: ['src/icons.ts'],
-    name: 'nextra-icons',
+    name: 'nextra-esm',
+    entry: [
+      'src/loader.ts',
+      'src/compile.ts',
+      'src/icons.ts',
+      'src/mermaid.tsx'
+    ],
     format: 'esm',
     dts: true,
     target

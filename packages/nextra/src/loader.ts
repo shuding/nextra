@@ -64,6 +64,7 @@ async function loader(
     defaultLocale,
     unstable_flexsearch,
     unstable_staticImage,
+    unstable_mermaid,
     mdxOptions,
     pageMapCache,
     newNextLinkBehavior
@@ -113,7 +114,8 @@ async function loader(
     mdxOptions,
     {
       unstable_staticImage,
-      unstable_flexsearch
+      unstable_flexsearch,
+      unstable_mermaid
     },
     resourcePath
   )

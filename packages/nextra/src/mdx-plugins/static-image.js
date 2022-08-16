@@ -1,5 +1,6 @@
 // Based on the remark-embed-images project
 // https://github.com/remarkjs/remark-embed-images
+import { getASTNodeImport } from './utils'
 
 const relative = /^\.{1,2}\//
 
@@ -7,51 +8,21 @@ function visit(node, type, handler) {
   if (node.type === type) {
     handler(node)
   }
-  if (node.children) {
-    node.children.forEach(n => visit(n, type, handler))
-  }
+  node.children?.forEach(n => visit(n, type, handler))
 }
 
-function ASTNodeImport(name, from) {
-  return {
-    type: 'mdxjsEsm',
-    value: `import ${name} from "${from}"`,
-    data: {
-      estree: {
-        type: 'Program',
-        body: [
-          {
-            type: 'ImportDeclaration',
-            specifiers: [
-              {
-                type: 'ImportDefaultSpecifier',
-                local: { type: 'Identifier', name }
-              }
-            ],
-            source: {
-              type: 'Literal',
-              value: from,
-              raw: `"${from}"`
-            }
-          }
-        ],
-        sourceType: 'module'
-      }
-    }
-  }
-}
-
-export function remarkStaticImage() {
-  return (tree, _file, done) => {
+export const remarkStaticImage = () => (tree, _file, done) => {
     const importsToInject = []
 
     visit(tree, 'image', visitor)
-    tree.children.unshift(...importsToInject)
-    tree.children.unshift(ASTNodeImport('$NextImageNextra', 'next/image'))
+    tree.children.unshift(
+      getASTNodeImport('$NextImageNextra', 'next/image'),
+      ...importsToInject
+    )
     done()
 
     function visitor(node) {
-      const url = node.url
+      const { url } = node
 
       if (url && relative.test(url)) {
         // Unique variable name for the given static image URL.
@@ -100,8 +71,7 @@ export function remarkStaticImage() {
         })
 
         // Inject the static image import into the root node.
-        importsToInject.push(ASTNodeImport(tempVariableName, url))
+        importsToInject.push(getASTNodeImport(tempVariableName, url))
       }
     }
-  }
 }
