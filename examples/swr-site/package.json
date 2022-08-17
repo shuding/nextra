@@ -1,7 +1,7 @@
 {
   "name": "swr-site",
   "private": true,
-  "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "next",
     "start": "next start",

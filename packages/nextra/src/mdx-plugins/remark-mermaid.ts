@@ -54,7 +54,7 @@ export const remarkMermaid: Plugin<[], Root> = () => (ast, file, done) => {
     for (const [node, index, parent] of codeblocks) {
       parent.children.splice(index, 1, getMermaidElementAST(node.value));
     }
-    ast.children.unshift(getASTNodeImport('Mermaid', 'nextra/mermaid', true) as any);
+    ast.children.unshift(getASTNodeImport('Mermaid', 'nextra/mermaid') as any);
   }
 
   done();

@@ -116,6 +116,11 @@ exports[`Page Process > pageMap en-US 1`] = `
             },
             {
               "locale": "en-US",
+              "name": "mermaid",
+              "route": "/docs/advanced/mermaid",
+            },
+            {
+              "locale": "en-US",
               "meta": {
                 "*": {
                   "theme": {
@@ -594,6 +599,11 @@ exports[`Page Process > pageMap zh-CN 1`] = `
               "locale": "en-US",
               "name": "markdown-import",
               "route": "/docs/advanced/markdown-import",
+            },
+            {
+              "locale": "en-US",
+              "name": "mermaid",
+              "route": "/docs/advanced/mermaid",
             },
           ],
           "name": "advanced",

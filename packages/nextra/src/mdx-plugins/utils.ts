@@ -11,13 +11,9 @@ export const getFlattenedValue = (node: Parent): string =>
     )
     .join('')
 
-export const getASTNodeImport = (
-  name: string,
-  from: string,
-  namedImport = false
-) => ({
+export const getASTNodeImport = (name: string, from: string) => ({
   type: 'mdxjsEsm',
-  value: `import ${namedImport ? `{ ${name} }` : name} from "${from}"`,
+  value: `import ${name} from "${from}"`,
   data: {
     estree: {
       type: 'Program',

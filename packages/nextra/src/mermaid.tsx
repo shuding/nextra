@@ -6,7 +6,7 @@ import mermaid from 'mermaid'
  */
 let id = 0
 
-export const Mermaid = ({ chart }: { chart: string }): ReactElement => {
+export default function Mermaid({ chart }: { chart: string }): ReactElement {
   const [svg, setSVG] = useState('')
 
   useEffect(() => {
