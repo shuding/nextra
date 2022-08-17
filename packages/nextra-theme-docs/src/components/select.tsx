@@ -38,7 +38,7 @@ export function Select({
           <Transition
             show={open}
             as={React.Fragment}
-            leave="transition"
+            leave="transition-opacity"
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
