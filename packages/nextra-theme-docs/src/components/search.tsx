@@ -12,7 +12,7 @@ import { Transition } from '@headlessui/react'
 import { SpinnerIcon } from 'nextra/icons'
 import { Input } from './input'
 import { Anchor } from './anchor'
-import { renderComponent, renderString } from '../utils'
+import { renderComponent, renderString, useMounted } from '../utils'
 import { useConfig, useMenu } from '../contexts'
 import { useRouter } from 'next/router'
 import { SearchResult } from '../types'
@@ -25,6 +25,8 @@ type SearchProps = {
   loading?: boolean
   results: SearchResult[]
 }
+
+const INPUTS = ['input', 'select', 'button', 'textarea']
 
 export function Search({
   className,
@@ -46,13 +48,11 @@ export function Search({
   }, [value])
 
   useEffect(() => {
-    const inputs = ['input', 'select', 'button', 'textarea']
-
     const down = (e: KeyboardEvent) => {
       if (
         input.current &&
         document.activeElement &&
-        inputs.indexOf(document.activeElement.tagName.toLowerCase()) === -1
+        !INPUTS.includes(document.activeElement.tagName.toLowerCase())
       ) {
         if (e.key === '/' || (e.key === 'k' && e.metaKey)) {
           e.preventDefault()
@@ -117,16 +117,55 @@ export function Search({
   )
 
   const finishSearch = () => {
-    if (input.current) {
-      input.current.value = ''
-      input.current.blur()
-    }
+    input.current?.blur()
     onChange('')
     setShow(false)
     setMenu(false)
   }
 
+  const mounted = useMounted()
   const renderList = show && !!value
+
+  const icon = (
+    <Transition
+      show={mounted && (!show || !!value)}
+      as={React.Fragment}
+      enter="transition-opacity"
+      enterFrom="opacity-0"
+      enterTo="opacity-100"
+      leave="transition-opacity"
+      leaveFrom="opacity-100"
+      leaveTo="opacity-0"
+    >
+      <kbd
+        className={cn(
+          'absolute ltr:right-1.5 rtl:left-1.5 my-1.5 select-none',
+          'rounded bg-white px-1.5 h-5 font-mono font-medium text-gray-500 text-[10px]',
+          'border dark:bg-dark/50 dark:border-gray-100/20',
+          'contrast-more:border-current contrast-more:text-current contrast-more:dark:border-current',
+          'items-center gap-1 transition-opacity',
+          value
+            ? 'cursor-pointer hover:opacity-70 z-20 flex'
+            : 'hidden sm:flex pointer-events-none'
+        )}
+        title={value ? 'Clear' : undefined}
+        onClick={() => {
+          onChange('')
+        }}
+      >
+        {value
+          ? 'ESC'
+          : mounted &&
+            (navigator.userAgent.includes('Macintosh') ? (
+              <>
+                <span className="text-xs">⌘</span>K
+              </>
+            ) : (
+              'CTRL K'
+            ))}
+      </kbd>
+    </Transition>
+  )
 
   return (
     <div className="nextra-search relative md:w-64">
@@ -136,6 +175,7 @@ export function Search({
 
       <Input
         ref={input}
+        value={value}
         onChange={e => {
           onChange(e.target.value)
           setShow(true)
@@ -147,30 +187,20 @@ export function Search({
           load?.()
           setShow(true)
         }}
-        suffix={
-          !renderList && (
-            <kbd
-              className={cn(
-                'pointer-events-none absolute ltr:right-1.5 rtl:left-1.5 my-1.5 hidden select-none sm:flex',
-                'rounded bg-white px-1.5 font-mono text-sm font-medium',
-                'text-gray-500',
-                'border dark:bg-dark/50 dark:border-gray-100/20',
-                'contrast-more:border-current contrast-more:text-current contrast-more:dark:border-current'
-              )}
-            >
-              /
-            </kbd>
-          )
-        }
+        onBlur={() => {
+          setShow(false)
+        }}
+        suffix={icon}
       />
 
       <Transition
         show={renderList}
         as={Fragment}
-        leave="transition duration-100"
+        leave="transition-opacity duration-100"
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
       >
+        {/* Transition.Child is required here, otherwise popup will still present in DOM after focus out */}
         <Transition.Child>
           <ul
             className={cn(
