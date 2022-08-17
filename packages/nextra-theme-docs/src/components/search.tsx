@@ -161,7 +161,7 @@ export function Search({
                 <span className="text-xs">⌘</span>K
               </>
             ) : (
-              '/'
+              'CTRL K'
             ))}
       </kbd>
     </Transition>
