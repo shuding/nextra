@@ -21,7 +21,7 @@ const getEditUrl = (filepath?: string): string => {
       }/${repo.subdir || 'pages'}${filepath}`
     case 'gitlab':
       return `https://gitlab.com/${repo.owner}/${repo.name}/-/blob/${
-        repo.branch || 'master'
+        repo.branch || 'main'
       }/${repo.subdir || 'pages'}${filepath}`
   }
 
