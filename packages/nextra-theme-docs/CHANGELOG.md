@@ -1,5 +1,29 @@
 # nextra-theme-docs
 
+## 2.0.0-beta.18
+
+### Patch Changes
+
+- 7a32f8e: remove unneeded wrappers `<div />`s in `<Navbar />`
+- bea62a1: make the search input responsive in narrow screens
+- 24a02f8: reuse Flexsearch result styles on match-sorter search
+- a0c0eb8: allow override `MDXProvider.components`
+- 16bedce: `"layout": "raw"` should render `all` unstyled elements, except `<a />`
+- 237faa9: add clear button for search input
+- 24a02f8: typescripify `<Flexsearch />`
+- 24a02f8: fix all RTL broken styles
+- a8c5883: add `config.bodyExtraContent` option
+- 8564919: extract `<Input/>` from `<Search/>` and `<Flexsearch/>`
+- 38769ca: prefer `ref.current.querySelector` over `document.querySelector`, remove `load` prop in `<Search />`
+- 24a02f8: match-sorter search should highlight every match like flexsearch
+- 7bcbc98: add new `meta.json#theme.timestamp` option to hide `Last updated on ...`
+- d16b2ba: move contexts to `./contexts` directory
+- 47938b1: remove unneeded `useRef` for `<details />`
+- 7373c1f: fix `useConfig`/`useRouter` inside `head()`
+- a9ca0b9: do not add `basePath` to the links
+- 0af6e79: `"layout": "raw"` should have unstyled `<a />` and `<p />` elements as well
+- f99bbc2: Add `nextra-body-typesetting-article` back
+
 ## 2.0.0-beta.17
 
 ### Patch Changes
