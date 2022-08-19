@@ -1,5 +1,11 @@
 # nextra-theme-blog
 
+## 2.0.0-beta.18
+
+### Patch Changes
+
+- 0518b1b: improve tags styling
+
 ## 2.0.0-beta.17
 
 ### Patch Changes

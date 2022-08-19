@@ -1,5 +1,11 @@
 # nextra
 
+## 2.0.0-beta.18
+
+### Patch Changes
+
+- 803553c: use `findPagesDir` from `next/dist/lib/find-pages-dir`
+
 ## 2.0.0-beta.17
 
 ### Patch Changes
