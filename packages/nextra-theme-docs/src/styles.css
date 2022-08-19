@@ -99,15 +99,6 @@ body {
     }
   }
 
-  .nextra-sidebar-container {
-    mask-image: linear-gradient(to bottom, transparent, #000 20px),
-      linear-gradient(to left, #000 10px, transparent 10px);
-
-    &.with-menu.nextra-scrollbar::-webkit-scrollbar-track {
-      margin-bottom: 76px;
-    }
-  }
-
   /* Sidebar */
   .nextra-sidebar {
     -webkit-touch-callout: none;
@@ -343,10 +334,14 @@ article {
   }
 }
 
-.nextra-toc {
+.nextra-toc, .nextra-sidebar-container {
   mask-image: linear-gradient(to bottom, transparent, #000 20px),
   linear-gradient(to left, #000 10px, transparent 10px);
 }
+
+.nextra-sidebar-container.with-menu.nextra-scrollbar::-webkit-scrollbar-track {
+   margin-bottom: 76px;
+ }
 
 /* Search */
 .nextra-search ul {
