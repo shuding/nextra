@@ -1,3 +1,4 @@
+import NextHead from 'next/head'
 /**
  * @type {import('nextra-theme-docs').DocsThemeConfig}
  */
@@ -15,7 +16,7 @@ export default {
     </>
   ),
   head: (
-    <>
+    <NextHead>
       <meta name="msapplication-TileColor" content="#ffffff" />
       <meta name="theme-color" content="#ffffff" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -59,7 +60,7 @@ export default {
         href="/favicon-16x16.png"
       />
       <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
-    </>
+    </NextHead>
   ),
   search: true,
   unstable_faviconGlyph: '✦',
