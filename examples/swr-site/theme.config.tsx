@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import NextHead from "next/head";
 import { DocsThemeConfig, useConfig } from "nextra-theme-docs";
 
 const Logo = ({ height }) => (
@@ -78,7 +79,7 @@ const config: DocsThemeConfig = {
       config.meta.image ||
       "https://assets.vercel.com/image/upload/v1572282926/swr/twitter-card.jpg";
     return (
-      <>
+      <NextHead>
         {/* Favicons, meta */}
         <link
           rel="apple-touch-icon"
@@ -113,7 +114,7 @@ const config: DocsThemeConfig = {
         <meta name="og:title" content={`${config.title} – SWR`} />
         <meta name="og:image" content={image} />
         <meta name="apple-mobile-web-app-title" content="SWR" />
-      </>
+      </NextHead>
     );
   },
   sidebarSubtitle: ({ title }) => (
@@ -192,14 +193,14 @@ const config: DocsThemeConfig = {
   },
   i18n: [
     { locale: "en-US", text: "English" },
-    { locale: "es-ES", text: "Español RTL", direction: 'rtl' },
+    { locale: "es-ES", text: "Español RTL", direction: "rtl" },
     { locale: "zh-CN", text: "简体中文" },
     { locale: "ja", text: "日本語" },
     { locale: "ko", text: "한국어" },
     { locale: "ru", text: "Русский" },
   ],
   gitTimestamp: "Last updated on",
-  bodyExtraContent: '💪 content from `config.bodyExtraContent`'
+  bodyExtraContent: "💪 content from `config.bodyExtraContent`",
 };
 
 export default config;
