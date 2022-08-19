@@ -33,9 +33,9 @@ export const DEFAULT_THEME: DocsThemeConfig = {
       </span>
     </>
   ),
-  head: (
+  head: () => (
     <>
-      <meta name="msapplication-TileColor" content="#ffffff" />
+      <meta name="msapplication-TileColor" content="#fff" />
       <meta httpEquiv="Content-Language" content="en" />
       <meta name="description" content="Nextra: the next docs builder" />
       <meta name="twitter:card" content="summary_large_image" />
