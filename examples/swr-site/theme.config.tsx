@@ -133,8 +133,7 @@ const config: DocsThemeConfig = {
     const linkProps = {
       target: "_blank",
       rel: "noopener",
-      className:
-        "inline-flex items-center no-underline text-current font-semibold gap-2",
+      className: "inline-flex items-center font-semibold gap-2",
       href:
         {
           "zh-CN": "https://vercel.com/?utm_source=swr_zh-cn",
@@ -200,7 +199,14 @@ const config: DocsThemeConfig = {
     { locale: "ru", text: "Русский" },
   ],
   gitTimestamp: "Last updated on",
-  bodyExtraContent: "💪 content from `config.bodyExtraContent`",
+  bodyExtraContent() {
+    const router = useRouter();
+    return (
+      router.route.startsWith("/docs") && (
+        <>💪 content from `config.bodyExtraContent`</>
+      )
+    );
+  },
 };
 
 export default config;

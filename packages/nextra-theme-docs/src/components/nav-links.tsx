@@ -28,7 +28,7 @@ export const NavLinks = ({
             href={prev.route}
             title={prev.title}
             className={cn(
-              '-m-4 flex items-center rounded p-4 text-base font-medium text-gray-600 no-underline transition-colors hover:text-primary-500 dark:text-gray-300 dark:hover:text-primary-500 md:text-lg',
+              '-m-4 flex items-center rounded p-4 text-base font-medium text-gray-600 transition-colors hover:text-primary-500 dark:text-gray-300 md:text-lg',
               'rtl:ml-2 ltr:mr-2'
             )}
           >
@@ -49,7 +49,7 @@ export const NavLinks = ({
             href={next.route}
             title={next.title}
             className={cn(
-              '-m-4 inline-flex items-center justify-end rounded p-4 text-base font-medium text-gray-600 no-underline transition-colors hover:text-primary-500 dark:text-gray-300 dark:hover:text-primary-500 md:text-lg',
+              '-m-4 inline-flex items-center justify-end rounded p-4 text-base font-medium text-gray-600 transition-colors hover:text-primary-500 dark:text-gray-300 md:text-lg',
               'rtl:mr-2 ltr:ml-2'
             )}
           >

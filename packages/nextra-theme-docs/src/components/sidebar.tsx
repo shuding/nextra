@@ -159,7 +159,7 @@ function Separator({ title, topLevel }: SeparatorProps): ReactElement {
       )}
     >
       {hasTitle ? (
-        <div className="mx-2 py-1.5 text-sm font-semibold text-gray-900 no-underline dark:text-gray-100">
+        <div className="mx-2 py-1.5 text-sm font-semibold text-gray-900 dark:text-gray-100">
           {sidebarSubtitle
             ? renderComponent(sidebarSubtitle, { title })
             : title}

@@ -36,7 +36,7 @@ function NavbarMenu({
       <Menu.Button
         className={cn(
           className,
-          'items-center -ml-2 hidden whitespace-nowrap p-2 no-underline md:inline-flex',
+          'items-center -ml-2 hidden whitespace-nowrap p-2 md:inline-flex',
           'text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200'
         )}
       >
@@ -57,7 +57,7 @@ function NavbarMenu({
                 <Anchor
                   href={href}
                   className={cn(
-                    'hidden whitespace-nowrap no-underline md:inline-block text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 relative cursor-pointer select-none w-full',
+                    'hidden whitespace-nowrap md:inline-block text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 relative select-none w-full',
                     'py-1.5 ltr:pl-3 ltr:pr-9 rtl:pr-3 rtl:pl-9'
                   )}
                   newWindow={item.newWindow}
@@ -85,7 +85,7 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
       <nav className="mx-auto flex h-16 max-w-[90rem] items-center justify-end gap-2 pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
         <Anchor
           href="/"
-          className="flex ltr:mr-auto rtl:ml-auto items-center text-current no-underline hover:opacity-75"
+          className="flex ltr:mr-auto rtl:ml-auto items-center hover:opacity-75"
         >
           {renderComponent(config.logo)}
         </Anchor>
@@ -106,7 +106,7 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
                   className={cn(
                     'nextra-nav-link flex gap-1',
                     isActive
-                      ? 'active subpixel-antialiased text-current'
+                      ? 'active subpixel-antialiased'
                       : 'text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200'
                   )}
                   menu={menu}
@@ -142,10 +142,10 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
               key={page.route}
               className={cn(
                 'nextra-nav-link',
-                '-ml-2 hidden whitespace-nowrap p-2 no-underline md:inline-block',
+                '-ml-2 hidden whitespace-nowrap p-2 md:inline-block',
                 !isActive || page.newWindow
                   ? 'text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200'
-                  : 'active subpixel-antialiased text-current'
+                  : 'active subpixel-antialiased'
               )}
               newWindow={page.newWindow}
               aria-selected={!page.newWindow && isActive}
