@@ -79,7 +79,7 @@ const config: DocsThemeConfig = {
       config.meta.image ||
       "https://assets.vercel.com/image/upload/v1572282926/swr/twitter-card.jpg";
     return (
-      <NextHead>
+      <>
         {/* Favicons, meta */}
         <link
           rel="apple-touch-icon"
@@ -114,7 +114,7 @@ const config: DocsThemeConfig = {
         <meta name="og:title" content={`${config.title} – SWR`} />
         <meta name="og:image" content={image} />
         <meta name="apple-mobile-web-app-title" content="SWR" />
-      </NextHead>
+      </>
     );
   },
   sidebarSubtitle: ({ title }) => (

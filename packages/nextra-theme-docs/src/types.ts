@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react'
+import { FC, ReactElement, ReactNode } from 'react'
 import { ThemeProviderProps } from 'next-themes/dist/types'
 import { PageOpts } from 'nextra'
 
@@ -24,7 +24,7 @@ export interface DocsThemeConfig {
   footerText?: ReactNode | FC
   footerEditLink?: ReactNode | FC
   logo?: ReactNode | FC
-  head?: ReactNode | FC
+  head?: () => ReactElement,
   direction?: 'ltr' | 'rtl'
   i18n?: { locale: string; text: string; direction?: string }[]
   floatTOC?: boolean
