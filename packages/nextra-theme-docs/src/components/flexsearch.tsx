@@ -151,7 +151,8 @@ export function Flexsearch(): ReactElement {
     )
   }, [search])
 
-  const load = async () => {
+  const load = async (value: string): Promise<void> => {
+    setSearch(value)
     if (indexes[locale] || loading) {
       return
     }
@@ -243,10 +244,9 @@ export function Flexsearch(): ReactElement {
 
   return (
     <Search
-      load={load}
       loading={loading}
       value={search}
-      onChange={setSearch}
+      onChange={load}
       className="w-screen min-h-[100px] max-w-[min(calc(100vw-2rem),calc(100%+20rem))]"
       results={results}
     />
