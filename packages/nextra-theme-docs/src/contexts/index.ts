@@ -1,5 +1,4 @@
 export {
-  ActiveAnchor,
   useActiveAnchor,
   useSetActiveAnchor,
   ActiveAnchorProvider

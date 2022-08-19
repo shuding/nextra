@@ -83,18 +83,19 @@ const createHeaderLink = (
     id,
     ...props
   }: ComponentProps<'h2'>): ReactElement {
-    setActiveAnchor = useSetActiveAnchor()
+    setActiveAnchor ??= useSetActiveAnchor()
     const obRef = useRef<HTMLSpanElement>(null)
 
     useEffect(() => {
-      if (!obRef.current) return
+      const heading = obRef.current
+      if (!heading) return
 
-      slugs.set(obRef.current, [id, (context.index += 1)])
-      if (obRef.current) observer.observe(obRef.current)
+      slugs.set(heading, [id, (context.index += 1)])
+      observer.observe(heading)
 
       return () => {
         observer.disconnect()
-        slugs.delete(obRef.current!)
+        slugs.delete(heading)
         setActiveAnchor(f => {
           const ret = { ...f }
           delete ret[id!]
@@ -108,7 +109,7 @@ const createHeaderLink = (
         className={cn(
           'font-semibold tracking-tight',
           {
-            h2: 'mt-10 text-3xl border-b pb-1 dark:border-primary-100/10',
+            h2: 'mt-10 text-3xl border-b pb-1 dark:border-primary-100/10 contrast-more:border-neutral-400 contrast-more:dark:border-neutral-400',
             h3: 'mt-8 text-2xl',
             h4: 'mt-8 text-xl',
             h5: 'mt-8 text-lg',

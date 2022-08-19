@@ -1,4 +1,4 @@
-import React, { ReactElement, useRef, useEffect } from 'react'
+import React, { ReactElement, useEffect, useRef, useMemo } from 'react'
 import cn from 'clsx'
 import Slugger from 'github-slugger'
 import { Heading } from 'nextra'
@@ -6,7 +6,7 @@ import parseGitUrl from 'parse-git-url'
 import scrollIntoView from 'scroll-into-view-if-needed'
 
 import { renderComponent, getHeadingText, getGitIssueUrl } from '../utils'
-import { useConfig, ActiveAnchor, useActiveAnchor } from '../contexts'
+import { useConfig, useActiveAnchor } from '../contexts'
 import { Anchor } from './anchor'
 
 const getEditUrl = (filepath?: string): string => {
@@ -28,145 +28,143 @@ const getEditUrl = (filepath?: string): string => {
   return '#'
 }
 
-function Item({
-  heading,
-  slug,
-  activeAnchor
-}: {
-  heading: Heading
-  slug: string
-  activeAnchor: ActiveAnchor
-}): ReactElement {
-  const text = getHeadingText(heading)
-  const state = activeAnchor[slug]
-  const ref = useRef<HTMLLIElement>(null)
-
-  useEffect(() => {
-    const el = ref.current
-    const [toc] = document.getElementsByClassName('nextra-toc')
-    if (state?.isActive && el && toc) {
-      scrollIntoView(el, {
-        behavior: 'smooth',
-        block: 'center',
-        inline: 'center',
-        scrollMode: 'always',
-        boundary: toc
-      })
-    }
-  }, [state?.isActive])
-
-  return (
-    <li
-      className={cn(
-        'scroll-my-6 scroll-py-6',
-        {
-          1: '',
-          2: '',
-          3: 'ml-4',
-          4: 'ml-8',
-          5: 'ml-12',
-          6: 'ml-16'
-        }[heading.depth]
-      )}
-      ref={ref}
-    >
-      <a
-        href={`#${slug}`}
-        className={cn(
-          'inline-block',
-          heading.depth === 2 && 'font-semibold',
-          state?.isActive
-            ? 'text-primary-500 subpixel-antialiased'
-            : 'text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300'
-        )}
-        aria-selected={state?.isActive}
-      >
-        {text}
-      </a>
-    </li>
-  )
-}
-
 export function TOC({
   headings,
-  filepathWithName
+  filepathWithName,
+  className
 }: {
   headings: Heading[]
   filepathWithName: string
+  className: string
 }): ReactElement {
   const slugger = new Slugger()
   const activeAnchor = useActiveAnchor()
   const config = useConfig()
+  const tocRef = useRef<HTMLDivElement>(null)
 
-  headings = headings.filter(h => h.type === 'heading' && h.depth > 1)
+  const items = useMemo<
+    { text: string; slug: string; depth: 2 | 3 | 4 | 5 | 6 }[]
+  >(
+    () =>
+      headings
+        .filter(heading => heading.type === 'heading' && heading.depth > 1)
+        .map(heading => {
+          const text = getHeadingText(heading)
+          return {
+            text,
+            slug: slugger.slug(text),
+            depth: heading.depth as any
+          }
+        }),
+    [headings]
+  )
 
-  const hasHeadings = headings.length > 0
+  const hasHeadings = items.length > 0
   const hasMetaInfo =
     config.feedbackLink || config.footerEditLink || config.tocExtraContent
 
+  const activeSlug = Object.entries(activeAnchor).find(
+    ([, { isActive }]) => isActive
+  )?.[0]
+
+  useEffect(() => {
+    if (!activeSlug) return
+    const anchor = tocRef.current?.querySelector(`li > a[href="#${activeSlug}"`)
+
+    if (anchor) {
+      scrollIntoView(anchor, {
+        behavior: 'smooth',
+        block: 'center',
+        inline: 'center',
+        scrollMode: 'always',
+        boundary: tocRef.current
+      })
+    }
+  }, [activeSlug])
+
+  const linkClassName = cn(
+    'text-xs font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100',
+    'contrast-more:text-gray-800 contrast-more:dark:text-gray-50'
+  )
+
   return (
-    <div className="nextra-toc order-last hidden w-64 flex-shrink-0 px-4 text-sm xl:block">
-      <div className="nextra-toc-content sticky top-16 -mr-4 max-h-[calc(100vh-4rem-env(safe-area-inset-bottom))] overflow-y-auto pr-4 pt-8">
-        {hasHeadings && (
+    <div
+      ref={tocRef}
+      className={cn(
+        'sticky top-16 pt-8 px-4 text-sm overflow-y-auto [hyphens:auto]',
+        'ltr:-mr-4 rtl:-ml-4',
+        'max-h-[calc(100vh-4rem-env(safe-area-inset-bottom))]',
+        className
+      )}
+    >
+      {hasHeadings && (
+        <>
+          <p className="mb-4 font-semibold tracking-tight">On This Page</p>
           <ul>
-            <p className="mb-4 font-semibold tracking-tight">On This Page</p>
-            {headings.map(heading => {
-              const text = getHeadingText(heading)
-              const slug = slugger.slug(text)
-
-              return (
-                <Item
-                  heading={heading}
-                  activeAnchor={activeAnchor}
-                  slug={slug}
-                  key={slug}
-                />
-              )
-            })}
+            {items.map(({ slug, text, depth }) => (
+              <li className="my-2 scroll-my-6 scroll-py-6" key={slug}>
+                <a
+                  href={`#${slug}`}
+                  className={cn(
+                    {
+                      2: 'font-semibold',
+                      3: 'ltr:ml-4 rtl:mr-4',
+                      4: 'ltr:ml-8 rtl:mr-8',
+                      5: 'ltr:ml-12 rtl:mr-12',
+                      6: 'ltr:ml-16 rtl:mr-16'
+                    }[depth],
+                    activeAnchor[slug]?.isActive
+                      ? 'text-primary-500 subpixel-antialiased contrast-more:!text-primary-500'
+                      : 'text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300',
+                    'contrast-more:text-gray-900 contrast-more:underline contrast-more:dark:text-gray-50'
+                  )}
+                >
+                  {text}
+                </a>
+              </li>
+            ))}
           </ul>
-        )}
+        </>
+      )}
 
-        {hasMetaInfo ? (
-          <div
-            className={cn(
-              'nextra-toc-meta',
-              hasHeadings &&
-                'mt-8 border-t bg-white pt-8 shadow-[0_-12px_16px_white] dark:bg-dark dark:shadow-[0_-12px_16px_#111]',
-              'sticky bottom-0 pb-8 dark:border-neutral-800'
-            )}
-          >
-            {config.feedbackLink ? (
-              <Anchor
-                className="mb-2 block text-xs font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
-                href={getGitIssueUrl({
-                  repository: config.docsRepositoryBase,
-                  title: `Feedback for “${config.title}”`,
-                  labels: config.feedbackLabels
-                })}
-                newWindow
-              >
-                {renderComponent(config.feedbackLink)}
-              </Anchor>
-            ) : null}
+      {hasMetaInfo ? (
+        <div
+          className={cn(
+            hasHeadings &&
+              'mt-8 border-t bg-white pt-8 shadow-[0_-12px_16px_white] dark:bg-dark dark:shadow-[0_-12px_16px_#111]',
+            'sticky bottom-0 pb-8 dark:border-neutral-800 flex flex-col gap-2',
+            'contrast-more:shadow-none contrast-more:border-t contrast-more:border-neutral-400 contrast-more:dark:border-neutral-400'
+          )}
+        >
+          {config.feedbackLink ? (
+            <Anchor
+              className={linkClassName}
+              href={getGitIssueUrl({
+                repository: config.docsRepositoryBase,
+                title: `Feedback for “${config.title}”`,
+                labels: config.feedbackLabels
+              })}
+              newWindow
+            >
+              {renderComponent(config.feedbackLink)}
+            </Anchor>
+          ) : null}
 
-            {config.footerEditLink ? (
-              <Anchor
-                className="mb-2 block text-xs font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
-                href={getEditUrl(filepathWithName)}
-                newWindow
-              >
-                {renderComponent(config.footerEditLink)}
-              </Anchor>
-            ) : null}
+          {config.footerEditLink ? (
+            <Anchor
+              className={linkClassName}
+              href={getEditUrl(filepathWithName)}
+              newWindow
+            >
+              {renderComponent(config.footerEditLink)}
+            </Anchor>
+          ) : null}
 
-            {config.tocExtraContent ? (
-              <div className="pt-4 leading-4">
-                {renderComponent(config.tocExtraContent)}
-              </div>
-            ) : null}
-          </div>
-        ) : null}
-      </div>
+          {config.tocExtraContent
+            ? renderComponent(config.tocExtraContent)
+            : null}
+        </div>
+      ) : null}
     </div>
   )
 }
