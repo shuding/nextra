@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import NextHead from "next/head";
 import { DocsThemeConfig, useConfig } from "nextra-theme-docs";
 
 const Logo = ({ height }) => (
@@ -192,14 +193,14 @@ const config: DocsThemeConfig = {
   },
   i18n: [
     { locale: "en-US", text: "English" },
-    { locale: "es-ES", text: "Español RTL", direction: 'rtl' },
+    { locale: "es-ES", text: "Español RTL", direction: "rtl" },
     { locale: "zh-CN", text: "简体中文" },
     { locale: "ja", text: "日本語" },
     { locale: "ko", text: "한국어" },
     { locale: "ru", text: "Русский" },
   ],
   gitTimestamp: "Last updated on",
-  bodyExtraContent: '💪 content from `config.bodyExtraContent`'
+  bodyExtraContent: "💪 content from `config.bodyExtraContent`",
 };
 
 export default config;

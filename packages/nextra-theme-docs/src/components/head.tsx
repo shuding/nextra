@@ -1,8 +1,7 @@
 import React, { ReactElement } from 'react'
 import NextHead from 'next/head'
 import { useTheme } from 'next-themes'
-
-import { renderComponent, renderString, useMounted } from '../utils'
+import { renderString, useMounted } from '../utils'
 import { useConfig } from '../contexts'
 
 export function Head(): ReactElement {
@@ -14,7 +13,6 @@ export function Head(): ReactElement {
   return (
     <NextHead>
       <title>{config.title + renderString(config.titleSuffix)}</title>
-      {renderComponent(config.head)}
       {config.unstable_faviconGlyph ? (
         <link
           rel="icon"
@@ -44,6 +42,7 @@ export function Head(): ReactElement {
         name="viewport"
         content="width=device-width, initial-scale=1.0, viewport-fit=cover"
       />
+      {config.head?.()}
     </NextHead>
   )
 }
