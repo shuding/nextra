@@ -232,7 +232,7 @@ export function Search({
                     )}
                   >
                     <Anchor
-                      className="block no-underline scroll-m-12 !text-current hover:!bg-transparent !p-0"
+                      className="block scroll-m-12"
                       href={route}
                       onMouseMove={() => setActive(i)}
                       onClick={finishSearch}

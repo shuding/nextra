@@ -195,12 +195,7 @@ const Summary = (props: ComponentProps<'summary'>): ReactElement => {
 }
 
 const A = ({ href = '', ...props }) => (
-  <Anchor
-    href={href}
-    newWindow={href.startsWith('https://')}
-    className="ring-primary-500/30 focus:outline-none focus-visible:ring"
-    {...props}
-  />
+  <Anchor href={href} newWindow={href.startsWith('https://')} {...props} />
 )
 
 export const getComponents = ({
@@ -243,12 +238,17 @@ export const getComponents = ({
     hr: (props: ComponentProps<'hr'>) => (
       <hr className="my-8 dark:border-gray-900" {...props} />
     ),
-    a: A,
+    a: props => (
+      <A
+        {...props}
+        className="ring-primary-500/30 focus:outline-none focus-visible:ring text-primary-500 underline decoration-from-font [text-underline-position:under]"
+      />
+    ),
     table: (props: ComponentProps<'table'>) => (
       <table className="mt-6 first:mt-0 p-0" {...props} />
     ),
     p: (props: ComponentProps<'p'>) => (
-      <p className="mt-6 first:mt-0" {...props} />
+      <p className="mt-6 first:mt-0 leading-7" {...props} />
     ),
     tr: (props: ComponentProps<'tr'>) => (
       <tr

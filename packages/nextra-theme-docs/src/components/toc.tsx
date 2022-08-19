@@ -73,7 +73,7 @@ function Item({
       <a
         href={`#${slug}`}
         className={cn(
-          'inline-block no-underline',
+          'inline-block',
           heading.depth === 2 && 'font-semibold',
           state?.isActive
             ? 'text-primary-500 subpixel-antialiased'
@@ -137,7 +137,7 @@ export function TOC({
           >
             {config.feedbackLink ? (
               <Anchor
-                className="mb-2 block text-xs font-medium text-gray-500 no-underline hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
+                className="mb-2 block text-xs font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
                 href={getGitIssueUrl({
                   repository: config.docsRepositoryBase,
                   title: `Feedback for “${config.title}”`,
@@ -151,7 +151,7 @@ export function TOC({
 
             {config.footerEditLink ? (
               <Anchor
-                className="mb-2 block text-xs font-medium text-gray-500 no-underline hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
+                className="mb-2 block text-xs font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
                 href={getEditUrl(filepathWithName)}
                 newWindow
               >
