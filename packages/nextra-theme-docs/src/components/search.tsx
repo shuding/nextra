@@ -216,11 +216,16 @@ export function Search({
               'bg-white text-gray-100 ring-1 ring-black/5',
               'dark:bg-neutral-900 dark:ring-white/10',
               'absolute top-full z-20 mt-2 overscroll-contain rounded-xl py-2.5 shadow-xl overflow-auto',
+              'max-h-[min(calc(50vh-11rem-env(safe-area-inset-bottom)),400px)]',
+              'md:max-h-[min(calc(100vh-5rem-env(safe-area-inset-bottom)),400px)]',
               'right-0 left-0 ltr:md:left-auto rtl:md:right-auto',
               'contrast-more:border contrast-more:border-gray-900 contrast-more:dark:border-gray-50',
               className
             )}
             ref={ulRef}
+            style={{
+              transition: 'max-height .2s ease' // don't work with tailwindcss
+            }}
           >
             {loading ? (
               <span className="flex select-none justify-center p-8 text-center text-sm text-gray-400 gap-2">

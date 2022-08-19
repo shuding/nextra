@@ -42,14 +42,6 @@ body {
         box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
       }
     }
-    @supports (
-      (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))
-    ) {
-      .nextra-nav-container-blur {
-        backdrop-filter: blur(12px);
-        @apply bg-opacity-[.85] dark:bg-opacity-80;
-      }
-    }
 
     .nextra-nav-link {
       @apply text-sm;
@@ -102,7 +94,7 @@ body {
   /* Sidebar */
   .nextra-sidebar {
     -webkit-touch-callout: none;
-    ul {
+    ul.nextra-sidebar-list {
       a, button {
         &:focus-visible {
           @apply ring ring-primary-200;
@@ -144,24 +136,6 @@ body {
       ul {
         @apply relative dark:border-neutral-800;
         @apply ltr:md:border-l ltr:pl-3 ltr:ml-1 rtl:md:border-r rtl:pr-3 rtl:mr-1;
-      }
-    }
-    .nextra-sidebar-search {
-      @apply sticky top-0 -mt-4 bg-white pt-4 dark:bg-dark;
-      box-shadow: 0 2px 14px 6px white;
-      z-index: 1;
-      .dark & {
-        box-shadow: 0 2px 14px 6px #111;
-      }
-    }
-
-    .nextra-sidebar-menu {
-      @apply sticky bottom-0;
-      @media (prefers-contrast: more) {
-        & {
-          box-shadow: none;
-          border-top: 1px solid #999;
-        }
       }
     }
   }
@@ -343,33 +317,25 @@ article {
    margin-bottom: 76px;
  }
 
-/* Search */
-.nextra-search ul {
-  max-height: min(calc(100vh - 5rem - env(safe-area-inset-bottom)), 400px);
-  transition: max-height 0.2s ease;
-  @supports (
-    (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))
-  ) {
-    & {
-      backdrop-filter: blur(16px);
-      @apply bg-opacity-70 dark:bg-opacity-80;
-    }
+@supports (
+  (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))
+) {
+  .nextra-search ul {
+    @apply backdrop-blur-lg bg-opacity-70 dark:bg-opacity-80;
+  }
+  .nextra-nav-container-blur {
+    @apply backdrop-blur-md bg-opacity-[.85] dark:bg-opacity-80;
   }
 }
 
 @media screen and (max-width: 767px) {
-  .nextra-search {
-    .excerpt {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-line-clamp: 1;
-      line-clamp: 1;
-      -webkit-box-orient: vertical;
-    }
-    ul {
-      max-height: min(calc(50vh - 11rem - env(safe-area-inset-bottom)), 400px);
-    }
+  .nextra-search .excerpt {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
   }
 }
 

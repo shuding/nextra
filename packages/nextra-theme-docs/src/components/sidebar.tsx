@@ -239,7 +239,7 @@ interface MenuProps {
 
 function Menu({ directories, anchors, submenu }: MenuProps): ReactElement {
   return (
-    <ul>
+    <ul className="nextra-sidebar-list">
       {directories.map(item => {
         if (
           item.type === 'menu' ||
@@ -328,7 +328,12 @@ export function Sidebar({
       >
         <div className="nextra-sidebar h-full w-full select-none pl-[calc(env(safe-area-inset-left)-1.5rem)] md:h-auto">
           <div className="min-h-[calc(100vh-4rem-61px)] p-4">
-            <div className="nextra-sidebar-search mb-4 block md:hidden">
+            <div
+              className={cn(
+                'sticky top-0 z-[1] block md:hidden -mt-4 mb-4 bg-white pt-4',
+                'dark:bg-dark shadow-[0_2px_14px_6px_#fff] dark:shadow-[0_2px_14px_6px_#111]'
+              )}
+            >
               {config.customSearch ||
                 (config.search ? (
                   config.unstable_flexsearch ? (
@@ -358,7 +363,12 @@ export function Sidebar({
           </div>
 
           {hasMenu && (
-            <div className="nextra-sidebar-menu mx-4 border-t shadow-[0_-12px_16px_white] dark:border-neutral-800 dark:shadow-[0_-12px_16px_#111]">
+            <div
+              className={cn(
+                'sticky bottom-0 mx-4 border-t shadow-[0_-12px_16px_#fff] dark:border-neutral-800 dark:shadow-[0_-12px_16px_#111]',
+                'contrast-more:shadow-none contrast-more:dark:shadow-none contrast-more:border-neutral-400'
+              )}
+            >
               <div className="flex gap-1 bg-white py-4 pb-4 dark:bg-dark justify-between">
                 {config.i18n ? (
                   <div className="relative">
