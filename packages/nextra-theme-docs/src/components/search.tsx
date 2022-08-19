@@ -21,7 +21,6 @@ type SearchProps = {
   className?: string
   value: string
   onChange: (newValue: string) => void
-  load?: () => Promise<void>
   loading?: boolean
   results: SearchResult[]
 }
@@ -32,7 +31,6 @@ export function Search({
   className,
   value,
   onChange,
-  load,
   loading,
   results
 }: SearchProps): ReactElement {
@@ -42,6 +40,7 @@ export function Search({
   const router = useRouter()
   const { setMenu } = useMenu()
   const input = useRef<HTMLInputElement>(null)
+  const ulRef = useRef<HTMLUListElement>(null)
 
   useEffect(() => {
     setActive(0)
@@ -77,8 +76,8 @@ export function Search({
           e.preventDefault()
           if (active + 1 < results.length) {
             setActive(active + 1)
-            const activeElement = document.querySelector(
-              `.nextra-search li:nth-of-type(${active + 2}) > a`
+            const activeElement = ulRef.current?.querySelector(
+              `li:nth-of-type(${active + 2}) > a`
             )
             activeElement?.scrollIntoView({
               behavior: 'smooth',
@@ -91,8 +90,8 @@ export function Search({
           e.preventDefault()
           if (active - 1 >= 0) {
             setActive(active - 1)
-            const activeElement = document.querySelector(
-              `.nextra-search li:nth-of-type(${active}) > a`
+            const activeElement = ulRef.current?.querySelector(
+              `li:nth-of-type(${active}) > a`
             )
             activeElement?.scrollIntoView({
               behavior: 'smooth',
@@ -167,6 +166,20 @@ export function Search({
     </Transition>
   )
 
+  const handleMouseMove = useCallback<
+    NonNullable<ComponentProps<'a'>['onMouseMove']>
+  >(e => {
+    const { index } = e.currentTarget.dataset
+    setActive(Number(index))
+  }, [])
+
+  const handleFocusAndBlur = useCallback<
+    NonNullable<ComponentProps<'input'>['onFocus']>
+  >(e => {
+    const isFocus = e.type === 'focus'
+    setShow(isFocus)
+  }, [])
+
   return (
     <div className="nextra-search relative md:w-64">
       {renderList && (
@@ -183,13 +196,8 @@ export function Search({
         type="search"
         placeholder={renderString(config.searchPlaceholder)}
         onKeyDown={handleKeyDown}
-        onFocus={() => {
-          load?.()
-          setShow(true)
-        }}
-        onBlur={() => {
-          setShow(false)
-        }}
+        onFocus={handleFocusAndBlur}
+        onBlur={handleFocusAndBlur}
         suffix={icon}
       />
 
@@ -200,7 +208,7 @@ export function Search({
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
       >
-        {/* Transition.Child is required here, otherwise popup will still present in DOM after focus out */}
+        {/* Transition.Child is required here, otherwise popup will be still present in DOM after focus out */}
         <Transition.Child>
           <ul
             className={cn(
@@ -212,6 +220,7 @@ export function Search({
               'contrast-more:border contrast-more:border-gray-900 contrast-more:dark:border-gray-50',
               className
             )}
+            ref={ulRef}
           >
             {loading ? (
               <span className="flex select-none justify-center p-8 text-center text-sm text-gray-400 gap-2">
@@ -234,7 +243,8 @@ export function Search({
                     <Anchor
                       className="block no-underline scroll-m-12 !text-current hover:!bg-transparent !p-0"
                       href={route}
-                      onMouseMove={() => setActive(i)}
+                      data-index={i}
+                      onMouseMove={handleMouseMove}
                       onClick={finishSearch}
                     >
                       {children}
