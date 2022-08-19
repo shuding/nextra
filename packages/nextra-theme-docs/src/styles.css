@@ -119,10 +119,8 @@ p {
     mask-image: linear-gradient(to bottom, transparent, #000 20px),
       linear-gradient(to left, #000 10px, transparent 10px);
 
-    &.with-menu.nextra-scrollbar {
-      &::-webkit-scrollbar-track {
-        margin-bottom: 76px;
-      }
+    &.with-menu.nextra-scrollbar::-webkit-scrollbar-track {
+      margin-bottom: 76px;
     }
   }
 
@@ -130,9 +128,21 @@ p {
   .nextra-sidebar {
     -webkit-touch-callout: none;
     ul {
-      a:focus-visible,
-      button:focus-visible {
-        @apply ring ring-primary-200;
+      a, button {
+        &:focus-visible {
+          @apply ring ring-primary-200;
+        }
+      }
+      li.active > a {
+        &, &:hover {
+          @apply bg-primary-50 font-bold text-primary-500;
+          @apply dark:bg-primary-500/10 dark:text-primary-500;
+        }
+      }
+      @media (prefers-contrast: more) {
+        li.active > a {
+          @apply border border-primary-500 dark:border-primary-500;
+        }
       }
       button,
       summary,
