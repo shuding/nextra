@@ -28,7 +28,7 @@ export interface NextraBlogTheme {
 }
 
 export interface BlogPageOpts extends PageOpts {
-  meta: Meta
+  frontMatter: Meta
 }
 
 type Meta = {

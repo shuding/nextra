@@ -10,7 +10,7 @@ export const ArticleLayout = ({ children }: { children: ReactNode }) => {
   const { back } = getParent({ opts, config })
   return (
     <BasicLayout>
-      <Meta {...opts.meta} back={back} config={config} />
+      <Meta {...opts.frontMatter} back={back} config={config} />
       <MDXTheme>
         {children}
         {config.postFooter}

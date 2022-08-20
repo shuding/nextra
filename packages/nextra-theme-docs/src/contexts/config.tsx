@@ -14,12 +14,12 @@ import { MenuProvider } from './menu'
 type Config = DocsThemeConfig &
   Pick<
     PageOpts,
-    'unstable_flexsearch' | 'newNextLinkBehavior' | 'title' | 'meta'
+    'unstable_flexsearch' | 'newNextLinkBehavior' | 'title' | 'frontMatter'
   >
 
 const ConfigContext = createContext<Config>({
   title: '',
-  meta: {},
+  frontMatter: {},
   ...DEFAULT_THEME
 })
 
@@ -80,7 +80,7 @@ export const ConfigProvider = ({
     unstable_flexsearch: pageOpts.unstable_flexsearch,
     newNextLinkBehavior: pageOpts.newNextLinkBehavior,
     title: pageOpts.title,
-    meta: pageOpts.meta,
+    frontMatter: pageOpts.frontMatter,
     ...Object.fromEntries(
       DEEP_OBJECT_KEYS.map(key => [
         key,

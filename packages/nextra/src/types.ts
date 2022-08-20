@@ -50,7 +50,7 @@ export type Heading = MDASTHeading & {
 export type PageOpts = {
   filePath: string
   route: string
-  meta: GrayMatterFile<string>['data']
+  frontMatter: GrayMatterFile<string>['data']
   pageMap: PageMapItem[]
   title: string
   headings: Heading[]
