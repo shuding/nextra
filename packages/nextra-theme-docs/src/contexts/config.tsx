@@ -104,13 +104,14 @@ export const ConfigProvider = ({
     }
 
     for (const key of ['search', 'footer'] as const) {
-      if (key in themeConfig) continue
-      const option = themeConfig[key]
-      if (typeof option === 'boolean' || option == null) {
-        console.warn(
-          `${notice} "${key}".`,
-          option ? 'Remove it' : `Rename it to ${key}: { component: null }`
-        )
+      if (key in themeConfig) {
+        const option = themeConfig[key]
+        if (typeof option === 'boolean' || option == null) {
+          console.warn(
+            `${notice} "${key}".`,
+            option ? 'Remove it' : `Rename it to ${key}: { component: null }`
+          )
+        }
       }
     }
     if (typeof themeConfig.banner === 'string') {
