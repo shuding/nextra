@@ -47,6 +47,46 @@ const FOOTER_LINK = {
   "zh-CN": "https://vercel.com/?utm_source=swr_zh-cn",
 };
 
+const FOOTER_LINK_TEXT = {
+  "en-US": (
+    <>
+      Powered by
+      <Vercel />
+    </>
+  ),
+  "es-ES": (
+    <>
+      Desarrollado por
+      <Vercel />
+    </>
+  ),
+  ja: (
+    <>
+      提供
+      <Vercel />
+    </>
+  ),
+  ko: (
+    <>
+      Powered by
+      <Vercel />
+    </>
+  ),
+  ru: (
+    <>
+      Работает на
+      <Vercel />
+    </>
+  ),
+  "zh-CN": (
+    <>
+      由
+      <Vercel />
+      驱动
+    </>
+  ),
+};
+
 const config: DocsThemeConfig = {
   banner: {
     key: "swr-2",
@@ -63,9 +103,9 @@ const config: DocsThemeConfig = {
   darkMode: true,
   docsRepositoryBase:
     "https://github.com/shuding/nextra/blob/core/examples/swr-site",
-  editLink() {
+  editLinkText() {
     const { locale } = useRouter();
-    return EDIT_TEXT[locale] || EDIT_TEXT["en-US"];
+    return EDIT_TEXT[locale];
   },
   feedback: {
     labels: "feedback",
@@ -74,59 +114,16 @@ const config: DocsThemeConfig = {
   footer: {
     text() {
       const { locale } = useRouter();
-
-      const linkProps = {
-        className: "inline-flex items-center font-semibold gap-2",
-        href: FOOTER_LINK[locale],
-        rel: "noopener",
-        target: "_blank",
-      };
-
-      switch (locale) {
-        case "zh-CN":
-          return (
-            <a {...linkProps}>
-              由
-              <Vercel />
-              驱动
-            </a>
-          );
-        case "es-ES":
-          return (
-            <a {...linkProps}>
-              Desarrollado por
-              <Vercel />
-            </a>
-          );
-        case "ja":
-          return (
-            <a {...linkProps}>
-              提供
-              <Vercel />
-            </a>
-          );
-        case "ko":
-          return (
-            <a {...linkProps}>
-              Powered by
-              <Vercel />
-            </a>
-          );
-        case "ru":
-          return (
-            <a {...linkProps}>
-              Работает на
-              <Vercel />
-            </a>
-          );
-        default:
-          return (
-            <a {...linkProps}>
-              Powered by
-              <Vercel />
-            </a>
-          );
-      }
+      return (
+        <a
+          rel="noopener"
+          target="_blank"
+          className="inline-flex items-center font-semibold gap-2"
+          href={FOOTER_LINK[locale]}
+        >
+          {FOOTER_LINK_TEXT[locale]}
+        </a>
+      );
     },
   },
   gitTimestamp: "Last updated on",

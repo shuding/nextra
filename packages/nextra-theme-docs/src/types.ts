@@ -23,7 +23,7 @@ export interface DocsThemeConfig {
   darkMode: boolean
   direction: 'ltr' | 'rtl'
   docsRepositoryBase: string
-  editLink: ReactNode | FC
+  editLinkText: ReactNode | FC
   feedback: {
     labels: string
     link: ReactNode | FC
