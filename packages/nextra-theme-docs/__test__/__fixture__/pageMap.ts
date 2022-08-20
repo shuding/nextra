@@ -3,42 +3,42 @@ export const cnPageMap: any[] = [
     name: 'blog',
     children: [
       {
-        name: 'meta.json',
+        name: '_meta.json',
         meta: {
           'swr-v1': 'Announcing SWR 1.0'
         },
         locale: 'en-US'
       },
       {
-        name: 'meta.json',
+        name: '_meta.json',
         meta: {
           'swr-v1': 'Announcing SWR 1.0'
         },
         locale: 'es-ES'
       },
       {
-        name: 'meta.json',
+        name: '_meta.json',
         meta: {
           'swr-v1': 'SWR 1.0 の発表'
         },
         locale: 'ja'
       },
       {
-        name: 'meta.json',
+        name: '_meta.json',
         meta: {
           'swr-v1': 'Announcing SWR 1.0'
         },
         locale: 'ko'
       },
       {
-        name: 'meta.json',
+        name: '_meta.json',
         meta: {
           'swr-v1': 'Представляем SWR 1.0'
         },
         locale: 'ru'
       },
       {
-        name: 'meta.json',
+        name: '_meta.json',
         meta: {
           'swr-v1': 'SWR 1.0 发布'
         },
@@ -70,7 +70,7 @@ export const cnPageMap: any[] = [
             locale: 'zh-CN'
           },
           {
-            name: 'meta.json',
+            name: '_meta.json',
             meta: {
               cache: 'Cache',
               performance: 'Performance',
@@ -79,7 +79,7 @@ export const cnPageMap: any[] = [
             locale: 'en-US'
           },
           {
-            name: 'meta.json',
+            name: '_meta.json',
             meta: {
               cache: 'Cache',
               performance: 'Rendimiento',
@@ -88,7 +88,7 @@ export const cnPageMap: any[] = [
             locale: 'es-ES'
           },
           {
-            name: 'meta.json',
+            name: '_meta.json',
             meta: {
               cache: 'キャッシュ',
               performance: 'パフォーマンス',
@@ -97,7 +97,7 @@ export const cnPageMap: any[] = [
             locale: 'ja'
           },
           {
-            name: 'meta.json',
+            name: '_meta.json',
             meta: {
               cache: '캐시',
               performance: '성능',
@@ -106,7 +106,7 @@ export const cnPageMap: any[] = [
             locale: 'ko'
           },
           {
-            name: 'meta.json',
+            name: '_meta.json',
             meta: {
               cache: 'Кеш',
               performance: 'Производительность',
@@ -115,7 +115,7 @@ export const cnPageMap: any[] = [
             locale: 'ru'
           },
           {
-            name: 'meta.json',
+            name: '_meta.json',
             meta: {
               cache: '缓存',
               performance: '性能',
@@ -172,7 +172,7 @@ export const cnPageMap: any[] = [
         locale: 'zh-CN'
       },
       {
-        name: 'meta.json',
+        name: '_meta.json',
         meta: {
           'getting-started': 'Getting Started',
           options: 'Options',
@@ -195,7 +195,7 @@ export const cnPageMap: any[] = [
         locale: 'en-US'
       },
       {
-        name: 'meta.json',
+        name: '_meta.json',
         meta: {
           'getting-started': 'Comienza',
           options: 'Opciones',
@@ -218,7 +218,7 @@ export const cnPageMap: any[] = [
         locale: 'es-ES'
       },
       {
-        name: 'meta.json',
+        name: '_meta.json',
         meta: {
           'getting-started': 'はじめに',
           options: 'オプション',
@@ -241,7 +241,7 @@ export const cnPageMap: any[] = [
         locale: 'ja'
       },
       {
-        name: 'meta.json',
+        name: '_meta.json',
         meta: {
           'getting-started': '시작하기',
           options: '옵션',
@@ -264,7 +264,7 @@ export const cnPageMap: any[] = [
         locale: 'ko'
       },
       {
-        name: 'meta.json',
+        name: '_meta.json',
         meta: {
           'getting-started': 'Начало работы',
           options: 'Опции',
@@ -287,7 +287,7 @@ export const cnPageMap: any[] = [
         locale: 'ru'
       },
       {
-        name: 'meta.json',
+        name: '_meta.json',
         meta: {
           'getting-started': '入门',
           options: '选项',
@@ -397,7 +397,7 @@ export const cnPageMap: any[] = [
         locale: 'zh-CN'
       },
       {
-        name: 'meta.json',
+        name: '_meta.json',
         meta: {
           basic: 'Basic Usage',
           auth: 'Authentication',
@@ -408,7 +408,7 @@ export const cnPageMap: any[] = [
         locale: 'en-US'
       },
       {
-        name: 'meta.json',
+        name: '_meta.json',
         meta: {
           basic: 'Uso Básico',
           auth: 'Autenticación',
@@ -419,7 +419,7 @@ export const cnPageMap: any[] = [
         locale: 'es-ES'
       },
       {
-        name: 'meta.json',
+        name: '_meta.json',
         meta: {
           basic: '基本的な使用法',
           auth: '認証',
@@ -430,7 +430,7 @@ export const cnPageMap: any[] = [
         locale: 'ja'
       },
       {
-        name: 'meta.json',
+        name: '_meta.json',
         meta: {
           basic: '기본 사용법',
           auth: '인증',
@@ -441,7 +441,7 @@ export const cnPageMap: any[] = [
         locale: 'ko'
       },
       {
-        name: 'meta.json',
+        name: '_meta.json',
         meta: {
           basic: 'Основное использование',
           auth: 'Аутентификация',
@@ -452,7 +452,7 @@ export const cnPageMap: any[] = [
         locale: 'ru'
       },
       {
-        name: 'meta.json',
+        name: '_meta.json',
         meta: {
           basic: '基本用法',
           auth: '身份验证',
@@ -483,7 +483,7 @@ export const cnPageMap: any[] = [
     locale: 'zh-CN'
   },
   {
-    name: 'meta.json',
+    name: '_meta.json',
     meta: {
       index: {
         title: 'Introduction',
@@ -506,7 +506,7 @@ export const cnPageMap: any[] = [
     locale: 'en-US'
   },
   {
-    name: 'meta.json',
+    name: '_meta.json',
     meta: {
       index: {
         title: 'Introducción',
@@ -529,7 +529,7 @@ export const cnPageMap: any[] = [
     locale: 'es-ES'
   },
   {
-    name: 'meta.json',
+    name: '_meta.json',
     meta: {
       index: {
         title: '前書き',
@@ -552,7 +552,7 @@ export const cnPageMap: any[] = [
     locale: 'ja'
   },
   {
-    name: 'meta.json',
+    name: '_meta.json',
     meta: {
       index: {
         title: '소개',
@@ -575,7 +575,7 @@ export const cnPageMap: any[] = [
     locale: 'ko'
   },
   {
-    name: 'meta.json',
+    name: '_meta.json',
     meta: {
       index: {
         title: 'Введение',
@@ -598,7 +598,7 @@ export const cnPageMap: any[] = [
     locale: 'ru'
   },
   {
-    name: 'meta.json',
+    name: '_meta.json',
     meta: {
       index: {
         title: '简介',
@@ -627,42 +627,42 @@ export const usPageMap: any[] = [
     name: 'blog',
     children: [
       {
-        name: 'meta.json',
+        name: '_meta.json',
         meta: {
           'swr-v1': 'Announcing SWR 1.0'
         },
         locale: 'en-US'
       },
       {
-        name: 'meta.json',
+        name: '_meta.json',
         meta: {
           'swr-v1': 'Announcing SWR 1.0'
         },
         locale: 'es-ES'
       },
       {
-        name: 'meta.json',
+        name: '_meta.json',
         meta: {
           'swr-v1': 'SWR 1.0 の発表'
         },
         locale: 'ja'
       },
       {
-        name: 'meta.json',
+        name: '_meta.json',
         meta: {
           'swr-v1': 'Announcing SWR 1.0'
         },
         locale: 'ko'
       },
       {
-        name: 'meta.json',
+        name: '_meta.json',
         meta: {
           'swr-v1': 'Представляем SWR 1.0'
         },
         locale: 'ru'
       },
       {
-        name: 'meta.json',
+        name: '_meta.json',
         meta: {
           'swr-v1': 'SWR 1.0 发布'
         },
@@ -694,7 +694,7 @@ export const usPageMap: any[] = [
             locale: 'en-US'
           },
           {
-            name: 'meta.json',
+            name: '_meta.json',
             meta: {
               cache: 'Cache',
               performance: 'Performance',
@@ -703,7 +703,7 @@ export const usPageMap: any[] = [
             locale: 'en-US'
           },
           {
-            name: 'meta.json',
+            name: '_meta.json',
             meta: {
               cache: 'Cache',
               performance: 'Rendimiento',
@@ -712,7 +712,7 @@ export const usPageMap: any[] = [
             locale: 'es-ES'
           },
           {
-            name: 'meta.json',
+            name: '_meta.json',
             meta: {
               cache: 'キャッシュ',
               performance: 'パフォーマンス',
@@ -721,7 +721,7 @@ export const usPageMap: any[] = [
             locale: 'ja'
           },
           {
-            name: 'meta.json',
+            name: '_meta.json',
             meta: {
               cache: '캐시',
               performance: '성능',
@@ -730,7 +730,7 @@ export const usPageMap: any[] = [
             locale: 'ko'
           },
           {
-            name: 'meta.json',
+            name: '_meta.json',
             meta: {
               cache: 'Кеш',
               performance: 'Производительность',
@@ -739,7 +739,7 @@ export const usPageMap: any[] = [
             locale: 'ru'
           },
           {
-            name: 'meta.json',
+            name: '_meta.json',
             meta: {
               cache: '缓存',
               performance: '性能',
@@ -796,7 +796,7 @@ export const usPageMap: any[] = [
         locale: 'en-US'
       },
       {
-        name: 'meta.json',
+        name: '_meta.json',
         meta: {
           'getting-started': 'Getting Started',
           options: 'Options',
@@ -819,7 +819,7 @@ export const usPageMap: any[] = [
         locale: 'en-US'
       },
       {
-        name: 'meta.json',
+        name: '_meta.json',
         meta: {
           'getting-started': 'Comienza',
           options: 'Opciones',
@@ -842,7 +842,7 @@ export const usPageMap: any[] = [
         locale: 'es-ES'
       },
       {
-        name: 'meta.json',
+        name: '_meta.json',
         meta: {
           'getting-started': 'はじめに',
           options: 'オプション',
@@ -865,7 +865,7 @@ export const usPageMap: any[] = [
         locale: 'ja'
       },
       {
-        name: 'meta.json',
+        name: '_meta.json',
         meta: {
           'getting-started': '시작하기',
           options: '옵션',
@@ -888,7 +888,7 @@ export const usPageMap: any[] = [
         locale: 'ko'
       },
       {
-        name: 'meta.json',
+        name: '_meta.json',
         meta: {
           'getting-started': 'Начало работы',
           options: 'Опции',
@@ -911,7 +911,7 @@ export const usPageMap: any[] = [
         locale: 'ru'
       },
       {
-        name: 'meta.json',
+        name: '_meta.json',
         meta: {
           'getting-started': '入门',
           options: '选项',
@@ -1021,7 +1021,7 @@ export const usPageMap: any[] = [
         locale: 'en-US'
       },
       {
-        name: 'meta.json',
+        name: '_meta.json',
         meta: {
           basic: 'Basic Usage',
           auth: 'Authentication',
@@ -1032,7 +1032,7 @@ export const usPageMap: any[] = [
         locale: 'en-US'
       },
       {
-        name: 'meta.json',
+        name: '_meta.json',
         meta: {
           basic: 'Uso Básico',
           auth: 'Autenticación',
@@ -1043,7 +1043,7 @@ export const usPageMap: any[] = [
         locale: 'es-ES'
       },
       {
-        name: 'meta.json',
+        name: '_meta.json',
         meta: {
           basic: '基本的な使用法',
           auth: '認証',
@@ -1054,7 +1054,7 @@ export const usPageMap: any[] = [
         locale: 'ja'
       },
       {
-        name: 'meta.json',
+        name: '_meta.json',
         meta: {
           basic: '기본 사용법',
           auth: '인증',
@@ -1065,7 +1065,7 @@ export const usPageMap: any[] = [
         locale: 'ko'
       },
       {
-        name: 'meta.json',
+        name: '_meta.json',
         meta: {
           basic: 'Основное использование',
           auth: 'Аутентификация',
@@ -1076,7 +1076,7 @@ export const usPageMap: any[] = [
         locale: 'ru'
       },
       {
-        name: 'meta.json',
+        name: '_meta.json',
         meta: {
           basic: '基本用法',
           auth: '身份验证',
@@ -1107,7 +1107,7 @@ export const usPageMap: any[] = [
     locale: 'en-US'
   },
   {
-    name: 'meta.json',
+    name: '_meta.json',
     meta: {
       index: {
         title: 'Introduction',
@@ -1130,7 +1130,7 @@ export const usPageMap: any[] = [
     locale: 'en-US'
   },
   {
-    name: 'meta.json',
+    name: '_meta.json',
     meta: {
       index: {
         title: 'Introducción',
@@ -1153,7 +1153,7 @@ export const usPageMap: any[] = [
     locale: 'es-ES'
   },
   {
-    name: 'meta.json',
+    name: '_meta.json',
     meta: {
       index: {
         title: '前書き',
@@ -1176,7 +1176,7 @@ export const usPageMap: any[] = [
     locale: 'ja'
   },
   {
-    name: 'meta.json',
+    name: '_meta.json',
     meta: {
       index: {
         title: '소개',
@@ -1199,7 +1199,7 @@ export const usPageMap: any[] = [
     locale: 'ko'
   },
   {
-    name: 'meta.json',
+    name: '_meta.json',
     meta: {
       index: {
         title: 'Введение',
@@ -1222,7 +1222,7 @@ export const usPageMap: any[] = [
     locale: 'ru'
   },
   {
-    name: 'meta.json',
+    name: '_meta.json',
     meta: {
       index: {
         title: '简介',

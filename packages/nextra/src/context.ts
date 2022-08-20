@@ -1,3 +1,5 @@
+import { META_FILENAME } from './constants'
+
 interface Page {
   name: string
   route: string
@@ -31,12 +33,12 @@ function normalizeMeta(meta: any) {
 
 function filter(pageMap: any, activeLevel?: string) {
   let activeLevelPages: Page[] | undefined
-  let meta = pageMap.find((item: any) => item.name === 'meta.json')?.meta || {}
+  let meta = pageMap.find((item: any) => item.name === META_FILENAME)?.meta || {}
   const metaKeys = Object.keys(meta)
 
   const items: Page[] = []
   for (const item of pageMap) {
-    if (item.name === 'meta.json') continue
+    if (item.name === META_FILENAME) continue
     const page: Page = {
       ...item,
       meta: normalizeMeta(meta[item.name])

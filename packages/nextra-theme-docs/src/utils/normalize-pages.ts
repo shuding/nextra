@@ -1,6 +1,6 @@
 import { PageMapItem } from 'nextra'
 import getTitle from 'title'
-import { DEFAULT_PAGE_THEME } from '../constants'
+import { DEFAULT_PAGE_THEME, META_FILENAME } from '../constants'
 import { PageTheme } from '../types'
 
 function extendMeta(
@@ -87,7 +87,7 @@ export function normalizePages({
 }) {
   let _meta: Record<string, any> | undefined
   for (let item of list) {
-    if (item.name === 'meta.json') {
+    if (item.name === META_FILENAME) {
       if (locale === item.locale) {
         _meta = item.meta
         break
@@ -133,12 +133,12 @@ export function normalizePages({
   delete fallbackMeta.title
   delete fallbackMeta.href
 
-  // Normalize items based on files and meta.json.
+  // Normalize items based on files and _meta.json.
   const items = list
     .filter(
       a =>
         // not meta
-        a.name !== 'meta.json' &&
+        a.name !== META_FILENAME &&
         // not hidden routes
         !a.name.startsWith('_') &&
         // locale matches, or fallback to default locale
