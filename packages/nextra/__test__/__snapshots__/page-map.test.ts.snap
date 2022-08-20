@@ -474,7 +474,7 @@ exports[`Page Process > pageMap en-US 1`] = `
     },
   ],
   "/docs/data-fetching",
-  "data-fetching",
+  "Data Fetching",
 ]
 `;
 
@@ -845,6 +845,6 @@ exports[`Page Process > pageMap zh-CN 1`] = `
     },
   ],
   "/docs/data-fetching",
-  "data-fetching",
+  "数据请求",
 ]
 `;
