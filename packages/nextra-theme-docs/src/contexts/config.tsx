@@ -40,6 +40,31 @@ const DEEP_OBJECT_KEYS = [
   'toc'
 ] as const
 
+const LegacyOptions: Record<string, string> = {
+  projectLink: 'project.link',
+  projectLinkIcon: 'project.icon',
+  nextLinks: 'navigation.next',
+  prevLinks: 'navigation.prev',
+  defaultMenuCollapsed: 'sidebar.defaultMenuCollapsed',
+  footerText: 'footer.text',
+  footerEditLink: 'editLinkText',
+  floatTOC: 'toc.float',
+  feedbackLink: 'feedback.link',
+  feedbackLabels: 'feedback.labels',
+  customSearch: 'search.component',
+  searchPlaceholder: 'search.placeholder',
+  projectChatLink: 'projectChat.link',
+  projectChatLinkIcon: 'projectChat.icon',
+  sidebarSubtitle: 'sidebar.subtitle',
+  bannerKey: 'banner.key',
+  tocExtraContent: 'toc.extraContent',
+  unstable_searchResultEmpty: 'search.emptyResult',
+  notFoundLink: 'notFound.link',
+  notFoundLabels: 'notFound.labels',
+  serverSideErrorLink: 'serverSideError.link',
+  serverSideErrorLabels: 'serverSideError.labels'
+}
+
 export const ConfigProvider = ({
   children,
   value
@@ -65,6 +90,32 @@ export const ConfigProvider = ({
   }
 
   const { nextThemes } = extendedConfig
+
+  if (process.env.NODE_ENV === 'development') {
+    const notice =
+      '[nextra-theme-docs] ⚠️ You are using legacy theme config option'
+
+    for (const [legacyOption, newPath] of Object.entries(LegacyOptions)) {
+      if (legacyOption in themeConfig) {
+        const [obj, key] = newPath.split('.')
+        const renameTo = key ? `${obj}: { ${key}: ... }` : obj
+        console.warn(`${notice} "${legacyOption}". Rename it to ${renameTo}`)
+      }
+    }
+
+    for (const key of ['search', 'footer']) {
+      const option = (themeConfig as any)[key]
+      if (typeof option === 'boolean' || option == null) {
+        console.warn(
+          `${notice} "${key}".`,
+          option ? 'Remove it' : `Rename it to ${key}: { component: null }`
+        )
+      }
+    }
+    if (typeof themeConfig.banner === 'string') {
+      console.warn(notice, '"banner". `Rename it to banner: { text: ... }')
+    }
+  }
 
   return (
     <ThemeProvider
