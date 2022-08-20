@@ -86,7 +86,8 @@ export const DEFAULT_THEME: DocsThemeConfig = {
         <span className="sr-only">GitHub</span>
       </>
     ),
-    link: 'https://github.com/shuding/nextra'
+    // by default should be empty so clicking on project link will go to the github link
+    link: ''
   },
   projectChat: {
     icon: (
