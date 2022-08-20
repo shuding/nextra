@@ -113,7 +113,7 @@ export const ConfigProvider = ({
       }
     }
     if (typeof themeConfig.banner === 'string') {
-      console.warn(notice, '"banner". `Rename it to banner: { text: ... }')
+      console.warn(notice, '"banner". Rename it to banner: { text: ... }')
     }
   }
 
