@@ -60,7 +60,7 @@ export function TOC({
 
   const hasHeadings = items.length > 0
   const hasMetaInfo =
-    config.feedbackLink || config.footerEditLink || config.tocExtraContent
+    Boolean(config.feedback.link || config.editLink || config.toc.extraContent)
 
   const activeSlug = Object.entries(activeAnchor).find(
     ([, { isActive }]) => isActive
@@ -96,7 +96,7 @@ export function TOC({
       >
         {hasHeadings && (
           <>
-            <p className="mb-4 font-semibold tracking-tight">On This Page</p>
+            <p className="mb-4 font-semibold tracking-tight">{renderComponent(config.toc.title)}</p>
             <ul>
               {items.map(({ slug, text, depth }) => (
                 <li className="my-2 scroll-my-6 scroll-py-6" key={slug}>
@@ -124,44 +124,42 @@ export function TOC({
           </>
         )}
 
-        {hasMetaInfo ? (
-          <div
-            className={cn(
-              hasHeadings &&
-                'mt-8 border-t bg-white pt-8 shadow-[0_-12px_16px_white] dark:bg-dark dark:shadow-[0_-12px_16px_#111]',
-              'sticky bottom-0 pb-8 dark:border-neutral-800 flex flex-col gap-2',
-              'contrast-more:shadow-none contrast-more:border-t contrast-more:border-neutral-400 contrast-more:dark:border-neutral-400'
-            )}
-          >
-            {config.feedbackLink ? (
-              <Anchor
-                className={linkClassName}
-                href={getGitIssueUrl({
-                  repository: config.docsRepositoryBase,
-                  title: `Feedback for “${config.title}”`,
-                  labels: config.feedbackLabels
-                })}
-                newWindow
-              >
-                {renderComponent(config.feedbackLink)}
-              </Anchor>
-            ) : null}
+      {hasMetaInfo && (
+        <div
+          className={cn(
+            hasHeadings &&
+              'mt-8 border-t bg-white pt-8 shadow-[0_-12px_16px_white] dark:bg-dark dark:shadow-[0_-12px_16px_#111]',
+            'sticky bottom-0 pb-8 dark:border-neutral-800 flex flex-col gap-2',
+            'contrast-more:shadow-none contrast-more:border-t contrast-more:border-neutral-400 contrast-more:dark:border-neutral-400'
+          )}
+        >
+          {config.feedback.link ? (
+            <Anchor
+              className={linkClassName}
+              href={getGitIssueUrl({
+                repository: config.docsRepositoryBase,
+                title: `Feedback for “${config.title}”`,
+                labels: config.feedback.labels
+              })}
+              newWindow
+            >
+              {renderComponent(config.feedback.link)}
+            </Anchor>
+          ) : null}
 
-          {config.footerEditLink ? (
+          {config.editLink ? (
             <Anchor
               className={linkClassName}
               href={getEditUrl(filePath)}
               newWindow
             >
-              {renderComponent(config.footerEditLink)}
+              {renderComponent(config.editLink)}
             </Anchor>
           ) : null}
 
-            {config.tocExtraContent
-              ? renderComponent(config.tocExtraContent)
-              : null}
-          </div>
-        ) : null}
+          {renderComponent(config.toc.extraContent)}
+        </div>
+      )}
       </div>
     </div>
   )

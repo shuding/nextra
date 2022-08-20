@@ -194,7 +194,7 @@ export function Search({
           setShow(true)
         }}
         type="search"
-        placeholder={renderString(config.searchPlaceholder)}
+        placeholder={renderString(config.search.placeholder)}
         onKeyDown={handleKeyDown}
         onFocus={handleFocusAndBlur}
         onBlur={handleFocusAndBlur}
@@ -258,7 +258,7 @@ export function Search({
                 </Fragment>
               ))
             ) : (
-              renderComponent(config.unstable_searchResultEmpty)
+              renderComponent(config.search.emptyResult)
             )}
           </ul>
         </Transition.Child>

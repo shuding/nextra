@@ -19,10 +19,26 @@ type Config = DocsThemeConfig &
 
 const ConfigContext = createContext<Config>({
   title: '',
-  meta: {}
+  meta: {},
+  ...DEFAULT_THEME
 })
 
 export const useConfig = () => useContext(ConfigContext)
+
+const DEEP_OBJECT_KEYS = [
+  'banner',
+  'feedback',
+  'footer',
+  'navigation',
+  'nextThemes',
+  'notFound',
+  'project',
+  'projectChat',
+  'search',
+  'serverSideError',
+  'sidebar',
+  'toc'
+] as const
 
 export const ConfigProvider = ({
   children,
@@ -33,15 +49,22 @@ export const ConfigProvider = ({
 }): ReactElement => {
   const [menu, setMenu] = useState(false)
   const { themeConfig, pageOpts } = value
-  const extendedConfig = {
+  const extendedConfig: Config = {
     ...DEFAULT_THEME,
     ...themeConfig,
     unstable_flexsearch: pageOpts.unstable_flexsearch,
     newNextLinkBehavior: pageOpts.newNextLinkBehavior,
     title: pageOpts.title,
-    meta: pageOpts.meta
+    meta: pageOpts.meta,
+    ...Object.fromEntries(
+      DEEP_OBJECT_KEYS.map(key => [
+        key,
+        { ...DEFAULT_THEME[key], ...themeConfig[key] }
+      ])
+    )
   }
-  const nextThemes = extendedConfig.nextThemes || {}
+
+  const { nextThemes } = extendedConfig
 
   return (
     <ThemeProvider
@@ -52,15 +75,7 @@ export const ConfigProvider = ({
       forcedTheme={nextThemes.forcedTheme}
     >
       <ConfigContext.Provider value={extendedConfig}>
-        <MenuProvider
-          value={{
-            menu,
-            setMenu,
-            defaultMenuCollapsed: !!extendedConfig.defaultMenuCollapsed
-          }}
-        >
-          {children}
-        </MenuProvider>
+        <MenuProvider value={{ menu, setMenu }}>{children}</MenuProvider>
       </ConfigContext.Provider>
     </ThemeProvider>
   )

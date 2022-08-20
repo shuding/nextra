@@ -5,9 +5,7 @@ import { Menu, Transition } from '@headlessui/react'
 import { ArrowRightIcon } from 'nextra/icons'
 
 import { useConfig, useMenu } from '../contexts'
-import { MatchSorterSearch } from './match-sorter-search'
-import { Flexsearch } from './flexsearch'
-import { GitHubIcon, DiscordIcon, MenuIcon } from 'nextra/icons'
+import { MenuIcon } from 'nextra/icons'
 import { Item, PageItem, MenuItem, renderComponent, getFSRoute } from '../utils'
 import { Anchor } from './anchor'
 import { DEFAULT_LOCALE } from '../constants'
@@ -156,47 +154,28 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
         })}
 
         <div className="hidden md:inline-block min-w-[200px]">
-          {config.customSearch ||
-            (config.search ? (
-              config.unstable_flexsearch ? (
-                <Flexsearch />
-              ) : (
-                <MatchSorterSearch directories={flatDirectories} />
-              )
-            ) : null)}
+          {renderComponent(config.search.component, {
+            directories: flatDirectories
+          })}
         </div>
 
-        {config.projectLink || config.github ? (
+        {config.project.link || config.github ? (
           <Anchor
             className="p-2 text-current"
-            href={config.projectLink || config.github}
+            href={config.project.link || config.github}
             newWindow
           >
-            {config.projectLinkIcon ? (
-              renderComponent(config.projectLinkIcon)
-            ) : (
-              <>
-                <GitHubIcon />
-                <span className="sr-only">GitHub</span>
-              </>
-            )}
+            {renderComponent(config.project.icon)}
           </Anchor>
         ) : null}
 
-        {config.projectChatLink ? (
+        {config.projectChat.link ? (
           <Anchor
             className="p-2 text-current"
-            href={config.projectChatLink}
+            href={config.projectChat.link}
             newWindow
           >
-            {config.projectChatLinkIcon ? (
-              renderComponent(config.projectChatLinkIcon)
-            ) : (
-              <>
-                <DiscordIcon />
-                <span className="sr-only">Discord</span>
-              </>
-            )}
+            {renderComponent(config.projectChat.icon)}
           </Anchor>
         ) : null}
 

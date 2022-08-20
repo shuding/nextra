@@ -1,4 +1,6 @@
+/* eslint sort-keys: error */
 export default {
+  darkMode: true,
   footer: (
     <small style={{ display: 'block', marginTop: '8rem' }}>
       <abbr
@@ -22,5 +24,4 @@ export default {
       `}</style>
     </small>
   ),
-  darkMode: true
 }

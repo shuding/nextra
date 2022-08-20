@@ -3,16 +3,14 @@ import { useRouter } from 'next/router'
 import { Select } from './select'
 import { DocsThemeConfig } from '../types'
 import { GlobeIcon } from 'nextra/icons'
-import { DEFAULT_LOCALE } from '../constants'
 
 interface LocaleSwitchProps {
   options: NonNullable<DocsThemeConfig['i18n']>
 }
 
 export function LocaleSwitch({ options }: LocaleSwitchProps): ReactElement {
-  const { locale = DEFAULT_LOCALE, asPath } = useRouter()
-  const selected = options.find(l => locale === l.locale)!
-
+  const { locale, asPath } = useRouter()
+  const selected = options.find(l => locale === l.locale)
   return (
     <Select
       onChange={option => {
@@ -23,11 +21,11 @@ export function LocaleSwitch({ options }: LocaleSwitchProps): ReactElement {
         location.href = asPath
       }}
       selected={{
-        key: selected.locale,
+        key: selected?.locale || '',
         name: (
           <div className="flex items-center gap-2">
             <GlobeIcon />
-            <span>{selected.text}</span>
+            <span>{selected?.text}</span>
           </div>
         )
       }}

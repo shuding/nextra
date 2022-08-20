@@ -1,29 +1,30 @@
+/* eslint typescript-sort-keys/interface: error */
 import { PageOpts } from 'nextra'
-import React from 'react'
+import { ReactNode } from 'react'
 
 export interface NextraBlogTheme {
-  readMore?: string
-  footer?: React.ReactNode
-  titleSuffix?: string
-  postFooter?: string
-  head?: ({
-    title,
-    meta
-  }: {
-    title: string
-    meta: Record<string, any>
-  }) => React.ReactNode
+  comments?: ReactNode
   cusdis?: {
     appId: string
     host?: string
     lang: string
   }
   darkMode?: boolean
+  footer?: ReactNode
+  head?: ({
+    meta,
+    title,
+  }: {
+    meta: Record<string, any>
+    title: string
+  }) => ReactNode
   navs?: {
-    url: string
     name: string
+    url: string
   }[]
-  comments?: React.ReactNode
+  postFooter?: string
+  readMore?: string
+  titleSuffix?: string
 }
 
 export interface BlogPageOpts extends PageOpts {
@@ -31,13 +32,13 @@ export interface BlogPageOpts extends PageOpts {
 }
 
 type Meta = {
-  title?: string
-  type?: 'post' | 'page' | 'posts' | 'tag'
-  tag?: string | string[]
+  author?: string
   back?: string
   date?: string
   description?: string
-  author?: string
+  tag?: string | string[]
+  title?: string
+  type?: 'post' | 'page' | 'posts' | 'tag'
 }
 
 export interface LayoutProps {

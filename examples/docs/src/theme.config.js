@@ -1,19 +1,14 @@
+/* eslint sort-keys: error */
 /**
  * @type {import('nextra-theme-docs').DocsThemeConfig}
  */
 export default {
-  projectLink: 'https://github.com/shuding/nextra',
+  banner: {
+    key: 'Nextra 2',
+    text: 'Nextra 2 Alpha',
+  },
   docsRepositoryBase: 'https://github.com/shuding/nextra/blob/core/examples/docs',
-  projectChatLink: 'https://discord.gg/hEM84NMkRv', // Next.js discord server,
-  titleSuffix: ' – Nextra',
-  logo: (
-    <>
-      <span className="mr-2 font-extrabold hidden md:inline">Nextra</span>
-      <span className="text-gray-600 font-normal hidden md:inline">
-        The Next.js Static Site Generator
-      </span>
-    </>
-  ),
+  editLink: 'Edit this page on GitHub',
   head: () => (
     <>
       <meta name="msapplication-TileColor" content="#ffffff" />
@@ -61,14 +56,8 @@ export default {
       <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
     </>
   ),
-  search: true,
+  projectChat: {
+    link: 'https://discord.gg/hEM84NMkRv', // Next.js discord server,
+  },
   unstable_faviconGlyph: '✦',
-  prevLinks: true,
-  nextLinks: true,
-  footer: true,
-  footerEditLink: 'Edit this page on GitHub',
-  footerText: `MIT ${new Date().getFullYear()} © Nextra.`,
-  darkMode: true,
-  bannerKey: 'Nextra 2',
-  banner: 'Nextra 2 Alpha'
 }

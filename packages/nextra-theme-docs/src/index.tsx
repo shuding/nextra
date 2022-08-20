@@ -13,7 +13,6 @@ import './polyfill'
 import {
   Head,
   Navbar,
-  Footer,
   NavLinks,
   Sidebar,
   TOC,
@@ -29,7 +28,7 @@ import {
 } from './contexts'
 import { DEFAULT_LOCALE, IS_BROWSER } from './constants'
 import { getFSRoute, normalizePages, renderComponent } from './utils'
-import { Context, DocsThemeConfig, PageTheme } from './types'
+import { Context, DocsThemeConfig, PageTheme, RecursivePartial } from './types'
 
 let resizeObserver: ResizeObserver
 if (IS_BROWSER) {
@@ -75,7 +74,6 @@ const Body = ({
 }: BodyProps): ReactElement => {
   const mainElement = useRef<HTMLElement>(null)
   const config = useConfig()
-  const { locale = DEFAULT_LOCALE } = useRouter()
 
   useEffect(() => {
     if (mainElement.current) {
@@ -98,13 +96,7 @@ const Body = ({
 
   const gitTimestampEl = date ? (
     <div className="pointer-default mt-12 mb-8 block ltr:text-right rtl:text-left text-xs text-gray-500 dark:text-gray-400">
-      {typeof config.gitTimestamp === 'string'
-        ? `${config.gitTimestamp} ${date.toLocaleDateString(locale, {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-          })}`
-        : renderComponent(config.gitTimestamp, { timestamp: date })}
+      {renderComponent(config.gitTimestamp, { timestamp: date })}
     </div>
   ) : (
     <div className="mt-16" />
@@ -169,7 +161,7 @@ const InnerLayout = ({
     directories
   } = useDirectoryInfo(pageMap)
 
-  const localeConfig = config.i18n?.find(l => l.locale === locale)
+  const localeConfig = config.i18n.find(l => l.locale === locale)
   const isRTL = localeConfig
     ? localeConfig.direction === 'rtl'
     : config.direction === 'rtl'
@@ -185,7 +177,8 @@ const InnerLayout = ({
   const hideSidebar = !themeContext.sidebar || themeContext.layout === 'raw'
   const asPopover = activeType === 'page' || hideSidebar
 
-  const tocClassName = 'nextra-toc order-last hidden w-64 flex-shrink-0 xl:block'
+  const tocClassName =
+    'nextra-toc order-last hidden w-64 flex-shrink-0 xl:block'
 
   const tocEl =
     activeType === 'page' ||
@@ -196,7 +189,7 @@ const InnerLayout = ({
       )
     ) : (
       <TOC
-        headings={config.floatTOC ? headings : []}
+        headings={config.toc.float ? headings : []}
         filePath={filePath}
         className={tocClassName}
       />
@@ -259,9 +252,9 @@ const InnerLayout = ({
           </Body>
         </ActiveAnchorProvider>
       </div>
-      {themeContext.footer && config.footer ? (
-        <Footer menu={asPopover} />
-      ) : null}
+      {themeContext.footer
+        ? renderComponent(config.footer.component, { menu: asPopover })
+        : null}
     </div>
   )
 }
@@ -301,9 +294,10 @@ export default function withLayout(
   return Layout
 }
 
-export { useConfig, getComponents }
+type PartialDocsThemeConfig = RecursivePartial<DocsThemeConfig>
+
+export { useConfig, getComponents, PartialDocsThemeConfig as DocsThemeConfig }
 export { useTheme } from 'next-themes'
-export * from './types'
 export {
   Bleed,
   Callout,
