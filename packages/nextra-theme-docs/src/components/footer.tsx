@@ -5,7 +5,7 @@ import { LocaleSwitch } from './locale-switch'
 import { ThemeSwitch } from './theme-switch'
 import { renderComponent } from '../utils'
 
-export function Footer({ menu }: { menu?: boolean }): ReactElement | null {
+export function Footer({ menu }: { menu?: boolean }): ReactElement {
   const config = useConfig()
   return (
     <footer className="bg-gray-100 pb-[env(safe-area-inset-bottom)] dark:bg-neutral-900">
