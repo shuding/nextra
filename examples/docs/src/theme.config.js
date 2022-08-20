@@ -3,7 +3,7 @@
  */
 export default {
   projectLink: 'https://github.com/shuding/nextra',
-  docsRepositoryBase: 'https://github.com/shuding/nextra/blob/master',
+  docsRepositoryBase: 'https://github.com/shuding/nextra/blob/core/examples/docs',
   projectChatLink: 'https://discord.gg/hEM84NMkRv', // Next.js discord server,
   titleSuffix: ' – Nextra',
   logo: (

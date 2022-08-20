@@ -147,14 +147,14 @@ const Body = ({
 }
 
 const InnerLayout = ({
-  filename,
+  filePath,
   pageMap,
   meta,
   headings,
   timestamp,
   children
 }: PageOpts & { children: ReactNode }): ReactElement => {
-  const { route, locale = DEFAULT_LOCALE } = useRouter()
+  const { locale = DEFAULT_LOCALE } = useRouter()
   const config = useConfig()
   const { menu } = useMenu()
   const {
@@ -181,7 +181,6 @@ const InnerLayout = ({
     document.documentElement.setAttribute('dir', direction)
   }, [])
 
-  const filepath = route.slice(0, route.lastIndexOf('/') + 1)
   const themeContext = { ...activeThemeContext, ...meta }
   const hideSidebar = !themeContext.sidebar || themeContext.layout === 'raw'
   const asPopover = activeType === 'page' || hideSidebar
@@ -198,7 +197,7 @@ const InnerLayout = ({
     ) : (
       <TOC
         headings={config.floatTOC ? headings : []}
-        filepathWithName={filepath + filename}
+        filePath={filePath}
         className={tocClassName}
       />
     )

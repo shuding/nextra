@@ -48,7 +48,7 @@ export type Heading = MDASTHeading & {
 }
 
 export type PageOpts = {
-  filename: string
+  filePath: string
   route: string
   meta: GrayMatterFile<string>['data']
   pageMap: PageMapItem[]

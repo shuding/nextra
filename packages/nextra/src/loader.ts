@@ -93,8 +93,7 @@ async function loader(
     context.addMissingDependency(resourcePath)
   }
 
-  const filename = path.basename(resourcePath)
-  const fileLocale = parseFileName(filename).locale
+  const fileLocale = parseFileName(resourcePath).locale
 
   for (const [filePath, { name, locale }] of Object.entries(fileMap)) {
     if (name === 'meta.json' && (!fileLocale || locale === fileLocale)) {
@@ -137,7 +136,7 @@ export default MDXContent`.trimStart()
   )
 
   const skipFlexsearchIndexing =
-    IS_PRODUCTION && indexContentEmitted.has(filename)
+    IS_PRODUCTION && indexContentEmitted.has(resourcePath)
   if (unstable_flexsearch && !skipFlexsearchIndexing) {
     if (meta.searchable !== false) {
       addPage({
@@ -148,7 +147,7 @@ export default MDXContent`.trimStart()
         structurizedData
       })
     }
-    indexContentEmitted.add(filename)
+    indexContentEmitted.add(resourcePath)
   }
 
   let timestamp: PageOpts['timestamp']
@@ -169,8 +168,9 @@ export default MDXContent`.trimStart()
   const themeConfigImport = themeConfig
     ? `import __nextra_themeConfig__ from '${slash(path.resolve(themeConfig))}'`
     : ''
+
   const pageOpts: Omit<PageOpts, 'title'> = {
-    filename,
+    filePath: path.relative(process.cwd(), resourcePath),
     route: slash(route),
     meta,
     pageMap,

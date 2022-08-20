@@ -21,6 +21,7 @@ export function NotFoundPage() {
           labels: config.notFoundLabels
         })}
         newWindow
+        className="ring-primary-500/30 focus:outline-none focus-visible:ring text-primary-500 underline decoration-from-font [text-underline-position:under]"
       >
         {renderComponent(config.notFoundLink)}
       </Anchor>

@@ -39,7 +39,7 @@ const EDIT_LINK_WITH_TRANSLATIONS = {
 
 const config: DocsThemeConfig = {
   github: "https://github.com/vercel/swr",
-  docsRepositoryBase: "https://github.com/vercel/swr-site/blob/master/pages",
+  docsRepositoryBase: "https://github.com/shuding/nextra/blob/core/examples/swr-site",
   titleSuffix() {
     const { locale } = useRouter();
     return ` – SWR (${locale})`;

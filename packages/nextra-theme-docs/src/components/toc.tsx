@@ -9,20 +9,19 @@ import { renderComponent, getHeadingText, getGitIssueUrl } from '../utils'
 import { useConfig, useActiveAnchor } from '../contexts'
 import { Anchor } from './anchor'
 
-const getEditUrl = (filepath?: string): string => {
+const getEditUrl = (filePath?: string): string => {
   const config = useConfig()
   const repo = parseGitUrl(config.docsRepositoryBase || '')
   if (!repo) throw new Error('Invalid `docsRepositoryBase` URL!')
 
+  const subdir = repo.subdir ? `${repo.subdir}/` : ''
+  const path = `blob/${repo.branch || 'main'}/${subdir}${filePath}`
+
   switch (repo.type) {
     case 'github':
-      return `https://github.com/${repo.owner}/${repo.name}/blob/${
-        repo.branch || 'main'
-      }/${repo.subdir || 'pages'}${filepath}`
+      return `https://github.com/${repo.owner}/${repo.name}/${path}`
     case 'gitlab':
-      return `https://gitlab.com/${repo.owner}/${repo.name}/-/blob/${
-        repo.branch || 'main'
-      }/${repo.subdir || 'pages'}${filepath}`
+      return `https://gitlab.com/${repo.owner}/${repo.name}/-/${path}`
   }
 
   return '#'
@@ -30,11 +29,11 @@ const getEditUrl = (filepath?: string): string => {
 
 export function TOC({
   headings,
-  filepathWithName,
+  filePath,
   className
 }: {
   headings: Heading[]
-  filepathWithName: string
+  filePath: string
   className: string
 }): ReactElement {
   const slugger = new Slugger()
@@ -148,15 +147,15 @@ export function TOC({
               </Anchor>
             ) : null}
 
-            {config.footerEditLink ? (
-              <Anchor
-                className={linkClassName}
-                href={getEditUrl(filepathWithName)}
-                newWindow
-              >
-                {renderComponent(config.footerEditLink)}
-              </Anchor>
-            ) : null}
+          {config.footerEditLink ? (
+            <Anchor
+              className={linkClassName}
+              href={getEditUrl(filePath)}
+              newWindow
+            >
+              {renderComponent(config.footerEditLink)}
+            </Anchor>
+          ) : null}
 
             {config.tocExtraContent
               ? renderComponent(config.tocExtraContent)
