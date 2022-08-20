@@ -103,8 +103,9 @@ export const ConfigProvider = ({
       }
     }
 
-    for (const key of ['search', 'footer']) {
-      const option = (themeConfig as any)[key]
+    for (const key of ['search', 'footer'] as const) {
+      if (key in themeConfig) continue
+      const option = themeConfig[key]
       if (typeof option === 'boolean' || option == null) {
         console.warn(
           `${notice} "${key}".`,
