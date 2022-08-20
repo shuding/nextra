@@ -88,83 +88,82 @@ export function TOC({
   )
 
   return (
-    <div
-      ref={tocRef}
-      className={cn(
-        'sticky top-16 pt-8 px-4 text-sm overflow-y-auto [hyphens:auto]',
-        'ltr:-mr-4 rtl:-ml-4',
-        'max-h-[calc(100vh-4rem-env(safe-area-inset-bottom))]',
-        className
-      )}
-    >
-      {hasHeadings && (
-        <>
-          <p className="mb-4 font-semibold tracking-tight">On This Page</p>
-          <ul>
-            {items.map(({ slug, text, depth }) => (
-              <li className="my-2 scroll-my-6 scroll-py-6" key={slug}>
-                <a
-                  href={`#${slug}`}
-                  className={cn(
-                    {
-                      2: 'font-semibold',
-                      3: 'ltr:ml-4 rtl:mr-4',
-                      4: 'ltr:ml-8 rtl:mr-8',
-                      5: 'ltr:ml-12 rtl:mr-12',
-                      6: 'ltr:ml-16 rtl:mr-16'
-                    }[depth],
-                    activeAnchor[slug]?.isActive
-                      ? 'text-primary-500 subpixel-antialiased contrast-more:!text-primary-500'
-                      : 'text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300',
-                    'contrast-more:text-gray-900 contrast-more:underline contrast-more:dark:text-gray-50'
-                  )}
-                >
-                  {text}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </>
-      )}
+    <div ref={tocRef} className={cn('mx-4', className)}>
+      <div
+        className={cn(
+          'sticky top-16 overflow-y-auto pr-4 pt-8 text-sm [hyphens:auto]',
+          'ltr:-mr-4 rtl:-ml-4 max-h-[calc(100vh-4rem-env(safe-area-inset-bottom))]'
+        )}
+      >
+        {hasHeadings && (
+          <>
+            <p className="mb-4 font-semibold tracking-tight">On This Page</p>
+            <ul>
+              {items.map(({ slug, text, depth }) => (
+                <li className="my-2 scroll-my-6 scroll-py-6" key={slug}>
+                  <a
+                    href={`#${slug}`}
+                    className={cn(
+                      {
+                        2: 'font-semibold',
+                        3: 'ltr:ml-4 rtl:mr-4',
+                        4: 'ltr:ml-8 rtl:mr-8',
+                        5: 'ltr:ml-12 rtl:mr-12',
+                        6: 'ltr:ml-16 rtl:mr-16'
+                      }[depth],
+                      activeAnchor[slug]?.isActive
+                        ? 'text-primary-500 subpixel-antialiased contrast-more:!text-primary-500'
+                        : 'text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300',
+                      'contrast-more:text-gray-900 contrast-more:underline contrast-more:dark:text-gray-50'
+                    )}
+                  >
+                    {text}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
 
-      {hasMetaInfo ? (
-        <div
-          className={cn(
-            hasHeadings &&
-              'mt-8 border-t bg-white pt-8 shadow-[0_-12px_16px_white] dark:bg-dark dark:shadow-[0_-12px_16px_#111]',
-            'sticky bottom-0 pb-8 dark:border-neutral-800 flex flex-col gap-2',
-            'contrast-more:shadow-none contrast-more:border-t contrast-more:border-neutral-400 contrast-more:dark:border-neutral-400'
-          )}
-        >
-          {config.feedbackLink ? (
-            <Anchor
-              className={linkClassName}
-              href={getGitIssueUrl({
-                repository: config.docsRepositoryBase,
-                title: `Feedback for “${config.title}”`,
-                labels: config.feedbackLabels
-              })}
-              newWindow
-            >
-              {renderComponent(config.feedbackLink)}
-            </Anchor>
-          ) : null}
+        {hasMetaInfo ? (
+          <div
+            className={cn(
+              hasHeadings &&
+                'mt-8 border-t bg-white pt-8 shadow-[0_-12px_16px_white] dark:bg-dark dark:shadow-[0_-12px_16px_#111]',
+              'sticky bottom-0 pb-8 dark:border-neutral-800 flex flex-col gap-2',
+              'contrast-more:shadow-none contrast-more:border-t contrast-more:border-neutral-400 contrast-more:dark:border-neutral-400'
+            )}
+          >
+            {config.feedbackLink ? (
+              <Anchor
+                className={linkClassName}
+                href={getGitIssueUrl({
+                  repository: config.docsRepositoryBase,
+                  title: `Feedback for “${config.title}”`,
+                  labels: config.feedbackLabels
+                })}
+                newWindow
+              >
+                {renderComponent(config.feedbackLink)}
+              </Anchor>
+            ) : null}
 
-          {config.footerEditLink ? (
-            <Anchor
-              className={linkClassName}
-              href={getEditUrl(filepathWithName)}
-              newWindow
-            >
-              {renderComponent(config.footerEditLink)}
-            </Anchor>
-          ) : null}
+            {config.footerEditLink ? (
+              <Anchor
+                className={linkClassName}
+                href={getEditUrl(filepathWithName)}
+                newWindow
+              >
+                {renderComponent(config.footerEditLink)}
+              </Anchor>
+            ) : null}
 
-          {config.tocExtraContent
-            ? renderComponent(config.tocExtraContent)
-            : null}
-        </div>
-      ) : null}
+            {config.tocExtraContent
+              ? renderComponent(config.tocExtraContent)
+              : null}
+          </div>
+        ) : null}
+      </div>
     </div>
   )
 }
