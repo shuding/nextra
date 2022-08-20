@@ -239,7 +239,6 @@ export function Flexsearch(): ReactElement {
     indexes[locale] = [pageIndex, sectionIndex]
 
     setLoading(false)
-    setSearch(s => (s ? s + ' ' : s)) // Trigger the effect
   }
 
   return (
