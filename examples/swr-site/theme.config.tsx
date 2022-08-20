@@ -131,10 +131,10 @@ const config: DocsThemeConfig = {
   head() {
     const config = useConfig();
     const description =
-      config.meta.description ||
+      config.frontMatter.description ||
       "SWR is a React Hooks library for data fetching. SWR first returns the data from cache (stale), then sends the fetch request (revalidate), and finally comes with the up-to-date data again.";
     const image =
-      config.meta.image ||
+      config.frontMatter.image ||
       "https://assets.vercel.com/image/upload/v1572282926/swr/twitter-card.jpg";
     return (
       <>
