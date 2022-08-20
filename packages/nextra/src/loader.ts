@@ -217,7 +217,7 @@ export default __nextra_withLayout__(
   ${JSON.stringify(pageNextRoute)},
   Content,
   {
-    title: __nextra_pageOpts__.meta.title
+    title: __nextra_pageOpts__.frontMatter.title
       || (typeof __nextra_title__ === 'string' && __nextra_title__)
       || 'Untitled',
     ...__nextra_pageOpts__
