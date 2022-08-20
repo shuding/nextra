@@ -27,7 +27,7 @@ import {
 } from './contexts'
 import { DEFAULT_LOCALE, IS_BROWSER } from './constants'
 import { getFSRoute, normalizePages, renderComponent } from './utils'
-import { Context, DocsThemeConfig, PageTheme, RecursivePartial } from './types'
+import { DocsThemeConfig, PageTheme, RecursivePartial } from './types'
 
 let resizeObserver: ResizeObserver
 if (IS_BROWSER) {
@@ -258,13 +258,11 @@ const InnerLayout = ({
   )
 }
 
-const nextraPageContext: Record<string, Context> = {}
-
-function Layout(props: any): ReactElement {
+export default function Layout(props: any): ReactElement {
   const { route } = useRouter()
-  const context = nextraPageContext[route]
-
+  const context = globalThis.__nextra_pageContext__[route]
   if (!context) throw new Error(`No content found for ${route}.`)
+
   const { pageOpts, Content } = context
   return (
     <ConfigProvider value={context}>
@@ -273,24 +271,6 @@ function Layout(props: any): ReactElement {
       </InnerLayout>
     </ConfigProvider>
   )
-}
-
-// Make sure the same component is always returned so Next.js will render the
-// stable layout. We then put the actual content into a global store and use
-// the route to identify it.
-export default function withLayout(
-  route: string,
-  Content: FC,
-  pageOpts: PageOpts,
-  themeConfig: DocsThemeConfig
-) {
-  nextraPageContext[route] = {
-    Content,
-    pageOpts,
-    themeConfig
-  }
-
-  return Layout
 }
 
 type PartialDocsThemeConfig = RecursivePartial<DocsThemeConfig>

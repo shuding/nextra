@@ -194,13 +194,17 @@ export default MDXContent`.trimStart()
 
   return `
 import { SSGContext as __nextra_SSGContext__ } from 'nextra/ssg'
-import __nextra_withLayout__ from '${layout}'
 ${themeConfigImport}
 ${cssImport}
 
 ${result}
 
 const __nextra_pageOpts__ = ${JSON.stringify(pageOpts)}
+
+__nextra_pageOpts__.title =
+  __nextra_pageOpts__.frontMatter.title ||
+  (typeof __nextra_title__ === 'string' && __nextra_title__) ||
+  'Untitled'
 
 globalThis.__nextra_internal__ = {
   pageMap: __nextra_pageOpts__.pageMap,
@@ -213,17 +217,18 @@ const Content = props => (
   </__nextra_SSGContext__.Provider>
 )
 
-export default __nextra_withLayout__(
-  ${JSON.stringify(pageNextRoute)},
+globalThis.__nextra_pageContext__ ||= Object.create(null)
+
+// Make sure the same component is always returned so Next.js will render the
+// stable layout. We then put the actual content into a global store and use
+// the route to identify it.
+globalThis.__nextra_pageContext__[${JSON.stringify(pageNextRoute)}] = {
   Content,
-  {
-    title: __nextra_pageOpts__.frontMatter.title
-      || (typeof __nextra_title__ === 'string' && __nextra_title__)
-      || 'Untitled',
-    ...__nextra_pageOpts__
-  },
-  ${themeConfigImport ? '__nextra_themeConfig__' : 'null'},
-)`.trimStart()
+  pageOpts: __nextra_pageOpts__,
+  themeConfig: ${themeConfigImport ? '__nextra_themeConfig__' : 'null'}
+}
+
+export { default } from '${layout}'`.trimStart()
 }
 
 export default function syncLoader(
