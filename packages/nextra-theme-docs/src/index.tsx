@@ -184,15 +184,15 @@ const InnerLayout = ({
     activeType === 'page' ||
     !themeContext.toc ||
     themeContext.layout !== 'default' ? (
-      themeContext.layout === 'full' || themeContext.layout === 'raw' ? null : (
-        <div className={tocClassName} />
-      )
+      themeContext.layout !== 'full' &&
+      themeContext.layout !== 'raw' && <div className={tocClassName} />
     ) : (
-      <TOC
-        headings={config.toc.float ? headings : []}
-        filePath={filePath}
-        className={tocClassName}
-      />
+      <div className={cn(tocClassName, 'mx-4')}>
+        {renderComponent(config.toc.component, {
+          headings: config.toc.float ? headings : [],
+          filePath,
+        })}
+      </div>
     )
 
   return (

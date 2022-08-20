@@ -27,15 +27,12 @@ const getEditUrl = (filePath?: string): string => {
   return '#'
 }
 
-export function TOC({
-  headings,
-  filePath,
-  className
-}: {
+export type TOCProps = {
   headings: Heading[]
   filePath: string
-  className: string
-}): ReactElement {
+}
+
+export function TOC({ headings, filePath }: TOCProps): ReactElement {
   const slugger = new Slugger()
   const activeAnchor = useActiveAnchor()
   const config = useConfig()
@@ -59,8 +56,9 @@ export function TOC({
   )
 
   const hasHeadings = items.length > 0
-  const hasMetaInfo =
-    Boolean(config.feedback.link || config.editLink || config.toc.extraContent)
+  const hasMetaInfo = Boolean(
+    config.feedback.link || config.editLink || config.toc.extraContent
+  )
 
   const activeSlug = Object.entries(activeAnchor).find(
     ([, { isActive }]) => isActive
@@ -87,42 +85,44 @@ export function TOC({
   )
 
   return (
-    <div ref={tocRef} className={cn('mx-4', className)}>
-      <div
-        className={cn(
-          'sticky top-16 overflow-y-auto pr-4 pt-8 text-sm [hyphens:auto]',
-          'ltr:-mr-4 rtl:-ml-4 max-h-[calc(100vh-4rem-env(safe-area-inset-bottom))]'
-        )}
-      >
-        {hasHeadings && (
-          <>
-            <p className="mb-4 font-semibold tracking-tight">{renderComponent(config.toc.title)}</p>
-            <ul>
-              {items.map(({ slug, text, depth }) => (
-                <li className="my-2 scroll-my-6 scroll-py-6" key={slug}>
-                  <a
-                    href={`#${slug}`}
-                    className={cn(
-                      {
-                        2: 'font-semibold',
-                        3: 'ltr:ml-4 rtl:mr-4',
-                        4: 'ltr:ml-8 rtl:mr-8',
-                        5: 'ltr:ml-12 rtl:mr-12',
-                        6: 'ltr:ml-16 rtl:mr-16'
-                      }[depth],
-                      activeAnchor[slug]?.isActive
-                        ? 'text-primary-500 subpixel-antialiased contrast-more:!text-primary-500'
-                        : 'text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300',
-                      'contrast-more:text-gray-900 contrast-more:underline contrast-more:dark:text-gray-50'
-                    )}
-                  >
-                    {text}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </>
-        )}
+    <div
+      ref={tocRef}
+      className={cn(
+        'sticky top-16 overflow-y-auto pr-4 pt-8 text-sm [hyphens:auto]',
+        'ltr:-mr-4 rtl:-ml-4 max-h-[calc(100vh-4rem-env(safe-area-inset-bottom))]'
+      )}
+    >
+      {hasHeadings && (
+        <>
+          <p className="mb-4 font-semibold tracking-tight">
+            {renderComponent(config.toc.title)}
+          </p>
+          <ul>
+            {items.map(({ slug, text, depth }) => (
+              <li className="my-2 scroll-my-6 scroll-py-6" key={slug}>
+                <a
+                  href={`#${slug}`}
+                  className={cn(
+                    {
+                      2: 'font-semibold',
+                      3: 'ltr:ml-4 rtl:mr-4',
+                      4: 'ltr:ml-8 rtl:mr-8',
+                      5: 'ltr:ml-12 rtl:mr-12',
+                      6: 'ltr:ml-16 rtl:mr-16'
+                    }[depth],
+                    activeAnchor[slug]?.isActive
+                      ? 'text-primary-500 subpixel-antialiased contrast-more:!text-primary-500'
+                      : 'text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300',
+                    'contrast-more:text-gray-900 contrast-more:underline contrast-more:dark:text-gray-50'
+                  )}
+                >
+                  {text}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
 
       {hasMetaInfo && (
         <div
@@ -160,7 +160,6 @@ export function TOC({
           {renderComponent(config.toc.extraContent)}
         </div>
       )}
-      </div>
     </div>
   )
 }

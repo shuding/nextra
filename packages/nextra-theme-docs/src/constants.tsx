@@ -2,7 +2,7 @@
 import React from 'react'
 import { DocsThemeConfig, PageTheme } from './types'
 import { useRouter } from 'next/router'
-import { Flexsearch, Footer } from './components'
+import { Flexsearch, Footer, TOC } from './components'
 import { DiscordIcon, GitHubIcon } from 'nextra/icons'
 import { MatchSorterSearch } from './components/match-sorter-search'
 import { useConfig } from './contexts'
@@ -14,7 +14,7 @@ export const IS_BROWSER = typeof window !== 'undefined'
 export const DEFAULT_THEME: DocsThemeConfig = {
   banner: {
     key: 'nextra-banner',
-    text: '',
+    text: ''
   },
   bodyExtraContent: null,
   components: {},
@@ -127,6 +127,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
   },
   titleSuffix: ' – Nextra',
   toc: {
+    component: TOC,
     extraContent: null,
     float: true,
     title: 'On This Page'

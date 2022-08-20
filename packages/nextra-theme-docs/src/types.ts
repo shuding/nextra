@@ -3,6 +3,7 @@ import { FC, ReactElement, ReactNode } from 'react'
 import { ThemeProviderProps } from 'next-themes/dist/types'
 import { PageOpts } from 'nextra'
 import { Item } from './utils'
+import { TOCProps } from './components/toc'
 
 export type RecursivePartial<T> = {
   [P in keyof T]?: T[P] extends (infer U)[]
@@ -74,6 +75,7 @@ export interface DocsThemeConfig {
   // Can't be React component, otherwise will get Warning: A title element received an array with more than 1 element as children.
   titleSuffix: string | (() => string)
   toc: {
+    component: ReactNode | FC<TOCProps>
     extraContent: ReactNode | FC
     float: boolean
     title: ReactNode | FC
