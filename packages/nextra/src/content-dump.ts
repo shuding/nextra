@@ -1,13 +1,14 @@
 import fs from 'graceful-fs'
 import path from 'path'
-import { PageOpts } from './types'
+import { FrontMatter } from './types'
+import { CWD } from './constants'
 
 const { statSync, mkdirSync } = fs
 
-const cacheDir = path.join(process.cwd(), '.next', 'cache')
-const assetDir = path.join(process.cwd(), '.next', 'static', 'chunks')
+const cacheDir = path.join(CWD, '.next', 'cache')
+const assetDir = path.join(CWD, '.next', 'static', 'chunks')
 
-const asset: { [locale: string]: any } = {}
+const asset: { [locale: string]: any } = Object.create(null)
 const cached = new Map<string, boolean>()
 
 try {
@@ -38,22 +39,22 @@ function initFromCache(filename: string) {
 }
 
 export function addPage({
-  fileLocale,
+  locale,
   route,
   title,
   frontMatter,
   structurizedData
 }: {
-  fileLocale: string
+  locale: string
   route: string
   title: string
-  frontMatter: PageOpts['frontMatter']
+  frontMatter: FrontMatter
   structurizedData: any
 }): void {
-  const dataFilename = `nextra-data-${fileLocale}.json`
+  const dataFilename = `nextra-data-${locale}.json`
 
-  asset[fileLocale] ||= initFromCache(dataFilename)
-  asset[fileLocale][route] = {
+  asset[locale] ||= initFromCache(dataFilename)
+  asset[locale][route] = {
     title: title || frontMatter.title,
     data: structurizedData
   }
@@ -61,7 +62,7 @@ export function addPage({
   // To prevent race conditions, we temporarily use the sync method to flush.
   // @TODO: introduce mutex lock, or only generate the asset when finishing the
   // entire build.
-  const content = JSON.stringify(asset[fileLocale])
+  const content = JSON.stringify(asset[locale])
   fs.writeFileSync(path.join(assetDir, dataFilename), content)
   fs.writeFileSync(path.join(cacheDir, dataFilename), content)
 }

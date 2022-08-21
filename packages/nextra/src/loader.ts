@@ -1,4 +1,4 @@
-import type { LoaderOptions, PageOpts } from './types'
+import type { LoaderOptions, MdxPath, PageOpts } from './types'
 
 import path from 'path'
 import grayMatter from 'gray-matter'
@@ -17,17 +17,18 @@ import {
   DEFAULT_LOCALE,
   OFFICIAL_THEMES,
   MARKDOWN_EXTENSION_REGEX,
-  META_FILENAME
+  META_FILENAME,
+  CWD
 } from './constants'
 
 // TODO: create this as a webpack plugin.
 const indexContentEmitted = new Set<string>()
 
-const pagesDir = findPagesDir(process.cwd()).pages
+const pagesDir = findPagesDir(CWD).pages
 
 const [repository, gitRoot] = (function () {
   try {
-    const repo = Repository.discover(process.cwd())
+    const repo = Repository.discover(CWD)
     if (repo.isShallow()) {
       if (process.env.VERCEL) {
         console.warn(
@@ -57,7 +58,6 @@ async function loader(
   context: LoaderContext<LoaderOptions>,
   source: string
 ): Promise<string> {
-  const { resourcePath } = context
   const {
     pageImport,
     theme,
@@ -77,27 +77,29 @@ async function loader(
     throw new Error('No Nextra theme found!')
   }
 
-  if (resourcePath.includes('/pages/api/')) {
+  const filePath = context.resourcePath as MdxPath
+
+  if (filePath.includes('/pages/api/')) {
     console.warn(
-      `[nextra] Ignoring ${resourcePath} because it is located in the "pages/api" folder.`
+      `[nextra] Ignoring ${filePath} because it is located in the "pages/api" folder.`
     )
     return ''
   }
 
-  const { items: pageMapResult, fileMap } = IS_PRODUCTION
+  const { items, fileMap } = IS_PRODUCTION
     ? pageMapCache.get()!
-    : await collectFiles(pagesDir, '/')
+    : await collectFiles(pagesDir)
 
   // mdx is imported but is outside the `pages` directory
-  if (!fileMap[resourcePath]) {
-    fileMap[resourcePath] = await collectMdx(resourcePath)
-    context.addMissingDependency(resourcePath)
+  if (!fileMap[filePath]) {
+    fileMap[filePath] = await collectMdx(filePath)
+    context.addMissingDependency(filePath)
   }
 
-  const fileLocale = parseFileName(resourcePath).locale
+  const { locale } = parseFileName(filePath)
 
-  for (const [filePath, { name, locale }] of Object.entries(fileMap)) {
-    if (name === META_FILENAME && (!fileLocale || locale === fileLocale)) {
+  for (const [filePath, file] of Object.entries(fileMap)) {
+    if (file.name === META_FILENAME && (!locale || file.locale === locale)) {
       context.addDependency(filePath)
     }
   }
@@ -115,7 +117,7 @@ async function loader(
       unstable_staticImage,
       unstable_flexsearch
     },
-    resourcePath
+    filePath
   )
   const cssImport = OFFICIAL_THEMES.includes(theme)
     ? `import '${theme}/style.css'`
@@ -129,33 +131,33 @@ ${result}
 export default MDXContent`.trimStart()
   }
 
-  const [pageMap, route, title] = getPageMap(
-    resourcePath,
-    pageMapResult,
+  const { route, title, pageMap } = getPageMap({
+    filePath,
     fileMap,
-    defaultLocale
-  )
+    defaultLocale,
+    pageMap: items
+  })
 
   const skipFlexsearchIndexing =
-    IS_PRODUCTION && indexContentEmitted.has(resourcePath)
+    IS_PRODUCTION && indexContentEmitted.has(filePath)
   if (unstable_flexsearch && !skipFlexsearchIndexing) {
     if (frontMatter.searchable !== false) {
       addPage({
-        fileLocale: fileLocale || DEFAULT_LOCALE,
+        locale: locale || DEFAULT_LOCALE,
         route,
         title,
         frontMatter,
         structurizedData
       })
     }
-    indexContentEmitted.add(resourcePath)
+    indexContentEmitted.add(filePath)
   }
 
   let timestamp: PageOpts['timestamp']
   if (repository && gitRoot) {
     try {
       timestamp = await repository.getFileLatestModifiedDateAsync(
-        path.relative(gitRoot, resourcePath)
+        path.relative(gitRoot, filePath)
       )
     } catch {
       // Failed to get timestamp for this file. Silently ignore it.
@@ -171,7 +173,7 @@ export default MDXContent`.trimStart()
     : ''
 
   const pageOpts: Omit<PageOpts, 'title'> = {
-    filePath: slash(path.relative(process.cwd(), resourcePath)),
+    filePath: slash(path.relative(CWD, filePath)),
     route: slash(route),
     frontMatter,
     pageMap,
@@ -184,7 +186,7 @@ export default MDXContent`.trimStart()
 
   const pageNextRoute =
     '/' +
-    slash(path.relative(pagesDir, resourcePath))
+    slash(path.relative(pagesDir, filePath))
       // Remove the `mdx?` extension
       .replace(MARKDOWN_EXTENSION_REGEX, '')
       // Remove the `*/index` suffix

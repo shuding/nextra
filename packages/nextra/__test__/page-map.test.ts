@@ -1,55 +1,57 @@
 import { describe, it, expect, beforeAll } from 'vitest'
-import path from 'path'
+import path from 'node:path'
 import { getPageMap } from '../src/page-map'
 import { collectFiles } from '../src/plugin'
-const pagesDir = () => '../../examples/swr-site/pages'
-const filePath = (name: string) => path.join(process.cwd(), pagesDir(), name)
+import { FileMap, PageMapItem } from '../src/types'
+import { CWD } from '../src/constants'
+
+const PAGES_DIR = path.join(CWD, '../../examples/swr-site/pages')
+const filePath = (name: string) => path.join(PAGES_DIR, name)
+
 const defaultLocale = 'en-US'
 
 describe('Page Process', () => {
-  let pageMap: any = {}
-  let fileMap: any = {}
+  let pageMap: PageMapItem[]
+  let fileMap: FileMap
   beforeAll(async () => {
-    const { items, fileMap: data } = await collectFiles(
-      path.join(process.cwd(), pagesDir()),
-      '/'
-    )
+    const { items, fileMap: data } = await collectFiles(PAGES_DIR)
     pageMap = items
     fileMap = data
   })
-  it('pageMap en-US', async () => {
-    const indexData = await getPageMap(
-      filePath('docs/data-fetching.en-US.mdx'),
-      pageMap,
-      fileMap,
-      defaultLocale
-    )
-    expect(indexData).toMatchSnapshot()
 
-    const gettingStartData = await getPageMap(
-      filePath('docs/getting-started.en-US.mdx'),
+  it('pageMap en-US', async () => {
+    const indexData = await getPageMap({
+      filePath: filePath('docs/data-fetching.en-US.mdx'),
       pageMap,
       fileMap,
       defaultLocale
-    )
-    expect(gettingStartData[0]).toEqual(indexData[0])
+    })
+    expect([indexData.pageMap, indexData.route, indexData.title]).toMatchSnapshot()
+
+    const gettingStartData = await getPageMap({
+      filePath: filePath('docs/getting-started.en-US.mdx'),
+      pageMap,
+      fileMap,
+      defaultLocale
+    })
+    expect(gettingStartData.pageMap).toEqual(indexData.pageMap)
   })
 
   it('pageMap zh-CN', async () => {
-    const indexData = await getPageMap(
-      filePath('docs/data-fetching.zh-CN.mdx'),
+    const indexData = await getPageMap({
+      filePath: filePath('docs/data-fetching.zh-CN.mdx'),
       pageMap,
       fileMap,
       defaultLocale
-    )
-    expect(indexData).toMatchSnapshot()
+    })
+    expect([indexData.pageMap, indexData.route, indexData.title]).toMatchSnapshot()
 
-    const gettingStartData = await getPageMap(
-      filePath('docs/getting-started.zh-CN.mdx'),
+    const gettingStartData = await getPageMap({
+      filePath: filePath('docs/getting-started.zh-CN.mdx'),
       pageMap,
       fileMap,
       defaultLocale
-    )
-    expect(gettingStartData[0]).toEqual(indexData[0])
+    })
+    expect(gettingStartData.pageMap).toEqual(indexData.pageMap)
   })
 })

@@ -1,6 +1,6 @@
-import fs from 'fs'
 import path from 'path'
 import { LOCALE_REGEX } from './constants'
+import { Meta } from './types'
 
 export function parseFileName(filePath: string): {
   name: string
@@ -32,11 +32,12 @@ export const parseJsonFile = (
   }
 }
 
-export const existsSync = (filePath: string): boolean => {
-  try {
-    fs.accessSync(filePath, fs.constants.F_OK)
-    return true
-  } catch {
-    return false
-  }
+type Truthy<T> = T extends false | '' | 0 | null | undefined ? never : T // from lodash
+
+export function truthy<T>(value: T): value is Truthy<T> {
+  return !!value
+}
+
+export function normalizeMeta(meta: Meta): Exclude<Meta, string> {
+  return typeof meta === 'string' ? { title: meta } : meta
 }

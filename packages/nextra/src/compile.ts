@@ -9,6 +9,7 @@ import { LoaderOptions, PageOpts } from './types'
 import structurize from './mdx-plugins/structurize'
 import { parseMeta, attachMeta } from './mdx-plugins/rehype-handler'
 import theme from './theme.json'
+import { truthy } from './utils'
 
 const createCompiler = (mdxOptions: ProcessorOptions): Processor => {
   const compiler = createProcessor(mdxOptions)
@@ -43,9 +44,9 @@ export async function compileMdx(
     LoaderOptions,
     'unstable_staticImage' | 'unstable_flexsearch'
   > = {},
-  resourcePath = ''
+  filePath = ''
 ) {
-  const structurizedData = {}
+  const structurizedData = Object.create(null)
   const compiler = createCompiler({
     jsx: mdxOptions.jsx ?? true,
     outputFormat: mdxOptions.outputFormat,
@@ -54,11 +55,10 @@ export async function compileMdx(
       ...(mdxOptions.remarkPlugins || []),
       remarkGfm,
       remarkHeadings,
-      ...(nextraOptions.unstable_staticImage ? [remarkStaticImage] : []),
-      ...(nextraOptions.unstable_flexsearch
-        ? [structurize(structurizedData, nextraOptions.unstable_flexsearch)]
-        : [])
-    ].filter(Boolean),
+      nextraOptions.unstable_staticImage && remarkStaticImage,
+      nextraOptions.unstable_flexsearch &&
+        structurize(structurizedData, nextraOptions.unstable_flexsearch)
+    ].filter(truthy),
     // @ts-ignore
     rehypePlugins: [
       ...(mdxOptions.rehypePlugins || []),
@@ -85,7 +85,7 @@ export async function compileMdx(
       structurizedData
     }
   } catch (err) {
-    console.error(`[nextra] Error compiling ${resourcePath}.`)
+    console.error(`[nextra] Error compiling ${filePath}.`)
     throw err
   }
 }
