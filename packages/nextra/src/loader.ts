@@ -171,7 +171,7 @@ export default MDXContent`.trimStart()
     : ''
 
   const pageOpts: Omit<PageOpts, 'title'> = {
-    filePath: path.relative(process.cwd(), resourcePath),
+    filePath: slash(path.relative(process.cwd(), resourcePath)),
     route: slash(route),
     frontMatter,
     pageMap,
