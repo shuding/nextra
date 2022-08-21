@@ -19,7 +19,7 @@ import { SearchResult } from '../types'
 
 type SearchProps = {
   className?: string
-  value: string
+  value?: string
   onChange: (newValue: string) => void
   loading?: boolean
   results: SearchResult[]
@@ -123,11 +123,12 @@ export function Search({
   }
 
   const mounted = useMounted()
-  const renderList = show && !!value
+  const hasValue = Boolean(value === undefined ? input.current?.value : value)
+  const renderList = show && hasValue
 
   const icon = (
     <Transition
-      show={mounted && (!show || !!value)}
+      show={mounted && (!show || hasValue)}
       as={React.Fragment}
       enter="transition-opacity"
       enterFrom="opacity-0"
@@ -143,11 +144,11 @@ export function Search({
           'border dark:bg-dark/50 dark:border-gray-100/20',
           'contrast-more:border-current contrast-more:text-current contrast-more:dark:border-current',
           'items-center gap-1 transition-opacity',
-          value
+          hasValue
             ? 'cursor-pointer hover:opacity-70 z-20 flex'
             : 'hidden sm:flex pointer-events-none'
         )}
-        title={value ? 'Clear' : undefined}
+        title={hasValue ? 'Clear' : undefined}
         onClick={() => {
           onChange('')
         }}
@@ -190,8 +191,9 @@ export function Search({
         ref={input}
         value={value}
         onChange={e => {
-          onChange(e.target.value)
-          setShow(true)
+          const { value } = e.target
+          onChange(value)
+          setShow(Boolean(value))
         }}
         type="search"
         placeholder={renderString(config.searchPlaceholder)}
