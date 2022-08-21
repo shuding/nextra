@@ -21,7 +21,7 @@ const BlogLayout = ({
   children,
   opts
 }: LayoutProps & { children: ReactNode }): ReactElement => {
-  const type = opts.meta.type || 'post'
+  const type = opts.frontMatter.type || 'post'
   const Layout = layoutMap[type]
   if (!Layout) {
     throw new Error(

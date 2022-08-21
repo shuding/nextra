@@ -1,6 +1,9 @@
-import React, { ComponentProps } from 'react'
+import React, { ComponentProps, ReactElement } from 'react'
 
-export function ArrowRightIcon(props: ComponentProps<'svg'>) {
+export function ArrowRightIcon({
+  pathClassName,
+  ...props
+}: ComponentProps<'svg'> & { pathClassName?: string }): ReactElement {
   return (
     <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" {...props}>
       <path
@@ -8,6 +11,7 @@ export function ArrowRightIcon(props: ComponentProps<'svg'>) {
         strokeLinejoin="round"
         strokeWidth="2"
         d="M9 5l7 7-7 7"
+        className={pathClassName}
       />
     </svg>
   )

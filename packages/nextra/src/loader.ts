@@ -16,7 +16,8 @@ import {
   IS_PRODUCTION,
   DEFAULT_LOCALE,
   OFFICIAL_THEMES,
-  MARKDOWN_EXTENSION_REGEX
+  MARKDOWN_EXTENSION_REGEX,
+  META_FILENAME
 } from './constants'
 
 // TODO: create this as a webpack plugin.
@@ -93,11 +94,10 @@ async function loader(
     context.addMissingDependency(resourcePath)
   }
 
-  const filename = path.basename(resourcePath)
-  const fileLocale = parseFileName(filename).locale
+  const fileLocale = parseFileName(resourcePath).locale
 
   for (const [filePath, { name, locale }] of Object.entries(fileMap)) {
-    if (name === 'meta.json' && (!fileLocale || locale === fileLocale)) {
+    if (name === META_FILENAME && (!fileLocale || locale === fileLocale)) {
       context.addDependency(filePath)
     }
   }
@@ -106,7 +106,7 @@ async function loader(
   context.addContextDependency(pagesDir)
 
   // Extract frontMatter information if it exists
-  const { data: meta, content } = grayMatter(source)
+  const { data: frontMatter, content } = grayMatter(source)
 
   const { result, headings, structurizedData, hasJsxInH1 } = await compileMdx(
     content,
@@ -137,18 +137,18 @@ export default MDXContent`.trimStart()
   )
 
   const skipFlexsearchIndexing =
-    IS_PRODUCTION && indexContentEmitted.has(filename)
+    IS_PRODUCTION && indexContentEmitted.has(resourcePath)
   if (unstable_flexsearch && !skipFlexsearchIndexing) {
-    if (meta.searchable !== false) {
+    if (frontMatter.searchable !== false) {
       addPage({
         fileLocale: fileLocale || DEFAULT_LOCALE,
         route,
         title,
-        meta,
+        frontMatter,
         structurizedData
       })
     }
-    indexContentEmitted.add(filename)
+    indexContentEmitted.add(resourcePath)
   }
 
   let timestamp: PageOpts['timestamp']
@@ -169,10 +169,11 @@ export default MDXContent`.trimStart()
   const themeConfigImport = themeConfig
     ? `import __nextra_themeConfig__ from '${slash(path.resolve(themeConfig))}'`
     : ''
+
   const pageOpts: Omit<PageOpts, 'title'> = {
-    filename,
+    filePath: slash(path.relative(process.cwd(), resourcePath)),
     route: slash(route),
-    meta,
+    frontMatter,
     pageMap,
     headings,
     hasJsxInH1,
@@ -216,7 +217,7 @@ export default __nextra_withLayout__(
   ${JSON.stringify(pageNextRoute)},
   Content,
   {
-    title: __nextra_pageOpts__.meta.title
+    title: __nextra_pageOpts__.frontMatter.title
       || (typeof __nextra_title__ === 'string' && __nextra_title__)
       || 'Untitled',
     ...__nextra_pageOpts__

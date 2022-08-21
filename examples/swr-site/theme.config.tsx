@@ -1,5 +1,5 @@
+/* eslint sort-keys: error */
 import { useRouter } from "next/router";
-import NextHead from "next/head";
 import { DocsThemeConfig, useConfig } from "nextra-theme-docs";
 
 const Logo = ({ height }) => (
@@ -20,63 +20,121 @@ const Vercel = () => (
   </svg>
 );
 
-const TITLE_WITH_TRANSLATIONS = {
+const TITLE = {
   "en-US": "React Hooks for Data Fetching",
-  "zh-CN": "用于数据请求的 React Hooks 库",
   "es-ES": "Biblioteca React Hooks para la obtención de datos",
   ja: "データ取得のための React Hooks ライブラリ",
   ko: "데이터 가져오기를 위한 React Hooks",
   ru: "React хуки для выборки данных",
+  "zh-CN": "用于数据请求的 React Hooks 库",
 };
 
-const EDIT_LINK_WITH_TRANSLATIONS = {
-  "zh-CN": "在 GitHub 上编辑本页",
+const EDIT_TEXT = {
+  "en-US": "Edit this page on GitHub →",
   "es-ES": "Edite esta página en GitHub",
   ja: "Github で編集する",
   ko: "Github에서 이 페이지 편집하기",
   ru: "Редактировать на GitHub",
+  "zh-CN": "在 GitHub 上编辑本页",
+};
+
+const FOOTER_LINK = {
+  "en-US": "https://vercel.com/?utm_source=swr",
+  "es-ES": "https://vercel.com/?utm_source=swr_es-es",
+  ja: "https://vercel.com/?utm_source=swr_ja",
+  ko: "https://vercel.com/?utm_source=swr_ko",
+  ru: "https://vercel.com/?utm_source=swr_ru",
+  "zh-CN": "https://vercel.com/?utm_source=swr_zh-cn",
+};
+
+const FOOTER_LINK_TEXT = {
+  "en-US": (
+    <>
+      Powered by
+      <Vercel />
+    </>
+  ),
+  "es-ES": (
+    <>
+      Desarrollado por
+      <Vercel />
+    </>
+  ),
+  ja: (
+    <>
+      提供
+      <Vercel />
+    </>
+  ),
+  ko: (
+    <>
+      Powered by
+      <Vercel />
+    </>
+  ),
+  ru: (
+    <>
+      Работает на
+      <Vercel />
+    </>
+  ),
+  "zh-CN": (
+    <>
+      由
+      <Vercel />
+      驱动
+    </>
+  ),
 };
 
 const config: DocsThemeConfig = {
-  github: "https://github.com/vercel/swr",
-  docsRepositoryBase: "https://github.com/vercel/swr-site/blob/master/pages",
-  titleSuffix() {
-    const { locale } = useRouter();
-    return ` – SWR (${locale})`;
+  banner: {
+    key: "swr-2",
+    text: "SWR 2.0 is out! Read more →",
   },
-  search: true,
-  floatTOC: true,
-  darkMode: true,
-  defaultMenuCollapsed: true,
-  nextThemes: {
-    defaultTheme: "dark",
-  },
-  feedbackLink: "Question? Give us feedback →",
-  feedbackLabels: "feedback",
-  bannerKey: "swr-2",
-  banner: "SWR 2.0 is out! Read more →",
-  tocExtraContent: <img src="https://placekitten.com/g/300/200" />,
-  logo() {
-    const { locale } = useRouter();
+  bodyExtraContent() {
+    const router = useRouter();
     return (
-      <>
-        <Logo height={12} />
-        <span
-          className="ltr:ml-2 rtl:mr-2 font-extrabold hidden md:inline select-none"
-          title={"SWR: " + (TITLE_WITH_TRANSLATIONS[locale] || "")}
-        >
-          SWR
-        </span>
-      </>
+      router.route.startsWith("/docs") && (
+        <>💪 content from `config.bodyExtraContent`</>
+      )
     );
   },
+  darkMode: true,
+  docsRepositoryBase:
+    "https://github.com/shuding/nextra/blob/core/examples/swr-site",
+  editLinkText() {
+    const { locale } = useRouter();
+    return EDIT_TEXT[locale];
+  },
+  feedback: {
+    labels: "feedback",
+    link: "Question? Give us feedback →",
+  },
+  footer: {
+    text() {
+      const { locale } = useRouter();
+      return (
+        <a
+          rel="noopener"
+          target="_blank"
+          className="inline-flex items-center font-semibold gap-2"
+          href={FOOTER_LINK[locale]}
+        >
+          {FOOTER_LINK_TEXT[locale]}
+        </a>
+      );
+    },
+  },
+  gitTimestamp: "Last updated on",
+  github: "https://github.com/vercel/swr",
   head() {
     const config = useConfig();
     const description =
-      config.meta.description ||
+      config.frontMatter.description ||
       "SWR is a React Hooks library for data fetching. SWR first returns the data from cache (stale), then sends the fetch request (revalidate), and finally comes with the up-to-date data again.";
     const image =
-      config.meta.image ||
+      config.frontMatter.image ||
       "https://assets.vercel.com/image/upload/v1572282926/swr/twitter-card.jpg";
     return (
       <>
@@ -117,95 +175,47 @@ const config: DocsThemeConfig = {
       </>
     );
   },
-  sidebarSubtitle: ({ title }) => (
-    <div className="flex items-center gap-2">
-      <Logo height={6} />
-      {title}
-    </div>
-  ),
-  footerEditLink() {
-    const { locale } = useRouter();
-    return EDIT_LINK_WITH_TRANSLATIONS[locale] || "Edit this page on GitHub →";
-  },
-  footerText() {
-    const { locale } = useRouter();
-
-    const linkProps = {
-      target: "_blank",
-      rel: "noopener",
-      className: "inline-flex items-center font-semibold gap-2",
-      href:
-        {
-          "zh-CN": "https://vercel.com/?utm_source=swr_zh-cn",
-          "es-ES": "https://vercel.com/?utm_source=swr_es-es",
-          ja: "https://vercel.com/?utm_source=swr_ja",
-          ko: "https://vercel.com/?utm_source=swr_ko",
-          ru: "https://vercel.com/?utm_source=swr_ru",
-        }[locale] || "https://vercel.com/?utm_source=swr",
-    };
-
-    switch (locale) {
-      case "zh-CN":
-        return (
-          <a {...linkProps}>
-            由
-            <Vercel />
-            驱动
-          </a>
-        );
-      case "es-ES":
-        return (
-          <a {...linkProps}>
-            Desarrollado por
-            <Vercel />
-          </a>
-        );
-      case "ja":
-        return (
-          <a {...linkProps}>
-            提供
-            <Vercel />
-          </a>
-        );
-      case "ko":
-        return (
-          <a {...linkProps}>
-            Powered by
-            <Vercel />
-          </a>
-        );
-      case "ru":
-        return (
-          <a {...linkProps}>
-            Работает на
-            <Vercel />
-          </a>
-        );
-      default:
-        return (
-          <a {...linkProps}>
-            Powered by
-            <Vercel />
-          </a>
-        );
-    }
-  },
   i18n: [
     { locale: "en-US", text: "English" },
-    { locale: "es-ES", text: "Español RTL", direction: "rtl" },
+    { direction: "rtl", locale: "es-ES", text: "Español RTL" },
     { locale: "zh-CN", text: "简体中文" },
     { locale: "ja", text: "日本語" },
     { locale: "ko", text: "한국어" },
     { locale: "ru", text: "Русский" },
   ],
-  gitTimestamp: "Last updated on",
-  bodyExtraContent() {
-    const router = useRouter();
+  logo() {
+    const { locale } = useRouter();
     return (
-      router.route.startsWith("/docs") && (
-        <>💪 content from `config.bodyExtraContent`</>
-      )
+      <>
+        <Logo height={12} />
+        <span
+          className="ltr:ml-2 rtl:mr-2 font-extrabold hidden md:inline select-none"
+          title={"SWR: " + (TITLE[locale] || "")}
+        >
+          SWR
+        </span>
+      </>
     );
+  },
+  nextThemes: {
+    defaultTheme: "dark",
+  },
+  sidebar: {
+    defaultMenuCollapsed: true,
+    subtitle: ({ title }) => (
+      <div className="flex items-center gap-2">
+        <Logo height={6} />
+        {title}
+      </div>
+    ),
+  },
+  titleSuffix() {
+    const { locale } = useRouter();
+    return ` – SWR (${locale})`;
+  },
+  toc: {
+    extraContent: <img src="https://placekitten.com/g/300/200" />,
+    float: true,
   },
 };
 

@@ -9,34 +9,30 @@ import { renderComponent, getHeadingText, getGitIssueUrl } from '../utils'
 import { useConfig, useActiveAnchor } from '../contexts'
 import { Anchor } from './anchor'
 
-const getEditUrl = (filepath?: string): string => {
+const getEditUrl = (filePath?: string): string => {
   const config = useConfig()
   const repo = parseGitUrl(config.docsRepositoryBase || '')
   if (!repo) throw new Error('Invalid `docsRepositoryBase` URL!')
 
+  const subdir = repo.subdir ? `${repo.subdir}/` : ''
+  const path = `blob/${repo.branch || 'main'}/${subdir}${filePath}`
+
   switch (repo.type) {
     case 'github':
-      return `https://github.com/${repo.owner}/${repo.name}/blob/${
-        repo.branch || 'main'
-      }/${repo.subdir || 'pages'}${filepath}`
+      return `https://github.com/${repo.owner}/${repo.name}/${path}`
     case 'gitlab':
-      return `https://gitlab.com/${repo.owner}/${repo.name}/-/blob/${
-        repo.branch || 'main'
-      }/${repo.subdir || 'pages'}${filepath}`
+      return `https://gitlab.com/${repo.owner}/${repo.name}/-/${path}`
   }
 
   return '#'
 }
 
-export function TOC({
-  headings,
-  filepathWithName,
-  className
-}: {
+export type TOCProps = {
   headings: Heading[]
-  filepathWithName: string
-  className: string
-}): ReactElement {
+  filePath: string
+}
+
+export function TOC({ headings, filePath }: TOCProps): ReactElement {
   const slugger = new Slugger()
   const activeAnchor = useActiveAnchor()
   const config = useConfig()
@@ -60,8 +56,9 @@ export function TOC({
   )
 
   const hasHeadings = items.length > 0
-  const hasMetaInfo =
-    config.feedbackLink || config.footerEditLink || config.tocExtraContent
+  const hasMetaInfo = Boolean(
+    config.feedback.link || config.editLinkText || config.toc.extraContent
+  )
 
   const activeSlug = Object.entries(activeAnchor).find(
     ([, { isActive }]) => isActive
@@ -88,8 +85,8 @@ export function TOC({
   )
 
   return (
-    <div ref={tocRef} className={cn('mx-4', className)}>
       <div
+        ref={tocRef}
         className={cn(
           'sticky top-16 overflow-y-auto pr-4 pt-8 text-sm [hyphens:auto]',
           'ltr:-mr-4 rtl:-ml-4 max-h-[calc(100vh-4rem-env(safe-area-inset-bottom))]'
@@ -97,7 +94,9 @@ export function TOC({
       >
         {hasHeadings && (
           <>
-            <p className="mb-4 font-semibold tracking-tight">On This Page</p>
+            <p className="mb-4 font-semibold tracking-tight">
+              {renderComponent(config.toc.title)}
+            </p>
             <ul>
               {items.map(({ slug, text, depth }) => (
                 <li className="my-2 scroll-my-6 scroll-py-6" key={slug}>
@@ -125,7 +124,7 @@ export function TOC({
           </>
         )}
 
-        {hasMetaInfo ? (
+        {hasMetaInfo && (
           <div
             className={cn(
               hasHeadings &&
@@ -134,36 +133,33 @@ export function TOC({
               'contrast-more:shadow-none contrast-more:border-t contrast-more:border-neutral-400 contrast-more:dark:border-neutral-400'
             )}
           >
-            {config.feedbackLink ? (
+            {config.feedback.link ? (
               <Anchor
                 className={linkClassName}
                 href={getGitIssueUrl({
                   repository: config.docsRepositoryBase,
                   title: `Feedback for “${config.title}”`,
-                  labels: config.feedbackLabels
+                  labels: config.feedback.labels
                 })}
                 newWindow
               >
-                {renderComponent(config.feedbackLink)}
+                {renderComponent(config.feedback.link)}
               </Anchor>
             ) : null}
 
-            {config.footerEditLink ? (
+            {config.editLinkText ? (
               <Anchor
                 className={linkClassName}
-                href={getEditUrl(filepathWithName)}
+                href={getEditUrl(filePath)}
                 newWindow
               >
-                {renderComponent(config.footerEditLink)}
+                {renderComponent(config.editLinkText)}
               </Anchor>
             ) : null}
 
-            {config.tocExtraContent
-              ? renderComponent(config.tocExtraContent)
-              : null}
+            {renderComponent(config.toc.extraContent)}
           </div>
-        ) : null}
+        )}
       </div>
-    </div>
   )
 }

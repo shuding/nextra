@@ -1,5 +1,6 @@
 import fs from 'graceful-fs'
 import path from 'path'
+import { PageOpts } from './types'
 
 const { statSync, mkdirSync } = fs
 
@@ -40,20 +41,20 @@ export function addPage({
   fileLocale,
   route,
   title,
-  meta,
+  frontMatter,
   structurizedData
 }: {
   fileLocale: string
   route: string
   title: string
-  meta: Record<string, any>
+  frontMatter: PageOpts['frontMatter']
   structurizedData: any
 }): void {
   const dataFilename = `nextra-data-${fileLocale}.json`
 
   asset[fileLocale] ||= initFromCache(dataFilename)
   asset[fileLocale][route] = {
-    title: title || meta.title,
+    title: title || frontMatter.title,
     data: structurizedData
   }
 

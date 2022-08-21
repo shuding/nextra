@@ -11,7 +11,7 @@ export const BasicLayout = ({ children }: { children: ReactNode }) => {
     <article className="container prose prose-sm dark:prose-dark md:prose">
       <Head>
         <title>{title}</title>
-        {config.head?.({ title, meta: opts.meta })}
+        {config.head?.({ title, meta: opts.frontMatter })}
       </Head>
       <HeadingContext.Provider value={ref}>
         {opts.hasJsxInH1 ? <h1 ref={ref} /> : null}

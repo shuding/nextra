@@ -10,6 +10,7 @@ module.exports = {
     {
       // TODO: enable for `nextra-theme-blog` also
       files: 'packages/nextra-theme-docs/**/*.{js,jsx,mjs,cjs,ts,tsx,mts,cts}',
+      plugins: ['typescript-sort-keys'],
       rules: {
         'no-restricted-imports': [
           'error',
