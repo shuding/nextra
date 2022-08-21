@@ -106,7 +106,7 @@ async function loader(
   context.addContextDependency(pagesDir)
 
   // Extract frontMatter information if it exists
-  const { data: meta, content } = grayMatter(source)
+  const { data: frontMatter, content } = grayMatter(source)
 
   const { result, headings, structurizedData, hasJsxInH1 } = await compileMdx(
     content,
@@ -139,12 +139,12 @@ export default MDXContent`.trimStart()
   const skipFlexsearchIndexing =
     IS_PRODUCTION && indexContentEmitted.has(resourcePath)
   if (unstable_flexsearch && !skipFlexsearchIndexing) {
-    if (meta.searchable !== false) {
+    if (frontMatter.searchable !== false) {
       addPage({
         fileLocale: fileLocale || DEFAULT_LOCALE,
         route,
         title,
-        meta,
+        frontMatter,
         structurizedData
       })
     }
@@ -173,7 +173,7 @@ export default MDXContent`.trimStart()
   const pageOpts: Omit<PageOpts, 'title'> = {
     filePath: path.relative(process.cwd(), resourcePath),
     route: slash(route),
-    meta,
+    frontMatter,
     pageMap,
     headings,
     hasJsxInH1,
@@ -217,7 +217,7 @@ export default __nextra_withLayout__(
   ${JSON.stringify(pageNextRoute)},
   Content,
   {
-    title: __nextra_pageOpts__.meta.title
+    title: __nextra_pageOpts__.frontMatter.title
       || (typeof __nextra_title__ === 'string' && __nextra_title__)
       || 'Untitled',
     ...__nextra_pageOpts__

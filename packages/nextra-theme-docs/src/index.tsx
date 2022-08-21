@@ -15,7 +15,6 @@ import {
   Navbar,
   NavLinks,
   Sidebar,
-  TOC,
   Breadcrumb,
   Banner
 } from './components'
@@ -141,7 +140,7 @@ const Body = ({
 const InnerLayout = ({
   filePath,
   pageMap,
-  meta,
+  frontMatter,
   headings,
   timestamp,
   children
@@ -173,7 +172,7 @@ const InnerLayout = ({
     document.documentElement.setAttribute('dir', direction)
   }, [])
 
-  const themeContext = { ...activeThemeContext, ...meta }
+  const themeContext = { ...activeThemeContext, ...frontMatter }
   const hideSidebar = !themeContext.sidebar || themeContext.layout === 'raw'
   const asPopover = activeType === 'page' || hideSidebar
 
@@ -190,7 +189,7 @@ const InnerLayout = ({
       <div className={cn(tocClassName, 'mx-4')}>
         {renderComponent(config.toc.component, {
           headings: config.toc.float ? headings : [],
-          filePath,
+          filePath
         })}
       </div>
     )

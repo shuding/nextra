@@ -14,7 +14,7 @@ export const BlogProvider = ({
   children,
   opts
 }: LayoutProps & { children: ReactNode }): ReactElement => {
-  const { date } = opts.meta
+  const { date } = opts.frontMatter
 
   if (date && !isValidDate(date)) {
     throw new Error(
