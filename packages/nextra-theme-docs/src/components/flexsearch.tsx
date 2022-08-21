@@ -52,15 +52,11 @@ export function Flexsearch(): ReactElement {
   const router = useRouter()
   const { locale = DEFAULT_LOCALE } = router
   const [loading, setLoading] = useState(false)
-  const [search, setSearch] = useState('')
   const [results, setResults] = useState<SearchResult[]>([])
 
-  useEffect(() => {
+  const doSearch = (search: string) => {
     if (!search) return
-    const index = indexes[locale]
-    if (!index) return
-
-    const [pageIndex, sectionIndex] = index
+    const [pageIndex, sectionIndex] = indexes[locale]
 
     // Show the results for the top 5 pages
     const pageResults =
@@ -149,14 +145,12 @@ export function Flexsearch(): ReactElement {
           children: res.children
         }))
     )
-  }, [search])
+  }
 
-  const load = async (value: string): Promise<void> => {
-    setSearch(value)
-    if (indexes[locale] || loading) {
-      return
-    }
+  const loadIndexes = async (): Promise<void> => {
+    if (indexes[locale]) return
     setLoading(true)
+
     const response = await fetch(
       `${router.basePath}/_next/static/chunks/nextra-data-${locale}.json`
     )
@@ -237,16 +231,21 @@ export function Flexsearch(): ReactElement {
     }
 
     indexes[locale] = [pageIndex, sectionIndex]
-
     setLoading(false)
-    setSearch(s => (s ? s + ' ' : s)) // Trigger the effect
+  }
+
+  const handleChange = async (value: string) => {
+    if (loading) {
+      return
+    }
+    await loadIndexes()
+    doSearch(value)
   }
 
   return (
     <Search
       loading={loading}
-      value={search}
-      onChange={load}
+      onChange={handleChange}
       className="w-screen min-h-[100px] max-w-[min(calc(100vw-2rem),calc(100%+20rem))]"
       results={results}
     />
