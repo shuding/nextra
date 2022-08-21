@@ -59,7 +59,6 @@ export async function compileMdx(
       nextraOptions.unstable_flexsearch &&
         structurize(structurizedData, nextraOptions.unstable_flexsearch)
     ].filter(truthy),
-    // @ts-ignore
     rehypePlugins: [
       ...(mdxOptions.rehypePlugins || []),
       parseMeta,
@@ -69,7 +68,7 @@ export async function compileMdx(
       ],
       [rehypeMdxTitle, { name: '__nextra_title__' }],
       attachMeta
-    ].filter(Boolean)
+    ]
   })
   try {
     const result = String(await compiler.process(source))

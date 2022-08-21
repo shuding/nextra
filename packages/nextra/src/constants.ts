@@ -6,7 +6,10 @@ export const LOCALE_REGEX = /\.([a-z]{2}(-[A-Z]{2})?)$/
 
 export const DEFAULT_LOCALE = 'en-US'
 
-export const OFFICIAL_THEMES = ['nextra-theme-docs', 'nextra-theme-blog']
+export const OFFICIAL_THEMES = [
+  'nextra-theme-docs',
+  'nextra-theme-blog'
+] as const
 
 export const META_FILENAME = '_meta.json'
 

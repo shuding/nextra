@@ -25,7 +25,7 @@ export interface Folder<FileType = PageMapItem> {
 
 export type MetaJsonFile = {
   name: MetaFilename
-  locale: string
+  locale?: string
   meta: {
     [fileName: string]: Meta
   }
@@ -37,7 +37,7 @@ export type Meta = string | Record<string, any>
 export type MdxFile = {
   name: string
   route: string
-  locale: string
+  locale?: string
   frontMatter?: FrontMatter
 }
 

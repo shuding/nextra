@@ -33,7 +33,7 @@ export const collectMdx = async (
   return {
     name,
     route,
-    locale,
+    ...(locale && { locale }),
     ...(Object.keys(data).length && { frontMatter: data })
   }
 }
@@ -74,7 +74,7 @@ export async function collectFiles(
         const content = await readFile(fp, 'utf8')
         fileMap[fp] = {
           name: META_FILENAME,
-          locale,
+          ...(locale && { locale }),
           meta: parseJsonFile(content, fp)
         }
         return fileMap[fp]

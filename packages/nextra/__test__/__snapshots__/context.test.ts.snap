@@ -3,7 +3,6 @@
 exports[`context > getAllPages() > should work 1`] = `
 [
   {
-    "locale": "",
     "meta": {
       "theme": {
         "timestamp": false,
@@ -14,7 +13,6 @@ exports[`context > getAllPages() > should work 1`] = `
     "route": "/404",
   },
   {
-    "locale": "",
     "meta": {
       "theme": {
         "layout": "full",

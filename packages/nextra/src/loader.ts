@@ -77,11 +77,11 @@ async function loader(
     throw new Error('No Nextra theme found!')
   }
 
-  const filePath = context.resourcePath as MdxPath
+  const mdxPath = context.resourcePath as MdxPath
 
-  if (filePath.includes('/pages/api/')) {
+  if (mdxPath.includes('/pages/api/')) {
     console.warn(
-      `[nextra] Ignoring ${filePath} because it is located in the "pages/api" folder.`
+      `[nextra] Ignoring ${mdxPath} because it is located in the "pages/api" folder.`
     )
     return ''
   }
@@ -91,12 +91,12 @@ async function loader(
     : await collectFiles(pagesDir)
 
   // mdx is imported but is outside the `pages` directory
-  if (!fileMap[filePath]) {
-    fileMap[filePath] = await collectMdx(filePath)
-    context.addMissingDependency(filePath)
+  if (!fileMap[mdxPath]) {
+    fileMap[mdxPath] = await collectMdx(mdxPath)
+    context.addMissingDependency(mdxPath)
   }
 
-  const { locale } = parseFileName(filePath)
+  const { locale } = parseFileName(mdxPath)
 
   for (const [filePath, file] of Object.entries(fileMap)) {
     if (file.name === META_FILENAME && (!locale || file.locale === locale)) {
@@ -117,8 +117,9 @@ async function loader(
       unstable_staticImage,
       unstable_flexsearch
     },
-    filePath
+    mdxPath
   )
+  // @ts-expect-error
   const cssImport = OFFICIAL_THEMES.includes(theme)
     ? `import '${theme}/style.css'`
     : ''
@@ -132,14 +133,14 @@ export default MDXContent`.trimStart()
   }
 
   const { route, title, pageMap } = getPageMap({
-    filePath,
+    filePath: mdxPath,
     fileMap,
     defaultLocale,
     pageMap: items
   })
 
   const skipFlexsearchIndexing =
-    IS_PRODUCTION && indexContentEmitted.has(filePath)
+    IS_PRODUCTION && indexContentEmitted.has(mdxPath)
   if (unstable_flexsearch && !skipFlexsearchIndexing) {
     if (frontMatter.searchable !== false) {
       addPage({
@@ -150,14 +151,14 @@ export default MDXContent`.trimStart()
         structurizedData
       })
     }
-    indexContentEmitted.add(filePath)
+    indexContentEmitted.add(mdxPath)
   }
 
   let timestamp: PageOpts['timestamp']
   if (repository && gitRoot) {
     try {
       timestamp = await repository.getFileLatestModifiedDateAsync(
-        path.relative(gitRoot, filePath)
+        path.relative(gitRoot, mdxPath)
       )
     } catch {
       // Failed to get timestamp for this file. Silently ignore it.
@@ -173,7 +174,7 @@ export default MDXContent`.trimStart()
     : ''
 
   const pageOpts: Omit<PageOpts, 'title'> = {
-    filePath: slash(path.relative(CWD, filePath)),
+    filePath: slash(path.relative(CWD, mdxPath)),
     route: slash(route),
     frontMatter,
     pageMap,
@@ -186,7 +187,7 @@ export default MDXContent`.trimStart()
 
   const pageNextRoute =
     '/' +
-    slash(path.relative(pagesDir, filePath))
+    slash(path.relative(pagesDir, mdxPath))
       // Remove the `mdx?` extension
       .replace(MARKDOWN_EXTENSION_REGEX, '')
       // Remove the `*/index` suffix
