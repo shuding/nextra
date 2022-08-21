@@ -10,6 +10,11 @@ export function Head(): ReactElement {
   const renderedTheme = theme === 'system' ? systemTheme : theme
   const mounted = useMounted()
 
+  // `head` can be either FC or ReactNode. We have to directly call it if it's a
+  // FC because hooks like Next.js' `useRouter` aren't allowed inside NextHead.
+  const head =
+    typeof config.head === 'function' ? config.head() : config.head || null
+
   return (
     <NextHead>
       <title>{config.title + renderString(config.titleSuffix)}</title>
@@ -42,7 +47,7 @@ export function Head(): ReactElement {
         name="viewport"
         content="width=device-width, initial-scale=1.0, viewport-fit=cover"
       />
-      {config.head?.()}
+      {head}
     </NextHead>
   )
 }
