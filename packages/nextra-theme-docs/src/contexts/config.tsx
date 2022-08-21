@@ -47,7 +47,7 @@ const LegacyOptions: Record<string, string> = {
   prevLinks: 'navigation.prev',
   defaultMenuCollapsed: 'sidebar.defaultMenuCollapsed',
   footerText: 'footer.text',
-  footerEditLink: 'editLinkText',
+  footerEditLink: 'editLink.text',
   floatTOC: 'toc.float',
   feedbackLink: 'feedback.link',
   feedbackLabels: 'feedback.labels',
