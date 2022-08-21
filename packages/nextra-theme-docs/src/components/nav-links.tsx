@@ -15,8 +15,8 @@ export const NavLinks = ({
   currentIndex
 }: NavLinkProps): ReactElement | null => {
   const config = useConfig()
-  const prev = config.prevLinks ? flatDirectories[currentIndex - 1] : null
-  const next = config.nextLinks ? flatDirectories[currentIndex + 1] : null
+  const prev = config.navigation.prev ? flatDirectories[currentIndex - 1] : null
+  const next = config.navigation.next ? flatDirectories[currentIndex + 1] : null
 
   if (!prev && !next) return null
 

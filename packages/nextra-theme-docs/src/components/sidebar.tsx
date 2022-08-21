@@ -5,8 +5,6 @@ import { useRouter } from 'next/router'
 import { Heading } from 'nextra'
 import scrollIntoView from 'scroll-into-view-if-needed'
 
-import { MatchSorterSearch } from './match-sorter-search'
-import { Flexsearch } from './flexsearch'
 import { useConfig, useMenu, useActiveAnchor } from '../contexts'
 import {
   Item,
@@ -39,11 +37,12 @@ function FolderImpl({ item, anchors }: FolderProps) {
   const active = [route, route + '/'].includes(item.route + '/')
   const activeRouteInside = active || route.startsWith(item.route + '/')
 
-  const { defaultMenuCollapsed, setMenu } = useMenu()
+  const { setMenu } = useMenu()
+  const config = useConfig()
   const open =
     TreeState[item.route] !== undefined
       ? TreeState[item.route]
-      : active || activeRouteInside || !defaultMenuCollapsed
+      : active || activeRouteInside || !config.sidebar.defaultMenuCollapsed
 
   const rerender = useState({})[1]
 
@@ -149,7 +148,7 @@ interface SeparatorProps {
 function Separator({ title, topLevel }: SeparatorProps): ReactElement {
   // since title can be empty string ''
   const hasTitle = title !== undefined
-  const { sidebarSubtitle } = useConfig()
+  const config = useConfig()
   return (
     <li
       className={cn(
@@ -160,9 +159,7 @@ function Separator({ title, topLevel }: SeparatorProps): ReactElement {
     >
       {hasTitle ? (
         <div className="mx-2 py-1.5 text-sm font-semibold text-gray-900 dark:text-gray-100">
-          {sidebarSubtitle
-            ? renderComponent(sidebarSubtitle, { title })
-            : title}
+          {renderComponent(config.sidebar.subtitle, { title })}
         </div>
       ) : (
         <hr className="mx-2 border-t border-gray-200 dark:border-primary-100/10" />
@@ -334,14 +331,9 @@ export function Sidebar({
                 'dark:bg-dark shadow-[0_2px_14px_6px_#fff] dark:shadow-[0_2px_14px_6px_#111]'
               )}
             >
-              {config.customSearch ||
-                (config.search ? (
-                  config.unstable_flexsearch ? (
-                    <Flexsearch />
-                  ) : (
-                    <MatchSorterSearch directories={flatDirectories} />
-                  )
-                ) : null)}
+              {renderComponent(config.search.component, {
+                directories: flatDirectories
+              })}
             </div>
             <div className="hidden md:block">
               <Menu
@@ -349,7 +341,7 @@ export function Sidebar({
                 directories={docsDirectories}
                 // When the viewport size is larger than `md`, hide the anchors in
                 // the sidebar when `floatTOC` is enabled.
-                anchors={config.floatTOC ? [] : anchors}
+                anchors={config.toc.float ? [] : anchors}
               />
             </div>
             <div className="md:hidden">
@@ -370,11 +362,11 @@ export function Sidebar({
               )}
             >
               <div className="flex gap-1 bg-white py-4 pb-4 dark:bg-dark justify-between">
-                {config.i18n ? (
+                {config.i18n.length > 0 && (
                   <div className="relative">
                     <LocaleSwitch options={config.i18n} />
                   </div>
-                ) : null}
+                )}
                 {config.darkMode ? (
                   <div className="relative">
                     <ThemeSwitch lite={!!config.i18n} />
