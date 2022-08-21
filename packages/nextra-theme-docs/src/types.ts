@@ -24,7 +24,7 @@ export interface DocsThemeConfig {
   footerText?: ReactNode | FC
   footerEditLink?: ReactNode | FC
   logo?: ReactNode | FC
-  head?: () => ReactElement,
+  head?: ReactNode | FC
   direction?: 'ltr' | 'rtl'
   i18n?: { locale: string; text: string; direction?: string }[]
   floatTOC?: boolean
