@@ -1,4 +1,11 @@
-import React, { useState, useEffect, useMemo, ReactElement, memo } from 'react'
+import React, {
+  useState,
+  useEffect,
+  useMemo,
+  ReactElement,
+  memo,
+  useRef
+} from 'react'
 import cn from 'clsx'
 import Slugger from 'github-slugger'
 import { useRouter } from 'next/router'
@@ -53,51 +60,12 @@ function FolderImpl({ item, anchors }: FolderProps) {
     }
   }, [activeRouteInside])
 
-  const link = (
-    <Anchor
-      href={(item as Item).withIndexPage ? item.route : ''}
-      className="cursor-pointer !flex gap-2 items-center justify-between [word-break:break-word]"
-      onClick={e => {
-        const clickedToggleIcon = ['svg', 'path'].includes(
-          (e.target as HTMLElement).tagName.toLowerCase()
-        )
-        if (clickedToggleIcon) {
-          e.preventDefault()
-        }
-        if ((item as Item).withIndexPage) {
-          // If it's focused, we toggle it. Otherwise, always open it.
-          if (active || clickedToggleIcon) {
-            TreeState[item.route] = !open
-          } else {
-            TreeState[item.route] = true
-            setMenu(false)
-          }
-          rerender({})
-          return
-        }
-        if (active) return
-        TreeState[item.route] = !open
-        rerender({})
-      }}
-    >
-      {item.title}
-      <ArrowRightIcon
-        height="1em"
-        className={cn(
-          'h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5',
-          '[&>path]:origin-center [&>path]:transition-transform rtl:[&>path]:-rotate-180',
-          open && 'ltr:[&>path]:rotate-90 rtl:[&>path]:rotate-[-270deg]'
-        )}
-      />
-    </Anchor>
-  )
-
   if (item.type === 'menu') {
     const menu = item as MenuItem
     const routes = Object.fromEntries(
       (menu.children || []).map(route => [route.name, route])
     )
-    const directories = Object.entries(menu.items || {}).map(([key, item]) => {
+    item.children = Object.entries(menu.items || {}).map(([key, item]) => {
       const route = routes[key] || {
         name: key,
         locale: menu.locale,
@@ -108,25 +76,46 @@ function FolderImpl({ item, anchors }: FolderProps) {
         ...item
       }
     })
-
-    return (
-      <li className={cn({ open, active })}>
-        {link}
-        <Collapse open={open}>
-          <Menu
-            submenu
-            directories={directories}
-            base={item.route}
-            anchors={anchors}
-          />
-        </Collapse>
-      </li>
-    )
   }
 
   return (
     <li className={cn({ open, active })}>
-      {link}
+      <Anchor
+        href={(item as Item).withIndexPage ? item.route : ''}
+        className="cursor-pointer !flex gap-2 items-center justify-between [word-break:break-word]"
+        onClick={e => {
+          const clickedToggleIcon = ['svg', 'path'].includes(
+            (e.target as HTMLElement).tagName.toLowerCase()
+          )
+          if (clickedToggleIcon) {
+            e.preventDefault()
+          }
+          if ((item as Item).withIndexPage) {
+            // If it's focused, we toggle it. Otherwise, always open it.
+            if (active || clickedToggleIcon) {
+              TreeState[item.route] = !open
+            } else {
+              TreeState[item.route] = true
+              setMenu(false)
+            }
+            rerender({})
+            return
+          }
+          if (active) return
+          TreeState[item.route] = !open
+          rerender({})
+        }}
+      >
+        {item.title}
+        <ArrowRightIcon
+          height="1em"
+          className={cn(
+            'h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5',
+            '[&>path]:origin-center [&>path]:transition-transform rtl:[&>path]:-rotate-180',
+            open && 'ltr:[&>path]:rotate-90 rtl:[&>path]:rotate-[-270deg]'
+          )}
+        />
+      </Anchor>
       <Collapse open={open}>
         {Array.isArray(item.children) ? (
           <Menu
@@ -289,6 +278,8 @@ export function Sidebar({
         .filter(Boolean),
     [headings]
   )
+  const sidebarRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (menu) {
@@ -299,14 +290,14 @@ export function Sidebar({
   }, [menu])
 
   useEffect(() => {
-    const activeElement = document.querySelector('.nextra-sidebar li.active')
+    const activeElement = sidebarRef.current?.querySelector('li.active')
 
     if (activeElement) {
       scrollIntoView(activeElement, {
         block: 'center',
         inline: 'center',
         scrollMode: 'always',
-        boundary: document.querySelector('.nextra-sidebar-container')
+        boundary: containerRef.current
       })
     }
   }, [])
@@ -325,8 +316,12 @@ export function Sidebar({
           hasMenu && 'with-menu',
           { open: menu }
         )}
+        ref={containerRef}
       >
-        <div className="nextra-sidebar h-full w-full select-none pl-[calc(env(safe-area-inset-left)-1.5rem)] md:h-auto">
+        <div
+          className="nextra-sidebar h-full w-full select-none pl-[calc(env(safe-area-inset-left)-1.5rem)] md:h-auto"
+          ref={sidebarRef}
+        >
           <div className="min-h-[calc(100vh-4rem-61px)] p-4">
             <div
               className={cn(
