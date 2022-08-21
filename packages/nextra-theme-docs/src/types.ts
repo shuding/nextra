@@ -35,7 +35,7 @@ export interface DocsThemeConfig {
   }
   gitTimestamp: ReactNode | FC<{ timestamp: Date }>
   github: string
-  head: () => ReactElement
+  head: ReactNode | FC
   i18n: { direction?: string; locale: string; text: string }[]
   logo: ReactNode | FC
   navigation: {

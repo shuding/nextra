@@ -12,8 +12,7 @@ export function Head(): ReactElement {
 
   // `head` can be either FC or ReactNode. We have to directly call it if it's a
   // FC because hooks like Next.js' `useRouter` aren't allowed inside NextHead.
-  const head =
-    typeof config.head === 'function' ? config.head() : config.head || null
+  const head = typeof config.head === 'function' ? config.head({}) : config.head
 
   return (
     <NextHead>

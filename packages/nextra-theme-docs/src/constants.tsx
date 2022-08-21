@@ -48,7 +48,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     )
   },
   github: '',
-  head: () => (
+  head: (
     <>
       <meta name="msapplication-TileColor" content="#fff" />
       <meta httpEquiv="Content-Language" content="en" />
