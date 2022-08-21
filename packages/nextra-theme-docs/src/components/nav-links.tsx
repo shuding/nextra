@@ -32,13 +32,7 @@ export const NavLinks = ({
               'rtl:ml-2 ltr:mr-2'
             )}
           >
-            <ArrowRightIcon
-              height={20}
-              className={cn(
-                'inline flex-shrink-0 transform',
-                'rtl:ml-1 ltr:mr-1 ltr:rotate-180'
-              )}
-            />
+            <ArrowRightIcon className="h-5 inline flex-shrink-0 transform rtl:ml-1 ltr:mr-1 ltr:rotate-180" />
             {prev.title}
           </Anchor>
         ) : null}
@@ -54,13 +48,7 @@ export const NavLinks = ({
             )}
           >
             {next.title}
-            <ArrowRightIcon
-              height={20}
-              className={cn(
-                'inline flex-shrink-0 transform',
-                'rtl:mr-1 rtl:rotate-180 ltr:ml-1'
-              )}
-            />
+            <ArrowRightIcon className="h-5 inline flex-shrink-0 transform rtl:mr-1 rtl:rotate-180 ltr:ml-1" />
           </Anchor>
         ) : null}
       </div>

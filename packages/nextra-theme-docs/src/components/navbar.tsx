@@ -111,11 +111,8 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
                 >
                   {menu.title}
                   <ArrowRightIcon
-                    height="1em"
-                    className={cn(
-                      'h-[18px] min-w-[18px] rounded-sm p-0.5',
-                      '[&>path]:origin-center [&>path]:transition-transform [&>path]:rotate-90'
-                    )}
+                    className="h-[18px] min-w-[18px] rounded-sm p-0.5"
+                    pathClassName="origin-center transition-transform rotate-90"
                   />
                 </NavbarMenu>
               </div>
