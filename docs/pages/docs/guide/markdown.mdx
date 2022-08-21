@@ -1,0 +1,115 @@
+# Markdown
+
+## MDX
+
+With Nextra, all your `.mdx` files under the pages directory will be rendered with [MDX](https://mdxjs.com/about), it's an
+advanced Markdown format with React component support.
+
+For example, you can use import and use React components inside your Markdown files like this:
+
+import { Callout } from 'nextra-theme-docs'
+
+```mdx filename="Markdown"
+## Hello MDX
+
+import { useState } from 'react'
+
+export function Counter({ children }) {
+  const [count, setCount] = useState(0)
+  return <button onClick={() => setCount(count + 1)}>
+    {children}{count}
+  </button>
+}
+
+<Counter>**Clicks**: </Counter>
+```
+
+Generates:
+
+import { useState } from 'react'
+import { Shadow } from '@components/utils/shadow'
+
+export function Counter({ children }) {
+  const [count, setCount] = useState(0)
+  return <button onClick={() => setCount(count + 1)}>{children}{count}</button>
+}
+
+<div className="p-4 border border-gray-200 dark:border-gray-900 rounded mt-6">
+  <Shadow mode="open">
+    <h2>Hello MDX</h2>
+    <Counter>**Clicks**: </Counter>
+  </Shadow>
+</div>
+
+Besides basic MDX, Nextra also has some advanced Markdown features built-in.
+
+## GitHub Flavored Markdown
+
+[GFM](https://github.github.com/gfm) is an extension of Markdown, created by GitHub, that adds support for strikethrough, task lists, tables, and more.
+
+### Strikethrough
+
+~~removed~~
+
+```md filename="Markdown"
+~~removed~~
+```
+
+### Task List
+
+- [x] Write the press release
+- [ ] Update the website
+- [ ] Contact the media
+
+```md filename="Markdown"
+- [x] Write the press release
+- [ ] Update the website
+- [ ] Contact the media
+```
+
+### Table
+
+| Syntax        | Description |   Test Text |
+| :------------ | :---------: | ----------: |
+| Header        |    Title    | Here's this |
+| Paragraph     |    Text     |    And more |
+| Strikethrough |             |    ~~Text~~ |
+
+```md filename="Markdown"
+| Syntax        | Description |   Test Text |
+| :------------ | :---------: | ----------: |
+| Header        |    Title    | Here's this |
+| Paragraph     |    Text     |    And more |
+| Strikethrough |             |    ~~Text~~ |
+```
+
+### Autolinks
+
+Visit https://nextjs.org.
+
+```md
+Visit https://nextjs.org.
+```
+
+## Extended Syntax Highlighting
+
+Nextra supports automatic syntax highlighting:
+
+```js
+console.log('hello, world')
+```
+
+````md filename="Markdown"
+```js
+console.log('hello, world')
+```
+````
+
+Inlined syntax highlighting is also supported `let x = 1{:jsx}` via:
+
+````md filename="Markdown"
+Inlined syntax highlighting is also supported `let x = 1{:jsx}` via:
+````
+
+
+Read more about the syntax highlighting in the next section:
