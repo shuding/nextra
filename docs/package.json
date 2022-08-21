@@ -1,8 +1,4 @@
 {
-  "name": "nextra",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "scripts": {
     "dev": "next",
     "start": "next start",
@@ -19,6 +15,7 @@
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
+    "@types/node": "^18.7.8",
     "prettier": "^2.7.1",
     "typescript": "^4.7.4"
   },
