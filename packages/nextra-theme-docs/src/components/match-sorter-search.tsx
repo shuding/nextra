@@ -28,12 +28,5 @@ export function MatchSorterSearch({
     [search]
   )
 
-  return (
-    <Search
-      value={search}
-      onChange={setSearch}
-      className="w-full"
-      results={results}
-    />
-  )
+  return <Search onChange={setSearch} className="w-full" results={results} />
 }
