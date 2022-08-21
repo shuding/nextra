@@ -2,6 +2,7 @@ import { PageMapItem } from './types'
 import { parseFileName } from './utils'
 import path from 'path'
 import filterRouteLocale from './filter-route-locale'
+import { META_FILENAME } from './constants'
 
 export function getPageMap(
   currentResourcePath: string,
@@ -9,19 +10,17 @@ export function getPageMap(
   fileMap: Record<string, PageMapItem>,
   defaultLocale: string
 ): [PageMapItem[], string, string] {
-  const activeRouteLocale = parseFileName(currentResourcePath).locale
+  const { locale } = parseFileName(currentResourcePath)
   const pageItem = fileMap[currentResourcePath]
+  const [metaName, metaExt] = META_FILENAME.split('.')
   const metaPath = path.dirname(currentResourcePath)
-  const metaExtension = activeRouteLocale ? `${activeRouteLocale}.json` : `json`
-  const pageMeta =
-    fileMap[`${metaPath}/meta.${metaExtension}`]?.meta?.[pageItem.name]
+  const metaFilename = `${metaName}.${locale && `${locale}.`}${metaExt}`
+  const pageMeta = fileMap[`${metaPath}/${metaFilename}`]?.meta?.[pageItem.name]
   const title =
     (typeof pageMeta === 'string' ? pageMeta : pageMeta?.title) || pageItem.name
 
   return [
-    activeRouteLocale
-      ? filterRouteLocale(pageMap, activeRouteLocale, defaultLocale)
-      : pageMap,
+    locale ? filterRouteLocale(pageMap, locale, defaultLocale) : pageMap,
     pageItem.route,
     title
   ]

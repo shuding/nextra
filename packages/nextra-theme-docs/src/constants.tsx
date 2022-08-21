@@ -11,6 +11,8 @@ export const DEFAULT_LOCALE = 'en-US'
 
 export const IS_BROWSER = typeof window !== 'undefined'
 
+export const META_FILENAME = '_meta.json'
+
 export const DEFAULT_THEME: DocsThemeConfig = {
   banner: {
     key: 'nextra-banner',

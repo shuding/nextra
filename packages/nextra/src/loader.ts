@@ -16,7 +16,8 @@ import {
   IS_PRODUCTION,
   DEFAULT_LOCALE,
   OFFICIAL_THEMES,
-  MARKDOWN_EXTENSION_REGEX
+  MARKDOWN_EXTENSION_REGEX,
+  META_FILENAME
 } from './constants'
 
 // TODO: create this as a webpack plugin.
@@ -96,7 +97,7 @@ async function loader(
   const fileLocale = parseFileName(resourcePath).locale
 
   for (const [filePath, { name, locale }] of Object.entries(fileMap)) {
-    if (name === 'meta.json' && (!fileLocale || locale === fileLocale)) {
+    if (name === META_FILENAME && (!fileLocale || locale === fileLocale)) {
       context.addDependency(filePath)
     }
   }

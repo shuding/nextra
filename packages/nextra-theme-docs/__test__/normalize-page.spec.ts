@@ -56,7 +56,7 @@ describe('normalize-page', () => {
         { name: 'get-started', route: '/get-started' },
         { name: 'index', route: '/' },
         {
-          name: 'meta.json',
+          name: '_meta.json',
           route: '',
           meta: {
             '404': {
@@ -89,7 +89,7 @@ describe('normalize-page', () => {
         { name: 'get-started', route: '/get-started' },
         { name: 'index', route: '/' },
         {
-          name: 'meta.json',
+          name: '_meta.json',
           route: '',
           meta: {
             '500': {

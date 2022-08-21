@@ -9,7 +9,7 @@ import { findPagesDir } from 'next/dist/lib/find-pages-dir.js'
 import { Compiler } from 'webpack'
 
 import { restoreCache } from './content-dump'
-import { MARKDOWN_EXTENSION_REGEX } from './constants'
+import { MARKDOWN_EXTENSION_REGEX, META_FILENAME } from './constants'
 
 const readdir = promisify(fs.readdir)
 const readFile = promisify(fs.readFile)
@@ -56,15 +56,23 @@ export async function collectFiles(
           fileMap[filePath] = await collectMdx(filePath, fileRoute)
           return fileMap[filePath]
         }
+        const fileName = name + ext
 
-        if (ext === '.json' && name === 'meta') {
+        if (fileName === META_FILENAME) {
           const content = await readFile(filePath, 'utf8')
           fileMap[filePath] = {
-            name: 'meta.json',
+            name: META_FILENAME,
             locale,
             meta: parseJsonFile(content, filePath)
           }
           return fileMap[filePath]
+        }
+
+        if (fileName === 'meta.json') {
+          console.warn(
+            `[nextra] "meta.json" was renamed to "_meta.json". Rename the following file:`,
+            path.relative(process.cwd(), filePath)
+          )
         }
       })
     )
