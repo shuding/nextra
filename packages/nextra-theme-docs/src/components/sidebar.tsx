@@ -1,4 +1,11 @@
-import React, { useState, useEffect, useMemo, ReactElement, memo } from 'react'
+import React, {
+  useState,
+  useEffect,
+  useMemo,
+  ReactElement,
+  memo,
+  useRef
+} from 'react'
 import cn from 'clsx'
 import Slugger from 'github-slugger'
 import { useRouter } from 'next/router'
@@ -270,6 +277,8 @@ export function Sidebar({
         .filter(Boolean),
     [headings]
   )
+  const sidebarRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (menu) {
@@ -280,14 +289,14 @@ export function Sidebar({
   }, [menu])
 
   useEffect(() => {
-    const activeElement = document.querySelector('.nextra-sidebar li.active')
+    const activeElement = sidebarRef.current?.querySelector('li.active')
 
     if (activeElement) {
       scrollIntoView(activeElement, {
         block: 'center',
         inline: 'center',
         scrollMode: 'always',
-        boundary: document.querySelector('.nextra-sidebar-container')
+        boundary: containerRef.current
       })
     }
   }, [])
@@ -306,8 +315,12 @@ export function Sidebar({
           hasMenu && 'with-menu',
           { open: menu }
         )}
+        ref={containerRef}
       >
-        <div className="nextra-sidebar h-full w-full select-none pl-[calc(env(safe-area-inset-left)-1.5rem)] md:h-auto">
+        <div
+          className="nextra-sidebar h-full w-full select-none pl-[calc(env(safe-area-inset-left)-1.5rem)] md:h-auto"
+          ref={sidebarRef}
+        >
           <div className="min-h-[calc(100vh-4rem-61px)] p-4">
             <div
               className={cn(
