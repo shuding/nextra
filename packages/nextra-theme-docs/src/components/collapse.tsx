@@ -51,7 +51,7 @@ export function Collapse({
           if (container) {
             container.style.maxHeight = '0px'
           }
-        })
+        }, 0)
       }
     }
   }, [open])

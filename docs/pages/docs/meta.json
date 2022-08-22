@@ -1,0 +1,16 @@
+{
+  "index": "Introduction",
+  "guide": "Guide",
+  "-- Themes --": {
+    "type": "separator",
+    "title": "Themes"
+  },
+  "docs-theme": "Docs Theme",
+  "blog": "Blog Theme",
+  "your-own-theme": "Your Own Theme",
+  "-- About --": {
+    "type": "separator",
+    "title": "About"
+  },
+  "about": "About"
+}
