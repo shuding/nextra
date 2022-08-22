@@ -165,11 +165,22 @@ const Details = ({
   const [openState, setOpen] = useState(!!open)
   const [summary, restChildren] = findSummary(children)
 
+  // To animate the close animation we have to delay the DOM node state here.
+  const [delayedOpenState, setDelayedOpenState] = useState(openState)
+  useEffect(() => {
+    if (openState) {
+      setDelayedOpenState(true)
+    } else {
+      const timeout = setTimeout(() => setDelayedOpenState(openState), 500)
+      return () => clearTimeout(timeout)
+    }
+  }, [openState])
+
   return (
     <details
       className="my-4 rounded border border-gray-200 bg-white p-2 shadow-sm dark:border-neutral-800 dark:bg-neutral-900 first:mt-0 last:mb-0"
       {...props}
-      {...(openState && { open: true })}
+      {...(delayedOpenState && { open: true })}
     >
       <DetailsProvider value={setOpen}>{summary}</DetailsProvider>
       <Collapse open={openState}>{restChildren}</Collapse>
