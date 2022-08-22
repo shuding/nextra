@@ -1,0 +1,23 @@
+{
+  "index": {
+    "title": "Nextra",
+    "type": "page",
+    "hidden": true,
+    "theme": {
+      "layout": "raw"
+    }
+  },
+  "docs": {
+    "title": "Documentation",
+    "type": "page"
+  },
+  "showcase": {
+    "title": "Showcase",
+    "type": "page"
+  },
+  "about": {
+    "title": "About",
+    "type": "page",
+    "href": "/docs/about"
+  }
+}
