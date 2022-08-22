@@ -136,6 +136,7 @@ importers:
       gray-matter: ^4.0.3
       next: ^12.2.4
       react: ^18.2.0
+      react-children-utilities: ^2.8.0
       react-dom: ^18.2.0
       rehype-mdx-title: ^1.0.0
       rehype-pretty-code: 0.2.4
@@ -150,6 +151,7 @@ importers:
       github-slugger: 1.4.0
       graceful-fs: 4.2.10
       gray-matter: 4.0.3
+      react-children-utilities: 2.8.0_react@18.2.0
       rehype-mdx-title: 1.0.0
       rehype-pretty-code: 0.2.4_shiki@0.10.1
       remark-gfm: 3.0.1
@@ -5031,6 +5033,14 @@ packages:
     dependencies:
       safe-buffer: 5.2.1
     dev: true
+
+  /react-children-utilities/2.8.0_react@18.2.0:
+    resolution: {integrity: sha512-g42oRsZLrFJgCcIdK1lad1CWujNH4gh1Cp1lsMQpHWdDjWQ8gUlaBebgy2iXofyPEpfJ4T/xt4qWrvDkgVCCNg==}
+    peerDependencies:
+      react: 18 || 17 || 16 || 15
+    dependencies:
+      react: 18.2.0
+    dev: false
 
   /react-cusdis/2.1.3_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-fUJOAUY7a3y21fNzlRWUSTr/ZMsejQAYWIWdsNuBPPZHbUrBvke/8Gw4OL5Mlrth7jLw8VTNssX0WBX5/prorQ==}

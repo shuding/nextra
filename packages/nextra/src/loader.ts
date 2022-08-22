@@ -63,6 +63,7 @@ async function loader(
     theme,
     themeConfig,
     defaultLocale,
+    unstable_defaultShowCopyCode,
     unstable_flexsearch,
     unstable_staticImage,
     mdxOptions,
@@ -114,6 +115,7 @@ async function loader(
     content,
     mdxOptions,
     {
+      unstable_defaultShowCopyCode,
       unstable_staticImage,
       unstable_flexsearch
     },

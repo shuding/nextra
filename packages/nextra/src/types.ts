@@ -79,6 +79,7 @@ type Flexsearch = boolean | { codeblocks: boolean }
 export type NextraConfig = {
   theme: Theme
   themeConfig?: string
+  unstable_defaultShowCopyCode?: boolean
   unstable_flexsearch?: Flexsearch
   unstable_staticImage?: boolean
   mdxOptions?: Pick<ProcessorOptions, 'rehypePlugins' | 'remarkPlugins'> & {

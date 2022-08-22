@@ -42,7 +42,9 @@ export async function compileMdx(
     Pick<ProcessorOptions, 'jsx' | 'outputFormat'> = {},
   nextraOptions: Pick<
     LoaderOptions,
-    'unstable_staticImage' | 'unstable_flexsearch'
+    | 'unstable_staticImage'
+    | 'unstable_flexsearch'
+    | 'unstable_defaultShowCopyCode'
   > = {},
   filePath = ''
 ) {
@@ -61,7 +63,10 @@ export async function compileMdx(
     ].filter(truthy),
     rehypePlugins: [
       ...(mdxOptions.rehypePlugins || []),
-      parseMeta,
+      [
+        parseMeta,
+        { defaultShowCopyCode: nextraOptions.unstable_defaultShowCopyCode }
+      ],
       [
         rehypePrettyCode,
         { ...rehypePrettyCodeOptions, ...mdxOptions.rehypePrettyCodeOptions }
