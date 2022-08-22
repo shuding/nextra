@@ -1,7 +1,10 @@
 .cards {
   display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(max(250px, calc((100% - 1rem * 2) / 3)), 1fr)
+  );
   grid-gap: 1rem;
-  grid-template-columns: repeat(3, 1fr);
   margin-top: 1rem;
 }
 
