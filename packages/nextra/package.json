@@ -28,17 +28,16 @@
         "./dist/locales.d.ts"
       ],
       "icons": [
-        "./dist/icons.d.ts"
+        "./dist/icons/index.d.ts"
+      ],
+      "components": [
+        "./dist/components/index.d.ts"
       ]
     }
   },
   "exports": {
     "./package.json": "./package.json",
     ".": "./dist/index.js",
-    "./compile": {
-      "import": "./dist/compile.mjs",
-      "types": "./dist/compile.d.ts"
-    },
     "./context": {
       "import": "./dist/context.js",
       "types": "./dist/context.d.ts"
@@ -57,8 +56,16 @@
       "types": "./dist/locales.d.ts"
     },
     "./icons": {
-      "import": "./dist/icons.mjs",
-      "types": "./dist/icons.d.ts"
+      "import": "./dist/icons/index.mjs",
+      "types": "./dist/icons/index.d.ts"
+    },
+    "./components": {
+      "import": "./dist/components/index.mjs",
+      "types": "./dist/components/index.d.ts"
+    },
+    "./*": {
+      "import": "./dist/*.mjs",
+      "types": "./dist/*.d.ts"
     }
   },
   "repository": "https://github.com/shuding/nextra",
@@ -79,6 +86,7 @@
     "github-slugger": "^1.4.0",
     "graceful-fs": "^4.2.10",
     "gray-matter": "^4.0.3",
+    "react-children-utilities": "^2.8.0",
     "rehype-mdx-title": "^1.0.0",
     "rehype-pretty-code": "0.2.4",
     "remark-gfm": "^3.0.1",
