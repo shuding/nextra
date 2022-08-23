@@ -1,13 +1,16 @@
 import React, { useMemo, useState, ReactElement } from 'react'
 import { matchSorter } from 'match-sorter'
+import cn from 'clsx'
 import { Item as NormalItem } from '../utils'
 import { Search } from './search'
 import { HighlightMatches } from './highlight-matches'
 import { SearchResult } from '../types'
 
 export function MatchSorterSearch({
+  className,
   directories = []
 }: {
+  className?: string
   directories: NormalItem[]
 }): ReactElement {
   const [search, setSearch] = useState('')
@@ -28,5 +31,11 @@ export function MatchSorterSearch({
     [search]
   )
 
-  return <Search onChange={setSearch} className="w-full" results={results} />
+  return (
+    <Search
+      onChange={setSearch}
+      className={cn('w-full', className)}
+      results={results}
+    />
+  )
 }

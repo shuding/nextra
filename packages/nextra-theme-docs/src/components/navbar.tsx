@@ -150,11 +150,10 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
           )
         })}
 
-        <div className="hidden md:inline-block min-w-[200px]">
-          {renderComponent(config.search.component, {
-            directories: flatDirectories
-          })}
-        </div>
+        {renderComponent(config.search.component, {
+          directories: flatDirectories,
+          className: 'hidden md:inline-block min-w-[200px]'
+        })}
 
         {config.project.link || config.github ? (
           <Anchor

@@ -48,7 +48,11 @@ const indexes: {
   [locale: string]: [PageIndex, SectionIndex]
 } = {}
 
-export function Flexsearch(): ReactElement {
+export function Flexsearch({
+  className
+}: {
+  className?: string
+}): ReactElement {
   const router = useRouter()
   const { locale = DEFAULT_LOCALE } = router
   const [loading, setLoading] = useState(false)
@@ -246,7 +250,10 @@ export function Flexsearch(): ReactElement {
     <Search
       loading={loading}
       onChange={handleChange}
-      className="w-screen min-h-[100px] max-w-[min(calc(100vw-2rem),calc(100%+20rem))]"
+      className={cn(
+        'w-screen min-h-[100px] max-w-[min(calc(100vw-2rem),calc(100%+20rem))]',
+        className
+      )}
       results={results}
     />
   )

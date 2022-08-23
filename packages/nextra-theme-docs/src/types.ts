@@ -68,7 +68,12 @@ export interface DocsThemeConfig {
     link: string
   }
   search: {
-    component: ReactNode | FC<{ directories: Item[] }>
+    component:
+      | ReactNode
+      | FC<{
+          className?: string
+          directories: Item[]
+        }>
     emptyResult: ReactNode | FC
     // Can't be React component
     placeholder: string | (() => string)
