@@ -202,19 +202,19 @@ import { SSGContext as __nextra_SSGContext__ } from 'nextra/ssg'
 ${themeConfigImport}
 ${cssImport}
 
-${result}
-
 const __nextra_pageOpts__ = ${JSON.stringify(pageOpts)}
-
-__nextra_pageOpts__.title =
-  __nextra_pageOpts__.frontMatter.title ||
-  (typeof __nextra_title__ === 'string' && __nextra_title__) ||
-  'Untitled'
 
 globalThis.__nextra_internal__ = {
   pageMap: __nextra_pageOpts__.pageMap,
   route: __nextra_pageOpts__.route
 }
+
+${result}
+
+__nextra_pageOpts__.title =
+  ${frontMatter.title} ||
+  (typeof __nextra_title__ === 'string' && __nextra_title__) ||
+  'Untitled'
 
 const Content = props => (
   <__nextra_SSGContext__.Provider value={props}>
