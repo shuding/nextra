@@ -212,7 +212,7 @@ globalThis.__nextra_internal__ = {
 ${result}
 
 __nextra_pageOpts__.title =
-  ${frontMatter.title} ||
+  ${JSON.stringify(frontMatter.title)} ||
   (typeof __nextra_title__ === 'string' && __nextra_title__) ||
   'Untitled'
 
