@@ -19,6 +19,7 @@ import { SearchResult } from '../types'
 
 type SearchProps = {
   className?: string
+  overlayClassName?: string
   value?: string
   onChange: (newValue: string) => void
   loading?: boolean
@@ -29,6 +30,7 @@ const INPUTS = ['input', 'select', 'button', 'textarea']
 
 export function Search({
   className,
+  overlayClassName,
   value,
   onChange,
   loading,
@@ -182,7 +184,7 @@ export function Search({
   }, [])
 
   return (
-    <div className="nextra-search relative md:w-64">
+    <div className={cn('nextra-search relative md:w-64', className)}>
       {renderList && (
         <div className="fixed inset-0 z-10" onClick={() => setShow(false)} />
       )}
@@ -222,7 +224,7 @@ export function Search({
               'md:max-h-[min(calc(100vh-5rem-env(safe-area-inset-bottom)),400px)]',
               'right-0 left-0 ltr:md:left-auto rtl:md:right-auto',
               'contrast-more:border contrast-more:border-gray-900 contrast-more:dark:border-gray-50',
-              className
+              overlayClassName
             )}
             ref={ulRef}
             style={{

@@ -1,6 +1,5 @@
 import React, { useMemo, useState, ReactElement } from 'react'
 import { matchSorter } from 'match-sorter'
-import cn from 'clsx'
 import { Item as NormalItem } from '../utils'
 import { Search } from './search'
 import { HighlightMatches } from './highlight-matches'
@@ -34,7 +33,8 @@ export function MatchSorterSearch({
   return (
     <Search
       onChange={setSearch}
-      className={cn('w-full', className)}
+      className={className}
+      overlayClassName="w-full"
       results={results}
     />
   )
