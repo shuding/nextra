@@ -2,30 +2,11 @@ import React, { ReactElement, useEffect, useRef, useMemo } from 'react'
 import cn from 'clsx'
 import Slugger from 'github-slugger'
 import { Heading } from 'nextra'
-import parseGitUrl from 'parse-git-url'
 import scrollIntoView from 'scroll-into-view-if-needed'
 
 import { renderComponent, getHeadingText, getGitIssueUrl } from '../utils'
 import { useConfig, useActiveAnchor } from '../contexts'
 import { Anchor } from './anchor'
-
-const getEditUrl = (filePath?: string): string => {
-  const config = useConfig()
-  const repo = parseGitUrl(config.docsRepositoryBase || '')
-  if (!repo) throw new Error('Invalid `docsRepositoryBase` URL!')
-
-  const subdir = repo.subdir ? `${repo.subdir}/` : ''
-  const path = `blob/${repo.branch || 'main'}/${subdir}${filePath}`
-
-  switch (repo.type) {
-    case 'github':
-      return `https://github.com/${repo.owner}/${repo.name}/${path}`
-    case 'gitlab':
-      return `https://gitlab.com/${repo.owner}/${repo.name}/-/${path}`
-  }
-
-  return '#'
-}
 
 export type TOCProps = {
   headings: Heading[]
@@ -57,7 +38,7 @@ export function TOC({ headings, filePath }: TOCProps): ReactElement {
 
   const hasHeadings = items.length > 0
   const hasMetaInfo = Boolean(
-    config.feedback.link || config.editLinkText || config.toc.extraContent
+    config.feedback.link || config.editLink.component || config.toc.extraContent
   )
 
   const activeSlug = Object.entries(activeAnchor).find(
@@ -147,15 +128,11 @@ export function TOC({ headings, filePath }: TOCProps): ReactElement {
               </Anchor>
             ) : null}
 
-            {config.editLinkText ? (
-              <Anchor
-                className={linkClassName}
-                href={getEditUrl(filePath)}
-                newWindow
-              >
-                {renderComponent(config.editLinkText)}
-              </Anchor>
-            ) : null}
+            {renderComponent(config.editLink.component, {
+              filePath,
+              className: linkClassName,
+              children: renderComponent(config.editLink.text)
+            })}
 
             {renderComponent(config.toc.extraContent)}
           </div>

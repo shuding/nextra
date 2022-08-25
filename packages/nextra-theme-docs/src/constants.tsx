@@ -2,10 +2,11 @@
 import React from 'react'
 import { DocsThemeConfig, PageTheme } from './types'
 import { useRouter } from 'next/router'
-import { Flexsearch, Footer, TOC } from './components'
+import { Anchor, Flexsearch, Footer, TOC } from './components'
 import { DiscordIcon, GitHubIcon } from 'nextra/icons'
 import { MatchSorterSearch } from './components/match-sorter-search'
 import { useConfig } from './contexts'
+import { getGitEditUrl } from './utils'
 
 export const DEFAULT_LOCALE = 'en-US'
 
@@ -23,7 +24,20 @@ export const DEFAULT_THEME: DocsThemeConfig = {
   darkMode: true,
   direction: 'ltr',
   docsRepositoryBase: 'https://github.com/shuding/nextra',
-  editLinkText: 'Edit this page',
+  editLink: {
+    component({ className, filePath, children }) {
+      const editUrl = getGitEditUrl(filePath)
+      if (!editUrl) {
+        return null
+      }
+      return (
+        <Anchor className={className} href={editUrl}>
+          {children}
+        </Anchor>
+      )
+    },
+    text: 'Edit this page'
+  },
   feedback: {
     labels: '',
     link: null
@@ -101,12 +115,12 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     link: ''
   },
   search: {
-    component({ directories }) {
+    component({ className, directories }) {
       const config = useConfig()
       return config.unstable_flexsearch ? (
-        <Flexsearch />
+        <Flexsearch className={className} />
       ) : (
-        <MatchSorterSearch directories={directories} />
+        <MatchSorterSearch className={className} directories={directories} />
       )
     },
     emptyResult: (

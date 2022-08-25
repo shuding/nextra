@@ -1,5 +1,5 @@
 /* eslint typescript-sort-keys/interface: error */
-import { FC, ReactElement, ReactNode } from 'react'
+import { FC, ReactNode } from 'react'
 import { ThemeProviderProps } from 'next-themes/dist/types'
 import { PageOpts } from 'nextra'
 import { Item } from './utils'
@@ -8,6 +8,8 @@ import { TOCProps } from './components/toc'
 export type RecursivePartial<T> = {
   [P in keyof T]?: T[P] extends (infer U)[]
     ? RecursivePartial<U>[]
+    : T[P] extends FC // do not change properties for optional in FC type
+    ? T[P]
     : T[P] extends object
     ? RecursivePartial<T[P]>
     : T[P]
@@ -23,7 +25,14 @@ export interface DocsThemeConfig {
   darkMode: boolean
   direction: 'ltr' | 'rtl'
   docsRepositoryBase: string
-  editLinkText: ReactNode | FC
+  editLink: {
+    component: FC<{
+      children: ReactNode
+      className?: string
+      filePath?: string
+    }>
+    text: ReactNode | FC
+  }
   feedback: {
     labels: string
     link: ReactNode | FC
@@ -59,7 +68,12 @@ export interface DocsThemeConfig {
     link: string
   }
   search: {
-    component: ReactNode | FC<{ directories: Item[] }>
+    component:
+      | ReactNode
+      | FC<{
+          className?: string
+          directories: Item[]
+        }>
     emptyResult: ReactNode | FC
     // Can't be React component
     placeholder: string | (() => string)

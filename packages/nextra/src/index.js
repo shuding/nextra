@@ -1,8 +1,11 @@
 import { NextraPlugin, pageMapCache } from './plugin'
-import { DEFAULT_LOCALE, MARKDOWN_EXTENSION_REGEX } from './constants'
+import {
+  DEFAULT_LOCALE,
+  MARKDOWN_EXTENSION_REGEX,
+  MARKDOWN_EXTENSIONS
+} from './constants'
 
 const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
-const MARKDOWN_EXTENSIONS = ['md', 'mdx']
 
 const nextra = (...config) =>
   function withNextra(nextConfig = {}) {

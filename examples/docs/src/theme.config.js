@@ -8,7 +8,9 @@ export default {
     text: 'Nextra 2 Alpha',
   },
   docsRepositoryBase: 'https://github.com/shuding/nextra/blob/core/examples/docs',
-  editLinkText: 'Edit this page on GitHub',
+  editLink: {
+    text: 'Edit this page on GitHub'
+  },
   head: () => (
     <>
       <meta name="msapplication-TileColor" content="#ffffff" />

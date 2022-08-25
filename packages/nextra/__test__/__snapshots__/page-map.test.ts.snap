@@ -4,12 +4,10 @@ exports[`Page Process > pageMap en-US 1`] = `
 [
   [
     {
-      "locale": "",
       "name": "404",
       "route": "/404",
     },
     {
-      "locale": "",
       "name": "500",
       "route": "/500",
     },
@@ -826,12 +824,10 @@ exports[`Page Process > pageMap zh-CN 1`] = `
       "route": "/",
     },
     {
-      "locale": "",
       "name": "404",
       "route": "/404",
     },
     {
-      "locale": "",
       "name": "500",
       "route": "/500",
     },
