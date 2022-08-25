@@ -141,7 +141,7 @@ export function Search({
     >
       <kbd
         className={cn(
-          'absolute ltr:right-1.5 rtl:left-1.5 top-0 my-1.5 select-none',
+          'absolute ltr:right-1.5 rtl:left-1.5 my-1.5 select-none',
           'rounded bg-white px-1.5 h-5 font-mono font-medium text-gray-500 text-[10px]',
           'border dark:bg-dark/50 dark:border-gray-100/20',
           'contrast-more:border-current contrast-more:text-current contrast-more:dark:border-current',
@@ -155,7 +155,7 @@ export function Search({
           onChange('')
         }}
       >
-        {value
+        {hasValue
           ? 'ESC'
           : mounted &&
             (navigator.userAgent.includes('Macintosh') ? (
