@@ -14,6 +14,7 @@ import { Collapse, Anchor } from './components'
 import { IS_BROWSER } from './constants'
 import cn from 'clsx'
 import { DocsThemeConfig } from './types'
+import { Pre, Code } from 'nextra/components'
 
 let observer: IntersectionObserver
 let setActiveAnchor: ReturnType<typeof useSetActiveAnchor>
@@ -283,12 +284,10 @@ export const getComponents = ({
         {...props}
       />
     ),
-    code: (props: ComponentProps<'code'>) => (
-      // always show code blocks in ltr
-      <code dir="ltr" {...props} />
-    ),
     details: Details,
     summary: Summary,
+    pre: Pre,
+    code: Code,
     ...components
   }
 }

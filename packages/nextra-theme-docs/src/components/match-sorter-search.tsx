@@ -6,8 +6,10 @@ import { HighlightMatches } from './highlight-matches'
 import { SearchResult } from '../types'
 
 export function MatchSorterSearch({
+  className,
   directories = []
 }: {
+  className?: string
   directories: NormalItem[]
 }): ReactElement {
   const [search, setSearch] = useState('')
@@ -28,5 +30,12 @@ export function MatchSorterSearch({
     [search]
   )
 
-  return <Search onChange={setSearch} className="w-full" results={results} />
+  return (
+    <Search
+      onChange={setSearch}
+      className={className}
+      overlayClassName="w-full"
+      results={results}
+    />
+  )
 }

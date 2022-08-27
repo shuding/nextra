@@ -9,6 +9,7 @@ import { LoaderOptions, PageOpts } from './types'
 import structurize from './mdx-plugins/structurize'
 import { parseMeta, attachMeta } from './mdx-plugins/rehype-handler'
 import theme from './theme.json'
+import { truthy } from './utils'
 
 const createCompiler = (mdxOptions: ProcessorOptions): Processor => {
   const compiler = createProcessor(mdxOptions)
@@ -41,11 +42,13 @@ export async function compileMdx(
     Pick<ProcessorOptions, 'jsx' | 'outputFormat'> = {},
   nextraOptions: Pick<
     LoaderOptions,
-    'unstable_staticImage' | 'unstable_flexsearch'
+    | 'unstable_staticImage'
+    | 'unstable_flexsearch'
+    | 'unstable_defaultShowCopyCode'
   > = {},
-  resourcePath = ''
+  filePath = ''
 ) {
-  const structurizedData = {}
+  const structurizedData = Object.create(null)
   const compiler = createCompiler({
     jsx: mdxOptions.jsx ?? true,
     outputFormat: mdxOptions.outputFormat,
@@ -54,22 +57,23 @@ export async function compileMdx(
       ...(mdxOptions.remarkPlugins || []),
       remarkGfm,
       remarkHeadings,
-      ...(nextraOptions.unstable_staticImage ? [remarkStaticImage] : []),
-      ...(nextraOptions.unstable_flexsearch
-        ? [structurize(structurizedData, nextraOptions.unstable_flexsearch)]
-        : [])
-    ].filter(Boolean),
-    // @ts-ignore
+      nextraOptions.unstable_staticImage && remarkStaticImage,
+      nextraOptions.unstable_flexsearch &&
+        structurize(structurizedData, nextraOptions.unstable_flexsearch)
+    ].filter(truthy),
     rehypePlugins: [
       ...(mdxOptions.rehypePlugins || []),
-      parseMeta,
+      [
+        parseMeta,
+        { defaultShowCopyCode: nextraOptions.unstable_defaultShowCopyCode }
+      ],
       [
         rehypePrettyCode,
         { ...rehypePrettyCodeOptions, ...mdxOptions.rehypePrettyCodeOptions }
       ],
       [rehypeMdxTitle, { name: '__nextra_title__' }],
       attachMeta
-    ].filter(Boolean)
+    ]
   })
   try {
     const result = String(await compiler.process(source))
@@ -85,7 +89,7 @@ export async function compileMdx(
       structurizedData
     }
   } catch (err) {
-    console.error(`[nextra] Error compiling ${resourcePath}.`)
+    console.error(`[nextra] Error compiling ${filePath}.`)
     throw err
   }
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ReactElement, ReactNode } from 'react'
+import React, { useState, ReactElement, ReactNode } from 'react'
 import { useRouter } from 'next/router'
 import FlexSearch from 'flexsearch'
 import cn from 'clsx'
@@ -48,7 +48,11 @@ const indexes: {
   [locale: string]: [PageIndex, SectionIndex]
 } = {}
 
-export function Flexsearch(): ReactElement {
+export function Flexsearch({
+  className
+}: {
+  className?: string
+}): ReactElement {
   const router = useRouter()
   const { locale = DEFAULT_LOCALE } = router
   const [loading, setLoading] = useState(false)
@@ -246,7 +250,8 @@ export function Flexsearch(): ReactElement {
     <Search
       loading={loading}
       onChange={handleChange}
-      className="w-screen min-h-[100px] max-w-[min(calc(100vw-2rem),calc(100%+20rem))]"
+      className={className}
+      overlayClassName="w-screen min-h-[100px] max-w-[min(calc(100vw-2rem),calc(100%+20rem))]"
       results={results}
     />
   )

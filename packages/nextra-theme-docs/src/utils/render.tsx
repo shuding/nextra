@@ -1,11 +1,7 @@
 import React, { FC, ReactNode } from 'react'
 
-// Forbid to have `locale` prop
-// since it can be retrieved via `const { locale } = useRouter()` call
-type WithoutLocale<T> = T & { locale?: never }
-
 export function renderComponent<T>(
-  ComponentOrNode: FC<WithoutLocale<T>> | ReactNode,
+  ComponentOrNode: FC<T> | ReactNode,
   props?: T
 ) {
   if (!ComponentOrNode) return null
@@ -15,7 +11,7 @@ export function renderComponent<T>(
 }
 
 export function renderString<T>(
-  stringOrFunction?: string | ((props: WithoutLocale<T>) => string),
+  stringOrFunction?: string | ((props: T) => string),
   // @ts-expect-error TS2322: Type '{}' is not assignable to type 'T'.
   props: T = {}
 ): string {

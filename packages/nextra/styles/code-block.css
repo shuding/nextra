@@ -31,9 +31,6 @@ code {
 pre {
   /* content-visibility: auto; */
   contain: paint;
-  @apply bg-primary-700/5 mt-6 mb-4 overflow-x-auto rounded-xl py-4 font-medium subpixel-antialiased;
-  @apply dark:bg-primary-300/10;
-
   code {
     @apply grid min-w-full rounded-none border-none bg-transparent p-0 text-sm leading-5 text-current dark:bg-transparent;
     /* code blocks without languages don't have children that have px-4 */
@@ -47,15 +44,18 @@ pre {
   }
 }
 
-[data-nextra-code][data-filename] {
-  @apply relative block;
+[data-rehype-pretty-code-fragment] {
+  @apply relative;
+}
 
-  &:before {
-    content: attr(data-filename);
-    @apply bg-primary-700/5 text-gray-700 absolute top-0 z-[1] w-full truncate rounded-t-xl py-2 px-4 text-xs;
-    @apply dark:bg-primary-300/10 dark:text-gray-200;
+@supports (
+  (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))
+) {
+  .nextra-copy-button {
+    @apply backdrop-blur-md bg-opacity-[.85] dark:bg-opacity-80;
   }
-  pre {
-    @apply pt-12;
-  }
+}
+
+.nextra-copy-button {
+  @apply border border-black/5 dark:border-white/10;
 }
