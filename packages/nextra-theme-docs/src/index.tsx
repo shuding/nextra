@@ -174,6 +174,7 @@ const InnerLayout = ({
     ? localeConfig.direction === 'rtl'
     : config.direction === 'rtl'
   const direction = isRTL ? 'rtl' : 'ltr'
+
   useEffect(() => {
     if (typeof document === 'undefined') return
     // needs for `ltr:/rtl:` modifiers inside `styles.css` file
@@ -185,17 +186,20 @@ const InnerLayout = ({
   const hideSidebar = !themeContext.sidebar || themeContext.layout === 'raw'
   const asPopover = activeType === 'page' || hideSidebar
 
+  const tocClassName = 'nextra-toc order-last hidden w-64 flex-shrink-0 xl:block'
+
   const tocEl =
     activeType === 'page' ||
     !themeContext.toc ||
     themeContext.layout !== 'default' ? (
       themeContext.layout === 'full' || themeContext.layout === 'raw' ? null : (
-        <div className="nextra-toc order-last hidden w-64 flex-shrink-0 px-4 text-sm xl:block" />
+        <div className={tocClassName} />
       )
     ) : (
       <TOC
         headings={config.floatTOC ? headings : []}
         filepathWithName={filepath + filename}
+        className={tocClassName}
       />
     )
 

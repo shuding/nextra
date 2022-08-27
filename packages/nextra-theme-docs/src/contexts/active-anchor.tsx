@@ -8,7 +8,7 @@ import React, {
   useState
 } from 'react'
 
-export type ActiveAnchor = Record<
+type ActiveAnchor = Record<
   string,
   {
     isActive?: boolean
