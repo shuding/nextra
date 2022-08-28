@@ -1,5 +1,14 @@
 # nextra-theme-docs
 
+## 2.0.0-beta.19
+
+### Patch Changes
+
+- 1fef548: allow head to be a ReactNode
+- ee270a4: fix extra space in flexsearch input after loading indexes
+- afaa26a: refactor toc, fix toc's styles on rtl, use `ref.current` instead `document.getElementsByClassName`
+- cdc1c2f: prefer `ref.current` over `document.querySelector` in sidebar
+
 ## 2.0.0-beta.18
 
 ### Patch Changes
