@@ -1,4 +1,4 @@
-import { PageMapItem } from 'nextra'
+import { PageMapItem, MdxFile } from 'nextra'
 import { LayoutProps } from '../types'
 import { sortDate } from './date'
 import traverse from './traverse'
@@ -8,15 +8,16 @@ const isNav = (page: PageMapItem): page is MdxFile => {
     'frontMatter' in page && ['page', 'posts'].includes(page.frontMatter?.type)
   )
 }
-const isPost = (page: PageMapItem) => {
-  if (page.children) return false
+const isPost = (page: PageMapItem): page is MdxFile => {
+  if ('children' in page && page.children) return false
   if (page.name.startsWith('_')) return false
-  return !page.frontMatter?.type || page.frontMatter.type === 'post'
+  const type = 'frontMatter' in page && page.frontMatter?.type
+  return !type || type === 'post'
 }
 
 export const collectPostsAndNavs = ({ opts }: LayoutProps) => {
-  const posts: PageMapItem[] = []
-  const navPages: PageMapItem[] = []
+  const posts: MdxFile[] = []
+  const navPages: (MdxFile & { active: boolean })[] = []
   const { route } = opts
   traverse(opts.pageMap, page => {
     if (isNav(page)) {
