@@ -1,5 +1,6 @@
 export * from './arrow-right'
 export * from './check'
+export * from './copy'
 export * from './discord'
 export * from './github'
 export * from './globe'

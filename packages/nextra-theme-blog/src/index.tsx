@@ -21,7 +21,7 @@ const BlogLayout = ({
   children,
   opts
 }: LayoutProps & { children: ReactNode }): ReactElement => {
-  const type = opts.meta.type || 'post'
+  const type = opts.frontMatter.type || 'post'
   const Layout = layoutMap[type]
   if (!Layout) {
     throw new Error(
@@ -35,17 +35,9 @@ const BlogLayout = ({
   )
 }
 
-const nextraPageContext: {
-  [key: string]: {
-    Content: FC
-    pageOpts: PageOpts
-    themeConfig: NextraBlogTheme
-  }
-} = {}
-
-function Layout(props: any) {
+export default function Layout(props: any) {
   const { route } = useRouter()
-  const context = nextraPageContext[route]
+  const context = globalThis.__nextra_pageContext__[route]
   if (!context) throw new Error(`No content found for ${route}.`)
 
   const extendedConfig = { ...DEFAULT_THEME, ...context.themeConfig }
@@ -57,24 +49,6 @@ function Layout(props: any) {
       </BlogLayout>
     </ThemeProvider>
   )
-}
-
-// Make sure the same component is always returned so Next.js will render the
-// stable layout. We then put the actual content into a global store and use
-// the route to identify it.
-export default function withLayout(
-  route: string,
-  Content: FC,
-  pageOpts: PageOpts,
-  themeConfig: NextraBlogTheme
-) {
-  nextraPageContext[route] = {
-    Content,
-    pageOpts,
-    themeConfig
-  }
-
-  return Layout
 }
 
 export { useTheme } from 'next-themes'

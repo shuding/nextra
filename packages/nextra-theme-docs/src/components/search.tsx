@@ -19,6 +19,7 @@ import { SearchResult } from '../types'
 
 type SearchProps = {
   className?: string
+  overlayClassName?: string
   value?: string
   onChange: (newValue: string) => void
   loading?: boolean
@@ -29,6 +30,7 @@ const INPUTS = ['input', 'select', 'button', 'textarea']
 
 export function Search({
   className,
+  overlayClassName,
   value,
   onChange,
   loading,
@@ -139,7 +141,7 @@ export function Search({
     >
       <kbd
         className={cn(
-          'absolute ltr:right-1.5 rtl:left-1.5 top-0 my-1.5 select-none',
+          'absolute ltr:right-1.5 rtl:left-1.5 my-1.5 select-none',
           'rounded bg-white px-1.5 h-5 font-mono font-medium text-gray-500 text-[10px]',
           'border dark:bg-dark/50 dark:border-gray-100/20',
           'contrast-more:border-current contrast-more:text-current contrast-more:dark:border-current',
@@ -153,7 +155,7 @@ export function Search({
           onChange('')
         }}
       >
-        {value
+        {hasValue
           ? 'ESC'
           : mounted &&
             (navigator.userAgent.includes('Macintosh') ? (
@@ -182,7 +184,7 @@ export function Search({
   }, [])
 
   return (
-    <div className="nextra-search relative md:w-64">
+    <div className={cn('nextra-search relative md:w-64', className)}>
       {renderList && (
         <div className="fixed inset-0 z-10" onClick={() => setShow(false)} />
       )}
@@ -196,7 +198,7 @@ export function Search({
           setShow(Boolean(value))
         }}
         type="search"
-        placeholder={renderString(config.searchPlaceholder)}
+        placeholder={renderString(config.search.placeholder)}
         onKeyDown={handleKeyDown}
         onFocus={handleFocusAndBlur}
         onBlur={handleFocusAndBlur}
@@ -218,11 +220,16 @@ export function Search({
               'bg-white text-gray-100 ring-1 ring-black/5',
               'dark:bg-neutral-900 dark:ring-white/10',
               'absolute top-full z-20 mt-2 overscroll-contain rounded-xl py-2.5 shadow-xl overflow-auto',
+              'max-h-[min(calc(50vh-11rem-env(safe-area-inset-bottom)),400px)]',
+              'md:max-h-[min(calc(100vh-5rem-env(safe-area-inset-bottom)),400px)]',
               'right-0 left-0 ltr:md:left-auto rtl:md:right-auto',
               'contrast-more:border contrast-more:border-gray-900 contrast-more:dark:border-gray-50',
-              className
+              overlayClassName
             )}
             ref={ulRef}
+            style={{
+              transition: 'max-height .2s ease' // don't work with tailwindcss
+            }}
           >
             {loading ? (
               <span className="flex select-none justify-center p-8 text-center text-sm text-gray-400 gap-2">
@@ -255,7 +262,7 @@ export function Search({
                 </Fragment>
               ))
             ) : (
-              renderComponent(config.unstable_searchResultEmpty)
+              renderComponent(config.search.emptyResult)
             )}
           </ul>
         </Transition.Child>

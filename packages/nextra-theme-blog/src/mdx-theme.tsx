@@ -10,6 +10,7 @@ import React, {
 import { MDXProvider } from '@mdx-js/react'
 import Link from 'next/link'
 import ReactDOM from 'react-dom'
+import { Code, Pre } from 'nextra/components'
 import { useBlogContext } from './blog-context'
 
 export const HeadingContext = createContext<
@@ -71,13 +72,6 @@ const A = ({
   )
 }
 
-const Pre = ({ children }: { children?: ReactNode }): ReactElement => {
-  return (
-    <div className="not-prose">
-      <pre>{children}</pre>
-    </div>
-  )
-}
 const components = {
   h1: H1,
   h2: createHeaderLink('h2'),
@@ -86,7 +80,14 @@ const components = {
   h5: createHeaderLink('h5'),
   h6: createHeaderLink('h6'),
   a: A,
-  pre: Pre
+  pre({ children, ...props }: ComponentProps<'pre'>) {
+    return (
+      <div className="not-prose">
+        <Pre {...props}>{children}</Pre>
+      </div>
+    )
+  },
+  code: Code
 }
 
 const MDXTheme = ({ children }: { children: ReactNode }): ReactElement => {

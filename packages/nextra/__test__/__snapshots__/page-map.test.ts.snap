@@ -4,398 +4,12 @@ exports[`Page Process > pageMap en-US 1`] = `
 [
   [
     {
-      "locale": "",
       "name": "404",
       "route": "/404",
     },
     {
-      "locale": "",
       "name": "500",
       "route": "/500",
-    },
-    {
-      "children": [
-        {
-          "locale": "en-US",
-          "name": "a-page",
-          "route": "/about/a-page",
-        },
-        {
-          "locale": "en-US",
-          "name": "acknowledgement",
-          "route": "/about/acknowledgement",
-        },
-        {
-          "locale": "en-US",
-          "meta": {
-            "a-page": {
-              "hidden": true,
-              "theme": {
-                "layout": "raw",
-              },
-              "title": "A Page",
-              "type": "page",
-            },
-            "acknowledgement": "🧩 Acknowledgement",
-            "team": "👥 Team",
-          },
-          "name": "meta.json",
-        },
-        {
-          "locale": "en-US",
-          "name": "team",
-          "route": "/about/team",
-        },
-      ],
-      "name": "about",
-      "route": "/about",
-    },
-    {
-      "children": [
-        {
-          "locale": "en-US",
-          "meta": {
-            "swr-v1": {
-              "theme": {
-                "breadcrumb": true,
-              },
-              "title": "Announcing SWR 1.0",
-            },
-          },
-          "name": "meta.json",
-        },
-        {
-          "frontMatter": {
-            "description": "Almost 2 years ago we open sourced SWR, the tiny data-fetching React library that people love. Today we are reaching another milestone: the 1.0 version of SWR.",
-            "image": "https://assets.vercel.com/image/upload/v1630059453/swr/v1.png",
-          },
-          "locale": "en-US",
-          "name": "swr-v1",
-          "route": "/blog/swr-v1",
-        },
-      ],
-      "name": "blog",
-      "route": "/blog",
-    },
-    {
-      "frontMatter": {
-        "searchable": false,
-      },
-      "locale": "en-US",
-      "name": "blog",
-      "route": "/blog",
-    },
-    {
-      "children": [
-        {
-          "locale": "en-US",
-          "name": "404-500",
-          "route": "/docs/404-500",
-        },
-        {
-          "children": [
-            {
-              "locale": "en-US",
-              "name": "cache",
-              "route": "/docs/advanced/cache",
-            },
-            {
-              "locale": "en-US",
-              "name": "code-highlighting",
-              "route": "/docs/advanced/code-highlighting",
-            },
-            {
-              "locale": "en-US",
-              "name": "file-name.with.DOTS",
-              "route": "/docs/advanced/file-name.with.DOTS",
-            },
-            {
-              "locale": "en-US",
-              "name": "markdown-import",
-              "route": "/docs/advanced/markdown-import",
-            },
-            {
-              "locale": "en-US",
-              "meta": {
-                "*": {
-                  "theme": {
-                    "footer": false,
-                  },
-                },
-                "--- yoo": {
-                  "title": "Do Not Use",
-                  "type": "separator",
-                },
-                "cache": "Cache",
-                "code-highlighting": "Code highlighting",
-                "file-name.with.DOTS": "Filenames with dots",
-                "markdown-import": "Markdown import",
-                "more": "More: A Super Super Super Super Long Directory",
-                "performance": "Performance",
-                "react-native": "React Native",
-              },
-              "name": "meta.json",
-            },
-            {
-              "children": [
-                {
-                  "locale": "en-US",
-                  "name": "loooooooooooooooooooong-title",
-                  "route": "/docs/advanced/more/loooooooooooooooooooong-title",
-                },
-              ],
-              "name": "more",
-              "route": "/docs/advanced/more",
-            },
-            {
-              "locale": "en-US",
-              "name": "performance",
-              "route": "/docs/advanced/performance",
-            },
-            {
-              "locale": "en-US",
-              "name": "react-native",
-              "route": "/docs/advanced/react-native",
-            },
-          ],
-          "name": "advanced",
-          "route": "/docs/advanced",
-        },
-        {
-          "locale": "en-US",
-          "name": "advanced",
-          "route": "/docs/advanced",
-        },
-        {
-          "locale": "en-US",
-          "name": "arguments",
-          "route": "/docs/arguments",
-        },
-        {
-          "locale": "en-US",
-          "name": "change-log",
-          "route": "/docs/change-log",
-        },
-        {
-          "locale": "en-US",
-          "name": "conditional-fetching",
-          "route": "/docs/conditional-fetching",
-        },
-        {
-          "locale": "en-US",
-          "name": "data-fetching",
-          "route": "/docs/data-fetching",
-        },
-        {
-          "locale": "en-US",
-          "name": "error-handling",
-          "route": "/docs/error-handling",
-        },
-        {
-          "locale": "en-US",
-          "name": "getting-started",
-          "route": "/docs/getting-started",
-        },
-        {
-          "locale": "en-US",
-          "name": "global-configuration",
-          "route": "/docs/global-configuration",
-        },
-        {
-          "locale": "en-US",
-          "meta": {
-            "--- hey": {
-              "title": "Getting Started",
-              "type": "separator",
-            },
-            "--- my_new_separator": {
-              "title": "Advanced",
-              "type": "separator",
-            },
-            "404-500": "404/500 Custom Error Pages",
-            "advanced": {
-              "title": "Advanced",
-            },
-            "arguments": "Arguments",
-            "change-log": {
-              "theme": {
-                "sidebar": false,
-              },
-              "title": "Change Log",
-            },
-            "conditional-fetching": "Conditional Data Fetching",
-            "data-fetching": "Data Fetching",
-            "error-handling": {
-              "hidden": true,
-              "title": "Error Handling",
-            },
-            "getting-started": "Getting Started",
-            "github_link": {
-              "href": "https://github.com/shuding/nextra",
-              "newWindow": true,
-              "title": "GitHub 🐙 →",
-              "type": "page",
-            },
-            "global-configuration": "Global Configuration",
-            "middleware": "Middleware",
-            "mutation": "Mutation",
-            "options": "Options",
-            "pagination": "Pagination",
-            "prefetching": "Prefetching",
-            "raw-layout": {
-              "theme": {
-                "layout": "raw",
-              },
-              "title": "Raw Layout",
-            },
-            "revalidation": "Auto Revalidation",
-            "scroll-with-dynamic-height": "Scroll With Dynamic Height",
-            "suspense": "Suspense",
-            "typescript": "TypeScript :)",
-            "with-nextjs": "Next.js SSG and SSR",
-          },
-          "name": "meta.json",
-        },
-        {
-          "locale": "en-US",
-          "name": "middleware",
-          "route": "/docs/middleware",
-        },
-        {
-          "locale": "en-US",
-          "name": "mutation",
-          "route": "/docs/mutation",
-        },
-        {
-          "locale": "en-US",
-          "name": "options",
-          "route": "/docs/options",
-        },
-        {
-          "locale": "en-US",
-          "name": "pagination",
-          "route": "/docs/pagination",
-        },
-        {
-          "locale": "en-US",
-          "name": "prefetching",
-          "route": "/docs/prefetching",
-        },
-        {
-          "locale": "en-US",
-          "name": "raw-layout",
-          "route": "/docs/raw-layout",
-        },
-        {
-          "locale": "en-US",
-          "name": "revalidation",
-          "route": "/docs/revalidation",
-        },
-        {
-          "locale": "en-US",
-          "name": "scroll-with-dynamic-height",
-          "route": "/docs/scroll-with-dynamic-height",
-        },
-        {
-          "locale": "en-US",
-          "name": "suspense",
-          "route": "/docs/suspense",
-        },
-        {
-          "locale": "en-US",
-          "name": "typescript",
-          "route": "/docs/typescript",
-        },
-        {
-          "locale": "en-US",
-          "name": "with-nextjs",
-          "route": "/docs/with-nextjs",
-        },
-      ],
-      "name": "docs",
-      "route": "/docs",
-    },
-    {
-      "children": [
-        {
-          "frontMatter": {
-            "full": true,
-            "title": "Authentication",
-          },
-          "locale": "en-US",
-          "name": "auth",
-          "route": "/examples/auth",
-        },
-        {
-          "frontMatter": {
-            "full": true,
-            "title": "Basic Usage",
-          },
-          "locale": "en-US",
-          "name": "basic",
-          "route": "/examples/basic",
-        },
-        {
-          "frontMatter": {
-            "full": true,
-            "title": "Error Handling",
-          },
-          "locale": "en-US",
-          "name": "error-handling",
-          "route": "/examples/error-handling",
-        },
-        {
-          "locale": "en-US",
-          "name": "full",
-          "route": "/examples/full",
-        },
-        {
-          "frontMatter": {
-            "full": true,
-            "title": "Infinite Loading",
-          },
-          "locale": "en-US",
-          "name": "infinite-loading",
-          "route": "/examples/infinite-loading",
-        },
-        {
-          "locale": "en-US",
-          "meta": {
-            "auth": "Authentication",
-            "basic": "Basic Usage",
-            "error-handling": "Error Handling",
-            "full": {
-              "theme": {
-                "layout": "raw",
-              },
-              "title": "Full",
-            },
-            "infinite-loading": "Infinite Loading",
-            "ssr": "Next.js SSR",
-          },
-          "name": "meta.json",
-        },
-        {
-          "frontMatter": {
-            "full": true,
-            "title": "Next.js SSR",
-          },
-          "locale": "en-US",
-          "name": "ssr",
-          "route": "/examples/ssr",
-        },
-      ],
-      "name": "examples",
-      "route": "/examples",
-    },
-    {
-      "frontMatter": {
-        "searchable": false,
-        "title": "React Hooks for Data Fetching",
-      },
-      "locale": "en-US",
-      "name": "index",
-      "route": "/",
     },
     {
       "locale": "en-US",
@@ -470,29 +84,10 @@ exports[`Page Process > pageMap en-US 1`] = `
           "type": "page",
         },
       },
-      "name": "meta.json",
+      "name": "_meta.json",
     },
-  ],
-  "/docs/data-fetching",
-  "Data Fetching",
-]
-`;
-
-exports[`Page Process > pageMap zh-CN 1`] = `
-[
-  [
     {
       "children": [
-        {
-          "locale": "en-US",
-          "name": "a-page",
-          "route": "/about/a-page",
-        },
-        {
-          "locale": "en-US",
-          "name": "acknowledgement",
-          "route": "/about/acknowledgement",
-        },
         {
           "locale": "en-US",
           "meta": {
@@ -507,7 +102,433 @@ exports[`Page Process > pageMap zh-CN 1`] = `
             "acknowledgement": "🧩 Acknowledgement",
             "team": "👥 Team",
           },
-          "name": "meta.json",
+          "name": "_meta.json",
+        },
+        {
+          "locale": "en-US",
+          "name": "a-page",
+          "route": "/about/a-page",
+        },
+        {
+          "locale": "en-US",
+          "name": "acknowledgement",
+          "route": "/about/acknowledgement",
+        },
+        {
+          "locale": "en-US",
+          "name": "team",
+          "route": "/about/team",
+        },
+      ],
+      "name": "about",
+      "route": "/about",
+    },
+    {
+      "children": [
+        {
+          "locale": "en-US",
+          "meta": {
+            "swr-v1": {
+              "theme": {
+                "breadcrumb": true,
+              },
+              "title": "Announcing SWR 1.0",
+            },
+          },
+          "name": "_meta.json",
+        },
+        {
+          "frontMatter": {
+            "description": "Almost 2 years ago we open sourced SWR, the tiny data-fetching React library that people love. Today we are reaching another milestone: the 1.0 version of SWR.",
+            "image": "https://assets.vercel.com/image/upload/v1630059453/swr/v1.png",
+          },
+          "locale": "en-US",
+          "name": "swr-v1",
+          "route": "/blog/swr-v1",
+        },
+      ],
+      "name": "blog",
+      "route": "/blog",
+    },
+    {
+      "frontMatter": {
+        "searchable": false,
+      },
+      "locale": "en-US",
+      "name": "blog",
+      "route": "/blog",
+    },
+    {
+      "children": [
+        {
+          "locale": "en-US",
+          "name": "404-500",
+          "route": "/docs/404-500",
+        },
+        {
+          "locale": "en-US",
+          "meta": {
+            "--- hey": {
+              "title": "Getting Started",
+              "type": "separator",
+            },
+            "--- my_new_separator": {
+              "title": "Advanced",
+              "type": "separator",
+            },
+            "404-500": "404/500 Custom Error Pages",
+            "advanced": {
+              "title": "Advanced",
+            },
+            "arguments": "Arguments",
+            "change-log": {
+              "theme": {
+                "sidebar": false,
+              },
+              "title": "Change Log",
+            },
+            "conditional-fetching": "Conditional Data Fetching",
+            "data-fetching": "Data Fetching",
+            "error-handling": {
+              "hidden": true,
+              "title": "Error Handling",
+            },
+            "getting-started": "Getting Started",
+            "github_link": {
+              "href": "https://github.com/shuding/nextra",
+              "newWindow": true,
+              "title": "GitHub 🐙 →",
+              "type": "page",
+            },
+            "global-configuration": "Global Configuration",
+            "middleware": "Middleware",
+            "mutation": "Mutation",
+            "options": "Options",
+            "pagination": "Pagination",
+            "prefetching": "Prefetching",
+            "raw-layout": {
+              "theme": {
+                "layout": "raw",
+              },
+              "title": "Raw Layout",
+            },
+            "revalidation": "Auto Revalidation",
+            "scroll-with-dynamic-height": "Scroll With Dynamic Height",
+            "suspense": "Suspense",
+            "typescript": "TypeScript :)",
+            "with-nextjs": "Next.js SSG and SSR",
+          },
+          "name": "_meta.json",
+        },
+        {
+          "children": [
+            {
+              "locale": "en-US",
+              "meta": {
+                "*": {
+                  "theme": {
+                    "footer": false,
+                  },
+                },
+                "--- yoo": {
+                  "title": "Do Not Use",
+                  "type": "separator",
+                },
+                "cache": "Cache",
+                "code-highlighting": "Code highlighting",
+                "file-name.with.DOTS": "Filenames with dots",
+                "markdown-import": "Markdown import",
+                "more": "More: A Super Super Super Super Long Directory",
+                "performance": "Performance",
+                "react-native": "React Native",
+              },
+              "name": "_meta.json",
+            },
+            {
+              "locale": "en-US",
+              "name": "cache",
+              "route": "/docs/advanced/cache",
+            },
+            {
+              "locale": "en-US",
+              "name": "code-highlighting",
+              "route": "/docs/advanced/code-highlighting",
+            },
+            {
+              "locale": "en-US",
+              "name": "file-name.with.DOTS",
+              "route": "/docs/advanced/file-name.with.DOTS",
+            },
+            {
+              "locale": "en-US",
+              "name": "markdown-import",
+              "route": "/docs/advanced/markdown-import",
+            },
+            {
+              "children": [
+                {
+                  "locale": "en-US",
+                  "name": "loooooooooooooooooooong-title",
+                  "route": "/docs/advanced/more/loooooooooooooooooooong-title",
+                },
+              ],
+              "name": "more",
+              "route": "/docs/advanced/more",
+            },
+            {
+              "locale": "en-US",
+              "name": "performance",
+              "route": "/docs/advanced/performance",
+            },
+            {
+              "locale": "en-US",
+              "name": "react-native",
+              "route": "/docs/advanced/react-native",
+            },
+          ],
+          "name": "advanced",
+          "route": "/docs/advanced",
+        },
+        {
+          "locale": "en-US",
+          "name": "advanced",
+          "route": "/docs/advanced",
+        },
+        {
+          "locale": "en-US",
+          "name": "arguments",
+          "route": "/docs/arguments",
+        },
+        {
+          "locale": "en-US",
+          "name": "change-log",
+          "route": "/docs/change-log",
+        },
+        {
+          "locale": "en-US",
+          "name": "conditional-fetching",
+          "route": "/docs/conditional-fetching",
+        },
+        {
+          "locale": "en-US",
+          "name": "data-fetching",
+          "route": "/docs/data-fetching",
+        },
+        {
+          "locale": "en-US",
+          "name": "error-handling",
+          "route": "/docs/error-handling",
+        },
+        {
+          "locale": "en-US",
+          "name": "getting-started",
+          "route": "/docs/getting-started",
+        },
+        {
+          "locale": "en-US",
+          "name": "global-configuration",
+          "route": "/docs/global-configuration",
+        },
+        {
+          "locale": "en-US",
+          "name": "middleware",
+          "route": "/docs/middleware",
+        },
+        {
+          "locale": "en-US",
+          "name": "mutation",
+          "route": "/docs/mutation",
+        },
+        {
+          "locale": "en-US",
+          "name": "options",
+          "route": "/docs/options",
+        },
+        {
+          "locale": "en-US",
+          "name": "pagination",
+          "route": "/docs/pagination",
+        },
+        {
+          "locale": "en-US",
+          "name": "prefetching",
+          "route": "/docs/prefetching",
+        },
+        {
+          "locale": "en-US",
+          "name": "raw-layout",
+          "route": "/docs/raw-layout",
+        },
+        {
+          "locale": "en-US",
+          "name": "revalidation",
+          "route": "/docs/revalidation",
+        },
+        {
+          "locale": "en-US",
+          "name": "scroll-with-dynamic-height",
+          "route": "/docs/scroll-with-dynamic-height",
+        },
+        {
+          "locale": "en-US",
+          "name": "suspense",
+          "route": "/docs/suspense",
+        },
+        {
+          "locale": "en-US",
+          "name": "typescript",
+          "route": "/docs/typescript",
+        },
+        {
+          "locale": "en-US",
+          "name": "with-nextjs",
+          "route": "/docs/with-nextjs",
+        },
+      ],
+      "name": "docs",
+      "route": "/docs",
+    },
+    {
+      "children": [
+        {
+          "locale": "en-US",
+          "meta": {
+            "auth": "Authentication",
+            "basic": "Basic Usage",
+            "error-handling": "Error Handling",
+            "full": {
+              "theme": {
+                "layout": "raw",
+              },
+              "title": "Full",
+            },
+            "infinite-loading": "Infinite Loading",
+            "ssr": "Next.js SSR",
+          },
+          "name": "_meta.json",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Authentication",
+          },
+          "locale": "en-US",
+          "name": "auth",
+          "route": "/examples/auth",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Basic Usage",
+          },
+          "locale": "en-US",
+          "name": "basic",
+          "route": "/examples/basic",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Error Handling",
+          },
+          "locale": "en-US",
+          "name": "error-handling",
+          "route": "/examples/error-handling",
+        },
+        {
+          "locale": "en-US",
+          "name": "full",
+          "route": "/examples/full",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Infinite Loading",
+          },
+          "locale": "en-US",
+          "name": "infinite-loading",
+          "route": "/examples/infinite-loading",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Next.js SSR",
+          },
+          "locale": "en-US",
+          "name": "ssr",
+          "route": "/examples/ssr",
+        },
+      ],
+      "name": "examples",
+      "route": "/examples",
+    },
+    {
+      "frontMatter": {
+        "searchable": false,
+        "title": "React Hooks for Data Fetching",
+      },
+      "locale": "en-US",
+      "name": "index",
+      "route": "/",
+    },
+  ],
+  "/docs/data-fetching",
+  "Data Fetching",
+]
+`;
+
+exports[`Page Process > pageMap zh-CN 1`] = `
+[
+  [
+    {
+      "locale": "zh-CN",
+      "meta": {
+        "blog": {
+          "title": "博客",
+          "type": "page",
+        },
+        "docs": {
+          "title": "文档",
+          "type": "page",
+        },
+        "examples": {
+          "title": "示例",
+          "type": "page",
+        },
+        "index": {
+          "hidden": true,
+          "title": "简介",
+          "type": "page",
+        },
+      },
+      "name": "_meta.json",
+    },
+    {
+      "children": [
+        {
+          "locale": "en-US",
+          "meta": {
+            "a-page": {
+              "hidden": true,
+              "theme": {
+                "layout": "raw",
+              },
+              "title": "A Page",
+              "type": "page",
+            },
+            "acknowledgement": "🧩 Acknowledgement",
+            "team": "👥 Team",
+          },
+          "name": "_meta.json",
+        },
+        {
+          "locale": "en-US",
+          "name": "a-page",
+          "route": "/about/a-page",
+        },
+        {
+          "locale": "en-US",
+          "name": "acknowledgement",
+          "route": "/about/acknowledgement",
         },
         {
           "locale": "en-US",
@@ -525,7 +546,7 @@ exports[`Page Process > pageMap zh-CN 1`] = `
           "meta": {
             "swr-v1": "SWR 1.0 发布",
           },
-          "name": "meta.json",
+          "name": "_meta.json",
         },
         {
           "frontMatter": {
@@ -543,7 +564,41 @@ exports[`Page Process > pageMap zh-CN 1`] = `
     {
       "children": [
         {
+          "locale": "zh-CN",
+          "meta": {
+            "advanced": "高级",
+            "arguments": "传入参数",
+            "change-log": "更新日志",
+            "conditional-fetching": "条件数据请求",
+            "data-fetching": "数据请求",
+            "error-handling": "错误处理",
+            "getting-started": "入门",
+            "global-configuration": "全局配置",
+            "middleware": "中间件",
+            "mutation": "数据更改",
+            "options": "选项",
+            "pagination": "分页",
+            "prefetching": "预请求",
+            "revalidation": "自动重新请求",
+            "scroll-with-dynamic-height": "以動態高度滾動",
+            "suspense": "Suspense",
+            "typescript": "Typescript",
+            "with-nextjs": "Next.js SSG 和 SSR",
+          },
+          "name": "_meta.json",
+        },
+        {
           "children": [
+            {
+              "locale": "zh-CN",
+              "meta": {
+                "cache": "缓存",
+                "file-name.with.DOTS": "带点的文件名",
+                "performance": "性能",
+                "react-native": "React Native",
+              },
+              "name": "_meta.json",
+            },
             {
               "locale": "zh-CN",
               "name": "cache",
@@ -553,16 +608,6 @@ exports[`Page Process > pageMap zh-CN 1`] = `
               "locale": "zh-CN",
               "name": "file-name.with.DOTS",
               "route": "/docs/advanced/file-name.with.DOTS",
-            },
-            {
-              "locale": "zh-CN",
-              "meta": {
-                "cache": "缓存",
-                "file-name.with.DOTS": "带点的文件名",
-                "performance": "性能",
-                "react-native": "React Native",
-              },
-              "name": "meta.json",
             },
             {
               "children": [
@@ -636,30 +681,6 @@ exports[`Page Process > pageMap zh-CN 1`] = `
         },
         {
           "locale": "zh-CN",
-          "meta": {
-            "advanced": "高级",
-            "arguments": "传入参数",
-            "change-log": "更新日志",
-            "conditional-fetching": "条件数据请求",
-            "data-fetching": "数据请求",
-            "error-handling": "错误处理",
-            "getting-started": "入门",
-            "global-configuration": "全局配置",
-            "middleware": "中间件",
-            "mutation": "数据更改",
-            "options": "选项",
-            "pagination": "分页",
-            "prefetching": "预请求",
-            "revalidation": "自动重新请求",
-            "scroll-with-dynamic-height": "以動態高度滾動",
-            "suspense": "Suspense",
-            "typescript": "Typescript",
-            "with-nextjs": "Next.js SSG 和 SSR",
-          },
-          "name": "meta.json",
-        },
-        {
-          "locale": "zh-CN",
           "name": "middleware",
           "route": "/docs/middleware",
         },
@@ -730,6 +751,17 @@ exports[`Page Process > pageMap zh-CN 1`] = `
     {
       "children": [
         {
+          "locale": "zh-CN",
+          "meta": {
+            "auth": "身份验证",
+            "basic": "基本用法",
+            "error-handling": "错误处理",
+            "infinite-loading": "无限加载",
+            "ssr": "Next.js SSR",
+          },
+          "name": "_meta.json",
+        },
+        {
           "frontMatter": {
             "full": true,
             "title": "身份验证",
@@ -766,17 +798,6 @@ exports[`Page Process > pageMap zh-CN 1`] = `
           "route": "/examples/infinite-loading",
         },
         {
-          "locale": "zh-CN",
-          "meta": {
-            "auth": "身份验证",
-            "basic": "基本用法",
-            "error-handling": "错误处理",
-            "infinite-loading": "无限加载",
-            "ssr": "Next.js SSR",
-          },
-          "name": "meta.json",
-        },
-        {
           "locale": "en-US",
           "name": "full",
           "route": "/examples/full",
@@ -803,35 +824,10 @@ exports[`Page Process > pageMap zh-CN 1`] = `
       "route": "/",
     },
     {
-      "locale": "zh-CN",
-      "meta": {
-        "blog": {
-          "title": "博客",
-          "type": "page",
-        },
-        "docs": {
-          "title": "文档",
-          "type": "page",
-        },
-        "examples": {
-          "title": "示例",
-          "type": "page",
-        },
-        "index": {
-          "hidden": true,
-          "title": "简介",
-          "type": "page",
-        },
-      },
-      "name": "meta.json",
-    },
-    {
-      "locale": "",
       "name": "404",
       "route": "/404",
     },
     {
-      "locale": "",
       "name": "500",
       "route": "/500",
     },

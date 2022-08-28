@@ -15,8 +15,8 @@ export const NavLinks = ({
   currentIndex
 }: NavLinkProps): ReactElement | null => {
   const config = useConfig()
-  const prev = config.prevLinks ? flatDirectories[currentIndex - 1] : null
-  const next = config.nextLinks ? flatDirectories[currentIndex + 1] : null
+  const prev = config.navigation.prev ? flatDirectories[currentIndex - 1] : null
+  const next = config.navigation.next ? flatDirectories[currentIndex + 1] : null
 
   if (!prev && !next) return null
 
@@ -32,13 +32,7 @@ export const NavLinks = ({
               'rtl:ml-2 ltr:mr-2'
             )}
           >
-            <ArrowRightIcon
-              height={20}
-              className={cn(
-                'inline flex-shrink-0 transform',
-                'rtl:ml-1 ltr:mr-1 ltr:rotate-180'
-              )}
-            />
+            <ArrowRightIcon className="h-5 inline flex-shrink-0 transform rtl:ml-1 ltr:mr-1 ltr:rotate-180" />
             {prev.title}
           </Anchor>
         ) : null}
@@ -54,13 +48,7 @@ export const NavLinks = ({
             )}
           >
             {next.title}
-            <ArrowRightIcon
-              height={20}
-              className={cn(
-                'inline flex-shrink-0 transform',
-                'rtl:mr-1 rtl:rotate-180 ltr:ml-1'
-              )}
-            />
+            <ArrowRightIcon className="h-5 inline flex-shrink-0 transform rtl:mr-1 rtl:rotate-180 ltr:ml-1" />
           </Anchor>
         ) : null}
       </div>

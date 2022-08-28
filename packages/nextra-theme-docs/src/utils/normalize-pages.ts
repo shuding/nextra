@@ -1,7 +1,8 @@
 import { PageMapItem } from 'nextra'
 import getTitle from 'title'
-import { DEFAULT_PAGE_THEME } from '../constants'
+import { DEFAULT_PAGE_THEME, META_FILENAME } from '../constants'
 import { PageTheme } from '../types'
+import { MdxFile, MetaJsonFile } from 'nextra/src/types'
 
 function extendMeta(
   meta: string | Record<string, any> = {},
@@ -14,7 +15,7 @@ function extendMeta(
   return Object.assign({}, fallback, meta, { theme })
 }
 
-export interface Item extends Omit<PageMapItem, 'children'> {
+export interface Item extends MdxFile {
   title: string
   type: string
   children?: Item[]
@@ -22,7 +23,7 @@ export interface Item extends Omit<PageMapItem, 'children'> {
   withIndexPage?: boolean
 }
 
-export interface PageItem extends Omit<PageMapItem, 'children'> {
+export interface PageItem extends MdxFile {
   title: string
   type: string
   href?: string
@@ -33,7 +34,7 @@ export interface PageItem extends Omit<PageMapItem, 'children'> {
   withIndexPage?: boolean
 }
 
-export interface MenuItem extends Omit<PageMapItem, 'children'> {
+export interface MenuItem extends MdxFile {
   title: string
   type: 'menu'
   hidden?: boolean
@@ -48,7 +49,7 @@ export interface MenuItem extends Omit<PageMapItem, 'children'> {
   >
 }
 
-interface DocsItem extends Omit<PageMapItem, 'children'> {
+interface DocsItem extends MdxFile {
   title: string
   type: string
   children?: DocsItem[]
@@ -87,8 +88,10 @@ export function normalizePages({
 }) {
   let _meta: Record<string, any> | undefined
   for (let item of list) {
-    if (item.name === 'meta.json') {
-      if (locale === item.locale) {
+    if (item.name === META_FILENAME) {
+      item = item as MetaJsonFile
+
+      if (item.locale === locale) {
         _meta = item.meta
         break
       }
@@ -133,15 +136,16 @@ export function normalizePages({
   delete fallbackMeta.title
   delete fallbackMeta.href
 
-  // Normalize items based on files and meta.json.
+  // Normalize items based on files and _meta.json.
   const items = list
     .filter(
       a =>
         // not meta
-        a.name !== 'meta.json' &&
+        a.name !== META_FILENAME &&
         // not hidden routes
         !a.name.startsWith('_') &&
         // locale matches, or fallback to default locale
+        // @ts-expect-error
         (a.locale === locale || a.locale === defaultLocale || !a.locale)
     )
     .sort((a, b) => {

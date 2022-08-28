@@ -1,6 +1,6 @@
-import { PageMapItem } from 'nextra'
+import { MdxFile } from 'nextra'
 
-export const sortDate = (a: PageMapItem, b: PageMapItem): number => {
+export const sortDate = (a: MdxFile, b: MdxFile): number => {
   if (!a.frontMatter?.date || !b.frontMatter?.date) return -1
 
   return (
