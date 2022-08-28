@@ -46,6 +46,10 @@ pre {
 
 [data-rehype-pretty-code-fragment] {
   @apply relative;
+
+  &:hover > .nextra-copy-button {
+    @apply opacity-100;
+  }
 }
 
 @supports (

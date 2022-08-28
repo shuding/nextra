@@ -32,7 +32,7 @@ export const Pre = ({
       {hasCopy && (
         <CopyToClipboard
           value={children}
-          className={'absolute m-2 right-0 ' + (filename ? 'top-8' : 'top-0')}
+          className={'opacity-0 transition-opacity absolute m-2 right-0 ' + (filename ? 'top-8' : 'top-0')}
         />
       )}
     </>
