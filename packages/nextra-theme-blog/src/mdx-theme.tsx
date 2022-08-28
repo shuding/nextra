@@ -10,7 +10,7 @@ import React, {
 import { MDXProvider } from '@mdx-js/react'
 import Link from 'next/link'
 import ReactDOM from 'react-dom'
-import { Code, Pre } from 'nextra/components'
+import { Code, Pre, Td, Th, Tr } from 'nextra/components'
 import { useBlogContext } from './blog-context'
 
 export const HeadingContext = createContext<
@@ -86,6 +86,12 @@ const components = {
         <Pre {...props}>{children}</Pre>
       </div>
     )
+  },
+  tr: Tr,
+  th: Th,
+  td: Td,
+  table(props: ComponentProps<'table'>) {
+    return <table className="not-prose" {...props} />
   },
   code: Code
 }

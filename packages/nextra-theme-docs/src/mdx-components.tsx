@@ -14,7 +14,7 @@ import { Collapse, Anchor } from './components'
 import { IS_BROWSER } from './constants'
 import cn from 'clsx'
 import { DocsThemeConfig } from './types'
-import { Pre, Code } from 'nextra/components'
+import { Code, Pre, Td, Th, Tr } from 'nextra/components'
 
 let observer: IntersectionObserver
 let setActiveAnchor: ReturnType<typeof useSetActiveAnchor>
@@ -263,27 +263,9 @@ export const getComponents = ({
     p: (props: ComponentProps<'p'>) => (
       <p className="mt-6 first:mt-0 leading-7" {...props} />
     ),
-    tr: (props: ComponentProps<'tr'>) => (
-      <tr
-        className={cn(
-          'm-0 border-t border-gray-300 p-0 dark:border-gray-600',
-          'even:bg-gray-100 even:dark:bg-gray-600/20'
-        )}
-        {...props}
-      />
-    ),
-    th: (props: ComponentProps<'th'>) => (
-      <th
-        className="m-0 border border-gray-300 px-4 py-2 dark:border-gray-600 font-semibold"
-        {...props}
-      />
-    ),
-    td: (props: ComponentProps<'td'>) => (
-      <td
-        className="m-0 border border-gray-300 px-4 py-2 dark:border-gray-600"
-        {...props}
-      />
-    ),
+    tr: Tr,
+    th: Th,
+    td: Td,
     details: Details,
     summary: Summary,
     pre: Pre,
