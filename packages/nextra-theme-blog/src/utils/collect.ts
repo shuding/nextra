@@ -3,8 +3,10 @@ import { LayoutProps } from '../types'
 import { sortDate } from './date'
 import traverse from './traverse'
 
-const isNav = (page: PageMapItem) => {
-  return page.frontMatter && ['page', 'posts'].includes(page.frontMatter.type)
+const isNav = (page: PageMapItem): page is MdxFile => {
+  return (
+    'frontMatter' in page && ['page', 'posts'].includes(page.frontMatter?.type)
+  )
 }
 const isPost = (page: PageMapItem) => {
   if (page.children) return false
