@@ -1,5 +1,11 @@
 # nextra
 
+## 2.0.0-beta.19
+
+### Patch Changes
+
+- 37b4445: fix react-dom peer dependency version
+
 ## 2.0.0-beta.18
 
 ### Patch Changes
