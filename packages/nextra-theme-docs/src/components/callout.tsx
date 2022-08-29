@@ -39,9 +39,7 @@ export function Callout({
       >
         {emoji}
       </div>
-      <span className="w-[calc(100%-2.5rem)]">
-        {children}
-      </span>
+      <div className="min-w-0">{children}</div>
     </div>
   )
 }

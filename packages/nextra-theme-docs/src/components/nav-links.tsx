@@ -10,6 +10,11 @@ interface NavLinkProps {
   flatDirectories: Item[]
 }
 
+const classes = {
+  link: 'max-w-[50%] gap-1 [word-break:break-word] flex items-center rounded py-4 text-base font-medium text-gray-600 transition-colors hover:text-primary-500 dark:text-gray-300 md:text-lg',
+  icon: 'h-5 inline flex-shrink-0'
+}
+
 export const NavLinks = ({
   flatDirectories,
   currentIndex
@@ -21,37 +26,30 @@ export const NavLinks = ({
   if (!prev && !next) return null
 
   return (
-    <div className="nextra-navigation-links mb-8 flex flex-row items-center justify-between border-t pt-8 dark:border-neutral-800">
-      <div className="flex min-w-0 flex-1 justify-start">
-        {prev ? (
-          <Anchor
-            href={prev.route}
-            title={prev.title}
-            className={cn(
-              '-m-4 flex items-center rounded p-4 text-base font-medium text-gray-600 transition-colors hover:text-primary-500 dark:text-gray-300 md:text-lg',
-              'rtl:ml-2 ltr:mr-2'
-            )}
-          >
-            <ArrowRightIcon className="h-5 inline flex-shrink-0 transform rtl:ml-1 ltr:mr-1 ltr:rotate-180" />
-            {prev.title}
-          </Anchor>
-        ) : null}
-      </div>
-      <div className="flex min-w-0 flex-1 justify-end">
-        {next ? (
-          <Anchor
-            href={next.route}
-            title={next.title}
-            className={cn(
-              '-m-4 inline-flex items-center justify-end rounded p-4 text-base font-medium text-gray-600 transition-colors hover:text-primary-500 dark:text-gray-300 md:text-lg',
-              'rtl:mr-2 ltr:ml-2'
-            )}
-          >
-            {next.title}
-            <ArrowRightIcon className="h-5 inline flex-shrink-0 transform rtl:mr-1 rtl:rotate-180 ltr:ml-1" />
-          </Anchor>
-        ) : null}
-      </div>
+    <div className="nextra-navigation-links mb-8 flex items-center border-t pt-8 dark:border-neutral-800">
+      {prev && (
+        <Anchor
+          href={prev.route}
+          title={prev.title}
+          className={cn(classes.link, 'ltr:pr-4 rtl:pl-4')}
+        >
+          <ArrowRightIcon className={cn(classes.icon, 'ltr:rotate-180')} />
+          {prev.title}
+        </Anchor>
+      )}
+      {next && (
+        <Anchor
+          href={next.route}
+          title={next.title}
+          className={cn(
+            classes.link,
+            'ltr:pl-4 rtl:pr-4 ltr:text-right rtl:text-left ltr:ml-auto rtl:mr-auto'
+          )}
+        >
+          {next.title}
+          <ArrowRightIcon className={cn(classes.icon, 'rtl:rotate-180')} />
+        </Anchor>
+      )}
     </div>
   )
 }
