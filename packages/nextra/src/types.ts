@@ -71,6 +71,14 @@ export type PageOpts = {
   timestamp?: number
   unstable_flexsearch?: Flexsearch
   newNextLinkBehavior?: boolean
+  readingTime?: ReadingTime
+}
+
+export type ReadingTime = {
+  text: string
+  minutes: number
+  time: number
+  words: number
 }
 
 type Theme = string
@@ -82,6 +90,7 @@ export type NextraConfig = {
   unstable_defaultShowCopyCode?: boolean
   unstable_flexsearch?: Flexsearch
   unstable_staticImage?: boolean
+  unstable_readingTime?: boolean
   mdxOptions?: Pick<ProcessorOptions, 'rehypePlugins' | 'remarkPlugins'> & {
     rehypePrettyCodeOptions?: Partial<RehypePrettyCodeOptions>
   }
