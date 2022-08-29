@@ -1,5 +1,16 @@
 # nextra-theme-blog
 
+## 2.0.0-beta.20
+
+### Patch Changes
+
+- 1ee3c92: reuse table styles from docs in blog
+- e6771ca: [Blog/Docs] Add copy to clipboard button for code-blocks. Add `NextraConfig.unstable_defaultShowCopyCode` option to show button by default, add `copy` and `copy=false` options for code-blocks
+- 64ae4b5: add `nextraConfig.unstable_readingTime` option for blog theme
+- 71528f1: show copy code button only on hover of container
+- e6771ca: rename `PageOpts.meta` to `PageOpts.frontMatter`
+- e6771ca: move `withLayout` logic directly in nextra loader
+
 ## 2.0.0-beta.19
 
 ## 2.0.0-beta.18
