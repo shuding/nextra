@@ -186,7 +186,7 @@ const InnerLayout = ({
       themeContext.layout !== 'full' &&
       themeContext.layout !== 'raw' && <div className={tocClassName} />
     ) : (
-      <div className={cn(tocClassName, 'mx-4')}>
+      <div className={cn(tocClassName, 'px-4')}>
         {renderComponent(config.toc.component, {
           headings: config.toc.float ? headings : [],
           filePath
