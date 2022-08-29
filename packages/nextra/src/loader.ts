@@ -17,7 +17,6 @@ import {
   DEFAULT_LOCALE,
   OFFICIAL_THEMES,
   MARKDOWN_EXTENSION_REGEX,
-  META_FILENAME,
   CWD
 } from './constants'
 
@@ -101,7 +100,7 @@ async function loader(
   const { locale } = parseFileName(mdxPath)
 
   for (const [filePath, file] of Object.entries(fileMap)) {
-    if (file.name === META_FILENAME && (!locale || file.locale === locale)) {
+    if (file.kind === 'Meta' && (!locale || file.locale === locale)) {
       context.addDependency(filePath)
     }
   }

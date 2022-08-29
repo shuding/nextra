@@ -5,7 +5,8 @@ import {
   MetaJsonPath,
   PageMapItem,
   Folder,
-  MdxFile
+  MdxFile,
+  MetaJsonFile
 } from './types'
 import fs from 'graceful-fs'
 import { promisify } from 'util'
@@ -31,11 +32,21 @@ export const collectMdx = async (
   const content = await readFile(filePath, 'utf8')
   const { data } = grayMatter(content)
   return {
+    kind: 'MdxPage',
     name,
     route,
     ...(locale && { locale }),
     ...(Object.keys(data).length && { frontMatter: data })
   }
+}
+
+const sortDate = (a: MdxFile, b: MdxFile): number => {
+  const aDate = a.frontMatter?.date
+  const bDate = b.frontMatter?.date
+  if (!aDate) return 1
+  if (!bDate) return -1
+
+  return new Date(bDate).getTime() - new Date(aDate).getTime()
 }
 
 export async function collectFiles(
@@ -45,54 +56,89 @@ export async function collectFiles(
 ): Promise<{ items: PageMapItem[]; fileMap: FileMap }> {
   const files = await readdir(dir, { withFileTypes: true })
 
-  const items = await Promise.all(
-    files.map(async f => {
-      const filePath = path.resolve(dir, f.name)
-      const { name, locale, ext } = parseFileName(filePath)
-      const fileRoute = slash(path.join(route, name.replace(/^index$/, '')))
+  const promises = files.map(async f => {
+    const filePath = path.resolve(dir, f.name)
+    const { name, locale, ext } = parseFileName(filePath)
+    const fileRoute = slash(path.join(route, name.replace(/^index$/, '')))
 
-      if (f.isDirectory()) {
-        if (fileRoute === '/api') return
-        const { items } = await collectFiles(filePath, fileRoute, fileMap)
-        if (!items.length) return
-        return <Folder>{
-          name: f.name,
-          route: fileRoute,
-          children: items
+    if (f.isDirectory()) {
+      if (fileRoute === '/api') return
+      const { items } = await collectFiles(filePath, fileRoute, fileMap)
+      if (!items.length) return
+      return <Folder>{
+        kind: 'Folder',
+        name: f.name,
+        route: fileRoute,
+        children: items
+      }
+    }
+
+    if (MARKDOWN_EXTENSION_REGEX.test(ext)) {
+      const fp = filePath as MdxPath
+      fileMap[fp] = await collectMdx(fp, fileRoute)
+      return fileMap[fp]
+    }
+    const fileName = name + ext
+
+    if (fileName === META_FILENAME) {
+      const fp = filePath as MetaJsonPath
+      const content = await readFile(fp, 'utf8')
+      fileMap[fp] = {
+        kind: 'Meta',
+        ...(locale && { locale }),
+        data: parseJsonFile(content, fp)
+      }
+      return fileMap[fp]
+    }
+
+    if (fileName === 'meta.json') {
+      console.warn(
+        '[nextra] "meta.json" was renamed to "_meta.json". Rename the following file:',
+        path.relative(CWD, filePath)
+      )
+    }
+  })
+
+  const items = (await Promise.all(promises)).filter(truthy)
+
+  const mdxPages = items
+    .filter((item): item is MdxFile => item.kind === 'MdxPage')
+    .sort(sortDate)
+  const locales = mdxPages.map(item => item.locale)
+
+  for (const locale of locales) {
+    const metaIndex = items.findIndex(
+      item => item.kind === 'Meta' && item.locale === locale
+    )
+    const defaultMeta: [string, string][] = mdxPages
+      .filter(item => item.locale === locale)
+      .map(item => [item.name, item.frontMatter?.title || item.name])
+    const metaFilename = locale
+      ? META_FILENAME.replace('.', `.${locale}.`)
+      : META_FILENAME
+    const metaPath = path.join(dir, metaFilename) as MetaJsonPath
+
+    if (metaIndex === -1) {
+      fileMap[metaPath] = {
+        kind: 'Meta',
+        ...(locale && { locale }),
+        data: Object.fromEntries(defaultMeta)
+      }
+      items.push(fileMap[metaPath])
+    } else {
+      const { data, ...metaFile } = items[metaIndex] as MetaJsonFile
+      fileMap[metaPath] = {
+        ...metaFile,
+        data: {
+          ...data,
+          ...Object.fromEntries(defaultMeta.filter(([key]) => !(key in data)))
         }
       }
-
-      if (MARKDOWN_EXTENSION_REGEX.test(ext)) {
-        const fp = filePath as MdxPath
-        fileMap[fp] = await collectMdx(fp, fileRoute)
-        return fileMap[fp]
-      }
-      const fileName = name + ext
-
-      if (fileName === META_FILENAME) {
-        const fp = filePath as MetaJsonPath
-        const content = await readFile(fp, 'utf8')
-        fileMap[fp] = {
-          name: META_FILENAME,
-          ...(locale && { locale }),
-          meta: parseJsonFile(content, fp)
-        }
-        return fileMap[fp]
-      }
-
-      if (fileName === 'meta.json') {
-        console.warn(
-          `[nextra] "meta.json" was renamed to "_meta.json". Rename the following file:`,
-          path.relative(CWD, filePath)
-        )
-      }
-    })
-  )
-
-  return {
-    items: items.filter(truthy),
-    fileMap
+      items[metaIndex] = fileMap[metaPath]
+    }
   }
+
+  return { items, fileMap }
 }
 
 export class PageMapCache {

@@ -1,50 +1,54 @@
-export const cnPageMap: any[] = [
+import { PageMapItem } from 'nextra'
+
+export const cnPageMap: PageMapItem[] = [
   {
+    kind: 'Folder',
     name: 'blog',
     children: [
       {
-        name: '_meta.json',
-        meta: {
+        kind: 'Meta',
+        data: {
           'swr-v1': 'Announcing SWR 1.0'
         },
         locale: 'en-US'
       },
       {
-        name: '_meta.json',
-        meta: {
+        kind: 'Meta',
+        data: {
           'swr-v1': 'Announcing SWR 1.0'
         },
         locale: 'es-ES'
       },
       {
-        name: '_meta.json',
-        meta: {
+        kind: 'Meta',
+        data: {
           'swr-v1': 'SWR 1.0 の発表'
         },
         locale: 'ja'
       },
       {
-        name: '_meta.json',
-        meta: {
+        kind: 'Meta',
+        data: {
           'swr-v1': 'Announcing SWR 1.0'
         },
         locale: 'ko'
       },
       {
-        name: '_meta.json',
-        meta: {
+        kind: 'Meta',
+        data: {
           'swr-v1': 'Представляем SWR 1.0'
         },
         locale: 'ru'
       },
       {
-        name: '_meta.json',
-        meta: {
+        kind: 'Meta',
+        data: {
           'swr-v1': 'SWR 1.0 发布'
         },
         locale: 'zh-CN'
       },
       {
+        kind: 'MdxPage',
         name: 'swr-v1',
         route: '/blog/swr-v1',
         frontMatter: {
@@ -59,19 +63,22 @@ export const cnPageMap: any[] = [
     route: '/blog'
   },
   {
+    kind: 'Folder',
     name: 'docs',
     children: [
       {
+        kind: 'Folder',
         name: 'advanced',
         children: [
           {
+            kind: 'MdxPage',
             name: 'cache',
             route: '/docs/advanced/cache',
             locale: 'zh-CN'
           },
           {
-            name: '_meta.json',
-            meta: {
+            kind: 'Meta',
+            data: {
               cache: 'Cache',
               performance: 'Performance',
               'react-native': 'React Native'
@@ -79,8 +86,8 @@ export const cnPageMap: any[] = [
             locale: 'en-US'
           },
           {
-            name: '_meta.json',
-            meta: {
+            kind: 'Meta',
+            data: {
               cache: 'Cache',
               performance: 'Rendimiento',
               'react-native': 'React Native'
@@ -88,8 +95,8 @@ export const cnPageMap: any[] = [
             locale: 'es-ES'
           },
           {
-            name: '_meta.json',
-            meta: {
+            kind: 'Meta',
+            data: {
               cache: 'キャッシュ',
               performance: 'パフォーマンス',
               'react-native': 'React Native'
@@ -97,8 +104,8 @@ export const cnPageMap: any[] = [
             locale: 'ja'
           },
           {
-            name: '_meta.json',
-            meta: {
+            kind: 'Meta',
+            data: {
               cache: '캐시',
               performance: '성능',
               'react-native': 'React Native'
@@ -106,8 +113,8 @@ export const cnPageMap: any[] = [
             locale: 'ko'
           },
           {
-            name: '_meta.json',
-            meta: {
+            kind: 'Meta',
+            data: {
               cache: 'Кеш',
               performance: 'Производительность',
               'react-native': 'React Native'
@@ -115,8 +122,8 @@ export const cnPageMap: any[] = [
             locale: 'ru'
           },
           {
-            name: '_meta.json',
-            meta: {
+            kind: 'Meta',
+            data: {
               cache: '缓存',
               performance: '性能',
               'react-native': 'React Native'
@@ -124,11 +131,13 @@ export const cnPageMap: any[] = [
             locale: 'zh-CN'
           },
           {
+            kind: 'MdxPage',
             name: 'performance',
             route: '/docs/advanced/performance',
             locale: 'zh-CN'
           },
           {
+            kind: 'MdxPage',
             name: 'react-native',
             route: '/docs/advanced/react-native',
             locale: 'zh-CN'
@@ -137,43 +146,50 @@ export const cnPageMap: any[] = [
         route: '/docs/advanced'
       },
       {
+        kind: 'MdxPage',
         name: 'arguments',
         route: '/docs/arguments',
         locale: 'zh-CN'
       },
       {
+        kind: 'MdxPage',
         name: 'change-log',
         route: '/docs/change-log',
         locale: 'zh-CN'
       },
       {
+        kind: 'MdxPage',
         name: 'conditional-fetching',
         route: '/docs/conditional-fetching',
         locale: 'zh-CN'
       },
       {
+        kind: 'MdxPage',
         name: 'data-fetching',
         route: '/docs/data-fetching',
         locale: 'zh-CN'
       },
       {
+        kind: 'MdxPage',
         name: 'error-handling',
         route: '/docs/error-handling',
         locale: 'zh-CN'
       },
       {
+        kind: 'MdxPage',
         name: 'getting-started',
         route: '/docs/getting-started',
         locale: 'zh-CN'
       },
       {
+        kind: 'MdxPage',
         name: 'global-configuration',
         route: '/docs/global-configuration',
         locale: 'zh-CN'
       },
       {
-        name: '_meta.json',
-        meta: {
+        kind: 'Meta',
+        data: {
           'getting-started': 'Getting Started',
           options: 'Options',
           'global-configuration': 'Global Configuration',
@@ -195,8 +211,8 @@ export const cnPageMap: any[] = [
         locale: 'en-US'
       },
       {
-        name: '_meta.json',
-        meta: {
+        kind: 'Meta',
+        data: {
           'getting-started': 'Comienza',
           options: 'Opciones',
           'global-configuration': 'Configuración Global',
@@ -218,8 +234,8 @@ export const cnPageMap: any[] = [
         locale: 'es-ES'
       },
       {
-        name: '_meta.json',
-        meta: {
+        kind: 'Meta',
+        data: {
           'getting-started': 'はじめに',
           options: 'オプション',
           'global-configuration': 'グローバルな設定',
@@ -241,8 +257,8 @@ export const cnPageMap: any[] = [
         locale: 'ja'
       },
       {
-        name: '_meta.json',
-        meta: {
+        kind: 'Meta',
+        data: {
           'getting-started': '시작하기',
           options: '옵션',
           'global-configuration': '전역 설정',
@@ -264,8 +280,8 @@ export const cnPageMap: any[] = [
         locale: 'ko'
       },
       {
-        name: '_meta.json',
-        meta: {
+        kind: 'Meta',
+        data: {
           'getting-started': 'Начало работы',
           options: 'Опции',
           'global-configuration': 'Глобальная конфигурация',
@@ -287,8 +303,8 @@ export const cnPageMap: any[] = [
         locale: 'ru'
       },
       {
-        name: '_meta.json',
-        meta: {
+        kind: 'Meta',
+        data: {
           'getting-started': '入门',
           options: '选项',
           'global-configuration': '全局配置',
@@ -310,46 +326,55 @@ export const cnPageMap: any[] = [
         locale: 'zh-CN'
       },
       {
+        kind: 'MdxPage',
         name: 'middleware',
         route: '/docs/middleware',
         locale: 'zh-CN'
       },
       {
+        kind: 'MdxPage',
         name: 'mutation',
         route: '/docs/mutation',
         locale: 'zh-CN'
       },
       {
+        kind: 'MdxPage',
         name: 'options',
         route: '/docs/options',
         locale: 'zh-CN'
       },
       {
+        kind: 'MdxPage',
         name: 'pagination',
         route: '/docs/pagination',
         locale: 'zh-CN'
       },
       {
+        kind: 'MdxPage',
         name: 'prefetching',
         route: '/docs/prefetching',
         locale: 'zh-CN'
       },
       {
+        kind: 'MdxPage',
         name: 'revalidation',
         route: '/docs/revalidation',
         locale: 'zh-CN'
       },
       {
+        kind: 'MdxPage',
         name: 'suspense',
         route: '/docs/suspense',
         locale: 'zh-CN'
       },
       {
+        kind: 'MdxPage',
         name: 'with-nextjs',
         route: '/docs/with-nextjs',
         locale: 'zh-CN'
       },
       {
+        kind: 'MdxPage',
         name: 'typescript',
         route: '/docs/typescript',
         locale: 'en-US'
@@ -358,9 +383,11 @@ export const cnPageMap: any[] = [
     route: '/docs'
   },
   {
+    kind: 'Folder',
     name: 'examples',
     children: [
       {
+        kind: 'MdxPage',
         name: 'auth',
         route: '/examples/auth',
         frontMatter: {
@@ -370,6 +397,7 @@ export const cnPageMap: any[] = [
         locale: 'zh-CN'
       },
       {
+        kind: 'MdxPage',
         name: 'basic',
         route: '/examples/basic',
         frontMatter: {
@@ -379,6 +407,7 @@ export const cnPageMap: any[] = [
         locale: 'zh-CN'
       },
       {
+        kind: 'MdxPage',
         name: 'error-handling',
         route: '/examples/error-handling',
         frontMatter: {
@@ -388,6 +417,7 @@ export const cnPageMap: any[] = [
         locale: 'zh-CN'
       },
       {
+        kind: 'MdxPage',
         name: 'infinite-loading',
         route: '/examples/infinite-loading',
         frontMatter: {
@@ -397,8 +427,8 @@ export const cnPageMap: any[] = [
         locale: 'zh-CN'
       },
       {
-        name: '_meta.json',
-        meta: {
+        kind: 'Meta',
+        data: {
           basic: 'Basic Usage',
           auth: 'Authentication',
           'infinite-loading': 'Infinite Loading',
@@ -408,8 +438,8 @@ export const cnPageMap: any[] = [
         locale: 'en-US'
       },
       {
-        name: '_meta.json',
-        meta: {
+        kind: 'Meta',
+        data: {
           basic: 'Uso Básico',
           auth: 'Autenticación',
           'infinite-loading': 'Carga Infinita',
@@ -419,8 +449,8 @@ export const cnPageMap: any[] = [
         locale: 'es-ES'
       },
       {
-        name: '_meta.json',
-        meta: {
+        kind: 'Meta',
+        data: {
           basic: '基本的な使用法',
           auth: '認証',
           'infinite-loading': '無限ローディング',
@@ -430,8 +460,8 @@ export const cnPageMap: any[] = [
         locale: 'ja'
       },
       {
-        name: '_meta.json',
-        meta: {
+        kind: 'Meta',
+        data: {
           basic: '기본 사용법',
           auth: '인증',
           'infinite-loading': '인피니트 로딩',
@@ -441,8 +471,8 @@ export const cnPageMap: any[] = [
         locale: 'ko'
       },
       {
-        name: '_meta.json',
-        meta: {
+        kind: 'Meta',
+        data: {
           basic: 'Основное использование',
           auth: 'Аутентификация',
           'infinite-loading': 'Бесконечная загрузка',
@@ -452,8 +482,8 @@ export const cnPageMap: any[] = [
         locale: 'ru'
       },
       {
-        name: '_meta.json',
-        meta: {
+        kind: 'Meta',
+        data: {
           basic: '基本用法',
           auth: '身份验证',
           'infinite-loading': '无限加载',
@@ -463,6 +493,7 @@ export const cnPageMap: any[] = [
         locale: 'zh-CN'
       },
       {
+        kind: 'MdxPage',
         name: 'ssr',
         route: '/examples/ssr',
         frontMatter: {
@@ -475,6 +506,7 @@ export const cnPageMap: any[] = [
     route: '/examples'
   },
   {
+    kind: 'MdxPage',
     name: 'index',
     route: '/',
     frontMatter: {
@@ -483,8 +515,8 @@ export const cnPageMap: any[] = [
     locale: 'zh-CN'
   },
   {
-    name: '_meta.json',
-    meta: {
+    kind: 'Meta',
+    data: {
       index: {
         title: 'Introduction',
         type: 'nav',
@@ -506,8 +538,8 @@ export const cnPageMap: any[] = [
     locale: 'en-US'
   },
   {
-    name: '_meta.json',
-    meta: {
+    kind: 'Meta',
+    data: {
       index: {
         title: 'Introducción',
         type: 'nav',
@@ -529,8 +561,8 @@ export const cnPageMap: any[] = [
     locale: 'es-ES'
   },
   {
-    name: '_meta.json',
-    meta: {
+    kind: 'Meta',
+    data: {
       index: {
         title: '前書き',
         type: 'nav',
@@ -552,8 +584,8 @@ export const cnPageMap: any[] = [
     locale: 'ja'
   },
   {
-    name: '_meta.json',
-    meta: {
+    kind: 'Meta',
+    data: {
       index: {
         title: '소개',
         type: 'nav',
@@ -575,8 +607,8 @@ export const cnPageMap: any[] = [
     locale: 'ko'
   },
   {
-    name: '_meta.json',
-    meta: {
+    kind: 'Meta',
+    data: {
       index: {
         title: 'Введение',
         type: 'nav',
@@ -598,8 +630,8 @@ export const cnPageMap: any[] = [
     locale: 'ru'
   },
   {
-    name: '_meta.json',
-    meta: {
+    kind: 'Meta',
+    data: {
       index: {
         title: '简介',
         type: 'nav',
@@ -622,53 +654,55 @@ export const cnPageMap: any[] = [
   }
 ]
 
-export const usPageMap: any[] = [
+export const usPageMap: PageMapItem[] = [
   {
+    kind: 'Folder',
     name: 'blog',
     children: [
       {
-        name: '_meta.json',
-        meta: {
+        kind: 'Meta',
+        data: {
           'swr-v1': 'Announcing SWR 1.0'
         },
         locale: 'en-US'
       },
       {
-        name: '_meta.json',
-        meta: {
+        kind: 'Meta',
+        data: {
           'swr-v1': 'Announcing SWR 1.0'
         },
         locale: 'es-ES'
       },
       {
-        name: '_meta.json',
-        meta: {
+        kind: 'Meta',
+        data: {
           'swr-v1': 'SWR 1.0 の発表'
         },
         locale: 'ja'
       },
       {
-        name: '_meta.json',
-        meta: {
+        kind: 'Meta',
+        data: {
           'swr-v1': 'Announcing SWR 1.0'
         },
         locale: 'ko'
       },
       {
-        name: '_meta.json',
-        meta: {
+        kind: 'Meta',
+        data: {
           'swr-v1': 'Представляем SWR 1.0'
         },
         locale: 'ru'
       },
       {
-        name: '_meta.json',
-        meta: {
+        kind: 'Meta',
+        data: {
           'swr-v1': 'SWR 1.0 发布'
         },
         locale: 'zh-CN'
       },
       {
+        kind: 'MdxPage',
         name: 'swr-v1',
         route: '/blog/swr-v1',
         frontMatter: {
@@ -683,19 +717,22 @@ export const usPageMap: any[] = [
     route: '/blog'
   },
   {
+    kind: 'Folder',
     name: 'docs',
     children: [
       {
+        kind: 'Folder',
         name: 'advanced',
         children: [
           {
+            kind: 'MdxPage',
             name: 'cache',
             route: '/docs/advanced/cache',
             locale: 'en-US'
           },
           {
-            name: '_meta.json',
-            meta: {
+            kind: 'Meta',
+            data: {
               cache: 'Cache',
               performance: 'Performance',
               'react-native': 'React Native'
@@ -703,8 +740,8 @@ export const usPageMap: any[] = [
             locale: 'en-US'
           },
           {
-            name: '_meta.json',
-            meta: {
+            kind: 'Meta',
+            data: {
               cache: 'Cache',
               performance: 'Rendimiento',
               'react-native': 'React Native'
@@ -712,8 +749,8 @@ export const usPageMap: any[] = [
             locale: 'es-ES'
           },
           {
-            name: '_meta.json',
-            meta: {
+            kind: 'Meta',
+            data: {
               cache: 'キャッシュ',
               performance: 'パフォーマンス',
               'react-native': 'React Native'
@@ -721,8 +758,8 @@ export const usPageMap: any[] = [
             locale: 'ja'
           },
           {
-            name: '_meta.json',
-            meta: {
+            kind: 'Meta',
+            data: {
               cache: '캐시',
               performance: '성능',
               'react-native': 'React Native'
@@ -730,8 +767,8 @@ export const usPageMap: any[] = [
             locale: 'ko'
           },
           {
-            name: '_meta.json',
-            meta: {
+            kind: 'Meta',
+            data: {
               cache: 'Кеш',
               performance: 'Производительность',
               'react-native': 'React Native'
@@ -739,8 +776,8 @@ export const usPageMap: any[] = [
             locale: 'ru'
           },
           {
-            name: '_meta.json',
-            meta: {
+            kind: 'Meta',
+            data: {
               cache: '缓存',
               performance: '性能',
               'react-native': 'React Native'
@@ -748,11 +785,13 @@ export const usPageMap: any[] = [
             locale: 'zh-CN'
           },
           {
+            kind: 'MdxPage',
             name: 'performance',
             route: '/docs/advanced/performance',
             locale: 'en-US'
           },
           {
+            kind: 'MdxPage',
             name: 'react-native',
             route: '/docs/advanced/react-native',
             locale: 'en-US'
@@ -761,43 +800,50 @@ export const usPageMap: any[] = [
         route: '/docs/advanced'
       },
       {
+        kind: 'MdxPage',
         name: 'arguments',
         route: '/docs/arguments',
         locale: 'en-US'
       },
       {
+        kind: 'MdxPage',
         name: 'change-log',
         route: '/docs/change-log',
         locale: 'en-US'
       },
       {
+        kind: 'MdxPage',
         name: 'conditional-fetching',
         route: '/docs/conditional-fetching',
         locale: 'en-US'
       },
       {
+        kind: 'MdxPage',
         name: 'data-fetching',
         route: '/docs/data-fetching',
         locale: 'en-US'
       },
       {
+        kind: 'MdxPage',
         name: 'error-handling',
         route: '/docs/error-handling',
         locale: 'en-US'
       },
       {
+        kind: 'MdxPage',
         name: 'getting-started',
         route: '/docs/getting-started',
         locale: 'en-US'
       },
       {
+        kind: 'MdxPage',
         name: 'global-configuration',
         route: '/docs/global-configuration',
         locale: 'en-US'
       },
       {
-        name: '_meta.json',
-        meta: {
+        kind: 'Meta',
+        data: {
           'getting-started': 'Getting Started',
           options: 'Options',
           'global-configuration': 'Global Configuration',
@@ -819,8 +865,8 @@ export const usPageMap: any[] = [
         locale: 'en-US'
       },
       {
-        name: '_meta.json',
-        meta: {
+        kind: 'Meta',
+        data: {
           'getting-started': 'Comienza',
           options: 'Opciones',
           'global-configuration': 'Configuración Global',
@@ -842,8 +888,8 @@ export const usPageMap: any[] = [
         locale: 'es-ES'
       },
       {
-        name: '_meta.json',
-        meta: {
+        kind: 'Meta',
+        data: {
           'getting-started': 'はじめに',
           options: 'オプション',
           'global-configuration': 'グローバルな設定',
@@ -865,8 +911,8 @@ export const usPageMap: any[] = [
         locale: 'ja'
       },
       {
-        name: '_meta.json',
-        meta: {
+        kind: 'Meta',
+        data: {
           'getting-started': '시작하기',
           options: '옵션',
           'global-configuration': '전역 설정',
@@ -888,8 +934,8 @@ export const usPageMap: any[] = [
         locale: 'ko'
       },
       {
-        name: '_meta.json',
-        meta: {
+        kind: 'Meta',
+        data: {
           'getting-started': 'Начало работы',
           options: 'Опции',
           'global-configuration': 'Глобальная конфигурация',
@@ -911,8 +957,8 @@ export const usPageMap: any[] = [
         locale: 'ru'
       },
       {
-        name: '_meta.json',
-        meta: {
+        kind: 'Meta',
+        data: {
           'getting-started': '入门',
           options: '选项',
           'global-configuration': '全局配置',
@@ -934,46 +980,55 @@ export const usPageMap: any[] = [
         locale: 'zh-CN'
       },
       {
+        kind: 'MdxPage',
         name: 'middleware',
         route: '/docs/middleware',
         locale: 'en-US'
       },
       {
+        kind: 'MdxPage',
         name: 'mutation',
         route: '/docs/mutation',
         locale: 'en-US'
       },
       {
+        kind: 'MdxPage',
         name: 'options',
         route: '/docs/options',
         locale: 'en-US'
       },
       {
+        kind: 'MdxPage',
         name: 'pagination',
         route: '/docs/pagination',
         locale: 'en-US'
       },
       {
+        kind: 'MdxPage',
         name: 'prefetching',
         route: '/docs/prefetching',
         locale: 'en-US'
       },
       {
+        kind: 'MdxPage',
         name: 'revalidation',
         route: '/docs/revalidation',
         locale: 'en-US'
       },
       {
+        kind: 'MdxPage',
         name: 'suspense',
         route: '/docs/suspense',
         locale: 'en-US'
       },
       {
+        kind: 'MdxPage',
         name: 'typescript',
         route: '/docs/typescript',
         locale: 'en-US'
       },
       {
+        kind: 'MdxPage',
         name: 'with-nextjs',
         route: '/docs/with-nextjs',
         locale: 'en-US'
@@ -982,9 +1037,11 @@ export const usPageMap: any[] = [
     route: '/docs'
   },
   {
+    kind: 'Folder',
     name: 'examples',
     children: [
       {
+        kind: 'MdxPage',
         name: 'auth',
         route: '/examples/auth',
         frontMatter: {
@@ -994,6 +1051,7 @@ export const usPageMap: any[] = [
         locale: 'en-US'
       },
       {
+        kind: 'MdxPage',
         name: 'basic',
         route: '/examples/basic',
         frontMatter: {
@@ -1003,6 +1061,7 @@ export const usPageMap: any[] = [
         locale: 'en-US'
       },
       {
+        kind: 'MdxPage',
         name: 'error-handling',
         route: '/examples/error-handling',
         frontMatter: {
@@ -1012,6 +1071,7 @@ export const usPageMap: any[] = [
         locale: 'en-US'
       },
       {
+        kind: 'MdxPage',
         name: 'infinite-loading',
         route: '/examples/infinite-loading',
         frontMatter: {
@@ -1021,8 +1081,8 @@ export const usPageMap: any[] = [
         locale: 'en-US'
       },
       {
-        name: '_meta.json',
-        meta: {
+        kind: 'Meta',
+        data: {
           basic: 'Basic Usage',
           auth: 'Authentication',
           'infinite-loading': 'Infinite Loading',
@@ -1032,8 +1092,8 @@ export const usPageMap: any[] = [
         locale: 'en-US'
       },
       {
-        name: '_meta.json',
-        meta: {
+        kind: 'Meta',
+        data: {
           basic: 'Uso Básico',
           auth: 'Autenticación',
           'infinite-loading': 'Carga Infinita',
@@ -1043,8 +1103,8 @@ export const usPageMap: any[] = [
         locale: 'es-ES'
       },
       {
-        name: '_meta.json',
-        meta: {
+        kind: 'Meta',
+        data: {
           basic: '基本的な使用法',
           auth: '認証',
           'infinite-loading': '無限ローディング',
@@ -1054,8 +1114,8 @@ export const usPageMap: any[] = [
         locale: 'ja'
       },
       {
-        name: '_meta.json',
-        meta: {
+        kind: 'Meta',
+        data: {
           basic: '기본 사용법',
           auth: '인증',
           'infinite-loading': '인피니트 로딩',
@@ -1065,8 +1125,8 @@ export const usPageMap: any[] = [
         locale: 'ko'
       },
       {
-        name: '_meta.json',
-        meta: {
+        kind: 'Meta',
+        data: {
           basic: 'Основное использование',
           auth: 'Аутентификация',
           'infinite-loading': 'Бесконечная загрузка',
@@ -1076,8 +1136,8 @@ export const usPageMap: any[] = [
         locale: 'ru'
       },
       {
-        name: '_meta.json',
-        meta: {
+        kind: 'Meta',
+        data: {
           basic: '基本用法',
           auth: '身份验证',
           'infinite-loading': '无限加载',
@@ -1087,6 +1147,7 @@ export const usPageMap: any[] = [
         locale: 'zh-CN'
       },
       {
+        kind: 'MdxPage',
         name: 'ssr',
         route: '/examples/ssr',
         frontMatter: {
@@ -1099,6 +1160,7 @@ export const usPageMap: any[] = [
     route: '/examples'
   },
   {
+    kind: 'MdxPage',
     name: 'index',
     route: '/',
     frontMatter: {
@@ -1107,8 +1169,8 @@ export const usPageMap: any[] = [
     locale: 'en-US'
   },
   {
-    name: '_meta.json',
-    meta: {
+    kind: 'Meta',
+    data: {
       index: {
         title: 'Introduction',
         type: 'nav',
@@ -1130,8 +1192,8 @@ export const usPageMap: any[] = [
     locale: 'en-US'
   },
   {
-    name: '_meta.json',
-    meta: {
+    kind: 'Meta',
+    data: {
       index: {
         title: 'Introducción',
         type: 'nav',
@@ -1153,8 +1215,8 @@ export const usPageMap: any[] = [
     locale: 'es-ES'
   },
   {
-    name: '_meta.json',
-    meta: {
+    kind: 'Meta',
+    data: {
       index: {
         title: '前書き',
         type: 'nav',
@@ -1176,8 +1238,8 @@ export const usPageMap: any[] = [
     locale: 'ja'
   },
   {
-    name: '_meta.json',
-    meta: {
+    kind: 'Meta',
+    data: {
       index: {
         title: '소개',
         type: 'nav',
@@ -1199,8 +1261,8 @@ export const usPageMap: any[] = [
     locale: 'ko'
   },
   {
-    name: '_meta.json',
-    meta: {
+    kind: 'Meta',
+    data: {
       index: {
         title: 'Введение',
         type: 'nav',
@@ -1222,8 +1284,8 @@ export const usPageMap: any[] = [
     locale: 'ru'
   },
   {
-    name: '_meta.json',
-    meta: {
+    kind: 'Meta',
+    data: {
       index: {
         title: '简介',
         type: 'nav',
