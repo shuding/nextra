@@ -34,7 +34,7 @@ function filter(
       meta: normalizeMeta(meta[item.name])
     } as Page
 
-    if ('children' in page && page.children) {
+    if (page.kind === 'Folder') {
       const filtered = filter(page.children, activeLevel)
       page.children = filtered.items
       if (filtered.activeLevelPages.length) {

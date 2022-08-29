@@ -36,7 +36,7 @@ export function getPageMap({
     pageMap: locale
       ? filterRouteLocale(pageMap, locale, defaultLocale)
       : pageMap,
-    title: normalizeMeta(pageMeta)?.title || pageItem.name,
+    title: normalizeMeta(pageMeta).title,
     route: pageItem.route
   }
 }
