@@ -37,7 +37,6 @@ export default defineConfig([
     format: 'esm',
     dts: true,
     target,
-    clean: true
   },
   {
     entry: ['src/types.ts'],
