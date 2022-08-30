@@ -7,5 +7,6 @@ export default defineConfig({
   dts: true,
   name: 'nextra-theme-blog',
   outExtension: () => ({ js: '.js' }),
+  external: ['react-children-utilities'],
   target: tsconfig.compilerOptions.target
 })

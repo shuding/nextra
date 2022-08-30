@@ -7,5 +7,6 @@ export default defineConfig({
   format: 'esm',
   dts: true,
   outExtension: () => ({ js: '.js' }),
+  external: ['react-children-utilities'],
   target: tsconfig.compilerOptions.target
 })
