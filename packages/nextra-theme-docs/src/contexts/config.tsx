@@ -1,5 +1,6 @@
 import React, {
   createContext,
+  isValidElement,
   ReactElement,
   ReactNode,
   useContext,
@@ -25,20 +26,18 @@ const ConfigContext = createContext<Config>({
 
 export const useConfig = () => useContext(ConfigContext)
 
-const DEEP_OBJECT_KEYS = [
-  'banner',
-  'feedback',
-  'footer',
-  'navigation',
-  'nextThemes',
-  'notFound',
-  'project',
-  'projectChat',
-  'search',
-  'serverSideError',
-  'sidebar',
-  'toc'
-] as const
+const DEEP_OBJECT_KEYS = Object.entries(DEFAULT_THEME)
+  .map(([key, value]) => {
+    const isObject =
+      value &&
+      typeof value === 'object' &&
+      !Array.isArray(value) &&
+      !isValidElement(value)
+    if (isObject) {
+      return key
+    }
+  })
+  .filter(Boolean)
 
 const LegacyOptions: Record<string, string> = {
   projectLink: 'project.link',
@@ -84,6 +83,7 @@ export const ConfigProvider = ({
     ...Object.fromEntries(
       DEEP_OBJECT_KEYS.map(key => [
         key,
+        // @ts-expect-error -- key has always object value
         { ...DEFAULT_THEME[key], ...themeConfig[key] }
       ])
     )
