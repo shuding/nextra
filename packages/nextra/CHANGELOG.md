@@ -1,5 +1,11 @@
 # nextra
 
+## 2.0.0-beta.21
+
+### Patch Changes
+
+- 568282e: fix broken build `SyntaxError: Unexpected token '}'`
+
 ## 2.0.0-beta.20
 
 ### Patch Changes
