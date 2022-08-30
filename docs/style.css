@@ -11,3 +11,10 @@
   text-decoration-thickness: from-font;
   color: hsl(var(--nextra-primary-hue) 100% 50% / var(--tw-text-opacity));
 }
+
+figurecaption {
+  font-size: 0.85rem;
+  line-height: 1.5rem;
+  display: block;
+  text-align: center;
+}

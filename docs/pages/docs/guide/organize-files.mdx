@@ -1,1 +1,89 @@
 # Organize Files
+
+Nextra first collects all your Markdown files and configurations from the `pages` directory, and then generates the “page map information” of your entire site, to render things such as the _navigation bar_ and _sidebar_ below:
+
+<figure>
+  ![](../../../public/assets/routing@1x.png)
+  <figurecaption>
+    Example: [Nextra Docs Theme](/docs/docs-theme) has sidebar and navbar
+    generated automatically from Markdown files.
+  </figurecaption>
+</figure>
+
+## Default Behavior
+
+By default, the page map contains all `.md` and `.mdx` filenames and the directory structure, sorted alphabetically.
+Then, Nextra will use the [title](https://github.com/vercel/title) package to get formatted page names from filenames.
+
+For example if you have the following structure:
+
+```
+pages/
+  contact.md
+  index.mdx
+  about/
+    legal.md
+    index.mdx
+```
+
+The resolved page map will be (note that all names were sorted alphabetically):
+
+```js
+[
+  {
+    name: 'About',
+    children: [
+      { name: 'Index' },
+      { name: 'Legal' }
+    ]
+  },
+  { name: 'Contact' },
+  { name: 'Index' }
+]
+```
+
+And the global page map will be bundled to each page by Nextra. Then, configured theme will render the actual UI with that page map.
+
+## \_meta.json
+
+It’s very common to customize each page’s title, rather than just using the filename. For example it doesn’t make sense to have a page titled “Index”, but instead have a page titled “Home”.
+
+That’s where `_meta.json` comes in. You can have a `_meta.json` file in each directory, and it will be used to override the default configuration of each page:
+
+```
+pages/
+  _meta.json
+  contact.md
+  index.mdx
+  about/
+    _meta.json
+    legal.md
+    index.mdx
+```
+
+And you can put this in your `pages/_meta.json` file:
+
+```json filename="pages/_meta.json"
+{
+  "index": "My Homepage",
+  "contact": "Contact Us",
+  "about": "About Us"
+}
+```
+
+It tells Nextra the order of each page, and the correct title. Alternatively, you can do it with `title` and have other configurations in there as well:
+
+```json filename="pages/_meta.json"
+{
+  "index": "My Homepage",
+  "contact": "Contact Us",
+  "about": {
+    "title": "About Us",
+    "...extra configurations...": "..."
+  }
+}
+```
+
+The extra configurations are passed to the theme as additional information of each page. Check the corresponding theme documentation for more information:
+
+(todo)
