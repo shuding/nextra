@@ -40,15 +40,6 @@ export const collectMdx = async (
   }
 }
 
-const sortDate = (a: MdxFile, b: MdxFile): number => {
-  const aDate = a.frontMatter?.date
-  const bDate = b.frontMatter?.date
-  if (!aDate) return 1
-  if (!bDate) return -1
-
-  return new Date(bDate).getTime() - new Date(aDate).getTime()
-}
-
 export async function collectFiles(
   dir: string,
   route = '/',
@@ -101,9 +92,9 @@ export async function collectFiles(
 
   const items = (await Promise.all(promises)).filter(truthy)
 
-  const mdxPages = items
-    .filter((item): item is MdxFile => item.kind === 'MdxPage')
-    .sort(sortDate)
+  const mdxPages = items.filter(
+    (item): item is MdxFile => item.kind === 'MdxPage'
+  )
   const locales = mdxPages.map(item => item.locale)
 
   for (const locale of locales) {
