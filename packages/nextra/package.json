@@ -38,23 +38,11 @@
   "exports": {
     "./package.json": "./package.json",
     ".": "./dist/index.js",
-    "./context": {
-      "import": "./dist/context.js",
-      "types": "./dist/context.d.ts"
-    },
     "./data": {
-      "import": "./dist/ssg.js",
-      "types": "./dist/ssg.d.ts"
-    },
-    "./ssg": {
-      "import": "./dist/ssg.js",
+      "import": "./dist/ssg.mjs",
       "types": "./dist/ssg.d.ts"
     },
     "./loader": "./loader.js",
-    "./locales": {
-      "import": "./dist/locales.js",
-      "types": "./dist/locales.d.ts"
-    },
     "./icons": {
       "import": "./dist/icons/index.mjs",
       "types": "./dist/icons/index.d.ts"
