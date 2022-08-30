@@ -1,5 +1,7 @@
 # nextra-theme-blog
 
+## 2.0.0-beta.21
+
 ## 2.0.0-beta.20
 
 ### Patch Changes
