@@ -1,6 +1,5 @@
 import React, {
   createContext,
-  isValidElement,
   ReactElement,
   ReactNode,
   useContext,
@@ -9,7 +8,11 @@ import React, {
 import { PageOpts } from 'nextra'
 import { ThemeProvider } from 'next-themes'
 import { Context, DocsThemeConfig } from '../types'
-import { DEFAULT_THEME } from '../constants'
+import {
+  DEEP_OBJECT_KEYS,
+  DEFAULT_THEME,
+  LEGACY_CONFIG_OPTIONS
+} from '../constants'
 import { MenuProvider } from './menu'
 
 type Config = DocsThemeConfig &
@@ -25,44 +28,6 @@ const ConfigContext = createContext<Config>({
 })
 
 export const useConfig = () => useContext(ConfigContext)
-
-const DEEP_OBJECT_KEYS = Object.entries(DEFAULT_THEME)
-  .map(([key, value]) => {
-    const isObject =
-      value &&
-      typeof value === 'object' &&
-      !Array.isArray(value) &&
-      !isValidElement(value)
-    if (isObject) {
-      return key
-    }
-  })
-  .filter(Boolean)
-
-const LegacyOptions: Record<string, string> = {
-  projectLink: 'project.link',
-  projectLinkIcon: 'project.icon',
-  nextLinks: 'navigation.next',
-  prevLinks: 'navigation.prev',
-  defaultMenuCollapsed: 'sidebar.defaultMenuCollapsed',
-  footerText: 'footer.text',
-  footerEditLink: 'editLink.text',
-  floatTOC: 'toc.float',
-  feedbackLink: 'feedback.link',
-  feedbackLabels: 'feedback.labels',
-  customSearch: 'search.component',
-  searchPlaceholder: 'search.placeholder',
-  projectChatLink: 'projectChat.link',
-  projectChatLinkIcon: 'projectChat.icon',
-  sidebarSubtitle: 'sidebar.subtitle',
-  bannerKey: 'banner.key',
-  tocExtraContent: 'toc.extraContent',
-  unstable_searchResultEmpty: 'search.emptyResult',
-  notFoundLink: 'notFound.link',
-  notFoundLabels: 'notFound.labels',
-  serverSideErrorLink: 'serverSideError.link',
-  serverSideErrorLabels: 'serverSideError.labels'
-}
 
 export const ConfigProvider = ({
   children,
@@ -95,7 +60,9 @@ export const ConfigProvider = ({
     const notice =
       '[nextra-theme-docs] ⚠️ You are using legacy theme config option'
 
-    for (const [legacyOption, newPath] of Object.entries(LegacyOptions)) {
+    for (const [legacyOption, newPath] of Object.entries(
+      LEGACY_CONFIG_OPTIONS
+    )) {
       if (legacyOption in themeConfig) {
         const [obj, key] = newPath.split('.')
         const renameTo = key ? `${obj}: { ${key}: ... }` : obj
