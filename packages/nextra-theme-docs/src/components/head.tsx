@@ -1,7 +1,8 @@
 import React, { ReactElement } from 'react'
 import NextHead from 'next/head'
 import { useTheme } from 'next-themes'
-import { renderString, useMounted } from '../utils'
+import { useMounted } from 'nextra/hooks'
+import { renderString } from '../utils'
 import { useConfig } from '../contexts'
 
 export function Head(): ReactElement {

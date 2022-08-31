@@ -29,6 +29,7 @@ export default defineConfig([
   {
     name: 'nextra-esm',
     entry: [
+      'src/hooks/index.ts',
       'src/loader.ts',
       'src/compile.ts',
       'src/icons/index.ts',

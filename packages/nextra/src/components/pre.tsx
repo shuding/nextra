@@ -1,9 +1,16 @@
-import React, { ComponentProps, ReactElement } from 'react'
+import React, {
+  ComponentProps,
+  ReactElement,
+  useCallback,
+  useState
+} from 'react'
 import { CopyToClipboard } from './copy-to-clipboard'
+import { Button } from './button'
+import { WordWrapIcon } from '../icons'
 
 export const Pre = ({
   children,
-  className,
+  className = '',
   ...props
 }: ComponentProps<'pre'> & {
   'data-filename'?: string
@@ -11,6 +18,19 @@ export const Pre = ({
 }): ReactElement => {
   const hasCopy = 'data-nextra-copy' in props
   const filename = props['data-filename']
+  const [, setWordWrap] = useState(false)
+
+  const toggleWordWrap = useCallback(() => {
+    setWordWrap(prev => {
+      const htmlEl = document.documentElement.dataset
+      if (prev) {
+        delete htmlEl.nextraWordWrap
+      } else {
+        htmlEl.nextraWordWrap = ''
+      }
+      return !prev
+    })
+  }, [])
 
   return (
     <>
@@ -23,18 +43,24 @@ export const Pre = ({
         className={[
           'bg-primary-700/5 mt-6 mb-4 overflow-x-auto rounded-xl font-medium subpixel-antialiased dark:bg-primary-300/10',
           filename ? 'pt-12 pb-4' : 'py-4',
-          className || ''
+          className
         ].join(' ')}
         {...props}
       >
         {children}
       </pre>
-      {hasCopy && (
-        <CopyToClipboard
-          value={children}
-          className={'opacity-0 transition-opacity absolute m-2 right-0 ' + (filename ? 'top-8' : 'top-0')}
-        />
-      )}
+      <div
+        className={[
+          'nextra-code-block-buttons opacity-0 transition-opacity',
+          'flex gap-1 absolute m-2 right-0',
+          filename ? 'top-8' : 'top-0'
+        ].join(' ')}
+      >
+        <Button onClick={toggleWordWrap} className="md:hidden">
+          <WordWrapIcon className="pointer-events-none w-4 h-4" />
+        </Button>
+        {hasCopy && <CopyToClipboard value={children} />}
+      </div>
     </>
   )
 }
