@@ -1,9 +1,4 @@
-import React, {
-  ComponentProps,
-  ReactElement,
-  useCallback,
-  useState
-} from 'react'
+import React, { ComponentProps, ReactElement, useCallback } from 'react'
 import { CopyToClipboard } from './copy-to-clipboard'
 import { Button } from './button'
 import { WordWrapIcon } from '../icons'
@@ -18,18 +13,15 @@ export const Pre = ({
 }): ReactElement => {
   const hasCopy = 'data-nextra-copy' in props
   const filename = props['data-filename']
-  const [, setWordWrap] = useState(false)
 
   const toggleWordWrap = useCallback(() => {
-    setWordWrap(prev => {
-      const htmlEl = document.documentElement.dataset
-      if (prev) {
-        delete htmlEl.nextraWordWrap
-      } else {
-        htmlEl.nextraWordWrap = ''
-      }
-      return !prev
-    })
+    const htmlDataset = document.documentElement.dataset
+    const hasWordWrap = 'nextraWordWrap' in htmlDataset
+    if (hasWordWrap) {
+      delete htmlDataset.nextraWordWrap
+    } else {
+      htmlDataset.nextraWordWrap = ''
+    }
   }, [])
 
   return (
@@ -59,7 +51,9 @@ export const Pre = ({
         <Button onClick={toggleWordWrap} className="md:hidden">
           <WordWrapIcon className="pointer-events-none w-4 h-4" />
         </Button>
-        {hasCopy && <CopyToClipboard value={children} />}
+        {hasCopy && (
+          <CopyToClipboard value={children} className="nextra-copy-button" />
+        )}
       </div>
     </>
   )
