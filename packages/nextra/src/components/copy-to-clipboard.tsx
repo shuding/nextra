@@ -12,7 +12,7 @@ import { Button } from './button'
 
 export const CopyToClipboard = ({
   value,
-  className = ''
+  className
 }: {
   value: ReactNode
   className?: string
@@ -47,10 +47,7 @@ export const CopyToClipboard = ({
   const IconToUse = isCopied ? CheckIcon : CopyIcon
 
   return (
-    <Button
-      onClick={handleClick}
-      className={['nextra-copy-button transition-colors', className].join(' ')}
-    >
+    <Button onClick={handleClick} className={className}>
       <IconToUse className="pointer-events-none h-4 w-4" />
     </Button>
   )
