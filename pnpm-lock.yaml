@@ -138,7 +138,6 @@ importers:
       gray-matter: ^4.0.3
       next: ^12.2.4
       react: ^18.2.0
-      react-children-utilities: ^2.8.0
       react-dom: ^18.2.0
       rehype-mdx-title: ^1.0.0
       rehype-pretty-code: 0.2.4
@@ -153,7 +152,6 @@ importers:
       github-slugger: 1.4.0
       graceful-fs: 4.2.10
       gray-matter: 4.0.3
-      react-children-utilities: 2.8.0_react@18.2.0
       rehype-mdx-title: 1.0.0
       rehype-pretty-code: 0.2.4_shiki@0.10.1
       remark-gfm: 3.0.1
@@ -6578,7 +6576,7 @@ packages:
     resolution: {directory: packages/nextra-theme-blog, type: directory}
     id: file:packages/nextra-theme-blog
     name: nextra-theme-blog
-    version: 2.0.0-beta.20
+    version: 2.0.0-beta.21
     peerDependencies:
       next: '>=9.5.3'
       react: '>=16.13.1'
@@ -6599,7 +6597,7 @@ packages:
     resolution: {directory: packages/nextra-theme-docs, type: directory}
     id: file:packages/nextra-theme-docs
     name: nextra-theme-docs
-    version: 2.0.0-beta.20
+    version: 2.0.0-beta.21
     peerDependencies:
       next: '>=9.5.3'
       react: '>=16.13.1'
@@ -6628,7 +6626,7 @@ packages:
     resolution: {directory: packages/nextra, type: directory}
     id: file:packages/nextra
     name: nextra
-    version: 2.0.0-beta.20
+    version: 2.0.0-beta.21
     peerDependencies:
       next: '>=9.5.3'
       react: '>=16.13.1'

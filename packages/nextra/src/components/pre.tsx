@@ -6,14 +6,13 @@ import { WordWrapIcon } from '../icons'
 export const Pre = ({
   children,
   className = '',
+  value,
+  filename,
   ...props
 }: ComponentProps<'pre'> & {
-  'data-filename'?: string
-  'data-nextra-copy'?: ''
+  filename?: string
+  value?: string
 }): ReactElement => {
-  const hasCopy = 'data-nextra-copy' in props
-  const filename = props['data-filename']
-
   const toggleWordWrap = useCallback(() => {
     const htmlDataset = document.documentElement.dataset
     const hasWordWrap = 'nextraWordWrap' in htmlDataset
@@ -43,7 +42,7 @@ export const Pre = ({
       </pre>
       <div
         className={[
-          'nextra-code-block-buttons opacity-0 transition-opacity',
+          'nextra-code-block-buttons opacity-0 transition-opacity [div:hover>&]:opacity-100',
           'flex gap-1 absolute m-2 right-0',
           filename ? 'top-8' : 'top-0'
         ].join(' ')}
@@ -51,8 +50,8 @@ export const Pre = ({
         <Button onClick={toggleWordWrap} className="md:hidden">
           <WordWrapIcon className="pointer-events-none w-4 h-4" />
         </Button>
-        {hasCopy && (
-          <CopyToClipboard value={children} className="nextra-copy-button" />
+        {value && (
+          <CopyToClipboard value={value} className="nextra-copy-button" />
         )}
       </div>
     </>
