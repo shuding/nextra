@@ -2,7 +2,7 @@
 import React from 'react'
 import { DocsThemeConfig, PageTheme } from './types'
 import { useRouter } from 'next/router'
-import { Anchor, Flexsearch, Footer, TOC } from './components'
+import { Anchor, Flexsearch, Footer, Navbar, TOC } from './components'
 import { DiscordIcon, GitHubIcon } from 'nextra/icons'
 import { MatchSorterSearch } from './components/match-sorter-search'
 import { useConfig } from './contexts'
@@ -74,6 +74,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
       <meta name="apple-mobile-web-app-title" content="Nextra" />
     </>
   ),
+  header: Navbar,
   i18n: [],
   logo: (
     <>

@@ -203,9 +203,11 @@ const InnerLayout = ({
     >
       <Head />
       <Banner />
-      {themeContext.navbar ? (
-        <Navbar flatDirectories={flatDirectories} items={topLevelNavbarItems} />
-      ) : null}
+      {themeContext.navbar &&
+        renderComponent(config.header, {
+          flatDirectories,
+          items: topLevelNavbarItems
+        })}
       <div
         className={cn(
           'mx-auto flex w-full flex-1 items-stretch',
@@ -284,5 +286,6 @@ export {
   NotFoundPage,
   ServerSideErrorPage,
   Tabs,
-  Tab
+  Tab,
+  Navbar
 } from './components'

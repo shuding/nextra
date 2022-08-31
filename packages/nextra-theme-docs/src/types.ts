@@ -4,6 +4,7 @@ import { ThemeProviderProps } from 'next-themes/dist/types'
 import { PageOpts } from 'nextra'
 import { Item } from './utils'
 import { TOCProps } from './components/toc'
+import { NavBarProps } from './components/navbar'
 
 export type RecursivePartial<T> = {
   [P in keyof T]?: T[P] extends (infer U)[]
@@ -45,6 +46,7 @@ export interface DocsThemeConfig {
   gitTimestamp: ReactNode | FC<{ timestamp: Date }>
   github: string
   head: ReactNode | FC
+  header: ReactNode | FC<NavBarProps>
   i18n: { direction?: string; locale: string; text: string }[]
   logo: ReactNode | FC
   navigation: {
