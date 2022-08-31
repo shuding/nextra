@@ -8,10 +8,11 @@ import React, {
 } from 'react'
 import { onlyText } from 'react-children-utilities'
 import { CheckIcon, CopyIcon } from '../icons'
+import { Button } from './button'
 
 export const CopyToClipboard = ({
   value,
-  className
+  className = ''
 }: {
   value: ReactNode
   className?: string
@@ -46,16 +47,11 @@ export const CopyToClipboard = ({
   const IconToUse = isCopied ? CheckIcon : CopyIcon
 
   return (
-    <button
+    <Button
       onClick={handleClick}
-      className={[
-        'nextra-copy-button rounded-md p-2 transition-colors',
-        'bg-primary-700/5 dark:bg-primary-300/10 border border-black/5 dark:border-white/10',
-        'text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50',
-        className || ''
-      ].join(' ')}
+      className={['nextra-copy-button transition-colors', className].join(' ')}
     >
       <IconToUse className="pointer-events-none h-4 w-4" />
-    </button>
+    </Button>
   )
 }

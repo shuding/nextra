@@ -32,6 +32,9 @@
       ],
       "components": [
         "./dist/components/index.d.ts"
+      ],
+      "hooks": [
+        "./dist/hooks/index.d.ts"
       ]
     }
   },
@@ -62,6 +65,10 @@
     "./components": {
       "import": "./dist/components/index.mjs",
       "types": "./dist/components/index.d.ts"
+    },
+    "./hooks": {
+      "import": "./dist/hooks/index.mjs",
+      "types": "./dist/hooks/index.d.ts"
     },
     "./*": {
       "import": "./dist/*.mjs",

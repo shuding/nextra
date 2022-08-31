@@ -1,6 +1,7 @@
 import React, { ReactElement } from 'react'
+import { useMounted } from 'nextra/hooks'
 import { useConfig } from '../contexts'
-import { renderComponent, useMounted, getGitIssueUrl } from '../utils'
+import { renderComponent, getGitIssueUrl } from '../utils'
 import { useRouter } from 'next/router'
 import { Anchor } from './anchor'
 
