@@ -151,7 +151,6 @@ export default MDXContent`.trimStart()
         locale: locale || DEFAULT_LOCALE,
         route,
         title,
-        frontMatter,
         structurizedData
       })
     }
