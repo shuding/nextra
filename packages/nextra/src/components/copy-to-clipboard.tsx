@@ -1,12 +1,10 @@
 import React, {
   ComponentProps,
   ReactElement,
-  ReactNode,
   useCallback,
   useEffect,
   useState
 } from 'react'
-import { onlyText } from 'react-children-utilities'
 import { CheckIcon, CopyIcon } from '../icons'
 import { Button } from './button'
 
@@ -14,7 +12,7 @@ export const CopyToClipboard = ({
   value,
   className
 }: {
-  value: ReactNode
+  value: string
   className?: string
 }): ReactElement => {
   const [isCopied, setCopied] = useState(false)
@@ -38,7 +36,7 @@ export const CopyToClipboard = ({
       console.error('Access to clipboard rejected!')
     }
     try {
-      await navigator.clipboard.writeText(onlyText(value))
+      await navigator.clipboard.writeText(JSON.parse(value))
     } catch {
       console.error('Failed to copy!')
     }

@@ -28,11 +28,6 @@ pre {
   contain: paint;
   code {
     @apply grid min-w-full rounded-none border-none !bg-transparent !p-0 text-sm leading-5 text-current dark:!bg-transparent;
-    /* code blocks without languages don't have children that have px-4 */
-    &:not([data-language]) {
-      @apply !px-4;
-    }
-
     .line {
       @apply border-l-2 border-transparent px-4;
     }
@@ -49,10 +44,6 @@ pre {
 
 [data-rehype-pretty-code-fragment] {
   @apply relative;
-
-  &:hover .nextra-code-block-buttons {
-    @apply opacity-100;
-  }
 }
 
 @supports (
