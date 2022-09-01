@@ -10,7 +10,7 @@ import { Item, PageItem, MenuItem, renderComponent, getFSRoute } from '../utils'
 import { Anchor } from './anchor'
 import { DEFAULT_LOCALE } from '../constants'
 
-interface NavBarProps {
+export type NavBarProps = {
   flatDirectories: Item[]
   items: (PageItem | MenuItem)[]
 }
