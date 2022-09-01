@@ -1,5 +1,12 @@
 # nextra-theme-docs
 
+## 2.0.0-beta.23
+
+### Patch Changes
+
+- c8129a2: fix theme switcher style
+- 2ec8564: add `DocsThemeConfig.navbar` config option for overriding navbar
+
 ## 2.0.0-beta.22
 
 ### Patch Changes
