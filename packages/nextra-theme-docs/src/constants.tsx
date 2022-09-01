@@ -96,6 +96,10 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     labels: 'bug',
     link: 'Submit an issue about broken link →'
   },
+  primaryHue: {
+    dark: 204,
+    light: 212
+  },
   project: {
     icon: (
       <>
@@ -164,7 +168,7 @@ export const DEEP_OBJECT_KEYS = Object.entries(DEFAULT_THEME)
       return key
     }
   })
-  .filter(Boolean) as string[]
+  .filter(Boolean) as (keyof DocsThemeConfig)[]
 
 export const LEGACY_CONFIG_OPTIONS: Record<string, string> = {
   bannerKey: 'banner.key',
@@ -188,7 +192,7 @@ export const LEGACY_CONFIG_OPTIONS: Record<string, string> = {
   serverSideErrorLink: 'serverSideError.link',
   sidebarSubtitle: 'sidebar.subtitle',
   tocExtraContent: 'toc.extraContent',
-  unstable_searchResultEmpty: 'search.emptyResult',
+  unstable_searchResultEmpty: 'search.emptyResult'
 }
 
 export const DEFAULT_PAGE_THEME: PageTheme = {

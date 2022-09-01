@@ -61,6 +61,10 @@ export interface DocsThemeConfig {
     labels: string
     link: ReactNode | FC
   }
+  primaryHue: number | {
+    dark: number
+    light: number
+  },
   project: {
     icon: ReactNode | FC
     link: string
