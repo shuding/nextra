@@ -27,6 +27,7 @@ export const useConfig = () => useContext(ConfigContext)
 
 const DEEP_OBJECT_KEYS = [
   'banner',
+  'editLink',
   'feedback',
   'footer',
   'navigation',
