@@ -20,7 +20,7 @@ import { SearchResult } from '../types'
 type SearchProps = {
   className?: string
   overlayClassName?: string
-  value?: string
+  value: string
   onChange: (newValue: string) => void
   loading?: boolean
   results: SearchResult[]
@@ -125,12 +125,11 @@ export function Search({
   }
 
   const mounted = useMounted()
-  const hasValue = Boolean(value === undefined ? input.current?.value : value)
-  const renderList = show && hasValue
+  const renderList = show && Boolean(value)
 
   const icon = (
     <Transition
-      show={mounted && (!show || hasValue)}
+      show={mounted && (!show || Boolean(value))}
       as={React.Fragment}
       enter="transition-opacity"
       enterFrom="opacity-0"
@@ -146,16 +145,16 @@ export function Search({
           'border dark:bg-dark/50 dark:border-gray-100/20',
           'contrast-more:border-current contrast-more:text-current contrast-more:dark:border-current',
           'items-center gap-1 transition-opacity',
-          hasValue
+          value
             ? 'cursor-pointer hover:opacity-70 z-20 flex'
             : 'hidden sm:flex pointer-events-none'
         )}
-        title={hasValue ? 'Clear' : undefined}
+        title={value ? 'Clear' : undefined}
         onClick={() => {
           onChange('')
         }}
       >
-        {hasValue
+        {value
           ? 'ESC'
           : mounted &&
             (navigator.userAgent.includes('Macintosh') ? (
