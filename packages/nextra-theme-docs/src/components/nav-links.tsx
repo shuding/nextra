@@ -11,7 +11,7 @@ interface NavLinkProps {
 }
 
 const classes = {
-  link: 'max-w-[50%] gap-1 [word-break:break-word] flex items-center rounded py-4 text-base font-medium text-gray-600 transition-colors hover:text-primary-500 dark:text-gray-300 md:text-lg',
+  link: 'max-w-[50%] gap-1 [word-break:break-word] flex items-center py-4 text-base font-medium text-gray-600 transition-colors hover:text-primary-500 dark:text-gray-300 md:text-lg',
   icon: 'h-5 inline flex-shrink-0'
 }
 
@@ -26,7 +26,12 @@ export const NavLinks = ({
   if (!prev && !next) return null
 
   return (
-    <div className="nextra-navigation-links mb-8 flex items-center border-t pt-8 dark:border-neutral-800">
+    <div
+      className={cn(
+        'mb-8 flex items-center border-t pt-8 dark:border-neutral-800',
+        'contrast-more:border-neutral-400 dark:contrast-more:border-neutral-400'
+      )}
+    >
       {prev && (
         <Anchor
           href={prev.route}

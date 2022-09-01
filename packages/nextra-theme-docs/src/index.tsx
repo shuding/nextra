@@ -112,7 +112,7 @@ const Body = ({
 
   if (themeContext.layout === 'full') {
     return (
-      <article className="w-full justify-center overflow-x-hidden pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
+      <article className="min-h-[calc(100vh-4rem)] w-full overflow-x-hidden pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
         {body}
       </article>
     )
@@ -121,7 +121,7 @@ const Body = ({
   return (
     <article
       className={cn(
-        'flex w-full min-w-0 max-w-full justify-center pb-8 pr-[calc(env(safe-area-inset-right)-1.5rem)]',
+        'min-h-[calc(100vh-4rem)] w-full flex min-w-0 max-w-full justify-center pb-8 pr-[calc(env(safe-area-inset-right)-1.5rem)]',
         themeContext.typesetting === 'article' &&
           'nextra-body-typesetting-article'
       )}
@@ -164,17 +164,11 @@ const InnerLayout = ({
   const isRTL = localeConfig
     ? localeConfig.direction === 'rtl'
     : config.direction === 'rtl'
-  const direction = isRTL ? 'rtl' : 'ltr'
-
-  useEffect(() => {
-    if (typeof document === 'undefined') return
-    // needs for `ltr:/rtl:` modifiers inside `styles.css` file
-    document.documentElement.setAttribute('dir', direction)
-  }, [])
-
   const themeContext = { ...activeThemeContext, ...frontMatter }
-  const hideSidebar = !themeContext.sidebar || themeContext.layout === 'raw'
-  const asPopover = activeType === 'page' || hideSidebar
+  const hideSidebar =
+    !themeContext.sidebar ||
+    themeContext.layout === 'raw' ||
+    activeType === 'page'
 
   const tocClassName =
     'nextra-toc order-last hidden w-64 flex-shrink-0 xl:block'
@@ -196,10 +190,8 @@ const InnerLayout = ({
 
   return (
     <div
-      dir={direction}
-      className={cn('nextra-container main-container flex flex-col', {
-        'menu-active': menu
-      })}
+      dir={isRTL ? 'rtl' : 'ltr'}
+      className={cn('nextra-container transition-opacity', menu && 'opacity-80')}
     >
       <Head />
       <Banner />
@@ -220,7 +212,7 @@ const InnerLayout = ({
             flatDirectories={flatDirectories}
             fullDirectories={directories}
             headings={headings}
-            asPopover={asPopover}
+            asPopover={hideSidebar}
             includePlaceholder={themeContext.layout === 'default'}
           />
           {tocEl}
@@ -253,9 +245,8 @@ const InnerLayout = ({
           </Body>
         </ActiveAnchorProvider>
       </div>
-      {themeContext.footer
-        ? renderComponent(config.footer.component, { menu: asPopover })
-        : null}
+      {themeContext.footer &&
+        renderComponent(config.footer.component, { menu: hideSidebar })}
     </div>
   )
 }

@@ -180,7 +180,6 @@ export function Flexsearch({
         const content = doc.display || doc.content
         if (occurred[url + '@' + content]) continue
         occurred[url + '@' + content] = true
-
         results.push({
           _page_rk: i,
           _section_rk: j,
@@ -201,14 +200,13 @@ export function Flexsearch({
                 <HighlightMatches match={search} value={title} />
               </div>
               {content && (
-                <div className="excerpt mt-1 text-sm leading-[1.35rem] text-gray-600 dark:text-gray-400">
+                <div className="excerpt mt-1 text-sm leading-[1.35rem] text-gray-600 dark:text-gray-400 contrast-more:dark:text-gray-50">
                   <HighlightMatches match={search} value={content} />
                 </div>
               )}
             </>
           )
         })
-
         isFirstItemOfPage = false
       }
     }

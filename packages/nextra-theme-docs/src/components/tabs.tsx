@@ -54,8 +54,9 @@ export function Tabs({
                 disabled={disabled}
                 className={({ selected }) =>
                   cn(
+                    'rounded-t',
                     'text-md mr-2 p-2 font-medium leading-5 transition-colors',
-                    '-mb-0.5 select-none rounded-[1px] border-b-2 ring-offset-2 focus:outline-none focus-visible:ring',
+                    '-mb-0.5 select-none border-b-2',
                     selected
                       ? 'border-primary-500 text-primary-500'
                       : 'border-transparent text-gray-600 hover:border-gray-200 hover:text-black dark:text-gray-200 dark:hover:border-neutral-800 dark:hover:text-white',
@@ -77,14 +78,10 @@ export function Tabs({
 
 export function Tab({
   children,
-  className,
   ...props
 }: ComponentProps<'div'>): ReactElement {
   return (
-    <HeadlessTab.Panel
-      className={cn('focus:outline-none focus-visible:ring', className)}
-      {...props}
-    >
+    <HeadlessTab.Panel {...props} className="rounded">
       {children}
     </HeadlessTab.Panel>
   )

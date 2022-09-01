@@ -18,13 +18,14 @@ exports[`Page Process > pageMap en-US 1`] = `
         "404": {
           "theme": {
             "timestamp": false,
+            "typesetting": "article",
           },
           "type": "page",
         },
         "500": {
           "theme": {
-            "layout": "full",
             "timestamp": false,
+            "typesetting": "article",
           },
           "type": "page",
         },

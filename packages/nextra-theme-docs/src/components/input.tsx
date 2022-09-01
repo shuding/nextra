@@ -14,8 +14,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           'block w-full appearance-none rounded-lg px-3 py-2 transition-colors',
           'md:text-sm text-base leading-tight',
           'bg-black/[.03] dark:bg-gray-50/10',
-          'focus:bg-white focus:outline-none focus:ring-1 focus:ring-gray-200',
-          'dark:focus:bg-dark dark:focus:ring-gray-100/20',
+          'focus:bg-white dark:focus:bg-dark',
           'placeholder:text-gray-400 dark:placeholder:text-gray-500',
           'contrast-more:border contrast-more:border-current'
         )}

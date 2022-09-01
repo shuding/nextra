@@ -18,7 +18,7 @@ interface MenuProps {
 export function Select({
   options,
   selected,
-  position,
+  position = 'left',
   onChange
 }: MenuProps): ReactElement {
   return (
@@ -27,7 +27,7 @@ export function Select({
         <>
           <Listbox.Button
             className={cn(
-              'h-7 w-full cursor-pointer rounded-md px-2 text-left text-xs font-medium text-gray-600 transition-colors focus:outline-none dark:text-gray-400',
+              'h-7 w-full rounded-md px-2 text-left text-xs font-medium text-gray-600 transition-colors dark:text-gray-400',
               open
                 ? 'bg-gray-200 text-gray-900 dark:bg-primary-100/10 dark:text-gray-50'
                 : 'hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-primary-100/5 dark:hover:text-gray-50'
@@ -44,12 +44,11 @@ export function Select({
           >
             <Listbox.Options
               className={cn(
-                'absolute bottom-[130%] z-20 mt-1 max-h-64 min-w-full overflow-auto rounded-md bg-white py-1 text-sm shadow-lg ring-1 ring-black/5 focus:outline-none dark:bg-neutral-800 dark:ring-white/20',
-                position &&
-                  {
-                    left: 'rtl:right-0 ltr:left-0',
-                    right: 'ltr:right-0 rtl:left-0'
-                  }[position]
+                'absolute bottom-[130%] z-20 mt-1 max-h-64 min-w-full overflow-auto rounded-md bg-white py-1 text-sm shadow-lg dark:bg-neutral-800',
+                {
+                  left: 'rtl:right-0 ltr:left-0',
+                  right: 'ltr:right-0 rtl:left-0'
+                }[position]
               )}
             >
               {options.map(option => (
@@ -61,7 +60,7 @@ export function Select({
                       active
                         ? 'bg-primary-50 text-primary-500 dark:bg-primary-500/10'
                         : 'text-gray-800 dark:text-gray-100',
-                      'relative cursor-pointer select-none whitespace-nowrap py-1.5',
+                      'relative cursor-pointer whitespace-nowrap py-1.5',
                       'ltr:pl-3 ltr:pr-9 rtl:pr-3 rtl:pl-9'
                     )
                   }

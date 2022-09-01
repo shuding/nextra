@@ -194,7 +194,7 @@ const Summary = (props: ComponentProps<'summary'>): ReactElement => {
   return (
     <summary
       className={cn(
-        'list-none cursor-pointer rounded p-1 outline-none transition-colors hover:bg-gray-100 dark:hover:bg-neutral-800',
+        'list-none p-1 transition-colors hover:bg-gray-100 dark:hover:bg-neutral-800',
         "before:content-[''] before:inline-block before:transition-transform dark:before:invert",
         '[[open]>&]:before:rotate-90 rtl:before:rotate-180'
       )}
@@ -254,7 +254,7 @@ export const getComponents = ({
     a: props => (
       <A
         {...props}
-        className="ring-primary-500/30 focus:outline-none focus-visible:ring text-primary-500 underline decoration-from-font [text-underline-position:under]"
+        className="text-primary-500 underline decoration-from-font [text-underline-position:under]"
       />
     ),
     table: (props: ComponentProps<'table'>) => (

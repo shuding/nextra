@@ -1,6 +1,6 @@
 import React, {
-  ComponentProps,
   ReactElement,
+  KeyboardEvent,
   Fragment,
   useCallback,
   useState,
@@ -50,62 +50,59 @@ export function Search({
   }, [value])
 
   useEffect(() => {
-    const down = (e: KeyboardEvent) => {
-      if (
-        input.current &&
-        document.activeElement &&
-        !INPUTS.includes(document.activeElement.tagName.toLowerCase())
-      ) {
-        if (e.key === '/' || (e.key === 'k' && e.metaKey)) {
-          e.preventDefault()
-          input.current.focus()
-        } else if (e.key === 'Escape') {
-          setShow(false)
-          input.current.blur()
-        }
+    const down = (e: globalThis.KeyboardEvent): void => {
+      const tagName = document.activeElement?.tagName.toLowerCase()
+      if (!input.current || !tagName || INPUTS.includes(tagName)) return
+      if (e.key === '/' || (e.key === 'k' && e.metaKey)) {
+        e.preventDefault()
+        input.current.focus()
+      } else if (e.key === 'Escape') {
+        setShow(false)
+        input.current.blur()
       }
     }
 
     window.addEventListener('keydown', down)
-    return () => window.removeEventListener('keydown', down)
+    return () => {
+      window.removeEventListener('keydown', down)
+    }
   }, [])
 
-  const handleKeyDown = useCallback<
-    NonNullable<ComponentProps<'input'>['onKeyDown']>
-  >(
-    e => {
+  const handleKeyDown = useCallback(
+    function <T>(e: KeyboardEvent<T>) {
       switch (e.key) {
         case 'ArrowDown': {
-          e.preventDefault()
           if (active + 1 < results.length) {
-            setActive(active + 1)
-            const activeElement = ulRef.current?.querySelector(
+            const el = ulRef.current?.querySelector<HTMLAnchorElement>(
               `li:nth-of-type(${active + 2}) > a`
             )
-            activeElement?.scrollIntoView({
-              behavior: 'smooth',
-              block: 'nearest'
-            })
+            if (el) {
+              e.preventDefault()
+              handleActive({ currentTarget: el })
+              el.focus()
+            }
           }
           break
         }
         case 'ArrowUp': {
-          e.preventDefault()
           if (active - 1 >= 0) {
-            setActive(active - 1)
-            const activeElement = ulRef.current?.querySelector(
+            const el = ulRef.current?.querySelector<HTMLAnchorElement>(
               `li:nth-of-type(${active}) > a`
             )
-            activeElement?.scrollIntoView({
-              behavior: 'smooth',
-              block: 'nearest'
-            })
+            if (el) {
+              e.preventDefault()
+              handleActive({ currentTarget: el })
+              el.focus()
+            }
           }
           break
         }
         case 'Enter': {
-          router.push(results[active].route)
-          finishSearch()
+          const result = results[active]
+          if (result) {
+            router.push(result.route)
+            finishSearch()
+          }
           break
         }
         case 'Escape': {
@@ -169,19 +166,13 @@ export function Search({
     </Transition>
   )
 
-  const handleMouseMove = useCallback<
-    NonNullable<ComponentProps<'a'>['onMouseMove']>
-  >(e => {
-    const { index } = e.currentTarget.dataset
-    setActive(Number(index))
-  }, [])
-
-  const handleFocusAndBlur = useCallback<
-    NonNullable<ComponentProps<'input'>['onFocus']>
-  >(e => {
-    const isFocus = e.type === 'focus'
-    setShow(isFocus)
-  }, [])
+  const handleActive = useCallback(
+    (e: { currentTarget: { dataset: DOMStringMap } }) => {
+      const { index } = e.currentTarget.dataset
+      setActive(Number(index))
+    },
+    []
+  )
 
   return (
     <div className={cn('nextra-search relative md:w-64', className)}>
@@ -200,8 +191,6 @@ export function Search({
         type="search"
         placeholder={renderString(config.search.placeholder)}
         onKeyDown={handleKeyDown}
-        onFocus={handleFocusAndBlur}
-        onBlur={handleFocusAndBlur}
         suffix={icon}
       />
 
@@ -217,8 +206,7 @@ export function Search({
           <ul
             className={cn(
               // Using bg-white as background-color when the browser didn't support backdrop-filter
-              'bg-white text-gray-100 ring-1 ring-black/5',
-              'dark:bg-neutral-900 dark:ring-white/10',
+              'bg-white text-gray-100 dark:bg-neutral-900',
               'absolute top-full z-20 mt-2 overscroll-contain rounded-xl py-2.5 shadow-xl overflow-auto',
               'max-h-[min(calc(50vh-11rem-env(safe-area-inset-bottom)),400px)]',
               'md:max-h-[min(calc(100vh-5rem-env(safe-area-inset-bottom)),400px)]',
@@ -242,7 +230,7 @@ export function Search({
                   {prefix}
                   <li
                     className={cn(
-                      'mx-2.5 px-2.5 py-2 rounded-md break-words',
+                      'mx-2.5 rounded-md break-words',
                       'contrast-more:border',
                       i === active
                         ? 'bg-primary-500/10 text-primary-500 contrast-more:border-primary-500'
@@ -250,11 +238,13 @@ export function Search({
                     )}
                   >
                     <Anchor
-                      className="block scroll-m-12"
+                      className="block px-2.5 py-2 scroll-m-12"
                       href={route}
                       data-index={i}
-                      onMouseMove={handleMouseMove}
+                      onFocus={handleActive}
+                      onMouseMove={handleActive}
                       onClick={finishSearch}
+                      onKeyDown={handleKeyDown}
                     >
                       {children}
                     </Anchor>
