@@ -93,7 +93,7 @@ export const ConfigProvider = ({
 
   if (process.env.NODE_ENV === 'development') {
     const notice =
-      '[nextra-theme-docs] ⚠️ You are using legacy theme config option'
+      '[nextra-theme-docs] ⚠️  You are using legacy theme config option'
 
     for (const [legacyOption, newPath] of Object.entries(LegacyOptions)) {
       if (legacyOption in themeConfig) {
