@@ -47,7 +47,7 @@ pre {
 [data-rehype-pretty-code-fragment] {
   @apply relative;
 
-  &:hover > .nextra-copy-button {
+  &:hover .nextra-copy-button {
     @apply opacity-100;
   }
 }
@@ -58,8 +58,4 @@ pre {
   .nextra-copy-button {
     @apply backdrop-blur-md bg-opacity-[.85] dark:bg-opacity-80;
   }
-}
-
-.nextra-copy-button {
-  @apply border border-black/5 dark:border-white/10;
 }
