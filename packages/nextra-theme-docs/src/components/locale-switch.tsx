@@ -13,6 +13,7 @@ export function LocaleSwitch({ options }: LocaleSwitchProps): ReactElement {
   const selected = options.find(l => locale === l.locale)
   return (
     <Select
+      position="left"
       onChange={option => {
         const date = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000)
         document.cookie = `NEXT_LOCALE=${
