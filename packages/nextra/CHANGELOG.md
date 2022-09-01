@@ -1,5 +1,11 @@
 # nextra
 
+## 2.0.0-beta.22
+
+### Patch Changes
+
+- 8dab966: fix invisible copy button in code blocks
+
 ## 2.0.0-beta.21
 
 ### Patch Changes

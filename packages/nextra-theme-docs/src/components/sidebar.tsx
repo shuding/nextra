@@ -301,7 +301,7 @@ export function Sidebar({
     }
   }, [])
 
-  const hasMenu = !!(config.i18n || config.darkMode)
+  const hasMenu = !!(config.i18n.length || config.darkMode)
 
   return (
     <>
@@ -360,13 +360,18 @@ export function Sidebar({
             >
               <div className="flex gap-1 bg-white py-4 pb-4 dark:bg-dark justify-between">
                 {config.i18n.length > 0 && (
-                  <div className="relative">
+                  <div className="relative flex-1">
                     <LocaleSwitch options={config.i18n} />
                   </div>
                 )}
                 {config.darkMode ? (
-                  <div className="relative">
-                    <ThemeSwitch lite={!!config.i18n} />
+                  <div
+                    className={cn(
+                      'relative',
+                      config.i18n.length > 0 ? '' : 'flex-1'
+                    )}
+                  >
+                    <ThemeSwitch lite={config.i18n.length > 0} />
                   </div>
                 ) : null}
               </div>

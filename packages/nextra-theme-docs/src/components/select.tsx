@@ -18,7 +18,7 @@ interface MenuProps {
 export function Select({
   options,
   selected,
-  position = 'left',
+  position,
   onChange
 }: MenuProps): ReactElement {
   return (
@@ -45,10 +45,11 @@ export function Select({
             <Listbox.Options
               className={cn(
                 'absolute bottom-[130%] z-20 mt-1 max-h-64 min-w-full overflow-auto rounded-md bg-white py-1 text-sm shadow-lg ring-1 ring-black/5 focus:outline-none dark:bg-neutral-800 dark:ring-white/20',
-                {
-                  left: 'rtl:right-0 ltr:left-0',
-                  right: 'ltr:right-0 rtl:left-0'
-                }[position]
+                position &&
+                  {
+                    left: 'rtl:right-0 ltr:left-0',
+                    right: 'ltr:right-0 rtl:left-0'
+                  }[position]
               )}
             >
               {options.map(option => (
