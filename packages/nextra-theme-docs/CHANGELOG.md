@@ -1,5 +1,13 @@
 # nextra-theme-docs
 
+## 2.0.0-beta.22
+
+### Patch Changes
+
+- 77361da: fix ESC button when still stays after pressed ESC
+- fdfe4f8: fix covered theme switch popup when i18n is not setup
+- 873561b: scrollbar is toc should be same as in sidebar
+
 ## 2.0.0-beta.21
 
 ## 2.0.0-beta.20
