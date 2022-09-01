@@ -1,5 +1,11 @@
 # nextra
 
+## 2.0.0-beta.24
+
+### Patch Changes
+
+- a2bc427: compile `context.ts`, `ssg.ts` and `locales.ts` to esm
+
 ## 2.0.0-beta.23
 
 ## 2.0.0-beta.22
