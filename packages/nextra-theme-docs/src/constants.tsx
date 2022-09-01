@@ -74,7 +74,6 @@ export const DEFAULT_THEME: DocsThemeConfig = {
       <meta name="apple-mobile-web-app-title" content="Nextra" />
     </>
   ),
-  header: Navbar,
   i18n: [],
   logo: (
     <>
@@ -84,6 +83,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
       </span>
     </>
   ),
+  navbar: Navbar,
   navigation: {
     next: true,
     prev: true

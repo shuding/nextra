@@ -204,7 +204,7 @@ const InnerLayout = ({
       <Head />
       <Banner />
       {themeContext.navbar &&
-        renderComponent(config.header, {
+        renderComponent(config.navbar, {
           flatDirectories,
           items: topLevelNavbarItems
         })}

@@ -46,9 +46,9 @@ export interface DocsThemeConfig {
   gitTimestamp: ReactNode | FC<{ timestamp: Date }>
   github: string
   head: ReactNode | FC
-  header: ReactNode | FC<NavBarProps>
   i18n: { direction?: string; locale: string; text: string }[]
   logo: ReactNode | FC
+  navbar: ReactNode | FC<NavBarProps>
   navigation: {
     next: boolean
     prev: boolean
