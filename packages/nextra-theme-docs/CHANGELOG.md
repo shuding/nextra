@@ -1,5 +1,11 @@
 # nextra-theme-docs
 
+## 2.0.0-beta.24
+
+### Patch Changes
+
+- bc52178: fix `editLink` option was not merged with default config `editLink`
+
 ## 2.0.0-beta.23
 
 ### Patch Changes
