@@ -53,6 +53,8 @@ export function Head(): ReactElement {
       <style>{`
         :root {
           --nextra-primary-hue: ${lightHue}deg;
+          --nextra-navbar-height: 4rem;
+          --nextra-menu-height: 3.75rem;
         }
         
         .dark {

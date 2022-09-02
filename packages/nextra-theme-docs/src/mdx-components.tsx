@@ -258,7 +258,7 @@ export const getComponents = ({
       />
     ),
     table: (props: ComponentProps<'table'>) => (
-      <Table className="mt-6 first:mt-0 p-0" {...props} />
+      <Table className="nextra-scrollbar mt-6 first:mt-0 p-0" {...props} />
     ),
     p: (props: ComponentProps<'p'>) => (
       <p className="mt-6 first:mt-0 leading-7" {...props} />
