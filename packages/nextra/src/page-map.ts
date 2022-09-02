@@ -30,15 +30,13 @@ export function getPageMap({
     : META_FILENAME
 
   const pageMeta =
-    fileMap[`${metaPath}/${metaFilename}` as MetaJsonPath]?.meta?.[
-      pageItem.name
-    ]
+    fileMap[`${metaPath}/${metaFilename}` as MetaJsonPath].data[pageItem.name]
 
   return {
     pageMap: locale
       ? filterRouteLocale(pageMap, locale, defaultLocale)
       : pageMap,
-    title: normalizeMeta(pageMeta)?.title || pageItem.name,
+    title: normalizeMeta(pageMeta).title,
     route: pageItem.route
   }
 }

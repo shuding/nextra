@@ -1,8 +1,7 @@
 import { PageMapItem } from 'nextra'
-import getTitle from 'title'
-import { DEFAULT_PAGE_THEME, META_FILENAME } from '../constants'
+import { DEFAULT_PAGE_THEME } from '../constants'
 import { PageTheme } from '../types'
-import { MdxFile, MetaJsonFile } from 'nextra/src/types'
+import { Folder, MdxFile } from 'nextra/src/types'
 
 function extendMeta(
   meta: string | Record<string, any> = {},
@@ -88,16 +87,14 @@ export function normalizePages({
 }) {
   let _meta: Record<string, any> | undefined
   for (let item of list) {
-    if (item.name === META_FILENAME) {
-      item = item as MetaJsonFile
-
+    if (item.kind === 'Meta') {
       if (item.locale === locale) {
-        _meta = item.meta
+        _meta = item.data
         break
       }
       // fallback
       if (!_meta) {
-        _meta = item.meta
+        _meta = item.data
       }
     }
   }
@@ -139,9 +136,9 @@ export function normalizePages({
   // Normalize items based on files and _meta.json.
   const items = list
     .filter(
-      a =>
+      (a): a is MdxFile | Folder =>
         // not meta
-        a.name !== META_FILENAME &&
+        a.kind !== 'Meta' &&
         // not hidden routes
         !a.name.startsWith('_') &&
         // locale matches, or fallback to default locale
@@ -206,7 +203,7 @@ export function normalizePages({
 
     // Get the item's meta information.
     const extendedMeta = extendMeta(meta[a.name], fallbackMeta)
-    const { title, hidden, type = 'doc' } = extendedMeta
+    const { hidden, type = 'doc' } = extendedMeta
     const extendedPageThemeContext = {
       ...pageThemeContext,
       ...extendedMeta.theme
@@ -225,11 +222,12 @@ export function normalizePages({
         underCurrentDocsRoot: underCurrentDocsRoot || isCurrentDocsTree,
         pageThemeContext: extendedPageThemeContext
       })
+    const title = extendedMeta.title || (type !== 'separator' && a.name)
 
     const getItem = (): Item => ({
       ...a,
       type,
-      title: title || (type === 'separator' ? undefined : getTitle(a.name)),
+      ...(title && { title }),
       ...(hidden && { hidden }),
       ...(normalizedChildren && { children: [] })
     })

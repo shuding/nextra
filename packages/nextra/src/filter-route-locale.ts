@@ -1,5 +1,6 @@
-import type { MdxFile, MetaJsonFile, PageMapItem } from './types'
+import { PageMapItem } from './types'
 import { truthy } from './utils'
+import { META_FILENAME } from './constants'
 
 export default function filterRouteLocale(
   pageMap: PageMapItem[],
@@ -14,30 +15,26 @@ export default function filterRouteLocale(
   const fallbackPages: Record<string, PageMapItem | null> = Object.create(null)
 
   for (let page of pageMap) {
-    if ('children' in page && page.children) {
+    if (page.kind === 'Folder') {
       filteredPageMap.push({
         ...page,
         children: filterRouteLocale(page.children, locale, defaultLocale)
       })
       continue
     }
-    page = page as MdxFile | MetaJsonFile
     const localDoesMatch =
       (!page.locale && isDefaultLocale) || page.locale === locale
-
+    const name = page.kind === 'Meta' ? META_FILENAME : page.name
     if (localDoesMatch) {
-      fallbackPages[page.name] = null
+      fallbackPages[name] = null
       filteredPageMap.push(page)
     } else if (
-      fallbackPages[page.name] !== null &&
+      fallbackPages[name] !== null &&
       (!page.locale || page.locale === defaultLocale)
     ) {
-      fallbackPages[page.name] = page
+      fallbackPages[name] = page
     }
   }
 
-  return [
-    ...filteredPageMap,
-    ...Object.values(fallbackPages).filter(truthy)
-  ]
+  return [...filteredPageMap, ...Object.values(fallbackPages).filter(truthy)]
 }

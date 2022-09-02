@@ -42,20 +42,18 @@ export function addPage({
   locale,
   route,
   title,
-  frontMatter,
   structurizedData
 }: {
   locale: string
   route: string
   title: string
-  frontMatter: FrontMatter
   structurizedData: any
 }): void {
   const dataFilename = `nextra-data-${locale}.json`
 
   asset[locale] ||= initFromCache(dataFilename)
   asset[locale][route] = {
-    title: title || frontMatter.title,
+    title,
     data: structurizedData
   }
 

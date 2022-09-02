@@ -1,4 +1,3 @@
-import { META_FILENAME } from './constants'
 import { normalizeMeta } from './utils'
 import { MetaJsonFile, PageMapItem, Page } from './types'
 
@@ -24,18 +23,18 @@ function filter(
 } {
   let activeLevelPages: Page[] = []
   const items: Page[] = []
-  const meta =
-    pageMap.find((item): item is MetaJsonFile => item.name === META_FILENAME)
-      ?.meta || {}
+  const meta = pageMap.find(
+    (item): item is MetaJsonFile => item.kind === 'Meta'
+  )!.data
 
   for (const item of pageMap) {
-    if (item.name === META_FILENAME) continue
+    if (item.kind === 'Meta') continue
     const page = {
       ...item,
       meta: normalizeMeta(meta[item.name])
     } as Page
 
-    if ('children' in page && page.children) {
+    if (page.kind === 'Folder') {
       const filtered = filter(page.children, activeLevel)
       page.children = filtered.items
       if (filtered.activeLevelPages.length) {
