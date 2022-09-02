@@ -46,11 +46,15 @@ export const ConfigProvider = ({
     title: pageOpts.title,
     frontMatter: pageOpts.frontMatter,
     ...Object.fromEntries(
-      DEEP_OBJECT_KEYS.map(key => [
-        key,
-        // @ts-expect-error -- key has always object value
-        { ...DEFAULT_THEME[key], ...themeConfig[key] }
-      ])
+      (DEEP_OBJECT_KEYS).map(key =>
+        typeof themeConfig[key] === 'object'
+          ? [
+              key,
+              // @ts-expect-error -- key has always object value
+              { ...DEFAULT_THEME[key], ...themeConfig[key] }
+            ]
+          : []
+      )
     )
   }
 

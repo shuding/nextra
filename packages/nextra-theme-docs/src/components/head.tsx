@@ -13,6 +13,9 @@ export function Head(): ReactElement {
   // `head` can be either FC or ReactNode. We have to directly call it if it's a
   // FC because hooks like Next.js' `useRouter` aren't allowed inside NextHead.
   const head = typeof config.head === 'function' ? config.head({}) : config.head
+  const hue = config.primaryHue
+  const { dark: darkHue, light: lightHue } =
+    typeof hue === 'number' ? { dark: hue, light: hue } : hue
 
   return (
     <NextHead>
@@ -46,6 +49,15 @@ export function Head(): ReactElement {
         name="viewport"
         content="width=device-width, initial-scale=1.0, viewport-fit=cover"
       />
+      <style>{`
+        :root {
+          --nextra-primary-hue: ${lightHue}deg;
+        }
+        
+        .dark {
+          --nextra-primary-hue: ${darkHue}deg;
+        }
+      `}</style>
       {head}
     </NextHead>
   )
