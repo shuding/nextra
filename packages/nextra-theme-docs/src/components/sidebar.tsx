@@ -373,7 +373,7 @@ export function Sidebar({
                 'contrast-more:shadow-none contrast-more:dark:shadow-none contrast-more:border-neutral-400',
                 'h-[var(--nextra-menu-height)]',
                 'flex bg-white dark:bg-dark justify-between items-center',
-                'mx-3', // hide ring on focused sidebar links
+                'mx-3', // cover focused sidebar links with extra ring width
               )}
             >
               {config.i18n.length > 0 && <LocaleSwitch options={config.i18n} />}
