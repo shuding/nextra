@@ -1,8 +1,8 @@
 /* eslint sort-keys: error */
-import React from 'react'
+import React, { isValidElement } from 'react'
 import { DocsThemeConfig, PageTheme } from './types'
 import { useRouter } from 'next/router'
-import { Anchor, Flexsearch, Footer, TOC } from './components'
+import { Anchor, Flexsearch, Footer, Navbar, TOC } from './components'
 import { DiscordIcon, GitHubIcon } from 'nextra/icons'
 import { MatchSorterSearch } from './components/match-sorter-search'
 import { useConfig } from './contexts'
@@ -83,6 +83,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
       </span>
     </>
   ),
+  navbar: Navbar,
   navigation: {
     next: true,
     prev: true
@@ -94,6 +95,10 @@ export const DEFAULT_THEME: DocsThemeConfig = {
   notFound: {
     labels: 'bug',
     link: 'Submit an issue about broken link →'
+  },
+  primaryHue: {
+    dark: 204,
+    light: 212
   },
   project: {
     icon: (
@@ -150,6 +155,44 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     title: 'On This Page'
   },
   unstable_faviconGlyph: ''
+}
+
+export const DEEP_OBJECT_KEYS = Object.entries(DEFAULT_THEME)
+  .map(([key, value]) => {
+    const isObject =
+      value &&
+      typeof value === 'object' &&
+      !Array.isArray(value) &&
+      !isValidElement(value)
+    if (isObject) {
+      return key
+    }
+  })
+  .filter(Boolean) as (keyof DocsThemeConfig)[]
+
+export const LEGACY_CONFIG_OPTIONS: Record<string, string> = {
+  bannerKey: 'banner.key',
+  customSearch: 'search.component',
+  defaultMenuCollapsed: 'sidebar.defaultMenuCollapsed',
+  feedbackLabels: 'feedback.labels',
+  feedbackLink: 'feedback.link',
+  floatTOC: 'toc.float',
+  footerEditLink: 'editLink.text',
+  footerText: 'footer.text',
+  nextLinks: 'navigation.next',
+  notFoundLabels: 'notFound.labels',
+  notFoundLink: 'notFound.link',
+  prevLinks: 'navigation.prev',
+  projectChatLink: 'projectChat.link',
+  projectChatLinkIcon: 'projectChat.icon',
+  projectLink: 'project.link',
+  projectLinkIcon: 'project.icon',
+  searchPlaceholder: 'search.placeholder',
+  serverSideErrorLabels: 'serverSideError.labels',
+  serverSideErrorLink: 'serverSideError.link',
+  sidebarSubtitle: 'sidebar.subtitle',
+  tocExtraContent: 'toc.extraContent',
+  unstable_searchResultEmpty: 'search.emptyResult'
 }
 
 export const DEFAULT_PAGE_THEME: PageTheme = {

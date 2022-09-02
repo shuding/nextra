@@ -1275,6 +1275,12 @@ exports[`context > getAllPages() > should work 1`] = `
         "name": "raw-layout",
         "route": "/docs/raw-layout",
       },
+      {
+        "locale": "en-US",
+        "meta": undefined,
+        "name": "code-block-without-language",
+        "route": "/docs/code-block-without-language",
+      },
     ],
     "kind": "Folder",
     "meta": {
@@ -2979,6 +2985,12 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
     },
     "name": "raw-layout",
     "route": "/docs/raw-layout",
+  },
+  {
+    "locale": "en-US",
+    "meta": undefined,
+    "name": "code-block-without-language",
+    "route": "/docs/code-block-without-language",
   },
 ]
 `;

@@ -10,7 +10,7 @@ import { Item, PageItem, MenuItem, renderComponent, getFSRoute } from '../utils'
 import { Anchor } from './anchor'
 import { DEFAULT_LOCALE } from '../constants'
 
-interface NavBarProps {
+export type NavBarProps = {
   flatDirectories: Item[]
   items: (PageItem | MenuItem)[]
 }
@@ -80,7 +80,7 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
   return (
     <div className="nextra-nav-container sticky top-0 z-20 w-full bg-transparent">
       <div className="nextra-nav-container-blur pointer-events-none absolute h-full w-full bg-white dark:bg-dark" />
-      <nav className="mx-auto flex h-16 max-w-[90rem] items-center justify-end gap-2 pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
+      <nav className="mx-auto flex h-[var(--nextra-navbar-height)] max-w-[90rem] items-center justify-end gap-2 pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
         <Anchor
           href="/"
           className="flex ltr:mr-auto rtl:ml-auto items-center hover:opacity-75"

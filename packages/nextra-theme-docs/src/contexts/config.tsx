@@ -8,7 +8,11 @@ import React, {
 import { PageOpts } from 'nextra'
 import { ThemeProvider } from 'next-themes'
 import { Context, DocsThemeConfig } from '../types'
-import { DEFAULT_THEME } from '../constants'
+import {
+  DEEP_OBJECT_KEYS,
+  DEFAULT_THEME,
+  LEGACY_CONFIG_OPTIONS
+} from '../constants'
 import { MenuProvider } from './menu'
 
 type Config = DocsThemeConfig &
@@ -24,46 +28,6 @@ const ConfigContext = createContext<Config>({
 })
 
 export const useConfig = () => useContext(ConfigContext)
-
-const DEEP_OBJECT_KEYS = [
-  'banner',
-  'feedback',
-  'footer',
-  'navigation',
-  'nextThemes',
-  'notFound',
-  'project',
-  'projectChat',
-  'search',
-  'serverSideError',
-  'sidebar',
-  'toc'
-] as const
-
-const LegacyOptions: Record<string, string> = {
-  projectLink: 'project.link',
-  projectLinkIcon: 'project.icon',
-  nextLinks: 'navigation.next',
-  prevLinks: 'navigation.prev',
-  defaultMenuCollapsed: 'sidebar.defaultMenuCollapsed',
-  footerText: 'footer.text',
-  footerEditLink: 'editLink.text',
-  floatTOC: 'toc.float',
-  feedbackLink: 'feedback.link',
-  feedbackLabels: 'feedback.labels',
-  customSearch: 'search.component',
-  searchPlaceholder: 'search.placeholder',
-  projectChatLink: 'projectChat.link',
-  projectChatLinkIcon: 'projectChat.icon',
-  sidebarSubtitle: 'sidebar.subtitle',
-  bannerKey: 'banner.key',
-  tocExtraContent: 'toc.extraContent',
-  unstable_searchResultEmpty: 'search.emptyResult',
-  notFoundLink: 'notFound.link',
-  notFoundLabels: 'notFound.labels',
-  serverSideErrorLink: 'serverSideError.link',
-  serverSideErrorLabels: 'serverSideError.labels'
-}
 
 export const ConfigProvider = ({
   children,
@@ -82,10 +46,15 @@ export const ConfigProvider = ({
     title: pageOpts.title,
     frontMatter: pageOpts.frontMatter,
     ...Object.fromEntries(
-      DEEP_OBJECT_KEYS.map(key => [
-        key,
-        { ...DEFAULT_THEME[key], ...themeConfig[key] }
-      ])
+      (DEEP_OBJECT_KEYS).map(key =>
+        typeof themeConfig[key] === 'object'
+          ? [
+              key,
+              // @ts-expect-error -- key has always object value
+              { ...DEFAULT_THEME[key], ...themeConfig[key] }
+            ]
+          : []
+      )
     )
   }
 
@@ -93,9 +62,11 @@ export const ConfigProvider = ({
 
   if (process.env.NODE_ENV === 'development') {
     const notice =
-      '[nextra-theme-docs] ⚠️ You are using legacy theme config option'
+      '[nextra-theme-docs] ⚠️  You are using legacy theme config option'
 
-    for (const [legacyOption, newPath] of Object.entries(LegacyOptions)) {
+    for (const [legacyOption, newPath] of Object.entries(
+      LEGACY_CONFIG_OPTIONS
+    )) {
       if (legacyOption in themeConfig) {
         const [obj, key] = newPath.split('.')
         const renameTo = key ? `${obj}: { ${key}: ... }` : obj

@@ -1,5 +1,26 @@
 # nextra-theme-docs
 
+## 2.0.0-beta.24
+
+### Patch Changes
+
+- bc52178: fix `editLink` option was not merged with default config `editLink`
+
+## 2.0.0-beta.23
+
+### Patch Changes
+
+- c8129a2: fix theme switcher style
+- 2ec8564: add `DocsThemeConfig.navbar` config option for overriding navbar
+
+## 2.0.0-beta.22
+
+### Patch Changes
+
+- 77361da: fix ESC button when still stays after pressed ESC
+- fdfe4f8: fix covered theme switch popup when i18n is not setup
+- 873561b: scrollbar is toc should be same as in sidebar
+
 ## 2.0.0-beta.21
 
 ## 2.0.0-beta.20

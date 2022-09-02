@@ -55,7 +55,7 @@ export type PageMapItem = Folder | MdxFile | MetaJsonFile
 
 // PageMapItem without MetaJsonFile and with its meta from _meta.json
 export type Page = (MdxFile | Folder<Page>) & {
-  meta: Exclude<Meta, string>
+  meta?: Exclude<Meta, string>
 }
 
 export type Heading = MDASTHeading & {

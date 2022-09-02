@@ -203,9 +203,11 @@ const InnerLayout = ({
     >
       <Head />
       <Banner />
-      {themeContext.navbar ? (
-        <Navbar flatDirectories={flatDirectories} items={topLevelNavbarItems} />
-      ) : null}
+      {themeContext.navbar &&
+        renderComponent(config.navbar, {
+          flatDirectories,
+          items: topLevelNavbarItems
+        })}
       <div
         className={cn(
           'mx-auto flex w-full flex-1 items-stretch',
@@ -275,7 +277,8 @@ export default function Layout(props: any): ReactElement {
 
 type PartialDocsThemeConfig = RecursivePartial<DocsThemeConfig>
 
-export { useConfig, getComponents, PartialDocsThemeConfig as DocsThemeConfig }
+export { useConfig, PartialDocsThemeConfig as DocsThemeConfig }
+export { useMDXComponents } from '@mdx-js/react'
 export { useTheme } from 'next-themes'
 export {
   Bleed,
@@ -284,5 +287,6 @@ export {
   NotFoundPage,
   ServerSideErrorPage,
   Tabs,
-  Tab
+  Tab,
+  Navbar
 } from './components'

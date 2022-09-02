@@ -8,14 +8,6 @@
 @import './scrollbar.css';
 @import './typesetting-article.css';
 
-:root {
-  --nextra-primary-hue: 212deg;
-}
-
-.dark {
-  --nextra-primary-hue: 204deg;
-}
-
 html {
   @apply antialiased text-base;
   font-feature-settings: 'rlig' 1, 'calt' 1, 'ss01' 1, 'ss06' 1;

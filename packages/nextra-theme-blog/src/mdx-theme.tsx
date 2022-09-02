@@ -12,7 +12,7 @@ import React, {
 import { MDXProvider } from '@mdx-js/react'
 import Link from 'next/link'
 import { createPortal } from 'react-dom'
-import { Code, Pre, Td, Th, Tr } from 'nextra/components'
+import { Code, Pre, Table, Td, Th, Tr } from 'nextra/components'
 import { useBlogContext } from './blog-context'
 
 export const HeadingContext = createContext<
@@ -68,19 +68,17 @@ const components = {
   h5: createHeaderLink('h5'),
   h6: createHeaderLink('h6'),
   a: A,
-  pre({ children, ...props }: ComponentProps<'pre'>) {
-    return (
-      <div className="not-prose">
-        <Pre {...props}>{children}</Pre>
-      </div>
-    )
-  },
+  pre: ({ children, ...props }: ComponentProps<'pre'>) => (
+    <div className="not-prose">
+      <Pre {...props}>{children}</Pre>
+    </div>
+  ),
   tr: Tr,
   th: Th,
   td: Td,
-  table(props: ComponentProps<'table'>) {
-    return <table className="not-prose" {...props} />
-  },
+  table: (props: ComponentProps<'table'>) => (
+    <Table className="not-prose" {...props} />
+  ),
   code: Code
 }
 

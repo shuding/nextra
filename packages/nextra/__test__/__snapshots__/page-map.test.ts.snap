@@ -336,6 +336,11 @@ exports[`Page Process > pageMap en-US 1`] = `
         {
           "kind": "MdxPage",
           "locale": "en-US",
+          "name": "code-block-without-language",
+          "route": "/docs/code-block-without-language",
+        },
+        {
+          "locale": "en-US",
           "name": "conditional-fetching",
           "route": "/docs/conditional-fetching",
         },
@@ -837,6 +842,11 @@ exports[`Page Process > pageMap zh-CN 1`] = `
         },
         {
           "kind": "MdxPage",
+          "locale": "en-US",
+          "name": "code-block-without-language",
+          "route": "/docs/code-block-without-language",
+        },
+        {
           "locale": "en-US",
           "name": "raw-layout",
           "route": "/docs/raw-layout",

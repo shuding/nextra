@@ -32,6 +32,7 @@ export function MatchSorterSearch({
 
   return (
     <Search
+      value={search}
       onChange={setSearch}
       className={className}
       overlayClassName="w-full"

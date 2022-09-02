@@ -1,6 +1,6 @@
 {
   "name": "nextra",
-  "version": "2.0.0-beta.21",
+  "version": "2.0.0-beta.24",
   "description": "Next.js and MDX based site generator.",
   "files": [
     "dist/*",
@@ -32,29 +32,20 @@
       ],
       "components": [
         "./dist/components/index.d.ts"
+      ],
+      "hooks": [
+        "./dist/hooks/index.d.ts"
       ]
     }
   },
   "exports": {
     "./package.json": "./package.json",
     ".": "./dist/index.js",
-    "./context": {
-      "import": "./dist/context.js",
-      "types": "./dist/context.d.ts"
-    },
     "./data": {
-      "import": "./dist/ssg.js",
-      "types": "./dist/ssg.d.ts"
-    },
-    "./ssg": {
-      "import": "./dist/ssg.js",
+      "import": "./dist/ssg.mjs",
       "types": "./dist/ssg.d.ts"
     },
     "./loader": "./loader.js",
-    "./locales": {
-      "import": "./dist/locales.js",
-      "types": "./dist/locales.d.ts"
-    },
     "./icons": {
       "import": "./dist/icons/index.mjs",
       "types": "./dist/icons/index.d.ts"
@@ -62,6 +53,10 @@
     "./components": {
       "import": "./dist/components/index.mjs",
       "types": "./dist/components/index.d.ts"
+    },
+    "./hooks": {
+      "import": "./dist/hooks/index.mjs",
+      "types": "./dist/hooks/index.d.ts"
     },
     "./*": {
       "import": "./dist/*.mjs",
@@ -86,7 +81,6 @@
     "github-slugger": "^1.4.0",
     "graceful-fs": "^4.2.10",
     "gray-matter": "^4.0.3",
-    "react-children-utilities": "^2.8.0",
     "rehype-mdx-title": "^1.0.0",
     "rehype-pretty-code": "0.2.4",
     "remark-gfm": "^3.0.1",

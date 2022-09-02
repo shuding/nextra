@@ -66,16 +66,16 @@ export async function compileMdx(
     ].filter(truthy),
     rehypePlugins: [
       ...(mdxOptions.rehypePlugins || []),
-      [
-        parseMeta,
-        { defaultShowCopyCode: nextraOptions.unstable_defaultShowCopyCode }
-      ],
+      parseMeta,
       [
         rehypePrettyCode,
         { ...rehypePrettyCodeOptions, ...mdxOptions.rehypePrettyCodeOptions }
       ],
       [rehypeMdxTitle, { name: '__nextra_title__' }],
-      attachMeta
+      [
+        attachMeta,
+        { defaultShowCopyCode: nextraOptions.unstable_defaultShowCopyCode }
+      ]
     ]
   })
   try {

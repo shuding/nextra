@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useTheme } from 'next-themes'
 import { MoonIcon, SunIcon } from 'nextra/icons'
+import { useMounted } from 'nextra/hooks'
 
 export default function ThemeSwitch() {
   const { theme, setTheme, resolvedTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => setMounted(true), [])
+  const mounted = useMounted()
   const isDark = theme === 'dark' || resolvedTheme === 'dark'
 
   // @TODO: system theme
