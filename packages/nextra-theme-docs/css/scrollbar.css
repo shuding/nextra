@@ -1,41 +1,32 @@
 .nextra-scrollbar {
   scrollbar-gutter: stable;
   &::-webkit-scrollbar {
-    width: 6px;
+    @apply w-1.5 h-1.5;
   }
   &::-webkit-scrollbar-track {
-    margin-top: 20px;
-    margin-bottom: 16px;
-    background-color: transparent;
+    @apply bg-transparent my-5;
   }
   &::-webkit-scrollbar-thumb {
-    box-shadow: inset 0 0 0 5px rgba(128, 128, 128, 0);
-    border-radius: 20px;
+    @apply rounded-[20px];
   }
   &:hover::-webkit-scrollbar-thumb {
-    box-shadow: inset 0 0 0 5px rgba(128, 128, 128, 0.2);
-    &:hover {
-      box-shadow: inset 0 0 0 5px rgba(128, 128, 128, 0.4);
-    }
+    @apply shadow-[inset_0_0_0_5px_var(--tw-shadow-color)];
+    @apply shadow-neutral-500/20 hover:shadow-neutral-500/40;
   }
-}
 
-.nextra-sidebar-container.with-menu.nextra-scrollbar::-webkit-scrollbar-track {
-  margin-bottom: 76px;
-}
-
-@media (max-width: 767px) {
-  .nextra-container .nextra-scrollbar {
-    scrollbar-gutter: auto;
+  @media (max-width: 767px) {
+    .nextra-container & {
+      scrollbar-gutter: auto;
+    }
   }
 }
 
 /* Hide scrollbar */
 .no-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
 
   &::-webkit-scrollbar {
-    display: none; /* Chrome, Safari and Opera */
+    @apply hidden; /* Chrome, Safari and Opera */
   }
 }
