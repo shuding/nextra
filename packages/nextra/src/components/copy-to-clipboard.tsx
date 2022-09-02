@@ -1,19 +1,18 @@
 import React, {
   ComponentProps,
   ReactElement,
-  ReactNode,
   useCallback,
   useEffect,
   useState
 } from 'react'
-import { onlyText } from 'react-children-utilities'
 import { CheckIcon, CopyIcon } from '../icons'
+import { Button } from './button'
 
 export const CopyToClipboard = ({
   value,
   className
 }: {
-  value: ReactNode
+  value: string
   className?: string
 }): ReactElement => {
   const [isCopied, setCopied] = useState(false)
@@ -37,7 +36,7 @@ export const CopyToClipboard = ({
       console.error('Access to clipboard rejected!')
     }
     try {
-      await navigator.clipboard.writeText(onlyText(value))
+      await navigator.clipboard.writeText(JSON.parse(value))
     } catch {
       console.error('Failed to copy!')
     }
@@ -46,16 +45,8 @@ export const CopyToClipboard = ({
   const IconToUse = isCopied ? CheckIcon : CopyIcon
 
   return (
-    <button
-      onClick={handleClick}
-      className={[
-        'nextra-copy-button rounded-md p-2 transition-colors',
-        'bg-primary-700/5 dark:bg-primary-300/10 border border-black/5 dark:border-white/10',
-        'text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50',
-        className || ''
-      ].join(' ')}
-    >
+    <Button onClick={handleClick} className={className}>
       <IconToUse className="pointer-events-none h-4 w-4" />
-    </button>
+    </Button>
   )
 }

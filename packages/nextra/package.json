@@ -32,6 +32,9 @@
       ],
       "components": [
         "./dist/components/index.d.ts"
+      ],
+      "hooks": [
+        "./dist/hooks/index.d.ts"
       ]
     }
   },
@@ -50,6 +53,10 @@
     "./components": {
       "import": "./dist/components/index.mjs",
       "types": "./dist/components/index.d.ts"
+    },
+    "./hooks": {
+      "import": "./dist/hooks/index.mjs",
+      "types": "./dist/hooks/index.d.ts"
     },
     "./*": {
       "import": "./dist/*.mjs",
@@ -74,7 +81,6 @@
     "github-slugger": "^1.4.0",
     "graceful-fs": "^4.2.10",
     "gray-matter": "^4.0.3",
-    "react-children-utilities": "^2.8.0",
     "rehype-mdx-title": "^1.0.0",
     "rehype-pretty-code": "0.2.4",
     "remark-gfm": "^3.0.1",
