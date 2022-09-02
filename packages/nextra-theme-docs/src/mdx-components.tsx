@@ -194,7 +194,7 @@ const Summary = (props: ComponentProps<'summary'>): ReactElement => {
   return (
     <summary
       className={cn(
-        'list-none p-1 transition-colors hover:bg-gray-100 dark:hover:bg-neutral-800',
+        'list-none cursor-pointer p-1 transition-colors hover:bg-gray-100 dark:hover:bg-neutral-800',
         "before:content-[''] before:inline-block before:transition-transform dark:before:invert",
         '[[open]>&]:before:rotate-90 rtl:before:rotate-180'
       )}
