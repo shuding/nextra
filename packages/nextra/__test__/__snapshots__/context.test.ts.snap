@@ -1276,8 +1276,11 @@ exports[`context > getAllPages() > should work 1`] = `
         "route": "/docs/raw-layout",
       },
       {
+        "kind": "MdxPage",
         "locale": "en-US",
-        "meta": undefined,
+        "meta": {
+          "title": "code-block-without-language",
+        },
         "name": "code-block-without-language",
         "route": "/docs/code-block-without-language",
       },
@@ -2987,8 +2990,11 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
     "route": "/docs/raw-layout",
   },
   {
+    "kind": "MdxPage",
     "locale": "en-US",
-    "meta": undefined,
+    "meta": {
+      "title": "code-block-without-language",
+    },
     "name": "code-block-without-language",
     "route": "/docs/code-block-without-language",
   },

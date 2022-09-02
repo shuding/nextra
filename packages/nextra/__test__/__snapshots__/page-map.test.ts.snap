@@ -196,6 +196,7 @@ exports[`Page Process > pageMap en-US 1`] = `
               },
               "title": "Change Log",
             },
+            "code-block-without-language": "code-block-without-language",
             "conditional-fetching": "Conditional Data Fetching",
             "data-fetching": "Data Fetching",
             "error-handling": {
@@ -340,6 +341,7 @@ exports[`Page Process > pageMap en-US 1`] = `
           "route": "/docs/code-block-without-language",
         },
         {
+          "kind": "MdxPage",
           "locale": "en-US",
           "name": "conditional-fetching",
           "route": "/docs/conditional-fetching",
@@ -847,6 +849,7 @@ exports[`Page Process > pageMap zh-CN 1`] = `
           "route": "/docs/code-block-without-language",
         },
         {
+          "kind": "MdxPage",
           "locale": "en-US",
           "name": "raw-layout",
           "route": "/docs/raw-layout",
