@@ -312,8 +312,12 @@ export function Sidebar({
         className={cn(
           'nextra-sidebar-container nextra-scrollbar fixed top-16 z-[15] h-[calc(100vh-4rem)] w-full flex-shrink-0 self-start overflow-y-auto md:sticky md:w-64',
           asPopover ? 'md:hidden' : 'md:block',
-          hasMenu && 'with-menu',
-          { open: menu }
+          '[&::-webkit-scrollbar-track]:mt-[var(--nextra-navbar-height)] md:[&::-webkit-scrollbar-track]:mt-5',
+          {
+            open: menu,
+            '[&::-webkit-scrollbar-track]:mb-[var(--nextra-menu-height)]':
+              hasMenu
+          }
         )}
         ref={containerRef}
       >
@@ -355,26 +359,26 @@ export function Sidebar({
             <div
               className={cn(
                 'sticky bottom-0 mx-4 border-t shadow-[0_-12px_16px_#fff] dark:border-neutral-800 dark:shadow-[0_-12px_16px_#111]',
-                'contrast-more:shadow-none contrast-more:dark:shadow-none contrast-more:border-neutral-400'
+                'contrast-more:shadow-none contrast-more:dark:shadow-none contrast-more:border-neutral-400',
+                'h-[var(--nextra-menu-height)]',
+                'flex bg-white dark:bg-dark justify-between items-center'
               )}
             >
-              <div className="flex gap-1 bg-white py-4 pb-4 dark:bg-dark justify-between">
-                {config.i18n.length > 0 && (
-                  <div className="relative flex-1">
-                    <LocaleSwitch options={config.i18n} />
-                  </div>
-                )}
-                {config.darkMode ? (
-                  <div
-                    className={cn(
-                      'relative',
-                      config.i18n.length > 0 ? '' : 'flex-1'
-                    )}
-                  >
-                    <ThemeSwitch lite={config.i18n.length > 0} />
-                  </div>
-                ) : null}
-              </div>
+              {config.i18n.length > 0 && (
+                <div className="relative flex-1">
+                  <LocaleSwitch options={config.i18n} />
+                </div>
+              )}
+              {config.darkMode ? (
+                <div
+                  className={cn(
+                    'relative',
+                    config.i18n.length > 0 ? '' : 'flex-1'
+                  )}
+                >
+                  <ThemeSwitch lite={config.i18n.length > 0} />
+                </div>
+              ) : null}
             </div>
           )}
         </div>
