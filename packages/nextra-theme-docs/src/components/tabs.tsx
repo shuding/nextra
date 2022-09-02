@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from 'react'
+import React, { ComponentProps, ReactElement, ReactNode } from 'react'
 import cn from 'clsx'
 import { Tab as HeadlessTab } from '@headlessui/react'
 
@@ -75,9 +75,16 @@ export function Tabs({
   )
 }
 
-export function Tab({ children }: { children: ReactNode }): ReactElement {
+export function Tab({
+  children,
+  className,
+  ...props
+}: ComponentProps<'div'>): ReactElement {
   return (
-    <HeadlessTab.Panel className="focus:outline-none focus-visible:ring">
+    <HeadlessTab.Panel
+      className={cn('focus:outline-none focus-visible:ring', className)}
+      {...props}
+    >
       {children}
     </HeadlessTab.Panel>
   )
