@@ -11,6 +11,7 @@ import Slugger from 'github-slugger'
 import { useRouter } from 'next/router'
 import { Heading } from 'nextra'
 import scrollIntoView from 'scroll-into-view-if-needed'
+import { Details, Summary } from 'nextra/components'
 
 import { useConfig, useMenu, useActiveAnchor } from '../contexts'
 import {
@@ -70,7 +71,7 @@ function FolderImpl({
 
   const { setMenu } = useMenu()
   const config = useConfig()
-  const open =
+  const isOpen =
     TreeState[item.route] !== undefined
       ? TreeState[item.route]
       : active || activeRouteInside || !config.sidebar.defaultMenuCollapsed
@@ -101,61 +102,60 @@ function FolderImpl({
     })
   }
   return (
-    <li className={cn({ open, active })}>
-      <Anchor
-        href={
-          (item as Item).withIndexPage
-            ? item.route
-            : item.children?.find(child => child.route)?.route
-        }
+    <Details
+      className={cn({ open: isOpen, active })}
+      open={isOpen}
+      variant="raw"
+    >
+      <Summary
+        variant="raw"
         className={cn(
-          'gap-2 items-center justify-between',
-          classes.link,
+          'flex-row-reverse items-center',
           active ? classes.active : classes.inactive
         )}
-        onClick={e => {
-          const clickedToggleIcon = ['svg', 'path'].includes(
-            (e.target as HTMLElement).tagName.toLowerCase()
-          )
-          if (clickedToggleIcon) {
-            e.preventDefault()
-          }
-          if ((item as Item).withIndexPage) {
+        iconProps={{
+          className:
+            'rounded-sm hover:bg-gray-800/5 dark:hover:bg-gray-100/5 ltr:mr-2 rtl:ml-2',
+          pathClassName: 'stroke-2',
+          onClick() {
+            if (!(item as Item).withIndexPage) {
+              if (active) return
+              TreeState[item.route] = !isOpen
+              rerender({})
+              return
+            }
             // If it's focused, we toggle it. Otherwise, always open it.
-            if (active || clickedToggleIcon) {
-              TreeState[item.route] = !open
+            if (active) {
+              TreeState[item.route] = !isOpen
             } else {
               TreeState[item.route] = true
               setMenu(false)
             }
             rerender({})
-            return
           }
-          if (active) return
-          TreeState[item.route] = !open
-          rerender({})
         }}
       >
-        {item.title}
-        <ArrowRightIcon
-          className="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"
-          pathClassName={cn(
-            'origin-center transition-transform rtl:-rotate-180',
-            open && 'ltr:rotate-90 rtl:rotate-[-270deg]'
-          )}
+        <Anchor
+          href={
+            (item as Item).withIndexPage
+              ? item.route
+              : item.children?.find(child => child.route)?.route
+          }
+          className={cn(classes.link, 'grow')}
+          tabIndex={-1}
+        >
+          {item.title}
+        </Anchor>
+      </Summary>
+      {item.children && (
+        <Menu
+          className={cn(classes.border, 'ltr:ml-1 rtl:mr-1')}
+          directories={item.children}
+          base={item.route}
+          anchors={anchors}
         />
-      </Anchor>
-      <Collapse open={open}>
-        {Array.isArray(item.children) ? (
-          <Menu
-            className={cn(classes.border, 'ltr:ml-1 rtl:mr-1')}
-            directories={item.children}
-            base={item.route}
-            anchors={anchors}
-          />
-        ) : null}
-      </Collapse>
-    </li>
+      )}
+    </Details>
   )
 }
 
@@ -314,6 +314,8 @@ export function Sidebar({
 
   const hasMenu = !!(config.i18n.length || config.darkMode)
 
+  const [showSidebar, setSidebar] = useState(true)
+
   return (
     <>
       {includePlaceholder && asPopover ? (
@@ -353,14 +355,16 @@ export function Sidebar({
                 />
               </>
             ) : (
-              <Menu
-                className="hidden md:flex"
-                // The sidebar menu, shows only the docs directories.
-                directories={docsDirectories}
-                // When the viewport size is larger than `md`, hide the anchors in
-                // the sidebar when `floatTOC` is enabled.
-                anchors={config.toc.float ? [] : anchors}
-              />
+              <Collapse open={showSidebar} vertical={false}>
+                <Menu
+                  className="hidden md:flex"
+                  // The sidebar menu, shows only the docs directories.
+                  directories={docsDirectories}
+                  // When the viewport size is larger than `md`, hide the anchors in
+                  // the sidebar when `floatTOC` is enabled.
+                  anchors={config.toc.float ? [] : anchors}
+                />
+              </Collapse>
             )}
           </div>
 
