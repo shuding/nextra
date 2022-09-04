@@ -39,9 +39,9 @@ export function I18n() {
     <div
       style={{ display: 'flex', flexDirection: 'column' }}
       className="menu bg-white dark:bg-neutral-800 dark:ring-white dark:ring-opacity-20 shadow-lg rounded-md py-1 ring-1 ring-black ring-opacity-5 overflow-auto text-sm">
-      <span className={cn("cursor-default select-none relative py-1.5 px-4 whitespace-nowrap", active === 'en' ? 'text-primary-500 bg-primary-50 dark:bg-primary-500 dark:bg-opacity-10' : 'text-gray-800 dark:text-gray-100 ')} onPointerOver={() => setActive('en')}>English</span>
-      <span className={cn("cursor-default select-none relative py-1.5 px-4 whitespace-nowrap", active === 'de' ? 'text-primary-500 bg-primary-50 dark:bg-primary-500 dark:bg-opacity-10' : 'text-gray-800 dark:text-gray-100 ')} onPointerOver={() => setActive('de')}>Deutsch</span>
-      <span className={cn("cursor-default select-none relative py-1.5 px-4 whitespace-nowrap", active === 'ja' ? 'text-primary-500 bg-primary-50 dark:bg-primary-500 dark:bg-opacity-10' : 'text-gray-800 dark:text-gray-100 ')} onPointerOver={() => setActive('ja')}>日本語</span>
+      <span className={cn("cursor-default select-none relative py-1.5 px-4 whitespace-nowrap", active === 'en' ? 'text-primary-500 bg-primary-50 dark:bg-primary-500/10' : 'text-gray-800 dark:text-gray-100 ')} onPointerOver={() => setActive('en')}>English</span>
+      <span className={cn("cursor-default select-none relative py-1.5 px-4 whitespace-nowrap", active === 'de' ? 'text-primary-500 bg-primary-50 dark:bg-primary-500/10' : 'text-gray-800 dark:text-gray-100 ')} onPointerOver={() => setActive('de')}>Deutsch</span>
+      <span className={cn("cursor-default select-none relative py-1.5 px-4 whitespace-nowrap", active === 'ja' ? 'text-primary-500 bg-primary-50 dark:bg-primary-500/10' : 'text-gray-800 dark:text-gray-100 ')} onPointerOver={() => setActive('ja')}>日本語</span>
     </div>
   }/>
 }
@@ -198,7 +198,7 @@ export function I18n() {
           <h3>Organize pages intuitively, <br/>with file-system routing from Next.js.</h3>
         </Feature>
         <Feature>
-          <h3>MDX from anywhere.</h3>
+          <h3>Content from anywhere.</h3>
         </Feature>
         <Feature>
           <h3>Links and images are always <span style={{ fontWeight: 300 }}>optimized</span>.</h3>
@@ -219,13 +219,13 @@ export function I18n() {
         </Feature>
         <Feature large>
           <h3>Hybrid rendering, <br/>next generation.</h3>
-          <p>[SSG](https://nextjs.org/docs/basic-features/pages#static-generation-recommended), [SSR](https://nextjs.org/docs/basic-features/pages#server-side-rendering), and [ISR](https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration) are all supported. With Nextra, <br/>you can leverage the hybrid rendering power from Next.js <br/>with your Markdown content, in the page level.</p>
+          <p>[SSG](https://nextjs.org/docs/basic-features/pages#static-generation-recommended), [SSR](https://nextjs.org/docs/basic-features/pages#server-side-rendering), and [ISR](https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration) are all supported. With Nextra, <br/>you can leverage the hybrid rendering power from Next.js <br/>with your Markdown content.</p>
         </Feature>
       </Features>
     </div>
   </div>
 
-  <div className="content-container">
-    <p className="subtitle"><Link href="/docs"><a>Get started →</a></Link></p>
+  <div className="content-container" style={{ marginTop: '4rem', marginBottom: '4rem' }}>
+    <p className="subtitle"><Link href="/docs"><a>Documentation →</a></Link></p>
   </div>
 </div>

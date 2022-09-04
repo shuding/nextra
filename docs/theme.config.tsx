@@ -78,14 +78,23 @@ export default {
       />
     </>
   ),
-  banner:
-    '🚧 This is a work-in-progress docs for Nextra 2.0, content may be incomplete or inaccurate.',
-  search: true,
-  prevLinks: true,
-  nextLinks: true,
-  footer: true,
-  footerEditLink: 'Edit this page on GitHub',
-  footerText: `MIT ${new Date().getFullYear()} © Nextra.`,
-  floatTOC: true,
-  defaultMenuCollapsed: true
+  banner: {
+    text: '🚧 This is a work-in-progress docs for Nextra 2.0, content may be incomplete or inaccurate.'
+  },
+  navigation: {
+    prev: true,
+    next: true
+  },
+  editLink: {
+    text: 'Edit this page on GitHub'
+  },
+  footer: {
+    text: `MIT ${new Date().getFullYear()} © Nextra.`
+  },
+  toc: {
+    float: true
+  },
+  sidebar: {
+    defaultMenuCollapsed: true
+  }
 }

@@ -44,3 +44,16 @@
   font-weight: 600;
   align-items: flex-start;
 }
+
+:global(.dark) .card {
+  background-color: hsl(var(--nextra-primary-hue) 10% 12%/0.9);
+}
+:global(.dark) .card:hover {
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+:global(.dark) .card svg {
+  color: #ffffff66;
+}
+:global(.dark) .card:hover svg {
+  color: currentColor;
+}

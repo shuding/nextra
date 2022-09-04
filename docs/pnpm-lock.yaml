@@ -1,28 +1,29 @@
 lockfileVersion: 5.4
 
-specifiers:
-  '@types/node': ^18.7.8
-  clsx: ^1.2.1
-  next: ^12.2.3
-  nextra: 2.0.0-beta.18
-  nextra-theme-docs: 2.0.0-beta.18
-  prettier: ^2.7.1
-  react: ^17.0.2
-  react-dom: ^17.0.2
-  typescript: ^4.7.4
+importers:
 
-dependencies:
-  clsx: 1.2.1
-  next: 12.2.5_sfoxds7t5ydpegc3knd667wn6m
-  nextra: 2.0.0-beta.18_pzmtmsmkyiq4foirxc7gldcjme
-  nextra-theme-docs: 2.0.0-beta.18_pzmtmsmkyiq4foirxc7gldcjme
-  react: 17.0.2
-  react-dom: 17.0.2_react@17.0.2
-
-devDependencies:
-  '@types/node': 18.7.8
-  prettier: 2.7.1
-  typescript: 4.7.4
+  .:
+    specifiers:
+      '@types/node': ^18.7.8
+      clsx: ^1.2.1
+      next: ^12.2.3
+      nextra: 2.0.0-beta.24
+      nextra-theme-docs: 2.0.0-beta.24
+      prettier: ^2.7.1
+      react: ^17.0.2
+      react-dom: ^17.0.2
+      typescript: ^4.7.4
+    dependencies:
+      clsx: 1.2.1
+      next: 12.2.5_sfoxds7t5ydpegc3knd667wn6m
+      nextra: 2.0.0-beta.24_pzmtmsmkyiq4foirxc7gldcjme
+      nextra-theme-docs: 2.0.0-beta.24_pzmtmsmkyiq4foirxc7gldcjme
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+    devDependencies:
+      '@types/node': 18.7.8
+      prettier: 2.7.1
+      typescript: 4.7.4
 
 packages:
 
@@ -609,6 +610,13 @@ packages:
       source-map: 0.7.4
     dev: false
 
+  /estree-util-value-to-estree/1.3.0:
+    resolution: {integrity: sha512-Y+ughcF9jSUJvncXwqRageavjrNPAI+1M/L3BI3PyLp1nmgYTGUXU6t5z1Y7OWuThoDdhPME07bQU+d5LxdJqw==}
+    engines: {node: '>=12.0.0'}
+    dependencies:
+      is-plain-obj: 3.0.0
+    dev: false
+
   /estree-util-visit/1.2.0:
     resolution: {integrity: sha512-wdsoqhWueuJKsh5hqLw3j8lwFqNStm92VcwtAOAny8g/KS/l5Y8RISjR4k5W6skCj3Nirag/WUCMS0Nfy3sgsg==}
     dependencies:
@@ -745,6 +753,11 @@ packages:
 
   /is-hexadecimal/2.0.1:
     resolution: {integrity: sha512-DgZQp241c8oO6cA1SbTEWiXeoxV42vlcJxgH+B3hi1AiqqKruZR3ZGF8In3fj4+/y/7rHvlOZLZtgJ/4ttYGZg==}
+    dev: false
+
+  /is-plain-obj/3.0.0:
+    resolution: {integrity: sha512-gwsOE28k+23GP1B6vFl1oVh/WOzmawBrKwo5Ev6wMKzPkaXaCDIQKzLnvsA42DRlbVTWorkgTKIviAKCWkfUwA==}
+    engines: {node: '>=10'}
     dev: false
 
   /is-plain-obj/4.1.0:
@@ -1406,8 +1419,8 @@ packages:
       - babel-plugin-macros
     dev: false
 
-  /nextra-theme-docs/2.0.0-beta.18_pzmtmsmkyiq4foirxc7gldcjme:
-    resolution: {integrity: sha512-lvJ39ICR3R9/w1JjLTBVsP+1zxyC0DMz5DIWcLpGfwapZAqxj8fXFinA3XCRC5QCdzAbP6O+p4Miswl32wa1/w==}
+  /nextra-theme-docs/2.0.0-beta.24_pzmtmsmkyiq4foirxc7gldcjme:
+    resolution: {integrity: sha512-GK8cEtxHoFl/FJGOB0I22HdwzVZA2PG4ovZ287kTODmIxT5ies06T6pznZJWmMzGdo/DTpzBr3L/CPiRcpU51w==}
     peerDependencies:
       next: '>=9.5.3'
       react: '>=16.13.1'
@@ -1431,12 +1444,12 @@ packages:
       title: 3.5.2
     dev: false
 
-  /nextra/2.0.0-beta.18_pzmtmsmkyiq4foirxc7gldcjme:
-    resolution: {integrity: sha512-MmAQ4FAquEzIsEz0HDaGeuEHBXv6sHW3MCylZZ9OgIV/me+fOCX8zqsmKWOqW32CYGzK/B2mJOPkZ0PcD8gK7Q==}
+  /nextra/2.0.0-beta.24_pzmtmsmkyiq4foirxc7gldcjme:
+    resolution: {integrity: sha512-vGIHxc84yV0igLYwOvYTAZD5CkJkipMDU6Qm0mWfANb1QiI3WbAL/LRdHj5Jl1H9h3IZ/Hz3QAEmRhjR5cXQBA==}
     peerDependencies:
       next: '>=9.5.3'
       react: '>=16.13.1'
-      react-dom: '>=18.2.0'
+      react-dom: '>=16.13.1'
     dependencies:
       '@mdx-js/mdx': 2.1.3
       '@napi-rs/simple-git': 0.1.8
@@ -1445,10 +1458,12 @@ packages:
       gray-matter: 4.0.3
       next: 12.2.5_sfoxds7t5ydpegc3knd667wn6m
       react: 17.0.2
+      react-children-utilities: 2.8.0_react@17.0.2
       react-dom: 17.0.2_react@17.0.2
       rehype-mdx-title: 1.0.0
       rehype-pretty-code: 0.2.4_shiki@0.10.1
       remark-gfm: 3.0.1
+      remark-reading-time: 2.0.1
       shiki: 0.10.1
       slash: 3.0.0
     transitivePeerDependencies:
@@ -1532,6 +1547,14 @@ packages:
     resolution: {integrity: sha512-b/YwNhb8lk1Zz2+bXXpS/LK9OisiZZ1SNsSLxN1x2OXVEhW2Ckr/7mWE5vrC1ZTiJlD9g19jWszTmJsB+oEpFQ==}
     dev: false
 
+  /react-children-utilities/2.8.0_react@17.0.2:
+    resolution: {integrity: sha512-g42oRsZLrFJgCcIdK1lad1CWujNH4gh1Cp1lsMQpHWdDjWQ8gUlaBebgy2iXofyPEpfJ4T/xt4qWrvDkgVCCNg==}
+    peerDependencies:
+      react: 18 || 17 || 16 || 15
+    dependencies:
+      react: 17.0.2
+    dev: false
+
   /react-dom/17.0.2_react@17.0.2:
     resolution: {integrity: sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA==}
     peerDependencies:
@@ -1549,6 +1572,10 @@ packages:
     dependencies:
       loose-envify: 1.4.0
       object-assign: 4.1.1
+    dev: false
+
+  /reading-time/1.5.0:
+    resolution: {integrity: sha512-onYyVhBNr4CmAxFsKS7bz+uTLRakypIe4R+5A824vBSkQy/hB3fZepoVEf8OVAxzLvK+H/jm9TzpI3ETSm64Kg==}
     dev: false
 
   /regenerator-runtime/0.13.9:
@@ -1602,6 +1629,15 @@ packages:
       unified: 10.1.2
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /remark-reading-time/2.0.1:
+    resolution: {integrity: sha512-fy4BKy9SRhtYbEHvp6AItbRTnrhiDGbqLQTSYVbQPGuRCncU1ubSsh9p/W5QZSxtYcUXv8KGL0xBgPLyNJA1xw==}
+    dependencies:
+      estree-util-is-identifier-name: 2.0.1
+      estree-util-value-to-estree: 1.3.0
+      reading-time: 1.5.0
+      unist-util-visit: 3.1.0
     dev: false
 
   /remark-rehype/10.1.0:
@@ -1837,6 +1873,13 @@ packages:
       unist-util-is: 4.1.0
     dev: false
 
+  /unist-util-visit-parents/4.1.1:
+    resolution: {integrity: sha512-1xAFJXAKpnnJl8G7K5KgU7FY55y3GcLIXqkzUj5QF/QVP7biUm0K0O2oqVkYsdjzJKifYeWn9+o6piAK2hGSHw==}
+    dependencies:
+      '@types/unist': 2.0.6
+      unist-util-is: 5.1.1
+    dev: false
+
   /unist-util-visit-parents/5.1.1:
     resolution: {integrity: sha512-gks4baapT/kNRaWxuGkl5BIhoanZo7sC/cUT/JToSRNL1dYoXRFl75d++NkjYk4TAu2uv2Px+l8guMajogeuiw==}
     dependencies:
@@ -1850,6 +1893,14 @@ packages:
       '@types/unist': 2.0.6
       unist-util-is: 4.1.0
       unist-util-visit-parents: 3.1.1
+    dev: false
+
+  /unist-util-visit/3.1.0:
+    resolution: {integrity: sha512-Szoh+R/Ll68QWAyQyZZpQzZQm2UPbxibDvaY8Xc9SUtYgPsDzx5AWSk++UUt2hJuow8mvwR+rG+LQLw+KsuAKA==}
+    dependencies:
+      '@types/unist': 2.0.6
+      unist-util-is: 5.1.1
+      unist-util-visit-parents: 4.1.1
     dev: false
 
   /unist-util-visit/4.1.1:

@@ -9,8 +9,8 @@
   "dependencies": {
     "clsx": "^1.2.1",
     "next": "^12.2.3",
-    "nextra": "2.0.0-beta.18",
-    "nextra-theme-docs": "2.0.0-beta.18",
+    "nextra": "2.0.0-beta.24",
+    "nextra-theme-docs": "2.0.0-beta.24",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
