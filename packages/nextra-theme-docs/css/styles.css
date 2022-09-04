@@ -98,7 +98,7 @@ article details > summary {
   }
 }
 
-.nextra-toc, .nextra-sidebar-container {
+.nextra-toc > .div, .nextra-sidebar-container {
   mask-image: linear-gradient(to bottom, transparent, #000 20px), linear-gradient(to left, #000 10px, transparent 10px);
 }
 
