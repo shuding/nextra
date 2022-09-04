@@ -24,7 +24,7 @@ import {
 import { LocaleSwitch } from './locale-switch'
 import ThemeSwitch from './theme-switch'
 import { ArrowRightIcon } from 'nextra/icons'
-import { Collapse } from './collapse'
+import { Collapse } from 'nextra/components'
 import { Anchor } from './anchor'
 import { DEFAULT_LOCALE } from '../constants'
 
@@ -289,7 +289,6 @@ export function Sidebar({
         .filter(Boolean),
     [headings]
   )
-  const sidebarRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -301,7 +300,7 @@ export function Sidebar({
   }, [menu])
 
   useEffect(() => {
-    const activeElement = sidebarRef.current?.querySelector('li.active')
+    const activeElement = containerRef.current?.querySelector('li.active')
 
     if (activeElement) {
       scrollIntoView(activeElement, {
@@ -322,33 +321,38 @@ export function Sidebar({
       ) : null}
       <aside
         className={cn(
-          'nextra-sidebar-container nextra-scrollbar',
-          'fixed top-16 z-[15] h-[calc(100vh-4rem)] w-full flex-shrink-0 self-start overflow-y-auto md:sticky md:w-64',
+          'nextra-sidebar-container',
+          'fixed inset-y-16 z-[15] w-full flex-shrink-0 overflow-y-auto md:sticky',
+          'motion-reduce:transform-none',
           asPopover ? 'md:hidden' : 'md:block',
-          '[&::-webkit-scrollbar-track]:mt-[var(--nextra-navbar-height)] md:[&::-webkit-scrollbar-track]:mt-5',
-          {
-            open: menu,
-            '[&::-webkit-scrollbar-track]:mb-[var(--nextra-menu-height)]':
-              hasMenu
-          }
+          hasMenu && 'with-menu',
+          menu && 'open',
+          'nextra-scrollbar w-full md:w-64'
         )}
         ref={containerRef}
       >
-        <div
-          className="h-full w-full select-none pl-[calc(env(safe-area-inset-left)-1.5rem)] md:h-auto [-webkit-touch-callout:none]"
-          ref={sidebarRef}
-        >
-          <div className="min-h-[calc(100vh-4rem-61px)] p-4">
-            <div
-              className={cn(
-                'sticky top-0 z-[1] block md:hidden -mt-4 mb-4 bg-white pt-4',
-                'dark:bg-dark shadow-[0_2px_14px_6px_#fff] dark:shadow-[0_2px_14px_6px_#111]'
-              )}
-            >
-              {renderComponent(config.search.component, {
-                directories: flatDirectories
-              })}
-            </div>
+        <div className="h-full pl-[calc(env(safe-area-inset-left)-1.5rem)] md:h-auto [-webkit-touch-callout:none]">
+          <div className="min-h-[calc(100vh-var(--nextra-navbar-height)-var(--nextra-menu-height))] py-4 px-2">
+            {menu ? (
+              <>
+                <div
+                  className={cn(
+                    'sticky top-0 z-[1] -mt-4 py-4 bg-white',
+                    'dark:bg-dark shadow-[0_2px_14px_6px_#fff] dark:shadow-[0_2px_14px_6px_#111]'
+                  )}
+                >
+                  {renderComponent(config.search.component, {
+                    directories: flatDirectories
+                  })}
+                </div>
+                <Menu
+                  // The mobile dropdown menu, shows all the directories.
+                  directories={fullDirectories}
+                  // Always show the anchor links on mobile (`md`).
+                  anchors={anchors}
+                />
+              </>
+            ) : (
               <Menu
                 className="hidden md:flex"
                 // The sidebar menu, shows only the docs directories.
@@ -357,13 +361,7 @@ export function Sidebar({
                 // the sidebar when `floatTOC` is enabled.
                 anchors={config.toc.float ? [] : anchors}
               />
-              <Menu
-                className="md:hidden"
-                // The mobile dropdown menu, shows all the directories.
-                directories={fullDirectories}
-                // Always show the anchor links on mobile (`md`).
-                anchors={anchors}
-              />
+            )}
           </div>
 
           {hasMenu && (

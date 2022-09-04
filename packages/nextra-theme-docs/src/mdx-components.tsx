@@ -1,20 +1,22 @@
-import React, {
-  useEffect,
-  useRef,
-  useState,
-  cloneElement,
-  Children,
-  ReactNode,
-  ReactElement,
-  ComponentProps
-} from 'react'
+import React, { useEffect, useRef, ReactElement, ComponentProps } from 'react'
 import 'intersection-observer'
-import { useSetActiveAnchor, DetailsProvider, useDetails } from './contexts'
-import { Collapse, Anchor } from './components'
+import { useSetActiveAnchor } from './contexts'
+import { Anchor } from './components'
 import { IS_BROWSER } from './constants'
 import cn from 'clsx'
 import { DocsThemeConfig } from './types'
-import { Code, Pre, Table, Td, Th, Tr } from 'nextra/components'
+import {
+  Code,
+  Details,
+  Input,
+  Pre,
+  Summary,
+  Table,
+  Td,
+  Th,
+  Tr,
+  Ul
+} from 'nextra/components'
 
 let observer: IntersectionObserver
 let setActiveAnchor: ReturnType<typeof useSetActiveAnchor>
@@ -125,88 +127,6 @@ const createHeaderLink = (
     )
   }
 
-const findSummary = (children: ReactNode) => {
-  let summary: ReactNode = null
-  const restChildren: ReactNode[] = []
-
-  Children.forEach(children, (child, index) => {
-    if (child && (child as ReactElement).type === Summary) {
-      summary ||= child
-      return
-    }
-
-    let c = child
-    if (
-      !summary &&
-      child &&
-      typeof child === 'object' &&
-      (child as ReactElement).type !== Details &&
-      'props' in child &&
-      child.props
-    ) {
-      const result = findSummary(child.props.children)
-      summary = result[0]
-      c = cloneElement(child, {
-        ...child.props,
-        children: result[1]?.length ? result[1] : undefined,
-        key: index
-      })
-    }
-    restChildren.push(c)
-  })
-
-  return [summary, restChildren]
-}
-
-const Details = ({
-  children,
-  open,
-  ...props
-}: ComponentProps<'details'>): ReactElement => {
-  const [openState, setOpen] = useState(!!open)
-  const [summary, restChildren] = findSummary(children)
-
-  // To animate the close animation we have to delay the DOM node state here.
-  const [delayedOpenState, setDelayedOpenState] = useState(openState)
-  useEffect(() => {
-    if (openState) {
-      setDelayedOpenState(true)
-    } else {
-      const timeout = setTimeout(() => setDelayedOpenState(openState), 500)
-      return () => clearTimeout(timeout)
-    }
-  }, [openState])
-
-  return (
-    <details
-      className="my-4 rounded border border-gray-200 bg-white p-2 shadow-sm dark:border-neutral-800 dark:bg-neutral-900 first:mt-0 last:mb-0"
-      {...props}
-      {...(delayedOpenState && { open: true })}
-    >
-      <DetailsProvider value={setOpen}>{summary}</DetailsProvider>
-      <Collapse open={openState}>{restChildren}</Collapse>
-    </details>
-  )
-}
-
-const Summary = (props: ComponentProps<'summary'>): ReactElement => {
-  const setOpen = useDetails()
-  return (
-    <summary
-      className={cn(
-        'list-none cursor-pointer p-1 transition-colors hover:bg-gray-100 dark:hover:bg-neutral-800',
-        "before:content-[''] before:inline-block before:transition-transform dark:before:invert",
-        '[[open]>&]:before:rotate-90 rtl:before:rotate-180'
-      )}
-      {...props}
-      onClick={e => {
-        e.preventDefault()
-        setOpen(v => !v)
-      }}
-    />
-  )
-}
-
 const A = ({ href = '', ...props }) => (
   <Anchor href={href} newWindow={href.startsWith('https://')} {...props} />
 )
@@ -232,13 +152,13 @@ export const getComponents = ({
     h4: createHeaderLink('h4', context),
     h5: createHeaderLink('h5', context),
     h6: createHeaderLink('h6', context),
-    ul: (props: ComponentProps<'ul'>) => (
-      <ul className="ltr:ml-6 rtl:mr-6 mt-6 list-disc first:mt-0" {...props} />
-    ),
+    ul: Ul,
     ol: (props: ComponentProps<'ol'>) => (
       <ol className="ltr:ml-6 rtl:mr-6 mt-6 list-decimal" {...props} />
     ),
-    li: (props: ComponentProps<'li'>) => <li className="my-2" {...props} />,
+    li: ({ className, ...props }: ComponentProps<'li'>) => (
+      <li className={cn('my-2', className)} {...props} />
+    ),
     blockquote: (props: ComponentProps<'blockquote'>) => (
       <blockquote
         className={cn(
@@ -270,6 +190,7 @@ export const getComponents = ({
     summary: Summary,
     pre: Pre,
     code: Code,
+    input: Input,
     ...components
   }
 }

@@ -13,6 +13,8 @@ export default function ThemeSwitch() {
     setTheme(isDark ? 'light' : 'dark')
   }
 
+  const IconToUse = mounted && isDark ? MoonIcon : SunIcon
+
   return (
     <span
       role="button"
@@ -24,7 +26,7 @@ export default function ThemeSwitch() {
         if (e.key === 'Enter') toggleTheme()
       }}
     >
-      {mounted && isDark ? <MoonIcon /> : <SunIcon />}
+      <IconToUse className="w-5 h-5 [&>path]:fill-transparent" />
     </span>
   )
 }

@@ -80,7 +80,7 @@ const Body = ({
   }, [])
 
   if (themeContext.layout === 'raw') {
-    return <div className="w-full overflow-x-hidden">{children}</div>
+    return <article className="w-full overflow-x-hidden">{children}</article>
   }
 
   const date =
@@ -107,7 +107,13 @@ const Body = ({
 
   if (themeContext.layout === 'full') {
     return (
-      <article className="min-h-[calc(100vh-4rem)] w-full overflow-x-hidden pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
+      <article
+        className={cn(
+          'min-h-[calc(100vh-var(--nextra-navbar-height)]',
+          'w-full overflow-x-hidden',
+          'pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]'
+        )}
+      >
         {body}
       </article>
     )
@@ -116,7 +122,8 @@ const Body = ({
   return (
     <article
       className={cn(
-        'min-h-[calc(100vh-4rem)] w-full flex min-w-0 max-w-full justify-center pb-8 pr-[calc(env(safe-area-inset-right)-1.5rem)]',
+        'min-h-[calc(100vh-var(--nextra-navbar-height))]',
+        'w-full flex min-w-0 max-w-full justify-center pb-8 pr-[calc(env(safe-area-inset-right)-1.5rem)]',
         themeContext.typesetting === 'article' &&
           'nextra-body-typesetting-article'
       )}
@@ -273,7 +280,6 @@ export { useTheme } from 'next-themes'
 export {
   Bleed,
   Callout,
-  Collapse,
   NotFoundPage,
   ServerSideErrorPage,
   Tabs,

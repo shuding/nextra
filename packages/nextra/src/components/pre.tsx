@@ -32,6 +32,7 @@ export const Pre = ({
       )}
       <pre
         className={[
+          'nextra-scrollbar',
           'bg-primary-700/5 mt-6 mb-4 overflow-x-auto rounded-xl font-medium subpixel-antialiased dark:bg-primary-300/10',
           'contrast-more:border contrast-more:border-primary-900/20 contrast-more:contrast-150 contrast-more:dark:border-primary-100/40',
           filename ? 'pt-12 pb-4' : 'py-4',

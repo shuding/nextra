@@ -12,7 +12,18 @@ import React, {
 import { MDXProvider } from '@mdx-js/react'
 import Link from 'next/link'
 import { createPortal } from 'react-dom'
-import { Code, Pre, Table, Td, Th, Tr } from 'nextra/components'
+import {
+  Code,
+  Details,
+  Input,
+  Pre,
+  Summary,
+  Table,
+  Td,
+  Th,
+  Tr,
+  Ul
+} from 'nextra/components'
 import { useBlogContext } from './blog-context'
 
 export const HeadingContext = createContext<
@@ -79,7 +90,17 @@ const components = {
   table: (props: ComponentProps<'table'>) => (
     <Table className="not-prose" {...props} />
   ),
-  code: Code
+  code: Code,
+  details: (props: ComponentProps<'details'>) => (
+    <Details className="not-prose" {...props} />
+  ),
+  summary: Summary,
+  input: Input,
+  ul: (props: ComponentProps<'ul'>) => (
+    <div className="not-prose">
+      <Ul {...props} />
+    </div>
+  )
 }
 
 export const MDXTheme = ({
