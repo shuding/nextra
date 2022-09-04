@@ -325,7 +325,7 @@ export function Sidebar({
         menu && 'open',
         showSidebar
           ? 'nextra-scrollbar w-full md:w-64'
-          : 'no-scrollbar md:w-12 transform-gpu overflow-hidden ease-in-out motion-reduce:transition-none transition-all'
+          : 'no-scrollbar md:w-20 transform-gpu ease-in-out motion-reduce:transition-none transition-all'
       )}
       ref={containerRef}
     >
@@ -371,11 +371,9 @@ export function Sidebar({
               'flex justify-end items-center gap-2',
               'dark:bg-dark dark:border-neutral-800 dark:shadow-[0_-12px_16px_#111]',
               'contrast-more:shadow-none contrast-more:dark:shadow-none contrast-more:border-neutral-400',
+              'mx-3', // hide ring on focused sidebar links
               showSidebar
-                ? [
-                    'h-[var(--nextra-menu-height)]',
-                    'mx-3' // hide ring on focused sidebar links
-                  ]
+                ? 'h-[var(--nextra-menu-height)]'
                 : 'py-4 flex-wrap justify-center'
             )}
           >
