@@ -1,4 +1,7 @@
 .nextra-scrollbar {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: rgba(115, 115, 115, 0.4) transparent; /* Firefox */
+  
   scrollbar-gutter: stable;
   &::-webkit-scrollbar {
     @apply w-1.5 h-1.5;
