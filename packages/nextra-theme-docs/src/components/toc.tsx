@@ -70,7 +70,7 @@ export function TOC({ headings, filePath }: TOCProps): ReactElement {
       ref={tocRef}
       className={cn(
         'nextra-scrollbar sticky top-16 overflow-y-auto pr-4 pt-8 text-sm [hyphens:auto]',
-        'ltr:-mr-4 rtl:-ml-4 max-h-[calc(100vh-4rem-env(safe-area-inset-bottom))]'
+        'ltr:-mr-4 rtl:-ml-4 max-h-[calc(100vh-var(--nextra-navbar-height)-env(safe-area-inset-bottom))]'
       )}
     >
       {hasHeadings && (

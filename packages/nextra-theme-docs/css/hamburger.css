@@ -1,36 +1,34 @@
 .nextra-hamburger svg {
   g {
-    transform-origin: center;
-    transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+    @apply origin-center;
+    transition: transform 0.2s cubic-bezier(.25, 1, .5, 1);
   }
   path {
     opacity: 1;
-    transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1) 0.2s,
-    opacity 0.2s ease 0.2s;
+    transition: transform 0.2s cubic-bezier(.25, 1, .5, 1) 0.2s, opacity .2s ease .2s;
   }
 
   &.open {
     path {
-      transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1),
-      opacity 0s ease 0.2s;
+      transition: transform 0.2s cubic-bezier(.25, 1, .5, 1), opacity 0s ease .2s;
     }
     g {
-      transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1) 0.2s;
+      transition: transform 0.2s cubic-bezier(.25, 1, .5, 1) .2s;
     }
   }
 
   &.open > {
     path {
-      opacity: 0;
+      @apply opacity-0
     }
     g:nth-of-type(1) {
-      transform: rotate(45deg);
+      @apply rotate-45;
       path {
         transform: translate3d(0, 6px, 0);
       }
     }
     g:nth-of-type(2) {
-      transform: rotate(-45deg);
+      @apply -rotate-45;
       path {
         transform: translate3d(0, -6px, 0);
       }

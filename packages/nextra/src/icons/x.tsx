@@ -1,6 +1,6 @@
-import React, { ReactElement } from 'react'
+import React, { ComponentProps, ReactElement } from 'react'
 
-export function XIcon({ className }: { className?: string }): ReactElement {
+export function XIcon(props: ComponentProps<'svg'>): ReactElement {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -8,7 +8,7 @@ export function XIcon({ className }: { className?: string }): ReactElement {
       height="20"
       viewBox="0 0 20 20"
       fill="currentColor"
-      className={className}
+      {...props}
     >
       <path
         fillRule="evenodd"
