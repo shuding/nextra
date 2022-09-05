@@ -13,6 +13,7 @@ describe('parent', () => {
             "title": "Random Thoughts",
             "type": "posts",
           },
+          "kind": "MdxPage",
           "locale": "",
           "name": "index",
           "route": "/posts",

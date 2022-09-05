@@ -1,4 +1,6 @@
-import type { PageMapItem } from './types'
+import { PageMapItem } from './types'
+import { truthy } from './utils'
+import { META_FILENAME } from './constants'
 
 export default function filterRouteLocale(
   pageMap: PageMapItem[],
@@ -7,41 +9,32 @@ export default function filterRouteLocale(
 ): PageMapItem[] {
   const isDefaultLocale = !locale || locale === defaultLocale
 
-  const filteredPageMap = []
+  const filteredPageMap: PageMapItem[] = []
 
   // We fallback to the default locale
-  const fallbackPages: Record<string, PageMapItem | null> = {}
+  const fallbackPages: Record<string, PageMapItem | null> = Object.create(null)
 
-  for (const page of pageMap) {
-    if (page.children) {
+  for (let page of pageMap) {
+    if (page.kind === 'Folder') {
       filteredPageMap.push({
         ...page,
         children: filterRouteLocale(page.children, locale, defaultLocale)
       })
       continue
     }
-
     const localDoesMatch =
       (!page.locale && isDefaultLocale) || page.locale === locale
-
+    const name = page.kind === 'Meta' ? META_FILENAME : page.name
     if (localDoesMatch) {
-      fallbackPages[page.name] = null
+      fallbackPages[name] = null
       filteredPageMap.push(page)
-    } else {
-      if (
-        fallbackPages[page.name] !== null &&
-        (!page.locale || page.locale === defaultLocale)
-      ) {
-        fallbackPages[page.name] = page
-      }
+    } else if (
+      fallbackPages[name] !== null &&
+      (!page.locale || page.locale === defaultLocale)
+    ) {
+      fallbackPages[name] = page
     }
   }
 
-  for (const name in fallbackPages) {
-    if (fallbackPages[name]) {
-      filteredPageMap.push(fallbackPages[name] as PageMapItem)
-    }
-  }
-
-  return filteredPageMap
+  return [...filteredPageMap, ...Object.values(fallbackPages).filter(truthy)]
 }

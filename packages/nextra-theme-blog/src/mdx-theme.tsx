@@ -1,4 +1,6 @@
 import React, {
+  RefObject,
+  createRef,
   ComponentProps,
   createContext,
   ReactElement,
@@ -9,33 +11,26 @@ import React, {
 } from 'react'
 import { MDXProvider } from '@mdx-js/react'
 import Link from 'next/link'
-import ReactDOM from 'react-dom'
+import { createPortal } from 'react-dom'
+import { Code, Pre, Table, Td, Th, Tr } from 'nextra/components'
 import { useBlogContext } from './blog-context'
 
 export const HeadingContext = createContext<
-  React.RefObject<HTMLHeadingElement | null>
->(React.createRef())
-
-const useHeadingRef = () => {
-  const ref = useContext(HeadingContext)
-  return ref
-}
+  RefObject<HTMLHeadingElement | null>
+>(createRef())
 
 const H1 = ({ children }: { children?: ReactNode }): ReactElement => {
-  const ref = useHeadingRef()
-  const {
-    opts: { hasJsxInH1 }
-  } = useBlogContext()
+  const ref = useContext(HeadingContext)
+  const { opts } = useBlogContext()
   const [showHeading, setShowHeading] = useState(false)
   useEffect(() => {
-    if (ref.current && hasJsxInH1) {
+    if (ref.current && opts.hasJsxInH1) {
       setShowHeading(true)
     }
   }, [])
-  return (
-    <>{showHeading ? ReactDOM.createPortal(children, ref.current!) : null}</>
-  )
+  return <>{showHeading && createPortal(children, ref.current!)}</>
 }
+
 const createHeaderLink =
   (Tag: `h${2 | 3 | 4 | 5 | 6}`) =>
   ({ children, id, ...props }: ComponentProps<'h2'>): ReactElement => {
@@ -47,13 +42,7 @@ const createHeaderLink =
     )
   }
 
-const A = ({
-  children,
-  ...props
-}: {
-  children?: React.ReactNode
-  href?: string
-}) => {
+const A = ({ children, ...props }: ComponentProps<'a'>) => {
   const isExternal = props.href && props.href.startsWith('https://')
   if (isExternal) {
     return (
@@ -71,13 +60,6 @@ const A = ({
   )
 }
 
-const Pre = ({ children }: { children?: ReactNode }): ReactElement => {
-  return (
-    <div className="not-prose">
-      <pre>{children}</pre>
-    </div>
-  )
-}
 const components = {
   h1: H1,
   h2: createHeaderLink('h2'),
@@ -86,7 +68,18 @@ const components = {
   h5: createHeaderLink('h5'),
   h6: createHeaderLink('h6'),
   a: A,
-  pre: Pre
+  pre: ({ children, ...props }: ComponentProps<'pre'>) => (
+    <div className="not-prose">
+      <Pre {...props}>{children}</Pre>
+    </div>
+  ),
+  tr: Tr,
+  th: Th,
+  td: Td,
+  table: (props: ComponentProps<'table'>) => (
+    <Table className="not-prose" {...props} />
+  ),
+  code: Code
 }
 
 const MDXTheme = ({ children }: { children: ReactNode }): ReactElement => {

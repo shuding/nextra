@@ -3,14 +3,12 @@ import Meta from './meta'
 import MDXTheme from './mdx-theme'
 import { useBlogContext } from './blog-context'
 import { BasicLayout } from './basic-layout'
-import { getParent } from './utils/parent'
 
 export const ArticleLayout = ({ children }: { children: ReactNode }) => {
-  const { opts, config } = useBlogContext()
-  const { back } = getParent({ opts, config })
+  const { config } = useBlogContext()
   return (
     <BasicLayout>
-      <Meta {...opts.meta} back={back} config={config} />
+      <Meta />
       <MDXTheme>
         {children}
         {config.postFooter}

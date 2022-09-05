@@ -1,6 +1,6 @@
 {
   "name": "nextra-theme-docs",
-  "version": "2.0.0-beta.18",
+  "version": "2.0.0-beta.24",
   "description": "A Nextra theme for documentation sites.",
   "repository": "https://github.com/shuding/nextra",
   "author": "Shu Ding <g@shud.in>",
@@ -31,11 +31,11 @@
     "dev": "concurrently \"pnpm dev:layout\" \"pnpm dev:tailwind\"",
     "build": "tsup",
     "build:all": "pnpm build && pnpm run build:tailwind",
-    "build:tailwind": "cross-env NODE_ENV=production pnpm postcss src/styles.css -o style.css --verbose",
+    "build:tailwind": "cross-env NODE_ENV=production pnpm postcss css/styles.css -o style.css --verbose",
     "types": "tsup --dts-only",
     "types:check": "tsc --noEmit",
     "dev:layout": "tsup --watch",
-    "dev:tailwind": "cross-env TAILWIND_MODE=watch pnpm postcss src/styles.css -o style.css --watch",
+    "dev:tailwind": "cross-env TAILWIND_MODE=watch pnpm postcss css/styles.css -o style.css --watch",
     "prepublishOnly": "pnpm build:all",
     "test": "vitest --run",
     "clean": "rimraf ./dist ./style.css",
@@ -53,8 +53,7 @@
     "match-sorter": "^6.3.1",
     "next-themes": "^0.2.0-beta.2",
     "parse-git-url": "^1.0.1",
-    "scroll-into-view-if-needed": "^2.2.29",
-    "title": "^3.5.1"
+    "scroll-into-view-if-needed": "^2.2.29"
   },
   "peerDependencies": {
     "next": ">=9.5.3",
@@ -81,7 +80,6 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tailwindcss": "^3.1.8",
-    "tsup": "^6.2.1",
     "vitest": "^0.21.0"
   },
   "prettier": {

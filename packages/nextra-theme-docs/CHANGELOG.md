@@ -1,5 +1,60 @@
 # nextra-theme-docs
 
+## 2.0.0-beta.24
+
+### Patch Changes
+
+- bc52178: fix `editLink` option was not merged with default config `editLink`
+
+## 2.0.0-beta.23
+
+### Patch Changes
+
+- c8129a2: fix theme switcher style
+- 2ec8564: add `DocsThemeConfig.navbar` config option for overriding navbar
+
+## 2.0.0-beta.22
+
+### Patch Changes
+
+- 77361da: fix ESC button when still stays after pressed ESC
+- fdfe4f8: fix covered theme switch popup when i18n is not setup
+- 873561b: scrollbar is toc should be same as in sidebar
+
+## 2.0.0-beta.21
+
+## 2.0.0-beta.20
+
+### Patch Changes
+
+- e6771ca: fix search overlay styles on mobile
+- e6771ca: split css to `hamburger`/`scrollbar`/`typesetting-article` css files
+- e6771ca: fix edit on github button for cases when filename named as `index`
+- e6771ca: BREAKING! various theme config options was renamed, take a look of renamed options [here](https://github.com/shuding/nextra/blob/core/packages/nextra-theme-docs/src/constants.tsx)
+- 1ee3c92: reuse table styles from docs in blog
+- e6771ca: [Blog/Docs] Add copy to clipboard button for code-blocks. Add `NextraConfig.unstable_defaultShowCopyCode` option to show button by default, add `copy` and `copy=false` options for code-blocks
+- 5d852b6: break words in navlinks, remove unneeded `<div />` wrappers, align text on right side for next link
+- e6771ca: hide search input in navbar on mobile
+- e6771ca: fix empty space in navbar when theme option `search.component: null`
+- e6771ca: add `editLink.component`
+- e6771ca: rename `meta.json` to `_meta.json`
+- e6771ca: clicking on folder should navigate to first children if `index` page doesn't exist
+- 71528f1: show copy code button only on hover of container
+- e6771ca: fix callout shrinking from children content
+- e6771ca: rename `PageOpts.meta` to `PageOpts.frontMatter`
+- e6771ca: move `withLayout` logic directly in nextra loader
+- e6771ca: adjust active breadcrumb color
+- e6771ca: fix search input `ESC` icon vertical alignment
+
+## 2.0.0-beta.19
+
+### Patch Changes
+
+- 1fef548: allow head to be a ReactNode
+- ee270a4: fix extra space in flexsearch input after loading indexes
+- afaa26a: refactor toc, fix toc's styles on rtl, use `ref.current` instead `document.getElementsByClassName`
+- cdc1c2f: prefer `ref.current` over `document.querySelector` in sidebar
+
 ## 2.0.0-beta.18
 
 ### Patch Changes

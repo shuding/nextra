@@ -8,18 +8,23 @@ import React, {
 import { PageOpts } from 'nextra'
 import { ThemeProvider } from 'next-themes'
 import { Context, DocsThemeConfig } from '../types'
-import { DEFAULT_THEME } from '../constants'
+import {
+  DEEP_OBJECT_KEYS,
+  DEFAULT_THEME,
+  LEGACY_CONFIG_OPTIONS
+} from '../constants'
 import { MenuProvider } from './menu'
 
 type Config = DocsThemeConfig &
   Pick<
     PageOpts,
-    'unstable_flexsearch' | 'newNextLinkBehavior' | 'title' | 'meta'
+    'unstable_flexsearch' | 'newNextLinkBehavior' | 'title' | 'frontMatter'
   >
 
 const ConfigContext = createContext<Config>({
   title: '',
-  meta: {}
+  frontMatter: {},
+  ...DEFAULT_THEME
 })
 
 export const useConfig = () => useContext(ConfigContext)
@@ -33,15 +38,57 @@ export const ConfigProvider = ({
 }): ReactElement => {
   const [menu, setMenu] = useState(false)
   const { themeConfig, pageOpts } = value
-  const extendedConfig = {
+  const extendedConfig: Config = {
     ...DEFAULT_THEME,
     ...themeConfig,
     unstable_flexsearch: pageOpts.unstable_flexsearch,
     newNextLinkBehavior: pageOpts.newNextLinkBehavior,
     title: pageOpts.title,
-    meta: pageOpts.meta
+    frontMatter: pageOpts.frontMatter,
+    ...Object.fromEntries(
+      (DEEP_OBJECT_KEYS).map(key =>
+        typeof themeConfig[key] === 'object'
+          ? [
+              key,
+              // @ts-expect-error -- key has always object value
+              { ...DEFAULT_THEME[key], ...themeConfig[key] }
+            ]
+          : []
+      )
+    )
   }
-  const nextThemes = extendedConfig.nextThemes || {}
+
+  const { nextThemes } = extendedConfig
+
+  if (process.env.NODE_ENV === 'development') {
+    const notice =
+      '[nextra-theme-docs] ⚠️  You are using legacy theme config option'
+
+    for (const [legacyOption, newPath] of Object.entries(
+      LEGACY_CONFIG_OPTIONS
+    )) {
+      if (legacyOption in themeConfig) {
+        const [obj, key] = newPath.split('.')
+        const renameTo = key ? `${obj}: { ${key}: ... }` : obj
+        console.warn(`${notice} "${legacyOption}". Rename it to ${renameTo}`)
+      }
+    }
+
+    for (const key of ['search', 'footer'] as const) {
+      if (key in themeConfig) {
+        const option = themeConfig[key]
+        if (typeof option === 'boolean' || option == null) {
+          console.warn(
+            `${notice} "${key}".`,
+            option ? 'Remove it' : `Rename it to ${key}: { component: null }`
+          )
+        }
+      }
+    }
+    if (typeof themeConfig.banner === 'string') {
+      console.warn(notice, '"banner". Rename it to banner: { text: ... }')
+    }
+  }
 
   return (
     <ThemeProvider
@@ -52,15 +99,7 @@ export const ConfigProvider = ({
       forcedTheme={nextThemes.forcedTheme}
     >
       <ConfigContext.Provider value={extendedConfig}>
-        <MenuProvider
-          value={{
-            menu,
-            setMenu,
-            defaultMenuCollapsed: !!extendedConfig.defaultMenuCollapsed
-          }}
-        >
-          {children}
-        </MenuProvider>
+        <MenuProvider value={{ menu, setMenu }}>{children}</MenuProvider>
       </ConfigContext.Provider>
     </ThemeProvider>
   )

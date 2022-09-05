@@ -11,10 +11,9 @@ export default function traverse(
     }
   }
 
-  for (const pageMapItem of pageMap) {
-    const { children } = pageMapItem
-    if (children) {
-      const matched = traverse(children, matcher)
+  for (const item of pageMap) {
+    if (item.kind === 'Folder') {
+      const matched = traverse(item.children, matcher)
       if (matched) {
         return matched
       }

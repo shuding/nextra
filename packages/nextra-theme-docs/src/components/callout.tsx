@@ -39,9 +39,7 @@ export function Callout({
       >
         {emoji}
       </div>
-      <span>
-        {children}
-      </span>
+      <div className="min-w-0">{children}</div>
     </div>
   )
 }

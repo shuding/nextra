@@ -3,44 +3,59 @@ import { Heading as MDASTHeading } from 'mdast'
 import { ProcessorOptions } from '@mdx-js/mdx'
 import { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
 import { GrayMatterFile } from 'gray-matter'
+import { PageMapCache } from './plugin'
+import { MARKDOWN_EXTENSIONS, META_FILENAME } from './constants'
 
-export abstract class NextraPluginCache {
-  public cache: { items: PageMapItem[]; fileMap: Record<string, any> } | null
+type MetaFilename = typeof META_FILENAME
+type MarkdownExtension = typeof MARKDOWN_EXTENSIONS[number]
 
-  constructor() {
-    this.cache = { items: [], fileMap: {} }
-  }
-
-  set(data: { items: PageMapItem[]; fileMap: Record<string, any> }) {
-    this.cache!.items = data.items
-    this.cache!.fileMap = data.fileMap
-  }
-
-  clear() {
-    this.cache = null
-  }
-
-  get() {
-    return this.cache
-  }
-}
 export interface LoaderOptions extends NextraConfig {
   pageImport?: boolean
   locales: string[]
   defaultLocale: string
-  pageMapCache: NextraPluginCache
+  pageMapCache: PageMapCache
   newNextLinkBehavior?: boolean
 }
 
-export interface PageMapItem {
+export interface Folder<FileType = PageMapItem> {
+  kind: 'Folder'
+  name: string
+  route: string
+  children: FileType[]
+}
+
+export type MetaJsonFile = {
+  kind: 'Meta'
+  locale?: string
+  data: {
+    [fileName: string]: Meta
+  }
+}
+
+export type FrontMatter = GrayMatterFile<string>['data']
+export type Meta = string | Record<string, any>
+
+export type MdxFile = {
+  kind: 'MdxPage'
   name: string
   route: string
   locale?: string
-  children?: PageMapItem[]
-  timestamp?: number
-  frontMatter?: Record<string, any>
-  meta?: Record<string, any>
-  active?: boolean
+  frontMatter?: FrontMatter
+}
+
+export type MetaJsonPath = `${string}/${MetaFilename}`
+export type MdxPath = `${string}.${MarkdownExtension}`
+
+export type FileMap = {
+  [jsonPath: MetaJsonPath]: MetaJsonFile
+  [mdxPath: MdxPath]: MdxFile
+}
+
+export type PageMapItem = Folder | MdxFile | MetaJsonFile
+
+// PageMapItem without MetaJsonFile and with its meta from _meta.json
+export type Page = (MdxFile | Folder<Page>) & {
+  meta?: Exclude<Meta, string>
 }
 
 export type Heading = MDASTHeading & {
@@ -48,9 +63,9 @@ export type Heading = MDASTHeading & {
 }
 
 export type PageOpts = {
-  filename: string
+  filePath: string
   route: string
-  meta: GrayMatterFile<string>['data']
+  frontMatter: FrontMatter
   pageMap: PageMapItem[]
   title: string
   headings: Heading[]
@@ -58,13 +73,15 @@ export type PageOpts = {
   timestamp?: number
   unstable_flexsearch?: Flexsearch
   newNextLinkBehavior?: boolean
+  readingTime?: ReadingTime
 }
 
-export type PageMapResult = [
-  pageMap: PageMapItem[],
-  route: string,
-  title: string
-]
+export type ReadingTime = {
+  text: string
+  minutes: number
+  time: number
+  words: number
+}
 
 type Theme = string
 type Flexsearch = boolean | { codeblocks: boolean }
@@ -72,8 +89,10 @@ type Flexsearch = boolean | { codeblocks: boolean }
 export type NextraConfig = {
   theme: Theme
   themeConfig?: string
+  unstable_defaultShowCopyCode?: boolean
   unstable_flexsearch?: Flexsearch
   unstable_staticImage?: boolean
+  unstable_readingTime?: boolean
   mdxOptions?: Pick<ProcessorOptions, 'rehypePlugins' | 'remarkPlugins'> & {
     rehypePrettyCodeOptions?: Partial<RehypePrettyCodeOptions>
   }
@@ -83,8 +102,6 @@ export type Nextra = (
   ...args: [NextraConfig] | [theme: Theme, themeConfig: string]
 ) => (nextConfig: NextConfig) => NextConfig
 
-const nextra: Nextra =
-  (...args) =>
-  nextConfig => ({})
+const nextra: Nextra = () => () => ({})
 
 export default nextra

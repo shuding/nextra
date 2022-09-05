@@ -12,8 +12,6 @@ import { useRouter } from 'next/router'
 import { Heading } from 'nextra'
 import scrollIntoView from 'scroll-into-view-if-needed'
 
-import { MatchSorterSearch } from './match-sorter-search'
-import { Flexsearch } from './flexsearch'
 import { useConfig, useMenu, useActiveAnchor } from '../contexts'
 import {
   Item,
@@ -46,11 +44,12 @@ function FolderImpl({ item, anchors }: FolderProps) {
   const active = [route, route + '/'].includes(item.route + '/')
   const activeRouteInside = active || route.startsWith(item.route + '/')
 
-  const { defaultMenuCollapsed, setMenu } = useMenu()
+  const { setMenu } = useMenu()
+  const config = useConfig()
   const open =
     TreeState[item.route] !== undefined
       ? TreeState[item.route]
-      : active || activeRouteInside || !defaultMenuCollapsed
+      : active || activeRouteInside || !config.sidebar.defaultMenuCollapsed
 
   const rerender = useState({})[1]
 
@@ -77,7 +76,6 @@ function FolderImpl({ item, anchors }: FolderProps) {
       }
     })
   }
-
   return (
     <li className={cn({ open, active })}>
       <Anchor
@@ -108,11 +106,10 @@ function FolderImpl({ item, anchors }: FolderProps) {
       >
         {item.title}
         <ArrowRightIcon
-          height="1em"
-          className={cn(
-            'h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5',
-            '[&>path]:origin-center [&>path]:transition-transform rtl:[&>path]:-rotate-180',
-            open && 'ltr:[&>path]:rotate-90 rtl:[&>path]:rotate-[-270deg]'
+          className="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"
+          pathClassName={cn(
+            'origin-center transition-transform rtl:-rotate-180',
+            open && 'ltr:rotate-90 rtl:rotate-[-270deg]'
           )}
         />
       </Anchor>
@@ -138,7 +135,7 @@ interface SeparatorProps {
 function Separator({ title, topLevel }: SeparatorProps): ReactElement {
   // since title can be empty string ''
   const hasTitle = title !== undefined
-  const { sidebarSubtitle } = useConfig()
+  const config = useConfig()
   return (
     <li
       className={cn(
@@ -149,9 +146,7 @@ function Separator({ title, topLevel }: SeparatorProps): ReactElement {
     >
       {hasTitle ? (
         <div className="mx-2 py-1.5 text-sm font-semibold text-gray-900 dark:text-gray-100">
-          {sidebarSubtitle
-            ? renderComponent(sidebarSubtitle, { title })
-            : title}
+          {renderComponent(config.sidebar.subtitle, { title })}
         </div>
       ) : (
         <hr className="mx-2 border-t border-gray-200 dark:border-primary-100/10" />
@@ -228,7 +223,7 @@ interface MenuProps {
 
 function Menu({ directories, anchors, submenu }: MenuProps): ReactElement {
   return (
-    <ul>
+    <ul className="nextra-sidebar-list">
       {directories.map(item => {
         if (
           item.type === 'menu' ||
@@ -302,7 +297,7 @@ export function Sidebar({
     }
   }, [])
 
-  const hasMenu = !!(config.i18n || config.darkMode)
+  const hasMenu = !!(config.i18n.length || config.darkMode)
 
   return (
     <>
@@ -313,8 +308,12 @@ export function Sidebar({
         className={cn(
           'nextra-sidebar-container nextra-scrollbar fixed top-16 z-[15] h-[calc(100vh-4rem)] w-full flex-shrink-0 self-start overflow-y-auto md:sticky md:w-64',
           asPopover ? 'md:hidden' : 'md:block',
-          hasMenu && 'with-menu',
-          { open: menu }
+          '[&::-webkit-scrollbar-track]:mt-[var(--nextra-navbar-height)] md:[&::-webkit-scrollbar-track]:mt-5',
+          {
+            open: menu,
+            '[&::-webkit-scrollbar-track]:mb-[var(--nextra-menu-height)]':
+              hasMenu
+          }
         )}
         ref={containerRef}
       >
@@ -322,16 +321,16 @@ export function Sidebar({
           className="nextra-sidebar h-full w-full select-none pl-[calc(env(safe-area-inset-left)-1.5rem)] md:h-auto"
           ref={sidebarRef}
         >
-          <div className="min-h-[calc(100vh-4rem-61px)] p-4">
-            <div className="nextra-sidebar-search mb-4 block md:hidden">
-              {config.customSearch ||
-                (config.search ? (
-                  config.unstable_flexsearch ? (
-                    <Flexsearch />
-                  ) : (
-                    <MatchSorterSearch directories={flatDirectories} />
-                  )
-                ) : null)}
+          <div className="min-h-[calc(100%-61px)] p-4">
+            <div
+              className={cn(
+                'sticky top-0 z-[1] block md:hidden -mt-4 mb-4 bg-white pt-4',
+                'dark:bg-dark shadow-[0_2px_14px_6px_#fff] dark:shadow-[0_2px_14px_6px_#111]'
+              )}
+            >
+              {renderComponent(config.search.component, {
+                directories: flatDirectories
+              })}
             </div>
             <div className="hidden md:block">
               <Menu
@@ -339,7 +338,7 @@ export function Sidebar({
                 directories={docsDirectories}
                 // When the viewport size is larger than `md`, hide the anchors in
                 // the sidebar when `floatTOC` is enabled.
-                anchors={config.floatTOC ? [] : anchors}
+                anchors={config.toc.float ? [] : anchors}
               />
             </div>
             <div className="md:hidden">
@@ -353,19 +352,29 @@ export function Sidebar({
           </div>
 
           {hasMenu && (
-            <div className="nextra-sidebar-menu mx-4 border-t shadow-[0_-12px_16px_white] dark:border-neutral-800 dark:shadow-[0_-12px_16px_#111]">
-              <div className="flex gap-1 bg-white py-4 pb-4 dark:bg-dark justify-between">
-                {config.i18n ? (
-                  <div className="relative">
-                    <LocaleSwitch options={config.i18n} />
-                  </div>
-                ) : null}
-                {config.darkMode ? (
-                  <div className="relative">
-                    <ThemeSwitch lite={!!config.i18n} />
-                  </div>
-                ) : null}
-              </div>
+            <div
+              className={cn(
+                'sticky bottom-0 mx-4 border-t shadow-[0_-12px_16px_#fff] dark:border-neutral-800 dark:shadow-[0_-12px_16px_#111]',
+                'contrast-more:shadow-none contrast-more:dark:shadow-none contrast-more:border-neutral-400',
+                'h-[var(--nextra-menu-height)]',
+                'flex gap-2 bg-white dark:bg-dark justify-between items-center'
+              )}
+            >
+              {config.i18n.length > 0 && (
+                <div className="relative flex-1">
+                  <LocaleSwitch options={config.i18n} />
+                </div>
+              )}
+              {config.darkMode ? (
+                <div
+                  className={cn(
+                    'relative flex',
+                    config.i18n.length > 0 ? '' : 'flex-1'
+                  )}
+                >
+                  <ThemeSwitch lite={config.i18n.length > 0} />
+                </div>
+              ) : null}
             </div>
           )}
         </div>

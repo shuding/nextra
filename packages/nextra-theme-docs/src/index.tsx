@@ -13,10 +13,8 @@ import './polyfill'
 import {
   Head,
   Navbar,
-  Footer,
   NavLinks,
   Sidebar,
-  TOC,
   Breadcrumb,
   Banner
 } from './components'
@@ -29,7 +27,7 @@ import {
 } from './contexts'
 import { DEFAULT_LOCALE, IS_BROWSER } from './constants'
 import { getFSRoute, normalizePages, renderComponent } from './utils'
-import { Context, DocsThemeConfig, PageTheme } from './types'
+import { DocsThemeConfig, PageTheme, RecursivePartial } from './types'
 
 let resizeObserver: ResizeObserver
 if (IS_BROWSER) {
@@ -75,7 +73,6 @@ const Body = ({
 }: BodyProps): ReactElement => {
   const mainElement = useRef<HTMLElement>(null)
   const config = useConfig()
-  const { locale = DEFAULT_LOCALE } = useRouter()
 
   useEffect(() => {
     if (mainElement.current) {
@@ -98,13 +95,7 @@ const Body = ({
 
   const gitTimestampEl = date ? (
     <div className="pointer-default mt-12 mb-8 block ltr:text-right rtl:text-left text-xs text-gray-500 dark:text-gray-400">
-      {typeof config.gitTimestamp === 'string'
-        ? `${config.gitTimestamp} ${date.toLocaleDateString(locale, {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-          })}`
-        : renderComponent(config.gitTimestamp, { timestamp: date })}
+      {renderComponent(config.gitTimestamp, { timestamp: date })}
     </div>
   ) : (
     <div className="mt-16" />
@@ -147,14 +138,14 @@ const Body = ({
 }
 
 const InnerLayout = ({
-  filename,
+  filePath,
   pageMap,
-  meta,
+  frontMatter,
   headings,
   timestamp,
   children
 }: PageOpts & { children: ReactNode }): ReactElement => {
-  const { route, locale = DEFAULT_LOCALE } = useRouter()
+  const { locale = DEFAULT_LOCALE } = useRouter()
   const config = useConfig()
   const { menu } = useMenu()
   const {
@@ -169,107 +160,115 @@ const InnerLayout = ({
     directories
   } = useDirectoryInfo(pageMap)
 
-  const localeConfig = config.i18n?.find(l => l.locale === locale)
+  const localeConfig = config.i18n.find(l => l.locale === locale)
   const isRTL = localeConfig
     ? localeConfig.direction === 'rtl'
     : config.direction === 'rtl'
   const direction = isRTL ? 'rtl' : 'ltr'
+
   useEffect(() => {
     if (typeof document === 'undefined') return
     // needs for `ltr:/rtl:` modifiers inside `styles.css` file
     document.documentElement.setAttribute('dir', direction)
   }, [])
 
-  const filepath = route.slice(0, route.lastIndexOf('/') + 1)
-  const themeContext = { ...activeThemeContext, ...meta }
+  const themeContext = { ...activeThemeContext, ...frontMatter }
   const hideSidebar = !themeContext.sidebar || themeContext.layout === 'raw'
   const asPopover = activeType === 'page' || hideSidebar
+
+  const tocClassName =
+    'nextra-toc order-last hidden w-64 flex-shrink-0 xl:block'
 
   const tocEl =
     activeType === 'page' ||
     !themeContext.toc ||
     themeContext.layout !== 'default' ? (
-      themeContext.layout === 'full' || themeContext.layout === 'raw' ? null : (
-        <div className="nextra-toc order-last hidden w-64 flex-shrink-0 px-4 text-sm xl:block" />
-      )
+      themeContext.layout !== 'full' &&
+      themeContext.layout !== 'raw' && <div className={tocClassName} />
     ) : (
-      <TOC
-        headings={config.floatTOC ? headings : []}
-        filepathWithName={filepath + filename}
-      />
+      <div className={cn(tocClassName, 'px-4')}>
+        {renderComponent(config.toc.component, {
+          headings: config.toc.float ? headings : [],
+          filePath
+        })}
+      </div>
     )
 
   return (
-    <div
-      dir={direction}
-      className={cn('nextra-container main-container flex flex-col', {
-        'menu-active': menu
-      })}
-    >
-      <Head />
-      <Banner />
-      {themeContext.navbar ? (
-        <Navbar flatDirectories={flatDirectories} items={topLevelNavbarItems} />
-      ) : null}
+    // This makes sure that selectors like `[dir=ltr] .nextra-container` work
+    // before hydration as Tailwind expects the `dir` attribute to exist on the
+    // `html` element.
+    <div dir={direction}>
       <div
-        className={cn(
-          'mx-auto flex w-full flex-1 items-stretch',
-          themeContext.layout !== 'raw' && 'max-w-[90rem]'
-        )}
+        className={cn('nextra-container main-container flex flex-col', {
+          'menu-active': menu
+        })}
       >
-        <ActiveAnchorProvider>
-          <Sidebar
-            docsDirectories={docsDirectories}
-            flatDirectories={flatDirectories}
-            fullDirectories={directories}
-            headings={headings}
-            asPopover={asPopover}
-            includePlaceholder={themeContext.layout === 'default'}
-          />
-          {tocEl}
-          <SkipNavContent />
-          <Body
-            themeContext={themeContext}
-            breadcrumb={
-              activeType !== 'page' && themeContext.breadcrumb ? (
-                <Breadcrumb activePath={activePath} />
-              ) : null
-            }
-            timestamp={timestamp}
-            navigation={
-              activeType !== 'page' && themeContext.pagination ? (
-                <NavLinks
-                  flatDirectories={flatDocsDirectories}
-                  currentIndex={activeIndex}
-                />
-              ) : null
-            }
-          >
-            <MDXProvider
-              components={getComponents({
-                isRawLayout: themeContext.layout === 'raw',
-                components: config.components
-              })}
+        <Head />
+        <Banner />
+        {themeContext.navbar &&
+          renderComponent(config.navbar, {
+            flatDirectories,
+            items: topLevelNavbarItems
+          })}
+        <div
+          className={cn(
+            'mx-auto flex w-full flex-1 items-stretch',
+            themeContext.layout !== 'raw' && 'max-w-[90rem]'
+          )}
+        >
+          <ActiveAnchorProvider>
+            <Sidebar
+              docsDirectories={docsDirectories}
+              flatDirectories={flatDirectories}
+              fullDirectories={directories}
+              headings={headings}
+              asPopover={asPopover}
+              includePlaceholder={themeContext.layout === 'default'}
+            />
+            {tocEl}
+            <SkipNavContent />
+            <Body
+              themeContext={themeContext}
+              breadcrumb={
+                activeType !== 'page' && themeContext.breadcrumb ? (
+                  <Breadcrumb activePath={activePath} />
+                ) : null
+              }
+              timestamp={timestamp}
+              navigation={
+                activeType !== 'page' && themeContext.pagination ? (
+                  <NavLinks
+                    flatDirectories={flatDocsDirectories}
+                    currentIndex={activeIndex}
+                  />
+                ) : null
+              }
             >
-              {children}
-            </MDXProvider>
-          </Body>
-        </ActiveAnchorProvider>
+              <MDXProvider
+                components={getComponents({
+                  isRawLayout: themeContext.layout === 'raw',
+                  components: config.components
+                })}
+              >
+                {children}
+              </MDXProvider>
+            </Body>
+          </ActiveAnchorProvider>
+        </div>
+        {themeContext.footer
+          ? renderComponent(config.footer.component, { menu: asPopover })
+          : null}
       </div>
-      {themeContext.footer && config.footer ? (
-        <Footer menu={asPopover} />
-      ) : null}
     </div>
   )
 }
 
-const nextraPageContext: Record<string, Context> = {}
-
-function Layout(props: any): ReactElement {
+export default function Layout(props: any): ReactElement {
   const { route } = useRouter()
-  const context = nextraPageContext[route]
-
+  const context = globalThis.__nextra_pageContext__[route]
   if (!context) throw new Error(`No content found for ${route}.`)
+
   const { pageOpts, Content } = context
   return (
     <ConfigProvider value={context}>
@@ -280,27 +279,11 @@ function Layout(props: any): ReactElement {
   )
 }
 
-// Make sure the same component is always returned so Next.js will render the
-// stable layout. We then put the actual content into a global store and use
-// the route to identify it.
-export default function withLayout(
-  route: string,
-  Content: FC,
-  pageOpts: PageOpts,
-  themeConfig: DocsThemeConfig
-) {
-  nextraPageContext[route] = {
-    Content,
-    pageOpts,
-    themeConfig
-  }
+type PartialDocsThemeConfig = RecursivePartial<DocsThemeConfig>
 
-  return Layout
-}
-
-export { useConfig, getComponents }
+export { useConfig, PartialDocsThemeConfig as DocsThemeConfig }
+export { useMDXComponents } from '@mdx-js/react'
 export { useTheme } from 'next-themes'
-export * from './types'
 export {
   Bleed,
   Callout,
@@ -308,5 +291,6 @@ export {
   NotFoundPage,
   ServerSideErrorPage,
   Tabs,
-  Tab
+  Tab,
+  Navbar
 } from './components'

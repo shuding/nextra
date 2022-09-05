@@ -1,16 +1,10 @@
-interface Page {
-  name: string
-  route: string
-  children?: Page[]
-  meta: {
-    type?: string
-    title?: string
-    hidden?: boolean
-  }
-  frontMatter?: any
-}
+import { normalizeMeta } from './utils'
+import { MetaJsonFile, PageMapItem, Page } from './types'
 
-function getContext(name: string) {
+function getContext(name: string): {
+  pageMap: PageMapItem[]
+  route: string
+} {
   const context = globalThis.__nextra_internal__
   if (!context) {
     throw new Error(
@@ -20,63 +14,64 @@ function getContext(name: string) {
   return context
 }
 
-function normalizeMeta(meta: any) {
-  if (typeof meta === 'string') {
-    meta = {
-      title: meta
-    }
-  }
-  return meta
-}
-
-function filter(pageMap: any, activeLevel?: string) {
-  let activeLevelPages: Page[] | undefined
-  let meta = pageMap.find((item: any) => item.name === 'meta.json')?.meta || {}
-  const metaKeys = Object.keys(meta)
-
+function filter(
+  pageMap: PageMapItem[],
+  activeLevel?: string
+): {
+  items: Page[]
+  activeLevelPages: Page[]
+} {
+  let activeLevelPages: Page[] = []
   const items: Page[] = []
+  const meta = pageMap.find(
+    (item): item is MetaJsonFile => item.kind === 'Meta'
+  )!.data
+
   for (const item of pageMap) {
-    if (item.name === 'meta.json') continue
-    const page: Page = {
+    if (item.kind === 'Meta') continue
+    const page = {
       ...item,
       meta: normalizeMeta(meta[item.name])
-    }
-    if (item.children) {
-      const filteredChildren = filter(item.children, activeLevel)
-      page.children = filteredChildren[0]
-      if (filteredChildren[1]) {
-        activeLevelPages = filteredChildren[1]
+    } as Page
+
+    if (page.kind === 'Folder') {
+      const filtered = filter(page.children, activeLevel)
+      page.children = filtered.items
+      if (filtered.activeLevelPages.length) {
+        activeLevelPages = filtered.activeLevelPages
       } else if (page.route === activeLevel) {
-        activeLevelPages = activeLevelPages || page.children
+        if (!activeLevelPages.length) {
+          activeLevelPages = page.children
+        }
       }
     }
     items.push(page)
   }
 
-  return [
-    items.sort((a, b) => {
-      const indexA = metaKeys.indexOf(a.name)
-      const indexB = metaKeys.indexOf(b.name)
-      if (indexA === -1 && indexB === -1) return a.name < b.name ? -1 : 1
-      if (indexA === -1) return 1
-      if (indexB === -1) return -1
-      return indexA - indexB
-    }),
-    activeLevelPages
-  ]
+  const metaKeys = Object.keys(meta)
+  items.sort((a, b) => {
+    const indexA = metaKeys.indexOf(a.name)
+    const indexB = metaKeys.indexOf(b.name)
+    if (indexA === -1 && indexB === -1) return a.name < b.name ? -1 : 1
+    if (indexA === -1) return 1
+    if (indexB === -1) return -1
+    return indexA - indexB
+  })
+
+  return { items, activeLevelPages }
 }
 
-export function getAllPages() {
-  const internal = getContext('getAllPages')
-  return filter(internal.pageMap)[0]
+export function getAllPages(): Page[] {
+  const { pageMap } = getContext('getAllPages')
+  return filter(pageMap).items
 }
 
-export function getCurrentLevelPages() {
-  const internal = getContext('getCurrentLevelPages')
-  return filter(internal.pageMap, internal.route)[1] || []
+export function getCurrentLevelPages(): Page[] {
+  const { pageMap, route } = getContext('getCurrentLevelPages')
+  return filter(pageMap, route).activeLevelPages
 }
 
-export function getPagesUnderRoute(route: string) {
-  const internal = getContext('getPagesUnderRoute')
-  return filter(internal.pageMap, route)[1] || []
+export function getPagesUnderRoute(route: string): Page[] {
+  const { pageMap } = getContext('getPagesUnderRoute')
+  return filter(pageMap, route).activeLevelPages
 }

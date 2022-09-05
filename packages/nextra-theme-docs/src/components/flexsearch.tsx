@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ReactElement, ReactNode } from 'react'
+import React, { useState, ReactElement, ReactNode, useCallback } from 'react'
 import { useRouter } from 'next/router'
 import FlexSearch from 'flexsearch'
 import cn from 'clsx'
@@ -48,11 +48,113 @@ const indexes: {
   [locale: string]: [PageIndex, SectionIndex]
 } = {}
 
-export function Flexsearch(): ReactElement {
-  const router = useRouter()
-  const { locale = DEFAULT_LOCALE } = router
+// Caches promises that load the index
+const loadIndexesPromises = new Map<string, Promise<void>>()
+const loadIndexes = (basePath: string, locale: string): Promise<void> => {
+  const key = basePath + '@' + locale
+  if (loadIndexesPromises.has(key)) {
+    return loadIndexesPromises.get(key)!
+  }
+  const promise = loadIndexesImpl(basePath, locale)
+  loadIndexesPromises.set(key, promise)
+  return promise
+}
+
+const loadIndexesImpl = async (
+  basePath: string,
+  locale: string
+): Promise<void> => {
+  const response = await fetch(
+    `${basePath}/_next/static/chunks/nextra-data-${locale}.json`
+  )
+  const data = (await response.json()) as NextraData
+
+  const pageIndex: PageIndex = new FlexSearch.Document({
+    cache: 100,
+    tokenize: 'full',
+    document: {
+      id: 'id',
+      index: 'content',
+      store: ['title']
+    },
+    context: {
+      resolution: 9,
+      depth: 2,
+      bidirectional: true
+    }
+  })
+
+  const sectionIndex: SectionIndex = new FlexSearch.Document({
+    cache: 100,
+    tokenize: 'full',
+    document: {
+      id: 'id',
+      index: 'content',
+      tag: 'pageId',
+      store: ['title', 'content', 'url', 'display']
+    },
+    context: {
+      resolution: 9,
+      depth: 2,
+      bidirectional: true
+    }
+  })
+
+  let pageId = 0
+  for (const route in data) {
+    let pageContent = ''
+    ++pageId
+
+    for (const heading in data[route].data) {
+      const [hash, text] = heading.split('#')
+      const url = route + (hash ? '#' + hash : '')
+      const title = text || data[route].title
+
+      const content = data[route].data[heading] || ''
+      const paragraphs = content.split('\n').filter(Boolean)
+
+      sectionIndex.add({
+        id: url,
+        url,
+        title,
+        pageId: `page_${pageId}`,
+        content: title,
+        ...(paragraphs[0] && { display: paragraphs[0] })
+      })
+
+      for (let i = 0; i < paragraphs.length; i++) {
+        sectionIndex.add({
+          id: `${url}_${i}`,
+          url,
+          title,
+          pageId: `page_${pageId}`,
+          content: paragraphs[i]
+        })
+      }
+
+      // Add the page itself.
+      pageContent += ` ${title} ${content}`
+    }
+
+    pageIndex.add({
+      id: pageId,
+      title: data[route].title,
+      content: pageContent
+    })
+  }
+
+  indexes[locale] = [pageIndex, sectionIndex]
+}
+
+export function Flexsearch({
+  className
+}: {
+  className?: string
+}): ReactElement {
+  const { locale = DEFAULT_LOCALE, basePath } = useRouter()
   const [loading, setLoading] = useState(false)
   const [results, setResults] = useState<SearchResult[]>([])
+  const [search, setSearch] = useState('')
 
   const doSearch = (search: string) => {
     if (!search) return
@@ -147,106 +249,38 @@ export function Flexsearch(): ReactElement {
     )
   }
 
-  const loadIndexes = async (): Promise<void> => {
-    if (indexes[locale]) return
-    setLoading(true)
-
-    const response = await fetch(
-      `${router.basePath}/_next/static/chunks/nextra-data-${locale}.json`
-    )
-    const data = (await response.json()) as NextraData
-
-    const pageIndex: PageIndex = new FlexSearch.Document({
-      cache: 100,
-      tokenize: 'full',
-      document: {
-        id: 'id',
-        index: 'content',
-        store: ['title']
-      },
-      context: {
-        resolution: 9,
-        depth: 2,
-        bidirectional: true
+  const preload = useCallback(
+    async (active: boolean) => {
+      if (active && !indexes[locale]) {
+        setLoading(true)
+        await loadIndexes(basePath, locale)
+        setLoading(false)
       }
-    })
-
-    const sectionIndex: SectionIndex = new FlexSearch.Document({
-      cache: 100,
-      tokenize: 'full',
-      document: {
-        id: 'id',
-        index: 'content',
-        tag: 'pageId',
-        store: ['title', 'content', 'url', 'display']
-      },
-      context: {
-        resolution: 9,
-        depth: 2,
-        bidirectional: true
-      }
-    })
-
-    let pageId = 0
-    for (const route in data) {
-      let pageContent = ''
-      ++pageId
-
-      for (const heading in data[route].data) {
-        const [hash, text] = heading.split('#')
-        const url = route + (hash ? '#' + hash : '')
-        const title = text || data[route].title
-
-        const content = data[route].data[heading] || ''
-        const paragraphs = content.split('\n').filter(Boolean)
-
-        sectionIndex.add({
-          id: url,
-          url,
-          title,
-          pageId: `page_${pageId}`,
-          content: title,
-          ...(paragraphs[0] && { display: paragraphs[0] })
-        })
-
-        for (let i = 0; i < paragraphs.length; i++) {
-          sectionIndex.add({
-            id: `${url}_${i}`,
-            url,
-            title,
-            pageId: `page_${pageId}`,
-            content: paragraphs[i]
-          })
-        }
-
-        // Add the page itself.
-        pageContent += ` ${title} ${content}`
-      }
-
-      pageIndex.add({
-        id: pageId,
-        title: data[route].title,
-        content: pageContent
-      })
-    }
-
-    indexes[locale] = [pageIndex, sectionIndex]
-    setLoading(false)
-  }
+    },
+    [locale]
+  )
 
   const handleChange = async (value: string) => {
+    setSearch(value)
     if (loading) {
       return
     }
-    await loadIndexes()
+    if (!indexes[locale]) {
+      setLoading(true)
+      await loadIndexes(basePath, locale)
+      setLoading(false)
+    }
     doSearch(value)
   }
 
   return (
     <Search
       loading={loading}
+      value={search}
       onChange={handleChange}
-      className="w-screen min-h-[100px] max-w-[min(calc(100vw-2rem),calc(100%+20rem))]"
+      onActive={preload}
+      className={className}
+      overlayClassName="w-screen min-h-[100px] max-w-[min(calc(100vw-2rem),calc(100%+20rem))]"
       results={results}
     />
   )

@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
+import { useMounted } from 'nextra/hooks'
 import { useConfig } from '../contexts'
-import { renderComponent, useMounted, getGitIssueUrl } from '../utils'
+import { renderComponent, getGitIssueUrl } from '../utils'
 import { useRouter } from 'next/router'
 import { Anchor } from './anchor'
 
-export function ServerSideErrorPage() {
+export function ServerSideErrorPage(): ReactElement | null {
   const config = useConfig()
   const mounted = useMounted()
   const { asPath } = useRouter()
-  if (!config.serverSideErrorLink) {
+  const { link, labels } = config.serverSideError
+  if (!link) {
     return null
   }
 
@@ -20,11 +22,12 @@ export function ServerSideErrorPage() {
           title: `Got server-side error in \`${
             mounted ? asPath : ''
           }\` url. Please fix!`,
-          labels: config.serverSideErrorLabels
+          labels
         })}
         newWindow
+        className="ring-primary-500/30 focus:outline-none focus-visible:ring text-primary-500 underline decoration-from-font [text-underline-position:under]"
       >
-        {renderComponent(config.serverSideErrorLink)}
+        {renderComponent(link)}
       </Anchor>
     </p>
   )

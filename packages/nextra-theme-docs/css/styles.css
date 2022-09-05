@@ -4,14 +4,9 @@
 @import 'nextra/styles/variables.css';
 @import 'nextra/styles/code-block.css';
 @import 'nextra/styles/subheading-anchor.css';
-
-:root {
-  --nextra-primary-hue: 212deg;
-}
-
-.dark {
-  --nextra-primary-hue: 204deg;
-}
+@import './hamburger.css';
+@import './scrollbar.css';
+@import './typesetting-article.css';
 
 html {
   @apply antialiased text-base;
@@ -42,91 +37,29 @@ body {
         box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
       }
     }
-    @media (prefers-contrast: more) {
-      .nextra-nav-container-blur {
-        box-shadow: 0 0 0 1px black;
-        .dark & {
-          box-shadow: 0 0 0 1px white;
-        }
-      }
-    }
-    @supports (
-      (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))
-    ) {
-      .nextra-nav-container-blur {
-        backdrop-filter: blur(12px);
-        @apply bg-opacity-[.85] dark:bg-opacity-80;
-      }
-    }
 
     .nextra-nav-link {
       @apply text-sm;
     }
     .nextra-menu-icon {
-      @apply select-none rounded outline-none;
-      &:active {
-        @apply bg-gray-400/20;
-      }
-    }
-    .nextra-menu-icon svg {
-      g {
-        transform-origin: center;
-        transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
-      }
-      path {
-        opacity: 1;
-        transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1) 0.2s,
-          opacity 0.2s ease 0.2s;
-      }
-      &.open {
-        path {
-          transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1),
-            opacity 0s ease 0.2s;
-        }
-        g {
-          transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1) 0.2s;
-        }
-      }
-      &.open > {
-        path {
-          opacity: 0;
-        }
-        g:nth-of-type(1) {
-          transform: rotate(45deg);
-          path {
-            transform: translate3d(0, 6px, 0);
-          }
-        }
-        g:nth-of-type(2) {
-          transform: rotate(-45deg);
-          path {
-            transform: translate3d(0, -6px, 0);
-          }
-        }
-      }
-    }
-  }
-
-  .nextra-sidebar-container {
-    mask-image: linear-gradient(to bottom, transparent, #000 20px),
-      linear-gradient(to left, #000 10px, transparent 10px);
-
-    &.with-menu.nextra-scrollbar::-webkit-scrollbar-track {
-      margin-bottom: 76px;
+      @apply select-none rounded outline-none active:bg-gray-400/20;
     }
   }
 
   /* Sidebar */
   .nextra-sidebar {
     -webkit-touch-callout: none;
-    ul {
-      a, button {
+    ul.nextra-sidebar-list {
+      overflow: hidden;
+      a,
+      button {
         &:focus-visible {
           @apply ring ring-primary-200;
         }
       }
       li.active > a {
-        &, &:hover {
+        &,
+        &:hover {
           @apply bg-primary-50 font-bold text-primary-500;
           @apply dark:bg-primary-500/10 dark:text-primary-500;
         }
@@ -163,48 +96,6 @@ body {
         @apply ltr:md:border-l ltr:pl-3 ltr:ml-1 rtl:md:border-r rtl:pr-3 rtl:mr-1;
       }
     }
-    .nextra-sidebar-search {
-      @apply sticky top-0 -mt-4 bg-white pt-4 dark:bg-dark;
-      box-shadow: 0 2px 14px 6px white;
-      z-index: 1;
-      .dark & {
-        box-shadow: 0 2px 14px 6px #111;
-      }
-    }
-
-    .nextra-sidebar-menu {
-      @apply sticky bottom-0;
-      @media (prefers-contrast: more) {
-        & {
-          box-shadow: none;
-          border-top: 1px solid #999;
-        }
-      }
-    }
-  }
-
-  .nextra-scrollbar {
-    scrollbar-gutter: stable;
-    &::-webkit-scrollbar {
-      width: 6px;
-    }
-    &::-webkit-scrollbar-track {
-      margin-top: 20px;
-      margin-bottom: 16px;
-      background-color: transparent;
-    }
-    &::-webkit-scrollbar-thumb {
-      box-shadow: inset 0 0 0 5px rgba(128, 128, 128, 0);
-      border-radius: 20px;
-    }
-    &:hover {
-      &::-webkit-scrollbar-thumb {
-        box-shadow: inset 0 0 0 5px rgba(128, 128, 128, 0.2);
-        &:hover {
-          box-shadow: inset 0 0 0 5px rgba(128, 128, 128, 0.4);
-        }
-      }
-    }
   }
 }
 
@@ -229,6 +120,7 @@ body {
     @apply top-0 overscroll-contain bg-white pt-16 dark:bg-dark;
     height: 100vh;
     height: -webkit-fill-available;
+    height: 100dvh;
 
     opacity: 0;
     transform: translate3d(0, -110%, 0);
@@ -255,16 +147,14 @@ body {
       @apply top-10 md:top-0;
     }
   }
-  .nextra-banner-hidden .nextra-banner-container ~ div .nextra-sidebar-container {
+  .nextra-banner-hidden
+    .nextra-banner-container
+    ~ div
+    .nextra-sidebar-container {
     @apply pt-16;
   }
   .nextra-banner-hidden div.nextra-nav-container {
     @apply top-0;
-  }
-  .nextra-container {
-    .nextra-scrollbar {
-      scrollbar-gutter: auto;
-    }
   }
 }
 
@@ -281,16 +171,6 @@ body {
 }
 
 @media (prefers-contrast: more) {
-  .nextra-toc-meta {
-    box-shadow: none;
-    border-top: 1px solid #999 !important;
-    a {
-      @apply text-gray-800 dark:!text-gray-50;
-    }
-  }
-  article h2 {
-    border-color: #999 !important;
-  }
   .nextra-nav-container nav .nextra-nav-link {
     @apply text-gray-700 dark:text-gray-100;
     &.active {
@@ -309,10 +189,10 @@ body {
   .nextra-navigation-links {
     border-color: #999 !important;
   }
-  .nextra-toc ul li a {
-    @apply text-gray-900 underline dark:text-gray-50;
-    &[aria-selected='true'] {
-      @apply text-primary-500;
+  .nextra-nav-container-blur {
+    box-shadow: 0 0 0 1px black;
+    .dark & {
+      box-shadow: 0 0 0 1px white;
     }
   }
 }
@@ -331,80 +211,33 @@ article {
       vertical-align: -4px;
     }
   }
-
-  /* Typesettings */
-  &.nextra-body-typesetting-article {
-    font-size: 17px;
-    font-feature-settings: 'rlig' 1, 'calt' 1;
-    h1 {
-      @apply mt-6 mb-4 text-center;
-      font-size: 2.5rem;
-    }
-    h2 {
-      @apply border-none;
-    }
-    a {
-      @apply no-underline hover:underline;
-    }
-    p {
-      @apply leading-8;
-    }
-    code {
-      @apply border-none dark:bg-neutral-700;
-    }
-    pre code {
-      @apply dark:bg-transparent;
-    }
-    .subheading-anchor + a {
-      @apply no-underline hover:no-underline after:hidden;
-    }
-  }
 }
 
-.nextra-toc {
-  .nextra-toc-content {
-    mask-image: linear-gradient(to bottom, transparent, #000 20px),
-      linear-gradient(to left, #000 10px, transparent 10px);
-  }
-  ul {
-    @apply m-0 list-none break-words;
-    hyphens: auto;
-    &:first-child {
-      @apply mt-0;
-    }
-  }
-  li {
-    @apply my-2;
-  }
+.nextra-toc > .div,
+.nextra-sidebar-container {
+  mask-image: linear-gradient(to bottom, transparent, #000 20px),
+    linear-gradient(to left, #000 10px, transparent 10px);
 }
 
-/* Search */
-.nextra-search ul {
-  max-height: min(calc(100vh - 5rem - env(safe-area-inset-bottom)), 400px);
-  transition: max-height 0.2s ease;
-  @supports (
-    (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))
-  ) {
-    & {
-      backdrop-filter: blur(16px);
-      @apply bg-opacity-70 dark:bg-opacity-80;
-    }
+@supports (
+  (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))
+) {
+  .nextra-search ul {
+    @apply backdrop-blur-lg bg-opacity-70 dark:bg-opacity-80;
+  }
+  .nextra-nav-container-blur {
+    @apply backdrop-blur-md bg-opacity-[.85] dark:bg-opacity-80;
   }
 }
 
 @media screen and (max-width: 767px) {
-  .nextra-search {
-    .excerpt {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-line-clamp: 1;
-      line-clamp: 1;
-      -webkit-box-orient: vertical;
-    }
-    ul {
-      max-height: min(calc(50vh - 11rem - env(safe-area-inset-bottom)), 400px);
-    }
+  .nextra-search .excerpt {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
   }
 }
 
@@ -422,7 +255,7 @@ input[type='search']::-webkit-search-results-decoration {
   display: none;
 }
 .locale-switch[open] summary:before {
-  content: ' ';
+  content: '';
   @apply fixed inset-0 z-10 block cursor-default bg-transparent;
 }
 .locale-switch .locale-dropdown {
@@ -436,17 +269,6 @@ input[type='search']::-webkit-search-results-decoration {
 
 .contains-task-list input[type='checkbox'] {
   @apply mr-1;
-}
-
-/* Hide scrollbar for Chrome, Safari and Opera */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
-.no-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
 }
 
 .nextra-banner-hidden .nextra-banner-container {

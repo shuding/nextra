@@ -4,402 +4,17 @@ exports[`Page Process > pageMap en-US 1`] = `
 [
   [
     {
-      "locale": "",
+      "kind": "MdxPage",
       "name": "404",
       "route": "/404",
     },
     {
-      "locale": "",
+      "kind": "MdxPage",
       "name": "500",
       "route": "/500",
     },
     {
-      "children": [
-        {
-          "locale": "en-US",
-          "name": "a-page",
-          "route": "/about/a-page",
-        },
-        {
-          "locale": "en-US",
-          "name": "acknowledgement",
-          "route": "/about/acknowledgement",
-        },
-        {
-          "locale": "en-US",
-          "meta": {
-            "a-page": {
-              "hidden": true,
-              "theme": {
-                "layout": "raw",
-              },
-              "title": "A Page",
-              "type": "page",
-            },
-            "acknowledgement": "🧩 Acknowledgement",
-            "team": "👥 Team",
-          },
-          "name": "meta.json",
-        },
-        {
-          "locale": "en-US",
-          "name": "team",
-          "route": "/about/team",
-        },
-      ],
-      "name": "about",
-      "route": "/about",
-    },
-    {
-      "children": [
-        {
-          "locale": "en-US",
-          "meta": {
-            "swr-v1": {
-              "theme": {
-                "breadcrumb": true,
-              },
-              "title": "Announcing SWR 1.0",
-            },
-          },
-          "name": "meta.json",
-        },
-        {
-          "frontMatter": {
-            "description": "Almost 2 years ago we open sourced SWR, the tiny data-fetching React library that people love. Today we are reaching another milestone: the 1.0 version of SWR.",
-            "image": "https://assets.vercel.com/image/upload/v1630059453/swr/v1.png",
-          },
-          "locale": "en-US",
-          "name": "swr-v1",
-          "route": "/blog/swr-v1",
-        },
-      ],
-      "name": "blog",
-      "route": "/blog",
-    },
-    {
-      "frontMatter": {
-        "searchable": false,
-      },
-      "locale": "en-US",
-      "name": "blog",
-      "route": "/blog",
-    },
-    {
-      "children": [
-        {
-          "locale": "en-US",
-          "name": "404-500",
-          "route": "/docs/404-500",
-        },
-        {
-          "children": [
-            {
-              "locale": "en-US",
-              "name": "cache",
-              "route": "/docs/advanced/cache",
-            },
-            {
-              "locale": "en-US",
-              "name": "code-highlighting",
-              "route": "/docs/advanced/code-highlighting",
-            },
-            {
-              "locale": "en-US",
-              "name": "file-name.with.DOTS",
-              "route": "/docs/advanced/file-name.with.DOTS",
-            },
-            {
-              "locale": "en-US",
-              "name": "markdown-import",
-              "route": "/docs/advanced/markdown-import",
-            },
-            {
-              "locale": "en-US",
-              "meta": {
-                "*": {
-                  "theme": {
-                    "footer": false,
-                  },
-                },
-                "--- yoo": {
-                  "title": "Do Not Use",
-                  "type": "separator",
-                },
-                "cache": "Cache",
-                "code-highlighting": "Code highlighting",
-                "file-name.with.DOTS": "Filenames with dots",
-                "markdown-import": "Markdown import",
-                "more": "More: A Super Super Super Super Long Directory",
-                "performance": "Performance",
-                "react-native": "React Native",
-              },
-              "name": "meta.json",
-            },
-            {
-              "children": [
-                {
-                  "locale": "en-US",
-                  "name": "loooooooooooooooooooong-title",
-                  "route": "/docs/advanced/more/loooooooooooooooooooong-title",
-                },
-              ],
-              "name": "more",
-              "route": "/docs/advanced/more",
-            },
-            {
-              "locale": "en-US",
-              "name": "performance",
-              "route": "/docs/advanced/performance",
-            },
-            {
-              "locale": "en-US",
-              "name": "react-native",
-              "route": "/docs/advanced/react-native",
-            },
-          ],
-          "name": "advanced",
-          "route": "/docs/advanced",
-        },
-        {
-          "locale": "en-US",
-          "name": "advanced",
-          "route": "/docs/advanced",
-        },
-        {
-          "locale": "en-US",
-          "name": "arguments",
-          "route": "/docs/arguments",
-        },
-        {
-          "locale": "en-US",
-          "name": "change-log",
-          "route": "/docs/change-log",
-        },
-        {
-          "locale": "en-US",
-          "name": "conditional-fetching",
-          "route": "/docs/conditional-fetching",
-        },
-        {
-          "locale": "en-US",
-          "name": "data-fetching",
-          "route": "/docs/data-fetching",
-        },
-        {
-          "locale": "en-US",
-          "name": "error-handling",
-          "route": "/docs/error-handling",
-        },
-        {
-          "locale": "en-US",
-          "name": "getting-started",
-          "route": "/docs/getting-started",
-        },
-        {
-          "locale": "en-US",
-          "name": "global-configuration",
-          "route": "/docs/global-configuration",
-        },
-        {
-          "locale": "en-US",
-          "meta": {
-            "--- hey": {
-              "title": "Getting Started",
-              "type": "separator",
-            },
-            "--- my_new_separator": {
-              "title": "Advanced",
-              "type": "separator",
-            },
-            "404-500": "404/500 Custom Error Pages",
-            "advanced": {
-              "title": "Advanced",
-            },
-            "arguments": "Arguments",
-            "change-log": {
-              "theme": {
-                "sidebar": false,
-              },
-              "title": "Change Log",
-            },
-            "conditional-fetching": "Conditional Data Fetching",
-            "data-fetching": "Data Fetching",
-            "error-handling": {
-              "hidden": true,
-              "title": "Error Handling",
-            },
-            "getting-started": "Getting Started",
-            "github_link": {
-              "href": "https://github.com/shuding/nextra",
-              "newWindow": true,
-              "title": "GitHub 🐙 →",
-              "type": "page",
-            },
-            "global-configuration": "Global Configuration",
-            "middleware": "Middleware",
-            "mutation": "Mutation",
-            "options": "Options",
-            "pagination": "Pagination",
-            "prefetching": "Prefetching",
-            "raw-layout": {
-              "theme": {
-                "layout": "raw",
-              },
-              "title": "Raw Layout",
-            },
-            "revalidation": "Auto Revalidation",
-            "scroll-with-dynamic-height": "Scroll With Dynamic Height",
-            "suspense": "Suspense",
-            "typescript": "TypeScript :)",
-            "with-nextjs": "Next.js SSG and SSR",
-          },
-          "name": "meta.json",
-        },
-        {
-          "locale": "en-US",
-          "name": "middleware",
-          "route": "/docs/middleware",
-        },
-        {
-          "locale": "en-US",
-          "name": "mutation",
-          "route": "/docs/mutation",
-        },
-        {
-          "locale": "en-US",
-          "name": "options",
-          "route": "/docs/options",
-        },
-        {
-          "locale": "en-US",
-          "name": "pagination",
-          "route": "/docs/pagination",
-        },
-        {
-          "locale": "en-US",
-          "name": "prefetching",
-          "route": "/docs/prefetching",
-        },
-        {
-          "locale": "en-US",
-          "name": "raw-layout",
-          "route": "/docs/raw-layout",
-        },
-        {
-          "locale": "en-US",
-          "name": "revalidation",
-          "route": "/docs/revalidation",
-        },
-        {
-          "locale": "en-US",
-          "name": "scroll-with-dynamic-height",
-          "route": "/docs/scroll-with-dynamic-height",
-        },
-        {
-          "locale": "en-US",
-          "name": "suspense",
-          "route": "/docs/suspense",
-        },
-        {
-          "locale": "en-US",
-          "name": "typescript",
-          "route": "/docs/typescript",
-        },
-        {
-          "locale": "en-US",
-          "name": "with-nextjs",
-          "route": "/docs/with-nextjs",
-        },
-      ],
-      "name": "docs",
-      "route": "/docs",
-    },
-    {
-      "children": [
-        {
-          "frontMatter": {
-            "full": true,
-            "title": "Authentication",
-          },
-          "locale": "en-US",
-          "name": "auth",
-          "route": "/examples/auth",
-        },
-        {
-          "frontMatter": {
-            "full": true,
-            "title": "Basic Usage",
-          },
-          "locale": "en-US",
-          "name": "basic",
-          "route": "/examples/basic",
-        },
-        {
-          "frontMatter": {
-            "full": true,
-            "title": "Error Handling",
-          },
-          "locale": "en-US",
-          "name": "error-handling",
-          "route": "/examples/error-handling",
-        },
-        {
-          "locale": "en-US",
-          "name": "full",
-          "route": "/examples/full",
-        },
-        {
-          "frontMatter": {
-            "full": true,
-            "title": "Infinite Loading",
-          },
-          "locale": "en-US",
-          "name": "infinite-loading",
-          "route": "/examples/infinite-loading",
-        },
-        {
-          "locale": "en-US",
-          "meta": {
-            "auth": "Authentication",
-            "basic": "Basic Usage",
-            "error-handling": "Error Handling",
-            "full": {
-              "theme": {
-                "layout": "raw",
-              },
-              "title": "Full",
-            },
-            "infinite-loading": "Infinite Loading",
-            "ssr": "Next.js SSR",
-          },
-          "name": "meta.json",
-        },
-        {
-          "frontMatter": {
-            "full": true,
-            "title": "Next.js SSR",
-          },
-          "locale": "en-US",
-          "name": "ssr",
-          "route": "/examples/ssr",
-        },
-      ],
-      "name": "examples",
-      "route": "/examples",
-    },
-    {
-      "frontMatter": {
-        "searchable": false,
-        "title": "React Hooks for Data Fetching",
-      },
-      "locale": "en-US",
-      "name": "index",
-      "route": "/",
-    },
-    {
-      "locale": "en-US",
-      "meta": {
+      "data": {
         "404": {
           "theme": {
             "timestamp": false,
@@ -470,32 +85,13 @@ exports[`Page Process > pageMap en-US 1`] = `
           "type": "page",
         },
       },
-      "name": "meta.json",
+      "kind": "Meta",
+      "locale": "en-US",
     },
-  ],
-  "/docs/data-fetching",
-  "Data Fetching",
-]
-`;
-
-exports[`Page Process > pageMap zh-CN 1`] = `
-[
-  [
     {
       "children": [
         {
-          "locale": "en-US",
-          "name": "a-page",
-          "route": "/about/a-page",
-        },
-        {
-          "locale": "en-US",
-          "name": "acknowledgement",
-          "route": "/about/acknowledgement",
-        },
-        {
-          "locale": "en-US",
-          "meta": {
+          "data": {
             "a-page": {
               "hidden": true,
               "theme": {
@@ -507,136 +103,542 @@ exports[`Page Process > pageMap zh-CN 1`] = `
             "acknowledgement": "🧩 Acknowledgement",
             "team": "👥 Team",
           },
-          "name": "meta.json",
+          "kind": "Meta",
+          "locale": "en-US",
         },
         {
+          "kind": "MdxPage",
+          "locale": "en-US",
+          "name": "a-page",
+          "route": "/about/a-page",
+        },
+        {
+          "kind": "MdxPage",
+          "locale": "en-US",
+          "name": "acknowledgement",
+          "route": "/about/acknowledgement",
+        },
+        {
+          "kind": "MdxPage",
           "locale": "en-US",
           "name": "team",
           "route": "/about/team",
         },
       ],
+      "kind": "Folder",
       "name": "about",
       "route": "/about",
     },
     {
       "children": [
         {
-          "locale": "zh-CN",
-          "meta": {
-            "swr-v1": "SWR 1.0 发布",
+          "data": {
+            "swr-v1": {
+              "theme": {
+                "breadcrumb": true,
+              },
+              "title": "Announcing SWR 1.0",
+            },
           },
-          "name": "meta.json",
+          "kind": "Meta",
+          "locale": "en-US",
         },
         {
           "frontMatter": {
-            "description": "大约两年前，我们开源了 SWR，大家喜爱的小型数据请求 React 库。今天，我们迎来了另一个里程碑：SWR 1.0 版本发布。",
+            "description": "Almost 2 years ago we open sourced SWR, the tiny data-fetching React library that people love. Today we are reaching another milestone: the 1.0 version of SWR.",
             "image": "https://assets.vercel.com/image/upload/v1630059453/swr/v1.png",
           },
-          "locale": "zh-CN",
+          "kind": "MdxPage",
+          "locale": "en-US",
           "name": "swr-v1",
           "route": "/blog/swr-v1",
         },
       ],
+      "kind": "Folder",
+      "name": "blog",
+      "route": "/blog",
+    },
+    {
+      "frontMatter": {
+        "searchable": false,
+      },
+      "kind": "MdxPage",
+      "locale": "en-US",
       "name": "blog",
       "route": "/blog",
     },
     {
       "children": [
         {
+          "kind": "MdxPage",
+          "locale": "en-US",
+          "name": "404-500",
+          "route": "/docs/404-500",
+        },
+        {
+          "data": {
+            "--- hey": {
+              "title": "Getting Started",
+              "type": "separator",
+            },
+            "--- my_new_separator": {
+              "title": "Advanced",
+              "type": "separator",
+            },
+            "404-500": "404/500 Custom Error Pages",
+            "advanced": {
+              "title": "Advanced",
+            },
+            "arguments": "Arguments",
+            "change-log": {
+              "theme": {
+                "sidebar": false,
+              },
+              "title": "Change Log",
+            },
+            "code-block-without-language": "code-block-without-language",
+            "conditional-fetching": "Conditional Data Fetching",
+            "data-fetching": "Data Fetching",
+            "error-handling": {
+              "hidden": true,
+              "title": "Error Handling",
+            },
+            "getting-started": "Getting Started",
+            "github_link": {
+              "href": "https://github.com/shuding/nextra",
+              "newWindow": true,
+              "title": "GitHub 🐙 →",
+              "type": "page",
+            },
+            "global-configuration": "Global Configuration",
+            "middleware": "Middleware",
+            "mutation": "Mutation",
+            "options": "Options",
+            "pagination": "Pagination",
+            "prefetching": "Prefetching",
+            "raw-layout": {
+              "theme": {
+                "layout": "raw",
+              },
+              "title": "Raw Layout",
+            },
+            "revalidation": "Auto Revalidation",
+            "scroll-with-dynamic-height": "Scroll With Dynamic Height",
+            "suspense": "Suspense",
+            "typescript": "TypeScript :)",
+            "with-nextjs": "Next.js SSG and SSR",
+          },
+          "kind": "Meta",
+          "locale": "en-US",
+        },
+        {
           "children": [
             {
-              "locale": "zh-CN",
+              "data": {
+                "*": {
+                  "theme": {
+                    "footer": false,
+                  },
+                },
+                "--- yoo": {
+                  "title": "Do Not Use",
+                  "type": "separator",
+                },
+                "cache": "Cache",
+                "code-highlighting": "Code highlighting",
+                "file-name.with.DOTS": "Filenames with dots",
+                "markdown-import": "Markdown import",
+                "more": "More: A Super Super Super Super Long Directory",
+                "performance": "Performance",
+                "react-native": "React Native",
+              },
+              "kind": "Meta",
+              "locale": "en-US",
+            },
+            {
+              "kind": "MdxPage",
+              "locale": "en-US",
               "name": "cache",
               "route": "/docs/advanced/cache",
             },
             {
-              "locale": "zh-CN",
-              "name": "file-name.with.DOTS",
-              "route": "/docs/advanced/file-name.with.DOTS",
-            },
-            {
-              "locale": "zh-CN",
-              "meta": {
-                "cache": "缓存",
-                "file-name.with.DOTS": "带点的文件名",
-                "performance": "性能",
-                "react-native": "React Native",
-              },
-              "name": "meta.json",
-            },
-            {
-              "children": [
-                {
-                  "locale": "en-US",
-                  "name": "loooooooooooooooooooong-title",
-                  "route": "/docs/advanced/more/loooooooooooooooooooong-title",
-                },
-              ],
-              "name": "more",
-              "route": "/docs/advanced/more",
-            },
-            {
-              "locale": "zh-CN",
-              "name": "performance",
-              "route": "/docs/advanced/performance",
-            },
-            {
-              "locale": "zh-CN",
-              "name": "react-native",
-              "route": "/docs/advanced/react-native",
-            },
-            {
+              "kind": "MdxPage",
               "locale": "en-US",
               "name": "code-highlighting",
               "route": "/docs/advanced/code-highlighting",
             },
             {
+              "kind": "MdxPage",
+              "locale": "en-US",
+              "name": "file-name.with.DOTS",
+              "route": "/docs/advanced/file-name.with.DOTS",
+            },
+            {
+              "kind": "MdxPage",
               "locale": "en-US",
               "name": "markdown-import",
               "route": "/docs/advanced/markdown-import",
             },
+            {
+              "children": [
+                {
+                  "kind": "MdxPage",
+                  "locale": "en-US",
+                  "name": "loooooooooooooooooooong-title",
+                  "route": "/docs/advanced/more/loooooooooooooooooooong-title",
+                },
+                {
+                  "data": {
+                    "loooooooooooooooooooong-title": "loooooooooooooooooooong-title",
+                  },
+                  "kind": "Meta",
+                  "locale": "en-US",
+                },
+              ],
+              "kind": "Folder",
+              "name": "more",
+              "route": "/docs/advanced/more",
+            },
+            {
+              "kind": "MdxPage",
+              "locale": "en-US",
+              "name": "performance",
+              "route": "/docs/advanced/performance",
+            },
+            {
+              "kind": "MdxPage",
+              "locale": "en-US",
+              "name": "react-native",
+              "route": "/docs/advanced/react-native",
+            },
           ],
+          "kind": "Folder",
           "name": "advanced",
           "route": "/docs/advanced",
         },
         {
-          "locale": "zh-CN",
+          "kind": "MdxPage",
+          "locale": "en-US",
+          "name": "advanced",
+          "route": "/docs/advanced",
+        },
+        {
+          "kind": "MdxPage",
+          "locale": "en-US",
           "name": "arguments",
           "route": "/docs/arguments",
         },
         {
-          "locale": "zh-CN",
+          "kind": "MdxPage",
+          "locale": "en-US",
           "name": "change-log",
           "route": "/docs/change-log",
         },
         {
-          "locale": "zh-CN",
+          "kind": "MdxPage",
+          "locale": "en-US",
+          "name": "code-block-without-language",
+          "route": "/docs/code-block-without-language",
+        },
+        {
+          "kind": "MdxPage",
+          "locale": "en-US",
           "name": "conditional-fetching",
           "route": "/docs/conditional-fetching",
         },
         {
-          "locale": "zh-CN",
+          "kind": "MdxPage",
+          "locale": "en-US",
           "name": "data-fetching",
           "route": "/docs/data-fetching",
         },
         {
-          "locale": "zh-CN",
+          "kind": "MdxPage",
+          "locale": "en-US",
           "name": "error-handling",
           "route": "/docs/error-handling",
         },
         {
-          "locale": "zh-CN",
+          "kind": "MdxPage",
+          "locale": "en-US",
           "name": "getting-started",
           "route": "/docs/getting-started",
         },
         {
-          "locale": "zh-CN",
+          "kind": "MdxPage",
+          "locale": "en-US",
           "name": "global-configuration",
           "route": "/docs/global-configuration",
         },
         {
+          "kind": "MdxPage",
+          "locale": "en-US",
+          "name": "middleware",
+          "route": "/docs/middleware",
+        },
+        {
+          "kind": "MdxPage",
+          "locale": "en-US",
+          "name": "mutation",
+          "route": "/docs/mutation",
+        },
+        {
+          "kind": "MdxPage",
+          "locale": "en-US",
+          "name": "options",
+          "route": "/docs/options",
+        },
+        {
+          "kind": "MdxPage",
+          "locale": "en-US",
+          "name": "pagination",
+          "route": "/docs/pagination",
+        },
+        {
+          "kind": "MdxPage",
+          "locale": "en-US",
+          "name": "prefetching",
+          "route": "/docs/prefetching",
+        },
+        {
+          "kind": "MdxPage",
+          "locale": "en-US",
+          "name": "raw-layout",
+          "route": "/docs/raw-layout",
+        },
+        {
+          "kind": "MdxPage",
+          "locale": "en-US",
+          "name": "revalidation",
+          "route": "/docs/revalidation",
+        },
+        {
+          "kind": "MdxPage",
+          "locale": "en-US",
+          "name": "scroll-with-dynamic-height",
+          "route": "/docs/scroll-with-dynamic-height",
+        },
+        {
+          "kind": "MdxPage",
+          "locale": "en-US",
+          "name": "suspense",
+          "route": "/docs/suspense",
+        },
+        {
+          "kind": "MdxPage",
+          "locale": "en-US",
+          "name": "typescript",
+          "route": "/docs/typescript",
+        },
+        {
+          "kind": "MdxPage",
+          "locale": "en-US",
+          "name": "with-nextjs",
+          "route": "/docs/with-nextjs",
+        },
+      ],
+      "kind": "Folder",
+      "name": "docs",
+      "route": "/docs",
+    },
+    {
+      "children": [
+        {
+          "data": {
+            "auth": "Authentication",
+            "basic": "Basic Usage",
+            "error-handling": "Error Handling",
+            "full": {
+              "theme": {
+                "layout": "raw",
+              },
+              "title": "Full",
+            },
+            "infinite-loading": "Infinite Loading",
+            "ssr": "Next.js SSR",
+          },
+          "kind": "Meta",
+          "locale": "en-US",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Authentication",
+          },
+          "kind": "MdxPage",
+          "locale": "en-US",
+          "name": "auth",
+          "route": "/examples/auth",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Basic Usage",
+          },
+          "kind": "MdxPage",
+          "locale": "en-US",
+          "name": "basic",
+          "route": "/examples/basic",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Error Handling",
+          },
+          "kind": "MdxPage",
+          "locale": "en-US",
+          "name": "error-handling",
+          "route": "/examples/error-handling",
+        },
+        {
+          "kind": "MdxPage",
+          "locale": "en-US",
+          "name": "full",
+          "route": "/examples/full",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Infinite Loading",
+          },
+          "kind": "MdxPage",
+          "locale": "en-US",
+          "name": "infinite-loading",
+          "route": "/examples/infinite-loading",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Next.js SSR",
+          },
+          "kind": "MdxPage",
+          "locale": "en-US",
+          "name": "ssr",
+          "route": "/examples/ssr",
+        },
+      ],
+      "kind": "Folder",
+      "name": "examples",
+      "route": "/examples",
+    },
+    {
+      "frontMatter": {
+        "searchable": false,
+        "title": "React Hooks for Data Fetching",
+      },
+      "kind": "MdxPage",
+      "locale": "en-US",
+      "name": "index",
+      "route": "/",
+    },
+    {
+      "data": {
+        "404": "404",
+        "500": "500",
+      },
+      "kind": "Meta",
+    },
+  ],
+  "/docs/data-fetching",
+  "Data Fetching",
+]
+`;
+
+exports[`Page Process > pageMap zh-CN 1`] = `
+[
+  [
+    {
+      "data": {
+        "blog": {
+          "title": "博客",
+          "type": "page",
+        },
+        "docs": {
+          "title": "文档",
+          "type": "page",
+        },
+        "examples": {
+          "title": "示例",
+          "type": "page",
+        },
+        "index": {
+          "hidden": true,
+          "title": "简介",
+          "type": "page",
+        },
+      },
+      "kind": "Meta",
+      "locale": "zh-CN",
+    },
+    {
+      "children": [
+        {
+          "data": {
+            "a-page": {
+              "hidden": true,
+              "theme": {
+                "layout": "raw",
+              },
+              "title": "A Page",
+              "type": "page",
+            },
+            "acknowledgement": "🧩 Acknowledgement",
+            "team": "👥 Team",
+          },
+          "kind": "Meta",
+          "locale": "en-US",
+        },
+        {
+          "kind": "MdxPage",
+          "locale": "en-US",
+          "name": "a-page",
+          "route": "/about/a-page",
+        },
+        {
+          "kind": "MdxPage",
+          "locale": "en-US",
+          "name": "acknowledgement",
+          "route": "/about/acknowledgement",
+        },
+        {
+          "kind": "MdxPage",
+          "locale": "en-US",
+          "name": "team",
+          "route": "/about/team",
+        },
+      ],
+      "kind": "Folder",
+      "name": "about",
+      "route": "/about",
+    },
+    {
+      "children": [
+        {
+          "data": {
+            "swr-v1": "SWR 1.0 发布",
+          },
+          "kind": "Meta",
           "locale": "zh-CN",
-          "meta": {
+        },
+        {
+          "frontMatter": {
+            "description": "大约两年前，我们开源了 SWR，大家喜爱的小型数据请求 React 库。今天，我们迎来了另一个里程碑：SWR 1.0 版本发布。",
+            "image": "https://assets.vercel.com/image/upload/v1630059453/swr/v1.png",
+          },
+          "kind": "MdxPage",
+          "locale": "zh-CN",
+          "name": "swr-v1",
+          "route": "/blog/swr-v1",
+        },
+      ],
+      "kind": "Folder",
+      "name": "blog",
+      "route": "/blog",
+    },
+    {
+      "children": [
+        {
+          "data": {
             "advanced": "高级",
             "arguments": "传入参数",
             "change-log": "更新日志",
@@ -656,84 +658,232 @@ exports[`Page Process > pageMap zh-CN 1`] = `
             "typescript": "Typescript",
             "with-nextjs": "Next.js SSG 和 SSR",
           },
-          "name": "meta.json",
+          "kind": "Meta",
+          "locale": "zh-CN",
         },
         {
+          "children": [
+            {
+              "data": {
+                "cache": "缓存",
+                "file-name.with.DOTS": "带点的文件名",
+                "performance": "性能",
+                "react-native": "React Native",
+              },
+              "kind": "Meta",
+              "locale": "zh-CN",
+            },
+            {
+              "kind": "MdxPage",
+              "locale": "zh-CN",
+              "name": "cache",
+              "route": "/docs/advanced/cache",
+            },
+            {
+              "kind": "MdxPage",
+              "locale": "zh-CN",
+              "name": "file-name.with.DOTS",
+              "route": "/docs/advanced/file-name.with.DOTS",
+            },
+            {
+              "children": [
+                {
+                  "kind": "MdxPage",
+                  "locale": "en-US",
+                  "name": "loooooooooooooooooooong-title",
+                  "route": "/docs/advanced/more/loooooooooooooooooooong-title",
+                },
+                {
+                  "data": {
+                    "loooooooooooooooooooong-title": "loooooooooooooooooooong-title",
+                  },
+                  "kind": "Meta",
+                  "locale": "en-US",
+                },
+              ],
+              "kind": "Folder",
+              "name": "more",
+              "route": "/docs/advanced/more",
+            },
+            {
+              "kind": "MdxPage",
+              "locale": "zh-CN",
+              "name": "performance",
+              "route": "/docs/advanced/performance",
+            },
+            {
+              "kind": "MdxPage",
+              "locale": "zh-CN",
+              "name": "react-native",
+              "route": "/docs/advanced/react-native",
+            },
+            {
+              "kind": "MdxPage",
+              "locale": "en-US",
+              "name": "code-highlighting",
+              "route": "/docs/advanced/code-highlighting",
+            },
+            {
+              "kind": "MdxPage",
+              "locale": "en-US",
+              "name": "markdown-import",
+              "route": "/docs/advanced/markdown-import",
+            },
+          ],
+          "kind": "Folder",
+          "name": "advanced",
+          "route": "/docs/advanced",
+        },
+        {
+          "kind": "MdxPage",
+          "locale": "zh-CN",
+          "name": "arguments",
+          "route": "/docs/arguments",
+        },
+        {
+          "kind": "MdxPage",
+          "locale": "zh-CN",
+          "name": "change-log",
+          "route": "/docs/change-log",
+        },
+        {
+          "kind": "MdxPage",
+          "locale": "zh-CN",
+          "name": "conditional-fetching",
+          "route": "/docs/conditional-fetching",
+        },
+        {
+          "kind": "MdxPage",
+          "locale": "zh-CN",
+          "name": "data-fetching",
+          "route": "/docs/data-fetching",
+        },
+        {
+          "kind": "MdxPage",
+          "locale": "zh-CN",
+          "name": "error-handling",
+          "route": "/docs/error-handling",
+        },
+        {
+          "kind": "MdxPage",
+          "locale": "zh-CN",
+          "name": "getting-started",
+          "route": "/docs/getting-started",
+        },
+        {
+          "kind": "MdxPage",
+          "locale": "zh-CN",
+          "name": "global-configuration",
+          "route": "/docs/global-configuration",
+        },
+        {
+          "kind": "MdxPage",
           "locale": "zh-CN",
           "name": "middleware",
           "route": "/docs/middleware",
         },
         {
+          "kind": "MdxPage",
           "locale": "zh-CN",
           "name": "mutation",
           "route": "/docs/mutation",
         },
         {
+          "kind": "MdxPage",
           "locale": "zh-CN",
           "name": "options",
           "route": "/docs/options",
         },
         {
+          "kind": "MdxPage",
           "locale": "zh-CN",
           "name": "pagination",
           "route": "/docs/pagination",
         },
         {
+          "kind": "MdxPage",
           "locale": "zh-CN",
           "name": "prefetching",
           "route": "/docs/prefetching",
         },
         {
+          "kind": "MdxPage",
           "locale": "zh-CN",
           "name": "revalidation",
           "route": "/docs/revalidation",
         },
         {
+          "kind": "MdxPage",
           "locale": "zh-CN",
           "name": "scroll-with-dynamic-height",
           "route": "/docs/scroll-with-dynamic-height",
         },
         {
+          "kind": "MdxPage",
           "locale": "zh-CN",
           "name": "suspense",
           "route": "/docs/suspense",
         },
         {
+          "kind": "MdxPage",
           "locale": "zh-CN",
           "name": "with-nextjs",
           "route": "/docs/with-nextjs",
         },
         {
+          "kind": "MdxPage",
           "locale": "en-US",
           "name": "404-500",
           "route": "/docs/404-500",
         },
         {
+          "kind": "MdxPage",
           "locale": "en-US",
           "name": "advanced",
           "route": "/docs/advanced",
         },
         {
+          "kind": "MdxPage",
+          "locale": "en-US",
+          "name": "code-block-without-language",
+          "route": "/docs/code-block-without-language",
+        },
+        {
+          "kind": "MdxPage",
           "locale": "en-US",
           "name": "raw-layout",
           "route": "/docs/raw-layout",
         },
         {
+          "kind": "MdxPage",
           "locale": "en-US",
           "name": "typescript",
           "route": "/docs/typescript",
         },
       ],
+      "kind": "Folder",
       "name": "docs",
       "route": "/docs",
     },
     {
       "children": [
         {
+          "data": {
+            "auth": "身份验证",
+            "basic": "基本用法",
+            "error-handling": "错误处理",
+            "infinite-loading": "无限加载",
+            "ssr": "Next.js SSR",
+          },
+          "kind": "Meta",
+          "locale": "zh-CN",
+        },
+        {
           "frontMatter": {
             "full": true,
             "title": "身份验证",
           },
+          "kind": "MdxPage",
           "locale": "zh-CN",
           "name": "auth",
           "route": "/examples/auth",
@@ -743,6 +893,7 @@ exports[`Page Process > pageMap zh-CN 1`] = `
             "full": true,
             "title": "基本用法",
           },
+          "kind": "MdxPage",
           "locale": "zh-CN",
           "name": "basic",
           "route": "/examples/basic",
@@ -752,6 +903,7 @@ exports[`Page Process > pageMap zh-CN 1`] = `
             "full": true,
             "title": "错误处理",
           },
+          "kind": "MdxPage",
           "locale": "zh-CN",
           "name": "error-handling",
           "route": "/examples/error-handling",
@@ -761,22 +913,13 @@ exports[`Page Process > pageMap zh-CN 1`] = `
             "full": true,
             "title": "无限加载",
           },
+          "kind": "MdxPage",
           "locale": "zh-CN",
           "name": "infinite-loading",
           "route": "/examples/infinite-loading",
         },
         {
-          "locale": "zh-CN",
-          "meta": {
-            "auth": "身份验证",
-            "basic": "基本用法",
-            "error-handling": "错误处理",
-            "infinite-loading": "无限加载",
-            "ssr": "Next.js SSR",
-          },
-          "name": "meta.json",
-        },
-        {
+          "kind": "MdxPage",
           "locale": "en-US",
           "name": "full",
           "route": "/examples/full",
@@ -786,11 +929,13 @@ exports[`Page Process > pageMap zh-CN 1`] = `
             "full": true,
             "title": "Next.js SSR",
           },
+          "kind": "MdxPage",
           "locale": "en-US",
           "name": "ssr",
           "route": "/examples/ssr",
         },
       ],
+      "kind": "Folder",
       "name": "examples",
       "route": "/examples",
     },
@@ -798,40 +943,18 @@ exports[`Page Process > pageMap zh-CN 1`] = `
       "frontMatter": {
         "title": "用于数据请求的 React Hooks 库",
       },
+      "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "index",
       "route": "/",
     },
     {
-      "locale": "zh-CN",
-      "meta": {
-        "blog": {
-          "title": "博客",
-          "type": "page",
-        },
-        "docs": {
-          "title": "文档",
-          "type": "page",
-        },
-        "examples": {
-          "title": "示例",
-          "type": "page",
-        },
-        "index": {
-          "hidden": true,
-          "title": "简介",
-          "type": "page",
-        },
-      },
-      "name": "meta.json",
-    },
-    {
-      "locale": "",
+      "kind": "MdxPage",
       "name": "404",
       "route": "/404",
     },
     {
-      "locale": "",
+      "kind": "MdxPage",
       "name": "500",
       "route": "/500",
     },
@@ -839,6 +962,7 @@ exports[`Page Process > pageMap zh-CN 1`] = `
       "frontMatter": {
         "searchable": false,
       },
+      "kind": "MdxPage",
       "locale": "en-US",
       "name": "blog",
       "route": "/blog",

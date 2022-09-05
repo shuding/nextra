@@ -10,17 +10,20 @@ import React, {
 import cn from 'clsx'
 import { Transition } from '@headlessui/react'
 import { SpinnerIcon } from 'nextra/icons'
+import { useMounted } from 'nextra/hooks'
 import { Input } from './input'
 import { Anchor } from './anchor'
-import { renderComponent, renderString, useMounted } from '../utils'
+import { renderComponent, renderString } from '../utils'
 import { useConfig, useMenu } from '../contexts'
 import { useRouter } from 'next/router'
 import { SearchResult } from '../types'
 
 type SearchProps = {
   className?: string
-  value?: string
+  overlayClassName?: string
+  value: string
   onChange: (newValue: string) => void
+  onActive?: (active: boolean) => void
   loading?: boolean
   results: SearchResult[]
 }
@@ -29,8 +32,10 @@ const INPUTS = ['input', 'select', 'button', 'textarea']
 
 export function Search({
   className,
+  overlayClassName,
   value,
   onChange,
+  onActive,
   loading,
   results
 }: SearchProps): ReactElement {
@@ -45,6 +50,10 @@ export function Search({
   useEffect(() => {
     setActive(0)
   }, [value])
+
+  useEffect(() => {
+    onActive && onActive(show)
+  }, [show])
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -123,12 +132,11 @@ export function Search({
   }
 
   const mounted = useMounted()
-  const hasValue = Boolean(value === undefined ? input.current?.value : value)
-  const renderList = show && hasValue
+  const renderList = show && Boolean(value)
 
   const icon = (
     <Transition
-      show={mounted && (!show || hasValue)}
+      show={mounted && (!show || Boolean(value))}
       as={React.Fragment}
       enter="transition-opacity"
       enterFrom="opacity-0"
@@ -144,11 +152,11 @@ export function Search({
           'border dark:bg-dark/50 dark:border-gray-100/20',
           'contrast-more:border-current contrast-more:text-current contrast-more:dark:border-current',
           'items-center gap-1 transition-opacity',
-          hasValue
+          value
             ? 'cursor-pointer hover:opacity-70 z-20 flex'
             : 'hidden sm:flex pointer-events-none'
         )}
-        title={hasValue ? 'Clear' : undefined}
+        title={value ? 'Clear' : undefined}
         onClick={() => {
           onChange('')
         }}
@@ -182,7 +190,7 @@ export function Search({
   }, [])
 
   return (
-    <div className="nextra-search relative md:w-64">
+    <div className={cn('nextra-search relative md:w-64', className)}>
       {renderList && (
         <div className="fixed inset-0 z-10" onClick={() => setShow(false)} />
       )}
@@ -196,7 +204,7 @@ export function Search({
           setShow(Boolean(value))
         }}
         type="search"
-        placeholder={renderString(config.searchPlaceholder)}
+        placeholder={renderString(config.search.placeholder)}
         onKeyDown={handleKeyDown}
         onFocus={handleFocusAndBlur}
         onBlur={handleFocusAndBlur}
@@ -218,11 +226,16 @@ export function Search({
               'bg-white text-gray-100 ring-1 ring-black/5',
               'dark:bg-neutral-900 dark:ring-white/10',
               'absolute top-full z-20 mt-2 overscroll-contain rounded-xl py-2.5 shadow-xl overflow-auto',
+              'max-h-[min(calc(50vh-11rem-env(safe-area-inset-bottom)),400px)]',
+              'md:max-h-[min(calc(100vh-5rem-env(safe-area-inset-bottom)),400px)]',
               'right-0 left-0 ltr:md:left-auto rtl:md:right-auto',
               'contrast-more:border contrast-more:border-gray-900 contrast-more:dark:border-gray-50',
-              className
+              overlayClassName
             )}
             ref={ulRef}
+            style={{
+              transition: 'max-height .2s ease' // don't work with tailwindcss
+            }}
           >
             {loading ? (
               <span className="flex select-none justify-center p-8 text-center text-sm text-gray-400 gap-2">
@@ -235,7 +248,7 @@ export function Search({
                   {prefix}
                   <li
                     className={cn(
-                      'mx-2.5 px-2.5 py-2 rounded-md break-words',
+                      'mx-2.5 rounded-md break-words',
                       'contrast-more:border',
                       i === active
                         ? 'bg-primary-500/10 text-primary-500 contrast-more:border-primary-500'
@@ -243,7 +256,7 @@ export function Search({
                     )}
                   >
                     <Anchor
-                      className="block scroll-m-12"
+                      className="block px-2.5 py-2 scroll-m-12"
                       href={route}
                       data-index={i}
                       onMouseMove={handleMouseMove}
@@ -255,7 +268,7 @@ export function Search({
                 </Fragment>
               ))
             ) : (
-              renderComponent(config.unstable_searchResultEmpty)
+              renderComponent(config.search.emptyResult)
             )}
           </ul>
         </Transition.Child>

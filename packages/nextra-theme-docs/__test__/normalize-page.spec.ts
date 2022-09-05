@@ -50,15 +50,14 @@ describe('normalize-page', () => {
   })
 
   it('/404 page', () => {
-    const data = {
+    const result = normalizePages({
       list: [
-        { name: '404', route: '/404' },
-        { name: 'get-started', route: '/get-started' },
-        { name: 'index', route: '/' },
+        { kind: 'MdxPage', name: '404', route: '/404' },
+        { kind: 'MdxPage', name: 'get-started', route: '/get-started' },
+        { kind: 'MdxPage', name: 'index', route: '/' },
         {
-          name: 'meta.json',
-          route: '',
-          meta: {
+          kind: 'Meta',
+          data: {
             '404': {
               type: 'page',
               theme: {
@@ -77,21 +76,19 @@ describe('normalize-page', () => {
       locale: 'en-US',
       defaultLocale: 'en-US',
       route: '/500ddd'
-    }
-    const result = normalizePages(data)
+    })
     expect(result).toMatchSnapshot()
   })
 
   it('/500 page', () => {
-    const data = {
+    const result = normalizePages({
       list: [
-        { name: '500', route: '/500', },
-        { name: 'get-started', route: '/get-started' },
-        { name: 'index', route: '/' },
+        { kind: 'MdxPage',name: '500', route: '/500' },
+        { kind: 'MdxPage',name: 'get-started', route: '/get-started' },
+        { kind: 'MdxPage',name: 'index', route: '/' },
         {
-          name: 'meta.json',
-          route: '',
-          meta: {
+          kind: 'Meta',
+          data: {
             '500': {
               type: 'page',
               theme: {
@@ -110,8 +107,7 @@ describe('normalize-page', () => {
       locale: 'en-US',
       defaultLocale: 'en-US',
       route: '/500'
-    }
-    const result = normalizePages(data)
+    })
     expect(result).toMatchSnapshot()
   })
 })

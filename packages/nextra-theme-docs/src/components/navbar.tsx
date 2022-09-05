@@ -5,14 +5,12 @@ import { Menu, Transition } from '@headlessui/react'
 import { ArrowRightIcon } from 'nextra/icons'
 
 import { useConfig, useMenu } from '../contexts'
-import { MatchSorterSearch } from './match-sorter-search'
-import { Flexsearch } from './flexsearch'
-import { GitHubIcon, DiscordIcon, MenuIcon } from 'nextra/icons'
+import { MenuIcon } from 'nextra/icons'
 import { Item, PageItem, MenuItem, renderComponent, getFSRoute } from '../utils'
 import { Anchor } from './anchor'
 import { DEFAULT_LOCALE } from '../constants'
 
-interface NavBarProps {
+export type NavBarProps = {
   flatDirectories: Item[]
   items: (PageItem | MenuItem)[]
 }
@@ -82,7 +80,7 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
   return (
     <div className="nextra-nav-container sticky top-0 z-20 w-full bg-transparent">
       <div className="nextra-nav-container-blur pointer-events-none absolute h-full w-full bg-white dark:bg-dark" />
-      <nav className="mx-auto flex h-16 max-w-[90rem] items-center justify-end gap-2 pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
+      <nav className="mx-auto flex h-[var(--nextra-navbar-height)] max-w-[90rem] items-center justify-end gap-2 pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
         <Anchor
           href="/"
           className="flex ltr:mr-auto rtl:ml-auto items-center hover:opacity-75"
@@ -113,11 +111,8 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
                 >
                   {menu.title}
                   <ArrowRightIcon
-                    height="1em"
-                    className={cn(
-                      'h-[18px] min-w-[18px] rounded-sm p-0.5',
-                      '[&>path]:origin-center [&>path]:transition-transform [&>path]:rotate-90'
-                    )}
+                    className="h-[18px] min-w-[18px] rounded-sm p-0.5"
+                    pathClassName="origin-center transition-transform rotate-90"
                   />
                 </NavbarMenu>
               </div>
@@ -155,53 +150,33 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
           )
         })}
 
-        <div className="hidden md:inline-block min-w-[200px]">
-          {config.customSearch ||
-            (config.search ? (
-              config.unstable_flexsearch ? (
-                <Flexsearch />
-              ) : (
-                <MatchSorterSearch directories={flatDirectories} />
-              )
-            ) : null)}
-        </div>
+        {renderComponent(config.search.component, {
+          directories: flatDirectories,
+          className: 'hidden md:inline-block min-w-[200px]'
+        })}
 
-        {config.projectLink || config.github ? (
+        {config.project.link || config.github ? (
           <Anchor
             className="p-2 text-current"
-            href={config.projectLink || config.github}
+            href={config.project.link || config.github}
             newWindow
           >
-            {config.projectLinkIcon ? (
-              renderComponent(config.projectLinkIcon)
-            ) : (
-              <>
-                <GitHubIcon />
-                <span className="sr-only">GitHub</span>
-              </>
-            )}
+            {renderComponent(config.project.icon)}
           </Anchor>
         ) : null}
 
-        {config.projectChatLink ? (
+        {config.projectChat.link ? (
           <Anchor
             className="p-2 text-current"
-            href={config.projectChatLink}
+            href={config.projectChat.link}
             newWindow
           >
-            {config.projectChatLinkIcon ? (
-              renderComponent(config.projectChatLinkIcon)
-            ) : (
-              <>
-                <DiscordIcon />
-                <span className="sr-only">Discord</span>
-              </>
-            )}
+            {renderComponent(config.projectChat.icon)}
           </Anchor>
         ) : null}
 
         <button
-          className="nextra-menu-icon block p-2 -mr-2 md:hidden"
+          className="nextra-hamburger block p-2 -mr-2 md:hidden"
           onClick={() => setMenu(!menu)}
         >
           <MenuIcon className={cn({ open: menu })} />

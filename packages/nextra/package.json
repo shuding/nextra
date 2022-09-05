@@ -1,6 +1,6 @@
 {
   "name": "nextra",
-  "version": "2.0.0-beta.18",
+  "version": "2.0.0-beta.24",
   "description": "Next.js and MDX based site generator.",
   "files": [
     "dist/*",
@@ -28,37 +28,39 @@
         "./dist/locales.d.ts"
       ],
       "icons": [
-        "./dist/icons.d.ts"
+        "./dist/icons/index.d.ts"
+      ],
+      "components": [
+        "./dist/components/index.d.ts"
+      ],
+      "hooks": [
+        "./dist/hooks/index.d.ts"
       ]
     }
   },
   "exports": {
     "./package.json": "./package.json",
     ".": "./dist/index.js",
-    "./compile": {
-      "import": "./dist/compile.mjs",
-      "types": "./dist/compile.d.ts"
-    },
-    "./context": {
-      "import": "./dist/context.js",
-      "types": "./dist/context.d.ts"
-    },
     "./data": {
-      "import": "./dist/ssg.js",
-      "types": "./dist/ssg.d.ts"
-    },
-    "./ssg": {
-      "import": "./dist/ssg.js",
+      "import": "./dist/ssg.mjs",
       "types": "./dist/ssg.d.ts"
     },
     "./loader": "./loader.js",
-    "./locales": {
-      "import": "./dist/locales.js",
-      "types": "./dist/locales.d.ts"
-    },
     "./icons": {
-      "import": "./dist/icons.mjs",
-      "types": "./dist/icons.d.ts"
+      "import": "./dist/icons/index.mjs",
+      "types": "./dist/icons/index.d.ts"
+    },
+    "./components": {
+      "import": "./dist/components/index.mjs",
+      "types": "./dist/components/index.d.ts"
+    },
+    "./hooks": {
+      "import": "./dist/hooks/index.mjs",
+      "types": "./dist/hooks/index.d.ts"
+    },
+    "./*": {
+      "import": "./dist/*.mjs",
+      "types": "./dist/*.d.ts"
     }
   },
   "repository": "https://github.com/shuding/nextra",
@@ -74,7 +76,7 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@mdx-js/mdx": "^2.1.2",
+    "@mdx-js/mdx": "^2.1.3",
     "@napi-rs/simple-git": "^0.1.8",
     "github-slugger": "^1.4.0",
     "graceful-fs": "^4.2.10",
@@ -82,13 +84,14 @@
     "rehype-mdx-title": "^1.0.0",
     "rehype-pretty-code": "0.2.4",
     "remark-gfm": "^3.0.1",
+    "remark-reading-time": "^2.0.1",
     "shiki": "0.10.1",
     "slash": "^3.0.0"
   },
   "peerDependencies": {
     "next": ">=9.5.3",
     "react": ">=16.13.1",
-    "react-dom": ">=18.2.0"
+    "react-dom": ">=16.13.1"
   },
   "prettier": {
     "semi": false,
@@ -106,7 +109,6 @@
     "next": "^12.2.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "tsup": "^6.2.1",
     "vitest": "^0.21.0"
   }
 }
