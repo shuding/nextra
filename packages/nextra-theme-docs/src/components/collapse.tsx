@@ -70,7 +70,7 @@ export function Collapse({
     >
       <div
         ref={innerRef}
-        className="p-2 transform-gpu overflow-hidden transition-opacity duration-500 ease-in-out motion-reduce:transition-none"
+        className="p-2 ltr:pr-0 rtl:pl-0 transform-gpu overflow-hidden transition-opacity duration-500 ease-in-out motion-reduce:transition-none"
         style={{
           opacity: initialState.current ? 1 : 0
         }}
