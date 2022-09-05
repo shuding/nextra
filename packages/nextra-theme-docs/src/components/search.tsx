@@ -23,6 +23,7 @@ type SearchProps = {
   overlayClassName?: string
   value: string
   onChange: (newValue: string) => void
+  onActive?: (active: boolean) => void
   loading?: boolean
   results: SearchResult[]
 }
@@ -34,6 +35,7 @@ export function Search({
   overlayClassName,
   value,
   onChange,
+  onActive,
   loading,
   results
 }: SearchProps): ReactElement {
@@ -48,6 +50,10 @@ export function Search({
   useEffect(() => {
     setActive(0)
   }, [value])
+
+  useEffect(() => {
+    onActive && onActive(show)
+  }, [show])
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -242,7 +248,7 @@ export function Search({
                   {prefix}
                   <li
                     className={cn(
-                      'mx-2.5 px-2.5 py-2 rounded-md break-words',
+                      'mx-2.5 rounded-md break-words',
                       'contrast-more:border',
                       i === active
                         ? 'bg-primary-500/10 text-primary-500 contrast-more:border-primary-500'
@@ -250,7 +256,7 @@ export function Search({
                     )}
                   >
                     <Anchor
-                      className="block scroll-m-12"
+                      className="block px-2.5 py-2 scroll-m-12"
                       href={route}
                       data-index={i}
                       onMouseMove={handleMouseMove}
