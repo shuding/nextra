@@ -50,6 +50,7 @@ body {
   .nextra-sidebar {
     -webkit-touch-callout: none;
     ul.nextra-sidebar-list {
+      overflow: hidden;
       a,
       button {
         &:focus-visible {
