@@ -1,10 +1,13 @@
 import React, { useRef, useEffect, ReactElement } from 'react'
+import cn from 'clsx'
 
 export function Collapse({
   children,
+  className,
   open
 }: {
   children: React.ReactNode
+  className?: string
   open: boolean
 }): ReactElement {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -70,7 +73,10 @@ export function Collapse({
     >
       <div
         ref={innerRef}
-        className="p-2 transform-gpu overflow-hidden transition-opacity duration-500 ease-in-out motion-reduce:transition-none"
+        className={cn(
+          'p-2 transform-gpu overflow-hidden transition-opacity duration-500 ease-in-out motion-reduce:transition-none',
+          className
+        )}
         style={{
           opacity: initialState.current ? 1 : 0
         }}

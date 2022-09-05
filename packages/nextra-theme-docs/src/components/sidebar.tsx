@@ -113,7 +113,7 @@ function FolderImpl({ item, anchors }: FolderProps) {
           )}
         />
       </Anchor>
-      <Collapse open={open}>
+      <Collapse className="ltr:pr-0 rtl:pl-0" open={open}>
         {Array.isArray(item.children) ? (
           <Menu
             submenu
