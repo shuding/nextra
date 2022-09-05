@@ -16,7 +16,7 @@ export const HighlightMatches = memo<{
     res.push(
       <Fragment key={id++}>
         {splittedText.splice(0, result.index - index).join('')}
-        <span className="text-primary-500 underline decoration-primary-400 decoration-from-font [text-underline-position:under]">
+        <span className="text-primary-500">
           {splittedText.splice(0, regexp.lastIndex - result.index).join('')}
         </span>
       </Fragment>

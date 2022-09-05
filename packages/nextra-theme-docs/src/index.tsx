@@ -195,67 +195,71 @@ const InnerLayout = ({
     )
 
   return (
-    <div
-      dir={direction}
-      className={cn('nextra-container main-container flex flex-col', {
-        'menu-active': menu
-      })}
-    >
-      <Head />
-      <Banner />
-      {themeContext.navbar &&
-        renderComponent(config.navbar, {
-          flatDirectories,
-          items: topLevelNavbarItems
-        })}
+    // This makes sure that selectors like `[dir=ltr] .nextra-container` work
+    // before hydration as Tailwind expects the `dir` attribute to exist on the
+    // `html` element.
+    <div dir={direction}>
       <div
-        className={cn(
-          'mx-auto flex w-full flex-1 items-stretch',
-          themeContext.layout !== 'raw' && 'max-w-[90rem]'
-        )}
+        className={cn('nextra-container main-container flex flex-col', {
+          'menu-active': menu
+        })}
       >
-        <ActiveAnchorProvider>
-          <Sidebar
-            docsDirectories={docsDirectories}
-            flatDirectories={flatDirectories}
-            fullDirectories={directories}
-            headings={headings}
-            asPopover={asPopover}
-            includePlaceholder={themeContext.layout === 'default'}
-          />
-          {tocEl}
-          <SkipNavContent />
-          <Body
-            themeContext={themeContext}
-            breadcrumb={
-              activeType !== 'page' && themeContext.breadcrumb ? (
-                <Breadcrumb activePath={activePath} />
-              ) : null
-            }
-            timestamp={timestamp}
-            navigation={
-              activeType !== 'page' && themeContext.pagination ? (
-                <NavLinks
-                  flatDirectories={flatDocsDirectories}
-                  currentIndex={activeIndex}
-                />
-              ) : null
-            }
-          >
-            <MDXProvider
-              components={getComponents({
-                isRawLayout: themeContext.layout === 'raw',
-                components: config.components
-              })}
+        <Head />
+        <Banner />
+        {themeContext.navbar &&
+          renderComponent(config.navbar, {
+            flatDirectories,
+            items: topLevelNavbarItems
+          })}
+        <div
+          className={cn(
+            'mx-auto flex w-full flex-1 items-stretch',
+            themeContext.layout !== 'raw' && 'max-w-[90rem]'
+          )}
+        >
+          <ActiveAnchorProvider>
+            <Sidebar
+              docsDirectories={docsDirectories}
+              flatDirectories={flatDirectories}
+              fullDirectories={directories}
+              headings={headings}
+              asPopover={asPopover}
+              includePlaceholder={themeContext.layout === 'default'}
+            />
+            {tocEl}
+            <SkipNavContent />
+            <Body
+              themeContext={themeContext}
+              breadcrumb={
+                activeType !== 'page' && themeContext.breadcrumb ? (
+                  <Breadcrumb activePath={activePath} />
+                ) : null
+              }
+              timestamp={timestamp}
+              navigation={
+                activeType !== 'page' && themeContext.pagination ? (
+                  <NavLinks
+                    flatDirectories={flatDocsDirectories}
+                    currentIndex={activeIndex}
+                  />
+                ) : null
+              }
             >
-              {children}
-            </MDXProvider>
-          </Body>
-        </ActiveAnchorProvider>
+              <MDXProvider
+                components={getComponents({
+                  isRawLayout: themeContext.layout === 'raw',
+                  components: config.components
+                })}
+              >
+                {children}
+              </MDXProvider>
+            </Body>
+          </ActiveAnchorProvider>
+        </div>
+        {themeContext.footer
+          ? renderComponent(config.footer.component, { menu: asPopover })
+          : null}
       </div>
-      {themeContext.footer
-        ? renderComponent(config.footer.component, { menu: asPopover })
-        : null}
     </div>
   )
 }

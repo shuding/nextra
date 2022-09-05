@@ -22,9 +22,9 @@ export function ThemeSwitch({ lite = true }): ReactElement {
         name: (
           <div className="flex items-center gap-2 capitalize">
             {mounted && renderedTheme === 'dark' ? (
-              <MoonIcon className="h-4 w-4 [&>path]:fill-current" />
+              <MoonIcon className="h-3 w-3 [&>path]:fill-current" />
             ) : (
-              <SunIcon className="h-4 w-4 [&>path]:fill-current" />
+              <SunIcon className="h-3 w-3 [&>path]:fill-current" />
             )}
             <span className={lite ? 'md:hidden' : ''}>
               {mounted ? theme : 'light'}
