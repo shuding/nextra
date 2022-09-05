@@ -22,23 +22,54 @@ import { Callout, Tab, Tabs } from 'nextra-theme-docs'
 
 ## Start from Empty Project
 
-### 1. Install
+<div className="steps-container">
+  <style jsx>{`
+    .steps-container {
+      margin-left: 1rem;
+      padding-left: 1.5rem;
+      counter-reset: step;
+      border-left: 1px solid #eaeaea;
+    }
+    .steps-container :global(h3) {
+      counter-increment: step;
+    }
+    .steps-container :global(h3):before {
+      content: counter(step);
+      display: inline-block;
+      position: absolute;
+      margin-top: 3px;
+      margin-left: -41px;
+      width: 33px;
+      height: 33px;
+      text-align: center;
+      text-indent: -1px;
+      color: #999;
+      border-radius: 100%;
+      border: 4px solid #fff;
+      background: #f3f3f3;
+      line-height: 1.5rem;
+      font-size: 1rem;
+      font-weight: 400;
+    }
+  `}</style>
+
+### Install
 
 To create a Nextra Docs site manually, you have to install **Next.js**, **React**, **Nextra**, and **Nextra Docs Theme**. In your project directory, run the following command to install the dependencies:
 
 <Tabs items={['pnpm', 'npm', 'yarn']}>
   <Tab>
-    ```bash
+    ```bash copy
     pnpm i next react react-dom nextra nextra-theme-docs
     ```
   </Tab>
   <Tab>
-    ```bash
+    ```bash copy
     npm i next react react-dom nextra nextra-theme-docs
     ```
   </Tab>
   <Tab>
-    ```bash
+    ```bash copy
     yarn add next react react-dom nextra nextra-theme-docs
     ```
   </Tab>
@@ -46,7 +77,7 @@ To create a Nextra Docs site manually, you have to install **Next.js**, **React*
 
 Like any Next.js projects, you need to also add `scripts` to your `package.json`:
 
-```json filename="package.json"
+```json filename="package.json" copy
 {
   "scripts": {
     "dev": "next",
@@ -58,7 +89,7 @@ Like any Next.js projects, you need to also add `scripts` to your `package.json`
 
 If you already have Next.js running, you only need to install `nextra` and `nextra-theme-docs` as the add-ons.
 
-### 2. Create Next.js Config
+### Create Next.js Config
 
 Create the following `next.config.js` file in your project’s root directory:
 
@@ -78,14 +109,13 @@ import { Card, Cards } from '@components/card'
 
 Full Nextra configurations can be found here:
 
+import switchIcon from '@components/icons/switch'
+
 <Cards>
-  <Card icon={
-   <svg viewBox="0 0 24 24"><path fill="currentColor" d="M7 18q-2.5 0-4.25-1.75T1 12q0-2.5 1.75-4.25T7 6h10q2.5 0 4.25 1.75T23 12q0 2.5-1.75 4.25T17 18Zm0-2h10q1.65 0 2.825-1.175Q21 13.65 21 12q0-1.65-1.175-2.825Q18.65 8 17 8H7Q5.35 8 4.175 9.175Q3 10.35 3 12q0 1.65 1.175 2.825Q5.35 16 7 16Zm0-1q1.25 0 2.125-.875T10 12q0-1.25-.875-2.125T7 9q-1.25 0-2.125.875T4 12q0 1.25.875 2.125T7 15Zm5-3Z"></path></svg>
-  } title="Configure Nextra" href="/docs/docs-theme/configuration">
-  </Card>
+  <Card icon={switchIcon} title="Configure Nextra" href="/docs/docs-theme/theme-configuration"/>
 </Cards>
 
-### 3. Create Docs Theme Config
+### Create Docs Theme Config
 
 Lastly, create the corresponding `theme.config.jsx` file in your project’s root directory:
 
@@ -99,13 +129,10 @@ export default {
 More configuration options for the docs theme can be found here:
 
 <Cards>
-  <Card icon={
-   <svg viewBox="0 0 24 24"><path fill="currentColor" d="M7 18q-2.5 0-4.25-1.75T1 12q0-2.5 1.75-4.25T7 6h10q2.5 0 4.25 1.75T23 12q0 2.5-1.75 4.25T17 18Zm0-2h10q1.65 0 2.825-1.175Q21 13.65 21 12q0-1.65-1.175-2.825Q18.65 8 17 8H7Q5.35 8 4.175 9.175Q3 10.35 3 12q0 1.65 1.175 2.825Q5.35 16 7 16Zm0-1q1.25 0 2.125-.875T10 12q0-1.25-.875-2.125T7 9q-1.25 0-2.125.875T4 12q0 1.25.875 2.125T7 15Zm5-3Z"></path></svg>
-  } title="Configure Docs Theme" href="/docs/docs-theme/configuration">
-  </Card>
+  <Card icon={switchIcon} title="Configure Docs Theme" href="/docs/docs-theme/configuration"/>
 </Cards>
 
-### 4. Start Project
+### Start Project
 
 Now, you can create an initial Markdown page (`pages/index.mdx`) in your project’s root directory:
 
@@ -120,3 +147,5 @@ And run the following command to start the project:
 ```bash
 pnpm dev
 ```
+
+</div>

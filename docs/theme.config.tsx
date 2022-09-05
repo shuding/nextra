@@ -1,3 +1,4 @@
+import type { DocsThemeConfig } from 'nextra-theme-docs'
 import { useRouter } from 'next/router'
 
 const logo = (
@@ -95,6 +96,7 @@ export default {
     float: true
   },
   sidebar: {
-    defaultMenuCollapsed: true
+    defaultMenuCollapsed: true,
+    subtitle: ({ title }) => <>{title}</>
   }
-}
+} as DocsThemeConfig

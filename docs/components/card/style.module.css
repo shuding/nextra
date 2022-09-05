@@ -10,6 +10,7 @@
 
 .card {
   display: flex;
+  gap: 0.8rem;
   flex-direction: column;
   justify-content: flex-start;
   padding: 1rem;
