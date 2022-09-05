@@ -181,6 +181,7 @@ const Details = ({
     <details
       className="my-4 rounded border border-gray-200 bg-white p-2 shadow-sm dark:border-neutral-800 dark:bg-neutral-900 first:mt-0 last:mb-0"
       {...props}
+      {...(openState && { 'data-expanded': true })}
       {...(delayedOpenState && { open: true })}
     >
       <DetailsProvider value={setOpen}>{summary}</DetailsProvider>
@@ -195,8 +196,8 @@ const Summary = (props: ComponentProps<'summary'>): ReactElement => {
     <summary
       className={cn(
         'list-none cursor-pointer rounded p-1 outline-none transition-colors hover:bg-gray-100 dark:hover:bg-neutral-800',
-        "before:content-[''] before:inline-block before:transition-transform dark:before:invert",
-        '[[open]>&]:before:rotate-90 rtl:before:rotate-180'
+        "before:mr-1 before:content-[''] before:inline-block before:transition-transform dark:before:invert",
+        '[[data-expanded]>&]:before:rotate-90 rtl:before:rotate-180'
       )}
       {...props}
       onClick={e => {

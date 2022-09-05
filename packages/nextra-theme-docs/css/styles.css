@@ -50,13 +50,15 @@ body {
   .nextra-sidebar {
     -webkit-touch-callout: none;
     ul.nextra-sidebar-list {
-      a, button {
+      a,
+      button {
         &:focus-visible {
           @apply ring ring-primary-200;
         }
       }
       li.active > a {
-        &, &:hover {
+        &,
+        &:hover {
           @apply bg-primary-50 font-bold text-primary-500;
           @apply dark:bg-primary-500/10 dark:text-primary-500;
         }
@@ -117,6 +119,7 @@ body {
     @apply top-0 overscroll-contain bg-white pt-16 dark:bg-dark;
     height: 100vh;
     height: -webkit-fill-available;
+    height: 100dvh;
 
     opacity: 0;
     transform: translate3d(0, -110%, 0);
@@ -143,7 +146,10 @@ body {
       @apply top-10 md:top-0;
     }
   }
-  .nextra-banner-hidden .nextra-banner-container ~ div .nextra-sidebar-container {
+  .nextra-banner-hidden
+    .nextra-banner-container
+    ~ div
+    .nextra-sidebar-container {
     @apply pt-16;
   }
   .nextra-banner-hidden div.nextra-nav-container {
@@ -206,8 +212,10 @@ article {
   }
 }
 
-.nextra-toc > .div, .nextra-sidebar-container {
-  mask-image: linear-gradient(to bottom, transparent, #000 20px), linear-gradient(to left, #000 10px, transparent 10px);
+.nextra-toc > .div,
+.nextra-sidebar-container {
+  mask-image: linear-gradient(to bottom, transparent, #000 20px),
+    linear-gradient(to left, #000 10px, transparent 10px);
 }
 
 @supports (
@@ -246,7 +254,7 @@ input[type='search']::-webkit-search-results-decoration {
   display: none;
 }
 .locale-switch[open] summary:before {
-  content: ' ';
+  content: '';
   @apply fixed inset-0 z-10 block cursor-default bg-transparent;
 }
 .locale-switch .locale-dropdown {

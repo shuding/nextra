@@ -79,11 +79,7 @@ function FolderImpl({ item, anchors }: FolderProps) {
   return (
     <li className={cn({ open, active })}>
       <Anchor
-        href={
-          (item as Item).withIndexPage
-            ? item.route
-            : item.children?.find(child => child.route)?.route
-        }
+        href={(item as Item).withIndexPage ? item.route : ''}
         className="cursor-pointer !flex gap-2 items-center justify-between [word-break:break-word]"
         onClick={e => {
           const clickedToggleIcon = ['svg', 'path'].includes(
@@ -325,7 +321,7 @@ export function Sidebar({
           className="nextra-sidebar h-full w-full select-none pl-[calc(env(safe-area-inset-left)-1.5rem)] md:h-auto"
           ref={sidebarRef}
         >
-          <div className="min-h-[calc(100vh-4rem-61px)] p-4">
+          <div className="min-h-[calc(100%-61px)] p-4">
             <div
               className={cn(
                 'sticky top-0 z-[1] block md:hidden -mt-4 mb-4 bg-white pt-4',
@@ -361,7 +357,7 @@ export function Sidebar({
                 'sticky bottom-0 mx-4 border-t shadow-[0_-12px_16px_#fff] dark:border-neutral-800 dark:shadow-[0_-12px_16px_#111]',
                 'contrast-more:shadow-none contrast-more:dark:shadow-none contrast-more:border-neutral-400',
                 'h-[var(--nextra-menu-height)]',
-                'flex bg-white dark:bg-dark justify-between items-center'
+                'flex gap-2 bg-white dark:bg-dark justify-between items-center'
               )}
             >
               {config.i18n.length > 0 && (
@@ -372,7 +368,7 @@ export function Sidebar({
               {config.darkMode ? (
                 <div
                   className={cn(
-                    'relative',
+                    'relative flex',
                     config.i18n.length > 0 ? '' : 'flex-1'
                   )}
                 >
