@@ -1,0 +1,225 @@
+import { Callout } from 'nextra-theme-docs'
+
+# Rendering Table
+
+## GFM syntax
+
+In markdown is preferable write table via [GFM syntax](https://github.github.com/gfm/#tables-extension-).
+
+```mdx filename="Markdown"
+| left   | center | right |
+| :----- | :----: | ----: |
+| foo    |  bar   |   baz |
+| banana | apple  |  kiwi |
+```
+
+will be rendered as:
+
+| left   | center | right |
+| :----- | :----: | ----: |
+| foo    |  bar   |   baz |
+| banana | apple  |  kiwi |
+
+## HTML Literal Tables
+
+If you'll try render the following literal `<table />{:jsx}` element:
+
+```mdx filename="Markdown"
+<table>
+  <thead>
+    <tr>
+      <th>left</th>
+      <th align="center">center</th>
+      <th align="right">right</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>foo</td>
+      <td align="center">bar</td>
+      <td align="right">baz</td>
+    </tr>
+    <tr>
+      <td>banana</td>
+      <td align="center">apple</td>
+      <td align="right">kiwi</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+you'll get the following result:
+
+<table>
+  <thead>
+    <tr>
+      <th>left</th>
+      <th align="center">center</th>
+      <th align="right">right</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>foo</td>
+      <td align="center">bar</td>
+      <td align="right">baz</td>
+    </tr>
+    <tr>
+      <td>banana</td>
+      <td align="center">apple</td>
+      <td align="right">kiwi</td>
+    </tr>
+  </tbody>
+</table>
+
+<Callout emoji='⚠️' type='warning'>
+  Confused by unstyled elements? We explained [here](#why-this-happens), why it's happens.
+</Callout>
+
+## Dynamic Tables
+
+### How to Write
+
+Want to render dynamic table? You can use embeded JavaScript expressions into your table for it:
+
+```mdx filename="Markdown"
+<table>
+  <thead>
+    <tr>
+      <th>Country</th>
+      <th>Flag</th>
+    </tr>
+  </thead>
+  <tbody>
+    {[
+      { country: 'France', flag: '🇫🇷' },
+      { country: 'Ukraine', flag: '🇺🇦' }
+    ].map(item => (
+      <tr key={item.country}>
+        <th>{item.country}</th>
+        <th>{item.flag}</th>
+      </tr>
+    ))}
+  </tbody>
+</table>
+```
+
+will be rendered as:
+
+<table>
+  <thead>
+    <tr>
+      <th>Country</th>
+      <th>Flag</th>
+    </tr>
+  </thead>
+  <tbody>
+    {[
+      { country: 'France', flag: '🇫🇷' },
+      { country: 'Ukraine', flag: '🇺🇦' }
+    ].map(item => (
+      <tr key={item.country}>
+        <th>{item.country}</th>
+        <th>{item.flag}</th>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+<Callout emoji='⚠️' type='warning'>
+  Confused by unstyled elements? We explain below 👇, why it's happens.
+</Callout>
+
+### Unexpected Result
+
+Table looks different compared to [GFM syntax table](#gfm-syntax):
+
+1. only children of table body `<tbody />{:jsx}` is styled
+
+2. table header is unstyled
+
+3. table doesn't have margin top
+
+### Why This Happens
+
+MDX2 doesn't replace literal HTML elements with `<MDXProvider />{:jsx}`.
+
+Adam Wathan, creator of Tailwind CSS submitted [an issue](https://github.com/mdx-js/mdx/issues/821) in MDX2 to have some
+_an escape hatch_ that we can name like:
+
+> please only transform markdown tags, not literal HTML tags
+
+Table header looks unstyled since not replaced with Nextra's MDX components `<tr />{:jsx}`, `<th />{:jsx}` and `<td />{:jsx}`,
+for the same reason `<table />{:jsx}` literal is not replaced and doesn't have default margin-top aka `mt-6`.
+
+### Ways to Fix It
+
+#### One-Time Fix
+
+Just wrap your table with curly braces `{` and `}`, e.g.
+
+```mdx filename="Markdown"
+{<table>
+ ...
+</table>}
+```
+
+will be rendered as:
+
+export const DynamicTable = () => (
+  <table>
+    <thead>
+    <tr>
+      <th>Country</th>
+      <th>Flag</th>
+    </tr>
+    </thead>
+    <tbody>
+    {[
+      { country: 'France', flag: '🇫🇷' },
+      { country: 'Ukraine', flag: '🇺🇦' }
+    ].map(item => (
+      <tr key={item.country}>
+        <th>{item.country}</th>
+        <th>{item.flag}</th>
+      </tr>
+    ))}
+    </tbody>
+  </table>
+)
+
+<DynamicTable />
+
+#### Changing Default Behaviour
+
+If this thing is still confusing for you, and you want to use regular literal HTML elements for your tables, do the following:
+
+1. Install `remark-mdx-disable-explicit-jsx` package
+
+```sh
+pnpm add remark-mdx-disable-explicit-jsx
+```
+
+2. Setup plugin in `nextra` function inside `next.config.mjs` file
+
+```js filename="next.config.mjs" {2,7-12}
+import nextra from 'nextra'
+import remarkMdxDisableExplicitJsx from 'remark-mdx-disable-explicit-jsx'
+
+const withNextra = nextra({
+  theme: 'nextra-theme-docs',
+  themeConfig: './theme.config.tsx',
+  remarkPlugins: [
+    [
+      remarkMdxDisableExplicitJsx,
+      { whiteList: ['table', 'thead', 'tbody', 'tr', 'th', 'td'] }
+    ]
+  ]
+})
+
+export default withNextra()
+```
+
+3. See that now literal HTML table uses Nextra's styles
+
+<DynamicTable />
