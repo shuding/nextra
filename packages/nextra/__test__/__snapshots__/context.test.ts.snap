@@ -1035,7 +1035,7 @@ exports[`context > getAllPages() > should work 1`] = `
                 "kind": "MdxPage",
                 "locale": "en-US",
                 "meta": {
-                  "title": "loooooooooooooooooooong-title",
+                  "title": "Loooooooooooooooooooong Title",
                 },
                 "name": "loooooooooooooooooooong-title",
                 "route": "/docs/advanced/more/loooooooooooooooooooong-title",
@@ -1279,7 +1279,7 @@ exports[`context > getAllPages() > should work 1`] = `
         "kind": "MdxPage",
         "locale": "en-US",
         "meta": {
-          "title": "code-block-without-language",
+          "title": "Code Block without Language",
         },
         "name": "code-block-without-language",
         "route": "/docs/code-block-without-language",
@@ -2749,7 +2749,7 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
             "kind": "MdxPage",
             "locale": "en-US",
             "meta": {
-              "title": "loooooooooooooooooooong-title",
+              "title": "Loooooooooooooooooooong Title",
             },
             "name": "loooooooooooooooooooong-title",
             "route": "/docs/advanced/more/loooooooooooooooooooong-title",
@@ -2993,7 +2993,7 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
     "kind": "MdxPage",
     "locale": "en-US",
     "meta": {
-      "title": "code-block-without-language",
+      "title": "Code Block without Language",
     },
     "name": "code-block-without-language",
     "route": "/docs/code-block-without-language",
@@ -3162,7 +3162,7 @@ exports[`context > getPagesUnderRoute() > should work 1`] = `
         "kind": "MdxPage",
         "locale": "en-US",
         "meta": {
-          "title": "loooooooooooooooooooong-title",
+          "title": "Loooooooooooooooooooong Title",
         },
         "name": "loooooooooooooooooooong-title",
         "route": "/docs/advanced/more/loooooooooooooooooooong-title",
