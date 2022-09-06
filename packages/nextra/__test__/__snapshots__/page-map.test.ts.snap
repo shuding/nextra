@@ -196,7 +196,7 @@ exports[`Page Process > pageMap en-US 1`] = `
               },
               "title": "Change Log",
             },
-            "code-block-without-language": "code-block-without-language",
+            "code-block-without-language": "Code Block without Language",
             "conditional-fetching": "Conditional Data Fetching",
             "data-fetching": "Data Fetching",
             "error-handling": {
@@ -289,7 +289,7 @@ exports[`Page Process > pageMap en-US 1`] = `
                 },
                 {
                   "data": {
-                    "loooooooooooooooooooong-title": "loooooooooooooooooooong-title",
+                    "loooooooooooooooooooong-title": "Loooooooooooooooooooong Title",
                   },
                   "kind": "Meta",
                   "locale": "en-US",
@@ -695,7 +695,7 @@ exports[`Page Process > pageMap zh-CN 1`] = `
                 },
                 {
                   "data": {
-                    "loooooooooooooooooooong-title": "loooooooooooooooooooong-title",
+                    "loooooooooooooooooooong-title": "Loooooooooooooooooooong Title",
                   },
                   "kind": "Meta",
                   "locale": "en-US",

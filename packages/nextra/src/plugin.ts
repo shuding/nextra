@@ -16,6 +16,7 @@ import slash from 'slash'
 import grayMatter from 'gray-matter'
 import { findPagesDir } from 'next/dist/lib/find-pages-dir.js'
 import { Compiler } from 'webpack'
+import title from 'title'
 
 import { restoreCache } from './content-dump'
 import { CWD, MARKDOWN_EXTENSION_REGEX, META_FILENAME } from './constants'
@@ -103,7 +104,10 @@ export async function collectFiles(
     )
     const defaultMeta: [string, string][] = mdxPages
       .filter(item => item.locale === locale)
-      .map(item => [item.name, item.frontMatter?.title || item.name])
+      .map(item => [
+        item.name,
+        item.frontMatter?.title || title(item.name.replace(/[-_]/g, ' '))
+      ])
     const metaFilename = locale
       ? META_FILENAME.replace('.', `.${locale}.`)
       : META_FILENAME
