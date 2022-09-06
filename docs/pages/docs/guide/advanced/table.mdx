@@ -96,8 +96,8 @@ Want to render dynamic table? You can use embeded JavaScript expressions into yo
       { country: 'Ukraine', flag: '🇺🇦' }
     ].map(item => (
       <tr key={item.country}>
-        <th>{item.country}</th>
-        <th>{item.flag}</th>
+        <td>{item.country}</td>
+        <td>{item.flag}</td>
       </tr>
     ))}
   </tbody>
@@ -119,8 +119,8 @@ will be rendered as:
       { country: 'Ukraine', flag: '🇺🇦' }
     ].map(item => (
       <tr key={item.country}>
-        <th>{item.country}</th>
-        <th>{item.flag}</th>
+        <td>{item.country}</td>
+        <td>{item.flag}</td>
       </tr>
     ))}
   </tbody>
@@ -164,32 +164,6 @@ Just wrap your table with curly braces `{` and `}`, e.g.
 </table>}
 ```
 
-will be rendered as:
-
-export const DynamicTable = () => (
-  <table>
-    <thead>
-    <tr>
-      <th>Country</th>
-      <th>Flag</th>
-    </tr>
-    </thead>
-    <tbody>
-    {[
-      { country: 'France', flag: '🇫🇷' },
-      { country: 'Ukraine', flag: '🇺🇦' }
-    ].map(item => (
-      <tr key={item.country}>
-        <th>{item.country}</th>
-        <th>{item.flag}</th>
-      </tr>
-    ))}
-    </tbody>
-  </table>
-)
-
-<DynamicTable />
-
 #### Changing Default Behaviour
 
 If this thing is still confusing for you, and you want to use regular literal HTML elements for your tables, do the following:
@@ -220,6 +194,3 @@ const withNextra = nextra({
 export default withNextra()
 ```
 
-3. See that now literal HTML table uses Nextra's styles
-
-<DynamicTable />
