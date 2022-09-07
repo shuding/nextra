@@ -1,20 +1,11 @@
 import { Processor } from '@mdx-js/mdx/lib/core'
+import { visit } from 'unist-util-visit'
+import { Plugin } from 'unified'
 import { Root, Heading, Parent } from 'mdast'
 import { PageOpts } from '../types'
 
-function visit(
-  node: any,
-  tester: (node: any) => boolean,
-  handler: (node: any) => any
-) {
-  if (tester(node)) {
-    handler(node)
-  }
-  node.children?.forEach((n: any) => visit(n, tester, handler))
-}
-
-export function getFlattenedValue(node: Parent): string {
-  return node.children
+export const getFlattenedValue = (node: Parent): string =>
+  node.children
     .map(child =>
       'children' in child
         ? getFlattenedValue(child)
@@ -23,23 +14,20 @@ export function getFlattenedValue(node: Parent): string {
         : ''
     )
     .join('')
-}
 
-export function remarkHeadings(this: Processor) {
+export const remarkHeadings: Plugin<[], Root> = function (this: Processor) {
   const data = this.data() as {
     headingMeta: Pick<PageOpts, 'headings' | 'hasJsxInH1'>
   }
-  return (tree: Root, _file: any, done: () => void) => {
+  return (tree, _file, done) => {
     visit(
       tree,
-      node => {
+      [
         // Match headings and <details>
-        return (
-          node.type === 'heading' ||
-          node.name === 'summary' ||
-          node.name === 'details'
-        )
-      },
+        { type: 'heading' },
+        { name: 'summary' },
+        { name: 'details' }
+      ],
       node => {
         if (node.type === 'heading') {
           const hasJsxInH1 =
@@ -56,11 +44,12 @@ export function remarkHeadings(this: Processor) {
           if (hasJsxInH1) {
             data.headingMeta.hasJsxInH1 = true
           }
-        } else if (node.name === 'summary' || node.name === 'details') {
-          // Replace the <summary> and <details> with customized components.
-          if (node.data) {
-            delete node.data._mdxExplicitJsx
-          }
+          return
+        }
+
+        // Replace the <summary> and <details> with customized components.
+        if (node.data) {
+          delete node.data._mdxExplicitJsx
         }
       }
     )

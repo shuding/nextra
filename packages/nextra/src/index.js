@@ -40,7 +40,8 @@ const nextra = (...config) =>
           locales: nextConfig.i18n?.locales || [DEFAULT_LOCALE],
           defaultLocale: nextConfig.i18n?.defaultLocale || DEFAULT_LOCALE,
           pageMapCache,
-          newNextLinkBehavior: nextConfig.experimental?.newNextLinkBehavior
+          newNextLinkBehavior: nextConfig.experimental?.newNextLinkBehavior,
+          allowFutureImage: nextConfig.experimental?.images?.allowFutureImage
         }
 
         config.module.rules.push(

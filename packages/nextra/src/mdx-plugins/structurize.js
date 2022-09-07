@@ -8,8 +8,10 @@ function cleanup(content) {
     .join('\n')
 }
 
-export default (structurizedData, options) => {
-  if (typeof options === 'boolean') options = {}
+export const structurize = (structurizedData, options) => {
+  if (typeof options === 'boolean') {
+    options = {}
+  }
   options = Object.assign({ codeblocks: true }, options)
 
   const slugger = new Slugger()
@@ -35,7 +37,9 @@ export default (structurizedData, options) => {
       /** @type {Type} */
       const type = node.type
 
-      if (type === 'heading') skip = true
+      if (type === 'heading') {
+        skip = true
+      }
 
       if (
         ['code', 'table', 'blockquote', 'list', 'mdxJsxFlowElement'].includes(
@@ -43,7 +47,9 @@ export default (structurizedData, options) => {
         )
       ) {
         result += '\n'
-        if (!skip) content += '\n'
+        if (!skip) {
+          content += '\n'
+        }
       }
 
       if ('children' in node) {
@@ -59,7 +65,9 @@ export default (structurizedData, options) => {
         ].includes(type)
       ) {
         result += node.value
-        if (!skip) content += node.value
+        if (!skip) {
+          content += node.value
+        }
       }
 
       if (
@@ -74,14 +82,20 @@ export default (structurizedData, options) => {
         ].includes(type)
       ) {
         result += '\n'
-        if (!skip) content += '\n'
+        if (!skip) {
+          content += '\n'
+        }
       }
-      if (['tableCell'].includes(type)) {
+      if (type === 'tableCell') {
         result += '\t'
-        if (!skip) content += '\t'
+        if (!skip) {
+          content += '\t'
+        }
       }
 
-      if (type === 'heading') skip = false
+      if (type === 'heading') {
+        skip = false
+      }
 
       if (type === 'heading' && node.depth > 1) {
         structurizedData[activeSlug] = cleanup(content)
