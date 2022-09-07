@@ -24,7 +24,7 @@ export const remarkHeadings: Plugin<[], Root> = function (this: Processor) {
       tree,
       [
         // Match headings and <details>
-        'heading',
+        { type: 'heading' },
         { name: 'summary' },
         { name: 'details' }
       ],
