@@ -69,7 +69,7 @@ export async function compileMdx(
       remarkHeadings,
       loaderOptions.unstable_staticImage && [
         remarkStaticImage,
-        { allowFutureImage: loaderOptions.allowFutureImage }
+        { allowFutureImage: loaderOptions.allowFutureImage, filePath }
       ] as any,
       loaderOptions.unstable_flexsearch &&
         structurize(structurizedData, loaderOptions.unstable_flexsearch),
