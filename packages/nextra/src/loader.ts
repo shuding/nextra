@@ -68,7 +68,8 @@ async function loader(
     unstable_readingTime,
     mdxOptions,
     pageMapCache,
-    newNextLinkBehavior
+    newNextLinkBehavior,
+    allowFutureImage
   } = context.getOptions()
 
   context.cacheable(true)
@@ -114,12 +115,13 @@ async function loader(
   const { result, headings, structurizedData, hasJsxInH1, readingTime } =
     await compileMdx(
       content,
-      mdxOptions,
       {
+        mdxOptions,
         unstable_readingTime,
         unstable_defaultShowCopyCode,
         unstable_staticImage,
-        unstable_flexsearch
+        unstable_flexsearch,
+        allowFutureImage
       },
       mdxPath
     )

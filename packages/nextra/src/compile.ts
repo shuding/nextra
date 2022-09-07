@@ -4,11 +4,14 @@ import remarkGfm from 'remark-gfm'
 import rehypePrettyCode from 'rehype-pretty-code'
 import { rehypeMdxTitle } from 'rehype-mdx-title'
 import readingTime from 'remark-reading-time'
-import { remarkStaticImage } from './mdx-plugins/static-image'
-import { remarkHeadings } from './mdx-plugins/remark'
+import {
+  remarkStaticImage,
+  remarkHeadings,
+  structurize,
+  parseMeta,
+  attachMeta
+} from './mdx-plugins'
 import { LoaderOptions, PageOpts, ReadingTime } from './types'
-import structurize from './mdx-plugins/structurize'
-import { parseMeta, attachMeta } from './mdx-plugins/rehype-handler'
 import theme from './theme.json'
 import { truthy } from './utils'
 
@@ -39,18 +42,23 @@ const rehypePrettyCodeOptions = {
 
 export async function compileMdx(
   source: string,
-  mdxOptions: LoaderOptions['mdxOptions'] &
-    Pick<ProcessorOptions, 'jsx' | 'outputFormat'> = {},
-  nextraOptions: Pick<
+  loaderOptions: Pick<
     LoaderOptions,
     | 'unstable_staticImage'
     | 'unstable_flexsearch'
     | 'unstable_defaultShowCopyCode'
     | 'unstable_readingTime'
-  > = {},
+    | 'allowFutureImage'
+  > & {
+    mdxOptions?: LoaderOptions['mdxOptions'] &
+      Pick<ProcessorOptions, 'jsx' | 'outputFormat'>
+  } = {},
   filePath = ''
 ) {
   const structurizedData = Object.create(null)
+
+  const mdxOptions = loaderOptions.mdxOptions || {}
+
   const compiler = createCompiler({
     jsx: mdxOptions.jsx ?? true,
     outputFormat: mdxOptions.outputFormat,
@@ -59,10 +67,13 @@ export async function compileMdx(
       ...(mdxOptions.remarkPlugins || []),
       remarkGfm,
       remarkHeadings,
-      nextraOptions.unstable_staticImage && remarkStaticImage,
-      nextraOptions.unstable_flexsearch &&
-        structurize(structurizedData, nextraOptions.unstable_flexsearch),
-      nextraOptions.unstable_readingTime && readingTime
+      loaderOptions.unstable_staticImage && [
+        remarkStaticImage,
+        { allowFutureImage: loaderOptions.allowFutureImage }
+      ] as any,
+      loaderOptions.unstable_flexsearch &&
+        structurize(structurizedData, loaderOptions.unstable_flexsearch),
+      loaderOptions.unstable_readingTime && readingTime
     ].filter(truthy),
     rehypePlugins: [
       ...(mdxOptions.rehypePlugins || []),
@@ -74,7 +85,7 @@ export async function compileMdx(
       [rehypeMdxTitle, { name: '__nextra_title__' }],
       [
         attachMeta,
-        { defaultShowCopyCode: nextraOptions.unstable_defaultShowCopyCode }
+        { defaultShowCopyCode: loaderOptions.unstable_defaultShowCopyCode }
       ]
     ]
   })
