@@ -2,7 +2,8 @@ import { visit } from 'unist-util-visit'
 import { Plugin } from 'unified'
 import { Root } from 'mdast'
 import path from 'node:path'
-import { existsSync, truthy } from '../utils'
+import { truthy } from '../utils'
+import { existsSync } from '../file-system'
 import { EXTERNAL_URL_REGEX, PUBLIC_DIR } from '../constants'
 
 const getASTNodeImport = (name: string, from: string) => ({

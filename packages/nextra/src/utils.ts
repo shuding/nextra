@@ -42,12 +42,3 @@ export function truthy<T>(value: T): value is Truthy<T> {
 export function normalizeMeta(meta: Meta): Exclude<Meta, string> {
   return typeof meta === 'string' ? { title: meta } : meta
 }
-
-export const existsSync = (filePath: string): boolean => {
-  try {
-    fs.statSync(filePath)
-    return true
-  } catch {
-    return false
-  }
-}

@@ -1,6 +1,6 @@
 import path from 'node:path'
 import fs from 'graceful-fs'
-import { existsSync } from './utils'
+import { existsSync } from './file-system'
 import { ASSET_DIR, CACHE_DIR } from './constants'
 
 const asset: { [locale: string]: any } = Object.create(null)
