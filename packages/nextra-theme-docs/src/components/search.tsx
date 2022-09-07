@@ -196,66 +196,65 @@ export function Search({
 
       <Transition
         show={renderList}
-        as={Fragment}
+        // Transition.Child is required here, otherwise popup will be still present in DOM after focus out
+        as={Transition.Child}
         leave="transition-opacity duration-100"
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
       >
-        {/* Transition.Child is required here, otherwise popup will be still present in DOM after focus out */}
-        <Transition.Child>
-          <ul
-            className={cn(
-              // Using bg-white as background-color when the browser didn't support backdrop-filter
-              'bg-white text-gray-100 dark:bg-neutral-900',
-              'absolute top-full z-20 mt-2 overscroll-contain rounded-xl py-2.5 shadow-xl overflow-auto',
-              'max-h-[min(calc(50vh-11rem-env(safe-area-inset-bottom)),400px)]',
-              'md:max-h-[min(calc(100vh-5rem-env(safe-area-inset-bottom)),400px)]',
-              'right-0 left-0 ltr:md:left-auto rtl:md:right-auto',
-              'contrast-more:border contrast-more:border-gray-900 contrast-more:dark:border-gray-50',
-              overlayClassName
-            )}
-            ref={ulRef}
-            style={{
-              transition: 'max-height .2s ease' // don't work with tailwindcss
-            }}
-          >
-            {loading ? (
-              <span className="flex select-none justify-center p-8 text-center text-sm text-gray-400 gap-2">
-                <SpinnerIcon className="h-5 w-5 animate-spin" />
-                Loading...
-              </span>
-            ) : results.length > 0 ? (
-              results.map(({ route, prefix, children, id }, i) => (
-                <Fragment key={id}>
-                  {prefix}
-                  <li
-                    className={cn(
-                      'mx-2.5 rounded-md break-words',
-                      'contrast-more:border',
-                      i === active
-                        ? 'bg-primary-500/10 text-primary-500 contrast-more:border-primary-500'
-                        : 'text-gray-800 dark:text-gray-300 contrast-more:border-transparent'
-                    )}
+        <ul
+          className={cn(
+            'nextra-scrollbar',
+            // Using bg-white as background-color when the browser didn't support backdrop-filter
+            'bg-white text-gray-100 dark:bg-neutral-900',
+            'absolute top-full z-20 mt-2 overscroll-contain rounded-xl py-2.5 shadow-xl overflow-auto',
+            'max-h-[min(calc(50vh-11rem-env(safe-area-inset-bottom)),400px)]',
+            'md:max-h-[min(calc(100vh-5rem-env(safe-area-inset-bottom)),400px)]',
+            'right-0 left-0 ltr:md:left-auto rtl:md:right-auto',
+            'contrast-more:border contrast-more:border-gray-900 contrast-more:dark:border-gray-50',
+            overlayClassName
+          )}
+          ref={ulRef}
+          style={{
+            transition: 'max-height .2s ease' // don't work with tailwindcss
+          }}
+        >
+          {loading ? (
+            <span className="flex select-none justify-center p-8 text-center text-sm text-gray-400 gap-2">
+              <SpinnerIcon className="h-5 w-5 animate-spin" />
+              Loading...
+            </span>
+          ) : results.length > 0 ? (
+            results.map(({ route, prefix, children, id }, i) => (
+              <Fragment key={id}>
+                {prefix}
+                <li
+                  className={cn(
+                    'mx-2.5 rounded-md break-words',
+                    'contrast-more:border',
+                    i === active
+                      ? 'bg-primary-500/10 text-primary-500 contrast-more:border-primary-500'
+                      : 'text-gray-800 dark:text-gray-300 contrast-more:border-transparent'
+                  )}
+                >
+                  <Anchor
+                    className="block px-2.5 py-2 scroll-m-12"
+                    href={route}
+                    data-index={i}
+                    onFocus={handleActive}
+                    onMouseMove={handleActive}
+                    onClick={finishSearch}
+                    onKeyDown={handleKeyDown}
                   >
-                    <Anchor
-                      className="block px-2.5 py-2 scroll-m-12"
-                      href={route}
-                      data-index={i}
-                      onFocus={handleActive}
-                      onMouseMove={handleActive}
-                      onClick={finishSearch}
-                      onKeyDown={handleKeyDown}
-                    >
-                      {children}
-                    </Anchor>
-                  </li>
-                </Fragment>
-              ))
-            ) : (
-              renderComponent(config.search.emptyResult)
-            )}
-          </ul>
-        </Transition.Child>
+                    {children}
+                  </Anchor>
+                </li>
+              </Fragment>
+            ))
+          ) : (
+            renderComponent(config.search.emptyResult)
+          )}
+        </ul>
       </Transition>
     </div>
   )

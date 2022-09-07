@@ -1,5 +1,5 @@
 import type { PageMapItem, PageOpts } from 'nextra'
-import type { FC, ReactElement, ReactNode } from 'react'
+import type { ReactElement, ReactNode } from 'react'
 
 import React, { useEffect, useMemo, useRef } from 'react'
 import { useRouter } from 'next/router'
@@ -19,12 +19,7 @@ import {
   Banner
 } from './components'
 import { getComponents } from './mdx-components'
-import {
-  ActiveAnchorProvider,
-  ConfigProvider,
-  useConfig,
-  useMenu
-} from './contexts'
+import { ActiveAnchorProvider, ConfigProvider, useConfig } from './contexts'
 import { DEFAULT_LOCALE, IS_BROWSER } from './constants'
 import { getFSRoute, normalizePages, renderComponent } from './utils'
 import { DocsThemeConfig, PageTheme, RecursivePartial } from './types'
@@ -145,9 +140,7 @@ const InnerLayout = ({
   timestamp,
   children
 }: PageOpts & { children: ReactNode }): ReactElement => {
-  const { locale = DEFAULT_LOCALE } = useRouter()
   const config = useConfig()
-  const { menu } = useMenu()
   const {
     activeType,
     activeIndex,
@@ -160,10 +153,6 @@ const InnerLayout = ({
     directories
   } = useDirectoryInfo(pageMap)
 
-  const localeConfig = config.i18n.find(l => l.locale === locale)
-  const isRTL = localeConfig
-    ? localeConfig.direction === 'rtl'
-    : config.direction === 'rtl'
   const themeContext = { ...activeThemeContext, ...frontMatter }
   const hideSidebar =
     !themeContext.sidebar ||
@@ -188,11 +177,21 @@ const InnerLayout = ({
       </div>
     )
 
+  const { locale = DEFAULT_LOCALE } = useRouter()
+  const localeConfig = config.i18n.find(l => l.locale === locale)
+  const isRTL = localeConfig
+    ? localeConfig.direction === 'rtl'
+    : config.direction === 'rtl'
+
+  const direction = isRTL ? 'rtl' : 'ltr'
+
   return (
-    <div
-      dir={isRTL ? 'rtl' : 'ltr'}
-      className={cn('nextra-container transition-opacity', menu && 'opacity-80')}
-    >
+    <>
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `document.documentElement.setAttribute('dir','${direction}')`
+        }}
+      />
       <Head />
       <Banner />
       {themeContext.navbar &&
@@ -202,7 +201,7 @@ const InnerLayout = ({
         })}
       <div
         className={cn(
-          'mx-auto flex w-full flex-1 items-stretch',
+          'mx-auto flex',
           themeContext.layout !== 'raw' && 'max-w-[90rem]'
         )}
       >
@@ -247,7 +246,7 @@ const InnerLayout = ({
       </div>
       {themeContext.footer &&
         renderComponent(config.footer.component, { menu: hideSidebar })}
-    </div>
+    </>
   )
 }
 

@@ -1,13 +1,13 @@
-import React, { ReactElement } from 'react'
+import React, { ComponentProps, ReactElement } from 'react'
 
-export function CheckIcon({ className }: { className?: string }): ReactElement {
+export function CheckIcon(props: ComponentProps<'svg'>): ReactElement {
   return (
     <svg
       viewBox="0 0 20 20"
       width="1em"
       height="1em"
       fill="currentColor"
-      className={className}
+      {...props}
     >
       <path
         fillRule="evenodd"

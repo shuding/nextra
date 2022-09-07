@@ -1,10 +1,6 @@
-import React, { ReactElement } from 'react'
+import React, { ComponentProps, ReactElement } from 'react'
 
-export function SpinnerIcon({
-  className
-}: {
-  className?: string
-}): ReactElement {
+export function SpinnerIcon(props: ComponentProps<'svg'>): ReactElement {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -12,7 +8,7 @@ export function SpinnerIcon({
       viewBox="0 0 24 24"
       width="24"
       height="24"
-      className={className}
+      {...props}
     >
       <circle
         className="opacity-25"

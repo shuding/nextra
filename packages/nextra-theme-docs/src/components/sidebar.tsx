@@ -369,14 +369,22 @@ export function Sidebar({
           {hasMenu && (
             <div
               className={cn(
-                'sticky bottom-0 mx-4 border-t shadow-[0_-12px_16px_#fff] dark:border-neutral-800 dark:shadow-[0_-12px_16px_#111]',
+                'sticky bottom-0 bg-white border-t shadow-[0_-12px_16px_#fff]',
+                'flex justify-end items-center gap-2',
+                'dark:bg-dark dark:border-neutral-800 dark:shadow-[0_-12px_16px_#111]',
                 'contrast-more:shadow-none contrast-more:dark:shadow-none contrast-more:border-neutral-400',
-                'h-[var(--nextra-menu-height)]',
-                'flex bg-white dark:bg-dark justify-between items-center',
-                'mx-3', // cover focused sidebar links with extra ring width
+                [
+                  'h-[var(--nextra-menu-height)]',
+                  'mx-3' // hide ring on focused sidebar links
+                ]
               )}
             >
-              {config.i18n.length > 0 && <LocaleSwitch options={config.i18n} />}
+              {config.i18n.length > 0 && (
+                <LocaleSwitch
+                  options={config.i18n}
+                  className="ltr:mr-auto rtl:ml-auto"
+                />
+              )}
               {config.darkMode && <ThemeSwitch lite={config.i18n.length > 0} />}
             </div>
           )}
