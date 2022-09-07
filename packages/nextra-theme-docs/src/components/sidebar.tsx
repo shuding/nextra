@@ -22,7 +22,7 @@ import {
   renderComponent
 } from '../utils'
 import { LocaleSwitch } from './locale-switch'
-import ThemeSwitch from './theme-switch'
+import { ThemeSwitch } from './theme-switch'
 import { ArrowRightIcon } from 'nextra/icons'
 import { Collapse } from './collapse'
 import { Anchor } from './anchor'
@@ -108,7 +108,8 @@ function FolderImpl({
           'gap-2 items-center justify-between',
           classes.link,
           active ? classes.active : classes.inactive
-        )}        onClick={e => {
+        )}
+        onClick={e => {
           const clickedToggleIcon = ['svg', 'path'].includes(
             (e.target as HTMLElement).tagName.toLowerCase()
           )
@@ -242,7 +243,7 @@ interface MenuProps {
 
 function Menu({ directories, anchors, className }: MenuProps): ReactElement {
   return (
-    <ul className={cn(classes.list, className)}>
+    <ul className={cn('overflow-hidden', classes.list, className)}>
       {directories.map(item =>
         item.type === 'menu' ||
         (item.children && (item.children.length || !item.withIndexPage)) ? (
@@ -344,28 +345,28 @@ export function Sidebar({
                 directories: flatDirectories
               })}
             </div>
-              <Menu
-                className="hidden md:flex"
-                // The sidebar menu, shows only the docs directories.
-                directories={docsDirectories}
-                // When the viewport size is larger than `md`, hide the anchors in
-                // the sidebar when `floatTOC` is enabled.
-                anchors={config.toc.float ? [] : anchors}
-              />
-              <Menu
-                className="md:hidden"
-                // The mobile dropdown menu, shows all the directories.
-                directories={fullDirectories}
-                // Always show the anchor links on mobile (`md`).
-                anchors={anchors}
-              />
+            <Menu
+              className="hidden md:flex"
+              // The sidebar menu, shows only the docs directories.
+              directories={docsDirectories}
+              // When the viewport size is larger than `md`, hide the anchors in
+              // the sidebar when `floatTOC` is enabled.
+              anchors={config.toc.float ? [] : anchors}
+            />
+            <Menu
+              className="md:hidden"
+              // The mobile dropdown menu, shows all the directories.
+              directories={fullDirectories}
+              // Always show the anchor links on mobile (`md`).
+              anchors={anchors}
+            />
           </div>
 
           {hasMenu && (
             <div
               className={cn(
                 'sticky bottom-0 bg-white border-t shadow-[0_-12px_16px_#fff]',
-                'flex gap-2 justify-end items-center gap-2',
+                'flex gap-2 items-center gap-2',
                 'dark:bg-dark dark:border-neutral-800 dark:shadow-[0_-12px_16px_#111]',
                 'contrast-more:shadow-none contrast-more:dark:shadow-none contrast-more:border-neutral-400',
                 [
@@ -375,10 +376,7 @@ export function Sidebar({
               )}
             >
               {config.i18n.length > 0 && (
-                <LocaleSwitch
-                  options={config.i18n}
-                  className="ltr:mr-auto rtl:ml-auto"
-                />
+                <LocaleSwitch options={config.i18n} className="grow" />
               )}
               {config.darkMode && <ThemeSwitch lite={config.i18n.length > 0} />}
             </div>

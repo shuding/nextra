@@ -29,7 +29,18 @@ export function Select({
   const [trigger, container] = usePopper({
     strategy: 'fixed',
     placement: 'top-start',
-    modifiers: [{ name: 'offset', options: { offset: [0, 10] } }]
+    modifiers: [
+      { name: 'offset', options: { offset: [0, 10] } },
+      {
+        name: 'sameWidth',
+        enabled: true,
+        fn({ state }) {
+          state.styles.popper.minWidth = `${state.rects.reference.width}px`
+        },
+        phase: 'beforeWrite',
+        requires: ['computeStyles']
+      }
+    ]
   })
 
   return (

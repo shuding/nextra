@@ -181,8 +181,8 @@ const Details = ({
     <details
       className="my-4 rounded border border-gray-200 bg-white p-2 shadow-sm dark:border-neutral-800 dark:bg-neutral-900 first:mt-0 last:mb-0"
       {...props}
-      data-expanded={openState}
       open={delayedOpenState}
+      {...(openState && { 'data-expanded': true })}
     >
       <DetailsProvider value={setOpen}>{summary}</DetailsProvider>
       <Collapse open={openState}>{restChildren}</Collapse>

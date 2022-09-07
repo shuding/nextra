@@ -1,4 +1,4 @@
-import React, { memo, ReactElement } from 'react'
+import React, { ReactElement } from 'react'
 import { useTheme } from 'next-themes'
 import { Select } from './select'
 import { SunIcon, MoonIcon } from 'nextra/icons'
@@ -40,5 +40,3 @@ export function ThemeSwitch({ lite }: ThemeSwitchProps): ReactElement {
   </div>
   )
 }
-
-export default memo(ThemeSwitch)
