@@ -1,5 +1,23 @@
 # nextra-theme-docs
 
+## 2.0.0-beta.25
+
+### Patch Changes
+
+- 4731fa7: Style improvements
+- e4cfb83: define page title in sidebar from `frontMatter.title` if page is not specified in `_meta.json`
+- 9064112: make `<Tab />` accept `ComponentProps<'div'>`
+- c3e6227: add `overflow-x-scroll` for tables
+- d6d5ab8: Make sure arrows are aligned
+- ab6c0e6: fix disappearing toc issue in Firefox
+- ff8967c: add `Toggle Word Wrap` button for code-blocks (only for mobile)
+- ff8967c: fix missing `Copy Code` button in code-blocks without language
+- e2d603a: remove `getComponents` export, export `useMDXComponents` from `@mdx-js/react` instead
+- 256154a: use "next/future/image" if `"experimental.images.allowFutureImage": true` is set in next config
+- 256154a: replace images with `<NextImage />` even when url not relative but that starts from `/` (public directory)
+- c4a9782: support custom hue theme color via `primaryHue`, `primaryHue.dark` and `primaryHue.light` theme options
+- c3e6227: reuse nextra's scrollbar-y styles for scrollbar-x, adjust sidebar's scrollbar-y
+
 ## 2.0.0-beta.24
 
 ### Patch Changes
