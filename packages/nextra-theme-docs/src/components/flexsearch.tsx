@@ -1,4 +1,4 @@
-import React, { useState, ReactElement, ReactNode } from 'react'
+import React, { useState, ReactElement, ReactNode, useCallback } from 'react'
 import { useRouter } from 'next/router'
 import FlexSearch from 'flexsearch'
 import cn from 'clsx'
@@ -48,7 +48,22 @@ const indexes: {
   [locale: string]: [PageIndex, SectionIndex]
 } = {}
 
-const loadIndexes = async (basePath: string, locale: string): Promise<void> => {
+// Caches promises that load the index
+const loadIndexesPromises = new Map<string, Promise<void>>()
+const loadIndexes = (basePath: string, locale: string): Promise<void> => {
+  const key = basePath + '@' + locale
+  if (loadIndexesPromises.has(key)) {
+    return loadIndexesPromises.get(key)!
+  }
+  const promise = loadIndexesImpl(basePath, locale)
+  loadIndexesPromises.set(key, promise)
+  return promise
+}
+
+const loadIndexesImpl = async (
+  basePath: string,
+  locale: string
+): Promise<void> => {
   const response = await fetch(
     `${basePath}/_next/static/chunks/nextra-data-${locale}.json`
   )
@@ -232,6 +247,17 @@ export function Flexsearch({
     )
   }
 
+  const preload = useCallback(
+    async (active: boolean) => {
+      if (active && !indexes[locale]) {
+        setLoading(true)
+        await loadIndexes(basePath, locale)
+        setLoading(false)
+      }
+    },
+    [locale]
+  )
+
   const handleChange = async (value: string) => {
     setSearch(value)
     if (loading) {
@@ -250,6 +276,7 @@ export function Flexsearch({
       loading={loading}
       value={search}
       onChange={handleChange}
+      onActive={preload}
       className={className}
       overlayClassName="w-screen min-h-[100px] max-w-[min(calc(100vw-2rem),calc(100%+20rem))]"
       results={results}

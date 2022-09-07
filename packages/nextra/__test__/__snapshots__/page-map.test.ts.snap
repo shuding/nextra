@@ -197,7 +197,7 @@ exports[`Page Process > pageMap en-US 1`] = `
               },
               "title": "Change Log",
             },
-            "code-block-without-language": "code-block-without-language",
+            "code-block-without-language": "Code Block without Language",
             "conditional-fetching": "Conditional Data Fetching",
             "data-fetching": "Data Fetching",
             "error-handling": {
@@ -246,9 +246,10 @@ exports[`Page Process > pageMap en-US 1`] = `
                   "type": "separator",
                 },
                 "cache": "Cache",
-                "code-highlighting": "Code highlighting",
-                "file-name.with.DOTS": "Filenames with dots",
-                "markdown-import": "Markdown import",
+                "code-highlighting": "Code Highlighting",
+                "file-name.with.DOTS": "Filenames with Dots",
+                "future-image": "Future Image",
+                "markdown-import": "Markdown Import",
                 "more": "More: A Super Super Super Super Long Directory",
                 "performance": "Performance",
                 "react-native": "React Native",
@@ -277,6 +278,12 @@ exports[`Page Process > pageMap en-US 1`] = `
             {
               "kind": "MdxPage",
               "locale": "en-US",
+              "name": "future-image",
+              "route": "/docs/advanced/future-image",
+            },
+            {
+              "kind": "MdxPage",
+              "locale": "en-US",
               "name": "markdown-import",
               "route": "/docs/advanced/markdown-import",
             },
@@ -290,7 +297,7 @@ exports[`Page Process > pageMap en-US 1`] = `
                 },
                 {
                   "data": {
-                    "loooooooooooooooooooong-title": "loooooooooooooooooooong-title",
+                    "loooooooooooooooooooong-title": "Loooooooooooooooooooong Title",
                   },
                   "kind": "Meta",
                   "locale": "en-US",
@@ -696,7 +703,7 @@ exports[`Page Process > pageMap zh-CN 1`] = `
                 },
                 {
                   "data": {
-                    "loooooooooooooooooooong-title": "loooooooooooooooooooong-title",
+                    "loooooooooooooooooooong-title": "Loooooooooooooooooooong Title",
                   },
                   "kind": "Meta",
                   "locale": "en-US",
@@ -723,6 +730,12 @@ exports[`Page Process > pageMap zh-CN 1`] = `
               "locale": "en-US",
               "name": "code-highlighting",
               "route": "/docs/advanced/code-highlighting",
+            },
+            {
+              "kind": "MdxPage",
+              "locale": "en-US",
+              "name": "future-image",
+              "route": "/docs/advanced/future-image",
             },
             {
               "kind": "MdxPage",

@@ -103,17 +103,12 @@ function FolderImpl({
   return (
     <li className={cn({ open, active })}>
       <Anchor
-        href={
-          (item as Item).withIndexPage
-            ? item.route
-            : item.children?.find(child => child.route)?.route
-        }
+        href={(item as Item).withIndexPage ? item.route : ''}
         className={cn(
           'gap-2 items-center justify-between',
           classes.link,
           active ? classes.active : classes.inactive
-        )}
-        onClick={e => {
+        )}        onClick={e => {
           const clickedToggleIcon = ['svg', 'path'].includes(
             (e.target as HTMLElement).tagName.toLowerCase()
           )
@@ -145,7 +140,7 @@ function FolderImpl({
           )}
         />
       </Anchor>
-      <Collapse open={open}>
+      <Collapse className="ltr:pr-0 rtl:pl-0" open={open}>
         {Array.isArray(item.children) ? (
           <Menu
             className={cn(classes.border, 'ltr:ml-1 rtl:mr-1')}
@@ -338,7 +333,7 @@ export function Sidebar({
           className="h-full w-full select-none pl-[calc(env(safe-area-inset-left)-1.5rem)] md:h-auto [-webkit-touch-callout:none]"
           ref={sidebarRef}
         >
-          <div className="min-h-[calc(100vh-4rem-61px)] p-4">
+          <div className="min-h-[calc(100%-61px)] p-4">
             <div
               className={cn(
                 'sticky top-0 z-[1] block md:hidden -mt-4 mb-4 bg-white pt-4',
@@ -370,7 +365,7 @@ export function Sidebar({
             <div
               className={cn(
                 'sticky bottom-0 bg-white border-t shadow-[0_-12px_16px_#fff]',
-                'flex justify-end items-center gap-2',
+                'flex gap-2 justify-end items-center gap-2',
                 'dark:bg-dark dark:border-neutral-800 dark:shadow-[0_-12px_16px_#111]',
                 'contrast-more:shadow-none contrast-more:dark:shadow-none contrast-more:border-neutral-400',
                 [

@@ -29,6 +29,14 @@ export const Anchor = forwardRef<HTMLAnchorElement, AnchorProps>(function (
     )
   }
 
+  if (!href) {
+    return (
+      <a ref={forwardedRef} {...props}>
+        {children}
+      </a>
+    )
+  }
+
   if (config.newNextLinkBehavior) {
     return (
       <NextLink ref={forwardedRef} href={href} {...props}>

@@ -1,6 +1,6 @@
 import type { LoaderOptions, MdxPath, PageOpts } from './types'
 
-import path from 'path'
+import path from 'node:path'
 import grayMatter from 'gray-matter'
 import slash from 'slash'
 import { LoaderContext } from 'webpack'
@@ -17,13 +17,12 @@ import {
   DEFAULT_LOCALE,
   OFFICIAL_THEMES,
   MARKDOWN_EXTENSION_REGEX,
-  CWD
+  CWD,
 } from './constants'
+const PAGES_DIR = findPagesDir(CWD).pages
 
 // TODO: create this as a webpack plugin.
 const indexContentEmitted = new Set<string>()
-
-const pagesDir = findPagesDir(CWD).pages
 
 const [repository, gitRoot] = (function () {
   try {
@@ -68,7 +67,8 @@ async function loader(
     unstable_readingTime,
     mdxOptions,
     pageMapCache,
-    newNextLinkBehavior
+    newNextLinkBehavior,
+    allowFutureImage
   } = context.getOptions()
 
   context.cacheable(true)
@@ -89,7 +89,7 @@ async function loader(
 
   const { items, fileMap } = IS_PRODUCTION
     ? pageMapCache.get()!
-    : await collectFiles(pagesDir)
+    : await collectFiles(PAGES_DIR)
 
   // mdx is imported but is outside the `pages` directory
   if (!fileMap[mdxPath]) {
@@ -106,7 +106,7 @@ async function loader(
   }
   // Add the entire directory `pages` as the dependency,
   // so we can generate the correct page map.
-  context.addContextDependency(pagesDir)
+  context.addContextDependency(PAGES_DIR)
 
   // Extract frontMatter information if it exists
   const { data: frontMatter, content } = grayMatter(source)
@@ -114,12 +114,13 @@ async function loader(
   const { result, headings, structurizedData, hasJsxInH1, readingTime } =
     await compileMdx(
       content,
-      mdxOptions,
       {
+        mdxOptions,
         unstable_readingTime,
         unstable_defaultShowCopyCode,
         unstable_staticImage,
-        unstable_flexsearch
+        unstable_flexsearch,
+        allowFutureImage
       },
       mdxPath
     )
@@ -191,7 +192,7 @@ export default MDXContent`.trimStart()
 
   const pageNextRoute =
     '/' +
-    slash(path.relative(pagesDir, mdxPath))
+    slash(path.relative(PAGES_DIR, mdxPath))
       // Remove the `mdx?` extension
       .replace(MARKDOWN_EXTENSION_REGEX, '')
       // Remove the `*/index` suffix
@@ -216,7 +217,7 @@ ${result}
 __nextra_pageOpts__.title =
   ${JSON.stringify(frontMatter.title)} ||
   (typeof __nextra_title__ === 'string' && __nextra_title__) ||
-  'Untitled'
+  ${JSON.stringify(title /* Fallback as sidebar link name */)}
 
 const Content = props => (
   <__nextra_SSGContext__.Provider value={props}>

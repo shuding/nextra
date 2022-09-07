@@ -186,6 +186,9 @@ const InnerLayout = ({
   const direction = isRTL ? 'rtl' : 'ltr'
 
   return (
+    // This makes sure that selectors like `[dir=ltr] .nextra-container` work
+    // before hydration as Tailwind expects the `dir` attribute to exist on the
+    // `html` element.
     <>
       <script
         dangerouslySetInnerHTML={{

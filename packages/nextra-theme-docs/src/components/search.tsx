@@ -23,6 +23,7 @@ type SearchProps = {
   overlayClassName?: string
   value: string
   onChange: (newValue: string) => void
+  onActive?: (active: boolean) => void
   loading?: boolean
   results: SearchResult[]
 }
@@ -34,6 +35,7 @@ export function Search({
   overlayClassName,
   value,
   onChange,
+  onActive,
   loading,
   results
 }: SearchProps): ReactElement {
@@ -48,6 +50,10 @@ export function Search({
   useEffect(() => {
     setActive(0)
   }, [value])
+
+  useEffect(() => {
+    onActive && onActive(show)
+  }, [show])
 
   useEffect(() => {
     const down = (e: globalThis.KeyboardEvent): void => {

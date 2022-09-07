@@ -1,5 +1,5 @@
+import path from 'node:path'
 import { FileMap, MdxPath, MetaJsonPath, PageMapItem } from './types'
-import path from 'path'
 import { META_FILENAME } from './constants'
 import { normalizeMeta, parseFileName } from './utils'
 import filterRouteLocale from './filter-route-locale'

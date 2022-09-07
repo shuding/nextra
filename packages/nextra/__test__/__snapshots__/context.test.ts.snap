@@ -878,165 +878,12 @@ exports[`context > getAllPages() > should work 1`] = `
       {
         "children": [
           {
-            "kind": "MdxPage",
-            "locale": "en-US",
-            "meta": {
-              "title": "Cache",
-            },
-            "name": "cache",
-            "route": "/docs/advanced/cache",
-          },
-          {
-            "kind": "MdxPage",
-            "locale": "ja",
-            "meta": {
-              "title": "Cache",
-            },
-            "name": "cache",
-            "route": "/docs/advanced/cache",
-          },
-          {
-            "kind": "MdxPage",
-            "locale": "ko",
-            "meta": {
-              "title": "Cache",
-            },
-            "name": "cache",
-            "route": "/docs/advanced/cache",
-          },
-          {
-            "kind": "MdxPage",
-            "locale": "ru",
-            "meta": {
-              "title": "Cache",
-            },
-            "name": "cache",
-            "route": "/docs/advanced/cache",
-          },
-          {
-            "kind": "MdxPage",
-            "locale": "zh-CN",
-            "meta": {
-              "title": "Cache",
-            },
-            "name": "cache",
-            "route": "/docs/advanced/cache",
-          },
-          {
-            "kind": "MdxPage",
-            "locale": "en-US",
-            "meta": {
-              "title": "Performance",
-            },
-            "name": "performance",
-            "route": "/docs/advanced/performance",
-          },
-          {
-            "kind": "MdxPage",
-            "locale": "es-ES",
-            "meta": {
-              "title": "Performance",
-            },
-            "name": "performance",
-            "route": "/docs/advanced/performance",
-          },
-          {
-            "kind": "MdxPage",
-            "locale": "ja",
-            "meta": {
-              "title": "Performance",
-            },
-            "name": "performance",
-            "route": "/docs/advanced/performance",
-          },
-          {
-            "kind": "MdxPage",
-            "locale": "ko",
-            "meta": {
-              "title": "Performance",
-            },
-            "name": "performance",
-            "route": "/docs/advanced/performance",
-          },
-          {
-            "kind": "MdxPage",
-            "locale": "ru",
-            "meta": {
-              "title": "Performance",
-            },
-            "name": "performance",
-            "route": "/docs/advanced/performance",
-          },
-          {
-            "kind": "MdxPage",
-            "locale": "zh-CN",
-            "meta": {
-              "title": "Performance",
-            },
-            "name": "performance",
-            "route": "/docs/advanced/performance",
-          },
-          {
-            "kind": "MdxPage",
-            "locale": "en-US",
-            "meta": {
-              "title": "React Native",
-            },
-            "name": "react-native",
-            "route": "/docs/advanced/react-native",
-          },
-          {
-            "kind": "MdxPage",
-            "locale": "ja",
-            "meta": {
-              "title": "React Native",
-            },
-            "name": "react-native",
-            "route": "/docs/advanced/react-native",
-          },
-          {
-            "kind": "MdxPage",
-            "locale": "ko",
-            "meta": {
-              "title": "React Native",
-            },
-            "name": "react-native",
-            "route": "/docs/advanced/react-native",
-          },
-          {
-            "kind": "MdxPage",
-            "locale": "ru",
-            "meta": {
-              "title": "React Native",
-            },
-            "name": "react-native",
-            "route": "/docs/advanced/react-native",
-          },
-          {
-            "kind": "MdxPage",
-            "locale": "zh-CN",
-            "meta": {
-              "title": "React Native",
-            },
-            "name": "react-native",
-            "route": "/docs/advanced/react-native",
-          },
-          {
-            "kind": "MdxPage",
-            "locale": "en-US",
-            "meta": {
-              "title": "Markdown import",
-            },
-            "name": "markdown-import",
-            "route": "/docs/advanced/markdown-import",
-          },
-          {
             "children": [
               {
                 "kind": "MdxPage",
                 "locale": "en-US",
                 "meta": {
-                  "title": "loooooooooooooooooooong-title",
+                  "title": "Loooooooooooooooooooong Title",
                 },
                 "name": "loooooooooooooooooooong-title",
                 "route": "/docs/advanced/more/loooooooooooooooooooong-title",
@@ -1053,7 +900,7 @@ exports[`context > getAllPages() > should work 1`] = `
             "kind": "MdxPage",
             "locale": "en-US",
             "meta": {
-              "title": "Filenames with dots",
+              "title": "Filenames with Dots",
             },
             "name": "file-name.with.DOTS",
             "route": "/docs/advanced/file-name.with.DOTS",
@@ -1062,7 +909,7 @@ exports[`context > getAllPages() > should work 1`] = `
             "kind": "MdxPage",
             "locale": "es-ES",
             "meta": {
-              "title": "Filenames with dots",
+              "title": "Filenames with Dots",
             },
             "name": "file-name.with.DOTS",
             "route": "/docs/advanced/file-name.with.DOTS",
@@ -1071,7 +918,7 @@ exports[`context > getAllPages() > should work 1`] = `
             "kind": "MdxPage",
             "locale": "ja",
             "meta": {
-              "title": "Filenames with dots",
+              "title": "Filenames with Dots",
             },
             "name": "file-name.with.DOTS",
             "route": "/docs/advanced/file-name.with.DOTS",
@@ -1080,7 +927,7 @@ exports[`context > getAllPages() > should work 1`] = `
             "kind": "MdxPage",
             "locale": "ko",
             "meta": {
-              "title": "Filenames with dots",
+              "title": "Filenames with Dots",
             },
             "name": "file-name.with.DOTS",
             "route": "/docs/advanced/file-name.with.DOTS",
@@ -1089,7 +936,7 @@ exports[`context > getAllPages() > should work 1`] = `
             "kind": "MdxPage",
             "locale": "ru",
             "meta": {
-              "title": "Filenames with dots",
+              "title": "Filenames with Dots",
             },
             "name": "file-name.with.DOTS",
             "route": "/docs/advanced/file-name.with.DOTS",
@@ -1098,7 +945,7 @@ exports[`context > getAllPages() > should work 1`] = `
             "kind": "MdxPage",
             "locale": "zh-CN",
             "meta": {
-              "title": "Filenames with dots",
+              "title": "Filenames with Dots",
             },
             "name": "file-name.with.DOTS",
             "route": "/docs/advanced/file-name.with.DOTS",
@@ -1107,10 +954,172 @@ exports[`context > getAllPages() > should work 1`] = `
             "kind": "MdxPage",
             "locale": "en-US",
             "meta": {
-              "title": "Code highlighting",
+              "title": "Cache",
+            },
+            "name": "cache",
+            "route": "/docs/advanced/cache",
+          },
+          {
+            "kind": "MdxPage",
+            "locale": "ja",
+            "meta": {
+              "title": "Cache",
+            },
+            "name": "cache",
+            "route": "/docs/advanced/cache",
+          },
+          {
+            "kind": "MdxPage",
+            "locale": "ko",
+            "meta": {
+              "title": "Cache",
+            },
+            "name": "cache",
+            "route": "/docs/advanced/cache",
+          },
+          {
+            "kind": "MdxPage",
+            "locale": "ru",
+            "meta": {
+              "title": "Cache",
+            },
+            "name": "cache",
+            "route": "/docs/advanced/cache",
+          },
+          {
+            "kind": "MdxPage",
+            "locale": "zh-CN",
+            "meta": {
+              "title": "Cache",
+            },
+            "name": "cache",
+            "route": "/docs/advanced/cache",
+          },
+          {
+            "kind": "MdxPage",
+            "locale": "en-US",
+            "meta": {
+              "title": "Code Highlighting",
             },
             "name": "code-highlighting",
             "route": "/docs/advanced/code-highlighting",
+          },
+          {
+            "kind": "MdxPage",
+            "locale": "en-US",
+            "meta": {
+              "title": "Future Image",
+            },
+            "name": "future-image",
+            "route": "/docs/advanced/future-image",
+          },
+          {
+            "kind": "MdxPage",
+            "locale": "en-US",
+            "meta": {
+              "title": "Markdown Import",
+            },
+            "name": "markdown-import",
+            "route": "/docs/advanced/markdown-import",
+          },
+          {
+            "kind": "MdxPage",
+            "locale": "en-US",
+            "meta": {
+              "title": "Performance",
+            },
+            "name": "performance",
+            "route": "/docs/advanced/performance",
+          },
+          {
+            "kind": "MdxPage",
+            "locale": "es-ES",
+            "meta": {
+              "title": "Performance",
+            },
+            "name": "performance",
+            "route": "/docs/advanced/performance",
+          },
+          {
+            "kind": "MdxPage",
+            "locale": "ja",
+            "meta": {
+              "title": "Performance",
+            },
+            "name": "performance",
+            "route": "/docs/advanced/performance",
+          },
+          {
+            "kind": "MdxPage",
+            "locale": "ko",
+            "meta": {
+              "title": "Performance",
+            },
+            "name": "performance",
+            "route": "/docs/advanced/performance",
+          },
+          {
+            "kind": "MdxPage",
+            "locale": "ru",
+            "meta": {
+              "title": "Performance",
+            },
+            "name": "performance",
+            "route": "/docs/advanced/performance",
+          },
+          {
+            "kind": "MdxPage",
+            "locale": "zh-CN",
+            "meta": {
+              "title": "Performance",
+            },
+            "name": "performance",
+            "route": "/docs/advanced/performance",
+          },
+          {
+            "kind": "MdxPage",
+            "locale": "en-US",
+            "meta": {
+              "title": "React Native",
+            },
+            "name": "react-native",
+            "route": "/docs/advanced/react-native",
+          },
+          {
+            "kind": "MdxPage",
+            "locale": "ja",
+            "meta": {
+              "title": "React Native",
+            },
+            "name": "react-native",
+            "route": "/docs/advanced/react-native",
+          },
+          {
+            "kind": "MdxPage",
+            "locale": "ko",
+            "meta": {
+              "title": "React Native",
+            },
+            "name": "react-native",
+            "route": "/docs/advanced/react-native",
+          },
+          {
+            "kind": "MdxPage",
+            "locale": "ru",
+            "meta": {
+              "title": "React Native",
+            },
+            "name": "react-native",
+            "route": "/docs/advanced/react-native",
+          },
+          {
+            "kind": "MdxPage",
+            "locale": "zh-CN",
+            "meta": {
+              "title": "React Native",
+            },
+            "name": "react-native",
+            "route": "/docs/advanced/react-native",
           },
         ],
         "kind": "Folder",
@@ -1280,7 +1289,7 @@ exports[`context > getAllPages() > should work 1`] = `
         "kind": "MdxPage",
         "locale": "en-US",
         "meta": {
-          "title": "code-block-without-language",
+          "title": "Code Block without Language",
         },
         "name": "code-block-without-language",
         "route": "/docs/code-block-without-language",
@@ -2592,165 +2601,12 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
   {
     "children": [
       {
-        "kind": "MdxPage",
-        "locale": "en-US",
-        "meta": {
-          "title": "Cache",
-        },
-        "name": "cache",
-        "route": "/docs/advanced/cache",
-      },
-      {
-        "kind": "MdxPage",
-        "locale": "ja",
-        "meta": {
-          "title": "Cache",
-        },
-        "name": "cache",
-        "route": "/docs/advanced/cache",
-      },
-      {
-        "kind": "MdxPage",
-        "locale": "ko",
-        "meta": {
-          "title": "Cache",
-        },
-        "name": "cache",
-        "route": "/docs/advanced/cache",
-      },
-      {
-        "kind": "MdxPage",
-        "locale": "ru",
-        "meta": {
-          "title": "Cache",
-        },
-        "name": "cache",
-        "route": "/docs/advanced/cache",
-      },
-      {
-        "kind": "MdxPage",
-        "locale": "zh-CN",
-        "meta": {
-          "title": "Cache",
-        },
-        "name": "cache",
-        "route": "/docs/advanced/cache",
-      },
-      {
-        "kind": "MdxPage",
-        "locale": "en-US",
-        "meta": {
-          "title": "Performance",
-        },
-        "name": "performance",
-        "route": "/docs/advanced/performance",
-      },
-      {
-        "kind": "MdxPage",
-        "locale": "es-ES",
-        "meta": {
-          "title": "Performance",
-        },
-        "name": "performance",
-        "route": "/docs/advanced/performance",
-      },
-      {
-        "kind": "MdxPage",
-        "locale": "ja",
-        "meta": {
-          "title": "Performance",
-        },
-        "name": "performance",
-        "route": "/docs/advanced/performance",
-      },
-      {
-        "kind": "MdxPage",
-        "locale": "ko",
-        "meta": {
-          "title": "Performance",
-        },
-        "name": "performance",
-        "route": "/docs/advanced/performance",
-      },
-      {
-        "kind": "MdxPage",
-        "locale": "ru",
-        "meta": {
-          "title": "Performance",
-        },
-        "name": "performance",
-        "route": "/docs/advanced/performance",
-      },
-      {
-        "kind": "MdxPage",
-        "locale": "zh-CN",
-        "meta": {
-          "title": "Performance",
-        },
-        "name": "performance",
-        "route": "/docs/advanced/performance",
-      },
-      {
-        "kind": "MdxPage",
-        "locale": "en-US",
-        "meta": {
-          "title": "React Native",
-        },
-        "name": "react-native",
-        "route": "/docs/advanced/react-native",
-      },
-      {
-        "kind": "MdxPage",
-        "locale": "ja",
-        "meta": {
-          "title": "React Native",
-        },
-        "name": "react-native",
-        "route": "/docs/advanced/react-native",
-      },
-      {
-        "kind": "MdxPage",
-        "locale": "ko",
-        "meta": {
-          "title": "React Native",
-        },
-        "name": "react-native",
-        "route": "/docs/advanced/react-native",
-      },
-      {
-        "kind": "MdxPage",
-        "locale": "ru",
-        "meta": {
-          "title": "React Native",
-        },
-        "name": "react-native",
-        "route": "/docs/advanced/react-native",
-      },
-      {
-        "kind": "MdxPage",
-        "locale": "zh-CN",
-        "meta": {
-          "title": "React Native",
-        },
-        "name": "react-native",
-        "route": "/docs/advanced/react-native",
-      },
-      {
-        "kind": "MdxPage",
-        "locale": "en-US",
-        "meta": {
-          "title": "Markdown import",
-        },
-        "name": "markdown-import",
-        "route": "/docs/advanced/markdown-import",
-      },
-      {
         "children": [
           {
             "kind": "MdxPage",
             "locale": "en-US",
             "meta": {
-              "title": "loooooooooooooooooooong-title",
+              "title": "Loooooooooooooooooooong Title",
             },
             "name": "loooooooooooooooooooong-title",
             "route": "/docs/advanced/more/loooooooooooooooooooong-title",
@@ -2767,7 +2623,7 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
         "kind": "MdxPage",
         "locale": "en-US",
         "meta": {
-          "title": "Filenames with dots",
+          "title": "Filenames with Dots",
         },
         "name": "file-name.with.DOTS",
         "route": "/docs/advanced/file-name.with.DOTS",
@@ -2776,7 +2632,7 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
         "kind": "MdxPage",
         "locale": "es-ES",
         "meta": {
-          "title": "Filenames with dots",
+          "title": "Filenames with Dots",
         },
         "name": "file-name.with.DOTS",
         "route": "/docs/advanced/file-name.with.DOTS",
@@ -2785,7 +2641,7 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
         "kind": "MdxPage",
         "locale": "ja",
         "meta": {
-          "title": "Filenames with dots",
+          "title": "Filenames with Dots",
         },
         "name": "file-name.with.DOTS",
         "route": "/docs/advanced/file-name.with.DOTS",
@@ -2794,7 +2650,7 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
         "kind": "MdxPage",
         "locale": "ko",
         "meta": {
-          "title": "Filenames with dots",
+          "title": "Filenames with Dots",
         },
         "name": "file-name.with.DOTS",
         "route": "/docs/advanced/file-name.with.DOTS",
@@ -2803,7 +2659,7 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
         "kind": "MdxPage",
         "locale": "ru",
         "meta": {
-          "title": "Filenames with dots",
+          "title": "Filenames with Dots",
         },
         "name": "file-name.with.DOTS",
         "route": "/docs/advanced/file-name.with.DOTS",
@@ -2812,7 +2668,7 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
         "kind": "MdxPage",
         "locale": "zh-CN",
         "meta": {
-          "title": "Filenames with dots",
+          "title": "Filenames with Dots",
         },
         "name": "file-name.with.DOTS",
         "route": "/docs/advanced/file-name.with.DOTS",
@@ -2821,10 +2677,172 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
         "kind": "MdxPage",
         "locale": "en-US",
         "meta": {
-          "title": "Code highlighting",
+          "title": "Cache",
+        },
+        "name": "cache",
+        "route": "/docs/advanced/cache",
+      },
+      {
+        "kind": "MdxPage",
+        "locale": "ja",
+        "meta": {
+          "title": "Cache",
+        },
+        "name": "cache",
+        "route": "/docs/advanced/cache",
+      },
+      {
+        "kind": "MdxPage",
+        "locale": "ko",
+        "meta": {
+          "title": "Cache",
+        },
+        "name": "cache",
+        "route": "/docs/advanced/cache",
+      },
+      {
+        "kind": "MdxPage",
+        "locale": "ru",
+        "meta": {
+          "title": "Cache",
+        },
+        "name": "cache",
+        "route": "/docs/advanced/cache",
+      },
+      {
+        "kind": "MdxPage",
+        "locale": "zh-CN",
+        "meta": {
+          "title": "Cache",
+        },
+        "name": "cache",
+        "route": "/docs/advanced/cache",
+      },
+      {
+        "kind": "MdxPage",
+        "locale": "en-US",
+        "meta": {
+          "title": "Code Highlighting",
         },
         "name": "code-highlighting",
         "route": "/docs/advanced/code-highlighting",
+      },
+      {
+        "kind": "MdxPage",
+        "locale": "en-US",
+        "meta": {
+          "title": "Future Image",
+        },
+        "name": "future-image",
+        "route": "/docs/advanced/future-image",
+      },
+      {
+        "kind": "MdxPage",
+        "locale": "en-US",
+        "meta": {
+          "title": "Markdown Import",
+        },
+        "name": "markdown-import",
+        "route": "/docs/advanced/markdown-import",
+      },
+      {
+        "kind": "MdxPage",
+        "locale": "en-US",
+        "meta": {
+          "title": "Performance",
+        },
+        "name": "performance",
+        "route": "/docs/advanced/performance",
+      },
+      {
+        "kind": "MdxPage",
+        "locale": "es-ES",
+        "meta": {
+          "title": "Performance",
+        },
+        "name": "performance",
+        "route": "/docs/advanced/performance",
+      },
+      {
+        "kind": "MdxPage",
+        "locale": "ja",
+        "meta": {
+          "title": "Performance",
+        },
+        "name": "performance",
+        "route": "/docs/advanced/performance",
+      },
+      {
+        "kind": "MdxPage",
+        "locale": "ko",
+        "meta": {
+          "title": "Performance",
+        },
+        "name": "performance",
+        "route": "/docs/advanced/performance",
+      },
+      {
+        "kind": "MdxPage",
+        "locale": "ru",
+        "meta": {
+          "title": "Performance",
+        },
+        "name": "performance",
+        "route": "/docs/advanced/performance",
+      },
+      {
+        "kind": "MdxPage",
+        "locale": "zh-CN",
+        "meta": {
+          "title": "Performance",
+        },
+        "name": "performance",
+        "route": "/docs/advanced/performance",
+      },
+      {
+        "kind": "MdxPage",
+        "locale": "en-US",
+        "meta": {
+          "title": "React Native",
+        },
+        "name": "react-native",
+        "route": "/docs/advanced/react-native",
+      },
+      {
+        "kind": "MdxPage",
+        "locale": "ja",
+        "meta": {
+          "title": "React Native",
+        },
+        "name": "react-native",
+        "route": "/docs/advanced/react-native",
+      },
+      {
+        "kind": "MdxPage",
+        "locale": "ko",
+        "meta": {
+          "title": "React Native",
+        },
+        "name": "react-native",
+        "route": "/docs/advanced/react-native",
+      },
+      {
+        "kind": "MdxPage",
+        "locale": "ru",
+        "meta": {
+          "title": "React Native",
+        },
+        "name": "react-native",
+        "route": "/docs/advanced/react-native",
+      },
+      {
+        "kind": "MdxPage",
+        "locale": "zh-CN",
+        "meta": {
+          "title": "React Native",
+        },
+        "name": "react-native",
+        "route": "/docs/advanced/react-native",
       },
     ],
     "kind": "Folder",
@@ -2994,7 +3012,7 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
     "kind": "MdxPage",
     "locale": "en-US",
     "meta": {
-      "title": "code-block-without-language",
+      "title": "Code Block without Language",
     },
     "name": "code-block-without-language",
     "route": "/docs/code-block-without-language",
@@ -3005,165 +3023,12 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
 exports[`context > getPagesUnderRoute() > should work 1`] = `
 [
   {
-    "kind": "MdxPage",
-    "locale": "en-US",
-    "meta": {
-      "title": "Cache",
-    },
-    "name": "cache",
-    "route": "/docs/advanced/cache",
-  },
-  {
-    "kind": "MdxPage",
-    "locale": "ja",
-    "meta": {
-      "title": "Cache",
-    },
-    "name": "cache",
-    "route": "/docs/advanced/cache",
-  },
-  {
-    "kind": "MdxPage",
-    "locale": "ko",
-    "meta": {
-      "title": "Cache",
-    },
-    "name": "cache",
-    "route": "/docs/advanced/cache",
-  },
-  {
-    "kind": "MdxPage",
-    "locale": "ru",
-    "meta": {
-      "title": "Cache",
-    },
-    "name": "cache",
-    "route": "/docs/advanced/cache",
-  },
-  {
-    "kind": "MdxPage",
-    "locale": "zh-CN",
-    "meta": {
-      "title": "Cache",
-    },
-    "name": "cache",
-    "route": "/docs/advanced/cache",
-  },
-  {
-    "kind": "MdxPage",
-    "locale": "en-US",
-    "meta": {
-      "title": "Performance",
-    },
-    "name": "performance",
-    "route": "/docs/advanced/performance",
-  },
-  {
-    "kind": "MdxPage",
-    "locale": "es-ES",
-    "meta": {
-      "title": "Performance",
-    },
-    "name": "performance",
-    "route": "/docs/advanced/performance",
-  },
-  {
-    "kind": "MdxPage",
-    "locale": "ja",
-    "meta": {
-      "title": "Performance",
-    },
-    "name": "performance",
-    "route": "/docs/advanced/performance",
-  },
-  {
-    "kind": "MdxPage",
-    "locale": "ko",
-    "meta": {
-      "title": "Performance",
-    },
-    "name": "performance",
-    "route": "/docs/advanced/performance",
-  },
-  {
-    "kind": "MdxPage",
-    "locale": "ru",
-    "meta": {
-      "title": "Performance",
-    },
-    "name": "performance",
-    "route": "/docs/advanced/performance",
-  },
-  {
-    "kind": "MdxPage",
-    "locale": "zh-CN",
-    "meta": {
-      "title": "Performance",
-    },
-    "name": "performance",
-    "route": "/docs/advanced/performance",
-  },
-  {
-    "kind": "MdxPage",
-    "locale": "en-US",
-    "meta": {
-      "title": "React Native",
-    },
-    "name": "react-native",
-    "route": "/docs/advanced/react-native",
-  },
-  {
-    "kind": "MdxPage",
-    "locale": "ja",
-    "meta": {
-      "title": "React Native",
-    },
-    "name": "react-native",
-    "route": "/docs/advanced/react-native",
-  },
-  {
-    "kind": "MdxPage",
-    "locale": "ko",
-    "meta": {
-      "title": "React Native",
-    },
-    "name": "react-native",
-    "route": "/docs/advanced/react-native",
-  },
-  {
-    "kind": "MdxPage",
-    "locale": "ru",
-    "meta": {
-      "title": "React Native",
-    },
-    "name": "react-native",
-    "route": "/docs/advanced/react-native",
-  },
-  {
-    "kind": "MdxPage",
-    "locale": "zh-CN",
-    "meta": {
-      "title": "React Native",
-    },
-    "name": "react-native",
-    "route": "/docs/advanced/react-native",
-  },
-  {
-    "kind": "MdxPage",
-    "locale": "en-US",
-    "meta": {
-      "title": "Markdown import",
-    },
-    "name": "markdown-import",
-    "route": "/docs/advanced/markdown-import",
-  },
-  {
     "children": [
       {
         "kind": "MdxPage",
         "locale": "en-US",
         "meta": {
-          "title": "loooooooooooooooooooong-title",
+          "title": "Loooooooooooooooooooong Title",
         },
         "name": "loooooooooooooooooooong-title",
         "route": "/docs/advanced/more/loooooooooooooooooooong-title",
@@ -3180,7 +3045,7 @@ exports[`context > getPagesUnderRoute() > should work 1`] = `
     "kind": "MdxPage",
     "locale": "en-US",
     "meta": {
-      "title": "Filenames with dots",
+      "title": "Filenames with Dots",
     },
     "name": "file-name.with.DOTS",
     "route": "/docs/advanced/file-name.with.DOTS",
@@ -3189,7 +3054,7 @@ exports[`context > getPagesUnderRoute() > should work 1`] = `
     "kind": "MdxPage",
     "locale": "es-ES",
     "meta": {
-      "title": "Filenames with dots",
+      "title": "Filenames with Dots",
     },
     "name": "file-name.with.DOTS",
     "route": "/docs/advanced/file-name.with.DOTS",
@@ -3198,7 +3063,7 @@ exports[`context > getPagesUnderRoute() > should work 1`] = `
     "kind": "MdxPage",
     "locale": "ja",
     "meta": {
-      "title": "Filenames with dots",
+      "title": "Filenames with Dots",
     },
     "name": "file-name.with.DOTS",
     "route": "/docs/advanced/file-name.with.DOTS",
@@ -3207,7 +3072,7 @@ exports[`context > getPagesUnderRoute() > should work 1`] = `
     "kind": "MdxPage",
     "locale": "ko",
     "meta": {
-      "title": "Filenames with dots",
+      "title": "Filenames with Dots",
     },
     "name": "file-name.with.DOTS",
     "route": "/docs/advanced/file-name.with.DOTS",
@@ -3216,7 +3081,7 @@ exports[`context > getPagesUnderRoute() > should work 1`] = `
     "kind": "MdxPage",
     "locale": "ru",
     "meta": {
-      "title": "Filenames with dots",
+      "title": "Filenames with Dots",
     },
     "name": "file-name.with.DOTS",
     "route": "/docs/advanced/file-name.with.DOTS",
@@ -3225,7 +3090,7 @@ exports[`context > getPagesUnderRoute() > should work 1`] = `
     "kind": "MdxPage",
     "locale": "zh-CN",
     "meta": {
-      "title": "Filenames with dots",
+      "title": "Filenames with Dots",
     },
     "name": "file-name.with.DOTS",
     "route": "/docs/advanced/file-name.with.DOTS",
@@ -3234,10 +3099,172 @@ exports[`context > getPagesUnderRoute() > should work 1`] = `
     "kind": "MdxPage",
     "locale": "en-US",
     "meta": {
-      "title": "Code highlighting",
+      "title": "Cache",
+    },
+    "name": "cache",
+    "route": "/docs/advanced/cache",
+  },
+  {
+    "kind": "MdxPage",
+    "locale": "ja",
+    "meta": {
+      "title": "Cache",
+    },
+    "name": "cache",
+    "route": "/docs/advanced/cache",
+  },
+  {
+    "kind": "MdxPage",
+    "locale": "ko",
+    "meta": {
+      "title": "Cache",
+    },
+    "name": "cache",
+    "route": "/docs/advanced/cache",
+  },
+  {
+    "kind": "MdxPage",
+    "locale": "ru",
+    "meta": {
+      "title": "Cache",
+    },
+    "name": "cache",
+    "route": "/docs/advanced/cache",
+  },
+  {
+    "kind": "MdxPage",
+    "locale": "zh-CN",
+    "meta": {
+      "title": "Cache",
+    },
+    "name": "cache",
+    "route": "/docs/advanced/cache",
+  },
+  {
+    "kind": "MdxPage",
+    "locale": "en-US",
+    "meta": {
+      "title": "Code Highlighting",
     },
     "name": "code-highlighting",
     "route": "/docs/advanced/code-highlighting",
+  },
+  {
+    "kind": "MdxPage",
+    "locale": "en-US",
+    "meta": {
+      "title": "Future Image",
+    },
+    "name": "future-image",
+    "route": "/docs/advanced/future-image",
+  },
+  {
+    "kind": "MdxPage",
+    "locale": "en-US",
+    "meta": {
+      "title": "Markdown Import",
+    },
+    "name": "markdown-import",
+    "route": "/docs/advanced/markdown-import",
+  },
+  {
+    "kind": "MdxPage",
+    "locale": "en-US",
+    "meta": {
+      "title": "Performance",
+    },
+    "name": "performance",
+    "route": "/docs/advanced/performance",
+  },
+  {
+    "kind": "MdxPage",
+    "locale": "es-ES",
+    "meta": {
+      "title": "Performance",
+    },
+    "name": "performance",
+    "route": "/docs/advanced/performance",
+  },
+  {
+    "kind": "MdxPage",
+    "locale": "ja",
+    "meta": {
+      "title": "Performance",
+    },
+    "name": "performance",
+    "route": "/docs/advanced/performance",
+  },
+  {
+    "kind": "MdxPage",
+    "locale": "ko",
+    "meta": {
+      "title": "Performance",
+    },
+    "name": "performance",
+    "route": "/docs/advanced/performance",
+  },
+  {
+    "kind": "MdxPage",
+    "locale": "ru",
+    "meta": {
+      "title": "Performance",
+    },
+    "name": "performance",
+    "route": "/docs/advanced/performance",
+  },
+  {
+    "kind": "MdxPage",
+    "locale": "zh-CN",
+    "meta": {
+      "title": "Performance",
+    },
+    "name": "performance",
+    "route": "/docs/advanced/performance",
+  },
+  {
+    "kind": "MdxPage",
+    "locale": "en-US",
+    "meta": {
+      "title": "React Native",
+    },
+    "name": "react-native",
+    "route": "/docs/advanced/react-native",
+  },
+  {
+    "kind": "MdxPage",
+    "locale": "ja",
+    "meta": {
+      "title": "React Native",
+    },
+    "name": "react-native",
+    "route": "/docs/advanced/react-native",
+  },
+  {
+    "kind": "MdxPage",
+    "locale": "ko",
+    "meta": {
+      "title": "React Native",
+    },
+    "name": "react-native",
+    "route": "/docs/advanced/react-native",
+  },
+  {
+    "kind": "MdxPage",
+    "locale": "ru",
+    "meta": {
+      "title": "React Native",
+    },
+    "name": "react-native",
+    "route": "/docs/advanced/react-native",
+  },
+  {
+    "kind": "MdxPage",
+    "locale": "zh-CN",
+    "meta": {
+      "title": "React Native",
+    },
+    "name": "react-native",
+    "route": "/docs/advanced/react-native",
   },
 ]
 `;
