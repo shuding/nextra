@@ -1,4 +1,5 @@
-import path from 'path'
+import path from 'node:path'
+import fs from 'graceful-fs'
 import { LOCALE_REGEX } from './constants'
 import { Meta } from './types'
 
@@ -40,4 +41,13 @@ export function truthy<T>(value: T): value is Truthy<T> {
 
 export function normalizeMeta(meta: Meta): Exclude<Meta, string> {
   return typeof meta === 'string' ? { title: meta } : meta
+}
+
+export const existsSync = (filePath: string): boolean => {
+  try {
+    fs.statSync(filePath)
+    return true
+  } catch {
+    return false
+  }
 }

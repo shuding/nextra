@@ -1,11 +1,9 @@
 import { visit } from 'unist-util-visit'
 import { Plugin } from 'unified'
 import { Root } from 'mdast'
-
-// Based on the remark-embed-images project
-// https://github.com/remarkjs/remark-embed-images
-
-const relative = /^\.{1,2}\//
+import path from 'node:path'
+import { existsSync, truthy } from '../utils'
+import { EXTERNAL_URL_REGEX, PUBLIC_DIR } from '../constants'
 
 const getASTNodeImport = (name: string, from: string) => ({
   type: 'mdxjsEsm',
@@ -34,66 +32,88 @@ const getASTNodeImport = (name: string, from: string) => ({
   }
 })
 
+// Based on the remark-embed-images project
+// https://github.com/remarkjs/remark-embed-images
 export const remarkStaticImage: Plugin<
-  [{ allowFutureImage?: boolean }],
+  [{ allowFutureImage?: boolean; filePath: string }],
   Root
 > =
-  ({ allowFutureImage }) =>
+  ({ allowFutureImage, filePath }) =>
   (tree, _file, done) => {
     const importsToInject: any[] = []
 
     visit(tree, 'image', node => {
-      const { url } = node
+      let { url } = node
+      if (!url) {
+        console.warn(
+          `[nextra] File "${filePath}" contain image with empty "src" property, skipping…`
+        )
+        return
+      }
 
-      if (url && relative.test(url)) {
-        // Unique variable name for the given static image URL.
-        const tempVariableName = `$nextraImage${importsToInject.length}`
+      if (EXTERNAL_URL_REGEX.test(url)) {
+        // do nothing with images with external url
+        return
+      }
 
-        // Replace the image node with a MDX component node (Next.js Image).
-        Object.assign(node, {
-          type: 'mdxJsxFlowElement',
-          name: '$NextImageNextra',
-          attributes: [
-            {
-              type: 'mdxJsxAttribute',
-              name: 'alt',
-              value: node.alt || ''
-            },
-            {
-              type: 'mdxJsxAttribute',
-              name: 'placeholder',
-              value: 'blur'
-            },
-            {
-              type: 'mdxJsxAttribute',
-              name: 'src',
-              value: {
-                type: 'mdxJsxAttributeValueExpression',
-                value: tempVariableName,
-                data: {
-                  estree: {
-                    type: 'Program',
-                    body: [
-                      {
-                        type: 'ExpressionStatement',
-                        expression: {
-                          type: 'Identifier',
-                          name: tempVariableName
-                        }
+      if (url.startsWith('/')) {
+        const urlPath = path.join(PUBLIC_DIR, url)
+        if (!existsSync(urlPath)) {
+          console.error(
+            `[nextra] File "${filePath}" contain image with url "${url}" that not found in "/public" directory, skipping…`
+          )
+          return
+        }
+        url = urlPath
+      }
+      // Unique variable name for the given static image URL.
+      const tempVariableName = `$nextraImage${importsToInject.length}`
+
+      // Replace the image node with a MDX component node (Next.js Image).
+      Object.assign(node, {
+        type: 'mdxJsxFlowElement',
+        name: '$NextImageNextra',
+        children: [],
+        attributes: [
+          // do not render empty alt in html markup
+          node.alt && {
+            type: 'mdxJsxAttribute',
+            name: 'alt',
+            value: node.alt
+          },
+          {
+            type: 'mdxJsxAttribute',
+            name: 'placeholder',
+            value: 'blur'
+          },
+          {
+            type: 'mdxJsxAttribute',
+            name: 'src',
+            value: {
+              type: 'mdxJsxAttributeValueExpression',
+              value: tempVariableName,
+              data: {
+                estree: {
+                  type: 'Program',
+                  sourceType: 'module',
+                  body: [
+                    {
+                      type: 'ExpressionStatement',
+                      expression: {
+                        type: 'Identifier',
+                        name: tempVariableName
                       }
-                    ],
-                    sourceType: 'module'
-                  }
+                    }
+                  ]
                 }
               }
             }
-          ],
-          children: []
-        })
+          }
+        ].filter(truthy)
+      })
 
-        // Inject the static image import into the root node.
-        importsToInject.push(getASTNodeImport(tempVariableName, url))
-      }
+      // Inject the static image import into the root node.
+      importsToInject.push(getASTNodeImport(tempVariableName, url))
     })
 
     tree.children.unshift(
