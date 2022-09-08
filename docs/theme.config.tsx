@@ -2,7 +2,7 @@ import type { DocsThemeConfig } from 'nextra-theme-docs'
 import { useRouter } from 'next/router'
 
 const logo = (
-  <>
+  <span>
     <svg
       height="20"
       viewBox="0 0 361 70"
@@ -21,7 +21,8 @@ const logo = (
       />
     </svg>
     <style jsx>{`
-      svg {
+      span {
+        padding: 0.5rem 0.5rem 0.5rem 0;
         mask-image: linear-gradient(
           60deg,
           black 25%,
@@ -31,12 +32,12 @@ const logo = (
         mask-size: 400%;
         mask-position: 0%;
       }
-      svg:hover {
+      span:hover {
         mask-position: 100%;
         transition: mask-position 1s ease, -webkit-mask-position 1s ease;
       }
     `}</style>
-  </>
+  </span>
 )
 
 export default {

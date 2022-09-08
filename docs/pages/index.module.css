@@ -23,8 +23,9 @@
   opacity: 0.3;
 }
 .comparison.invert {
-  margin: 1.5rem -1.75rem -1.5rem;
-  padding: 1.5rem 1.75rem;
-  color: #fff;
-  background: #111;
+  margin: 1.5rem 0;
+  padding: 1.5rem;
+  border-radius: 10px;
+  color: #f3f4f6;
+  background: #1e2126;
 }
