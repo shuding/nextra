@@ -73,7 +73,8 @@ export function I18n() {
 
   <style jsx>{`
     .headline {
-      font-size: min(70px, max(8vw, 40px));
+      font-size: 3.125rem;
+      font-size: min(4.375rem, max(8vw, 2.5rem));
       font-weight: 700;
       font-feature-settings: initial;
       letter-spacing: -.12rem;
@@ -83,6 +84,7 @@ export function I18n() {
     }
     .subtitle {
       font-size: 1.3rem;
+      font-size: min(1.3rem, max(3.5vw, 1.2rem));
       font-feature-settings: initial;
       line-height: 1.6;
     }
@@ -93,27 +95,52 @@ export function I18n() {
     }
     :global(#docs-card) {
       background-image: url(/assets/card-1.png);
+      background-size: cover;
+      color: #fff;
+      text-shadow: 0 0 1rem rgba(0,0,0,0.2);
+      aspect-ratio: 135/86;
     }
     :global(.dark #docs-card) {
       background-image: url(/assets/card-1.dark.png);
     }
     :global(#highlighting-card) {
+      min-height: 300px;
       background-image: linear-gradient(to top, transparent, #fff 50%), url(/assets/syntax-highlighting.svg);
+      background-size: 634px;
+      background-position: -6px calc(100% + 4px);
+      background-repeat: no-repeat;
     }
     :global(.dark #highlighting-card) {
       background-image: linear-gradient(to top, transparent, #202020 50%), url(/assets/syntax-highlighting.svg);
+    }
+    :global(.feat-darkmode) {
+      min-height: 300px;
+    }
+    :global(.feat-darkmode h3) {
+      font-size: 48px;
+    }
+    @media screen and (max-width: 1200px) {
+      :global(#docs-card) {
+        background-position: 0 0;
+        background-size: 136%;
+        min-height: 300px;
+        width: 100%;
+        aspect-ratio: auto;
+      }
+      :global(#highlighting-card) {
+        aspect-ratio: auto;
+      }
+      :global(.feat-darkmode h3) {
+        font-size: 4vw;
+        font-size: min(48px, max(4vw, 30px));
+      }
     }
   `}</style>
 
   <div className="features-container">
     <div className="content-container">
       <Features>
-        <Feature large centered id="docs-card" style={{
-          color: '#fff',
-          textShadow: '0 0 1rem rgba(0,0,0,0.2)',
-          aspectRatio: '135/86',
-          backgroundSize: 'cover',
-        }}>
+        <Feature large centered id="docs-card">
           <h3>Full-power documentation in minutes.</h3>
         </Feature>
         <Feature centered lightOnly style={{ minHeight: 450 }}>
@@ -125,12 +152,7 @@ export function I18n() {
             width: '100%',
           }}/>
         </Feature>
-        <Feature id="highlighting-card" style={{
-          aspectRatio: '4/3',
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 634,
-          backgroundPosition: '-6px calc(100% + 4px)',
-        }}>
+        <Feature id="highlighting-card">
           <h3>Advanced syntax highlighting solution.</h3>
           <p>Performant and reliable build-time syntax highlighting powered by [Shiki](https://shiki.matsu.io).</p>
         </Feature>
@@ -157,60 +179,63 @@ export function I18n() {
           </svg>
           <p style={{
             textShadow: '0 2px 4px rgb(0 0 0 / 20%)'
-          }}><a href="https://mdxjs.com/blog/v2" target="_blank" style={{ color: 'currentColor' }}>MDX 2</a> lets you use Components inside Markdown, <br/>with huge performance boost since MDX v1.</p>
+          }}><a href="https://mdxjs.com/blog/v2" target="_blank" style={{ color: 'currentColor' }}>MDX 2</a> lets you use Components inside Markdown, <br className="hide-medium"/>with huge performance boost since MDX v1.</p>
         </Feature>
-        <Feature centered className="darkmode-container" style={{
+        <Feature centered className="feat-darkmode" style={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           // border: '1px solid #2a2a2a'
         }}>
           <motion.div
-            initial="inactive"
-            whileInView="active"
-            viewport={{ once: true }}
-            variants={{
-              active: {
-                color: '#fff',
-                transition: {
-                  duration: 1,
-                  delay: 1.5
-                }
-              },
-              inactive: {
-                color: '#dae5ff',
-              }
+            animate={{
+              backgroundPosition: ['0% 0%', '50% 40%', '50% 40%', '100% 100%'],
+              backgroundImage: [`radial-gradient(farthest-corner, #e2e5ea, #e2e5ea)`, 'radial-gradient(farthest-corner, #06080a, #e2e5ea)', 'radial-gradient(farthest-corner, #06080a, #e2e5ea)', 'radial-gradient(farthest-corner, #e2e5ea, #e2e5ea)'],
             }}
-          >
-            <motion.div style={{
+            transition={{
+              backgroundPosition: {
+                times: [0, .5, .5, 1],
+                type: 'spring',
+                repeat: Infinity,
+                duration: 10,
+                delay: 1
+              },
+              backgroundImage: {
+                times: [0, .2, .8, 1],
+                repeat: Infinity,
+                duration: 10,
+                delay: 1
+              },
+            }}
+            style={{
               position: 'absolute',
               top: 0,
               left: 0,
               width: '100%',
               height: '100%',
-              boxShadow: '0 -10px 40px inset rgba(0,0,0,0.1)',
-              backgroundImage: `radial-gradient(#06080a, #f3f4f6)`,
+              backgroundImage: `radial-gradient(farthest-corner, #06080a, #e2e5ea)`,
+              backgroundSize: '400% 400%',
+              backgroundRepeat: 'no-repeat',
             }}
-            variants={{
-              active: {
-                backgroundPosition: '50% 40%',
-                backgroundSize: '400% 500%',
-                transition: {
-                  duration: 3,
-                }
+          />
+          <motion.h3
+            animate={{
+              color: ['#dae5ff', '#fff', '#fff', '#dae5ff'],
+            }}
+            transition={{
+              color: {
+                times: [.25, .35, .7, .8],
+                type: 'spring',
+                repeat: Infinity,
+                duration: 10,
+                delay: 1
               },
-              inactive: {
-                backgroundPosition: '0 0',
-                backgroundSize: '400% 450%',
-              }
-            }}/>
-            <h3 style={{
+            }}
+            style={{
               position: 'relative',
-              fontSize: 48,
               mixBlendMode: 'difference',
-              color: 'inherit',
-            }}>Dark <br/>mode <br/>included.</h3>
-          </motion.div>
+            }}
+          >Dark <br/>mode <br/>included.</motion.h3>
         </Feature>
         <Feature large lightOnly style={{
           display: 'flex',
@@ -233,7 +258,7 @@ export function I18n() {
         <Feature large style={{
           color: 'white',
           backgroundImage: 'url(/assets/routing.png), url(/assets/gradient-bg.jpeg)',
-          backgroundSize: '1234px, 180%',
+          backgroundSize: '140%, 180%',
           backgroundPosition: '130px -8px, top',
           backgroundRepeat: 'no-repeat',
           textShadow: '0 1px 6px rgb(38 59 82 / 18%)',
@@ -241,24 +266,24 @@ export function I18n() {
         }}>
           <h3 style={{ width: 300 }}>Organize pages intuitively, <br/>with file-system routing from Next.js.</h3>
         </Feature>
-        <Feature style={{
-        }}>
+        <Feature>
           <div/>
           <h3>Links and images are always <span style={{ fontWeight: 300 }}>optimized</span>.</h3>
           <p>Nextra converts Markdown links and images to [next/link](https://nextjs.org/docs/routing/introduction#linking-between-pages) and [next/image](https://nextjs.org/docs/basic-features/image-optimization#local-images), keeping your website the best experience.</p>
-          <Comparison invert a={
+          <div className={styles.optimization}>
             <div style={{ fontSize: '.9rem', lineHeight: 2 }}>
               <span>{`[Learn more](/more)`}</span>
               <br/>
               <span>{`![Hero](../public/hero.png)`}</span>
             </div>
-          } b={
+          </div>
+          <div className={styles.optimization}>
             <div style={{ fontSize: '.9rem', lineHeight: 2 }}>
               <span>{`<Link .../>`}</span>
               <br/>
               <span>{`<Image .../>`}</span>
             </div>
-          }/>
+          </div>
         </Feature>
         <Feature>
           <h3>Hybrid rendering, <br/>next generation.</h3>

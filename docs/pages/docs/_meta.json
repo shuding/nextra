@@ -6,7 +6,7 @@
     "title": "Themes"
   },
   "docs-theme": "Docs Theme",
-  "blog": "Blog Theme",
+  "blog-theme": "Blog Theme",
   "your-own-theme": "Your Own Theme",
   "-- About --": {
     "type": "separator",

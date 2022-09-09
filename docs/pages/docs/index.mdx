@@ -6,33 +6,32 @@
 
 import { Card, Cards } from '@components/card'
 
-To start, select a theme from the following:
+To start using Nextra, you need to select a theme first:
 
 <Cards>
   <Card
     title="Documentation theme →"
-    href="/docs/docs-theme/start"
-  >
+    href="/docs/docs-theme/start">
     <div className="flex">![](../../public/assets/docs-theme.png)</div>
+    <div href="https://swr.vercel.app">Demo</div>
   </Card>
   <Card
     title="Blog theme →"
-    href="/docs-theme/installation"
-  >
-    <div className="flex">![](../../public/assets/blog-theme.png)</div>
+    href="/docs-theme/installation">
+    <div className="flex">
+      ![](../../public/assets/blog-theme.png)
+    </div>
   </Card>
   <Card
     title="Start with empty theme"
-    href="/docs-theme/installation"
-  ></Card>
+    href="/docs-theme/installation">
+  </Card>
 </Cards>
 
 ## FAQ
 
 <details>
-  <summary>
-    What’s the relationship between Next.js, Nextra and Nextra Themes?
-  </summary>
+  <summary>What’s the relationship between Next.js, Nextra and Nextra Themes?</summary>
   **Next.js** is a general purpose framework for building all kinds of web applications
   with React. **Nextra** is a Next.js plugin, which provides a complete solution
   around Markdown (MDX) on top of Next.js. A **Nextra Theme** is basically a “layout

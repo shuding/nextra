@@ -1,4 +1,6 @@
 import cn from 'clsx'
+import { motion } from 'framer-motion'
+
 import styles from './style.module.css'
 
 export function Feature({
@@ -10,7 +12,11 @@ export function Feature({
   ...props
 }) {
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, margin: '-20px' }}
+      transition={{ duration: 0.5, delay: 0.1 }}
       className={cn(
         styles.feature,
         large && styles.large,
@@ -21,7 +27,7 @@ export function Feature({
       {...props}
     >
       {children}
-    </div>
+    </motion.div>
   )
 }
 

@@ -1,6 +1,6 @@
 .home-content p {
-  margin-top: 1.5rem;
-  line-height: 1.75rem;
+  margin-top: 1.5em;
+  line-height: 1.75em;
 }
 
 .home-content a {
@@ -17,4 +17,19 @@ figurecaption {
   line-height: 1.5rem;
   display: block;
   text-align: center;
+}
+
+@media screen and (max-width: 1200px) {
+  .home-content .hide-medium {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .home-content p {
+    font-size: 0.9rem;
+  }
+  .home-content .hide-small {
+    display: none;
+  }
 }

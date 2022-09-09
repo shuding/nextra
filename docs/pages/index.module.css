@@ -22,10 +22,13 @@
 .comparison > svg {
   opacity: 0.3;
 }
-.comparison.invert {
-  margin: 1.5rem 0;
-  padding: 1.5rem;
-  border-radius: 10px;
-  color: #f3f4f6;
-  background: #1e2126;
+
+.optimization {
+  display: flex;
+  margin: 1rem 0;
+  padding: 1rem;
+  background: #0e1116;
+  color: white;
+  border-radius: 0.375rem;
+  font-weight: 300;
 }
