@@ -1,5 +1,15 @@
 # nextra-theme-blog
 
+## 2.0.0-beta.25
+
+### Patch Changes
+
+- c3e6227: add `overflow-x-scroll` for tables
+- ff8967c: add `Toggle Word Wrap` button for code-blocks (only for mobile)
+- ff8967c: fix missing `Copy Code` button in code-blocks without language
+- 256154a: use "next/future/image" if `"experimental.images.allowFutureImage": true` is set in next config
+- 256154a: replace images with `<NextImage />` even when url not relative but that starts from `/` (public directory)
+
 ## 2.0.0-beta.24
 
 ## 2.0.0-beta.23
