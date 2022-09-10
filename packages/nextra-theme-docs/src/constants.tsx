@@ -17,8 +17,14 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     key: 'nextra-banner',
     text: ''
   },
-  main: {
-    extraContent: null
+  chat: {
+    icon: (
+      <>
+        <DiscordIcon />
+        <span className="sr-only">Discord</span>
+      </>
+    ),
+    link: ''
   },
   components: {},
   darkMode: true,
@@ -38,9 +44,10 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     },
     text: 'Edit this page'
   },
+  faviconGlyph: '',
   feedback: {
-    labels: '',
-    content: null
+    content: null,
+    labels: ''
   },
   footer: {
     component: Footer,
@@ -80,6 +87,9 @@ export const DEFAULT_THEME: DocsThemeConfig = {
       </span>
     </>
   ),
+  main: {
+    extraContent: null
+  },
   navbar: Navbar,
   navigation: {
     next: true,
@@ -90,8 +100,8 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     storageKey: 'theme'
   },
   notFound: {
-    labels: 'bug',
-    link: 'Submit an issue about broken link →'
+    content: 'Submit an issue about broken link →',
+    labels: 'bug'
   },
   primaryHue: {
     dark: 204,
@@ -105,15 +115,6 @@ export const DEFAULT_THEME: DocsThemeConfig = {
       </>
     ),
     // by default should be empty so clicking on project link will go to the github link
-    link: ''
-  },
-  chat: {
-    icon: (
-      <>
-        <DiscordIcon />
-        <span className="sr-only">Discord</span>
-      </>
-    ),
     link: ''
   },
   search: {
@@ -137,8 +138,8 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     }
   },
   serverSideError: {
-    labels: 'bug',
-    link: 'Submit an issue about error in url →'
+    content: 'Submit an issue about error in url →',
+    labels: 'bug'
   },
   sidebar: {
     defaultMenuCollapsed: false,
@@ -150,8 +151,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     extraContent: null,
     float: true,
     title: 'On This Page'
-  },
-  faviconGlyph: ''
+  }
 }
 
 export const DEEP_OBJECT_KEYS = Object.entries(DEFAULT_THEME)
@@ -168,28 +168,28 @@ export const DEEP_OBJECT_KEYS = Object.entries(DEFAULT_THEME)
   .filter(Boolean) as (keyof DocsThemeConfig)[]
 
 export const LEGACY_CONFIG_OPTIONS: Record<string, string> = {
-  github: 'project.link',
   bannerKey: 'banner.key',
-  customSearch: 'search.component',
   bodyExtraContent: 'main.extraContent',
+  customSearch: 'search.component',
   defaultMenuCollapsed: 'sidebar.defaultMenuCollapsed',
   feedbackLabels: 'feedback.labels',
   feedbackLink: 'feedback.content',
   floatTOC: 'toc.float',
   footerEditLink: 'editLink.text',
   footerText: 'footer.text',
+  github: 'project.link',
   nextLinks: 'navigation.next',
   notFoundLabels: 'notFound.labels',
-  notFoundLink: 'notFound.link',
+  notFoundLink: 'notFound.content',
   prevLinks: 'navigation.prev',
+  projectChat: 'chat',
   projectChatLink: 'chat.link',
   projectChatLinkIcon: 'chat.icon',
-  projectChat: 'chat',
   projectLink: 'project.link',
   projectLinkIcon: 'project.icon',
   searchPlaceholder: 'search.placeholder',
   serverSideErrorLabels: 'serverSideError.labels',
-  serverSideErrorLink: 'serverSideError.link',
+  serverSideErrorLink: 'serverSideError.content',
   sidebarSubtitle: 'sidebar.titleComponent',
   tocExtraContent: 'toc.extraContent',
   unstable_searchResultEmpty: 'search.emptyResult'

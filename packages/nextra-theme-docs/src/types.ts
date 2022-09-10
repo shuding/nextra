@@ -21,8 +21,9 @@ export interface DocsThemeConfig {
     key: string
     text: ReactNode | FC
   }
-  main: {
-    extraContent: ReactNode | FC
+  chat: {
+    icon: ReactNode | FC
+    link: string
   }
   components: Record<string, FC>
   darkMode: boolean
@@ -36,9 +37,10 @@ export interface DocsThemeConfig {
     }>
     text: ReactNode | FC
   }
+  faviconGlyph: string
   feedback: {
-    labels: string
     content: ReactNode | FC
+    labels: string
   }
   footer: {
     component: ReactNode | FC<{ menu: boolean }>
@@ -48,6 +50,9 @@ export interface DocsThemeConfig {
   head: ReactNode | FC
   i18n: { direction?: string; locale: string; text: string }[]
   logo: ReactNode | FC
+  main: {
+    extraContent: ReactNode | FC
+  }
   navbar: ReactNode | FC<NavBarProps>
   navigation:
     | boolean
@@ -60,8 +65,8 @@ export interface DocsThemeConfig {
     'defaultTheme' | 'storageKey' | 'forcedTheme'
   >
   notFound: {
+    content: ReactNode | FC,
     labels: string
-    link: ReactNode | FC
   }
   primaryHue:
     | number
@@ -70,10 +75,6 @@ export interface DocsThemeConfig {
         light: number
       }
   project: {
-    icon: ReactNode | FC
-    link: string
-  }
-  chat: {
     icon: ReactNode | FC
     link: string
   }
@@ -89,12 +90,12 @@ export interface DocsThemeConfig {
     placeholder: string | (() => string)
   }
   serverSideError: {
+    content: ReactNode | FC,
     labels: string
-    link: ReactNode | FC
   }
   sidebar: {
     defaultMenuCollapsed: boolean
-    titleComponent: ReactNode | FC<{ type: string; title: string }>
+    titleComponent: ReactNode | FC<{ title: string; type: string }>
   }
   // Can't be React component, otherwise will get Warning: A title element received an array with more than 1 element as children.
   titleSuffix: string | (() => string)
@@ -104,7 +105,6 @@ export interface DocsThemeConfig {
     float: boolean
     title: ReactNode | FC
   }
-  faviconGlyph: string
 }
 
 export type PageTheme = {
