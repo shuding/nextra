@@ -46,7 +46,7 @@ export const ConfigProvider = ({
     title: pageOpts.title,
     frontMatter: pageOpts.frontMatter,
     ...Object.fromEntries(
-      (DEEP_OBJECT_KEYS).map(key =>
+      DEEP_OBJECT_KEYS.map(key =>
         typeof themeConfig[key] === 'object'
           ? [
               key,
@@ -61,8 +61,7 @@ export const ConfigProvider = ({
   const { nextThemes } = extendedConfig
 
   if (process.env.NODE_ENV === 'development') {
-    const notice =
-      '[nextra-theme-docs] ⚠️  You are using legacy theme config option'
+    const notice = '[nextra-theme-docs] ⚠️  You are using a legacy theme config'
 
     for (const [legacyOption, newPath] of Object.entries(
       LEGACY_CONFIG_OPTIONS
@@ -70,7 +69,9 @@ export const ConfigProvider = ({
       if (legacyOption in themeConfig) {
         const [obj, key] = newPath.split('.')
         const renameTo = key ? `${obj}: { ${key}: ... }` : obj
-        console.warn(`${notice} "${legacyOption}". Rename it to ${renameTo}`)
+        console.warn(
+          `${notice} \`${legacyOption}\`. Rename it to \`${renameTo}\` for future compatibility.`
+        )
       }
     }
 
@@ -79,14 +80,19 @@ export const ConfigProvider = ({
         const option = themeConfig[key]
         if (typeof option === 'boolean' || option == null) {
           console.warn(
-            `${notice} "${key}".`,
-            option ? 'Remove it' : `Rename it to ${key}: { component: null }`
+            `${notice} \`${key}\`.`,
+            option
+              ? 'Remove it'
+              : `Rename it to \`${key}: { component: null }\` for future compatibility.`
           )
         }
       }
     }
     if (typeof themeConfig.banner === 'string') {
-      console.warn(notice, '"banner". Rename it to banner: { text: ... }')
+      console.warn(
+        notice,
+        '`banner`. Rename it to `banner: { content: ... }` for future compatibility.'
+      )
     }
   }
 

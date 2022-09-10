@@ -111,7 +111,7 @@ const config: DocsThemeConfig = {
   },
   feedback: {
     labels: "feedback",
-    link: "Question? Give us feedback →",
+    content: "Question? Give us feedback →",
   },
   footer: {
     text() {
@@ -129,7 +129,9 @@ const config: DocsThemeConfig = {
     },
   },
   gitTimestamp: "Last updated on",
-  github: "https://github.com/vercel/swr",
+  project: {
+    link: "https://github.com/vercel/swr",
+  },
   head() {
     const config = useConfig();
     const description =
