@@ -1,4 +1,5 @@
-import path from 'path'
+import path from 'node:path'
+import fs from 'graceful-fs'
 import { LOCALE_REGEX } from './constants'
 import { Meta } from './types'
 

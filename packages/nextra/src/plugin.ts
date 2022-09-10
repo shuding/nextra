@@ -9,13 +9,14 @@ import {
   MetaJsonFile
 } from './types'
 import fs from 'graceful-fs'
-import { promisify } from 'util'
+import { promisify } from 'node:util'
 import { parseFileName, parseJsonFile, truthy } from './utils'
-import path from 'path'
+import path from 'node:path'
 import slash from 'slash'
 import grayMatter from 'gray-matter'
-import { findPagesDir } from 'next/dist/lib/find-pages-dir.js'
 import { Compiler } from 'webpack'
+import title from 'title'
+import { findPagesDir } from 'next/dist/lib/find-pages-dir.js'
 
 import { restoreCache } from './content-dump'
 import { CWD, MARKDOWN_EXTENSION_REGEX, META_FILENAME } from './constants'
@@ -103,7 +104,10 @@ export async function collectFiles(
     )
     const defaultMeta: [string, string][] = mdxPages
       .filter(item => item.locale === locale)
-      .map(item => [item.name, item.frontMatter?.title || item.name])
+      .map(item => [
+        item.name,
+        item.frontMatter?.title || title(item.name.replace(/[-_]/g, ' '))
+      ])
     const metaFilename = locale
       ? META_FILENAME.replace('.', `.${locale}.`)
       : META_FILENAME
@@ -165,7 +169,8 @@ export class NextraPlugin {
           // Restore the search data from the cache.
           restoreCache()
         }
-        const result = await collectFiles(findPagesDir(CWD).pages, '/')
+        const PAGES_DIR = findPagesDir(CWD).pages
+        const result = await collectFiles(PAGES_DIR)
         pageMapCache.set(result)
         callback()
       }

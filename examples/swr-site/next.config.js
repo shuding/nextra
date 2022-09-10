@@ -65,5 +65,8 @@ module.exports = withNextra({
   reactStrictMode: true,
   experimental: {
     newNextLinkBehavior: true,
+    images: {
+      allowFutureImage: true,
+    },
   },
 });
