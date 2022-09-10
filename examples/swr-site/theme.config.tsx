@@ -198,7 +198,7 @@ const config: DocsThemeConfig = {
   },
   sidebar: {
     defaultMenuCollapsed: true,
-    subtitle: ({ title }) => (
+    titleComponent: ({ title }) => (
       <div className="flex items-center gap-2">
         <Logo height={6} />
         {title}
