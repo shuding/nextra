@@ -103,7 +103,7 @@ const config: DocsThemeConfig = {
   },
   feedback: {
     labels: "feedback",
-    link: "Question? Give us feedback →",
+    content: "Question? Give us feedback →",
   },
   footer: {
     text() {
@@ -120,7 +120,10 @@ const config: DocsThemeConfig = {
       );
     },
   },
-  github: "https://github.com/vercel/swr",
+  gitTimestamp: "Last updated on",
+  project: {
+    link: "https://github.com/vercel/swr",
+  },
   head() {
     const config = useConfig();
     const description =
@@ -195,7 +198,7 @@ const config: DocsThemeConfig = {
   },
   sidebar: {
     defaultMenuCollapsed: true,
-    subtitle: ({ title }) => (
+    titleComponent: ({ title }) => (
       <div className="flex items-center gap-2">
         <Logo height={6} />
         {title}

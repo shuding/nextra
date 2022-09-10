@@ -9,8 +9,8 @@ export function ServerSideErrorPage(): ReactElement | null {
   const config = useConfig()
   const mounted = useMounted()
   const { asPath } = useRouter()
-  const { link, labels } = config.serverSideError
-  if (!link) {
+  const { content, labels } = config.serverSideError
+  if (!content) {
     return null
   }
 
@@ -27,7 +27,7 @@ export function ServerSideErrorPage(): ReactElement | null {
         newWindow
         className="ring-primary-500/30 focus:outline-none focus-visible:ring text-primary-500 underline decoration-from-font [text-underline-position:under]"
       >
-        {renderComponent(link)}
+        {renderComponent(content)}
       </Anchor>
     </p>
   )

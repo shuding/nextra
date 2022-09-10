@@ -104,7 +104,10 @@ function FolderImpl({ item, anchors }: FolderProps) {
           rerender({})
         }}
       >
-        {item.title}
+        {renderComponent(config.sidebar.titleComponent, {
+          title: item.title,
+          type: item.type
+        })}
         <ArrowRightIcon
           className="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"
           pathClassName={cn(
@@ -146,7 +149,10 @@ function Separator({ title, topLevel }: SeparatorProps): ReactElement {
     >
       {hasTitle ? (
         <div className="mx-2 py-1.5 text-sm font-semibold text-gray-900 dark:text-gray-100">
-          {renderComponent(config.sidebar.subtitle, { title })}
+          {renderComponent(config.sidebar.titleComponent, {
+            title,
+            type: 'separator'
+          })}
         </div>
       ) : (
         <hr className="mx-2 border-t border-gray-200 dark:border-primary-100/10" />
@@ -168,6 +174,7 @@ function File({ item, anchors, topLevel }: FileProps): ReactElement {
   const slugger = new Slugger()
   const activeAnchor = useActiveAnchor()
   const { setMenu } = useMenu()
+  const config = useConfig()
 
   if (item.type === 'separator') {
     return <Separator title={item.title} topLevel={topLevel} />
@@ -183,7 +190,10 @@ function File({ item, anchors, topLevel }: FileProps): ReactElement {
           setMenu(false)
         }}
       >
-        {item.title}
+        {renderComponent(config.sidebar.titleComponent, {
+          title: item.title,
+          type: item.type
+        })}
       </Anchor>
       {active && anchors.length > 0 && (
         <ul>

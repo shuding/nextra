@@ -38,7 +38,9 @@ export function TOC({ headings, filePath }: TOCProps): ReactElement {
 
   const hasHeadings = items.length > 0
   const hasMetaInfo = Boolean(
-    config.feedback.link || config.editLink.component || config.toc.extraContent
+    config.feedback.content ||
+      config.editLink.component ||
+      config.toc.extraContent
   )
 
   const activeSlug = Object.entries(activeAnchor).find(
@@ -114,7 +116,7 @@ export function TOC({ headings, filePath }: TOCProps): ReactElement {
             'contrast-more:shadow-none contrast-more:border-t contrast-more:border-neutral-400 contrast-more:dark:border-neutral-400'
           )}
         >
-          {config.feedback.link ? (
+          {config.feedback.content ? (
             <Anchor
               className={linkClassName}
               href={getGitIssueUrl({
@@ -124,7 +126,7 @@ export function TOC({ headings, filePath }: TOCProps): ReactElement {
               })}
               newWindow
             >
-              {renderComponent(config.feedback.link)}
+              {renderComponent(config.feedback.content)}
             </Anchor>
           ) : null}
 

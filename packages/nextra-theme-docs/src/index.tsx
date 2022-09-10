@@ -106,7 +106,7 @@ const Body = ({
       {children}
       {gitTimestampEl}
       {navigation}
-      {renderComponent(config.bodyExtraContent)}
+      {renderComponent(config.main.extraContent)}
     </>
   )
 

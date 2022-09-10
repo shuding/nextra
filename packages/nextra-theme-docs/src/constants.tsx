@@ -17,7 +17,15 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     key: 'nextra-banner',
     text: ''
   },
-  bodyExtraContent: null,
+  chat: {
+    icon: (
+      <>
+        <DiscordIcon />
+        <span className="sr-only">Discord</span>
+      </>
+    ),
+    link: ''
+  },
   components: {},
   darkMode: true,
   direction: 'ltr',
@@ -36,12 +44,11 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     },
     text: 'Edit this page'
   },
+  faviconGlyph: '',
   feedback: {
-    labels: '',
-    link: null
+    content: null,
+    labels: ''
   },
-  // @TODO: Can probably introduce a set of options to use Google Fonts directly
-  font: false,
   footer: {
     component: Footer,
     text: `MIT ${new Date().getFullYear()} © Nextra.`
@@ -59,7 +66,6 @@ export const DEFAULT_THEME: DocsThemeConfig = {
       </>
     )
   },
-  github: '',
   head: (
     <>
       <meta name="msapplication-TileColor" content="#fff" />
@@ -81,6 +87,9 @@ export const DEFAULT_THEME: DocsThemeConfig = {
       </span>
     </>
   ),
+  main: {
+    extraContent: null
+  },
   navbar: Navbar,
   navigation: {
     next: true,
@@ -91,8 +100,8 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     storageKey: 'theme'
   },
   notFound: {
-    labels: 'bug',
-    link: 'Submit an issue about broken link →'
+    content: 'Submit an issue about broken link →',
+    labels: 'bug'
   },
   primaryHue: {
     dark: 204,
@@ -106,15 +115,6 @@ export const DEFAULT_THEME: DocsThemeConfig = {
       </>
     ),
     // by default should be empty so clicking on project link will go to the github link
-    link: ''
-  },
-  projectChat: {
-    icon: (
-      <>
-        <DiscordIcon />
-        <span className="sr-only">Discord</span>
-      </>
-    ),
     link: ''
   },
   search: {
@@ -138,12 +138,12 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     }
   },
   serverSideError: {
-    labels: 'bug',
-    link: 'Submit an issue about error in url →'
+    content: 'Submit an issue about error in url →',
+    labels: 'bug'
   },
   sidebar: {
     defaultMenuCollapsed: false,
-    subtitle: null
+    titleComponent: ({ title }) => <>{title}</>
   },
   titleSuffix: ' – Nextra',
   toc: {
@@ -151,8 +151,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     extraContent: null,
     float: true,
     title: 'On This Page'
-  },
-  unstable_faviconGlyph: ''
+  }
 }
 
 export const DEEP_OBJECT_KEYS = Object.entries(DEFAULT_THEME)
@@ -170,25 +169,28 @@ export const DEEP_OBJECT_KEYS = Object.entries(DEFAULT_THEME)
 
 export const LEGACY_CONFIG_OPTIONS: Record<string, string> = {
   bannerKey: 'banner.key',
+  bodyExtraContent: 'main.extraContent',
   customSearch: 'search.component',
   defaultMenuCollapsed: 'sidebar.defaultMenuCollapsed',
   feedbackLabels: 'feedback.labels',
-  feedbackLink: 'feedback.link',
+  feedbackLink: 'feedback.content',
   floatTOC: 'toc.float',
   footerEditLink: 'editLink.text',
   footerText: 'footer.text',
+  github: 'project.link',
   nextLinks: 'navigation.next',
   notFoundLabels: 'notFound.labels',
-  notFoundLink: 'notFound.link',
+  notFoundLink: 'notFound.content',
   prevLinks: 'navigation.prev',
-  projectChatLink: 'projectChat.link',
-  projectChatLinkIcon: 'projectChat.icon',
+  projectChat: 'chat',
+  projectChatLink: 'chat.link',
+  projectChatLinkIcon: 'chat.icon',
   projectLink: 'project.link',
   projectLinkIcon: 'project.icon',
   searchPlaceholder: 'search.placeholder',
   serverSideErrorLabels: 'serverSideError.labels',
-  serverSideErrorLink: 'serverSideError.link',
-  sidebarSubtitle: 'sidebar.subtitle',
+  serverSideErrorLink: 'serverSideError.content',
+  sidebarSubtitle: 'sidebar.titleComponent',
   tocExtraContent: 'toc.extraContent',
   unstable_searchResultEmpty: 'search.emptyResult'
 }

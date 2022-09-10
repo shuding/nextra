@@ -21,7 +21,10 @@ export interface DocsThemeConfig {
     key: string
     text: ReactNode | FC
   }
-  bodyExtraContent: ReactNode | FC
+  chat: {
+    icon: ReactNode | FC
+    link: string
+  }
   components: Record<string, FC>
   darkMode: boolean
   direction: 'ltr' | 'rtl'
@@ -34,42 +37,44 @@ export interface DocsThemeConfig {
     }>
     text: ReactNode | FC
   }
+  faviconGlyph: string
   feedback: {
+    content: ReactNode | FC
     labels: string
-    link: ReactNode | FC
   }
-  font: boolean
   footer: {
     component: ReactNode | FC<{ menu: boolean }>
     text: ReactNode | FC
   }
   gitTimestamp: ReactNode | FC<{ timestamp: Date }>
-  github: string
   head: ReactNode | FC
   i18n: { direction?: string; locale: string; text: string }[]
   logo: ReactNode | FC
-  navbar: ReactNode | FC<NavBarProps>
-  navigation: {
-    next: boolean
-    prev: boolean
+  main: {
+    extraContent: ReactNode | FC
   }
+  navbar: ReactNode | FC<NavBarProps>
+  navigation:
+    | boolean
+    | {
+        next: boolean
+        prev: boolean
+      }
   nextThemes: Pick<
     ThemeProviderProps,
     'defaultTheme' | 'storageKey' | 'forcedTheme'
   >
   notFound: {
+    content: ReactNode | FC,
     labels: string
-    link: ReactNode | FC
   }
-  primaryHue: number | {
-    dark: number
-    light: number
-  },
+  primaryHue:
+    | number
+    | {
+        dark: number
+        light: number
+      }
   project: {
-    icon: ReactNode | FC
-    link: string
-  }
-  projectChat: {
     icon: ReactNode | FC
     link: string
   }
@@ -85,12 +90,12 @@ export interface DocsThemeConfig {
     placeholder: string | (() => string)
   }
   serverSideError: {
+    content: ReactNode | FC,
     labels: string
-    link: ReactNode | FC
   }
   sidebar: {
     defaultMenuCollapsed: boolean
-    subtitle: ReactNode | FC<{ title: string }>
+    titleComponent: ReactNode | FC<{ title: string; type: string }>
   }
   // Can't be React component, otherwise will get Warning: A title element received an array with more than 1 element as children.
   titleSuffix: string | (() => string)
@@ -100,7 +105,6 @@ export interface DocsThemeConfig {
     float: boolean
     title: ReactNode | FC
   }
-  unstable_faviconGlyph: string
 }
 
 export type PageTheme = {
