@@ -86,11 +86,11 @@ Like any Next.js projects, you need to also add `scripts` to your `package.json`
 
 If you already have Next.js running, you only need to install `nextra` and `nextra-theme-docs` as the add-ons.
 
-### Create Next.js Config
+### Create Nextra Config
 
 Create the following `next.config.js` file in your project’s root directory:
 
-```js filename="next.config.js"
+```js filename="next.config.js" copy
 const withNextra = require('nextra')({
   theme: 'nextra-theme-docs',
   themeConfig: './theme.config.jsx',
@@ -116,7 +116,7 @@ import switchIcon from '@components/icons/switch'
 
 Lastly, create the corresponding `theme.config.jsx` file in your project’s root directory:
 
-```jsx filename="theme.config.jsx"
+```jsx filename="theme.config.jsx" copy
 export default {
   logo: <span>My Nextra Documentation</span>,
   // ...
@@ -129,19 +129,19 @@ More configuration options for the docs theme can be found here:
   <Card icon={switchIcon} title="Configure Docs Theme" href="/docs/docs-theme/configuration"/>
 </Cards>
 
-### Start Project
+### Ready to Go!
 
-Now, you can create an initial Markdown page (`pages/index.mdx`) in your project’s root directory:
+Now, you can create an initial MDX page:
 
-```mdx filename="pages/index.mdx"
+```mdx filename="pages/index.mdx" copy
 # Welcome to Nextra
 
 Hello, world!
 ```
 
-And run the following command to start the project:
+And run the `dev` command to start developing the project:
 
-```bash
+```bash copy
 pnpm dev
 ```
 

@@ -41,7 +41,9 @@ const logo = (
 )
 
 export default {
-  github: 'https://github.com/shuding/nextra',
+  project: {
+    link: 'https://github.com/shuding/nextra'
+  },
   docsRepositoryBase: 'https://github.com/shuding/nextra/blob/master',
   titleSuffix: () => {
     const { route } = useRouter()
@@ -81,7 +83,12 @@ export default {
     </>
   ),
   banner: {
-    text: '🚧 This is a work-in-progress docs for Nextra 2.0, content may be incomplete or inaccurate.'
+    key: '2.0-release',
+    text: (
+      <a href="https://nextra.vercel.app" target="_blank">
+        🎉 Nextra 2.0 is released. Read more →
+      </a>
+    )
   },
   navigation: {
     prev: true,

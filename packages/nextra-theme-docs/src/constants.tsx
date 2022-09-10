@@ -19,7 +19,9 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     key: 'nextra-banner',
     text: ''
   },
-  bodyExtraContent: null,
+  main: {
+    extraContent: null
+  },
   components: {},
   darkMode: true,
   direction: 'ltr',
@@ -40,10 +42,8 @@ export const DEFAULT_THEME: DocsThemeConfig = {
   },
   feedback: {
     labels: '',
-    link: null
+    content: null
   },
-  // @TODO: Can probably introduce a set of options to use Google Fonts directly
-  font: false,
   footer: {
     component: Footer,
     text: `MIT ${new Date().getFullYear()} © Nextra.`
@@ -61,7 +61,6 @@ export const DEFAULT_THEME: DocsThemeConfig = {
       </>
     )
   },
-  github: '',
   head: (
     <>
       <meta name="msapplication-TileColor" content="#fff" />
@@ -110,7 +109,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     // by default should be empty so clicking on project link will go to the github link
     link: ''
   },
-  projectChat: {
+  chat: {
     icon: (
       <>
         <DiscordIcon />
@@ -145,7 +144,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
   },
   sidebar: {
     defaultMenuCollapsed: false,
-    subtitle: null
+    titleComponent: ({ title }) => <>{title}</>
   },
   titleSuffix: ' – Nextra',
   toc: {
@@ -154,7 +153,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     float: true,
     title: 'On This Page'
   },
-  unstable_faviconGlyph: ''
+  faviconGlyph: ''
 }
 
 export const DEEP_OBJECT_KEYS = Object.entries(DEFAULT_THEME)
@@ -171,11 +170,13 @@ export const DEEP_OBJECT_KEYS = Object.entries(DEFAULT_THEME)
   .filter(Boolean) as (keyof DocsThemeConfig)[]
 
 export const LEGACY_CONFIG_OPTIONS: Record<string, string> = {
+  github: 'project.link',
   bannerKey: 'banner.key',
   customSearch: 'search.component',
+  bodyExtraContent: 'main.extraContent',
   defaultMenuCollapsed: 'sidebar.defaultMenuCollapsed',
   feedbackLabels: 'feedback.labels',
-  feedbackLink: 'feedback.link',
+  feedbackLink: 'feedback.content',
   floatTOC: 'toc.float',
   footerEditLink: 'editLink.text',
   footerText: 'footer.text',
@@ -183,14 +184,15 @@ export const LEGACY_CONFIG_OPTIONS: Record<string, string> = {
   notFoundLabels: 'notFound.labels',
   notFoundLink: 'notFound.link',
   prevLinks: 'navigation.prev',
-  projectChatLink: 'projectChat.link',
-  projectChatLinkIcon: 'projectChat.icon',
+  projectChatLink: 'chat.link',
+  projectChatLinkIcon: 'chat.icon',
+  projectChat: 'chat',
   projectLink: 'project.link',
   projectLinkIcon: 'project.icon',
   searchPlaceholder: 'search.placeholder',
   serverSideErrorLabels: 'serverSideError.labels',
   serverSideErrorLink: 'serverSideError.link',
-  sidebarSubtitle: 'sidebar.subtitle',
+  sidebarSubtitle: 'sidebar.titleComponent',
   tocExtraContent: 'toc.extraContent',
   unstable_searchResultEmpty: 'search.emptyResult'
 }

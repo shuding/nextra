@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .home-content p {
   margin-top: 1.5em;
   line-height: 1.75em;
@@ -17,6 +21,10 @@ figurecaption {
   line-height: 1.5rem;
   display: block;
   text-align: center;
+}
+
+code.text-\[\.9em\] {
+  font-size: 14px;
 }
 
 @media screen and (max-width: 1200px) {

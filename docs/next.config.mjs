@@ -6,9 +6,11 @@ const withNextra = nextra({
   unstable_staticImage: true,
   unstable_flexsearch: {
     codeblocks: true
-  }
+  },
+  unstable_defaultShowCopyCode: true
 })
 
 export default withNextra({
-  reactStrictMode: true
+  reactStrictMode: true,
+  experimental: { images: { allowFutureImage: true } }
 })

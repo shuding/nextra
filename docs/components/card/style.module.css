@@ -4,27 +4,8 @@
     auto-fill,
     minmax(max(250px, calc((100% - 1rem * 2) / 3)), 1fr)
   );
-  grid-gap: 1rem;
-  margin-top: 1rem;
 }
 
-.card {
-  display: flex;
-  gap: 0.8rem;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: 1rem;
-  color: currentColor;
-  text-decoration: none;
-  background-color: hsl(var(--nextra-primary-hue) 10% 96%/0.9);
-  border-radius: 0.25rem;
-  cursor: pointer;
-  transition: box-shadow 0.1s ease;
-}
-
-.card:hover {
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
-}
 .card:hover svg {
   color: currentColor;
 }
@@ -41,7 +22,6 @@
 
 .card .title {
   display: flex;
-  gap: 0.5rem;
   font-weight: 600;
   align-items: flex-start;
 }
