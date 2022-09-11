@@ -1,5 +1,12 @@
 # nextra
 
+## 2.0.0-beta.26
+
+### Patch Changes
+
+- b365bb0: fix TypeError: Cannot read properties of undefined (reading 'data')
+- a0e5847: Rename some docs theme configurations
+
 ## 2.0.0-beta.25
 
 ### Patch Changes
