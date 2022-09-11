@@ -24,13 +24,13 @@ export function getPageMap({
   const { locale } = parseFileName(filePath)
   const pageItem = fileMap[filePath as MdxPath]
 
-  const metaPath = path.dirname(filePath)
   const metaFilename = locale
     ? META_FILENAME.replace('.', `.${locale}.`)
     : META_FILENAME
+  const metaDir = path.dirname(filePath)
+  const metaPath = path.join(metaDir, metaFilename) as MetaJsonPath
 
-  const pageMeta =
-    fileMap[`${metaPath}/${metaFilename}` as MetaJsonPath].data[pageItem.name]
+  const pageMeta = fileMap[metaPath].data[pageItem.name]
 
   return {
     pageMap: locale

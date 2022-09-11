@@ -9,8 +9,8 @@ export function NotFoundPage(): ReactElement | null {
   const config = useConfig()
   const mounted = useMounted()
   const { asPath } = useRouter()
-  const { link, labels } = config.notFound
-  if (!link) {
+  const { content, labels } = config.notFound
+  if (!content) {
     return null
   }
 
@@ -25,7 +25,7 @@ export function NotFoundPage(): ReactElement | null {
         newWindow
         className="text-primary-500 underline decoration-from-font [text-underline-position:under]"
       >
-        {renderComponent(link)}
+        {renderComponent(content)}
       </Anchor>
     </p>
   )

@@ -9,15 +9,19 @@
   "license": "MIT",
   "dependencies": {
     "clsx": "^1.2.1",
+    "framer-motion": "^7.3.2",
     "next": "^12.2.3",
-    "nextra": "2.0.0-beta.18",
-    "nextra-theme-docs": "2.0.0-beta.18",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "nextra": "2.0.0-beta.25",
+    "nextra-theme-docs": "2.0.0-beta.25",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@types/node": "^18.7.8",
+    "autoprefixer": "^10.4.8",
+    "postcss": "^8.4.16",
     "prettier": "^2.7.1",
+    "tailwindcss": "^3.1.8",
     "typescript": "^4.7.4"
   },
   "prettier": {

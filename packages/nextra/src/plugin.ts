@@ -49,7 +49,7 @@ export async function collectFiles(
   const files = await readdir(dir, { withFileTypes: true })
 
   const promises = files.map(async f => {
-    const filePath = path.resolve(dir, f.name)
+    const filePath = path.join(dir, f.name)
     const { name, locale, ext } = parseFileName(filePath)
     const fileRoute = slash(path.join(route, name.replace(/^index$/, '')))
 

@@ -1,8 +1,6 @@
 # Next.js Image
 
-You can use [Next.js Image](https://nextjs.org/docs/basic-features/image-optimization) directly in MDX.
-
-If the `demo.png` file is located at `/public/demo.png`, you can use the code below to display it:
+The standard way to use [Next.js Image](https://nextjs.org/docs/basic-features/image-optimization) inside MDX is to directly import the component:
 
 ```mdx
 import Image from 'next/image'
@@ -19,15 +17,13 @@ import { Callout } from 'nextra-theme-docs'
   true`](/get-started#create-manually).
 </Callout>
 
-Nextra also supports automatic static image imports, you no longer need to specify the width and height of the image manually,
-and you can directly use the Markdown syntax to display the same image:
+Nextra supports automatically optimize your static image imports with the Markdown syntax. You no longer need to specify the width and height of the image manually,
+but directly use the `![]()` syntax to display the same image:
 
-```md
+```md filename="index.mdx" copy
 ![Hello](../../../public/demo.png)
 ```
 
 With Next.js Image, there will be no layout shift, and a beautiful blury placeholder will be shown by default when loading the images:
-
-<br />
 
 ![Nextra](../../../public/og.png)

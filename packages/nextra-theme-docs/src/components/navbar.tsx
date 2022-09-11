@@ -164,23 +164,23 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
           className: 'hidden md:inline-block min-w-[200px]'
         })}
 
-        {config.project.link || config.github ? (
+        {config.project.link ? (
           <Anchor
             className="p-2 text-current"
-            href={config.project.link || config.github}
+            href={config.project.link}
             newWindow
           >
             {renderComponent(config.project.icon)}
           </Anchor>
         ) : null}
 
-        {config.projectChat.link ? (
+        {config.chat.link ? (
           <Anchor
             className="p-2 text-current"
-            href={config.projectChat.link}
+            href={config.chat.link}
             newWindow
           >
-            {renderComponent(config.projectChat.icon)}
+            {renderComponent(config.chat.icon)}
           </Anchor>
         ) : null}
 

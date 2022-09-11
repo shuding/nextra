@@ -1,7 +1,8 @@
+import type { DocsThemeConfig } from 'nextra-theme-docs'
 import { useRouter } from 'next/router'
 
 const logo = (
-  <>
+  <span>
     <svg
       height="20"
       viewBox="0 0 361 70"
@@ -20,7 +21,8 @@ const logo = (
       />
     </svg>
     <style jsx>{`
-      svg {
+      span {
+        padding: 0.5rem 0.5rem 0.5rem 0;
         mask-image: linear-gradient(
           60deg,
           black 25%,
@@ -30,16 +32,18 @@ const logo = (
         mask-size: 400%;
         mask-position: 0%;
       }
-      svg:hover {
+      span:hover {
         mask-position: 100%;
         transition: mask-position 1s ease, -webkit-mask-position 1s ease;
       }
     `}</style>
-  </>
+  </span>
 )
 
 export default {
-  github: 'https://github.com/shuding/nextra',
+  project: {
+    link: 'https://github.com/shuding/nextra'
+  },
   docsRepositoryBase: 'https://github.com/shuding/nextra/blob/master',
   titleSuffix: () => {
     const { route } = useRouter()
@@ -78,14 +82,29 @@ export default {
       />
     </>
   ),
-  banner:
-    '🚧 This is a work-in-progress docs for Nextra 2.0, content may be incomplete or inaccurate.',
-  search: true,
-  prevLinks: true,
-  nextLinks: true,
-  footer: true,
-  footerEditLink: 'Edit this page on GitHub',
-  footerText: `MIT ${new Date().getFullYear()} © Nextra.`,
-  floatTOC: true,
-  defaultMenuCollapsed: true
-}
+  banner: {
+    key: '2.0-release',
+    text: (
+      <a href="https://nextra.vercel.app" target="_blank">
+        🎉 Nextra 2.0 is released. Read more →
+      </a>
+    )
+  },
+  navigation: {
+    prev: true,
+    next: true
+  },
+  editLink: {
+    text: 'Edit this page on GitHub'
+  },
+  footer: {
+    text: `MIT ${new Date().getFullYear()} © Nextra.`
+  },
+  toc: {
+    float: true
+  },
+  sidebar: {
+    defaultMenuCollapsed: true,
+    subtitle: ({ title }) => <>{title}</>
+  }
+} as DocsThemeConfig

@@ -132,7 +132,10 @@ function FolderImpl({
           rerender({})
         }}
       >
-        {item.title}
+        {renderComponent(config.sidebar.titleComponent, {
+          title: item.title,
+          type: item.type
+        })}
         <ArrowRightIcon
           className="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"
           pathClassName={cn(
@@ -167,7 +170,10 @@ function Separator({ title }: { title: string }): ReactElement {
       )}
     >
       {title ? (
-        renderComponent(config.sidebar.subtitle, { title })
+        renderComponent(config.sidebar.titleComponent, {
+          title,
+          type: 'separator'
+        })
       ) : (
         <hr className="mx-2 border-t border-gray-200 dark:border-primary-100/10" />
       )}
@@ -188,6 +194,7 @@ function File({
   const slugger = new Slugger()
   const activeAnchor = useActiveAnchor()
   const { setMenu } = useMenu()
+  const config = useConfig()
 
   if (item.type === 'separator') {
     return <Separator title={item.title} />
@@ -203,7 +210,10 @@ function File({
           setMenu(false)
         }}
       >
-        {item.title}
+        {renderComponent(config.sidebar.titleComponent, {
+          title: item.title,
+          type: item.type
+        })}
       </Anchor>
       {active && anchors.length > 0 && (
         <ul className={cn(classes.list, classes.border, 'ltr:ml-3 rtl:mr-3')}>

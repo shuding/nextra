@@ -1,6 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .home-content p {
-  margin-top: 1.5rem;
-  line-height: 1.75rem;
+  margin-top: 1.5em;
+  line-height: 1.75em;
 }
 
 .home-content a {
@@ -10,4 +14,30 @@
   text-decoration-line: underline;
   text-decoration-thickness: from-font;
   color: hsl(var(--nextra-primary-hue) 100% 50% / var(--tw-text-opacity));
+}
+
+figurecaption {
+  font-size: 0.85rem;
+  line-height: 1.5rem;
+  display: block;
+  text-align: center;
+}
+
+code.text-\[\.9em\] {
+  font-size: 14px;
+}
+
+@media screen and (max-width: 1200px) {
+  .home-content .hide-medium {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .home-content p {
+    font-size: 0.9rem;
+  }
+  .home-content .hide-small {
+    display: none;
+  }
 }

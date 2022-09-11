@@ -20,8 +20,16 @@ export const NavLinks = ({
   currentIndex
 }: NavLinkProps): ReactElement | null => {
   const config = useConfig()
-  const prev = config.navigation.prev ? flatDirectories[currentIndex - 1] : null
-  const next = config.navigation.next ? flatDirectories[currentIndex + 1] : null
+  const navigation: { prev?: boolean; next?: boolean } =
+    typeof config.navigation === 'boolean'
+      ? config.navigation === false
+        ? { prev: false, next: false }
+        : {}
+      : config.navigation
+  const prev =
+    navigation.prev === false ? null : flatDirectories[currentIndex - 1]
+  const next =
+    navigation.next === false ? null : flatDirectories[currentIndex + 1]
 
   if (!prev && !next) return null
 

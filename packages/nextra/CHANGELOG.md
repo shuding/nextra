@@ -1,5 +1,25 @@
 # nextra
 
+## 2.0.0-beta.26
+
+### Patch Changes
+
+- b365bb0: fix TypeError: Cannot read properties of undefined (reading 'data')
+- a0e5847: Rename some docs theme configurations
+
+## 2.0.0-beta.25
+
+### Patch Changes
+
+- e4cfb83: `addPage` no longer need accept `frontMatter`
+- e4cfb83: define page title in sidebar from `frontMatter.title` if page is not specified in `_meta.json`
+- c3e6227: add `overflow-x-scroll` for tables
+- 93d028b: use `title` package in nextra to determine sidebar title based on pagename
+- ff8967c: add `Toggle Word Wrap` button for code-blocks (only for mobile)
+- ff8967c: fix missing `Copy Code` button in code-blocks without language
+- 256154a: use "next/future/image" if `"experimental.images.allowFutureImage": true` is set in next config
+- 256154a: replace images with `<NextImage />` even when url not relative but that starts from `/` (public directory)
+
 ## 2.0.0-beta.24
 
 ### Patch Changes
