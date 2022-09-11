@@ -102,8 +102,8 @@ const config: DocsThemeConfig = {
     },
   },
   feedback: {
-    labels: "feedback",
     content: "Question? Give us feedback →",
+    labels: "feedback",
   },
   footer: {
     text() {
@@ -121,9 +121,6 @@ const config: DocsThemeConfig = {
     },
   },
   gitTimestamp: "Last updated on",
-  project: {
-    link: "https://github.com/vercel/swr",
-  },
   head() {
     const config = useConfig();
     const description =
@@ -195,6 +192,9 @@ const config: DocsThemeConfig = {
   },
   nextThemes: {
     defaultTheme: "dark",
+  },
+  project: {
+    link: "https://github.com/vercel/swr",
   },
   sidebar: {
     defaultMenuCollapsed: true,
