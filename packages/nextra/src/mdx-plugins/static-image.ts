@@ -12,6 +12,7 @@ const getASTNodeImport = (name: string, from: string) => ({
   data: {
     estree: {
       type: 'Program',
+      sourceType: 'module',
       body: [
         {
           type: 'ImportDeclaration',
@@ -27,8 +28,7 @@ const getASTNodeImport = (name: string, from: string) => ({
             raw: `"${from}"`
           }
         }
-      ],
-      sourceType: 'module'
+      ]
     }
   }
 })
@@ -82,7 +82,7 @@ export const remarkStaticImage: Plugin<
             name: 'alt',
             value: node.alt
           },
-          {
+          !url.endsWith('.svg') && {
             type: 'mdxJsxAttribute',
             name: 'placeholder',
             value: 'blur'
