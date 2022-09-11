@@ -17,8 +17,9 @@ import {
   DEFAULT_LOCALE,
   OFFICIAL_THEMES,
   MARKDOWN_EXTENSION_REGEX,
-  CWD,
+  CWD
 } from './constants'
+
 const PAGES_DIR = findPagesDir(CWD).pages
 
 // TODO: create this as a webpack plugin.
@@ -179,7 +180,7 @@ export default MDXContent`.trimStart()
 
   const pageOpts: Omit<PageOpts, 'title'> = {
     filePath: slash(path.relative(CWD, mdxPath)),
-    route: slash(route),
+    route,
     frontMatter,
     pageMap,
     headings,

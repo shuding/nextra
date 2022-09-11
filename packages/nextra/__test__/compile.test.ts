@@ -1,7 +1,8 @@
+import fs from 'node:fs/promises'
+import path from 'node:path'
 import { compileMdx } from '../src/compile'
 import { it, describe, expect } from 'vitest'
-import path from 'path'
-import { promises as fs } from 'fs'
+import { CWD } from '../src/constants'
 
 type Name =
   | 'code-h1.mdx'
@@ -11,13 +12,7 @@ type Name =
   | 'static-h1.mdx'
 
 function loadFixture(name: Name) {
-  const filePath = path.join(
-    process.cwd(),
-    '__test__',
-    'fixture',
-    'headings',
-    name
-  )
+  const filePath = path.join(CWD, '__test__', 'fixture', 'headings', name)
   return fs.readFile(filePath, 'utf8')
 }
 
