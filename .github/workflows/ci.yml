@@ -6,11 +6,12 @@ on:
 
 jobs:
   test:
-    name: Test
+    name: Test (${{matrix.os}})
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [16, 18]
+        os: [ubuntu-latest, windows-latest]
 
     steps:
       - name: Checkout Master
