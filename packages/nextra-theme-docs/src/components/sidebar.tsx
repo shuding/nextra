@@ -226,8 +226,9 @@ function File({
                   className={cn(
                     classes.link,
                     'before:opacity-25 flex gap-2 before:content-["#"]',
-                    activeAnchor[slug]?.isActive &&
-                      'font-semibold !text-gray-900 dark:!text-white'
+                    activeAnchor[slug]?.isActive
+                      ? classes.active
+                      : classes.inactive
                   )}
                   onClick={() => {
                     setMenu(false)
@@ -286,7 +287,7 @@ export function Sidebar({
   includePlaceholder
 }: SideBarProps): ReactElement {
   const config = useConfig()
-  const { menu } = useMenu()
+  const { menu, setMenu } = useMenu()
   const anchors = useMemo(
     () =>
       headings
@@ -296,7 +297,6 @@ export function Sidebar({
     [headings]
   )
   const sidebarRef = useRef<HTMLDivElement>(null)
-  const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (menu) {
@@ -313,85 +313,92 @@ export function Sidebar({
       scrollIntoView(activeElement, {
         block: 'center',
         inline: 'center',
-        scrollMode: 'always',
-        boundary: containerRef.current
+        scrollMode: 'always'
       })
     }
   }, [])
 
-  const hasMenu = !!(config.i18n.length || config.darkMode)
+  const hasMenu = config.i18n.length > 0 || config.darkMode
 
   return (
     <>
       {includePlaceholder && asPopover ? (
         <div className="hidden h-0 w-64 flex-shrink-0 xl:block" />
       ) : null}
+      <div
+        className={cn(
+          '[transition:background-color_1.5s_ease] motion-reduce:transition-none',
+          menu
+            ? 'fixed inset-0 z-10 bg-black/80 dark:bg-black/60'
+            : 'bg-transparent'
+        )}
+        onClick={() => setMenu(false)}
+      />
       <aside
         className={cn(
-          'nextra-sidebar-container nextra-scrollbar',
-          'fixed top-16 z-[15] h-[calc(100vh-4rem)] w-full flex-shrink-0 self-start overflow-y-auto md:sticky md:w-64',
+          'nextra-sidebar-container',
+          'fixed md:top-16 z-[15] w-full flex-shrink-0 self-start',
+          'md:sticky md:w-64 md:transform-none',
+          'pl-[calc(env(safe-area-inset-left)-1.5rem)]',
           asPopover ? 'md:hidden' : 'md:block',
-          '[&::-webkit-scrollbar-track]:mt-[var(--nextra-navbar-height)] md:[&::-webkit-scrollbar-track]:mt-5',
-          {
-            open: menu,
-            '[&::-webkit-scrollbar-track]:mb-[var(--nextra-menu-height)]':
-              hasMenu
-          }
+          menu
+            ? '[transform:translate3d(0,0,0)]'
+            : '[transform:translate3d(0,-100%,0)]'
         )}
-        ref={containerRef}
       >
         <div
-          className="h-full w-full select-none pl-[calc(env(safe-area-inset-left)-1.5rem)] md:h-auto [-webkit-touch-callout:none]"
+          className={cn(
+            'px-4 pb-4 md:pt-4 overflow-y-auto nextra-scrollbar',
+            'h-[calc(100vh-var(--nextra-navbar-height)-var(--nextra-menu-height)-4rem)]',
+            'md:h-[calc(100vh-var(--nextra-navbar-height)-var(--nextra-menu-height))]'
+          )}
           ref={sidebarRef}
         >
-          <div className="min-h-[calc(100%-61px)] p-4">
-            <div
-              className={cn(
-                'sticky top-0 z-[1] block md:hidden -mt-4 mb-4 bg-white pt-4',
-                'dark:bg-dark shadow-[0_2px_14px_6px_#fff] dark:shadow-[0_2px_14px_6px_#111]'
-              )}
-            >
-              {renderComponent(config.search.component, {
-                directories: flatDirectories
-              })}
-            </div>
-            <Menu
-              className="hidden md:flex"
-              // The sidebar menu, shows only the docs directories.
-              directories={docsDirectories}
-              // When the viewport size is larger than `md`, hide the anchors in
-              // the sidebar when `floatTOC` is enabled.
-              anchors={config.toc.float ? [] : anchors}
-            />
-            <Menu
-              className="md:hidden"
-              // The mobile dropdown menu, shows all the directories.
-              directories={fullDirectories}
-              // Always show the anchor links on mobile (`md`).
-              anchors={anchors}
-            />
+          <div
+            className={cn(
+              'sticky md:hidden top-0 py-4 mb-4 z-[1]',
+              'bg-white dark:bg-dark',
+              'shadow-[0_2px_14px_6px_#fff] dark:shadow-[0_2px_14px_6px_#111]',
+              'contrast-more:shadow-none dark:contrast-more:shadow-none'
+            )}
+          >
+            {renderComponent(config.search.component, {
+              directories: flatDirectories
+            })}
           </div>
-
-          {hasMenu && (
-            <div
-              className={cn(
-                'sticky bottom-0 bg-white border-t shadow-[0_-12px_16px_#fff]',
-                'flex gap-2 items-center gap-2',
-                'dark:bg-dark dark:border-neutral-800 dark:shadow-[0_-12px_16px_#111]',
-                'contrast-more:shadow-none contrast-more:dark:shadow-none contrast-more:border-neutral-400',
-                [
-                  'h-[var(--nextra-menu-height)]',
-                  'mx-3' // hide ring on focused sidebar links
-                ]
-              )}
-            >
-              {config.i18n.length > 0 && (
-                <LocaleSwitch options={config.i18n} className="grow" />
-              )}
-              {config.darkMode && <ThemeSwitch lite={config.i18n.length > 0} />}
-            </div>
-          )}
+          <Menu
+            className="hidden md:flex"
+            // The sidebar menu, shows only the docs directories.
+            directories={docsDirectories}
+            // When the viewport size is larger than `md`, hide the anchors in
+            // the sidebar when `floatTOC` is enabled.
+            anchors={config.toc.float ? [] : anchors}
+          />
+          <Menu
+            className="md:hidden"
+            // The mobile dropdown menu, shows all the directories.
+            directories={fullDirectories}
+            // Always show the anchor links on mobile (`md`).
+            anchors={anchors}
+          />
         </div>
+
+        {hasMenu && (
+          <div
+            className={cn(
+              'mx-4 sticky bottom-0 bg-white border-t shadow-[0_-12px_16px_#fff]',
+              'flex gap-2 items-center gap-2',
+              'dark:bg-dark dark:border-neutral-800 dark:shadow-[0_-12px_16px_#111]',
+              'contrast-more:shadow-none contrast-more:dark:shadow-none contrast-more:border-neutral-400',
+              'h-[var(--nextra-menu-height)]'
+            )}
+          >
+            {config.i18n.length > 0 && (
+              <LocaleSwitch options={config.i18n} className="grow" />
+            )}
+            {config.darkMode && <ThemeSwitch lite={config.i18n.length > 0} />}
+          </div>
+        )}
       </aside>
     </>
   )

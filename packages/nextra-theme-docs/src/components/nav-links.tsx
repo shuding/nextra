@@ -4,6 +4,7 @@ import { ArrowRightIcon } from 'nextra/icons'
 import { useConfig } from '../contexts'
 import { Item } from '../utils'
 import { Anchor } from './anchor'
+import { DocsThemeConfig } from '../index'
 
 interface NavLinkProps {
   currentIndex: number
@@ -20,16 +21,11 @@ export const NavLinks = ({
   currentIndex
 }: NavLinkProps): ReactElement | null => {
   const config = useConfig()
-  const navigation: { prev?: boolean; next?: boolean } =
-    typeof config.navigation === 'boolean'
-      ? config.navigation === false
-        ? { prev: false, next: false }
-        : {}
-      : config.navigation
-  const prev =
-    navigation.prev === false ? null : flatDirectories[currentIndex - 1]
-  const next =
-    navigation.next === false ? null : flatDirectories[currentIndex + 1]
+  const nav = config.navigation
+  const navigation: Exclude<DocsThemeConfig['navigation'], boolean> =
+    typeof nav === 'boolean' ? { prev: nav, next: nav } : nav
+  const prev = navigation.prev && flatDirectories[currentIndex - 1]
+  const next = navigation.next && flatDirectories[currentIndex + 1]
 
   if (!prev && !next) return null
 

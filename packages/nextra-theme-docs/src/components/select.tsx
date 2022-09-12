@@ -64,7 +64,7 @@ export function Select({
               ref={container}
               show={open}
               as={Listbox.Options}
-              className="z-20 max-h-64 overflow-auto rounded-md bg-white py-1 text-sm shadow-lg dark:bg-neutral-800"
+              className="border border-black/5 dark:border-white/20 z-20 max-h-64 overflow-auto rounded-md bg-white py-1 text-sm shadow-lg dark:bg-neutral-800"
               leave="transition-opacity"
               leaveFrom="opacity-100"
               leaveTo="opacity-0"

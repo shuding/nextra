@@ -50,10 +50,14 @@ export async function collectFiles(
 
   const promises = files.map(async f => {
     const filePath = path.join(dir, f.name)
-    const { name, locale, ext } = parseFileName(filePath)
+    const isDirectory = f.isDirectory()
+    const { name, locale, ext } = isDirectory
+      ? // directory couldn't have extensions
+        { name: path.basename(filePath), locale: '', ext: '' }
+      : parseFileName(filePath)
     const fileRoute = slash(path.join(route, name.replace(/^index$/, '')))
 
-    if (f.isDirectory()) {
+    if (isDirectory) {
       if (fileRoute === '/api') return
       const { items } = await collectFiles(filePath, fileRoute, fileMap)
       if (!items.length) return

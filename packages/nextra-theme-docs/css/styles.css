@@ -34,23 +34,12 @@ a, summary {
 }
 
 @media (max-width: 767px) {
-  article:before {
-    @apply content-[''] fixed top-0 left-0 right-0 bottom-[-200px] pointer-events-none opacity-0 z-[14] bg-black transition-opacity;
-  }
   .nextra-sidebar-container {
-    @apply opacity-0 top-0 overscroll-contain bg-white pt-16 dark:bg-dark opacity-0 h-screen;
-    height: -webkit-fill-available;
-    height: 100dvh;
-    transform: translate3d(0, -110%, 0);
-    transition: transform .8s cubic-bezier(.52, .16, .04, 1), opacity 0s linear 1s;
+    @apply top-0 bottom-16 pt-16 overscroll-contain bg-white dark:bg-dark;
+    transition: transform .8s cubic-bezier(.52, .16, .04, 1);
     will-change: transform, opacity;
     contain: layout style;
     backface-visibility: hidden;
-    &.open {
-      @apply opacity-100;
-      transform: translate3d(0, 0, 0);
-      transition: transform .8s cubic-bezier(.52, .16, .04, 1);
-    }
   }
   .nextra-banner-container ~ div {
     .nextra-sidebar-container {
@@ -99,10 +88,12 @@ article details > summary {
   }
 }
 
-.nextra-toc > .div,
-.nextra-sidebar-container {
-  mask-image: linear-gradient(to bottom, transparent, #000 20px),
+@media (min-width: 768px) {
+  .nextra-toc > .div,
+  .nextra-sidebar-container {
+    mask-image: linear-gradient(to bottom, transparent, #000 20px),
     linear-gradient(to left, #000 10px, transparent 10px);
+  }
 }
 
 @supports (
