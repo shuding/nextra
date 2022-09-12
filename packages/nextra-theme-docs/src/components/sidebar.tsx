@@ -254,7 +254,7 @@ interface MenuProps {
 
 function Menu({ directories, anchors, className }: MenuProps): ReactElement {
   return (
-    <ul className={cn('overflow-hidden', classes.list, className)}>
+    <ul className={cn(classes.list, className)}>
       {directories.map(item =>
         item.type === 'menu' ||
         (item.children && (item.children.length || !item.withIndexPage)) ? (
@@ -346,7 +346,7 @@ export function Sidebar({
       />
       <aside
         className={cn(
-          'nextra-sidebar-container',
+          'nextra-sidebar-container flex flex-col',
           'md:top-16 md:flex-shrink-0 md:w-64 md:transform-none',
           asPopover ? 'md:hidden' : 'md:sticky md:self-start',
           menu
@@ -357,23 +357,23 @@ export function Sidebar({
       >
         <div
           className={cn(
+            'z-[1]',  // for bottom box shadow
+            'md:hidden p-4',
+            'shadow-[0_2px_14px_6px_#fff] dark:shadow-[0_2px_14px_6px_#111]',
+            'contrast-more:shadow-none dark:contrast-more:shadow-none'
+          )}
+        >
+          {renderComponent(config.search.component, {
+            directories: flatDirectories
+          })}
+        </div>
+        <div
+          className={cn(
             'px-4 pb-4 md:pt-4 overflow-y-auto nextra-scrollbar',
             'grow md:h-[calc(100vh-var(--nextra-navbar-height)-3.75rem)]'
           )}
           ref={sidebarRef}
         >
-          <div
-            className={cn(
-              'sticky md:hidden top-0 py-4 mb-4 z-[1]',
-              'bg-white dark:bg-dark',
-              'shadow-[0_2px_14px_6px_#fff] dark:shadow-[0_2px_14px_6px_#111]',
-              'contrast-more:shadow-none dark:contrast-more:shadow-none'
-            )}
-          >
-            {renderComponent(config.search.component, {
-              directories: flatDirectories
-            })}
-          </div>
           <Menu
             className="hidden md:flex"
             // The sidebar menu, shows only the docs directories.
@@ -394,6 +394,7 @@ export function Sidebar({
         {hasMenu && (
           <div
             className={cn(
+              'z-[1] relative', // for top box shadow
               'mx-4 py-4 border-t shadow-[0_-12px_16px_#fff]',
               'flex gap-2 items-center gap-2',
               'dark:border-neutral-800 dark:shadow-[0_-12px_16px_#111]',
