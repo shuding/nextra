@@ -35,7 +35,7 @@ a, summary {
 
 @media (max-width: 767px) {
   .nextra-sidebar-container {
-    @apply top-0 bottom-16 pt-16 overscroll-contain bg-white dark:bg-dark;
+    @apply fixed w-full top-0 bottom-16 pt-16 z-[15] overscroll-contain bg-white dark:bg-dark;
     transition: transform .8s cubic-bezier(.52, .16, .04, 1);
     will-change: transform, opacity;
     contain: layout style;

@@ -297,6 +297,7 @@ export function Sidebar({
     [headings]
   )
   const sidebarRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (menu) {
@@ -309,14 +310,23 @@ export function Sidebar({
   useEffect(() => {
     const activeElement = sidebarRef.current?.querySelector('li.active')
 
-    if (activeElement) {
-      scrollIntoView(activeElement, {
-        block: 'center',
-        inline: 'center',
-        scrollMode: 'always'
-      })
+    if (activeElement && (window.innerWidth > 767 || menu)) {
+      const scroll = () => {
+        scrollIntoView(activeElement, {
+          block: 'center',
+          inline: 'center',
+          scrollMode: 'always',
+          boundary: containerRef.current
+        })
+      }
+      if (menu) {
+        // needs for mobile since menu has transition transform
+        setTimeout(scroll, 300)
+      } else {
+        scroll()
+      }
     }
-  }, [])
+  }, [menu])
 
   const hasMenu = config.i18n.length > 0 || config.darkMode
 
@@ -337,20 +347,18 @@ export function Sidebar({
       <aside
         className={cn(
           'nextra-sidebar-container',
-          'fixed md:top-16 z-[15] w-full flex-shrink-0 self-start',
-          'md:sticky md:w-64 md:transform-none',
-          'pl-[calc(env(safe-area-inset-left)-1.5rem)]',
-          asPopover ? 'md:hidden' : 'md:block',
+          'md:top-16 md:flex-shrink-0 md:w-64 md:transform-none',
+          asPopover ? 'md:hidden' : 'md:sticky md:self-start',
           menu
             ? '[transform:translate3d(0,0,0)]'
             : '[transform:translate3d(0,-100%,0)]'
         )}
+        ref={containerRef}
       >
         <div
           className={cn(
             'px-4 pb-4 md:pt-4 overflow-y-auto nextra-scrollbar',
-            'h-[calc(100vh-var(--nextra-navbar-height)-var(--nextra-menu-height)-4rem)]',
-            'md:h-[calc(100vh-var(--nextra-navbar-height)-var(--nextra-menu-height))]'
+            'grow md:h-[calc(100vh-var(--nextra-navbar-height)-3.75rem)]'
           )}
           ref={sidebarRef}
         >
@@ -386,11 +394,10 @@ export function Sidebar({
         {hasMenu && (
           <div
             className={cn(
-              'mx-4 sticky bottom-0 bg-white border-t shadow-[0_-12px_16px_#fff]',
+              'mx-4 py-4 border-t shadow-[0_-12px_16px_#fff]',
               'flex gap-2 items-center gap-2',
-              'dark:bg-dark dark:border-neutral-800 dark:shadow-[0_-12px_16px_#111]',
-              'contrast-more:shadow-none contrast-more:dark:shadow-none contrast-more:border-neutral-400',
-              'h-[var(--nextra-menu-height)]'
+              'dark:border-neutral-800 dark:shadow-[0_-12px_16px_#111]',
+              'contrast-more:shadow-none contrast-more:dark:shadow-none contrast-more:border-neutral-400'
             )}
           >
             {config.i18n.length > 0 && (
