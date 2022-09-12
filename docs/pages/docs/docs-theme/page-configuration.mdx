@@ -1,3 +1,75 @@
 # Page Configuration
 
-(todo)
+In Nextra, a page can be configured via the [`_meta.json`](/docs/guide/organize-files) file. With the docs theme, some extra options are available to customize the structure further.
+
+## Routes
+
+The title and order of a route in the sidebar should be configured in the `_meta.json` file:
+
+```json filename="_meta.json"
+{
+  "index": "My Homepage",
+  "contact": "Contact Us",
+  "about": "About Us"
+}
+```
+
+If some routes are not listed in the `_meta.json` file, they will be appended to the end of the sidebar and sorted alphabetically.
+
+## Folders
+
+## External Links
+
+### Open in New Window
+
+## Hidden
+
+## Menus
+
+## Theme
+
+## Layouts
+
+## Typesettings
+
+## Separators
+
+You can use a pseudo item with `"type": "separator"` to create a separator line between items in the sidebar:
+
+```json filename="_meta.json"
+{
+  "index": "My Homepage",
+  "---": {
+    "type": "separator"
+  },
+  "contact": "Contact Us"
+}
+```
+
+### Separator with Title
+
+Together with the [`sidebar.titleComponent`](/docs/docs-theme/theme-configuration#sidebar) theme option, you can render the separator with a title:
+
+```json filename="_meta.json"
+{
+  "index": "My Homepage",
+  "---": {
+    "type": "separator",
+    "title": "My Title"
+  },
+  "contact": "Contact Us"
+}
+```
+
+```jsx filename="theme.config.jsx"
+export default {
+  sidebar: {
+    titleComponent: ({ title, type }) => {
+      if (type === 'separator') {
+        return <span style={{ opacity: 0.5 }}>{title}</span>
+      }
+      return title // normal items
+    }
+  }
+}
+```

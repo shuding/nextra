@@ -149,19 +149,35 @@ export default {
   head: (
     <>
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta name="description" content="Nextra: the next docs builder" />
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content="@shuding_" />
-      <meta property="og:title" content="Nextra: the next docs builder" />
-      <meta property="og:description" content="Nextra: the next docs builder" />
-      <meta name="msapplication-TileColor" content="#ffffff" />
-      <meta name="theme-color" content="#ffffff" />
+      <meta property="og:title" content="Nextra" />
+      <meta property="og:description" content="The next site builder" />
     </>
-  )
+  ),
 }
 ```
 
-### Render Open Graph tags
+### Dynamic tags based on page
+
+You can also use a _function component_ as `head` to dynamically generate the head tags based on the current page’s front matter. For example:
+
+```jsx
+import { useRouter } from 'next/router'
+import { useConfig } from 'nextra-theme-docs'
+
+export default {
+  head: () => {
+    const { asPath } = useRouter()
+    const { frontMatter } = useConfig()
+    return <>
+      <meta property="og:url" content={`https://my-app.com${asPath}`} />
+      <meta property="og:title" content={frontMatter.title || 'Nextra'} />
+      <meta property="og:description" content={frontMatter.description || 'The next site builder'} />
+    </>
+  },
+}
+```
+
+You can refer to the [`useConfig`](/docs/docs-theme/api/use-config) API section for more information about the `useConfig` hook and the `frontMatter` object.
 
 ## Sidebar
 
@@ -352,4 +368,8 @@ You can adjust the theme color of the website.
 
 ## Favicon Glyph (Experimental)
 
-This isn’t supported by all browsers, but it’s a nice way to customize the favicon of the website.
+This isn’t supported by all browsers, but it’s a nice way to customize the favicon of the website simply by using an emoji or character.
+
+<OptionTable options={[
+  ['faviconGlyph', `string`, 'The glyph to use as the favicon.'],
+]}/>

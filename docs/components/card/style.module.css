@@ -1,8 +1,9 @@
 .cards {
   display: grid;
+  --rows: 3;
   grid-template-columns: repeat(
     auto-fill,
-    minmax(max(250px, calc((100% - 1rem * 2) / 3)), 1fr)
+    minmax(max(250px, calc((100% - 1rem * 2) / var(--rows))), 1fr)
   );
 }
 
