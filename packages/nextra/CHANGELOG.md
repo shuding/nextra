@@ -1,5 +1,13 @@
 # nextra
 
+## 2.0.0-beta.27
+
+### Patch Changes
+
+- d7e7f5b: do not add `placeholder="blur"` on `.svg` static images
+- a9523c9: fix nextra on webcontainers
+- 21009c7: better focus ui, use ring color as theme hue color
+
 ## 2.0.0-beta.26
 
 ### Patch Changes
