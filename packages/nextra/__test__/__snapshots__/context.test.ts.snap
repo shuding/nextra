@@ -7,6 +7,7 @@ exports[`context > getAllPages() > should work 1`] = `
     "meta": {
       "theme": {
         "timestamp": false,
+        "typesetting": "article",
       },
       "type": "page",
     },
@@ -17,8 +18,8 @@ exports[`context > getAllPages() > should work 1`] = `
     "kind": "MdxPage",
     "meta": {
       "theme": {
-        "layout": "full",
         "timestamp": false,
+        "typesetting": "article",
       },
       "type": "page",
     },

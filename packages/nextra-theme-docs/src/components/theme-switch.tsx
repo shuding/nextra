@@ -1,19 +1,22 @@
-import React, { memo, ReactElement } from 'react'
+import React, { ReactElement } from 'react'
 import { useTheme } from 'next-themes'
 import { Select } from './select'
 import { SunIcon, MoonIcon } from 'nextra/icons'
 import { useMounted } from 'nextra/hooks'
-import { useConfig } from '../contexts'
 
-export function ThemeSwitch({ lite = true }): ReactElement {
+type ThemeSwitchProps = {
+  lite?: boolean
+}
+
+export function ThemeSwitch({ lite }: ThemeSwitchProps): ReactElement {
   const { theme, setTheme, systemTheme } = useTheme()
   const renderedTheme = theme === 'system' ? systemTheme : theme
-  const config = useConfig()
   const mounted = useMounted()
-
+  const IconToUse = mounted && renderedTheme === 'dark' ? MoonIcon : SunIcon
   return (
+  <div className="relative">
     <Select
-      position={config.i18n.length > 0 ? (lite ? 'right' : 'left') : undefined}
+      title="Change theme"
       onChange={option => {
         setTheme(option.key)
       }}
@@ -21,11 +24,7 @@ export function ThemeSwitch({ lite = true }): ReactElement {
         key: theme || '',
         name: (
           <div className="flex items-center gap-2 capitalize">
-            {mounted && renderedTheme === 'dark' ? (
-              <MoonIcon className="h-3 w-3 [&>path]:fill-current" />
-            ) : (
-              <SunIcon className="h-3 w-3 [&>path]:fill-current" />
-            )}
+            <IconToUse />
             <span className={lite ? 'md:hidden' : ''}>
               {mounted ? theme : 'light'}
             </span>
@@ -38,7 +37,6 @@ export function ThemeSwitch({ lite = true }): ReactElement {
         { key: 'system', name: 'System' }
       ]}
     />
+  </div>
   )
 }
-
-export default memo(ThemeSwitch)

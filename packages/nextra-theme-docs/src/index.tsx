@@ -1,5 +1,5 @@
 import type { PageMapItem, PageOpts } from 'nextra'
-import type { FC, ReactElement, ReactNode } from 'react'
+import type { ReactElement, ReactNode } from 'react'
 
 import React, { useEffect, useMemo, useRef } from 'react'
 import { useRouter } from 'next/router'
@@ -19,12 +19,7 @@ import {
   Banner
 } from './components'
 import { getComponents } from './mdx-components'
-import {
-  ActiveAnchorProvider,
-  ConfigProvider,
-  useConfig,
-  useMenu
-} from './contexts'
+import { ActiveAnchorProvider, ConfigProvider, useConfig } from './contexts'
 import { DEFAULT_LOCALE, IS_BROWSER } from './constants'
 import { getFSRoute, normalizePages, renderComponent } from './utils'
 import { DocsThemeConfig, PageTheme, RecursivePartial } from './types'
@@ -112,7 +107,7 @@ const Body = ({
 
   if (themeContext.layout === 'full') {
     return (
-      <article className="w-full justify-center overflow-x-hidden pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
+      <article className="min-h-[calc(100vh-4rem)] w-full overflow-x-hidden pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
         {body}
       </article>
     )
@@ -121,7 +116,7 @@ const Body = ({
   return (
     <article
       className={cn(
-        'flex w-full min-w-0 max-w-full justify-center pb-8 pr-[calc(env(safe-area-inset-right)-1.5rem)]',
+        'min-h-[calc(100vh-4rem)] w-full flex min-w-0 max-w-full justify-center pb-8 pr-[calc(env(safe-area-inset-right)-1.5rem)]',
         themeContext.typesetting === 'article' &&
           'nextra-body-typesetting-article'
       )}
@@ -145,9 +140,7 @@ const InnerLayout = ({
   timestamp,
   children
 }: PageOpts & { children: ReactNode }): ReactElement => {
-  const { locale = DEFAULT_LOCALE } = useRouter()
   const config = useConfig()
-  const { menu } = useMenu()
   const {
     activeType,
     activeIndex,
@@ -160,21 +153,11 @@ const InnerLayout = ({
     directories
   } = useDirectoryInfo(pageMap)
 
-  const localeConfig = config.i18n.find(l => l.locale === locale)
-  const isRTL = localeConfig
-    ? localeConfig.direction === 'rtl'
-    : config.direction === 'rtl'
-  const direction = isRTL ? 'rtl' : 'ltr'
-
-  useEffect(() => {
-    if (typeof document === 'undefined') return
-    // needs for `ltr:/rtl:` modifiers inside `styles.css` file
-    document.documentElement.setAttribute('dir', direction)
-  }, [])
-
   const themeContext = { ...activeThemeContext, ...frontMatter }
-  const hideSidebar = !themeContext.sidebar || themeContext.layout === 'raw'
-  const asPopover = activeType === 'page' || hideSidebar
+  const hideSidebar =
+    !themeContext.sidebar ||
+    themeContext.layout === 'raw' ||
+    activeType === 'page'
 
   const tocClassName =
     'nextra-toc order-last hidden w-64 flex-shrink-0 xl:block'
@@ -194,73 +177,79 @@ const InnerLayout = ({
       </div>
     )
 
+  const { locale = DEFAULT_LOCALE } = useRouter()
+  const localeConfig = config.i18n.find(l => l.locale === locale)
+  const isRTL = localeConfig
+    ? localeConfig.direction === 'rtl'
+    : config.direction === 'rtl'
+
+  const direction = isRTL ? 'rtl' : 'ltr'
+
   return (
     // This makes sure that selectors like `[dir=ltr] .nextra-container` work
     // before hydration as Tailwind expects the `dir` attribute to exist on the
     // `html` element.
-    <div dir={direction}>
-      <div
-        className={cn('nextra-container main-container flex flex-col', {
-          'menu-active': menu
+    <>
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `document.documentElement.setAttribute('dir','${direction}')`
+        }}
+      />
+      <Head />
+      <Banner />
+      {themeContext.navbar &&
+        renderComponent(config.navbar, {
+          flatDirectories,
+          items: topLevelNavbarItems
         })}
+      <div
+        className={cn(
+          'mx-auto flex',
+          themeContext.layout !== 'raw' && 'max-w-[90rem]'
+        )}
       >
-        <Head />
-        <Banner />
-        {themeContext.navbar &&
-          renderComponent(config.navbar, {
-            flatDirectories,
-            items: topLevelNavbarItems
-          })}
-        <div
-          className={cn(
-            'mx-auto flex w-full flex-1 items-stretch',
-            themeContext.layout !== 'raw' && 'max-w-[90rem]'
-          )}
-        >
-          <ActiveAnchorProvider>
-            <Sidebar
-              docsDirectories={docsDirectories}
-              flatDirectories={flatDirectories}
-              fullDirectories={directories}
-              headings={headings}
-              asPopover={asPopover}
-              includePlaceholder={themeContext.layout === 'default'}
-            />
-            {tocEl}
-            <SkipNavContent />
-            <Body
-              themeContext={themeContext}
-              breadcrumb={
-                activeType !== 'page' && themeContext.breadcrumb ? (
-                  <Breadcrumb activePath={activePath} />
-                ) : null
-              }
-              timestamp={timestamp}
-              navigation={
-                activeType !== 'page' && themeContext.pagination ? (
-                  <NavLinks
-                    flatDirectories={flatDocsDirectories}
-                    currentIndex={activeIndex}
-                  />
-                ) : null
-              }
+        <ActiveAnchorProvider>
+          <Sidebar
+            docsDirectories={docsDirectories}
+            flatDirectories={flatDirectories}
+            fullDirectories={directories}
+            headings={headings}
+            asPopover={hideSidebar}
+            includePlaceholder={themeContext.layout === 'default'}
+          />
+          {tocEl}
+          <SkipNavContent />
+          <Body
+            themeContext={themeContext}
+            breadcrumb={
+              activeType !== 'page' && themeContext.breadcrumb ? (
+                <Breadcrumb activePath={activePath} />
+              ) : null
+            }
+            timestamp={timestamp}
+            navigation={
+              activeType !== 'page' && themeContext.pagination ? (
+                <NavLinks
+                  flatDirectories={flatDocsDirectories}
+                  currentIndex={activeIndex}
+                />
+              ) : null
+            }
+          >
+            <MDXProvider
+              components={getComponents({
+                isRawLayout: themeContext.layout === 'raw',
+                components: config.components
+              })}
             >
-              <MDXProvider
-                components={getComponents({
-                  isRawLayout: themeContext.layout === 'raw',
-                  components: config.components
-                })}
-              >
-                {children}
-              </MDXProvider>
-            </Body>
-          </ActiveAnchorProvider>
-        </div>
-        {themeContext.footer
-          ? renderComponent(config.footer.component, { menu: asPopover })
-          : null}
+              {children}
+            </MDXProvider>
+          </Body>
+        </ActiveAnchorProvider>
       </div>
-    </div>
+      {themeContext.footer &&
+        renderComponent(config.footer.component, { menu: hideSidebar })}
+    </>
   )
 }
 

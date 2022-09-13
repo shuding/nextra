@@ -6,14 +6,21 @@ import { GlobeIcon } from 'nextra/icons'
 
 interface LocaleSwitchProps {
   options: NonNullable<DocsThemeConfig['i18n']>
+  lite?: boolean
+  className?: string
 }
 
-export function LocaleSwitch({ options }: LocaleSwitchProps): ReactElement {
+export function LocaleSwitch({
+  options,
+  lite,
+  className
+}: LocaleSwitchProps): ReactElement {
   const { locale, asPath } = useRouter()
   const selected = options.find(l => locale === l.locale)
   return (
     <Select
-      position="left"
+      title="Change language"
+      className={className}
       onChange={option => {
         const date = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000)
         document.cookie = `NEXT_LOCALE=${
@@ -26,7 +33,7 @@ export function LocaleSwitch({ options }: LocaleSwitchProps): ReactElement {
         name: (
           <div className="flex items-center gap-2">
             <GlobeIcon />
-            <span>{selected?.text}</span>
+            <span className={lite ? 'hidden' : ''}>{selected?.text}</span>
           </div>
         )
       }}

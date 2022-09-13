@@ -42,8 +42,9 @@
     "format": "prettier --ignore-path ../../.gitignore --write --list-different ."
   },
   "dependencies": {
-    "@headlessui/react": "^1.6.5",
+    "@headlessui/react": "^1.6.6",
     "@mdx-js/react": "^2.1.2",
+    "@popperjs/core": "^2.11.6",
     "@reach/skip-nav": "^0.17.0",
     "clsx": "^1.2.1",
     "flexsearch": "^0.7.21",

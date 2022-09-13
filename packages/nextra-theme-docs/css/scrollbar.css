@@ -7,7 +7,7 @@
     @apply w-1.5 h-1.5;
   }
   &::-webkit-scrollbar-track {
-    @apply bg-transparent my-5;
+    @apply bg-transparent;
   }
   &::-webkit-scrollbar-thumb {
     @apply rounded-[20px];

@@ -13,131 +13,33 @@ html {
   font-feature-settings: 'rlig' 1, 'calt' 1, 'ss01' 1, 'ss06' 1;
   -webkit-tap-highlight-color: transparent;
 }
+
 body {
   @apply w-full bg-white dark:bg-dark dark:text-gray-100;
 }
 
-.nextra-container {
-  /* Navbar */
-  .nextra-nav-container {
-    a:focus,
-    summary:focus {
-      @apply select-none outline-none;
-    }
-    a:focus-visible,
-    summary:focus-visible {
-      @apply select-none outline-none ring ring-primary-200;
-    }
-
-    .nextra-nav-container-blur {
-      z-index: -1;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02),
-        0 -1px 0 rgba(0, 0, 0, 0.06) inset;
-      .dark & {
-        box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
-      }
-    }
-
-    .nextra-nav-link {
-      @apply text-sm;
-    }
-    .nextra-menu-icon {
-      @apply select-none rounded outline-none active:bg-gray-400/20;
-    }
-  }
-
-  /* Sidebar */
-  .nextra-sidebar {
-    -webkit-touch-callout: none;
-    ul.nextra-sidebar-list {
-      overflow: hidden;
-      a,
-      button {
-        &:focus-visible {
-          @apply ring ring-primary-200;
-        }
-      }
-      li.active > a {
-        &,
-        &:hover {
-          @apply bg-primary-50 font-bold text-primary-500;
-          @apply dark:bg-primary-500/10 dark:text-primary-500;
-        }
-      }
-      @media (prefers-contrast: more) {
-        li.active > a {
-          @apply border border-primary-500 dark:border-primary-500;
-        }
-      }
-      button,
-      summary,
-      li a {
-        @apply mt-1 block w-full select-none rounded px-2 py-1.5 text-sm text-gray-500 outline-none transition-[background-color];
-        @apply dark:text-neutral-500;
-        -webkit-tap-highlight-color: transparent;
-        -webkit-touch-callout: none;
-        &:hover {
-          @apply bg-gray-100 text-gray-900;
-          @apply dark:bg-primary-100/5 dark:text-gray-50;
-        }
-        @media (prefers-contrast: more) {
-          & {
-            @apply border border-transparent text-gray-900;
-            @apply hover:border-gray-900;
-          }
-          .dark & {
-            @apply border border-transparent text-gray-50;
-            @apply hover:border-gray-50;
-          }
-        }
-      }
-      ul {
-        @apply relative dark:border-neutral-800;
-        @apply ltr:md:border-l ltr:pl-3 ltr:ml-1 rtl:md:border-r rtl:pr-3 rtl:mr-1;
-      }
-    }
+a,
+summary,
+button,
+input,
+[tabindex]:not([tabindex='-1']) {
+  @apply outline-none;
+  &:focus-visible {
+    @apply ring-2 ring-primary-200 ring-offset-1 ring-offset-primary-300;
   }
 }
 
-@media (max-width: 767px) {
-  article:before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: -200px;
-    pointer-events: none;
-    transition: opacity 1.5s ease;
-    opacity: 0;
-    z-index: 14;
-    background-color: black;
-    .nextra-container.menu-active & {
-      opacity: 0.8;
-    }
-  }
-  .nextra-sidebar-container {
-    @apply top-0 overscroll-contain bg-white pt-16 dark:bg-dark;
-    height: 100vh;
-    height: -webkit-fill-available;
-    height: 100dvh;
+a, summary {
+  @apply rounded;
+}
 
-    opacity: 0;
-    transform: translate3d(0, -110%, 0);
-    transition: transform 0.8s cubic-bezier(0.52, 0.16, 0.04, 1),
-      opacity 0s linear 1s;
+@media (max-width: 767px) {
+  .nextra-sidebar-container {
+    @apply fixed pt-[calc(var(--nextra-navbar-height))] top-0 w-full bottom-24 z-[15] overscroll-contain bg-white dark:bg-dark;
+    transition: transform .8s cubic-bezier(.52, .16, .04, 1);
     will-change: transform, opacity;
     contain: layout style;
     backface-visibility: hidden;
-
-    &.open {
-      opacity: 1;
-      transform: translate3d(0, 0, 0);
-      transition: transform 0.8s cubic-bezier(0.52, 0.16, 0.04, 1);
-    }
-    body.resizing & {
-      transition: none;
-    }
   }
   .nextra-banner-container ~ div {
     .nextra-sidebar-container {
@@ -147,130 +49,80 @@ body {
       @apply top-10 md:top-0;
     }
   }
-  .nextra-banner-hidden
-    .nextra-banner-container
-    ~ div
-    .nextra-sidebar-container {
-    @apply pt-16;
+  .nextra-banner-hidden {
+    .nextra-banner-container ~ div .nextra-sidebar-container {
+      @apply pt-16;
+    }
+    .nextra-nav-container {
+      @apply !top-0;
+    }
   }
-  .nextra-banner-hidden div.nextra-nav-container {
-    @apply top-0;
+  .nextra-search .excerpt {
+    @apply overflow-hidden text-ellipsis;
+    display: -webkit-box;
+    line-clamp: 1;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
   }
 }
 
 @media (prefers-reduced-motion: reduce) and (max-width: 767px) {
-  article:before {
-    transition: none;
-  }
-  .nextra-sidebar-container {
-    transition: none;
-    &.open {
-      transition: none;
-    }
-  }
-}
-
-@media (prefers-contrast: more) {
-  .nextra-nav-container nav .nextra-nav-link {
-    @apply text-gray-700 dark:text-gray-100;
-    &.active {
-      @apply font-bold;
-    }
-  }
-  article pre {
-    @apply border border-primary-900/20 contrast-150 dark:border-primary-100/40;
-  }
-  .nextra-callout {
-    @apply border-current dark:!border-current;
-  }
-  .nextra-search ul li .excerpt {
-    @apply dark:text-gray-50;
-  }
-  .nextra-navigation-links {
-    border-color: #999 !important;
-  }
-  .nextra-nav-container-blur {
-    box-shadow: 0 0 0 1px black;
-    .dark & {
-      box-shadow: 0 0 0 1px white;
-    }
+  article:before,
+  .nextra-sidebar-container,
+  .nextra-sidebar-container.open,
+  body.resizing .nextra-sidebar-container {
+    @apply transition-none;
   }
 }
 
 /* Content Typography */
-article {
-  min-height: calc(100vh - 64px);
-  details > summary {
-    &::-webkit-details-marker {
-      @apply hidden;
-    }
-    &::before {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'%3E%3Cpath fill-rule='evenodd' d='M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z' clip-rule='evenodd' /%3E%3C/svg%3E");
-      height: 1.2em;
-      width: 1.2em;
-      vertical-align: -4px;
-    }
+article details > summary {
+  &::-webkit-details-marker {
+    @apply hidden;
+  }
+  &::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'%3E%3Cpath fill-rule='evenodd' d='M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z' clip-rule='evenodd' /%3E%3C/svg%3E");
+    height: 1.2em;
+    width: 1.2em;
+    vertical-align: -4px;
   }
 }
 
-.nextra-toc > .div,
-.nextra-sidebar-container {
-  mask-image: linear-gradient(to bottom, transparent, #000 20px),
+@media (min-width: 768px) {
+  .nextra-toc > .div,
+  .nextra-sidebar-container {
+    mask-image: linear-gradient(to bottom, transparent, #000 20px),
     linear-gradient(to left, #000 10px, transparent 10px);
+  }
 }
 
 @supports (
   (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))
 ) {
   .nextra-search ul {
-    @apply backdrop-blur-lg bg-opacity-70 dark:bg-opacity-80;
+    @apply backdrop-blur-lg bg-white/70 dark:bg-dark/80;
   }
   .nextra-nav-container-blur {
-    @apply backdrop-blur-md bg-opacity-[.85] dark:bg-opacity-80;
+    @apply backdrop-blur-md bg-white/[.85] dark:!bg-dark/80;
   }
 }
 
-@media screen and (max-width: 767px) {
-  .nextra-search .excerpt {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    line-clamp: 1;
-    -webkit-box-orient: vertical;
+input[type='search'] {
+  &::-webkit-search-decoration,
+  &::-webkit-search-cancel-button,
+  &::-webkit-search-results-button,
+  &::-webkit-search-results-decoration {
+    -webkit-appearance: none;
   }
-}
-
-input[type='search']::-webkit-search-decoration,
-input[type='search']::-webkit-search-cancel-button,
-input[type='search']::-webkit-search-results-button,
-input[type='search']::-webkit-search-results-decoration {
-  -webkit-appearance: none;
-}
-
-/* Locale */
-.locale-switch summary::-webkit-details-marker,
-.locale-switch summary::marker {
-  content: '';
-  display: none;
-}
-.locale-switch[open] summary:before {
-  content: '';
-  @apply fixed inset-0 z-10 block cursor-default bg-transparent;
-}
-.locale-switch .locale-dropdown {
-  position: absolute;
-  z-index: 11;
 }
 
 .contains-task-list {
   @apply ml-0 list-none;
-}
-
-.contains-task-list input[type='checkbox'] {
-  @apply mr-1;
+  input[type='checkbox'] {
+    @apply mr-1;
+  }
 }
 
 .nextra-banner-hidden .nextra-banner-container {
-  display: none;
+  @apply hidden;
 }

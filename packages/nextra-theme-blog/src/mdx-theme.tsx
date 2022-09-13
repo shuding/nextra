@@ -82,8 +82,10 @@ const components = {
   code: Code
 }
 
-const MDXTheme = ({ children }: { children: ReactNode }): ReactElement => {
+export const MDXTheme = ({
+  children
+}: {
+  children: ReactNode
+}): ReactElement => {
   return <MDXProvider components={components}>{children}</MDXProvider>
 }
-
-export default MDXTheme

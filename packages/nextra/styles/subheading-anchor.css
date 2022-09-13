@@ -6,6 +6,7 @@
   }
 
   & + a:after {
+    @apply absolute /* for not including # in focus ring border */;
     @apply content-['#'] text-gray-300 px-2 opacity-0 transition-opacity;
     @apply dark:text-neutral-700;
   }

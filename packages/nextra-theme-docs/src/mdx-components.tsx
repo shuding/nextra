@@ -181,8 +181,8 @@ const Details = ({
     <details
       className="my-4 rounded border border-gray-200 bg-white p-2 shadow-sm dark:border-neutral-800 dark:bg-neutral-900 first:mt-0 last:mb-0"
       {...props}
+      open={delayedOpenState}
       {...(openState && { 'data-expanded': true })}
-      {...(delayedOpenState && { open: true })}
     >
       <DetailsProvider value={setOpen}>{summary}</DetailsProvider>
       <Collapse open={openState}>{restChildren}</Collapse>
@@ -195,7 +195,7 @@ const Summary = (props: ComponentProps<'summary'>): ReactElement => {
   return (
     <summary
       className={cn(
-        'list-none cursor-pointer rounded p-1 outline-none transition-colors hover:bg-gray-100 dark:hover:bg-neutral-800',
+        'list-none cursor-pointer p-1 transition-colors hover:bg-gray-100 dark:hover:bg-neutral-800',
         "before:mr-1 before:content-[''] before:inline-block before:transition-transform dark:before:invert",
         '[[data-expanded]>&]:before:rotate-90 rtl:before:rotate-180'
       )}
@@ -255,7 +255,7 @@ export const getComponents = ({
     a: props => (
       <A
         {...props}
-        className="ring-primary-500/30 focus:outline-none focus-visible:ring text-primary-500 underline decoration-from-font [text-underline-position:under]"
+        className="text-primary-500 underline decoration-from-font [text-underline-position:under]"
       />
     ),
     table: (props: ComponentProps<'table'>) => (

@@ -113,7 +113,7 @@ const config: DocsThemeConfig = {
         <a
           rel="noopener"
           target="_blank"
-          className="inline-flex items-center font-semibold gap-2"
+          className="flex items-center font-semibold gap-2"
           href={FOOTER_LINK[locale]}
         >
           {FOOTER_LINK_TEXT[locale]}

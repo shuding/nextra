@@ -15,7 +15,7 @@ export function NotFoundPage(): ReactElement | null {
   }
 
   return (
-    <p>
+    <p className="text-center">
       <Anchor
         href={getGitIssueUrl({
           repository: config.docsRepositoryBase,
@@ -23,7 +23,7 @@ export function NotFoundPage(): ReactElement | null {
           labels
         })}
         newWindow
-        className="ring-primary-500/30 focus:outline-none focus-visible:ring text-primary-500 underline decoration-from-font [text-underline-position:under]"
+        className="text-primary-500 underline decoration-from-font [text-underline-position:under]"
       >
         {renderComponent(content)}
       </Anchor>

@@ -22,22 +22,46 @@ import {
   renderComponent
 } from '../utils'
 import { LocaleSwitch } from './locale-switch'
-import ThemeSwitch from './theme-switch'
+import { ThemeSwitch } from './theme-switch'
 import { ArrowRightIcon } from 'nextra/icons'
 import { Collapse } from './collapse'
 import { Anchor } from './anchor'
 import { DEFAULT_LOCALE } from '../constants'
 
-const TreeState: Record<string, boolean> = {}
-
-interface FolderProps {
-  item: PageItem | MenuItem | Item
-  anchors: string[]
-}
+const TreeState: Record<string, boolean> = Object.create(null)
 
 const Folder = memo(FolderImpl)
 
-function FolderImpl({ item, anchors }: FolderProps) {
+const classes = {
+  link: cn(
+    'flex rounded px-2 py-1.5 text-sm transition-colors [word-break:break-word]',
+    '[-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] contrast-more:border'
+  ),
+  inactive: cn(
+    'hover:bg-gray-100 text-gray-500 hover:text-gray-900',
+    'dark:hover:bg-primary-100/5 dark:text-neutral-500 dark:hover:text-gray-50',
+    'contrast-more:text-gray-900 contrast-more:dark:text-gray-50',
+    'contrast-more:border-transparent contrast-more:hover:border-gray-900 contrast-more:dark:hover:border-gray-50'
+  ),
+  active: cn(
+    'bg-primary-50 text-primary-500 dark:bg-primary-500/10 font-bold',
+    'contrast-more:border-primary-500 contrast-more:dark:border-primary-500'
+  ),
+  list: 'flex gap-1 flex-col',
+  border: cn(
+    'relative before:absolute before:top-1.5 before:bottom-1.5',
+    'before:content-[""] before:w-px before:bg-gray-200 dark:before:bg-neutral-800',
+    'ltr:pl-3 rtl:pr-3 ltr:before:left-0 rtl:before:right-0'
+  )
+}
+
+function FolderImpl({
+  item,
+  anchors
+}: {
+  item: PageItem | MenuItem | Item
+  anchors: string[]
+}): ReactElement {
   const { asPath, locale = DEFAULT_LOCALE } = useRouter()
   const routeOriginal = getFSRoute(asPath, locale)
   const [route] = routeOriginal.split('#')
@@ -80,7 +104,11 @@ function FolderImpl({ item, anchors }: FolderProps) {
     <li className={cn({ open, active })}>
       <Anchor
         href={(item as Item).withIndexPage ? item.route : ''}
-        className="cursor-pointer !flex gap-2 items-center justify-between [word-break:break-word]"
+        className={cn(
+          'gap-2 items-center justify-between',
+          classes.link,
+          active ? classes.active : classes.inactive
+        )}
         onClick={e => {
           const clickedToggleIcon = ['svg', 'path'].includes(
             (e.target as HTMLElement).tagName.toLowerCase()
@@ -119,7 +147,7 @@ function FolderImpl({ item, anchors }: FolderProps) {
       <Collapse className="ltr:pr-0 rtl:pl-0" open={open}>
         {Array.isArray(item.children) ? (
           <Menu
-            submenu
+            className={cn(classes.border, 'ltr:ml-1 rtl:mr-1')}
             directories={item.children}
             base={item.route}
             anchors={anchors}
@@ -130,30 +158,22 @@ function FolderImpl({ item, anchors }: FolderProps) {
   )
 }
 
-interface SeparatorProps {
-  title?: string
-  topLevel: boolean
-}
-
-function Separator({ title, topLevel }: SeparatorProps): ReactElement {
-  // since title can be empty string ''
-  const hasTitle = title !== undefined
+function Separator({ title }: { title: string }): ReactElement {
   const config = useConfig()
   return (
     <li
       className={cn(
-        topLevel ? 'first:mt-1' : 'first:mt-2',
-        hasTitle ? 'mt-5 mb-2' : 'my-4',
-        'break-words'
+        '[word-break:break-word]',
+        title
+          ? 'first:mt-0 mt-5 mb-2 px-2 py-1.5 text-sm font-semibold text-gray-900 dark:text-gray-100'
+          : 'my-4'
       )}
     >
-      {hasTitle ? (
-        <div className="mx-2 py-1.5 text-sm font-semibold text-gray-900 dark:text-gray-100">
-          {renderComponent(config.sidebar.titleComponent, {
-            title,
-            type: 'separator'
-          })}
-        </div>
+      {title ? (
+        renderComponent(config.sidebar.titleComponent, {
+          title,
+          type: 'separator'
+        })
       ) : (
         <hr className="mx-2 border-t border-gray-200 dark:border-primary-100/10" />
       )}
@@ -161,13 +181,13 @@ function Separator({ title, topLevel }: SeparatorProps): ReactElement {
   )
 }
 
-interface FileProps {
+function File({
+  item,
+  anchors
+}: {
   item: PageItem | Item
   anchors: string[]
-  topLevel: boolean
-}
-
-function File({ item, anchors, topLevel }: FileProps): ReactElement {
+}): ReactElement {
   const { asPath, locale = DEFAULT_LOCALE } = useRouter()
   const route = getFSRoute(asPath, locale)
   const active = [route, route + '/'].includes(item.route + '/')
@@ -177,15 +197,15 @@ function File({ item, anchors, topLevel }: FileProps): ReactElement {
   const config = useConfig()
 
   if (item.type === 'separator') {
-    return <Separator title={item.title} topLevel={topLevel} />
+    return <Separator title={item.title} />
   }
 
   return (
-    <li className={cn({ active })}>
+    <li className={cn(classes.list, { active })}>
       <Anchor
         href={(item as PageItem).href || item.route}
         newWindow={(item as PageItem).newWindow}
-        className="break-words"
+        className={cn(classes.link, active ? classes.active : classes.inactive)}
         onClick={() => {
           setMenu(false)
         }}
@@ -196,18 +216,19 @@ function File({ item, anchors, topLevel }: FileProps): ReactElement {
         })}
       </Anchor>
       {active && anchors.length > 0 && (
-        <ul>
-          {anchors.map((text, i) => {
+        <ul className={cn(classes.list, classes.border, 'ltr:ml-3 rtl:mr-3')}>
+          {anchors.map(text => {
             const slug = slugger.slug(text)
             return (
-              <li key={`a-${slug}`}>
+              <li key={slug}>
                 <a
                   href={`#${slug}`}
                   className={cn(
-                    '!flex text-sm w-full [word-break:break-word]',
-                    'before:opacity-25 before:mr-2 before:content-["#"]',
-                    activeAnchor[slug]?.isActive &&
-                      'font-semibold !text-gray-900 dark:!text-white'
+                    classes.link,
+                    'before:opacity-25 flex gap-2 before:content-["#"]',
+                    activeAnchor[slug]?.isActive
+                      ? classes.active
+                      : classes.inactive
                   )}
                   onClick={() => {
                     setMenu(false)
@@ -228,28 +249,20 @@ interface MenuProps {
   directories: PageItem[] | Item[]
   anchors: string[]
   base?: string
-  submenu?: boolean
+  className?: string
 }
 
-function Menu({ directories, anchors, submenu }: MenuProps): ReactElement {
+function Menu({ directories, anchors, className }: MenuProps): ReactElement {
   return (
-    <ul className="nextra-sidebar-list">
-      {directories.map(item => {
-        if (
-          item.type === 'menu' ||
-          (item.children && (item.children.length || !item.withIndexPage))
-        ) {
-          return <Folder key={item.name} item={item} anchors={anchors} />
-        }
-        return (
-          <File
-            key={item.name}
-            item={item}
-            anchors={anchors}
-            topLevel={!submenu}
-          />
+    <ul className={cn(classes.list, className)}>
+      {directories.map(item =>
+        item.type === 'menu' ||
+        (item.children && (item.children.length || !item.withIndexPage)) ? (
+          <Folder key={item.name} item={item} anchors={anchors} />
+        ) : (
+          <File key={item.name} item={item} anchors={anchors} />
         )
-      })}
+      )}
     </ul>
   )
 }
@@ -274,7 +287,7 @@ export function Sidebar({
   includePlaceholder
 }: SideBarProps): ReactElement {
   const config = useConfig()
-  const { menu } = useMenu()
+  const { menu, setMenu } = useMenu()
   const anchors = useMemo(
     () =>
       headings
@@ -297,97 +310,103 @@ export function Sidebar({
   useEffect(() => {
     const activeElement = sidebarRef.current?.querySelector('li.active')
 
-    if (activeElement) {
-      scrollIntoView(activeElement, {
-        block: 'center',
-        inline: 'center',
-        scrollMode: 'always',
-        boundary: containerRef.current
-      })
+    if (activeElement && (window.innerWidth > 767 || menu)) {
+      const scroll = () => {
+        scrollIntoView(activeElement, {
+          block: 'center',
+          inline: 'center',
+          scrollMode: 'always',
+          boundary: containerRef.current
+        })
+      }
+      if (menu) {
+        // needs for mobile since menu has transition transform
+        setTimeout(scroll, 300)
+      } else {
+        scroll()
+      }
     }
-  }, [])
+  }, [menu])
 
-  const hasMenu = !!(config.i18n.length || config.darkMode)
+  const hasMenu = config.i18n.length > 0 || config.darkMode
 
   return (
     <>
       {includePlaceholder && asPopover ? (
         <div className="hidden h-0 w-64 flex-shrink-0 xl:block" />
       ) : null}
+      <div
+        className={cn(
+          '[transition:background-color_1.5s_ease] motion-reduce:transition-none',
+          menu
+            ? 'fixed inset-0 z-10 bg-black/80 dark:bg-black/60'
+            : 'bg-transparent'
+        )}
+        onClick={() => setMenu(false)}
+      />
       <aside
         className={cn(
-          'nextra-sidebar-container nextra-scrollbar fixed top-16 z-[15] h-[calc(100vh-4rem)] w-full flex-shrink-0 self-start overflow-y-auto md:sticky md:w-64',
-          asPopover ? 'md:hidden' : 'md:block',
-          '[&::-webkit-scrollbar-track]:mt-[var(--nextra-navbar-height)] md:[&::-webkit-scrollbar-track]:mt-5',
-          {
-            open: menu,
-            '[&::-webkit-scrollbar-track]:mb-[var(--nextra-menu-height)]':
-              hasMenu
-          }
+          'nextra-sidebar-container flex flex-col',
+          'md:top-16 md:flex-shrink-0 md:w-64 md:transform-none',
+          asPopover ? 'md:hidden' : 'md:sticky md:self-start',
+          menu
+            ? '[transform:translate3d(0,0,0)]'
+            : '[transform:translate3d(0,-100%,0)]'
         )}
         ref={containerRef}
       >
         <div
-          className="nextra-sidebar h-full w-full select-none pl-[calc(env(safe-area-inset-left)-1.5rem)] md:h-auto"
+          className={cn(
+            'z-[1]',  // for bottom box shadow
+            'md:hidden p-4',
+            'shadow-[0_2px_14px_6px_#fff] dark:shadow-[0_2px_14px_6px_#111]',
+            'contrast-more:shadow-none dark:contrast-more:shadow-none'
+          )}
+        >
+          {renderComponent(config.search.component, {
+            directories: flatDirectories
+          })}
+        </div>
+        <div
+          className={cn(
+            'px-4 pb-4 md:pt-4 overflow-y-auto nextra-scrollbar',
+            'grow md:h-[calc(100vh-var(--nextra-navbar-height)-3.75rem)]'
+          )}
           ref={sidebarRef}
         >
-          <div className="min-h-[calc(100%-61px)] p-4">
-            <div
-              className={cn(
-                'sticky top-0 z-[1] block md:hidden -mt-4 mb-4 bg-white pt-4',
-                'dark:bg-dark shadow-[0_2px_14px_6px_#fff] dark:shadow-[0_2px_14px_6px_#111]'
-              )}
-            >
-              {renderComponent(config.search.component, {
-                directories: flatDirectories
-              })}
-            </div>
-            <div className="hidden md:block">
-              <Menu
-                // The sidebar menu, shows only the docs directories.
-                directories={docsDirectories}
-                // When the viewport size is larger than `md`, hide the anchors in
-                // the sidebar when `floatTOC` is enabled.
-                anchors={config.toc.float ? [] : anchors}
-              />
-            </div>
-            <div className="md:hidden">
-              <Menu
-                // The mobile dropdown menu, shows all the directories.
-                directories={fullDirectories}
-                // Always show the anchor links on mobile (`md`).
-                anchors={anchors}
-              />
-            </div>
-          </div>
-
-          {hasMenu && (
-            <div
-              className={cn(
-                'sticky bottom-0 mx-4 border-t shadow-[0_-12px_16px_#fff] dark:border-neutral-800 dark:shadow-[0_-12px_16px_#111]',
-                'contrast-more:shadow-none contrast-more:dark:shadow-none contrast-more:border-neutral-400',
-                'h-[var(--nextra-menu-height)]',
-                'flex gap-2 bg-white dark:bg-dark justify-between items-center'
-              )}
-            >
-              {config.i18n.length > 0 && (
-                <div className="relative flex-1">
-                  <LocaleSwitch options={config.i18n} />
-                </div>
-              )}
-              {config.darkMode ? (
-                <div
-                  className={cn(
-                    'relative flex',
-                    config.i18n.length > 0 ? '' : 'flex-1'
-                  )}
-                >
-                  <ThemeSwitch lite={config.i18n.length > 0} />
-                </div>
-              ) : null}
-            </div>
-          )}
+          <Menu
+            className="hidden md:flex"
+            // The sidebar menu, shows only the docs directories.
+            directories={docsDirectories}
+            // When the viewport size is larger than `md`, hide the anchors in
+            // the sidebar when `floatTOC` is enabled.
+            anchors={config.toc.float ? [] : anchors}
+          />
+          <Menu
+            className="md:hidden"
+            // The mobile dropdown menu, shows all the directories.
+            directories={fullDirectories}
+            // Always show the anchor links on mobile (`md`).
+            anchors={anchors}
+          />
         </div>
+
+        {hasMenu && (
+          <div
+            className={cn(
+              'z-[1] relative', // for top box shadow
+              'mx-4 py-4 border-t shadow-[0_-12px_16px_#fff]',
+              'flex gap-2 items-center gap-2',
+              'dark:border-neutral-800 dark:shadow-[0_-12px_16px_#111]',
+              'contrast-more:shadow-none contrast-more:dark:shadow-none contrast-more:border-neutral-400'
+            )}
+          >
+            {config.i18n.length > 0 && (
+              <LocaleSwitch options={config.i18n} className="grow" />
+            )}
+            {config.darkMode && <ThemeSwitch lite={config.i18n.length > 0} />}
+          </div>
+        )}
       </aside>
     </>
   )
