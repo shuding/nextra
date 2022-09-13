@@ -1,5 +1,12 @@
 # nextra-theme-docs
 
+## 2.0.0-beta.27
+
+### Patch Changes
+
+- 21009c7: fix covered select options
+- 21009c7: better focus ui, use ring color as theme hue color
+
 ## 2.0.0-beta.26
 
 ### Patch Changes
