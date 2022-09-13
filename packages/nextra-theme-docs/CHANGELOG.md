@@ -1,5 +1,11 @@
 # nextra-theme-docs
 
+## 2.0.0-beta.28
+
+### Patch Changes
+
+- c2c0d90: fix(search): handle case when value is empty
+
 ## 2.0.0-beta.27
 
 ### Patch Changes
