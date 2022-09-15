@@ -18,7 +18,6 @@ overrides:
   '@tailwindcss/typography': ^0.5.4
   tsup: ^6.2.1
   concurrently: ^7.3.0
-  cross-env: ^7.0.3
   postcss-import: ^14.1.0
 
 importers:
@@ -116,7 +115,7 @@ importers:
     devDependencies:
       autoprefixer: 10.4.8_postcss@8.4.14
       postcss: 8.4.14
-      tailwindcss: 3.1.8_postcss@8.4.14
+      tailwindcss: 3.1.8
     dependenciesMeta:
       nextra:
         injected: true
@@ -185,7 +184,6 @@ importers:
       '@types/react-dom': ^18.0.6
       autoprefixer: ^10.4.8
       concurrently: ^7.3.0
-      cross-env: ^7.0.3
       cssnano: ^5.1.12
       cssnano-preset-advanced: ^5.3.8
       next: ^12.2.4
@@ -209,7 +207,6 @@ importers:
       '@types/react-dom': 18.0.6
       autoprefixer: 10.4.8_postcss@8.4.14
       concurrently: 7.3.0
-      cross-env: 7.0.3
       cssnano: 5.1.12_postcss@8.4.14
       cssnano-preset-advanced: 5.3.8_postcss@8.4.14
       next: 12.2.4_biqbaboplfbrettd7655fr4n2y
@@ -220,7 +217,7 @@ importers:
       react: 18.2.0
       react-cusdis: 2.1.3_biqbaboplfbrettd7655fr4n2y
       react-dom: 18.2.0_react@18.2.0
-      tailwindcss: 3.1.8_postcss@8.4.14
+      tailwindcss: 3.1.8
       vitest: 0.21.0
 
   packages/nextra-theme-docs:
@@ -238,7 +235,6 @@ importers:
       autoprefixer: ^10.4.8
       clsx: ^1.2.1
       concurrently: ^7.3.0
-      cross-env: ^7.0.3
       cssnano: ^5.1.12
       cssnano-preset-advanced: ^5.3.8
       flexsearch: ^0.7.21
@@ -281,7 +277,6 @@ importers:
       '@types/react-dom': 18.0.6
       autoprefixer: 10.4.8_postcss@8.4.14
       concurrently: 7.3.0
-      cross-env: 7.0.3
       cssnano: 5.1.12_postcss@8.4.14
       cssnano-preset-advanced: 5.3.8_postcss@8.4.14
       next: 12.2.4_biqbaboplfbrettd7655fr4n2y
@@ -1872,14 +1867,6 @@ packages:
       supports-color: 8.1.1
       tree-kill: 1.2.2
       yargs: 17.5.1
-    dev: true
-
-  /cross-env/7.0.3:
-    resolution: {integrity: sha512-+/HKd6EgcQCJGh2PSjZuUitQBQynKor4wrFbRg4DtAgS1aWO+gU52xpH7M9ScGgXSYmAVS9bIJ8EzuaGw0oNAw==}
-    engines: {node: '>=10.14', npm: '>=6', yarn: '>=1'}
-    hasBin: true
-    dependencies:
-      cross-spawn: 7.0.3
     dev: true
 
   /cross-spawn/5.1.0:
@@ -5698,39 +5685,6 @@ packages:
       - ts-node
     dev: true
 
-  /tailwindcss/3.1.8_postcss@8.4.14:
-    resolution: {integrity: sha512-YSneUCZSFDYMwk+TGq8qYFdCA3yfBRdBlS7txSq0LUmzyeqRe3a8fBQzbz9M3WS/iFT4BNf/nmw9mEzrnSaC0g==}
-    engines: {node: '>=12.13.0'}
-    hasBin: true
-    peerDependencies:
-      postcss: ^8.0.9
-    dependencies:
-      arg: 5.0.2
-      chokidar: 3.5.3
-      color-name: 1.1.4
-      detective: 5.2.1
-      didyoumean: 1.2.2
-      dlv: 1.1.3
-      fast-glob: 3.2.11
-      glob-parent: 6.0.2
-      is-glob: 4.0.3
-      lilconfig: 2.0.6
-      normalize-path: 3.0.0
-      object-hash: 3.0.0
-      picocolors: 1.0.0
-      postcss: 8.4.14
-      postcss-import: 14.1.0_postcss@8.4.14
-      postcss-js: 4.0.0_postcss@8.4.14
-      postcss-load-config: 3.1.4_postcss@8.4.14
-      postcss-nested: 5.0.6_postcss@8.4.14
-      postcss-selector-parser: 6.0.10
-      postcss-value-parser: 4.2.0
-      quick-lru: 5.1.1
-      resolve: 1.22.1
-    transitivePeerDependencies:
-      - ts-node
-    dev: true
-
   /tapable/2.2.1:
     resolution: {integrity: sha512-GNzQvQTOIP6RyTfE2Qxb8ZVlNmw0n88vp1szwWRimP02mnTsx3Wtn5qRdqY9w2XduFNUgvOwhNnQsjwCp+kqaQ==}
     engines: {node: '>=6'}
@@ -6632,7 +6586,7 @@ packages:
     resolution: {directory: packages/nextra-theme-blog, type: directory}
     id: file:packages/nextra-theme-blog
     name: nextra-theme-blog
-    version: 2.0.0-beta.24
+    version: 2.0.0-beta.28
     peerDependencies:
       next: '>=9.5.3'
       react: '>=16.13.1'
@@ -6653,7 +6607,7 @@ packages:
     resolution: {directory: packages/nextra-theme-docs, type: directory}
     id: file:packages/nextra-theme-docs
     name: nextra-theme-docs
-    version: 2.0.0-beta.24
+    version: 2.0.0-beta.28
     peerDependencies:
       next: '>=9.5.3'
       react: '>=16.13.1'
@@ -6661,6 +6615,7 @@ packages:
     dependencies:
       '@headlessui/react': 1.6.6_biqbaboplfbrettd7655fr4n2y
       '@mdx-js/react': 2.1.2_react@18.2.0
+      '@popperjs/core': 2.11.6
       '@reach/skip-nav': 0.17.0_biqbaboplfbrettd7655fr4n2y
       classnames: 2.3.1
       clsx: 1.2.1
@@ -6682,7 +6637,7 @@ packages:
     resolution: {directory: packages/nextra, type: directory}
     id: file:packages/nextra
     name: nextra
-    version: 2.0.0-beta.24
+    version: 2.0.0-beta.28
     peerDependencies:
       next: '>=9.5.3'
       react: '>=16.13.1'
@@ -6703,6 +6658,8 @@ packages:
       remark-reading-time: 2.0.1
       shiki: 0.10.1
       slash: 3.0.0
+      title: 3.5.3
+      unist-util-visit: 4.1.1
     transitivePeerDependencies:
       - supports-color
     dev: false
