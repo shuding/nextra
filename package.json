@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "dev": "turbo run dev",
-    "build": "turbo run build:tailwind build --filter=./packages/*",
+    "build": "turbo run build:tailwind build --filter=./packages/\\*",
     "types:check": "turbo run types:check",
     "lint": "eslint --ignore-path .gitignore --ext js,jsx,mjs,cjs,ts,tsx,mts,cts .",
     "dev:core": "turbo run dev --filter=nextra... --filter=!docs",
