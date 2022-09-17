@@ -1,5 +1,11 @@
 # nextra-theme-docs
 
+## 2.0.0-beta.29
+
+### Patch Changes
+
+- 973ca49: fix rtl/ltr glitch on initial loading
+
 ## 2.0.0-beta.28
 
 ### Patch Changes
