@@ -16,17 +16,19 @@ interface FolderProps {
   open?: boolean
   defaultOpen?: boolean
   onToggle?: (open: boolean) => void
+  children: ReactElement | ReactElement[]
 }
 
 interface FileProps {
   name: string
   label?: ReactElement
   active?: boolean
+  children: ReactElement | ReactElement[]
 }
 
-const Tree: React.FC = ({ children }) => (
-  <div className="text-base mt-6">{children}</div>
-)
+const Tree: React.FC<{
+  children: ReactElement | ReactElement[]
+}> = ({ children }) => <div className="text-base mt-6">{children}</div>
 
 function Ident() {
   const indent = useIndent()
