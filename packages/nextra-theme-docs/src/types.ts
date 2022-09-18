@@ -65,7 +65,7 @@ export interface DocsThemeConfig {
     'defaultTheme' | 'storageKey' | 'forcedTheme'
   >
   notFound: {
-    content: ReactNode | FC,
+    content: ReactNode | FC
     labels: string
   }
   primaryHue:
@@ -90,7 +90,7 @@ export interface DocsThemeConfig {
     placeholder: string | (() => string)
   }
   serverSideError: {
-    content: ReactNode | FC,
+    content: ReactNode | FC
     labels: string
   }
   sidebar: {
@@ -118,6 +118,35 @@ export type PageTheme = {
   toc: boolean
   typesetting: 'default' | 'article'
 }
+
+export type Meta = Record<
+  string,
+  | string
+  | {
+      hidden?: boolean
+      href?: string
+      newWindow?: boolean
+      theme?: RecursivePartial<PageTheme>
+      title?: string
+      type?: 'page'
+    }
+  | {
+      items: Record<
+        string,
+        {
+          href?: string
+          newWindow?: boolean
+          title: string
+        }
+      >
+      title: string
+      type: 'menu'
+    }
+  | {
+      title: string
+      type: 'separator'
+    }
+>
 
 export type Context = {
   Content: FC

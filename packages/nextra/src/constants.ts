@@ -13,7 +13,7 @@ export const OFFICIAL_THEMES = [
   'nextra-theme-blog'
 ] as const
 
-export const META_FILENAME = '_meta.json'
+export const META_FILENAME = '_meta.mjs'
 
 export const CWD = process.cwd()
 
@@ -26,3 +26,5 @@ export const CACHE_DIR = path.join(CWD, '.next', 'cache')
 export const ASSET_DIR = path.join(CWD, '.next', 'static', 'chunks')
 
 export const EXTERNAL_URL_REGEX = /^https?:\/\//
+
+export const DEFAULT_PAGE_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx'] as const

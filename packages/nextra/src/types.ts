@@ -25,7 +25,7 @@ export interface Folder<FileType = PageMapItem> {
   children: FileType[]
 }
 
-export type MetaJsonFile = {
+export type MetaFile = {
   kind: 'Meta'
   locale?: string
   data: {
@@ -44,15 +44,15 @@ export type MdxFile = {
   frontMatter?: FrontMatter
 }
 
-export type MetaJsonPath = `${string}/${MetaFilename}`
+export type MetaPath = `${string}/${MetaFilename}`
 export type MdxPath = `${string}.${MarkdownExtension}`
 
 export type FileMap = {
-  [jsonPath: MetaJsonPath]: MetaJsonFile
+  [jsonPath: MetaPath]: MetaFile
   [mdxPath: MdxPath]: MdxFile
 }
 
-export type PageMapItem = Folder | MdxFile | MetaJsonFile
+export type PageMapItem = Folder | MdxFile | MetaFile
 
 // PageMapItem without MetaJsonFile and with its meta from _meta.json
 export type Page = (MdxFile | Folder<Page>) & {

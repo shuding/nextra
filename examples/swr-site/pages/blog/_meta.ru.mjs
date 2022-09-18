@@ -1,0 +1,3 @@
+export default {
+  "swr-v1": "Представляем SWR 1.0"
+}

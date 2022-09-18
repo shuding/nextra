@@ -1,0 +1,19 @@
+export default {
+  "index": {
+    "title": "简介",
+    "type": "page",
+    "hidden": true
+  },
+  "docs": {
+    "title": "文档",
+    "type": "page"
+  },
+  "examples": {
+    "title": "示例",
+    "type": "page"
+  },
+  "blog": {
+    "title": "博客",
+    "type": "page"
+  }
+}

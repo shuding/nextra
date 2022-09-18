@@ -1,0 +1,19 @@
+export default {
+  "index": {
+    "title": "Introducción",
+    "type": "page",
+    "hidden": true
+  },
+  "docs": {
+    "title": "Docs",
+    "type": "page"
+  },
+  "examples": {
+    "title": "Ejemplos",
+    "type": "page"
+  },
+  "blog": {
+    "title": "Blog",
+    "type": "page"
+  }
+}

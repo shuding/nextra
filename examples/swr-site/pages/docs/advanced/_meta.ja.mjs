@@ -1,0 +1,6 @@
+export default {
+  "cache": "キャッシュ",
+  "performance": "パフォーマンス",
+  "react-native": "React Native",
+  "file-name.with.DOTS": "ドット付きのファイル名"
+}

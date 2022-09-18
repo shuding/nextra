@@ -1,11 +1,10 @@
 import { NextraPlugin, pageMapCache } from './plugin'
 import {
   DEFAULT_LOCALE,
+  DEFAULT_PAGE_EXTENSIONS,
   MARKDOWN_EXTENSION_REGEX,
   MARKDOWN_EXTENSIONS
 } from './constants'
-
-const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
 
 const nextra = (...config) =>
   function withNextra(nextConfig = {}) {
@@ -28,7 +27,7 @@ const nextra = (...config) =>
     return {
       ...nextConfig,
       pageExtensions: [
-        ...(nextConfig.pageExtensions || DEFAULT_EXTENSIONS),
+        ...(nextConfig.pageExtensions || DEFAULT_PAGE_EXTENSIONS),
         ...MARKDOWN_EXTENSIONS
       ],
       webpack(config, options) {

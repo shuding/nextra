@@ -2,15 +2,16 @@ import {
   NextraConfig,
   FileMap,
   MdxPath,
-  MetaJsonPath,
+  MetaPath,
   PageMapItem,
   Folder,
   MdxFile,
-  MetaJsonFile
+  MetaFile,
+  Meta
 } from './types'
 import fs from 'graceful-fs'
 import { promisify } from 'node:util'
-import { parseFileName, parseJsonFile, truthy } from './utils'
+import { parseFileName, truthy } from './utils'
 import path from 'node:path'
 import slash from 'slash'
 import grayMatter from 'gray-matter'
@@ -77,19 +78,29 @@ export async function collectFiles(
     const fileName = name + ext
 
     if (fileName === META_FILENAME) {
-      const fp = filePath as MetaJsonPath
-      const content = await readFile(fp, 'utf8')
+      const fp = filePath as MetaPath
+      let metaFile: MetaFile['data']
+      try {
+        const mod = await import(fp)
+        metaFile = mod.default
+      } catch (err) {
+        console.error(
+          `[nextra] Error parsing ${fp}, make sure it's a valid file`,
+          err
+        )
+        metaFile = {}
+      }
       fileMap[fp] = {
         kind: 'Meta',
         ...(locale && { locale }),
-        data: parseJsonFile(content, fp)
+        data: metaFile
       }
       return fileMap[fp]
     }
 
-    if (fileName === 'meta.json') {
+    if (fileName === 'meta.json' || fileName === '_meta.json') {
       console.warn(
-        '[nextra] "meta.json" was renamed to "_meta.json". Rename the following file:',
+        `[nextra] "${fileName}" was renamed to "_meta.mjs". Rename and refactor the following file:`,
         path.relative(CWD, filePath)
       )
     }
@@ -115,7 +126,7 @@ export async function collectFiles(
     const metaFilename = locale
       ? META_FILENAME.replace('.', `.${locale}.`)
       : META_FILENAME
-    const metaPath = path.join(dir, metaFilename) as MetaJsonPath
+    const metaPath = path.join(dir, metaFilename) as MetaPath
 
     if (metaIndex === -1) {
       fileMap[metaPath] = {
@@ -125,7 +136,7 @@ export async function collectFiles(
       }
       items.push(fileMap[metaPath])
     } else {
-      const { data, ...metaFile } = items[metaIndex] as MetaJsonFile
+      const { data, ...metaFile } = items[metaIndex] as MetaFile
       fileMap[metaPath] = {
         ...metaFile,
         data: {

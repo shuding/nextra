@@ -1,5 +1,5 @@
 import path from 'node:path'
-import { FileMap, MdxPath, MetaJsonPath, PageMapItem } from './types'
+import { FileMap, MdxPath, MetaPath, PageMapItem } from './types'
 import { META_FILENAME } from './constants'
 import { normalizeMeta, parseFileName } from './utils'
 import filterRouteLocale from './filter-route-locale'
@@ -28,7 +28,7 @@ export function getPageMap({
     ? META_FILENAME.replace('.', `.${locale}.`)
     : META_FILENAME
   const metaDir = path.dirname(filePath)
-  const metaPath = path.join(metaDir, metaFilename) as MetaJsonPath
+  const metaPath = path.join(metaDir, metaFilename) as MetaPath
 
   const pageMeta = fileMap[metaPath].data[pageItem.name]
 

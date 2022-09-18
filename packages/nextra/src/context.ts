@@ -1,5 +1,5 @@
 import { normalizeMeta } from './utils'
-import { MetaJsonFile, PageMapItem, Page } from './types'
+import { MetaFile, PageMapItem, Page } from './types'
 
 function getContext(name: string): {
   pageMap: PageMapItem[]
@@ -24,7 +24,7 @@ function filter(
   let activeLevelPages: Page[] = []
   const items: Page[] = []
   const meta = pageMap.find(
-    (item): item is MetaJsonFile => item.kind === 'Meta'
+    (item): item is MetaFile => item.kind === 'Meta'
   )!.data
 
   for (const item of pageMap) {

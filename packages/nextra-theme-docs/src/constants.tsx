@@ -192,6 +192,7 @@ export const LEGACY_CONFIG_OPTIONS: Record<string, string> = {
   serverSideErrorLink: 'serverSideError.content',
   sidebarSubtitle: 'sidebar.titleComponent',
   tocExtraContent: 'toc.extraContent',
+  unstable_faviconGlyph: 'faviconGlyph',
   unstable_searchResultEmpty: 'search.emptyResult'
 }
 

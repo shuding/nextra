@@ -1,0 +1,19 @@
+export default {
+  "index": {
+    "title": "前書き",
+    "type": "page",
+    "hidden": true
+  },
+  "docs": {
+    "title": "ドキュメント",
+    "type": "page"
+  },
+  "examples": {
+    "title": "例",
+    "type": "page"
+  },
+  "blog": {
+    "title": "ブログ",
+    "type": "page"
+  }
+}

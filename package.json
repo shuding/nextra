@@ -59,7 +59,7 @@
       "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
       "@tailwindcss/typography": "^0.5.4",
       "tsup": "^6.2.1",
-      "concurrently": "^7.3.0", 
+      "concurrently": "^7.3.0",
       "postcss-import": "^14.1.0"
     }
   }

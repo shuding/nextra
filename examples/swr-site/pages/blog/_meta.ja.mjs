@@ -1,0 +1,3 @@
+export default {
+  "swr-v1": "SWR 1.0 の発表"
+}

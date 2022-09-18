@@ -270,6 +270,7 @@ export default function Layout(props: any): ReactElement {
 
 type PartialDocsThemeConfig = RecursivePartial<DocsThemeConfig>
 
+export { Meta } from './types'
 export { useConfig, PartialDocsThemeConfig as DocsThemeConfig }
 export { useMDXComponents } from '@mdx-js/react'
 export { useTheme } from 'next-themes'

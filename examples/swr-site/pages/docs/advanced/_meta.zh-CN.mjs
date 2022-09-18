@@ -1,0 +1,6 @@
+export default {
+  "cache": "缓存",
+  "performance": "性能",
+  "react-native": "React Native",
+  "file-name.with.DOTS": "带点的文件名"
+}
