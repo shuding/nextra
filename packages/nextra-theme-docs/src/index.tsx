@@ -2,7 +2,7 @@ import type { PageMapItem, PageOpts } from 'nextra'
 import type { ReactElement, ReactNode } from 'react'
 
 import React, { useEffect, useMemo, useRef } from 'react'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router.js'
 import 'focus-visible'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import { SkipNavContent } from '@reach/skip-nav'

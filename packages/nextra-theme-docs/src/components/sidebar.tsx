@@ -8,7 +8,7 @@ import React, {
 } from 'react'
 import cn from 'clsx'
 import Slugger from 'github-slugger'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router.js'
 import { Heading } from 'nextra'
 import scrollIntoView from 'scroll-into-view-if-needed'
 

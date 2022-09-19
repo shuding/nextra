@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react'
-import NextHead from 'next/head'
+import NextHead from 'next/head.js'
 import { useTheme } from 'next-themes'
 import { useMounted } from 'nextra/hooks'
 import { renderString } from '../utils'

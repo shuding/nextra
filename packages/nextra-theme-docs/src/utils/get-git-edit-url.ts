@@ -1,5 +1,8 @@
+import parseGitUrlPackage from 'parse-git-url'
 import { useConfig } from '../contexts'
-import parseGitUrl from 'parse-git-url'
+import { getDefault } from './get-default'
+
+const parseGitUrl = getDefault(parseGitUrlPackage)
 
 export const getGitEditUrl = (filePath?: string): string => {
   const config = useConfig()

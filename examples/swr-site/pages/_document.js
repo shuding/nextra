@@ -2,7 +2,7 @@ import React from "react";
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import { SkipNavLink } from "@reach/skip-nav";
 
-class MyDocument extends Document {
+class MyDocument extends Document.default {
   render() {
     return (
       <Html lang="en">

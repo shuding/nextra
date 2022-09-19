@@ -19,6 +19,7 @@
       ]
     }
   },
+  "type": "module",
   "types": "./dist/index.d.ts",
   "exports": {
     "./style.css": "./style.css",

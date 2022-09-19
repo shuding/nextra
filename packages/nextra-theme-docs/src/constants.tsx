@@ -1,7 +1,7 @@
 /* eslint sort-keys: error */
 import React, { isValidElement } from 'react'
 import { DocsThemeConfig, PageTheme } from './types'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router.js'
 import { Anchor, Flexsearch, Footer, Navbar, TOC } from './components'
 import { DiscordIcon, GitHubIcon } from 'nextra/icons'
 import { MatchSorterSearch } from './components/match-sorter-search'

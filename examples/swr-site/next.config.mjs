@@ -1,14 +1,16 @@
-const withNextra = require("nextra")({
+import nextra from "nextra";
+
+const withNextra = nextra({
   theme: "nextra-theme-docs",
   themeConfig: "./theme.config.tsx",
   unstable_flexsearch: {
     codeblocks: true,
   },
   unstable_staticImage: true,
-  unstable_defaultShowCopyCode: true
+  unstable_defaultShowCopyCode: true,
 });
 
-module.exports = withNextra({
+export default withNextra({
   i18n: {
     locales: ["en-US", "es-ES", "ja", "ko", "ru", "zh-CN"],
     defaultLocale: "en-US",

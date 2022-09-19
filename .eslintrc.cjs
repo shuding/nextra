@@ -15,7 +15,7 @@ module.exports = {
         'no-restricted-imports': [
           'error',
           {
-            name: 'next/link',
+            name: 'next/link.js',
             message: 'Use local <Anchor /> instead'
           }
         ]

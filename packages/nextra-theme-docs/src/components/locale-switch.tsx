@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router.js'
 import { Select } from './select'
 import { DocsThemeConfig } from '../types'
 import { GlobeIcon } from 'nextra/icons'

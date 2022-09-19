@@ -1,5 +1,5 @@
 import React, { useState, ReactElement, ReactNode, useCallback } from 'react'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router.js'
 import FlexSearch from 'flexsearch'
 import cn from 'clsx'
 import { Search } from './search'

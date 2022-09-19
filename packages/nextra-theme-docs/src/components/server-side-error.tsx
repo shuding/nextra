@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react'
 import { useMounted } from 'nextra/hooks'
 import { useConfig } from '../contexts'
 import { renderComponent, getGitIssueUrl } from '../utils'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router.js'
 import { Anchor } from './anchor'
 
 export function ServerSideErrorPage(): ReactElement | null {

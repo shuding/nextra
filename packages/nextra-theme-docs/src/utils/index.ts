@@ -1,3 +1,4 @@
+export { getDefault } from './get-default'
 export { getFSRoute } from './get-fs-route'
 export { getGitEditUrl } from './get-git-edit-url'
 export { getGitIssueUrl } from './get-git-issue-url'

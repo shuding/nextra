@@ -1,6 +1,6 @@
 import React, { ReactElement, ReactNode } from 'react'
 import cn from 'clsx'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router.js'
 import { Menu, Transition } from '@headlessui/react'
 import { ArrowRightIcon } from 'nextra/icons'
 

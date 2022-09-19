@@ -1,4 +1,7 @@
-import parseGitUrl from 'parse-git-url'
+import parseGitUrlPackage from 'parse-git-url'
+import { getDefault } from './get-default'
+
+const parseGitUrl = getDefault(parseGitUrlPackage)
 
 export const getGitIssueUrl = ({
   repository = '',
