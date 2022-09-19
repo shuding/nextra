@@ -173,7 +173,7 @@ export class NextraPlugin {
           // Restore the search data from the cache.
           restoreCache()
         }
-        const PAGES_DIR = findPagesDir(CWD).pages
+        const PAGES_DIR = findPagesDir(CWD).pages as string
         const result = await collectFiles(PAGES_DIR)
         pageMapCache.set(result)
         callback()

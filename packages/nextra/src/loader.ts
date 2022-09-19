@@ -19,7 +19,7 @@ import {
   CWD
 } from './constants'
 
-const PAGES_DIR = findPagesDir(CWD).pages
+const PAGES_DIR = findPagesDir(CWD).pages as string
 
 // TODO: create this as a webpack plugin.
 const indexContentEmitted = new Set<string>()
