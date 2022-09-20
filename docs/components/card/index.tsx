@@ -17,7 +17,7 @@ export function Card({ children, title, icon, image, arrow, href, ...props }) {
 
   if (image) {
     return (
-      <Link href={href}>
+      <Link href={href} passHref>
         <a
           className={cn(
             styles.card,
@@ -44,7 +44,7 @@ export function Card({ children, title, icon, image, arrow, href, ...props }) {
   }
 
   return (
-    <Link href={href}>
+    <Link href={href} passHref>
       <a
         className={cn(
           styles.card,
