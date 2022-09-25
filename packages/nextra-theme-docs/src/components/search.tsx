@@ -59,7 +59,7 @@ export function Search({
     const down = (e: globalThis.KeyboardEvent): void => {
       const tagName = document.activeElement?.tagName.toLowerCase()
       if (!input.current || !tagName || INPUTS.includes(tagName)) return
-      if (e.key === '/' || (e.key === 'k' && e.metaKey)) {
+      if (e.key === '/' || (e.key === 'k' && (e.metaKey || e.ctrlKey))) {
         e.preventDefault()
         input.current.focus()
       } else if (e.key === 'Escape') {
