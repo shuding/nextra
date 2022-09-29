@@ -228,6 +228,7 @@ exports[`Page Process > pageMap en-US 1`] = `
             "suspense": "Suspense",
             "typescript": "TypeScript :)",
             "with-nextjs": "Next.js SSG and SSR",
+            "wrap-toc-items": "Wrap Table of Content Items",
           },
           "kind": "Meta",
           "locale": "en-US",
@@ -425,6 +426,12 @@ exports[`Page Process > pageMap en-US 1`] = `
           "locale": "en-US",
           "name": "scroll-with-dynamic-height",
           "route": "/docs/scroll-with-dynamic-height",
+        },
+        {
+          "kind": "MdxPage",
+          "locale": "en-US",
+          "name": "wrap-toc-items",
+          "route": "/docs/wrap-toc-items",
         },
         {
           "kind": "MdxPage",
@@ -665,6 +672,7 @@ exports[`Page Process > pageMap zh-CN 1`] = `
             "suspense": "Suspense",
             "typescript": "Typescript",
             "with-nextjs": "Next.js SSG 和 SSR",
+            "wrap-toc-items": "包裝目錄項",
           },
           "kind": "Meta",
           "locale": "zh-CN",
@@ -831,6 +839,12 @@ exports[`Page Process > pageMap zh-CN 1`] = `
           "locale": "zh-CN",
           "name": "scroll-with-dynamic-height",
           "route": "/docs/scroll-with-dynamic-height",
+        },
+        {
+          "kind": "MdxPage",
+          "locale": "zh-CN",
+          "name": "wrap-toc-items",
+          "route": "/docs/wrap-toc-items",
         },
         {
           "kind": "MdxPage",
