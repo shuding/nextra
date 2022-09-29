@@ -47,5 +47,6 @@
     "theme": {
       "layout": "raw"
     }
-  }
+  },
+  "wrap-toc-items": "Wrap Table of Content Items"
 }
