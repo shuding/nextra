@@ -8,20 +8,26 @@ type ThemeSwitchProps = {
   lite?: boolean
 }
 
+const OPTIONS = [
+  { key: 'light', name: 'Light' },
+  { key: 'dark', name: 'Dark' },
+  { key: 'system', name: 'System' }
+]
+
 export function ThemeSwitch({ lite }: ThemeSwitchProps): ReactElement {
-  const { theme, setTheme, systemTheme } = useTheme()
-  const renderedTheme = theme === 'system' ? systemTheme : theme
+  const { setTheme, resolvedTheme, theme = '' } = useTheme()
   const mounted = useMounted()
-  const IconToUse = mounted && renderedTheme === 'dark' ? MoonIcon : SunIcon
+  const IconToUse = mounted && resolvedTheme === 'dark' ? MoonIcon : SunIcon
   return (
   <div className="relative">
     <Select
       title="Change theme"
+      options={OPTIONS}
       onChange={option => {
         setTheme(option.key)
       }}
       selected={{
-        key: theme || '',
+        key: theme,
         name: (
           <div className="flex items-center gap-2 capitalize">
             <IconToUse />
@@ -31,11 +37,6 @@ export function ThemeSwitch({ lite }: ThemeSwitchProps): ReactElement {
           </div>
         )
       }}
-      options={[
-        { key: 'light', name: 'Light' },
-        { key: 'dark', name: 'Dark' },
-        { key: 'system', name: 'System' }
-      ]}
     />
   </div>
   )

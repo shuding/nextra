@@ -4,9 +4,9 @@ import { MoonIcon, SunIcon } from 'nextra/icons'
 import { useMounted } from 'nextra/hooks'
 
 export default function ThemeSwitch() {
-  const { theme, setTheme, resolvedTheme } = useTheme()
+  const { setTheme, resolvedTheme } = useTheme()
   const mounted = useMounted()
-  const isDark = theme === 'dark' || resolvedTheme === 'dark'
+  const isDark = resolvedTheme === 'dark'
 
   // @TODO: system theme
   const toggleTheme = () => {

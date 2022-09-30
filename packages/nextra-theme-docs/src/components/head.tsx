@@ -7,8 +7,7 @@ import { useConfig } from '../contexts'
 
 export function Head(): ReactElement {
   const config = useConfig()
-  const { theme, systemTheme } = useTheme()
-  const renderedTheme = theme === 'system' ? systemTheme : theme
+  const { resolvedTheme } = useTheme()
   const mounted = useMounted()
 
   // `head` can be either FC or ReactNode. We have to directly call it if it's a
@@ -30,7 +29,7 @@ export function Head(): ReactElement {
       {mounted ? (
         <meta
           name="theme-color"
-          content={renderedTheme === 'dark' ? '#111' : '#fff'}
+          content={resolvedTheme === 'dark' ? '#111' : '#fff'}
         />
       ) : (
         <>
