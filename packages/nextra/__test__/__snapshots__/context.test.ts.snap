@@ -1268,60 +1268,6 @@ exports[`context > getAllPages() > should work 1`] = `
         "kind": "MdxPage",
         "locale": "en-US",
         "meta": {
-          "title": "Wrap Table of Content Items",
-        },
-        "name": "wrap-toc-items",
-        "route": "/docs/wrap-toc-items",
-      },
-      {
-        "kind": "MdxPage",
-        "locale": "es-ES",
-        "meta": {
-          "title": "Wrap Table of Content Items",
-        },
-        "name": "wrap-toc-items",
-        "route": "/docs/wrap-toc-items",
-      },
-      {
-        "kind": "MdxPage",
-        "locale": "ja",
-        "meta": {
-          "title": "Wrap Table of Content Items",
-        },
-        "name": "wrap-toc-items",
-        "route": "/docs/wrap-toc-items",
-      },
-      {
-        "kind": "MdxPage",
-        "locale": "ko",
-        "meta": {
-          "title": "Wrap Table of Content Items",
-        },
-        "name": "wrap-toc-items",
-        "route": "/docs/wrap-toc-items",
-      },
-      {
-        "kind": "MdxPage",
-        "locale": "ru",
-        "meta": {
-          "title": "Wrap Table of Content Items",
-        },
-        "name": "wrap-toc-items",
-        "route": "/docs/wrap-toc-items",
-      },
-      {
-        "kind": "MdxPage",
-        "locale": "zh-CN",
-        "meta": {
-          "title": "Wrap Table of Content Items",
-        },
-        "name": "wrap-toc-items",
-        "route": "/docs/wrap-toc-items",
-      },
-      {
-        "kind": "MdxPage",
-        "locale": "en-US",
-        "meta": {
           "title": "404/500 Custom Error Pages",
         },
         "name": "404-500",
@@ -3040,60 +2986,6 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
     },
     "name": "scroll-with-dynamic-height",
     "route": "/docs/scroll-with-dynamic-height",
-  },
-  {
-    "kind": "MdxPage",
-    "locale": "en-US",
-    "meta": {
-      "title": "Wrap Table of Content Items",
-    },
-    "name": "wrap-toc-items",
-    "route": "/docs/wrap-toc-items",
-  },
-  {
-    "kind": "MdxPage",
-    "locale": "es-ES",
-    "meta": {
-      "title": "Wrap Table of Content Items",
-    },
-    "name": "wrap-toc-items",
-    "route": "/docs/wrap-toc-items",
-  },
-  {
-    "kind": "MdxPage",
-    "locale": "ja",
-    "meta": {
-      "title": "Wrap Table of Content Items",
-    },
-    "name": "wrap-toc-items",
-    "route": "/docs/wrap-toc-items",
-  },
-  {
-    "kind": "MdxPage",
-    "locale": "ko",
-    "meta": {
-      "title": "Wrap Table of Content Items",
-    },
-    "name": "wrap-toc-items",
-    "route": "/docs/wrap-toc-items",
-  },
-  {
-    "kind": "MdxPage",
-    "locale": "ru",
-    "meta": {
-      "title": "Wrap Table of Content Items",
-    },
-    "name": "wrap-toc-items",
-    "route": "/docs/wrap-toc-items",
-  },
-  {
-    "kind": "MdxPage",
-    "locale": "zh-CN",
-    "meta": {
-      "title": "Wrap Table of Content Items",
-    },
-    "name": "wrap-toc-items",
-    "route": "/docs/wrap-toc-items",
   },
   {
     "kind": "MdxPage",

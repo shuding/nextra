@@ -225,7 +225,6 @@ exports[`Page Process > pageMap en-US 1`] = `
             },
             "revalidation": "Auto Revalidation",
             "scroll-with-dynamic-height": "Scroll With Dynamic Height",
-            "wrap-toc-items": "Wrap Table of Content Items",
             "suspense": "Suspense",
             "typescript": "TypeScript :)",
             "with-nextjs": "Next.js SSG and SSR",
@@ -426,12 +425,6 @@ exports[`Page Process > pageMap en-US 1`] = `
           "locale": "en-US",
           "name": "scroll-with-dynamic-height",
           "route": "/docs/scroll-with-dynamic-height",
-        },
-        {
-          "kind": "MdxPage",
-          "locale": "en-US",
-          "name": "wrap-toc-items",
-          "route": "/docs/wrap-toc-items",
         },
         {
           "kind": "MdxPage",
@@ -669,7 +662,6 @@ exports[`Page Process > pageMap zh-CN 1`] = `
             "prefetching": "预请求",
             "revalidation": "自动重新请求",
             "scroll-with-dynamic-height": "以動態高度滾動",
-            "wrap-toc-items": "包裝目錄項",
             "suspense": "Suspense",
             "typescript": "Typescript",
             "with-nextjs": "Next.js SSG 和 SSR",
@@ -839,12 +831,6 @@ exports[`Page Process > pageMap zh-CN 1`] = `
           "locale": "zh-CN",
           "name": "scroll-with-dynamic-height",
           "route": "/docs/scroll-with-dynamic-height",
-        },
-        {
-          "kind": "MdxPage",
-          "locale": "zh-CN",
-          "name": "wrap-toc-items",
-          "route": "/docs/wrap-toc-items",
         },
         {
           "kind": "MdxPage",
