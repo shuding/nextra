@@ -94,7 +94,8 @@ export interface DocsThemeConfig {
     labels: string
   }
   sidebar: {
-    defaultMenuCollapsed: boolean
+    defaultMenuCollapsed: boolean,
+    defaultMenuCollapseLevel: number,
     titleComponent: ReactNode | FC<{ title: string; type: string }>
   }
   // Can't be React component, otherwise will get Warning: A title element received an array with more than 1 element as children.

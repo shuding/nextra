@@ -199,6 +199,7 @@ const config: DocsThemeConfig = {
   },
   sidebar: {
     defaultMenuCollapsed: true,
+    defaultMenuCollapseLevel: 3,
     titleComponent: ({ title, type }) =>
       type === "separator" ? (
         <div className="flex items-center gap-2">
