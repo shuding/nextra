@@ -142,8 +142,8 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     labels: 'bug'
   },
   sidebar: {
-    defaultMenuCollapsed: false,
     defaultMenuCollapseLevel: 1,
+    defaultMenuCollapsed: false,
     titleComponent: ({ title }) => <>{title}</>
   },
   titleSuffix: ' – Nextra',
