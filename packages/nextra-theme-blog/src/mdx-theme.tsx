@@ -52,7 +52,7 @@ const A = ({ children, ...props }: ComponentProps<'a'>) => {
     )
   }
   return props.href ? (
-    <Link href={props.href}>
+    <Link href={props.href} passHref>
       <a {...props}>{children}</a>
     </Link>
   ) : (
