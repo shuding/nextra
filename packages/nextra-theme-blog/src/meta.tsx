@@ -12,7 +12,7 @@ export default function Meta(): ReactElement {
   const tags = tag ? split(tag) : []
 
   const tagsEl = tags.map(t => (
-    <Link key={t} href="/tags/[tag]" as={`/tags/${t}`}>
+    <Link key={t} href="/tags/[tag]" as={`/tags/${t}`} passHref>
       <a
         className="
           select-none
