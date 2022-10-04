@@ -93,6 +93,7 @@ export function TOC({ headings, filePath }: TOCProps): ReactElement {
                       5: 'ltr:ml-12 rtl:mr-12',
                       6: 'ltr:ml-16 rtl:mr-16'
                     }[depth],
+                    'inline-block',
                     activeAnchor[slug]?.isActive
                       ? 'text-primary-500 subpixel-antialiased contrast-more:!text-primary-500'
                       : 'text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300',
