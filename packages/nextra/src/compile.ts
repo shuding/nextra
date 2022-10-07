@@ -60,8 +60,8 @@ export async function compileMdx(
   const mdxOptions = loaderOptions.mdxOptions || {}
 
   const compiler = createCompiler({
-    jsx: mdxOptions.jsx ?? true,
-    outputFormat: mdxOptions.outputFormat,
+    jsx: mdxOptions.jsx || false,
+    outputFormat: mdxOptions.outputFormat || 'function-body',
     providerImportSource: '@mdx-js/react',
     remarkPlugins: [
       ...(mdxOptions.remarkPlugins || []),

@@ -119,7 +119,11 @@ async function loader(
     await compileMdx(
       content,
       {
-        mdxOptions,
+        mdxOptions: {
+          ...mdxOptions,
+          jsx: true,
+          outputFormat: 'program',
+        },
         unstable_readingTime,
         unstable_defaultShowCopyCode,
         unstable_staticImage,
