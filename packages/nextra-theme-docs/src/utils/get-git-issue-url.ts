@@ -1,3 +1,4 @@
+import { useConfig } from '../contexts'
 import parseGitUrl from 'parse-git-url'
 
 export const getGitIssueUrl = ({
@@ -9,6 +10,14 @@ export const getGitIssueUrl = ({
   title: string
   labels?: string
 }): string => {
+  const config = useConfig()
+
+  if (config.docsRepositoryBaseCustom) {
+    return `${config.docsRepositoryBaseCustom}/issues/new?title=${encodeURI(title)}${
+      labels ? `&labels=${encodeURI(labels as string)}` : ''
+    }`
+  }
+
   const repo = parseGitUrl(repository)
   if (!repo) throw new Error('Invalid `docsRepositoryBase` URL!')
 
