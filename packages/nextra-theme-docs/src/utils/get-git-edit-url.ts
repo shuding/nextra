@@ -3,6 +3,12 @@ import parseGitUrl from 'parse-git-url'
 
 export const getGitEditUrl = (filePath?: string): string => {
   const config = useConfig()
+
+  if (config.docsRepositoryBaseCustom) {
+    console.log(filePath);
+    return `${config.docsRepositoryBaseCustom}/${config.docsRepositoryBaseCustomBranch || 'main'}/${filePath}`
+  }
+
   const repo = parseGitUrl(config.docsRepositoryBase || '')
   if (!repo) throw new Error('Invalid `docsRepositoryBase` URL!')
 

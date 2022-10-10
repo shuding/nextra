@@ -30,6 +30,8 @@ export const DEFAULT_THEME: DocsThemeConfig = {
   darkMode: true,
   direction: 'ltr',
   docsRepositoryBase: 'https://github.com/shuding/nextra',
+  docsRepositoryBaseCustom: 'https://github.onprem.com/shuding/nextra',
+  docsRepositoryBaseCustomBranch: 'main',
   editLink: {
     component({ className, filePath, children }) {
       const editUrl = getGitEditUrl(filePath)

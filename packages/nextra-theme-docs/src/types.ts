@@ -29,6 +29,8 @@ export interface DocsThemeConfig {
   darkMode: boolean
   direction: 'ltr' | 'rtl'
   docsRepositoryBase: string
+  docsRepositoryBaseCustom: string
+  docsRepositoryBaseCustomBranch: string
   editLink: {
     component: FC<{
       children: ReactNode
