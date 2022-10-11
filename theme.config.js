@@ -1,7 +1,7 @@
 export default {
   github: 'https://github.com/shuding/nextra',
   docsRepositoryBase: 'https://github.com/shuding/nextra/blob/master',
-  titleSuffix: ' – Nextra',
+  titleSuffix: ' – API',
   logo: (
     <>
       <span className="mr-2 font-extrabold hidden md:inline">Nextra</span>
