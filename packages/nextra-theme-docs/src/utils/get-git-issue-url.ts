@@ -1,4 +1,4 @@
-import parseGitUrl from 'parse-git-url'
+import parseGitUrl from 'git-url-parse'
 
 export const getGitIssueUrl = ({
   repository = '',
@@ -12,16 +12,15 @@ export const getGitIssueUrl = ({
   const repo = parseGitUrl(repository)
   if (!repo) throw new Error('Invalid `docsRepositoryBase` URL!')
 
-  switch (repo.type) {
-    case 'github':
-      return `https://github.com/${repo.owner}/${
-        repo.name
-      }/issues/new?title=${encodeURIComponent(title)}&labels=${labels || ''}`
-    case 'gitlab':
-      return `https://gitlab.com/${repo.owner}/${
+  if (repo.href.includes('gitlab')) {
+    return `https://gitlab.com/${repo.owner}/${
         repo.name
       }/-/issues/new?issue[title]=${encodeURIComponent(title)}`
+  } else if (repo.href.includes('github')) {
+    return `${repo.resource}/${repo.owner}/${
+        repo.name
+      }/issues/new?title=${encodeURIComponent(title)}&labels=${labels || ''}`
+  } else {
+    return '#'
   }
-
-  return '#'
 }
