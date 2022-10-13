@@ -1,4 +1,4 @@
-import parseGitUrl from 'git-url-parse'
+import gitUrlParse from 'git-url-parse'
 
 export const getGitIssueUrl = ({
   repository = '',
@@ -9,7 +9,7 @@ export const getGitIssueUrl = ({
   title: string
   labels?: string
 }): string => {
-  const repo = parseGitUrl(repository)
+  const repo = gitUrlParse(repository)
   if (!repo) throw new Error('Invalid `docsRepositoryBase` URL!')
 
   if (repo.resource.includes('gitlab')) {

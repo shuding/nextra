@@ -1,9 +1,9 @@
 import { useConfig } from '../contexts'
-import parseGitUrl from 'git-url-parse'
+import gitUrlParse from 'git-url-parse'
 
 export const getGitEditUrl = (filePath?: string): string => {
   const config = useConfig()
-  const repo = parseGitUrl(config.docsRepositoryBase || '')
+  const repo = gitUrlParse(config.docsRepositoryBase || '')
 
   if (!repo) throw new Error('Invalid `docsRepositoryBase` URL!')
 
