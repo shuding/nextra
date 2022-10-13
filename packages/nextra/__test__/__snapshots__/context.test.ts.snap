@@ -1343,6 +1343,15 @@ exports[`context > getAllPages() > should work 1`] = `
         "kind": "MdxPage",
         "locale": "en-US",
         "meta": {
+          "title": "Callout",
+        },
+        "name": "callout",
+        "route": "/docs/callout",
+      },
+      {
+        "kind": "MdxPage",
+        "locale": "en-US",
+        "meta": {
           "title": "Code Block without Language",
         },
         "name": "code-block-without-language",
@@ -3115,6 +3124,15 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
     },
     "name": "raw-layout",
     "route": "/docs/raw-layout",
+  },
+  {
+    "kind": "MdxPage",
+    "locale": "en-US",
+    "meta": {
+      "title": "Callout",
+    },
+    "name": "callout",
+    "route": "/docs/callout",
   },
   {
     "kind": "MdxPage",
