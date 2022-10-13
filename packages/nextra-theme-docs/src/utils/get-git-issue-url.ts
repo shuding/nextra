@@ -13,11 +13,11 @@ export const getGitIssueUrl = ({
   if (!repo) throw new Error('Invalid `docsRepositoryBase` URL!')
 
   if (repo.resource.includes('gitlab')) {
-    return `${repo.protocol}:${repo.resource}/${repo.owner}/${
+    return `${repo.protocol}://${repo.resource}/${repo.owner}/${
       repo.name
     }/-/issues/new?issue[title]=${encodeURIComponent(title)}`
   } else if (repo.resource.includes('github')) {
-    return `${repo.protocol}:${repo.resource}/${repo.owner}/${
+    return `${repo.protocol}://${repo.resource}/${repo.owner}/${
       repo.name
     }/issues/new?title=${encodeURIComponent(title)}&labels=${labels || ''}`
   } else {
