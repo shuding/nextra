@@ -17,7 +17,7 @@ export const getGitIssueUrl = ({
       repo.name
     }/-/issues/new?issue[title]=${encodeURIComponent(title)}`
   } else if (repo.resource.includes('github')) {
-    return `${repo.protocol}:${repo.resource}/${
+    return `${repo.protocol}:${repo.resource}/${repo.owner}/${
       repo.name
     }/issues/new?title=${encodeURIComponent(title)}&labels=${labels || ''}`
   } else {
