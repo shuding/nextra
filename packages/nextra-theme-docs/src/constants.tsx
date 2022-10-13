@@ -142,8 +142,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     labels: 'bug'
   },
   sidebar: {
-    defaultMenuCollapseLevel: 1,
-    defaultMenuCollapsed: false,
+    defaultMenuCollapseLevel: 2,
     titleComponent: ({ title }) => <>{title}</>
   },
   titleSuffix: ' – Nextra',
@@ -172,7 +171,7 @@ export const LEGACY_CONFIG_OPTIONS: Record<string, string> = {
   bannerKey: 'banner.key',
   bodyExtraContent: 'main.extraContent',
   customSearch: 'search.component',
-  defaultMenuCollapsed: 'sidebar.defaultMenuCollapsed',
+  defaultMenuCollapsed: 'sidebar.defaultMenuCollapseLevel',
   feedbackLabels: 'feedback.labels',
   feedbackLink: 'feedback.content',
   floatTOC: 'toc.float',

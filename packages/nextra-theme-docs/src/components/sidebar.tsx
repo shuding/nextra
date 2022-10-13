@@ -74,8 +74,7 @@ function FolderImpl({
   const open =
     TreeState[item.route] !== undefined
       ? TreeState[item.route]
-      : active || activeRouteInside || !config.sidebar.defaultMenuCollapsed
-        || (config.sidebar.defaultMenuCollapsed && folderLevel < config.sidebar.defaultMenuCollapseLevel)
+      : active || activeRouteInside || folderLevel <= config.sidebar.defaultMenuCollapseLevel
 
   const rerender = useState({})[1]
 
