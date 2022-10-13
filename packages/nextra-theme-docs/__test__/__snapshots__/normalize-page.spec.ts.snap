@@ -6,6 +6,7 @@ exports[`normalize-page > /404 page 1`] = `
   "activePath": [],
   "activeThemeContext": {
     "breadcrumb": true,
+    "collapsed": false,
     "footer": true,
     "layout": "default",
     "navbar": true,
@@ -101,6 +102,7 @@ exports[`normalize-page > /500 page 1`] = `
   ],
   "activeThemeContext": {
     "breadcrumb": true,
+    "collapsed": false,
     "footer": true,
     "layout": "raw",
     "navbar": true,
@@ -364,6 +366,7 @@ exports[`normalize-page > en-US getting-started 1`] = `
   ],
   "activeThemeContext": {
     "breadcrumb": true,
+    "collapsed": false,
     "footer": true,
     "layout": "default",
     "navbar": true,
@@ -1112,6 +1115,7 @@ exports[`normalize-page > en-US home 1`] = `
   ],
   "activeThemeContext": {
     "breadcrumb": true,
+    "collapsed": false,
     "footer": true,
     "layout": "default",
     "navbar": true,
@@ -2026,6 +2030,7 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
   ],
   "activeThemeContext": {
     "breadcrumb": true,
+    "collapsed": false,
     "footer": true,
     "layout": "default",
     "navbar": true,
@@ -2774,6 +2779,7 @@ exports[`normalize-page > zh-CN home 1`] = `
   ],
   "activeThemeContext": {
     "breadcrumb": true,
+    "collapsed": false,
     "footer": true,
     "layout": "default",
     "navbar": true,
