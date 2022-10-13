@@ -1,5 +1,12 @@
 # nextra
 
+## 2.0.0-beta.30
+
+### Patch Changes
+
+- 02bc6fc: use `next/future/image` if next>=12.3.0
+- f7856a1: change default options for `compileMdx`, set `jsx: false` and `outputFormat: 'function-body'` by default
+
 ## 2.0.0-beta.29
 
 ## 2.0.0-beta.28
