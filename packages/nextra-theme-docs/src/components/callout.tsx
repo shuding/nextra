@@ -30,7 +30,7 @@ type CalloutProps = {
 export function Callout({
   children,
   type = 'default',
-  emoji = TypeToEmoji[type] || TypeToEmoji.default
+  emoji = TypeToEmoji[type]
 }: CalloutProps): ReactElement {
   return (
     <div
