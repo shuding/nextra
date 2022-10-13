@@ -28,7 +28,7 @@ let resizeObserver: ResizeObserver
 if (IS_BROWSER) {
   resizeObserver ||= new ResizeObserver(entries => {
     if (location.hash) {
-      const node = entries[0].target.ownerDocument.querySelector(location.hash)
+      const node = entries[0].target.ownerDocument.getElementById(location.hash.slice(1))
       if (node) {
         scrollIntoView(node)
       }
