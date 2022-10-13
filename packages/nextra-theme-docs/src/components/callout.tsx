@@ -1,7 +1,17 @@
 import React, { ReactElement, ReactNode } from 'react'
 import cn from 'clsx'
+import { InformationCircleIcon } from 'nextra/icons'
 
-const themes = {
+const TypeToEmoji = {
+  default: '💡',
+  error: '🚫',
+  info: <InformationCircleIcon className="mt-1" />,
+  warning: '⚠️'
+}
+
+type CalloutType = keyof typeof TypeToEmoji
+
+const themes: Record<CalloutType, string> = {
   default:
     'bg-orange-50 border-orange-100 text-orange-800 dark:text-orange-300 dark:bg-orange-400/20 dark:border-orange-400/30',
   error:
@@ -12,17 +22,15 @@ const themes = {
 }
 
 type CalloutProps = {
-  /** Callout Theme default to 'default'  */
-  type?: keyof typeof themes
-  /** default emoji 💡*/
-  emoji: string
+  type?: CalloutType
+  emoji?: string | ReactElement
   children: ReactNode
 }
 
 export function Callout({
   children,
   type = 'default',
-  emoji = '💡'
+  emoji = TypeToEmoji[type] || TypeToEmoji.default
 }: CalloutProps): ReactElement {
   return (
     <div
