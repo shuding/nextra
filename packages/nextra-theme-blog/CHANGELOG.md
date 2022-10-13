@@ -1,5 +1,12 @@
 # nextra-theme-blog
 
+## 2.0.0-beta.30
+
+### Patch Changes
+
+- b7f7cf6: add missing `passHref` for `NextLink`
+- 7d2d5ee: use resolvedTheme instead renderedTheme + theme check
+
 ## 2.0.0-beta.29
 
 ## 2.0.0-beta.28
