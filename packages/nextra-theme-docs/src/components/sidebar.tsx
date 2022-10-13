@@ -70,10 +70,15 @@ function FolderImpl({
 
   const { setMenu } = useMenu()
   const config = useConfig()
+  const { theme } = item as Item
   const open =
     TreeState[item.route] !== undefined
       ? TreeState[item.route]
-      : active || activeRouteInside || !config.sidebar.defaultMenuCollapsed
+      : active ||
+        activeRouteInside ||
+        (theme && 'collapsed' in theme
+          ? !theme.collapsed
+          : !config.sidebar.defaultMenuCollapsed)
 
   const rerender = useState({})[1]
 
@@ -357,7 +362,7 @@ export function Sidebar({
       >
         <div
           className={cn(
-            'z-[1]',  // for bottom box shadow
+            'z-[1]', // for bottom box shadow
             'md:hidden p-4',
             'shadow-[0_2px_14px_6px_#fff] dark:shadow-[0_2px_14px_6px_#111]',
             'contrast-more:shadow-none dark:contrast-more:shadow-none'

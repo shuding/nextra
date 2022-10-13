@@ -109,6 +109,7 @@ export interface DocsThemeConfig {
 
 export type PageTheme = {
   breadcrumb: boolean
+  collapsed: boolean
   footer: boolean
   layout: 'default' | 'full' | 'raw'
   navbar: boolean

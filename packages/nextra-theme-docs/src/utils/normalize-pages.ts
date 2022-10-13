@@ -20,6 +20,7 @@ export interface Item extends MdxFile {
   children?: Item[]
   hidden?: boolean
   withIndexPage?: boolean
+  theme?: PageTheme
 }
 
 export interface PageItem extends MdxFile {
