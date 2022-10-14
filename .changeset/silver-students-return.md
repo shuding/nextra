@@ -2,7 +2,7 @@
 'nextra-theme-docs': patch
 ---
 
-remove `titleSuffix` theme option in favor of `defaultSeo.titleTemplate`
-setup `next-seo`
-add new theme option `defaultSeo`
-get `description`, `canonical`, `openGraph` values from `frontMatter` and pass them to `<NextSeo />` component
+- setup `next-seo`
+- add new theme option `getNextSeoProps`
+- remove `titleSuffix` theme option in favor of `getNextSeoProps.titleTemplate`
+- by default pass `description`, `canonical`, `openGraph` values to `<NextSeo />` component  from page `frontMatter`, values can be overridden with return value of `getNextSeoProps`
