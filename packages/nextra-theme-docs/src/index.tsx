@@ -1,10 +1,9 @@
 import type { PageMapItem, PageOpts } from 'nextra'
 import type { ReactElement, ReactNode } from 'react'
 
-import React, { useEffect, useMemo, useRef } from 'react'
+import React, { useMemo } from 'react'
 import { useRouter } from 'next/router'
 import 'focus-visible'
-import scrollIntoView from 'scroll-into-view-if-needed'
 import { SkipNavContent } from '@reach/skip-nav'
 import cn from 'clsx'
 import { MDXProvider } from '@mdx-js/react'
@@ -13,23 +12,9 @@ import './polyfill'
 import { Head, NavLinks, Sidebar, Breadcrumb, Banner } from './components'
 import { getComponents } from './mdx-components'
 import { ActiveAnchorProvider, ConfigProvider, useConfig } from './contexts'
-import { DEFAULT_LOCALE, IS_BROWSER } from './constants'
+import { DEFAULT_LOCALE } from './constants'
 import { getFSRoute, normalizePages, renderComponent } from './utils'
 import { DocsThemeConfig, PageTheme, RecursivePartial } from './types'
-
-let resizeObserver: ResizeObserver
-if (IS_BROWSER) {
-  resizeObserver ||= new ResizeObserver(entries => {
-    if (location.hash) {
-      const node = entries[0].target.ownerDocument.getElementById(
-        location.hash.slice(1)
-      )
-      if (node) {
-        scrollIntoView(node)
-      }
-    }
-  })
-}
 
 function useDirectoryInfo(pageMap: PageMapItem[]) {
   const { locale = DEFAULT_LOCALE, defaultLocale, route } = useRouter()
@@ -61,18 +46,7 @@ const Body = ({
   navigation,
   children
 }: BodyProps): ReactElement => {
-  const mainElement = useRef<HTMLElement>(null)
   const config = useConfig()
-
-  useEffect(() => {
-    if (mainElement.current) {
-      resizeObserver.observe(mainElement.current)
-    }
-
-    return () => {
-      resizeObserver.disconnect()
-    }
-  }, [])
 
   if (themeContext.layout === 'raw') {
     return <div className="nx-w-full nx-overflow-x-hidden">{children}</div>
@@ -117,10 +91,7 @@ const Body = ({
           'nextra-body-typesetting-article'
       )}
     >
-      <main
-        className="nx-w-full nx-min-w-0 nx-max-w-4xl nx-px-6 nx-pt-4 md:nx-px-8"
-        ref={mainElement}
-      >
+      <main className="nx-w-full nx-min-w-0 nx-max-w-4xl nx-px-6 nx-pt-4 md:nx-px-8">
         {breadcrumb}
         {body}
       </main>

@@ -1220,60 +1220,6 @@ exports[`context > getAllPages() > should work 1`] = `
         "kind": "MdxPage",
         "locale": "en-US",
         "meta": {
-          "title": "Scroll With Dynamic Height",
-        },
-        "name": "scroll-with-dynamic-height",
-        "route": "/docs/scroll-with-dynamic-height",
-      },
-      {
-        "kind": "MdxPage",
-        "locale": "es-ES",
-        "meta": {
-          "title": "Scroll With Dynamic Height",
-        },
-        "name": "scroll-with-dynamic-height",
-        "route": "/docs/scroll-with-dynamic-height",
-      },
-      {
-        "kind": "MdxPage",
-        "locale": "ja",
-        "meta": {
-          "title": "Scroll With Dynamic Height",
-        },
-        "name": "scroll-with-dynamic-height",
-        "route": "/docs/scroll-with-dynamic-height",
-      },
-      {
-        "kind": "MdxPage",
-        "locale": "ko",
-        "meta": {
-          "title": "Scroll With Dynamic Height",
-        },
-        "name": "scroll-with-dynamic-height",
-        "route": "/docs/scroll-with-dynamic-height",
-      },
-      {
-        "kind": "MdxPage",
-        "locale": "ru",
-        "meta": {
-          "title": "Scroll With Dynamic Height",
-        },
-        "name": "scroll-with-dynamic-height",
-        "route": "/docs/scroll-with-dynamic-height",
-      },
-      {
-        "kind": "MdxPage",
-        "locale": "zh-CN",
-        "meta": {
-          "title": "Scroll With Dynamic Height",
-        },
-        "name": "scroll-with-dynamic-height",
-        "route": "/docs/scroll-with-dynamic-height",
-      },
-      {
-        "kind": "MdxPage",
-        "locale": "en-US",
-        "meta": {
           "title": "Wrap Table of Content Items",
         },
         "name": "wrap-toc-items",
@@ -3007,60 +2953,6 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
     },
     "name": "change-log",
     "route": "/docs/change-log",
-  },
-  {
-    "kind": "MdxPage",
-    "locale": "en-US",
-    "meta": {
-      "title": "Scroll With Dynamic Height",
-    },
-    "name": "scroll-with-dynamic-height",
-    "route": "/docs/scroll-with-dynamic-height",
-  },
-  {
-    "kind": "MdxPage",
-    "locale": "es-ES",
-    "meta": {
-      "title": "Scroll With Dynamic Height",
-    },
-    "name": "scroll-with-dynamic-height",
-    "route": "/docs/scroll-with-dynamic-height",
-  },
-  {
-    "kind": "MdxPage",
-    "locale": "ja",
-    "meta": {
-      "title": "Scroll With Dynamic Height",
-    },
-    "name": "scroll-with-dynamic-height",
-    "route": "/docs/scroll-with-dynamic-height",
-  },
-  {
-    "kind": "MdxPage",
-    "locale": "ko",
-    "meta": {
-      "title": "Scroll With Dynamic Height",
-    },
-    "name": "scroll-with-dynamic-height",
-    "route": "/docs/scroll-with-dynamic-height",
-  },
-  {
-    "kind": "MdxPage",
-    "locale": "ru",
-    "meta": {
-      "title": "Scroll With Dynamic Height",
-    },
-    "name": "scroll-with-dynamic-height",
-    "route": "/docs/scroll-with-dynamic-height",
-  },
-  {
-    "kind": "MdxPage",
-    "locale": "zh-CN",
-    "meta": {
-      "title": "Scroll With Dynamic Height",
-    },
-    "name": "scroll-with-dynamic-height",
-    "route": "/docs/scroll-with-dynamic-height",
   },
   {
     "kind": "MdxPage",

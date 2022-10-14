@@ -16,6 +16,5 @@
   "middleware": "Middleware",
   "advanced": "고급",
   "change-log": "변경 로그",
-  "scroll-with-dynamic-height": "동적 높이로 스크롤",
   "wrap-toc-items": "목차 항목 줄 바꿈"
 }
