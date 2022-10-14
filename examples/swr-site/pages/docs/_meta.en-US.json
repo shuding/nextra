@@ -9,7 +9,7 @@
   "data-fetching": "Data Fetching",
   "error-handling": {
     "title": "Error Handling",
-    "hidden": true
+    "display": "hidden"
   },
   "revalidation": "Auto Revalidation",
   "conditional-fetching": "Conditional Data Fetching",
@@ -26,7 +26,10 @@
   "suspense": "Suspense",
   "middleware": "Middleware",
   "advanced": {
-    "title": "Advanced"
+    "title": "Advanced",
+    "theme": {
+      "collapsed": false
+    }
   },
   "change-log": {
     "title": "Change Log",
@@ -40,7 +43,6 @@
     "type": "page",
     "newWindow": true
   },
-  "scroll-with-dynamic-height": "Scroll With Dynamic Height",
   "wrap-toc-items": "Wrap Table of Content Items",
   "404-500": "404/500 Custom Error Pages",
   "raw-layout": {

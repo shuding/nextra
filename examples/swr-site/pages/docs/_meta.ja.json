@@ -16,6 +16,5 @@
   "middleware": "ミドルウェア",
   "advanced": "高度な使い方",
   "change-log": "変更履歴",
-  "scroll-with-dynamic-height": "動的な高さでスクロールする",
   "wrap-toc-items": "目次アイテムの折り返し"
 }

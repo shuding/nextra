@@ -121,6 +121,12 @@ const config: DocsThemeConfig = {
       );
     },
   },
+  getNextSeoProps() {
+    const { locale } = useRouter();
+    return {
+      titleTemplate: `%s | SWR (${locale})`
+    }
+  },
   gitTimestamp: ({ timestamp }) => <>Last updated on {timestamp.toString()}</>,
   head() {
     const config = useConfig();
@@ -207,10 +213,6 @@ const config: DocsThemeConfig = {
       ) : (
         <>{title}</>
       ),
-  },
-  titleSuffix() {
-    const { locale } = useRouter();
-    return ` – SWR (${locale})`;
   },
   toc: {
     extraContent: <img src="https://placekitten.com/g/300/200" />,

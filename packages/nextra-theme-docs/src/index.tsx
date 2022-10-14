@@ -1,40 +1,20 @@
 import type { PageMapItem, PageOpts } from 'nextra'
 import type { ReactElement, ReactNode } from 'react'
 
-import React, { useEffect, useMemo, useRef } from 'react'
+import React, { useMemo } from 'react'
 import { useRouter } from 'next/router'
 import 'focus-visible'
-import scrollIntoView from 'scroll-into-view-if-needed'
 import { SkipNavContent } from '@reach/skip-nav'
 import cn from 'clsx'
 import { MDXProvider } from '@mdx-js/react'
 
 import './polyfill'
-import {
-  Head,
-  Navbar,
-  NavLinks,
-  Sidebar,
-  Breadcrumb,
-  Banner
-} from './components'
+import { Head, NavLinks, Sidebar, Breadcrumb, Banner } from './components'
 import { getComponents } from './mdx-components'
 import { ActiveAnchorProvider, ConfigProvider, useConfig } from './contexts'
-import { DEFAULT_LOCALE, IS_BROWSER } from './constants'
+import { DEFAULT_LOCALE } from './constants'
 import { getFSRoute, normalizePages, renderComponent } from './utils'
 import { DocsThemeConfig, PageTheme, RecursivePartial } from './types'
-
-let resizeObserver: ResizeObserver
-if (IS_BROWSER) {
-  resizeObserver ||= new ResizeObserver(entries => {
-    if (location.hash) {
-      const node = entries[0].target.ownerDocument.querySelector(location.hash)
-      if (node) {
-        scrollIntoView(node)
-      }
-    }
-  })
-}
 
 function useDirectoryInfo(pageMap: PageMapItem[]) {
   const { locale = DEFAULT_LOCALE, defaultLocale, route } = useRouter()
@@ -66,21 +46,10 @@ const Body = ({
   navigation,
   children
 }: BodyProps): ReactElement => {
-  const mainElement = useRef<HTMLElement>(null)
   const config = useConfig()
 
-  useEffect(() => {
-    if (mainElement.current) {
-      resizeObserver.observe(mainElement.current)
-    }
-
-    return () => {
-      resizeObserver.disconnect()
-    }
-  }, [])
-
   if (themeContext.layout === 'raw') {
-    return <div className="w-full overflow-x-hidden">{children}</div>
+    return <div className="nx-w-full nx-overflow-x-hidden">{children}</div>
   }
 
   const date =
@@ -89,25 +58,26 @@ const Body = ({
       : null
 
   const gitTimestampEl = date ? (
-    <div className="pointer-default mt-12 mb-8 block ltr:text-right rtl:text-left text-xs text-gray-500 dark:text-gray-400">
+    <div className="nx-pointer-default nx-mt-12 nx-mb-8 nx-block ltr:nx-text-right rtl:nx-text-left nx-text-xs nx-text-gray-500 dark:nx-text-gray-400">
       {renderComponent(config.gitTimestamp, { timestamp: date })}
     </div>
   ) : (
-    <div className="mt-16" />
+    <div className="nx-mt-16" />
   )
 
-  const body = (
+  const content = (
     <>
       {children}
       {gitTimestampEl}
       {navigation}
-      {renderComponent(config.main.extraContent)}
     </>
   )
 
+  const body = config.main?.({ children: content }) || content
+
   if (themeContext.layout === 'full') {
     return (
-      <article className="min-h-[calc(100vh-4rem)] w-full overflow-x-hidden pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
+      <article className="nx-min-h-[calc(100vh-4rem)] nx-w-full nx-overflow-x-hidden nx-pl-[max(env(safe-area-inset-left),1.5rem)] nx-pr-[max(env(safe-area-inset-right),1.5rem)]">
         {body}
       </article>
     )
@@ -116,15 +86,12 @@ const Body = ({
   return (
     <article
       className={cn(
-        'min-h-[calc(100vh-4rem)] w-full flex min-w-0 max-w-full justify-center pb-8 pr-[calc(env(safe-area-inset-right)-1.5rem)]',
+        'nx-min-h-[calc(100vh-4rem)] nx-w-full nx-flex nx-min-w-0 nx-max-w-full nx-justify-center nx-pb-8 nx-pr-[calc(env(safe-area-inset-right)-1.5rem)]',
         themeContext.typesetting === 'article' &&
           'nextra-body-typesetting-article'
       )}
     >
-      <main
-        className="w-full min-w-0 max-w-4xl px-6 pt-4 md:px-8"
-        ref={mainElement}
-      >
+      <main className="nx-w-full nx-min-w-0 nx-max-w-4xl nx-px-6 nx-pt-4 md:nx-px-8">
         {breadcrumb}
         {body}
       </main>
@@ -160,7 +127,7 @@ const InnerLayout = ({
     activeType === 'page'
 
   const tocClassName =
-    'nextra-toc order-last hidden w-64 flex-shrink-0 xl:block'
+    'nextra-toc nx-order-last nx-hidden nx-w-64 nx-flex-shrink-0 xl:nx-block'
 
   const tocEl =
     activeType === 'page' ||
@@ -169,7 +136,7 @@ const InnerLayout = ({
       themeContext.layout !== 'full' &&
       themeContext.layout !== 'raw' && <div className={tocClassName} />
     ) : (
-      <div className={cn(tocClassName, 'px-4')}>
+      <div className={cn(tocClassName, 'nx-px-4')}>
         {renderComponent(config.toc.component, {
           headings: config.toc.float ? headings : [],
           filePath
@@ -204,8 +171,8 @@ const InnerLayout = ({
         })}
       <div
         className={cn(
-          'mx-auto flex',
-          themeContext.layout !== 'raw' && 'max-w-[90rem]'
+          'nx-mx-auto nx-flex',
+          themeContext.layout !== 'raw' && 'nx-max-w-[90rem]'
         )}
       >
         <ActiveAnchorProvider>
@@ -281,5 +248,6 @@ export {
   ServerSideErrorPage,
   Tabs,
   Tab,
-  Navbar
+  Navbar,
+  ThemeSwitch
 } from './components'

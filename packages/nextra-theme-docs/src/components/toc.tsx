@@ -63,41 +63,41 @@ export function TOC({ headings, filePath }: TOCProps): ReactElement {
   }, [activeSlug])
 
   const linkClassName = cn(
-    'text-xs font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100',
-    'contrast-more:text-gray-800 contrast-more:dark:text-gray-50'
+    'nx-text-xs nx-font-medium nx-text-gray-500 hover:nx-text-gray-900 dark:nx-text-gray-400 dark:hover:nx-text-gray-100',
+    'contrast-more:nx-text-gray-800 contrast-more:dark:nx-text-gray-50'
   )
 
   return (
     <div
       ref={tocRef}
       className={cn(
-        'nextra-scrollbar sticky top-16 overflow-y-auto pr-4 pt-8 text-sm [hyphens:auto]',
-        'ltr:-mr-4 rtl:-ml-4 max-h-[calc(100vh-var(--nextra-navbar-height)-env(safe-area-inset-bottom))]'
+        'nextra-scrollbar nx-sticky nx-top-16 nx-overflow-y-auto nx-pr-4 nx-pt-8 nx-text-sm nx-[hyphens:auto]',
+        'ltr:-nx-mr-4 rtl:-nx-ml-4 nx-max-h-[calc(100vh-var(--nextra-navbar-height)-env(safe-area-inset-bottom))]'
       )}
     >
       {hasHeadings && (
         <>
-          <p className="mb-4 font-semibold tracking-tight">
+          <p className="nx-mb-4 nx-font-semibold nx-tracking-tight">
             {renderComponent(config.toc.title)}
           </p>
           <ul>
             {items.map(({ slug, text, depth }) => (
-              <li className="my-2 scroll-my-6 scroll-py-6" key={slug}>
+              <li className="nx-my-2 nx-scroll-my-6 nx-scroll-py-6" key={slug}>
                 <a
                   href={`#${slug}`}
                   className={cn(
                     {
-                      2: 'font-semibold',
-                      3: 'ltr:ml-4 rtl:mr-4',
-                      4: 'ltr:ml-8 rtl:mr-8',
-                      5: 'ltr:ml-12 rtl:mr-12',
-                      6: 'ltr:ml-16 rtl:mr-16'
+                      2: 'nx-font-semibold',
+                      3: 'ltr:nx-ml-4 rtl:nx-mr-4',
+                      4: 'ltr:nx-ml-8 rtl:nx-mr-8',
+                      5: 'ltr:nx-ml-12 rtl:nx-mr-12',
+                      6: 'ltr:nx-ml-16 rtl:nx-mr-16'
                     }[depth],
-                    'inline-block',
+                    'nx-inline-block',
                     activeAnchor[slug]?.isActive
-                      ? 'text-primary-500 subpixel-antialiased contrast-more:!text-primary-500'
-                      : 'text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300',
-                    'contrast-more:text-gray-900 contrast-more:underline contrast-more:dark:text-gray-50'
+                      ? 'nx-text-primary-500 nx-subpixel-antialiased contrast-more:!nx-text-primary-500'
+                      : 'nx-text-gray-500 hover:nx-text-gray-900 dark:nx-text-gray-400 dark:hover:nx-text-gray-300',
+                    'contrast-more:nx-text-gray-900 contrast-more:nx-underline contrast-more:dark:nx-text-gray-50'
                   )}
                 >
                   {text}
@@ -112,9 +112,9 @@ export function TOC({ headings, filePath }: TOCProps): ReactElement {
         <div
           className={cn(
             hasHeadings &&
-              'mt-8 border-t bg-white pt-8 shadow-[0_-12px_16px_white] dark:bg-dark dark:shadow-[0_-12px_16px_#111]',
-            'sticky bottom-0 pb-8 dark:border-neutral-800 flex flex-col items-start gap-2',
-            'contrast-more:shadow-none contrast-more:border-t contrast-more:border-neutral-400 contrast-more:dark:border-neutral-400'
+              'nx-mt-8 nx-border-t nx-bg-white nx-pt-8 nx-shadow-[0_-12px_16px_white] dark:nx-bg-dark dark:nx-shadow-[0_-12px_16px_#111]',
+            'nx-sticky nx-bottom-0 nx-pb-8 dark:nx-border-neutral-800 nx-flex nx-flex-col nx-items-start nx-gap-2',
+            'contrast-more:nx-shadow-none contrast-more:nx-border-t contrast-more:nx-border-neutral-400 contrast-more:dark:nx-border-neutral-400'
           )}
         >
           {config.feedback.content ? (

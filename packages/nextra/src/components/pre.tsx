@@ -26,15 +26,15 @@ export const Pre = ({
   return (
     <>
       {filename && (
-        <div className="bg-primary-700/5 text-gray-700 absolute top-0 z-[1] w-full truncate rounded-t-xl py-2 px-4 text-xs dark:bg-primary-300/10 dark:text-gray-200">
+        <div className="nx-bg-primary-700/5 nx-text-gray-700 nx-absolute nx-top-0 nx-z-[1] nx-w-full nx-truncate nx-rounded-t-xl nx-py-2 nx-px-4 nx-text-xs dark:nx-bg-primary-300/10 dark:nx-text-gray-200">
           {filename}
         </div>
       )}
       <pre
         className={[
-          'bg-primary-700/5 mt-6 mb-4 overflow-x-auto rounded-xl font-medium subpixel-antialiased dark:bg-primary-300/10',
-          'contrast-more:border contrast-more:border-primary-900/20 contrast-more:contrast-150 contrast-more:dark:border-primary-100/40',
-          filename ? 'pt-12 pb-4' : 'py-4',
+          'nx-bg-primary-700/5 nx-mt-6 nx-mb-4 nx-overflow-x-auto nx-rounded-xl nx-font-medium nx-subpixel-antialiased dark:nx-bg-primary-300/10',
+          'contrast-more:nx-border contrast-more:nx-border-primary-900/20 contrast-more:nx-contrast-150 contrast-more:dark:nx-border-primary-100/40',
+          filename ? 'nx-pt-12 nx-pb-4' : 'nx-py-4',
           className
         ].join(' ')}
         {...props}
@@ -43,18 +43,18 @@ export const Pre = ({
       </pre>
       <div
         className={[
-          'opacity-0 transition-opacity [div:hover>&]:opacity-100',
-          'flex gap-1 absolute m-2 right-0',
-          filename ? 'top-8' : 'top-0'
+          'nx-opacity-0 nx-transition-opacity [div:hover>&]:nx-opacity-100',
+          'nx-flex nx-gap-1 nx-absolute nx-m-2 nx-right-0',
+          filename ? 'nx-top-8' : 'nx-top-0'
         ].join(' ')}
       >
         <Button
           tabIndex={-1}
           onClick={toggleWordWrap}
-          className="md:hidden"
+          className="md:nx-hidden"
           title="Toggle word wrap"
         >
-          <WordWrapIcon className="pointer-events-none w-4 h-4" />
+          <WordWrapIcon className="nx-pointer-events-none nx-w-4 nx-h-4" />
         </Button>
         {value && <CopyToClipboard tabIndex={-1} value={value} />}
       </div>

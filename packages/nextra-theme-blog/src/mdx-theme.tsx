@@ -36,14 +36,15 @@ const createHeaderLink =
   ({ children, id, ...props }: ComponentProps<'h2'>): ReactElement => {
     return (
       <Tag className={`subheading-${Tag}`} {...props}>
-        <span className="subheading-anchor -mt-8" id={id} />
-        <a href={`#${id}`}>{children}</a>
+        {children}
+        <span className="nx-absolute -nx-mt-7" id={id} />
+        <a href={`#${id}`} className="subheading-anchor" />
       </Tag>
     )
   }
 
 const A = ({ children, ...props }: ComponentProps<'a'>) => {
-  const isExternal = props.href && props.href.startsWith('https://')
+  const isExternal = props.href?.startsWith('https://')
   if (isExternal) {
     return (
       <a target="_blank" rel="noreferrer" {...props}>
@@ -69,7 +70,7 @@ const components = {
   h6: createHeaderLink('h6'),
   a: A,
   pre: ({ children, ...props }: ComponentProps<'pre'>) => (
-    <div className="not-prose">
+    <div className="nx-not-prose">
       <Pre {...props}>{children}</Pre>
     </div>
   ),
@@ -77,7 +78,7 @@ const components = {
   th: Th,
   td: Td,
   table: (props: ComponentProps<'table'>) => (
-    <Table className="not-prose" {...props} />
+    <Table className="nx-not-prose" {...props} />
   ),
   code: Code
 }

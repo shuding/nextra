@@ -1,46 +1,54 @@
 import React, { ReactElement, ReactNode } from 'react'
 import cn from 'clsx'
+import { InformationCircleIcon } from 'nextra/icons'
 
-const themes = {
+const TypeToEmoji = {
+  default: '💡',
+  error: '🚫',
+  info: <InformationCircleIcon className="nx-mt-1" />,
+  warning: '⚠️'
+}
+
+type CalloutType = keyof typeof TypeToEmoji
+
+const themes: Record<CalloutType, string> = {
   default:
-    'bg-orange-50 border-orange-100 text-orange-800 dark:text-orange-300 dark:bg-orange-400/20 dark:border-orange-400/30',
+    'nx-bg-orange-50 nx-border-orange-100 nx-text-orange-800 dark:nx-text-orange-300 dark:nx-bg-orange-400/20 dark:nx-border-orange-400/30',
   error:
-    'bg-red-100 border-red-200 text-red-900 dark:text-red-200 dark:bg-red-900/30 dark:border-red-200/30',
-  info: 'bg-blue-100 border-blue-200 text-blue-900 dark:text-blue-200 dark:bg-blue-900/30 dark:border-blue-200/30',
+    'nx-bg-red-100 nx-border-red-200 nx-text-red-900 dark:nx-text-red-200 dark:nx-bg-red-900/30 dark:nx-border-red-200/30',
+  info: 'nx-bg-blue-100 nx-border-blue-200 nx-text-blue-900 dark:nx-text-blue-200 dark:nx-bg-blue-900/30 dark:nx-border-blue-200/30',
   warning:
-    'bg-yellow-50 border-yellow-100 text-yellow-900 dark:text-yellow-200 dark:bg-yellow-700/30'
+    'nx-bg-yellow-50 nx-border-yellow-100 nx-text-yellow-900 dark:nx-text-yellow-200 dark:nx-bg-yellow-700/30'
 }
 
 type CalloutProps = {
-  /** Callout Theme default to 'default'  */
-  type?: keyof typeof themes
-  /** default emoji 💡*/
-  emoji: string
+  type?: CalloutType
+  emoji?: string | ReactElement
   children: ReactNode
 }
 
 export function Callout({
   children,
   type = 'default',
-  emoji = '💡'
+  emoji = TypeToEmoji[type]
 }: CalloutProps): ReactElement {
   return (
     <div
       className={cn(
-        'nextra-callout border mt-6 flex rounded-lg py-2 ltr:pr-4 rtl:pl-4',
-        'contrast-more:border-current contrast-more:dark:border-current',
+        'nextra-callout nx-border nx-mt-6 nx-flex nx-rounded-lg nx-py-2 ltr:nx-pr-4 rtl:nx-pl-4',
+        'contrast-more:nx-border-current contrast-more:dark:nx-border-current',
         themes[type]
       )}
     >
       <div
-        className="select-none text-xl ltr:pl-3 ltr:pr-2 rtl:pr-3 rtl:pl-2"
+        className="nx-select-none nx-text-xl ltr:nx-pl-3 ltr:nx-pr-2 rtl:nx-pr-3 rtl:nx-pl-2"
         style={{
           fontFamily: '"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
         }}
       >
         {emoji}
       </div>
-      <div className="min-w-0">{children}</div>
+      <div className="nx-min-w-0">{children}</div>
     </div>
   )
 }

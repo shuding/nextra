@@ -12,8 +12,8 @@ interface NavLinkProps {
 }
 
 const classes = {
-  link: 'max-w-[50%] gap-1 [word-break:break-word] flex items-center py-4 text-base font-medium text-gray-600 transition-colors hover:text-primary-500 dark:text-gray-300 md:text-lg',
-  icon: 'h-5 inline flex-shrink-0'
+  link: 'nx-max-w-[50%] nx-gap-1 [word-break:break-word] nx-flex nx-items-center nx-py-4 nx-text-base nx-font-medium nx-text-gray-600 nx-transition-colors hover:nx-text-primary-500 dark:nx-text-gray-300 md:nx-text-lg',
+  icon: 'nx-h-5 nx-inline nx-flex-shrink-0'
 }
 
 export const NavLinks = ({
@@ -32,17 +32,17 @@ export const NavLinks = ({
   return (
     <div
       className={cn(
-        'mb-8 flex items-center border-t pt-8 dark:border-neutral-800',
-        'contrast-more:border-neutral-400 dark:contrast-more:border-neutral-400'
+        'nx-mb-8 nx-flex nx-items-center nx-border-t nx-pt-8 dark:nx-border-neutral-800',
+        'contrast-more:nx-border-neutral-400 dark:contrast-more:nx-border-neutral-400'
       )}
     >
       {prev && (
         <Anchor
           href={prev.route}
           title={prev.title}
-          className={cn(classes.link, 'ltr:pr-4 rtl:pl-4')}
+          className={cn(classes.link, 'ltr:nx-pr-4 rtl:nx-pl-4')}
         >
-          <ArrowRightIcon className={cn(classes.icon, 'ltr:rotate-180')} />
+          <ArrowRightIcon className={cn(classes.icon, 'ltr:nx-rotate-180')} />
           {prev.title}
         </Anchor>
       )}
@@ -52,11 +52,11 @@ export const NavLinks = ({
           title={next.title}
           className={cn(
             classes.link,
-            'ltr:pl-4 rtl:pr-4 ltr:text-right rtl:text-left ltr:ml-auto rtl:mr-auto'
+            'ltr:nx-pl-4 rtl:nx-pr-4 ltr:nx-text-right rtl:nx-text-left ltr:nx-ml-auto rtl:nx-mr-auto'
           )}
         >
           {next.title}
-          <ArrowRightIcon className={cn(classes.icon, 'rtl:rotate-180')} />
+          <ArrowRightIcon className={cn(classes.icon, 'rtl:nx-rotate-180')} />
         </Anchor>
       )}
     </div>

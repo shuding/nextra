@@ -15,7 +15,6 @@ export interface LoaderOptions extends NextraConfig {
   defaultLocale: string
   pageMapCache: PageMapCache
   newNextLinkBehavior?: boolean
-  allowFutureImage?: boolean
 }
 
 export interface Folder<FileType = PageMapItem> {

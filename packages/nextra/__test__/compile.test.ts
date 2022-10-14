@@ -16,30 +16,35 @@ function loadFixture(name: Name) {
   return fs.readFile(filePath, 'utf8')
 }
 
+const mdxOptions = {
+  jsx: true,
+  outputFormat: 'program' as const
+}
+
 describe('process heading', () => {
   it('code-h1', async () => {
     const data = await loadFixture('code-h1.mdx')
-    const result = await compileMdx(data)
+    const result = await compileMdx(data, { mdxOptions })
     expect(result).toMatchSnapshot()
   })
   it('code-with-text-h1', async () => {
     const data = await loadFixture('code-with-text-h1.mdx')
-    const result = await compileMdx(data)
+    const result = await compileMdx(data, { mdxOptions })
     expect(result).toMatchSnapshot()
   })
   it('static-h1', async () => {
     const data = await loadFixture('static-h1.mdx')
-    const result = await compileMdx(data)
+    const result = await compileMdx(data, { mdxOptions })
     expect(result).toMatchSnapshot()
   })
   it('dynamic-h1', async () => {
     const data = await loadFixture('dynamic-h1.mdx')
-    const result = await compileMdx(data)
+    const result = await compileMdx(data, { mdxOptions })
     expect(result).toMatchSnapshot()
   })
   it('no-h1', async () => {
     const data = await loadFixture('no-h1.mdx')
-    const result = await compileMdx(data)
+    const result = await compileMdx(data, { mdxOptions })
     expect(result).toMatchSnapshot()
   })
 })

@@ -5,7 +5,10 @@ type MatchArgs = {
   match: string
 }
 
-export const HighlightMatches = memo<MatchArgs>(function HighlightMatches({ value, match }: MatchArgs) {
+export const HighlightMatches = memo<MatchArgs>(function HighlightMatches({
+  value,
+  match
+}: MatchArgs) {
   const splitText = value ? value.split('') : []
   const escapedSearch = match.trim().replace(/[|\\{}()[\]^$+*?.]/g, '\\$&')
   const regexp = RegExp('(' + escapedSearch.replaceAll(' ', '|') + ')', 'ig')
@@ -19,7 +22,7 @@ export const HighlightMatches = memo<MatchArgs>(function HighlightMatches({ valu
       res.push(
         <Fragment key={id++}>
           {splitText.splice(0, result.index - index).join('')}
-          <span className="text-primary-500">
+          <span className="nx-text-primary-500">
             {splitText.splice(0, regexp.lastIndex - result.index).join('')}
           </span>
         </Fragment>

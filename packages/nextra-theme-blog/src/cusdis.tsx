@@ -13,23 +13,28 @@ const Cusdis = dynamic(
 const Comments = () => {
   const { config, opts } = useBlogContext()
   const router = useRouter()
-  const { theme, resolvedTheme } = useTheme()
-  if (config.cusdis && !config.cusdis.appId) {
-    console.warn('[nextra/cusdis] `appId` is required')
+  const { resolvedTheme } = useTheme()
+  const { cusdis } = config
+  if (!cusdis) {
+    return null
   }
-  return config.cusdis?.appId ? (
+  if (!cusdis.appId) {
+    console.warn('[nextra/cusdis] `appId` is required')
+    return null
+  }
+  return (
     <Cusdis
-      lang={config.cusdis.lang}
+      lang={cusdis.lang}
       style={{ marginTop: '4rem' }}
       attrs={{
-        host: config.cusdis.host || 'https://cusdis.com',
-        appId: config.cusdis.appId,
+        host: cusdis.host || 'https://cusdis.com',
+        appId: cusdis.appId,
         pageId: router.pathname,
         pageTitle: opts.title,
-        theme: theme === 'dark' || resolvedTheme === 'dark' ? 'dark' : 'light'
+        theme: resolvedTheme === 'dark' ? 'dark' : 'light'
       }}
     />
-  ) : null
+  )
 }
 
 export default Comments

@@ -16,6 +16,5 @@
   "middleware": "Промежуточное ПО (Middleware)",
   "advanced": "Продвинутые",
   "change-log": "Журнал изменений",
-  "scroll-with-dynamic-height": "Прокрутка с динамической высотой",
   "wrap-toc-items": "Обернуть таблицу содержимого элементов"
 }

@@ -75,7 +75,7 @@ exports[`Page Process > pageMap en-US 1`] = `
           "type": "page",
         },
         "index": {
-          "hidden": true,
+          "display": "hidden",
           "title": "Introduction",
           "type": "page",
         },
@@ -94,7 +94,7 @@ exports[`Page Process > pageMap en-US 1`] = `
         {
           "data": {
             "a-page": {
-              "hidden": true,
+              "display": "hidden",
               "theme": {
                 "layout": "raw",
               },
@@ -188,9 +188,13 @@ exports[`Page Process > pageMap en-US 1`] = `
             },
             "404-500": "404/500 Custom Error Pages",
             "advanced": {
+              "theme": {
+                "collapsed": false,
+              },
               "title": "Advanced",
             },
             "arguments": "Arguments",
+            "callout": "Callout",
             "change-log": {
               "theme": {
                 "sidebar": false,
@@ -201,7 +205,7 @@ exports[`Page Process > pageMap en-US 1`] = `
             "conditional-fetching": "Conditional Data Fetching",
             "data-fetching": "Data Fetching",
             "error-handling": {
-              "hidden": true,
+              "display": "hidden",
               "title": "Error Handling",
             },
             "getting-started": "Getting Started",
@@ -224,7 +228,6 @@ exports[`Page Process > pageMap en-US 1`] = `
               "title": "Raw Layout",
             },
             "revalidation": "Auto Revalidation",
-            "scroll-with-dynamic-height": "Scroll With Dynamic Height",
             "suspense": "Suspense",
             "typescript": "TypeScript :)",
             "with-nextjs": "Next.js SSG and SSR",
@@ -297,8 +300,39 @@ exports[`Page Process > pageMap en-US 1`] = `
                   "route": "/docs/advanced/more/loooooooooooooooooooong-title",
                 },
                 {
+                  "children": [
+                    {
+                      "kind": "MdxPage",
+                      "name": "one",
+                      "route": "/docs/advanced/more/tree/one",
+                    },
+                    {
+                      "kind": "MdxPage",
+                      "name": "three",
+                      "route": "/docs/advanced/more/tree/three",
+                    },
+                    {
+                      "kind": "MdxPage",
+                      "name": "two",
+                      "route": "/docs/advanced/more/tree/two",
+                    },
+                    {
+                      "data": {
+                        "one": "One",
+                        "three": "Three",
+                        "two": "Two",
+                      },
+                      "kind": "Meta",
+                    },
+                  ],
+                  "kind": "Folder",
+                  "name": "tree",
+                  "route": "/docs/advanced/more/tree",
+                },
+                {
                   "data": {
                     "loooooooooooooooooooong-title": "Loooooooooooooooooooong Title",
+                    "tree": "Tree",
                   },
                   "kind": "Meta",
                   "locale": "en-US",
@@ -336,6 +370,12 @@ exports[`Page Process > pageMap en-US 1`] = `
           "locale": "en-US",
           "name": "arguments",
           "route": "/docs/arguments",
+        },
+        {
+          "kind": "MdxPage",
+          "locale": "en-US",
+          "name": "callout",
+          "route": "/docs/callout",
         },
         {
           "kind": "MdxPage",
@@ -420,12 +460,6 @@ exports[`Page Process > pageMap en-US 1`] = `
           "locale": "en-US",
           "name": "revalidation",
           "route": "/docs/revalidation",
-        },
-        {
-          "kind": "MdxPage",
-          "locale": "en-US",
-          "name": "scroll-with-dynamic-height",
-          "route": "/docs/scroll-with-dynamic-height",
         },
         {
           "kind": "MdxPage",
@@ -550,6 +584,10 @@ exports[`Page Process > pageMap en-US 1`] = `
       "data": {
         "404": "404",
         "500": "500",
+        "about": "About",
+        "blog": "Blog",
+        "docs": "Docs",
+        "examples": "Examples",
       },
       "kind": "Meta",
     },
@@ -564,6 +602,7 @@ exports[`Page Process > pageMap zh-CN 1`] = `
   [
     {
       "data": {
+        "about": "About",
         "blog": {
           "title": "博客",
           "type": "page",
@@ -577,7 +616,7 @@ exports[`Page Process > pageMap zh-CN 1`] = `
           "type": "page",
         },
         "index": {
-          "hidden": true,
+          "display": "hidden",
           "title": "简介",
           "type": "page",
         },
@@ -590,7 +629,7 @@ exports[`Page Process > pageMap zh-CN 1`] = `
         {
           "data": {
             "a-page": {
-              "hidden": true,
+              "display": "hidden",
               "theme": {
                 "layout": "raw",
               },
@@ -668,7 +707,6 @@ exports[`Page Process > pageMap zh-CN 1`] = `
             "pagination": "分页",
             "prefetching": "预请求",
             "revalidation": "自动重新请求",
-            "scroll-with-dynamic-height": "以動態高度滾動",
             "suspense": "Suspense",
             "typescript": "Typescript",
             "with-nextjs": "Next.js SSG 和 SSR",
@@ -683,6 +721,7 @@ exports[`Page Process > pageMap zh-CN 1`] = `
               "data": {
                 "cache": "缓存",
                 "file-name.with.DOTS": "带点的文件名",
+                "more": "More",
                 "performance": "性能",
                 "react-native": "React Native",
               },
@@ -704,6 +743,36 @@ exports[`Page Process > pageMap zh-CN 1`] = `
             {
               "children": [
                 {
+                  "children": [
+                    {
+                      "kind": "MdxPage",
+                      "name": "one",
+                      "route": "/docs/advanced/more/tree/one",
+                    },
+                    {
+                      "kind": "MdxPage",
+                      "name": "three",
+                      "route": "/docs/advanced/more/tree/three",
+                    },
+                    {
+                      "kind": "MdxPage",
+                      "name": "two",
+                      "route": "/docs/advanced/more/tree/two",
+                    },
+                    {
+                      "data": {
+                        "one": "One",
+                        "three": "Three",
+                        "two": "Two",
+                      },
+                      "kind": "Meta",
+                    },
+                  ],
+                  "kind": "Folder",
+                  "name": "tree",
+                  "route": "/docs/advanced/more/tree",
+                },
+                {
                   "kind": "MdxPage",
                   "locale": "en-US",
                   "name": "loooooooooooooooooooong-title",
@@ -712,6 +781,7 @@ exports[`Page Process > pageMap zh-CN 1`] = `
                 {
                   "data": {
                     "loooooooooooooooooooong-title": "Loooooooooooooooooooong Title",
+                    "tree": "Tree",
                   },
                   "kind": "Meta",
                   "locale": "en-US",
@@ -837,12 +907,6 @@ exports[`Page Process > pageMap zh-CN 1`] = `
         {
           "kind": "MdxPage",
           "locale": "zh-CN",
-          "name": "scroll-with-dynamic-height",
-          "route": "/docs/scroll-with-dynamic-height",
-        },
-        {
-          "kind": "MdxPage",
-          "locale": "zh-CN",
           "name": "suspense",
           "route": "/docs/suspense",
         },
@@ -869,6 +933,12 @@ exports[`Page Process > pageMap zh-CN 1`] = `
           "locale": "en-US",
           "name": "advanced",
           "route": "/docs/advanced",
+        },
+        {
+          "kind": "MdxPage",
+          "locale": "en-US",
+          "name": "callout",
+          "route": "/docs/callout",
         },
         {
           "kind": "MdxPage",

@@ -2,7 +2,7 @@
   "index": {
     "title": "소개",
     "type": "page",
-    "hidden": true
+    "display": "hidden"
   },
   "docs": {
     "title": "문서",

@@ -2,7 +2,7 @@
   "index": {
     "title": "前書き",
     "type": "page",
-    "hidden": true
+    "display": "hidden"
   },
   "docs": {
     "title": "ドキュメント",
