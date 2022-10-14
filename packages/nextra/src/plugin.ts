@@ -10,7 +10,7 @@ import {
 } from './types'
 import fs from 'graceful-fs'
 import { promisify } from 'node:util'
-import { parseFileName, parseJsonFile, truthy } from './utils'
+import { parseFileName, parseJsonFile, sortPages, truthy } from './utils'
 import path from 'node:path'
 import slash from 'slash'
 import grayMatter from 'gray-matter'
@@ -106,15 +106,13 @@ export async function collectFiles(
     const metaIndex = items.findIndex(
       item => item.kind === 'Meta' && item.locale === locale
     )
-    const defaultMeta: [string, string][] = mdxPages
-      .filter(item => item.locale === locale)
-      .map(item => [
-        item.name,
-        item.frontMatter?.title || title(item.name.replace(/[-_]/g, ' '))
-      ])
+
+    const defaultMeta = sortPages(mdxPages, locale)
+
     const metaFilename = locale
       ? META_FILENAME.replace('.', `.${locale}.`)
       : META_FILENAME
+
     const metaPath = path.join(dir, metaFilename) as MetaJsonPath
 
     if (metaIndex === -1) {
