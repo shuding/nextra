@@ -15,8 +15,7 @@ export const IS_BROWSER = typeof window !== 'undefined'
 export const DEFAULT_THEME: DocsThemeConfig = {
   banner: {
     dismissible: true,
-    key: 'nextra-banner',
-    text: ''
+    key: 'nextra-banner'
   },
   chat: {
     icon: (
@@ -24,10 +23,8 @@ export const DEFAULT_THEME: DocsThemeConfig = {
         <DiscordIcon />
         <span className="sr-only">Discord</span>
       </>
-    ),
-    link: ''
+    )
   },
-  components: {},
   darkMode: true,
   direction: 'ltr',
   docsRepositoryBase: 'https://github.com/shuding/nextra',
@@ -45,11 +42,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     },
     text: 'Edit this page'
   },
-  faviconGlyph: '',
-  feedback: {
-    content: null,
-    labels: ''
-  },
+  feedback: {},
   footer: {
     component: Footer,
     text: `MIT ${new Date().getFullYear()} © Nextra.`
@@ -89,9 +82,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     </>
   ),
   logoLink: true,
-  main: {
-    extraContent: null
-  },
+  main: {},
   navbar: Navbar,
   navigation: {
     next: true,
@@ -115,9 +106,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
         <GitHubIcon />
         <span className="sr-only">GitHub</span>
       </>
-    ),
-    // by default should be empty so clicking on project link will go to the github link
-    link: ''
+    )
   },
   search: {
     component({ className, directories }) {
@@ -135,8 +124,10 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     ),
     placeholder() {
       const { locale } = useRouter()
-      if (locale === 'zh-CN') return '搜索文档...'
-      return 'Search documentation...'
+      if (locale === 'zh-CN') return '搜索文档…'
+      if (locale === 'ru-RU') return 'Поиск документации…'
+      if (locale === 'fr-FR') return 'Rechercher de la documentation…'
+      return 'Search documentation…'
     }
   },
   serverSideError: {
@@ -147,10 +138,8 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     defaultMenuCollapsed: false,
     titleComponent: ({ title }) => <>{title}</>
   },
-  titleSuffix: ' – Nextra',
   toc: {
     component: TOC,
-    extraContent: null,
     float: true,
     title: 'On This Page'
   }

@@ -2,6 +2,7 @@
 import { FC, ReactNode } from 'react'
 import { ThemeProviderProps } from 'next-themes/dist/types'
 import { PageOpts } from 'nextra'
+import { NextSeoProps } from 'next-seo'
 import { Item } from './utils'
 import { TOCProps } from './components/toc'
 import { NavBarProps } from './components/navbar'
@@ -20,13 +21,13 @@ export interface DocsThemeConfig {
   banner: {
     dismissible: boolean
     key: string
-    text: ReactNode | FC
+    text?: ReactNode | FC
   }
   chat: {
     icon: ReactNode | FC
-    link: string
+    link?: string
   }
-  components: Record<string, FC>
+  components?: Record<string, FC>
   darkMode: boolean
   direction: 'ltr' | 'rtl'
   docsRepositoryBase: string
@@ -38,22 +39,23 @@ export interface DocsThemeConfig {
     }>
     text: ReactNode | FC
   }
-  faviconGlyph: string
+  faviconGlyph?: string
   feedback: {
-    content: ReactNode | FC
-    labels: string
+    content?: ReactNode | FC
+    labels?: string
   }
   footer: {
     component: ReactNode | FC<{ menu: boolean }>
     text: ReactNode | FC
   }
+  getNextSeoProps?: () => NextSeoProps
   gitTimestamp: ReactNode | FC<{ timestamp: Date }>
   head: ReactNode | FC
   i18n: { direction?: string; locale: string; text: string }[]
   logo: ReactNode | FC
   logoLink?: boolean | string
   main: {
-    extraContent: ReactNode | FC
+    extraContent?: ReactNode | FC
   }
   navbar: ReactNode | FC<NavBarProps>
   navigation:
@@ -67,7 +69,7 @@ export interface DocsThemeConfig {
     'defaultTheme' | 'storageKey' | 'forcedTheme'
   >
   notFound: {
-    content: ReactNode | FC,
+    content: ReactNode | FC
     labels: string
   }
   primaryHue:
@@ -78,7 +80,7 @@ export interface DocsThemeConfig {
       }
   project: {
     icon: ReactNode | FC
-    link: string
+    link?: string
   }
   search: {
     component:
@@ -92,18 +94,16 @@ export interface DocsThemeConfig {
     placeholder: string | (() => string)
   }
   serverSideError: {
-    content: ReactNode | FC,
+    content: ReactNode | FC
     labels: string
   }
   sidebar: {
     defaultMenuCollapsed: boolean
     titleComponent: ReactNode | FC<{ title: string; type: string }>
   }
-  // Can't be React component, otherwise will get Warning: A title element received an array with more than 1 element as children.
-  titleSuffix: string | (() => string)
   toc: {
     component: ReactNode | FC<TOCProps>
-    extraContent: ReactNode | FC
+    extraContent?: ReactNode | FC
     float: boolean
     title: ReactNode | FC
   }
