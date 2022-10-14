@@ -44,7 +44,7 @@ export function normalizeMeta(meta: Meta): Exclude<Meta, string> {
 }
 
 export function sortPages(
-  pages: MdxFile[],
+  pages: Pick<MdxFile, 'name' | 'frontMatter' | 'locale'>[],
   locale?: string
 ): [string, string][] {
   return pages

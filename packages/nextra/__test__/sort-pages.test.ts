@@ -1,26 +1,13 @@
 import { describe, expect, it } from 'vitest'
 import { sortPages } from '../src/utils'
-import { MdxFile } from '../src/types'
-
-function enhanceDefaultData(
-  data: Pick<MdxFile, 'name' | 'frontMatter'>
-): MdxFile {
-  return {
-    kind: 'MdxPage',
-    route: '',
-    ...data
-  }
-}
 
 describe('sortPages()', () => {
   it('should should sort by date', () => {
-    const data = sortPages(
-      [
-        { name: 'baz', frontMatter: { date: new Date('1995-10-21') } },
-        { name: 'foo', frontMatter: { date: new Date('1992-10-21') } },
-        { name: 'quz', frontMatter: { date: new Date('1998-10-21') } }
-      ].map(enhanceDefaultData)
-    )
+    const data = sortPages([
+      { name: 'baz', frontMatter: { date: new Date('1995-10-21') } },
+      { name: 'foo', frontMatter: { date: new Date('1992-10-21') } },
+      { name: 'quz', frontMatter: { date: new Date('1998-10-21') } }
+    ])
     expect(data).toEqual([
       ['quz', 'Quz'],
       ['baz', 'Baz'],
@@ -29,13 +16,11 @@ describe('sortPages()', () => {
   })
 
   it('should should sort by date first and after by title', () => {
-    const data = sortPages(
-      [
-        { name: 'quz' },
-        { name: 'foo', frontMatter: { date: new Date('1992-10-21') } },
-        { name: 'baz' }
-      ].map(enhanceDefaultData)
-    )
+    const data = sortPages([
+      { name: 'quz' },
+      { name: 'foo', frontMatter: { date: new Date('1992-10-21') } },
+      { name: 'baz' }
+    ])
     expect(data).toEqual([
       ['foo', 'Foo'],
       ['baz', 'Baz'],
@@ -44,13 +29,11 @@ describe('sortPages()', () => {
   })
 
   it('should take priority `frontMatter.title` over name', () => {
-    const data = sortPages(
-      [
-        { name: 'baz' },
-        { name: 'foo', frontMatter: { title: 'abc' } },
-        { name: 'quz' }
-      ].map(enhanceDefaultData)
-    )
+    const data = sortPages([
+      { name: 'baz' },
+      { name: 'foo', frontMatter: { title: 'abc' } },
+      { name: 'quz' }
+    ])
     expect(data).toEqual([
       ['foo', 'abc'],
       ['baz', 'Baz'],
@@ -59,11 +42,11 @@ describe('sortPages()', () => {
   })
 
   it('should sort numeric', () => {
-    const data = sortPages(
-      [{ name: '10-baz' }, { name: '0-foo' }, { name: '2.5-quz' }].map(
-        enhanceDefaultData
-      )
-    )
+    const data = sortPages([
+      { name: '10-baz' },
+      { name: '0-foo' },
+      { name: '2.5-quz' }
+    ])
     expect(data).toEqual([
       ['0-foo', '0 Foo'],
       ['2.5-quz', '2.5 Quz'],
