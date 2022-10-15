@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { sortPages } from '../src/utils'
 
 describe('sortPages()', () => {
-  it('should should sort by date', () => {
+  it('should sort by date', () => {
     const data = sortPages([
       { name: 'baz', frontMatter: { date: new Date('1995-10-21') } },
       { name: 'foo', frontMatter: { date: new Date('1992-10-21') } },
@@ -15,7 +15,7 @@ describe('sortPages()', () => {
     ])
   })
 
-  it('should should sort by date first and after by title', () => {
+  it('should sort by date first and after by title', () => {
     const data = sortPages([
       { name: 'quz' },
       { name: 'foo', frontMatter: { date: new Date('1992-10-21') } },
