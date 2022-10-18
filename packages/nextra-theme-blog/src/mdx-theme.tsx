@@ -36,14 +36,15 @@ const createHeaderLink =
   ({ children, id, ...props }: ComponentProps<'h2'>): ReactElement => {
     return (
       <Tag className={`subheading-${Tag}`} {...props}>
-        <span className="subheading-anchor -mt-8" id={id} />
-        <a href={`#${id}`}>{children}</a>
+        {children}
+        <span className="absolute -mt-7" id={id} />
+        <a href={`#${id}`} className="subheading-anchor" />
       </Tag>
     )
   }
 
 const A = ({ children, ...props }: ComponentProps<'a'>) => {
-  const isExternal = props.href && props.href.startsWith('https://')
+  const isExternal = props.href?.startsWith('https://')
   if (isExternal) {
     return (
       <a target="_blank" rel="noreferrer" {...props}>
