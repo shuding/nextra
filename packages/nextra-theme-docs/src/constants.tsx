@@ -90,7 +90,10 @@ export const DEFAULT_THEME: DocsThemeConfig = {
   main: {
     extraContent: null
   },
-  navbar: Navbar,
+  navbar: {
+    component: Navbar,
+    extraContent: null
+  },
   navigation: {
     next: true,
     prev: true

@@ -184,6 +184,8 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
           </Anchor>
         ) : null}
 
+        {renderComponent(config.navbar.extraContent)}
+
         <button
           className="nextra-hamburger rounded active:bg-gray-400/20 p-2 -mr-2 md:hidden"
           onClick={() => setMenu(!menu)}
