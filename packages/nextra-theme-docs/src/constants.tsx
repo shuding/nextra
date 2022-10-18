@@ -81,8 +81,8 @@ export const DEFAULT_THEME: DocsThemeConfig = {
   i18n: [],
   logo: (
     <>
-      <span className="mr-2 hidden font-extrabold md:inline">Nextra</span>
-      <span className="hidden font-normal text-gray-600 md:inline">
+      <span className="font-extrabold">Nextra</span>
+      <span className="ml-2 hidden font-normal text-gray-600 md:inline">
         The Next Docs Builder
       </span>
     </>
