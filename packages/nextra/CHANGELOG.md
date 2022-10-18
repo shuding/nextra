@@ -1,5 +1,11 @@
 # nextra
 
+## 2.0.0-beta.31
+
+### Patch Changes
+
+- cef5546: allow headings contain links
+
 ## 2.0.0-beta.30
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # nextra-theme-docs
 
+## 2.0.0-beta.31
+
+### Patch Changes
+
+- cef5546: allow headings contain links
+- 5238bb4: feat(docs): support logoLink config option
+- f964802: do not hide default logo on mobile
+
 ## 2.0.0-beta.30
 
 ### Patch Changes
