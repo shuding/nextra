@@ -355,6 +355,36 @@ export default {
 }
 ```
 
+## `logoLink`
+
+Enable automaticaly linking the logo to root, or provide a custom url.
+
+**Type:** `string` | `boolean`
+
+**Default:** `true` (links to `/` by default)
+
+**Example:**
+
+```js filename="theme.config.js"
+/**
+ * @type {import('nextra-theme-docs').DocsThemeConfig}
+ */
+export default {
+  logoLink: '/about'
+}
+```
+
+Or to disable the logo link:
+
+```js filename="theme.config.js"
+/**
+ * @type {import('nextra-theme-docs').DocsThemeConfig}
+ */
+export default {
+  logoLink: false
+}
+```
+
 ## `head`
 
 The head that should be inserted into the html document.

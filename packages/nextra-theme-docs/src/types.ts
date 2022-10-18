@@ -50,6 +50,7 @@ export interface DocsThemeConfig {
   head: ReactNode | FC
   i18n: { direction?: string; locale: string; text: string }[]
   logo: ReactNode | FC
+  logoLink?: boolean | string
   main: {
     extraContent: ReactNode | FC
   }

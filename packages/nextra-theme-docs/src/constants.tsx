@@ -87,6 +87,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
       </span>
     </>
   ),
+  logoLink: true,
   main: {
     extraContent: null
   },

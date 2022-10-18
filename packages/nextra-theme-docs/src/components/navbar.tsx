@@ -94,13 +94,18 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
         )}
       />
       <nav className="mx-auto flex h-[var(--nextra-navbar-height)] max-w-[90rem] items-center justify-end gap-2 pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
-        <Anchor
-          href="/"
-          className="flex ltr:mr-auto rtl:ml-auto items-center hover:opacity-75"
-        >
-          {renderComponent(config.logo)}
-        </Anchor>
-
+        {config.logoLink ? (
+          <Anchor
+            href={typeof config.logoLink === 'string' ? config.logoLink : '/'}
+            className="flex ltr:mr-auto rtl:ml-auto items-center hover:opacity-75"
+          >
+            {renderComponent(config.logo)}
+          </Anchor>
+        ) : (
+          <div className="flex ltr:mr-auto rtl:ml-auto items-center">
+            {renderComponent(config.logo)}
+          </div>
+        )}
         {items.map(pageOrMenu => {
           if (pageOrMenu.hidden) return null
 
