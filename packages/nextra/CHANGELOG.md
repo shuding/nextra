@@ -1,5 +1,11 @@
 # nextra
 
+## 2.0.0-beta.32
+
+### Patch Changes
+
+- fc8cca0: add `<InformationCircleIcon />` icon, improve `<Callout />` default emojis
+
 ## 2.0.0-beta.31
 
 ### Patch Changes
