@@ -98,9 +98,12 @@ export async function collectFiles(
   const items = (await Promise.all(promises)).filter(truthy)
 
   const mdxPages = items.filter(
-    (item): item is MdxFile => item.kind === 'MdxPage'
+    (item): item is MdxFile | Folder =>
+      item.kind === 'MdxPage' || item.kind === 'Folder'
   )
-  const locales = mdxPages.map(item => item.locale)
+  const locales = mdxPages
+    .filter((item): item is MdxFile => item.kind === 'MdxPage')
+    .map(item => item.locale)
 
   for (const locale of locales) {
     const metaIndex = items.findIndex(
