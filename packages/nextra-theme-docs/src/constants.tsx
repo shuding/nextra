@@ -198,6 +198,7 @@ export const LEGACY_CONFIG_OPTIONS: Record<string, string> = {
 
 export const DEFAULT_PAGE_THEME: PageTheme = {
   breadcrumb: true,
+  collapsed: false,
   footer: true,
   layout: 'default',
   navbar: true,
