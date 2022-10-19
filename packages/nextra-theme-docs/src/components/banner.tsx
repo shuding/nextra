@@ -28,17 +28,19 @@ export function Banner(): ReactElement | null {
         <div className="max-w-[90rem] truncate">
           {renderComponent(banner.text)}
         </div>
-        <button
-          className="opacity-80 absolute ltr:right-0 rtl:left-0 hover:opacity-100"
-          onClick={() => {
-            try {
-              localStorage.setItem(banner.key, '0')
-            } catch {}
-            document.body.classList.add('nextra-banner-hidden')
-          }}
-        >
-          <XIcon className="h4 w-4 mx-4" />
-        </button>
+        {banner.dismissible && (
+          <button
+            className="opacity-80 absolute ltr:right-0 rtl:left-0 hover:opacity-100"
+            onClick={() => {
+              try {
+                localStorage.setItem(banner.key, '0')
+              } catch {}
+              document.body.classList.add('nextra-banner-hidden')
+            }}
+          >
+            <XIcon className="h4 w-4 mx-4" />
+          </button>
+        )}
       </div>
     </>
   )

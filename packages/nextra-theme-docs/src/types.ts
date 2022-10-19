@@ -18,6 +18,7 @@ export type RecursivePartial<T> = {
 
 export interface DocsThemeConfig {
   banner: {
+    dismissible: boolean
     key: string
     text: ReactNode | FC
   }

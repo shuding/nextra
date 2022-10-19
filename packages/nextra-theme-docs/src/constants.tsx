@@ -14,6 +14,7 @@ export const IS_BROWSER = typeof window !== 'undefined'
 
 export const DEFAULT_THEME: DocsThemeConfig = {
   banner: {
+    dismissible: true,
     key: 'nextra-banner',
     text: ''
   },
