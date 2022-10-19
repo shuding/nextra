@@ -16,7 +16,8 @@ import {
   NavLinks,
   Sidebar,
   Breadcrumb,
-  Banner
+  Banner,
+  ThemeSwitch
 } from './components'
 import { getComponents } from './mdx-components'
 import { ActiveAnchorProvider, ConfigProvider, useConfig } from './contexts'
@@ -281,5 +282,6 @@ export {
   ServerSideErrorPage,
   Tabs,
   Tab,
-  Navbar
+  Navbar,
+  ThemeSwitch,
 } from './components'

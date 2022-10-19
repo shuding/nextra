@@ -177,6 +177,10 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
           >
             {renderComponent(config.project.icon)}
           </Anchor>
+        ) : config.project.icon ? (
+          // if no project link is provided, but a component exists, render it
+          // to allow the client to render their own link
+          renderComponent(config.project.icon)
         ) : null}
 
         {config.chat.link ? (
@@ -187,6 +191,10 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
           >
             {renderComponent(config.chat.icon)}
           </Anchor>
+        ) : config.chat.icon ? (
+          // if no chat link is provided, but a component exists, render it
+          // to allow the client to render their own link
+          renderComponent(config.chat.icon)
         ) : null}
 
         <button
