@@ -194,6 +194,7 @@ exports[`Page Process > pageMap en-US 1`] = `
               "title": "Advanced",
             },
             "arguments": "Arguments",
+            "callout": "Callout",
             "change-log": {
               "theme": {
                 "sidebar": false,
@@ -339,6 +340,12 @@ exports[`Page Process > pageMap en-US 1`] = `
           "locale": "en-US",
           "name": "arguments",
           "route": "/docs/arguments",
+        },
+        {
+          "kind": "MdxPage",
+          "locale": "en-US",
+          "name": "callout",
+          "route": "/docs/callout",
         },
         {
           "kind": "MdxPage",
@@ -872,6 +879,12 @@ exports[`Page Process > pageMap zh-CN 1`] = `
           "locale": "en-US",
           "name": "advanced",
           "route": "/docs/advanced",
+        },
+        {
+          "kind": "MdxPage",
+          "locale": "en-US",
+          "name": "callout",
+          "route": "/docs/callout",
         },
         {
           "kind": "MdxPage",
