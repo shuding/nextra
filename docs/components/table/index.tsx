@@ -1,27 +1,29 @@
 export function OptionTable({ options }: { options: [string, string, any] }) {
   return (
-    <div className="mt-6 mb-4 pb-4 overflow-x-auto overscroll-x-contain">
-      <table className="border-collapse w-full text-sm">
+    <div className="nx-mt-6 nx-mb-4 nx-pb-4 nx-overflow-x-auto nx-overscroll-x-contain">
+      <table className="nx-border-collapse nx-w-full nx-text-sm">
         <thead>
-          <tr className="border-b text-left py-4 dark:border-primary-100/10">
-            <th className="py-2 font-semibold">Option</th>
-            <th className="py-2 pl-6 font-semibold">Type</th>
-            <th className="py-2 pl-6 pr-6 font-semibold">Description</th>
+          <tr className="nx-border-b nx-text-left nx-py-4 dark:nx-border-primary-100/10">
+            <th className="nx-py-2 nx-font-semibold">Option</th>
+            <th className="nx-py-2 nx-pl-6 nx-font-semibold">Type</th>
+            <th className="nx-py-2 nx-pl-6 nx-pr-6 nx-font-semibold">
+              Description
+            </th>
           </tr>
         </thead>
-        <tbody className="text-gray-900 dark:text-gray-100 align-baseline">
+        <tbody className="nx-text-gray-900 dark:nx-text-gray-100 nx-align-baseline">
           {options.map(([option, type, description]) => (
             <tr
               key={option}
-              className="border-b border-gray-100 dark:border-zinc-800/50"
+              className="nx-border-b nx-border-gray-100 dark:nx-border-zinc-800/50"
             >
-              <td className="py-2 font-mono font-semibold text-xs leading-6 text-violet-600 whitespace-pre dark:text-violet-500">
+              <td className="nx-py-2 nx-font-mono nx-font-semibold nx-text-xs nx-leading-6 nx-text-violet-600 nx-whitespace-pre dark:nx-text-violet-500">
                 {option}
               </td>
-              <td className="py-2 pl-6 font-mono font-semibold text-xs leading-6 text-slate-500 whitespace-pre dark:text-slate-400">
+              <td className="nx-py-2 nx-pl-6 nx-font-mono nx-font-semibold nx-text-xs nx-leading-6 nx-text-slate-500 nx-whitespace-pre dark:nx-text-slate-400">
                 {type}
               </td>
-              <td className="py-2 pl-6">{description}</td>
+              <td className="nx-py-2 nx-pl-6">{description}</td>
             </tr>
           ))}
         </tbody>
