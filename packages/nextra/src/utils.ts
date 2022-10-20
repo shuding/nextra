@@ -1,6 +1,7 @@
 import path from 'node:path'
+import title from 'title'
 import { LOCALE_REGEX } from './constants'
-import { Meta } from './types'
+import { Folder, MdxFile, Meta } from './types'
 
 export function parseFileName(filePath: string): {
   name: string
@@ -40,4 +41,35 @@ export function truthy<T>(value: T): value is Truthy<T> {
 
 export function normalizeMeta(meta: Meta): Exclude<Meta, string> {
   return typeof meta === 'string' ? { title: meta } : meta
+}
+
+export function sortPages(
+  pages: (
+    | Pick<MdxFile, 'kind' | 'name' | 'frontMatter' | 'locale'>
+    | Pick<Folder, 'kind' | 'name'>
+  )[],
+  locale?: string
+): [string, string][] {
+  return pages
+    .filter(item => item.kind === 'Folder' || item.locale === locale)
+    .map(item => ({
+      name: item.name,
+      date: 'frontMatter' in item && item.frontMatter?.date,
+      title:
+        ('frontMatter' in item && item.frontMatter?.title) ||
+        title(item.name.replace(/[-_]/g, ' '))
+    }))
+    .sort((a, b) => {
+      if (a.date && b.date) {
+        return new Date(b.date).getTime() - new Date(a.date).getTime()
+      }
+      if (a.date) {
+        return -1 // sort a before b
+      }
+      if (b.date) {
+        return 1 // sort a after b
+      }
+      return a.title.localeCompare(b.title, locale, { numeric: true })
+    })
+    .map(item => [item.name, item.title])
 }

@@ -560,6 +560,10 @@ exports[`Page Process > pageMap en-US 1`] = `
       "data": {
         "404": "404",
         "500": "500",
+        "about": "About",
+        "blog": "Blog",
+        "docs": "Docs",
+        "examples": "Examples",
       },
       "kind": "Meta",
     },
@@ -574,6 +578,7 @@ exports[`Page Process > pageMap zh-CN 1`] = `
   [
     {
       "data": {
+        "about": "About",
         "blog": {
           "title": "博客",
           "type": "page",
@@ -693,6 +698,7 @@ exports[`Page Process > pageMap zh-CN 1`] = `
               "data": {
                 "cache": "缓存",
                 "file-name.with.DOTS": "带点的文件名",
+                "more": "More",
                 "performance": "性能",
                 "react-native": "React Native",
               },
