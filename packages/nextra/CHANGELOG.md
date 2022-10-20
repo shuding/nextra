@@ -1,5 +1,13 @@
 # nextra
 
+## 2.0.0-beta.33
+
+### Patch Changes
+
+- 580c433: add nx- to all tailwind classes for style isolation
+- 094fdec: sort `defaultMeta` by `frontMatter.date`, if missing by `frontMatter.title` and after by capitalized page name
+- 094fdec: capitalize sidebar's folders names if item is missing in `_meta.json`
+
 ## 2.0.0-beta.32
 
 ### Patch Changes
