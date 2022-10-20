@@ -97,14 +97,15 @@ const Body = ({
     <div className="mt-16" />
   )
 
-  const body = (
+  const content = (
     <>
       {children}
       {gitTimestampEl}
       {navigation}
-      {renderComponent(config.main.extraContent)}
     </>
   )
+
+  const body = config.main?.({ children: content }) || content
 
   if (themeContext.layout === 'full') {
     return (
