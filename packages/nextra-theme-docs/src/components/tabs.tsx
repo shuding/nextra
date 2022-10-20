@@ -38,8 +38,8 @@ export function Tabs({
       defaultIndex={defaultIndex}
       onChange={onChange}
     >
-      <div className="no-scrollbar -m-2 overflow-x-auto overflow-y-hidden overscroll-x-contain p-2">
-        <HeadlessTab.List className="mt-4 flex w-max min-w-full border-b border-gray-200 pb-px dark:border-neutral-800">
+      <div className="nx-no-scrollbar -nx-m-2 nx-overflow-x-auto nx-overflow-y-hidden nx-overscroll-x-contain nx-p-2">
+        <HeadlessTab.List className="nx-mt-4 nx-flex nx-w-max nx-min-w-full nx-border-b nx-border-gray-200 nx-pb-px dark:nx-border-neutral-800">
           {items.map((item, index) => {
             const disabled = !!(
               item &&
@@ -54,14 +54,14 @@ export function Tabs({
                 disabled={disabled}
                 className={({ selected }) =>
                   cn(
-                    'rounded-t',
-                    'text-md mr-2 p-2 font-medium leading-5 transition-colors',
-                    '-mb-0.5 select-none border-b-2',
+                    'nx-rounded-t',
+                    'nx-text-md nx-mr-2 nx-p-2 nx-font-medium nx-leading-5 nx-transition-colors',
+                    '-nx-mb-0.5 nx-select-none nx-border-b-2',
                     selected
-                      ? 'border-primary-500 text-primary-500'
-                      : 'border-transparent text-gray-600 hover:border-gray-200 hover:text-black dark:text-gray-200 dark:hover:border-neutral-800 dark:hover:text-white',
+                      ? 'nx-border-primary-500 nx-text-primary-500'
+                      : 'nx-border-transparent nx-text-gray-600 hover:nx-border-gray-200 hover:nx-text-black dark:nx-text-gray-200 dark:hover:nx-border-neutral-800 dark:hover:nx-text-white',
                     disabled &&
-                      'pointer-events-none text-gray-400 dark:text-neutral-600'
+                      'nx-pointer-events-none nx-text-gray-400 dark:nx-text-neutral-600'
                   )
                 }
               >
@@ -81,7 +81,7 @@ export function Tab({
   ...props
 }: ComponentProps<'div'>): ReactElement {
   return (
-    <HeadlessTab.Panel {...props} className="rounded">
+    <HeadlessTab.Panel {...props} className="nx-rounded">
       {children}
     </HeadlessTab.Panel>
   )

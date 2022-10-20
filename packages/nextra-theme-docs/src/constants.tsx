@@ -21,7 +21,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     icon: (
       <>
         <DiscordIcon />
-        <span className="sr-only">Discord</span>
+        <span className="nx-sr-only">Discord</span>
       </>
     )
   },
@@ -104,7 +104,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     icon: (
       <>
         <GitHubIcon />
-        <span className="sr-only">GitHub</span>
+        <span className="nx-sr-only">GitHub</span>
       </>
     )
   },

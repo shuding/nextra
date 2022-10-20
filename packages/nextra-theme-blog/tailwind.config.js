@@ -1,5 +1,7 @@
 const colors = require('tailwindcss/colors')
+
 module.exports = {
+  prefix: 'nx-',
   content: ['./src/**/*.{js,tsx,jsx}', '../nextra/src/components/*.tsx'],
   theme: {
     colors: {
@@ -55,5 +57,5 @@ module.exports = {
     }
   },
   plugins: [require('@tailwindcss/typography')],
-  darkMode: 'class'
+  darkMode: ['class', 'html[class~="dark"]']
 }

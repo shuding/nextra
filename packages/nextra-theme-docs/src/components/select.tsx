@@ -50,10 +50,10 @@ export function Select({
           ref={trigger}
           title={title}
           className={cn(
-            'h-7 rounded-md px-2 text-left text-xs font-medium text-gray-600 transition-colors dark:text-gray-400',
+            'nx-h-7 nx-rounded-md nx-px-2 nx-text-left nx-text-xs nx-font-medium nx-text-gray-600 nx-transition-colors dark:nx-text-gray-400',
             open
-              ? 'bg-gray-200 text-gray-900 dark:bg-primary-100/10 dark:text-gray-50'
-              : 'hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-primary-100/5 dark:hover:text-gray-50',
+              ? 'nx-bg-gray-200 nx-text-gray-900 dark:nx-bg-primary-100/10 dark:nx-text-gray-50'
+              : 'hover:nx-bg-gray-100 hover:nx-text-gray-900 dark:hover:nx-bg-primary-100/5 dark:hover:nx-text-gray-50',
             className
           )}
         >
@@ -64,10 +64,10 @@ export function Select({
               ref={container}
               show={open}
               as={Listbox.Options}
-              className="border border-black/5 dark:border-white/20 z-20 max-h-64 overflow-auto rounded-md bg-white py-1 text-sm shadow-lg dark:bg-neutral-800"
-              leave="transition-opacity"
-              leaveFrom="opacity-100"
-              leaveTo="opacity-0"
+              className="nx-border nx-border-black/5 dark:nx-border-white/20 nx-z-20 nx-max-h-64 nx-overflow-auto nx-rounded-md nx-bg-white nx-py-1 nx-text-sm nx-shadow-lg dark:nx-bg-neutral-800"
+              leave="nx-transition-opacity"
+              leaveFrom="nx-opacity-100"
+              leaveTo="nx-opacity-0"
             >
               {options.map(option => (
                 <Listbox.Option
@@ -76,16 +76,16 @@ export function Select({
                   className={({ active }) =>
                     cn(
                       active
-                        ? 'bg-primary-50 text-primary-500 dark:bg-primary-500/10'
-                        : 'text-gray-800 dark:text-gray-100',
-                      'relative cursor-pointer whitespace-nowrap py-1.5',
-                      'ltr:pl-3 ltr:pr-9 rtl:pr-3 rtl:pl-9'
+                        ? 'nx-bg-primary-50 nx-text-primary-500 dark:nx-bg-primary-500/10'
+                        : 'nx-text-gray-800 dark:nx-text-gray-100',
+                      'nx-relative nx-cursor-pointer nx-whitespace-nowrap nx-py-1.5',
+                      'ltr:nx-pl-3 ltr:nx-pr-9 rtl:nx-pr-3 rtl:nx-pl-9'
                     )
                   }
                 >
                   {option.name}
                   {option.key === selected.key && (
-                    <span className="absolute inset-y-0 ltr:right-3 rtl:left-3 flex items-center">
+                    <span className="nx-absolute nx-inset-y-0 ltr:nx-right-3 rtl:nx-left-3 nx-flex nx-items-center">
                       <CheckIcon />
                     </span>
                   )}

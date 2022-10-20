@@ -6,15 +6,15 @@
 @import 'nextra/styles/subheading-anchor.css';
 
 body {
-  @apply px-4;
+  @apply nx-px-4;
 }
 
 article {
-  @apply mx-auto block pt-20 pb-32;
+  @apply nx-mx-auto nx-block nx-pt-20 nx-pb-32;
 }
 
 article img {
-  @apply mx-auto;
+  @apply nx-mx-auto;
 }
 
 h1 {
@@ -24,9 +24,9 @@ h1 {
 .prose code {
   &:before,
   &:after {
-    @apply hidden;
+    @apply nx-hidden;
   }
   .line {
-    @apply font-normal;
+    @apply nx-font-normal;
   }
 }

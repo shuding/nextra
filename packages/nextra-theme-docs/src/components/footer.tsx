@@ -8,21 +8,21 @@ import { renderComponent } from '../utils'
 export function Footer({ menu }: { menu?: boolean }): ReactElement {
   const config = useConfig()
   return (
-    <footer className="bg-gray-100 pb-[env(safe-area-inset-bottom)] dark:bg-neutral-900">
+    <footer className="nx-bg-gray-100 nx-pb-[env(safe-area-inset-bottom)] dark:nx-bg-neutral-900">
       <div
         className={cn(
-          'mx-auto max-w-[90rem] py-2 px-4 flex gap-2',
-          menu ? 'flex' : 'hidden'
+          'nx-mx-auto nx-max-w-[90rem] nx-py-2 nx-px-4 nx-flex nx-gap-2',
+          menu ? 'nx-flex' : 'nx-hidden'
         )}
       >
         {config.i18n.length > 0 && <LocaleSwitch options={config.i18n} />}
         {config.darkMode && <ThemeSwitch />}
       </div>
-      <hr className="dark:border-neutral-800" />
+      <hr className="dark:nx-border-neutral-800" />
       <div
         className={cn(
-          'mx-auto max-w-[90rem] py-12 flex justify-center md:justify-start text-gray-600 dark:text-gray-400',
-          'pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]'
+          'nx-mx-auto nx-max-w-[90rem] nx-py-12 nx-flex nx-justify-center md:nx-justify-start nx-text-gray-600 dark:nx-text-gray-400',
+          'nx-pl-[max(env(safe-area-inset-left),1.5rem)] nx-pr-[max(env(safe-area-inset-right),1.5rem)]'
         )}
       >
         {renderComponent(config.footer.text)}
