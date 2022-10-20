@@ -14,6 +14,7 @@ export const IS_BROWSER = typeof window !== 'undefined'
 
 export const DEFAULT_THEME: DocsThemeConfig = {
   banner: {
+    dismissible: true,
     key: 'nextra-banner',
     text: ''
   },
@@ -81,12 +82,13 @@ export const DEFAULT_THEME: DocsThemeConfig = {
   i18n: [],
   logo: (
     <>
-      <span className="mr-2 hidden font-extrabold md:inline">Nextra</span>
-      <span className="hidden font-normal text-gray-600 md:inline">
+      <span className="font-extrabold">Nextra</span>
+      <span className="ml-2 hidden font-normal text-gray-600 md:inline">
         The Next Docs Builder
       </span>
     </>
   ),
+  logoLink: true,
   main: {
     extraContent: null
   },
@@ -200,6 +202,7 @@ export const LEGACY_CONFIG_OPTIONS: Record<string, string> = {
 
 export const DEFAULT_PAGE_THEME: PageTheme = {
   breadcrumb: true,
+  collapsed: false,
   footer: true,
   layout: 'default',
   navbar: true,

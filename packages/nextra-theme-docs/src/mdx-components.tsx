@@ -85,7 +85,7 @@ const createHeaderLink = (
     ...props
   }: ComponentProps<'h2'>): ReactElement {
     setActiveAnchor ??= useSetActiveAnchor()
-    const obRef = useRef<HTMLSpanElement>(null)
+    const obRef = useRef<HTMLAnchorElement>(null)
 
     useEffect(() => {
       const heading = obRef.current
@@ -119,8 +119,9 @@ const createHeaderLink = (
         )}
         {...props}
       >
-        <span className="subheading-anchor -mt-20" id={id} ref={obRef} />
-        <a href={`#${id}`}>{children}</a>
+        {children}
+        <span className="absolute -mt-20" id={id} ref={obRef} />
+        <a href={`#${id}`} className="subheading-anchor" />
       </Tag>
     )
   }

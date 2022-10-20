@@ -1124,6 +1124,9 @@ exports[`context > getAllPages() > should work 1`] = `
         ],
         "kind": "Folder",
         "meta": {
+          "theme": {
+            "collapsed": false,
+          },
           "title": "Advanced",
         },
         "name": "advanced",
@@ -1133,6 +1136,9 @@ exports[`context > getAllPages() > should work 1`] = `
         "kind": "MdxPage",
         "locale": "en-US",
         "meta": {
+          "theme": {
+            "collapsed": false,
+          },
           "title": "Advanced",
         },
         "name": "advanced",
@@ -1338,6 +1344,15 @@ exports[`context > getAllPages() > should work 1`] = `
         },
         "name": "raw-layout",
         "route": "/docs/raw-layout",
+      },
+      {
+        "kind": "MdxPage",
+        "locale": "en-US",
+        "meta": {
+          "title": "Callout",
+        },
+        "name": "callout",
+        "route": "/docs/callout",
       },
       {
         "kind": "MdxPage",
@@ -2901,6 +2916,9 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
     ],
     "kind": "Folder",
     "meta": {
+      "theme": {
+        "collapsed": false,
+      },
       "title": "Advanced",
     },
     "name": "advanced",
@@ -2910,6 +2928,9 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
     "kind": "MdxPage",
     "locale": "en-US",
     "meta": {
+      "theme": {
+        "collapsed": false,
+      },
       "title": "Advanced",
     },
     "name": "advanced",
@@ -3115,6 +3136,15 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
     },
     "name": "raw-layout",
     "route": "/docs/raw-layout",
+  },
+  {
+    "kind": "MdxPage",
+    "locale": "en-US",
+    "meta": {
+      "title": "Callout",
+    },
+    "name": "callout",
+    "route": "/docs/callout",
   },
   {
     "kind": "MdxPage",

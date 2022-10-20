@@ -18,6 +18,7 @@ export type RecursivePartial<T> = {
 
 export interface DocsThemeConfig {
   banner: {
+    dismissible: boolean
     key: string
     text: ReactNode | FC
   }
@@ -50,6 +51,7 @@ export interface DocsThemeConfig {
   head: ReactNode | FC
   i18n: { direction?: string; locale: string; text: string }[]
   logo: ReactNode | FC
+  logoLink?: boolean | string
   main: {
     extraContent: ReactNode | FC
   }
@@ -112,6 +114,7 @@ export interface DocsThemeConfig {
 
 export type PageTheme = {
   breadcrumb: boolean
+  collapsed: boolean
   footer: boolean
   layout: 'default' | 'full' | 'raw'
   navbar: boolean

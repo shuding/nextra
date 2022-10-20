@@ -1,5 +1,23 @@
 # nextra-theme-docs
 
+## 2.0.0-beta.32
+
+### Patch Changes
+
+- fc8cca0: add `<InformationCircleIcon />` icon, improve `<Callout />` default emojis
+- 723d42a: use `lightningcss` instead `cssnano`
+- 9f5af54: add `_meta.json#theme.collapsed` option for control state sidebar's folders
+- f360f28: add new theme option `banner.dismissible`
+- a8a89e9: chore(docs): export ThemeSwitch & custom social
+
+## 2.0.0-beta.31
+
+### Patch Changes
+
+- cef5546: allow headings contain links
+- 5238bb4: feat(docs): support logoLink config option
+- f964802: do not hide default logo on mobile
+
 ## 2.0.0-beta.30
 
 ### Patch Changes
