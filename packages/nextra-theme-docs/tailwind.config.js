@@ -10,6 +10,7 @@ const makePrimaryColor =
   }
 
 module.exports = {
+  prefix: 'nx-',
   content: [
     './src/**/*.tsx',
     '../nextra/src/icons/*.tsx',

@@ -9,13 +9,13 @@
 @import './typesetting-article.css';
 
 html {
-  @apply antialiased text-base;
+  @apply nx-antialiased nx-text-base;
   font-feature-settings: 'rlig' 1, 'calt' 1, 'ss01' 1, 'ss06' 1;
   -webkit-tap-highlight-color: transparent;
 }
 
 body {
-  @apply w-full bg-white dark:bg-dark dark:text-gray-100;
+  @apply nx-w-full nx-bg-white dark:nx-bg-dark dark:nx-text-gray-100;
 }
 
 a,
@@ -23,42 +23,43 @@ summary,
 button,
 input,
 [tabindex]:not([tabindex='-1']) {
-  @apply outline-none;
+  @apply nx-outline-none;
   &:focus-visible {
-    @apply ring-2 ring-primary-200 ring-offset-1 ring-offset-primary-300;
+    @apply nx-ring-2 nx-ring-primary-200 nx-ring-offset-1 nx-ring-offset-primary-300;
   }
 }
 
-a, summary {
-  @apply rounded;
+a,
+summary {
+  @apply nx-rounded;
 }
 
 @media (max-width: 767px) {
   .nextra-sidebar-container {
-    @apply fixed pt-[calc(var(--nextra-navbar-height))] top-0 w-full bottom-24 z-[15] overscroll-contain bg-white dark:bg-dark;
-    transition: transform .8s cubic-bezier(.52, .16, .04, 1);
+    @apply nx-fixed nx-pt-[calc(var(--nextra-navbar-height))] nx-top-0 nx-w-full nx-bottom-24 nx-z-[15] nx-overscroll-contain nx-bg-white dark:nx-bg-dark;
+    transition: transform 0.8s cubic-bezier(0.52, 0.16, 0.04, 1);
     will-change: transform, opacity;
     contain: layout style;
     backface-visibility: hidden;
   }
   .nextra-banner-container ~ div {
     .nextra-sidebar-container {
-      @apply pt-[6.5rem];
+      @apply nx-pt-[6.5rem];
     }
     &.nextra-nav-container {
-      @apply top-10 md:top-0;
+      @apply nx-top-10 md:nx-top-0;
     }
   }
   .nextra-banner-hidden {
     .nextra-banner-container ~ div .nextra-sidebar-container {
-      @apply pt-16;
+      @apply nx-pt-16;
     }
     .nextra-nav-container {
-      @apply !top-0;
+      @apply !nx-top-0;
     }
   }
   .nextra-search .excerpt {
-    @apply overflow-hidden text-ellipsis;
+    @apply nx-overflow-hidden nx-text-ellipsis;
     display: -webkit-box;
     line-clamp: 1;
     -webkit-line-clamp: 1;
@@ -71,14 +72,14 @@ a, summary {
   .nextra-sidebar-container,
   .nextra-sidebar-container.open,
   body.resizing .nextra-sidebar-container {
-    @apply transition-none;
+    @apply nx-transition-none;
   }
 }
 
 /* Content Typography */
 article details > summary {
   &::-webkit-details-marker {
-    @apply hidden;
+    @apply nx-hidden;
   }
   &::before {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'%3E%3Cpath fill-rule='evenodd' d='M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z' clip-rule='evenodd' /%3E%3C/svg%3E");
@@ -92,7 +93,7 @@ article details > summary {
   .nextra-toc > .div,
   .nextra-sidebar-container {
     mask-image: linear-gradient(to bottom, transparent, #000 20px),
-    linear-gradient(to left, #000 10px, transparent 10px);
+      linear-gradient(to left, #000 10px, transparent 10px);
   }
 }
 
@@ -100,10 +101,10 @@ article details > summary {
   (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))
 ) {
   .nextra-search ul {
-    @apply backdrop-blur-lg bg-white/70 dark:bg-dark/80;
+    @apply nx-backdrop-blur-lg nx-bg-white/70 dark:nx-bg-dark/80;
   }
   .nextra-nav-container-blur {
-    @apply backdrop-blur-md bg-white/[.85] dark:!bg-dark/80;
+    @apply nx-backdrop-blur-md nx-bg-white/[.85] dark:!nx-bg-dark/80;
   }
 }
 
@@ -117,12 +118,12 @@ input[type='search'] {
 }
 
 .contains-task-list {
-  @apply ml-0 list-none;
+  @apply nx-ml-0 nx-list-none;
   input[type='checkbox'] {
-    @apply mr-1;
+    @apply nx-mr-1;
   }
 }
 
 .nextra-banner-hidden .nextra-banner-container {
-  @apply hidden;
+  @apply nx-hidden;
 }

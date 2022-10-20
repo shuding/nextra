@@ -2,25 +2,25 @@ article.nextra-body-typesetting-article {
   font-size: 17px;
   font-feature-settings: 'rlig' 1, 'calt' 1;
   h1 {
-    @apply mt-6 mb-4 text-center;
+    @apply nx-mt-6 nx-mb-4 nx-text-center;
     font-size: 2.5rem;
   }
   h2 {
-    @apply border-none;
+    @apply nx-border-none;
   }
   a {
-    @apply no-underline hover:underline;
+    @apply nx-no-underline hover:nx-underline;
   }
   p {
-    @apply leading-8;
+    @apply nx-leading-8;
   }
   code {
-    @apply border-none dark:bg-neutral-700;
+    @apply nx-border-none dark:nx-bg-neutral-700;
   }
   pre code {
-    @apply dark:bg-transparent;
+    @apply dark:nx-bg-transparent;
   }
   .subheading-anchor + a {
-    @apply no-underline hover:no-underline after:hidden;
+    @apply nx-no-underline hover:nx-no-underline after:nx-hidden;
   }
 }

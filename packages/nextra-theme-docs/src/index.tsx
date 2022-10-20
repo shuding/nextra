@@ -29,7 +29,9 @@ let resizeObserver: ResizeObserver
 if (IS_BROWSER) {
   resizeObserver ||= new ResizeObserver(entries => {
     if (location.hash) {
-      const node = entries[0].target.ownerDocument.getElementById(location.hash.slice(1))
+      const node = entries[0].target.ownerDocument.getElementById(
+        location.hash.slice(1)
+      )
       if (node) {
         scrollIntoView(node)
       }
@@ -81,7 +83,7 @@ const Body = ({
   }, [])
 
   if (themeContext.layout === 'raw') {
-    return <div className="w-full overflow-x-hidden">{children}</div>
+    return <div className="nx-w-full nx-overflow-x-hidden">{children}</div>
   }
 
   const date =
@@ -90,11 +92,11 @@ const Body = ({
       : null
 
   const gitTimestampEl = date ? (
-    <div className="pointer-default mt-12 mb-8 block ltr:text-right rtl:text-left text-xs text-gray-500 dark:text-gray-400">
+    <div className="nx-pointer-default nx-mt-12 nx-mb-8 nx-block ltr:nx-text-right rtl:nx-text-left nx-text-xs nx-text-gray-500 dark:nx-text-gray-400">
       {renderComponent(config.gitTimestamp, { timestamp: date })}
     </div>
   ) : (
-    <div className="mt-16" />
+    <div className="nx-mt-16" />
   )
 
   const body = (
@@ -108,7 +110,7 @@ const Body = ({
 
   if (themeContext.layout === 'full') {
     return (
-      <article className="min-h-[calc(100vh-4rem)] w-full overflow-x-hidden pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
+      <article className="nx-min-h-[calc(100vh-4rem)] nx-w-full nx-overflow-x-hidden nx-pl-[max(env(safe-area-inset-left),1.5rem)] nx-pr-[max(env(safe-area-inset-right),1.5rem)]">
         {body}
       </article>
     )
@@ -117,13 +119,13 @@ const Body = ({
   return (
     <article
       className={cn(
-        'min-h-[calc(100vh-4rem)] w-full flex min-w-0 max-w-full justify-center pb-8 pr-[calc(env(safe-area-inset-right)-1.5rem)]',
+        'nx-min-h-[calc(100vh-4rem)] nx-w-full nx-flex nx-min-w-0 nx-max-w-full nx-justify-center nx-pb-8 nx-pr-[calc(env(safe-area-inset-right)-1.5rem)]',
         themeContext.typesetting === 'article' &&
           'nextra-body-typesetting-article'
       )}
     >
       <main
-        className="w-full min-w-0 max-w-4xl px-6 pt-4 md:px-8"
+        className="nx-w-full nx-min-w-0 nx-max-w-4xl nx-px-6 nx-pt-4 md:nx-px-8"
         ref={mainElement}
       >
         {breadcrumb}
@@ -161,7 +163,7 @@ const InnerLayout = ({
     activeType === 'page'
 
   const tocClassName =
-    'nextra-toc order-last hidden w-64 flex-shrink-0 xl:block'
+    'nextra-toc nx-order-last nx-hidden nx-w-64 nx-flex-shrink-0 xl:nx-block'
 
   const tocEl =
     activeType === 'page' ||
@@ -170,7 +172,7 @@ const InnerLayout = ({
       themeContext.layout !== 'full' &&
       themeContext.layout !== 'raw' && <div className={tocClassName} />
     ) : (
-      <div className={cn(tocClassName, 'px-4')}>
+      <div className={cn(tocClassName, 'nx-px-4')}>
         {renderComponent(config.toc.component, {
           headings: config.toc.float ? headings : [],
           filePath
@@ -205,8 +207,8 @@ const InnerLayout = ({
         })}
       <div
         className={cn(
-          'mx-auto flex',
-          themeContext.layout !== 'raw' && 'max-w-[90rem]'
+          'nx-mx-auto nx-flex',
+          themeContext.layout !== 'raw' && 'nx-max-w-[90rem]'
         )}
       >
         <ActiveAnchorProvider>
@@ -283,5 +285,5 @@ export {
   Tabs,
   Tab,
   Navbar,
-  ThemeSwitch,
+  ThemeSwitch
 } from './components'
