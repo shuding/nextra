@@ -47,6 +47,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     component: Footer,
     text: `MIT ${new Date().getFullYear()} © Nextra.`
   },
+  getNextSeoProps: () => ({ titleTemplate: '%s – Nextra' }),
   gitTimestamp({ timestamp }) {
     const { locale = DEFAULT_LOCALE } = useRouter()
     return (

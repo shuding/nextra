@@ -28,24 +28,24 @@ import { Callout } from 'nextra-theme-docs'
 
 ### Warning
 
-<Callout type="warning" emoji="⚠️">
+<Callout type="warning">
   This API will be deprecated soon.
 </Callout>
 
 ```mdx
-<Callout type="warning" emoji="⚠️">
+<Callout type="warning">
   This API will be deprecated soon.
 </Callout>
 ```
 
 ### Error
 
-<Callout type="error" emoji="🚫">
+<Callout type="error">
   This is a dangerous feature that can cause everything to explode.
 </Callout>
 
 ```mdx
-<Callout type="error" emoji="️🚫">
+<Callout type="error">
   This is a dangerous feature that can cause everything to explode.
 </Callout>
 ```
@@ -54,6 +54,7 @@ import { Callout } from 'nextra-theme-docs'
 
 ```jsx filename="callout.jsx"
 import { Callout } from 'nextra-theme-docs'
+
 const Component = () => {
   return (
     <Callout emoji="👾">
