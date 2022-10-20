@@ -42,7 +42,7 @@ function NavbarMenu({
         <Menu.Button
           className={cn(
             className,
-            'nx-rounded nx-items-center nx--ml-2 nx-hidden nx-whitespace-nowrap nx-p-2 md:nx-inline-flex',
+            'nx-rounded nx-items-center -nx-ml-2 nx-hidden nx-whitespace-nowrap nx-p-2 md:nx-inline-flex',
             classes.inactive
           )}
         >

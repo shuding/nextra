@@ -72,5 +72,5 @@ module.exports = {
       }
     }
   },
-  darkMode: 'class'
+  darkMode: ['class', 'html[class~="dark"]']
 }

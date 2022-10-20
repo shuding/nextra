@@ -35,7 +35,7 @@ const Folder = memo(FolderImpl)
 const classes = {
   link: cn(
     'nx-flex nx-rounded nx-px-2 nx-py-1.5 nx-text-sm nx-transition-colors [word-break:break-word]',
-    '[-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] contrast-more:nx-border'
+    '[-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] contrast-more:nx-border nx-cursor-pointer'
   ),
   inactive: cn(
     'hover:nx-bg-gray-100 nx-text-gray-500 hover:nx-text-gray-900',
