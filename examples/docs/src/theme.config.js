@@ -1,3 +1,5 @@
+import { useConfig } from 'nextra-theme-docs'
+
 /* eslint sort-keys: error */
 /**
  * @type {import('nextra-theme-docs').DocsThemeConfig}
@@ -5,61 +7,69 @@
 export default {
   banner: {
     key: 'Nextra 2',
-    text: 'Nextra 2 Alpha',
+    text: 'Nextra 2 Alpha'
   },
-  docsRepositoryBase: 'https://github.com/shuding/nextra/blob/core/examples/docs',
+  chat: {
+    link: 'https://discord.gg/hEM84NMkRv' // Next.js discord server,
+  },
+  docsRepositoryBase:
+    'https://github.com/shuding/nextra/blob/core/examples/docs',
   editLink: {
     text: 'Edit this page on GitHub'
   },
-  head: () => (
-    <>
-      <meta name="msapplication-TileColor" content="#ffffff" />
-      <meta name="theme-color" content="#ffffff" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta httpEquiv="Content-Language" content="en" />
-      <meta name="description" content="Nextra: the Next.js site builder" />
-      <meta name="og:description" content="Nextra: the Next.js site builder" />
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:image" content="https://nextra.vercel.app/og.png" />
-      <meta name="twitter:site:domain" content="nextra.vercel.app" />
-      <meta name="twitter:url" content="https://nextra.vercel.app" />
-      <meta name="og:title" content="Nextra: Next.js static site generator" />
-      <meta name="og:image" content="https://nextra.vercel.app/og.png" />
-      <meta name="apple-mobile-web-app-title" content="Nextra" />
-      <link
-        rel="apple-touch-icon"
-        sizes="180x180"
-        href="/apple-icon-180x180.png"
-      />
-      <link
-        rel="icon"
-        type="image/png"
-        sizes="192x192"
-        href="/android-icon-192x192.png"
-      />
-      <link
-        rel="icon"
-        type="image/png"
-        sizes="32x32"
-        href="/favicon-32x32.png"
-      />
-      <link
-        rel="icon"
-        type="image/png"
-        sizes="96x96"
-        href="/favicon-96x96.png"
-      />
-      <link
-        rel="icon"
-        type="image/png"
-        sizes="16x16"
-        href="/favicon-16x16.png"
-      />
-      <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
-    </>
-  ),
-  projectChat: {
-    link: 'https://discord.gg/hEM84NMkRv', // Next.js discord server,
+  getNextSeoProps() {
+    const { frontMatter } = useConfig()
+    return {
+      additionalLinkTags: [
+        {
+          href: '/apple-icon-180x180.png',
+          rel: 'apple-touch-icon',
+          sizes: '180x180'
+        },
+        {
+          href: '/android-icon-192x192.png',
+          rel: 'icon',
+          sizes: '192x192',
+          type: 'image/png'
+        },
+        {
+          href: '/favicon-96x96.png',
+          rel: 'icon',
+          sizes: '96x96',
+          type: 'image/png'
+        },
+        {
+          href: '/favicon-32x32.png',
+          rel: 'icon',
+          sizes: '32x32',
+          type: 'image/png'
+        },
+        {
+          href: '/favicon-16x16.png',
+          rel: 'icon',
+          sizes: '16x16',
+          type: 'image/png'
+        }
+      ],
+      additionalMetaTags: [
+        { content: 'en', httpEquiv: 'Content-Language' },
+        { content: 'Nextra', name: 'apple-mobile-web-app-title' },
+        { content: '#fff', name: 'msapplication-TileColor' },
+        { content: '/ms-icon-144x144.png', name: 'msapplication-TileImage' }
+      ],
+      description:
+        frontMatter.description || 'Nextra: the Next.js site builder',
+      openGraph: {
+        images: [
+          { url: frontMatter.image || 'https://nextra.vercel.app/og.png' }
+        ]
+      },
+      titleTemplate: '%s – Nextra',
+      twitter: {
+        cardType: 'summary_large_image',
+        site: 'https://nextra.vercel.app'
+      }
+    }
   },
-  unstable_faviconGlyph: '✦',
+  unstable_faviconGlyph: '✦'
 }

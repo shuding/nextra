@@ -73,17 +73,19 @@ module.exports = withNextra()
  * @type {import('nextra-theme-docs').DocsThemeConfig}
  */
 export default {
-  projectLink: 'https://github.com/shuding/nextra', // GitHub link in the navbar
+  project:{
+    link: 'https://github.com/shuding/nextra' // GitHub link in the navbar
+  },
   docsRepositoryBase: 'https://github.com/shuding/nextra/blob/master', // base URL for the docs repository
-  titleSuffix: ' – Nextra',
-  nextLinks: true,
-  prevLinks: true,
-  search: true,
-  customSearch: null, // customizable, you can use algolia for example
+  getNextSeoProps: () => ({ titleTemplate: '%s – Nextra' }),
+  navigation: true,
   darkMode: true,
-  footer: true,
-  footerText: `MIT ${new Date().getFullYear()} © Shu Ding.`,
-  footerEditLink: `Edit this page on GitHub`,
+  footer: {
+    text: `MIT ${new Date().getFullYear()} © Shu Ding.`
+  },
+  editLink: {
+    text: 'Edit this page on GitHub'
+  },
   logo: (
     <>
       <svg>...</svg>
@@ -96,7 +98,11 @@ export default {
       <meta name="description" content="Nextra: the next docs builder" />
       <meta name="og:title" content="Nextra: the next docs builder" />
     </>
-  )
+  ),
+  primaryHue: {
+    dark: 204,
+    light: 212
+  }
 }
 ```
 
@@ -105,18 +111,7 @@ export default {
   [here](/themes/docs/configuration).
 </Callout>
 
-5. Create `pages/_app.js` and include the theme stylesheet:
-
-```jsx filename="_app.js"
-import 'nextra-theme-docs/style.css'
-
-export default function Nextra({ Component, pageProps }) {
-  const getLayout = Component.getLayout || (page => page)
-  return getLayout(<Component {...pageProps} />)
-}
-```
-
-6. You are good to go! Run `yarn next` to start.
+5. You are good to go! Run `yarn next` to start.
 
 ---
 

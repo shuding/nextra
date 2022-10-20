@@ -240,6 +240,7 @@ importers:
       lightningcss-cli: ^1.16.0
       match-sorter: ^6.3.1
       next: ^12.2.4
+      next-seo: ^5.5.0
       next-themes: ^0.2.0-beta.2
       nextra: workspace:*
       parse-git-url: ^1.0.1
@@ -262,6 +263,7 @@ importers:
       github-slugger: 1.4.0
       intersection-observer: 0.12.2
       match-sorter: 6.3.1
+      next-seo: 5.8.0_c3hne4hwj64hb7tofigd3bvkji
       next-themes: 0.2.0_c3hne4hwj64hb7tofigd3bvkji
       parse-git-url: 1.0.1
       scroll-into-view-if-needed: 2.2.29
@@ -4302,6 +4304,18 @@ packages:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
     dev: true
 
+  /next-seo/5.8.0_c3hne4hwj64hb7tofigd3bvkji:
+    resolution: {integrity: sha512-V5W/JwqdoX6/0zG4S7m5g8zNajYffytWigkPo2hrbHhLD18yGFBU9607OPhvbI9zX3QjWQFMBSmlUY456xt9cA==}
+    peerDependencies:
+      next: ^8.1.1-canary.54 || >=9.0.0
+      react: '>=16.0.0'
+      react-dom: '>=16.0.0'
+    dependencies:
+      next: 12.3.0_biqbaboplfbrettd7655fr4n2y
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
   /next-themes/0.2.0_c3hne4hwj64hb7tofigd3bvkji:
     resolution: {integrity: sha512-myhpDL4vadBD9YDSHiewqvzorGzB03N84e+3LxCwHRlM/hiBOaW+UsKsQojQAzC7fdcJA0l2ppveXcYaVV+hxQ==}
     peerDependencies:
@@ -6302,7 +6316,7 @@ packages:
     resolution: {directory: packages/nextra-theme-blog, type: directory}
     id: file:packages/nextra-theme-blog
     name: nextra-theme-blog
-    version: 2.0.0-beta.30
+    version: 2.0.0-beta.32
     peerDependencies:
       next: '>=9.5.3'
       react: '>=16.13.1'
@@ -6323,7 +6337,7 @@ packages:
     resolution: {directory: packages/nextra-theme-docs, type: directory}
     id: file:packages/nextra-theme-docs
     name: nextra-theme-docs
-    version: 2.0.0-beta.30
+    version: 2.0.0-beta.32
     peerDependencies:
       next: '>=9.5.3'
       react: '>=16.13.1'
@@ -6340,6 +6354,7 @@ packages:
       intersection-observer: 0.12.2
       match-sorter: 6.3.1
       next: 12.3.0_biqbaboplfbrettd7655fr4n2y
+      next-seo: 5.8.0_c3hne4hwj64hb7tofigd3bvkji
       next-themes: 0.2.0_c3hne4hwj64hb7tofigd3bvkji
       parse-git-url: 1.0.1
       react: 18.2.0
@@ -6351,7 +6366,7 @@ packages:
     resolution: {directory: packages/nextra, type: directory}
     id: file:packages/nextra
     name: nextra
-    version: 2.0.0-beta.30
+    version: 2.0.0-beta.32
     peerDependencies:
       next: '>=9.5.3'
       react: '>=16.13.1'
