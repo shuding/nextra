@@ -345,6 +345,11 @@ export function normalizePages({
       }
     }
 
+    // directories is used by the mobile Sidebar menu.
+    // Check for the hoistChildrenAndExclude config. If it's
+    // there and the current page has children, exclude it and push
+    // the children directly instead. This has the effect of hoisting
+    // the children up one level.
     if (item.theme?.hoistChildrenAndExclude) {
       if (item.children) {
         directories.push(...item.children)
