@@ -295,11 +295,11 @@ export function normalizePages({
           // once we're ready to start pushing in pages into docsDirectories
           // if the directory wants to be excluded, skip it and push its children
           // instead. This essentially hoists its children up one level
-          for (const x of normalizedChildren.docsDirectories) {
-            if (x.theme?.hoistChildrenAndExclude) {
-              docsDirectories.push(...x.children)
+          for (const d of normalizedChildren.docsDirectories) {
+            if (d.theme?.hoistChildrenAndExclude) {
+              docsDirectories.push(...d.children)
             } else {
-              docsDirectories.push(x)
+              docsDirectories.push(d)
             }
           }
 
@@ -345,8 +345,13 @@ export function normalizePages({
       }
     }
 
-    // TODO: Do something similar here?
-    directories.push(item)
+    if (item.theme?.hoistChildrenAndExclude) {
+      if (item.children) {
+        directories.push(...item.children)
+      }
+    } else {
+      directories.push(item)
+    }
     switch (type) {
       case 'page':
       case 'menu':

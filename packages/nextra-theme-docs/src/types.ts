@@ -111,6 +111,7 @@ export type PageTheme = {
   breadcrumb: boolean
   collapsed: boolean
   footer: boolean
+  hoistChildrenAndExclude: boolean
   layout: 'default' | 'full' | 'raw'
   navbar: boolean
   pagination: boolean
