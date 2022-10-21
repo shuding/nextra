@@ -296,7 +296,7 @@ export function normalizePages({
           // if the directory wants to be excluded, skip it and push its children
           // instead. This essentially hoists its children up one level
           for (const x of normalizedChildren.docsDirectories) {
-            if (x.theme?.removeFromSidebar) {
+            if (x.theme?.hoistChildrenAndExclude) {
               docsDirectories.push(...x.children)
             } else {
               docsDirectories.push(x)
