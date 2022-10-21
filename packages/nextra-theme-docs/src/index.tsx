@@ -10,15 +10,7 @@ import cn from 'clsx'
 import { MDXProvider } from '@mdx-js/react'
 
 import './polyfill'
-import {
-  Head,
-  Navbar,
-  NavLinks,
-  Sidebar,
-  Breadcrumb,
-  Banner,
-  ThemeSwitch
-} from './components'
+import { Head, NavLinks, Sidebar, Breadcrumb, Banner } from './components'
 import { getComponents } from './mdx-components'
 import { ActiveAnchorProvider, ConfigProvider, useConfig } from './contexts'
 import { DEFAULT_LOCALE, IS_BROWSER } from './constants'

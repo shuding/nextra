@@ -14,11 +14,19 @@ function extendMeta(
   return Object.assign({}, fallback, meta, { theme })
 }
 
+/**
+ * An option to control how an item should be displayed in the sidebar:
+ * - `normal`: the default behavior, item will be displayed
+ * - `hidden`: the item will not be displayed in the sidebar entirely
+ * - `children`: if the item is a folder, itself will be hidden but all its children will still be processed
+ */
+export type Display = 'normal' | 'hidden' | 'children'
+
 export interface Item extends MdxFile {
   title: string
   type: string
   children?: Item[]
-  hidden?: boolean
+  display?: Display
   withIndexPage?: boolean
   theme?: PageTheme
 }
@@ -30,14 +38,14 @@ export interface PageItem extends MdxFile {
   newWindow?: boolean
   children?: PageItem[]
   firstChildRoute?: string
-  hidden?: boolean
+  display?: Display
   withIndexPage?: boolean
 }
 
 export interface MenuItem extends MdxFile {
   title: string
   type: 'menu'
-  hidden?: boolean
+  display?: Display
   children?: PageItem[]
   items?: Record<
     string,
@@ -204,11 +212,12 @@ export function normalizePages({
 
     // Get the item's meta information.
     const extendedMeta = extendMeta(meta[a.name], fallbackMeta)
-    const { hidden, type = 'doc' } = extendedMeta
+    const { display, type = 'doc' } = extendedMeta
     const extendedPageThemeContext = {
       ...pageThemeContext,
       ...extendedMeta.theme
     }
+
     // If the doc is under the active page root.
     const isCurrentDocsTree = route.startsWith(docsRoot)
 
@@ -229,7 +238,7 @@ export function normalizePages({
       ...a,
       type,
       ...(title && { title }),
-      ...(hidden && { hidden }),
+      ...(display && { display }),
       ...(normalizedChildren && { children: [] })
     })
     const item: Item = getItem()
@@ -258,9 +267,11 @@ export function normalizePages({
           }
       }
     }
-    if (hidden || CUSTOM_ERROR_PAGES.includes(a.route)) continue
+    if (display === 'hidden' || CUSTOM_ERROR_PAGES.includes(a.route)) continue
 
+    // If this item has children
     if (normalizedChildren) {
+      // If the active item is in its children
       if (
         normalizedChildren.activeIndex !== undefined &&
         normalizedChildren.activeType !== undefined
@@ -311,7 +322,9 @@ export function normalizePages({
             }
             // Itself is a doc page.
             if (item.withIndexPage) {
-              flatDocsDirectories.push(docsItem)
+              if (display !== 'children') {
+                flatDocsDirectories.push(docsItem)
+              }
             }
           }
       }
@@ -335,7 +348,16 @@ export function normalizePages({
       }
     }
 
-    directories.push(item)
+    if (type === 'doc' && display === 'children') {
+      // Hide the dectory itself and treat all its children as pages
+      if (docsItem.children) {
+        directories.push(...docsItem.children)
+        docsDirectories.push(...docsItem.children)
+      }
+    } else {
+      directories.push(item)
+    }
+
     switch (type) {
       case 'page':
       case 'menu':
@@ -344,10 +366,14 @@ export function normalizePages({
         }
         break
       case 'doc':
-      case 'separator':
         if (isCurrentDocsTree) {
-          docsDirectories.push(docsItem)
+          if (display !== 'children') {
+            docsDirectories.push(docsItem)
+          }
         }
+        break
+      case 'separator':
+        docsDirectories.push(item)
     }
   }
 
