@@ -291,7 +291,17 @@ export function normalizePages({
         case 'menu':
           // @ts-expect-error normalizedChildren === true
           pageItem.children.push(...normalizedChildren.directories)
-          docsDirectories.push(...normalizedChildren.docsDirectories)
+
+          // once we're ready to start pushing in pages into docsDirectories
+          // if the directory wants to be excluded, skip it and push its children
+          // instead. This essentially hoists its children up one level
+          for (const x of normalizedChildren.docsDirectories) {
+            if (x.theme?.removeFromSidebar) {
+              docsDirectories.push(...x.children)
+            } else {
+              docsDirectories.push(x)
+            }
+          }
 
           // If it's a page with children inside, we inject itself as a page too.
           if (normalizedChildren.flatDirectories.length) {
@@ -335,6 +345,7 @@ export function normalizePages({
       }
     }
 
+    // TODO: Do something similar here?
     directories.push(item)
     switch (type) {
       case 'page':
