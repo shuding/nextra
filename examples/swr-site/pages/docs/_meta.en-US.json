@@ -9,7 +9,7 @@
   "data-fetching": "Data Fetching",
   "error-handling": {
     "title": "Error Handling",
-    "hidden": true
+    "display": "hidden"
   },
   "revalidation": "Auto Revalidation",
   "conditional-fetching": "Conditional Data Fetching",

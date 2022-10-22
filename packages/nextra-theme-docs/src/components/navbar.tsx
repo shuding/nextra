@@ -107,7 +107,7 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
           </div>
         )}
         {items.map(pageOrMenu => {
-          if (pageOrMenu.hidden) return null
+          if (pageOrMenu.display === 'hidden') return null
 
           if (pageOrMenu.type === 'menu') {
             const menu = pageOrMenu as MenuItem

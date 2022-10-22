@@ -34,7 +34,7 @@ exports[`context > getAllPages() > should work 1`] = `
     "kind": "MdxPage",
     "locale": "en-US",
     "meta": {
-      "hidden": true,
+      "display": "hidden",
       "title": "Introduction",
       "type": "page",
     },
@@ -48,7 +48,7 @@ exports[`context > getAllPages() > should work 1`] = `
     "kind": "MdxPage",
     "locale": "es-ES",
     "meta": {
-      "hidden": true,
+      "display": "hidden",
       "title": "Introduction",
       "type": "page",
     },
@@ -62,7 +62,7 @@ exports[`context > getAllPages() > should work 1`] = `
     "kind": "MdxPage",
     "locale": "ja",
     "meta": {
-      "hidden": true,
+      "display": "hidden",
       "title": "Introduction",
       "type": "page",
     },
@@ -76,7 +76,7 @@ exports[`context > getAllPages() > should work 1`] = `
     "kind": "MdxPage",
     "locale": "ko",
     "meta": {
-      "hidden": true,
+      "display": "hidden",
       "title": "Introduction",
       "type": "page",
     },
@@ -90,7 +90,7 @@ exports[`context > getAllPages() > should work 1`] = `
     "kind": "MdxPage",
     "locale": "ru",
     "meta": {
-      "hidden": true,
+      "display": "hidden",
       "title": "Introduction",
       "type": "page",
     },
@@ -104,7 +104,7 @@ exports[`context > getAllPages() > should work 1`] = `
     "kind": "MdxPage",
     "locale": "zh-CN",
     "meta": {
-      "hidden": true,
+      "display": "hidden",
       "title": "Introduction",
       "type": "page",
     },
@@ -333,7 +333,7 @@ exports[`context > getAllPages() > should work 1`] = `
         "kind": "MdxPage",
         "locale": "en-US",
         "meta": {
-          "hidden": true,
+          "display": "hidden",
           "title": "Error Handling",
         },
         "name": "error-handling",
@@ -343,7 +343,7 @@ exports[`context > getAllPages() > should work 1`] = `
         "kind": "MdxPage",
         "locale": "es-ES",
         "meta": {
-          "hidden": true,
+          "display": "hidden",
           "title": "Error Handling",
         },
         "name": "error-handling",
@@ -353,7 +353,7 @@ exports[`context > getAllPages() > should work 1`] = `
         "kind": "MdxPage",
         "locale": "ja",
         "meta": {
-          "hidden": true,
+          "display": "hidden",
           "title": "Error Handling",
         },
         "name": "error-handling",
@@ -363,7 +363,7 @@ exports[`context > getAllPages() > should work 1`] = `
         "kind": "MdxPage",
         "locale": "ko",
         "meta": {
-          "hidden": true,
+          "display": "hidden",
           "title": "Error Handling",
         },
         "name": "error-handling",
@@ -373,7 +373,7 @@ exports[`context > getAllPages() > should work 1`] = `
         "kind": "MdxPage",
         "locale": "ru",
         "meta": {
-          "hidden": true,
+          "display": "hidden",
           "title": "Error Handling",
         },
         "name": "error-handling",
@@ -383,7 +383,7 @@ exports[`context > getAllPages() > should work 1`] = `
         "kind": "MdxPage",
         "locale": "zh-CN",
         "meta": {
-          "hidden": true,
+          "display": "hidden",
           "title": "Error Handling",
         },
         "name": "error-handling",
@@ -1399,7 +1399,7 @@ exports[`context > getAllPages() > should work 1`] = `
         "kind": "MdxPage",
         "locale": "en-US",
         "meta": {
-          "hidden": true,
+          "display": "hidden",
           "theme": {
             "layout": "raw",
           },
@@ -2125,7 +2125,7 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
     "kind": "MdxPage",
     "locale": "en-US",
     "meta": {
-      "hidden": true,
+      "display": "hidden",
       "title": "Error Handling",
     },
     "name": "error-handling",
@@ -2135,7 +2135,7 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
     "kind": "MdxPage",
     "locale": "es-ES",
     "meta": {
-      "hidden": true,
+      "display": "hidden",
       "title": "Error Handling",
     },
     "name": "error-handling",
@@ -2145,7 +2145,7 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
     "kind": "MdxPage",
     "locale": "ja",
     "meta": {
-      "hidden": true,
+      "display": "hidden",
       "title": "Error Handling",
     },
     "name": "error-handling",
@@ -2155,7 +2155,7 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
     "kind": "MdxPage",
     "locale": "ko",
     "meta": {
-      "hidden": true,
+      "display": "hidden",
       "title": "Error Handling",
     },
     "name": "error-handling",
@@ -2165,7 +2165,7 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
     "kind": "MdxPage",
     "locale": "ru",
     "meta": {
-      "hidden": true,
+      "display": "hidden",
       "title": "Error Handling",
     },
     "name": "error-handling",
@@ -2175,7 +2175,7 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
     "kind": "MdxPage",
     "locale": "zh-CN",
     "meta": {
-      "hidden": true,
+      "display": "hidden",
       "title": "Error Handling",
     },
     "name": "error-handling",

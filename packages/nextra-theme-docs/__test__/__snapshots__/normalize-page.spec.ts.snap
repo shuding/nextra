@@ -379,6 +379,18 @@ exports[`normalize-page > en-US getting-started 1`] = `
   "activeType": "doc",
   "directories": [
     {
+      "frontMatter": {
+        "title": "React Hooks for Data Fetching",
+      },
+      "hidden": true,
+      "kind": "MdxPage",
+      "locale": "en-US",
+      "name": "index",
+      "route": "/",
+      "title": "Introduction",
+      "type": "nav",
+    },
+    {
       "children": [
         {
           "kind": "MdxPage",
@@ -641,6 +653,18 @@ exports[`normalize-page > en-US getting-started 1`] = `
   ],
   "docsDirectories": [],
   "flatDirectories": [
+    {
+      "frontMatter": {
+        "title": "React Hooks for Data Fetching",
+      },
+      "hidden": true,
+      "kind": "MdxPage",
+      "locale": "en-US",
+      "name": "index",
+      "route": "/",
+      "title": "Introduction",
+      "type": "nav",
+    },
     {
       "kind": "MdxPage",
       "locale": "en-US",
@@ -1128,6 +1152,18 @@ exports[`normalize-page > en-US home 1`] = `
   "activeType": "nav",
   "directories": [
     {
+      "frontMatter": {
+        "title": "React Hooks for Data Fetching",
+      },
+      "hidden": true,
+      "kind": "MdxPage",
+      "locale": "en-US",
+      "name": "index",
+      "route": "/",
+      "title": "Introduction",
+      "type": "nav",
+    },
+    {
       "children": [
         {
           "kind": "MdxPage",
@@ -1390,6 +1426,18 @@ exports[`normalize-page > en-US home 1`] = `
   ],
   "docsDirectories": [],
   "flatDirectories": [
+    {
+      "frontMatter": {
+        "title": "React Hooks for Data Fetching",
+      },
+      "hidden": true,
+      "kind": "MdxPage",
+      "locale": "en-US",
+      "name": "index",
+      "route": "/",
+      "title": "Introduction",
+      "type": "nav",
+    },
     {
       "kind": "MdxPage",
       "locale": "en-US",
@@ -2043,6 +2091,18 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
   "activeType": "doc",
   "directories": [
     {
+      "frontMatter": {
+        "title": "用于数据请求的 React Hooks 库",
+      },
+      "hidden": true,
+      "kind": "MdxPage",
+      "locale": "zh-CN",
+      "name": "index",
+      "route": "/",
+      "title": "简介",
+      "type": "nav",
+    },
+    {
       "children": [
         {
           "kind": "MdxPage",
@@ -2305,6 +2365,18 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
   ],
   "docsDirectories": [],
   "flatDirectories": [
+    {
+      "frontMatter": {
+        "title": "用于数据请求的 React Hooks 库",
+      },
+      "hidden": true,
+      "kind": "MdxPage",
+      "locale": "zh-CN",
+      "name": "index",
+      "route": "/",
+      "title": "简介",
+      "type": "nav",
+    },
     {
       "kind": "MdxPage",
       "locale": "zh-CN",
@@ -2792,6 +2864,18 @@ exports[`normalize-page > zh-CN home 1`] = `
   "activeType": "nav",
   "directories": [
     {
+      "frontMatter": {
+        "title": "用于数据请求的 React Hooks 库",
+      },
+      "hidden": true,
+      "kind": "MdxPage",
+      "locale": "zh-CN",
+      "name": "index",
+      "route": "/",
+      "title": "简介",
+      "type": "nav",
+    },
+    {
       "children": [
         {
           "kind": "MdxPage",
@@ -3054,6 +3138,18 @@ exports[`normalize-page > zh-CN home 1`] = `
   ],
   "docsDirectories": [],
   "flatDirectories": [
+    {
+      "frontMatter": {
+        "title": "用于数据请求的 React Hooks 库",
+      },
+      "hidden": true,
+      "kind": "MdxPage",
+      "locale": "zh-CN",
+      "name": "index",
+      "route": "/",
+      "title": "简介",
+      "type": "nav",
+    },
     {
       "kind": "MdxPage",
       "locale": "zh-CN",
