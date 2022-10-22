@@ -1104,7 +1104,7 @@ exports[`normalize-page > en-US home 1`] = `
       "frontMatter": {
         "title": "React Hooks for Data Fetching",
       },
-      "display": "hidden",,
+      "display": "hidden",
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "index",
@@ -2768,7 +2768,7 @@ exports[`normalize-page > zh-CN home 1`] = `
       "frontMatter": {
         "title": "用于数据请求的 React Hooks 库",
       },
-      "display": "hidden",,
+      "display": "hidden",
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "index",

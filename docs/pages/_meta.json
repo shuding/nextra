@@ -2,7 +2,7 @@
   "index": {
     "title": "Nextra",
     "type": "page",
-    "display": "hidden",,
+    "display": "hidden",
     "theme": {
       "layout": "raw"
     }
