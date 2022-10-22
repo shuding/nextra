@@ -15,19 +15,19 @@ export default function Meta(): ReactElement {
     <Link key={t} href="/tags/[tag]" as={`/tags/${t}`} passHref>
       <a
         className="
-          select-none
-          rounded-md
-          px-1
-          transition-colors
-          text-sm
-          text-gray-400
-          hover:text-gray-500
-          dark:text-gray-300
-          dark:hover:text-gray-200
-          bg-gray-200
-          hover:bg-gray-300
-          dark:bg-gray-600
-          dark:hover:bg-gray-700
+          nx-select-none
+          nx-rounded-md
+          nx-px-1
+          nx-transition-colors
+          nx-text-sm
+          nx-text-gray-400
+          hover:nx-text-gray-500
+          dark:nx-text-gray-300
+          dark:hover:nx-text-gray-200
+          nx-bg-gray-200
+          hover:nx-bg-gray-300
+          dark:nx-bg-gray-600
+          dark:hover:nx-bg-gray-700
         "
       >
         {t}
@@ -40,11 +40,12 @@ export default function Meta(): ReactElement {
   return (
     <div
       className={
-        'mb-8 flex gap-3 ' + (readingTime ? 'items-start' : 'items-center')
+        'nx-mb-8 nx-flex nx-gap-3 ' +
+        (readingTime ? 'nx-items-start' : 'nx-items-center')
       }
     >
-      <div className="grow text-gray-400">
-        <div className="flex flex-wrap items-center gap-1 not-prose">
+      <div className="nx-grow nx-text-gray-400">
+        <div className="nx-flex nx-flex-wrap nx-items-center nx-gap-1 nx-not-prose">
           {author}
           {author && date && ','}
           {date && (
@@ -56,10 +57,12 @@ export default function Meta(): ReactElement {
           {readingTime || tagsEl}
         </div>
         {readingTime && (
-          <div className="flex flex-wrap items-center gap-1 mt-1 not-prose">{tagsEl}</div>
+          <div className="nx-flex nx-flex-wrap nx-items-center nx-gap-1 nx-mt-1 nx-not-prose">
+            {tagsEl}
+          </div>
         )}
       </div>
-      <div className="flex items-center gap-3">
+      <div className="nx-flex nx-items-center nx-gap-3">
         {back && (
           <Link href={back} passHref>
             <a>Back</a>

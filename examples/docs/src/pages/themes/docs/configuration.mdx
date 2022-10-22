@@ -1,7 +1,7 @@
 import { Callout } from 'nextra-theme-docs'
 
 export const Unstable = () => (
-  <Callout type="error" emoji="">
+  <Callout type="error">
     This is an unstable and experimental feature and not recommended for general
     use.
   </Callout>
@@ -41,25 +41,6 @@ The URL that the button in the top right will point to.
  */
 export default {
   projectLink: 'https://gitlab.com/librewolf-community/browser'
-}
-```
-
-## `github`
-
-The URL that the button in the top right will point to.
-
-**Type:** `string`
-
-**Default:** `https://github.com/shuding/nextra`
-
-**Example:**
-
-```js filename="theme.config.js"
-/**
- * @type {import('nextra-theme-docs').DocsThemeConfig}
- */
-export default {
-  github: 'https://gitlab.com/librewolf-community/browser'
 }
 ```
 

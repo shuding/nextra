@@ -16,10 +16,10 @@ export type NavBarProps = {
 }
 
 const classes = {
-  link: 'text-sm contrast-more:text-gray-700 contrast-more:dark:text-gray-100',
-  active: 'subpixel-antialiased contrast-more:font-bold',
+  link: 'nx-text-sm contrast-more:nx-text-gray-700 contrast-more:dark:nx-text-gray-100',
+  active: 'nx-subpixel-antialiased contrast-more:nx-font-bold',
   inactive:
-    'text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200'
+    'nx-text-gray-600 hover:nx-text-gray-800 dark:nx-text-gray-400 dark:hover:nx-text-gray-200'
 }
 
 function NavbarMenu({
@@ -37,23 +37,23 @@ function NavbarMenu({
   )
 
   return (
-    <div className="inline-block relative">
+    <div className="nx-inline-block nx-relative">
       <Menu>
         <Menu.Button
           className={cn(
             className,
-            'rounded items-center -ml-2 hidden whitespace-nowrap p-2 md:inline-flex',
+            'nx-rounded nx-items-center -nx-ml-2 nx-hidden nx-whitespace-nowrap nx-p-2 md:nx-inline-flex',
             classes.inactive
           )}
         >
           {children}
         </Menu.Button>
         <Transition
-          leave="transition-opacity"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
+          leave="nx-transition-opacity"
+          leaveFrom="nx-opacity-100"
+          leaveTo="nx-opacity-0"
         >
-          <Menu.Items className="absolute right-0 z-20 mt-1 max-h-64 min-w-full overflow-auto rounded-md bg-white py-1 text-sm shadow-lg dark:bg-neutral-800">
+          <Menu.Items className="nx-absolute nx-right-0 nx-z-20 nx-mt-1 nx-max-h-64 nx-min-w-full nx-overflow-auto nx-rounded-md nx-bg-white nx-py-1 nx-text-sm nx-shadow-lg dark:nx-bg-neutral-800">
             {Object.entries(items || {}).map(([key, item]) => (
               <Menu.Item key={key}>
                 <Anchor
@@ -61,8 +61,8 @@ function NavbarMenu({
                     item.href || routes[key]?.route || menu.route + '/' + key
                   }
                   className={cn(
-                    'hidden whitespace-nowrap md:inline-block text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 relative select-none w-full',
-                    'py-1.5 ltr:pl-3 ltr:pr-9 rtl:pr-3 rtl:pl-9'
+                    'nx-hidden nx-whitespace-nowrap md:nx-inline-block nx-text-gray-600 hover:nx-text-gray-900 dark:nx-text-gray-400 dark:hover:nx-text-gray-100 nx-relative nx-select-none nx-w-full',
+                    'nx-py-1.5 ltr:nx-pl-3 ltr:nx-pr-9 rtl:nx-pr-3 rtl:nx-pl-9'
                   )}
                   newWindow={item.newWindow}
                 >
@@ -84,25 +84,25 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
   const { menu, setMenu } = useMenu()
 
   return (
-    <div className="nextra-nav-container sticky top-0 z-20 w-full bg-transparent">
+    <div className="nextra-nav-container nx-sticky nx-top-0 nx-z-20 nx-w-full nx-bg-transparent">
       <div
         className={cn(
           'nextra-nav-container-blur',
-          'pointer-events-none absolute z-[-1] h-full w-full bg-white dark:bg-dark',
-          'shadow-[0_2px_4px_rgba(0,0,0,.02),0_-1px_0_rgba(0,0,0,.06)_inset] dark:shadow-[0_-1px_0_rgba(255,255,255,.1)_inset]',
-          'contrast-more:shadow-[0_0_0_1px_#000] contrast-more:dark:shadow-[0_0_0_1px_#fff]'
+          'nx-pointer-events-none nx-absolute nx-z-[-1] nx-h-full nx-w-full nx-bg-white dark:nx-bg-dark',
+          'nx-shadow-[0_2px_4px_rgba(0,0,0,.02),0_-1px_0_rgba(0,0,0,.06)_inset] dark:nx-shadow-[0_-1px_0_rgba(255,255,255,.1)_inset]',
+          'contrast-more:nx-shadow-[0_0_0_1px_#000] contrast-more:dark:nx-shadow-[0_0_0_1px_#fff]'
         )}
       />
-      <nav className="mx-auto flex h-[var(--nextra-navbar-height)] max-w-[90rem] items-center justify-end gap-2 pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
+      <nav className="nx-mx-auto nx-flex nx-h-[var(--nextra-navbar-height)] nx-max-w-[90rem] nx-items-center nx-justify-end nx-gap-2 nx-pl-[max(env(safe-area-inset-left),1.5rem)] nx-pr-[max(env(safe-area-inset-right),1.5rem)]">
         {config.logoLink ? (
           <Anchor
             href={typeof config.logoLink === 'string' ? config.logoLink : '/'}
-            className="flex ltr:mr-auto rtl:ml-auto items-center hover:opacity-75"
+            className="nx-flex ltr:nx-mr-auto rtl:nx-ml-auto nx-items-center hover:nx-opacity-75"
           >
             {renderComponent(config.logo)}
           </Anchor>
         ) : (
-          <div className="flex ltr:mr-auto rtl:ml-auto items-center">
+          <div className="nx-flex ltr:nx-mr-auto rtl:nx-ml-auto nx-items-center">
             {renderComponent(config.logo)}
           </div>
         )}
@@ -128,8 +128,8 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
               >
                 {menu.title}
                 <ArrowRightIcon
-                  className="h-[18px] min-w-[18px] rounded-sm p-0.5"
-                  pathClassName="origin-center transition-transform rotate-90"
+                  className="nx-h-[18px] nx-min-w-[18px] nx-rounded-sm nx-p-0.5"
+                  pathClassName="nx-origin-center nx-transition-transform nx-rotate-90"
                 />
               </NavbarMenu>
             )
@@ -153,7 +153,7 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
               key={page.route}
               className={cn(
                 classes.link,
-                '-ml-2 hidden whitespace-nowrap p-2 md:inline-block',
+                '-nx-ml-2 nx-hidden nx-whitespace-nowrap nx-p-2 md:nx-inline-block',
                 !isActive || page.newWindow ? classes.inactive : classes.active
               )}
               newWindow={page.newWindow}
@@ -166,12 +166,12 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
 
         {renderComponent(config.search.component, {
           directories: flatDirectories,
-          className: 'hidden md:inline-block min-w-[200px]'
+          className: 'nx-hidden md:nx-inline-block mx-min-w-[200px]'
         })}
 
         {config.project.link ? (
           <Anchor
-            className="p-2 text-current"
+            className="nx-p-2 nx-text-current"
             href={config.project.link}
             newWindow
           >
@@ -185,7 +185,7 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
 
         {config.chat.link ? (
           <Anchor
-            className="p-2 text-current"
+            className="nx-p-2 nx-text-current"
             href={config.chat.link}
             newWindow
           >
@@ -200,7 +200,7 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
         {renderComponent(config.navbar.extraContent)}
 
         <button
-          className="nextra-hamburger rounded active:bg-gray-400/20 p-2 -mr-2 md:hidden"
+          className="nextra-hamburger nx-rounded active:nx-bg-gray-400/20 nx-p-2 -nx-mr-2 md:nx-hidden"
           onClick={() => setMenu(!menu)}
         >
           <MenuIcon className={cn({ open: menu })} />

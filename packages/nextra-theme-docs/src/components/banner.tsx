@@ -18,19 +18,19 @@ export function Banner(): ReactElement | null {
       <script dangerouslySetInnerHTML={{ __html: hideBannerScript }} />
       <div
         className={cn(
-          'relative z-20 flex justify-center items-center',
-          'bg-neutral-900 text-sm text-slate-50 font-medium',
-          'h-[var(--nextra-banner-height)] [body.nextra-banner-hidden_&]:hidden',
-          'dark:bg-[linear-gradient(1deg,#383838,#212121)] dark:text-white',
-          'py-1 pl-[max(env(safe-area-inset-left),2.5rem)] pr-[max(env(safe-area-inset-right),2.5rem)]'
+          'nx-relative nx-z-20 nx-flex nx-justify-center nx-items-center',
+          'nx-bg-neutral-900 nx-text-sm nx-text-slate-50 nx-font-medium',
+          'nx-h-[var(--nextra-banner-height)] [body.nextra-banner-hidden_&]:nx-hidden',
+          'dark:nx-bg-[linear-gradient(1deg,#383838,#212121)] dark:nx-text-white',
+          'nx-py-1 nx-pl-[max(env(safe-area-inset-left),2.5rem)] nx-pr-[max(env(safe-area-inset-right),2.5rem)]'
         )}
       >
-        <div className="max-w-[90rem] truncate">
+        <div className="nx-max-w-[90rem] nx-truncate">
           {renderComponent(banner.text)}
         </div>
         {banner.dismissible && (
           <button
-            className="opacity-80 absolute ltr:right-0 rtl:left-0 hover:opacity-100"
+            className="nx-opacity-80 nx-absolute ltr:nx-right-0 rtl:nx-left-0 hover:nx-opacity-100"
             onClick={() => {
               try {
                 localStorage.setItem(banner.key, '0')
@@ -38,7 +38,7 @@ export function Banner(): ReactElement | null {
               document.body.classList.add('nextra-banner-hidden')
             }}
           >
-            <XIcon className="h4 w-4 mx-4" />
+            <XIcon className="nx-h4 nx-w-4 nx-mx-4" />
           </button>
         )}
       </div>

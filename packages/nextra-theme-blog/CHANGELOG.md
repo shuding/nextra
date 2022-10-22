@@ -1,5 +1,11 @@
 # nextra-theme-blog
 
+## 2.0.0-beta.33
+
+### Patch Changes
+
+- 580c433: add nx- to all tailwind classes for style isolation
+
 ## 2.0.0-beta.32
 
 ### Patch Changes

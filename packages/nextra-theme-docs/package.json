@@ -1,6 +1,6 @@
 {
   "name": "nextra-theme-docs",
-  "version": "2.0.0-beta.32",
+  "version": "2.0.0-beta.33",
   "description": "A Nextra theme for documentation sites.",
   "repository": "https://github.com/shuding/nextra",
   "author": "Shu Ding <g@shud.in>",
@@ -53,6 +53,7 @@
     "github-slugger": "^1.4.0",
     "intersection-observer": "^0.12.2",
     "match-sorter": "^6.3.1",
+    "next-seo": "^5.5.0",
     "next-themes": "^0.2.0-beta.2",
     "parse-git-url": "^1.0.1",
     "scroll-into-view-if-needed": "^2.2.29"

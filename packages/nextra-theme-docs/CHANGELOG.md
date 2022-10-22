@@ -1,5 +1,16 @@
 # nextra-theme-docs
 
+## 2.0.0-beta.33
+
+### Patch Changes
+
+- 580c433: add nx- to all tailwind classes for style isolation
+- 2533a6c: replace `main.extraContent` theme option with `main` option
+- c28a7f2: - setup `next-seo`
+  - add new theme option `getNextSeoProps`
+  - remove `titleSuffix` theme option in favor of `getNextSeoProps.titleTemplate`
+  - by default pass `description`, `canonical`, `openGraph` values to `<NextSeo />` component from page `frontMatter`, values can be overridden with return value of `getNextSeoProps`
+
 ## 2.0.0-beta.32
 
 ### Patch Changes
