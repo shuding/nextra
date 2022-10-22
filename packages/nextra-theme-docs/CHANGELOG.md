@@ -1,5 +1,11 @@
 # nextra-theme-docs
 
+## 2.0.0-beta.34
+
+### Patch Changes
+
+- 4e4a37c: add new "display" property to \_meta
+
 ## 2.0.0-beta.33
 
 ### Patch Changes
