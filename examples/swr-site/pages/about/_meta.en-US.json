@@ -4,7 +4,7 @@
   "a-page": {
     "title": "A Page",
     "type": "page",
-    "hidden": true,
+    "display": "hidden",,
     "theme": {
       "layout": "raw"
     }

@@ -2,7 +2,7 @@
   "index": {
     "title": "简介",
     "type": "page",
-    "hidden": true
+    "display": "hidden"
   },
   "docs": {
     "title": "文档",

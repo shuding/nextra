@@ -75,7 +75,7 @@ exports[`Page Process > pageMap en-US 1`] = `
           "type": "page",
         },
         "index": {
-          "hidden": true,
+          "display": "hidden",,
           "title": "Introduction",
           "type": "page",
         },
@@ -94,7 +94,7 @@ exports[`Page Process > pageMap en-US 1`] = `
         {
           "data": {
             "a-page": {
-              "hidden": true,
+              "display": "hidden",,
               "theme": {
                 "layout": "raw",
               },
@@ -205,7 +205,7 @@ exports[`Page Process > pageMap en-US 1`] = `
             "conditional-fetching": "Conditional Data Fetching",
             "data-fetching": "Data Fetching",
             "error-handling": {
-              "hidden": true,
+              "display": "hidden",,
               "title": "Error Handling",
             },
             "getting-started": "Getting Started",
@@ -592,7 +592,7 @@ exports[`Page Process > pageMap zh-CN 1`] = `
           "type": "page",
         },
         "index": {
-          "hidden": true,
+          "display": "hidden",,
           "title": "简介",
           "type": "page",
         },
@@ -605,7 +605,7 @@ exports[`Page Process > pageMap zh-CN 1`] = `
         {
           "data": {
             "a-page": {
-              "hidden": true,
+              "display": "hidden",,
               "theme": {
                 "layout": "raw",
               },
