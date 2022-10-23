@@ -21,7 +21,6 @@ export const Anchor = forwardRef<HTMLAnchorElement, AnchorProps>(function (
         href={href}
         target="_blank"
         rel="noreferrer"
-        aria-selected={false}
         {...props}
       >
         {children}

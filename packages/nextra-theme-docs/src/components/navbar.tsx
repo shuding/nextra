@@ -157,7 +157,7 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
                 !isActive || page.newWindow ? classes.inactive : classes.active
               )}
               newWindow={page.newWindow}
-              aria-selected={!page.newWindow && isActive}
+              aria-current={!page.newWindow && isActive}
             >
               {page.title}
             </Anchor>
