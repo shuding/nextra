@@ -416,7 +416,7 @@ export function Sidebar({
             )}
           >
             {config.i18n.length > 0 && (
-              <LocaleSwitch options={config.i18n} className="grow" />
+              <LocaleSwitch options={config.i18n} className="nx-grow" />
             )}
             {config.darkMode && <ThemeSwitch lite={config.i18n.length > 0} />}
           </div>
