@@ -1,5 +1,11 @@
 # nextra-theme-docs
 
+## 2.0.0-beta.35
+
+### Patch Changes
+
+- ab629e6: Add correct aria values inside nav
+
 ## 2.0.0-beta.34
 
 ### Patch Changes
