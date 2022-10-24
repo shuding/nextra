@@ -1,5 +1,13 @@
 # nextra-theme-docs
 
+## 2.0.0-beta.36
+
+### Patch Changes
+
+- 08a39e6: remove `resizeObserver` for dynamic content since it provoke jumps on tabs switch when there is `#` anchor in url
+- 1c3fedb: add missing `nx-` prefixes to table/th/tr elements
+- 351fa45: add missing `nx-` prefix for `grow` class in `<LocaleSwitch />`
+
 ## 2.0.0-beta.35
 
 ### Patch Changes
