@@ -43,7 +43,6 @@
     "type": "page",
     "newWindow": true
   },
-  "scroll-with-dynamic-height": "Scroll With Dynamic Height",
   "wrap-toc-items": "Wrap Table of Content Items",
   "404-500": "404/500 Custom Error Pages",
   "raw-layout": {

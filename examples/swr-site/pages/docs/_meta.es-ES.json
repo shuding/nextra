@@ -16,6 +16,5 @@
   "middleware": "Middleware",
   "advanced": "Avanzado",
   "change-log": "Registro de cambios",
-  "scroll-with-dynamic-height": "Desplazarse con altura dinámica",
   "wrap-toc-items": "Ajustar elementos de la tabla de contenido"
 }

@@ -228,7 +228,6 @@ exports[`Page Process > pageMap en-US 1`] = `
               "title": "Raw Layout",
             },
             "revalidation": "Auto Revalidation",
-            "scroll-with-dynamic-height": "Scroll With Dynamic Height",
             "suspense": "Suspense",
             "typescript": "TypeScript :)",
             "with-nextjs": "Next.js SSG and SSR",
@@ -430,12 +429,6 @@ exports[`Page Process > pageMap en-US 1`] = `
           "locale": "en-US",
           "name": "revalidation",
           "route": "/docs/revalidation",
-        },
-        {
-          "kind": "MdxPage",
-          "locale": "en-US",
-          "name": "scroll-with-dynamic-height",
-          "route": "/docs/scroll-with-dynamic-height",
         },
         {
           "kind": "MdxPage",
@@ -683,7 +676,6 @@ exports[`Page Process > pageMap zh-CN 1`] = `
             "pagination": "分页",
             "prefetching": "预请求",
             "revalidation": "自动重新请求",
-            "scroll-with-dynamic-height": "以動態高度滾動",
             "suspense": "Suspense",
             "typescript": "Typescript",
             "with-nextjs": "Next.js SSG 和 SSR",
@@ -849,12 +841,6 @@ exports[`Page Process > pageMap zh-CN 1`] = `
           "locale": "zh-CN",
           "name": "revalidation",
           "route": "/docs/revalidation",
-        },
-        {
-          "kind": "MdxPage",
-          "locale": "zh-CN",
-          "name": "scroll-with-dynamic-height",
-          "route": "/docs/scroll-with-dynamic-height",
         },
         {
           "kind": "MdxPage",
