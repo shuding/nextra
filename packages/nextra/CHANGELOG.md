@@ -1,5 +1,11 @@
 # nextra
 
+## 2.0.0-beta.36
+
+### Patch Changes
+
+- 1c3fedb: add missing `nx-` prefixes to table/th/tr elements
+
 ## 2.0.0-beta.35
 
 ## 2.0.0-beta.34
