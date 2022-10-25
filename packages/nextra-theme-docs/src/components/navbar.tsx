@@ -198,6 +198,8 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
         ) : null}
 
         <button
+          type="button"
+          aria-label="Menu"
           className="nextra-hamburger nx-rounded active:nx-bg-gray-400/20 nx-p-2 -nx-mr-2 md:nx-hidden"
           onClick={() => setMenu(!menu)}
         >
