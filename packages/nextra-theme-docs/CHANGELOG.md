@@ -1,5 +1,11 @@
 # nextra-theme-docs
 
+## 2.0.0-beta.38
+
+### Patch Changes
+
+- 05d068c: Add button label for hamburger menu
+
 ## 2.0.0-beta.37
 
 ### Patch Changes
