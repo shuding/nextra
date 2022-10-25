@@ -1,5 +1,11 @@
 # nextra-theme-docs
 
+## 2.0.0-beta.37
+
+### Patch Changes
+
+- 5b01537: Fix full docs directory list and active link
+
 ## 2.0.0-beta.36
 
 ### Patch Changes

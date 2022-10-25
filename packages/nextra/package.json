@@ -1,6 +1,6 @@
 {
   "name": "nextra",
-  "version": "2.0.0-beta.36",
+  "version": "2.0.0-beta.37",
   "description": "Next.js and MDX based site generator.",
   "files": [
     "dist/*",
