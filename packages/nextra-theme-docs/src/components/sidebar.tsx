@@ -195,7 +195,10 @@ function File({
 }): ReactElement {
   const { asPath, locale = DEFAULT_LOCALE } = useRouter()
   const route = getFSRoute(asPath, locale)
-  const active = [route, route + '/'].includes(item.route + '/')
+
+  // It is possible that the item doesn't have any route - for example an extermal link.
+  const active = item.route && [route, route + '/'].includes(item.route + '/')
+
   const slugger = new Slugger()
   const activeAnchor = useActiveAnchor()
   const { setMenu } = useMenu()
@@ -261,18 +264,26 @@ interface MenuProps {
   anchors: string[]
   base?: string
   className?: string
+  onlyCurrentDocs?: boolean
 }
 
-function Menu({ directories, anchors, className }: MenuProps): ReactElement {
+function Menu({
+  directories,
+  anchors,
+  className,
+  onlyCurrentDocs
+}: MenuProps): ReactElement {
   return (
     <ul className={cn(classes.list, className)}>
       {directories.map(item =>
-        item.type === 'menu' ||
-        (item.children && (item.children.length || !item.withIndexPage)) ? (
-          <Folder key={item.name} item={item} anchors={anchors} />
-        ) : (
-          <File key={item.name} item={item} anchors={anchors} />
-        )
+        !onlyCurrentDocs || item.isUnderCurrentDocsTree ? (
+          item.type === 'menu' ||
+          (item.children && (item.children.length || !item.withIndexPage)) ? (
+            <Folder key={item.name} item={item} anchors={anchors} />
+          ) : (
+            <File key={item.name} item={item} anchors={anchors} />
+          )
+        ) : null
       )}
     </ul>
   )
@@ -395,6 +406,7 @@ export function Sidebar({
             // When the viewport size is larger than `md`, hide the anchors in
             // the sidebar when `floatTOC` is enabled.
             anchors={config.toc.float ? [] : anchors}
+            onlyCurrentDocs
           />
           <Menu
             className="md:nx-hidden"

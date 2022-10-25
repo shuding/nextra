@@ -29,6 +29,7 @@ export interface Item extends MdxFile {
   display?: Display
   withIndexPage?: boolean
   theme?: PageTheme
+  isUnderCurrentDocsTree?: boolean
 }
 
 export interface PageItem extends MdxFile {
@@ -40,6 +41,7 @@ export interface PageItem extends MdxFile {
   firstChildRoute?: string
   display?: Display
   withIndexPage?: boolean
+  isUnderCurrentDocsTree?: boolean
 }
 
 export interface MenuItem extends MdxFile {
@@ -63,6 +65,7 @@ interface DocsItem extends MdxFile {
   children?: DocsItem[]
   firstChildRoute?: string
   withIndexPage?: boolean
+  isUnderCurrentDocsTree?: boolean
 }
 
 function findFirstRoute(items: DocsItem[]): string | undefined {
@@ -245,6 +248,8 @@ export function normalizePages({
     const docsItem: DocsItem = getItem()
     const pageItem: PageItem = getItem()
 
+    docsItem.isUnderCurrentDocsTree = isCurrentDocsTree
+
     // This item is currently active, we collect the active path etc.
     if (a.route === route) {
       activePath = [item]
@@ -262,9 +267,7 @@ export function normalizePages({
           break
         case 'doc':
           // Active in the docs tree
-          if (isCurrentDocsTree) {
-            activeIndex = flatDocsDirectories.length
-          }
+          activeIndex = flatDocsDirectories.length
       }
     }
     if (display === 'hidden' || CUSTOM_ERROR_PAGES.includes(a.route)) continue
@@ -316,15 +319,13 @@ export function normalizePages({
 
           break
         case 'doc':
-          if (isCurrentDocsTree) {
-            if (Array.isArray(docsItem.children)) {
-              docsItem.children.push(...normalizedChildren.docsDirectories)
-            }
-            // Itself is a doc page.
-            if (item.withIndexPage) {
-              if (display !== 'children') {
-                flatDocsDirectories.push(docsItem)
-              }
+          if (Array.isArray(docsItem.children)) {
+            docsItem.children.push(...normalizedChildren.docsDirectories)
+          }
+          // Itself is a doc page.
+          if (item.withIndexPage) {
+            if (display !== 'children') {
+              flatDocsDirectories.push(docsItem)
             }
           }
       }
@@ -342,9 +343,7 @@ export function normalizePages({
           topLevelNavbarItems.push(pageItem)
           break
         case 'doc':
-          if (isCurrentDocsTree) {
-            flatDocsDirectories.push(docsItem)
-          }
+          flatDocsDirectories.push(docsItem)
       }
     }
 
@@ -361,15 +360,11 @@ export function normalizePages({
     switch (type) {
       case 'page':
       case 'menu':
-        if (isCurrentDocsTree && underCurrentDocsRoot) {
-          docsDirectories.push(pageItem)
-        }
+        docsDirectories.push(pageItem)
         break
       case 'doc':
-        if (isCurrentDocsTree) {
-          if (display !== 'children') {
-            docsDirectories.push(docsItem)
-          }
+        if (display !== 'children') {
+          docsDirectories.push(docsItem)
         }
         break
       case 'separator':
