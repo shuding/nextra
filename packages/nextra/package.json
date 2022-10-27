@@ -102,7 +102,7 @@
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
     "@types/webpack": "^5.28.0",
-    "next": "^12.2.4",
+    "next": "^13.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "unified": "^10.1.2",

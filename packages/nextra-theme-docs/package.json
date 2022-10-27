@@ -74,7 +74,7 @@
     "autoprefixer": "^10.4.8",
     "concurrently": "^7.3.0",
     "lightningcss-cli": "^1.16.0",
-    "next": "^12.2.4",
+    "next": "^13.0.0",
     "nextra": "workspace:*",
     "postcss": "^8.4.14",
     "postcss-cli": "^8.3.1",

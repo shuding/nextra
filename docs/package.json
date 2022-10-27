@@ -10,7 +10,7 @@
   "dependencies": {
     "clsx": "^1.2.1",
     "framer-motion": "^7.3.2",
-    "next": "^12.2.3",
+    "next": "^13.0.0",
     "nextra": "2.0.0-beta.25",
     "nextra-theme-docs": "2.0.0-beta.25",
     "react": "^18.2.0",

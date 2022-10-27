@@ -1,3 +1,4 @@
+import next from 'next/package.json'
 import React, { forwardRef, ComponentProps, ReactElement } from 'react'
 // eslint-disable-next-line no-restricted-imports -- only in this file we determine either we include <a /> as child of <NextLink /> based of `newNextLinkBehavior` value
 import NextLink from 'next/link'
@@ -6,6 +7,8 @@ import { useConfig } from '../contexts'
 type AnchorProps = Omit<ComponentProps<'a'>, 'ref'> & {
   newWindow?: boolean
 }
+
+const nextVersion = Number(next.version.split('.')[0])
 
 export const Anchor = forwardRef<HTMLAnchorElement, AnchorProps>(function (
   { href = '', children, newWindow, ...props },
@@ -36,7 +39,7 @@ export const Anchor = forwardRef<HTMLAnchorElement, AnchorProps>(function (
     )
   }
 
-  if (config.newNextLinkBehavior) {
+  if (nextVersion > 12 || config.newNextLinkBehavior) {
     return (
       <NextLink ref={forwardedRef} href={href} {...props}>
         {children}
