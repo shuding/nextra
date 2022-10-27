@@ -1,4 +1,3 @@
-
 const TAILWIND_CONFIG = {
   extends: ['plugin:tailwindcss/recommended'],
   rules: {
@@ -7,7 +6,7 @@ const TAILWIND_CONFIG = {
     'tailwindcss/enforces-shorthand': 'error',
     'tailwindcss/migration-from-tailwind-2': 'error',
     'tailwindcss/no-custom-classname': 'error'
-  },
+  }
 }
 
 module.exports = {
@@ -67,6 +66,15 @@ module.exports = {
         tailwindcss: {
           config: 'packages/nextra-theme-blog/tailwind.config.js',
           whitelist: ['subheading-', 'post-item', 'post-item-more']
+        }
+      }
+    },
+    {
+      ...TAILWIND_CONFIG,
+      files: 'packages/nextra/**/*',
+      settings: {
+        tailwindcss: {
+          config: 'packages/nextra-theme-docs/tailwind.config.js'
         }
       }
     }
