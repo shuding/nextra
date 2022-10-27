@@ -66,8 +66,7 @@ module.exports = {
       settings: {
         tailwindcss: {
           config: 'packages/nextra-theme-blog/tailwind.config.js',
-          // callees: ['cn'],
-          // whitelist: ['nextra-breadcrumb', 'nextra-callout', 'nextra-bleed']
+          whitelist: ['subheading-']
         }
       }
     }
