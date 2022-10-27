@@ -300,8 +300,39 @@ exports[`Page Process > pageMap en-US 1`] = `
                   "route": "/docs/advanced/more/loooooooooooooooooooong-title",
                 },
                 {
+                  "children": [
+                    {
+                      "kind": "MdxPage",
+                      "name": "one",
+                      "route": "/docs/advanced/more/tree/one",
+                    },
+                    {
+                      "kind": "MdxPage",
+                      "name": "three",
+                      "route": "/docs/advanced/more/tree/three",
+                    },
+                    {
+                      "kind": "MdxPage",
+                      "name": "two",
+                      "route": "/docs/advanced/more/tree/two",
+                    },
+                    {
+                      "data": {
+                        "one": "One",
+                        "three": "Three",
+                        "two": "Two",
+                      },
+                      "kind": "Meta",
+                    },
+                  ],
+                  "kind": "Folder",
+                  "name": "tree",
+                  "route": "/docs/advanced/more/tree",
+                },
+                {
                   "data": {
                     "loooooooooooooooooooong-title": "Loooooooooooooooooooong Title",
+                    "tree": "Tree",
                   },
                   "kind": "Meta",
                   "locale": "en-US",
@@ -712,6 +743,36 @@ exports[`Page Process > pageMap zh-CN 1`] = `
             {
               "children": [
                 {
+                  "children": [
+                    {
+                      "kind": "MdxPage",
+                      "name": "one",
+                      "route": "/docs/advanced/more/tree/one",
+                    },
+                    {
+                      "kind": "MdxPage",
+                      "name": "three",
+                      "route": "/docs/advanced/more/tree/three",
+                    },
+                    {
+                      "kind": "MdxPage",
+                      "name": "two",
+                      "route": "/docs/advanced/more/tree/two",
+                    },
+                    {
+                      "data": {
+                        "one": "One",
+                        "three": "Three",
+                        "two": "Two",
+                      },
+                      "kind": "Meta",
+                    },
+                  ],
+                  "kind": "Folder",
+                  "name": "tree",
+                  "route": "/docs/advanced/more/tree",
+                },
+                {
                   "kind": "MdxPage",
                   "locale": "en-US",
                   "name": "loooooooooooooooooooong-title",
@@ -720,6 +781,7 @@ exports[`Page Process > pageMap zh-CN 1`] = `
                 {
                   "data": {
                     "loooooooooooooooooooong-title": "Loooooooooooooooooooong Title",
+                    "tree": "Tree",
                   },
                   "kind": "Meta",
                   "locale": "en-US",
