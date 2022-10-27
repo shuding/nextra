@@ -54,8 +54,7 @@ export function Tabs({
                 disabled={disabled}
                 className={({ selected }) =>
                   cn(
-                    'nx-rounded-t',
-                    'nx-text-md nx-mr-2 nx-p-2 nx-font-medium nx-leading-5 nx-transition-colors',
+                    'nx-mr-2 nx-rounded-t nx-p-2 nx-font-medium nx-leading-5 nx-transition-colors',
                     '-nx-mb-0.5 nx-select-none nx-border-b-2',
                     selected
                       ? 'nx-border-primary-500 nx-text-primary-500'

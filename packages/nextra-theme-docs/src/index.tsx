@@ -58,7 +58,7 @@ const Body = ({
       : null
 
   const gitTimestampEl = date ? (
-    <div className="nx-pointer-default nx-mt-12 nx-mb-8 nx-block nx-text-xs nx-text-gray-500 ltr:nx-text-right rtl:nx-text-left dark:nx-text-gray-400">
+    <div className="nx-mt-12 nx-mb-8 nx-block nx-text-xs nx-text-gray-500 ltr:nx-text-right rtl:nx-text-left dark:nx-text-gray-400">
       {renderComponent(config.gitTimestamp, { timestamp: date })}
     </div>
   ) : (
