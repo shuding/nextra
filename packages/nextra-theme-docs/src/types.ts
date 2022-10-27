@@ -96,7 +96,7 @@ export interface DocsThemeConfig {
     labels: string
   }
   sidebar: {
-    defaultMenuCollapsed: boolean
+    defaultMenuCollapseLevel: number,
     titleComponent: ReactNode | FC<{ title: string; type: string }>
   }
   toc: {

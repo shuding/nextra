@@ -67,6 +67,7 @@ function FolderImpl({
   const [route] = routeOriginal.split('#')
   const active = [route, route + '/'].includes(item.route + '/')
   const activeRouteInside = active || route.startsWith(item.route + '/')
+  const folderLevel = (item.route.match(/\//g) || []).length
 
   const { setMenu } = useMenu()
   const config = useConfig()
@@ -78,7 +79,7 @@ function FolderImpl({
         activeRouteInside ||
         (theme && 'collapsed' in theme
           ? !theme.collapsed
-          : !config.sidebar.defaultMenuCollapsed)
+          : folderLevel <= config.sidebar.defaultMenuCollapseLevel)
 
   const rerender = useState({})[1]
 

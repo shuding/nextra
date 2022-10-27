@@ -135,7 +135,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     labels: 'bug'
   },
   sidebar: {
-    defaultMenuCollapsed: false,
+    defaultMenuCollapseLevel: 2,
     titleComponent: ({ title }) => <>{title}</>
   },
   toc: {
@@ -162,7 +162,7 @@ export const LEGACY_CONFIG_OPTIONS: Record<string, string> = {
   bannerKey: 'banner.key',
   bodyExtraContent: 'main',
   customSearch: 'search.component',
-  defaultMenuCollapsed: 'sidebar.defaultMenuCollapsed',
+  defaultMenuCollapsed: 'sidebar.defaultMenuCollapseLevel',
   feedbackLabels: 'feedback.labels',
   feedbackLink: 'feedback.content',
   floatTOC: 'toc.float',
