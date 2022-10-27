@@ -86,6 +86,16 @@ module.exports = {
           config: 'examples/swr-site/tailwind.config.js'
         }
       }
+    },
+    {
+      ...TAILWIND_CONFIG,
+      files: 'docs/**/*',
+      settings: {
+        tailwindcss: {
+          config: 'docs/tailwind.config.js',
+          whitelist: ['dash-ring', 'theme-1', 'theme-2', 'theme-3', 'theme-4', 'border-primary-100/10$']
+        }
+      }
     }
   ]
 }
