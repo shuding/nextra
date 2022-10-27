@@ -1,12 +1,14 @@
-const withNextra = require('nextra')({
+import nextra from 'nextra'
+
+const withNextra = nextra({
   theme: 'nextra-theme-docs',
-  themeConfig: './src/theme.config.js',
+  themeConfig: './theme.config.jsx',
   unstable_staticImage: true,
   unstable_flexsearch: {
     codeblock: false
   }
 })
 
-module.exports = withNextra({
+export default withNextra({
   reactStrictMode: true
 })

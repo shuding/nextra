@@ -8,6 +8,7 @@ import { useConfig, useMenu } from '../contexts'
 import { MenuIcon } from 'nextra/icons'
 import { Item, PageItem, MenuItem, renderComponent, getFSRoute } from '../utils'
 import { Anchor } from './anchor'
+import { VersionSwitch } from './version-switch'
 import { DEFAULT_LOCALE } from '../constants'
 
 export type NavBarProps = {
@@ -83,6 +84,21 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
   const activeRoute = getFSRoute(asPath, locale)
   const { menu, setMenu } = useMenu()
 
+  const { versioned, filteredItems } = items.reduce<{
+    versioned: PageItem[]
+    filteredItems: (PageItem | MenuItem)[]
+  }>(
+    (acc, curr) => {
+      if ('versioned' in curr && curr.versioned) {
+        acc.versioned.push(curr)
+      } else {
+        acc.filteredItems.push(curr)
+      }
+      return acc
+    },
+    { versioned: [], filteredItems: [] }
+  )
+
   return (
     <div className="nextra-nav-container nx-sticky nx-top-0 nx-z-20 nx-w-full nx-bg-transparent">
       <div
@@ -106,7 +122,9 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
             {renderComponent(config.logo)}
           </div>
         )}
-        {items.map(pageOrMenu => {
+        {versioned.length > 0 && <VersionSwitch options={versioned} />}
+
+        {filteredItems.map(pageOrMenu => {
           if (pageOrMenu.display === 'hidden') return null
 
           if (pageOrMenu.type === 'menu') {

@@ -1,7 +1,24 @@
 {
-  "index": "Introduction",
-  "get-started": "Get Started",
-  "features": "Features",
-  "themes": "Themes",
-  "advanced": "Advanced"
+  "index": {
+    "type": "page",
+    "display": "hidden",
+    "theme": {
+      "timestamp": false
+    }
+  },
+  "docs": {
+    "type": "page",
+    "title": "v3.0.0",
+    "versioned": true
+  },
+  "v2.13.13": {
+    "type": "page",
+    "versioned": true
+  },
+  "nextra_link": {
+    "title": "Nextra ↗",
+    "href": "https://github.com/shuding/nextra",
+    "type": "page",
+    "newWindow": true
+  }
 }

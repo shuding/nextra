@@ -42,6 +42,7 @@ export interface PageItem extends MdxFile {
   display?: Display
   withIndexPage?: boolean
   isUnderCurrentDocsTree?: boolean
+  versioned?: true
 }
 
 export interface MenuItem extends MdxFile {
