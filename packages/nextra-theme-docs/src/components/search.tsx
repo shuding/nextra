@@ -148,14 +148,14 @@ export function Search({
     >
       <kbd
         className={cn(
-          'nx-absolute ltr:nx-right-1.5 rtl:nx-left-1.5 nx-my-1.5 nx-select-none',
-          'nx-rounded nx-bg-white nx-px-1.5 nx-h-5 nx-font-mono nx-font-medium nx-text-gray-500 nx-text-[10px]',
-          'nx-border dark:nx-bg-dark/50 dark:nx-border-gray-100/20',
+          'nx-absolute nx-my-1.5 nx-select-none ltr:nx-right-1.5 rtl:nx-left-1.5',
+          'nx-h-5 nx-rounded nx-bg-white nx-px-1.5 nx-font-mono nx-text-[10px] nx-font-medium nx-text-gray-500',
+          'nx-border dark:nx-border-gray-100/20 dark:nx-bg-dark/50',
           'contrast-more:nx-border-current contrast-more:nx-text-current contrast-more:dark:nx-border-current',
           'nx-items-center nx-gap-1 nx-transition-opacity',
           value
-            ? 'nx-cursor-pointer hover:nx-opacity-70 nx-z-20 nx-flex'
-            : 'nx-hidden sm:nx-flex nx-pointer-events-none'
+            ? 'nx-z-20 nx-flex nx-cursor-pointer hover:nx-opacity-70'
+            : 'nx-pointer-events-none nx-hidden sm:nx-flex'
         )}
         title={value ? 'Clear' : undefined}
         onClick={() => {
@@ -220,7 +220,7 @@ export function Search({
             'nextra-scrollbar',
             // Using bg-white as background-color when the browser didn't support backdrop-filter
             'nx-bg-white nx-text-gray-100 dark:nx-bg-neutral-900',
-            'nx-absolute nx-top-full nx-z-20 nx-mt-2 nx-overscroll-contain nx-rounded-xl nx-py-2.5 nx-shadow-xl nx-overflow-auto',
+            'nx-absolute nx-top-full nx-z-20 nx-mt-2 nx-overflow-auto nx-overscroll-contain nx-rounded-xl nx-py-2.5 nx-shadow-xl',
             'nx-max-h-[min(calc(50vh-11rem-env(safe-area-inset-bottom)),400px)]',
             'md:nx-max-h-[min(calc(100vh-5rem-env(safe-area-inset-bottom)),400px)]',
             'nx-right-0 nx-left-0 ltr:md:nx-left-auto rtl:md:nx-right-auto',
@@ -233,7 +233,7 @@ export function Search({
           }}
         >
           {loading ? (
-            <span className="nx-flex nx-select-none nx-justify-center nx-p-8 nx-text-center nx-text-sm nx-text-gray-400 nx-gap-2">
+            <span className="nx-flex nx-select-none nx-justify-center nx-gap-2 nx-p-8 nx-text-center nx-text-sm nx-text-gray-400">
               <SpinnerIcon className="nx-h-5 nx-w-5 nx-animate-spin" />
               Loading...
             </span>
@@ -243,15 +243,15 @@ export function Search({
                 {prefix}
                 <li
                   className={cn(
-                    'nx-mx-2.5 nx-rounded-md nx-break-words',
+                    'nx-mx-2.5 nx-break-words nx-rounded-md',
                     'contrast-more:nx-border',
                     i === active
                       ? 'nx-bg-primary-500/10 nx-text-primary-500 contrast-more:nx-border-primary-500'
-                      : 'nx-text-gray-800 dark:nx-text-gray-300 contrast-more:nx-border-transparent'
+                      : 'nx-text-gray-800 contrast-more:nx-border-transparent dark:nx-text-gray-300'
                   )}
                 >
                   <Anchor
-                    className="nx-block nx-px-2.5 nx-py-2 nx-scroll-m-12"
+                    className="nx-block nx-scroll-m-12 nx-px-2.5 nx-py-2"
                     href={route}
                     data-index={i}
                     onFocus={handleActive}

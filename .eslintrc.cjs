@@ -36,6 +36,23 @@ module.exports = {
           }
         ]
       }
+    },
+    {
+      files: 'packages/nextra-theme-docs/**/*',
+      extends: ['plugin:tailwindcss/recommended'],
+      rules: {
+        'tailwindcss/classnames-order': 'error',
+        'tailwindcss/enforces-negative-arbitrary-values': 'error',
+        'tailwindcss/enforces-shorthand': 'error',
+        'tailwindcss/migration-from-tailwind-2': 'error',
+        'tailwindcss/no-custom-classname': 'error'
+      },
+      settings: {
+        tailwindcss: {
+          config: 'packages/nextra-theme-docs/tailwind.config.js',
+          whitelist: ['nextra-breadcrumb']
+        }
+      }
     }
   ]
 }

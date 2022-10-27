@@ -23,6 +23,7 @@
     "@edge-runtime/vm": "1.1.0-beta.23",
     "@typescript-eslint/parser": "^5.32.0",
     "eslint": "^8.21.0",
+    "eslint-plugin-tailwindcss": "^3.6.2",
     "eslint-plugin-typescript-sort-keys": "^2.1.0",
     "prettier": "^2.7.1",
     "prettier-plugin-tailwindcss": "^0.1.13",
@@ -30,12 +31,6 @@
     "tsup": "^6.2.3",
     "turbo": "^1.4.2",
     "typescript": "^4.7.4"
-  },
-  "prettier": {
-    "semi": false,
-    "singleQuote": true,
-    "trailingComma": "none",
-    "arrowParens": "avoid"
   },
   "packageManager": "pnpm@7.3.0",
   "workspaces": [
@@ -59,7 +54,7 @@
       "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
       "@tailwindcss/typography": "^0.5.4",
       "tsup": "^6.2.1",
-      "concurrently": "^7.3.0", 
+      "concurrently": "^7.3.0",
       "postcss-import": "^14.1.0"
     }
   }

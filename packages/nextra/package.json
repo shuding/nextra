@@ -73,7 +73,7 @@
     "test": "vitest run",
     "prepublishOnly": "pnpm build",
     "clean": "rimraf ./dist ./style.css",
-    "format": "prettier --write ."
+    "format": "prettier --ignore-path ../../.gitignore --write --list-different ."
   },
   "dependencies": {
     "@mdx-js/mdx": "^2.1.3",
@@ -94,12 +94,6 @@
     "next": ">=9.5.3",
     "react": ">=16.13.1",
     "react-dom": ">=16.13.1"
-  },
-  "prettier": {
-    "semi": false,
-    "singleQuote": true,
-    "trailingComma": "none",
-    "arrowParens": "avoid"
   },
   "devDependencies": {
     "@types/github-slugger": "^1.3.0",

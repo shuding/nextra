@@ -58,7 +58,7 @@ const Body = ({
       : null
 
   const gitTimestampEl = date ? (
-    <div className="nx-pointer-default nx-mt-12 nx-mb-8 nx-block ltr:nx-text-right rtl:nx-text-left nx-text-xs nx-text-gray-500 dark:nx-text-gray-400">
+    <div className="nx-pointer-default nx-mt-12 nx-mb-8 nx-block nx-text-xs nx-text-gray-500 ltr:nx-text-right rtl:nx-text-left dark:nx-text-gray-400">
       {renderComponent(config.gitTimestamp, { timestamp: date })}
     </div>
   ) : (
@@ -86,7 +86,7 @@ const Body = ({
   return (
     <article
       className={cn(
-        'nx-min-h-[calc(100vh-4rem)] nx-w-full nx-flex nx-min-w-0 nx-max-w-full nx-justify-center nx-pb-8 nx-pr-[calc(env(safe-area-inset-right)-1.5rem)]',
+        'nx-flex nx-min-h-[calc(100vh-4rem)] nx-w-full nx-min-w-0 nx-max-w-full nx-justify-center nx-pb-8 nx-pr-[calc(env(safe-area-inset-right)-1.5rem)]',
         themeContext.typesetting === 'article' &&
           'nextra-body-typesetting-article'
       )}

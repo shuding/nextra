@@ -202,7 +202,7 @@ export function Flexsearch({
           prefix: isFirstItemOfPage && (
             <div
               className={cn(
-                'nx-border-b nx-border-black/10 dark:nx-border-white/20 nx-mx-2.5 nx-mb-2 nx-mt-6 nx-select-none nx-px-2.5 nx-pb-1.5 nx-text-xs nx-font-semibold nx-uppercase nx-text-gray-500 first:nx-mt-0 dark:nx-text-gray-300',
+                'nx-mx-2.5 nx-mb-2 nx-mt-6 nx-select-none nx-border-b nx-border-black/10 nx-px-2.5 nx-pb-1.5 nx-text-xs nx-font-semibold nx-uppercase nx-text-gray-500 first:nx-mt-0 dark:nx-border-white/20 dark:nx-text-gray-300',
                 'contrast-more:nx-border-gray-600 contrast-more:nx-text-gray-900 contrast-more:dark:nx-border-gray-50 contrast-more:dark:nx-text-gray-50'
               )}
             >
@@ -211,7 +211,7 @@ export function Flexsearch({
           ),
           children: (
             <>
-              <div className="nx-font-semibold nx-leading-5 nx-text-base">
+              <div className="nx-text-base nx-font-semibold nx-leading-5">
                 <HighlightMatches match={search} value={title} />
               </div>
               {content && (
