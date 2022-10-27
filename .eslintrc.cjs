@@ -93,6 +93,7 @@ module.exports = {
       settings: {
         tailwindcss: {
           config: 'docs/tailwind.config.js',
+          callees: ['cn'],
           whitelist: ['dash-ring', 'theme-1', 'theme-2', 'theme-3', 'theme-4', 'border-primary-100/10$']
         }
       }
