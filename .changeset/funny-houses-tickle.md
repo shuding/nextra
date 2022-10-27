@@ -1,5 +1,5 @@
 ---
-'nextra-theme-docs': major
+'nextra-theme-docs': minor
 ---
 
-allowed custom git domains
+allow custom github domains
