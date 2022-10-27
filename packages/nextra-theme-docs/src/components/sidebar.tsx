@@ -149,7 +149,7 @@ function FolderImpl({
           )}
         />
       </Anchor>
-      <Collapse className="ltr:pr-0 rtl:pl-0" open={open}>
+      <Collapse className="ltr:nx-pr-0 rtl:nx-pl-0" open={open}>
         {Array.isArray(item.children) ? (
           <Menu
             className={cn(classes.border, 'ltr:nx-ml-1 rtl:nx-mr-1')}
