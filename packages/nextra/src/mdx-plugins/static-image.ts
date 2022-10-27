@@ -35,11 +35,8 @@ const getASTNodeImport = (name: string, from: string) => ({
 
 // Based on the remark-embed-images project
 // https://github.com/remarkjs/remark-embed-images
-export const remarkStaticImage: Plugin<
-  [{ allowFutureImage?: boolean; filePath: string }],
-  Root
-> =
-  ({ allowFutureImage, filePath }) =>
+export const remarkStaticImage: Plugin<[{ filePath: string }], Root> =
+  ({ filePath }) =>
   (tree, _file, done) => {
     const importsToInject: any[] = []
 
@@ -118,10 +115,7 @@ export const remarkStaticImage: Plugin<
     })
 
     tree.children.unshift(
-      getASTNodeImport(
-        '$NextImageNextra',
-        allowFutureImage ? 'next/future/image' : 'next/image'
-      ) as any,
+      getASTNodeImport('$NextImageNextra', 'next/image') as any,
       ...importsToInject
     )
     done()
