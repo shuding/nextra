@@ -3,7 +3,12 @@
 
   span:target + &,
   :hover > & {
-    @apply nx-no-underline nx-opacity-100;
+    @apply nx-opacity-100;
+  }
+
+  span + &,
+  :hover > & {
+    @apply !nx-no-underline;
   }
 
   &:after {

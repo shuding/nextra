@@ -180,7 +180,7 @@ const Details = ({
 
   return (
     <details
-      className="nx-my-4 nx-rounded nx-border nx-border-gray-200 nx-bg-white nx-p-2 nx-shadow-sm dark:nx-border-neutral-800 dark:nx-bg-neutral-900"
+      className="nx-my-4 nx-rounded nx-border nx-border-gray-200 nx-bg-white nx-p-2 nx-shadow-sm dark:nx-border-neutral-800 dark:nx-bg-neutral-900 first:nx-mt-0"
       {...props}
       open={delayedOpenState}
       {...(openState && { 'data-expanded': true })}
@@ -238,11 +238,14 @@ export const getComponents = ({
     h5: createHeaderLink('h5', context),
     h6: createHeaderLink('h6', context),
     ul: (props: ComponentProps<'ul'>) => (
-      <ul className="ltr:nx-ml-6 rtl:nx-mr-6 nx-mt-6 nx-list-disc" {...props} />
+      <ul
+        className="ltr:nx-ml-6 rtl:nx-mr-6 nx-mt-6 nx-list-disc first:nx-mt-0"
+        {...props}
+      />
     ),
     ol: (props: ComponentProps<'ol'>) => (
       <ol
-        className="ltr:nx-ml-6 rtl:nx-mr-6 nx-mt-6 nx-list-decimal"
+        className="ltr:nx-ml-6 rtl:nx-mr-6 nx-mt-6 nx-list-decimal first:nx-mt-0"
         {...props}
       />
     ),
@@ -251,7 +254,7 @@ export const getComponents = ({
       <blockquote
         className={cn(
           'nx-mt-6 nx-border-gray-300 nx-italic nx-text-gray-700 dark:nx-border-gray-700 dark:nx-text-gray-400',
-          'rtl:nx-border-r-2 rtl:nx-pr-6 ltr:nx-border-l-2 ltr:nx-pl-6'
+          'rtl:nx-border-r-2 rtl:nx-pr-6 ltr:nx-border-l-2 ltr:nx-pl-6 first:nx-mt-0'
         )}
         {...props}
       />
@@ -266,10 +269,13 @@ export const getComponents = ({
       />
     ),
     table: (props: ComponentProps<'table'>) => (
-      <Table className="nextra-scrollbar nx-mt-6 nx-p-0" {...props} />
+      <Table
+        className="nextra-scrollbar nx-mt-6 nx-p-0 first:nx-mt-0"
+        {...props}
+      />
     ),
     p: (props: ComponentProps<'p'>) => (
-      <p className="nx-mt-6 nx-leading-7" {...props} />
+      <p className="nx-mt-6 nx-leading-7 first:nx-mt-0" {...props} />
     ),
     tr: Tr,
     th: Th,

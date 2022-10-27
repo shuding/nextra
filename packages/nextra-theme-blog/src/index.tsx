@@ -24,7 +24,7 @@ const BlogLayout = ({
   const Layout = layoutMap[type]
   if (!Layout) {
     throw new Error(
-      `Nextra-themes-blog does not support the layout type "${type}" It only supports "post", "page", "posts" and "tag"`
+      `nextra-theme-blog does not support the layout type "${type}" It only supports "post", "page", "posts" and "tag"`
     )
   }
   return (
