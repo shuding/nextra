@@ -127,7 +127,7 @@ const InnerLayout = ({
     activeType === 'page'
 
   const tocClassName =
-    'nextra-toc nx-order-last nx-hidden nx-w-64 nx-flex-shrink-0 xl:nx-block'
+    'nextra-toc nx-order-last nx-hidden nx-w-64 nx-shrink-0 xl:nx-block'
 
   const tocEl =
     activeType === 'page' ||

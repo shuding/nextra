@@ -359,7 +359,7 @@ export function Sidebar({
   return (
     <>
       {includePlaceholder && asPopover ? (
-        <div className="nx-hidden nx-h-0 nx-w-64 nx-flex-shrink-0 xl:nx-block" />
+        <div className="nx-hidden nx-h-0 nx-w-64 nx-shrink-0 xl:nx-block" />
       ) : null}
       <div
         className={cn(
@@ -373,7 +373,7 @@ export function Sidebar({
       <aside
         className={cn(
           'nextra-sidebar-container nx-flex nx-flex-col',
-          'md:nx-top-16 md:nx-flex-shrink-0 md:nx-w-64 md:nx-transform-none',
+          'md:nx-top-16 md:nx-shrink-0 md:nx-w-64 md:nx-transform-none',
           asPopover ? 'md:nx-hidden' : 'md:nx-sticky md:nx-self-start',
           menu
             ? '[transform:translate3d(0,0,0)]'

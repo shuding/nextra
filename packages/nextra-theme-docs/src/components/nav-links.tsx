@@ -13,7 +13,7 @@ interface NavLinkProps {
 
 const classes = {
   link: 'nx-max-w-[50%] nx-gap-1 [word-break:break-word] nx-flex nx-items-center nx-py-4 nx-text-base nx-font-medium nx-text-gray-600 nx-transition-colors hover:nx-text-primary-500 dark:nx-text-gray-300 md:nx-text-lg',
-  icon: 'nx-h-5 nx-inline nx-flex-shrink-0'
+  icon: 'nx-h-5 nx-inline nx-shrink-0'
 }
 
 export const NavLinks = ({

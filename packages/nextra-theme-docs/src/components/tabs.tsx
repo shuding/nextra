@@ -38,7 +38,7 @@ export function Tabs({
       defaultIndex={defaultIndex}
       onChange={onChange}
     >
-      <div className="nx-no-scrollbar -nx-m-2 nx-overflow-x-auto nx-overflow-y-hidden nx-overscroll-x-contain nx-p-2">
+      <div className="no-scrollbar -nx-m-2 nx-overflow-x-auto nx-overflow-y-hidden nx-overscroll-x-contain nx-p-2">
         <HeadlessTab.List className="nx-mt-4 nx-flex nx-w-max nx-min-w-full nx-border-b nx-border-gray-200 nx-pb-px dark:nx-border-neutral-800">
           {items.map((item, index) => {
             const disabled = !!(
