@@ -77,6 +77,15 @@ module.exports = {
           config: 'packages/nextra-theme-docs/tailwind.config.js'
         }
       }
+    },
+    {
+      ...TAILWIND_CONFIG,
+      files: 'examples/swr-site/**/*',
+      settings: {
+        tailwindcss: {
+          config: 'examples/swr-site/tailwind.config.js'
+        }
+      }
     }
   ]
 }

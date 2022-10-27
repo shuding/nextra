@@ -113,7 +113,7 @@ const config: DocsThemeConfig = {
         <a
           rel="noopener"
           target="_blank"
-          className="flex items-center font-semibold gap-2"
+          className="flex items-center gap-2 font-semibold"
           href={FOOTER_LINK[locale]}
         >
           {FOOTER_LINK_TEXT[locale]}
@@ -124,8 +124,8 @@ const config: DocsThemeConfig = {
   getNextSeoProps() {
     const { locale } = useRouter();
     return {
-      titleTemplate: `%s | SWR (${locale})`
-    }
+      titleTemplate: `%s | SWR (${locale})`,
+    };
   },
   gitTimestamp: ({ timestamp }) => <>Last updated on {timestamp.toString()}</>,
   head() {
@@ -189,7 +189,7 @@ const config: DocsThemeConfig = {
       <>
         <Logo className="h-3" />
         <span
-          className="ltr:ml-2 rtl:mr-2 font-extrabold hidden md:inline select-none"
+          className="hidden select-none font-extrabold ltr:ml-2 rtl:mr-2 md:inline"
           title={"SWR: " + (TITLE[locale] || "")}
         >
           SWR
