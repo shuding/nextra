@@ -1,5 +1,18 @@
 # nextra-theme-docs
 
+## 2.0.0-beta.39
+
+### Minor Changes
+
+- 8f6d377: allow custom github domains
+
+### Patch Changes
+
+- f5bf2e4: fix margin-top for `<Tab />` content
+- 0c136ad: add missing `nx-` prefix in sidebar
+- 8ad9507: fix unable expanding folder items in sidebar
+- 416dfe2: add missing `nx-` prefixes in sidebar
+
 ## 2.0.0-beta.38
 
 ### Patch Changes
