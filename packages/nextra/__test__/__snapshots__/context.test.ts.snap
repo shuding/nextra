@@ -1158,9 +1158,6 @@ exports[`context > getAllPages() > should work 1`] = `
         ],
         "kind": "Folder",
         "meta": {
-          "theme": {
-            "collapsed": false,
-          },
           "title": "Advanced",
         },
         "name": "advanced",
@@ -1170,9 +1167,6 @@ exports[`context > getAllPages() > should work 1`] = `
         "kind": "MdxPage",
         "locale": "en-US",
         "meta": {
-          "theme": {
-            "collapsed": false,
-          },
           "title": "Advanced",
         },
         "name": "advanced",
@@ -2930,9 +2924,6 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
     ],
     "kind": "Folder",
     "meta": {
-      "theme": {
-        "collapsed": false,
-      },
       "title": "Advanced",
     },
     "name": "advanced",
@@ -2942,9 +2933,6 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
     "kind": "MdxPage",
     "locale": "en-US",
     "meta": {
-      "theme": {
-        "collapsed": false,
-      },
       "title": "Advanced",
     },
     "name": "advanced",

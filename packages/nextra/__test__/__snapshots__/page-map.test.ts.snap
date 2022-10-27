@@ -188,9 +188,6 @@ exports[`Page Process > pageMap en-US 1`] = `
             },
             "404-500": "404/500 Custom Error Pages",
             "advanced": {
-              "theme": {
-                "collapsed": false,
-              },
               "title": "Advanced",
             },
             "arguments": "Arguments",
