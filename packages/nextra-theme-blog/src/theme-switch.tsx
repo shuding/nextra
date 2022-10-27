@@ -17,7 +17,7 @@ export default function ThemeSwitch() {
     <span
       role="button"
       aria-label="Toggle Dark Mode"
-      className="cursor-pointer p-2 text-current"
+      className="nx-cursor-pointer nx-p-2 nx-text-current"
       tabIndex={0}
       onClick={toggleTheme}
       onKeyDown={e => {

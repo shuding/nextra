@@ -9,7 +9,7 @@ export default function Nav(): ReactElement {
   const { navPages } = collectPostsAndNavs({ opts, config })
   return (
     <div className="nx-mb-8 nx-flex nx-items-center nx-gap-3">
-      <div className="nx-flex grow nx-flex-wrap nx-items-center nx-justify-end nx-gap-3">
+      <div className="nx-flex nx-grow nx-flex-wrap nx-items-center nx-justify-end nx-gap-3">
         {navPages.map(page => {
           if (page.active) {
             return (

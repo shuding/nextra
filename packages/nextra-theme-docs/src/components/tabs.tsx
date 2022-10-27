@@ -81,7 +81,7 @@ export function Tab({
   ...props
 }: ComponentProps<'div'>): ReactElement {
   return (
-    <HeadlessTab.Panel {...props} className="nx-rounded">
+    <HeadlessTab.Panel {...props} className="nx-rounded nx-pt-6">
       {children}
     </HeadlessTab.Panel>
   )

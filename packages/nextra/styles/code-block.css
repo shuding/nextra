@@ -43,7 +43,7 @@ pre {
 }
 
 [data-rehype-pretty-code-fragment] {
-  @apply nx-relative;
+  @apply nx-relative nx-mt-6 first:nx-mt-0;
 }
 
 @supports (
