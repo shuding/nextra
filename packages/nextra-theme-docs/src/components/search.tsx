@@ -223,7 +223,7 @@ export function Search({
             'nx-absolute nx-top-full nx-z-20 nx-mt-2 nx-overflow-auto nx-overscroll-contain nx-rounded-xl nx-py-2.5 nx-shadow-xl',
             'nx-max-h-[min(calc(50vh-11rem-env(safe-area-inset-bottom)),400px)]',
             'md:nx-max-h-[min(calc(100vh-5rem-env(safe-area-inset-bottom)),400px)]',
-            'nx-right-0 nx-left-0 ltr:md:nx-left-auto rtl:md:nx-right-auto',
+            'nx-inset-x-0 ltr:md:nx-left-auto rtl:md:nx-right-auto',
             'contrast-more:nx-border contrast-more:nx-border-gray-900 contrast-more:dark:nx-border-gray-50',
             overlayClassName
           )}
