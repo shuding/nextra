@@ -1,5 +1,11 @@
 # nextra-theme-blog
 
+## 2.0.0-beta.41
+
+### Patch Changes
+
+- bd2cefa: Fix css classes with `eslint-plugin-tailwindcss`
+
 ## 2.0.0-beta.40
 
 ### Patch Changes
