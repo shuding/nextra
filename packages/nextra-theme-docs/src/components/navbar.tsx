@@ -121,7 +121,7 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
                 key={menu.title}
                 className={cn(
                   classes.link,
-                  'flex gap-1',
+                  'nx-flex nx-gap-1',
                   isActive ? classes.active : classes.inactive
                 )}
                 menu={menu}
