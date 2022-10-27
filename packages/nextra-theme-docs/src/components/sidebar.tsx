@@ -47,7 +47,7 @@ const classes = {
     'nx-bg-primary-50 nx-text-primary-500 dark:nx-bg-primary-500/10 nx-font-bold',
     'contrast-more:nx-border-primary-500 contrast-more:dark:nx-border-primary-500'
   ),
-  list: 'nx-flex nx-gap-1 nx-flex-col',
+  list: cn('nx-flex nx-gap-1 nx-flex-col'),
   border: cn(
     'nx-relative before:nx-absolute before:nx-top-1.5 before:nx-bottom-1.5',
     'before:nx-content-[""] before:nx-w-px before:nx-bg-gray-200 dark:before:nx-bg-neutral-800',

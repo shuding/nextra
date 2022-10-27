@@ -16,10 +16,10 @@ export type NavBarProps = {
 }
 
 const classes = {
-  link: 'nx-text-sm contrast-more:nx-text-gray-700 contrast-more:dark:nx-text-gray-100',
-  active: 'nx-subpixel-antialiased contrast-more:nx-font-bold',
+  link: cn('nx-text-sm contrast-more:nx-text-gray-700 contrast-more:dark:nx-text-gray-100'),
+  active: cn('nx-subpixel-antialiased contrast-more:nx-font-bold'),
   inactive:
-    'nx-text-gray-600 hover:nx-text-gray-800 dark:nx-text-gray-400 dark:hover:nx-text-gray-200'
+    cn('nx-text-gray-600 hover:nx-text-gray-800 dark:nx-text-gray-400 dark:hover:nx-text-gray-200')
 }
 
 function NavbarMenu({
