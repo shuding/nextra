@@ -1,5 +1,12 @@
 # nextra-theme-docs
 
+## 2.0.0-beta.40
+
+### Patch Changes
+
+- f569d90: missing `nx-` class prefixes in blog
+  fix callout padding in docs
+
 ## 2.0.0-beta.39
 
 ### Minor Changes
