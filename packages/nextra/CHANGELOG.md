@@ -1,5 +1,11 @@
 # nextra
 
+## 2.0.0-beta.39
+
+### Patch Changes
+
+- a9414be: always use `next/image`, since in next 12.3.2 `next/future/image` was renamed to `next/image`
+
 ## 2.0.0-beta.38
 
 ## 2.0.0-beta.37
