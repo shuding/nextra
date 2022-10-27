@@ -888,6 +888,40 @@ exports[`context > getAllPages() > should work 1`] = `
                 "name": "loooooooooooooooooooong-title",
                 "route": "/docs/advanced/more/loooooooooooooooooooong-title",
               },
+              {
+                "children": [
+                  {
+                    "kind": "MdxPage",
+                    "meta": {
+                      "title": "One",
+                    },
+                    "name": "one",
+                    "route": "/docs/advanced/more/tree/one",
+                  },
+                  {
+                    "kind": "MdxPage",
+                    "meta": {
+                      "title": "Three",
+                    },
+                    "name": "three",
+                    "route": "/docs/advanced/more/tree/three",
+                  },
+                  {
+                    "kind": "MdxPage",
+                    "meta": {
+                      "title": "Two",
+                    },
+                    "name": "two",
+                    "route": "/docs/advanced/more/tree/two",
+                  },
+                ],
+                "kind": "Folder",
+                "meta": {
+                  "title": "Tree",
+                },
+                "name": "tree",
+                "route": "/docs/advanced/more/tree",
+              },
             ],
             "kind": "Folder",
             "meta": {
@@ -2626,6 +2660,40 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
             "name": "loooooooooooooooooooong-title",
             "route": "/docs/advanced/more/loooooooooooooooooooong-title",
           },
+          {
+            "children": [
+              {
+                "kind": "MdxPage",
+                "meta": {
+                  "title": "One",
+                },
+                "name": "one",
+                "route": "/docs/advanced/more/tree/one",
+              },
+              {
+                "kind": "MdxPage",
+                "meta": {
+                  "title": "Three",
+                },
+                "name": "three",
+                "route": "/docs/advanced/more/tree/three",
+              },
+              {
+                "kind": "MdxPage",
+                "meta": {
+                  "title": "Two",
+                },
+                "name": "two",
+                "route": "/docs/advanced/more/tree/two",
+              },
+            ],
+            "kind": "Folder",
+            "meta": {
+              "title": "Tree",
+            },
+            "name": "tree",
+            "route": "/docs/advanced/more/tree",
+          },
         ],
         "kind": "Folder",
         "meta": {
@@ -3062,6 +3130,40 @@ exports[`context > getPagesUnderRoute() > should work 1`] = `
         },
         "name": "loooooooooooooooooooong-title",
         "route": "/docs/advanced/more/loooooooooooooooooooong-title",
+      },
+      {
+        "children": [
+          {
+            "kind": "MdxPage",
+            "meta": {
+              "title": "One",
+            },
+            "name": "one",
+            "route": "/docs/advanced/more/tree/one",
+          },
+          {
+            "kind": "MdxPage",
+            "meta": {
+              "title": "Three",
+            },
+            "name": "three",
+            "route": "/docs/advanced/more/tree/three",
+          },
+          {
+            "kind": "MdxPage",
+            "meta": {
+              "title": "Two",
+            },
+            "name": "two",
+            "route": "/docs/advanced/more/tree/two",
+          },
+        ],
+        "kind": "Folder",
+        "meta": {
+          "title": "Tree",
+        },
+        "name": "tree",
+        "route": "/docs/advanced/more/tree",
       },
     ],
     "kind": "Folder",
