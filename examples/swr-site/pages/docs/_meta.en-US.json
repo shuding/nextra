@@ -26,10 +26,7 @@
   "suspense": "Suspense",
   "middleware": "Middleware",
   "advanced": {
-    "title": "Advanced",
-    "theme": {
-      "collapsed": false
-    }
+    "title": "Advanced"
   },
   "change-log": {
     "title": "Change Log",
