@@ -18,8 +18,8 @@ export function Banner(): ReactElement | null {
       <script dangerouslySetInnerHTML={{ __html: hideBannerScript }} />
       <div
         className={cn(
-          'nx-relative nx-z-20 nx-flex nx-justify-center nx-items-center',
-          'nx-bg-neutral-900 nx-text-sm nx-text-slate-50 nx-font-medium',
+          'nx-relative nx-z-20 nx-flex nx-items-center nx-justify-center',
+          'nx-bg-neutral-900 nx-text-sm nx-font-medium nx-text-slate-50',
           'nx-h-[var(--nextra-banner-height)] [body.nextra-banner-hidden_&]:nx-hidden',
           'dark:nx-bg-[linear-gradient(1deg,#383838,#212121)] dark:nx-text-white',
           'nx-py-1 nx-pl-[max(env(safe-area-inset-left),2.5rem)] nx-pr-[max(env(safe-area-inset-right),2.5rem)]'
@@ -30,7 +30,7 @@ export function Banner(): ReactElement | null {
         </div>
         {banner.dismissible && (
           <button
-            className="nx-opacity-80 nx-absolute ltr:nx-right-0 rtl:nx-left-0 hover:nx-opacity-100"
+            className="nx-absolute nx-opacity-80 hover:nx-opacity-100 ltr:nx-right-0 rtl:nx-left-0"
             onClick={() => {
               try {
                 localStorage.setItem(banner.key, '0')
@@ -38,7 +38,7 @@ export function Banner(): ReactElement | null {
               document.body.classList.add('nextra-banner-hidden')
             }}
           >
-            <XIcon className="nx-h4 nx-w-4 nx-mx-4" />
+            <XIcon className="nx-mx-4 nx-h-4 nx-w-4" />
           </button>
         )}
       </div>

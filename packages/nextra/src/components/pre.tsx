@@ -26,7 +26,7 @@ export const Pre = ({
   return (
     <>
       {filename && (
-        <div className="nx-bg-primary-700/5 nx-text-gray-700 nx-absolute nx-top-0 nx-z-[1] nx-w-full nx-truncate nx-rounded-t-xl nx-py-2 nx-px-4 nx-text-xs dark:nx-bg-primary-300/10 dark:nx-text-gray-200">
+        <div className="nx-absolute nx-top-0 nx-z-[1] nx-w-full nx-truncate nx-rounded-t-xl nx-bg-primary-700/5 nx-py-2 nx-px-4 nx-text-xs nx-text-gray-700 dark:nx-bg-primary-300/10 dark:nx-text-gray-200">
           {filename}
         </div>
       )}
@@ -54,7 +54,7 @@ export const Pre = ({
           className="md:nx-hidden"
           title="Toggle word wrap"
         >
-          <WordWrapIcon className="nx-pointer-events-none nx-w-4 nx-h-4" />
+          <WordWrapIcon className="nx-pointer-events-none nx-h-4 nx-w-4" />
         </Button>
         {value && <CopyToClipboard tabIndex={-1} value={value} />}
       </div>

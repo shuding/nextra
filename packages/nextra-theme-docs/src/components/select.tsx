@@ -64,7 +64,7 @@ export function Select({
               ref={container}
               show={open}
               as={Listbox.Options}
-              className="nx-border nx-border-black/5 dark:nx-border-white/20 nx-z-20 nx-max-h-64 nx-overflow-auto nx-rounded-md nx-bg-white nx-py-1 nx-text-sm nx-shadow-lg dark:nx-bg-neutral-800"
+              className="nx-z-20 nx-max-h-64 nx-overflow-auto nx-rounded-md nx-border nx-border-black/5 nx-bg-white nx-py-1 nx-text-sm nx-shadow-lg dark:nx-border-white/20 dark:nx-bg-neutral-800"
               leave="nx-transition-opacity"
               leaveFrom="nx-opacity-100"
               leaveTo="nx-opacity-0"
@@ -85,7 +85,7 @@ export function Select({
                 >
                   {option.name}
                   {option.key === selected.key && (
-                    <span className="nx-absolute nx-inset-y-0 ltr:nx-right-3 rtl:nx-left-3 nx-flex nx-items-center">
+                    <span className="nx-absolute nx-inset-y-0 nx-flex nx-items-center ltr:nx-right-3 rtl:nx-left-3">
                       <CheckIcon />
                     </span>
                   )}

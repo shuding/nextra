@@ -75,7 +75,7 @@ export function Collapse({
       <div
         ref={innerRef}
         className={cn(
-          'nx-p-2 nx-transform-gpu nx-overflow-hidden nx-transition-opacity nx-duration-500 nx-ease-in-out motion-reduce:nx-transition-none',
+          'nx-transform-gpu nx-overflow-hidden nx-p-2 nx-transition-opacity nx-duration-500 nx-ease-in-out motion-reduce:nx-transition-none',
           className
         )}
         style={{

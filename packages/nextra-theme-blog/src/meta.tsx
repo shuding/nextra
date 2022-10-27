@@ -17,17 +17,17 @@ export default function Meta(): ReactElement {
         className="
           nx-select-none
           nx-rounded-md
+          nx-bg-gray-200
           nx-px-1
-          nx-transition-colors
           nx-text-sm
           nx-text-gray-400
-          hover:nx-text-gray-500
-          dark:nx-text-gray-300
-          dark:hover:nx-text-gray-200
-          nx-bg-gray-200
+          nx-transition-colors
           hover:nx-bg-gray-300
+          hover:nx-text-gray-500
           dark:nx-bg-gray-600
+          dark:nx-text-gray-300
           dark:hover:nx-bg-gray-700
+          dark:hover:nx-text-gray-200
         "
       >
         {t}
@@ -45,7 +45,7 @@ export default function Meta(): ReactElement {
       }
     >
       <div className="nx-grow nx-text-gray-400">
-        <div className="nx-flex nx-flex-wrap nx-items-center nx-gap-1 nx-not-prose">
+        <div className="nx-not-prose nx-flex nx-flex-wrap nx-items-center nx-gap-1">
           {author}
           {author && date && ','}
           {date && (
@@ -57,7 +57,7 @@ export default function Meta(): ReactElement {
           {readingTime || tagsEl}
         </div>
         {readingTime && (
-          <div className="nx-flex nx-flex-wrap nx-items-center nx-gap-1 nx-mt-1 nx-not-prose">
+          <div className="nx-not-prose nx-mt-1 nx-flex nx-flex-wrap nx-items-center nx-gap-1">
             {tagsEl}
           </div>
         )}

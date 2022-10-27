@@ -76,8 +76,8 @@ export const DEFAULT_THEME: DocsThemeConfig = {
   i18n: [],
   logo: (
     <>
-      <span className="font-extrabold">Nextra</span>
-      <span className="ml-2 hidden font-normal text-gray-600 md:inline">
+      <span className="nx-font-extrabold">Nextra</span>
+      <span className="nx-ml-2 nx-hidden nx-font-normal nx-text-gray-600 md:nx-inline">
         The Next Docs Builder
       </span>
     </>
@@ -118,7 +118,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
       )
     },
     emptyResult: (
-      <span className="block select-none p-8 text-center text-sm text-gray-400">
+      <span className="nx-block nx-select-none nx-p-8 nx-text-center nx-text-sm nx-text-gray-400">
         No results found.
       </span>
     ),

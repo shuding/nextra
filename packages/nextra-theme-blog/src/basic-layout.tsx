@@ -9,7 +9,7 @@ export const BasicLayout = ({ children }: { children: ReactNode }) => {
   const ref = useRef<HTMLHeadingElement>(null)
   return (
     <article
-      className="container nx-prose nx-prose-sm dark:nx-prose-dark md:nx-prose"
+      className="nx-container nx-prose-sm nx-prose dark:nx-prose-dark md:nx-prose"
       dir="ltr"
     >
       <Head>
