@@ -110,7 +110,7 @@ function FolderImpl({
       <Anchor
         href={(item as Item).withIndexPage ? item.route : ''}
         className={cn(
-          'gap-2 items-center justify-between',
+          'nx-gap-2 nx-items-center nx-justify-between',
           classes.link,
           active ? classes.active : classes.inactive
         )}
