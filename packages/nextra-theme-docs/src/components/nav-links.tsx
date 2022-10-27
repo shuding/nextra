@@ -12,8 +12,10 @@ interface NavLinkProps {
 }
 
 const classes = {
-  link: cn('nx-max-w-[50%] nx-gap-1 [word-break:break-word] nx-flex nx-items-center nx-py-4 nx-text-base nx-font-medium nx-text-gray-600 nx-transition-colors hover:nx-text-primary-500 dark:nx-text-gray-300 md:nx-text-lg'),
-  icon: cn('nx-h-5 nx-inline nx-shrink-0')
+  link: cn(
+    'nx-flex nx-max-w-[50%] nx-items-center nx-gap-1 nx-py-4 nx-text-base nx-font-medium nx-text-gray-600 nx-transition-colors [word-break:break-word] hover:nx-text-primary-500 dark:nx-text-gray-300 md:nx-text-lg'
+  ),
+  icon: cn('nx-inline nx-h-5 nx-shrink-0')
 }
 
 export const NavLinks = ({
@@ -52,7 +54,7 @@ export const NavLinks = ({
           title={next.title}
           className={cn(
             classes.link,
-            'ltr:nx-pl-4 rtl:nx-pr-4 ltr:nx-text-right rtl:nx-text-left ltr:nx-ml-auto rtl:nx-mr-auto'
+            'ltr:nx-ml-auto ltr:nx-pl-4 ltr:nx-text-right rtl:nx-mr-auto rtl:nx-pr-4 rtl:nx-text-left'
           )}
         >
           {next.title}
