@@ -122,11 +122,18 @@ export const DEFAULT_THEME: DocsThemeConfig = {
         No results found.
       </span>
     ),
+    loading() {
+      const { locale } = useRouter()
+      if (locale === 'zh-CN') return '正在加载…'
+      if (locale === 'ru') return 'Загрузка…'
+      if (locale === 'fr') return 'Сhargement…'
+      return 'Loading…'
+    },
     placeholder() {
       const { locale } = useRouter()
       if (locale === 'zh-CN') return '搜索文档…'
-      if (locale === 'ru-RU') return 'Поиск документации…'
-      if (locale === 'fr-FR') return 'Rechercher de la documentation…'
+      if (locale === 'ru') return 'Поиск документации…'
+      if (locale === 'fr') return 'Rechercher de la documentation…'
       return 'Search documentation…'
     }
   },
