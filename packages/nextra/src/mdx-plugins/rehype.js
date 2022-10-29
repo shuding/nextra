@@ -30,16 +30,19 @@ export const attachMeta =
         node.properties.id ||= slugger.slug(getFlattenedValue(node))
         return
       }
+
       if (!('data-rehype-pretty-code-fragment' in node.properties)) {
         return
       }
+      // remove redundant <div data-rehype-pretty-code-fragment /> element that wraps <pre /> element
+      const preEl = Object.assign(node, node.children[0])
+
       const meta = node.__nextra_meta__
       const hasCopy = meta
         ? (defaultShowCopyCode && !/( |^)copy=false($| )/.test(meta)) ||
           /( |^)copy($| )/.test(meta)
         : defaultShowCopyCode
 
-      const [preEl] = node.children
       if (hasCopy) {
         preEl.properties.value = JSON.stringify(node.__nextra_text__)
       }
