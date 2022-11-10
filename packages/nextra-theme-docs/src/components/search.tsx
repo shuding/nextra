@@ -235,7 +235,7 @@ export function Search({
           {loading ? (
             <span className="nx-flex nx-select-none nx-justify-center nx-gap-2 nx-p-8 nx-text-center nx-text-sm nx-text-gray-400">
               <SpinnerIcon className="nx-h-5 nx-w-5 nx-animate-spin" />
-              Loading...
+              {renderString(config.search.loading)}
             </span>
           ) : results.length > 0 ? (
             results.map(({ route, prefix, children, id }, i) => (
