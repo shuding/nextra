@@ -38,6 +38,7 @@
   ],
   "pnpm": {
     "overrides": {
+      "flexsearch": "0.7.21",
       "vitest": "^0.21.0",
       "react": "^18.2.0",
       "react-dom": "^18.2.0",

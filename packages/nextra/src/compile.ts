@@ -1,6 +1,8 @@
 import { createProcessor, ProcessorOptions } from '@mdx-js/mdx'
 import { Processor } from '@mdx-js/mdx/lib/core'
 import remarkGfm from 'remark-gfm'
+import remarkMath from 'remark-math'
+import rehypeKatex from 'rehype-katex'
 import rehypePrettyCode from 'rehype-pretty-code'
 import { rehypeMdxTitle } from 'rehype-mdx-title'
 import readingTime from 'remark-reading-time'
@@ -65,6 +67,7 @@ export async function compileMdx(
     remarkPlugins: [
       ...(mdxOptions.remarkPlugins || []),
       remarkGfm,
+      remarkMath,
       remarkHeadings,
       loaderOptions.unstable_staticImage &&
         ([remarkStaticImage, { filePath }] as any),
@@ -75,6 +78,7 @@ export async function compileMdx(
     rehypePlugins: [
       ...(mdxOptions.rehypePlugins || []),
       parseMeta,
+      rehypeKatex,
       [
         rehypePrettyCode,
         { ...rehypePrettyCodeOptions, ...mdxOptions.rehypePrettyCodeOptions }

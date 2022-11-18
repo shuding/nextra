@@ -48,7 +48,7 @@
     "@popperjs/core": "^2.11.6",
     "@reach/skip-nav": "^0.17.0",
     "clsx": "^1.2.1",
-    "flexsearch": "^0.7.21",
+    "flexsearch": "0.7.21",
     "focus-visible": "^5.2.0",
     "git-url-parse": "^13.1.0",
     "github-slugger": "^1.4.0",
