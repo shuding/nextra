@@ -1,5 +1,13 @@
 # nextra-theme-docs
 
+## 2.0.0-beta.42
+
+### Patch Changes
+
+- 2b6f3be: add missing border for search container
+- 32cd385: add new option `search.loading` for control loading text
+- fb37b5f: Close selector bracket for compat with old Safari.
+
 ## 2.0.0-beta.41
 
 ### Patch Changes
