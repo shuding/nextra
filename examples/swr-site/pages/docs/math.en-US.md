@@ -2,7 +2,6 @@
 
 Some math text:
 
-{/*
 $$
 a_n = \left\{\begin{array}{ll}
 0 & \text{if}\ n=0 \\
@@ -14,4 +13,3 @@ $$
 Also:
 
 $n! = n \cdot (n-1) \cdot \ldots \cdot 1$ for $n\in \mathbb{N}_+$
-*/}
