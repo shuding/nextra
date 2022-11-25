@@ -83,11 +83,10 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     </>
   ),
   logoLink: true,
-  navbar: Navbar,
-  navigation: {
-    next: true,
-    prev: true
+  navbar: {
+    component: Navbar,
   },
+  navigation: true,
   nextThemes: {
     defaultTheme: 'system',
     storageKey: 'theme'

@@ -197,6 +197,8 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
           renderComponent(config.chat.icon)
         ) : null}
 
+        {renderComponent(config.navbar.extraContent)}
+
         <button
           type="button"
           aria-label="Menu"

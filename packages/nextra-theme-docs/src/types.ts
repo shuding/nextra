@@ -55,7 +55,10 @@ export interface DocsThemeConfig {
   logo: ReactNode | FC
   logoLink?: boolean | string
   main?: FC<{ children: ReactNode }>
-  navbar: ReactNode | FC<NavBarProps>
+  navbar: {
+    component: ReactNode | FC<NavBarProps>,
+    extraContent?: ReactNode | FC
+  }
   navigation:
     | boolean
     | {
