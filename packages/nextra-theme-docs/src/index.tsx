@@ -1,43 +1,20 @@
 import type { PageMapItem, PageOpts } from 'nextra'
 import type { ReactElement, ReactNode } from 'react'
 
-import React, { useEffect, useMemo, useRef } from 'react'
+import React, { useMemo } from 'react'
 import { useRouter } from 'next/router'
 import 'focus-visible'
-import scrollIntoView from 'scroll-into-view-if-needed'
 import { SkipNavContent } from '@reach/skip-nav'
 import cn from 'clsx'
 import { MDXProvider } from '@mdx-js/react'
 
 import './polyfill'
-import {
-  Head,
-  Navbar,
-  NavLinks,
-  Sidebar,
-  Breadcrumb,
-  Banner,
-  ThemeSwitch
-} from './components'
+import { Head, NavLinks, Sidebar, Breadcrumb, Banner } from './components'
 import { getComponents } from './mdx-components'
 import { ActiveAnchorProvider, ConfigProvider, useConfig } from './contexts'
-import { DEFAULT_LOCALE, IS_BROWSER } from './constants'
+import { DEFAULT_LOCALE } from './constants'
 import { getFSRoute, normalizePages, renderComponent } from './utils'
 import { DocsThemeConfig, PageTheme, RecursivePartial } from './types'
-
-let resizeObserver: ResizeObserver
-if (IS_BROWSER) {
-  resizeObserver ||= new ResizeObserver(entries => {
-    if (location.hash) {
-      const node = entries[0].target.ownerDocument.getElementById(
-        location.hash.slice(1)
-      )
-      if (node) {
-        scrollIntoView(node)
-      }
-    }
-  })
-}
 
 function useDirectoryInfo(pageMap: PageMapItem[]) {
   const { locale = DEFAULT_LOCALE, defaultLocale, route } = useRouter()
@@ -69,18 +46,7 @@ const Body = ({
   navigation,
   children
 }: BodyProps): ReactElement => {
-  const mainElement = useRef<HTMLElement>(null)
   const config = useConfig()
-
-  useEffect(() => {
-    if (mainElement.current) {
-      resizeObserver.observe(mainElement.current)
-    }
-
-    return () => {
-      resizeObserver.disconnect()
-    }
-  }, [])
 
   if (themeContext.layout === 'raw') {
     return <div className="nx-w-full nx-overflow-x-hidden">{children}</div>
@@ -92,7 +58,7 @@ const Body = ({
       : null
 
   const gitTimestampEl = date ? (
-    <div className="nx-pointer-default nx-mt-12 nx-mb-8 nx-block ltr:nx-text-right rtl:nx-text-left nx-text-xs nx-text-gray-500 dark:nx-text-gray-400">
+    <div className="nx-mt-12 nx-mb-8 nx-block nx-text-xs nx-text-gray-500 ltr:nx-text-right rtl:nx-text-left dark:nx-text-gray-400">
       {renderComponent(config.gitTimestamp, { timestamp: date })}
     </div>
   ) : (
@@ -120,15 +86,12 @@ const Body = ({
   return (
     <article
       className={cn(
-        'nx-min-h-[calc(100vh-4rem)] nx-w-full nx-flex nx-min-w-0 nx-max-w-full nx-justify-center nx-pb-8 nx-pr-[calc(env(safe-area-inset-right)-1.5rem)]',
+        'nx-flex nx-min-h-[calc(100vh-4rem)] nx-w-full nx-min-w-0 nx-max-w-full nx-justify-center nx-pb-8 nx-pr-[calc(env(safe-area-inset-right)-1.5rem)]',
         themeContext.typesetting === 'article' &&
           'nextra-body-typesetting-article'
       )}
     >
-      <main
-        className="nx-w-full nx-min-w-0 nx-max-w-4xl nx-px-6 nx-pt-4 md:nx-px-8"
-        ref={mainElement}
-      >
+      <main className="nx-w-full nx-min-w-0 nx-max-w-4xl nx-px-6 nx-pt-4 md:nx-px-8">
         {breadcrumb}
         {body}
       </main>
@@ -164,7 +127,7 @@ const InnerLayout = ({
     activeType === 'page'
 
   const tocClassName =
-    'nextra-toc nx-order-last nx-hidden nx-w-64 nx-flex-shrink-0 xl:nx-block'
+    'nextra-toc nx-order-last nx-hidden nx-w-64 nx-shrink-0 xl:nx-block'
 
   const tocEl =
     activeType === 'page' ||

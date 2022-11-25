@@ -1,5 +1,40 @@
 # nextra
 
+## 2.0.0-beta.42
+
+## 2.0.0-beta.41
+
+### Patch Changes
+
+- bd2cefa: Fix css classes with `eslint-plugin-tailwindcss`
+
+## 2.0.0-beta.40
+
+### Patch Changes
+
+- f569d90: missing `nx-` class prefixes in blog
+  fix callout padding in docs
+
+## 2.0.0-beta.39
+
+### Patch Changes
+
+- a9414be: always use `next/image`, since in next 12.3.2 `next/future/image` was renamed to `next/image`
+
+## 2.0.0-beta.38
+
+## 2.0.0-beta.37
+
+## 2.0.0-beta.36
+
+### Patch Changes
+
+- 1c3fedb: add missing `nx-` prefixes to table/th/tr elements
+
+## 2.0.0-beta.35
+
+## 2.0.0-beta.34
+
 ## 2.0.0-beta.33
 
 ### Patch Changes

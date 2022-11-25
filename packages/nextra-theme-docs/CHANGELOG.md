@@ -1,5 +1,71 @@
 # nextra-theme-docs
 
+## 2.0.0-beta.42
+
+### Patch Changes
+
+- 2b6f3be: add missing border for search container
+- 32cd385: add new option `search.loading` for control loading text
+- fb37b5f: Close selector bracket for compat with old Safari.
+
+## 2.0.0-beta.41
+
+### Patch Changes
+
+- bd2cefa: Fix css classes with `eslint-plugin-tailwindcss`
+
+## 2.0.0-beta.40
+
+### Patch Changes
+
+- f569d90: missing `nx-` class prefixes in blog
+  fix callout padding in docs
+
+## 2.0.0-beta.39
+
+### Minor Changes
+
+- 8f6d377: allow custom github domains
+
+### Patch Changes
+
+- f5bf2e4: fix margin-top for `<Tab />` content
+- 0c136ad: add missing `nx-` prefix in sidebar
+- 8ad9507: fix unable expanding folder items in sidebar
+- 416dfe2: add missing `nx-` prefixes in sidebar
+
+## 2.0.0-beta.38
+
+### Patch Changes
+
+- 05d068c: Add button label for hamburger menu
+
+## 2.0.0-beta.37
+
+### Patch Changes
+
+- 5b01537: Fix full docs directory list and active link
+
+## 2.0.0-beta.36
+
+### Patch Changes
+
+- 08a39e6: remove `resizeObserver` for dynamic content since it provoke jumps on tabs switch when there is `#` anchor in url
+- 1c3fedb: add missing `nx-` prefixes to table/th/tr elements
+- 351fa45: add missing `nx-` prefix for `grow` class in `<LocaleSwitch />`
+
+## 2.0.0-beta.35
+
+### Patch Changes
+
+- ab629e6: Add correct aria values inside nav
+
+## 2.0.0-beta.34
+
+### Patch Changes
+
+- 4e4a37c: add new "display" property to \_meta
+
 ## 2.0.0-beta.33
 
 ### Patch Changes

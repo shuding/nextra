@@ -1,6 +1,6 @@
 export default function Authors({ date, children }) {
   return (
-    <div className="nx-mt-8 nx-mb-16 nx-text-gray-400 nx-text-sm">
+    <div className="mt-8 mb-16 text-sm text-gray-400">
       {date} by {children}
     </div>
   );
@@ -8,12 +8,12 @@ export default function Authors({ date, children }) {
 
 export function Author({ name, link }) {
   return (
-    <span className="after:nx-content-[','] last:after:nx-content-['']">
+    <span className="after:content-[','] last:after:content-['']">
       <a
         key={name}
         href={link}
         target="_blank"
-        className="nx-mx-1 nx-text-gray-800 dark:nx-text-gray-100"
+        className="mx-1 text-gray-800 dark:text-gray-100"
       >
         {name}
       </a>

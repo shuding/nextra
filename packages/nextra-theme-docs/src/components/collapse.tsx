@@ -35,7 +35,8 @@ export function Collapse({
         animationRef.current = setTimeout(() => {
           const container = containerRef.current
           if (container) {
-            container.style.removeProperty('nx-max-height')
+            // should be style property in kebab-case, not css class name
+            container.style.removeProperty('max-height')
           }
         }, 300)
       }
@@ -74,7 +75,7 @@ export function Collapse({
       <div
         ref={innerRef}
         className={cn(
-          'nx-p-2 nx-transform-gpu nx-overflow-hidden nx-transition-opacity nx-duration-500 nx-ease-in-out motion-reduce:nx-transition-none',
+          'nx-transform-gpu nx-overflow-hidden nx-p-2 nx-transition-opacity nx-duration-500 nx-ease-in-out motion-reduce:nx-transition-none',
           className
         )}
         style={{

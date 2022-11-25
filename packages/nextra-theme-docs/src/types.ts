@@ -91,6 +91,7 @@ export interface DocsThemeConfig {
           directories: Item[]
         }>
     emptyResult: ReactNode | FC
+    loading: string | (() => string)
     // Can't be React component
     placeholder: string | (() => string)
   }
@@ -99,7 +100,7 @@ export interface DocsThemeConfig {
     labels: string
   }
   sidebar: {
-    defaultMenuCollapsed: boolean
+    defaultMenuCollapseLevel: number,
     titleComponent: ReactNode | FC<{ title: string; type: string }>
   }
   toc: {

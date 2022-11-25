@@ -20,9 +20,9 @@ export function Breadcrumb({
             {index > 0 && <ArrowRightIcon className="nx-w-3.5 nx-shrink-0" />}
             <li
               className={cn(
-                'nx-transition-colors nx-whitespace-nowrap',
+                'nx-whitespace-nowrap nx-transition-colors',
                 isActive
-                  ? 'nx-text-gray-700 dark:nx-text-gray-400 nx-font-medium contrast-more:nx-font-bold contrast-more:nx-text-current contrast-more:dark:nx-text-current'
+                  ? 'nx-font-medium nx-text-gray-700 contrast-more:nx-font-bold contrast-more:nx-text-current dark:nx-text-gray-400 contrast-more:dark:nx-text-current'
                   : [
                       'nx-min-w-[24px] nx-overflow-hidden nx-text-ellipsis',
                       isLink &&

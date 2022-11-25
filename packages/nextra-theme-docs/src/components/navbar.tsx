@@ -16,10 +16,10 @@ export type NavBarProps = {
 }
 
 const classes = {
-  link: 'nx-text-sm contrast-more:nx-text-gray-700 contrast-more:dark:nx-text-gray-100',
-  active: 'nx-subpixel-antialiased contrast-more:nx-font-bold',
+  link: cn('nx-text-sm contrast-more:nx-text-gray-700 contrast-more:dark:nx-text-gray-100'),
+  active: cn('nx-subpixel-antialiased contrast-more:nx-font-bold'),
   inactive:
-    'nx-text-gray-600 hover:nx-text-gray-800 dark:nx-text-gray-400 dark:hover:nx-text-gray-200'
+    cn('nx-text-gray-600 hover:nx-text-gray-800 dark:nx-text-gray-400 dark:hover:nx-text-gray-200')
 }
 
 function NavbarMenu({
@@ -37,12 +37,12 @@ function NavbarMenu({
   )
 
   return (
-    <div className="nx-inline-block nx-relative">
+    <div className="nx-relative nx-inline-block">
       <Menu>
         <Menu.Button
           className={cn(
             className,
-            'nx-rounded nx-items-center -nx-ml-2 nx-hidden nx-whitespace-nowrap nx-p-2 md:nx-inline-flex',
+            '-nx-ml-2 nx-hidden nx-items-center nx-whitespace-nowrap nx-rounded nx-p-2 md:nx-inline-flex',
             classes.inactive
           )}
         >
@@ -61,7 +61,7 @@ function NavbarMenu({
                     item.href || routes[key]?.route || menu.route + '/' + key
                   }
                   className={cn(
-                    'nx-hidden nx-whitespace-nowrap md:nx-inline-block nx-text-gray-600 hover:nx-text-gray-900 dark:nx-text-gray-400 dark:hover:nx-text-gray-100 nx-relative nx-select-none nx-w-full',
+                    'nx-relative nx-hidden nx-w-full nx-select-none nx-whitespace-nowrap nx-text-gray-600 hover:nx-text-gray-900 dark:nx-text-gray-400 dark:hover:nx-text-gray-100 md:nx-inline-block',
                     'nx-py-1.5 ltr:nx-pl-3 ltr:nx-pr-9 rtl:nx-pr-3 rtl:nx-pl-9'
                   )}
                   newWindow={item.newWindow}
@@ -97,17 +97,17 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
         {config.logoLink ? (
           <Anchor
             href={typeof config.logoLink === 'string' ? config.logoLink : '/'}
-            className="nx-flex ltr:nx-mr-auto rtl:nx-ml-auto nx-items-center hover:nx-opacity-75"
+            className="nx-flex nx-items-center hover:nx-opacity-75 ltr:nx-mr-auto rtl:nx-ml-auto"
           >
             {renderComponent(config.logo)}
           </Anchor>
         ) : (
-          <div className="nx-flex ltr:nx-mr-auto rtl:nx-ml-auto nx-items-center">
+          <div className="nx-flex nx-items-center ltr:nx-mr-auto rtl:nx-ml-auto">
             {renderComponent(config.logo)}
           </div>
         )}
         {items.map(pageOrMenu => {
-          if (pageOrMenu.hidden) return null
+          if (pageOrMenu.display === 'hidden') return null
 
           if (pageOrMenu.type === 'menu') {
             const menu = pageOrMenu as MenuItem
@@ -121,7 +121,7 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
                 key={menu.title}
                 className={cn(
                   classes.link,
-                  'flex gap-1',
+                  'nx-flex nx-gap-1',
                   isActive ? classes.active : classes.inactive
                 )}
                 menu={menu}
@@ -157,7 +157,7 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
                 !isActive || page.newWindow ? classes.inactive : classes.active
               )}
               newWindow={page.newWindow}
-              aria-selected={!page.newWindow && isActive}
+              aria-current={!page.newWindow && isActive}
             >
               {page.title}
             </Anchor>
@@ -200,7 +200,9 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
         {renderComponent(config.navbar.extraContent)}
 
         <button
-          className="nextra-hamburger nx-rounded active:nx-bg-gray-400/20 nx-p-2 -nx-mr-2 md:nx-hidden"
+          type="button"
+          aria-label="Menu"
+          className="nextra-hamburger -nx-mr-2 nx-rounded nx-p-2 active:nx-bg-gray-400/20 md:nx-hidden"
           onClick={() => setMenu(!menu)}
         >
           <MenuIcon className={cn({ open: menu })} />

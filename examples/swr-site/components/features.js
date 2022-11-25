@@ -54,8 +54,8 @@ export default () => {
     FEATURES_WITH_TRANSLATIONS[defaultLocale][key]; // Fallback for missing translations
 
   return (
-    <div className="mx-auto max-w-full w-[880px] text-center px-4 mb-10">
-      <p className="text-lg mb-2 text-gray-600 md:!text-2xl">
+    <div className="mx-auto mb-10 w-[880px] max-w-full px-4 text-center">
+      <p className="mb-2 text-lg text-gray-600 md:!text-2xl">
         {TITLE_WITH_TRANSLATIONS[locale]}
       </p>
       <div className={styles.features}>

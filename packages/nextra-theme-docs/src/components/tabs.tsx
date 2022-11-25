@@ -38,7 +38,7 @@ export function Tabs({
       defaultIndex={defaultIndex}
       onChange={onChange}
     >
-      <div className="nx-no-scrollbar -nx-m-2 nx-overflow-x-auto nx-overflow-y-hidden nx-overscroll-x-contain nx-p-2">
+      <div className="no-scrollbar -nx-m-2 nx-overflow-x-auto nx-overflow-y-hidden nx-overscroll-x-contain nx-p-2">
         <HeadlessTab.List className="nx-mt-4 nx-flex nx-w-max nx-min-w-full nx-border-b nx-border-gray-200 nx-pb-px dark:nx-border-neutral-800">
           {items.map((item, index) => {
             const disabled = !!(
@@ -54,8 +54,7 @@ export function Tabs({
                 disabled={disabled}
                 className={({ selected }) =>
                   cn(
-                    'nx-rounded-t',
-                    'nx-text-md nx-mr-2 nx-p-2 nx-font-medium nx-leading-5 nx-transition-colors',
+                    'nx-mr-2 nx-rounded-t nx-p-2 nx-font-medium nx-leading-5 nx-transition-colors',
                     '-nx-mb-0.5 nx-select-none nx-border-b-2',
                     selected
                       ? 'nx-border-primary-500 nx-text-primary-500'
@@ -81,7 +80,7 @@ export function Tab({
   ...props
 }: ComponentProps<'div'>): ReactElement {
   return (
-    <HeadlessTab.Panel {...props} className="nx-rounded">
+    <HeadlessTab.Panel {...props} className="nx-rounded nx-pt-6">
       {children}
     </HeadlessTab.Panel>
   )

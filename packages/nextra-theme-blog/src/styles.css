@@ -21,7 +21,7 @@ h1 {
   letter-spacing: -0.03em;
 }
 
-.prose code {
+.nx-prose code {
   &:before,
   &:after {
     @apply nx-hidden;

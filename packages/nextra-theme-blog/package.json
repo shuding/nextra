@@ -1,6 +1,6 @@
 {
   "name": "nextra-theme-blog",
-  "version": "2.0.0-beta.33",
+  "version": "2.0.0-beta.42",
   "description": "A Nextra theme for blogs.",
   "repository": "https://github.com/shuding/nextra",
   "author": "Shu Ding <g@shud.in>",
@@ -78,11 +78,5 @@
     "react-dom": "^18.2.0",
     "tailwindcss": "^3.1.8",
     "vitest": "^0.21.0"
-  },
-  "prettier": {
-    "semi": false,
-    "singleQuote": true,
-    "trailingComma": "none",
-    "arrowParens": "avoid"
   }
 }

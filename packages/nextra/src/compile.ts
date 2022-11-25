@@ -48,7 +48,6 @@ export async function compileMdx(
     | 'unstable_flexsearch'
     | 'unstable_defaultShowCopyCode'
     | 'unstable_readingTime'
-    | 'allowFutureImage'
   > & {
     mdxOptions?: LoaderOptions['mdxOptions'] &
       Pick<ProcessorOptions, 'jsx' | 'outputFormat'>
@@ -67,10 +66,8 @@ export async function compileMdx(
       ...(mdxOptions.remarkPlugins || []),
       remarkGfm,
       remarkHeadings,
-      loaderOptions.unstable_staticImage && [
-        remarkStaticImage,
-        { allowFutureImage: loaderOptions.allowFutureImage, filePath }
-      ] as any,
+      loaderOptions.unstable_staticImage &&
+        ([remarkStaticImage, { filePath }] as any),
       loaderOptions.unstable_flexsearch &&
         structurize(structurizedData, loaderOptions.unstable_flexsearch),
       loaderOptions.unstable_readingTime && readingTime
