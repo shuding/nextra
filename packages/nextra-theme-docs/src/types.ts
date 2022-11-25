@@ -57,7 +57,7 @@ export interface DocsThemeConfig {
   main?: FC<{ children: ReactNode }>
   navbar: {
     component: ReactNode | FC<NavBarProps>,
-    extraContent: ReactNode | FC
+    extraContent?: ReactNode | FC
   }
   navigation:
     | boolean
