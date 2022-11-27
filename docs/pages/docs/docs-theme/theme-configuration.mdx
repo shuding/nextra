@@ -1,5 +1,5 @@
 import cn from 'clsx'
-import Image from 'next/future/image'
+import Image from 'next/image'
 
 export function Screenshot({ src, alt, full }) {
   return <div className={cn("mt-6 -mb-4 flex justify-center border dark:border-zinc-800 rounded-xl overflow-hidden", full ? 'bg-white' : 'bg-zinc-100')}>

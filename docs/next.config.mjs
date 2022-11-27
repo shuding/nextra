@@ -10,6 +10,4 @@ const withNextra = nextra({
   unstable_defaultShowCopyCode: true
 })
 
-export default withNextra({
-  reactStrictMode: true
-})
+export default withNextra({})
