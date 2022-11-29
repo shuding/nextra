@@ -4,7 +4,6 @@ import path from 'node:path'
 import grayMatter from 'gray-matter'
 import slash from 'slash'
 import { LoaderContext } from 'webpack'
-import { findPagesDir } from 'next/dist/lib/find-pages-dir.js'
 
 import { addPage } from './content-dump'
 import { parseFileName } from './utils'
@@ -18,8 +17,9 @@ import {
   MARKDOWN_EXTENSION_REGEX,
   CWD
 } from './constants'
+import { findPagesDirectory } from './file-system'
 
-const PAGES_DIR = findPagesDir(CWD).pages as string
+const PAGES_DIR = findPagesDirectory()
 
 // TODO: create this as a webpack plugin.
 const indexContentEmitted = new Set<string>()

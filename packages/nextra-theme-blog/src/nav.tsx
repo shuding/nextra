@@ -22,13 +22,13 @@ export default function Nav(): ReactElement {
             )
           }
           return (
-            <Link key={page.route} href={page.route} passHref>
+            <Link key={page.route} href={page.route} passHref legacyBehavior>
               <a>{page.frontMatter?.title || page.name}</a>
             </Link>
           )
         })}
         {config.navs?.map(nav => (
-          <Link key={nav.url} href={nav.url} passHref>
+          <Link key={nav.url} href={nav.url} passHref legacyBehavior>
             <a>{nav.name}</a>
           </Link>
         ))}

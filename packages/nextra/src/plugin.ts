@@ -15,11 +15,10 @@ import path from 'node:path'
 import slash from 'slash'
 import grayMatter from 'gray-matter'
 import { Compiler } from 'webpack'
-import title from 'title'
-import { findPagesDir } from 'next/dist/lib/find-pages-dir.js'
 
 import { restoreCache } from './content-dump'
 import { CWD, MARKDOWN_EXTENSION_REGEX, META_FILENAME } from './constants'
+import { findPagesDirectory } from './file-system'
 
 const readdir = promisify(fs.readdir)
 const readFile = promisify(fs.readFile)
@@ -174,7 +173,7 @@ export class NextraPlugin {
           // Restore the search data from the cache.
           restoreCache()
         }
-        const PAGES_DIR = findPagesDir(CWD).pages as string
+        const PAGES_DIR = findPagesDirectory()
         const result = await collectFiles(PAGES_DIR)
         pageMapCache.set(result)
         callback()

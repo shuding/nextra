@@ -31,7 +31,7 @@ export const PostsLayout = ({ children }: { children: ReactNode }) => {
     return (
       <div key={post.route} className="post-item">
         <h3>
-          <Link href={post.route} passHref>
+          <Link href={post.route} passHref legacyBehavior>
             <a className="!nx-no-underline">{postTitle}</a>
           </Link>
         </h3>
@@ -39,7 +39,7 @@ export const PostsLayout = ({ children }: { children: ReactNode }) => {
           <p className="nx-mb-2 nx-text-gray-400">
             {description}
             {config.readMore && (
-              <Link href={post.route} passHref>
+              <Link href={post.route} passHref legacyBehavior>
                 <a className="post-item-more nx-ml-2">{config.readMore}</a>
               </Link>
             )}

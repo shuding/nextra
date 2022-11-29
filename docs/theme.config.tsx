@@ -1,4 +1,4 @@
-import type { DocsThemeConfig } from 'nextra-theme-docs'
+import { DocsThemeConfig } from 'nextra-theme-docs'
 import { useRouter } from 'next/router'
 
 const logo = (
@@ -40,18 +40,21 @@ const logo = (
   </span>
 )
 
-export default {
+const config: DocsThemeConfig = {
   project: {
     link: 'https://github.com/shuding/nextra'
   },
   docsRepositoryBase: 'https://github.com/shuding/nextra/blob/master',
-  titleSuffix: () => {
+  getNextSeoProps() {
     const { route } = useRouter()
-    if (route === '/') return ''
-    return ' – Nextra'
+    if (route !== '/') {
+      return {
+        titleTemplate: '%s – Nextra'
+      }
+    }
   },
   logo,
-  head: () => (
+  head: (
     <>
       <meta name="msapplication-TileColor" content="#ffffff" />
       <meta name="theme-color" content="#ffffff" />
@@ -85,26 +88,14 @@ export default {
   banner: {
     key: '2.0-release',
     text: (
-      <a href="https://nextra.vercel.app" target="_blank">
+      <a href="https://nextra.vercel.app" target="_blank" rel="noreferrer">
         🎉 Nextra 2.0 is released. Read more →
       </a>
     )
   },
-  navigation: {
-    prev: true,
-    next: true
-  },
   editLink: {
     text: 'Edit this page on GitHub'
-  },
-  footer: {
-    text: `MIT ${new Date().getFullYear()} © Nextra.`
-  },
-  toc: {
-    float: true
-  },
-  sidebar: {
-    defaultMenuCollapsed: true,
-    subtitle: ({ title }) => <>{title}</>
   }
-} as DocsThemeConfig
+}
+
+export default config

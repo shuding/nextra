@@ -12,7 +12,7 @@ export default function Meta(): ReactElement {
   const tags = tag ? split(tag) : []
 
   const tagsEl = tags.map(t => (
-    <Link key={t} href="/tags/[tag]" as={`/tags/${t}`} passHref>
+    <Link key={t} href="/tags/[tag]" as={`/tags/${t}`} passHref legacyBehavior>
       <a
         className="
           nx-select-none
@@ -64,7 +64,7 @@ export default function Meta(): ReactElement {
       </div>
       <div className="nx-flex nx-items-center nx-gap-3">
         {back && (
-          <Link href={back} passHref>
+          <Link href={back} passHref legacyBehavior>
             <a>Back</a>
           </Link>
         )}
