@@ -56,17 +56,17 @@ To create a Nextra Docs site manually, you have to install **Next.js**, **React*
 
 <Tabs items={['pnpm', 'npm', 'yarn']}>
   <Tab>
-    ```bash copy
+    ```bash
     pnpm i next react react-dom nextra nextra-theme-docs
     ```
   </Tab>
   <Tab>
-    ```bash copy
+    ```bash
     npm i next react react-dom nextra nextra-theme-docs
     ```
   </Tab>
   <Tab>
-    ```bash copy
+    ```bash
     yarn add next react react-dom nextra nextra-theme-docs
     ```
   </Tab>
@@ -74,7 +74,7 @@ To create a Nextra Docs site manually, you have to install **Next.js**, **React*
 
 Like any Next.js projects, you need to also add `scripts` to your `package.json`:
 
-```json filename="package.json" copy
+```json filename="package.json"
 {
   "scripts": {
     "dev": "next",
@@ -90,7 +90,7 @@ If you already have Next.js running, you only need to install `nextra` and `next
 
 Create the following `next.config.js` file in your project’s root directory:
 
-```js filename="next.config.js" copy
+```js filename="next.config.js"
 const withNextra = require('nextra')({
   theme: 'nextra-theme-docs',
   themeConfig: './theme.config.jsx',
@@ -116,7 +116,7 @@ import switchIcon from '@components/icons/switch'
 
 Lastly, create the corresponding `theme.config.jsx` file in your project’s root directory:
 
-```jsx filename="theme.config.jsx" copy
+```jsx filename="theme.config.jsx"
 export default {
   logo: <span>My Nextra Documentation</span>,
   // ...
@@ -133,7 +133,7 @@ More configuration options for the docs theme can be found here:
 
 Now, you can create an initial MDX page:
 
-```mdx filename="pages/index.mdx" copy
+```mdx filename="pages/index.mdx"
 # Welcome to Nextra
 
 Hello, world!
@@ -141,7 +141,7 @@ Hello, world!
 
 And run the `dev` command to start developing the project:
 
-```bash copy
+```bash
 pnpm dev
 ```
 

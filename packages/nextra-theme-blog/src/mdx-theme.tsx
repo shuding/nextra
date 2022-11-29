@@ -53,7 +53,7 @@ const A = ({ children, ...props }: ComponentProps<'a'>) => {
     )
   }
   return props.href ? (
-    <Link href={props.href} passHref>
+    <Link href={props.href} passHref legacyBehavior>
       <a {...props}>{children}</a>
     </Link>
   ) : (
