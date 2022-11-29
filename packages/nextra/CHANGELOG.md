@@ -1,5 +1,11 @@
 # nextra
 
+## 2.0.0-beta.43
+
+### Patch Changes
+
+- 59e18b0: make `nextra`/`nextra-theme-docs`/`nextra-theme-blog` be compatible with next 13
+
 ## 2.0.0-beta.42
 
 ## 2.0.0-beta.41

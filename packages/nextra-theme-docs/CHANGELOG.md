@@ -1,5 +1,13 @@
 # nextra-theme-docs
 
+## 2.0.0-beta.43
+
+### Patch Changes
+
+- 9ab6dd0: allow adding additional navbar content via `navbar.extraContent`
+- 59e18b0: make `nextra`/`nextra-theme-docs`/`nextra-theme-blog` be compatible with next 13
+- 2e2912e: fix project/chat icon could appear without provided link
+
 ## 2.0.0-beta.42
 
 ### Patch Changes
