@@ -53,7 +53,7 @@ export function Callout({
       >
         {emoji}
       </div>
-      <div className="nx-leading-7 nx-min-w-0 nx-w-full">{children}</div>
+      <div className="nx-w-full nx-min-w-0 nx-leading-7">{children}</div>
     </div>
   )
 }
