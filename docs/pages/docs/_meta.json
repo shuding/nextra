@@ -7,10 +7,5 @@
   },
   "docs-theme": "Docs Theme",
   "blog-theme": "Blog Theme",
-  "custom-theme": "Custom Theme",
-  "-- About --": {
-    "type": "separator",
-    "title": "About"
-  },
-  "about": "About"
+  "custom-theme": "Custom Theme"
 }

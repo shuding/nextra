@@ -8,8 +8,12 @@ Nextra supports [Next.js Internationalized Routing](https://nextjs.org/docs/adva
 
 To add multi-language pages to your Nextra application, you need to config `i18n` in `next.config.js` first:
 
-```js filename="next.config.js"
-const withNextra = require('nextra')('nextra-theme-docs', './theme.config.jsx')
+```js filename="next.config.js" {7-10}
+const withNextra = require('nextra')({
+  theme: "nextra-theme-docs",
+  themeConfig: "./theme.config.tsx",
+})
+
 module.exports = withNextra({
   i18n: {
     locales: ['en', 'zh', 'de'],

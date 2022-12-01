@@ -62,12 +62,14 @@ export function I18n() {
       margin: 0 auto;
     }
     .features-container {
-      margin: 4rem 0;
+      margin: 4rem 0 0;
       padding: 4rem 0;
       background-color: #f3f4f6;
+      border-bottom: 1px solid #e5e7eb;
     }
     :global(.dark) .features-container {
       background-color: #000;
+      border-bottom: 1px solid rgb(38,38,38);
     }
   `}</style>
 
@@ -289,18 +291,12 @@ export function I18n() {
           <h3>Hybrid rendering, <br/>next generation.</h3>
           <p>With Nextra, you can leverage the hybrid rendering power from Next.js with your Markdown content including [SSG](https://nextjs.org/docs/basic-features/pages#static-generation-recommended), [SSR](https://nextjs.org/docs/basic-features/pages#server-side-rendering), and [ISR](https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration).</p>
         </Feature>
-        <Feature>
-          <h3>Optimized SEO</h3>
+        <Feature large>
+          <h3>And more...</h3>
           <p>Nextra has [next-seo](https://github.com/garmeeh/next-seo) built in.</p>
         </Feature>
-        <Feature>
-          <h3>And more...</h3>
-        </Feature>
       </Features>
+      <p className="subtitle py-8"><Link href="/docs">Start Using Nextra →</Link></p>
     </div>
-  </div>
-
-  <div className="content-container" style={{ marginTop: '4rem', marginBottom: '4rem' }}>
-    <p className="subtitle"><Link href="/docs">Documentation →</Link></p>
   </div>
 </div>
