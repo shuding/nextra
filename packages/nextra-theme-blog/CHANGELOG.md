@@ -1,5 +1,75 @@
 # nextra-theme-blog
 
+## 2.0.0-beta.43
+
+### Patch Changes
+
+- 59e18b0: make `nextra`/`nextra-theme-docs`/`nextra-theme-blog` be compatible with next 13
+
+## 2.0.0-beta.42
+
+## 2.0.0-beta.41
+
+### Patch Changes
+
+- bd2cefa: Fix css classes with `eslint-plugin-tailwindcss`
+
+## 2.0.0-beta.40
+
+### Patch Changes
+
+- f569d90: missing `nx-` class prefixes in blog
+  fix callout padding in docs
+
+## 2.0.0-beta.39
+
+## 2.0.0-beta.38
+
+## 2.0.0-beta.37
+
+## 2.0.0-beta.36
+
+### Patch Changes
+
+- 1c3fedb: add missing `nx-` prefixes to table/th/tr elements
+
+## 2.0.0-beta.35
+
+## 2.0.0-beta.34
+
+## 2.0.0-beta.33
+
+### Patch Changes
+
+- 580c433: add nx- to all tailwind classes for style isolation
+
+## 2.0.0-beta.32
+
+### Patch Changes
+
+- 723d42a: use `lightningcss` instead `cssnano`
+
+## 2.0.0-beta.31
+
+### Patch Changes
+
+- cef5546: allow headings contain links
+
+## 2.0.0-beta.30
+
+### Patch Changes
+
+- b7f7cf6: add missing `passHref` for `NextLink`
+- 7d2d5ee: use resolvedTheme instead renderedTheme + theme check
+
+## 2.0.0-beta.29
+
+## 2.0.0-beta.28
+
+## 2.0.0-beta.27
+
+## 2.0.0-beta.26
+
 ## 2.0.0-beta.25
 
 ### Patch Changes

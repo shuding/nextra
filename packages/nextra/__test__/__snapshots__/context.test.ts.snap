@@ -7,6 +7,7 @@ exports[`context > getAllPages() > should work 1`] = `
     "meta": {
       "theme": {
         "timestamp": false,
+        "typesetting": "article",
       },
       "type": "page",
     },
@@ -17,8 +18,8 @@ exports[`context > getAllPages() > should work 1`] = `
     "kind": "MdxPage",
     "meta": {
       "theme": {
-        "layout": "full",
         "timestamp": false,
+        "typesetting": "article",
       },
       "type": "page",
     },
@@ -33,7 +34,7 @@ exports[`context > getAllPages() > should work 1`] = `
     "kind": "MdxPage",
     "locale": "en-US",
     "meta": {
-      "hidden": true,
+      "display": "hidden",
       "title": "Introduction",
       "type": "page",
     },
@@ -47,7 +48,7 @@ exports[`context > getAllPages() > should work 1`] = `
     "kind": "MdxPage",
     "locale": "es-ES",
     "meta": {
-      "hidden": true,
+      "display": "hidden",
       "title": "Introduction",
       "type": "page",
     },
@@ -61,7 +62,7 @@ exports[`context > getAllPages() > should work 1`] = `
     "kind": "MdxPage",
     "locale": "ja",
     "meta": {
-      "hidden": true,
+      "display": "hidden",
       "title": "Introduction",
       "type": "page",
     },
@@ -75,7 +76,7 @@ exports[`context > getAllPages() > should work 1`] = `
     "kind": "MdxPage",
     "locale": "ko",
     "meta": {
-      "hidden": true,
+      "display": "hidden",
       "title": "Introduction",
       "type": "page",
     },
@@ -89,7 +90,7 @@ exports[`context > getAllPages() > should work 1`] = `
     "kind": "MdxPage",
     "locale": "ru",
     "meta": {
-      "hidden": true,
+      "display": "hidden",
       "title": "Introduction",
       "type": "page",
     },
@@ -103,7 +104,7 @@ exports[`context > getAllPages() > should work 1`] = `
     "kind": "MdxPage",
     "locale": "zh-CN",
     "meta": {
-      "hidden": true,
+      "display": "hidden",
       "title": "Introduction",
       "type": "page",
     },
@@ -332,7 +333,7 @@ exports[`context > getAllPages() > should work 1`] = `
         "kind": "MdxPage",
         "locale": "en-US",
         "meta": {
-          "hidden": true,
+          "display": "hidden",
           "title": "Error Handling",
         },
         "name": "error-handling",
@@ -342,7 +343,7 @@ exports[`context > getAllPages() > should work 1`] = `
         "kind": "MdxPage",
         "locale": "es-ES",
         "meta": {
-          "hidden": true,
+          "display": "hidden",
           "title": "Error Handling",
         },
         "name": "error-handling",
@@ -352,7 +353,7 @@ exports[`context > getAllPages() > should work 1`] = `
         "kind": "MdxPage",
         "locale": "ja",
         "meta": {
-          "hidden": true,
+          "display": "hidden",
           "title": "Error Handling",
         },
         "name": "error-handling",
@@ -362,7 +363,7 @@ exports[`context > getAllPages() > should work 1`] = `
         "kind": "MdxPage",
         "locale": "ko",
         "meta": {
-          "hidden": true,
+          "display": "hidden",
           "title": "Error Handling",
         },
         "name": "error-handling",
@@ -372,7 +373,7 @@ exports[`context > getAllPages() > should work 1`] = `
         "kind": "MdxPage",
         "locale": "ru",
         "meta": {
-          "hidden": true,
+          "display": "hidden",
           "title": "Error Handling",
         },
         "name": "error-handling",
@@ -382,7 +383,7 @@ exports[`context > getAllPages() > should work 1`] = `
         "kind": "MdxPage",
         "locale": "zh-CN",
         "meta": {
-          "hidden": true,
+          "display": "hidden",
           "title": "Error Handling",
         },
         "name": "error-handling",
@@ -887,6 +888,40 @@ exports[`context > getAllPages() > should work 1`] = `
                 "name": "loooooooooooooooooooong-title",
                 "route": "/docs/advanced/more/loooooooooooooooooooong-title",
               },
+              {
+                "children": [
+                  {
+                    "kind": "MdxPage",
+                    "meta": {
+                      "title": "One",
+                    },
+                    "name": "one",
+                    "route": "/docs/advanced/more/tree/one",
+                  },
+                  {
+                    "kind": "MdxPage",
+                    "meta": {
+                      "title": "Three",
+                    },
+                    "name": "three",
+                    "route": "/docs/advanced/more/tree/three",
+                  },
+                  {
+                    "kind": "MdxPage",
+                    "meta": {
+                      "title": "Two",
+                    },
+                    "name": "two",
+                    "route": "/docs/advanced/more/tree/two",
+                  },
+                ],
+                "kind": "Folder",
+                "meta": {
+                  "title": "Tree",
+                },
+                "name": "tree",
+                "route": "/docs/advanced/more/tree",
+              },
             ],
             "kind": "Folder",
             "meta": {
@@ -1213,55 +1248,55 @@ exports[`context > getAllPages() > should work 1`] = `
         "kind": "MdxPage",
         "locale": "en-US",
         "meta": {
-          "title": "Scroll With Dynamic Height",
+          "title": "Wrap Table of Content Items",
         },
-        "name": "scroll-with-dynamic-height",
-        "route": "/docs/scroll-with-dynamic-height",
+        "name": "wrap-toc-items",
+        "route": "/docs/wrap-toc-items",
       },
       {
         "kind": "MdxPage",
         "locale": "es-ES",
         "meta": {
-          "title": "Scroll With Dynamic Height",
+          "title": "Wrap Table of Content Items",
         },
-        "name": "scroll-with-dynamic-height",
-        "route": "/docs/scroll-with-dynamic-height",
+        "name": "wrap-toc-items",
+        "route": "/docs/wrap-toc-items",
       },
       {
         "kind": "MdxPage",
         "locale": "ja",
         "meta": {
-          "title": "Scroll With Dynamic Height",
+          "title": "Wrap Table of Content Items",
         },
-        "name": "scroll-with-dynamic-height",
-        "route": "/docs/scroll-with-dynamic-height",
+        "name": "wrap-toc-items",
+        "route": "/docs/wrap-toc-items",
       },
       {
         "kind": "MdxPage",
         "locale": "ko",
         "meta": {
-          "title": "Scroll With Dynamic Height",
+          "title": "Wrap Table of Content Items",
         },
-        "name": "scroll-with-dynamic-height",
-        "route": "/docs/scroll-with-dynamic-height",
+        "name": "wrap-toc-items",
+        "route": "/docs/wrap-toc-items",
       },
       {
         "kind": "MdxPage",
         "locale": "ru",
         "meta": {
-          "title": "Scroll With Dynamic Height",
+          "title": "Wrap Table of Content Items",
         },
-        "name": "scroll-with-dynamic-height",
-        "route": "/docs/scroll-with-dynamic-height",
+        "name": "wrap-toc-items",
+        "route": "/docs/wrap-toc-items",
       },
       {
         "kind": "MdxPage",
         "locale": "zh-CN",
         "meta": {
-          "title": "Scroll With Dynamic Height",
+          "title": "Wrap Table of Content Items",
         },
-        "name": "scroll-with-dynamic-height",
-        "route": "/docs/scroll-with-dynamic-height",
+        "name": "wrap-toc-items",
+        "route": "/docs/wrap-toc-items",
       },
       {
         "kind": "MdxPage",
@@ -1283,6 +1318,15 @@ exports[`context > getAllPages() > should work 1`] = `
         },
         "name": "raw-layout",
         "route": "/docs/raw-layout",
+      },
+      {
+        "kind": "MdxPage",
+        "locale": "en-US",
+        "meta": {
+          "title": "Callout",
+        },
+        "name": "callout",
+        "route": "/docs/callout",
       },
       {
         "kind": "MdxPage",
@@ -1329,7 +1373,7 @@ exports[`context > getAllPages() > should work 1`] = `
         "kind": "MdxPage",
         "locale": "en-US",
         "meta": {
-          "hidden": true,
+          "display": "hidden",
           "theme": {
             "layout": "raw",
           },
@@ -2055,7 +2099,7 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
     "kind": "MdxPage",
     "locale": "en-US",
     "meta": {
-      "hidden": true,
+      "display": "hidden",
       "title": "Error Handling",
     },
     "name": "error-handling",
@@ -2065,7 +2109,7 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
     "kind": "MdxPage",
     "locale": "es-ES",
     "meta": {
-      "hidden": true,
+      "display": "hidden",
       "title": "Error Handling",
     },
     "name": "error-handling",
@@ -2075,7 +2119,7 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
     "kind": "MdxPage",
     "locale": "ja",
     "meta": {
-      "hidden": true,
+      "display": "hidden",
       "title": "Error Handling",
     },
     "name": "error-handling",
@@ -2085,7 +2129,7 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
     "kind": "MdxPage",
     "locale": "ko",
     "meta": {
-      "hidden": true,
+      "display": "hidden",
       "title": "Error Handling",
     },
     "name": "error-handling",
@@ -2095,7 +2139,7 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
     "kind": "MdxPage",
     "locale": "ru",
     "meta": {
-      "hidden": true,
+      "display": "hidden",
       "title": "Error Handling",
     },
     "name": "error-handling",
@@ -2105,7 +2149,7 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
     "kind": "MdxPage",
     "locale": "zh-CN",
     "meta": {
-      "hidden": true,
+      "display": "hidden",
       "title": "Error Handling",
     },
     "name": "error-handling",
@@ -2610,6 +2654,40 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
             "name": "loooooooooooooooooooong-title",
             "route": "/docs/advanced/more/loooooooooooooooooooong-title",
           },
+          {
+            "children": [
+              {
+                "kind": "MdxPage",
+                "meta": {
+                  "title": "One",
+                },
+                "name": "one",
+                "route": "/docs/advanced/more/tree/one",
+              },
+              {
+                "kind": "MdxPage",
+                "meta": {
+                  "title": "Three",
+                },
+                "name": "three",
+                "route": "/docs/advanced/more/tree/three",
+              },
+              {
+                "kind": "MdxPage",
+                "meta": {
+                  "title": "Two",
+                },
+                "name": "two",
+                "route": "/docs/advanced/more/tree/two",
+              },
+            ],
+            "kind": "Folder",
+            "meta": {
+              "title": "Tree",
+            },
+            "name": "tree",
+            "route": "/docs/advanced/more/tree",
+          },
         ],
         "kind": "Folder",
         "meta": {
@@ -2936,55 +3014,55 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
     "kind": "MdxPage",
     "locale": "en-US",
     "meta": {
-      "title": "Scroll With Dynamic Height",
+      "title": "Wrap Table of Content Items",
     },
-    "name": "scroll-with-dynamic-height",
-    "route": "/docs/scroll-with-dynamic-height",
+    "name": "wrap-toc-items",
+    "route": "/docs/wrap-toc-items",
   },
   {
     "kind": "MdxPage",
     "locale": "es-ES",
     "meta": {
-      "title": "Scroll With Dynamic Height",
+      "title": "Wrap Table of Content Items",
     },
-    "name": "scroll-with-dynamic-height",
-    "route": "/docs/scroll-with-dynamic-height",
+    "name": "wrap-toc-items",
+    "route": "/docs/wrap-toc-items",
   },
   {
     "kind": "MdxPage",
     "locale": "ja",
     "meta": {
-      "title": "Scroll With Dynamic Height",
+      "title": "Wrap Table of Content Items",
     },
-    "name": "scroll-with-dynamic-height",
-    "route": "/docs/scroll-with-dynamic-height",
+    "name": "wrap-toc-items",
+    "route": "/docs/wrap-toc-items",
   },
   {
     "kind": "MdxPage",
     "locale": "ko",
     "meta": {
-      "title": "Scroll With Dynamic Height",
+      "title": "Wrap Table of Content Items",
     },
-    "name": "scroll-with-dynamic-height",
-    "route": "/docs/scroll-with-dynamic-height",
+    "name": "wrap-toc-items",
+    "route": "/docs/wrap-toc-items",
   },
   {
     "kind": "MdxPage",
     "locale": "ru",
     "meta": {
-      "title": "Scroll With Dynamic Height",
+      "title": "Wrap Table of Content Items",
     },
-    "name": "scroll-with-dynamic-height",
-    "route": "/docs/scroll-with-dynamic-height",
+    "name": "wrap-toc-items",
+    "route": "/docs/wrap-toc-items",
   },
   {
     "kind": "MdxPage",
     "locale": "zh-CN",
     "meta": {
-      "title": "Scroll With Dynamic Height",
+      "title": "Wrap Table of Content Items",
     },
-    "name": "scroll-with-dynamic-height",
-    "route": "/docs/scroll-with-dynamic-height",
+    "name": "wrap-toc-items",
+    "route": "/docs/wrap-toc-items",
   },
   {
     "kind": "MdxPage",
@@ -3011,6 +3089,15 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
     "kind": "MdxPage",
     "locale": "en-US",
     "meta": {
+      "title": "Callout",
+    },
+    "name": "callout",
+    "route": "/docs/callout",
+  },
+  {
+    "kind": "MdxPage",
+    "locale": "en-US",
+    "meta": {
       "title": "Code Block without Language",
     },
     "name": "code-block-without-language",
@@ -3031,6 +3118,40 @@ exports[`context > getPagesUnderRoute() > should work 1`] = `
         },
         "name": "loooooooooooooooooooong-title",
         "route": "/docs/advanced/more/loooooooooooooooooooong-title",
+      },
+      {
+        "children": [
+          {
+            "kind": "MdxPage",
+            "meta": {
+              "title": "One",
+            },
+            "name": "one",
+            "route": "/docs/advanced/more/tree/one",
+          },
+          {
+            "kind": "MdxPage",
+            "meta": {
+              "title": "Three",
+            },
+            "name": "three",
+            "route": "/docs/advanced/more/tree/three",
+          },
+          {
+            "kind": "MdxPage",
+            "meta": {
+              "title": "Two",
+            },
+            "name": "two",
+            "route": "/docs/advanced/more/tree/two",
+          },
+        ],
+        "kind": "Folder",
+        "meta": {
+          "title": "Tree",
+        },
+        "name": "tree",
+        "route": "/docs/advanced/more/tree",
       },
     ],
     "kind": "Folder",

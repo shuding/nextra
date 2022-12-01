@@ -48,7 +48,6 @@ export async function compileMdx(
     | 'unstable_flexsearch'
     | 'unstable_defaultShowCopyCode'
     | 'unstable_readingTime'
-    | 'allowFutureImage'
   > & {
     mdxOptions?: LoaderOptions['mdxOptions'] &
       Pick<ProcessorOptions, 'jsx' | 'outputFormat'>
@@ -60,17 +59,15 @@ export async function compileMdx(
   const mdxOptions = loaderOptions.mdxOptions || {}
 
   const compiler = createCompiler({
-    jsx: mdxOptions.jsx ?? true,
-    outputFormat: mdxOptions.outputFormat,
+    jsx: mdxOptions.jsx || false,
+    outputFormat: mdxOptions.outputFormat || 'function-body',
     providerImportSource: '@mdx-js/react',
     remarkPlugins: [
       ...(mdxOptions.remarkPlugins || []),
       remarkGfm,
       remarkHeadings,
-      loaderOptions.unstable_staticImage && [
-        remarkStaticImage,
-        { allowFutureImage: loaderOptions.allowFutureImage, filePath }
-      ] as any,
+      loaderOptions.unstable_staticImage &&
+        ([remarkStaticImage, { filePath }] as any),
       loaderOptions.unstable_flexsearch &&
         structurize(structurizedData, loaderOptions.unstable_flexsearch),
       loaderOptions.unstable_readingTime && readingTime

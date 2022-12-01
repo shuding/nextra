@@ -1,11 +1,4 @@
-import cn from 'clsx'
-import Image from 'next/future/image'
-
-export function Screenshot({ src, alt, full }) {
-  return <div className={cn("mt-6 -mb-4 flex justify-center border dark:border-zinc-800 rounded-xl overflow-hidden", full ? 'bg-white' : 'bg-zinc-100')}>
-    <Image src={src} alt={alt} className={cn("w-auto select-none bg-white", full ? '' : 'ring-1 ring-gray-200')} />
-  </div>
-}
+import {Screenshot} from 'components/screenshot'
 
 # Theme Configuration
 
@@ -182,7 +175,7 @@ You can refer to the [`useConfig`](/docs/docs-theme/api/use-config) API section 
 ## Sidebar
 
 <OptionTable options={[
-  ['sidebar.defaultMenuCollapsed', 'boolean', 'Default collapse state of sidebar menus.'],
+  ['sidebar.defaultMenuCollapseLevel', 'number', 'Specifies the folder level at which the menu on the left is collapsed by default.'],
   ['sidebar.titleComponent', `React.ReactNode | React.FC<{
   type: string;
   title: string
@@ -310,6 +303,8 @@ The logo of the website rendered on the navbar. It can be any React node.
 import logoImage from '../../../public/assets/docs/logo.png'
 
 <Screenshot src={logoImage} alt="Customized Logo" />
+
+<div className="text-center text-sm mt-8">[Live example on StackBlitz ↗](https://stackblitz.com/edit/nextra-2-docs-yrlccm?file=theme.config.jsx)</div>
 
 ```jsx
 export default {

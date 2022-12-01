@@ -4,6 +4,7 @@ import { ArrowRightIcon } from 'nextra/icons'
 import { useConfig } from '../contexts'
 import { Item } from '../utils'
 import { Anchor } from './anchor'
+import { DocsThemeConfig } from '../index'
 
 interface NavLinkProps {
   currentIndex: number
@@ -11,8 +12,10 @@ interface NavLinkProps {
 }
 
 const classes = {
-  link: 'max-w-[50%] gap-1 [word-break:break-word] flex items-center rounded py-4 text-base font-medium text-gray-600 transition-colors hover:text-primary-500 dark:text-gray-300 md:text-lg',
-  icon: 'h-5 inline flex-shrink-0'
+  link: cn(
+    'nx-flex nx-max-w-[50%] nx-items-center nx-gap-1 nx-py-4 nx-text-base nx-font-medium nx-text-gray-600 nx-transition-colors [word-break:break-word] hover:nx-text-primary-500 dark:nx-text-gray-300 md:nx-text-lg'
+  ),
+  icon: cn('nx-inline nx-h-5 nx-shrink-0')
 }
 
 export const NavLinks = ({
@@ -20,28 +23,28 @@ export const NavLinks = ({
   currentIndex
 }: NavLinkProps): ReactElement | null => {
   const config = useConfig()
-  const navigation: { prev?: boolean; next?: boolean } =
-    typeof config.navigation === 'boolean'
-      ? config.navigation === false
-        ? { prev: false, next: false }
-        : {}
-      : config.navigation
-  const prev =
-    navigation.prev === false ? null : flatDirectories[currentIndex - 1]
-  const next =
-    navigation.next === false ? null : flatDirectories[currentIndex + 1]
+  const nav = config.navigation
+  const navigation: Exclude<DocsThemeConfig['navigation'], boolean> =
+    typeof nav === 'boolean' ? { prev: nav, next: nav } : nav
+  const prev = navigation.prev && flatDirectories[currentIndex - 1]
+  const next = navigation.next && flatDirectories[currentIndex + 1]
 
   if (!prev && !next) return null
 
   return (
-    <div className="nextra-navigation-links mb-8 flex items-center border-t pt-8 dark:border-neutral-800">
+    <div
+      className={cn(
+        'nx-mb-8 nx-flex nx-items-center nx-border-t nx-pt-8 dark:nx-border-neutral-800',
+        'contrast-more:nx-border-neutral-400 dark:contrast-more:nx-border-neutral-400'
+      )}
+    >
       {prev && (
         <Anchor
           href={prev.route}
           title={prev.title}
-          className={cn(classes.link, 'ltr:pr-4 rtl:pl-4')}
+          className={cn(classes.link, 'ltr:nx-pr-4 rtl:nx-pl-4')}
         >
-          <ArrowRightIcon className={cn(classes.icon, 'ltr:rotate-180')} />
+          <ArrowRightIcon className={cn(classes.icon, 'ltr:nx-rotate-180')} />
           {prev.title}
         </Anchor>
       )}
@@ -51,11 +54,11 @@ export const NavLinks = ({
           title={next.title}
           className={cn(
             classes.link,
-            'ltr:pl-4 rtl:pr-4 ltr:text-right rtl:text-left ltr:ml-auto rtl:mr-auto'
+            'ltr:nx-ml-auto ltr:nx-pl-4 ltr:nx-text-right rtl:nx-mr-auto rtl:nx-pr-4 rtl:nx-text-left'
           )}
         >
           {next.title}
-          <ArrowRightIcon className={cn(classes.icon, 'rtl:rotate-180')} />
+          <ArrowRightIcon className={cn(classes.icon, 'rtl:nx-rotate-180')} />
         </Anchor>
       )}
     </div>

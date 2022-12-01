@@ -28,7 +28,13 @@ interface FileProps {
 
 const Tree: React.FC<{
   children: ReactElement | ReactElement[]
-}> = ({ children }) => <div className="text-base mt-6">{children}</div>
+}> = ({ children }) => (
+  <div className="mt-6 select-none text-sm text-gray-800 dark:text-gray-300">
+    <div className="inline-flex rounded border px-4 py-2 dark:border-neutral-800">
+      {children}
+    </div>
+  </div>
+)
 
 function Ident() {
   const indent = useIndent()
@@ -36,7 +42,7 @@ function Ident() {
   return (
     <>
       {[...Array(indent)].map((_, i) => (
-        <span className="inline-block w-5 h-7" key={i} />
+        <span className="inline-block w-5" key={i} />
       ))}
     </>
   )
@@ -56,11 +62,11 @@ const Folder: React.FC<FolderProps> = React.memo(
     const isFolderOpen = typeof open === 'undefined' ? isOpen : open
 
     return (
-      <li className={cn('list-none', { ['']: isFolderOpen })}>
+      <li className={cn('flex list-none flex-col', { ['']: isFolderOpen })}>
         <a
           onClick={toggle}
           title={name}
-          className="inline-flex items-center cursor-pointer"
+          className="inline-flex cursor-pointer items-center py-1 hover:opacity-60"
         >
           <Ident />
           <span className={''}>
@@ -105,8 +111,13 @@ Folder.displayName = 'Folder'
 const File: React.FC<FileProps> = React.memo(
   ({ label, name, active, ...props }) => {
     return (
-      <li className={cn('list-none flex', { ['']: active })}>
-        <a {...props} className="inline-flex items-center cursor-default">
+      <li
+        className={cn('flex list-none', {
+          ['nx-text-primary-500 contrast-more:!nx-text-primary-500 contrast-more:nx-text-gray-900 contrast-more:nx-underline contrast-more:dark:nx-text-gray-50']:
+            active
+        })}
+      >
+        <a {...props} className="inline-flex cursor-default items-center py-1">
           <Ident />
           <span className={''}>
             <svg width="1em" height="1em" viewBox="0 0 24 24">

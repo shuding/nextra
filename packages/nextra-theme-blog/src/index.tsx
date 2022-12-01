@@ -1,7 +1,6 @@
-import React, { ReactElement, ReactNode, FC } from 'react'
+import React, { ReactElement, ReactNode } from 'react'
 import { ThemeProvider } from 'next-themes'
-import type { PageOpts } from 'nextra'
-import type { LayoutProps, NextraBlogTheme } from './types'
+import type { LayoutProps } from './types'
 import { BlogProvider } from './blog-context'
 import { ArticleLayout } from './article-layout'
 import { PostsLayout } from './posts-layout'
@@ -25,7 +24,7 @@ const BlogLayout = ({
   const Layout = layoutMap[type]
   if (!Layout) {
     throw new Error(
-      `Nextra-themes-blog does not support the layout type "${type}" It only supports "post", "page", "posts" and "tag"`
+      `nextra-theme-blog does not support the layout type "${type}" It only supports "post", "page", "posts" and "tag"`
     )
   }
   return (

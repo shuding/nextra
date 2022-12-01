@@ -1,6 +1,6 @@
-import React, { ReactElement } from 'react'
+import React, { ComponentProps, ReactElement } from 'react'
 
-export function MenuIcon({ className }: { className?: string }): ReactElement {
+export function MenuIcon(props: ComponentProps<'svg'>): ReactElement {
   return (
     <svg
       fill="none"
@@ -8,7 +8,7 @@ export function MenuIcon({ className }: { className?: string }): ReactElement {
       height="24"
       viewBox="0 0 24 24"
       stroke="currentColor"
-      className={className}
+      {...props}
     >
       <g>
         <path

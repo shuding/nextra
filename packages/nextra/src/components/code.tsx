@@ -9,8 +9,8 @@ export const Code = ({
   return (
     <code
       className={[
-        'border-black/5 bg-black/5 break-words rounded-md border py-0.5 px-[.25em] text-[.9em]',
-        'dark:border-white/10 dark:bg-white/10',
+        'nx-border-black/5 nx-bg-black/5 nx-break-words nx-rounded-md nx-border nx-py-0.5 nx-px-[.25em] nx-text-[.9em]',
+        'dark:nx-border-white/10 dark:nx-bg-white/10',
         hasLineNumbers ? '[counter-reset:line]' : '',
         className
       ].join(' ')}

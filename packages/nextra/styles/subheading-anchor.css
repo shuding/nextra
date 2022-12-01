@@ -1,17 +1,22 @@
 .subheading-anchor {
-  @apply absolute;
+  @apply nx-opacity-0 nx-transition-opacity ltr:nx-ml-1 rtl:nx-mr-1;
 
-  & + a {
-    @apply text-current no-underline hover:after:opacity-100;
+  span:target + &,
+  :hover > & {
+    @apply nx-opacity-100;
   }
 
-  & + a:after {
-    @apply content-['#'] text-gray-300 px-2 opacity-0 transition-opacity;
-    @apply dark:text-neutral-700;
+  span + &,
+  :hover > & {
+    @apply !nx-no-underline;
   }
 
-  &:target + a:after {
-    @apply text-gray-400 opacity-100;
-    @apply dark:text-neutral-500;
+  &:after {
+    @apply nx-content-['#'] nx-px-1;
+    @apply nx-text-gray-300 dark:nx-text-neutral-700;
+    span:target + & {
+      @apply nx-text-gray-400;
+      @apply dark:nx-text-neutral-500;
+    }
   }
 }

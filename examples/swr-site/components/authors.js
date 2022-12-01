@@ -1,6 +1,6 @@
 export default function Authors({ date, children }) {
   return (
-    <div className="mt-8 mb-16 text-gray-400 text-sm">
+    <div className="mt-8 mb-16 text-sm text-gray-400">
       {date} by {children}
     </div>
   );

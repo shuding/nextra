@@ -1,7 +1,7 @@
 import { Callout } from 'nextra-theme-docs'
 
 export const Unstable = () => (
-  <Callout type="error" emoji="">
+  <Callout type="error">
     This is an unstable and experimental feature and not recommended for general
     use.
   </Callout>
@@ -41,25 +41,6 @@ The URL that the button in the top right will point to.
  */
 export default {
   projectLink: 'https://gitlab.com/librewolf-community/browser'
-}
-```
-
-## `github`
-
-The URL that the button in the top right will point to.
-
-**Type:** `string`
-
-**Default:** `https://github.com/shuding/nextra`
-
-**Example:**
-
-```js filename="theme.config.js"
-/**
- * @type {import('nextra-theme-docs').DocsThemeConfig}
- */
-export default {
-  github: 'https://gitlab.com/librewolf-community/browser'
 }
 ```
 
@@ -219,13 +200,13 @@ export default {
 }
 ```
 
-## `defaultMenuCollapsed`
+## `defaultMenuCollapseLevel`
 
-Specifies if the menu on the left is collapsed by default.
+Specifies the folder level at which the menu on the left is collapsed by default.
 
-**Type:** `boolean`
+**Type:** `number`
 
-**Default:** `false`
+**Default:** `2`
 
 **Example:**
 
@@ -234,7 +215,7 @@ Specifies if the menu on the left is collapsed by default.
  * @type {import('nextra-theme-docs').DocsThemeConfig}
  */
 export default {
-  defaultMenuCollapsed: false
+  defaultMenuCollapseLevel: 2
 }
 ```
 
@@ -352,6 +333,36 @@ export default {
       </span>
     </>
   )
+}
+```
+
+## `logoLink`
+
+Enable automaticaly linking the logo to root, or provide a custom url.
+
+**Type:** `string` | `boolean`
+
+**Default:** `true` (links to `/` by default)
+
+**Example:**
+
+```js filename="theme.config.js"
+/**
+ * @type {import('nextra-theme-docs').DocsThemeConfig}
+ */
+export default {
+  logoLink: '/about'
+}
+```
+
+Or to disable the logo link:
+
+```js filename="theme.config.js"
+/**
+ * @type {import('nextra-theme-docs').DocsThemeConfig}
+ */
+export default {
+  logoLink: false
 }
 ```
 

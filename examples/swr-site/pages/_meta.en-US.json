@@ -2,7 +2,7 @@
   "index": {
     "title": "Introduction",
     "type": "page",
-    "hidden": true
+    "display": "hidden"
   },
   "docs": {
     "title": "Docs",
@@ -58,14 +58,15 @@
   "404": {
     "type": "page",
     "theme": {
-      "timestamp": false
+      "timestamp": false,
+      "typesetting": "article"
     }
   },
   "500": {
     "type": "page",
     "theme": {
       "timestamp": false,
-      "layout": "full"
+      "typesetting": "article"
     }
   }
 }

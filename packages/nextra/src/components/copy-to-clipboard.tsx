@@ -10,11 +10,10 @@ import { Button } from './button'
 
 export const CopyToClipboard = ({
   value,
-  className
+  ...props
 }: {
   value: string
-  className?: string
-}): ReactElement => {
+} & ComponentProps<'button'>): ReactElement => {
   const [isCopied, setCopied] = useState(false)
 
   useEffect(() => {
@@ -45,8 +44,8 @@ export const CopyToClipboard = ({
   const IconToUse = isCopied ? CheckIcon : CopyIcon
 
   return (
-    <Button onClick={handleClick} className={className}>
-      <IconToUse className="pointer-events-none h-4 w-4" />
+    <Button onClick={handleClick} title="Copy code" {...props}>
+      <IconToUse className="nx-pointer-events-none nx-h-4 nx-w-4" />
     </Button>
   )
 }

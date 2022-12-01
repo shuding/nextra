@@ -2,9 +2,9 @@
   "private": true,
   "scripts": {
     "dev": "turbo run dev",
-    "build": "turbo run build:tailwind build --filter=./packages/*",
+    "build": "turbo run build:tailwind build --filter=./packages/\\*",
     "types:check": "turbo run types:check",
-    "lint": "eslint --ignore-path .gitignore .",
+    "lint": "eslint --ignore-path .gitignore --ext js,jsx,mjs,cjs,ts,tsx,mts,cts .",
     "dev:core": "turbo run dev --filter=nextra... --filter=!docs",
     "dev:theme-blog": "turbo run dev --filter=blog... --filter=!docs",
     "dev:theme-docs": "turbo run dev --filter=swr-site... --filter=!docs",
@@ -23,6 +23,7 @@
     "@edge-runtime/vm": "1.1.0-beta.23",
     "@typescript-eslint/parser": "^5.32.0",
     "eslint": "^8.21.0",
+    "eslint-plugin-tailwindcss": "^3.6.2",
     "eslint-plugin-typescript-sort-keys": "^2.1.0",
     "prettier": "^2.7.1",
     "prettier-plugin-tailwindcss": "^0.1.13",
@@ -30,12 +31,6 @@
     "tsup": "^6.2.3",
     "turbo": "^1.4.2",
     "typescript": "^4.7.4"
-  },
-  "prettier": {
-    "semi": false,
-    "singleQuote": true,
-    "trailingComma": "none",
-    "arrowParens": "avoid"
   },
   "packageManager": "pnpm@7.3.0",
   "workspaces": [
@@ -46,9 +41,9 @@
       "vitest": "^0.21.0",
       "react": "^18.2.0",
       "react-dom": "^18.2.0",
-      "@mdx-js/react": "^2.1.2",
-      "next-themes": "^0.2.0-beta.2",
-      "next": "^12.2.4",
+      "@mdx-js/react": "^2.1.5",
+      "next-themes": "^0.2.1",
+      "next": "^13.0.5",
       "@types/react": "^18.0.15",
       "@types/react-dom": "^18.0.6",
       "postcss": "^8.4.14",
@@ -60,7 +55,6 @@
       "@tailwindcss/typography": "^0.5.4",
       "tsup": "^6.2.1",
       "concurrently": "^7.3.0",
-      "cross-env": "^7.0.3",
       "postcss-import": "^14.1.0"
     }
   }

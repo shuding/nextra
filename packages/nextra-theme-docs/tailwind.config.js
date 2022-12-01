@@ -10,6 +10,7 @@ const makePrimaryColor =
   }
 
 module.exports = {
+  prefix: 'nx-',
   content: [
     './src/**/*.tsx',
     '../nextra/src/icons/*.tsx',
@@ -71,5 +72,5 @@ module.exports = {
       }
     }
   },
-  darkMode: 'class'
+  darkMode: ['class', 'html[class~="dark"]']
 }

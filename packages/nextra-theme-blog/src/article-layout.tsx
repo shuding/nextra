@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
 import Meta from './meta'
-import MDXTheme from './mdx-theme'
+import { MDXTheme } from './mdx-theme'
 import { useBlogContext } from './blog-context'
 import { BasicLayout } from './basic-layout'
 

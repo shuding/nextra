@@ -5,7 +5,7 @@ import { collectFiles } from '../src/plugin'
 import { FileMap, PageMapItem } from '../src/types'
 import { CWD } from '../src/constants'
 
-const PAGES_DIR = path.join(CWD, '../../examples/swr-site/pages')
+const PAGES_DIR = path.join(CWD, '..', '..', 'examples', 'swr-site', 'pages')
 const filePath = (name: string) => path.join(PAGES_DIR, name)
 
 const defaultLocale = 'en-US'
@@ -26,7 +26,11 @@ describe('Page Process', () => {
       fileMap,
       defaultLocale
     })
-    expect([indexData.pageMap, indexData.route, indexData.title]).toMatchSnapshot()
+    expect([
+      indexData.pageMap,
+      indexData.route,
+      indexData.title
+    ]).toMatchSnapshot()
 
     const gettingStartData = await getPageMap({
       filePath: filePath('docs/getting-started.en-US.mdx'),
@@ -44,7 +48,11 @@ describe('Page Process', () => {
       fileMap,
       defaultLocale
     })
-    expect([indexData.pageMap, indexData.route, indexData.title]).toMatchSnapshot()
+    expect([
+      indexData.pageMap,
+      indexData.route,
+      indexData.title
+    ]).toMatchSnapshot()
 
     const gettingStartData = await getPageMap({
       filePath: filePath('docs/getting-started.zh-CN.mdx'),

@@ -10,16 +10,15 @@ import {
 } from './types'
 import fs from 'graceful-fs'
 import { promisify } from 'node:util'
-import { parseFileName, parseJsonFile, truthy } from './utils'
+import { parseFileName, parseJsonFile, sortPages, truthy } from './utils'
 import path from 'node:path'
 import slash from 'slash'
 import grayMatter from 'gray-matter'
 import { Compiler } from 'webpack'
-import title from 'title'
-import { findPagesDir } from 'next/dist/lib/find-pages-dir.js'
 
 import { restoreCache } from './content-dump'
 import { CWD, MARKDOWN_EXTENSION_REGEX, META_FILENAME } from './constants'
+import { findPagesDirectory } from './file-system'
 
 const readdir = promisify(fs.readdir)
 const readFile = promisify(fs.readFile)
@@ -49,11 +48,15 @@ export async function collectFiles(
   const files = await readdir(dir, { withFileTypes: true })
 
   const promises = files.map(async f => {
-    const filePath = path.resolve(dir, f.name)
-    const { name, locale, ext } = parseFileName(filePath)
+    const filePath = path.join(dir, f.name)
+    const isDirectory = f.isDirectory()
+    const { name, locale, ext } = isDirectory
+      ? // directory couldn't have extensions
+        { name: path.basename(filePath), locale: '', ext: '' }
+      : parseFileName(filePath)
     const fileRoute = slash(path.join(route, name.replace(/^index$/, '')))
 
-    if (f.isDirectory()) {
+    if (isDirectory) {
       if (fileRoute === '/api') return
       const { items } = await collectFiles(filePath, fileRoute, fileMap)
       if (!items.length) return
@@ -94,23 +97,24 @@ export async function collectFiles(
   const items = (await Promise.all(promises)).filter(truthy)
 
   const mdxPages = items.filter(
-    (item): item is MdxFile => item.kind === 'MdxPage'
+    (item): item is MdxFile | Folder =>
+      item.kind === 'MdxPage' || item.kind === 'Folder'
   )
-  const locales = mdxPages.map(item => item.locale)
+  const locales = mdxPages
+    .filter((item): item is MdxFile => item.kind === 'MdxPage')
+    .map(item => item.locale)
 
   for (const locale of locales) {
     const metaIndex = items.findIndex(
       item => item.kind === 'Meta' && item.locale === locale
     )
-    const defaultMeta: [string, string][] = mdxPages
-      .filter(item => item.locale === locale)
-      .map(item => [
-        item.name,
-        item.frontMatter?.title || title(item.name.replace(/[-_]/g, ' '))
-      ])
+
+    const defaultMeta = sortPages(mdxPages, locale)
+
     const metaFilename = locale
       ? META_FILENAME.replace('.', `.${locale}.`)
       : META_FILENAME
+
     const metaPath = path.join(dir, metaFilename) as MetaJsonPath
 
     if (metaIndex === -1) {
@@ -169,7 +173,7 @@ export class NextraPlugin {
           // Restore the search data from the cache.
           restoreCache()
         }
-        const PAGES_DIR = findPagesDir(CWD).pages
+        const PAGES_DIR = findPagesDirectory()
         const result = await collectFiles(PAGES_DIR)
         pageMapCache.set(result)
         callback()

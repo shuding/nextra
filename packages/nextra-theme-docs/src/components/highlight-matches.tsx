@@ -1,10 +1,15 @@
 import React, { Fragment, memo } from 'react'
 
-export const HighlightMatches = memo<{
-  value: string
+type MatchArgs = {
+  value?: string
   match: string
-}>(function HighlightMatches({ value, match }) {
-  const splittedText = value.split('')
+}
+
+export const HighlightMatches = memo<MatchArgs>(function HighlightMatches({
+  value,
+  match
+}: MatchArgs) {
+  const splitText = value ? value.split('') : []
   const escapedSearch = match.trim().replace(/[|\\{}()[\]^$+*?.]/g, '\\$&')
   const regexp = RegExp('(' + escapedSearch.replaceAll(' ', '|') + ')', 'ig')
   let result
@@ -12,22 +17,24 @@ export const HighlightMatches = memo<{
   let index = 0
   const res = []
 
-  while ((result = regexp.exec(value)) !== null) {
-    res.push(
-      <Fragment key={id++}>
-        {splittedText.splice(0, result.index - index).join('')}
-        <span className="text-primary-500">
-          {splittedText.splice(0, regexp.lastIndex - result.index).join('')}
-        </span>
-      </Fragment>
-    )
-    index = regexp.lastIndex
+  if (value) {
+    while ((result = regexp.exec(value)) !== null) {
+      res.push(
+        <Fragment key={id++}>
+          {splitText.splice(0, result.index - index).join('')}
+          <span className="nx-text-primary-500">
+            {splitText.splice(0, regexp.lastIndex - result.index).join('')}
+          </span>
+        </Fragment>
+      )
+      index = regexp.lastIndex
+    }
   }
 
   return (
     <>
       {res}
-      {splittedText.join('')}
+      {splitText.join('')}
     </>
   )
 })

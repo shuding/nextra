@@ -1,5 +1,92 @@
 # nextra
 
+## 2.0.0-beta.43
+
+### Patch Changes
+
+- 59e18b0: make `nextra`/`nextra-theme-docs`/`nextra-theme-blog` be compatible with next 13
+
+## 2.0.0-beta.42
+
+## 2.0.0-beta.41
+
+### Patch Changes
+
+- bd2cefa: Fix css classes with `eslint-plugin-tailwindcss`
+
+## 2.0.0-beta.40
+
+### Patch Changes
+
+- f569d90: missing `nx-` class prefixes in blog
+  fix callout padding in docs
+
+## 2.0.0-beta.39
+
+### Patch Changes
+
+- a9414be: always use `next/image`, since in next 12.3.2 `next/future/image` was renamed to `next/image`
+
+## 2.0.0-beta.38
+
+## 2.0.0-beta.37
+
+## 2.0.0-beta.36
+
+### Patch Changes
+
+- 1c3fedb: add missing `nx-` prefixes to table/th/tr elements
+
+## 2.0.0-beta.35
+
+## 2.0.0-beta.34
+
+## 2.0.0-beta.33
+
+### Patch Changes
+
+- 580c433: add nx- to all tailwind classes for style isolation
+- 094fdec: sort `defaultMeta` by `frontMatter.date`, if missing by `frontMatter.title` and after by capitalized page name
+- 094fdec: capitalize sidebar's folders names if item is missing in `_meta.json`
+
+## 2.0.0-beta.32
+
+### Patch Changes
+
+- fc8cca0: add `<InformationCircleIcon />` icon, improve `<Callout />` default emojis
+
+## 2.0.0-beta.31
+
+### Patch Changes
+
+- cef5546: allow headings contain links
+
+## 2.0.0-beta.30
+
+### Patch Changes
+
+- 02bc6fc: use `next/future/image` if next>=12.3.0
+- f7856a1: change default options for `compileMdx`, set `jsx: false` and `outputFormat: 'function-body'` by default
+
+## 2.0.0-beta.29
+
+## 2.0.0-beta.28
+
+## 2.0.0-beta.27
+
+### Patch Changes
+
+- d7e7f5b: do not add `placeholder="blur"` on `.svg` static images
+- a9523c9: fix nextra on webcontainers
+- 21009c7: better focus ui, use ring color as theme hue color
+
+## 2.0.0-beta.26
+
+### Patch Changes
+
+- b365bb0: fix TypeError: Cannot read properties of undefined (reading 'data')
+- a0e5847: Rename some docs theme configurations
+
 ## 2.0.0-beta.25
 
 ### Patch Changes

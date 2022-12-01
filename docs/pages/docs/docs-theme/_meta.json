@@ -1,6 +1,8 @@
 {
   "start": "Get Started",
-  "page-configuration": "Page Configuration",
+  "page-configuration": {
+    "title": "Page Configuration"
+  },
   "theme-configuration": "Theme Configuration",
   "api": "API"
 }

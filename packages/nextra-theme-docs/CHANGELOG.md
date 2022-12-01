@@ -1,5 +1,142 @@
 # nextra-theme-docs
 
+## 2.0.0-beta.43
+
+### Patch Changes
+
+- 9ab6dd0: allow adding additional navbar content via `navbar.extraContent`
+- 59e18b0: make `nextra`/`nextra-theme-docs`/`nextra-theme-blog` be compatible with next 13
+- 2e2912e: fix project/chat icon could appear without provided link
+
+## 2.0.0-beta.42
+
+### Patch Changes
+
+- 2b6f3be: add missing border for search container
+- 32cd385: add new option `search.loading` for control loading text
+- fb37b5f: Close selector bracket for compat with old Safari.
+
+## 2.0.0-beta.41
+
+### Patch Changes
+
+- bd2cefa: Fix css classes with `eslint-plugin-tailwindcss`
+
+## 2.0.0-beta.40
+
+### Patch Changes
+
+- f569d90: missing `nx-` class prefixes in blog
+  fix callout padding in docs
+
+## 2.0.0-beta.39
+
+### Minor Changes
+
+- 8f6d377: allow custom github domains
+
+### Patch Changes
+
+- f5bf2e4: fix margin-top for `<Tab />` content
+- 0c136ad: add missing `nx-` prefix in sidebar
+- 8ad9507: fix unable expanding folder items in sidebar
+- 416dfe2: add missing `nx-` prefixes in sidebar
+
+## 2.0.0-beta.38
+
+### Patch Changes
+
+- 05d068c: Add button label for hamburger menu
+
+## 2.0.0-beta.37
+
+### Patch Changes
+
+- 5b01537: Fix full docs directory list and active link
+
+## 2.0.0-beta.36
+
+### Patch Changes
+
+- 08a39e6: remove `resizeObserver` for dynamic content since it provoke jumps on tabs switch when there is `#` anchor in url
+- 1c3fedb: add missing `nx-` prefixes to table/th/tr elements
+- 351fa45: add missing `nx-` prefix for `grow` class in `<LocaleSwitch />`
+
+## 2.0.0-beta.35
+
+### Patch Changes
+
+- ab629e6: Add correct aria values inside nav
+
+## 2.0.0-beta.34
+
+### Patch Changes
+
+- 4e4a37c: add new "display" property to \_meta
+
+## 2.0.0-beta.33
+
+### Patch Changes
+
+- 580c433: add nx- to all tailwind classes for style isolation
+- 2533a6c: replace `main.extraContent` theme option with `main` option
+- c28a7f2: - setup `next-seo`
+  - add new theme option `getNextSeoProps`
+  - remove `titleSuffix` theme option in favor of `getNextSeoProps.titleTemplate`
+  - by default pass `description`, `canonical`, `openGraph` values to `<NextSeo />` component from page `frontMatter`, values can be overridden with return value of `getNextSeoProps`
+
+## 2.0.0-beta.32
+
+### Patch Changes
+
+- fc8cca0: add `<InformationCircleIcon />` icon, improve `<Callout />` default emojis
+- 723d42a: use `lightningcss` instead `cssnano`
+- 9f5af54: add `_meta.json#theme.collapsed` option for control state sidebar's folders
+- f360f28: add new theme option `banner.dismissible`
+- a8a89e9: chore(docs): export ThemeSwitch & custom social
+
+## 2.0.0-beta.31
+
+### Patch Changes
+
+- cef5546: allow headings contain links
+- 5238bb4: feat(docs): support logoLink config option
+- f964802: do not hide default logo on mobile
+
+## 2.0.0-beta.30
+
+### Patch Changes
+
+- 1a7cd68: toc anchor links should have `display: inline-block`
+- c09f450: fix CTRL+K, on non non-mac use `e.ctrlKey` instead `e.metaKey`
+- 84d983f: fix(docs): correct query for hash with leading num
+- 7d2d5ee: use resolvedTheme instead renderedTheme + theme check
+
+## 2.0.0-beta.29
+
+### Patch Changes
+
+- 973ca49: fix rtl/ltr glitch on initial loading
+
+## 2.0.0-beta.28
+
+### Patch Changes
+
+- c2c0d90: fix(search): handle case when value is empty
+
+## 2.0.0-beta.27
+
+### Patch Changes
+
+- 21009c7: fix covered select options
+- 21009c7: better focus ui, use ring color as theme hue color
+
+## 2.0.0-beta.26
+
+### Patch Changes
+
+- a0e5847: Rename some docs theme configurations
+
 ## 2.0.0-beta.25
 
 ### Patch Changes

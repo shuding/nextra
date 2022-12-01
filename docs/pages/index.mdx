@@ -51,7 +51,7 @@ export function I18n() {
   <div className="content-container">
     <h1 className="headline">Make beautiful websites <br/>with Next.js & MDX.</h1>
     <p className="subtitle">Simple, powerful and flexible site generation framework <br/>with everything you love from <a className="nextjs-link" href="https://nextjs.org" target="_blank">Next.js</a>.</p>
-    <p className="subtitle"><Link href="/docs"><a>Start →</a></Link></p>
+    <p className="subtitle"><Link href="/docs">Start →</Link></p>
   </div>
 
   <style jsx>{`
@@ -274,7 +274,7 @@ export function I18n() {
             <div style={{ fontSize: '.9rem', lineHeight: 2 }}>
               <span>{`[Learn more](/more)`}</span>
               <br/>
-              <span>{`![Hero](../public/hero.png)`}</span>
+              <span>{`![Hero](/hero.png)`}</span>
             </div>
           </div>
           <div className={styles.optimization}>
@@ -289,7 +289,11 @@ export function I18n() {
           <h3>Hybrid rendering, <br/>next generation.</h3>
           <p>With Nextra, you can leverage the hybrid rendering power from Next.js with your Markdown content including [SSG](https://nextjs.org/docs/basic-features/pages#static-generation-recommended), [SSR](https://nextjs.org/docs/basic-features/pages#server-side-rendering), and [ISR](https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration).</p>
         </Feature>
-        <Feature large>
+        <Feature>
+          <h3>Optimized SEO</h3>
+          <p>Nextra has [next-seo](https://github.com/garmeeh/next-seo) built in.</p>
+        </Feature>
+        <Feature>
           <h3>And more...</h3>
         </Feature>
       </Features>
@@ -297,6 +301,6 @@ export function I18n() {
   </div>
 
   <div className="content-container" style={{ marginTop: '4rem', marginBottom: '4rem' }}>
-    <p className="subtitle"><Link href="/docs"><a>Documentation →</a></Link></p>
+    <p className="subtitle"><Link href="/docs">Documentation →</Link></p>
   </div>
 </div>

@@ -26,54 +26,20 @@ export function Card({
 
   if (image) {
     return (
-      <Link href={href}>
-        <a
-          className={cn(
-            styles.card,
-            'flex flex-col justify-start text-current rounded-lg overflow-hidden text-gray-500 shadow-md shadow-gray-100 border border-gray-200 bg-gray-100 no-underline transition-all duration-300',
-            'hover:border-gray-200 hover:shadow-lg hover:bg-gray-50 hover:shadow-gray-200 hover:text-gray-900'
-          )}
-          {...props}
-        >
-          {children}
-          <span className={cn(styles.title, 'p-4 gap-2 text-current')}>
-            {icon}
-            <span className="flex gap-1">
-              {title}
-              {animatedArrow}
-            </span>
-          </span>
-          {demo ? (
-            <span
-              onClick={e => {
-                e.preventDefault()
-                e.stopPropagation()
-                window.open(demo, '_blank')
-              }}
-              className="text-sm m-4 -mt-2 text-gray-500 self-start hover:underline hover:text-gray-700"
-            >
-              Live Example
-            </span>
-          ) : null}
-        </a>
-      </Link>
-    )
-  }
-
-  return (
-    <Link href={href}>
-      <a
+      <Link
+        href={href}
         className={cn(
           styles.card,
-          'group flex flex-col justify-start text-current rounded-lg overflow-hidden shadow shadow-transparent border border-transparent bg-gray-100 no-underline transition-all duration-200',
-          'hover:border-gray-200 hover:shadow-md hover:shadow-gray-100'
+          'group flex flex-col justify-start overflow-hidden rounded-lg border border-gray-200 bg-gray-100 text-current no-underline shadow shadow-gray-100 transition-all duration-200',
+          'hover:border-gray-300 hover:shadow-lg hover:shadow-gray-100'
         )}
         {...props}
       >
+        {children}
         <span
           className={cn(
             styles.title,
-            'p-4 text-gray-700 gap-2',
+            'gap-2 p-4 text-gray-700',
             'hover:text-gray-900'
           )}
         >
@@ -83,7 +49,31 @@ export function Card({
             {animatedArrow}
           </span>
         </span>
-      </a>
+      </Link>
+    )
+  }
+
+  return (
+    <Link
+      href={href}
+      className={cn(
+        styles.card,
+        'group flex flex-col justify-start overflow-hidden rounded-lg border border-gray-200 text-current no-underline shadow-sm shadow-gray-100 transition-all duration-200',
+        'hover:border-gray-300 hover:bg-slate-50 hover:shadow-md hover:shadow-gray-100'
+      )}
+      {...props}
+    >
+      <span
+        className={cn(
+          styles.title,
+          'gap-2 p-4 text-gray-700',
+          'hover:text-gray-900'
+        )}
+      >
+        {icon}
+        {title}
+        {animatedArrow}
+      </span>
     </Link>
   )
 }
@@ -91,7 +81,7 @@ export function Card({
 export function Cards({ children, num, ...props }) {
   return (
     <div
-      className={cn(styles.cards, 'gap-4 mt-4')}
+      className={cn(styles.cards, 'mt-4 gap-4')}
       {...props}
       style={
         {

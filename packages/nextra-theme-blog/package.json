@@ -1,6 +1,6 @@
 {
   "name": "nextra-theme-blog",
-  "version": "2.0.0-beta.25",
+  "version": "2.0.0-beta.43",
   "description": "A Nextra theme for blogs.",
   "repository": "https://github.com/shuding/nextra",
   "author": "Shu Ding <g@shud.in>",
@@ -32,21 +32,22 @@
   },
   "scripts": {
     "build": "tsup",
-    "build:tailwind": "cross-env NODE_ENV=production pnpm postcss src/styles.css -o style.css --verbose",
-    "build:all": "pnpm build && pnpm run build:tailwind",
+    "build:tailwind": "NODE_ENV=production pnpm postcss src/styles.css -o style.css --verbose",
+    "minify:css": "lightningcss --minify --nesting --bundle --error-recovery --targets '>= 0.25%' style.css -o style.css",
+    "build:all": "pnpm build && pnpm build:tailwind && pnpm minify:css",
     "types": "tsup --dts-only",
     "types:check": "tsc --noEmit",
     "dev": "concurrently \"pnpm dev:layout\" \"pnpm dev:tailwind\"",
     "dev:layout": "tsup --watch",
-    "dev:tailwind": "cross-env TAILWIND_MODE=watch pnpm postcss src/styles.css -o style.css --watch",
+    "dev:tailwind": "TAILWIND_MODE=watch pnpm postcss src/styles.css -o style.css --watch",
     "prepublishOnly": "pnpm build:all",
     "clean": "rimraf ./dist ./style.css",
     "test": "vitest run",
     "format": "prettier --ignore-path ../../.gitignore --write --list-different ."
   },
   "dependencies": {
-    "@mdx-js/react": "^2.1.2",
-    "next-themes": "^0.2.0-beta.2"
+    "@mdx-js/react": "^2.1.5",
+    "next-themes": "^0.2.1"
   },
   "peerDependencies": {
     "next": ">=9.5.3",
@@ -61,15 +62,13 @@
   },
   "devDependencies": {
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
-    "@tailwindcss/typography": "^0.5.4",
+    "@tailwindcss/typography": "^0.5.7",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
     "autoprefixer": "^10.4.8",
     "concurrently": "^7.3.0",
-    "cross-env": "^7.0.3",
-    "cssnano": "^5.1.12",
-    "cssnano-preset-advanced": "^5.3.8",
-    "next": "^12.2.4",
+    "lightningcss-cli": "^1.16.0",
+    "next": "^13.0.5",
     "nextra": "workspace:*",
     "postcss": "^8.4.14",
     "postcss-cli": "^8.3.1",
@@ -79,11 +78,5 @@
     "react-dom": "^18.2.0",
     "tailwindcss": "^3.1.8",
     "vitest": "^0.21.0"
-  },
-  "prettier": {
-    "semi": false,
-    "singleQuote": true,
-    "trailingComma": "none",
-    "arrowParens": "avoid"
   }
 }

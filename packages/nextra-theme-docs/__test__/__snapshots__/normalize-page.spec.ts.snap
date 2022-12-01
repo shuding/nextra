@@ -6,6 +6,7 @@ exports[`normalize-page > /404 page 1`] = `
   "activePath": [],
   "activeThemeContext": {
     "breadcrumb": true,
+    "collapsed": false,
     "footer": true,
     "layout": "default",
     "navbar": true,
@@ -34,6 +35,7 @@ exports[`normalize-page > /404 page 1`] = `
   ],
   "docsDirectories": [
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "name": "index",
       "route": "/",
@@ -41,6 +43,7 @@ exports[`normalize-page > /404 page 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "name": "get-started",
       "route": "/get-started",
@@ -66,6 +69,7 @@ exports[`normalize-page > /404 page 1`] = `
   ],
   "flatDocsDirectories": [
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "name": "index",
       "route": "/",
@@ -73,6 +77,7 @@ exports[`normalize-page > /404 page 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "name": "get-started",
       "route": "/get-started",
@@ -101,6 +106,7 @@ exports[`normalize-page > /500 page 1`] = `
   ],
   "activeThemeContext": {
     "breadcrumb": true,
+    "collapsed": false,
     "footer": true,
     "layout": "raw",
     "navbar": true,
@@ -129,6 +135,7 @@ exports[`normalize-page > /500 page 1`] = `
   ],
   "docsDirectories": [
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "name": "index",
       "route": "/",
@@ -136,6 +143,7 @@ exports[`normalize-page > /500 page 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "name": "get-started",
       "route": "/get-started",
@@ -161,6 +169,7 @@ exports[`normalize-page > /500 page 1`] = `
   ],
   "flatDocsDirectories": [
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "name": "index",
       "route": "/",
@@ -168,6 +177,7 @@ exports[`normalize-page > /500 page 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "name": "get-started",
       "route": "/get-started",
@@ -364,6 +374,7 @@ exports[`normalize-page > en-US getting-started 1`] = `
   ],
   "activeThemeContext": {
     "breadcrumb": true,
+    "collapsed": false,
     "footer": true,
     "layout": "default",
     "navbar": true,
@@ -375,6 +386,18 @@ exports[`normalize-page > en-US getting-started 1`] = `
   },
   "activeType": "doc",
   "directories": [
+    {
+      "frontMatter": {
+        "title": "React Hooks for Data Fetching",
+      },
+      "hidden": true,
+      "kind": "MdxPage",
+      "locale": "en-US",
+      "name": "index",
+      "route": "/",
+      "title": "Introduction",
+      "type": "nav",
+    },
     {
       "children": [
         {
@@ -639,6 +662,18 @@ exports[`normalize-page > en-US getting-started 1`] = `
   "docsDirectories": [],
   "flatDirectories": [
     {
+      "frontMatter": {
+        "title": "React Hooks for Data Fetching",
+      },
+      "hidden": true,
+      "kind": "MdxPage",
+      "locale": "en-US",
+      "name": "index",
+      "route": "/",
+      "title": "Introduction",
+      "type": "nav",
+    },
+    {
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "getting-started",
@@ -865,6 +900,7 @@ exports[`normalize-page > en-US getting-started 1`] = `
   ],
   "flatDocsDirectories": [
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "getting-started",
@@ -873,6 +909,7 @@ exports[`normalize-page > en-US getting-started 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "options",
@@ -881,6 +918,7 @@ exports[`normalize-page > en-US getting-started 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "global-configuration",
@@ -889,6 +927,7 @@ exports[`normalize-page > en-US getting-started 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "data-fetching",
@@ -897,6 +936,7 @@ exports[`normalize-page > en-US getting-started 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "error-handling",
@@ -905,6 +945,7 @@ exports[`normalize-page > en-US getting-started 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "revalidation",
@@ -913,6 +954,7 @@ exports[`normalize-page > en-US getting-started 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "conditional-fetching",
@@ -921,6 +963,7 @@ exports[`normalize-page > en-US getting-started 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "arguments",
@@ -929,6 +972,7 @@ exports[`normalize-page > en-US getting-started 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "mutation",
@@ -937,6 +981,7 @@ exports[`normalize-page > en-US getting-started 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "pagination",
@@ -945,6 +990,7 @@ exports[`normalize-page > en-US getting-started 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "prefetching",
@@ -953,6 +999,7 @@ exports[`normalize-page > en-US getting-started 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "with-nextjs",
@@ -961,6 +1008,7 @@ exports[`normalize-page > en-US getting-started 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "typescript",
@@ -969,6 +1017,7 @@ exports[`normalize-page > en-US getting-started 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "suspense",
@@ -977,6 +1026,7 @@ exports[`normalize-page > en-US getting-started 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "middleware",
@@ -985,6 +1035,7 @@ exports[`normalize-page > en-US getting-started 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "cache",
@@ -993,6 +1044,7 @@ exports[`normalize-page > en-US getting-started 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "performance",
@@ -1001,6 +1053,7 @@ exports[`normalize-page > en-US getting-started 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "react-native",
@@ -1009,6 +1062,7 @@ exports[`normalize-page > en-US getting-started 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "change-log",
@@ -1021,6 +1075,7 @@ exports[`normalize-page > en-US getting-started 1`] = `
         "full": true,
         "title": "Basic Usage",
       },
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "basic",
@@ -1033,6 +1088,7 @@ exports[`normalize-page > en-US getting-started 1`] = `
         "full": true,
         "title": "Authentication",
       },
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "auth",
@@ -1045,6 +1101,7 @@ exports[`normalize-page > en-US getting-started 1`] = `
         "full": true,
         "title": "Infinite Loading",
       },
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "infinite-loading",
@@ -1057,6 +1114,7 @@ exports[`normalize-page > en-US getting-started 1`] = `
         "full": true,
         "title": "Error Handling",
       },
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "error-handling",
@@ -1069,6 +1127,7 @@ exports[`normalize-page > en-US getting-started 1`] = `
         "full": true,
         "title": "Next.js SSR",
       },
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "ssr",
@@ -1081,6 +1140,7 @@ exports[`normalize-page > en-US getting-started 1`] = `
         "description": "Almost 2 years ago we open sourced SWR, the tiny data-fetching React library that people love. Today we are reaching another milestone: the 1.0 version of SWR.",
         "image": "https://assets.vercel.com/image/upload/v1630059453/swr/v1.png",
       },
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "swr-v1",
@@ -1112,6 +1172,7 @@ exports[`normalize-page > en-US home 1`] = `
   ],
   "activeThemeContext": {
     "breadcrumb": true,
+    "collapsed": false,
     "footer": true,
     "layout": "default",
     "navbar": true,
@@ -1123,6 +1184,18 @@ exports[`normalize-page > en-US home 1`] = `
   },
   "activeType": "nav",
   "directories": [
+    {
+      "frontMatter": {
+        "title": "React Hooks for Data Fetching",
+      },
+      "hidden": true,
+      "kind": "MdxPage",
+      "locale": "en-US",
+      "name": "index",
+      "route": "/",
+      "title": "Introduction",
+      "type": "nav",
+    },
     {
       "children": [
         {
@@ -1387,6 +1460,18 @@ exports[`normalize-page > en-US home 1`] = `
   "docsDirectories": [],
   "flatDirectories": [
     {
+      "frontMatter": {
+        "title": "React Hooks for Data Fetching",
+      },
+      "hidden": true,
+      "kind": "MdxPage",
+      "locale": "en-US",
+      "name": "index",
+      "route": "/",
+      "title": "Introduction",
+      "type": "nav",
+    },
+    {
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "getting-started",
@@ -1613,6 +1698,7 @@ exports[`normalize-page > en-US home 1`] = `
   ],
   "flatDocsDirectories": [
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "getting-started",
@@ -1621,6 +1707,7 @@ exports[`normalize-page > en-US home 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "options",
@@ -1629,6 +1716,7 @@ exports[`normalize-page > en-US home 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "global-configuration",
@@ -1637,6 +1725,7 @@ exports[`normalize-page > en-US home 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "data-fetching",
@@ -1645,6 +1734,7 @@ exports[`normalize-page > en-US home 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "error-handling",
@@ -1653,6 +1743,7 @@ exports[`normalize-page > en-US home 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "revalidation",
@@ -1661,6 +1752,7 @@ exports[`normalize-page > en-US home 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "conditional-fetching",
@@ -1669,6 +1761,7 @@ exports[`normalize-page > en-US home 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "arguments",
@@ -1677,6 +1770,7 @@ exports[`normalize-page > en-US home 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "mutation",
@@ -1685,6 +1779,7 @@ exports[`normalize-page > en-US home 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "pagination",
@@ -1693,6 +1788,7 @@ exports[`normalize-page > en-US home 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "prefetching",
@@ -1701,6 +1797,7 @@ exports[`normalize-page > en-US home 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "with-nextjs",
@@ -1709,6 +1806,7 @@ exports[`normalize-page > en-US home 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "typescript",
@@ -1717,6 +1815,7 @@ exports[`normalize-page > en-US home 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "suspense",
@@ -1725,6 +1824,7 @@ exports[`normalize-page > en-US home 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "middleware",
@@ -1733,6 +1833,7 @@ exports[`normalize-page > en-US home 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "cache",
@@ -1741,6 +1842,7 @@ exports[`normalize-page > en-US home 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "performance",
@@ -1749,6 +1851,7 @@ exports[`normalize-page > en-US home 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "react-native",
@@ -1757,6 +1860,7 @@ exports[`normalize-page > en-US home 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "change-log",
@@ -1769,6 +1873,7 @@ exports[`normalize-page > en-US home 1`] = `
         "full": true,
         "title": "Basic Usage",
       },
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "basic",
@@ -1781,6 +1886,7 @@ exports[`normalize-page > en-US home 1`] = `
         "full": true,
         "title": "Authentication",
       },
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "auth",
@@ -1793,6 +1899,7 @@ exports[`normalize-page > en-US home 1`] = `
         "full": true,
         "title": "Infinite Loading",
       },
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "infinite-loading",
@@ -1805,6 +1912,7 @@ exports[`normalize-page > en-US home 1`] = `
         "full": true,
         "title": "Error Handling",
       },
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "error-handling",
@@ -1817,6 +1925,7 @@ exports[`normalize-page > en-US home 1`] = `
         "full": true,
         "title": "Next.js SSR",
       },
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "ssr",
@@ -1829,6 +1938,7 @@ exports[`normalize-page > en-US home 1`] = `
         "description": "Almost 2 years ago we open sourced SWR, the tiny data-fetching React library that people love. Today we are reaching another milestone: the 1.0 version of SWR.",
         "image": "https://assets.vercel.com/image/upload/v1630059453/swr/v1.png",
       },
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "swr-v1",
@@ -2026,6 +2136,7 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
   ],
   "activeThemeContext": {
     "breadcrumb": true,
+    "collapsed": false,
     "footer": true,
     "layout": "default",
     "navbar": true,
@@ -2037,6 +2148,18 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
   },
   "activeType": "doc",
   "directories": [
+    {
+      "frontMatter": {
+        "title": "用于数据请求的 React Hooks 库",
+      },
+      "hidden": true,
+      "kind": "MdxPage",
+      "locale": "zh-CN",
+      "name": "index",
+      "route": "/",
+      "title": "简介",
+      "type": "nav",
+    },
     {
       "children": [
         {
@@ -2301,6 +2424,18 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
   "docsDirectories": [],
   "flatDirectories": [
     {
+      "frontMatter": {
+        "title": "用于数据请求的 React Hooks 库",
+      },
+      "hidden": true,
+      "kind": "MdxPage",
+      "locale": "zh-CN",
+      "name": "index",
+      "route": "/",
+      "title": "简介",
+      "type": "nav",
+    },
+    {
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "getting-started",
@@ -2527,6 +2662,7 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
   ],
   "flatDocsDirectories": [
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "getting-started",
@@ -2535,6 +2671,7 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "options",
@@ -2543,6 +2680,7 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "global-configuration",
@@ -2551,6 +2689,7 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "data-fetching",
@@ -2559,6 +2698,7 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "error-handling",
@@ -2567,6 +2707,7 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "revalidation",
@@ -2575,6 +2716,7 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "conditional-fetching",
@@ -2583,6 +2725,7 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "arguments",
@@ -2591,6 +2734,7 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "mutation",
@@ -2599,6 +2743,7 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "pagination",
@@ -2607,6 +2752,7 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "prefetching",
@@ -2615,6 +2761,7 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "with-nextjs",
@@ -2623,6 +2770,7 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "typescript",
@@ -2631,6 +2779,7 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "suspense",
@@ -2639,6 +2788,7 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "middleware",
@@ -2647,6 +2797,7 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "cache",
@@ -2655,6 +2806,7 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "performance",
@@ -2663,6 +2815,7 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "react-native",
@@ -2671,6 +2824,7 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "change-log",
@@ -2683,6 +2837,7 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
         "full": true,
         "title": "基本用法",
       },
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "basic",
@@ -2695,6 +2850,7 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
         "full": true,
         "title": "身份验证",
       },
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "auth",
@@ -2707,6 +2863,7 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
         "full": true,
         "title": "无限加载",
       },
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "infinite-loading",
@@ -2719,6 +2876,7 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
         "full": true,
         "title": "错误处理",
       },
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "error-handling",
@@ -2731,6 +2889,7 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
         "full": true,
         "title": "Next.js SSR",
       },
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "ssr",
@@ -2743,6 +2902,7 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
         "description": "大约两年前，我们开源了 SWR，大家喜爱的小型数据请求 React 库。今天，我们迎来了另一个里程碑：SWR 1.0 版本发布。",
         "image": "https://assets.vercel.com/image/upload/v1630059453/swr/v1.png",
       },
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "swr-v1",
@@ -2774,6 +2934,7 @@ exports[`normalize-page > zh-CN home 1`] = `
   ],
   "activeThemeContext": {
     "breadcrumb": true,
+    "collapsed": false,
     "footer": true,
     "layout": "default",
     "navbar": true,
@@ -2785,6 +2946,18 @@ exports[`normalize-page > zh-CN home 1`] = `
   },
   "activeType": "nav",
   "directories": [
+    {
+      "frontMatter": {
+        "title": "用于数据请求的 React Hooks 库",
+      },
+      "hidden": true,
+      "kind": "MdxPage",
+      "locale": "zh-CN",
+      "name": "index",
+      "route": "/",
+      "title": "简介",
+      "type": "nav",
+    },
     {
       "children": [
         {
@@ -3049,6 +3222,18 @@ exports[`normalize-page > zh-CN home 1`] = `
   "docsDirectories": [],
   "flatDirectories": [
     {
+      "frontMatter": {
+        "title": "用于数据请求的 React Hooks 库",
+      },
+      "hidden": true,
+      "kind": "MdxPage",
+      "locale": "zh-CN",
+      "name": "index",
+      "route": "/",
+      "title": "简介",
+      "type": "nav",
+    },
+    {
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "getting-started",
@@ -3275,6 +3460,7 @@ exports[`normalize-page > zh-CN home 1`] = `
   ],
   "flatDocsDirectories": [
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "getting-started",
@@ -3283,6 +3469,7 @@ exports[`normalize-page > zh-CN home 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "options",
@@ -3291,6 +3478,7 @@ exports[`normalize-page > zh-CN home 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "global-configuration",
@@ -3299,6 +3487,7 @@ exports[`normalize-page > zh-CN home 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "data-fetching",
@@ -3307,6 +3496,7 @@ exports[`normalize-page > zh-CN home 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "error-handling",
@@ -3315,6 +3505,7 @@ exports[`normalize-page > zh-CN home 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "revalidation",
@@ -3323,6 +3514,7 @@ exports[`normalize-page > zh-CN home 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "conditional-fetching",
@@ -3331,6 +3523,7 @@ exports[`normalize-page > zh-CN home 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "arguments",
@@ -3339,6 +3532,7 @@ exports[`normalize-page > zh-CN home 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "mutation",
@@ -3347,6 +3541,7 @@ exports[`normalize-page > zh-CN home 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "pagination",
@@ -3355,6 +3550,7 @@ exports[`normalize-page > zh-CN home 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "prefetching",
@@ -3363,6 +3559,7 @@ exports[`normalize-page > zh-CN home 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "with-nextjs",
@@ -3371,6 +3568,7 @@ exports[`normalize-page > zh-CN home 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "typescript",
@@ -3379,6 +3577,7 @@ exports[`normalize-page > zh-CN home 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "suspense",
@@ -3387,6 +3586,7 @@ exports[`normalize-page > zh-CN home 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "middleware",
@@ -3395,6 +3595,7 @@ exports[`normalize-page > zh-CN home 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "cache",
@@ -3403,6 +3604,7 @@ exports[`normalize-page > zh-CN home 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "performance",
@@ -3411,6 +3613,7 @@ exports[`normalize-page > zh-CN home 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "react-native",
@@ -3419,6 +3622,7 @@ exports[`normalize-page > zh-CN home 1`] = `
       "type": "doc",
     },
     {
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "change-log",
@@ -3431,6 +3635,7 @@ exports[`normalize-page > zh-CN home 1`] = `
         "full": true,
         "title": "基本用法",
       },
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "basic",
@@ -3443,6 +3648,7 @@ exports[`normalize-page > zh-CN home 1`] = `
         "full": true,
         "title": "身份验证",
       },
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "auth",
@@ -3455,6 +3661,7 @@ exports[`normalize-page > zh-CN home 1`] = `
         "full": true,
         "title": "无限加载",
       },
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "infinite-loading",
@@ -3467,6 +3674,7 @@ exports[`normalize-page > zh-CN home 1`] = `
         "full": true,
         "title": "错误处理",
       },
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "error-handling",
@@ -3479,6 +3687,7 @@ exports[`normalize-page > zh-CN home 1`] = `
         "full": true,
         "title": "Next.js SSR",
       },
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "en-US",
       "name": "ssr",
@@ -3491,6 +3700,7 @@ exports[`normalize-page > zh-CN home 1`] = `
         "description": "大约两年前，我们开源了 SWR，大家喜爱的小型数据请求 React 库。今天，我们迎来了另一个里程碑：SWR 1.0 版本发布。",
         "image": "https://assets.vercel.com/image/upload/v1630059453/swr/v1.png",
       },
+      "isUnderCurrentDocsTree": true,
       "kind": "MdxPage",
       "locale": "zh-CN",
       "name": "swr-v1",

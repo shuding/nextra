@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "next dev",
+    "dev": "next",
     "build": "next build",
     "start": "next start",
     "debug": "NODE_OPTIONS='--inspect' next dev",
@@ -14,7 +14,7 @@
   "dependencies": {
     "react": "*",
     "react-dom": "*",
-    "next": ">=12",
+    "next": ">=13",
     "nextra": "workspace:*",
     "nextra-theme-docs": "workspace:*"
   },

@@ -4,8 +4,6 @@ import path from 'node:path'
 import grayMatter from 'gray-matter'
 import slash from 'slash'
 import { LoaderContext } from 'webpack'
-import { Repository } from '@napi-rs/simple-git'
-import { findPagesDir } from 'next/dist/lib/find-pages-dir.js'
 
 import { addPage } from './content-dump'
 import { parseFileName } from './utils'
@@ -17,39 +15,45 @@ import {
   DEFAULT_LOCALE,
   OFFICIAL_THEMES,
   MARKDOWN_EXTENSION_REGEX,
-  CWD,
+  CWD
 } from './constants'
-const PAGES_DIR = findPagesDir(CWD).pages
+import { findPagesDirectory } from './file-system'
+
+const PAGES_DIR = findPagesDirectory()
 
 // TODO: create this as a webpack plugin.
 const indexContentEmitted = new Set<string>()
 
-const [repository, gitRoot] = (function () {
-  try {
-    const repo = Repository.discover(CWD)
-    if (repo.isShallow()) {
-      if (process.env.VERCEL) {
-        console.warn(
-          '[nextra] The repository is shallow cloned, so the latest modified time will not be presented. Set the VERCEL_DEEP_CLONE=true environment variable to enable deep cloning.'
-        )
-      } else if (process.env.GITHUB_ACTION) {
-        console.warn(
-          '[nextra] The repository is shallow cloned, so the latest modified time will not be presented. See https://github.com/actions/checkout#fetch-all-history-for-all-tags-and-branches to fetch all the history.'
-        )
-      } else {
-        console.warn(
-          '[nextra] The repository is shallow cloned, so the latest modified time will not be presented.'
-        )
-      }
-    }
-    // repository.path() returns the `/path/to/repo/.git`, we need the parent directory of it
-    const gitRoot = path.join(repo.path(), '..')
+const IS_WEB_CONTAINER = !!process.versions.webcontainer
 
-    return [repo, gitRoot]
-  } catch (e) {
-    console.warn('[nextra] Init git repository failed', e)
-    return []
+const initGitRepo = (async () => {
+  if (!IS_WEB_CONTAINER) {
+    const { Repository } = await import('@napi-rs/simple-git')
+    try {
+      const repository = Repository.discover(CWD)
+      if (repository.isShallow()) {
+        if (process.env.VERCEL) {
+          console.warn(
+            '[nextra] The repository is shallow cloned, so the latest modified time will not be presented. Set the VERCEL_DEEP_CLONE=true environment variable to enable deep cloning.'
+          )
+        } else if (process.env.GITHUB_ACTION) {
+          console.warn(
+            '[nextra] The repository is shallow cloned, so the latest modified time will not be presented. See https://github.com/actions/checkout#fetch-all-history-for-all-tags-and-branches to fetch all the history.'
+          )
+        } else {
+          console.warn(
+            '[nextra] The repository is shallow cloned, so the latest modified time will not be presented.'
+          )
+        }
+      }
+      // repository.path() returns the `/path/to/repo/.git`, we need the parent directory of it
+      const gitRoot = path.join(repository.path(), '..')
+      return { repository, gitRoot }
+    } catch (e) {
+      console.warn('[nextra] Init git repository failed', e)
+    }
   }
+  return {}
 })()
 
 async function loader(
@@ -68,7 +72,6 @@ async function loader(
     mdxOptions,
     pageMapCache,
     newNextLinkBehavior,
-    allowFutureImage
   } = context.getOptions()
 
   context.cacheable(true)
@@ -115,12 +118,15 @@ async function loader(
     await compileMdx(
       content,
       {
-        mdxOptions,
+        mdxOptions: {
+          ...mdxOptions,
+          jsx: true,
+          outputFormat: 'program',
+        },
         unstable_readingTime,
         unstable_defaultShowCopyCode,
         unstable_staticImage,
         unstable_flexsearch,
-        allowFutureImage
       },
       mdxPath
     )
@@ -159,6 +165,7 @@ export default MDXContent`.trimStart()
   }
 
   let timestamp: PageOpts['timestamp']
+  const { repository, gitRoot } = await initGitRepo
   if (repository && gitRoot) {
     try {
       timestamp = await repository.getFileLatestModifiedDateAsync(
@@ -179,7 +186,7 @@ export default MDXContent`.trimStart()
 
   const pageOpts: Omit<PageOpts, 'title'> = {
     filePath: slash(path.relative(CWD, mdxPath)),
-    route: slash(route),
+    route,
     frontMatter,
     pageMap,
     headings,

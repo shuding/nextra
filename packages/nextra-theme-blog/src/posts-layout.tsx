@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import React, { ReactNode } from 'react'
 import { useBlogContext } from './blog-context'
 import { BasicLayout } from './basic-layout'
-import MDXTheme from './mdx-theme'
+import { MDXTheme } from './mdx-theme'
 import Nav from './nav'
 import { collectPostsAndNavs } from './utils/collect'
 import getTags from './utils/get-tags'
@@ -31,22 +31,22 @@ export const PostsLayout = ({ children }: { children: ReactNode }) => {
     return (
       <div key={post.route} className="post-item">
         <h3>
-          <Link href={post.route} passHref>
-            <a className="!no-underline">{postTitle}</a>
+          <Link href={post.route} passHref legacyBehavior>
+            <a className="!nx-no-underline">{postTitle}</a>
           </Link>
         </h3>
         {description && (
-          <p className="mb-2 text-gray-400">
+          <p className="nx-mb-2 nx-text-gray-400">
             {description}
             {config.readMore && (
-              <Link href={post.route} passHref>
-                <a className="post-item-more ml-2">{config.readMore}</a>
+              <Link href={post.route} passHref legacyBehavior>
+                <a className="post-item-more nx-ml-2">{config.readMore}</a>
               </Link>
             )}
           </p>
         )}
         {date && (
-          <time className="text-sm text-gray-300" dateTime={date.toISOString()}>
+          <time className="nx-text-sm nx-text-gray-300" dateTime={date.toISOString()}>
             {date.toDateString()}
           </time>
         )}

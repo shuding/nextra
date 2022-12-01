@@ -8,35 +8,24 @@ import { renderComponent } from '../utils'
 export function Footer({ menu }: { menu?: boolean }): ReactElement {
   const config = useConfig()
   return (
-    <footer className="bg-gray-100 pb-[env(safe-area-inset-bottom)] dark:bg-neutral-900">
+    <footer className="nx-bg-gray-100 nx-pb-[env(safe-area-inset-bottom)] dark:nx-bg-neutral-900">
       <div
         className={cn(
-          'hidden border-b py-2 dark:border-neutral-800 md:block',
-          !menu && 'md:hidden'
+          'nx-mx-auto nx-flex nx-max-w-[90rem] nx-gap-2 nx-py-2 nx-px-4',
+          menu ? 'nx-flex' : 'nx-hidden'
         )}
       >
-        <div className="mx-auto max-w-[90rem]">
-          <div className="inline-flex px-4">
-            {config.i18n.length > 0 && (
-              <div className="relative flex-1">
-                <LocaleSwitch options={config.i18n} />
-              </div>
-            )}
-            {config.darkMode ? (
-              <div className="relative grow-0">
-                <ThemeSwitch lite={false} />
-              </div>
-            ) : null}
-          </div>
-        </div>
+        {config.i18n.length > 0 && <LocaleSwitch options={config.i18n} />}
+        {config.darkMode && <ThemeSwitch />}
       </div>
-      <div className="mx-auto max-w-[90rem] py-12 pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
-        <div className="flex flex-col-reverse items-center justify-between md:flex-row md:items-end">
-          <span className="text-gray-600 dark:text-gray-400">
-            {renderComponent(config.footer.text)}
-          </span>
-          <div className="mt-6" />
-        </div>
+      <hr className="dark:nx-border-neutral-800" />
+      <div
+        className={cn(
+          'nx-mx-auto nx-flex nx-max-w-[90rem] nx-justify-center nx-py-12 nx-text-gray-600 dark:nx-text-gray-400 md:nx-justify-start',
+          'nx-pl-[max(env(safe-area-inset-left),1.5rem)] nx-pr-[max(env(safe-area-inset-right),1.5rem)]'
+        )}
+      >
+        {renderComponent(config.footer.text)}
       </div>
     </footer>
   )

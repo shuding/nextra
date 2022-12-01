@@ -28,13 +28,14 @@ export function Collapse({
       if (container && inner) {
         const contentHeight = innerRef.current.clientHeight
         container.style.maxHeight = contentHeight + 'px'
-        container.classList.remove('duration-500')
-        container.classList.add('duration-300')
+        container.classList.remove('nx-duration-500')
+        container.classList.add('nx-duration-300')
 
         inner.style.opacity = '1'
         animationRef.current = setTimeout(() => {
           const container = containerRef.current
           if (container) {
+            // should be style property in kebab-case, not css class name
             container.style.removeProperty('max-height')
           }
         }, 300)
@@ -45,8 +46,8 @@ export function Collapse({
       if (container && inner) {
         const contentHeight = innerRef.current.clientHeight
         container.style.maxHeight = contentHeight + 'px'
-        container.classList.remove('duration-300')
-        container.classList.add('duration-500')
+        container.classList.remove('nx-duration-300')
+        container.classList.add('nx-duration-500')
 
         inner.style.opacity = '0'
         setTimeout(() => {
@@ -66,7 +67,7 @@ export function Collapse({
   return (
     <div
       ref={containerRef}
-      className="transform-gpu overflow-hidden transition-all duration-300 ease-in-out motion-reduce:transition-none"
+      className="nx-transform-gpu nx-overflow-hidden nx-transition-all nx-duration-300 nx-ease-in-out motion-reduce:nx-transition-none"
       style={{
         maxHeight: initialState.current ? undefined : 0
       }}
@@ -74,7 +75,7 @@ export function Collapse({
       <div
         ref={innerRef}
         className={cn(
-          'p-2 transform-gpu overflow-hidden transition-opacity duration-500 ease-in-out motion-reduce:transition-none',
+          'nx-transform-gpu nx-overflow-hidden nx-p-2 nx-transition-opacity nx-duration-500 nx-ease-in-out motion-reduce:nx-transition-none',
           className
         )}
         style={{

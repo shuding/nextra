@@ -1,6 +1,6 @@
 import React, { ComponentProps, ReactElement } from 'react'
 
-export const WordWrapIcon = (props: ComponentProps<'svg'>): ReactElement => {
+export function WordWrapIcon(props: ComponentProps<'svg'>): ReactElement {
   return (
     <svg viewBox="0 0 24 24" width="24" height="24" {...props}>
       <path

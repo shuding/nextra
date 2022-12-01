@@ -15,7 +15,7 @@ cd packages/nextra
 pnpm build
 ```
 
-Watch mode: `yarn dev`
+Watch mode: `pnpm dev`
 
 ### Build Nextra Theme
 
@@ -24,9 +24,11 @@ cd packages/nextra-theme-docs
 pnpm build
 ```
 
-Watch mode: `pnpm dev`
-Watch mode (layout only): `pnpm dev:layout`
-Watch mode (style only): `pnpm dev:tailwind`
+| Command           | Description              |
+| ----------------- | ------------------------ |
+| pnpm dev          | Watch mode               |
+| pnpm dev:layout   | Watch mode (layout only) |
+| pnpm dev:tailwind | Watch mode (style only)  |
 
 ### Development
 

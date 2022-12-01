@@ -1,9 +1,10 @@
 /* eslint sort-keys: error */
 import { useRouter } from "next/router";
+import { ComponentProps, ReactElement } from "react";
 import { DocsThemeConfig, useConfig } from "nextra-theme-docs";
 
-const Logo = ({ height }) => (
-  <svg height={height} viewBox="0 0 291 69" fill="none">
+const Logo = (props: ComponentProps<"svg">): ReactElement => (
+  <svg viewBox="0 0 291 69" fill="none" {...props}>
     <path
       d="M0 36.53c.07 17.6 14.4 32.01 32.01 32.01a32.05 32.05 0 0032.01-32V32a13.2 13.2 0 0123.4-8.31h20.7A32.07 32.07 0 0077.2 0a32.05 32.05 0 00-32 32.01v4.52A13.2 13.2 0 0132 49.71a13.2 13.2 0 01-13.18-13.18 3.77 3.77 0 00-3.77-3.77H3.76A3.77 3.77 0 000 36.53zM122.49 68.54a32.14 32.14 0 01-30.89-23.7h20.67a13.16 13.16 0 0023.4-8.3V32A32.05 32.05 0 01167.68 0c17.43 0 31.64 14 32 31.33l.1 5.2a13.2 13.2 0 0023.4 8.31h20.7a32.07 32.07 0 01-30.91 23.7c-17.61 0-31.94-14.42-32.01-32l-.1-4.7v-.2a13.2 13.2 0 00-13.18-12.81 13.2 13.2 0 00-13.18 13.18v4.52a32.05 32.05 0 01-32.01 32.01zM247.94 23.7a13.16 13.16 0 0123.4 8.31 3.77 3.77 0 003.77 3.77h11.3a3.77 3.77 0 003.76-3.77A32.05 32.05 0 00258.16 0a32.07 32.07 0 00-30.92 23.7h20.7z"
       fill="currentColor"
@@ -102,8 +103,8 @@ const config: DocsThemeConfig = {
     },
   },
   feedback: {
-    labels: "feedback",
     content: "Question? Give us feedback →",
+    labels: "feedback",
   },
   footer: {
     text() {
@@ -112,7 +113,7 @@ const config: DocsThemeConfig = {
         <a
           rel="noopener"
           target="_blank"
-          className="inline-flex items-center font-semibold gap-2"
+          className="flex items-center gap-2 font-semibold"
           href={FOOTER_LINK[locale]}
         >
           {FOOTER_LINK_TEXT[locale]}
@@ -120,10 +121,13 @@ const config: DocsThemeConfig = {
       );
     },
   },
-  gitTimestamp: "Last updated on",
-  project: {
-    link: "https://github.com/vercel/swr",
+  getNextSeoProps() {
+    const { locale } = useRouter();
+    return {
+      titleTemplate: `%s | SWR (${locale})`,
+    };
   },
+  gitTimestamp: ({ timestamp }) => <>Last updated on {timestamp.toString()}</>,
   head() {
     const config = useConfig();
     const description =
@@ -183,9 +187,9 @@ const config: DocsThemeConfig = {
     const { locale } = useRouter();
     return (
       <>
-        <Logo height={12} />
+        <Logo className="h-3" />
         <span
-          className="ltr:ml-2 rtl:mr-2 font-extrabold hidden md:inline select-none"
+          className="hidden select-none font-extrabold ltr:ml-2 rtl:mr-2 md:inline"
           title={"SWR: " + (TITLE[locale] || "")}
         >
           SWR
@@ -196,18 +200,19 @@ const config: DocsThemeConfig = {
   nextThemes: {
     defaultTheme: "dark",
   },
-  sidebar: {
-    defaultMenuCollapsed: true,
-    titleComponent: ({ title }) => (
-      <div className="flex items-center gap-2">
-        <Logo height={6} />
-        {title}
-      </div>
-    ),
+  project: {
+    link: "https://github.com/vercel/swr",
   },
-  titleSuffix() {
-    const { locale } = useRouter();
-    return ` – SWR (${locale})`;
+  sidebar: {
+    titleComponent: ({ title, type }) =>
+      type === "separator" ? (
+        <div className="flex items-center gap-2">
+          <Logo className="h-1.5 shrink-0" />
+          {title}
+        </div>
+      ) : (
+        <>{title}</>
+      ),
   },
   toc: {
     extraContent: <img src="https://placekitten.com/g/300/200" />,

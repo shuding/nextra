@@ -15,7 +15,7 @@ export function ServerSideErrorPage(): ReactElement | null {
   }
 
   return (
-    <p>
+    <p className="nx-text-center">
       <Anchor
         href={getGitIssueUrl({
           repository: config.docsRepositoryBase,
@@ -25,7 +25,7 @@ export function ServerSideErrorPage(): ReactElement | null {
           labels
         })}
         newWindow
-        className="ring-primary-500/30 focus:outline-none focus-visible:ring text-primary-500 underline decoration-from-font [text-underline-position:under]"
+        className="nx-text-primary-500 nx-underline nx-decoration-from-font [text-underline-position:under]"
       >
         {renderComponent(content)}
       </Anchor>
