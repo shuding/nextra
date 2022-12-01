@@ -40,17 +40,17 @@ export function I18n() {
     <div
       style={{ display: 'flex', flexDirection: 'column' }}
       className="menu bg-white dark:bg-neutral-800 dark:ring-white dark:ring-opacity-20 shadow-lg rounded-md py-1 ring-1 ring-black ring-opacity-5 overflow-auto text-sm">
-      <span className={cn("cursor-default select-none relative py-1.5 px-4 whitespace-nowrap", active === 'en' ? 'text-primary-500 bg-primary-50 dark:bg-primary-500/10' : 'text-gray-800 dark:text-gray-100 ')} onPointerOver={() => setActive('en')}>English</span>
-      <span className={cn("cursor-default select-none relative py-1.5 px-4 whitespace-nowrap", active === 'de' ? 'text-primary-500 bg-primary-50 dark:bg-primary-500/10' : 'text-gray-800 dark:text-gray-100 ')} onPointerOver={() => setActive('de')}>Deutsch</span>
-      <span className={cn("cursor-default select-none relative py-1.5 px-4 whitespace-nowrap", active === 'ja' ? 'text-primary-500 bg-primary-50 dark:bg-primary-500/10' : 'text-gray-800 dark:text-gray-100 ')} onPointerOver={() => setActive('ja')}>日本語</span>
+      <span className={cn("cursor-default select-none relative py-1.5 px-4 whitespace-nowrap", active === 'en' ? 'nx-text-primary-500 nx-bg-primary-50 dark:nx-bg-primary-500/10' : 'text-gray-800 dark:text-gray-100 ')} onPointerOver={() => setActive('en')}>English</span>
+      <span className={cn("cursor-default select-none relative py-1.5 px-4 whitespace-nowrap", active === 'de' ? 'nx-text-primary-500 nx-bg-primary-50 dark:nx-bg-primary-500/10' : 'text-gray-800 dark:text-gray-100 ')} onPointerOver={() => setActive('de')}>Deutsch</span>
+      <span className={cn("cursor-default select-none relative py-1.5 px-4 whitespace-nowrap", active === 'ja' ? 'nx-text-primary-500 nx-bg-primary-50 dark:nx-bg-primary-500/10' : 'text-gray-800 dark:text-gray-100 ')} onPointerOver={() => setActive('ja')}>日本語</span>
     </div>
   }/>
 }
 
 <div className="home-content">
   <div className="content-container">
-    <h1 className="headline">Make beautiful websites <br/>with Next.js & MDX.</h1>
-    <p className="subtitle">Simple, powerful and flexible site generation framework <br/>with everything you love from <a className="nextjs-link" href="https://nextjs.org" target="_blank">Next.js</a>.</p>
+    <h1 className="headline">Make beautiful websites <br className='sm:block hidden'/>with <br className='sm:hidden block'/>Next.js & MDX.</h1>
+    <p className="subtitle">Simple, powerful and flexible site generation framework <br className='sm:block hidden'/>with everything you love from <a className="nextjs-link" href="https://nextjs.org" target="_blank">Next.js</a>.</p>
     <p className="subtitle"><Link href="/docs">Start →</Link></p>
   </div>
 
@@ -136,6 +136,9 @@ export function I18n() {
         font-size: 4vw;
         font-size: min(48px, max(4vw, 30px));
       }
+      .headline {
+        letter-spacing: -.08rem;
+      }
     }
   `}</style>
 
@@ -160,8 +163,7 @@ export function I18n() {
         </Feature>
         <Feature>
           <h3>I18n as easy as creating new files.</h3>
-          <p>Name your page files with locales suffixed, Nextra and Next.js will do the rest for you.</p>
-          <br/>
+          <p className='mb-4'>Name your page files with locales suffixed, Nextra and Next.js will do the rest for you.</p>
           <I18n/>
         </Feature>
         <Feature centered style={{
@@ -264,26 +266,32 @@ export function I18n() {
           backgroundPosition: '130px -8px, top',
           backgroundRepeat: 'no-repeat',
           textShadow: '0 1px 6px rgb(38 59 82 / 18%)',
-          aspectRatio: '1.5',
+          aspectRatio: '1.765',
         }}>
           <h3 style={{ width: 300 }}>Organize pages intuitively, <br/>with file-system routing from Next.js.</h3>
         </Feature>
-        <Feature>
+        <Feature centered>
           <div/>
           <h3>Links and images are always <span style={{ fontWeight: 300 }}>optimized</span>.</h3>
-          <p>Nextra converts Markdown links and images to [next/link](https://nextjs.org/docs/routing/introduction#linking-between-pages) and [next/image](https://nextjs.org/docs/basic-features/image-optimization#local-images), keeping your website the best experience.</p>
+          <p>Nextra converts Markdown link and image to [Next.js Link](https://nextjs.org/docs/routing/introduction#linking-between-pages) and [Next.js Image](https://nextjs.org/docs/basic-features/image-optimization#local-images), keeping your website the best user experience possible.</p>
+          <div className="mt-6"/>
           <div className={styles.optimization}>
-            <div style={{ fontSize: '.9rem', lineHeight: 2 }}>
-              <span>{`[Learn more](/more)`}</span>
+            <div style={{ fontSize: '.9rem' }} className="leading-8">
+              <code>{`[Learn more](/more)`}</code>
               <br/>
-              <span>{`![Hero](/hero.png)`}</span>
+              <code>{`![Hero](/hero.png)`}</code>
             </div>
           </div>
+          <div className="flex justify-center text-neutral-400 mt-4">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
+            </svg>
+          </div>
           <div className={styles.optimization}>
-            <div style={{ fontSize: '.9rem', lineHeight: 2 }}>
-              <span>{`<Link .../>`}</span>
+            <div style={{ fontSize: '.9rem' }} className="leading-8">
+              <code>{`<Link .../>`}</code>
               <br/>
-              <span>{`<Image .../>`}</span>
+              <code>{`<Image .../>`}</code>
             </div>
           </div>
         </Feature>
@@ -293,7 +301,7 @@ export function I18n() {
         </Feature>
         <Feature large>
           <h3>And more...</h3>
-          <p>Nextra has [next-seo](https://github.com/garmeeh/next-seo) built in.</p>
+          <p>SEO built-in via [next-seo](https://github.com/garmeeh/next-seo).</p>
         </Feature>
       </Features>
       <p className="subtitle py-8"><Link href="/docs">Start Using Nextra →</Link></p>

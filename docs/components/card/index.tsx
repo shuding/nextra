@@ -66,8 +66,8 @@ export function Card({
       <span
         className={cn(
           styles.title,
-          'gap-2 p-4 text-gray-700 dark:text-neutral-400',
-          'hover:text-gray-900 dark:hover:text-neutral-100'
+          'gap-2 p-4 text-gray-700 dark:text-neutral-200',
+          'hover:text-gray-900 dark:hover:text-neutral-50'
         )}
       >
         {icon}
