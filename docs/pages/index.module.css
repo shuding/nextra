@@ -25,7 +25,8 @@
 
 .optimization {
   display: flex;
-  margin: 1rem 0;
+  justify-content: center;
+  margin: 1rem 0 0.25rem;
   padding: 1rem;
   background: #0e1116;
   color: white;

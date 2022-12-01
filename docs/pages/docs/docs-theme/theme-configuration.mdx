@@ -122,11 +122,13 @@ You can adjust the theme color of the website by setting a primary hue value to 
   ['primaryHue', 'number | { dark: number; light: number }', 'The hue of the primary theme color.'],
 ]}/>
 
-<div className='flex items-center gap-2'>Try it out for this website: <input type="range" min="0" max="360" onChange={e => {
-  const hue = e.target.value + 'deg'
-  document.documentElement.style.setProperty('--nextra-primary-hue', hue)
+Try it out for this website:
+
+<div className='flex items-center gap-2 mt-4 h-6'><input type="range" min="0" max="360" step="1" onChange={e => {
+  const hue = e.target.value
+  document.documentElement.style.setProperty('--nextra-primary-hue', hue + 'deg')
   document.getElementById('test-theme-hue').innerText = hue
-}} /><span id="test-theme-hue"></span></div>
+}} /><code id="test-theme-hue" className="text-sm text-gray-500"></code></div>
 
 ## Navbar
 
