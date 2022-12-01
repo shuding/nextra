@@ -15,17 +15,11 @@
     "title": "Showcase",
     "type": "page"
   },
-  "faq": {
-    "title": "FAQ",
-    "type": "menu",
-    "items": {
-      "about": {
-        "title": "About Nextra",
-        "href": "/docs/about"
-      },
-      "community": {
-        "title": "Community"
-      }
+  "about": {
+    "title": "About",
+    "type": "page",
+    "theme": {
+      "typesetting": "article"
     }
   }
 }

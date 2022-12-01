@@ -1,11 +1,11 @@
 {
   "organize-files": "Organize Files",
   "markdown": "Markdown",
+  "syntax-highlighting": "Syntax Highlighting",
   "ssg": "Next.js SSG",
   "i18n": "Next.js I18n",
   "image": "Next.js Image",
   "link": "Next.js Link",
   "typescript": "TypeScript",
-  "cms": "CMS",
   "advanced": "Advanced"
 }

@@ -380,12 +380,14 @@ Show an “Edit this page” link on the page that points to the file URL on Git
 
 ### Feedback Link
 
-The built-in feedback link provides a way for users to submit feedback about the documentation. By default, it’s a link that points to the issue creation form of the docs repository, with the current website title prefilled.
+The built-in feedback link provides a way for users to submit feedback about the documentation. By default, it’s a link that points to the issue creation form of the docs repository, with the current website title prefilled: [example](https://github.com/shuding/nextra/issues/new?title=Feedback%20for%20%E2%80%9CTheme%20Configuration%E2%80%9D&labels=feedback).
 
 <OptionTable options={[
-  ['feedback.content', 'React.ReactNode | React.FC', 'Content of the feedback link.'],
+  ['feedback.content', 'React.ReactNode | React.FC | undefined', 'Content of the feedback button.'],
   ['feedback.labels', 'string', 'Labels that can be added to the new created GitHub issue.'],
 ]}/>
+
+To disable it, you can set `feedback.content` to `undefined`.
 
 ## End of Page
 

@@ -42,7 +42,10 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     },
     text: 'Edit this page'
   },
-  feedback: {},
+  feedback: {
+    content: () => <>Question? Give us feedback →</>,
+    labels: 'feedback'
+  },
   footer: {
     component: Footer,
     text: `MIT ${new Date().getFullYear()} © Nextra.`
@@ -84,7 +87,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
   ),
   logoLink: true,
   navbar: {
-    component: Navbar,
+    component: Navbar
   },
   navigation: true,
   nextThemes: {
