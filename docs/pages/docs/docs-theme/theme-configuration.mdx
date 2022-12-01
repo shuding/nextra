@@ -18,114 +18,47 @@ Detailed information for each option is listed below.
 
 import { OptionTable } from 'components/table'
 
-## Project Link
+## Global
 
-Show a button that links to your project’s homepage on the navbar. By default, it links to Nextra’s GitHub repository.
+### Docs Repository
+
+Set the repository URL of the documentation. It’s used to generate the “[Edit this page](#edit-link)” link and the “[Feedback](#feedback-link)” link.
 
 <OptionTable options={[
-  ['project.link', 'string', 'URL of the project homepage.'],
-  ['project.icon', 'React.ReactNode | React.FC', 'Icon or element of the project link.'],
+  ['docsRepositoryBase', 'string', 'URL of the documentation repository.'],
 ]}/>
 
-### Use a custom icon
+#### Specify a Path
 
-You can configure `project.link` and `project.icon` to customize the project link, for example make it link to your GitLab repository:
-
-import projectLinkImage from '../../../public/assets/docs/project-link.png'
-
-<Screenshot src={projectLinkImage} alt="Project link" full />
+If the documentation is inside a monorepo, a subfolder, or a different branch of the repository, you can simply set the `docsRepositoryBase` to the root path of the `pages/` folder of your docs. For example:
 
 ```jsx
 export default {
-  project: {
-    link: 'https://gitlab.com/inkscape/inkscape',
-    icon: <svg width="24" height="24" viewBox="0 0 256 256"><path fill="currentColor" d="m231.9 169.8l-94.8 65.6a15.7 15.7 0 0 1-18.2 0l-94.8-65.6a16.1 16.1 0 0 1-6.4-17.3L45 50a12 12 0 0 1 22.9-1.1L88.5 104h79l20.6-55.1A12 12 0 0 1 211 50l27.3 102.5a16.1 16.1 0 0 1-6.4 17.3Z"></path></svg>,
-  },
+  docsRepositoryBase: 'https://github.com/shuding/nextra/blob/core/docs/pages',
 }
 ```
 
-If `icon` is missing, it will be a [GitHub icon](https://primer.style/octicons/mark-github-16) by default.
+Then Nextra will automatically generate the correct file path for all pages.
 
-## Chat Link
+### Title Suffix
 
-Show a button that links to your project’s forum or other social media on the navbar.
+In Nextra, the website title will be the content of `<h1>` of each page. If `<h1>` is missing, it will use the page title specified in the [page configuration](/docs/docs-theme/page-configuration). You can also provide a global suffix via the `titleSuffix` option.
 
 <OptionTable options={[
-  ['chat.link', 'string', 'URL of the chat link.'],
-  ['chat.icon', 'React.ReactNode | React.FC', 'Icon or element of the chat link.'],
+  ['titleSuffix', 'string | (() => string)', 'The title suffix.'],
 ]}/>
 
-### Customize chat link
+import titleSuffixImage from '../../../public/assets/docs/title-suffix.png'
 
-You can configure `chat.link` and `chat.icon` to customize the chat link, for example make it link to your Twitter account:
+<Screenshot src={titleSuffixImage} alt="Project link" />
 
 ```jsx
 export default {
-  chat: {
-    link: 'https://twitter.com/shuding',
-    icon: <svg width="24" height="24" viewBox="0 0 256 256"><path fill="currentColor" d="m231.9 169.8l-94.8 65.6a15.7 15.7 0 0 1-18.2 0l-94.8-65.6a16.1 16.1 0 0 1-6.4-17.3L45 50a12 12 0 0 1 22.9-1.1L88.5 104h79l20.6-55.1A12 12 0 0 1 211 50l27.3 102.5a16.1 16.1 0 0 1-6.4 17.3Z"></path></svg>,
-  },
+  titleSuffix: ' – SWR',
 }
 ```
 
-If `icon` is missing, it will be a Discord icon by default.
-
-## Banner
-
-Show a dismissable banner on the top of the website. It can be used to show a warning or a notice.
-
-<OptionTable options={[
-  ['banner.key', 'string', 'Storage key to keep the banner state (dismissed or not).'],
-  ['banner.content', 'React.ReactNode | React.FC', 'Content of the banner.'],
-]}/>
-
-### Banner key
-
-A banner can be dismissed. By default `banner.key` will be `"nextra-banner"` and it’s used by [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) to keep the banner state (dismissed or not) on the client.
-
-If you have updated your banner content, you should change the key to make sure the banner is shown again. The best practice is to always use a descriptive key for the current content, for example:
-
-import bannerImage from '../../../public/assets/docs/banner.png'
-
-<Screenshot src={bannerImage} alt="Banner" />
-
-```jsx
-export default {
-  banner: {
-    key: '2.0-release',
-    content: <a href="https://nextra.vercel.app" target="_blank">
-      🎉 Nextra 2.0 is released. Read more →
-    </a>,
-  },
-}
-```
-
-## Navigation
-
-Show previous and next page links on the bottom of the content. It’s useful for navigating between pages.
-
-<OptionTable options={[
-  ['navigation', 'boolean | object', 'Enable or disable navigation link.'],
-  ['navigation.prev', 'boolean', 'Enable or disable the previous page link.'],
-  ['navigation.next', 'boolean', 'Enable or disable the next page link.'],
-]}/>
-
-import navigationImage from '../../../public/assets/docs/navigation.png'
-
-<Screenshot src={navigationImage} alt="Navigation" full />
-
-```jsx
-export default {
-  navigation: {
-    prev: true,
-    next: true,
-  },
-}
-```
-
-The above is also equivalent to `navigation: true`.
-
-## Head Tags
+### Head Tags
 
 Configure the `<head>` tags of the website. You can add meta tags, title, favicon, etc.
 
@@ -133,7 +66,7 @@ Configure the `<head>` tags of the website. You can add meta tags, title, favico
   ['head', 'React.ReactNode | React.FC', <>Component that renders the <code>{'<head>'}</code> content.</>],
 ]}/>
 
-### Static head tags
+#### Static head tags
 
 If you have only static head tags, it’s easy to directly put them in `head`. For example:
 
@@ -149,7 +82,7 @@ export default {
 }
 ```
 
-### Dynamic tags based on page
+#### Dynamic tags based on page
 
 You can also use a _function component_ as `head` to dynamically generate the head tags based on the current page’s front matter. For example:
 
@@ -172,15 +105,177 @@ export default {
 
 You can refer to the [`useConfig`](/docs/docs-theme/api/use-config) API section for more information about the `useConfig` hook and the `frontMatter` object.
 
+### Dark Mode and Themes
+
+Customize the theme behavior of the website.
+
+<OptionTable options={[
+  ['darkMode', 'boolean', 'Show or hide the dark mode toggle button.'],
+  ['nextThemes', 'object', <>Configuration for the <a href="https://github.com/pacocoursey/next-themes#themeprovider" target="_blank">next-themes</a> package.</>],
+]}/>
+
+### Theme Color
+
+You can adjust the theme color of the website by setting a primary hue value to dark or light themes.
+
+<OptionTable options={[
+  ['primaryHue', 'number | { dark: number; light: number }', 'The hue of the primary theme color.'],
+]}/>
+
+<div className='flex items-center gap-2'>Try it out for this website: <input type="range" min="0" max="360" onChange={e => {
+  const hue = e.target.value + 'deg'
+  document.documentElement.style.setProperty('--nextra-primary-hue', hue)
+  document.getElementById('test-theme-hue').innerText = hue
+}} /><span id="test-theme-hue"></span></div>
+
+## Navbar
+
+### Logo
+
+The logo of the website rendered on the navbar. It can be a React node or a function component.
+
+<OptionTable options={[
+  ['logo', 'React.ReactNode | React.FC', 'Logo of the website.'],
+]}/>
+
+import logoImage from '../../../public/assets/docs/logo.png'
+
+<Screenshot src={logoImage} alt="Customized Logo" />
+
+<div className="text-center text-sm mt-8">[Live example on StackBlitz ↗](https://stackblitz.com/edit/nextra-2-docs-yrlccm?file=theme.config.jsx)</div>
+
+```jsx
+export default {
+  logo: (
+    <>
+      <svg width="24" height="24" viewBox="0 0 24 24">
+        <path
+          fill="currentColor"
+          d="M14.683 14.828a4.055 4.055 0 0 1-1.272.858a4.002 4.002 0 0 1-4.875-1.45l-1.658 1.119a6.063 6.063 0 0 0 1.621 1.62a5.963 5.963 0 0 0 2.148.903a6.035 6.035 0 0 0 3.542-.35a6.048 6.048 0 0 0 1.907-1.284c.272-.271.52-.571.734-.889l-1.658-1.119a4.147 4.147 0 0 1-.489.592z M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10s10-4.486 10-10S17.514 2 12 2zm0 2c2.953 0 5.531 1.613 6.918 4H5.082C6.469 5.613 9.047 4 12 4zm0 16c-4.411 0-8-3.589-8-8c0-.691.098-1.359.264-2H5v1a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2h2a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-1h.736c.166.641.264 1.309.264 2c0 4.411-3.589 8-8 8z"
+        />
+      </svg>
+      <span style={{ marginLeft: '.4em', fontWeight: 800 }}>
+        My Cool Project
+      </span>
+    </>
+  ),
+}
+```
+
+### Project Link
+
+Show a button that links to your project’s homepage on the navbar. By default, it links to Nextra’s GitHub repository.
+
+<OptionTable options={[
+  ['project.link', 'string', 'URL of the project homepage.'],
+  ['project.icon', 'React.ReactNode | React.FC', 'Icon or element of the project link.'],
+]}/>
+
+You can configure `project.link` and `project.icon` to customize the project link, for example make it link to your GitLab repository:
+
+import projectLinkImage from '../../../public/assets/docs/project-link.png'
+
+<Screenshot src={projectLinkImage} alt="Project link" full />
+
+```jsx
+export default {
+  project: {
+    link: 'https://gitlab.com/inkscape/inkscape',
+    icon: <svg width="24" height="24" viewBox="0 0 256 256"><path fill="currentColor" d="m231.9 169.8l-94.8 65.6a15.7 15.7 0 0 1-18.2 0l-94.8-65.6a16.1 16.1 0 0 1-6.4-17.3L45 50a12 12 0 0 1 22.9-1.1L88.5 104h79l20.6-55.1A12 12 0 0 1 211 50l27.3 102.5a16.1 16.1 0 0 1-6.4 17.3Z"></path></svg>,
+  },
+}
+```
+
+If `icon` is missing, it will be a [GitHub icon](https://primer.style/octicons/mark-github-16) by default.
+
+### Chat Link
+
+Show a button that links to your project’s forum or other social media on the navbar.
+
+<OptionTable options={[
+  ['chat.link', 'string', 'URL of the chat link.'],
+  ['chat.icon', 'React.ReactNode | React.FC', 'Icon or element of the chat link.'],
+]}/>
+
+You can configure `chat.link` and `chat.icon` to customize the chat link, for example make it link to your Twitter account:
+
+```jsx
+export default {
+  chat: {
+    link: 'https://twitter.com/shuding',
+    icon: <svg width="24" height="24" viewBox="0 0 256 256"><path fill="currentColor" d="m231.9 169.8l-94.8 65.6a15.7 15.7 0 0 1-18.2 0l-94.8-65.6a16.1 16.1 0 0 1-6.4-17.3L45 50a12 12 0 0 1 22.9-1.1L88.5 104h79l20.6-55.1A12 12 0 0 1 211 50l27.3 102.5a16.1 16.1 0 0 1-6.4 17.3Z"></path></svg>,
+  },
+}
+```
+
+If `icon` is missing, it will be a Discord icon by default.
+
+### Menu and Custom Links
+
+Check out [Page Configuration](/docs/docs-theme/page-configuration#navbar-items) to learn how to add custom menus or links to the navbar.
+
+### Search
+
+<OptionTable options={[
+  ['search.component', `React.ReactNode | React.FC<{
+  className?: string
+  directories: Item[]
+}>`, ''],
+  ['search.emptyResult', 'React.ReactNode | React.FC', ''],
+  ['search.placeholder', 'string | (() => string)', ''],
+]}/>
+
+### Banner
+
+Show a dismissable banner on the top of the website. It can be used to show a warning or a notice.
+
+<OptionTable options={[
+  ['banner.key', 'string', 'Storage key to keep the banner state (dismissed or not).'],
+  ['banner.content', 'React.ReactNode | React.FC', 'Content of the banner.'],
+]}/>
+
+#### Banner key
+
+A banner can be dismissed. By default `banner.key` will be `"nextra-banner"` and it’s used by [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) to keep the banner state (dismissed or not) on the client.
+
+If you have updated your banner content, you should change the key to make sure the banner is shown again. The best practice is to always use a descriptive key for the current content, for example:
+
+import bannerImage from '../../../public/assets/docs/banner.png'
+
+<Screenshot src={bannerImage} alt="Banner" />
+
+```jsx
+export default {
+  banner: {
+    key: '2.0-release',
+    content: <a href="https://nextra.vercel.app" target="_blank">
+      🎉 Nextra 2.0 is released. Read more →
+    </a>,
+  },
+}
+```
+
+### Customize the Navbar
+
+Customize the entire navbar component.
+
+<OptionTable options={[
+  ['navbar', 'React.ReactNode | React.FC<NavBarProps>', 'Navbar component.'],
+]}/>
+
 ## Sidebar
 
 <OptionTable options={[
-  ['sidebar.defaultMenuCollapseLevel', 'number', 'Specifies the folder level at which the menu on the left is collapsed by default.'],
+  ['sidebar.defaultMenuCollapseLevel', 'number', 'Specifies the folder level at which the menu on the left is collapsed by default. Defaults to 2.'],
   ['sidebar.titleComponent', `React.ReactNode | React.FC<{
   type: string;
   title: string
 }>`, 'Custom renderer for sidebar titles.'],
 ]}/>
+
+### Menu Collapse Level
+
+By default, the sidebar menu is collapsed at level `2`. You can change it by setting `sidebar.defaultMenuCollapseLevel` to a different number. For example, when set to `0`, every folder will be collapsed by default and when set to `Infinity`, all nested folders will be expanded by default.
 
 ### Customize sidebar content
 
@@ -229,23 +324,103 @@ import sidebarTitleComponentImage from '../../../public/assets/docs/sidebar-cust
   </Tab>
 </Tabs>
 
-## Title
+## Content
 
-In Nextra, the website title will be the content of `<h1>` of each page. If `<h1>` is missing, it will use the page title specified in the [page configuration](/docs/docs-theme/page-configuration). You can also provide a global suffix via the `titleSuffix` option.
+### MDX Components
+
+Provide custom [MDX components](https://mdxjs.com/table-of-components/) to render the content. For example, you can use a custom `pre` component to render code blocks.
 
 <OptionTable options={[
-  ['titleSuffix', 'string | (() => string)', 'The title suffix.'],
+  ['components', 'Record<string, React.FC>', 'Custom MDX components.'],
 ]}/>
 
-import titleSuffixImage from '../../../public/assets/docs/title-suffix.png'
+### Writing Direction
 
-<Screenshot src={titleSuffixImage} alt="Project link" />
+The default writing direction of the website.
+
+<OptionTable options={[
+  ['direction', '"ltr" | "rtl"', 'Default writing direction.'],
+]}/>
+
+### Extra Content
+
+Render extra content at the end of the main area of the page. It can be used to render a comment section, a newsletter form, or any other type of content.
+
+<OptionTable options={[
+  ['main.extraContent', 'React.ReactNode | React.FC', 'Extra content after the main content.'],
+]}/>
+
+## TOC Sidebar
+
+### Table of Contents
+
+Show a table of contents on the right side of the page. It’s useful for navigating between headings.
+
+<OptionTable options={[
+  ['toc.float', 'boolean', 'Float the TOC next to the content.'],
+  ['toc.component', 'boolean', 'Float the TOC next to the content.'],
+  ['toc.extraContent', 'boolean', 'Float the TOC next to the content.'],
+  ['toc.title', 'React.ReactNode | React.FC', 'Float the TOC next to the content.'],
+]}/>
+
+#### Floating TOC
+
+### Edit Link
+
+Show an “Edit this page” link on the page that points to the file URL on GitHub (or other places).
+
+<OptionTable options={[
+  ['editLink.content', 'React.ReactNode | React.FC', 'Content of the default edit link.'],
+  ['editLink.component', `React.FC<{
+  children: React.ReactNode
+  className?: string
+  filePath?: string
+}>`, 'Customized edit link component.'],
+]}/>
+
+### Feedback Link
+
+The built-in feedback link provides a way for users to submit feedback about the documentation. By default, it’s a link that points to the issue creation form of the docs repository, with the current website title prefilled.
+
+<OptionTable options={[
+  ['feedback.content', 'React.ReactNode | React.FC', 'Content of the feedback link.'],
+  ['feedback.labels', 'string', 'Labels that can be added to the new created GitHub issue.'],
+]}/>
+
+## End of Page
+
+### Navigation
+
+Show previous and next page links on the bottom of the content. It’s useful for navigating between pages.
+
+<OptionTable options={[
+  ['navigation', 'boolean | object', 'Enable or disable navigation link.'],
+  ['navigation.prev', 'boolean', 'Enable or disable the previous page link.'],
+  ['navigation.next', 'boolean', 'Enable or disable the next page link.'],
+]}/>
+
+import navigationImage from '../../../public/assets/docs/navigation.png'
+
+<Screenshot src={navigationImage} alt="Navigation" full />
 
 ```jsx
 export default {
-  titleSuffix: ' – SWR',
+  navigation: {
+    prev: true,
+    next: true,
+  },
 }
 ```
+
+The above is also equivalent to `navigation: true`.
+
+### Last Updated Date
+
+Show the last updated date of each page. It’s useful for showing the freshness of the content.
+
+<OptionTable options={[
+  ['gitTimestamp', 'React.ReactNode | React.FC<{ timestamp: Date }>', 'Component to render the last updated info.'],
+]}/>
 
 ## Footer
 
@@ -270,168 +445,11 @@ export default {
 }
 ```
 
-## Edit Link
-
-Show an “Edit this page” link on the page that points to the file URL on GitHub (or other places).
-
-<OptionTable options={[
-  ['editLink.content', 'React.ReactNode | React.FC', 'Content of the default edit link.'],
-  ['editLink.component', `React.FC<{
-  children: React.ReactNode
-  className?: string
-  filePath?: string
-}>`, 'Customized edit link component.'],
-]}/>
-
-## Feedback Link
-
-The built-in feedback link provides a way for users to submit feedback about the documentation. By default, it’s a link that points to the issue creation form of the docs repository, with the current website title prefilled.
-
-<OptionTable options={[
-  ['feedback.content', 'React.ReactNode | React.FC', 'Content of the feedback link.'],
-  ['feedback.labels', 'string', 'Labels that can be added to the new created GitHub issue.'],
-]}/>
-
-## Logo
-
-The logo of the website rendered on the navbar. It can be any React node.
-
-<OptionTable options={[
-  ['logo', 'React.ReactNode | React.FC', 'Logo of the website.'],
-]}/>
-
-import logoImage from '../../../public/assets/docs/logo.png'
-
-<Screenshot src={logoImage} alt="Customized Logo" />
-
-<div className="text-center text-sm mt-8">[Live example on StackBlitz ↗](https://stackblitz.com/edit/nextra-2-docs-yrlccm?file=theme.config.jsx)</div>
-
-```jsx
-export default {
-  logo: (
-    <>
-      <svg width="24" height="24" viewBox="0 0 24 24">
-        <path
-          fill="currentColor"
-          d="M14.683 14.828a4.055 4.055 0 0 1-1.272.858a4.002 4.002 0 0 1-4.875-1.45l-1.658 1.119a6.063 6.063 0 0 0 1.621 1.62a5.963 5.963 0 0 0 2.148.903a6.035 6.035 0 0 0 3.542-.35a6.048 6.048 0 0 0 1.907-1.284c.272-.271.52-.571.734-.889l-1.658-1.119a4.147 4.147 0 0 1-.489.592z M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10s10-4.486 10-10S17.514 2 12 2zm0 2c2.953 0 5.531 1.613 6.918 4H5.082C6.469 5.613 9.047 4 12 4zm0 16c-4.411 0-8-3.589-8-8c0-.691.098-1.359.264-2H5v1a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2h2a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-1h.736c.166.641.264 1.309.264 2c0 4.411-3.589 8-8 8z"
-        />
-      </svg>
-      <span style={{ marginLeft: '.4em', fontWeight: 800 }}>
-        My Cool Project
-      </span>
-    </>
-  ),
-}
-```
-
-## Table of Contents
-
-Show a table of contents on the right side of the page. It’s useful for navigating between headings.
-
-<OptionTable options={[
-  ['toc.float', 'boolean', 'Float the TOC next to the content.'],
-  ['toc.component', 'boolean', 'Float the TOC next to the content.'],
-  ['toc.extraContent', 'boolean', 'Float the TOC next to the content.'],
-  ['toc.title', 'React.ReactNode | React.FC', 'Float the TOC next to the content.'],
-]}/>
-
-### Floating TOC
-
-## Extra Content
-
-Render extra content at the end of the main area of the page. It can be used to render a comment section, a newsletter form, or any other type of content.
-
-<OptionTable options={[
-  ['main.extraContent', 'React.ReactNode | React.FC', 'Extra content after the main content.'],
-]}/>
-
-## MDX Components
-
-Provide custom [MDX components](https://mdxjs.com/table-of-components/) to render the content. For example, you can use a custom `pre` component to render code blocks.
-
-<OptionTable options={[
-  ['components', 'Record<string, React.FC>', 'Custom MDX components.'],
-]}/>
-
-## Writing Direction
-
-The default writing direction of the website.
-
-<OptionTable options={[
-  ['direction', '"ltr" | "rtl"', 'Default writing direction.'],
-]}/>
-
-## Docs Repository
-
-Set the repository URL of the documentation. It’s used to generate the “[Edit this page](#edit-link)” link and the “[Feedback](#feedback-link)” link.
-
-<OptionTable options={[
-  ['docsRepositoryBase', 'string', 'URL of the documentation repository.'],
-]}/>
-
-### Specify path
-
-If the documentation is inside a monorepo, a subfolder, or a different branch of the repository, you can simply set the `docsRepositoryBase` to the root path of the `pages/` folder of your docs. For example:
-
-```jsx
-export default {
-  docsRepositoryBase: 'https://github.com/shuding/nextra/blob/core/docs/pages',
-}
-```
-
-Then Nextra will automatically generate the correct file path for all pages.
-
-## Last Updated Date
-
-Show the last updated date of each page. It’s useful for showing the freshness of the content.
-
-<OptionTable options={[
-  ['gitTimestamp', 'React.ReactNode | React.FC<{ timestamp: Date }>', 'Component to render the last updated info.'],
-]}/>
-
-## I18n
-
-## Navbar
-
-Customize the navbar of the website.
-
-<OptionTable options={[
-  ['navbar', 'React.ReactNode | React.FC<NavBarProps>', 'Navbar component.'],
-]}/>
-
-## Dark Mode and Themes
-
-Customize the theme behavior of the website.
-
-<OptionTable options={[
-  ['darkMode', 'boolean', 'Show or hide the dark mode toggle button.'],
-  ['nextThemes', '', ''],
-]}/>
-
-## Theme Color
-
-You can adjust the theme color of the website.
-
-<OptionTable options={[
-  ['primaryHue', 'number | { dark: number; light: number }', 'The hue of the primary theme color.'],
-]}/>
-
 ## Error Pages
 
 ### 404 - Not Found
 
 ### 500 - Internal Server Error
-
-## Search
-
-<OptionTable options={[
-  ['search.component', `React.ReactNode | React.FC<{
-  className?: string
-  directories: Item[]
-}>`, ''],
-  ['search.emptyResult', 'React.ReactNode | React.FC', ''],
-  ['search.placeholder', 'string | (() => string)', ''],
-]}/>
 
 ## Favicon Glyph (Experimental)
 
