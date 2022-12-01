@@ -3,7 +3,16 @@ import Link from 'next/link'
 
 import styles from './style.module.css'
 
-export function Card({ children, title, icon, image, arrow, href, ...props }) {
+export function Card({
+  children,
+  title,
+  icon,
+  image,
+  arrow,
+  demo,
+  href,
+  ...props
+}) {
   const animatedArrow = arrow ? (
     <span
       className={cn(
@@ -21,8 +30,8 @@ export function Card({ children, title, icon, image, arrow, href, ...props }) {
         href={href}
         className={cn(
           styles.card,
-          'group flex flex-col justify-start overflow-hidden rounded-lg border border-transparent bg-gray-100 text-current no-underline shadow shadow-gray-200 transition-all duration-200',
-          'hover:border-gray-200 hover:shadow-lg hover:shadow-gray-200'
+          'group flex flex-col justify-start overflow-hidden rounded-lg border border-gray-200 bg-gray-100 text-current no-underline shadow shadow-gray-100 transition-all duration-200',
+          'hover:border-gray-300 hover:shadow-lg hover:shadow-gray-100'
         )}
         {...props}
       >
@@ -30,13 +39,15 @@ export function Card({ children, title, icon, image, arrow, href, ...props }) {
         <span
           className={cn(
             styles.title,
-            'gap-1 p-4 text-gray-700',
+            'gap-2 p-4 text-gray-700',
             'hover:text-gray-900'
           )}
         >
           {icon}
-          {title}
-          {animatedArrow}
+          <span className="flex gap-1">
+            {title}
+            {animatedArrow}
+          </span>
         </span>
       </Link>
     )
@@ -47,15 +58,15 @@ export function Card({ children, title, icon, image, arrow, href, ...props }) {
       href={href}
       className={cn(
         styles.card,
-        'group flex flex-col justify-start overflow-hidden rounded-lg border border-transparent bg-gray-100 text-current no-underline shadow shadow-transparent transition-all duration-200',
-        'hover:border-gray-200 hover:shadow-md hover:shadow-gray-100'
+        'group flex flex-col justify-start overflow-hidden rounded-lg border border-gray-200 text-current no-underline shadow-sm shadow-gray-100 transition-all duration-200',
+        'hover:border-gray-300 hover:bg-slate-50 hover:shadow-md hover:shadow-gray-100'
       )}
       {...props}
     >
       <span
         className={cn(
           styles.title,
-          'gap-1 p-4 text-gray-700',
+          'gap-2 p-4 text-gray-700',
           'hover:text-gray-900'
         )}
       >
@@ -67,9 +78,18 @@ export function Card({ children, title, icon, image, arrow, href, ...props }) {
   )
 }
 
-export function Cards({ children, ...props }) {
+export function Cards({ children, num, ...props }) {
   return (
-    <div className={cn(styles.cards, 'mt-4 gap-4')} {...props}>
+    <div
+      className={cn(styles.cards, 'mt-4 gap-4')}
+      {...props}
+      style={
+        {
+          '--rows': num || 3,
+          ...props.style
+        } as any
+      }
+    >
       {children}
     </div>
   )

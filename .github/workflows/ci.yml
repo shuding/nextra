@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [16, 18]
+        node-version: [18]
         os: [ubuntu-latest, windows-latest]
 
     steps:

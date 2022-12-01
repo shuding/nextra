@@ -2,6 +2,8 @@
 
 import { Callout, Tab, Tabs } from 'nextra-theme-docs'
 
+Nextra Docs Theme is a theme that includes almost everything you need to build a modern documentation website. It includes a top navigation bar, a search bar, a pages sidebar, a TOC sidebar, and other built-in components.
+
 ## Quick Start from Template
 
 {/* You can start by creating your own Nextra site and deploying to Vercel by clicking the link: */}
@@ -16,39 +18,9 @@ import { Callout, Tab, Tabs } from 'nextra-theme-docs'
 
 (todo)
 
-## Start from Empty Project
+## Start as New Project
 
 <div className="steps-container">
-  <style jsx>{`
-    .steps-container {
-      margin-left: 1rem;
-      padding-left: 1.5rem;
-      counter-reset: step;
-      border-left: 1px solid;
-      border-color: rgb(229 231 235/1);
-    }
-    .steps-container :global(h3) {
-      counter-increment: step;
-    }
-    .steps-container :global(h3):before {
-      content: counter(step);
-      display: inline-block;
-      position: absolute;
-      margin-top: 3px;
-      margin-left: -41px;
-      width: 33px;
-      height: 33px;
-      text-align: center;
-      text-indent: -1px;
-      color: #999;
-      border-radius: 100%;
-      border: 4px solid #fff;
-      background: #f3f3f3;
-      line-height: 1.5rem;
-      font-size: 1rem;
-      font-weight: 400;
-    }
-  `}</style>
 
 ### Install
 
@@ -72,7 +44,7 @@ To create a Nextra Docs site manually, you have to install **Next.js**, **React*
   </Tab>
 </Tabs>
 
-Like any Next.js projects, you need to also add `scripts` to your `package.json`:
+Like any Next.js projects, you need to also add the following scripts to your `package.json` file:
 
 ```json filename="package.json"
 {
@@ -84,9 +56,11 @@ Like any Next.js projects, you need to also add `scripts` to your `package.json`
 }
 ```
 
-If you already have Next.js running, you only need to install `nextra` and `nextra-theme-docs` as the add-ons.
+<Callout>
+  If you already have Next.js installed in your project, you only need to install `nextra` and `nextra-theme-docs` as the add-ons.
+</Callout>
 
-### Create Nextra Config
+### Add Next.js Config
 
 Create the following `next.config.js` file in your project’s root directory:
 
@@ -97,14 +71,14 @@ const withNextra = require('nextra')({
 })
 
 module.exports = withNextra()
-// or module.exports = withNextra({ /* other next.js config */ })
+
+// If you have other Next.js configurations, you can pass them as the parameter:
+// module.exports = withNextra({ /* other next.js config */ })
 ```
 
-Here you can configure Nextra to propoerly handle your Markdown files. With the above configurations, Nextra will first compile the content to JSX, and then render the site with configured theme.
+With the above configuration, Nextra can handle Markdown files in your Next.js project, with the specified theme. Full Nextra configurations can be found here:
 
 import { Card, Cards } from '@components/card'
-
-Full Nextra configurations can be found here:
 
 import switchIcon from '@components/icons/switch'
 
@@ -114,7 +88,7 @@ import switchIcon from '@components/icons/switch'
 
 ### Create Docs Theme Config
 
-Lastly, create the corresponding `theme.config.jsx` file in your project’s root directory:
+Lastly, create the corresponding `theme.config.jsx` file in your project’s root directory. This will be used to configure the Nextra Docs theme:
 
 ```jsx filename="theme.config.jsx"
 export default {
@@ -123,15 +97,15 @@ export default {
 }
 ```
 
-More configuration options for the docs theme can be found here:
+More options for this theme can be found here:
 
 <Cards>
-  <Card icon={switchIcon} title="Configure Docs Theme" href="/docs/docs-theme/configuration"/>
+  <Card icon={switchIcon} title="Configure Docs Theme" href="/docs/docs-theme/theme-configuration"/>
 </Cards>
 
 ### Ready to Go!
 
-Now, you can create an initial MDX page:
+Now, you can create your first MDX page in `pages/index.mdx`:
 
 ```mdx filename="pages/index.mdx"
 # Welcome to Nextra
@@ -146,3 +120,5 @@ pnpm dev
 ```
 
 </div>
+
+Next step, check out the next section to learn about organizing your documentation pages.

@@ -1,0 +1,5 @@
+---
+'nextra': patch
+---
+
+Update docs

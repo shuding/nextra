@@ -5,7 +5,7 @@ const TAILWIND_CONFIG = {
     'tailwindcss/enforces-negative-arbitrary-values': 'error',
     'tailwindcss/enforces-shorthand': 'error',
     'tailwindcss/migration-from-tailwind-2': 'error',
-    'tailwindcss/no-custom-classname': 'error'
+    'tailwindcss/no-custom-classname': 'warn'
   }
 }
 
@@ -94,7 +94,14 @@ module.exports = {
         tailwindcss: {
           config: 'docs/tailwind.config.js',
           callees: ['cn'],
-          whitelist: ['dash-ring', 'theme-1', 'theme-2', 'theme-3', 'theme-4', 'border-primary-100/10$']
+          whitelist: [
+            'dash-ring',
+            'theme-1',
+            'theme-2',
+            'theme-3',
+            'theme-4',
+            'border-primary-100/10$'
+          ]
         }
       }
     }

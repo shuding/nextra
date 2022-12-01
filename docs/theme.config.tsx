@@ -85,16 +85,24 @@ const config: DocsThemeConfig = {
       />
     </>
   ),
-  banner: {
-    key: '2.0-release',
-    text: (
-      <a href="https://nextra.vercel.app" target="_blank" rel="noreferrer">
-        🎉 Nextra 2.0 is released. Read more →
-      </a>
-    )
-  },
+  // banner: {
+  //   key: '2.0-release',
+  //   text: (
+  //     <a href="https://nextra.vercel.app" target="_blank" rel="noreferrer">
+  //       🎉 Nextra 2.0 is released. Read more →
+  //     </a>
+  //   )
+  // },
   editLink: {
     text: 'Edit this page on GitHub'
+  },
+  sidebar: {
+    titleComponent: ({ title, type }) => {
+      if (type === 'separator') {
+        return <b>{title}!!!!</b>
+      }
+      return <>{title}</>
+    }
   }
 }
 
