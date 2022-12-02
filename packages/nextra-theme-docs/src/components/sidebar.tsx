@@ -363,7 +363,7 @@ export function Sidebar({
       ) : null}
       <div
         className={cn(
-          '[transition:background-color_1.5s_ease] motion-reduce:nx-transition-none',
+          'motion-reduce:nx-transition-none [transition:background-color_1.5s_ease]',
           menu
             ? 'nx-fixed nx-inset-0 nx-z-10 nx-bg-black/80 dark:nx-bg-black/60'
             : 'nx-bg-transparent'
@@ -381,21 +381,14 @@ export function Sidebar({
         )}
         ref={containerRef}
       >
-        <div
-          className={cn(
-            'nx-z-[1]', // for bottom box shadow
-            'nx-p-4 md:nx-hidden',
-            'nx-shadow-[0_2px_14px_6px_#fff] dark:nx-shadow-[0_2px_14px_6px_#111]',
-            'contrast-more:nx-shadow-none dark:contrast-more:nx-shadow-none'
-          )}
-        >
+        <div className={'nx-px-4 nx-pt-4 md:nx-hidden'}>
           {renderComponent(config.search.component, {
             directories: flatDirectories
           })}
         </div>
         <div
           className={cn(
-            'nextra-scrollbar nx-overflow-y-auto nx-px-4 nx-pb-4 md:nx-pt-4',
+            'nextra-scrollbar nx-overflow-y-auto nx-p-4',
             'nx-grow md:nx-h-[calc(100vh-var(--nextra-navbar-height)-3.75rem)]'
           )}
           ref={sidebarRef}

@@ -169,7 +169,7 @@ export class NextraPlugin {
     compiler.hooks.beforeCompile.tapAsync(
       'NextraPlugin',
       async (_, callback) => {
-        if (this.config?.unstable_flexsearch) {
+        if (this.config?.flexsearch) {
           // Restore the search data from the cache.
           restoreCache()
         }

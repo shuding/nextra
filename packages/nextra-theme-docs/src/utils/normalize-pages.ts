@@ -249,6 +249,9 @@ export function normalizePages({
     const pageItem: PageItem = getItem()
 
     docsItem.isUnderCurrentDocsTree = isCurrentDocsTree
+    if (type === 'separator') {
+      item.isUnderCurrentDocsTree = isCurrentDocsTree
+    }
 
     // This item is currently active, we collect the active path etc.
     if (a.route === route) {
