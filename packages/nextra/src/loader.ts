@@ -68,7 +68,7 @@ async function loader(
     defaultShowCopyCode,
     flexsearch,
     staticImage,
-    readingTime,
+    readingTime: _readingTime,
     mdxOptions,
     pageMapCache,
     newNextLinkBehavior
@@ -123,7 +123,7 @@ async function loader(
           jsx: true,
           outputFormat: 'program'
         },
-        readingTime,
+        readingTime: _readingTime,
         defaultShowCopyCode,
         staticImage,
         flexsearch
