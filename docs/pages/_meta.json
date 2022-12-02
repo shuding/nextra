@@ -14,7 +14,10 @@
   "showcase": {
     "title": "Showcase",
     "type": "page",
-    "display": "hidden"
+    "theme": {
+      "typesetting": "article",
+      "layout": "full"
+    }
   },
   "about": {
     "title": "About",
