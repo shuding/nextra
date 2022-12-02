@@ -10,7 +10,6 @@ export default {
     link: 'https://github.com/shuding/nextra',
   },
   logo: <strong>Project</strong>,
-  titleSuffix: ' – Project',
 }
 ```
 
@@ -40,21 +39,46 @@ export default {
 
 Then Nextra will automatically generate the correct file path for all pages.
 
-### Title Suffix
+### SEO Options
 
-In Nextra, the website title will be the content of `<h1>` of each page. If `<h1>` is missing, it will use the page title specified in the [page configuration](/docs/docs-theme/page-configuration). You can also provide a global suffix via the `titleSuffix` option.
+You can configure SEO related settings via the `useNextSeoProps` option. The `useNextSeoProps` function returns the props that will be passed to the [Next SEO](https://github.com/garmeeh/next-seo#add-seo-to-page) component. 
+
+It is also a hook so you can use APIs like `useRouter` inside to return values conditionally.
 
 <OptionTable options={[
-  ['titleSuffix', 'string | (() => string)', 'The title suffix.'],
+  ['useNextSeoProps', '(() => NextSeoProps)', 'A React hook function that returns options for Next SEO.'],
 ]}/>
+
+For example, we can have all pages rendering the same suffix for `<title>`:
 
 import titleSuffixImage from '../../../public/assets/docs/title-suffix.png'
 
-<Screenshot src={titleSuffixImage} alt="Project link" />
+<Screenshot src={titleSuffixImage} alt="Title suffix" />
 
 ```jsx
 export default {
-  titleSuffix: ' – SWR',
+  useNextSeoProps() {
+    return {
+      titleTemplate: '%s – SWR'
+    }
+  },
+}
+```
+
+The `%s` is a [placeholder](https://github.com/garmeeh/next-seo#title-template) that will be replaced by the page title.
+
+You can also return it conditionally to avoid adding the suffix to the homepage:
+
+```jsx
+export default {
+  useNextSeoProps() {
+    const { route } = useRouter()
+    if (route !== '/') {
+      return {
+        titleTemplate: '%s – SWR'
+      }
+    }
+  },
 }
 ```
 

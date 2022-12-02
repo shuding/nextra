@@ -8,6 +8,13 @@ export const LOCALE_REGEX = /\.([a-z]{2}(-[A-Z]{2})?)$/
 
 export const DEFAULT_LOCALE = 'en-US'
 
+export const DEFAULT_CONFIG = {
+  staticImage: true,
+  flexsearch: {
+    codeblocks: true
+  }
+}
+
 export const OFFICIAL_THEMES = [
   'nextra-theme-docs',
   'nextra-theme-blog'
