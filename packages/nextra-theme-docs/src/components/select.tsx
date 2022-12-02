@@ -79,7 +79,7 @@ export function Select({
                         ? 'nx-bg-primary-50 nx-text-primary-500 dark:nx-bg-primary-500/10'
                         : 'nx-text-gray-800 dark:nx-text-gray-100',
                       'nx-relative nx-cursor-pointer nx-whitespace-nowrap nx-py-1.5',
-                      'ltr:nx-pl-3 ltr:nx-pr-9 rtl:nx-pr-3 rtl:nx-pl-9 nx-transition-colors'
+                      'nx-transition-colors ltr:nx-pl-3 ltr:nx-pr-9 rtl:nx-pr-3 rtl:nx-pl-9'
                     )
                   }
                 >
