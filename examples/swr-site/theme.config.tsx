@@ -121,12 +121,6 @@ const config: DocsThemeConfig = {
       );
     },
   },
-  getNextSeoProps() {
-    const { locale } = useRouter();
-    return {
-      titleTemplate: `%s | SWR (${locale})`,
-    };
-  },
   gitTimestamp: ({ timestamp }) => <>Last updated on {timestamp.toString()}</>,
   head() {
     const config = useConfig();
@@ -217,6 +211,12 @@ const config: DocsThemeConfig = {
   toc: {
     extraContent: <img src="https://placekitten.com/g/300/200" />,
     float: true,
+  },
+  useNextSeoProps() {
+    const { locale } = useRouter();
+    return {
+      titleTemplate: `%s | SWR (${locale})`,
+    };
   },
 };
 
