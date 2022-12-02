@@ -1,5 +1,15 @@
 # nextra-theme-docs
 
+## 2.0.0-beta.44
+
+### Patch Changes
+
+- 94ef0b3: improve 2.0 docs
+- fdb2f57: update docs to use next.js 13
+- b1d7361: improve docs for 2.0
+- 74a3398: update docs for 2.0
+- d7f2bbc: adjust docs theme; rename options
+
 ## 2.0.0-beta.43
 
 ### Patch Changes
