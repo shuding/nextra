@@ -50,7 +50,6 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     component: Footer,
     text: `MIT ${new Date().getFullYear()} © Nextra.`
   },
-  getNextSeoProps: () => ({ titleTemplate: '%s – Nextra' }),
   gitTimestamp({ timestamp }) {
     const { locale = DEFAULT_LOCALE } = useRouter()
     return (
@@ -151,7 +150,8 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     component: TOC,
     float: true,
     title: 'On This Page'
-  }
+  },
+  useNextSeoProps: () => ({ titleTemplate: '%s – Nextra' })
 }
 
 export const DEEP_OBJECT_KEYS = Object.entries(DEFAULT_THEME)

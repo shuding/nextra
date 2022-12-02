@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  font-feature-settings: 'rlig' 1, 'calt' 1;
+}
+
 .home-content p {
   margin-top: 1.5em;
   line-height: 1.75em;

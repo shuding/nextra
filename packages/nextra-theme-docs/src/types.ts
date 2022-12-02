@@ -48,7 +48,6 @@ export interface DocsThemeConfig {
     component: ReactNode | FC<{ menu: boolean }>
     text: ReactNode | FC
   }
-  getNextSeoProps?: () => NextSeoProps
   gitTimestamp: ReactNode | FC<{ timestamp: Date }>
   head: ReactNode | FC
   i18n: { direction?: string; locale: string; text: string }[]
@@ -56,7 +55,7 @@ export interface DocsThemeConfig {
   logoLink?: boolean | string
   main?: FC<{ children: ReactNode }>
   navbar: {
-    component: ReactNode | FC<NavBarProps>,
+    component: ReactNode | FC<NavBarProps>
     extraContent?: ReactNode | FC
   }
   navigation:
@@ -100,7 +99,7 @@ export interface DocsThemeConfig {
     labels: string
   }
   sidebar: {
-    defaultMenuCollapseLevel: number,
+    defaultMenuCollapseLevel: number
     titleComponent: ReactNode | FC<{ title: string; type: string }>
   }
   toc: {
@@ -109,6 +108,7 @@ export interface DocsThemeConfig {
     float: boolean
     title: ReactNode | FC
   }
+  useNextSeoProps?: () => NextSeoProps
 }
 
 export type PageTheme = {

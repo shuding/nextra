@@ -25,7 +25,7 @@ export function Head(): ReactElement {
         description={frontMatter.description}
         canonical={frontMatter.canonical}
         openGraph={frontMatter.openGraph}
-        {...config.getNextSeoProps?.()}
+        {...config.useNextSeoProps?.()}
       />
       <NextHead>
         {config.faviconGlyph ? (

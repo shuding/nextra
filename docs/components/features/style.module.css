@@ -88,17 +88,49 @@
   font-feature-settings: initial;
 }
 
-@media screen and (max-width: 920px) {
-  .features {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.feature :global(.show-on-mobile) {
+  display: none;
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 1024px) {
+  .feature {
+    max-width: 80vw;
+    width: 100%;
+  }
   .feature.large {
     grid-column: span 1;
   }
   .features {
     grid-template-columns: 1fr;
+    grid-gap: 3em;
+    justify-items: center;
+  }
+  .feature h3 {
+    font-size: 28px;
+    font-size: min(28px, max(4vw, 22px));
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .feature {
+    max-width: 460px;
+    width: 100%;
+  }
+  .feature.large {
+    grid-column: span 1;
+  }
+  .features {
+    grid-template-columns: 1fr;
+    grid-gap: 3em;
+    justify-items: center;
+  }
+  .feature h3 {
+    font-size: 34px;
+    font-size: min(34px, max(4vw, 22px));
+    text-align: center;
+  }
+  .feature :global(.show-on-mobile) {
+    display: block;
   }
 }
