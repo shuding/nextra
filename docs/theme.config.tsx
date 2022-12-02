@@ -44,7 +44,7 @@ const config: DocsThemeConfig = {
   project: {
     link: 'https://github.com/shuding/nextra'
   },
-  docsRepositoryBase: 'https://github.com/shuding/nextra/blob/master',
+  docsRepositoryBase: 'https://github.com/shuding/nextra/tree/main/docs',
   useNextSeoProps() {
     const { route } = useRouter()
     if (route !== '/') {
@@ -69,11 +69,11 @@ const config: DocsThemeConfig = {
         content="Make beautiful websites with Next.js & MDX."
       />
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:image" content="https://nextra.site/og.png" />
+      <meta name="twitter:image" content="https://nextra.site/og.jpeg" />
       <meta name="twitter:site:domain" content="nextra.site" />
       <meta name="twitter:url" content="https://nextra.site" />
       <meta name="og:title" content="Nextra" />
-      <meta name="og:image" content="https://nextra.site/og.png" />
+      <meta name="og:image" content="https://nextra.site/og.jpeg" />
       <meta name="apple-mobile-web-app-title" content="Nextra" />
       <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       <link rel="icon" href="/favicon.png" type="image/png" />
