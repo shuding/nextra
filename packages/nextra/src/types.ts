@@ -92,7 +92,7 @@ export type NextraConfig = {
   defaultShowCopyCode?: boolean
   flexsearch?: Flexsearch
   staticImage?: boolean
-  unstable_readingTime?: boolean
+  readingTime?: boolean
   mdxOptions?: Pick<ProcessorOptions, 'rehypePlugins' | 'remarkPlugins'> & {
     rehypePrettyCodeOptions?: Partial<RehypePrettyCodeOptions>
   }

@@ -44,10 +44,7 @@ export async function compileMdx(
   source: string,
   loaderOptions: Pick<
     LoaderOptions,
-    | 'staticImage'
-    | 'flexsearch'
-    | 'defaultShowCopyCode'
-    | 'unstable_readingTime'
+    'staticImage' | 'flexsearch' | 'defaultShowCopyCode' | 'readingTime'
   > & {
     mdxOptions?: LoaderOptions['mdxOptions'] &
       Pick<ProcessorOptions, 'jsx' | 'outputFormat'>
@@ -69,7 +66,7 @@ export async function compileMdx(
       loaderOptions.staticImage && ([remarkStaticImage, { filePath }] as any),
       loaderOptions.flexsearch &&
         structurize(structurizedData, loaderOptions.flexsearch),
-      loaderOptions.unstable_readingTime && readingTime
+      loaderOptions.readingTime && readingTime
     ].filter(truthy),
     rehypePlugins: [
       ...(mdxOptions.rehypePlugins || []),
