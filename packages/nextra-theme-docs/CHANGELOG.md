@@ -1,5 +1,182 @@
 # nextra-theme-docs
 
+## 2.0.0
+
+### Minor Changes
+
+- 8f6d377: allow custom github domains
+
+### Patch Changes
+
+- 4731fa7: Style improvements
+- 7a32f8e: remove unneeded wrappers `<div />`s in `<Navbar />`
+- 9ab6dd0: allow adding additional navbar content via `navbar.extraContent`
+- e6771ca: fix search overlay styles on mobile
+- 94ef0b3: improve 2.0 docs
+- 21009c7: fix covered select options
+- bea62a1: make the search input responsive in narrow screens
+- 903ddf0: fix: should update scroll when height is dynamic
+- e6771ca: split css to `hamburger`/`scrollbar`/`typesetting-article` css files
+- 24a02f8: reuse Flexsearch result styles on match-sorter search
+- 1a7cd68: toc anchor links should have `display: inline-block`
+- 6644bd5: pass unstable_flexsearch
+- cef5546: allow headings contain links
+- 2217f9c: fix `Warning: Prop `href` did not match. Server: "#" Client: ...`
+- a0c0eb8: allow override `MDXProvider.components`
+- e6771ca: fix edit on github button for cases when filename named as `index`
+- 8bcb5e6: fix sideEffects in package.json
+- 2217f9c: fix `next export` command
+- fdb2f57: update docs to use next.js 13
+- 3e3b0a9: feat: add cursor pointer to locale and theme menu
+- a0398e0: fix: avoid mutating nextConfig
+- e6771ca: BREAKING! various theme config options was renamed, take a look of renamed options [here](https://github.com/shuding/nextra/blob/core/packages/nextra-theme-docs/src/constants.tsx)
+- 59e18b0: make `nextra`/`nextra-theme-docs`/`nextra-theme-blog` be compatible with next 13
+- 38ccce8: feat(docs): allow `Tabs.items` as `ReadonlyArray<ReactNode>`
+- fc8cca0: add `<InformationCircleIcon />` icon, improve `<Callout />` default emojis
+- fe2b714: upgrade to react 18
+- af72f85: chore(nextra-theme-docs): provide type for `DocsThemeConfig.nextThemes` instead of `object`
+- e4cfb83: define page title in sidebar from `frontMatter.title` if page is not specified in `_meta.json`
+- 1ee3c92: reuse table styles from docs in blog
+- f569d90: missing `nx-` class prefixes in blog
+  fix callout padding in docs
+- 77361da: fix ESC button when still stays after pressed ESC
+- b1d7361: improve docs for 2.0
+- 9064112: make `<Tab />` accept `ComponentProps<'div'>`
+- da2bea7: remove no longer used `icons` folder
+- 4825365: add `@types/github-slugger` instead of manually declaring type
+- 6bdb9bf: fix: broken flexsearch styles
+- fdfe4f8: fix covered theme switch popup when i18n is not setup
+- 66712f0: polish docs
+- 873561b: scrollbar is toc should be same as in sidebar
+- 08a39e6: remove `resizeObserver` for dynamic content since it provoke jumps on tabs switch when there is `#` anchor in url
+- 4e4a37c: add new "display" property to \_meta
+- e6771ca: [Blog/Docs] Add copy to clipboard button for code-blocks. Add `NextraConfig.unstable_defaultShowCopyCode` option to show button by default, add `copy` and `copy=false` options for code-blocks
+- a5cac21: [docs/blog]: extract code styles and import in both themes
+- 96ed5c2: [nextra/nextra-theme-docs]: support both `experimental.newNextLinkBehavior` - `true` and `false`
+- 1fef548: allow head to be a ReactNode
+- 580c433: add nx- to all tailwind classes for style isolation
+- c3e6227: add `overflow-x-scroll` for tables
+- dfbe996: extract `<Banner />` from `<Navbar />` to `components/banner.tsx`
+- 1c3fedb: add missing `nx-` prefixes to table/th/tr elements
+- 78f1519: chore: Add strict-peer-dependencies=false
+- c15f570: fix: query should not affect nav highlight
+- 97e6141: fix(nextra/docs): fallback search to `en-US` instead `default`
+- 2b6f3be: add missing border for search container
+- cb87709: Fix flexsearch option being overridden
+- d6d5ab8: Make sure arrows are aligned
+- a007c64: move DEFAULT_THEME and DEFAULT_PAGE_THEME to constants.tsx
+- ab6c0e6: fix disappearing toc issue in Firefox
+- 16bedce: `"layout": "raw"` should render `all` unstyled elements, except `<a />`
+- a0e5847: Rename some docs theme configurations
+- 351fa45: add missing `nx-` prefix for `grow` class in `<LocaleSwitch />`
+- c09f450: fix CTRL+K, on non non-mac use `e.ctrlKey` instead `e.metaKey`
+- f5bf2e4: fix margin-top for `<Tab />` content
+- 237faa9: add clear button for search input
+- 973ca49: fix rtl/ltr glitch on initial loading
+- c8129a2: fix theme switcher style
+- 3de0f41: chore(blog/docs): use `postcss-import` to import css variables styles
+- 2e2912e: fix project/chat icon could appear without provided link
+- 97ca2e3: New feature: menu type
+- 84d983f: fix(docs): correct query for hash with leading num
+- 32cd385: add new option `search.loading` for control loading text
+- 2533a6c: replace `main.extraContent` theme option with `main` option
+- 4730bdc: chore(nextra-theme-docs): refactor `theme-context.ts`
+- 24a02f8: typescripify `<Flexsearch />`
+- 74a3398: update docs for 2.0
+- bd2cefa: Fix css classes with `eslint-plugin-tailwindcss`
+- ff8967c: add `Toggle Word Wrap` button for code-blocks (only for mobile)
+- 5d852b6: break words in navlinks, remove unneeded `<div />` wrappers, align text on right side for next link
+- e6771ca: hide search input in navbar on mobile
+- 76d1e30: [nextra-theme-docs]: fix `Warning: A title element received an array` and possible `[object Object]` in title
+- 009bf6a: Fix release workflow.
+- 5238bb4: feat(docs): support logoLink config option
+- e6771ca: fix empty space in navbar when theme option `search.component: null`
+- e6771ca: add `editLink.component`
+- ee270a4: fix extra space in flexsearch input after loading indexes
+- e6771ca: rename `meta.json` to `_meta.json`
+- 24a02f8: fix all RTL broken styles
+- 0c136ad: add missing `nx-` prefix in sidebar
+- ff8967c: fix missing `Copy Code` button in code-blocks without language
+- 2217f9c: replace `classnames` package with `clsx` as he's faster
+- e6771ca: clicking on folder should navigate to first children if `index` page doesn't exist
+- 723d42a: use `lightningcss` instead `cssnano`
+- bf74201: [nextra-theme-docs]: use new opacity modifier syntax for tailwindcss
+- a8c5883: add `config.bodyExtraContent` option
+- e2d603a: remove `getComponents` export, export `useMDXComponents` from `@mdx-js/react` instead
+- 8564919: extract `<Input/>` from `<Search/>` and `<Flexsearch/>`
+- 05d068c: Add button label for hamburger menu
+- 38769ca: prefer `ref.current.querySelector` over `document.querySelector`, remove `load` prop in `<Search />`
+- b219821: fix body overflow
+- d7f2bbc: adjust docs theme; rename options
+- 24a02f8: match-sorter search should highlight every match like flexsearch
+- 2217f9c: remove `locale` prop from theme config, forbid passing in `renderComponent`
+- 7d2d5ee: use resolvedTheme instead renderedTheme + theme check
+- 256154a: use "next/future/image" if `"experimental.images.allowFutureImage": true` is set in next config
+- 9f5af54: add `_meta.json#theme.collapsed` option for control state sidebar's folders
+- c8605d6: feat: New layout implementation
+- 4157b71: set lower build target and share code highlight theme through nextra
+- c28a7f2: - setup `next-seo`
+  - add new theme option `getNextSeoProps`
+  - remove `titleSuffix` theme option in favor of `getNextSeoProps.titleTemplate`
+  - by default pass `description`, `canonical`, `openGraph` values to `<NextSeo />` component from page `frontMatter`, values can be overridden with return value of `getNextSeoProps`
+- f360f28: add new theme option `banner.dismissible`
+- 7bcbc98: add new `meta.json#theme.timestamp` option to hide `Last updated on ...`
+- 94a8587: chore: extract `svg` icons in `/icons` folder, reusing same icons `<MoonIcon />` / `<SunIcon />` in blog from docs
+- d16b2ba: move contexts to `./contexts` directory
+- 699d131: feat(nextra/docs/blog): allow import `.md`/`.mdx` as well
+- 47938b1: remove unneeded `useRef` for `<details />`
+- 256154a: replace images with `<NextImage />` even when url not relative but that starts from `/` (public directory)
+- e573175: Fix release CI
+- 48e0ac2: export `useConfig` and `useTheme`
+- 21009c7: better focus ui, use ring color as theme hue color
+- 0f4795f: chore(nextra/blog/docs): provide types for PageOpts in loader
+- 71528f1: show copy code button only on hover of container
+- 03e90d8: refresh build system with tsup and fix nextra type
+- afaa26a: refactor toc, fix toc's styles on rtl, use `ref.current` instead `document.getElementsByClassName`
+- c380989: fix(docs): types is missing in bundle
+- 7373c1f: fix `useConfig`/`useRouter` inside `head()`
+- e6771ca: fix callout shrinking from children content
+- fb37b5f: Close selector bracket for compat with old Safari.
+- e6771ca: rename `PageOpts.meta` to `PageOpts.frontMatter`
+- ab629e6: Add correct aria values inside nav
+- cdc1c2f: prefer `ref.current` over `document.querySelector` in sidebar
+- 6a4a593: fix: #531 unclickable breadcrumb
+- d34f9f2: feat(nextra-theme-docs): update discord logo to the new one
+- a8a89e9: chore(docs): export ThemeSwitch & custom social
+- f964802: do not hide default logo on mobile
+- 7053959: chore(nextra-theme-docs): remove unneeded `transform-none` css class
+- bc52178: fix `editLink` option was not merged with default config `editLink`
+- 582ad96: feat: bump `rehype-pretty-code` version, support `showLineNumbers`
+- da998e6: move react components to `components` folder and replace exports:
+  ```ts
+  import Callout from 'nextra-theme-docs/callout'
+  import Collapse from 'nextra-theme-docs/collapse'
+  import Bleed from 'nextra-theme-docs/bleed'
+  import { Tabs, Tab } from 'nextra-theme-docs/tabs'
+  ```
+  by
+  ```ts
+  import { Callout, Collapse, Bleed, Tabs, Tab } from 'nextra-theme-docs'
+  ```
+- e6771ca: move `withLayout` logic directly in nextra loader
+- 8ad9507: fix unable expanding folder items in sidebar
+- c2c0d90: fix(search): handle case when value is empty
+- c4a9782: support custom hue theme color via `primaryHue`, `primaryHue.dark` and `primaryHue.light` theme options
+- c8bb94f: UI adjustments
+- a9ca0b9: do not add `basePath` to the links
+- 88f999d: fix: UI improvements
+- 43409ad: fix: mdx theme is missing
+- 416dfe2: add missing `nx-` prefixes in sidebar
+- e6771ca: adjust active breadcrumb color
+- 707fdc2: fix: Anchor links are not wrapping on the sidebar
+- c3e6227: reuse nextra's scrollbar-y styles for scrollbar-x, adjust sidebar's scrollbar-y
+- 0af6e79: `"layout": "raw"` should have unstyled `<a />` and `<p />` elements as well
+- 2ec8564: add `DocsThemeConfig.navbar` config option for overriding navbar
+- f99bbc2: Add `nextra-body-typesetting-article` back
+- e6771ca: fix search input `ESC` icon vertical alignment
+- 5b01537: Fix full docs directory list and active link
+- 06aa62f: feat: allow `import { getComponents } from 'nextra-theme-docs'`
+
 ## 2.0.0-beta.45
 
 ### Patch Changes
