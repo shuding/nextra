@@ -48,7 +48,6 @@ export interface DocsThemeConfig {
     component: ReactNode | FC<{ menu: boolean }>
     text: ReactNode | FC
   }
-  useNextSeoProps?: () => NextSeoProps
   gitTimestamp: ReactNode | FC<{ timestamp: Date }>
   head: ReactNode | FC
   i18n: { direction?: string; locale: string; text: string }[]
@@ -109,6 +108,7 @@ export interface DocsThemeConfig {
     float: boolean
     title: ReactNode | FC
   }
+  useNextSeoProps?: () => NextSeoProps
 }
 
 export type PageTheme = {
