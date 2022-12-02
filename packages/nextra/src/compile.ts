@@ -44,10 +44,7 @@ export async function compileMdx(
   source: string,
   loaderOptions: Pick<
     LoaderOptions,
-    | 'unstable_staticImage'
-    | 'unstable_flexsearch'
-    | 'unstable_defaultShowCopyCode'
-    | 'unstable_readingTime'
+    'staticImage' | 'flexsearch' | 'defaultShowCopyCode' | 'readingTime'
   > & {
     mdxOptions?: LoaderOptions['mdxOptions'] &
       Pick<ProcessorOptions, 'jsx' | 'outputFormat'>
@@ -66,11 +63,10 @@ export async function compileMdx(
       ...(mdxOptions.remarkPlugins || []),
       remarkGfm,
       remarkHeadings,
-      loaderOptions.unstable_staticImage &&
-        ([remarkStaticImage, { filePath }] as any),
-      loaderOptions.unstable_flexsearch &&
-        structurize(structurizedData, loaderOptions.unstable_flexsearch),
-      loaderOptions.unstable_readingTime && readingTime
+      loaderOptions.staticImage && ([remarkStaticImage, { filePath }] as any),
+      loaderOptions.flexsearch &&
+        structurize(structurizedData, loaderOptions.flexsearch),
+      loaderOptions.readingTime && readingTime
     ].filter(truthy),
     rehypePlugins: [
       ...(mdxOptions.rehypePlugins || []),
@@ -80,10 +76,7 @@ export async function compileMdx(
         { ...rehypePrettyCodeOptions, ...mdxOptions.rehypePrettyCodeOptions }
       ],
       [rehypeMdxTitle, { name: '__nextra_title__' }],
-      [
-        attachMeta,
-        { defaultShowCopyCode: loaderOptions.unstable_defaultShowCopyCode }
-      ]
+      [attachMeta, { defaultShowCopyCode: loaderOptions.defaultShowCopyCode }]
     ]
   })
   try {

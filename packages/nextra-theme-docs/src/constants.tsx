@@ -113,7 +113,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
   search: {
     component({ className, directories }) {
       const config = useConfig()
-      return config.unstable_flexsearch ? (
+      return config.flexsearch ? (
         <Flexsearch className={className} />
       ) : (
         <MatchSorterSearch className={className} directories={directories} />

@@ -71,7 +71,7 @@ export type PageOpts = {
   headings: Heading[]
   hasJsxInH1?: boolean
   timestamp?: number
-  unstable_flexsearch?: Flexsearch
+  flexsearch?: Flexsearch
   newNextLinkBehavior?: boolean
   readingTime?: ReadingTime
 }
@@ -89,10 +89,10 @@ type Flexsearch = boolean | { codeblocks: boolean }
 export type NextraConfig = {
   theme: Theme
   themeConfig?: string
-  unstable_defaultShowCopyCode?: boolean
-  unstable_flexsearch?: Flexsearch
-  unstable_staticImage?: boolean
-  unstable_readingTime?: boolean
+  defaultShowCopyCode?: boolean
+  flexsearch?: Flexsearch
+  staticImage?: boolean
+  readingTime?: boolean
   mdxOptions?: Pick<ProcessorOptions, 'rehypePlugins' | 'remarkPlugins'> & {
     rehypePrettyCodeOptions?: Partial<RehypePrettyCodeOptions>
   }

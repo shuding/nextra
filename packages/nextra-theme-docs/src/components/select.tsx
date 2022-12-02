@@ -64,7 +64,7 @@ export function Select({
               ref={container}
               show={open}
               as={Listbox.Options}
-              className="nx-z-20 nx-max-h-64 nx-overflow-auto nx-rounded-md nx-border nx-border-black/5 nx-bg-white nx-py-1 nx-text-sm nx-shadow-lg dark:nx-border-white/20 dark:nx-bg-neutral-800"
+              className="nx-z-20 nx-max-h-64 nx-overflow-auto nx-rounded-md nx-border nx-border-black/5 nx-bg-white nx-py-1 nx-text-sm nx-shadow-lg dark:nx-border-white/10 dark:nx-bg-neutral-800"
               leave="nx-transition-opacity"
               leaveFrom="nx-opacity-100"
               leaveTo="nx-opacity-0"
@@ -79,7 +79,7 @@ export function Select({
                         ? 'nx-bg-primary-50 nx-text-primary-500 dark:nx-bg-primary-500/10'
                         : 'nx-text-gray-800 dark:nx-text-gray-100',
                       'nx-relative nx-cursor-pointer nx-whitespace-nowrap nx-py-1.5',
-                      'ltr:nx-pl-3 ltr:nx-pr-9 rtl:nx-pr-3 rtl:nx-pl-9'
+                      'nx-transition-colors ltr:nx-pl-3 ltr:nx-pr-9 rtl:nx-pr-3 rtl:nx-pl-9'
                     )
                   }
                 >
