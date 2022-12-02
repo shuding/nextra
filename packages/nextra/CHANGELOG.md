@@ -1,5 +1,11 @@
 # nextra
 
+## 2.0.0-beta.45
+
+### Patch Changes
+
+- 66712f0: polish docs
+
 ## 2.0.0-beta.44
 
 ### Patch Changes
