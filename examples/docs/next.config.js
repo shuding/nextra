@@ -1,8 +1,8 @@
 const withNextra = require('nextra')({
   theme: 'nextra-theme-docs',
   themeConfig: './src/theme.config.js',
-  unstable_staticImage: true,
-  unstable_flexsearch: {
+  staticImage: true,
+  flexsearch: {
     codeblock: false
   }
 })

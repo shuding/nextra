@@ -23,7 +23,7 @@ Nextra works like a Next.js plugin, and it accepts a theme config (layout) to re
 const withNextra = require('nextra')({
   theme: 'nextra-theme-docs',
   themeConfig: './theme.config.jsx'
-  // optional: add `unstable_staticImage: true` to enable Nextra's auto image import
+  // optional: add `staticImage: true` to enable Nextra's auto image import
 })
 module.exports = withNextra()
 ```

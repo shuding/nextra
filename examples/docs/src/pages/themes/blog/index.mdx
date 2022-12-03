@@ -17,11 +17,11 @@ Similar to the docs theme, you can install the blog theme with the following com
 
 3. Create the following Next.js config and theme config under the root directory:
 
-```jsx filename="next.config.js"
+```js filename="next.config.js"
 const withNextra = require('nextra')({
   theme: 'nextra-theme-blog',
   themeConfig: './theme.config.js'
-  // optional: add `unstable_staticImage: true` to enable Nextra's auto image import
+  // optional: add `staticImage: true` to enable Nextra's auto image import
 })
 module.exports = withNextra()
 ```
