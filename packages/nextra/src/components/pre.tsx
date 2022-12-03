@@ -43,20 +43,19 @@ export const Pre = ({
       </pre>
       <div
         className={[
-          'nx-opacity-0 nx-transition-opacity [div:hover>&]:nx-opacity-100',
+          'nx-opacity-0 nx-transition nx-invisible [div:hover>&]:nx-opacity-100 [div:hover>&]:nx-visible',
           'nx-flex nx-gap-1 nx-absolute nx-m-[11px] nx-right-0',
           filename ? 'nx-top-8' : 'nx-top-0'
         ].join(' ')}
       >
         <Button
-          tabIndex={-1}
           onClick={toggleWordWrap}
           className="md:nx-hidden"
           title="Toggle word wrap"
         >
           <WordWrapIcon className="nx-pointer-events-none nx-h-4 nx-w-4" />
         </Button>
-        {value && <CopyToClipboard tabIndex={-1} value={value} />}
+        {value && <CopyToClipboard value={value} />}
       </div>
     </>
   )

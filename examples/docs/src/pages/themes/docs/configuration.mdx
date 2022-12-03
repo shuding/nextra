@@ -547,7 +547,7 @@ export default {
 
 The internationalization (i18n) config. See more [here](/features/i18n).
 
-## `unstable_faviconGlyph`
+## `faviconGlyph`
 
 A glyph that should be used as a favicon.
 
@@ -560,13 +560,13 @@ A glyph that should be used as a favicon.
  * @type {import('nextra-theme-docs').DocsThemeConfig}
  */
 export default {
-  unstable_faviconGlyph: '🐱'
+  faviconGlyph: '🐱'
 }
 ```
 
 <Unstable />
 
-## `unstable_flexsearch`
+## `flexsearch`
 
 Enable Nextra built-in search
 
@@ -574,11 +574,11 @@ Enable Nextra built-in search
 
 **Example:**
 
-```jsx filename="next.config.js"
+```js filename="next.config.js"
 const withNextra = require('nextra')({
   theme: 'nextra-theme-blog',
-  themeConfig: './theme.config.js'
-  unstable_flexsearch: {
+  themeConfig: './theme.config.js',
+  flexsearch: {
     codeblock: false
   }
 })
@@ -587,7 +587,7 @@ module.exports = withNextra()
 
 <Unstable />
 
-## `unstable_searchResultEmpty`
+## `searchResultEmpty`
 
 Empty component for search result.
 
@@ -600,7 +600,7 @@ Empty component for search result.
  * @type {import('nextra-theme-docs').DocsThemeConfig}
  */
 export default {
-  unstable_searchResultEmpty: ({ locale }) => {
+  searchResultEmpty({ locale }) {
     if (locale === 'zh-CN') return <span> 未查找到结果 </span>
     return <span> No results found. </span>
   }

@@ -17,6 +17,7 @@ export default {
   editLink: {
     text: 'Edit this page on GitHub'
   },
+  faviconGlyph: '✦',
   getNextSeoProps() {
     const { frontMatter } = useConfig()
     return {
@@ -71,5 +72,4 @@ export default {
       }
     }
   },
-  unstable_faviconGlyph: '✦'
 }
