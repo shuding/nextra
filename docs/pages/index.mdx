@@ -140,6 +140,15 @@ export function I18n() {
       width: min(300px, 41%);
       min-width: 155px;
     }
+    :global(#a11y-card) {
+      background-image: url(/assets/high-contrast.png);
+      background-position: -160px 160px;
+    }
+    @media screen and (max-width: 1300px) {
+      :global(#a11y-card) {
+        background-image: linear-gradient(to bottom, white, transparent), url(/assets/high-contrast.png);
+      }
+    }
     @media screen and (max-width: 1200px) {
       :global(#highlighting-card) {
         aspect-ratio: auto;
@@ -161,6 +170,10 @@ export function I18n() {
       }
       :global(#search-card h3) {
         text-align: left;
+      }
+      :global(#a11y-card) {
+        background-image: url(/assets/high-contrast.png);
+        background-position: center 160px;
       }
     }
     @media screen and (max-width: 768px) {
@@ -325,10 +338,8 @@ export function I18n() {
         }}>
           <h3>Organize pages intuitively, <br/>with file-system routing from Next.js.</h3>
         </Feature>
-        <Feature className='border border-neutral-200 dark:border-neutral-700' style={{
-          backgroundImage: 'url(/assets/high-contrast.png)',
+        <Feature id="a11y-card" className='border border-neutral-200 dark:border-neutral-700' style={{
           backgroundSize: 750,
-          backgroundPosition: '-160px 160px',
           backgroundRepeat: 'no-repeat',
           clipPath: 'none',
           borderRadius: '1em',
