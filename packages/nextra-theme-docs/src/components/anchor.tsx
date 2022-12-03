@@ -26,7 +26,7 @@ export const Anchor = forwardRef<HTMLAnchorElement, AnchorProps>(function (
         rel="noreferrer"
         {...props}
       >
-        {children} <span className="nx-sr-only">(opens in a new tab)</span>
+        {children}<span className="nx-sr-only"> (opens in a new tab)</span>
       </a>
     )
   }
