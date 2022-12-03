@@ -48,7 +48,7 @@ const A = ({ children, ...props }: ComponentProps<'a'>) => {
   if (isExternal) {
     return (
       <a target="_blank" rel="noreferrer" {...props}>
-        {children}
+        {children}<span className="nx-sr-only"> (opens in a new tab)</span>
       </a>
     )
   }
