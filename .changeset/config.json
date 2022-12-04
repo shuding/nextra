@@ -2,7 +2,13 @@
   "$schema": "https://unpkg.com/@changesets/config@2.0.1/schema.json",
   "changelog": "@changesets/cli/changelog",
   "commit": false,
-  "fixed": [["nextra", "nextra-theme-docs", "nextra-theme-blog"]],
+  "fixed": [
+    [
+      "nextra",
+      "nextra-theme-docs",
+      "nextra-theme-blog"
+    ]
+  ],
   "linked": [],
   "access": "public",
   "baseBranch": "main",

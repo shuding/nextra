@@ -16,6 +16,9 @@
     "*": {
       "cusdis": [
         "./dist/cusdis.d.ts"
+      ],
+      "tags": [
+        "./dist/tags.d.ts"
       ]
     }
   },
@@ -28,6 +31,10 @@
     "./cusdis": {
       "import": "./dist/cusdis.js",
       "types": "./dist/cusdis.d.ts"
+    },
+    "./tags": {
+      "import": "./dist/tags.js",
+      "types": "./dist/tags.d.ts"
     }
   },
   "scripts": {
