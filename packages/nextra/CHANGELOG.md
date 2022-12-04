@@ -1,5 +1,12 @@
 # nextra
 
+## 2.0.1
+
+### Patch Changes
+
+- a9748aa: fix: A11y improvements to the docs theme
+- ac82b1f: make code-blocks buttons focusable if they are visible on page
+
 ## 2.0.0
 
 ### Major Changes

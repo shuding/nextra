@@ -1,5 +1,13 @@
 # nextra-theme-docs
 
+## 2.0.1
+
+### Patch Changes
+
+- a9748aa: fix: A11y improvements to the docs theme
+- ac82b1f: make code-blocks buttons focusable if they are visible on page
+- 0ca195c: inform screen readers of externals links that open in a new tabs
+
 ## 2.0.0
 
 ### Minor Changes
