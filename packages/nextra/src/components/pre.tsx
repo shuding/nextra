@@ -43,7 +43,7 @@ export const Pre = ({
       </pre>
       <div
         className={[
-          'nx-opacity-0 nx-transition nx-invisible [div:hover>&]:nx-opacity-100 [div:hover>&]:nx-visible',
+          'nx-opacity-0 nx-transition [div:hover>&]:nx-opacity-100 focus-within:nx-opacity-100',
           'nx-flex nx-gap-1 nx-absolute nx-m-[11px] nx-right-0',
           filename ? 'nx-top-8' : 'nx-top-0'
         ].join(' ')}

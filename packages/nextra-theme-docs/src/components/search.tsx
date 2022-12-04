@@ -246,7 +246,7 @@ export function Search({
                     'nx-mx-2.5 nx-break-words nx-rounded-md',
                     'contrast-more:nx-border',
                     i === active
-                      ? 'nx-bg-primary-500/10 nx-text-primary-500 contrast-more:nx-border-primary-500'
+                      ? 'nx-bg-primary-500/10 nx-text-primary-600 contrast-more:nx-border-primary-500'
                       : 'nx-text-gray-800 contrast-more:nx-border-transparent dark:nx-text-gray-300'
                   )}
                 >

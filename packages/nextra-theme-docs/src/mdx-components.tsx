@@ -121,7 +121,11 @@ const createHeaderLink = (
       >
         {children}
         <span className="nx-absolute -nx-mt-20" id={id} ref={obRef} />
-        <a href={`#${id}`} className="subheading-anchor" />
+        <a
+          href={`#${id}`}
+          className="subheading-anchor"
+          aria-label="Permalink for this section"
+        />
       </Tag>
     )
   }
@@ -265,7 +269,7 @@ export const getComponents = ({
     a: props => (
       <A
         {...props}
-        className="nx-text-primary-500 nx-underline nx-decoration-from-font [text-underline-position:under]"
+        className="nx-text-primary-600 nx-underline nx-decoration-from-font [text-underline-position:under]"
       />
     ),
     table: (props: ComponentProps<'table'>) => (

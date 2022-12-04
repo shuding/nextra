@@ -209,7 +209,9 @@ const config: DocsThemeConfig = {
       ),
   },
   toc: {
-    extraContent: <img src="https://placekitten.com/g/300/200" />,
+    extraContent: (
+      <img alt="placeholder cat" src="https://placekitten.com/g/300/200" />
+    ),
     float: true,
   },
   useNextSeoProps() {

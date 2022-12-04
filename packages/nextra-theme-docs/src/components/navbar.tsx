@@ -19,7 +19,7 @@ const classes = {
   link: cn(
     'nx-text-sm contrast-more:nx-text-gray-700 contrast-more:dark:nx-text-gray-100'
   ),
-  active: cn('nx-subpixel-antialiased contrast-more:nx-font-bold'),
+  active: cn('nx-subpixel-antialiased nx-font-medium'),
   inactive: cn(
     'nx-text-gray-600 hover:nx-text-gray-800 dark:nx-text-gray-400 dark:hover:nx-text-gray-200'
   )
@@ -56,7 +56,10 @@ function NavbarMenu({
           leaveFrom="nx-opacity-100"
           leaveTo="nx-opacity-0"
         >
-          <Menu.Items className="nx-absolute nx-right-0 nx-z-20 nx-mt-1 nx-max-h-64 nx-min-w-full nx-overflow-auto nx-rounded-md nx-border nx-border-black/5 nx-bg-white nx-py-1 nx-text-sm nx-shadow-lg dark:nx-border-white/10 dark:nx-bg-neutral-800">
+          <Menu.Items
+            className="nx-absolute nx-right-0 nx-z-20 nx-mt-1 nx-max-h-64 nx-min-w-full nx-overflow-auto nx-rounded-md nx-border nx-border-black/5 nx-bg-white nx-py-1 nx-text-sm nx-shadow-lg dark:nx-border-white/10 dark:nx-bg-neutral-800"
+            tabIndex={0}
+          >
             {Object.entries(items || {}).map(([key, item]) => (
               <Menu.Item key={key}>
                 <Anchor
@@ -156,13 +159,14 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
               key={page.route}
               className={cn(
                 classes.link,
-                '-nx-ml-2 nx-hidden nx-whitespace-nowrap nx-p-2 md:nx-inline-block',
+                '-nx-ml-2 nx-hidden nx-whitespace-nowrap nx-p-2 md:nx-inline-block nx-relative',
                 !isActive || page.newWindow ? classes.inactive : classes.active
               )}
               newWindow={page.newWindow}
               aria-current={!page.newWindow && isActive}
             >
-              {page.title}
+              <span className="nx-absolute">{page.title}</span>
+              <span className="nx-invisible nx-font-medium">{page.title}</span>
             </Anchor>
           )
         })}

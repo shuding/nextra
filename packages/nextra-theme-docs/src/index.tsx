@@ -134,14 +134,19 @@ const InnerLayout = ({
     !themeContext.toc ||
     themeContext.layout !== 'default' ? (
       themeContext.layout !== 'full' &&
-      themeContext.layout !== 'raw' && <div className={tocClassName} />
+      themeContext.layout !== 'raw' && (
+        <nav className={tocClassName} aria-label="table of contents" />
+      )
     ) : (
-      <div className={cn(tocClassName, 'nx-px-4')}>
+      <nav
+        className={cn(tocClassName, 'nx-px-4')}
+        aria-label="table of contents"
+      >
         {renderComponent(config.toc.component, {
           headings: config.toc.float ? headings : [],
           filePath
         })}
-      </div>
+      </nav>
     )
 
   const { locale = DEFAULT_LOCALE } = useRouter()
