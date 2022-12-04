@@ -22,7 +22,7 @@ export const HighlightMatches = memo<MatchArgs>(function HighlightMatches({
       res.push(
         <Fragment key={id++}>
           {splitText.splice(0, result.index - index).join('')}
-          <span className="nx-text-primary-500">
+          <span className="nx-text-primary-600">
             {splitText.splice(0, regexp.lastIndex - result.index).join('')}
           </span>
         </Fragment>

@@ -57,7 +57,7 @@ export function Tabs({
                     'nx-mr-2 nx-rounded-t nx-p-2 nx-font-medium nx-leading-5 nx-transition-colors',
                     '-nx-mb-0.5 nx-select-none nx-border-b-2',
                     selected
-                      ? 'nx-border-primary-500 nx-text-primary-500'
+                      ? 'nx-border-primary-500 nx-text-primary-600'
                       : 'nx-border-transparent nx-text-gray-600 hover:nx-border-gray-200 hover:nx-text-black dark:nx-text-gray-200 dark:hover:nx-border-neutral-800 dark:hover:nx-text-white',
                     disabled &&
                       'nx-pointer-events-none nx-text-gray-400 dark:nx-text-neutral-600'

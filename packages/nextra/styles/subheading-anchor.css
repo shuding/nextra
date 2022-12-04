@@ -2,7 +2,8 @@
   @apply nx-opacity-0 nx-transition-opacity ltr:nx-ml-1 rtl:nx-mr-1;
 
   span:target + &,
-  :hover > & {
+  :hover > &,
+  &:focus {
     @apply nx-opacity-100;
   }
 

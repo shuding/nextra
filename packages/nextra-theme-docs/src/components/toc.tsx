@@ -49,7 +49,9 @@ export function TOC({ headings, filePath }: TOCProps): ReactElement {
 
   useEffect(() => {
     if (!activeSlug) return
-    const anchor = tocRef.current?.querySelector(`li > a[href="#${activeSlug}"]`)
+    const anchor = tocRef.current?.querySelector(
+      `li > a[href="#${activeSlug}"]`
+    )
 
     if (anchor) {
       scrollIntoView(anchor, {
@@ -95,7 +97,7 @@ export function TOC({ headings, filePath }: TOCProps): ReactElement {
                     }[depth],
                     'nx-inline-block',
                     activeAnchor[slug]?.isActive
-                      ? 'nx-text-primary-500 nx-subpixel-antialiased contrast-more:!nx-text-primary-500'
+                      ? 'nx-text-primary-600 nx-subpixel-antialiased contrast-more:!nx-text-primary-600'
                       : 'nx-text-gray-500 hover:nx-text-gray-900 dark:nx-text-gray-400 dark:hover:nx-text-gray-300',
                     'contrast-more:nx-text-gray-900 contrast-more:nx-underline contrast-more:dark:nx-text-gray-50'
                   )}

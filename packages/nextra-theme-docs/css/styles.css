@@ -25,7 +25,7 @@ input,
 [tabindex]:not([tabindex='-1']) {
   @apply nx-outline-none;
   &:focus-visible {
-    @apply nx-ring-2 nx-ring-primary-200 nx-ring-offset-1 nx-ring-offset-primary-300;
+    @apply nx-ring-2 nx-ring-primary-200 nx-ring-offset-1 nx-ring-offset-primary-300 dark:nx-ring-primary-800 dark:nx-ring-offset-primary-700;
   }
 }
 

@@ -113,7 +113,7 @@ const File: React.FC<FileProps> = React.memo(
     return (
       <li
         className={cn('flex list-none', {
-          ['nx-text-primary-500 contrast-more:!nx-text-primary-500 contrast-more:nx-text-gray-900 contrast-more:nx-underline contrast-more:dark:nx-text-gray-50']:
+          ['nx-text-primary-600 contrast-more:!nx-text-primary-600 contrast-more:nx-text-gray-900 contrast-more:nx-underline contrast-more:dark:nx-text-gray-50']:
             active
         })}
       >

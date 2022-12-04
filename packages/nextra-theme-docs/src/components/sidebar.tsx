@@ -4,7 +4,9 @@ import React, {
   useMemo,
   ReactElement,
   memo,
-  useRef
+  useRef,
+  createContext,
+  useContext
 } from 'react'
 import cn from 'clsx'
 import Slugger from 'github-slugger'
@@ -30,6 +32,11 @@ import { DEFAULT_LOCALE } from '../constants'
 
 const TreeState: Record<string, boolean> = Object.create(null)
 
+const FocusedItemContext = createContext<null | string>(null)
+const OnFocuseItemContext = createContext<
+  null | ((item: string | null) => any)
+>(null)
+
 const Folder = memo(FolderImpl)
 
 const classes = {
@@ -44,7 +51,7 @@ const classes = {
     'contrast-more:nx-border-transparent contrast-more:hover:nx-border-gray-900 contrast-more:dark:hover:nx-border-gray-50'
   ),
   active: cn(
-    'nx-bg-primary-50 nx-font-bold nx-text-primary-500 dark:nx-bg-primary-500/10',
+    'nx-bg-primary-50 nx-font-bold nx-text-primary-600 dark:nx-bg-primary-500/10',
     'contrast-more:nx-border-primary-500 contrast-more:dark:nx-border-primary-500'
   ),
   list: cn('nx-flex nx-flex-col nx-gap-1'),
@@ -67,6 +74,11 @@ function FolderImpl({
   const [route] = routeOriginal.split('#')
   const active = [route, route + '/'].includes(item.route + '/')
   const activeRouteInside = active || route.startsWith(item.route + '/')
+
+  const focusedRoute = useContext(FocusedItemContext)
+  const focusedRouteInside = !!focusedRoute?.startsWith(item.route + '/')
+
+  // TODO: This is not always correct. Might be related to docs root.
   const folderLevel = (item.route.match(/\//g) || []).length
 
   const { setMenu } = useMenu()
@@ -74,9 +86,10 @@ function FolderImpl({
   const { theme } = item as Item
   const open =
     TreeState[item.route] !== undefined
-      ? TreeState[item.route]
+      ? TreeState[item.route] || focusedRouteInside
       : active ||
         activeRouteInside ||
+        focusedRouteInside ||
         (theme && 'collapsed' in theme
           ? !theme.collapsed
           : folderLevel <= config.sidebar.defaultMenuCollapseLevel)
@@ -84,10 +97,10 @@ function FolderImpl({
   const rerender = useState({})[1]
 
   useEffect(() => {
-    if (activeRouteInside) {
+    if (activeRouteInside || focusedRouteInside) {
       TreeState[item.route] = true
     }
-  }, [activeRouteInside])
+  }, [activeRouteInside || focusedRouteInside])
 
   if (item.type === 'menu') {
     const menu = item as MenuItem
@@ -106,6 +119,7 @@ function FolderImpl({
       }
     })
   }
+
   return (
     <li className={cn({ open, active })}>
       <Anchor
@@ -196,6 +210,7 @@ function File({
 }): ReactElement {
   const { asPath, locale = DEFAULT_LOCALE } = useRouter()
   const route = getFSRoute(asPath, locale)
+  const onFocus = useContext(OnFocuseItemContext)
 
   // It is possible that the item doesn't have any route - for example an extermal link.
   const active = item.route && [route, route + '/'].includes(item.route + '/')
@@ -217,6 +232,12 @@ function File({
         className={cn(classes.link, active ? classes.active : classes.inactive)}
         onClick={() => {
           setMenu(false)
+        }}
+        onFocus={() => {
+          onFocus?.(item.route)
+        }}
+        onBlur={() => {
+          onFocus?.(null)
         }}
       >
         {renderComponent(config.sidebar.titleComponent, {
@@ -311,6 +332,8 @@ export function Sidebar({
 }: SideBarProps): ReactElement {
   const config = useConfig()
   const { menu, setMenu } = useMenu()
+  const [focused, setFocused] = useState<null | string>(null)
+
   const anchors = useMemo(
     () =>
       headings
@@ -363,7 +386,7 @@ export function Sidebar({
       ) : null}
       <div
         className={cn(
-          '[transition:background-color_1.5s_ease] motion-reduce:nx-transition-none',
+          'motion-reduce:nx-transition-none [transition:background-color_1.5s_ease]',
           menu
             ? 'nx-fixed nx-inset-0 nx-z-10 nx-bg-black/80 dark:nx-bg-black/60'
             : 'nx-bg-transparent'
@@ -386,30 +409,38 @@ export function Sidebar({
             directories: flatDirectories
           })}
         </div>
-        <div
-          className={cn(
-            'nextra-scrollbar nx-overflow-y-auto nx-p-4',
-            'nx-grow md:nx-h-[calc(100vh-var(--nextra-navbar-height)-3.75rem)]'
-          )}
-          ref={sidebarRef}
-        >
-          <Menu
-            className="nx-hidden md:nx-flex"
-            // The sidebar menu, shows only the docs directories.
-            directories={docsDirectories}
-            // When the viewport size is larger than `md`, hide the anchors in
-            // the sidebar when `floatTOC` is enabled.
-            anchors={config.toc.float ? [] : anchors}
-            onlyCurrentDocs
-          />
-          <Menu
-            className="md:nx-hidden"
-            // The mobile dropdown menu, shows all the directories.
-            directories={fullDirectories}
-            // Always show the anchor links on mobile (`md`).
-            anchors={anchors}
-          />
-        </div>
+        <FocusedItemContext.Provider value={focused}>
+          <OnFocuseItemContext.Provider
+            value={item => {
+              setFocused(item)
+            }}
+          >
+            <div
+              className={cn(
+                'nextra-scrollbar nx-overflow-y-auto nx-p-4',
+                'nx-grow md:nx-h-[calc(100vh-var(--nextra-navbar-height)-3.75rem)]'
+              )}
+              ref={sidebarRef}
+            >
+              <Menu
+                className="nx-hidden md:nx-flex"
+                // The sidebar menu, shows only the docs directories.
+                directories={docsDirectories}
+                // When the viewport size is larger than `md`, hide the anchors in
+                // the sidebar when `floatTOC` is enabled.
+                anchors={config.toc.float ? [] : anchors}
+                onlyCurrentDocs
+              />
+              <Menu
+                className="md:nx-hidden"
+                // The mobile dropdown menu, shows all the directories.
+                directories={fullDirectories}
+                // Always show the anchor links on mobile (`md`).
+                anchors={anchors}
+              />
+            </div>
+          </OnFocuseItemContext.Provider>
+        </FocusedItemContext.Provider>
 
         {hasMenu && (
           <div

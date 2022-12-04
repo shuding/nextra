@@ -38,7 +38,11 @@ const createHeaderLink =
       <Tag className={`subheading-${Tag}`} {...props}>
         {children}
         <span className="nx-absolute -nx-mt-7" id={id} />
-        <a href={`#${id}`} className="subheading-anchor" />
+        <a
+          href={`#${id}`}
+          className="subheading-anchor"
+          aria-label="Permalink for this section"
+        />
       </Tag>
     )
   }
@@ -48,7 +52,8 @@ const A = ({ children, ...props }: ComponentProps<'a'>) => {
   if (isExternal) {
     return (
       <a target="_blank" rel="noreferrer" {...props}>
-        {children}<span className="nx-sr-only"> (opens in a new tab)</span>
+        {children}
+        <span className="nx-sr-only"> (opens in a new tab)</span>
       </a>
     )
   }

@@ -44,7 +44,7 @@ export const CopyToClipboard = ({
   const IconToUse = isCopied ? CheckIcon : CopyIcon
 
   return (
-    <Button onClick={handleClick} title="Copy code" {...props}>
+    <Button onClick={handleClick} title="Copy code" tabIndex={0} {...props}>
       <IconToUse className="nx-pointer-events-none nx-h-4 nx-w-4" />
     </Button>
   )
