@@ -384,12 +384,14 @@ Show a table of contents on the right side of the page. It’s useful for naviga
 
 <OptionTable options={[
   ['toc.float', 'boolean', 'Float the TOC next to the content.'],
-  ['toc.component', 'boolean', 'Float the TOC next to the content.'],
-  ['toc.extraContent', 'boolean', 'Float the TOC next to the content.'],
-  ['toc.title', 'React.ReactNode | React.FC', 'Float the TOC next to the content.'],
+  ['toc.component', 'React.ReactNode | React.FC<TOCProps>', 'Custom renderer of the TOC.'],
+  ['toc.extraContent', 'React.ReactNode | React.FC', 'Display extra content below the TOC content.'],
+  ['toc.title', 'React.ReactNode | React.FC', 'Title of the TOC sidebar. By default it’s “On This Page”.'],
 ]}/>
 
 #### Floating TOC
+
+`toc.float` is enabled by default. When enabled, the TOC will be displayed on the right side of the page and it will be sticky when scrolling. If it’s disabled, the TOC will be displayed directly on the page sidebar.
 
 ### Edit Link
 
