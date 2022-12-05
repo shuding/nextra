@@ -157,7 +157,6 @@ const config: DocsThemeConfig = {
           href="/favicon/favicon-16x16.png"
         />
         <link rel="manifest" href="/favicon/site.webmanifest" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" />
         <link
           rel="mask-icon"
           href="/favicon/safari-pinned-tab.svg"
