@@ -455,7 +455,7 @@ Show the last updated date of each page. It’s useful for showing the freshness
 The footer area of the website. You can either specify some content for the default footer, or fully customize it with a custom component.
 
 <OptionTable options={[
-  ['footer.content', 'React.ReactNode | React.FC', 'Content of the default footer component.'],
+  ['footer.text', 'React.ReactNode | React.FC', 'Content of the default footer component.'],
   ['footer.component', 'React.ReactNode | React.FC<{ menu: boolean }>', 'Customized footer component.'],
 ]}/>
 
@@ -466,8 +466,8 @@ You can add some simple content, such as copyright information to the default fo
 ```jsx
 export default {
   footer: {
-    content: <span>
-      MIT ${new Date().getFullYear()} © <a href="https://nextra.site" target="_blank">Nextra</a>.
+    text: <span>
+      MIT {new Date().getFullYear()} © <a href="https://nextra.site" target="_blank">Nextra</a>.
     </span>,
   }
 }
