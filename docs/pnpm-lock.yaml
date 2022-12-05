@@ -9,8 +9,8 @@ importers:
       clsx: ^1.2.1
       framer-motion: ^7.3.2
       next: ^13.0.5
-      nextra: 2.0.0-beta.45
-      nextra-theme-docs: 2.0.0-beta.45
+      nextra: 2.0.1
+      nextra-theme-docs: 2.0.1
       postcss: ^8.4.19
       react: ^18.2.0
       react-dom: ^18.2.0
@@ -20,8 +20,8 @@ importers:
       clsx: 1.2.1
       framer-motion: 7.6.15_biqbaboplfbrettd7655fr4n2y
       next: 13.0.5_biqbaboplfbrettd7655fr4n2y
-      nextra: 2.0.0-beta.45_7iuvftg57tblwyxclfkwku5xo4
-      nextra-theme-docs: 2.0.0-beta.45_7iuvftg57tblwyxclfkwku5xo4
+      nextra: 2.0.1_7iuvftg57tblwyxclfkwku5xo4
+      nextra-theme-docs: 2.0.1_7iuvftg57tblwyxclfkwku5xo4
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     devDependencies:
@@ -1806,8 +1806,8 @@ packages:
       - babel-plugin-macros
     dev: false
 
-  /nextra-theme-docs/2.0.0-beta.45_7iuvftg57tblwyxclfkwku5xo4:
-    resolution: {integrity: sha512-dEAbl3DIvH30D7KyK6wY9v5GnZtacFxZ2dB0hRwZZPMgta+EdD33bJ3bra6htWT58KggYPIDG+PfofZ7EH25PA==}
+  /nextra-theme-docs/2.0.1_7iuvftg57tblwyxclfkwku5xo4:
+    resolution: {integrity: sha512-vrxSQjfG5hcWXd0foVUgRu1T9rD+dQdVnKzJhpEG+ncAIYTT/o7GajvYUEPPZMYvvZwehmNIUhSTDN9unnVsxw==}
     peerDependencies:
       next: '>=9.5.3'
       react: '>=16.13.1'
@@ -1832,8 +1832,8 @@ packages:
       scroll-into-view-if-needed: 2.2.31
     dev: false
 
-  /nextra/2.0.0-beta.45_7iuvftg57tblwyxclfkwku5xo4:
-    resolution: {integrity: sha512-UP5p6WFXUNBNqpGc4NqyM7qzENsT0BrxUTlghgNDIZLmr+cPt0qGxcmeVjT4nD/EjEKeVeL2zO9J7y0Aqp/opQ==}
+  /nextra/2.0.1_7iuvftg57tblwyxclfkwku5xo4:
+    resolution: {integrity: sha512-IOBwqMREnadxGryNHvwr3sZuD90uyaTxCWi9yxDB56UndsLBTulKwXNIOdW1FV+vKTbSGpz89wNe665Moli7Kw==}
     peerDependencies:
       next: '>=9.5.3'
       react: '>=16.13.1'

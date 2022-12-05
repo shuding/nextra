@@ -30,8 +30,8 @@ export function Card({
         href={href}
         className={cn(
           styles.card,
-          'group flex flex-col justify-start overflow-hidden rounded-lg border border-gray-200 bg-gray-100 text-current no-underline shadow shadow-gray-100 transition-all duration-200',
-          'hover:border-gray-300 hover:shadow-lg hover:shadow-gray-100'
+          'group flex flex-col justify-start overflow-hidden rounded-lg border border-gray-200 bg-gray-100 text-current no-underline shadow shadow-gray-100 transition-all duration-200 dark:border-neutral-800 dark:shadow-none',
+          'hover:border-gray-300 hover:shadow-lg hover:shadow-gray-100 dark:hover:border-neutral-500 dark:hover:bg-gray-200 dark:hover:shadow-none'
         )}
         {...props}
       >
