@@ -37,3 +37,44 @@
 :global(.dark) .optimization {
   background: linear-gradient(27deg, #3d3d3d, #252525);
 }
+
+a.cta {
+  display: inline-block;
+  background: linear-gradient(to bottom, #238aff, #0077ff);
+  text-decoration: none;
+  border-radius: 9999px;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  margin-top: 0.5rem;
+  text-shadow: 0 1px 1px #00387838;
+  box-shadow: 0 1px 2px #00295738;
+  transition: all 0.2s ease;
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+a.cta span {
+  display: inline-block;
+  transition: all 0.2s ease;
+}
+a.cta:hover span {
+  transform: translateX(3px);
+}
+a.cta:hover {
+  box-shadow: 0 5px 30px -10px #0078ffab;
+  filter: brightness(1.05);
+}
+a.cta:active {
+  box-shadow: 0 1px 3px #00295738;
+  filter: brightness(0.95);
+}
+a.cta:active span {
+  transform: translateX(5px);
+}
+a.cta:focus-visible {
+  outline: 2px solid hsl(var(--nextra-primary-hue) 100% 77%);
+  outline-offset: 2px;
+}
+a.cta:focus-visible span {
+  transform: translateX(3px);
+}
