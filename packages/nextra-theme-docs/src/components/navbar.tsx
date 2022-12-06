@@ -19,7 +19,7 @@ const classes = {
   link: cn(
     'nx-text-sm contrast-more:nx-text-gray-700 contrast-more:dark:nx-text-gray-100'
   ),
-  active: cn('nx-subpixel-antialiased nx-font-medium'),
+  active: cn('nx-font-medium nx-subpixel-antialiased'),
   inactive: cn(
     'nx-text-gray-600 hover:nx-text-gray-800 dark:nx-text-gray-400 dark:hover:nx-text-gray-200'
   )
@@ -159,7 +159,7 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
               key={page.route}
               className={cn(
                 classes.link,
-                '-nx-ml-2 nx-hidden nx-whitespace-nowrap nx-p-2 md:nx-inline-block nx-relative',
+                'nx-relative -nx-ml-2 nx-hidden nx-whitespace-nowrap nx-p-2 md:nx-inline-block',
                 !isActive || page.newWindow ? classes.inactive : classes.active
               )}
               newWindow={page.newWindow}
