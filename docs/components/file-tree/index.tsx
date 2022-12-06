@@ -5,9 +5,11 @@ import type { ReactElement } from 'react'
 const ctx = createContext(0)
 
 export const { Provider, Consumer } = ctx
+
 export function useIndent() {
   return useContext(ctx) || 0
 }
+
 export default ctx
 
 interface FolderProps {
@@ -55,11 +57,11 @@ const Folder: React.FC<FolderProps> = React.memo(
     const [isOpen, setIsOpen] = useState(defaultOpen || false)
 
     const toggle = useCallback(() => {
-      onToggle && onToggle(!isOpen)
+      onToggle?.(!isOpen)
       setIsOpen(!isOpen)
     }, [isOpen, onToggle])
 
-    const isFolderOpen = typeof open === 'undefined' ? isOpen : open
+    const isFolderOpen = open === undefined ? isOpen : open
 
     return (
       <li className={cn('flex list-none flex-col', { ['']: isFolderOpen })}>
@@ -112,10 +114,11 @@ const File: React.FC<FileProps> = React.memo(
   ({ label, name, active, ...props }) => {
     return (
       <li
-        className={cn('flex list-none', {
-          ['nx-text-primary-600 contrast-more:!nx-text-primary-600 contrast-more:nx-text-gray-900 contrast-more:nx-underline contrast-more:dark:nx-text-gray-50']:
-            active
-        })}
+        className={cn(
+          'flex list-none',
+          active &&
+            'nx-text-primary-600 contrast-more:nx-text-gray-900 contrast-more:nx-underline'
+        )}
       >
         <a {...props} className="inline-flex cursor-default items-center py-1">
           <Ident />
