@@ -131,3 +131,11 @@ input[type='search'] {
 .nextra-banner-hidden .nextra-banner-container {
   @apply nx-hidden;
 }
+
+[data-reach-skip-link] {
+  @apply nx-sr-only;
+}
+
+[data-reach-skip-link]:focus {
+  @apply nx-not-sr-only nx-fixed nx-ml-6 nx-top-0 nx-bg-white nx-text-lg nx-px-6 nx-py-2 nx-mt-2 nx-outline-none nx-ring nx-z-50;
+}

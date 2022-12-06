@@ -1,10 +1,9 @@
 import type { PageMapItem, PageOpts } from 'nextra'
 import type { ReactElement, ReactNode } from 'react'
-
 import React, { useMemo } from 'react'
 import { useRouter } from 'next/router'
 import 'focus-visible'
-import { SkipNavContent } from '@reach/skip-nav'
+import { SkipNavContent, SkipNavLink } from '@reach/skip-nav'
 import cn from 'clsx'
 import { MDXProvider } from '@mdx-js/react'
 
@@ -88,7 +87,7 @@ const Body = ({
       className={cn(
         'nx-flex nx-min-h-[calc(100vh-4rem)] nx-w-full nx-min-w-0 nx-max-w-full nx-justify-center nx-pb-8 nx-pr-[calc(env(safe-area-inset-right)-1.5rem)]',
         themeContext.typesetting === 'article' &&
-          'nextra-body-typesetting-article'
+        'nextra-body-typesetting-article'
       )}
     >
       <main className="nx-w-full nx-min-w-0 nx-max-w-4xl nx-px-6 nx-pt-4 md:nx-px-8">
@@ -97,6 +96,14 @@ const Body = ({
       </main>
     </article>
   )
+}
+
+const SkipLink = () => {
+  /** SkipNaiLink will break fast-refresh */
+  if (process.env.NODE_ENV === 'production') {
+    return <SkipNavLink />
+  }
+  return null
 }
 
 const InnerLayout = ({
@@ -131,8 +138,8 @@ const InnerLayout = ({
 
   const tocEl =
     activeType === 'page' ||
-    !themeContext.toc ||
-    themeContext.layout !== 'default' ? (
+      !themeContext.toc ||
+      themeContext.layout !== 'default' ? (
       themeContext.layout !== 'full' &&
       themeContext.layout !== 'raw' && (
         <nav className={tocClassName} aria-label="table of contents" />
@@ -233,6 +240,7 @@ export default function Layout(props: any): ReactElement {
   const { pageOpts, Content } = context
   return (
     <ConfigProvider value={context}>
+      <SkipLink />
       <InnerLayout {...pageOpts}>
         <Content {...props} />
       </InnerLayout>
