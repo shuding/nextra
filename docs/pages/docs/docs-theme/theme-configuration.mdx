@@ -41,12 +41,12 @@ Then Nextra will automatically generate the correct file path for all pages.
 
 ### SEO Options
 
-You can configure SEO related settings via the `useNextSeoProps` option. The `useNextSeoProps` function returns the props that will be passed to the [Next SEO](https://github.com/garmeeh/next-seo#add-seo-to-page) component. 
+You can configure SEO related settings via the `useNextSeoProps` option. The `useNextSeoProps` function returns the props that will be passed to the [Next SEO](https://github.com/garmeeh/next-seo#add-seo-to-page) component.
 
-It is also a hook so you can use APIs like `useRouter` inside to return values conditionally.
+It is also a hook, so you can use APIs like `useRouter` inside to return values conditionally.
 
 <OptionTable options={[
-  ['useNextSeoProps', '(() => NextSeoProps)', 'A React hook function that returns options for Next SEO.'],
+  ['useNextSeoProps', '() => NextSeoProps', 'A React hook function that returns options for Next SEO.'],
 ]}/>
 
 For example, we can have all pages rendering the same suffix for `<title>`:
@@ -162,6 +162,7 @@ The logo of the website rendered on the navbar. It can be a React node or a func
 
 <OptionTable options={[
   ['logo', 'React.ReactNode | React.FC', 'Logo of the website.'],
+  ['logoLink', 'boolean | string', 'Link of the logo.'],
 ]}/>
 
 import logoImage from '../../../public/assets/docs/logo.png'
@@ -247,15 +248,17 @@ Check out [Page Configuration](/docs/docs-theme/page-configuration#navbar-items)
   className?: string
   directories: Item[]
 }>`, ''],
-  ['search.emptyResult', 'React.ReactNode | React.FC', ''],
-  ['search.placeholder', 'string | (() => string)', ''],
+  ['search.emptyResult', 'React.ReactNode | React.FC', 'Not found text'],
+  ['search.loading', 'string | (() => string)', 'Loading text'],
+  ['search.placeholder', 'string | (() => string)', 'Placeholder text'],
 ]}/>
 
 ### Banner
 
-Show a dismissable banner on the top of the website. It can be used to show a warning or a notice.
+Show a dismissible banner on the top of the website. It can be used to show a warning or a notice.
 
 <OptionTable options={[
+  ['banner.dismissible', 'boolean', 'Closable banner or not.'],
   ['banner.key', 'string', 'Storage key to keep the banner state (dismissed or not).'],
   ['banner.content', 'React.ReactNode | React.FC', 'Content of the banner.'],
 ]}/>
@@ -286,7 +289,8 @@ export default {
 Customize the entire navbar component.
 
 <OptionTable options={[
-  ['navbar', 'React.ReactNode | React.FC<NavBarProps>', 'Navbar component.'],
+  ['navbar.component', 'React.ReactNode | React.FC<NavBarProps>', 'Navbar component.'],
+  ['navbar.extraContent', 'React.ReactNode | React.FC', 'Display extra content after last icon.'],
 ]}/>
 
 ## Sidebar
@@ -320,7 +324,7 @@ import sidebarTitleComponentImage from '../../../public/assets/docs/sidebar-cust
     ```jsx
     export default {
       sidebar: {
-        titleComponent: ({ title, type }) => {
+        titleComponent({ title, type }) {
           if (type === 'separator') {
             return (
               <div style={{ background: 'cyan', textAlign: 'center' }}>{title}</div>
@@ -330,8 +334,8 @@ import sidebarTitleComponentImage from '../../../public/assets/docs/sidebar-cust
             return <>❓ {title}</>
           }
           return <>👉 {title}</>
-        },
-      },
+        }
+      }
     }
     ```
   </Tab>
@@ -368,12 +372,12 @@ The default writing direction of the website.
   ['direction', '"ltr" | "rtl"', 'Default writing direction.'],
 ]}/>
 
-### Extra Content
+### Main Content
 
-Render extra content at the end of the main area of the page. It can be used to render a comment section, a newsletter form, or any other type of content.
+Render top and/or bottom content of main area of the page. It can be used to render a comment section, a newsletter form, or any other type of content.
 
 <OptionTable options={[
-  ['main.extraContent', 'React.ReactNode | React.FC', 'Extra content after the main content.'],
+  ['main', 'React.FC<{ children: React.ReactNode }>', 'Component of main content.'],
 ]}/>
 
 ## TOC Sidebar
@@ -383,9 +387,9 @@ Render extra content at the end of the main area of the page. It can be used to 
 Show a table of contents on the right side of the page. It’s useful for navigating between headings.
 
 <OptionTable options={[
-  ['toc.float', 'boolean', 'Float the TOC next to the content.'],
   ['toc.component', 'React.ReactNode | React.FC<TOCProps>', 'Custom renderer of the TOC.'],
   ['toc.extraContent', 'React.ReactNode | React.FC', 'Display extra content below the TOC content.'],
+  ['toc.float', 'boolean', 'Float the TOC next to the content.'],
   ['toc.title', 'React.ReactNode | React.FC', 'Title of the TOC sidebar. By default it’s “On This Page”.'],
 ]}/>
 
@@ -398,7 +402,7 @@ Show a table of contents on the right side of the page. It’s useful for naviga
 Show an “Edit this page” link on the page that points to the file URL on GitHub (or other places).
 
 <OptionTable options={[
-  ['editLink.content', 'React.ReactNode | React.FC', 'Content of the default edit link.'],
+  ['editLink.text', 'React.ReactNode | React.FC', 'Content of the default edit link.'],
   ['editLink.component', `React.FC<{
   children: React.ReactNode
   className?: string
@@ -411,11 +415,11 @@ Show an “Edit this page” link on the page that points to the file URL on Git
 The built-in feedback link provides a way for users to submit feedback about the documentation. By default, it’s a link that points to the issue creation form of the docs repository, with the current website title prefilled: [example](https://github.com/shuding/nextra/issues/new?title=Feedback%20for%20%E2%80%9CTheme%20Configuration%E2%80%9D&labels=feedback).
 
 <OptionTable options={[
-  ['feedback.content', 'React.ReactNode | React.FC | undefined', 'Content of the feedback button.'],
+  ['feedback.content', 'React.ReactNode | React.FC', 'Content of the feedback button.'],
   ['feedback.labels', 'string', 'Labels that can be added to the new created GitHub issue.'],
 ]}/>
 
-To disable it, you can set `feedback.content` to `undefined`.
+To disable it, you can set `feedback.content` to `null`.
 
 ## End of Page
 
@@ -437,8 +441,8 @@ import navigationImage from '../../../public/assets/docs/navigation.png'
 export default {
   navigation: {
     prev: true,
-    next: true,
-  },
+    next: true
+  }
 }
 ```
 
