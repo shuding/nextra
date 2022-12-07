@@ -50,7 +50,9 @@ export function I18n() {
   <div className="content-container">
     <h1 className="headline">Make beautiful websites <br className='sm:block hidden'/>with Next.js & MDX.</h1>
     <p className="subtitle">Simple, powerful and flexible site generation framework <br className='sm:block hidden'/>with everything you love from <a className="nextjs-link" href="https://nextjs.org" target="_blank">Next.js</a>.</p>
-    <p className="subtitle"><Link href="/docs">Start →</Link></p>
+    <p className="subtitle">
+      <Link className={styles.cta} href="/docs">Get started <span>→</span></Link>
+    </p>
   </div>
 
   <style jsx>{`
@@ -95,7 +97,7 @@ export function I18n() {
       background-image: url(/assets/card-1.png);
       background-size: cover;
       color: #fff;
-      text-shadow: 0 0 1rem rgba(0,0,0,0.2);
+      text-shadow: 0 0 1rem rgba(0,0,0,0.1);
     }
     :global(.dark #docs-card) {
       background-image: url(/assets/card-1.dark.png);
@@ -120,6 +122,9 @@ export function I18n() {
       display: flex;
       flex-direction: column;
       justify-content: center;
+    }
+    :global(#search-card p) {
+      max-width: 320px;
     }
     :global(#search-card video) {
       position: absolute;
@@ -153,6 +158,10 @@ export function I18n() {
       :global(.feat-darkmode h3) {
         font-size: 4vw;
         font-size: min(48px, max(4vw, 30px));
+      }
+      :global(#search-card video) {
+        aspect-ratio: 787/623;
+        height: auto;
       }
       .headline {
         letter-spacing: -.08rem;
@@ -189,13 +198,20 @@ export function I18n() {
       :global(#search-card) {
         aspect-ratio: 2.5/2;
         justify-content: flex-start;
-        align-items: center;
+        align-items: stretch;
         min-height: 350px;
       }
+      :global(#search-card h3) {
+        text-align: center;
+      }
+      :global(#search-card p) {
+        max-width: 100%;
+      }
       :global(#search-card video) {
-        top: 43%;
         left: 0;
         margin: auto;
+        top: 52%;
+        max-width: 100%;
       }
     }
   `}</style>
@@ -320,7 +336,7 @@ export function I18n() {
         <Feature large lightOnly id="search-card" >
           <div style={{ zIndex: 2}}>
             <h3>Full-text search, <br/>zero-config needed.</h3>
-            <p style={{ maxWidth: 320 }}>Nextra indexes your content automatically at build-time and performs incredibly fast full-text search based on [FlexSearch](https://github.com/nextapps-de/flexsearch).</p>
+            <p>Nextra indexes your content automatically at build-time and performs incredibly fast full-text search via [FlexSearch](https://github.com/nextapps-de/flexsearch).</p>
           </div>
           <div className="absolute w-full h-full inset-0 hidden sm:block" style={{ background: 'linear-gradient(to right, white 250px, transparent)', zIndex: 1 }}/>
           <video autoPlay="autoplay" loop muted playsInline>
