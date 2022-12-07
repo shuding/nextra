@@ -9,7 +9,7 @@ export const BasicLayout = ({ children }: { children: ReactNode }) => {
   const ref = useRef<HTMLHeadingElement>(null)
   return (
     <article
-      className="nx-container nx-prose-sm nx-prose dark:nx-prose-dark md:nx-prose"
+      className="nx-container nx-prose-sm dark:nx-prose-dark md:nx-prose"
       dir="ltr"
     >
       <Head>
@@ -18,7 +18,7 @@ export const BasicLayout = ({ children }: { children: ReactNode }) => {
       </Head>
       <HeadingContext.Provider value={ref}>
         {opts.hasJsxInH1 ? <h1 ref={ref} /> : null}
-        {!opts.hasJsxInH1 ? <h1>{opts.title}</h1> : null}
+        {opts.hasJsxInH1 ? null : <h1>{opts.title}</h1>}
         {children}
         {config.footer}
       </HeadingContext.Provider>

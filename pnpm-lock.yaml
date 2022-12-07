@@ -28,7 +28,7 @@ importers:
       '@edge-runtime/vm': 1.1.0-beta.23
       '@typescript-eslint/parser': ^5.32.0
       eslint: ^8.21.0
-      eslint-plugin-tailwindcss: ^3.6.2
+      eslint-plugin-tailwindcss: ^3.7.1
       eslint-plugin-typescript-sort-keys: ^2.1.0
       prettier: ^2.7.1
       prettier-plugin-tailwindcss: ^0.1.13
@@ -41,7 +41,7 @@ importers:
       '@edge-runtime/vm': 1.1.0-beta.23
       '@typescript-eslint/parser': 5.38.0_4brgkhw6cq4me3drk3kxrpb2mm
       eslint: 8.23.1
-      eslint-plugin-tailwindcss: 3.6.2
+      eslint-plugin-tailwindcss: 3.7.1
       eslint-plugin-typescript-sort-keys: 2.1.0_gl4g3tss5phduo5kw3bd5pm54i
       prettier: 2.7.1
       prettier-plugin-tailwindcss: 0.1.13_prettier@2.7.1
@@ -2528,8 +2528,8 @@ packages:
     engines: {node: '>=12'}
     dev: false
 
-  /eslint-plugin-tailwindcss/3.6.2:
-    resolution: {integrity: sha512-C9Ka3w6W9F5l/3ZDLnkdbqmeujc1vE+p5drjP1Z1UyxgoE1Nh4/f8oQ4XC45PrZsS0Nyv0YKXNH8/dn/FJZKsQ==}
+  /eslint-plugin-tailwindcss/3.7.1:
+    resolution: {integrity: sha512-MCPpVp5VvNYuRz1JYN9sN0r/cgAt3SfIlKbvYjVij+T/8r0z4U8nPY/c07vm+dLYb7mBv9N9LLIR4l9pLHSJaQ==}
     engines: {node: '>=12.13.0'}
     dependencies:
       fast-glob: 3.2.11
@@ -6358,7 +6358,7 @@ packages:
     resolution: {directory: packages/nextra-theme-blog, type: directory}
     id: file:packages/nextra-theme-blog
     name: nextra-theme-blog
-    version: 2.0.0-beta.42
+    version: 2.0.1
     peerDependencies:
       next: '>=9.5.3'
       react: '>=16.13.1'
@@ -6379,7 +6379,7 @@ packages:
     resolution: {directory: packages/nextra-theme-docs, type: directory}
     id: file:packages/nextra-theme-docs
     name: nextra-theme-docs
-    version: 2.0.0-beta.42
+    version: 2.0.1
     peerDependencies:
       next: '>=9.5.3'
       react: '>=16.13.1'
@@ -6408,7 +6408,7 @@ packages:
     resolution: {directory: packages/nextra, type: directory}
     id: file:packages/nextra
     name: nextra
-    version: 2.0.0-beta.42
+    version: 2.0.1
     peerDependencies:
       next: '>=9.5.3'
       react: '>=16.13.1'
