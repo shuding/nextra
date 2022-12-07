@@ -1,6 +1,13 @@
+import styles from './style.module.css'
+
 export function OptionTable({ options }: { options: [string, string, any] }) {
   return (
-    <div className="mt-6 mb-4 overflow-x-auto overscroll-x-contain pb-4">
+    <div
+      className={
+        '-mx-6 mt-6 mb-4 overflow-x-auto overscroll-x-contain px-6 pb-4 ' +
+        styles.container
+      }
+    >
       <table className="w-full border-collapse text-sm">
         <thead>
           <tr className="border-b py-4 text-left dark:border-neutral-700">

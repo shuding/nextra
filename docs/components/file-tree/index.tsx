@@ -32,7 +32,7 @@ const Tree: React.FC<{
   children: ReactElement | ReactElement[]
 }> = ({ children }) => (
   <div className="mt-6 select-none text-sm text-gray-800 dark:text-gray-300">
-    <div className="inline-flex rounded border px-4 py-2 dark:border-neutral-800">
+    <div className="inline-flex rounded-lg border px-4 py-2 dark:border-neutral-800">
       {children}
     </div>
   </div>

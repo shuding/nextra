@@ -118,8 +118,8 @@ const config: DocsThemeConfig = {
   footer: {
     text: () => {
       return (
-        <div>
-          <div className="mb-6 block">
+        <div className="flex w-full flex-col items-center sm:items-start">
+          <div>
             <a
               className="flex items-center gap-1 text-current"
               target="_blank"

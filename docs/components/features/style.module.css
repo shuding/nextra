@@ -4,62 +4,7 @@
   color: #000;
   background-color: white;
   overflow: hidden;
-  border-radius: 0.8em;
-  clip-path: polygon(
-    1.389012em 0em,
-    calc(100% - 1.389012em) 0em,
-    calc(100% - 1.194572em) 0.001596em,
-    calc(100% - 1.000425em) 0.011608em,
-    calc(100% - 0.807927em) 0.03823em,
-    calc(100% - 0.620879em) 0.090424em,
-    calc(100% - 0.445587em) 0.173591em,
-    calc(100% - 0.292642em) 0.292642em,
-    calc(100% - 0.173591em) 0.445587em,
-    calc(100% - 0.090424em) 0.620879em,
-    calc(100% - 0.03823em) 0.807927em,
-    calc(100% - 0.011608em) 1.000425em,
-    calc(100% - 0.001596em) 1.194572em,
-    100% 1.389012em,
-    100% calc(100% - 1.389012em),
-    calc(100% - 0.001596em) calc(100% - 1.194572em),
-    calc(100% - 0.011608em) calc(100% - 1.000425em),
-    calc(100% - 0.03823em) calc(100% - 0.807927em),
-    calc(100% - 0.090424em) calc(100% - 0.620879em),
-    calc(100% - 0.173591em) calc(100% - 0.445587em),
-    calc(100% - 0.292642em) calc(100% - 0.292642em),
-    calc(100% - 0.445587em) calc(100% - 0.173591em),
-    calc(100% - 0.620879em) calc(100% - 0.090424em),
-    calc(100% - 0.807927em) calc(100% - 0.03823em),
-    calc(100% - 1.000425em) calc(100% - 0.011608em),
-    calc(100% - 1.194572em) calc(100% - 0.001596em),
-    calc(100% - 1.389012em) 100%,
-    1.389012em 100%,
-    1.194572em calc(100% - 0.001596em),
-    1.000425em calc(100% - 0.011608em),
-    0.807927em calc(100% - 0.03823em),
-    0.620879em calc(100% - 0.090424em),
-    0.445587em calc(100% - 0.173591em),
-    0.292642em calc(100% - 0.292642em),
-    0.173591em calc(100% - 0.445587em),
-    0.090424em calc(100% - 0.620879em),
-    0.03823em calc(100% - 0.807927em),
-    0.011608em calc(100% - 1.000425em),
-    0.001596em calc(100% - 1.194572em),
-    0em calc(100% - 1.389012em),
-    0em 1.389012em,
-    0.001596em 1.194572em,
-    0.011608em 1.000425em,
-    0.03823em 0.807927em,
-    0.090424em 0.620879em,
-    0.173591em 0.445587em,
-    0.292642em 0.292642em,
-    0.445587em 0.173591em,
-    0.620879em 0.090424em,
-    0.807927em 0.03823em,
-    1.000425em 0.011608em,
-    1.194572em 0.001596em,
-    1.389012em 0em
-  );
+  border-radius: 1.78em;
 }
 .feature.large {
   grid-column: span 2;
@@ -79,6 +24,12 @@
 :global(.dark) .feature:not(.light-only) {
   color: #fff;
   background-color: #202020;
+}
+.feature {
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 3%);
+}
+:global(.dark) .feature {
+  box-shadow: 0 0 0 1px rgb(82 82 82 / 60%);
 }
 
 .features {

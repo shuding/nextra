@@ -7,6 +7,10 @@
   );
 }
 
+.card img {
+  -webkit-user-drag: none;
+}
+
 .card:hover svg {
   color: currentColor;
 }
