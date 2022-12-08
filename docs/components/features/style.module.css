@@ -28,9 +28,47 @@
 .feature {
   box-shadow: 0 8px 16px rgb(0 0 0 / 8%), 0 1px 2px rgb(0 0 0 / 4%),
     0 0 0 1px rgb(0 0 0 / 3%);
+  transition: box-shadow 0.3s ease;
 }
 :global(.dark) .feature {
   box-shadow: 0 0 0 1px rgb(82 82 82 / 60%);
+}
+.feature .link {
+  position: absolute;
+  right: 1em;
+  bottom: 1em;
+  z-index: 2;
+  width: 2.5em;
+  height: 2.5em;
+  background-color: rgb(0 0 0 / 39%);
+  backdrop-filter: blur(10px);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 0 2px rgb(154 154 154 / 56%), 0 0 30px rgb(0 0 0 / 10%);
+  transition: all 0.2s ease;
+}
+@media (hover: hover) {
+  .feature .link {
+    opacity: 0;
+  }
+  .feature:hover .link {
+    opacity: 1;
+  }
+  .feature .link:hover {
+    transform: scale(1.05);
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(64, 64, 64, 0.39);
+    box-shadow: 0 0 0 2px rgba(220, 220, 220, 0.56), 0 0 30px rgb(0 0 0 / 10%);
+  }
+  .feature .link:active {
+    transform: scale(1);
+    color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(22, 22, 22, 0.39);
+    box-shadow: 0 0 0 2px rgba(178, 178, 178, 0.56), 0 0 30px rgb(0 0 0 / 10%);
+  }
 }
 
 .features {

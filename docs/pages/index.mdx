@@ -248,12 +248,12 @@ import docsCardDark from '../public/assets/card-1.dark.png'
   <div className="features-container">
     <div className="content-container">
       <Features>
-        <Feature index={0} large centered id="docs-card">
+        <Feature index={0} large centered id="docs-card" href="/docs/docs-theme/start">
           <Image src={docsCard} alt="Background" loading="eager" />
           <Image src={docsCardDark} alt="Background (Dark)" loading="eager" />
           <h3>Full-power documentation <br className="show-on-mobile"/>in minutes.</h3>
         </Feature>
-        <Feature index={1} centered className="card-with-border">
+        <Feature index={1} centered className="card-with-border" href="/docs/guide/image">
           <div className="h-full flex flex-col justify-between">
             <h3>Links and images are <br className="show-on-mobile"/>always <span style={{ fontWeight: 300 }}>optimized</span>.</h3>
             <p className='text-left mb-8'>Nextra automatically converts Markdown links and images to use [Next.js Link](https://nextjs.org/docs/routing/introduction#linking-between-pages) and [Next.js Image](https://nextjs.org/docs/basic-features/image-optimization#local-images) when possible. No slow navigation or layout shift.</p>
@@ -280,11 +280,11 @@ import docsCardDark from '../public/assets/card-1.dark.png'
             </div>
           </div>
         </Feature>
-        <Feature index={2} id="highlighting-card">
+        <Feature index={2} id="highlighting-card" href="/docs/guide/syntax-highlighting">
           <h3>Advanced syntax <br className="show-on-mobile"/>highlighting solution.</h3>
           <p>Performant and reliable build-time syntax highlighting powered by [Shiki](https://shiki.matsu.io).</p>
         </Feature>
-        <Feature index={3}>
+        <Feature index={3} href="/docs/guide/i18n">
           <h3>I18n as easy as <br className="show-on-mobile"/>creating new files.</h3>
           <p className='mb-4'>Name your page files with locales suffixed, Nextra and Next.js will do the rest for you.</p>
           <I18n/>
@@ -298,7 +298,7 @@ import docsCardDark from '../public/assets/card-1.dark.png'
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           color: '#fff'
-        }}>
+        }} href="/docs/guide/markdown">
           <svg width="70%" viewBox="0 0 69 29" fill="none" xmlns="http://www.w3.org/2000/svg" style={{
             filter: 'drop-shadow(0 2px 10px rgba(0, 0, 0, .1))'
           }}>
@@ -312,7 +312,6 @@ import docsCardDark from '../public/assets/card-1.dark.png'
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          // border: '1px solid #2a2a2a'
         }}>
           <motion.div
             animate={{
@@ -364,7 +363,7 @@ import docsCardDark from '../public/assets/card-1.dark.png'
             }}
           >Dark <br/>mode <br/>included.</motion.h3>
         </Feature>
-        <Feature index={6} large id="search-card" >
+        <Feature index={6} large id="search-card" href="/docs/docs-theme/theme-configuration#search">
           <div style={{ zIndex: 2}}>
             <h3>Full-text search, <br/>zero-config needed.</h3>
             <p>Nextra indexes your content automatically at build-time and performs incredibly fast full-text search via [FlexSearch](https://github.com/nextapps-de/flexsearch).</p>
@@ -385,7 +384,7 @@ import docsCardDark from '../public/assets/card-1.dark.png'
           backgroundRepeat: 'no-repeat',
           textShadow: '0 1px 6px rgb(38 59 82 / 18%)',
           aspectRatio: '1.765',
-        }}>
+        }} href="/docs/docs-theme/page-configuration">
           <h3>Organize pages intuitively, <br/>with file-system routing from Next.js.</h3>
         </Feature>
         <Feature index={8} id="a11y-card" className='card-with-border' style={{
@@ -396,9 +395,9 @@ import docsCardDark from '../public/assets/card-1.dark.png'
           <h3>A11y as a top priority.</h3>
           <p>Nextra respects system options <br className="show-on-mobile"/>such as <b>Increase Contrast</b> and <b>Reduce Motion</b>.</p>
         </Feature>
-        <Feature index={9}>
+        <Feature index={9} href="/docs/guide/ssg">
           <h3>Hybrid rendering, <br/>next generation.</h3>
-          <p>You can leverage the hybrid rendering power from Next.js with your Markdown content including [SSG](https://nextjs.org/docs/basic-features/pages#static-generation-recommended), [SSR](https://nextjs.org/docs/basic-features/pages#server-side-rendering), and [ISR](https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration).</p>
+          <p className='mr-6'>You can leverage the hybrid rendering power from Next.js with your Markdown content including [SSG](https://nextjs.org/docs/basic-features/pages#static-generation-recommended), [SSR](https://nextjs.org/docs/basic-features/pages#server-side-rendering), and [ISR](https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration).</p>
         </Feature>
         <Feature index={10} large>
           <h3>And more...</h3>
