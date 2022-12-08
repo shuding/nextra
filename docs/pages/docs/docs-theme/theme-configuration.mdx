@@ -260,14 +260,14 @@ Show a dismissible banner on the top of the website. It can be used to show a wa
 <OptionTable options={[
   ['banner.dismissible', 'boolean', 'Closable banner or not.'],
   ['banner.key', 'string', 'Storage key to keep the banner state (dismissed or not).'],
-  ['banner.content', 'React.ReactNode | React.FC', 'Content of the banner.'],
+  ['banner.text', 'React.ReactNode | React.FC', 'Text of the banner.'],
 ]}/>
 
 #### Banner key
 
 A banner can be dismissed. By default `banner.key` will be `"nextra-banner"` and it’s used by [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) to keep the banner state (dismissed or not) on the client.
 
-If you have updated your banner content, you should change the key to make sure the banner is shown again. The best practice is to always use a descriptive key for the current content, for example:
+If you have updated your banner text, you should change the key to make sure the banner is shown again. The best practice is to always use a descriptive key for the current text, for example:
 
 import bannerImage from '../../../public/assets/docs/banner.png'
 
@@ -277,7 +277,7 @@ import bannerImage from '../../../public/assets/docs/banner.png'
 export default {
   banner: {
     key: '2.0-release',
-    content: <a href="https://nextra.site" target="_blank">
+    text: <a href="https://nextra.site" target="_blank">
       🎉 Nextra 2.0 is released. Read more →
     </a>,
   },
