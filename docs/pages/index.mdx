@@ -5,6 +5,7 @@ title: 'Nextra – Next.js Static Site Generator'
 import Link from 'next/link'
 import cn from 'clsx'
 import { useState } from 'react'
+import Image from 'next/image'
 import { motion } from "framer-motion"
 
 import { Features, Feature } from '@components/features'
@@ -45,6 +46,9 @@ export function I18n() {
     </div>
   }/>
 }
+
+import docsCard from '../public/assets/card-1.png'
+import docsCardDark from '../public/assets/card-1.dark.png'
 
 <div className="home-content">
   <div className="content-container">
@@ -245,8 +249,8 @@ export function I18n() {
     <div className="content-container">
       <Features>
         <Feature index={0} large centered id="docs-card">
-          <>![Background](/assets/card-1.png)</>
-          <>![Background (Dark)](/assets/card-1.dark.png)</>
+          <Image src={docsCard} alt="Background" loading="eager" />
+          <Image src={docsCardDark} alt="Background (Dark)" loading="eager" />
           <h3>Full-power documentation <br className="show-on-mobile"/>in minutes.</h3>
         </Feature>
         <Feature index={1} centered className="card-with-border">
