@@ -17,7 +17,7 @@ export function Feature({
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true, margin: '-20px' }}
-      transition={{ duration: Math.min(0.25 + index * 0.2, 0.8), delay: 0.1 }}
+      transition={{ duration: Math.min(0.25 + index * 0.2, 0.8) }}
       className={cn(
         styles.feature,
         large && styles.large,

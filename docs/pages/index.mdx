@@ -70,7 +70,6 @@ export function I18n() {
     }
     .features-container .content-container {
       margin-top: -8rem;
-      filter: drop-shadow(0 8px 16px rgba(0,0,0,.08)) drop-shadow(0 1px 2px rgba(0,0,0,.04));
     }
     :global(.dark) .features-container {
       background-color: #000;
@@ -232,10 +231,12 @@ export function I18n() {
         max-width: 100%;
       }
       :global(#search-card video) {
-        left: 0;
-        margin: auto;
-        top: 52%;
-        max-width: 100%;
+        position: relative;
+        margin: .75em -1.75em 0;
+        max-width: calc(100% + 3.5em);
+      }
+      :global(.dark #search-card video) {
+        mix-blend-mode: lighten;
       }
     }
   `}</style>

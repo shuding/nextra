@@ -26,7 +26,8 @@
   background-color: #202020;
 }
 .feature {
-  box-shadow: 0 0 0 1px rgb(0 0 0 / 3%);
+  box-shadow: 0 8px 16px rgb(0 0 0 / 8%), 0 1px 2px rgb(0 0 0 / 4%),
+    0 0 0 1px rgb(0 0 0 / 3%);
 }
 :global(.dark) .feature {
   box-shadow: 0 0 0 1px rgb(82 82 82 / 60%);
