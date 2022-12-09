@@ -227,6 +227,7 @@ exports[`Page Process > pageMap en-US 1`] = `
             "revalidation": "Auto Revalidation",
             "suspense": "Suspense",
             "typescript": "TypeScript :)",
+            "understanding": "Understanding",
             "with-nextjs": "Next.js SSG and SSR",
             "wrap-toc-items": "Wrap Table of Content Items",
           },
@@ -473,6 +474,12 @@ exports[`Page Process > pageMap en-US 1`] = `
         {
           "kind": "MdxPage",
           "locale": "en-US",
+          "name": "understanding",
+          "route": "/docs/understanding",
+        },
+        {
+          "kind": "MdxPage",
+          "locale": "en-US",
           "name": "with-nextjs",
           "route": "/docs/with-nextjs",
         },
@@ -706,6 +713,7 @@ exports[`Page Process > pageMap zh-CN 1`] = `
             "revalidation": "自动重新请求",
             "suspense": "Suspense",
             "typescript": "Typescript",
+            "understanding": "Understanding",
             "with-nextjs": "Next.js SSG 和 SSR",
             "wrap-toc-items": "包裝目錄項",
           },
@@ -906,6 +914,12 @@ exports[`Page Process > pageMap zh-CN 1`] = `
           "locale": "zh-CN",
           "name": "suspense",
           "route": "/docs/suspense",
+        },
+        {
+          "kind": "MdxPage",
+          "locale": "zh-CN",
+          "name": "understanding",
+          "route": "/docs/understanding",
         },
         {
           "kind": "MdxPage",
