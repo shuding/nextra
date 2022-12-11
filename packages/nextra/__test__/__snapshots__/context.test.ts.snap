@@ -1337,6 +1337,69 @@ exports[`context > getAllPages() > should work 1`] = `
         "name": "code-block-without-language",
         "route": "/docs/code-block-without-language",
       },
+      {
+        "kind": "MdxPage",
+        "locale": "en-US",
+        "meta": {
+          "title": "Understanding",
+        },
+        "name": "understanding",
+        "route": "/docs/understanding",
+      },
+      {
+        "kind": "MdxPage",
+        "locale": "es-ES",
+        "meta": {
+          "title": "Understanding",
+        },
+        "name": "understanding",
+        "route": "/docs/understanding",
+      },
+      {
+        "kind": "MdxPage",
+        "locale": "ja",
+        "meta": {
+          "title": "Understanding",
+        },
+        "name": "understanding",
+        "route": "/docs/understanding",
+      },
+      {
+        "kind": "MdxPage",
+        "locale": "ko",
+        "meta": {
+          "title": "Understanding",
+        },
+        "name": "understanding",
+        "route": "/docs/understanding",
+      },
+      {
+        "kind": "MdxPage",
+        "locale": "pt-BR",
+        "meta": {
+          "title": "Understanding",
+        },
+        "name": "understanding",
+        "route": "/docs/understanding",
+      },
+      {
+        "kind": "MdxPage",
+        "locale": "ru",
+        "meta": {
+          "title": "Understanding",
+        },
+        "name": "understanding",
+        "route": "/docs/understanding",
+      },
+      {
+        "kind": "MdxPage",
+        "locale": "zh-CN",
+        "meta": {
+          "title": "Understanding",
+        },
+        "name": "understanding",
+        "route": "/docs/understanding",
+      },
     ],
     "kind": "Folder",
     "meta": {
@@ -3102,6 +3165,69 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
     },
     "name": "code-block-without-language",
     "route": "/docs/code-block-without-language",
+  },
+  {
+    "kind": "MdxPage",
+    "locale": "en-US",
+    "meta": {
+      "title": "Understanding",
+    },
+    "name": "understanding",
+    "route": "/docs/understanding",
+  },
+  {
+    "kind": "MdxPage",
+    "locale": "es-ES",
+    "meta": {
+      "title": "Understanding",
+    },
+    "name": "understanding",
+    "route": "/docs/understanding",
+  },
+  {
+    "kind": "MdxPage",
+    "locale": "ja",
+    "meta": {
+      "title": "Understanding",
+    },
+    "name": "understanding",
+    "route": "/docs/understanding",
+  },
+  {
+    "kind": "MdxPage",
+    "locale": "ko",
+    "meta": {
+      "title": "Understanding",
+    },
+    "name": "understanding",
+    "route": "/docs/understanding",
+  },
+  {
+    "kind": "MdxPage",
+    "locale": "pt-BR",
+    "meta": {
+      "title": "Understanding",
+    },
+    "name": "understanding",
+    "route": "/docs/understanding",
+  },
+  {
+    "kind": "MdxPage",
+    "locale": "ru",
+    "meta": {
+      "title": "Understanding",
+    },
+    "name": "understanding",
+    "route": "/docs/understanding",
+  },
+  {
+    "kind": "MdxPage",
+    "locale": "zh-CN",
+    "meta": {
+      "title": "Understanding",
+    },
+    "name": "understanding",
+    "route": "/docs/understanding",
   },
 ]
 `;
