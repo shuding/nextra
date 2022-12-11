@@ -6,7 +6,11 @@ import { truthy } from '../utils'
 import { existsSync } from '../file-system'
 import { EXTERNAL_URL_REGEX, PUBLIC_DIR } from '../constants'
 
-const blurFormat = [".jpeg", ".png", ".webp", ".avif"]
+/**
+ * @ link https://github.com/vercel/next.js/blob/6cfebfb02c2a52a1f99fca59a2eac2d704d053db/packages/next/build/webpack/loaders/next-image-loader.js#L6
+ * @ link https://github.com/vercel/next.js/blob/6cfebfb02c2a52a1f99fca59a2eac2d704d053db/packages/next/client/image.tsx#LL702
+ */
+const VALID_BLUR_EXT = [".jpeg", ".png", ".webp", ".avif"]
 
 const getASTNodeImport = (name: string, from: string) => ({
   type: 'mdxjsEsm',
@@ -69,7 +73,7 @@ export const remarkStaticImage: Plugin<[{ filePath: string }], Root> =
         }
         // Unique variable name for the given static image URL.
         const tempVariableName = `$nextraImage${importsToInject.length}`
-        const blur = blurFormat.some((ext) => url.endsWith(ext))
+        const blur = VALID_BLUR_EXT.some((ext) => url.endsWith(ext))
         // Replace the image node with a MDX component node (Next.js Image).
         Object.assign(node, {
           type: 'mdxJsxFlowElement',
