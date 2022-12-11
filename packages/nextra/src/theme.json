@@ -1,6 +1,6 @@
 {
   "name": "css-variables",
-  "type": "light",
+  "type": "css",
   "colors": {
     "editor.foreground": "#000001",
     "editor.background": "#000002"
