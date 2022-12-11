@@ -50,7 +50,7 @@
     "flexsearch": "^0.7.21",
     "focus-visible": "^5.2.0",
     "git-url-parse": "^13.1.0",
-    "github-slugger": "^1.4.0",
+    "github-slugger": "^2.0.0",
     "intersection-observer": "^0.12.2",
     "match-sorter": "^6.3.1",
     "next-seo": "^5.5.0",

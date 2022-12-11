@@ -78,7 +78,7 @@
   "dependencies": {
     "@mdx-js/mdx": "^2.1.3",
     "@napi-rs/simple-git": "^0.1.8",
-    "github-slugger": "^1.4.0",
+    "github-slugger": "^2.0.0",
     "graceful-fs": "^4.2.10",
     "gray-matter": "^4.0.3",
     "rehype-mdx-title": "^1.0.0",
