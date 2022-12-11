@@ -31,7 +31,7 @@ importers:
       eslint-plugin-tailwindcss: ^3.7.1
       eslint-plugin-typescript-sort-keys: ^2.1.0
       prettier: ^2.7.1
-      prettier-plugin-tailwindcss: ^0.1.13
+      prettier-plugin-tailwindcss: ^0.2.0
       rimraf: ^3.0.2
       tsup: ^6.2.1
       turbo: ^1.4.2
@@ -44,7 +44,7 @@ importers:
       eslint-plugin-tailwindcss: 3.7.1
       eslint-plugin-typescript-sort-keys: 2.1.0_gl4g3tss5phduo5kw3bd5pm54i
       prettier: 2.7.1
-      prettier-plugin-tailwindcss: 0.1.13_prettier@2.7.1
+      prettier-plugin-tailwindcss: 0.2.1_prettier@2.7.1
       rimraf: 3.0.2
       tsup: 6.2.3_typescript@4.7.4
       turbo: 1.4.7
@@ -115,7 +115,7 @@ importers:
     devDependencies:
       autoprefixer: 10.4.11_postcss@8.4.14
       postcss: 8.4.14
-      tailwindcss: 3.1.8_postcss@8.4.14
+      tailwindcss: 3.1.8
     dependenciesMeta:
       nextra:
         injected: true
@@ -215,7 +215,7 @@ importers:
       react: 18.2.0
       react-cusdis: 2.1.3_biqbaboplfbrettd7655fr4n2y
       react-dom: 18.2.0_react@18.2.0
-      tailwindcss: 3.1.8_postcss@8.4.14
+      tailwindcss: 3.1.8
       vitest: 0.21.1
 
   packages/nextra-theme-docs:
@@ -284,7 +284,7 @@ importers:
       postcss-import: 14.1.0_postcss@8.4.14
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-      tailwindcss: 3.1.8_postcss@8.4.14
+      tailwindcss: 3.1.8
       vitest: 0.21.1
 
 packages:
@@ -966,7 +966,7 @@ packages:
       lodash.castarray: 4.4.0
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
-      tailwindcss: 3.1.8_postcss@8.4.14
+      tailwindcss: 3.1.8
     dev: true
 
   /@types/acorn/4.0.6:
@@ -2506,7 +2506,7 @@ packages:
     dependencies:
       fast-glob: 3.2.11
       postcss: 8.4.14
-      tailwindcss: 3.1.8_postcss@8.4.14
+      tailwindcss: 3.1.8
     transitivePeerDependencies:
       - ts-node
     dev: true
@@ -4780,8 +4780,8 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
-  /prettier-plugin-tailwindcss/0.1.13_prettier@2.7.1:
-    resolution: {integrity: sha512-/EKQURUrxLu66CMUg4+1LwGdxnz8of7IDvrSLqEtDqhLH61SAlNNUSr90UTvZaemujgl3OH/VHg+fyGltrNixw==}
+  /prettier-plugin-tailwindcss/0.2.1_prettier@2.7.1:
+    resolution: {integrity: sha512-aIO8IguumORyRsmT+E7JfJ3A9FEoyhqZR7Au7TBOege3VZkgMvHJMkufeYp4zjnDK2iq4ktkvGMNOQR9T8lisQ==}
     engines: {node: '>=12.17.0'}
     peerDependencies:
       prettier: '>=2.2.0'
@@ -5424,12 +5424,10 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /tailwindcss/3.1.8_postcss@8.4.14:
+  /tailwindcss/3.1.8:
     resolution: {integrity: sha512-YSneUCZSFDYMwk+TGq8qYFdCA3yfBRdBlS7txSq0LUmzyeqRe3a8fBQzbz9M3WS/iFT4BNf/nmw9mEzrnSaC0g==}
     engines: {node: '>=12.13.0'}
     hasBin: true
-    peerDependencies:
-      postcss: ^8.0.9
     dependencies:
       arg: 5.0.2
       chokidar: 3.5.3
