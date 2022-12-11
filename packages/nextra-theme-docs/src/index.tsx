@@ -4,12 +4,11 @@ import type { ReactElement, ReactNode } from 'react'
 import React, { useMemo } from 'react'
 import { useRouter } from 'next/router'
 import 'focus-visible'
-import { SkipNavContent } from '@reach/skip-nav'
 import cn from 'clsx'
 import { MDXProvider } from '@mdx-js/react'
 
 import './polyfill'
-import { Head, NavLinks, Sidebar, Breadcrumb, Banner } from './components'
+import { Head, NavLinks, Sidebar, SkipNavContent, Breadcrumb, Banner } from './components'
 import { getComponents } from './mdx-components'
 import { ActiveAnchorProvider, ConfigProvider, useConfig } from './contexts'
 import { DEFAULT_LOCALE } from './constants'
@@ -254,5 +253,7 @@ export {
   Tabs,
   Tab,
   Navbar,
+  SkipNavContent,
+  SkipNavLink,
   ThemeSwitch
 } from './components'
