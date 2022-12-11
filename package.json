@@ -20,7 +20,6 @@
   },
   "devDependencies": {
     "@changesets/cli": "^2.24.2",
-    "@edge-runtime/vm": "1.1.0-beta.23",
     "@typescript-eslint/parser": "^5.32.0",
     "eslint": "^8.21.0",
     "eslint-plugin-tailwindcss": "^3.7.1",
