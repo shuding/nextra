@@ -25,7 +25,7 @@ importers:
   .:
     specifiers:
       '@changesets/cli': ^2.24.2
-      '@edge-runtime/vm': 1.1.0-beta.23
+      '@edge-runtime/vm': 1.1.0
       '@typescript-eslint/parser': ^5.32.0
       eslint: ^8.21.0
       eslint-plugin-tailwindcss: ^3.7.1
@@ -38,7 +38,7 @@ importers:
       typescript: ^4.7.4
     devDependencies:
       '@changesets/cli': 2.24.4
-      '@edge-runtime/vm': 1.1.0-beta.23
+      '@edge-runtime/vm': 1.1.0
       '@typescript-eslint/parser': 5.38.0_4brgkhw6cq4me3drk3kxrpb2mm
       eslint: 8.23.1
       eslint-plugin-tailwindcss: 3.7.1
@@ -499,14 +499,14 @@ packages:
       prettier: 2.7.1
     dev: true
 
-  /@edge-runtime/primitives/1.1.0-beta.31:
-    resolution: {integrity: sha512-OO1x32aJoxgME1k77RVxVNsazs5NY/SNwYEN8ptlZ6DKUXn0eesXftDsmlypX/OU0ZeJc61/xNVUuoeyDGJDVA==}
+  /@edge-runtime/primitives/1.1.0:
+    resolution: {integrity: sha512-MpL5fKlOs9mz5DMRuFchLe3Il84t7XpfbPq4qtaEK37uNMCRx1MzA3d7A4aTsR/guXSZvV/AtEbKVqBWjuSThA==}
     dev: true
 
-  /@edge-runtime/vm/1.1.0-beta.23:
-    resolution: {integrity: sha512-XBp3rCuX4scJVOo2KconAotL5XGX3zdd8IkfDNr5VVSQ/B6HkiTNuf+EvzSQTpplF+fiyLTpfcP9EbNLibwLTA==}
+  /@edge-runtime/vm/1.1.0:
+    resolution: {integrity: sha512-a3PSCdznoop5+ifkNDaSINB9V+Anwh+wpoaASIWhq9PLQuBF9D6Yxe/mLRZkuZRkOJ2ZmaTzMGDI5ROUChTL7g==}
     dependencies:
-      '@edge-runtime/primitives': 1.1.0-beta.31
+      '@edge-runtime/primitives': 1.1.0
     dev: true
 
   /@esbuild/android-arm/0.15.8:
