@@ -10,7 +10,7 @@ import { EXTERNAL_URL_REGEX, PUBLIC_DIR } from '../constants'
  * @ link https://github.com/vercel/next.js/blob/6cfebfb02c2a52a1f99fca59a2eac2d704d053db/packages/next/build/webpack/loaders/next-image-loader.js#L6
  * @ link https://github.com/vercel/next.js/blob/6cfebfb02c2a52a1f99fca59a2eac2d704d053db/packages/next/client/image.tsx#LL702
  */
-const VALID_BLUR_EXT = [".jpeg", ".png", ".webp", ".avif"]
+const VALID_BLUR_EXT = [".jpeg", ".png", ".webp", ".avif", '.jpg']
 
 const getASTNodeImport = (name: string, from: string) => ({
   type: 'mdxjsEsm',
