@@ -1,4 +1,11 @@
-import React, { ComponentProps, ReactElement, LegacyRef, useCallback, useRef, useState, useEffect } from 'react'
+import React, {
+  ComponentProps,
+  ReactElement,
+  useCallback,
+  useRef,
+  useState,
+  useEffect
+} from 'react'
 import { CopyToClipboard } from './copy-to-clipboard'
 import { Button } from './button'
 import { WordWrapIcon } from '../icons'
@@ -13,8 +20,8 @@ export const Pre = ({
   filename?: string
   value?: string
 }): ReactElement => {
-  const ref = useRef<HTMLPreElement | undefined>();
-  const [codeString, setCodeString] = useState<string | undefined>(value);
+  const preRef = useRef<HTMLPreElement | null>(null)
+  const [codeString, setCodeString] = useState(value)
 
   const toggleWordWrap = useCallback(() => {
     const htmlDataset = document.documentElement.dataset
@@ -27,14 +34,12 @@ export const Pre = ({
   }, [])
 
   useEffect(() => {
-    if (typeof ref.current !== "undefined") {
-      let code = ref.current.querySelector("code");
+    const codeEl = preRef.current?.querySelector('code')
 
-      if (typeof code?.textContent === "string") {
-        setCodeString(code.textContent);
-      }
+    if (codeEl?.textContent) {
+      setCodeString(codeEl.textContent)
     }
-  }, [ref]);
+  }, [preRef])
 
   return (
     <>
@@ -50,7 +55,7 @@ export const Pre = ({
           filename ? 'nx-pt-12 nx-pb-4' : 'nx-py-4',
           className
         ].join(' ')}
-        ref={ref as LegacyRef<HTMLPreElement> | undefined}
+        ref={preRef}
         {...props}
       >
         {children}
