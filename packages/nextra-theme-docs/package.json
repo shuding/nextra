@@ -55,7 +55,7 @@
     "match-sorter": "^6.3.1",
     "next-seo": "^5.5.0",
     "next-themes": "^0.2.1",
-    "scroll-into-view-if-needed": "^2.2.29"
+    "scroll-into-view-if-needed": "^3.0.0"
   },
   "peerDependencies": {
     "next": ">=9.5.3",
