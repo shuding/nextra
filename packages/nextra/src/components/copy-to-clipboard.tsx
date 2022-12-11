@@ -35,7 +35,7 @@ export const CopyToClipboard = ({
       console.error('Access to clipboard rejected!')
     }
     try {
-      await navigator.clipboard.writeText(JSON.parse(value))
+      await navigator.clipboard.writeText(value)
     } catch {
       console.error('Failed to copy!')
     }

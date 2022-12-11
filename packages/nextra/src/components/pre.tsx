@@ -1,4 +1,11 @@
-import React, { ComponentProps, ReactElement, useCallback } from 'react'
+import React, {
+  ComponentProps,
+  ReactElement,
+  useCallback,
+  useRef,
+  useState,
+  useEffect
+} from 'react'
 import { CopyToClipboard } from './copy-to-clipboard'
 import { Button } from './button'
 import { WordWrapIcon } from '../icons'
@@ -13,6 +20,9 @@ export const Pre = ({
   filename?: string
   value?: string
 }): ReactElement => {
+  const preRef = useRef<HTMLPreElement | null>(null)
+  const [codeString, setCodeString] = useState(value)
+
   const toggleWordWrap = useCallback(() => {
     const htmlDataset = document.documentElement.dataset
     const hasWordWrap = 'nextraWordWrap' in htmlDataset
@@ -22,6 +32,14 @@ export const Pre = ({
       htmlDataset.nextraWordWrap = ''
     }
   }, [])
+
+  useEffect(() => {
+    const codeEl = preRef.current?.querySelector('code')
+
+    if (codeEl?.textContent) {
+      setCodeString(codeEl.textContent)
+    }
+  }, [preRef])
 
   return (
     <>
@@ -37,6 +55,7 @@ export const Pre = ({
           filename ? 'nx-pt-12 nx-pb-4' : 'nx-py-4',
           className
         ].join(' ')}
+        ref={preRef}
         {...props}
       >
         {children}
@@ -55,7 +74,7 @@ export const Pre = ({
         >
           <WordWrapIcon className="nx-pointer-events-none nx-h-4 nx-w-4" />
         </Button>
-        {value && <CopyToClipboard value={value} />}
+        {codeString && <CopyToClipboard value={codeString} />}
       </div>
     </>
   )
