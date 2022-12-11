@@ -2,7 +2,7 @@ import { createProcessor, ProcessorOptions } from '@mdx-js/mdx'
 import { Processor } from '@mdx-js/mdx/lib/core'
 import remarkGfm from 'remark-gfm'
 import rehypePrettyCode from 'rehype-pretty-code'
-import { rehypeMdxTitle } from 'rehype-mdx-title'
+import rehypeMdxTitle from 'rehype-mdx-title'
 import readingTime from 'remark-reading-time'
 import {
   remarkStaticImage,
