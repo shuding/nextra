@@ -115,7 +115,7 @@ importers:
     devDependencies:
       autoprefixer: 10.4.11_postcss@8.4.14
       postcss: 8.4.14
-      tailwindcss: 3.1.8
+      tailwindcss: 3.1.8_postcss@8.4.14
     dependenciesMeta:
       nextra:
         injected: true
@@ -143,7 +143,7 @@ importers:
       remark-gfm: ^3.0.1
       remark-reading-time: ^2.0.1
       shiki: 0.10.1
-      slash: ^3.0.0
+      slash: ^5.0.0
       title: ^3.5.3
       unified: ^10.1.2
       unist-util-visit: ^4.1.1
@@ -159,7 +159,7 @@ importers:
       remark-gfm: 3.0.1
       remark-reading-time: 2.0.1
       shiki: 0.10.1
-      slash: 3.0.0
+      slash: 5.0.0
       title: 3.5.3
       unist-util-visit: 4.1.1
     devDependencies:
@@ -215,7 +215,7 @@ importers:
       react: 18.2.0
       react-cusdis: 2.1.3_biqbaboplfbrettd7655fr4n2y
       react-dom: 18.2.0_react@18.2.0
-      tailwindcss: 3.1.8
+      tailwindcss: 3.1.8_postcss@8.4.14
       vitest: 0.21.1
 
   packages/nextra-theme-docs:
@@ -284,7 +284,7 @@ importers:
       postcss-import: 14.1.0_postcss@8.4.14
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-      tailwindcss: 3.1.8
+      tailwindcss: 3.1.8_postcss@8.4.14
       vitest: 0.21.1
 
 packages:
@@ -966,7 +966,7 @@ packages:
       lodash.castarray: 4.4.0
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
-      tailwindcss: 3.1.8
+      tailwindcss: 3.1.8_postcss@8.4.14
     dev: true
 
   /@types/acorn/4.0.6:
@@ -2506,7 +2506,7 @@ packages:
     dependencies:
       fast-glob: 3.2.11
       postcss: 8.4.14
-      tailwindcss: 3.1.8
+      tailwindcss: 3.1.8_postcss@8.4.14
     transitivePeerDependencies:
       - ts-node
     dev: true
@@ -5197,6 +5197,12 @@ packages:
   /slash/3.0.0:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
     engines: {node: '>=8'}
+    dev: true
+
+  /slash/5.0.0:
+    resolution: {integrity: sha512-n6KkmvKS0623igEVj3FF0OZs1gYYJ0o0Hj939yc1fyxl2xt+xYpLnzJB6xBSqOfV9ZFLEWodBBN/heZJahuIJQ==}
+    engines: {node: '>=14.16'}
+    dev: false
 
   /smartwrap/2.0.2:
     resolution: {integrity: sha512-vCsKNQxb7PnCNd2wY1WClWifAc2lwqsG8OaswpJkVJsvMGcnEntdTCDajZCkk93Ay1U3t/9puJmb525Rg5MZBA==}
@@ -5424,10 +5430,12 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /tailwindcss/3.1.8:
+  /tailwindcss/3.1.8_postcss@8.4.14:
     resolution: {integrity: sha512-YSneUCZSFDYMwk+TGq8qYFdCA3yfBRdBlS7txSq0LUmzyeqRe3a8fBQzbz9M3WS/iFT4BNf/nmw9mEzrnSaC0g==}
     engines: {node: '>=12.13.0'}
     hasBin: true
+    peerDependencies:
+      postcss: ^8.0.9
     dependencies:
       arg: 5.0.2
       chokidar: 3.5.3
@@ -6397,7 +6405,7 @@ packages:
       remark-gfm: 3.0.1
       remark-reading-time: 2.0.1
       shiki: 0.10.1
-      slash: 3.0.0
+      slash: 5.0.0
       title: 3.5.3
       unist-util-visit: 4.1.1
     transitivePeerDependencies:
