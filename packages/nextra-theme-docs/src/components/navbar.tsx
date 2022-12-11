@@ -156,7 +156,7 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
           return (
             <Anchor
               href={href}
-              key={page.route}
+              key={href}
               className={cn(
                 classes.link,
                 'nx-relative -nx-ml-2 nx-hidden nx-whitespace-nowrap nx-p-2 md:nx-inline-block',
