@@ -58,21 +58,20 @@ export function addPage({
 export function initConfig(distDir = '.next') {
   cacheDir = path.join(CWD, distDir, 'cache')
   assetDir = path.join(CWD, distDir, 'static', 'chunks')
-
-  if (!existsSync(assetDir)) {
-    fs.mkdirSync(assetDir, { recursive: true })
-  }
-
-  cacheDirExist = existsSync(cacheDir)
-  if (!cacheDirExist) {
-    fs.mkdirSync(cacheDir, { recursive: true })
-  }
 }
 
 // Copy cached data to the asset directory.
 export function restoreCache(distDir?: string): void {
   if (!cacheDir || !assetDir) {
     initConfig(distDir)
+    if (!existsSync(assetDir)) {
+      fs.mkdirSync(assetDir, { recursive: true })
+    }
+
+    cacheDirExist = existsSync(cacheDir)
+    if (!cacheDirExist) {
+      fs.mkdirSync(cacheDir, { recursive: true })
+    }
   }
 
   if (!cacheDirExist) {

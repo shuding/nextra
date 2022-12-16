@@ -13,7 +13,7 @@ module.exports = withNextra({
     locales: ["en-US", "es-ES", "ja", "ko", "ru", "zh-CN"],
     defaultLocale: "en-US",
   },
-  distDir: "./dist/.next", // Nextra supports `nextConfig.distDir`
+  distDir: "./.next", // Nextra supports custom `nextConfig.distDir`
   redirects: () => {
     return [
       // {
