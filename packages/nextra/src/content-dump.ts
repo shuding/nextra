@@ -1,24 +1,19 @@
 import path from 'node:path'
 import fs from 'graceful-fs'
 import { existsSync } from './file-system'
-import { ASSET_DIR, CACHE_DIR } from './constants'
+import { CWD } from './constants'
+
+let cacheDir: string
+let assetDir: string
+let cacheDirExist = false
 
 const asset: { [locale: string]: any } = Object.create(null)
 const cached = new Map<string, boolean>()
 
-if (!existsSync(ASSET_DIR)) {
-  fs.mkdirSync(ASSET_DIR, { recursive: true })
-}
-
-const cacheDirExist = existsSync(CACHE_DIR)
-if (!cacheDirExist) {
-  fs.mkdirSync(CACHE_DIR, { recursive: true })
-}
-
 function initFromCache(filename: string) {
   if (!cached.has(filename)) {
     try {
-      const content = fs.readFileSync(path.join(ASSET_DIR, filename), 'utf8')
+      const content = fs.readFileSync(path.join(assetDir, filename), 'utf8')
       cached.set(filename, true)
       return JSON.parse(content)
     } catch {
@@ -32,13 +27,18 @@ export function addPage({
   locale,
   route,
   title,
-  structurizedData
+  structurizedData,
+  distDir
 }: {
   locale: string
   route: string
   title: string
   structurizedData: any
+  distDir?: string
 }): void {
+  if (!cacheDir || !assetDir) {
+    initConfig(distDir)
+  }
   const dataFilename = `nextra-data-${locale}.json`
 
   asset[locale] ||= initFromCache(dataFilename)
@@ -51,23 +51,42 @@ export function addPage({
   // @TODO: introduce mutex lock, or only generate the asset when finishing the
   // entire build.
   const content = JSON.stringify(asset[locale])
-  fs.writeFileSync(path.join(ASSET_DIR, dataFilename), content)
-  fs.writeFileSync(path.join(CACHE_DIR, dataFilename), content)
+  fs.writeFileSync(path.join(assetDir, dataFilename), content)
+  fs.writeFileSync(path.join(cacheDir, dataFilename), content)
+}
+
+export function initConfig(distDir = '.next') {
+  cacheDir = path.join(CWD, distDir, 'cache')
+  assetDir = path.join(CWD, distDir, 'static', 'chunks')
+
+  if (!existsSync(assetDir)) {
+    fs.mkdirSync(assetDir, { recursive: true })
+  }
+
+  cacheDirExist = existsSync(cacheDir)
+  if (!cacheDirExist) {
+    fs.mkdirSync(cacheDir, { recursive: true })
+  }
 }
 
 // Copy cached data to the asset directory.
-export function restoreCache(): void {
+export function restoreCache(distDir?: string): void {
+  if (!cacheDir || !assetDir) {
+    initConfig(distDir)
+  }
+
   if (!cacheDirExist) {
     return
   }
-  if (!existsSync(ASSET_DIR)) {
-    fs.mkdirSync(ASSET_DIR, { recursive: true })
+
+  if (!existsSync(assetDir)) {
+    fs.mkdirSync(assetDir, { recursive: true })
   }
 
-  const files = fs.readdirSync(CACHE_DIR)
+  const files = fs.readdirSync(cacheDir)
   for (const file of files) {
     if (file.startsWith('nextra-data-')) {
-      fs.copyFileSync(path.join(CACHE_DIR, file), path.join(ASSET_DIR, file))
+      fs.copyFileSync(path.join(cacheDir, file), path.join(assetDir, file))
     }
   }
 }

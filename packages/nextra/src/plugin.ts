@@ -163,15 +163,16 @@ export class PageMapCache {
 export const pageMapCache = new PageMapCache()
 
 export class NextraPlugin {
-  constructor(private config: NextraConfig) {}
+  constructor(private config: NextraConfig & { distDir?: string }) {}
 
   apply(compiler: Compiler) {
     compiler.hooks.beforeCompile.tapAsync(
       'NextraPlugin',
       async (_, callback) => {
-        if (this.config?.flexsearch) {
+        const { flexsearch, distDir } = this.config
+        if (flexsearch) {
           // Restore the search data from the cache.
-          restoreCache()
+          restoreCache(distDir)
         }
         const PAGES_DIR = findPagesDirectory()
         const result = await collectFiles(PAGES_DIR)

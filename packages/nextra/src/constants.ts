@@ -28,8 +28,4 @@ export const MARKDOWN_EXTENSIONS = ['md', 'mdx'] as const
 
 export const PUBLIC_DIR = path.join(CWD, 'public')
 
-export const CACHE_DIR = path.join(CWD, '.next', 'cache')
-
-export const ASSET_DIR = path.join(CWD, '.next', 'static', 'chunks')
-
 export const EXTERNAL_URL_REGEX = /^https?:\/\//
