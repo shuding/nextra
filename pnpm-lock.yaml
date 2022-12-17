@@ -139,7 +139,7 @@ importers:
       react: ^18.2.0
       react-dom: ^18.2.0
       rehype-mdx-title: ^2.0.0
-      rehype-pretty-code: 0.2.4
+      rehype-pretty-code: 0.5.1
       remark-gfm: ^3.0.1
       remark-reading-time: ^2.0.1
       shiki: 0.10.1
@@ -155,7 +155,7 @@ importers:
       graceful-fs: 4.2.10
       gray-matter: 4.0.3
       rehype-mdx-title: 2.0.0
-      rehype-pretty-code: 0.2.4_shiki@0.10.1
+      rehype-pretty-code: 0.5.1_shiki@0.10.1
       remark-gfm: 3.0.1
       remark-reading-time: 2.0.1
       shiki: 0.10.1
@@ -4961,8 +4961,8 @@ packages:
       unist-util-visit: 4.1.1
     dev: false
 
-  /rehype-pretty-code/0.2.4_shiki@0.10.1:
-    resolution: {integrity: sha512-vbqwIa4cNwRaVur9caUw/b0jOQR88Svrs9c9RaQoogvbBxs5X9bWrSe5oFypaRTTq2cpZ45YzJQ7UUPO76LMKA==}
+  /rehype-pretty-code/0.5.1_shiki@0.10.1:
+    resolution: {integrity: sha512-v8kVq8eMAm0L1O7H2MH/79CO02tBVE60Bv6pPXiYsSE7YRn8o04sEG7nPj3Xg8pHYRGQsiczX3Pb63JuJtVKDg==}
     engines: {node: ^12.16.0 || >=13.2.0}
     peerDependencies:
       shiki: '*'
@@ -6376,7 +6376,7 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       rehype-mdx-title: 2.0.0
-      rehype-pretty-code: 0.2.4_shiki@0.10.1
+      rehype-pretty-code: 0.5.1_shiki@0.10.1
       remark-gfm: 3.0.1
       remark-reading-time: 2.0.1
       shiki: 0.10.1
