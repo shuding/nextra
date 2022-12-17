@@ -21,7 +21,10 @@ const nextra = (...config) =>
         : config[0]
     )
 
-    const nextraPlugin = new NextraPlugin(nextraConfig)
+    const nextraPlugin = new NextraPlugin({
+      ...nextraConfig,
+      distDir: nextConfig.distDir
+    })
 
     if (nextConfig.i18n?.locales) {
       console.log(
@@ -44,7 +47,8 @@ const nextra = (...config) =>
           locales: nextConfig.i18n?.locales || [DEFAULT_LOCALE],
           defaultLocale: nextConfig.i18n?.defaultLocale || DEFAULT_LOCALE,
           pageMapCache,
-          newNextLinkBehavior: nextConfig.experimental?.newNextLinkBehavior
+          newNextLinkBehavior: nextConfig.experimental?.newNextLinkBehavior,
+          distDir: nextConfig.distDir
         }
 
         config.module.rules.push(
@@ -78,11 +82,7 @@ const nextra = (...config) =>
           }
         )
 
-        if (typeof nextConfig.webpack === 'function') {
-          return nextConfig.webpack(config, options)
-        }
-
-        return config
+        return nextConfig.webpack?.(config, options) || config
       }
     }
   }

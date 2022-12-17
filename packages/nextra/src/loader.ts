@@ -71,7 +71,8 @@ async function loader(
     readingTime: _readingTime,
     mdxOptions,
     pageMapCache,
-    newNextLinkBehavior
+    newNextLinkBehavior,
+    distDir
   } = context.getOptions()
 
   context.cacheable(true)
@@ -158,7 +159,8 @@ export default MDXContent`.trimStart()
         locale: locale || DEFAULT_LOCALE,
         route,
         title,
-        structurizedData
+        structurizedData,
+        distDir
       })
     }
     indexContentEmitted.add(mdxPath)

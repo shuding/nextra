@@ -5,7 +5,7 @@ const withNextra = require("nextra")({
     codeblocks: true,
   },
   staticImage: true,
-  defaultShowCopyCode: true
+  defaultShowCopyCode: true,
 });
 
 module.exports = withNextra({
@@ -13,6 +13,7 @@ module.exports = withNextra({
     locales: ["en-US", "es-ES", "ja", "ko", "ru", "zh-CN"],
     defaultLocale: "en-US",
   },
+  distDir: "./.next", // Nextra supports custom `nextConfig.distDir`
   redirects: () => {
     return [
       // {
