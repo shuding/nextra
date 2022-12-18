@@ -22,7 +22,7 @@ const classes: Record<CalloutType, string> = {
     'nx-border-blue-200 nx-bg-blue-100 nx-text-blue-900 dark:nx-border-blue-200/30 dark:nx-bg-blue-900/30 dark:nx-text-blue-200'
   ),
   warning: cn(
-    'nx-border-yellow-100 nx-bg-yellow-50 nx-text-yellow-900 dark:nx-bg-yellow-700/30 dark:nx-text-yellow-200'
+    'nx-border-yellow-100 nx-bg-yellow-50 nx-text-yellow-900 dark:nx-border-yellow-200/30 dark:nx-bg-yellow-700/30 dark:nx-text-yellow-200'
   )
 }
 
