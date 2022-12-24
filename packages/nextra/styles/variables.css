@@ -10,8 +10,6 @@
   --shiki-token-string-expression: #22863a;
   --shiki-token-punctuation: #212121;
   --shiki-token-link: #22863a;
-  --nextra-shiki-deleted: #f00;
-  --nextra-shiki-inserted: #f00;
 }
 
 .dark {
