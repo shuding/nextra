@@ -82,7 +82,7 @@
     "graceful-fs": "^4.2.10",
     "gray-matter": "^4.0.3",
     "rehype-mdx-title": "^2.0.0",
-    "rehype-pretty-code": "0.2.4",
+    "rehype-pretty-code": "0.6.0",
     "remark-gfm": "^3.0.1",
     "remark-reading-time": "^2.0.1",
     "shiki": "0.10.1",
