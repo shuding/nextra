@@ -30,6 +30,8 @@ export function Banner(): ReactElement | null {
         </div>
         {banner.dismissible && (
           <button
+            type="button"
+            aria-label="Dismiss banner"
             className="nx-absolute nx-opacity-80 hover:nx-opacity-100 ltr:nx-right-0 rtl:nx-left-0"
             onClick={() => {
               try {
