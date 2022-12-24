@@ -6,9 +6,17 @@ import { useRouter } from 'next/router'
 import 'focus-visible'
 import cn from 'clsx'
 import { MDXProvider } from '@mdx-js/react'
+import { useMounted } from 'nextra/hooks'
 
 import './polyfill'
-import { Head, NavLinks, Sidebar, SkipNavContent, Breadcrumb, Banner } from './components'
+import {
+  Head,
+  NavLinks,
+  Sidebar,
+  SkipNavContent,
+  Breadcrumb,
+  Banner
+} from './components'
 import { getComponents } from './mdx-components'
 import { ActiveAnchorProvider, ConfigProvider, useConfig } from './contexts'
 import { DEFAULT_LOCALE } from './constants'
@@ -46,6 +54,7 @@ const Body = ({
   children
 }: BodyProps): ReactElement => {
   const config = useConfig()
+  const mounted = useMounted()
 
   if (themeContext.layout === 'raw') {
     return <div className="nx-w-full nx-overflow-x-hidden">{children}</div>
@@ -56,13 +65,15 @@ const Body = ({
       ? new Date(timestamp)
       : null
 
-  const gitTimestampEl = date ? (
-    <div className="nx-mt-12 nx-mb-8 nx-block nx-text-xs nx-text-gray-500 ltr:nx-text-right rtl:nx-text-left dark:nx-text-gray-400">
-      {renderComponent(config.gitTimestamp, { timestamp: date })}
-    </div>
-  ) : (
-    <div className="nx-mt-16" />
-  )
+  const gitTimestampEl =
+    // Because a user's time zone may be different from the server page
+    mounted && date ? (
+      <div className="nx-mt-12 nx-mb-8 nx-block nx-text-xs nx-text-gray-500 ltr:nx-text-right rtl:nx-text-left dark:nx-text-gray-400">
+        {renderComponent(config.gitTimestamp, { timestamp: date })}
+      </div>
+    ) : (
+      <div className="nx-mt-16" />
+    )
 
   const content = (
     <>
