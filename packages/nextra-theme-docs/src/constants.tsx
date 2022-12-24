@@ -55,11 +55,13 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     return (
       <>
         Last updated on{' '}
-        {timestamp.toLocaleDateString(locale, {
-          day: 'numeric',
-          month: 'long',
-          year: 'numeric'
-        })}
+        <time dateTime={timestamp.toISOString()}>
+          {timestamp.toLocaleDateString(locale, {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+          })}
+        </time>
       </>
     )
   },

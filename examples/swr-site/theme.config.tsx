@@ -121,7 +121,6 @@ const config: DocsThemeConfig = {
       );
     },
   },
-  gitTimestamp: ({ timestamp }) => <>Last updated on {timestamp.toString()}</>,
   head() {
     const config = useConfig();
     const description =
