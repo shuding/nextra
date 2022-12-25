@@ -41,7 +41,8 @@ export function locales(request: NextRequest) {
   // The locale code prefixed in the current URL, which can be empty.
   const locale = nextUrl.locale === nextUrl.defaultLocale ? '' : nextUrl.locale
 
-  nextUrl.pathname = hasBasePath(nextUrl.pathname) // default locale doesn't contain basePath and locale segment
+  // pathname for default locale doesn't contain basePath and locale segment
+  nextUrl.pathname = hasBasePath(nextUrl.pathname)
     ? removeLocale(removeBasePath(nextUrl.pathname), nextUrl.locale)
     : nextUrl.pathname
 
