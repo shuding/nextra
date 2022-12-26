@@ -892,6 +892,7 @@ exports[`context > getAllPages() > should work 1`] = `
                 "children": [
                   {
                     "kind": "MdxPage",
+                    "locale": "en-US",
                     "meta": {
                       "title": "One",
                     },
@@ -900,6 +901,7 @@ exports[`context > getAllPages() > should work 1`] = `
                   },
                   {
                     "kind": "MdxPage",
+                    "locale": "en-US",
                     "meta": {
                       "title": "Three",
                     },
@@ -908,6 +910,7 @@ exports[`context > getAllPages() > should work 1`] = `
                   },
                   {
                     "kind": "MdxPage",
+                    "locale": "en-US",
                     "meta": {
                       "title": "Two",
                     },
@@ -2721,6 +2724,7 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
             "children": [
               {
                 "kind": "MdxPage",
+                "locale": "en-US",
                 "meta": {
                   "title": "One",
                 },
@@ -2729,6 +2733,7 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
               },
               {
                 "kind": "MdxPage",
+                "locale": "en-US",
                 "meta": {
                   "title": "Three",
                 },
@@ -2737,6 +2742,7 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
               },
               {
                 "kind": "MdxPage",
+                "locale": "en-US",
                 "meta": {
                   "title": "Two",
                 },
@@ -3249,6 +3255,7 @@ exports[`context > getPagesUnderRoute() > should work 1`] = `
         "children": [
           {
             "kind": "MdxPage",
+            "locale": "en-US",
             "meta": {
               "title": "One",
             },
@@ -3257,6 +3264,7 @@ exports[`context > getPagesUnderRoute() > should work 1`] = `
           },
           {
             "kind": "MdxPage",
+            "locale": "en-US",
             "meta": {
               "title": "Three",
             },
@@ -3265,6 +3273,7 @@ exports[`context > getPagesUnderRoute() > should work 1`] = `
           },
           {
             "kind": "MdxPage",
+            "locale": "en-US",
             "meta": {
               "title": "Two",
             },
