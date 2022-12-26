@@ -138,10 +138,9 @@ async function loader(
 
   // Imported as a normal component, no need to add the layout.
   if (!pageImport) {
-    return `
-${cssImport}
+    return `${cssImport}
 ${result}
-export default MDXContent`.trimStart()
+export default MDXContent`
   }
 
   const { route, title, pageMap } = getPageMap({
@@ -209,8 +208,7 @@ export default MDXContent`.trimStart()
       // Remove the only `index` route
       .replace(/^index$/, '')
 
-  return `
-import { SSGContext as __nextra_SSGContext__ } from 'nextra/ssg'
+  return `import { SSGContext as __nextra_SSGContext__ } from 'nextra/ssg'
 ${themeConfigImport}
 ${cssImport}
 
@@ -245,7 +243,7 @@ globalThis.__nextra_pageContext__[${JSON.stringify(pageNextRoute)}] = {
   themeConfig: ${themeConfigImport ? '__nextra_themeConfig__' : 'null'}
 }
 
-export { default } from '${layout}'`.trimStart()
+export { default } from '${layout}'`
 }
 
 export default function syncLoader(

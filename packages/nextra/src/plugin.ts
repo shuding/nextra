@@ -15,6 +15,7 @@ import path from 'node:path'
 import slash from 'slash'
 import grayMatter from 'gray-matter'
 import { Compiler } from 'webpack'
+import pLimit from 'p-limit'
 
 import { restoreCache } from './content-dump'
 import { CWD, MARKDOWN_EXTENSION_REGEX, META_FILENAME } from './constants'
@@ -40,6 +41,8 @@ export const collectMdx = async (
   }
 }
 
+const limit = pLimit(20)
+
 export async function collectFiles(
   dir: string,
   route = '/',
@@ -47,52 +50,55 @@ export async function collectFiles(
 ): Promise<{ items: PageMapItem[]; fileMap: FileMap }> {
   const files = await readdir(dir, { withFileTypes: true })
 
-  const promises = files.map(async f => {
-    const filePath = path.join(dir, f.name)
-    const isDirectory = f.isDirectory()
-    const { name, locale, ext } = isDirectory
-      ? // directory couldn't have extensions
-        { name: path.basename(filePath), locale: '', ext: '' }
-      : parseFileName(filePath)
-    const fileRoute = slash(path.join(route, name.replace(/^index$/, '')))
+  const promises = files.map(f =>
+    // add concurrency because folder can contain a lot of files
+    limit(async () => {
+      const filePath = path.join(dir, f.name)
+      const isDirectory = f.isDirectory()
+      const { name, locale, ext } = isDirectory
+        ? // directory couldn't have extensions
+          { name: path.basename(filePath), locale: '', ext: '' }
+        : parseFileName(filePath)
+      const fileRoute = slash(path.join(route, name.replace(/^index$/, '')))
 
-    if (isDirectory) {
-      if (fileRoute === '/api') return
-      const { items } = await collectFiles(filePath, fileRoute, fileMap)
-      if (!items.length) return
-      return <Folder>{
-        kind: 'Folder',
-        name: f.name,
-        route: fileRoute,
-        children: items
+      if (isDirectory) {
+        if (fileRoute === '/api') return
+        const { items } = await collectFiles(filePath, fileRoute, fileMap)
+        if (!items.length) return
+        return <Folder>{
+          kind: 'Folder',
+          name: f.name,
+          route: fileRoute,
+          children: items
+        }
       }
-    }
 
-    if (MARKDOWN_EXTENSION_REGEX.test(ext)) {
-      const fp = filePath as MdxPath
-      fileMap[fp] = await collectMdx(fp, fileRoute)
-      return fileMap[fp]
-    }
-    const fileName = name + ext
-
-    if (fileName === META_FILENAME) {
-      const fp = filePath as MetaJsonPath
-      const content = await readFile(fp, 'utf8')
-      fileMap[fp] = {
-        kind: 'Meta',
-        ...(locale && { locale }),
-        data: parseJsonFile(content, fp)
+      if (MARKDOWN_EXTENSION_REGEX.test(ext)) {
+        const fp = filePath as MdxPath
+        fileMap[fp] = await collectMdx(fp, fileRoute)
+        return fileMap[fp]
       }
-      return fileMap[fp]
-    }
+      const fileName = name + ext
 
-    if (fileName === 'meta.json') {
-      console.warn(
-        '[nextra] "meta.json" was renamed to "_meta.json". Rename the following file:',
-        path.relative(CWD, filePath)
-      )
-    }
-  })
+      if (fileName === META_FILENAME) {
+        const fp = filePath as MetaJsonPath
+        const content = await readFile(fp, 'utf8')
+        fileMap[fp] = {
+          kind: 'Meta',
+          ...(locale && { locale }),
+          data: parseJsonFile(content, fp)
+        }
+        return fileMap[fp]
+      }
+
+      if (fileName === 'meta.json') {
+        console.warn(
+          '[nextra] "meta.json" was renamed to "_meta.json". Rename the following file:',
+          path.relative(CWD, filePath)
+        )
+      }
+    })
+  )
 
   const items = (await Promise.all(promises)).filter(truthy)
 
@@ -100,9 +106,11 @@ export async function collectFiles(
     (item): item is MdxFile | Folder =>
       item.kind === 'MdxPage' || item.kind === 'Folder'
   )
-  const locales = mdxPages
-    .filter((item): item is MdxFile => item.kind === 'MdxPage')
-    .map(item => item.locale)
+  const locales = new Set(
+    mdxPages
+      .filter((item): item is MdxFile => item.kind === 'MdxPage')
+      .map(item => item.locale)
+  )
 
   for (const locale of locales) {
     const metaIndex = items.findIndex(
