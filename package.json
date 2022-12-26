@@ -32,7 +32,7 @@
     "turbo": "^1.4.2",
     "typescript": "^4.7.4"
   },
-  "packageManager": "pnpm@7.19.0",
+  "packageManager": "pnpm@7.20.0",
   "workspaces": [
     "packages/*"
   ],
