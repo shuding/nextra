@@ -301,16 +301,19 @@ exports[`Page Process > pageMap en-US 1`] = `
                   "children": [
                     {
                       "kind": "MdxPage",
+                      "locale": "en-US",
                       "name": "one",
                       "route": "/docs/advanced/more/tree/one",
                     },
                     {
                       "kind": "MdxPage",
+                      "locale": "en-US",
                       "name": "three",
                       "route": "/docs/advanced/more/tree/three",
                     },
                     {
                       "kind": "MdxPage",
+                      "locale": "en-US",
                       "name": "two",
                       "route": "/docs/advanced/more/tree/two",
                     },
@@ -321,6 +324,7 @@ exports[`Page Process > pageMap en-US 1`] = `
                         "two": "Two",
                       },
                       "kind": "Meta",
+                      "locale": "en-US",
                     },
                   ],
                   "kind": "Folder",
@@ -751,16 +755,19 @@ exports[`Page Process > pageMap zh-CN 1`] = `
                   "children": [
                     {
                       "kind": "MdxPage",
+                      "locale": "en-US",
                       "name": "one",
                       "route": "/docs/advanced/more/tree/one",
                     },
                     {
                       "kind": "MdxPage",
+                      "locale": "en-US",
                       "name": "three",
                       "route": "/docs/advanced/more/tree/three",
                     },
                     {
                       "kind": "MdxPage",
+                      "locale": "en-US",
                       "name": "two",
                       "route": "/docs/advanced/more/tree/two",
                     },
@@ -771,6 +778,7 @@ exports[`Page Process > pageMap zh-CN 1`] = `
                         "two": "Two",
                       },
                       "kind": "Meta",
+                      "locale": "en-US",
                     },
                   ],
                   "kind": "Folder",
