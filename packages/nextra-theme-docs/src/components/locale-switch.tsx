@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { Select } from './select'
 import { DocsThemeConfig } from '../types'
 import { GlobeIcon } from 'nextra/icons'
+import { addBasePath } from 'next/dist/client/add-base-path'
 
 interface LocaleSwitchProps {
   options: NonNullable<DocsThemeConfig['i18n']>
@@ -26,7 +27,7 @@ export function LocaleSwitch({
         document.cookie = `NEXT_LOCALE=${
           option.key
         }; expires=${date.toUTCString()}; path=/`
-        location.href = asPath
+        location.href = addBasePath(asPath)
       }}
       selected={{
         key: selected?.locale || '',
