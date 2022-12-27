@@ -4,6 +4,7 @@ import { Select } from './select'
 import { DocsThemeConfig } from '../types'
 import { GlobeIcon } from 'nextra/icons'
 import { addBasePath } from 'next/dist/client/add-base-path'
+
 interface LocaleSwitchProps {
   options: NonNullable<DocsThemeConfig['i18n']>
   lite?: boolean
