@@ -81,7 +81,7 @@
     "github-slugger": "^2.0.0",
     "graceful-fs": "^4.2.10",
     "gray-matter": "^4.0.3",
-    "p-limit": "^3.1.0",
+    "p-limit": "^4.0.0",
     "rehype-mdx-title": "^2.0.0",
     "rehype-pretty-code": "0.6.0",
     "remark-gfm": "^3.0.1",
