@@ -74,36 +74,6 @@ export const indexOpts: BlogPageOpts = {
     {
       type: 'heading',
       depth: 1,
-      children: [
-        {
-          type: 'text',
-          value: 'Nextra',
-          position: {
-            start: {
-              line: 2,
-              column: 3,
-              offset: 3
-            },
-            end: {
-              line: 2,
-              column: 9,
-              offset: 9
-            }
-          }
-        }
-      ],
-      position: {
-        start: {
-          line: 2,
-          column: 1,
-          offset: 1
-        },
-        end: {
-          line: 2,
-          column: 9,
-          offset: 9
-        }
-      },
       value: 'Nextra'
     }
   ]
@@ -183,36 +153,6 @@ export const postsOpts: BlogPageOpts = {
     {
       type: 'heading',
       depth: 1,
-      children: [
-        {
-          type: 'text',
-          value: 'Random Thoughts',
-          position: {
-            start: {
-              line: 2,
-              column: 3,
-              offset: 3
-            },
-            end: {
-              line: 2,
-              column: 18,
-              offset: 18
-            }
-          }
-        }
-      ],
-      position: {
-        start: {
-          line: 2,
-          column: 1,
-          offset: 1
-        },
-        end: {
-          line: 2,
-          column: 18,
-          offset: 18
-        }
-      },
       value: 'Random Thoughts'
     }
   ]
@@ -295,141 +235,21 @@ export const articleOpts: BlogPageOpts = {
     {
       type: 'heading',
       depth: 1,
-      children: [
-        {
-          type: 'text',
-          value: 'Notes on A Programmable Web by Aaron Swartz',
-          position: {
-            start: {
-              line: 2,
-              column: 3,
-              offset: 3
-            },
-            end: {
-              line: 2,
-              column: 46,
-              offset: 46
-            }
-          }
-        }
-      ],
-      position: {
-        start: {
-          line: 2,
-          column: 1,
-          offset: 1
-        },
-        end: {
-          line: 2,
-          column: 46,
-          offset: 46
-        }
-      },
       value: 'Notes on A Programmable Web by Aaron Swartz'
     },
     {
       type: 'heading',
       depth: 2,
-      children: [
-        {
-          type: 'text',
-          value: 'Quotes About WWW',
-          position: {
-            start: {
-              line: 17,
-              column: 4,
-              offset: 874
-            },
-            end: {
-              line: 17,
-              column: 20,
-              offset: 890
-            }
-          }
-        }
-      ],
-      position: {
-        start: {
-          line: 17,
-          column: 1,
-          offset: 871
-        },
-        end: {
-          line: 17,
-          column: 20,
-          offset: 890
-        }
-      },
       value: 'Quotes About WWW'
     },
     {
       type: 'heading',
       depth: 2,
-      children: [
-        {
-          type: 'text',
-          value: 'Quotes from Aaron’s Post',
-          position: {
-            start: {
-              line: 23,
-              column: 4,
-              offset: 1559
-            },
-            end: {
-              line: 23,
-              column: 28,
-              offset: 1583
-            }
-          }
-        }
-      ],
-      position: {
-        start: {
-          line: 23,
-          column: 1,
-          offset: 1556
-        },
-        end: {
-          line: 23,
-          column: 28,
-          offset: 1583
-        }
-      },
       value: 'Quotes from Aaron’s Post'
     },
     {
       type: 'heading',
       depth: 2,
-      children: [
-        {
-          type: 'text',
-          value: 'External links',
-          position: {
-            start: {
-              line: 63,
-              column: 4,
-              offset: 4179
-            },
-            end: {
-              line: 63,
-              column: 18,
-              offset: 4193
-            }
-          }
-        }
-      ],
-      position: {
-        start: {
-          line: 63,
-          column: 1,
-          offset: 4176
-        },
-        end: {
-          line: 63,
-          column: 18,
-          offset: 4193
-        }
-      },
       value: 'External links'
     }
   ]
