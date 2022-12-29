@@ -37,7 +37,8 @@ export const remarkHeadings: Plugin<[], Root> = function (this: Processor) {
               (child: { type: string }) => child.type === 'mdxJsxTextElement'
             )
           const heading = {
-            ...(node as Heading),
+            type: node.type,
+            depth: node.depth,
             value: getFlattenedValue(node)
           }
           data.headingMeta.headings.push(heading)

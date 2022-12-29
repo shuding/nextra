@@ -59,7 +59,7 @@ export type Page = (MdxFile | Folder<Page>) & {
   meta?: Exclude<Meta, string>
 }
 
-export type Heading = MDASTHeading & {
+export type Heading = Omit<MDASTHeading, 'children' | 'position'> & {
   value: string
 }
 

@@ -56,6 +56,29 @@ const initGitRepo = (async () => {
   return {}
 })()
 
+/**
+ * Calculate a 32 bit FNV-1a hash
+ * Found here: https://gist.github.com/vaiorabbit/5657561
+ * Ref.: http://isthe.com/chongo/tech/comp/fnv/
+ *
+ * @param {string} str the input value
+ * @param {integer} [seed] optionally pass the hash of the previous chunk
+ * @returns {string}
+ */
+function hashFnv32a(str: string, seed = 0x811c9dc5) {
+  let i,
+    l,
+    hval = seed
+
+  for (i = 0, l = str.length; i < l; i++) {
+    hval ^= str.charCodeAt(i)
+    hval += (hval << 1) + (hval << 4) + (hval << 7) + (hval << 8) + (hval << 24)
+  }
+
+  // Convert to 8 digit hex string
+  return ('0000000' + (hval >>> 0).toString(16)).substring(-8)
+}
+
 async function loader(
   context: LoaderContext<LoaderOptions>,
   source: string
@@ -208,23 +231,25 @@ export default MDXContent`
       // Remove the only `index` route
       .replace(/^index$/, '')
 
+  const stringifiedPageOpts = JSON.stringify(pageOpts)
+  const pageOptsChecksum = hashFnv32a(stringifiedPageOpts)
+
   return `import { SSGContext as __nextra_SSGContext__ } from 'nextra/ssg'
 ${themeConfigImport}
 ${cssImport}
 
-const __nextra_pageOpts__ = ${JSON.stringify(pageOpts)}
+const __nextra_pageOpts__ = ${stringifiedPageOpts}
 
-globalThis.__nextra_internal__ = {
-  pageMap: __nextra_pageOpts__.pageMap,
-  route: __nextra_pageOpts__.route
-}
+// Make sure the same component is always returned so Next.js will render the
+// stable layout. We then put the actual content into a global store and use
+// the route to identify it.
+const NEXTRA_INTERNAL = Symbol.for('__nextra_internal__')
+const __nextra_internal__ = (globalThis[NEXTRA_INTERNAL] ||= Object.create(null))
+__nextra_internal__.pageMap = __nextra_pageOpts__.pageMap
+__nextra_internal__.route = __nextra_pageOpts__.route
+__nextra_internal__.refreshListeners ||= Object.create(null)
 
 ${result}
-
-__nextra_pageOpts__.title =
-  ${JSON.stringify(frontMatter.title)} ||
-  (typeof __nextra_title__ === 'string' && __nextra_title__) ||
-  ${JSON.stringify(title /* Fallback as sidebar link name */)}
 
 const Content = props => (
   <__nextra_SSGContext__.Provider value={props}>
@@ -232,15 +257,28 @@ const Content = props => (
   </__nextra_SSGContext__.Provider>
 )
 
-globalThis.__nextra_pageContext__ ||= Object.create(null)
+__nextra_pageOpts__.title =
+  ${JSON.stringify(frontMatter.title)} ||
+  (typeof __nextra_title__ === 'string' && __nextra_title__) ||
+  ${JSON.stringify(title /* Fallback as sidebar link name */)}
 
-// Make sure the same component is always returned so Next.js will render the
-// stable layout. We then put the actual content into a global store and use
-// the route to identify it.
-globalThis.__nextra_pageContext__[${JSON.stringify(pageNextRoute)}] = {
+__nextra_internal__.context = {
   Content,
   pageOpts: __nextra_pageOpts__,
-  themeConfig: ${themeConfigImport ? '__nextra_themeConfig__' : 'null'}
+  themeConfig: ${themeConfigImport ? '__nextra_themeConfig__' : 'null'},
+}
+
+if (module.hot) {
+  const checksum = "${pageOptsChecksum}"
+  if (!module.hot.data) module.hot.data = {}
+  if (module.hot.data.prevPageOptsChecksum !== checksum) {
+    __nextra_internal__.refreshListeners[${JSON.stringify(
+      pageNextRoute
+    )}]?.forEach(listener => listener())
+  }
+  module.hot.dispose((data) => {
+    data.prevPageOptsChecksum = checksum
+  })
 }
 
 export { default } from '${layout}'`

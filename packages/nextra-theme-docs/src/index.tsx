@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import 'focus-visible'
 import cn from 'clsx'
 import { MDXProvider } from '@mdx-js/react'
-import { useMounted } from 'nextra/hooks'
+import { useMounted, usePageContext } from 'nextra/hooks'
 
 import './polyfill'
 import {
@@ -236,9 +236,11 @@ const InnerLayout = ({
 }
 
 export default function Layout(props: any): ReactElement {
-  const { route } = useRouter()
-  const context = globalThis.__nextra_pageContext__[route]
-  if (!context) throw new Error(`No content found for ${route}.`)
+  const context = usePageContext()
+  if (!context)
+    throw new Error(
+      `No content found for the current route. This is a Nextra bug.`
+    )
 
   const { pageOpts, Content } = context
   return (

@@ -8,6 +8,8 @@ import { collectFiles } from '../src/plugin'
 import { CWD } from '../src/constants'
 import path from 'node:path'
 
+const NEXTRA_INTERNAL = Symbol.for('__nextra_internal__')
+
 describe('context', () => {
   beforeAll(async () => {
     const PAGES_DIR = path.join(
@@ -19,10 +21,11 @@ describe('context', () => {
       'pages'
     )
     const { items } = await collectFiles(PAGES_DIR)
-    globalThis.__nextra_internal__ = {
+    const __nextra_internal__ = (globalThis as any)[NEXTRA_INTERNAL]
+    Object.assign(__nextra_internal__, {
       pageMap: items,
       route: '/docs'
-    }
+    })
   })
 
   describe('getAllPages()', () => {
