@@ -21,7 +21,7 @@ describe('context', () => {
       'pages'
     )
     const { items } = await collectFiles(PAGES_DIR)
-    const __nextra_internal__ = (globalThis as any)[NEXTRA_INTERNAL]
+    const __nextra_internal__ = ((globalThis as any)[NEXTRA_INTERNAL] ||= {})
     Object.assign(__nextra_internal__, {
       pageMap: items,
       route: '/docs'
