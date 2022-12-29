@@ -247,6 +247,7 @@ const NEXTRA_INTERNAL = Symbol.for('__nextra_internal__')
 const __nextra_internal__ = (globalThis[NEXTRA_INTERNAL] ||= Object.create(null))
 __nextra_internal__.pageMap = __nextra_pageOpts__.pageMap
 __nextra_internal__.route = __nextra_pageOpts__.route
+__nextra_internal__.context ||= Object.create(null)
 __nextra_internal__.refreshListeners ||= Object.create(null)
 
 ${result}
@@ -262,7 +263,7 @@ __nextra_pageOpts__.title =
   (typeof __nextra_title__ === 'string' && __nextra_title__) ||
   ${JSON.stringify(title /* Fallback as sidebar link name */)}
 
-__nextra_internal__.context = {
+__nextra_internal__.context[${JSON.stringify(pageNextRoute)}] = {
   Content,
   pageOpts: __nextra_pageOpts__,
   themeConfig: ${themeConfigImport ? '__nextra_themeConfig__' : 'null'},

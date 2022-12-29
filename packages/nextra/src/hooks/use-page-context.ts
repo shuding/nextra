@@ -9,11 +9,14 @@ export function usePageContext() {
   const __nextra_internal__ = (globalThis as any)[NEXTRA_INTERNAL] as {
     pageMap: PageMapItem[]
     route: string
-    context: {
-      Content: React.FC
-      pageOpts: PageOpts
-      themeConfig: any | null
-    }
+    context: Record<
+      string,
+      {
+        Content: React.FC
+        pageOpts: PageOpts
+        themeConfig: any | null
+      }
+    >
     refreshListeners: Record<string, (() => void)[]>
   }
 
@@ -34,5 +37,5 @@ export function usePageContext() {
     }
   }, [route])
 
-  return __nextra_internal__.context
+  return __nextra_internal__.context[route]
 }
