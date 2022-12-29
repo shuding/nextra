@@ -14,6 +14,8 @@ import {
 import { LoaderOptions, PageOpts, ReadingTime } from './types'
 import theme from './theme.json'
 import { truthy } from './utils'
+import remarkMath from 'remark-math'
+import rehypeKatex from 'rehype-katex'
 
 const createCompiler = (mdxOptions: ProcessorOptions): Processor => {
   const compiler = createProcessor(mdxOptions)
@@ -44,7 +46,11 @@ export async function compileMdx(
   source: string,
   loaderOptions: Pick<
     LoaderOptions,
-    'staticImage' | 'flexsearch' | 'defaultShowCopyCode' | 'readingTime'
+    | 'staticImage'
+    | 'flexsearch'
+    | 'defaultShowCopyCode'
+    | 'readingTime'
+    | 'latex'
   > & {
     mdxOptions?: LoaderOptions['mdxOptions'] &
       Pick<ProcessorOptions, 'jsx' | 'outputFormat'>
@@ -66,7 +72,8 @@ export async function compileMdx(
       loaderOptions.staticImage && ([remarkStaticImage, { filePath }] as any),
       loaderOptions.flexsearch &&
         structurize(structurizedData, loaderOptions.flexsearch),
-      loaderOptions.readingTime && readingTime
+      loaderOptions.readingTime && readingTime,
+      loaderOptions.latex && remarkMath
     ].filter(truthy),
     rehypePlugins: [
       ...(mdxOptions.rehypePlugins || []),
@@ -76,7 +83,8 @@ export async function compileMdx(
         { ...rehypePrettyCodeOptions, ...mdxOptions.rehypePrettyCodeOptions }
       ],
       [rehypeMdxTitle, { name: '__nextra_title__' }],
-      [attachMeta, { defaultShowCopyCode: loaderOptions.defaultShowCopyCode }]
+      [attachMeta, { defaultShowCopyCode: loaderOptions.defaultShowCopyCode }],
+      ...(loaderOptions.latex ? [rehypeKatex] : [])
     ]
   })
   try {
