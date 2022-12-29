@@ -20,6 +20,7 @@ export function usePageContext() {
   const rerender = useState({})[1]
   const { route } = useRouter()
 
+  // TODO: Remove the HMR logic for prod builds
   useEffect(() => {
     const trigger = () => rerender({})
 

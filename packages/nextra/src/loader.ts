@@ -267,7 +267,7 @@ __nextra_internal__.context = {
   pageOpts: __nextra_pageOpts__,
   themeConfig: ${themeConfigImport ? '__nextra_themeConfig__' : 'null'},
 }
-
+${'' /* TODO: Do not include all the HMR logic for prod */}
 if (module.hot) {
   const checksum = "${pageOptsChecksum}"
   if (!module.hot.data) module.hot.data = {}
