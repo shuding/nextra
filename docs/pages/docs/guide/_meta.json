@@ -6,6 +6,7 @@
   "i18n": "Next.js I18n",
   "image": "Next.js Image",
   "link": "Next.js Link",
+  "latex": "LaTeX",
   "typescript": "TypeScript",
   "advanced": "Advanced"
 }
