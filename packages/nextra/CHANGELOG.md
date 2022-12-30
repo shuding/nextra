@@ -1,5 +1,21 @@
 # nextra
 
+## 2.0.2
+
+### Patch Changes
+
+- 1e2afcf: Add LaTeX support
+- 99ec64e: fix indentation for copy code button
+- 3a08fe2: Add Callout border in dark mode
+- f488e2e: remove @react/skip-nev #1051
+
+  fix: staticImage should only set blur placeholder for jpeg,png,webp,avif
+
+- cf9b886: better performance of `collectFiles`
+- f35e724: update shiki to v0.12.1
+- b2fc168: support `nextConfig.distDir`
+- cc1cb5f: support `nextConfig.basePath` with i18n
+
 ## 2.0.1
 
 ### Patch Changes
