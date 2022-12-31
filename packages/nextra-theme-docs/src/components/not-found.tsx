@@ -23,7 +23,7 @@ export function NotFoundPage(): ReactElement | null {
           labels
         })}
         newWindow
-        className="nx-text-primary-600 nx-underline nx-decoration-from-font [text-underline-position:under]"
+        className="nx-text-primary-600 nx-underline nx-decoration-from-font [text-underline-position:from-font]"
       >
         {renderComponent(content)}
       </Anchor>
