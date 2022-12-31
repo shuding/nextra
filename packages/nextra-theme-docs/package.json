@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.6.6",
-    "@mdx-js/react": "^2.1.5",
+    "@mdx-js/react": "^2.2.1",
     "@popperjs/core": "^2.11.6",
     "clsx": "^1.2.1",
     "flexsearch": "^0.7.21",
@@ -71,7 +71,7 @@
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
     "autoprefixer": "^10.4.8",
-    "concurrently": "^7.3.0",
+    "concurrently": "^7.6.0",
     "lightningcss-cli": "^1.16.0",
     "next": "^13.1.1",
     "nextra": "workspace:*",
@@ -81,6 +81,6 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tailwindcss": "^3.1.8",
-    "vitest": "^0.26.0"
+    "vitest": "^0.26.2"
   }
 }
