@@ -237,11 +237,6 @@ const InnerLayout = ({
 
 export default function Layout(props: any): ReactElement {
   const context = usePageContext()
-  if (!context)
-    throw new Error(
-      `No content found for the current route. This is a Nextra bug.`
-    )
-
   const { pageOpts, Content } = context
   return (
     <ConfigProvider value={context}>

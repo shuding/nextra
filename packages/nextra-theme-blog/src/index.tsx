@@ -36,11 +36,6 @@ const BlogLayout = ({
 
 export default function Layout(props: any) {
   const context = usePageContext()
-  if (!context)
-    throw new Error(
-      `No content found for the current route. This is a Nextra bug.`
-    )
-
   const extendedConfig = { ...DEFAULT_THEME, ...context.themeConfig }
 
   return (

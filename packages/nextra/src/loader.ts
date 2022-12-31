@@ -231,8 +231,10 @@ export default MDXContent`
       // Remove the only `index` route
       .replace(/^index$/, '')
 
+  const stringifiedPageNextRoute = JSON.stringify(pageNextRoute)
   const stringifiedPageOpts = JSON.stringify(pageOpts)
-  const pageOptsChecksum = hashFnv32a(stringifiedPageOpts)
+  const pageOptsChecksum =
+    process.env.NODE_ENV === 'development' && hashFnv32a(stringifiedPageOpts)
 
   return `import { SSGContext as __nextra_SSGContext__ } from 'nextra/ssg'
 ${themeConfigImport}
@@ -263,19 +265,17 @@ __nextra_pageOpts__.title =
   (typeof __nextra_title__ === 'string' && __nextra_title__) ||
   ${JSON.stringify(title /* Fallback as sidebar link name */)}
 
-__nextra_internal__.context[${JSON.stringify(pageNextRoute)}] = {
+__nextra_internal__.context[${stringifiedPageNextRoute}] = {
   Content,
   pageOpts: __nextra_pageOpts__,
   themeConfig: ${themeConfigImport ? '__nextra_themeConfig__' : 'null'},
 }
-${'' /* TODO: Do not include all the HMR logic for prod */}
-if (module.hot) {
+
+if (process.env.NODE_ENV === 'development' && module.hot) {
   const checksum = "${pageOptsChecksum}"
-  if (!module.hot.data) module.hot.data = {}
+  module.hot.data ||= Object.create(null)
   if (module.hot.data.prevPageOptsChecksum !== checksum) {
-    __nextra_internal__.refreshListeners[${JSON.stringify(
-      pageNextRoute
-    )}]?.forEach(listener => listener())
+    __nextra_internal__.refreshListeners[${stringifiedPageNextRoute}]?.forEach(listener => listener())
   }
   module.hot.dispose((data) => {
     data.prevPageOptsChecksum = checksum

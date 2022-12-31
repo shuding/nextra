@@ -72,7 +72,6 @@ export const indexOpts: BlogPageOpts = {
   title: 'Nextra',
   headings: [
     {
-      type: 'heading',
       depth: 1,
       value: 'Nextra'
     }
@@ -151,7 +150,6 @@ export const postsOpts: BlogPageOpts = {
   title: 'Random Thoughts',
   headings: [
     {
-      type: 'heading',
       depth: 1,
       value: 'Random Thoughts'
     }
@@ -233,22 +231,18 @@ export const articleOpts: BlogPageOpts = {
   title: 'Notes on A Programmable Web by Aaron Swartz',
   headings: [
     {
-      type: 'heading',
       depth: 1,
       value: 'Notes on A Programmable Web by Aaron Swartz'
     },
     {
-      type: 'heading',
       depth: 2,
       value: 'Quotes About WWW'
     },
     {
-      type: 'heading',
       depth: 2,
       value: 'Quotes from Aaron’s Post'
     },
     {
-      type: 'heading',
       depth: 2,
       value: 'External links'
     }

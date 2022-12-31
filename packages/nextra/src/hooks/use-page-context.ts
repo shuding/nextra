@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router.js'
 import { useEffect, useState } from 'react'
 
 import { PageMapItem, PageOpts } from '../types'
@@ -20,22 +20,31 @@ export function usePageContext() {
     refreshListeners: Record<string, (() => void)[]>
   }
 
-  const rerender = useState({})[1]
   const { route } = useRouter()
 
-  // TODO: Remove the HMR logic for prod builds
-  useEffect(() => {
-    const trigger = () => rerender({})
+  if (process.env.NODE_ENV === 'development') {
+    const rerender = useState({})[1]
+    useEffect(() => {
+      const trigger = () => rerender({})
 
-    const listeners = __nextra_internal__.refreshListeners
+      const listeners = __nextra_internal__.refreshListeners
 
-    if (!listeners[route]) listeners[route] = []
-    listeners[route].push(trigger)
+      listeners[route] ||= []
+      listeners[route].push(trigger)
 
-    return () => {
-      listeners[route].splice(listeners[route].indexOf(trigger), 1)
-    }
-  }, [route])
+      return () => {
+        listeners[route].splice(listeners[route].indexOf(trigger), 1)
+      }
+    }, [route])
+  }
 
-  return __nextra_internal__.context[route]
+  const context = __nextra_internal__.context[route]
+
+  if (!context) {
+    throw new Error(
+      `No content found for the current route. This is a Nextra bug.`
+    )
+  }
+
+  return context
 }
