@@ -110,7 +110,7 @@ const createHeaderLink = (
         className={cn(
           'nx-font-semibold nx-tracking-tight',
           {
-            h2: 'nx-mt-10 nx-border-b nx-pb-1 nx-text-3xl contrast-more:nx-border-neutral-400 dark:nx-border-primary-100/10 contrast-more:dark:nx-border-neutral-400',
+            h2: 'nx-mt-10 nx-border-b nx-pb-1 nx-text-3xl nx-border-neutral-200/70 contrast-more:nx-border-neutral-400 dark:nx-border-primary-100/10 contrast-more:dark:nx-border-neutral-400',
             h3: 'nx-mt-8 nx-text-2xl',
             h4: 'nx-mt-8 nx-text-xl',
             h5: 'nx-mt-8 nx-text-lg',
@@ -269,7 +269,7 @@ export const getComponents = ({
     a: props => (
       <A
         {...props}
-        className="nx-text-primary-600 nx-underline nx-decoration-from-font [text-underline-position:under]"
+        className="nx-text-primary-600 nx-underline nx-decoration-from-font [text-underline-position:from-font]"
       />
     ),
     table: (props: ComponentProps<'table'>) => (

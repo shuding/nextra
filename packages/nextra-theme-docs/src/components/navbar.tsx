@@ -165,7 +165,9 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
               newWindow={page.newWindow}
               aria-current={!page.newWindow && isActive}
             >
-              <span className="nx-absolute">{page.title}</span>
+              <span className="nx-absolute nx-inset-x-0 nx-text-center">
+                {page.title}
+              </span>
               <span className="nx-invisible nx-font-medium">{page.title}</span>
             </Anchor>
           )
