@@ -49,6 +49,7 @@
   color: rgba(255, 255, 255, 0.9);
   box-shadow: 0 0 0 2px rgb(154 154 154 / 56%), 0 0 30px rgb(0 0 0 / 10%);
   transition: all 0.2s ease;
+  -webkit-user-drag: none;
 }
 @media (hover: hover) {
   .feature .link {
