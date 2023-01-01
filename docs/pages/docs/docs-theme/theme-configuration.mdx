@@ -117,7 +117,7 @@ import { useConfig } from 'nextra-theme-docs'
 export default {
   head: () => {
     const { asPath } = useRouter()
-    const { frontMatter } = useConfig()
+    const frontMatter = useConfig()
     return <>
       <meta property="og:url" content={`https://my-app.com${asPath}`} />
       <meta property="og:title" content={frontMatter.title || 'Nextra'} />
