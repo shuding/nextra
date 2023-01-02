@@ -12,14 +12,15 @@
   "author": "Shu Ding",
   "license": "Apache-2.0",
   "dependencies": {
-    "react": "*",
-    "react-dom": "*",
-    "next": ">=13",
     "focus-visible": "^5.1.0",
     "intersection-observer": "^0.10.0",
     "markdown-to-jsx": "^6.11.4",
+    "next": ">=13",
+    "next-mdx-remote": "^4.2.0",
     "nextra": "workspace:*",
     "nextra-theme-docs": "workspace:*",
+    "react": "*",
+    "react-dom": "*",
     "react-intersection-observer": "^8.26.2"
   },
   "dependenciesMeta": {
