@@ -1,5 +1,11 @@
 # nextra-theme-docs
 
+## 2.0.3
+
+### Patch Changes
+
+- 8060ed3: style improvements
+
 ## 2.0.2
 
 ### Patch Changes
