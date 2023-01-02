@@ -11,7 +11,7 @@ importers:
       eslint: ^8.30.0
       framer-motion: ^8.0.0
       next: ^13.1.1
-      nextra: 2.0.2
+      nextra: 2.0.3
       nextra-theme-docs: 2.0.2
       postcss: ^8.4.19
       react: ^18.2.0
@@ -23,7 +23,7 @@ importers:
       clsx: 1.2.1
       framer-motion: 8.0.1_biqbaboplfbrettd7655fr4n2y
       next: 13.1.1_biqbaboplfbrettd7655fr4n2y
-      nextra: 2.0.2_q76c2b4vyoegvsbrcwkfvimnai
+      nextra: 2.0.3_q76c2b4vyoegvsbrcwkfvimnai
       nextra-theme-docs: 2.0.2_q76c2b4vyoegvsbrcwkfvimnai
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
@@ -2356,8 +2356,8 @@ packages:
       scroll-into-view-if-needed: 3.0.3
     dev: false
 
-  /nextra/2.0.2_q76c2b4vyoegvsbrcwkfvimnai:
-    resolution: {integrity: sha512-SryuJVTw/FDMIZBEbXJm9Jo5OX+/HajjccHj8QVcGCEtmWFqbEJklGHHMDKOhC9pBr6sxRhtFFzOGu//F9J1Hw==}
+  /nextra/2.0.3_q76c2b4vyoegvsbrcwkfvimnai:
+    resolution: {integrity: sha512-GttZMwfHiVcrnVMnN2PKq2mS6YoQ0zrbzRYS838WYfzUpjIPCR6L8rJbAEd00kcrJNM1MvSCxONOTqGDDjW7YA==}
     peerDependencies:
       next: '>=9.5.3'
       react: '>=16.13.1'
