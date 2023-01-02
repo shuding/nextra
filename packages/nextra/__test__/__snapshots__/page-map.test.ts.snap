@@ -224,6 +224,7 @@ exports[`Page Process > pageMap en-US 1`] = `
               },
               "title": "Raw Layout",
             },
+            "remote": "Remote",
             "revalidation": "Auto Revalidation",
             "suspense": "Suspense",
             "typescript": "TypeScript :)",
@@ -456,6 +457,26 @@ exports[`Page Process > pageMap en-US 1`] = `
           "locale": "en-US",
           "name": "raw-layout",
           "route": "/docs/raw-layout",
+        },
+        {
+          "children": [
+            {
+              "kind": "MdxPage",
+              "locale": "en-US",
+              "name": "foo",
+              "route": "/docs/remote/foo",
+            },
+            {
+              "data": {
+                "foo": "Foo",
+              },
+              "kind": "Meta",
+              "locale": "en-US",
+            },
+          ],
+          "kind": "Folder",
+          "name": "remote",
+          "route": "/docs/remote",
         },
         {
           "kind": "MdxPage",
@@ -714,6 +735,7 @@ exports[`Page Process > pageMap zh-CN 1`] = `
             "options": "选项",
             "pagination": "分页",
             "prefetching": "预请求",
+            "remote": "Remote",
             "revalidation": "自动重新请求",
             "suspense": "Suspense",
             "typescript": "Typescript",
@@ -910,6 +932,26 @@ exports[`Page Process > pageMap zh-CN 1`] = `
           "locale": "zh-CN",
           "name": "prefetching",
           "route": "/docs/prefetching",
+        },
+        {
+          "children": [
+            {
+              "kind": "MdxPage",
+              "locale": "en-US",
+              "name": "foo",
+              "route": "/docs/remote/foo",
+            },
+            {
+              "data": {
+                "foo": "Foo",
+              },
+              "kind": "Meta",
+              "locale": "en-US",
+            },
+          ],
+          "kind": "Folder",
+          "name": "remote",
+          "route": "/docs/remote",
         },
         {
           "kind": "MdxPage",
