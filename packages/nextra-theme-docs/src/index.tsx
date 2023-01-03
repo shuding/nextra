@@ -1,4 +1,4 @@
-import type { PageMapItem, PageOpts } from 'nextra'
+import type { NextraThemeLayoutProps, PageMapItem, PageOpts } from 'nextra'
 import type { ReactElement, ReactNode } from 'react'
 
 import React, { useMemo } from 'react'
@@ -24,18 +24,18 @@ import { getFSRoute, normalizePages, renderComponent } from './utils'
 import { DocsThemeConfig, PageTheme, RecursivePartial } from './types'
 
 function useDirectoryInfo(pageMap: PageMapItem[]) {
-  const { locale = DEFAULT_LOCALE, defaultLocale, route } = useRouter()
+  const { locale = DEFAULT_LOCALE, defaultLocale, asPath } = useRouter()
 
   return useMemo(() => {
     // asPath can return redirected url
-    const fsPath = getFSRoute(route, locale)
+    const fsPath = getFSRoute(asPath, locale)
     return normalizePages({
       list: pageMap,
       locale,
       defaultLocale,
       route: fsPath
     })
-  }, [pageMap, locale, defaultLocale, route])
+  }, [pageMap, locale, defaultLocale, asPath])
 }
 
 interface BodyProps {
@@ -109,6 +109,10 @@ const Body = ({
   )
 }
 
+const tocClassName = cn(
+  'nextra-toc nx-order-last nx-hidden nx-w-64 nx-shrink-0 xl:nx-block'
+)
+
 const InnerLayout = ({
   filePath,
   pageMap,
@@ -135,9 +139,6 @@ const InnerLayout = ({
     !themeContext.sidebar ||
     themeContext.layout === 'raw' ||
     activeType === 'page'
-
-  const tocClassName =
-    'nextra-toc nx-order-last nx-hidden nx-w-64 nx-shrink-0 xl:nx-block'
 
   const tocEl =
     activeType === 'page' ||
@@ -236,22 +237,12 @@ const InnerLayout = ({
 }
 
 export default function Layout({
-  __nextra_pageMap,
-  ...props
-}: any): ReactElement {
-  const { route } = useRouter()
-  const context = globalThis.__nextra_pageContext__[route]
-  if (!context) throw new Error(`No content found for ${route}.`)
-
-  const { pageOpts, Content } = context
-  if (__nextra_pageMap) {
-    pageOpts.pageMap = __nextra_pageMap
-  }
+  children,
+  ...context
+}: NextraThemeLayoutProps): ReactElement {
   return (
     <ConfigProvider value={context}>
-      <InnerLayout {...pageOpts}>
-        <Content {...props} />
-      </InnerLayout>
+      <InnerLayout {...context.pageOpts}>{children}</InnerLayout>
     </ConfigProvider>
   )
 }

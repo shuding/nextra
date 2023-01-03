@@ -85,6 +85,10 @@ export async function collectFiles(
       }
 
       if (MARKDOWN_EXTENSION_REGEX.test(ext)) {
+        // We need to filter out dynamic routes, because we can't get all the
+        // paths statically from here — they'll be generated separately.
+        if (name.startsWith('[')) return
+
         const fp = filePath as MdxPath
         fileMap[fp] = await collectMdx(fp, fileRoute)
         return fileMap[fp]

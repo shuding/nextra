@@ -1,0 +1,61 @@
+import { MDXRemote } from 'next-mdx-remote'
+import { compileMdx } from 'nextra/compile'
+import { useSSG, getDynamicMeta } from 'nextra/data'
+import { useMDXComponents } from 'nextra-theme-docs'
+
+export const getStaticProps = async ({ params }) => {
+  const res = await fetch(
+    'https://api.github.com/gists/c204a2da82cd3ed8e676f35c493ab59f/comments/' + params.slug,
+    {
+      headers: {
+        Accept: "application/vnd.github+json",
+        "X-GitHub-Api-Version": "2022-11-28",
+        ...(process.env.GITHUB_TEST_REMOTE_MDX ? { "Authorization": "Bearer " + process.env.GITHUB_TEST_REMOTE_MDX } : {})
+      },
+    }
+  );
+  const comment = await res.json();
+  try {
+    const mdx = await compileMdx(comment.body)
+    return {
+      props: {
+        ssg: mdx.result,
+        ...(await getDynamicMeta())
+      },
+    }
+  } catch (e) {
+    const mdx = await compileMdx(`Error: failed to render comment ${params.slug}.`)
+    return {
+      ssg: mdx.result,
+      ...(await getDynamicMeta())
+    }
+  }
+}
+
+export const getStaticPaths = async () => {
+  const res = await fetch(
+    "https://api.github.com/gists/c204a2da82cd3ed8e676f35c493ab59f/comments",
+    {
+      headers: {
+        Accept: "application/vnd.github+json",
+        "X-GitHub-Api-Version": "2022-11-28",
+        ...(process.env.GITHUB_TEST_REMOTE_MDX ? { "Authorization": "Bearer " + process.env.GITHUB_TEST_REMOTE_MDX } : {})
+      },
+    }
+  );
+  const comments = await res.json();
+  return {
+    paths: comments.map((comment) => ({
+      params: { slug: String(comment.id) },
+    })),
+    fallback: false,
+  }
+}
+
+export const NextraReadme = () => {
+  const compiledSource = useSSG()
+  const components = useMDXComponents()
+  return <MDXRemote compiledSource={compiledSource} components={components} />
+}
+
+<NextraReadme />

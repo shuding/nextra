@@ -11,7 +11,9 @@ export const useData = useSSG
 export const getDynamicMeta = async () => {
   if ((globalThis as any).__nextra_resolvePageMap__) {
     return {
-      __nextra_pageMap: await (globalThis as any).__nextra_resolvePageMap__()
+      __nextra__: {
+        pageMap: await (globalThis as any).__nextra_resolvePageMap__()
+      }
     }
   }
   return {}

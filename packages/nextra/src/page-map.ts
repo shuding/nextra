@@ -9,7 +9,11 @@ type PageMapProps = {
   defaultLocale: string
 }
 
-type DynamicMetaDescriptor = [itemPath: string, filePath: string]
+type DynamicMetaDescriptor = {
+  metaFilePath: string
+  metaObjectKeyPath: string
+  metaParentKeyPath: string
+}
 
 function getDynamicMeta(
   path: string,
@@ -32,7 +36,11 @@ function getDynamicMeta(
       })
     } else if (item.kind === 'Meta') {
       if (item.__nextra_src) {
-        dynamicMetaItems.push([path + `[${i}]`, item.__nextra_src])
+        dynamicMetaItems.push({
+          metaFilePath: item.__nextra_src,
+          metaObjectKeyPath: path + `[${i}]`,
+          metaParentKeyPath: path
+        })
         const newItem = {
           ...item
         }

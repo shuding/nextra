@@ -1,3 +1,5 @@
+import type { NextraThemeLayoutProps } from 'nextra'
+
 import React, { ReactElement, ReactNode } from 'react'
 import { ThemeProvider } from 'next-themes'
 import type { LayoutProps } from './types'
@@ -6,7 +8,6 @@ import { ArticleLayout } from './article-layout'
 import { PostsLayout } from './posts-layout'
 import { PageLayout } from './page-layout'
 import { DEFAULT_THEME } from './constants'
-import { useRouter } from 'next/router'
 
 const layoutMap = {
   post: ArticleLayout,
@@ -34,17 +35,16 @@ const BlogLayout = ({
   )
 }
 
-export default function Layout(props: any) {
-  const { route } = useRouter()
-  const context = globalThis.__nextra_pageContext__[route]
-  if (!context) throw new Error(`No content found for ${route}.`)
-
+export default function Layout({
+  children,
+  ...context
+}: NextraThemeLayoutProps) {
   const extendedConfig = { ...DEFAULT_THEME, ...context.themeConfig }
 
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <BlogLayout config={extendedConfig} opts={context.pageOpts}>
-        <context.Content {...props} />
+        {children}
       </BlogLayout>
     </ThemeProvider>
   )

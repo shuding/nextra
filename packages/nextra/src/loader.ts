@@ -56,6 +56,27 @@ const initGitRepo = (async () => {
   return {}
 })()
 
+/**
+ * Calculate a 32 bit FNV-1a hash
+ * Found here: https://gist.github.com/vaiorabbit/5657561
+ * Ref.: http://isthe.com/chongo/tech/comp/fnv/
+ *
+ * @param {string} str the input value
+ * @param {number} [seed] optionally pass the hash of the previous chunk
+ * @returns {string}
+ */
+function hashFnv32a(str: string, seed = 0x811c9dc5): string {
+  let hval = seed
+
+  for (let i = 0; i < str.length; i++) {
+    hval ^= str.charCodeAt(i)
+    hval += (hval << 1) + (hval << 4) + (hval << 7) + (hval << 8) + (hval << 24)
+  }
+
+  // Convert to 8 digit hex string
+  return ('0000000' + (hval >>> 0).toString(16)).substring(-8)
+}
+
 async function loader(
   context: LoaderContext<LoaderOptions>,
   source: string
@@ -239,14 +260,36 @@ export default MDXContent`
     const importPromises = [
       ${dynamicMetaItems
         .map(
-          ([keyPath, filePath]) => `import('${slash(
+          ({
+            metaFilePath,
+            metaObjectKeyPath,
+            metaParentKeyPath
+          }) => `import('${slash(
             (() => {
-              const relative = path.relative(path.dirname(mdxPath), filePath)
+              const relative = path.relative(
+                path.dirname(mdxPath),
+                metaFilePath
+              )
               return relative.startsWith('.') ? relative : './' + relative
             })()
           )}').then(m => {
-        const getMeta = Promise.resolve(m.default()).then(meta => {
-          clonedPageMap${keyPath}.data = meta
+        const getMeta = Promise.resolve(m.default()).then(metaData => {
+          const meta = clonedPageMap${metaObjectKeyPath}
+          meta.data = metaData
+
+          const parentRoute = clonedPageMap${metaParentKeyPath.replace(
+            /\.children$/,
+            ''
+          )}.route || ''
+          for (const key of Object.keys(metaData)) {
+            const name = key.split('/').pop()
+            clonedPageMap${metaParentKeyPath}.push({
+              kind: 'MdxPage',
+              locale: meta.locale,
+              name,
+              route: parentRoute + '/' + key,
+            })
+          }
         })
         executePromises.push(getMeta)
       })`
@@ -259,21 +302,30 @@ export default MDXContent`
   
     return clonedPageMap
   }
-}
-`
+}`
     : ''
 
-  return `import { SSGContext as __nextra_SSGContext__ } from 'nextra/ssg'
+  const stringifiedPageNextRoute = JSON.stringify(pageNextRoute)
+  const stringifiedPageOpts = JSON.stringify(pageOpts)
+  const pageOptsChecksum = !IS_PRODUCTION && hashFnv32a(stringifiedPageOpts)
+
+  return `import __nextra_layout__ from '${layout}'
 ${themeConfigImport}
 ${cssImport}
-
-const __nextra_pageOpts__ = ${JSON.stringify(pageOpts)}
 ${dynamicMetaResolver}
 
-globalThis.__nextra_internal__ = {
-  pageMap: __nextra_pageOpts__.pageMap,
-  route: __nextra_pageOpts__.route
-}
+const __nextra_pageOpts__ = ${stringifiedPageOpts}
+
+// Make sure the same component is always returned so Next.js will render the
+// stable layout. We then put the actual content into a global store and use
+// the route to identify it.
+const NEXTRA_INTERNAL = Symbol.for('__nextra_internal__')
+const __nextra_internal__ = (globalThis[NEXTRA_INTERNAL] ||= Object.create(null))
+__nextra_internal__.pageMap = __nextra_pageOpts__.pageMap
+__nextra_internal__.route = __nextra_pageOpts__.route
+__nextra_internal__.context ||= Object.create(null)
+__nextra_internal__.refreshListeners ||= Object.create(null)
+__nextra_internal__.Layout = __nextra_layout__
 
 ${result}
 
@@ -282,24 +334,24 @@ __nextra_pageOpts__.title =
   (typeof __nextra_title__ === 'string' && __nextra_title__) ||
   ${JSON.stringify(fallbackTitle /* Fallback as sidebar link name */)}
 
-const __nextra_content__ = props => (
-  <__nextra_SSGContext__.Provider value={props}>
-    <MDXContent />
-  </__nextra_SSGContext__.Provider>
-)
-
-globalThis.__nextra_pageContext__ ||= Object.create(null)
-
-// Make sure the same component is always returned so Next.js will render the
-// stable layout. We then put the actual content into a global store and use
-// the route to identify it.
-globalThis.__nextra_pageContext__[${JSON.stringify(pageNextRoute)}] = {
-  Content: __nextra_content__,
+__nextra_internal__.context[${stringifiedPageNextRoute}] = {
+  Content: MDXContent,
   pageOpts: __nextra_pageOpts__,
   themeConfig: ${themeConfigImport ? '__nextra_themeConfig__' : 'null'}
 }
 
-export { default } from '${layout}'`
+if (${!IS_PRODUCTION} && module.hot) {
+  const checksum = "${pageOptsChecksum}"
+  module.hot.data ||= Object.create(null)
+  if (module.hot.data.prevPageOptsChecksum !== checksum) {
+    __nextra_internal__.refreshListeners[${stringifiedPageNextRoute}]?.forEach(listener => listener())
+  }
+  module.hot.dispose(data => {
+    data.prevPageOptsChecksum = checksum
+  })
+}
+
+export { default } from 'nextra/layout'`
 }
 
 export default function syncLoader(

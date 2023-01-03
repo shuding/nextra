@@ -4,7 +4,7 @@ import Slugger from 'github-slugger'
 import { Heading } from 'nextra'
 import scrollIntoView from 'scroll-into-view-if-needed'
 
-import { renderComponent, getHeadingText, getGitIssueUrl } from '../utils'
+import { renderComponent, getHeadingText } from '../utils'
 import { useConfig, useActiveAnchor } from '../contexts'
 import { Anchor } from './anchor'
 
@@ -24,7 +24,7 @@ export function TOC({ headings, filePath }: TOCProps): ReactElement {
   >(
     () =>
       headings
-        .filter(heading => heading.type === 'heading' && heading.depth > 1)
+        .filter(heading => heading.depth > 1)
         .map(heading => {
           const text = getHeadingText(heading)
           return {
@@ -122,11 +122,7 @@ export function TOC({ headings, filePath }: TOCProps): ReactElement {
           {config.feedback.content ? (
             <Anchor
               className={linkClassName}
-              href={getGitIssueUrl({
-                repository: config.docsRepositoryBase,
-                title: `Feedback for “${config.title}”`,
-                labels: config.feedback.labels
-              })}
+              href={config.feedback.useLink()}
               newWindow
             >
               {renderComponent(config.feedback.content)}

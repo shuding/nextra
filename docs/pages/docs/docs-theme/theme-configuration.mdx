@@ -417,6 +417,7 @@ The built-in feedback link provides a way for users to submit feedback about the
 <OptionTable options={[
   ['feedback.content', 'React.ReactNode | React.FC', 'Content of the feedback button.'],
   ['feedback.labels', 'string', 'Labels that can be added to the new created GitHub issue.'],
+  ['feedback.useLink', '() => string', 'Custom link, by default, will open an issue in the repository set in `docsRepositoryBase`.'],
 ]}/>
 
 To disable it, you can set `feedback.content` to `null`.

@@ -43,6 +43,7 @@ export interface DocsThemeConfig {
   feedback: {
     content?: ReactNode | FC
     labels?: string
+    useLink: () => string
   }
   footer: {
     component: ReactNode | FC<{ menu: boolean }>
@@ -125,7 +126,6 @@ export type PageTheme = {
 }
 
 export type Context = {
-  Content: FC
   pageOpts: PageOpts
   themeConfig: DocsThemeConfig
 }

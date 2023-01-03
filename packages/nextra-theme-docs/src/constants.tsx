@@ -6,7 +6,7 @@ import { Anchor, Flexsearch, Footer, Navbar, TOC } from './components'
 import { DiscordIcon, GitHubIcon } from 'nextra/icons'
 import { MatchSorterSearch } from './components/match-sorter-search'
 import { useConfig } from './contexts'
-import { getGitEditUrl } from './utils'
+import { getGitEditUrl, getGitIssueUrl } from './utils'
 
 export const DEFAULT_LOCALE = 'en-US'
 
@@ -43,8 +43,16 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     text: 'Edit this page'
   },
   feedback: {
-    content: () => <>Question? Give us feedback →</>,
-    labels: 'feedback'
+    content: 'Question? Give us feedback →',
+    labels: 'feedback',
+    useLink() {
+      const config = useConfig()
+      return getGitIssueUrl({
+        labels: config.feedback.labels,
+        repository: config.docsRepositoryBase,
+        title: `Feedback for “${config.title}”`,
+      })
+    },
   },
   footer: {
     component: Footer,
