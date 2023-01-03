@@ -337,7 +337,7 @@ export function Sidebar({
   const anchors = useMemo(
     () =>
       headings
-        .filter(v => v.children && v.depth === 2 && v.type === 'heading')
+        .filter(v => v.depth === 2)
         .map(getHeadingText)
         .filter(Boolean),
     [headings]

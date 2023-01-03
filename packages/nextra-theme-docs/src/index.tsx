@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import 'focus-visible'
 import cn from 'clsx'
 import { MDXProvider } from '@mdx-js/react'
-import { useMounted } from 'nextra/hooks'
+import { useMounted, usePageContext } from 'nextra/hooks'
 
 import './polyfill'
 import {
@@ -109,6 +109,10 @@ const Body = ({
   )
 }
 
+const tocClassName = cn(
+  'nextra-toc nx-order-last nx-hidden nx-w-64 nx-shrink-0 xl:nx-block'
+)
+
 const InnerLayout = ({
   filePath,
   pageMap,
@@ -135,9 +139,6 @@ const InnerLayout = ({
     !themeContext.sidebar ||
     themeContext.layout === 'raw' ||
     activeType === 'page'
-
-  const tocClassName =
-    'nextra-toc nx-order-last nx-hidden nx-w-64 nx-shrink-0 xl:nx-block'
 
   const tocEl =
     activeType === 'page' ||
@@ -236,10 +237,7 @@ const InnerLayout = ({
 }
 
 export default function Layout(props: any): ReactElement {
-  const { route } = useRouter()
-  const context = globalThis.__nextra_pageContext__[route]
-  if (!context) throw new Error(`No content found for ${route}.`)
-
+  const context = usePageContext()
   const { pageOpts, Content } = context
   return (
     <ConfigProvider value={context}>
