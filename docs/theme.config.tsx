@@ -1,4 +1,4 @@
-import { DocsThemeConfig } from 'nextra-theme-docs'
+import { DocsThemeConfig, useConfig } from 'nextra-theme-docs'
 import { useRouter } from 'next/router'
 
 const logo = (
@@ -54,43 +54,55 @@ const config: DocsThemeConfig = {
     }
   },
   logo,
-  head: (
-    <>
-      <meta name="msapplication-TileColor" content="#ffffff" />
-      <meta name="theme-color" content="#ffffff" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta httpEquiv="Content-Language" content="en" />
-      <meta
-        name="description"
-        content="Make beautiful websites with Next.js & MDX."
-      />
-      <meta
-        name="og:description"
-        content="Make beautiful websites with Next.js & MDX."
-      />
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:image" content="https://nextra.site/og.jpeg" />
-      <meta name="twitter:site:domain" content="nextra.site" />
-      <meta name="twitter:url" content="https://nextra.site" />
-      <meta name="og:title" content="Nextra" />
-      <meta name="og:image" content="https://nextra.site/og.jpeg" />
-      <meta name="apple-mobile-web-app-title" content="Nextra" />
-      <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-      <link rel="icon" href="/favicon.png" type="image/png" />
-      <link
-        rel="icon"
-        href="/favicon-dark.svg"
-        type="image/svg+xml"
-        media="(prefers-color-scheme: dark)"
-      />
-      <link
-        rel="icon"
-        href="/favicon-dark.png"
-        type="image/png"
-        media="(prefers-color-scheme: dark)"
-      />
-    </>
-  ),
+  head: () => {
+    const { title } = useConfig()
+    const { route } = useRouter()
+    const socialCard =
+      route === '/' || !title
+        ? 'https://nextra.site/og.jpeg'
+        : `https://nextra.site/api/og?title=${title}`
+
+    return (
+      <>
+        <meta name="msapplication-TileColor" content="#ffffff" />
+        <meta name="theme-color" content="#ffffff" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta httpEquiv="Content-Language" content="en" />
+        <meta
+          name="description"
+          content="Make beautiful websites with Next.js & MDX."
+        />
+        <meta
+          name="og:description"
+          content="Make beautiful websites with Next.js & MDX."
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content={socialCard} />
+        <meta name="twitter:site:domain" content="nextra.site" />
+        <meta name="twitter:url" content="https://nextra.site" />
+        <meta
+          name="og:title"
+          content={title ? title + ' – Nextra' : 'Nextra'}
+        />
+        <meta name="og:image" content={socialCard} />
+        <meta name="apple-mobile-web-app-title" content="Nextra" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="icon" href="/favicon.png" type="image/png" />
+        <link
+          rel="icon"
+          href="/favicon-dark.svg"
+          type="image/svg+xml"
+          media="(prefers-color-scheme: dark)"
+        />
+        <link
+          rel="icon"
+          href="/favicon-dark.png"
+          type="image/png"
+          media="(prefers-color-scheme: dark)"
+        />
+      </>
+    )
+  },
   // banner: {
   //   key: '2.0-release',
   //   text: (

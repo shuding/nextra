@@ -1,0 +1,29 @@
+import { MDXRemote } from 'next-mdx-remote'
+import { compileMdx } from 'nextra/compile'
+import { useSSG } from 'nextra/ssg'
+import { useMDXComponents } from 'nextra-theme-docs'
+
+export const getStaticProps = async () => {
+  const markdown = `# Hello Nextra!!
+  
+## Yo
+
+\`\`\`js
+const a = 1
+\`\`\`
+`
+  const mdx = await compileMdx(markdown, { defaultShowCopyCode: true })
+  return {
+    props: {
+      ssg: mdx.result
+    },
+  }
+}
+
+export const NextraReadme = () => {
+  const compiledSource = useSSG()
+  const components = useMDXComponents()
+  return <MDXRemote compiledSource={compiledSource} components={components} />
+}
+
+<NextraReadme />

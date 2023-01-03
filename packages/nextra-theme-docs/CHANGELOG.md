@@ -1,5 +1,27 @@
 # nextra-theme-docs
 
+## 2.0.3
+
+### Patch Changes
+
+- 8060ed3: style improvements
+
+## 2.0.2
+
+### Patch Changes
+
+- 99ec64e: fix indentation for copy code button
+- 3a08fe2: Add Callout border in dark mode
+- 328ad88: support basePath with locale switch
+- f488e2e: remove @react/skip-nev #1051
+
+  fix: staticImage should only set blur placeholder for jpeg,png,webp,avif
+
+- 5c617d4: add `aria-label` for dismiss button in banner
+- b43d775: fix `Navbar />` elements `key` prop
+- 105588d: fix missing border in navbar
+- c1867fd: fix hydration for default `gitTimestamp` component
+
 ## 2.0.1
 
 ### Patch Changes

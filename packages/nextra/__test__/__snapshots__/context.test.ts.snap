@@ -1341,6 +1341,25 @@ exports[`context > getAllPages() > should work 1`] = `
         "route": "/docs/code-block-without-language",
       },
       {
+        "children": [
+          {
+            "kind": "MdxPage",
+            "locale": "en-US",
+            "meta": {
+              "title": "Foo",
+            },
+            "name": "foo",
+            "route": "/docs/remote/foo",
+          },
+        ],
+        "kind": "Folder",
+        "meta": {
+          "title": "Remote",
+        },
+        "name": "remote",
+        "route": "/docs/remote",
+      },
+      {
         "kind": "MdxPage",
         "locale": "en-US",
         "meta": {
@@ -3171,6 +3190,25 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
     },
     "name": "code-block-without-language",
     "route": "/docs/code-block-without-language",
+  },
+  {
+    "children": [
+      {
+        "kind": "MdxPage",
+        "locale": "en-US",
+        "meta": {
+          "title": "Foo",
+        },
+        "name": "foo",
+        "route": "/docs/remote/foo",
+      },
+    ],
+    "kind": "Folder",
+    "meta": {
+      "title": "Remote",
+    },
+    "name": "remote",
+    "route": "/docs/remote",
   },
   {
     "kind": "MdxPage",

@@ -94,6 +94,7 @@ export type NextraConfig = {
   flexsearch?: Flexsearch
   staticImage?: boolean
   readingTime?: boolean
+  latex?: boolean
   mdxOptions?: Pick<ProcessorOptions, 'rehypePlugins' | 'remarkPlugins'> & {
     rehypePrettyCodeOptions?: Partial<RehypePrettyCodeOptions>
   }

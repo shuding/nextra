@@ -90,6 +90,7 @@ async function loader(
     defaultLocale,
     defaultShowCopyCode,
     flexsearch,
+    latex,
     staticImage,
     readingTime: _readingTime,
     mdxOptions,
@@ -150,14 +151,18 @@ async function loader(
         readingTime: _readingTime,
         defaultShowCopyCode,
         staticImage,
-        flexsearch
+        flexsearch,
+        latex
       },
       mdxPath
     )
-  // @ts-expect-error
-  const cssImport = OFFICIAL_THEMES.includes(theme)
-    ? `import '${theme}/style.css'`
-    : ''
+
+  const katexCss = latex ? "import 'katex/dist/katex.min.css'\n" : ''
+
+  const cssImport =
+    katexCss +
+    // @ts-expect-error
+    (OFFICIAL_THEMES.includes(theme) ? `import '${theme}/style.css'` : '')
 
   // Imported as a normal component, no need to add the layout.
   if (!pageImport) {

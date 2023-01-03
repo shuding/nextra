@@ -13,10 +13,10 @@ code {
 
   .line {
     &.highlighted {
-      @apply nx-border-primary-600/60 nx-bg-primary-600/10;
+      @apply nx-bg-primary-600/10 nx-text-primary-600/50 nx-shadow-[2px_0_currentColor_inset];
     }
     .highlighted {
-      @apply nx-rounded-sm nx-shadow-[0_0_0_3px_rgba(0,0,0,.3)];
+      @apply nx-rounded-sm nx-shadow-[0_0_0_2px_rgba(0,0,0,.3)];
       @apply nx-bg-primary-800/10 nx-shadow-primary-800/10;
       @apply dark:nx-bg-primary-300/10 dark:nx-shadow-primary-300/10;
     }
@@ -29,7 +29,7 @@ pre {
   code {
     @apply nx-grid nx-min-w-full nx-rounded-none nx-border-none !nx-bg-transparent !nx-p-0 nx-text-sm nx-leading-5 nx-text-current dark:!nx-bg-transparent;
     .line {
-      @apply nx-border-l-2 nx-border-transparent nx-px-4;
+      @apply nx-px-4;
     }
   }
 
@@ -39,6 +39,19 @@ pre {
     .line {
       @apply nx-inline-block;
     }
+  }
+
+  .nextra-copy-icon {
+    animation: fade-in 0.3s ease forwards;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 
