@@ -43,6 +43,7 @@ export interface DocsThemeConfig {
   feedback: {
     content?: ReactNode | FC
     labels?: string
+    useLink: () => string
   }
   footer: {
     component: ReactNode | FC<{ menu: boolean }>
