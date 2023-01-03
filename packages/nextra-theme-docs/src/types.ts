@@ -126,7 +126,6 @@ export type PageTheme = {
 }
 
 export type Context = {
-  Content: FC
   pageOpts: PageOpts
   themeConfig: DocsThemeConfig
 }
