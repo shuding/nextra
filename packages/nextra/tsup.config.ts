@@ -21,7 +21,8 @@ export default defineConfig([
       'src/components/index.ts',
       'src/ssg.ts',
       'src/locales.ts',
-      'src/context.ts'
+      'src/context.ts',
+      'src/layout.ts'
     ],
     format: 'esm',
     dts: true,

@@ -35,6 +35,9 @@
       ],
       "hooks": [
         "./dist/hooks/index.d.ts"
+      ],
+      "layout": [
+        "./dist/layout.d.ts"
       ]
     }
   },
