@@ -62,15 +62,13 @@ const initGitRepo = (async () => {
  * Ref.: http://isthe.com/chongo/tech/comp/fnv/
  *
  * @param {string} str the input value
- * @param {integer} [seed] optionally pass the hash of the previous chunk
+ * @param {number} [seed] optionally pass the hash of the previous chunk
  * @returns {string}
  */
-function hashFnv32a(str: string, seed = 0x811c9dc5) {
-  let i,
-    l,
-    hval = seed
+function hashFnv32a(str: string, seed = 0x811c9dc5): string {
+  let hval = seed
 
-  for (i = 0, l = str.length; i < l; i++) {
+  for (let i = 0; i < str.length; i++) {
     hval ^= str.charCodeAt(i)
     hval += (hval << 1) + (hval << 4) + (hval << 7) + (hval << 8) + (hval << 24)
   }
@@ -238,8 +236,7 @@ export default MDXContent`
 
   const stringifiedPageNextRoute = JSON.stringify(pageNextRoute)
   const stringifiedPageOpts = JSON.stringify(pageOpts)
-  const pageOptsChecksum =
-    process.env.NODE_ENV === 'development' && hashFnv32a(stringifiedPageOpts)
+  const pageOptsChecksum = !IS_PRODUCTION && hashFnv32a(stringifiedPageOpts)
 
   return `import { SSGContext as __nextra_SSGContext__ } from 'nextra/ssg'
 ${themeConfigImport}
@@ -273,16 +270,16 @@ __nextra_pageOpts__.title =
 __nextra_internal__.context[${stringifiedPageNextRoute}] = {
   Content,
   pageOpts: __nextra_pageOpts__,
-  themeConfig: ${themeConfigImport ? '__nextra_themeConfig__' : 'null'},
+  themeConfig: ${themeConfigImport ? '__nextra_themeConfig__' : 'null'}
 }
 
-if (process.env.NODE_ENV === 'development' && module.hot) {
+if (${!IS_PRODUCTION} && module.hot) {
   const checksum = "${pageOptsChecksum}"
   module.hot.data ||= Object.create(null)
   if (module.hot.data.prevPageOptsChecksum !== checksum) {
     __nextra_internal__.refreshListeners[${stringifiedPageNextRoute}]?.forEach(listener => listener())
   }
-  module.hot.dispose((data) => {
+  module.hot.dispose(data => {
     data.prevPageOptsChecksum = checksum
   })
 }

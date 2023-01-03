@@ -109,6 +109,10 @@ const Body = ({
   )
 }
 
+const tocClassName = cn(
+  'nextra-toc nx-order-last nx-hidden nx-w-64 nx-shrink-0 xl:nx-block'
+)
+
 const InnerLayout = ({
   filePath,
   pageMap,
@@ -135,9 +139,6 @@ const InnerLayout = ({
     !themeContext.sidebar ||
     themeContext.layout === 'raw' ||
     activeType === 'page'
-
-  const tocClassName =
-    'nextra-toc nx-order-last nx-hidden nx-w-64 nx-shrink-0 xl:nx-block'
 
   const tocEl =
     activeType === 'page' ||

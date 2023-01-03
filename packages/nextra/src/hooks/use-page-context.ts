@@ -2,6 +2,7 @@ import { useRouter } from 'next/router.js'
 import { useEffect, useState } from 'react'
 
 import { PageMapItem, PageOpts } from '../types'
+import { IS_PRODUCTION } from '../constants'
 
 const NEXTRA_INTERNAL = Symbol.for('__nextra_internal__')
 
@@ -22,7 +23,7 @@ export function usePageContext() {
 
   const { route } = useRouter()
 
-  if (process.env.NODE_ENV === 'development') {
+  if (!IS_PRODUCTION) {
     const rerender = useState({})[1]
     useEffect(() => {
       const trigger = () => rerender({})
