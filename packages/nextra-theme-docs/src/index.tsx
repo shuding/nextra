@@ -1,4 +1,4 @@
-import type { PageMapItem, PageOpts } from 'nextra'
+import type { NextraThemeLayoutProps, PageMapItem, PageOpts } from 'nextra'
 import type { ReactElement, ReactNode } from 'react'
 
 import React, { useMemo } from 'react'
@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import 'focus-visible'
 import cn from 'clsx'
 import { MDXProvider } from '@mdx-js/react'
-import { useMounted, usePageContext } from 'nextra/hooks'
+import { useMounted } from 'nextra/hooks'
 
 import './polyfill'
 import {
@@ -236,14 +236,13 @@ const InnerLayout = ({
   )
 }
 
-export default function Layout(props: any): ReactElement {
-  const context = usePageContext()
-  const { pageOpts, Content } = context
+export default function Layout({
+  children,
+  ...context
+}: NextraThemeLayoutProps): ReactElement {
   return (
     <ConfigProvider value={context}>
-      <InnerLayout {...pageOpts}>
-        <Content {...props} />
-      </InnerLayout>
+      <InnerLayout {...context.pageOpts}>{children}</InnerLayout>
     </ConfigProvider>
   )
 }

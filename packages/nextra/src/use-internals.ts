@@ -1,12 +1,16 @@
 import { useRouter } from 'next/router.js'
 import { useEffect, useState } from 'react'
 
-import { PageMapItem, PageOpts } from '../types'
-import { IS_PRODUCTION } from '../constants'
+import { PageMapItem, PageOpts } from './types'
+import { IS_PRODUCTION } from './constants'
 
 const NEXTRA_INTERNAL = Symbol.for('__nextra_internal__')
 
-export function usePageContext() {
+/**
+ * This hook is used to access the internal state of Nextra, you should never
+ * use this hook in your application.
+ */
+export function useInternals() {
   const __nextra_internal__ = (globalThis as any)[NEXTRA_INTERNAL] as {
     pageMap: PageMapItem[]
     route: string
@@ -19,6 +23,7 @@ export function usePageContext() {
       }
     >
     refreshListeners: Record<string, (() => void)[]>
+    Layout: React.FC<any>
   }
 
   const { route } = useRouter()
@@ -47,5 +52,8 @@ export function usePageContext() {
     )
   }
 
-  return context
+  return {
+    context,
+    Layout: __nextra_internal__.Layout
+  }
 }

@@ -238,9 +238,9 @@ export default MDXContent`
   const stringifiedPageOpts = JSON.stringify(pageOpts)
   const pageOptsChecksum = !IS_PRODUCTION && hashFnv32a(stringifiedPageOpts)
 
-  return `import { SSGContext as __nextra_SSGContext__ } from 'nextra/ssg'
-${themeConfigImport}
+  return `${themeConfigImport}
 ${cssImport}
+import __nextra_layout__ from '${layout}'
 
 const __nextra_pageOpts__ = ${stringifiedPageOpts}
 
@@ -253,14 +253,9 @@ __nextra_internal__.pageMap = __nextra_pageOpts__.pageMap
 __nextra_internal__.route = __nextra_pageOpts__.route
 __nextra_internal__.context ||= Object.create(null)
 __nextra_internal__.refreshListeners ||= Object.create(null)
+__nextra_internal__.Layout = __nextra_layout__
 
 ${result}
-
-const Content = props => (
-  <__nextra_SSGContext__.Provider value={props}>
-    <MDXContent />
-  </__nextra_SSGContext__.Provider>
-)
 
 __nextra_pageOpts__.title =
   ${JSON.stringify(frontMatter.title)} ||
@@ -268,7 +263,7 @@ __nextra_pageOpts__.title =
   ${JSON.stringify(title /* Fallback as sidebar link name */)}
 
 __nextra_internal__.context[${stringifiedPageNextRoute}] = {
-  Content,
+  Content: MDXContent,
   pageOpts: __nextra_pageOpts__,
   themeConfig: ${themeConfigImport ? '__nextra_themeConfig__' : 'null'}
 }
@@ -284,7 +279,7 @@ if (${!IS_PRODUCTION} && module.hot) {
   })
 }
 
-export { default } from '${layout}'`
+export { default } from 'nextra/layout'`
 }
 
 export default function syncLoader(
