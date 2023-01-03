@@ -58,7 +58,9 @@ export const ConfigProvider = ({
   const extendedConfig: Config = {
     ...theme,
     flexsearch: pageOpts.flexsearch,
-    newNextLinkBehavior: pageOpts.newNextLinkBehavior,
+    ...(typeof pageOpts.newNextLinkBehavior === 'boolean' && {
+      newNextLinkBehavior: pageOpts.newNextLinkBehavior
+    }),
     title: pageOpts.title,
     frontMatter: pageOpts.frontMatter
   }
