@@ -105,6 +105,12 @@ const config: DocsThemeConfig = {
   feedback: {
     content: "Question? Give us feedback →",
     labels: "feedback",
+    useLink() {
+      const config = useConfig();
+      return `https://google.com/search?q=${encodeURIComponent(
+        `Feedback for ${config.title}`
+      )}`;
+    },
   },
   footer: {
     text() {
