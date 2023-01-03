@@ -5,11 +5,11 @@ import { useInternals } from './use-internals'
 
 export default function Nextra(props: any): React.ReactElement {
   const { context, Layout } = useInternals()
-  const { Content } = context
+  const { Content, ...restContext } = context
 
   return React.createElement(
     Layout,
-    context,
+    restContext,
     React.createElement(
       SSGContext.Provider,
       {

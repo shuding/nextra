@@ -109,7 +109,6 @@ const nextra: Nextra = () => () => ({})
 export default nextra
 
 export type NextraThemeLayoutProps = {
-  Content: React.FC
   pageOpts: PageOpts
   themeConfig: any | null
   children: React.ReactNode
