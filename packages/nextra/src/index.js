@@ -33,8 +33,31 @@ const nextra = (...config) =>
       locales: nextConfig.i18n?.locales || ['']
     })
 
+    const rewrites = async () => {
+      const rules = [
+        {
+          source: '/:path*/_meta',
+          destination: '/404'
+        }
+      ]
+
+      if (nextraPlugin.rewrites) {
+        const originalRewrites = await nextraPlugin.rewrites()
+        if (Array.isArray(originalRewrites)) {
+          return [...originalRewrites, ...rules]
+        }
+        return {
+          ...originalRewrites,
+          beforeFiles: [...(originalRewrites.beforeFiles || []), ...rules]
+        }
+      }
+
+      return rules
+    }
+
     return {
       ...nextConfig,
+      rewrites,
       pageExtensions: [
         ...(nextConfig.pageExtensions || DEFAULT_EXTENSIONS),
         ...MARKDOWN_EXTENSIONS
@@ -77,6 +100,20 @@ const nextra = (...config) =>
                 options: {
                   ...nextraLoaderOptions,
                   pageImport: true
+                }
+              }
+            ]
+          },
+          {
+            // Match dynamic meta files inside pages.
+            test: /_meta(\.[a-z]{2}-[A-Z]{2})?\.js$/,
+            issuer: request => !request,
+            use: [
+              options.defaultLoaders.babel,
+              {
+                loader: 'nextra/loader',
+                options: {
+                  metaImport: true
                 }
               }
             ]

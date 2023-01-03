@@ -61,6 +61,7 @@ async function loader(
   source: string
 ): Promise<string> {
   const {
+    metaImport,
     pageImport,
     theme,
     themeConfig,
@@ -78,6 +79,11 @@ async function loader(
   } = context.getOptions()
 
   context.cacheable(true)
+
+  // _meta.js used as a page.
+  if (metaImport) {
+    return 'export default () => null'
+  }
 
   // Check if there's a theme provided
   if (!theme) {
