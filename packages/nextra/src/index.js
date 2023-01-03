@@ -21,16 +21,17 @@ const nextra = (...config) =>
         : config[0]
     )
 
-    const nextraPlugin = new NextraPlugin({
-      ...nextraConfig,
-      distDir: nextConfig.distDir
-    })
-
     if (nextConfig.i18n?.locales) {
       console.log(
         '[nextra] You have Next.js i18n enabled, read here https://nextjs.org/docs/advanced-features/i18n-routing for the docs.'
       )
     }
+
+    const nextraPlugin = new NextraPlugin({
+      ...nextraConfig,
+      distDir: nextConfig.distDir,
+      locales: nextConfig.i18n?.locales || ['']
+    })
 
     return {
       ...nextConfig,
@@ -44,7 +45,7 @@ const nextra = (...config) =>
 
         const nextraLoaderOptions = {
           ...nextraConfig,
-          locales: nextConfig.i18n?.locales || [DEFAULT_LOCALE],
+          locales: nextConfig.i18n?.locales || [''],
           defaultLocale: nextConfig.i18n?.defaultLocale || DEFAULT_LOCALE,
           pageMapCache,
           newNextLinkBehavior: nextConfig.experimental?.newNextLinkBehavior,

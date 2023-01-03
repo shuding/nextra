@@ -6,9 +6,9 @@ import slash from 'slash'
 import { LoaderContext } from 'webpack'
 
 import { addPage } from './content-dump'
-import { parseFileName } from './utils'
+import { pageTitleFromFilename, parseFileName } from './utils'
 import { compileMdx } from './compile'
-import { getPageMap } from './page-map'
+import { resolvePageMap } from './page-map'
 import { collectFiles, collectMdx } from './plugin'
 import {
   IS_PRODUCTION,
@@ -64,6 +64,7 @@ async function loader(
     pageImport,
     theme,
     themeConfig,
+    locales,
     defaultLocale,
     defaultShowCopyCode,
     flexsearch,
@@ -94,7 +95,7 @@ async function loader(
 
   const { items, fileMap } = IS_PRODUCTION
     ? pageMapCache.get()!
-    : await collectFiles(PAGES_DIR)
+    : await collectFiles(PAGES_DIR, locales)
 
   // mdx is imported but is outside the `pages` directory
   if (!fileMap[mdxPath]) {
@@ -148,12 +149,21 @@ ${result}
 export default MDXContent`
   }
 
-  const { route, title, pageMap } = getPageMap({
+  const { route, pageMap, dynamicMetaItems } = resolvePageMap({
     filePath: mdxPath,
     fileMap,
     defaultLocale,
-    pageMap: items
+    items
   })
+
+  // Logic for resovling the page title (used for search and as fallback):
+  // 1. If the frontMatter has a title, use it.
+  // 2. Use the first h1 heading if it exists.
+  // 3. Use the fallback, title-cased file name.
+  const fallbackTitle =
+    frontMatter.title ||
+    headings.find(h => h.depth === 1)?.value ||
+    pageTitleFromFilename(fileMap[mdxPath].name)
 
   const skipFlexsearchIndexing =
     IS_PRODUCTION && indexContentEmitted.has(mdxPath)
@@ -162,7 +172,7 @@ export default MDXContent`
       addPage({
         locale: locale || DEFAULT_LOCALE,
         route,
-        title,
+        title: fallbackTitle,
         structurizedData,
         distDir
       })
@@ -213,11 +223,46 @@ export default MDXContent`
       // Remove the only `index` route
       .replace(/^index$/, '')
 
+  const dynamicMetaResolver = dynamicMetaItems.length
+    ? `if (typeof window === 'undefined') {
+  globalThis.__nextra_resolvePageMap__ = async () => {
+    const { pageMap } = __nextra_pageOpts__
+    const clonedPageMap = JSON.parse(JSON.stringify(pageMap))
+  
+    const executePromises = []
+    const importPromises = [
+      ${dynamicMetaItems
+        .map(
+          ([keyPath, filePath]) => `import('${slash(
+            (() => {
+              const relative = path.relative(path.dirname(mdxPath), filePath)
+              return relative.startsWith('.') ? relative : './' + relative
+            })()
+          )}').then(m => {
+        const getMeta = Promise.resolve(m.default()).then(meta => {
+          clonedPageMap${keyPath}.data = meta
+        })
+        executePromises.push(getMeta)
+      })`
+        )
+        .join(',\n    ')}
+    ]
+  
+    await Promise.all(importPromises)
+    await Promise.all(executePromises)
+  
+    return clonedPageMap
+  }
+}
+`
+    : ''
+
   return `import { SSGContext as __nextra_SSGContext__ } from 'nextra/ssg'
 ${themeConfigImport}
 ${cssImport}
 
 const __nextra_pageOpts__ = ${JSON.stringify(pageOpts)}
+${dynamicMetaResolver}
 
 globalThis.__nextra_internal__ = {
   pageMap: __nextra_pageOpts__.pageMap,
@@ -229,9 +274,9 @@ ${result}
 __nextra_pageOpts__.title =
   ${JSON.stringify(frontMatter.title)} ||
   (typeof __nextra_title__ === 'string' && __nextra_title__) ||
-  ${JSON.stringify(title /* Fallback as sidebar link name */)}
+  ${JSON.stringify(fallbackTitle /* Fallback as sidebar link name */)}
 
-const Content = props => (
+const __nextra_content__ = props => (
   <__nextra_SSGContext__.Provider value={props}>
     <MDXContent />
   </__nextra_SSGContext__.Provider>
@@ -243,7 +288,7 @@ globalThis.__nextra_pageContext__ ||= Object.create(null)
 // stable layout. We then put the actual content into a global store and use
 // the route to identify it.
 globalThis.__nextra_pageContext__[${JSON.stringify(pageNextRoute)}] = {
-  Content,
+  Content: __nextra_content__,
   pageOpts: __nextra_pageOpts__,
   themeConfig: ${themeConfigImport ? '__nextra_themeConfig__' : 'null'}
 }

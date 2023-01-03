@@ -1,42 +1,75 @@
-import path from 'node:path'
-import { FileMap, MdxPath, MetaJsonPath, PageMapItem } from './types'
-import { META_FILENAME } from './constants'
-import { normalizeMeta, parseFileName } from './utils'
+import { FileMap, MdxPath, PageMapItem } from './types'
+import { parseFileName } from './utils'
 import filterRouteLocale from './filter-route-locale'
 
 type PageMapProps = {
   filePath: string
-  pageMap: PageMapItem[]
+  items: PageMapItem[]
   fileMap: FileMap
   defaultLocale: string
 }
 
-export function getPageMap({
+type DynamicMetaDescriptor = [itemPath: string, filePath: string]
+
+function getDynamicMeta(
+  path: string,
+  items: PageMapItem[]
+): [DynamicMetaDescriptor[], PageMapItem[]] {
+  const newItems = []
+  const dynamicMetaItems: DynamicMetaDescriptor[] = []
+
+  for (let i = 0; i < items.length; i++) {
+    const item = items[i]
+    if (item.kind === 'Folder') {
+      const [dynamicItemsInChildren, newItemsInChildren] = getDynamicMeta(
+        path + `[${i}].children`,
+        item.children
+      )
+      dynamicMetaItems.push(...dynamicItemsInChildren)
+      newItems.push({
+        ...item,
+        children: newItemsInChildren
+      })
+    } else if (item.kind === 'Meta') {
+      if (item.__nextra_src) {
+        dynamicMetaItems.push([path + `[${i}]`, item.__nextra_src])
+        const newItem = {
+          ...item
+        }
+        delete newItem.__nextra_src
+        newItems.push(newItem)
+      } else {
+        newItems.push(item)
+      }
+    } else {
+      newItems.push(item)
+    }
+  }
+
+  return [dynamicMetaItems, newItems]
+}
+
+export function resolvePageMap({
   filePath,
-  pageMap,
+  items,
   fileMap,
   defaultLocale
 }: PageMapProps): {
-  title: string
   route: string
   pageMap: PageMapItem[]
+  dynamicMetaItems: DynamicMetaDescriptor[]
 } {
   const { locale } = parseFileName(filePath)
   const pageItem = fileMap[filePath as MdxPath]
 
-  const metaFilename = locale
-    ? META_FILENAME.replace('.', `.${locale}.`)
-    : META_FILENAME
-  const metaDir = path.dirname(filePath)
-  const metaPath = path.join(metaDir, metaFilename) as MetaJsonPath
-
-  const pageMeta = fileMap[metaPath].data[pageItem.name]
+  const [dynamicMetaItems, newItems] = getDynamicMeta(
+    '',
+    locale ? filterRouteLocale(items, locale, defaultLocale) : items
+  )
 
   return {
-    pageMap: locale
-      ? filterRouteLocale(pageMap, locale, defaultLocale)
-      : pageMap,
-    title: normalizeMeta(pageMeta).title,
-    route: pageItem.route
+    pageMap: newItems,
+    route: pageItem.route,
+    dynamicMetaItems
   }
 }

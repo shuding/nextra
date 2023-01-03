@@ -21,6 +21,7 @@ export const OFFICIAL_THEMES = [
 ] as const
 
 export const META_FILENAME = '_meta.json'
+export const DYNAMIC_META_FILENAME = '_meta.js'
 
 export const CWD = process.cwd()
 

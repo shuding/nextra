@@ -1,6 +1,6 @@
 import { MDXRemote } from 'next-mdx-remote'
 import { compileMdx } from 'nextra/compile'
-import { useSSG } from 'nextra/ssg'
+import { useSSG, getDynamicMeta } from 'nextra/data'
 import { useMDXComponents } from 'nextra-theme-docs'
 
 export const getStaticProps = async () => {
@@ -15,7 +15,8 @@ const a = 1
   const mdx = await compileMdx(markdown, { defaultShowCopyCode: true })
   return {
     props: {
-      ssg: mdx.result
+      ssg: mdx.result,
+      ...(await getDynamicMeta())
     },
   }
 }

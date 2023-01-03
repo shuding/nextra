@@ -235,12 +235,18 @@ const InnerLayout = ({
   )
 }
 
-export default function Layout(props: any): ReactElement {
+export default function Layout({
+  __nextra_pageMap,
+  ...props
+}: any): ReactElement {
   const { route } = useRouter()
   const context = globalThis.__nextra_pageContext__[route]
   if (!context) throw new Error(`No content found for ${route}.`)
 
   const { pageOpts, Content } = context
+  if (__nextra_pageMap) {
+    pageOpts.pageMap = __nextra_pageMap
+  }
   return (
     <ConfigProvider value={context}>
       <InnerLayout {...pageOpts}>
