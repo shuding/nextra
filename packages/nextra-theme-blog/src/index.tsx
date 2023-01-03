@@ -6,7 +6,7 @@ import { ArticleLayout } from './article-layout'
 import { PostsLayout } from './posts-layout'
 import { PageLayout } from './page-layout'
 import { DEFAULT_THEME } from './constants'
-import { useRouter } from 'next/router'
+import { usePageContext } from 'nextra/hooks'
 
 const layoutMap = {
   post: ArticleLayout,
@@ -35,10 +35,7 @@ const BlogLayout = ({
 }
 
 export default function Layout(props: any) {
-  const { route } = useRouter()
-  const context = globalThis.__nextra_pageContext__[route]
-  if (!context) throw new Error(`No content found for ${route}.`)
-
+  const context = usePageContext()
   const extendedConfig = { ...DEFAULT_THEME, ...context.themeConfig }
 
   return (

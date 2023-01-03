@@ -1,7 +1,7 @@
 import { Processor } from '@mdx-js/mdx/lib/core'
 import { visit } from 'unist-util-visit'
 import { Plugin } from 'unified'
-import { Root, Heading, Parent } from 'mdast'
+import { Root, Parent } from 'mdast'
 import { PageOpts } from '../types'
 
 export const getFlattenedValue = (node: Parent): string =>
@@ -37,7 +37,7 @@ export const remarkHeadings: Plugin<[], Root> = function (this: Processor) {
               (child: { type: string }) => child.type === 'mdxJsxTextElement'
             )
           const heading = {
-            ...(node as Heading),
+            depth: node.depth,
             value: getFlattenedValue(node)
           }
           data.headingMeta.headings.push(heading)

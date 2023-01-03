@@ -24,7 +24,7 @@ export function TOC({ headings, filePath }: TOCProps): ReactElement {
   >(
     () =>
       headings
-        .filter(heading => heading.type === 'heading' && heading.depth > 1)
+        .filter(heading => heading.depth > 1)
         .map(heading => {
           const text = getHeadingText(heading)
           return {
