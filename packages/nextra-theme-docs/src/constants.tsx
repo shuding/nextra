@@ -30,7 +30,7 @@ function isString(value: unknown): boolean {
 
 const i18nSchema = z.array(
   z.object({
-    direction: z.string().optional(),
+    direction: z.enum(['ltr', 'rtl']).optional(),
     locale: z.string(),
     text: z.string()
   })
@@ -143,7 +143,7 @@ export const themeSchema = z
 
 const publicThemeSchema = themeSchema.deepPartial().extend({
   // to have `locale` and `text` as required properties
-  i18n: i18nSchema,
+  i18n: i18nSchema
 })
 
 export type DocsThemeConfig = z.infer<typeof themeSchema>
