@@ -11,9 +11,8 @@ import React, {
 import 'intersection-observer'
 import { useSetActiveAnchor, DetailsProvider, useDetails } from './contexts'
 import { Collapse, Anchor } from './components'
-import { IS_BROWSER } from './constants'
+import { IS_BROWSER, DocsThemeConfig } from './constants'
 import cn from 'clsx'
-import { DocsThemeConfig } from './types'
 import { Code, Pre, Table, Td, Th, Tr } from 'nextra/components'
 
 let observer: IntersectionObserver
