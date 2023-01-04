@@ -51,7 +51,7 @@ export const ConfigProvider = ({
       ])
     )
   }
-  if (isValidated) {
+  if (!isValidated) {
     theme = themeSchema.parse(theme)
     isValidated = true
   }
