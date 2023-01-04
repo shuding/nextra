@@ -1,4 +1,10 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:base"]
+  "extends": ["config:base"],
+  "packageRules": [
+    {
+      "groupName": "nextra",
+      "matchPackageNames": ["nextra", "nextra-theme-docs", "nextra-theme-blog"]
+    }
+  ]
 }

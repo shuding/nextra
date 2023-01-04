@@ -11,20 +11,20 @@ importers:
       eslint: ^8.30.0
       framer-motion: ^8.0.0
       next: ^13.1.1
-      nextra: 2.0.2
-      nextra-theme-docs: 2.0.2
+      nextra: 2.0.3
+      nextra-theme-docs: 2.0.3
       postcss: ^8.4.19
       react: ^18.2.0
       react-dom: ^18.2.0
       tailwindcss: ^3.2.4
-      typescript: ^4.9.3
+      typescript: ^4.9.4
     dependencies:
       '@vercel/og': 0.0.21
       clsx: 1.2.1
       framer-motion: 8.0.1_biqbaboplfbrettd7655fr4n2y
       next: 13.1.1_biqbaboplfbrettd7655fr4n2y
-      nextra: 2.0.2_q76c2b4vyoegvsbrcwkfvimnai
-      nextra-theme-docs: 2.0.2_q76c2b4vyoegvsbrcwkfvimnai
+      nextra: 2.0.3_q76c2b4vyoegvsbrcwkfvimnai
+      nextra-theme-docs: 2.0.3_q76c2b4vyoegvsbrcwkfvimnai
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     devDependencies:
@@ -33,7 +33,7 @@ importers:
       eslint: 8.30.0
       postcss: 8.4.19
       tailwindcss: 3.2.4_postcss@8.4.19
-      typescript: 4.9.3
+      typescript: 4.9.4
 
 packages:
 
@@ -2331,8 +2331,8 @@ packages:
       - babel-plugin-macros
     dev: false
 
-  /nextra-theme-docs/2.0.2_q76c2b4vyoegvsbrcwkfvimnai:
-    resolution: {integrity: sha512-EE6P5JyF26tb9YGueYMpZh5KRfMLuB/5FIti8gyhvbVqgU1OBO14Ex2xOIAvLB5Lqsg1eSv3mg84T7lwOg9E8w==}
+  /nextra-theme-docs/2.0.3_q76c2b4vyoegvsbrcwkfvimnai:
+    resolution: {integrity: sha512-BN0NOzYNMQNLU8PMRKVtgOitLC2jFubMA9O8b3gNhr+5/Uny6MTDwuSAVO7G7z830b6dNaRqrMA84iVRS+2LaQ==}
     peerDependencies:
       next: '>=9.5.3'
       react: '>=16.13.1'
@@ -2356,8 +2356,8 @@ packages:
       scroll-into-view-if-needed: 3.0.3
     dev: false
 
-  /nextra/2.0.2_q76c2b4vyoegvsbrcwkfvimnai:
-    resolution: {integrity: sha512-SryuJVTw/FDMIZBEbXJm9Jo5OX+/HajjccHj8QVcGCEtmWFqbEJklGHHMDKOhC9pBr6sxRhtFFzOGu//F9J1Hw==}
+  /nextra/2.0.3_q76c2b4vyoegvsbrcwkfvimnai:
+    resolution: {integrity: sha512-GttZMwfHiVcrnVMnN2PKq2mS6YoQ0zrbzRYS838WYfzUpjIPCR6L8rJbAEd00kcrJNM1MvSCxONOTqGDDjW7YA==}
     peerDependencies:
       next: '>=9.5.3'
       react: '>=16.13.1'
@@ -3096,8 +3096,8 @@ packages:
     engines: {node: '>=10'}
     dev: false
 
-  /typescript/4.9.3:
-    resolution: {integrity: sha512-CIfGzTelbKNEnLpLdGFgdyKhG23CKdKgQPOBc+OUNrkJ2vr+KSzsSV5kq5iWhEQbok+quxgGzrAtGWCyU7tHnA==}
+  /typescript/4.9.4:
+    resolution: {integrity: sha512-Uz+dTXYzxXXbsFpM86Wh3dKCxrQqUcVMxwU54orwlJjOpO3ao8L7j5lH+dWfTwgCwIuM9GQ2kvVotzYJMXTBZg==}
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: true

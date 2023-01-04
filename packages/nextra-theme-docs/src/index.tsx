@@ -1,4 +1,4 @@
-import type { PageMapItem, PageOpts } from 'nextra'
+import type { NextraThemeLayoutProps, PageMapItem, PageOpts } from 'nextra'
 import type { ReactElement, ReactNode } from 'react'
 
 import React, { useMemo } from 'react'
@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import 'focus-visible'
 import cn from 'clsx'
 import { MDXProvider } from '@mdx-js/react'
-import { useMounted, usePageContext } from 'nextra/hooks'
+import { useMounted } from 'nextra/hooks'
 
 import './polyfill'
 import {
@@ -19,9 +19,9 @@ import {
 } from './components'
 import { getComponents } from './mdx-components'
 import { ActiveAnchorProvider, ConfigProvider, useConfig } from './contexts'
-import { DEFAULT_LOCALE } from './constants'
+import { DEFAULT_LOCALE, PartialDocsThemeConfig } from './constants'
 import { getFSRoute, normalizePages, renderComponent } from './utils'
-import { DocsThemeConfig, PageTheme, RecursivePartial } from './types'
+import { PageTheme } from './types'
 
 function useDirectoryInfo(pageMap: PageMapItem[]) {
   const { locale = DEFAULT_LOCALE, defaultLocale, route } = useRouter()
@@ -230,25 +230,21 @@ const InnerLayout = ({
           </Body>
         </ActiveAnchorProvider>
       </div>
-      {themeContext.footer &&
-        renderComponent(config.footer.component, { menu: hideSidebar })}
+      {renderComponent(config.footer.component, { menu: hideSidebar })}
     </div>
   )
 }
 
-export default function Layout(props: any): ReactElement {
-  const context = usePageContext()
-  const { pageOpts, Content } = context
+export default function Layout({
+  children,
+  ...context
+}: NextraThemeLayoutProps): ReactElement {
   return (
     <ConfigProvider value={context}>
-      <InnerLayout {...pageOpts}>
-        <Content {...props} />
-      </InnerLayout>
+      <InnerLayout {...context.pageOpts}>{children}</InnerLayout>
     </ConfigProvider>
   )
 }
-
-type PartialDocsThemeConfig = RecursivePartial<DocsThemeConfig>
 
 export { useConfig, PartialDocsThemeConfig as DocsThemeConfig }
 export { useMDXComponents } from '@mdx-js/react'
