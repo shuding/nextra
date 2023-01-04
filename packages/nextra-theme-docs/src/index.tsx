@@ -19,9 +19,9 @@ import {
 } from './components'
 import { getComponents } from './mdx-components'
 import { ActiveAnchorProvider, ConfigProvider, useConfig } from './contexts'
-import { DEFAULT_LOCALE } from './constants'
+import { DEFAULT_LOCALE, PartialDocsThemeConfig } from './constants'
 import { getFSRoute, normalizePages, renderComponent } from './utils'
-import { DocsThemeConfig, PageTheme, RecursivePartial } from './types'
+import { PageTheme } from './types'
 
 function useDirectoryInfo(pageMap: PageMapItem[]) {
   const { locale = DEFAULT_LOCALE, defaultLocale, route } = useRouter()
@@ -230,8 +230,7 @@ const InnerLayout = ({
           </Body>
         </ActiveAnchorProvider>
       </div>
-      {themeContext.footer &&
-        renderComponent(config.footer.component, { menu: hideSidebar })}
+      {renderComponent(config.footer.component, { menu: hideSidebar })}
     </div>
   )
 }
@@ -246,8 +245,6 @@ export default function Layout({
     </ConfigProvider>
   )
 }
-
-type PartialDocsThemeConfig = RecursivePartial<DocsThemeConfig>
 
 export { useConfig, PartialDocsThemeConfig as DocsThemeConfig }
 export { useMDXComponents } from '@mdx-js/react'
