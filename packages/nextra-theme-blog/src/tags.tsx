@@ -6,11 +6,14 @@ import { getStaticTags } from './utils/get-tags'
 
 const NEXTRA_INTERNAL = Symbol.for('__nextra_internal__')
 
-export const TagTitle = () => {
+export const TagTitle = ({ prefix = 'Posts tagged with ' }) => {
   const { tag } = useSSG()
   return (
     <Head>
-      <title>{`Posts Tagged with ${tag}`}</title>
+      <title>
+        {prefix}
+        {tag}
+      </title>
     </Head>
   )
 }
