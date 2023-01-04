@@ -22,12 +22,16 @@ export const getStaticProps = async ({ params }) => {
         ssg: mdx.result,
         ...(await getDynamicMeta())
       },
+      revalidate: 10,
     }
   } catch (e) {
     const mdx = await compileMdx(`Error: failed to render comment ${params.slug}.`)
     return {
-      ssg: mdx.result,
-      ...(await getDynamicMeta())
+      props: {
+        ssg: mdx.result,
+        ...(await getDynamicMeta())
+      },
+      revalidate: 10,
     }
   }
 }
