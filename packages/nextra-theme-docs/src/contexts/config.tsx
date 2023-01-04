@@ -28,6 +28,7 @@ const ConfigContext = createContext<Config>({
 export const useConfig = () => useContext(ConfigContext)
 
 let theme: DocsThemeConfig
+let isValidated = process.env.NODE_ENV === 'production'
 
 export const ConfigProvider = ({
   children,
@@ -37,8 +38,8 @@ export const ConfigProvider = ({
   value: Context
 }): ReactElement => {
   const [menu, setMenu] = useState(false)
-  // Validate only on first load
-  theme ||= themeSchema.parse({
+  // Merge only on first load
+  theme ||= {
     ...DEFAULT_THEME,
     ...Object.fromEntries(
       Object.entries(themeConfig).map(([key, value]) => [
@@ -49,7 +50,11 @@ export const ConfigProvider = ({
           : value
       ])
     )
-  })
+  }
+  if (isValidated) {
+    theme = themeSchema.parse(theme)
+    isValidated = true
+  }
   const extendedConfig: Config = {
     ...theme,
     flexsearch: pageOpts.flexsearch,
