@@ -2,6 +2,7 @@ import { visit } from 'unist-util-visit'
 import { Plugin } from 'unified'
 import { Root } from 'mdast'
 import path from 'node:path'
+import slash from 'slash'
 import { truthy } from '../utils'
 import { existsSync } from '../file-system'
 import { EXTERNAL_URL_REGEX, PUBLIC_DIR } from '../constants'
@@ -68,7 +69,7 @@ export const remarkStaticImage: Plugin<[{ filePath: string }], Root> =
           )
           return
         }
-        url = urlPath
+        url = slash(urlPath)
       }
       // Unique variable name for the given static image URL.
       const tempVariableName = `$nextraImage${importsToInject.length}`
