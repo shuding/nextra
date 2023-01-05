@@ -155,12 +155,10 @@ async function loader(
       mdxPath
     )
 
-  const katexCss = latex ? "import 'katex/dist/katex.min.css'\n" : ''
-
+  const katexCssImport = latex ? "import 'katex/dist/katex.min.css'" : ''
   const cssImport =
-    katexCss +
     // @ts-expect-error
-    (OFFICIAL_THEMES.includes(theme) ? `import '${theme}/style.css'` : '')
+    OFFICIAL_THEMES.includes(theme) ? `import '${theme}/style.css'` : ''
 
   // Imported as a normal component, no need to add the layout.
   if (!pageImport) {
@@ -239,6 +237,7 @@ export default MDXContent`
   const pageOptsChecksum = !IS_PRODUCTION && hashFnv32a(stringifiedPageOpts)
 
   return `${themeConfigImport}
+${katexCssImport}
 ${cssImport}
 import __nextra_layout__ from '${layout}'
 

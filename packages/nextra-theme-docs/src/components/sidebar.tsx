@@ -212,7 +212,7 @@ function File({
   const route = getFSRoute(asPath, locale)
   const onFocus = useContext(OnFocuseItemContext)
 
-  // It is possible that the item doesn't have any route - for example an extermal link.
+  // It is possible that the item doesn't have any route - for example an external link.
   const active = item.route && [route, route + '/'].includes(item.route + '/')
 
   const slugger = new Slugger()
@@ -332,6 +332,7 @@ export function Sidebar({
 }: SideBarProps): ReactElement {
   const config = useConfig()
   const { menu, setMenu } = useMenu()
+  const router = useRouter()
   const [focused, setFocused] = useState<null | string>(null)
 
   const anchors = useMemo(
@@ -376,6 +377,11 @@ export function Sidebar({
       }
     }
   }, [menu])
+
+  // Always close mobile nav when route was changed (e.g. logo click)
+  useEffect(() => {
+    setMenu(false)
+  }, [router.asPath])
 
   const hasMenu = config.i18n.length > 0 || config.darkMode
 

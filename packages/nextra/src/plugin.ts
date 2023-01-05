@@ -50,29 +50,29 @@ export async function collectFiles(
 ): Promise<{ items: PageMapItem[]; fileMap: FileMap }> {
   const files = await readdir(dir, { withFileTypes: true })
 
-  const promises = files.map(f =>
-    // add concurrency because folder can contain a lot of files
-    limit(async () => {
-      const filePath = path.join(dir, f.name)
-      const isDirectory = f.isDirectory()
-      const { name, locale, ext } = isDirectory
-        ? // directory couldn't have extensions
-          { name: path.basename(filePath), locale: '', ext: '' }
-        : parseFileName(filePath)
-      const fileRoute = slash(path.join(route, name.replace(/^index$/, '')))
+  const promises = files.map(async f => {
+    const filePath = path.join(dir, f.name)
+    const isDirectory = f.isDirectory()
+    const { name, locale, ext } = isDirectory
+      ? // directory couldn't have extensions
+        { name: path.basename(filePath), locale: '', ext: '' }
+      : parseFileName(filePath)
+    const fileRoute = slash(path.join(route, name.replace(/^index$/, '')))
 
-      if (isDirectory) {
-        if (fileRoute === '/api') return
-        const { items } = await collectFiles(filePath, fileRoute, fileMap)
-        if (!items.length) return
-        return <Folder>{
-          kind: 'Folder',
-          name: f.name,
-          route: fileRoute,
-          children: items
-        }
+    if (isDirectory) {
+      if (fileRoute === '/api') return
+      const { items } = await collectFiles(filePath, fileRoute, fileMap)
+      if (!items.length) return
+      return <Folder>{
+        kind: 'Folder',
+        name: f.name,
+        route: fileRoute,
+        children: items
       }
+    }
 
+    // add concurrency because folder can contain a lot of files
+    return limit(async () => {
       if (MARKDOWN_EXTENSION_REGEX.test(ext)) {
         const fp = filePath as MdxPath
         fileMap[fp] = await collectMdx(fp, fileRoute)
@@ -98,7 +98,7 @@ export async function collectFiles(
         )
       }
     })
-  )
+  })
 
   const items = (await Promise.all(promises)).filter(truthy)
 

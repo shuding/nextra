@@ -9,10 +9,7 @@ export default {
       >
         CC BY-NC 4.0
       </abbr>{' '}
-      <time dateTime={new Date().toISOString()}>
-        {new Date().getFullYear()}
-      </time>{' '}
-      © Shu Ding.
+      {new Date().getFullYear()} © Shu Ding.
       <a href="/feed.xml">RSS</a>
       <style jsx>{`
         a {
