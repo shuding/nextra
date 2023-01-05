@@ -21,7 +21,7 @@ export function Banner(): ReactElement | null {
           'nx-relative nx-z-20 nx-flex nx-items-center nx-justify-center',
           'nx-bg-neutral-900 nx-text-sm nx-font-medium nx-text-slate-50',
           'nx-h-[var(--nextra-banner-height)] [body.nextra-banner-hidden_&]:nx-hidden',
-          'dark:nx-bg-[linear-gradient(1deg,oklch(34.07%_0_0),oklch(24.78%_0_0))] dark:nx-text-white',
+          'dark:nx-bg-[linear-gradient(1deg,#383838,#212121)] dark:nx-text-white',
           'nx-py-1 nx-pl-[max(env(safe-area-inset-left),2.5rem)] nx-pr-[max(env(safe-area-inset-right),2.5rem)]'
         )}
       >
