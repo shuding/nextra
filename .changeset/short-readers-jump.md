@@ -4,4 +4,4 @@
 'nextra-theme-docs': patch
 ---
 
-use OKLCH for code blocks colors
+use OKLCH colors where possible
