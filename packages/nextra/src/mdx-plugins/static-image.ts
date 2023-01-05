@@ -74,7 +74,7 @@ export const remarkStaticImage: Plugin<[{ filePath: string }], Root> =
       // Unique variable name for the given static image URL.
       const tempVariableName = `$nextraImage${importsToInject.length}`
       const blur = VALID_BLUR_EXT.some(ext => url.endsWith(ext))
-      // Replace the image node with a MDX component node (Next.js Image).
+      // Replace the image node with an MDX component node (Next.js Image).
       Object.assign(node, {
         type: 'mdxJsxFlowElement',
         name: '$NextImageNextra',

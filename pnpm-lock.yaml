@@ -11,11 +11,10 @@ overrides:
   '@types/react-dom': ^18.0.6
   postcss: ^8.4.14
   postcss-cli: ^8.3.1
-  autoprefixer: ^10.4.8
-  cssnano: ^5.1.12
+  autoprefixer: ^10.4.13
   tailwindcss: ^3.1.8
   '@tailwindcss/nesting': ^0.0.0-insiders.565cd3e
-  '@tailwindcss/typography': ^0.5.4
+  '@tailwindcss/typography': ^0.5.8
   tsup: ^6.5.0
   concurrently: ^7.3.0
   postcss-import: ^14.1.0
@@ -90,7 +89,7 @@ importers:
 
   examples/swr-site:
     specifiers:
-      autoprefixer: ^10.4.8
+      autoprefixer: ^10.4.13
       focus-visible: ^5.1.0
       intersection-observer: ^0.10.0
       markdown-to-jsx: ^6.11.4
@@ -115,7 +114,7 @@ importers:
       react-dom: 18.2.0_react@18.2.0
       react-intersection-observer: 8.34.0_react@18.2.0
     devDependencies:
-      autoprefixer: 10.4.11_postcss@8.4.14
+      autoprefixer: 10.4.13_postcss@8.4.14
       postcss: 8.4.14
       tailwindcss: 3.1.8_postcss@8.4.14
     dependenciesMeta:
@@ -189,18 +188,17 @@ importers:
     specifiers:
       '@mdx-js/react': ^2.1.5
       '@tailwindcss/nesting': ^0.0.0-insiders.565cd3e
-      '@tailwindcss/typography': ^0.5.4
+      '@tailwindcss/typography': ^0.5.8
       '@types/react': ^18.0.15
       '@types/react-dom': ^18.0.6
-      autoprefixer: ^10.4.8
       concurrently: ^7.3.0
-      lightningcss-cli: ^1.16.0
       next: ^13.1.1
       next-themes: ^0.2.1
       nextra: workspace:*
       postcss: ^8.4.14
       postcss-cli: ^8.3.1
       postcss-import: ^14.1.0
+      postcss-lightningcss: ^0.6.0
       react: ^18.2.0
       react-cusdis: ^2.1.3
       react-dom: ^18.2.0
@@ -211,17 +209,16 @@ importers:
       next-themes: 0.2.1_q76c2b4vyoegvsbrcwkfvimnai
     devDependencies:
       '@tailwindcss/nesting': 0.0.0-insiders.565cd3e_postcss@8.4.14
-      '@tailwindcss/typography': 0.5.4_tailwindcss@3.1.8
+      '@tailwindcss/typography': 0.5.8_tailwindcss@3.1.8
       '@types/react': 18.0.20
       '@types/react-dom': 18.0.6
-      autoprefixer: 10.4.11_postcss@8.4.14
       concurrently: 7.4.0
-      lightningcss-cli: 1.16.0
       next: 13.1.1_biqbaboplfbrettd7655fr4n2y
       nextra: link:../nextra
       postcss: 8.4.14
       postcss-cli: 8.3.1_postcss@8.4.14
       postcss-import: 14.1.0_postcss@8.4.14
+      postcss-lightningcss: 0.6.0_postcss@8.4.14
       react: 18.2.0
       react-cusdis: 2.1.3_biqbaboplfbrettd7655fr4n2y
       react-dom: 18.2.0_react@18.2.0
@@ -234,13 +231,11 @@ importers:
       '@mdx-js/react': ^2.1.5
       '@popperjs/core': ^2.11.6
       '@tailwindcss/nesting': ^0.0.0-insiders.565cd3e
-      '@tailwindcss/typography': ^0.5.4
       '@types/flexsearch': ^0.7.3
       '@types/git-url-parse': ^9.0.1
       '@types/github-slugger': ^1.3.0
       '@types/react': ^18.0.15
       '@types/react-dom': ^18.0.6
-      autoprefixer: ^10.4.8
       clsx: ^1.2.1
       concurrently: ^7.3.0
       flexsearch: ^0.7.21
@@ -248,7 +243,6 @@ importers:
       git-url-parse: ^13.1.0
       github-slugger: ^2.0.0
       intersection-observer: ^0.12.2
-      lightningcss-cli: ^1.16.0
       match-sorter: ^6.3.1
       next: ^13.1.1
       next-seo: ^5.5.0
@@ -257,6 +251,7 @@ importers:
       postcss: ^8.4.14
       postcss-cli: ^8.3.1
       postcss-import: ^14.1.0
+      postcss-lightningcss: ^0.6.0
       react: ^18.2.0
       react-dom: ^18.2.0
       scroll-into-view-if-needed: ^3.0.0
@@ -280,20 +275,18 @@ importers:
       zod: 3.20.2
     devDependencies:
       '@tailwindcss/nesting': 0.0.0-insiders.565cd3e_postcss@8.4.14
-      '@tailwindcss/typography': 0.5.4_tailwindcss@3.1.8
       '@types/flexsearch': 0.7.3
       '@types/git-url-parse': 9.0.1
       '@types/github-slugger': 1.3.0
       '@types/react': 18.0.20
       '@types/react-dom': 18.0.6
-      autoprefixer: 10.4.11_postcss@8.4.14
       concurrently: 7.4.0
-      lightningcss-cli: 1.16.0
       next: 13.1.1_biqbaboplfbrettd7655fr4n2y
       nextra: link:../nextra
       postcss: 8.4.14
       postcss-cli: 8.3.1_postcss@8.4.14
       postcss-import: 14.1.0_postcss@8.4.14
+      postcss-lightningcss: 0.6.0_postcss@8.4.14
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       tailwindcss: 3.1.8_postcss@8.4.14
@@ -942,14 +935,15 @@ packages:
       postcss-nested: 5.0.6_postcss@8.4.14
     dev: true
 
-  /@tailwindcss/typography/0.5.4_tailwindcss@3.1.8:
-    resolution: {integrity: sha512-QEdg40EmGvE7kKoDei8zr5sf4D1pIayHj4R31bH3lX8x2BtTiR+jNejYPOkhbmy3DXgkMF9jC8xqNiGFAuL9Sg==}
+  /@tailwindcss/typography/0.5.8_tailwindcss@3.1.8:
+    resolution: {integrity: sha512-xGQEp8KXN8Sd8m6R4xYmwxghmswrd0cPnNI2Lc6fmrC3OojysTBJJGSIVwPV56q4t6THFUK3HJ0EaWwpglSxWw==}
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders'
     dependencies:
       lodash.castarray: 4.4.0
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
+      postcss-selector-parser: 6.0.10
       tailwindcss: 3.1.8_postcss@8.4.14
     dev: true
 
@@ -1519,15 +1513,15 @@ packages:
     engines: {node: '>= 4.0.0'}
     dev: true
 
-  /autoprefixer/10.4.11_postcss@8.4.14:
-    resolution: {integrity: sha512-5lHp6DgRodxlBLSkzHOTcufWFflH1ewfy2hvFQyjrblBFlP/0Yh4O/Wrg4ow8WRlN3AAUFFLAQwX8hTptzqVHg==}
+  /autoprefixer/10.4.13_postcss@8.4.14:
+    resolution: {integrity: sha512-49vKpMqcZYsJjwotvt4+h/BCjJVnhGwcLpDt5xkcaOG3eLrG/HUYLagrihYsQ+qrIBgIzX1Rw7a6L8I/ZA1Atg==}
     engines: {node: ^10 || ^12 || >=14}
     hasBin: true
     peerDependencies:
       postcss: ^8.1.0
     dependencies:
       browserslist: 4.21.4
-      caniuse-lite: 1.0.30001406
+      caniuse-lite: 1.0.30001442
       fraction.js: 4.2.0
       normalize-range: 0.1.2
       picocolors: 1.0.0
@@ -1574,23 +1568,12 @@ packages:
       wcwidth: 1.0.1
     dev: true
 
-  /browserslist/4.21.2:
-    resolution: {integrity: sha512-MonuOgAtUB46uP5CezYbRaYKBNt2LxP0yX+Pmj4LkcDFGkn9Cbpi83d9sCjwQDErXsIJSzY5oKGDbgOlF/LPAA==}
-    engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
-    hasBin: true
-    dependencies:
-      caniuse-lite: 1.0.30001406
-      electron-to-chromium: 1.4.192
-      node-releases: 2.0.6
-      update-browserslist-db: 1.0.4_browserslist@4.21.2
-    dev: true
-
   /browserslist/4.21.4:
     resolution: {integrity: sha512-CBHJJdDmgjl3daYjN5Cp5kbTf1mUhZoS+beLklHIvkOWscs83YAhLlF3Wsh/lciQYAcbBJgTOD44VtG31ZM4Hw==}
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001406
+      caniuse-lite: 1.0.30001442
       electron-to-chromium: 1.4.254
       node-releases: 2.0.6
       update-browserslist-db: 1.0.9_browserslist@4.21.4
@@ -1648,6 +1631,10 @@ packages:
 
   /caniuse-lite/1.0.30001406:
     resolution: {integrity: sha512-bWTlaXUy/rq0BBtYShc/jArYfBPjEV95euvZ8JVtO43oQExEN/WquoqpufFjNu4kSpi5cy5kMbNvzztWDfv1Jg==}
+
+  /caniuse-lite/1.0.30001442:
+    resolution: {integrity: sha512-239m03Pqy0hwxYPYR5JwOIxRJfLTWtle9FV8zosfV5pHg+/51uD4nxcUlM8+mWWGfwKtt8lJNHnD3cWw9VZ6ow==}
+    dev: true
 
   /ccount/2.0.1:
     resolution: {integrity: sha512-eyrF0jiFpY+3drT6383f1qhkbGsLSifNAjA61IUjZjmLCWjItY6LB9ft9YhoDgwfmclB2zhu51Lc7+95b8NRAg==}
@@ -1795,6 +1782,10 @@ packages:
   /color-name/1.1.4:
     resolution: {integrity: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==}
     dev: true
+
+  /colorjs.io/0.4.2:
+    resolution: {integrity: sha512-vtpiH+BTzZtzs4Yno0GyoC05Z20fTeLwNJ7lQzjxi8GJJb1SZO2o5yUBAUXzgvrO2JNuyIqur4gb1Z6HBjpd9A==}
+    dev: false
 
   /comma-separated-tokens/2.0.2:
     resolution: {integrity: sha512-G5yTt3KQN4Yn7Yk4ed73hlZ1evrFKXeUW3086p3PRFNp7m2vIjI6Pg+Kgb+oyzhd9F2qdcoj67+y3SdxL5XWsg==}
@@ -2005,10 +1996,6 @@ packages:
     engines: {node: '>=6.0.0'}
     dependencies:
       esutils: 2.0.3
-    dev: true
-
-  /electron-to-chromium/1.4.192:
-    resolution: {integrity: sha512-8nCXyIQY9An88NXAp+PuPy5h3/w5ZY7Iu2lag65Q0XREprcat5F8gKhoHsBUnQcFuCRnmevpR8yEBYRU3d2HDw==}
     dev: true
 
   /electron-to-chromium/1.4.254:
@@ -3581,8 +3568,8 @@ packages:
       type-check: 0.4.0
     dev: true
 
-  /lightningcss-cli-darwin-arm64/1.16.0:
-    resolution: {integrity: sha512-oVvStP/pB/idS3jIkCUXaw7YtXm8JfOyhv4YitXeC/eW4guXnOnEH0QnYgPxHXkyoTzv7LTC8l8E+WSvTh0OZw==}
+  /lightningcss-darwin-arm64/1.18.0:
+    resolution: {integrity: sha512-OqjydwtiNPgdH1ByIjA1YzqvDG/OMR6L3LPN6wRl1729LB0y4Mik7L06kmZaTb+pvUHr+NmDd2KCwnlrQ4zO3w==}
     engines: {node: '>= 12.0.0'}
     cpu: [arm64]
     os: [darwin]
@@ -3590,8 +3577,8 @@ packages:
     dev: true
     optional: true
 
-  /lightningcss-cli-darwin-x64/1.16.0:
-    resolution: {integrity: sha512-arTe6LZYbZReAFfe/NEUjxu2F72EN0J3QWU8bwEoqCzlxP3cx3ycOUU4M6jEI63MJMKD1sk/xPPODzm0/UTctA==}
+  /lightningcss-darwin-x64/1.18.0:
+    resolution: {integrity: sha512-mNiuPHj89/JHZmJMp+5H8EZSt6EL5DZRWJ31O6k3DrLLnRIQjXuXdDdN8kP7LoIkeWI5xvyD60CsReJm+YWYAw==}
     engines: {node: '>= 12.0.0'}
     cpu: [x64]
     os: [darwin]
@@ -3599,8 +3586,8 @@ packages:
     dev: true
     optional: true
 
-  /lightningcss-cli-linux-arm-gnueabihf/1.16.0:
-    resolution: {integrity: sha512-Bw0lzRtcO7GNnQIJoIgokQr1rUb/yVc6OcwihgrYZjjVJDOQy/yaALsiLuyN36dfdfmarof+EBpdVzv3X89T8w==}
+  /lightningcss-linux-arm-gnueabihf/1.18.0:
+    resolution: {integrity: sha512-S+25JjI6601HiAVoTDXW6SqH+E94a+FHA7WQqseyNHunOgVWKcAkNEc2LJvVxgwTq6z41sDIb9/M3Z9wa9lk4A==}
     engines: {node: '>= 12.0.0'}
     cpu: [arm]
     os: [linux]
@@ -3608,8 +3595,8 @@ packages:
     dev: true
     optional: true
 
-  /lightningcss-cli-linux-arm64-gnu/1.16.0:
-    resolution: {integrity: sha512-RRakhwHEnbvCEyrnTiCshWmQ8z0YjAKH63Qcl5fsWQCtra1GrGI9wcnvRRY87YCrHkBguUnZ23m6f7yfEIVVNA==}
+  /lightningcss-linux-arm64-gnu/1.18.0:
+    resolution: {integrity: sha512-JSqh4+21dCgBecIQUet35dtE4PhhSEMyqe3y0ZNQrAJQ5kyUPSQHiw81WXnPJcOSTTpG0TyMLiC8K//+BsFGQA==}
     engines: {node: '>= 12.0.0'}
     cpu: [arm64]
     os: [linux]
@@ -3617,8 +3604,8 @@ packages:
     dev: true
     optional: true
 
-  /lightningcss-cli-linux-arm64-musl/1.16.0:
-    resolution: {integrity: sha512-BOVcioDGEmp0mYPruJELfzuJTNYgttCs3pxALKE9TjKUTF8GrzaUCbhHwdv8nAjyK5XnQ5uibQa89yJASeg1tg==}
+  /lightningcss-linux-arm64-musl/1.18.0:
+    resolution: {integrity: sha512-2FWHa8iUhShnZnqhn2wfIcK5adJat9hAAaX7etNsoXJymlliDIOFuBQEsba2KBAZSM4QqfQtvRdR7m8i0I7ybQ==}
     engines: {node: '>= 12.0.0'}
     cpu: [arm64]
     os: [linux]
@@ -3626,8 +3613,8 @@ packages:
     dev: true
     optional: true
 
-  /lightningcss-cli-linux-x64-gnu/1.16.0:
-    resolution: {integrity: sha512-/SMAmmTAqRjSPX4z0bjHPz9NC3R18w9CVXXimBjOflF22BToscVqUOoAOKt+1wIPWnzGW1ua/FpEgqDOsol0ww==}
+  /lightningcss-linux-x64-gnu/1.18.0:
+    resolution: {integrity: sha512-plCPGQJtDZHcLVKVRLnQVF2XRsIC32WvuJhQ7fJ7F6BV98b/VZX0OlX05qUaOESD9dCDHjYSfxsgcvOKgCWh7A==}
     engines: {node: '>= 12.0.0'}
     cpu: [x64]
     os: [linux]
@@ -3635,8 +3622,8 @@ packages:
     dev: true
     optional: true
 
-  /lightningcss-cli-linux-x64-musl/1.16.0:
-    resolution: {integrity: sha512-48NqZOHwaJpt9ap2GSQuTqPnaOlQKrxTDjKc0Wsunmgb2q6Y2/R/ZPOU7e55laECZNy0RkR+V8UkXjsuQYPl2Q==}
+  /lightningcss-linux-x64-musl/1.18.0:
+    resolution: {integrity: sha512-na+BGtVU6fpZvOHKhnlA0XHeibkT3/46nj6vLluG3kzdJYoBKU6dIl7DSOk++8jv4ybZyFJ0aOFMMSc8g2h58A==}
     engines: {node: '>= 12.0.0'}
     cpu: [x64]
     os: [linux]
@@ -3644,8 +3631,8 @@ packages:
     dev: true
     optional: true
 
-  /lightningcss-cli-win32-x64-msvc/1.16.0:
-    resolution: {integrity: sha512-w+oZe3Nk4q0f6QDgSt/h5IHhBdfqYK4ZCi6a72oOG0op/v/dglztm7n1pzMsQ/etUvPA6AOM1qkyErxBuEATZA==}
+  /lightningcss-win32-x64-msvc/1.18.0:
+    resolution: {integrity: sha512-5qeAH4RMNy2yMNEl7e5TI6upt/7xD2ZpHWH4RkT8iJ7/6POS5mjHbXWUO9Q1hhDhqkdzGa76uAdMzEouIeCyNw==}
     engines: {node: '>= 12.0.0'}
     cpu: [x64]
     os: [win32]
@@ -3653,22 +3640,20 @@ packages:
     dev: true
     optional: true
 
-  /lightningcss-cli/1.16.0:
-    resolution: {integrity: sha512-Ttn7Fa+muTwDs6AOufqikBFoIMvKaDfkqoirTT/2OVYOFoPex/h/fezZVXSi65uBl8nU/E5bYCE2EEaO7H5mAw==}
+  /lightningcss/1.18.0:
+    resolution: {integrity: sha512-uk10tNxi5fhZqU93vtYiQgx/8a9f0Kvtj5AXIm+VlOXY+t/DWDmCZWJEkZJmmALgvbS6aAW8or+Kq85eJ6TDTw==}
     engines: {node: '>= 12.0.0'}
-    hasBin: true
-    requiresBuild: true
     dependencies:
       detect-libc: 1.0.3
     optionalDependencies:
-      lightningcss-cli-darwin-arm64: 1.16.0
-      lightningcss-cli-darwin-x64: 1.16.0
-      lightningcss-cli-linux-arm-gnueabihf: 1.16.0
-      lightningcss-cli-linux-arm64-gnu: 1.16.0
-      lightningcss-cli-linux-arm64-musl: 1.16.0
-      lightningcss-cli-linux-x64-gnu: 1.16.0
-      lightningcss-cli-linux-x64-musl: 1.16.0
-      lightningcss-cli-win32-x64-msvc: 1.16.0
+      lightningcss-darwin-arm64: 1.18.0
+      lightningcss-darwin-x64: 1.18.0
+      lightningcss-linux-arm-gnueabihf: 1.18.0
+      lightningcss-linux-arm64-gnu: 1.18.0
+      lightningcss-linux-arm64-musl: 1.18.0
+      lightningcss-linux-x64-gnu: 1.18.0
+      lightningcss-linux-x64-musl: 1.18.0
+      lightningcss-win32-x64-msvc: 1.18.0
     dev: true
 
   /lilconfig/2.0.6:
@@ -4853,6 +4838,17 @@ packages:
       postcss: 8.4.14
     dev: true
 
+  /postcss-lightningcss/0.6.0_postcss@8.4.14:
+    resolution: {integrity: sha512-+2KtEKQrmSb2p2N4rVW2y4a13jwJnYkYmGVXepofT5W1VKPySy7VxbIXFEZTBDAHVI7wzketPUc5g8n8vFWkWA==}
+    engines: {node: ^12.20.0 || ^14.13.0 || >=15.0.0, npm: '>=7.0.0'}
+    peerDependencies:
+      postcss: ^8.0.0
+    dependencies:
+      browserslist: 4.21.4
+      lightningcss: 1.18.0
+      postcss: 8.4.14
+    dev: true
+
   /postcss-load-config/3.1.4:
     resolution: {integrity: sha512-6DiM4E7v4coTE4uzA8U//WhtPwyhiim3eyjEMFCnUpzbrkK9wJHgKDT2mR+HbtSrd/NubVaYTOpSpjUl8NQeRg==}
     engines: {node: '>= 10'}
@@ -5217,7 +5213,7 @@ packages:
     dev: false
 
   /remove-accents/0.4.2:
-    resolution: {integrity: sha1-CkPTqq4egNuRngeuJUsoXZ4ce7U=}
+    resolution: {integrity: sha512-7pXIJqJOq5tFgG1A2Zxti3Ht8jJF337m4sowbuHsW30ZnkQFnDzy9qBNhgzX8ZLW4+UBcXiiR7SwR6pokHsxiA==}
     dev: false
 
   /require-directory/2.1.1:
@@ -5756,7 +5752,7 @@ packages:
     dev: false
 
   /titleize/1.0.0:
-    resolution: {integrity: sha1-fTUHIgYYMLpmF2MeDP0+oIOY2Vo=}
+    resolution: {integrity: sha512-TARUb7z1pGvlLxgPk++7wJ6aycXF3GJ0sNSBTAsTuJrQG5QuZlkUQP+zl+nbjAh4gMX9yDw9ZYklMd7vAfJKEw==}
     engines: {node: '>=0.10.0'}
     dev: false
 
@@ -6153,17 +6149,6 @@ packages:
     resolution: {integrity: sha512-vRCqFv6UhXpWxZPyGDh/F3ZpNv8/qo7w6iufLpQg9aKnQ71qM4B5KiI7Mia9COcjEhrO9LueHpMYjYzsWH3OIg==}
     dev: false
 
-  /update-browserslist-db/1.0.4_browserslist@4.21.2:
-    resolution: {integrity: sha512-jnmO2BEGUjsMOe/Fg9u0oczOe/ppIDZPebzccl1yDWGLFP16Pa1/RM5wEoKYPG2zstNcDuAStejyxsOuKINdGA==}
-    hasBin: true
-    peerDependencies:
-      browserslist: '>= 4.21.0'
-    dependencies:
-      browserslist: 4.21.2
-      escalade: 3.1.1
-      picocolors: 1.0.0
-    dev: true
-
   /update-browserslist-db/1.0.9_browserslist@4.21.4:
     resolution: {integrity: sha512-/xsqn21EGVdXI3EXSum1Yckj3ZVZugqyOZQ/CxYPBD/R+ko9NSUScf8tFF4dOKY+2pvSSJA/S+5B8s4Zr4kyvg==}
     hasBin: true
@@ -6349,7 +6334,7 @@ packages:
       '@webassemblyjs/wasm-parser': 1.11.1
       acorn: 8.8.0
       acorn-import-assertions: 1.8.0_acorn@8.8.0
-      browserslist: 4.21.2
+      browserslist: 4.21.4
       chrome-trace-event: 1.0.3
       enhanced-resolve: 5.10.0
       es-module-lexer: 0.9.3
@@ -6577,6 +6562,7 @@ packages:
       '@mdx-js/react': 2.1.5_react@18.2.0
       '@popperjs/core': 2.11.6
       clsx: 1.2.1
+      colorjs.io: 0.4.2
       flexsearch: 0.7.21
       focus-visible: 5.2.0
       git-url-parse: 13.1.0
