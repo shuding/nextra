@@ -454,7 +454,7 @@ export function Sidebar({
               'nx-relative nx-z-[1]', // for top box nx-shadow
               'nx-mx-4 nx-border-t nx-py-4 nx-shadow-[0_-12px_16px_#fff]',
               'nx-flex nx-items-center nx-gap-2',
-              'dark:nx-border-neutral-800 dark:nx-shadow-[0_-12px_16px_oklch(17.76%_0_0)]',
+              'dark:nx-border-neutral-800 dark:nx-shadow-[0_-12px_16px_#111]',
               'contrast-more:nx-border-neutral-400 contrast-more:nx-shadow-none contrast-more:dark:nx-shadow-none'
             )}
           >

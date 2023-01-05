@@ -16,7 +16,7 @@ code {
       @apply nx-bg-primary-600/10 nx-text-primary-600/50 nx-shadow-[2px_0_currentColor_inset];
     }
     .highlighted {
-      @apply nx-rounded-sm nx-shadow-[0_0_0_2px_oklch(0%_0_0/30%)];
+      @apply nx-rounded-sm nx-shadow-[0_0_0_2px_rgba(0,0,0,.3)];
       @apply nx-bg-primary-800/10 nx-shadow-primary-800/10;
       @apply dark:nx-bg-primary-300/10 dark:nx-shadow-primary-300/10;
     }
