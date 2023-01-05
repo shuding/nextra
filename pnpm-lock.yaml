@@ -11,7 +11,7 @@ overrides:
   '@types/react-dom': ^18.0.6
   postcss: ^8.4.14
   postcss-cli: ^8.3.1
-  autoprefixer: ^10.4.8
+  autoprefixer: ^10.4.13
   cssnano: ^5.1.12
   tailwindcss: ^3.1.8
   '@tailwindcss/nesting': ^0.0.0-insiders.565cd3e
@@ -90,7 +90,8 @@ importers:
 
   examples/swr-site:
     specifiers:
-      autoprefixer: ^10.4.8
+      add: ^2.0.6
+      autoprefixer: ^10.4.13
       focus-visible: ^5.1.0
       intersection-observer: ^0.10.0
       markdown-to-jsx: ^6.11.4
@@ -115,7 +116,8 @@ importers:
       react-dom: 18.2.0_react@18.2.0
       react-intersection-observer: 8.34.0_react@18.2.0
     devDependencies:
-      autoprefixer: 10.4.11_postcss@8.4.14
+      add: 2.0.6
+      autoprefixer: 10.4.13_postcss@8.4.14
       postcss: 8.4.14
       tailwindcss: 3.1.8_postcss@8.4.14
     dependenciesMeta:
@@ -192,7 +194,6 @@ importers:
       '@tailwindcss/typography': ^0.5.4
       '@types/react': ^18.0.15
       '@types/react-dom': ^18.0.6
-      autoprefixer: ^10.4.8
       concurrently: ^7.3.0
       lightningcss-cli: ^1.16.0
       next: ^13.1.1
@@ -214,7 +215,6 @@ importers:
       '@tailwindcss/typography': 0.5.4_tailwindcss@3.1.8
       '@types/react': 18.0.20
       '@types/react-dom': 18.0.6
-      autoprefixer: 10.4.11_postcss@8.4.14
       concurrently: 7.4.0
       lightningcss-cli: 1.16.0
       next: 13.1.1_biqbaboplfbrettd7655fr4n2y
@@ -240,7 +240,6 @@ importers:
       '@types/github-slugger': ^1.3.0
       '@types/react': ^18.0.15
       '@types/react-dom': ^18.0.6
-      autoprefixer: ^10.4.8
       clsx: ^1.2.1
       concurrently: ^7.3.0
       flexsearch: ^0.7.21
@@ -286,7 +285,6 @@ importers:
       '@types/github-slugger': 1.3.0
       '@types/react': 18.0.20
       '@types/react-dom': 18.0.6
-      autoprefixer: 10.4.11_postcss@8.4.14
       concurrently: 7.4.0
       lightningcss-cli: 1.16.0
       next: 13.1.1_biqbaboplfbrettd7655fr4n2y
@@ -1413,6 +1411,10 @@ packages:
     engines: {node: '>=0.4.0'}
     hasBin: true
 
+  /add/2.0.6:
+    resolution: {integrity: sha512-j5QzrmsokwWWp6kUcJQySpbG+xfOBqqKnup3OIk1pz+kB/80SLorZ9V8zHFLO92Lcd+hbvq8bT+zOGoPkmBV0Q==}
+    dev: true
+
   /ajv-keywords/3.5.2_ajv@6.12.6:
     resolution: {integrity: sha512-5p6WTN0DdTGVQk6VjcEju19IgaHudalcfabD7yhDGeA6bcQnmL+CpveLJq/3hvfwd1aof6L386Ougkx6RfyMIQ==}
     peerDependencies:
@@ -1519,15 +1521,15 @@ packages:
     engines: {node: '>= 4.0.0'}
     dev: true
 
-  /autoprefixer/10.4.11_postcss@8.4.14:
-    resolution: {integrity: sha512-5lHp6DgRodxlBLSkzHOTcufWFflH1ewfy2hvFQyjrblBFlP/0Yh4O/Wrg4ow8WRlN3AAUFFLAQwX8hTptzqVHg==}
+  /autoprefixer/10.4.13_postcss@8.4.14:
+    resolution: {integrity: sha512-49vKpMqcZYsJjwotvt4+h/BCjJVnhGwcLpDt5xkcaOG3eLrG/HUYLagrihYsQ+qrIBgIzX1Rw7a6L8I/ZA1Atg==}
     engines: {node: ^10 || ^12 || >=14}
     hasBin: true
     peerDependencies:
       postcss: ^8.1.0
     dependencies:
       browserslist: 4.21.4
-      caniuse-lite: 1.0.30001406
+      caniuse-lite: 1.0.30001442
       fraction.js: 4.2.0
       normalize-range: 0.1.2
       picocolors: 1.0.0
@@ -1574,23 +1576,12 @@ packages:
       wcwidth: 1.0.1
     dev: true
 
-  /browserslist/4.21.2:
-    resolution: {integrity: sha512-MonuOgAtUB46uP5CezYbRaYKBNt2LxP0yX+Pmj4LkcDFGkn9Cbpi83d9sCjwQDErXsIJSzY5oKGDbgOlF/LPAA==}
-    engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
-    hasBin: true
-    dependencies:
-      caniuse-lite: 1.0.30001406
-      electron-to-chromium: 1.4.192
-      node-releases: 2.0.6
-      update-browserslist-db: 1.0.4_browserslist@4.21.2
-    dev: true
-
   /browserslist/4.21.4:
     resolution: {integrity: sha512-CBHJJdDmgjl3daYjN5Cp5kbTf1mUhZoS+beLklHIvkOWscs83YAhLlF3Wsh/lciQYAcbBJgTOD44VtG31ZM4Hw==}
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001406
+      caniuse-lite: 1.0.30001442
       electron-to-chromium: 1.4.254
       node-releases: 2.0.6
       update-browserslist-db: 1.0.9_browserslist@4.21.4
@@ -1648,6 +1639,10 @@ packages:
 
   /caniuse-lite/1.0.30001406:
     resolution: {integrity: sha512-bWTlaXUy/rq0BBtYShc/jArYfBPjEV95euvZ8JVtO43oQExEN/WquoqpufFjNu4kSpi5cy5kMbNvzztWDfv1Jg==}
+
+  /caniuse-lite/1.0.30001442:
+    resolution: {integrity: sha512-239m03Pqy0hwxYPYR5JwOIxRJfLTWtle9FV8zosfV5pHg+/51uD4nxcUlM8+mWWGfwKtt8lJNHnD3cWw9VZ6ow==}
+    dev: true
 
   /ccount/2.0.1:
     resolution: {integrity: sha512-eyrF0jiFpY+3drT6383f1qhkbGsLSifNAjA61IUjZjmLCWjItY6LB9ft9YhoDgwfmclB2zhu51Lc7+95b8NRAg==}
@@ -1795,6 +1790,10 @@ packages:
   /color-name/1.1.4:
     resolution: {integrity: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==}
     dev: true
+
+  /colorjs.io/0.4.2:
+    resolution: {integrity: sha512-vtpiH+BTzZtzs4Yno0GyoC05Z20fTeLwNJ7lQzjxi8GJJb1SZO2o5yUBAUXzgvrO2JNuyIqur4gb1Z6HBjpd9A==}
+    dev: false
 
   /comma-separated-tokens/2.0.2:
     resolution: {integrity: sha512-G5yTt3KQN4Yn7Yk4ed73hlZ1evrFKXeUW3086p3PRFNp7m2vIjI6Pg+Kgb+oyzhd9F2qdcoj67+y3SdxL5XWsg==}
@@ -2005,10 +2004,6 @@ packages:
     engines: {node: '>=6.0.0'}
     dependencies:
       esutils: 2.0.3
-    dev: true
-
-  /electron-to-chromium/1.4.192:
-    resolution: {integrity: sha512-8nCXyIQY9An88NXAp+PuPy5h3/w5ZY7Iu2lag65Q0XREprcat5F8gKhoHsBUnQcFuCRnmevpR8yEBYRU3d2HDw==}
     dev: true
 
   /electron-to-chromium/1.4.254:
@@ -5217,7 +5212,7 @@ packages:
     dev: false
 
   /remove-accents/0.4.2:
-    resolution: {integrity: sha1-CkPTqq4egNuRngeuJUsoXZ4ce7U=}
+    resolution: {integrity: sha512-7pXIJqJOq5tFgG1A2Zxti3Ht8jJF337m4sowbuHsW30ZnkQFnDzy9qBNhgzX8ZLW4+UBcXiiR7SwR6pokHsxiA==}
     dev: false
 
   /require-directory/2.1.1:
@@ -5756,7 +5751,7 @@ packages:
     dev: false
 
   /titleize/1.0.0:
-    resolution: {integrity: sha1-fTUHIgYYMLpmF2MeDP0+oIOY2Vo=}
+    resolution: {integrity: sha512-TARUb7z1pGvlLxgPk++7wJ6aycXF3GJ0sNSBTAsTuJrQG5QuZlkUQP+zl+nbjAh4gMX9yDw9ZYklMd7vAfJKEw==}
     engines: {node: '>=0.10.0'}
     dev: false
 
@@ -6153,17 +6148,6 @@ packages:
     resolution: {integrity: sha512-vRCqFv6UhXpWxZPyGDh/F3ZpNv8/qo7w6iufLpQg9aKnQ71qM4B5KiI7Mia9COcjEhrO9LueHpMYjYzsWH3OIg==}
     dev: false
 
-  /update-browserslist-db/1.0.4_browserslist@4.21.2:
-    resolution: {integrity: sha512-jnmO2BEGUjsMOe/Fg9u0oczOe/ppIDZPebzccl1yDWGLFP16Pa1/RM5wEoKYPG2zstNcDuAStejyxsOuKINdGA==}
-    hasBin: true
-    peerDependencies:
-      browserslist: '>= 4.21.0'
-    dependencies:
-      browserslist: 4.21.2
-      escalade: 3.1.1
-      picocolors: 1.0.0
-    dev: true
-
   /update-browserslist-db/1.0.9_browserslist@4.21.4:
     resolution: {integrity: sha512-/xsqn21EGVdXI3EXSum1Yckj3ZVZugqyOZQ/CxYPBD/R+ko9NSUScf8tFF4dOKY+2pvSSJA/S+5B8s4Zr4kyvg==}
     hasBin: true
@@ -6349,7 +6333,7 @@ packages:
       '@webassemblyjs/wasm-parser': 1.11.1
       acorn: 8.8.0
       acorn-import-assertions: 1.8.0_acorn@8.8.0
-      browserslist: 4.21.2
+      browserslist: 4.21.4
       chrome-trace-event: 1.0.3
       enhanced-resolve: 5.10.0
       es-module-lexer: 0.9.3
@@ -6577,6 +6561,7 @@ packages:
       '@mdx-js/react': 2.1.5_react@18.2.0
       '@popperjs/core': 2.11.6
       clsx: 1.2.1
+      colorjs.io: 0.4.2
       flexsearch: 0.7.21
       focus-visible: 5.2.0
       git-url-parse: 13.1.0

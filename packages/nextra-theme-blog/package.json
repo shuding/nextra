@@ -39,8 +39,8 @@
   },
   "scripts": {
     "build": "tsup",
-    "build:tailwind": "NODE_ENV=production pnpm postcss src/styles.css -o style.css --verbose",
-    "minify:css": "lightningcss --minify --nesting --bundle --error-recovery --targets '>= 0.25%' style.css -o style.css",
+    "build:tailwind": "pnpm postcss src/styles.css -o style.css --verbose",
+    "minify:css": "lightningcss --minify --bundle --error-recovery --targets '>= 0.25%' style.css -o style.css",
     "build:all": "pnpm build && pnpm build:tailwind && pnpm minify:css",
     "types": "tsup --dts-only",
     "types:check": "tsc --noEmit",
@@ -72,7 +72,6 @@
     "@tailwindcss/typography": "^0.5.7",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
-    "autoprefixer": "^10.4.8",
     "concurrently": "^7.3.0",
     "lightningcss-cli": "^1.16.0",
     "next": "^13.1.1",
