@@ -149,7 +149,7 @@ const config: DocsThemeConfig = {
               </svg>
             </a>
           </div>
-          <p className="mt-6 text-xs">© 2022 The Nextra Project.</p>
+          <p className="mt-6 text-xs">© 2023 The Nextra Project.</p>
         </div>
       )
     }
