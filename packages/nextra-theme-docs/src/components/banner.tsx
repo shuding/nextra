@@ -36,7 +36,9 @@ export function Banner(): ReactElement | null {
             onClick={() => {
               try {
                 localStorage.setItem(banner.key, '0')
-              } catch {}
+              } catch {
+                /* ignore */
+              }
               document.body.classList.add('nextra-banner-hidden')
             }}
           >

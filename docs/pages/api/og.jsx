@@ -1,3 +1,4 @@
+/* eslint-env node */
 import { ImageResponse } from '@vercel/og'
 
 export const config = {

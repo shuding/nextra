@@ -43,7 +43,7 @@ if (IS_BROWSER) {
         let activeSlug = ''
         let smallestIndexInViewport = Infinity
         let largestIndexAboveViewport = -1
-        for (let s in ret) {
+        for (const s in ret) {
           ret[s].isActive = false
           if (
             ret[s].insideHalfViewport &&
