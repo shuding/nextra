@@ -11,13 +11,12 @@ const TAILWIND_CONFIG = {
 
 module.exports = {
   root: true,
-  parser: '@typescript-eslint/parser',
   reportUnusedDisableDirectives: true,
-  parserOptions: {
-    sourceType: 'module',
-    ecmaVersion: 'latest'
-  },
   overrides: [
+    {
+      files: '**/*.{js,jsx,cjs,mjs,ts,tsx,cts,mts}',
+      extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended']
+    },
     {
       // TODO: enable for `nextra-theme-blog` also
       files: 'packages/nextra-theme-docs/**/*',
@@ -96,6 +95,18 @@ module.exports = {
           callees: ['cn'],
           whitelist: ['dash-ring', 'theme-1', 'theme-2', 'theme-3', 'theme-4']
         }
+      }
+    },
+    {
+      files: [
+        'prettier.config.js',
+        'postcss.config.js',
+        'tailwind.config.js',
+        'next.config.js',
+        '.eslintrc.cjs'
+      ],
+      env: {
+        node: true
       }
     }
   ]

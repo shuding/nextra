@@ -14,7 +14,7 @@ export function usePopper(
 
   const cleanupCallback = useRef(() => {})
 
-  let instantiatePopper = useCallback(() => {
+  const instantiatePopper = useCallback(() => {
     if (!reference.current) return
     if (!popper.current) return
 

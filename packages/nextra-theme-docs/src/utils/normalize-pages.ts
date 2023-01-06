@@ -98,7 +98,7 @@ export function normalizePages({
   pageThemeContext?: PageTheme
 }) {
   let _meta: Record<string, any> | undefined
-  for (let item of list) {
+  for (const item of list) {
     if (item.kind === 'Meta') {
       if (item.locale === locale) {
         _meta = item.data
@@ -113,7 +113,7 @@ export function normalizePages({
   const meta = _meta || {}
   const metaKeys = Object.keys(meta)
 
-  for (let key of metaKeys) {
+  for (const key of metaKeys) {
     if (typeof meta[key] === 'string') {
       meta[key] = {
         title: meta[key]
