@@ -179,7 +179,7 @@ export function Flexsearch({
         sectionIndex.search<true>(search, 5, {
           enrich: true,
           suggest: true,
-          tag: 'page_' + result.id
+          tag: `page_${result.id}`
         })[0]?.result || []
 
       let isFirstItemOfPage = true

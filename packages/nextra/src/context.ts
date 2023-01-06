@@ -1,13 +1,14 @@
 import { normalizeMeta } from './utils'
-import { MetaJsonFile, PageMapItem, Page } from './types'
-
-const NEXTRA_INTERNAL = Symbol.for('__nextra_internal__')
+import { MetaJsonFile, PageMapItem, Page, NextraInternalGlobal } from './types'
+import { NEXTRA_INTERNAL } from './constants'
 
 function getContext(name: string): {
   pageMap: PageMapItem[]
   route: string
 } {
-  const __nextra_internal__ = (globalThis as any)[NEXTRA_INTERNAL]
+  const __nextra_internal__ = (globalThis as NextraInternalGlobal)[
+    NEXTRA_INTERNAL
+  ]
   if (!__nextra_internal__) {
     throw new Error(
       `Nextra context not found. Please make sure you are using "${name}" of "nextra/context" on a Nextra page.`
