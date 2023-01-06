@@ -229,7 +229,7 @@ importers:
 
   packages/nextra-theme-docs:
     specifiers:
-      '@headlessui/react': ^1.6.6
+      '@headlessui/react': ^1.7.7
       '@mdx-js/react': ^2.1.5
       '@popperjs/core': ^2.11.6
       '@tailwindcss/nesting': ^0.0.0-insiders.565cd3e
@@ -261,7 +261,7 @@ importers:
       vitest: ^0.21.0
       zod: ^3.20.2
     dependencies:
-      '@headlessui/react': 1.6.6_biqbaboplfbrettd7655fr4n2y
+      '@headlessui/react': 1.7.7_biqbaboplfbrettd7655fr4n2y
       '@mdx-js/react': 2.1.5_react@18.2.0
       '@popperjs/core': 2.11.6
       clsx: 1.2.1
@@ -562,13 +562,14 @@ packages:
       - supports-color
     dev: true
 
-  /@headlessui/react/1.6.6_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-MFJtmj9Xh/hhBMhLccGbBoSk+sk61BlP6sJe4uQcVMtXZhCgGqd2GyIQzzmsdPdTEWGSF434CBi8mnhR6um46Q==}
+  /@headlessui/react/1.7.7_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-BqDOd/tB9u2tA0T3Z0fn18ktw+KbVwMnkxxsGPIH2hzssrQhKB5n/6StZOyvLYP/FsYtvuXfi9I0YowKPv2c1w==}
     engines: {node: '>=10'}
     peerDependencies:
       react: ^16 || ^17 || ^18
       react-dom: ^16 || ^17 || ^18
     dependencies:
+      client-only: 0.0.1
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false
@@ -6645,7 +6646,7 @@ packages:
       react: '>=16.13.1'
       react-dom: '>=16.13.1'
     dependencies:
-      '@headlessui/react': 1.6.6_biqbaboplfbrettd7655fr4n2y
+      '@headlessui/react': 1.7.7_biqbaboplfbrettd7655fr4n2y
       '@mdx-js/react': 2.1.5_react@18.2.0
       '@popperjs/core': 2.11.6
       clsx: 1.2.1
