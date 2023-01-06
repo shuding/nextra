@@ -4,7 +4,7 @@
     "dev": "turbo run dev",
     "build": "turbo run build:tailwind build --filter=./packages/\\*",
     "types:check": "turbo run types:check",
-    "lint": "eslint --ignore-path .gitignore --ext js,jsx,mjs,cjs,ts,tsx,mts,cts .",
+    "lint": "eslint --cache --ignore-path .gitignore .",
     "dev:core": "turbo run dev --filter=nextra... --filter=!docs",
     "dev:theme-blog": "turbo run dev --filter=blog... --filter=!docs",
     "dev:theme-docs": "turbo run dev --filter=swr-site... --filter=!docs",
@@ -19,8 +19,9 @@
     "format": "turbo run format"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.24.2",
+    "@changesets/cli": "2.24.2",
     "@edge-runtime/vm": "2.0.2",
+    "@typescript-eslint/eslint-plugin": "5.48.0",
     "@typescript-eslint/parser": "^5.48.0",
     "eslint": "^8.31.0",
     "eslint-plugin-tailwindcss": "^3.8.0",
