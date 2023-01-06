@@ -15,7 +15,10 @@ module.exports = {
   overrides: [
     {
       files: '**/*.{js,jsx,cjs,mjs,ts,tsx,cts,mts}',
-      extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended']
+      extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
+      rules: {
+        'prefer-object-has-own': 'error'
+      }
     },
     {
       // TODO: enable for `nextra-theme-blog` also
