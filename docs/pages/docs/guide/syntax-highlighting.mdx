@@ -156,3 +156,60 @@ Nextra uses CSS variables to define the colors for tokens. You can inject a [glo
   --shiki-token-link: #ffab70;
 }
 ```
+
+## With Dynamic Content
+
+Since syntax highlighting is done at build time, you can’t use dynamic content in your code blocks. However, since MDX is very powerful so there is a workaround via client JS. For example:
+
+import { useEffect, useRef } from 'react'
+
+export function DynamicCode ({ children }) {
+  const ref = useRef()
+  const tokenRef = useRef()
+  // Find the corresponding token from the DOM
+  useEffect(() => {
+    if (ref.current) {
+      const token = [...ref.current.querySelectorAll('code span')].find((el) => el.innerText === '1')
+      tokenRef.current = token
+    }
+  }, [])
+  return <>
+    <div ref={ref} style={{ marginTop: '1.5rem' }}>{children}</div>
+    <a
+      onClick={() => {
+        tokenRef.current.innerText = (parseInt(tokenRef.current.innerText) || 0) + 1
+      }}
+      style={{
+        cursor: 'pointer',
+        userSelect: 'none',
+      }}
+    >
+      Increase the number
+    </a>
+    <a
+      onClick={() => {
+        tokenRef.current.innerText = '1 + 1'
+      }}
+      style={{
+        marginLeft: '.5rem',
+        cursor: 'pointer',
+        userSelect: 'none',
+      }}
+    >
+      Change to `1 + 1`
+    </a>
+  </>
+}
+
+<DynamicCode>
+```js filename="dynamic_code.js"
+function hello () {
+  const x = 2 + 3
+  console.log(1)
+}
+```
+</DynamicCode>
+
+This workaround has a limitation that updated content won't be re-highlighted. For example if we update the number to `1 + 1`, it will be highlighted wrongly.
+
+Check out the [code](https://github.com/shuding/nextra/blob/f35e72479a47ee02d4110d0d16c4713298a3f30e/docs/pages/docs/guide/syntax-highlighting.mdx) to see how it works.
