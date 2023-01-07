@@ -39,5 +39,6 @@
   "prettier": {
     "embeddedLanguageFormatting": "off",
     "htmlWhitespaceSensitivity": "strict"
-  }
+  },
+  "version": null
 }

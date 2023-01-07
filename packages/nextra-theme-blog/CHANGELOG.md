@@ -1,5 +1,22 @@
 # nextra-theme-blog
 
+## 2.1.0
+
+### Minor Changes
+
+- e5262d0: improve hmr and internal api for layout (toc and meta files)
+
+### Patch Changes
+
+- 09fc32a: allow changing prefix in `<TagTitle />`
+- c86508c: lint fixes for `eslint:recommended` and `plugin:@typescript-eslint/recommended` configs
+- 329bc8c: fix inline code blocks style regression
+- d6c871a: simplify the custom theme layout api
+- 1ff43c1: use OKLCH colors where possible
+- ef3008d: `•` separator is missing if tags are empty
+- c86508c: allow override components with new options `components` #1201
+- a31678a: improve copy
+
 ## 2.0.3
 
 ## 2.0.2
