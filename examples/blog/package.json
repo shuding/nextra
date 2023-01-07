@@ -25,5 +25,6 @@
     "nextra-theme-blog": {
       "injected": true
     }
-  }
+  },
+  "version": null
 }
