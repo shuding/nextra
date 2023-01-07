@@ -1,4 +1,4 @@
-import { PageMapItem, PageOpts, MdxFile } from 'nextra'
+import { PageMapItem, MdxFile } from 'nextra'
 
 export function split(tags: string | string[]): string[] {
   return (Array.isArray(tags) ? tags : tags.split(',')).map(s => s.trim())

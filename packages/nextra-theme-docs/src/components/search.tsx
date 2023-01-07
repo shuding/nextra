@@ -110,7 +110,7 @@ export function Search({
         case 'Enter': {
           const result = results[active]
           if (result) {
-            router.push(result.route)
+            void router.push(result.route)
             finishSearch()
           }
           break

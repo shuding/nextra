@@ -156,9 +156,11 @@ async function loader(
     )
 
   const katexCssImport = latex ? "import 'katex/dist/katex.min.css'" : ''
-  const cssImport =
-    // @ts-expect-error
-    OFFICIAL_THEMES.includes(theme) ? `import '${theme}/style.css'` : ''
+  const cssImport = OFFICIAL_THEMES.includes(
+    theme as typeof OFFICIAL_THEMES[number]
+  )
+    ? `import '${theme}/style.css'`
+    : ''
 
   // Imported as a normal component, no need to add the layout.
   if (!pageImport) {
@@ -234,7 +236,7 @@ export default MDXContent`
 
   const stringifiedPageNextRoute = JSON.stringify(pageNextRoute)
   const stringifiedPageOpts = JSON.stringify(pageOpts)
-  const pageOptsChecksum = !IS_PRODUCTION && hashFnv32a(stringifiedPageOpts)
+  const pageOptsChecksum = IS_PRODUCTION ? '' : hashFnv32a(stringifiedPageOpts)
 
   return `${themeConfigImport}
 ${katexCssImport}

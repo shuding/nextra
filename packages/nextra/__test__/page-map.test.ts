@@ -19,8 +19,8 @@ describe('Page Process', () => {
     fileMap = data
   })
 
-  it('pageMap en-US', async () => {
-    const indexData = await getPageMap({
+  it('pageMap en-US', () => {
+    const indexData = getPageMap({
       filePath: filePath('docs/data-fetching.en-US.mdx'),
       pageMap,
       fileMap,
@@ -32,7 +32,7 @@ describe('Page Process', () => {
       indexData.title
     ]).toMatchSnapshot()
 
-    const gettingStartData = await getPageMap({
+    const gettingStartData = getPageMap({
       filePath: filePath('docs/getting-started.en-US.mdx'),
       pageMap,
       fileMap,
@@ -41,8 +41,8 @@ describe('Page Process', () => {
     expect(gettingStartData.pageMap).toEqual(indexData.pageMap)
   })
 
-  it('pageMap zh-CN', async () => {
-    const indexData = await getPageMap({
+  it('pageMap zh-CN', () => {
+    const indexData = getPageMap({
       filePath: filePath('docs/data-fetching.zh-CN.mdx'),
       pageMap,
       fileMap,
@@ -54,7 +54,7 @@ describe('Page Process', () => {
       indexData.title
     ]).toMatchSnapshot()
 
-    const gettingStartData = await getPageMap({
+    const gettingStartData = getPageMap({
       filePath: filePath('docs/getting-started.zh-CN.mdx'),
       pageMap,
       fileMap,

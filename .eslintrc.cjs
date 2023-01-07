@@ -9,17 +9,34 @@ const TAILWIND_CONFIG = {
   }
 }
 
+/** @type {import('eslint').Linter.Config} */
 module.exports = {
   root: true,
-  parser: '@typescript-eslint/parser',
   reportUnusedDisableDirectives: true,
-  parserOptions: {
-    sourceType: 'module',
-    ecmaVersion: 'latest'
-  },
+  ignorePatterns: ['next-env.d.ts'],
   overrides: [
     {
-      // TODO: enable for `nextra-theme-blog` also
+      files: '**/*.{js,jsx,cjs,mjs,ts,tsx,cts,mts}',
+      extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
+      rules: {
+        'prefer-object-has-own': 'error'
+      }
+    },
+    {
+      files: '**/*.{ts,tsx,cts,mts}',
+      extends: [
+        // TODO: fix errors
+        // 'plugin:@typescript-eslint/recommended-requiring-type-checking'
+      ],
+      parserOptions: {
+        project: [
+          'packages/*/tsconfig.json',
+          'docs/tsconfig.json',
+          'tsconfig.eslint.json'
+        ]
+      }
+    },
+    {
       files: 'packages/nextra-theme-docs/**/*',
       plugins: ['typescript-sort-keys'],
       rules: {
@@ -96,6 +113,18 @@ module.exports = {
           callees: ['cn'],
           whitelist: ['dash-ring', 'theme-1', 'theme-2', 'theme-3', 'theme-4']
         }
+      }
+    },
+    {
+      files: [
+        'prettier.config.js',
+        'postcss.config.js',
+        'tailwind.config.js',
+        'next.config.js',
+        '.eslintrc.cjs'
+      ],
+      env: {
+        node: true
       }
     }
   ]

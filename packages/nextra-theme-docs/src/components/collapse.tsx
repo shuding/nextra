@@ -27,7 +27,7 @@ export function Collapse({
       const inner = innerRef.current
       if (container && inner) {
         const contentHeight = innerRef.current.clientHeight
-        container.style.maxHeight = contentHeight + 'px'
+        container.style.maxHeight = `${contentHeight}px`
         container.classList.remove('nx-duration-500')
         container.classList.add('nx-duration-300')
 
@@ -45,7 +45,7 @@ export function Collapse({
       const inner = innerRef.current
       if (container && inner) {
         const contentHeight = innerRef.current.clientHeight
-        container.style.maxHeight = contentHeight + 'px'
+        container.style.maxHeight = `${contentHeight}px`
         container.classList.remove('nx-duration-300')
         container.classList.add('nx-duration-500')
 

@@ -1,0 +1,10 @@
+{
+  // https://typescript-eslint.io/docs/linting/typed-linting/monorepos/#one-root-tsconfigjson
+  // extend your base config to share compilerOptions, etc
+  "compilerOptions": {
+    // ensure that nobody can accidentally use this config for a build
+    "noEmit": true
+  },
+  "include": ["examples/swr-site/theme.config.tsx"],
+  "exclude": []
+}
