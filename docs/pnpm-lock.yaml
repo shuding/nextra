@@ -5,7 +5,7 @@ importers:
   .:
     specifiers:
       '@types/node': ^18.11.9
-      '@vercel/og': ^0.0.21
+      '@vercel/og': ^0.0.22
       autoprefixer: ^10.4.13
       clsx: ^1.2.1
       eslint: ^8.30.0
@@ -19,7 +19,7 @@ importers:
       tailwindcss: ^3.2.4
       typescript: ^4.9.4
     dependencies:
-      '@vercel/og': 0.0.21
+      '@vercel/og': 0.0.22
       clsx: 1.2.1
       framer-motion: 8.0.1_biqbaboplfbrettd7655fr4n2y
       next: 13.1.1_biqbaboplfbrettd7655fr4n2y
@@ -547,12 +547,12 @@ packages:
     resolution: {integrity: sha512-S9q47ByT2pPvD65IvrWp7qppVMpk9WGMbVq9wbWZOHg6tnXSD4vyhao6nOSBwwfDdV2p3Kx9evA9vI+XWTfDvw==}
     dev: false
 
-  /@vercel/og/0.0.21:
-    resolution: {integrity: sha512-WgMahG5c8UM7xtn/mT+ljUpDMSDnSlu8AXL52JtTwxb1odrd0GWqZg2N1X38wulPj+sCccNpDdFmmAuw0GLc+Q==}
+  /@vercel/og/0.0.22:
+    resolution: {integrity: sha512-HJjYfjpuNVnxwH7GnEv5QxzdIV4xytjY2RkVmhaOAKlms4X071WSPR9Jp6vjZ3Zmjz0tKSiRnrT5uN/PkW/q9Q==}
     engines: {node: '>=16'}
     dependencies:
       '@resvg/resvg-wasm': 2.0.0-alpha.4
-      satori: 0.0.44
+      satori: 0.0.45
       yoga-wasm-web: 0.1.2
     dev: false
 
@@ -2830,8 +2830,8 @@ packages:
       mri: 1.2.0
     dev: false
 
-  /satori/0.0.44:
-    resolution: {integrity: sha512-WKUxXC2qeyno6J3ucwwLozPL6j1HXOZiN5wIUf7iqAhlx1RUC/6ePIKHi7iPc3Cy6DYuZcJriZXxXkSdo2FQHg==}
+  /satori/0.0.45:
+    resolution: {integrity: sha512-jF7AAK5ddZQVE6r6gTG07YxOvhldev0wBrFqBXRNbPH/mEy15gfIqA4xjGfVHczcGYZvY/VWmKri6DzRJF8cgQ==}
     engines: {node: '>=16'}
     dependencies:
       '@shuding/opentype.js': 1.4.0-beta.0
