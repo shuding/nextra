@@ -39,7 +39,7 @@ const createHeaderLink =
         {children}
         <span className="nx-absolute -nx-mt-7" id={id} />
         <a
-          href={`#${id}`}
+          href={id && `#${id}`}
           className="subheading-anchor"
           aria-label="Permalink for this section"
         />

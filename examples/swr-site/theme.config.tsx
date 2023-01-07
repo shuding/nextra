@@ -189,7 +189,7 @@ const config: DocsThemeConfig = {
         <Logo className="h-3" />
         <span
           className="hidden select-none font-extrabold ltr:ml-2 rtl:mr-2 md:inline"
-          title={"SWR: " + (TITLE[locale] || "")}
+          title={`SWR: ${TITLE[locale] || ""}`}
         >
           SWR
         </span>

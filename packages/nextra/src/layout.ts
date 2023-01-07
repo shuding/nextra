@@ -1,21 +1,19 @@
-import React from 'react'
+import { ReactElement, createElement } from 'react'
 
 import { SSGContext } from './ssg'
 import { useInternals } from './use-internals'
 
-export default function Nextra(props: any): React.ReactElement {
+export default function Nextra(props: any): ReactElement {
   const { context, Layout } = useInternals()
   const { Content, ...restContext } = context
 
-  return React.createElement(
+  return createElement(
     Layout,
     restContext,
-    React.createElement(
+    createElement(
       SSGContext.Provider,
-      {
-        value: props
-      },
-      React.createElement(Content, props)
+      { value: props },
+      createElement(Content, props)
     )
   )
 }

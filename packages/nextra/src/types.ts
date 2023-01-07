@@ -4,7 +4,11 @@ import { ProcessorOptions } from '@mdx-js/mdx'
 import { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
 import { GrayMatterFile } from 'gray-matter'
 import { PageMapCache } from './plugin'
-import { MARKDOWN_EXTENSIONS, META_FILENAME } from './constants'
+import {
+  MARKDOWN_EXTENSIONS,
+  META_FILENAME,
+  NEXTRA_INTERNAL
+} from './constants'
 
 type MetaFilename = typeof META_FILENAME
 type MarkdownExtension = typeof MARKDOWN_EXTENSIONS[number]
@@ -112,4 +116,21 @@ export type NextraThemeLayoutProps = {
   pageOpts: PageOpts
   themeConfig: any | null
   children: React.ReactNode
+}
+
+export type NextraInternalGlobal = typeof globalThis & {
+  [NEXTRA_INTERNAL]: {
+    pageMap: PageMapItem[]
+    route: string
+    context: Record<
+      string,
+      {
+        Content: React.FC
+        pageOpts: PageOpts
+        themeConfig: any | null
+      }
+    >
+    refreshListeners: Record<string, (() => void)[]>
+    Layout: React.FC<any>
+  }
 }

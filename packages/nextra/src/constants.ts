@@ -29,3 +29,5 @@ export const MARKDOWN_EXTENSIONS = ['md', 'mdx'] as const
 export const PUBLIC_DIR = path.join(CWD, 'public')
 
 export const EXTERNAL_URL_REGEX = /^https?:\/\//
+
+export const NEXTRA_INTERNAL = Symbol.for('__nextra_internal__')

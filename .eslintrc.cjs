@@ -9,9 +9,11 @@ const TAILWIND_CONFIG = {
   }
 }
 
+/** @type {import('eslint').Linter.Config} */
 module.exports = {
   root: true,
   reportUnusedDisableDirectives: true,
+  ignorePatterns: ['next-env.d.ts'],
   overrides: [
     {
       files: '**/*.{js,jsx,cjs,mjs,ts,tsx,cts,mts}',
@@ -21,7 +23,20 @@ module.exports = {
       }
     },
     {
-      // TODO: enable for `nextra-theme-blog` also
+      files: '**/*.{ts,tsx,cts,mts}',
+      extends: [
+        // TODO: fix errors
+        // 'plugin:@typescript-eslint/recommended-requiring-type-checking'
+      ],
+      parserOptions: {
+        project: [
+          'packages/*/tsconfig.json',
+          'docs/tsconfig.json',
+          'tsconfig.eslint.json'
+        ]
+      }
+    },
+    {
       files: 'packages/nextra-theme-docs/**/*',
       plugins: ['typescript-sort-keys'],
       rules: {

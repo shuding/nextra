@@ -236,7 +236,7 @@ export default MDXContent`
 
   const stringifiedPageNextRoute = JSON.stringify(pageNextRoute)
   const stringifiedPageOpts = JSON.stringify(pageOpts)
-  const pageOptsChecksum = !IS_PRODUCTION && hashFnv32a(stringifiedPageOpts)
+  const pageOptsChecksum = IS_PRODUCTION ? '' : hashFnv32a(stringifiedPageOpts)
 
   return `${themeConfigImport}
 ${katexCssImport}
