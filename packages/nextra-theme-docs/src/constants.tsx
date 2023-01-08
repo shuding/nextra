@@ -298,8 +298,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
   toc: {
     component: TOC,
     float: true,
-    title: 'On This Page',
-    extraContent: <React.Fragment />
+    title: 'On This Page'
   },
   useNextSeoProps: () => ({ titleTemplate: '%s – Nextra' })
 }
