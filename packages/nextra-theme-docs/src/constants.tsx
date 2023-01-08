@@ -17,7 +17,12 @@ export const DEFAULT_LOCALE = 'en-US'
 export const IS_BROWSER = typeof window !== 'undefined'
 
 function isReactNode(value: unknown): boolean {
-  return isString(value) || isValidElement(value as any) || isFunction(value)
+  return (
+    value == null ||
+    isString(value) ||
+    isFunction(value) ||
+    isValidElement(value as any)
+  )
 }
 
 function isFunction(value: unknown): boolean {
@@ -141,12 +146,10 @@ export const themeSchema = z
   })
   .strict()
 
-const publicThemeSchema = themeSchema
-  .extend({
-    // to have `locale` and `text` as required properties
-    i18n: i18nSchema
-  })
-  .deepPartial()
+const publicThemeSchema = themeSchema.deepPartial().extend({
+  // to have `locale` and `text` as required properties
+  i18n: i18nSchema.optional()
+})
 
 export type DocsThemeConfig = z.infer<typeof themeSchema>
 export type PartialDocsThemeConfig = z.infer<typeof publicThemeSchema>

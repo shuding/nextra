@@ -59,11 +59,7 @@ export const ConfigProvider = ({
   if (!isValidated) {
     try {
       theme = themeSchema.parse(theme, {
-        errorMap: err => {
-          return {
-            message: 'Invalid theme config'
-          }
-        }
+        errorMap: err => ({ message: 'Invalid theme config' })
       })
     } catch (err) {
       console.error('[nextra] Error validating the theme config')
