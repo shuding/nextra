@@ -70,7 +70,7 @@ export async function compileMdx(
   const compiler = createCompiler({
     jsx: mdxOptions.jsx || false,
     outputFormat: mdxOptions.outputFormat || 'function-body',
-    providerImportSource: '@mdx-js/react',
+    providerImportSource: 'nextra/mdx',
     // https://github.com/hashicorp/next-mdx-remote/issues/307#issuecomment-1363415249
     development: false,
     remarkPlugins: [

@@ -189,7 +189,6 @@ importers:
 
   packages/nextra-theme-blog:
     specifiers:
-      '@mdx-js/react': ^2.1.5
       '@tailwindcss/nesting': ^0.0.0-insiders.565cd3e
       '@tailwindcss/typography': ^0.5.4
       '@types/react': ^18.0.15
@@ -209,7 +208,6 @@ importers:
       tailwindcss: ^3.1.8
       vitest: ^0.21.0
     dependencies:
-      '@mdx-js/react': 2.1.5_react@18.2.0
       next-themes: 0.2.1_q76c2b4vyoegvsbrcwkfvimnai
     devDependencies:
       '@tailwindcss/nesting': 0.0.0-insiders.565cd3e_postcss@8.4.14
@@ -233,7 +231,6 @@ importers:
   packages/nextra-theme-docs:
     specifiers:
       '@headlessui/react': ^1.6.6
-      '@mdx-js/react': ^2.1.5
       '@popperjs/core': ^2.11.6
       '@tailwindcss/nesting': ^0.0.0-insiders.565cd3e
       '@tailwindcss/typography': ^0.5.4
@@ -266,7 +263,6 @@ importers:
       vitest: ^0.21.0
     dependencies:
       '@headlessui/react': 1.6.6_biqbaboplfbrettd7655fr4n2y
-      '@mdx-js/react': 2.1.5_react@18.2.0
       '@popperjs/core': 2.11.6
       clsx: 1.2.1
       flexsearch: 0.7.21

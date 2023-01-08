@@ -1,6 +1,7 @@
 import React, { createContext, useContext } from 'react'
-import { useMDXComponents } from '@mdx-js/react'
 import { MDXRemote } from 'next-mdx-remote'
+
+import { useMDXComponents } from './mdx'
 
 export const SSGContext = createContext<any>(false)
 export const useSSG = (key = 'ssg') => useContext(SSGContext)?.[key]
@@ -19,6 +20,7 @@ export function RemoteContent() {
   }
 
   const components = useMDXComponents()
+
   return React.createElement(MDXRemote, {
     compiledSource: dynamicContext,
     components

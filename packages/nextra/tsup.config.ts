@@ -23,7 +23,8 @@ export default defineConfig([
       'src/locales.ts',
       'src/context.ts',
       'src/layout.ts',
-      'src/remote.ts'
+      'src/remote.ts',
+      'src/mdx.ts'
     ],
     format: 'esm',
     dts: true,

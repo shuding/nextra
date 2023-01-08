@@ -41,6 +41,9 @@
       ],
       "remote": [
         "./dist/remote.d.ts"
+      ],
+      "mdx": [
+        "./dist/mdx.d.ts"
       ]
     }
   },
