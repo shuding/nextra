@@ -1,4 +1,4 @@
-import { draw } from "./drawer";
+import { useDraw } from "./use-draw";
 
 const PATHS = {
   "en-US": {
@@ -35,14 +35,14 @@ export const Cache = () => (
   <svg viewBox="0 0 588 311" fill="none" className="invert-on-dark">
     <path stroke="#D2D2D2" d="M22.5 59.5h543v232h-543z" />
     <path fill="#fff" d="M40 43h116v33H40z" />
-    <path fill="#141414" d={draw(PATHS, "firstCacheProvider")} />
+    <path fill="#141414" d={useDraw(PATHS, "firstCacheProvider")} />
     <path stroke="#D2D2D2" d="M54.5 91.5h256v168h-256z" />
     <circle cx={183} cy={174} r={44.5} fill="#EAEAEA" stroke="#D3D3D3" />
-    <path fill="#000" d={draw(PATHS, "leftSWRHooks")} />
+    <path fill="#000" d={useDraw(PATHS, "leftSWRHooks")} />
     <circle cx={434} cy={174} r={44.5} fill="#EAEAEA" stroke="#D3D3D3" />
-    <path fill="#000" d={draw(PATHS, "rightSWRHooks")} />
+    <path fill="#000" d={useDraw(PATHS, "rightSWRHooks")} />
     <path fill="#fff" d="M72 75h116v33H72z" />
-    <path fill="#141414" d={draw(PATHS, "secondCacheProvider")} />
-    <path fill="#9A9A9A" d={draw(PATHS, "defaultCacheProvider")} />
+    <path fill="#141414" d={useDraw(PATHS, "secondCacheProvider")} />
+    <path fill="#9A9A9A" d={useDraw(PATHS, "defaultCacheProvider")} />
   </svg>
 );

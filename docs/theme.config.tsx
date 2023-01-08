@@ -54,7 +54,7 @@ const config: DocsThemeConfig = {
     }
   },
   logo,
-  head() {
+  head: function useHead() {
     const { title } = useConfig()
     const { route } = useRouter()
     const socialCard =

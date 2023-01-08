@@ -2,7 +2,7 @@ import { useRef, useCallback, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import "intersection-observer";
 
-export default ({ src, caption, ratio }) => {
+export default function Video({ src, caption, ratio }) {
   const [inViewRef, inView] = useInView({
     threshold: 1,
   });
@@ -29,7 +29,7 @@ export default ({ src, caption, ratio }) => {
   );
 
   useEffect(() => {
-    if (!videoRef || !videoRef.current) {
+    if (!videoRef?.current) {
       return;
     }
 
@@ -60,4 +60,4 @@ export default ({ src, caption, ratio }) => {
       )}
     </div>
   );
-};
+}

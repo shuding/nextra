@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 
-export const draw = (paths = {}, name = "") => {
+export function useDraw(paths = {}, name = "") {
   const { locale, defaultLocale } = useRouter();
 
   if (!Object.hasOwn(paths, defaultLocale)) {
@@ -17,4 +17,4 @@ export const draw = (paths = {}, name = "") => {
   }
 
   return paths[locale]?.[name] || paths[defaultLocale][name];
-};
+}

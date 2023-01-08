@@ -97,7 +97,7 @@ const config: DocsThemeConfig = {
   docsRepositoryBase:
     "https://github.com/shuding/nextra/blob/core/examples/swr-site",
   editLink: {
-    text() {
+    text: function useText() {
       const { locale } = useRouter();
       return EDIT_TEXT[locale];
     },
@@ -113,11 +113,11 @@ const config: DocsThemeConfig = {
     },
   },
   footer: {
-    text() {
+    text: function useText() {
       const { locale } = useRouter();
       return (
         <a
-          rel="noopener"
+          rel="noreferrer"
           target="_blank"
           className="flex items-center gap-2 font-semibold"
           href={FOOTER_LINK[locale]}
@@ -127,7 +127,7 @@ const config: DocsThemeConfig = {
       );
     },
   },
-  head() {
+  head: function useHead() {
     const config = useConfig();
     const description =
       config.frontMatter.description ||
@@ -182,7 +182,7 @@ const config: DocsThemeConfig = {
     { locale: "ko", text: "한국어" },
     { locale: "ru", text: "Русский" },
   ],
-  logo() {
+  logo: function Logo() {
     const { locale } = useRouter();
     return (
       <>
@@ -215,6 +215,7 @@ const config: DocsThemeConfig = {
   },
   toc: {
     extraContent: (
+      // eslint-disable-next-line @next/next/no-img-element -- ignore since url is external and dynamic
       <img alt="placeholder cat" src="https://placekitten.com/g/300/200" />
     ),
     float: true,

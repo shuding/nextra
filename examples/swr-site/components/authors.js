@@ -13,6 +13,7 @@ export function Author({ name, link }) {
         key={name}
         href={link}
         target="_blank"
+        rel="noreferrer"
         className="mx-1 text-gray-800 dark:text-gray-100"
       >
         {name}

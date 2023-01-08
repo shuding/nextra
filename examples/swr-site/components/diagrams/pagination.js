@@ -1,4 +1,4 @@
-import { draw } from "./drawer";
+import { useDraw } from "./use-draw";
 
 const PATHS = {
   "en-US": {
@@ -42,7 +42,7 @@ export const Pagination = () => (
       fill="#FAFAFA"
       stroke="#D3D3D3"
     />
-    <path d={draw(PATHS, "prev")} fill="#454545" />
+    <path d={useDraw(PATHS, "prev")} fill="#454545" />
     <rect
       x="307.5"
       y="306.5"
@@ -52,7 +52,7 @@ export const Pagination = () => (
       fill="#FAFAFA"
       stroke="#D3D3D3"
     />
-    <path d={draw(PATHS, "next")} fill="#454545" />
+    <path d={useDraw(PATHS, "next")} fill="#454545" />
     <path
       d="M281.098 322.03C281.563 322.03 281.951 321.651 281.951 321.178C281.951 320.713 281.563 320.33 281.098 320.33C280.63 320.33 280.246 320.713 280.246 321.178C280.246 321.651 280.63 322.03 281.098 322.03ZM284.497 322.03C284.961 322.03 285.349 321.651 285.349 321.178C285.349 320.713 284.961 320.33 284.497 320.33C284.028 320.33 283.645 320.713 283.645 321.178C283.645 321.651 284.028 322.03 284.497 322.03ZM287.895 322.03C288.36 322.03 288.748 321.651 288.748 321.178C288.748 320.713 288.36 320.33 287.895 320.33C287.426 320.33 287.043 320.713 287.043 321.178C287.043 321.651 287.426 322.03 287.895 322.03Z"
       fill="black"
@@ -66,7 +66,7 @@ export const Pagination = () => (
       fill="#FAFAFA"
       stroke="#D3D3D3"
     />
-    <path d={draw(PATHS, "one")} fill="#454545" />
+    <path d={useDraw(PATHS, "one")} fill="#454545" />
     <rect
       x="160.5"
       y="306.5"
@@ -76,7 +76,7 @@ export const Pagination = () => (
       fill="#EDEDED"
       stroke="#B3B3B3"
     />
-    <path d={draw(PATHS, "two")} fill="#454545" />
+    <path d={useDraw(PATHS, "two")} fill="#454545" />
     <rect
       x="217.5"
       y="306.5"
@@ -86,6 +86,6 @@ export const Pagination = () => (
       fill="#FAFAFA"
       stroke="#D3D3D3"
     />
-    <path d={draw(PATHS, "three")} fill="#454545" />
+    <path d={useDraw(PATHS, "three")} fill="#454545" />
   </svg>
 );
