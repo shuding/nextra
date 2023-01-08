@@ -1,4 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires -- can't use import
+// eslint-disable-next-line @typescript-eslint/no-var-requires -- valid since it's commonjs
 const colors = require('tailwindcss/colors')
 
 const makePrimaryColor =

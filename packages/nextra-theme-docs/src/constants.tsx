@@ -6,7 +6,7 @@ import { Anchor, Flexsearch, Footer, Navbar, TOC } from './components'
 import { DiscordIcon, GitHubIcon } from 'nextra/icons'
 import { MatchSorterSearch } from './components/match-sorter-search'
 import { useConfig } from './contexts'
-import { getGitEditUrl, getGitIssueUrl, Item } from './utils'
+import { useGitEditUrl, getGitIssueUrl, Item } from './utils'
 import { z } from 'zod'
 import { NavBarProps } from './components/navbar'
 import { TOCProps } from './components/toc'
@@ -171,8 +171,8 @@ export const DEFAULT_THEME: DocsThemeConfig = {
   direction: 'ltr',
   docsRepositoryBase: 'https://github.com/shuding/nextra',
   editLink: {
-    component({ className, filePath, children }) {
-      const editUrl = getGitEditUrl(filePath)
+    component: function EditLink({ className, filePath, children }) {
+      const editUrl = useGitEditUrl(filePath)
       if (!editUrl) {
         return null
       }
@@ -200,7 +200,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     component: Footer,
     text: `MIT ${new Date().getFullYear()} © Nextra.`
   },
-  gitTimestamp({ timestamp }) {
+  gitTimestamp: function useGitTimestamp({ timestamp }) {
     const { locale = DEFAULT_LOCALE } = useRouter()
     return (
       <>
@@ -262,7 +262,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     )
   },
   search: {
-    component({ className, directories }) {
+    component: function Search({ className, directories }) {
       const config = useConfig()
       return config.flexsearch ? (
         <Flexsearch className={className} />
@@ -275,14 +275,14 @@ export const DEFAULT_THEME: DocsThemeConfig = {
         No results found.
       </span>
     ),
-    loading() {
+    loading: function useLoading() {
       const { locale } = useRouter()
       if (locale === 'zh-CN') return '正在加载…'
       if (locale === 'ru') return 'Загрузка…'
       if (locale === 'fr') return 'Сhargement…'
       return 'Loading…'
     },
-    placeholder() {
+    placeholder: function usePlaceholder() {
       const { locale } = useRouter()
       if (locale === 'zh-CN') return '搜索文档…'
       if (locale === 'ru') return 'Поиск документации…'
