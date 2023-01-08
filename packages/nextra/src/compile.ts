@@ -2,8 +2,9 @@ import { createProcessor, ProcessorOptions } from '@mdx-js/mdx'
 import { Processor } from '@mdx-js/mdx/lib/core'
 import remarkGfm from 'remark-gfm'
 import rehypePrettyCode from 'rehype-pretty-code'
-import rehypeMdxTitle from 'rehype-mdx-title'
 import readingTime from 'remark-reading-time'
+import grayMatter from 'gray-matter'
+
 import {
   remarkStaticImage,
   remarkHeadings,
@@ -57,6 +58,11 @@ export async function compileMdx(
   } = {},
   filePath = ''
 ) {
+  // Extract frontMatter information if it exists
+  const { data: frontMatter, content } = grayMatter(source)
+
+  source = content
+
   const structurizedData = Object.create(null)
 
   const mdxOptions = loaderOptions.mdxOptions || {}
@@ -84,25 +90,32 @@ export async function compileMdx(
         rehypePrettyCode,
         { ...rehypePrettyCodeOptions, ...mdxOptions.rehypePrettyCodeOptions }
       ],
-      [rehypeMdxTitle, { name: '__nextra_title__' }],
       [attachMeta, { defaultShowCopyCode: loaderOptions.defaultShowCopyCode }],
       ...(loaderOptions.latex ? [rehypeKatex] : [])
     ]
   })
   try {
     const vFile = await compiler.process(source)
-    const result = String(vFile)
-      .replace('export const __nextra_title__', 'const __nextra_title__')
-      .replace('export default MDXContent;', '')
+
+    let result = String(vFile).replace('export default MDXContent;', '')
+
+    const headingMeta = compiler.data('headingMeta') as Pick<
+      PageOpts,
+      'headings' | 'hasJsxInH1' | 'title'
+    >
+    if (headingMeta.title) {
+      result += `\nconst __nextra_title__ = ${JSON.stringify(
+        headingMeta.title
+      )}`
+    }
+
     const readingTime = vFile.data.readingTime as ReadingTime | undefined
     return {
       result,
-      ...(compiler.data('headingMeta') as Pick<
-        PageOpts,
-        'headings' | 'hasJsxInH1'
-      >),
+      ...headingMeta,
       ...(readingTime && { readingTime }),
-      structurizedData
+      structurizedData,
+      frontMatter
     }
   } catch (err) {
     console.error(`[nextra] Error compiling ${filePath}.`)

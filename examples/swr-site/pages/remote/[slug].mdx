@@ -1,7 +1,5 @@
-import { MDXRemote } from 'next-mdx-remote'
-import { compileMdx } from 'nextra/compile'
-import { useSSG, getDynamicMeta } from 'nextra/data'
-import { useMDXComponents } from 'nextra-theme-docs'
+import { buildDynamicMDX, buildDynamicMeta } from 'nextra/remote'
+import { RemoteContent } from 'nextra/data'
 
 export const getStaticProps = async ({ params }) => {
   const res = await fetch(
@@ -15,24 +13,12 @@ export const getStaticProps = async ({ params }) => {
     }
   );
   const comment = await res.json();
-  try {
-    const mdx = await compileMdx(comment.body)
-    return {
-      props: {
-        ssg: mdx.result,
-        ...(await getDynamicMeta())
-      },
-      revalidate: 10,
-    }
-  } catch (e) {
-    const mdx = await compileMdx(`Error: failed to render comment ${params.slug}.`)
-    return {
-      props: {
-        ssg: mdx.result,
-        ...(await getDynamicMeta())
-      },
-      revalidate: 10,
-    }
+  return {
+    props: {
+      ...(await buildDynamicMDX(comment.body)),
+      ...(await buildDynamicMeta())
+    },
+    revalidate: 10,
   }
 }
 
@@ -56,10 +42,4 @@ export const getStaticPaths = async () => {
   }
 }
 
-export const NextraReadme = () => {
-  const compiledSource = useSSG()
-  const components = useMDXComponents()
-  return <MDXRemote compiledSource={compiledSource} components={components} />
-}
-
-<NextraReadme />
+<RemoteContent/>

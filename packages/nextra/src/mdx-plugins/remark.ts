@@ -17,7 +17,7 @@ export const getFlattenedValue = (node: Parent): string =>
 
 export const remarkHeadings: Plugin<[], Root> = function (this: Processor) {
   const data = this.data() as {
-    headingMeta: Pick<PageOpts, 'headings' | 'hasJsxInH1'>
+    headingMeta: Pick<PageOpts, 'headings' | 'hasJsxInH1' | 'title'>
   }
   return (tree, _file, done) => {
     visit(
@@ -44,6 +44,10 @@ export const remarkHeadings: Plugin<[], Root> = function (this: Processor) {
           if (hasJsxInH1) {
             data.headingMeta.hasJsxInH1 = true
           }
+          if (node.depth === 1) {
+            data.headingMeta.title = heading.value
+          }
+
           return
         }
 

@@ -1,4 +1,6 @@
-import { createContext, useContext } from 'react'
+import React, { createContext, useContext } from 'react'
+import { useMDXComponents } from '@mdx-js/react'
+import { MDXRemote } from 'next-mdx-remote'
 
 export const SSGContext = createContext<any>(false)
 export const useSSG = (key = 'ssg') => useContext(SSGContext)?.[key]
@@ -8,13 +10,17 @@ export const useSSG = (key = 'ssg') => useContext(SSGContext)?.[key]
 export const DataContext = SSGContext
 export const useData = useSSG
 
-export const getDynamicMeta = async () => {
-  if ((globalThis as any).__nextra_resolvePageMap__) {
-    return {
-      __nextra__: {
-        pageMap: await (globalThis as any).__nextra_resolvePageMap__()
-      }
-    }
+export function RemoteContent() {
+  const dynamicContext = useSSG('__nextra_dynamic_mdx')
+  if (!dynamicContext) {
+    throw new Error(
+      'RemoteContent must be used together with the `buildDynamicMDX` API'
+    )
   }
-  return {}
+
+  const components = useMDXComponents()
+  return React.createElement(MDXRemote, {
+    compiledSource: dynamicContext,
+    components
+  })
 }

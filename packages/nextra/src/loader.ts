@@ -1,7 +1,6 @@
 import type { LoaderOptions, MdxPath, PageOpts } from './types'
 
 import path from 'node:path'
-import grayMatter from 'gray-matter'
 import slash from 'slash'
 import { LoaderContext } from 'webpack'
 
@@ -141,26 +140,30 @@ async function loader(
   // so we can generate the correct page map.
   context.addContextDependency(PAGES_DIR)
 
-  // Extract frontMatter information if it exists
-  const { data: frontMatter, content } = grayMatter(source)
-
-  const { result, headings, structurizedData, hasJsxInH1, readingTime } =
-    await compileMdx(
-      content,
-      {
-        mdxOptions: {
-          ...mdxOptions,
-          jsx: true,
-          outputFormat: 'program'
-        },
-        readingTime: _readingTime,
-        defaultShowCopyCode,
-        staticImage,
-        flexsearch,
-        latex
+  const {
+    result,
+    headings,
+    title,
+    frontMatter,
+    structurizedData,
+    hasJsxInH1,
+    readingTime
+  } = await compileMdx(
+    source,
+    {
+      mdxOptions: {
+        ...mdxOptions,
+        jsx: true,
+        outputFormat: 'program'
       },
-      mdxPath
-    )
+      readingTime: _readingTime,
+      defaultShowCopyCode,
+      staticImage,
+      flexsearch,
+      latex
+    },
+    mdxPath
+  )
 
   const katexCss = latex ? "import 'katex/dist/katex.min.css'\n" : ''
 
@@ -188,9 +191,7 @@ export default MDXContent`
   // 2. Use the first h1 heading if it exists.
   // 3. Use the fallback, title-cased file name.
   const fallbackTitle =
-    frontMatter.title ||
-    headings.find(h => h.depth === 1)?.value ||
-    pageTitleFromFilename(fileMap[mdxPath].name)
+    frontMatter.title || title || pageTitleFromFilename(fileMap[mdxPath].name)
 
   const skipFlexsearchIndexing =
     IS_PRODUCTION && indexContentEmitted.has(mdxPath)

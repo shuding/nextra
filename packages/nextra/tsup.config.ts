@@ -22,7 +22,8 @@ export default defineConfig([
       'src/ssg.ts',
       'src/locales.ts',
       'src/context.ts',
-      'src/layout.ts'
+      'src/layout.ts',
+      'src/remote.ts'
     ],
     format: 'esm',
     dts: true,
