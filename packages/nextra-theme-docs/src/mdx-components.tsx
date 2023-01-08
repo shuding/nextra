@@ -106,7 +106,7 @@ function HeadingLink({
         return ret
       })
     }
-  }, [id])
+  }, [id, context])
 
   return (
     <Tag

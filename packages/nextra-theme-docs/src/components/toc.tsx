@@ -14,6 +14,7 @@ export type TOCProps = {
 }
 
 export function TOC({ headings, filePath }: TOCProps): ReactElement {
+  // can't be instantiated outside of component
   const slugger = useMemo(() => new Slugger(), [])
   const activeAnchor = useActiveAnchor()
   const config = useConfig()

@@ -27,7 +27,7 @@ export function useInternals() {
     return () => {
       listeners[route].splice(listeners[route].indexOf(trigger), 1)
     }
-  }, [route])
+  }, [route, __nextra_internal__.refreshListeners, rerender])
 
   const context = __nextra_internal__.context[route]
 
