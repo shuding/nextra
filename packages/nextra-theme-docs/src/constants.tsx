@@ -126,7 +126,7 @@ export const themeSchema = z
       labels: z.string()
     }),
     sidebar: z.object({
-      defaultMenuCollapseLevel: z.number().min(2).int(),
+      defaultMenuCollapseLevel: z.number().min(0).int(),
       titleComponent: z.custom<ReactNode | FC<{ title: string; type: string }>>(
         ...reactNode
       )
@@ -141,10 +141,12 @@ export const themeSchema = z
   })
   .strict()
 
-const publicThemeSchema = themeSchema.deepPartial().extend({
-  // to have `locale` and `text` as required properties
-  i18n: i18nSchema
-})
+const publicThemeSchema = themeSchema
+  .extend({
+    // to have `locale` and `text` as required properties
+    i18n: i18nSchema
+  })
+  .deepPartial()
 
 export type DocsThemeConfig = z.infer<typeof themeSchema>
 export type PartialDocsThemeConfig = z.infer<typeof publicThemeSchema>
@@ -296,7 +298,8 @@ export const DEFAULT_THEME: DocsThemeConfig = {
   toc: {
     component: TOC,
     float: true,
-    title: 'On This Page'
+    title: 'On This Page',
+    extraContent: <React.Fragment />
   },
   useNextSeoProps: () => ({ titleTemplate: '%s – Nextra' })
 }
