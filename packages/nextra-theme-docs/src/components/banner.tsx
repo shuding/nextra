@@ -11,7 +11,7 @@ export function Banner(): ReactElement | null {
   }
   const hideBannerScript = `try{if(localStorage.getItem(${JSON.stringify(
     banner.key
-  )})==='0'){document.body.classList.add('nextra-banner-hidden')}}catch(e){}`
+  )})==='0'){document.body.classList.add('nextra-banner-hidden')}else{document.body.classList.add('nextra-banner-visible')}}catch(e){}`
 
   return (
     <>
@@ -39,6 +39,7 @@ export function Banner(): ReactElement | null {
               } catch {
                 /* ignore */
               }
+              document.body.classList.remove('nextra-banner-visible')
               document.body.classList.add('nextra-banner-hidden')
             }}
           >
