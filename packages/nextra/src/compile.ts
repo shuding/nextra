@@ -39,7 +39,8 @@ const rehypePrettyCodeOptions = {
   },
   onVisitHighlightedWord(node: any) {
     node.properties.className = ['highlighted']
-  }
+  },
+  filterMetaString: (meta: string) => meta.replace(/filename="[^"]*"/, '')
 }
 
 export async function compileMdx(

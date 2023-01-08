@@ -145,7 +145,7 @@ importers:
       react-dom: ^18.2.0
       rehype-katex: ^6.0.2
       rehype-mdx-title: ^2.0.0
-      rehype-pretty-code: 0.6.0
+      rehype-pretty-code: 0.7.0
       remark-gfm: ^3.0.1
       remark-math: ^5.1.1
       remark-reading-time: ^2.0.1
@@ -165,7 +165,7 @@ importers:
       p-limit: 3.1.0
       rehype-katex: 6.0.2
       rehype-mdx-title: 2.0.0
-      rehype-pretty-code: 0.6.0_shiki@0.12.1
+      rehype-pretty-code: 0.7.0_shiki@0.12.1
       remark-gfm: 3.0.1
       remark-math: 5.1.1
       remark-reading-time: 2.0.1
@@ -5231,8 +5231,8 @@ packages:
       unified: 10.1.2
     dev: false
 
-  /rehype-pretty-code/0.6.0_shiki@0.12.1:
-    resolution: {integrity: sha512-VfntYoWYOBVURXYDdB8p/E1sZTm2W5ry89fJyY94WJAo1jUH/5sVhDC7cX5PPnksMyW9PYMxRLNfjkBpSgJrzQ==}
+  /rehype-pretty-code/0.7.0_shiki@0.12.1:
+    resolution: {integrity: sha512-dWdNYALc6ApIx6Qlyk+13JVrEdZiy73rIjRkZgNG05d2iHzfIWMMZ6NM/WsuS0KEAPq9vgulqRah98b9HFpPlw==}
     engines: {node: ^12.16.0 || >=13.2.0}
     peerDependencies:
       shiki: '*'
@@ -6547,7 +6547,7 @@ packages:
     resolution: {directory: packages/nextra-theme-blog, type: directory}
     id: file:packages/nextra-theme-blog
     name: nextra-theme-blog
-    version: 2.0.3
+    version: 2.1.0
     peerDependencies:
       next: '>=9.5.3'
       react: '>=16.13.1'
@@ -6568,7 +6568,7 @@ packages:
     resolution: {directory: packages/nextra-theme-docs, type: directory}
     id: file:packages/nextra-theme-docs
     name: nextra-theme-docs
-    version: 2.0.3
+    version: 2.1.0
     peerDependencies:
       next: '>=9.5.3'
       react: '>=16.13.1'
@@ -6598,7 +6598,7 @@ packages:
     resolution: {directory: packages/nextra, type: directory}
     id: file:packages/nextra
     name: nextra
-    version: 2.0.3
+    version: 2.1.0
     peerDependencies:
       next: '>=9.5.3'
       react: '>=16.13.1'
@@ -6616,7 +6616,7 @@ packages:
       react-dom: 18.2.0_react@18.2.0
       rehype-katex: 6.0.2
       rehype-mdx-title: 2.0.0
-      rehype-pretty-code: 0.6.0_shiki@0.12.1
+      rehype-pretty-code: 0.7.0_shiki@0.12.1
       remark-gfm: 3.0.1
       remark-math: 5.1.1
       remark-reading-time: 2.0.1
