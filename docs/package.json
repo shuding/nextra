@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "@types/node": "^18.11.9",
+    "@types/react": "^18.0.15",
     "autoprefixer": "^10.4.13",
     "eslint": "^8.30.0",
     "postcss": "^8.4.19",
