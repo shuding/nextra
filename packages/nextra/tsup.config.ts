@@ -6,7 +6,7 @@ const { target } = tsconfig.compilerOptions
 export default defineConfig([
   {
     name: 'nextra',
-    entry: ['src/index.js'],
+    entry: ['src/index.js', 'src/__temp__.ts'],
     format: 'cjs',
     dts: false,
     target
@@ -29,7 +29,7 @@ export default defineConfig([
     format: 'esm',
     dts: true,
     target,
-    external: ['shiki']
+    external: ['shiki', './__temp__']
   },
   {
     entry: ['src/types.ts'],

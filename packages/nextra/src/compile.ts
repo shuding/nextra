@@ -18,15 +18,10 @@ import { truthy } from './utils'
 import remarkMath from 'remark-math'
 import rehypeKatex from 'rehype-katex'
 
-if (typeof window === 'undefined') {
-  const requireShikiLangs = () => {
-    // https://github.com/shuding/nextra/pull/1168#issuecomment-1374960179
-    // Make sure to include all languages in the bundle when tracing dependencies.
-    const fs = require('fs')
-    const path = require('path')
-    const shikiPath = require.resolve('shiki/package.json')
-    fs.readdir(path.join(shikiPath, '..', 'languages'))
-  }
+// @ts-ignore
+globalThis.__nextra_temp_do_not_use = () => {
+  // @ts-ignore
+  import('./__temp__')
 }
 
 const createCompiler = (mdxOptions: ProcessorOptions): Processor => {
