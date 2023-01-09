@@ -22,7 +22,7 @@ export function Banner(): ReactElement | null {
           'nx-bg-neutral-900 nx-text-sm nx-text-slate-50',
           'nx-h-[var(--nextra-banner-height)] [body.nextra-banner-hidden_&]:nx-hidden',
           'dark:nx-bg-[linear-gradient(1deg,#383838,#212121)] dark:nx-text-white',
-          'nx-pl-10'
+          'ltr:nx-pl-10 rtl:nx-pr-10'
         )}
       >
         <div className="nx-mx-auto nx-w-full nx-max-w-[90rem] nx-truncate nx-whitespace-nowrap nx-py-1 nx-pl-[max(env(safe-area-inset-left),1.5rem)] nx-pr-[max(env(safe-area-inset-right),1.5rem)] nx-text-center nx-font-medium">
@@ -32,7 +32,7 @@ export function Banner(): ReactElement | null {
           <button
             type="button"
             aria-label="Dismiss banner"
-            className="nx-mr-2 nx-w-8 nx-opacity-80 hover:nx-opacity-100"
+            className="nx-w-8 nx-opacity-80 hover:nx-opacity-100 ltr:nx-mr-2 rtl:nx-ml-2"
             onClick={() => {
               try {
                 localStorage.setItem(banner.key, '0')
