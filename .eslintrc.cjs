@@ -45,7 +45,17 @@ module.exports = {
         'react/prop-types': 'off',
         'react/no-unknown-property': ['error', { ignore: ['jsx'] }],
         'react-hooks/exhaustive-deps': 'error',
-        'react/self-closing-comp': 'error'
+        'react/self-closing-comp': 'error',
+        'no-restricted-syntax': [
+          'error',
+          {
+            // ❌ useMemo(…, [])
+            selector:
+              'CallExpression[callee.name=useMemo][arguments.1.type=ArrayExpression][arguments.1.elements.length=0]',
+            message:
+              "`useMemo` with an empty dependency array can't provide a stable reference, use `useRef` instead."
+          }
+        ]
       },
       settings: {
         react: { version: 'detect' }
