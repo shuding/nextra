@@ -38,7 +38,7 @@ export const getStaticPaths = async () => {
     paths: comments.map((comment) => ({
       params: { slug: String(comment.id) },
     })),
-    fallback: false,
+    fallback: 'blocking'
   }
 }
 
