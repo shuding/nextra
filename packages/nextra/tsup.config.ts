@@ -28,7 +28,8 @@ export default defineConfig([
     ],
     format: 'esm',
     dts: true,
-    target
+    target,
+    external: ['shiki']
   },
   {
     entry: ['src/types.ts'],

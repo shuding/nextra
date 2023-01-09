@@ -18,6 +18,14 @@ import { truthy } from './utils'
 import remarkMath from 'remark-math'
 import rehypeKatex from 'rehype-katex'
 
+if (typeof window === 'undefined') {
+  const requireShikiLangs = () => {
+    // https://github.com/shuding/nextra/pull/1168#issuecomment-1374960179
+    // Make sure to include all languages in the bundle when tracing dependencies.
+    import(`shiki/languages/${Math.random()}`)
+  }
+}
+
 const createCompiler = (mdxOptions: ProcessorOptions): Processor => {
   const compiler = createProcessor(mdxOptions)
   compiler.data('headingMeta', {
