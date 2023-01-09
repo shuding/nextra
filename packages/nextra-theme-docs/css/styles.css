@@ -66,9 +66,6 @@ summary {
       @apply !nx-top-0;
     }
   }
-  .nextra-banner-visible .nextra-sidebar-container {
-    @apply nx-pt-[calc(var(--nextra-navbar-height)+var(--nextra-banner-height))]
-  }
   .nextra-search .excerpt {
     @apply nx-overflow-hidden nx-text-ellipsis;
     display: -webkit-box;

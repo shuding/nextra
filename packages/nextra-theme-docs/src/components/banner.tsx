@@ -11,28 +11,28 @@ export function Banner(): ReactElement | null {
   }
   const hideBannerScript = `try{if(localStorage.getItem(${JSON.stringify(
     banner.key
-  )})==='0'){document.body.classList.add('nextra-banner-hidden')}else{document.body.classList.add('nextra-banner-visible')}}catch(e){}`
+  )})==='0'){document.body.classList.add('nextra-banner-hidden')}}catch(e){}`
 
   return (
     <>
       <script dangerouslySetInnerHTML={{ __html: hideBannerScript }} />
       <div
         className={cn(
-          'nx-relative nx-z-20 nx-flex nx-items-center nx-justify-center',
-          'nx-bg-neutral-900 nx-text-sm nx-font-medium nx-text-slate-50',
+          'nextra-banner-container nx-sticky nx-top-0 nx-z-20 nx-flex nx-items-center md:nx-relative',
+          'nx-bg-neutral-900 nx-text-sm nx-text-slate-50',
           'nx-h-[var(--nextra-banner-height)] [body.nextra-banner-hidden_&]:nx-hidden',
           'dark:nx-bg-[linear-gradient(1deg,#383838,#212121)] dark:nx-text-white',
-          'nx-py-1 nx-pl-[max(env(safe-area-inset-left),2.5rem)] nx-pr-[max(env(safe-area-inset-right),2.5rem)]'
+          'nx-pl-10'
         )}
       >
-        <div className="nx-max-w-[90rem] nx-truncate">
+        <div className="nx-mx-auto nx-w-full nx-max-w-[90rem] nx-truncate nx-whitespace-nowrap nx-py-1 nx-pl-[max(env(safe-area-inset-left),1.5rem)] nx-pr-[max(env(safe-area-inset-right),1.5rem)] nx-text-center nx-font-medium">
           {renderComponent(banner.text)}
         </div>
         {banner.dismissible && (
           <button
             type="button"
             aria-label="Dismiss banner"
-            className="nx-absolute nx-opacity-80 hover:nx-opacity-100 ltr:nx-right-0 rtl:nx-left-0"
+            className="nx-mr-2 nx-w-8 nx-opacity-80 hover:nx-opacity-100"
             onClick={() => {
               try {
                 localStorage.setItem(banner.key, '0')
@@ -43,7 +43,7 @@ export function Banner(): ReactElement | null {
               document.body.classList.add('nextra-banner-hidden')
             }}
           >
-            <XIcon className="nx-mx-4 nx-h-4 nx-w-4" />
+            <XIcon className="nx-mx-auto nx-h-4 nx-w-4" />
           </button>
         )}
       </div>
