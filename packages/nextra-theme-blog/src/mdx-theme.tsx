@@ -28,8 +28,7 @@ const H1 = ({ children }: { children?: ReactNode }): ReactElement => {
     if (ref.current && opts.hasJsxInH1) {
       setShowHeading(true)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- ref is always same and hasJsxInH1 calculated at compile time
-  }, [])
+  }, [opts.hasJsxInH1, ref])
   return <>{showHeading && createPortal(children, ref.current!)}</>
 }
 
