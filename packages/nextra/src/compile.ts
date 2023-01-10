@@ -54,7 +54,7 @@ export async function compileMdx(
     | 'latex'
   > & {
     mdxOptions?: LoaderOptions['mdxOptions'] &
-      Pick<ProcessorOptions, 'jsx' | 'outputFormat'>
+      Pick<ProcessorOptions, 'jsx' | 'outputFormat' | 'format'>
   } = {},
   filePath = ''
 ) {
@@ -66,6 +66,7 @@ export async function compileMdx(
     jsx: mdxOptions.jsx || false,
     outputFormat: mdxOptions.outputFormat || 'function-body',
     providerImportSource: '@mdx-js/react',
+    format: mdxOptions.format || 'mdx',
     // https://github.com/hashicorp/next-mdx-remote/issues/307#issuecomment-1363415249
     development: false,
     remarkPlugins: [
@@ -91,7 +92,10 @@ export async function compileMdx(
     ]
   })
   try {
-    const vFile = await compiler.process(source)
+    const vFile = await compiler.process({
+      value: source,
+      path: filePath
+    })
     const result = String(vFile)
       .replace('export const __nextra_title__', 'const __nextra_title__')
       .replace('export default MDXContent;', '')
