@@ -1959,6 +1959,20 @@ exports[`context > getAllPages() > should work 1`] = `
     "name": "blog",
     "route": "/blog",
   },
+  {
+    "frontMatter": {
+      "mdxOptions": {
+        "format": "md",
+      },
+    },
+    "kind": "MdxPage",
+    "locale": "en-US",
+    "meta": {
+      "title": "Test",
+    },
+    "name": "test",
+    "route": "/test",
+  },
 ]
 `;
 

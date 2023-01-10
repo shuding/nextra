@@ -143,6 +143,8 @@ async function loader(
       {
         mdxOptions: {
           ...mdxOptions,
+          // You can override MDX options in the frontMatter too.
+          ...frontMatter.mdxOptions,
           jsx: true,
           outputFormat: 'program'
         },
