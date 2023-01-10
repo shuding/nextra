@@ -1,1 +1,14 @@
 # One
+
+export function getStaticProps() {
+  return {
+    props: {
+      foo: 'bar'
+    }
+  }
+}
+
+export default function(props) {
+  console.log({ props })
+  return props.children
+}

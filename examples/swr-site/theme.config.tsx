@@ -88,6 +88,14 @@ const FOOTER_LINK_TEXT = {
   ),
 };
 
+export function getStaticProps() {
+  return {
+    props: {
+      foo: 'from theme config'
+    }
+  }
+}
+
 const config: DocsThemeConfig = {
   banner: {
     key: "swr-2",

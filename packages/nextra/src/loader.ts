@@ -157,7 +157,7 @@ async function loader(
 
   const katexCssImport = latex ? "import 'katex/dist/katex.min.css'" : ''
   const cssImport = OFFICIAL_THEMES.includes(
-    theme as typeof OFFICIAL_THEMES[number]
+    theme as (typeof OFFICIAL_THEMES)[number]
   )
     ? `import '${theme}/style.css'`
     : ''
@@ -208,7 +208,9 @@ export default MDXContent`
     theme.startsWith('.') || theme.startsWith('/') ? path.resolve(theme) : theme
 
   const themeConfigImport = themeConfig
-    ? `import __nextra_themeConfig__ from '${slash(path.resolve(themeConfig))}'`
+    ? `import __nextra_themeConfig__, { getStaticProps as __nextra_themeConfigGetStaticProps } from '${slash(
+        path.resolve(themeConfig)
+      )}'`
     : ''
 
   const pageOpts: Omit<PageOpts, 'title'> = {
@@ -257,6 +259,12 @@ __nextra_internal__.refreshListeners ||= Object.create(null)
 __nextra_internal__.Layout = __nextra_layout__
 
 ${result}
+${
+  // `getStaticProps` from the MDX page take priority over `getStaticProps` from the theme config
+  result.includes('getStaticProps')
+    ? ''
+    : 'export const getStaticProps = __nextra_themeConfigGetStaticProps'
+}
 
 __nextra_pageOpts__.title =
   ${JSON.stringify(frontMatter.title)} ||
