@@ -92,10 +92,14 @@ export async function compileMdx(
     ]
   })
   try {
-    const vFile = await compiler.process({
-      value: source,
-      path: filePath
-    })
+    const vFile = await compiler.process(
+      filePath
+        ? {
+            value: source,
+            path: filePath
+          }
+        : source
+    )
     const result = String(vFile)
       .replace('export const __nextra_title__', 'const __nextra_title__')
       .replace('export default MDXContent;', '')
