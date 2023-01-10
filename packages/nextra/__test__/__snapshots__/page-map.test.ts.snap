@@ -85,6 +85,7 @@ exports[`Page Process > pageMap en-US 1`] = `
           "title": "Nextra ↗",
           "type": "page",
         },
+        "test": "Test",
       },
       "kind": "Meta",
       "locale": "en-US",
@@ -610,6 +611,17 @@ exports[`Page Process > pageMap en-US 1`] = `
       "route": "/",
     },
     {
+      "frontMatter": {
+        "mdxOptions": {
+          "format": "md",
+        },
+      },
+      "kind": "MdxPage",
+      "locale": "en-US",
+      "name": "test",
+      "route": "/test",
+    },
+    {
       "data": {
         "404": "404",
         "500": "500",
@@ -1125,6 +1137,17 @@ exports[`Page Process > pageMap zh-CN 1`] = `
       "locale": "en-US",
       "name": "blog",
       "route": "/blog",
+    },
+    {
+      "frontMatter": {
+        "mdxOptions": {
+          "format": "md",
+        },
+      },
+      "kind": "MdxPage",
+      "locale": "en-US",
+      "name": "test",
+      "route": "/test",
     },
   ],
   "/docs/data-fetching",
