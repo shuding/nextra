@@ -183,9 +183,13 @@ export class NextraPlugin {
           restoreCache(distDir)
         }
         const PAGES_DIR = findPagesDirectory()
-        const result = await collectFiles(PAGES_DIR)
-        pageMapCache.set(result)
-        callback()
+        try {
+          const result = await collectFiles(PAGES_DIR)
+          pageMapCache.set(result)
+          callback()
+        } catch (err) {
+          callback(err as Error)
+        }
       }
     )
   }
