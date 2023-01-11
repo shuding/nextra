@@ -130,10 +130,10 @@ const config: DocsThemeConfig = {
   footer: {
     text: () => {
       return (
-        <div className="flex w-full flex-col items-center sm:items-start">
+        <div className="nx-flex nx-w-full nx-flex-col nx-items-center sm:items-start">
           <div>
             <a
-              className="flex items-center gap-1 text-current"
+              className="nx-flex nx-items-center nx-text-current nx-gap-1"
               target="_blank"
               rel="noopener noreferrer"
               title="vercel.com homepage"
@@ -149,7 +149,7 @@ const config: DocsThemeConfig = {
               </svg>
             </a>
           </div>
-          <p className="mt-6 text-xs">© 2023 The Nextra Project.</p>
+          <p className="nx-mt-6 nx-text-xs">© 2023 The Nextra Project.</p>
         </div>
       )
     }
