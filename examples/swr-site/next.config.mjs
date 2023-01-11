@@ -8,6 +8,19 @@ const withNextra = nextra({
   },
   staticImage: true,
   defaultShowCopyCode: true,
+  transform: (content, { route }) => {
+    if (route !== '/docs/advanced/more/tree/one.en-US') {
+      return content + `
+export function getStaticProps() {
+  return {
+    props: {
+      foo: 'from nextra config'
+    }
+  }
+}`
+    }
+    return content
+  }
 });
 
 export default withNextra({

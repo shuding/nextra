@@ -90,6 +90,12 @@ export type ReadingTime = {
 
 type Theme = string
 type Flexsearch = boolean | { codeblocks: boolean }
+type Transform = (
+  result: string,
+  options: {
+    route: string
+  }
+) => string | Promise<string>
 
 export type NextraConfig = {
   theme: Theme
@@ -99,6 +105,7 @@ export type NextraConfig = {
   staticImage?: boolean
   readingTime?: boolean
   latex?: boolean
+  transform?: Transform
   mdxOptions?: Pick<ProcessorOptions, 'rehypePlugins' | 'remarkPlugins'> & {
     rehypePrettyCodeOptions?: Partial<RehypePrettyCodeOptions>
   }
@@ -114,6 +121,7 @@ export default nextra
 
 export type NextraThemeLayoutProps = {
   pageOpts: PageOpts
+  pageProps: any
   themeConfig: any | null
   children: React.ReactNode
 }

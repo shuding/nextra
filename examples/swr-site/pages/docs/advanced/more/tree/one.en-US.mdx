@@ -9,6 +9,10 @@ export function getStaticProps() {
 }
 
 export default function(props) {
-  console.log({ props })
-  return props.children
+  return <>
+    {props.children}
+    <div>
+      foo = {props.foo}
+    </div>
+  </>
 }
