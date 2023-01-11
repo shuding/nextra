@@ -65,7 +65,10 @@ const nextra = (...config) =>
       ],
       webpack(config, options) {
         config.plugins ||= []
-        config.plugins.push(nextraPlugin)
+
+        if (options.nextRuntime !== 'edge' && options.isServer) {
+          config.plugins.push(nextraPlugin)
+        }
 
         const nextraLoaderOptions = {
           ...nextraConfig,

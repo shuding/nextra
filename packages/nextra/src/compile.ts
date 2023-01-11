@@ -52,6 +52,8 @@ const rehypePrettyCodeOptions = {
   filterMetaString: (meta: string) => meta.replace(/filename="[^"]*"/, '')
 }
 
+let cachedCompiler: Processor
+
 export async function compileMdx(
   source: string,
   loaderOptions: Pick<
@@ -61,11 +63,13 @@ export async function compileMdx(
     | 'defaultShowCopyCode'
     | 'readingTime'
     | 'latex'
+    | 'codeHighlight'
   > & {
     mdxOptions?: LoaderOptions['mdxOptions'] &
       Pick<ProcessorOptions, 'jsx' | 'outputFormat' | 'format'>
   } = {},
-  filePath = ''
+  filePath = '',
+  useCachedCompiler = false
 ) {
   // Extract frontMatter information if it exists
   const { data: frontMatter, content } = grayMatter(source)
@@ -80,34 +84,44 @@ export async function compileMdx(
     ...frontMatter.mdxOptions
   }
 
-  const compiler = createCompiler({
-    jsx: mdxOptions.jsx || false,
-    outputFormat: mdxOptions.outputFormat || 'function-body',
-    providerImportSource: 'nextra/mdx',
-    format: mdxOptions.format || 'mdx',
-    // https://github.com/hashicorp/next-mdx-remote/issues/307#issuecomment-1363415249
-    development: false,
-    remarkPlugins: [
-      ...(mdxOptions.remarkPlugins || []),
-      remarkGfm,
-      remarkHeadings,
-      loaderOptions.staticImage && ([remarkStaticImage, { filePath }] as any),
-      loaderOptions.flexsearch &&
-        structurize(structurizedData, loaderOptions.flexsearch),
-      loaderOptions.readingTime && readingTime,
-      loaderOptions.latex && remarkMath
-    ].filter(truthy),
-    rehypePlugins: [
-      ...(mdxOptions.rehypePlugins || []),
-      parseMeta,
-      [
-        rehypePrettyCode,
-        { ...rehypePrettyCodeOptions, ...mdxOptions.rehypePrettyCodeOptions }
-      ],
-      [attachMeta, { defaultShowCopyCode: loaderOptions.defaultShowCopyCode }],
-      ...(loaderOptions.latex ? [rehypeKatex] : [])
-    ]
-  })
+  const compiler =
+    (useCachedCompiler && cachedCompiler) ||
+    (cachedCompiler = createCompiler({
+      jsx: mdxOptions.jsx || false,
+      outputFormat: mdxOptions.outputFormat || 'function-body',
+      providerImportSource: 'nextra/mdx',
+      format: mdxOptions.format || 'mdx',
+      // https://github.com/hashicorp/next-mdx-remote/issues/307#issuecomment-1363415249
+      development: false,
+      remarkPlugins: [
+        ...(mdxOptions.remarkPlugins || []),
+        remarkGfm,
+        remarkHeadings,
+        loaderOptions.staticImage && ([remarkStaticImage, { filePath }] as any),
+        loaderOptions.flexsearch &&
+          structurize(structurizedData, loaderOptions.flexsearch),
+        loaderOptions.readingTime && readingTime,
+        loaderOptions.latex && remarkMath
+      ].filter(truthy),
+      rehypePlugins: [
+        ...(mdxOptions.rehypePlugins || []),
+        parseMeta,
+        loaderOptions.codeHighlight &&
+          ([
+            rehypePrettyCode,
+            {
+              ...rehypePrettyCodeOptions,
+              ...mdxOptions.rehypePrettyCodeOptions
+            }
+          ] as any),
+        [
+          attachMeta,
+          { defaultShowCopyCode: loaderOptions.defaultShowCopyCode }
+        ],
+        loaderOptions.latex && rehypeKatex
+      ].filter(truthy)
+    }))
+
   try {
     const vFile = await compiler.process(
       filePath
