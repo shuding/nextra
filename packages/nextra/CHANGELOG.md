@@ -1,5 +1,16 @@
 # nextra
 
+## 2.2.0
+
+### Minor Changes
+
+- e4b20ca: support `transform` in nextra config
+
+### Patch Changes
+
+- 52a1bf3: feat: allow to use plain md syntax
+- af76dbe: fix highlight substring from filename for code blocks
+
 ## 2.1.0
 
 ### Minor Changes
