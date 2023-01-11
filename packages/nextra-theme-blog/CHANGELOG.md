@@ -1,5 +1,15 @@
 # nextra-theme-blog
 
+## 2.2.0
+
+### Minor Changes
+
+- e4b20ca: support `transform` in nextra config
+
+### Patch Changes
+
+- af76dbe: fix highlight substring from filename for code blocks
+
 ## 2.1.0
 
 ### Minor Changes
