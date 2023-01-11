@@ -1,9 +1,9 @@
 import type { LoaderOptions, MdxPath, PageOpts } from './types'
+import type { LoaderContext } from 'webpack'
 
 import path from 'node:path'
 import grayMatter from 'gray-matter'
 import slash from 'slash'
-import { LoaderContext } from 'webpack'
 
 import { addPage } from './content-dump'
 import { parseFileName } from './utils'
@@ -94,7 +94,8 @@ async function loader(
     mdxOptions,
     pageMapCache,
     newNextLinkBehavior,
-    distDir
+    distDir,
+    transform
   } = context.getOptions()
 
   context.cacheable(true)
@@ -133,6 +134,15 @@ async function loader(
   // Add the entire directory `pages` as the dependency,
   // so we can generate the correct page map.
   context.addContextDependency(PAGES_DIR)
+
+  // Add local theme as a dependency
+  if (theme.startsWith('.') || theme.startsWith('/')) {
+    context.addDependency(path.resolve(theme))
+  }
+  // Add theme config as a dependency
+  if (themeConfig) {
+    context.addDependency(path.resolve(themeConfig))
+  }
 
   // Extract frontMatter information if it exists
   const { data: frontMatter, content } = grayMatter(source)
@@ -240,6 +250,13 @@ export default MDXContent`
   const stringifiedPageOpts = JSON.stringify(pageOpts)
   const pageOptsChecksum = IS_PRODUCTION ? '' : hashFnv32a(stringifiedPageOpts)
 
+  let finalResult = result
+  if (transform) {
+    finalResult = await transform(finalResult, {
+      route: pageNextRoute
+    })
+  }
+
   return `${themeConfigImport}
 ${katexCssImport}
 ${cssImport}
@@ -258,7 +275,7 @@ __nextra_internal__.context ||= Object.create(null)
 __nextra_internal__.refreshListeners ||= Object.create(null)
 __nextra_internal__.Layout = __nextra_layout__
 
-${result}
+${finalResult}
 
 __nextra_pageOpts__.title =
   ${JSON.stringify(frontMatter.title)} ||

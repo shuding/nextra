@@ -9,7 +9,7 @@ export default function Nextra(props: any): ReactElement {
 
   return createElement(
     Layout,
-    restContext,
+    { ...restContext, pageProps: props },
     createElement(
       SSGContext.Provider,
       { value: props },

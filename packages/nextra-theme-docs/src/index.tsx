@@ -7,6 +7,7 @@ import 'focus-visible'
 import cn from 'clsx'
 import { MDXProvider } from '@mdx-js/react'
 import { useMounted } from 'nextra/hooks'
+import { useData } from 'nextra/data'
 
 import './polyfill'
 import {
