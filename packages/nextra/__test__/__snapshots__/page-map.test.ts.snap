@@ -629,13 +629,6 @@ exports[`Page Process > pageMap en-US 1`] = `
     },
   ],
   "/docs/data-fetching",
-  [
-    {
-      "metaFilePath": "/Users/shu/Documents/git/nextra/examples/swr-site/pages/remote/_meta.en-US.js",
-      "metaObjectKeyPath": "[9].children[0]",
-      "metaParentKeyPath": "[9].children",
-    },
-  ],
 ]
 `;
 
@@ -1118,6 +1111,5 @@ exports[`Page Process > pageMap zh-CN 1`] = `
     },
   ],
   "/docs/data-fetching",
-  [],
 ]
 `;

@@ -26,11 +26,7 @@ describe('Page Process', () => {
       fileMap,
       defaultLocale
     })
-    expect([
-      indexData.pageMap,
-      indexData.route,
-      indexData.dynamicMetaItems
-    ]).toMatchSnapshot()
+    expect([indexData.pageMap, indexData.route]).toMatchSnapshot()
 
     const gettingStartData = resolvePageMap({
       filePath: filePath('docs/getting-started.en-US.mdx'),
@@ -48,11 +44,7 @@ describe('Page Process', () => {
       fileMap,
       defaultLocale
     })
-    expect([
-      indexData.pageMap,
-      indexData.route,
-      indexData.dynamicMetaItems
-    ]).toMatchSnapshot()
+    expect([indexData.pageMap, indexData.route]).toMatchSnapshot()
 
     const gettingStartData = resolvePageMap({
       filePath: filePath('docs/getting-started.zh-CN.mdx'),
