@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 module.exports = async () => {
   const res = await fetch(
     "https://api.github.com/gists/c204a2da82cd3ed8e676f35c493ab59f/comments",
@@ -20,7 +22,3 @@ module.exports = async () => {
     ])
   );
 };
-
-// module.exports = {
-//   foo: "This is a dynamic title",
-// };
