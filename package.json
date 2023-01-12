@@ -4,7 +4,7 @@
     "dev": "turbo run dev",
     "build": "turbo run build:tailwind build --filter=./packages/\\*",
     "types:check": "turbo run types:check",
-    "lint": "eslint --ignore-path .gitignore --ext js,jsx,mjs,cjs,ts,tsx,mts,cts .",
+    "lint": "eslint --cache --ignore-path .gitignore .",
     "dev:core": "turbo run dev --filter=nextra... --filter=!docs",
     "dev:theme-blog": "turbo run dev --filter=blog... --filter=!docs",
     "dev:theme-docs": "turbo run dev --filter=swr-site... --filter=!docs",
@@ -19,23 +19,21 @@
     "format": "turbo run format"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.24.2",
+    "@changesets/cli": "2.26.0",
     "@edge-runtime/vm": "2.0.2",
-    "@typescript-eslint/parser": "^5.32.0",
-    "eslint": "^8.21.0",
-    "eslint-plugin-tailwindcss": "^3.7.1",
-    "eslint-plugin-typescript-sort-keys": "^2.1.0",
-    "prettier": "^2.7.1",
-    "prettier-plugin-tailwindcss": "^0.2.0",
-    "rimraf": "^3.0.2",
-    "tsup": "^6.2.3",
-    "turbo": "^1.4.2",
-    "typescript": "^4.7.4"
+    "@typescript-eslint/eslint-plugin": "5.48.1",
+    "@typescript-eslint/parser": "5.48.1",
+    "eslint": "8.31.0",
+    "eslint-plugin-tailwindcss": "3.8.0",
+    "eslint-plugin-typescript-sort-keys": "2.1.0",
+    "prettier": "2.8.2",
+    "prettier-plugin-tailwindcss": "0.2.1",
+    "rimraf": "3.0.2",
+    "tsup": "6.5.0",
+    "turbo": "1.7.0",
+    "typescript": "4.9.4"
   },
-  "packageManager": "pnpm@7.22.0",
-  "workspaces": [
-    "packages/*"
-  ],
+  "packageManager": "pnpm@7.24.3",
   "pnpm": {
     "overrides": {
       "vitest": "^0.21.0",
@@ -48,12 +46,11 @@
       "@types/react-dom": "^18.0.6",
       "postcss": "^8.4.14",
       "postcss-cli": "^8.3.1",
-      "autoprefixer": "^10.4.8",
-      "cssnano": "^5.1.12",
+      "autoprefixer": "^10.4.13",
       "tailwindcss": "^3.1.8",
       "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
-      "@tailwindcss/typography": "^0.5.4",
-      "tsup": "^6.2.1",
+      "@tailwindcss/typography": "^0.5.8",
+      "tsup": "^6.5.0",
       "concurrently": "^7.3.0",
       "postcss-import": "^14.1.0"
     }

@@ -1,6 +1,6 @@
 {
   "name": "nextra-theme-docs",
-  "version": "2.0.3",
+  "version": "2.2.0",
   "description": "A Nextra theme for documentation sites.",
   "repository": "https://github.com/shuding/nextra",
   "author": "Shu Ding <g@shud.in>",
@@ -30,9 +30,8 @@
   "scripts": {
     "dev": "concurrently \"pnpm dev:layout\" \"pnpm dev:tailwind\"",
     "build": "tsup",
-    "build:all": "pnpm build && pnpm build:tailwind && pnpm minify:css",
-    "build:tailwind": "NODE_ENV=production pnpm postcss css/styles.css -o style.css --verbose",
-    "minify:css": "lightningcss --minify --nesting --bundle --targets '>= 0.25%' style.css -o style.css",
+    "build:all": "pnpm build && pnpm build:tailwind",
+    "build:tailwind": "pnpm postcss css/styles.css -o style.css --verbose",
     "types": "tsup --dts-only",
     "types:check": "tsc --noEmit",
     "dev:layout": "tsup --watch",
@@ -43,7 +42,7 @@
     "format": "prettier --ignore-path ../../.gitignore --write --list-different ."
   },
   "dependencies": {
-    "@headlessui/react": "^1.6.6",
+    "@headlessui/react": "^1.7.7",
     "@popperjs/core": "^2.11.6",
     "clsx": "^1.2.1",
     "flexsearch": "^0.7.21",
@@ -54,7 +53,8 @@
     "match-sorter": "^6.3.1",
     "next-seo": "^5.5.0",
     "next-themes": "^0.2.1",
-    "scroll-into-view-if-needed": "^3.0.0"
+    "scroll-into-view-if-needed": "^3.0.0",
+    "zod": "^3.20.2"
   },
   "peerDependencies": {
     "next": ">=9.5.3",
@@ -63,23 +63,21 @@
   },
   "devDependencies": {
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
-    "@tailwindcss/typography": "^0.5.4",
     "@types/flexsearch": "^0.7.3",
     "@types/git-url-parse": "^9.0.1",
     "@types/github-slugger": "^1.3.0",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
-    "autoprefixer": "^10.4.8",
     "concurrently": "^7.3.0",
-    "lightningcss-cli": "^1.16.0",
     "next": "^13.1.1",
     "nextra": "workspace:*",
     "postcss": "^8.4.14",
     "postcss-cli": "^10.0.0",
     "postcss-import": "^15.0.0",
+    "postcss-lightningcss": "^0.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tailwindcss": "^3.1.8",
-    "vitest": "^0.26.0"
+    "vitest": "^0.27.0"
   }
 }

@@ -1,16 +1,153 @@
 /* eslint sort-keys: error */
-import React, { isValidElement } from 'react'
-import { DocsThemeConfig, PageTheme } from './types'
+import React, { isValidElement, FC, ReactNode } from 'react'
+import { PageTheme } from './types'
 import { useRouter } from 'next/router'
 import { Anchor, Flexsearch, Footer, Navbar, TOC } from './components'
 import { DiscordIcon, GitHubIcon } from 'nextra/icons'
 import { MatchSorterSearch } from './components/match-sorter-search'
 import { useConfig } from './contexts'
-import { getGitEditUrl, getGitIssueUrl } from './utils'
+import { getGitEditUrl, getGitIssueUrl, Item } from './utils'
+import { z } from 'zod'
+import { NavBarProps } from './components/navbar'
+import { TOCProps } from './components/toc'
+import { NextSeoProps } from 'next-seo'
 
 export const DEFAULT_LOCALE = 'en-US'
 
 export const IS_BROWSER = typeof window !== 'undefined'
+
+function isReactNode(value: unknown): boolean {
+  return isString(value) || isValidElement(value as any) || isFunction(value)
+}
+
+function isFunction(value: unknown): boolean {
+  return typeof value === 'function'
+}
+
+function isString(value: unknown): boolean {
+  return typeof value === 'string'
+}
+
+const i18nSchema = z.array(
+  z.object({
+    direction: z.enum(['ltr', 'rtl']).optional(),
+    locale: z.string(),
+    text: z.string()
+  })
+)
+
+const reactNode = [
+  isReactNode,
+  { message: 'Must be React.ReactNode or React.FC' }
+] as const
+const fc = [isFunction, { message: 'Must be React.FC' }] as const
+
+export const themeSchema = z
+  .object({
+    banner: z.object({
+      dismissible: z.boolean(),
+      key: z.string(),
+      text: z.custom<ReactNode | FC>(...reactNode).optional()
+    }),
+    chat: z.object({
+      icon: z.custom<ReactNode | FC>(...reactNode),
+      link: z.string().startsWith('https://').optional()
+    }),
+    components: z.record(z.custom<FC>(...fc)).optional(),
+    darkMode: z.boolean(),
+    direction: z.enum(['ltr', 'rtl']),
+    docsRepositoryBase: z.string().startsWith('https://'),
+    editLink: z.object({
+      component: z.custom<
+        FC<{
+          children: ReactNode
+          className?: string
+          filePath?: string
+        }>
+      >(...fc),
+      text: z.custom<ReactNode | FC>(...reactNode)
+    }),
+    faviconGlyph: z.string().optional(),
+    feedback: z.object({
+      content: z.custom<ReactNode | FC>(...reactNode),
+      labels: z.string(),
+      useLink: z.function().returns(z.string())
+    }),
+    footer: z.object({
+      component: z.custom<ReactNode | FC<{ menu: boolean }>>(...reactNode),
+      text: z.custom<ReactNode | FC>(...reactNode)
+    }),
+    gitTimestamp: z.custom<ReactNode | FC<{ timestamp: Date }>>(...reactNode),
+    head: z.custom<ReactNode | FC>(...reactNode),
+    i18n: i18nSchema,
+    logo: z.custom<ReactNode | FC>(...reactNode),
+    logoLink: z.boolean().or(z.string()),
+    main: z.custom<FC<{ children: ReactNode }>>(...fc).optional(),
+    navbar: z.object({
+      component: z.custom<ReactNode | FC<NavBarProps>>(...reactNode),
+      extraContent: z.custom<ReactNode | FC>(...reactNode).optional()
+    }),
+    navigation: z.boolean().or(
+      z.object({
+        next: z.boolean(),
+        prev: z.boolean()
+      })
+    ),
+    nextThemes: z.object({
+      defaultTheme: z.string(),
+      forcedTheme: z.string().optional(),
+      storageKey: z.string()
+    }),
+    notFound: z.object({
+      content: z.custom<ReactNode | FC>(...reactNode),
+      labels: z.string()
+    }),
+    primaryHue: z.number().or(
+      z.object({
+        dark: z.number(),
+        light: z.number()
+      })
+    ),
+    project: z.object({
+      icon: z.custom<ReactNode | FC>(...reactNode),
+      link: z.string().startsWith('https://').optional()
+    }),
+    search: z.object({
+      component: z.custom<
+        ReactNode | FC<{ className?: string; directories: Item[] }>
+      >(...reactNode),
+      emptyResult: z.custom<ReactNode | FC>(...reactNode),
+      loading: z.string().or(z.function().returns(z.string())),
+      // Can't be React component
+      placeholder: z.string().or(z.function().returns(z.string()))
+    }),
+    serverSideError: z.object({
+      content: z.custom<ReactNode | FC>(...reactNode),
+      labels: z.string()
+    }),
+    sidebar: z.object({
+      defaultMenuCollapseLevel: z.number().min(2).int(),
+      titleComponent: z.custom<ReactNode | FC<{ title: string; type: string }>>(
+        ...reactNode
+      )
+    }),
+    toc: z.object({
+      component: z.custom<ReactNode | FC<TOCProps>>(...reactNode),
+      extraContent: z.custom<ReactNode | FC>(...reactNode),
+      float: z.boolean(),
+      title: z.custom<ReactNode | FC>(...reactNode)
+    }),
+    useNextSeoProps: z.custom<() => NextSeoProps>(isFunction)
+  })
+  .strict()
+
+const publicThemeSchema = themeSchema.deepPartial().extend({
+  // to have `locale` and `text` as required properties
+  i18n: i18nSchema
+})
+
+export type DocsThemeConfig = z.infer<typeof themeSchema>
+export type PartialDocsThemeConfig = z.infer<typeof publicThemeSchema>
 
 export const DEFAULT_THEME: DocsThemeConfig = {
   banner: {
@@ -50,9 +187,9 @@ export const DEFAULT_THEME: DocsThemeConfig = {
       return getGitIssueUrl({
         labels: config.feedback.labels,
         repository: config.docsRepositoryBase,
-        title: `Feedback for “${config.title}”`,
+        title: `Feedback for “${config.title}”`
       })
-    },
+    }
   },
   footer: {
     component: Footer,
@@ -175,35 +312,7 @@ export const DEEP_OBJECT_KEYS = Object.entries(DEFAULT_THEME)
       return key
     }
   })
-  .filter(Boolean) as (keyof DocsThemeConfig)[]
-
-export const LEGACY_CONFIG_OPTIONS: Record<string, string> = {
-  bannerKey: 'banner.key',
-  bodyExtraContent: 'main',
-  customSearch: 'search.component',
-  defaultMenuCollapsed: 'sidebar.defaultMenuCollapseLevel',
-  feedbackLabels: 'feedback.labels',
-  feedbackLink: 'feedback.content',
-  floatTOC: 'toc.float',
-  footerEditLink: 'editLink.text',
-  footerText: 'footer.text',
-  github: 'project.link',
-  nextLinks: 'navigation.next',
-  notFoundLabels: 'notFound.labels',
-  notFoundLink: 'notFound.content',
-  prevLinks: 'navigation.prev',
-  projectChat: 'chat',
-  projectChatLink: 'chat.link',
-  projectChatLinkIcon: 'chat.icon',
-  projectLink: 'project.link',
-  projectLinkIcon: 'project.icon',
-  searchPlaceholder: 'search.placeholder',
-  serverSideErrorLabels: 'serverSideError.labels',
-  serverSideErrorLink: 'serverSideError.content',
-  sidebarSubtitle: 'sidebar.titleComponent',
-  tocExtraContent: 'toc.extraContent',
-  unstable_searchResultEmpty: 'search.emptyResult'
-}
+  .filter(Boolean)
 
 export const DEFAULT_PAGE_THEME: PageTheme = {
   breadcrumb: true,

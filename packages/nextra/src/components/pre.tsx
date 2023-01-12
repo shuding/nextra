@@ -74,7 +74,13 @@ export const Pre = ({
         >
           <WordWrapIcon className="nx-pointer-events-none nx-h-4 nx-w-4" />
         </Button>
-        {codeString && <CopyToClipboard value={codeString} />}
+        {codeString && (
+          <CopyToClipboard
+            getValue={() => {
+              return preRef.current?.querySelector('code')?.textContent || ''
+            }}
+          />
+        )}
       </div>
     </>
   )

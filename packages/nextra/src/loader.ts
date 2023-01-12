@@ -1,8 +1,8 @@
 import type { LoaderOptions, MdxPath, PageOpts } from './types'
+import type { LoaderContext } from 'webpack'
 
 import path from 'node:path'
 import slash from 'slash'
-import { LoaderContext } from 'webpack'
 
 import { addPage } from './content-dump'
 import { pageTitleFromFilename, parseFileName } from './utils'
@@ -95,7 +95,8 @@ async function loader(
     mdxOptions,
     pageMapCache,
     newNextLinkBehavior,
-    distDir
+    distDir,
+    transform
   } = context.getOptions()
 
   context.cacheable(true)
@@ -140,6 +141,15 @@ async function loader(
   // so we can generate the correct page map.
   context.addContextDependency(PAGES_DIR)
 
+  // Add local theme as a dependency
+  if (theme.startsWith('.') || theme.startsWith('/')) {
+    context.addDependency(path.resolve(theme))
+  }
+  // Add theme config as a dependency
+  if (themeConfig) {
+    context.addDependency(path.resolve(themeConfig))
+  }
+
   const {
     result,
     headings,
@@ -165,12 +175,12 @@ async function loader(
     mdxPath
   )
 
-  const katexCss = latex ? "import 'katex/dist/katex.min.css'\n" : ''
-
-  const cssImport =
-    katexCss +
-    // @ts-expect-error
-    (OFFICIAL_THEMES.includes(theme) ? `import '${theme}/style.css'` : '')
+  const katexCssImport = latex ? "import 'katex/dist/katex.min.css'" : ''
+  const cssImport = OFFICIAL_THEMES.includes(
+    theme as typeof OFFICIAL_THEMES[number]
+  )
+    ? `import '${theme}/style.css'`
+    : ''
 
   // Imported as a normal component, no need to add the layout.
   if (!pageImport) {
@@ -308,10 +318,18 @@ export default MDXContent`
 
   const stringifiedPageNextRoute = JSON.stringify(pageNextRoute)
   const stringifiedPageOpts = JSON.stringify(pageOpts)
-  const pageOptsChecksum = !IS_PRODUCTION && hashFnv32a(stringifiedPageOpts)
+  const pageOptsChecksum = IS_PRODUCTION ? '' : hashFnv32a(stringifiedPageOpts)
+
+  let finalResult = result
+  if (transform) {
+    finalResult = await transform(finalResult, {
+      route: pageNextRoute
+    })
+  }
 
   return `import __nextra_layout__ from '${layout}'
 ${themeConfigImport}
+${katexCssImport}
 ${cssImport}
 ${dynamicMetaResolver}
 
@@ -328,7 +346,7 @@ __nextra_internal__.context ||= Object.create(null)
 __nextra_internal__.refreshListeners ||= Object.create(null)
 __nextra_internal__.Layout = __nextra_layout__
 
-${result}
+${finalResult}
 
 __nextra_pageOpts__.title =
   ${JSON.stringify(frontMatter.title)} ||

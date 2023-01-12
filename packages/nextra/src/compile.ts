@@ -46,7 +46,8 @@ const rehypePrettyCodeOptions = {
   },
   onVisitHighlightedWord(node: any) {
     node.properties.className = ['highlighted']
-  }
+  },
+  filterMetaString: (meta: string) => meta.replace(/filename="[^"]*"/, '')
 }
 
 export async function compileMdx(
@@ -60,7 +61,7 @@ export async function compileMdx(
     | 'latex'
   > & {
     mdxOptions?: LoaderOptions['mdxOptions'] &
-      Pick<ProcessorOptions, 'jsx' | 'outputFormat'>
+      Pick<ProcessorOptions, 'jsx' | 'outputFormat' | 'format'>
   } = {},
   filePath = ''
 ) {
@@ -71,12 +72,17 @@ export async function compileMdx(
 
   const structurizedData = Object.create(null)
 
-  const mdxOptions = loaderOptions.mdxOptions || {}
+  const mdxOptions = {
+    ...(loaderOptions.mdxOptions || {}),
+    // You can override MDX options in the frontMatter too.
+    ...frontMatter.mdxOptions
+  }
 
   const compiler = createCompiler({
     jsx: mdxOptions.jsx || false,
     outputFormat: mdxOptions.outputFormat || 'function-body',
     providerImportSource: 'nextra/mdx',
+    format: mdxOptions.format || 'mdx',
     // https://github.com/hashicorp/next-mdx-remote/issues/307#issuecomment-1363415249
     development: false,
     remarkPlugins: [
@@ -101,8 +107,14 @@ export async function compileMdx(
     ]
   })
   try {
-    const vFile = await compiler.process(source)
-
+    const vFile = await compiler.process(
+      filePath
+        ? {
+            value: source,
+            path: filePath
+          }
+        : source
+    )
     let result = String(vFile).replace('export default MDXContent;', '')
 
     const headingMeta = compiler.data('headingMeta') as Pick<
@@ -116,6 +128,7 @@ export async function compileMdx(
     }
 
     const readingTime = vFile.data.readingTime as ReadingTime | undefined
+
     return {
       result,
       ...headingMeta,

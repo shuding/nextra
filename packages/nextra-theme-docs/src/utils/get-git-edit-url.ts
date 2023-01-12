@@ -1,7 +1,7 @@
 import { useConfig } from '../contexts'
 import gitUrlParse from 'git-url-parse'
 
-export const getGitEditUrl = (filePath?: string): string => {
+export const getGitEditUrl = (filePath = ''): string => {
   const config = useConfig()
   const repo = gitUrlParse(config.docsRepositoryBase || '')
 

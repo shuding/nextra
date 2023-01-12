@@ -39,7 +39,7 @@ const createHeaderLink =
         {children}
         <span className="nx-absolute -nx-mt-7" id={id} />
         <a
-          href={`#${id}`}
+          href={id && `#${id}`}
           className="subheading-anchor"
           aria-label="Permalink for this section"
         />
@@ -66,26 +66,30 @@ const A = ({ children, ...props }: ComponentProps<'a'>) => {
   )
 }
 
-const components = {
-  h1: H1,
-  h2: createHeaderLink('h2'),
-  h3: createHeaderLink('h3'),
-  h4: createHeaderLink('h4'),
-  h5: createHeaderLink('h5'),
-  h6: createHeaderLink('h6'),
-  a: A,
-  pre: ({ children, ...props }: ComponentProps<'pre'>) => (
-    <div className="nx-not-prose">
-      <Pre {...props}>{children}</Pre>
-    </div>
-  ),
-  tr: Tr,
-  th: Th,
-  td: Td,
-  table: (props: ComponentProps<'table'>) => (
-    <Table className="nx-not-prose" {...props} />
-  ),
-  code: Code
+const getComponents = () => {
+  const { config } = useBlogContext();
+  return {
+    h1: H1,
+    h2: createHeaderLink('h2'),
+    h3: createHeaderLink('h3'),
+    h4: createHeaderLink('h4'),
+    h5: createHeaderLink('h5'),
+    h6: createHeaderLink('h6'),
+    a: A,
+    pre: ({ children, ...props }: ComponentProps<'pre'>) => (
+      <div className="nx-not-prose">
+        <Pre {...props}>{children}</Pre>
+      </div>
+    ),
+    tr: Tr,
+    th: Th,
+    td: Td,
+    table: (props: ComponentProps<'table'>) => (
+      <Table className="nx-not-prose" {...props} />
+    ),
+    code: Code,
+    ...config.components,
+  }
 }
 
 export const MDXTheme = ({
@@ -93,5 +97,5 @@ export const MDXTheme = ({
 }: {
   children: ReactNode
 }): ReactElement => {
-  return <MDXProvider components={components}>{children}</MDXProvider>
+  return <MDXProvider components={getComponents()}>{children}</MDXProvider>
 }

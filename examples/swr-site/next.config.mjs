@@ -1,4 +1,6 @@
-const withNextra = require("nextra")({
+import nextra from "nextra";
+
+const withNextra = nextra({
   theme: "nextra-theme-docs",
   themeConfig: "./theme.config.tsx",
   flexsearch: {
@@ -6,9 +8,22 @@ const withNextra = require("nextra")({
   },
   staticImage: true,
   defaultShowCopyCode: true,
+  transform: (content, { route }) => {
+    if (route.startsWith('/docs/advanced/more/tree/two')) {
+      return content + `
+export function getStaticProps() {
+  return {
+    props: {
+      foo: 'from nextra config'
+    }
+  }
+}`
+    }
+    return content
+  }
 });
 
-module.exports = withNextra({
+export default withNextra({
   i18n: {
     locales: ["en-US", "es-ES", "ja", "ko", "ru", "zh-CN"],
     defaultLocale: "en-US",

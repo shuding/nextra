@@ -1,3 +1,4 @@
+/* eslint-env node */
 import { NextraPlugin, pageMapCache } from './plugin'
 import {
   DEFAULT_LOCALE,

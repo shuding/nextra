@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 export const draw = (paths = {}, name = "") => {
   const { locale, defaultLocale } = useRouter();
 
-  if (!paths.hasOwnProperty(defaultLocale)) {
+  if (!Object.hasOwn(paths, defaultLocale)) {
     throw new Error(
       `Please provide '${defaultLocale}' locale inside '${paths}'.`
     );

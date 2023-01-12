@@ -60,7 +60,7 @@ export function Select({
           {selected.name}
           <Portal>
             <Transition
-              // @ts-ignore
+              // @ts-expect-error TODO: fix Property 'ref' does not exist on type
               ref={container}
               show={open}
               as={Listbox.Options}

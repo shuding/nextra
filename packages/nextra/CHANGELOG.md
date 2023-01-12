@@ -1,5 +1,31 @@
 # nextra
 
+## 2.2.0
+
+### Minor Changes
+
+- e4b20ca: support `transform` in nextra config
+
+### Patch Changes
+
+- 52a1bf3: feat: allow to use plain md syntax
+- af76dbe: fix highlight substring from filename for code blocks
+
+## 2.1.0
+
+### Minor Changes
+
+- e5262d0: improve hmr and internal api for layout (toc and meta files)
+
+### Patch Changes
+
+- a923bd5: fix `collectFiles` concurrency
+- 5bdc62c: fix static images on windows
+- c86508c: lint fixes for `eslint:recommended` and `plugin:@typescript-eslint/recommended` configs
+- d6c871a: simplify the custom theme layout api
+- 1ff43c1: use OKLCH colors where possible
+- a31678a: improve copy
+
 ## 2.0.3
 
 ### Patch Changes

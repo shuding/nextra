@@ -1,31 +1,17 @@
 import { useRouter } from 'next/router.js'
 import { useEffect, useState } from 'react'
 
-import { PageMapItem, PageOpts } from './types'
-import { IS_PRODUCTION } from './constants'
-
-const NEXTRA_INTERNAL = Symbol.for('__nextra_internal__')
+import { IS_PRODUCTION, NEXTRA_INTERNAL } from './constants'
+import { NextraInternalGlobal } from './types'
 
 /**
  * This hook is used to access the internal state of Nextra, you should never
  * use this hook in your application.
  */
 export function useInternals() {
-  const __nextra_internal__ = (globalThis as any)[NEXTRA_INTERNAL] as {
-    pageMap: PageMapItem[]
-    route: string
-    context: Record<
-      string,
-      {
-        Content: React.FC
-        pageOpts: PageOpts
-        themeConfig: any | null
-      }
-    >
-    refreshListeners: Record<string, (() => void)[]>
-    Layout: React.FC<any>
-  }
-
+  const __nextra_internal__ = (globalThis as NextraInternalGlobal)[
+    NEXTRA_INTERNAL
+  ]
   const { route } = useRouter()
 
   if (!IS_PRODUCTION) {

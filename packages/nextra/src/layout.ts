@@ -1,4 +1,4 @@
-import React from 'react'
+import { ReactElement, createElement } from 'react'
 
 import { SSGContext } from './ssg'
 import { useInternals } from './use-internals'
@@ -7,7 +7,7 @@ export default function Nextra({
   __nextra_pageMap,
   __nextra_dynamic_opts,
   ...props
-}: any): React.ReactElement {
+}: any): ReactElement {
   const { context, Layout } = useInternals()
   const { Content, ...restContext } = context
 
@@ -28,15 +28,13 @@ export default function Nextra({
     }
   }
 
-  return React.createElement(
+  return createElement(
     Layout,
-    restContext,
-    React.createElement(
+    { ...restContext, pageProps: props },
+    createElement(
       SSGContext.Provider,
-      {
-        value: props
-      },
-      React.createElement(Content, props)
+      { value: props },
+      createElement(Content, props)
     )
   )
 }

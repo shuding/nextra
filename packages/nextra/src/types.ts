@@ -4,7 +4,11 @@ import { ProcessorOptions } from '@mdx-js/mdx'
 import { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
 import { GrayMatterFile } from 'gray-matter'
 import { PageMapCache } from './plugin'
-import { MARKDOWN_EXTENSIONS, META_FILENAME } from './constants'
+import {
+  MARKDOWN_EXTENSIONS,
+  META_FILENAME,
+  NEXTRA_INTERNAL
+} from './constants'
 
 type MetaFilename = typeof META_FILENAME
 type MarkdownExtension = typeof MARKDOWN_EXTENSIONS[number]
@@ -89,6 +93,12 @@ export type ReadingTime = {
 
 type Theme = string
 type Flexsearch = boolean | { codeblocks: boolean }
+type Transform = (
+  result: string,
+  options: {
+    route: string
+  }
+) => string | Promise<string>
 
 export type NextraConfig = {
   theme: Theme
@@ -98,6 +108,7 @@ export type NextraConfig = {
   staticImage?: boolean
   readingTime?: boolean
   latex?: boolean
+  transform?: Transform
   mdxOptions?: Pick<ProcessorOptions, 'rehypePlugins' | 'remarkPlugins'> & {
     rehypePrettyCodeOptions?: Partial<RehypePrettyCodeOptions>
   }
@@ -113,6 +124,24 @@ export default nextra
 
 export type NextraThemeLayoutProps = {
   pageOpts: PageOpts
+  pageProps: any
   themeConfig: any | null
   children: React.ReactNode
+}
+
+export type NextraInternalGlobal = typeof globalThis & {
+  [NEXTRA_INTERNAL]: {
+    pageMap: PageMapItem[]
+    route: string
+    context: Record<
+      string,
+      {
+        Content: React.FC
+        pageOpts: PageOpts
+        themeConfig: any | null
+      }
+    >
+    refreshListeners: Record<string, (() => void)[]>
+    Layout: React.FC<any>
+  }
 }

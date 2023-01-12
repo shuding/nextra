@@ -25,5 +25,6 @@
     "nextra-theme-docs": {
       "injected": true
     }
-  }
+  },
+  "version": null
 }

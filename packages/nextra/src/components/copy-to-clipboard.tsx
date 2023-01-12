@@ -9,10 +9,10 @@ import { CheckIcon, CopyIcon } from '../icons'
 import { Button } from './button'
 
 export const CopyToClipboard = ({
-  value,
+  getValue,
   ...props
 }: {
-  value: string
+  getValue: () => string
 } & ComponentProps<'button'>): ReactElement => {
   const [isCopied, setCopied] = useState(false)
 
@@ -35,11 +35,11 @@ export const CopyToClipboard = ({
       console.error('Access to clipboard rejected!')
     }
     try {
-      await navigator.clipboard.writeText(value)
+      await navigator.clipboard.writeText(getValue())
     } catch {
       console.error('Failed to copy!')
     }
-  }, [value])
+  }, [getValue])
 
   const IconToUse = isCopied ? CheckIcon : CopyIcon
 

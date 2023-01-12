@@ -11,9 +11,8 @@ import React, {
 import 'intersection-observer'
 import { useSetActiveAnchor, DetailsProvider, useDetails } from './contexts'
 import { Collapse, Anchor } from './components'
-import { IS_BROWSER } from './constants'
+import { IS_BROWSER, DocsThemeConfig } from './constants'
 import cn from 'clsx'
-import { DocsThemeConfig } from './types'
 import { Code, Pre, Table, Td, Th, Tr } from 'nextra/components'
 
 let observer: IntersectionObserver
@@ -44,7 +43,7 @@ if (IS_BROWSER) {
         let activeSlug = ''
         let smallestIndexInViewport = Infinity
         let largestIndexAboveViewport = -1
-        for (let s in ret) {
+        for (const s in ret) {
           ret[s].isActive = false
           if (
             ret[s].insideHalfViewport &&

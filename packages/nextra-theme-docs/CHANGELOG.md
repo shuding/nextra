@@ -1,5 +1,32 @@
 # nextra-theme-docs
 
+## 2.2.0
+
+### Minor Changes
+
+- e4b20ca: support `transform` in nextra config
+
+### Patch Changes
+
+- af76dbe: fix highlight substring from filename for code blocks
+
+## 2.1.0
+
+### Minor Changes
+
+- e5262d0: improve hmr and internal api for layout (toc and meta files)
+
+### Patch Changes
+
+- d6b0068: Always close mobile nav when route was changed (e.g. logo click)
+- 9df1d5d: fix `undefined: undefined` property in `useConfig()`
+- c86508c: lint fixes for `eslint:recommended` and `plugin:@typescript-eslint/recommended` configs
+- d6c871a: simplify the custom theme layout api
+- 1ff43c1: use OKLCH colors where possible
+- 0da1258: add new option `feedback.useLink`
+- a3f1a90: validate theme options with `zod`
+- a31678a: improve copy
+
 ## 2.0.3
 
 ### Patch Changes

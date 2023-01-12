@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires -- can't use import
 const colors = require('tailwindcss/colors')
 
 const makePrimaryColor =
@@ -9,6 +10,7 @@ const makePrimaryColor =
     return `hsl(var(--nextra-primary-hue) 100% ${l}% / ${opacityValue})`
   }
 
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   prefix: 'nx-',
   content: [
@@ -63,7 +65,6 @@ module.exports = {
         750: makePrimaryColor(35),
         800: makePrimaryColor(32),
         900: makePrimaryColor(24),
-        1000: makePrimaryColor(12)
       }
     },
     extend: {
