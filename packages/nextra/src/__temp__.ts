@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 // This file has to be targeted to CJS, to keep `require.resolve` untranspiled.
 // Otherwise the file tracing will not work.
 
