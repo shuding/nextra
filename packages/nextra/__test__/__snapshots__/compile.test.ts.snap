@@ -2,6 +2,7 @@
 
 exports[`process heading > code-h1 1`] = `
 {
+  "frontMatter": {},
   "headings": [
     {
       "depth": 1,
@@ -9,8 +10,7 @@ exports[`process heading > code-h1 1`] = `
     },
   ],
   "result": "/*@jsxRuntime automatic @jsxImportSource react*/
-import {useMDXComponents as _provideComponents} from \\"@mdx-js/react\\";
-const __nextra_title__ = \\"codegen.yml\\";
+import {useMDXComponents as _provideComponents} from \\"nextra/mdx\\";
 function _createMdxContent(props) {
   const _components = Object.assign({
     h1: \\"h1\\",
@@ -23,13 +23,16 @@ function MDXContent(props = {}) {
   return MDXLayout ? <MDXLayout {...props}><_createMdxContent {...props} /></MDXLayout> : _createMdxContent(props);
 }
 
-",
+
+const __nextra_title__ = \\"codegen.yml\\"",
   "structurizedData": {},
+  "title": "codegen.yml",
 }
 `;
 
 exports[`process heading > code-with-text-h1 1`] = `
 {
+  "frontMatter": {},
   "headings": [
     {
       "depth": 1,
@@ -37,8 +40,7 @@ exports[`process heading > code-with-text-h1 1`] = `
     },
   ],
   "result": "/*@jsxRuntime automatic @jsxImportSource react*/
-import {useMDXComponents as _provideComponents} from \\"@mdx-js/react\\";
-const __nextra_title__ = \\"codegen.yml file\\";
+import {useMDXComponents as _provideComponents} from \\"nextra/mdx\\";
 function _createMdxContent(props) {
   const _components = Object.assign({
     h1: \\"h1\\",
@@ -51,13 +53,16 @@ function MDXContent(props = {}) {
   return MDXLayout ? <MDXLayout {...props}><_createMdxContent {...props} /></MDXLayout> : _createMdxContent(props);
 }
 
-",
+
+const __nextra_title__ = \\"codegen.yml file\\"",
   "structurizedData": {},
+  "title": "codegen.yml file",
 }
 `;
 
 exports[`process heading > dynamic-h1 1`] = `
 {
+  "frontMatter": {},
   "hasJsxInH1": true,
   "headings": [
     {
@@ -66,8 +71,7 @@ exports[`process heading > dynamic-h1 1`] = `
     },
   ],
   "result": "/*@jsxRuntime automatic @jsxImportSource react*/
-import {useMDXComponents as _provideComponents} from \\"@mdx-js/react\\";
-const __nextra_title__ = \\"Posts Tagged with “”\\";
+import {useMDXComponents as _provideComponents} from \\"nextra/mdx\\";
 import {useRouter} from 'next/router';
 export const TagName = () => {
   const {tag} = useRouter().query;
@@ -84,13 +88,16 @@ function MDXContent(props = {}) {
   return MDXLayout ? <MDXLayout {...props}><_createMdxContent {...props} /></MDXLayout> : _createMdxContent(props);
 }
 
-",
+
+const __nextra_title__ = \\"Posts Tagged with “”\\"",
   "structurizedData": {},
+  "title": "Posts Tagged with “”",
 }
 `;
 
 exports[`process heading > no-h1 1`] = `
 {
+  "frontMatter": {},
   "headings": [
     {
       "depth": 2,
@@ -98,7 +105,7 @@ exports[`process heading > no-h1 1`] = `
     },
   ],
   "result": "/*@jsxRuntime automatic @jsxImportSource react*/
-import {useMDXComponents as _provideComponents} from \\"@mdx-js/react\\";
+import {useMDXComponents as _provideComponents} from \\"nextra/mdx\\";
 function _createMdxContent(props) {
   const _components = Object.assign({
     h2: \\"h2\\"
@@ -117,6 +124,7 @@ function MDXContent(props = {}) {
 
 exports[`process heading > static-h1 1`] = `
 {
+  "frontMatter": {},
   "headings": [
     {
       "depth": 1,
@@ -124,8 +132,7 @@ exports[`process heading > static-h1 1`] = `
     },
   ],
   "result": "/*@jsxRuntime automatic @jsxImportSource react*/
-import {useMDXComponents as _provideComponents} from \\"@mdx-js/react\\";
-const __nextra_title__ = \\"Hello World\\";
+import {useMDXComponents as _provideComponents} from \\"nextra/mdx\\";
 function _createMdxContent(props) {
   const _components = Object.assign({
     h1: \\"h1\\"
@@ -137,7 +144,9 @@ function MDXContent(props = {}) {
   return MDXLayout ? <MDXLayout {...props}><_createMdxContent {...props} /></MDXLayout> : _createMdxContent(props);
 }
 
-",
+
+const __nextra_title__ = \\"Hello World\\"",
   "structurizedData": {},
+  "title": "Hello World",
 }
 `;
