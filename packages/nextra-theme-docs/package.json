@@ -43,7 +43,6 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.7",
-    "@mdx-js/react": "^2.1.5",
     "@popperjs/core": "^2.11.6",
     "clsx": "^1.2.1",
     "flexsearch": "^0.7.21",

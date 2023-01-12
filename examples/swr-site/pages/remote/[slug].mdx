@@ -1,0 +1,45 @@
+import { buildDynamicMDX, buildDynamicMeta } from 'nextra/remote'
+import { RemoteContent } from 'nextra/data'
+
+export const getStaticProps = async ({ params }) => {
+  const res = await fetch(
+    'https://api.github.com/gists/c204a2da82cd3ed8e676f35c493ab59f/comments/' + params.slug,
+    {
+      headers: {
+        Accept: "application/vnd.github+json",
+        "X-GitHub-Api-Version": "2022-11-28",
+        ...(process.env.GITHUB_TEST_REMOTE_MDX ? { "Authorization": "Bearer " + process.env.GITHUB_TEST_REMOTE_MDX } : {})
+      },
+    }
+  );
+  const comment = await res.json();
+  return {
+    props: {
+      ...(await buildDynamicMDX(comment.body)),
+      ...(await buildDynamicMeta())
+    },
+    revalidate: 10,
+  }
+}
+
+export const getStaticPaths = async () => {
+  const res = await fetch(
+    "https://api.github.com/gists/c204a2da82cd3ed8e676f35c493ab59f/comments",
+    {
+      headers: {
+        Accept: "application/vnd.github+json",
+        "X-GitHub-Api-Version": "2022-11-28",
+        ...(process.env.GITHUB_TEST_REMOTE_MDX ? { "Authorization": "Bearer " + process.env.GITHUB_TEST_REMOTE_MDX } : {})
+      },
+    }
+  );
+  const comments = await res.json();
+  return {
+    paths: comments.map((comment) => ({
+      params: { slug: String(comment.id) },
+    })),
+    fallback: 'blocking'
+  }
+}
+
+<RemoteContent/>

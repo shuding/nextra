@@ -2,13 +2,12 @@ import type { LoaderOptions, MdxPath, PageOpts } from './types'
 import type { LoaderContext } from 'webpack'
 
 import path from 'node:path'
-import grayMatter from 'gray-matter'
 import slash from 'slash'
 
 import { addPage } from './content-dump'
-import { parseFileName } from './utils'
+import { pageTitleFromFilename, parseFileName } from './utils'
 import { compileMdx } from './compile'
-import { getPageMap } from './page-map'
+import { resolvePageMap } from './page-map'
 import { collectFiles, collectMdx } from './plugin'
 import {
   IS_PRODUCTION,
@@ -82,9 +81,11 @@ async function loader(
   source: string
 ): Promise<string> {
   const {
+    metaImport,
     pageImport,
     theme,
     themeConfig,
+    locales,
     defaultLocale,
     defaultShowCopyCode,
     flexsearch,
@@ -99,6 +100,11 @@ async function loader(
   } = context.getOptions()
 
   context.cacheable(true)
+
+  // _meta.js used as a page.
+  if (metaImport) {
+    return 'export default () => null'
+  }
 
   // Check if there's a theme provided
   if (!theme) {
@@ -116,7 +122,7 @@ async function loader(
 
   const { items, fileMap } = IS_PRODUCTION
     ? pageMapCache.get()!
-    : await collectFiles(PAGES_DIR)
+    : await collectFiles(PAGES_DIR, locales)
 
   // mdx is imported but is outside the `pages` directory
   if (!fileMap[mdxPath]) {
@@ -144,28 +150,30 @@ async function loader(
     context.addDependency(path.resolve(themeConfig))
   }
 
-  // Extract frontMatter information if it exists
-  const { data: frontMatter, content } = grayMatter(source)
-
-  const { result, headings, structurizedData, hasJsxInH1, readingTime } =
-    await compileMdx(
-      content,
-      {
-        mdxOptions: {
-          ...mdxOptions,
-          // You can override MDX options in the frontMatter too.
-          ...frontMatter.mdxOptions,
-          jsx: true,
-          outputFormat: 'program'
-        },
-        readingTime: _readingTime,
-        defaultShowCopyCode,
-        staticImage,
-        flexsearch,
-        latex
+  const {
+    result,
+    headings,
+    title,
+    frontMatter,
+    structurizedData,
+    hasJsxInH1,
+    readingTime
+  } = await compileMdx(
+    source,
+    {
+      mdxOptions: {
+        ...mdxOptions,
+        jsx: true,
+        outputFormat: 'program'
       },
-      mdxPath
-    )
+      readingTime: _readingTime,
+      defaultShowCopyCode,
+      staticImage,
+      flexsearch,
+      latex
+    },
+    mdxPath
+  )
 
   const katexCssImport = latex ? "import 'katex/dist/katex.min.css'" : ''
   const cssImport = OFFICIAL_THEMES.includes(
@@ -181,12 +189,19 @@ ${result}
 export default MDXContent`
   }
 
-  const { route, title, pageMap } = getPageMap({
+  const { route, pageMap, dynamicMetaItems } = resolvePageMap({
     filePath: mdxPath,
     fileMap,
     defaultLocale,
-    pageMap: items
+    items
   })
+
+  // Logic for resovling the page title (used for search and as fallback):
+  // 1. If the frontMatter has a title, use it.
+  // 2. Use the first h1 heading if it exists.
+  // 3. Use the fallback, title-cased file name.
+  const fallbackTitle =
+    frontMatter.title || title || pageTitleFromFilename(fileMap[mdxPath].name)
 
   const skipFlexsearchIndexing =
     IS_PRODUCTION && indexContentEmitted.has(mdxPath)
@@ -195,7 +210,7 @@ export default MDXContent`
       addPage({
         locale: locale || DEFAULT_LOCALE,
         route,
-        title,
+        title: fallbackTitle,
         structurizedData,
         distDir
       })
@@ -246,6 +261,61 @@ export default MDXContent`
       // Remove the only `index` route
       .replace(/^index$/, '')
 
+  const dynamicMetaResolver = dynamicMetaItems.length
+    ? `if (typeof window === 'undefined') {
+  globalThis.__nextra_resolvePageMap__ = async () => {
+    const { pageMap } = __nextra_pageOpts__
+    const clonedPageMap = JSON.parse(JSON.stringify(pageMap))
+  
+    const executePromises = []
+    const importPromises = [
+      ${dynamicMetaItems
+        .map(
+          ({
+            metaFilePath,
+            metaObjectKeyPath,
+            metaParentKeyPath
+          }) => `import('${slash(
+            (() => {
+              const relative = path.relative(
+                path.dirname(mdxPath),
+                metaFilePath
+              )
+              return relative.startsWith('.') ? relative : './' + relative
+            })()
+          )}').then(m => {
+        const getMeta = Promise.resolve(m.default()).then(metaData => {
+          const meta = clonedPageMap${metaObjectKeyPath}
+          meta.data = metaData
+
+          const parentRoute = clonedPageMap${metaParentKeyPath.replace(
+            /\.children$/,
+            ''
+          )}.route || ''
+          for (const key of Object.keys(metaData)) {
+            const name = key.split('/').pop()
+            clonedPageMap${metaParentKeyPath}.push({
+              kind: 'MdxPage',
+              locale: meta.locale,
+              name,
+              route: parentRoute + '/' + key,
+            })
+          }
+        })
+        executePromises.push(getMeta)
+      })`
+        )
+        .join(',\n    ')}
+    ]
+  
+    await Promise.all(importPromises)
+    await Promise.all(executePromises)
+  
+    return clonedPageMap
+  }
+}`
+    : ''
+
   const stringifiedPageNextRoute = JSON.stringify(pageNextRoute)
   const stringifiedPageOpts = JSON.stringify(pageOpts)
   const pageOptsChecksum = IS_PRODUCTION ? '' : hashFnv32a(stringifiedPageOpts)
@@ -257,10 +327,11 @@ export default MDXContent`
     })
   }
 
-  return `${themeConfigImport}
+  return `import __nextra_layout__ from '${layout}'
+${themeConfigImport}
 ${katexCssImport}
 ${cssImport}
-import __nextra_layout__ from '${layout}'
+${dynamicMetaResolver}
 
 const __nextra_pageOpts__ = ${stringifiedPageOpts}
 
@@ -280,7 +351,7 @@ ${finalResult}
 __nextra_pageOpts__.title =
   ${JSON.stringify(frontMatter.title)} ||
   (typeof __nextra_title__ === 'string' && __nextra_title__) ||
-  ${JSON.stringify(title /* Fallback as sidebar link name */)}
+  ${JSON.stringify(fallbackTitle /* Fallback as sidebar link name */)}
 
 __nextra_internal__.context[${stringifiedPageNextRoute}] = {
   Content: MDXContent,

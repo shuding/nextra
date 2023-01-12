@@ -1,11 +1,11 @@
 /* eslint typescript-sort-keys/interface: error */
-import { PageOpts } from 'nextra'
-import { ReactNode } from 'react'
-import { Components } from '@mdx-js/react/lib';
+import type { PageOpts } from 'nextra'
+import type { ReactNode } from 'react'
+import type { Components } from 'nextra/mdx'
 
 export interface NextraBlogTheme {
   comments?: ReactNode
-  components?: Components;
+  components?: Components
   cusdis?: {
     appId: string
     host?: string
@@ -15,7 +15,7 @@ export interface NextraBlogTheme {
   footer?: ReactNode
   head?: ({
     meta,
-    title,
+    title
   }: {
     meta: Record<string, any>
     title: string

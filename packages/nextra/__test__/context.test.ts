@@ -19,7 +19,7 @@ describe('context', () => {
       'swr-site',
       'pages'
     )
-    const { items } = await collectFiles(PAGES_DIR)
+    const { items } = await collectFiles(PAGES_DIR, [''])
     // @ts-expect-error -- we don't care about missing properties
     const __nextra_internal__ = ((globalThis as NextraInternalGlobal)[
       NEXTRA_INTERNAL

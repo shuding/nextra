@@ -9,7 +9,7 @@ import React, {
   useEffect,
   useState
 } from 'react'
-import { MDXProvider } from '@mdx-js/react'
+import { MDXProvider } from 'nextra/mdx'
 import Link from 'next/link'
 import { createPortal } from 'react-dom'
 import { Code, Pre, Table, Td, Th, Tr } from 'nextra/components'

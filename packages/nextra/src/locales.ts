@@ -29,6 +29,12 @@ function getCookie(
 export function locales(request: NextRequest) {
   const { nextUrl } = request
 
+  if (/\/_meta(\.[a-z]{2}-[A-Z]{2})?$/.test(nextUrl.pathname)) {
+    const url = nextUrl.clone()
+    url.pathname = `/404`
+    return NextResponse.rewrite(url)
+  }
+
   const shouldHandleLocale =
     !/^\/(api|_next)\//.test(nextUrl.pathname) &&
     !/\.(jpe?g|svg|png|webmanifest)$/.test(nextUrl.pathname) &&

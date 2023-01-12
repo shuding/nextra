@@ -43,6 +43,10 @@ export function normalizeMeta(meta: Meta): Exclude<Meta, string> {
   return typeof meta === 'string' ? { title: meta } : meta
 }
 
+export function pageTitleFromFilename(fileName: string) {
+  return title(fileName.replace(/[-_]/g, ' '))
+}
+
 export function sortPages(
   pages: (
     | Pick<MdxFile, 'kind' | 'name' | 'frontMatter' | 'locale'>
@@ -57,7 +61,7 @@ export function sortPages(
       date: 'frontMatter' in item && item.frontMatter?.date,
       title:
         ('frontMatter' in item && item.frontMatter?.title) ||
-        title(item.name.replace(/[-_]/g, ' '))
+        pageTitleFromFilename(item.name)
     }))
     .sort((a, b) => {
       if (a.date && b.date) {
@@ -72,4 +76,13 @@ export function sortPages(
       return a.title.localeCompare(b.title, locale, { numeric: true })
     })
     .map(item => [item.name, item.title])
+}
+
+export function isSerializable(o: any): boolean {
+  try {
+    JSON.stringify(o)
+    return true
+  } catch (err) {
+    return false
+  }
 }

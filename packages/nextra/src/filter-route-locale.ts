@@ -1,18 +1,19 @@
-import { PageMapItem } from './types'
+import { PageMapItemDescriptor } from './types'
 import { truthy } from './utils'
 import { META_FILENAME } from './constants'
 
 export default function filterRouteLocale(
-  pageMap: PageMapItem[],
+  pageMap: PageMapItemDescriptor[],
   locale: string,
   defaultLocale: string
-): PageMapItem[] {
+): PageMapItemDescriptor[] {
   const isDefaultLocale = !locale || locale === defaultLocale
 
-  const filteredPageMap: PageMapItem[] = []
+  const filteredPageMap: PageMapItemDescriptor[] = []
 
   // We fallback to the default locale
-  const fallbackPages: Record<string, PageMapItem | null> = Object.create(null)
+  const fallbackPages: Record<string, PageMapItemDescriptor | null> =
+    Object.create(null)
 
   for (const page of pageMap) {
     if (page.kind === 'Folder') {

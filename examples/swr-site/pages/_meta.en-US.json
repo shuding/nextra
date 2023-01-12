@@ -11,6 +11,12 @@
       "toc": true
     }
   },
+  "remote": {
+    "title": "Remote",
+    "type": "page",
+    "href": "/remote/foo",
+    "display": "children"
+  },
   "about": {
     "title": "About",
     "type": "menu",

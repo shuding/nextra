@@ -882,9 +882,7 @@ exports[`context > getAllPages() > should work 1`] = `
               {
                 "kind": "MdxPage",
                 "locale": "en-US",
-                "meta": {
-                  "title": "Loooooooooooooooooooong Title",
-                },
+                "meta": undefined,
                 "name": "loooooooooooooooooooong-title",
                 "route": "/docs/advanced/more/loooooooooooooooooooong-title",
               },
@@ -893,35 +891,27 @@ exports[`context > getAllPages() > should work 1`] = `
                   {
                     "kind": "MdxPage",
                     "locale": "en-US",
-                    "meta": {
-                      "title": "One",
-                    },
+                    "meta": undefined,
                     "name": "one",
                     "route": "/docs/advanced/more/tree/one",
                   },
                   {
                     "kind": "MdxPage",
                     "locale": "en-US",
-                    "meta": {
-                      "title": "Three",
-                    },
+                    "meta": undefined,
                     "name": "three",
                     "route": "/docs/advanced/more/tree/three",
                   },
                   {
                     "kind": "MdxPage",
                     "locale": "en-US",
-                    "meta": {
-                      "title": "Two",
-                    },
+                    "meta": undefined,
                     "name": "two",
                     "route": "/docs/advanced/more/tree/two",
                   },
                 ],
                 "kind": "Folder",
-                "meta": {
-                  "title": "Tree",
-                },
+                "meta": undefined,
                 "name": "tree",
                 "route": "/docs/advanced/more/tree",
               },
@@ -990,171 +980,133 @@ exports[`context > getAllPages() > should work 1`] = `
           {
             "kind": "MdxPage",
             "locale": "en-US",
-            "meta": {
-              "title": "Cache",
-            },
+            "meta": undefined,
             "name": "cache",
             "route": "/docs/advanced/cache",
           },
           {
             "kind": "MdxPage",
             "locale": "ja",
-            "meta": {
-              "title": "Cache",
-            },
+            "meta": undefined,
             "name": "cache",
             "route": "/docs/advanced/cache",
           },
           {
             "kind": "MdxPage",
             "locale": "ko",
-            "meta": {
-              "title": "Cache",
-            },
+            "meta": undefined,
             "name": "cache",
             "route": "/docs/advanced/cache",
           },
           {
             "kind": "MdxPage",
             "locale": "ru",
-            "meta": {
-              "title": "Cache",
-            },
+            "meta": undefined,
             "name": "cache",
             "route": "/docs/advanced/cache",
           },
           {
             "kind": "MdxPage",
             "locale": "zh-CN",
-            "meta": {
-              "title": "Cache",
-            },
+            "meta": undefined,
             "name": "cache",
             "route": "/docs/advanced/cache",
           },
           {
             "kind": "MdxPage",
             "locale": "en-US",
-            "meta": {
-              "title": "Code Highlighting",
-            },
+            "meta": undefined,
             "name": "code-highlighting",
             "route": "/docs/advanced/code-highlighting",
           },
           {
             "kind": "MdxPage",
             "locale": "en-US",
-            "meta": {
-              "title": "Future Image",
-            },
+            "meta": undefined,
             "name": "future-image",
             "route": "/docs/advanced/future-image",
           },
           {
             "kind": "MdxPage",
             "locale": "en-US",
-            "meta": {
-              "title": "Markdown Import",
-            },
+            "meta": undefined,
             "name": "markdown-import",
             "route": "/docs/advanced/markdown-import",
           },
           {
             "kind": "MdxPage",
             "locale": "en-US",
-            "meta": {
-              "title": "Performance",
-            },
+            "meta": undefined,
             "name": "performance",
             "route": "/docs/advanced/performance",
           },
           {
             "kind": "MdxPage",
             "locale": "es-ES",
-            "meta": {
-              "title": "Performance",
-            },
+            "meta": undefined,
             "name": "performance",
             "route": "/docs/advanced/performance",
           },
           {
             "kind": "MdxPage",
             "locale": "ja",
-            "meta": {
-              "title": "Performance",
-            },
+            "meta": undefined,
             "name": "performance",
             "route": "/docs/advanced/performance",
           },
           {
             "kind": "MdxPage",
             "locale": "ko",
-            "meta": {
-              "title": "Performance",
-            },
+            "meta": undefined,
             "name": "performance",
             "route": "/docs/advanced/performance",
           },
           {
             "kind": "MdxPage",
             "locale": "ru",
-            "meta": {
-              "title": "Performance",
-            },
+            "meta": undefined,
             "name": "performance",
             "route": "/docs/advanced/performance",
           },
           {
             "kind": "MdxPage",
             "locale": "zh-CN",
-            "meta": {
-              "title": "Performance",
-            },
+            "meta": undefined,
             "name": "performance",
             "route": "/docs/advanced/performance",
           },
           {
             "kind": "MdxPage",
             "locale": "en-US",
-            "meta": {
-              "title": "React Native",
-            },
+            "meta": undefined,
             "name": "react-native",
             "route": "/docs/advanced/react-native",
           },
           {
             "kind": "MdxPage",
             "locale": "ja",
-            "meta": {
-              "title": "React Native",
-            },
+            "meta": undefined,
             "name": "react-native",
             "route": "/docs/advanced/react-native",
           },
           {
             "kind": "MdxPage",
             "locale": "ko",
-            "meta": {
-              "title": "React Native",
-            },
+            "meta": undefined,
             "name": "react-native",
             "route": "/docs/advanced/react-native",
           },
           {
             "kind": "MdxPage",
             "locale": "ru",
-            "meta": {
-              "title": "React Native",
-            },
+            "meta": undefined,
             "name": "react-native",
             "route": "/docs/advanced/react-native",
           },
           {
             "kind": "MdxPage",
             "locale": "zh-CN",
-            "meta": {
-              "title": "React Native",
-            },
+            "meta": undefined,
             "name": "react-native",
             "route": "/docs/advanced/react-native",
           },
@@ -1325,100 +1277,63 @@ exports[`context > getAllPages() > should work 1`] = `
       {
         "kind": "MdxPage",
         "locale": "en-US",
-        "meta": {
-          "title": "Callout",
-        },
+        "meta": undefined,
         "name": "callout",
         "route": "/docs/callout",
       },
       {
         "kind": "MdxPage",
         "locale": "en-US",
-        "meta": {
-          "title": "Code Block without Language",
-        },
+        "meta": undefined,
         "name": "code-block-without-language",
         "route": "/docs/code-block-without-language",
       },
       {
-        "children": [
-          {
-            "kind": "MdxPage",
-            "locale": "en-US",
-            "meta": {
-              "title": "Foo",
-            },
-            "name": "foo",
-            "route": "/docs/remote/foo",
-          },
-        ],
-        "kind": "Folder",
-        "meta": {
-          "title": "Remote",
-        },
-        "name": "remote",
-        "route": "/docs/remote",
-      },
-      {
         "kind": "MdxPage",
         "locale": "en-US",
-        "meta": {
-          "title": "Understanding",
-        },
+        "meta": undefined,
         "name": "understanding",
         "route": "/docs/understanding",
       },
       {
         "kind": "MdxPage",
         "locale": "es-ES",
-        "meta": {
-          "title": "Understanding",
-        },
+        "meta": undefined,
         "name": "understanding",
         "route": "/docs/understanding",
       },
       {
         "kind": "MdxPage",
         "locale": "ja",
-        "meta": {
-          "title": "Understanding",
-        },
+        "meta": undefined,
         "name": "understanding",
         "route": "/docs/understanding",
       },
       {
         "kind": "MdxPage",
         "locale": "ko",
-        "meta": {
-          "title": "Understanding",
-        },
+        "meta": undefined,
         "name": "understanding",
         "route": "/docs/understanding",
       },
       {
         "kind": "MdxPage",
         "locale": "pt-BR",
-        "meta": {
-          "title": "Understanding",
-        },
+        "meta": undefined,
         "name": "understanding",
         "route": "/docs/understanding",
       },
       {
         "kind": "MdxPage",
         "locale": "ru",
-        "meta": {
-          "title": "Understanding",
-        },
+        "meta": undefined,
         "name": "understanding",
         "route": "/docs/understanding",
       },
       {
         "kind": "MdxPage",
         "locale": "zh-CN",
-        "meta": {
-          "title": "Understanding",
-        },
+        "meta": undefined,
         "name": "understanding",
         "route": "/docs/understanding",
       },
@@ -1433,6 +1348,18 @@ exports[`context > getAllPages() > should work 1`] = `
     },
     "name": "docs",
     "route": "/docs",
+  },
+  {
+    "children": [],
+    "kind": "Folder",
+    "meta": {
+      "display": "children",
+      "href": "/remote/foo",
+      "title": "Remote",
+      "type": "page",
+    },
+    "name": "remote",
+    "route": "/remote",
   },
   {
     "children": [
@@ -1967,9 +1894,7 @@ exports[`context > getAllPages() > should work 1`] = `
     },
     "kind": "MdxPage",
     "locale": "en-US",
-    "meta": {
-      "title": "Test",
-    },
+    "meta": undefined,
     "name": "test",
     "route": "/test",
   },
@@ -2747,9 +2672,7 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
           {
             "kind": "MdxPage",
             "locale": "en-US",
-            "meta": {
-              "title": "Loooooooooooooooooooong Title",
-            },
+            "meta": undefined,
             "name": "loooooooooooooooooooong-title",
             "route": "/docs/advanced/more/loooooooooooooooooooong-title",
           },
@@ -2758,35 +2681,27 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
               {
                 "kind": "MdxPage",
                 "locale": "en-US",
-                "meta": {
-                  "title": "One",
-                },
+                "meta": undefined,
                 "name": "one",
                 "route": "/docs/advanced/more/tree/one",
               },
               {
                 "kind": "MdxPage",
                 "locale": "en-US",
-                "meta": {
-                  "title": "Three",
-                },
+                "meta": undefined,
                 "name": "three",
                 "route": "/docs/advanced/more/tree/three",
               },
               {
                 "kind": "MdxPage",
                 "locale": "en-US",
-                "meta": {
-                  "title": "Two",
-                },
+                "meta": undefined,
                 "name": "two",
                 "route": "/docs/advanced/more/tree/two",
               },
             ],
             "kind": "Folder",
-            "meta": {
-              "title": "Tree",
-            },
+            "meta": undefined,
             "name": "tree",
             "route": "/docs/advanced/more/tree",
           },
@@ -2855,171 +2770,133 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
       {
         "kind": "MdxPage",
         "locale": "en-US",
-        "meta": {
-          "title": "Cache",
-        },
+        "meta": undefined,
         "name": "cache",
         "route": "/docs/advanced/cache",
       },
       {
         "kind": "MdxPage",
         "locale": "ja",
-        "meta": {
-          "title": "Cache",
-        },
+        "meta": undefined,
         "name": "cache",
         "route": "/docs/advanced/cache",
       },
       {
         "kind": "MdxPage",
         "locale": "ko",
-        "meta": {
-          "title": "Cache",
-        },
+        "meta": undefined,
         "name": "cache",
         "route": "/docs/advanced/cache",
       },
       {
         "kind": "MdxPage",
         "locale": "ru",
-        "meta": {
-          "title": "Cache",
-        },
+        "meta": undefined,
         "name": "cache",
         "route": "/docs/advanced/cache",
       },
       {
         "kind": "MdxPage",
         "locale": "zh-CN",
-        "meta": {
-          "title": "Cache",
-        },
+        "meta": undefined,
         "name": "cache",
         "route": "/docs/advanced/cache",
       },
       {
         "kind": "MdxPage",
         "locale": "en-US",
-        "meta": {
-          "title": "Code Highlighting",
-        },
+        "meta": undefined,
         "name": "code-highlighting",
         "route": "/docs/advanced/code-highlighting",
       },
       {
         "kind": "MdxPage",
         "locale": "en-US",
-        "meta": {
-          "title": "Future Image",
-        },
+        "meta": undefined,
         "name": "future-image",
         "route": "/docs/advanced/future-image",
       },
       {
         "kind": "MdxPage",
         "locale": "en-US",
-        "meta": {
-          "title": "Markdown Import",
-        },
+        "meta": undefined,
         "name": "markdown-import",
         "route": "/docs/advanced/markdown-import",
       },
       {
         "kind": "MdxPage",
         "locale": "en-US",
-        "meta": {
-          "title": "Performance",
-        },
+        "meta": undefined,
         "name": "performance",
         "route": "/docs/advanced/performance",
       },
       {
         "kind": "MdxPage",
         "locale": "es-ES",
-        "meta": {
-          "title": "Performance",
-        },
+        "meta": undefined,
         "name": "performance",
         "route": "/docs/advanced/performance",
       },
       {
         "kind": "MdxPage",
         "locale": "ja",
-        "meta": {
-          "title": "Performance",
-        },
+        "meta": undefined,
         "name": "performance",
         "route": "/docs/advanced/performance",
       },
       {
         "kind": "MdxPage",
         "locale": "ko",
-        "meta": {
-          "title": "Performance",
-        },
+        "meta": undefined,
         "name": "performance",
         "route": "/docs/advanced/performance",
       },
       {
         "kind": "MdxPage",
         "locale": "ru",
-        "meta": {
-          "title": "Performance",
-        },
+        "meta": undefined,
         "name": "performance",
         "route": "/docs/advanced/performance",
       },
       {
         "kind": "MdxPage",
         "locale": "zh-CN",
-        "meta": {
-          "title": "Performance",
-        },
+        "meta": undefined,
         "name": "performance",
         "route": "/docs/advanced/performance",
       },
       {
         "kind": "MdxPage",
         "locale": "en-US",
-        "meta": {
-          "title": "React Native",
-        },
+        "meta": undefined,
         "name": "react-native",
         "route": "/docs/advanced/react-native",
       },
       {
         "kind": "MdxPage",
         "locale": "ja",
-        "meta": {
-          "title": "React Native",
-        },
+        "meta": undefined,
         "name": "react-native",
         "route": "/docs/advanced/react-native",
       },
       {
         "kind": "MdxPage",
         "locale": "ko",
-        "meta": {
-          "title": "React Native",
-        },
+        "meta": undefined,
         "name": "react-native",
         "route": "/docs/advanced/react-native",
       },
       {
         "kind": "MdxPage",
         "locale": "ru",
-        "meta": {
-          "title": "React Native",
-        },
+        "meta": undefined,
         "name": "react-native",
         "route": "/docs/advanced/react-native",
       },
       {
         "kind": "MdxPage",
         "locale": "zh-CN",
-        "meta": {
-          "title": "React Native",
-        },
+        "meta": undefined,
         "name": "react-native",
         "route": "/docs/advanced/react-native",
       },
@@ -3190,100 +3067,63 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
   {
     "kind": "MdxPage",
     "locale": "en-US",
-    "meta": {
-      "title": "Callout",
-    },
+    "meta": undefined,
     "name": "callout",
     "route": "/docs/callout",
   },
   {
     "kind": "MdxPage",
     "locale": "en-US",
-    "meta": {
-      "title": "Code Block without Language",
-    },
+    "meta": undefined,
     "name": "code-block-without-language",
     "route": "/docs/code-block-without-language",
   },
   {
-    "children": [
-      {
-        "kind": "MdxPage",
-        "locale": "en-US",
-        "meta": {
-          "title": "Foo",
-        },
-        "name": "foo",
-        "route": "/docs/remote/foo",
-      },
-    ],
-    "kind": "Folder",
-    "meta": {
-      "title": "Remote",
-    },
-    "name": "remote",
-    "route": "/docs/remote",
-  },
-  {
     "kind": "MdxPage",
     "locale": "en-US",
-    "meta": {
-      "title": "Understanding",
-    },
+    "meta": undefined,
     "name": "understanding",
     "route": "/docs/understanding",
   },
   {
     "kind": "MdxPage",
     "locale": "es-ES",
-    "meta": {
-      "title": "Understanding",
-    },
+    "meta": undefined,
     "name": "understanding",
     "route": "/docs/understanding",
   },
   {
     "kind": "MdxPage",
     "locale": "ja",
-    "meta": {
-      "title": "Understanding",
-    },
+    "meta": undefined,
     "name": "understanding",
     "route": "/docs/understanding",
   },
   {
     "kind": "MdxPage",
     "locale": "ko",
-    "meta": {
-      "title": "Understanding",
-    },
+    "meta": undefined,
     "name": "understanding",
     "route": "/docs/understanding",
   },
   {
     "kind": "MdxPage",
     "locale": "pt-BR",
-    "meta": {
-      "title": "Understanding",
-    },
+    "meta": undefined,
     "name": "understanding",
     "route": "/docs/understanding",
   },
   {
     "kind": "MdxPage",
     "locale": "ru",
-    "meta": {
-      "title": "Understanding",
-    },
+    "meta": undefined,
     "name": "understanding",
     "route": "/docs/understanding",
   },
   {
     "kind": "MdxPage",
     "locale": "zh-CN",
-    "meta": {
-      "title": "Understanding",
-    },
+    "meta": undefined,
     "name": "understanding",
     "route": "/docs/understanding",
   },
@@ -3297,9 +3137,7 @@ exports[`context > getPagesUnderRoute() > should work 1`] = `
       {
         "kind": "MdxPage",
         "locale": "en-US",
-        "meta": {
-          "title": "Loooooooooooooooooooong Title",
-        },
+        "meta": undefined,
         "name": "loooooooooooooooooooong-title",
         "route": "/docs/advanced/more/loooooooooooooooooooong-title",
       },
@@ -3308,35 +3146,27 @@ exports[`context > getPagesUnderRoute() > should work 1`] = `
           {
             "kind": "MdxPage",
             "locale": "en-US",
-            "meta": {
-              "title": "One",
-            },
+            "meta": undefined,
             "name": "one",
             "route": "/docs/advanced/more/tree/one",
           },
           {
             "kind": "MdxPage",
             "locale": "en-US",
-            "meta": {
-              "title": "Three",
-            },
+            "meta": undefined,
             "name": "three",
             "route": "/docs/advanced/more/tree/three",
           },
           {
             "kind": "MdxPage",
             "locale": "en-US",
-            "meta": {
-              "title": "Two",
-            },
+            "meta": undefined,
             "name": "two",
             "route": "/docs/advanced/more/tree/two",
           },
         ],
         "kind": "Folder",
-        "meta": {
-          "title": "Tree",
-        },
+        "meta": undefined,
         "name": "tree",
         "route": "/docs/advanced/more/tree",
       },
@@ -3405,171 +3235,133 @@ exports[`context > getPagesUnderRoute() > should work 1`] = `
   {
     "kind": "MdxPage",
     "locale": "en-US",
-    "meta": {
-      "title": "Cache",
-    },
+    "meta": undefined,
     "name": "cache",
     "route": "/docs/advanced/cache",
   },
   {
     "kind": "MdxPage",
     "locale": "ja",
-    "meta": {
-      "title": "Cache",
-    },
+    "meta": undefined,
     "name": "cache",
     "route": "/docs/advanced/cache",
   },
   {
     "kind": "MdxPage",
     "locale": "ko",
-    "meta": {
-      "title": "Cache",
-    },
+    "meta": undefined,
     "name": "cache",
     "route": "/docs/advanced/cache",
   },
   {
     "kind": "MdxPage",
     "locale": "ru",
-    "meta": {
-      "title": "Cache",
-    },
+    "meta": undefined,
     "name": "cache",
     "route": "/docs/advanced/cache",
   },
   {
     "kind": "MdxPage",
     "locale": "zh-CN",
-    "meta": {
-      "title": "Cache",
-    },
+    "meta": undefined,
     "name": "cache",
     "route": "/docs/advanced/cache",
   },
   {
     "kind": "MdxPage",
     "locale": "en-US",
-    "meta": {
-      "title": "Code Highlighting",
-    },
+    "meta": undefined,
     "name": "code-highlighting",
     "route": "/docs/advanced/code-highlighting",
   },
   {
     "kind": "MdxPage",
     "locale": "en-US",
-    "meta": {
-      "title": "Future Image",
-    },
+    "meta": undefined,
     "name": "future-image",
     "route": "/docs/advanced/future-image",
   },
   {
     "kind": "MdxPage",
     "locale": "en-US",
-    "meta": {
-      "title": "Markdown Import",
-    },
+    "meta": undefined,
     "name": "markdown-import",
     "route": "/docs/advanced/markdown-import",
   },
   {
     "kind": "MdxPage",
     "locale": "en-US",
-    "meta": {
-      "title": "Performance",
-    },
+    "meta": undefined,
     "name": "performance",
     "route": "/docs/advanced/performance",
   },
   {
     "kind": "MdxPage",
     "locale": "es-ES",
-    "meta": {
-      "title": "Performance",
-    },
+    "meta": undefined,
     "name": "performance",
     "route": "/docs/advanced/performance",
   },
   {
     "kind": "MdxPage",
     "locale": "ja",
-    "meta": {
-      "title": "Performance",
-    },
+    "meta": undefined,
     "name": "performance",
     "route": "/docs/advanced/performance",
   },
   {
     "kind": "MdxPage",
     "locale": "ko",
-    "meta": {
-      "title": "Performance",
-    },
+    "meta": undefined,
     "name": "performance",
     "route": "/docs/advanced/performance",
   },
   {
     "kind": "MdxPage",
     "locale": "ru",
-    "meta": {
-      "title": "Performance",
-    },
+    "meta": undefined,
     "name": "performance",
     "route": "/docs/advanced/performance",
   },
   {
     "kind": "MdxPage",
     "locale": "zh-CN",
-    "meta": {
-      "title": "Performance",
-    },
+    "meta": undefined,
     "name": "performance",
     "route": "/docs/advanced/performance",
   },
   {
     "kind": "MdxPage",
     "locale": "en-US",
-    "meta": {
-      "title": "React Native",
-    },
+    "meta": undefined,
     "name": "react-native",
     "route": "/docs/advanced/react-native",
   },
   {
     "kind": "MdxPage",
     "locale": "ja",
-    "meta": {
-      "title": "React Native",
-    },
+    "meta": undefined,
     "name": "react-native",
     "route": "/docs/advanced/react-native",
   },
   {
     "kind": "MdxPage",
     "locale": "ko",
-    "meta": {
-      "title": "React Native",
-    },
+    "meta": undefined,
     "name": "react-native",
     "route": "/docs/advanced/react-native",
   },
   {
     "kind": "MdxPage",
     "locale": "ru",
-    "meta": {
-      "title": "React Native",
-    },
+    "meta": undefined,
     "name": "react-native",
     "route": "/docs/advanced/react-native",
   },
   {
     "kind": "MdxPage",
     "locale": "zh-CN",
-    "meta": {
-      "title": "React Native",
-    },
+    "meta": undefined,
     "name": "react-native",
     "route": "/docs/advanced/react-native",
   },

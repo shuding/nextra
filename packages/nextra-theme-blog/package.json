@@ -52,7 +52,6 @@
     "format": "prettier --ignore-path ../../.gitignore --write --list-different ."
   },
   "dependencies": {
-    "@mdx-js/react": "^2.1.5",
     "next-themes": "^0.2.1"
   },
   "peerDependencies": {

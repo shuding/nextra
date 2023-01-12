@@ -85,7 +85,12 @@ exports[`Page Process > pageMap en-US 1`] = `
           "title": "Nextra ↗",
           "type": "page",
         },
-        "test": "Test",
+        "remote": {
+          "display": "children",
+          "href": "/remote/foo",
+          "title": "Remote",
+          "type": "page",
+        },
       },
       "kind": "Meta",
       "locale": "en-US",
@@ -126,6 +131,10 @@ exports[`Page Process > pageMap en-US 1`] = `
           "name": "team",
           "route": "/about/team",
         },
+        {
+          "data": {},
+          "kind": "Meta",
+        },
       ],
       "kind": "Folder",
       "name": "about",
@@ -154,6 +163,10 @@ exports[`Page Process > pageMap en-US 1`] = `
           "locale": "en-US",
           "name": "swr-v1",
           "route": "/blog/swr-v1",
+        },
+        {
+          "data": {},
+          "kind": "Meta",
         },
       ],
       "kind": "Folder",
@@ -192,14 +205,12 @@ exports[`Page Process > pageMap en-US 1`] = `
               "title": "Advanced",
             },
             "arguments": "Arguments",
-            "callout": "Callout",
             "change-log": {
               "theme": {
                 "sidebar": false,
               },
               "title": "Change Log",
             },
-            "code-block-without-language": "Code Block without Language",
             "conditional-fetching": "Conditional Data Fetching",
             "data-fetching": "Data Fetching",
             "error-handling": {
@@ -225,11 +236,9 @@ exports[`Page Process > pageMap en-US 1`] = `
               },
               "title": "Raw Layout",
             },
-            "remote": "Remote",
             "revalidation": "Auto Revalidation",
             "suspense": "Suspense",
             "typescript": "TypeScript :)",
-            "understanding": "Understanding",
             "with-nextjs": "Next.js SSG and SSR",
             "wrap-toc-items": "Wrap Table of Content Items",
           },
@@ -249,14 +258,8 @@ exports[`Page Process > pageMap en-US 1`] = `
                   "title": "Do Not Use",
                   "type": "separator",
                 },
-                "cache": "Cache",
-                "code-highlighting": "Code Highlighting",
                 "file-name.with.DOTS": "Filenames with Dots",
-                "future-image": "Future Image",
-                "markdown-import": "Markdown Import",
                 "more": "More: A Super Super Super Super Long Directory",
-                "performance": "Performance",
-                "react-native": "React Native",
               },
               "kind": "Meta",
               "locale": "en-US",
@@ -320,13 +323,8 @@ exports[`Page Process > pageMap en-US 1`] = `
                       "route": "/docs/advanced/more/tree/two",
                     },
                     {
-                      "data": {
-                        "one": "One",
-                        "three": "Three",
-                        "two": "Two",
-                      },
+                      "data": {},
                       "kind": "Meta",
-                      "locale": "en-US",
                     },
                   ],
                   "kind": "Folder",
@@ -334,12 +332,8 @@ exports[`Page Process > pageMap en-US 1`] = `
                   "route": "/docs/advanced/more/tree",
                 },
                 {
-                  "data": {
-                    "loooooooooooooooooooong-title": "Loooooooooooooooooooong Title",
-                    "tree": "Tree",
-                  },
+                  "data": {},
                   "kind": "Meta",
-                  "locale": "en-US",
                 },
               ],
               "kind": "Folder",
@@ -357,6 +351,10 @@ exports[`Page Process > pageMap en-US 1`] = `
               "locale": "en-US",
               "name": "react-native",
               "route": "/docs/advanced/react-native",
+            },
+            {
+              "data": {},
+              "kind": "Meta",
             },
           ],
           "kind": "Folder",
@@ -460,26 +458,6 @@ exports[`Page Process > pageMap en-US 1`] = `
           "route": "/docs/raw-layout",
         },
         {
-          "children": [
-            {
-              "kind": "MdxPage",
-              "locale": "en-US",
-              "name": "foo",
-              "route": "/docs/remote/foo",
-            },
-            {
-              "data": {
-                "foo": "Foo",
-              },
-              "kind": "Meta",
-              "locale": "en-US",
-            },
-          ],
-          "kind": "Folder",
-          "name": "remote",
-          "route": "/docs/remote",
-        },
-        {
           "kind": "MdxPage",
           "locale": "en-US",
           "name": "revalidation",
@@ -514,6 +492,10 @@ exports[`Page Process > pageMap en-US 1`] = `
           "locale": "en-US",
           "name": "wrap-toc-items",
           "route": "/docs/wrap-toc-items",
+        },
+        {
+          "data": {},
+          "kind": "Meta",
         },
       ],
       "kind": "Folder",
@@ -595,6 +577,10 @@ exports[`Page Process > pageMap en-US 1`] = `
           "name": "ssr",
           "route": "/examples/ssr",
         },
+        {
+          "data": {},
+          "kind": "Meta",
+        },
       ],
       "kind": "Folder",
       "name": "examples",
@@ -611,6 +597,22 @@ exports[`Page Process > pageMap en-US 1`] = `
       "route": "/",
     },
     {
+      "children": [
+        {
+          "data": {},
+          "kind": "Meta",
+          "locale": "en-US",
+        },
+        {
+          "data": {},
+          "kind": "Meta",
+        },
+      ],
+      "kind": "Folder",
+      "name": "remote",
+      "route": "/remote",
+    },
+    {
       "frontMatter": {
         "mdxOptions": {
           "format": "md",
@@ -622,19 +624,11 @@ exports[`Page Process > pageMap en-US 1`] = `
       "route": "/test",
     },
     {
-      "data": {
-        "404": "404",
-        "500": "500",
-        "about": "About",
-        "blog": "Blog",
-        "docs": "Docs",
-        "examples": "Examples",
-      },
+      "data": {},
       "kind": "Meta",
     },
   ],
   "/docs/data-fetching",
-  "Data Fetching",
 ]
 `;
 
@@ -643,7 +637,6 @@ exports[`Page Process > pageMap zh-CN 1`] = `
   [
     {
       "data": {
-        "about": "About",
         "blog": {
           "title": "博客",
           "type": "page",
@@ -668,20 +661,8 @@ exports[`Page Process > pageMap zh-CN 1`] = `
     {
       "children": [
         {
-          "data": {
-            "a-page": {
-              "display": "hidden",
-              "theme": {
-                "layout": "raw",
-              },
-              "title": "A Page",
-              "type": "page",
-            },
-            "acknowledgement": "🧩 Acknowledgement",
-            "team": "👥 Team",
-          },
+          "data": {},
           "kind": "Meta",
-          "locale": "en-US",
         },
         {
           "kind": "MdxPage",
@@ -747,11 +728,9 @@ exports[`Page Process > pageMap zh-CN 1`] = `
             "options": "选项",
             "pagination": "分页",
             "prefetching": "预请求",
-            "remote": "Remote",
             "revalidation": "自动重新请求",
             "suspense": "Suspense",
             "typescript": "Typescript",
-            "understanding": "Understanding",
             "with-nextjs": "Next.js SSG 和 SSR",
             "wrap-toc-items": "包裝目錄項",
           },
@@ -764,7 +743,6 @@ exports[`Page Process > pageMap zh-CN 1`] = `
               "data": {
                 "cache": "缓存",
                 "file-name.with.DOTS": "带点的文件名",
-                "more": "More",
                 "performance": "性能",
                 "react-native": "React Native",
               },
@@ -806,13 +784,8 @@ exports[`Page Process > pageMap zh-CN 1`] = `
                       "route": "/docs/advanced/more/tree/two",
                     },
                     {
-                      "data": {
-                        "one": "One",
-                        "three": "Three",
-                        "two": "Two",
-                      },
+                      "data": {},
                       "kind": "Meta",
-                      "locale": "en-US",
                     },
                   ],
                   "kind": "Folder",
@@ -826,12 +799,8 @@ exports[`Page Process > pageMap zh-CN 1`] = `
                   "route": "/docs/advanced/more/loooooooooooooooooooong-title",
                 },
                 {
-                  "data": {
-                    "loooooooooooooooooooong-title": "Loooooooooooooooooooong Title",
-                    "tree": "Tree",
-                  },
+                  "data": {},
                   "kind": "Meta",
-                  "locale": "en-US",
                 },
               ],
               "kind": "Folder",
@@ -944,26 +913,6 @@ exports[`Page Process > pageMap zh-CN 1`] = `
           "locale": "zh-CN",
           "name": "prefetching",
           "route": "/docs/prefetching",
-        },
-        {
-          "children": [
-            {
-              "kind": "MdxPage",
-              "locale": "en-US",
-              "name": "foo",
-              "route": "/docs/remote/foo",
-            },
-            {
-              "data": {
-                "foo": "Foo",
-              },
-              "kind": "Meta",
-              "locale": "en-US",
-            },
-          ],
-          "kind": "Folder",
-          "name": "remote",
-          "route": "/docs/remote",
         },
         {
           "kind": "MdxPage",
@@ -1120,6 +1069,17 @@ exports[`Page Process > pageMap zh-CN 1`] = `
       "route": "/",
     },
     {
+      "children": [
+        {
+          "data": {},
+          "kind": "Meta",
+        },
+      ],
+      "kind": "Folder",
+      "name": "remote",
+      "route": "/remote",
+    },
+    {
       "kind": "MdxPage",
       "name": "404",
       "route": "/404",
@@ -1151,6 +1111,5 @@ exports[`Page Process > pageMap zh-CN 1`] = `
     },
   ],
   "/docs/data-fetching",
-  "数据请求",
 ]
 `;

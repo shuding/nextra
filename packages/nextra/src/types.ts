@@ -14,6 +14,7 @@ type MetaFilename = typeof META_FILENAME
 type MarkdownExtension = typeof MARKDOWN_EXTENSIONS[number]
 
 export interface LoaderOptions extends NextraConfig {
+  metaImport?: boolean
   pageImport?: boolean
   locales: string[]
   defaultLocale: string
@@ -35,6 +36,8 @@ export type MetaJsonFile = {
   data: {
     [fileName: string]: Meta
   }
+  // The path to the _meta.json file. This is a private property needed by the loader.
+  __nextra_src?: string
 }
 
 export type FrontMatter = GrayMatterFile<string>['data']

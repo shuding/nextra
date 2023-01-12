@@ -2,8 +2,9 @@ import { createProcessor, ProcessorOptions } from '@mdx-js/mdx'
 import { Processor } from '@mdx-js/mdx/lib/core'
 import remarkGfm from 'remark-gfm'
 import rehypePrettyCode from 'rehype-pretty-code'
-import rehypeMdxTitle from 'rehype-mdx-title'
 import readingTime from 'remark-reading-time'
+import grayMatter from 'gray-matter'
+
 import {
   remarkStaticImage,
   remarkHeadings,
@@ -16,6 +17,14 @@ import theme from './theme.json'
 import { truthy } from './utils'
 import remarkMath from 'remark-math'
 import rehypeKatex from 'rehype-katex'
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+globalThis.__nextra_temp_do_not_use = () => {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  import('./__temp__')
+}
 
 const createCompiler = (mdxOptions: ProcessorOptions): Processor => {
   const compiler = createProcessor(mdxOptions)
@@ -58,14 +67,23 @@ export async function compileMdx(
   } = {},
   filePath = ''
 ) {
+  // Extract frontMatter information if it exists
+  const { data: frontMatter, content } = grayMatter(source)
+
+  source = content
+
   const structurizedData = Object.create(null)
 
-  const mdxOptions = loaderOptions.mdxOptions || {}
+  const mdxOptions = {
+    ...(loaderOptions.mdxOptions || {}),
+    // You can override MDX options in the frontMatter too.
+    ...frontMatter.mdxOptions
+  }
 
   const compiler = createCompiler({
     jsx: mdxOptions.jsx || false,
     outputFormat: mdxOptions.outputFormat || 'function-body',
-    providerImportSource: '@mdx-js/react',
+    providerImportSource: 'nextra/mdx',
     format: mdxOptions.format || 'mdx',
     // https://github.com/hashicorp/next-mdx-remote/issues/307#issuecomment-1363415249
     development: false,
@@ -86,7 +104,6 @@ export async function compileMdx(
         rehypePrettyCode,
         { ...rehypePrettyCodeOptions, ...mdxOptions.rehypePrettyCodeOptions }
       ],
-      [rehypeMdxTitle, { name: '__nextra_title__' }],
       [attachMeta, { defaultShowCopyCode: loaderOptions.defaultShowCopyCode }],
       ...(loaderOptions.latex ? [rehypeKatex] : [])
     ]
@@ -100,18 +117,26 @@ export async function compileMdx(
           }
         : source
     )
-    const result = String(vFile)
-      .replace('export const __nextra_title__', 'const __nextra_title__')
-      .replace('export default MDXContent;', '')
+    let result = String(vFile).replace('export default MDXContent;', '')
+
+    const headingMeta = compiler.data('headingMeta') as Pick<
+      PageOpts,
+      'headings' | 'hasJsxInH1' | 'title'
+    >
+    if (headingMeta.title) {
+      result += `\nconst __nextra_title__ = ${JSON.stringify(
+        headingMeta.title
+      )}`
+    }
+
     const readingTime = vFile.data.readingTime as ReadingTime | undefined
+
     return {
       result,
-      ...(compiler.data('headingMeta') as Pick<
-        PageOpts,
-        'headings' | 'hasJsxInH1'
-      >),
+      ...headingMeta,
       ...(readingTime && { readingTime }),
-      structurizedData
+      structurizedData,
+      frontMatter
     }
   } catch (err) {
     console.error(`[nextra] Error compiling ${filePath}.`)

@@ -5,7 +5,7 @@ import React, { useMemo } from 'react'
 import { useRouter } from 'next/router'
 import 'focus-visible'
 import cn from 'clsx'
-import { MDXProvider } from '@mdx-js/react'
+import { MDXProvider, useMDXComponents } from 'nextra/mdx'
 import { useMounted } from 'nextra/hooks'
 import { useData } from 'nextra/data'
 
@@ -25,18 +25,18 @@ import { getFSRoute, normalizePages, renderComponent } from './utils'
 import { PageTheme } from './types'
 
 function useDirectoryInfo(pageMap: PageMapItem[]) {
-  const { locale = DEFAULT_LOCALE, defaultLocale, route } = useRouter()
+  const { locale = DEFAULT_LOCALE, defaultLocale, asPath } = useRouter()
 
   return useMemo(() => {
     // asPath can return redirected url
-    const fsPath = getFSRoute(route, locale)
+    const fsPath = getFSRoute(asPath, locale)
     return normalizePages({
       list: pageMap,
       locale,
       defaultLocale,
       route: fsPath
     })
-  }, [pageMap, locale, defaultLocale, route])
+  }, [pageMap, locale, defaultLocale, asPath])
 }
 
 interface BodyProps {
@@ -248,7 +248,7 @@ export default function Layout({
 }
 
 export { useConfig, PartialDocsThemeConfig as DocsThemeConfig }
-export { useMDXComponents } from '@mdx-js/react'
+export { useMDXComponents }
 export { useTheme } from 'next-themes'
 export {
   Bleed,
