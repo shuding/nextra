@@ -189,11 +189,12 @@ export async function collectFiles(
       }
       items.push(fileMap[metaPath])
     } else {
-      // Fill with the fallback.
+      // Fill with the fallback. Note that we need to keep the original order.
       const meta = { ...(items[metaIndex] as MetaJsonFile) }
-      meta.data = {
-        ...Object.fromEntries(defaultMeta),
-        ...meta.data
+      for (const [k, v] of defaultMeta) {
+        if (meta.data[k] === undefined) {
+          meta.data[k] = v
+        }
       }
 
       fileMap[metaPath] = meta
