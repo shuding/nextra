@@ -123,7 +123,7 @@ export function normalizePages({
 
   // All directories
   // - directories: all directories in the tree structure
-  // - flatDirectories: all directories in the flat structure, used by search
+  // - flatDirectories: all directories in the flat structure, used by search and footer navigation
   const directories: Item[] = []
   const flatDirectories: Item[] = []
 
