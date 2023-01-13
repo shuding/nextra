@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react'
 import { XIcon } from 'nextra/icons'
 import cn from 'clsx'
 import { useConfig } from '../contexts'

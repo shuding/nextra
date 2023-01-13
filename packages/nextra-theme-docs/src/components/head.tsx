@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react'
 import NextHead from 'next/head'
 import { useTheme } from 'next-themes'
 import { useMounted } from 'nextra/hooks'

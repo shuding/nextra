@@ -1,4 +1,4 @@
-import React, { useState, ReactElement, ReactNode, useCallback } from 'react'
+import { useState, ReactElement, ReactNode, useCallback } from 'react'
 import { useRouter } from 'next/router'
 import FlexSearch from 'flexsearch'
 import cn from 'clsx'

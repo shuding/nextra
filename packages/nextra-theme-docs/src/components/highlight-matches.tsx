@@ -1,4 +1,4 @@
-import React, { Fragment, memo } from 'react'
+import { Fragment, memo } from 'react'
 
 type MatchArgs = {
   value?: string

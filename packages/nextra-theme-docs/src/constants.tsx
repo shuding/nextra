@@ -1,5 +1,5 @@
 /* eslint sort-keys: error */
-import React, { isValidElement, FC, ReactNode } from 'react'
+import { isValidElement, FC, ReactNode } from 'react'
 import { PageTheme } from './types'
 import { useRouter } from 'next/router'
 import { Anchor, Flexsearch, Footer, Navbar, TOC } from './components'

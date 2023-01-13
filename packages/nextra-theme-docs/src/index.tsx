@@ -1,7 +1,6 @@
 import type { NextraThemeLayoutProps, PageMapItem, PageOpts } from 'nextra'
-import type { ReactElement, ReactNode } from 'react'
 
-import React, { useMemo } from 'react'
+import { useMemo, ReactElement, ReactNode } from 'react'
 import { useRouter } from 'next/router'
 import 'focus-visible'
 import cn from 'clsx'

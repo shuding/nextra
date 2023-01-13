@@ -1,4 +1,4 @@
-import React, { useMemo, useState, ReactElement } from 'react'
+import { useMemo, useState, ReactElement } from 'react'
 import { matchSorter } from 'match-sorter'
 import { Item as NormalItem } from '../utils'
 import { Search } from './search'
