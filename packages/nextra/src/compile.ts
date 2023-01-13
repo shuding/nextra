@@ -18,11 +18,8 @@ import { truthy } from './utils'
 import remarkMath from 'remark-math'
 import rehypeKatex from 'rehype-katex'
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 globalThis.__nextra_temp_do_not_use = () => {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
+  // @ts-expect-error -- ignore error - File is not a module
   import('./__temp__')
 }
 
@@ -52,6 +49,11 @@ const rehypePrettyCodeOptions = {
   filterMetaString: (meta: string) => meta.replace(/filename="[^"]*"/, '')
 }
 
+const cachedCompilerForFormat: Record<
+  Exclude<ProcessorOptions['format'], undefined>,
+  Processor
+> = Object.create(null)
+
 export async function compileMdx(
   source: string,
   loaderOptions: Pick<
@@ -61,11 +63,13 @@ export async function compileMdx(
     | 'defaultShowCopyCode'
     | 'readingTime'
     | 'latex'
+    | 'codeHighlight'
   > & {
     mdxOptions?: LoaderOptions['mdxOptions'] &
-      Pick<ProcessorOptions, 'jsx' | 'outputFormat' | 'format'>
+      Pick<ProcessorOptions, 'jsx' | 'outputFormat'>
   } = {},
-  filePath = ''
+  filePath = '',
+  useCachedCompiler = false
 ) {
   // Extract frontMatter information if it exists
   const { data: frontMatter, content } = grayMatter(source)
@@ -77,45 +81,50 @@ export async function compileMdx(
   const mdxOptions = {
     ...(loaderOptions.mdxOptions || {}),
     // You can override MDX options in the frontMatter too.
-    ...frontMatter.mdxOptions
+    ...frontMatter.mdxOptions as Record<any, unknown>
   }
+  const format = mdxOptions.format || 'mdx'
+  const compiler =
+    (useCachedCompiler && cachedCompilerForFormat[format]) ||
+    (cachedCompilerForFormat[format] = createCompiler({
+      jsx: mdxOptions.jsx || false,
+      outputFormat: mdxOptions.outputFormat || 'function-body',
+      providerImportSource: 'nextra/mdx',
+      format,
+      // https://github.com/hashicorp/next-mdx-remote/issues/307#issuecomment-1363415249
+      development: false,
+      remarkPlugins: [
+        ...(mdxOptions.remarkPlugins || []),
+        remarkGfm,
+        remarkHeadings,
+        loaderOptions.staticImage && remarkStaticImage,
+        loaderOptions.flexsearch &&
+          structurize(structurizedData, loaderOptions.flexsearch),
+        loaderOptions.readingTime && readingTime,
+        loaderOptions.latex && remarkMath
+      ].filter(truthy),
+      rehypePlugins: [
+        ...(mdxOptions.rehypePlugins || []),
+        parseMeta,
+        loaderOptions.codeHighlight &&
+          ([
+            rehypePrettyCode,
+            {
+              ...rehypePrettyCodeOptions,
+              ...mdxOptions.rehypePrettyCodeOptions
+            }
+          ] as any),
+        [
+          attachMeta,
+          { defaultShowCopyCode: loaderOptions.defaultShowCopyCode }
+        ],
+        loaderOptions.latex && rehypeKatex
+      ].filter(truthy)
+    }))
 
-  const compiler = createCompiler({
-    jsx: mdxOptions.jsx || false,
-    outputFormat: mdxOptions.outputFormat || 'function-body',
-    providerImportSource: 'nextra/mdx',
-    format: mdxOptions.format || 'mdx',
-    // https://github.com/hashicorp/next-mdx-remote/issues/307#issuecomment-1363415249
-    development: false,
-    remarkPlugins: [
-      ...(mdxOptions.remarkPlugins || []),
-      remarkGfm,
-      remarkHeadings,
-      loaderOptions.staticImage && ([remarkStaticImage, { filePath }] as any),
-      loaderOptions.flexsearch &&
-        structurize(structurizedData, loaderOptions.flexsearch),
-      loaderOptions.readingTime && readingTime,
-      loaderOptions.latex && remarkMath
-    ].filter(truthy),
-    rehypePlugins: [
-      ...(mdxOptions.rehypePlugins || []),
-      parseMeta,
-      [
-        rehypePrettyCode,
-        { ...rehypePrettyCodeOptions, ...mdxOptions.rehypePrettyCodeOptions }
-      ],
-      [attachMeta, { defaultShowCopyCode: loaderOptions.defaultShowCopyCode }],
-      ...(loaderOptions.latex ? [rehypeKatex] : [])
-    ]
-  })
   try {
     const vFile = await compiler.process(
-      filePath
-        ? {
-            value: source,
-            path: filePath
-          }
-        : source
+      filePath ? { value: source, path: filePath } : source
     )
     let result = String(vFile).replace('export default MDXContent;', '')
 

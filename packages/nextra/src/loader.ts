@@ -132,22 +132,24 @@ async function loader(
 
   const { locale } = parseFileName(mdxPath)
 
-  for (const [filePath, file] of Object.entries(fileMap)) {
-    if (file.kind === 'Meta' && (!locale || file.locale === locale)) {
-      context.addDependency(filePath)
+  if (!IS_PRODUCTION) {
+    for (const [filePath, file] of Object.entries(fileMap)) {
+      if (file.kind === 'Meta' && (!locale || file.locale === locale)) {
+        context.addDependency(filePath)
+      }
     }
-  }
-  // Add the entire directory `pages` as the dependency,
-  // so we can generate the correct page map.
-  context.addContextDependency(PAGES_DIR)
+    // Add the entire directory `pages` as the dependency,
+    // so we can generate the correct page map.
+    context.addContextDependency(PAGES_DIR)
 
-  // Add local theme as a dependency
-  if (theme.startsWith('.') || theme.startsWith('/')) {
-    context.addDependency(path.resolve(theme))
-  }
-  // Add theme config as a dependency
-  if (themeConfig) {
-    context.addDependency(path.resolve(themeConfig))
+    // Add local theme as a dependency
+    if (theme.startsWith('.') || theme.startsWith('/')) {
+      context.addDependency(path.resolve(theme))
+    }
+    // Add theme config as a dependency
+    if (themeConfig) {
+      context.addDependency(path.resolve(themeConfig))
+    }
   }
 
   const {
@@ -172,7 +174,8 @@ async function loader(
       flexsearch,
       latex
     },
-    mdxPath
+    mdxPath,
+    true
   )
 
   const katexCssImport = latex ? "import 'katex/dist/katex.min.css'" : ''

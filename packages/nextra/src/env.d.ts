@@ -6,3 +6,7 @@ declare module 'title' {
     }
   )
 }
+
+declare namespace globalThis {
+  var __nextra_temp_do_not_use: () => void
+}

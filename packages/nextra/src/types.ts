@@ -108,8 +108,12 @@ export type NextraConfig = {
   staticImage?: boolean
   readingTime?: boolean
   latex?: boolean
+  codeHighlight?: boolean
   transform?: Transform
-  mdxOptions?: Pick<ProcessorOptions, 'rehypePlugins' | 'remarkPlugins'> & {
+  mdxOptions?: Pick<
+    ProcessorOptions,
+    'rehypePlugins' | 'remarkPlugins' | 'format'
+  > & {
     rehypePrettyCodeOptions?: Partial<RehypePrettyCodeOptions>
   }
 }
