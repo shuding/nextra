@@ -55,10 +55,6 @@ pre {
   }
 }
 
-[data-rehype-pretty-code-fragment] {
-  @apply nx-relative nx-mt-6 first:nx-mt-0;
-}
-
 @supports (
   (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))
 ) {
