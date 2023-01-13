@@ -1,4 +1,3 @@
-import React from 'react'
 import { useTheme } from 'next-themes'
 import { MoonIcon, SunIcon } from 'nextra/icons'
 import { useMounted } from 'nextra/hooks'

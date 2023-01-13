@@ -1,4 +1,4 @@
-import React, {
+import {
   RefObject,
   createRef,
   ComponentProps,

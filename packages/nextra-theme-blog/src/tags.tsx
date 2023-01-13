@@ -1,4 +1,3 @@
-import React from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { useSSG } from 'nextra/ssg'
 import Head from 'next/head'
