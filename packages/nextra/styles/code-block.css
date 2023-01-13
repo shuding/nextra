@@ -33,6 +33,10 @@ pre {
     }
   }
 
+  &:not([data-theme]) {
+    @apply nx-px-4;
+  }
+
   html[data-nextra-word-wrap] & {
     word-break: break-word;
     @apply nx-whitespace-pre-wrap md:nx-whitespace-pre;
