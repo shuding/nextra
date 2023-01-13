@@ -1,5 +1,6 @@
 import Slugger from 'github-slugger'
 import { getFlattenedValue } from './remark'
+import { CODE_BLOCK_FILENAME_REGEX } from '../constants'
 
 function visit(node, tagNames, handler) {
   if (tagNames.includes(node.tagName)) {
@@ -14,8 +15,7 @@ export const parseMeta = () => tree => {
     const [codeEl] = node.children
     // Add default language `text` for code-blocks without languages
     codeEl.properties.className ||= ['language-text']
-    node.__nextra_meta__ = codeEl.data?.meta
-    node.__nextra_text__ = codeEl.children[0].value
+    node.__nextra_meta = codeEl.data?.meta
   })
 }
 
@@ -33,20 +33,18 @@ export const attachMeta =
       if (!('data-rehype-pretty-code-fragment' in node.properties)) {
         return
       }
-      // remove redundant <div data-rehype-pretty-code-fragment /> element that wraps <pre /> element
+      // remove <div data-rehype-pretty-code-fragment /> element that wraps <pre /> element
+      // because we'll wrap with our own <div />
       const preEl = Object.assign(node, node.children[0])
-      const meta = node.__nextra_meta__
-      const hasCopy = meta
+      const meta = node.__nextra_meta
+
+      preEl.properties.hasCopyCode = meta
         ? (defaultShowCopyCode && !/( |^)copy=false($| )/.test(meta)) ||
           /( |^)copy($| )/.test(meta)
         : defaultShowCopyCode
 
-      if (hasCopy) {
-        preEl.properties.value = JSON.stringify(node.__nextra_text__)
-      }
-
       // Attach filename
-      const filename = meta?.match(/filename="([^"]+)"/)?.[1]
+      const filename = meta?.match(CODE_BLOCK_FILENAME_REGEX)?.[1]
       if (filename) {
         preEl.properties.filename = filename
       }

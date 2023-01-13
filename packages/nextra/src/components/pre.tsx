@@ -6,12 +6,12 @@ import { WordWrapIcon } from '../icons'
 export const Pre = ({
   children,
   className = '',
-  value,
+  hasCopyCode,
   filename,
   ...props
 }: ComponentProps<'pre'> & {
   filename?: string
-  value?: string
+  hasCopyCode?: boolean
 }): ReactElement => {
   const preRef = useRef<HTMLPreElement | null>(null)
 
@@ -26,25 +26,27 @@ export const Pre = ({
   }, [])
 
   return (
-    <pre
-      className={[
-        'nextra-code nx-relative nx-mt-6 first:nx-mt-0 nx-bg-primary-700/5 nx-mb-4 nx-overflow-x-auto nx-rounded-xl nx-font-medium nx-subpixel-antialiased dark:nx-bg-primary-300/10 nx-text-[.9em]',
-        'contrast-more:nx-border contrast-more:nx-border-primary-900/20 contrast-more:nx-contrast-150 contrast-more:dark:nx-border-primary-100/40',
-        filename ? 'nx-pt-12 nx-pb-4' : 'nx-py-4',
-        className
-      ].join(' ')}
-      ref={preRef}
-      {...props}
-    >
+    <div className="nextra-code-block nx-relative nx-mt-6 first:nx-mt-0">
       {filename && (
         <div className="nx-absolute nx-top-0 nx-z-[1] nx-w-full nx-truncate nx-rounded-t-xl nx-bg-primary-700/5 nx-py-2 nx-px-4 nx-text-xs nx-text-gray-700 dark:nx-bg-primary-300/10 dark:nx-text-gray-200">
           {filename}
         </div>
       )}
-      {children}
+      <pre
+        className={[
+          'nx-bg-primary-700/5 nx-mb-4 nx-overflow-x-auto nx-rounded-xl nx-font-medium nx-subpixel-antialiased dark:nx-bg-primary-300/10 nx-text-[.9em]',
+          'contrast-more:nx-border contrast-more:nx-border-primary-900/20 contrast-more:nx-contrast-150 contrast-more:dark:nx-border-primary-100/40',
+          filename ? 'nx-pt-12 nx-pb-4' : 'nx-py-4',
+          className
+        ].join(' ')}
+        ref={preRef}
+        {...props}
+      >
+        {children}
+      </pre>
       <div
         className={[
-          'nx-opacity-0 nx-transition [pre:hover>&]:nx-opacity-100 focus-within:nx-opacity-100',
+          'nx-opacity-0 nx-transition [div:hover>&]:nx-opacity-100 focus-within:nx-opacity-100',
           'nx-flex nx-gap-1 nx-absolute nx-m-[11px] nx-right-0',
           filename ? 'nx-top-8' : 'nx-top-0'
         ].join(' ')}
@@ -56,7 +58,7 @@ export const Pre = ({
         >
           <WordWrapIcon className="nx-pointer-events-none nx-h-4 nx-w-4" />
         </Button>
-        {value && (
+        {hasCopyCode && (
           <CopyToClipboard
             getValue={() =>
               preRef.current?.querySelector('code')?.textContent || ''
@@ -64,6 +66,6 @@ export const Pre = ({
           />
         )}
       </div>
-    </pre>
+    </div>
   )
 }
