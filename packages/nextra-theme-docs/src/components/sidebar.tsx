@@ -410,7 +410,7 @@ export function Sidebar({
         )}
         ref={containerRef}
       >
-        <div className={'nx-px-4 nx-pt-4 md:nx-hidden'}>
+        <div className="nx-px-4 nx-pt-4 md:nx-hidden">
           {renderComponent(config.search.component, {
             directories: flatDirectories
           })}

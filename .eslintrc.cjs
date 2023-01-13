@@ -57,7 +57,13 @@ module.exports = {
             message:
               "`useMemo` with an empty dependency array can't provide a stable reference, use `useRef` instead."
           }
-        ]
+        ],
+        'react/jsx-filename-extension': [
+          'error',
+          { extensions: ['.tsx', '.jsx'], allow: 'as-needed' }
+        ],
+        'react/jsx-curly-brace-presence': 'error',
+        'react/jsx-boolean-value': 'error',
       },
       settings: {
         react: { version: 'detect' }
@@ -76,6 +82,9 @@ module.exports = {
           'docs/tsconfig.json',
           'tsconfig.eslint.json'
         ]
+      },
+      rules: {
+        '@typescript-eslint/no-unnecessary-type-assertion': 'error'
       }
     },
     // ⚙️ nextra-theme-docs
