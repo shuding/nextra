@@ -39,11 +39,11 @@ module.exports = {
       files: '{packages,examples,docs}/**',
       extends: [
         'plugin:react/recommended',
+        'plugin:react/jsx-runtime',
         'plugin:react-hooks/recommended',
         'plugin:@next/next/recommended'
       ],
       rules: {
-        'react/react-in-jsx-scope': 'off',
         'react/prop-types': 'off',
         'react/no-unknown-property': ['error', { ignore: ['jsx'] }],
         'react-hooks/exhaustive-deps': 'error',
