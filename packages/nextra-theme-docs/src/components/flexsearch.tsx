@@ -255,7 +255,7 @@ export function Flexsearch({
         setLoading(false)
       }
     },
-    [locale]
+    [locale, basePath]
   )
 
   const handleChange = async (value: string) => {

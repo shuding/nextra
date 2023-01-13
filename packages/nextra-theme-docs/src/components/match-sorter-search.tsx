@@ -7,7 +7,7 @@ import { SearchResult } from '../types'
 
 export function MatchSorterSearch({
   className,
-  directories = []
+  directories
 }: {
   className?: string
   directories: NormalItem[]
@@ -27,7 +27,7 @@ export function MatchSorterSearch({
             })
           )
         : [],
-    [search]
+    [search, directories]
   )
 
   return (

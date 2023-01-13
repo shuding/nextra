@@ -22,7 +22,7 @@
  * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  * Source: https://github.com/reach/reach-ui/blob/43f450db7bcb25a743121fe31355f2294065a049/LICENSE
  */
 import React, { forwardRef, ComponentProps, ReactElement } from 'react'
@@ -79,6 +79,8 @@ export const SkipNavLink = forwardRef<HTMLAnchorElement, SkipNavLinkProps>(
   }
 )
 
+SkipNavLink.displayName = 'SkipNavLink'
+
 type SkipNavContentProps = Omit<ComponentProps<'div'>, 'ref' | 'children'>
 
 export const SkipNavContent = forwardRef<HTMLDivElement, SkipNavContentProps>(
@@ -86,3 +88,5 @@ export const SkipNavContent = forwardRef<HTMLDivElement, SkipNavContentProps>(
     return <div {...props} ref={forwardedRef} id={id || DEFAULT_ID} />
   }
 )
+
+SkipNavContent.displayName = 'SkipNavContent'

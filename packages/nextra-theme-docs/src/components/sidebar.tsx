@@ -100,7 +100,7 @@ function FolderImpl({
     if (activeRouteInside || focusedRouteInside) {
       TreeState[item.route] = true
     }
-  }, [activeRouteInside || focusedRouteInside])
+  }, [activeRouteInside, focusedRouteInside, item.route])
 
   if (item.type === 'menu') {
     const menu = item as MenuItem
@@ -381,7 +381,7 @@ export function Sidebar({
   // Always close mobile nav when route was changed (e.g. logo click)
   useEffect(() => {
     setMenu(false)
-  }, [router.asPath])
+  }, [router.asPath, setMenu])
 
   const hasMenu = config.i18n.length > 0 || config.darkMode
 
@@ -392,7 +392,7 @@ export function Sidebar({
       ) : null}
       <div
         className={cn(
-          '[transition:background-color_1.5s_ease] motion-reduce:nx-transition-none',
+          'motion-reduce:nx-transition-none [transition:background-color_1.5s_ease]',
           menu
             ? 'nx-fixed nx-inset-0 nx-z-10 nx-bg-black/80 dark:nx-bg-black/60'
             : 'nx-bg-transparent'

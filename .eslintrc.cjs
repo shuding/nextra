@@ -1,7 +1,7 @@
 const TAILWIND_CONFIG = {
   extends: ['plugin:tailwindcss/recommended'],
   rules: {
-    'tailwindcss/classnames-order': 'error',
+    'tailwindcss/classnames-order': 'off', // conflicts with prettier-plugin-tailwindcss
     'tailwindcss/enforces-negative-arbitrary-values': 'error',
     'tailwindcss/enforces-shorthand': 'error',
     'tailwindcss/migration-from-tailwind-2': 'error',
@@ -15,13 +15,53 @@ module.exports = {
   reportUnusedDisableDirectives: true,
   ignorePatterns: ['next-env.d.ts'],
   overrides: [
+    // Rules for all files
     {
       files: '**/*.{js,jsx,cjs,mjs,ts,tsx,cts,mts}',
       extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
       rules: {
-        'prefer-object-has-own': 'error'
+        'prefer-object-has-own': 'error',
+        'logical-assignment-operators': [
+          'error',
+          'always',
+          { enforceForIfStatements: true }
+        ],
+        '@typescript-eslint/prefer-optional-chain': 'error',
+        // todo: enable
+        '@typescript-eslint/no-explicit-any': 'off',
+        '@typescript-eslint/no-non-null-assertion': 'off'
       }
     },
+    // Rules for React files
+    {
+      files: '{packages,examples,docs}/**',
+      extends: [
+        'plugin:react/recommended',
+        'plugin:react-hooks/recommended',
+        'plugin:@next/next/recommended'
+      ],
+      rules: {
+        'react/react-in-jsx-scope': 'off',
+        'react/prop-types': 'off',
+        'react/no-unknown-property': ['error', { ignore: ['jsx'] }],
+        'react-hooks/exhaustive-deps': 'error',
+        'react/self-closing-comp': 'error',
+        'no-restricted-syntax': [
+          'error',
+          {
+            // ❌ useMemo(…, [])
+            selector:
+              'CallExpression[callee.name=useMemo][arguments.1.type=ArrayExpression][arguments.1.elements.length=0]',
+            message:
+              "`useMemo` with an empty dependency array can't provide a stable reference, use `useRef` instead."
+          }
+        ]
+      },
+      settings: {
+        react: { version: 'detect' }
+      }
+    },
+    // Rules for TypeScript files
     {
       files: '**/*.{ts,tsx,cts,mts}',
       extends: [
@@ -36,10 +76,20 @@ module.exports = {
         ]
       }
     },
+    // ⚙️ nextra-theme-docs
     {
-      files: 'packages/nextra-theme-docs/**/*',
+      ...TAILWIND_CONFIG,
+      files: 'packages/nextra-theme-docs/**',
       plugins: ['typescript-sort-keys'],
+      settings: {
+        tailwindcss: {
+          config: 'packages/nextra-theme-docs/tailwind.config.js',
+          callees: ['cn'],
+          whitelist: ['nextra-breadcrumb', 'nextra-callout', 'nextra-bleed']
+        }
+      },
       rules: {
+        ...TAILWIND_CONFIG.rules,
         'no-restricted-imports': [
           'error',
           {
@@ -49,36 +99,10 @@ module.exports = {
         ]
       }
     },
-    {
-      files: 'packages/nextra/src/**/*',
-      rules: {
-        'no-restricted-imports': [
-          'error',
-          {
-            patterns: [
-              {
-                group: ['fs', 'node:fs'],
-                message: 'Use `graceful-fs` instead'
-              }
-            ]
-          }
-        ]
-      }
-    },
+    // ⚙️ nextra-theme-blog
     {
       ...TAILWIND_CONFIG,
-      files: 'packages/nextra-theme-docs/**/*',
-      settings: {
-        tailwindcss: {
-          config: 'packages/nextra-theme-docs/tailwind.config.js',
-          callees: ['cn'],
-          whitelist: ['nextra-breadcrumb', 'nextra-callout', 'nextra-bleed']
-        }
-      }
-    },
-    {
-      ...TAILWIND_CONFIG,
-      files: 'packages/nextra-theme-blog/**/*',
+      files: 'packages/nextra-theme-blog/**',
       settings: {
         tailwindcss: {
           config: 'packages/nextra-theme-blog/tailwind.config.js',
@@ -86,33 +110,52 @@ module.exports = {
         }
       }
     },
+    // ⚙️ nextra
     {
       ...TAILWIND_CONFIG,
-      files: 'packages/nextra/**/*',
+      files: 'packages/nextra/**',
       settings: {
         tailwindcss: {
           config: 'packages/nextra-theme-docs/tailwind.config.js'
         }
       }
     },
+    // ⚙️ Docs
     {
       ...TAILWIND_CONFIG,
-      files: 'examples/swr-site/**/*',
-      settings: {
-        tailwindcss: {
-          config: 'examples/swr-site/tailwind.config.js'
-        }
-      }
-    },
-    {
-      ...TAILWIND_CONFIG,
-      files: 'docs/**/*',
+      files: 'docs/**',
       settings: {
         tailwindcss: {
           config: 'docs/tailwind.config.js',
           callees: ['cn'],
           whitelist: ['dash-ring', 'theme-1', 'theme-2', 'theme-3', 'theme-4']
-        }
+        },
+        next: { rootDir: 'docs' }
+      }
+    },
+    // ⚙️ SWR-site example
+    {
+      ...TAILWIND_CONFIG,
+      files: 'examples/swr-site/**',
+      settings: {
+        tailwindcss: {
+          config: 'examples/swr-site/tailwind.config.js'
+        },
+        next: { rootDir: 'examples/swr-site' }
+      }
+    },
+    // ⚙️ blog example
+    {
+      files: 'examples/blog/**',
+      settings: {
+        next: { rootDir: 'examples/blog' }
+      }
+    },
+    // ⚙️ docs example
+    {
+      files: 'examples/docs/**',
+      settings: {
+        next: { rootDir: 'examples/docs' }
       }
     },
     {
@@ -125,6 +168,29 @@ module.exports = {
       ],
       env: {
         node: true
+      }
+    },
+    {
+      files: 'packages/{nextra,nextra-theme-docs,nextra-theme-blog}/**',
+      rules: {
+        // disable rule because we don't have pagesDir in above folders
+        '@next/next/no-html-link-for-pages': 'off'
+      }
+    },
+    {
+      files: 'packages/nextra/src/**',
+      rules: {
+        'no-restricted-imports': [
+          'error',
+          {
+            patterns: [
+              {
+                group: ['fs', 'node:fs'],
+                message: 'Use `graceful-fs` instead'
+              }
+            ]
+          }
+        ]
       }
     }
   ]

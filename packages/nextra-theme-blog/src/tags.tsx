@@ -8,12 +8,10 @@ const NEXTRA_INTERNAL = Symbol.for('__nextra_internal__')
 
 export const TagTitle = ({ prefix = 'Posts tagged with ' }) => {
   const { tag } = useSSG()
+  const title = `${prefix}${tag}`
   return (
     <Head>
-      <title>
-        {prefix}
-        {tag}
-      </title>
+      <title>{title}</title>
     </Head>
   )
 }

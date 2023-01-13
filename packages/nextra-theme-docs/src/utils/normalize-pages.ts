@@ -105,9 +105,7 @@ export function normalizePages({
         break
       }
       // fallback
-      if (!_meta) {
-        _meta = item.data
-      }
+      _meta ||= item.data
     }
   }
   const meta = _meta || {}

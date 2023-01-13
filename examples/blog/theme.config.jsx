@@ -3,10 +3,10 @@ export default {
   components: {
     h1: ({ children }) => (
       <h1 style={{
-        '-webkit-background-clip': 'text',
-        '-webkit-text-fill-color': 'transparent',
+        WebkitBackgroundClip: 'text',
+        WebkitTextFillColor: 'transparent',
         backgroundClip: 'text',
-        backgroundImage: 'linear-gradient(90deg,#7928CA,#FF0080);',
+        backgroundImage: 'linear-gradient(90deg,#7928CA,#FF0080)',
       }}
       >
         {children}

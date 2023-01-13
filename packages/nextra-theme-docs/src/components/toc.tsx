@@ -14,7 +14,9 @@ export type TOCProps = {
 }
 
 export function TOC({ headings, filePath }: TOCProps): ReactElement {
-  const slugger = new Slugger()
+  const sluggerRef = useRef<Slugger>()
+  sluggerRef.current ||= new Slugger()
+
   const activeAnchor = useActiveAnchor()
   const config = useConfig()
   const tocRef = useRef<HTMLDivElement>(null)
@@ -29,7 +31,7 @@ export function TOC({ headings, filePath }: TOCProps): ReactElement {
           const text = getHeadingText(heading)
           return {
             text,
-            slug: slugger.slug(text),
+            slug: sluggerRef.current!.slug(text),
             depth: heading.depth as any
           }
         }),

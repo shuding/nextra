@@ -13,22 +13,21 @@ export function useInternals() {
     NEXTRA_INTERNAL
   ]
   const { route } = useRouter()
+  const rerender = useState({})[1]
 
-  if (!IS_PRODUCTION) {
-    const rerender = useState({})[1]
-    useEffect(() => {
-      const trigger = () => rerender({})
+  useEffect(() => {
+    if (IS_PRODUCTION) return
+    const trigger = () => rerender({})
 
-      const listeners = __nextra_internal__.refreshListeners
+    const listeners = __nextra_internal__.refreshListeners
 
-      listeners[route] ||= []
-      listeners[route].push(trigger)
+    listeners[route] ||= []
+    listeners[route].push(trigger)
 
-      return () => {
-        listeners[route].splice(listeners[route].indexOf(trigger), 1)
-      }
-    }, [route])
-  }
+    return () => {
+      listeners[route].splice(listeners[route].indexOf(trigger), 1)
+    }
+  }, [route, __nextra_internal__.refreshListeners, rerender])
 
   const context = __nextra_internal__.context[route]
 
