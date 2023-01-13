@@ -1,5 +1,13 @@
 # nextra-theme-docs
 
+## 2.2.3
+
+### Patch Changes
+
+- 11b2870: fix copy code button position
+- 0cab136: pass route to titleComponent
+- cd0cc63: fix defaultMenuCollapseLevel behavior
+
 ## 2.2.2
 
 ### Patch Changes
