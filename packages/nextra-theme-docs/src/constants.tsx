@@ -132,9 +132,9 @@ export const themeSchema = z
     }),
     sidebar: z.object({
       defaultMenuCollapseLevel: z.number().min(1).int(),
-      titleComponent: z.custom<ReactNode | FC<{ title: string; type: string }>>(
-        ...reactNode
-      )
+      titleComponent: z.custom<
+        ReactNode | FC<{ title: string; type: string; route: string }>
+      >(...reactNode)
     }),
     toc: z.object({
       component: z.custom<ReactNode | FC<TOCProps>>(...reactNode),

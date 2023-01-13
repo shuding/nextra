@@ -154,7 +154,8 @@ function FolderImpl({
       >
         {renderComponent(config.sidebar.titleComponent, {
           title: item.title,
-          type: item.type
+          type: item.type,
+          route: item.route
         })}
         <ArrowRightIcon
           className="nx-h-[18px] nx-min-w-[18px] nx-rounded-sm nx-p-0.5 hover:nx-bg-gray-800/5 dark:hover:nx-bg-gray-100/5"
@@ -192,7 +193,8 @@ function Separator({ title }: { title: string }): ReactElement {
       {title ? (
         renderComponent(config.sidebar.titleComponent, {
           title,
-          type: 'separator'
+          type: 'separator',
+          route: ''
         })
       ) : (
         <hr className="nx-mx-2 nx-border-t nx-border-gray-200 dark:nx-border-primary-100/10" />
@@ -242,7 +244,8 @@ function File({
       >
         {renderComponent(config.sidebar.titleComponent, {
           title: item.title,
-          type: item.type
+          type: item.type,
+          route: item.route
         })}
       </Anchor>
       {active && anchors.length > 0 && (
