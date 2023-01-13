@@ -15,6 +15,7 @@ import {
   themeSchema
 } from '../constants'
 import { MenuProvider } from './menu'
+import type { ZodError } from 'zod'
 
 type Config = DocsThemeConfig &
   Pick<PageOpts, 'flexsearch' | 'newNextLinkBehavior' | 'title' | 'frontMatter'>
@@ -29,6 +30,10 @@ export const useConfig = () => useContext(ConfigContext)
 
 let theme: DocsThemeConfig
 let isValidated = process.env.NODE_ENV === 'production'
+
+function lowerCaseFirstLetter(s: string) {
+  return s.charAt(0).toLowerCase() + s.slice(1)
+}
 
 export const ConfigProvider = ({
   children,
@@ -52,7 +57,24 @@ export const ConfigProvider = ({
     )
   }
   if (!isValidated) {
-    theme = themeSchema.parse(theme)
+    try {
+      theme = themeSchema.parse(theme, {
+        errorMap: err => ({ message: 'Invalid theme config' })
+      })
+    } catch (err) {
+      console.error('[nextra] Error validating the theme config')
+      console.error(
+        (err as ZodError).issues
+          .map(
+            issue =>
+              '[nextra] Error in config `' +
+              issue.path.join('.') +
+              '`: ' +
+              lowerCaseFirstLetter(issue.message || '')
+          )
+          .join('\n')
+      )
+    }
     isValidated = true
   }
   const extendedConfig: Config = {

@@ -17,7 +17,12 @@ export const DEFAULT_LOCALE = 'en-US'
 export const IS_BROWSER = typeof window !== 'undefined'
 
 function isReactNode(value: unknown): boolean {
-  return isString(value) || isValidElement(value as any) || isFunction(value)
+  return (
+    value == null ||
+    isString(value) ||
+    isFunction(value) ||
+    isValidElement(value as any)
+  )
 }
 
 function isFunction(value: unknown): boolean {
@@ -126,7 +131,7 @@ export const themeSchema = z
       labels: z.string()
     }),
     sidebar: z.object({
-      defaultMenuCollapseLevel: z.number().min(2).int(),
+      defaultMenuCollapseLevel: z.number().min(1).int(),
       titleComponent: z.custom<ReactNode | FC<{ title: string; type: string }>>(
         ...reactNode
       )
@@ -143,7 +148,7 @@ export const themeSchema = z
 
 const publicThemeSchema = themeSchema.deepPartial().extend({
   // to have `locale` and `text` as required properties
-  i18n: i18nSchema
+  i18n: i18nSchema.optional()
 })
 
 export type DocsThemeConfig = z.infer<typeof themeSchema>

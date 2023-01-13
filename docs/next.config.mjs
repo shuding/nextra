@@ -12,5 +12,9 @@ const withNextra = nextra({
 })
 
 export default withNextra({
-  reactStrictMode: true
+  reactStrictMode: true,
+  eslint: {
+    // Eslint behaves weirdly in this monorepo.
+    ignoreDuringBuilds: true
+  }
 })

@@ -34,6 +34,10 @@ summary {
   @apply nx-rounded;
 }
 
+.nextra-content {
+  @apply nx-text-slate-700 dark:nx-text-slate-200;
+}
+
 @media (max-width: 767px) {
   .nextra-sidebar-container {
     @apply nx-fixed nx-pt-[calc(var(--nextra-navbar-height))] nx-top-0 nx-w-full nx-bottom-0 nx-z-[15] nx-overscroll-contain nx-bg-white dark:nx-bg-dark;
