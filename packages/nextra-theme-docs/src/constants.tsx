@@ -143,7 +143,8 @@ export const DEFAULT_THEME: DocsThemeConfig = {
   },
   sidebar: {
     defaultMenuCollapsed: false,
-    subtitle: null
+    subtitle: null,
+    toggleButton: false,
   },
   titleSuffix: ' – Nextra',
   toc: {

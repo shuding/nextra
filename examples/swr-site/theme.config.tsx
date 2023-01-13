@@ -93,14 +93,6 @@ const config: DocsThemeConfig = {
     key: "swr-2",
     text: "SWR 2.0 is out! Read more →",
   },
-  bodyExtraContent() {
-    const router = useRouter();
-    return (
-      router.route.startsWith("/docs") && (
-        <>💪 content from `config.bodyExtraContent`</>
-      )
-    );
-  },
   darkMode: true,
   docsRepositoryBase:
     "https://github.com/shuding/nextra/blob/core/examples/swr-site",
@@ -210,6 +202,7 @@ const config: DocsThemeConfig = {
         {title}
       </div>
     ),
+    toggleButton: true,
   },
   titleSuffix() {
     const { locale } = useRouter();

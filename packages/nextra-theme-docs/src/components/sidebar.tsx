@@ -11,6 +11,7 @@ import Slugger from 'github-slugger'
 import { useRouter } from 'next/router'
 import { Heading } from 'nextra'
 import scrollIntoView from 'scroll-into-view-if-needed'
+import { Details, Summary } from 'nextra/components'
 
 import { useConfig, useMenu, useActiveAnchor } from '../contexts'
 import {
@@ -23,7 +24,7 @@ import {
 } from '../utils'
 import { LocaleSwitch } from './locale-switch'
 import ThemeSwitch from './theme-switch'
-import { ArrowRightIcon } from 'nextra/icons'
+import { ExpandIcon } from 'nextra/icons'
 import { Collapse } from 'nextra/components'
 import { Anchor } from './anchor'
 import { DEFAULT_LOCALE } from '../constants'
@@ -70,7 +71,7 @@ function FolderImpl({
 
   const { setMenu } = useMenu()
   const config = useConfig()
-  const open =
+  const isOpen =
     TreeState[item.route] !== undefined
       ? TreeState[item.route]
       : active || activeRouteInside || !config.sidebar.defaultMenuCollapsed
@@ -101,61 +102,60 @@ function FolderImpl({
     })
   }
   return (
-    <li className={cn({ open, active })}>
-      <Anchor
-        href={
-          (item as Item).withIndexPage
-            ? item.route
-            : item.children?.find(child => child.route)?.route
-        }
+    <Details
+      className={cn({ open: isOpen, active })}
+      open={isOpen}
+      variant="raw"
+    >
+      <Summary
+        variant="raw"
         className={cn(
-          'gap-2 items-center justify-between',
-          classes.link,
+          'flex-row-reverse items-center',
           active ? classes.active : classes.inactive
         )}
-        onClick={e => {
-          const clickedToggleIcon = ['svg', 'path'].includes(
-            (e.target as HTMLElement).tagName.toLowerCase()
-          )
-          if (clickedToggleIcon) {
-            e.preventDefault()
-          }
-          if ((item as Item).withIndexPage) {
+        iconProps={{
+          className:
+            'rounded-sm hover:bg-gray-800/5 dark:hover:bg-gray-100/5 ltr:mr-2 rtl:ml-2',
+          pathClassName: 'stroke-2',
+          onClick() {
+            if (!(item as Item).withIndexPage) {
+              if (active) return
+              TreeState[item.route] = !isOpen
+              rerender({})
+              return
+            }
             // If it's focused, we toggle it. Otherwise, always open it.
-            if (active || clickedToggleIcon) {
-              TreeState[item.route] = !open
+            if (active) {
+              TreeState[item.route] = !isOpen
             } else {
               TreeState[item.route] = true
               setMenu(false)
             }
             rerender({})
-            return
           }
-          if (active) return
-          TreeState[item.route] = !open
-          rerender({})
         }}
       >
-        {item.title}
-        <ArrowRightIcon
-          className="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"
-          pathClassName={cn(
-            'origin-center transition-transform rtl:-rotate-180',
-            open && 'ltr:rotate-90 rtl:rotate-[-270deg]'
-          )}
+        <Anchor
+          href={
+            (item as Item).withIndexPage
+              ? item.route
+              : item.children?.find(child => child.route)?.route
+          }
+          className={cn(classes.link, 'grow')}
+          tabIndex={-1}
+        >
+          {item.title}
+        </Anchor>
+      </Summary>
+      {item.children && (
+        <Menu
+          className={cn(classes.border, 'ltr:ml-1 rtl:mr-1')}
+          directories={item.children}
+          base={item.route}
+          anchors={anchors}
         />
-      </Anchor>
-      <Collapse open={open}>
-        {Array.isArray(item.children) ? (
-          <Menu
-            className={cn(classes.border, 'ltr:ml-1 rtl:mr-1')}
-            directories={item.children}
-            base={item.route}
-            anchors={anchors}
-          />
-        ) : null}
-      </Collapse>
-    </li>
+      )}
+    </Details>
   )
 }
 
@@ -266,7 +266,6 @@ interface SideBarProps {
   fullDirectories: Item[]
   asPopover?: boolean
   headings?: Heading[]
-  includePlaceholder: boolean
 }
 
 const emptyHeading: any[] = []
@@ -276,8 +275,7 @@ export function Sidebar({
   flatDirectories,
   fullDirectories,
   asPopover = false,
-  headings = emptyHeading,
-  includePlaceholder
+  headings = emptyHeading
 }: SideBarProps): ReactElement {
   const config = useConfig()
   const { menu } = useMenu()
@@ -314,45 +312,46 @@ export function Sidebar({
 
   const hasMenu = !!(config.i18n.length || config.darkMode)
 
+  const [showSidebar, setSidebar] = useState(true)
+
   return (
-    <>
-      {includePlaceholder && asPopover ? (
-        <div className="hidden h-0 w-64 flex-shrink-0 xl:block" />
-      ) : null}
-      <aside
-        className={cn(
-          'nextra-sidebar-container',
-          'fixed inset-y-16 z-[15] w-full flex-shrink-0 overflow-y-auto md:sticky',
-          'motion-reduce:transform-none',
-          asPopover ? 'md:hidden' : 'md:block',
-          hasMenu && 'with-menu',
-          menu && 'open',
-          'nextra-scrollbar w-full md:w-64'
-        )}
-        ref={containerRef}
-      >
-        <div className="h-full pl-[calc(env(safe-area-inset-left)-1.5rem)] md:h-auto [-webkit-touch-callout:none]">
-          <div className="min-h-[calc(100vh-var(--nextra-navbar-height)-var(--nextra-menu-height))] py-4 px-2">
-            {menu ? (
-              <>
-                <div
-                  className={cn(
-                    'sticky top-0 z-[1] -mt-4 py-4 bg-white',
-                    'dark:bg-dark shadow-[0_2px_14px_6px_#fff] dark:shadow-[0_2px_14px_6px_#111]'
-                  )}
-                >
-                  {renderComponent(config.search.component, {
-                    directories: flatDirectories
-                  })}
-                </div>
-                <Menu
-                  // The mobile dropdown menu, shows all the directories.
-                  directories={fullDirectories}
-                  // Always show the anchor links on mobile (`md`).
-                  anchors={anchors}
-                />
-              </>
-            ) : (
+    <aside
+      className={cn(
+        'nextra-sidebar-container',
+        'fixed inset-y-16 z-[15] w-full flex-shrink-0 overflow-y-auto md:sticky',
+        'motion-reduce:transform-none',
+        asPopover ? 'md:hidden' : 'md:block',
+        hasMenu && 'with-menu',
+        menu && 'open',
+        showSidebar
+          ? 'nextra-scrollbar w-full md:w-64'
+          : 'no-scrollbar md:w-20 transform-gpu ease-in-out motion-reduce:transition-none transition-all'
+      )}
+      ref={containerRef}
+    >
+      <div className="h-full pl-[calc(env(safe-area-inset-left)-1.5rem)] md:h-auto [-webkit-touch-callout:none]">
+        <div className="min-h-[calc(100vh-var(--nextra-navbar-height)-var(--nextra-menu-height))] py-4 px-2">
+          {menu ? (
+            <>
+              <div
+                className={cn(
+                  'sticky top-0 z-[1] -mt-4 py-4 bg-white',
+                  'dark:bg-dark shadow-[0_2px_14px_6px_#fff] dark:shadow-[0_2px_14px_6px_#111]'
+                )}
+              >
+                {renderComponent(config.search.component, {
+                  directories: flatDirectories
+                })}
+              </div>
+              <Menu
+                // The mobile dropdown menu, shows all the directories.
+                directories={fullDirectories}
+                // Always show the anchor links on mobile (`md`).
+                anchors={anchors}
+              />
+            </>
+          ) : (
+            <Collapse open={showSidebar} vertical={false}>
               <Menu
                 className="hidden md:flex"
                 // The sidebar menu, shows only the docs directories.
@@ -361,33 +360,43 @@ export function Sidebar({
                 // the sidebar when `floatTOC` is enabled.
                 anchors={config.toc.float ? [] : anchors}
               />
-            )}
-          </div>
-
-          {hasMenu && (
-            <div
-              className={cn(
-                'sticky bottom-0 bg-white border-t shadow-[0_-12px_16px_#fff]',
-                'flex justify-end items-center gap-2',
-                'dark:bg-dark dark:border-neutral-800 dark:shadow-[0_-12px_16px_#111]',
-                'contrast-more:shadow-none contrast-more:dark:shadow-none contrast-more:border-neutral-400',
-                [
-                  'h-[var(--nextra-menu-height)]',
-                  'mx-3' // hide ring on focused sidebar links
-                ]
-              )}
-            >
-              {config.i18n.length > 0 && (
-                <LocaleSwitch
-                  options={config.i18n}
-                  className="ltr:mr-auto rtl:ml-auto"
-                />
-              )}
-              {config.darkMode && <ThemeSwitch lite={config.i18n.length > 0} />}
-            </div>
+            </Collapse>
           )}
         </div>
-      </aside>
-    </>
+
+        {hasMenu && (
+          <div
+            className={cn(
+              'sticky bottom-0 bg-white border-t shadow-[0_-12px_16px_#fff]',
+              'flex justify-end items-center gap-2',
+              'dark:bg-dark dark:border-neutral-800 dark:shadow-[0_-12px_16px_#111]',
+              'contrast-more:shadow-none contrast-more:dark:shadow-none contrast-more:border-neutral-400',
+              'mx-3', // hide ring on focused sidebar links
+              showSidebar
+                ? 'h-[var(--nextra-menu-height)]'
+                : 'py-4 flex-wrap justify-center'
+            )}
+          >
+            {config.i18n.length > 0 && (
+              <LocaleSwitch
+                options={config.i18n}
+                lite={!showSidebar}
+                className={showSidebar ? 'ltr:mr-auto rtl:ml-auto' : ''}
+              />
+            )}
+            {config.darkMode && <ThemeSwitch lite={config.i18n.length > 0} />}
+            {config.sidebar.toggleButton && (
+              <button
+                title={showSidebar ? 'Hide sidebar' : 'Show sidebar'}
+                className="hidden md:block h-7 rounded-md transition-colors text-gray-600 dark:text-gray-400 px-2 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-primary-100/5 dark:hover:text-gray-50"
+                onClick={() => setSidebar(prev => !prev)}
+              >
+                <ExpandIcon isOpen={showSidebar} />
+              </button>
+            )}
+          </div>
+        )}
+      </div>
+    </aside>
   )
 }
