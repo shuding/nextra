@@ -63,7 +63,7 @@ module.exports = {
           { extensions: ['.tsx', '.jsx'], allow: 'as-needed' }
         ],
         'react/jsx-curly-brace-presence': 'error',
-        'react/jsx-boolean-value': 'error',
+        'react/jsx-boolean-value': 'error'
       },
       settings: {
         react: { version: 'detect' }
@@ -127,7 +127,8 @@ module.exports = {
       files: 'packages/nextra/**',
       settings: {
         tailwindcss: {
-          config: 'packages/nextra-theme-docs/tailwind.config.js'
+          config: 'packages/nextra-theme-docs/tailwind.config.js',
+          whitelist: ['nextra-code-block']
         }
       }
     },

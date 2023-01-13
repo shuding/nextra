@@ -17,6 +17,7 @@ import theme from './theme.json'
 import { truthy } from './utils'
 import remarkMath from 'remark-math'
 import rehypeKatex from 'rehype-katex'
+import { CODE_BLOCK_FILENAME_REGEX } from './constants'
 
 globalThis.__nextra_temp_do_not_use = () => {
   // @ts-expect-error -- ignore error - File is not a module
@@ -38,7 +39,7 @@ const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS = {
   onVisitHighlightedWord(node: any) {
     node.properties.className = ['highlighted']
   },
-  filterMetaString: (meta: string) => meta.replace(/filename="[^"]*"/, '')
+  filterMetaString: (meta: string) => meta.replace(CODE_BLOCK_FILENAME_REGEX, '')
 }
 
 const cachedCompilerForFormat: Record<

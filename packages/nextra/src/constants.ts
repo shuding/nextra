@@ -34,3 +34,5 @@ export const PUBLIC_DIR = path.join(CWD, 'public')
 export const EXTERNAL_URL_REGEX = /^https?:\/\//
 
 export const NEXTRA_INTERNAL = Symbol.for('__nextra_internal__')
+
+export const CODE_BLOCK_FILENAME_REGEX = /filename="[^"]*"/
