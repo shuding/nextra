@@ -26,7 +26,7 @@
     "@typescript-eslint/eslint-plugin": "5.48.1",
     "@typescript-eslint/parser": "5.48.1",
     "eslint": "8.31.0",
-    "eslint-plugin-react": "7.31.11",
+    "eslint-plugin-react": "7.32.0",
     "eslint-plugin-react-hooks": "4.6.0",
     "eslint-plugin-tailwindcss": "3.8.0",
     "eslint-plugin-typescript-sort-keys": "2.1.0",
