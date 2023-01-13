@@ -74,14 +74,12 @@ export async function compileMdx(
   // Extract frontMatter information if it exists
   const { data: frontMatter, content } = grayMatter(source)
 
-  source = content
-
   const structurizedData = Object.create(null)
 
   const mdxOptions = {
     ...(loaderOptions.mdxOptions || {}),
     // You can override MDX options in the frontMatter too.
-    ...frontMatter.mdxOptions as Record<string, unknown>
+    ...(frontMatter.mdxOptions as Record<string, unknown>)
   }
   const format = mdxOptions.format || 'mdx'
   const compiler =
@@ -124,7 +122,7 @@ export async function compileMdx(
 
   try {
     const vFile = await compiler.process(
-      filePath ? { value: source, path: filePath } : source
+      filePath ? { value: content, path: filePath } : content
     )
     const result = String(vFile).replace('export default MDXContent;', '')
 
