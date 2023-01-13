@@ -7,7 +7,6 @@ import 'focus-visible'
 import cn from 'clsx'
 import { MDXProvider, useMDXComponents } from 'nextra/mdx'
 import { useMounted } from 'nextra/hooks'
-import { useData } from 'nextra/data'
 
 import './polyfill'
 import {
