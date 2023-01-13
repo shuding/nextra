@@ -33,10 +33,10 @@ export const attachMeta =
       if (!('data-rehype-pretty-code-fragment' in node.properties)) {
         return
       }
+      const meta = node.__nextra_meta
       // remove <div data-rehype-pretty-code-fragment /> element that wraps <pre /> element
       // because we'll wrap with our own <div />
       const preEl = Object.assign(node, node.children[0])
-      const meta = node.__nextra_meta
 
       preEl.properties.hasCopyCode = meta
         ? (defaultShowCopyCode && !/( |^)copy=false($| )/.test(meta)) ||
