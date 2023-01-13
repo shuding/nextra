@@ -202,6 +202,7 @@ const config: DocsThemeConfig = {
         {title}
       </div>
     ),
+    toggleButton: true,
   },
   titleSuffix() {
     const { locale } = useRouter();

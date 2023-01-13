@@ -129,7 +129,7 @@ const Body = ({
       )}
     >
       <main
-        className="w-full min-w-0 max-w-4xl px-6 pt-4 md:px-8"
+        className="w-full min-w-0 max-w-6xl px-6 pt-4 md:px-12"
         ref={mainElement}
       >
         {breadcrumb}
@@ -213,14 +213,17 @@ const InnerLayout = ({
         )}
       >
         <ActiveAnchorProvider>
-          <Sidebar
-            docsDirectories={docsDirectories}
-            flatDirectories={flatDirectories}
-            fullDirectories={directories}
-            headings={headings}
-            asPopover={hideSidebar}
-            includePlaceholder={themeContext.layout === 'default'}
-          />
+          {themeContext.layout === 'default' && hideSidebar ? (
+            <div className="hidden h-0 w-64 flex-shrink-0 xl:block" />
+          ) : (
+            <Sidebar
+              docsDirectories={docsDirectories}
+              flatDirectories={flatDirectories}
+              fullDirectories={directories}
+              headings={headings}
+              asPopover={hideSidebar}
+            />
+          )}
           {tocEl}
           <SkipNavContent />
           <Body

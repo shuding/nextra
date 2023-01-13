@@ -91,6 +91,7 @@ export interface DocsThemeConfig {
   sidebar: {
     defaultMenuCollapsed: boolean
     subtitle: ReactNode | FC<{ title: string }>
+    toggleButton: boolean
   }
   // Can't be React component, otherwise will get Warning: A title element received an array with more than 1 element as children.
   titleSuffix: string | (() => string)
