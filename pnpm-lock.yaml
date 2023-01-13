@@ -12,7 +12,7 @@ overrides:
   postcss: ^8.4.14
   postcss-cli: ^8.3.1
   autoprefixer: ^10.4.13
-  tailwindcss: ^3.1.8
+  tailwindcss: ^3.2.4
   '@tailwindcss/nesting': ^0.0.0-insiders.565cd3e
   '@tailwindcss/typography': ^0.5.8
   tsup: ^6.5.0
@@ -72,7 +72,7 @@ importers:
       postcss: ^8.4.14
       react: ^18.2.0
       react-dom: ^18.2.0
-      tailwindcss: ^3.1.8
+      tailwindcss: ^3.2.4
       typescript: ^4.9.4
     dependencies:
       '@vercel/og': 0.0.27
@@ -89,7 +89,7 @@ importers:
       autoprefixer: 10.4.13_postcss@8.4.14
       eslint: 8.31.0
       postcss: 8.4.14
-      tailwindcss: 3.1.8_postcss@8.4.14
+      tailwindcss: 3.2.4_postcss@8.4.14
       typescript: 4.9.4
 
   examples/blog:
@@ -144,7 +144,7 @@ importers:
       react: ^18.2.0
       react-dom: ^18.2.0
       react-intersection-observer: ^8.26.2
-      tailwindcss: ^3.1.8
+      tailwindcss: ^3.2.4
     dependencies:
       focus-visible: 5.2.0
       intersection-observer: 0.10.0
@@ -159,7 +159,7 @@ importers:
     devDependencies:
       autoprefixer: 10.4.13_postcss@8.4.14
       postcss: 8.4.14
-      tailwindcss: 3.1.8_postcss@8.4.14
+      tailwindcss: 3.2.4_postcss@8.4.14
     dependenciesMeta:
       nextra:
         injected: true
@@ -246,13 +246,13 @@ importers:
       react: ^18.2.0
       react-cusdis: ^2.1.3
       react-dom: ^18.2.0
-      tailwindcss: ^3.1.8
+      tailwindcss: ^3.2.4
       vitest: ^0.27.1
     dependencies:
       next-themes: 0.2.1_q76c2b4vyoegvsbrcwkfvimnai
     devDependencies:
       '@tailwindcss/nesting': 0.0.0-insiders.565cd3e_postcss@8.4.14
-      '@tailwindcss/typography': 0.5.8_tailwindcss@3.1.8
+      '@tailwindcss/typography': 0.5.8_tailwindcss@3.2.4
       '@types/react': 18.0.20
       '@types/react-dom': 18.0.6
       concurrently: 7.4.0
@@ -265,7 +265,7 @@ importers:
       react: 18.2.0
       react-cusdis: 2.1.3_biqbaboplfbrettd7655fr4n2y
       react-dom: 18.2.0_react@18.2.0
-      tailwindcss: 3.1.8_postcss@8.4.14
+      tailwindcss: 3.2.4_postcss@8.4.14
       vitest: 0.27.1
 
   packages/nextra-theme-docs:
@@ -298,7 +298,7 @@ importers:
       react: ^18.2.0
       react-dom: ^18.2.0
       scroll-into-view-if-needed: ^3.0.0
-      tailwindcss: ^3.1.8
+      tailwindcss: ^3.2.4
       vitest: ^0.27.1
       zod: ^3.20.2
     dependencies:
@@ -332,7 +332,7 @@ importers:
       postcss-lightningcss: 0.6.0_postcss@8.4.14
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-      tailwindcss: 3.1.8_postcss@8.4.14
+      tailwindcss: 3.2.4_postcss@8.4.14
       vitest: 0.27.1
 
 packages:
@@ -1485,7 +1485,7 @@ packages:
       postcss-nested: 5.0.6_postcss@8.4.14
     dev: true
 
-  /@tailwindcss/typography/0.5.8_tailwindcss@3.1.8:
+  /@tailwindcss/typography/0.5.8_tailwindcss@3.2.4:
     resolution: {integrity: sha512-xGQEp8KXN8Sd8m6R4xYmwxghmswrd0cPnNI2Lc6fmrC3OojysTBJJGSIVwPV56q4t6THFUK3HJ0EaWwpglSxWw==}
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders'
@@ -1494,7 +1494,7 @@ packages:
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       postcss-selector-parser: 6.0.10
-      tailwindcss: 3.1.8_postcss@8.4.14
+      tailwindcss: 3.2.4_postcss@8.4.14
     dev: true
 
   /@types/acorn/4.0.6:
@@ -3139,7 +3139,7 @@ packages:
     dependencies:
       fast-glob: 3.2.11
       postcss: 8.4.14
-      tailwindcss: 3.1.8_postcss@8.4.14
+      tailwindcss: 3.2.4_postcss@8.4.14
     transitivePeerDependencies:
       - ts-node
     dev: true
@@ -3395,6 +3395,17 @@ packages:
 
   /fast-glob/3.2.11:
     resolution: {integrity: sha512-xrO3+1bxSo3ZVHAnqzyuewYT6aMFHRAd4Kcs92MAonjwQZLsK9d0SF1IyQ3k5PoirxTW0Oe/RqFgMQ6TcNE5Ew==}
+    engines: {node: '>=8.6.0'}
+    dependencies:
+      '@nodelib/fs.stat': 2.0.5
+      '@nodelib/fs.walk': 1.2.8
+      glob-parent: 5.1.2
+      merge2: 1.4.1
+      micromatch: 4.0.5
+    dev: true
+
+  /fast-glob/3.2.12:
+    resolution: {integrity: sha512-DVj4CQIYYow0BlaelwK1pHl5n5cRSJfM60UA0zK891sVInoPri2Ekj7+e1CT3/3qxXenpI+nBBmQAcJPJgaj4w==}
     engines: {node: '>=8.6.0'}
     dependencies:
       '@nodelib/fs.stat': 2.0.5
@@ -5681,6 +5692,16 @@ packages:
       postcss-selector-parser: 6.0.10
     dev: true
 
+  /postcss-nested/6.0.0_postcss@8.4.14:
+    resolution: {integrity: sha512-0DkamqrPcmkBDsLn+vQDIrtkSbNkv5AD/M322ySo9kqFkCIYklym2xEmWkwo+Y3/qZo34tzEPNUw4y7yMCdv5w==}
+    engines: {node: '>=12.0'}
+    peerDependencies:
+      postcss: ^8.2.14
+    dependencies:
+      postcss: 8.4.14
+      postcss-selector-parser: 6.0.10
+    dev: true
+
   /postcss-reporter/7.0.5_postcss@8.4.14:
     resolution: {integrity: sha512-glWg7VZBilooZGOFPhN9msJ3FQs19Hie7l5a/eE6WglzYqVeH3ong3ShFcp9kDWJT1g2Y/wd59cocf9XxBtkWA==}
     engines: {node: '>=10'}
@@ -6492,8 +6513,8 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /tailwindcss/3.1.8_postcss@8.4.14:
-    resolution: {integrity: sha512-YSneUCZSFDYMwk+TGq8qYFdCA3yfBRdBlS7txSq0LUmzyeqRe3a8fBQzbz9M3WS/iFT4BNf/nmw9mEzrnSaC0g==}
+  /tailwindcss/3.2.4_postcss@8.4.14:
+    resolution: {integrity: sha512-AhwtHCKMtR71JgeYDaswmZXhPcW9iuI9Sp2LvZPo9upDZ7231ZJ7eA9RaURbhpXGVlrjX4cFNlB4ieTetEb7hQ==}
     engines: {node: '>=12.13.0'}
     hasBin: true
     peerDependencies:
@@ -6505,10 +6526,11 @@ packages:
       detective: 5.2.1
       didyoumean: 1.2.2
       dlv: 1.1.3
-      fast-glob: 3.2.11
+      fast-glob: 3.2.12
       glob-parent: 6.0.2
       is-glob: 4.0.3
       lilconfig: 2.0.6
+      micromatch: 4.0.5
       normalize-path: 3.0.0
       object-hash: 3.0.0
       picocolors: 1.0.0
@@ -6516,7 +6538,7 @@ packages:
       postcss-import: 14.1.0_postcss@8.4.14
       postcss-js: 4.0.0_postcss@8.4.14
       postcss-load-config: 3.1.4_postcss@8.4.14
-      postcss-nested: 5.0.6_postcss@8.4.14
+      postcss-nested: 6.0.0_postcss@8.4.14
       postcss-selector-parser: 6.0.10
       postcss-value-parser: 4.2.0
       quick-lru: 5.1.1
@@ -7410,7 +7432,7 @@ packages:
     resolution: {directory: packages/nextra-theme-blog, type: directory}
     id: file:packages/nextra-theme-blog
     name: nextra-theme-blog
-    version: 2.2.1
+    version: 2.2.2
     peerDependencies:
       next: '>=9.5.3'
       react: '>=16.13.1'
@@ -7431,7 +7453,7 @@ packages:
     resolution: {directory: packages/nextra-theme-docs, type: directory}
     id: file:packages/nextra-theme-docs
     name: nextra-theme-docs
-    version: 2.2.1
+    version: 2.2.2
     peerDependencies:
       next: '>=9.5.3'
       react: '>=16.13.1'
@@ -7461,7 +7483,7 @@ packages:
     resolution: {directory: packages/nextra, type: directory}
     id: file:packages/nextra
     name: nextra
-    version: 2.2.1
+    version: 2.2.2
     peerDependencies:
       next: '>=9.5.3'
       react: '>=16.13.1'
