@@ -10,4 +10,4 @@ const path = require('path')
 // Make sure to include all languages in the bundle when tracing dependencies.
 // @ts-ignore
 const shikiPath = require.resolve('shiki/package.json')
-fs.readdir(path.join(shikiPath, '..', 'languages'), () => {})
+fs.readdir(path.join(shikiPath, '..', 'languages'), () => null)

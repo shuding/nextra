@@ -27,6 +27,8 @@ module.exports = {
           { enforceForIfStatements: true }
         ],
         '@typescript-eslint/prefer-optional-chain': 'error',
+        'no-else-return': ['error', { allowElseIf: false }],
+        'no-lonely-if': 'error',
         // todo: enable
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-non-null-assertion': 'off'

@@ -180,7 +180,7 @@ async function loader(
 
   const katexCssImport = latex ? "import 'katex/dist/katex.min.css'" : ''
   const cssImport = OFFICIAL_THEMES.includes(
-    theme as typeof OFFICIAL_THEMES[number]
+    theme as (typeof OFFICIAL_THEMES)[number]
   )
     ? `import '${theme}/style.css'`
     : ''
@@ -199,7 +199,7 @@ export default MDXContent`
     items
   })
 
-  // Logic for resovling the page title (used for search and as fallback):
+  // Logic for resolving the page title (used for search and as fallback):
   // 1. If the frontMatter has a title, use it.
   // 2. Use the first h1 heading if it exists.
   // 3. Use the fallback, title-cased file name.
@@ -241,7 +241,7 @@ export default MDXContent`
     ? `import __nextra_themeConfig__ from '${slash(path.resolve(themeConfig))}'`
     : ''
 
-  const pageOpts: Omit<PageOpts, 'title'> = {
+  const pageOpts: PageOpts = {
     filePath: slash(path.relative(CWD, mdxPath)),
     route,
     frontMatter,
@@ -251,7 +251,8 @@ export default MDXContent`
     timestamp,
     flexsearch,
     newNextLinkBehavior,
-    readingTime
+    readingTime,
+    title: fallbackTitle
   }
 
   const pageNextRoute =
@@ -264,11 +265,16 @@ export default MDXContent`
       // Remove the only `index` route
       .replace(/^index$/, '')
 
+  const convertToRelativePath = (filePath: string): string => {
+    const relative = path.relative(path.dirname(mdxPath), filePath)
+    const finalPath = relative.startsWith('.') ? relative : `./${relative}`
+    return slash(finalPath)
+  }
+
   const dynamicMetaResolver = dynamicMetaItems.length
     ? `if (typeof window === 'undefined') {
   globalThis.__nextra_resolvePageMap__ = async () => {
-    const { pageMap } = __nextra_pageOpts__
-    const clonedPageMap = JSON.parse(JSON.stringify(pageMap))
+    const clonedPageMap = JSON.parse(JSON.stringify(__nextra_pageOpts__.pageMap))
   
     const executePromises = []
     const importPromises = [
@@ -278,15 +284,7 @@ export default MDXContent`
             metaFilePath,
             metaObjectKeyPath,
             metaParentKeyPath
-          }) => `import('${slash(
-            (() => {
-              const relative = path.relative(
-                path.dirname(mdxPath),
-                metaFilePath
-              )
-              return relative.startsWith('.') ? relative : './' + relative
-            })()
-          )}').then(m => {
+          }) => `import('${convertToRelativePath(metaFilePath)}').then(m => {
         const getMeta = Promise.resolve(m.default()).then(metaData => {
           const meta = clonedPageMap${metaObjectKeyPath}
           meta.data = metaData
@@ -296,12 +294,11 @@ export default MDXContent`
             ''
           )}.route || ''
           for (const key of Object.keys(metaData)) {
-            const name = key.split('/').pop()
             clonedPageMap${metaParentKeyPath}.push({
               kind: 'MdxPage',
               locale: meta.locale,
-              name,
-              route: parentRoute + '/' + key,
+              name: key.split('/').pop(),
+              route: parentRoute + '/' + key
             })
           }
         })
@@ -323,12 +320,9 @@ export default MDXContent`
   const stringifiedPageOpts = JSON.stringify(pageOpts)
   const pageOptsChecksum = IS_PRODUCTION ? '' : hashFnv32a(stringifiedPageOpts)
 
-  let finalResult = result
-  if (transform) {
-    finalResult = await transform(finalResult, {
-      route: pageNextRoute
-    })
-  }
+  const finalResult = transform
+    ? await transform(result, { route: pageNextRoute })
+    : result
 
   return `import __nextra_layout__ from '${layout}'
 ${themeConfigImport}
@@ -350,11 +344,6 @@ __nextra_internal__.refreshListeners ||= Object.create(null)
 __nextra_internal__.Layout = __nextra_layout__
 
 ${finalResult}
-
-__nextra_pageOpts__.title =
-  ${JSON.stringify(frontMatter.title)} ||
-  (typeof __nextra_title__ === 'string' && __nextra_title__) ||
-  ${JSON.stringify(fallbackTitle /* Fallback as sidebar link name */)}
 
 __nextra_internal__.context[${stringifiedPageNextRoute}] = {
   Content: MDXContent,

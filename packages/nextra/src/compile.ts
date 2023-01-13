@@ -126,18 +126,12 @@ export async function compileMdx(
     const vFile = await compiler.process(
       filePath ? { value: source, path: filePath } : source
     )
-    let result = String(vFile).replace('export default MDXContent;', '')
+    const result = String(vFile).replace('export default MDXContent;', '')
 
     const headingMeta = compiler.data('headingMeta') as Pick<
       PageOpts,
       'headings' | 'hasJsxInH1' | 'title'
     >
-    if (headingMeta.title) {
-      result += `\nconst __nextra_title__ = ${JSON.stringify(
-        headingMeta.title
-      )}`
-    }
-
     const readingTime = vFile.data.readingTime as ReadingTime | undefined
 
     return {
