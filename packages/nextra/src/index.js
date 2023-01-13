@@ -9,18 +9,14 @@ import {
 
 const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
 
-const nextra = (...config) =>
+const nextra = (themeOrNextraConfig, themeConfig) =>
   function withNextra(nextConfig = {}) {
-    const nextraConfig = Object.assign(
-      {},
-      DEFAULT_CONFIG,
-      typeof config[0] === 'string'
-        ? {
-            theme: config[0],
-            themeConfig: config[1]
-          }
-        : config[0]
-    )
+    const nextraConfig = {
+      ...DEFAULT_CONFIG,
+      ...(typeof themeOrNextraConfig === 'string'
+        ? { theme: themeOrNextraConfig, themeConfig }
+        : themeOrNextraConfig)
+    }
 
     if (nextConfig.i18n?.locales) {
       console.log(
@@ -56,6 +52,15 @@ const nextra = (...config) =>
       return rules
     }
 
+    const nextraLoaderOptions = {
+      ...nextraConfig,
+      locales: nextConfig.i18n?.locales || [''],
+      defaultLocale: nextConfig.i18n?.defaultLocale || DEFAULT_LOCALE,
+      pageMapCache,
+      newNextLinkBehavior: nextConfig.experimental?.newNextLinkBehavior,
+      distDir: nextConfig.distDir
+    }
+
     return {
       ...nextConfig,
       rewrites,
@@ -64,19 +69,9 @@ const nextra = (...config) =>
         ...MARKDOWN_EXTENSIONS
       ],
       webpack(config, options) {
-        config.plugins ||= []
-
         if (options.nextRuntime !== 'edge' && options.isServer) {
+          config.plugins ||= []
           config.plugins.push(nextraPlugin)
-        }
-
-        const nextraLoaderOptions = {
-          ...nextraConfig,
-          locales: nextConfig.i18n?.locales || [''],
-          defaultLocale: nextConfig.i18n?.defaultLocale || DEFAULT_LOCALE,
-          pageMapCache,
-          newNextLinkBehavior: nextConfig.experimental?.newNextLinkBehavior,
-          distDir: nextConfig.distDir
         }
 
         config.module.rules.push(

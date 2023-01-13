@@ -18,11 +18,8 @@ import { truthy } from './utils'
 import remarkMath from 'remark-math'
 import rehypeKatex from 'rehype-katex'
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 globalThis.__nextra_temp_do_not_use = () => {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
+  // @ts-expect-error -- ignore error - File is not a module
   import('./__temp__')
 }
 
@@ -52,7 +49,10 @@ const rehypePrettyCodeOptions = {
   filterMetaString: (meta: string) => meta.replace(/filename="[^"]*"/, '')
 }
 
-let cachedCompiler: Processor
+const cachedCompilerForFormat: Record<
+  Exclude<ProcessorOptions['format'], undefined>,
+  Processor
+> = Object.create(null)
 
 export async function compileMdx(
   source: string,
@@ -66,7 +66,7 @@ export async function compileMdx(
     | 'codeHighlight'
   > & {
     mdxOptions?: LoaderOptions['mdxOptions'] &
-      Pick<ProcessorOptions, 'jsx' | 'outputFormat' | 'format'>
+      Pick<ProcessorOptions, 'jsx' | 'outputFormat'>
   } = {},
   filePath = '',
   useCachedCompiler = false
@@ -81,23 +81,23 @@ export async function compileMdx(
   const mdxOptions = {
     ...(loaderOptions.mdxOptions || {}),
     // You can override MDX options in the frontMatter too.
-    ...frontMatter.mdxOptions
+    ...frontMatter.mdxOptions as Record<any, unknown>
   }
-
+  const format = mdxOptions.format || 'mdx'
   const compiler =
-    (useCachedCompiler && cachedCompiler) ||
-    (cachedCompiler = createCompiler({
+    (useCachedCompiler && cachedCompilerForFormat[format]) ||
+    (cachedCompilerForFormat[format] = createCompiler({
       jsx: mdxOptions.jsx || false,
       outputFormat: mdxOptions.outputFormat || 'function-body',
       providerImportSource: 'nextra/mdx',
-      format: mdxOptions.format || 'mdx',
+      format,
       // https://github.com/hashicorp/next-mdx-remote/issues/307#issuecomment-1363415249
       development: false,
       remarkPlugins: [
         ...(mdxOptions.remarkPlugins || []),
         remarkGfm,
         remarkHeadings,
-        loaderOptions.staticImage && ([remarkStaticImage, { filePath }] as any),
+        loaderOptions.staticImage && remarkStaticImage,
         loaderOptions.flexsearch &&
           structurize(structurizedData, loaderOptions.flexsearch),
         loaderOptions.readingTime && readingTime,
@@ -124,12 +124,7 @@ export async function compileMdx(
 
   try {
     const vFile = await compiler.process(
-      filePath
-        ? {
-            value: source,
-            path: filePath
-          }
-        : source
+      filePath ? { value: source, path: filePath } : source
     )
     let result = String(vFile).replace('export default MDXContent;', '')
 

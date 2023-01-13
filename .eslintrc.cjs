@@ -192,6 +192,12 @@ module.exports = {
           }
         ]
       }
+    },
+    {
+      files: ['**/*.d.ts'],
+      rules: {
+        'no-var': 'off'
+      }
     }
   ]
 }

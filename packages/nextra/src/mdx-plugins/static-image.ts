@@ -43,16 +43,12 @@ const getASTNodeImport = (name: string, from: string) => ({
 // Based on the remark-embed-images project
 // https://github.com/remarkjs/remark-embed-images
 export const remarkStaticImage: Plugin<[{ filePath: string }], Root> =
-  ({ filePath }) =>
-  (tree, _file, done) => {
+  () => (tree, _file, done) => {
     const importsToInject: any[] = []
 
     visit(tree, 'image', node => {
       let { url } = node
       if (!url) {
-        console.warn(
-          `[nextra] File "${filePath}" contain image with empty "src" property, skipping…`
-        )
         return
       }
 
@@ -64,9 +60,6 @@ export const remarkStaticImage: Plugin<[{ filePath: string }], Root> =
       if (url.startsWith('/')) {
         const urlPath = path.join(PUBLIC_DIR, url)
         if (!existsSync(urlPath)) {
-          console.error(
-            `[nextra] File "${filePath}" contain image with url "${url}" that not found in "/public" directory, skipping…`
-          )
           return
         }
         url = slash(urlPath)
