@@ -203,6 +203,7 @@ const config: DocsThemeConfig = {
     link: "https://github.com/vercel/swr",
   },
   sidebar: {
+    defaultMenuCollapseLevel: 1,
     titleComponent: ({ title, type }) =>
       type === "separator" ? (
         <div className="flex items-center gap-2">

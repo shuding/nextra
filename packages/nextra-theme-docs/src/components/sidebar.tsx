@@ -36,8 +36,16 @@ const FocusedItemContext = createContext<null | string>(null)
 const OnFocuseItemContext = createContext<
   null | ((item: string | null) => any)
 >(null)
+const FolderLevelContext = createContext(0)
 
-const Folder = memo(FolderImpl)
+const Folder = memo(function FolderInner(props: any) {
+  const level = useContext(FolderLevelContext)
+  return (
+    <FolderLevelContext.Provider value={level + 1}>
+      <FolderImpl {...props} />
+    </FolderLevelContext.Provider>
+  )
+})
 
 const classes = {
   link: cn(
@@ -77,9 +85,7 @@ function FolderImpl({
 
   const focusedRoute = useContext(FocusedItemContext)
   const focusedRouteInside = !!focusedRoute?.startsWith(item.route + '/')
-
-  // TODO: This is not always correct. Might be related to docs root.
-  const folderLevel = (item.route.match(/\//g) || []).length
+  const level = useContext(FolderLevelContext)
 
   const { setMenu } = useMenu()
   const config = useConfig()
@@ -92,7 +98,7 @@ function FolderImpl({
         focusedRouteInside ||
         (theme && 'collapsed' in theme
           ? !theme.collapsed
-          : folderLevel <= config.sidebar.defaultMenuCollapseLevel)
+          : level < config.sidebar.defaultMenuCollapseLevel)
 
   const rerender = useState({})[1]
 
