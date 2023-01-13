@@ -1,6 +1,6 @@
 import type { NextraThemeLayoutProps } from 'nextra'
 
-import React, { ReactElement, ReactNode } from 'react'
+import { ReactElement, ReactNode } from 'react'
 import { ThemeProvider } from 'next-themes'
 import type { LayoutProps } from './types'
 import { BlogProvider } from './blog-context'

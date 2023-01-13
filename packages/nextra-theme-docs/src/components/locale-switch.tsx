@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react'
 import { useRouter } from 'next/router'
 import { Select } from './select'
 import { DocsThemeConfig } from '../constants'

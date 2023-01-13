@@ -105,7 +105,9 @@ export async function collectFiles(
           data: JSON.parse(content)
         }
         return fileMap[fp]
-      } else if (fileName === DYNAMIC_META_FILENAME) {
+      }
+
+      if (fileName === DYNAMIC_META_FILENAME) {
         // _meta.js file. Need to check if it's dynamic (a function) or not.
         const metaMod = await import(filePath)
         const meta = metaMod.default
@@ -133,7 +135,9 @@ export async function collectFiles(
           )
         }
         return fileMap[fp]
-      } else if (fileName === 'meta.json') {
+      }
+
+      if (fileName === 'meta.json') {
         console.warn(
           '[nextra] "meta.json" was renamed to "_meta.json". Rename the following file:',
           path.relative(CWD, filePath)

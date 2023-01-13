@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, ReactElement } from 'react'
+import { useRef, useEffect, ReactElement, ReactNode } from 'react'
 import cn from 'clsx'
 
 export function Collapse({
@@ -6,7 +6,7 @@ export function Collapse({
   className,
   open
 }: {
-  children: React.ReactNode
+  children: ReactNode
   className?: string
   open: boolean
 }): ReactElement {

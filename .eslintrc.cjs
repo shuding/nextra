@@ -27,6 +27,8 @@ module.exports = {
           { enforceForIfStatements: true }
         ],
         '@typescript-eslint/prefer-optional-chain': 'error',
+        'no-else-return': ['error', { allowElseIf: false }],
+        'no-lonely-if': 'error',
         // todo: enable
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-non-null-assertion': 'off'
@@ -37,11 +39,11 @@ module.exports = {
       files: '{packages,examples,docs}/**',
       extends: [
         'plugin:react/recommended',
+        'plugin:react/jsx-runtime',
         'plugin:react-hooks/recommended',
         'plugin:@next/next/recommended'
       ],
       rules: {
-        'react/react-in-jsx-scope': 'off',
         'react/prop-types': 'off',
         'react/no-unknown-property': ['error', { ignore: ['jsx'] }],
         'react-hooks/exhaustive-deps': 'error',
@@ -55,7 +57,13 @@ module.exports = {
             message:
               "`useMemo` with an empty dependency array can't provide a stable reference, use `useRef` instead."
           }
-        ]
+        ],
+        'react/jsx-filename-extension': [
+          'error',
+          { extensions: ['.tsx', '.jsx'], allow: 'as-needed' }
+        ],
+        'react/jsx-curly-brace-presence': 'error',
+        'react/jsx-boolean-value': 'error',
       },
       settings: {
         react: { version: 'detect' }
@@ -74,6 +82,9 @@ module.exports = {
           'docs/tsconfig.json',
           'tsconfig.eslint.json'
         ]
+      },
+      rules: {
+        '@typescript-eslint/no-unnecessary-type-assertion': 'error'
       }
     },
     // ⚙️ nextra-theme-docs

@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import { ReactElement, Fragment } from 'react'
 import { Anchor } from './anchor'
 import cn from 'clsx'
 import { ArrowRightIcon } from 'nextra/icons'
@@ -16,7 +16,7 @@ export function Breadcrumb({
         const isActive = index === activePath.length - 1
 
         return (
-          <React.Fragment key={item.route + item.name}>
+          <Fragment key={item.route + item.name}>
             {index > 0 && <ArrowRightIcon className="nx-w-3.5 nx-shrink-0" />}
             <div
               className={cn(
@@ -37,7 +37,7 @@ export function Breadcrumb({
                 item.title
               )}
             </div>
-          </React.Fragment>
+          </Fragment>
         )
       })}
     </div>

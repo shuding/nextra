@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useRef, useMemo } from 'react'
+import { ReactElement, useEffect, useRef, useMemo } from 'react'
 import cn from 'clsx'
 import Slugger from 'github-slugger'
 import { Heading } from 'nextra'

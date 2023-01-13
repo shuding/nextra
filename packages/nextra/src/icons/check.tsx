@@ -1,4 +1,4 @@
-import React, { ComponentProps, ReactElement } from 'react'
+import { ComponentProps, ReactElement } from 'react'
 
 export function CheckIcon(props: ComponentProps<'svg'>): ReactElement {
   return (

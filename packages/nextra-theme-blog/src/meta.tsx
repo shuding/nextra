@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react'
 import Link from 'next/link'
 import ThemeSwitch from './theme-switch'
 import { split } from './utils/get-tags'

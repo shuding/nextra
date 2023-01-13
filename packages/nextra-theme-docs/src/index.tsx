@@ -1,11 +1,10 @@
 import type { NextraThemeLayoutProps, PageMapItem, PageOpts } from 'nextra'
-import type { ReactElement, ReactNode } from 'react'
 
-import React, { useMemo } from 'react'
+import { useMemo, ReactElement, ReactNode } from 'react'
 import { useRouter } from 'next/router'
 import 'focus-visible'
 import cn from 'clsx'
-import { MDXProvider, useMDXComponents } from 'nextra/mdx'
+import { MDXProvider } from 'nextra/mdx'
 import { useMounted } from 'nextra/hooks'
 
 import './polyfill'
@@ -247,7 +246,7 @@ export default function Layout({
 }
 
 export { useConfig, PartialDocsThemeConfig as DocsThemeConfig }
-export { useMDXComponents }
+export { useMDXComponents } from 'nextra/mdx'
 export { useTheme } from 'next-themes'
 export {
   Bleed,

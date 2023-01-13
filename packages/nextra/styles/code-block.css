@@ -33,6 +33,10 @@ pre {
     }
   }
 
+  &:not([data-theme]) {
+    @apply nx-px-4;
+  }
+
   html[data-nextra-word-wrap] & {
     word-break: break-word;
     @apply nx-whitespace-pre-wrap md:nx-whitespace-pre;
@@ -53,10 +57,6 @@ pre {
   100% {
     opacity: 1;
   }
-}
-
-[data-rehype-pretty-code-fragment] {
-  @apply nx-relative nx-mt-6 first:nx-mt-0;
 }
 
 @supports (

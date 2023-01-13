@@ -19,14 +19,14 @@ function getDynamicMeta(
   path: string,
   items: PageMapItem[]
 ): [DynamicMetaDescriptor[], PageMapItem[]] {
-  const newItems = []
+  const newItems: PageMapItem[] = []
   const dynamicMetaItems: DynamicMetaDescriptor[] = []
 
   for (let i = 0; i < items.length; i++) {
     const item = items[i]
     if (item.kind === 'Folder') {
       const [dynamicItemsInChildren, newItemsInChildren] = getDynamicMeta(
-        path + `[${i}].children`,
+        `${path}[${i}].children`,
         item.children
       )
       dynamicMetaItems.push(...dynamicItemsInChildren)
@@ -34,24 +34,20 @@ function getDynamicMeta(
         ...item,
         children: newItemsInChildren
       })
-    } else if (item.kind === 'Meta') {
-      if (item.__nextra_src) {
-        dynamicMetaItems.push({
-          metaFilePath: item.__nextra_src,
-          metaObjectKeyPath: path + `[${i}]`,
-          metaParentKeyPath: path
-        })
-        const newItem = {
-          ...item
-        }
-        delete newItem.__nextra_src
-        newItems.push(newItem)
-      } else {
-        newItems.push(item)
-      }
-    } else {
-      newItems.push(item)
+      continue
     }
+
+    if (item.kind === 'Meta' && item.__nextra_src) {
+      const { __nextra_src, ...newItem } = item
+      dynamicMetaItems.push({
+        metaFilePath: __nextra_src,
+        metaObjectKeyPath: `${path}[${i}]`,
+        metaParentKeyPath: path
+      })
+      newItems.push(newItem)
+      continue
+    }
+    newItems.push(item)
   }
 
   return [dynamicMetaItems, newItems]

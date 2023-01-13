@@ -1,4 +1,4 @@
-import React, {
+import {
   ReactElement,
   KeyboardEvent,
   Fragment,
@@ -146,7 +146,7 @@ export function Search({
   const icon = (
     <Transition
       show={mounted && (!show || Boolean(value))}
-      as={React.Fragment}
+      as={Fragment}
       enter="nx-transition-opacity"
       enterFrom="nx-opacity-0"
       enterTo="nx-opacity-100"

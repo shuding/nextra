@@ -18,21 +18,6 @@ export function parseFileName(filePath: string): {
   }
 }
 
-export const parseJsonFile = (
-  content: string,
-  path: string
-): Record<string, any> => {
-  try {
-    return JSON.parse(content)
-  } catch (err) {
-    console.error(
-      `[nextra] Error parsing ${path}, make sure it's a valid JSON`,
-      err
-    )
-    return {}
-  }
-}
-
 type Truthy<T> = T extends false | '' | 0 | null | undefined ? never : T // from lodash
 
 export function truthy<T>(value: T): value is Truthy<T> {
