@@ -180,7 +180,7 @@ async function loader(
       codeHighlight
     },
     mdxPath,
-    true
+    false // TODO: produce hydration errors or error - Create a new processor first, by calling it: use `processor()` instead of `processor`.
   )
 
   const katexCssImport = latex ? "import 'katex/dist/katex.min.css'" : ''

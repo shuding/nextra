@@ -12,7 +12,7 @@ export const structurize = (structurizedData, options) => {
   if (typeof options === 'boolean') {
     options = {}
   }
-  options = Object.assign({ codeblocks: true }, options)
+  options = { codeblocks: true, ...options }
 
   const slugger = new Slugger()
   let activeSlug = ''
@@ -35,7 +35,7 @@ export const structurize = (structurizedData, options) => {
       let result = ''
 
       /** @type {Type} */
-      const type = node.type
+      const { type } = node
 
       if (type === 'heading') {
         skip = true
