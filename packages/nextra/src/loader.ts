@@ -96,7 +96,8 @@ async function loader(
     pageMapCache,
     newNextLinkBehavior,
     distDir,
-    transform
+    transform,
+    codeHighlight
   } = context.getOptions()
 
   context.cacheable(true)
@@ -175,7 +176,8 @@ async function loader(
       defaultShowCopyCode,
       staticImage,
       flexsearch,
-      latex
+      latex,
+      codeHighlight
     },
     mdxPath,
     true

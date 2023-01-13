@@ -1,4 +1,5 @@
 import path from 'node:path'
+import { NextraConfig } from './types'
 
 export const MARKDOWN_EXTENSION_REGEX = /\.mdx?$/
 
@@ -8,11 +9,12 @@ export const LOCALE_REGEX = /\.([a-z]{2}(-[A-Z]{2})?)$/
 
 export const DEFAULT_LOCALE = 'en-US'
 
-export const DEFAULT_CONFIG = {
+export const DEFAULT_CONFIG: Omit<NextraConfig, 'theme'> = {
   staticImage: true,
   flexsearch: {
     codeblocks: true
-  }
+  },
+  codeHighlight: true
 }
 
 export const OFFICIAL_THEMES = [
