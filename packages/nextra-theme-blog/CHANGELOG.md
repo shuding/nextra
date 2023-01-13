@@ -1,5 +1,12 @@
 # nextra-theme-blog
 
+## 2.2.2
+
+### Patch Changes
+
+- 3145f53: extend `plugin:react/recommended`, `plugin:react-hooks/recommended` and `plugin:@next/next/recommended` configs
+- 1834730: fix hydration error produced by cached compiler, fix broken code-blocks styles while setting `nextraConfig.codeHighlight: false`
+
 ## 2.2.1
 
 ## 2.2.0
