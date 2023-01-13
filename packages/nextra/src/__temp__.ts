@@ -11,6 +11,3 @@ const path = require('path')
 // @ts-ignore
 const shikiPath = require.resolve('shiki/package.json')
 fs.readdir(path.join(shikiPath, '..', 'languages'), () => {})
-
-const katexPath = require.resolve('katex/package.json')
-fs.readdir(path.join(katexPath, '..', 'dist'), () => {})
