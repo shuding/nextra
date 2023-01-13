@@ -1,5 +1,11 @@
 # nextra-theme-blog
 
+## 2.2.3
+
+### Patch Changes
+
+- 11b2870: fix copy code button position
+
 ## 2.2.2
 
 ### Patch Changes
