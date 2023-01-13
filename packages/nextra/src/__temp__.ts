@@ -1,4 +1,4 @@
-/* eslint-disable */
+/* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/ban-ts-comment */
 
 // This file has to be targeted to CJS, to keep `require.resolve` untranspiled.
 // Otherwise, the file tracing will not work.

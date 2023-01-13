@@ -19,10 +19,10 @@ export default defineConfig([
       'src/compile.ts',
       'src/icons/index.ts',
       'src/components/index.ts',
-      'src/ssg.ts',
+      'src/ssg.tsx',
       'src/locales.ts',
       'src/context.ts',
-      'src/layout.ts',
+      'src/layout.tsx',
       'src/remote.ts',
       'src/mdx.ts'
     ],

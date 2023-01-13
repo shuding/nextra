@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from 'react'
+import { createContext, useContext } from 'react'
 import { MDXRemote } from 'next-mdx-remote'
 
 import { useMDXComponents } from './mdx'
@@ -21,8 +21,5 @@ export function RemoteContent() {
 
   const components = useMDXComponents()
 
-  return React.createElement(MDXRemote, {
-    compiledSource: dynamicContext,
-    components
-  })
+  return <MDXRemote compiledSource={dynamicContext} components={components} />
 }

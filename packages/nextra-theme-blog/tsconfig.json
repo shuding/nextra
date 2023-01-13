@@ -8,7 +8,7 @@
     "strict": true,
     "skipLibCheck": true,
     "allowJs": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "moduleResolution": "Node",
     "types": ["vitest/globals"],
     "resolveJsonModule": true
