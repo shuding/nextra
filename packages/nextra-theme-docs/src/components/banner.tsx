@@ -19,27 +19,25 @@ export function Banner(): ReactElement | null {
       <div
         className={cn(
           'nextra-banner-container nx-sticky nx-top-0 nx-z-20 nx-flex nx-items-center md:nx-relative',
-          'nx-bg-neutral-900 nx-text-sm nx-text-slate-50',
           'nx-h-[var(--nextra-banner-height)] [body.nextra-banner-hidden_&]:nx-hidden',
-          'dark:nx-bg-[linear-gradient(1deg,#383838,#212121)] dark:nx-text-white',
-          'ltr:nx-pl-10 rtl:nx-pr-10'
+          'nx-text-slate-50 dark:nx-text-white nx-bg-neutral-900 dark:nx-bg-[linear-gradient(1deg,#383838,#212121)]',
+          'nx-px-2 ltr:nx-pl-10 rtl:nx-pr-10'
         )}
       >
-        <div className="nx-mx-auto nx-w-full nx-max-w-[90rem] nx-truncate nx-whitespace-nowrap nx-py-1 nx-pl-[max(env(safe-area-inset-left),1.5rem)] nx-pr-[max(env(safe-area-inset-right),1.5rem)] nx-text-center nx-font-medium">
+        <div className="nx-w-full nx-truncate nx-px-4 nx-text-center nx-font-medium nx-text-sm">
           {renderComponent(banner.text)}
         </div>
         {banner.dismissible && (
           <button
             type="button"
             aria-label="Dismiss banner"
-            className="nx-w-8 nx-opacity-80 hover:nx-opacity-100 ltr:nx-mr-2 rtl:nx-ml-2"
+            className="nx-w-8 nx-h-8 nx-opacity-80 hover:nx-opacity-100"
             onClick={() => {
               try {
                 localStorage.setItem(banner.key, '0')
               } catch {
                 /* ignore */
               }
-              document.body.classList.remove('nextra-banner-visible')
               document.body.classList.add('nextra-banner-hidden')
             }}
           >
