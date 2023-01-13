@@ -23,8 +23,7 @@ function MDXContent(props = {}) {
   return MDXLayout ? <MDXLayout {...props}><_createMdxContent {...props} /></MDXLayout> : _createMdxContent(props);
 }
 
-
-const __nextra_title__ = \\"codegen.yml\\"",
+",
   "structurizedData": {},
   "title": "codegen.yml",
 }
@@ -53,8 +52,7 @@ function MDXContent(props = {}) {
   return MDXLayout ? <MDXLayout {...props}><_createMdxContent {...props} /></MDXLayout> : _createMdxContent(props);
 }
 
-
-const __nextra_title__ = \\"codegen.yml file\\"",
+",
   "structurizedData": {},
   "title": "codegen.yml file",
 }
@@ -88,8 +86,7 @@ function MDXContent(props = {}) {
   return MDXLayout ? <MDXLayout {...props}><_createMdxContent {...props} /></MDXLayout> : _createMdxContent(props);
 }
 
-
-const __nextra_title__ = \\"Posts Tagged with “”\\"",
+",
   "structurizedData": {},
   "title": "Posts Tagged with “”",
 }
@@ -144,8 +141,7 @@ function MDXContent(props = {}) {
   return MDXLayout ? <MDXLayout {...props}><_createMdxContent {...props} /></MDXLayout> : _createMdxContent(props);
 }
 
-
-const __nextra_title__ = \\"Hello World\\"",
+",
   "structurizedData": {},
   "title": "Hello World",
 }
