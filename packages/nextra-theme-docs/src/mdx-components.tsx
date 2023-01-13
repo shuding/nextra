@@ -9,7 +9,7 @@ import React, {
   ComponentProps
 } from 'react'
 import 'intersection-observer'
-import { Components } from '@mdx-js/react/lib'
+import { Components } from 'nextra/mdx'
 import { useSetActiveAnchor, DetailsProvider, useDetails } from './contexts'
 import { Collapse, Anchor } from './components'
 import { IS_BROWSER, DocsThemeConfig } from './constants'

@@ -14,7 +14,7 @@ import Link from 'next/link'
 import { createPortal } from 'react-dom'
 import { Code, Pre, Table, Td, Th, Tr } from 'nextra/components'
 import { useBlogContext } from './blog-context'
-import { Components } from '@mdx-js/react/lib'
+import { Components } from 'nextra/mdx'
 
 export const HeadingContext = createContext<
   RefObject<HTMLHeadingElement | null>
