@@ -38,7 +38,7 @@ const OnFocuseItemContext = createContext<
 >(null)
 const FolderLevelContext = createContext(0)
 
-const Folder = memo((props: any) => {
+const Folder = memo(function FolderInner(props: any) {
   const level = useContext(FolderLevelContext)
   return (
     <FolderLevelContext.Provider value={level + 1}>
