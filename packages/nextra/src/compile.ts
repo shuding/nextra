@@ -120,6 +120,7 @@ export async function compileMdx(
     }))
 
   try {
+    compiler.data('headingMeta', { headings: [] })
     const vFile = await compiler.process(
       filePath ? { value: content, path: filePath } : content
     )
