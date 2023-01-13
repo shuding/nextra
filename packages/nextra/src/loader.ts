@@ -127,10 +127,13 @@ async function loader(
   // mdx is imported but is outside the `pages` directory
   if (!fileMap[mdxPath]) {
     fileMap[mdxPath] = await collectMdx(mdxPath)
-    context.addMissingDependency(mdxPath)
+    if (!IS_PRODUCTION) {
+      context.addMissingDependency(mdxPath)
+    }
   }
 
   const { locale } = parseFileName(mdxPath)
+  const isLocalTheme = theme.startsWith('.') || theme.startsWith('/')
 
   if (!IS_PRODUCTION) {
     for (const [filePath, file] of Object.entries(fileMap)) {
@@ -143,7 +146,7 @@ async function loader(
     context.addContextDependency(PAGES_DIR)
 
     // Add local theme as a dependency
-    if (theme.startsWith('.') || theme.startsWith('/')) {
+    if (isLocalTheme) {
       context.addDependency(path.resolve(theme))
     }
     // Add theme config as a dependency
@@ -234,8 +237,7 @@ export default MDXContent`
   }
 
   // Relative path instead of a package name
-  const layout =
-    theme.startsWith('.') || theme.startsWith('/') ? path.resolve(theme) : theme
+  const layout = isLocalTheme ? path.resolve(theme) : theme
 
   const themeConfigImport = themeConfig
     ? `import __nextra_themeConfig__ from '${slash(path.resolve(themeConfig))}'`
