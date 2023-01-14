@@ -213,6 +213,7 @@ const config: DocsThemeConfig = {
       ) : (
         <>{title}</>
       ),
+    toggleButton: true,
   },
   toc: {
     extraContent: (

@@ -134,7 +134,8 @@ export const themeSchema = z
       defaultMenuCollapseLevel: z.number().min(1).int(),
       titleComponent: z.custom<
         ReactNode | FC<{ title: string; type: string; route: string }>
-      >(...reactNode)
+      >(...reactNode),
+      toggleButton: z.boolean()
     }),
     toc: z.object({
       component: z.custom<ReactNode | FC<TOCProps>>(...reactNode),
@@ -296,7 +297,8 @@ export const DEFAULT_THEME: DocsThemeConfig = {
   },
   sidebar: {
     defaultMenuCollapseLevel: 2,
-    titleComponent: ({ title }) => <>{title}</>
+    titleComponent: ({ title }) => <>{title}</>,
+    toggleButton: false
   },
   toc: {
     component: TOC,
