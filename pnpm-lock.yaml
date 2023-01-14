@@ -33,7 +33,7 @@ importers:
       eslint-plugin-react-hooks: 4.6.0
       eslint-plugin-tailwindcss: 3.8.0
       eslint-plugin-typescript-sort-keys: 2.1.0
-      prettier: 2.8.2
+      prettier: 2.8.3
       prettier-plugin-tailwindcss: 0.2.1
       rimraf: 4.0.4
       tsup: ^6.5.0
@@ -50,8 +50,8 @@ importers:
       eslint-plugin-react-hooks: 4.6.0_eslint@8.31.0
       eslint-plugin-tailwindcss: 3.8.0
       eslint-plugin-typescript-sort-keys: 2.1.0_3jon24igvnqaqexgwtxk6nkpse
-      prettier: 2.8.2
-      prettier-plugin-tailwindcss: 0.2.1_prettier@2.8.2
+      prettier: 2.8.3
+      prettier-plugin-tailwindcss: 0.2.1_prettier@2.8.3
       rimraf: 4.0.4
       tsup: 6.5.0_typescript@4.9.4
       turbo: 1.6.3
@@ -596,7 +596,7 @@ packages:
       fs-extra: 7.0.1
       lodash.startcase: 4.4.0
       outdent: 0.5.0
-      prettier: 2.8.2
+      prettier: 2.8.3
       resolve-from: 5.0.0
       semver: 5.7.1
     dev: true
@@ -764,7 +764,7 @@ packages:
       '@changesets/types': 5.2.1
       fs-extra: 7.0.1
       human-id: 1.0.2
-      prettier: 2.8.2
+      prettier: 2.8.3
     dev: true
 
   /@edge-runtime/primitives/2.0.2:
@@ -5769,17 +5769,17 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
-  /prettier-plugin-tailwindcss/0.2.1_prettier@2.8.2:
+  /prettier-plugin-tailwindcss/0.2.1_prettier@2.8.3:
     resolution: {integrity: sha512-aIO8IguumORyRsmT+E7JfJ3A9FEoyhqZR7Au7TBOege3VZkgMvHJMkufeYp4zjnDK2iq4ktkvGMNOQR9T8lisQ==}
     engines: {node: '>=12.17.0'}
     peerDependencies:
       prettier: '>=2.2.0'
     dependencies:
-      prettier: 2.8.2
+      prettier: 2.8.3
     dev: true
 
-  /prettier/2.8.2:
-    resolution: {integrity: sha512-BtRV9BcncDyI2tsuS19zzhzoxD8Dh8LiCx7j7tHzrkz8GFXAexeWFdi22mjE1d16dftH2qNaytVxqiRTGlMfpw==}
+  /prettier/2.8.3:
+    resolution: {integrity: sha512-tJ/oJ4amDihPoufT5sM0Z1SKEuKay8LfVAMlbbhnnkvt6BUserZylqo2PN+p9KeljLr0OHa2rXHU1T8reeoTrw==}
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: true
@@ -7451,7 +7451,7 @@ packages:
     resolution: {directory: packages/nextra-theme-blog, type: directory}
     id: file:packages/nextra-theme-blog
     name: nextra-theme-blog
-    version: 2.2.2
+    version: 2.2.3
     peerDependencies:
       next: '>=9.5.3'
       react: '>=16.13.1'
@@ -7472,7 +7472,7 @@ packages:
     resolution: {directory: packages/nextra-theme-docs, type: directory}
     id: file:packages/nextra-theme-docs
     name: nextra-theme-docs
-    version: 2.2.2
+    version: 2.2.3
     peerDependencies:
       next: '>=9.5.3'
       react: '>=16.13.1'
@@ -7502,7 +7502,7 @@ packages:
     resolution: {directory: packages/nextra, type: directory}
     id: file:packages/nextra
     name: nextra
-    version: 2.2.2
+    version: 2.2.3
     peerDependencies:
       next: '>=9.5.3'
       react: '>=16.13.1'
