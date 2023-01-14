@@ -24,28 +24,19 @@ const Vercel = () => (
 const TITLE = {
   "en-US": "React Hooks for Data Fetching",
   "es-ES": "Biblioteca React Hooks para la obtención de datos",
-  ja: "データ取得のための React Hooks ライブラリ",
-  ko: "데이터 가져오기를 위한 React Hooks",
   ru: "React хуки для выборки данных",
-  "zh-CN": "用于数据请求的 React Hooks 库",
 };
 
 const EDIT_TEXT = {
   "en-US": "Edit this page on GitHub →",
   "es-ES": "Edite esta página en GitHub",
-  ja: "Github で編集する",
-  ko: "Github에서 이 페이지 편집하기",
   ru: "Редактировать на GitHub",
-  "zh-CN": "在 GitHub 上编辑本页",
 };
 
 const FOOTER_LINK = {
   "en-US": "https://vercel.com/?utm_source=swr",
   "es-ES": "https://vercel.com/?utm_source=swr_es-es",
-  ja: "https://vercel.com/?utm_source=swr_ja",
-  ko: "https://vercel.com/?utm_source=swr_ko",
   ru: "https://vercel.com/?utm_source=swr_ru",
-  "zh-CN": "https://vercel.com/?utm_source=swr_zh-cn",
 };
 
 const FOOTER_LINK_TEXT = {
@@ -61,29 +52,10 @@ const FOOTER_LINK_TEXT = {
       <Vercel />
     </>
   ),
-  ja: (
-    <>
-      提供
-      <Vercel />
-    </>
-  ),
-  ko: (
-    <>
-      Powered by
-      <Vercel />
-    </>
-  ),
   ru: (
     <>
       Работает на
       <Vercel />
-    </>
-  ),
-  "zh-CN": (
-    <>
-      由
-      <Vercel />
-      驱动
     </>
   ),
 };
@@ -177,9 +149,6 @@ const config: DocsThemeConfig = {
   i18n: [
     { locale: "en-US", text: "English" },
     { direction: "rtl", locale: "es-ES", text: "Español RTL" },
-    { locale: "zh-CN", text: "简体中文" },
-    { locale: "ja", text: "日本語" },
-    { locale: "ko", text: "한국어" },
     { locale: "ru", text: "Русский" },
   ],
   logo: function Logo() {
