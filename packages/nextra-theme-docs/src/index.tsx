@@ -100,7 +100,7 @@ const Body = ({
           'nextra-body-typesetting-article'
       )}
     >
-      <main className="nx-w-full nx-min-w-0 nx-max-w-4xl nx-px-6 nx-pt-4 md:nx-px-8">
+      <main className="nx-w-full nx-min-w-0 nx-max-w-6xl nx-px-6 nx-pt-4 md:nx-px-12">
         {breadcrumb}
         {body}
       </main>
@@ -191,14 +191,17 @@ const InnerLayout = ({
         )}
       >
         <ActiveAnchorProvider>
-          <Sidebar
-            docsDirectories={docsDirectories}
-            flatDirectories={flatDirectories}
-            fullDirectories={directories}
-            headings={headings}
-            asPopover={hideSidebar}
-            includePlaceholder={themeContext.layout === 'default'}
-          />
+          {themeContext.layout === 'default' && hideSidebar ? (
+            <div className="max-xl:nx-hidden nx-h-0 nx-w-64 nx-shrink-0" />
+          ) : (
+            <Sidebar
+              docsDirectories={docsDirectories}
+              flatDirectories={flatDirectories}
+              fullDirectories={directories}
+              headings={headings}
+              asPopover={hideSidebar}
+            />
+          )}
           {tocEl}
           <SkipNavContent />
           <Body

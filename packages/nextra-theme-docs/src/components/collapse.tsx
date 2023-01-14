@@ -22,8 +22,8 @@ export function Collapse({
     const inner = innerRef.current
     if (!mounted || !container || !inner) return
 
-    container.classList.toggle('duration-500', !isOpen)
-    container.classList.toggle('duration-300', isOpen)
+    container.classList.toggle('nx-duration-500', !isOpen)
+    container.classList.toggle('nx-duration-300', isOpen)
 
     if (horizontal) {
       // save initial width to avoid word wrapping when container width will be changed
@@ -32,19 +32,19 @@ export function Collapse({
     } else {
       container.style.height = `${isOpen ? inner.clientHeight : 0}px`
     }
-  }, [isOpen, mounted])
+  }, [horizontal, isOpen, mounted])
 
   return (
     <div
       ref={containerRef}
-      className="transform-gpu overflow-hidden transition-all ease-in-out motion-reduce:transition-none"
+      className="nx-transform-gpu nx-overflow-hidden nx-transition-all nx-ease-in-out motion-reduce:nx-transition-none"
       style={initialOpen.current || horizontal ? undefined : { height: 0 }}
     >
       <div
         ref={innerRef}
         className={[
-          'p-2 transition-opacity duration-500 ease-in-out motion-reduce:transition-none',
-          isOpen ? 'opacity-100' : 'opacity-0',
+          'nx-p-2 nx-transition-opacity nx-duration-500 nx-ease-in-out motion-reduce:nx-transition-none',
+          isOpen ? 'nx-opacity-100' : 'nx-opacity-0',
           className || ''
         ].join(' ')}
       >

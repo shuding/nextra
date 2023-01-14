@@ -193,7 +193,7 @@ const Details = ({
       {...(openState && { 'data-expanded': true })}
     >
       <DetailsProvider value={setOpen}>{summary}</DetailsProvider>
-      <Collapse open={openState}>{restChildren}</Collapse>
+      <Collapse isOpen={openState}>{restChildren}</Collapse>
     </details>
   )
 }
