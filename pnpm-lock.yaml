@@ -35,7 +35,7 @@ importers:
       eslint-plugin-typescript-sort-keys: 2.1.0
       prettier: 2.8.3
       prettier-plugin-tailwindcss: 0.2.1
-      rimraf: 4.0.4
+      rimraf: 4.0.5
       tsup: ^6.5.0
       turbo: 1.6.3
       typescript: 4.9.4
@@ -52,7 +52,7 @@ importers:
       eslint-plugin-typescript-sort-keys: 2.1.0_3jon24igvnqaqexgwtxk6nkpse
       prettier: 2.8.3
       prettier-plugin-tailwindcss: 0.2.1_prettier@2.8.3
-      rimraf: 4.0.4
+      rimraf: 4.0.5
       tsup: 6.5.0_typescript@4.9.4
       turbo: 1.6.3
       typescript: 4.9.4
@@ -6104,8 +6104,8 @@ packages:
       glob: 7.1.6
     dev: true
 
-  /rimraf/4.0.4:
-    resolution: {integrity: sha512-R0hoVr9xTwemarQjoWlNt/nb5dEGVTBhVdkRmEX2zEkT8T6onH0XKiGjuaC7rNNj/gYzY2p4NVRJ3sjO1ascHQ==}
+  /rimraf/4.0.5:
+    resolution: {integrity: sha512-3gf/WdsBM+ZkuPb76MpXSxNKt00QQ3PdXqDCCBOsHgcoBs8DAhXbqtrGQUAkhxHgXYWzXxuaOsN4s21+at5fBw==}
     engines: {node: '>=14'}
     hasBin: true
     dev: true
