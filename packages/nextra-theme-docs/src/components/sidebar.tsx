@@ -391,7 +391,8 @@ export function Sidebar({
     setMenu(false)
   }, [router.asPath, setMenu])
 
-  const hasMenu = config.i18n.length > 0 || config.darkMode
+  const hasI18n = config.i18n.length > 0
+  const hasMenu = config.darkMode || hasI18n
 
   return (
     <>
@@ -462,6 +463,7 @@ export function Sidebar({
           <div
             className={cn(
               'nx-sticky nx-bottom-0',
+              'nx-bg-white dark:nx-bg-dark', // when banner is showed, sidebar links can be behind menu, set bg color as body bg color
               'nx-mx-4 nx-border-t nx-py-4 nx-shadow-[0_-12px_16px_#fff]',
               'nx-flex nx-items-center nx-gap-2',
               'dark:nx-border-neutral-800 dark:nx-shadow-[0_-12px_16px_#111]',
@@ -471,7 +473,7 @@ export function Sidebar({
                 : 'nx-py-4 nx-flex-wrap nx-justify-center'
             )}
           >
-            {config.i18n.length > 0 && (
+            {hasI18n && (
               <LocaleSwitch
                 options={config.i18n}
                 lite={!showSidebar}
@@ -482,7 +484,7 @@ export function Sidebar({
                 }
               />
             )}
-            {config.darkMode && <ThemeSwitch lite={config.i18n.length > 0} />}
+            {config.darkMode && <ThemeSwitch lite={hasI18n} />}
             {config.sidebar.toggleButton && (
               <button
                 title={showSidebar ? 'Hide sidebar' : 'Show sidebar'}
