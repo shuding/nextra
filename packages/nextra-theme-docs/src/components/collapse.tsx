@@ -1,5 +1,6 @@
 import { useRef, useEffect, ReactElement, ReactNode } from 'react'
 import { useMounted } from 'nextra/hooks'
+import cn from 'clsx'
 
 export function Collapse({
   children,
@@ -42,11 +43,11 @@ export function Collapse({
     >
       <div
         ref={innerRef}
-        className={[
+        className={cn(
           'nx-p-2 nx-transition-opacity nx-duration-500 nx-ease-in-out motion-reduce:nx-transition-none',
           isOpen ? 'nx-opacity-100' : 'nx-opacity-0',
           className || ''
-        ].join(' ')}
+        )}
       >
         {children}
       </div>
