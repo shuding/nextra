@@ -326,6 +326,7 @@ interface SideBarProps {
   fullDirectories: Item[]
   asPopover?: boolean
   headings?: Heading[]
+  includePlaceholder: boolean
 }
 
 const emptyHeading: any[] = []
@@ -335,7 +336,8 @@ export function Sidebar({
   flatDirectories,
   fullDirectories,
   asPopover = false,
-  headings = emptyHeading
+  headings = emptyHeading,
+  includePlaceholder
 }: SideBarProps): ReactElement {
   const config = useConfig()
   const { menu, setMenu } = useMenu()
@@ -396,6 +398,9 @@ export function Sidebar({
 
   return (
     <>
+      {includePlaceholder && asPopover ? (
+        <div className="max-xl:nx-hidden nx-h-0 nx-w-64 nx-shrink-0" />
+      ) : null}
       <div
         className={cn(
           'motion-reduce:nx-transition-none [transition:background-color_1.5s_ease]',
@@ -437,17 +442,20 @@ export function Sidebar({
               )}
               ref={sidebarRef}
             >
-              <Collapse isOpen={showSidebar} horizontal>
-                <Menu
-                  className="max-md:nx-hidden"
-                  // The sidebar menu, shows only the docs directories.
-                  directories={docsDirectories}
-                  // When the viewport size is larger than `md`, hide the anchors in
-                  // the sidebar when `floatTOC` is enabled.
-                  anchors={config.toc.float ? [] : anchors}
-                  onlyCurrentDocs
-                />
-              </Collapse>
+              {/* without asPopover check <Collapse />'s inner.clientWidth on `layout: "raw"` will be 0 and element will not have width on initial loading */}
+              {!asPopover && (
+                <Collapse isOpen={showSidebar} horizontal>
+                  <Menu
+                    className="max-md:nx-hidden"
+                    // The sidebar menu, shows only the docs directories.
+                    directories={docsDirectories}
+                    // When the viewport size is larger than `md`, hide the anchors in
+                    // the sidebar when `floatTOC` is enabled.
+                    anchors={config.toc.float ? [] : anchors}
+                    onlyCurrentDocs
+                  />
+                </Collapse>
+              )}
               <Menu
                 className="md:nx-hidden"
                 // The mobile dropdown menu, shows all the directories.

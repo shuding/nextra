@@ -191,17 +191,14 @@ const InnerLayout = ({
         )}
       >
         <ActiveAnchorProvider>
-          {themeContext.layout === 'default' && hideSidebar ? (
-            <div className="max-xl:nx-hidden nx-h-0 nx-w-64 nx-shrink-0" />
-          ) : (
-            <Sidebar
-              docsDirectories={docsDirectories}
-              flatDirectories={flatDirectories}
-              fullDirectories={directories}
-              headings={headings}
-              asPopover={hideSidebar}
-            />
-          )}
+          <Sidebar
+            docsDirectories={docsDirectories}
+            flatDirectories={flatDirectories}
+            fullDirectories={directories}
+            headings={headings}
+            asPopover={hideSidebar}
+            includePlaceholder={themeContext.layout === 'default'}
+          />
           {tocEl}
           <SkipNavContent />
           <Body
