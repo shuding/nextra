@@ -477,11 +477,7 @@ export function Sidebar({
               <LocaleSwitch
                 options={config.i18n}
                 lite={!showSidebar}
-                className={
-                  showSidebar
-                    ? 'ltr:nx-mr-auto rtl:nx-ml-auto'
-                    : 'max-md:nx-grow'
-                }
+                className={showSidebar ? 'nx-grow' : 'max-md:nx-grow'}
               />
             )}
             {config.darkMode && <ThemeSwitch lite={!showSidebar || hasI18n} />}
