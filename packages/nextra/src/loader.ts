@@ -222,7 +222,7 @@ export default MDXContent`
 
   const themeConfigImport = themeConfig
     ? `import __nextra_themeConfig from '${slash(path.resolve(themeConfig))}'`
-    : 'const __nextra_themeConfig = null'
+    : ''
 
   const pageOpts: PageOpts = {
     filePath: slash(path.relative(CWD, mdxPath)),
@@ -264,7 +264,7 @@ setupNextraPage({
   pageNextRoute: ${JSON.stringify(pageNextRoute)},
   pageOpts: ${JSON.stringify(pageOpts)},
   nextraLayout: __nextra_layout,
-  themeConfig: __nextra_themeConfig,
+  themeConfig: ${themeConfigImport ? '__nextra_themeConfig' : 'null'},
   Content: MDXContent,
   hot: module.hot,
   dynamicMetaItems: ${JSON.stringify(dynamicMetaItems)}
