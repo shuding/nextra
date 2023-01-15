@@ -23,6 +23,7 @@ export default defineConfig([
       'src/locales.ts',
       'src/context.ts',
       'src/layout.tsx',
+      'src/setup-page.ts',
       'src/remote.ts',
       'src/mdx.ts'
     ],

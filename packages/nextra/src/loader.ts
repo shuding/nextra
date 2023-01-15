@@ -55,27 +55,6 @@ const initGitRepo = (async () => {
   return {}
 })()
 
-/**
- * Calculate a 32 bit FNV-1a hash
- * Found here: https://gist.github.com/vaiorabbit/5657561
- * Ref.: http://isthe.com/chongo/tech/comp/fnv/
- *
- * @param {string} str the input value
- * @param {number} [seed] optionally pass the hash of the previous chunk
- * @returns {string}
- */
-function hashFnv32a(str: string, seed = 0x811c9dc5): string {
-  let hval = seed
-
-  for (let i = 0; i < str.length; i++) {
-    hval ^= str.charCodeAt(i)
-    hval += (hval << 1) + (hval << 4) + (hval << 7) + (hval << 8) + (hval << 24)
-  }
-
-  // Convert to 8 digit hex string
-  return ('0000000' + (hval >>> 0).toString(16)).substring(-8)
-}
-
 async function loader(
   context: LoaderContext<LoaderOptions>,
   source: string
@@ -242,8 +221,8 @@ export default MDXContent`
   const layout = isLocalTheme ? path.resolve(theme) : theme
 
   const themeConfigImport = themeConfig
-    ? `import __nextra_themeConfig__ from '${slash(path.resolve(themeConfig))}'`
-    : ''
+    ? `import __nextra_themeConfig from '${slash(path.resolve(themeConfig))}'`
+    : 'const __nextra_themeConfig = null'
 
   const pageOpts: PageOpts = {
     filePath: slash(path.relative(CWD, mdxPath)),
@@ -269,102 +248,27 @@ export default MDXContent`
       // Remove the only `index` route
       .replace(/^index$/, '')
 
-  const convertToRelativePath = (filePath: string): string => {
-    const relative = path.relative(path.dirname(mdxPath), filePath)
-    const finalPath = relative.startsWith('.') ? relative : `./${relative}`
-    return slash(finalPath)
-  }
-
-  const dynamicMetaResolver = dynamicMetaItems.length
-    ? `if (typeof window === 'undefined') {
-  globalThis.__nextra_resolvePageMap__ = async () => {
-    const clonedPageMap = JSON.parse(JSON.stringify(__nextra_pageOpts__.pageMap))
-  
-    const executePromises = []
-    const importPromises = [
-      ${dynamicMetaItems
-        .map(
-          ({
-            metaFilePath,
-            metaObjectKeyPath,
-            metaParentKeyPath
-          }) => `import('${convertToRelativePath(metaFilePath)}').then(m => {
-        const getMeta = Promise.resolve(m.default()).then(metaData => {
-          const meta = clonedPageMap${metaObjectKeyPath}
-          meta.data = metaData
-
-          const parentRoute = clonedPageMap${metaParentKeyPath.replace(
-            /\.children$/,
-            ''
-          )}.route || ''
-          for (const key of Object.keys(metaData)) {
-            clonedPageMap${metaParentKeyPath}.push({
-              kind: 'MdxPage',
-              locale: meta.locale,
-              name: key.split('/').pop(),
-              route: parentRoute + '/' + key
-            })
-          }
-        })
-        executePromises.push(getMeta)
-      })`
-        )
-        .join(',\n    ')}
-    ]
-  
-    await Promise.all(importPromises)
-    await Promise.all(executePromises)
-  
-    return clonedPageMap
-  }
-}`
-    : ''
-
-  const stringifiedPageNextRoute = JSON.stringify(pageNextRoute)
-  const stringifiedPageOpts = JSON.stringify(pageOpts)
-  const pageOptsChecksum = IS_PRODUCTION ? '' : hashFnv32a(stringifiedPageOpts)
-
   const finalResult = transform
     ? await transform(result, { route: pageNextRoute })
     : result
 
-  return `import __nextra_layout__ from '${layout}'
+  return `import { setupNextraPage } from 'nextra/setup-page'
+import __nextra_layout from '${layout}'
 ${themeConfigImport}
 ${katexCssImport}
 ${cssImport}
-${dynamicMetaResolver}
-
-const __nextra_pageOpts__ = ${stringifiedPageOpts}
-
-// Make sure the same component is always returned so Next.js will render the
-// stable layout. We then put the actual content into a global store and use
-// the route to identify it.
-const NEXTRA_INTERNAL = Symbol.for('__nextra_internal__')
-const __nextra_internal__ = (globalThis[NEXTRA_INTERNAL] ||= Object.create(null))
-__nextra_internal__.pageMap = __nextra_pageOpts__.pageMap
-__nextra_internal__.route = __nextra_pageOpts__.route
-__nextra_internal__.context ||= Object.create(null)
-__nextra_internal__.refreshListeners ||= Object.create(null)
-__nextra_internal__.Layout = __nextra_layout__
 
 ${finalResult}
 
-__nextra_internal__.context[${stringifiedPageNextRoute}] = {
+setupNextraPage({
+  pageNextRoute: ${JSON.stringify(pageNextRoute)},
+  pageOpts: ${JSON.stringify(pageOpts)},
+  nextraLayout: __nextra_layout,
+  themeConfig: __nextra_themeConfig,
   Content: MDXContent,
-  pageOpts: __nextra_pageOpts__,
-  themeConfig: ${themeConfigImport ? '__nextra_themeConfig__' : 'null'}
-}
-
-if (${!IS_PRODUCTION} && module.hot) {
-  const checksum = "${pageOptsChecksum}"
-  module.hot.data ||= Object.create(null)
-  if (module.hot.data.prevPageOptsChecksum !== checksum) {
-    __nextra_internal__.refreshListeners[${stringifiedPageNextRoute}]?.forEach(listener => listener())
-  }
-  module.hot.dispose(data => {
-    data.prevPageOptsChecksum = checksum
-  })
-}
+  hot: module.hot,
+  dynamicMetaItems: ${JSON.stringify(dynamicMetaItems)}
+})
 
 export { default } from 'nextra/layout'`
 }

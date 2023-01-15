@@ -14,7 +14,7 @@ export const buildDynamicMDX = async (content: string) => {
 }
 
 export const buildDynamicMeta = async () => {
-  const resolvePageMap = (globalThis as any).__nextra_resolvePageMap__
+  const resolvePageMap = (globalThis as any).__nextra_resolvePageMap
   if (resolvePageMap) {
     return {
       __nextra_pageMap: await resolvePageMap()

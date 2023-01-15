@@ -1,4 +1,4 @@
-import { FileMap, MdxPath, PageMapItem } from './types'
+import { FileMap, MdxPath, PageMapItem, DynamicMetaDescriptor } from './types'
 import { parseFileName } from './utils'
 import filterRouteLocale from './filter-route-locale'
 
@@ -7,12 +7,6 @@ type PageMapProps = {
   items: PageMapItem[]
   fileMap: FileMap
   defaultLocale: string
-}
-
-type DynamicMetaDescriptor = {
-  metaFilePath: string
-  metaObjectKeyPath: string
-  metaParentKeyPath: string
 }
 
 function getDynamicMeta(
