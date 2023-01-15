@@ -168,13 +168,16 @@ Just wrap your table with curly braces `{` and `}`, e.g.
 
 If this thing is still confusing for you, and you want to use regular literal HTML elements for your tables, do the following:
 
-1. Install `remark-mdx-disable-explicit-jsx` package
+<div className="steps-container">
+### Install `remark-mdx-disable-explicit-jsx` package
 
 ```sh
 pnpm add remark-mdx-disable-explicit-jsx
 ```
 
-2. Setup plugin in `nextra` function inside `next.config.mjs` file
+### Setup
+
+Configure plugin in `nextra` function inside `next.config.mjs` file
 
 ```js filename="next.config.mjs" {2,7-12}
 import nextra from 'nextra'
@@ -193,4 +196,5 @@ const withNextra = nextra({
 
 export default withNextra()
 ```
+</div>
 

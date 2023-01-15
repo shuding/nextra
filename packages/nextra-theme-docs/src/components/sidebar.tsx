@@ -469,7 +469,7 @@ export function Sidebar({
               'dark:nx-border-neutral-800 dark:nx-shadow-[0_-12px_16px_#111]',
               'contrast-more:nx-border-neutral-400 contrast-more:nx-shadow-none contrast-more:dark:nx-shadow-none',
               showSidebar
-                ? 'nx-justify-end'
+                ? [hasI18n && 'nx-justify-end']
                 : 'nx-py-4 nx-flex-wrap nx-justify-center'
             )}
           >
@@ -484,7 +484,7 @@ export function Sidebar({
                 }
               />
             )}
-            {config.darkMode && <ThemeSwitch lite={hasI18n} />}
+            {config.darkMode && <ThemeSwitch lite={!showSidebar || hasI18n} />}
             {config.sidebar.toggleButton && (
               <button
                 title={showSidebar ? 'Hide sidebar' : 'Show sidebar'}
