@@ -25,7 +25,7 @@ import {
 } from '../utils'
 import { LocaleSwitch } from './locale-switch'
 import { ThemeSwitch } from './theme-switch'
-import { ArrowRightIcon } from 'nextra/icons'
+import { ArrowRightIcon, ExpandIcon } from 'nextra/icons'
 import { Collapse } from './collapse'
 import { Anchor } from './anchor'
 import { DEFAULT_LOCALE } from '../constants'
@@ -171,7 +171,7 @@ function FolderImpl({
           )}
         />
       </Anchor>
-      <Collapse className="ltr:nx-pr-0 rtl:nx-pl-0" open={open}>
+      <Collapse className="ltr:nx-pr-0 rtl:nx-pl-0" isOpen={open}>
         {Array.isArray(item.children) ? (
           <Menu
             className={cn(classes.border, 'ltr:nx-ml-1 rtl:nx-mr-1')}
@@ -343,6 +343,7 @@ export function Sidebar({
   const { menu, setMenu } = useMenu()
   const router = useRouter()
   const [focused, setFocused] = useState<null | string>(null)
+  const [showSidebar, setSidebar] = useState(true)
 
   const anchors = useMemo(
     () =>
@@ -392,12 +393,13 @@ export function Sidebar({
     setMenu(false)
   }, [router.asPath, setMenu])
 
-  const hasMenu = config.i18n.length > 0 || config.darkMode
+  const hasI18n = config.i18n.length > 0
+  const hasMenu = config.darkMode || hasI18n
 
   return (
     <>
       {includePlaceholder && asPopover ? (
-        <div className="nx-hidden nx-h-0 nx-w-64 nx-shrink-0 xl:nx-block" />
+        <div className="max-xl:nx-hidden nx-h-0 nx-w-64 nx-shrink-0" />
       ) : null}
       <div
         className={cn(
@@ -411,11 +413,13 @@ export function Sidebar({
       <aside
         className={cn(
           'nextra-sidebar-container nx-flex nx-flex-col',
-          'md:nx-top-16 md:nx-w-64 md:nx-shrink-0 md:nx-transform-none',
+          'md:nx-top-16 md:nx-shrink-0 motion-reduce:nx-transform-none',
+          'nx-transform-gpu nx-transition-all nx-ease-in-out',
+          showSidebar ? 'md:nx-w-64' : 'md:nx-w-20',
           asPopover ? 'md:nx-hidden' : 'md:nx-sticky md:nx-self-start',
           menu
-            ? '[transform:translate3d(0,0,0)]'
-            : '[transform:translate3d(0,-100%,0)]'
+            ? 'max-md:[transform:translate3d(0,0,0)]'
+            : 'max-md:[transform:translate3d(0,-100%,0)]'
         )}
         ref={containerRef}
       >
@@ -432,20 +436,26 @@ export function Sidebar({
           >
             <div
               className={cn(
-                'nextra-scrollbar nx-overflow-y-auto nx-p-4',
-                'nx-grow md:nx-h-[calc(100vh-var(--nextra-navbar-height)-3.75rem)]'
+                'nx-overflow-y-auto nx-p-4',
+                'nx-grow md:nx-h-[calc(100vh-var(--nextra-navbar-height)-3.75rem)]',
+                showSidebar ? 'nextra-scrollbar' : 'no-scrollbar'
               )}
               ref={sidebarRef}
             >
-              <Menu
-                className="nx-hidden md:nx-flex"
-                // The sidebar menu, shows only the docs directories.
-                directories={docsDirectories}
-                // When the viewport size is larger than `md`, hide the anchors in
-                // the sidebar when `floatTOC` is enabled.
-                anchors={config.toc.float ? [] : anchors}
-                onlyCurrentDocs
-              />
+              {/* without asPopover check <Collapse />'s inner.clientWidth on `layout: "raw"` will be 0 and element will not have width on initial loading */}
+              {!asPopover && (
+                <Collapse isOpen={showSidebar} horizontal>
+                  <Menu
+                    className="max-md:nx-hidden"
+                    // The sidebar menu, shows only the docs directories.
+                    directories={docsDirectories}
+                    // When the viewport size is larger than `md`, hide the anchors in
+                    // the sidebar when `floatTOC` is enabled.
+                    anchors={config.toc.float ? [] : anchors}
+                    onlyCurrentDocs
+                  />
+                </Collapse>
+              )}
               <Menu
                 className="md:nx-hidden"
                 // The mobile dropdown menu, shows all the directories.
@@ -460,17 +470,34 @@ export function Sidebar({
         {hasMenu && (
           <div
             className={cn(
-              'nx-relative nx-z-[1]', // for top box nx-shadow
+              'nx-sticky nx-bottom-0',
+              'nx-bg-white dark:nx-bg-dark', // when banner is showed, sidebar links can be behind menu, set bg color as body bg color
               'nx-mx-4 nx-border-t nx-py-4 nx-shadow-[0_-12px_16px_#fff]',
               'nx-flex nx-items-center nx-gap-2',
               'dark:nx-border-neutral-800 dark:nx-shadow-[0_-12px_16px_#111]',
-              'contrast-more:nx-border-neutral-400 contrast-more:nx-shadow-none contrast-more:dark:nx-shadow-none'
+              'contrast-more:nx-border-neutral-400 contrast-more:nx-shadow-none contrast-more:dark:nx-shadow-none',
+              showSidebar
+                ? [hasI18n && 'nx-justify-end']
+                : 'nx-py-4 nx-flex-wrap nx-justify-center'
             )}
           >
-            {config.i18n.length > 0 && (
-              <LocaleSwitch options={config.i18n} className="nx-grow" />
+            {hasI18n && (
+              <LocaleSwitch
+                options={config.i18n}
+                lite={!showSidebar}
+                className={showSidebar ? 'nx-grow' : 'max-md:nx-grow'}
+              />
             )}
-            {config.darkMode && <ThemeSwitch lite={config.i18n.length > 0} />}
+            {config.darkMode && <ThemeSwitch lite={!showSidebar || hasI18n} />}
+            {config.sidebar.toggleButton && (
+              <button
+                title={showSidebar ? 'Hide sidebar' : 'Show sidebar'}
+                className="max-md:nx-hidden nx-h-7 nx-rounded-md nx-transition-colors nx-text-gray-600 dark:nx-text-gray-400 nx-px-2 hover:nx-bg-gray-100 hover:nx-text-gray-900 dark:hover:nx-bg-primary-100/5 dark:hover:nx-text-gray-50"
+                onClick={() => setSidebar(!showSidebar)}
+              >
+                <ExpandIcon isOpen={showSidebar} />
+              </button>
+            )}
           </div>
         )}
       </aside>

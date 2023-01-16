@@ -1,86 +1,53 @@
 import { useRef, useEffect, ReactElement, ReactNode } from 'react'
+import { useMounted } from 'nextra/hooks'
 import cn from 'clsx'
 
 export function Collapse({
   children,
   className,
-  open
+  isOpen,
+  horizontal = false
 }: {
   children: ReactNode
   className?: string
-  open: boolean
+  isOpen: boolean
+  horizontal?: boolean
 }): ReactElement {
   const containerRef = useRef<HTMLDivElement>(null)
   const innerRef = useRef<HTMLDivElement>(null)
-  const animationRef = useRef<any>()
-  const initialRender = useRef(true)
-  const initialState = useRef(open)
+  const initialOpen = useRef(isOpen)
+  const mounted = useMounted()
 
   useEffect(() => {
-    if (initialRender.current) return
+    const container = containerRef.current
+    const inner = innerRef.current
+    if (!mounted || !container || !inner) return
 
-    if (animationRef.current) {
-      clearTimeout(animationRef.current)
-    }
-    if (open) {
-      const container = containerRef.current
-      const inner = innerRef.current
-      if (container && inner) {
-        const contentHeight = innerRef.current.clientHeight
-        container.style.maxHeight = `${contentHeight}px`
-        container.classList.remove('nx-duration-500')
-        container.classList.add('nx-duration-300')
+    container.classList.toggle('nx-duration-500', !isOpen)
+    container.classList.toggle('nx-duration-300', isOpen)
 
-        inner.style.opacity = '1'
-        animationRef.current = setTimeout(() => {
-          const container = containerRef.current
-          if (container) {
-            // should be style property in kebab-case, not css class name
-            container.style.removeProperty('max-height')
-          }
-        }, 300)
-      }
+    if (horizontal) {
+      // save initial width to avoid word wrapping when container width will be changed
+      inner.style.width = `${inner.clientWidth}px`
+      container.style.width = `${isOpen ? inner.clientWidth : 0}px`
     } else {
-      const container = containerRef.current
-      const inner = innerRef.current
-      if (container && inner) {
-        const contentHeight = innerRef.current.clientHeight
-        container.style.maxHeight = `${contentHeight}px`
-        container.classList.remove('nx-duration-300')
-        container.classList.add('nx-duration-500')
-
-        inner.style.opacity = '0'
-        setTimeout(() => {
-          const container = containerRef.current
-          if (container) {
-            container.style.maxHeight = '0px'
-          }
-        }, 0)
-      }
+      container.style.height = `${isOpen ? inner.clientHeight : 0}px`
     }
-  }, [open])
-
-  useEffect(() => {
-    initialRender.current = false
-  }, [])
+  }, [horizontal, isOpen, mounted])
 
   return (
     <div
       ref={containerRef}
-      className="nx-transform-gpu nx-overflow-hidden nx-transition-all nx-duration-300 nx-ease-in-out motion-reduce:nx-transition-none"
-      style={{
-        maxHeight: initialState.current ? undefined : 0
-      }}
+      className="nx-transform-gpu nx-overflow-hidden nx-transition-all nx-ease-in-out motion-reduce:nx-transition-none"
+      style={initialOpen.current || horizontal ? undefined : { height: 0 }}
     >
       <div
         ref={innerRef}
         className={cn(
-          'nx-transform-gpu nx-overflow-hidden nx-p-2 nx-transition-opacity nx-duration-500 nx-ease-in-out motion-reduce:nx-transition-none',
+          'nx-p-2 nx-transition-opacity nx-duration-500 nx-ease-in-out motion-reduce:nx-transition-none',
+          isOpen ? 'nx-opacity-100' : 'nx-opacity-0',
           className
         )}
-        style={{
-          opacity: initialState.current ? 1 : 0
-        }}
       >
         {children}
       </div>

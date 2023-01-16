@@ -37,9 +37,9 @@ describe('Page Process', () => {
     expect(gettingStartData.pageMap).toEqual(indexData.pageMap)
   })
 
-  it('pageMap zh-CN', () => {
+  it('pageMap ru', () => {
     const indexData = resolvePageMap({
-      filePath: filePath('docs/data-fetching.zh-CN.mdx'),
+      filePath: filePath('docs/data-fetching.ru.mdx'),
       items: pageMap,
       fileMap,
       defaultLocale
@@ -47,7 +47,7 @@ describe('Page Process', () => {
     expect([indexData.pageMap, indexData.route]).toMatchSnapshot()
 
     const gettingStartData = resolvePageMap({
-      filePath: filePath('docs/getting-started.zh-CN.mdx'),
+      filePath: filePath('docs/getting-started.ru.mdx'),
       items: pageMap,
       fileMap,
       defaultLocale
