@@ -1,5 +1,18 @@
 # nextra-theme-docs
 
+## 2.2.4
+
+### Patch Changes
+
+- 091b77b: fix missing filename
+
+  add filename / copy code with "codeHighlight: false"
+
+  add unit tests for filename and copy code
+
+- 917de49: remove `github-slugger` from docs
+- 1b2d7a2: allow hide sidebar, add new option `sidebar.toggleButton?: boolean = false`
+
 ## 2.2.3
 
 ### Patch Changes
