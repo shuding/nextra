@@ -6,6 +6,7 @@ exports[`process heading > code-h1 1`] = `
   "headings": [
     {
       "depth": 1,
+      "id": "codegenyml",
       "value": "codegen.yml",
     },
   ],
@@ -35,6 +36,7 @@ exports[`process heading > code-with-text-h1 1`] = `
   "headings": [
     {
       "depth": 1,
+      "id": "codegenyml-file",
       "value": "codegen.yml file",
     },
   ],
@@ -65,6 +67,7 @@ exports[`process heading > dynamic-h1 1`] = `
   "headings": [
     {
       "depth": 1,
+      "id": "posts-tagged-with-",
       "value": "Posts Tagged with “”",
     },
   ],
@@ -98,6 +101,7 @@ exports[`process heading > no-h1 1`] = `
   "headings": [
     {
       "depth": 2,
+      "id": "h2",
       "value": "H2",
     },
   ],
@@ -125,6 +129,7 @@ exports[`process heading > static-h1 1`] = `
   "headings": [
     {
       "depth": 1,
+      "id": "hello-world",
       "value": "Hello World",
     },
   ],
