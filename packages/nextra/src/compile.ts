@@ -39,7 +39,8 @@ const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS = {
   onVisitHighlightedWord(node: any) {
     node.properties.className = ['highlighted']
   },
-  filterMetaString: (meta: string) => meta.replace(CODE_BLOCK_FILENAME_REGEX, '')
+  filterMetaString: (meta: string) =>
+    meta.replace(CODE_BLOCK_FILENAME_REGEX, '')
 }
 
 const cachedCompilerForFormat: Record<
@@ -103,7 +104,7 @@ export async function compileMdx(
       ].filter(truthy),
       rehypePlugins: [
         ...rehypePlugins,
-        parseMeta,
+        [parseMeta, { defaultShowCopyCode: loaderOptions.defaultShowCopyCode }],
         loaderOptions.codeHighlight &&
           ([
             rehypePrettyCode,
@@ -112,10 +113,7 @@ export async function compileMdx(
               ...rehypePrettyCodeOptions
             }
           ] as any),
-        [
-          attachMeta,
-          { defaultShowCopyCode: loaderOptions.defaultShowCopyCode }
-        ],
+        attachMeta,
         loaderOptions.latex && rehypeKatex
       ].filter(truthy)
     }))
