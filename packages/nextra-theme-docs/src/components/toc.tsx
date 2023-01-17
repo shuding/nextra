@@ -1,10 +1,9 @@
 import { ReactElement, useEffect, useRef, useMemo } from 'react'
 import cn from 'clsx'
-import Slugger from 'github-slugger'
 import { Heading } from 'nextra'
 import scrollIntoView from 'scroll-into-view-if-needed'
 
-import { renderComponent, getHeadingText } from '../utils'
+import { renderComponent } from '../utils'
 import { useConfig, useActiveAnchor } from '../contexts'
 import { Anchor } from './anchor'
 
@@ -14,27 +13,12 @@ export type TOCProps = {
 }
 
 export function TOC({ headings, filePath }: TOCProps): ReactElement {
-  const sluggerRef = useRef<Slugger>()
-  sluggerRef.current ||= new Slugger()
-
   const activeAnchor = useActiveAnchor()
   const config = useConfig()
   const tocRef = useRef<HTMLDivElement>(null)
 
-  const items = useMemo<
-    { text: string; slug: string; depth: 2 | 3 | 4 | 5 | 6 }[]
-  >(
-    () =>
-      headings
-        .filter(heading => heading.depth > 1)
-        .map(heading => {
-          const text = getHeadingText(heading)
-          return {
-            text,
-            slug: sluggerRef.current!.slug(text),
-            depth: heading.depth as any
-          }
-        }),
+  const items = useMemo(
+    () => headings.filter(heading => heading.depth > 1),
     [headings]
   )
 
@@ -85,10 +69,10 @@ export function TOC({ headings, filePath }: TOCProps): ReactElement {
             {renderComponent(config.toc.title)}
           </p>
           <ul>
-            {items.map(({ slug, text, depth }) => (
-              <li className="nx-my-2 nx-scroll-my-6 nx-scroll-py-6" key={slug}>
+            {items.map(({ id, value, depth }) => (
+              <li className="nx-my-2 nx-scroll-my-6 nx-scroll-py-6" key={id}>
                 <a
-                  href={`#${slug}`}
+                  href={`#${id}`}
                   className={cn(
                     {
                       2: 'nx-font-semibold',
@@ -96,15 +80,15 @@ export function TOC({ headings, filePath }: TOCProps): ReactElement {
                       4: 'ltr:nx-ml-8 rtl:nx-mr-8',
                       5: 'ltr:nx-ml-12 rtl:nx-mr-12',
                       6: 'ltr:nx-ml-16 rtl:nx-mr-16'
-                    }[depth],
+                    }[depth as Exclude<typeof depth, 1>],
                     'nx-inline-block',
-                    activeAnchor[slug]?.isActive
+                    activeAnchor[id]?.isActive
                       ? 'nx-text-primary-600 nx-subpixel-antialiased contrast-more:!nx-text-primary-600'
                       : 'nx-text-gray-500 hover:nx-text-gray-900 dark:nx-text-gray-400 dark:hover:nx-text-gray-300',
                     'contrast-more:nx-text-gray-900 contrast-more:nx-underline contrast-more:dark:nx-text-gray-50'
                   )}
                 >
-                  {text}
+                  {value}
                 </a>
               </li>
             ))}

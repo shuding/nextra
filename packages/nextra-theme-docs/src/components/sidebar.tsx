@@ -9,20 +9,12 @@ import {
   useContext
 } from 'react'
 import cn from 'clsx'
-import Slugger from 'github-slugger'
 import { useRouter } from 'next/router'
 import { Heading } from 'nextra'
 import scrollIntoView from 'scroll-into-view-if-needed'
 
 import { useConfig, useMenu, useActiveAnchor } from '../contexts'
-import {
-  Item,
-  MenuItem,
-  PageItem,
-  getFSRoute,
-  getHeadingText,
-  renderComponent
-} from '../utils'
+import { Item, MenuItem, PageItem, getFSRoute, renderComponent } from '../utils'
 import { LocaleSwitch } from './locale-switch'
 import { ThemeSwitch } from './theme-switch'
 import { ArrowRightIcon, ExpandIcon } from 'nextra/icons'
@@ -38,7 +30,7 @@ const OnFocuseItemContext = createContext<
 >(null)
 const FolderLevelContext = createContext(0)
 
-const Folder = memo(function FolderInner(props: any) {
+const Folder = memo(function FolderInner(props: FolderProps) {
   const level = useContext(FolderLevelContext)
   return (
     <FolderLevelContext.Provider value={level + 1}>
@@ -70,13 +62,12 @@ const classes = {
   )
 }
 
-function FolderImpl({
-  item,
-  anchors
-}: {
+type FolderProps = {
   item: PageItem | MenuItem | Item
-  anchors: string[]
-}): ReactElement {
+  anchors: Heading[]
+}
+
+function FolderImpl({ item, anchors }: FolderProps): ReactElement {
   const { asPath, locale = DEFAULT_LOCALE } = useRouter()
   const routeOriginal = getFSRoute(asPath, locale)
   const [route] = routeOriginal.split('#')
@@ -214,7 +205,7 @@ function File({
   anchors
 }: {
   item: PageItem | Item
-  anchors: string[]
+  anchors: Heading[]
 }): ReactElement {
   const { asPath, locale = DEFAULT_LOCALE } = useRouter()
   const route = getFSRoute(asPath, locale)
@@ -222,8 +213,6 @@ function File({
 
   // It is possible that the item doesn't have any route - for example an external link.
   const active = item.route && [route, route + '/'].includes(item.route + '/')
-
-  const slugger = new Slugger()
   const activeAnchor = useActiveAnchor()
   const { setMenu } = useMenu()
   const config = useConfig()
@@ -262,28 +251,25 @@ function File({
             'ltr:nx-ml-3 rtl:nx-mr-3'
           )}
         >
-          {anchors.map(text => {
-            const slug = slugger.slug(text)
-            return (
-              <li key={slug}>
-                <a
-                  href={`#${slug}`}
-                  className={cn(
-                    classes.link,
-                    'nx-flex nx-gap-2 before:nx-opacity-25 before:nx-content-["#"]',
-                    activeAnchor[slug]?.isActive
-                      ? classes.active
-                      : classes.inactive
-                  )}
-                  onClick={() => {
-                    setMenu(false)
-                  }}
-                >
-                  {text}
-                </a>
-              </li>
-            )
-          })}
+          {anchors.map(({ id, value }) => (
+            <li key={id}>
+              <a
+                href={`#${id}`}
+                className={cn(
+                  classes.link,
+                  'nx-flex nx-gap-2 before:nx-opacity-25 before:nx-content-["#"]',
+                  activeAnchor[id]?.isActive
+                    ? classes.active
+                    : classes.inactive
+                )}
+                onClick={() => {
+                  setMenu(false)
+                }}
+              >
+                {value}
+              </a>
+            </li>
+          ))}
         </ul>
       )}
     </li>
@@ -292,7 +278,7 @@ function File({
 
 interface MenuProps {
   directories: PageItem[] | Item[]
-  anchors: string[]
+  anchors: Heading[]
   base?: string
   className?: string
   onlyCurrentDocs?: boolean
@@ -325,18 +311,16 @@ interface SideBarProps {
   flatDirectories: Item[]
   fullDirectories: Item[]
   asPopover?: boolean
-  headings?: Heading[]
+  headings: Heading[]
   includePlaceholder: boolean
 }
-
-const emptyHeading: any[] = []
 
 export function Sidebar({
   docsDirectories,
   flatDirectories,
   fullDirectories,
   asPopover = false,
-  headings = emptyHeading,
+  headings,
   includePlaceholder
 }: SideBarProps): ReactElement {
   const config = useConfig()
@@ -345,14 +329,7 @@ export function Sidebar({
   const [focused, setFocused] = useState<null | string>(null)
   const [showSidebar, setSidebar] = useState(true)
 
-  const anchors = useMemo(
-    () =>
-      headings
-        .filter(v => v.depth === 2)
-        .map(getHeadingText)
-        .filter(Boolean),
-    [headings]
-  )
+  const anchors = useMemo(() => headings.filter(v => v.depth === 2), [headings])
   const sidebarRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
 

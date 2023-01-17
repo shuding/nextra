@@ -2,6 +2,7 @@ import { Processor } from '@mdx-js/mdx/lib/core'
 import { visit } from 'unist-util-visit'
 import { Plugin } from 'unified'
 import { Root, Parent } from 'mdast'
+import Slugger from 'github-slugger'
 import { PageOpts } from '../types'
 
 export const getFlattenedValue = (node: Parent): string =>
@@ -19,6 +20,7 @@ export const remarkHeadings: Plugin<[], Root> = function (this: Processor) {
   const data = this.data() as {
     headingMeta: Pick<PageOpts, 'headings' | 'hasJsxInH1' | 'title'>
   }
+  const slugger = new Slugger()
   return (tree, _file, done) => {
     visit(
       tree,
@@ -36,9 +38,11 @@ export const remarkHeadings: Plugin<[], Root> = function (this: Processor) {
             node.children.some(
               (child: { type: string }) => child.type === 'mdxJsxTextElement'
             )
+          const value = getFlattenedValue(node)
           const heading = {
             depth: node.depth,
-            value: getFlattenedValue(node)
+            value,
+            id: slugger.slug(value)
           }
           data.headingMeta.headings.push(heading)
           if (hasJsxInH1) {

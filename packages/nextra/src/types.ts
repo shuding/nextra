@@ -68,6 +68,7 @@ export type Page = (MdxFile | Folder<Page>) & {
 
 export type Heading = Omit<MDASTHeading, 'type' | 'children' | 'position'> & {
   value: string
+  id: string
 }
 
 export type PageOpts = {
