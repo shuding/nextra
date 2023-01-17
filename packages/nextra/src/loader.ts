@@ -4,14 +4,12 @@ import type { LoaderContext } from 'webpack'
 import path from 'node:path'
 import slash from 'slash'
 
-import { addPage } from './content-dump'
 import { pageTitleFromFilename, parseFileName } from './utils'
 import { compileMdx } from './compile'
 import { resolvePageMap } from './page-map'
 import { collectFiles, collectMdx } from './plugin'
 import {
   IS_PRODUCTION,
-  DEFAULT_LOCALE,
   OFFICIAL_THEMES,
   MARKDOWN_EXTENSION_REGEX,
   CWD
@@ -19,9 +17,6 @@ import {
 import { findPagesDirectory } from './file-system'
 
 const PAGES_DIR = findPagesDirectory()
-
-// TODO: create this as a webpack plugin.
-const indexContentEmitted = new Set<string>()
 
 const IS_WEB_CONTAINER = !!process.versions.webcontainer
 
@@ -135,6 +130,15 @@ async function loader(
 
   const { locale } = parseFileName(mdxPath)
   const isLocalTheme = theme.startsWith('.') || theme.startsWith('/')
+  const pageNextRoute =
+    '/' +
+    slash(path.relative(PAGES_DIR, mdxPath))
+      // Remove the `mdx?` extension
+      .replace(MARKDOWN_EXTENSION_REGEX, '')
+      // Remove the `*/index` suffix
+      .replace(/\/index$/, '')
+      // Remove the only `index` route
+      .replace(/^index$/, '')
 
   if (!IS_PRODUCTION) {
     for (const [filePath, file] of Object.entries(fileMap)) {
@@ -162,6 +166,7 @@ async function loader(
     title,
     frontMatter,
     structurizedData,
+    searchIndexKey,
     hasJsxInH1,
     readingTime
   } = await compileMdx(
@@ -177,7 +182,9 @@ async function loader(
       staticImage,
       flexsearch,
       latex,
-      codeHighlight
+      codeHighlight,
+      route: pageNextRoute,
+      locale
     },
     mdxPath,
     false // TODO: produce hydration errors or error - Create a new processor first, by calling it: use `processor()` instead of `processor`.
@@ -185,7 +192,7 @@ async function loader(
 
   const katexCssImport = latex ? "import 'katex/dist/katex.min.css'" : ''
   const cssImport = OFFICIAL_THEMES.includes(
-    theme as (typeof OFFICIAL_THEMES)[number]
+    theme as typeof OFFICIAL_THEMES[number]
   )
     ? `import '${theme}/style.css'`
     : ''
@@ -211,19 +218,17 @@ export default MDXContent`
   const fallbackTitle =
     frontMatter.title || title || pageTitleFromFilename(fileMap[mdxPath].name)
 
-  const skipFlexsearchIndexing =
-    IS_PRODUCTION && indexContentEmitted.has(mdxPath)
-  if (flexsearch && !skipFlexsearchIndexing) {
+  if (searchIndexKey) {
     if (frontMatter.searchable !== false) {
-      addPage({
-        locale: locale || DEFAULT_LOCALE,
-        route,
+      // Store all the things in buildInfo.
+      const buildInfo = (context._module as any).buildInfo
+      buildInfo.nextraSearch = {
+        indexKey: searchIndexKey,
         title: fallbackTitle,
-        structurizedData,
-        distDir
-      })
+        data: structurizedData,
+        route: pageNextRoute
+      }
     }
-    indexContentEmitted.add(mdxPath)
   }
 
   let timestamp: PageOpts['timestamp']
@@ -258,16 +263,6 @@ export default MDXContent`
     readingTime,
     title: fallbackTitle
   }
-
-  const pageNextRoute =
-    '/' +
-    slash(path.relative(PAGES_DIR, mdxPath))
-      // Remove the `mdx?` extension
-      .replace(MARKDOWN_EXTENSION_REGEX, '')
-      // Remove the `*/index` suffix
-      .replace(/\/index$/, '')
-      // Remove the only `index` route
-      .replace(/^index$/, '')
 
   const convertToRelativePath = (filePath: string): string => {
     const relative = path.relative(path.dirname(mdxPath), filePath)

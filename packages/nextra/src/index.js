@@ -1,5 +1,6 @@
 /* eslint-env node */
 import { NextraPlugin, pageMapCache } from './plugin'
+import { NextraSearchPlugin } from './search/plugin'
 import {
   DEFAULT_LOCALE,
   DEFAULT_CONFIG,
@@ -72,6 +73,11 @@ const nextra = (themeOrNextraConfig, themeConfig) =>
         if (options.nextRuntime !== 'edge' && options.isServer) {
           config.plugins ||= []
           config.plugins.push(nextraPlugin)
+
+          if (nextraConfig.flexsearch) {
+            const nextraSearchPlugin = new NextraSearchPlugin({})
+            config.plugins.push(nextraSearchPlugin)
+          }
         }
 
         config.module.rules.push(
