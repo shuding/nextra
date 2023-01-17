@@ -51,7 +51,7 @@ describe('process heading', () => {
   describe('Code block', () => {
     describe('filename', () => {
       it('attach with "codeHighlight: true"', async () => {
-        const { result } = await compileMdx('~~~js filename="test.js"\n~~~', {
+        const { result } = await compileMdx('```js filename="test.js"\n```', {
           mdxOptions,
           codeHighlight: true
         })
@@ -59,8 +59,9 @@ describe('process heading', () => {
           '<_components.pre data-language="js" data-theme="default" filename="test.js">'
         )
       })
+
       it('attach with "codeHighlight: false"', async () => {
-        const { result } = await compileMdx('~~~js filename="test.js"\n~~~', {
+        const { result } = await compileMdx('```js filename="test.js"\n```', {
           mdxOptions,
           codeHighlight: false
         })
@@ -69,7 +70,7 @@ describe('process heading', () => {
 
       it('not highlight filename as substring', async () => {
         const { result } = await compileMdx(
-          '~~~js filename="/foo/"\nfoo\n~~~',
+          '```js filename="/foo/"\nfoo\n```',
           {
             mdxOptions,
             codeHighlight: true // processed only by rehype-pretty-code
@@ -86,7 +87,7 @@ describe('process heading', () => {
       for (const codeHighlight of [true, false]) {
         describe(`codeHighlight: ${codeHighlight}`, () => {
           it(`attach with "copy"`, async () => {
-            const { result } = await compileMdx('~~~js copy\n~~~', {
+            const { result } = await compileMdx('```js copy\n```', {
               mdxOptions,
               codeHighlight
             })
@@ -94,7 +95,7 @@ describe('process heading', () => {
           })
 
           it(`attach with "defaultShowCopyCode: true"`, async () => {
-            const { result } = await compileMdx('~~~js\n~~~', {
+            const { result } = await compileMdx('```js\n```', {
               mdxOptions,
               defaultShowCopyCode: true,
               codeHighlight
@@ -103,7 +104,7 @@ describe('process heading', () => {
           })
 
           it(`not attach with "defaultShowCopyCode: true" and "copy=false"`, async () => {
-            const { result } = await compileMdx('~~~js copy=false\n~~~', {
+            const { result } = await compileMdx('```js copy=false\n```', {
               mdxOptions,
               defaultShowCopyCode: true,
               codeHighlight
@@ -115,7 +116,7 @@ describe('process heading', () => {
     })
 
     it('code block without language has "text" language', async () => {
-      const { result } = await compileMdx('~~~\n~~~', { mdxOptions })
+      const { result } = await compileMdx('```\n```', { mdxOptions })
       expect(result).toMatch('<_components.code className="language-text" />')
     })
   })
