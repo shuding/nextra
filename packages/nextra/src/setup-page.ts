@@ -3,15 +3,16 @@
  * This file should be never used directly, only in loader.ts
  */
 
-import { FC } from 'react'
-import get from 'lodash.get'
-import { NEXTRA_INTERNAL } from './constants'
-import {
+import type { FC } from 'react'
+import type {
   DynamicMetaDescriptor,
   NextraInternalGlobal,
   PageOpts,
   ThemeConfig
 } from './types'
+
+import get from 'lodash.get'
+import { NEXTRA_INTERNAL } from './constants'
 
 /**
  * Calculate a 32 bit FNV-1a hash

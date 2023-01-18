@@ -25,5 +25,5 @@ export type SearchResult = {
   children: ReactNode
   id: string
   prefix?: ReactNode
-  route: string
+  url: string
 }

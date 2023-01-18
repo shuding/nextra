@@ -1,4 +1,4 @@
-import { useState, ReactElement, ReactNode, useCallback } from 'react'
+import { useState, ReactElement, ReactNode, useCallback, useMemo } from 'react'
 import { useRouter } from 'next/router'
 import FlexSearch from 'flexsearch'
 import cn from 'clsx'
@@ -6,6 +6,7 @@ import { Search } from './search'
 import { HighlightMatches } from './highlight-matches'
 import { DEFAULT_LOCALE } from '../constants'
 import { SearchResult } from '../types'
+import { useConfig } from '../contexts'
 
 type SectionIndex = FlexSearch.Document<
   {
@@ -31,7 +32,7 @@ type PageIndex = FlexSearch.Document<
 type Result = {
   _page_rk: number
   _section_rk: number
-  route: string
+  url: string
   prefix: ReactNode
   children: ReactNode
 }
@@ -155,79 +156,85 @@ export function Flexsearch({
   const [loading, setLoading] = useState(false)
   const [results, setResults] = useState<SearchResult[]>([])
   const [search, setSearch] = useState('')
+  const config = useConfig()
 
-  const doSearch = (search: string) => {
-    if (!search) return
-    const [pageIndex, sectionIndex] = indexes[locale]
+  // A modifier function to transform the search results.
+  const modifier =
+    config.search?.useResultModifier?.() || ((r: SearchResult[]) => r)
+  const memorizedModifier = useMemo(() => modifier, [])
 
-    // Show the results for the top 5 pages
-    const pageResults =
-      pageIndex.search<true>(search, 5, {
-        enrich: true,
-        suggest: true
-      })[0]?.result || []
+  const doSearch = useCallback(
+    (search: string) => {
+      if (!search) return
+      const [pageIndex, sectionIndex] = indexes[locale]
 
-    const results: Result[] = []
-    const pageTitleMatches: Record<number, number> = {}
-
-    for (let i = 0; i < pageResults.length; i++) {
-      const result = pageResults[i]
-      pageTitleMatches[i] = 0
-
-      // Show the top 5 results for each page
-      const sectionResults =
-        sectionIndex.search<true>(search, 5, {
+      // Show the results for the top 5 pages
+      const pageResults =
+        pageIndex.search<true>(search, 5, {
           enrich: true,
-          suggest: true,
-          tag: `page_${result.id}`
+          suggest: true
         })[0]?.result || []
 
-      let isFirstItemOfPage = true
-      const occurred: Record<string, boolean> = {}
+      const results: Result[] = []
+      const pageTitleMatches: Record<number, number> = {}
 
-      for (let j = 0; j < sectionResults.length; j++) {
-        const { doc } = sectionResults[j]
-        const isMatchingTitle = doc.display !== undefined
-        if (isMatchingTitle) {
-          pageTitleMatches[i]++
-        }
-        const { url, title } = doc
-        const content = doc.display || doc.content
-        if (occurred[url + '@' + content]) continue
-        occurred[url + '@' + content] = true
-        results.push({
-          _page_rk: i,
-          _section_rk: j,
-          route: url,
-          prefix: isFirstItemOfPage && (
-            <div
-              className={cn(
-                'nx-mx-2.5 nx-mb-2 nx-mt-6 nx-select-none nx-border-b nx-border-black/10 nx-px-2.5 nx-pb-1.5 nx-text-xs nx-font-semibold nx-uppercase nx-text-gray-500 first:nx-mt-0 dark:nx-border-white/20 dark:nx-text-gray-300',
-                'contrast-more:nx-border-gray-600 contrast-more:nx-text-gray-900 contrast-more:dark:nx-border-gray-50 contrast-more:dark:nx-text-gray-50'
-              )}
-            >
-              {result.doc.title}
-            </div>
-          ),
-          children: (
-            <>
-              <div className="nx-text-base nx-font-semibold nx-leading-5">
-                <HighlightMatches match={search} value={title} />
+      for (let i = 0; i < pageResults.length; i++) {
+        const result = pageResults[i]
+        pageTitleMatches[i] = 0
+
+        // Show the top 5 results for each page
+        const sectionResults =
+          sectionIndex.search<true>(search, 5, {
+            enrich: true,
+            suggest: true,
+            tag: `page_${result.id}`
+          })[0]?.result || []
+
+        let isFirstItemOfPage = true
+        const occurred: Record<string, boolean> = {}
+
+        for (let j = 0; j < sectionResults.length; j++) {
+          const { doc } = sectionResults[j]
+          const isMatchingTitle = doc.display !== undefined
+          if (isMatchingTitle) {
+            pageTitleMatches[i]++
+          }
+          const { url, title } = doc
+          const content = doc.display || doc.content
+          if (occurred[url + '@' + content]) continue
+          occurred[url + '@' + content] = true
+          results.push({
+            _page_rk: i,
+            _section_rk: j,
+            url,
+            prefix: isFirstItemOfPage && (
+              <div
+                className={cn(
+                  'nx-mx-2.5 nx-mb-2 nx-mt-6 nx-select-none nx-border-b nx-border-black/10 nx-px-2.5 nx-pb-1.5 nx-text-xs nx-font-semibold nx-uppercase nx-text-gray-500 first:nx-mt-0 dark:nx-border-white/20 dark:nx-text-gray-300',
+                  'contrast-more:nx-border-gray-600 contrast-more:nx-text-gray-900 contrast-more:dark:nx-border-gray-50 contrast-more:dark:nx-text-gray-50'
+                )}
+              >
+                {result.doc.title}
               </div>
-              {content && (
-                <div className="excerpt nx-mt-1 nx-text-sm nx-leading-[1.35rem] nx-text-gray-600 dark:nx-text-gray-400 contrast-more:dark:nx-text-gray-50">
-                  <HighlightMatches match={search} value={content} />
+            ),
+            children: (
+              <>
+                <div className="nx-text-base nx-font-semibold nx-leading-5">
+                  <HighlightMatches match={search} value={title} />
                 </div>
-              )}
-            </>
-          )
-        })
-        isFirstItemOfPage = false
+                {content && (
+                  <div className="excerpt nx-mt-1 nx-text-sm nx-leading-[1.35rem] nx-text-gray-600 dark:nx-text-gray-400 contrast-more:dark:nx-text-gray-50">
+                    <HighlightMatches match={search} value={content} />
+                  </div>
+                )}
+              </>
+            )
+          })
+          isFirstItemOfPage = false
+        }
       }
-    }
 
-    setResults(
-      results
+      const sortedResults = results
         .sort((a, b) => {
           // Sort by number of matches in the title.
           if (a._page_rk === b._page_rk) {
@@ -240,12 +247,15 @@ export function Flexsearch({
         })
         .map(res => ({
           id: `${res._page_rk}_${res._section_rk}`,
-          route: res.route,
+          url: res.url,
           prefix: res.prefix,
           children: res.children
         }))
-    )
-  }
+
+      setResults(memorizedModifier(sortedResults))
+    },
+    [locale, memorizedModifier]
+  )
 
   const preload = useCallback(
     async (active: boolean) => {
@@ -258,18 +268,21 @@ export function Flexsearch({
     [locale, basePath]
   )
 
-  const handleChange = async (value: string) => {
-    setSearch(value)
-    if (loading) {
-      return
-    }
-    if (!indexes[locale]) {
-      setLoading(true)
-      await loadIndexes(basePath, locale)
-      setLoading(false)
-    }
-    doSearch(value)
-  }
+  const handleChange = useCallback(
+    async (value: string) => {
+      setSearch(value)
+      if (loading) {
+        return
+      }
+      if (!indexes[locale]) {
+        setLoading(true)
+        await loadIndexes(basePath, locale)
+        setLoading(false)
+      }
+      doSearch(value)
+    },
+    [basePath, locale, doSearch]
+  )
 
   return (
     <Search
