@@ -17,7 +17,7 @@ import theme from './theme.json'
 import { truthy } from './utils'
 import remarkMath from 'remark-math'
 import rehypeKatex from 'rehype-katex'
-import { CODE_BLOCK_FILENAME_REGEX } from './constants'
+import { CODE_BLOCK_FILENAME_REGEX, DEFAULT_LOCALE } from './constants'
 
 globalThis.__nextra_temp_do_not_use = () => {
   // @ts-expect-error -- ignore error - File is not a module
@@ -61,7 +61,7 @@ export async function compileMdx(
     | 'readingTime'
     | 'latex'
     | 'codeHighlight'
-  > & { mdxOptions?: MdxOptions } = {},
+  > & { mdxOptions?: MdxOptions; route?: string; locale?: string } = {},
   filePath = '',
   useCachedCompiler = false
 ) {
@@ -69,6 +69,24 @@ export async function compileMdx(
   const { data: frontMatter, content } = grayMatter(source)
 
   const structurizedData = Object.create(null)
+
+  let searchIndexKey: string | null = null
+  if (typeof loaderOptions.flexsearch === 'object') {
+    if (loaderOptions.flexsearch.indexKey) {
+      searchIndexKey = loaderOptions.flexsearch.indexKey(
+        filePath,
+        loaderOptions.route || '',
+        loaderOptions.locale
+      )
+      if (searchIndexKey === '') {
+        searchIndexKey = loaderOptions.locale || DEFAULT_LOCALE
+      }
+    } else {
+      searchIndexKey = loaderOptions.locale || DEFAULT_LOCALE
+    }
+  } else if (loaderOptions.flexsearch) {
+    searchIndexKey = loaderOptions.locale || DEFAULT_LOCALE
+  }
 
   const {
     jsx = false,
@@ -97,7 +115,7 @@ export async function compileMdx(
         remarkGfm,
         remarkHeadings,
         loaderOptions.staticImage && remarkStaticImage,
-        loaderOptions.flexsearch &&
+        searchIndexKey !== null &&
           structurize(structurizedData, loaderOptions.flexsearch),
         loaderOptions.readingTime && readingTime,
         loaderOptions.latex && remarkMath
@@ -135,6 +153,7 @@ export async function compileMdx(
       ...headingMeta,
       ...(readingTime && { readingTime }),
       structurizedData,
+      searchIndexKey,
       frontMatter
     }
   } catch (err) {

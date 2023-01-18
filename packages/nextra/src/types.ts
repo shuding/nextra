@@ -94,7 +94,26 @@ export type ReadingTime = {
 }
 
 type Theme = string
-type Flexsearch = boolean | { codeblocks: boolean }
+type Flexsearch =
+  | boolean
+  | {
+      /**
+       * Whether to index code blocks
+       * @default true
+       */
+      codeblocks: boolean
+      /**
+       * A filter function to filter out files from indexing, and return the
+       * index file key, or null to skip indexing.
+       * A site can have multiple indexes, by default they're separated by
+       * locales as multiple index files.
+       */
+      indexKey?: (
+        filepath: string,
+        route: string,
+        locale?: string
+      ) => null | string
+    }
 type Transform = (
   result: string,
   options: {

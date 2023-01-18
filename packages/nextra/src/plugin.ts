@@ -1,3 +1,4 @@
+import type { Compiler } from 'webpack'
 import {
   NextraConfig,
   FileMap,
@@ -14,10 +15,8 @@ import { isSerializable, parseFileName, sortPages, truthy } from './utils'
 import path from 'node:path'
 import slash from 'slash'
 import grayMatter from 'gray-matter'
-import { Compiler } from 'webpack'
 import pLimit from 'p-limit'
 
-import { restoreCache } from './content-dump'
 import {
   CWD,
   DYNAMIC_META_FILENAME,
@@ -235,19 +234,13 @@ export class PageMapCache {
 export const pageMapCache = new PageMapCache()
 
 export class NextraPlugin {
-  constructor(
-    private config: NextraConfig & { distDir?: string; locales: string[] }
-  ) {}
+  constructor(private config: NextraConfig & { locales: string[] }) {}
 
   apply(compiler: Compiler) {
     compiler.hooks.beforeCompile.tapAsync(
       'NextraPlugin',
       async (_, callback) => {
-        const { flexsearch, distDir, locales } = this.config
-        if (flexsearch) {
-          // Restore the search data from the cache.
-          restoreCache(distDir)
-        }
+        const { locales } = this.config
         const PAGES_DIR = findPagesDirectory()
         try {
           const result = await collectFiles(PAGES_DIR, locales)

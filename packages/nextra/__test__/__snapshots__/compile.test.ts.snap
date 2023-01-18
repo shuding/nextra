@@ -25,6 +25,7 @@ function MDXContent(props = {}) {
 }
 
 ",
+  "searchIndexKey": null,
   "structurizedData": {},
   "title": "codegen.yml",
 }
@@ -55,6 +56,7 @@ function MDXContent(props = {}) {
 }
 
 ",
+  "searchIndexKey": null,
   "structurizedData": {},
   "title": "codegen.yml file",
 }
@@ -90,6 +92,7 @@ function MDXContent(props = {}) {
 }
 
 ",
+  "searchIndexKey": null,
   "structurizedData": {},
   "title": "Posts Tagged with “”",
 }
@@ -119,6 +122,7 @@ function MDXContent(props = {}) {
 }
 
 ",
+  "searchIndexKey": null,
   "structurizedData": {},
 }
 `;
@@ -147,6 +151,7 @@ function MDXContent(props = {}) {
 }
 
 ",
+  "searchIndexKey": null,
   "structurizedData": {},
   "title": "Hello World",
 }

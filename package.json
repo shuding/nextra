@@ -5,7 +5,7 @@
     "types:check": "turbo run types:check",
     "lint": "eslint --cache --ignore-path .gitignore --max-warnings 0 .",
     "dev:core": "turbo run dev --filter=nextra... --filter=!docs",
-    "dev:theme-blog": "turbo run dev --filter=blog... --filter=!docs",
+    "dev:theme-blog": "turbo run dev --filter=example-blog... --filter=!docs",
     "dev:theme-docs": "turbo run dev --filter=swr-site... --filter=!docs",
     "dev:website": "turbo run dev --filter=docs...",
     "build:core": "pnpm run build --filter=nextra",
