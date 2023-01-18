@@ -1,6 +1,6 @@
 /* eslint sort-keys: error */
 import { isValidElement, FC, ReactNode } from 'react'
-import { PageTheme } from './types'
+import { PageTheme, SearchResult } from './types'
 import { useRouter } from 'next/router'
 import { Anchor, Flexsearch, Footer, Navbar, TOC } from './components'
 import { DiscordIcon, GitHubIcon } from 'nextra/icons'
@@ -124,7 +124,10 @@ export const themeSchema = z
       emptyResult: z.custom<ReactNode | FC>(...reactNode),
       loading: z.string().or(z.function().returns(z.string())),
       // Can't be React component
-      placeholder: z.string().or(z.function().returns(z.string()))
+      placeholder: z.string().or(z.function().returns(z.string())),
+      useResultModifier: z
+        .function()
+        .returns(z.custom<(v: SearchResult[]) => SearchResult[]>())
     }),
     serverSideError: z.object({
       content: z.custom<ReactNode | FC>(...reactNode),
@@ -289,6 +292,9 @@ export const DEFAULT_THEME: DocsThemeConfig = {
       if (locale === 'ru') return 'Поиск документации…'
       if (locale === 'fr') return 'Rechercher de la documentation…'
       return 'Search documentation…'
+    },
+    useResultModifier: function useResultModifier() {
+      return (v: SearchResult[]) => v
     }
   },
   serverSideError: {

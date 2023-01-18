@@ -60,6 +60,12 @@ const FOOTER_LINK_TEXT = {
   ),
 };
 
+// A custom ranking implementation, that "options" will always be before "getting started".
+const rank = {
+  "/docs/options": 2,
+  "/docs/getting-started": 1,
+};
+
 const config: DocsThemeConfig = {
   banner: {
     key: "swr-2",
@@ -72,6 +78,20 @@ const config: DocsThemeConfig = {
     text: function useText() {
       const { locale } = useRouter();
       return EDIT_TEXT[locale];
+    },
+  },
+  search: {
+    useResultModifier: () => {
+      return (results) => {
+        results.sort((a, b) => {
+          const [route1] = a.url.split("#");
+          const [route2] = b.url.split("#");
+          const rank1 = rank[route1] || 0;
+          const rank2 = rank[route2] || 0;
+          return rank1 - rank2;
+        });
+        return results;
+      };
     },
   },
   feedback: {

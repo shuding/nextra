@@ -30,6 +30,9 @@ type SearchProps = {
 
 const INPUTS = ['input', 'select', 'button', 'textarea']
 
+const isMac =
+  typeof navigator !== 'undefined' && navigator.userAgent.includes('Macintosh')
+
 export function Search({
   className,
   overlayClassName,
@@ -125,7 +128,7 @@ export function Search({
         case 'Enter': {
           const result = results[active]
           if (result) {
-            void router.push(result.route)
+            void router.push(result.url)
             finishSearch()
           }
           break
@@ -173,7 +176,7 @@ export function Search({
         {value
           ? 'ESC'
           : mounted &&
-            (navigator.userAgent.includes('Macintosh') ? (
+            (isMac ? (
               <>
                 <span className="nx-text-xs">⌘</span>K
               </>
@@ -238,7 +241,7 @@ export function Search({
               {renderString(config.search.loading)}
             </span>
           ) : results.length > 0 ? (
-            results.map(({ route, prefix, children, id }, i) => (
+            results.map(({ url, prefix, children, id }, i) => (
               <Fragment key={id}>
                 {prefix}
                 <li
@@ -252,7 +255,7 @@ export function Search({
                 >
                   <Anchor
                     className="nx-block nx-scroll-m-12 nx-px-2.5 nx-py-2"
-                    href={route}
+                    href={url}
                     data-index={i}
                     onFocus={handleActive}
                     onMouseMove={handleActive}
