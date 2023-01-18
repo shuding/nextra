@@ -1,5 +1,12 @@
 # nextra
 
+## 2.2.6
+
+### Patch Changes
+
+- be24334: improve search index generation
+- 4fc13df: fix warning of dynamic imports
+
 ## 2.2.5
 
 ### Patch Changes
