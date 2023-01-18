@@ -72,7 +72,7 @@ export async function compileMdx(
 
   const {
     jsx = false,
-    format = 'mdx',
+    format: _format = 'mdx',
     outputFormat = 'function-body',
     remarkPlugins = [],
     rehypePlugins = [],
@@ -82,6 +82,8 @@ export async function compileMdx(
     // You can override MDX options in the frontMatter too.
     ...(frontMatter.mdxOptions as Record<string, unknown>)
   }
+  
+  const format = _format = "detect" ? filePath.endsWith(".mdx") ? "mdx" : "md" : _format
 
   const compiler =
     (useCachedCompiler && cachedCompilerForFormat[format]) ||
