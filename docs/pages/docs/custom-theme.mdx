@@ -45,8 +45,8 @@ export default function Layout({ children }: NextraThemeLayoutProps) {
 }
 ```
 
-It accepts `children`, which is the MDX content of the current page, and wrapper some other elements.
-You can simply create a MDX file as `pages/index.mdx` and see the result:
+It accepts a `children` prop, which is the MDX content of the current page, and wraps some other elements around the content.
+After creating the theme, you can simply add a MDX file as `pages/index.mdx` and see the result:
 
 import customThemeImage from '../../public/assets/docs/custom-theme.png'
 
@@ -54,7 +54,7 @@ import customThemeImage from '../../public/assets/docs/custom-theme.png'
 
 <br/>
 
-In your theme layout, you can use CSS imports or other ways to style it. Next.js hooks such as `useRouter`, `Head` are also available.
+Inside your theme layout, you can use CSS imports or other ways to style it. Next.js hooks such as `useRouter`, `Head` are also available.
 
 ### Render Metadata for the Active Page
 

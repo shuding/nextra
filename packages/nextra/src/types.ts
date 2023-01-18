@@ -9,9 +9,10 @@ import {
   META_FILENAME,
   NEXTRA_INTERNAL
 } from './constants'
+import { ReactNode, FC } from 'react'
 
 type MetaFilename = typeof META_FILENAME
-type MarkdownExtension = typeof MARKDOWN_EXTENSIONS[number]
+type MarkdownExtension = (typeof MARKDOWN_EXTENSIONS)[number]
 
 export interface LoaderOptions extends NextraConfig {
   metaImport?: boolean
@@ -146,11 +147,13 @@ const nextra: Nextra = () => () => ({})
 
 export default nextra
 
+export type ThemeConfig = any | null
+
 export type NextraThemeLayoutProps = {
   pageOpts: PageOpts
   pageProps: any
-  themeConfig: any | null
-  children: React.ReactNode
+  themeConfig: ThemeConfig
+  children: ReactNode
 }
 
 export type NextraInternalGlobal = typeof globalThis & {
@@ -160,12 +163,18 @@ export type NextraInternalGlobal = typeof globalThis & {
     context: Record<
       string,
       {
-        Content: React.FC
+        Content: FC
         pageOpts: PageOpts
-        themeConfig: any | null
+        themeConfig: ThemeConfig
       }
     >
     refreshListeners: Record<string, (() => void)[]>
-    Layout: React.FC<any>
+    Layout: FC<any>
   }
+}
+
+export type DynamicMetaDescriptor = {
+  metaFilePath: string
+  metaObjectKeyPath: string
+  metaParentKeyPath: string
 }
