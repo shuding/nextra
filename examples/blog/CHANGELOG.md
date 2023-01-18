@@ -4,6 +4,14 @@
 
 ### Patch Changes
 
+- Updated dependencies [163065c]
+  - nextra@2.2.5
+  - nextra-theme-blog@2.2.5
+
+## null
+
+### Patch Changes
+
 - Updated dependencies [091b77b]
 - Updated dependencies [917de49]
   - nextra@2.2.4

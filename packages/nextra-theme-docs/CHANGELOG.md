@@ -1,5 +1,12 @@
 # nextra-theme-docs
 
+## 2.2.5
+
+### Patch Changes
+
+- 5daa1c4: fix Collapse element
+- 163065c: loader refactor, type-safe `__nextra_resolvePageMap`, avoid code interpolation in loader.ts
+
 ## 2.2.4
 
 ### Patch Changes

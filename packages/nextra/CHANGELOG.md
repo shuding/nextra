@@ -1,5 +1,11 @@
 # nextra
 
+## 2.2.5
+
+### Patch Changes
+
+- 163065c: loader refactor, type-safe `__nextra_resolvePageMap`, avoid code interpolation in loader.ts
+
 ## 2.2.4
 
 ### Patch Changes
