@@ -26,7 +26,7 @@ export function getStaticProps() {
 
 export default withNextra({
   i18n: {
-    locales: ["en-US", "es-ES", "ja", "ko", "ru", "zh-CN"],
+    locales: ["en-US", "es-ES", "ru"],
     defaultLocale: "en-US",
   },
   // basePath: "/some-base-path",
