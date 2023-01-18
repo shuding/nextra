@@ -1,5 +1,4 @@
 import { useRef, useEffect, ReactElement, ReactNode } from 'react'
-import { useMounted } from 'nextra/hooks'
 import cn from 'clsx'
 
 export function Collapse({
@@ -15,13 +14,17 @@ export function Collapse({
 }): ReactElement {
   const containerRef = useRef<HTMLDivElement>(null)
   const innerRef = useRef<HTMLDivElement>(null)
+  const animationRef = useRef(0)
   const initialOpen = useRef(isOpen)
-  const mounted = useMounted()
 
   useEffect(() => {
     const container = containerRef.current
     const inner = innerRef.current
-    if (!mounted || !container || !inner) return
+    const animation = animationRef.current
+    if (animation) {
+      clearTimeout(animation)
+    }
+    if (!container || !inner) return
 
     container.classList.toggle('nx-duration-500', !isOpen)
     container.classList.toggle('nx-duration-300', isOpen)
@@ -29,11 +32,26 @@ export function Collapse({
     if (horizontal) {
       // save initial width to avoid word wrapping when container width will be changed
       inner.style.width = `${inner.clientWidth}px`
-      container.style.width = `${isOpen ? inner.clientWidth : 0}px`
+      container.style.width = `${inner.clientWidth}px`
     } else {
-      container.style.height = `${isOpen ? inner.clientHeight : 0}px`
+      container.style.height = `${inner.clientHeight}px`
     }
-  }, [horizontal, isOpen, mounted])
+
+    if (isOpen) {
+      animationRef.current = window.setTimeout(() => {
+        // should be style property in kebab-case, not css class name
+        container.style.removeProperty('height')
+      }, 300)
+    } else {
+      setTimeout(() => {
+        if (horizontal) {
+          container.style.width = '0px'
+        } else {
+          container.style.height = '0px'
+        }
+      }, 0)
+    }
+  }, [horizontal, isOpen])
 
   return (
     <div
