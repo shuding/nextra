@@ -61,10 +61,7 @@ export async function compileMdx(
     | 'readingTime'
     | 'latex'
     | 'codeHighlight'
-  > & { mdxOptions?: MdxOptions; route: string; locale: string } = {
-    route: '',
-    locale: ''
-  },
+  > & { mdxOptions?: MdxOptions; route?: string; locale?: string } = {},
   filePath = '',
   useCachedCompiler = false
 ) {
@@ -78,7 +75,7 @@ export async function compileMdx(
     if (loaderOptions.flexsearch.indexKey) {
       searchIndexKey = loaderOptions.flexsearch.indexKey(
         filePath,
-        loaderOptions.route,
+        loaderOptions.route || '',
         loaderOptions.locale
       )
       if (searchIndexKey === '') {
@@ -88,8 +85,8 @@ export async function compileMdx(
       searchIndexKey = loaderOptions.locale || DEFAULT_LOCALE
     }
   } else if (loaderOptions.flexsearch) {
-      searchIndexKey = loaderOptions.locale || DEFAULT_LOCALE
-    }
+    searchIndexKey = loaderOptions.locale || DEFAULT_LOCALE
+  }
 
   const {
     jsx = false,
