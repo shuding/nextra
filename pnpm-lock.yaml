@@ -24,7 +24,7 @@ importers:
   .:
     specifiers:
       '@changesets/cli': 2.26.0
-      '@edge-runtime/vm': 2.0.2
+      '@edge-runtime/vm': 2.0.3
       '@next/eslint-plugin-next': 13.1.2
       '@typescript-eslint/eslint-plugin': 5.48.2
       '@typescript-eslint/parser': 5.48.2
@@ -41,7 +41,7 @@ importers:
       typescript: 4.9.4
     devDependencies:
       '@changesets/cli': 2.26.0
-      '@edge-runtime/vm': 2.0.2
+      '@edge-runtime/vm': 2.0.3
       '@next/eslint-plugin-next': 13.1.2
       '@typescript-eslint/eslint-plugin': 5.48.2_caon6io6stgpr7lz2rtbhekxqy
       '@typescript-eslint/parser': 5.48.2_7uibuqfxkfaozanbtbziikiqje
@@ -769,14 +769,16 @@ packages:
       prettier: 2.8.3
     dev: true
 
-  /@edge-runtime/primitives/2.0.2:
-    resolution: {integrity: sha512-pE/VlEMzF2+WOdQUR8vgecd0b5kY4/d2Z5rA8tdq2uANQvqallJQ6tJvLmWxResq75kMFln4NDXrtzNBw3mgXA==}
+  /@edge-runtime/primitives/2.0.3:
+    resolution: {integrity: sha512-+y39BANcePTGKAE+0R8xX3UFzwTqWQOVUaC+UXsKjA45jGNfZCkGnJgGjJPXZftmxiLcl9R2lYyDvHN+55dUlw==}
+    engines: {node: '>=14'}
     dev: true
 
-  /@edge-runtime/vm/2.0.2:
-    resolution: {integrity: sha512-yQFE4H5R7jy98xRMnH3dOt3PQkORVtKTT2gn0U86JBHWMvoSZxvd1hw8UXxJtyp+bqW3yV7N1oTwDdX71It+Gg==}
+  /@edge-runtime/vm/2.0.3:
+    resolution: {integrity: sha512-l0fTtkBIPozgr8vQ46LXCSrp40WBWSNFQy/wGpydAsXznm6So90/ZsZD9hFLiudT2dnPJAWFtdNHcTpEKv8smA==}
+    engines: {node: '>=14'}
     dependencies:
-      '@edge-runtime/primitives': 2.0.2
+      '@edge-runtime/primitives': 2.0.3
     dev: true
 
   /@emotion/is-prop-valid/0.8.8:
@@ -7529,7 +7531,7 @@ packages:
     resolution: {directory: packages/nextra-theme-blog, type: directory}
     id: file:packages/nextra-theme-blog
     name: nextra-theme-blog
-    version: 2.2.4
+    version: 2.2.5
     peerDependencies:
       next: '>=9.5.3'
       react: '>=16.13.1'
@@ -7550,7 +7552,7 @@ packages:
     resolution: {directory: packages/nextra-theme-docs, type: directory}
     id: file:packages/nextra-theme-docs
     name: nextra-theme-docs
-    version: 2.2.4
+    version: 2.2.5
     peerDependencies:
       next: '>=9.5.3'
       react: '>=16.13.1'
@@ -7580,7 +7582,7 @@ packages:
     resolution: {directory: packages/nextra, type: directory}
     id: file:packages/nextra
     name: nextra
-    version: 2.2.4
+    version: 2.2.5
     peerDependencies:
       next: '>=9.5.3'
       react: '>=16.13.1'
