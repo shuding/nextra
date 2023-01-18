@@ -6,13 +6,87 @@
 import type { FC } from 'react'
 import type {
   DynamicMetaDescriptor,
+  Folder,
   NextraInternalGlobal,
   PageOpts,
-  ThemeConfig
+  ThemeConfig,
+  MetaJsonFile
 } from './types'
+import { normalizePageRoute, pageTitleFromFilename } from './utils'
 
 import get from 'lodash.get'
 import { NEXTRA_INTERNAL } from './constants'
+
+function normalizeMetaData(obj: Record<string, any>) {
+  return Object.fromEntries(
+    Object.entries(obj).map(([key, value]) => {
+      const keyWithoutSlash = key.replace('/', '')
+      return key.includes('/')
+        ? [
+            keyWithoutSlash,
+            value.title || pageTitleFromFilename(keyWithoutSlash)
+          ]
+        : [key, value || pageTitleFromFilename(key)]
+    })
+  )
+}
+
+export function collectCatchAllRoutes(
+  parent: Folder<any>,
+  meta: Omit<MetaJsonFile, 'data'> & { data: Record<string, any> },
+  isRootFolder = true
+) {
+  if (isRootFolder) {
+    collectCatchAllRoutes(
+      parent,
+      {
+        kind: 'Meta',
+        data: meta.data,
+        locale: meta.locale
+      },
+      false
+    )
+    meta.data = normalizeMetaData(meta.data)
+    return
+  }
+  for (const [key, value] of Object.entries(meta.data)) {
+    const isFolder = key.includes('/')
+    if (!isFolder) {
+      parent.children.push({
+        kind: 'MdxPage',
+        locale: meta.locale,
+        name: key,
+        title: value || pageTitleFromFilename(key),
+        route: normalizePageRoute(parent.route, key)
+      })
+      continue
+    }
+    const routeWithoutSlashes = key.replace('/', '')
+    const newParent: Folder = {
+      kind: 'Folder',
+      name: routeWithoutSlashes,
+      route: `${parent.route}/${routeWithoutSlashes}`,
+      children: [
+        {
+          kind: 'Meta',
+          locale: meta.locale,
+          data: normalizeMetaData(value.items)
+        }
+      ]
+    }
+
+    parent.children.push(newParent)
+    collectCatchAllRoutes(
+      newParent,
+      {
+        kind: 'Meta',
+        data: value.items,
+        locale: meta.locale
+      },
+      false
+    )
+  }
+}
 
 export function setupNextraPage({
   pageNextRoute,
@@ -36,6 +110,7 @@ export function setupNextraPage({
   if (typeof window === 'undefined') {
     globalThis.__nextra_resolvePageMap = async () => {
       const clonedPageMap = JSON.parse(JSON.stringify(pageOpts.pageMap))
+
       await Promise.all(
         dynamicMetaModules.map(
           async ([importMod, { metaObjectKeyPath, metaParentKeyPath }]) => {
@@ -44,18 +119,11 @@ export function setupNextraPage({
             const meta = get(clonedPageMap, metaObjectKeyPath)
             meta.data = metaData
 
-            const parentRoute =
-              get(clonedPageMap, metaParentKeyPath.replace(/\.children$/, ''))
-                .route || ''
-
-            for (const key of Object.keys(metaData)) {
-              get(clonedPageMap, metaParentKeyPath).push({
-                kind: 'MdxPage',
-                locale: meta.locale,
-                name: key.split('/').pop(),
-                route: parentRoute + '/' + key
-              })
-            }
+            const parent = get(
+              clonedPageMap,
+              metaParentKeyPath.replace(/\.children$/, '')
+            )
+            collectCatchAllRoutes(parent, meta)
           }
         )
       )

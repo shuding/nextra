@@ -4,7 +4,7 @@ import { createProcessor, ProcessorOptions } from '@mdx-js/mdx'
 import { Processor } from '@mdx-js/mdx/lib/core'
 import remarkGfm from 'remark-gfm'
 import rehypePrettyCode from 'rehype-pretty-code'
-import readingTime from 'remark-reading-time'
+import remarkReadingTime from 'remark-reading-time'
 import grayMatter from 'gray-matter'
 
 import {
@@ -13,7 +13,8 @@ import {
   remarkReplaceImports,
   structurize,
   parseMeta,
-  attachMeta
+  attachMeta,
+  remarkRemoveImports
 } from './mdx-plugins'
 import { LoaderOptions, PageOpts, ReadingTime } from './types'
 import theme from './theme.json'
@@ -107,6 +108,15 @@ export async function compileMdx(
   const format =
     _format === 'detect' ? (filePath.endsWith('.mdx') ? 'mdx' : 'md') : _format
 
+  const {
+    staticImage,
+    flexsearch,
+    readingTime,
+    latex,
+    codeHighlight,
+    defaultShowCopyCode
+  } = loaderOptions
+
   // https://github.com/shuding/nextra/issues/1303
   const isFileOutsideCWD =
     !isPageImport && path.relative(CWD, filePath).startsWith('..')
@@ -122,19 +132,19 @@ export async function compileMdx(
         : 'nextra/mdx',
       remarkPlugins: [
         ...remarkPlugins,
+        outputFormat === 'function-body' && remarkRemoveImports,
         remarkGfm,
         remarkHeadings,
-        loaderOptions.staticImage && remarkStaticImage,
-        searchIndexKey !== null &&
-          structurize(structurizedData, loaderOptions.flexsearch),
-        loaderOptions.readingTime && readingTime,
-        loaderOptions.latex && remarkMath,
+        staticImage && remarkStaticImage,
+        searchIndexKey !== null && structurize(structurizedData, flexsearch),
+        readingTime && remarkReadingTime,
+        latex && remarkMath,
         isFileOutsideCWD && remarkReplaceImports
       ].filter(truthy),
       rehypePlugins: [
         ...rehypePlugins,
-        [parseMeta, { defaultShowCopyCode: loaderOptions.defaultShowCopyCode }],
-        loaderOptions.codeHighlight === false
+        [parseMeta, { defaultShowCopyCode }],
+        codeHighlight === false
           ? null
           : ([
               rehypePrettyCode,
@@ -144,7 +154,7 @@ export async function compileMdx(
               }
             ] as any),
         attachMeta,
-        loaderOptions.latex && rehypeKatex
+        latex && rehypeKatex
       ].filter(truthy)
     }))
 

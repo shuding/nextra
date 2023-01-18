@@ -4,44 +4,50 @@ import { RemoteContent } from 'nextra/data'
 export const getStaticProps = async ({ params }) => {
   const token = process.env.GITHUB_TEST_REMOTE_MDX
   const res = await fetch(
-    'https://api.github.com/gists/c204a2da82cd3ed8e676f35c493ab59f/comments/' + params.slug,
+    'https://api.github.com/gists/c204a2da82cd3ed8e676f35c493ab59f/comments/' +
+      params.slug,
     {
       headers: {
-        Accept: "application/vnd.github+json",
-        "X-GitHub-Api-Version": "2022-11-28",
+        Accept: 'application/vnd.github+json',
+        'X-GitHub-Api-Version': '2022-11-28',
         ...(token && { Authorization: `Bearer ${token}` })
-      },
+      }
     }
-  );
-  const comment = await res.json();
+  )
+  const comment = await res.json()
   if (!comment.body) {
-    throw new Error(`Error while fetch data from GitHub.\n${JSON.stringify(comment, null, 4)}`)
+    throw new Error(
+      `Error while fetch data from GitHub.\n${JSON.stringify(comment, null, 4)}`
+    )
   }
   return {
     props: {
-      ...(await buildDynamicMDX(comment.body)),
+      ...(await buildDynamicMDX(comment.body, {
+        codeHighlight: true,
+        defaultShowCopyCode: true
+      })),
       ...(await buildDynamicMeta())
     },
-    revalidate: 10,
+    revalidate: 10
   }
 }
 
 export const getStaticPaths = async () => {
   const token = process.env.GITHUB_TEST_REMOTE_MDX
   const res = await fetch(
-    "https://api.github.com/gists/c204a2da82cd3ed8e676f35c493ab59f/comments",
+    'https://api.github.com/gists/c204a2da82cd3ed8e676f35c493ab59f/comments',
     {
       headers: {
-        Accept: "application/vnd.github+json",
-        "X-GitHub-Api-Version": "2022-11-28",
+        Accept: 'application/vnd.github+json',
+        'X-GitHub-Api-Version': '2022-11-28',
         ...(token && { Authorization: `Bearer ${token}` })
-      },
+      }
     }
-  );
-  const comments = await res.json();
+  )
+  const comments = await res.json()
   return {
-    paths: comments.map((comment) => ({
-      params: { slug: String(comment.id) },
+    paths: comments.map(comment => ({
+      params: { slug: String(comment.id) }
     })),
     fallback: 'blocking'
   }

@@ -48,7 +48,7 @@ const esmOptions = defineConfig({
 export default defineConfig([
   {
     name: 'nextra',
-    entry: ['src/index.js', 'src/__temp__.js'],
+    entry: ['src/index.js', 'src/__temp__.js', 'src/catch-all.ts'],
     format: 'cjs',
     dts: false,
     target
@@ -59,7 +59,9 @@ export default defineConfig([
       'src/**/*.ts',
       'src/**/*.tsx',
       '!src/compile.ts',
-      '!src/mdx-plugins/remark-replace-imports.ts'
+      '!src/mdx-plugins/remark-replace-imports.ts',
+      '!src/**/*.d.ts',
+      '!src/catch-all.ts'
     ],
     ...esmOptions
   },

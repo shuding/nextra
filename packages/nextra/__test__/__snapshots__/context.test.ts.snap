@@ -684,7 +684,22 @@ exports[`context > getAllPages() > should work 1`] = `
     "route": "/docs",
   },
   {
-    "children": [],
+    "children": [
+      {
+        "children": [],
+        "kind": "Folder",
+        "meta": undefined,
+        "name": "graphql-eslint",
+        "route": "/remote/graphql-eslint",
+      },
+      {
+        "children": [],
+        "kind": "Folder",
+        "meta": undefined,
+        "name": "graphql-yoga",
+        "route": "/remote/graphql-yoga",
+      },
+    ],
     "kind": "Folder",
     "meta": {
       "display": "children",

@@ -14,9 +14,9 @@
   "dependencies": {
     "focus-visible": "^5.1.0",
     "intersection-observer": "^0.10.0",
+    "isomorphic-git": "1.21.0",
     "markdown-to-jsx": "^6.11.4",
     "next": ">=13",
-    "next-mdx-remote": "^4.2.0",
     "nextra": "workspace:*",
     "nextra-theme-docs": "workspace:*",
     "react": "*",
@@ -35,10 +35,6 @@
     "autoprefixer": "*",
     "postcss": "*",
     "tailwindcss": "*"
-  },
-  "prettier": {
-    "embeddedLanguageFormatting": "off",
-    "htmlWhitespaceSensitivity": "strict"
   },
   "version": null
 }

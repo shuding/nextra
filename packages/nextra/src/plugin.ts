@@ -11,9 +11,14 @@ import {
 } from './types'
 import fs from 'graceful-fs'
 import { promisify } from 'node:util'
-import { isSerializable, parseFileName, sortPages, truthy } from './utils'
+import {
+  isSerializable,
+  normalizePageRoute,
+  parseFileName,
+  sortPages,
+  truthy
+} from './utils'
 import path from 'node:path'
-import slash from 'slash'
 import grayMatter from 'gray-matter'
 import pLimit from 'p-limit'
 
@@ -62,7 +67,7 @@ export async function collectFiles(
       ? // directory couldn't have extensions
         { name: path.basename(filePath), locale: '', ext: '' }
       : parseFileName(filePath)
-    const fileRoute = slash(path.join(route, name.replace(/^index$/, '')))
+    const fileRoute = normalizePageRoute(route, name)
 
     if (isDirectory) {
       if (fileRoute === '/api') return
