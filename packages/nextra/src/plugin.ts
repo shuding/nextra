@@ -234,9 +234,7 @@ export class PageMapCache {
 export const pageMapCache = new PageMapCache()
 
 export class NextraPlugin {
-  constructor(
-    private config: NextraConfig & { distDir?: string; locales: string[] }
-  ) {}
+  constructor(private config: NextraConfig & { locales: string[] }) {}
 
   apply(compiler: Compiler) {
     compiler.hooks.beforeCompile.tapAsync(

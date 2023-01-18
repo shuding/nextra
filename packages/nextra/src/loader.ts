@@ -69,7 +69,6 @@ async function loader(
     mdxOptions,
     pageMapCache,
     newNextLinkBehavior,
-    distDir,
     transform,
     codeHighlight
   } = context.getOptions()

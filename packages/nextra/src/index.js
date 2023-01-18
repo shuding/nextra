@@ -27,7 +27,6 @@ const nextra = (themeOrNextraConfig, themeConfig) =>
 
     const nextraPlugin = new NextraPlugin({
       ...nextraConfig,
-      distDir: nextConfig.distDir,
       locales: nextConfig.i18n?.locales || ['']
     })
 
@@ -58,8 +57,7 @@ const nextra = (themeOrNextraConfig, themeConfig) =>
       locales: nextConfig.i18n?.locales || [''],
       defaultLocale: nextConfig.i18n?.defaultLocale || DEFAULT_LOCALE,
       pageMapCache,
-      newNextLinkBehavior: nextConfig.experimental?.newNextLinkBehavior,
-      distDir: nextConfig.distDir
+      newNextLinkBehavior: nextConfig.experimental?.newNextLinkBehavior
     }
 
     return {

@@ -4,8 +4,6 @@ import { webpack, sources } from 'next/dist/compiled/webpack/webpack'
 const PLUGIN_NAME = 'NextraSearchPlugin'
 
 export class NextraSearchPlugin {
-  constructor() {}
-
   apply(compiler: Compiler) {
     compiler.hooks.make.tap(PLUGIN_NAME, compilation => {
       compilation.hooks.processAssets.tap(
@@ -21,7 +19,7 @@ export class NextraSearchPlugin {
             const entryModule =
               compilation.moduleGraph.getResolvedModule(entryDependency)
 
-            if (entryModule && entryModule.buildInfo?.nextraSearch) {
+            if (entryModule?.buildInfo?.nextraSearch) {
               const { title, data, indexKey, route } =
                 entryModule.buildInfo.nextraSearch
 

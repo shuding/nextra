@@ -87,11 +87,9 @@ export async function compileMdx(
     } else {
       searchIndexKey = loaderOptions.locale || DEFAULT_LOCALE
     }
-  } else {
-    if (loaderOptions.flexsearch) {
+  } else if (loaderOptions.flexsearch) {
       searchIndexKey = loaderOptions.locale || DEFAULT_LOCALE
     }
-  }
 
   const {
     jsx = false,
