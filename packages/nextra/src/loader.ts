@@ -4,7 +4,7 @@ import type { LoaderContext } from 'webpack'
 import path from 'node:path'
 import slash from 'slash'
 
-import { pageTitleFromFilename, parseFileName } from './utils'
+import { hashFnv32a, pageTitleFromFilename, parseFileName } from './utils'
 import { compileMdx } from './compile'
 import { resolvePageMap } from './page-map'
 import { collectFiles, collectMdx } from './plugin'
@@ -246,6 +246,8 @@ export default MDXContent`
     ? await transform(result, { route: pageNextRoute })
     : result
 
+  const stringifiedPageOpts = JSON.stringify(pageOpts)
+
   return `import { setupNextraPage } from 'nextra/setup-page'
 import __nextra_layout from '${layout}'
 ${themeConfigImport}
@@ -256,12 +258,20 @@ ${finalResult}
 
 setupNextraPage({
   pageNextRoute: ${JSON.stringify(pageNextRoute)},
-  pageOpts: ${JSON.stringify(pageOpts)},
+  pageOpts: ${stringifiedPageOpts},
   nextraLayout: __nextra_layout,
   themeConfig: ${themeConfigImport ? '__nextra_themeConfig' : 'null'},
   Content: MDXContent,
   hot: module.hot,
-  dynamicMetaItems: ${JSON.stringify(dynamicMetaItems)}
+  pageOptsChecksum: ${JSON.stringify(hashFnv32a(stringifiedPageOpts))},
+  dynamicMetaModules: typeof window !== 'undefined' ? [] : [${dynamicMetaItems
+    .map(
+      descriptor =>
+        `[import(${JSON.stringify(descriptor.metaFilePath)}), ${JSON.stringify(
+          descriptor
+        )}]`
+    )
+    .join(',')}]
 })
 
 export { default } from 'nextra/layout'`

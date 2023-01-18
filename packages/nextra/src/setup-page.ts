@@ -3,36 +3,16 @@
  * This file should be never used directly, only in loader.ts
  */
 
-import { FC } from 'react'
-import get from 'lodash.get'
-import { NEXTRA_INTERNAL } from './constants'
-import {
+import type { FC } from 'react'
+import type {
   DynamicMetaDescriptor,
   NextraInternalGlobal,
   PageOpts,
   ThemeConfig
 } from './types'
 
-/**
- * Calculate a 32 bit FNV-1a hash
- * Found here: https://gist.github.com/vaiorabbit/5657561
- * Ref.: http://isthe.com/chongo/tech/comp/fnv/
- *
- * @param {string} str the input value
- * @param {number} [seed] optionally pass the hash of the previous chunk
- * @returns {string}
- */
-function hashFnv32a(str: string, seed = 0x811c9dc5): string {
-  let hval = seed
-
-  for (let i = 0; i < str.length; i++) {
-    hval ^= str.charCodeAt(i)
-    hval += (hval << 1) + (hval << 4) + (hval << 7) + (hval << 8) + (hval << 24)
-  }
-
-  // Convert to 8 digit hex string
-  return ('0000000' + (hval >>> 0).toString(16)).substring(-8)
-}
+import get from 'lodash.get'
+import { NEXTRA_INTERNAL } from './constants'
 
 export function setupNextraPage({
   pageNextRoute,
@@ -41,7 +21,8 @@ export function setupNextraPage({
   themeConfig,
   Content,
   hot,
-  dynamicMetaItems
+  pageOptsChecksum,
+  dynamicMetaModules
 }: {
   pageNextRoute: string
   pageOpts: PageOpts
@@ -49,15 +30,16 @@ export function setupNextraPage({
   themeConfig: ThemeConfig
   Content: FC
   hot: __WebpackModuleApi.Hot
-  dynamicMetaItems: DynamicMetaDescriptor[]
+  pageOptsChecksum: string
+  dynamicMetaModules: [Promise<any>, DynamicMetaDescriptor][]
 }) {
   if (typeof window === 'undefined') {
     globalThis.__nextra_resolvePageMap = async () => {
       const clonedPageMap = JSON.parse(JSON.stringify(pageOpts.pageMap))
       await Promise.all(
-        dynamicMetaItems.map(
-          async ({ metaFilePath, metaObjectKeyPath, metaParentKeyPath }) => {
-            const mod = await import(metaFilePath)
+        dynamicMetaModules.map(
+          async ([importMod, { metaObjectKeyPath, metaParentKeyPath }]) => {
+            const mod = await importMod
             const metaData = await mod.default()
             const meta = get(clonedPageMap, metaObjectKeyPath)
             meta.data = metaData
@@ -100,7 +82,7 @@ export function setupNextraPage({
   }
 
   if (process.env.NODE_ENV !== 'production' && hot) {
-    const checksum = hashFnv32a(JSON.stringify(pageOpts))
+    const checksum = pageOptsChecksum
     hot.data ||= Object.create(null)
     if (hot.data.prevPageOptsChecksum !== checksum) {
       const listeners =
