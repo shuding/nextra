@@ -5,7 +5,7 @@
 
 import { FC } from 'react'
 import get from 'lodash.get'
-import { IS_PRODUCTION, NEXTRA_INTERNAL } from './constants'
+import { NEXTRA_INTERNAL } from './constants'
 import {
   DynamicMetaDescriptor,
   NextraInternalGlobal,
@@ -99,7 +99,7 @@ export function setupNextraPage({
     themeConfig
   }
 
-  if (!IS_PRODUCTION && hot) {
+  if (process.env.NODE_ENV !== 'production' && hot) {
     const checksum = hashFnv32a(JSON.stringify(pageOpts))
     hot.data ||= Object.create(null)
     if (hot.data.prevPageOptsChecksum !== checksum) {

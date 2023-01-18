@@ -4,7 +4,11 @@ mdxOptions: { format: "md" }
 
 # Hello!
 
-This is a MD file instead of MDX, which means you can use syntax like this:
+This is an MD file instead of MDX, which means you can use syntax like this:
+
+```md
+<!-- this is a comment -->
+```
 
 <!-- this is a comment -->
 

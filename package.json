@@ -1,7 +1,6 @@
 {
   "private": true,
   "scripts": {
-    "dev": "turbo run dev",
     "build": "turbo run build:tailwind build --filter=./packages/\\*",
     "types:check": "turbo run types:check",
     "lint": "eslint --cache --ignore-path .gitignore --max-warnings 0 .",

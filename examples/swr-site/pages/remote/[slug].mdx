@@ -1,9 +1,8 @@
 import { buildDynamicMDX, buildDynamicMeta } from 'nextra/remote'
 import { RemoteContent } from 'nextra/data'
 
-export const token = process.env.GITHUB_TEST_REMOTE_MDX
-
 export const getStaticProps = async ({ params }) => {
+  const token = process.env.GITHUB_TEST_REMOTE_MDX
   const res = await fetch(
     'https://api.github.com/gists/c204a2da82cd3ed8e676f35c493ab59f/comments/' + params.slug,
     {
@@ -15,7 +14,7 @@ export const getStaticProps = async ({ params }) => {
     }
   );
   const comment = await res.json();
-  if (!Object.hasOwn(comment, 'body')) {
+  if (!comment.body) {
     throw new Error(`Error while fetch data from GitHub.\n${JSON.stringify(comment, null, 4)}`)
   }
   return {
@@ -28,6 +27,7 @@ export const getStaticProps = async ({ params }) => {
 }
 
 export const getStaticPaths = async () => {
+  const token = process.env.GITHUB_TEST_REMOTE_MDX
   const res = await fetch(
     "https://api.github.com/gists/c204a2da82cd3ed8e676f35c493ab59f/comments",
     {
