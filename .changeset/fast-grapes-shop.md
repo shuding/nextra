@@ -2,4 +2,4 @@
 'nextra': patch
 ---
 
-support dynamic import
+support dynamic markdown import
