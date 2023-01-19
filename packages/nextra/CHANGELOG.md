@@ -1,5 +1,11 @@
 # nextra
 
+## 2.2.9
+
+### Patch Changes
+
+- c50474e: support dynamic markdown import
+
 ## 2.2.8
 
 ### Patch Changes
