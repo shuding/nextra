@@ -99,8 +99,9 @@ export async function compileMdx(
     // You can override MDX options in the frontMatter too.
     ...(frontMatter.mdxOptions as Record<string, unknown>)
   }
-  
-  const format = _format === "detect" ? filePath.endsWith(".mdx") ? "mdx" : "md" : _format
+
+  const format =
+    _format === 'detect' ? (filePath.endsWith('.mdx') ? 'mdx' : 'md') : _format
 
   const compiler =
     (useCachedCompiler && cachedCompilerForFormat[format]) ||
@@ -109,8 +110,6 @@ export async function compileMdx(
       format,
       outputFormat,
       providerImportSource: 'nextra/mdx',
-      // https://github.com/hashicorp/next-mdx-remote/issues/307#issuecomment-1363415249
-      development: false,
       remarkPlugins: [
         ...remarkPlugins,
         remarkGfm,
