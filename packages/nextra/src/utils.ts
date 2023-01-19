@@ -39,6 +39,9 @@ export function sortPages(
   )[],
   locale?: string
 ): [string, string][] {
+  if (locale === '') {
+    locale = undefined
+  }
   return pages
     .filter(item => item.kind === 'Folder' || item.locale === locale)
     .map(item => ({

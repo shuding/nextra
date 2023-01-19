@@ -194,10 +194,8 @@ export async function collectFiles(
     } else {
       // Fill with the fallback. Note that we need to keep the original order.
       const meta = { ...(items[metaIndex] as MetaJsonFile) }
-      for (const [k, v] of defaultMeta) {
-        if (meta.data[k] === undefined) {
-          meta.data[k] = v
-        }
+      for (const [key, value] of defaultMeta) {
+        meta.data[key] ||= value;
       }
 
       fileMap[metaPath] = meta
