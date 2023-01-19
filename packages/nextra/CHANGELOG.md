@@ -1,5 +1,12 @@
 # nextra
 
+## 2.2.8
+
+### Patch Changes
+
+- d2ed10f: remove development: false
+- b943146: add transformPageOpts option for advanced use cases
+
 ## 2.2.7
 
 ### Patch Changes
