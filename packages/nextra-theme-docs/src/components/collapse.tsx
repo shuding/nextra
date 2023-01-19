@@ -16,6 +16,7 @@ export function Collapse({
   const innerRef = useRef<HTMLDivElement>(null)
   const animationRef = useRef(0)
   const initialOpen = useRef(isOpen)
+  const initialRender = useRef(true)
 
   useEffect(() => {
     const container = containerRef.current
@@ -24,7 +25,7 @@ export function Collapse({
     if (animation) {
       clearTimeout(animation)
     }
-    if (!container || !inner) return
+    if (initialRender.current || !container || !inner) return
 
     container.classList.toggle('nx-duration-500', !isOpen)
     container.classList.toggle('nx-duration-300', isOpen)
@@ -52,6 +53,10 @@ export function Collapse({
       }, 0)
     }
   }, [horizontal, isOpen])
+
+  useEffect(() => {
+    initialRender.current = false
+  }, [])
 
   return (
     <div
