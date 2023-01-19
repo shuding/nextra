@@ -60,6 +60,11 @@ const nextra = (themeOrNextraConfig, themeConfig) =>
       newNextLinkBehavior: nextConfig.experimental?.newNextLinkBehavior
     }
 
+    // Check if there's a theme provided
+    if (!nextraLoaderOptions.theme) {
+      throw new Error('No Nextra theme found!')
+    }
+
     return {
       ...nextConfig,
       rewrites,

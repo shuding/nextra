@@ -70,6 +70,18 @@
       "import": "./dist/hooks/index.mjs",
       "types": "./dist/hooks/index.d.ts"
     },
+    "./setup-page": {
+      "import": "./dist/setup-page.mjs",
+      "types": "./dist/setup-page.d.ts"
+    },
+    "./mdx": {
+      "import": "./dist/mdx.mjs",
+      "types": "./dist/mdx.d.ts"
+    },
+    "./layout": {
+      "import": "./dist/layout.mjs",
+      "types": "./dist/layout.d.ts"
+    },
     "./*": {
       "import": "./dist/*.mjs",
       "types": "./dist/*.d.ts"
