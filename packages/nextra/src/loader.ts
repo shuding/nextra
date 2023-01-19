@@ -81,11 +81,6 @@ async function loader(
     return 'export default () => null'
   }
 
-  // Check if there's a theme provided
-  if (!theme) {
-    throw new Error('No Nextra theme found!')
-  }
-
   const mdxPath = context.resourcePath as MdxPath
 
   if (mdxPath.includes('/pages/api/')) {
