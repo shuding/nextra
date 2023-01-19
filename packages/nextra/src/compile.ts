@@ -20,7 +20,6 @@ import rehypeKatex from 'rehype-katex'
 import { CODE_BLOCK_FILENAME_REGEX, DEFAULT_LOCALE } from './constants'
 
 globalThis.__nextra_temp_do_not_use = () => {
-  // @ts-expect-error -- ignore error - File is not a module
   import('./__temp__')
 }
 

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import Slugger from 'github-slugger'
 import { getFlattenedValue } from './remark-headings'
 import { CODE_BLOCK_FILENAME_REGEX } from '../constants'

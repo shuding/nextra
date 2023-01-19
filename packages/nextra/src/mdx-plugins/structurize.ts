@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import Slugger from 'github-slugger'
 
 function cleanup(content) {
