@@ -279,6 +279,12 @@ exports[`Page Process > pageMap en-US 1`] = `
             {
               "kind": "MdxPage",
               "locale": "en-US",
+              "name": "dynamic-markdown-import",
+              "route": "/docs/advanced/dynamic-markdown-import",
+            },
+            {
+              "kind": "MdxPage",
+              "locale": "en-US",
               "name": "file-name.with.DOTS",
               "route": "/docs/advanced/file-name.with.DOTS",
             },
@@ -824,6 +830,12 @@ exports[`Page Process > pageMap ru 1`] = `
               "locale": "en-US",
               "name": "code-highlighting",
               "route": "/docs/advanced/code-highlighting",
+            },
+            {
+              "kind": "MdxPage",
+              "locale": "en-US",
+              "name": "dynamic-markdown-import",
+              "route": "/docs/advanced/dynamic-markdown-import",
             },
             {
               "kind": "MdxPage",

@@ -271,15 +271,23 @@ setupNextraPage({
   themeConfig: ${themeConfigImport ? '__nextra_themeConfig' : 'null'},
   Content: MDXContent,
   hot: module.hot,
-  pageOptsChecksum: ${JSON.stringify(hashFnv32a(stringifiedPageOpts))},
-  dynamicMetaModules: typeof window !== 'undefined' ? [] : [${dynamicMetaItems
-    .map(
-      descriptor =>
-        `[import(${JSON.stringify(descriptor.metaFilePath)}), ${JSON.stringify(
-          descriptor
-        )}]`
-    )
-    .join(',')}]
+  pageOptsChecksum: ${
+    IS_PRODUCTION
+      ? 'undefined'
+      : JSON.stringify(hashFnv32a(stringifiedPageOpts))
+  },
+  dynamicMetaModules: [${
+    typeof window !== 'undefined'
+      ? ''
+      : dynamicMetaItems
+          .map(
+            descriptor =>
+              `[import(${JSON.stringify(
+                descriptor.metaFilePath
+              )}), ${JSON.stringify(descriptor)}]`
+          )
+          .join(',')
+  }]
 })
 
 export { default } from 'nextra/layout'`
