@@ -83,7 +83,7 @@ export async function compileMdx(
     ...(frontMatter.mdxOptions as Record<string, unknown>)
   }
   
-  const format = _format = "detect" ? filePath.endsWith(".mdx") ? "mdx" : "md" : _format
+  const format = _format === "detect" ? filePath.endsWith(".mdx") ? "mdx" : "md" : _format
 
   const compiler =
     (useCachedCompiler && cachedCompilerForFormat[format]) ||
