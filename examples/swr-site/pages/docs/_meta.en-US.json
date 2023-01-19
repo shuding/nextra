@@ -3,33 +3,29 @@
     "title": "Getting Started",
     "type": "separator"
   },
-  "getting-started": "Getting Started",
-  "options": "Options",
-  "global-configuration": "Global Configuration",
-  "data-fetching": "Data Fetching",
+  "getting-started": "",
+  "options": "",
+  "global-configuration": "",
+  "data-fetching": "",
   "error-handling": {
-    "title": "Error Handling",
     "display": "hidden"
   },
   "revalidation": "Auto Revalidation",
   "conditional-fetching": "Conditional Data Fetching",
-  "arguments": "Arguments",
-  "mutation": "Mutation",
-  "pagination": "Pagination",
+  "arguments": "",
+  "mutation": "",
+  "pagination": "",
   "--- my_new_separator": {
     "title": "Advanced",
     "type": "separator"
   },
-  "prefetching": "Prefetching",
+  "prefetching": "",
   "with-nextjs": "Next.js SSG and SSR",
   "typescript": "TypeScript :)",
-  "suspense": "Suspense",
-  "middleware": "Middleware",
-  "advanced": {
-    "title": "Advanced"
-  },
+  "suspense": "",
+  "middleware": "",
+  "advanced": "",
   "change-log": {
-    "title": "Change Log",
     "theme": {
       "sidebar": false
     }
@@ -43,7 +39,6 @@
   "wrap-toc-items": "Wrap Table of Content Items",
   "404-500": "404/500 Custom Error Pages",
   "raw-layout": {
-    "title": "Raw Layout",
     "theme": {
       "layout": "raw"
     }

@@ -196,8 +196,11 @@ export async function collectFiles(
       const meta = { ...(items[metaIndex] as MetaJsonFile) }
       for (const [key, value] of defaultMeta) {
         meta.data[key] ||= value;
+        const metaItem = meta.data[key]
+        if (typeof metaItem === 'object') {
+          metaItem.title ||= value
+        }
       }
-
       fileMap[metaPath] = meta
       items[metaIndex] = meta
     }
