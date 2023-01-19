@@ -135,7 +135,7 @@ export type NextraConfig = {
     ProcessorOptions,
     'rehypePlugins' | 'remarkPlugins'
   > & {
-    format?: 'detect' | 'mdx' | 'md'
+    format?: 'detect' | 'mdx' | 'md'
     rehypePrettyCodeOptions?: Partial<RehypePrettyCodeOptions>
   }
 }
