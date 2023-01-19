@@ -130,11 +130,17 @@ export type NextraConfig = {
   readingTime?: boolean
   latex?: boolean
   codeHighlight?: boolean
+  /**
+   * A function to modify the code of compiled MDX pages.
+   * @experimental
+   */
   transform?: Transform
-  mdxOptions?: Pick<
-    ProcessorOptions,
-    'rehypePlugins' | 'remarkPlugins'
-  > & {
+  /**
+   * A function to modify the `pageOpts` prop passed to theme layouts.
+   * @experimental
+   */
+  transformPageOpts?: (pageOpts: PageOpts) => PageOpts
+  mdxOptions?: Pick<ProcessorOptions, 'rehypePlugins' | 'remarkPlugins'> & {
     format?: 'detect' | 'mdx' | 'md'
     rehypePrettyCodeOptions?: Partial<RehypePrettyCodeOptions>
   }

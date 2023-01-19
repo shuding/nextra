@@ -70,6 +70,7 @@ async function loader(
     pageMapCache,
     newNextLinkBehavior,
     transform,
+    transformPageOpts,
     codeHighlight
   } = context.getOptions()
 
@@ -228,7 +229,7 @@ export default MDXContent`
     ? `import __nextra_themeConfig from '${slash(path.resolve(themeConfig))}'`
     : ''
 
-  const pageOpts: PageOpts = {
+  let pageOpts: PageOpts = {
     filePath: slash(path.relative(CWD, mdxPath)),
     route,
     frontMatter,
@@ -240,6 +241,13 @@ export default MDXContent`
     newNextLinkBehavior,
     readingTime,
     title: fallbackTitle
+  }
+  if (transformPageOpts) {
+    // It is possible that a theme wants to attach customized data, or modify
+    // some fields of `pageOpts`. One example is that the theme doesn't need
+    // to access the full pageMap or frontMatter of other pages, and it's not
+    // necessary to include them in the bundle.
+    pageOpts = transformPageOpts(pageOpts)
   }
 
   const finalResult = transform
