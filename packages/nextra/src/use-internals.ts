@@ -19,6 +19,7 @@ export function useInternals() {
   // should be removed after compilation and it's fine to put the effect under
   // if, because hooks' order is still stable.
   if (process.env.NODE_ENV !== 'production') {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
       const trigger = () => rerender({})
 
