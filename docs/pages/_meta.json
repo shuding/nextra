@@ -12,6 +12,7 @@
     "type": "page"
   },
   "showcase": {
+    "title": "Showcase",
     "type": "page",
     "theme": {
       "typesetting": "article",
@@ -19,6 +20,7 @@
     }
   },
   "about": {
+    "title": "About",
     "type": "page",
     "theme": {
       "typesetting": "article"
