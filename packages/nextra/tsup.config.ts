@@ -34,12 +34,14 @@ export default defineConfig([
               args.path.startsWith('.') &&
               !args.path.endsWith('.json')
             ) {
-              let isDir = false
+              let isDir: boolean
               try {
                 isDir = (
                   await fs.stat(path.join(args.resolveDir, args.path))
                 ).isDirectory()
-              } catch {}
+              } catch {
+                isDir = false
+              }
 
               if (isDir) {
                 // it's a directory
