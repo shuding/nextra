@@ -6,7 +6,7 @@ const { target } = tsconfig.compilerOptions
 export default defineConfig([
   {
     name: 'nextra',
-    entry: ['src/index.js', 'src/__temp__.ts'],
+    entry: ['src/index.js', 'src/__temp__.js'],
     format: 'cjs',
     dts: false,
     target
