@@ -1,5 +1,12 @@
 # nextra
 
+## 2.2.7
+
+### Patch Changes
+
+- 36fd8c7: add format detection
+- 64cec8f: disable code splitting and fix dev errors
+
 ## 2.2.6
 
 ### Patch Changes

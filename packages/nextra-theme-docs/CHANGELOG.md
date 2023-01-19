@@ -1,5 +1,11 @@
 # nextra-theme-docs
 
+## 2.2.7
+
+### Patch Changes
+
+- be410bd: fix `<Collapse />` initial animation
+
 ## 2.2.6
 
 ## 2.2.5
