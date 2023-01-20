@@ -74,108 +74,84 @@ exports[`context > getAllPages() > should work 1`] = `
       {
         "kind": "MdxPage",
         "locale": "en-US",
-        "meta": {
-          "title": "",
-        },
+        "meta": {},
         "name": "getting-started",
         "route": "/docs/getting-started",
       },
       {
         "kind": "MdxPage",
         "locale": "es-ES",
-        "meta": {
-          "title": "",
-        },
+        "meta": {},
         "name": "getting-started",
         "route": "/docs/getting-started",
       },
       {
         "kind": "MdxPage",
         "locale": "ru",
-        "meta": {
-          "title": "",
-        },
+        "meta": {},
         "name": "getting-started",
         "route": "/docs/getting-started",
       },
       {
         "kind": "MdxPage",
         "locale": "en-US",
-        "meta": {
-          "title": "",
-        },
+        "meta": {},
         "name": "options",
         "route": "/docs/options",
       },
       {
         "kind": "MdxPage",
         "locale": "es-ES",
-        "meta": {
-          "title": "",
-        },
+        "meta": {},
         "name": "options",
         "route": "/docs/options",
       },
       {
         "kind": "MdxPage",
         "locale": "ru",
-        "meta": {
-          "title": "",
-        },
+        "meta": {},
         "name": "options",
         "route": "/docs/options",
       },
       {
         "kind": "MdxPage",
         "locale": "en-US",
-        "meta": {
-          "title": "",
-        },
+        "meta": {},
         "name": "global-configuration",
         "route": "/docs/global-configuration",
       },
       {
         "kind": "MdxPage",
         "locale": "es-ES",
-        "meta": {
-          "title": "",
-        },
+        "meta": {},
         "name": "global-configuration",
         "route": "/docs/global-configuration",
       },
       {
         "kind": "MdxPage",
         "locale": "ru",
-        "meta": {
-          "title": "",
-        },
+        "meta": {},
         "name": "global-configuration",
         "route": "/docs/global-configuration",
       },
       {
         "kind": "MdxPage",
         "locale": "en-US",
-        "meta": {
-          "title": "",
-        },
+        "meta": {},
         "name": "data-fetching",
         "route": "/docs/data-fetching",
       },
       {
         "kind": "MdxPage",
         "locale": "es-ES",
-        "meta": {
-          "title": "",
-        },
+        "meta": {},
         "name": "data-fetching",
         "route": "/docs/data-fetching",
       },
       {
         "kind": "MdxPage",
         "locale": "ru",
-        "meta": {
-          "title": "",
-        },
+        "meta": {},
         "name": "data-fetching",
         "route": "/docs/data-fetching",
       },
@@ -263,108 +239,84 @@ exports[`context > getAllPages() > should work 1`] = `
       {
         "kind": "MdxPage",
         "locale": "en-US",
-        "meta": {
-          "title": "",
-        },
+        "meta": {},
         "name": "arguments",
         "route": "/docs/arguments",
       },
       {
         "kind": "MdxPage",
         "locale": "es-ES",
-        "meta": {
-          "title": "",
-        },
+        "meta": {},
         "name": "arguments",
         "route": "/docs/arguments",
       },
       {
         "kind": "MdxPage",
         "locale": "ru",
-        "meta": {
-          "title": "",
-        },
+        "meta": {},
         "name": "arguments",
         "route": "/docs/arguments",
       },
       {
         "kind": "MdxPage",
         "locale": "en-US",
-        "meta": {
-          "title": "",
-        },
+        "meta": {},
         "name": "mutation",
         "route": "/docs/mutation",
       },
       {
         "kind": "MdxPage",
         "locale": "es-ES",
-        "meta": {
-          "title": "",
-        },
+        "meta": {},
         "name": "mutation",
         "route": "/docs/mutation",
       },
       {
         "kind": "MdxPage",
         "locale": "ru",
-        "meta": {
-          "title": "",
-        },
+        "meta": {},
         "name": "mutation",
         "route": "/docs/mutation",
       },
       {
         "kind": "MdxPage",
         "locale": "en-US",
-        "meta": {
-          "title": "",
-        },
+        "meta": {},
         "name": "pagination",
         "route": "/docs/pagination",
       },
       {
         "kind": "MdxPage",
         "locale": "es-ES",
-        "meta": {
-          "title": "",
-        },
+        "meta": {},
         "name": "pagination",
         "route": "/docs/pagination",
       },
       {
         "kind": "MdxPage",
         "locale": "ru",
-        "meta": {
-          "title": "",
-        },
+        "meta": {},
         "name": "pagination",
         "route": "/docs/pagination",
       },
       {
         "kind": "MdxPage",
         "locale": "en-US",
-        "meta": {
-          "title": "",
-        },
+        "meta": {},
         "name": "prefetching",
         "route": "/docs/prefetching",
       },
       {
         "kind": "MdxPage",
         "locale": "es-ES",
-        "meta": {
-          "title": "",
-        },
+        "meta": {},
         "name": "prefetching",
         "route": "/docs/prefetching",
       },
       {
         "kind": "MdxPage",
         "locale": "ru",
-        "meta": {
-          "title": "",
-        },
+        "meta": {},
         "name": "prefetching",
         "route": "/docs/prefetching",
       },
@@ -407,45 +359,35 @@ exports[`context > getAllPages() > should work 1`] = `
       {
         "kind": "MdxPage",
         "locale": "en-US",
-        "meta": {
-          "title": "",
-        },
+        "meta": {},
         "name": "suspense",
         "route": "/docs/suspense",
       },
       {
         "kind": "MdxPage",
         "locale": "es-ES",
-        "meta": {
-          "title": "",
-        },
+        "meta": {},
         "name": "suspense",
         "route": "/docs/suspense",
       },
       {
         "kind": "MdxPage",
         "locale": "ru",
-        "meta": {
-          "title": "",
-        },
+        "meta": {},
         "name": "suspense",
         "route": "/docs/suspense",
       },
       {
         "kind": "MdxPage",
         "locale": "en-US",
-        "meta": {
-          "title": "",
-        },
+        "meta": {},
         "name": "middleware",
         "route": "/docs/middleware",
       },
       {
         "kind": "MdxPage",
         "locale": "ru",
-        "meta": {
-          "title": "",
-        },
+        "meta": {},
         "name": "middleware",
         "route": "/docs/middleware",
       },
@@ -603,18 +545,14 @@ exports[`context > getAllPages() > should work 1`] = `
           },
         ],
         "kind": "Folder",
-        "meta": {
-          "title": "",
-        },
+        "meta": {},
         "name": "advanced",
         "route": "/docs/advanced",
       },
       {
         "kind": "MdxPage",
         "locale": "en-US",
-        "meta": {
-          "title": "",
-        },
+        "meta": {},
         "name": "advanced",
         "route": "/docs/advanced",
       },
@@ -902,9 +840,7 @@ exports[`context > getAllPages() > should work 1`] = `
         },
         "kind": "MdxPage",
         "locale": "en-US",
-        "meta": {
-          "title": "",
-        },
+        "meta": {},
         "name": "infinite-loading",
         "route": "/examples/infinite-loading",
       },
@@ -915,9 +851,7 @@ exports[`context > getAllPages() > should work 1`] = `
         },
         "kind": "MdxPage",
         "locale": "es-ES",
-        "meta": {
-          "title": "",
-        },
+        "meta": {},
         "name": "infinite-loading",
         "route": "/examples/infinite-loading",
       },
@@ -928,9 +862,7 @@ exports[`context > getAllPages() > should work 1`] = `
         },
         "kind": "MdxPage",
         "locale": "ru",
-        "meta": {
-          "title": "",
-        },
+        "meta": {},
         "name": "infinite-loading",
         "route": "/examples/infinite-loading",
       },
@@ -941,9 +873,7 @@ exports[`context > getAllPages() > should work 1`] = `
         },
         "kind": "MdxPage",
         "locale": "en-US",
-        "meta": {
-          "title": "",
-        },
+        "meta": {},
         "name": "error-handling",
         "route": "/examples/error-handling",
       },
@@ -954,9 +884,7 @@ exports[`context > getAllPages() > should work 1`] = `
         },
         "kind": "MdxPage",
         "locale": "es-ES",
-        "meta": {
-          "title": "",
-        },
+        "meta": {},
         "name": "error-handling",
         "route": "/examples/error-handling",
       },
@@ -967,9 +895,7 @@ exports[`context > getAllPages() > should work 1`] = `
         },
         "kind": "MdxPage",
         "locale": "ru",
-        "meta": {
-          "title": "",
-        },
+        "meta": {},
         "name": "error-handling",
         "route": "/examples/error-handling",
       },
@@ -1112,108 +1038,84 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
   {
     "kind": "MdxPage",
     "locale": "en-US",
-    "meta": {
-      "title": "",
-    },
+    "meta": {},
     "name": "getting-started",
     "route": "/docs/getting-started",
   },
   {
     "kind": "MdxPage",
     "locale": "es-ES",
-    "meta": {
-      "title": "",
-    },
+    "meta": {},
     "name": "getting-started",
     "route": "/docs/getting-started",
   },
   {
     "kind": "MdxPage",
     "locale": "ru",
-    "meta": {
-      "title": "",
-    },
+    "meta": {},
     "name": "getting-started",
     "route": "/docs/getting-started",
   },
   {
     "kind": "MdxPage",
     "locale": "en-US",
-    "meta": {
-      "title": "",
-    },
+    "meta": {},
     "name": "options",
     "route": "/docs/options",
   },
   {
     "kind": "MdxPage",
     "locale": "es-ES",
-    "meta": {
-      "title": "",
-    },
+    "meta": {},
     "name": "options",
     "route": "/docs/options",
   },
   {
     "kind": "MdxPage",
     "locale": "ru",
-    "meta": {
-      "title": "",
-    },
+    "meta": {},
     "name": "options",
     "route": "/docs/options",
   },
   {
     "kind": "MdxPage",
     "locale": "en-US",
-    "meta": {
-      "title": "",
-    },
+    "meta": {},
     "name": "global-configuration",
     "route": "/docs/global-configuration",
   },
   {
     "kind": "MdxPage",
     "locale": "es-ES",
-    "meta": {
-      "title": "",
-    },
+    "meta": {},
     "name": "global-configuration",
     "route": "/docs/global-configuration",
   },
   {
     "kind": "MdxPage",
     "locale": "ru",
-    "meta": {
-      "title": "",
-    },
+    "meta": {},
     "name": "global-configuration",
     "route": "/docs/global-configuration",
   },
   {
     "kind": "MdxPage",
     "locale": "en-US",
-    "meta": {
-      "title": "",
-    },
+    "meta": {},
     "name": "data-fetching",
     "route": "/docs/data-fetching",
   },
   {
     "kind": "MdxPage",
     "locale": "es-ES",
-    "meta": {
-      "title": "",
-    },
+    "meta": {},
     "name": "data-fetching",
     "route": "/docs/data-fetching",
   },
   {
     "kind": "MdxPage",
     "locale": "ru",
-    "meta": {
-      "title": "",
-    },
+    "meta": {},
     "name": "data-fetching",
     "route": "/docs/data-fetching",
   },
@@ -1301,108 +1203,84 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
   {
     "kind": "MdxPage",
     "locale": "en-US",
-    "meta": {
-      "title": "",
-    },
+    "meta": {},
     "name": "arguments",
     "route": "/docs/arguments",
   },
   {
     "kind": "MdxPage",
     "locale": "es-ES",
-    "meta": {
-      "title": "",
-    },
+    "meta": {},
     "name": "arguments",
     "route": "/docs/arguments",
   },
   {
     "kind": "MdxPage",
     "locale": "ru",
-    "meta": {
-      "title": "",
-    },
+    "meta": {},
     "name": "arguments",
     "route": "/docs/arguments",
   },
   {
     "kind": "MdxPage",
     "locale": "en-US",
-    "meta": {
-      "title": "",
-    },
+    "meta": {},
     "name": "mutation",
     "route": "/docs/mutation",
   },
   {
     "kind": "MdxPage",
     "locale": "es-ES",
-    "meta": {
-      "title": "",
-    },
+    "meta": {},
     "name": "mutation",
     "route": "/docs/mutation",
   },
   {
     "kind": "MdxPage",
     "locale": "ru",
-    "meta": {
-      "title": "",
-    },
+    "meta": {},
     "name": "mutation",
     "route": "/docs/mutation",
   },
   {
     "kind": "MdxPage",
     "locale": "en-US",
-    "meta": {
-      "title": "",
-    },
+    "meta": {},
     "name": "pagination",
     "route": "/docs/pagination",
   },
   {
     "kind": "MdxPage",
     "locale": "es-ES",
-    "meta": {
-      "title": "",
-    },
+    "meta": {},
     "name": "pagination",
     "route": "/docs/pagination",
   },
   {
     "kind": "MdxPage",
     "locale": "ru",
-    "meta": {
-      "title": "",
-    },
+    "meta": {},
     "name": "pagination",
     "route": "/docs/pagination",
   },
   {
     "kind": "MdxPage",
     "locale": "en-US",
-    "meta": {
-      "title": "",
-    },
+    "meta": {},
     "name": "prefetching",
     "route": "/docs/prefetching",
   },
   {
     "kind": "MdxPage",
     "locale": "es-ES",
-    "meta": {
-      "title": "",
-    },
+    "meta": {},
     "name": "prefetching",
     "route": "/docs/prefetching",
   },
   {
     "kind": "MdxPage",
     "locale": "ru",
-    "meta": {
-      "title": "",
-    },
+    "meta": {},
     "name": "prefetching",
     "route": "/docs/prefetching",
   },
@@ -1445,45 +1323,35 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
   {
     "kind": "MdxPage",
     "locale": "en-US",
-    "meta": {
-      "title": "",
-    },
+    "meta": {},
     "name": "suspense",
     "route": "/docs/suspense",
   },
   {
     "kind": "MdxPage",
     "locale": "es-ES",
-    "meta": {
-      "title": "",
-    },
+    "meta": {},
     "name": "suspense",
     "route": "/docs/suspense",
   },
   {
     "kind": "MdxPage",
     "locale": "ru",
-    "meta": {
-      "title": "",
-    },
+    "meta": {},
     "name": "suspense",
     "route": "/docs/suspense",
   },
   {
     "kind": "MdxPage",
     "locale": "en-US",
-    "meta": {
-      "title": "",
-    },
+    "meta": {},
     "name": "middleware",
     "route": "/docs/middleware",
   },
   {
     "kind": "MdxPage",
     "locale": "ru",
-    "meta": {
-      "title": "",
-    },
+    "meta": {},
     "name": "middleware",
     "route": "/docs/middleware",
   },
@@ -1641,18 +1509,14 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
       },
     ],
     "kind": "Folder",
-    "meta": {
-      "title": "",
-    },
+    "meta": {},
     "name": "advanced",
     "route": "/docs/advanced",
   },
   {
     "kind": "MdxPage",
     "locale": "en-US",
-    "meta": {
-      "title": "",
-    },
+    "meta": {},
     "name": "advanced",
     "route": "/docs/advanced",
   },
