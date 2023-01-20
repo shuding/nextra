@@ -10,7 +10,7 @@ module.exports = async () => {
   return createCatchAllMeta(
     // Ensure you didn't forget define some file by providing all paths of remote files
     files,
-    // Next you can override order of your meta files, folders should end with / and be nested
+    // Next you can override the order of your meta files, folders should have `type: 'folder'` and have `items` property
     {
       index: 'Introduction',
       'getting-started': {
