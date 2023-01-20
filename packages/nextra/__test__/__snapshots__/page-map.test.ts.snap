@@ -104,7 +104,6 @@ exports[`Page Process > pageMap en-US 1`] = `
               "theme": {
                 "layout": "raw",
               },
-              "title": "A Page",
               "type": "page",
             },
             "acknowledgement": "🧩 Acknowledgement",
@@ -201,43 +200,38 @@ exports[`Page Process > pageMap en-US 1`] = `
               "type": "separator",
             },
             "404-500": "404/500 Custom Error Pages",
-            "advanced": {
-              "title": "Advanced",
-            },
-            "arguments": "Arguments",
+            "advanced": "",
+            "arguments": "",
             "change-log": {
               "theme": {
                 "sidebar": false,
               },
-              "title": "Change Log",
             },
             "conditional-fetching": "Conditional Data Fetching",
-            "data-fetching": "Data Fetching",
+            "data-fetching": "",
             "error-handling": {
               "display": "hidden",
-              "title": "Error Handling",
             },
-            "getting-started": "Getting Started",
+            "getting-started": "",
             "github_link": {
               "href": "https://github.com/shuding/nextra",
               "newWindow": true,
               "title": "GitHub 🐙 →",
               "type": "page",
             },
-            "global-configuration": "Global Configuration",
-            "middleware": "Middleware",
-            "mutation": "Mutation",
-            "options": "Options",
-            "pagination": "Pagination",
-            "prefetching": "Prefetching",
+            "global-configuration": "",
+            "middleware": "",
+            "mutation": "",
+            "options": "",
+            "pagination": "",
+            "prefetching": "",
             "raw-layout": {
               "theme": {
                 "layout": "raw",
               },
-              "title": "Raw Layout",
             },
             "revalidation": "Auto Revalidation",
-            "suspense": "Suspense",
+            "suspense": "",
             "typescript": "TypeScript :)",
             "with-nextjs": "Next.js SSG and SSR",
             "wrap-toc-items": "Wrap Table of Content Items",
@@ -291,8 +285,8 @@ exports[`Page Process > pageMap en-US 1`] = `
             {
               "kind": "MdxPage",
               "locale": "en-US",
-              "name": "future-image",
-              "route": "/docs/advanced/future-image",
+              "name": "images",
+              "route": "/docs/advanced/images",
             },
             {
               "kind": "MdxPage",
@@ -514,14 +508,13 @@ exports[`Page Process > pageMap en-US 1`] = `
           "data": {
             "auth": "Authentication",
             "basic": "Basic Usage",
-            "error-handling": "Error Handling",
+            "error-handling": "",
             "full": {
               "theme": {
                 "layout": "raw",
               },
-              "title": "Full",
             },
-            "infinite-loading": "Infinite Loading",
+            "infinite-loading": "",
             "ssr": "Next.js SSR",
           },
           "kind": "Meta",
@@ -630,7 +623,10 @@ exports[`Page Process > pageMap en-US 1`] = `
       "route": "/test",
     },
     {
-      "data": {},
+      "data": {
+        "404": "404",
+        "500": "500",
+      },
       "kind": "Meta",
     },
   ],
@@ -840,8 +836,8 @@ exports[`Page Process > pageMap ru 1`] = `
             {
               "kind": "MdxPage",
               "locale": "en-US",
-              "name": "future-image",
-              "route": "/docs/advanced/future-image",
+              "name": "images",
+              "route": "/docs/advanced/images",
             },
             {
               "kind": "MdxPage",
