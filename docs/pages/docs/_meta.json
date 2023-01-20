@@ -1,13 +1,13 @@
 {
   "index": "Introduction",
-  "guide": "Guide",
+  "guide": "",
   "-- Themes --": {
     "type": "separator",
     "title": "Themes"
   },
-  "docs-theme": "Docs Theme",
-  "blog-theme": "Blog Theme",
-  "custom-theme": "Custom Theme",
+  "docs-theme": "",
+  "blog-theme": "",
+  "custom-theme": "",
   "-- About --": {
     "type": "separator",
     "title": "More"

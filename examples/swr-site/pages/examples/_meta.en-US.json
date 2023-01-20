@@ -1,11 +1,10 @@
 {
   "basic": "Basic Usage",
   "auth": "Authentication",
-  "infinite-loading": "Infinite Loading",
-  "error-handling": "Error Handling",
+  "infinite-loading": {},
+  "error-handling": {},
   "ssr": "Next.js SSR",
   "full": {
-    "title": "Full",
     "theme": {
       "layout": "raw"
     }
