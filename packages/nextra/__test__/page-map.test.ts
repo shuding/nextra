@@ -54,4 +54,12 @@ describe('Page Process', () => {
     })
     expect(gettingStartData.pageMap).toEqual(indexData.pageMap)
   })
+
+  it("should not add to pageMap folders that doesn't contain markdown files", async () => {
+    const { items } = await collectFiles(
+      path.join(PAGES_DIR, 'docs/test-non-md-folders'),
+      ['']
+    )
+    expect(items.length).toBe(0)
+  })
 })

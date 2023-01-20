@@ -20,7 +20,7 @@ export const DEFAULT_CONFIG: Omit<NextraConfig, 'theme'> = {
 export const OFFICIAL_THEMES = [
   'nextra-theme-docs',
   'nextra-theme-blog'
-] as const
+]
 
 export const META_FILENAME = '_meta.json'
 export const DYNAMIC_META_FILENAME = '_meta.js'
