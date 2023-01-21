@@ -25,7 +25,7 @@ importers:
     specifiers:
       '@changesets/cli': 2.26.0
       '@edge-runtime/vm': 2.0.3
-      '@next/eslint-plugin-next': 13.1.3
+      '@next/eslint-plugin-next': 13.1.4
       '@typescript-eslint/eslint-plugin': 5.48.2
       '@typescript-eslint/parser': 5.48.2
       eslint: 8.32.0
@@ -42,7 +42,7 @@ importers:
     devDependencies:
       '@changesets/cli': 2.26.0
       '@edge-runtime/vm': 2.0.3
-      '@next/eslint-plugin-next': 13.1.3
+      '@next/eslint-plugin-next': 13.1.4
       '@typescript-eslint/eslint-plugin': 5.48.2_caon6io6stgpr7lz2rtbhekxqy
       '@typescript-eslint/parser': 5.48.2_7uibuqfxkfaozanbtbziikiqje
       eslint: 8.32.0
@@ -1326,8 +1326,8 @@ packages:
   /@next/env/13.1.1:
     resolution: {integrity: sha512-vFMyXtPjSAiOXOywMojxfKIqE3VWN5RCAx+tT3AS3pcKjMLFTCJFUWsKv8hC+87Z1F4W3r68qTwDFZIFmd5Xkw==}
 
-  /@next/eslint-plugin-next/13.1.3:
-    resolution: {integrity: sha512-9IF2euUtOdXoQMHB9x1Afsw19si71oIj8Oqp40I7vcoG758LMZJZePG8sjhGh1dMJv+JtkIjiLu+ENVMGKAMJQ==}
+  /@next/eslint-plugin-next/13.1.4:
+    resolution: {integrity: sha512-a/T30+7Q1scom5t3L+wEBkYzCa+bhT/3DTxzxlNy4Xckw2InzcckQGeIi/larDgh5r2fSSJswhYAZEcKtuJiig==}
     dependencies:
       glob: 7.1.7
     dev: true
