@@ -277,6 +277,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
         No results found.
       </span>
     ),
+    error: 'Failed to load search index.',
     loading: function useLoading() {
       const { locale } = useRouter()
       if (locale === 'zh-CN') return '正在加载…'
@@ -284,7 +285,6 @@ export const DEFAULT_THEME: DocsThemeConfig = {
       if (locale === 'fr') return 'Сhargement…'
       return 'Loading…'
     },
-    error: 'Failed to load search index.',
     placeholder: function usePlaceholder() {
       const { locale } = useRouter()
       if (locale === 'zh-CN') return '搜索文档…'
