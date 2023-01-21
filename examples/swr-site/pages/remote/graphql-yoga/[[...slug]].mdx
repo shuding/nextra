@@ -17,7 +17,6 @@ export const getStaticProps = async ({ params }) => {
   return {
     props: {
       ...(await buildDynamicMDX(content, {
-        codeHighlight: true,
         defaultShowCopyCode: true,
         remarkLinkRewriteOptions: {
           pattern: /^\/docs(\/.*)?$/,

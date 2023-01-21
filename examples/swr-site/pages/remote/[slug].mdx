@@ -23,7 +23,6 @@ export const getStaticProps = async ({ params }) => {
   return {
     props: {
       ...(await buildDynamicMDX(comment.body, {
-        codeHighlight: true,
         defaultShowCopyCode: true
       })),
       ...(await buildDynamicMeta())
@@ -45,6 +44,7 @@ export const getStaticPaths = async () => {
     }
   )
   const comments = await res.json()
+  console.log('getStaticPaths', comments)
   return {
     paths: comments.map(comment => ({
       params: { slug: String(comment.id) }

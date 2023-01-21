@@ -13,7 +13,7 @@ module.exports = async () => {
     }
   );
   const comments = await res.json();
-
+  console.log('_meta.en-US.js', comments)
   return Object.fromEntries(
     comments.map((comment) => [
       comment.id,
