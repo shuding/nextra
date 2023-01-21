@@ -122,6 +122,7 @@ export const themeSchema = z
         ReactNode | FC<{ className?: string; directories: Item[] }>
       >(...reactNode),
       emptyResult: z.custom<ReactNode | FC>(...reactNode),
+      error: z.string().or(z.function().returns(z.string())),
       loading: z.string().or(z.function().returns(z.string())),
       // Can't be React component
       placeholder: z.string().or(z.function().returns(z.string()))
@@ -276,6 +277,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
         No results found.
       </span>
     ),
+    error: 'Failed to load search index.',
     loading: function useLoading() {
       const { locale } = useRouter()
       if (locale === 'zh-CN') return '正在加载…'
