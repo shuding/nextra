@@ -109,7 +109,7 @@ const nextra = (themeOrNextraConfig, themeConfig) =>
                 loader: 'nextra/loader',
                 options: {
                   ...nextraLoaderOptions,
-                  pageImport: true
+                  isPageImport: true
                 }
               }
             ]
@@ -123,7 +123,7 @@ const nextra = (themeOrNextraConfig, themeConfig) =>
               {
                 loader: 'nextra/loader',
                 options: {
-                  metaImport: true
+                  isMetaImport: true
                 }
               }
             ]

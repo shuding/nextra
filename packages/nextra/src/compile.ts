@@ -1,3 +1,5 @@
+import path from 'node:path'
+import { createRequire } from 'node:module'
 import { createProcessor, ProcessorOptions } from '@mdx-js/mdx'
 import { Processor } from '@mdx-js/mdx/lib/core'
 import remarkGfm from 'remark-gfm'
@@ -8,6 +10,7 @@ import grayMatter from 'gray-matter'
 import {
   remarkStaticImage,
   remarkHeadings,
+  remarkReplaceImports,
   structurize,
   parseMeta,
   attachMeta
@@ -17,11 +20,13 @@ import theme from './theme.json'
 import { truthy } from './utils'
 import remarkMath from 'remark-math'
 import rehypeKatex from 'rehype-katex'
-import { CODE_BLOCK_FILENAME_REGEX, DEFAULT_LOCALE } from './constants'
+import { CODE_BLOCK_FILENAME_REGEX, CWD, DEFAULT_LOCALE } from './constants'
 
 globalThis.__nextra_temp_do_not_use = () => {
   import('./__temp__')
 }
+
+const require = createRequire(import.meta.url)
 
 const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS = {
   theme,
@@ -61,8 +66,7 @@ export async function compileMdx(
     | 'latex'
     | 'codeHighlight'
   > & { mdxOptions?: MdxOptions; route?: string; locale?: string } = {},
-  filePath = '',
-  useCachedCompiler = false
+  { filePath = '', useCachedCompiler = false, isPageImport = true } = {}
 ) {
   // Extract frontMatter information if it exists
   const { data: frontMatter, content } = grayMatter(source)
@@ -103,13 +107,19 @@ export async function compileMdx(
   const format =
     _format === 'detect' ? (filePath.endsWith('.mdx') ? 'mdx' : 'md') : _format
 
+  // https://github.com/shuding/nextra/issues/1303
+  const isFileOutsideCWD =
+    !isPageImport && path.relative(CWD, filePath).startsWith('../')
+
   const compiler =
     (useCachedCompiler && cachedCompilerForFormat[format]) ||
     (cachedCompilerForFormat[format] = createProcessor({
       jsx,
       format,
       outputFormat,
-      providerImportSource: 'nextra/mdx',
+      providerImportSource: isFileOutsideCWD
+        ? require.resolve('nextra').replace(/index\.js$/, 'mdx.mjs') // fixes Package subpath './mdx' is not defined by "exports"
+        : 'nextra/mdx',
       remarkPlugins: [
         ...remarkPlugins,
         remarkGfm,
@@ -118,7 +128,8 @@ export async function compileMdx(
         searchIndexKey !== null &&
           structurize(structurizedData, loaderOptions.flexsearch),
         loaderOptions.readingTime && readingTime,
-        loaderOptions.latex && remarkMath
+        loaderOptions.latex && remarkMath,
+        isFileOutsideCWD && remarkReplaceImports
       ].filter(truthy),
       rehypePlugins: [
         ...rehypePlugins,
@@ -149,7 +160,7 @@ export async function compileMdx(
     const readingTime = vFile.data.readingTime as ReadingTime | undefined
 
     return {
-      result: String(vFile).replace('export default MDXContent;', ''),
+      result: String(vFile),
       ...headingMeta,
       ...(readingTime && { readingTime }),
       structurizedData,

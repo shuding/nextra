@@ -55,8 +55,8 @@ async function loader(
   source: string
 ): Promise<string> {
   const {
-    metaImport,
-    pageImport,
+    isMetaImport = false,
+    isPageImport = false,
     theme,
     themeConfig,
     locales,
@@ -77,7 +77,7 @@ async function loader(
   context.cacheable(true)
 
   // _meta.js used as a page.
-  if (metaImport) {
+  if (isMetaImport) {
     return 'export default () => null'
   }
 
@@ -160,8 +160,11 @@ async function loader(
       route: pageNextRoute,
       locale
     },
-    mdxPath,
-    false // TODO: produce hydration errors or error - Create a new processor first, by calling it: use `processor()` instead of `processor`.
+    {
+      filePath: mdxPath,
+      useCachedCompiler: false, // TODO: produce hydration errors or error - Create a new processor first, by calling it: use `processor()` instead of `processor`.
+      isPageImport
+    }
   )
 
   const katexCssImport = latex ? "import 'katex/dist/katex.min.css'" : ''
@@ -172,10 +175,8 @@ async function loader(
     : ''
 
   // Imported as a normal component, no need to add the layout.
-  if (!pageImport) {
-    return `${cssImport}
-${result}
-export default MDXContent`
+  if (!isPageImport) {
+    return result
   }
 
   const { route, pageMap, dynamicMetaItems } = resolvePageMap({
@@ -257,7 +258,10 @@ ${themeConfigImport}
 ${katexCssImport}
 ${cssImport}
 
-${finalResult}
+${finalResult.replace(
+  'export default MDXContent;',
+  "export { default } from 'nextra/layout'"
+)}
 
 setupNextraPage({
   pageNextRoute: ${JSON.stringify(pageNextRoute)},
@@ -283,9 +287,7 @@ setupNextraPage({
           )
           .join(',')
   }]
-})
-
-export { default } from 'nextra/layout'`
+})`
 }
 
 export default function syncLoader(
