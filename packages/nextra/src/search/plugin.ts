@@ -2,7 +2,7 @@ import type { Compiler } from 'webpack'
 import { webpack, sources } from 'next/dist/compiled/webpack/webpack'
 
 const PLUGIN_NAME = 'NextraSearchPlugin'
-
+const isDev = process.env.NODE_ENV !== 'production'
 export class NextraSearchPlugin {
   apply(compiler: Compiler) {
     compiler.hooks.make.tap(PLUGIN_NAME, compilation => {
@@ -39,9 +39,9 @@ export class NextraSearchPlugin {
           }
 
           for (const [file, content] of Object.entries(indexFiles)) {
-            assets['../static/chunks/' + file] = new sources.RawSource(
-              content + '}'
-            )
+            assets[
+              (isDev ? '../static/chunks/' : '../../static/chunks/') + file
+            ] = new sources.RawSource(content + '}')
           }
         }
       )
