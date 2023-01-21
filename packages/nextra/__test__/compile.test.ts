@@ -49,11 +49,10 @@ describe('process heading', () => {
   })
 
   describe('Code block', () => {
-    describe('filename', () => {
-      it('attach with "codeHighlight: true"', async () => {
+    describe('Filename', () => {
+      it('attach with "codeHighlight: true" by default', async () => {
         const { result } = await compileMdx('```js filename="test.js"\n```', {
-          mdxOptions,
-          codeHighlight: true
+          mdxOptions
         })
         expect(result).toMatch(
           '<_components.pre data-language="js" data-theme="default" filename="test.js">'
@@ -80,6 +79,20 @@ describe('process heading', () => {
           'className="highlighted">{"foo"}</_components.span>'
         )
         expect(result).toMatch('}}>{"foo"}</_components.span>')
+      })
+    })
+
+    describe('Highlight', () => {
+      it('should support line highlights', async () => {
+        const { result } = await compileMdx(
+          '```js filename="test.js" {1}\n123\n```',
+          {
+            mdxOptions
+          }
+        )
+        expect(result).toMatch(
+          '<_components.span className="line highlighted">'
+        )
       })
     })
 
@@ -116,7 +129,10 @@ describe('process heading', () => {
     })
 
     it('code block without language has "text" language', async () => {
-      const { result } = await compileMdx('```\n```', { mdxOptions })
+      const { result } = await compileMdx('```\n```', {
+        mdxOptions,
+        codeHighlight: false
+      })
       expect(result).toMatch('<_components.code className="language-text" />')
     })
   })

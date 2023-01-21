@@ -134,14 +134,15 @@ export async function compileMdx(
       rehypePlugins: [
         ...rehypePlugins,
         [parseMeta, { defaultShowCopyCode: loaderOptions.defaultShowCopyCode }],
-        loaderOptions.codeHighlight &&
-          ([
-            rehypePrettyCode,
-            {
-              ...DEFAULT_REHYPE_PRETTY_CODE_OPTIONS,
-              ...rehypePrettyCodeOptions
-            }
-          ] as any),
+        loaderOptions.codeHighlight === false
+          ? null
+          : ([
+              rehypePrettyCode,
+              {
+                ...DEFAULT_REHYPE_PRETTY_CODE_OPTIONS,
+                ...rehypePrettyCodeOptions
+              }
+            ] as any),
         attachMeta,
         loaderOptions.latex && rehypeKatex
       ].filter(truthy)
