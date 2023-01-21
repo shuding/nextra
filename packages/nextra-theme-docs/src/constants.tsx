@@ -122,8 +122,8 @@ export const themeSchema = z
         ReactNode | FC<{ className?: string; directories: Item[] }>
       >(...reactNode),
       emptyResult: z.custom<ReactNode | FC>(...reactNode),
-      loading: z.string().or(z.function().returns(z.string())),
       error: z.string().or(z.function().returns(z.string())),
+      loading: z.string().or(z.function().returns(z.string())),
       // Can't be React component
       placeholder: z.string().or(z.function().returns(z.string()))
     }),
