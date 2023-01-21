@@ -1,5 +1,14 @@
 # nextra-theme-docs
 
+## 2.2.10
+
+### Patch Changes
+
+- c97143f: fix search index output location
+- 4b2052f: fix `Module not found: Can't resolve 'nextra-theme-docs/style.css'` for imported markdown files that located outside of CWD
+- 624d6b4: fix when sidebar show non-md folders
+- 0c957db: fix capitalizing of undefined \_meta.json file/folders
+
 ## 2.2.9
 
 ## 2.2.8
