@@ -9,7 +9,7 @@ import {
 } from 'react'
 import cn from 'clsx'
 import { Transition } from '@headlessui/react'
-import { SpinnerIcon } from 'nextra/icons'
+import { InformationCircleIcon, SpinnerIcon } from 'nextra/icons'
 import { useMounted } from 'nextra/hooks'
 import { Input } from './input'
 import { Anchor } from './anchor'
@@ -25,6 +25,7 @@ type SearchProps = {
   onChange: (newValue: string) => void
   onActive?: (active: boolean) => void
   loading?: boolean
+  error?: boolean
   results: SearchResult[]
 }
 
@@ -37,6 +38,7 @@ export function Search({
   onChange,
   onActive,
   loading,
+  error,
   results
 }: SearchProps): ReactElement {
   const [show, setShow] = useState(false)
@@ -50,10 +52,6 @@ export function Search({
   useEffect(() => {
     setActive(0)
   }, [value])
-
-  useEffect(() => {
-    onActive?.(show)
-  }, [show, onActive])
 
   useEffect(() => {
     const down = (e: globalThis.KeyboardEvent): void => {
@@ -201,6 +199,9 @@ export function Search({
           onChange(value)
           setShow(Boolean(value))
         }}
+        onFocus={() => {
+          onActive?.(true)
+        }}
         type="search"
         placeholder={renderString(config.search.placeholder)}
         onKeyDown={handleKeyDown}
@@ -232,7 +233,12 @@ export function Search({
             transition: 'max-height .2s ease' // don't work with tailwindcss
           }}
         >
-          {loading ? (
+          {error ? (
+            <span className="nx-flex nx-select-none nx-justify-center nx-gap-2 nx-p-8 nx-text-center nx-text-sm nx-text-red-500">
+              <InformationCircleIcon className="nx-h-5 nx-w-5" />
+              {renderString(config.search.error)}
+            </span>
+          ) : loading ? (
             <span className="nx-flex nx-select-none nx-justify-center nx-gap-2 nx-p-8 nx-text-center nx-text-sm nx-text-gray-400">
               <SpinnerIcon className="nx-h-5 nx-w-5 nx-animate-spin" />
               {renderString(config.search.loading)}

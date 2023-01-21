@@ -153,6 +153,7 @@ export function Flexsearch({
 }): ReactElement {
   const { locale = DEFAULT_LOCALE, basePath } = useRouter()
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(false)
   const [results, setResults] = useState<SearchResult[]>([])
   const [search, setSearch] = useState('')
 
@@ -251,7 +252,11 @@ export function Flexsearch({
     async (active: boolean) => {
       if (active && !indexes[locale]) {
         setLoading(true)
-        await loadIndexes(basePath, locale)
+        try {
+          await loadIndexes(basePath, locale)
+        } catch (e) {
+          setError(true)
+        }
         setLoading(false)
       }
     },
@@ -265,7 +270,11 @@ export function Flexsearch({
     }
     if (!indexes[locale]) {
       setLoading(true)
-      await loadIndexes(basePath, locale)
+      try {
+        await loadIndexes(basePath, locale)
+      } catch (e) {
+        setError(true)
+      }
       setLoading(false)
     }
     doSearch(value)
@@ -274,6 +283,7 @@ export function Flexsearch({
   return (
     <Search
       loading={loading}
+      error={error}
       value={search}
       onChange={handleChange}
       onActive={preload}
