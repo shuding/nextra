@@ -165,9 +165,7 @@ async function loader(
   )
 
   const katexCssImport = latex ? "import 'katex/dist/katex.min.css'" : ''
-  const cssImport = OFFICIAL_THEMES.includes(
-    theme as (typeof OFFICIAL_THEMES)[number]
-  )
+  const cssImport = OFFICIAL_THEMES.includes(theme)
     ? `import '${theme}/style.css'`
     : ''
 

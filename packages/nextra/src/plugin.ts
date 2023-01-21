@@ -152,15 +152,11 @@ export async function collectFiles(
 
   const items = (await Promise.all(promises)).filter(truthy)
 
-  const mdxPagesAndFolders: (MdxFile | Folder)[] = []
   const mdxPages: MdxFile[] = []
   const metaLocaleIndexes = new Map<string, number>()
 
   for (let i = 0; i < items.length; i++) {
     const item = items[i]
-    if (item.kind === 'MdxPage' || item.kind === 'Folder') {
-      mdxPagesAndFolders.push(item)
-    }
     if (item.kind === 'MdxPage') {
       mdxPages.push(item)
     }
@@ -183,15 +179,7 @@ export async function collectFiles(
 
     const metaPath = path.join(dir, metaFilename) as MetaJsonPath
 
-    if (metaIndex === undefined) {
-      // Create a new meta file if it doesn't exist.
-      fileMap[metaPath] = {
-        kind: 'Meta',
-        ...(locale && { locale }),
-        data: Object.fromEntries(defaultMeta)
-      }
-      items.push(fileMap[metaPath])
-    } else {
+    if (metaIndex !== undefined) {
       // Fill with the fallback. Note that we need to keep the original order.
       const meta = { ...(items[metaIndex] as MetaJsonFile) }
       for (const [key, value] of defaultMeta) {

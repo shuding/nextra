@@ -31,13 +31,14 @@ function filter(
   const items: Page[] = []
   const meta = pageMap.find(
     (item): item is MetaJsonFile => item.kind === 'Meta'
-  )!.data
+  )
+  const metaData = meta?.data || {}
 
   for (const item of pageMap) {
     if (item.kind === 'Meta') continue
     const page = {
       ...item,
-      meta: normalizeMeta(meta[item.name])
+      meta: normalizeMeta(metaData[item.name])
     } as Page
 
     if (page.kind === 'Folder') {
@@ -54,7 +55,7 @@ function filter(
     items.push(page)
   }
 
-  const metaKeys = Object.keys(meta)
+  const metaKeys = Object.keys(metaData)
   items.sort((a, b) => {
     const indexA = metaKeys.indexOf(a.name)
     const indexB = metaKeys.indexOf(b.name)

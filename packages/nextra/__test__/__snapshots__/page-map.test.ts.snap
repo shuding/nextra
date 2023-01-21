@@ -130,10 +130,6 @@ exports[`Page Process > pageMap en-US 1`] = `
           "name": "team",
           "route": "/about/team",
         },
-        {
-          "data": {},
-          "kind": "Meta",
-        },
       ],
       "kind": "Folder",
       "name": "about",
@@ -162,10 +158,6 @@ exports[`Page Process > pageMap en-US 1`] = `
           "locale": "en-US",
           "name": "swr-v1",
           "route": "/blog/swr-v1",
-        },
-        {
-          "data": {},
-          "kind": "Meta",
         },
       ],
       "kind": "Folder",
@@ -322,18 +314,10 @@ exports[`Page Process > pageMap en-US 1`] = `
                       "name": "two",
                       "route": "/docs/advanced/more/tree/two",
                     },
-                    {
-                      "data": {},
-                      "kind": "Meta",
-                    },
                   ],
                   "kind": "Folder",
                   "name": "tree",
                   "route": "/docs/advanced/more/tree",
-                },
-                {
-                  "data": {},
-                  "kind": "Meta",
                 },
               ],
               "kind": "Folder",
@@ -351,10 +335,6 @@ exports[`Page Process > pageMap en-US 1`] = `
               "locale": "en-US",
               "name": "react-native",
               "route": "/docs/advanced/react-native",
-            },
-            {
-              "data": {},
-              "kind": "Meta",
             },
           ],
           "kind": "Folder",
@@ -493,10 +473,6 @@ exports[`Page Process > pageMap en-US 1`] = `
           "name": "wrap-toc-items",
           "route": "/docs/wrap-toc-items",
         },
-        {
-          "data": {},
-          "kind": "Meta",
-        },
       ],
       "kind": "Folder",
       "name": "docs",
@@ -576,10 +552,6 @@ exports[`Page Process > pageMap en-US 1`] = `
           "name": "ssr",
           "route": "/examples/ssr",
         },
-        {
-          "data": {},
-          "kind": "Meta",
-        },
       ],
       "kind": "Folder",
       "name": "examples",
@@ -602,10 +574,6 @@ exports[`Page Process > pageMap en-US 1`] = `
           "kind": "Meta",
           "locale": "en-US",
         },
-        {
-          "data": {},
-          "kind": "Meta",
-        },
       ],
       "kind": "Folder",
       "name": "remote",
@@ -621,13 +589,6 @@ exports[`Page Process > pageMap en-US 1`] = `
       "locale": "en-US",
       "name": "test",
       "route": "/test",
-    },
-    {
-      "data": {
-        "404": "404",
-        "500": "500",
-      },
-      "kind": "Meta",
     },
   ],
   "/docs/data-fetching",
@@ -663,8 +624,19 @@ exports[`Page Process > pageMap ru 1`] = `
     {
       "children": [
         {
-          "data": {},
+          "data": {
+            "a-page": {
+              "display": "hidden",
+              "theme": {
+                "layout": "raw",
+              },
+              "type": "page",
+            },
+            "acknowledgement": "🧩 Acknowledgement",
+            "team": "👥 Team",
+          },
           "kind": "Meta",
+          "locale": "en-US",
         },
         {
           "kind": "MdxPage",
@@ -785,10 +757,6 @@ exports[`Page Process > pageMap ru 1`] = `
                       "name": "two",
                       "route": "/docs/advanced/more/tree/two",
                     },
-                    {
-                      "data": {},
-                      "kind": "Meta",
-                    },
                   ],
                   "kind": "Folder",
                   "name": "tree",
@@ -799,10 +767,6 @@ exports[`Page Process > pageMap ru 1`] = `
                   "locale": "en-US",
                   "name": "loooooooooooooooooooong-title",
                   "route": "/docs/advanced/more/loooooooooooooooooooong-title",
-                },
-                {
-                  "data": {},
-                  "kind": "Meta",
                 },
               ],
               "kind": "Folder",
@@ -1081,6 +1045,7 @@ exports[`Page Process > pageMap ru 1`] = `
         {
           "data": {},
           "kind": "Meta",
+          "locale": "en-US",
         },
       ],
       "kind": "Folder",
