@@ -1,6 +1,6 @@
 // Vitest Snapshot v1
 
-exports[`process heading > code-h1 1`] = `
+exports[`Process heading > code-h1 1`] = `
 {
   "frontMatter": {},
   "headings": [
@@ -31,7 +31,7 @@ export default MDXContent;
 }
 `;
 
-exports[`process heading > code-with-text-h1 1`] = `
+exports[`Process heading > code-with-text-h1 1`] = `
 {
   "frontMatter": {},
   "headings": [
@@ -62,7 +62,7 @@ export default MDXContent;
 }
 `;
 
-exports[`process heading > dynamic-h1 1`] = `
+exports[`Process heading > dynamic-h1 1`] = `
 {
   "frontMatter": {},
   "hasJsxInH1": true,
@@ -98,7 +98,7 @@ export default MDXContent;
 }
 `;
 
-exports[`process heading > no-h1 1`] = `
+exports[`Process heading > no-h1 1`] = `
 {
   "frontMatter": {},
   "headings": [
@@ -127,7 +127,7 @@ export default MDXContent;
 }
 `;
 
-exports[`process heading > static-h1 1`] = `
+exports[`Process heading > static-h1 1`] = `
 {
   "frontMatter": {},
   "headings": [

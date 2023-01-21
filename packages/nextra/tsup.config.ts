@@ -6,45 +6,6 @@ import tsconfig from './tsconfig.json'
 
 const { target } = tsconfig.compilerOptions
 
-const esmOptions = defineConfig({
-  format: 'esm',
-  dts: true,
-  target,
-  bundle: true,
-  splitting: false,
-  external: ['shiki', './__temp__', 'webpack'],
-  esbuildPlugins: [
-    // https://github.com/evanw/esbuild/issues/622#issuecomment-769462611
-    {
-      name: 'add-mjs',
-      setup(build) {
-        build.onResolve({ filter: /.*/ }, async args => {
-          if (
-            args.importer &&
-            args.path.startsWith('.') &&
-            !args.path.endsWith('.json')
-          ) {
-            let isDir: boolean
-            try {
-              isDir = (
-                await fs.stat(path.join(args.resolveDir, args.path))
-              ).isDirectory()
-            } catch {
-              isDir = false
-            }
-
-            if (isDir) {
-              // it's a directory
-              return { path: args.path + '/index.mjs', external: true }
-            }
-            return { path: args.path + '.mjs', external: true }
-          }
-        })
-      }
-    }
-  ]
-})
-
 export default defineConfig([
   {
     name: 'nextra',
@@ -58,17 +19,44 @@ export default defineConfig([
     entry: [
       'src/**/*.ts',
       'src/**/*.tsx',
-      '!src/compile.ts',
-      '!src/mdx-plugins/remark-replace-imports.ts',
       '!src/**/*.d.ts',
       '!src/catch-all.ts'
     ],
-    ...esmOptions
-  },
-  {
-    name: 'nextra-esm-import.meta',
-    entry: ['src/compile.ts', 'src/mdx-plugins/remark-replace-imports.ts'],
-    ...esmOptions,
+    format: 'esm',
+    dts: true,
+    bundle: true,
+    splitting: false,
+    external: ['shiki', './__temp__', 'webpack'],
+    esbuildPlugins: [
+      // https://github.com/evanw/esbuild/issues/622#issuecomment-769462611
+      {
+        name: 'add-mjs',
+        setup(build) {
+          build.onResolve({ filter: /.*/ }, async args => {
+            if (
+              args.importer &&
+              args.path.startsWith('.') &&
+              !args.path.endsWith('.json')
+            ) {
+              let isDir: boolean
+              try {
+                isDir = (
+                  await fs.stat(path.join(args.resolveDir, args.path))
+                ).isDirectory()
+              } catch {
+                isDir = false
+              }
+
+              if (isDir) {
+                // it's a directory
+                return { path: args.path + '/index.mjs', external: true }
+              }
+              return { path: args.path + '.mjs', external: true }
+            }
+          })
+        }
+      }
+    ],
     // import.meta is available only from es2020
     target: 'es2020'
   },
