@@ -10,7 +10,8 @@ import type {
   NextraInternalGlobal,
   PageOpts,
   ThemeConfig,
-  MetaJsonFile
+  MetaJsonFile,
+  PageMapItem
 } from './types'
 import { normalizePageRoute, pageTitleFromFilename } from './utils'
 
@@ -88,6 +89,8 @@ export function collectCatchAllRoutes(
   }
 }
 
+let cachedResolvedPageMap: PageMapItem[]
+
 export function setupNextraPage({
   pageNextRoute,
   pageOpts,
@@ -109,6 +112,9 @@ export function setupNextraPage({
 }) {
   if (typeof window === 'undefined') {
     globalThis.__nextra_resolvePageMap = async () => {
+      if (process.env.NODE_ENV === 'production' && cachedResolvedPageMap) {
+        return cachedResolvedPageMap
+      }
       const clonedPageMap = JSON.parse(JSON.stringify(pageOpts.pageMap))
 
       await Promise.all(
@@ -127,7 +133,7 @@ export function setupNextraPage({
           }
         )
       )
-      return clonedPageMap
+      return (cachedResolvedPageMap = clonedPageMap)
     }
   }
 
