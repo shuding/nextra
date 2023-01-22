@@ -35,6 +35,7 @@ export function createCatchAllMeta(
     meta[`${name}/`] ||= {} as DynamicFolder
     const folder = meta[`${name}/`] as DynamicFolder
     folder.items ||= {}
+    folder.type ||= 'folder'
 
     // fix conflicts when folder and folder with index page exists
     if (Object.hasOwn(meta, name) && typeof folder.title === 'string') {
