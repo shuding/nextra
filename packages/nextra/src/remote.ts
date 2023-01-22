@@ -1,14 +1,35 @@
 import { compileMdx } from './compile'
+import { LoaderOptions } from './types'
+import { remarkLinkRewrite, RemarkLinkRewriteOptions } from './mdx-plugins'
+import { truthy } from './utils'
 
-export const buildDynamicMDX = async (content: string) => {
-  const mdx = await compileMdx(content)
+export const buildDynamicMDX = async (
+  content: string,
+  {
+    remarkLinkRewriteOptions,
+    ...loaderOptions
+  }: Pick<LoaderOptions, 'latex' | 'codeHighlight' | 'defaultShowCopyCode'> & {
+    remarkLinkRewriteOptions?: RemarkLinkRewriteOptions
+  } = {}
+) => {
+  const { result, headings, frontMatter, title } = await compileMdx(content, {
+    ...loaderOptions,
+    mdxOptions: {
+      remarkPlugins: [
+        remarkLinkRewriteOptions && [
+          remarkLinkRewrite,
+          remarkLinkRewriteOptions
+        ] as any
+      ].filter(truthy)
+    }
+  })
 
   return {
-    __nextra_dynamic_mdx: mdx.result,
+    __nextra_dynamic_mdx: result,
     __nextra_dynamic_opts: JSON.stringify({
-      headings: mdx.headings || [],
-      frontMatter: mdx.frontMatter || {},
-      title: mdx.frontMatter?.title || mdx.title
+      headings,
+      frontMatter,
+      title: frontMatter.title || title
     })
   }
 }

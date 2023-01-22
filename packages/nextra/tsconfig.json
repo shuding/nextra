@@ -9,6 +9,7 @@
     "skipLibCheck": true,
     "allowJs": true,
     "jsx": "react-jsx",
+    "lib": ["es2022", "dom"],
     "moduleResolution": "node",
     "types": ["vitest/globals", "webpack-env"],
     "resolveJsonModule": true

@@ -29,6 +29,7 @@ module.exports = {
         '@typescript-eslint/prefer-optional-chain': 'error',
         'no-else-return': ['error', { allowElseIf: false }],
         'no-lonely-if': 'error',
+        'prefer-destructuring': ['error', { VariableDeclarator: { object: true } }],
         // todo: enable
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-non-null-assertion': 'off',

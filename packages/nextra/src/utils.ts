@@ -1,5 +1,6 @@
 import path from 'node:path'
 import title from 'title'
+import slash from 'slash'
 import { LOCALE_REGEX } from './constants'
 import { Folder, MdxFile, Meta } from './types'
 
@@ -26,6 +27,10 @@ export function truthy<T>(value: T): value is Truthy<T> {
 
 export function normalizeMeta(meta: Meta): Exclude<Meta, string> {
   return typeof meta === 'string' ? { title: meta } : meta
+}
+
+export function normalizePageRoute(parentRoute: string, route: string): string {
+  return slash(path.join(parentRoute, route.replace(/^index$/, '')))
 }
 
 export function pageTitleFromFilename(fileName: string) {
