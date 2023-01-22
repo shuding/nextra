@@ -2,7 +2,7 @@ import path from 'node:path'
 import title from 'title'
 import slash from 'slash'
 import { LOCALE_REGEX } from './constants'
-import { Folder, MdxFile, Meta } from './types'
+import type { Folder, MdxFile, Meta } from './types'
 
 export function parseFileName(filePath: string): {
   name: string

@@ -1,4 +1,4 @@
-import { ReactElement } from 'react'
+import type { ReactElement } from 'react'
 import { useTheme } from 'next-themes'
 import { Select } from './select'
 import { SunIcon, MoonIcon } from 'nextra/icons'

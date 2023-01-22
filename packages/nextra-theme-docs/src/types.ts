@@ -1,7 +1,7 @@
 /* eslint typescript-sort-keys/interface: error */
-import { ReactNode } from 'react'
-import { PageOpts } from 'nextra'
-import { DocsThemeConfig } from './constants'
+import type { ReactNode } from 'react'
+import type { PageOpts } from 'nextra'
+import type { DocsThemeConfig } from './constants'
 
 export type Context = {
   pageOpts: PageOpts

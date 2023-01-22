@@ -1,7 +1,7 @@
 import { useTheme } from 'next-themes'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
-import { ReactCusdis } from 'react-cusdis'
+import type { ReactCusdis } from 'react-cusdis'
 import { useBlogContext } from './blog-context'
 
 const Cusdis = dynamic(

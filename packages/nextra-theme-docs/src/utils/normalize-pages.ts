@@ -1,6 +1,7 @@
-import { PageMapItem } from 'nextra'
-import { DEFAULT_PAGE_THEME, PageTheme, Display, IMenuItem } from '../constants'
-import { Folder, MdxFile } from 'nextra'
+import type { PageMapItem } from 'nextra'
+import type { PageTheme, Display, IMenuItem } from '../constants';
+import { DEFAULT_PAGE_THEME } from '../constants'
+import type { Folder, MdxFile } from 'nextra'
 
 function extendMeta(
   meta: string | Record<string, any> = {},

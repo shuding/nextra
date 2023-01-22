@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode } from 'react'
+import type { ReactElement, ReactNode } from 'react'
 import cn from 'clsx'
 import { InformationCircleIcon } from 'nextra/icons'
 

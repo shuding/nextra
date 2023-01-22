@@ -1,5 +1,7 @@
-import { RefCallback, useRef, useCallback, useMemo } from 'react'
-import { createPopper, Options } from '@popperjs/core'
+import type { RefCallback} from 'react';
+import { useRef, useCallback, useMemo } from 'react'
+import type { Options } from '@popperjs/core';
+import { createPopper } from '@popperjs/core'
 
 /**
  * https://github.com/tailwindlabs/headlessui/issues/59

@@ -1,6 +1,7 @@
 import type { NextraThemeLayoutProps, PageMapItem, PageOpts } from 'nextra'
 
-import { useMemo, ReactElement, ReactNode } from 'react'
+import type { ReactElement, ReactNode } from 'react';
+import { useMemo } from 'react'
 import { useRouter } from 'next/router'
 import 'focus-visible'
 import cn from 'clsx'
@@ -18,7 +19,8 @@ import {
 } from './components'
 import { getComponents } from './mdx-components'
 import { ActiveAnchorProvider, ConfigProvider, useConfig } from './contexts'
-import { DEFAULT_LOCALE, PartialDocsThemeConfig, PageTheme } from './constants'
+import type { PageTheme } from './constants';
+import { DEFAULT_LOCALE, PartialDocsThemeConfig } from './constants'
 import { getFSRoute, normalizePages, renderComponent } from './utils'
 
 function useDirectoryInfo(pageMap: PageMapItem[]) {

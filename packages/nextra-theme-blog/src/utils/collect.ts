@@ -1,5 +1,5 @@
-import { PageMapItem, MdxFile } from 'nextra'
-import { LayoutProps } from '../types'
+import type { PageMapItem, MdxFile } from 'nextra'
+import type { LayoutProps } from '../types'
 import { sortDate } from './date'
 import traverse from './traverse'
 

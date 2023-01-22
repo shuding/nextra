@@ -1,4 +1,4 @@
-import { FileMap, MdxPath, PageMapItem, DynamicMetaDescriptor } from './types'
+import type { FileMap, MdxPath, PageMapItem, DynamicMetaDescriptor } from './types'
 import { parseFileName } from './utils'
 import filterRouteLocale from './filter-route-locale'
 import { IS_PRODUCTION } from './constants'

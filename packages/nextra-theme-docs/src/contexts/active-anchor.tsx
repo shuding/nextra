@@ -1,9 +1,10 @@
-import {
-  createContext,
+import type {
   Dispatch,
   ReactElement,
   ReactNode,
-  SetStateAction,
+  SetStateAction} from 'react';
+import {
+  createContext,
   useContext,
   useState
 } from 'react'

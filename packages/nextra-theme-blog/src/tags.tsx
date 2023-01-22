@@ -1,4 +1,4 @@
-import { GetStaticPaths, GetStaticProps } from 'next'
+import type { GetStaticPaths, GetStaticProps } from 'next'
 import { useSSG } from 'nextra/ssg'
 import Head from 'next/head'
 import { getStaticTags } from './utils/get-tags'

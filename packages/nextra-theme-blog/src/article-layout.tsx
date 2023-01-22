@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import Meta from './meta'
 import { MDXTheme } from './mdx-theme'
 import { useBlogContext } from './blog-context'

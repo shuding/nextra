@@ -1,10 +1,11 @@
-import {
+import type {
   RefObject,
-  createRef,
   ComponentProps,
-  createContext,
   ReactElement,
-  ReactNode,
+  ReactNode} from 'react';
+import {
+  createRef,
+  createContext,
   useContext,
   useEffect,
   useState
@@ -14,7 +15,7 @@ import Link from 'next/link'
 import { createPortal } from 'react-dom'
 import { Code, Pre, Table, Td, Th, Tr } from 'nextra/components'
 import { useBlogContext } from './blog-context'
-import { Components } from 'nextra/mdx'
+import type { Components } from 'nextra/mdx'
 
 export const HeadingContext = createContext<
   RefObject<HTMLHeadingElement | null>

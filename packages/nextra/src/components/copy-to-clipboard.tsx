@@ -1,6 +1,7 @@
-import {
+import type {
   ComponentProps,
-  ReactElement,
+  ReactElement} from 'react';
+import {
   useCallback,
   useEffect,
   useState

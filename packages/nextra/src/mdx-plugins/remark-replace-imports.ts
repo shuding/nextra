@@ -1,7 +1,7 @@
 import { createRequire } from 'node:module'
 import { visit } from 'unist-util-visit'
-import { Plugin } from 'unified'
-import { Root } from 'mdast'
+import type { Plugin } from 'unified'
+import type { Root } from 'mdast'
 
 const require = createRequire(import.meta.url)
 

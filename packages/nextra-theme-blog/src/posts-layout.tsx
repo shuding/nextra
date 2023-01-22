@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import { useBlogContext } from './blog-context'
 import { BasicLayout } from './basic-layout'
 import { MDXTheme } from './mdx-theme'

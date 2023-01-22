@@ -1,4 +1,5 @@
-import { useContext, createContext, Dispatch, SetStateAction } from 'react'
+import type { Dispatch, SetStateAction } from 'react';
+import { useContext, createContext } from 'react'
 
 interface Menu {
   menu: boolean

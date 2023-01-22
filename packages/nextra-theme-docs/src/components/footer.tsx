@@ -1,4 +1,4 @@
-import { ReactElement } from 'react'
+import type { ReactElement } from 'react'
 import cn from 'clsx'
 import { useConfig } from '../contexts'
 import { LocaleSwitch } from './locale-switch'

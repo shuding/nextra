@@ -1,4 +1,4 @@
-import { PageMapItem } from 'nextra'
+import type { PageMapItem } from 'nextra'
 
 export const cnPageMap: PageMapItem[] = [
   {

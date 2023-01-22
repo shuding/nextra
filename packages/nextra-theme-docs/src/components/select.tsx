@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode } from 'react'
+import type { ReactElement, ReactNode } from 'react'
 import cn from 'clsx'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon } from 'nextra/icons'

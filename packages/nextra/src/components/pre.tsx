@@ -1,4 +1,5 @@
-import { ComponentProps, ReactElement, useCallback, useRef } from 'react'
+import type { ComponentProps, ReactElement} from 'react';
+import { useCallback, useRef } from 'react'
 import { CopyToClipboard } from './copy-to-clipboard'
 import { Button } from './button'
 import { WordWrapIcon } from '../icons'
