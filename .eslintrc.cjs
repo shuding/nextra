@@ -29,7 +29,10 @@ module.exports = {
         '@typescript-eslint/prefer-optional-chain': 'error',
         'no-else-return': ['error', { allowElseIf: false }],
         'no-lonely-if': 'error',
-        'prefer-destructuring': ['error', { VariableDeclarator: { object: true } }],
+        'prefer-destructuring': [
+          'error',
+          { VariableDeclarator: { object: true } }
+        ],
         // todo: enable
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-non-null-assertion': 'off',
@@ -59,6 +62,12 @@ module.exports = {
               'CallExpression[callee.name=useMemo][arguments.1.type=ArrayExpression][arguments.1.elements.length=0]',
             message:
               "`useMemo` with an empty dependency array can't provide a stable reference, use `useRef` instead."
+          },
+          {
+            // ❌ z.object(…)
+            selector:
+              'MemberExpression[object.name=z] > .property[name=object]',
+            message: 'Use z.strictObject is more safe.'
           }
         ],
         'react/jsx-filename-extension': [

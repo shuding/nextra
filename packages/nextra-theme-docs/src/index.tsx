@@ -18,9 +18,8 @@ import {
 } from './components'
 import { getComponents } from './mdx-components'
 import { ActiveAnchorProvider, ConfigProvider, useConfig } from './contexts'
-import { DEFAULT_LOCALE, PartialDocsThemeConfig } from './constants'
+import { DEFAULT_LOCALE, PartialDocsThemeConfig, PageTheme } from './constants'
 import { getFSRoute, normalizePages, renderComponent } from './utils'
-import { PageTheme } from './types'
 
 function useDirectoryInfo(pageMap: PageMapItem[]) {
   const { locale = DEFAULT_LOCALE, defaultLocale, asPath } = useRouter()

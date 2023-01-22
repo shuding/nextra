@@ -1,6 +1,5 @@
 import { PageMapItem } from 'nextra'
-import { DEFAULT_PAGE_THEME } from '../constants'
-import { PageTheme } from '../types'
+import { DEFAULT_PAGE_THEME, PageTheme } from '../constants'
 import { Folder, MdxFile } from 'nextra'
 
 function extendMeta(
