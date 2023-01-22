@@ -47,7 +47,7 @@ export const remarkStaticImage: Plugin<[{ filePath: string }], Root> =
     const importsToInject: any[] = []
 
     visit(tree, 'image', node => {
-      let { url } = node
+      const url = decodeURI(node.url)
       if (!url) {
         return
       }
