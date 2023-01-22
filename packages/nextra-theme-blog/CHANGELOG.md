@@ -1,5 +1,13 @@
 # nextra-theme-blog
 
+## 2.2.12
+
+### Patch Changes
+
+- c913ec8: add peer deps
+- Updated dependencies [619ae3a]
+  - nextra@2.2.12
+
 ## 2.2.11
 
 ## 2.2.10
