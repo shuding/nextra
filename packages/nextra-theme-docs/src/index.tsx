@@ -1,6 +1,6 @@
 import type { NextraThemeLayoutProps, PageMapItem, PageOpts } from 'nextra'
 
-import type { ReactElement, ReactNode } from 'react';
+import type { ReactElement, ReactNode } from 'react'
 import { useMemo } from 'react'
 import { useRouter } from 'next/router'
 import 'focus-visible'
@@ -19,7 +19,7 @@ import {
 } from './components'
 import { getComponents } from './mdx-components'
 import { ActiveAnchorProvider, ConfigProvider, useConfig } from './contexts'
-import type { PageTheme } from './constants';
+import type { PageTheme } from './constants'
 import { DEFAULT_LOCALE, PartialDocsThemeConfig } from './constants'
 import { getFSRoute, normalizePages, renderComponent } from './utils'
 
@@ -46,6 +46,11 @@ interface BodyProps {
   children: ReactNode
 }
 
+const classes = {
+  toc: cn('nextra-toc nx-order-last nx-hidden nx-w-64 nx-shrink-0 xl:nx-block'),
+  main: cn('nx-w-full nx-overflow-x-hidden nx-break-words')
+}
+
 const Body = ({
   themeContext,
   breadcrumb,
@@ -57,7 +62,7 @@ const Body = ({
   const mounted = useMounted()
 
   if (themeContext.layout === 'raw') {
-    return <div className="nx-w-full nx-overflow-x-hidden">{children}</div>
+    return <div className={classes.main}>{children}</div>
   }
 
   const date =
@@ -87,7 +92,12 @@ const Body = ({
 
   if (themeContext.layout === 'full') {
     return (
-      <article className="nextra-content nx-min-h-[calc(100vh-4rem)] nx-w-full nx-overflow-x-hidden nx-pl-[max(env(safe-area-inset-left),1.5rem)] nx-pr-[max(env(safe-area-inset-right),1.5rem)]">
+      <article
+        className={cn(
+          classes.main,
+          'nextra-content nx-min-h-[calc(100vh-var(--nextra-navbar-height))] nx-pl-[max(env(safe-area-inset-left),1.5rem)] nx-pr-[max(env(safe-area-inset-right),1.5rem)]'
+        )}
+      >
         {body}
       </article>
     )
@@ -96,7 +106,8 @@ const Body = ({
   return (
     <article
       className={cn(
-        'nextra-content nx-flex nx-min-h-[calc(100vh-4rem)] nx-w-full nx-min-w-0 nx-max-w-full nx-justify-center nx-pb-8 nx-pr-[calc(env(safe-area-inset-right)-1.5rem)]',
+        classes.main,
+        'nextra-content nx-flex nx-min-h-[calc(100vh-var(--nextra-navbar-height))] nx-min-w-0 nx-justify-center nx-pb-8 nx-pr-[calc(env(safe-area-inset-right)-1.5rem)]',
         themeContext.typesetting === 'article' &&
           'nextra-body-typesetting-article'
       )}
@@ -108,10 +119,6 @@ const Body = ({
     </article>
   )
 }
-
-const tocClassName = cn(
-  'nextra-toc nx-order-last nx-hidden nx-w-64 nx-shrink-0 xl:nx-block'
-)
 
 const InnerLayout = ({
   filePath,
@@ -146,11 +153,11 @@ const InnerLayout = ({
     themeContext.layout !== 'default' ? (
       themeContext.layout !== 'full' &&
       themeContext.layout !== 'raw' && (
-        <nav className={tocClassName} aria-label="table of contents" />
+        <nav className={classes.toc} aria-label="table of contents" />
       )
     ) : (
       <nav
-        className={cn(tocClassName, 'nx-px-4')}
+        className={cn(classes.toc, 'nx-px-4')}
         aria-label="table of contents"
       >
         {renderComponent(config.toc.component, {
