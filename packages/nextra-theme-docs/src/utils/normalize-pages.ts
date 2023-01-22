@@ -1,5 +1,5 @@
 import { PageMapItem } from 'nextra'
-import { DEFAULT_PAGE_THEME, PageTheme } from '../constants'
+import { DEFAULT_PAGE_THEME, PageTheme, Display, IMenuItem } from '../constants'
 import { Folder, MdxFile } from 'nextra'
 
 function extendMeta(
@@ -9,17 +9,9 @@ function extendMeta(
   if (typeof meta === 'string') {
     meta = { title: meta }
   }
-  const theme = Object.assign({}, fallback.theme, meta.theme)
+  const theme: PageTheme = Object.assign({}, fallback.theme, meta.theme)
   return Object.assign({}, fallback, meta, { theme })
 }
-
-/**
- * An option to control how an item should be displayed in the sidebar:
- * - `normal`: the default behavior, item will be displayed
- * - `hidden`: the item will not be displayed in the sidebar entirely
- * - `children`: if the item is a folder, itself will be hidden but all its children will still be processed
- */
-export type Display = 'normal' | 'hidden' | 'children'
 
 export interface Item extends MdxFile {
   title: string
@@ -43,19 +35,8 @@ export interface PageItem extends MdxFile {
   isUnderCurrentDocsTree?: boolean
 }
 
-export interface MenuItem extends MdxFile {
-  title: string
-  type: 'menu'
-  display?: Display
+export interface MenuItem extends MdxFile, IMenuItem {
   children?: PageItem[]
-  items?: Record<
-    string,
-    {
-      title: string
-      href?: string
-      newWindow?: boolean
-    }
-  >
 }
 
 interface DocsItem extends MdxFile {

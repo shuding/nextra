@@ -12,7 +12,7 @@ import {
   DEEP_OBJECT_KEYS,
   DEFAULT_THEME,
   DocsThemeConfig,
-  pageThemeSchema,
+  metaSchema,
   themeSchema
 } from '../constants'
 import { MenuProvider } from './menu'
@@ -34,10 +34,15 @@ let isValidated = false
 
 function normalizeZodMessage(error: unknown): string {
   return (error as ZodError).issues
-    .map(issue => {
+    .flatMap(issue => {
       const themePath =
-        issue.path.length > 0 ? `Path: "${issue.path.join('.')}"` : ''
-      return `${issue.message}. ${themePath}`
+        issue.path.length > 0 && `Path: "${issue.path.join('.')}"`
+      const unionErrors =
+        'unionErrors' in issue ? issue.unionErrors.map(normalizeZodMessage) : []
+      return [
+        [issue.message, themePath].filter(Boolean).join('. '),
+        ...unionErrors
+      ]
     })
     .join('\n')
 }
@@ -46,14 +51,11 @@ function validateMeta(pageMap: PageMapItem[]) {
   for (const pageMapItem of pageMap) {
     if (pageMapItem.kind === 'Meta') {
       for (const [key, data] of Object.entries(pageMapItem.data)) {
-        const hasTheme = data && typeof data === 'object' && 'theme' in data
-        if (!hasTheme) continue
-
         try {
-          pageThemeSchema.parse(data.theme)
+          metaSchema.parse(data)
         } catch (error) {
           console.error(
-            `[nextra-theme-docs] Error validating "theme" config in _meta.json file for "${key}" page.\n\n${normalizeZodMessage(
+            `[nextra-theme-docs] Error validating _meta.json file for "${key}" property.\n\n${normalizeZodMessage(
               error
             )}`
           )

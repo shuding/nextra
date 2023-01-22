@@ -33,7 +33,6 @@
   "github_link": {
     "title": "GitHub 🐙 →",
     "href": "https://github.com/shuding/nextra",
-    "type": "page",
     "newWindow": true
   },
   "wrap-toc-items": "Wrap Table of Content Items",
