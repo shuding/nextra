@@ -47,6 +47,7 @@ export const remarkStaticImage: Plugin<[{ filePath: string }], Root> =
     const importsToInject: any[] = []
 
     visit(tree, 'image', node => {
+      // https://github.com/shuding/nextra/issues/1344
       let url = decodeURI(node.url)
       if (!url) {
         return
