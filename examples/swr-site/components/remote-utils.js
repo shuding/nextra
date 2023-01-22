@@ -16,10 +16,7 @@ async function listFiles({ repo, rootDir }) {
     .map(filename => filename.replace(rootDir, ''))
 }
 
-async function findPathWithExtension({ repo, rootDir, slug }) {
-  if (slug === undefined) {
-    slug = ['index']
-  }
+async function findPathWithExtension({ repo, rootDir, slug = ['index'] }) {
   const dirs = slug.slice(0, -1)
   const dirPath = path.join(CACHE_DIR, repo.split('/').pop(), rootDir, ...dirs)
 

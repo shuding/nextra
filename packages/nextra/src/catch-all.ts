@@ -1,12 +1,5 @@
 import { MARKDOWN_EXTENSION_REGEX } from './constants'
-
-type Folder = {
-  type: 'folder'
-  items: DynamicMeta
-  title?: string
-}
-
-type DynamicMeta = Record<string, string | Folder>
+import { DynamicMeta, DynamicFolder } from './types'
 
 function appendSlashForFolders(obj: DynamicMeta): DynamicMeta {
   return Object.fromEntries(
@@ -39,17 +32,17 @@ export function createCatchAllMeta(
       meta[name] ||= ''
       return
     }
-    meta[`${name}/`] ||= {} as Folder
-    const folder = meta[`${name}/`] as Folder
+    meta[`${name}/`] ||= {} as DynamicFolder
+    const folder = meta[`${name}/`] as DynamicFolder
     folder.items ||= {}
 
     // fix conflicts when folder and folder with index page exists
     if (Object.hasOwn(meta, name) && typeof folder.title === 'string') {
-      if (typeof meta[name] === 'string') {
+      const metaItem = meta[name]
+      if (typeof metaItem === 'string') {
         meta[name] = folder.title
       } else {
-        // @ts-expect-error fix Property 'title' does not exist on type 'string'.
-        meta[name].title = folder.title
+        metaItem.title = folder.title
       }
     }
     addToMap(folder.items, rest)

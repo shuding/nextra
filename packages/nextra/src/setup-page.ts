@@ -10,33 +10,41 @@ import type {
   NextraInternalGlobal,
   PageOpts,
   ThemeConfig,
-  MetaJsonFile,
-  PageMapItem
+  PageMapItem,
+  DynamicMetaJsonFile,
+  DynamicMeta,
+  DynamicMetaItem,
+  DynamicFolder
 } from './types'
 import { normalizePageRoute, pageTitleFromFilename } from './utils'
 
 import get from 'lodash.get'
 import { NEXTRA_INTERNAL } from './constants'
 
-function normalizeMetaData(obj: Record<string, any>) {
+function isFolder(value: DynamicMetaItem): value is DynamicFolder {
+  return !!value && typeof value === 'object' && value.type === 'folder'
+}
+
+function normalizeMetaData(obj: DynamicMeta): DynamicMeta {
   return Object.fromEntries(
     Object.entries(obj).map(([key, value]) => {
-      const keyWithoutSlash = key.replace('/', '')
-      return key.includes('/')
-        ? [
-            keyWithoutSlash,
-            value.title || pageTitleFromFilename(keyWithoutSlash)
-          ]
-        : [key, value || pageTitleFromFilename(key)]
+      if (isFolder(value)) {
+        const keyWithoutSlash = key.replace('/', '')
+        return [
+          keyWithoutSlash,
+          value.title || pageTitleFromFilename(keyWithoutSlash)
+        ]
+      }
+      return [key, value || pageTitleFromFilename(key)]
     })
   )
 }
 
 export function collectCatchAllRoutes(
   parent: Folder<any>,
-  meta: Omit<MetaJsonFile, 'data'> & { data: Record<string, any> },
+  meta: DynamicMetaJsonFile,
   isRootFolder = true
-) {
+): void {
   if (isRootFolder) {
     collectCatchAllRoutes(
       parent,
@@ -51,8 +59,7 @@ export function collectCatchAllRoutes(
     return
   }
   for (const [key, value] of Object.entries(meta.data)) {
-    const isFolder = key.includes('/')
-    if (!isFolder) {
+    if (!isFolder(value)) {
       parent.children.push({
         kind: 'MdxPage',
         locale: meta.locale,
@@ -115,17 +122,22 @@ export function setupNextraPage({
       if (process.env.NODE_ENV === 'production' && cachedResolvedPageMap) {
         return cachedResolvedPageMap
       }
-      const clonedPageMap = JSON.parse(JSON.stringify(pageOpts.pageMap))
+      const clonedPageMap: PageMapItem[] = JSON.parse(
+        JSON.stringify(pageOpts.pageMap)
+      )
 
       await Promise.all(
         dynamicMetaModules.map(
           async ([importMod, { metaObjectKeyPath, metaParentKeyPath }]) => {
             const mod = await importMod
             const metaData = await mod.default()
-            const meta = get(clonedPageMap, metaObjectKeyPath)
+            const meta: DynamicMetaJsonFile = get(
+              clonedPageMap,
+              metaObjectKeyPath
+            )
             meta.data = metaData
 
-            const parent = get(
+            const parent: Folder = get(
               clonedPageMap,
               metaParentKeyPath.replace(/\.children$/, '')
             )

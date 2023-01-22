@@ -41,6 +41,22 @@ export type MetaJsonFile = {
   __nextra_src?: string
 }
 
+export type DynamicFolder = {
+  type: 'folder'
+  items: DynamicMeta
+  title?: string
+}
+
+export type DynamicMetaItem = Meta | DynamicFolder
+
+export type DynamicMeta = Record<string, DynamicMetaItem>
+
+export type DynamicMetaJsonFile = {
+  kind: 'Meta'
+  locale?: string
+  data: DynamicMeta
+}
+
 export type FrontMatter = GrayMatterFile<string>['data']
 export type Meta = string | Record<string, any>
 
