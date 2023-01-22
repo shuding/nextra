@@ -1,5 +1,20 @@
 # nextra
 
+## 2.2.11
+
+### Patch Changes
+
+- 7d96698: compile mdx with `format: 'detect'` in loader
+- e10bf74: add support for remote `[...catchAll]` routes
+
+  support meta keys with `/`
+
+  sanitize remote mdx by removing `import` statements
+
+- e04e2ce: better types for dynamic meta
+- 5fd2183: ignore `.xml` files in locales middleware
+- e38e61f: use decodeURI in static-image.ts
+
 ## 2.2.10
 
 ### Patch Changes
