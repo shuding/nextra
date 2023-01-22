@@ -135,3 +135,32 @@ input[type='search'] {
 .nextra-banner-hidden .nextra-banner-container {
   @apply nx-hidden;
 }
+
+.nextra-sidebar-container {
+  [data-toggle-animation='show'] button {
+    opacity: 0;
+    animation: nextra-fadein 1s ease 0.2s forwards;
+  }
+  [data-toggle-animation='hide'] button {
+    opacity: 0;
+    animation: nextra-fadein2 1s ease 0.2s forwards;
+  }
+}
+
+@keyframes nextra-fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes nextra-fadein2 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
