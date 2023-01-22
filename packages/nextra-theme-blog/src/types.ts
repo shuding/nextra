@@ -29,11 +29,9 @@ export interface NextraBlogTheme {
   titleSuffix?: string
 }
 
-export interface BlogPageOpts extends PageOpts {
-  frontMatter: Meta
-}
+export type BlogPageOpts = PageOpts<BlogFrontMatter>
 
-type Meta = {
+export type BlogFrontMatter = {
   author?: string
   back?: string
   date?: string

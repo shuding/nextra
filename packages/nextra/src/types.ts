@@ -21,7 +21,6 @@ export interface LoaderOptions extends NextraConfig {
   defaultLocale: string
   pageMapCache: PageMapCache
   newNextLinkBehavior?: boolean
-  distDir?: string
 }
 
 export interface Folder<FileType = PageMapItem> {
@@ -60,12 +59,12 @@ export type DynamicMetaJsonFile = {
 export type FrontMatter = GrayMatterFile<string>['data']
 export type Meta = string | Record<string, any>
 
-export type MdxFile = {
+export type MdxFile<FrontMatterType = FrontMatter> = {
   kind: 'MdxPage'
   name: string
   route: string
   locale?: string
-  frontMatter?: FrontMatter
+  frontMatter?: FrontMatterType
 }
 
 export type MetaJsonPath = `${string}/${MetaFilename}`
@@ -88,10 +87,10 @@ export type Heading = Omit<MDASTHeading, 'type' | 'children' | 'position'> & {
   id: string
 }
 
-export type PageOpts = {
+export type PageOpts<FrontMatterType = FrontMatter> = {
   filePath: string
   route: string
-  frontMatter: FrontMatter
+  frontMatter: FrontMatterType
   pageMap: PageMapItem[]
   title: string
   headings: Heading[]
