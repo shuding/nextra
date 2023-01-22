@@ -37,7 +37,7 @@ function getDynamicMeta(
       dynamicMetaItems.push({
         metaFilePath: __nextra_src,
         metaObjectKeyPath: `${path}[${i}]`,
-        metaParentKeyPath: path
+        metaParentKeyPath: path.replace(/\.children$/, '')
       })
       newItems.push(newItem)
       continue
@@ -63,7 +63,9 @@ export function resolvePageMap({
   pageMap: PageMapItem[]
   dynamicMetaItems: DynamicMetaDescriptor[]
 } {
-  const { locale } = parseFileName(filePath)
+  let { locale } = parseFileName(filePath)
+  locale ||= defaultLocale
+
   const pageItem = fileMap[filePath as MdxPath]
 
   const [dynamicMetaItems, newItems] =

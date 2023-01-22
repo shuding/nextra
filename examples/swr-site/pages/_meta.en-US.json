@@ -6,16 +6,15 @@
   },
   "docs": {
     "title": "Docs",
-    "type": "page",
-    "theme": {
-      "toc": true
-    }
+    "type": "page"
   },
   "remote": {
     "title": "Remote",
     "type": "page",
-    "href": "/remote/foo",
-    "display": "children"
+    "href": "/remote/4423220"
+  },
+  "test": {
+    "type": "page"
   },
   "about": {
     "title": "About",

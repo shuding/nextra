@@ -674,9 +674,6 @@ exports[`context > getAllPages() > should work 1`] = `
     ],
     "kind": "Folder",
     "meta": {
-      "theme": {
-        "toc": true,
-      },
       "title": "Docs",
       "type": "page",
     },
@@ -702,13 +699,26 @@ exports[`context > getAllPages() > should work 1`] = `
     ],
     "kind": "Folder",
     "meta": {
-      "display": "children",
-      "href": "/remote/foo",
+      "href": "/remote/4423220",
       "title": "Remote",
       "type": "page",
     },
     "name": "remote",
     "route": "/remote",
+  },
+  {
+    "frontMatter": {
+      "mdxOptions": {
+        "format": "md",
+      },
+    },
+    "kind": "MdxPage",
+    "locale": "en-US",
+    "meta": {
+      "type": "page",
+    },
+    "name": "test",
+    "route": "/test",
   },
   {
     "children": [
@@ -1032,18 +1042,6 @@ exports[`context > getAllPages() > should work 1`] = `
     },
     "name": "blog",
     "route": "/blog",
-  },
-  {
-    "frontMatter": {
-      "mdxOptions": {
-        "format": "md",
-      },
-    },
-    "kind": "MdxPage",
-    "locale": "en-US",
-    "meta": undefined,
-    "name": "test",
-    "route": "/test",
   },
 ]
 `;

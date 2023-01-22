@@ -61,9 +61,6 @@ exports[`Page Process > pageMap en-US 1`] = `
           "type": "page",
         },
         "docs": {
-          "theme": {
-            "toc": true,
-          },
           "title": "Docs",
           "type": "page",
         },
@@ -86,9 +83,11 @@ exports[`Page Process > pageMap en-US 1`] = `
           "type": "page",
         },
         "remote": {
-          "display": "children",
-          "href": "/remote/foo",
+          "href": "/remote/4423220",
           "title": "Remote",
+          "type": "page",
+        },
+        "test": {
           "type": "page",
         },
       },
@@ -572,14 +571,12 @@ exports[`Page Process > pageMap en-US 1`] = `
         {
           "data": {},
           "kind": "Meta",
-          "locale": "en-US",
         },
         {
           "children": [
             {
               "data": {},
               "kind": "Meta",
-              "locale": "en-US",
             },
           ],
           "kind": "Folder",
@@ -591,7 +588,6 @@ exports[`Page Process > pageMap en-US 1`] = `
             {
               "data": {},
               "kind": "Meta",
-              "locale": "en-US",
             },
           ],
           "kind": "Folder",
@@ -1071,7 +1067,6 @@ exports[`Page Process > pageMap ru 1`] = `
             {
               "data": {},
               "kind": "Meta",
-              "locale": "en-US",
             },
           ],
           "kind": "Folder",
@@ -1083,7 +1078,6 @@ exports[`Page Process > pageMap ru 1`] = `
             {
               "data": {},
               "kind": "Meta",
-              "locale": "en-US",
             },
           ],
           "kind": "Folder",
@@ -1093,7 +1087,6 @@ exports[`Page Process > pageMap ru 1`] = `
         {
           "data": {},
           "kind": "Meta",
-          "locale": "en-US",
         },
       ],
       "kind": "Folder",
