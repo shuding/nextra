@@ -189,7 +189,7 @@ async function loader(
   if (searchIndexKey) {
     if (frontMatter.searchable !== false) {
       // Store all the things in buildInfo.
-      const buildInfo = (context._module as any).buildInfo
+      const { buildInfo } = context._module as any
       buildInfo.nextraSearch = {
         indexKey: searchIndexKey,
         title: fallbackTitle,
