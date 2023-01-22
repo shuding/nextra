@@ -149,7 +149,8 @@ async function loader(
       mdxOptions: {
         ...mdxOptions,
         jsx: true,
-        outputFormat: 'program'
+        outputFormat: 'program',
+        format: 'detect'
       },
       readingTime: _readingTime,
       defaultShowCopyCode,
