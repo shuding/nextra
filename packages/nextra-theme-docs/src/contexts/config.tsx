@@ -30,7 +30,7 @@ const ConfigContext = createContext<Config>({
 export const useConfig = () => useContext(ConfigContext)
 
 let theme: DocsThemeConfig
-let isValidated = process.env.NODE_ENV === 'production'
+let isValidated = false
 
 function normalizeZodMessage(error: unknown): string {
   return (error as ZodError).issues
@@ -86,7 +86,7 @@ export const ConfigProvider = ({
       ])
     )
   }
-  if (!isValidated) {
+  if (process.env.NODE_ENV !== 'production' && !isValidated) {
     try {
       theme = themeSchema.parse(theme)
     } catch (error) {
