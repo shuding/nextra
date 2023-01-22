@@ -102,7 +102,7 @@ export async function compileMdx(
   }: MdxOptions = {
     ...loaderOptions.mdxOptions,
     // You can override MDX options in the frontMatter too.
-    ...(frontMatter.mdxOptions as Record<string, unknown>)
+    ...frontMatter.mdxOptions
   }
 
   const format =

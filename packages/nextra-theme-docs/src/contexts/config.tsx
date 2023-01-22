@@ -5,7 +5,7 @@ import {
   useContext,
   useState
 } from 'react'
-import { PageOpts, PageMapItem } from 'nextra'
+import { PageOpts, PageMapItem, FrontMatter } from 'nextra'
 import { ThemeProvider } from 'next-themes'
 import { Context } from '../types'
 import {
@@ -18,8 +18,11 @@ import {
 import { MenuProvider } from './menu'
 import type { ZodError } from 'zod'
 
-type Config = DocsThemeConfig &
-  Pick<PageOpts, 'flexsearch' | 'newNextLinkBehavior' | 'title' | 'frontMatter'>
+type Config<FrontMatterType = FrontMatter> = DocsThemeConfig &
+  Pick<
+    PageOpts<FrontMatterType>,
+    'flexsearch' | 'newNextLinkBehavior' | 'title' | 'frontMatter'
+  >
 
 const ConfigContext = createContext<Config>({
   title: '',
@@ -27,7 +30,10 @@ const ConfigContext = createContext<Config>({
   ...DEFAULT_THEME
 })
 
-export const useConfig = () => useContext(ConfigContext)
+export function useConfig<FrontMatterType = FrontMatter>() {
+  // @ts-expect-error TODO: fix Type 'Config<{ [key: string]: any; }>' is not assignable to type 'Config<FrontMatterType>'.
+  return useContext<Config<FrontMatterType>>(ConfigContext)
+}
 
 let theme: DocsThemeConfig
 let isValidated = false
