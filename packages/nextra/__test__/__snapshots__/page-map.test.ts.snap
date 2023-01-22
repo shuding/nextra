@@ -208,7 +208,6 @@ exports[`Page Process > pageMap en-US 1`] = `
               "href": "https://github.com/shuding/nextra",
               "newWindow": true,
               "title": "GitHub 🐙 →",
-              "type": "page",
             },
             "global-configuration": {},
             "middleware": {},
