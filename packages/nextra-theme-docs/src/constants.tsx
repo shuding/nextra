@@ -1,6 +1,5 @@
 /* eslint sort-keys: error */
 import { isValidElement, FC, ReactNode } from 'react'
-import { PageTheme } from './types'
 import { useRouter } from 'next/router'
 import { Anchor, Flexsearch, Footer, Navbar, TOC } from './components'
 import { DiscordIcon, GitHubIcon } from 'nextra/icons'
@@ -320,6 +319,23 @@ export const DEEP_OBJECT_KEYS = Object.entries(DEFAULT_THEME)
     }
   })
   .filter(Boolean)
+
+export const pageThemeSchema = z
+  .strictObject({
+    breadcrumb: z.boolean(),
+    collapsed: z.boolean(),
+    footer: z.boolean(),
+    layout: z.enum(['default', 'full', 'raw']),
+    navbar: z.boolean(),
+    pagination: z.boolean(),
+    sidebar: z.boolean(),
+    timestamp: z.boolean(),
+    toc: z.boolean(),
+    typesetting: z.enum(['default', 'article'])
+  })
+  .partial()
+
+export type PageTheme = z.infer<typeof pageThemeSchema>
 
 export const DEFAULT_PAGE_THEME: PageTheme = {
   breadcrumb: true,

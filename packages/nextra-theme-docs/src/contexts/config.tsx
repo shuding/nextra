@@ -5,13 +5,14 @@ import {
   useContext,
   useState
 } from 'react'
-import { PageOpts } from 'nextra'
+import { PageOpts, PageMapItem } from 'nextra'
 import { ThemeProvider } from 'next-themes'
 import { Context } from '../types'
 import {
   DEEP_OBJECT_KEYS,
   DEFAULT_THEME,
   DocsThemeConfig,
+  pageThemeSchema,
   themeSchema
 } from '../constants'
 import { MenuProvider } from './menu'
@@ -30,6 +31,39 @@ export const useConfig = () => useContext(ConfigContext)
 
 let theme: DocsThemeConfig
 let isValidated = process.env.NODE_ENV === 'production'
+
+function normalizeZodMessage(error: unknown): string {
+  return (error as ZodError).issues
+    .map(issue => {
+      const themePath =
+        issue.path.length > 0 ? `Path: "${issue.path.join('.')}"` : ''
+      return `${issue.message}. ${themePath}`
+    })
+    .join('\n')
+}
+
+function validateMeta(pageMap: PageMapItem[]) {
+  for (const pageMapItem of pageMap) {
+    if (pageMapItem.kind === 'Meta') {
+      for (const [key, data] of Object.entries(pageMapItem.data)) {
+        const hasTheme = data && typeof data === 'object' && 'theme' in data
+        if (!hasTheme) continue
+
+        try {
+          pageThemeSchema.parse(data.theme)
+        } catch (error) {
+          console.error(
+            `[nextra-theme-docs] Error validating "theme" config in _meta.json file for "${key}" page.\n\n${normalizeZodMessage(
+              error
+            )}`
+          )
+        }
+      }
+    } else if (pageMapItem.kind === 'Folder') {
+      validateMeta(pageMapItem.children)
+    }
+  }
+}
 
 export const ConfigProvider = ({
   children,
@@ -57,16 +91,12 @@ export const ConfigProvider = ({
       theme = themeSchema.parse(theme)
     } catch (error) {
       console.error(
-        '[nextra-theme-docs] Error validating theme config\n\n',
-        ...(error as ZodError).issues.map(issue => {
-          const themePath =
-            issue.path.length > 0
-              ? `Theme path: [${issue.path.join(', ')}]`
-              : ''
-          return `${issue.message}. ${themePath}\n`
-        })
+        `[nextra-theme-docs] Error validating theme config file.\n\n${normalizeZodMessage(
+          error
+        )}`
       )
     }
+    validateMeta(pageOpts.pageMap)
     isValidated = true
   }
   const extendedConfig: Config = {
