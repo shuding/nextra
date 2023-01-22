@@ -1,5 +1,11 @@
 # nextra
 
+## 2.2.12
+
+### Patch Changes
+
+- 619ae3a: fix pageMap for remote content
+
 ## 2.2.11
 
 ### Patch Changes
