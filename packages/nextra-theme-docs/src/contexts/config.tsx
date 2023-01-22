@@ -1,17 +1,12 @@
-import {
-  createContext,
-  ReactElement,
-  ReactNode,
-  useContext,
-  useState
-} from 'react'
-import { PageOpts, PageMapItem, FrontMatter } from 'nextra'
+import type { ReactElement, ReactNode } from 'react'
+import { createContext, useContext, useState } from 'react'
+import type { PageOpts, PageMapItem, FrontMatter } from 'nextra'
 import { ThemeProvider } from 'next-themes'
-import { Context } from '../types'
+import type { Context } from '../types'
+import type { DocsThemeConfig } from '../constants'
 import {
   DEEP_OBJECT_KEYS,
   DEFAULT_THEME,
-  DocsThemeConfig,
   metaSchema,
   themeSchema
 } from '../constants'
