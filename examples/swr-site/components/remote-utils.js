@@ -17,7 +17,7 @@ async function listFiles({ repo, rootDir }) {
 }
 
 async function findPathWithExtension({ repo, rootDir, slug }) {
-  if (slug === undefined) {
+  if (slug === undefined || slug.length === 0) {
     slug = ['index']
   }
   const dirs = slug.slice(0, -1)
