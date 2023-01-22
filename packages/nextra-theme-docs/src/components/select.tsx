@@ -64,7 +64,7 @@ export function Select({
               ref={container}
               show={open}
               as={Listbox.Options}
-              className="nx-z-20 nx-max-h-64 nx-overflow-auto nx-rounded-md nx-border nx-border-black/5 nx-bg-white nx-py-1 nx-text-sm nx-shadow-lg dark:nx-border-white/10 dark:nx-bg-neutral-800"
+              className="nx-z-20 nx-max-h-64 nx-overflow-auto nx-rounded-md nx-ring-1 nx-ring-black/5 nx-bg-white nx-py-1 nx-text-sm nx-shadow-lg dark:nx-ring-white/20 dark:nx-bg-neutral-800"
               leave="nx-transition-opacity"
               leaveFrom="nx-opacity-100"
               leaveTo="nx-opacity-0"
