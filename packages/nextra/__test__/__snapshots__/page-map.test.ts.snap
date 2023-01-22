@@ -572,14 +572,12 @@ exports[`Page Process > pageMap en-US 1`] = `
         {
           "data": {},
           "kind": "Meta",
-          "locale": "en-US",
         },
         {
           "children": [
             {
               "data": {},
               "kind": "Meta",
-              "locale": "en-US",
             },
           ],
           "kind": "Folder",
@@ -591,7 +589,6 @@ exports[`Page Process > pageMap en-US 1`] = `
             {
               "data": {},
               "kind": "Meta",
-              "locale": "en-US",
             },
           ],
           "kind": "Folder",
@@ -1071,7 +1068,6 @@ exports[`Page Process > pageMap ru 1`] = `
             {
               "data": {},
               "kind": "Meta",
-              "locale": "en-US",
             },
           ],
           "kind": "Folder",
@@ -1083,7 +1079,6 @@ exports[`Page Process > pageMap ru 1`] = `
             {
               "data": {},
               "kind": "Meta",
-              "locale": "en-US",
             },
           ],
           "kind": "Folder",
@@ -1093,7 +1088,6 @@ exports[`Page Process > pageMap ru 1`] = `
         {
           "data": {},
           "kind": "Meta",
-          "locale": "en-US",
         },
       ],
       "kind": "Folder",

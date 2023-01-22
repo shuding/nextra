@@ -62,7 +62,7 @@ export function collectCatchAllRoutes(
     if (!isFolder(value)) {
       parent.children.push({
         kind: 'MdxPage',
-        locale: meta.locale,
+        ...(meta.locale && { locale: meta.locale }),
         name: key,
         title: value || pageTitleFromFilename(key),
         route: normalizePageRoute(parent.route, key)
@@ -77,7 +77,7 @@ export function collectCatchAllRoutes(
       children: [
         {
           kind: 'Meta',
-          locale: meta.locale,
+          ...(meta.locale && { locale: meta.locale }),
           data: normalizeMetaData(value.items)
         }
       ]
@@ -89,7 +89,7 @@ export function collectCatchAllRoutes(
       {
         kind: 'Meta',
         data: value.items,
-        locale: meta.locale
+        ...(meta.locale && { locale: meta.locale })
       },
       false
     )
@@ -137,10 +137,7 @@ export function setupNextraPage({
             )
             meta.data = metaData
 
-            const parent: Folder = get(
-              clonedPageMap,
-              metaParentKeyPath.replace(/\.children$/, '')
-            )
+            const parent: Folder = get(clonedPageMap, metaParentKeyPath)
             collectCatchAllRoutes(parent, meta)
           }
         )
