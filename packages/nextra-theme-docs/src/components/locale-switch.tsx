@@ -1,7 +1,7 @@
-import { ReactElement } from 'react'
+import type { ReactElement } from 'react'
 import { useRouter } from 'next/router'
 import { Select } from './select'
-import { DocsThemeConfig } from '../constants'
+import type { DocsThemeConfig } from '../constants'
 import { GlobeIcon } from 'nextra/icons'
 import { addBasePath } from 'next/dist/client/add-base-path'
 

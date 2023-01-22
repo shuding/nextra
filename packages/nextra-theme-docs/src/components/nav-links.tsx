@@ -1,10 +1,10 @@
-import { ReactElement } from 'react'
+import type { ReactElement } from 'react'
 import cn from 'clsx'
 import { ArrowRightIcon } from 'nextra/icons'
 import { useConfig } from '../contexts'
-import { Item } from '../utils'
+import type { Item } from '../utils'
 import { Anchor } from './anchor'
-import { DocsThemeConfig } from '../index'
+import type { DocsThemeConfig } from '../index'
 
 interface NavLinkProps {
   currentIndex: number

@@ -1,7 +1,8 @@
 import path from 'node:path'
 import { createRequire } from 'node:module'
-import { createProcessor, ProcessorOptions } from '@mdx-js/mdx'
-import { Processor } from '@mdx-js/mdx/lib/core'
+import type { ProcessorOptions } from '@mdx-js/mdx';
+import { createProcessor } from '@mdx-js/mdx'
+import type { Processor } from '@mdx-js/mdx/lib/core'
 import remarkGfm from 'remark-gfm'
 import rehypePrettyCode from 'rehype-pretty-code'
 import remarkReadingTime from 'remark-reading-time'
@@ -16,7 +17,7 @@ import {
   attachMeta,
   remarkRemoveImports
 } from './mdx-plugins'
-import { LoaderOptions, PageOpts, ReadingTime } from './types'
+import type { LoaderOptions, PageOpts, ReadingTime } from './types'
 import theme from './theme.json'
 import { truthy } from './utils'
 import remarkMath from 'remark-math'

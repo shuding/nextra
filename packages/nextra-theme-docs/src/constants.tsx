@@ -1,15 +1,17 @@
 /* eslint sort-keys: error */
-import { isValidElement, FC, ReactNode } from 'react'
+import type { FC, ReactNode } from 'react';
+import { isValidElement } from 'react'
 import { useRouter } from 'next/router'
 import { Anchor, Flexsearch, Footer, Navbar, TOC } from './components'
 import { DiscordIcon, GitHubIcon } from 'nextra/icons'
 import { MatchSorterSearch } from './components/match-sorter-search'
 import { useConfig } from './contexts'
-import { useGitEditUrl, getGitIssueUrl, Item } from './utils'
+import type { Item } from './utils';
+import { useGitEditUrl, getGitIssueUrl } from './utils'
 import { z } from 'zod'
-import { NavBarProps } from './components/navbar'
-import { TOCProps } from './components/toc'
-import { NextSeoProps } from 'next-seo'
+import type { NavBarProps } from './components/navbar'
+import type { TOCProps } from './components/toc'
+import type { NextSeoProps } from 'next-seo'
 
 export const DEFAULT_LOCALE = 'en-US'
 

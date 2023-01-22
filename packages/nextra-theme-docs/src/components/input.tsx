@@ -1,4 +1,5 @@
-import { ComponentProps, forwardRef, ReactNode } from 'react'
+import type { ComponentProps, ReactNode } from 'react';
+import { forwardRef } from 'react'
 import cn from 'clsx'
 
 type InputProps = ComponentProps<'input'> & { suffix?: ReactNode }

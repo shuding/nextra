@@ -1,6 +1,6 @@
 import { remove } from 'unist-util-remove'
-import { Plugin } from 'unified'
-import { Root } from 'mdast'
+import type { Plugin } from 'unified'
+import type { Root } from 'mdast'
 
 export const remarkRemoveImports: Plugin<[], Root> = () => {
   return (tree, _file, done) => {

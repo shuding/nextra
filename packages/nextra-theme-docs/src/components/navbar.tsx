@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode } from 'react'
+import type { ReactElement, ReactNode } from 'react'
 import cn from 'clsx'
 import { useRouter } from 'next/router'
 import { Menu, Transition } from '@headlessui/react'
@@ -6,7 +6,8 @@ import { ArrowRightIcon } from 'nextra/icons'
 
 import { useConfig, useMenu } from '../contexts'
 import { MenuIcon } from 'nextra/icons'
-import { Item, PageItem, MenuItem, renderComponent, getFSRoute } from '../utils'
+import type { Item, PageItem, MenuItem} from '../utils';
+import { renderComponent, getFSRoute } from '../utils'
 import { Anchor } from './anchor'
 import { DEFAULT_LOCALE } from '../constants'
 

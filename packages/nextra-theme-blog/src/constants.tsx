@@ -1,5 +1,5 @@
 /* eslint sort-keys: error */
-import { NextraBlogTheme } from './types'
+import type { NextraBlogTheme } from './types'
 
 export const DEFAULT_THEME: NextraBlogTheme = {
   footer: (

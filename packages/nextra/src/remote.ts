@@ -1,6 +1,7 @@
 import { compileMdx } from './compile'
-import { LoaderOptions } from './types'
-import { remarkLinkRewrite, RemarkLinkRewriteOptions } from './mdx-plugins'
+import type { LoaderOptions } from './types'
+import type { RemarkLinkRewriteOptions } from './mdx-plugins';
+import { remarkLinkRewrite } from './mdx-plugins'
 import { truthy } from './utils'
 
 export const buildDynamicMDX = async (

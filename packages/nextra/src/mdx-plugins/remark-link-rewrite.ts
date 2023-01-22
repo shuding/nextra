@@ -1,6 +1,6 @@
 import { visit } from 'unist-util-visit'
-import { Plugin } from 'unified'
-import { Root } from 'mdast'
+import type { Plugin } from 'unified'
+import type { Root } from 'mdast'
 
 export type RemarkLinkRewriteOptions = {
   pattern: RegExp

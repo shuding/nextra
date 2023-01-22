@@ -7,7 +7,7 @@ import {
 import { collectFiles } from '../src/plugin'
 import { CWD, NEXTRA_INTERNAL } from '../src/constants'
 import path from 'node:path'
-import { NextraInternalGlobal } from '../src/types'
+import type { NextraInternalGlobal } from '../src/types'
 
 describe('context', () => {
   beforeAll(async () => {

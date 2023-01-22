@@ -1,9 +1,9 @@
-import { Processor } from '@mdx-js/mdx/lib/core'
+import type { Processor } from '@mdx-js/mdx/lib/core'
 import { visit } from 'unist-util-visit'
-import { Plugin } from 'unified'
-import { Root, Parent } from 'mdast'
+import type { Plugin } from 'unified'
+import type { Root, Parent } from 'mdast'
 import Slugger from 'github-slugger'
-import { PageOpts } from '../types'
+import type { PageOpts } from '../types'
 
 export const getFlattenedValue = (node: Parent): string =>
   node.children

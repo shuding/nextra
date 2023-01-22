@@ -1,6 +1,7 @@
-import { ReactElement, useEffect, useRef, useMemo } from 'react'
+import type { ReactElement} from 'react';
+import { useEffect, useRef, useMemo } from 'react'
 import cn from 'clsx'
-import { Heading } from 'nextra'
+import type { Heading } from 'nextra'
 import scrollIntoView from 'scroll-into-view-if-needed'
 
 import { renderComponent } from '../utils'

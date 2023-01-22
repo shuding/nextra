@@ -1,4 +1,4 @@
-import { MdxFile } from 'nextra'
+import type { MdxFile } from 'nextra'
 
 export const sortDate = (a: MdxFile, b: MdxFile): number => {
   if (!a.frontMatter?.date || !b.frontMatter?.date) return -1

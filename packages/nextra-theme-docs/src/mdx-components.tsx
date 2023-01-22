@@ -1,18 +1,11 @@
-import {
-  useEffect,
-  useRef,
-  useState,
-  cloneElement,
-  Children,
-  ReactNode,
-  ReactElement,
-  ComponentProps
-} from 'react'
+import type { ReactNode, ReactElement, ComponentProps } from 'react'
+import { useEffect, useRef, useState, cloneElement, Children } from 'react'
 import 'intersection-observer'
-import { Components } from 'nextra/mdx'
+import type { Components } from 'nextra/mdx'
 import { useSetActiveAnchor, DetailsProvider, useDetails } from './contexts'
 import { Collapse, Anchor } from './components'
-import { IS_BROWSER, DocsThemeConfig } from './constants'
+import type { DocsThemeConfig } from './constants'
+import { IS_BROWSER } from './constants'
 import cn from 'clsx'
 import { Code, Pre, Table, Td, Th, Tr } from 'nextra/components'
 

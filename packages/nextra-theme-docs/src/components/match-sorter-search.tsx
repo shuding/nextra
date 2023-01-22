@@ -1,9 +1,10 @@
-import { useMemo, useState, ReactElement } from 'react'
+import type { ReactElement } from 'react';
+import { useMemo, useState } from 'react'
 import { matchSorter } from 'match-sorter'
-import { Item as NormalItem } from '../utils'
+import type { Item as NormalItem } from '../utils'
 import { Search } from './search'
 import { HighlightMatches } from './highlight-matches'
-import { SearchResult } from '../types'
+import type { SearchResult } from '../types'
 
 export function MatchSorterSearch({
   className,

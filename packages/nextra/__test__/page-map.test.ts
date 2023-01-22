@@ -2,7 +2,7 @@ import { describe, it, expect, beforeAll } from 'vitest'
 import path from 'node:path'
 import { resolvePageMap } from '../src/page-map'
 import { collectFiles } from '../src/plugin'
-import { FileMap, PageMapItem } from '../src/types'
+import type { FileMap, PageMapItem } from '../src/types'
 import { CWD } from '../src/constants'
 
 const PAGES_DIR = path.join(CWD, '..', '..', 'examples', 'swr-site', 'pages')

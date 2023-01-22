@@ -1,4 +1,4 @@
-import { ComponentProps, ReactElement, ReactNode } from 'react'
+import type { ComponentProps, ReactElement, ReactNode } from 'react'
 import cn from 'clsx'
 import { Tab as HeadlessTab } from '@headlessui/react'
 

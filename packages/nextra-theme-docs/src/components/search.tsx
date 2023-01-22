@@ -1,6 +1,7 @@
-import {
+import type {
   ReactElement,
-  KeyboardEvent,
+  KeyboardEvent} from 'react';
+import {
   Fragment,
   useCallback,
   useState,
@@ -16,7 +17,7 @@ import { Anchor } from './anchor'
 import { renderComponent, renderString } from '../utils'
 import { useConfig, useMenu } from '../contexts'
 import { useRouter } from 'next/router'
-import { SearchResult } from '../types'
+import type { SearchResult } from '../types'
 
 type SearchProps = {
   className?: string

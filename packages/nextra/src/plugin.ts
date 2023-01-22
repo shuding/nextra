@@ -1,5 +1,5 @@
 import type { Compiler } from 'webpack'
-import {
+import type {
   NextraConfig,
   FileMap,
   MdxPath,

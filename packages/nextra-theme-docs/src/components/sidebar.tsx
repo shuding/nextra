@@ -1,8 +1,9 @@
+import type {
+  ReactElement} from 'react';
 import {
   useState,
   useEffect,
   useMemo,
-  ReactElement,
   memo,
   useRef,
   createContext,
@@ -10,11 +11,12 @@ import {
 } from 'react'
 import cn from 'clsx'
 import { useRouter } from 'next/router'
-import { Heading } from 'nextra'
+import type { Heading } from 'nextra'
 import scrollIntoView from 'scroll-into-view-if-needed'
 
 import { useConfig, useMenu, useActiveAnchor } from '../contexts'
-import { Item, MenuItem, PageItem, getFSRoute, renderComponent } from '../utils'
+import type { Item, MenuItem, PageItem} from '../utils';
+import { getFSRoute, renderComponent } from '../utils'
 import { LocaleSwitch } from './locale-switch'
 import { ThemeSwitch } from './theme-switch'
 import { ArrowRightIcon, ExpandIcon } from 'nextra/icons'

@@ -1,4 +1,4 @@
-import { BlogPageOpts } from '../../src'
+import type { BlogPageOpts } from '../../src'
 
 export const indexOpts: BlogPageOpts = {
   filePath: 'index.mdx',

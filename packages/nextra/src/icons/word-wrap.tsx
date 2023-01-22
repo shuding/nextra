@@ -1,4 +1,4 @@
-import { ComponentProps, ReactElement } from 'react'
+import type { ComponentProps, ReactElement } from 'react'
 
 export function WordWrapIcon(props: ComponentProps<'svg'>): ReactElement {
   return (
