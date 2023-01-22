@@ -167,11 +167,6 @@ async function loader(
     }
   )
 
-  const katexCssImport = latex ? "import 'katex/dist/katex.min.css'" : ''
-  const cssImport = OFFICIAL_THEMES.includes(theme)
-    ? `import '${theme}/style.css'`
-    : ''
-
   // Imported as a normal component, no need to add the layout.
   if (!isPageImport) {
     return result
@@ -219,10 +214,6 @@ async function loader(
   // Relative path instead of a package name
   const layout = isLocalTheme ? path.resolve(theme) : theme
 
-  const themeConfigImport = themeConfig
-    ? `import __nextra_themeConfig from '${slash(path.resolve(themeConfig))}'`
-    : ''
-
   let pageOpts: PageOpts = {
     filePath: slash(path.relative(CWD, mdxPath)),
     route,
@@ -244,10 +235,16 @@ async function loader(
     pageOpts = transformPageOpts(pageOpts)
   }
 
+  const themeConfigImport = themeConfig
+    ? `import __nextra_themeConfig from '${slash(path.resolve(themeConfig))}'`
+    : ''
+  const katexCssImport = latex ? "import 'katex/dist/katex.min.css'" : ''
+  const cssImport = OFFICIAL_THEMES.includes(theme)
+    ? `import '${theme}/style.css'`
+    : ''
   const finalResult = transform
     ? await transform(result, { route: pageNextRoute })
     : result
-
   const stringifiedPageOpts = JSON.stringify(pageOpts)
 
   return `import { setupNextraPage } from 'nextra/setup-page'
@@ -262,12 +259,12 @@ ${finalResult.replace(
 )}
 
 setupNextraPage({
-  pageNextRoute: ${JSON.stringify(pageNextRoute)},
-  pageOpts: ${stringifiedPageOpts},
-  nextraLayout: __nextra_layout,
-  themeConfig: ${themeConfigImport ? '__nextra_themeConfig' : 'null'},
   Content: MDXContent,
+  nextraLayout: __nextra_layout,
   hot: module.hot,
+  pageOpts: ${stringifiedPageOpts},
+  themeConfig: ${themeConfigImport ? '__nextra_themeConfig' : 'null'},
+  pageNextRoute: ${JSON.stringify(pageNextRoute)},
   pageOptsChecksum: ${
     IS_PRODUCTION
       ? 'undefined'
