@@ -36,7 +36,7 @@ function normalizeZodMessage(error: unknown): string {
   return (error as ZodError).issues
     .map(issue => {
       const themePath =
-        issue.path.length > 0 ? `Path: [${issue.path.join(', ')}]` : ''
+        issue.path.length > 0 ? `Path: "${issue.path.join('.')}"` : ''
       return `${issue.message}. ${themePath}`
     })
     .join('\n')
