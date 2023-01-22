@@ -31,10 +31,6 @@ export const useConfig = () => useContext(ConfigContext)
 let theme: DocsThemeConfig
 let isValidated = process.env.NODE_ENV === 'production'
 
-function lowerCaseFirstLetter(s: string) {
-  return s.charAt(0).toLowerCase() + s.slice(1)
-}
-
 export const ConfigProvider = ({
   children,
   value: { themeConfig, pageOpts }
@@ -58,21 +54,17 @@ export const ConfigProvider = ({
   }
   if (!isValidated) {
     try {
-      theme = themeSchema.parse(theme, {
-        errorMap: () => ({ message: 'Invalid theme config' })
-      })
-    } catch (err) {
-      console.error('[nextra] Error validating the theme config')
+      theme = themeSchema.parse(theme)
+    } catch (error) {
       console.error(
-        (err as ZodError).issues
-          .map(
-            issue =>
-              '[nextra] Error in config `' +
-              issue.path.join('.') +
-              '`: ' +
-              lowerCaseFirstLetter(issue.message || '')
-          )
-          .join('\n')
+        '[nextra-theme-docs] Error validating theme config\n\n',
+        ...(error as ZodError).issues.map(issue => {
+          const themePath =
+            issue.path.length > 0
+              ? `Theme path: [${issue.path.join(', ')}]`
+              : ''
+          return `${issue.message}. ${themePath}\n`
+        })
       )
     }
     isValidated = true
