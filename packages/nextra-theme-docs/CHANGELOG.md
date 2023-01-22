@@ -1,5 +1,19 @@
 # nextra-theme-docs
 
+## 2.2.11
+
+### Patch Changes
+
+- bcaf84a: fix treeshake of zod validation on prod build
+- e10bf74: add support for remote `[...catchAll]` routes
+
+  support meta keys with `/`
+
+  sanitize remote mdx by removing `import` statements
+
+- 6a0f428: add zod validation for \_meta.json "theme" property
+- 6a0f428: use `z.strictObject` instead `z.object` in zod theme validation, improve zod error messages
+
 ## 2.2.10
 
 ### Patch Changes
