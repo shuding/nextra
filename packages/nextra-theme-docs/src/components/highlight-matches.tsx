@@ -5,6 +5,28 @@ type MatchArgs = {
   match: string
 }
 
+let segmentor: Intl.Segmenter
+const getLastWord = (text: string) => {
+  if (typeof window === 'undefined' || typeof Intl === 'undefined') {
+    return text.split(' ').pop()
+  }
+  segmentor = segmentor || new Intl.Segmenter('en', { granularity: 'word' })
+  const segments = [...segmentor.segment(text)]
+  let word = ''
+
+  let last = segments.pop()
+  if (last) {
+    word = last.segment
+  }
+  while (last && !last.isWordLike) {
+    last = segments.pop()
+    if (last) {
+      word = last.segment + word
+    }
+  }
+  return word
+}
+
 export const HighlightMatches = memo<MatchArgs>(function HighlightMatches({
   value,
   match
@@ -19,9 +41,12 @@ export const HighlightMatches = memo<MatchArgs>(function HighlightMatches({
 
   if (value) {
     while ((result = regexp.exec(value)) !== null) {
+      const remaining = splitText.splice(0, result.index - index).join('')
       res.push(
         <Fragment key={id++}>
-          {splitText.splice(0, result.index - index).join('')}
+          {!index && remaining.length > 80
+            ? '...' + getLastWord(remaining)
+            : remaining}
           <span className="nx-text-primary-600">
             {splitText.splice(0, regexp.lastIndex - result.index).join('')}
           </span>

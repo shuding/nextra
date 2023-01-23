@@ -13,11 +13,15 @@ import {
 import { MenuProvider } from './menu'
 import type { ZodError } from 'zod'
 
-type Config<FrontMatterType = FrontMatter> = DocsThemeConfig &
-  Pick<
-    PageOpts<FrontMatterType>,
-    'flexsearch' | 'newNextLinkBehavior' | 'title' | 'frontMatter'
+type Config<FrontMatterType = FrontMatter> = DocsThemeConfig & {
+  title: PageOpts<FrontMatterType>['title']
+  frontMatter: Partial<
+    Pick<
+      PageOpts<FrontMatterType>,
+      'search' | 'newNextLinkBehavior' | 'title' | 'frontMatter'
+    >
   >
+}
 
 const ConfigContext = createContext<Config>({
   title: '',
@@ -104,12 +108,15 @@ export const ConfigProvider = ({
   }
   const extendedConfig: Config = {
     ...theme,
-    flexsearch: pageOpts.flexsearch,
     ...(typeof pageOpts.newNextLinkBehavior === 'boolean' && {
       newNextLinkBehavior: pageOpts.newNextLinkBehavior
     }),
     title: pageOpts.title,
-    frontMatter: pageOpts.frontMatter
+    frontMatter: pageOpts.frontMatter,
+    search: {
+      ...theme.search,
+      ...pageOpts.frontMatter.search
+    }
   }
 
   const { nextThemes } = extendedConfig

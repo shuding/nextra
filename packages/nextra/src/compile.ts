@@ -1,6 +1,6 @@
 import path from 'node:path'
 import { createRequire } from 'node:module'
-import type { ProcessorOptions } from '@mdx-js/mdx';
+import type { ProcessorOptions } from '@mdx-js/mdx'
 import { createProcessor } from '@mdx-js/mdx'
 import type { Processor } from '@mdx-js/mdx/lib/core'
 import remarkGfm from 'remark-gfm'
@@ -62,7 +62,7 @@ export async function compileMdx(
   loaderOptions: Pick<
     LoaderOptions,
     | 'staticImage'
-    | 'flexsearch'
+    | 'search'
     | 'defaultShowCopyCode'
     | 'readingTime'
     | 'latex'
@@ -76,9 +76,9 @@ export async function compileMdx(
   const structurizedData = Object.create(null)
 
   let searchIndexKey: string | null = null
-  if (typeof loaderOptions.flexsearch === 'object') {
-    if (loaderOptions.flexsearch.indexKey) {
-      searchIndexKey = loaderOptions.flexsearch.indexKey(
+  if (typeof loaderOptions.search === 'object') {
+    if (loaderOptions.search.indexKey) {
+      searchIndexKey = loaderOptions.search.indexKey(
         filePath,
         loaderOptions.route || '',
         loaderOptions.locale
@@ -89,7 +89,7 @@ export async function compileMdx(
     } else {
       searchIndexKey = loaderOptions.locale || DEFAULT_LOCALE
     }
-  } else if (loaderOptions.flexsearch) {
+  } else if (loaderOptions.search) {
     searchIndexKey = loaderOptions.locale || DEFAULT_LOCALE
   }
 
@@ -111,7 +111,7 @@ export async function compileMdx(
 
   const {
     staticImage,
-    flexsearch,
+    search,
     readingTime,
     latex,
     codeHighlight,
@@ -137,7 +137,7 @@ export async function compileMdx(
         remarkGfm,
         remarkHeadings,
         staticImage && remarkStaticImage,
-        searchIndexKey !== null && structurize(structurizedData, flexsearch),
+        searchIndexKey !== null && structurize(structurizedData, search),
         readingTime && remarkReadingTime,
         latex && remarkMath,
         isFileOutsideCWD && remarkReplaceImports

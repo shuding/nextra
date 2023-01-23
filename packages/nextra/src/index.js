@@ -77,7 +77,7 @@ const nextra = (themeOrNextraConfig, themeConfig) =>
           config.plugins ||= []
           config.plugins.push(nextraPlugin)
 
-          if (nextraConfig.flexsearch) {
+          if (nextraConfig.search) {
             const nextraSearchPlugin = new NextraSearchPlugin({})
             config.plugins.push(nextraSearchPlugin)
           }
