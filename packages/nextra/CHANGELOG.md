@@ -1,5 +1,13 @@
 # nextra
 
+## 2.2.13
+
+### Patch Changes
+
+- d1d873f: typed frontmatter -> `useConfig<YOUR_FRONTMATTER_TYPE>`
+- 6626356: prefer `import type`
+- 2234a13: fix raw `__esModule` string ☠️
+
 ## 2.2.12
 
 ### Patch Changes
