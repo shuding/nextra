@@ -1,5 +1,20 @@
 # nextra-theme-docs
 
+## 2.2.13
+
+### Patch Changes
+
+- 089112c: validate `_meta.json` files with zod
+- 23fc5b7: style improvements
+- d1d873f: typed frontmatter -> `useConfig<YOUR_FRONTMATTER_TYPE>`
+- 93b9596: fix overflow for main content on desktop and mobile
+- 6626356: prefer `import type`
+- 2234a13: fix raw `__esModule` string ☠️
+- Updated dependencies [d1d873f]
+- Updated dependencies [6626356]
+- Updated dependencies [2234a13]
+  - nextra@2.2.13
+
 ## 2.2.12
 
 ### Patch Changes
