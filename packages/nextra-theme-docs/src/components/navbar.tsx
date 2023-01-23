@@ -2,10 +2,9 @@ import type { ReactElement, ReactNode } from 'react'
 import cn from 'clsx'
 import { useRouter } from 'next/router'
 import { Menu, Transition } from '@headlessui/react'
-import { ArrowRightIcon } from 'nextra/icons'
+import { ArrowRightIcon, MenuIcon } from 'nextra/icons'
 
 import { useConfig, useMenu } from '../contexts'
-import { MenuIcon } from 'nextra/icons'
 import type { Item, PageItem, MenuItem} from '../utils';
 import { renderComponent, getFSRoute } from '../utils'
 import { Anchor } from './anchor'

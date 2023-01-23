@@ -1,7 +1,6 @@
-import type { MdxFile } from 'nextra'
+import type { MdxFile, Folder } from 'nextra'
 import type { LayoutProps } from '../types'
 import traverse from './traverse'
-import type { Folder } from 'nextra'
 
 export const getParent = ({ opts }: LayoutProps) => {
   let back: string | null = null
