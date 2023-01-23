@@ -38,6 +38,14 @@ summary {
   @apply nx-text-slate-700 dark:nx-text-slate-200;
 }
 
+.nextra-search .nextra-excerpt {
+  @apply nx-overflow-hidden nx-text-ellipsis;
+  display: -webkit-box;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
 @media (max-width: 767px) {
   .nextra-sidebar-container {
     @apply nx-fixed nx-pt-[calc(var(--nextra-navbar-height))] nx-top-0 nx-w-full nx-bottom-0 nx-z-[15] nx-overscroll-contain nx-bg-white dark:nx-bg-dark;
@@ -66,7 +74,7 @@ summary {
       @apply !nx-top-0;
     }
   }
-  .nextra-search .excerpt {
+  .nextra-search .nextra-excerpt {
     @apply nx-overflow-hidden nx-text-ellipsis;
     display: -webkit-box;
     line-clamp: 1;

@@ -11,16 +11,13 @@ export const DEFAULT_LOCALE = 'en-US'
 
 export const DEFAULT_CONFIG: Omit<NextraConfig, 'theme'> = {
   staticImage: true,
-  flexsearch: {
+  search: {
     codeblocks: true
   },
   codeHighlight: true
 }
 
-export const OFFICIAL_THEMES = [
-  'nextra-theme-docs',
-  'nextra-theme-blog'
-]
+export const OFFICIAL_THEMES = ['nextra-theme-docs', 'nextra-theme-blog']
 
 export const META_FILENAME = '_meta.json'
 export const DYNAMIC_META_FILENAME = '_meta.js'

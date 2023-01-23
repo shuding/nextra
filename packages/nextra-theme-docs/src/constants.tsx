@@ -1,12 +1,12 @@
 /* eslint sort-keys: error */
-import type { FC, ReactNode } from 'react';
+import type { FC, ReactNode } from 'react'
 import { isValidElement } from 'react'
 import { useRouter } from 'next/router'
-import { Anchor, Flexsearch, Footer, Navbar, TOC } from './components'
+import { Anchor, Fuzzsearch, Footer, Navbar, TOC } from './components'
 import { DiscordIcon, GitHubIcon } from 'nextra/icons'
 import { MatchSorterSearch } from './components/match-sorter-search'
 import { useConfig } from './contexts'
-import type { Item } from './utils';
+import type { Item } from './utils'
 import { useGitEditUrl, getGitIssueUrl } from './utils'
 import { z } from 'zod'
 import type { NavBarProps } from './components/navbar'
@@ -265,8 +265,8 @@ export const DEFAULT_THEME: DocsThemeConfig = {
   search: {
     component: function Search({ className, directories }) {
       const config = useConfig()
-      return config.flexsearch ? (
-        <Flexsearch className={className} />
+      return config.search ? (
+        <Fuzzsearch className={className} />
       ) : (
         <MatchSorterSearch className={className} directories={directories} />
       )

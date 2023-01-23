@@ -1,13 +1,5 @@
-import type {
-  ReactElement,
-  KeyboardEvent} from 'react';
-import {
-  Fragment,
-  useCallback,
-  useState,
-  useEffect,
-  useRef
-} from 'react'
+import type { ReactElement, KeyboardEvent } from 'react'
+import { Fragment, useCallback, useState, useEffect, useRef } from 'react'
 import cn from 'clsx'
 import { Transition } from '@headlessui/react'
 import { InformationCircleIcon, SpinnerIcon } from 'nextra/icons'
@@ -183,6 +175,9 @@ export function Search({
     </Transition>
   )
 
+  const errorMessage = renderString(config.search.error)
+  const loadingMessage = renderString(config.search.loading)
+
   return (
     <div className={cn('nextra-search nx-relative md:nx-w-64', className)}>
       {renderList && (
@@ -237,12 +232,12 @@ export function Search({
           {error ? (
             <span className="nx-flex nx-select-none nx-justify-center nx-gap-2 nx-p-8 nx-text-center nx-text-sm nx-text-red-500">
               <InformationCircleIcon className="nx-h-5 nx-w-5" />
-              {renderString(config.search.error)}
+              {errorMessage}
             </span>
           ) : loading ? (
             <span className="nx-flex nx-select-none nx-justify-center nx-gap-2 nx-p-8 nx-text-center nx-text-sm nx-text-gray-400">
               <SpinnerIcon className="nx-h-5 nx-w-5 nx-animate-spin" />
-              {renderString(config.search.loading)}
+              {loadingMessage}
             </span>
           ) : results.length > 0 ? (
             results.map(({ route, prefix, children, id }, i) => (
