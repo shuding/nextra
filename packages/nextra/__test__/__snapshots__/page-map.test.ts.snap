@@ -87,9 +87,6 @@ exports[`Page Process > pageMap en-US 1`] = `
           "title": "Remote",
           "type": "page",
         },
-        "test": {
-          "type": "page",
-        },
       },
       "kind": "Meta",
       "locale": "en-US",

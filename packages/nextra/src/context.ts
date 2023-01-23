@@ -36,9 +36,10 @@ function filter(
 
   for (const item of pageMap) {
     if (item.kind === 'Meta') continue
+    const meta = normalizeMeta(metaData[item.name])
     const page = {
       ...item,
-      meta: normalizeMeta(metaData[item.name])
+      ...(meta && { meta })
     } as Page
 
     if (page.kind === 'Folder') {
