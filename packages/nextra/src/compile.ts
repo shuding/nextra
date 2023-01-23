@@ -171,7 +171,8 @@ export async function compileMdx(
     const readingTime = vFile.data.readingTime as ReadingTime | undefined
 
     return {
-      result: String(vFile),
+      // https://github.com/shuding/nextra/issues/1032
+      result: String(vFile).replaceAll('__esModule', '_\\_esModule'),
       ...headingMeta,
       ...(readingTime && { readingTime }),
       structurizedData,

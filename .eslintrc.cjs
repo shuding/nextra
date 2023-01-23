@@ -18,7 +18,12 @@ module.exports = {
     // Rules for all files
     {
       files: '**/*.{js,jsx,cjs,mjs,ts,tsx,cts,mts}',
-      extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
+      extends: [
+        'eslint:recommended',
+        'plugin:@typescript-eslint/recommended',
+        'plugin:import/typescript'
+      ],
+      plugins: ['import'],
       rules: {
         'prefer-object-has-own': 'error',
         'logical-assignment-operators': [
@@ -33,6 +38,7 @@ module.exports = {
           'error',
           { VariableDeclarator: { object: true } }
         ],
+        'import/no-duplicates': 'error',
         // todo: enable
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-non-null-assertion': 'off',
