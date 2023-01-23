@@ -41,7 +41,7 @@ export const Anchor = forwardRef<HTMLAnchorElement, AnchorProps>(function (
     )
   }
 
-  if (nextVersion > 12 || config.frontMatter.newNextLinkBehavior) {
+  if (nextVersion > 12 || config.newNextLinkBehavior) {
     return (
       <NextLink ref={forwardedRef} href={href} {...props}>
         {children}

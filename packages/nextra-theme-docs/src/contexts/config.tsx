@@ -16,11 +16,10 @@ import type { ZodError } from 'zod'
 type Config<FrontMatterType = FrontMatter> = DocsThemeConfig & {
   title: PageOpts<FrontMatterType>['title']
   frontMatter: Partial<
-    Pick<
-      PageOpts<FrontMatterType>,
-      'search' | 'newNextLinkBehavior' | 'title' | 'frontMatter'
-    >
+    Pick<PageOpts<FrontMatterType>, 'search' | 'title' | 'frontMatter'>
   >
+} & {
+  newNextLinkBehavior?: boolean
 }
 
 const ConfigContext = createContext<Config>({
