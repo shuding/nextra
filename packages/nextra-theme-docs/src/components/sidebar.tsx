@@ -106,7 +106,7 @@ function FolderImpl({ item, anchors }: FolderProps): ReactElement {
     item.children = Object.entries(menu.items || {}).map(([key, item]) => {
       const route = routes[key] || {
         name: key,
-        locale: menu.locale,
+        ...('locale' in menu && { locale: menu.locale }),
         route: menu.route + '/' + key
       }
       return {
