@@ -138,8 +138,7 @@ export function Fuzzsearch({
     // Show the results for the top 10 pages
     const pageResults = pageSearcher
       .search(search, {
-        returnMatchData: true,
-        threshold: 0.8
+        returnMatchData: true
       })
       .map((r, index) => {
         return {
@@ -164,8 +163,7 @@ export function Fuzzsearch({
     const results: Result[] = []
     const sectionResults = sectionSearcher
       .search(search, {
-        returnMatchData: true,
-        threshold: 0.9
+        returnMatchData: true
       })
       .sort((a, b) => {
         const pageRankA = pageRank[a.item.pageRoute]
