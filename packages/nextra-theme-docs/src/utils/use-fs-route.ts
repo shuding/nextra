@@ -8,7 +8,7 @@ export const useFSRoute = () => {
   const { locale = DEFAULT_LOCALE, asPath, route } = useRouter()
 
   return useMemo(() => {
-    // asPath can return redirected url
+    // because for the 404 route `asPath` will be redirected URL and `normalizePages` will never return correct pageItem
     const clientRoute = ERROR_ROUTES.has(route) ? route : asPath
 
     const { pathname } = new URL(clientRoute, template)
