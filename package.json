@@ -29,7 +29,7 @@
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-react": "7.32.1",
     "eslint-plugin-react-hooks": "4.6.0",
-    "eslint-plugin-tailwindcss": "3.8.1",
+    "eslint-plugin-tailwindcss": "3.8.2",
     "eslint-plugin-typescript-sort-keys": "2.1.0",
     "prettier": "2.8.3",
     "prettier-plugin-tailwindcss": "0.2.1",
