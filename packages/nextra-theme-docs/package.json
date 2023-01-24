@@ -70,6 +70,7 @@
     "@types/react-dom": "^18.0.6",
     "@vitejs/plugin-react": "^3.0.1",
     "concurrently": "^7.3.0",
+    "jsdom": "^21.1.0",
     "next": "^13.1.1",
     "nextra": "workspace:*",
     "postcss": "^8.4.21",
