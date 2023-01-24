@@ -21,7 +21,8 @@ module.exports = {
       extends: [
         'eslint:recommended',
         'plugin:@typescript-eslint/recommended',
-        'plugin:import/typescript'
+        'plugin:import/typescript',
+        'prettier'
       ],
       plugins: ['import'],
       rules: {
@@ -39,6 +40,7 @@ module.exports = {
           { VariableDeclarator: { object: true } }
         ],
         'import/no-duplicates': 'error',
+        'prefer-regex-literals': ['error', { disallowRedundantWrapping: true }],
         // todo: enable
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-non-null-assertion': 'off',

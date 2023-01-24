@@ -1,4 +1,4 @@
-import type { NextraThemeLayoutProps, PageMapItem, PageOpts } from 'nextra'
+import type { NextraThemeLayoutProps, PageOpts } from 'nextra'
 
 import type { ReactElement, ReactNode } from 'react'
 import { useMemo } from 'react'
@@ -21,22 +21,7 @@ import { getComponents } from './mdx-components'
 import { ActiveAnchorProvider, ConfigProvider, useConfig } from './contexts'
 import type { PageTheme } from './constants'
 import { DEFAULT_LOCALE, PartialDocsThemeConfig } from './constants'
-import { getFSRoute, normalizePages, renderComponent } from './utils'
-
-function useDirectoryInfo(pageMap: PageMapItem[]) {
-  const { locale = DEFAULT_LOCALE, defaultLocale, asPath } = useRouter()
-
-  return useMemo(() => {
-    // asPath can return redirected url
-    const fsPath = getFSRoute(asPath, locale)
-    return normalizePages({
-      list: pageMap,
-      locale,
-      defaultLocale,
-      route: fsPath
-    })
-  }, [pageMap, locale, defaultLocale, asPath])
-}
+import { useFSRoute, normalizePages, renderComponent } from './utils'
 
 interface BodyProps {
   themeContext: PageTheme
@@ -129,6 +114,9 @@ const InnerLayout = ({
   children
 }: PageOpts & { children: ReactNode }): ReactElement => {
   const config = useConfig()
+  const { locale = DEFAULT_LOCALE, defaultLocale } = useRouter()
+  const fsPath = useFSRoute()
+
   const {
     activeType,
     activeIndex,
@@ -139,7 +127,16 @@ const InnerLayout = ({
     flatDirectories,
     flatDocsDirectories,
     directories
-  } = useDirectoryInfo(pageMap)
+  } = useMemo(
+    () =>
+      normalizePages({
+        list: pageMap,
+        locale,
+        defaultLocale,
+        route: fsPath
+      }),
+    [pageMap, locale, defaultLocale, fsPath]
+  )
 
   const themeContext = { ...activeThemeContext, ...frontMatter }
   const hideSidebar =
@@ -167,7 +164,6 @@ const InnerLayout = ({
       </nav>
     )
 
-  const { locale = DEFAULT_LOCALE } = useRouter()
   const localeConfig = config.i18n.find(l => l.locale === locale)
   const isRTL = localeConfig
     ? localeConfig.direction === 'rtl'
