@@ -1,6 +1,6 @@
 import type { PageMapItem, Folder, MdxFile } from 'nextra'
 import type { PageTheme, Display, IMenuItem } from '../constants';
-import { DEFAULT_PAGE_THEME } from '../constants'
+import { DEFAULT_PAGE_THEME, ERROR_ROUTES } from '../constants'
 
 function extendMeta(
   meta: string | Record<string, any> = {},
@@ -13,7 +13,9 @@ function extendMeta(
   return Object.assign({}, fallback, meta, { theme })
 }
 
-export interface Item extends MdxFile {
+type FolderWithoutChildren = Omit<Folder, 'children'>
+
+export type Item = (MdxFile | FolderWithoutChildren) & {
   title: string
   type: string
   children?: Item[]
@@ -23,7 +25,7 @@ export interface Item extends MdxFile {
   isUnderCurrentDocsTree?: boolean
 }
 
-export interface PageItem extends MdxFile {
+export type PageItem = (MdxFile | FolderWithoutChildren) & {
   title: string
   type: string
   href?: string
@@ -35,11 +37,11 @@ export interface PageItem extends MdxFile {
   isUnderCurrentDocsTree?: boolean
 }
 
-export interface MenuItem extends MdxFile, IMenuItem {
+export type MenuItem = (MdxFile | FolderWithoutChildren) & IMenuItem & {
   children?: PageItem[]
 }
 
-interface DocsItem extends MdxFile {
+type DocsItem = (MdxFile | FolderWithoutChildren) & {
   title: string
   type: string
   children?: DocsItem[]
@@ -57,8 +59,6 @@ function findFirstRoute(items: DocsItem[]): string | undefined {
     }
   }
 }
-
-const CUSTOM_ERROR_PAGES = ['/404', '/500']
 
 export function normalizePages({
   list,
@@ -214,6 +214,7 @@ export function normalizePages({
         underCurrentDocsRoot: underCurrentDocsRoot || isCurrentDocsTree,
         pageThemeContext: extendedPageThemeContext
       })
+
     const title = extendedMeta.title || (type !== 'separator' && a.name)
 
     const getItem = (): Item => ({
@@ -252,7 +253,12 @@ export function normalizePages({
           activeIndex = flatDocsDirectories.length
       }
     }
-    if (display === 'hidden' || CUSTOM_ERROR_PAGES.includes(a.route)) continue
+    if (
+      (display === 'hidden' && item.kind !== 'Folder') ||
+      ERROR_ROUTES.has(a.route)
+    ) {
+      continue
+    }
 
     // If this item has children
     if (normalizedChildren) {
@@ -275,10 +281,8 @@ export function normalizePages({
               flatDocsDirectories.length + normalizedChildren.activeIndex
             break
         }
-        if (a.withIndexPage) {
-          if (type === 'doc') {
-            activeIndex++
-          }
+        if (a.withIndexPage && type === 'doc') {
+          activeIndex++
         }
       }
 
@@ -305,10 +309,8 @@ export function normalizePages({
             docsItem.children.push(...normalizedChildren.docsDirectories)
           }
           // Itself is a doc page.
-          if (item.withIndexPage) {
-            if (display !== 'children') {
-              flatDocsDirectories.push(docsItem)
-            }
+          if (item.withIndexPage && display !== 'children') {
+            flatDocsDirectories.push(docsItem)
           }
       }
 
@@ -330,7 +332,7 @@ export function normalizePages({
     }
 
     if (type === 'doc' && display === 'children') {
-      // Hide the dectory itself and treat all its children as pages
+      // Hide the directory itself and treat all its children as pages
       if (docsItem.children) {
         directories.push(...docsItem.children)
         docsDirectories.push(...docsItem.children)

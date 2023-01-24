@@ -56,21 +56,18 @@ describe('collectCatchAllRoutes', () => {
             "locale": "en-US",
             "name": "configs",
             "route": "/remote/nested/configs",
-            "title": "Configs",
           },
           {
             "kind": "MdxPage",
             "locale": "en-US",
             "name": "custom-rules",
             "route": "/remote/nested/custom-rules",
-            "title": "Custom Rules",
           },
           {
             "kind": "MdxPage",
             "locale": "en-US",
             "name": "getting-started",
             "route": "/remote/nested/getting-started",
-            "title": "Getting Started",
           },
           {
             "children": [
@@ -88,14 +85,12 @@ describe('collectCatchAllRoutes', () => {
                 "locale": "en-US",
                 "name": "parser-options",
                 "route": "/remote/nested/getting-started/parser-options",
-                "title": "Parser Options",
               },
               {
                 "kind": "MdxPage",
                 "locale": "en-US",
                 "name": "parser",
                 "route": "/remote/nested/getting-started/parser",
-                "title": "Parser",
               },
               {
                 "children": [
@@ -111,7 +106,6 @@ describe('collectCatchAllRoutes', () => {
                     "locale": "en-US",
                     "name": "foo",
                     "route": "/remote/nested/getting-started/third-level/foo",
-                    "title": "Foo",
                   },
                 ],
                 "kind": "Folder",
@@ -128,7 +122,51 @@ describe('collectCatchAllRoutes', () => {
             "locale": "en-US",
             "name": "index",
             "route": "/remote/nested",
-            "title": "Index",
+          },
+        ],
+        "kind": "Folder",
+        "name": "nested",
+        "route": "/remote/nested",
+      }
+    `)
+  })
+
+  it('should not create MdxPage for "*" key', () => {
+    const meta = {
+      kind: 'Meta' as const,
+      data: createCatchAllMeta([], {
+        '*': {
+          type: 'page',
+          display: 'hidden',
+          theme: {
+            layout: 'full',
+            timestamp: false
+          }
+        }
+      })
+    }
+    const parent = {
+      kind: 'Folder' as const,
+      name: 'nested',
+      route: '/remote/nested',
+      children: [meta]
+    }
+    collectCatchAllRoutes(parent, meta)
+    expect(parent).toMatchInlineSnapshot(`
+      {
+        "children": [
+          {
+            "data": {
+              "*": {
+                "display": "hidden",
+                "theme": {
+                  "layout": "full",
+                  "timestamp": false,
+                },
+                "type": "page",
+              },
+            },
+            "kind": "Meta",
           },
         ],
         "kind": "Folder",

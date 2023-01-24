@@ -15,13 +15,12 @@ import scrollIntoView from 'scroll-into-view-if-needed'
 
 import { useConfig, useMenu, useActiveAnchor } from '../contexts'
 import type { Item, MenuItem, PageItem } from '../utils'
-import { getFSRoute, renderComponent } from '../utils'
+import { useFSRoute, renderComponent } from '../utils'
 import { LocaleSwitch } from './locale-switch'
 import { ThemeSwitch } from './theme-switch'
 import { ArrowRightIcon, ExpandIcon } from 'nextra/icons'
 import { Collapse } from './collapse'
 import { Anchor } from './anchor'
-import { DEFAULT_LOCALE } from '../constants'
 
 const TreeState: Record<string, boolean> = Object.create(null)
 
@@ -69,8 +68,7 @@ type FolderProps = {
 }
 
 function FolderImpl({ item, anchors }: FolderProps): ReactElement {
-  const { asPath, locale = DEFAULT_LOCALE } = useRouter()
-  const routeOriginal = getFSRoute(asPath, locale)
+  const routeOriginal = useFSRoute()
   const [route] = routeOriginal.split('#')
   const active = [route, route + '/'].includes(item.route + '/')
   const activeRouteInside = active || route.startsWith(item.route + '/')
@@ -108,7 +106,7 @@ function FolderImpl({ item, anchors }: FolderProps): ReactElement {
     item.children = Object.entries(menu.items || {}).map(([key, item]) => {
       const route = routes[key] || {
         name: key,
-        locale: menu.locale,
+        ...('locale' in menu && { locale: menu.locale }),
         route: menu.route + '/' + key
       }
       return {
@@ -208,8 +206,7 @@ function File({
   item: PageItem | Item
   anchors: Heading[]
 }): ReactElement {
-  const { asPath, locale = DEFAULT_LOCALE } = useRouter()
-  const route = getFSRoute(asPath, locale)
+  const route = useFSRoute()
   const onFocus = useContext(OnFocuseItemContext)
 
   // It is possible that the item doesn't have any route - for example an external link.
@@ -414,7 +411,7 @@ export function Sidebar({
             <div
               className={cn(
                 'nx-overflow-y-auto nx-p-4',
-                'nx-grow md:nx-h-[calc(100vh-var(--nextra-navbar-height)-3.75rem)]',
+                'nx-grow md:nx-h-[calc(100vh-var(--nextra-navbar-height)-var(--nextra-menu-height))]',
                 showSidebar ? 'nextra-scrollbar nx-pr-2' : 'no-scrollbar'
               )}
               ref={sidebarRef}

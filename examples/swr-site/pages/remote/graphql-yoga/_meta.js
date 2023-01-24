@@ -12,6 +12,11 @@ module.exports = async () => {
     files,
     // Next you can override the order of your meta files, folders should have `type: 'folder'` and have `items` property
     {
+      '*': {
+        theme: {
+          timestamp: false
+        }
+      },
       index: 'Quick Start',
       features: {
         title: '🚀 FeAtuReS',

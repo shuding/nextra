@@ -60,11 +60,13 @@ export function collectCatchAllRoutes(
   }
   for (const [key, value] of Object.entries(meta.data)) {
     if (!isFolder(value)) {
+      if (key === '*') {
+        continue
+      }
       parent.children.push({
         kind: 'MdxPage',
         ...(meta.locale && { locale: meta.locale }),
         name: key,
-        title: value || pageTitleFromFilename(key),
         route: normalizePageRoute(parent.route, key)
       })
       continue
@@ -89,7 +91,7 @@ export function collectCatchAllRoutes(
       {
         kind: 'Meta',
         data: value.items,
-        ...(meta.locale && { locale: meta.locale })
+        locale: meta.locale
       },
       false
     )

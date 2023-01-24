@@ -394,3 +394,5 @@ export const metaSchema = z
   .or(menuItemSchema)
   .or(separatorItemSchema)
   .or(itemSchema)
+
+export const ERROR_ROUTES = new Set(['/404', '/500'])

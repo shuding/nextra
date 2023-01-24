@@ -1,14 +1,12 @@
 import type { ReactElement, ReactNode } from 'react'
 import cn from 'clsx'
-import { useRouter } from 'next/router'
 import { Menu, Transition } from '@headlessui/react'
 import { ArrowRightIcon, MenuIcon } from 'nextra/icons'
 
 import { useConfig, useMenu } from '../contexts'
 import type { Item, PageItem, MenuItem} from '../utils';
-import { renderComponent, getFSRoute } from '../utils'
+import { renderComponent, useFSRoute } from '../utils'
 import { Anchor } from './anchor'
-import { DEFAULT_LOCALE } from '../constants'
 
 export type NavBarProps = {
   flatDirectories: Item[]
@@ -85,8 +83,7 @@ function NavbarMenu({
 
 export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
   const config = useConfig()
-  const { locale = DEFAULT_LOCALE, asPath } = useRouter()
-  const activeRoute = getFSRoute(asPath, locale)
+  const activeRoute = useFSRoute()
   const { menu, setMenu } = useMenu()
 
   return (
