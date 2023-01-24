@@ -51,12 +51,12 @@ const classes = {
     'contrast-more:nx-border-transparent contrast-more:hover:nx-border-gray-900 contrast-more:dark:hover:nx-border-gray-50'
   ),
   active: cn(
-    'nx-bg-primary-50 nx-font-bold nx-text-primary-600 dark:nx-bg-primary-500/10',
+    'nx-bg-primary-50 nx-font-semibold nx-text-primary-600 dark:nx-bg-primary-500/10',
     'contrast-more:nx-border-primary-500 contrast-more:dark:nx-border-primary-500'
   ),
   list: cn('nx-flex nx-flex-col nx-gap-1'),
   border: cn(
-    'nx-relative before:nx-absolute before:nx-inset-y-1.5',
+    'nx-relative before:nx-absolute before:nx-inset-y-1',
     'before:nx-w-px before:nx-bg-gray-200 before:nx-content-[""] dark:before:nx-bg-neutral-800',
     'ltr:nx-pl-3 ltr:before:nx-left-0 rtl:nx-pr-3 rtl:before:nx-right-0'
   )
@@ -161,7 +161,7 @@ function FolderImpl({ item, anchors }: FolderProps): ReactElement {
           )}
         />
       </Anchor>
-      <Collapse className="ltr:nx-pr-0 rtl:nx-pl-0" isOpen={open}>
+      <Collapse className="ltr:nx-pr-0 rtl:nx-pl-0 nx-pt-1" isOpen={open}>
         {Array.isArray(item.children) ? (
           <Menu
             className={cn(classes.border, 'ltr:nx-ml-3 rtl:nx-mr-3')}
@@ -465,7 +465,12 @@ export function Sidebar({
                 className={cn(showSidebar ? 'nx-grow' : 'max-md:nx-grow')}
               />
             )}
-            {config.darkMode && <ThemeSwitch lite={!showSidebar || hasI18n} />}
+            {config.darkMode && (
+              <ThemeSwitch
+                lite={!showSidebar || hasI18n}
+                className={showSidebar && !hasI18n ? 'nx-grow' : ''}
+              />
+            )}
             {config.sidebar.toggleButton && (
               <button
                 title={showSidebar ? 'Hide sidebar' : 'Show sidebar'}

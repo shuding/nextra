@@ -1,4 +1,4 @@
-import type { ReactElement} from 'react';
+import type { ReactElement } from 'react'
 import { Fragment } from 'react'
 import { Anchor } from './anchor'
 import cn from 'clsx'
@@ -11,7 +11,7 @@ export function Breadcrumb({
   activePath: Item[]
 }): ReactElement {
   return (
-    <div className="nextra-breadcrumb nx-mt-2.5 nx-flex nx-items-center nx-gap-1 nx-overflow-hidden nx-text-sm nx-text-gray-500 contrast-more:nx-text-current">
+    <div className="nextra-breadcrumb nx-mt-1.5 nx-flex nx-items-center nx-gap-1 nx-overflow-hidden nx-text-sm nx-text-gray-500 contrast-more:nx-text-current">
       {activePath.map((item, index) => {
         const isLink = !item.children || item.withIndexPage
         const isActive = index === activePath.length - 1

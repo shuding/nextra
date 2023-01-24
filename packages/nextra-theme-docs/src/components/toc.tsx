@@ -1,4 +1,4 @@
-import type { ReactElement} from 'react';
+import type { ReactElement } from 'react'
 import { useEffect, useRef, useMemo } from 'react'
 import cn from 'clsx'
 import type { Heading } from 'nextra'
@@ -60,7 +60,7 @@ export function TOC({ headings, filePath }: TOCProps): ReactElement {
     <div
       ref={tocRef}
       className={cn(
-        'nextra-scrollbar nx-sticky nx-top-16 nx-overflow-y-auto nx-pr-4 nx-pt-8 nx-text-sm [hyphens:auto]',
+        'nextra-scrollbar nx-sticky nx-top-16 nx-overflow-y-auto nx-pr-4 nx-pt-6 nx-text-sm [hyphens:auto]',
         'nx-max-h-[calc(100vh-var(--nextra-navbar-height)-env(safe-area-inset-bottom))] ltr:-nx-mr-4 rtl:-nx-ml-4'
       )}
     >
