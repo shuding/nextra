@@ -91,7 +91,7 @@ export const ConfigProvider = ({
   }
   if (process.env.NODE_ENV !== 'production' && !isValidated) {
     try {
-      theme = themeSchema.parse(theme)
+      themeSchema.parse(theme)
     } catch (error) {
       console.error(
         `[nextra-theme-docs] Error validating theme config file.\n\n${normalizeZodMessage(

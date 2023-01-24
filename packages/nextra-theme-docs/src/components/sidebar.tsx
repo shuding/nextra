@@ -106,7 +106,7 @@ function FolderImpl({ item, anchors }: FolderProps): ReactElement {
     item.children = Object.entries(menu.items || {}).map(([key, item]) => {
       const route = routes[key] || {
         name: key,
-        locale: menu.locale,
+        ...('locale' in menu && { locale: menu.locale }),
         route: menu.route + '/' + key
       }
       return {
@@ -411,7 +411,7 @@ export function Sidebar({
             <div
               className={cn(
                 'nx-overflow-y-auto nx-p-4',
-                'nx-grow md:nx-h-[calc(100vh-var(--nextra-navbar-height)-3.75rem)]',
+                'nx-grow md:nx-h-[calc(100vh-var(--nextra-navbar-height)-var(--nextra-menu-height))]',
                 showSidebar ? 'nextra-scrollbar nx-pr-2' : 'no-scrollbar'
               )}
               ref={sidebarRef}
