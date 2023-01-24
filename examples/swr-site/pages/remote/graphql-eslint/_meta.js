@@ -12,7 +12,12 @@ module.exports = async () => {
     files,
     // Next you can override the order of your meta files, folders should have `type: 'folder'` and have `items` property
     {
-      index: 'Introduction',
+      index: {
+        title: 'Introduction',
+        theme: {
+          toc: false
+        }
+      },
       'getting-started': {
         type: 'folder',
         title: '🦄 GETTING Started',
