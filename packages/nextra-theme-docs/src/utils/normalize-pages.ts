@@ -1,6 +1,6 @@
 import type { PageMapItem, Folder, MdxFile } from 'nextra'
 import type { PageTheme, Display, IMenuItem } from '../constants';
-import { DEFAULT_PAGE_THEME } from '../constants'
+import { DEFAULT_PAGE_THEME, ERROR_ROUTES } from '../constants'
 
 function extendMeta(
   meta: string | Record<string, any> = {},
@@ -57,8 +57,6 @@ function findFirstRoute(items: DocsItem[]): string | undefined {
     }
   }
 }
-
-const CUSTOM_ERROR_PAGES = ['/404', '/500']
 
 export function normalizePages({
   list,
@@ -252,7 +250,7 @@ export function normalizePages({
           activeIndex = flatDocsDirectories.length
       }
     }
-    if (display === 'hidden' || CUSTOM_ERROR_PAGES.includes(a.route)) continue
+    if (display === 'hidden' || ERROR_ROUTES.has(a.route)) continue
 
     // If this item has children
     if (normalizedChildren) {
