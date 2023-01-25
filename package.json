@@ -32,7 +32,7 @@
     "eslint-plugin-tailwindcss": "3.8.2",
     "eslint-plugin-typescript-sort-keys": "2.1.0",
     "prettier": "2.8.3",
-    "prettier-plugin-tailwindcss": "0.2.1",
+    "prettier-plugin-tailwindcss": "0.2.2",
     "rimraf": "4.1.2",
     "tsup": "6.5.0",
     "turbo": "1.7.0",
