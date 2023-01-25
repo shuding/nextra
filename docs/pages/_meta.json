@@ -1,27 +1,27 @@
 {
   "index": {
-    "title": "Nextra",
     "type": "page",
+    "title": "Nextra",
     "display": "hidden",
     "theme": {
       "layout": "raw"
     }
   },
   "docs": {
-    "title": "Documentation",
-    "type": "page"
+    "type": "page",
+    "title": "Documentation"
   },
   "showcase": {
-    "title": "Showcase",
     "type": "page",
+    "title": "Showcase",
     "theme": {
       "typesetting": "article",
       "layout": "full"
     }
   },
   "about": {
-    "title": "About",
     "type": "page",
+    "title": "About",
     "theme": {
       "typesetting": "article"
     }

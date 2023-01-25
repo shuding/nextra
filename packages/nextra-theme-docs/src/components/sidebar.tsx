@@ -81,14 +81,14 @@ function FolderImpl({ item, anchors }: FolderProps): ReactElement {
   const config = useConfig()
   const { theme } = item as Item
   const open =
-    TreeState[item.route] !== undefined
-      ? TreeState[item.route] || focusedRouteInside
-      : active ||
+    TreeState[item.route] === undefined
+      ? active ||
         activeRouteInside ||
         focusedRouteInside ||
         (theme && 'collapsed' in theme
           ? !theme.collapsed
           : level < config.sidebar.defaultMenuCollapseLevel)
+      : TreeState[item.route] || focusedRouteInside
 
   const rerender = useState({})[1]
 

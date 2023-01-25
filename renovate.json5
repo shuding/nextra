@@ -1,0 +1,24 @@
+{
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+  extends: ['config:base'],
+  packageRules: [
+    {
+      groupName: 'lint',
+      matchPackageNames: [
+        '@next/eslint-plugin-next',
+        '@typescript-eslint/eslint-plugin',
+        '@typescript-eslint/parser',
+        'eslint',
+        'eslint-config-prettier',
+        'eslint-plugin-import',
+        'eslint-plugin-react',
+        'eslint-plugin-react-hooks',
+        'eslint-plugin-tailwindcss',
+        'eslint-plugin-typescript-sort-keys',
+        'eslint-plugin-unicorn',
+        'prettier',
+        'prettier-plugin-tailwindcss'
+      ]
+    }
+  ]
+}

@@ -5,7 +5,8 @@ import {
   DEFAULT_LOCALE,
   DEFAULT_CONFIG,
   MARKDOWN_EXTENSION_REGEX,
-  MARKDOWN_EXTENSIONS
+  MARKDOWN_EXTENSIONS,
+  DEFAULT_LOCALES
 } from './constants'
 
 const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
@@ -24,11 +25,8 @@ const nextra = (themeOrNextraConfig, themeConfig) =>
         '[nextra] You have Next.js i18n enabled, read here https://nextjs.org/docs/advanced-features/i18n-routing for the docs.'
       )
     }
-
-    const nextraPlugin = new NextraPlugin({
-      ...nextraConfig,
-      locales: nextConfig.i18n?.locales || ['']
-    })
+    const locales = nextConfig.i18n?.locales || DEFAULT_LOCALES
+    const nextraPlugin = new NextraPlugin({ ...nextraConfig, locales })
 
     const rewrites = async () => {
       const rules = [
@@ -54,7 +52,7 @@ const nextra = (themeOrNextraConfig, themeConfig) =>
 
     const nextraLoaderOptions = {
       ...nextraConfig,
-      locales: nextConfig.i18n?.locales || [''],
+      locales,
       defaultLocale: nextConfig.i18n?.defaultLocale || DEFAULT_LOCALE,
       pageMapCache,
       newNextLinkBehavior: nextConfig.experimental?.newNextLinkBehavior
