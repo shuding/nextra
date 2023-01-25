@@ -527,6 +527,12 @@ exports[`context > getAllPages() > should work 1`] = `
             "name": "react-native",
             "route": "/docs/advanced/react-native",
           },
+          {
+            "kind": "MdxPage",
+            "locale": "en-US",
+            "name": "scrollbar-x",
+            "route": "/docs/advanced/scrollbar-x",
+          },
         ],
         "kind": "Folder",
         "meta": {},
@@ -1478,6 +1484,12 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
         "name": "react-native",
         "route": "/docs/advanced/react-native",
       },
+      {
+        "kind": "MdxPage",
+        "locale": "en-US",
+        "name": "scrollbar-x",
+        "route": "/docs/advanced/scrollbar-x",
+      },
     ],
     "kind": "Folder",
     "meta": {},
@@ -1739,6 +1751,12 @@ exports[`context > getPagesUnderRoute() > should work 1`] = `
     "locale": "ru",
     "name": "react-native",
     "route": "/docs/advanced/react-native",
+  },
+  {
+    "kind": "MdxPage",
+    "locale": "en-US",
+    "name": "scrollbar-x",
+    "route": "/docs/advanced/scrollbar-x",
   },
 ]
 `;
