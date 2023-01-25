@@ -38,8 +38,8 @@ const nextra = (themeOrNextraConfig, themeConfig) =>
         }
       ]
 
-      if (nextraPlugin.rewrites) {
-        const originalRewrites = await nextraPlugin.rewrites()
+      if (nextConfig.rewrites) {
+        const originalRewrites = await nextConfig.rewrites()
         if (Array.isArray(originalRewrites)) {
           return [...originalRewrites, ...rules]
         }
