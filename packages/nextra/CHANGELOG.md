@@ -1,5 +1,13 @@
 # nextra
 
+## 2.2.14
+
+### Patch Changes
+
+- bcaba9c: fix capitalizing sidebar links + tests
+- a683c84: fix `*` key for `collectCatchAll`
+- a404ef7: fix rewrites
+
 ## 2.2.13
 
 ### Patch Changes
