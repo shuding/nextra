@@ -1,3 +1,5 @@
+import { OptionTable } from 'components/table'
+
 # Syntax Highlighting
 
 Nextra uses [Shiki](https://shiki.matsu.io) to do syntax highlighting at build time. It’s very reliable and performant. For example, adding this in your Markdown file:
@@ -13,6 +15,12 @@ And it renders:
 ```js
 console.log('hello, world')
 ```
+
+You can opt out of syntax highlighting for using one of your own. You can disable syntax highlighting globally by setting ```codeHighlight: false``` in your Nextra configuration (next.config.js file)
+
+<OptionTable options={[
+  ['codeHighlight', 'boolean' , 'Enable or Disable syntax highlighting. Defaults to `true`.'],
+]} />
 
 ## Features
 
