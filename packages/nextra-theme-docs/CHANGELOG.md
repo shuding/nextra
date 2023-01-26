@@ -1,5 +1,19 @@
 # nextra-theme-docs
 
+## 2.2.14
+
+### Patch Changes
+
+- bcaba9c: fix capitalizing sidebar links + tests
+- f300fe7: fix missing sidebar nav links while applying `"display": "hidden"` for folder
+- 71257cd: style improvements
+- efd8c71: fix for `theme: { footer: false }` still showed the footer
+- 086cf7b: fix scrollbar for table and tabs
+- Updated dependencies [bcaba9c]
+- Updated dependencies [a683c84]
+- Updated dependencies [a404ef7]
+  - nextra@2.2.14
+
 ## 2.2.13
 
 ### Patch Changes
