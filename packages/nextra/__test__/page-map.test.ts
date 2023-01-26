@@ -14,7 +14,13 @@ describe('Page Process', () => {
   let pageMap: PageMapItem[]
   let fileMap: FileMap
   beforeAll(async () => {
-    const { items, fileMap: data } = await collectFiles(PAGES_DIR, [''])
+    const nextConfig = await import(
+      path.join(CWD, '..', '..', 'examples', 'swr-site', 'next.config.mjs')
+    )
+    const { items, fileMap: data } = await collectFiles(
+      PAGES_DIR,
+      nextConfig.default.i18n.locales
+    )
     pageMap = items
     fileMap = data
   })
@@ -55,11 +61,33 @@ describe('Page Process', () => {
     expect(gettingStartData.pageMap).toEqual(indexData.pageMap)
   })
 
-  it("should not add to pageMap folders that doesn't contain markdown files", async () => {
+  it("should not add `_meta.json` file if folder doesn't contain markdown files", async () => {
     const { items } = await collectFiles(
-      path.join(PAGES_DIR, 'docs/test-non-md-folders'),
-      ['']
+      path.join(
+        CWD,
+        '__test__',
+        'fixture',
+        'page-maps',
+        'folder-without-markdown-files'
+      )
     )
-    expect(items.length).toBe(0)
+    expect(items).toEqual([])
+  })
+
+  it('should add `_meta.json` file if it missing', async () => {
+    const { items } = await collectFiles(
+      path.join(
+        CWD,
+        '__test__',
+        'fixture',
+        'page-maps',
+        'folder-without-meta-json'
+      )
+    )
+    expect(items).toEqual([
+      { kind: 'MdxPage', name: 'callout', route: '/callout' },
+      { kind: 'MdxPage', name: 'tabs', route: '/tabs' },
+      { kind: 'Meta', data: { callout: 'Callout', tabs: 'Tabs' } }
+    ])
   })
 })

@@ -1,5 +1,10 @@
 import { normalizeMeta } from './utils'
-import type { MetaJsonFile, PageMapItem, Page, NextraInternalGlobal } from './types'
+import type {
+  MetaJsonFile,
+  PageMapItem,
+  Page,
+  NextraInternalGlobal
+} from './types'
 import { NEXTRA_INTERNAL } from './constants'
 
 function getContext(name: string): {
@@ -39,7 +44,7 @@ function filter(
     const meta = normalizeMeta(metaData[item.name])
     const page = {
       ...item,
-      ...(meta && { meta })
+      ...(Object.keys(meta || {}).length > 0 && { meta })
     } as Page
 
     if (page.kind === 'Folder') {

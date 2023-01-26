@@ -5,17 +5,17 @@
     "display": "hidden"
   },
   "docs": {
-    "title": "Docs",
-    "type": "page"
+    "type": "page",
+    "title": "Docs"
   },
   "remote": {
-    "title": "Remote",
     "type": "page",
+    "title": "Remote",
     "href": "/remote/4423220"
   },
   "about": {
-    "title": "About",
     "type": "menu",
+    "title": "About",
     "items": {
       "contributors": {
         "title": "Contributors",
@@ -34,15 +34,15 @@
     }
   },
   "examples": {
-    "title": "Examples",
     "type": "page",
+    "title": "Examples",
     "theme": {
       "layout": "full"
     }
   },
   "blog": {
-    "title": "Blog",
     "type": "page",
+    "title": "Blog",
     "theme": {
       "sidebar": false,
       "toc": true,
@@ -52,9 +52,9 @@
     }
   },
   "nextra_link": {
+    "type": "page",
     "title": "Nextra ↗",
     "href": "https://github.com/shuding/nextra",
-    "type": "page",
     "newWindow": true
   },
   "404": {

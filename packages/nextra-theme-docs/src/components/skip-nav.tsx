@@ -53,9 +53,8 @@ export const SkipNavLink = forwardRef<HTMLAnchorElement, SkipNavLinkProps>(
     forwardedRef
   ): ReactElement {
     const className =
-      providedClassName !== undefined // Give the option to the user to pass a falsy other than undefined to remove the default styles
-        ? providedClassName
-        : styled // Give the user a way to opt-in the default style provided with the theme. Probably remove this option in the next major version (v3.x) and just do a check to use the providedClassName or the default
+      providedClassName === undefined // Give the option to the user to pass a falsy other than undefined to remove the default styles
+        ? styled // Give the user a way to opt-in the default style provided with the theme. Probably remove this option in the next major version (v3.x) and just do a check to use the providedClassName or the default
         ? cn(
             'nx-sr-only',
             'focus:nx-not-sr-only focus:nx-fixed focus:nx-z-50 focus:nx-m-3 focus:nx-ml-4 focus:nx-h-[calc(var(--nextra-navbar-height)-1.5rem)] focus:nx-rounded-lg focus:nx-border focus:nx-px-3 focus:nx-py-2 focus:nx-align-middle focus:nx-text-sm focus:nx-font-bold',
@@ -64,6 +63,7 @@ export const SkipNavLink = forwardRef<HTMLAnchorElement, SkipNavLinkProps>(
             'focus:nx-border-neutral-400 focus:dark:nx-border-neutral-800'
           )
         : ''
+        : providedClassName
 
     return (
       <a
@@ -71,7 +71,7 @@ export const SkipNavLink = forwardRef<HTMLAnchorElement, SkipNavLinkProps>(
         ref={forwardedRef}
         href={`#${id || DEFAULT_ID}`}
         className={className}
-        // TODO: Remove in version v3.x. Must keep for compability reasons
+        // TODO: Remove in version v3.x. Must keep for compatibility reasons
         data-reach-skip-link=""
       >
         {label}

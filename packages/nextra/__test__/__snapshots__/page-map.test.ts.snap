@@ -87,6 +87,7 @@ exports[`Page Process > pageMap en-US 1`] = `
           "title": "Remote",
           "type": "page",
         },
+        "test": "Test",
       },
       "kind": "Meta",
       "locale": "en-US",
@@ -100,6 +101,7 @@ exports[`Page Process > pageMap en-US 1`] = `
               "theme": {
                 "layout": "raw",
               },
+              "title": "A Page",
               "type": "page",
             },
             "acknowledgement": "🧩 Acknowledgement",
@@ -188,38 +190,66 @@ exports[`Page Process > pageMap en-US 1`] = `
               "type": "separator",
             },
             "404-500": "404/500 Custom Error Pages",
-            "advanced": {},
-            "arguments": {},
+            "advanced": {
+              "title": "Advanced",
+            },
+            "arguments": {
+              "title": "Arguments",
+            },
+            "callout": "Callout",
             "change-log": {
               "theme": {
                 "sidebar": false,
               },
+              "title": "Change Log",
             },
+            "code-block-without-language": "Code Block without Language",
             "conditional-fetching": "Conditional Data Fetching",
-            "data-fetching": {},
+            "data-fetching": {
+              "title": "Data Fetching",
+            },
             "error-handling": {
               "display": "hidden",
+              "title": "Error Handling",
             },
-            "getting-started": {},
+            "getting-started": {
+              "title": "Getting Started",
+            },
             "github_link": {
               "href": "https://github.com/shuding/nextra",
               "newWindow": true,
               "title": "GitHub 🐙 →",
             },
-            "global-configuration": {},
-            "middleware": {},
-            "mutation": {},
-            "options": {},
-            "pagination": {},
-            "prefetching": {},
+            "global-configuration": {
+              "title": "Global Configuration",
+            },
+            "middleware": {
+              "title": "Middleware",
+            },
+            "mutation": {
+              "title": "Mutation",
+            },
+            "options": {
+              "title": "Options",
+            },
+            "pagination": {
+              "title": "Pagination",
+            },
+            "prefetching": {
+              "title": "Prefetching",
+            },
             "raw-layout": {
               "theme": {
                 "layout": "raw",
               },
+              "title": "Raw Layout",
             },
             "revalidation": "Auto Revalidation",
-            "suspense": {},
+            "suspense": {
+              "title": "Suspense",
+            },
             "typescript": "TypeScript :)",
+            "understanding": "Understanding",
             "with-nextjs": "Next.js SSG and SSR",
             "wrap-toc-items": "Wrap Table of Content Items",
           },
@@ -239,8 +269,15 @@ exports[`Page Process > pageMap en-US 1`] = `
                   "title": "Do Not Use",
                   "type": "separator",
                 },
+                "cache": "Cache",
+                "code-highlighting": "Code Highlighting",
+                "dynamic-markdown-import": "Dynamic Markdown Import",
                 "file-name.with.DOTS": "Filenames with Dots",
+                "images": "Images",
+                "markdown-import": "Markdown Import",
                 "more": "More: A Super Super Super Super Long Directory",
+                "performance": "Performance",
+                "react-native": "React Native",
               },
               "kind": "Meta",
               "locale": "en-US",
@@ -309,10 +346,26 @@ exports[`Page Process > pageMap en-US 1`] = `
                       "name": "two",
                       "route": "/docs/advanced/more/tree/two",
                     },
+                    {
+                      "data": {
+                        "one": "One",
+                        "three": "Three",
+                        "two": "Two",
+                      },
+                      "kind": "Meta",
+                      "locale": "en-US",
+                    },
                   ],
                   "kind": "Folder",
                   "name": "tree",
                   "route": "/docs/advanced/more/tree",
+                },
+                {
+                  "data": {
+                    "loooooooooooooooooooong-title": "Loooooooooooooooooooong Title",
+                  },
+                  "kind": "Meta",
+                  "locale": "en-US",
                 },
               ],
               "kind": "Folder",
@@ -479,13 +532,18 @@ exports[`Page Process > pageMap en-US 1`] = `
           "data": {
             "auth": "Authentication",
             "basic": "Basic Usage",
-            "error-handling": {},
+            "error-handling": {
+              "title": "Error Handling",
+            },
             "full": {
               "theme": {
                 "layout": "raw",
               },
+              "title": "Full",
             },
-            "infinite-loading": {},
+            "infinite-loading": {
+              "title": "Infinite Loading",
+            },
             "ssr": "Next.js SSR",
           },
           "kind": "Meta",
@@ -646,6 +704,7 @@ exports[`Page Process > pageMap ru 1`] = `
               "theme": {
                 "layout": "raw",
               },
+              "title": "A Page",
               "type": "page",
             },
             "acknowledgement": "🧩 Acknowledgement",
@@ -721,6 +780,7 @@ exports[`Page Process > pageMap ru 1`] = `
             "revalidation": "Авто-ревалидация",
             "suspense": "Задержка (Suspense)",
             "typescript": "Typescript",
+            "understanding": "Understanding",
             "with-nextjs": "Next.js SSG и SSR",
             "wrap-toc-items": "Обернуть таблицу содержимого элементов",
           },
@@ -773,6 +833,15 @@ exports[`Page Process > pageMap ru 1`] = `
                       "name": "two",
                       "route": "/docs/advanced/more/tree/two",
                     },
+                    {
+                      "data": {
+                        "one": "One",
+                        "three": "Three",
+                        "two": "Two",
+                      },
+                      "kind": "Meta",
+                      "locale": "en-US",
+                    },
                   ],
                   "kind": "Folder",
                   "name": "tree",
@@ -783,6 +852,13 @@ exports[`Page Process > pageMap ru 1`] = `
                   "locale": "en-US",
                   "name": "loooooooooooooooooooong-title",
                   "route": "/docs/advanced/more/loooooooooooooooooooong-title",
+                },
+                {
+                  "data": {
+                    "loooooooooooooooooooong-title": "Loooooooooooooooooooong Title",
+                  },
+                  "kind": "Meta",
+                  "locale": "en-US",
                 },
               ],
               "kind": "Folder",

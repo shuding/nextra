@@ -24,6 +24,7 @@ import pLimit from 'p-limit'
 
 import {
   CWD,
+  DEFAULT_LOCALES,
   DYNAMIC_META_FILENAME,
   MARKDOWN_EXTENSION_REGEX,
   META_FILENAME
@@ -54,7 +55,7 @@ const limit = pLimit(20)
 
 export async function collectFiles(
   dir: string,
-  locales: string[],
+  locales = DEFAULT_LOCALES,
   route = '/',
   fileMap: FileMap = Object.create(null)
 ): Promise<{ items: PageMapItem[]; fileMap: FileMap }> {
@@ -146,7 +147,7 @@ export async function collectFiles(
           '[nextra] "meta.json" was renamed to "_meta.json". Rename the following file:',
           path.relative(CWD, filePath)
         )
-      } else if (/_meta\.(jsx|ts|tsx)$/.test(fileName)) {
+      } else if (/_meta\.(jsx|ts|tsx|cjs|mjs)$/.test(fileName)) {
         console.error(
           `[nextra] "${fileName}" is not currently supported, please rename the following file to "${DYNAMIC_META_FILENAME}":`,
           path.relative(CWD, filePath)
@@ -164,8 +165,7 @@ export async function collectFiles(
     const item = items[i]
     if (item.kind === 'MdxPage') {
       mdxPages.push(item)
-    }
-    if (item.kind === 'Meta') {
+    } else if (item.kind === 'Meta') {
       // It is possible that it doesn't have a locale suffixed, we use '' here.
       metaLocaleIndexes.set(item.locale || '', i)
     }
@@ -174,7 +174,7 @@ export async function collectFiles(
   // In the current level, find the corresponding meta file for each locale and
   // extend the fallback meta data we get from the file system.
   for (const locale of locales) {
-    const metaIndex = metaLocaleIndexes.get(locale)
+    let metaIndex = metaLocaleIndexes.get(locale)
 
     const defaultMeta = sortPages(mdxPages, locale)
 
@@ -184,14 +184,26 @@ export async function collectFiles(
 
     const metaPath = path.join(dir, metaFilename) as MetaJsonPath
 
+    if (metaIndex === undefined && defaultMeta.length > 0) {
+      // Create a new meta file if it doesn't exist.
+      const meta = {
+        kind: 'Meta' as const,
+        ...(locale && { locale }),
+        data: Object.fromEntries(defaultMeta)
+      }
+      fileMap[metaPath] = meta
+      items.push(meta)
+      metaIndex = items.length - 1
+    }
+
     if (metaIndex !== undefined) {
       // Fill with the fallback. Note that we need to keep the original order.
-      const meta = { ...(items[metaIndex] as MetaJsonFile) }
-      for (const [key, value] of defaultMeta) {
-        meta.data[key] ||= value;
+      const meta = { ...items[metaIndex] } as MetaJsonFile
+      for (const [key, capitalizedTitle] of defaultMeta) {
+        meta.data[key] ||= capitalizedTitle
         const metaItem = meta.data[key]
         if (typeof metaItem === 'object') {
-          metaItem.title ||= value
+          metaItem.title ||= capitalizedTitle
         }
       }
       fileMap[metaPath] = meta

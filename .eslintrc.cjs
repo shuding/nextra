@@ -24,7 +24,7 @@ module.exports = {
         'plugin:import/typescript',
         'prettier'
       ],
-      plugins: ['import'],
+      plugins: ['import', 'unicorn'],
       rules: {
         'prefer-object-has-own': 'error',
         'logical-assignment-operators': [
@@ -40,6 +40,8 @@ module.exports = {
           { VariableDeclarator: { object: true } }
         ],
         'import/no-duplicates': 'error',
+        'no-negated-condition': 'off',
+        'unicorn/no-negated-condition': 'error',
         'prefer-regex-literals': ['error', { disallowRedundantWrapping: true }],
         // todo: enable
         '@typescript-eslint/no-explicit-any': 'off',
