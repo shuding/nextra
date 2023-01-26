@@ -78,6 +78,27 @@ export default {
         titleTemplate: '%s – SWR'
       }
     }
+    return {
+      titleTemplate: undefined
+    }
+  },
+}
+```
+
+If you are using i18n, the `route` will change from `/` to `/index.[locale]` for the homepage. Modify the check to catch all translations of the homepage.
+
+```jsx
+export default {
+  useNextSeoProps() {
+    const { route } = useRouter()
+    if (!route.startsWith('/index.')) {
+      return {
+        titleTemplate: '%s – SWR'
+      }
+    }
+    return {
+      titleTemplate: undefined
+    }
   },
 }
 ```
