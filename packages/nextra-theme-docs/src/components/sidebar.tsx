@@ -417,7 +417,7 @@ export function Sidebar({
               ref={sidebarRef}
             >
               {/* without asPopover check <Collapse />'s inner.clientWidth on `layout: "raw"` will be 0 and element will not have width on initial loading */}
-              {!asPopover && (
+              {(!asPopover || !showSidebar) && (
                 <Collapse isOpen={showSidebar} horizontal>
                   <Menu
                     className="max-md:nx-hidden"
