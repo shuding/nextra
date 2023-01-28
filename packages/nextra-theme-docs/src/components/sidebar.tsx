@@ -410,9 +410,9 @@ export function Sidebar({
           >
             <div
               className={cn(
-                'nx-overflow-y-auto nx-p-4',
-                'nx-grow md:nx-h-[calc(100vh-var(--nextra-navbar-height)-var(--nextra-menu-height))]',
-                showSidebar ? 'nextra-scrollbar nx-pr-2' : 'no-scrollbar'
+                'nx-overflow-y-auto nx-overflow-x-hidden',
+                'nx-p-4 nx-grow md:nx-h-[calc(100vh-var(--nextra-navbar-height)-var(--nextra-menu-height))]',
+                showSidebar ? 'nextra-scrollbar' : 'no-scrollbar'
               )}
               ref={sidebarRef}
             >
