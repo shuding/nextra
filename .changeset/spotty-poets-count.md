@@ -2,4 +2,4 @@
 'nextra': patch
 ---
 
-fix custom class names fully overriding default component styles
+do not override `className` for `<Td />`,  `<Th />` and  `<Tr />` components
