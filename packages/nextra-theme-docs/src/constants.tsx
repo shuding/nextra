@@ -171,32 +171,14 @@ export const DEFAULT_THEME: DocsThemeConfig = {
   darkMode: true,
   direction: 'ltr',
   docsRepositoryBase: 'https://github.com/shuding/nextra',
-  editLink: {
-    component: function EditLink({ className, filePath, children }) {
-      const editUrl = useGitEditUrl(filePath)
-      if (!editUrl) {
-        return null
-      }
-      return (
-        <Anchor className={className} href={editUrl}>
-          {children}
-        </Anchor>
-      )
-    },
-    text: 'Edit this page'
-  },
   feedback: {
     content: 'Question? Give us feedback →',
     labels: 'feedback',
     useLink() {
-      const config = useConfig()
-      return getGitIssueUrl({
-        labels: config.feedback.labels,
-        repository: config.docsRepositoryBase,
-        title: `Feedback for “${config.title}”`
-      })
+      return 'mailto:ads@addslice.com'
     }
   },
+  editLink: {},
   footer: {
     component: Footer,
     text: `MIT ${new Date().getFullYear()} © Nextra.`

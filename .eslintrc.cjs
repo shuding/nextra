@@ -168,31 +168,6 @@ module.exports = {
         next: { rootDir: 'docs' }
       }
     },
-    // ⚙️ SWR-site example
-    {
-      ...TAILWIND_CONFIG,
-      files: 'examples/swr-site/**',
-      settings: {
-        tailwindcss: {
-          config: 'examples/swr-site/tailwind.config.js'
-        },
-        next: { rootDir: 'examples/swr-site' }
-      }
-    },
-    // ⚙️ blog example
-    {
-      files: 'examples/blog/**',
-      settings: {
-        next: { rootDir: 'examples/blog' }
-      }
-    },
-    // ⚙️ docs example
-    {
-      files: 'examples/docs/**',
-      settings: {
-        next: { rootDir: 'examples/docs' }
-      }
-    },
     {
       files: [
         'prettier.config.js',

@@ -98,25 +98,6 @@ importers:
       tailwindcss: 3.2.4_postcss@8.4.21
       typescript: 4.9.4
 
-  examples/blog:
-    specifiers:
-      next: ^13.1.1
-      nextra: workspace:*
-      nextra-theme-blog: workspace:*
-      react: ^18.2.0
-      react-dom: ^18.2.0
-    dependencies:
-      next: 13.1.1_biqbaboplfbrettd7655fr4n2y
-      nextra: file:packages/nextra_q76c2b4vyoegvsbrcwkfvimnai
-      nextra-theme-blog: file:packages/nextra-theme-blog_45p7ptalf3sm4r75hzq3pywol4
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-    dependenciesMeta:
-      nextra:
-        injected: true
-      nextra-theme-blog:
-        injected: true
-
   examples/docs:
     specifiers:
       next: ^13.1.1
@@ -130,42 +111,6 @@ importers:
       nextra-theme-docs: file:packages/nextra-theme-docs_45p7ptalf3sm4r75hzq3pywol4
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-    dependenciesMeta:
-      nextra:
-        injected: true
-      nextra-theme-docs:
-        injected: true
-
-  examples/swr-site:
-    specifiers:
-      autoprefixer: ^10.4.13
-      focus-visible: ^5.1.0
-      intersection-observer: ^0.10.0
-      isomorphic-git: 1.21.0
-      markdown-to-jsx: ^6.11.4
-      next: ^13.1.1
-      nextra: workspace:*
-      nextra-theme-docs: workspace:*
-      postcss: ^8.4.21
-      react: ^18.2.0
-      react-dom: ^18.2.0
-      react-intersection-observer: ^8.26.2
-      tailwindcss: ^3.2.4
-    dependencies:
-      focus-visible: 5.2.0
-      intersection-observer: 0.10.0
-      isomorphic-git: 1.21.0
-      markdown-to-jsx: 6.11.4_react@18.2.0
-      next: 13.1.1_biqbaboplfbrettd7655fr4n2y
-      nextra: file:packages/nextra_q76c2b4vyoegvsbrcwkfvimnai
-      nextra-theme-docs: file:packages/nextra-theme-docs_45p7ptalf3sm4r75hzq3pywol4
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-      react-intersection-observer: 8.34.0_react@18.2.0
-    devDependencies:
-      autoprefixer: 10.4.13_postcss@8.4.21
-      postcss: 8.4.21
-      tailwindcss: 3.2.4_postcss@8.4.21
     dependenciesMeta:
       nextra:
         injected: true
