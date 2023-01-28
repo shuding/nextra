@@ -3,13 +3,29 @@ import { Card, Cards } from '@components/card'
 
 import turbo from 'public/showcase/turbo.jpg'
 import swr from 'public/showcase/swr.png'
-import graphqlModules from 'public/showcase/graphql_modules.jpg'
 import cobe from 'public/showcase/cobe.png'
-import javaScriptPatterns from 'public/showcase/javascript_patterns.jpg'
+import javaScriptPatterns from 'public/showcase/javascript-patterns.jpg'
 import codesandbox from 'public/showcase/codesandbox.jpg'
 import hop from 'public/showcase/hop.jpeg'
-import edgeRuntime from 'public/showcase/edge_runtime.jpeg'
+import edgeRuntime from 'public/showcase/edge-runtime.jpeg'
 import livepeer from 'public/showcase/livepeer.png'
+
+import theGuild from 'public/showcase/the-guild.png'
+import apolloAngular from 'public/showcase/apollo-angular.png'
+import graphqlCodegen from 'public/showcase/graphql-codegen.png'
+import graphqlConfig from 'public/showcase/graphql-config.png'
+import graphqlEnvelop from 'public/showcase/graphql-envelop.png'
+import graphqlESLint from 'public/showcase/graphql-eslint.png'
+import graphqlHive from 'public/showcase/graphql-hive.png'
+import graphqlInspector from 'public/showcase/graphql-inspector.png'
+import graphqlMesh from 'public/showcase/graphql-mesh.png'
+import graphqlModules from 'public/showcase/graphql-modules.png'
+import graphqlScalars from 'public/showcase/graphql-scalars.png'
+import graphqlShield from 'public/showcase/graphql-shield.png'
+import graphqlSofa from 'public/showcase/graphql-sofa.png'
+import graphqlTools from 'public/showcase/graphql-tools.png'
+import graphqlYoga from 'public/showcase/graphql-yoga.png'
+import kitql from 'public/showcase/kitql.png'
 
 {<h1 className="mt-10 mb-4 text-center text-[2.5rem] font-bold tracking-tight">Showcase</h1>}
 
@@ -26,11 +42,6 @@ import livepeer from 'public/showcase/livepeer.png'
       name: 'SWR',
       url: 'https://swr.vercel.app',
       image: swr
-    },
-    {
-      name: 'GraphQL Modules',
-      url: 'https://the-guild.dev/graphql/modules',
-      image: graphqlModules
     },
     {
       name: 'COBE',
@@ -61,6 +72,86 @@ import livepeer from 'public/showcase/livepeer.png'
       name: 'Livepeer',
       url: 'https://docs.livepeer.org/guides/overview',
       image: livepeer
+    },
+    {
+      name: 'The Guild Blog',
+      url: 'https://the-guild.dev',
+      image: theGuild
+    },
+    {
+      name: 'GraphQL Hive',
+      url: 'https://the-guild.dev/graphql/hive',
+      image: graphqlHive
+    },
+    {
+      name: 'GraphQL Yoga',
+      url: 'https://the-guild.dev/graphql/yoga-server',
+      image: graphqlYoga
+    },
+    {
+      name: 'GraphQL Envelop',
+      url: 'https://the-guild.dev/graphql/envelop',
+      image: graphqlEnvelop
+    },
+    {
+      name: 'GraphQL Inspector',
+      url: 'https://the-guild.dev/graphql/inspector',
+      image: graphqlInspector
+    },
+    {
+      name: 'GraphQL Code Generator',
+      url: 'https://the-guild.dev/graphql/codegen',
+      image: graphqlCodegen
+    },
+    {
+      name: 'GraphQL Mesh',
+      url: 'https://the-guild.dev/graphql/mesh',
+      image: graphqlMesh
+    },
+    {
+      name: 'GraphQL Tools',
+      url: 'https://the-guild.dev/graphql/tools',
+      image: graphqlTools
+    },
+    {
+      name: 'GraphQL Modules',
+      url: 'https://the-guild.dev/graphql/modules',
+      image: graphqlModules
+    },
+    {
+      name: 'GraphQL ESLint',
+      url: 'https://the-guild.dev/graphql/eslint',
+      image: graphqlESLint
+    },
+    {
+      name: 'GraphQL Config',
+      url: 'https://the-guild.dev/graphql/config',
+      image: graphqlConfig
+    },
+    {
+      name: 'GraphQL Scalars',
+      url: 'https://the-guild.dev/graphql/scalars',
+      image: graphqlScalars
+    },
+    {
+      name: 'GraphQL Shield',
+      url: 'https://the-guild.dev/graphql/shield',
+      image: graphqlShield
+    },
+    {
+      name: 'GraphQL SOFA',
+      url: 'https://the-guild.dev/graphql/sofa-api',
+      image: graphqlSofa
+    },
+    {
+      name: 'Apollo Angular',
+      url: 'https://the-guild.dev/graphql/apollo-angular',
+      image: apolloAngular
+    },
+    {
+      name: 'KitQL',
+      url: 'https://kitql.dev',
+      image: kitql
     }
   ].map(({ name, url, image }) => (
     <Card key={name} image arrow target="_blank" title={name} href={url}>
