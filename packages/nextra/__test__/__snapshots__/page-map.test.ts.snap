@@ -278,6 +278,7 @@ exports[`Page Process > pageMap en-US 1`] = `
                 "more": "More: A Super Super Super Super Long Directory",
                 "performance": "Performance",
                 "react-native": "React Native",
+                "scrollbar-x": "Scrollbar X",
               },
               "kind": "Meta",
               "locale": "en-US",
