@@ -171,14 +171,17 @@ export const DEFAULT_THEME: DocsThemeConfig = {
   darkMode: true,
   direction: 'ltr',
   docsRepositoryBase: 'https://github.com/shuding/nextra',
+  editLink: {
+    component: () => (<></>),
+    text: 'Edit this page'
+  }, 
   feedback: {
     content: 'Question? Give us feedback →',
     labels: 'feedback',
     useLink() {
-      return 'mailto:ads@addslice.com'
+      return 'mailto:ads@addslice.com' 
     }
   },
-  editLink: {},
   footer: {
     component: Footer,
     text: `MIT ${new Date().getFullYear()} © Nextra.`
