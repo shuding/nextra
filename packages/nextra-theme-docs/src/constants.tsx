@@ -144,7 +144,7 @@ export const themeSchema = z.strictObject({
     float: z.boolean(),
     title: z.custom<ReactNode | FC>(...reactNode)
   }),
-  useNextSeoProps: z.custom<() => NextSeoProps>(isFunction)
+  useNextSeoProps: z.custom<() => NextSeoProps | void>(isFunction)
 })
 
 const publicThemeSchema = themeSchema.deepPartial().extend({

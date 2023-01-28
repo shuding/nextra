@@ -1,3 +1,4 @@
+import type { ComponentProps, ReactNode } from 'react'
 import cn from 'clsx'
 import Link from 'next/link'
 
@@ -11,6 +12,13 @@ export function Card({
   arrow,
   href,
   ...props
+}: {
+  children: ReactNode
+  title: string,
+  icon: ReactNode,
+  image?: boolean,
+  arrow?: boolean,
+  href: string
 }) {
   const animatedArrow = arrow ? (
     <span
@@ -79,12 +87,17 @@ export function Card({
   )
 }
 
-export function Cards({ children, num, ...props }) {
+export function Cards({
+  children,
+  num,
+  ...props
+}: { num?: number } & ComponentProps<'div'>) {
   return (
     <div
       className={cn(styles.cards, 'mt-4 gap-4')}
       {...props}
       style={{
+        // @ts-expect-error -- todo: enhance style prop to accept css variables
         '--rows': num || 3,
         ...props.style
       }}

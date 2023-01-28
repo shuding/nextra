@@ -119,7 +119,7 @@
     "remark-gfm": "^3.0.1",
     "remark-math": "^5.1.1",
     "remark-reading-time": "^2.0.1",
-    "shiki": "^0.12.1",
+    "shiki": "^0.13.0",
     "slash": "^3.0.0",
     "title": "^3.5.3",
     "unist-util-remove": "^3.1.0",

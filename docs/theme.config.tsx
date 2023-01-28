@@ -47,8 +47,8 @@ const config: DocsThemeConfig = {
   },
   docsRepositoryBase: 'https://github.com/shuding/nextra/tree/main/docs',
   useNextSeoProps() {
-    const { route } = useRouter()
-    if (route !== '/') {
+    const { asPath } = useRouter()
+    if (asPath !== '/') {
       return {
         titleTemplate: '%s – Nextra'
       }
