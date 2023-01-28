@@ -55,13 +55,13 @@ import titleSuffixImage from '../../../public/assets/docs/title-suffix.png'
 
 <Screenshot src={titleSuffixImage} alt="Title suffix" />
 
-```jsx
+```js
 export default {
   useNextSeoProps() {
     return {
       titleTemplate: '%s – SWR'
     }
-  },
+  }
 }
 ```
 
@@ -69,16 +69,16 @@ The `%s` is a [placeholder](https://github.com/garmeeh/next-seo#title-template) 
 
 You can also return it conditionally to avoid adding the suffix to the homepage:
 
-```jsx
+```js
 export default {
   useNextSeoProps() {
-    const { route } = useRouter()
-    if (route !== '/') {
+    const { asPath } = useRouter()
+    if (asPath !== '/') {
       return {
         titleTemplate: '%s – SWR'
       }
     }
-  },
+  }
 }
 ```
 

@@ -16,12 +16,6 @@ And it renders:
 console.log('hello, world')
 ```
 
-You can opt out of syntax highlighting for using one of your own. You can disable syntax highlighting globally by setting ```codeHighlight: false``` in your Nextra configuration (next.config.js file)
-
-<OptionTable options={[
-  ['codeHighlight', 'boolean' , 'Enable or Disable syntax highlighting. Defaults to `true`.'],
-]} />
-
 ## Features
 
 ### Inlined Code
@@ -221,3 +215,11 @@ function hello () {
 This workaround has a limitation that updated content won't be re-highlighted. For example if we update the number to `1 + 1`, it will be highlighted wrongly.
 
 Check out the [code](https://github.com/shuding/nextra/blob/main/docs/pages/docs/guide/syntax-highlighting.mdx) to see how it works.
+
+## Disable Syntax Highlighting
+
+You can opt out of syntax highlighting for using one of your own. You can disable syntax highlighting globally by setting `codeHighlight: false` in your Nextra configuration (`next.config.js` file)
+
+<OptionTable options={[
+  ['codeHighlight', 'boolean' , 'Enable or disable syntax highlighting. Defaults to `true`.'],
+]} />

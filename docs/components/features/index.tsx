@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import Link from 'next/link'
 import cn from 'clsx'
 import { motion } from 'framer-motion'
@@ -50,6 +51,6 @@ export function Feature({
   )
 }
 
-export function Features({ children }) {
+export function Features({ children }: { children: ReactNode }) {
   return <div className={styles.features}>{children}</div>
 }
