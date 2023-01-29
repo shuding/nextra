@@ -39,7 +39,7 @@
     "turbo": "1.7.0",
     "typescript": "4.9.4"
   },
-  "packageManager": "pnpm@7.26.1",
+  "packageManager": "pnpm@7.26.2",
   "pnpm": {
     "overrides": {
       "vitest": "^0.27.1",
