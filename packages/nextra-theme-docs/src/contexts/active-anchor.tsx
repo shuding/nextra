@@ -3,7 +3,6 @@ import type {
   ReactElement,
   ReactNode,
   SetStateAction,
-  MutableRefObject
 } from 'react';
 import 'intersection-observer'
 import {
@@ -11,7 +10,6 @@ import {
   useContext,
   useState,
   useRef,
-  createRef
 } from 'react';
 import { IS_BROWSER } from '../constants';
 
@@ -30,7 +28,7 @@ const SetActiveAnchorContext = createContext<
   Dispatch<SetStateAction<ActiveAnchor>>
 >(v => v)
 
-const IntersectionObserverContext = createContext<MutableRefObject<IntersectionObserver | null>>(createRef())
+const IntersectionObserverContext = createContext<IntersectionObserver | null>(null)
 const slugs = new WeakMap()
 const SlugsContext = createContext<WeakMap<any, any>>(slugs)
 // Separate the state as 2 contexts here to avoid
@@ -105,7 +103,7 @@ export const ActiveAnchorProvider = ({
     <ActiveAnchorContext.Provider value={activeAnchor}>
       <SetActiveAnchorContext.Provider value={setActiveAnchor}>
         <SlugsContext.Provider value={slugs}>
-          <IntersectionObserverContext.Provider value={observerRef}>
+          <IntersectionObserverContext.Provider value={observerRef.current}>
             {children}
           </IntersectionObserverContext.Provider>
         </SlugsContext.Provider>
