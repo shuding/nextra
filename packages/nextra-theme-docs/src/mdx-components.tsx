@@ -21,14 +21,13 @@ function HeadingLink({
 }): ReactElement {
   const setActiveAnchor = useSetActiveAnchor()
   const slugs = useSlugs()
-  const observer = useIntersectionObserver()
+  const observer = useIntersectionObserver().current
   const obRef = useRef<HTMLAnchorElement>(null)
 
   useEffect(() => {
     if (!id) return
     const heading = obRef.current
     if (!heading) return
-
     slugs.set(heading, [id, (context.index += 1)])
     observer?.observe(heading)
 
