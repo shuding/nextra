@@ -1,4 +1,4 @@
-import type { ReactElement, ReactNode } from 'react';
+import type { ReactElement, ReactNode } from 'react'
 import { useRef, useEffect } from 'react'
 import cn from 'clsx'
 
@@ -47,9 +47,9 @@ export function Collapse({
     } else {
       setTimeout(() => {
         if (horizontal) {
-          container.style.width = '0px'
+          container.style.width = '.5rem'
         } else {
-          container.style.height = '0px'
+          container.style.height = '.5rem'
         }
       }, 0)
     }
@@ -62,13 +62,13 @@ export function Collapse({
   return (
     <div
       ref={containerRef}
-      className="nx-transform-gpu nx-overflow-hidden nx-transition-all nx-ease-in-out motion-reduce:nx-transition-none"
+      className="nx-transform-gpu nx-overflow-hidden nx-transition-all nx-ease-in-out motion-reduce:nx-transition-none -nx-m-1"
       style={initialOpen.current || horizontal ? undefined : { height: 0 }}
     >
       <div
         ref={innerRef}
         className={cn(
-          'nx-transition-opacity nx-duration-500 nx-ease-in-out motion-reduce:nx-transition-none',
+          'nx-transition-opacity nx-duration-500 nx-ease-in-out motion-reduce:nx-transition-none nx-p-1',
           isOpen ? 'nx-opacity-100' : 'nx-opacity-0',
           className
         )}

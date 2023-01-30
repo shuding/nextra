@@ -25,7 +25,7 @@ export function Breadcrumb({
                 isActive
                   ? 'nx-font-medium nx-text-gray-700 contrast-more:nx-font-bold contrast-more:nx-text-current dark:nx-text-gray-400 contrast-more:dark:nx-text-current'
                   : [
-                      'nx-min-w-[24px] nx-overflow-hidden nx-text-ellipsis',
+                      'nx-min-w-[24px] nx-overflow-hidden nx-text-ellipsis nx-px-1 -nx-mx-1',
                       isLink &&
                         'hover:nx-text-gray-900 dark:hover:nx-text-gray-200'
                     ]

@@ -4,7 +4,7 @@ With Next.js, you can pre-render your page using [Static Generation (SSG)](https
 
 This is supported by Nextra too. Here's an example:
 
-import { useSSG } from 'nextra/ssg'
+import { useData } from 'nextra/data'
 
 export const getStaticProps = ({ params }) => {
   return fetch(`https://api.github.com/repos/shuding/nextra`)
@@ -12,7 +12,7 @@ export const getStaticProps = ({ params }) => {
     .then(repo => ({
       props: {
         // We add an `ssg` field to the page props,
-        // which will be provided to the Nextra `useSSG` hook.
+        // which will be provided to the Nextra `useData` hook.
         ssg: {
           stars: repo.stargazers_count
         }
@@ -24,11 +24,11 @@ export const getStaticProps = ({ params }) => {
 
 export const Stars = () => {
   // Get the data from SSG, and render it as a component.
-  const { stars } = useSSG()
+  const { stars } = useData()
   return <strong>{stars}</strong>
 }
 
-<div className="p-4 border border-gray-200 dark:border-gray-900 rounded mt-6">
+<div className="p-4 border border-gray-200 dark:border-gray-900 rounded-xl mt-6">
   Nextra has <Stars /> stars on GitHub!
 </div>
 
@@ -39,7 +39,7 @@ The number above was generated at build time via `getStaticProps`. With [Increme
 Here's the MDX code for the example above:
 
 ```mdx
-import { useSSG } from 'nextra/ssg'
+import { useData } from 'nextra/data'
 
 export const getStaticProps = ({ params }) => {
   return fetch(`https://api.github.com/repos/shuding/nextra`)
@@ -47,7 +47,7 @@ export const getStaticProps = ({ params }) => {
     .then(repo => ({
       props: {
         // We add an `ssg` field to the page props,
-        // which will be provided to the Nextra `useSSG` hook.
+        // which will be provided to the Nextra `useData` hook.
         ssg: {
           stars: repo.stargazers_count
         }
@@ -59,7 +59,7 @@ export const getStaticProps = ({ params }) => {
 
 export const Stars = () => {
   // Get the data from SSG, and render it as a component.
-  const { stars } = useSSG()
+  const { stars } = useData()
   return <strong>{stars}</strong>
 }
 

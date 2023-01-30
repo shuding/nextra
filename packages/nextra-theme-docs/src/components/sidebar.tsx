@@ -161,16 +161,18 @@ function FolderImpl({ item, anchors }: FolderProps): ReactElement {
           )}
         />
       </Anchor>
-      <Collapse className="ltr:nx-pr-0 rtl:nx-pl-0 nx-pt-1" isOpen={open}>
-        {Array.isArray(item.children) ? (
-          <Menu
-            className={cn(classes.border, 'ltr:nx-ml-3 rtl:nx-mr-3')}
-            directories={item.children}
-            base={item.route}
-            anchors={anchors}
-          />
-        ) : null}
-      </Collapse>
+      <div className="ltr:nx-pr-0 rtl:nx-pl-0 nx-pt-1">
+        <Collapse isOpen={open}>
+          {Array.isArray(item.children) ? (
+            <Menu
+              className={cn(classes.border, 'ltr:nx-ml-3 rtl:nx-mr-3')}
+              directories={item.children}
+              base={item.route}
+              anchors={anchors}
+            />
+          ) : null}
+        </Collapse>
+      </div>
     </li>
   )
 }
@@ -410,7 +412,7 @@ export function Sidebar({
           >
             <div
               className={cn(
-                'nx-overflow-y-auto nx-overflow-x-hidden',
+                'nx-overflow-y-auto nx-overflow-x-visible',
                 'nx-p-4 nx-grow md:nx-h-[calc(100vh-var(--nextra-navbar-height)-var(--nextra-menu-height))]',
                 showSidebar ? 'nextra-scrollbar' : 'no-scrollbar'
               )}
