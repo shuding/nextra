@@ -12,7 +12,9 @@ export function Footer({ menu }: { menu?: boolean }): ReactElement {
       <div
         className={cn(
           'nx-mx-auto nx-flex nx-max-w-[90rem] nx-gap-2 nx-py-2 nx-px-4',
-          menu ? 'nx-flex' : 'nx-hidden'
+          menu && (config.i18n.length > 0 || config.darkMode)
+            ? 'nx-flex'
+            : 'nx-hidden'
         )}
       >
         {config.i18n.length > 0 && <LocaleSwitch options={config.i18n} />}
