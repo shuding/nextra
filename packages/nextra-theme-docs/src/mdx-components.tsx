@@ -1,71 +1,12 @@
 import type { ReactNode, ReactElement, ComponentProps } from 'react'
 import { useEffect, useRef, useState, cloneElement, Children } from 'react'
-import 'intersection-observer'
 import type { Components } from 'nextra/mdx'
 import { useSetActiveAnchor, DetailsProvider, useDetails } from './contexts'
 import { Collapse, Anchor } from './components'
 import type { DocsThemeConfig } from './constants'
-import { IS_BROWSER } from './constants'
 import cn from 'clsx'
 import { Code, Pre, Table, Td, Th, Tr } from 'nextra/components'
-
-let observer: IntersectionObserver
-let setActiveAnchor: ReturnType<typeof useSetActiveAnchor>
-const slugs = new WeakMap()
-
-if (IS_BROWSER) {
-  observer ||= new IntersectionObserver(
-    entries => {
-      setActiveAnchor(f => {
-        const ret = { ...f }
-
-        for (const entry of entries) {
-          if (entry?.rootBounds && slugs.has(entry.target)) {
-            const [slug, index] = slugs.get(entry.target)
-            const aboveHalfViewport =
-              entry.boundingClientRect.y + entry.boundingClientRect.height <=
-              entry.rootBounds.y + entry.rootBounds.height
-            const insideHalfViewport = entry.intersectionRatio > 0
-            ret[slug] = {
-              index,
-              aboveHalfViewport,
-              insideHalfViewport
-            }
-          }
-        }
-
-        let activeSlug = ''
-        let smallestIndexInViewport = Infinity
-        let largestIndexAboveViewport = -1
-        for (const s in ret) {
-          ret[s].isActive = false
-          if (
-            ret[s].insideHalfViewport &&
-            ret[s].index < smallestIndexInViewport
-          ) {
-            smallestIndexInViewport = ret[s].index
-            activeSlug = s
-          }
-          if (
-            smallestIndexInViewport === Infinity &&
-            ret[s].aboveHalfViewport &&
-            ret[s].index > largestIndexAboveViewport
-          ) {
-            largestIndexAboveViewport = ret[s].index
-            activeSlug = s
-          }
-        }
-
-        if (ret[activeSlug]) ret[activeSlug].isActive = true
-        return ret
-      })
-    },
-    {
-      rootMargin: '0px 0px -50%',
-      threshold: [0, 1]
-    }
-  )
-}
+import { useIntersectionObserver, useSlugs } from './contexts/active-anchor'
 
 // Anchor links
 function HeadingLink({
@@ -78,8 +19,9 @@ function HeadingLink({
   tag: `h${2 | 3 | 4 | 5 | 6}`
   context: { index: number }
 }): ReactElement {
-  // eslint-disable-next-line react-hooks/rules-of-hooks -- todo: fix React Hook "useSetActiveAnchor" is called conditionally
-  setActiveAnchor ??= useSetActiveAnchor()
+  const setActiveAnchor = useSetActiveAnchor()
+  const slugs = useSlugs()
+  const observer = useIntersectionObserver()
   const obRef = useRef<HTMLAnchorElement>(null)
 
   useEffect(() => {
@@ -88,10 +30,10 @@ function HeadingLink({
     if (!heading) return
 
     slugs.set(heading, [id, (context.index += 1)])
-    observer.observe(heading)
+    observer?.observe(heading)
 
     return () => {
-      observer.disconnect()
+      observer?.disconnect()
       slugs.delete(heading)
       setActiveAnchor(f => {
         const ret = { ...f }
@@ -99,7 +41,7 @@ function HeadingLink({
         return ret
       })
     }
-  }, [id, context])
+  }, [id, context, slugs, observer, setActiveAnchor])
 
   return (
     <Tag
