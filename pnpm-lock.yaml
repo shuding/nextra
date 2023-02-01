@@ -71,7 +71,7 @@ importers:
       autoprefixer: ^10.4.13
       clsx: ^1.2.1
       eslint: ^8.30.0
-      framer-motion: ^8.0.0
+      framer-motion: ^9.0.0
       next: ^13.1.1
       nextra: workspace:*
       nextra-theme-docs: workspace:*
@@ -83,7 +83,7 @@ importers:
     dependencies:
       '@vercel/og': 0.0.27
       clsx: 1.2.1
-      framer-motion: 8.4.3_biqbaboplfbrettd7655fr4n2y
+      framer-motion: 9.0.0_biqbaboplfbrettd7655fr4n2y
       next: 13.1.1_biqbaboplfbrettd7655fr4n2y
       nextra: link:../packages/nextra
       nextra-theme-docs: link:../packages/nextra-theme-docs
@@ -3927,8 +3927,8 @@ packages:
     resolution: {integrity: sha512-MhLuK+2gUcnZe8ZHlaaINnQLl0xRIGRfcGk2yl8xoQAfHrSsL3rYu6FCmBdkdbhc9EPlwyGHewaRsvwRMJtAlA==}
     dev: true
 
-  /framer-motion/8.4.3_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-UMfJ8hEOlIObdJgI+U/VgaSSKY+W9/E0YtnFHPDsIE9rNPglaFZ+oycB0gj8ERuRBInGaIgNCFsil8iaJHZFgA==}
+  /framer-motion/9.0.0_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-nDLVzUlIUNyxD7SbqWpWKBeK1FIP/mDMFNy4yhXjhaRoyvGPcoe3uGYf0cEti+DG64N99Dzaw5kdmVjsxbwlEA==}
     peerDependencies:
       react: ^18.0.0
       react-dom: ^18.0.0
