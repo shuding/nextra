@@ -7,7 +7,7 @@ import slash from 'slash'
 import { hashFnv32a, pageTitleFromFilename, parseFileName } from './utils'
 import { compileMdx } from './compile'
 import { resolvePageMap } from './page-map'
-import { collectFiles, collectMdx } from './plugin'
+import { collectFiles, collectMdx } from './collect-files'
 import {
   IS_PRODUCTION,
   OFFICIAL_THEMES,

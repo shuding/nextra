@@ -4,7 +4,7 @@ import {
   getCurrentLevelPages,
   getPagesUnderRoute
 } from '../src/context'
-import { collectFiles } from '../src/plugin'
+import { collectFiles } from '../src/collect-files'
 import { CWD, NEXTRA_INTERNAL } from '../src/constants'
 import path from 'node:path'
 import type { NextraInternalGlobal } from '../src/types'
