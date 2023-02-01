@@ -12,9 +12,11 @@ export const useFSRoute = () => {
     const clientRoute = ERROR_ROUTES.has(route) ? route : asPath
 
     const { pathname } = new URL(clientRoute, template)
+
     const cleanedPath = locale
       ? pathname.replace(new RegExp(`\\.${locale}(\\/|$)`), '$1')
       : pathname
-    return cleanedPath.replace(/\/index(\/|$)/, '$1').split('#')[0] || '/'
+
+    return cleanedPath.replace(/\/index(\/|$)/, '$1').replace(/\/$/, '') || '/'
   }, [asPath, locale, route])
 }
