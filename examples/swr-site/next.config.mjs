@@ -24,6 +24,9 @@ export function getStaticProps() {
   },
 });
 
+/**
+ * @type {import('next').NextConfig}
+ */
 export default withNextra({
   i18n: {
     locales: ["en-US", "es-ES", "ru"],
