@@ -14,9 +14,7 @@ import {
   MARKDOWN_EXTENSION_REGEX,
   CWD
 } from './constants'
-import { findPagesDirectory } from './file-system'
-
-const PAGES_DIR = findPagesDirectory()
+import { HAS_UNDERSCORE_APP_MDX_FILE, PAGES_DIR } from './file-system'
 
 const IS_WEB_CONTAINER = !!process.versions.webcontainer
 
@@ -223,8 +221,8 @@ async function loader(
     headings,
     hasJsxInH1,
     timestamp,
-    flexsearch,
-    newNextLinkBehavior,
+    flexsearch, // todo: can be injected only in _app file
+    newNextLinkBehavior, // todo: remove in v3
     readingTime,
     title: fallbackTitle
   }
@@ -235,6 +233,22 @@ async function loader(
     // necessary to include them in the bundle.
     pageOpts = transformPageOpts(pageOpts)
   }
+  if (HAS_UNDERSCORE_APP_MDX_FILE) {
+    // @ts-expect-error `pageMap` will be injected in `setupAppPage` and not in each route
+    delete pageOpts.pageMap
+  }
+  const finalResult = (
+    transform ? await transform(result, { route }) : result
+  ).replace('export default MDXContent;', '')
+
+  if (route === '/_app') {
+    return `import { setupUnderscoreApp } from 'nextra/setup-underscore-app'
+${finalResult}
+export default setupUnderscoreApp({
+  MDXContent,
+  pageMap: ${JSON.stringify(pageMap)}
+})`
+  }
 
   const themeConfigImport = themeConfig
     ? `import __nextra_themeConfig from '${slash(path.resolve(themeConfig))}'`
@@ -243,43 +257,38 @@ async function loader(
   const cssImport = OFFICIAL_THEMES.includes(theme)
     ? `import '${theme}/style.css'`
     : ''
-  const finalResult = transform
-    ? await transform(result, { route: pageNextRoute })
-    : result
   const stringifiedPageOpts = JSON.stringify(pageOpts)
-
-  return `import { setupNextraPage } from 'nextra/setup-page'
-import __nextra_layout from '${layout}'
-${themeConfigImport}
-${katexCssImport}
-${cssImport}
-
-${finalResult.replace(
-  'export default MDXContent;',
-  "export { default } from 'nextra/layout'"
-)}
-
-setupNextraPage({
-  Content: MDXContent,
-  nextraLayout: __nextra_layout,
-  hot: module.hot,
-  pageOpts: ${stringifiedPageOpts},
-  themeConfig: ${themeConfigImport ? '__nextra_themeConfig' : 'null'},
-  pageNextRoute: ${JSON.stringify(pageNextRoute)},
-  pageOptsChecksum: ${
-    IS_PRODUCTION
-      ? 'undefined'
-      : JSON.stringify(hashFnv32a(stringifiedPageOpts))
-  },
-  dynamicMetaModules: typeof window === 'undefined' ? [${dynamicMetaItems
+  const pageOptsChecksum = IS_PRODUCTION
+    ? "''"
+    : JSON.stringify(hashFnv32a(stringifiedPageOpts))
+  const dynamicMetaModules = dynamicMetaItems
     .map(
       descriptor =>
         `[import(${JSON.stringify(descriptor.metaFilePath)}), ${JSON.stringify(
           descriptor
         )}]`
     )
-    .join(',')}] : []
-})`
+    .join(',')
+
+  return `import { setupNextraPage } from 'nextra/setup-page'
+import __nextra_layout from '${layout}'
+${themeConfigImport}
+${katexCssImport}
+${cssImport}
+${finalResult}
+
+setupNextraPage({
+  MDXContent,
+  nextraLayout: __nextra_layout,
+  hot: module.hot,
+  pageOpts: ${stringifiedPageOpts},
+  themeConfig: ${themeConfigImport ? '__nextra_themeConfig' : 'null'},
+  pageNextRoute: ${JSON.stringify(pageNextRoute)},
+  pageOptsChecksum: ${pageOptsChecksum},
+  dynamicMetaModules: typeof window === 'undefined' ? [${dynamicMetaModules}] : []
+})
+
+export { default } from 'nextra/layout'`
 }
 
 export default function syncLoader(

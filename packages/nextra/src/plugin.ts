@@ -29,7 +29,7 @@ import {
   MARKDOWN_EXTENSION_REGEX,
   META_FILENAME
 } from './constants'
-import { findPagesDirectory } from './file-system'
+import { PAGES_DIR } from './file-system'
 
 const readdir = promisify(fs.readdir)
 const readFile = promisify(fs.readFile)
@@ -247,7 +247,6 @@ export class NextraPlugin {
       'NextraPlugin',
       async (_, callback) => {
         const { locales } = this.config
-        const PAGES_DIR = findPagesDirectory()
         try {
           const result = await collectFiles(PAGES_DIR, locales)
           pageMapCache.set(result)

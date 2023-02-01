@@ -1,3 +1,4 @@
+import path from 'node:path'
 import { findPagesDir, existsSync } from 'next/dist/lib/find-pages-dir.js'
 import { CWD } from './constants'
 
@@ -10,3 +11,9 @@ export function findPagesDirectory(): string {
     (res as any).pages // next v12
   )
 }
+
+export const PAGES_DIR = findPagesDirectory()
+
+export const HAS_UNDERSCORE_APP_MDX_FILE =
+  existsSync(path.join(PAGES_DIR, '_app.mdx')) ||
+  existsSync(path.join(PAGES_DIR, '_app.md'))

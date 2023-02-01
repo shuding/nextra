@@ -105,7 +105,7 @@ export function setupNextraPage({
   pageOpts,
   nextraLayout,
   themeConfig,
-  Content,
+  MDXContent,
   hot,
   pageOptsChecksum,
   dynamicMetaModules
@@ -114,7 +114,7 @@ export function setupNextraPage({
   pageOpts: PageOpts
   nextraLayout: FC
   themeConfig: ThemeConfig
-  Content: FC
+  MDXContent: FC
   hot: __WebpackModuleApi.Hot
   pageOptsChecksum: string
   dynamicMetaModules: [Promise<any>, DynamicMetaDescriptor][]
@@ -125,7 +125,7 @@ export function setupNextraPage({
         return cachedResolvedPageMap
       }
       const clonedPageMap: PageMapItem[] = JSON.parse(
-        JSON.stringify(pageOpts.pageMap)
+        JSON.stringify(__nextra_internal__.pageMap)
       )
 
       await Promise.all(
@@ -155,14 +155,23 @@ export function setupNextraPage({
     NEXTRA_INTERNAL
   ] ||= Object.create(null))
 
-  __nextra_internal__.pageMap = pageOpts.pageMap
+  if (pageOpts.pageMap) {
+    __nextra_internal__.pageMap = pageOpts.pageMap
+  }
   __nextra_internal__.route = pageOpts.route
   __nextra_internal__.context ||= Object.create(null)
   __nextra_internal__.refreshListeners ||= Object.create(null)
   __nextra_internal__.Layout = nextraLayout
   __nextra_internal__.context[pageNextRoute] = {
-    Content,
-    pageOpts,
+    Content: MDXContent,
+    // while using `_app.md/mdx` pageMap will be injected in _app file to boost compilation time,
+    // and reduce bundle size
+    pageOpts: pageOpts.pageMap
+      ? pageOpts
+      : {
+          ...pageOpts,
+          pageMap: __nextra_internal__.pageMap
+        },
     themeConfig
   }
 

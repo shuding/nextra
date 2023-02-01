@@ -42,9 +42,6 @@
       "layout": [
         "./dist/layout.d.ts"
       ],
-      "setup-page": [
-        "./dist/setup-page.d.ts"
-      ],
       "remote": [
         "./dist/remote.d.ts"
       ],
