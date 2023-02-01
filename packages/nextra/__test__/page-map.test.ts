@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeAll } from 'vitest'
 import path from 'node:path'
 import { resolvePageMap } from '../src/page-map'
-import { collectFiles } from '../src/collect-files'
+import { collectFiles } from '../src/plugin'
 import type { FileMap, PageMapItem } from '../src/types'
 import { CWD } from '../src/constants'
 
