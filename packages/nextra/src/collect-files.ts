@@ -90,7 +90,8 @@ export async function collectFiles(
         // We need to filter out dynamic routes, because we can't get all the
         // paths statically from here — they'll be generated separately.
         if (name.startsWith('[')) return
-
+        // There is no reason to add special `_app` to fileMap
+        if (fileRoute === '/_app') return
         const fp = filePath as MdxPath
         fileMap[fp] = await collectMdx(fp, fileRoute)
         return fileMap[fp]
