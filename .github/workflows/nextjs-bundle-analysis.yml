@@ -15,7 +15,7 @@ jobs:
   analyze:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Install Node.js
         uses: actions/setup-node@v3
@@ -27,7 +27,7 @@ jobs:
         run: pnpm i
 
       - name: Restore next build
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         id: restore-build-cache
         env:
           cache-name: cache-next-build
