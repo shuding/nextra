@@ -42,7 +42,7 @@ jobs:
           # change this if you prefer a more strict cache
           key: ${{ runner.os }}-build-${{ env.cache-name }}
 
-      - name: Build next.js app
+      - name: Build Next.js app
         # change this if your site requires a custom build command
         run: ./node_modules/.bin/next build
 
