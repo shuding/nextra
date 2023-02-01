@@ -66,7 +66,7 @@ export async function collectFiles(
     const isDirectory = f.isDirectory()
     const { name, locale, ext } = isDirectory
       ? // directory couldn't have extensions
-      { name: path.basename(filePath), locale: '', ext: '' }
+        { name: path.basename(filePath), locale: '', ext: '' }
       : parseFileName(filePath)
     const fileRoute = normalizePageRoute(route, name)
 
