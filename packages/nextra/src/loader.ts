@@ -234,14 +234,14 @@ async function loader(
     pageOpts = transformPageOpts(pageOpts)
   }
   if (HAS_UNDERSCORE_APP_MDX_FILE) {
-    // @ts-expect-error `pageMap` will be injected in `setupAppPage` and not in each route
+    // @ts-expect-error `pageMap` will be injected in `setupUnderscoreApp` and not in each route
     delete pageOpts.pageMap
   }
   const finalResult = (
     transform ? await transform(result, { route }) : result
   ).replace('export default MDXContent;', '')
 
-  if (route === '/_app') {
+  if (pageNextRoute === '/_app') {
     return `import { setupUnderscoreApp } from 'nextra/setup-underscore-app'
 ${finalResult}
 export default setupUnderscoreApp({
