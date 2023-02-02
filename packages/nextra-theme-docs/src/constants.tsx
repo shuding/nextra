@@ -1,17 +1,18 @@
 /* eslint sort-keys: error */
-import type { FC, ReactNode } from 'react';
+import type { FC, ReactNode } from 'react'
 import { isValidElement } from 'react'
 import { useRouter } from 'next/router'
 import { Anchor, Flexsearch, Footer, Navbar, TOC } from './components'
 import { DiscordIcon, GitHubIcon } from 'nextra/icons'
 import { MatchSorterSearch } from './components/match-sorter-search'
 import { useConfig } from './contexts'
-import type { Item } from './utils';
+import type { Item } from './utils'
 import { useGitEditUrl, getGitIssueUrl } from './utils'
 import { z } from 'zod'
 import type { NavBarProps } from './components/navbar'
 import type { TOCProps } from './components/toc'
 import type { NextSeoProps } from 'next-seo'
+import type { ThemeOption } from './components/theme-switch'
 
 export const DEFAULT_LOCALE = 'en-US'
 
@@ -137,6 +138,9 @@ export const themeSchema = z.strictObject({
       ReactNode | FC<{ title: string; type: string; route: string }>
     >(...reactNode),
     toggleButton: z.boolean()
+  }),
+  themeSwitch: z.strictObject({
+    useOptions: z.custom<() => ThemeOption[]>(isFunction)
   }),
   toc: z.strictObject({
     component: z.custom<ReactNode | FC<TOCProps>>(...reactNode),
@@ -300,6 +304,24 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     defaultMenuCollapseLevel: 2,
     titleComponent: ({ title }) => <>{title}</>,
     toggleButton: false
+  },
+  themeSwitch: {
+    useOptions() {
+      const { locale } = useRouter()
+
+      if (locale === 'zh-CN')
+        return [
+          { key: 'light', name: '淺色主題' },
+          { key: 'dark', name: '深色主題' },
+          { key: 'system', name: '系統默認' }
+        ]
+
+      return [
+        { key: 'light', name: 'Light' },
+        { key: 'dark', name: 'Dark' },
+        { key: 'system', name: 'System' }
+      ]
+    }
   },
   toc: {
     component: TOC,

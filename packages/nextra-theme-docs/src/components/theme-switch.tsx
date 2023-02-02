@@ -6,17 +6,14 @@ import { useTheme } from 'next-themes'
 import cn from 'clsx'
 
 import { Select } from './select'
+import { useConfig } from '../contexts'
 
 type ThemeSwitchProps = {
   lite?: boolean
   className?: string
 }
 
-const OPTIONS = [
-  { key: 'light', name: 'Light' },
-  { key: 'dark', name: 'Dark' },
-  { key: 'system', name: 'System' }
-]
+export type ThemeOption = { key: 'light' | 'dark' | 'system'; name: string }
 
 export function ThemeSwitch({
   lite,
@@ -25,12 +22,14 @@ export function ThemeSwitch({
   const { setTheme, resolvedTheme, theme = '' } = useTheme()
   const mounted = useMounted()
   const IconToUse = mounted && resolvedTheme === 'dark' ? MoonIcon : SunIcon
+  const options = useConfig().themeSwitch.useOptions()
+
   return (
     <div className={cn('nx-relative', className)}>
       <Select
         title="Change theme"
         className="nx-w-full"
-        options={OPTIONS}
+        options={options}
         onChange={option => {
           setTheme(option.key)
         }}
