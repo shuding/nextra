@@ -483,6 +483,25 @@ export default {
 }
 ```
 
+## Theme Switch
+
+You are able to customize the option names:
+
+```jsx
+export default {
+  themeSwitch: {
+    useOptions() {
+
+      return [
+        { key: 'light', name: 'Light' },
+        { key: 'dark', name: 'Dark' },
+        { key: 'system', name: 'System' }
+      ]
+    }
+  },
+}
+```
+
 ## Error Pages
 
 ### 404 - Not Found
@@ -496,3 +515,4 @@ This isn’t supported by all browsers, but it’s a nice way to customize the f
 <OptionTable options={[
   ['faviconGlyph', `string`, 'The glyph to use as the favicon.'],
 ]}/>
+
