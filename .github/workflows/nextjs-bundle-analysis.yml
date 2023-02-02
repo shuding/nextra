@@ -9,7 +9,7 @@ on:
 
 defaults:
   run:
-    working-directory: ./examples/swr-site
+    working-directory: ./
 
 jobs:
   analyze:
@@ -38,7 +38,7 @@ jobs:
         with:
           # if you use a custom build directory, replace all instances of `.next` in this file with your build directory
           # ex: if your app builds to `dist`, replace `.next` with `dist`
-          path: ./examples/swr-site/.next/cache
+          path: examples/swr-site/.next/cache
           # change this if you prefer a more strict cache
           key: ${{ runner.os }}-build-${{ env.cache-name }}
 
@@ -55,7 +55,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: bundle
-          path: ./examples/swr-site/.next/analyze/__bundle_analysis.json
+          path: examples/swr-site/.next/analyze/__bundle_analysis.json
 
       - name: Download Base Branch Bundle Stats
         uses: dawidd6/action-download-artifact@v2
@@ -63,7 +63,7 @@ jobs:
         with:
           workflow: nextjs-bundle-analysis.yml
           branch: ${{ github.event.pull_request.base.ref }}
-          path: ./examples/swr-site/.next/analyze/base
+          path: examples/swr-site/.next/analyze/base
 
       # And here's the second place - this runs after we have both the current and
       # base branch bundle stats, and will compare them to determine what changed.
@@ -80,13 +80,13 @@ jobs:
       # entry in your package.json file.
       - name: Compare with Base Branch Bundle
         if: success() && github.event.number
-        run: ls -laR ./examples/swr-site/.next/analyze/base && cd examples/swr-site && npx -p nextjs-bundle-analysis compare
+        run: ls -laR examples/swr-site/.next/analyze/base && cd examples/swr-site && npx -p nextjs-bundle-analysis compare
 
       - name: Get Comment Body
         id: get-comment-body
         if: success() && github.event.number
         run: |
-          body=$(cat ./examples/swr-site/.next/analyze/__bundle_analysis_comment.txt)
+          body=$(cat examples/swr-site/.next/analyze/__bundle_analysis_comment.txt)
           body="${body//'%'/'%25'}"
           body="${body//$'\n'/'%0A'}"
           body="${body//$'\r'/'%0D'}"
