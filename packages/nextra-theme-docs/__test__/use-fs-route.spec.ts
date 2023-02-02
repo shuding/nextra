@@ -68,4 +68,9 @@ describe('getFSRoute', () => {
     })
     expect(value).toEqual('/500')
   })
+
+  it('remove trailing slash', () => {
+    const value = mockAndRenderHook({ asPath: '/foo/' })
+    expect(value).toEqual('/foo')
+  })
 })
