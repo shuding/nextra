@@ -30,7 +30,7 @@ jobs:
       - name: Install Dependencies
         run: pnpm i
 
-      - name: Restore next build
+      - name: Restore Next.js Build
         uses: actions/cache@v3
         id: restore-build-cache
         env:
@@ -38,26 +38,26 @@ jobs:
         with:
           # if you use a custom build directory, replace all instances of `.next` in this file with your build directory
           # ex: if your app builds to `dist`, replace `.next` with `dist`
-          path: .next/cache
+          path: ./examples/swr-site/.next/cache
           # change this if you prefer a more strict cache
           key: ${{ runner.os }}-build-${{ env.cache-name }}
 
-      - name: Build Next.js app
+      - name: Build Next.js App
         # change this if your site requires a custom build command
         run: ./node_modules/.bin/next build
 
       # Here's the first place where next-bundle-analysis' own script is used
       # This step pulls the raw bundle stats for the current bundle
-      - name: Analyze bundle
+      - name: Analyze Bundle
         run: npx -p nextjs-bundle-analysis report
 
       - name: Upload bundle
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: bundle
-          path: .next/analyze/__bundle_analysis.json
+          path: ./examples/swr-site/.next/analyze/__bundle_analysis.json
 
-      - name: Download base branch bundle stats
+      - name: Download Base Branch Bundle Stats
         uses: dawidd6/action-download-artifact@v2
         if: success() && github.event.number
         with:
@@ -78,11 +78,11 @@ jobs:
       #
       # Either of these arguments can be changed or removed by editing the `nextBundleAnalysis`
       # entry in your package.json file.
-      - name: Compare with base branch bundle
+      - name: Compare with Base Branch Bundle
         if: success() && github.event.number
         run: ls -laR .next/analyze/base && npx -p nextjs-bundle-analysis compare
 
-      - name: Get comment body
+      - name: Get Comment Body
         id: get-comment-body
         if: success() && github.event.number
         run: |
@@ -101,14 +101,14 @@ jobs:
           body-includes: '<!-- __NEXTJS_BUNDLE -->'
 
       - name: Create Comment
-        uses: peter-evans/create-or-update-comment@v1.4.4
+        uses: peter-evans/create-or-update-comment@v1.4.5
         if: success() && github.event.number && steps.fc.outputs.comment-id == 0
         with:
           issue-number: ${{ github.event.number }}
           body: ${{ steps.get-comment-body.outputs.body }}
 
       - name: Update Comment
-        uses: peter-evans/create-or-update-comment@v1.4.4
+        uses: peter-evans/create-or-update-comment@v1.4.5
         if: success() && github.event.number && steps.fc.outputs.comment-id != 0
         with:
           issue-number: ${{ github.event.number }}
