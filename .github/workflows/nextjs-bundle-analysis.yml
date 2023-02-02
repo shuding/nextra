@@ -63,7 +63,7 @@ jobs:
         with:
           workflow: nextjs-bundle-analysis.yml
           branch: ${{ github.event.pull_request.base.ref }}
-          path: .next/analyze/base
+          path: ./examples/swr-site/.next/analyze/base
 
       # And here's the second place - this runs after we have both the current and
       # base branch bundle stats, and will compare them to determine what changed.
@@ -86,7 +86,7 @@ jobs:
         id: get-comment-body
         if: success() && github.event.number
         run: |
-          body=$(cat .next/analyze/__bundle_analysis_comment.txt)
+          body=$(cat ./examples/swr-site/.next/analyze/__bundle_analysis_comment.txt)
           body="${body//'%'/'%25'}"
           body="${body//$'\n'/'%0A'}"
           body="${body//$'\r'/'%0D'}"
