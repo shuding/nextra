@@ -91,7 +91,7 @@ describe('Page Process', () => {
     ])
   })
 
-  describe.only('getDynamicMeta()', () => {
+  describe('getDynamicMeta()', () => {
     const items: PageMapItem[] = [
       {
         kind: 'Folder',
@@ -141,30 +141,13 @@ describe('Page Process', () => {
             {
               "children": [
                 {
-                  "__nextra_src": "/Users/dmytro/Desktop/nextra/examples/swr-site/pages/remote/_meta.js",
-                  "data": {},
-                  "kind": "Meta",
-                },
-                {
-                  "children": [
-                    {
-                      "__nextra_src": "/Users/dmytro/Desktop/nextra/examples/swr-site/pages/remote/graphql-eslint/_meta.js",
-                      "data": {},
-                      "kind": "Meta",
-                    },
-                  ],
+                  "children": [],
                   "kind": "Folder",
                   "name": "graphql-eslint",
                   "route": "/remote/graphql-eslint",
                 },
                 {
-                  "children": [
-                    {
-                      "__nextra_src": "/Users/dmytro/Desktop/nextra/examples/swr-site/pages/remote/graphql-yoga/_meta.js",
-                      "data": {},
-                      "kind": "Meta",
-                    },
-                  ],
+                  "children": [],
                   "kind": "Folder",
                   "name": "graphql-yoga",
                   "route": "/remote/graphql-yoga",

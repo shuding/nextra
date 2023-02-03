@@ -630,27 +630,13 @@ exports[`Page Process > pageMap en-US 1`] = `
     {
       "children": [
         {
-          "data": {},
-          "kind": "Meta",
-        },
-        {
-          "children": [
-            {
-              "data": {},
-              "kind": "Meta",
-            },
-          ],
+          "children": [],
           "kind": "Folder",
           "name": "graphql-eslint",
           "route": "/remote/graphql-eslint",
         },
         {
-          "children": [
-            {
-              "data": {},
-              "kind": "Meta",
-            },
-          ],
+          "children": [],
           "kind": "Folder",
           "name": "graphql-yoga",
           "route": "/remote/graphql-yoga",
@@ -1148,30 +1134,16 @@ exports[`Page Process > pageMap ru 1`] = `
     {
       "children": [
         {
-          "children": [
-            {
-              "data": {},
-              "kind": "Meta",
-            },
-          ],
+          "children": [],
           "kind": "Folder",
           "name": "graphql-eslint",
           "route": "/remote/graphql-eslint",
         },
         {
-          "children": [
-            {
-              "data": {},
-              "kind": "Meta",
-            },
-          ],
+          "children": [],
           "kind": "Folder",
           "name": "graphql-yoga",
           "route": "/remote/graphql-yoga",
-        },
-        {
-          "data": {},
-          "kind": "Meta",
         },
       ],
       "kind": "Folder",
