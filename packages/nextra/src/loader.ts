@@ -3,6 +3,7 @@ import type { LoaderContext } from 'webpack'
 
 import path from 'node:path'
 import slash from 'slash'
+import fs from 'graceful-fs'
 
 import { hashFnv32a, pageTitleFromFilename, parseFileName } from './utils'
 import { compileMdx } from './compile'
@@ -14,9 +15,33 @@ import {
   MARKDOWN_EXTENSION_REGEX,
   CWD
 } from './constants'
-import { HAS_UNDERSCORE_APP_MDX_FILE, PAGES_DIR } from './file-system'
+import { existsSync, PAGES_DIR } from './file-system'
 
 const IS_WEB_CONTAINER = !!process.versions.webcontainer
+
+const APP_MDX_PATH = path.join(PAGES_DIR, '_app.mdx')
+
+const UNDERSCORE_APP_FILENAME: string =
+  fs
+    .readdirSync(PAGES_DIR)
+    .find(fileName => /^_app\.(js|jsx|ts|tsx|md)$/.test(fileName)) || ''
+
+let HAS_UNDERSCORE_APP_MDX_FILE = existsSync(APP_MDX_PATH)
+
+if (UNDERSCORE_APP_FILENAME) {
+  console.warn(
+    `[nextra] Found "${UNDERSCORE_APP_FILENAME}" file, refactor it to "_app.mdx" for better performance.`
+  )
+} else if (!HAS_UNDERSCORE_APP_MDX_FILE) {
+  const appMdxContent = `export default function App({ Component, pageProps }) {
+  return <Component {...pageProps} />
+}`
+  fs.writeFileSync(APP_MDX_PATH, appMdxContent)
+  HAS_UNDERSCORE_APP_MDX_FILE = true
+  console.info(
+    `[nextra] Didn't find "_app.mdx" file, created it for you for better performance.`
+  )
+}
 
 const initGitRepo = (async () => {
   if (!IS_WEB_CONTAINER) {
@@ -185,16 +210,14 @@ async function loader(
   const fallbackTitle =
     frontMatter.title || title || pageTitleFromFilename(fileMap[mdxPath].name)
 
-  if (searchIndexKey) {
-    if (frontMatter.searchable !== false) {
-      // Store all the things in buildInfo.
-      const { buildInfo } = context._module as any
-      buildInfo.nextraSearch = {
-        indexKey: searchIndexKey,
-        title: fallbackTitle,
-        data: structurizedData,
-        route: pageNextRoute
-      }
+  if (searchIndexKey && frontMatter.searchable !== false) {
+    // Store all the things in buildInfo.
+    const { buildInfo } = context._module as any
+    buildInfo.nextraSearch = {
+      indexKey: searchIndexKey,
+      title: fallbackTitle,
+      data: structurizedData,
+      route: pageNextRoute
     }
   }
 
@@ -222,7 +245,7 @@ async function loader(
     timestamp,
     ...(!HAS_UNDERSCORE_APP_MDX_FILE && {
       pageMap,
-      flexsearch, // todo: can be injected only in _app file
+      flexsearch,
       newNextLinkBehavior // todo: remove in v3
     }),
     readingTime,
@@ -242,11 +265,11 @@ async function loader(
   const cssImport = OFFICIAL_THEMES.includes(theme)
     ? `import '${theme}/style.css'`
     : ''
+  const finalResult = transform ? await transform(result, { route }) : result
   const pageImports = `import __nextra_layout from '${layout}'
 ${themeConfigImport}
 ${katexCssImport}
 ${cssImport}`
-  const finalResult = transform ? await transform(result, { route }) : result
 
   if (pageNextRoute === '/_app') {
     return `${pageImports}

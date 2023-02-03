@@ -160,6 +160,13 @@ export function setupNextraPage({
     __nextra_internal__.pageMap = pageOpts.pageMap
     __nextra_internal__.Layout = nextraLayout
   }
+
+  pageOpts = {
+    // @ts-ignore ignore "'frontMatter' is specified more than once" error to treeshake empty object `{}` for each compiled page
+    frontMatter: {},
+    ...pageOpts
+  }
+
   __nextra_internal__.route = pageOpts.route
   __nextra_internal__.context ||= Object.create(null)
   __nextra_internal__.context[pageNextRoute] = {
@@ -169,8 +176,6 @@ export function setupNextraPage({
     pageOpts: pageOpts.pageMap
       ? pageOpts
       : {
-          // @ts-ignore
-          frontMatter: {},
           ...pageOpts,
           pageMap: __nextra_internal__.pageMap,
           // @ts-ignore

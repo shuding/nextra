@@ -1,4 +1,3 @@
-import path from 'node:path'
 import { findPagesDir, existsSync } from 'next/dist/lib/find-pages-dir.js'
 import { CWD } from './constants'
 
@@ -12,9 +11,6 @@ export function findPagesDirectory(): string {
   )
 }
 
-export const PAGES_DIR =
-  process.env.NODE_ENV === 'test' ? '' : findPagesDirectory()
-
-export const HAS_UNDERSCORE_APP_MDX_FILE = existsSync(
-  path.join(PAGES_DIR, '_app.mdx')
-)
+export const PAGES_DIR = process.env.VITEST_WORKER_ID
+  ? ''
+  : findPagesDirectory()
