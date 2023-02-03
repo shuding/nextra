@@ -137,27 +137,7 @@ describe('Page Process', () => {
       expect(getDynamicMeta('', items, 'en-US')).toMatchInlineSnapshot(`
         [
           [],
-          [
-            {
-              "children": [
-                {
-                  "children": [],
-                  "kind": "Folder",
-                  "name": "graphql-eslint",
-                  "route": "/remote/graphql-eslint",
-                },
-                {
-                  "children": [],
-                  "kind": "Folder",
-                  "name": "graphql-yoga",
-                  "route": "/remote/graphql-yoga",
-                },
-              ],
-              "kind": "Folder",
-              "name": "remote",
-              "route": "/remote",
-            },
-          ],
+          [],
         ]
       `)
     })
