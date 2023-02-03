@@ -275,7 +275,7 @@ ${cssImport}`
     return `${pageImports}
 ${finalResult}
 
-const __nextra_internal__ = globalThis[Symbol.for('__nextra_internal__')] ||= Object.create(null)
+const __nextra_internal__ = globalThis[Symbol.for('__nextra_internal__')] = Object.create(null)
 __nextra_internal__.Layout = __nextra_layout
 __nextra_internal__.pageMap = ${JSON.stringify(pageMap)}
 __nextra_internal__.flexsearch = ${JSON.stringify(flexsearch)}
@@ -287,6 +287,10 @@ ${
   }
 
   const stringifiedPageOpts = JSON.stringify(pageOpts)
+  const stringifiedChecksum = IS_PRODUCTION
+    ? "''"
+    : JSON.stringify(hashFnv32a(stringifiedPageOpts))
+
   const dynamicMetaModules = dynamicMetaItems
     .map(
       descriptor =>
@@ -302,20 +306,18 @@ ${finalResult.replace('export default MDXContent;', '')}
 
 const __nextraPageOptions = {
   MDXContent,
-  ${HAS_UNDERSCORE_APP_MDX_FILE ? '' : 'nextraLayout: __nextra_layout,'}
   pageOpts: ${stringifiedPageOpts},
+  pageNextRoute: ${JSON.stringify(pageNextRoute)},
   ${
-    !HAS_UNDERSCORE_APP_MDX_FILE && themeConfigImport
-      ? 'themeConfig: __nextra_themeConfig,'
-      : ''
+    HAS_UNDERSCORE_APP_MDX_FILE
+      ? ''
+      : 'nextraLayout: __nextra_layout,' +
+        (themeConfigImport && 'themeConfig: __nextra_themeConfig')
   }
-  pageNextRoute: ${JSON.stringify(pageNextRoute)}
 }
 if (process.env.NODE_ENV !== 'production') {
   __nextraPageOptions.hot = module.hot
-  __nextraPageOptions.pageOptsChecksum = ${JSON.stringify(
-    hashFnv32a(stringifiedPageOpts)
-  )}
+  __nextraPageOptions.pageOptsChecksum = ${stringifiedChecksum}
 }
 if (typeof window === 'undefined') __nextraPageOptions.dynamicMetaModules = [${dynamicMetaModules}]
 

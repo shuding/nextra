@@ -159,6 +159,15 @@ export function setupNextraPage({
   if (pageOpts.pageMap) {
     __nextra_internal__.pageMap = pageOpts.pageMap
     __nextra_internal__.Layout = nextraLayout
+  } else {
+    // while using `_app.md/mdx` pageMap will be injected in _app file to boost compilation time,
+    // and reduce bundle size
+    pageOpts = {
+      ...pageOpts,
+      pageMap: __nextra_internal__.pageMap,
+      flexsearch: __nextra_internal__.flexsearch
+    }
+    themeConfig = __nextra_internal__.themeConfig
   }
 
   pageOpts = {
@@ -171,20 +180,8 @@ export function setupNextraPage({
   __nextra_internal__.context ||= Object.create(null)
   __nextra_internal__.context[pageNextRoute] = {
     Content: MDXContent,
-    // while using `_app.md/mdx` pageMap will be injected in _app file to boost compilation time,
-    // and reduce bundle size
-    pageOpts: pageOpts.pageMap
-      ? pageOpts
-      : {
-          ...pageOpts,
-          pageMap: __nextra_internal__.pageMap,
-          // @ts-ignore
-          flexsearch: __nextra_internal__.flexsearch
-        },
-    themeConfig: pageOpts.pageMap
-      ? themeConfig
-      : //@ts-ignore
-        __nextra_internal__.themeConfig
+    pageOpts,
+    themeConfig
   }
 
   if (process.env.NODE_ENV !== 'production' && hot) {
