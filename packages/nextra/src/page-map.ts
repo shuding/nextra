@@ -1,5 +1,9 @@
-import type { FileMap, MdxPath, PageMapItem, DynamicMetaDescriptor } from './types'
-import { parseFileName } from './utils'
+import type {
+  FileMap,
+  MdxPath,
+  PageMapItem,
+  DynamicMetaDescriptor
+} from './types'
 import filterRouteLocale from './filter-route-locale'
 import { IS_PRODUCTION } from './constants'
 
@@ -10,9 +14,10 @@ type PageMapProps = {
   defaultLocale: string
 }
 
-function getDynamicMeta(
+export function getDynamicMeta(
   path: string,
-  items: PageMapItem[]
+  items: PageMapItem[],
+  locale?: string
 ): [DynamicMetaDescriptor[], PageMapItem[]] {
   const newItems: PageMapItem[] = []
   const dynamicMetaItems: DynamicMetaDescriptor[] = []
@@ -22,24 +27,29 @@ function getDynamicMeta(
     if (item.kind === 'Folder') {
       const [dynamicItemsInChildren, newItemsInChildren] = getDynamicMeta(
         `${path}[${i}].children`,
-        item.children
+        item.children,
+        locale
       )
       dynamicMetaItems.push(...dynamicItemsInChildren)
-      newItems.push({
-        ...item,
-        children: newItemsInChildren
-      })
+      if (newItemsInChildren.length) {
+        newItems.push({
+          ...item,
+          children: newItemsInChildren
+        })
+      }
       continue
     }
 
     if (item.kind === 'Meta' && item.__nextra_src) {
-      const { __nextra_src, ...newItem } = item
-      dynamicMetaItems.push({
-        metaFilePath: __nextra_src,
-        metaObjectKeyPath: `${path}[${i}]`,
-        metaParentKeyPath: path.replace(/\.children$/, '')
-      })
-      newItems.push(newItem)
+      if (locale === item.locale) {
+        const { __nextra_src, ...newItem } = item
+        dynamicMetaItems.push({
+          metaFilePath: __nextra_src,
+          metaObjectKeyPath: `${path}[${i}]`,
+          metaParentKeyPath: path.replace(/\.children$/, '')
+        })
+        newItems.push(newItem)
+      }
       continue
     }
     newItems.push(item)
@@ -63,21 +73,20 @@ export function resolvePageMap({
   pageMap: PageMapItem[]
   dynamicMetaItems: DynamicMetaDescriptor[]
 } {
-  let { locale } = parseFileName(filePath)
-  locale ||= defaultLocale
-
-  const pageItem = fileMap[filePath as MdxPath]
+  const { locale, route } = fileMap[filePath as MdxPath]
+  const localeKey = locale || ''
 
   const [dynamicMetaItems, newItems] =
-    (IS_PRODUCTION && cachedDynamicMetaForLocale[locale]) ||
-    (cachedDynamicMetaForLocale[locale] = getDynamicMeta(
+    (IS_PRODUCTION && cachedDynamicMetaForLocale[localeKey]) ||
+    (cachedDynamicMetaForLocale[localeKey] = getDynamicMeta(
       '',
-      locale ? filterRouteLocale(items, locale, defaultLocale) : items
+      locale ? filterRouteLocale(items, locale, defaultLocale) : items,
+      locale
     ))
 
   return {
     pageMap: newItems,
-    route: pageItem.route,
+    route,
     dynamicMetaItems
   }
 }
