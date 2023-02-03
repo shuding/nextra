@@ -15,6 +15,6 @@ export function findPagesDirectory(): string {
 export const PAGES_DIR =
   process.env.NODE_ENV === 'test' ? '' : findPagesDirectory()
 
-export const HAS_UNDERSCORE_APP_MDX_FILE =
-  existsSync(path.join(PAGES_DIR, '_app.mdx')) ||
-  existsSync(path.join(PAGES_DIR, '_app.md'))
+export const HAS_UNDERSCORE_APP_MDX_FILE = existsSync(
+  path.join(PAGES_DIR, '_app.mdx')
+)
