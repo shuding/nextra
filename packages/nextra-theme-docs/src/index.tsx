@@ -259,6 +259,7 @@ export {
   Collapse,
   NotFoundPage,
   ServerSideErrorPage,
+  Steps,
   Tabs,
   Tab,
   Cards,

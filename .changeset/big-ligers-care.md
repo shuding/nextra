@@ -2,4 +2,4 @@
 'nextra-theme-docs': patch
 ---
 
-export `<Card />`, `<Cards >/`
+export `<Card />`, `<Cards >/`, `<Steps />`
