@@ -1,13 +1,11 @@
-import React, { useState, useCallback, createContext, useContext } from 'react'
+import { useState, useCallback, createContext, useContext, memo } from 'react'
+import type { ReactElement, ReactNode } from 'react'
 import cn from 'clsx'
-import type { ReactElement } from 'react'
 
 const ctx = createContext(0)
 
-const { Provider, Consumer } = ctx
-
 function useIndent() {
-  return useContext(ctx) || 0
+  return useContext(ctx)
 }
 
 interface FolderProps {
@@ -26,33 +24,30 @@ interface FileProps {
   children: ReactElement | ReactElement[]
 }
 
-const Tree: React.FC<{
-  children: ReactElement | ReactElement[]
-}> = ({ children }) => (
-  <div className="mt-6 select-none text-sm text-gray-800 dark:text-gray-300">
-    <div className="inline-flex rounded-lg border px-4 py-2 dark:border-neutral-800">
+const Tree = ({ children }: { children: ReactNode }): ReactElement => (
+  <div className="nx-mt-6 nx-select-none nx-text-sm nx-text-gray-800 dark:nx-text-gray-300">
+    <div className="nx-inline-flex nx-rounded-lg nx-border nx-px-4 nx-py-2 dark:nx-border-neutral-800">
       {children}
     </div>
   </div>
 )
 
-function Ident() {
+function Ident(): ReactElement {
   const indent = useIndent()
 
   return (
     <>
       {[...Array(indent)].map((_, i) => (
-        <span className="inline-block w-5" key={i} />
+        <span className="nx-inline-block nx-w-5" key={i} />
       ))}
     </>
   )
 }
 
-const Folder: React.FC<FolderProps> = React.memo(
-  ({ label, name, open, children, defaultOpen, onToggle }) => {
+const Folder = memo<FolderProps>(
+  ({ label, name, open, children, defaultOpen = false, onToggle }) => {
     const indent = useIndent()
-
-    const [isOpen, setIsOpen] = useState(defaultOpen || false)
+    const [isOpen, setIsOpen] = useState(defaultOpen)
 
     const toggle = useCallback(() => {
       onToggle?.(!isOpen)
@@ -62,45 +57,34 @@ const Folder: React.FC<FolderProps> = React.memo(
     const isFolderOpen = open === undefined ? isOpen : open
 
     return (
-      <li className={cn('flex list-none flex-col', { ['']: isFolderOpen })}>
+      <li className="nx-flex nx-list-none nx-flex-col">
         <a
           onClick={toggle}
           title={name}
-          className="inline-flex cursor-pointer items-center py-1 hover:opacity-60"
+          className="nx-inline-flex nx-cursor-pointer nx-items-center nx-py-1 hover:nx-opacity-60"
         >
           <Ident />
-          <span>
-            {isFolderOpen ? (
-              <svg width="1em" height="1em" viewBox="0 0 24 24">
-                <path
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M5 19a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4l2 2h4a2 2 0 0 1 2 2v1M5 19h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2Z"
-                />
-              </svg>
-            ) : (
-              <svg width="1em" height="1em" viewBox="0 0 24 24">
-                <path
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M3 7v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-6l-2-2H5a2 2 0 0 0-2 2Z"
-                />
-              </svg>
-            )}
-          </span>
-          <span className="ml-1">{label ?? name}</span>
+          <svg width="1em" height="1em" viewBox="0 0 24 24">
+            <path
+              fill="none"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d={
+                isFolderOpen
+                  ? 'M5 19a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4l2 2h4a2 2 0 0 1 2 2v1M5 19h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2Z'
+                  : 'M3 7v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-6l-2-2H5a2 2 0 0 0-2 2Z'
+              }
+            />
+          </svg>
+          <span className="nx-ml-1">{label ?? name}</span>
         </a>
-        {isFolderOpen ? (
+        {isFolderOpen && (
           <ul>
-            <Provider value={indent + 1}>{children}</Provider>
+            <ctx.Provider value={indent + 1}>{children}</ctx.Provider>
           </ul>
-        ) : null}
+        )}
       </li>
     )
   }
@@ -108,35 +92,34 @@ const Folder: React.FC<FolderProps> = React.memo(
 
 Folder.displayName = 'Folder'
 
-const File: React.FC<FileProps> = React.memo(
-  ({ label, name, active, ...props }) => {
-    return (
-      <li
-        className={cn(
-          'flex list-none',
-          active && 'nx-text-primary-600 contrast-more:nx-underline'
-        )}
+const File = memo<FileProps>(({ label, name, active, ...props }) => {
+  return (
+    <li
+      className={cn(
+        'nx-flex nx-list-none',
+        active && 'nx-text-primary-600 contrast-more:nx-underline'
+      )}
+    >
+      <a
+        {...props}
+        className="nx-inline-flex nx-cursor-default nx-items-center nx-py-1"
       >
-        <a {...props} className="inline-flex cursor-default items-center py-1">
-          <Ident />
-          <span>
-            <svg width="1em" height="1em" viewBox="0 0 24 24">
-              <path
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M9 12h6m-6 4h6m2 5H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5.586a1 1 0 0 1 .707.293l5.414 5.414a1 1 0 0 1 .293.707V19a2 2 0 0 1-2 2Z"
-              />
-            </svg>
-          </span>
-          <span className="ml-1">{label ?? name}</span>
-        </a>
-      </li>
-    )
-  }
-)
+        <Ident />
+        <svg width="1em" height="1em" viewBox="0 0 24 24">
+          <path
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M9 12h6m-6 4h6m2 5H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5.586a1 1 0 0 1 .707.293l5.414 5.414a1 1 0 0 1 .293.707V19a2 2 0 0 1-2 2Z"
+          />
+        </svg>
+        <span className="nx-ml-1">{label ?? name}</span>
+      </a>
+    </li>
+  )
+})
 
 File.displayName = 'File'
 
