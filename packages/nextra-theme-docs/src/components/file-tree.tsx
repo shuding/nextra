@@ -4,13 +4,11 @@ import type { ReactElement } from 'react'
 
 const ctx = createContext(0)
 
-export const { Provider, Consumer } = ctx
+const { Provider, Consumer } = ctx
 
-export function useIndent() {
+function useIndent() {
   return useContext(ctx) || 0
 }
-
-export default ctx
 
 interface FolderProps {
   name: string

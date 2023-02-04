@@ -4,10 +4,10 @@ In Nextra, the site and page structure can be configured via the co-located `_me
 
 Those configurations affect the overall layout of the theme, especially the navigation bar and the sidebar.
 
-import { Callout } from 'nextra-theme-docs'
-import { Tree, File, Folder } from 'components/file-tree'
+import { Callout, Tree, File, Folder } from 'nextra-theme-docs'
 import Video from 'components/video'
 import {Screenshot} from 'components/screenshot'
+import menuImage from '../../../public/assets/docs/menu.png'
 
 <Callout>
   Read more about Nextra's `_meta.json` files [here](/docs/guide/organize-files).
@@ -211,8 +211,6 @@ You can also hide links like `Home` from the navbar with the [`"display": "hidde
 ### Menus
 
 You can also add menus to the navbar using `"type": "menu"` and the `"items"` option:
-
-import menuImage from '../../../public/assets/docs/menu.png'
 
 <Screenshot src={menuImage} alt="Navbar menu" />
 
