@@ -490,8 +490,9 @@ You are able to customize the option names:
 ```jsx
 export default {
   themeSwitch: {
-    useOptions() {
-
+    options() {
+      //hooks
+      
       return [
         { key: 'light', name: 'Light' },
         { key: 'dark', name: 'Dark' },
