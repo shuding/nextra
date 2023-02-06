@@ -7,13 +7,18 @@ import cn from 'clsx'
 
 import { Select } from './select'
 import { useConfig } from '../contexts'
+import { z } from 'zod'
 
 type ThemeSwitchProps = {
   lite?: boolean
   className?: string
 }
+export const themeOptionSchema = z.object({
+  key: z.enum(['light', 'dark', 'system']),
+  name: z.string()
+})
 
-export type ThemeOption = { key: 'light' | 'dark' | 'system'; name: string }
+export type ThemeOption = z.infer<typeof themeOptionSchema>
 
 export function ThemeSwitch({
   lite,
@@ -21,8 +26,10 @@ export function ThemeSwitch({
 }: ThemeSwitchProps): ReactElement {
   const { setTheme, resolvedTheme, theme = '' } = useTheme()
   const mounted = useMounted()
+  const config = useConfig().themeSwitch
   const IconToUse = mounted && resolvedTheme === 'dark' ? MoonIcon : SunIcon
-  const options = useConfig().themeSwitch.useOptions()
+  const options =
+    typeof config.options === 'function' ? config.options() : config.options
 
   return (
     <div className={cn('nx-relative', className)}>

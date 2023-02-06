@@ -12,7 +12,7 @@ import { z } from 'zod'
 import type { NavBarProps } from './components/navbar'
 import type { TOCProps } from './components/toc'
 import type { NextSeoProps } from 'next-seo'
-import type { ThemeOption } from './components/theme-switch'
+import { themeOptionSchema } from './components/theme-switch'
 
 export const DEFAULT_LOCALE = 'en-US'
 
@@ -140,7 +140,9 @@ export const themeSchema = z.strictObject({
     toggleButton: z.boolean()
   }),
   themeSwitch: z.strictObject({
-    useOptions: z.custom<() => ThemeOption[]>(isFunction)
+    options: z
+      .array(themeOptionSchema)
+      .or(z.function().returns(z.array(themeOptionSchema)))
   }),
   toc: z.strictObject({
     component: z.custom<ReactNode | FC<TOCProps>>(...reactNode),
@@ -306,7 +308,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     toggleButton: false
   },
   themeSwitch: {
-    useOptions() {
+    options: function useOptions() {
       const { locale } = useRouter()
 
       if (locale === 'zh-CN')
