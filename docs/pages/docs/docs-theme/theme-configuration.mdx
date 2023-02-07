@@ -485,14 +485,19 @@ export default {
 
 ## Theme Switch
 
+<OptionTable options={[
+  ['themeSwitch.component', 'React.ReactNode | React.FC<{ lite?: boolean }>', 'Component to render the theme switch.'],
+  ['themeSwitch.useOptions', 'ThemeOptions | () => ThemeOptions', 'Options in the theme switch'],
+]}/>
+
 ### Options
 
-You are able to customize the option names:
+You are able to customize the option names for localization or other purposes:
 
 ```jsx
 export default {
   themeSwitch: {
-    options() {
+    useOptions() {
       return {
         light: 'Light',
         dark: 'Dark',
