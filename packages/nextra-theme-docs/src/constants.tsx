@@ -313,9 +313,9 @@ export const DEFAULT_THEME: DocsThemeConfig = {
 
       if (locale === 'zh-CN')
         return {
-          dark: '深色主題',
-          light: '淺色主題',
-          system: '系統默認'
+          dark: '深色主题',
+          light: '浅色主题',
+          system: '系统默认'
         }
 
       return {
