@@ -9,6 +9,7 @@
   "author": "Shu Ding",
   "license": "MIT",
   "dependencies": {
+    "@next/font": "^13.1.6",
     "@vercel/og": "^0.0.27",
     "clsx": "^1.2.1",
     "framer-motion": "^9.0.0",

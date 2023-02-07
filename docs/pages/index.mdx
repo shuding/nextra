@@ -60,6 +60,12 @@ import docsCardDark from '../public/assets/card-1.dark.png'
   </div>
 
   <style jsx>{`
+    .home-content {
+      color: rgba(51,65,85);
+    }
+    .dark .home-content {
+      color: rgba(226,232,240);
+    }
     .content-container {
       max-width: 90rem;
       padding-left: max(env(safe-area-inset-left),1.5rem);
@@ -84,11 +90,10 @@ import docsCardDark from '../public/assets/card-1.dark.png'
       font-size: 3.125rem;
       font-size: min(4.375rem, max(8vw, 2.5rem));
       font-weight: 700;
-      font-feature-settings: initial;
       letter-spacing: -.12rem;
       margin-left: -0.2rem;
       margin-top: 3.4rem;
-      line-height: 1.1;
+      line-height: 1.15;
       background-image: linear-gradient(146deg,#000,#757a7d);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -100,7 +105,6 @@ import docsCardDark from '../public/assets/card-1.dark.png'
     .subtitle {
       font-size: 1.3rem;
       font-size: min(1.3rem, max(3.5vw, 1.2rem));
-      font-feature-settings: initial;
       line-height: 1.6;
     }
     .nextjs-link {
