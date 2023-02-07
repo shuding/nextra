@@ -24,7 +24,7 @@ importers:
   .:
     specifiers:
       '@changesets/cli': 2.26.0
-      '@edge-runtime/vm': 2.0.3
+      '@edge-runtime/vm': 2.0.4
       '@next/eslint-plugin-next': 13.1.6
       '@typescript-eslint/eslint-plugin': 5.51.0
       '@typescript-eslint/parser': 5.51.0
@@ -44,7 +44,7 @@ importers:
       typescript: 4.9.5
     devDependencies:
       '@changesets/cli': 2.26.0
-      '@edge-runtime/vm': 2.0.3
+      '@edge-runtime/vm': 2.0.4
       '@next/eslint-plugin-next': 13.1.6
       '@typescript-eslint/eslint-plugin': 5.51.0_b635kmla6dsb4frxfihkw4m47e
       '@typescript-eslint/parser': 5.51.0_4vsywjlpuriuw3tl5oq6zy5a64
@@ -768,16 +768,16 @@ packages:
       prettier: 2.8.3
     dev: true
 
-  /@edge-runtime/primitives/2.0.3:
-    resolution: {integrity: sha512-+y39BANcePTGKAE+0R8xX3UFzwTqWQOVUaC+UXsKjA45jGNfZCkGnJgGjJPXZftmxiLcl9R2lYyDvHN+55dUlw==}
+  /@edge-runtime/primitives/2.0.4:
+    resolution: {integrity: sha512-nP4zF4oL/4iNA1Cm1PlO5/Edo25aGtpwgIv8VY18UReJzvn4qc0RgaWsLUMi4qfGLxtiFuuKx6CM0UnHy6Kysw==}
     engines: {node: '>=14'}
     dev: true
 
-  /@edge-runtime/vm/2.0.3:
-    resolution: {integrity: sha512-l0fTtkBIPozgr8vQ46LXCSrp40WBWSNFQy/wGpydAsXznm6So90/ZsZD9hFLiudT2dnPJAWFtdNHcTpEKv8smA==}
+  /@edge-runtime/vm/2.0.4:
+    resolution: {integrity: sha512-kA2gotpWS8tsXbEjO3rEGjPk4EtAbVWnjimMtFpvuUF4SBS5t+GtnkjsT/pjdcHq5b0PYAHit3zybqP0PhaXQg==}
     engines: {node: '>=14'}
     dependencies:
-      '@edge-runtime/primitives': 2.0.3
+      '@edge-runtime/primitives': 2.0.4
     dev: true
 
   /@emotion/is-prop-valid/0.8.8:
