@@ -18,6 +18,8 @@ export const themeOptionsSchema = z.strictObject({
   system: z.string()
 })
 
+export type ThemeOptions = z.infer<typeof themeOptionsSchema>
+
 export function ThemeSwitch({ lite }: ThemeSwitchProps): ReactElement {
   const { setTheme, resolvedTheme, theme = '' } = useTheme()
   const mounted = useMounted()
@@ -25,7 +27,9 @@ export function ThemeSwitch({ lite }: ThemeSwitchProps): ReactElement {
 
   const IconToUse = mounted && resolvedTheme === 'dark' ? MoonIcon : SunIcon
   const options =
-    typeof config.options === 'function' ? config.options() : config.options
+    typeof config.useOptions === 'function'
+      ? config.useOptions()
+      : config.useOptions
 
   return (
     <Select

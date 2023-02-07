@@ -141,7 +141,7 @@ export const themeSchema = z.strictObject({
   }),
   themeSwitch: z.strictObject({
     component: z.custom<ReactNode | FC<{ lite?: boolean }>>(...reactNode),
-    options: themeOptionsSchema.or(z.function().returns(themeOptionsSchema))
+    useOptions: themeOptionsSchema.or(z.function().returns(themeOptionsSchema))
   }),
   toc: z.strictObject({
     component: z.custom<ReactNode | FC<TOCProps>>(...reactNode),
@@ -308,7 +308,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
   },
   themeSwitch: {
     component: ThemeSwitch,
-    options: function useOptions() {
+    useOptions() {
       const { locale } = useRouter()
 
       if (locale === 'zh-CN')
