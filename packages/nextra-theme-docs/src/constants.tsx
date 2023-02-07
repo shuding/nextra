@@ -12,7 +12,7 @@ import { z } from 'zod'
 import type { NavBarProps } from './components/navbar'
 import type { TOCProps } from './components/toc'
 import type { NextSeoProps } from 'next-seo'
-import { themeOptionSchema } from './components/theme-switch'
+import { themeOptionsSchema, ThemeSwitch } from './components/theme-switch'
 
 export const DEFAULT_LOCALE = 'en-US'
 
@@ -140,9 +140,8 @@ export const themeSchema = z.strictObject({
     toggleButton: z.boolean()
   }),
   themeSwitch: z.strictObject({
-    options: z
-      .array(themeOptionSchema)
-      .or(z.function().returns(z.array(themeOptionSchema)))
+    component: z.custom<ReactNode | FC<{ lite?: boolean }>>(...reactNode),
+    options: themeOptionsSchema.or(z.function().returns(themeOptionsSchema))
   }),
   toc: z.strictObject({
     component: z.custom<ReactNode | FC<TOCProps>>(...reactNode),
@@ -308,21 +307,22 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     toggleButton: false
   },
   themeSwitch: {
+    component: ThemeSwitch,
     options: function useOptions() {
       const { locale } = useRouter()
 
       if (locale === 'zh-CN')
-        return [
-          { key: 'light', name: '淺色主題' },
-          { key: 'dark', name: '深色主題' },
-          { key: 'system', name: '系統默認' }
-        ]
+        return {
+          dark: '深色主題',
+          light: '淺色主題',
+          system: '系統默認'
+        }
 
-      return [
-        { key: 'light', name: 'Light' },
-        { key: 'dark', name: 'Dark' },
-        { key: 'system', name: 'System' }
-      ]
+      return {
+        dark: 'Dark',
+        light: 'Light',
+        system: 'System'
+      }
     }
   },
   toc: {

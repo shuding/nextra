@@ -2,7 +2,6 @@ import type { ReactElement } from 'react'
 import cn from 'clsx'
 import { useConfig } from '../contexts'
 import { LocaleSwitch } from './locale-switch'
-import { ThemeSwitch } from './theme-switch'
 import { renderComponent } from '../utils'
 
 export function Footer({ menu }: { menu?: boolean }): ReactElement {
@@ -18,7 +17,7 @@ export function Footer({ menu }: { menu?: boolean }): ReactElement {
         )}
       >
         {config.i18n.length > 0 && <LocaleSwitch options={config.i18n} />}
-        {config.darkMode && <ThemeSwitch />}
+        {config.darkMode && renderComponent(config.themeSwitch.component)}
       </div>
       <hr className="dark:nx-border-neutral-800" />
       <div
