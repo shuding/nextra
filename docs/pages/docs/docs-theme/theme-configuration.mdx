@@ -485,21 +485,21 @@ export default {
 
 ## Theme Switch
 
+### Options
+
 You are able to customize the option names:
 
 ```jsx
 export default {
   themeSwitch: {
     options() {
-      //hooks
-      
-      return [
-        { key: 'light', name: 'Light' },
-        { key: 'dark', name: 'Dark' },
-        { key: 'system', name: 'System' }
-      ]
+      return {
+        light: 'Light',
+        dark: 'Dark',
+        system: 'System'
+      }
     }
-  },
+  }
 }
 ```
 
