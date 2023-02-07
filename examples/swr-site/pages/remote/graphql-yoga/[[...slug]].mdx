@@ -39,4 +39,12 @@ export const getStaticPaths = async () => {
   }
 }
 
-<RemoteContent components={{ PackageCmd: () => null, Tab, Tabs, Callout }} />
+<RemoteContent
+  components={{
+    PackageCmd: () => null,
+    CodegenCallout: () => null,
+    Tab,
+    Tabs,
+    Callout
+  }}
+/>
