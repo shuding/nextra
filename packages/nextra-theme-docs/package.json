@@ -42,7 +42,7 @@
     "format": "prettier --ignore-path ../../.gitignore --write --list-different ."
   },
   "dependencies": {
-    "@headlessui/react": "^1.7.7",
+    "@headlessui/react": "^1.7.10",
     "@popperjs/core": "^2.11.6",
     "clsx": "^1.2.1",
     "flexsearch": "^0.7.21",
