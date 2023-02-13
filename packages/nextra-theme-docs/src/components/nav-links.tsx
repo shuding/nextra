@@ -37,7 +37,7 @@ export const NavLinks = ({
   return (
     <div
       className={cn(
-        'nx-mb-8 nx-flex nx-items-center nx-border-t nx-pt-8 dark:nx-border-neutral-800',
+        'nextra-nav-links-container nx-mb-8 nx-flex nx-items-center nx-border-t nx-pt-8 dark:nx-border-neutral-800',
         'contrast-more:nx-border-neutral-400 dark:contrast-more:nx-border-neutral-400'
       )}
     >
