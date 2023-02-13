@@ -147,16 +147,6 @@ input[type='search'] {
   }
 }
 
-@media print {
-  .nextra-banner-container,
-  .nextra-nav-container,
-  .nextra-sidebar-container,
-  .nextra-toc,
-  .nextra-nav-links-container {
-    display: none !important;
-  }
-}
-
 @keyframes nextra-fadein {
   0% {
     opacity: 0;
