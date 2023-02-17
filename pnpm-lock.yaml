@@ -40,7 +40,7 @@ importers:
       prettier-plugin-tailwindcss: 0.2.3
       rimraf: 4.1.2
       tsup: ^6.5.0
-      turbo: 1.7.4
+      turbo: 1.8.0
       typescript: 4.9.5
     devDependencies:
       '@changesets/cli': 2.26.0
@@ -60,7 +60,7 @@ importers:
       prettier-plugin-tailwindcss: 0.2.3_prettier@2.8.4
       rimraf: 4.1.2
       tsup: 6.5.0_typescript@4.9.5
-      turbo: 1.7.4
+      turbo: 1.8.0
       typescript: 4.9.5
 
   docs:
@@ -7596,65 +7596,65 @@ packages:
       yargs: 17.5.1
     dev: true
 
-  /turbo-darwin-64/1.7.4:
-    resolution: {integrity: sha512-ZyYrQlUl8K/mYN1e6R7bEhPPYjMakz0DYMaexkyD7TAijQtWmTSd4a+I7VknOYNEssnUZ/v41GU3gPV1JAzxxQ==}
+  /turbo-darwin-64/1.8.0:
+    resolution: {integrity: sha512-NxsE8OXuFigOV5GH/12Q4+HqAM5w3ZDHhfqxQPEyi1mM2e/+7XSUwNKOjQHzxFdwS/m54Y/GvNr75/GxqxblaA==}
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-darwin-arm64/1.7.4:
-    resolution: {integrity: sha512-CKIXg9uqp1a+Yeq/c4U0alPOqvwLUq5SBZf1PGYhGqJsfG0fRBtJfkUjHuBsuJIOGXg8rCmcGSWGIsIF6fqYuw==}
+  /turbo-darwin-arm64/1.8.0:
+    resolution: {integrity: sha512-WjJJm5DdhocjzrPRDme+irgN+X/KKk9AnLmY9PPxDzeegeBTaenQqoN4k4Z3iSPqdkdnbT1zMO4+xt+rof43cg==}
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-linux-64/1.7.4:
-    resolution: {integrity: sha512-RIUl4RUFFyzD2T024vL7509Ygwcw+SEa8NOwPfaN6TtJHK7RZV/SBP3fLNVOptG9WRLnOWX3OvsLMbiOqDLLyA==}
+  /turbo-linux-64/1.8.0:
+    resolution: {integrity: sha512-n41gbE7HxLr+j8Mduq10I2k79uS3vTsSwl4+z5Zpcm2GgI1ljinnVvIkeTupfaTqV4AsVz4w7JBtF9HmxKJncw==}
     cpu: [x64]
     os: [linux]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-linux-arm64/1.7.4:
-    resolution: {integrity: sha512-Bg65F0AjYYYxqE6RPf2H5TIGuA/EyWMeGOATHVSZOWAbYcnG3Ly03GZii8AHnUi7ntWBdjwvXf/QbOS1ayNB6A==}
+  /turbo-linux-arm64/1.8.0:
+    resolution: {integrity: sha512-Jq7lBwFT52MPyi+HqXsemQiVXJXLPmyt+0UQYvcxza01a/dXGlQb7H980EOfE/QNUp1Oq9RZXwJGE/8YH8c+bQ==}
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-windows-64/1.7.4:
-    resolution: {integrity: sha512-rTaV50XZ2BRxRHOHqt1UsWfeDmYLbn8UKE6g2D2ED+uW+kmnTvR9s01nmlGWd2sAuWcRYQyQ2V+O09VfKPKcQw==}
+  /turbo-windows-64/1.8.0:
+    resolution: {integrity: sha512-x+0jeQ1gE1yPoZ4CBnaVbCeIY5EeGTKs2tuFA1zS5x8rz8yFB4pgxGWt+Romk/tyRyav/ZhjUZ98EeDKYP2ePQ==}
     cpu: [x64]
     os: [win32]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-windows-arm64/1.7.4:
-    resolution: {integrity: sha512-h8sxdKPvHTnWUPtwnYszFMmSO0P/iUUwmYY9n7iYThA71zSao28UeZ0H0Gw75cY3MPjvkjn2C4EBAUGPjuZJLw==}
+  /turbo-windows-arm64/1.8.0:
+    resolution: {integrity: sha512-24aaeWLnzj2z2nmH2ra0cr+CKclWuArJZfx/NgS3jgJDB7kbcwoIfLxEUXhWudT5Mkbh44Oz1puwYauw5lnBWQ==}
     cpu: [arm64]
     os: [win32]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo/1.7.4:
-    resolution: {integrity: sha512-8RLedDoUL0kkVKWEZ/RMM70BvKLyDFen06QuKKhYC2XNOfNKqFDqzIdcY/vGick869bNIWalChoy4O07k0HLsA==}
+  /turbo/1.8.0:
+    resolution: {integrity: sha512-vqRF0JGWGAKrBVtt/QT6ggBEYyRLTynZNRCiUad5zlXA7FB1vLTnCSQT6Hj2sq80QFGcWmgf2bLiNDKHiP4THA==}
     hasBin: true
     requiresBuild: true
     optionalDependencies:
-      turbo-darwin-64: 1.7.4
-      turbo-darwin-arm64: 1.7.4
-      turbo-linux-64: 1.7.4
-      turbo-linux-arm64: 1.7.4
-      turbo-windows-64: 1.7.4
-      turbo-windows-arm64: 1.7.4
+      turbo-darwin-64: 1.8.0
+      turbo-darwin-arm64: 1.8.0
+      turbo-linux-64: 1.8.0
+      turbo-linux-arm64: 1.8.0
+      turbo-windows-64: 1.8.0
+      turbo-windows-arm64: 1.8.0
     dev: true
 
   /type-check/0.3.2:
