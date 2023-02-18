@@ -40,7 +40,7 @@ export function Callout({
   return (
     <div
       className={cn(
-        'nextra-callout nx-mt-6 nx-flex nx-rounded-lg nx-border nx-py-2 ltr:nx-pr-4 rtl:nx-pl-4',
+        'nextra-callout nx-overflow-x-auto nx-mt-6 nx-flex nx-rounded-lg nx-border nx-py-2 ltr:nx-pr-4 rtl:nx-pl-4',
         'contrast-more:nx-border-current contrast-more:dark:nx-border-current',
         classes[type]
       )}
