@@ -10,7 +10,7 @@
 
 html {
   @apply nx-antialiased nx-text-base;
-  font-feature-settings: 'rlig' 1, 'calt' 1, 'ss01' 1, 'ss06' 1;
+  font-feature-settings: 'rlig' 1, 'calt' 1, 'ss01' 1;
   -webkit-tap-highlight-color: transparent;
 }
 
