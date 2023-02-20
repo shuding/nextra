@@ -1,5 +1,17 @@
 # nextra-theme-blog
 
+## 2.2.15
+
+### Patch Changes
+
+- 2e441b7: open http:// links in new window
+- da585a8: force theme to `light` if `darkMode: false` was set
+- 3e9e54f: hide unnecessary parts of the pages when being printed
+- Updated dependencies [d5aa17c]
+- Updated dependencies [016828e]
+- Updated dependencies [b3219c3]
+  - nextra@2.2.15
+
 ## 2.2.14
 
 ### Patch Changes
