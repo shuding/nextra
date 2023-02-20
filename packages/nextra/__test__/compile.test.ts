@@ -10,7 +10,6 @@ type Name =
   | 'dynamic-h1.mdx'
   | 'no-h1.mdx'
   | 'static-h1.mdx'
-  | 'markdown-link.md'
 
 function loadFixture(name: Name) {
   const filePath = path.join(CWD, '__test__', 'fixture', 'headings', name)
