@@ -51,10 +51,19 @@ describe('Process heading', () => {
 })
 
 describe('Link', () => {
-  it('support markdown links', async () => {
-    const data = await loadFixture('markdown-link.md')
-    const result = await compileMdx(data, { mdxOptions })
-    expect(result).toMatchSnapshot()
+  it('supports .md links', async () => {
+    const { result } = await compileMdx(`[link](../file.md)`, { mdxOptions })
+    expect(result).toMatch(`<_components.a href="../file">`)
+  })
+
+  it('supports .mdx links', async () => {
+    const { result } = await compileMdx(`[link](../file.mdx)`, { mdxOptions })
+    expect(result).toMatch(`<_components.a href="../file">`)
+  })
+
+  it('supports URL links', async () => {
+    const { result } = await compileMdx(`[link](../file)`, { mdxOptions })
+    expect(result).toMatch(`<_components.a href="../file">`)
   })
 })
 
