@@ -1,5 +1,30 @@
 // Vitest Snapshot v1
 
+exports[`Link > support markdown links 1`] = `
+{
+  "frontMatter": {},
+  "headings": [],
+  "result": "/*@jsxRuntime automatic @jsxImportSource react*/
+import {useMDXComponents as _provideComponents} from \\"nextra/mdx\\";
+function _createMdxContent(props) {
+  const _components = Object.assign({
+    ul: \\"ul\\",
+    li: \\"li\\",
+    a: \\"a\\"
+  }, _provideComponents(), props.components);
+  return <_components.ul>{\\"\\\\n\\"}<_components.li><_components.a href=\\"code-h1\\">{\\"URL\\"}</_components.a></_components.li>{\\"\\\\n\\"}<_components.li><_components.a href=\\"code-h1\\">{\\"File path\\"}</_components.a></_components.li>{\\"\\\\n\\"}</_components.ul>;
+}
+function MDXContent(props = {}) {
+  const {wrapper: MDXLayout} = Object.assign({}, _provideComponents(), props.components);
+  return MDXLayout ? <MDXLayout {...props}><_createMdxContent {...props} /></MDXLayout> : _createMdxContent(props);
+}
+export default MDXContent;
+",
+  "searchIndexKey": null,
+  "structurizedData": {},
+}
+`;
+
 exports[`Process heading > code-h1 1`] = `
 {
   "frontMatter": {},

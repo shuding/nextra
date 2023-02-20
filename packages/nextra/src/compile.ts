@@ -23,6 +23,7 @@ import { truthy } from './utils'
 import remarkMath from 'remark-math'
 import rehypeKatex from 'rehype-katex'
 import { CODE_BLOCK_FILENAME_REGEX, CWD, DEFAULT_LOCALE } from './constants'
+import { remarkMarkdownLinkRewrite } from './mdx-plugins/remark-markdown-link-rewrite';
 
 globalThis.__nextra_temp_do_not_use = () => {
   import('./__temp__')
@@ -140,7 +141,8 @@ export async function compileMdx(
         searchIndexKey !== null && structurize(structurizedData, flexsearch),
         readingTime && remarkReadingTime,
         latex && remarkMath,
-        isFileOutsideCWD && remarkReplaceImports
+        isFileOutsideCWD && remarkReplaceImports,
+        remarkMarkdownLinkRewrite,
       ].filter(truthy),
       rehypePlugins: [
         ...rehypePlugins,

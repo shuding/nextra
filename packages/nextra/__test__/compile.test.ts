@@ -10,6 +10,7 @@ type Name =
   | 'dynamic-h1.mdx'
   | 'no-h1.mdx'
   | 'static-h1.mdx'
+  | 'markdown-link.md'
 
 function loadFixture(name: Name) {
   const filePath = path.join(CWD, '__test__', 'fixture', 'headings', name)
@@ -44,6 +45,14 @@ describe('Process heading', () => {
   })
   it('no-h1', async () => {
     const data = await loadFixture('no-h1.mdx')
+    const result = await compileMdx(data, { mdxOptions })
+    expect(result).toMatchSnapshot()
+  })
+})
+
+describe('Link', () => {
+  it('support markdown links', async () => {
+    const data = await loadFixture('markdown-link.md')
     const result = await compileMdx(data, { mdxOptions })
     expect(result).toMatchSnapshot()
   })
