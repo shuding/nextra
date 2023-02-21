@@ -1,6 +1,6 @@
 # Docs Theme
 
-import { Callout, Tab, Tabs } from 'nextra-theme-docs'
+import { Callout, Tab, Tabs, Steps } from 'nextra-theme-docs'
 
 Nextra Docs Theme is a theme that includes almost everything you need to build a modern documentation website. It includes a top navigation bar, a search bar, a pages sidebar, a TOC sidebar, and other built-in components.
 
@@ -22,8 +22,7 @@ You can also manually fork the [template repository](https://github.com/shuding/
 
 ## Start as New Project
 
-<div className="steps-container">
-
+<Steps>
 ### Install
 
 To create a Nextra Docs site manually, you have to install **Next.js**, **React**, **Nextra**, and **Nextra Docs Theme**. In your project directory, run the following command to install the dependencies:
@@ -95,11 +94,11 @@ Hello, world!
 ```
 
 And run the `pnpm next` command to start developing the project! 🎉
-</div>
+</Steps>
 
 Next, check out the next section to learn about organizing the documentation structure and configuring the website theme:
 
-import { Card, Cards } from '@components/card'
+import { Card, Cards } from 'nextra-theme-docs'
 
 <Cards>
   <Card icon={<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">

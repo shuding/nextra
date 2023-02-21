@@ -151,7 +151,11 @@ const Summary = (props: ComponentProps<'summary'>): ReactElement => {
 }
 
 const A = ({ href = '', ...props }) => (
-  <Anchor href={href} newWindow={href.startsWith('https://')} {...props} />
+  <Anchor
+    href={href}
+    newWindow={href.startsWith('https://') || href.startsWith('http://')}
+    {...props}
+  />
 )
 
 export const getComponents = ({

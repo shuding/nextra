@@ -32,7 +32,7 @@ interface BodyProps {
 }
 
 const classes = {
-  toc: cn('nextra-toc nx-order-last nx-hidden nx-w-64 nx-shrink-0 xl:nx-block'),
+  toc: cn('nextra-toc nx-order-last nx-hidden nx-w-64 nx-shrink-0 xl:nx-block print:nx-hidden'),
   main: cn('nx-w-full nx-overflow-x-hidden nx-break-words')
 }
 
@@ -259,8 +259,12 @@ export {
   Collapse,
   NotFoundPage,
   ServerSideErrorPage,
+  Steps,
   Tabs,
   Tab,
+  Cards,
+  Card,
+  FileTree,
   Navbar,
   SkipNavContent,
   SkipNavLink,
