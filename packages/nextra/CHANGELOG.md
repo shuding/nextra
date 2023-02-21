@@ -1,5 +1,13 @@
 # nextra
 
+## 2.2.15
+
+### Patch Changes
+
+- d5aa17c: do not redirect `.txt` files in nextra's `locales` middleware
+- 016828e: do not redirect .mp4 in locales middleware
+- b3219c3: do not override `className` for `<Td />`, `<Th />` and `<Tr />` components
+
 ## 2.2.14
 
 ### Patch Changes
