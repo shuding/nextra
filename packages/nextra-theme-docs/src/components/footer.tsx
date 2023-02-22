@@ -7,18 +7,23 @@ import { renderComponent } from '../utils'
 
 export function Footer({ menu }: { menu?: boolean }): ReactElement {
   const config = useConfig()
+
   return (
     <footer className="nx-bg-gray-100 nx-pb-[env(safe-area-inset-bottom)] dark:nx-bg-neutral-900 print:nx-bg-transparent">
       <div
         className={cn(
           'nx-mx-auto nx-flex nx-max-w-[90rem] nx-gap-2 nx-py-2 nx-px-4',
-          menu && (config.i18n.length > 0 || config.darkMode)
+          menu &&
+            (config.i18n.length > 0 ||
+              (config.darkMode === undefined && !config.nextThemes.forcedTheme))
             ? 'nx-flex'
             : 'nx-hidden'
         )}
       >
         {config.i18n.length > 0 && <LocaleSwitch options={config.i18n} />}
-        {config.darkMode && <ThemeSwitch />}
+        {config.darkMode === undefined && !config.nextThemes.forcedTheme && (
+          <ThemeSwitch />
+        )}
       </div>
       <hr className="dark:nx-border-neutral-800" />
       <div

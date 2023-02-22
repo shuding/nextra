@@ -1,12 +1,12 @@
 /* eslint sort-keys: error */
-import type { FC, ReactNode } from 'react';
+import type { FC, ReactNode } from 'react'
 import { isValidElement } from 'react'
 import { useRouter } from 'next/router'
 import { Anchor, Flexsearch, Footer, Navbar, TOC } from './components'
 import { DiscordIcon, GitHubIcon } from 'nextra/icons'
 import { MatchSorterSearch } from './components/match-sorter-search'
 import { useConfig } from './contexts'
-import type { Item } from './utils';
+import type { Item } from './utils'
 import { useGitEditUrl, getGitIssueUrl } from './utils'
 import { z } from 'zod'
 import type { NavBarProps } from './components/navbar'
@@ -59,7 +59,7 @@ export const themeSchema = z.strictObject({
     link: z.string().startsWith('https://').optional()
   }),
   components: z.record(z.custom<FC>(...fc)).optional(),
-  darkMode: z.boolean(),
+  darkMode: z.boolean().optional(),
   direction: z.enum(['ltr', 'rtl']),
   docsRepositoryBase: z.string().startsWith('https://'),
   editLink: z.strictObject({
@@ -168,7 +168,6 @@ export const DEFAULT_THEME: DocsThemeConfig = {
       </>
     )
   },
-  darkMode: true,
   direction: 'ltr',
   docsRepositoryBase: 'https://github.com/shuding/nextra',
   editLink: {

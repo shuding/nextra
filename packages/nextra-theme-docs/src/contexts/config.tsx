@@ -118,9 +118,15 @@ export const ConfigProvider = ({
     <ThemeProvider
       attribute="class"
       disableTransitionOnChange
-      defaultTheme={nextThemes.defaultTheme}
+      defaultTheme={
+        theme.darkMode === undefined
+          ? nextThemes.defaultTheme
+          : theme.darkMode
+          ? 'dark'
+          : 'light'
+      }
       storageKey={nextThemes.storageKey}
-      forcedTheme={theme.darkMode ? nextThemes.forcedTheme : 'light'}
+      forcedTheme={nextThemes.forcedTheme}
     >
       <ConfigContext.Provider value={extendedConfig}>
         <MenuProvider value={{ menu, setMenu }}>{children}</MenuProvider>

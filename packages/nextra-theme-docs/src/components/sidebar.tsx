@@ -466,12 +466,13 @@ export function Sidebar({
                 className={cn(showSidebar ? 'nx-grow' : 'max-md:nx-grow')}
               />
             )}
-            {config.darkMode && (
-              <ThemeSwitch
-                lite={!showSidebar || hasI18n}
-                className={showSidebar && !hasI18n ? 'nx-grow' : ''}
-              />
-            )}
+            {config.darkMode === undefined &&
+              !config.nextThemes.forcedTheme && (
+                <ThemeSwitch
+                  lite={!showSidebar || hasI18n}
+                  className={showSidebar && !hasI18n ? 'nx-grow' : ''}
+                />
+              )}
             {config.sidebar.toggleButton && (
               <button
                 title={showSidebar ? 'Hide sidebar' : 'Show sidebar'}

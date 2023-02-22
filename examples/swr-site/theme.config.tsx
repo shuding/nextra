@@ -66,7 +66,6 @@ const config: DocsThemeConfig = {
     key: 'swr-2',
     text: 'SWR 2.0 is out! Read more →'
   },
-  darkMode: true,
   docsRepositoryBase:
     'https://github.com/shuding/nextra/blob/core/examples/swr-site',
   editLink: {
