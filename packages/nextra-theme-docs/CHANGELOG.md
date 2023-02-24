@@ -1,5 +1,14 @@
 # nextra-theme-docs
 
+## 2.2.16
+
+### Patch Changes
+
+- b94245a: Reverts #1417 "force theme to light if darkMode: false was set"
+- d495e5f: introduce `_app.mdx` for better performance and smallest `.next/static/chunks` size
+- Updated dependencies [d495e5f]
+  - nextra@2.2.16
+
 ## 2.2.15
 
 ### Patch Changes
