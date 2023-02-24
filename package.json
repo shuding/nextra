@@ -21,7 +21,7 @@
   "devDependencies": {
     "@changesets/cli": "2.26.0",
     "@edge-runtime/vm": "2.0.5",
-    "@next/eslint-plugin-next": "13.2.0",
+    "@next/eslint-plugin-next": "13.2.1",
     "@typescript-eslint/eslint-plugin": "5.53.0",
     "@typescript-eslint/parser": "5.53.0",
     "eslint": "8.34.0",
