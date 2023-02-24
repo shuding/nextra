@@ -133,7 +133,7 @@ describe('Page Process', () => {
         ]
       }
     ]
-    it('should not return dynamicItems for incorrect locale', async () => {
+    it('should not return dynamicItems for incorrect locale', () => {
       expect(getDynamicMeta('', items, 'en-US')).toMatchInlineSnapshot(`
         [
           [],
@@ -141,7 +141,7 @@ describe('Page Process', () => {
         ]
       `)
     })
-    it('should return dynamicItems for unset locale', async () => {
+    it('should return dynamicItems for unset locale', () => {
       expect(getDynamicMeta('', items)).toMatchInlineSnapshot(`
         [
           [
