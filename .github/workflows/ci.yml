@@ -30,6 +30,9 @@ jobs:
       - name: Install Dependencies
         run: pnpm install
 
+      - name: Site
+        run: pnpm run build:all
+
       - name: Test
         run: pnpm test
 
@@ -45,5 +48,3 @@ jobs:
       - name: Type Check
         run: pnpm run types:check
 
-      - name: Site
-        run: pnpm run build:all

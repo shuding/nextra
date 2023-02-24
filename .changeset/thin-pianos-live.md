@@ -4,4 +4,4 @@
 'nextra-theme-docs': minor
 ---
 
-introduce `_app.{md,mdx}` for better perfomance, smallest bundle size
+introduce `_app.mdx` for better performance and smallest `.next/static/chunks` size

@@ -3,6 +3,7 @@ import type { LoaderContext } from 'webpack'
 
 import path from 'node:path'
 import slash from 'slash'
+import fs from 'graceful-fs'
 
 import { hashFnv32a, pageTitleFromFilename, parseFileName } from './utils'
 import { compileMdx } from './compile'
@@ -14,9 +15,33 @@ import {
   MARKDOWN_EXTENSION_REGEX,
   CWD
 } from './constants'
-import { HAS_UNDERSCORE_APP_MDX_FILE, PAGES_DIR } from './file-system'
+import { existsSync, PAGES_DIR } from './file-system'
 
 const IS_WEB_CONTAINER = !!process.versions.webcontainer
+
+const APP_MDX_PATH = path.join(PAGES_DIR, '_app.mdx')
+
+const UNDERSCORE_APP_FILENAME: string =
+  fs
+    .readdirSync(PAGES_DIR)
+    .find(fileName => /^_app\.(js|jsx|ts|tsx|md)$/.test(fileName)) || ''
+
+let HAS_UNDERSCORE_APP_MDX_FILE = existsSync(APP_MDX_PATH)
+
+if (UNDERSCORE_APP_FILENAME) {
+  console.warn(
+    `[nextra] Found "${UNDERSCORE_APP_FILENAME}" file, refactor it to "_app.mdx" for better performance.`
+  )
+} else if (!HAS_UNDERSCORE_APP_MDX_FILE) {
+  const appMdxContent = `export default function App({ Component, pageProps }) {
+  return <Component {...pageProps} />
+}`
+  fs.writeFileSync(APP_MDX_PATH, appMdxContent)
+  HAS_UNDERSCORE_APP_MDX_FILE = true
+  console.info(
+    `[nextra] Didn't find "_app.mdx" file, created it for you for better performance.`
+  )
+}
 
 const initGitRepo = (async () => {
   if (!IS_WEB_CONTAINER) {
@@ -185,16 +210,14 @@ async function loader(
   const fallbackTitle =
     frontMatter.title || title || pageTitleFromFilename(fileMap[mdxPath].name)
 
-  if (searchIndexKey) {
-    if (frontMatter.searchable !== false) {
-      // Store all the things in buildInfo.
-      const { buildInfo } = context._module as any
-      buildInfo.nextraSearch = {
-        indexKey: searchIndexKey,
-        title: fallbackTitle,
-        data: structurizedData,
-        route: pageNextRoute
-      }
+  if (searchIndexKey && frontMatter.searchable !== false) {
+    // Store all the things in buildInfo.
+    const { buildInfo } = context._module as any
+    buildInfo.nextraSearch = {
+      indexKey: searchIndexKey,
+      title: fallbackTitle,
+      data: structurizedData,
+      route: pageNextRoute
     }
   }
 
@@ -213,16 +236,18 @@ async function loader(
   // Relative path instead of a package name
   const layout = isLocalTheme ? path.resolve(theme) : theme
 
-  let pageOpts: PageOpts = {
+  let pageOpts: Partial<PageOpts> = {
     filePath: slash(path.relative(CWD, mdxPath)),
     route,
-    frontMatter,
-    pageMap,
+    ...(Object.keys(frontMatter).length > 0 && { frontMatter }),
     headings,
     hasJsxInH1,
     timestamp,
-    flexsearch, // todo: can be injected only in _app file
-    newNextLinkBehavior, // todo: remove in v3
+    ...(!HAS_UNDERSCORE_APP_MDX_FILE && {
+      pageMap,
+      flexsearch,
+      newNextLinkBehavior // todo: remove in v3
+    }),
     readingTime,
     title: fallbackTitle
   }
@@ -231,25 +256,8 @@ async function loader(
     // some fields of `pageOpts`. One example is that the theme doesn't need
     // to access the full pageMap or frontMatter of other pages, and it's not
     // necessary to include them in the bundle.
-    pageOpts = transformPageOpts(pageOpts)
+    pageOpts = transformPageOpts(pageOpts as any)
   }
-  if (HAS_UNDERSCORE_APP_MDX_FILE) {
-    // @ts-expect-error `pageMap` will be injected in `setupUnderscoreApp` and not for each compiled mdx
-    delete pageOpts.pageMap
-  }
-  const finalResult = (
-    transform ? await transform(result, { route }) : result
-  ).replace('export default MDXContent;', '')
-
-  if (pageNextRoute === '/_app') {
-    return `import { setupUnderscoreApp } from 'nextra/setup-underscore-app'
-${finalResult}
-export default setupUnderscoreApp({
-  MDXContent,
-  pageMap: ${JSON.stringify(pageMap)}
-})`
-  }
-
   const themeConfigImport = themeConfig
     ? `import __nextra_themeConfig from '${slash(path.resolve(themeConfig))}'`
     : ''
@@ -257,10 +265,32 @@ export default setupUnderscoreApp({
   const cssImport = OFFICIAL_THEMES.includes(theme)
     ? `import '${theme}/style.css'`
     : ''
+  const finalResult = transform ? await transform(result, { route }) : result
+  const pageImports = `import __nextra_layout from '${layout}'
+${themeConfigImport}
+${katexCssImport}
+${cssImport}`
+
+  if (pageNextRoute === '/_app') {
+    return `${pageImports}
+${finalResult}
+
+const __nextra_internal__ = globalThis[Symbol.for('__nextra_internal__')] = Object.create(null)
+__nextra_internal__.Layout = __nextra_layout
+__nextra_internal__.pageMap = ${JSON.stringify(pageMap)}
+__nextra_internal__.flexsearch = ${JSON.stringify(flexsearch)}
+${
+  themeConfigImport
+    ? '__nextra_internal__.themeConfig = __nextra_themeConfig'
+    : ''
+}`
+  }
+
   const stringifiedPageOpts = JSON.stringify(pageOpts)
-  const pageOptsChecksum = IS_PRODUCTION
+  const stringifiedChecksum = IS_PRODUCTION
     ? "''"
     : JSON.stringify(hashFnv32a(stringifiedPageOpts))
+
   const dynamicMetaModules = dynamicMetaItems
     .map(
       descriptor =>
@@ -271,24 +301,27 @@ export default setupUnderscoreApp({
     .join(',')
 
   return `import { setupNextraPage } from 'nextra/setup-page'
-import __nextra_layout from '${layout}'
-${themeConfigImport}
-${katexCssImport}
-${cssImport}
-${finalResult}
+${HAS_UNDERSCORE_APP_MDX_FILE ? '' : pageImports}
+${finalResult.replace('export default MDXContent;', '')}
 
-setupNextraPage({
+const __nextraPageOptions = {
   MDXContent,
-  nextraLayout: __nextra_layout,
-  hot: module.hot,
   pageOpts: ${stringifiedPageOpts},
-  themeConfig: ${themeConfigImport ? '__nextra_themeConfig' : 'null'},
   pageNextRoute: ${JSON.stringify(pageNextRoute)},
-  pageOptsChecksum: ${pageOptsChecksum},
-  dynamicMetaModules: typeof window === 'undefined' ? [${dynamicMetaModules}] : []
-})
+  ${
+    HAS_UNDERSCORE_APP_MDX_FILE
+      ? ''
+      : 'nextraLayout: __nextra_layout,' +
+        (themeConfigImport && 'themeConfig: __nextra_themeConfig')
+  }
+}
+if (process.env.NODE_ENV !== 'production') {
+  __nextraPageOptions.hot = module.hot
+  __nextraPageOptions.pageOptsChecksum = ${stringifiedChecksum}
+}
+if (typeof window === 'undefined') __nextraPageOptions.dynamicMetaModules = [${dynamicMetaModules}]
 
-export { default } from 'nextra/layout'`
+export default setupNextraPage(__nextraPageOptions)`
 }
 
 export default function syncLoader(
