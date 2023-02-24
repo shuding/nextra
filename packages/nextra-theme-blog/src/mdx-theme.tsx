@@ -1,8 +1,4 @@
-import type {
-  RefObject,
-  ComponentProps,
-  ReactElement,
-  ReactNode} from 'react';
+import type { RefObject, ComponentProps, ReactElement, ReactNode } from 'react'
 import {
   createRef,
   createContext,
@@ -53,7 +49,8 @@ function HeadingLink({
 }
 
 const A = ({ children, ...props }: ComponentProps<'a'>) => {
-  const isExternal = props.href?.startsWith('https://')
+  const isExternal =
+    props.href?.startsWith('https://') || props.href?.startsWith('http://')
   if (isExternal) {
     return (
       <a target="_blank" rel="noreferrer" {...props}>

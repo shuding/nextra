@@ -234,7 +234,7 @@ async function loader(
   }
 
   // Relative path instead of a package name
-  const layout = isLocalTheme ? path.resolve(theme) : theme
+  const layout = isLocalTheme ? slash(path.resolve(theme)) : theme
 
   let pageOpts: Partial<PageOpts> = {
     filePath: slash(path.relative(CWD, mdxPath)),
