@@ -42,10 +42,7 @@ export default function Layout({
   const extendedConfig = { ...DEFAULT_THEME, ...context.themeConfig }
 
   return (
-    <ThemeProvider
-      attribute="class"
-      forcedTheme={extendedConfig.darkMode ? undefined : 'light'}
-    >
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <BlogLayout config={extendedConfig} opts={context.pageOpts}>
         {children}
       </BlogLayout>
