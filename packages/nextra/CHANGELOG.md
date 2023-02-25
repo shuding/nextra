@@ -1,5 +1,11 @@
 # nextra
 
+## 2.2.16
+
+### Patch Changes
+
+- d495e5f: introduce `_app.mdx` for better performance and smallest `.next/static/chunks` size
+
 ## 2.2.15
 
 ### Patch Changes

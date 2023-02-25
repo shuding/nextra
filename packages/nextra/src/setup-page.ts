@@ -17,6 +17,7 @@ import type {
   DynamicFolder
 } from './types'
 import { normalizePageRoute, pageTitleFromFilename } from './utils'
+import NextraLayout from './layout'
 
 import get from 'lodash.get'
 import { NEXTRA_INTERNAL } from './constants'
@@ -105,19 +106,19 @@ export function setupNextraPage({
   pageOpts,
   nextraLayout,
   themeConfig,
-  Content,
+  MDXContent,
   hot,
   pageOptsChecksum,
-  dynamicMetaModules
+  dynamicMetaModules = []
 }: {
   pageNextRoute: string
   pageOpts: PageOpts
   nextraLayout: FC
   themeConfig: ThemeConfig
-  Content: FC
-  hot: __WebpackModuleApi.Hot
-  pageOptsChecksum: string
-  dynamicMetaModules: [Promise<any>, DynamicMetaDescriptor][]
+  MDXContent: FC
+  hot?: __WebpackModuleApi.Hot
+  pageOptsChecksum?: string
+  dynamicMetaModules?: [Promise<any>, DynamicMetaDescriptor][]
 }) {
   if (typeof window === 'undefined') {
     globalThis.__nextra_resolvePageMap = async () => {
@@ -125,7 +126,7 @@ export function setupNextraPage({
         return cachedResolvedPageMap
       }
       const clonedPageMap: PageMapItem[] = JSON.parse(
-        JSON.stringify(pageOpts.pageMap)
+        JSON.stringify(__nextra_internal__.pageMap)
       )
 
       await Promise.all(
@@ -155,18 +156,36 @@ export function setupNextraPage({
     NEXTRA_INTERNAL
   ] ||= Object.create(null))
 
-  __nextra_internal__.pageMap = pageOpts.pageMap
+  if (pageOpts.pageMap) {
+    __nextra_internal__.pageMap = pageOpts.pageMap
+    __nextra_internal__.Layout = nextraLayout
+  } else {
+    // while using `_app.md/mdx` pageMap will be injected in _app file to boost compilation time,
+    // and reduce bundle size
+    pageOpts = {
+      ...pageOpts,
+      pageMap: __nextra_internal__.pageMap,
+      flexsearch: __nextra_internal__.flexsearch
+    }
+    themeConfig = __nextra_internal__.themeConfig
+  }
+
+  pageOpts = {
+    // @ts-ignore ignore "'frontMatter' is specified more than once" error to treeshake empty object `{}` for each compiled page
+    frontMatter: {},
+    ...pageOpts
+  }
+
   __nextra_internal__.route = pageOpts.route
   __nextra_internal__.context ||= Object.create(null)
-  __nextra_internal__.refreshListeners ||= Object.create(null)
-  __nextra_internal__.Layout = nextraLayout
   __nextra_internal__.context[pageNextRoute] = {
-    Content,
+    Content: MDXContent,
     pageOpts,
     themeConfig
   }
 
   if (process.env.NODE_ENV !== 'production' && hot) {
+    __nextra_internal__.refreshListeners ||= Object.create(null)
     const checksum = pageOptsChecksum
     hot.data ||= Object.create(null)
     if (hot.data.prevPageOptsChecksum !== checksum) {
@@ -180,4 +199,5 @@ export function setupNextraPage({
       data.prevPageOptsChecksum = checksum
     })
   }
+  return NextraLayout
 }

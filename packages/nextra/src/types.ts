@@ -192,6 +192,8 @@ export type NextraInternalGlobal = typeof globalThis & {
     >
     refreshListeners: Record<string, (() => void)[]>
     Layout: FC<any>
+    themeConfig?: ThemeConfig
+    flexsearch?: Flexsearch
   }
 }
 

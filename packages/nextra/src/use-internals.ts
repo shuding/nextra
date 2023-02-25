@@ -16,7 +16,7 @@ export function useInternals() {
   const rerender = useState({})[1]
 
   // The HMR handling logic is not needed for production builds, the condition
-  // should be removed after compilation and it's fine to put the effect under
+  // should be removed after compilation, and it's fine to put the effect under
   // if, because hooks' order is still stable.
   if (process.env.NODE_ENV !== 'production') {
     // eslint-disable-next-line react-hooks/rules-of-hooks
