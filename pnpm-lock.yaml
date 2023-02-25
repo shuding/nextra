@@ -71,7 +71,7 @@ importers:
       autoprefixer: ^10.4.13
       clsx: ^1.2.1
       eslint: ^8.30.0
-      framer-motion: ^9.0.0
+      framer-motion: ^10.0.0
       next: ^13.1.1
       nextra: workspace:*
       nextra-theme-docs: workspace:*
@@ -83,7 +83,7 @@ importers:
     dependencies:
       '@vercel/og': 0.1.0
       clsx: 1.2.1
-      framer-motion: 9.0.0_biqbaboplfbrettd7655fr4n2y
+      framer-motion: 10.0.0_biqbaboplfbrettd7655fr4n2y
       next: 13.1.1_biqbaboplfbrettd7655fr4n2y
       nextra: link:../packages/nextra
       nextra-theme-docs: link:../packages/nextra-theme-docs
@@ -108,7 +108,7 @@ importers:
     dependencies:
       next: 13.1.1_biqbaboplfbrettd7655fr4n2y
       nextra: file:packages/nextra_q76c2b4vyoegvsbrcwkfvimnai
-      nextra-theme-blog: file:packages/nextra-theme-blog_7lt7ys5jf2brj2ekueikqp4hwe
+      nextra-theme-blog: file:packages/nextra-theme-blog_sm7k32rvxo4pi34ymeu4kzhqze
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dependenciesMeta:
@@ -127,7 +127,7 @@ importers:
     dependencies:
       next: 13.1.1_biqbaboplfbrettd7655fr4n2y
       nextra: file:packages/nextra_q76c2b4vyoegvsbrcwkfvimnai
-      nextra-theme-docs: file:packages/nextra-theme-docs_7lt7ys5jf2brj2ekueikqp4hwe
+      nextra-theme-docs: file:packages/nextra-theme-docs_sm7k32rvxo4pi34ymeu4kzhqze
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dependenciesMeta:
@@ -158,7 +158,7 @@ importers:
       markdown-to-jsx: 6.11.4_react@18.2.0
       next: 13.1.1_biqbaboplfbrettd7655fr4n2y
       nextra: file:packages/nextra_q76c2b4vyoegvsbrcwkfvimnai
-      nextra-theme-docs: file:packages/nextra-theme-docs_7lt7ys5jf2brj2ekueikqp4hwe
+      nextra-theme-docs: file:packages/nextra-theme-docs_sm7k32rvxo4pi34ymeu4kzhqze
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-intersection-observer: 8.34.0_react@18.2.0
@@ -1167,53 +1167,6 @@ packages:
       '@types/mdx': 2.0.2
       '@types/react': 18.0.20
       react: 18.2.0
-    dev: false
-
-  /@motionone/animation/10.15.1:
-    resolution: {integrity: sha512-mZcJxLjHor+bhcPuIFErMDNyrdb2vJur8lSfMCsuCB4UyV8ILZLvK+t+pg56erv8ud9xQGK/1OGPt10agPrCyQ==}
-    dependencies:
-      '@motionone/easing': 10.15.1
-      '@motionone/types': 10.15.1
-      '@motionone/utils': 10.15.1
-      tslib: 2.4.0
-    dev: false
-
-  /@motionone/dom/10.15.5:
-    resolution: {integrity: sha512-Xc5avlgyh3xukU9tydh9+8mB8+2zAq+WlLsC3eEIp7Ax7DnXgY7Bj/iv0a4X2R9z9ZFZiaXK3BO0xMYHKbAAdA==}
-    dependencies:
-      '@motionone/animation': 10.15.1
-      '@motionone/generators': 10.15.1
-      '@motionone/types': 10.15.1
-      '@motionone/utils': 10.15.1
-      hey-listen: 1.0.8
-      tslib: 2.4.0
-    dev: false
-
-  /@motionone/easing/10.15.1:
-    resolution: {integrity: sha512-6hIHBSV+ZVehf9dcKZLT7p5PEKHGhDwky2k8RKkmOvUoYP3S+dXsKupyZpqx5apjd9f+php4vXk4LuS+ADsrWw==}
-    dependencies:
-      '@motionone/utils': 10.15.1
-      tslib: 2.4.0
-    dev: false
-
-  /@motionone/generators/10.15.1:
-    resolution: {integrity: sha512-67HLsvHJbw6cIbLA/o+gsm7h+6D4Sn7AUrB/GPxvujse1cGZ38F5H7DzoH7PhX+sjvtDnt2IhFYF2Zp1QTMKWQ==}
-    dependencies:
-      '@motionone/types': 10.15.1
-      '@motionone/utils': 10.15.1
-      tslib: 2.4.0
-    dev: false
-
-  /@motionone/types/10.15.1:
-    resolution: {integrity: sha512-iIUd/EgUsRZGrvW0jqdst8st7zKTzS9EsKkP+6c6n4MPZoQHwiHuVtTQLD6Kp0bsBLhNzKIBlHXponn/SDT4hA==}
-    dev: false
-
-  /@motionone/utils/10.15.1:
-    resolution: {integrity: sha512-p0YncgU+iklvYr/Dq4NobTRdAPv9PveRDUXabPEeOjBLSO/1FNB2phNTZxOxpi1/GZwYpAoECEa0Wam+nsmhSw==}
-    dependencies:
-      '@motionone/types': 10.15.1
-      hey-listen: 1.0.8
-      tslib: 2.4.0
     dev: false
 
   /@napi-rs/simple-git-android-arm-eabi/0.1.8:
@@ -3927,14 +3880,12 @@ packages:
     resolution: {integrity: sha512-MhLuK+2gUcnZe8ZHlaaINnQLl0xRIGRfcGk2yl8xoQAfHrSsL3rYu6FCmBdkdbhc9EPlwyGHewaRsvwRMJtAlA==}
     dev: true
 
-  /framer-motion/9.0.0_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-nDLVzUlIUNyxD7SbqWpWKBeK1FIP/mDMFNy4yhXjhaRoyvGPcoe3uGYf0cEti+DG64N99Dzaw5kdmVjsxbwlEA==}
+  /framer-motion/10.0.0_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-qVmndcu4Z3q5ftqcbUCvVewHc5yiw4uIZyM0uvJ0/spj9lza/FnWywUUc8DNIZTG1my6nFsNLRPGDruP4o6eIw==}
     peerDependencies:
       react: ^18.0.0
       react-dom: ^18.0.0
     dependencies:
-      '@motionone/dom': 10.15.5
-      hey-listen: 1.0.8
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       tslib: 2.4.0
@@ -4302,10 +4253,6 @@ packages:
       hast-util-parse-selector: 3.1.0
       property-information: 6.1.1
       space-separated-tokens: 2.0.1
-    dev: false
-
-  /hey-listen/1.0.8:
-    resolution: {integrity: sha512-COpmrF2NOg4TBWUJ5UVyaCU2A88wEMkUPK4hNqyCkqHbxT92BbvfjoSozkAIIm6XhicGlJHhFdullInrdhwU8Q==}
     dev: false
 
   /hosted-git-info/2.8.9:
@@ -8400,11 +8347,11 @@ packages:
     resolution: {integrity: sha512-JZxotl7SxAJH0j7dN4pxsTV6ZLXoLdGME+PsjkL/DaBrVryK9kTGq06GfKrwcSOqypP+fdXGoCHE36b99fWVoA==}
     dev: false
 
-  file:packages/nextra-theme-blog_7lt7ys5jf2brj2ekueikqp4hwe:
+  file:packages/nextra-theme-blog_sm7k32rvxo4pi34ymeu4kzhqze:
     resolution: {directory: packages/nextra-theme-blog, type: directory}
     id: file:packages/nextra-theme-blog
     name: nextra-theme-blog
-    version: 2.2.15
+    version: 2.2.16
     peerDependencies:
       next: '>=9.5.3'
       nextra: workspace:*
@@ -8422,11 +8369,11 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  file:packages/nextra-theme-docs_7lt7ys5jf2brj2ekueikqp4hwe:
+  file:packages/nextra-theme-docs_sm7k32rvxo4pi34ymeu4kzhqze:
     resolution: {directory: packages/nextra-theme-docs, type: directory}
     id: file:packages/nextra-theme-docs
     name: nextra-theme-docs
-    version: 2.2.15
+    version: 2.2.16
     peerDependencies:
       next: '>=9.5.3'
       nextra: workspace:*
@@ -8455,7 +8402,7 @@ packages:
     resolution: {directory: packages/nextra, type: directory}
     id: file:packages/nextra
     name: nextra
-    version: 2.2.15
+    version: 2.2.16
     peerDependencies:
       next: '>=9.5.3'
       react: '>=16.13.1'
