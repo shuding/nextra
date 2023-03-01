@@ -33,7 +33,7 @@ importers:
       eslint-plugin-import: 2.27.5
       eslint-plugin-react: 7.32.2
       eslint-plugin-react-hooks: 4.6.0
-      eslint-plugin-tailwindcss: 3.10.0
+      eslint-plugin-tailwindcss: 3.10.1
       eslint-plugin-typescript-sort-keys: 2.1.0
       eslint-plugin-unicorn: 45.0.2
       prettier: 2.8.4
@@ -53,7 +53,7 @@ importers:
       eslint-plugin-import: 2.27.5_ajyizmi44oc3hrc35l6ndh7p4e
       eslint-plugin-react: 7.32.2_eslint@8.35.0
       eslint-plugin-react-hooks: 4.6.0_eslint@8.35.0
-      eslint-plugin-tailwindcss: 3.10.0
+      eslint-plugin-tailwindcss: 3.10.1
       eslint-plugin-typescript-sort-keys: 2.1.0_6mj2wypvdnknez7kws2nfdgupi
       eslint-plugin-unicorn: 45.0.2_eslint@8.35.0
       prettier: 2.8.4
@@ -3460,8 +3460,8 @@ packages:
       string.prototype.matchall: 4.0.8
     dev: true
 
-  /eslint-plugin-tailwindcss/3.10.0:
-    resolution: {integrity: sha512-6fqvo9Dp3BqGntQoMHH3ri/nWKwUnYDqx67eKUgNPscaNxqjDEJvV6Cj8zgmCjJBAMrU+Cu6Eh4INKsgEwEbDQ==}
+  /eslint-plugin-tailwindcss/3.10.1:
+    resolution: {integrity: sha512-NLPZ6b6nd/8CgGNMQ6NDiPUfBLQpSGu/u9RyX3MCZOwzNs2dFt1OamNAiRuo3Ixh7Gv4t5UcAcdNt8z74UDJkA==}
     engines: {node: '>=12.13.0'}
     peerDependencies:
       tailwindcss: ^3.2.2
