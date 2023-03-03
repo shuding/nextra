@@ -1,5 +1,11 @@
 # nextra
 
+## 2.2.17
+
+### Patch Changes
+
+- 4a66366: fix TypeError: Cannot read properties of undefined (reading '/') with \_app.mdx while editing theme.config, \_meta.json or adding/removing md/mdx files
+
 ## 2.2.16
 
 ### Patch Changes

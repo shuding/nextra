@@ -275,7 +275,7 @@ ${cssImport}`
     return `${pageImports}
 ${finalResult}
 
-const __nextra_internal__ = globalThis[Symbol.for('__nextra_internal__')] = Object.create(null)
+const __nextra_internal__ = globalThis[Symbol.for('__nextra_internal__')] ||= Object.create(null)
 __nextra_internal__.Layout = __nextra_layout
 __nextra_internal__.pageMap = ${JSON.stringify(pageMap)}
 __nextra_internal__.flexsearch = ${JSON.stringify(flexsearch)}
