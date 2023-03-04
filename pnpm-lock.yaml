@@ -38,7 +38,7 @@ importers:
       eslint-plugin-unicorn: 45.0.2
       prettier: 2.8.4
       prettier-plugin-tailwindcss: 0.2.4
-      rimraf: 4.2.0
+      rimraf: 4.3.0
       tsup: ^6.5.0
       turbo: 1.8.3
       typescript: 4.9.5
@@ -58,7 +58,7 @@ importers:
       eslint-plugin-unicorn: 45.0.2_eslint@8.35.0
       prettier: 2.8.4
       prettier-plugin-tailwindcss: 0.2.4_prettier@2.8.4
-      rimraf: 4.2.0
+      rimraf: 4.3.0
       tsup: 6.5.0_typescript@4.9.5
       turbo: 1.8.3
       typescript: 4.9.5
@@ -108,7 +108,7 @@ importers:
     dependencies:
       next: 13.1.1_biqbaboplfbrettd7655fr4n2y
       nextra: file:packages/nextra_q76c2b4vyoegvsbrcwkfvimnai
-      nextra-theme-blog: file:packages/nextra-theme-blog_sm7k32rvxo4pi34ymeu4kzhqze
+      nextra-theme-blog: file:packages/nextra-theme-blog_dk4awux43sh7ulrzzxdtpl5dwm
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dependenciesMeta:
@@ -127,7 +127,7 @@ importers:
     dependencies:
       next: 13.1.1_biqbaboplfbrettd7655fr4n2y
       nextra: file:packages/nextra_q76c2b4vyoegvsbrcwkfvimnai
-      nextra-theme-docs: file:packages/nextra-theme-docs_sm7k32rvxo4pi34ymeu4kzhqze
+      nextra-theme-docs: file:packages/nextra-theme-docs_dk4awux43sh7ulrzzxdtpl5dwm
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dependenciesMeta:
@@ -158,7 +158,7 @@ importers:
       markdown-to-jsx: 6.11.4_react@18.2.0
       next: 13.1.1_biqbaboplfbrettd7655fr4n2y
       nextra: file:packages/nextra_q76c2b4vyoegvsbrcwkfvimnai
-      nextra-theme-docs: file:packages/nextra-theme-docs_sm7k32rvxo4pi34ymeu4kzhqze
+      nextra-theme-docs: file:packages/nextra-theme-docs_dk4awux43sh7ulrzzxdtpl5dwm
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-intersection-observer: 8.34.0_react@18.2.0
@@ -6871,8 +6871,8 @@ packages:
       glob: 7.1.7
     dev: true
 
-  /rimraf/4.2.0:
-    resolution: {integrity: sha512-tPt+gLORNVqRCk0NwuJ5SlMEcOGvt4CCU8sUPqgCFtCbnoNCTd9Q6vq7JlBbxQlACiH14OR28y7piA2Bak9Sxw==}
+  /rimraf/4.3.0:
+    resolution: {integrity: sha512-5qVDXPbByA1qSJEWMv1qAwKsoS22vVpsL2QyxCKBw4gf6XiFo1K3uRLY6uSOOBFDwnqAZtnbILqWKKlzh8bkGg==}
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
@@ -8452,11 +8452,11 @@ packages:
     resolution: {integrity: sha512-JZxotl7SxAJH0j7dN4pxsTV6ZLXoLdGME+PsjkL/DaBrVryK9kTGq06GfKrwcSOqypP+fdXGoCHE36b99fWVoA==}
     dev: false
 
-  file:packages/nextra-theme-blog_sm7k32rvxo4pi34ymeu4kzhqze:
+  file:packages/nextra-theme-blog_dk4awux43sh7ulrzzxdtpl5dwm:
     resolution: {directory: packages/nextra-theme-blog, type: directory}
     id: file:packages/nextra-theme-blog
     name: nextra-theme-blog
-    version: 2.2.16
+    version: 2.2.17
     peerDependencies:
       next: '>=9.5.3'
       nextra: workspace:*
@@ -8474,11 +8474,11 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  file:packages/nextra-theme-docs_sm7k32rvxo4pi34ymeu4kzhqze:
+  file:packages/nextra-theme-docs_dk4awux43sh7ulrzzxdtpl5dwm:
     resolution: {directory: packages/nextra-theme-docs, type: directory}
     id: file:packages/nextra-theme-docs
     name: nextra-theme-docs
-    version: 2.2.16
+    version: 2.2.17
     peerDependencies:
       next: '>=9.5.3'
       nextra: workspace:*
@@ -8507,7 +8507,7 @@ packages:
     resolution: {directory: packages/nextra, type: directory}
     id: file:packages/nextra
     name: nextra
-    version: 2.2.16
+    version: 2.2.17
     peerDependencies:
       next: '>=9.5.3'
       react: '>=16.13.1'
