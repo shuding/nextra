@@ -6,7 +6,6 @@ import swr from 'public/showcase/swr.png'
 import cobe from 'public/showcase/cobe.png'
 import javaScriptPatterns from 'public/showcase/javascript-patterns.jpg'
 import codesandbox from 'public/showcase/codesandbox.jpg'
-import hop from 'public/showcase/hop.jpeg'
 import edgeRuntime from 'public/showcase/edge-runtime.jpeg'
 import livepeer from 'public/showcase/livepeer.png'
 
@@ -26,7 +25,7 @@ import graphqlSofa from 'public/showcase/graphql-sofa.png'
 import graphqlTools from 'public/showcase/graphql-tools.png'
 import graphqlYoga from 'public/showcase/graphql-yoga.png'
 import kitql from 'public/showcase/kitql.png'
-import cloudquery from 'public/showcase/cloudquery.svg'
+import cloudQuery from 'public/showcase/cloudquery.svg'
 
 {<h1 className="mt-10 mb-4 text-center text-[2.5rem] font-bold tracking-tight">Showcase</h1>}
 
@@ -60,9 +59,9 @@ import cloudquery from 'public/showcase/cloudquery.svg'
       image: codesandbox
     },
     {
-      name: 'Hop',
-      url: 'https://docs.hop.io',
-      image: hop
+      name: 'CloudQuery',
+      url: 'https://cloudquery.io',
+      image: cloudQuery
     },
     {
       name: 'Edge Runtime',
@@ -153,11 +152,6 @@ import cloudquery from 'public/showcase/cloudquery.svg'
       name: 'KitQL',
       url: 'https://kitql.dev',
       image: kitql
-    },
-    {
-      name: 'CloudQuery',
-      url: 'https://www.cloudquery.io',
-      image: cloudquery
     }
   ].map(({ name, url, image }) => (
     <Card key={name} image arrow target="_blank" title={name} href={url}>
