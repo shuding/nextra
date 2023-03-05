@@ -26,6 +26,7 @@ import graphqlSofa from 'public/showcase/graphql-sofa.png'
 import graphqlTools from 'public/showcase/graphql-tools.png'
 import graphqlYoga from 'public/showcase/graphql-yoga.png'
 import kitql from 'public/showcase/kitql.png'
+import narutodb from 'public/showcase/narutodb.png'
 
 {<h1 className="mt-10 mb-4 text-center text-[2.5rem] font-bold tracking-tight">Showcase</h1>}
 
@@ -152,6 +153,11 @@ import kitql from 'public/showcase/kitql.png'
       name: 'KitQL',
       url: 'https://kitql.dev',
       image: kitql
+    },
+    {
+      name: 'NarutoDB',
+      url: 'https://www.narutodb.xyz/',
+      image: narutodb
     }
   ].map(({ name, url, image }) => (
     <Card key={name} image arrow target="_blank" title={name} href={url}>
