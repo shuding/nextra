@@ -35,7 +35,7 @@ importers:
       eslint-plugin-react-hooks: 4.6.0
       eslint-plugin-tailwindcss: 3.10.1
       eslint-plugin-typescript-sort-keys: 2.1.0
-      eslint-plugin-unicorn: 45.0.2
+      eslint-plugin-unicorn: 46.0.0
       prettier: 2.8.4
       prettier-plugin-tailwindcss: 0.2.4
       rimraf: 4.2.0
@@ -55,7 +55,7 @@ importers:
       eslint-plugin-react-hooks: 4.6.0_eslint@8.35.0
       eslint-plugin-tailwindcss: 3.10.1
       eslint-plugin-typescript-sort-keys: 2.1.0_6mj2wypvdnknez7kws2nfdgupi
-      eslint-plugin-unicorn: 45.0.2_eslint@8.35.0
+      eslint-plugin-unicorn: 46.0.0_eslint@8.35.0
       prettier: 2.8.4
       prettier-plugin-tailwindcss: 0.2.4_prettier@2.8.4
       rimraf: 4.2.0
@@ -1603,7 +1603,7 @@ packages:
   /@types/is-ci/3.0.0:
     resolution: {integrity: sha512-Q0Op0hdWbYd1iahB+IFNQcWXFq4O0Q5MwQP7uN0souuQ4rPg1vEYcnIOfr1gY+M+6rc8FGoRaBO1mOOvL29sEQ==}
     dependencies:
-      ci-info: 3.3.2
+      ci-info: 3.7.1
     dev: true
 
   /@types/js-yaml/4.0.5:
@@ -2529,10 +2529,6 @@ packages:
   /chrome-trace-event/1.0.3:
     resolution: {integrity: sha512-p3KULyQg4S7NIHixdwbGX+nFHkoBiA4YQmyWtjb8XngSKV124nJmRysgAeujbUVb15vh+RvFUfCPqU7rXk+hZg==}
     engines: {node: '>=6.0'}
-    dev: true
-
-  /ci-info/3.3.2:
-    resolution: {integrity: sha512-xmDt/QIAdeZ9+nfdPsaBCpMvHNLFiLdjj59qjqn+6iPe6YmHGQ35sBnQ8uslRBXFmXkiZQOJRjvQeoGppoTjjg==}
     dev: true
 
   /ci-info/3.7.1:
@@ -3494,8 +3490,8 @@ packages:
       - supports-color
     dev: true
 
-  /eslint-plugin-unicorn/45.0.2_eslint@8.35.0:
-    resolution: {integrity: sha512-Y0WUDXRyGDMcKLiwgL3zSMpHrXI00xmdyixEGIg90gHnj0PcHY4moNv3Ppje/kDivdAy5vUeUr7z211ImPv2gw==}
+  /eslint-plugin-unicorn/46.0.0_eslint@8.35.0:
+    resolution: {integrity: sha512-j07WkC+PFZwk8J33LYp6JMoHa1lXc1u6R45pbSAipjpfpb7KIGr17VE2D685zCxR5VL4cjrl65kTJflziQWMDA==}
     engines: {node: '>=14.18'}
     peerDependencies:
       eslint: '>=8.28.0'
@@ -3505,7 +3501,7 @@ packages:
       ci-info: 3.7.1
       clean-regexp: 1.0.0
       eslint: 8.35.0
-      esquery: 1.4.0
+      esquery: 1.4.2
       indent-string: 4.0.0
       is-builtin-module: 3.2.0
       jsesc: 3.0.2
@@ -4486,7 +4482,7 @@ packages:
     resolution: {integrity: sha512-ZYvCgrefwqoQ6yTyYUbQu64HsITZ3NfKX1lzaEYdkTDcfKzzCI/wthRRYKkdjHKFVgNiXKAKm65Zo1pk2as/QQ==}
     hasBin: true
     dependencies:
-      ci-info: 3.3.2
+      ci-info: 3.7.1
     dev: true
 
   /is-core-module/2.11.0:
