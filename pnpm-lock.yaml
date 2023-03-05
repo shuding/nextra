@@ -24,7 +24,7 @@ importers:
   .:
     specifiers:
       '@changesets/cli': 2.26.0
-      '@edge-runtime/vm': 2.1.1
+      '@edge-runtime/vm': 2.1.2
       '@next/eslint-plugin-next': 13.2.3
       '@typescript-eslint/eslint-plugin': 5.54.0
       '@typescript-eslint/parser': 5.54.0
@@ -44,7 +44,7 @@ importers:
       typescript: 4.9.5
     devDependencies:
       '@changesets/cli': 2.26.0
-      '@edge-runtime/vm': 2.1.1
+      '@edge-runtime/vm': 2.1.2
       '@next/eslint-plugin-next': 13.2.3
       '@typescript-eslint/eslint-plugin': 5.54.0_6mj2wypvdnknez7kws2nfdgupi
       '@typescript-eslint/parser': 5.54.0_ycpbpc6yetojsgtrx3mwntkhsu
@@ -108,7 +108,7 @@ importers:
     dependencies:
       next: 13.1.1_biqbaboplfbrettd7655fr4n2y
       nextra: file:packages/nextra_q76c2b4vyoegvsbrcwkfvimnai
-      nextra-theme-blog: file:packages/nextra-theme-blog_sm7k32rvxo4pi34ymeu4kzhqze
+      nextra-theme-blog: file:packages/nextra-theme-blog_dk4awux43sh7ulrzzxdtpl5dwm
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dependenciesMeta:
@@ -127,7 +127,7 @@ importers:
     dependencies:
       next: 13.1.1_biqbaboplfbrettd7655fr4n2y
       nextra: file:packages/nextra_q76c2b4vyoegvsbrcwkfvimnai
-      nextra-theme-docs: file:packages/nextra-theme-docs_sm7k32rvxo4pi34ymeu4kzhqze
+      nextra-theme-docs: file:packages/nextra-theme-docs_dk4awux43sh7ulrzzxdtpl5dwm
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dependenciesMeta:
@@ -158,7 +158,7 @@ importers:
       markdown-to-jsx: 6.11.4_react@18.2.0
       next: 13.1.1_biqbaboplfbrettd7655fr4n2y
       nextra: file:packages/nextra_q76c2b4vyoegvsbrcwkfvimnai
-      nextra-theme-docs: file:packages/nextra-theme-docs_sm7k32rvxo4pi34ymeu4kzhqze
+      nextra-theme-docs: file:packages/nextra-theme-docs_dk4awux43sh7ulrzzxdtpl5dwm
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-intersection-observer: 8.34.0_react@18.2.0
@@ -768,16 +768,16 @@ packages:
       prettier: 2.8.4
     dev: true
 
-  /@edge-runtime/primitives/2.1.1:
-    resolution: {integrity: sha512-vzchfwwzh7RcMExF7Qq0Mgc7tOT/X09Y7p0TCJRVDUXO96oglmWvLOIQGQzRzpWnPWhg4N6mLWFI+2JjK8PoVg==}
+  /@edge-runtime/primitives/2.1.2:
+    resolution: {integrity: sha512-SR04SMDybALlhIYIi0hiuEUwIl0b7Sn+RKwQkX6hydg4+AKMzBNDFhj2nqHDD1+xkHArV9EhmJIb6iGjShwSzg==}
     engines: {node: '>=14'}
     dev: true
 
-  /@edge-runtime/vm/2.1.1:
-    resolution: {integrity: sha512-lkhS92ytYfuty2IuMGGFdHU6r8yYTN3kWoDujRmvOoLoN1z9kOa/BZvxClvOqMbcqSL0X8juyM/ATbHCkK5Qdw==}
+  /@edge-runtime/vm/2.1.2:
+    resolution: {integrity: sha512-j4H5S26NJhYOyjVMN8T/YJuwwslfnEX1P0j6N2Rq1FaubgNowdYunA9nlO7lg8Rgjv6dqJ2zKuM7GD1HFtNSGw==}
     engines: {node: '>=14'}
     dependencies:
-      '@edge-runtime/primitives': 2.1.1
+      '@edge-runtime/primitives': 2.1.2
     dev: true
 
   /@emotion/is-prop-valid/0.8.8:
@@ -8452,11 +8452,11 @@ packages:
     resolution: {integrity: sha512-JZxotl7SxAJH0j7dN4pxsTV6ZLXoLdGME+PsjkL/DaBrVryK9kTGq06GfKrwcSOqypP+fdXGoCHE36b99fWVoA==}
     dev: false
 
-  file:packages/nextra-theme-blog_sm7k32rvxo4pi34ymeu4kzhqze:
+  file:packages/nextra-theme-blog_dk4awux43sh7ulrzzxdtpl5dwm:
     resolution: {directory: packages/nextra-theme-blog, type: directory}
     id: file:packages/nextra-theme-blog
     name: nextra-theme-blog
-    version: 2.2.16
+    version: 2.2.17
     peerDependencies:
       next: '>=9.5.3'
       nextra: workspace:*
@@ -8474,11 +8474,11 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  file:packages/nextra-theme-docs_sm7k32rvxo4pi34ymeu4kzhqze:
+  file:packages/nextra-theme-docs_dk4awux43sh7ulrzzxdtpl5dwm:
     resolution: {directory: packages/nextra-theme-docs, type: directory}
     id: file:packages/nextra-theme-docs
     name: nextra-theme-docs
-    version: 2.2.16
+    version: 2.2.17
     peerDependencies:
       next: '>=9.5.3'
       nextra: workspace:*
@@ -8507,7 +8507,7 @@ packages:
     resolution: {directory: packages/nextra, type: directory}
     id: file:packages/nextra
     name: nextra
-    version: 2.2.16
+    version: 2.2.17
     peerDependencies:
       next: '>=9.5.3'
       react: '>=16.13.1'
