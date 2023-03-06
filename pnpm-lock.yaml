@@ -38,7 +38,7 @@ importers:
       eslint-plugin-unicorn: 46.0.0
       prettier: 2.8.4
       prettier-plugin-tailwindcss: 0.2.4
-      rimraf: 4.3.0
+      rimraf: 4.3.1
       tsup: ^6.5.0
       turbo: 1.8.3
       typescript: 4.9.5
@@ -58,7 +58,7 @@ importers:
       eslint-plugin-unicorn: 46.0.0_eslint@8.35.0
       prettier: 2.8.4
       prettier-plugin-tailwindcss: 0.2.4_prettier@2.8.4
-      rimraf: 4.3.0
+      rimraf: 4.3.1
       tsup: 6.5.0_typescript@4.9.5
       turbo: 1.8.3
       typescript: 4.9.5
@@ -6867,8 +6867,8 @@ packages:
       glob: 7.1.7
     dev: true
 
-  /rimraf/4.3.0:
-    resolution: {integrity: sha512-5qVDXPbByA1qSJEWMv1qAwKsoS22vVpsL2QyxCKBw4gf6XiFo1K3uRLY6uSOOBFDwnqAZtnbILqWKKlzh8bkGg==}
+  /rimraf/4.3.1:
+    resolution: {integrity: sha512-GfHJHBzFQra23IxDzIdBqhOWfbtdgS1/dCHrDy+yvhpoJY5TdwdT28oWaHWfRpKFDLd3GZnGTx6Mlt4+anbsxQ==}
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
