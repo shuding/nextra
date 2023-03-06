@@ -26,7 +26,7 @@ const UNDERSCORE_APP_FILENAME: string =
     .readdirSync(PAGES_DIR)
     .find(fileName => /^_app\.(js|jsx|ts|tsx|md)$/.test(fileName)) || ''
 
-let HAS_UNDERSCORE_APP_MDX_FILE = existsSync(APP_MDX_PATH)
+const HAS_UNDERSCORE_APP_MDX_FILE = existsSync(APP_MDX_PATH)
 
 if (UNDERSCORE_APP_FILENAME) {
   console.warn(
