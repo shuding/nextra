@@ -140,7 +140,9 @@ export const themeSchema = z.strictObject({
     toggleButton: z.boolean()
   }),
   themeSwitch: z.strictObject({
-    component: z.custom<ReactNode | FC<{ lite?: boolean }>>(...reactNode),
+    component: z.custom<ReactNode | FC<{ lite?: boolean; className?: string }>>(
+      ...reactNode
+    ),
     useOptions: themeOptionsSchema.or(z.function().returns(themeOptionsSchema))
   }),
   toc: z.strictObject({
