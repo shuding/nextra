@@ -26,20 +26,11 @@ const UNDERSCORE_APP_FILENAME: string =
     .readdirSync(PAGES_DIR)
     .find(fileName => /^_app\.(js|jsx|ts|tsx|md)$/.test(fileName)) || ''
 
-let HAS_UNDERSCORE_APP_MDX_FILE = existsSync(APP_MDX_PATH)
+const HAS_UNDERSCORE_APP_MDX_FILE = existsSync(APP_MDX_PATH)
 
 if (UNDERSCORE_APP_FILENAME) {
   console.warn(
     `[nextra] Found "${UNDERSCORE_APP_FILENAME}" file, refactor it to "_app.mdx" for better performance.`
-  )
-} else if (!HAS_UNDERSCORE_APP_MDX_FILE) {
-  const appMdxContent = `export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />
-}`
-  fs.writeFileSync(APP_MDX_PATH, appMdxContent)
-  HAS_UNDERSCORE_APP_MDX_FILE = true
-  console.info(
-    `[nextra] Didn't find "_app.mdx" file, created it for you for better performance.`
   )
 }
 
