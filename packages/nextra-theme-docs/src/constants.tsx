@@ -206,7 +206,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     component: Footer,
     text: `MIT ${new Date().getFullYear()} © Nextra.`
   },
-  gitTimestamp: function useGitTimestamp({ timestamp }) {
+  gitTimestamp: function GitTimestamp({ timestamp }) {
     const { locale = DEFAULT_LOCALE } = useRouter()
     return (
       <>
@@ -311,18 +311,10 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     useOptions() {
       const { locale } = useRouter()
 
-      if (locale === 'zh-CN')
-        return {
-          dark: '深色主题',
-          light: '浅色主题',
-          system: '系统默认'
-        }
-
-      return {
-        dark: 'Dark',
-        light: 'Light',
-        system: 'System'
+      if (locale === 'zh-CN') {
+        return { dark: '深色主题', light: '浅色主题', system: '系统默认' }
       }
+      return { dark: 'Dark', light: 'Light', system: 'System' }
     }
   },
   toc: {

@@ -10,6 +10,7 @@ import { z } from 'zod'
 
 type ThemeSwitchProps = {
   lite?: boolean
+  className?: string
 }
 
 export const themeOptionsSchema = z.strictObject({
@@ -18,21 +19,25 @@ export const themeOptionsSchema = z.strictObject({
   system: z.string()
 })
 
-export type ThemeOptions = z.infer<typeof themeOptionsSchema>
+type ThemeOptions = z.infer<typeof themeOptionsSchema>
 
-export function ThemeSwitch({ lite }: ThemeSwitchProps): ReactElement {
+export function ThemeSwitch({
+  lite,
+  className
+}: ThemeSwitchProps): ReactElement {
   const { setTheme, resolvedTheme, theme = '' } = useTheme()
   const mounted = useMounted()
   const config = useConfig().themeSwitch
 
   const IconToUse = mounted && resolvedTheme === 'dark' ? MoonIcon : SunIcon
-  const options =
+  const options: ThemeOptions =
     typeof config.useOptions === 'function'
       ? config.useOptions()
       : config.useOptions
 
   return (
     <Select
+      className={className}
       title="Change theme"
       options={[
         { key: 'light', name: options.light },

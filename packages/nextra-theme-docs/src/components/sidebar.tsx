@@ -466,11 +466,7 @@ export function Sidebar({
               />
             )}
             {config.darkMode && (
-              <div
-                className={cn(
-                  showSidebar && !hasI18n ? 'nx-grow nx-flex nx-flex-col' : ''
-                )}
-              >
+              <div className={showSidebar && !hasI18n ? 'nx-grow nx-flex nx-flex-col' : ''}>
                 {renderComponent(config.themeSwitch.component, {
                   lite: !showSidebar || hasI18n
                 })}

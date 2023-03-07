@@ -121,7 +121,7 @@ export default {
     const url =
       'https://my-app.com' +
       (defaultLocale === locale ? asPath : `/${locale}${asPath}`)
-      
+
     return <>
       <meta property="og:url" content={url} />
       <meta property="og:title" content={frontMatter.title || 'Nextra'} />
@@ -490,8 +490,8 @@ export default {
 ## Theme Switch
 
 <OptionTable options={[
-  ['themeSwitch.component', 'React.ReactNode | React.FC<{ lite?: boolean }>', 'Component to render the theme switch.'],
-  ['themeSwitch.useOptions', 'ThemeOptions | () => ThemeOptions', 'Options in the theme switch'],
+  ['themeSwitch.component', 'React.ReactNode | React.FC<{ lite?: boolean, className?: string }>', 'Component to render the theme switch.'],
+  ['themeSwitch.useOptions', 'ThemeOptions | () => ThemeOptions', 'Options in the theme switch.'],
 ]}/>
 
 ### Options
