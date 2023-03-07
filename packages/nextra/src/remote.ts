@@ -1,6 +1,5 @@
 import { compileMdx } from './compile'
-import type { LoaderOptions } from './types'
-import type { RemarkLinkRewriteOptions } from './mdx-plugins';
+import type { RemarkLinkRewriteOptions } from './mdx-plugins'
 import { remarkLinkRewrite } from './mdx-plugins'
 import { truthy } from './utils'
 
@@ -9,18 +8,18 @@ export const buildDynamicMDX = async (
   {
     remarkLinkRewriteOptions,
     ...loaderOptions
-  }: Pick<LoaderOptions, 'latex' | 'codeHighlight' | 'defaultShowCopyCode'> & {
+  }: Parameters<typeof compileMdx>[1] & {
     remarkLinkRewriteOptions?: RemarkLinkRewriteOptions
   } = {}
 ) => {
   const { result, headings, frontMatter, title } = await compileMdx(content, {
     ...loaderOptions,
     mdxOptions: {
+      ...loaderOptions.mdxOptions,
       remarkPlugins: [
-        remarkLinkRewriteOptions && [
-          remarkLinkRewrite,
-          remarkLinkRewriteOptions
-        ] as any
+        ...(loaderOptions.mdxOptions?.remarkPlugins || []),
+        remarkLinkRewriteOptions &&
+          ([remarkLinkRewrite, remarkLinkRewriteOptions] as any)
       ].filter(truthy)
     }
   })
