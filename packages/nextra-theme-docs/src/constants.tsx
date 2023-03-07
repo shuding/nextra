@@ -1,17 +1,18 @@
 /* eslint sort-keys: error */
-import type { FC, ReactNode } from 'react';
+import type { FC, ReactNode } from 'react'
 import { isValidElement } from 'react'
 import { useRouter } from 'next/router'
 import { Anchor, Flexsearch, Footer, Navbar, TOC } from './components'
 import { DiscordIcon, GitHubIcon } from 'nextra/icons'
 import { MatchSorterSearch } from './components/match-sorter-search'
 import { useConfig } from './contexts'
-import type { Item } from './utils';
+import type { Item } from './utils'
 import { useGitEditUrl, getGitIssueUrl } from './utils'
 import { z } from 'zod'
 import type { NavBarProps } from './components/navbar'
 import type { TOCProps } from './components/toc'
 import type { NextSeoProps } from 'next-seo'
+import { themeOptionsSchema, ThemeSwitch } from './components/theme-switch'
 
 export const DEFAULT_LOCALE = 'en-US'
 
@@ -138,6 +139,12 @@ export const themeSchema = z.strictObject({
     >(...reactNode),
     toggleButton: z.boolean()
   }),
+  themeSwitch: z.strictObject({
+    component: z.custom<ReactNode | FC<{ lite?: boolean; className?: string }>>(
+      ...reactNode
+    ),
+    useOptions: themeOptionsSchema.or(z.function().returns(themeOptionsSchema))
+  }),
   toc: z.strictObject({
     component: z.custom<ReactNode | FC<TOCProps>>(...reactNode),
     extraContent: z.custom<ReactNode | FC>(...reactNode),
@@ -201,7 +208,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     component: Footer,
     text: `MIT ${new Date().getFullYear()} © Nextra.`
   },
-  gitTimestamp: function useGitTimestamp({ timestamp }) {
+  gitTimestamp: function GitTimestamp({ timestamp }) {
     const { locale = DEFAULT_LOCALE } = useRouter()
     return (
       <>
@@ -300,6 +307,17 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     defaultMenuCollapseLevel: 2,
     titleComponent: ({ title }) => <>{title}</>,
     toggleButton: false
+  },
+  themeSwitch: {
+    component: ThemeSwitch,
+    useOptions() {
+      const { locale } = useRouter()
+
+      if (locale === 'zh-CN') {
+        return { dark: '深色主题', light: '浅色主题', system: '系统默认' }
+      }
+      return { dark: 'Dark', light: 'Light', system: 'System' }
+    }
   },
   toc: {
     component: TOC,
