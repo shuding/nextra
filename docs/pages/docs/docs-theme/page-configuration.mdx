@@ -4,10 +4,10 @@ In Nextra, the site and page structure can be configured via the co-located `_me
 
 Those configurations affect the overall layout of the theme, especially the navigation bar and the sidebar.
 
-import { Callout } from 'nextra-theme-docs'
-import { Tree, File, Folder } from 'components/file-tree'
+import { Callout, FileTree } from 'nextra-theme-docs'
 import Video from 'components/video'
 import {Screenshot} from 'components/screenshot'
+import menuImage from '../../../public/assets/docs/menu.png'
 
 <Callout>
   Read more about Nextra's `_meta.json` files [here](/docs/guide/organize-files).
@@ -17,14 +17,14 @@ import {Screenshot} from 'components/screenshot'
 
 The title and order of a page shown in the sidebar should be configured in the `_meta.json` file as key-value pairs. For example, if you have the following file structure:
 
-<Tree>
-  <Folder name="pages" defaultOpen>
-    <File name="_meta.json" />
-    <File name="about.mdx" />
-    <File name="contact.mdx" />
-    <File name="index.mdx" />
-  </Folder>
-</Tree>
+<FileTree>
+  <FileTree.Folder name="pages" defaultOpen>
+    <FileTree.File name="_meta.json" />
+    <FileTree.File name="about.mdx" />
+    <FileTree.File name="contact.mdx" />
+    <FileTree.File name="index.mdx" />
+  </FileTree.Folder>
+</FileTree>
 
 You can define how the pages are shown in the sidebar via the `_meta.json` file:
 
@@ -44,19 +44,19 @@ You can define how the pages are shown in the sidebar via the `_meta.json` file:
 
 Folders can be configured in the same way as pages. For example:
 
-<Tree>
-  <Folder name="pages" defaultOpen>
-    <Folder name="fruits" defaultOpen>
-      <File name="_meta.json" />
-      <File name="apple.mdx" />
-      <File name="banana.mdx" />
-    </Folder>
-    <File name="_meta.json" />
-    <File name="about.mdx" />
-    <File name="contact.mdx" />
-    <File name="index.mdx" />
-  </Folder>
-</Tree>
+<FileTree>
+  <FileTree.Folder name="pages" defaultOpen>
+    <FileTree.Folder name="fruits" defaultOpen>
+      <FileTree.File name="_meta.json" />
+      <FileTree.File name="apple.mdx" />
+      <FileTree.File name="banana.mdx" />
+    </FileTree.Folder>
+    <FileTree.File name="_meta.json" />
+    <FileTree.File name="about.mdx" />
+    <FileTree.File name="contact.mdx" />
+    <FileTree.File name="index.mdx" />
+  </FileTree.Folder>
+</FileTree>
 
 The top-level `_meta.json` file contains the meta information for the top-level pages and folders:
 
@@ -84,20 +84,20 @@ This way, information for pages are grouped together in directories. You can mov
 
 What if I want to have a folder with an index page? We can add a MDX page with the same name and in the same directory as the folder. Let's say we want to add `/fruits` route in the example above, we can create a `fruits.mdx` file in pages:
 
-<Tree>
-  <Folder name="pages" defaultOpen>
-    <Folder name="fruits" defaultOpen>
-      <File name="_meta.json" />
-      <File name="apple.mdx" />
-      <File name="banana.mdx" />
-    </Folder>
-    <File name="_meta.json" />
-    <File name="about.mdx" />
-    <File name="contact.mdx" />
-    <File name="fruits.mdx" active />
-    <File name="index.mdx" />
-  </Folder>
-</Tree>
+<FileTree>
+  <FileTree.Folder name="pages" defaultOpen>
+    <FileTree.Folder name="fruits" defaultOpen>
+      <FileTree.File name="_meta.json" />
+      <FileTree.File name="apple.mdx" />
+      <FileTree.File name="banana.mdx" />
+    </FileTree.Folder>
+    <FileTree.File name="_meta.json" />
+    <FileTree.File name="about.mdx" />
+    <FileTree.File name="contact.mdx" />
+    <FileTree.File name="fruits.mdx" active />
+    <FileTree.File name="index.mdx" />
+  </FileTree.Folder>
+</FileTree>
 
 Then Nextra knows that the `fruits` key in `_meta.json` defines a folder with an index page. If you click that folder in the sidebar, it will open the folder and show you the `fruits.mdx` page at the same time.
 
@@ -160,22 +160,22 @@ By defining a top-level page or folder as `"type": "page"`, it will be shown as 
 
 For example, you can have 2 docs folders `frameworks` and `fruits` in your project:
 
-<Tree>
-  <Folder name="pages" defaultOpen>
-    <Folder name="frameworks" defaultOpen>
-      <File name="react.mdx" />
-      <File name="svelte.mdx" />
-      <File name="vue.mdx" />
-    </Folder>
-    <Folder name="fruits" defaultOpen>
-      <File name="apple.mdx" />
-      <File name="banana.mdx" />
-    </Folder>
-    <File name="_meta.json" />
-    <File name="about.mdx" />
-    <File name="index.mdx" />
-  </Folder>
-</Tree>
+<FileTree>
+  <FileTree.Folder name="pages" defaultOpen>
+    <FileTree.Folder name="frameworks" defaultOpen>
+      <FileTree.File name="react.mdx" />
+      <FileTree.File name="svelte.mdx" />
+      <FileTree.File name="vue.mdx" />
+    </FileTree.Folder>
+    <FileTree.Folder name="fruits" defaultOpen>
+      <FileTree.File name="apple.mdx" />
+      <FileTree.File name="banana.mdx" />
+    </FileTree.Folder>
+    <FileTree.File name="_meta.json" />
+    <FileTree.File name="about.mdx" />
+    <FileTree.File name="index.mdx" />
+  </FileTree.Folder>
+</FileTree>
 
 In your top-level `_meta.json` file, you can set everything as a page, instead of a normal sidebar item:
 
@@ -202,7 +202,7 @@ In your top-level `_meta.json` file, you can set everything as a page, instead o
 
 And it will look like this:
 
-<Video src="/assets/docs/sub-docs.mp4"/>
+<Video src="/assets/docs/sub-docs.mp4" />
 
 <div className="text-center text-sm mt-4">[Live example on StackBlitz ↗](https://stackblitz.com/edit/nextra-2-docs-eszspq?file=pages%2F_meta.json)<span className="sr-only"> (opens in a new tab)</span></div>
 
@@ -211,8 +211,6 @@ You can also hide links like `Home` from the navbar with the [`"display": "hidde
 ### Menus
 
 You can also add menus to the navbar using `"type": "menu"` and the `"items"` option:
-
-import menuImage from '../../../public/assets/docs/menu.png'
 
 <Screenshot src={menuImage} alt="Navbar menu" />
 

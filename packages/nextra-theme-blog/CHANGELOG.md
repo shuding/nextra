@@ -1,5 +1,33 @@
 # nextra-theme-blog
 
+## 2.2.17
+
+### Patch Changes
+
+- Updated dependencies [4a66366]
+  - nextra@2.2.17
+
+## 2.2.16
+
+### Patch Changes
+
+- b94245a: Reverts #1417 "force theme to light if darkMode: false was set"
+- d495e5f: introduce `_app.mdx` for better performance and smallest `.next/static/chunks` size
+- Updated dependencies [d495e5f]
+  - nextra@2.2.16
+
+## 2.2.15
+
+### Patch Changes
+
+- 2e441b7: open http:// links in new window
+- da585a8: force theme to `light` if `darkMode: false` was set
+- 3e9e54f: hide unnecessary parts of the pages when being printed
+- Updated dependencies [d5aa17c]
+- Updated dependencies [016828e]
+- Updated dependencies [b3219c3]
+  - nextra@2.2.15
+
 ## 2.2.14
 
 ### Patch Changes

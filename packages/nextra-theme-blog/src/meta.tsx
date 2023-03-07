@@ -64,7 +64,7 @@ export default function Meta(): ReactElement {
           </div>
         )}
       </div>
-      <div className="nx-flex nx-items-center nx-gap-3">
+      <div className="nx-flex nx-items-center nx-gap-3 print:nx-hidden">
         {back && (
           <Link href={back} passHref legacyBehavior>
             <a>Back</a>

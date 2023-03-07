@@ -49,6 +49,7 @@ export function Search({
   const { setMenu } = useMenu()
   const input = useRef<HTMLInputElement>(null)
   const ulRef = useRef<HTMLUListElement>(null)
+  const [focused, setFocused] = useState(false)
 
   useEffect(() => {
     setActive(0)
@@ -169,7 +170,7 @@ export function Search({
           onChange('')
         }}
       >
-        {value
+        {(value && focused)
           ? 'ESC'
           : mounted &&
             (navigator.userAgent.includes('Macintosh') ? (
@@ -202,6 +203,10 @@ export function Search({
         }}
         onFocus={() => {
           onActive?.(true)
+          setFocused(true)
+        }}
+        onBlur={() => {
+          setFocused(false)
         }}
         type="search"
         placeholder={renderString(config.search.placeholder)}

@@ -1,5 +1,25 @@
 # nextra
 
+## 2.2.17
+
+### Patch Changes
+
+- 4a66366: fix TypeError: Cannot read properties of undefined (reading '/') with \_app.mdx while editing theme.config, \_meta.json or adding/removing md/mdx files
+
+## 2.2.16
+
+### Patch Changes
+
+- d495e5f: introduce `_app.mdx` for better performance and smallest `.next/static/chunks` size
+
+## 2.2.15
+
+### Patch Changes
+
+- d5aa17c: do not redirect `.txt` files in nextra's `locales` middleware
+- 016828e: do not redirect .mp4 in locales middleware
+- b3219c3: do not override `className` for `<Td />`, `<Th />` and `<Tr />` components
+
 ## 2.2.14
 
 ### Patch Changes
