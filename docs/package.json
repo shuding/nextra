@@ -9,7 +9,7 @@
   "author": "Shu Ding",
   "license": "MIT",
   "dependencies": {
-    "@vercel/og": "^0.3.0",
+    "@vercel/og": "^0.4.0",
     "clsx": "^1.2.1",
     "framer-motion": "^10.0.0",
     "next": "^13.1.1",
