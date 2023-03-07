@@ -1,15 +1,18 @@
-import {Screenshot} from 'components/screenshot'
+import { Callout, Steps } from 'nextra-theme-docs'
+import { Screenshot } from 'components/screenshot'
 
 # Custom Theme
 
-import { Callout } from 'nextra-theme-docs'
-
-A theme in Nextra works like a layout, that will be rendered as a wrapper for all pages. 
+A theme in Nextra works like a layout, that will be rendered as a wrapper for all pages.
 This docs will walk you through the process of creating a custom theme.
+
+Optionally, you can deploy an example and build further on it by following the below steps:
+
+[![](https://vercel.com/button)](https://vercel.com/new/clone?s=https%3A%2F%2Fgithub.com%2Fshuding%2Fnextra-example&showOptionalTeamCreation=false)
 
 ## Create a Custom Theme
 
-<div className="steps-container">
+<Steps>
 ### Configure Nextra to Use the Theme
 
 First, you need to tell Nextra to use your custom theme file instead of official ones.
@@ -61,7 +64,7 @@ Inside your theme layout, you can use CSS imports or other ways to style it. Nex
 Other than `children`, some other useful props are passed to the theme layout too. With the `pageOpts` props, the theme can access the page’s meta information.
 
 For example, let’s implement these features:
-- Render the page title in `<title>` 
+- Render the page title in `<title>`
 - Show a simple table of contents
 - Add a meta tag for `og:image` via the front matter
 
@@ -130,8 +133,7 @@ export default function Layout({ children, pageOpts }: NextraThemeLayoutProps) {
 ```
 
 There are other item kinds such as `Folder` (for directories) and `Meta` (for `_meta.json` files). All the items are typed so you can easily know the properties.
-
-</div>
+</Steps>
 
 ## Advanced Usage
 

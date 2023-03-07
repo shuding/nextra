@@ -293,7 +293,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
       const { locale } = useRouter()
       if (locale === 'zh-CN') return '搜索文档…'
       if (locale === 'ru') return 'Поиск документации…'
-      if (locale === 'fr') return 'Rechercher de la documentation…'
+      if (locale === 'fr') return 'Rechercher documents…'
       return 'Search documentation…'
     }
   },

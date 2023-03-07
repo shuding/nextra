@@ -1,4 +1,4 @@
-import { Callout } from 'nextra-theme-docs'
+import { Callout, Steps } from 'nextra-theme-docs'
 
 # Rendering Tables
 
@@ -80,7 +80,7 @@ you'll get the following result:
 
 ### How to Write
 
-Want to render dynamic table? You can use embeded JavaScript expressions into your table for it:
+Want to render dynamic table? You can use embedded JavaScript expressions into your table for it:
 
 ```mdx filename="Markdown"
 <table>
@@ -168,7 +168,7 @@ Just wrap your table with curly braces `{` and `}`, e.g.
 
 If this thing is still confusing for you, and you want to use regular literal HTML elements for your tables, do the following:
 
-<div className="steps-container">
+<Steps>
 ### Install `remark-mdx-disable-explicit-jsx` package
 
 ```sh
@@ -196,5 +196,5 @@ const withNextra = nextra({
 
 export default withNextra()
 ```
-</div>
+</Steps>
 

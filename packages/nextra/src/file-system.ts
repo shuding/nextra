@@ -10,3 +10,7 @@ export function findPagesDirectory(): string {
     (res as any).pages // next v12
   )
 }
+
+export const PAGES_DIR = process.env.VITEST_WORKER_ID
+  ? ''
+  : findPagesDirectory()

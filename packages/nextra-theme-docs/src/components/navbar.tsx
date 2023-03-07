@@ -87,7 +87,7 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
   const { menu, setMenu } = useMenu()
 
   return (
-    <div className="nextra-nav-container nx-sticky nx-top-0 nx-z-20 nx-w-full nx-bg-transparent">
+    <div className="nextra-nav-container nx-sticky nx-top-0 nx-z-20 nx-w-full nx-bg-transparent print:nx-hidden">
       <div
         className={cn(
           'nextra-nav-container-blur',

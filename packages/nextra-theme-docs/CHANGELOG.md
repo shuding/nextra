@@ -1,5 +1,42 @@
 # nextra-theme-docs
 
+## 2.2.17
+
+### Patch Changes
+
+- Updated dependencies [4a66366]
+  - nextra@2.2.17
+
+## 2.2.16
+
+### Patch Changes
+
+- b94245a: Reverts #1417 "force theme to light if darkMode: false was set"
+- d495e5f: introduce `_app.mdx` for better performance and smallest `.next/static/chunks` size
+- Updated dependencies [d495e5f]
+  - nextra@2.2.16
+
+## 2.2.15
+
+### Patch Changes
+
+- 71c1897: export `<Card />`, `<Cards >/`, `<Steps />` and `<FileTree />`
+- 51ec00f: fix white appearing of white square while sidebar was toggled
+- 2e441b7: open http:// links in new window
+- 7f697e9: prefer `asPath` over `route` in `useNextSeoProps` docs, allow `void` as return type of `useNextSeoProps`
+- 016828e: do not redirect .mp4 in locales middleware
+- da585a8: force theme to `light` if `darkMode: false` was set
+- 863a750: Fixed x overflow in Callouts for long latex
+- eae1993: Fix the capital letter M is displayed incorrectly on Xiaomi phones
+- ad8625c: bump @headlessui/react to ^1.7.10
+- 673a125: fix squeezed sidebar when he was hidden -> navigated to page without sidebar -> comeback to page with sidebar
+- 26c7e20: fix: move intersection observe and slugs into ActiveAnchorProvider
+- 3e9e54f: hide unnecessary parts of the pages when being printed
+- Updated dependencies [d5aa17c]
+- Updated dependencies [016828e]
+- Updated dependencies [b3219c3]
+  - nextra@2.2.15
+
 ## 2.2.14
 
 ### Patch Changes

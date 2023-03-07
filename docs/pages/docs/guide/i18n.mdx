@@ -1,4 +1,4 @@
-import { Callout } from 'nextra-theme-docs'
+import { Callout, Steps } from 'nextra-theme-docs'
 
 # Next.js I18n
 
@@ -6,8 +6,7 @@ import { Callout } from 'nextra-theme-docs'
 
 Nextra supports [Next.js Internationalized Routing](https://nextjs.org/docs/advanced-features/i18n-routing) out of the box. These docs explain how to configure and use it.
 
-<div className="steps-container">
-
+<Steps>
 ### Add I18n Config
 
 To add multi-language pages to your Nextra application, you need to config `i18n` in `next.config.js` first:
@@ -63,7 +62,7 @@ Then, add the locale codes to your file extensions (required for the default loc
 
 Finally, add the `i18n` option to your `theme.config.jsx` to configure the language dropdown:
 
-```jsx filename="theme.config.jsx"
+```js filename="theme.config.jsx"
 i18n: [
   { locale: 'en', text: 'English' },
   { locale: 'zh', text: '中文' },
@@ -71,5 +70,4 @@ i18n: [
   { locale: 'ar', text: 'العربية', direction: 'rtl' }
 ]
 ```
-
-</div>
+</Steps>
