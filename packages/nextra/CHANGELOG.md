@@ -1,5 +1,13 @@
 # nextra
 
+## 2.2.18
+
+### Patch Changes
+
+- 9bd2d59: remove the .md and .mdx extension from links
+- c2287e1: fix buildDynamicMDX options passed to compileMdx
+- 90cb6b8: do not auto create `_app.mdx` if missing
+
 ## 2.2.17
 
 ### Patch Changes
