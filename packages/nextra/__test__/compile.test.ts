@@ -49,6 +49,23 @@ describe('Process heading', () => {
   })
 })
 
+describe('Link', () => {
+  it('supports .md links', async () => {
+    const { result } = await compileMdx(`[link](../file.md)`, { mdxOptions })
+    expect(result).toMatch(`<_components.a href="../file">`)
+  })
+
+  it('supports .mdx links', async () => {
+    const { result } = await compileMdx(`[link](../file.mdx)`, { mdxOptions })
+    expect(result).toMatch(`<_components.a href="../file">`)
+  })
+
+  it('supports URL links', async () => {
+    const { result } = await compileMdx(`[link](../file)`, { mdxOptions })
+    expect(result).toMatch(`<_components.a href="../file">`)
+  })
+})
+
 describe('Code block', () => {
   describe('Filename', () => {
     it('attach with "codeHighlight: true" by default', async () => {
