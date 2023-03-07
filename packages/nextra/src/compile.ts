@@ -4,9 +4,8 @@ import type { ProcessorOptions } from '@mdx-js/mdx'
 import { createProcessor } from '@mdx-js/mdx'
 import type { Processor } from '@mdx-js/mdx/lib/core'
 import remarkGfm from 'remark-gfm'
-import rehypePrettyCode, {
-  Options as RehypePrettyCodeOptions
-} from 'rehype-pretty-code'
+import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
+import rehypePrettyCode from 'rehype-pretty-code'
 import remarkReadingTime from 'remark-reading-time'
 import grayMatter from 'gray-matter'
 import remarkMath from 'remark-math'
