@@ -1,12 +1,16 @@
 import path from 'node:path'
 import { createRequire } from 'node:module'
-import type { ProcessorOptions } from '@mdx-js/mdx';
+import type { ProcessorOptions } from '@mdx-js/mdx'
 import { createProcessor } from '@mdx-js/mdx'
 import type { Processor } from '@mdx-js/mdx/lib/core'
 import remarkGfm from 'remark-gfm'
-import rehypePrettyCode from 'rehype-pretty-code'
+import rehypePrettyCode, {
+  Options as RehypePrettyCodeOptions
+} from 'rehype-pretty-code'
 import remarkReadingTime from 'remark-reading-time'
 import grayMatter from 'gray-matter'
+import remarkMath from 'remark-math'
+import rehypeKatex from 'rehype-katex'
 
 import {
   remarkStaticImage,
@@ -15,15 +19,18 @@ import {
   structurize,
   parseMeta,
   attachMeta,
-  remarkRemoveImports
+  remarkRemoveImports,
+  remarkLinkRewrite
 } from './mdx-plugins'
 import type { LoaderOptions, PageOpts, ReadingTime } from './types'
-import theme from './theme.json'
 import { truthy } from './utils'
-import remarkMath from 'remark-math'
-import rehypeKatex from 'rehype-katex'
-import { CODE_BLOCK_FILENAME_REGEX, CWD, DEFAULT_LOCALE } from './constants'
-import { remarkMarkdownLinkRewrite } from './mdx-plugins/remark-markdown-link-rewrite';
+import {
+  CODE_BLOCK_FILENAME_REGEX,
+  CWD,
+  DEFAULT_LOCALE,
+  MARKDOWN_EXTENSION_REGEX
+} from './constants'
+import theme from './theme.json'
 
 globalThis.__nextra_temp_do_not_use = () => {
   import('./__temp__')
@@ -31,7 +38,8 @@ globalThis.__nextra_temp_do_not_use = () => {
 
 const require = createRequire(import.meta.url)
 
-const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS = {
+const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS: RehypePrettyCodeOptions = {
+  // @ts-expect-error -- TODO: fix type error
   theme,
   onVisitLine(node: any) {
     // Prevent lines from collapsing in `display: grid` mode, and
@@ -51,7 +59,7 @@ const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS = {
 }
 
 const cachedCompilerForFormat: Record<
-  Exclude<ProcessorOptions['format'], undefined>,
+  Exclude<ProcessorOptions['format'], undefined | null>,
   Processor
 > = Object.create(null)
 
@@ -98,8 +106,8 @@ export async function compileMdx(
     jsx = false,
     format: _format = 'mdx',
     outputFormat = 'function-body',
-    remarkPlugins = [],
-    rehypePlugins = [],
+    remarkPlugins,
+    rehypePlugins,
     rehypePrettyCodeOptions
   }: MdxOptions = {
     ...loaderOptions.mdxOptions,
@@ -133,7 +141,7 @@ export async function compileMdx(
         ? require.resolve('nextra').replace(/index\.js$/, 'mdx.mjs') // fixes Package subpath './mdx' is not defined by "exports"
         : 'nextra/mdx',
       remarkPlugins: [
-        ...remarkPlugins,
+        ...(remarkPlugins || []),
         outputFormat === 'function-body' && remarkRemoveImports,
         remarkGfm,
         remarkHeadings,
@@ -142,10 +150,14 @@ export async function compileMdx(
         readingTime && remarkReadingTime,
         latex && remarkMath,
         isFileOutsideCWD && remarkReplaceImports,
-        remarkMarkdownLinkRewrite,
+        // Remove the markdown file extension from links
+        [
+          remarkLinkRewrite,
+          { pattern: MARKDOWN_EXTENSION_REGEX, replace: '' }
+        ] as any
       ].filter(truthy),
       rehypePlugins: [
-        ...rehypePlugins,
+        ...(rehypePlugins || []),
         [parseMeta, { defaultShowCopyCode }],
         codeHighlight !== false &&
           ([

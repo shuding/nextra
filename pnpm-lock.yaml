@@ -174,11 +174,11 @@ importers:
 
   packages/nextra:
     specifiers:
-      '@mdx-js/mdx': ^2.2.1
+      '@mdx-js/mdx': ^2.3.0
       '@mdx-js/react': ^2.2.1
       '@napi-rs/simple-git': ^0.1.8
-      '@types/github-slugger': ^1.3.0
-      '@types/graceful-fs': ^4.1.5
+      '@types/github-slugger': ^2.0.0
+      '@types/graceful-fs': ^4.1.6
       '@types/lodash.get': ^4.4.7
       '@types/mdast': ^3.0.10
       '@types/react': ^18.0.15
@@ -204,11 +204,11 @@ importers:
       slash: ^3.0.0
       title: ^3.5.3
       unified: ^10.1.2
-      unist-util-remove: ^3.1.0
+      unist-util-remove: ^3.1.1
       unist-util-visit: ^4.1.1
       vitest: ^0.27.1
     dependencies:
-      '@mdx-js/mdx': 2.2.1
+      '@mdx-js/mdx': 2.3.0
       '@mdx-js/react': 2.2.1_react@18.2.0
       '@napi-rs/simple-git': 0.1.8
       github-slugger: 2.0.0
@@ -226,11 +226,11 @@ importers:
       shiki: 0.14.0
       slash: 3.0.0
       title: 3.5.3
-      unist-util-remove: 3.1.0
+      unist-util-remove: 3.1.1
       unist-util-visit: 4.1.1
     devDependencies:
-      '@types/github-slugger': 1.3.0
-      '@types/graceful-fs': 4.1.5
+      '@types/github-slugger': 2.0.0
+      '@types/graceful-fs': 4.1.6
       '@types/lodash.get': 4.4.7
       '@types/mdast': 3.0.10
       '@types/react': 18.0.20
@@ -1157,8 +1157,8 @@ packages:
       read-yaml-file: 1.1.0
     dev: true
 
-  /@mdx-js/mdx/2.2.1:
-    resolution: {integrity: sha512-hZ3ex7exYLJn6FfReq8yTvA6TE53uW9UHJQM9IlSauOuS55J9y8RtA7W+dzp6Yrzr00/U1sd7q+Wf61q6SfiTQ==}
+  /@mdx-js/mdx/2.3.0:
+    resolution: {integrity: sha512-jLuwRlz8DQfQNiUCJR50Y09CGPq3fLtmtUQfVrj79E0JWu3dvsVcxVIcfhR5h0iXu+/z++zDrYeiJqifRynJkA==}
     dependencies:
       '@types/estree-jsx': 1.0.0
       '@types/mdx': 2.0.2
@@ -1584,12 +1584,15 @@ packages:
     resolution: {integrity: sha512-Zf9mY4Mz7N3Nyi341nUkOtgVUQn4j6NS4ndqEha/lOgEbTkHzpD7wZuRagYKzrXNtvawWfsrojoC1nhsQexvNA==}
     dev: true
 
-  /@types/github-slugger/1.3.0:
-    resolution: {integrity: sha512-J/rMZa7RqiH/rT29TEVZO4nBoDP9XJOjnbbIofg7GQKs4JIduEO3WLpte+6WeUz/TcrXKlY+bM7FYrp8yFB+3g==}
+  /@types/github-slugger/2.0.0:
+    resolution: {integrity: sha512-z/FaJhjFPk5mtrsZWeqyvaJdcZKw6CVCTuynEMrcXtgyozN3yMrtL13xWv8uQV2bWtwSXkdiNM37HEKkEj9x1Q==}
+    deprecated: This is a stub types definition. github-slugger provides its own type definitions, so you do not need this installed.
+    dependencies:
+      github-slugger: 2.0.0
     dev: true
 
-  /@types/graceful-fs/4.1.5:
-    resolution: {integrity: sha512-anKkLmZZ+xm4p8JWBf4hElkM4XR+EZeA2M9BAkkTldmcyDY4mbdIJnRghDJH3Ov5ooY7/UAoENtmdMSkaAd7Cw==}
+  /@types/graceful-fs/4.1.6:
+    resolution: {integrity: sha512-Sig0SNORX9fdW+bQuTEovKj3uHcUL6LQKbCrrqb1X7J6/ReAbhCXRAhc+SMejhLELFj2QcyuxmUooZ4bt5ReSw==}
     dependencies:
       '@types/node': 18.11.18
     dev: true
@@ -4047,7 +4050,6 @@ packages:
 
   /github-slugger/2.0.0:
     resolution: {integrity: sha512-IaOQ9puYtjrkq7Y0Ygl9KDZnrf/aiUJYUpVf89y8kyaxbRG7Y1SrX/jaumrv81vc61+kiMempujsM3Yw7w5qcw==}
-    dev: false
 
   /glob-parent/5.1.2:
     resolution: {integrity: sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==}
@@ -5825,7 +5827,7 @@ packages:
       react: '>=16.x <=18.x'
       react-dom: '>=16.x <=18.x'
     dependencies:
-      '@mdx-js/mdx': 2.2.1
+      '@mdx-js/mdx': 2.3.0
       '@mdx-js/react': 2.2.1_react@18.2.0
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
@@ -7435,7 +7437,7 @@ packages:
     hasBin: true
     dependencies:
       '@jridgewell/source-map': 0.3.2
-      acorn: 8.8.0
+      acorn: 8.8.1
       commander: 2.20.3
       source-map-support: 0.5.21
     dev: true
@@ -7829,8 +7831,8 @@ packages:
       unist-util-visit: 4.1.1
     dev: false
 
-  /unist-util-remove/3.1.0:
-    resolution: {integrity: sha512-rO/sIghl13eN8irs5OBN2a4RC10MsJdiePCfwrvnzGtgIbHcDXr2REr0qi9F2r/CIb1r9FyyFmcMRIGs+EyUFw==}
+  /unist-util-remove/3.1.1:
+    resolution: {integrity: sha512-kfCqZK5YVY5yEa89tvpl7KnBBHu2c6CzMkqHUrlOqaRgGOMp0sMvwWOVrbAtj03KhovQB7i96Gda72v/EFE0vw==}
     dependencies:
       '@types/unist': 2.0.6
       unist-util-is: 5.1.1
@@ -8509,7 +8511,7 @@ packages:
       react: '>=16.13.1'
       react-dom: '>=16.13.1'
     dependencies:
-      '@mdx-js/mdx': 2.2.1
+      '@mdx-js/mdx': 2.3.0
       '@mdx-js/react': 2.2.1_react@18.2.0
       '@napi-rs/simple-git': 0.1.8
       github-slugger: 2.0.0
@@ -8531,7 +8533,7 @@ packages:
       shiki: 0.14.0
       slash: 3.0.0
       title: 3.5.3
-      unist-util-remove: 3.1.0
+      unist-util-remove: 3.1.1
       unist-util-visit: 4.1.1
     transitivePeerDependencies:
       - supports-color
