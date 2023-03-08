@@ -65,18 +65,18 @@ describe('Link', () => {
     expect(result).toMatch(`<_components.a href="../file">`)
   })
 
-  it('removes query from links', async () => {
+  it('supports query', async () => {
     const { result } = await compileMdx(`[link](../file.md?query=a)`, {
       mdxOptions
     })
-    expect(result).toMatch(`<_components.a href="../file">`)
+    expect(result).toMatch(`<_components.a href="../file?query=a">`)
   })
 
-  it('removes anchor from links', async () => {
+  it('supports anchor', async () => {
     const { result } = await compileMdx(`[link](../file.md#anchor)`, {
       mdxOptions
     })
-    expect(result).toMatch(`<_components.a href="../file">`)
+    expect(result).toMatch(`<_components.a href="../file#anchor">`)
   })
 })
 
