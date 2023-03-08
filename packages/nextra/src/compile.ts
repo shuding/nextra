@@ -1,36 +1,35 @@
+import path from 'node:path'
+import { createRequire } from 'node:module'
 import type { ProcessorOptions } from '@mdx-js/mdx'
 import { createProcessor } from '@mdx-js/mdx'
 import type { Processor } from '@mdx-js/mdx/lib/core'
-import grayMatter from 'gray-matter'
-import { createRequire } from 'node:module'
-import path from 'node:path'
-import rehypeKatex from 'rehype-katex'
+import remarkGfm from 'remark-gfm'
 import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
 import rehypePrettyCode from 'rehype-pretty-code'
-import remarkGfm from 'remark-gfm'
-import remarkMath from 'remark-math'
 import remarkReadingTime from 'remark-reading-time'
-import type { Pluggable } from 'unified'
+import grayMatter from 'gray-matter'
+import remarkMath from 'remark-math'
+import rehypeKatex from 'rehype-katex'
 
+import {
+  remarkStaticImage,
+  remarkHeadings,
+  remarkReplaceImports,
+  structurize,
+  parseMeta,
+  attachMeta,
+  remarkRemoveImports,
+  remarkLinkRewrite
+} from './mdx-plugins'
+import type { LoaderOptions, PageOpts, ReadingTime } from './types'
+import { truthy } from './utils'
 import {
   CODE_BLOCK_FILENAME_REGEX,
   CWD,
   DEFAULT_LOCALE,
   MARKDOWN_URL_EXTENSION_REGEX
 } from './constants'
-import {
-  attachMeta,
-  parseMeta,
-  remarkHeadings,
-  remarkLinkRewrite,
-  remarkRemoveImports,
-  remarkReplaceImports,
-  remarkStaticImage,
-  structurize
-} from './mdx-plugins'
 import theme from './theme.json'
-import type { LoaderOptions, PageOpts, ReadingTime } from './types'
-import { truthy } from './utils'
 
 globalThis.__nextra_temp_do_not_use = () => {
   import('./__temp__')
