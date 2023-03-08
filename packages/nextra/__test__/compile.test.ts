@@ -64,6 +64,20 @@ describe('Link', () => {
     const { result } = await compileMdx(`[link](../file)`, { mdxOptions })
     expect(result).toMatch(`<_components.a href="../file">`)
   })
+
+  it('removes query from links', async () => {
+    const { result } = await compileMdx(`[link](../file.md?query=a)`, {
+      mdxOptions
+    })
+    expect(result).toMatch(`<_components.a href="../file">`)
+  })
+
+  it('removes anchor from links', async () => {
+    const { result } = await compileMdx(`[link](../file.md#anchor)`, {
+      mdxOptions
+    })
+    expect(result).toMatch(`<_components.a href="../file">`)
+  })
 })
 
 describe('Code block', () => {
