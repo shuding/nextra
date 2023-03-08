@@ -10,6 +10,7 @@ import remarkReadingTime from 'remark-reading-time'
 import grayMatter from 'gray-matter'
 import remarkMath from 'remark-math'
 import rehypeKatex from 'rehype-katex'
+import type { Pluggable } from 'unified'
 
 import {
   remarkStaticImage,
@@ -153,7 +154,7 @@ export async function compileMdx(
         [
           remarkLinkRewrite,
           { pattern: MARKDOWN_EXTENSION_REGEX, replace: '' }
-        ] as any
+        ] satisfies Pluggable
       ].filter(truthy),
       rehypePlugins: [
         ...(rehypePlugins || []),
