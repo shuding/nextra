@@ -10,6 +10,7 @@ import remarkReadingTime from 'remark-reading-time'
 import grayMatter from 'gray-matter'
 import remarkMath from 'remark-math'
 import rehypeKatex from 'rehype-katex'
+import type { Pluggable } from 'unified'
 
 import {
   remarkStaticImage,
