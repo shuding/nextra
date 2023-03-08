@@ -10,6 +10,7 @@ import remarkReadingTime from 'remark-reading-time'
 import grayMatter from 'gray-matter'
 import remarkMath from 'remark-math'
 import rehypeKatex from 'rehype-katex'
+import type { Pluggable } from 'unified'
 
 import {
   remarkStaticImage,
@@ -27,7 +28,7 @@ import {
   CODE_BLOCK_FILENAME_REGEX,
   CWD,
   DEFAULT_LOCALE,
-  MARKDOWN_EXTENSION_REGEX
+  MARKDOWN_URL_EXTENSION_REGEX
 } from './constants'
 import theme from './theme.json'
 
@@ -152,8 +153,8 @@ export async function compileMdx(
         // Remove the markdown file extension from links
         [
           remarkLinkRewrite,
-          { pattern: MARKDOWN_EXTENSION_REGEX, replace: '' }
-        ] as any
+          { pattern: MARKDOWN_URL_EXTENSION_REGEX, replace: '' }
+        ] satisfies Pluggable
       ].filter(truthy),
       rehypePlugins: [
         ...(rehypePlugins || []),

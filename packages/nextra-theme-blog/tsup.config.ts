@@ -7,6 +7,6 @@ export default defineConfig({
   dts: true,
   name: 'nextra-theme-blog',
   outExtension: () => ({ js: '.js' }),
-  target: tsconfig.compilerOptions.target,
+  target: tsconfig.compilerOptions.target as 'es2016',
   external: ['nextra']
 })
