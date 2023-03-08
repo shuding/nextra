@@ -8,5 +8,5 @@ export default defineConfig({
   dts: true,
   external: ['nextra'],
   outExtension: () => ({ js: '.js' }),
-  target: tsconfig.compilerOptions.target
+  target: tsconfig.compilerOptions.target as 'es2016'
 })
