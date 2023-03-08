@@ -2,4 +2,4 @@
 'nextra': patch
 ---
 
-Remove query and anchor from markdown links.
+Support Markdown links with query or anchor.
