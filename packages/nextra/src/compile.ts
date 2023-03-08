@@ -28,7 +28,7 @@ import {
   CODE_BLOCK_FILENAME_REGEX,
   CWD,
   DEFAULT_LOCALE,
-  MARKDOWN_EXTENSION_REGEX
+  MARKDOWN_LINK_REGEX
 } from './constants'
 import theme from './theme.json'
 
@@ -153,7 +153,7 @@ export async function compileMdx(
         // Remove the markdown file extension from links
         [
           remarkLinkRewrite,
-          { pattern: MARKDOWN_EXTENSION_REGEX, replace: '' }
+          { pattern: MARKDOWN_LINK_REGEX, replace: '' }
         ] satisfies Pluggable
       ].filter(truthy),
       rehypePlugins: [
