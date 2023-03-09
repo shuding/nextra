@@ -3,6 +3,7 @@ import Meta from './meta'
 import { MDXTheme } from './mdx-theme'
 import { useBlogContext } from './blog-context'
 import { BasicLayout } from './basic-layout'
+import Comments from './cusdis'
 
 export const ArticleLayout = ({ children }: { children: ReactNode }) => {
   const { config } = useBlogContext()
@@ -12,7 +13,7 @@ export const ArticleLayout = ({ children }: { children: ReactNode }) => {
       <MDXTheme>
         {children}
         {config.postFooter}
-        {config.comments}
+        <Comments />
       </MDXTheme>
     </BasicLayout>
   )
