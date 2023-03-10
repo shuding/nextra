@@ -234,8 +234,8 @@ async function loader(
     headings,
     hasJsxInH1,
     timestamp,
+    pageMap,
     ...(!HAS_UNDERSCORE_APP_MDX_FILE && {
-      pageMap,
       flexsearch,
       newNextLinkBehavior // todo: remove in v3
     }),
@@ -268,13 +268,16 @@ ${finalResult}
 
 const __nextra_internal__ = globalThis[Symbol.for('__nextra_internal__')] ||= Object.create(null)
 __nextra_internal__.Layout = __nextra_layout
-__nextra_internal__.pageMap = ${JSON.stringify(pageMap)}
+__nextra_internal__.pageMap = ${JSON.stringify(pageOpts.pageMap)}
 __nextra_internal__.flexsearch = ${JSON.stringify(flexsearch)}
 ${
   themeConfigImport
     ? '__nextra_internal__.themeConfig = __nextra_themeConfig'
     : ''
 }`
+  }
+  if (HAS_UNDERSCORE_APP_MDX_FILE) {
+    delete pageOpts.pageMap
   }
 
   const stringifiedPageOpts = JSON.stringify(pageOpts)
