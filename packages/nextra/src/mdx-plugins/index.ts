@@ -1,4 +1,5 @@
 export { parseMeta, attachMeta } from './rehype'
+export { remarkHeaderIds } from './remark-header-ids'
 export { remarkHeadings } from './remark-headings'
 export { remarkReplaceImports } from './remark-replace-imports'
 export { remarkRemoveImports } from './remark-remove-imports'

@@ -4,6 +4,7 @@ import type { Plugin } from 'unified'
 import type { Root, Parent } from 'mdast'
 import Slugger from 'github-slugger'
 import type { PageOpts } from '../types'
+import type { HProperties } from './remark-header-ids'
 
 export const getFlattenedValue = (node: Parent): string =>
   node.children
@@ -42,7 +43,8 @@ export const remarkHeadings: Plugin<[], Root> = function (this: Processor) {
           const heading = {
             depth: node.depth,
             value,
-            id: slugger.slug(value)
+            id: slugger.slug(value),
+            customId: (node.data?.hProperties as HProperties)?.id
           }
           data.headingMeta.headings.push(heading)
           if (hasJsxInH1) {
