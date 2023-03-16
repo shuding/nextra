@@ -70,10 +70,10 @@ export function TOC({ headings, filePath }: TOCProps): ReactElement {
             {renderComponent(config.toc.title)}
           </p>
           <ul>
-            {items.map(({ customId, id, value, depth }) => (
-              <li className="nx-my-2 nx-scroll-my-6 nx-scroll-py-6" key={customId ?? id}>
+            {items.map(({ id, value, depth }) => (
+              <li className="nx-my-2 nx-scroll-my-6 nx-scroll-py-6" key={id}>
                 <a
-                  href={`#${customId ?? id}`}
+                  href={`#${id}`}
                   className={cn(
                     {
                       2: 'nx-font-semibold',
@@ -83,7 +83,7 @@ export function TOC({ headings, filePath }: TOCProps): ReactElement {
                       6: 'ltr:nx-ml-16 rtl:nx-mr-16'
                     }[depth as Exclude<typeof depth, 1>],
                     'nx-inline-block',
-                    activeAnchor[customId ?? id]?.isActive
+                    activeAnchor[id]?.isActive
                       ? 'nx-text-primary-600 nx-subpixel-antialiased contrast-more:!nx-text-primary-600'
                       : 'nx-text-gray-500 hover:nx-text-gray-900 dark:nx-text-gray-400 dark:hover:nx-text-gray-300',
                     'contrast-more:nx-text-gray-900 contrast-more:nx-underline contrast-more:dark:nx-text-gray-50'

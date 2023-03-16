@@ -43,8 +43,7 @@ export const remarkHeadings: Plugin<[], Root> = function (this: Processor) {
           const heading = {
             depth: node.depth,
             value,
-            id: slugger.slug(value),
-            customId: (node.data?.hProperties as HProperties)?.id
+            id: (node.data?.hProperties as HProperties)?.id || slugger.slug(value)
           }
           data.headingMeta.headings.push(heading)
           if (hasJsxInH1) {
