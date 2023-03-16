@@ -579,6 +579,15 @@ exports[`context > getAllPages() > should work 1`] = `
         "kind": "MdxPage",
         "locale": "en-US",
         "meta": {
+          "title": "Custom Header IDs",
+        },
+        "name": "custom-header-ids",
+        "route": "/docs/custom-header-ids",
+      },
+      {
+        "kind": "MdxPage",
+        "locale": "en-US",
+        "meta": {
           "title": "404/500 Custom Error Pages",
         },
         "name": "404-500",
@@ -1494,6 +1503,15 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
     },
     "name": "wrap-toc-items",
     "route": "/docs/wrap-toc-items",
+  },
+  {
+    "kind": "MdxPage",
+    "locale": "en-US",
+    "meta": {
+      "title": "Custom Header IDs",
+    },
+    "name": "custom-header-ids",
+    "route": "/docs/custom-header-ids",
   },
   {
     "kind": "MdxPage",

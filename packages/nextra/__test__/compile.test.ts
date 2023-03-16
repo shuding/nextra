@@ -47,6 +47,18 @@ describe('Process heading', () => {
     const result = await compileMdx(data, { mdxOptions })
     expect(result).toMatchSnapshot()
   })
+  it('supports custom header id', async () => {
+    const { result } = await compileMdx(`### My Header [#test-id]`, {
+      mdxOptions
+    })
+    expect(result).toMatch(`<_components.h3 id="test-id">{"My Header"}`)
+  })
+  it('supports header without custom id', async () => {
+    const { result } = await compileMdx(`### My Header`, {
+      mdxOptions
+    })
+    expect(result).toMatch(`<_components.h3 id="my-header">{"My Header"}`)
+  })
 })
 
 describe('Link', () => {
