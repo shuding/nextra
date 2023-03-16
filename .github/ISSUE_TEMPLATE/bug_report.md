@@ -7,7 +7,7 @@ assignees: ''
 
 ---
 
-**1. Search on the [docs](https://nextra.site/docs) 👇**
+**1. Search on the [docs](https://nextra.site/docs)**
 
 **2. Describe the bug**
 
