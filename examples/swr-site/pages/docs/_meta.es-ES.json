@@ -16,6 +16,5 @@
   "middleware": "Middleware",
   "advanced": "Avanzado",
   "change-log": "Registro de cambios",
-  "wrap-toc-items": "Ajustar elementos de la tabla de contenido",
-  "custom-header-ids": "ID de Encabezado Personalizado"
+  "wrap-toc-items": "Ajustar elementos de la tabla de contenido"
 }
