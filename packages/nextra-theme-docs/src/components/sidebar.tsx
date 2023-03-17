@@ -17,7 +17,6 @@ import { useConfig, useMenu, useActiveAnchor } from '../contexts'
 import type { Item, MenuItem, PageItem } from '../utils'
 import { useFSRoute, renderComponent } from '../utils'
 import { LocaleSwitch } from './locale-switch'
-import { ThemeSwitch } from './theme-switch'
 import { ArrowRightIcon, ExpandIcon } from 'nextra/icons'
 import { Collapse } from './collapse'
 import { Anchor } from './anchor'
@@ -467,10 +466,11 @@ export function Sidebar({
               />
             )}
             {config.darkMode && (
-              <ThemeSwitch
-                lite={!showSidebar || hasI18n}
-                className={showSidebar && !hasI18n ? 'nx-grow' : ''}
-              />
+              <div className={showSidebar && !hasI18n ? 'nx-grow nx-flex nx-flex-col' : ''}>
+                {renderComponent(config.themeSwitch.component, {
+                  lite: !showSidebar || hasI18n
+                })}
+              </div>
             )}
             {config.sidebar.toggleButton && (
               <button

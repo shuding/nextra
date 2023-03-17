@@ -1,5 +1,20 @@
 # nextra
 
+## 2.2.19
+
+### Patch Changes
+
+- e41cbbc: fix `transformPageOpts` with \_app.mdx, `pageMap` was still included even it was removed in `transformPageOpts`
+- a1e59b2: Support Markdown links with query or anchor.
+
+## 2.2.18
+
+### Patch Changes
+
+- 9bd2d59: remove the .md and .mdx extension from links
+- c2287e1: fix buildDynamicMDX options passed to compileMdx
+- 90cb6b8: do not auto create `_app.mdx` if missing
+
 ## 2.2.17
 
 ### Patch Changes

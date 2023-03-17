@@ -121,7 +121,7 @@ export default {
     const url =
       'https://my-app.com' +
       (defaultLocale === locale ? asPath : `/${locale}${asPath}`)
-      
+
     return <>
       <meta property="og:url" content={url} />
       <meta property="og:title" content={frontMatter.title || 'Nextra'} />
@@ -487,6 +487,31 @@ export default {
 }
 ```
 
+## Theme Switch
+
+<OptionTable options={[
+  ['themeSwitch.component', 'React.ReactNode | React.FC<{ lite?: boolean, className?: string }>', 'Component to render the theme switch.'],
+  ['themeSwitch.useOptions', 'ThemeOptions | () => ThemeOptions', 'Options in the theme switch.'],
+]}/>
+
+### Options
+
+You are able to customize the option names for localization or other purposes:
+
+```jsx
+export default {
+  themeSwitch: {
+    useOptions() {
+      return {
+        light: 'Light',
+        dark: 'Dark',
+        system: 'System'
+      }
+    }
+  }
+}
+```
+
 ## Error Pages
 
 ### 404 - Not Found
@@ -500,3 +525,4 @@ This isn’t supported by all browsers, but it’s a nice way to customize the f
 <OptionTable options={[
   ['faviconGlyph', `string`, 'The glyph to use as the favicon.'],
 ]}/>
+

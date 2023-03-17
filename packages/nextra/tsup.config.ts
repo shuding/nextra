@@ -4,15 +4,13 @@ import path from 'node:path'
 
 import tsconfig from './tsconfig.json'
 
-const { target } = tsconfig.compilerOptions
-
 export default defineConfig([
   {
     name: 'nextra',
     entry: ['src/index.js', 'src/__temp__.js', 'src/catch-all.ts'],
     format: 'cjs',
     dts: false,
-    target
+    target: tsconfig.compilerOptions.target as 'es2016'
   },
   {
     name: 'nextra-esm',

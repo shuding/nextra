@@ -26,20 +26,11 @@ const UNDERSCORE_APP_FILENAME: string =
     .readdirSync(PAGES_DIR)
     .find(fileName => /^_app\.(js|jsx|ts|tsx|md)$/.test(fileName)) || ''
 
-let HAS_UNDERSCORE_APP_MDX_FILE = existsSync(APP_MDX_PATH)
+const HAS_UNDERSCORE_APP_MDX_FILE = existsSync(APP_MDX_PATH)
 
 if (UNDERSCORE_APP_FILENAME) {
   console.warn(
     `[nextra] Found "${UNDERSCORE_APP_FILENAME}" file, refactor it to "_app.mdx" for better performance.`
-  )
-} else if (!HAS_UNDERSCORE_APP_MDX_FILE) {
-  const appMdxContent = `export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />
-}`
-  fs.writeFileSync(APP_MDX_PATH, appMdxContent)
-  HAS_UNDERSCORE_APP_MDX_FILE = true
-  console.info(
-    `[nextra] Didn't find "_app.mdx" file, created it for you for better performance.`
   )
 }
 
@@ -243,8 +234,8 @@ async function loader(
     headings,
     hasJsxInH1,
     timestamp,
+    pageMap,
     ...(!HAS_UNDERSCORE_APP_MDX_FILE && {
-      pageMap,
       flexsearch,
       newNextLinkBehavior // todo: remove in v3
     }),
@@ -277,13 +268,16 @@ ${finalResult}
 
 const __nextra_internal__ = globalThis[Symbol.for('__nextra_internal__')] ||= Object.create(null)
 __nextra_internal__.Layout = __nextra_layout
-__nextra_internal__.pageMap = ${JSON.stringify(pageMap)}
+__nextra_internal__.pageMap = ${JSON.stringify(pageOpts.pageMap)}
 __nextra_internal__.flexsearch = ${JSON.stringify(flexsearch)}
 ${
   themeConfigImport
     ? '__nextra_internal__.themeConfig = __nextra_themeConfig'
     : ''
 }`
+  }
+  if (HAS_UNDERSCORE_APP_MDX_FILE) {
+    delete pageOpts.pageMap
   }
 
   const stringifiedPageOpts = JSON.stringify(pageOpts)

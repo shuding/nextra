@@ -1,4 +1,4 @@
-import { Callout } from 'nextra-theme-docs'
+import { Callout, FileTree } from 'nextra-theme-docs'
 
 # Getting Started
 
@@ -32,6 +32,36 @@ const fetcher = (...args) => fetch(...args).then(res => res.json())
   If you want to use GraphQL API or libs like Axios, you can create your own fetcher function.
   Check [here](/docs/data-fetching) for more examples.
 </Callout>
+
+<FileTree>
+  <FileTree.Folder name="users-service" defaultOpen>
+    <FileTree.File name="schema.graphql" />
+  </FileTree.Folder>
+  <FileTree.Folder name="posts-service" defaultOpen>
+    <FileTree.File name="schema.graphql" />
+  </FileTree.Folder>
+</FileTree>
+
+<FileTree>
+  <FileTree.Folder name="users-service" defaultOpen>
+    <FileTree.File name="schema.graphql" />
+    <FileTree.Folder name="posts-service" defaultOpen>
+      <FileTree.File name="schema.graphql" />
+    </FileTree.Folder>
+  </FileTree.Folder>
+</FileTree>
+
+<details>
+  <summary>Renders properly</summary>
+  <div className="nx-flex nx-justify-center">content</div>
+</details>
+
+<details>
+  <summary>
+    Renders on next line
+  </summary>
+  <div className="nx-flex nx-justify-center">content</div>
+</details>
 
 Then you can import `useSWR` and start using it inside any function components:
 
