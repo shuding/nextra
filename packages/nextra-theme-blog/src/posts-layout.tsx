@@ -46,8 +46,13 @@ export const PostsLayout = ({ children }: { children: ReactNode }) => {
           </p>
         )}
         {date && (
-          <time className="nx-text-sm nx-text-gray-300" dateTime={date.toISOString()}>
-            {date.toDateString()}
+          <time
+            className="nx-text-sm nx-text-gray-300"
+            dateTime={date.toISOString()}
+          >
+            {config.dateFormatter && typeof config.dateFormatter === 'function'
+              ? config.dateFormatter(new Date(date))
+              : new Date(date).toDateString()}
           </time>
         )}
       </div>

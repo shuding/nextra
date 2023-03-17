@@ -24,6 +24,7 @@ export interface NextraBlogTheme {
     name: string
     url: string
   }[]
+  dateFormatter: (date: Date) => string
   postFooter?: string
   readMore?: string
   titleSuffix?: string

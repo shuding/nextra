@@ -49,8 +49,11 @@ export default function Meta(): ReactElement {
           {author}
           {author && date && ','}
           {date && (
-            <time dateTime={new Date(date).toISOString()}>
-              {new Date(date).toDateString()}
+            <time>
+              {config.dateFormatter &&
+              typeof config.dateFormatter === 'function'
+                ? config.dateFormatter(new Date(date))
+                : new Date(date).toDateString()}
             </time>
           )}
           {(author || date) && (readingTime || tags.length > 0) && (
