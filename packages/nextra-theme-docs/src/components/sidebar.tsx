@@ -147,11 +147,7 @@ function FolderImpl({ item, anchors }: FolderProps): ReactElement {
           rerender({})
         }}
       >
-        {renderComponent(config.sidebar.titleComponent, {
-          title: item.title,
-          type: item.type,
-          route: item.route
-        })}
+        {renderComponent(config.sidebar.titleComponent, item)}
         <ArrowRightIcon
           className="nx-h-[18px] nx-min-w-[18px] nx-rounded-sm nx-p-0.5 hover:nx-bg-gray-800/5 dark:hover:nx-bg-gray-100/5"
           pathClassName={cn(
@@ -174,20 +170,24 @@ function FolderImpl({ item, anchors }: FolderProps): ReactElement {
   )
 }
 
-function Separator({ title }: { title: string }): ReactElement {
+type SeparatorProps = {
+  item: PageItem | Item
+}
+
+function Separator({item}: SeparatorProps): ReactElement {
   const config = useConfig()
   return (
     <li
       className={cn(
         '[word-break:break-word]',
-        title
+        item.title
           ? 'nx-mt-5 nx-mb-2 nx-px-2 nx-py-1.5 nx-text-sm nx-font-semibold nx-text-gray-900 first:nx-mt-0 dark:nx-text-gray-100'
           : 'nx-my-4'
       )}
     >
-      {title ? (
+      {item.title ? (
         renderComponent(config.sidebar.titleComponent, {
-          title,
+          ...item,
           type: 'separator',
           route: ''
         })
@@ -215,7 +215,7 @@ function File({
   const config = useConfig()
 
   if (item.type === 'separator') {
-    return <Separator title={item.title} />
+    return <Separator item={item} />
   }
 
   return (
@@ -234,11 +234,7 @@ function File({
           onFocus?.(null)
         }}
       >
-        {renderComponent(config.sidebar.titleComponent, {
-          title: item.title,
-          type: item.type,
-          route: item.route
-        })}
+        {renderComponent(config.sidebar.titleComponent, item)}
       </Anchor>
       {active && anchors.length > 0 && (
         <ul

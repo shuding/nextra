@@ -135,7 +135,7 @@ export const themeSchema = z.strictObject({
   sidebar: z.strictObject({
     defaultMenuCollapseLevel: z.number().min(1).int(),
     titleComponent: z.custom<
-      ReactNode | FC<{ title: string; type: string; route: string }>
+      ReactNode | FC<{ title: string; type: string; route: string, [data: string]: any }>
     >(...reactNode),
     toggleButton: z.boolean()
   }),
