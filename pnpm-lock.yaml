@@ -38,7 +38,7 @@ importers:
       prettier: 2.8.4
       prettier-plugin-tailwindcss: 0.2.5
       rimraf: 4.4.0
-      tsup: 6.6.3
+      tsup: 6.7.0
       turbo: 1.8.3
       typescript: 4.9.5
     devDependencies:
@@ -58,7 +58,7 @@ importers:
       prettier: 2.8.4
       prettier-plugin-tailwindcss: 0.2.5_prettier@2.8.4
       rimraf: 4.4.0
-      tsup: 6.6.3_typescript@4.9.5
+      tsup: 6.7.0_typescript@4.9.5
       turbo: 1.8.3
       typescript: 4.9.5
 
@@ -7544,14 +7544,14 @@ packages:
   /tslib/2.4.0:
     resolution: {integrity: sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==}
 
-  /tsup/6.6.3_typescript@4.9.5:
-    resolution: {integrity: sha512-OLx/jFllYlVeZQ7sCHBuRVEQBBa1tFbouoc/gbYakyipjVQdWy/iQOvmExUA/ewap9iQ7tbJf9pW0PgcEFfJcQ==}
+  /tsup/6.7.0_typescript@4.9.5:
+    resolution: {integrity: sha512-L3o8hGkaHnu5TdJns+mCqFsDBo83bJ44rlK7e6VdanIvpea4ArPcU3swWGsLVbXak1PqQx/V+SSmFPujBK+zEQ==}
     engines: {node: '>=14.18'}
     hasBin: true
     peerDependencies:
       '@swc/core': ^1
       postcss: ^8.4.12
-      typescript: ^4.1.0
+      typescript: '>=4.1.0'
     peerDependenciesMeta:
       '@swc/core':
         optional: true
