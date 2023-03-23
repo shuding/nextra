@@ -47,6 +47,9 @@
       ],
       "mdx": [
         "./dist/mdx.d.ts"
+      ],
+      "normalize-pages": [
+        "./dist/normalize-pages.d.ts"
       ]
     }
   },

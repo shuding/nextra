@@ -1,5 +1,6 @@
 import { z } from 'zod'
 import type { PageMapItem, Folder, MdxFile } from './types'
+import { ERROR_ROUTES } from './constants'
 
 const DEFAULT_PAGE_THEME: PageTheme = {
   breadcrumb: true,
@@ -14,8 +15,6 @@ const DEFAULT_PAGE_THEME: PageTheme = {
   typesetting: 'default'
 }
 
-const ERROR_ROUTES = new Set(['/404', '/500'])
-
 const pageThemeSchema = z.strictObject({
   breadcrumb: z.boolean(),
   collapsed: z.boolean(),
@@ -29,7 +28,7 @@ const pageThemeSchema = z.strictObject({
   typesetting: z.enum(['default', 'article'])
 })
 
-type PageTheme = z.infer<typeof pageThemeSchema>
+export type PageTheme = z.infer<typeof pageThemeSchema>
 
 /**
  * An option to control how an item should be displayed in the sidebar:
@@ -89,7 +88,7 @@ function extendMeta(
 
 type FolderWithoutChildren = Omit<Folder, 'children'>
 
-type Item = (MdxFile | FolderWithoutChildren) & {
+export type Item = (MdxFile | FolderWithoutChildren) & {
   title: string
   type: string
   children?: Item[]
@@ -99,7 +98,7 @@ type Item = (MdxFile | FolderWithoutChildren) & {
   isUnderCurrentDocsTree?: boolean
 }
 
-type PageItem = (MdxFile | FolderWithoutChildren) & {
+export type PageItem = (MdxFile | FolderWithoutChildren) & {
   title: string
   type: string
   href?: string
@@ -111,7 +110,7 @@ type PageItem = (MdxFile | FolderWithoutChildren) & {
   isUnderCurrentDocsTree?: boolean
 }
 
-type MenuItem = (MdxFile | FolderWithoutChildren) & IMenuItem & {
+export type MenuItem = (MdxFile | FolderWithoutChildren) & IMenuItem & {
   children?: PageItem[]
 }
 

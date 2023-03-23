@@ -37,3 +37,5 @@ export const NEXTRA_INTERNAL = Symbol.for('__nextra_internal__')
 export const CODE_BLOCK_FILENAME_REGEX = /filename="([^"]+)"/
 
 export const DEFAULT_LOCALES = ['']
+
+export const ERROR_ROUTES = new Set(['/404', '/500'])

@@ -206,6 +206,7 @@ importers:
       unist-util-remove: ^3.1.1
       unist-util-visit: ^4.1.1
       vitest: ^0.27.1
+      zod: ^3.20.2
     dependencies:
       '@mdx-js/mdx': 2.3.0
       '@mdx-js/react': 2.2.1_react@18.2.0
@@ -227,6 +228,7 @@ importers:
       title: 3.5.3
       unist-util-remove: 3.1.1
       unist-util-visit: 4.1.1
+      zod: 3.20.2
     devDependencies:
       '@types/github-slugger': 2.0.0
       '@types/graceful-fs': 4.1.6
@@ -8497,6 +8499,7 @@ packages:
       title: 3.5.3
       unist-util-remove: 3.1.1
       unist-util-visit: 4.1.1
+      zod: 3.20.2
     transitivePeerDependencies:
       - supports-color
     dev: false
