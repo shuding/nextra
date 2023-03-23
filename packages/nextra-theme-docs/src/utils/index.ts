@@ -1,5 +1,5 @@
 export { getGitIssueUrl } from './get-git-issue-url'
-export { Item, PageItem, MenuItem, normalizePages } from './normalize-pages'
+export { Item, PageItem, MenuItem, normalizePages } from 'nextra/normalize-pages'
 export { renderComponent, renderString } from './render'
 export { usePopper } from './use-popper'
 export { useGitEditUrl } from './use-git-edit-url'
