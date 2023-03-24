@@ -16,7 +16,8 @@ import {
   normalizePageRoute,
   parseFileName,
   sortPages,
-  truthy
+  truthy,
+  parseJsonFile
 } from './utils'
 import path from 'node:path'
 import grayMatter from 'gray-matter'
@@ -108,7 +109,7 @@ export async function collectFiles(
         fileMap[fp] = {
           kind: 'Meta',
           ...(locale && { locale }),
-          data: JSON.parse(content)
+          data: parseJsonFile(content, fp)
         }
         return fileMap[fp]
       }
@@ -132,7 +133,9 @@ export async function collectFiles(
           fileMap[fp] = {
             kind: 'Meta',
             ...(locale && { locale }),
-            data: meta
+            // we spread object because default title could be incorrectly set when _meta.json/js
+            // is imported/exported by another _meta.js
+            data: { ...meta }
           }
         } else {
           console.error(

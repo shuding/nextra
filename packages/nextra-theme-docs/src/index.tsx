@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import 'focus-visible'
 import cn from 'clsx'
 import { MDXProvider } from 'nextra/mdx'
-import { useMounted } from 'nextra/hooks'
+import { useMounted, useFSRoute } from 'nextra/hooks'
 
 import './polyfill'
 import {
@@ -19,9 +19,10 @@ import {
 } from './components'
 import { getComponents } from './mdx-components'
 import { ActiveAnchorProvider, ConfigProvider, useConfig } from './contexts'
-import type { PageTheme } from './constants'
+import type { PageTheme } from 'nextra/normalize-pages'
+import { normalizePages } from 'nextra/normalize-pages'
 import { DEFAULT_LOCALE, PartialDocsThemeConfig } from './constants'
-import { useFSRoute, normalizePages, renderComponent } from './utils'
+import { renderComponent } from './utils'
 
 interface BodyProps {
   themeContext: PageTheme
