@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { cnPageMap, usPageMap } from './__fixture__/pageMap'
-import { normalizePages } from '../src/utils'
+import { normalizePages } from 'nextra/normalize-pages'
 
 const defaultLocale = 'en-US'
 

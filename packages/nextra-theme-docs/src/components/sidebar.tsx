@@ -14,8 +14,9 @@ import type { Heading } from 'nextra'
 import scrollIntoView from 'scroll-into-view-if-needed'
 
 import { useConfig, useMenu, useActiveAnchor } from '../contexts'
-import type { Item, MenuItem, PageItem } from '../utils'
-import { useFSRoute, renderComponent } from '../utils'
+import type { Item, MenuItem, PageItem } from 'nextra/normalize-pages'
+import { renderComponent } from '../utils'
+import { useFSRoute } from 'nextra/hooks'
 import { LocaleSwitch } from './locale-switch'
 import { ArrowRightIcon, ExpandIcon } from 'nextra/icons'
 import { Collapse } from './collapse'
@@ -466,7 +467,11 @@ export function Sidebar({
               />
             )}
             {config.darkMode && (
-              <div className={showSidebar && !hasI18n ? 'nx-grow nx-flex nx-flex-col' : ''}>
+              <div
+                className={
+                  showSidebar && !hasI18n ? 'nx-grow nx-flex nx-flex-col' : ''
+                }
+              >
                 {renderComponent(config.themeSwitch.component, {
                   lite: !showSidebar || hasI18n
                 })}

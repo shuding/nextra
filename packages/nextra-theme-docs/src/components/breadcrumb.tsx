@@ -3,7 +3,7 @@ import { Fragment } from 'react'
 import { Anchor } from './anchor'
 import cn from 'clsx'
 import { ArrowRightIcon } from 'nextra/icons'
-import type { Item } from '../utils'
+import type { Item } from 'nextra/normalize-pages'
 
 export function Breadcrumb({
   activePath
