@@ -1,5 +1,12 @@
 # nextra
 
+## 2.2.20
+
+### Patch Changes
+
+- 2e48307: export `normalizePages` from `nextra/normalize-pages`, `useFSRoute` from `nextra/hooks` (can be useful for custom theme)
+- e4c8b6d: fix crash of dev server when \_meta.json is malformed
+
 ## 2.2.19
 
 ### Patch Changes
