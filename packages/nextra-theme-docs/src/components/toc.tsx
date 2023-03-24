@@ -13,6 +13,11 @@ export type TOCProps = {
   filePath: string
 }
 
+export type TOCValue = {
+  id: string,
+  value: string
+}
+
 export function TOC({ headings, filePath }: TOCProps): ReactElement {
   const activeAnchor = useActiveAnchor()
   const config = useConfig()
