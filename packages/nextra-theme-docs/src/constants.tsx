@@ -147,6 +147,9 @@ export const themeSchema = z.strictObject({
   }),
   toc: z.strictObject({
     component: z.custom<ReactNode | FC<TOCProps>>(...reactNode),
+    valueComponent: z.custom<
+      ReactNode | FC<{ id: string; value: string }>
+    >(...reactNode),
     extraContent: z.custom<ReactNode | FC>(...reactNode),
     float: z.boolean(),
     title: z.custom<ReactNode | FC>(...reactNode)
@@ -321,6 +324,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
   },
   toc: {
     component: TOC,
+    valueComponent: ({ value }) => <>{value}</>,
     float: true,
     title: 'On This Page'
   },

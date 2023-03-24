@@ -89,7 +89,10 @@ export function TOC({ headings, filePath }: TOCProps): ReactElement {
                     'contrast-more:nx-text-gray-900 contrast-more:nx-underline contrast-more:dark:nx-text-gray-50'
                   )}
                 >
-                  {value}
+                  {renderComponent(config.toc.valueComponent, { 
+                    id: id, 
+                    value: value 
+                  })}
                 </a>
               </li>
             ))}
