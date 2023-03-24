@@ -6,7 +6,7 @@ import { Anchor, Flexsearch, Footer, Navbar, TOC } from './components'
 import { DiscordIcon, GitHubIcon } from 'nextra/icons'
 import { MatchSorterSearch } from './components/match-sorter-search'
 import { useConfig } from './contexts'
-import type { Item } from './utils'
+import type { Item } from 'nextra/normalize-pages'
 import { useGitEditUrl, getGitIssueUrl } from './utils'
 import { z } from 'zod'
 import type { NavBarProps } from './components/navbar'
@@ -339,78 +339,3 @@ export const DEEP_OBJECT_KEYS = Object.entries(DEFAULT_THEME)
     }
   })
   .filter(Boolean)
-
-const pageThemeSchema = z.strictObject({
-  breadcrumb: z.boolean(),
-  collapsed: z.boolean(),
-  footer: z.boolean(),
-  layout: z.enum(['default', 'full', 'raw']),
-  navbar: z.boolean(),
-  pagination: z.boolean(),
-  sidebar: z.boolean(),
-  timestamp: z.boolean(),
-  toc: z.boolean(),
-  typesetting: z.enum(['default', 'article'])
-})
-
-export type PageTheme = z.infer<typeof pageThemeSchema>
-
-export const DEFAULT_PAGE_THEME: PageTheme = {
-  breadcrumb: true,
-  collapsed: false,
-  footer: true,
-  layout: 'default',
-  navbar: true,
-  pagination: true,
-  sidebar: true,
-  timestamp: true,
-  toc: true,
-  typesetting: 'default'
-}
-
-/**
- * An option to control how an item should be displayed in the sidebar:
- * - `normal`: the default behavior, item will be displayed
- * - `hidden`: the item will not be displayed in the sidebar entirely
- * - `children`: if the item is a folder, itself will be hidden but all its children will still be processed
- */
-const displaySchema = z.enum(['normal', 'hidden', 'children'])
-const titleSchema = z.string()
-
-const linkItemSchema = z.strictObject({
-  href: z.string(),
-  newWindow: z.boolean(),
-  title: titleSchema
-})
-
-const menuItemSchema = z.strictObject({
-  display: displaySchema.optional(),
-  items: z.record(linkItemSchema.partial({ href: true, newWindow: true })),
-  title: titleSchema,
-  type: z.literal('menu')
-})
-
-const separatorItemSchema = z.strictObject({
-  title: titleSchema,
-  type: z.literal('separator')
-})
-
-const itemSchema = linkItemSchema
-  .extend({
-    display: displaySchema,
-    theme: pageThemeSchema,
-    title: titleSchema,
-    type: z.enum(['page', 'doc'])
-  })
-  .deepPartial()
-
-export type Display = z.infer<typeof displaySchema>
-export type IMenuItem = z.infer<typeof menuItemSchema>
-
-export const metaSchema = z
-  .string()
-  .or(menuItemSchema)
-  .or(separatorItemSchema)
-  .or(itemSchema)
-
-export const ERROR_ROUTES = new Set(['/404', '/500'])

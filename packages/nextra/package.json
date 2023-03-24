@@ -1,6 +1,6 @@
 {
   "name": "nextra",
-  "version": "2.2.19",
+  "version": "2.2.20",
   "description": "Next.js and MDX based site generator.",
   "files": [
     "dist/*",
@@ -47,6 +47,9 @@
       ],
       "mdx": [
         "./dist/mdx.d.ts"
+      ],
+      "normalize-pages": [
+        "./dist/normalize-pages.d.ts"
       ]
     }
   },
@@ -120,7 +123,8 @@
     "slash": "^3.0.0",
     "title": "^3.5.3",
     "unist-util-remove": "^3.1.1",
-    "unist-util-visit": "^4.1.1"
+    "unist-util-visit": "^4.1.1",
+    "zod": "^3.20.2"
   },
   "peerDependencies": {
     "next": ">=9.5.3",
