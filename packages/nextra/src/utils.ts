@@ -1,7 +1,7 @@
 import path from 'node:path'
 import title from 'title'
 import slash from 'slash'
-import { CWD, LOCALE_REGEX } from './constants'
+import { LOCALE_REGEX } from './constants'
 import type { Folder, MdxFile, Meta } from './types'
 
 export function parseFileName(filePath: string): {
@@ -99,20 +99,4 @@ export function hashFnv32a(str: string, seed = 0x811c9dc5): string {
 
   // Convert to 8 digit hex string
   return ('0000000' + (hval >>> 0).toString(16)).substring(-8)
-}
-
-export const parseJsonFile = (
-  content: string,
-  filePath: string
-): Record<string, any> => {
-  try {
-    return JSON.parse(content)
-  } catch (err) {
-    const relPath = path.relative(CWD, filePath)
-    console.error(
-      `[nextra] Error parsing ${relPath}, make sure it's a valid JSON.`,
-      err
-    )
-    return {}
-  }
 }
