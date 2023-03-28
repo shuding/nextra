@@ -57,8 +57,10 @@ const initGitRepo = (async () => {
       // repository.path() returns the `/path/to/repo/.git`, we need the parent directory of it
       const gitRoot = path.join(repository.path(), '..')
       return { repository, gitRoot }
-    } catch (e: any) {
-      console.warn(`[nextra] Init git repository failed ${e.message || e}`)
+    } catch (error) {
+      console.warn(
+        `[nextra] Init git repository failed ${(error as Error).message}`
+      )
     }
   }
   return {}
