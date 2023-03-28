@@ -14,7 +14,7 @@ import type { Pluggable } from 'unified'
 
 import {
   remarkStaticImage,
-  remarkHeaderIds,
+  remarkCustomHeadingId,
   remarkHeadings,
   remarkReplaceImports,
   structurize,
@@ -145,7 +145,7 @@ export async function compileMdx(
         ...(remarkPlugins || []),
         outputFormat === 'function-body' && remarkRemoveImports,
         remarkGfm,
-        remarkHeaderIds,
+        remarkCustomHeadingId,
         remarkHeadings,
         staticImage && remarkStaticImage,
         searchIndexKey !== null && structurize(structurizedData, flexsearch),
