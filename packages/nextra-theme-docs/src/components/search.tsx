@@ -57,8 +57,9 @@ export function Search({
 
   useEffect(() => {
     const down = (e: globalThis.KeyboardEvent): void => {
-      const tagName = document.activeElement?.tagName.toLowerCase()
-      if (!input.current || !tagName || INPUTS.includes(tagName)) return
+      const activeElement = document.activeElement as HTMLElement;
+      const tagName = activeElement?.tagName.toLowerCase()
+      if (!input.current || !tagName || INPUTS.includes(tagName) || activeElement?.isContentEditable) return
       if (
         e.key === '/' ||
         (e.key === 'k' &&
