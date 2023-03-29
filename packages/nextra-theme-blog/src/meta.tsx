@@ -36,7 +36,7 @@ export default function Meta(): ReactElement {
   ))
 
   const readingTime = opts.readingTime?.text
-
+  const dateObj = date ? new Date(date) : null
   return (
     <div
       className={
@@ -48,12 +48,9 @@ export default function Meta(): ReactElement {
         <div className="nx-not-prose nx-flex nx-flex-wrap nx-items-center nx-gap-1">
           {author}
           {author && date && ','}
-          {date && (
-            <time>
-              {config.dateFormatter &&
-              typeof config.dateFormatter === 'function'
-                ? config.dateFormatter(new Date(date))
-                : new Date(date).toDateString()}
+          {dateObj && (
+            <time dateTime={dateObj.toISOString()}>
+              {config.dateFormatter?.(dateObj) || dateObj.toDateString()}
             </time>
           )}
           {(author || date) && (readingTime || tags.length > 0) && (

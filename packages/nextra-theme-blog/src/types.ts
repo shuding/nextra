@@ -12,6 +12,7 @@ export interface NextraBlogTheme {
     lang: string
   }
   darkMode?: boolean
+  dateFormatter?: (date: Date) => string
   footer?: ReactNode
   head?: ({
     meta,
@@ -24,7 +25,6 @@ export interface NextraBlogTheme {
     name: string
     url: string
   }[]
-  dateFormatter: (date: Date) => string
   postFooter?: string
   readMore?: string
   titleSuffix?: string
