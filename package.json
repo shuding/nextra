@@ -58,6 +58,9 @@
       "@tailwindcss/typography": "^0.5.8",
       "concurrently": "^7.3.0",
       "postcss-import": "^14.1.0"
+    },
+    "patchedDependencies": {
+      "@changesets/assemble-release-plan@5.2.3": "patches/@changesets__assemble-release-plan@5.2.3.patch"
     }
   }
 }
