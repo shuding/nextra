@@ -57,7 +57,7 @@
   },
   "peerDependencies": {
     "next": ">=9.5.3",
-    "nextra": "workspace:*",
+    "nextra": "workspace:^",
     "react": ">=16.13.1",
     "react-dom": ">=16.13.1"
   },
