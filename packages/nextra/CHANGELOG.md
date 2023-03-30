@@ -1,5 +1,21 @@
 # nextra
 
+## 2.3.0
+
+### Minor Changes
+
+- 6ea1caf: fix crash of dev server when `_meta.js` contains errors
+
+  disallow caching of `_meta.js` on dev env
+
+  set minimal `node` as `16`
+
+- 76e8b0f: support custom heading id via `# my very long heading... [#my-custom-heading]` syntax https://github.com/shuding/nextra/pull/1645
+
+### Patch Changes
+
+- 0dd028a: Prints the warning inline instead of the current behavior which includes a stack trace.
+
 ## 2.2.20
 
 ### Patch Changes
