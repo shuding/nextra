@@ -416,8 +416,8 @@ importers:
         specifier: ^6.3.1
         version: 6.3.1
       next-seo:
-        specifier: ^5.5.0
-        version: 5.8.0(next@13.1.1)(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^6.0.0
+        version: 6.0.0(next@13.1.1)(react-dom@18.2.0)(react@18.2.0)
       next-themes:
         specifier: ^0.2.1
         version: 0.2.1(next@13.1.1)(react-dom@18.2.0)(react@18.2.0)
@@ -5924,8 +5924,8 @@ packages:
       - supports-color
     dev: false
 
-  /next-seo@5.8.0(next@13.1.1)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-V5W/JwqdoX6/0zG4S7m5g8zNajYffytWigkPo2hrbHhLD18yGFBU9607OPhvbI9zX3QjWQFMBSmlUY456xt9cA==}
+  /next-seo@6.0.0(next@13.1.1)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-jKKt1p1z4otMA28AyeoAONixVjdYmgFCWwpEFtu+DwRHQDllVX3RjtyXbuCQiUZEfQ9rFPBpAI90vDeLZlMBdg==}
     peerDependencies:
       next: ^8.1.1-canary.54 || >=9.0.0
       react: '>=16.0.0'
@@ -8536,7 +8536,7 @@ packages:
       intersection-observer: 0.12.2
       match-sorter: 6.3.1
       next: 13.1.1(@babel/core@7.20.12)(react-dom@18.2.0)(react@18.2.0)
-      next-seo: 5.8.0(next@13.1.1)(react-dom@18.2.0)(react@18.2.0)
+      next-seo: 6.0.0(next@13.1.1)(react-dom@18.2.0)(react@18.2.0)
       next-themes: 0.2.1(next@13.1.1)(react-dom@18.2.0)(react@18.2.0)
       nextra: file:packages/nextra(next@13.1.1)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
