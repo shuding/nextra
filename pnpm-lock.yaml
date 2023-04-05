@@ -58,8 +58,8 @@ importers:
         specifier: 4.6.0
         version: 4.6.0(eslint@8.37.0)
       eslint-plugin-tailwindcss:
-        specifier: 3.10.3
-        version: 3.10.3(tailwindcss@3.2.4)
+        specifier: 3.11.0
+        version: 3.11.0(tailwindcss@3.2.4)
       eslint-plugin-typescript-sort-keys:
         specifier: 2.3.0
         version: 2.3.0(@typescript-eslint/parser@5.57.1)(eslint@8.37.0)(typescript@5.0.3)
@@ -70,8 +70,8 @@ importers:
         specifier: 2.8.7
         version: 2.8.7
       prettier-plugin-tailwindcss:
-        specifier: 0.2.6
-        version: 0.2.6(prettier@2.8.7)
+        specifier: 0.2.7
+        version: 0.2.7(prettier@2.8.7)
       rimraf:
         specifier: 4.4.1
         version: 4.4.1
@@ -3555,8 +3555,8 @@ packages:
       string.prototype.matchall: 4.0.8
     dev: true
 
-  /eslint-plugin-tailwindcss@3.10.3(tailwindcss@3.2.4):
-    resolution: {integrity: sha512-yDJDs0R6AHT1quc9cCB5mpg5s5hBH0yE5L57GYWfRQWidF3HVEVrRF+Hg/4metBJzKikTD9QPIFd6CZANarWOQ==}
+  /eslint-plugin-tailwindcss@3.11.0(tailwindcss@3.2.4):
+    resolution: {integrity: sha512-RaraOG4D6VXutKnoNvFQ4+frTWGJDKtezy1yCrGFS7Um1to/npDNdh2GL19IRoGB/eanbtwhxFXy+xyEw0grAg==}
     engines: {node: '>=12.13.0'}
     peerDependencies:
       tailwindcss: ^3.2.2
@@ -6518,8 +6518,8 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
-  /prettier-plugin-tailwindcss@0.2.6(prettier@2.8.7):
-    resolution: {integrity: sha512-F+7XCl9RLF/LPrGdUMHWpsT6TM31JraonAUyE6eBmpqymFvDwyl0ETHsKFHP1NG+sEfv8bmKqnTxEbWQbHPlBA==}
+  /prettier-plugin-tailwindcss@0.2.7(prettier@2.8.7):
+    resolution: {integrity: sha512-jQopIOgjLpX+y8HeD56XZw7onupRTC0cw7eKKUimI7vhjkPF5/1ltW5LyqaPtSyc8HvEpvNZsvvsGFa2qpa59w==}
     engines: {node: '>=12.17.0'}
     peerDependencies:
       '@ianvs/prettier-plugin-sort-imports': '*'
