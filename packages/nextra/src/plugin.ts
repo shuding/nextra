@@ -33,6 +33,8 @@ import { PAGES_DIR } from './file-system'
 
 const readdir = promisify(fs.readdir)
 const readFile = promisify(fs.readFile)
+const realpath = promisify(fs.realpath)
+const stat = promisify(fs.stat)
 
 export const collectMdx = async (
   filePath: string,
@@ -57,13 +59,25 @@ export async function collectFiles(
   dir: string,
   locales = DEFAULT_LOCALES,
   route = '/',
-  fileMap: FileMap = Object.create(null)
+  fileMap: FileMap = Object.create(null),
+  isFollowingSymlink = false
 ): Promise<{ items: PageMapItem[]; fileMap: FileMap }> {
   const files = await readdir(dir, { withFileTypes: true })
 
   const promises = files.map(async f => {
     const filePath = path.join(dir, f.name)
-    const isDirectory = f.isDirectory()
+    let isDirectory = f.isDirectory()
+
+    const isSymlinked = isFollowingSymlink || f.isSymbolicLink()
+    let symlinkSource: string
+    if (isSymlinked) {
+      symlinkSource = await realpath(filePath)
+      const stats = await stat(filePath)
+      if (stats.isDirectory()) {
+        isDirectory = true
+      }
+    }
+
     const { name, locale, ext } = isDirectory
       ? // directory couldn't have extensions
         { name: path.basename(filePath), locale: '', ext: '' }
@@ -76,7 +90,8 @@ export async function collectFiles(
         filePath,
         locales,
         fileRoute,
-        fileMap
+        fileMap,
+        isSymlinked
       )
       if (!items.length) return
       return <Folder>{
@@ -97,6 +112,14 @@ export async function collectFiles(
         if (fileRoute === '/_app') return
         const fp = filePath as MdxPath
         fileMap[fp] = await collectMdx(fp, fileRoute)
+
+        if (symlinkSource) {
+          fileMap[symlinkSource as MdxPath] = {
+            ...fileMap[fp],
+            __symlinkTarget: fp
+          }
+        }
+
         return fileMap[fp]
       }
 

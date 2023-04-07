@@ -65,6 +65,8 @@ export type MdxFile<FrontMatterType = FrontMatter> = {
   route: string
   locale?: string
   frontMatter?: FrontMatterType
+  // path to the mdx file which was used as a symlink target. This is a private property needed by the loader.
+  __symlinkTarget?: MdxPath
 }
 
 export type MetaJsonPath = `${string}/${MetaFilename}`
