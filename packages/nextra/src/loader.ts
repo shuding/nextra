@@ -97,7 +97,15 @@ async function loader(
     return 'export default () => null'
   }
 
-  let mdxPath = context.resourcePath as MdxPath
+  const mdxPath = (
+    context._module?.resourceResolveData
+      ? // to make it work with symlinks, resolve the mdx path based on the relative path
+        path.join(
+          context.rootContext,
+          context._module.resourceResolveData.relativePath
+        )
+      : context.resourcePath
+  ) as MdxPath
 
   if (mdxPath.includes('/pages/api/')) {
     console.warn(
@@ -116,12 +124,6 @@ async function loader(
     if (!IS_PRODUCTION) {
       context.addMissingDependency(mdxPath)
     }
-  }
-
-  const symlinkTarget = fileMap[mdxPath].__symlinkTarget
-  // map mdxPath to the symlink target (if presented) which will be used as the page route
-  if (symlinkTarget) {
-    mdxPath = symlinkTarget
   }
 
   const { locale } = parseFileName(mdxPath)

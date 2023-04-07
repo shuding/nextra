@@ -114,10 +114,7 @@ export async function collectFiles(
         fileMap[fp] = await collectMdx(fp, fileRoute)
 
         if (symlinkSource) {
-          fileMap[symlinkSource as MdxPath] = {
-            ...fileMap[fp],
-            __symlinkTarget: fp
-          }
+          fileMap[symlinkSource as MdxPath] = { ...fileMap[fp] }
         }
 
         return fileMap[fp]
