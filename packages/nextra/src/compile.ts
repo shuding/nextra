@@ -21,7 +21,7 @@ import {
   parseMeta,
   attachMeta,
   remarkRemoveImports,
-  remarkLinkRewrite
+  remarkLocalLinkRewrite
 } from './mdx-plugins'
 import type { LoaderOptions, PageOpts, ReadingTime } from './types'
 import { truthy } from './utils'
@@ -154,7 +154,7 @@ export async function compileMdx(
         isFileOutsideCWD && remarkReplaceImports,
         // Remove the markdown file extension from links
         [
-          remarkLinkRewrite,
+          remarkLocalLinkRewrite,
           { pattern: MARKDOWN_URL_EXTENSION_REGEX, replace: '' }
         ] satisfies Pluggable
       ].filter(truthy),
