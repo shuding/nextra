@@ -108,6 +108,25 @@ describe('Link', () => {
     })
     expect(result).toMatch(`<_components.a href="../file#anchor">`)
   })
+
+  it('supports external .md links', async () => {
+    const { result } = await compileMdx(`[link](https://example.com/file.md)`, {
+      mdxOptions
+    })
+    expect(result).toMatch(`<_components.a href="https://example.com/file.md">`)
+  })
+
+  it('supports external .mdx links', async () => {
+    const { result } = await compileMdx(
+      `[link](https://example.com/file.mdx)`,
+      {
+        mdxOptions
+      }
+    )
+    expect(result).toMatch(
+      `<_components.a href="https://example.com/file.mdx">`
+    )
+  })
 })
 
 describe('Code block', () => {
