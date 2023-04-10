@@ -3,18 +3,20 @@ import type { Plugin } from 'unified'
 import type { Root } from 'mdast'
 import { EXTERNAL_URL_REGEX } from '../constants'
 
-export type RemarkLocalLinkRewriteOptions = {
+export type RemarkLinkRewriteOptions = {
   pattern: RegExp
   replace: string
+  excludeExternalLinks?: boolean
 }
 
-export const remarkLocalLinkRewrite: Plugin<
-  [RemarkLocalLinkRewriteOptions],
-  Root
-> = ({ pattern, replace }) => {
+export const remarkLinkRewrite: Plugin<[RemarkLinkRewriteOptions], Root> = ({
+  pattern,
+  replace,
+  excludeExternalLinks
+}) => {
   return (tree, _file, done) => {
     visit(tree, 'link', node => {
-      if (!EXTERNAL_URL_REGEX.test(node.url)) {
+      if (!(excludeExternalLinks && EXTERNAL_URL_REGEX.test(node.url))) {
         node.url = node.url.replace(pattern, replace)
       }
     })
