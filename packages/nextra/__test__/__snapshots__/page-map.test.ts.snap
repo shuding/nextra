@@ -37,6 +37,9 @@ exports[`Page Process > pageMap en-US 1`] = `
             "acknowledgement": {
               "title": "Acknowledgement",
             },
+            "changelog": {
+              "title": "Changelog",
+            },
             "contributors": {
               "href": "https://github.com/vercel/swr/graphs/contributors",
               "newWindow": true,
@@ -105,6 +108,7 @@ exports[`Page Process > pageMap en-US 1`] = `
               "type": "page",
             },
             "acknowledgement": "🧩 Acknowledgement",
+            "changelog": "Changelog",
             "team": "👥 Team",
           },
           "kind": "Meta",
@@ -121,6 +125,12 @@ exports[`Page Process > pageMap en-US 1`] = `
           "locale": "en-US",
           "name": "acknowledgement",
           "route": "/about/acknowledgement",
+        },
+        {
+          "kind": "MdxPage",
+          "locale": "en-US",
+          "name": "changelog",
+          "route": "/about/changelog",
         },
         {
           "kind": "MdxPage",
@@ -689,6 +699,7 @@ exports[`Page Process > pageMap ru 1`] = `
               "type": "page",
             },
             "acknowledgement": "🧩 Acknowledgement",
+            "changelog": "Changelog",
             "team": "👥 Team",
           },
           "kind": "Meta",
@@ -705,6 +716,12 @@ exports[`Page Process > pageMap ru 1`] = `
           "locale": "en-US",
           "name": "acknowledgement",
           "route": "/about/acknowledgement",
+        },
+        {
+          "kind": "MdxPage",
+          "locale": "en-US",
+          "name": "changelog",
+          "route": "/about/changelog",
         },
         {
           "kind": "MdxPage",

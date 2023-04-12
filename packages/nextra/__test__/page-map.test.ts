@@ -91,6 +91,32 @@ describe('Page Process', () => {
     ])
   })
 
+  it('should resolve symlinked files and directories', async () => {
+    const { items } = await collectFiles(
+      path.join(
+        CWD,
+        '__test__',
+        'fixture',
+        'page-maps',
+        'folder-with-symlinks',
+        'pages'
+      )
+    )
+    expect(items).toEqual([
+      {
+        kind: 'Folder',
+        name: 'docs',
+        route: '/docs',
+        children: [
+          { kind: 'MdxPage', name: 'test2', route: '/docs/test2' },
+          { kind: 'Meta', data: { test2: 'Test2' } }
+        ]
+      },
+      { kind: 'MdxPage', name: 'test1', route: '/test1' },
+      { kind: 'Meta', data: { test1: 'Test1' } }
+    ])
+  })
+
   describe('getDynamicMeta()', () => {
     const items: PageMapItem[] = [
       {
