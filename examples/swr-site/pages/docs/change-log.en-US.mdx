@@ -7,7 +7,7 @@ export const ReleasesRenderer = () => {
   return <i>{releases}</i>
 }
 
-export const getStaticProps = ({ params }) => {
+export const getStaticProps = () => {
   return ({ props: { ssg: 'Test SSG ' + Date.now() }, revalidate: 10 })
 }
 
