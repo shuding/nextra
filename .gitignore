@@ -1,10 +1,10 @@
 .DS_Store
 .next/
 node_modules/
-yarn-error.log
-.pnpm-debug.log
+*.log
 dist/
-*/**/.turbo
+.turbo/
+out/
 # Theme styles
 packages/nextra-theme-*/style.css
 
