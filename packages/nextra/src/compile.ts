@@ -155,7 +155,11 @@ export async function compileMdx(
         // Remove the markdown file extension from links
         [
           remarkLinkRewrite,
-          { pattern: MARKDOWN_URL_EXTENSION_REGEX, replace: '' }
+          {
+            pattern: MARKDOWN_URL_EXTENSION_REGEX,
+            replace: '',
+            excludeExternalLinks: true
+          }
         ] satisfies Pluggable
       ].filter(truthy),
       rehypePlugins: [
