@@ -1,1 +1,1 @@
-../../CHANGELOG.md
+../../../../packages/nextra/CHANGELOG.md
