@@ -134,6 +134,7 @@ export const themeSchema = z.strictObject({
   }),
   sidebar: z.strictObject({
     defaultMenuCollapseLevel: z.number().min(1).int(),
+    sidebarSort: z.function().returns(z.number().int()),
     titleComponent: z.custom<
       ReactNode | FC<{ title: string; type: string; route: string }>
     >(...reactNode),
@@ -308,6 +309,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
   },
   sidebar: {
     defaultMenuCollapseLevel: 2,
+    sidebarSort: () => 0,
     titleComponent: ({ title }) => <>{title}</>,
     toggleButton: false
   },

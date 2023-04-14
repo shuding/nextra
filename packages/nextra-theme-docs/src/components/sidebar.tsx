@@ -290,6 +290,8 @@ function Menu({
   className,
   onlyCurrentDocs
 }: MenuProps): ReactElement {
+  const { sidebarSort } = useConfig().sidebar
+  directories = directories.sort((a, b) => sidebarSort(a, b))
   return (
     <ul className={cn(classes.list, className)}>
       {directories.map(item =>
