@@ -2,4 +2,4 @@
 'nextra-theme-docs': minor
 ---
 
-Add valueComponent to the TOC
+Add new option `headingComponent` to the TOC

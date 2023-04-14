@@ -10,7 +10,7 @@ import type { Item } from 'nextra/normalize-pages'
 import { useGitEditUrl, getGitIssueUrl } from './utils'
 import { z } from 'zod'
 import type { NavBarProps } from './components/navbar'
-import type { TOCProps, TOCValue } from './components/toc'
+import type { TOCProps } from './components/toc'
 import type { NextSeoProps } from 'next-seo'
 import { themeOptionsSchema, ThemeSwitch } from './components/theme-switch'
 
@@ -149,10 +149,10 @@ export const themeSchema = z.strictObject({
     component: z.custom<ReactNode | FC<TOCProps>>(...reactNode),
     extraContent: z.custom<ReactNode | FC>(...reactNode),
     float: z.boolean(),
-    title: z.custom<ReactNode | FC>(...reactNode),
-    valueComponent: z.custom<
-      ReactNode | FC<TOCValue>
-    >(...reactNode),
+    headingComponent: z
+      .custom<FC<{ id: string; children: string }>>(...fc)
+      .optional(),
+    title: z.custom<ReactNode | FC>(...reactNode)
   }),
   useNextSeoProps: z.custom<() => NextSeoProps | void>(isFunction)
 })
@@ -325,8 +325,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
   toc: {
     component: TOC,
     float: true,
-    title: 'On This Page',
-    valueComponent: ({ value }) => <>{value}</>,
+    title: 'On This Page'
   },
   useNextSeoProps: () => ({ titleTemplate: '%s – Nextra' })
 }

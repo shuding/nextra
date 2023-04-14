@@ -13,11 +13,6 @@ export type TOCProps = {
   filePath: string
 }
 
-export type TOCValue = {
-  id: string,
-  value: string
-}
-
 export function TOC({ headings, filePath }: TOCProps): ReactElement {
   const activeAnchor = useActiveAnchor()
   const config = useConfig()
@@ -94,10 +89,10 @@ export function TOC({ headings, filePath }: TOCProps): ReactElement {
                     'contrast-more:nx-text-gray-900 contrast-more:nx-underline contrast-more:dark:nx-text-gray-50 nx-w-full nx-break-words'
                   )}
                 >
-                  {renderComponent(config.toc.valueComponent, { 
-                    id: id, 
-                    value: value 
-                  })}
+                  {config.toc.headingComponent?.({
+                    id,
+                    children: value
+                  }) ?? value}
                 </a>
               </li>
             ))}
