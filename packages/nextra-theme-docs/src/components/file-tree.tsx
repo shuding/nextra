@@ -21,7 +21,6 @@ interface FileProps {
   name: string
   label?: ReactElement
   active?: boolean
-  children: ReactNode
 }
 
 const Tree = ({ children }: { children: ReactNode }): ReactElement => (
@@ -91,17 +90,14 @@ const Folder = memo<FolderProps>(
 )
 Folder.displayName = 'Folder'
 
-const File = memo<FileProps>(({ label, name, active, ...props }) => (
+const File = memo<FileProps>(({ label, name, active }) => (
   <li
     className={cn(
       'nx-flex nx-list-none',
       active && 'nx-text-primary-600 contrast-more:nx-underline'
     )}
   >
-    <a
-      {...props}
-      className="nx-inline-flex nx-cursor-default nx-items-center nx-py-1"
-    >
+    <a className="nx-inline-flex nx-cursor-default nx-items-center nx-py-1">
       <Ident />
       <svg width="1em" height="1em" viewBox="0 0 24 24">
         <path

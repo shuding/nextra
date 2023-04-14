@@ -116,12 +116,16 @@ function FolderImpl({ item, anchors }: FolderProps): ReactElement {
     })
   }
 
+  const isLink = 'withIndexPage' in item && Boolean(item.withIndexPage)
+  // use button when link don't have href because it impacts on SEO
+  const ComponentToUse = isLink ? Anchor : 'button'
+
   return (
     <li className={cn({ open, active })}>
-      <Anchor
-        href={(item as Item).withIndexPage ? item.route : ''}
+      <ComponentToUse
+        href={isLink ? item.route : undefined}
         className={cn(
-          'nx-items-center nx-justify-between nx-gap-2',
+          'nx-items-center nx-justify-between nx-gap-2 nx-text-left',
           classes.link,
           active ? classes.active : classes.inactive
         )}
@@ -132,7 +136,7 @@ function FolderImpl({ item, anchors }: FolderProps): ReactElement {
           if (clickedToggleIcon) {
             e.preventDefault()
           }
-          if ((item as Item).withIndexPage) {
+          if (isLink) {
             // If it's focused, we toggle it. Otherwise, always open it.
             if (active || clickedToggleIcon) {
               TreeState[item.route] = !open
@@ -160,7 +164,7 @@ function FolderImpl({ item, anchors }: FolderProps): ReactElement {
             open && 'ltr:nx-rotate-90 rtl:nx-rotate-[-270deg]'
           )}
         />
-      </Anchor>
+      </ComponentToUse>
       <Collapse className="ltr:nx-pr-0 rtl:nx-pl-0 nx-pt-1" isOpen={open}>
         {Array.isArray(item.children) ? (
           <Menu
