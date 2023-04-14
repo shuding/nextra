@@ -116,7 +116,7 @@ function FolderImpl({ item, anchors }: FolderProps): ReactElement {
     })
   }
 
-  const isLink = 'withIndexPage' in item && Boolean(item.withIndexPage)
+  const isLink = 'withIndexPage' in item && item.withIndexPage
   // use button when link don't have href because it impacts on SEO
   const ComponentToUse = isLink ? Anchor : 'button'
 
