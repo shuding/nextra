@@ -115,7 +115,7 @@
     "next-mdx-remote": "^4.2.1",
     "p-limit": "^3.1.0",
     "rehype-katex": "^6.0.2",
-    "rehype-pretty-code": "0.9.3",
+    "rehype-pretty-code": "0.9.4",
     "remark-gfm": "^3.0.1",
     "remark-math": "^5.1.1",
     "remark-reading-time": "^2.0.1",
