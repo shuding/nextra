@@ -33,7 +33,9 @@ interface BodyProps {
 }
 
 const classes = {
-  toc: cn('nextra-toc nx-order-last nx-hidden nx-w-64 nx-shrink-0 xl:nx-block print:nx-hidden'),
+  toc: cn(
+    'nextra-toc nx-order-last nx-hidden nx-w-64 nx-shrink-0 xl:nx-block print:nx-hidden'
+  ),
   main: cn('nx-w-full nx-overflow-x-hidden nx-break-words')
 }
 
@@ -269,5 +271,6 @@ export {
   Navbar,
   SkipNavContent,
   SkipNavLink,
-  ThemeSwitch
+  ThemeSwitch,
+  Anchor
 } from './components'
