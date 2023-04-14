@@ -1,5 +1,25 @@
 # nextra-theme-docs
 
+## 2.4.0
+
+### Minor Changes
+
+- 6973b21: Add new option `headingComponent` to the TOC
+
+### Patch Changes
+
+- 2ff360f: use `<span />` instead `<div />` inside `<button />` for local switch button
+- e3664c4: fix uncrawable links in sidebar, use button when link don't have href because it impacts on SEO
+
+  remove useless prop children from `<FileTree.File />` component
+
+- 8e00549: export `<Link />` component
+- 61b4f0c: Wrap long section headers in TOC properly
+- Updated dependencies [545bd7c]
+- Updated dependencies [0a50cad]
+- Updated dependencies [259bfbc]
+  - nextra@2.4.0
+
 ## 2.3.0
 
 ### Minor Changes

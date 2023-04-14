@@ -1,5 +1,16 @@
 # nextra
 
+## 2.4.0
+
+### Minor Changes
+
+- 0a50cad: support symlinked pages
+
+### Patch Changes
+
+- 545bd7c: Remove `.mdx?` of local links only
+- 259bfbc: do not throw error when `output: 'export'` is specified in `next.config.js`
+
 ## 2.3.0
 
 ### Minor Changes
