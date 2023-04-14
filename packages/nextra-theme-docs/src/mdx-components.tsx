@@ -7,6 +7,7 @@ import type { DocsThemeConfig } from './constants'
 import cn from 'clsx'
 import { Code, Pre, Table, Td, Th, Tr } from 'nextra/components'
 import { useIntersectionObserver, useSlugs } from './contexts/active-anchor'
+import type { AnchorProps } from './components/anchor'
 
 // Anchor links
 function HeadingLink({
@@ -150,12 +151,22 @@ const Summary = (props: ComponentProps<'summary'>): ReactElement => {
   )
 }
 
-const A = ({ href = '', ...props }) => (
+const EXTERNAL_HREF_REGEX = /https?:\/\//
+
+export const Link = ({ href = '', className, ...props }: AnchorProps) => (
   <Anchor
     href={href}
-    newWindow={href.startsWith('https://') || href.startsWith('http://')}
+    newWindow={EXTERNAL_HREF_REGEX.test(href)}
+    className={cn(
+      'nx-text-primary-600 nx-underline nx-decoration-from-font [text-underline-position:from-font]',
+      className
+    )}
     {...props}
   />
+)
+
+const A = ({ href = '', ...props }) => (
+  <Anchor href={href} newWindow={EXTERNAL_HREF_REGEX.test(href)} {...props} />
 )
 
 export const getComponents = ({
@@ -205,12 +216,7 @@ export const getComponents = ({
       />
     ),
     hr: props => <hr className="nx-my-8 dark:nx-border-gray-900" {...props} />,
-    a: props => (
-      <A
-        {...props}
-        className="nx-text-primary-600 nx-underline nx-decoration-from-font [text-underline-position:from-font]"
-      />
-    ),
+    a: Link,
     table: props => (
       <Table
         className="nextra-scrollbar nx-mt-6 nx-p-0 first:nx-mt-0"

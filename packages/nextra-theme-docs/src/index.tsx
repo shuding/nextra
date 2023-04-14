@@ -33,7 +33,9 @@ interface BodyProps {
 }
 
 const classes = {
-  toc: cn('nextra-toc nx-order-last nx-hidden nx-w-64 nx-shrink-0 xl:nx-block print:nx-hidden'),
+  toc: cn(
+    'nextra-toc nx-order-last nx-hidden nx-w-64 nx-shrink-0 xl:nx-block print:nx-hidden'
+  ),
   main: cn('nx-w-full nx-overflow-x-hidden nx-break-words')
 }
 
@@ -254,6 +256,7 @@ export default function Layout({
 export { useConfig, PartialDocsThemeConfig as DocsThemeConfig }
 export { useMDXComponents } from 'nextra/mdx'
 export { useTheme } from 'next-themes'
+export { Link } from './mdx-components'
 export {
   Bleed,
   Callout,
