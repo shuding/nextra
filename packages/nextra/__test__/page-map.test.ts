@@ -17,10 +17,10 @@ describe('Page Process', () => {
     const nextConfig = await import(
       path.join(CWD, '..', '..', 'examples', 'swr-site', 'next.config.mjs')
     )
-    const { items, fileMap: data } = await collectFiles(
-      PAGES_DIR,
-      nextConfig.default.i18n.locales
-    )
+    const { items, fileMap: data } = await collectFiles({
+      dir: PAGES_DIR,
+      locales: nextConfig.default.i18n.locales
+    })
     pageMap = items
     fileMap = data
   })
@@ -62,28 +62,28 @@ describe('Page Process', () => {
   })
 
   it("should not add `_meta.json` file if folder doesn't contain markdown files", async () => {
-    const { items } = await collectFiles(
-      path.join(
+    const { items } = await collectFiles({
+      dir: path.join(
         CWD,
         '__test__',
         'fixture',
         'page-maps',
         'folder-without-markdown-files'
       )
-    )
+    })
     expect(items).toEqual([])
   })
 
   it('should add `_meta.json` file if it missing', async () => {
-    const { items } = await collectFiles(
-      path.join(
+    const { items } = await collectFiles({
+      dir: path.join(
         CWD,
         '__test__',
         'fixture',
         'page-maps',
         'folder-without-meta-json'
       )
-    )
+    })
     expect(items).toEqual([
       { kind: 'MdxPage', name: 'callout', route: '/callout' },
       { kind: 'MdxPage', name: 'tabs', route: '/tabs' },
@@ -92,8 +92,8 @@ describe('Page Process', () => {
   })
 
   it('should resolve symlinked files and directories', async () => {
-    const { items } = await collectFiles(
-      path.join(
+    const { items } = await collectFiles({
+      dir: path.join(
         CWD,
         '__test__',
         'fixture',
@@ -101,7 +101,7 @@ describe('Page Process', () => {
         'folder-with-symlinks',
         'pages'
       )
-    )
+    })
     expect(items).toEqual([
       {
         kind: 'Folder',

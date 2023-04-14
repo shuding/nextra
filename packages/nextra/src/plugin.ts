@@ -55,13 +55,19 @@ export const collectMdx = async (
 
 const limit = pLimit(20)
 
-export async function collectFiles(
-  dir: string,
+export async function collectFiles({
+  dir,
   locales = DEFAULT_LOCALES,
   route = '/',
-  fileMap: FileMap = Object.create(null),
+  fileMap = Object.create(null),
   isFollowingSymlink = false
-): Promise<{ items: PageMapItem[]; fileMap: FileMap }> {
+}: {
+  dir: string
+  locales?: string[]
+  route?: string
+  fileMap?: FileMap
+  isFollowingSymlink?: boolean
+}): Promise<{ items: PageMapItem[]; fileMap: FileMap }> {
   const files = await readdir(dir, { withFileTypes: true })
 
   const promises = files.map(async f => {
@@ -86,13 +92,13 @@ export async function collectFiles(
 
     if (isDirectory) {
       if (fileRoute === '/api') return
-      const { items } = await collectFiles(
-        filePath,
+      const { items } = await collectFiles({
+        dir: filePath,
         locales,
-        fileRoute,
+        route: fileRoute,
         fileMap,
-        isSymlinked
-      )
+        isFollowingSymlink: isSymlinked
+      })
       if (!items.length) return
       return <Folder>{
         kind: 'Folder',
@@ -281,7 +287,7 @@ export class NextraPlugin {
       async (_, callback) => {
         const { locales } = this.config
         try {
-          const result = await collectFiles(PAGES_DIR, locales)
+          const result = await collectFiles({ dir: PAGES_DIR, locales })
           pageMapCache.set(result)
           callback()
         } catch (err) {

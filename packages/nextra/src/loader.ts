@@ -116,7 +116,7 @@ async function loader(
 
   const { items, fileMap } = IS_PRODUCTION
     ? pageMapCache.get()!
-    : await collectFiles(PAGES_DIR, locales)
+    : await collectFiles({ dir: PAGES_DIR, locales })
 
   // mdx is imported but is outside the `pages` directory
   if (!fileMap[mdxPath]) {
