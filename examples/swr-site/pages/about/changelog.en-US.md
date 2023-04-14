@@ -1,1 +1,1 @@
-../../../../packages/nextra/CHANGELOG.md
+../../README.md
