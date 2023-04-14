@@ -65,7 +65,7 @@ const nextra = (themeOrNextraConfig, themeConfig) =>
 
     return {
       ...nextConfig,
-      rewrites,
+      ...(nextConfig.output !== 'export' && { rewrites }),
       pageExtensions: [
         ...(nextConfig.pageExtensions || DEFAULT_EXTENSIONS),
         ...MARKDOWN_EXTENSIONS
@@ -76,7 +76,7 @@ const nextra = (themeOrNextraConfig, themeConfig) =>
           config.plugins.push(nextraPlugin)
 
           if (nextraConfig.flexsearch) {
-            const nextraSearchPlugin = new NextraSearchPlugin({})
+            const nextraSearchPlugin = new NextraSearchPlugin()
             config.plugins.push(nextraSearchPlugin)
           }
         }

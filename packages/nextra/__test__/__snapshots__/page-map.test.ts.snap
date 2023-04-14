@@ -205,6 +205,7 @@ exports[`Page Process > pageMap en-US 1`] = `
             },
             "code-block-without-language": "Code Block without Language",
             "conditional-fetching": "Conditional Data Fetching",
+            "custom-header-ids": "Custom Header IDs",
             "data-fetching": {
               "title": "Data Fetching",
             },
@@ -431,6 +432,12 @@ exports[`Page Process > pageMap en-US 1`] = `
           "locale": "en-US",
           "name": "conditional-fetching",
           "route": "/docs/conditional-fetching",
+        },
+        {
+          "kind": "MdxPage",
+          "locale": "en-US",
+          "name": "custom-header-ids",
+          "route": "/docs/custom-header-ids",
         },
         {
           "kind": "MdxPage",
@@ -1011,6 +1018,12 @@ exports[`Page Process > pageMap ru 1`] = `
           "locale": "en-US",
           "name": "code-block-without-language",
           "route": "/docs/code-block-without-language",
+        },
+        {
+          "kind": "MdxPage",
+          "locale": "en-US",
+          "name": "custom-header-ids",
+          "route": "/docs/custom-header-ids",
         },
         {
           "kind": "MdxPage",

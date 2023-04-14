@@ -1,5 +1,20 @@
 # nextra-theme-docs
 
+## 2.3.0
+
+### Minor Changes
+
+- 707a709: Improve sidebar colors accessibility
+- 76e8b0f: support custom heading id via `# my very long heading... [#my-custom-heading]` syntax https://github.com/shuding/nextra/pull/1645
+
+### Patch Changes
+
+- fb0b19b: Do not focus search when currently focusing a HTMLElement with contenteditable active
+- Updated dependencies [0dd028a]
+- Updated dependencies [6ea1caf]
+- Updated dependencies [76e8b0f]
+  - nextra@2.3.0
+
 ## 2.2.20
 
 ### Patch Changes

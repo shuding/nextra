@@ -89,6 +89,16 @@ Visit https://nextjs.org.
 Visit https://nextjs.org.
 ```
 
+### Custom Heading Id
+
+You can specify custom heading id using the format `## My heading [#custom-id]`. For example:
+
+```md filename="Markdown"
+## Long heading about Nextra [#about-nextra]
+```
+
+In this example, `#about-nextra` will be used as the heading link, replacing the default `#long-heading-about-nextra`.
+
 ## Extended Syntax Highlighting
 
 import { Card, Cards } from 'nextra-theme-docs'
@@ -101,4 +111,3 @@ Check out the Syntax Highlighting section for more information:
 </svg>
 } title="Syntax Highlighting" href="/docs/guide/syntax-highlighting"/>
 </Cards>
-

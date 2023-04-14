@@ -12,6 +12,7 @@ export interface NextraBlogTheme {
     lang: string
   }
   darkMode?: boolean
+  dateFormatter?: (date: Date) => string
   footer?: ReactNode
   head?: ({
     meta,
