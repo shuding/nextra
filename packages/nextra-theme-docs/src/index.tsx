@@ -256,6 +256,7 @@ export default function Layout({
 export { useConfig, PartialDocsThemeConfig as DocsThemeConfig }
 export { useMDXComponents } from 'nextra/mdx'
 export { useTheme } from 'next-themes'
+export { Link } from './mdx-components'
 export {
   Bleed,
   Callout,
@@ -271,6 +272,5 @@ export {
   Navbar,
   SkipNavContent,
   SkipNavLink,
-  ThemeSwitch,
-  Anchor
+  ThemeSwitch
 } from './components'

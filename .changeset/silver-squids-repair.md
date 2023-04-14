@@ -2,4 +2,4 @@
 'nextra-theme-docs': patch
 ---
 
-export `<Anchor />`
+export `<Link />` component
