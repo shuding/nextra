@@ -33,6 +33,8 @@ import { PAGES_DIR } from './file-system'
 
 const readdir = promisify(fs.readdir)
 const readFile = promisify(fs.readFile)
+const realpath = promisify(fs.realpath)
+const stat = promisify(fs.stat)
 
 export const collectMdx = async (
   filePath: string,
@@ -53,17 +55,35 @@ export const collectMdx = async (
 
 const limit = pLimit(20)
 
-export async function collectFiles(
-  dir: string,
+export async function collectFiles({
+  dir,
   locales = DEFAULT_LOCALES,
   route = '/',
-  fileMap: FileMap = Object.create(null)
-): Promise<{ items: PageMapItem[]; fileMap: FileMap }> {
+  fileMap = Object.create(null),
+  isFollowingSymlink = false
+}: {
+  dir: string
+  locales?: string[]
+  route?: string
+  fileMap?: FileMap
+  isFollowingSymlink?: boolean
+}): Promise<{ items: PageMapItem[]; fileMap: FileMap }> {
   const files = await readdir(dir, { withFileTypes: true })
 
   const promises = files.map(async f => {
     const filePath = path.join(dir, f.name)
-    const isDirectory = f.isDirectory()
+    let isDirectory = f.isDirectory()
+
+    const isSymlinked = isFollowingSymlink || f.isSymbolicLink()
+    let symlinkSource: string
+    if (isSymlinked) {
+      symlinkSource = await realpath(filePath)
+      const stats = await stat(filePath)
+      if (stats.isDirectory()) {
+        isDirectory = true
+      }
+    }
+
     const { name, locale, ext } = isDirectory
       ? // directory couldn't have extensions
         { name: path.basename(filePath), locale: '', ext: '' }
@@ -72,12 +92,13 @@ export async function collectFiles(
 
     if (isDirectory) {
       if (fileRoute === '/api') return
-      const { items } = await collectFiles(
-        filePath,
+      const { items } = await collectFiles({
+        dir: filePath,
         locales,
-        fileRoute,
-        fileMap
-      )
+        route: fileRoute,
+        fileMap,
+        isFollowingSymlink: isSymlinked
+      })
       if (!items.length) return
       return <Folder>{
         kind: 'Folder',
@@ -97,6 +118,11 @@ export async function collectFiles(
         if (fileRoute === '/_app') return
         const fp = filePath as MdxPath
         fileMap[fp] = await collectMdx(fp, fileRoute)
+
+        if (symlinkSource) {
+          fileMap[symlinkSource as MdxPath] = { ...fileMap[fp] }
+        }
+
         return fileMap[fp]
       }
 
@@ -261,7 +287,7 @@ export class NextraPlugin {
       async (_, callback) => {
         const { locales } = this.config
         try {
-          const result = await collectFiles(PAGES_DIR, locales)
+          const result = await collectFiles({ dir: PAGES_DIR, locales })
           pageMapCache.set(result)
           callback()
         } catch (err) {

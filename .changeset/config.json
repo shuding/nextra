@@ -16,5 +16,5 @@
   "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {
     "onlyUpdatePeerDependentsWhenOutOfRange": true
   },
-  "ignore": []
+  "ignore": ["example-blog", "example-docs", "swr-site", "docs"]
 }

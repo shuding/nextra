@@ -30,6 +30,9 @@
       },
       "a-page": {
         "title": "A Page"
+      },
+      "changelog": {
+        "title": "Changelog"
       }
     }
   },
