@@ -9,7 +9,7 @@ describe('normalize-page', () => {
     const locale = 'zh-CN'
     const result = normalizePages({
       list: cnPageMap,
-      locale: locale,
+      locale,
       defaultLocale,
       route: '/'
     })
@@ -20,7 +20,7 @@ describe('normalize-page', () => {
     const locale = 'zh-CN'
     const result = normalizePages({
       list: cnPageMap,
-      locale: locale,
+      locale,
       defaultLocale,
       route: '/docs/getting-started'
     })
@@ -31,7 +31,7 @@ describe('normalize-page', () => {
     const locale = 'en-US'
     const result = normalizePages({
       list: usPageMap,
-      locale: locale,
+      locale,
       defaultLocale,
       route: '/'
     })
@@ -42,7 +42,7 @@ describe('normalize-page', () => {
     const locale = 'en-US'
     const result = normalizePages({
       list: usPageMap,
-      locale: locale,
+      locale,
       defaultLocale,
       route: '/docs/getting-started'
     })

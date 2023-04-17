@@ -57,8 +57,10 @@ const initGitRepo = (async () => {
       // repository.path() returns the `/path/to/repo/.git`, we need the parent directory of it
       const gitRoot = path.join(repository.path(), '..')
       return { repository, gitRoot }
-    } catch (e) {
-      console.warn('[nextra] Init git repository failed', e)
+    } catch (error) {
+      console.warn(
+        `[nextra] Init git repository failed ${(error as Error).message}`
+      )
     }
   }
   return {}
@@ -95,7 +97,15 @@ async function loader(
     return 'export default () => null'
   }
 
-  const mdxPath = context.resourcePath as MdxPath
+  const mdxPath = (
+    context._module?.resourceResolveData
+      ? // to make it work with symlinks, resolve the mdx path based on the relative path
+        path.join(
+          context.rootContext,
+          context._module.resourceResolveData.relativePath
+        )
+      : context.resourcePath
+  ) as MdxPath
 
   if (mdxPath.includes('/pages/api/')) {
     console.warn(
@@ -106,7 +116,7 @@ async function loader(
 
   const { items, fileMap } = IS_PRODUCTION
     ? pageMapCache.get()!
-    : await collectFiles(PAGES_DIR, locales)
+    : await collectFiles({ dir: PAGES_DIR, locales })
 
   // mdx is imported but is outside the `pages` directory
   if (!fileMap[mdxPath]) {

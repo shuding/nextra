@@ -1,5 +1,28 @@
 # nextra-theme-blog
 
+## 2.4.0
+
+### Patch Changes
+
+- Updated dependencies [545bd7c]
+- Updated dependencies [0a50cad]
+- Updated dependencies [259bfbc]
+  - nextra@2.4.0
+
+## 2.3.0
+
+### Minor Changes
+
+- 6a79462: add new option `dateFormatter`
+- 76e8b0f: support custom heading id via `# my very long heading... [#my-custom-heading]` syntax https://github.com/shuding/nextra/pull/1645
+
+### Patch Changes
+
+- Updated dependencies [0dd028a]
+- Updated dependencies [6ea1caf]
+- Updated dependencies [76e8b0f]
+  - nextra@2.3.0
+
 ## 2.2.20
 
 ### Patch Changes

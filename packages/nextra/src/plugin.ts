@@ -16,8 +16,7 @@ import {
   normalizePageRoute,
   parseFileName,
   sortPages,
-  truthy,
-  parseJsonFile
+  truthy
 } from './utils'
 import path from 'node:path'
 import grayMatter from 'gray-matter'
@@ -34,6 +33,8 @@ import { PAGES_DIR } from './file-system'
 
 const readdir = promisify(fs.readdir)
 const readFile = promisify(fs.readFile)
+const realpath = promisify(fs.realpath)
+const stat = promisify(fs.stat)
 
 export const collectMdx = async (
   filePath: string,
@@ -54,17 +55,35 @@ export const collectMdx = async (
 
 const limit = pLimit(20)
 
-export async function collectFiles(
-  dir: string,
+export async function collectFiles({
+  dir,
   locales = DEFAULT_LOCALES,
   route = '/',
-  fileMap: FileMap = Object.create(null)
-): Promise<{ items: PageMapItem[]; fileMap: FileMap }> {
+  fileMap = Object.create(null),
+  isFollowingSymlink = false
+}: {
+  dir: string
+  locales?: string[]
+  route?: string
+  fileMap?: FileMap
+  isFollowingSymlink?: boolean
+}): Promise<{ items: PageMapItem[]; fileMap: FileMap }> {
   const files = await readdir(dir, { withFileTypes: true })
 
   const promises = files.map(async f => {
     const filePath = path.join(dir, f.name)
-    const isDirectory = f.isDirectory()
+    let isDirectory = f.isDirectory()
+
+    const isSymlinked = isFollowingSymlink || f.isSymbolicLink()
+    let symlinkSource: string
+    if (isSymlinked) {
+      symlinkSource = await realpath(filePath)
+      const stats = await stat(filePath)
+      if (stats.isDirectory()) {
+        isDirectory = true
+      }
+    }
+
     const { name, locale, ext } = isDirectory
       ? // directory couldn't have extensions
         { name: path.basename(filePath), locale: '', ext: '' }
@@ -73,12 +92,13 @@ export async function collectFiles(
 
     if (isDirectory) {
       if (fileRoute === '/api') return
-      const { items } = await collectFiles(
-        filePath,
+      const { items } = await collectFiles({
+        dir: filePath,
         locales,
-        fileRoute,
-        fileMap
-      )
+        route: fileRoute,
+        fileMap,
+        isFollowingSymlink: isSymlinked
+      })
       if (!items.length) return
       return <Folder>{
         kind: 'Folder',
@@ -98,52 +118,67 @@ export async function collectFiles(
         if (fileRoute === '/_app') return
         const fp = filePath as MdxPath
         fileMap[fp] = await collectMdx(fp, fileRoute)
+
+        if (symlinkSource) {
+          fileMap[symlinkSource as MdxPath] = { ...fileMap[fp] }
+        }
+
         return fileMap[fp]
       }
 
       const fileName = name + ext
-
-      if (fileName === META_FILENAME) {
-        const fp = filePath as MetaJsonPath
-        const content = await readFile(fp, 'utf8')
-        fileMap[fp] = {
-          kind: 'Meta',
-          ...(locale && { locale }),
-          data: parseJsonFile(content, fp)
-        }
-        return fileMap[fp]
-      }
-
-      if (fileName === DYNAMIC_META_FILENAME) {
-        // _meta.js file. Need to check if it's dynamic (a function) or not.
-        const metaMod = await import(filePath)
-        const meta = metaMod.default
-        const fp = filePath.replace(/\.js$/, '.json') as MetaJsonPath
-
-        if (typeof meta === 'function') {
-          // Dynamic. Add a special key (__nextra_src) and set data as empty.
+      try {
+        if (fileName === META_FILENAME) {
+          const fp = filePath as MetaJsonPath
+          const content = await readFile(fp, 'utf8')
           fileMap[fp] = {
             kind: 'Meta',
             ...(locale && { locale }),
-            __nextra_src: filePath,
-            data: {}
+            data: JSON.parse(content)
           }
-        } else if (meta && typeof meta === 'object' && isSerializable(meta)) {
-          // Static content, can be statically optimized.
-          fileMap[fp] = {
-            kind: 'Meta',
-            ...(locale && { locale }),
-            // we spread object because default title could be incorrectly set when _meta.json/js
-            // is imported/exported by another _meta.js
-            data: { ...meta }
-          }
-        } else {
-          console.error(
-            `[nextra] "${fileName}" is not a valid meta file. The default export is required to be a serializable object or a function. Please check the following file:`,
-            path.relative(CWD, filePath)
-          )
+          return fileMap[fp]
         }
-        return fileMap[fp]
+
+        if (fileName === DYNAMIC_META_FILENAME) {
+          // _meta.js file. Need to check if it's dynamic (a function) or not.
+
+          // querystring to disable caching of module
+          const importPath = `${filePath}?d=${Date.now()}`
+          const metaMod = await import(importPath)
+          const meta = metaMod.default
+          const fp = filePath.replace(/\.js$/, '.json') as MetaJsonPath
+
+          if (typeof meta === 'function') {
+            // Dynamic. Add a special key (__nextra_src) and set data as empty.
+            fileMap[fp] = {
+              kind: 'Meta',
+              ...(locale && { locale }),
+              __nextra_src: filePath,
+              data: {}
+            }
+          } else if (meta && typeof meta === 'object' && isSerializable(meta)) {
+            // Static content, can be statically optimized.
+            fileMap[fp] = {
+              kind: 'Meta',
+              ...(locale && { locale }),
+              // we spread object because default title could be incorrectly set when _meta.json/js
+              // is imported/exported by another _meta.js
+              data: { ...meta }
+            }
+          } else {
+            console.error(
+              `[nextra] "${fileName}" is not a valid meta file. The default export is required to be a serializable object or a function. Please check the following file:`,
+              path.relative(CWD, filePath)
+            )
+          }
+          return fileMap[fp]
+        }
+      } catch (err) {
+        const relPath = path.relative(CWD, filePath)
+        console.error(
+          `[nextra] Error loading ${relPath}
+${(err as Error).name}: ${(err as Error).message}`
+        )
       }
 
       if (fileName === 'meta.json') {
@@ -252,7 +287,7 @@ export class NextraPlugin {
       async (_, callback) => {
         const { locales } = this.config
         try {
-          const result = await collectFiles(PAGES_DIR, locales)
+          const result = await collectFiles({ dir: PAGES_DIR, locales })
           pageMapCache.set(result)
           callback()
         } catch (err) {

@@ -14,6 +14,7 @@ import type { Pluggable } from 'unified'
 
 import {
   remarkStaticImage,
+  remarkCustomHeadingId,
   remarkHeadings,
   remarkReplaceImports,
   structurize,
@@ -144,6 +145,7 @@ export async function compileMdx(
         ...(remarkPlugins || []),
         outputFormat === 'function-body' && remarkRemoveImports,
         remarkGfm,
+        remarkCustomHeadingId,
         remarkHeadings,
         staticImage && remarkStaticImage,
         searchIndexKey !== null && structurize(structurizedData, flexsearch),
@@ -153,7 +155,11 @@ export async function compileMdx(
         // Remove the markdown file extension from links
         [
           remarkLinkRewrite,
-          { pattern: MARKDOWN_URL_EXTENSION_REGEX, replace: '' }
+          {
+            pattern: MARKDOWN_URL_EXTENSION_REGEX,
+            replace: '',
+            excludeExternalLinks: true
+          }
         ] satisfies Pluggable
       ].filter(truthy),
       rehypePlugins: [

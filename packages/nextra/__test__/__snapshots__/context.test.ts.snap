@@ -579,6 +579,15 @@ exports[`context > getAllPages() > should work 1`] = `
         "kind": "MdxPage",
         "locale": "en-US",
         "meta": {
+          "title": "Custom Header IDs",
+        },
+        "name": "custom-header-ids",
+        "route": "/docs/custom-header-ids",
+      },
+      {
+        "kind": "MdxPage",
+        "locale": "en-US",
+        "meta": {
           "title": "404/500 Custom Error Pages",
         },
         "name": "404-500",
@@ -691,6 +700,12 @@ exports[`context > getAllPages() > should work 1`] = `
         "name": "a-page",
         "route": "/about/a-page",
       },
+      {
+        "kind": "MdxPage",
+        "locale": "en-US",
+        "name": "changelog",
+        "route": "/about/changelog",
+      },
     ],
     "kind": "Folder",
     "meta": {
@@ -700,6 +715,9 @@ exports[`context > getAllPages() > should work 1`] = `
         },
         "acknowledgement": {
           "title": "Acknowledgement",
+        },
+        "changelog": {
+          "title": "Changelog",
         },
         "contributors": {
           "href": "https://github.com/vercel/swr/graphs/contributors",
@@ -1494,6 +1512,15 @@ exports[`context > getCurrentLevelPages() > should work 1`] = `
     },
     "name": "wrap-toc-items",
     "route": "/docs/wrap-toc-items",
+  },
+  {
+    "kind": "MdxPage",
+    "locale": "en-US",
+    "meta": {
+      "title": "Custom Header IDs",
+    },
+    "name": "custom-header-ids",
+    "route": "/docs/custom-header-ids",
   },
   {
     "kind": "MdxPage",
