@@ -35,12 +35,6 @@ export function ThemeSwitch({
       ? config.useOptions()
       : config.useOptions
 
-  const optionsMap = {
-    light: options.light,
-    dark: options.dark,
-    system: options.system
-  }
-
   return (
     <Select
       className={className}
@@ -59,9 +53,7 @@ export function ThemeSwitch({
           <div className="nx-flex nx-items-center nx-gap-2 nx-capitalize">
             <IconToUse />
             <span className={lite ? 'md:nx-hidden' : ''}>
-              {mounted
-                ? optionsMap[theme as keyof typeof optionsMap]
-                : optionsMap.light}
+              {mounted ? options[theme as keyof typeof options] : options.light}
             </span>
           </div>
         )
