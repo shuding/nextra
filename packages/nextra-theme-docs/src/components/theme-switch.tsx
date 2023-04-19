@@ -53,7 +53,7 @@ export function ThemeSwitch({
           <div className="nx-flex nx-items-center nx-gap-2 nx-capitalize">
             <IconToUse />
             <span className={lite ? 'md:nx-hidden' : ''}>
-              {mounted ? theme : 'light'}
+              {mounted ? options[theme as keyof typeof options] : options.light}
             </span>
           </div>
         )
