@@ -306,7 +306,6 @@ ${
 
   return `import { setupNextraPage } from 'nextra/setup-page'
 ${HAS_UNDERSCORE_APP_MDX_FILE ? '' : pageImports}
-${finalResult.replace('export default MDXContent;', '')}
 
 const __nextraPageOptions = {
   MDXContent,
@@ -319,6 +318,7 @@ const __nextraPageOptions = {
         (themeConfigImport && 'themeConfig: __nextra_themeConfig')
   }
 }
+${finalResult.replace('export default MDXContent;', '')}
 if (process.env.NODE_ENV !== 'production') {
   __nextraPageOptions.hot = module.hot
   __nextraPageOptions.pageOptsChecksum = ${stringifiedChecksum}

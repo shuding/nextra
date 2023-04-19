@@ -125,7 +125,8 @@ function FolderImpl({ item, anchors }: FolderProps): ReactElement {
       <ComponentToUse
         href={isLink ? item.route : undefined}
         className={cn(
-          'nx-items-center nx-justify-between nx-gap-2 nx-text-left',
+          'nx-items-center nx-justify-between nx-gap-2',
+          !isLink && 'nx-text-left nx-w-full',
           classes.link,
           active ? classes.active : classes.inactive
         )}
