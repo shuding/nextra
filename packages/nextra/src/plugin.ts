@@ -90,6 +90,10 @@ export async function collectFiles({
       : parseFileName(filePath)
     const fileRoute = normalizePageRoute(route, name)
 
+    // We need to filter out dynamic routes, because we can't get all the
+    // paths statically from here — they'll be generated separately.
+    if (name.startsWith('[')) return
+
     if (isDirectory) {
       if (fileRoute === '/api') return
       const { items } = await collectFiles({
@@ -111,9 +115,6 @@ export async function collectFiles({
     // add concurrency because folder can contain a lot of files
     return limit(async () => {
       if (MARKDOWN_EXTENSION_REGEX.test(ext)) {
-        // We need to filter out dynamic routes, because we can't get all the
-        // paths statically from here — they'll be generated separately.
-        if (name.startsWith('[')) return
         // There is no reason to add special `_app` to fileMap
         if (fileRoute === '/_app') return
         const fp = filePath as MdxPath
