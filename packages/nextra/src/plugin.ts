@@ -88,11 +88,11 @@ export async function collectFiles({
       ? // directory couldn't have extensions
         { name: path.basename(filePath), locale: '', ext: '' }
       : parseFileName(filePath)
-    const fileRoute = normalizePageRoute(route, name)
-
     // We need to filter out dynamic routes, because we can't get all the
     // paths statically from here — they'll be generated separately.
     if (name.startsWith('[')) return
+
+    const fileRoute = normalizePageRoute(route, name)
 
     if (isDirectory) {
       if (fileRoute === '/api') return
