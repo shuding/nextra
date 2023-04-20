@@ -91,6 +91,7 @@ export function TOC({ headings, filePath }: TOCProps): ReactElement {
                 >
                   {config.toc.headingComponent?.({
                     id,
+                    depth,
                     children: value
                   }) ?? value}
                 </a>

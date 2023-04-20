@@ -150,7 +150,7 @@ export const themeSchema = z.strictObject({
     extraContent: z.custom<ReactNode | FC>(...reactNode),
     float: z.boolean(),
     headingComponent: z
-      .custom<FC<{ id: string; children: string }>>(...fc)
+      .custom<FC<{ id: string; depth: number; children: string }>>(...fc)
       .optional(),
     title: z.custom<ReactNode | FC>(...reactNode)
   }),
