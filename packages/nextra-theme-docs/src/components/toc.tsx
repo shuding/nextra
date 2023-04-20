@@ -70,33 +70,69 @@ export function TOC({ headings, filePath }: TOCProps): ReactElement {
             {renderComponent(config.toc.title)}
           </p>
           <ul>
-            {items.map(({ id, value, depth }) => (
-              <li className="nx-my-2 nx-scroll-my-6 nx-scroll-py-6" key={id}>
-                <a
-                  href={`#${id}`}
-                  className={cn(
-                    {
-                      2: 'nx-font-semibold',
-                      3: 'ltr:nx-pl-4 rtl:nx-pr-4',
-                      4: 'ltr:nx-pl-8 rtl:nx-pr-8',
-                      5: 'ltr:nx-pl-12 rtl:nx-pr-12',
-                      6: 'ltr:nx-pl-16 rtl:nx-pr-16'
-                    }[depth as Exclude<typeof depth, 1>],
-                    'nx-inline-block',
-                    activeAnchor[id]?.isActive
-                      ? 'nx-text-primary-600 nx-subpixel-antialiased contrast-more:!nx-text-primary-600'
-                      : 'nx-text-gray-500 hover:nx-text-gray-900 dark:nx-text-gray-400 dark:hover:nx-text-gray-300',
-                    'contrast-more:nx-text-gray-900 contrast-more:nx-underline contrast-more:dark:nx-text-gray-50 nx-w-full nx-break-words'
-                  )}
-                >
-                  {config.toc.headingComponent?.({
-                    id,
-                    depth,
-                    children: value
-                  }) ?? value}
-                </a>
-              </li>
-            ))}
+            {items.map(({ id, value, depth }) =>
+              config.toc.headingComponent ? (
+                config.toc.headingComponent({
+                  id,
+                  depth,
+                  children: value
+                }) ? (
+                  <li
+                    className="nx-my-2 nx-scroll-my-6 nx-scroll-py-6"
+                    key={id}
+                  >
+                    <a
+                      href={`#${id}`}
+                      className={cn(
+                        {
+                          2: 'nx-font-semibold',
+                          3: 'ltr:nx-pl-4 rtl:nx-pr-4',
+                          4: 'ltr:nx-pl-8 rtl:nx-pr-8',
+                          5: 'ltr:nx-pl-12 rtl:nx-pr-12',
+                          6: 'ltr:nx-pl-16 rtl:nx-pr-16'
+                        }[depth as Exclude<typeof depth, 1>],
+                        'nx-inline-block',
+                        activeAnchor[id]?.isActive
+                          ? 'nx-text-primary-600 nx-subpixel-antialiased contrast-more:!nx-text-primary-600'
+                          : 'nx-text-gray-500 hover:nx-text-gray-900 dark:nx-text-gray-400 dark:hover:nx-text-gray-300',
+                        'contrast-more:nx-text-gray-900 contrast-more:nx-underline contrast-more:dark:nx-text-gray-50 nx-w-full nx-break-words'
+                      )}
+                    >
+                      {config.toc.headingComponent({
+                        id,
+                        depth,
+                        children: value
+                      })}
+                    </a>
+                  </li>
+                ) : (
+                  <li
+                    className="nx-my-2 nx-scroll-my-6 nx-scroll-py-6"
+                    key={id}
+                  >
+                    <a
+                      href={`#${id}`}
+                      className={cn(
+                        {
+                          2: 'nx-font-semibold',
+                          3: 'ltr:nx-pl-4 rtl:nx-pr-4',
+                          4: 'ltr:nx-pl-8 rtl:nx-pr-8',
+                          5: 'ltr:nx-pl-12 rtl:nx-pr-12',
+                          6: 'ltr:nx-pl-16 rtl:nx-pr-16'
+                        }[depth as Exclude<typeof depth, 1>],
+                        'nx-inline-block',
+                        activeAnchor[id]?.isActive
+                          ? 'nx-text-primary-600 nx-subpixel-antialiased contrast-more:!nx-text-primary-600'
+                          : 'nx-text-gray-500 hover:nx-text-gray-900 dark:nx-text-gray-400 dark:hover:nx-text-gray-300',
+                        'contrast-more:nx-text-gray-900 contrast-more:nx-underline contrast-more:dark:nx-text-gray-50 nx-w-full nx-break-words'
+                      )}
+                    >
+                      {value}
+                    </a>
+                  </li>
+                )
+              ) : null
+            )}
           </ul>
         </>
       )}
