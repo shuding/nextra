@@ -1,5 +1,11 @@
 # nextra
 
+## 2.4.1
+
+### Patch Changes
+
+- a992ce1: do not add dynamic routes to pageMap
+
 ## 2.4.0
 
 ### Minor Changes
