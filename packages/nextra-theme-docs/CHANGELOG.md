@@ -1,5 +1,14 @@
 # nextra-theme-docs
 
+## 2.4.1
+
+### Patch Changes
+
+- 2df6e91: Use config.useOptions text as the Select selected name on Theme Switch
+- 7989cc5: fix regression of sidebar style for folder
+- Updated dependencies [a992ce1]
+  - nextra@2.4.1
+
 ## 2.4.0
 
 ### Minor Changes
