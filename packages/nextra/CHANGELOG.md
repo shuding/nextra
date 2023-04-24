@@ -1,5 +1,11 @@
 # nextra
 
+## 2.4.2
+
+### Patch Changes
+
+- 16e562d: fix Next.js 13.3.1 compatibility for SyntaxError: Named export 'existsSync' not found.
+
 ## 2.4.1
 
 ### Patch Changes
