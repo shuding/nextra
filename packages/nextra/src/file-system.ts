@@ -1,5 +1,7 @@
-import { findPagesDir, existsSync } from 'next/dist/lib/find-pages-dir.js'
+import findPagesDirExports from 'next/dist/lib/find-pages-dir.js'
 import { CWD } from './constants'
+
+const { findPagesDir, existsSync } = findPagesDirExports
 
 export { existsSync }
 
