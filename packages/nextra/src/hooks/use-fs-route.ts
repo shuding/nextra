@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { useRouter } from 'next/router.js'
+import { useRouter } from 'next/router'
 import { DEFAULT_LOCALE, ERROR_ROUTES } from '../constants'
 
 const template = 'https://nextra.vercel.app'

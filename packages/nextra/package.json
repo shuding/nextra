@@ -58,33 +58,57 @@
     ".": "./dist/index.js",
     "./catch-all": "./dist/catch-all.js",
     "./data": {
-      "import": "./dist/ssg.mjs",
+      "import": "./dist/ssg.js",
       "types": "./dist/ssg.d.ts"
     },
+    "./ssg": {
+      "import": "./dist/ssg.js",
+      "types": "./dist/ssg.d.ts"
+    },
+    "./layout": {
+      "import": "./dist/layout.js",
+      "types": "./dist/layout.d.ts"
+    },
     "./loader": "./loader.js",
-    "./icons": {
-      "import": "./dist/icons/index.mjs",
-      "types": "./dist/icons/index.d.ts"
-    },
-    "./components": {
-      "import": "./dist/components/index.mjs",
-      "types": "./dist/components/index.d.ts"
-    },
-    "./hooks": {
-      "import": "./dist/hooks/index.mjs",
-      "types": "./dist/hooks/index.d.ts"
-    },
     "./setup-page": {
-      "import": "./dist/setup-page.mjs",
+      "import": "./dist/setup-page.js",
       "types": "./dist/setup-page.d.ts"
     },
     "./mdx": {
-      "import": "./dist/mdx.mjs",
+      "import": "./dist/mdx.js",
       "types": "./dist/mdx.d.ts"
     },
-    "./layout": {
-      "import": "./dist/layout.mjs",
-      "types": "./dist/layout.d.ts"
+    "./use-internals": {
+      "import": "./dist/use-internals.js",
+      "types": "./dist/use-internals.d.ts"
+    },
+    "./remote": {
+      "import": "./dist/remote.js",
+      "types": "./dist/remote.d.ts"
+    },
+    "./components": {
+      "import": "./dist/components/index.js",
+      "types": "./dist/components/index.d.ts"
+    },
+    "./components/*": {
+      "import": "./dist/components/*.js",
+      "types": "./dist/components/*.d.ts"
+    },
+    "./hooks": {
+      "import": "./dist/hooks/index.js",
+      "types": "./dist/hooks/index.d.ts"
+    },
+    "./hooks/*": {
+      "import": "./dist/hooks/*.js",
+      "types": "./dist/hooks/*.d.ts"
+    },
+    "./icons": {
+      "import": "./dist/icons/index.js",
+      "types": "./dist/icons/index.d.ts"
+    },
+    "./icons/*": {
+      "import": "./dist/icons/*.js",
+      "types": "./dist/icons/*.d.ts"
     },
     "./*": {
       "import": "./dist/*.mjs",
@@ -140,6 +164,7 @@
     "@types/react-dom": "^18.0.11",
     "@types/webpack": "^5.28.0",
     "@types/webpack-env": "^1.18.0",
+    "fast-glob": "^3.2.12",
     "next": "^13.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
