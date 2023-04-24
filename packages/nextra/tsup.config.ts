@@ -40,9 +40,9 @@ const sharedConfig = defineConfig({
               isDir = false
             }
 
-            const isClientImported = entriesSet.has(args.importer)
+            const isClientImporter = entriesSet.has(args.importer)
 
-            if (isClientImported) {
+            if (isClientImporter) {
               const isClientImport = entries.some(entry =>
                 entry.startsWith(importPath)
               )
