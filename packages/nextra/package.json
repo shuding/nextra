@@ -61,57 +61,24 @@
       "import": "./dist/ssg.js",
       "types": "./dist/ssg.d.ts"
     },
-    "./ssg": {
-      "import": "./dist/ssg.js",
-      "types": "./dist/ssg.d.ts"
-    },
-    "./layout": {
-      "import": "./dist/layout.js",
-      "types": "./dist/layout.d.ts"
-    },
-    "./loader": "./loader.js",
-    "./setup-page": {
-      "import": "./dist/setup-page.js",
-      "types": "./dist/setup-page.d.ts"
-    },
-    "./mdx": {
-      "import": "./dist/mdx.js",
-      "types": "./dist/mdx.d.ts"
-    },
-    "./use-internals": {
-      "import": "./dist/use-internals.js",
-      "types": "./dist/use-internals.d.ts"
-    },
-    "./remote": {
-      "import": "./dist/remote.js",
-      "types": "./dist/remote.d.ts"
+    "./context": {
+      "import": "./dist/context.mjs",
+      "types": "./dist/context.d.ts"
     },
     "./components": {
       "import": "./dist/components/index.js",
       "types": "./dist/components/index.d.ts"
     },
-    "./components/*": {
-      "import": "./dist/components/*.js",
-      "types": "./dist/components/*.d.ts"
-    },
     "./hooks": {
       "import": "./dist/hooks/index.js",
       "types": "./dist/hooks/index.d.ts"
-    },
-    "./hooks/*": {
-      "import": "./dist/hooks/*.js",
-      "types": "./dist/hooks/*.d.ts"
     },
     "./icons": {
       "import": "./dist/icons/index.js",
       "types": "./dist/icons/index.d.ts"
     },
-    "./icons/*": {
-      "import": "./dist/icons/*.js",
-      "types": "./dist/icons/*.d.ts"
-    },
     "./*": {
-      "import": "./dist/*.mjs",
+      "import": "./dist/*.js",
       "types": "./dist/*.d.ts"
     }
   },
