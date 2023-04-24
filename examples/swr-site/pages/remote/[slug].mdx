@@ -44,6 +44,9 @@ export const getStaticPaths = async () => {
     }
   )
   const comments = await res.json()
+  if (!Array.isArray(comments)) {
+    throw new Error(JSON.stringify(comments, null, 4))
+  }
   return {
     paths: comments.map(comment => ({
       params: { slug: String(comment.id) }

@@ -6,7 +6,7 @@ import fg from 'fast-glob'
 import tsconfig from './tsconfig.json'
 
 const CLIENT_ENTRY = [
-  'src/{use-internals,mdx,setup-page,remote,normalize-pages}.ts',
+  'src/{use-internals,mdx,setup-page,normalize-pages}.ts',
   'src/{ssg,layout}.tsx',
   'src/{components,hooks,icons}/*.{ts,tsx}'
 ]

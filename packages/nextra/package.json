@@ -61,9 +61,22 @@
       "import": "./dist/ssg.js",
       "types": "./dist/ssg.d.ts"
     },
-    "./context": {
-      "import": "./dist/context.mjs",
-      "types": "./dist/context.d.ts"
+    "./ssg": {
+      "import": "./dist/ssg.js",
+      "types": "./dist/ssg.d.ts"
+    },
+    "./loader": "./loader.js",
+    "./setup-page": {
+      "import": "./dist/setup-page.js",
+      "types": "./dist/setup-page.d.ts"
+    },
+    "./mdx": {
+      "import": "./dist/mdx.js",
+      "types": "./dist/mdx.d.ts"
+    },
+    "./normalize-pages": {
+      "import": "./dist/normalize-pages.js",
+      "types": "./dist/normalize-pages.d.ts"
     },
     "./components": {
       "import": "./dist/components/index.js",
@@ -78,7 +91,7 @@
       "types": "./dist/icons/index.d.ts"
     },
     "./*": {
-      "import": "./dist/*.js",
+      "import": "./dist/*.mjs",
       "types": "./dist/*.d.ts"
     }
   },
