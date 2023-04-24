@@ -58,33 +58,37 @@
     ".": "./dist/index.js",
     "./catch-all": "./dist/catch-all.js",
     "./data": {
-      "import": "./dist/ssg.mjs",
+      "import": "./dist/ssg.js",
+      "types": "./dist/ssg.d.ts"
+    },
+    "./ssg": {
+      "import": "./dist/ssg.js",
       "types": "./dist/ssg.d.ts"
     },
     "./loader": "./loader.js",
-    "./icons": {
-      "import": "./dist/icons/index.mjs",
-      "types": "./dist/icons/index.d.ts"
-    },
-    "./components": {
-      "import": "./dist/components/index.mjs",
-      "types": "./dist/components/index.d.ts"
-    },
-    "./hooks": {
-      "import": "./dist/hooks/index.mjs",
-      "types": "./dist/hooks/index.d.ts"
-    },
     "./setup-page": {
-      "import": "./dist/setup-page.mjs",
+      "import": "./dist/setup-page.js",
       "types": "./dist/setup-page.d.ts"
     },
     "./mdx": {
-      "import": "./dist/mdx.mjs",
+      "import": "./dist/mdx.js",
       "types": "./dist/mdx.d.ts"
     },
-    "./layout": {
-      "import": "./dist/layout.mjs",
-      "types": "./dist/layout.d.ts"
+    "./normalize-pages": {
+      "import": "./dist/normalize-pages.js",
+      "types": "./dist/normalize-pages.d.ts"
+    },
+    "./components": {
+      "import": "./dist/components/index.js",
+      "types": "./dist/components/index.d.ts"
+    },
+    "./hooks": {
+      "import": "./dist/hooks/index.js",
+      "types": "./dist/hooks/index.d.ts"
+    },
+    "./icons": {
+      "import": "./dist/icons/index.js",
+      "types": "./dist/icons/index.d.ts"
     },
     "./*": {
       "import": "./dist/*.mjs",
@@ -140,7 +144,8 @@
     "@types/react-dom": "^18.0.11",
     "@types/webpack": "^5.28.0",
     "@types/webpack-env": "^1.18.0",
-    "next": "^13.2.3",
+    "fast-glob": "^3.2.12",
+    "next": "^13.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "unified": "^10.1.2",

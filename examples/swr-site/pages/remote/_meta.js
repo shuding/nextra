@@ -13,6 +13,9 @@ module.exports = async () => {
     }
   )
   const comments = await res.json()
+  if (!Array.isArray(comments)) {
+    throw new Error(JSON.stringify(comments, null, 4))
+  }
   return Object.fromEntries(
     comments.map(comment => [comment.id, comment.user.login + '_' + comment.id])
   )
