@@ -1,7 +1,8 @@
 import findPagesDirExports from 'next/dist/lib/find-pages-dir.js'
 import { CWD } from './constants'
+import { getDefault } from './utils'
 
-const { findPagesDir, existsSync } = findPagesDirExports
+const { findPagesDir, existsSync } = getDefault(findPagesDirExports)
 
 export { existsSync }
 
