@@ -124,7 +124,7 @@ export const themeSchema = z.strictObject({
     >(...reactNode),
     emptyResult: z.custom<ReactNode | FC>(...reactNode),
     error: z.string().or(z.function().returns(z.string())),
-    loading: z.string().or(z.function().returns(z.string())),
+    loading: z.custom<ReactNode | FC>(...reactNode),
     // Can't be React component
     placeholder: z.string().or(z.function().returns(z.string()))
   }),
@@ -164,6 +164,20 @@ const publicThemeSchema = themeSchema.deepPartial().extend({
 
 export type DocsThemeConfig = z.infer<typeof themeSchema>
 export type PartialDocsThemeConfig = z.infer<typeof publicThemeSchema>
+
+const LOADING_LOCALES: Record<string, string> = {
+  'en-US': 'Loading',
+  fr: 'Сhargement',
+  ru: 'Загрузка',
+  'zh-CN': '正在加载'
+}
+
+const PLACEHOLDER_LOCALES: Record<string, string> = {
+  'en-US': 'Search documentation',
+  fr: 'Rechercher documents',
+  ru: 'Поиск документации',
+  'zh-CN': '搜索文档'
+}
 
 export const DEFAULT_THEME: DocsThemeConfig = {
   banner: {
@@ -288,18 +302,17 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     ),
     error: 'Failed to load search index.',
     loading: function useLoading() {
-      const { locale } = useRouter()
-      if (locale === 'zh-CN') return '正在加载…'
-      if (locale === 'ru') return 'Загрузка…'
-      if (locale === 'fr') return 'Сhargement…'
-      return 'Loading…'
+      const { locale, defaultLocale = DEFAULT_LOCALE } = useRouter()
+      const text =
+        (locale && LOADING_LOCALES[locale]) || LOADING_LOCALES[defaultLocale]
+      return <>{text}…</>
     },
     placeholder: function usePlaceholder() {
-      const { locale } = useRouter()
-      if (locale === 'zh-CN') return '搜索文档…'
-      if (locale === 'ru') return 'Поиск документации…'
-      if (locale === 'fr') return 'Rechercher documents…'
-      return 'Search documentation…'
+      const { locale, defaultLocale = DEFAULT_LOCALE } = useRouter()
+      const text =
+        (locale && PLACEHOLDER_LOCALES[locale]) ||
+        PLACEHOLDER_LOCALES[defaultLocale]
+      return `${text}…`
     }
   },
   serverSideError: {

@@ -1,13 +1,5 @@
-import type {
-  ReactElement,
-  KeyboardEvent} from 'react';
-import {
-  Fragment,
-  useCallback,
-  useState,
-  useEffect,
-  useRef
-} from 'react'
+import type { ReactElement, KeyboardEvent } from 'react'
+import { Fragment, useCallback, useState, useEffect, useRef } from 'react'
 import cn from 'clsx'
 import { Transition } from '@headlessui/react'
 import { InformationCircleIcon, SpinnerIcon } from 'nextra/icons'
@@ -57,9 +49,15 @@ export function Search({
 
   useEffect(() => {
     const down = (e: globalThis.KeyboardEvent): void => {
-      const activeElement = document.activeElement as HTMLElement;
+      const activeElement = document.activeElement as HTMLElement
       const tagName = activeElement?.tagName.toLowerCase()
-      if (!input.current || !tagName || INPUTS.includes(tagName) || activeElement?.isContentEditable) return
+      if (
+        !input.current ||
+        !tagName ||
+        INPUTS.includes(tagName) ||
+        activeElement?.isContentEditable
+      )
+        return
       if (
         e.key === '/' ||
         (e.key === 'k' &&
@@ -171,7 +169,7 @@ export function Search({
           onChange('')
         }}
       >
-        {(value && focused)
+        {value && focused
           ? 'ESC'
           : mounted &&
             (navigator.userAgent.includes('Macintosh') ? (
@@ -248,7 +246,7 @@ export function Search({
           ) : loading ? (
             <span className="nx-flex nx-select-none nx-justify-center nx-gap-2 nx-p-8 nx-text-center nx-text-sm nx-text-gray-400">
               <SpinnerIcon className="nx-h-5 nx-w-5 nx-animate-spin" />
-              {renderString(config.search.loading)}
+              {renderComponent(config.search.loading)}
             </span>
           ) : results.length > 0 ? (
             results.map(({ route, prefix, children, id }, i) => (
