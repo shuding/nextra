@@ -3,7 +3,23 @@
   "type": "css",
   "colors": {
     "editor.foreground": "#000001",
-    "editor.background": "#000002"
+    "editor.background": "#000002",
+    "terminal.ansiBlack": "#A00000",
+    "terminal.ansiRed": "#A00001",
+    "terminal.ansiGreen": "#A00002",
+    "terminal.ansiYellow": "#A00003",
+    "terminal.ansiBlue": "#A00004",
+    "terminal.ansiMagenta": "#A00005",
+    "terminal.ansiCyan": "#A00006",
+    "terminal.ansiWhite": "#A00007",
+    "terminal.ansiBrightBlack": "#A00008",
+    "terminal.ansiBrightRed": "#A00009",
+    "terminal.ansiBrightGreen": "#A00010",
+    "terminal.ansiBrightYellow": "#A00011",
+    "terminal.ansiBrightBlue": "#A00012",
+    "terminal.ansiBrightMagenta": "#A00013",
+    "terminal.ansiBrightCyan": "#A00014",
+    "terminal.ansiBrightWhite": "#A00015"
   },
   "tokenColors": [
     {
