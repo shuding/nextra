@@ -1,7 +1,7 @@
 ---
-'nextra-theme-blog': patch
-'nextra-theme-docs': patch
-'nextra': patch
+'nextra-theme-blog': minor
+'nextra-theme-docs': minor
+'nextra': minor
 ---
 
 support ANSI highlighting
