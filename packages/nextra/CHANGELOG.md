@@ -1,5 +1,11 @@
 # nextra
 
+## 2.5.0
+
+### Minor Changes
+
+- 08d393e: support ANSI highlighting
+
 ## 2.4.2
 
 ### Patch Changes

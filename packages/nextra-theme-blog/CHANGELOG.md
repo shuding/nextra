@@ -1,5 +1,16 @@
 # nextra-theme-blog
 
+## 2.5.0
+
+### Minor Changes
+
+- 08d393e: support ANSI highlighting
+
+### Patch Changes
+
+- Updated dependencies [08d393e]
+  - nextra@2.5.0
+
 ## 2.4.2
 
 ### Patch Changes
