@@ -34,8 +34,8 @@ importers:
         specifier: 2.1.2
         version: 2.1.2
       '@next/eslint-plugin-next':
-        specifier: 13.4.0
-        version: 13.4.0
+        specifier: 13.4.1
+        version: 13.4.1
       '@typescript-eslint/eslint-plugin':
         specifier: 5.59.2
         version: 5.59.2(@typescript-eslint/parser@5.59.2)(eslint@8.39.0)(typescript@5.0.4)
@@ -144,7 +144,7 @@ importers:
         version: file:packages/nextra(next@13.3.1)(react-dom@18.2.0)(react@18.2.0)
       nextra-theme-blog:
         specifier: workspace:*
-        version: file:packages/nextra-theme-blog(next@13.3.1)(nextra@2.4.2)(react-dom@18.2.0)(react@18.2.0)
+        version: file:packages/nextra-theme-blog(next@13.3.1)(nextra@2.5.0)(react-dom@18.2.0)(react@18.2.0)
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -167,7 +167,7 @@ importers:
         version: file:packages/nextra(next@13.3.1)(react-dom@18.2.0)(react@18.2.0)
       nextra-theme-docs:
         specifier: workspace:*
-        version: file:packages/nextra-theme-docs(next@13.3.1)(nextra@2.4.2)(react-dom@18.2.0)(react@18.2.0)
+        version: file:packages/nextra-theme-docs(next@13.3.1)(nextra@2.5.0)(react-dom@18.2.0)(react@18.2.0)
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -202,7 +202,7 @@ importers:
         version: file:packages/nextra(next@13.3.1)(react-dom@18.2.0)(react@18.2.0)
       nextra-theme-docs:
         specifier: workspace:*
-        version: file:packages/nextra-theme-docs(next@13.3.1)(nextra@2.4.2)(react-dom@18.2.0)(react@18.2.0)
+        version: file:packages/nextra-theme-docs(next@13.3.1)(nextra@2.5.0)(react-dom@18.2.0)(react@18.2.0)
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1621,8 +1621,8 @@ packages:
   /@next/env@13.3.1:
     resolution: {integrity: sha512-EDtCoedIZC7JlUQ3uaQpSc4aVmyhbLHmQVALg7pFfQgOTjgSnn7mKtA0DiCMkYvvsx6aFb5octGMtWrOtGXW9A==}
 
-  /@next/eslint-plugin-next@13.4.0:
-    resolution: {integrity: sha512-ZqQi1slguDavpuNUcl9va8+WtHHpgymIW2g+4Gs9FdI+5rjAvrUqqjfCec2hi3Cjbbp7zULFQuAiPwASKHbrxw==}
+  /@next/eslint-plugin-next@13.4.1:
+    resolution: {integrity: sha512-tVPS/2FKlA3ANCRCYZVT5jdbUKasBU8LG6bYqcNhyORDFTlDYa4cAWQJjZ7msIgLwMQIbL8CAsxrOL8maa/4Lg==}
     dependencies:
       glob: 7.1.7
     dev: true
@@ -8385,7 +8385,7 @@ packages:
     resolution: {directory: packages/nextra, type: directory}
     id: file:packages/nextra
     name: nextra
-    version: 2.4.2
+    version: 2.5.0
     engines: {node: '>=16'}
     peerDependencies:
       next: '>=9.5.3'
@@ -8420,11 +8420,11 @@ packages:
       - supports-color
     dev: false
 
-  file:packages/nextra-theme-blog(next@13.3.1)(nextra@2.4.2)(react-dom@18.2.0)(react@18.2.0):
+  file:packages/nextra-theme-blog(next@13.3.1)(nextra@2.5.0)(react-dom@18.2.0)(react@18.2.0):
     resolution: {directory: packages/nextra-theme-blog, type: directory}
     id: file:packages/nextra-theme-blog
     name: nextra-theme-blog
-    version: 2.4.2
+    version: 2.5.0
     peerDependencies:
       next: '>=9.5.3'
       nextra: workspace:*
@@ -8442,11 +8442,11 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
-  file:packages/nextra-theme-docs(next@13.3.1)(nextra@2.4.2)(react-dom@18.2.0)(react@18.2.0):
+  file:packages/nextra-theme-docs(next@13.3.1)(nextra@2.5.0)(react-dom@18.2.0)(react@18.2.0):
     resolution: {directory: packages/nextra-theme-docs, type: directory}
     id: file:packages/nextra-theme-docs
     name: nextra-theme-docs
-    version: 2.4.2
+    version: 2.5.0
     peerDependencies:
       next: '>=9.5.3'
       nextra: workspace:*
