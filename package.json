@@ -31,7 +31,7 @@
     "eslint-plugin-react-hooks": "4.6.0",
     "eslint-plugin-tailwindcss": "3.11.0",
     "eslint-plugin-typescript-sort-keys": "2.3.0",
-    "eslint-plugin-unicorn": "46.0.0",
+    "eslint-plugin-unicorn": "47.0.0",
     "prettier": "2.8.8",
     "prettier-plugin-tailwindcss": "0.2.8",
     "rimraf": "5.0.0",
