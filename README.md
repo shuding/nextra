@@ -10,7 +10,7 @@ Simple, powerful and flexible site generation framework with everything you love
 
 ### Installation
 
-The Nextra repository uses [PNPM Workspaces](https://pnpm.io/workspaces) and [Turborepo](https://github.com/vercel/turborepo). To install dependencies, just simply run `pnpm` in the project root directory.
+The Nextra repository uses [PNPM Workspaces](https://pnpm.io/workspaces) and [Turborepo](https://github.com/vercel/turborepo). To install dependencies, run `pnpm install` in the project root directory.
 
 ### Build Nextra Core
 
