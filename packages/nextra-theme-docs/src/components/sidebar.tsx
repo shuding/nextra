@@ -1,26 +1,26 @@
-import type { ReactElement } from 'react'
-import {
-  useState,
-  useEffect,
-  useMemo,
-  memo,
-  useRef,
-  createContext,
-  useContext
-} from 'react'
 import cn from 'clsx'
 import { useRouter } from 'next/router'
 import type { Heading } from 'nextra'
+import type { ReactElement } from 'react'
+import {
+  createContext,
+  memo,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState
+} from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
 
-import { useConfig, useMenu, useActiveAnchor } from '../contexts'
-import type { Item, MenuItem, PageItem } from 'nextra/normalize-pages'
-import { renderComponent } from '../utils'
 import { useFSRoute } from 'nextra/hooks'
-import { LocaleSwitch } from './locale-switch'
 import { ArrowRightIcon, ExpandIcon } from 'nextra/icons'
-import { Collapse } from './collapse'
+import type { Item, MenuItem, PageItem } from 'nextra/normalize-pages'
+import { useActiveAnchor, useConfig, useMenu } from '../contexts'
+import { renderComponent } from '../utils'
 import { Anchor } from './anchor'
+import { Collapse } from './collapse'
+import { LocaleSwitch } from './locale-switch'
 
 const TreeState: Record<string, boolean> = Object.create(null)
 
@@ -93,10 +93,25 @@ function FolderImpl({ item, anchors }: FolderProps): ReactElement {
   const rerender = useState({})[1]
 
   useEffect(() => {
-    if (activeRouteInside || focusedRouteInside) {
-      TreeState[item.route] = true
+    const updateTreeState = () => {
+      if (activeRouteInside || focusedRouteInside) {
+        TreeState[item.route] = true
+      }
     }
-  }, [activeRouteInside, focusedRouteInside, item.route])
+    const updateAndPruneTreeState = () => {
+      if (activeRouteInside && focusedRouteInside) {
+        TreeState[item.route] = true
+      } else {
+        delete TreeState[item.route]
+      }
+    }
+    config.sidebar.autoCollapse ? updateAndPruneTreeState() : updateTreeState()
+  }, [
+    activeRouteInside,
+    focusedRouteInside,
+    item.route,
+    config.sidebar.autoCollapse
+  ])
 
   if (item.type === 'menu') {
     const menu = item as MenuItem
