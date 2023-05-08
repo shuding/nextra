@@ -13,7 +13,17 @@ const Comments = () => {
   const { config, opts } = useBlogContext()
   const router = useRouter()
   const { resolvedTheme } = useTheme()
+
   const { cusdis } = config
+
+  // when resolvedTheme changes, update the theme for the cusdis iframe
+  useEffect(() => {
+    const iframe = document.querySelector('#cusdis_thread iframe') as HTMLIFrameElement
+      if (!iframe) return
+      // @ts-ignore
+      window.CUSDIS.setTheme(resolvedTheme === 'dark' ? 'dark' : 'light')
+  }, [resolvedTheme]);
+
   if (!cusdis) {
     return null
   }
