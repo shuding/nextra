@@ -100,10 +100,11 @@ async function loader(
   const mdxPath = (
     context._module?.resourceResolveData
       ? // to make it work with symlinks, resolve the mdx path based on the relative path
-        path.join(
-          context.rootContext,
-          context._module.resourceResolveData.relativePath
-        )
+        /*
+         * `context._module.resourceResolveData.relativePath` could include path chunk of
+         * `context.rootContext` use `context._module.rawRequest` instead
+         */
+        path.join(context.rootContext, context._module.rawRequest)
       : context.resourcePath
   ) as MdxPath
 
