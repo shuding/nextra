@@ -1,5 +1,13 @@
 # nextra-theme-blog
 
+## 2.5.1
+
+### Patch Changes
+
+- 8aae0c9: fix: cusdis comments theme doens't change when resolvedTheme changed
+- Updated dependencies [d408ab0]
+  - nextra@2.5.1
+
 ## 2.5.0
 
 ### Minor Changes

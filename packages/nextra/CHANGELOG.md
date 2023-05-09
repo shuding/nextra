@@ -1,5 +1,11 @@
 # nextra
 
+## 2.5.1
+
+### Patch Changes
+
+- d408ab0: fix `Error: ENOENT: no such file or directory` in Nx-managed monorepos
+
 ## 2.5.0
 
 ### Minor Changes

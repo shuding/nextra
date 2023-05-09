@@ -1,5 +1,12 @@
 # nextra-theme-docs
 
+## 2.5.1
+
+### Patch Changes
+
+- Updated dependencies [d408ab0]
+  - nextra@2.5.1
+
 ## 2.5.0
 
 ### Minor Changes
