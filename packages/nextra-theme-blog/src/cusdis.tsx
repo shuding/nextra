@@ -22,7 +22,7 @@ const Comments = () => {
       if (!iframe) return
       // @ts-ignore
       window.CUSDIS.setTheme(resolvedTheme === 'dark' ? 'dark' : 'light')
-  }, [resolvedTheme]);
+  }, [resolvedTheme])
 
   if (!cusdis) {
     return null
