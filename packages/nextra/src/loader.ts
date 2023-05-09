@@ -101,10 +101,14 @@ async function loader(
     context._module?.resourceResolveData
       ? // to make it work with symlinks, resolve the mdx path based on the relative path
         /*
-         * `context._module.resourceResolveData.relativePath` could include path chunk of
-         * `context.rootContext` use `context._module.rawRequest` instead
+         * `context.rootContext` could include path chunk of
+         * `context._module.resourceResolveData.relativePath` use
+         * `context._module.resourceResolveData.descriptionFileRoot` instead
          */
-        path.join(context.rootContext, context._module.rawRequest)
+      path.join(
+        context._module.resourceResolveData.descriptionFileRoot,
+        context._module.resourceResolveData.relativePath
+      )
       : context.resourcePath
   ) as MdxPath
 
