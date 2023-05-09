@@ -17,7 +17,7 @@ const Comments = () => {
   const { cusdis } = config
   const theme = resolvedTheme === 'dark' ? 'dark' : 'light'
 
-  // when resolvedTheme changes, update the theme for the cusdis iframe
+  // update the theme for the cusdis iframe when theme changed
   useEffect(() => {
     window.CUSDIS?.setTheme(theme)
   }, [theme])
