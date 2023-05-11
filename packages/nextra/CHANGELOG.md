@@ -1,5 +1,11 @@
 # nextra
 
+## 2.5.2
+
+### Patch Changes
+
+- a3601e5: fix Module not found: Can't resolve '.../node_modules/nextra/dist/mdx.mjs'
+
 ## 2.5.1
 
 ### Patch Changes
