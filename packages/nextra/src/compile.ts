@@ -139,7 +139,7 @@ export async function compileMdx(
       format,
       outputFormat,
       providerImportSource: isFileOutsideCWD
-        ? require.resolve('nextra').replace(/index\.js$/, 'mdx.mjs') // fixes Package subpath './mdx' is not defined by "exports"
+        ? require.resolve('nextra').replace(/index\.js$/, 'mdx.js') // fixes Package subpath './mdx' is not defined by "exports"
         : 'nextra/mdx',
       remarkPlugins: [
         ...(remarkPlugins || []),
