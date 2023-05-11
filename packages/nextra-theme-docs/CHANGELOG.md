@@ -1,5 +1,12 @@
 # nextra-theme-docs
 
+## 2.5.2
+
+### Patch Changes
+
+- Updated dependencies [a3601e5]
+  - nextra@2.5.2
+
 ## 2.5.1
 
 ### Patch Changes
