@@ -1,5 +1,6 @@
 .next/
 out/
 dist/
+examples/swr-site/pages/remote/graphql-eslint/\[\[...slug\]\].mdx
 pnpm-lock.yaml
 .changeset/*.md
