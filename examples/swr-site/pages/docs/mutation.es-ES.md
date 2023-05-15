@@ -11,19 +11,22 @@ cuando el usuario hace clic en el botón "Logout".
 ```jsx
 import useSWR, { useSWRConfig } from 'swr'
 
-function App () {
+function App() {
   const { mutate } = useSWRConfig()
 
   return (
     <div>
       <Profile />
-      <button onClick={() => {
-        // establecer la cookie como caduca
-        document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+      <button
+        onClick={() => {
+          // establecer la cookie como caduca
+          document.cookie =
+            'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
 
-        // indicar a todos SWRs con esta key que se revaliden
-        mutate('/api/user')
-      }}>
+          // indicar a todos SWRs con esta key que se revaliden
+          mutate('/api/user')
+        }}
+      >
         Logout
       </button>
     </div>
@@ -42,25 +45,29 @@ sustituyes por los datos más recientes.
 ```jsx
 import useSWR, { useSWRConfig } from 'swr'
 
-function Profile () {
+function Profile() {
   const { mutate } = useSWRConfig()
   const { data } = useSWR('/api/user', fetcher)
 
   return (
     <div>
       <h1>My name is {data.name}.</h1>
-      <button onClick={async () => {
-        const newName = data.name.toUpperCase()
+      <button
+        onClick={async () => {
+          const newName = data.name.toUpperCase()
 
-        // actualiza los datos locales inmediatamente, pero desactiva la revalidación
-        mutate('/api/user', { ...data, name: newName }, false)
+          // actualiza los datos locales inmediatamente, pero desactiva la revalidación
+          mutate('/api/user', { ...data, name: newName }, false)
 
-        // envía una solicitud a la API para actualizar la fuente
-        await requestUpdateUsername(newName)
+          // envía una solicitud a la API para actualizar la fuente
+          await requestUpdateUsername(newName)
 
-        // activar una revalidación (refetch) para asegurarse de que nuestros datos locales son correctos
-        mutate('/api/user')
-      }}>Uppercase my name!</button>
+          // activar una revalidación (refetch) para asegurarse de que nuestros datos locales son correctos
+          mutate('/api/user')
+        }}
+      >
+        Uppercase my name!
+      </button>
     </div>
   )
 }
@@ -73,9 +80,9 @@ Pero muchas APIs POST simplemente devolverán los datos actualizados directament
 Aquí hay un ejemplo que muestra el uso de "local mutate - request - update":
 
 ```jsx
-mutate('/api/user', newUser, false)             // utilice `false` para mutate sin revalidar
+mutate('/api/user', newUser, false) // utilice `false` para mutate sin revalidar
 mutate('/api/user', updateUser(newUser), false) // `updateUser` es una Promise de la solicitud,
-                                                // que devuelve el update document
+// que devuelve el update document
 ```
 
 ## Mutar basándose en los datos actuales
@@ -123,20 +130,24 @@ Es funcionalmente equivalente a la función global `mutate` pero no requiere el 
 ```jsx
 import useSWR from 'swr'
 
-function Profile () {
+function Profile() {
   const { data, mutate } = useSWR('/api/user', fetcher)
 
   return (
     <div>
       <h1>My name is {data.name}.</h1>
-      <button onClick={async () => {
-        const newName = data.name.toUpperCase()
-        // enviar una solicitud a la API para actualizar los datos
-        await requestUpdateUsername(newName)
-        // actualizar los datos locales inmediatamente y revalidar (refetch)
-        // NOTA: la key no es necesaria cuando se utiliza el mutate de useSWR, es pre-bound
-        mutate({ ...data, name: newName })
-      }}>Uppercase my name!</button>
+      <button
+        onClick={async () => {
+          const newName = data.name.toUpperCase()
+          // enviar una solicitud a la API para actualizar los datos
+          await requestUpdateUsername(newName)
+          // actualizar los datos locales inmediatamente y revalidar (refetch)
+          // NOTA: la key no es necesaria cuando se utiliza el mutate de useSWR, es pre-bound
+          mutate({ ...data, name: newName })
+        }}
+      >
+        Uppercase my name!
+      </button>
     </div>
   )
 }

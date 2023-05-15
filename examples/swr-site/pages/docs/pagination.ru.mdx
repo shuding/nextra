@@ -3,7 +3,8 @@ import { Callout } from 'nextra-theme-docs'
 # Пагинация
 
 <Callout emoji="✅">
-  Пожалуйста, обновитесь до последней версии (≥ 0.3.0), чтобы использовать этот API. Предыдущий API <code>useSWRPages</code> является устаревшим.
+  Пожалуйста, обновитесь до последней версии (≥ 0.3.0), чтобы использовать этот
+  API. Предыдущий API <code>useSWRPages</code> является устаревшим.
 </Callout>
 
 SWR предоставляет специальный API `useSWRInfinite` для поддержки общепринятых UI шаблонов, таких как **пагинация** и **бесконечная загрузка**.
@@ -17,47 +18,53 @@ SWR предоставляет специальный API `useSWRInfinite` дл�
 import { Pagination } from '@components/diagrams/pagination'
 
 <div className="mt-8">
-  <Pagination/>
+  <Pagination />
 </div>
 
 ...что является типичной UI пагинацией. Посмотрим, как это легко реализовать с помощью `useSWR`:
 
 ```jsx {5}
-function App () {
-  const [pageIndex, setPageIndex] = useState(0);
+function App() {
+  const [pageIndex, setPageIndex] = useState(0)
 
   // URL-адрес API включает индекс страницы, который является состоянием React.
-  const { data } = useSWR(`/api/data?page=${pageIndex}`, fetcher);
+  const { data } = useSWR(`/api/data?page=${pageIndex}`, fetcher)
 
   // ... обработка состояния загразки и ошибки
 
-  return <div>
-    {data.map(item => <div key={item.id}>{item.name}</div>)}
-    <button onClick={() => setPageIndex(pageIndex - 1)}>Назад</button>
-    <button onClick={() => setPageIndex(pageIndex + 1)}>Вперёд</button>
-  </div>
+  return (
+    <div>
+      {data.map(item => (
+        <div key={item.id}>{item.name}</div>
+      ))}
+      <button onClick={() => setPageIndex(pageIndex - 1)}>Назад</button>
+      <button onClick={() => setPageIndex(pageIndex + 1)}>Вперёд</button>
+    </div>
+  )
 }
 ```
 
 Более того, мы можем создать абстракцию для этого «компонента страницы»:
 
 ```jsx {13}
-function Page ({ index }) {
-  const { data } = useSWR(`/api/data?page=${index}`, fetcher);
+function Page({ index }) {
+  const { data } = useSWR(`/api/data?page=${index}`, fetcher)
 
   // ... обработка состояния загразки и ошибки
 
   return data.map(item => <div key={item.id}>{item.name}</div>)
 }
 
-function App () {
-  const [pageIndex, setPageIndex] = useState(0);
+function App() {
+  const [pageIndex, setPageIndex] = useState(0)
 
-  return <div>
-    <Page index={pageIndex}/>
-    <button onClick={() => setPageIndex(pageIndex - 1)}>Назад</button>
-    <button onClick={() => setPageIndex(pageIndex + 1)}>Вперёд</button>
-  </div>
+  return (
+    <div>
+      <Page index={pageIndex} />
+      <button onClick={() => setPageIndex(pageIndex - 1)}>Назад</button>
+      <button onClick={() => setPageIndex(pageIndex + 1)}>Вперёд</button>
+    </div>
+  )
 }
 ```
 
@@ -66,15 +73,19 @@ function App () {
 Когда пользователь переходит на следующую страницу, данные уже там:
 
 ```jsx {6}
-function App () {
-  const [pageIndex, setPageIndex] = useState(0);
+function App() {
+  const [pageIndex, setPageIndex] = useState(0)
 
-  return <div>
-    <Page index={pageIndex}/>
-    <div style={{ display: 'none' }}><Page index={pageIndex + 1}/></div>
-    <button onClick={() => setPageIndex(pageIndex - 1)}>Назад</button>
-    <button onClick={() => setPageIndex(pageIndex + 1)}>Вперёд</button>
-  </div>
+  return (
+    <div>
+      <Page index={pageIndex} />
+      <div style={{ display: 'none' }}>
+        <Page index={pageIndex + 1} />
+      </div>
+      <button onClick={() => setPageIndex(pageIndex - 1)}>Назад</button>
+      <button onClick={() => setPageIndex(pageIndex + 1)}>Вперёд</button>
+    </div>
+  )
 }
 ```
 
@@ -89,14 +100,14 @@ function App () {
 import { Infinite } from '@components/diagrams/infinite'
 
 <div className="mt-8">
-  <Infinite/>
+  <Infinite />
 </div>
 
 Чтобы реализовать это, нам нужно сделать **динамическое количество запросов** на этой странице.
 У хуков React есть [пара правил](https://ru.reactjs.org/docs/hooks-rules.html), поэтому мы **НЕ МОЖЕМ** делать что-то вроде этого:
 
 ```jsx {5-9}
-function App () {
+function App() {
   const [cnt, setCnt] = useState(1)
 
   const list = []
@@ -106,20 +117,25 @@ function App () {
     list.push(data)
   }
 
-  return <div>
-    {list.map((data, i) =>
-      <div key={i}>{
-        data.map(item => <div key={item.id}>{item.name}</div>)
-      }</div>)}
-    <button onClick={() => setCnt(cnt + 1)}>Загрузить ещё</button>
-  </div>
+  return (
+    <div>
+      {list.map((data, i) => (
+        <div key={i}>
+          {data.map(item => (
+            <div key={item.id}>{item.name}</div>
+          ))}
+        </div>
+      ))}
+      <button onClick={() => setCnt(cnt + 1)}>Загрузить ещё</button>
+    </div>
+  )
 }
 ```
 
 Вместо этого мы можем использовать абстракцию `<Page />`, которую мы создали для этого:
 
 ```jsx {5-7}
-function App () {
+function App() {
   const [cnt, setCnt] = useState(1)
 
   const pages = []
@@ -127,10 +143,12 @@ function App () {
     pages.push(<Page index={i} key={i} />)
   }
 
-  return <div>
-    {pages}
-    <button onClick={() => setCnt(cnt + 1)}>Загрузить ещё</button>
-  </div>
+  return (
+    <div>
+      {pages}
+      <button onClick={() => setCnt(cnt + 1)}>Загрузить ещё</button>
+    </div>
+  )
 }
 ```
 
@@ -143,7 +161,7 @@ function App () {
 потому что UI верхнего уровня (`<App />`) нужны данные внутри каждой страницы:
 
 ```jsx {10}
-function App () {
+function App() {
   const [cnt, setCnt] = useState(1)
 
   const pages = []
@@ -151,11 +169,13 @@ function App () {
     pages.push(<Page index={i} key={i} />)
   }
 
-  return <div>
-    <p>??? элементов</p>
-    {pages}
-    <button onClick={() => setCnt(cnt + 1)}>Загрузить ещё</button>
-  </div>
+  return (
+    <div>
+      <p>??? элементов</p>
+      {pages}
+      <button onClick={() => setCnt(cnt + 1)}>Загрузить ещё</button>
+    </div>
+  )
 }
 ```
 
@@ -183,8 +203,10 @@ const { data, error, isValidating, mutate, size, setSize } = useSWRInfinite(
 При бесконечной загрузке одна _страница_ — это один запрос, и наша цель — получить несколько страниц и отобразить их.
 
 <Callout emoji="⚠️">
-  Если вы используете версии SWR 0.x, `useSWRInfinite` необходимо импортировать из `swr`:<br/>
-  `import { useSWRInfinite } from 'swr'`
+  Если вы используете версии SWR 0.x, `useSWRInfinite` необходимо импортировать
+  из `swr`:
+  <br />
+  `import {useSWRInfinite} from 'swr'`
 </Callout>
 
 ### API
@@ -232,10 +254,10 @@ GET /users?page=0&limit=10
 // Если возвращается `null`, запрос этой страницы не запускается.
 const getKey = (pageIndex, previousPageData) => {
   if (previousPageData && !previousPageData.length) return null // достигнут конец
-  return `/users?page=${pageIndex}&limit=10`                    // ключ SWR
+  return `/users?page=${pageIndex}&limit=10` // ключ SWR
 }
 
-function App () {
+function App() {
   const { data, size, setSize } = useSWRInfinite(getKey, fetcher)
   if (!data) return 'loading'
 
@@ -245,14 +267,16 @@ function App () {
     totalUsers += data[i].length
   }
 
-  return <div>
-    <p>{totalUsers} users listed</p>
-    {data.map((users, index) => {
-      // `data` — это массив ответов API каждой страницы.
-      return users.map(user => <div key={user.id}>{user.name}</div>)
-    })}
-    <button onClick={() => setSize(size + 1)}>Загрузить ещё</button>
-  </div>
+  return (
+    <div>
+      <p>{totalUsers} users listed</p>
+      {data.map((users) => {
+        // `data` — это массив ответов API каждой страницы.
+        return users.map(user => <div key={user.id}>{user.name}</div>)
+      })}
+      <button onClick={() => setSize(size + 1)}>Загрузить ещё</button>
+    </div>
+  )
 }
 ```
 

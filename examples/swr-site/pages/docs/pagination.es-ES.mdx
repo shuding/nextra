@@ -3,7 +3,8 @@ import { Callout } from 'nextra-theme-docs'
 # Paginación
 
 <Callout emoji="✅">
-  Por favor, actualice a la última versión (≥ 0.3.0) para utilizar esta API. La anterior API <code>useSWRPages</code> ha quedado obsoleta.
+  Por favor, actualice a la última versión (≥ 0.3.0) para utilizar esta API. La
+  anterior API <code>useSWRPages</code> ha quedado obsoleta.
 </Callout>
 
 SWR proporciona una API dedicada `useSWRInfinite` para admitir patrones de UI comunes como la **paginación** y la **carga infinita**.
@@ -18,48 +19,54 @@ si estamos construyendo algo como esto:
 import { Pagination } from '@components/diagrams/pagination'
 
 <div className="mt-8">
-  <Pagination/>
+  <Pagination />
 </div>
 
 ...que es un típico UI de paginación. Veamos cómo se puede implementar fácilmente con
 `useSWR`:
 
 ```jsx {5}
-function App () {
-  const [pageIndex, setPageIndex] = useState(0);
+function App() {
+  const [pageIndex, setPageIndex] = useState(0)
 
   // La URL de la API incluye el índice de la página, que es un React state.
-  const { data } = useSWR(`/api/data?page=${pageIndex}`, fetcher);
+  const { data } = useSWR(`/api/data?page=${pageIndex}`, fetcher)
 
   // ... manejar los estados de carga y error
 
-  return <div>
-    {data.map(item => <div key={item.id}>{item.name}</div>)}
-    <button onClick={() => setPageIndex(pageIndex - 1)}>Previous</button>
-    <button onClick={() => setPageIndex(pageIndex + 1)}>Next</button>
-  </div>
+  return (
+    <div>
+      {data.map(item => (
+        <div key={item.id}>{item.name}</div>
+      ))}
+      <button onClick={() => setPageIndex(pageIndex - 1)}>Previous</button>
+      <button onClick={() => setPageIndex(pageIndex + 1)}>Next</button>
+    </div>
+  )
 }
 ```
 
 Además, podemos crear una abstracción para este "page component":
 
 ```jsx {13}
-function Page ({ index }) {
-  const { data } = useSWR(`/api/data?page=${index}`, fetcher);
+function Page({ index }) {
+  const { data } = useSWR(`/api/data?page=${index}`, fetcher)
 
   // ... manejar los estados de carga y error
 
   return data.map(item => <div key={item.id}>{item.name}</div>)
 }
 
-function App () {
-  const [pageIndex, setPageIndex] = useState(0);
+function App() {
+  const [pageIndex, setPageIndex] = useState(0)
 
-  return <div>
-    <Page index={pageIndex}/>
-    <button onClick={() => setPageIndex(pageIndex - 1)}>Previous</button>
-    <button onClick={() => setPageIndex(pageIndex + 1)}>Next</button>
-  </div>
+  return (
+    <div>
+      <Page index={pageIndex} />
+      <button onClick={() => setPageIndex(pageIndex - 1)}>Previous</button>
+      <button onClick={() => setPageIndex(pageIndex + 1)}>Next</button>
+    </div>
+  )
 }
 ```
 
@@ -68,15 +75,19 @@ La página siguiente se presenta dentro de un hidden div, por lo que SWR activar
 de la página siguiente. Cuando el usuario navega a la siguiente página, los datos ya están allí:
 
 ```jsx {6}
-function App () {
-  const [pageIndex, setPageIndex] = useState(0);
+function App() {
+  const [pageIndex, setPageIndex] = useState(0)
 
-  return <div>
-    <Page index={pageIndex}/>
-    <div style={{ display: 'none' }}><Page index={pageIndex + 1}/></div>
-    <button onClick={() => setPageIndex(pageIndex - 1)}>Previous</button>
-    <button onClick={() => setPageIndex(pageIndex + 1)}>Next</button>
-  </div>
+  return (
+    <div>
+      <Page index={pageIndex} />
+      <div style={{ display: 'none' }}>
+        <Page index={pageIndex + 1} />
+      </div>
+      <button onClick={() => setPageIndex(pageIndex - 1)}>Previous</button>
+      <button onClick={() => setPageIndex(pageIndex + 1)}>Next</button>
+    </div>
+  )
 }
 ```
 
@@ -91,14 +102,14 @@ a la lista (o que lo haga automáticamente al desplazarse):
 import { Infinite } from '@components/diagrams/infinite'
 
 <div className="mt-8">
-  <Infinite/>
+  <Infinite />
 </div>
 
 Para implementar esto, necesitamos hacer **número de peticiones dinámicas** en esta página. Los React Hooks tienen [un par de reglas](https://reactjs.org/docs/hooks-rules.html),
 por lo que **NO PODEMOS** hacer algo así:
 
 ```jsx {5-9}
-function App () {
+function App() {
   const [cnt, setCnt] = useState(1)
 
   const list = []
@@ -108,20 +119,25 @@ function App () {
     list.push(data)
   }
 
-  return <div>
-    {list.map((data, i) =>
-      <div key={i}>{
-        data.map(item => <div key={item.id}>{item.name}</div>)
-      }</div>)}
-    <button onClick={() => setCnt(cnt + 1)}>Load More</button>
-  </div>
+  return (
+    <div>
+      {list.map((data, i) => (
+        <div key={i}>
+          {data.map(item => (
+            <div key={item.id}>{item.name}</div>
+          ))}
+        </div>
+      ))}
+      <button onClick={() => setCnt(cnt + 1)}>Load More</button>
+    </div>
+  )
 }
 ```
 
 En su lugar, podemos utilizar la abstracción `<Page />` que hemos creado para conseguirlo:
 
 ```jsx {5,6,7}
-function App () {
+function App() {
   const [cnt, setCnt] = useState(1)
 
   const pages = []
@@ -129,10 +145,12 @@ function App () {
     pages.push(<Page index={i} key={i} />)
   }
 
-  return <div>
-    {pages}
-    <button onClick={() => setCnt(cnt + 1)}>Load More</button>
-  </div>
+  return (
+    <div>
+      {pages}
+      <button onClick={() => setCnt(cnt + 1)}>Load More</button>
+    </div>
+  )
 }
 ```
 
@@ -145,7 +163,7 @@ sobre cuántos item hay en total. No podemos utilizar la solución `<Page />` po
 la UI de nivel superior (`<App />`) necesita los datos dentro de cada página:
 
 ```jsx {10}
-function App () {
+function App() {
   const [cnt, setCnt] = useState(1)
 
   const pages = []
@@ -153,11 +171,13 @@ function App () {
     pages.push(<Page index={i} key={i} />)
   }
 
-  return <div>
-    <p>??? items</p>
-    {pages}
-    <button onClick={() => setCnt(cnt + 1)}>Load More</button>
-  </div>
+  return (
+    <div>
+      <p>??? items</p>
+      {pages}
+      <button onClick={() => setCnt(cnt + 1)}>Load More</button>
+    </div>
+  )
 }
 ```
 
@@ -185,8 +205,10 @@ Devuelve todos los valores que devuelve `useSWR`, incluyendo 2 valores extra: pa
 En la carga infinita, una _page_ es una petición, y nuestro objetivo es obtener varias páginas y renderizarlas.
 
 <Callout emoji="⚠️">
-  If you are using SWR 0.x versions, `useSWRInfinite` needs to be imported from `swr`:<br/>
-  `import { useSWRInfinite } from 'swr'`
+  If you are using SWR 0.x versions, `useSWRInfinite` needs to be imported from
+  `swr`:
+  <br />
+  `import {useSWRInfinite} from 'swr'`
 </Callout>
 
 ### API
@@ -202,7 +224,8 @@ En la carga infinita, una _page_ es una petición, y nuestro objetivo es obtener
   - `persistSize = false`: no restablecer el page size a 1 (o `initialSize` si está establecido) cuando la key de la primera página cambia
 
 <Callout>
-    Tenga en cuenta que la opción `InitialSize` no puede cambiar en el ciclo de vida.
+  Tenga en cuenta que la opción `InitialSize` no puede cambiar en el ciclo de
+  vida.
 </Callout>
 
 #### Valores de retorno
@@ -234,10 +257,10 @@ GET /users?page=0&limit=10
 // Si se devuelve `null`, la petición de esa página no se iniciará.
 const getKey = (pageIndex, previousPageData) => {
   if (previousPageData && !previousPageData.length) return null // reached the end
-  return `/users?page=${pageIndex}&limit=10`                    // SWR key
+  return `/users?page=${pageIndex}&limit=10` // SWR key
 }
 
-function App () {
+function App() {
   const { data, size, setSize } = useSWRInfinite(getKey, fetcher)
   if (!data) return 'loading'
 
@@ -247,14 +270,16 @@ function App () {
     totalUsers += data[i].length
   }
 
-  return <div>
-    <p>{totalUsers} users listed</p>
-    {data.map((users, index) => {
-      // `data` es un array con la respuesta de la API de cada página.
-      return users.map(user => <div key={user.id}>{user.name}</div>)
-    })}
-    <button onClick={() => setSize(size + 1)}>Load More</button>
-  </div>
+  return (
+    <div>
+      <p>{totalUsers} users listed</p>
+      {data.map((users) => {
+        // `data` es un array con la respuesta de la API de cada página.
+        return users.map(user => <div key={user.id}>{user.name}</div>)
+      })}
+      <button onClick={() => setSize(size + 1)}>Load More</button>
+    </div>
+  )
 }
 ```
 

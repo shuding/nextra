@@ -3,7 +3,6 @@ import { Callout } from 'nextra-theme-docs'
 # API Options
 
 ```js
-
 const { data, error, isValidating, mutate } = useSWR(key, fetcher, options)
 ```
 
@@ -53,8 +52,8 @@ const { data, error, isValidating, mutate } = useSWR(key, fetcher, options)
 - `use`: array of middleware functions [(details)](/docs/middleware)
 
 <Callout emoji="💡">
-Cuando una red lenta (2G, {'<='} 70Kbps), `errorRetryInterval` serian 10 segundos, y
-`loadingTimeout` serian 5 segundos por defecto.
+  Cuando una red lenta (2G, {'<='} 70Kbps), `errorRetryInterval` serian 10
+  segundos, y `loadingTimeout` serian 5 segundos por defecto.
 </Callout>
 
 También puede utilizar la [configuración global](/docs/global-configuration) para proporcionar opciónes por defecto.
