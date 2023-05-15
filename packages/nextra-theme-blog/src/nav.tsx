@@ -15,7 +15,9 @@ export default function Nav(): ReactElement {
             return (
               <span
                 key={page.route}
-                className={`nx-cursor-default ${config.darkMode ? 'nx-text-gray-400' : 'nx-text-gray-600'}`}
+                className={`nx-cursor-default ${config.darkMode ?
+                  'nx-text-gray-400' : 'nx-text-gray-600'}`
+                }
               >
                 {page.frontMatter?.title || page.name}
               </span>
