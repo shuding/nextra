@@ -181,7 +181,7 @@ If you are using the corresponding types, update the import path too:
 SWR no longer provides the default fetcher (a `fetch` call that parses the data as JSON). The easiest way to migrate the change is to use the `<SWRConfig>` component:
 
 ```jsx
-<SWRConfig value={{ fetcher: url => fetch(url).then(res => res.json()) }}>
+;<SWRConfig value={{ fetcher: url => fetch(url).then(res => res.json()) }}>
   <App />
 </SWRConfig>
 

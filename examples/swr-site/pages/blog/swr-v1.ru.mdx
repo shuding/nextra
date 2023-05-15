@@ -181,7 +181,7 @@ useSWR(key, fetcher, { use: [...middleware] })
 SWR больше не предоставляет fetcher по умолчанию (вызов `fetch`, который анализирует данные как JSON). Самый простой способ перенести изменение — использовать компонент `<SWRConfig>`:
 
 ```jsx
-<SWRConfig value={{ fetcher: url => fetch(url).then(res => res.json()) }}>
+;<SWRConfig value={{ fetcher: url => fetch(url).then(res => res.json()) }}>
   <App />
 </SWRConfig>
 
