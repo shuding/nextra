@@ -16,7 +16,7 @@
     "release": "changeset publish",
     "test": "turbo run test",
     "clean": "turbo run clean",
-    "prettier": "prettier --cache --write --list-different --ignore-path .gitignore ."
+    "prettier": "prettier --cache --write --list-different --ignore-path .gitignore --ignore-path .prettierignore ."
   },
   "devDependencies": {
     "@changesets/cli": "2.26.1",

@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import type { ReactElement } from 'react'
 import { useMemo, useState } from 'react'
 import { matchSorter } from 'match-sorter'
 import type { Item as NormalItem } from 'nextra/normalize-pages'
