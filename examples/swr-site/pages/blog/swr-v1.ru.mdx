@@ -74,10 +74,12 @@ useSWRImmutable(key, fetcher, options)
 По умолчанию SWR использует единый глобальный кеш для хранения всех данных. В версии 1.0 вы можете настроить его с помощью новой опции `provider`:
 
 ```jsx
-<SWRConfig value={{
-  provider: () => myCache
-}}>
-  <App/>
+<SWRConfig
+  value={{
+    provider: () => myCache
+  }}
+>
+  <App />
 </SWRConfig>
 ```
 
@@ -94,7 +96,7 @@ useSWRImmutable(key, fetcher, options)
 ```jsx
 import { useSWRConfig } from 'swr'
 
-function Foo () {
+function Foo() {
   const { refreshInterval, cache, mutate, ...restConfig } = useSWRConfig()
 
   // ...
@@ -179,12 +181,12 @@ useSWR(key, fetcher, { use: [...middleware] })
 SWR больше не предоставляет fetcher по умолчанию (вызов `fetch`, который анализирует данные как JSON). Самый простой способ перенести изменение — использовать компонент `<SWRConfig>`:
 
 ```jsx
-<SWRConfig value={{ fetcher: (url) => fetch(url).then(res => res.json()) }}>
-  <App/>
+<SWRConfig value={{ fetcher: url => fetch(url).then(res => res.json()) }}>
+  <App />
 </SWRConfig>
 
 // ... или
-useSWR(key, (url) => fetch(url).then(res => res.json()))
+useSWR(key, url => fetch(url).then(res => res.json()))
 ```
 
 ### Рекомендуем использовать `mutate` возвращаемый хуком

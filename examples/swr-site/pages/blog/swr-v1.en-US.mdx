@@ -74,10 +74,12 @@ It has the exact same API as the `useSWR` hook, but it will never revalidate upo
 By default, SWR uses a single global cache to store all the data. In 1.0, you are able to customize it with the new `provider` option:
 
 ```jsx
-<SWRConfig value={{
-  provider: () => myCache
-}}>
-  <App/>
+<SWRConfig
+  value={{
+    provider: () => myCache
+  }}
+>
+  <App />
 </SWRConfig>
 ```
 
@@ -94,7 +96,7 @@ There is a new Hook API to return all global configurations, including the curre
 ```jsx
 import { useSWRConfig } from 'swr'
 
-function Foo () {
+function Foo() {
   const { refreshInterval, cache, mutate, ...restConfig } = useSWRConfig()
 
   // ...
@@ -179,12 +181,12 @@ If you are using the corresponding types, update the import path too:
 SWR no longer provides the default fetcher (a `fetch` call that parses the data as JSON). The easiest way to migrate the change is to use the `<SWRConfig>` component:
 
 ```jsx
-<SWRConfig value={{ fetcher: (url) => fetch(url).then(res => res.json()) }}>
-  <App/>
+<SWRConfig value={{ fetcher: url => fetch(url).then(res => res.json()) }}>
+  <App />
 </SWRConfig>
 
 // ... or
-useSWR(key, (url) => fetch(url).then(res => res.json()))
+useSWR(key, url => fetch(url).then(res => res.json()))
 ```
 
 ### Recommend to Use the Hook-Returned `mutate`
