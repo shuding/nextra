@@ -10,7 +10,7 @@ export default function Nav(): ReactElement {
   const { navPages } = collectPostsAndNavs({ opts, config })
   const { setTheme, resolvedTheme } = useTheme()
   const isDark = resolvedTheme === 'dark'
-  const fontColor = isDark ? 'nx-text-gray-400' : 'nx-text-gray-600'
+  const textColor = isDark ? 'nx-text-gray-400' : 'nx-text-gray-600'
   return (
     <div className="nx-mb-8 nx-flex nx-items-center nx-gap-3">
       <div className="nx-flex nx-grow nx-flex-wrap nx-items-center nx-justify-end nx-gap-3">
@@ -19,7 +19,7 @@ export default function Nav(): ReactElement {
             return (
               <span
                 key={page.route}
-                className={'nx-cursor-default ' + fontColor}>
+                className={'nx-cursor-default ' + textColor}>
                 {page.frontMatter?.title || page.name}
               </span>
             )
