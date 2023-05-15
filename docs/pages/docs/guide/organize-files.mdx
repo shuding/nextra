@@ -19,7 +19,7 @@ Then, Nextra will use the [title](https://github.com/vercel/title) package to ge
 
 For example if you have the following structure:
 
-```
+```text
 pages/
   contact.md
   index.mdx
@@ -30,14 +30,11 @@ pages/
 
 The resolved page map will be (note that all names were sorted alphabetically):
 
-```js
+```json
 [
   {
     name: 'About',
-    children: [
-      { name: 'Index' },
-      { name: 'Legal' }
-    ]
+    children: [{ name: 'Index' }, { name: 'Legal' }]
   },
   { name: 'Contact' },
   { name: 'Index' }
@@ -52,7 +49,7 @@ It’s very common to customize each page's title, rather than just using the fi
 
 That’s where `_meta.json` comes in. You can have an `_meta.json` file in each directory, and it will be used to override the default configuration of each page:
 
-```
+```text
 pages/
   _meta.json
   contact.md
