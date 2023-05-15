@@ -1,5 +1,6 @@
 import cn from 'clsx'
 import type { ReactElement, ReactNode } from 'react'
+
 import { InformationCircleIcon } from '../icons'
 
 const TypeToEmoji = {
