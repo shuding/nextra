@@ -279,8 +279,8 @@ importers:
         specifier: ^0.14.2
         version: 0.14.2
       slash:
-        specifier: ^3.0.0
-        version: 3.0.0
+        specifier: ^5.0.0
+        version: 5.0.0
       title:
         specifier: ^3.5.3
         version: 3.5.3
@@ -7093,6 +7093,7 @@ packages:
   /slash@3.0.0:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
     engines: {node: '>=8'}
+    dev: true
 
   /slash@4.0.0:
     resolution: {integrity: sha512-3dOsAHXXUkQTpOYcoAxLIorMTp4gIQr5IW3iVb7A7lFIp0VHhnynm9izx6TssdrIcVIESAlVjtnO2K8bg+Coew==}
@@ -7102,7 +7103,6 @@ packages:
   /slash@5.0.0:
     resolution: {integrity: sha512-n6KkmvKS0623igEVj3FF0OZs1gYYJ0o0Hj939yc1fyxl2xt+xYpLnzJB6xBSqOfV9ZFLEWodBBN/heZJahuIJQ==}
     engines: {node: '>=14.16'}
-    dev: true
 
   /smartwrap@2.0.2:
     resolution: {integrity: sha512-vCsKNQxb7PnCNd2wY1WClWifAc2lwqsG8OaswpJkVJsvMGcnEntdTCDajZCkk93Ay1U3t/9puJmb525Rg5MZBA==}
@@ -8484,7 +8484,7 @@ packages:
       remark-math: 5.1.1
       remark-reading-time: 2.0.1
       shiki: 0.14.2
-      slash: 3.0.0
+      slash: 5.0.0
       title: 3.5.3
       unist-util-remove: 3.1.1
       unist-util-visit: 4.1.1

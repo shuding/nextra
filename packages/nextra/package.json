@@ -124,7 +124,7 @@
     "remark-math": "^5.1.1",
     "remark-reading-time": "^2.0.1",
     "shiki": "^0.14.2",
-    "slash": "^3.0.0",
+    "slash": "^5.0.0",
     "title": "^3.5.3",
     "unist-util-remove": "^3.1.1",
     "unist-util-visit": "^4.1.1",
