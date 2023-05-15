@@ -7,6 +7,7 @@ import { collectPostsAndNavs } from './utils/collect'
 export default function Nav(): ReactElement {
   const { opts, config } = useBlogContext()
   const { navPages } = collectPostsAndNavs({ opts, config })
+  const activeFontColor = config.darkMode ? 'nx-text-gray-400' : 'nx-text-gray-600';
   return (
     <div className="nx-mb-8 nx-flex nx-items-center nx-gap-3">
       <div className="nx-flex nx-grow nx-flex-wrap nx-items-center nx-justify-end nx-gap-3">
@@ -15,10 +16,7 @@ export default function Nav(): ReactElement {
             return (
               <span
                 key={page.route}
-                className={`nx-cursor-default ${config.darkMode ?
-                  'nx-text-gray-400' : 'nx-text-gray-600'}`
-                }
-              >
+                className={'nx-cursor-default ' + activeFontColor}>
                 {page.frontMatter?.title || page.name}
               </span>
             )
