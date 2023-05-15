@@ -270,7 +270,7 @@ function App() {
   return (
     <div>
       <p>{totalUsers} users listed</p>
-      {data.map((users) => {
+      {data.map(users => {
         // `data` is an array of each page's API response.
         return users.map(user => <div key={user.id}>{user.name}</div>)
       })}

@@ -4,7 +4,7 @@ import { Callout, FileTree, Link } from 'nextra-theme-docs'
 
 https://google.com/da;djaldhksagfugsufgasuyfgyuasgfuasgdjasbdjasdjkasfuydfasyrdyafsdygasjdgasgdsafgdhjfasgjdfsahjdfsahjgdasgdjkasgdkjasgdkjasgdkagdkjasgdkjagdkjagdkagdkagdkjagdkagdkagdkagda
 
-__esModule
+\_\_esModule
 
 <Link href="https://google.com">Link</Link>
 
@@ -31,8 +31,8 @@ const fetcher = (...args) => fetch(...args).then(res => res.json())
 ```
 
 <Callout emoji="💡">
-  If you want to use GraphQL API or libs like Axios, you can create your own fetcher function.
-  Check [here](/docs/data-fetching) for more examples.
+  If you want to use GraphQL API or libs like Axios, you can create your own
+  fetcher function. Check [here](/docs/data-fetching) for more examples.
 </Callout>
 
 <FileTree>
@@ -59,9 +59,7 @@ const fetcher = (...args) => fetch(...args).then(res => res.json())
 </details>
 
 <details>
-  <summary>
-    Renders on next line
-  </summary>
+  <summary>Renders on next line</summary>
   <div className="nx-flex nx-justify-center">content</div>
 </details>
 
@@ -70,7 +68,7 @@ Then you can import `useSWR` and start using it inside any function components:
 ```jsx
 import useSWR from 'swr'
 
-function Profile () {
+function Profile() {
   const { data, error } = useSWR('/api/user/123', fetcher)
 
   if (error) return <div>failed to load</div>
@@ -92,7 +90,7 @@ When building a web app, you might need to reuse the data in many places of the 
 on top of SWR:
 
 ```jsx /data/
-function useUser (id) {
+function useUser(id) {
   const { data, error } = useSWR(`/api/user/${id}`, fetcher)
 
   return {
@@ -106,7 +104,7 @@ function useUser (id) {
 And use it in your components:
 
 ```jsx
-function Avatar ({ id }) {
+function Avatar({ id }) {
   const { user, isLoading, isError } = useUser(id)
 
   if (isLoading) return <Spinner />
@@ -125,7 +123,7 @@ In a real-world example, our website shows a navbar and the content, both depend
 import { Welcome } from '@components/diagrams/welcome'
 
 <div className="mt-8">
-  <Welcome/>
+  <Welcome />
 </div>
 
 Traditionally, we fetch data once using `useEffect` in the top level component, and pass it to child components via props (notice that we don't handle error state for now):
@@ -133,7 +131,7 @@ Traditionally, we fetch data once using `useEffect` in the top level component, 
 ```jsx {7-11,17,18,27}
 // page component
 
-function Page () {
+function Page() {
   const [user, setUser] = useState(null)
 
   // fetch data
@@ -144,28 +142,32 @@ function Page () {
   }, [])
 
   // global loading state
-  if (!user) return <Spinner/>
+  if (!user) return <Spinner />
 
-  return <div>
-    <Navbar user={user} />
-    <Content user={user} />
-  </div>
+  return (
+    <div>
+      <Navbar user={user} />
+      <Content user={user} />
+    </div>
+  )
 }
 
 // child components
 
-function Navbar ({ user }) {
-  return <div>
-    ...
-    <Avatar user={user} />
-  </div>
+function Navbar({ user }) {
+  return (
+    <div>
+      ...
+      <Avatar user={user} />
+    </div>
+  )
 }
 
-function Content ({ user }) {
+function Content({ user }) {
   return <h1>Welcome back, {user.name}</h1>
 }
 
-function Avatar ({ user }) {
+function Avatar({ user }) {
   return <img src={user.avatar} alt={user.name} />
 }
 ```
@@ -180,28 +182,32 @@ SWR solves the problem perfectly. With the `useUser` hook we just created, the c
 
 ```jsx {20,26}
 // page component
-function Page () {
-  return <div>
-    <Navbar />
-    <Content />
-  </div>
+function Page() {
+  return (
+    <div>
+      <Navbar />
+      <Content />
+    </div>
+  )
 }
 
 // child components
-function Navbar () {
-  return <div>
-    ...
-    <Avatar />
-  </div>
+function Navbar() {
+  return (
+    <div>
+      ...
+      <Avatar />
+    </div>
+  )
 }
 
-function Content () {
+function Content() {
   const { user, isLoading } = useUser()
   if (isLoading) return <Spinner />
   return <h1>Welcome back, {user.name}</h1>
 }
 
-function Avatar () {
+function Avatar() {
   const { user, isLoading } = useUser()
   if (isLoading) return <Spinner />
   return <img src={user.avatar} alt={user.name} />

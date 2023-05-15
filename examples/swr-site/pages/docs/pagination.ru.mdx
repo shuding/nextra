@@ -270,7 +270,7 @@ function App() {
   return (
     <div>
       <p>{totalUsers} users listed</p>
-      {data.map((users) => {
+      {data.map(users => {
         // `data` — это массив ответов API каждой страницы.
         return users.map(user => <div key={user.id}>{user.name}</div>)
       })}

@@ -26,17 +26,17 @@ const fetcher = (...args) => fetch(...args).then(res => res.json())
 ```
 
 <Callout emoji="💡">
-    Si tu quieres usar API GraphQL o librerías como Axios, puedes crear tu propia función fetcher. Consulta
-    [aqui](/docs/data-fetching) para ver más ejemplos.
+  Si tu quieres usar API GraphQL o librerías como Axios, puedes crear tu propia
+  función fetcher. Consulta [aqui](/docs/data-fetching) para ver más ejemplos.
 </Callout>
 
 Luego puede importar `useSWR` y empezar a usarlo dentro de cualquier componente de la función:
 
 ```jsx
-import useSWR from "swr"
+import useSWR from 'swr'
 
-function Profile () {
-  const { data, error } = useSWR("/api/user/123", fetcher)
+function Profile() {
+  const { data, error } = useSWR('/api/user/123', fetcher)
 
   if (error) return <div>failed to load</div>
   if (!data) return <div>loading...</div>
@@ -55,14 +55,14 @@ Cuando construye una aplicación web, es posible que haya que reutilizar los dat
 Es increíblemente fácil crear hooks de datos reutilizables sobre SWR:
 
 ```jsx
-function useUser (id) {
-    const { data, error } = useSWR(`/api/user/${id}`, fetcher)
+function useUser(id) {
+  const { data, error } = useSWR(`/api/user/${id}`, fetcher)
 
-    return {
-        user: data,
-        isLoading: !error && !data,
-        isError: error
-    }
+  return {
+    user: data,
+    isLoading: !error && !data,
+    isError: error
+  }
 }
 ```
 
@@ -70,11 +70,11 @@ Y utilícelo en sus componentes:
 
 ```jsx
 function Avatar({ id }) {
-   const { user, isLoading, isError } = useUser(id)
+  const { user, isLoading, isError } = useUser(id)
 
-   if(isLoading) return <Spinner />
-   if (isError) return <Error />
-   return <img src={user.avatar} />
+  if (isLoading) return <Spinner />
+  if (isError) return <Error />
+  return <img src={user.avatar} />
 }
 ```
 
@@ -90,7 +90,7 @@ ambos dependen del `user`:
 import { Welcome } from '@components/diagrams/welcome'
 
 <div className="mt-8">
-  <Welcome/>
+  <Welcome />
 </div>
 
 Tradicionalmente, obtenemos los datos una vez utilizando `useEffect` en el componente de nivel superiror, y pasarlo a los componentes hijos
@@ -104,9 +104,9 @@ function Page() {
 
   // obtener datos
   useEffect(() => {
-    fetch("/api/user")
-      .then((res) => res.json())
-      .then((data) => setUser(data))
+    fetch('/api/user')
+      .then(res => res.json())
+      .then(data => setUser(data))
   }, [])
 
   // estado de carga global
@@ -150,23 +150,26 @@ Los componentes dentro del contenido de la página pueden ser dinámicos, y comp
 SWR resuelve el problema perfectamente, Con el hook `useUser` que acabamos de crear, el código puede ser refactorizado a:
 
 ```jsx {20,26}
-
 // componente de la página
 
-function Page () {
-  return <div>
-    <Navbar />
-    <Content />
-  </div>
+function Page() {
+  return (
+    <div>
+      <Navbar />
+      <Content />
+    </div>
+  )
 }
 
 // componentes hijos
 
 function Navbar() {
-   return <div>
-    ...
-    <Avatar />
-  </div>
+  return (
+    <div>
+      ...
+      <Avatar />
+    </div>
+  )
 }
 
 function Content() {
@@ -177,7 +180,7 @@ function Content() {
 
 function Avatar() {
   const { user, isLoading } = useUser()
-  if(isLoading) return <Spinner />
+  if (isLoading) return <Spinner />
   return <img src={user.avatar} alt={user.name} />
 }
 ```
