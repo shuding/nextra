@@ -104,8 +104,7 @@
     "types:check": "tsc --noEmit",
     "test": "vitest run",
     "prepublishOnly": "pnpm build",
-    "clean": "rimraf ./dist ./style.css",
-    "format": "prettier --ignore-path ../../.gitignore --write --list-different ."
+    "clean": "rimraf ./dist ./style.css"
   },
   "dependencies": {
     "@mdx-js/mdx": "^2.3.0",
