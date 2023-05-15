@@ -11,19 +11,22 @@ when the user clicks the “Logout” button.
 ```jsx
 import useSWR, { useSWRConfig } from 'swr'
 
-function App () {
+function App() {
   const { mutate } = useSWRConfig()
 
   return (
     <div>
       <Profile />
-      <button onClick={() => {
-        // set the cookie as expired
-        document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+      <button
+        onClick={() => {
+          // set the cookie as expired
+          document.cookie =
+            'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
 
-        // tell all SWRs with this key to revalidate
-        mutate('/api/user')
-      }}>
+          // tell all SWRs with this key to revalidate
+          mutate('/api/user')
+        }}
+      >
         Logout
       </button>
     </div>
@@ -44,25 +47,29 @@ revalidating and finally replace it with the latest data.
 ```jsx
 import useSWR, { useSWRConfig } from 'swr'
 
-function Profile () {
+function Profile() {
   const { mutate } = useSWRConfig()
   const { data } = useSWR('/api/user', fetcher)
 
   return (
     <div>
       <h1>My name is {data.name}.</h1>
-      <button onClick={async () => {
-        const newName = data.name.toUpperCase()
+      <button
+        onClick={async () => {
+          const newName = data.name.toUpperCase()
 
-        // update the local data immediately, but disable the revalidation
-        mutate('/api/user', { ...data, name: newName }, false)
+          // update the local data immediately, but disable the revalidation
+          mutate('/api/user', { ...data, name: newName }, false)
 
-        // send a request to the API to update the source
-        await requestUpdateUsername(newName)
+          // send a request to the API to update the source
+          await requestUpdateUsername(newName)
 
-        // trigger a revalidation (refetch) to make sure our local data is correct
-        mutate('/api/user')
-      }}>Uppercase my name!</button>
+          // trigger a revalidation (refetch) to make sure our local data is correct
+          mutate('/api/user')
+        }}
+      >
+        Uppercase my name!
+      </button>
     </div>
   )
 }
@@ -75,9 +82,9 @@ But many POST APIs will just return the updated data directly, so we don’t nee
 Here’s an example showing the “local mutate - request - update” usage:
 
 ```jsx
-mutate('/api/user', newUser, false)             // use `false` to mutate without revalidation
+mutate('/api/user', newUser, false) // use `false` to mutate without revalidation
 mutate('/api/user', updateUser(newUser), false) // `updateUser` is a Promise of the request,
-                                                // which returns the updated document
+// which returns the updated document
 ```
 
 ## Mutate Based on Current Data
@@ -124,20 +131,24 @@ It is functionally equivalent to the global `mutate` function but does not requi
 ```jsx
 import useSWR from 'swr'
 
-function Profile () {
+function Profile() {
   const { data, mutate } = useSWR('/api/user', fetcher)
 
   return (
     <div>
       <h1>My name is {data.name}.</h1>
-      <button onClick={async () => {
-        const newName = data.name.toUpperCase()
-        // send a request to the API to update the data
-        await requestUpdateUsername(newName)
-        // update the local data immediately and revalidate (refetch)
-        // NOTE: key is not required when using useSWR's mutate as it's pre-bound
-        mutate({ ...data, name: newName })
-      }}>Uppercase my name!</button>
+      <button
+        onClick={async () => {
+          const newName = data.name.toUpperCase()
+          // send a request to the API to update the data
+          await requestUpdateUsername(newName)
+          // update the local data immediately and revalidate (refetch)
+          // NOTE: key is not required when using useSWR's mutate as it's pre-bound
+          mutate({ ...data, name: newName })
+        }}
+      >
+        Uppercase my name!
+      </button>
     </div>
   )
 }

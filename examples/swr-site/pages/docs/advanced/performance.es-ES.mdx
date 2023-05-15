@@ -21,29 +21,29 @@ Es muy común reutilizar los hooks SWR en tu aplicación. Por ejemplo, una aplic
 actual 5 veces:
 
 ```jsx
-
 function useUser() {
-   return useSWR('/api/user', fetcher)
+  return useSWR('/api/user', fetcher)
 }
 
-function Avatar () {
-   const { data, error } = useUser()
-   if (error) return <Error />
-   if (!data) return <Spinner />
+function Avatar() {
+  const { data, error } = useUser()
+  if (error) return <Error />
+  if (!data) return <Spinner />
 
-   return <img src={data.avatar_url} />
+  return <img src={data.avatar_url} />
 }
 
 function App() {
-  return <>
-    <Avatar />
-    <Avatar />
-    <Avatar />
-    <Avatar />
-    <Avatar />
-  </>
+  return (
+    <>
+      <Avatar />
+      <Avatar />
+      <Avatar />
+      <Avatar />
+      <Avatar />
+    </>
+  )
 }
-
 ```
 
 Cada componente `<Avatar/>` tiene un hook `useSWR` en su interior. Dado que tienen el mismo key SWR y
@@ -68,13 +68,11 @@ Por ejemplo, algunas respuestas de la API devuelven una marca de tiempo del serv
 Por ejemplo, si imprimimos esos valores dentro de un ciclo de vida completo de obtención de datos, será algo como esto:
 
 ```jsx
-
-function App () {
+function App() {
   const { data, error, isValidating } = useSWR('/api', fetcher)
   console.log(data, error, isValidating)
   return null
 }
-
 ```
 
 En el peor de los casos (si la primera solicitud falló, entonces el reintento fue exitoso). Se verán 4 líneas de registros:
@@ -93,11 +91,10 @@ Los cambios de estado tienen sentido. Pero eso también significa que nuestro co
 Si cambiamos nuestro componente para usar solo `data`:
 
 ```jsx
-
-function App () {
-   const { data } = useSWR('/api', fetcher)
-   console.log(data)
-   return null
+function App() {
+  const { data } = useSWR('/api', fetcher)
+  console.log(data)
+  return null
 }
 ```
 
@@ -106,7 +103,7 @@ La magia ocurre - ahora solo hay **2 rederizaciones**:
 ```js
 // console.log(data)
 undefined // => hydration / initial render
-Data      // => end retrying, get the data
+Data // => end retrying, get the data
 ```
 
 El mismo proceso ha ocurrido internamente, hubo un error de la primera solicitud, entonces tenemos los datos del reintento.

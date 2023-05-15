@@ -38,8 +38,7 @@
     "dev:tailwind": "TAILWIND_MODE=watch pnpm postcss css/styles.css -o style.css --watch",
     "prepublishOnly": "pnpm build:all",
     "test": "vitest --run",
-    "clean": "rimraf ./dist ./style.css",
-    "format": "prettier --ignore-path ../../.gitignore --write --list-different ."
+    "clean": "rimraf ./dist ./style.css"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.10",

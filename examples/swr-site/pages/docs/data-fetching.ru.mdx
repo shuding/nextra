@@ -11,8 +11,8 @@ const { data, error } = useSWR(key, fetcher)
 Возвращаемое значение будет передано как `data`, и если оно будет выброшено, оно будет перехвачено как` error`.
 
 <Callout emoji="💡">
-  Обратите внимание, что <code>fetcher</code> можно не указывать в параметрах, если он{' '}
-  [предоставляется глобально](/docs/global-configuration).
+  Обратите внимание, что <code>fetcher</code> можно не указывать в параметрах,
+  если он [предоставляется глобально](/docs/global-configuration).
 </Callout>
 
 ## Выборка (Fetch)
@@ -24,15 +24,18 @@ import fetch from 'unfetch'
 
 const fetcher = url => fetch(url).then(r => r.json())
 
-function App () {
+function App() {
   const { data, error } = useSWR('/api/data', fetcher)
   // ...
 }
 ```
 
 <Callout emoji="💡">
-  Если вы используете <strong>Next.js</strong>, вам не нужно импортировать этот полифил:<br/>
-  [Новые встроенные полифилы: fetch(), URL, и Object.assign](https://nextjs.org/blog/next-9-1-7#new-built-in-polyfills-fetch-url-and-objectassign)
+  Если вы используете <strong>Next.js</strong>, вам не нужно импортировать этот
+  полифил:
+  <br />
+  [Новые встроенные полифилы: fetch(), URL, и
+  Object.assign](https://nextjs.org/blog/next-9-1-7#new-built-in-polyfills-fetch-url-and-objectassign)
 </Callout>
 
 ## Axios
@@ -42,7 +45,7 @@ import axios from 'axios'
 
 const fetcher = url => axios.get(url).then(res => res.data)
 
-function App () {
+function App() {
   const { data, error } = useSWR('/api/data', fetcher)
   // ...
 }
@@ -57,7 +60,7 @@ import { request } from 'graphql-request'
 
 const fetcher = query => request('/api/graphql', query)
 
-function App () {
+function App() {
   const { data, error } = useSWR(
     `{
       Movie(title: "Начало") {

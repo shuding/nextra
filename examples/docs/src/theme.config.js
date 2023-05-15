@@ -71,5 +71,5 @@ export default {
         site: 'https://nextra.vercel.app'
       }
     }
-  },
+  }
 }

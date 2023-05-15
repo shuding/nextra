@@ -1,9 +1,9 @@
 export default function Authors({ date, children }) {
   return (
-    <div className="mt-8 mb-16 text-sm text-gray-400">
+    <div className="mb-16 mt-8 text-sm text-gray-400">
       {date} by {children}
     </div>
-  );
+  )
 }
 
 export function Author({ name, link }) {
@@ -19,5 +19,5 @@ export function Author({ name, link }) {
         {name}
       </a>
     </span>
-  );
+  )
 }

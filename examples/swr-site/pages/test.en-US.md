@@ -1,5 +1,5 @@
 ---
-mdxOptions: { format: "md" }
+mdxOptions: { format: 'md' }
 ---
 
 # Hello!

@@ -102,5 +102,5 @@ export function hashFnv32a(str: string, seed = 0x811c9dc5): string {
 }
 
 export function getDefault<T>(module: T & { default?: T }): T {
-  return module.default || module;
+  return module.default || module
 }

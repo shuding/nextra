@@ -3,13 +3,14 @@ import { Callout } from 'nextra-theme-docs'
 # Suspense
 
 <Callout emoji="🚨" type="error">
-  Suspense is currently an <strong>experimental</strong> feature of React. These APIs may change significantly and without a warning before they become a part of React.<br/>
+  Suspense is currently an <strong>experimental</strong> feature of React. These
+  APIs may change significantly and without a warning before they become a part
+  of React.
+  <br />
   [More information](https://reactjs.org/docs/concurrent-mode-suspense.html)
 </Callout>
 
-<Callout>
-  Note that React Suspense is not yet supported in SSR mode.
-</Callout>
+<Callout>Note that React Suspense is not yet supported in SSR mode.</Callout>
 
 You can enable the `suspense` option to use SWR with React Suspense:
 
@@ -17,15 +18,15 @@ You can enable the `suspense` option to use SWR with React Suspense:
 import { Suspense } from 'react'
 import useSWR from 'swr'
 
-function Profile () {
+function Profile() {
   const { data } = useSWR('/api/user', fetcher, { suspense: true })
   return <div>hello, {data.name}</div>
 }
 
-function App () {
+function App() {
   return (
     <Suspense fallback={<div>loading...</div>}>
-      <Profile/>
+      <Profile />
     </Suspense>
   )
 }
@@ -53,7 +54,7 @@ But if an error occurred, you need to use an [error boundary](https://reactjs.or
 Normally, when you enabled `suspense` it's guaranteed that `data` will always be ready on render:
 
 ```jsx
-function Profile () {
+function Profile() {
   const { data } = useSWR('/api/user', fetcher, { suspense: true })
 
   // `data` will never be `undefined`
@@ -64,8 +65,10 @@ function Profile () {
 However, when using it together with conditional fetching or dependent fetching, `data` will be `undefined` if the request is **paused**:
 
 ```jsx
-function Profile () {
-  const { data } = useSWR(isReady ? '/api/user' : null, fetcher, { suspense: true })
+function Profile() {
+  const { data } = useSWR(isReady ? '/api/user' : null, fetcher, {
+    suspense: true
+  })
 
   // `data` will be `undefined` if `isReady` is false
   // ...

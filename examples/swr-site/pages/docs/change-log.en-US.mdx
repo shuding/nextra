@@ -8,10 +8,10 @@ export const ReleasesRenderer = () => {
 }
 
 export const getStaticProps = () => {
-  return ({ props: { ssg: 'Test SSG ' + Date.now() }, revalidate: 10 })
+  return { props: { ssg: 'Test SSG ' + Date.now() }, revalidate: 10 }
 }
 
-<ReleasesRenderer/>
+<ReleasesRenderer />
 
 This page should not have the sidebar because it has
 

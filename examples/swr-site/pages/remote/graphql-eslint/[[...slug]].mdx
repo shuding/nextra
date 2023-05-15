@@ -13,7 +13,6 @@ export const getStaticProps = async ({ params }) => {
     rootDir: 'website/src/pages/docs/',
     slug: params.slug
   })
-
   const content = await fs.readFile(filePath, 'utf8')
   return {
     props: {
