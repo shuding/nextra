@@ -9,7 +9,7 @@
 const { data } = useSWR(shouldFetch ? '/api/data' : null, fetcher)
 
 // ...или вернуть ложное значение
-const { data } = useSWR(() => shouldFetch ? '/api/data' : null, fetcher)
+const { data } = useSWR(() => (shouldFetch ? '/api/data' : null), fetcher)
 
 // ...или вывести ошибку, если user.id не определен
 const { data } = useSWR(() => '/api/data?uid=' + user.id, fetcher)
@@ -20,7 +20,7 @@ const { data } = useSWR(() => '/api/data?uid=' + user.id, fetcher)
 SWR также позволяет получать данные, которые зависят от других данных. Это обеспечивает максимально возможный параллелизм (избегая водопадов), а также последовательную выборку, когда для следующей выборки данных требуется фрагмент динамических данных.
 
 ```js
-function MyProjects () {
+function MyProjects() {
   const { data: user } = useSWR('/api/user')
   const { data: projects } = useSWR(() => '/api/projects?uid=' + user.id)
   // При передаче функции SWR будет использовать возвращаемое значение

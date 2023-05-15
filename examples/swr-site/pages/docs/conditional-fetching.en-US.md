@@ -9,7 +9,7 @@ Use `null` or pass a function as `key` to conditionally fetch data. If the funct
 const { data } = useSWR(shouldFetch ? '/api/data' : null, fetcher)
 
 // ...or return a falsy value
-const { data } = useSWR(() => shouldFetch ? '/api/data' : null, fetcher)
+const { data } = useSWR(() => (shouldFetch ? '/api/data' : null), fetcher)
 
 // ...or throw an error when user.id is not defined
 const { data } = useSWR(() => '/api/data?uid=' + user.id, fetcher)
@@ -20,7 +20,7 @@ const { data } = useSWR(() => '/api/data?uid=' + user.id, fetcher)
 SWR also allows you to fetch data that depends on other data. It ensures the maximum possible parallelism (avoiding waterfalls), as well as serial fetching when a piece of dynamic data is required for the next data fetch to happen.
 
 ```js
-function MyProjects () {
+function MyProjects() {
   const { data: user } = useSWR('/api/user')
   const { data: projects } = useSWR(() => '/api/projects?uid=' + user.id)
   // When passing a function, SWR will use the return

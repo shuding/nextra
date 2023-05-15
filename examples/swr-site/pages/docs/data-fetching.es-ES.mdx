@@ -12,8 +12,8 @@ y devuelve los datos.
 El valor devuelto será pasado como `data`, y si lanza, será capturado como `error`.
 
 <Callout emoji="💡">
-  Tenga en cuenta que el <code>fetcher</code> puede ser omitido de los parámetros si se
-  [proporciona globalmente](/docs/global-configuration).
+  Tenga en cuenta que el <code>fetcher</code> puede ser omitido de los
+  parámetros si se [proporciona globalmente](/docs/global-configuration).
 </Callout>
 
 ## Fetch
@@ -25,15 +25,17 @@ import fetch from 'unfetch'
 
 const fetcher = url => fetch(url).then(r => r.json())
 
-function App () {
+function App() {
   const { data, error } = useSWR('/api/data', fetcher)
   // ...
 }
 ```
 
 <Callout emoji="💡">
-  Si estás usando <strong>Next.js</strong>, no necesita importar este polyfill:<br />
-  [Nuevos Polyfills Incorporados: fetch(), URL, y Object.assign](https://nextjs.org/blog/next-9-1-7#new-built-in-polyfills-fetch-url-and-objectassign)
+  Si estás usando <strong>Next.js</strong>, no necesita importar este polyfill:
+  <br />
+  [Nuevos Polyfills Incorporados: fetch(), URL, y
+  Object.assign](https://nextjs.org/blog/next-9-1-7#new-built-in-polyfills-fetch-url-and-objectassign)
 </Callout>
 
 ## Axios
@@ -43,7 +45,7 @@ import axios from 'axios'
 
 const fetcher = url => axios.get(url).then(res => res.data)
 
-function App () {
+function App() {
   const { data, error } = useSWR('/api/data', fetcher)
   // ...
 }
@@ -58,7 +60,7 @@ import { request } from 'graphql-request'
 
 const fetcher = query => request('/api/graphql', query)
 
-function App () {
+function App() {
   const { data, error } = useSWR(
     `{
       Movie(title: "Inception") {
