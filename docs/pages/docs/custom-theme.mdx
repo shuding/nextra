@@ -40,9 +40,7 @@ export default function Layout({ children }: NextraThemeLayoutProps) {
   return (
     <div>
       <h1>My Theme</h1>
-      <div style={{ border: '1px solid' }}>
-        {children}
-      </div>
+      <div style={{ border: '1px solid' }}>{children}</div>
     </div>
   )
 }
@@ -55,7 +53,7 @@ import customThemeImage from '../../public/assets/docs/custom-theme.png'
 
 <Screenshot src={customThemeImage} alt="Custom theme" />
 
-<br/>
+<br />
 
 Inside your theme layout, you can use CSS imports or other ways to style it. Next.js hooks such as `useRouter`, `Head` are also available.
 
@@ -64,6 +62,7 @@ Inside your theme layout, you can use CSS imports or other ways to style it. Nex
 Other than `children`, some other useful props are passed to the theme layout too. With the `pageOpts` props, the theme can access the page’s meta information.
 
 For example, let’s implement these features:
+
 - Render the page title in `<title>`
 - Show a simple table of contents
 - Add a meta tag for `og:image` via the front matter
@@ -73,11 +72,7 @@ import type { NextraThemeLayoutProps } from 'nextra'
 import Head from 'next/head'
 
 export default function Layout({ children, pageOpts }: NextraThemeLayoutProps) {
-  const {
-    title,
-    frontMatter,
-    headings
-  } = pageOpts
+  const { title, frontMatter, headings } = pageOpts
 
   return (
     <div>
@@ -88,13 +83,11 @@ export default function Layout({ children, pageOpts }: NextraThemeLayoutProps) {
       <h1>My Theme</h1>
       Table of Contents:
       <ul>
-        {headings.map((heading) => (
+        {headings.map(heading => (
           <li key={heading.value}>{heading.value}</li>
         ))}
       </ul>
-      <div style={{ border: '1px solid' }}>
-        {children}
-      </div>
+      <div style={{ border: '1px solid' }}>{children}</div>
     </div>
   )
 }
@@ -116,7 +109,7 @@ export default function Layout({ children, pageOpts }: NextraThemeLayoutProps) {
   return (
     <div>
       <h1>My Theme</h1>
-      {pageMap.map((item) => {
+      {pageMap.map(item => {
         if (item.kind === 'MdxPage') {
           return (
             <Link key={item.name} href={item.route}>
@@ -133,6 +126,7 @@ export default function Layout({ children, pageOpts }: NextraThemeLayoutProps) {
 ```
 
 There are other item kinds such as `Folder` (for directories) and `Meta` (for `_meta.json` files). All the items are typed so you can easily know the properties.
+
 </Steps>
 
 ## Advanced Usage
