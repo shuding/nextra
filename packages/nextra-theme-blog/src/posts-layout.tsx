@@ -18,6 +18,7 @@ export const PostsLayout = ({
   const router = useRouter()
   const { type } = opts.frontMatter
   const tagName = type === 'tag' ? router.query.tag : null
+  const fontColor = config.darkMode ? 'nx-text-gray-400' : 'nx-text-gray-600'
   const postList = posts.map(post => {
     if (tagName) {
       const tags = getTags(post)
@@ -42,7 +43,7 @@ export const PostsLayout = ({
           </Link>
         </h3>
         {description && (
-          <p className="nx-mb-2 nx-text-gray-400">
+          <p className={'nx-mb-2 ' + fontColor}>
             {description}
             {config.readMore && (
               <Link href={post.route} passHref legacyBehavior>
@@ -53,7 +54,7 @@ export const PostsLayout = ({
         )}
         {date && (
           <time
-            className="nx-text-sm nx-text-gray-300"
+            className={'nx-text-sm  ' + fontColor}
             dateTime={date.toISOString()}
           >
             {date.toDateString()}
