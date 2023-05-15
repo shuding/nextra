@@ -110,9 +110,10 @@ export type PageItem = (MdxFile | FolderWithoutChildren) & {
   isUnderCurrentDocsTree?: boolean
 }
 
-export type MenuItem = (MdxFile | FolderWithoutChildren) & IMenuItem & {
-  children?: PageItem[]
-}
+export type MenuItem = (MdxFile | FolderWithoutChildren) &
+  IMenuItem & {
+    children?: PageItem[]
+  }
 
 type DocsItem = (MdxFile | FolderWithoutChildren) & {
   title: string

@@ -15,7 +15,7 @@ import { Callout } from 'nextra-theme-docs'
 ### API
 
 ```jsx
-function myMiddleware (useSWRNext) {
+function myMiddleware(useSWRNext) {
   return (key, fetcher, config) => {
     // До выполнения хука...
 
@@ -43,7 +43,7 @@ useSWR(key, fetcher, { use: [myMiddleware] })
 Промежуточное ПО расширяется как обычные опции. Например:
 
 ```jsx
-function Bar () {
+function Bar() {
   useSWR(key, fetcher, { use: [c] })
   // ...
 }
@@ -52,7 +52,7 @@ function Foo() {
   return (
     <SWRConfig value={{ use: [a] }}>
       <SWRConfig value={{ use: [b] }}>
-        <Bar/>
+        <Bar />
       </SWRConfig>
     </SWRConfig>
   )
@@ -147,16 +147,18 @@ function laggy(useSWRNext) {
     }, [])
 
     // Возврат к предыдущим данным, если текущие данные не определены.
-    const dataOrLaggyData = swr.data === undefined ? laggyDataRef.current : swr.data
+    const dataOrLaggyData =
+      swr.data === undefined ? laggyDataRef.current : swr.data
 
     // Показывает предыдущие данные?
-    const isLagging = swr.data === undefined && laggyDataRef.current !== undefined
+    const isLagging =
+      swr.data === undefined && laggyDataRef.current !== undefined
 
     // Также добавьте поле `isLagging` в SWR.
     return Object.assign({}, swr, {
       data: dataOrLaggyData,
       isLagging,
-      resetLaggy,
+      resetLaggy
     })
   }
 }

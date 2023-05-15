@@ -83,9 +83,9 @@ describe('normalize-page', () => {
   it('/500 page', () => {
     const result = normalizePages({
       list: [
-        { kind: 'MdxPage',name: '500', route: '/500' },
-        { kind: 'MdxPage',name: 'get-started', route: '/get-started' },
-        { kind: 'MdxPage',name: 'index', route: '/' },
+        { kind: 'MdxPage', name: '500', route: '/500' },
+        { kind: 'MdxPage', name: 'get-started', route: '/get-started' },
+        { kind: 'MdxPage', name: 'index', route: '/' },
         {
           kind: 'Meta',
           data: {

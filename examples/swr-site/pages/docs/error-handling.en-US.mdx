@@ -48,8 +48,9 @@ const { data, error } = useSWR('/api/user', fetcher)
 ```
 
 <Callout emoji="💡">
-  Note that <code>data</code> and <code>error</code> can exist at the same time. So the UI can display the existing data,
-  while knowing the upcoming request has failed.
+  Note that <code>data</code> and <code>error</code> can exist at the same time.
+  So the UI can display the existing data, while knowing the upcoming request
+  has failed.
 </Callout>
 
 [Here](/examples/error-handling) we have an example.
@@ -90,14 +91,16 @@ But in case you want to handle the error globally, to notify the UI to show a [t
 there's an [`onError`](/docs/options#options) event:
 
 ```jsx
-<SWRConfig value={{
-  onError: (error, key) => {
-    if (error.status !== 403 && error.status !== 404) {
-      // We can send the error to Sentry,
-      // or show a notification UI.
+<SWRConfig
+  value={{
+    onError: (error, key) => {
+      if (error.status !== 403 && error.status !== 404) {
+        // We can send the error to Sentry,
+        // or show a notification UI.
+      }
     }
-  }
-}}>
+  }}
+>
   <MyApp />
 </SWRConfig>
 ```

@@ -10,7 +10,7 @@ Si la función lanza o devuelve un falsy value, SWR no iniciará la petición.
 const { data } = useSWR(shouldFetch ? '/api/data' : null, fetcher)
 
 // ...o devuelve un falsy value
-const { data } = useSWR(() => shouldFetch ? '/api/data' : null, fetcher)
+const { data } = useSWR(() => (shouldFetch ? '/api/data' : null), fetcher)
 
 // ...o lanza un error cuando user.id no está definifo
 const { data } = useSWR(() => '/api/data?uid=' + user.id, fetcher)
@@ -21,7 +21,7 @@ const { data } = useSWR(() => '/api/data?uid=' + user.id, fetcher)
 SWR también permite obtener datos que dependen de otros datos. Garantiza el máximo paralelismo posible (evitando las cascadas), así como la obtención en serie cuando se necesita un dato dinámico para que se produzca la siguiente obtención de datos.
 
 ```js
-function MyProjects () {
+function MyProjects() {
   const { data: user } = useSWR('/api/user')
   const { data: projects } = useSWR(() => '/api/projects?uid=' + user.id)
   // Al pasar una función, SWR utilizará el valor devuelto

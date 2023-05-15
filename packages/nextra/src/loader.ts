@@ -105,10 +105,10 @@ async function loader(
          * `context._module.resourceResolveData.relativePath` use
          * `context._module.resourceResolveData.descriptionFileRoot` instead
          */
-      path.join(
-        context._module.resourceResolveData.descriptionFileRoot,
-        context._module.resourceResolveData.relativePath
-      )
+        path.join(
+          context._module.resourceResolveData.descriptionFileRoot,
+          context._module.resourceResolveData.relativePath
+        )
       : context.resourcePath
   ) as MdxPath
 
