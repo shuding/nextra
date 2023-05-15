@@ -1,6 +1,12 @@
 .next/
 out/
 dist/
-examples/swr-site/pages/remote/graphql-eslint/\[\[...slug\]\].mdx
 pnpm-lock.yaml
 .changeset/*.md
+
+# bellow files is broken since prettier doesn't support MDX2
+examples/swr-site/pages/remote/graphql-eslint/\[\[...slug\]\].mdx
+docs/pages/docs/blog-theme/start.mdx
+docs/pages/docs/docs-theme/start.mdx
+examples/docs/src/pages/themes/docs/index.mdx
+examples/docs/src/pages/get-started.mdx
