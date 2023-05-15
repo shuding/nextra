@@ -46,7 +46,7 @@ export const PostsLayout = ({
           </Link>
         </h3>
         {description && (
-          <p className={'nx-mb-2 ' + textColor}>
+          <p className="nx-mb-2 nx-text-gray-400">
             {description}
             {config.readMore && (
               <Link href={post.route} passHref legacyBehavior>
@@ -57,7 +57,7 @@ export const PostsLayout = ({
         )}
         {date && (
           <time
-            className={'nx-text-sm  ' + textColor}
+            className="nx-text-sm nx-text-gray-300"
             dateTime={date.toISOString()}
           >
             {date.toDateString()}
