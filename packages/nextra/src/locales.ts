@@ -1,4 +1,4 @@
-import type { NextRequest } from 'next/server';
+import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 import { removeBasePath } from 'next/dist/client/remove-base-path'
 import { addBasePath } from 'next/dist/client/add-base-path'
