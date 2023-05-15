@@ -1,2 +1,5 @@
+.next/
+out/
+dist/
 pnpm-lock.yaml
 .changeset/*.md
