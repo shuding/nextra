@@ -23,11 +23,11 @@ export function Breadcrumb({
               className={cn(
                 'nx-whitespace-nowrap nx-transition-colors',
                 isActive
-                  ? 'nx-font-medium nx-text-gray-700 contrast-more:nx-font-bold contrast-more:nx-text-current dark:nx-text-gray-300 contrast-more:dark:nx-text-current'
+                  ? 'nx-font-medium nx-text-gray-700 contrast-more:nx-font-bold contrast-more:nx-text-current dark:nx-text-gray-100 contrast-more:dark:nx-text-current'
                   : [
                       'nx-min-w-[24px] nx-overflow-hidden nx-text-ellipsis',
                       isLink &&
-                        'hover:nx-text-gray-900 dark:hover:nx-text-gray-200'
+                        'hover:nx-text-gray-900 dark:hover:nx-text-gray-100'
                     ]
               )}
               title={item.title}
