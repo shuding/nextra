@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import { cnPageMap, usPageMap } from './__fixture__/pageMap'
-import { normalizePages } from 'nextra/normalize-pages'
+import { cnPageMap, usPageMap } from './fixture/page-maps/pageMap'
+import { normalizePages } from '../src/normalize-pages'
 
 const defaultLocale = 'en-US'
 
@@ -109,5 +109,101 @@ describe('normalize-page', () => {
       route: '/500'
     })
     expect(result).toMatchSnapshot()
+  })
+
+  // https://github.com/shuding/nextra/issues/1888
+  it('should set `route: #` for `type: menu`', () => {
+    const result = normalizePages({
+      list: [
+        {
+          kind: 'Meta',
+          data: {
+            index: {
+              type: 'page',
+              title: 'Nextra',
+              display: 'hidden'
+            },
+            docs: {
+              type: 'page',
+              title: 'Documentation'
+            },
+            explorers: {
+              title: 'Explorers',
+              type: 'menu'
+            },
+            showcase: {
+              type: 'page',
+              title: 'Showcase'
+            },
+            explorers2: {
+              title: 'Explorers2',
+              type: 'menu'
+            },
+            about: {
+              type: 'page',
+              title: 'About'
+            },
+            explorers3: {
+              title: 'Explorers3',
+              type: 'menu'
+            }
+          }
+        },
+        {
+          kind: 'MdxPage',
+          name: 'about',
+          route: '/about'
+        },
+        {
+          kind: 'MdxPage',
+          name: 'showcase',
+          route: '/showcase'
+        }
+      ],
+      locale: 'en-US',
+      route: '/docs'
+    })
+    expect(result.topLevelNavbarItems).toMatchInlineSnapshot(`
+      [
+        {
+          "name": "docs",
+          "route": "#",
+          "title": "Documentation",
+          "type": "page",
+        },
+        {
+          "name": "explorers",
+          "route": "#",
+          "title": "Explorers",
+          "type": "menu",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "showcase",
+          "route": "/showcase",
+          "title": "Showcase",
+          "type": "page",
+        },
+        {
+          "name": "explorers2",
+          "route": "#",
+          "title": "Explorers2",
+          "type": "menu",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "about",
+          "route": "/about",
+          "title": "About",
+          "type": "page",
+        },
+        {
+          "name": "explorers3",
+          "route": "#",
+          "title": "Explorers3",
+          "type": "menu",
+        },
+      ]
+    `)
   })
 })
