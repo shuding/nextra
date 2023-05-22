@@ -5,7 +5,7 @@
 Есть много способов предварительно получить данные для SWR. Для запросов верхнего уровня настоятельно рекомендуется использовать [`rel="preload"`](https://developer.mozilla.org/ru/docs/Web/HTML/Preloading_content):
 
 ```html
-<link rel="preload" href="/api/data" as="fetch" crossorigin="anonymous">
+<link rel="preload" href="/api/data" as="fetch" crossorigin="anonymous" />
 ```
 
 Просто поместите его в свой HTML `<head>`. Это просто, быстро и нативно.
@@ -19,8 +19,11 @@
 ```js
 import { mutate } from 'swr'
 
-function prefetch () {
-  mutate('/api/data', fetch('/api/data').then(res => res.json()))
+function prefetch() {
+  mutate(
+    '/api/data',
+    fetch('/api/data').then(res => res.json())
+  )
   // вторым параметром является промис
   // SWR использует его результат, после того, как он разрешится
 }

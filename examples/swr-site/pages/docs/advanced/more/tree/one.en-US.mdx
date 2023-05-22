@@ -8,11 +8,11 @@ export function getStaticProps() {
   }
 }
 
-export default function(props) {
-  return <>
-    {props.children}
-    <div>
-      foo = {props.foo}
-    </div>
-  </>
+export default function (props) {
+  return (
+    <>
+      {props.children}
+      <div>foo = {props.foo}</div>
+    </>
+  )
 }

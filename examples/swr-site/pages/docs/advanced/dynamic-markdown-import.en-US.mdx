@@ -5,18 +5,18 @@ import { useState } from 'react'
 
 export function Renderer() {
   const [pageOne, setPageOne] = useState(true)
-  const Page = dynamic(
-    () => {
-      if (pageOne) {
-        return import(`./more/tree/one.en-US.mdx`)
-      }
-      return import(`./more/tree/two.en-US.mdx`)
+  const Page = dynamic(() => {
+    if (pageOne) {
+      return import('./more/tree/one.en-US.mdx')
     }
-  );
-  return <>
-    <Page />
-    <button onClick={() => setPageOne(!pageOne)}>Toggle Content</button>
-  </>
+    return import('./more/tree/two.en-US.mdx')
+  })
+  return (
+    <>
+      <Page />
+      <button onClick={() => setPageOne(!pageOne)}>Toggle Content</button>
+    </>
+  )
 }
 
-<Renderer/>
+<Renderer />

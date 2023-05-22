@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import type { ReactNode} from 'react';
+import type { ReactNode } from 'react'
 import { useRef } from 'react'
 import { useBlogContext } from './blog-context'
 import { HeadingContext } from './mdx-theme'
@@ -10,7 +10,7 @@ export const BasicLayout = ({ children }: { children: ReactNode }) => {
   const ref = useRef<HTMLHeadingElement>(null)
   return (
     <article
-      className="nx-container nx-prose-sm dark:nx-prose-dark md:nx-prose"
+      className="nx-container nx-prose max-md:nx-prose-sm dark:nx-prose-dark"
       dir="ltr"
     >
       <Head>

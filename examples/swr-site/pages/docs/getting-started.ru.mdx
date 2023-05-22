@@ -1,4 +1,4 @@
-import { Callout } from 'nextra-theme-docs'
+import { Callout } from 'nextra/components'
 
 # Начало работы
 
@@ -26,9 +26,9 @@ const fetcher = (...args) => fetch(...args).then(res => res.json())
 ```
 
 <Callout emoji="💡">
-  Если вы хотите использовать GraphQL API или библиотеки, такие как Axios, вы можете создать свою
-  собственную fetcher-функцию.
-  Смотрите примеры [здесь](/docs/data-fetching).
+  Если вы хотите использовать GraphQL API или библиотеки, такие как Axios, вы
+  можете создать свою собственную fetcher-функцию. Смотрите примеры
+  [здесь](/docs/data-fetching).
 </Callout>
 
 Затем можете импортировать `useSWR` и использовать его внутри функциональных компонентов:
@@ -36,7 +36,7 @@ const fetcher = (...args) => fetch(...args).then(res => res.json())
 ```jsx
 import useSWR from 'swr'
 
-function Profile () {
+function Profile() {
   const { data, error } = useSWR('/api/user/123', fetcher)
 
   if (error) return <div>ошибка загрузки</div>
@@ -56,7 +56,7 @@ function Profile () {
 пользовательского интерфейса. Создавать многоразовые хуки данных поверх SWR невероятно просто:
 
 ```jsx
-function useUser (id) {
+function useUser(id) {
   const { data, error } = useSWR(`/api/user/${id}`, fetcher)
 
   return {
@@ -70,7 +70,7 @@ function useUser (id) {
 И используйте их в своих компонентах:
 
 ```jsx
-function Avatar ({ id }) {
+function Avatar({ id }) {
   const { user, isLoading, isError } = useUser(id)
 
   if (isLoading) return <Spinner />
@@ -90,7 +90,7 @@ function Avatar ({ id }) {
 import { Welcome } from '@components/diagrams/welcome'
 
 <div className="mt-8">
-  <Welcome/>
+  <Welcome />
 </div>
 
 Традиционно мы получаем данные один раз, используя `useEffect` в компоненте верхнего уровня,
@@ -100,7 +100,7 @@ import { Welcome } from '@components/diagrams/welcome'
 ```jsx {7-11,17,18,27}
 // компонент страницы
 
-function Page () {
+function Page() {
   const [user, setUser] = useState(null)
 
   // выборка данных
@@ -111,28 +111,32 @@ function Page () {
   }, [])
 
   // глобальное состояние загрузки
-  if (!user) return <Spinner/>
+  if (!user) return <Spinner />
 
-  return <div>
-    <Navbar user={user} />
-    <Content user={user} />
-  </div>
+  return (
+    <div>
+      <Navbar user={user} />
+      <Content user={user} />
+    </div>
+  )
 }
 
 // дочерний компонент
 
-function Navbar ({ user }) {
-  return <div>
-    ...
-    <Avatar user={user} />
-  </div>
+function Navbar({ user }) {
+  return (
+    <div>
+      ...
+      <Avatar user={user} />
+    </div>
+  )
 }
 
-function Content ({ user }) {
+function Content({ user }) {
   return <h1>С возвращением, {user.name}</h1>
 }
 
-function Avatar ({ user }) {
+function Avatar({ user }) {
   return <img src={user.avatar} alt={user.name} />
 }
 ```
@@ -150,29 +154,33 @@ SWR отлично решает проблему. С помощью только
 ```jsx {20,26}
 // компонент страницы
 
-function Page () {
-  return <div>
-    <Navbar />
-    <Content />
-  </div>
+function Page() {
+  return (
+    <div>
+      <Navbar />
+      <Content />
+    </div>
+  )
 }
 
 // дочерний компонент
 
-function Navbar () {
-  return <div>
-    ...
-    <Avatar />
-  </div>
+function Navbar() {
+  return (
+    <div>
+      ...
+      <Avatar />
+    </div>
+  )
 }
 
-function Content () {
+function Content() {
   const { user, isLoading } = useUser()
   if (isLoading) return <Spinner />
   return <h1>С возвращением, {user.name}</h1>
 }
 
-function Avatar () {
+function Avatar() {
   const { user, isLoading } = useUser()
   if (isLoading) return <Spinner />
   return <img src={user.avatar} alt={user.name} />

@@ -1,4 +1,4 @@
-import { Callout } from 'nextra-theme-docs'
+import { Callout } from 'nextra/components'
 
 # Gestión De Errores
 
@@ -48,8 +48,9 @@ const { data, error } = useSWR('/api/user', fetcher)
 ```
 
 <Callout emoji="💡">
-  Tenga en cuenta que `data` y `error` pueden existir al mismo tiempo. Por lo tanto la UI puede mostrar
-  data existente, mientras se sabe que la próxima solicitud ha fallado.
+  Tenga en cuenta que `data` y `error` pueden existir al mismo tiempo. Por lo
+  tanto la UI puede mostrar data existente, mientras se sabe que la próxima
+  solicitud ha fallado.
 </Callout>
 
 [Aquí](/examples/error-handling) tenemos un ejemplo.
@@ -90,14 +91,16 @@ para notificar a la UI que muestre un [toast](https://vercel.com/design/toast) o
 en algún lugar como [Sentry](https://sentry.io), hay un evento [`onError`](/docs/options#options):
 
 ```jsx
-<SWRConfig value={{
-  onError: (error, key) => {
-    if (error.status !== 403 && error.status !== 404) {
-      // Podemos enviar el error a Sentry
-      // o mostrarlo una notificación UI.
+<SWRConfig
+  value={{
+    onError: (error, key) => {
+      if (error.status !== 403 && error.status !== 404) {
+        // Podemos enviar el error a Sentry
+        // o mostrarlo una notificación UI.
+      }
     }
-  }
-}}>
+  }}
+>
   <MyApp />
 </SWRConfig>
 ```

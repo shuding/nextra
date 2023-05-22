@@ -16,5 +16,12 @@ export default withNextra({
   eslint: {
     // Eslint behaves weirdly in this monorepo.
     ignoreDuringBuilds: true
-  }
+  },
+  redirects: () => [
+    {
+      source: '/docs/docs-theme/built-ins/callout',
+      destination: '/docs/guide/built-ins/callout',
+      permanent: true
+    }
+  ]
 })

@@ -1,4 +1,4 @@
-import { Callout } from 'nextra-theme-docs'
+import { Callout } from 'nextra/components'
 import Video from 'components/video'
 
 # Understanding SWR
@@ -53,18 +53,20 @@ Comparing to the existing `isValidating` value, `isLoading` is a new property th
 Simply saying you can use `isValidating` for indicating everytime there is an ongoing revalidation, and `isLoading` for indicating that SWR is revalidating but there is no data yet to display.
 
 <Callout emoji="📝">
-  Fallback data and previous data are not considered "loaded data," so when you use fallback data or enable the keepPreviousData option, you might have data to display.
+  Fallback data and previous data are not considered "loaded data," so when you
+  use fallback data or enable the keepPreviousData option, you might have data
+  to display.
 </Callout>
 
 ```jsx
 function Stock() {
   const { data, isLoading, isValidating } = useSWR(STOCK_API, fetcher, {
     refreshInterval: 3000
-  });
+  })
 
   // If it's still loading the initial data, there is nothing to display.
   // We return a skeleton here.
-  if (isLoading) return <div className="skeleton" />;
+  if (isLoading) return <div className="skeleton" />
 
   // Otherwise, display the data and a spinner that indicates a background
   // revalidation.
@@ -73,7 +75,7 @@ function Stock() {
       <div>${data}</div>
       {isValidating ? <div className="spinner" /> : null}
     </>
-  );
+  )
 }
 ```
 
@@ -115,7 +117,7 @@ With `keepPreviousData` enabled, you will still get the previous data even if yo
 <Video
   src="https://user-images.githubusercontent.com/3676859/163695903-a3eb1259-180e-41e0-821e-21c320201194.mp4"
   caption="Keep previous search results when keepPreviousData has been enabled"
-  ratio={640/730}
+  ratio={640 / 730}
 />
 
 You can find the full code for this example here: https://codesandbox.io/s/swr-keeppreviousdata-fsjz3m.

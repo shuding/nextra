@@ -1,5 +1,17 @@
 # nextra
 
+## 2.5.2
+
+### Patch Changes
+
+- a3601e5: fix Module not found: Can't resolve '.../node_modules/nextra/dist/mdx.mjs'
+
+## 2.5.1
+
+### Patch Changes
+
+- d408ab0: fix `Error: ENOENT: no such file or directory` in Nx-managed monorepos
+
 ## 2.5.0
 
 ### Minor Changes

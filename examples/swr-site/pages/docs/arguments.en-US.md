@@ -30,7 +30,7 @@ The function `fetchWithToken` still accepts the same 2 arguments, but the cache 
 
 ## Passing Objects
 
-import { Callout } from 'nextra-theme-docs'
+import { Callout } from 'nextra/components'
 
 <Callout>
   Since SWR 1.1.0, object-like keys will be serialized under the hood automatically. 
@@ -42,7 +42,10 @@ Say you have another function that fetches data with a user scope: `fetchWithUse
 const { data: user } = useSWR(['/api/user', token], fetchWithToken)
 
 // ...and then pass it as an argument to another useSWR hook
-const { data: orders } = useSWR(user ? ['/api/orders', user] : null, fetchWithUser)
+const { data: orders } = useSWR(
+  user ? ['/api/orders', user] : null,
+  fetchWithUser
+)
 ```
 
 You can directly pass an object as the key, and `fetcher` will receive that object too:

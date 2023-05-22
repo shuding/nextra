@@ -2,9 +2,7 @@ import { Callout, Tab, Tabs, Steps } from 'nextra-theme-docs'
 
 # Get Started
 
-<Callout type="warning">
-  Docs for this theme is under construction.
-</Callout>
+<Callout type="warning">Docs for this theme is under construction.</Callout>
 
 <Callout>
   An example of the blog theme can be found [here](https://demo.vercel.blog).
@@ -13,7 +11,6 @@ import { Callout, Tab, Tabs, Steps } from 'nextra-theme-docs'
 Similar to the [Docs Theme](/docs/docs-theme/start), you can install the blog theme with the following commands:
 
 ## Quick Start from Template
-
 
 ## Start as New Project
 
@@ -41,7 +38,8 @@ To create a Nextra Docs site manually, you have to install **Next.js**, **React*
 </Tabs>
 
 <Callout>
-  If you already have Next.js installed in your project, you only need to install `nextra` and `nextra-theme-blog` as the add-ons.
+  If you already have Next.js installed in your project, you only need to
+  install `nextra` and `nextra-theme-blog` as the add-ons.
 </Callout>
 
 ### Add Next.js Config
@@ -51,7 +49,7 @@ Create the following `next.config.js` file in your project’s root directory:
 ```js filename="next.config.js"
 const withNextra = require('nextra')({
   theme: 'nextra-theme-blog',
-  themeConfig: './theme.config.jsx',
+  themeConfig: './theme.config.jsx'
 })
 
 module.exports = withNextra()
@@ -93,4 +91,5 @@ export default {
 ### Ready to Go!
 
 Now, you can run the `pnpm next` command to start developing the project! 🎉
+
 </Steps>

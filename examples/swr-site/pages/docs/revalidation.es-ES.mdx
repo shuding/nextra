@@ -4,7 +4,8 @@ import { Callout, Bleed } from 'nextra-theme-docs'
 # Revalidación Automática
 
 <Callout>
-  Si quiere revalidar manualmente los datos, compruebe [mutation](/docs/mutation).
+  Si quiere revalidar manualmente los datos, compruebe
+  [mutation](/docs/mutation).
 </Callout>
 
 ## Revalidar on focus
@@ -18,7 +19,7 @@ como stale mobile tabs, o laptops que están **suspendida**.
   <Video
     src="https://raw.githubusercontent.com/vercel/swr-site/master/.github/videos/focus-revalidate.mp4"
     caption="Vídeo: uso de la revalidación focus para sincronizar automáticamente el estado login entre páginas."
-    ratio={307/768}
+    ratio={307 / 768}
   />
 </Bleed>
 
@@ -36,14 +37,14 @@ componente asociado al hook está **en la pantalla**.
   <Video
     src="https://raw.githubusercontent.com/vercel/swr-site/master/.github/videos/refetch-interval.mp4"
     caption="Vídeo: cuando un usuario realiza un cambio, ambas sesiones acabarán por mostrar los mismo datos."
-    ratio={307/768}
+    ratio={307 / 768}
   />
 </Bleed>
 
 Puede activarlo estableciendo un valor de [`refreshInterval`](/docs/options).
 
 ```js
-useSWR('/api/todos', fetcher, { refreshInterval: 1000 })
+useSWR('/api/todos', fetcher, { refreshInterval: 1000 })
 ```
 
 También hay opciones como `refreshWhenHidden` y `refreshWhenOffline`. Ambas están deshabilitadas por defecto,

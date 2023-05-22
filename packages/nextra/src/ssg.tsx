@@ -1,7 +1,7 @@
 import { createContext, useContext } from 'react'
 import { MDXRemote } from 'next-mdx-remote'
 
-import type { Components } from './mdx';
+import type { Components } from './mdx'
 import { useMDXComponents } from './mdx'
 
 export const SSGContext = createContext<any>(false)
@@ -15,7 +15,7 @@ export const useData = useSSG
 export function RemoteContent({
   components: dynamicComponents
 }: {
-  components: Components
+  components?: Components
 }) {
   const dynamicContext = useSSG('__nextra_dynamic_mdx')
 

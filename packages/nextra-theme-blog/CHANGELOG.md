@@ -1,5 +1,21 @@
 # nextra-theme-blog
 
+## 2.5.2
+
+### Patch Changes
+
+- f85423a: Fix prose styles for small breakpoints
+- Updated dependencies [a3601e5]
+  - nextra@2.5.2
+
+## 2.5.1
+
+### Patch Changes
+
+- 8aae0c9: fix: cusdis comments theme doens't change when resolvedTheme changed
+- Updated dependencies [d408ab0]
+  - nextra@2.5.1
+
 ## 2.5.0
 
 ### Minor Changes

@@ -18,11 +18,11 @@ without any code changes from you.
 It’s very common to reuse SWR hooks in your app. For example, an app that renders the current user’s avatar 5 times:
 
 ```jsx
-function useUser () {
+function useUser() {
   return useSWR('/api/user', fetcher)
 }
 
-function Avatar () {
+function Avatar() {
   const { data, error } = useUser()
 
   if (error) return <Error />
@@ -31,14 +31,16 @@ function Avatar () {
   return <img src={data.avatar_url} />
 }
 
-function App () {
-  return <>
-    <Avatar />
-    <Avatar />
-    <Avatar />
-    <Avatar />
-    <Avatar />
-  </>
+function App() {
+  return (
+    <>
+      <Avatar />
+      <Avatar />
+      <Avatar />
+      <Avatar />
+      <Avatar />
+    </>
+  )
 }
 ```
 
@@ -61,7 +63,7 @@ For example, some API responses return a server timestamp that you might want to
 For example, if we print those values within a full data-fetching lifecycle, it will be something like this:
 
 ```jsx
-function App () {
+function App() {
   const { data, error, isValidating } = useSWR('/api', fetcher)
   console.log(data, error, isValidating)
   return null
@@ -83,7 +85,7 @@ The state changes make sense. But that also means our component **rendered 4 tim
 If we change our component to only use `data`:
 
 ```jsx
-function App () {
+function App() {
   const { data } = useSWR('/api', fetcher)
   console.log(data)
   return null
@@ -95,7 +97,7 @@ The magic happens — there are only **2 re-renders** now:
 ```js
 // console.log(data)
 undefined // => hydration / initial render
-Data      // => end retrying, get the data
+Data // => end retrying, get the data
 ```
 
 The exact same process has happened internally, there was an error from the first request, then we got the data from the retry.
