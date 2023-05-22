@@ -1,5 +1,14 @@
 # nextra-theme-blog
 
+## 2.6.0
+
+### Patch Changes
+
+- 9d9bc23: accessibility issues for text and navbar in light mode
+- Updated dependencies [15c4092]
+- Updated dependencies [1c6256b]
+  - nextra@2.6.0
+
 ## 2.5.2
 
 ### Patch Changes
