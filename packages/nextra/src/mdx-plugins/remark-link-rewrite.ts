@@ -1,6 +1,6 @@
-import { visit } from 'unist-util-visit'
-import type { Plugin } from 'unified'
 import type { Root } from 'mdast'
+import type { Plugin } from 'unified'
+import { visit } from 'unist-util-visit'
 import { EXTERNAL_URL_REGEX } from '../constants'
 
 export type RemarkLinkRewriteOptions = {

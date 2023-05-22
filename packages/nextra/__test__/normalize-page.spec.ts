@@ -1,6 +1,6 @@
-import { describe, it, expect } from 'vitest'
-import { cnPageMap, usPageMap } from './fixture/page-maps/pageMap'
+import { describe, expect, it } from 'vitest'
 import { normalizePages } from '../src/normalize-pages'
+import { cnPageMap, usPageMap } from './fixture/page-maps/pageMap'
 
 const defaultLocale = 'en-US'
 
