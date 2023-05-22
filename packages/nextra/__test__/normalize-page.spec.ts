@@ -111,6 +111,7 @@ describe('normalize-page', () => {
     expect(result).toMatchSnapshot()
   })
 
+  // https://github.com/shuding/nextra/issues/1888
   it('should set `route: #` for `type: menu`', () => {
     const result = normalizePages({
       list: [
@@ -120,7 +121,7 @@ describe('normalize-page', () => {
             index: {
               type: 'page',
               title: 'Nextra',
-              display: 'hidden',
+              display: 'hidden'
             },
             docs: {
               type: 'page',
@@ -128,23 +129,23 @@ describe('normalize-page', () => {
             },
             explorers: {
               title: 'Explorers',
-              type: 'menu',
+              type: 'menu'
             },
             showcase: {
               type: 'page',
-              title: 'Showcase',
+              title: 'Showcase'
             },
             explorers2: {
               title: 'Explorers2',
-              type: 'menu',
+              type: 'menu'
             },
             about: {
               type: 'page',
-              title: 'About',
+              title: 'About'
             },
             explorers3: {
               title: 'Explorers3',
-              type: 'menu',
+              type: 'menu'
             }
           }
         },
