@@ -132,7 +132,7 @@ SWR запрос: /api/user2
 мы также собираемся расширить возвращаемый объект хука `useSWR`:
 
 ```jsx
-import { useRef, useEffect, useCallback } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 
 // Это ППО SWR для хранения данных даже при изменении ключа.
 function laggy(useSWRNext) {

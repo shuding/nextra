@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router'
-
 import styles from './features.module.css'
 
 const Feature = ({ text, icon }) => (

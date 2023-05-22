@@ -132,7 +132,7 @@ This can be built as a laggy middleware together with `useRef`. In this example,
 we are also going to extend the returned object of the `useSWR` hook:
 
 ```jsx
-import { useRef, useEffect, useCallback } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 
 // This is a SWR middleware for keeping the data even if key changes.
 function laggy(useSWRNext) {

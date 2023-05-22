@@ -26,7 +26,7 @@ useSWR(() => ['user', 8], (arg0, arg1) => {})
 You can also explicitly specify the types for `key` and `fetcher`'s arguments.
 
 ```typescript
-import useSWR, { Key, Fetcher } from 'swr'
+import useSWR, { Fetcher, Key } from 'swr'
 
 const uid: Key = '<user_id>'
 const fetcher: Fetcher<string, User> = id => getUserById(id)
