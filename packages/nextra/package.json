@@ -2,14 +2,55 @@
   "name": "nextra",
   "version": "2.6.0",
   "description": "Next.js and MDX based site generator.",
-  "files": [
-    "dist/*",
-    "icons/*",
-    "loader.js",
-    "styles/*"
-  ],
-  "types": "./dist/types.d.ts",
+  "repository": "https://github.com/shuding/nextra",
+  "license": "MIT",
+  "engines": {
+    "node": ">=16"
+  },
   "main": "./dist/index.js",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": "./dist/index.js",
+    "./catch-all": "./dist/catch-all.js",
+    "./data": {
+      "import": "./dist/ssg.js",
+      "types": "./dist/ssg.d.ts"
+    },
+    "./ssg": {
+      "import": "./dist/ssg.js",
+      "types": "./dist/ssg.d.ts"
+    },
+    "./loader": "./loader.js",
+    "./setup-page": {
+      "import": "./dist/setup-page.js",
+      "types": "./dist/setup-page.d.ts"
+    },
+    "./mdx": {
+      "import": "./dist/mdx.js",
+      "types": "./dist/mdx.d.ts"
+    },
+    "./normalize-pages": {
+      "import": "./dist/normalize-pages.js",
+      "types": "./dist/normalize-pages.d.ts"
+    },
+    "./components": {
+      "import": "./dist/components/index.js",
+      "types": "./dist/components/index.d.ts"
+    },
+    "./hooks": {
+      "import": "./dist/hooks/index.js",
+      "types": "./dist/hooks/index.d.ts"
+    },
+    "./icons": {
+      "import": "./dist/icons/index.js",
+      "types": "./dist/icons/index.d.ts"
+    },
+    "./*": {
+      "import": "./dist/*.mjs",
+      "types": "./dist/*.d.ts"
+    }
+  },
+  "types": "./dist/types.d.ts",
   "typesVersions": {
     "*": {
       "compile": [
@@ -53,58 +94,25 @@
       ]
     }
   },
-  "exports": {
-    "./package.json": "./package.json",
-    ".": "./dist/index.js",
-    "./catch-all": "./dist/catch-all.js",
-    "./data": {
-      "import": "./dist/ssg.js",
-      "types": "./dist/ssg.d.ts"
-    },
-    "./ssg": {
-      "import": "./dist/ssg.js",
-      "types": "./dist/ssg.d.ts"
-    },
-    "./loader": "./loader.js",
-    "./setup-page": {
-      "import": "./dist/setup-page.js",
-      "types": "./dist/setup-page.d.ts"
-    },
-    "./mdx": {
-      "import": "./dist/mdx.js",
-      "types": "./dist/mdx.d.ts"
-    },
-    "./normalize-pages": {
-      "import": "./dist/normalize-pages.js",
-      "types": "./dist/normalize-pages.d.ts"
-    },
-    "./components": {
-      "import": "./dist/components/index.js",
-      "types": "./dist/components/index.d.ts"
-    },
-    "./hooks": {
-      "import": "./dist/hooks/index.js",
-      "types": "./dist/hooks/index.d.ts"
-    },
-    "./icons": {
-      "import": "./dist/icons/index.js",
-      "types": "./dist/icons/index.d.ts"
-    },
-    "./*": {
-      "import": "./dist/*.mjs",
-      "types": "./dist/*.d.ts"
-    }
-  },
-  "repository": "https://github.com/shuding/nextra",
-  "license": "MIT",
+  "files": [
+    "dist/*",
+    "icons/*",
+    "loader.js",
+    "styles/*"
+  ],
   "scripts": {
     "build": "tsup",
+    "clean": "rimraf ./dist ./style.css",
     "dev": "tsup --watch",
-    "types": "tsup --dts-only",
-    "types:check": "tsc --noEmit",
-    "test": "vitest run",
     "prepublishOnly": "pnpm build",
-    "clean": "rimraf ./dist ./style.css"
+    "test": "vitest run",
+    "types": "tsup --dts-only",
+    "types:check": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "next": ">=9.5.3",
+    "react": ">=16.13.1",
+    "react-dom": ">=16.13.1"
   },
   "dependencies": {
     "@mdx-js/mdx": "^2.3.0",
@@ -130,11 +138,6 @@
     "unist-util-visit": "^4.1.1",
     "zod": "^3.20.2"
   },
-  "peerDependencies": {
-    "next": ">=9.5.3",
-    "react": ">=16.13.1",
-    "react-dom": ">=16.13.1"
-  },
   "devDependencies": {
     "@types/github-slugger": "^2.0.0",
     "@types/graceful-fs": "^4.1.6",
@@ -150,8 +153,5 @@
     "react-dom": "^18.2.0",
     "unified": "^10.1.2",
     "vitest": "^0.31.0"
-  },
-  "engines": {
-    "node": ">=16"
   }
 }

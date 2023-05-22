@@ -1,13 +1,13 @@
 {
   "name": "docs",
-  "private": true,
-  "scripts": {
-    "dev": "next",
-    "start": "next start",
-    "build": "next build"
-  },
   "author": "Shu Ding",
   "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "next build",
+    "dev": "next",
+    "start": "next start"
+  },
   "dependencies": {
     "@vercel/og": "^0.5.0",
     "clsx": "^1.2.1",
