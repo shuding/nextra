@@ -13,6 +13,11 @@ export type TOCProps = {
   filePath: string
 }
 
+const linkClassName = cn(
+  'nx-text-xs nx-font-medium nx-text-gray-500 hover:nx-text-gray-900 dark:nx-text-gray-400 dark:hover:nx-text-gray-100',
+  'contrast-more:nx-text-gray-800 contrast-more:dark:nx-text-gray-50'
+)
+
 export function TOC({ headings, filePath }: TOCProps): ReactElement {
   const activeAnchor = useActiveAnchor()
   const config = useConfig()
@@ -50,11 +55,6 @@ export function TOC({ headings, filePath }: TOCProps): ReactElement {
       })
     }
   }, [activeSlug])
-
-  const linkClassName = cn(
-    'nx-text-xs nx-font-medium nx-text-gray-500 hover:nx-text-gray-900 dark:nx-text-gray-400 dark:hover:nx-text-gray-100',
-    'contrast-more:nx-text-gray-800 contrast-more:dark:nx-text-gray-50'
-  )
 
   return (
     <div
