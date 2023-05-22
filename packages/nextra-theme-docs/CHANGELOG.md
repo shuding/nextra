@@ -36,7 +36,8 @@
 
 ### Patch Changes
 
-- 8515349: fix Warning: React has detected a change in the order of Hooks called by Search
+- 8515349: fix Warning: React has detected a change in the order of Hooks called
+  by Search
 - Updated dependencies [08d393e]
   - nextra@2.5.0
 
@@ -52,7 +53,8 @@
 
 ### Patch Changes
 
-- 2df6e91: Use config.useOptions text as the Select selected name on Theme Switch
+- 2df6e91: Use config.useOptions text as the Select selected name on Theme
+  Switch
 - 7989cc5: fix regression of sidebar style for folder
 - Updated dependencies [a992ce1]
   - nextra@2.4.1
@@ -65,8 +67,10 @@
 
 ### Patch Changes
 
-- 2ff360f: use `<span />` instead `<div />` inside `<button />` for local switch button
-- e3664c4: fix uncrawable links in sidebar, use button when link don't have href because it impacts on SEO
+- 2ff360f: use `<span />` instead `<div />` inside `<button />` for local switch
+  button
+- e3664c4: fix uncrawable links in sidebar, use button when link don't have href
+  because it impacts on SEO
 
   remove useless prop children from `<FileTree.File />` component
 
@@ -82,11 +86,14 @@
 ### Minor Changes
 
 - 707a709: Improve sidebar colors accessibility
-- 76e8b0f: support custom heading id via `# my very long heading... [#my-custom-heading]` syntax https://github.com/shuding/nextra/pull/1645
+- 76e8b0f: support custom heading id via
+  `# my very long heading... [#my-custom-heading]` syntax
+  https://github.com/shuding/nextra/pull/1645
 
 ### Patch Changes
 
-- fb0b19b: Do not focus search when currently focusing a HTMLElement with contenteditable active
+- fb0b19b: Do not focus search when currently focusing a HTMLElement with
+  contenteditable active
 - Updated dependencies [0dd028a]
 - Updated dependencies [6ea1caf]
 - Updated dependencies [76e8b0f]
@@ -96,7 +103,8 @@
 
 ### Patch Changes
 
-- 2e48307: export `normalizePages` from `nextra/normalize-pages`, `useFSRoute` from `nextra/hooks` (can be useful for custom theme)
+- 2e48307: export `normalizePages` from `nextra/normalize-pages`, `useFSRoute`
+  from `nextra/hooks` (can be useful for custom theme)
 - Updated dependencies [2e48307]
 - Updated dependencies [e4c8b6d]
   - nextra@2.2.20
@@ -134,7 +142,8 @@
 ### Patch Changes
 
 - b94245a: Reverts #1417 "force theme to light if darkMode: false was set"
-- d495e5f: introduce `_app.mdx` for better performance and smallest `.next/static/chunks` size
+- d495e5f: introduce `_app.mdx` for better performance and smallest
+  `.next/static/chunks` size
 - Updated dependencies [d495e5f]
   - nextra@2.2.16
 
@@ -145,13 +154,15 @@
 - 71c1897: export `<Card />`, `<Cards >/`, `<Steps />` and `<FileTree />`
 - 51ec00f: fix white appearing of white square while sidebar was toggled
 - 2e441b7: open http:// links in new window
-- 7f697e9: prefer `asPath` over `route` in `useNextSeoProps` docs, allow `void` as return type of `useNextSeoProps`
+- 7f697e9: prefer `asPath` over `route` in `useNextSeoProps` docs, allow `void`
+  as return type of `useNextSeoProps`
 - 016828e: do not redirect .mp4 in locales middleware
 - da585a8: force theme to `light` if `darkMode: false` was set
 - 863a750: Fixed x overflow in Callouts for long latex
 - eae1993: Fix the capital letter M is displayed incorrectly on Xiaomi phones
 - ad8625c: bump @headlessui/react to ^1.7.10
-- 673a125: fix squeezed sidebar when he was hidden -> navigated to page without sidebar -> comeback to page with sidebar
+- 673a125: fix squeezed sidebar when he was hidden -> navigated to page without
+  sidebar -> comeback to page with sidebar
 - 26c7e20: fix: move intersection observe and slugs into ActiveAnchorProvider
 - 3e9e54f: hide unnecessary parts of the pages when being printed
 - Updated dependencies [d5aa17c]
@@ -164,7 +175,8 @@
 ### Patch Changes
 
 - bcaba9c: fix capitalizing sidebar links + tests
-- f300fe7: fix missing sidebar nav links while applying `"display": "hidden"` for folder
+- f300fe7: fix missing sidebar nav links while applying `"display": "hidden"`
+  for folder
 - 71257cd: style improvements
 - efd8c71: fix for `theme: { footer: false }` still showed the footer
 - 086cf7b: fix scrollbar for table and tabs
@@ -208,14 +220,16 @@
   sanitize remote mdx by removing `import` statements
 
 - 6a0f428: add zod validation for \_meta.json "theme" property
-- 6a0f428: use `z.strictObject` instead `z.object` in zod theme validation, improve zod error messages
+- 6a0f428: use `z.strictObject` instead `z.object` in zod theme validation,
+  improve zod error messages
 
 ## 2.2.10
 
 ### Patch Changes
 
 - c97143f: fix search index output location
-- 4b2052f: fix `Module not found: Can't resolve 'nextra-theme-docs/style.css'` for imported markdown files that located outside of CWD
+- 4b2052f: fix `Module not found: Can't resolve 'nextra-theme-docs/style.css'`
+  for imported markdown files that located outside of CWD
 - 624d6b4: fix when sidebar show non-md folders
 - 0c957db: fix capitalizing of undefined \_meta.json file/folders
 
@@ -236,7 +250,8 @@
 ### Patch Changes
 
 - 5daa1c4: fix Collapse element
-- 163065c: loader refactor, type-safe `__nextra_resolvePageMap`, avoid code interpolation in loader.ts
+- 163065c: loader refactor, type-safe `__nextra_resolvePageMap`, avoid code
+  interpolation in loader.ts
 
 ## 2.2.4
 
@@ -249,7 +264,8 @@
   add unit tests for filename and copy code
 
 - 917de49: remove `github-slugger` from docs
-- 1b2d7a2: allow hide sidebar, add new option `sidebar.toggleButton?: boolean = false`
+- 1b2d7a2: allow hide sidebar, add new option
+  `sidebar.toggleButton?: boolean = false`
 
 ## 2.2.3
 
@@ -263,8 +279,10 @@
 
 ### Patch Changes
 
-- 3145f53: extend `plugin:react/recommended`, `plugin:react-hooks/recommended` and `plugin:@next/next/recommended` configs
-- 1834730: fix hydration error produced by cached compiler, fix broken code-blocks styles while setting `nextraConfig.codeHighlight: false`
+- 3145f53: extend `plugin:react/recommended`, `plugin:react-hooks/recommended`
+  and `plugin:@next/next/recommended` configs
+- 1834730: fix hydration error produced by cached compiler, fix broken
+  code-blocks styles while setting `nextraConfig.codeHighlight: false`
 - 8b9a5a0: tweak styling; fix zod checks
 
 ## 2.2.1
@@ -289,7 +307,8 @@
 
 - d6b0068: Always close mobile nav when route was changed (e.g. logo click)
 - 9df1d5d: fix `undefined: undefined` property in `useConfig()`
-- c86508c: lint fixes for `eslint:recommended` and `plugin:@typescript-eslint/recommended` configs
+- c86508c: lint fixes for `eslint:recommended` and
+  `plugin:@typescript-eslint/recommended` configs
 - d6c871a: simplify the custom theme layout api
 - 1ff43c1: use OKLCH colors where possible
 - 0da1258: add new option `feedback.useLink`
@@ -355,16 +374,21 @@
 - fdb2f57: update docs to use next.js 13
 - 3e3b0a9: feat: add cursor pointer to locale and theme menu
 - a0398e0: fix: avoid mutating nextConfig
-- e6771ca: BREAKING! various theme config options was renamed, take a look of renamed options [here](https://github.com/shuding/nextra/blob/core/packages/nextra-theme-docs/src/constants.tsx)
-- 59e18b0: make `nextra`/`nextra-theme-docs`/`nextra-theme-blog` be compatible with next 13
+- e6771ca: BREAKING! various theme config options was renamed, take a look of
+  renamed options
+  [here](https://github.com/shuding/nextra/blob/core/packages/nextra-theme-docs/src/constants.tsx)
+- 59e18b0: make `nextra`/`nextra-theme-docs`/`nextra-theme-blog` be compatible
+  with next 13
 - 38ccce8: feat(docs): allow `Tabs.items` as `ReadonlyArray<ReactNode>`
-- fc8cca0: add `<InformationCircleIcon />` icon, improve `<Callout />` default emojis
+- fc8cca0: add `<InformationCircleIcon />` icon, improve `<Callout />` default
+  emojis
 - fe2b714: upgrade to react 18
-- af72f85: chore(nextra-theme-docs): provide type for `DocsThemeConfig.nextThemes` instead of `object`
-- e4cfb83: define page title in sidebar from `frontMatter.title` if page is not specified in `_meta.json`
+- af72f85: chore(nextra-theme-docs): provide type for
+  `DocsThemeConfig.nextThemes` instead of `object`
+- e4cfb83: define page title in sidebar from `frontMatter.title` if page is not
+  specified in `_meta.json`
 - 1ee3c92: reuse table styles from docs in blog
-- f569d90: missing `nx-` class prefixes in blog
-  fix callout padding in docs
+- f569d90: missing `nx-` class prefixes in blog fix callout padding in docs
 - 77361da: fix ESC button when still stays after pressed ESC
 - b1d7361: improve docs for 2.0
 - 9064112: make `<Tab />` accept `ComponentProps<'div'>`
@@ -374,11 +398,15 @@
 - fdfe4f8: fix covered theme switch popup when i18n is not setup
 - 66712f0: polish docs
 - 873561b: scrollbar is toc should be same as in sidebar
-- 08a39e6: remove `resizeObserver` for dynamic content since it provoke jumps on tabs switch when there is `#` anchor in url
+- 08a39e6: remove `resizeObserver` for dynamic content since it provoke jumps on
+  tabs switch when there is `#` anchor in url
 - 4e4a37c: add new "display" property to \_meta
-- e6771ca: [Blog/Docs] Add copy to clipboard button for code-blocks. Add `NextraConfig.unstable_defaultShowCopyCode` option to show button by default, add `copy` and `copy=false` options for code-blocks
+- e6771ca: [Blog/Docs] Add copy to clipboard button for code-blocks. Add
+  `NextraConfig.unstable_defaultShowCopyCode` option to show button by default,
+  add `copy` and `copy=false` options for code-blocks
 - a5cac21: [docs/blog]: extract code styles and import in both themes
-- 96ed5c2: [nextra/nextra-theme-docs]: support both `experimental.newNextLinkBehavior` - `true` and `false`
+- 96ed5c2: [nextra/nextra-theme-docs]: support both
+  `experimental.newNextLinkBehavior` - `true` and `false`
 - 1fef548: allow head to be a ReactNode
 - 580c433: add nx- to all tailwind classes for style isolation
 - c3e6227: add `overflow-x-scroll` for tables
@@ -392,7 +420,8 @@
 - d6d5ab8: Make sure arrows are aligned
 - a007c64: move DEFAULT_THEME and DEFAULT_PAGE_THEME to constants.tsx
 - ab6c0e6: fix disappearing toc issue in Firefox
-- 16bedce: `"layout": "raw"` should render `all` unstyled elements, except `<a />`
+- 16bedce: `"layout": "raw"` should render `all` unstyled elements, except
+  `<a />`
 - a0e5847: Rename some docs theme configurations
 - 351fa45: add missing `nx-` prefix for `grow` class in `<LocaleSwitch />`
 - c09f450: fix CTRL+K, on non non-mac use `e.ctrlKey` instead `e.metaKey`
@@ -411,9 +440,11 @@
 - 74a3398: update docs for 2.0
 - bd2cefa: Fix css classes with `eslint-plugin-tailwindcss`
 - ff8967c: add `Toggle Word Wrap` button for code-blocks (only for mobile)
-- 5d852b6: break words in navlinks, remove unneeded `<div />` wrappers, align text on right side for next link
+- 5d852b6: break words in navlinks, remove unneeded `<div />` wrappers, align
+  text on right side for next link
 - e6771ca: hide search input in navbar on mobile
-- 76d1e30: [nextra-theme-docs]: fix `Warning: A title element received an array` and possible `[object Object]` in title
+- 76d1e30: [nextra-theme-docs]: fix `Warning: A title element received an array`
+  and possible `[object Object]` in title
 - 009bf6a: Fix release workflow.
 - 5238bb4: feat(docs): support logoLink config option
 - e6771ca: fix empty space in navbar when theme option `search.component: null`
@@ -424,41 +455,54 @@
 - 0c136ad: add missing `nx-` prefix in sidebar
 - ff8967c: fix missing `Copy Code` button in code-blocks without language
 - 2217f9c: replace `classnames` package with `clsx` as he's faster
-- e6771ca: clicking on folder should navigate to first children if `index` page doesn't exist
+- e6771ca: clicking on folder should navigate to first children if `index` page
+  doesn't exist
 - 723d42a: use `lightningcss` instead `cssnano`
 - bf74201: [nextra-theme-docs]: use new opacity modifier syntax for tailwindcss
 - a8c5883: add `config.bodyExtraContent` option
-- e2d603a: remove `getComponents` export, export `useMDXComponents` from `@mdx-js/react` instead
+- e2d603a: remove `getComponents` export, export `useMDXComponents` from
+  `@mdx-js/react` instead
 - 8564919: extract `<Input/>` from `<Search/>` and `<Flexsearch/>`
 - 05d068c: Add button label for hamburger menu
-- 38769ca: prefer `ref.current.querySelector` over `document.querySelector`, remove `load` prop in `<Search />`
+- 38769ca: prefer `ref.current.querySelector` over `document.querySelector`,
+  remove `load` prop in `<Search />`
 - b219821: fix body overflow
 - d7f2bbc: adjust docs theme; rename options
 - 24a02f8: match-sorter search should highlight every match like flexsearch
-- 2217f9c: remove `locale` prop from theme config, forbid passing in `renderComponent`
+- 2217f9c: remove `locale` prop from theme config, forbid passing in
+  `renderComponent`
 - 7d2d5ee: use resolvedTheme instead renderedTheme + theme check
-- 256154a: use "next/future/image" if `"experimental.images.allowFutureImage": true` is set in next config
-- 9f5af54: add `_meta.json#theme.collapsed` option for control state sidebar's folders
+- 256154a: use "next/future/image" if
+  `"experimental.images.allowFutureImage": true` is set in next config
+- 9f5af54: add `_meta.json#theme.collapsed` option for control state sidebar's
+  folders
 - c8605d6: feat: New layout implementation
 - 4157b71: set lower build target and share code highlight theme through nextra
 - c28a7f2: - setup `next-seo`
   - add new theme option `getNextSeoProps`
-  - remove `titleSuffix` theme option in favor of `getNextSeoProps.titleTemplate`
-  - by default pass `description`, `canonical`, `openGraph` values to `<NextSeo />` component from page `frontMatter`, values can be overridden with return value of `getNextSeoProps`
+  - remove `titleSuffix` theme option in favor of
+    `getNextSeoProps.titleTemplate`
+  - by default pass `description`, `canonical`, `openGraph` values to
+    `<NextSeo />` component from page `frontMatter`, values can be overridden
+    with return value of `getNextSeoProps`
 - f360f28: add new theme option `banner.dismissible`
-- 7bcbc98: add new `meta.json#theme.timestamp` option to hide `Last updated on ...`
-- 94a8587: chore: extract `svg` icons in `/icons` folder, reusing same icons `<MoonIcon />` / `<SunIcon />` in blog from docs
+- 7bcbc98: add new `meta.json#theme.timestamp` option to hide
+  `Last updated on ...`
+- 94a8587: chore: extract `svg` icons in `/icons` folder, reusing same icons
+  `<MoonIcon />` / `<SunIcon />` in blog from docs
 - d16b2ba: move contexts to `./contexts` directory
 - 699d131: feat(nextra/docs/blog): allow import `.md`/`.mdx` as well
 - 47938b1: remove unneeded `useRef` for `<details />`
-- 256154a: replace images with `<NextImage />` even when url not relative but that starts from `/` (public directory)
+- 256154a: replace images with `<NextImage />` even when url not relative but
+  that starts from `/` (public directory)
 - e573175: Fix release CI
 - 48e0ac2: export `useConfig` and `useTheme`
 - 21009c7: better focus ui, use ring color as theme hue color
 - 0f4795f: chore(nextra/blog/docs): provide types for PageOpts in loader
 - 71528f1: show copy code button only on hover of container
 - 03e90d8: refresh build system with tsup and fix nextra type
-- afaa26a: refactor toc, fix toc's styles on rtl, use `ref.current` instead `document.getElementsByClassName`
+- afaa26a: refactor toc, fix toc's styles on rtl, use `ref.current` instead
+  `document.getElementsByClassName`
 - c380989: fix(docs): types is missing in bundle
 - 7373c1f: fix `useConfig`/`useRouter` inside `head()`
 - e6771ca: fix callout shrinking from children content
@@ -487,7 +531,8 @@
 - e6771ca: move `withLayout` logic directly in nextra loader
 - 8ad9507: fix unable expanding folder items in sidebar
 - c2c0d90: fix(search): handle case when value is empty
-- c4a9782: support custom hue theme color via `primaryHue`, `primaryHue.dark` and `primaryHue.light` theme options
+- c4a9782: support custom hue theme color via `primaryHue`, `primaryHue.dark`
+  and `primaryHue.light` theme options
 - c8bb94f: UI adjustments
 - a9ca0b9: do not add `basePath` to the links
 - 88f999d: fix: UI improvements
@@ -495,8 +540,10 @@
 - 416dfe2: add missing `nx-` prefixes in sidebar
 - e6771ca: adjust active breadcrumb color
 - 707fdc2: fix: Anchor links are not wrapping on the sidebar
-- c3e6227: reuse nextra's scrollbar-y styles for scrollbar-x, adjust sidebar's scrollbar-y
-- 0af6e79: `"layout": "raw"` should have unstyled `<a />` and `<p />` elements as well
+- c3e6227: reuse nextra's scrollbar-y styles for scrollbar-x, adjust sidebar's
+  scrollbar-y
+- 0af6e79: `"layout": "raw"` should have unstyled `<a />` and `<p />` elements
+  as well
 - 2ec8564: add `DocsThemeConfig.navbar` config option for overriding navbar
 - f99bbc2: Add `nextra-body-typesetting-article` back
 - e6771ca: fix search input `ESC` icon vertical alignment
@@ -524,7 +571,8 @@
 ### Patch Changes
 
 - 9ab6dd0: allow adding additional navbar content via `navbar.extraContent`
-- 59e18b0: make `nextra`/`nextra-theme-docs`/`nextra-theme-blog` be compatible with next 13
+- 59e18b0: make `nextra`/`nextra-theme-docs`/`nextra-theme-blog` be compatible
+  with next 13
 - 2e2912e: fix project/chat icon could appear without provided link
 
 ## 2.0.0-beta.42
@@ -545,8 +593,7 @@
 
 ### Patch Changes
 
-- f569d90: missing `nx-` class prefixes in blog
-  fix callout padding in docs
+- f569d90: missing `nx-` class prefixes in blog fix callout padding in docs
 
 ## 2.0.0-beta.39
 
@@ -577,7 +624,8 @@
 
 ### Patch Changes
 
-- 08a39e6: remove `resizeObserver` for dynamic content since it provoke jumps on tabs switch when there is `#` anchor in url
+- 08a39e6: remove `resizeObserver` for dynamic content since it provoke jumps on
+  tabs switch when there is `#` anchor in url
 - 1c3fedb: add missing `nx-` prefixes to table/th/tr elements
 - 351fa45: add missing `nx-` prefix for `grow` class in `<LocaleSwitch />`
 
@@ -601,16 +649,21 @@
 - 2533a6c: replace `main.extraContent` theme option with `main` option
 - c28a7f2: - setup `next-seo`
   - add new theme option `getNextSeoProps`
-  - remove `titleSuffix` theme option in favor of `getNextSeoProps.titleTemplate`
-  - by default pass `description`, `canonical`, `openGraph` values to `<NextSeo />` component from page `frontMatter`, values can be overridden with return value of `getNextSeoProps`
+  - remove `titleSuffix` theme option in favor of
+    `getNextSeoProps.titleTemplate`
+  - by default pass `description`, `canonical`, `openGraph` values to
+    `<NextSeo />` component from page `frontMatter`, values can be overridden
+    with return value of `getNextSeoProps`
 
 ## 2.0.0-beta.32
 
 ### Patch Changes
 
-- fc8cca0: add `<InformationCircleIcon />` icon, improve `<Callout />` default emojis
+- fc8cca0: add `<InformationCircleIcon />` icon, improve `<Callout />` default
+  emojis
 - 723d42a: use `lightningcss` instead `cssnano`
-- 9f5af54: add `_meta.json#theme.collapsed` option for control state sidebar's folders
+- 9f5af54: add `_meta.json#theme.collapsed` option for control state sidebar's
+  folders
 - f360f28: add new theme option `banner.dismissible`
 - a8a89e9: chore(docs): export ThemeSwitch & custom social
 
@@ -661,18 +714,24 @@
 ### Patch Changes
 
 - 4731fa7: Style improvements
-- e4cfb83: define page title in sidebar from `frontMatter.title` if page is not specified in `_meta.json`
+- e4cfb83: define page title in sidebar from `frontMatter.title` if page is not
+  specified in `_meta.json`
 - 9064112: make `<Tab />` accept `ComponentProps<'div'>`
 - c3e6227: add `overflow-x-scroll` for tables
 - d6d5ab8: Make sure arrows are aligned
 - ab6c0e6: fix disappearing toc issue in Firefox
 - ff8967c: add `Toggle Word Wrap` button for code-blocks (only for mobile)
 - ff8967c: fix missing `Copy Code` button in code-blocks without language
-- e2d603a: remove `getComponents` export, export `useMDXComponents` from `@mdx-js/react` instead
-- 256154a: use "next/future/image" if `"experimental.images.allowFutureImage": true` is set in next config
-- 256154a: replace images with `<NextImage />` even when url not relative but that starts from `/` (public directory)
-- c4a9782: support custom hue theme color via `primaryHue`, `primaryHue.dark` and `primaryHue.light` theme options
-- c3e6227: reuse nextra's scrollbar-y styles for scrollbar-x, adjust sidebar's scrollbar-y
+- e2d603a: remove `getComponents` export, export `useMDXComponents` from
+  `@mdx-js/react` instead
+- 256154a: use "next/future/image" if
+  `"experimental.images.allowFutureImage": true` is set in next config
+- 256154a: replace images with `<NextImage />` even when url not relative but
+  that starts from `/` (public directory)
+- c4a9782: support custom hue theme color via `primaryHue`, `primaryHue.dark`
+  and `primaryHue.light` theme options
+- c3e6227: reuse nextra's scrollbar-y styles for scrollbar-x, adjust sidebar's
+  scrollbar-y
 
 ## 2.0.0-beta.24
 
@@ -704,15 +763,21 @@
 - e6771ca: fix search overlay styles on mobile
 - e6771ca: split css to `hamburger`/`scrollbar`/`typesetting-article` css files
 - e6771ca: fix edit on github button for cases when filename named as `index`
-- e6771ca: BREAKING! various theme config options was renamed, take a look of renamed options [here](https://github.com/shuding/nextra/blob/core/packages/nextra-theme-docs/src/constants.tsx)
+- e6771ca: BREAKING! various theme config options was renamed, take a look of
+  renamed options
+  [here](https://github.com/shuding/nextra/blob/core/packages/nextra-theme-docs/src/constants.tsx)
 - 1ee3c92: reuse table styles from docs in blog
-- e6771ca: [Blog/Docs] Add copy to clipboard button for code-blocks. Add `NextraConfig.unstable_defaultShowCopyCode` option to show button by default, add `copy` and `copy=false` options for code-blocks
-- 5d852b6: break words in navlinks, remove unneeded `<div />` wrappers, align text on right side for next link
+- e6771ca: [Blog/Docs] Add copy to clipboard button for code-blocks. Add
+  `NextraConfig.unstable_defaultShowCopyCode` option to show button by default,
+  add `copy` and `copy=false` options for code-blocks
+- 5d852b6: break words in navlinks, remove unneeded `<div />` wrappers, align
+  text on right side for next link
 - e6771ca: hide search input in navbar on mobile
 - e6771ca: fix empty space in navbar when theme option `search.component: null`
 - e6771ca: add `editLink.component`
 - e6771ca: rename `meta.json` to `_meta.json`
-- e6771ca: clicking on folder should navigate to first children if `index` page doesn't exist
+- e6771ca: clicking on folder should navigate to first children if `index` page
+  doesn't exist
 - 71528f1: show copy code button only on hover of container
 - e6771ca: fix callout shrinking from children content
 - e6771ca: rename `PageOpts.meta` to `PageOpts.frontMatter`
@@ -726,7 +791,8 @@
 
 - 1fef548: allow head to be a ReactNode
 - ee270a4: fix extra space in flexsearch input after loading indexes
-- afaa26a: refactor toc, fix toc's styles on rtl, use `ref.current` instead `document.getElementsByClassName`
+- afaa26a: refactor toc, fix toc's styles on rtl, use `ref.current` instead
+  `document.getElementsByClassName`
 - cdc1c2f: prefer `ref.current` over `document.querySelector` in sidebar
 
 ## 2.0.0-beta.18
@@ -737,20 +803,24 @@
 - bea62a1: make the search input responsive in narrow screens
 - 24a02f8: reuse Flexsearch result styles on match-sorter search
 - a0c0eb8: allow override `MDXProvider.components`
-- 16bedce: `"layout": "raw"` should render `all` unstyled elements, except `<a />`
+- 16bedce: `"layout": "raw"` should render `all` unstyled elements, except
+  `<a />`
 - 237faa9: add clear button for search input
 - 24a02f8: typescripify `<Flexsearch />`
 - 24a02f8: fix all RTL broken styles
 - a8c5883: add `config.bodyExtraContent` option
 - 8564919: extract `<Input/>` from `<Search/>` and `<Flexsearch/>`
-- 38769ca: prefer `ref.current.querySelector` over `document.querySelector`, remove `load` prop in `<Search />`
+- 38769ca: prefer `ref.current.querySelector` over `document.querySelector`,
+  remove `load` prop in `<Search />`
 - 24a02f8: match-sorter search should highlight every match like flexsearch
-- 7bcbc98: add new `meta.json#theme.timestamp` option to hide `Last updated on ...`
+- 7bcbc98: add new `meta.json#theme.timestamp` option to hide
+  `Last updated on ...`
 - d16b2ba: move contexts to `./contexts` directory
 - 47938b1: remove unneeded `useRef` for `<details />`
 - 7373c1f: fix `useConfig`/`useRouter` inside `head()`
 - a9ca0b9: do not add `basePath` to the links
-- 0af6e79: `"layout": "raw"` should have unstyled `<a />` and `<p />` elements as well
+- 0af6e79: `"layout": "raw"` should have unstyled `<a />` and `<p />` elements
+  as well
 - f99bbc2: Add `nextra-body-typesetting-article` back
 
 ## 2.0.0-beta.17
@@ -760,7 +830,8 @@
 - 2217f9c: fix `Warning: Prop`href`did not match. Server: "#" Client: ...`
 - 2217f9c: fix `next export` command
 - 2217f9c: replace `classnames` package with `clsx` as he's faster
-- 2217f9c: remove `locale` prop from theme config, forbid passing in `renderComponent`
+- 2217f9c: remove `locale` prop from theme config, forbid passing in
+  `renderComponent`
 
 ## 2.0.0-beta.16
 
@@ -796,7 +867,8 @@
 
 ### Patch Changes
 
-- 96ed5c2: [nextra/nextra-theme-docs]: support both `experimental.newNextLinkBehavior` - `true` and `false`
+- 96ed5c2: [nextra/nextra-theme-docs]: support both
+  `experimental.newNextLinkBehavior` - `true` and `false`
 - c8605d6: feat: New layout implementation
 
 ## 2.0.0-beta.13
@@ -815,7 +887,8 @@
 - a5cac21: [docs/blog]: extract code styles and import in both themes
 - 3de0f41: chore(blog/docs): use `postcss-import` to import css variables styles
 - 97ca2e3: New feature: menu type
-- 76d1e30: [nextra-theme-docs]: fix `Warning: A title element received an array` and possible `[object Object]` in title
+- 76d1e30: [nextra-theme-docs]: fix `Warning: A title element received an array`
+  and possible `[object Object]` in title
 - bf74201: [nextra-theme-docs]: use new opacity modifier syntax for tailwindcss
 - 0f4795f: chore(nextra/blog/docs): provide types for PageOpts in loader
 
@@ -838,7 +911,8 @@
 
 ### Patch Changes
 
-- af72f85: chore(nextra-theme-docs): provide type for `DocsThemeConfig.nextThemes` instead of `object`
+- af72f85: chore(nextra-theme-docs): provide type for
+  `DocsThemeConfig.nextThemes` instead of `object`
 - 97e6141: fix(nextra/docs): fallback search to `en-US` instead `default`
 - 699d131: feat(nextra/docs/blog): allow import `.md`/`.mdx` as well
 - 03e90d8: refresh build system with tsup and fix nextra type
@@ -850,7 +924,8 @@
 - 6644bd5: pass unstable_flexsearch
 - c15f570: fix: query should not affect nav highlight
 - 4730bdc: chore(nextra-theme-docs): refactor `theme-context.ts`
-- 94a8587: chore: extract `svg` icons in `/icons` folder, reusing same icons `<MoonIcon />` / `<SunIcon />` in blog from docs
+- 94a8587: chore: extract `svg` icons in `/icons` folder, reusing same icons
+  `<MoonIcon />` / `<SunIcon />` in blog from docs
 - e573175: Fix release CI
 - c380989: fix(docs): types is missing in bundle
 - d34f9f2: feat(nextra-theme-docs): update discord logo to the new one
