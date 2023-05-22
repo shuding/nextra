@@ -2,11 +2,12 @@
 
 ## Revalidate
 
-You can get the `mutate` function from the `useSWRConfig()` hook, and broadcast a revalidation message
-globally to other SWR hooks<sup>\*</sup> using the same key by calling `mutate(key)`.
+You can get the `mutate` function from the `useSWRConfig()` hook, and broadcast
+a revalidation message globally to other SWR hooks<sup>\*</sup> using the same
+key by calling `mutate(key)`.
 
-This example shows how to automatically refetch the login info (e.g. inside `<Profile/>`)
-when the user clicks the “Logout” button.
+This example shows how to automatically refetch the login info (e.g. inside
+`<Profile/>`) when the user clicks the “Logout” button.
 
 ```jsx
 import useSWR, { useSWRConfig } from 'swr'
@@ -34,7 +35,8 @@ function App() {
 }
 ```
 
-\*: _It broadcasts to SWR hooks under the same [cache provider](/docs/cache) scope. If no cache provider exists, it will broadcast to all SWR hooks._
+\*: _It broadcasts to SWR hooks under the same [cache provider](/docs/cache)
+scope. If no cache provider exists, it will broadcast to all SWR hooks._
 
 ## Mutation and POST Request
 
@@ -75,11 +77,13 @@ function Profile() {
 }
 ```
 
-Clicking the button in the example above will locally update the client data, send a POST request to modify the remote data and
-try to fetch the latest one (revalidate).
+Clicking the button in the example above will locally update the client data,
+send a POST request to modify the remote data and try to fetch the latest one
+(revalidate).
 
-But many POST APIs will just return the updated data directly, so we don’t need to revalidate again.
-Here’s an example showing the “local mutate - request - update” usage:
+But many POST APIs will just return the updated data directly, so we don’t need
+to revalidate again. Here’s an example showing the “local mutate - request -
+update” usage:
 
 ```jsx
 mutate('/api/user', newUser, false) // use `false` to mutate without revalidation
@@ -91,7 +95,8 @@ mutate('/api/user', updateUser(newUser), false) // `updateUser` is a Promise of 
 
 Sometimes, you want to update a part of your data based on the current data.
 
-With `mutate`, you can pass an async function which will receive the current cached value, if any, and returns an updated document.
+With `mutate`, you can pass an async function which will receive the current
+cached value, if any, and returns an updated document.
 
 ```jsx
 mutate('/api/todos', async todos => {
@@ -110,9 +115,12 @@ mutate('/api/todos', async todos => {
 
 ## Returned Data from Mutate
 
-Most probably, you need some data to update the cache. The data is resolved or returned from the promise or async function you passed to `mutate`.
+Most probably, you need some data to update the cache. The data is resolved or
+returned from the promise or async function you passed to `mutate`.
 
-The function passed to `mutate` will return an updated document which is used to update the corresponding cache value. If there is an error thown while executing the function, the error will be thrown so it can be handled appropriately.
+The function passed to `mutate` will return an updated document which is used to
+update the corresponding cache value. If there is an error thown while executing
+the function, the error will be thrown so it can be handled appropriately.
 
 ```jsx
 try {
@@ -124,9 +132,11 @@ try {
 
 ## Bound Mutate
 
-The SWR object returned by `useSWR` also contains a `mutate()` function that is pre-bound to the SWR's key.
+The SWR object returned by `useSWR` also contains a `mutate()` function that is
+pre-bound to the SWR's key.
 
-It is functionally equivalent to the global `mutate` function but does not require the `key` parameter.
+It is functionally equivalent to the global `mutate` function but does not
+require the `key` parameter.
 
 ```jsx
 import useSWR from 'swr'

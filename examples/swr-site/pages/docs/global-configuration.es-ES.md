@@ -1,6 +1,7 @@
 # Configuración Global
 
-El contexto `SWRConfig` puede proporcionar configuraciones globales ([opciones](/docs/options)) para todos los hooks de SWR.
+El contexto `SWRConfig` puede proporcionar configuraciones globales
+([opciones](/docs/options)) para todos los hooks de SWR.
 
 ```jsx
 <SWRConfig value={options}>
@@ -8,8 +9,9 @@ El contexto `SWRConfig` puede proporcionar configuraciones globales ([opciones](
 </SWRConfig>
 ```
 
-En este ejemplo, todos los hooks de SWR utilizarán el mismo fetcher proporcionando para cargar datos JSON,
-y se actualizarán cada 3 segundos por defecto:
+En este ejemplo, todos los hooks de SWR utilizarán el mismo fetcher
+proporcionando para cargar datos JSON, y se actualizarán cada 3 segundos por
+defecto:
 
 ```jsx
 import useSWR, { SWRConfig } from 'swr'
@@ -41,7 +43,9 @@ function App() {
 
 ### Cache Provider
 
-Besides all the [options](/docs/options) listed, `SWRConfig` also accepts an optional `provider` function. Please refer to the [Cache](/docs/cache) section for more details.
+Besides all the [options](/docs/options) listed, `SWRConfig` also accepts an
+optional `provider` function. Please refer to the [Cache](/docs/cache) section
+for more details.
 
 ```jsx
 <SWRConfig value={{ provider: () => new Map() }}>
@@ -51,7 +55,8 @@ Besides all the [options](/docs/options) listed, `SWRConfig` also accepts an opt
 
 ### Access To Global Configurations
 
-You can use the `useSWRConfig` hook to get the global configurations, as well as [`mutate`](/docs/mutation) and [`cache`](/docs/advanced/cache):
+You can use the `useSWRConfig` hook to get the global configurations, as well as
+[`mutate`](/docs/mutation) and [`cache`](/docs/advanced/cache):
 
 ```jsx
 import { useSWRConfig } from 'swr'
@@ -63,4 +68,5 @@ function Component() {
 }
 ```
 
-Nested configurations will be extended. If no `<SWRConfig>` is used, it will return the default ones.
+Nested configurations will be extended. If no `<SWRConfig>` is used, it will
+return the default ones.
