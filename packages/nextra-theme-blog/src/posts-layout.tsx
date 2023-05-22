@@ -8,6 +8,7 @@ import { MDXTheme } from './mdx-theme'
 import Nav from './nav'
 import { collectPostsAndNavs } from './utils/collect'
 import getTags from './utils/get-tags'
+import { useTheme } from 'next-themes'
 
 export const PostsLayout = ({
   children
