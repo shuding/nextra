@@ -1,5 +1,19 @@
 # nextra-theme-docs
 
+## 2.6.0
+
+### Minor Changes
+
+- 1c6256b: Move Callout component to nextra package
+
+### Patch Changes
+
+- 15c4092: fix inconsistent `font-weight: bold` style for `type: 'menu'`
+- 2d79e20: Resolves dark mode contrast problems in sidebar and breadcrumbs
+- Updated dependencies [15c4092]
+- Updated dependencies [1c6256b]
+  - nextra@2.6.0
+
 ## 2.5.2
 
 ### Patch Changes
