@@ -30,3 +30,7 @@ h1 {
     @apply nx-font-normal;
   }
 }
+
+.nx-prose .nextra-callout p {
+  @apply nx-m-0;
+}
