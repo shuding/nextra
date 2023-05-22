@@ -38,7 +38,8 @@
     "rimraf": "5.0.1",
     "tsup": "6.7.0",
     "turbo": "1.9.8",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "@ianvs/prettier-plugin-sort-imports": "^4.0.0-beta.0"
   },
   "packageManager": "pnpm@8.5.1",
   "pnpm": {

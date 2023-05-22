@@ -519,14 +519,14 @@
 - 582ad96: feat: bump `rehype-pretty-code` version, support `showLineNumbers`
 - da998e6: move react components to `components` folder and replace exports:
   ```ts
+  import Bleed from 'nextra-theme-docs/bleed'
   import Callout from 'nextra-theme-docs/callout'
   import Collapse from 'nextra-theme-docs/collapse'
-  import Bleed from 'nextra-theme-docs/bleed'
-  import { Tabs, Tab } from 'nextra-theme-docs/tabs'
+  import { Tab, Tabs } from 'nextra-theme-docs/tabs'
   ```
   by
   ```ts
-  import { Callout, Collapse, Bleed, Tabs, Tab } from 'nextra-theme-docs'
+  import { Bleed, Callout, Collapse, Tab, Tabs } from 'nextra-theme-docs'
   ```
 - e6771ca: move `withLayout` logic directly in nextra loader
 - 8ad9507: fix unable expanding folder items in sidebar
@@ -846,14 +846,14 @@
 - 48e0ac2: export `useConfig` and `useTheme`
 - da998e6: move react components to `components` folder and replace exports:
   ```ts
+  import Bleed from 'nextra-theme-docs/bleed'
   import Callout from 'nextra-theme-docs/callout'
   import Collapse from 'nextra-theme-docs/collapse'
-  import Bleed from 'nextra-theme-docs/bleed'
-  import { Tabs, Tab } from 'nextra-theme-docs/tabs'
+  import { Tab, Tabs } from 'nextra-theme-docs/tabs'
   ```
   by
   ```ts
-  import { Callout, Collapse, Bleed, Tabs, Tab } from 'nextra-theme-docs'
+  import { Bleed, Callout, Collapse, Tab, Tabs } from 'nextra-theme-docs'
   ```
 - 43409ad: fix: mdx theme is missing
 

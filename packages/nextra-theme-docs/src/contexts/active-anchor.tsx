@@ -1,6 +1,6 @@
 import type { Dispatch, ReactElement, ReactNode, SetStateAction } from 'react'
 import 'intersection-observer'
-import { createContext, useContext, useState, useRef } from 'react'
+import { createContext, useContext, useRef, useState } from 'react'
 import { IS_BROWSER } from '../constants'
 
 type ActiveAnchor = Record<
