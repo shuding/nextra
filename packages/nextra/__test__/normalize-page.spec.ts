@@ -121,9 +121,6 @@ describe('normalize-page', () => {
               type: 'page',
               title: 'Nextra',
               display: 'hidden',
-              theme: {
-                layout: 'raw'
-              }
             },
             docs: {
               type: 'page',
@@ -136,10 +133,6 @@ describe('normalize-page', () => {
             showcase: {
               type: 'page',
               title: 'Showcase',
-              theme: {
-                typesetting: 'article',
-                layout: 'full'
-              }
             },
             explorers2: {
               title: 'Explorers2',
@@ -148,9 +141,6 @@ describe('normalize-page', () => {
             about: {
               type: 'page',
               title: 'About',
-              theme: {
-                typesetting: 'article'
-              }
             },
             explorers3: {
               title: 'Explorers3',
@@ -190,10 +180,6 @@ describe('normalize-page', () => {
           "kind": "MdxPage",
           "name": "showcase",
           "route": "/showcase",
-          "theme": {
-            "layout": "full",
-            "typesetting": "article",
-          },
           "title": "Showcase",
           "type": "page",
         },
@@ -207,9 +193,6 @@ describe('normalize-page', () => {
           "kind": "MdxPage",
           "name": "about",
           "route": "/about",
-          "theme": {
-            "typesetting": "article",
-          },
           "title": "About",
           "type": "page",
         },
