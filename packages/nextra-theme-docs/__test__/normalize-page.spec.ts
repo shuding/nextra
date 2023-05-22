@@ -132,24 +132,6 @@ describe('normalize-page', () => {
             explorers: {
               title: 'Explorers',
               type: 'menu',
-              items: {
-                status: {
-                  title: 'Protocol Status',
-                  type: 'page',
-                  href: 'https://status.internal.taiko.xyz',
-                  newWindow: true
-                },
-                'l1-block-explorer': {
-                  title: 'L1 Block Explorer',
-                  href: 'https://sepolia.etherscan.io',
-                  newWindow: true
-                },
-                'l2-block-explorer': {
-                  title: 'L2 Block Explorer',
-                  href: 'https://explorer.internal.taiko.xyz',
-                  newWindow: true
-                }
-              }
             },
             showcase: {
               type: 'page',
@@ -162,24 +144,6 @@ describe('normalize-page', () => {
             explorers2: {
               title: 'Explorers2',
               type: 'menu',
-              items: {
-                status: {
-                  title: 'Protocol Status',
-                  type: 'page',
-                  href: 'https://status.internal.taiko.xyz',
-                  newWindow: true
-                },
-                'l1-block-explorer': {
-                  title: 'L1 Block Explorer',
-                  href: 'https://sepolia.etherscan.io',
-                  newWindow: true
-                },
-                'l2-block-explorer': {
-                  title: 'L2 Block Explorer',
-                  href: 'https://explorer.internal.taiko.xyz',
-                  newWindow: true
-                }
-              }
             },
             about: {
               type: 'page',
@@ -191,24 +155,6 @@ describe('normalize-page', () => {
             explorers3: {
               title: 'Explorers3',
               type: 'menu',
-              items: {
-                status: {
-                  title: 'Protocol Status',
-                  type: 'page',
-                  href: 'https://status.internal.taiko.xyz',
-                  newWindow: true
-                },
-                'l1-block-explorer': {
-                  title: 'L1 Block Explorer',
-                  href: 'https://sepolia.etherscan.io',
-                  newWindow: true
-                },
-                'l2-block-explorer': {
-                  title: 'L2 Block Explorer',
-                  href: 'https://explorer.internal.taiko.xyz',
-                  newWindow: true
-                }
-              }
             }
           }
         },
@@ -216,63 +162,6 @@ describe('normalize-page', () => {
           kind: 'MdxPage',
           name: 'about',
           route: '/about'
-        },
-        {
-          kind: 'Folder',
-          name: 'docs',
-          route: '/docs',
-          children: [
-            {
-              kind: 'Meta',
-              data: {
-                index: {
-                  title: 'Introduction'
-                },
-                guide: {
-                  title: 'Guide'
-                },
-                '-- Themes': {
-                  type: 'separator',
-                  title: 'Themes'
-                },
-                'docs-theme': {
-                  title: 'Docs Theme'
-                },
-                'blog-theme': {
-                  title: 'Blog Theme'
-                },
-                'custom-theme': {
-                  title: 'Custom Theme'
-                },
-                '-- More': {
-                  type: 'separator',
-                  title: 'More'
-                },
-                'about-link': {
-                  title: 'About Nextra',
-                  href: '/about'
-                },
-                'next.js-link': {
-                  title: 'Next.js Docs ↗',
-                  href: 'https://nextjs.org?utm_source=nextra.site&utm_medium=referral&utm_campaign=sidebar',
-                  newWindow: true
-                }
-              }
-            },
-            {
-              kind: 'MdxPage',
-              name: 'index',
-              route: '/docs'
-            }
-          ]
-        },
-        {
-          kind: 'MdxPage',
-          name: 'index',
-          route: '/',
-          frontMatter: {
-            title: 'Nextra – Next.js Static Site Generator'
-          }
         },
         {
           kind: 'MdxPage',
@@ -286,94 +175,12 @@ describe('normalize-page', () => {
     expect(result.topLevelNavbarItems).toMatchInlineSnapshot(`
       [
         {
-          "children": [
-            {
-              "kind": "MdxPage",
-              "name": "index",
-              "route": "/docs",
-              "title": "Introduction",
-              "type": "doc",
-            },
-            {
-              "name": "guide",
-              "route": "#",
-              "title": "Guide",
-              "type": "doc",
-            },
-            {
-              "isUnderCurrentDocsTree": true,
-              "name": "-- Themes",
-              "route": "#",
-              "title": "Themes",
-              "type": "separator",
-            },
-            {
-              "name": "docs-theme",
-              "route": "#",
-              "title": "Docs Theme",
-              "type": "doc",
-            },
-            {
-              "name": "blog-theme",
-              "route": "#",
-              "title": "Blog Theme",
-              "type": "doc",
-            },
-            {
-              "name": "custom-theme",
-              "route": "#",
-              "title": "Custom Theme",
-              "type": "doc",
-            },
-            {
-              "isUnderCurrentDocsTree": true,
-              "name": "-- More",
-              "route": "#",
-              "title": "More",
-              "type": "separator",
-            },
-            {
-              "href": "/about",
-              "name": "about-link",
-              "route": "#",
-              "title": "About Nextra",
-              "type": "doc",
-            },
-            {
-              "href": "https://nextjs.org?utm_source=nextra.site&utm_medium=referral&utm_campaign=sidebar",
-              "name": "next.js-link",
-              "newWindow": true,
-              "route": "#",
-              "title": "Next.js Docs ↗",
-              "type": "doc",
-            },
-          ],
-          "firstChildRoute": "/docs",
-          "kind": "Folder",
           "name": "docs",
-          "route": "/docs",
+          "route": "",
           "title": "Documentation",
           "type": "page",
         },
         {
-          "items": {
-            "l1-block-explorer": {
-              "href": "https://sepolia.etherscan.io",
-              "newWindow": true,
-              "title": "L1 Block Explorer",
-            },
-            "l2-block-explorer": {
-              "href": "https://explorer.internal.taiko.xyz",
-              "newWindow": true,
-              "title": "L2 Block Explorer",
-            },
-            "status": {
-              "href": "https://status.internal.taiko.xyz",
-              "newWindow": true,
-              "title": "Protocol Status",
-              "type": "page",
-            },
-          },
           "name": "explorers",
           "route": "",
           "title": "Explorers",
@@ -391,24 +198,6 @@ describe('normalize-page', () => {
           "type": "page",
         },
         {
-          "items": {
-            "l1-block-explorer": {
-              "href": "https://sepolia.etherscan.io",
-              "newWindow": true,
-              "title": "L1 Block Explorer",
-            },
-            "l2-block-explorer": {
-              "href": "https://explorer.internal.taiko.xyz",
-              "newWindow": true,
-              "title": "L2 Block Explorer",
-            },
-            "status": {
-              "href": "https://status.internal.taiko.xyz",
-              "newWindow": true,
-              "title": "Protocol Status",
-              "type": "page",
-            },
-          },
           "name": "explorers2",
           "route": "",
           "title": "Explorers2",
@@ -425,24 +214,6 @@ describe('normalize-page', () => {
           "type": "page",
         },
         {
-          "items": {
-            "l1-block-explorer": {
-              "href": "https://sepolia.etherscan.io",
-              "newWindow": true,
-              "title": "L1 Block Explorer",
-            },
-            "l2-block-explorer": {
-              "href": "https://explorer.internal.taiko.xyz",
-              "newWindow": true,
-              "title": "L2 Block Explorer",
-            },
-            "status": {
-              "href": "https://status.internal.taiko.xyz",
-              "newWindow": true,
-              "title": "Protocol Status",
-              "type": "page",
-            },
-          },
           "name": "explorers3",
           "route": "#",
           "title": "Explorers3",
