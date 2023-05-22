@@ -3,4 +3,4 @@
 'nextra-theme-docs': patch
 ---
 
-fix `font-weight: bold` style for `type: 'menu'`
+fix inconsistent `font-weight: bold` style for `type: 'menu'`
