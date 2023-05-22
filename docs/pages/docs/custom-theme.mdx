@@ -1,5 +1,5 @@
-import { Callout, Steps } from 'nextra-theme-docs'
 import { Screenshot } from 'components/screenshot'
+import { Callout, Steps } from 'nextra-theme-docs'
 
 # Custom Theme
 
@@ -76,8 +76,8 @@ For example, let’s implement these features:
 - Add a meta tag for `og:image` via the front matter
 
 ```tsx filename="theme.tsx" /pageOpts/
-import type { NextraThemeLayoutProps } from 'nextra'
 import Head from 'next/head'
+import type { NextraThemeLayoutProps } from 'nextra'
 
 export default function Layout({ children, pageOpts }: NextraThemeLayoutProps) {
   const { title, frontMatter, headings } = pageOpts

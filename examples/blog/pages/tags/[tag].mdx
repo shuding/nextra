@@ -2,14 +2,14 @@
 type: tag
 ---
 
-import { useSSG } from 'nextra/ssg'
 import Head from 'next/head'
 import {
   getStaticPaths,
   getStaticProps,
-  TagTitle,
-  TagName
+  TagName,
+  TagTitle
 } from 'nextra-theme-blog/tags'
+import { useSSG } from 'nextra/ssg'
 
 <TagTitle />
 # Posts Tagged with “<TagName />”
