@@ -1,7 +1,7 @@
 import fs from 'fs/promises'
 import { buildDynamicMDX, buildDynamicMeta } from 'nextra/remote'
 import { RemoteContent } from 'nextra/data'
-import { Callout } from 'nextra-theme-docs'
+import { Callout } from 'nextra/components'
 import {
   findPathWithExtension,
   findStaticPaths
@@ -13,7 +13,6 @@ export const getStaticProps = async ({ params }) => {
     rootDir: 'website/src/pages/docs/',
     slug: params.slug
   })
-
   const content = await fs.readFile(filePath, 'utf8')
   return {
     props: {

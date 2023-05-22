@@ -1,4 +1,4 @@
-import { Callout } from 'nextra-theme-docs'
+import { Callout } from 'nextra/components'
 
 # Usage with Next.js
 
@@ -24,7 +24,7 @@ You can use the `fallback` option of [`SWRConfig`](/docs/global-configuration) t
 For example with `getStaticProps`:
 
 ```jsx
- export async function getStaticProps () {
+export async function getStaticProps() {
   // `getStaticProps` is executed on the server side.
   const article = await getArticleFromAPI()
   return {

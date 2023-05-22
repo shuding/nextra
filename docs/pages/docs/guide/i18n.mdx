@@ -13,8 +13,8 @@ To add multi-language pages to your Nextra application, you need to config `i18n
 
 ```js filename="next.config.js" {7-10}
 const withNextra = require('nextra')({
-  theme: "nextra-theme-docs",
-  themeConfig: "./theme.config.tsx",
+  theme: 'nextra-theme-docs',
+  themeConfig: './theme.config.tsx'
 })
 
 module.exports = withNextra({
@@ -38,7 +38,7 @@ If you already have the middleware defined, you can do this instead:
 ```js
 import { withLocales } from 'nextra/locales'
 
-export const middleware = withLocales((request) => {
+export const middleware = withLocales(request => {
   // Your middleware code...
 })
 ```
@@ -70,4 +70,5 @@ i18n: [
   { locale: 'ar', text: 'العربية', direction: 'rtl' }
 ]
 ```
+
 </Steps>

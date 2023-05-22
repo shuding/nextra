@@ -1,4 +1,4 @@
-import type { Dispatch, SetStateAction} from 'react';
+import type { Dispatch, SetStateAction } from 'react'
 import { createContext, useContext } from 'react'
 
 const DetailsContext = createContext<Dispatch<SetStateAction<boolean>>>(v => v)

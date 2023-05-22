@@ -28,7 +28,7 @@ You can also explicitly specify the types for `key` and `fetcher`'s arguments.
 import useSWR, { Key, Fetcher } from 'swr'
 
 const uid: Key = '<user_id>'
-const fetcher: Fetcher<string, User> = (id) => getUserById(id)
+const fetcher: Fetcher<string, User> = id => getUserById(id)
 
 const { data } = useSWR(uid, fetcher)
 // `data` will be `User | undefined`.
@@ -69,7 +69,7 @@ import { useSWR } from 'swr'
 import type { SWRConfiguration } from 'swr'
 
 const config: SWRConfiguration = {
-  fallbackData: "fallback",
+  fallbackData: 'fallback',
   revalidateOnMount: false
   // ...
 }
@@ -84,8 +84,9 @@ There're some extra type definitions you can import to help adding types to your
 ```typescript
 import useSWR, { Middleware, SWRHook } from 'swr'
 
-const swrMiddleware: Middleware = (useSWRNext: SWRHook) => (key, fetcher, config) => {
-  // ...
-  return useSWRNext(key, fetcher, config)
-}
+const swrMiddleware: Middleware =
+  (useSWRNext: SWRHook) => (key, fetcher, config) => {
+    // ...
+    return useSWRNext(key, fetcher, config)
+  }
 ```

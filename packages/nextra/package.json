@@ -104,13 +104,13 @@
     "types:check": "tsc --noEmit",
     "test": "vitest run",
     "prepublishOnly": "pnpm build",
-    "clean": "rimraf ./dist ./style.css",
-    "format": "prettier --ignore-path ../../.gitignore --write --list-different ."
+    "clean": "rimraf ./dist ./style.css"
   },
   "dependencies": {
     "@mdx-js/mdx": "^2.3.0",
     "@mdx-js/react": "^2.3.0",
     "@napi-rs/simple-git": "^0.1.8",
+    "clsx": "^1.2.1",
     "github-slugger": "^2.0.0",
     "graceful-fs": "^4.2.10",
     "gray-matter": "^4.0.3",

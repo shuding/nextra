@@ -6,11 +6,12 @@ Those configurations affect the overall layout of the theme, especially the navi
 
 import { Callout, FileTree } from 'nextra-theme-docs'
 import Video from 'components/video'
-import {Screenshot} from 'components/screenshot'
+import { Screenshot } from 'components/screenshot'
 import menuImage from '../../../public/assets/docs/menu.png'
 
 <Callout>
-  Read more about Nextra's `_meta.json` files [here](/docs/guide/organize-files).
+  Read more about Nextra's `_meta.json` files
+  [here](/docs/guide/organize-files).
 </Callout>
 
 ## Pages
@@ -37,7 +38,9 @@ You can define how the pages are shown in the sidebar via the `_meta.json` file:
 ```
 
 <Callout>
-  If any routes are not listed in the `_meta.json` file, they will be appended to the end of the sidebar and sorted alphabetically, and the title will be formatted with [Title](https://title.sh).
+  If any routes are not listed in the `_meta.json` file, they will be appended
+  to the end of the sidebar and sorted alphabetically, and the title will be
+  formatted with [Title](https://title.sh).
 </Callout>
 
 ## Folders
@@ -134,7 +137,9 @@ To always open the link in a new tab, enable the `"newWindow": true` option:
 }
 ```
 
-<Callout>You can use this option to link to relative internal links too.</Callout>
+<Callout>
+  You can use this option to link to relative internal links too.
+</Callout>
 
 ## Hidden Routes
 
@@ -204,7 +209,11 @@ And it will look like this:
 
 <Video src="/assets/docs/sub-docs.mp4" />
 
-<div className="text-center text-sm mt-4">[Live example on StackBlitz ↗](https://stackblitz.com/edit/nextra-2-docs-eszspq?file=pages%2F_meta.json)<span className="sr-only"> (opens in a new tab)</span></div>
+<div className="mt-4 text-center text-sm">
+  [Live example on StackBlitz
+  ↗](https://stackblitz.com/edit/nextra-2-docs-eszspq?file=pages%2F_meta.json)
+  <span className="sr-only"> (opens in a new tab)</span>
+</div>
 
 You can also hide links like `Home` from the navbar with the [`"display": "hidden"`](#hidden-routes) option.
 
@@ -214,7 +223,11 @@ You can also add menus to the navbar using `"type": "menu"` and the `"items"` op
 
 <Screenshot src={menuImage} alt="Navbar menu" />
 
-<div className="text-center text-sm mt-8">[Live example on StackBlitz ↗](https://stackblitz.com/edit/nextra-2-docs-2qopvp?file=pages%2F_meta.json)<span className="sr-only"> (opens in a new tab)</span></div>
+<div className="mt-8 text-center text-sm">
+  [Live example on StackBlitz
+  ↗](https://stackblitz.com/edit/nextra-2-docs-2qopvp?file=pages%2F_meta.json)
+  <span className="sr-only"> (opens in a new tab)</span>
+</div>
 
 ```json filename="pages/_meta.json"
 {
@@ -291,7 +304,10 @@ You can use a "placeholder" item with `"type": "separator"` to create a separato
 ```
 
 <Callout>
-  Together with the [`sidebar.titleComponent`](/docs/docs-theme/theme-configuration#sidebar) theme option, you can customize the look of titles and separator lines in the sidebar.
+  Together with the
+  [`sidebar.titleComponent`](/docs/docs-theme/theme-configuration#sidebar) theme
+  option, you can customize the look of titles and separator lines in the
+  sidebar.
 </Callout>
 
 ## Advanced
@@ -368,4 +384,8 @@ The default one is suitable for most cases like documentation, but you can use t
 }
 ```
 
-<div className="text-center text-sm mt-4">[Live example on StackBlitz ↗](https://stackblitz.com/edit/nextra-2-docs-hg77h3?file=pages%2F_meta.json,pages%2Findex.mdx)<span className="sr-only"> (opens in a new tab)</span></div>
+<div className="mt-4 text-center text-sm">
+  [Live example on StackBlitz
+  ↗](https://stackblitz.com/edit/nextra-2-docs-hg77h3?file=pages%2F_meta.json,pages%2Findex.mdx)
+  <span className="sr-only"> (opens in a new tab)</span>
+</div>

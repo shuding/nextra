@@ -1,4 +1,4 @@
-import { Callout } from 'nextra-theme-docs'
+import { Callout } from 'nextra/components'
 
 # Использование с Next.js
 
@@ -23,7 +23,7 @@ import { Callout } from 'nextra-theme-docs'
 Вы можете использовать `fallback` опцию [`SWRConfig`](/docs/global-configuration), чтобы передать предварительно выбранные данные в качестве начального значения всех SWR хуков. Например, с `getStaticProps`:
 
 ```jsx
- export async function getStaticProps () {
+export async function getStaticProps() {
   // `getStaticProps` выполняется на стороне сервера.
   const article = await getArticleFromAPI()
   return {

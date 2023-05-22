@@ -1,22 +1,13 @@
- 
 const colors = require('tailwindcss/colors')
+const docsConfig = require('../nextra-theme-docs/tailwind.config')
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  prefix: 'nx-',
-  content: ['./src/**/*.{js,tsx,jsx}', '../nextra/src/components/*.tsx'],
+  prefix: docsConfig.prefix,
+  content: docsConfig.content,
   theme: {
     colors: {
-      transparent: 'transparent',
-      current: 'currentColor',
-      black: '#000',
-      white: '#fff',
-      gray: colors.gray,
-      slate: colors.slate,
-      neutral: colors.neutral,
-      red: colors.red,
-      orange: colors.orange,
-      yellow: colors.yellow,
+      ...docsConfig.theme.colors,
       primary: colors.blue
     },
     extend: {
@@ -59,5 +50,5 @@ module.exports = {
     }
   },
   plugins: [require('@tailwindcss/typography')],
-  darkMode: ['class', 'html[class~="dark"]']
+  darkMode: docsConfig.darkMode
 }

@@ -1,4 +1,3 @@
- 
 const colors = require('tailwindcss/colors')
 
 const makePrimaryColor =
@@ -64,7 +63,7 @@ module.exports = {
         700: makePrimaryColor(39),
         750: makePrimaryColor(35),
         800: makePrimaryColor(32),
-        900: makePrimaryColor(24),
+        900: makePrimaryColor(24)
       }
     },
     extend: {

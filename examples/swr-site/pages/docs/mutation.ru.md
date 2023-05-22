@@ -9,19 +9,22 @@
 ```jsx
 import useSWR, { useSWRConfig } from 'swr'
 
-function App () {
+function App() {
   const { mutate } = useSWRConfig()
 
   return (
     <div>
       <Profile />
-      <button onClick={() => {
-        // установить cookie как просроченный
-        document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+      <button
+        onClick={() => {
+          // установить cookie как просроченный
+          document.cookie =
+            'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
 
-        // сообщить всем SWR с этим ключём, чтобы они ревалидировали
-        mutate('/api/user')
-      }}>
+          // сообщить всем SWR с этим ключём, чтобы они ревалидировали
+          mutate('/api/user')
+        }}
+      >
         Выйти
       </button>
     </div>
@@ -40,25 +43,29 @@ function App () {
 ```jsx
 import useSWR, { useSWRConfig } from 'swr'
 
-function Profile () {
+function Profile() {
   const { mutate } = useSWRConfig()
   const { data } = useSWR('/api/user', fetcher)
 
   return (
     <div>
       <h1>Меня зовут {data.name}.</h1>
-      <button onClick={async () => {
-        const newName = data.name.toUpperCase()
+      <button
+        onClick={async () => {
+          const newName = data.name.toUpperCase()
 
-        // немедленно обновить локальные данные, но отключить ревалидацию
-        mutate('/api/user', { ...data, name: newName }, false)
+          // немедленно обновить локальные данные, но отключить ревалидацию
+          mutate('/api/user', { ...data, name: newName }, false)
 
-        // отправить API запрос для обновления источника
-        await requestUpdateUsername(newName)
+          // отправить API запрос для обновления источника
+          await requestUpdateUsername(newName)
 
-        // вызвать ревалидацию (повторную выборку), чтобы убедиться, что наши локальные данные верны
-        mutate('/api/user')
-      }}>Перевести моё имя в верхнии регистр!</button>
+          // вызвать ревалидацию (повторную выборку), чтобы убедиться, что наши локальные данные верны
+          mutate('/api/user')
+        }}
+      >
+        Перевести моё имя в верхнии регистр!
+      </button>
     </div>
   )
 }
@@ -69,9 +76,9 @@ function Profile () {
 Но многие POST API возвращают обновленные данные напрямую, поэтому ревалидация не требуется. Вот пример, показывающий использование «локальная мутация - запрос - обновление»:
 
 ```jsx
-mutate('/api/user', newUser, false)             // используйте `false` для мутации без ревалидации
+mutate('/api/user', newUser, false) // используйте `false` для мутации без ревалидации
 mutate('/api/user', updateUser(newUser), false) // `updateUser` является промисом запроса,
-                                                // который возвращает обновленный документ
+// который возвращает обновленный документ
 ```
 
 ## Мутировать на основе текущих данных
@@ -118,20 +125,24 @@ try {
 ```jsx
 import useSWR from 'swr'
 
-function Profile () {
+function Profile() {
   const { data, mutate } = useSWR('/api/user', fetcher)
 
   return (
     <div>
       <h1>Меня зовут {data.name}.</h1>
-      <button onClick={async () => {
-        const newName = data.name.toUpperCase()
-        // отправьте API запрос для обновления данных
-        await requestUpdateUsername(newName)
-        // немедленно обновите локальные данные и ревалидируйте их (повторная выборка)
-        // ПРИМЕЧАНИЕ: ключ не требуется при использовании мутации useSWR, поскольку он предварительно привязан
-        mutate({ ...data, name: newName })
-      }}>Перевести моё имя в верхнии регистр!</button>
+      <button
+        onClick={async () => {
+          const newName = data.name.toUpperCase()
+          // отправьте API запрос для обновления данных
+          await requestUpdateUsername(newName)
+          // немедленно обновите локальные данные и ревалидируйте их (повторная выборка)
+          // ПРИМЕЧАНИЕ: ключ не требуется при использовании мутации useSWR, поскольку он предварительно привязан
+          mutate({ ...data, name: newName })
+        }}
+      >
+        Перевести моё имя в верхнии регистр!
+      </button>
     </div>
   )
 }

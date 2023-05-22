@@ -58,7 +58,7 @@ export default {
 }
 ```
 
-import { Callout } from 'nextra-theme-docs'
+import { Callout } from 'nextra/components'
 
 <Callout>
   More configuration options for the docs theme can be found

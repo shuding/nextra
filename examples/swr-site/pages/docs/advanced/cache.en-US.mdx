@@ -1,14 +1,16 @@
-import { Callout } from 'nextra-theme-docs'
+import { Callout } from 'nextra/components'
 
 # Cache
 
-<Callout>
-  Upgrade to the latest version (≥ 1.0.0) to use this feature.
-</Callout>
+<Callout>Upgrade to the latest version (≥ 1.0.0) to use this feature.</Callout>
 
 <Callout emoji="⚠️">
-  In most cases, you shouldn't directly _write_ to the cache, which might cause undefined behaviors of SWR. If you need to manually mutate a key, please consider using the SWR APIs.<br/>
-  See also: [Mutation](/docs/mutation), [Reset Cache Between Test Cases](#reset-cache-between-test-cases).
+  In most cases, you shouldn't directly _write_ to the cache, which might cause
+  undefined behaviors of SWR. If you need to manually mutate a key, please
+  consider using the SWR APIs.
+  <br />
+  See also: [Mutation](/docs/mutation), [Reset Cache Between Test
+  Cases](#reset-cache-between-test-cases).
 </Callout>
 
 By default, SWR uses a global cache to store and share data across all components. But you can also customize this behavior with the `provider` option of `SWRConfig`.
@@ -39,7 +41,7 @@ import useSWR, { SWRConfig } from 'swr'
 function App() {
   return (
     <SWRConfig value={{ provider: () => new Map() }}>
-      <Page/>
+      <Page />
     </SWRConfig>
   )
 }
@@ -48,13 +50,15 @@ function App() {
 All SWR hooks inside `<Page/>` will read and write from that Map instance. You can also use other cache provider implementations as well for your specific use case.
 
 <Callout>
-  In the example above, when the `<App/>` component is re-mounted, the provider will also be re-created. Cache providers should be put higher in the component tree, or outside of render.
+  In the example above, when the `<App />` component is re-mounted, the provider
+  will also be re-created. Cache providers should be put higher in the component
+  tree, or outside of render.
 </Callout>
 
 import { Cache } from '@components/diagrams/cache'
 
 <div className="my-8">
-  <Cache/>
+  <Cache />
 </div>
 
 When nested, SWR hooks will use the upper-level cache provider. If there is no upper-level cache provider, it fallbacks to the default cache provider, which is an empty `Map`.
@@ -81,7 +85,7 @@ If it's not under any `<SWRConfig>`, it will return the default configurations.
 ## Experimental: Extend Cache Provider
 
 <Callout emoji="🧪">
-   This is an experimental feature, the behavior might change in future upgrades.
+  This is an experimental feature, the behavior might change in future upgrades.
 </Callout>
 
 When multiple `<SWRConfig>` components are nested, cache provider can be extended.
@@ -89,9 +93,7 @@ When multiple `<SWRConfig>` components are nested, cache provider can be extende
 The first argument for the `provider` function is the cache provider of the upper-level `<SWRConfig>` (or the default cache if there's no parent `<SWRConfig>`), you can use it to extend the cache provider:
 
 ```jsx
-<SWRConfig value={{ provider: (cache) => newCache }}>
-  ...
-</SWRConfig>
+<SWRConfig value={{ provider: cache => newCache }}>...</SWRConfig>
 ```
 
 ## Examples
@@ -107,7 +109,9 @@ function useMatchMutate() {
   const { cache, mutate } = useSWRConfig()
   return (matcher, ...args) => {
     if (!(cache instanceof Map)) {
-      throw new Error('matchMutate requires the cache provider to be a Map instance')
+      throw new Error(
+        'matchMutate requires the cache provider to be a Map instance'
+      )
     }
 
     const keys = []
@@ -118,7 +122,7 @@ function useMatchMutate() {
       }
     }
 
-    const mutations = keys.map((key) => mutate(key, ...args))
+    const mutations = keys.map(key => mutate(key, ...args))
     return Promise.all(mutations)
   }
 }
@@ -129,9 +133,11 @@ Then inside your component:
 ```jsx
 function Button() {
   const matchMutate = useMatchMutate()
-  return <button onClick={() => matchMutate(/^\/api\//)}>
-    Revalidate all keys start with "/api/"
-  </button>
+  return (
+    <button onClick={() => matchMutate(/^\/api\//)}>
+      Revalidate all keys start with "/api/"
+    </button>
+  )
 }
 ```
 
@@ -163,12 +169,14 @@ Then use it as a provider:
 
 ```jsx
 <SWRConfig value={{ provider: localStorageProvider }}>
-  <App/>
+  <App />
 </SWRConfig>
 ```
 
 <Callout>
-  As an improvement, you can also use the memory cache as a buffer, and write to `localStorage` periodically. You can also implement a similar layered cache with IndexedDB or WebSQL.
+  As an improvement, you can also use the memory cache as a buffer, and write to
+  `localStorage` periodically. You can also implement a similar layered cache
+  with IndexedDB or WebSQL.
 </Callout>
 
 ### Reset Cache Between Test Cases
@@ -180,7 +188,7 @@ describe('test suite', async () => {
   it('test case', async () => {
     render(
       <SWRConfig value={{ provider: () => new Map() }}>
-        <App/>
+        <App />
       </SWRConfig>
     )
   })
@@ -195,5 +203,5 @@ Alert: you should not write to the cache directly, it might cause undefined beha
 const { cache } = useSWRConfig()
 
 cache.get(key) // Get the current data for a key.
-cache.clear()  // ⚠️ Clear all the cache. SWR will revalidate upon re-render.
+cache.clear() // ⚠️ Clear all the cache. SWR will revalidate upon re-render.
 ```

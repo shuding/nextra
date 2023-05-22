@@ -1,4 +1,4 @@
-import type { DocsThemeConfig} from 'nextra-theme-docs';
+import type { DocsThemeConfig } from 'nextra-theme-docs'
 import { useConfig } from 'nextra-theme-docs'
 import { useRouter } from 'next/router'
 
@@ -127,7 +127,7 @@ const config: DocsThemeConfig = {
       return <>{title}</>
     },
     defaultMenuCollapseLevel: 1,
-    toggleButton: true,
+    toggleButton: true
   },
   footer: {
     text: (

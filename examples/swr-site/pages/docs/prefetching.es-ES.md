@@ -5,7 +5,7 @@
 Hay muchas formas de precargar los datos para SWR. Para las solicitudes de nivel superior, [`rel="preload"`](https://developer.mozilla.org/en-US/docs/Web/HTML/Preloading_content) es muy recomendable:
 
 ```html
-<link rel="preload" href="/api/data" as="fetch" crossorigin="anonymous">
+<link rel="preload" href="/api/data" as="fetch" crossorigin="anonymous" />
 ```
 
 Sólo tienes que ponerlo dentro de tu HTML `<head>`. Es fácil, rápido y nativo.
@@ -19,8 +19,11 @@ A veces, se quiere precargar un recurso de forma condicional. Por ejemplo, preca
 ```js
 import { mutate } from 'swr'
 
-function prefetch () {
-  mutate('/api/data', fetch('/api/data').then(res => res.json()))
+function prefetch() {
+  mutate(
+    '/api/data',
+    fetch('/api/data').then(res => res.json())
+  )
   // el segundo parametró es una Promise
   // SWR utilizará el resultado cuando resuelva
 }

@@ -1,4 +1,4 @@
-import { Callout } from 'nextra-theme-docs'
+import { Callout } from 'nextra/components'
 
 # Middleware
 
@@ -15,7 +15,7 @@ Middleware receive the SWR hook and can execute logic before and after running i
 ### API
 
 ```jsx
-function myMiddleware (useSWRNext) {
+function myMiddleware(useSWRNext) {
   return (key, fetcher, config) => {
     // Before hook runs...
 
@@ -43,7 +43,7 @@ useSWR(key, fetcher, { use: [myMiddleware] })
 Middleware will be extended like regular options. For example:
 
 ```jsx
-function Bar () {
+function Bar() {
   useSWR(key, fetcher, { use: [c] })
   // ...
 }
@@ -52,7 +52,7 @@ function Foo() {
   return (
     <SWRConfig value={{ use: [a] }}>
       <SWRConfig value={{ use: [b] }}>
-        <Bar/>
+        <Bar />
       </SWRConfig>
     </SWRConfig>
   )
@@ -149,16 +149,18 @@ function laggy(useSWRNext) {
     }, [])
 
     // Fallback to previous data if the current data is undefined.
-    const dataOrLaggyData = swr.data === undefined ? laggyDataRef.current : swr.data
+    const dataOrLaggyData =
+      swr.data === undefined ? laggyDataRef.current : swr.data
 
     // Is it showing previous data?
-    const isLagging = swr.data === undefined && laggyDataRef.current !== undefined
+    const isLagging =
+      swr.data === undefined && laggyDataRef.current !== undefined
 
     // Also add a `isLagging` field to SWR.
     return Object.assign({}, swr, {
       data: dataOrLaggyData,
       isLagging,
-      resetLaggy,
+      resetLaggy
     })
   }
 }

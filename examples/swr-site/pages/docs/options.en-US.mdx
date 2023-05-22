@@ -1,4 +1,4 @@
-import { Callout } from 'nextra-theme-docs'
+import { Callout } from 'nextra/components'
 
 # API Options
 
@@ -50,8 +50,8 @@ const { data, error, isValidating, mutate } = useSWR(key, fetcher, options)
 - `use`: array of middleware functions [(details)](/docs/middleware)
 
 <Callout emoji="💡">
-  When under a slow network (2G, {'<='} 70Kbps), <code>errorRetryInterval</code> will be 10s, and{' '}
-  <code>loadingTimeout</code> will be 5s by default.
+  When under a slow network (2G, {'<='} 70Kbps), <code>errorRetryInterval</code>{' '}
+  will be 10s, and <code>loadingTimeout</code> will be 5s by default.
 </Callout>
 
 You can also use [global configuration](/docs/global-configuration) to provide default options.
