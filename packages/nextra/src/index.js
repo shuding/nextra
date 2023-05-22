@@ -1,13 +1,13 @@
 /* eslint-env node */
+import {
+  DEFAULT_CONFIG,
+  DEFAULT_LOCALE,
+  DEFAULT_LOCALES,
+  MARKDOWN_EXTENSION_REGEX,
+  MARKDOWN_EXTENSIONS
+} from './constants'
 import { NextraPlugin, pageMapCache } from './plugin'
 import { NextraSearchPlugin } from './search/plugin'
-import {
-  DEFAULT_LOCALE,
-  DEFAULT_CONFIG,
-  MARKDOWN_EXTENSION_REGEX,
-  MARKDOWN_EXTENSIONS,
-  DEFAULT_LOCALES
-} from './constants'
 
 const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
 

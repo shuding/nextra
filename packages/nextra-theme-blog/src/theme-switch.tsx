@@ -1,6 +1,6 @@
 import { useTheme } from 'next-themes'
-import { MoonIcon, SunIcon } from 'nextra/icons'
 import { useMounted } from 'nextra/hooks'
+import { MoonIcon, SunIcon } from 'nextra/icons'
 
 export default function ThemeSwitch() {
   const { setTheme, resolvedTheme } = useTheme()

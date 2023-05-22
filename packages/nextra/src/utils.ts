@@ -1,6 +1,6 @@
 import path from 'node:path'
-import title from 'title'
 import slash from 'slash'
+import title from 'title'
 import { LOCALE_REGEX } from './constants'
 import type { Folder, MdxFile, Meta } from './types'
 

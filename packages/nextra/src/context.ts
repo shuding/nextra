@@ -1,11 +1,11 @@
-import { normalizeMeta } from './utils'
+import { NEXTRA_INTERNAL } from './constants'
 import type {
   MetaJsonFile,
-  PageMapItem,
+  NextraInternalGlobal,
   Page,
-  NextraInternalGlobal
+  PageMapItem
 } from './types'
-import { NEXTRA_INTERNAL } from './constants'
+import { normalizeMeta } from './utils'
 
 function getContext(name: string): {
   pageMap: PageMapItem[]

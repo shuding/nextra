@@ -1,11 +1,11 @@
+import { IS_PRODUCTION } from './constants'
+import filterRouteLocale from './filter-route-locale'
 import type {
+  DynamicMetaDescriptor,
   FileMap,
   MdxPath,
-  PageMapItem,
-  DynamicMetaDescriptor
+  PageMapItem
 } from './types'
-import filterRouteLocale from './filter-route-locale'
-import { IS_PRODUCTION } from './constants'
 
 type PageMapProps = {
   filePath: string
