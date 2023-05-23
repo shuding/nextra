@@ -2,6 +2,7 @@ import { defineConfig } from 'tsup'
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import fg from 'fast-glob'
+import slash from 'slash'
 
 import tsconfig from './tsconfig.json'
 
@@ -33,14 +34,14 @@ const sharedConfig = defineConfig({
             !args.path.endsWith('.json')
           ) {
             let isDir: boolean
-            const importPath = path.join(args.resolveDir, args.path)
+            const importPath = slash(path.join(args.resolveDir, args.path))
             try {
               isDir = (await fs.stat(importPath)).isDirectory()
             } catch {
               isDir = false
             }
 
-            const isClientImporter = entriesSet.has(args.importer)
+            const isClientImporter = entriesSet.has(slash(args.importer))
 
             if (isClientImporter) {
               const isClientImport = entries.some(entry =>
