@@ -14,6 +14,8 @@ const CLIENT_ENTRY = [
 const entries = fg.sync(CLIENT_ENTRY, { absolute: true })
 const entriesSet = new Set(entries)
 
+const winPath = (p: string) => p.replace(/\\/g, '/')
+
 const sharedConfig = defineConfig({
   // import.meta is available only from es2020
   target: 'es2020',
@@ -33,14 +35,14 @@ const sharedConfig = defineConfig({
             !args.path.endsWith('.json')
           ) {
             let isDir: boolean
-            const importPath = path.join(args.resolveDir, args.path)
+            const importPath = winPath(path.join(args.resolveDir, args.path))
             try {
               isDir = (await fs.stat(importPath)).isDirectory()
             } catch {
               isDir = false
             }
 
-            const isClientImporter = entriesSet.has(args.importer)
+            const isClientImporter = entriesSet.has(winPath(args.importer))
 
             if (isClientImporter) {
               const isClientImport = entries.some(entry =>
