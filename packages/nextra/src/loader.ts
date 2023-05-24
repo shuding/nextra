@@ -1,21 +1,19 @@
-import type { LoaderOptions, MdxPath, PageOpts } from './types'
-import type { LoaderContext } from 'webpack'
-
 import path from 'node:path'
-import slash from 'slash'
 import fs from 'graceful-fs'
-
-import { hashFnv32a, pageTitleFromFilename, parseFileName } from './utils'
+import slash from 'slash'
+import type { LoaderContext } from 'webpack'
 import { compileMdx } from './compile'
-import { resolvePageMap } from './page-map'
-import { collectFiles, collectMdx } from './plugin'
 import {
+  CWD,
   IS_PRODUCTION,
-  OFFICIAL_THEMES,
   MARKDOWN_EXTENSION_REGEX,
-  CWD
+  OFFICIAL_THEMES
 } from './constants'
 import { existsSync, PAGES_DIR } from './file-system'
+import { resolvePageMap } from './page-map'
+import { collectFiles, collectMdx } from './plugin'
+import type { LoaderOptions, MdxPath, PageOpts } from './types'
+import { hashFnv32a, pageTitleFromFilename, parseFileName } from './utils'
 
 const IS_WEB_CONTAINER = !!process.versions.webcontainer
 

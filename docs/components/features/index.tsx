@@ -1,8 +1,7 @@
-import type { ReactNode } from 'react'
-import Link from 'next/link'
 import cn from 'clsx'
 import { motion } from 'framer-motion'
-
+import Link from 'next/link'
+import type { ReactNode } from 'react'
 import styles from './style.module.css'
 
 export function Feature({

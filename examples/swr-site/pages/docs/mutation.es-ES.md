@@ -2,11 +2,13 @@
 
 ## Revalidar
 
-You can get the `mutate` function from the `useSWRConfig()` hook, and broadcast a revalidation message
-globally to other SWR hooks<sup>\*</sup> using the same key by calling `mutate(key)`.
+You can get the `mutate` function from the `useSWRConfig()` hook, and broadcast
+a revalidation message globally to other SWR hooks<sup>\*</sup> using the same
+key by calling `mutate(key)`.
 
-Este ejemplo muestra cómo recuperar automáticamente la información de login (por ejemplo, dentro de `<Profile/>`)
-cuando el usuario hace clic en el botón "Logout".
+Este ejemplo muestra cómo recuperar automáticamente la información de login (por
+ejemplo, dentro de `<Profile/>`) cuando el usuario hace clic en el botón
+"Logout".
 
 ```jsx
 import useSWR, { useSWRConfig } from 'swr'
@@ -36,11 +38,12 @@ function App() {
 
 ## Mutación y solicitud POST
 
-En muchos casos, la aplicación de mutations locales a los datos es una buena forma de agilizar los cambios,
-sin necesidad de esperar a la fuente de datos remota.
+En muchos casos, la aplicación de mutations locales a los datos es una buena
+forma de agilizar los cambios, sin necesidad de esperar a la fuente de datos
+remota.
 
-Con `mutate`, puedes actualizar tus datos locales mediante programación, mientras los revalidas y finalmente los
-sustituyes por los datos más recientes.
+Con `mutate`, puedes actualizar tus datos locales mediante programación,
+mientras los revalidas y finalmente los sustituyes por los datos más recientes.
 
 ```jsx
 import useSWR, { useSWRConfig } from 'swr'
@@ -73,11 +76,13 @@ function Profile() {
 }
 ```
 
-Al hacer click en el botón del ejemplo anterior, se actualizarán localmente los datos del cliente, se enviará una solicitud POST
-para modificar los datos remotos y se intentará obtener la última (revalidar).
+Al hacer click en el botón del ejemplo anterior, se actualizarán localmente los
+datos del cliente, se enviará una solicitud POST para modificar los datos
+remotos y se intentará obtener la última (revalidar).
 
-Pero muchas APIs POST simplemente devolverán los datos actualizados directamente, por lo que no necesitamos revalidar de nuevo.
-Aquí hay un ejemplo que muestra el uso de "local mutate - request - update":
+Pero muchas APIs POST simplemente devolverán los datos actualizados
+directamente, por lo que no necesitamos revalidar de nuevo. Aquí hay un ejemplo
+que muestra el uso de "local mutate - request - update":
 
 ```jsx
 mutate('/api/user', newUser, false) // utilice `false` para mutate sin revalidar
@@ -87,9 +92,11 @@ mutate('/api/user', updateUser(newUser), false) // `updateUser` es una Promise d
 
 ## Mutar basándose en los datos actuales
 
-A veces, se desea actualizar una parte de los datos en función de los datos actuales.
+A veces, se desea actualizar una parte de los datos en función de los datos
+actuales.
 
-Con `mutate`, puedes pasar una función asíncrona que recibirá el valor actual de la caché, si lo hay, y devolverá un updated document.
+Con `mutate`, puedes pasar una función asíncrona que recibirá el valor actual de
+la caché, si lo hay, y devolverá un updated document.
 
 ```jsx
 mutate('/api/todos', async todos => {
@@ -108,10 +115,13 @@ mutate('/api/todos', async todos => {
 
 ## Datos devueltos por Mutate
 
-Lo más probable es que necesites algunos datos para actualizar la caché. Los datos se resuelven o se devuelven
-desde la promise o función asíncrona que pasaste para `mutate`.
+Lo más probable es que necesites algunos datos para actualizar la caché. Los
+datos se resuelven o se devuelven desde la promise o función asíncrona que
+pasaste para `mutate`.
 
-La función devolverá update document para que `mutate` actualice el valor de la caché correspondiente. Podría arrojar un error de alguna manera, cada vez que se llame.
+La función devolverá update document para que `mutate` actualice el valor de la
+caché correspondiente. Podría arrojar un error de alguna manera, cada vez que se
+llame.
 
 ```jsx
 try {
@@ -123,9 +133,11 @@ try {
 
 ## Bound Mutate
 
-El objeto SWR devuelto por `useSWR` también contiene una función `mutate()` que está atada a la key del SWR.
+El objeto SWR devuelto por `useSWR` también contiene una función `mutate()` que
+está atada a la key del SWR.
 
-Es funcionalmente equivalente a la función global `mutate` pero no requiere el parámetro `key`.
+Es funcionalmente equivalente a la función global `mutate` pero no requiere el
+parámetro `key`.
 
 ```jsx
 import useSWR from 'swr'

@@ -1,5 +1,4 @@
 import type { ReactElement } from 'react'
-
 import { SSGContext } from './ssg'
 import { useInternals } from './use-internals'
 

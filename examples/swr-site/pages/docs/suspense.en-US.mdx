@@ -36,8 +36,10 @@ function App() {
   Note that the `suspense` option is not allowed to change in the lifecycle.
 </Callout>
 
-In Suspense mode, `data` is always the fetch response (so you don't need to check if it's `undefined`).
-But if an error occurred, you need to use an [error boundary](https://reactjs.org/docs/concurrent-mode-suspense.html#handling-errors) to catch it:
+In Suspense mode, `data` is always the fetch response (so you don't need to
+check if it's `undefined`). But if an error occurred, you need to use an
+[error boundary](https://reactjs.org/docs/concurrent-mode-suspense.html#handling-errors)
+to catch it:
 
 ```jsx
 <ErrorBoundary fallback={<h2>Could not fetch posts.</h2>}>
@@ -51,7 +53,8 @@ But if an error occurred, you need to use an [error boundary](https://reactjs.or
 
 ### Note: With Conditional Fetching
 
-Normally, when you enabled `suspense` it's guaranteed that `data` will always be ready on render:
+Normally, when you enabled `suspense` it's guaranteed that `data` will always be
+ready on render:
 
 ```jsx
 function Profile() {
@@ -62,7 +65,8 @@ function Profile() {
 }
 ```
 
-However, when using it together with conditional fetching or dependent fetching, `data` will be `undefined` if the request is **paused**:
+However, when using it together with conditional fetching or dependent fetching,
+`data` will be `undefined` if the request is **paused**:
 
 ```jsx
 function Profile() {
@@ -75,4 +79,5 @@ function Profile() {
 }
 ```
 
-If you want to read more technical details about this restriction, check [the discussion here](https://github.com/vercel/swr/pull/357#issuecomment-627089889).
+If you want to read more technical details about this restriction, check
+[the discussion here](https://github.com/vercel/swr/pull/357#issuecomment-627089889).

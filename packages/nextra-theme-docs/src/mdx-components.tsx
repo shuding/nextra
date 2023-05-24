@@ -1,13 +1,13 @@
-import type { ReactNode, ReactElement, ComponentProps } from 'react'
-import { useEffect, useRef, useState, cloneElement, Children } from 'react'
-import type { Components } from 'nextra/mdx'
-import { useSetActiveAnchor, DetailsProvider, useDetails } from './contexts'
-import { Collapse, Anchor } from './components'
-import type { DocsThemeConfig } from './constants'
 import cn from 'clsx'
 import { Code, Pre, Table, Td, Th, Tr } from 'nextra/components'
-import { useIntersectionObserver, useSlugs } from './contexts/active-anchor'
+import type { Components } from 'nextra/mdx'
+import type { ComponentProps, ReactElement, ReactNode } from 'react'
+import { Children, cloneElement, useEffect, useRef, useState } from 'react'
+import { Anchor, Collapse } from './components'
 import type { AnchorProps } from './components/anchor'
+import type { DocsThemeConfig } from './constants'
+import { DetailsProvider, useDetails, useSetActiveAnchor } from './contexts'
+import { useIntersectionObserver, useSlugs } from './contexts/active-anchor'
 
 // Anchor links
 function HeadingLink({

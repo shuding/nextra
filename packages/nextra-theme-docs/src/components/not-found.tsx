@@ -1,8 +1,8 @@
-import type { ReactElement } from 'react'
-import { useMounted } from 'nextra/hooks'
-import { useConfig } from '../contexts'
-import { renderComponent, getGitIssueUrl } from '../utils'
 import { useRouter } from 'next/router'
+import { useMounted } from 'nextra/hooks'
+import type { ReactElement } from 'react'
+import { useConfig } from '../contexts'
+import { getGitIssueUrl, renderComponent } from '../utils'
 import { Anchor } from './anchor'
 
 export function NotFoundPage(): ReactElement | null {

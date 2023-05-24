@@ -1,6 +1,6 @@
-import { collectCatchAllRoutes } from '../src/setup-page'
-import { describe, it, expect } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import { createCatchAllMeta } from '../src/catch-all'
+import { collectCatchAllRoutes } from '../src/setup-page'
 
 describe('collectCatchAllRoutes', () => {
   it('should collect', () => {

@@ -2,10 +2,11 @@
 // on `__NEXT_ROUTER_BASEPATH` environment variable that must be set before
 // importing middleware
 process.env.__NEXT_ROUTER_BASEPATH = '/testBasePath'
-import { locales as originalLocales } from '../src/locales'
-import { describe, expect, it, vi } from 'vitest'
+
 import { NextRequest } from 'next/server'
 import type NextServer from 'next/server'
+import { describe, expect, it, vi } from 'vitest'
+import { locales as originalLocales } from '../src/locales'
 
 vi.mock('next/server', async () => {
   const mod = await vi.importActual<typeof NextServer>('next/server')

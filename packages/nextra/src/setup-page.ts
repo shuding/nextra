@@ -3,24 +3,23 @@
  * This file should be never used directly, only in loader.ts
  */
 
+import get from 'lodash.get'
 import type { FC } from 'react'
+import { NEXTRA_INTERNAL } from './constants'
+import NextraLayout from './layout'
 import type {
+  DynamicFolder,
+  DynamicMeta,
   DynamicMetaDescriptor,
+  DynamicMetaItem,
+  DynamicMetaJsonFile,
   Folder,
   NextraInternalGlobal,
-  PageOpts,
-  ThemeConfig,
   PageMapItem,
-  DynamicMetaJsonFile,
-  DynamicMeta,
-  DynamicMetaItem,
-  DynamicFolder
+  PageOpts,
+  ThemeConfig
 } from './types'
 import { normalizePageRoute, pageTitleFromFilename } from './utils'
-import NextraLayout from './layout'
-
-import get from 'lodash.get'
-import { NEXTRA_INTERNAL } from './constants'
 
 function isFolder(value: DynamicMetaItem): value is DynamicFolder {
   return !!value && typeof value === 'object' && value.type === 'folder'

@@ -1,11 +1,11 @@
 import fs from 'fs/promises'
-import { buildDynamicMDX, buildDynamicMeta } from 'nextra/remote'
-import { RemoteContent } from 'nextra/data'
-import { Callout, Tab, Tabs } from 'nextra-theme-docs'
 import {
   findPathWithExtension,
   findStaticPaths
 } from '@components/remote-utils'
+import { Callout, Tab, Tabs } from 'nextra-theme-docs'
+import { RemoteContent } from 'nextra/data'
+import { buildDynamicMDX, buildDynamicMeta } from 'nextra/remote'
 
 export const getStaticProps = async ({ params }) => {
   const filePath = await findPathWithExtension({

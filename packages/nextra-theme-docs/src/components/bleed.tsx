@@ -1,5 +1,5 @@
-import type { ReactElement, ReactNode } from 'react'
 import cn from 'clsx'
+import type { ReactElement, ReactNode } from 'react'
 
 export function Bleed({
   full,

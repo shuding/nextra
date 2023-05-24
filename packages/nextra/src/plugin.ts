@@ -1,27 +1,9 @@
-import type { Compiler } from 'webpack'
-import type {
-  NextraConfig,
-  FileMap,
-  MdxPath,
-  MetaJsonPath,
-  PageMapItem,
-  Folder,
-  MdxFile,
-  MetaJsonFile
-} from './types'
-import fs from 'graceful-fs'
-import { promisify } from 'node:util'
-import {
-  isSerializable,
-  normalizePageRoute,
-  parseFileName,
-  sortPages,
-  truthy
-} from './utils'
 import path from 'node:path'
+import { promisify } from 'node:util'
+import fs from 'graceful-fs'
 import grayMatter from 'gray-matter'
 import pLimit from 'p-limit'
-
+import type { Compiler } from 'webpack'
 import {
   CWD,
   DEFAULT_LOCALES,
@@ -30,6 +12,23 @@ import {
   META_FILENAME
 } from './constants'
 import { PAGES_DIR } from './file-system'
+import type {
+  FileMap,
+  Folder,
+  MdxFile,
+  MdxPath,
+  MetaJsonFile,
+  MetaJsonPath,
+  NextraConfig,
+  PageMapItem
+} from './types'
+import {
+  isSerializable,
+  normalizePageRoute,
+  parseFileName,
+  sortPages,
+  truthy
+} from './utils'
 
 const readdir = promisify(fs.readdir)
 const readFile = promisify(fs.readFile)

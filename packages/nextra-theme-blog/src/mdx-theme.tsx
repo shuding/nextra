@@ -1,17 +1,17 @@
-import type { RefObject, ComponentProps, ReactElement, ReactNode } from 'react'
+import Link from 'next/link'
+import { Code, Pre, Table, Td, Th, Tr } from 'nextra/components'
+import { MDXProvider } from 'nextra/mdx'
+import type { Components } from 'nextra/mdx'
+import type { ComponentProps, ReactElement, ReactNode, RefObject } from 'react'
 import {
-  createRef,
   createContext,
+  createRef,
   useContext,
   useEffect,
   useState
 } from 'react'
-import { MDXProvider } from 'nextra/mdx'
-import Link from 'next/link'
 import { createPortal } from 'react-dom'
-import { Code, Pre, Table, Td, Th, Tr } from 'nextra/components'
 import { useBlogContext } from './blog-context'
-import type { Components } from 'nextra/mdx'
 
 export const HeadingContext = createContext<
   RefObject<HTMLHeadingElement | null>

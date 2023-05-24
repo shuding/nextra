@@ -1,5 +1,5 @@
+import { sources, webpack } from 'next/dist/compiled/webpack/webpack'
 import type { Compiler } from 'webpack'
-import { webpack, sources } from 'next/dist/compiled/webpack/webpack'
 
 const PLUGIN_NAME = 'NextraSearchPlugin'
 const isDev = process.env.NODE_ENV !== 'production'

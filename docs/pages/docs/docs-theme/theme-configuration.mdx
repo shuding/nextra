@@ -2,7 +2,9 @@ import { Screenshot } from 'components/screenshot'
 
 # Theme Configuration
 
-The theme is configured with the [theme.config.jsx](/docs/docs-theme/start#create-docs-theme-config) file. It should export an object that contains your configurations, for example:
+The theme is configured with the
+[theme.config.jsx](/docs/docs-theme/start#create-docs-theme-config) file. It
+should export an object that contains your configurations, for example:
 
 ```jsx filename="theme.config.jsx"
 export default {
@@ -21,7 +23,8 @@ import { OptionTable } from 'components/table'
 
 ### Docs Repository
 
-Set the repository URL of the documentation. It’s used to generate the “[Edit this page](#edit-link)” link and the “[Feedback](#feedback-link)” link.
+Set the repository URL of the documentation. It’s used to generate the
+“[Edit this page](#edit-link)” link and the “[Feedback](#feedback-link)” link.
 
 <OptionTable
   options={[
@@ -31,7 +34,9 @@ Set the repository URL of the documentation. It’s used to generate the “[Edi
 
 #### Specify a Path
 
-If the documentation is inside a monorepo, a subfolder, or a different branch of the repository, you can simply set the `docsRepositoryBase` to the root path of the `pages/` folder of your docs. For example:
+If the documentation is inside a monorepo, a subfolder, or a different branch of
+the repository, you can simply set the `docsRepositoryBase` to the root path of
+the `pages/` folder of your docs. For example:
 
 ```js
 export default {
@@ -43,9 +48,12 @@ Then Nextra will automatically generate the correct file path for all pages.
 
 ### SEO Options
 
-You can configure SEO related settings via the `useNextSeoProps` option. The `useNextSeoProps` function returns the props that will be passed to the [Next SEO](https://github.com/garmeeh/next-seo#add-seo-to-page) component.
+You can configure SEO related settings via the `useNextSeoProps` option. The
+`useNextSeoProps` function returns the props that will be passed to the
+[Next SEO](https://github.com/garmeeh/next-seo#add-seo-to-page) component.
 
-It is also a hook, so you can use APIs like `useRouter` inside to return values conditionally.
+It is also a hook, so you can use APIs like `useRouter` inside to return values
+conditionally.
 
 <OptionTable
   options={[
@@ -73,7 +81,8 @@ export default {
 }
 ```
 
-The `%s` is a [placeholder](https://github.com/garmeeh/next-seo#title-template) that will be replaced by the page title.
+The `%s` is a [placeholder](https://github.com/garmeeh/next-seo#title-template)
+that will be replaced by the page title.
 
 You can also return it conditionally to avoid adding the suffix to the homepage:
 
@@ -92,7 +101,8 @@ export default {
 
 ### Head Tags
 
-Configure the `<head>` tags of the website. You can add meta tags, title, favicon, etc.
+Configure the `<head>` tags of the website. You can add meta tags, title,
+favicon, etc.
 
 <OptionTable
   options={[
@@ -108,7 +118,8 @@ Configure the `<head>` tags of the website. You can add meta tags, title, favico
 
 #### Static head tags
 
-If you have only static head tags, it’s easy to directly put them in `head`. For example:
+If you have only static head tags, it’s easy to directly put them in `head`. For
+example:
 
 ```jsx
 export default {
@@ -124,7 +135,8 @@ export default {
 
 #### Dynamic tags based on page
 
-You can also use a _function component_ as `head` to dynamically generate the head tags based on the current page’s front matter. For example:
+You can also use a _function component_ as `head` to dynamically generate the
+head tags based on the current page’s front matter. For example:
 
 ```jsx
 import { useRouter } from 'next/router'
@@ -152,7 +164,8 @@ export default {
 }
 ```
 
-You can refer to the [`useConfig`](/docs/docs-theme/api/use-config) API section for more information about the `useConfig` hook and the `frontMatter` object.
+You can refer to the [`useConfig`](/docs/docs-theme/api/use-config) API section
+for more information about the `useConfig` hook and the `frontMatter` object.
 
 ### Dark Mode and Themes
 
@@ -180,7 +193,8 @@ Customize the theme behavior of the website.
 
 ### Theme Color
 
-You can adjust the theme color of the website by setting a primary hue value to dark or light themes.
+You can adjust the theme color of the website by setting a primary hue value to
+dark or light themes.
 
 <OptionTable
   options={[
@@ -216,7 +230,8 @@ Try it out for this website:
 
 ### Logo
 
-The logo of the website rendered on the navbar. It can be a React node or a function component.
+The logo of the website rendered on the navbar. It can be a React node or a
+function component.
 
 <OptionTable
   options={[
@@ -255,7 +270,8 @@ export default {
 
 ### Project Link
 
-Show a button that links to your project’s homepage on the navbar. By default, it links to Nextra’s GitHub repository.
+Show a button that links to your project’s homepage on the navbar. By default,
+it links to Nextra’s GitHub repository.
 
 <OptionTable
   options={[
@@ -268,7 +284,8 @@ Show a button that links to your project’s homepage on the navbar. By default,
   ]}
 />
 
-You can configure `project.link` and `project.icon` to customize the project link, for example make it link to your GitLab repository:
+You can configure `project.link` and `project.icon` to customize the project
+link, for example make it link to your GitLab repository:
 
 import projectLinkImage from '../../../public/assets/docs/project-link.png'
 
@@ -290,11 +307,13 @@ export default {
 }
 ```
 
-If `icon` is missing, it will be a [GitHub icon](https://primer.style/octicons/mark-github-16) by default.
+If `icon` is missing, it will be a
+[GitHub icon](https://primer.style/octicons/mark-github-16) by default.
 
 ### Chat Link
 
-Show a button that links to your project’s forum or other social media on the navbar.
+Show a button that links to your project’s forum or other social media on the
+navbar.
 
 <OptionTable
   options={[
@@ -307,7 +326,8 @@ Show a button that links to your project’s forum or other social media on the 
   ]}
 />
 
-You can configure `chat.link` and `chat.icon` to customize the chat link, for example make it link to your Twitter account:
+You can configure `chat.link` and `chat.icon` to customize the chat link, for
+example make it link to your Twitter account:
 
 ```jsx
 export default {
@@ -329,7 +349,8 @@ If `icon` is missing, it will be a Discord icon by default.
 
 ### Menu and Custom Links
 
-Check out [Page Configuration](/docs/docs-theme/page-configuration#navbar-items) to learn how to add custom menus or links to the navbar.
+Check out [Page Configuration](/docs/docs-theme/page-configuration#navbar-items)
+to learn how to add custom menus or links to the navbar.
 
 ### Search
 
@@ -352,7 +373,8 @@ Check out [Page Configuration](/docs/docs-theme/page-configuration#navbar-items)
 
 ### Banner
 
-Show a dismissible banner on the top of the website. It can be used to show a warning or a notice.
+Show a dismissible banner on the top of the website. It can be used to show a
+warning or a notice.
 
 <OptionTable
   options={[
@@ -368,9 +390,14 @@ Show a dismissible banner on the top of the website. It can be used to show a wa
 
 #### Banner key
 
-A banner can be dismissed. By default `banner.key` will be `"nextra-banner"` and it’s used by [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) to keep the banner state (dismissed or not) on the client.
+A banner can be dismissed. By default `banner.key` will be `"nextra-banner"` and
+it’s used by
+[localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
+to keep the banner state (dismissed or not) on the client.
 
-If you have updated your banner text, you should change the key to make sure the banner is shown again. The best practice is to always use a descriptive key for the current text, for example:
+If you have updated your banner text, you should change the key to make sure the
+banner is shown again. The best practice is to always use a descriptive key for
+the current text, for example:
 
 import bannerImage from '../../../public/assets/docs/banner.png'
 
@@ -436,14 +463,18 @@ Customize the entire navbar component.
 
 ### Menu Collapse Level
 
-By default, the sidebar menu is collapsed at level `2`. You can change it by setting `sidebar.defaultMenuCollapseLevel` to a different number. For example, when set to `1`, every folder will be collapsed by default and when set to `Infinity`, all nested folders will be expanded by default.
+By default, the sidebar menu is collapsed at level `2`. You can change it by
+setting `sidebar.defaultMenuCollapseLevel` to a different number. For example,
+when set to `1`, every folder will be collapsed by default and when set to
+`Infinity`, all nested folders will be expanded by default.
 
 ### Customize sidebar content
 
-Together with the [Separators](/docs/docs-theme/page-configuration#separators) item, you can customize how the sidebar content is rendered by using the `sidebar.titleComponent` option:
+Together with the [Separators](/docs/docs-theme/page-configuration#separators)
+item, you can customize how the sidebar content is rendered by using the
+`sidebar.titleComponent` option:
 
 import { Tab, Tabs } from 'nextra-theme-docs'
-
 import sidebarTitleComponentImage from '../../../public/assets/docs/sidebar-customized.png'
 
 <Screenshot src={sidebarTitleComponentImage} alt="Customized Sidebar" />
@@ -493,7 +524,9 @@ import sidebarTitleComponentImage from '../../../public/assets/docs/sidebar-cust
 
 ### MDX Components
 
-Provide custom [MDX components](https://mdxjs.com/table-of-components/) to render the content. For example, you can use a custom `pre` component to render code blocks.
+Provide custom [MDX components](https://mdxjs.com/table-of-components/) to
+render the content. For example, you can use a custom `pre` component to render
+code blocks.
 
 <OptionTable
   options={[
@@ -511,7 +544,8 @@ The default writing direction of the website.
 
 ### Main Content
 
-Render top and/or bottom content of main area of the page. It can be used to render a comment section, a newsletter form, or any other type of content.
+Render top and/or bottom content of main area of the page. It can be used to
+render a comment section, a newsletter form, or any other type of content.
 
 <OptionTable
   options={[
@@ -527,7 +561,8 @@ Render top and/or bottom content of main area of the page. It can be used to ren
 
 ### Table of Contents
 
-Show a table of contents on the right side of the page. It’s useful for navigating between headings.
+Show a table of contents on the right side of the page. It’s useful for
+navigating between headings.
 
 <OptionTable
   options={[
@@ -557,11 +592,14 @@ Show a table of contents on the right side of the page. It’s useful for naviga
 
 #### Floating TOC
 
-`toc.float` is enabled by default. When enabled, the TOC will be displayed on the right side of the page and it will be sticky when scrolling. If it’s disabled, the TOC will be displayed directly on the page sidebar.
+`toc.float` is enabled by default. When enabled, the TOC will be displayed on
+the right side of the page and it will be sticky when scrolling. If it’s
+disabled, the TOC will be displayed directly on the page sidebar.
 
 ### Edit Link
 
-Show an “Edit this page” link on the page that points to the file URL on GitHub (or other places).
+Show an “Edit this page” link on the page that points to the file URL on GitHub
+(or other places).
 
 <OptionTable
   options={[
@@ -584,7 +622,10 @@ Show an “Edit this page” link on the page that points to the file URL on Git
 
 ### Feedback Link
 
-The built-in feedback link provides a way for users to submit feedback about the documentation. By default, it’s a link that points to the issue creation form of the docs repository, with the current website title prefilled: [example](https://github.com/shuding/nextra/issues/new?title=Feedback%20for%20%E2%80%9CTheme%20Configuration%E2%80%9D&labels=feedback).
+The built-in feedback link provides a way for users to submit feedback about the
+documentation. By default, it’s a link that points to the issue creation form of
+the docs repository, with the current website title prefilled:
+[example](https://github.com/shuding/nextra/issues/new?title=Feedback%20for%20%E2%80%9CTheme%20Configuration%E2%80%9D&labels=feedback).
 
 <OptionTable
   options={[
@@ -612,7 +653,8 @@ To disable it, you can set `feedback.content` to `null`.
 
 ### Navigation
 
-Show previous and next page links on the bottom of the content. It’s useful for navigating between pages.
+Show previous and next page links on the bottom of the content. It’s useful for
+navigating between pages.
 
 <OptionTable
   options={[
@@ -639,7 +681,8 @@ The above is also equivalent to `navigation: true`.
 
 ### Last Updated Date
 
-Show the last updated date of each page. It’s useful for showing the freshness of the content.
+Show the last updated date of each page. It’s useful for showing the freshness
+of the content.
 
 <OptionTable
   options={[
@@ -653,7 +696,8 @@ Show the last updated date of each page. It’s useful for showing the freshness
 
 ## Footer
 
-The footer area of the website. You can either specify some content for the default footer, or fully customize it with a custom component.
+The footer area of the website. You can either specify some content for the
+default footer, or fully customize it with a custom component.
 
 <OptionTable
   options={[
@@ -672,7 +716,8 @@ The footer area of the website. You can either specify some content for the defa
 
 ### Copyright information
 
-You can add some simple content, such as copyright information to the default footer:
+You can add some simple content, such as copyright information to the default
+footer:
 
 ```jsx
 export default {
@@ -733,7 +778,8 @@ export default {
 
 ## Favicon Glyph (Experimental)
 
-This isn’t supported by all browsers, but it’s a nice way to customize the favicon of the website simply by using an emoji or character.
+This isn’t supported by all browsers, but it’s a nice way to customize the
+favicon of the website simply by using an emoji or character.
 
 <OptionTable
   options={[['faviconGlyph', `string`, 'The glyph to use as the favicon.']]}
