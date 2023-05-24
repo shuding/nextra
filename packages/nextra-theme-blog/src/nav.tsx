@@ -1,7 +1,6 @@
 import { useTheme } from 'next-themes'
 import Link from 'next/link'
-import ThemeSwitch from './theme-switch'
-import { useTheme } from 'next-themes'
+import type { ReactElement } from 'react'
 import { useBlogContext } from './blog-context'
 import ThemeSwitch from './theme-switch'
 import { collectPostsAndNavs } from './utils/collect'

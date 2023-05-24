@@ -91,9 +91,6 @@
       ],
       "normalize-pages": [
         "./dist/normalize-pages.d.ts"
-      ],
-      "mdx-plugins": [
-        "./dist/mdx-plugins/index.d.ts"
       ]
     }
   },
