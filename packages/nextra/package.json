@@ -37,10 +37,6 @@
       "import": "./dist/components/index.js",
       "types": "./dist/components/index.d.ts"
     },
-    "./mdx-plugins": {
-      "import": "./dist/mdx-plugins/index.mjs",
-      "types": "./dist/mdx-plugins/index.d.ts"
-    },
     "./hooks": {
       "import": "./dist/hooks/index.js",
       "types": "./dist/hooks/index.d.ts"
