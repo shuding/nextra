@@ -4,7 +4,7 @@ A built-in tab component of the Docs Theme.
 
 ## Example
 
-import { Tab, Tabs } from 'nextra-theme-docs'
+import { Tab, Tabs } from 'nextra/components'
 
 <Tabs items={['pnpm', 'npm', 'yarn']}>
   <Tab>**pnpm**: Fast, disk space efficient package manager.</Tab>
@@ -19,7 +19,7 @@ import { Tab, Tabs } from 'nextra-theme-docs'
 ### Default
 
 ```mdx
-import { Tab, Tabs } from 'nextra-theme-docs'
+import { Tab, Tabs } from 'nextra/components'
 
 <Tabs items={['pnpm', 'npm', 'yarn']}>
   <Tab>**pnpm**: Fast, disk space efficient package manager.</Tab>
@@ -35,7 +35,7 @@ import { Tab, Tabs } from 'nextra-theme-docs'
 You can use the `defaultIndex` prop to set the default tab index:
 
 ```mdx /defaultIndex="1"/
-import { Tab, Tabs } from 'nextra-theme-docs'
+import { Tab, Tabs } from 'nextra/components'
 
 <Tabs items={['pnpm', 'npm', 'yarn']} defaultIndex="1">
   ...
