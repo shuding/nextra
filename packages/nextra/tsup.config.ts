@@ -1,9 +1,8 @@
-import { defineConfig } from 'tsup'
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import fg from 'fast-glob'
 import slash from 'slash'
-
+import { defineConfig } from 'tsup'
 import tsconfig from './tsconfig.json'
 
 const CLIENT_ENTRY = [
