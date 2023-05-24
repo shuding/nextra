@@ -37,6 +37,10 @@
       "import": "./dist/components/index.js",
       "types": "./dist/components/index.d.ts"
     },
+    "./mdx-plugins": {
+      "import": "./dist/mdx-plugins/index.mjs",
+      "types": "./dist/mdx-plugins/index.d.ts"
+    },
     "./hooks": {
       "import": "./dist/hooks/index.js",
       "types": "./dist/hooks/index.d.ts"
@@ -91,6 +95,9 @@
       ],
       "normalize-pages": [
         "./dist/normalize-pages.d.ts"
+      ],
+      "mdx-plugins": [
+        "./dist/mdx-plugins/index.d.ts"
       ]
     }
   },
@@ -120,13 +127,13 @@
     "@napi-rs/simple-git": "^0.1.8",
     "clsx": "^1.2.1",
     "github-slugger": "^2.0.0",
-    "graceful-fs": "^4.2.10",
+    "graceful-fs": "^4.2.11",
     "gray-matter": "^4.0.3",
-    "katex": "^0.16.4",
+    "katex": "^0.16.7",
     "lodash.get": "^4.4.2",
     "next-mdx-remote": "^4.2.1",
     "p-limit": "^3.1.0",
-    "rehype-katex": "^6.0.2",
+    "rehype-katex": "^6.0.3",
     "rehype-pretty-code": "0.9.4",
     "remark-gfm": "^3.0.1",
     "remark-math": "^5.1.1",

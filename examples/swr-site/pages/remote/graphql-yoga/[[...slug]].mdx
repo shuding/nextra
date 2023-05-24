@@ -5,6 +5,7 @@ import {
 } from '@components/remote-utils'
 import { Callout, Tab, Tabs } from 'nextra-theme-docs'
 import { RemoteContent } from 'nextra/data'
+import { remarkLinkRewrite } from 'nextra/mdx-plugins'
 import { buildDynamicMDX, buildDynamicMeta } from 'nextra/remote'
 
 export const getStaticProps = async ({ params }) => {
@@ -18,9 +19,16 @@ export const getStaticProps = async ({ params }) => {
     props: {
       ...(await buildDynamicMDX(content, {
         defaultShowCopyCode: true,
-        remarkLinkRewriteOptions: {
-          pattern: /^\/docs(\/.*)?$/,
-          replace: '/docs/3.0.0$1'
+        mdxOptions: {
+          remarkPlugins: [
+            [
+              remarkLinkRewrite,
+              {
+                pattern: /^\/docs(\/.*)?$/,
+                replace: '/docs/3.0.0$1'
+              }
+            ]
+          ]
         }
       })),
       ...(await buildDynamicMeta())
