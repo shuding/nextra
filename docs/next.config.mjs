@@ -19,8 +19,8 @@ export default withNextra({
   },
   redirects: () => [
     {
-      source: '/docs/docs-theme/built-ins/callout',
-      destination: '/docs/guide/built-ins/callout',
+      source: '/docs/docs-theme/built-ins/:slug',
+      destination: '/docs/guide/built-ins/:slug',
       permanent: true
     }
   ]
