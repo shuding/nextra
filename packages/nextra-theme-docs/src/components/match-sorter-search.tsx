@@ -1,10 +1,10 @@
-import type { ReactElement } from 'react'
-import { useMemo, useState } from 'react'
 import { matchSorter } from 'match-sorter'
 import type { Item as NormalItem } from 'nextra/normalize-pages'
-import { Search } from './search'
-import { HighlightMatches } from './highlight-matches'
+import type { ReactElement } from 'react'
+import { useMemo, useState } from 'react'
 import type { SearchResult } from '../types'
+import { HighlightMatches } from './highlight-matches'
+import { Search } from './search'
 
 export function MatchSorterSearch({
   className,

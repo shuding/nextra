@@ -1,9 +1,9 @@
-import { describe, it, expect, beforeAll } from 'vitest'
 import path from 'node:path'
+import { beforeAll, describe, expect, it } from 'vitest'
+import { CWD } from '../src/constants'
 import { getDynamicMeta, resolvePageMap } from '../src/page-map'
 import { collectFiles } from '../src/plugin'
 import type { FileMap, PageMapItem } from '../src/types'
-import { CWD } from '../src/constants'
 
 const PAGES_DIR = path.join(CWD, '..', '..', 'examples', 'swr-site', 'pages')
 const filePath = (name: string) => path.join(PAGES_DIR, name)

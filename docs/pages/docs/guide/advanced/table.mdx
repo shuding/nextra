@@ -4,7 +4,8 @@ import { Callout, Steps } from 'nextra-theme-docs'
 
 ## GFM syntax
 
-In markdown is preferable write table via [GFM syntax](https://github.github.com/gfm/#tables-extension-).
+In markdown is preferable write table via
+[GFM syntax](https://github.github.com/gfm/#tables-extension-).
 
 ```mdx filename="Markdown"
 | left   | center | right |
@@ -81,7 +82,8 @@ you'll get the following result:
 
 ### How to Write
 
-Want to render dynamic table? You can use embedded JavaScript expressions into your table for it:
+Want to render dynamic table? You can use embedded JavaScript expressions into
+your table for it:
 
 ```mdx filename="Markdown"
 <table>
@@ -145,13 +147,16 @@ Table looks different compared to [GFM syntax table](#gfm-syntax):
 
 MDX2 doesn't replace literal HTML elements with `<MDXProvider />{:jsx}`.
 
-Adam Wathan, creator of Tailwind CSS submitted [an issue](https://github.com/mdx-js/mdx/issues/821) in MDX2 to have some
-_an escape hatch_ that we can name like:
+Adam Wathan, creator of Tailwind CSS submitted
+[an issue](https://github.com/mdx-js/mdx/issues/821) in MDX2 to have some _an
+escape hatch_ that we can name like:
 
 > please only transform markdown tags, not literal HTML tags
 
-Table header looks unstyled since not replaced with Nextra's MDX components `<tr />{:jsx}`, `<th />{:jsx}` and `<td />{:jsx}`,
-for the same reason `<table />{:jsx}` literal is not replaced and doesn't have default margin-top aka `mt-6`.
+Table header looks unstyled since not replaced with Nextra's MDX components
+`<tr />{:jsx}`, `<th />{:jsx}` and `<td />{:jsx}`, for the same reason
+`<table />{:jsx}` literal is not replaced and doesn't have default margin-top
+aka `mt-6`.
 
 ### Ways to Fix It
 
@@ -167,7 +172,8 @@ Just wrap your table with curly braces `{` and `}`, e.g.
 
 #### Changing Default Behaviour
 
-If this thing is still confusing for you, and you want to use regular literal HTML elements for your tables, do the following:
+If this thing is still confusing for you, and you want to use regular literal
+HTML elements for your tables, do the following:
 
 <Steps>
 ### Install `remark-mdx-disable-explicit-jsx` package

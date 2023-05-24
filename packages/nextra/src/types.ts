@@ -1,15 +1,15 @@
-import type { NextConfig } from 'next'
-import type { Heading as MDASTHeading } from 'mdast'
 import type { ProcessorOptions } from '@mdx-js/mdx'
-import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
 import type { GrayMatterFile } from 'gray-matter'
-import type { PageMapCache } from './plugin'
+import type { Heading as MDASTHeading } from 'mdast'
+import type { NextConfig } from 'next'
+import type { FC, ReactNode } from 'react'
+import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
 import type {
   MARKDOWN_EXTENSIONS,
   META_FILENAME,
   NEXTRA_INTERNAL
 } from './constants'
-import type { ReactNode, FC } from 'react'
+import type { PageMapCache } from './plugin'
 
 type MetaFilename = typeof META_FILENAME
 type MarkdownExtension = (typeof MARKDOWN_EXTENSIONS)[number]

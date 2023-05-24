@@ -1,6 +1,6 @@
+import { useRouter } from 'next/router'
 import type { DocsThemeConfig } from 'nextra-theme-docs'
 import { useConfig } from 'nextra-theme-docs'
-import { useRouter } from 'next/router'
 
 const logo = (
   <span>

@@ -1,10 +1,10 @@
-import type { ReactElement, ReactNode } from 'react'
-import cn from 'clsx'
 import { Listbox, Transition } from '@headlessui/react'
-import { CheckIcon } from 'nextra/icons'
-import { usePopper } from '../utils'
-import { createPortal } from 'react-dom'
+import cn from 'clsx'
 import { useMounted } from 'nextra/hooks'
+import { CheckIcon } from 'nextra/icons'
+import type { ReactElement, ReactNode } from 'react'
+import { createPortal } from 'react-dom'
+import { usePopper } from '../utils'
 
 interface MenuOption {
   key: string

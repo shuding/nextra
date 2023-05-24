@@ -1,10 +1,10 @@
-import type { NextRequest } from 'next/server'
-import { NextResponse } from 'next/server'
-import { removeBasePath } from 'next/dist/client/remove-base-path'
 import { addBasePath } from 'next/dist/client/add-base-path'
 import { addLocale } from 'next/dist/client/add-locale'
-import { removeLocale } from 'next/dist/client/remove-locale'
 import { hasBasePath } from 'next/dist/client/has-base-path'
+import { removeBasePath } from 'next/dist/client/remove-base-path'
+import { removeLocale } from 'next/dist/client/remove-locale'
+import type { NextRequest } from 'next/server'
+import { NextResponse } from 'next/server'
 
 type LegacyMiddlewareCookies = Record<string, string>
 type StableMiddlewareCookies = Map<string, string>

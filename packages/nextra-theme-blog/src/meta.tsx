@@ -1,8 +1,8 @@
-import type { ReactElement } from 'react'
 import Link from 'next/link'
+import type { ReactElement } from 'react'
+import { useBlogContext } from './blog-context'
 import ThemeSwitch from './theme-switch'
 import { split } from './utils/get-tags'
-import { useBlogContext } from './blog-context'
 import { getParent } from './utils/parent'
 import { useTheme } from 'next-themes'
 

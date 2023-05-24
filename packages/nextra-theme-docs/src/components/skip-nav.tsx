@@ -25,9 +25,9 @@
  *
  * Source: https://github.com/reach/reach-ui/blob/43f450db7bcb25a743121fe31355f2294065a049/LICENSE
  */
+import cn from 'clsx'
 import type { ComponentProps, ReactElement } from 'react'
 import { forwardRef } from 'react'
-import cn from 'clsx'
 
 // TODO: Change the DEFAULT_ID for `nextra-skip-nav` or something else on the next major version (v3.x). The DEFAULT_ID must be 'reach-skip-nav' because changing this value is a breaking change for users that use v2.0.1 and earlier
 const DEFAULT_ID = 'reach-skip-nav'

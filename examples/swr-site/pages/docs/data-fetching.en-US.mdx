@@ -6,9 +6,11 @@ import { Callout } from 'nextra/components'
 const { data, error } = useSWR(key, fetcher)
 ```
 
-This is the very fundamental API of SWR. The `fetcher` here is an async function that **accepts the `key`** of SWR, and returns the data.
+This is the very fundamental API of SWR. The `fetcher` here is an async function
+that **accepts the `key`** of SWR, and returns the data.
 
-The returned value will be passed as `data`, and if it throws, it will be caught as `error`.
+The returned value will be passed as `data`, and if it throws, it will be caught
+as `error`.
 
 <Callout emoji="💡">
   Note that <code>fetcher</code> can be omitted from the parameters if it's{' '}
@@ -17,7 +19,8 @@ The returned value will be passed as `data`, and if it throws, it will be caught
 
 ## Fetch
 
-You can use any library to handle data fetching, for example a `fetch` polyfill [developit/unfetch](https://github.com/developit/unfetch):
+You can use any library to handle data fetching, for example a `fetch` polyfill
+[developit/unfetch](https://github.com/developit/unfetch):
 
 ```js
 import fetch from 'unfetch'
@@ -53,7 +56,8 @@ function App() {
 
 ## GraphQL
 
-Or using GraphQL with libs like [graphql-request](https://github.com/prisma-labs/graphql-request):
+Or using GraphQL with libs like
+[graphql-request](https://github.com/prisma-labs/graphql-request):
 
 ```js
 import { request } from 'graphql-request'
@@ -76,4 +80,5 @@ function App() {
 }
 ```
 
-_If you want to pass variables to a GraphQL query, check out [Multiple Arguments](/docs/arguments)._
+_If you want to pass variables to a GraphQL query, check out
+[Multiple Arguments](/docs/arguments)._

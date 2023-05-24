@@ -1,11 +1,10 @@
-import type { ReactElement } from 'react'
-import { useEffect, useRef, useMemo } from 'react'
 import cn from 'clsx'
 import type { Heading } from 'nextra'
+import type { ReactElement } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
-
+import { useActiveAnchor, useConfig } from '../contexts'
 import { renderComponent } from '../utils'
-import { useConfig, useActiveAnchor } from '../contexts'
 import { Anchor } from './anchor'
 
 export type TOCProps = {

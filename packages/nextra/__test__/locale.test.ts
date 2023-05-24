@@ -1,7 +1,7 @@
-import { describe, it, expect, vi } from 'vitest'
 import { NextRequest } from 'next/server'
-import { locales as originalLocales } from '../src/locales'
 import type NextServer from 'next/server'
+import { describe, expect, it, vi } from 'vitest'
+import { locales as originalLocales } from '../src/locales'
 
 vi.mock('next/server', async () => {
   const mod = await vi.importActual<typeof NextServer>('next/server')

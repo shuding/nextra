@@ -1,9 +1,9 @@
-import type { ReactElement } from 'react'
-import { useRouter } from 'next/router'
-import { Select } from './select'
-import type { DocsThemeConfig } from '../constants'
-import { GlobeIcon } from 'nextra/icons'
 import { addBasePath } from 'next/dist/client/add-base-path'
+import { useRouter } from 'next/router'
+import { GlobeIcon } from 'nextra/icons'
+import type { ReactElement } from 'react'
+import type { DocsThemeConfig } from '../constants'
+import { Select } from './select'
 
 interface LocaleSwitchProps {
   options: NonNullable<DocsThemeConfig['i18n']>
