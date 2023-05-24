@@ -1,5 +1,11 @@
 # nextra
 
+## 2.6.1
+
+### Patch Changes
+
+- 1e9ebabc: remove `remarkLinkRewriteOptions` from `buildDynamicMDX`
+
 ## 2.6.0
 
 ### Minor Changes
