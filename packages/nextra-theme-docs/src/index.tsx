@@ -253,7 +253,7 @@ export default function Layout({
 
 export { useConfig, PartialDocsThemeConfig as DocsThemeConfig }
 export { useMDXComponents } from 'nextra/mdx'
-export { Callout } from 'nextra/components'
+export { Callout, Steps, Tabs, Tab } from 'nextra/components'
 export { useTheme } from 'next-themes'
 export { Link } from './mdx-components'
 export {
@@ -261,9 +261,6 @@ export {
   Collapse,
   NotFoundPage,
   ServerSideErrorPage,
-  Steps,
-  Tabs,
-  Tab,
   Cards,
   Card,
   FileTree,
