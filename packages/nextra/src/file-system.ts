@@ -7,7 +7,8 @@ const { findPagesDir, existsSync } = getDefault(findPagesDirImport)
 export { existsSync }
 
 export function findPagesDirectory(): string {
-  const res = findPagesDir(CWD, false)
+  const rootDir = process.env.NEXT_ROOT || CWD
+  const res = findPagesDir(rootDir, false)
   return (
     res.pagesDir || // next v13
     (res as any).pages // next v12
