@@ -21,7 +21,7 @@ export const PostsLayout = ({
   const tagName = type === 'tag' ? router.query.tag : null
   const { resolvedTheme } = useTheme()
   const textColor =
-    resolvedTheme === 'dark' ? 'nx-text-gray-400' : 'nx-text-gray-600'
+    resolvedTheme === 'dark' ? 'dark:nx-text-gray-400' : 'nx-text-gray-600'
   const postList = posts.map(post => {
     if (tagName) {
       const tags = getTags(post)

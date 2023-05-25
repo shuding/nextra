@@ -14,7 +14,7 @@ export default function Meta(): ReactElement {
   const tags = tag ? split(tag) : []
   const { resolvedTheme } = useTheme()
   const textColor =
-    resolvedTheme === 'dark' ? 'nx-text-gray-400' : 'nx-text-gray-600'
+    resolvedTheme === 'dark' ? 'dark:nx-text-gray-400' : 'nx-text-gray-600'
 
   const tagsEl = tags.map(t => (
     <Link key={t} href="/tags/[tag]" as={`/tags/${t}`} passHref legacyBehavior>

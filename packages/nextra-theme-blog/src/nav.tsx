@@ -20,7 +20,7 @@ export default function Nav(): ReactElement {
                 key={page.route}
                 className={`nx-cursor-default ${
                   resolvedTheme === 'dark'
-                    ? 'nx-text-gray-400'
+                    ? 'dark:nx-text-gray-400'
                     : 'nx-text-gray-600'
                 }`}
               >
