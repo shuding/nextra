@@ -4,7 +4,6 @@ import { useBlogContext } from './blog-context'
 import ThemeSwitch from './theme-switch'
 import { split } from './utils/get-tags'
 import { getParent } from './utils/parent'
-import { useTheme } from 'next-themes'
 
 
 export default function Meta(): ReactElement {
@@ -12,9 +11,6 @@ export default function Meta(): ReactElement {
   const { author, date, tag } = opts.frontMatter
   const { back } = getParent({ opts, config })
   const tags = tag ? split(tag) : []
-  const { resolvedTheme } = useTheme()
-  const textColor =
-    resolvedTheme === 'dark' ? 'dark:nx-text-gray-400' : 'nx-text-gray-600'
 
   const tagsEl = tags.map(t => (
     <Link key={t} href="/tags/[tag]" as={`/tags/${t}`} passHref legacyBehavior>
@@ -49,7 +45,7 @@ export default function Meta(): ReactElement {
         (readingTime ? 'nx-items-start' : 'nx-items-center')
       }
     >
-      <div className={'nx-grow' + textColor}>
+      <div className={'nx-grow dark:nx-text-gray-400 nx-text-gray-600'}>
         <div className="nx-not-prose nx-flex nx-flex-wrap nx-items-center nx-gap-1">
           {author}
           {author && date && ','}
