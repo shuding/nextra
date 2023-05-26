@@ -4,8 +4,8 @@
 @import 'nextra/styles/variables.css';
 @import 'nextra/styles/code-block.css';
 @import 'nextra/styles/subheading-anchor.css';
+@import 'nextra/styles/scrollbar.css';
 @import './hamburger.css';
-@import './scrollbar.css';
 @import './typesetting-article.css';
 
 html {
