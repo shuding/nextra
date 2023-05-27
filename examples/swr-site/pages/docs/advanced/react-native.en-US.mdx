@@ -1,4 +1,4 @@
-import { Callout } from 'nextra-theme-docs'
+import { Callout } from 'nextra/components'
 
 # React Native
 
@@ -6,8 +6,12 @@ import { Callout } from 'nextra-theme-docs'
   Upgrade to the latest version (≥ 1.0.0) to experience this customization.
 </Callout>
 
-Unlike React running inside the browsers, React Native has a very different user experience. For example there is no “tab focus”, switching from the background to the app is considered as a “focus” instead.
-To customize these behaviors, you can replace the default browser `focus` and `online` events listeners with React Native’s app state detection and other native ported API, and configure SWR to use them.
+Unlike React running inside the browsers, React Native has a very different user
+experience. For example there is no “tab focus”, switching from the background
+to the app is considered as a “focus” instead. To customize these behaviors, you
+can replace the default browser `focus` and `online` events listeners with React
+Native’s app state detection and other native ported API, and configure SWR to
+use them.
 
 ## Example
 
@@ -27,11 +31,16 @@ You can wrap your app under `SWRConfig` and preconfig all configurations there
 
 ### Customize `focus` and `reconnect` Events
 
-There're few configurations you need to take care of such as `isOnline`, `isVisible`, `initFocus` and `initReconnect`.
+There're few configurations you need to take care of such as `isOnline`,
+`isVisible`, `initFocus` and `initReconnect`.
 
-`isOnline` and `isVisible` are functions that return a boolean, to determine if the application is "active". By default, SWR will bail out a revalidation if these conditions are not met.
+`isOnline` and `isVisible` are functions that return a boolean, to determine if
+the application is "active". By default, SWR will bail out a revalidation if
+these conditions are not met.
 
-When using `initFocus` and `initReconnect`, it's required to also set up a [custom cache provider](/docs/advanced/cache). You can use an empty `Map()` or any storage you prefer.
+When using `initFocus` and `initReconnect`, it's required to also set up a
+[custom cache provider](/docs/advanced/cache). You can use an empty `Map()` or
+any storage you prefer.
 
 ```jsx
 <SWRConfig
@@ -92,4 +101,9 @@ import { AppState } from 'react-native'
 </SWRConfig>
 ```
 
-For `initReconnect`, it requires some 3rd party libraries such as [NetInfo](https://github.com/react-native-netinfo/react-native-netinfo) to subscribe to the network status. The implementation will be similar to the example above: receiving a `callback` function and trigger it when the network recovers from offline, so SWR can start a revalidation to keep your data up-to-date.
+For `initReconnect`, it requires some 3rd party libraries such as
+[NetInfo](https://github.com/react-native-netinfo/react-native-netinfo) to
+subscribe to the network status. The implementation will be similar to the
+example above: receiving a `callback` function and trigger it when the network
+recovers from offline, so SWR can start a revalidation to keep your data
+up-to-date.

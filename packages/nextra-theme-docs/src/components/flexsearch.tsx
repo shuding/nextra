@@ -1,12 +1,12 @@
-import type { ReactElement, ReactNode} from 'react';
-import { useState, useCallback } from 'react'
-import { useRouter } from 'next/router'
-import FlexSearch from 'flexsearch'
 import cn from 'clsx'
-import { Search } from './search'
-import { HighlightMatches } from './highlight-matches'
+import FlexSearch from 'flexsearch'
+import { useRouter } from 'next/router'
+import type { ReactElement, ReactNode } from 'react'
+import { useCallback, useState } from 'react'
 import { DEFAULT_LOCALE } from '../constants'
 import type { SearchResult } from '../types'
+import { HighlightMatches } from './highlight-matches'
+import { Search } from './search'
 
 type SectionIndex = FlexSearch.Document<
   {

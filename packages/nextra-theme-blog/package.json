@@ -1,27 +1,11 @@
 {
   "name": "nextra-theme-blog",
-  "version": "2.5.0",
+  "version": "2.6.1",
   "description": "A Nextra theme for blogs.",
   "repository": "https://github.com/shuding/nextra",
   "author": "Shu Ding <g@shud.in>",
   "license": "MIT",
-  "files": [
-    "dist/*",
-    "style.css"
-  ],
-  "sideEffects": false,
   "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "typesVersions": {
-    "*": {
-      "cusdis": [
-        "./dist/cusdis.d.ts"
-      ],
-      "tags": [
-        "./dist/tags.d.ts"
-      ]
-    }
-  },
   "exports": {
     "./style.css": "./style.css",
     ".": {
@@ -37,22 +21,33 @@
       "types": "./dist/tags.d.ts"
     }
   },
+  "types": "./dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "cusdis": [
+        "./dist/cusdis.d.ts"
+      ],
+      "tags": [
+        "./dist/tags.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist/*",
+    "style.css"
+  ],
   "scripts": {
     "build": "tsup",
-    "build:tailwind": "pnpm postcss src/styles.css -o style.css --verbose",
     "build:all": "pnpm build && pnpm build:tailwind",
-    "types": "tsup --dts-only",
-    "types:check": "tsc --noEmit",
+    "build:tailwind": "pnpm postcss src/styles.css -o style.css --verbose",
+    "clean": "rimraf ./dist ./style.css",
     "dev": "concurrently \"pnpm dev:layout\" \"pnpm dev:tailwind\"",
     "dev:layout": "tsup --watch",
     "dev:tailwind": "TAILWIND_MODE=watch pnpm postcss src/styles.css -o style.css --watch",
     "prepublishOnly": "pnpm build:all",
-    "clean": "rimraf ./dist ./style.css",
     "test": "vitest run",
-    "format": "prettier --ignore-path ../../.gitignore --write --list-different ."
-  },
-  "dependencies": {
-    "next-themes": "^0.2.1"
+    "types": "tsup --dts-only",
+    "types:check": "tsc --noEmit"
   },
   "peerDependencies": {
     "next": ">=9.5.3",
@@ -65,6 +60,9 @@
     "react-cusdis": {
       "optional": true
     }
+  },
+  "dependencies": {
+    "next-themes": "^0.2.1"
   },
   "devDependencies": {
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
@@ -83,5 +81,6 @@
     "react-dom": "^18.2.0",
     "tailwindcss": "^3.3.1",
     "vitest": "^0.31.0"
-  }
+  },
+  "sideEffects": false
 }

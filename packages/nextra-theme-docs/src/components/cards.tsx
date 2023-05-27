@@ -1,5 +1,5 @@
-import type { ComponentProps, CSSProperties, ReactNode } from 'react'
 import cn from 'clsx'
+import type { ComponentProps, CSSProperties, ReactNode } from 'react'
 import { Anchor } from './anchor'
 
 const classes = {

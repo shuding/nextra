@@ -1,6 +1,6 @@
-import { describe, it, expect } from 'vitest'
-import { config, articleOpts } from './__fixture__/pageMap'
+import { describe, expect, it } from 'vitest'
 import { getParent } from '../src/utils/parent'
+import { articleOpts, config } from './__fixture__/pageMap'
 
 describe('parent', () => {
   it('article', () => {

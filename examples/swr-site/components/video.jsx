@@ -1,50 +1,50 @@
-import { useRef, useCallback, useEffect } from "react";
-import { useInView } from "react-intersection-observer";
-import "intersection-observer";
+import { useCallback, useEffect, useRef } from 'react'
+import { useInView } from 'react-intersection-observer'
+import 'intersection-observer'
 
 export default function Video({ src, caption, ratio }) {
   const [inViewRef, inView] = useInView({
-    threshold: 1,
-  });
-  const videoRef = useRef();
+    threshold: 1
+  })
+  const videoRef = useRef()
 
   const setRefs = useCallback(
-    (node) => {
+    node => {
       // Ref's from useRef needs to have the node assigned to `current`
-      videoRef.current = node;
+      videoRef.current = node
       // Callback refs, like the one from `useInView`, is a function that takes the node as an argument
-      inViewRef(node);
+      inViewRef(node)
 
       if (node) {
-        node.addEventListener("click", function () {
+        node.addEventListener('click', function () {
           if (this.paused) {
-            this.play();
+            this.play()
           } else {
-            this.pause();
+            this.pause()
           }
-        });
+        })
       }
     },
     [inViewRef]
-  );
+  )
 
   useEffect(() => {
     if (!videoRef?.current) {
-      return;
+      return
     }
 
     if (inView) {
-      videoRef.current.play();
+      videoRef.current.play()
     } else {
-      videoRef.current.pause();
+      videoRef.current.pause()
     }
-  }, [inView]);
+  }, [inView])
 
   return (
-    <div style={{ position: "relative", margin: "2rem 1rem" }}>
-      <div style={{ paddingBottom: ratio * 100 + "%" }} />
+    <div style={{ position: 'relative', margin: '2rem 1rem' }}>
+      <div style={{ paddingBottom: ratio * 100 + '%' }} />
       <video
-        style={{ position: "absolute", top: 0, left: 0 }}
+        style={{ position: 'absolute', top: 0, left: 0 }}
         loop
         muted
         autoPlay
@@ -54,10 +54,10 @@ export default function Video({ src, caption, ratio }) {
         <source src={src} type="video/mp4" />
       </video>
       {caption && (
-        <figcaption style={{ fontSize: ".9rem", textAlign: "center" }}>
+        <figcaption style={{ fontSize: '.9rem', textAlign: 'center' }}>
           {caption}
         </figcaption>
       )}
     </div>
-  );
+  )
 }

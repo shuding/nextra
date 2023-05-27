@@ -1,25 +1,10 @@
 {
   "name": "nextra-theme-docs",
-  "version": "2.5.0",
+  "version": "2.6.1",
   "description": "A Nextra theme for documentation sites.",
   "repository": "https://github.com/shuding/nextra",
   "author": "Shu Ding <g@shud.in>",
   "license": "MIT",
-  "files": [
-    "dist",
-    "style.css"
-  ],
-  "sideEffects": [
-    "./src/polyfill.ts"
-  ],
-  "typesVersions": {
-    "*": {
-      ".": [
-        "./dist/index.d.ts"
-      ]
-    }
-  },
-  "types": "./dist/index.d.ts",
   "exports": {
     "./style.css": "./style.css",
     ".": {
@@ -27,19 +12,36 @@
       "types": "./dist/index.d.ts"
     }
   },
+  "types": "./dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      ".": [
+        "./dist/index.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist",
+    "style.css"
+  ],
   "scripts": {
-    "dev": "concurrently \"pnpm dev:layout\" \"pnpm dev:tailwind\"",
     "build": "tsup",
     "build:all": "pnpm build && pnpm build:tailwind",
     "build:tailwind": "pnpm postcss css/styles.css -o style.css --verbose",
-    "types": "tsup --dts-only",
-    "types:check": "tsc --noEmit",
+    "clean": "rimraf ./dist ./style.css",
+    "dev": "concurrently \"pnpm dev:layout\" \"pnpm dev:tailwind\"",
     "dev:layout": "tsup --watch",
     "dev:tailwind": "TAILWIND_MODE=watch pnpm postcss css/styles.css -o style.css --watch",
     "prepublishOnly": "pnpm build:all",
     "test": "vitest --run",
-    "clean": "rimraf ./dist ./style.css",
-    "format": "prettier --ignore-path ../../.gitignore --write --list-different ."
+    "types": "tsup --dts-only",
+    "types:check": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "next": ">=9.5.3",
+    "nextra": "workspace:*",
+    "react": ">=16.13.1",
+    "react-dom": ">=16.13.1"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.10",
@@ -54,12 +56,6 @@
     "next-themes": "^0.2.1",
     "scroll-into-view-if-needed": "^3.0.0",
     "zod": "^3.20.2"
-  },
-  "peerDependencies": {
-    "next": ">=9.5.3",
-    "nextra": "workspace:*",
-    "react": ">=16.13.1",
-    "react-dom": ">=16.13.1"
   },
   "devDependencies": {
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
@@ -81,5 +77,8 @@
     "react-dom": "^18.2.0",
     "tailwindcss": "^3.3.1",
     "vitest": "^0.31.0"
-  }
+  },
+  "sideEffects": [
+    "./src/polyfill.ts"
+  ]
 }

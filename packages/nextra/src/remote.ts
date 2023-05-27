@@ -1,28 +1,33 @@
 import { compileMdx } from './compile'
-import type { RemarkLinkRewriteOptions } from './mdx-plugins'
-import { remarkLinkRewrite } from './mdx-plugins'
-import { truthy } from './utils'
 
-export const buildDynamicMDX = async (
+export async function buildDynamicMDX(
   content: string,
-  {
-    remarkLinkRewriteOptions,
-    ...loaderOptions
-  }: Parameters<typeof compileMdx>[1] & {
-    remarkLinkRewriteOptions?: RemarkLinkRewriteOptions
-  } = {}
-) => {
-  const { result, headings, frontMatter, title } = await compileMdx(content, {
-    ...loaderOptions,
-    mdxOptions: {
-      ...loaderOptions.mdxOptions,
-      remarkPlugins: [
-        ...(loaderOptions.mdxOptions?.remarkPlugins || []),
-        remarkLinkRewriteOptions &&
-          ([remarkLinkRewrite, remarkLinkRewriteOptions] as any)
-      ].filter(truthy)
-    }
-  })
+  loaderOptions: Parameters<typeof compileMdx>[1]
+) {
+  if (loaderOptions && 'remarkLinkRewriteOptions' in loaderOptions) {
+    throw new Error(`\`remarkLinkRewriteOptions\` was removed. For overriding internal links use \`remarkLinkRewrite\` instead.
+
+import { remarkLinkRewrite } from 'nextra/mdx-plugins'
+
+// ...
+
+const result = await buildDynamicMDX(rawMdx, {
+  mdxOptions: {
+    remarkPlugins: [
+      [remarkLinkRewrite, {
+        pattern: /^\\/docs(\\/.*)?$/,
+        replace: '/docs/2.0.0$1'
+      }]
+    ]
+  }
+})
+`)
+  }
+
+  const { result, headings, frontMatter, title } = await compileMdx(
+    content,
+    loaderOptions
+  )
 
   return {
     __nextra_dynamic_mdx: result,
@@ -34,8 +39,8 @@ export const buildDynamicMDX = async (
   }
 }
 
-export const buildDynamicMeta = async () => {
-  const resolvePageMap = (globalThis as any).__nextra_resolvePageMap
+export async function buildDynamicMeta() {
+  const resolvePageMap = globalThis.__nextra_resolvePageMap
   if (resolvePageMap) {
     return {
       __nextra_pageMap: await resolvePageMap()

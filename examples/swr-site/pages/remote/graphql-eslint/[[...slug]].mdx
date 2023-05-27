@@ -1,11 +1,12 @@
 import fs from 'fs/promises'
-import { buildDynamicMDX, buildDynamicMeta } from 'nextra/remote'
-import { RemoteContent } from 'nextra/data'
-import { Callout } from 'nextra-theme-docs'
 import {
   findPathWithExtension,
   findStaticPaths
 } from '@components/remote-utils'
+import { Callout } from 'nextra/components'
+import { RemoteContent } from 'nextra/data'
+import { remarkLinkRewrite } from 'nextra/mdx-plugins'
+import { buildDynamicMDX, buildDynamicMeta } from 'nextra/remote'
 
 export const getStaticProps = async ({ params }) => {
   const filePath = await findPathWithExtension({
@@ -13,15 +14,21 @@ export const getStaticProps = async ({ params }) => {
     rootDir: 'website/src/pages/docs/',
     slug: params.slug
   })
-
   const content = await fs.readFile(filePath, 'utf8')
   return {
     props: {
       ...(await buildDynamicMDX(content, {
         defaultShowCopyCode: true,
-        remarkLinkRewriteOptions: {
-          pattern: /^\/docs(\/.*)?$/,
-          replace: '/docs/2.0.0$1'
+        mdxOptions: {
+          remarkPlugins: [
+            [
+              remarkLinkRewrite,
+              {
+                pattern: /^\/docs(\/.*)?$/,
+                replace: '/docs/2.0.0$1'
+              }
+            ]
+          ]
         }
       })),
       ...(await buildDynamicMeta())

@@ -1,12 +1,14 @@
 # MDX
 
-With Nextra, all your `.md` and `.mdx` files under the pages directory will be rendered with [MDX](https://mdxjs.com/about), it's an
-advanced Markdown format with React component support.
+With Nextra, all your `.md` and `.mdx` files under the pages directory will be
+rendered with [MDX](https://mdxjs.com/about), it's an advanced Markdown format
+with React component support.
 
-You can use import and use React components inside your Markdown files like this:
+You can use import and use React components inside your Markdown files like
+this:
 
 ```mdx filename="example.mdx"
-import { Callout } from 'nextra-theme-docs'
+import { Callout } from 'nextra/components'
 
 **Markdown With React Components**
 
@@ -20,7 +22,7 @@ import { Callout } from 'nextra-theme-docs'
 
 Generates:
 
-import { Callout } from 'nextra-theme-docs'
+import { Callout } from 'nextra/components'
 
 <div className="p-4 border border-gray-200 dark:border-gray-900 rounded mt-6">
 **Markdown With React Components**
@@ -124,13 +126,15 @@ You can use \`content\` to wrap inline code content like: `let x = 1`.
 
 ## Blockquote
 
-> Where some people measure progress in answers-right per test or tests-passed per year, we are more interested in Sistine-Chapel-Ceilings per Lifetime.
+> Where some people measure progress in answers-right per test or tests-passed
+> per year, we are more interested in Sistine-Chapel-Ceilings per Lifetime.
 >
 > — Alan Kay, A Personal Computer for Children of All Ages
 
 Nested quotes:
 
-> > Where some people measure progress in answers-right per test or tests-passed per year, we are more interested in Sistine-Chapel-Ceilings per Lifetime.
+> > Where some people measure progress in answers-right per test or tests-passed
+> > per year, we are more interested in Sistine-Chapel-Ceilings per Lifetime.
 > >
 > > — Alan Kay, A Personal Computer for Children of All Ages
 >

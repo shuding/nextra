@@ -1,5 +1,5 @@
-import type { Dispatch, SetStateAction } from 'react';
-import { useContext, createContext } from 'react'
+import type { Dispatch, SetStateAction } from 'react'
+import { createContext, useContext } from 'react'
 
 interface Menu {
   menu: boolean
@@ -8,7 +8,7 @@ interface Menu {
 
 const MenuContext = createContext<Menu>({
   menu: false,
-  setMenu: () => false,
+  setMenu: () => false
 })
 
 export const useMenu = () => useContext(MenuContext)

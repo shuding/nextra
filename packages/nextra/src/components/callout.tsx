@@ -1,6 +1,6 @@
-import type { ReactElement, ReactNode } from 'react'
 import cn from 'clsx'
-import { InformationCircleIcon } from 'nextra/icons'
+import type { ReactElement, ReactNode } from 'react'
+import { InformationCircleIcon } from '../icons'
 
 const TypeToEmoji = {
   default: '💡',

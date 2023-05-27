@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
+import { describe, expect, it } from 'vitest'
 import { compileMdx } from '../src/compile'
-import { it, describe, expect } from 'vitest'
 import { CWD } from '../src/constants'
 
 type Name =

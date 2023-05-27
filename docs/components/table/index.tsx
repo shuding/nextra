@@ -4,7 +4,7 @@ export function OptionTable({ options }: { options: [string, string, any] }) {
   return (
     <div
       className={
-        '-mx-6 mt-6 mb-4 overflow-x-auto overscroll-x-contain px-6 pb-4 ' +
+        '-mx-6 mb-4 mt-6 overflow-x-auto overscroll-x-contain px-6 pb-4 ' +
         styles.container
       }
     >
@@ -13,7 +13,7 @@ export function OptionTable({ options }: { options: [string, string, any] }) {
           <tr className="border-b py-4 text-left dark:border-neutral-700">
             <th className="py-2 font-semibold">Option</th>
             <th className="py-2 pl-6 font-semibold">Type</th>
-            <th className="py-2 px-6 font-semibold">Description</th>
+            <th className="px-6 py-2 font-semibold">Description</th>
           </tr>
         </thead>
         <tbody className="align-baseline text-gray-900 dark:text-gray-100">

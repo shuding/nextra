@@ -1,6 +1,6 @@
-import type { DocsThemeConfig} from 'nextra-theme-docs';
-import { useConfig } from 'nextra-theme-docs'
 import { useRouter } from 'next/router'
+import type { DocsThemeConfig } from 'nextra-theme-docs'
+import { useConfig } from 'nextra-theme-docs'
 
 const logo = (
   <span>
@@ -127,7 +127,7 @@ const config: DocsThemeConfig = {
       return <>{title}</>
     },
     defaultMenuCollapseLevel: 1,
-    toggleButton: true,
+    toggleButton: true
   },
   footer: {
     text: (

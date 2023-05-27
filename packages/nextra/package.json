@@ -1,15 +1,60 @@
 {
   "name": "nextra",
-  "version": "2.5.0",
+  "version": "2.6.1",
   "description": "Next.js and MDX based site generator.",
-  "files": [
-    "dist/*",
-    "icons/*",
-    "loader.js",
-    "styles/*"
-  ],
-  "types": "./dist/types.d.ts",
+  "repository": "https://github.com/shuding/nextra",
+  "license": "MIT",
+  "engines": {
+    "node": ">=16"
+  },
   "main": "./dist/index.js",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": "./dist/index.js",
+    "./catch-all": "./dist/catch-all.js",
+    "./data": {
+      "import": "./dist/ssg.js",
+      "types": "./dist/ssg.d.ts"
+    },
+    "./ssg": {
+      "import": "./dist/ssg.js",
+      "types": "./dist/ssg.d.ts"
+    },
+    "./loader": "./loader.js",
+    "./setup-page": {
+      "import": "./dist/setup-page.js",
+      "types": "./dist/setup-page.d.ts"
+    },
+    "./mdx": {
+      "import": "./dist/mdx.js",
+      "types": "./dist/mdx.d.ts"
+    },
+    "./normalize-pages": {
+      "import": "./dist/normalize-pages.js",
+      "types": "./dist/normalize-pages.d.ts"
+    },
+    "./components": {
+      "import": "./dist/components/index.js",
+      "types": "./dist/components/index.d.ts"
+    },
+    "./mdx-plugins": {
+      "import": "./dist/mdx-plugins/index.mjs",
+      "types": "./dist/mdx-plugins/index.d.ts"
+    },
+    "./hooks": {
+      "import": "./dist/hooks/index.js",
+      "types": "./dist/hooks/index.d.ts"
+    },
+    "./icons": {
+      "import": "./dist/icons/index.js",
+      "types": "./dist/icons/index.d.ts"
+    },
+    "./*": {
+      "import": "./dist/*.mjs",
+      "types": "./dist/*.d.ts"
+    }
+  },
+  "types": "./dist/types.d.ts",
   "typesVersions": {
     "*": {
       "compile": [
@@ -50,75 +95,45 @@
       ],
       "normalize-pages": [
         "./dist/normalize-pages.d.ts"
+      ],
+      "mdx-plugins": [
+        "./dist/mdx-plugins/index.d.ts"
       ]
     }
   },
-  "exports": {
-    "./package.json": "./package.json",
-    ".": "./dist/index.js",
-    "./catch-all": "./dist/catch-all.js",
-    "./data": {
-      "import": "./dist/ssg.js",
-      "types": "./dist/ssg.d.ts"
-    },
-    "./ssg": {
-      "import": "./dist/ssg.js",
-      "types": "./dist/ssg.d.ts"
-    },
-    "./loader": "./loader.js",
-    "./setup-page": {
-      "import": "./dist/setup-page.js",
-      "types": "./dist/setup-page.d.ts"
-    },
-    "./mdx": {
-      "import": "./dist/mdx.js",
-      "types": "./dist/mdx.d.ts"
-    },
-    "./normalize-pages": {
-      "import": "./dist/normalize-pages.js",
-      "types": "./dist/normalize-pages.d.ts"
-    },
-    "./components": {
-      "import": "./dist/components/index.js",
-      "types": "./dist/components/index.d.ts"
-    },
-    "./hooks": {
-      "import": "./dist/hooks/index.js",
-      "types": "./dist/hooks/index.d.ts"
-    },
-    "./icons": {
-      "import": "./dist/icons/index.js",
-      "types": "./dist/icons/index.d.ts"
-    },
-    "./*": {
-      "import": "./dist/*.mjs",
-      "types": "./dist/*.d.ts"
-    }
-  },
-  "repository": "https://github.com/shuding/nextra",
-  "license": "MIT",
+  "files": [
+    "dist/*",
+    "icons/*",
+    "loader.js",
+    "styles/*"
+  ],
   "scripts": {
     "build": "tsup",
-    "dev": "tsup --watch",
-    "types": "tsup --dts-only",
-    "types:check": "tsc --noEmit",
-    "test": "vitest run",
-    "prepublishOnly": "pnpm build",
     "clean": "rimraf ./dist ./style.css",
-    "format": "prettier --ignore-path ../../.gitignore --write --list-different ."
+    "dev": "tsup --watch",
+    "prepublishOnly": "pnpm build",
+    "test": "vitest run",
+    "types": "tsup --dts-only",
+    "types:check": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "next": ">=9.5.3",
+    "react": ">=16.13.1",
+    "react-dom": ">=16.13.1"
   },
   "dependencies": {
     "@mdx-js/mdx": "^2.3.0",
     "@mdx-js/react": "^2.3.0",
     "@napi-rs/simple-git": "^0.1.8",
+    "clsx": "^1.2.1",
     "github-slugger": "^2.0.0",
-    "graceful-fs": "^4.2.10",
+    "graceful-fs": "^4.2.11",
     "gray-matter": "^4.0.3",
-    "katex": "^0.16.4",
+    "katex": "^0.16.7",
     "lodash.get": "^4.4.2",
     "next-mdx-remote": "^4.2.1",
     "p-limit": "^3.1.0",
-    "rehype-katex": "^6.0.2",
+    "rehype-katex": "^6.0.3",
     "rehype-pretty-code": "0.9.4",
     "remark-gfm": "^3.0.1",
     "remark-math": "^5.1.1",
@@ -129,11 +144,6 @@
     "unist-util-remove": "^3.1.1",
     "unist-util-visit": "^4.1.1",
     "zod": "^3.20.2"
-  },
-  "peerDependencies": {
-    "next": ">=9.5.3",
-    "react": ">=16.13.1",
-    "react-dom": ">=16.13.1"
   },
   "devDependencies": {
     "@types/github-slugger": "^2.0.0",
@@ -150,8 +160,5 @@
     "react-dom": "^18.2.0",
     "unified": "^10.1.2",
     "vitest": "^0.31.0"
-  },
-  "engines": {
-    "node": ">=16"
   }
 }

@@ -1,11 +1,11 @@
-import { describe, it, expect } from 'vitest'
-import {
-  indexOpts,
-  config,
-  postsOpts,
-  articleOpts
-} from './__fixture__/pageMap'
+import { describe, expect, it } from 'vitest'
 import { collectPostsAndNavs } from '../src/utils/collect'
+import {
+  articleOpts,
+  config,
+  indexOpts,
+  postsOpts
+} from './__fixture__/pageMap'
 
 describe('collect', () => {
   it('page', () => {

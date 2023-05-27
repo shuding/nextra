@@ -1,7 +1,8 @@
 # LaTeX
 
-Nextra uses [KaTeX](https://katex.org/) to render LaTeX expressions directly in MDX.
-To enable LaTeX support, you must add the following to your `next.config.js`:
+Nextra uses [KaTeX](https://katex.org/) to render LaTeX expressions directly in
+MDX. To enable LaTeX support, you must add the following to your
+`next.config.js`:
 
 ```js filename="next.config.js"
 module.exports = require('nextra')({
@@ -9,10 +10,14 @@ module.exports = require('nextra')({
 })
 ```
 
-Using LaTeX within MDX is as simple as wrapping your expression in `$$` or `$`. For example, the following code
+Using LaTeX within MDX is as simple as wrapping your expression in `$$` or `$`.
+For example, the following code
+
 ```latex
 $\sqrt{a^2 + b^2}$
 ```
+
 will be rendered as: $\sqrt{a^2 + b^2}$
 
-To learn more about KaTeX and its supported functions, visit their [documentation](https://katex.org/docs/supported.html).
+To learn more about KaTeX and its supported functions, visit their
+[documentation](https://katex.org/docs/supported.html).

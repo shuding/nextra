@@ -1,29 +1,36 @@
-import type { ReactElement } from 'react'
+import { useTheme } from 'next-themes'
 import Link from 'next/link'
-import ThemeSwitch from './theme-switch'
+import type { ReactElement } from 'react'
 import { useBlogContext } from './blog-context'
+import ThemeSwitch from './theme-switch'
 import { collectPostsAndNavs } from './utils/collect'
 
 export default function Nav(): ReactElement {
   const { opts, config } = useBlogContext()
   const { navPages } = collectPostsAndNavs({ opts, config })
+  const { resolvedTheme } = useTheme()
   return (
     <div className="nx-mb-8 nx-flex nx-items-center nx-gap-3">
       <div className="nx-flex nx-grow nx-flex-wrap nx-items-center nx-justify-end nx-gap-3">
         {navPages.map(page => {
+          const name = page.frontMatter?.title || page.name
           if (page.active) {
             return (
               <span
                 key={page.route}
-                className="nx-cursor-default nx-text-gray-400"
+                className={`nx-cursor-default ${
+                  resolvedTheme === 'dark'
+                    ? 'nx-text-gray-400'
+                    : 'nx-text-gray-600'
+                }`}
               >
-                {page.frontMatter?.title || page.name}
+                {name}
               </span>
             )
           }
           return (
             <Link key={page.route} href={page.route} passHref legacyBehavior>
-              <a>{page.frontMatter?.title || page.name}</a>
+              <a>{name}</a>
             </Link>
           )
         })}

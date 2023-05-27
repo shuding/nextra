@@ -1,11 +1,5 @@
-import type {
-  ReactElement,
-  ReactNode
-} from 'react';
-import {
-  useContext,
-  createContext
-} from 'react'
+import type { ReactElement, ReactNode } from 'react'
+import { createContext, useContext } from 'react'
 import type { LayoutProps } from './types'
 import { isValidDate } from './utils/date'
 

@@ -1,16 +1,16 @@
 {
   "name": "swr-site",
+  "author": "Shu Ding",
+  "license": "Apache-2.0",
   "private": true,
   "main": "index.js",
   "scripts": {
-    "dev": "next",
-    "start": "next start",
     "build": "next build",
+    "clean": "rimraf .next .turbo",
     "debug": "NODE_OPTIONS='--inspect' next dev",
-    "clean": "rimraf .next .turbo"
+    "dev": "next",
+    "start": "next start"
   },
-  "author": "Shu Ding",
-  "license": "Apache-2.0",
   "dependencies": {
     "focus-visible": "^5.1.0",
     "intersection-observer": "^0.10.0",

@@ -1,4 +1,4 @@
-import { Callout } from 'nextra-theme-docs'
+import { Callout } from 'nextra/components'
 
 # Data Fetching
 
@@ -6,9 +6,11 @@ import { Callout } from 'nextra-theme-docs'
 const { data, error } = useSWR(key, fetcher)
 ```
 
-This is the very fundamental API of SWR. The `fetcher` here is an async function that **accepts the `key`** of SWR, and returns the data.
+This is the very fundamental API of SWR. The `fetcher` here is an async function
+that **accepts the `key`** of SWR, and returns the data.
 
-The returned value will be passed as `data`, and if it throws, it will be caught as `error`.
+The returned value will be passed as `data`, and if it throws, it will be caught
+as `error`.
 
 <Callout emoji="💡">
   Note that <code>fetcher</code> can be omitted from the parameters if it's{' '}
@@ -17,22 +19,26 @@ The returned value will be passed as `data`, and if it throws, it will be caught
 
 ## Fetch
 
-You can use any library to handle data fetching, for example a `fetch` polyfill [developit/unfetch](https://github.com/developit/unfetch):
+You can use any library to handle data fetching, for example a `fetch` polyfill
+[developit/unfetch](https://github.com/developit/unfetch):
 
 ```js
 import fetch from 'unfetch'
 
 const fetcher = url => fetch(url).then(r => r.json())
 
-function App () {
+function App() {
   const { data, error } = useSWR('/api/data', fetcher)
   // ...
 }
 ```
 
 <Callout emoji="💡">
-  If you are using <strong>Next.js</strong>, you don't need to import this polyfill:<br/>
-  [New Built-In Polyfills: fetch(), URL, and Object.assign](https://nextjs.org/blog/next-9-1-7#new-built-in-polyfills-fetch-url-and-objectassign)
+  If you are using <strong>Next.js</strong>, you don't need to import this
+  polyfill:
+  <br />
+  [New Built-In Polyfills: fetch(), URL, and
+  Object.assign](https://nextjs.org/blog/next-9-1-7#new-built-in-polyfills-fetch-url-and-objectassign)
 </Callout>
 
 ## Axios
@@ -42,7 +48,7 @@ import axios from 'axios'
 
 const fetcher = url => axios.get(url).then(res => res.data)
 
-function App () {
+function App() {
   const { data, error } = useSWR('/api/data', fetcher)
   // ...
 }
@@ -50,14 +56,15 @@ function App () {
 
 ## GraphQL
 
-Or using GraphQL with libs like [graphql-request](https://github.com/prisma-labs/graphql-request):
+Or using GraphQL with libs like
+[graphql-request](https://github.com/prisma-labs/graphql-request):
 
 ```js
 import { request } from 'graphql-request'
 
 const fetcher = query => request('/api/graphql', query)
 
-function App () {
+function App() {
   const { data, error } = useSWR(
     `{
       Movie(title: "Inception") {
@@ -73,4 +80,5 @@ function App () {
 }
 ```
 
-_If you want to pass variables to a GraphQL query, check out [Multiple Arguments](/docs/arguments)._
+_If you want to pass variables to a GraphQL query, check out
+[Multiple Arguments](/docs/arguments)._

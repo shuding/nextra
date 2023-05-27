@@ -1,17 +1,7 @@
-import type {
-  Dispatch,
-  ReactElement,
-  ReactNode,
-  SetStateAction,
-} from 'react';
+import type { Dispatch, ReactElement, ReactNode, SetStateAction } from 'react'
 import 'intersection-observer'
-import {
-  createContext,
-  useContext,
-  useState,
-  useRef,
-} from 'react';
-import { IS_BROWSER } from '../constants';
+import { createContext, useContext, useRef, useState } from 'react'
+import { IS_BROWSER } from '../constants'
 
 type ActiveAnchor = Record<
   string,
@@ -28,7 +18,9 @@ const SetActiveAnchorContext = createContext<
   Dispatch<SetStateAction<ActiveAnchor>>
 >(v => v)
 
-const IntersectionObserverContext = createContext<IntersectionObserver | null>(null)
+const IntersectionObserverContext = createContext<IntersectionObserver | null>(
+  null
+)
 const slugs = new WeakMap()
 const SlugsContext = createContext<WeakMap<any, any>>(slugs)
 // Separate the state as 2 contexts here to avoid
@@ -36,7 +28,8 @@ const SlugsContext = createContext<WeakMap<any, any>>(slugs)
 export const useActiveAnchor = () => useContext(ActiveAnchorContext)
 export const useSetActiveAnchor = () => useContext(SetActiveAnchorContext)
 
-export const useIntersectionObserver = () => useContext(IntersectionObserverContext)
+export const useIntersectionObserver = () =>
+  useContext(IntersectionObserverContext)
 export const useSlugs = () => useContext(SlugsContext)
 
 export const ActiveAnchorProvider = ({

@@ -1,37 +1,36 @@
-import path from 'node:path'
 import { createRequire } from 'node:module'
+import path from 'node:path'
 import type { ProcessorOptions } from '@mdx-js/mdx'
 import { createProcessor } from '@mdx-js/mdx'
 import type { Processor } from '@mdx-js/mdx/lib/core'
-import remarkGfm from 'remark-gfm'
+import grayMatter from 'gray-matter'
+import rehypeKatex from 'rehype-katex'
 import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
 import rehypePrettyCode from 'rehype-pretty-code'
-import remarkReadingTime from 'remark-reading-time'
-import grayMatter from 'gray-matter'
+import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
-import rehypeKatex from 'rehype-katex'
+import remarkReadingTime from 'remark-reading-time'
 import type { Pluggable } from 'unified'
-
-import {
-  remarkStaticImage,
-  remarkCustomHeadingId,
-  remarkHeadings,
-  remarkReplaceImports,
-  structurize,
-  parseMeta,
-  attachMeta,
-  remarkRemoveImports,
-  remarkLinkRewrite
-} from './mdx-plugins'
-import type { LoaderOptions, PageOpts, ReadingTime } from './types'
-import { truthy } from './utils'
 import {
   CODE_BLOCK_FILENAME_REGEX,
   CWD,
   DEFAULT_LOCALE,
   MARKDOWN_URL_EXTENSION_REGEX
 } from './constants'
+import {
+  attachMeta,
+  parseMeta,
+  remarkCustomHeadingId,
+  remarkHeadings,
+  remarkLinkRewrite,
+  remarkRemoveImports,
+  remarkReplaceImports,
+  remarkStaticImage,
+  structurize
+} from './mdx-plugins'
 import theme from './theme.json'
+import type { LoaderOptions, PageOpts, ReadingTime } from './types'
+import { truthy } from './utils'
 
 globalThis.__nextra_temp_do_not_use = () => {
   import('./__temp__')
@@ -66,6 +65,10 @@ const cachedCompilerForFormat: Record<
 
 type MdxOptions = LoaderOptions['mdxOptions'] &
   Pick<ProcessorOptions, 'jsx' | 'outputFormat'>
+
+// @ts-expect-error -- Without bind is unable to use `remarkLinkRewrite` with `buildDynamicMDX`
+// because we already use `remarkLinkRewrite` function to remove .mdx? extensions
+const clonedRemarkLinkRewrite = remarkLinkRewrite.bind(null)
 
 export async function compileMdx(
   source: string,
@@ -139,7 +142,7 @@ export async function compileMdx(
       format,
       outputFormat,
       providerImportSource: isFileOutsideCWD
-        ? require.resolve('nextra').replace(/index\.js$/, 'mdx.mjs') // fixes Package subpath './mdx' is not defined by "exports"
+        ? require.resolve('nextra').replace(/index\.js$/, 'mdx.js') // fixes Package subpath './mdx' is not defined by "exports"
         : 'nextra/mdx',
       remarkPlugins: [
         ...(remarkPlugins || []),
@@ -154,7 +157,7 @@ export async function compileMdx(
         isFileOutsideCWD && remarkReplaceImports,
         // Remove the markdown file extension from links
         [
-          remarkLinkRewrite,
+          clonedRemarkLinkRewrite,
           {
             pattern: MARKDOWN_URL_EXTENSION_REGEX,
             replace: '',

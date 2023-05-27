@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-
 import { NEXTRA_INTERNAL } from './constants'
 import type { NextraInternalGlobal } from './types'
 

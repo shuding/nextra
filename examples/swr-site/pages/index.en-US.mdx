@@ -4,11 +4,9 @@ searchable: false
 ---
 
 import Features from '@components/features'
-import { Tabs, Tab, Callout } from 'nextra-theme-docs'
+import { Callout, Tab, Tabs } from 'nextra-theme-docs'
 
-{
-// wrapped with {} to mark it as javascript so mdx will not put it under a p tag
-}
+{/* wrapped with {} to mark it as javascript so mdx will not put it under a p tag */}
 {<h1 className="text-center font-extrabold md:text-5xl mt-8">SWR</h1>}
 
 <Tabs items={['JavaScript', 'C++', {label:'C', disabled: true}, 'Python']} defaultIndex={1}>
@@ -34,18 +32,24 @@ import { Tabs, Tab, Callout } from 'nextra-theme-docs'
   </Tab>
 </Tabs>
 
-<Features/>
+<Features />
 
-The name “SWR” is derived from `stale-while-revalidate`, a HTTP cache invalidation strategy popularized by [HTTP RFC 5861](https://tools.ietf.org/html/rfc5861).
-SWR is a strategy to first return the data from cache (stale), then send the fetch request (revalidate), and finally come with the up-to-date data.
+The name “SWR” is derived from `stale-while-revalidate`, a HTTP cache
+invalidation strategy popularized by
+[HTTP RFC 5861](https://tools.ietf.org/html/rfc5861). SWR is a strategy to first
+return the data from cache (stale), then send the fetch request (revalidate),
+and finally come with the up-to-date data.
 
 <Callout emoji="✅">
-  With SWR, components will get a stream of data updates **constantly** and **automatically**.<br/>
+  With SWR, components will get a stream of data updates **constantly** and
+  **automatically**.
+  <br />
   And the UI will be always **fast** and **reactive**.
 </Callout>
 
-<div className="mt-16 mb-20 text-center">
-  [Get Started](/docs/getting-started) · [Examples](/examples) · [Blog](/blog) · [GitHub Repository](https://github.com/vercel/swr)
+<div className="mb-20 mt-16 text-center">
+  [Get Started](/docs/getting-started) · [Examples](/examples) · [Blog](/blog) ·
+  [GitHub Repository](https://github.com/vercel/swr)
 </div>
 
 ## Overview
@@ -74,14 +78,18 @@ function Profile() {
 }
 ```
 
-In this example, the `useSWR` hook accepts a `key` string and a `fetcher` function. `key` is a unique identifier of the data (normally the API URL)
-and will be passed to `fetcher`. `fetcher` can be any asynchronous function which returns the data, you can use the native fetch or tools like Axios.
+In this example, the `useSWR` hook accepts a `key` string and a `fetcher`
+function. `key` is a unique identifier of the data (normally the API URL) and
+will be passed to `fetcher`. `fetcher` can be any asynchronous function which
+returns the data, you can use the native fetch or tools like Axios.
 
-The hook returns 2 values: `data` and `error`, based on the status of the request.
+The hook returns 2 values: `data` and `error`, based on the status of the
+request.
 
 ## Features
 
-With just one single line of code, you can simplify the logic of data fetching in your project, and also have all these amazing features out-of-the-box:
+With just one single line of code, you can simplify the logic of data fetching
+in your project, and also have all these amazing features out-of-the-box:
 
 - **Fast**, **lightweight** and **reusable** data fetching
 - Built-in **cache** and request deduplication
@@ -91,7 +99,8 @@ With just one single line of code, you can simplify the logic of data fetching i
 - TypeScript ready
 - React Native
 
-SWR has you covered in all aspects of speed, correctness, and stability to help you build better experiences:
+SWR has you covered in all aspects of speed, correctness, and stability to help
+you build better experiences:
 
 - Fast page navigation
 - Polling on interval
@@ -107,13 +116,15 @@ And a lot [more](/docs/getting-started).
 
 ## Community
 
-<p className="flex gap-2 h-6 mt-6">
+<p className="mt-6 flex h-6 gap-2">
   <img alt="stars" src="https://badgen.net/github/stars/vercel/swr" />
   <img alt="downloads" src="https://badgen.net/npm/dt/swr" />
   <img alt="license" src="https://badgen.net/npm/license/swr" />
 </p>
 
-SWR is created by the same team behind [Next.js](https://nextjs.org), the React framework.
-Follow [@vercel](https://twitter.com/vercel) on Twitter for future project updates.
+SWR is created by the same team behind [Next.js](https://nextjs.org), the React
+framework. Follow [@vercel](https://twitter.com/vercel) on Twitter for future
+project updates.
 
-Feel free to join the [discussions on GitHub](https://github.com/vercel/swr/discussions)!
+Feel free to join the
+[discussions on GitHub](https://github.com/vercel/swr/discussions)!

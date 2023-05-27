@@ -1,11 +1,5 @@
-import type {
-  ComponentProps,
-  ReactElement} from 'react';
-import {
-  useCallback,
-  useEffect,
-  useState
-} from 'react'
+import type { ComponentProps, ReactElement } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { CheckIcon, CopyIcon } from '../icons'
 import { Button } from './button'
 

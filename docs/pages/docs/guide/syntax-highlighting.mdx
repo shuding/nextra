@@ -2,7 +2,9 @@ import { OptionTable } from 'components/table'
 
 # Syntax Highlighting
 
-Nextra uses [Shiki](https://shiki.matsu.io) to do syntax highlighting at build time. It’s very reliable and performant. For example, adding this in your Markdown file:
+Nextra uses [Shiki](https://shiki.matsu.io) to do syntax highlighting at build
+time. It’s very reliable and performant. For example, adding this in your
+Markdown file:
 
 ````md filename="Markdown"
 ```js
@@ -20,15 +22,17 @@ console.log('hello, world')
 
 ### Inlined Code
 
-Inlined syntax highlighting like `let x = 1{:jsx}` is also supported via the `{:}` syntax:
+Inlined syntax highlighting like `let x = 1{:jsx}` is also supported via the
+`{:}` syntax:
 
-````md filename="Markdown"
+```md filename="Markdown"
 Inlined syntax highlighting is also supported `let x = 1{:jsx}` via:
-````
+```
 
 ### Highlighting Lines
 
-You can highlight specific lines of code by adding a `{}` attribute to the code block:
+You can highlight specific lines of code by adding a `{}` attribute to the code
+block:
 
 ````md filename="Markdown"
 ```js {1,4-5}
@@ -54,7 +58,8 @@ function Counter() {
 
 ### Highlighting Substrings
 
-You can highlight specific substrings of code by adding a `//` attribute to the code block:
+You can highlight specific substrings of code by adding a `//` attribute to the
+code block:
 
 ````md filename="Markdown"
 ```js /useState/
@@ -76,11 +81,13 @@ function Counter() {
 }
 ```
 
-You can highlight only a part of the occurrences of that substring by adding a number it: `/str/1`, or multiple: `/str/1-3`, `/str/1,3`.
+You can highlight only a part of the occurrences of that substring by adding a
+number it: `/str/1`, or multiple: `/str/1-3`, `/str/1,3`.
 
 ### Copy Button
 
-By adding a `copy` attribute, a copy button will be added to the code block when the user hovers over it:
+By adding a `copy` attribute, a copy button will be added to the code block when
+the user hovers over it:
 
 ````md filename="Markdown"
 ```js copy
@@ -94,11 +101,14 @@ Renders:
 console.log('hello, world')
 ```
 
-You can enable this feature globally by setting `defaultShowCopyCode: true` in your Nextra configuration (`next.config.js` file). Once it's enabled globally, you can disable it via the `copy=false` attribute.
+You can enable this feature globally by setting `defaultShowCopyCode: true` in
+your Nextra configuration (`next.config.js` file). Once it's enabled globally,
+you can disable it via the `copy=false` attribute.
 
 ### Line Numbers
 
-You can add line numbers to your code blocks by adding a `showLineNumbers` attribute:
+You can add line numbers to your code blocks by adding a `showLineNumbers`
+attribute:
 
 ````md filename="Markdown"
 ```js showLineNumbers
@@ -124,7 +134,8 @@ function Counter() {
 
 ### Filenames and Titles
 
-You can add a filename or a title to your code blocks by adding a `filename` attribute:
+You can add a filename or a title to your code blocks by adding a `filename`
+attribute:
 
 ````md filename="Markdown"
 ```js filename="example.js"
@@ -168,11 +179,15 @@ Renders:
 
 ## Supported Languages
 
-Check [this list](https://github.com/shikijs/shiki/blob/main/docs/languages.md) for all supported languages.
+Check [this list](https://github.com/shikijs/shiki/blob/main/docs/languages.md)
+for all supported languages.
 
 ## Customize The Theme
 
-Nextra uses CSS variables to define the colors for tokens. You can inject a [global CSS](https://nextjs.org/docs/basic-features/built-in-css-support#adding-a-global-stylesheet) to customize them under light/dark themes. For example this is the default tokens and you can override any of these:
+Nextra uses CSS variables to define the colors for tokens. You can inject a
+[global CSS](https://nextjs.org/docs/basic-features/built-in-css-support#adding-a-global-stylesheet)
+to customize them under light/dark themes. For example this is the default
+tokens and you can override any of these:
 
 ```css filename="styles.css"
 :root {
@@ -205,46 +220,55 @@ Nextra uses CSS variables to define the colors for tokens. You can inject a [glo
 
 ## With Dynamic Content
 
-Since syntax highlighting is done at build time, you can’t use dynamic content in your code blocks. However, since MDX is very powerful so there is a workaround via client JS. For example:
+Since syntax highlighting is done at build time, you can’t use dynamic content
+in your code blocks. However, since MDX is very powerful so there is a
+workaround via client JS. For example:
 
 import { useEffect, useRef } from 'react'
 
-export function DynamicCode ({ children }) {
+export function DynamicCode({ children }) {
   const ref = useRef()
   const tokenRef = useRef()
   // Find the corresponding token from the DOM
   useEffect(() => {
     if (ref.current) {
-      const token = [...ref.current.querySelectorAll('code span')].find((el) => el.innerText === '1')
+      const token = [...ref.current.querySelectorAll('code span')].find(
+        el => el.innerText === '1'
+      )
       tokenRef.current = token
     }
   }, [])
-  return <>
-    <div ref={ref} style={{ marginTop: '1.5rem' }}>{children}</div>
-    <a
-      onClick={() => {
-        tokenRef.current.innerText = (parseInt(tokenRef.current.innerText) || 0) + 1
-      }}
-      style={{
-        cursor: 'pointer',
-        userSelect: 'none',
-      }}
-    >
-      Increase the number
-    </a>
-    <a
-      onClick={() => {
-        tokenRef.current.innerText = '1 + 1'
-      }}
-      style={{
-        marginLeft: '.5rem',
-        cursor: 'pointer',
-        userSelect: 'none',
-      }}
-    >
-      Change to `1 + 1`
-    </a>
-  </>
+  return (
+    <>
+      <div ref={ref} style={{ marginTop: '1.5rem' }}>
+        {children}
+      </div>
+      <a
+        onClick={() => {
+          tokenRef.current.innerText =
+            (parseInt(tokenRef.current.innerText) || 0) + 1
+        }}
+        style={{
+          cursor: 'pointer',
+          userSelect: 'none'
+        }}
+      >
+        Increase the number
+      </a>
+      <a
+        onClick={() => {
+          tokenRef.current.innerText = '1 + 1'
+        }}
+        style={{
+          marginLeft: '.5rem',
+          cursor: 'pointer',
+          userSelect: 'none'
+        }}
+      >
+        Change to `1 + 1`
+      </a>
+    </>
+  )
 }
 
 <DynamicCode>
@@ -256,14 +280,25 @@ function hello () {
 ```
 </DynamicCode>
 
-This workaround has a limitation that updated content won't be re-highlighted. For example if we update the number to `1 + 1`, it will be highlighted wrongly.
+This workaround has a limitation that updated content won't be re-highlighted.
+For example if we update the number to `1 + 1`, it will be highlighted wrongly.
 
-Check out the [code](https://github.com/shuding/nextra/blob/main/docs/pages/docs/guide/syntax-highlighting.mdx) to see how it works.
+Check out the
+[code](https://github.com/shuding/nextra/blob/main/docs/pages/docs/guide/syntax-highlighting.mdx)
+to see how it works.
 
 ## Disable Syntax Highlighting
 
-You can opt out of syntax highlighting for using one of your own. You can disable syntax highlighting globally by setting `codeHighlight: false` in your Nextra configuration (`next.config.js` file).
+You can opt out of syntax highlighting for using one of your own. You can
+disable syntax highlighting globally by setting `codeHighlight: false` in your
+Nextra configuration (`next.config.js` file).
 
-<OptionTable options={[
-  ['codeHighlight', 'boolean' , 'Enable or disable syntax highlighting. Defaults to `true`.'],
-]} />
+<OptionTable
+  options={[
+    [
+      'codeHighlight',
+      'boolean',
+      'Enable or disable syntax highlighting. Defaults to `true`.'
+    ]
+  ]}
+/>

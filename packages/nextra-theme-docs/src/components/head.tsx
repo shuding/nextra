@@ -1,10 +1,10 @@
-import type { ReactElement } from 'react'
-import NextHead from 'next/head'
-import { useTheme } from 'next-themes'
-import { useMounted } from 'nextra/hooks'
-import { useConfig } from '../contexts'
-import type { NextSeoProps } from 'next-seo';
+import type { NextSeoProps } from 'next-seo'
 import { NextSeo } from 'next-seo'
+import { useTheme } from 'next-themes'
+import NextHead from 'next/head'
+import { useMounted } from 'nextra/hooks'
+import type { ReactElement } from 'react'
+import { useConfig } from '../contexts'
 
 export function Head(): ReactElement {
   const config = useConfig()

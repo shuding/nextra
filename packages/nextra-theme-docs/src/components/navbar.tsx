@@ -1,12 +1,11 @@
-import type { ReactElement, ReactNode } from 'react'
-import cn from 'clsx'
 import { Menu, Transition } from '@headlessui/react'
-import { ArrowRightIcon, MenuIcon } from 'nextra/icons'
-
-import { useConfig, useMenu } from '../contexts'
-import type { Item, PageItem, MenuItem } from 'nextra/normalize-pages'
-import { renderComponent } from '../utils'
+import cn from 'clsx'
 import { useFSRoute } from 'nextra/hooks'
+import { ArrowRightIcon, MenuIcon } from 'nextra/icons'
+import type { Item, MenuItem, PageItem } from 'nextra/normalize-pages'
+import type { ReactElement, ReactNode } from 'react'
+import { useConfig, useMenu } from '../contexts'
+import { renderComponent } from '../utils'
 import { Anchor } from './anchor'
 
 export type NavBarProps = {

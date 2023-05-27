@@ -1,4 +1,4 @@
-name: CI
+name: Test
 
 on:
   pull_request:
@@ -24,25 +24,22 @@ jobs:
 
       - uses: pnpm/action-setup@v2.2.4
         with:
-          version: 7
+          version: 8
 
-      - name: Use Node.js ${{matrix.node-version}}
+      - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
-          node-version: ${{matrix.node-version}}
+          node-version: ${{ matrix.node-version }}
           cache: pnpm
 
       - name: Install Dependencies
-        run: pnpm install
+        run: pnpm i
 
       - name: Site
         run: pnpm run build:all
 
       - name: Test
         run: pnpm test
-
-      - name: Lint ESLint
-        run: pnpm lint
 
       - name: Clean
         run: pnpm clean
@@ -52,4 +49,3 @@ jobs:
 
       - name: Type Check
         run: pnpm run types:check
-

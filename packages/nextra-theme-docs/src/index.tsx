@@ -1,27 +1,25 @@
+import { useRouter } from 'next/router'
 import type { NextraThemeLayoutProps, PageOpts } from 'nextra'
-
 import type { ReactElement, ReactNode } from 'react'
 import { useMemo } from 'react'
-import { useRouter } from 'next/router'
 import 'focus-visible'
 import cn from 'clsx'
+import { useFSRoute, useMounted } from 'nextra/hooks'
 import { MDXProvider } from 'nextra/mdx'
-import { useMounted, useFSRoute } from 'nextra/hooks'
-
 import './polyfill'
+import type { PageTheme } from 'nextra/normalize-pages'
+import { normalizePages } from 'nextra/normalize-pages'
 import {
+  Banner,
+  Breadcrumb,
   Head,
   NavLinks,
   Sidebar,
-  SkipNavContent,
-  Breadcrumb,
-  Banner
+  SkipNavContent
 } from './components'
-import { getComponents } from './mdx-components'
-import { ActiveAnchorProvider, ConfigProvider, useConfig } from './contexts'
-import type { PageTheme } from 'nextra/normalize-pages'
-import { normalizePages } from 'nextra/normalize-pages'
 import { DEFAULT_LOCALE, PartialDocsThemeConfig } from './constants'
+import { ActiveAnchorProvider, ConfigProvider, useConfig } from './contexts'
+import { getComponents } from './mdx-components'
 import { renderComponent } from './utils'
 
 interface BodyProps {
@@ -255,11 +253,11 @@ export default function Layout({
 
 export { useConfig, PartialDocsThemeConfig as DocsThemeConfig }
 export { useMDXComponents } from 'nextra/mdx'
+export { Callout } from 'nextra/components'
 export { useTheme } from 'next-themes'
 export { Link } from './mdx-components'
 export {
   Bleed,
-  Callout,
   Collapse,
   NotFoundPage,
   ServerSideErrorPage,

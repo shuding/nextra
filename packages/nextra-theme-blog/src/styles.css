@@ -21,7 +21,7 @@ h1 {
   letter-spacing: -0.03em;
 }
 
-.nx-prose-sm code {
+.nx-prose code {
   &:before,
   &:after {
     @apply nx-hidden;
@@ -29,4 +29,8 @@ h1 {
   .line {
     @apply nx-font-normal;
   }
+}
+
+.nx-prose .nextra-callout p {
+  @apply nx-m-0;
 }

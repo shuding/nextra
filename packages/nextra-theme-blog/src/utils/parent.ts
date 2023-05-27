@@ -1,4 +1,4 @@
-import type { MdxFile, Folder } from 'nextra'
+import type { Folder, MdxFile } from 'nextra'
 import type { LayoutProps } from '../types'
 import traverse from './traverse'
 

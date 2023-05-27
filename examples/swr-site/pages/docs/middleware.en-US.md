@@ -1,4 +1,4 @@
-import { Callout } from 'nextra-theme-docs'
+import { Callout } from 'nextra/components'
 
 # Middleware
 
@@ -6,16 +6,19 @@ import { Callout } from 'nextra-theme-docs'
   Upgrade to the latest version (≥ 1.0.0) to use this feature.
 </Callout>
 
-The middleware feature is a new addition in SWR 1.0 that enables you to execute logic before and after SWR hooks.
+The middleware feature is a new addition in SWR 1.0 that enables you to execute
+logic before and after SWR hooks.
 
 ## Usage
 
-Middleware receive the SWR hook and can execute logic before and after running it. If there are multiple middleware, each middleware wraps the next middleware. The last middleware in the list will receive the original SWR hook `useSWR`.
+Middleware receive the SWR hook and can execute logic before and after running
+it. If there are multiple middleware, each middleware wraps the next middleware.
+The last middleware in the list will receive the original SWR hook `useSWR`.
 
 ### API
 
 ```jsx
-function myMiddleware (useSWRNext) {
+function myMiddleware(useSWRNext) {
   return (key, fetcher, config) => {
     // Before hook runs...
 
@@ -43,7 +46,7 @@ useSWR(key, fetcher, { use: [myMiddleware] })
 Middleware will be extended like regular options. For example:
 
 ```jsx
-function Bar () {
+function Bar() {
   useSWR(key, fetcher, { use: [c] })
   // ...
 }
@@ -52,7 +55,7 @@ function Foo() {
   return (
     <SWRConfig value={{ use: [a] }}>
       <SWRConfig value={{ use: [b] }}>
-        <Bar/>
+        <Bar />
       </SWRConfig>
     </SWRConfig>
   )
@@ -67,7 +70,8 @@ useSWR(key, fetcher, { use: [a, b, c] })
 
 ### Multiple Middleware
 
-Each middleware wraps the next middleware, and the last one just wraps the SWR hook. For example:
+Each middleware wraps the next middleware, and the last one just wraps the SWR
+hook. For example:
 
 ```jsx
 useSWR(key, fetcher, { use: [a, b, c] })
@@ -89,7 +93,9 @@ exit  a
 
 ### Request Logger
 
-Let's build a simple request logger middleware as an example. It prints out all the fetcher requests sent from this SWR hook. You can also use this middleware for all SWR hooks by adding it to `SWRConfig`.
+Let's build a simple request logger middleware as an example. It prints out all
+the fetcher requests sent from this SWR hook. You can also use this middleware
+for all SWR hooks by adding it to `SWRConfig`.
 
 ```jsx
 function logger(useSWRNext) {
@@ -118,14 +124,15 @@ SWR Request: /api/user2
 
 ### Keep Previous Result
 
-Sometimes you want the data returned by `useSWR` to be "laggy". Even if the key changes,
-you still want it to return the previous result until the new data has loaded.
+Sometimes you want the data returned by `useSWR` to be "laggy". Even if the key
+changes, you still want it to return the previous result until the new data has
+loaded.
 
-This can be built as a laggy middleware together with `useRef`. In this example, we are also going to
-extend the returned object of the `useSWR` hook:
+This can be built as a laggy middleware together with `useRef`. In this example,
+we are also going to extend the returned object of the `useSWR` hook:
 
 ```jsx
-import { useRef, useEffect, useCallback } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 
 // This is a SWR middleware for keeping the data even if key changes.
 function laggy(useSWRNext) {
@@ -149,16 +156,18 @@ function laggy(useSWRNext) {
     }, [])
 
     // Fallback to previous data if the current data is undefined.
-    const dataOrLaggyData = swr.data === undefined ? laggyDataRef.current : swr.data
+    const dataOrLaggyData =
+      swr.data === undefined ? laggyDataRef.current : swr.data
 
     // Is it showing previous data?
-    const isLagging = swr.data === undefined && laggyDataRef.current !== undefined
+    const isLagging =
+      swr.data === undefined && laggyDataRef.current !== undefined
 
     // Also add a `isLagging` field to SWR.
     return Object.assign({}, swr, {
       data: dataOrLaggyData,
       isLagging,
-      resetLaggy,
+      resetLaggy
     })
   }
 }
@@ -199,7 +208,9 @@ useSWR(['/api/user', { id: '73' }], fetcher, { use: [serialize] })
 <SWRConfig value={{ use: [serialize] }}>
 ```
 
-You don’t need to worry that object might change between renders. It’s always serialized to the same string, and the fetcher will still receive those object arguments.
+You don’t need to worry that object might change between renders. It’s always
+serialized to the same string, and the fetcher will still receive those object
+arguments.
 
 <Callout>
   Furthermore, you can use libs like [fast-json-stable-stringify](https://github.com/epoberezkin/fast-json-stable-stringify) instead of `JSON.stringify` — faster and stabler.

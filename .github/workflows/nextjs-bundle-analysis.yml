@@ -24,7 +24,7 @@ jobs:
 
       - uses: pnpm/action-setup@v2.2.4
         with:
-          version: 7
+          version: 8
 
       - name: Install Node.js
         uses: actions/setup-node@v3
@@ -85,7 +85,9 @@ jobs:
       # entry in your package.json file.
       - name: Compare with Base Branch Bundle
         if: success() && github.event.number
-        run: ls -laR examples/swr-site/.next/analyze/base && cd examples/swr-site && npx -p nextjs-bundle-analysis compare
+        run:
+          ls -laR examples/swr-site/.next/analyze/base && cd examples/swr-site
+          && npx -p nextjs-bundle-analysis compare
 
       - name: Get Comment Body
         id: get-comment-body

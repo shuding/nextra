@@ -1,19 +1,27 @@
 import { useTheme } from 'next-themes'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
-import type { ReactCusdis } from 'react-cusdis'
+import { useEffect } from 'react'
 import { useBlogContext } from './blog-context'
 
 const Cusdis = dynamic(
   () => import('react-cusdis').then(mod => mod.ReactCusdis),
   { ssr: false }
-) as typeof ReactCusdis
+)
 
 const Comments = () => {
   const { config, opts } = useBlogContext()
   const router = useRouter()
   const { resolvedTheme } = useTheme()
+
   const { cusdis } = config
+  const theme = resolvedTheme === 'dark' ? 'dark' : 'light'
+
+  // update the theme for the cusdis iframe when theme changed
+  useEffect(() => {
+    window.CUSDIS?.setTheme(theme)
+  }, [theme])
+
   if (!cusdis) {
     return null
   }
@@ -30,7 +38,7 @@ const Comments = () => {
         appId: cusdis.appId,
         pageId: router.pathname,
         pageTitle: opts.title,
-        theme: resolvedTheme === 'dark' ? 'dark' : 'light'
+        theme
       }}
     />
   )

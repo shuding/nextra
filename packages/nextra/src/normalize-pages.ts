@@ -1,6 +1,6 @@
 import { z } from 'zod'
-import type { PageMapItem, Folder, MdxFile } from './types'
 import { ERROR_ROUTES } from './constants'
+import type { Folder, MdxFile, PageMapItem } from './types'
 
 const DEFAULT_PAGE_THEME: PageTheme = {
   breadcrumb: true,
@@ -110,9 +110,10 @@ export type PageItem = (MdxFile | FolderWithoutChildren) & {
   isUnderCurrentDocsTree?: boolean
 }
 
-export type MenuItem = (MdxFile | FolderWithoutChildren) & IMenuItem & {
-  children?: PageItem[]
-}
+export type MenuItem = (MdxFile | FolderWithoutChildren) &
+  IMenuItem & {
+    children?: PageItem[]
+  }
 
 type DocsItem = (MdxFile | FolderWithoutChildren) & {
   title: string
@@ -228,7 +229,7 @@ export function normalizePages({
           if (key !== '*') {
             items.push({
               name: key,
-              route: '',
+              route: '#',
               ...meta[key]
             })
           }

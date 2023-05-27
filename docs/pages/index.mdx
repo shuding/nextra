@@ -2,53 +2,111 @@
 title: Nextra – Next.js Static Site Generator
 ---
 
-import Link from 'next/link'
+import { Feature, Features } from '@components/features'
 import cn from 'clsx'
-import { useState } from 'react'
+import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { motion } from "framer-motion"
-
-import { Features, Feature } from '@components/features'
-
+import Link from 'next/link'
+import { useState } from 'react'
+import docsCardDark from '../public/assets/card-1.dark.png'
+import docsCard from '../public/assets/card-1.png'
 import styles from './index.module.css'
 
 export function File({ name, className, ...props }) {
-  return <span className={cn(styles.file, className)} {...props}>
-    {name}
-  </span>
+  return (
+    <span className={cn(styles.file, className)} {...props}>
+      {name}
+    </span>
+  )
 }
 
 export function Comparison({ a, b, invert, ...props }) {
-  return <div className={cn(styles.comparison, invert && styles.invert)} {...props}>
-    <div>{a}</div>
-    <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" viewBox="0 0 20 20" fill="currentColor">
-      <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-    </svg>
-    <div>{b}</div>
-  </div>
+  return (
+    <div className={cn(styles.comparison, invert && styles.invert)} {...props}>
+      <div>{a}</div>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="1.2em"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+      >
+        <path
+          fillRule="evenodd"
+          d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+          clipRule="evenodd"
+        />
+      </svg>
+      <div>{b}</div>
+    </div>
+  )
 }
 
 export function I18n() {
   const [active, setActive] = useState('')
-  return <Comparison a={
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '.5rem' }}>
-      <File name="/hello.en-US.mdx" className={active === 'en' && styles.active} onPointerOver={() => setActive('en')}/>
-      <File name="/hello.de-DE.mdx" className={active === 'de' && styles.active} onPointerOver={() => setActive('de')}/>
-      <File name="/hello.ja-JP.mdx" className={active === 'ja' && styles.active} onPointerOver={() => setActive('ja')}/>
-    </div>
-  } b={
-    <div
-      style={{ display: 'flex', flexDirection: 'column' }}
-      className="menu bg-white dark:bg-neutral-800 dark:ring-white dark:ring-opacity-20 shadow-lg rounded-md py-1 ring-1 ring-black ring-opacity-5 overflow-auto text-sm">
-      <span className={cn("cursor-default select-none relative py-1.5 px-4 whitespace-nowrap", active === 'en' ? 'nx-text-primary-600 nx-bg-primary-50 dark:nx-bg-primary-500/10' : 'text-gray-800 dark:text-gray-100 ')} onPointerOver={() => setActive('en')}>English</span>
-      <span className={cn("cursor-default select-none relative py-1.5 px-4 whitespace-nowrap", active === 'de' ? 'nx-text-primary-600 nx-bg-primary-50 dark:nx-bg-primary-500/10' : 'text-gray-800 dark:text-gray-100 ')} onPointerOver={() => setActive('de')}>Deutsch</span>
-      <span className={cn("cursor-default select-none relative py-1.5 px-4 whitespace-nowrap", active === 'ja' ? 'nx-text-primary-600 nx-bg-primary-50 dark:nx-bg-primary-500/10' : 'text-gray-800 dark:text-gray-100 ')} onPointerOver={() => setActive('ja')}>日本語</span>
-    </div>
-  }/>
+  return (
+    <Comparison
+      a={
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '.5rem' }}>
+          <File
+            name="/hello.en-US.mdx"
+            className={active === 'en' && styles.active}
+            onPointerOver={() => setActive('en')}
+          />
+          <File
+            name="/hello.de-DE.mdx"
+            className={active === 'de' && styles.active}
+            onPointerOver={() => setActive('de')}
+          />
+          <File
+            name="/hello.ja-JP.mdx"
+            className={active === 'ja' && styles.active}
+            onPointerOver={() => setActive('ja')}
+          />
+        </div>
+      }
+      b={
+        <div
+          style={{ display: 'flex', flexDirection: 'column' }}
+          className="menu overflow-auto rounded-md bg-white py-1 text-sm shadow-lg ring-1 ring-black ring-opacity-5 dark:bg-neutral-800 dark:ring-white dark:ring-opacity-20"
+        >
+          <span
+            className={cn(
+              'relative cursor-default select-none whitespace-nowrap px-4 py-1.5',
+              active === 'en'
+                ? 'nx-text-primary-600 nx-bg-primary-50 dark:nx-bg-primary-500/10'
+                : 'text-gray-800 dark:text-gray-100 '
+            )}
+            onPointerOver={() => setActive('en')}
+          >
+            English
+          </span>
+          <span
+            className={cn(
+              'relative cursor-default select-none whitespace-nowrap px-4 py-1.5',
+              active === 'de'
+                ? 'nx-text-primary-600 nx-bg-primary-50 dark:nx-bg-primary-500/10'
+                : 'text-gray-800 dark:text-gray-100 '
+            )}
+            onPointerOver={() => setActive('de')}
+          >
+            Deutsch
+          </span>
+          <span
+            className={cn(
+              'relative cursor-default select-none whitespace-nowrap px-4 py-1.5',
+              active === 'ja'
+                ? 'nx-text-primary-600 nx-bg-primary-50 dark:nx-bg-primary-500/10'
+                : 'text-gray-800 dark:text-gray-100 '
+            )}
+            onPointerOver={() => setActive('ja')}
+          >
+            日本語
+          </span>
+        </div>
+      }
+    />
+  )
 }
-
-import docsCard from '../public/assets/card-1.png'
-import docsCardDark from '../public/assets/card-1.dark.png'
 
 <div className="home-content">
   <div className="content-container">
@@ -58,7 +116,6 @@ import docsCardDark from '../public/assets/card-1.dark.png'
       <Link className={styles.cta} href="/docs">Get started <span>→</span></Link>
     </p>
   </div>
-
   <style jsx>{`
     .content-container {
       max-width: 90rem;
@@ -80,7 +137,7 @@ import docsCardDark from '../public/assets/card-1.dark.png'
       border-bottom: 1px solid rgb(38,38,38);
     }
     .headline {
-      display: inline-block;
+      display: inline-flex;
       font-size: 3.125rem;
       font-size: min(4.375rem, max(8vw, 2.5rem));
       font-weight: 700;

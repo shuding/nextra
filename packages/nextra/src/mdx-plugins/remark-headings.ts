@@ -1,8 +1,8 @@
 import type { Processor } from '@mdx-js/mdx/lib/core'
-import { visit } from 'unist-util-visit'
-import type { Plugin } from 'unified'
-import type { Root, Parent } from 'mdast'
 import Slugger from 'github-slugger'
+import type { Parent, Root } from 'mdast'
+import type { Plugin } from 'unified'
+import { visit } from 'unist-util-visit'
 import type { PageOpts } from '../types'
 import type { HProperties } from './remark-custom-heading-id'
 

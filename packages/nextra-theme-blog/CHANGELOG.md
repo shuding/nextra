@@ -1,5 +1,37 @@
 # nextra-theme-blog
 
+## 2.6.1
+
+### Patch Changes
+
+- Updated dependencies [1e9ebabc]
+  - nextra@2.6.1
+
+## 2.6.0
+
+### Patch Changes
+
+- 9d9bc23: accessibility issues for text and navbar in light mode
+- Updated dependencies [15c4092]
+- Updated dependencies [1c6256b]
+  - nextra@2.6.0
+
+## 2.5.2
+
+### Patch Changes
+
+- f85423a: Fix prose styles for small breakpoints
+- Updated dependencies [a3601e5]
+  - nextra@2.5.2
+
+## 2.5.1
+
+### Patch Changes
+
+- 8aae0c9: fix: cusdis comments theme doens't change when resolvedTheme changed
+- Updated dependencies [d408ab0]
+  - nextra@2.5.1
+
 ## 2.5.0
 
 ### Minor Changes
@@ -39,7 +71,9 @@
 ### Minor Changes
 
 - 6a79462: add new option `dateFormatter`
-- 76e8b0f: support custom heading id via `# my very long heading... [#my-custom-heading]` syntax https://github.com/shuding/nextra/pull/1645
+- 76e8b0f: support custom heading id via
+  `# my very long heading... [#my-custom-heading]` syntax
+  https://github.com/shuding/nextra/pull/1645
 
 ### Patch Changes
 
@@ -85,7 +119,8 @@
 ### Patch Changes
 
 - b94245a: Reverts #1417 "force theme to light if darkMode: false was set"
-- d495e5f: introduce `_app.mdx` for better performance and smallest `.next/static/chunks` size
+- d495e5f: introduce `_app.mdx` for better performance and smallest
+  `.next/static/chunks` size
 - Updated dependencies [d495e5f]
   - nextra@2.2.16
 
@@ -146,7 +181,8 @@
 
 ### Patch Changes
 
-- 163065c: loader refactor, type-safe `__nextra_resolvePageMap`, avoid code interpolation in loader.ts
+- 163065c: loader refactor, type-safe `__nextra_resolvePageMap`, avoid code
+  interpolation in loader.ts
 
 ## 2.2.4
 
@@ -168,8 +204,10 @@
 
 ### Patch Changes
 
-- 3145f53: extend `plugin:react/recommended`, `plugin:react-hooks/recommended` and `plugin:@next/next/recommended` configs
-- 1834730: fix hydration error produced by cached compiler, fix broken code-blocks styles while setting `nextraConfig.codeHighlight: false`
+- 3145f53: extend `plugin:react/recommended`, `plugin:react-hooks/recommended`
+  and `plugin:@next/next/recommended` configs
+- 1834730: fix hydration error produced by cached compiler, fix broken
+  code-blocks styles while setting `nextraConfig.codeHighlight: false`
 
 ## 2.2.1
 
@@ -192,7 +230,8 @@
 ### Patch Changes
 
 - 09fc32a: allow changing prefix in `<TagTitle />`
-- c86508c: lint fixes for `eslint:recommended` and `plugin:@typescript-eslint/recommended` configs
+- c86508c: lint fixes for `eslint:recommended` and
+  `plugin:@typescript-eslint/recommended` configs
 - 329bc8c: fix inline code blocks style regression
 - d6c871a: simplify the custom theme layout api
 - 1ff43c1: use OKLCH colors where possible
@@ -231,18 +270,20 @@
 - 2217f9c: fix `Warning: Prop `href` did not match. Server: "#" Client: ...`
 - fdb2f57: update docs to use next.js 13
 - a0398e0: fix: avoid mutating nextConfig
-- 59e18b0: make `nextra`/`nextra-theme-docs`/`nextra-theme-blog` be compatible with next 13
+- 59e18b0: make `nextra`/`nextra-theme-docs`/`nextra-theme-blog` be compatible
+  with next 13
 - a5cac21: [blog]: add support for `showLineNumbers` prop in code-blocks
 - fe2b714: upgrade to react 18
 - 1ee3c92: reuse table styles from docs in blog
-- f569d90: missing `nx-` class prefixes in blog
-  fix callout padding in docs
+- f569d90: missing `nx-` class prefixes in blog fix callout padding in docs
 - b1d7361: improve docs for 2.0
 - 8dab966: fix invisible copy button in code blocks
 - 0518b1b: improve tags styling
 - 29dc746: fix blog build error
 - b7f7cf6: add missing `passHref` for `NextLink`
-- e6771ca: [Blog/Docs] Add copy to clipboard button for code-blocks. Add `NextraConfig.unstable_defaultShowCopyCode` option to show button by default, add `copy` and `copy=false` options for code-blocks
+- e6771ca: [Blog/Docs] Add copy to clipboard button for code-blocks. Add
+  `NextraConfig.unstable_defaultShowCopyCode` option to show button by default,
+  add `copy` and `copy=false` options for code-blocks
 - a5cac21: [docs/blog]: extract code styles and import in both themes
 - 580c433: add nx- to all tailwind classes for style isolation
 - c3e6227: add `overflow-x-scroll` for tables
@@ -253,7 +294,8 @@
 - acf3a1f: fix(blog): types is missing in bundle
 - 3de0f41: chore(blog/docs): use `postcss-import` to import css variables styles
 - 74a3398: update docs for 2.0
-- 3ef42cb: fix(nextra-theme-blog): move css to `className`s, fix duplicate id issue
+- 3ef42cb: fix(nextra-theme-blog): move css to `className`s, fix duplicate id
+  issue
 - bd2cefa: Fix css classes with `eslint-plugin-tailwindcss`
 - ff8967c: add `Toggle Word Wrap` button for code-blocks (only for mobile)
 - 009bf6a: Fix release workflow.
@@ -263,12 +305,15 @@
 - 64ae4b5: add `nextraConfig.unstable_readingTime` option for blog theme
 - 596ea52: fix(nextra-theme-blog): make nav items center aligned
 - 7d2d5ee: use resolvedTheme instead renderedTheme + theme check
-- 256154a: use "next/future/image" if `"experimental.images.allowFutureImage": true` is set in next config
+- 256154a: use "next/future/image" if
+  `"experimental.images.allowFutureImage": true` is set in next config
 - c8605d6: feat: New layout implementation
 - 4157b71: set lower build target and share code highlight theme through nextra
-- 94a8587: chore: extract `svg` icons in `/icons` folder, reusing same icons `<MoonIcon />` / `<SunIcon />` in blog from docs
+- 94a8587: chore: extract `svg` icons in `/icons` folder, reusing same icons
+  `<MoonIcon />` / `<SunIcon />` in blog from docs
 - 699d131: feat(nextra/docs/blog): allow import `.md`/`.mdx` as well
-- 256154a: replace images with `<NextImage />` even when url not relative but that starts from `/` (public directory)
+- 256154a: replace images with `<NextImage />` even when url not relative but
+  that starts from `/` (public directory)
 - e573175: Fix release CI
 - 48e0ac2: export `useConfig` and `useTheme`
 - 0f4795f: chore(nextra/blog/docs): provide types for PageOpts in loader
@@ -278,7 +323,9 @@
 - e6771ca: move `withLayout` logic directly in nextra loader
 - 43409ad: fix: mdx theme is missing
 - e596d3d: add missing class names to override styles
-- 07e4732: [nextra-theme-blog]: fix `Application error: a client-side exception has occurred` when invalid date was provided in frontmatter + TESTS
+- 07e4732: [nextra-theme-blog]: fix
+  `Application error: a client-side exception has occurred` when invalid date
+  was provided in frontmatter + TESTS
 
 ## 2.0.0-beta.45
 
@@ -295,7 +342,8 @@
 
 ### Patch Changes
 
-- 59e18b0: make `nextra`/`nextra-theme-docs`/`nextra-theme-blog` be compatible with next 13
+- 59e18b0: make `nextra`/`nextra-theme-docs`/`nextra-theme-blog` be compatible
+  with next 13
 
 ## 2.0.0-beta.42
 
@@ -309,8 +357,7 @@
 
 ### Patch Changes
 
-- f569d90: missing `nx-` class prefixes in blog
-  fix callout padding in docs
+- f569d90: missing `nx-` class prefixes in blog fix callout padding in docs
 
 ## 2.0.0-beta.39
 
@@ -368,8 +415,10 @@
 - c3e6227: add `overflow-x-scroll` for tables
 - ff8967c: add `Toggle Word Wrap` button for code-blocks (only for mobile)
 - ff8967c: fix missing `Copy Code` button in code-blocks without language
-- 256154a: use "next/future/image" if `"experimental.images.allowFutureImage": true` is set in next config
-- 256154a: replace images with `<NextImage />` even when url not relative but that starts from `/` (public directory)
+- 256154a: use "next/future/image" if
+  `"experimental.images.allowFutureImage": true` is set in next config
+- 256154a: replace images with `<NextImage />` even when url not relative but
+  that starts from `/` (public directory)
 
 ## 2.0.0-beta.24
 
@@ -388,7 +437,9 @@
 ### Patch Changes
 
 - 1ee3c92: reuse table styles from docs in blog
-- e6771ca: [Blog/Docs] Add copy to clipboard button for code-blocks. Add `NextraConfig.unstable_defaultShowCopyCode` option to show button by default, add `copy` and `copy=false` options for code-blocks
+- e6771ca: [Blog/Docs] Add copy to clipboard button for code-blocks. Add
+  `NextraConfig.unstable_defaultShowCopyCode` option to show button by default,
+  add `copy` and `copy=false` options for code-blocks
 - 64ae4b5: add `nextraConfig.unstable_readingTime` option for blog theme
 - 71528f1: show copy code button only on hover of container
 - e6771ca: rename `PageOpts.meta` to `PageOpts.frontMatter`
@@ -440,7 +491,9 @@
 - a5cac21: [docs/blog]: extract code styles and import in both themes
 - 3de0f41: chore(blog/docs): use `postcss-import` to import css variables styles
 - 0f4795f: chore(nextra/blog/docs): provide types for PageOpts in loader
-- 07e4732: [nextra-theme-blog]: fix `Application error: a client-side exception has occurred` when invalid date was provided in frontmatter + TESTS
+- 07e4732: [nextra-theme-blog]: fix
+  `Application error: a client-side exception has occurred` when invalid date
+  was provided in frontmatter + TESTS
 
 ## 2.0.0-beta.11
 
@@ -454,7 +507,8 @@
 
 ### Patch Changes
 
-- 3ef42cb: fix(nextra-theme-blog): move css to `className`s, fix duplicate id issue
+- 3ef42cb: fix(nextra-theme-blog): move css to `className`s, fix duplicate id
+  issue
 - 699d131: feat(nextra/docs/blog): allow import `.md`/`.mdx` as well
 - 03e90d8: refresh build system with tsup and fix nextra type
 
@@ -467,7 +521,8 @@
 - 4edca5e: chore(nextra-theme-blog): refactor `traverse.ts`
 - acf3a1f: fix(blog): types is missing in bundle
 - 596ea52: fix(nextra-theme-blog): make nav items center aligned
-- 94a8587: chore: extract `svg` icons in `/icons` folder, reusing same icons `<MoonIcon />` / `<SunIcon />` in blog from docs
+- 94a8587: chore: extract `svg` icons in `/icons` folder, reusing same icons
+  `<MoonIcon />` / `<SunIcon />` in blog from docs
 - e573175: Fix release CI
 
 ## 2.0.0-beta.8
