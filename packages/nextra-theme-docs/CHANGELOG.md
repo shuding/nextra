@@ -1,5 +1,13 @@
 # nextra-theme-docs
 
+## 2.6.2
+
+### Patch Changes
+
+- 9c9625ee: Fix search not working in certain Next.js versions
+- Updated dependencies [9c9625ee]
+  - nextra@2.6.2
+
 ## 2.6.1
 
 ### Patch Changes
