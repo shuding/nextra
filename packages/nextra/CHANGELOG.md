@@ -1,5 +1,11 @@
 # nextra
 
+## 2.6.2
+
+### Patch Changes
+
+- 9c9625ee: Fix search not working in certain Next.js versions
+
 ## 2.6.1
 
 ### Patch Changes
