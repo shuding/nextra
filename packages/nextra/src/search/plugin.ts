@@ -16,8 +16,20 @@ export class NextraSearchPlugin {
 
           for (const [, entry] of compilation.entries.entries()) {
             const entryDependency = entry.dependencies?.[0]
-            const entryModule =
-              compilation.moduleGraph.getResolvedModule(entryDependency)
+
+            // There're some Next.js refactors that might cause the MDX module
+            // to be a dependency of the entry module, instead of the entry
+            // itself. This is a workaround to find the MDX module loaded by
+            // Nextra.
+            let entryModule = compilation.moduleGraph.getResolvedModule(entryDependency)
+            if (!entryModule?.buildInfo?.nextraSearch) {
+              for (const dependency of entryModule.dependencies) {
+                const mod = compilation.moduleGraph.getResolvedModule(dependency)
+                if (mod?.buildInfo?.nextraSearch) {
+                  entryModule = mod
+                }
+              }
+            }
 
             if (entryModule?.buildInfo?.nextraSearch) {
               const { title, data, indexKey, route } =
