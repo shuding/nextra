@@ -1,5 +1,16 @@
 # nextra-theme-blog
 
+## 2.7.0
+
+### Minor Changes
+
+- 44626e8f: support mermaid diagrams
+
+### Patch Changes
+
+- Updated dependencies [44626e8f]
+  - nextra@2.7.0
+
 ## 2.6.2
 
 ### Patch Changes
