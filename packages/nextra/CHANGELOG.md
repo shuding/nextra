@@ -1,5 +1,11 @@
 # nextra
 
+## 2.7.0
+
+### Minor Changes
+
+- 44626e8f: support mermaid diagrams
+
 ## 2.6.2
 
 ### Patch Changes
