@@ -1,5 +1,11 @@
 # nextra
 
+## 2.7.1
+
+### Patch Changes
+
+- 0e53ca51: remarkMermaid should be before removing imports for remote markdown
+
 ## 2.7.0
 
 ### Minor Changes
