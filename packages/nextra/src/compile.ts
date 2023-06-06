@@ -147,8 +147,8 @@ export async function compileMdx(
         : 'nextra/mdx',
       remarkPlugins: [
         ...(remarkPlugins || []),
+        remarkMermaid, // should be before remarkRemoveImports because contains `import { Mermaid } from ...`
         outputFormat === 'function-body' && remarkRemoveImports,
-        remarkMermaid,
         remarkGfm,
         remarkCustomHeadingId,
         remarkHeadings,
