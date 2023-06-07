@@ -73,4 +73,14 @@ describe('getFSRoute', () => {
     const value = mockAndRenderHook({ asPath: '/foo/' })
     expect(value).toEqual('/foo')
   })
+
+  it('should ignore .html file extension', () => {
+    const value = mockAndRenderHook({ asPath: '/foo.html' })
+    expect(value).toEqual('/foo')
+  })
+
+  it('should ignore .html file extension but ignore sub-directories', () => {
+    const value = mockAndRenderHook({ asPath: '/bar/foo.html' })
+    expect(value).toEqual('/bar/foo')
+  })
 })
