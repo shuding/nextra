@@ -19,9 +19,9 @@ export const useFSRoute = () => {
 
     return (
       cleanedPath
+        .replace(/\.html$/, '')
         .replace(/\/index(\/|$)/, '$1')
-        .replace(/\/$/, '')
-        .replace(/\.[^/.]+$/, '') || '/'
+        .replace(/\/$/, '') || '/'
     )
   }, [asPath, locale, route])
 }
