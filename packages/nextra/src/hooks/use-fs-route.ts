@@ -17,6 +17,11 @@ export const useFSRoute = () => {
       ? pathname.replace(new RegExp(`\\.${locale}(\\/|$)`), '$1')
       : pathname
 
-    return cleanedPath.replace(/\/index(\/|$)/, '$1').replace(/\/$/, '') || '/'
+    return (
+      cleanedPath
+        .replace(/\/index(\/|$)/, '$1')
+        .replace(/\/$/, '')
+        .replace(/\.[^/.]+$/, '') || '/'
+    )
   }, [asPath, locale, route])
 }
