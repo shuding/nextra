@@ -125,7 +125,7 @@
     "@mdx-js/mdx": "^2.3.0",
     "@mdx-js/react": "^2.3.0",
     "@napi-rs/simple-git": "^0.1.8",
-    "@theguild/remark-mermaid": "^0.0.1",
+    "@theguild/remark-mermaid": "^0.0.3",
     "clsx": "^1.2.1",
     "github-slugger": "^2.0.0",
     "graceful-fs": "^4.2.11",
