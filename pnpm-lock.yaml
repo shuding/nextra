@@ -154,7 +154,7 @@ importers:
         version: file:packages/nextra(next@13.3.1)(react-dom@18.2.0)(react@18.2.0)
       nextra-theme-blog:
         specifier: workspace:*
-        version: file:packages/nextra-theme-blog(next@13.3.1)(nextra@2.7.0)(react-dom@18.2.0)(react@18.2.0)
+        version: file:packages/nextra-theme-blog(next@13.3.1)(nextra@2.7.1)(react-dom@18.2.0)(react@18.2.0)
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -177,7 +177,7 @@ importers:
         version: file:packages/nextra(next@13.3.1)(react-dom@18.2.0)(react@18.2.0)
       nextra-theme-docs:
         specifier: workspace:*
-        version: file:packages/nextra-theme-docs(next@13.3.1)(nextra@2.7.0)(react-dom@18.2.0)(react@18.2.0)
+        version: file:packages/nextra-theme-docs(next@13.3.1)(nextra@2.7.1)(react-dom@18.2.0)(react@18.2.0)
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -212,7 +212,7 @@ importers:
         version: file:packages/nextra(next@13.3.1)(react-dom@18.2.0)(react@18.2.0)
       nextra-theme-docs:
         specifier: workspace:*
-        version: file:packages/nextra-theme-docs(next@13.3.1)(nextra@2.7.0)(react-dom@18.2.0)(react@18.2.0)
+        version: file:packages/nextra-theme-docs(next@13.3.1)(nextra@2.7.1)(react-dom@18.2.0)(react@18.2.0)
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -250,8 +250,8 @@ importers:
         specifier: ^0.1.8
         version: 0.1.8
       '@theguild/remark-mermaid':
-        specifier: ^0.0.1
-        version: 0.0.1(react@18.2.0)
+        specifier: ^0.0.3
+        version: 0.0.3(react@18.2.0)
       clsx:
         specifier: ^1.2.1
         version: 1.2.1
@@ -1882,12 +1882,12 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: true
 
-  /@theguild/remark-mermaid@0.0.1(react@18.2.0):
-    resolution: {integrity: sha512-MbLi7CIn25r0MypN1yaTrvuQHBE/UXy/DKfVjaLlXx5ut4PasOwzGIJihzM4d9kqNADJKilHpQWcd66ivbvJEQ==}
+  /@theguild/remark-mermaid@0.0.3(react@18.2.0):
+    resolution: {integrity: sha512-fccVR6o4UPUztrBjdUhM4ahwx+X7YHhoxsUoXv2vI07vz4dq+I03Ot0SjuZzDA/H7engxcb8ZxzCUEkZgGr/2g==}
     peerDependencies:
       react: ^18.2.0
     dependencies:
-      mermaid: 10.2.1
+      mermaid: 10.2.2
       react: 18.2.0
       unist-util-visit: 4.1.2
     transitivePeerDependencies:
@@ -5897,8 +5897,8 @@ packages:
     engines: {node: '>= 8'}
     dev: true
 
-  /mermaid@10.2.1:
-    resolution: {integrity: sha512-gziwXLuAidRxPJxcA0LqPhToirGZ2J2gD+UrDEtGNeKb98BtcQde28UUcCUCmNplkQOwE7oynrzKcMe9i29AMw==}
+  /mermaid@10.2.2:
+    resolution: {integrity: sha512-ifYKlCcZKYq48hxC1poJXnvk/PbCdgqqbg5B4qsybb8nIItPM1ATKqVEDkyde6BBJxVFhVJr9hoUjipzniQJZg==}
     dependencies:
       '@braintree/sanitize-url': 6.0.2
       cytoscape: 3.25.0
@@ -9131,7 +9131,7 @@ packages:
     resolution: {directory: packages/nextra, type: directory}
     id: file:packages/nextra
     name: nextra
-    version: 2.7.0
+    version: 2.7.1
     engines: {node: '>=16'}
     peerDependencies:
       next: '>=9.5.3'
@@ -9141,7 +9141,7 @@ packages:
       '@mdx-js/mdx': 2.3.0
       '@mdx-js/react': 2.3.0(react@18.2.0)
       '@napi-rs/simple-git': 0.1.8
-      '@theguild/remark-mermaid': 0.0.1(react@18.2.0)
+      '@theguild/remark-mermaid': 0.0.3(react@18.2.0)
       clsx: 1.2.1
       github-slugger: 2.0.0
       graceful-fs: 4.2.11
@@ -9168,11 +9168,11 @@ packages:
       - supports-color
     dev: false
 
-  file:packages/nextra-theme-blog(next@13.3.1)(nextra@2.7.0)(react-dom@18.2.0)(react@18.2.0):
+  file:packages/nextra-theme-blog(next@13.3.1)(nextra@2.7.1)(react-dom@18.2.0)(react@18.2.0):
     resolution: {directory: packages/nextra-theme-blog, type: directory}
     id: file:packages/nextra-theme-blog
     name: nextra-theme-blog
-    version: 2.7.0
+    version: 2.7.1
     peerDependencies:
       next: '>=9.5.3'
       nextra: workspace:*
@@ -9190,11 +9190,11 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
-  file:packages/nextra-theme-docs(next@13.3.1)(nextra@2.7.0)(react-dom@18.2.0)(react@18.2.0):
+  file:packages/nextra-theme-docs(next@13.3.1)(nextra@2.7.1)(react-dom@18.2.0)(react@18.2.0):
     resolution: {directory: packages/nextra-theme-docs, type: directory}
     id: file:packages/nextra-theme-docs
     name: nextra-theme-docs
-    version: 2.7.0
+    version: 2.7.1
     peerDependencies:
       next: '>=9.5.3'
       nextra: workspace:*
