@@ -1,0 +1,55 @@
+# Mermaid
+
+Nextra supports [mermaid](https://mermaid.js.org) diagrams. Like in GitHub you
+can use it in your markdown files by using the `mermaid` code block language.
+Out of the box, Nextra uses
+[`@theguild/remark-mermaid`](https://npmjs.com/package/@theguild/remark-mermaid)
+package that replaces the code block with the `<Mermaid />` component.
+
+## Example
+
+```mermaid
+graph TD;
+subgraph AA [Consumers]
+A[Mobile app];
+B[Web app];
+C[Node.js client];
+end
+subgraph BB [Services]
+E[REST API];
+F[GraphQL API];
+G[SOAP API];
+end
+Z[GraphQL API];
+A --> Z;
+B --> Z;
+C --> Z;
+Z --> E;
+Z --> F;
+Z --> G;
+```
+
+## Usage
+
+````mdx filename="Markdown"
+```mermaid
+graph TD;
+subgraph AA [Consumers]
+A[Mobile app];
+B[Web app];
+C[Node.js client];
+end
+subgraph BB [Services]
+E[REST API];
+F[GraphQL API];
+G[SOAP API];
+end
+Z[GraphQL API];
+A --> Z;
+B --> Z;
+C --> Z;
+Z --> E;
+Z --> F;
+Z --> G;
+```
+````

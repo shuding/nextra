@@ -108,7 +108,8 @@ module.exports = {
       },
       rules: {
         '@typescript-eslint/no-unnecessary-type-assertion': 'error',
-        '@typescript-eslint/consistent-type-imports': 'error'
+        '@typescript-eslint/consistent-type-imports': 'error',
+        '@typescript-eslint/non-nullable-type-assertion-style': 'error'
       }
     },
     // ⚙️ nextra-theme-docs

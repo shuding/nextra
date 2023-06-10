@@ -3,6 +3,7 @@ import path from 'node:path'
 import type { ProcessorOptions } from '@mdx-js/mdx'
 import { createProcessor } from '@mdx-js/mdx'
 import type { Processor } from '@mdx-js/mdx/lib/core'
+import { remarkMermaid } from '@theguild/remark-mermaid'
 import grayMatter from 'gray-matter'
 import rehypeKatex from 'rehype-katex'
 import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
@@ -146,6 +147,7 @@ export async function compileMdx(
         : 'nextra/mdx',
       remarkPlugins: [
         ...(remarkPlugins || []),
+        remarkMermaid, // should be before remarkRemoveImports because contains `import { Mermaid } from ...`
         outputFormat === 'function-body' && remarkRemoveImports,
         remarkGfm,
         remarkCustomHeadingId,
