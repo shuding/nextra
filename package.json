@@ -14,7 +14,7 @@
     "dev:website": "turbo run dev --filter=docs...",
     "lint": "eslint --cache --ignore-path .gitignore --max-warnings 0 .",
     "lint:prettier": "prettier --cache --check --ignore-path .gitignore --ignore-path .prettierignore .",
-    "prettier": "prettier --cache --write --list-different --ignore-path .gitignore --ignore-path .prettierignore .",
+    "prettier": "pnpm lint:prettier --write",
     "release": "changeset publish",
     "test": "turbo run test",
     "types:check": "turbo run types:check",
