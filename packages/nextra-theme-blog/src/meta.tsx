@@ -5,7 +5,6 @@ import ThemeSwitch from './theme-switch'
 import { split } from './utils/get-tags'
 import { getParent } from './utils/parent'
 
-
 export default function Meta(): ReactElement {
   const { opts, config } = useBlogContext()
   const { author, date, tag } = opts.frontMatter
@@ -45,7 +44,7 @@ export default function Meta(): ReactElement {
         (readingTime ? 'nx-items-start' : 'nx-items-center')
       }
     >
-      <div className={'nx-grow dark:nx-text-gray-400 nx-text-gray-600'}>
+      <div className="nx-grow dark:nx-text-gray-400 nx-text-gray-600">
         <div className="nx-not-prose nx-flex nx-flex-wrap nx-items-center nx-gap-1">
           {author}
           {author && date && ','}
