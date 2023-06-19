@@ -1,4 +1,3 @@
-import { useTheme } from 'next-themes'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import type { ReactElement, ReactNode } from 'react'
@@ -19,9 +18,7 @@ export const PostsLayout = ({
   const router = useRouter()
   const { type } = opts.frontMatter
   const tagName = type === 'tag' ? router.query.tag : null
-  const { resolvedTheme } = useTheme()
-  const textColor =
-    resolvedTheme === 'dark' ? 'nx-text-gray-400' : 'nx-text-gray-600'
+
   const postList = posts.map(post => {
     if (tagName) {
       const tags = getTags(post)
@@ -46,7 +43,7 @@ export const PostsLayout = ({
           </Link>
         </h3>
         {description && (
-          <p className={'nx-mb-2 ' + textColor}>
+          <p className="nx-mb-2 dark:nx-text-gray-400 nx-text-gray-600">
             {description}
             {config.readMore && (
               <Link href={post.route} passHref legacyBehavior>
@@ -57,7 +54,7 @@ export const PostsLayout = ({
         )}
         {date && (
           <time
-            className={'nx-text-sm  ' + textColor}
+            className="nx-text-sm dark:nx-text-gray-400 nx-text-gray-600"
             dateTime={date.toISOString()}
           >
             {date.toDateString()}
