@@ -445,6 +445,11 @@ Customize the entire navbar component.
       'Specifies the folder level at which the menu on the left is collapsed by default. Defaults to 2.'
     ],
     [
+      'sidebar.autoCollapse',
+      'boolean',
+      'If true, automatically collapse inactive folders above defaultMenuCollapseLevel.'
+    ],
+    [
       'sidebar.titleComponent',
       `React.ReactNode | React.FC<{
   type: string;
@@ -467,6 +472,11 @@ By default, the sidebar menu is collapsed at level `2`. You can change it by
 setting `sidebar.defaultMenuCollapseLevel` to a different number. For example,
 when set to `1`, every folder will be collapsed by default and when set to
 `Infinity`, all nested folders will be expanded by default.
+
+If `sidebar.autoCollapse` is set to `true`, then all folders that do not contain
+an active/focused route will automatically collapse up to the level set by
+`sidebar.defaultMenuCollapseLevel`. e.g. if `defaultMenuCollapseLevel` is `2`,
+then top-level folders will not auto-collapse.
 
 ### Customize sidebar content
 
