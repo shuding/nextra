@@ -44,7 +44,7 @@ export default function Meta(): ReactElement {
         (readingTime ? 'nx-items-start' : 'nx-items-center')
       }
     >
-      <div className="nx-grow nx-text-gray-400">
+      <div className="nx-grow dark:nx-text-gray-400 nx-text-gray-600">
         <div className="nx-not-prose nx-flex nx-flex-wrap nx-items-center nx-gap-1">
           {author}
           {author && date && ','}

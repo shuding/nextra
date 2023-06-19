@@ -3,7 +3,7 @@ code {
   font-feature-settings: 'rlig' 1, 'calt' 1, 'ss01' 1;
 
   &[data-line-numbers] > .line {
-    @apply nx-inline-flex nx-pl-2;
+    @apply nx-pl-2;
     &::before {
       counter-increment: line;
       content: counter(line);
