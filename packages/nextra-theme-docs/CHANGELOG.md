@@ -1,5 +1,31 @@
 # nextra-theme-docs
 
+## 2.7.1
+
+### Patch Changes
+
+- Updated dependencies [0e53ca51]
+  - nextra@2.7.1
+
+## 2.7.0
+
+### Minor Changes
+
+- 44626e8f: support mermaid diagrams
+
+### Patch Changes
+
+- Updated dependencies [44626e8f]
+  - nextra@2.7.0
+
+## 2.6.2
+
+### Patch Changes
+
+- 9c9625ee: Fix search not working in certain Next.js versions
+- Updated dependencies [9c9625ee]
+  - nextra@2.6.2
+
 ## 2.6.1
 
 ### Patch Changes

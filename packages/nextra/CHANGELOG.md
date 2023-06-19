@@ -1,5 +1,23 @@
 # nextra
 
+## 2.7.1
+
+### Patch Changes
+
+- 0e53ca51: remarkMermaid should be before removing imports for remote markdown
+
+## 2.7.0
+
+### Minor Changes
+
+- 44626e8f: support mermaid diagrams
+
+## 2.6.2
+
+### Patch Changes
+
+- 9c9625ee: Fix search not working in certain Next.js versions
+
 ## 2.6.1
 
 ### Patch Changes
