@@ -69,7 +69,7 @@
     "@tailwindcss/typography": "^0.5.8",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
-    "concurrently": "^8.0.0",
+    "concurrently": "^7.4.0",
     "next": "^13.4.6",
     "nextra": "workspace:*",
     "postcss": "^8.4.21",
