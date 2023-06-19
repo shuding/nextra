@@ -147,6 +147,7 @@
     "zod": "^3.20.2"
   },
   "devDependencies": {
+    "@testing-library/react": "^14.0.0",
     "@types/github-slugger": "^2.0.0",
     "@types/graceful-fs": "^4.1.6",
     "@types/lodash.get": "^4.4.7",
@@ -155,8 +156,9 @@
     "@types/react-dom": "^18.0.11",
     "@types/webpack": "^5.28.0",
     "@types/webpack-env": "^1.18.0",
+    "@vitejs/plugin-react": "^3.0.1",
     "fast-glob": "^3.2.12",
-    "next": "^13.3.1",
+    "next": "^13.4.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "unified": "^10.1.2",
