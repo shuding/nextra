@@ -54,3 +54,36 @@ export default function Nextra({ Component, pageProps }) {
 
 You can find a list of supported languages
 [here](https://github.com/shikijs/shiki/blob/main/docs/languages.md).
+
+### Custom Grammar
+
+Shiki accepts a [VSCode TextMate Grammar](https://code.visualstudio.com/api/language-extensions/syntax-highlight-guide)
+for syntax highlighting with custom language grammars.
+
+You can provide these grammars by overriding the `getHighlighter` function in
+`mdxOptions.rehypePrettyCodeOptions` option in your Nextra config (`next.config.mjs`):
+
+```js
+import {BUNDLED_LANGUAGES} from 'shiki';
+
+nextra({
+  ... // other options here
+  mdxOptions: {
+    rehypePrettyCodeOptions: {
+      getHighlighter: options => getHighlighter({
+        ...options,
+        langs: [
+          ...BUNDLED_LANGUAGES,
+          // custom grammar options, see the Shiki documentation for how to provide these options
+          {
+            id: 'my-lang',
+            scopeName: 'source.my-lang',
+            aliases: ['mylang'], // Along with id, aliases will be included in the allowed names you can use when writing markdown.
+            path: '../../public/syntax/grammar.tmLanguage.json',
+          }
+        ]
+      })
+    }
+  },
+})
+```
