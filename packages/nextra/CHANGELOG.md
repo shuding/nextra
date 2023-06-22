@@ -1,5 +1,12 @@
 # nextra
 
+## 2.8.0
+
+### Patch Changes
+
+- 6c12bf4: fix broken code format while selecting and copying code with
+  `showLineNumbers` option enabled
+
 ## 2.7.1
 
 ### Patch Changes
