@@ -280,8 +280,8 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
       rehype-pretty-code:
-        specifier: 0.9.9
-        version: 0.9.9(shiki@0.14.2)
+        specifier: 0.9.11
+        version: 0.9.11(shiki@0.14.2)
       remark-gfm:
         specifier: ^3.0.1
         version: 3.0.1
@@ -7272,8 +7272,8 @@ packages:
       unist-util-visit: 4.1.1
     dev: false
 
-  /rehype-pretty-code@0.9.9(shiki@0.14.2):
-    resolution: {integrity: sha512-mlU2Qgupn9MMK31CTmWk0Ie5Vp0od+jh2vCkGDBMlPAMeAvYASn6Ois6xRmosutMT4yH/COc3R4r/PELpuUoWg==}
+  /rehype-pretty-code@0.9.11(shiki@0.14.2):
+    resolution: {integrity: sha512-Eq90eCYXQJISktfRZ8PPtwc5SUyH6fJcxS8XOMnHPUQZBtC6RYo67gGlley9X2nR8vlniPj0/7oCDEYHKQa/oA==}
     engines: {node: '>=16'}
     peerDependencies:
       shiki: '*'
@@ -9064,7 +9064,7 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       rehype-katex: 6.0.3
-      rehype-pretty-code: 0.9.9(shiki@0.14.2)
+      rehype-pretty-code: 0.9.11(shiki@0.14.2)
       remark-gfm: 3.0.1
       remark-math: 5.1.1
       remark-reading-time: 2.0.1
