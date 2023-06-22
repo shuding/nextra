@@ -1,5 +1,19 @@
 # nextra-theme-docs
 
+## 2.8.0
+
+### Minor Changes
+
+- b43f268: add new option `sidebar.autoCollapse` to automatically collapse
+  inactive folders above `defaultMenuCollapseLevel`
+
+### Patch Changes
+
+- 6c12bf4: fix broken code format while selecting and copying code with
+  `showLineNumbers` option enabled
+- Updated dependencies [6c12bf4]
+  - nextra@2.8.0
+
 ## 2.7.1
 
 ### Patch Changes
