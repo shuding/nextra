@@ -4,9 +4,9 @@
   "scripts": {
     "build": "turbo run build:tailwind build --filter=./packages/\\*",
     "build:all": "turbo run build:tailwind build",
-    "build:core": "pnpm run build --filter=nextra",
-    "build:theme-blog": "pnpm run build --filter=nextra-theme-blog",
-    "build:theme-docs": "pnpm run build --filter=nextra-theme-docs",
+    "build:core": "pnpm build --filter=nextra",
+    "build:theme-blog": "pnpm build --filter=nextra-theme-blog",
+    "build:theme-docs": "pnpm build --filter=nextra-theme-docs",
     "clean": "turbo run clean",
     "dev:core": "turbo run dev --filter=nextra... --filter=!docs",
     "dev:theme-blog": "turbo run dev --filter=example-blog... --filter=!docs",
