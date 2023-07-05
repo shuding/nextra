@@ -1,7 +1,9 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
+import svgrPlugin from 'esbuild-plugin-svgr'
 import fg from 'fast-glob'
 import slash from 'slash'
+import type { Options } from 'tsup'
 import { defineConfig } from 'tsup'
 import tsconfig from './tsconfig.json'
 
@@ -14,7 +16,7 @@ const CLIENT_ENTRY = [
 const entries = fg.sync(CLIENT_ENTRY, { absolute: true })
 const entriesSet = new Set(entries)
 
-const sharedConfig = defineConfig({
+const sharedConfig = {
   // import.meta is available only from es2020
   target: 'es2020',
   format: 'esm',
@@ -61,7 +63,7 @@ const sharedConfig = defineConfig({
       }
     }
   ]
-})
+} satisfies Options
 
 export default defineConfig([
   {
@@ -85,7 +87,11 @@ export default defineConfig([
     name: 'nextra-client',
     entry: CLIENT_ENTRY,
     outExtension: () => ({ js: '.js' }),
-    ...sharedConfig
+    ...sharedConfig,
+    esbuildPlugins: [
+      ...sharedConfig.esbuildPlugins,
+      svgrPlugin({ exportType: 'named' })
+    ]
   },
   {
     entry: ['src/types.ts'],

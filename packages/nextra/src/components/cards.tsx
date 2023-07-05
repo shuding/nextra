@@ -1,6 +1,6 @@
 import cn from 'clsx'
 import type { ComponentProps, CSSProperties, ReactNode } from 'react'
-import { Anchor } from './anchor'
+import NextLink from 'next/link'
 
 const classes = {
   cards: cn('nextra-cards nx-mt-4 nx-gap-4 nx-grid'),
@@ -42,7 +42,7 @@ export function Card({
 
   if (image) {
     return (
-      <Anchor
+      <NextLink
         href={href}
         className={cn(
           classes.card,
@@ -63,12 +63,12 @@ export function Card({
             {animatedArrow}
           </span>
         </span>
-      </Anchor>
+      </NextLink>
     )
   }
 
   return (
-    <Anchor
+    <NextLink
       href={href}
       className={cn(
         classes.card,
@@ -86,7 +86,7 @@ export function Card({
         {title}
         {animatedArrow}
       </span>
-    </Anchor>
+    </NextLink>
   )
 }
 
