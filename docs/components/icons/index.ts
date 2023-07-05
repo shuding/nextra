@@ -22,5 +22,6 @@ export { default as TableIcon } from './table.svg'
 export { default as FileIcon } from './file.svg'
 export { default as NewsletterIcon } from './newsletter.svg'
 export { default as ArrowRightIcon } from './arrow-right.svg'
+export { default as SwitchIcon } from './switch.svg'
 
 
