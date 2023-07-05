@@ -4,19 +4,27 @@ import { Bleed } from 'nextra-theme-docs'
 
 ## Example
 
-When wrapping your content with `<Bleed>`, it will be slightly wider than the container
-and will overflow on both sides.
+When wrapping your content with `<Bleed>`, it will be slightly wider than the
+container and will overflow on both sides.
 
 <Bleed>
-  <div style={{ border: '1px solid #888', padding: '4rem 2.5rem', textAlign: 'center' }}>
+  <div
+    style={{
+      border: '1px solid #888',
+      padding: '4rem 2.5rem',
+      textAlign: 'center',
+      background: 'white'
+    }}
+  >
     _There is nothing to writing. All you do is sit down at a typewriter and **bleed**._
 
     — Ernest Hemingway
+
   </div>
 </Bleed>
 
-It provides a better reading experience when you want to present some graphical information, which normally
-looks nicer in a larger size.
+It provides a better reading experience when you want to present some graphical
+information, which normally looks nicer in a larger size.
 
 For example, you can put text, image, video or any component inside:
 
@@ -40,7 +48,7 @@ You can even make it full-bleed using `<Bleed full>`:
 ## Usage
 
 ```mdx
-import Bleed from 'nextra-theme-docs'
+import { Bleed } from 'nextra-theme-docs'
 
 <Bleed>Hey, I can use **Markdown** syntax here.</Bleed>
 
