@@ -23,5 +23,12 @@ export default withNextra({
       destination: '/docs/guide/built-ins/callout',
       permanent: true
     }
-  ]
+  ],
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ['@svgr/webpack']
+    })
+    return config
+  }
 })
