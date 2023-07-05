@@ -2,6 +2,7 @@
   "organize-files": "",
   "markdown": "",
   "syntax-highlighting": "",
+  "custom-css": "",
   "ssg": "Next.js SSG",
   "i18n": "Next.js I18n",
   "image": "Next.js Image",
@@ -9,6 +10,7 @@
   "latex": "LaTeX",
   "mermaid": "",
   "typescript": "",
+  "tailwind-css": "",
   "advanced": "",
   "built-ins": "Built-ins"
 }

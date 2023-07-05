@@ -159,7 +159,7 @@
     "@types/webpack-env": "^1.18.0",
     "@vitejs/plugin-react": "^3.0.1",
     "fast-glob": "^3.2.12",
-    "next": "^13.4.6",
+    "next": "^13.4.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "unified": "^10.1.2",
