@@ -1,10 +1,8 @@
+import { Bleed } from 'nextra-theme-docs'
+
 # Bleed
 
-A built-in component provided by `nextra-theme-docs`.
-
 ## Example
-
-import { Bleed } from 'nextra-theme-docs'
 
 When wrapping your content with `<Bleed>`, it will be slightly wider than the container
 and will overflow on both sides.
@@ -14,14 +12,13 @@ and will overflow on both sides.
     _There is nothing to writing. All you do is sit down at a typewriter and **bleed**._
 
     — Ernest Hemingway
-
   </div>
 </Bleed>
 
 It provides a better reading experience when you want to present some graphical information, which normally
 looks nicer in a larger size.
 
-For example you can put text, image, video or any component inside:
+For example, you can put text, image, video or any component inside:
 
 <Bleed>
   <iframe
@@ -43,7 +40,7 @@ You can even make it full-bleed using `<Bleed full>`:
 ## Usage
 
 ```mdx
-import Bleed from 'nextra-theme-docs/bleed'
+import Bleed from 'nextra-theme-docs'
 
 <Bleed>Hey, I can use **Markdown** syntax here.</Bleed>
 
