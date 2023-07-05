@@ -11,5 +11,6 @@ export { default as DropperIcon } from './dropper.svg'
 export { default as StarsIcon } from './stars.svg'
 export { default as FormulaIcon } from './formula.svg'
 export { default as WarningIcon } from './warning.svg'
+export { default as ChevronRightIcon } from './chevron-right.svg'
 
 
