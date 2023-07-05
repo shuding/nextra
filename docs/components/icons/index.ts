@@ -8,4 +8,7 @@ export { default as PictureIcon } from './picture.svg'
 export { default as CodeIcon } from './code.svg'
 export { default as BrushIcon } from './brush.svg'
 export { default as DropperIcon } from './dropper.svg'
+export { default as StarsIcon } from './stars.svg'
+export { default as FormulaIcon } from './formula.svg'
+
 
