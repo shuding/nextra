@@ -12,5 +12,8 @@ export { default as StarsIcon } from './stars.svg'
 export { default as FormulaIcon } from './formula.svg'
 export { default as WarningIcon } from './warning.svg'
 export { default as ChevronRightIcon } from './chevron-right.svg'
+export { default as BoxIcon } from './box.svg'
+export { default as GearIcon } from './gear.svg'
+export { default as RowsIcon } from './rows.svg'
 
 
