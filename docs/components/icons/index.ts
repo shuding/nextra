@@ -19,5 +19,7 @@ export { default as CardsIcon } from './cards.svg'
 export { default as OneIcon } from './one.svg'
 export { default as CloudIcon } from './cloud.svg'
 export { default as TableIcon } from './table.svg'
+export { default as FileIcon } from './file.svg'
+export { default as NewsletterIcon } from './newsletter.svg'
 
 
