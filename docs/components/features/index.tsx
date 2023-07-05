@@ -33,7 +33,7 @@ export function Feature({
       {children}
       {href ? (
         <Link className={styles.link} href={href} target="_blank">
-          <ArrowRightIcon />
+          <ArrowRightIcon width="1.5em" />
         </Link>
       ) : null}
     </motion.div>
