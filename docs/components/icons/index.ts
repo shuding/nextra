@@ -15,5 +15,7 @@ export { default as ChevronRightIcon } from './chevron-right.svg'
 export { default as BoxIcon } from './box.svg'
 export { default as GearIcon } from './gear.svg'
 export { default as RowsIcon } from './rows.svg'
+export { default as CardsIcon } from './cards.svg'
+export { default as OneIcon } from './one.svg'
 
 
