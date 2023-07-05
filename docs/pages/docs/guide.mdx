@@ -1,7 +1,13 @@
-# Guide
-
-import { FilesIcon, MarkdownIcon } from '@components/icons'
+import {
+  FilesIcon,
+  LinkIcon,
+  MarkdownIcon,
+  TailwindIcon,
+  LightningIcon,
+} from '@components/icons'
 import { Card, Cards } from 'nextra-theme-docs'
+
+# Guide
 
 The following features are configured via the Next.js configuration and are
 available in all themes.
@@ -52,24 +58,7 @@ available in all themes.
     title="Custom CSS"
     href="/docs/guide/custom-css"
   />
-  <Card
-    icon={
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="currentColor"
-        className="h-6 w-6"
-      >
-        <path
-          fillRule="evenodd"
-          d="M14.615 1.595a.75.75 0 01.359.852L12.982 9.75h7.268a.75.75 0 01.548 1.262l-10.5 11.25a.75.75 0 01-1.272-.71l1.992-7.302H3.75a.75.75 0 01-.548-1.262l10.5-11.25a.75.75 0 01.913-.143z"
-          clipRule="evenodd"
-        />
-      </svg>
-    }
-    title="Next.js SSG"
-    href="/docs/guide/ssg"
-  />
+  <Card icon={<LightningIcon />} title="Next.js SSG" href="/docs/guide/ssg" />
   <Card
     icon={
       <svg
@@ -110,26 +99,7 @@ available in all themes.
     title="Next.js Image"
     href="/docs/guide/image"
   />
-  <Card
-    icon={
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth={1.5}
-        stroke="currentColor"
-        className="h-6 w-6"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"
-        />
-      </svg>
-    }
-    title="Next.js Link"
-    href="/docs/guide/link"
-  />
+  <Card icon={<LinkIcon />} title="Next.js Link" href="/docs/guide/link" />
   <Card
     icon={
       <svg
@@ -171,22 +141,7 @@ available in all themes.
     href="/docs/guide/latex"
   />
   <Card
-    icon={
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 52 25"
-        strokeWidth={3.25}
-        stroke="currentColor"
-        className="h-6 w-6"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M25.517 0C18.712 0 14.46 3.382 12.758 10.146c2.552-3.382 5.529-4.65 8.931-3.805 1.941.482 3.329 1.882 4.864 3.432 2.502 2.524 5.398 5.445 11.722 5.445 6.804 0 11.057-3.382 12.758-10.145-2.551 3.382-5.528 4.65-8.93 3.804-1.942-.482-3.33-1.882-4.865-3.431C34.736 2.92 31.841 0 25.517 0zM12.758 15.218C5.954 15.218 1.701 18.6 0 25.364c2.552-3.382 5.529-4.65 8.93-3.805 1.942.482 3.33 1.882 4.865 3.432 2.502 2.524 5.397 5.445 11.722 5.445 6.804 0 11.057-3.381 12.758-10.145-2.552 3.382-5.529 4.65-8.931 3.805-1.941-.483-3.329-1.883-4.864-3.432-2.502-2.524-5.398-5.446-11.722-5.446z"
-        />
-      </svg>
-    }
+    icon={<TailwindIcon className="h-6 w-6" />}
     title="Tailwind CSS"
     href="/docs/guide/tailwind-css"
   />
