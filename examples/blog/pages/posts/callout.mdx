@@ -6,7 +6,7 @@ tag: web development
 author: Tristan Dubbeld
 ---
 
-import { Callout } from 'nextra/components'
+import { Callout, FileTree, Steps, Tab, Tabs } from 'nextra/components'
 
 ## Use different callout types
 
@@ -29,3 +29,37 @@ import { Callout } from 'nextra/components'
 ### With custom emoji
 
 <Callout emoji="🚀">This is a callout with a custom emoji.</Callout>
+
+## Steps
+
+<Steps>
+
+### Step 1
+
+Content for step 1.
+
+### Step 2
+
+Contents for step 2.
+
+</Steps>
+
+## Tabs
+
+{/* prettier-ignore */}
+<Tabs items={['pnpm', 'npm', 'yarn']}>
+  <Tab>**pnpm**: Fast, disk space efficient package manager.</Tab>
+  <Tab>**npm** is a package manager for the JavaScript programming language.</Tab>
+  <Tab>**Yarn** is a software packaging system.</Tab>
+</Tabs>
+
+## FileTree
+
+<FileTree>
+  <FileTree.Folder name="pages" defaultOpen>
+    <FileTree.File name="_meta.json" />
+    <FileTree.File name="about.mdx" />
+    <FileTree.File name="contact.mdx" />
+    <FileTree.File name="index.mdx" />
+  </FileTree.Folder>
+</FileTree>
