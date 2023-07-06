@@ -1,12 +1,12 @@
 {
   "private": true,
-  "packageManager": "pnpm@8.6.3",
+  "packageManager": "pnpm@8.6.6",
   "scripts": {
     "build": "turbo run build:tailwind build --filter=./packages/\\*",
     "build:all": "turbo run build:tailwind build",
-    "build:core": "pnpm run build --filter=nextra",
-    "build:theme-blog": "pnpm run build --filter=nextra-theme-blog",
-    "build:theme-docs": "pnpm run build --filter=nextra-theme-docs",
+    "build:core": "pnpm build --filter=nextra",
+    "build:theme-blog": "pnpm build --filter=nextra-theme-blog",
+    "build:theme-docs": "pnpm build --filter=nextra-theme-docs",
     "clean": "turbo run clean",
     "dev:core": "turbo run dev --filter=nextra... --filter=!docs",
     "dev:theme-blog": "turbo run dev --filter=example-blog... --filter=!docs",
@@ -24,15 +24,15 @@
     "@changesets/cli": "2.26.1",
     "@edge-runtime/vm": "3.0.3",
     "@ianvs/prettier-plugin-sort-imports": "^4.0.0-beta.0",
-    "@next/eslint-plugin-next": "13.4.6",
-    "@typescript-eslint/eslint-plugin": "5.60.0",
-    "@typescript-eslint/parser": "5.60.0",
-    "eslint": "8.43.0",
+    "@next/eslint-plugin-next": "13.4.8",
+    "@typescript-eslint/eslint-plugin": "5.61.0",
+    "@typescript-eslint/parser": "5.61.0",
+    "eslint": "8.44.0",
     "eslint-config-prettier": "8.8.0",
     "eslint-plugin-import": "2.27.5",
     "eslint-plugin-react": "7.32.2",
     "eslint-plugin-react-hooks": "4.6.0",
-    "eslint-plugin-tailwindcss": "3.12.1",
+    "eslint-plugin-tailwindcss": "3.13.0",
     "eslint-plugin-typescript-sort-keys": "2.3.0",
     "eslint-plugin-unicorn": "47.0.0",
     "prettier": "2.8.8",
@@ -40,8 +40,8 @@
     "prettier-plugin-tailwindcss": "0.3.0",
     "rimraf": "5.0.1",
     "tsup": "7.0.0",
-    "turbo": "1.10.3",
-    "typescript": "5.1.3"
+    "turbo": "1.10.7",
+    "typescript": "5.1.6"
   },
   "pnpm": {
     "overrides": {

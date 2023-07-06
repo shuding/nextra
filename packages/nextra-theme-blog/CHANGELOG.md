@@ -1,5 +1,15 @@
 # nextra-theme-blog
 
+## 2.8.0
+
+### Patch Changes
+
+- bef7324: accessibility issues for text and navbar in light mode
+- 6c12bf4: fix broken code format while selecting and copying code with
+  `showLineNumbers` option enabled
+- Updated dependencies [6c12bf4]
+  - nextra@2.8.0
+
 ## 2.7.1
 
 ### Patch Changes
