@@ -321,7 +321,7 @@ const __nextraPageOptions = {
         (themeConfigImport && 'themeConfig: __nextra_themeConfig')
   }
 }
-${finalResult.replace('export default MDXContent;', '')}
+${finalResult.replace(/(export default MDXContent;).*$/, '$1')}
 if (process.env.NODE_ENV !== 'production') {
   __nextraPageOptions.hot = module.hot
   __nextraPageOptions.pageOptsChecksum = ${stringifiedChecksum}
