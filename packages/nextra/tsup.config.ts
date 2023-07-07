@@ -16,11 +16,11 @@ const entriesSet = new Set(entries)
 
 const sharedConfig = defineConfig({
   // import.meta is available only from es2020
-  target: 'es2020',
+  target: 'es5',
   format: 'esm',
   dts: true,
   splitting: false,
-  external: ['shiki', './__temp__', 'webpack'],
+  external: ['shiki', 'webpack'],
   esbuildPlugins: [
     // https://github.com/evanw/esbuild/issues/622#issuecomment-769462611
     {
@@ -66,10 +66,10 @@ const sharedConfig = defineConfig({
 export default defineConfig([
   {
     name: 'nextra',
-    entry: ['src/index.js', 'src/__temp__.js', 'src/catch-all.ts'],
+    entry: ['src/index.js', 'src/catch-all.ts'],
     format: 'cjs',
     dts: false,
-    target: tsconfig.compilerOptions.target as 'es2016'
+    target: tsconfig.compilerOptions.target as 'es5'
   },
   {
     name: 'nextra-esm',

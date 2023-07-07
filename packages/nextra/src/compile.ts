@@ -25,7 +25,6 @@ import {
   remarkHeadings,
   remarkLinkRewrite,
   remarkRemoveImports,
-  remarkReplaceImports,
   remarkStaticImage,
   structurize
 } from './mdx-plugins'
@@ -33,9 +32,6 @@ import theme from './theme.json'
 import type { LoaderOptions, PageOpts, ReadingTime } from './types'
 import { truthy } from './utils'
 
-globalThis.__nextra_temp_do_not_use = () => {
-  import('./__temp__')
-}
 
 const require = createRequire(import.meta.url)
 
@@ -156,7 +152,6 @@ export async function compileMdx(
         searchIndexKey !== null && structurize(structurizedData, flexsearch),
         readingTime && remarkReadingTime,
         latex && remarkMath,
-        isFileOutsideCWD && remarkReplaceImports,
         // Remove the markdown file extension from links
         [
           clonedRemarkLinkRewrite,

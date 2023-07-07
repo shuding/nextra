@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es2016",
-    "module": "ESNext",
+    "target": "es5",
+    "module": "es2020",
     "declaration": false,
     "noEmit": true,
     "esModuleInterop": true,
@@ -10,7 +10,7 @@
     "allowJs": true,
     "jsx": "react-jsx",
     "moduleResolution": "node",
-    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "lib": ["es2020", "DOM", "DOM.Iterable"],
     "types": ["vitest/globals"],
     "resolveJsonModule": true
   }

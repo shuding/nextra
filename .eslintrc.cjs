@@ -49,6 +49,11 @@ module.exports = {
         '@typescript-eslint/no-non-null-assertion': 'off',
         '@typescript-eslint/no-var-requires': 'off',
         '@typescript-eslint/ban-ts-comment': 'off'
+      },
+      settings: {
+        'import/parsers': {
+          '@typescript-eslint/parser': [".ts", ".tsx"]
+        }
       }
     },
     // Rules for React files
@@ -122,6 +127,15 @@ module.exports = {
           config: 'packages/nextra-theme-docs/tailwind.config.js',
           callees: ['cn'],
           whitelist: ['nextra-breadcrumb', 'nextra-bleed']
+        },
+        'import/resolver': {
+          typescript: {
+            alwaysTryTypes: true,
+            project: [
+              'packages/nextra-theme-docs/tsconfig.json'
+            ]
+          },
+          node: true
         }
       },
       rules: {
@@ -143,6 +157,15 @@ module.exports = {
         tailwindcss: {
           config: 'packages/nextra-theme-blog/tailwind.config.js',
           whitelist: ['subheading-', 'post-item', 'post-item-more']
+        },
+        'import/resolver': {
+          typescript: {
+            alwaysTryTypes: true,
+            project: [
+              'packages/nextra-theme-blog/tsconfig.json'
+            ]
+          },
+          node: true
         }
       }
     },
@@ -155,6 +178,15 @@ module.exports = {
           config: 'packages/nextra-theme-docs/tailwind.config.js',
           callees: ['cn'],
           whitelist: ['nextra-code-block']
+        },
+        'import/resolver': {
+          typescript: {
+            alwaysTryTypes: true,
+            project: [
+              'packages/nextra-theme-docs/tsconfig.json'
+            ]
+          },
+          node: true
         }
       }
     },
