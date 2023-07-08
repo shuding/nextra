@@ -1,5 +1,39 @@
 # nextra
 
+## 2.9.0
+
+### Minor Changes
+
+- 16bbb88: Move below packages to nextra package
+
+  - `<Cards />` and `<Card />`
+  - `<Tabs />` and `<Tab />`
+  - `<Steps />`
+  - `<FileTree />`
+
+  to import them you can use the following in your official `nextra-theme-blog`
+  and `nextra-theme-docs`
+
+  ```js
+  import { Card, Cards } from 'nextra/components'
+  ```
+
+  ```js
+  import { Tab, Tabs } from 'nextra/components'
+  ```
+
+  ```js
+  import { Steps } from 'nextra/components'
+  ```
+
+  ```js
+  import { FileTree } from 'nextra/components'
+  ```
+
+### Patch Changes
+
+- 23a25b1: replace last match of `export default MDXContent;`
+
 ## 2.8.0
 
 ### Patch Changes
