@@ -37,9 +37,3 @@ h1 {
 .nx-prose .nextra-callout p {
   @apply nx-m-0;
 }
-
-.nextra-filetree {
-  ul, li {
-    @apply nx-m-0 nx-p-0;
-  }
-}
