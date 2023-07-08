@@ -1,9 +1,12 @@
 import cn from 'clsx'
-import type { ComponentProps, CSSProperties, ReactNode } from 'react'
 import NextLink from 'next/link'
+import type { ComponentProps, CSSProperties, ReactNode } from 'react'
 
 const classes = {
-  cards: cn('nextra-cards nx-mt-4 nx-gap-4 nx-grid'),
+  cards: cn(
+    'nextra-cards nx-mt-4 nx-gap-4 nx-grid',
+    'nx-not-prose' // for nextra-theme-docs
+  ),
   card: cn(
     'nextra-card nx-group nx-flex nx-flex-col nx-justify-start nx-overflow-hidden nx-rounded-lg nx-border nx-border-gray-200',
     'nx-text-current nx-no-underline dark:nx-shadow-none',

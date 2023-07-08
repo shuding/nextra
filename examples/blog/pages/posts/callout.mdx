@@ -6,7 +6,16 @@ tag: web development
 author: Tristan Dubbeld
 ---
 
-import { Callout, FileTree, Steps, Tab, Tabs } from 'nextra/components'
+import {
+  Callout,
+  Card,
+  Cards,
+  FileTree,
+  Steps,
+  Tab,
+  Tabs
+} from 'nextra/components'
+import { CopyIcon, GitHubIcon, MenuIcon } from 'nextra/icons'
 
 ## Callout
 
@@ -68,3 +77,20 @@ Contents for step 2.
     <FileTree.File name="index.mdx" />
   </FileTree.Folder>
 </FileTree>
+
+## Cards
+
+<Cards num={2}>
+  <Card image arrow title="Documentation theme" href="/docs/docs-theme/start">
+    <>![Documentation theme](https://nextra.site/assets/docs-theme.png)</>
+  </Card>
+  <Card image arrow title="Blog theme" href="/docs/blog-theme/start">
+    <>![Blog theme](https://nextra.site/assets/blog-theme.png)</>
+  </Card>
+</Cards>
+
+<Cards>
+  <Card icon={<CopyIcon />} title="Callout" href="/foo" />
+  <Card icon={<GitHubIcon />} title="Tabs" href="/bar" />
+  <Card icon={<MenuIcon />} title="Steps" href="/baz" />
+</Cards>
