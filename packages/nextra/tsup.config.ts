@@ -1,6 +1,5 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
-import svgrPlugin from 'esbuild-plugin-svgr'
 import fg from 'fast-glob'
 import slash from 'slash'
 import type { Options } from 'tsup'
@@ -87,11 +86,7 @@ export default defineConfig([
     name: 'nextra-client',
     entry: CLIENT_ENTRY,
     outExtension: () => ({ js: '.js' }),
-    ...sharedConfig,
-    esbuildPlugins: [
-      ...sharedConfig.esbuildPlugins,
-      svgrPlugin({ exportType: 'named' })
-    ]
+    ...sharedConfig
   },
   {
     entry: ['src/types.ts'],

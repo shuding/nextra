@@ -158,7 +158,6 @@
     "@types/webpack": "^5.28.0",
     "@types/webpack-env": "^1.18.0",
     "@vitejs/plugin-react": "^3.0.1",
-    "esbuild-plugin-svgr": "^2.0.0",
     "fast-glob": "^3.2.12",
     "next": "^13.4.8",
     "react": "^18.2.0",

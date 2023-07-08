@@ -5,6 +5,8 @@
 @import 'nextra/styles/code-block.css';
 @import 'nextra/styles/subheading-anchor.css';
 @import 'nextra/styles/scrollbar.css';
+@import 'nextra/styles/steps.css';
+@import 'nextra/styles/cards.css';
 
 body {
   @apply nx-px-4;
@@ -34,4 +36,10 @@ h1 {
 
 .nx-prose .nextra-callout p {
   @apply nx-m-0;
+}
+
+.nextra-filetree {
+  ul, li {
+    @apply nx-m-0 nx-p-0;
+  }
 }

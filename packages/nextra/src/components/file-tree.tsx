@@ -24,7 +24,7 @@ interface FileProps {
 }
 
 const Tree = ({ children }: { children: ReactNode }): ReactElement => (
-  <div className="nx-mt-6 nx-select-none nx-text-sm nx-text-gray-800 dark:nx-text-gray-300">
+  <div className="nextra-filetree nx-mt-6 nx-select-none nx-text-sm nx-text-gray-800 dark:nx-text-gray-300">
     <div className="nx-inline-flex nx-flex-col nx-rounded-lg nx-border nx-px-4 nx-py-2 dark:nx-border-neutral-800">
       {children}
     </div>
