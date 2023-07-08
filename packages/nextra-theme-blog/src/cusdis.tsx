@@ -1,7 +1,7 @@
 import { useTheme } from 'next-themes'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
-import type { ReactElement} from 'react';
+import type { ReactElement } from 'react'
 import { useEffect } from 'react'
 import { useBlogContext } from './blog-context'
 
