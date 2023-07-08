@@ -55,7 +55,7 @@ const A = ({ children, ...props }: ComponentProps<'a'>) => {
     return (
       <a target="_blank" rel="noreferrer" {...props}>
         {children}
-        <span className="nx-sr-only"> (opens in a new tab)</span>
+        <span className="nx-sr-only select-none"> (opens in a new tab)</span>
       </a>
     )
   }
