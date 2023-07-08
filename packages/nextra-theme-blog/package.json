@@ -70,7 +70,7 @@
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
     "concurrently": "^8.0.0",
-    "next": "^13.4.6",
+    "next": "^13.4.8",
     "nextra": "workspace:*",
     "postcss": "^8.4.21",
     "postcss-cli": "^10.1.0",
