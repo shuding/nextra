@@ -23,21 +23,27 @@ interface FileProps {
   active?: boolean
 }
 
-const Tree = ({ children }: { children: ReactNode }): ReactElement => (
-  <div className="nx-mt-6 nx-select-none nx-text-sm nx-text-gray-800 dark:nx-text-gray-300">
-    <div className="nx-inline-flex nx-flex-col nx-rounded-lg nx-border nx-px-4 nx-py-2 dark:nx-border-neutral-800">
-      {children}
+function Tree({ children }: { children: ReactNode }): ReactElement {
+  return (
+    <div
+      className={cn(
+        'nextra-filetree nx-mt-6 nx-select-none nx-text-sm nx-text-gray-800 dark:nx-text-gray-300',
+        'nx-not-prose' // for nextra-theme-blog
+      )}
+    >
+      <div className="nx-inline-block nx-rounded-lg nx-border nx-px-4 nx-py-2 dark:nx-border-neutral-800">
+        {children}
+      </div>
     </div>
-  </div>
-)
+  )
+}
 
 function Ident(): ReactElement {
-  const indent = useIndent()
-
+  const length = useIndent()
   return (
     <>
-      {[...Array(indent)].map((_, i) => (
-        <span className="nx-inline-block nx-w-5" key={i} />
+      {Array.from({ length }, (_, i) => (
+        <span className="nx-w-5" key={i} />
       ))}
     </>
   )
@@ -57,7 +63,7 @@ const Folder = memo<FolderProps>(
 
     return (
       <li className="nx-flex nx-list-none nx-flex-col">
-        <a
+        <button
           onClick={toggle}
           title={name}
           className="nx-inline-flex nx-cursor-pointer nx-items-center nx-py-1 hover:nx-opacity-60"
@@ -78,7 +84,7 @@ const Folder = memo<FolderProps>(
             />
           </svg>
           <span className="nx-ml-1">{label ?? name}</span>
-        </a>
+        </button>
         {isFolderOpen && (
           <ul>
             <ctx.Provider value={indent + 1}>{children}</ctx.Provider>
@@ -97,7 +103,7 @@ const File = memo<FileProps>(({ label, name, active }) => (
       active && 'nx-text-primary-600 contrast-more:nx-underline'
     )}
   >
-    <a className="nx-inline-flex nx-cursor-default nx-items-center nx-py-1">
+    <span className="nx-inline-flex nx-cursor-default nx-items-center nx-py-1">
       <Ident />
       <svg width="1em" height="1em" viewBox="0 0 24 24">
         <path
@@ -110,7 +116,7 @@ const File = memo<FileProps>(({ label, name, active }) => (
         />
       </svg>
       <span className="nx-ml-1">{label ?? name}</span>
-    </a>
+    </span>
   </li>
 ))
 File.displayName = 'File'

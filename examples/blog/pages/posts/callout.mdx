@@ -6,9 +6,18 @@ tag: web development
 author: Tristan Dubbeld
 ---
 
-import { Callout } from 'nextra/components'
+import {
+  Callout,
+  Card,
+  Cards,
+  FileTree,
+  Steps,
+  Tab,
+  Tabs
+} from 'nextra/components'
+import { CopyIcon, GitHubIcon, MenuIcon } from 'nextra/icons'
 
-## Use different callout types
+## Callout
 
 ### Default
 
@@ -29,3 +38,68 @@ import { Callout } from 'nextra/components'
 ### With custom emoji
 
 <Callout emoji="🚀">This is a callout with a custom emoji.</Callout>
+
+## Steps
+
+<Steps>
+
+### Step 1
+
+Content for step 1.
+
+### Step 2
+
+Contents for step 2.
+
+</Steps>
+
+## Tabs
+
+{/* prettier-ignore */}
+<Tabs items={['pnpm', 'npm', 'yarn']}>
+  <Tab>**pnpm**: Fast, disk space efficient package manager.</Tab>
+  <Tab>**npm** is a package manager for the JavaScript programming language.</Tab>
+  <Tab>**Yarn** is a software packaging system.</Tab>
+</Tabs>
+
+## FileTree
+
+<FileTree>
+  <FileTree.Folder name="pages" defaultOpen>
+    <FileTree.Folder name="fruits" defaultOpen>
+      <FileTree.File name="_meta.json" />
+      <FileTree.File name="apple.mdx" />
+      <FileTree.File name="banana.mdx" />
+    </FileTree.Folder>
+    <FileTree.File name="_meta.json" />
+    <FileTree.File name="about.mdx" />
+    <FileTree.File name="contact.mdx" />
+    <FileTree.File name="index.mdx" />
+  </FileTree.Folder>
+</FileTree>
+
+<FileTree>
+  <FileTree.Folder name="users-service" defaultOpen>
+    <FileTree.File name="schema.graphql" />
+  </FileTree.Folder>
+  <FileTree.Folder name="posts-service" defaultOpen>
+    <FileTree.File name="schema.graphql" />
+  </FileTree.Folder>
+</FileTree>
+
+## Cards
+
+<Cards num={2}>
+  <Card image arrow title="Documentation theme" href="/docs/docs-theme/start">
+    <>![Documentation theme](https://nextra.site/assets/docs-theme.png)</>
+  </Card>
+  <Card image arrow title="Blog theme" href="/docs/blog-theme/start">
+    <>![Blog theme](https://nextra.site/assets/blog-theme.png)</>
+  </Card>
+</Cards>
+
+<Cards>
+  <Card icon={<CopyIcon />} title="Callout" href="/foo" />
+  <Card icon={<GitHubIcon />} title="Tabs" href="/bar" />
+  <Card icon={<MenuIcon />} title="Steps" href="/baz" />
+</Cards>

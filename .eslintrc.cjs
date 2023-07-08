@@ -154,7 +154,7 @@ module.exports = {
         tailwindcss: {
           config: 'packages/nextra-theme-docs/tailwind.config.js',
           callees: ['cn'],
-          whitelist: ['nextra-code-block']
+          whitelist: ['nextra-code-block', 'nextra-filetree']
         }
       }
     },

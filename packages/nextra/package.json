@@ -122,6 +122,7 @@
     "react-dom": ">=16.13.1"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.10",
     "@mdx-js/mdx": "^2.3.0",
     "@mdx-js/react": "^2.3.0",
     "@napi-rs/simple-git": "^0.1.8",

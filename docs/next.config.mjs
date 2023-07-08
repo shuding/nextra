@@ -3,7 +3,6 @@ import nextra from 'nextra'
 const withNextra = nextra({
   theme: 'nextra-theme-docs',
   themeConfig: './theme.config.tsx',
-  staticImage: true,
   latex: true,
   flexsearch: {
     codeblocks: false
@@ -19,8 +18,8 @@ export default withNextra({
   },
   redirects: () => [
     {
-      source: '/docs/docs-theme/built-ins/callout',
-      destination: '/docs/guide/built-ins/callout',
+      source: '/docs/docs-theme/built-ins/:slug(callout|steps|tabs)',
+      destination: '/docs/guide/built-ins/:slug',
       permanent: true
     }
   ],

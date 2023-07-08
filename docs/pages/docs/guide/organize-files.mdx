@@ -1,5 +1,5 @@
 import { FileIcon, NewsletterIcon } from '@components/icons'
-import { Card, Cards } from 'nextra-theme-docs'
+import { Card, Cards, FileTree } from 'nextra/components'
 
 # Organize Files
 
@@ -26,14 +26,16 @@ from filenames.
 
 For example if you have the following structure:
 
-```text
-pages/
-  contact.md
-  index.mdx
-  about/
-    legal.md
-    index.mdx
-```
+<FileTree>
+  <FileTree.Folder name="pages" defaultOpen>
+    <FileTree.File name="contact.md" />
+    <FileTree.File name="index.mdx" />
+    <FileTree.Folder name="about" defaultOpen>
+      <FileTree.File name="legal.md" />
+      <FileTree.File name="index.mdx" />
+    </FileTree.Folder>
+  </FileTree.Folder>
+</FileTree>
 
 The resolved page map will be (note that all names were sorted alphabetically):
 
@@ -61,16 +63,18 @@ That’s where `_meta.json` comes in. You can have an `_meta.json` file in each
 directory, and it will be used to override the default configuration of each
 page:
 
-```text
-pages/
-  _meta.json
-  contact.md
-  index.mdx
-  about/
-    _meta.json
-    legal.md
-    index.mdx
-```
+<FileTree>
+  <FileTree.Folder name="pages" defaultOpen>
+    <FileTree.File name="_meta.json" />
+    <FileTree.File name="contact.md" />
+    <FileTree.File name="index.mdx" />
+    <FileTree.Folder name="about" defaultOpen>
+      <FileTree.File name="_meta.json" />
+      <FileTree.File name="legal.md" />
+      <FileTree.File name="index.mdx" />
+    </FileTree.Folder>
+  </FileTree.Folder>
+</FileTree>
 
 And you can put this in your `pages/_meta.json` file:
 

@@ -3,10 +3,6 @@ import nextra from 'nextra'
 const withNextra = nextra({
   theme: 'nextra-theme-docs',
   themeConfig: './theme.config.tsx',
-  flexsearch: {
-    codeblocks: true
-  },
-  staticImage: true,
   defaultShowCopyCode: true,
   transform(content, { route }) {
     if (route.startsWith('/docs/advanced/more/tree/two')) {
