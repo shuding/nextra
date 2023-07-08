@@ -30,7 +30,7 @@ const Tree = ({ children }: { children: ReactNode }): ReactElement => (
       'nx-not-prose' // for nextra-theme-blog
     )}
   >
-    <div className="nx-inline-flex nx-flex-col nx-rounded-lg nx-border nx-px-4 nx-py-2 dark:nx-border-neutral-800">
+    <div className="nx-inline-block nx-rounded-lg nx-border nx-px-4 nx-py-2 dark:nx-border-neutral-800">
       {children}
     </div>
   </div>
