@@ -23,18 +23,20 @@ interface FileProps {
   active?: boolean
 }
 
-const Tree = ({ children }: { children: ReactNode }): ReactElement => (
-  <div
-    className={cn(
-      'nextra-filetree nx-mt-6 nx-select-none nx-text-sm nx-text-gray-800 dark:nx-text-gray-300',
-      'nx-not-prose' // for nextra-theme-blog
-    )}
-  >
-    <div className="nx-inline-block nx-rounded-lg nx-border nx-px-4 nx-py-2 dark:nx-border-neutral-800">
-      {children}
+function Tree({ children }: { children: ReactNode }): ReactElement {
+  return (
+    <div
+      className={cn(
+        'nextra-filetree nx-mt-6 nx-select-none nx-text-sm nx-text-gray-800 dark:nx-text-gray-300',
+        'nx-not-prose' // for nextra-theme-blog
+      )}
+    >
+      <div className="nx-inline-block nx-rounded-lg nx-border nx-px-4 nx-py-2 dark:nx-border-neutral-800">
+        {children}
+      </div>
     </div>
-  </div>
-)
+  )
+}
 
 function Ident(): ReactElement {
   const length = useIndent()
