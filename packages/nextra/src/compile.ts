@@ -4,6 +4,7 @@ import type { ProcessorOptions } from '@mdx-js/mdx'
 import { createProcessor } from '@mdx-js/mdx'
 import type { Processor } from '@mdx-js/mdx/lib/core'
 import { remarkMermaid } from '@theguild/remark-mermaid'
+import { remarkNpm2Yarn } from '@theguild/remark-npm2yarn'
 import grayMatter from 'gray-matter'
 import rehypeKatex from 'rehype-katex'
 import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
@@ -148,6 +149,14 @@ export async function compileMdx(
       remarkPlugins: [
         ...(remarkPlugins || []),
         remarkMermaid, // should be before remarkRemoveImports because contains `import { Mermaid } from ...`
+        [
+          remarkNpm2Yarn, // should be before remarkRemoveImports because contains `import { Tabs as $Tabs, Tab as $Tab } from ...`
+          {
+            packageName: 'nextra/components',
+            tabNamesProp: 'items',
+            storageKey: 'selectedPackageManager'
+          }
+        ] satisfies Pluggable,
         outputFormat === 'function-body' && remarkRemoveImports,
         remarkGfm,
         remarkCustomHeadingId,

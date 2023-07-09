@@ -150,7 +150,7 @@ importers:
         version: file:packages/nextra(next@13.4.8)(react-dom@18.2.0)(react@18.2.0)
       nextra-theme-blog:
         specifier: workspace:*
-        version: file:packages/nextra-theme-blog(next@13.4.8)(nextra@2.8.0)(react-dom@18.2.0)(react@18.2.0)
+        version: file:packages/nextra-theme-blog(next@13.4.8)(nextra@2.9.0)(react-dom@18.2.0)(react@18.2.0)
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -173,7 +173,7 @@ importers:
         version: file:packages/nextra(next@13.4.8)(react-dom@18.2.0)(react@18.2.0)
       nextra-theme-docs:
         specifier: workspace:*
-        version: file:packages/nextra-theme-docs(next@13.4.8)(nextra@2.8.0)(react-dom@18.2.0)(react@18.2.0)
+        version: file:packages/nextra-theme-docs(next@13.4.8)(nextra@2.9.0)(react-dom@18.2.0)(react@18.2.0)
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -208,7 +208,7 @@ importers:
         version: file:packages/nextra(next@13.4.8)(react-dom@18.2.0)(react@18.2.0)
       nextra-theme-docs:
         specifier: workspace:*
-        version: file:packages/nextra-theme-docs(next@13.4.8)(nextra@2.8.0)(react-dom@18.2.0)(react@18.2.0)
+        version: file:packages/nextra-theme-docs(next@13.4.8)(nextra@2.9.0)(react-dom@18.2.0)(react@18.2.0)
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -251,6 +251,9 @@ importers:
       '@theguild/remark-mermaid':
         specifier: ^0.0.3
         version: 0.0.3(react@18.2.0)
+      '@theguild/remark-npm2yarn':
+        specifier: ^0.1.0
+        version: 0.1.0
       clsx:
         specifier: ^1.2.1
         version: 1.2.1
@@ -3322,6 +3325,13 @@ packages:
       unist-util-visit: 4.1.2
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /@theguild/remark-npm2yarn@0.1.0:
+    resolution: {integrity: sha512-rpP8w9I5B1t+uf1wJz8Z3OVOS/TS7ZdwFmgYNs3dxlyWHpcnm2pZIq+4PQGMIjjfxTXuWVf6sKYat0dm8zgubg==}
+    dependencies:
+      npm-to-yarn: 2.0.0
+      unist-util-visit: 5.0.0
     dev: false
 
   /@tootallnate/once@2.0.0:
@@ -8149,6 +8159,11 @@ packages:
       path-key: 3.1.1
     dev: true
 
+  /npm-to-yarn@2.0.0:
+    resolution: {integrity: sha512-/IbjiJ7vqbxfxJxAZ+QI9CCRjnIbvGxn5KQcSY9xHh0lMKc/Sgqmm7yp7KPmd6TiTZX5/KiSBKlkGHo59ucZbg==}
+    engines: {node: '>=6.0.0'}
+    dev: false
+
   /nth-check@2.1.1:
     resolution: {integrity: sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==}
     dependencies:
@@ -10770,6 +10785,7 @@ packages:
       '@mdx-js/react': 2.3.0(react@18.2.0)
       '@napi-rs/simple-git': 0.1.8
       '@theguild/remark-mermaid': 0.0.3(react@18.2.0)
+      '@theguild/remark-npm2yarn': 0.1.0
       clsx: 1.2.1
       github-slugger: 2.0.0
       graceful-fs: 4.2.11
@@ -10796,7 +10812,7 @@ packages:
       - supports-color
     dev: false
 
-  file:packages/nextra-theme-blog(next@13.4.8)(nextra@2.8.0)(react-dom@18.2.0)(react@18.2.0):
+  file:packages/nextra-theme-blog(next@13.4.8)(nextra@2.9.0)(react-dom@18.2.0)(react@18.2.0):
     resolution: {directory: packages/nextra-theme-blog, type: directory}
     id: file:packages/nextra-theme-blog
     name: nextra-theme-blog
@@ -10817,7 +10833,7 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
-  file:packages/nextra-theme-docs(next@13.4.8)(nextra@2.8.0)(react-dom@18.2.0)(react@18.2.0):
+  file:packages/nextra-theme-docs(next@13.4.8)(nextra@2.9.0)(react-dom@18.2.0)(react@18.2.0):
     resolution: {directory: packages/nextra-theme-docs, type: directory}
     id: file:packages/nextra-theme-docs
     name: nextra-theme-docs
