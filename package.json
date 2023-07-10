@@ -1,6 +1,6 @@
 {
   "private": true,
-  "packageManager": "pnpm@8.6.6",
+  "packageManager": "pnpm@8.6.7",
   "scripts": {
     "build": "turbo run build:tailwind build --filter=./packages/\\*",
     "build:all": "turbo run build:tailwind build",
