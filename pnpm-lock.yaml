@@ -249,8 +249,8 @@ importers:
         specifier: ^0.1.8
         version: 0.1.8
       '@theguild/remark-mermaid':
-        specifier: ^0.0.3
-        version: 0.0.3(react@18.2.0)
+        specifier: ^0.0.4
+        version: 0.0.4(react@18.2.0)
       clsx:
         specifier: ^1.2.1
         version: 1.2.1
@@ -3312,14 +3312,14 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: true
 
-  /@theguild/remark-mermaid@0.0.3(react@18.2.0):
-    resolution: {integrity: sha512-fccVR6o4UPUztrBjdUhM4ahwx+X7YHhoxsUoXv2vI07vz4dq+I03Ot0SjuZzDA/H7engxcb8ZxzCUEkZgGr/2g==}
+  /@theguild/remark-mermaid@0.0.4(react@18.2.0):
+    resolution: {integrity: sha512-C1gssw07eURtCwzXqZZdvyV/eawQ/cXfARaXIgBU9orffox+/YQ+exxmNu9v16NSGzAVsGF4qEVHvCOcCR/FpQ==}
     peerDependencies:
       react: ^18.2.0
     dependencies:
       mermaid: 10.2.2
       react: 18.2.0
-      unist-util-visit: 4.1.2
+      unist-util-visit: 5.0.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -10769,7 +10769,7 @@ packages:
       '@mdx-js/mdx': 2.3.0
       '@mdx-js/react': 2.3.0(react@18.2.0)
       '@napi-rs/simple-git': 0.1.8
-      '@theguild/remark-mermaid': 0.0.3(react@18.2.0)
+      '@theguild/remark-mermaid': 0.0.4(react@18.2.0)
       clsx: 1.2.1
       github-slugger: 2.0.0
       graceful-fs: 4.2.11
