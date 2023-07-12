@@ -70,8 +70,8 @@ importers:
         specifier: 2.8.8
         version: 2.8.8
       prettier-plugin-pkg:
-        specifier: 0.17.1
-        version: 0.17.1(prettier@2.8.8)
+        specifier: 0.18.0
+        version: 0.18.0(prettier@2.8.8)
       prettier-plugin-tailwindcss:
         specifier: 0.4.0
         version: 0.4.0(@ianvs/prettier-plugin-sort-imports@4.0.0-beta.0)(prettier@2.8.8)
@@ -8627,11 +8627,11 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
-  /prettier-plugin-pkg@0.17.1(prettier@2.8.8):
-    resolution: {integrity: sha512-XPRRMQR5oseJXdfK8kQDj2LCV1UjmTuDlPbbJ8C2WLaATNhdvZLhQO0+NtWnRrQTP+erLR5cVxfcwyqF+3R8SA==}
-    engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
+  /prettier-plugin-pkg@0.18.0(prettier@2.8.8):
+    resolution: {integrity: sha512-cme+OUHj25cVj3HwGK6ek/GkCHhlhM1u/IYspOHYsFImaXMJCmjs8xeCcvLreD0HMX5QxObot+3TtQR3Bd2wHw==}
+    engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
-      prettier: ^2.0.0
+      prettier: ^3.0.0
     dependencies:
       prettier: 2.8.8
     dev: true

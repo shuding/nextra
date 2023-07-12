@@ -36,7 +36,7 @@
     "eslint-plugin-typescript-sort-keys": "2.3.0",
     "eslint-plugin-unicorn": "47.0.0",
     "prettier": "2.8.8",
-    "prettier-plugin-pkg": "0.17.1",
+    "prettier-plugin-pkg": "0.18.0",
     "prettier-plugin-tailwindcss": "0.4.0",
     "rimraf": "5.0.1",
     "tsup": "7.0.0",
