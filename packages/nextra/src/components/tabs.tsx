@@ -51,16 +51,12 @@ export function Tabs({
 
     function fn(event: StorageEvent) {
       if (event.key === storageKey) {
-        setSelectedIndex(
-          items.findIndex(
-            item => (isTabItem(item) ? item.label : item) === event.newValue!
-          )
-        )
+        setSelectedIndex(Number(event.newValue))
       }
     }
 
-    const index = items.indexOf(localStorage.getItem(storageKey)!)
-    setSelectedIndex(index === -1 ? 0 : index)
+    const index = Number(localStorage.getItem(storageKey))
+    setSelectedIndex(Number.isNaN(index) ? 0 : index)
 
     window.addEventListener('storage', fn)
     return () => {
@@ -70,8 +66,7 @@ export function Tabs({
 
   const handleChange = useCallback((index: number) => {
     if (storageKey) {
-      const newTabValue = items[index]
-      const newValue = isTabItem(newTabValue) ? newTabValue.label : newTabValue
+      const newValue = String(index)
       localStorage.setItem(storageKey, newValue)
 
       // the storage event only get picked up (by the listener) if the localStorage was changed in
