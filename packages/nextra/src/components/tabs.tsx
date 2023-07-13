@@ -23,7 +23,7 @@ const renderTab = (item: string | TabItem) => {
 export function Tabs({
   items,
   selectedIndex: _selectedIndex,
-  defaultIndex,
+  defaultIndex = 0,
   onChange,
   children,
   storageKey
@@ -35,13 +35,13 @@ export function Tabs({
   children: ReactNode
   storageKey?: string
 }): ReactElement {
-  const [selectedIndex, setSelectedIndex] = useState(0)
+  const [selectedIndex, setSelectedIndex] = useState(defaultIndex)
 
   useEffect(() => {
-    if (defaultIndex !== undefined) {
-      setSelectedIndex(defaultIndex)
+    if (_selectedIndex !== undefined) {
+      setSelectedIndex(_selectedIndex)
     }
-  }, [defaultIndex])
+  }, [_selectedIndex])
 
   useEffect(() => {
     if (!storageKey) {
