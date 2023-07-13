@@ -1,5 +1,5 @@
 import { BoxIcon, GearIcon, RowsIcon } from '@components/icons'
-import { Callout, Card, Cards, Steps, Tab, Tabs } from 'nextra/components'
+import { Callout, Card, Cards, Steps } from 'nextra/components'
 
 # Docs Theme
 
@@ -13,7 +13,8 @@ This website itself is built with the Nextra Docs Theme.
 
 ### Deploy to Vercel
 
-You can start by creating your own Nextra site and deploying to Vercel by clicking the link:
+You can start by creating your own Nextra site and deploying to Vercel by
+clicking the link:
 
 <a
   className="mt-3 inline-flex"
@@ -23,36 +24,28 @@ You can start by creating your own Nextra site and deploying to Vercel by clicki
   ![](https://vercel.com/button)
 </a>
 
-Vercel will fork the [Nextra Docs template](https://github.com/shuding/nextra-docs-template) and deploy the site for you. Once done, every commit in the repository will be deployed automatically.
+Vercel will fork the
+[Nextra Docs template](https://github.com/shuding/nextra-docs-template) and
+deploy the site for you. Once done, every commit in the repository will be
+deployed automatically.
 
 ### Fork the Template
 
-You can also manually fork the [template repository](https://github.com/shuding/nextra-docs-template).
+You can also manually fork the
+[template repository](https://github.com/shuding/nextra-docs-template).
 
 ## Start as New Project
 
 <Steps>
 ### Install
 
-To create a Nextra Docs site manually, you have to install **Next.js**, **React**, **Nextra**, and **Nextra Docs Theme**. In your project directory, run the following command to install the dependencies:
+To create a Nextra Docs site manually, you have to install **Next.js**,
+**React**, **Nextra**, and **Nextra Docs Theme**. In your project directory, run
+the following command to install the dependencies:
 
-<Tabs items={['pnpm', 'npm', 'yarn']}>
-  <Tab>
-    ```bash
-    pnpm i next react react-dom nextra nextra-theme-docs
-    ```
-  </Tab>
-  <Tab>
-    ```bash
-    npm i next react react-dom nextra nextra-theme-docs
-    ```
-  </Tab>
-  <Tab>
-    ```bash
-    yarn add next react react-dom nextra nextra-theme-docs
-    ```
-  </Tab>
-</Tabs>
+```sh npm2yarn
+npm i next react react-dom nextra nextra-theme-docs
+```
 
 <Callout>
   If you already have Next.js installed in your project, you only need to
@@ -75,11 +68,14 @@ module.exports = withNextra()
 // module.exports = withNextra({ /* other next.js config */ })
 ```
 
-With the above configuration, Nextra can handle Markdown files in your Next.js project, with the specified theme. Other Nextra configurations can be found in [Guide](/docs/guide).
+With the above configuration, Nextra can handle Markdown files in your Next.js
+project, with the specified theme. Other Nextra configurations can be found in
+[Guide](/docs/guide).
 
 ### Create Docs Theme Config
 
-Lastly, create the corresponding `theme.config.jsx` file in your project’s root directory. This will be used to configure the Nextra Docs theme:
+Lastly, create the corresponding `theme.config.jsx` file in your project’s root
+directory. This will be used to configure the Nextra Docs theme:
 
 ```jsx filename="theme.config.jsx"
 export default {
@@ -91,7 +87,8 @@ export default {
 }
 ```
 
-Full theme configurations can be found [here](/docs/docs-theme/theme-configuration).
+Full theme configurations can be found
+[here](/docs/docs-theme/theme-configuration).
 
 ### Ready to Go!
 
@@ -107,7 +104,8 @@ And run the `pnpm next` command to start developing the project! 🎉
 
 </Steps>
 
-Next, check out the next section to learn about organizing the documentation structure and configuring the website theme:
+Next, check out the next section to learn about organizing the documentation
+structure and configuring the website theme:
 
 <Cards>
   <Card

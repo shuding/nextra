@@ -251,6 +251,9 @@ importers:
       '@theguild/remark-mermaid':
         specifier: ^0.0.4
         version: 0.0.4(react@18.2.0)
+      '@theguild/remark-npm2yarn':
+        specifier: ^0.1.1
+        version: 0.1.1
       clsx:
         specifier: ^1.2.1
         version: 1.2.1
@@ -3322,6 +3325,13 @@ packages:
       unist-util-visit: 5.0.0
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /@theguild/remark-npm2yarn@0.1.1:
+    resolution: {integrity: sha512-ZKwd/bjQ9V+pESLnu8+q8jqn15alXzJOuVckraebsXwqVBTw53Gmupiw9zCdLNHU829KTYNycJYea6m9HRLuOg==}
+    dependencies:
+      npm-to-yarn: 2.0.0
+      unist-util-visit: 5.0.0
     dev: false
 
   /@tootallnate/once@2.0.0:
@@ -8130,6 +8140,11 @@ packages:
       path-key: 3.1.1
     dev: true
 
+  /npm-to-yarn@2.0.0:
+    resolution: {integrity: sha512-/IbjiJ7vqbxfxJxAZ+QI9CCRjnIbvGxn5KQcSY9xHh0lMKc/Sgqmm7yp7KPmd6TiTZX5/KiSBKlkGHo59ucZbg==}
+    engines: {node: '>=6.0.0'}
+    dev: false
+
   /nth-check@2.1.1:
     resolution: {integrity: sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==}
     dependencies:
@@ -10743,6 +10758,7 @@ packages:
       '@mdx-js/react': 2.3.0(react@18.2.0)
       '@napi-rs/simple-git': 0.1.8
       '@theguild/remark-mermaid': 0.0.4(react@18.2.0)
+      '@theguild/remark-npm2yarn': 0.1.1
       clsx: 1.2.1
       github-slugger: 2.0.0
       graceful-fs: 4.2.11

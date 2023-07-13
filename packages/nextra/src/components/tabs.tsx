@@ -1,53 +1,89 @@
 import { Tab as HeadlessTab } from '@headlessui/react'
 import cn from 'clsx'
 import type { ComponentProps, ReactElement, ReactNode } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
-type TabItem = {
-  label: ReactElement
-  disabled?: boolean
+type TabItem = string | ReactNode
+
+type TabObjectItem = {
+  label: TabItem
+  disabled: boolean
 }
 
-function isTabItem(item: unknown): item is TabItem {
-  if (item && typeof item === 'object' && 'label' in item) return true
-  return false
-}
-
-const renderTab = (item: ReactNode | TabItem) => {
-  if (isTabItem(item)) {
-    return item.label
-  }
-  return item
+function isTabObjectItem(item: unknown): item is TabObjectItem {
+  return !!item && typeof item === 'object' && 'label' in item
 }
 
 export function Tabs({
   items,
-  selectedIndex,
-  defaultIndex,
+  selectedIndex: _selectedIndex,
+  defaultIndex = 0,
   onChange,
-  children
+  children,
+  storageKey
 }: {
-  items: ReactNode[] | ReadonlyArray<ReactNode> | TabItem[]
+  items: (TabItem | TabObjectItem)[]
   selectedIndex?: number
   defaultIndex?: number
   onChange?: (index: number) => void
   children: ReactNode
+  storageKey?: string
 }): ReactElement {
+  const [selectedIndex, setSelectedIndex] = useState(defaultIndex)
+
+  useEffect(() => {
+    if (_selectedIndex !== undefined) {
+      setSelectedIndex(_selectedIndex)
+    }
+  }, [_selectedIndex])
+
+  useEffect(() => {
+    if (!storageKey) {
+      // Do not listen storage events if there is no storage key
+      return
+    }
+
+    function fn(event: StorageEvent) {
+      if (event.key === storageKey) {
+        setSelectedIndex(Number(event.newValue))
+      }
+    }
+
+    const index = Number(localStorage.getItem(storageKey))
+    setSelectedIndex(Number.isNaN(index) ? 0 : index)
+
+    window.addEventListener('storage', fn)
+    return () => {
+      window.removeEventListener('storage', fn)
+    }
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps -- only on mount
+
+  const handleChange = useCallback((index: number) => {
+    if (storageKey) {
+      const newValue = String(index)
+      localStorage.setItem(storageKey, newValue)
+
+      // the storage event only get picked up (by the listener) if the localStorage was changed in
+      // another browser's tab/window (of the same app), but not within the context of the current tab.
+      window.dispatchEvent(
+        new StorageEvent('storage', { key: storageKey, newValue })
+      )
+      return
+    }
+    setSelectedIndex(index)
+    onChange?.(index)
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps -- only on mount
+
   return (
     <HeadlessTab.Group
       selectedIndex={selectedIndex}
       defaultIndex={defaultIndex}
-      onChange={onChange}
+      onChange={handleChange}
     >
       <div className="nextra-scrollbar nx-overflow-x-auto nx-overflow-y-hidden nx-overscroll-x-contain">
         <HeadlessTab.List className="nx-mt-4 nx-flex nx-w-max nx-min-w-full nx-border-b nx-border-gray-200 nx-pb-px dark:nx-border-neutral-800">
           {items.map((item, index) => {
-            const disabled = !!(
-              item &&
-              typeof item === 'object' &&
-              'disabled' in item &&
-              item.disabled
-            )
-
+            const disabled = isTabObjectItem(item) && item.disabled
             return (
               <HeadlessTab
                 key={index}
@@ -64,7 +100,7 @@ export function Tabs({
                   )
                 }
               >
-                {renderTab(item)}
+                {isTabObjectItem(item) ? item.label : item}
               </HeadlessTab>
             )
           })}
