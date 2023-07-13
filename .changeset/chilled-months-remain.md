@@ -9,3 +9,5 @@
 
 - `<Tabs />` now has `selectedKey` prop, the chosen tab is saved in the local storage, which will be
   chosen in future page renders.
+
+More info https://nextra.site/docs/guide/advanced/npm2yarn
