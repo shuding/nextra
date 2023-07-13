@@ -1,6 +1,6 @@
 {
   "private": true,
-  "packageManager": "pnpm@8.6.6",
+  "packageManager": "pnpm@8.6.7",
   "scripts": {
     "build": "turbo run build:tailwind build --filter=./packages/\\*",
     "build:all": "turbo run build:tailwind build",
@@ -25,8 +25,8 @@
     "@edge-runtime/vm": "3.0.3",
     "@ianvs/prettier-plugin-sort-imports": "^4.0.0-beta.0",
     "@next/eslint-plugin-next": "13.4.9",
-    "@typescript-eslint/eslint-plugin": "5.61.0",
-    "@typescript-eslint/parser": "5.61.0",
+    "@typescript-eslint/eslint-plugin": "5.62.0",
+    "@typescript-eslint/parser": "5.62.0",
     "eslint": "8.44.0",
     "eslint-config-prettier": "8.8.0",
     "eslint-plugin-import": "2.27.5",
@@ -37,7 +37,7 @@
     "eslint-plugin-unicorn": "47.0.0",
     "prettier": "2.8.8",
     "prettier-plugin-pkg": "0.17.1",
-    "prettier-plugin-tailwindcss": "0.3.0",
+    "prettier-plugin-tailwindcss": "0.4.0",
     "rimraf": "5.0.1",
     "tsup": "7.0.0",
     "turbo": "1.10.7",
