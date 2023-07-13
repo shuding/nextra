@@ -3,21 +3,15 @@ import cn from 'clsx'
 import type { ComponentProps, ReactElement, ReactNode } from 'react'
 import { useCallback, useEffect, useState } from 'react'
 
-type TabItem = {
-  label: string
-  disabled?: boolean
+type TabItem = string | ReactNode
+
+type TabObjectItem = {
+  label: TabItem
+  disabled: boolean
 }
 
-function isTabItem(item: unknown): item is TabItem {
-  if (item && typeof item === 'object' && 'label' in item) return true
-  return false
-}
-
-const renderTab = (item: string | TabItem) => {
-  if (isTabItem(item)) {
-    return item.label
-  }
-  return item
+function isTabObjectItem(item: unknown): item is TabObjectItem {
+  return !!item && typeof item === 'object' && 'label' in item
 }
 
 export function Tabs({
@@ -28,7 +22,7 @@ export function Tabs({
   children,
   storageKey
 }: {
-  items: (string | TabItem)[]
+  items: (TabItem | TabObjectItem)[]
   selectedIndex?: number
   defaultIndex?: number
   onChange?: (index: number) => void
@@ -76,7 +70,6 @@ export function Tabs({
       )
       return
     }
-
     setSelectedIndex(index)
     onChange?.(index)
   }, []) // eslint-disable-line react-hooks/exhaustive-deps -- only on mount
@@ -90,13 +83,7 @@ export function Tabs({
       <div className="nextra-scrollbar nx-overflow-x-auto nx-overflow-y-hidden nx-overscroll-x-contain">
         <HeadlessTab.List className="nx-mt-4 nx-flex nx-w-max nx-min-w-full nx-border-b nx-border-gray-200 nx-pb-px dark:nx-border-neutral-800">
           {items.map((item, index) => {
-            const disabled = !!(
-              item &&
-              typeof item === 'object' &&
-              'disabled' in item &&
-              item.disabled
-            )
-
+            const disabled = isTabObjectItem(item) && item.disabled
             return (
               <HeadlessTab
                 key={index}
@@ -113,7 +100,7 @@ export function Tabs({
                   )
                 }
               >
-                {renderTab(item)}
+                {isTabObjectItem(item) ? item.label : item}
               </HeadlessTab>
             )
           })}
