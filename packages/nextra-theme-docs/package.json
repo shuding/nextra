@@ -46,7 +46,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.10",
     "@popperjs/core": "^2.11.6",
-    "clsx": "^1.2.1",
+    "clsx": "^2.0.0",
     "flexsearch": "^0.7.21",
     "focus-visible": "^5.2.0",
     "git-url-parse": "^13.1.0",
