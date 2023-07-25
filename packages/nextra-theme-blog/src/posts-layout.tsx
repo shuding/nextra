@@ -1,3 +1,4 @@
+import { minimatch } from 'minimatch'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import type { ReactElement, ReactNode } from 'react'
@@ -20,6 +21,9 @@ export function PostsLayout({
   const tagName = type === 'tag' ? router.query.tag : null
 
   const postList = posts.map(post => {
+    for (const excludePattern of config.excludePatterns || []) {
+      if (minimatch(post.route, excludePattern)) return null
+    }
     if (tagName) {
       const tags = getTags(post)
       if (!Array.isArray(tagName) && !tags.includes(tagName)) {

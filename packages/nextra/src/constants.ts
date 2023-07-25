@@ -14,7 +14,9 @@ export const DEFAULT_LOCALE = 'en-US'
 export const DEFAULT_CONFIG: Omit<NextraConfig, 'theme'> = {
   staticImage: true,
   flexsearch: {
-    codeblocks: true
+    codeblocks: true,
+    indexKey: (_, route, locale) =>
+      route === "/404" ? null : (locale || DEFAULT_LOCALE)
   },
   codeHighlight: true
 }
