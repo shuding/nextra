@@ -12,6 +12,7 @@
 
 html {
   @apply nx-antialiased nx-text-base;
+  scroll-padding-top: var(--nextra-navbar-height);
   font-feature-settings:
     'rlig' 1,
     'calt' 1,
@@ -152,6 +153,18 @@ input[type='search'] {
     opacity: 0;
     animation: nextra-fadein2 1s ease 0.2s forwards;
   }
+}
+
+.mdx-h2 {
+  @apply nx-mt-10 nx-border-b nx-pb-1 nx-text-3xl nx-border-neutral-200/70 contrast-more:nx-border-neutral-400 dark:nx-border-primary-100/10 contrast-more:dark:nx-border-neutral-400;
+}
+
+.footnotes > h2 {
+  @apply mdx-h2;
+}
+
+.footnotes a[data-footnote-backref] {
+  font-family: initial;
 }
 
 @keyframes nextra-fadein {
