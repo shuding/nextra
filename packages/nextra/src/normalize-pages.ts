@@ -126,7 +126,8 @@ type DocsItem = (MdxFile | FolderWithoutChildren) & {
 
 function findFirstRoute(items: DocsItem[]): string | undefined {
   for (const item of items) {
-    if (item.route) return item.route
+    // seprator route always return `#`
+    if (item.route && item.type !== 'separator') return item.route
     if (item.children) {
       const route = findFirstRoute(item.children)
       if (route) return route
