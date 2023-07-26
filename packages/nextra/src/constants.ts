@@ -16,7 +16,7 @@ export const DEFAULT_CONFIG: Omit<NextraConfig, 'theme'> = {
   flexsearch: {
     codeblocks: true,
     indexKey: (_, route, locale) =>
-      route === "/404" ? null : (locale || DEFAULT_LOCALE)
+      route === '/404' ? null : locale || DEFAULT_LOCALE
   },
   codeHighlight: true
 }

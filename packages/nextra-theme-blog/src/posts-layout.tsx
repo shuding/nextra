@@ -1,4 +1,3 @@
-import { minimatch } from 'minimatch'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import type { ReactElement, ReactNode } from 'react'
@@ -7,6 +6,7 @@ import { useBlogContext } from './blog-context'
 import { MDXTheme } from './mdx-theme'
 import Nav from './nav'
 import { collectPostsAndNavs } from './utils/collect'
+import { pageType } from './utils/frontmatter'
 import getTags from './utils/get-tags'
 
 export function PostsLayout({
@@ -17,13 +17,10 @@ export function PostsLayout({
   const { config, opts } = useBlogContext()
   const { posts } = collectPostsAndNavs({ config, opts })
   const router = useRouter()
-  const { type } = opts.frontMatter
+  const type = pageType(opts, config)
   const tagName = type === 'tag' ? router.query.tag : null
 
   const postList = posts.map(post => {
-    for (const excludePattern of config.excludePatterns || []) {
-      if (minimatch(post.route, excludePattern)) return null
-    }
     if (tagName) {
       const tags = getTags(post)
       if (!Array.isArray(tagName) && !tags.includes(tagName)) {

@@ -12,7 +12,8 @@ const layoutMap = {
   post: ArticleLayout,
   page: PageLayout,
   posts: PostsLayout,
-  tag: PostsLayout
+  tag: PostsLayout,
+  ['hidden-page']: PageLayout
 }
 
 const BlogLayout = ({
@@ -23,8 +24,11 @@ const BlogLayout = ({
   const type = opts.frontMatter.type || 'post'
   const Layout = layoutMap[type]
   if (!Layout) {
+    const supported = Object.keys(layoutMap)
+      .map(type => `"${type}"`)
+      .join(', ')
     throw new Error(
-      `nextra-theme-blog does not support the layout type "${type}" It only supports "post", "page", "posts" and "tag"`
+      `nextra-theme-blog does not support the layout type "${type}" It only supports ${supported}`
     )
   }
   return (

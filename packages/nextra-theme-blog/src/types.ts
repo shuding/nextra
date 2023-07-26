@@ -13,7 +13,6 @@ export interface NextraBlogTheme {
   }
   darkMode?: boolean
   dateFormatter?: (date: Date) => string
-  excludePatterns?: string[]
   footer?: ReactNode
   head?: ({
     meta,
@@ -22,6 +21,7 @@ export interface NextraBlogTheme {
     meta: Record<string, any>
     title: string
   }) => ReactNode
+  hiddenPages?: string[]
   navs?: {
     name: string
     url: string
@@ -40,7 +40,7 @@ export type BlogFrontMatter = {
   description?: string
   tag?: string | string[]
   title?: string
-  type?: 'post' | 'page' | 'posts' | 'tag'
+  type?: 'post' | 'page' | 'posts' | 'tag' | 'hidden-page'
 }
 
 export interface LayoutProps {

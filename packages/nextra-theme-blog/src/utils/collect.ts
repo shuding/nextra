@@ -1,32 +1,35 @@
 import type { MdxFile, PageMapItem } from 'nextra'
-import type { LayoutProps } from '../types'
+import type { LayoutProps, NextraBlogTheme } from '../types'
 import { sortDate } from './date'
+import { pageType } from './frontmatter'
 import traverse from './traverse'
 
-const isNav = (page: PageMapItem): page is MdxFile => {
-  const type = 'frontMatter' in page && page.frontMatter?.type
-  return type && ['page', 'posts'].includes(type)
+const isNav = (page: PageMapItem, config: NextraBlogTheme): page is MdxFile => {
+  const type = 'frontMatter' in page && pageType(page, config)
+  return type !== false && ['page', 'posts'].includes(type)
 }
-const isPost = (page: PageMapItem): page is MdxFile => {
+const isPost = (
+  page: PageMapItem,
+  config: NextraBlogTheme
+): page is MdxFile => {
   if (
     page.kind === 'Folder' ||
     page.kind === 'Meta' ||
     page.name.startsWith('_')
   )
     return false
-  const type = page.frontMatter?.type
-  return !type || type === 'post'
+  return pageType(page, config) === 'post'
 }
 
-export const collectPostsAndNavs = ({ opts }: LayoutProps) => {
+export const collectPostsAndNavs = ({ config, opts }: LayoutProps) => {
   const posts: MdxFile[] = []
   const navPages: (MdxFile & { active: boolean })[] = []
   const { route } = opts
   traverse(opts.pageMap, page => {
-    if (isNav(page)) {
+    if (isNav(page, config)) {
       navPages.push({ ...page, active: page.route === route })
     }
-    if (isPost(page)) {
+    if (isPost(page, config)) {
       posts.push(page)
     }
   })

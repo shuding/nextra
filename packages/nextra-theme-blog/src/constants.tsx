@@ -2,11 +2,11 @@
 import type { NextraBlogTheme } from './types'
 
 export const DEFAULT_THEME: NextraBlogTheme = {
-  excludePatterns: ["/404"],
   footer: (
     <small className="nx-mt-32 nx-block">
       CC BY-NC 4.0 {new Date().getFullYear()} © Shu Ding.
     </small>
   ),
+  hiddenPages: ['/404'],
   readMore: 'Read More →'
 }
