@@ -42,6 +42,7 @@ export function Search({
   const input = useRef<HTMLInputElement>(null)
   const ulRef = useRef<HTMLUListElement>(null)
   const [focused, setFocused] = useState(false)
+  const [compositionend, setCompositionend] = useState(true);
 
   useEffect(() => {
     setActive(0)
@@ -123,7 +124,7 @@ export function Search({
         }
         case 'Enter': {
           const result = results[active]
-          if (result) {
+          if (result && compositionend) {
             void router.push(result.route)
             finishSearch()
           }
@@ -136,7 +137,7 @@ export function Search({
         }
       }
     },
-    [active, results, router, finishSearch, handleActive]
+    [active, results, router, finishSearch, handleActive, compositionend]
   )
 
   const mounted = useMounted()
@@ -207,6 +208,8 @@ export function Search({
         onBlur={() => {
           setFocused(false)
         }}
+        onCompositionStart={() => setCompositionend(false)}
+        onCompositionEnd={() => setCompositionend(true)}
         type="search"
         placeholder={renderString(config.search.placeholder)}
         onKeyDown={handleKeyDown}
