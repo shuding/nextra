@@ -79,8 +79,8 @@ importers:
         specifier: 5.0.1
         version: 5.0.1
       tsup:
-        specifier: 7.0.0
-        version: 7.0.0(typescript@5.1.6)
+        specifier: 7.2.0
+        version: 7.2.0(typescript@5.1.6)
       turbo:
         specifier: 1.10.12
         version: 1.10.12
@@ -9858,8 +9858,8 @@ packages:
   /tslib@2.4.0:
     resolution: {integrity: sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==}
 
-  /tsup@7.0.0(typescript@5.1.6):
-    resolution: {integrity: sha512-yYARDRkPq07mO3YUXTvF12ISwWQG57Odve8aFEgLdHyeGungxuKxb19yf9G0W8y59SZFkLnRj1gkoVk1gd5fbQ==}
+  /tsup@7.2.0(typescript@5.1.6):
+    resolution: {integrity: sha512-vDHlczXbgUvY3rWvqFEbSqmC1L7woozbzngMqTtL2PGBODTtWlRwGDDawhvWzr5c1QjKe4OAKqJGfE1xeXUvtQ==}
     engines: {node: '>=16.14'}
     hasBin: true
     peerDependencies:
