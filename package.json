@@ -24,7 +24,7 @@
     "@changesets/cli": "2.26.2",
     "@edge-runtime/vm": "3.0.4",
     "@ianvs/prettier-plugin-sort-imports": "^4.0.2",
-    "@next/eslint-plugin-next": "13.4.12",
+    "@next/eslint-plugin-next": "13.4.13",
     "@typescript-eslint/eslint-plugin": "6.2.1",
     "@typescript-eslint/parser": "6.2.1",
     "eslint": "8.46.0",
