@@ -46,7 +46,7 @@ function HeadingLink({
   return (
     <Tag
       className={cn(
-        'nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100',
+        'mdx-header',
         {
           h2: 'mdx-h2',
           h3: 'nx-mt-8 nx-text-2xl',
