@@ -1,0 +1,65 @@
+import { Steps } from 'nextra/components'
+
+# Google Analytics
+
+This page describes how to configure your Nextra website with Google Analytics (`gtag.js`).
+
+**Note:** This guide assumes you already have a [Google Analytics measurement id](https://support.google.com/analytics/answer/9304153) for your Nextra site.
+
+## Configuration
+
+<Steps>
+
+### Create a Custom App
+
+Add a custom App (`_app.mdx`) to the `pages` directory of your project.
+
+### Add Google Analytics to Your App
+
+Use [`next/script`](https://nextjs.org/docs/pages/building-your-application/optimizing/scripts) to add your Google Analytics tracking code to the custom App (`pages/_app.mdx`) as follows:
+
+```jsx filename="pages/_app.mdx"
+import Script from "next/script";
+
+export default function App({ Component, pageProps }) {
+const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID;
+
+return (
+<>
+  <Component {...pageProps} />
+  {/* Global Site Tag (gtag.js) - Google Analytics */}
+  <Script
+    src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+  />
+  <Script id="google-analytics">
+    {`
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+        
+      gtag('config', '${GA_TRACKING_ID}');
+    `}
+  </Script>
+</>
+); }
+```
+
+### Load Measurement ID into `process.env`
+
+Create a `.env.local` file in your project's root directory. And add your [Google Analytics measurement id](https://support.google.com/analytics/answer/9539598) to it:
+
+```txt filename=".env.local"
+NEXT_PUBLIC_GA_ID=G-xxxxxxxxxx
+```
+
+**Note:** Replace `G-xxxxxxxxxx` with your measurement id.
+
+### Add Measurement ID to Your Server's Environment Variable
+
+Add your Google Analytics tracking id to [Vercel's environment variable](https://vercel.com/docs/concepts/projects/environment-variables).
+
+### Deploy Your App to Vercel
+
+[Deploy your app](https://vercel.com/docs/concepts/deployments/overview) to start tracking visitors and page views in your app's Google Analytics dashboard.
+
+</Steps>
