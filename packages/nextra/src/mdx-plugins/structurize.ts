@@ -102,7 +102,7 @@ export const structurize = (structurizedData, options) => {
       if (type === 'heading' && node.depth > 1) {
         structurizedData[activeSlug] = cleanup(content)
         content = ''
-        activeSlug = slugger.slug(result) + '#' + result
+        activeSlug = (node.data?.hProperties?.id ?? slugger.slug(result)) + '#' + result
       }
 
       return result
