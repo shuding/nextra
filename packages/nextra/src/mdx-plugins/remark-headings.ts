@@ -51,19 +51,22 @@ export const remarkHeadings: Plugin<[], Root> = function (this: Processor) {
           const sameHeadingIdIndex = data.headingMeta.headings.findIndex(h => h.id == heading.id);
 
           // no need to iterate on depth 1 headings
-          if(sameHeadingIdIndex !== -1 && heading.depth > 1) {
-            const oldHeading = data.headingMeta.headings[sameHeadingIdIndex]
-            // findLastIndex workaround: clone, rotate, findLastIndex (todo: refactor)
-            const lowerDepthHeadingIndex = data.headingMeta.headings
-              .slice(0)
-              .reverse()
-              .findIndex((heading) => heading.depth == oldHeading.depth - 1);
-
-            // append lower heading id
-            if(lowerDepthHeadingIndex) heading.id = slugger.slug(`${data.headingMeta.headings[lowerDepthHeadingIndex].id}-${heading.id}`);
+          if (sameHeadingIdIndex !== -1 && heading.depth > 1) {
+            const oldHeading = data.headingMeta.headings[sameHeadingIdIndex];
+            let lowerDepthHeadingIndex = -1;
+          
+            for (let i = data.headingMeta.headings.length - 1; i >= 0; i--) {
+              if (data.headingMeta.headings[i].depth === oldHeading.depth - 1) {
+                lowerDepthHeadingIndex = i;
+                break;
+              }
+            }
+          
+            // prepend lower heading id
+            if (lowerDepthHeadingIndex) {
+              heading.id = slugger.slug(`${data.headingMeta.headings[lowerDepthHeadingIndex].id}-${heading.id}`);
+            }
           }
-
-          data.headingMeta.headings.push(heading)
           if (hasJsxInH1) {
             data.headingMeta.hasJsxInH1 = true
           }
