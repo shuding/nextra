@@ -64,7 +64,6 @@ export const remarkHeadings: Plugin<[], Root> = function (this: Processor) {
         }
       }
     )
-    console.log(data.headingMeta.headings)
     done()
   }
 }
