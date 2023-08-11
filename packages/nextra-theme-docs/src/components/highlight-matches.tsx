@@ -30,7 +30,7 @@ export const HighlightMatches = memo<MatchArgs>(function HighlightMatches({
 
   while (
     (result = regexp.exec(value)) &&
-    // case `>  ` replaced previously to `>||d` + some character provoke memory leak
+    // case `>  ` replaced previously to `>||` + some character provoke memory leak
     regexp.lastIndex !== 0
   ) {
     const before = splitText.splice(0, result.index - index).join('')
