@@ -1,3 +1,4 @@
+import escapeStringRegexp from 'escape-string-regexp'
 import type { ReactElement, ReactNode } from 'react'
 import { memo } from 'react'
 
@@ -14,15 +15,8 @@ export const HighlightMatches = memo<MatchArgs>(function HighlightMatches({
     return null
   }
   const splitText = value ? value.split('') : []
-  const escapedSearch = match
-    .trim()
-    // taken from https://github.com/sindresorhus/escape-string-regexp/blob/main/index.js
-    .replace(/[|\\{}()[\]^$+*?.]/g, '\\$&')
-    .replace(/-/g, '\\x2d')
-  const regexp = new RegExp(
-    '(' + escapedSearch.replaceAll(' ', '|') + ')',
-    'ig'
-  )
+  const escapedSearch = escapeStringRegexp(match.trim())
+  const regexp = new RegExp(escapedSearch.replaceAll(' ', '|'), 'ig')
   let result
   let id = 0
   let index = 0
@@ -30,7 +24,8 @@ export const HighlightMatches = memo<MatchArgs>(function HighlightMatches({
 
   while (
     (result = regexp.exec(value)) &&
-    // case `>  ` replaced previously to `>||` + some character provoke memory leak
+    // case `>  ` replaced previously to `>||` + some character provoke memory leak because
+    // `RegExp#exec` will always return a match
     regexp.lastIndex !== 0
   ) {
     const before = splitText.splice(0, result.index - index).join('')

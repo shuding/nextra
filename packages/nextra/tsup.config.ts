@@ -4,7 +4,6 @@ import fg from 'fast-glob'
 import slash from 'slash'
 import type { Options } from 'tsup'
 import { defineConfig } from 'tsup'
-import tsconfig from './tsconfig.json'
 
 const CLIENT_ENTRY = [
   'src/{use-internals,mdx,setup-page,normalize-pages}.ts',
@@ -69,8 +68,7 @@ export default defineConfig([
     name: 'nextra',
     entry: ['src/index.js', 'src/__temp__.js', 'src/catch-all.ts'],
     format: 'cjs',
-    dts: false,
-    target: tsconfig.compilerOptions.target as 'es2016'
+    dts: false
   },
   {
     name: 'nextra-esm',
