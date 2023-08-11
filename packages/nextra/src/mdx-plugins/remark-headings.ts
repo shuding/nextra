@@ -67,6 +67,8 @@ export const remarkHeadings: Plugin<[], Root> = function (this: Processor) {
               heading.id = slugger.slug(`${data.headingMeta.headings[lowerDepthHeadingIndex].id}-${heading.id}`);
             }
           }
+          data.headingMeta.headings.push(heading)
+          
           if (hasJsxInH1) {
             data.headingMeta.hasJsxInH1 = true
           }
