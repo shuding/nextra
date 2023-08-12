@@ -18,7 +18,7 @@ const getFlattenedValue = (node: Parent): string =>
     .join('')
 
 export const remarkHeadings: Plugin<[], Root> = function (this: Processor) {
-  const data = this.data() as {
+  const { headingMeta } = this.data() as {
     headingMeta: Pick<PageOpts, 'headings' | 'hasJsxInH1' | 'title'>
   }
   const slugger = new Slugger()
@@ -52,12 +52,12 @@ export const remarkHeadings: Plugin<[], Root> = function (this: Processor) {
             value,
             id
           }
-          data.headingMeta.headings.push(heading)
+          headingMeta.headings.push(heading)
           if (hasJsxInH1) {
-            data.headingMeta.hasJsxInH1 = true
+            headingMeta.hasJsxInH1 = true
           }
           if (node.depth === 1) {
-            data.headingMeta.title = heading.value
+            headingMeta.title = heading.value
           }
 
           return

@@ -15,8 +15,10 @@
     "lint": "eslint --cache --ignore-path .gitignore --max-warnings 0 .",
     "lint:prettier": "prettier --cache --check --ignore-path .gitignore --ignore-path .prettierignore .",
     "prettier": "pnpm lint:prettier --write",
+    "release": "changeset publish",
     "test": "turbo run test",
-    "types:check": "turbo run types:check"
+    "types:check": "turbo run types:check",
+    "version": "changeset version"
   },
   "devDependencies": {
     "@changesets/cli": "2.26.2",
