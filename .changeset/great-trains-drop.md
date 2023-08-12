@@ -3,6 +3,5 @@
 'nextra': patch
 ---
 
-fix `Warning: Prop `href` did not match. Server: "/blog.en-US#" Client: "/blog#"`
-
-export `LocaleSwitch` from `nextra-theme-docs`
+fix `Warning: Prop href did not match. Server: "/blog.en-US#" Client: "/blog#"` in
+by `normalizePages` from nextra/normalize-pages`
