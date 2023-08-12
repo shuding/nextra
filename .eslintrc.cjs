@@ -43,6 +43,8 @@ module.exports = {
         'unicorn/no-negated-condition': 'error',
         'prefer-regex-literals': ['error', { disallowRedundantWrapping: true }],
         'object-shorthand': ['error', 'always'],
+        'unicorn/prefer-regexp-test': 'error',
+        '@typescript-eslint/prefer-for-of': 'error',
         // todo: enable
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-non-null-assertion': 'off',

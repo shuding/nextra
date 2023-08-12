@@ -22,7 +22,7 @@ jobs:
       - name: Checkout Master
         uses: actions/checkout@v3
 
-      - uses: pnpm/action-setup@v2.3.0
+      - uses: pnpm/action-setup@v2.4.0
         with:
           version: 8
 
@@ -35,8 +35,8 @@ jobs:
       - name: Install Dependencies
         run: pnpm i
 
-      - name: Site
-        run: pnpm run build:all
+      - name: Build All
+        run: pnpm build:all
 
       - name: Test
         run: pnpm test
@@ -44,8 +44,5 @@ jobs:
       - name: Clean
         run: pnpm clean
 
-      - name: Build
-        run: pnpm build
-
       - name: Type Check
-        run: pnpm run types:check
+        run: pnpm types:check
