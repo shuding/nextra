@@ -215,7 +215,12 @@ export const getComponents = ({
         {...props}
       />
     ),
-    hr: props => <hr className="nx-my-8 dark:nx-border-gray-900" {...props} />,
+    hr: props => (
+      <hr
+        className="nx-my-8 nx-border-neutral-200/70 contrast-more:nx-border-neutral-400 dark:nx-border-primary-100/10 contrast-more:dark:nx-border-neutral-400"
+        {...props}
+      />
+    ),
     a: Link,
     table: props => (
       <Table
