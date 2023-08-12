@@ -10,5 +10,13 @@ module.exports = {
     // for sorting imports
     require('@ianvs/prettier-plugin-sort-imports')
   ],
+  overrides: [
+    {
+      files: '*.svg',
+      options: {
+        parser: 'html'
+      }
+    }
+  ],
   proseWrap: 'always' // printWidth line breaks in md/mdx
 }

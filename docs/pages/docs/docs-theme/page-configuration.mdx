@@ -9,7 +9,7 @@ navigation bar and the sidebar.
 
 import { Screenshot } from 'components/screenshot'
 import Video from 'components/video'
-import { Callout, FileTree } from 'nextra-theme-docs'
+import { Callout, FileTree } from 'nextra/components'
 import menuImage from '../../../public/assets/docs/menu.png'
 
 <Callout>
@@ -234,7 +234,6 @@ And it will look like this:
 <div className="mt-4 text-center text-sm">
   [Live example on StackBlitz
   ↗](https://stackblitz.com/edit/nextra-2-docs-eszspq?file=pages%2F_meta.json)
-  <span className="sr-only"> (opens in a new tab)</span>
 </div>
 
 You can also hide links like `Home` from the navbar with the
@@ -250,7 +249,6 @@ option:
 <div className="mt-8 text-center text-sm">
   [Live example on StackBlitz
   ↗](https://stackblitz.com/edit/nextra-2-docs-2qopvp?file=pages%2F_meta.json)
-  <span className="sr-only"> (opens in a new tab)</span>
 </div>
 
 ```json filename="pages/_meta.json"
@@ -423,5 +421,4 @@ the `"article"` typesetting to make it look like an elegant article page:
 <div className="mt-4 text-center text-sm">
   [Live example on StackBlitz
   ↗](https://stackblitz.com/edit/nextra-2-docs-hg77h3?file=pages%2F_meta.json,pages%2Findex.mdx)
-  <span className="sr-only"> (opens in a new tab)</span>
 </div>

@@ -1,0 +1,56 @@
+import { Steps } from 'nextra/components'
+
+# Steps Component
+
+A built-in component to turn a numbered list into a visual representation of
+steps.
+
+## Example
+
+<Steps>
+
+### This is the first step
+
+This is the first step description.
+
+### This is the second step
+
+This is the second step description.
+
+### This is the third step
+
+This is the third step description.
+
+</Steps>
+
+## Usage
+
+Wrap a set of markdown h3 headings with the `Steps` component to turn them into
+visual steps.
+
+<Steps>
+
+### Step 1
+
+Content for step 1.
+
+### Step 2
+
+Contents for step 2.
+
+</Steps>
+
+{/* prettier-ignore */}
+```mdx
+import { Steps } from 'nextra/components'
+
+<Steps>
+### Step 1
+
+Contents for step 1.
+
+### Step 2
+
+Contents for step 2.
+</Steps>
+```

@@ -2,8 +2,8 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import fg from 'fast-glob'
 import slash from 'slash'
+import type { Options } from 'tsup'
 import { defineConfig } from 'tsup'
-import tsconfig from './tsconfig.json'
 
 const CLIENT_ENTRY = [
   'src/{use-internals,mdx,setup-page,normalize-pages}.ts',
@@ -14,7 +14,7 @@ const CLIENT_ENTRY = [
 const entries = fg.sync(CLIENT_ENTRY, { absolute: true })
 const entriesSet = new Set(entries)
 
-const sharedConfig = defineConfig({
+const sharedConfig = {
   // import.meta is available only from es2020
   target: 'es2020',
   format: 'esm',
@@ -61,15 +61,14 @@ const sharedConfig = defineConfig({
       }
     }
   ]
-})
+} satisfies Options
 
 export default defineConfig([
   {
     name: 'nextra',
     entry: ['src/index.js', 'src/__temp__.js', 'src/catch-all.ts'],
     format: 'cjs',
-    dts: false,
-    target: tsconfig.compilerOptions.target as 'es2016'
+    dts: false
   },
   {
     name: 'nextra-esm',

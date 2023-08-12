@@ -6,7 +6,7 @@ Markdown-based content with ease.
 
 ## Quick Start
 
-import { Card, Cards } from 'nextra-theme-docs'
+import { Card, Cards } from 'nextra/components'
 
 To start using Nextra, you need to select a theme first:
 
@@ -19,5 +19,41 @@ To start using Nextra, you need to select a theme first:
   </Card>
 </Cards>
 
-If you want to use Nextra without a preset theme, or build your own theme, you
-can follow the [Custom Theme](/docs/custom-theme) docs.
+If you want to use Nextra without using these built-in themes, you can follow
+the [Custom Theme](/docs/custom-theme) docs.
+
+## Nextra FAQ
+
+The Nextra FAQ is a collection of useful questions and answers about the
+project. If you have a question that isn't answered here, please
+[open a discussion](https://github.com/shuding/nextra/discussions).
+
+export function FAQBox({ title, children }) {
+  return (
+    <details
+      open
+      className="last-of-type:mb-0 rounded-lg bg-neutral-50 dark:bg-neutral-800 p-2 mt-4"
+    >
+      <summary>
+        <strong className="text-lg">{title}</strong>
+      </summary>
+      <div className="nx-p-2">{children}</div>
+    </details>
+  )
+}
+
+<FAQBox title="Can I use X with Nextra?">
+  The answer is “yes” for most things. Since Nextra is just a Next.js plugin, almost all the things
+  that can be done with React can be done with Nextra. Here are some examples and guides:
+
+- [Use Tailwind CSS](/docs/guide/tailwind-css)
+- [Use custom CSS and Sass](/docs/guide/custom-css)
+- [Use custom fonts](https://nextjs.org/docs/basic-features/font-optimization)
+
+</FAQBox>
+
+<FAQBox title="How can I add a live coding component in Nextra?">
+  There are libraries like [Sandpack](https://sandpack.codesandbox.io) and
+  [react-live](https://github.com/FormidableLabs/react-live) that can help you
+  add live coding components to your MDX.
+</FAQBox>

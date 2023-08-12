@@ -1,6 +1,7 @@
 import { useTheme } from 'next-themes'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
+import type { ReactElement } from 'react'
 import { useEffect } from 'react'
 import { useBlogContext } from './blog-context'
 
@@ -9,7 +10,7 @@ const Cusdis = dynamic(
   { ssr: false }
 )
 
-const Comments = () => {
+function Comments(): ReactElement | null {
   const { config, opts } = useBlogContext()
   const router = useRouter()
   const { resolvedTheme } = useTheme()

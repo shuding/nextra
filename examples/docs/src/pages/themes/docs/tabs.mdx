@@ -4,7 +4,7 @@ A built-in component provided by `nextra-theme-docs`.
 
 ## Example
 
-import { Tab, Tabs } from 'nextra-theme-docs'
+import { Tab, Tabs } from 'nextra/components'
 
 <Tabs items={['JavaScript', 'C++', {label:'C', disabled: true}, 'Python']} defaultIndex={1}>
   <Tab>
@@ -61,7 +61,7 @@ import { Tab, Tabs } from 'nextra-theme-docs'
 ### React Component
 
 ```jsx filename="tabs.jsx"
-import { Tabs, Tab } from 'nextra-theme-docs'
+import { Tabs, Tab } from 'nextra/components'
 const items = ['1', '2', '3', '4']
 const defaultIndex = 1
 const Component = () => (

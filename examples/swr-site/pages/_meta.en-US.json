@@ -49,7 +49,6 @@
     "theme": {
       "sidebar": false,
       "toc": true,
-      "footer": true,
       "breadcrumb": false,
       "typesetting": "article"
     }

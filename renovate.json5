@@ -17,7 +17,9 @@
         'eslint-plugin-typescript-sort-keys',
         'eslint-plugin-unicorn',
         'prettier',
-        'prettier-plugin-tailwindcss'
+        'prettier-plugin-tailwindcss',
+        'prettier-plugin-pkg',
+        '@ianvs/prettier-plugin-sort-imports'
       ]
     }
   ]

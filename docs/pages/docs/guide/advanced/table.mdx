@@ -1,4 +1,4 @@
-import { Callout, Steps } from 'nextra-theme-docs'
+import { Callout, Steps } from 'nextra/components'
 
 # Rendering Tables
 
@@ -23,7 +23,7 @@ will be rendered as:
 
 ## HTML Literal Tables
 
-If you'll try render the following literal `<table />{:jsx}` element:
+If you try to render the following literal `<table />{:jsx}` element:
 
 ```mdx filename="Markdown"
 <table>
@@ -73,7 +73,7 @@ you'll get the following result:
   </tbody>
 </table>
 
-<Callout emoji="⚠️" type="warning">
+<Callout type="warning">
   Confused by unstyled elements? We explained [here](#why-this-happens), why
   this happens.
 </Callout>
@@ -129,7 +129,7 @@ will be rendered as:
   </tbody>
 </table>
 
-<Callout emoji="⚠️" type="warning">
+<Callout type="warning">
   Confused by unstyled elements? We explain below 👇, why it's happens.
 </Callout>
 
@@ -178,8 +178,8 @@ HTML elements for your tables, do the following:
 <Steps>
 ### Install `remark-mdx-disable-explicit-jsx` package
 
-```sh
-pnpm add remark-mdx-disable-explicit-jsx
+```sh npm2yarn
+npm i remark-mdx-disable-explicit-jsx
 ```
 
 ### Setup

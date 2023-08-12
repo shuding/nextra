@@ -229,7 +229,7 @@ export function normalizePages({
           if (key !== '*') {
             items.push({
               name: key,
-              route: '#',
+              route: '',
               ...meta[key]
             })
           }
@@ -290,7 +290,6 @@ export function normalizePages({
       })
 
     const title = extendedMeta.title || (type !== 'separator' && a.name)
-
     const getItem = (): Item => ({
       ...a,
       type,
@@ -429,7 +428,6 @@ export function normalizePages({
         docsDirectories.push(item)
     }
   }
-
   return {
     activeType,
     activeIndex,

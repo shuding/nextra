@@ -1,5 +1,88 @@
 # nextra-theme-blog
 
+## 2.10.0
+
+### Minor Changes
+
+- e54b008: - add `@theguild/remark-npm2yarn` package that replaces the code
+  block that has `npm2yarn` metadata with `<Tabs />` and `<Tab />` components
+  from `nextra/components`.
+
+  - `<Tabs />` now has `selectedKey` prop, the chosen tab is saved in the local
+    storage, which will be chosen in future page renders.
+
+  More info https://nextra.site/docs/guide/advanced/npm2yarn
+
+### Patch Changes
+
+- Updated dependencies [e54b008]
+  - nextra@2.10.0
+
+## 2.9.0
+
+### Minor Changes
+
+- 16bbb88: Move below packages to nextra package
+
+  - `<Cards />` and `<Card />`
+  - `<Tabs />` and `<Tab />`
+  - `<Steps />`
+  - `<FileTree />`
+
+  to import them you can use the following in your official `nextra-theme-blog`
+  and `nextra-theme-docs`
+
+  ```js
+  import { Card, Cards } from 'nextra/components'
+  ```
+
+  ```js
+  import { Tab, Tabs } from 'nextra/components'
+  ```
+
+  ```js
+  import { Steps } from 'nextra/components'
+  ```
+
+  ```js
+  import { FileTree } from 'nextra/components'
+  ```
+
+### Patch Changes
+
+- b1a7eba: `opens in new tab` span element should have `user-select: none`
+- Updated dependencies [16bbb88]
+- Updated dependencies [23a25b1]
+  - nextra@2.9.0
+
+## 2.8.0
+
+### Patch Changes
+
+- bef7324: accessibility issues for text and navbar in light mode
+- 6c12bf4: fix broken code format while selecting and copying code with
+  `showLineNumbers` option enabled
+- Updated dependencies [6c12bf4]
+  - nextra@2.8.0
+
+## 2.7.1
+
+### Patch Changes
+
+- Updated dependencies [0e53ca51]
+  - nextra@2.7.1
+
+## 2.7.0
+
+### Minor Changes
+
+- 44626e8f: support mermaid diagrams
+
+### Patch Changes
+
+- Updated dependencies [44626e8f]
+  - nextra@2.7.0
+
 ## 2.6.2
 
 ### Patch Changes

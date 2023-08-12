@@ -1,5 +1,71 @@
 # nextra
 
+## 2.10.0
+
+### Minor Changes
+
+- e54b008: - add `@theguild/remark-npm2yarn` package that replaces the code
+  block that has `npm2yarn` metadata with `<Tabs />` and `<Tab />` components
+  from `nextra/components`.
+
+  - `<Tabs />` now has `selectedKey` prop, the chosen tab is saved in the local
+    storage, which will be chosen in future page renders.
+
+  More info https://nextra.site/docs/guide/advanced/npm2yarn
+
+## 2.9.0
+
+### Minor Changes
+
+- 16bbb88: Move below packages to nextra package
+
+  - `<Cards />` and `<Card />`
+  - `<Tabs />` and `<Tab />`
+  - `<Steps />`
+  - `<FileTree />`
+
+  to import them you can use the following in your official `nextra-theme-blog`
+  and `nextra-theme-docs`
+
+  ```js
+  import { Card, Cards } from 'nextra/components'
+  ```
+
+  ```js
+  import { Tab, Tabs } from 'nextra/components'
+  ```
+
+  ```js
+  import { Steps } from 'nextra/components'
+  ```
+
+  ```js
+  import { FileTree } from 'nextra/components'
+  ```
+
+### Patch Changes
+
+- 23a25b1: replace last match of `export default MDXContent;`
+
+## 2.8.0
+
+### Patch Changes
+
+- 6c12bf4: fix broken code format while selecting and copying code with
+  `showLineNumbers` option enabled
+
+## 2.7.1
+
+### Patch Changes
+
+- 0e53ca51: remarkMermaid should be before removing imports for remote markdown
+
+## 2.7.0
+
+### Minor Changes
+
+- 44626e8f: support mermaid diagrams
+
 ## 2.6.2
 
 ### Patch Changes
