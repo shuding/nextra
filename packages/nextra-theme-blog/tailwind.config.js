@@ -11,6 +11,7 @@ module.exports = {
       primary: colors.blue
     },
     extend: {
+      colors: docsConfig.theme.extend.colors,
       typography: theme => ({
         dark: {
           css: {

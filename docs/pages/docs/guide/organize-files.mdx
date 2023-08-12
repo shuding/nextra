@@ -1,3 +1,6 @@
+import { FileIcon, NewsletterIcon } from '@components/icons'
+import { Card, Cards, FileTree } from 'nextra/components'
+
 # Organize Files
 
 Nextra first collects all your Markdown files and configurations from the
@@ -7,7 +10,7 @@ site, to render things such as the _navigation bar_ and _sidebar_ below:
 <br />
 
 <figure>
-  ![](/assets/routing@1x.png)
+  <>![Example of Nextra Theme Docs](/assets/routing@1x.png)</>
   <figcaption>
     Example: [Nextra Docs Theme](/docs/docs-theme) has sidebar and navbar
     generated automatically from Markdown files.
@@ -23,14 +26,16 @@ from filenames.
 
 For example if you have the following structure:
 
-```text
-pages/
-  contact.md
-  index.mdx
-  about/
-    legal.md
-    index.mdx
-```
+<FileTree>
+  <FileTree.Folder name="pages" defaultOpen>
+    <FileTree.File name="contact.md" />
+    <FileTree.File name="index.mdx" />
+    <FileTree.Folder name="about" defaultOpen>
+      <FileTree.File name="legal.md" />
+      <FileTree.File name="index.mdx" />
+    </FileTree.Folder>
+  </FileTree.Folder>
+</FileTree>
 
 The resolved page map will be (note that all names were sorted alphabetically):
 
@@ -58,16 +63,18 @@ That’s where `_meta.json` comes in. You can have an `_meta.json` file in each
 directory, and it will be used to override the default configuration of each
 page:
 
-```text
-pages/
-  _meta.json
-  contact.md
-  index.mdx
-  about/
-    _meta.json
-    legal.md
-    index.mdx
-```
+<FileTree>
+  <FileTree.Folder name="pages" defaultOpen>
+    <FileTree.File name="_meta.json" />
+    <FileTree.File name="contact.md" />
+    <FileTree.File name="index.mdx" />
+    <FileTree.Folder name="about" defaultOpen>
+      <FileTree.File name="_meta.json" />
+      <FileTree.File name="legal.md" />
+      <FileTree.File name="index.mdx" />
+    </FileTree.Folder>
+  </FileTree.Folder>
+</FileTree>
 
 And you can put this in your `pages/_meta.json` file:
 
@@ -96,47 +103,15 @@ you can do it with `title` and have other configurations in there as well:
 The extra configurations are passed to the **theme** as additional information.
 Check the corresponding pages for more information:
 
-import { Card, Cards } from 'nextra-theme-docs'
-
 <Cards>
   <Card
-    icon={
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth={1.5}
-        stroke="currentColor"
-        className="h-6 w-6"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z"
-        />
-      </svg>
-    }
+    icon={<NewsletterIcon />}
     title="Docs Theme →"
     href="/docs/docs-theme/page-configuration"
   />
   <Card
-    icon={
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth={1.5}
-        stroke="currentColor"
-        className="h-6 w-6"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
-        />
-      </svg>
-    }
+    icon={<FileIcon />}
     title="Blog Theme →"
-    href="/docs/blog-theme/page-configuration"
+    href="/docs/blog-theme/start"
   />
 </Cards>

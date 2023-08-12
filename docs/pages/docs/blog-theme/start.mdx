@@ -1,4 +1,4 @@
-import { Callout, Tab, Tabs, Steps } from 'nextra-theme-docs'
+import { Callout, Steps } from 'nextra/components'
 
 # Get Started
 
@@ -8,7 +8,8 @@ import { Callout, Tab, Tabs, Steps } from 'nextra-theme-docs'
   An example of the blog theme can be found [here](https://demo.vercel.blog).
 </Callout>
 
-Similar to the [Docs Theme](/docs/docs-theme/start), you can install the blog theme with the following commands:
+Similar to the [Docs Theme](/docs/docs-theme/start), you can install the blog
+theme with the following commands:
 
 ## Quick Start from Template
 
@@ -17,25 +18,13 @@ Similar to the [Docs Theme](/docs/docs-theme/start), you can install the blog th
 <Steps>
 ### Install
 
-To create a Nextra Docs site manually, you have to install **Next.js**, **React**, **Nextra**, and **Nextra Blog Theme**. In your project directory, run the following command to install the dependencies:
+To create a Nextra Docs site manually, you have to install **Next.js**,
+**React**, **Nextra**, and **Nextra Blog Theme**. In your project directory, run
+the following command to install the dependencies:
 
-<Tabs items={['pnpm', 'npm', 'yarn']}>
-  <Tab>
-    ```bash
-    pnpm i next react react-dom nextra nextra-theme-blog
-    ```
-  </Tab>
-  <Tab>
-    ```bash
-    npm i next react react-dom nextra nextra-theme-blog
-    ```
-  </Tab>
-  <Tab>
-    ```bash
-    yarn add next react react-dom nextra nextra-theme-blog
-    ```
-  </Tab>
-</Tabs>
+```sh npm2yarn
+npm i next react react-dom nextra nextra-theme-blog
+```
 
 <Callout>
   If you already have Next.js installed in your project, you only need to
@@ -58,11 +47,14 @@ module.exports = withNextra()
 // module.exports = withNextra({ /* other next.js config */ })
 ```
 
-With the above configuration, Nextra can handle Markdown files in your Next.js project, with the specified theme. Other Nextra configurations can be found in [Guide](/docs/guide).
+With the above configuration, Nextra can handle Markdown files in your Next.js
+project, with the specified theme. Other Nextra configurations can be found in
+[Guide](/docs/guide).
 
 ### Create Blog Theme Config
 
-Lastly, create the corresponding `theme.config.jsx` file in your project’s root directory. This will be used to configure the Nextra Blog theme:
+Lastly, create the corresponding `theme.config.jsx` file in your project’s root
+directory. This will be used to configure the Nextra Blog theme:
 
 ```jsx filename="theme.config.jsx"
 export default {

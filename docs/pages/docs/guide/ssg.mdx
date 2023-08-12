@@ -7,7 +7,7 @@ can also be cached by a CDN to maximize the performance.
 
 This is supported by Nextra too. Here's an example:
 
-import { useSSG } from 'nextra/ssg'
+import { useData } from 'nextra/data'
 
 export const getStaticProps = ({ params }) => {
   return fetch(`https://api.github.com/repos/shuding/nextra`)
@@ -15,7 +15,7 @@ export const getStaticProps = ({ params }) => {
     .then(repo => ({
       props: {
         // We add an `ssg` field to the page props,
-        // which will be provided to the Nextra `useSSG` hook.
+        // which will be provided to the Nextra `useData` hook.
         ssg: {
           stars: repo.stargazers_count
         }
@@ -27,11 +27,11 @@ export const getStaticProps = ({ params }) => {
 
 export const Stars = () => {
   // Get the data from SSG, and render it as a component.
-  const { stars } = useSSG()
+  const { stars } = useData()
   return <strong>{stars}</strong>
 }
 
-<div className="mt-6 rounded border border-gray-200 p-4 dark:border-gray-900">
+<div className="mt-6 rounded-xl border border-gray-200 p-4 dark:border-gray-900">
   Nextra has <Stars /> stars on GitHub!
 </div>
 
@@ -44,7 +44,7 @@ enabled, it will be kept up to date.
 Here's the MDX code for the example above:
 
 ```mdx
-import { useSSG } from 'nextra/ssg'
+import { useData } from 'nextra/data'
 
 export const getStaticProps = ({ params }) => {
   return fetch(`https://api.github.com/repos/shuding/nextra`)
@@ -52,7 +52,7 @@ export const getStaticProps = ({ params }) => {
     .then(repo => ({
       props: {
         // We add an `ssg` field to the page props,
-        // which will be provided to the Nextra `useSSG` hook.
+        // which will be provided to the Nextra `useData` hook.
         ssg: {
           stars: repo.stargazers_count
         }
@@ -64,7 +64,7 @@ export const getStaticProps = ({ params }) => {
 
 export const Stars = () => {
   // Get the data from SSG, and render it as a component.
-  const { stars } = useSSG()
+  const { stars } = useData()
   return <strong>{stars}</strong>
 }
 

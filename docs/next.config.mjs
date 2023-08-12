@@ -3,7 +3,6 @@ import nextra from 'nextra'
 const withNextra = nextra({
   theme: 'nextra-theme-docs',
   themeConfig: './theme.config.tsx',
-  staticImage: true,
   latex: true,
   flexsearch: {
     codeblocks: false
@@ -19,9 +18,28 @@ export default withNextra({
   },
   redirects: () => [
     {
-      source: '/docs/docs-theme/built-ins/callout',
-      destination: '/docs/guide/built-ins/callout',
+      source: '/docs/guide/:slug(typescript|latex|tailwind-css|mermaid)',
+      destination: '/docs/guide/advanced/:slug',
+      permanent: true
+    },
+    {
+      source: '/docs/docs-theme/built-ins/:slug(callout|steps|tabs)',
+      destination: '/docs/guide/built-ins/:slug',
       permanent: true
     }
-  ]
+  ],
+  webpack(config) {
+    const allowedSvgRegex = /components\/icons\/.+\.svg$/
+
+    const fileLoaderRule = config.module.rules.find(rule =>
+      rule.test?.test('.svg')
+    )
+    fileLoaderRule.exclude = allowedSvgRegex
+
+    config.module.rules.push({
+      test: allowedSvgRegex,
+      use: ['@svgr/webpack']
+    })
+    return config
+  }
 })
