@@ -18,7 +18,6 @@ export const HighlightMatches = memo<MatchArgs>(function HighlightMatches({
   const escapedSearch = escapeStringRegexp(match.trim())
   const regexp = new RegExp(escapedSearch.replaceAll(' ', '|'), 'ig')
   let result
-  let id = 0
   let index = 0
   const content: (string | ReactNode)[] = []
 
@@ -32,7 +31,7 @@ export const HighlightMatches = memo<MatchArgs>(function HighlightMatches({
     const after = splitText.splice(0, regexp.lastIndex - result.index).join('')
     content.push(
       before,
-      <span key={id++} className="nx-text-primary-600">
+      <span key={result.index} className="nx-text-primary-600">
         {after}
       </span>
     )
