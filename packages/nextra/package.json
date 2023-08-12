@@ -14,90 +14,87 @@
     "./catch-all": "./dist/catch-all.js",
     "./data": {
       "import": "./dist/ssg.js",
-      "types": "./dist/ssg.d.ts"
+      "types": "./dist/ssg.d.mts"
     },
     "./ssg": {
       "import": "./dist/ssg.js",
-      "types": "./dist/ssg.d.ts"
+      "types": "./dist/ssg.d.mts"
     },
     "./loader": "./loader.js",
     "./setup-page": {
       "import": "./dist/setup-page.js",
-      "types": "./dist/setup-page.d.ts"
+      "types": "./dist/setup-page.d.mts"
     },
     "./mdx": {
       "import": "./dist/mdx.js",
-      "types": "./dist/mdx.d.ts"
+      "types": "./dist/mdx.d.mts"
     },
     "./normalize-pages": {
       "import": "./dist/normalize-pages.js",
-      "types": "./dist/normalize-pages.d.ts"
+      "types": "./dist/normalize-pages.d.mts"
     },
     "./components": {
       "import": "./dist/components/index.js",
-      "types": "./dist/components/index.d.ts"
+      "types": "./dist/components/index.d.mts"
     },
     "./mdx-plugins": {
       "import": "./dist/mdx-plugins/index.mjs",
-      "types": "./dist/mdx-plugins/index.d.ts"
+      "types": "./dist/mdx-plugins/index.d.mts"
     },
     "./hooks": {
       "import": "./dist/hooks/index.js",
-      "types": "./dist/hooks/index.d.ts"
+      "types": "./dist/hooks/index.d.mts"
     },
     "./icons": {
       "import": "./dist/icons/index.js",
-      "types": "./dist/icons/index.d.ts"
+      "types": "./dist/icons/index.d.mts"
     },
     "./*": {
       "import": "./dist/*.mjs",
-      "types": "./dist/*.d.ts"
+      "types": "./dist/*.d.mts"
     }
   },
-  "types": "./dist/types.d.ts",
+  "types": "./dist/types.d.mts",
   "typesVersions": {
     "*": {
       "compile": [
-        "./dist/compile.d.ts"
+        "./dist/compile.d.mts"
       ],
       "context": [
-        "./dist/context.d.ts"
-      ],
-      "catch-all": [
-        "./dist/catch-all.d.ts"
+        "./dist/context.d.mts"
       ],
       "data": [
-        "./dist/ssg.d.ts"
+        "./dist/ssg.d.mts"
       ],
       "ssg": [
-        "./dist/ssg.d.ts"
+        "./dist/ssg.d.mts"
       ],
       "locales": [
-        "./dist/locales.d.ts"
+        "./dist/locales.d.mts"
       ],
       "icons": [
-        "./dist/icons/index.d.ts"
+        "./dist/icons/index.d.mts"
       ],
       "components": [
-        "./dist/components/index.d.ts"
+        "./dist/components/index.d.mts"
       ],
       "hooks": [
-        "./dist/hooks/index.d.ts"
+        "./dist/hooks/index.d.mts"
       ],
       "layout": [
-        "./dist/layout.d.ts"
+        "./dist/layout.d.mts"
       ],
       "remote": [
-        "./dist/remote.d.ts"
+        "./dist/remote.d.mts"
       ],
       "mdx": [
-        "./dist/mdx.d.ts"
+        "./dist/mdx.d.mts"
       ],
       "normalize-pages": [
-        "./dist/normalize-pages.d.ts"
+        "./dist/normalize-pages.d.mts"
       ],
       "mdx-plugins": [
-        "./dist/mdx-plugins/index.d.ts"
+        "./dist/mdx-plugins/index.d.mts"
       ]
     }
   },
@@ -150,7 +147,6 @@
   },
   "devDependencies": {
     "@testing-library/react": "^14.0.0",
-    "@types/github-slugger": "^2.0.0",
     "@types/graceful-fs": "^4.1.6",
     "@types/lodash.get": "^4.4.7",
     "@types/mdast": "^4.0.0",

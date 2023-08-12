@@ -9,17 +9,10 @@
     "./style.css": "./style.css",
     ".": {
       "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "types": "./dist/index.d.mts"
     }
   },
-  "types": "./dist/index.d.ts",
-  "typesVersions": {
-    "*": {
-      ".": [
-        "./dist/index.d.ts"
-      ]
-    }
-  },
+  "types": "./dist/index.d.mts",
   "files": [
     "dist",
     "style.css"
@@ -47,7 +40,8 @@
     "@headlessui/react": "^1.7.10",
     "@popperjs/core": "^2.11.6",
     "clsx": "^2.0.0",
-    "flexsearch": "^0.7.21",
+    "escape-string-regexp": "^5.0.0",
+    "flexsearch": "^0.7.31",
     "focus-visible": "^5.2.0",
     "git-url-parse": "^13.1.0",
     "intersection-observer": "^0.12.2",

@@ -15,10 +15,8 @@
     "lint": "eslint --cache --ignore-path .gitignore --max-warnings 0 .",
     "lint:prettier": "prettier --cache --check --ignore-path .gitignore --ignore-path .prettierignore .",
     "prettier": "pnpm lint:prettier --write",
-    "release": "changeset publish",
     "test": "turbo run test",
-    "types:check": "turbo run types:check",
-    "version": "changeset version"
+    "types:check": "turbo run types:check"
   },
   "devDependencies": {
     "@changesets/cli": "2.26.2",
@@ -39,7 +37,7 @@
     "prettier-plugin-pkg": "0.18.0",
     "prettier-plugin-tailwindcss": "0.4.1",
     "rimraf": "5.0.1",
-    "tsup": "7.0.0",
+    "tsup": "7.2.0",
     "turbo": "1.10.12",
     "typescript": "5.1.6"
   },
