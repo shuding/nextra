@@ -114,18 +114,13 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
 
           if (pageOrMenu.type === 'menu') {
             const menu = pageOrMenu as MenuItem
-
-            const isActive =
-              menu.route === activeRoute ||
-              activeRoute.startsWith(menu.route + '/')
-
             return (
               <NavbarMenu
                 key={menu.title}
                 className={cn(
                   classes.link,
                   'nx-flex nx-gap-1',
-                  isActive ? classes.active : classes.inactive
+                  classes.inactive
                 )}
                 menu={menu}
               >
