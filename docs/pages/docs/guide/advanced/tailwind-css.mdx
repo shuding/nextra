@@ -1,0 +1,26 @@
+# Tailwind CSS
+
+Tailwind CSS is a CSS framework that provides a set of pre-defined CSS classes
+to quickly style elements. You can follow the official
+[Tailwind CSS documentation for Next.js](https://tailwindcss.com/docs/guides/nextjs)
+to set up Tailwind CSS for your Nextra project.
+
+To use Tailwind classes in your Markdown files, you will also need to add `.md`
+and `.mdx` files to the `content` list in `tailwind.config.js`:
+
+```js filename="tailwind.config.js" /md,mdx/
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    './pages/**/*.{js,jsx,ts,tsx,md,mdx}',
+    './components/**/*.{js,jsx,ts,tsx,md,mdx}',
+
+    // Or if using `src` directory:
+    './src/**/*.{js,jsx,ts,tsx,md,mdx}'
+  ],
+  theme: {
+    extend: {}
+  },
+  plugins: []
+}
+```

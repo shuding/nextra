@@ -4,7 +4,7 @@ searchable: false
 ---
 
 import Features from '@components/features'
-import { Callout, Tab, Tabs } from 'nextra-theme-docs'
+import { Callout, Tab, Tabs } from 'nextra/components'
 
 {/* wrapped with {} to mark it as javascript so mdx will not put it under a p tag */}
 {<h1 className="text-center font-extrabold md:text-5xl mt-8">SWR</h1>}
@@ -43,8 +43,9 @@ and finally come with the up-to-date data.
 <Callout emoji="✅">
   With SWR, components will get a stream of data updates **constantly** and
   **automatically**.
-  <br />
-  And the UI will be always **fast** and **reactive**.
+
+And the UI will be always **fast** and **reactive**.
+
 </Callout>
 
 <div className="mb-20 mt-16 text-center">

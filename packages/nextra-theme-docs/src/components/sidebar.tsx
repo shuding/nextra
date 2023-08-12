@@ -24,9 +24,9 @@ import { LocaleSwitch } from './locale-switch'
 const TreeState: Record<string, boolean> = Object.create(null)
 
 const FocusedItemContext = createContext<null | string>(null)
-const OnFocuseItemContext = createContext<
-  null | ((item: string | null) => any)
->(null)
+const OnFocusItemContext = createContext<null | ((item: string | null) => any)>(
+  null
+)
 const FolderLevelContext = createContext(0)
 
 const Folder = memo(function FolderInner(props: FolderProps) {
@@ -92,10 +92,25 @@ function FolderImpl({ item, anchors }: FolderProps): ReactElement {
   const rerender = useState({})[1]
 
   useEffect(() => {
-    if (activeRouteInside || focusedRouteInside) {
-      TreeState[item.route] = true
+    const updateTreeState = () => {
+      if (activeRouteInside || focusedRouteInside) {
+        TreeState[item.route] = true
+      }
     }
-  }, [activeRouteInside, focusedRouteInside, item.route])
+    const updateAndPruneTreeState = () => {
+      if (activeRouteInside && focusedRouteInside) {
+        TreeState[item.route] = true
+      } else {
+        delete TreeState[item.route]
+      }
+    }
+    config.sidebar.autoCollapse ? updateAndPruneTreeState() : updateTreeState()
+  }, [
+    activeRouteInside,
+    focusedRouteInside,
+    item.route,
+    config.sidebar.autoCollapse
+  ])
 
   if (item.type === 'menu') {
     const menu = item as MenuItem
@@ -211,7 +226,7 @@ function File({
   anchors: Heading[]
 }): ReactElement {
   const route = useFSRoute()
-  const onFocus = useContext(OnFocuseItemContext)
+  const onFocus = useContext(OnFocusItemContext)
 
   // It is possible that the item doesn't have any route - for example an external link.
   const active = item.route && [route, route + '/'].includes(item.route + '/')
@@ -408,7 +423,7 @@ export function Sidebar({
           })}
         </div>
         <FocusedItemContext.Provider value={focused}>
-          <OnFocuseItemContext.Provider
+          <OnFocusItemContext.Provider
             value={item => {
               setFocused(item)
             }}
@@ -443,7 +458,7 @@ export function Sidebar({
                 anchors={anchors}
               />
             </div>
-          </OnFocuseItemContext.Provider>
+          </OnFocusItemContext.Provider>
         </FocusedItemContext.Provider>
 
         {hasMenu && (
