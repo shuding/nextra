@@ -1,4 +1,5 @@
 import cn from 'clsx'
+// flexsearch types are incorrect, they were overwritten in tsconfig.json
 import FlexSearch from 'flexsearch'
 import { useRouter } from 'next/router'
 import type { ReactElement, ReactNode } from 'react'

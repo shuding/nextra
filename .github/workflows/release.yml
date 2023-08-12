@@ -34,13 +34,13 @@ jobs:
         run: pnpm build
 
       - name: Type Check
-        run: pnpm run types:check
+        run: pnpm types:check
 
       - name: Create Release Pull Request or Publish to npm
         uses: changesets/action@v1
         with:
-          publish: pnpm run release
-          version: pnpm run version
+          publish: changeset publish
+          version: changeset version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
