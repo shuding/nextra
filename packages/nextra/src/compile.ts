@@ -161,7 +161,7 @@ export async function compileMdx(
         remarkGfm,
         remarkCustomHeadingId,
         remarkHeadings,
-        // Should be before remarkHeadings
+        // structurize should be before remarkHeadings because we attach #id attribute to heading node
         searchIndexKey !== null && structurize(structurizedData, flexsearch),
         staticImage && remarkStaticImage,
         readingTime && remarkReadingTime,
