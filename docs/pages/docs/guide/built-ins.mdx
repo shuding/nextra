@@ -1,7 +1,13 @@
-# Built-ins
-
-import { CardsIcon, OneIcon, WarningIcon } from '@components/icons'
+import {
+  CardsIcon,
+  FolderTreeIcon,
+  IdCardIcon,
+  OneIcon,
+  WarningIcon
+} from '@components/icons'
 import { Card, Cards } from 'nextra/components'
+
+# Built-ins
 
 Nextra includes a couple of built-in components that you can use to better style
 your content:
@@ -13,5 +19,15 @@ your content:
     href="/docs/guide/built-ins/callout"
   />
   <Card icon={<CardsIcon />} title="Tabs" href="/docs/guide/built-ins/tabs" />
+  <Card
+    icon={<IdCardIcon />}
+    title="Cards"
+    href="/docs/guide/built-ins/cards"
+  />
   <Card icon={<OneIcon />} title="Steps" href="/docs/guide/built-ins/steps" />
+  <Card
+    icon={<FolderTreeIcon className="h-5 w-5" />}
+    title="FileTree"
+    href="/docs/guide/built-ins/filetree"
+  />
 </Cards>
