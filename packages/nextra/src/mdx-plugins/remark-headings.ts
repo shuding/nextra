@@ -6,7 +6,7 @@ import { visit } from 'unist-util-visit'
 import type { PageOpts } from '../types'
 import type { HProperties } from './remark-custom-heading-id'
 
-export const getFlattenedValue = (node: Parent): string =>
+const getFlattenedValue = (node: Parent): string =>
   node.children
     .map(child =>
       'children' in child
@@ -40,11 +40,17 @@ export const remarkHeadings: Plugin<[], Root> = function (this: Processor) {
               (child: { type: string }) => child.type === 'mdxJsxTextElement'
             )
           const value = getFlattenedValue(node)
+
+          node.data ||= {}
+          const headingProps = (node.data.hProperties ||= {}) as HProperties
+          const id = slugger.slug(headingProps.id || value)
+          // Attach flattened/custom #id to heading node
+          headingProps.id = id
+
           const heading = {
             depth: node.depth,
             value,
-            id:
-              (node.data?.hProperties as HProperties)?.id || slugger.slug(value)
+            id
           }
           data.headingMeta.headings.push(heading)
           if (hasJsxInH1) {

@@ -147,7 +147,6 @@
   },
   "devDependencies": {
     "@testing-library/react": "^14.0.0",
-    "@types/github-slugger": "^2.0.0",
     "@types/graceful-fs": "^4.1.6",
     "@types/lodash.get": "^4.4.7",
     "@types/mdast": "^4.0.0",
