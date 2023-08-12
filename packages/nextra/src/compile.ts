@@ -161,8 +161,9 @@ export async function compileMdx(
         remarkGfm,
         remarkCustomHeadingId,
         remarkHeadings,
-        staticImage && remarkStaticImage,
+        // Should be before remarkHeadings
         searchIndexKey !== null && structurize(structurizedData, flexsearch),
+        staticImage && remarkStaticImage,
         readingTime && remarkReadingTime,
         latex && remarkMath,
         isFileOutsideCWD && remarkReplaceImports,

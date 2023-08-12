@@ -43,10 +43,9 @@ export class NextraSearchPlugin {
               if (indexFiles[indexFilename] !== '{') {
                 indexFiles[indexFilename] += ','
               }
-              indexFiles[indexFilename] += `"${route}":${JSON.stringify({
-                title,
-                data
-              })}`
+              indexFiles[indexFilename] += JSON.stringify({
+                [route]: { title, data }
+              }).slice(1, -1)
             }
           }
 

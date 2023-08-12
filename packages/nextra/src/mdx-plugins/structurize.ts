@@ -1,8 +1,5 @@
 // @ts-nocheck
-
-import Slugger from 'github-slugger'
-
-function cleanup(content) {
+function cleanup(content: string): string {
   return content
     .trim()
     .split('\n')
@@ -10,30 +7,26 @@ function cleanup(content) {
     .join('\n')
 }
 
-export const structurize = (structurizedData, options) => {
+export function structurize(
+  structurizedData: Record<string, unknown>,
+  options
+) {
   if (typeof options === 'boolean') {
     options = {}
   }
   options = { codeblocks: true, ...options }
-
-  const slugger = new Slugger()
   let activeSlug = ''
   let skip = false
   let content = ''
 
   return function stripMarkdown() {
-    // @ts-expect-error: assume content model (for root) matches.
     return node => {
       walk(node)
       structurizedData[activeSlug] = cleanup(content)
       return node
     }
 
-    /**
-     * @param {Node} node
-     * @returns {string}
-     */
-    function walk(node) {
+    function walk(node): string {
       let result = ''
 
       /** @type {Type} */
@@ -55,8 +48,8 @@ export const structurize = (structurizedData, options) => {
       }
 
       if ('children' in node) {
-        for (let i = 0; i < node.children.length; i++) {
-          result += walk(node.children[i])
+        for (const child of node.children) {
+          result += walk(child)
         }
       } else if (
         [
@@ -88,23 +81,20 @@ export const structurize = (structurizedData, options) => {
           content += '\n'
         }
       }
+
       if (type === 'tableCell') {
         result += '\t'
         if (!skip) {
           content += '\t'
         }
-      }
-
-      if (type === 'heading') {
+      } else if (type === 'heading') {
         skip = false
+        if (node.depth > 1) {
+          structurizedData[activeSlug] = cleanup(content)
+          content = ''
+          activeSlug = node.data.hProperties.id + '#' + result
+        }
       }
-
-      if (type === 'heading' && node.depth > 1) {
-        structurizedData[activeSlug] = cleanup(content)
-        content = ''
-        activeSlug = (node.data?.hProperties?.id ?? slugger.slug(result)) + '#' + result
-      }
-
       return result
     }
   }
