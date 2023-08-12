@@ -1,7 +1,7 @@
 /* eslint sort-keys: error */
 import { useRouter } from 'next/router'
 import type { DocsThemeConfig } from 'nextra-theme-docs'
-import { useConfig } from 'nextra-theme-docs'
+import { useConfig, LocaleSwitch } from 'nextra-theme-docs'
 import type { ComponentProps, ReactElement } from 'react'
 
 const SWRLogo = (props: ComponentProps<'svg'>): ReactElement => (
@@ -165,6 +165,9 @@ const config: DocsThemeConfig = {
         </span>
       </>
     )
+  },
+  navbar: {
+    extraContent: LocaleSwitch,
   },
   nextThemes: {
     defaultTheme: 'dark'

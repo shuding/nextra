@@ -229,7 +229,7 @@ export function normalizePages({
           if (key !== '*') {
             items.push({
               name: key,
-              route: '#',
+              route: '',
               ...meta[key]
             })
           }

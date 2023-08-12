@@ -21,7 +21,15 @@ export function Page() {
       >
         {page.meta.title || page.frontMatter?.title || page.name}
       </Link>
-      <p>{page.frontMatter?.description}</p>
+      <p className="opacity-80 mt-6 leading-7">
+        {page.frontMatter?.description}
+        <Link
+          href={page.route}
+          className="block text-[color:hsl(var(--nextra-primary-hue),100%,50%)] underline underline-offset-2 decoration-from-font"
+        >
+          Read more →
+        </Link>
+      </p>
       <p>{page.date}</p>
     </div>
   ))
