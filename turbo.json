@@ -6,14 +6,7 @@
         // Run `build` in workspaces I depend on first
         "^build"
       ],
-      "outputs": [
-        "dist/**/*.d.mts",
-        "dist/**/*.mjs",
-        "dist/**/*.js",
-        "dist/**/*.css",
-        ".next/**",
-        "loader.js"
-      ]
+      "outputs": ["dist/**", ".next/**", "loader.js"]
     },
     "build:tailwind": {
       "dependsOn": [],
