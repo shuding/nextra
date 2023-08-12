@@ -2,16 +2,9 @@
 type: tag
 ---
 
-import Head from 'next/head'
-import {
-  getStaticPaths,
-  getStaticProps,
-  TagName,
-  TagTitle
-} from 'nextra-theme-blog/tags'
-import { useSSG } from 'nextra/ssg'
+import { TagName, TagTitle } from 'nextra-theme-blog/tags'
 
 <TagTitle />
 # Posts Tagged with “<TagName />”
 
-export { getStaticProps, TagTitle, TagName, getStaticPaths }
+export { getStaticProps, getStaticPaths } from 'nextra-theme-blog/tags'

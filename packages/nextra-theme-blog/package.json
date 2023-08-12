@@ -5,35 +5,34 @@
   "repository": "https://github.com/shuding/nextra",
   "author": "Shu Ding <g@shud.in>",
   "license": "MIT",
-  "module": "./dist/index.js",
   "exports": {
     "./style.css": "./style.css",
     ".": {
       "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "types": "./dist/index.d.mts"
     },
     "./cusdis": {
       "import": "./dist/cusdis.js",
-      "types": "./dist/cusdis.d.ts"
+      "types": "./dist/cusdis.d.mts"
     },
     "./tags": {
       "import": "./dist/tags.js",
-      "types": "./dist/tags.d.ts"
+      "types": "./dist/tags.d.mts"
     }
   },
-  "types": "./dist/index.d.ts",
+  "types": "./dist/index.d.mts",
   "typesVersions": {
     "*": {
       "cusdis": [
-        "./dist/cusdis.d.ts"
+        "./dist/cusdis.d.mts"
       ],
       "tags": [
-        "./dist/tags.d.ts"
+        "./dist/tags.d.mts"
       ]
     }
   },
   "files": [
-    "dist/*",
+    "dist",
     "style.css"
   ],
   "scripts": {
