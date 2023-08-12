@@ -3,7 +3,7 @@ import cn from 'clsx'
 import { useRouter } from 'next/router'
 import { useMounted } from 'nextra/hooks'
 import { InformationCircleIcon, SpinnerIcon } from 'nextra/icons'
-import type { KeyboardEvent, ReactElement } from 'react'
+import type { CompositionEvent, KeyboardEvent, ReactElement } from 'react'
 import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
 import { useConfig, useMenu } from '../contexts'
 import type { SearchResult } from '../types'
@@ -42,7 +42,8 @@ export function Search({
   const input = useRef<HTMLInputElement>(null)
   const ulRef = useRef<HTMLUListElement>(null)
   const [focused, setFocused] = useState(false)
-  const [compositionend, setCompositionend] = useState(true);
+  //  Trigger the search after the Input is complete for languages like Chinese
+  const [composition, setComposition] = useState(true)
 
   useEffect(() => {
     setActive(0)
@@ -124,7 +125,7 @@ export function Search({
         }
         case 'Enter': {
           const result = results[active]
-          if (result && compositionend) {
+          if (result && composition) {
             void router.push(result.route)
             finishSearch()
           }
@@ -137,7 +138,7 @@ export function Search({
         }
       }
     },
-    [active, results, router, finishSearch, handleActive, compositionend]
+    [active, results, router, finishSearch, handleActive, composition]
   )
 
   const mounted = useMounted()
@@ -183,6 +184,12 @@ export function Search({
       </kbd>
     </Transition>
   )
+  const handleComposition = useCallback(
+    (e: CompositionEvent<HTMLInputElement>) => {
+      setComposition(e.type === 'compositionend')
+    },
+    []
+  )
 
   return (
     <div className={cn('nextra-search nx-relative md:nx-w-64', className)}>
@@ -208,8 +215,8 @@ export function Search({
         onBlur={() => {
           setFocused(false)
         }}
-        onCompositionStart={() => setCompositionend(false)}
-        onCompositionEnd={() => setCompositionend(true)}
+        onCompositionStart={handleComposition}
+        onCompositionEnd={handleComposition}
         type="search"
         placeholder={renderString(config.search.placeholder)}
         onKeyDown={handleKeyDown}
