@@ -4,7 +4,7 @@
     "build": {
       "dependsOn": ["^build"],
       "outputs": [
-        "dist/**/*.d.ts",
+        "dist/**/*.d.mts",
         "dist/**/*.mjs",
         "dist/**/*.js",
         "dist/**/*.css",

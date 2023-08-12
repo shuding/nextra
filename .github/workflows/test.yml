@@ -35,7 +35,7 @@ jobs:
       - name: Install Dependencies
         run: pnpm i
 
-      - name: Site
+      - name: Build All
         run: pnpm build:all
 
       - name: Test
