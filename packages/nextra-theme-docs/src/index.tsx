@@ -272,5 +272,6 @@ export {
   Navbar,
   SkipNavContent,
   SkipNavLink,
-  ThemeSwitch
+  ThemeSwitch,
+  LocaleSwitch
 } from './components'
