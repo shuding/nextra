@@ -4,6 +4,9 @@
 @import 'nextra/styles/variables.css';
 @import 'nextra/styles/code-block.css';
 @import 'nextra/styles/subheading-anchor.css';
+@import 'nextra/styles/scrollbar.css';
+@import 'nextra/styles/steps.css';
+@import 'nextra/styles/cards.css';
 
 body {
   @apply nx-px-4;

@@ -1,6 +1,6 @@
 {
   "name": "nextra-theme-docs",
-  "version": "2.8.0",
+  "version": "2.10.0",
   "description": "A Nextra theme for documentation sites.",
   "repository": "https://github.com/shuding/nextra",
   "author": "Shu Ding <g@shud.in>",
@@ -9,17 +9,10 @@
     "./style.css": "./style.css",
     ".": {
       "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "types": "./dist/index.d.mts"
     }
   },
-  "types": "./dist/index.d.ts",
-  "typesVersions": {
-    "*": {
-      ".": [
-        "./dist/index.d.ts"
-      ]
-    }
-  },
+  "types": "./dist/index.d.mts",
   "files": [
     "dist",
     "style.css"
@@ -46,8 +39,9 @@
   "dependencies": {
     "@headlessui/react": "^1.7.10",
     "@popperjs/core": "^2.11.6",
-    "clsx": "^1.2.1",
-    "flexsearch": "^0.7.21",
+    "clsx": "^2.0.0",
+    "escape-string-regexp": "^5.0.0",
+    "flexsearch": "^0.7.31",
     "focus-visible": "^5.2.0",
     "git-url-parse": "^13.1.0",
     "intersection-observer": "^0.12.2",
@@ -67,7 +61,7 @@
     "@vitejs/plugin-react": "^3.0.1",
     "concurrently": "^8.0.0",
     "jsdom": "^22.0.0",
-    "next": "^13.4.6",
+    "next": "^13.4.8",
     "nextra": "workspace:*",
     "postcss": "^8.4.21",
     "postcss-cli": "^10.1.0",
@@ -75,8 +69,8 @@
     "postcss-lightningcss": "^0.9.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "tailwindcss": "^3.3.1",
-    "vitest": "^0.33.0"
+    "tailwindcss": "^3.3.2",
+    "vitest": "^0.34.0"
   },
   "sideEffects": [
     "./src/polyfill.ts"

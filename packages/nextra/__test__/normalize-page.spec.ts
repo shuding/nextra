@@ -167,13 +167,13 @@ describe('normalize-page', () => {
       [
         {
           "name": "docs",
-          "route": "#",
+          "route": "",
           "title": "Documentation",
           "type": "page",
         },
         {
           "name": "explorers",
-          "route": "#",
+          "route": "",
           "title": "Explorers",
           "type": "menu",
         },
@@ -186,7 +186,7 @@ describe('normalize-page', () => {
         },
         {
           "name": "explorers2",
-          "route": "#",
+          "route": "",
           "title": "Explorers2",
           "type": "menu",
         },

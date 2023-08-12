@@ -478,13 +478,10 @@ export function Sidebar({
               showToggleAnimation ? (showSidebar ? 'show' : 'hide') : 'off'
             }
           >
-            {hasI18n && (
-              <LocaleSwitch
-                options={config.i18n}
-                lite={!showSidebar}
-                className={cn(showSidebar ? 'nx-grow' : 'max-md:nx-grow')}
-              />
-            )}
+            <LocaleSwitch
+              lite={!showSidebar}
+              className={cn(showSidebar ? 'nx-grow' : 'max-md:nx-grow')}
+            />
             {config.darkMode && (
               <div
                 className={

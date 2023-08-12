@@ -6,7 +6,7 @@ import { visit } from 'unist-util-visit'
 import type { PageOpts } from '../types'
 import type { HProperties } from './remark-custom-heading-id'
 
-export const getFlattenedValue = (node: Parent): string =>
+const getFlattenedValue = (node: Parent): string =>
   node.children
     .map(child =>
       'children' in child
@@ -18,7 +18,7 @@ export const getFlattenedValue = (node: Parent): string =>
     .join('')
 
 export const remarkHeadings: Plugin<[], Root> = function (this: Processor) {
-  const data = this.data() as {
+  const { headingMeta } = this.data() as {
     headingMeta: Pick<PageOpts, 'headings' | 'hasJsxInH1' | 'title'>
   }
   const slugger = new Slugger()
@@ -40,18 +40,24 @@ export const remarkHeadings: Plugin<[], Root> = function (this: Processor) {
               (child: { type: string }) => child.type === 'mdxJsxTextElement'
             )
           const value = getFlattenedValue(node)
+
+          node.data ||= {}
+          const headingProps = (node.data.hProperties ||= {}) as HProperties
+          const id = slugger.slug(headingProps.id || value)
+          // Attach flattened/custom #id to heading node
+          headingProps.id = id
+
           const heading = {
             depth: node.depth,
             value,
-            id:
-              (node.data?.hProperties as HProperties)?.id || slugger.slug(value)
+            id
           }
-          data.headingMeta.headings.push(heading)
+          headingMeta.headings.push(heading)
           if (hasJsxInH1) {
-            data.headingMeta.hasJsxInH1 = true
+            headingMeta.hasJsxInH1 = true
           }
           if (node.depth === 1) {
-            data.headingMeta.title = heading.value
+            headingMeta.title = heading.value
           }
 
           return

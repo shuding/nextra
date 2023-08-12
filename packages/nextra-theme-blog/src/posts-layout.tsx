@@ -8,11 +8,11 @@ import Nav from './nav'
 import { collectPostsAndNavs } from './utils/collect'
 import getTags from './utils/get-tags'
 
-export const PostsLayout = ({
+export function PostsLayout({
   children
 }: {
   children: ReactNode
-}): ReactElement => {
+}): ReactElement {
   const { config, opts } = useBlogContext()
   const { posts } = collectPostsAndNavs({ config, opts })
   const router = useRouter()

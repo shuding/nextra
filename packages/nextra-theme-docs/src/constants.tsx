@@ -21,7 +21,7 @@ export const IS_BROWSER = typeof window !== 'undefined'
 function isReactNode(value: unknown): boolean {
   return (
     value == null ||
-    isString(value) ||
+    typeof value === 'string' ||
     isFunction(value) ||
     isValidElement(value as any)
   )
@@ -29,10 +29,6 @@ function isReactNode(value: unknown): boolean {
 
 function isFunction(value: unknown): boolean {
   return typeof value === 'function'
-}
-
-function isString(value: unknown): boolean {
-  return typeof value === 'string'
 }
 
 const i18nSchema = z.array(
