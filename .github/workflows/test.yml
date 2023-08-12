@@ -44,8 +44,5 @@ jobs:
       - name: Clean
         run: pnpm clean
 
-      - name: Build
-        run: pnpm build
-
       - name: Type Check
         run: pnpm types:check
