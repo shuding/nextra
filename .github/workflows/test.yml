@@ -36,7 +36,7 @@ jobs:
         run: pnpm i
 
       - name: Site
-        run: pnpm run build:all
+        run: pnpm build:all
 
       - name: Test
         run: pnpm test
@@ -48,4 +48,4 @@ jobs:
         run: pnpm build
 
       - name: Type Check
-        run: pnpm run types:check
+        run: pnpm types:check

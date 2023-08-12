@@ -14,7 +14,7 @@ export const HighlightMatches = memo<MatchArgs>(function HighlightMatches({
   if (!value) {
     return null
   }
-  const splitText = value ? value.split('') : []
+  const splitText = value.split('')
   const escapedSearch = escapeStringRegexp(match.trim())
   const regexp = new RegExp(escapedSearch.replaceAll(' ', '|'), 'ig')
   let result
