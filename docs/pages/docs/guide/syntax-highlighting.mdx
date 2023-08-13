@@ -315,27 +315,28 @@ You can provide these grammars by overriding the `getHighlighter` function in
 (`next.config.mjs`):
 
 ```js {12-17}
-import {BUNDLED_LANGUAGES} from 'shiki';
+import { BUNDLED_LANGUAGES } from 'shiki'
 
 nextra({
-  ... // other options here
+  // ... other options
   mdxOptions: {
     rehypePrettyCodeOptions: {
-      getHighlighter: options => getHighlighter({
-        ...options,
-        langs: [
-          ...BUNDLED_LANGUAGES,
-          // custom grammar options, see the Shiki documentation for how to provide these options
-          {
-            id: 'my-lang',
-            scopeName: 'source.my-lang',
-            aliases: ['mylang'], // Along with id, aliases will be included in the allowed names you can use when writing markdown.
-            path: '../../public/syntax/grammar.tmLanguage.json',
-          }
-        ]
-      })
+      getHighlighter: options =>
+        getHighlighter({
+          ...options,
+          langs: [
+            ...BUNDLED_LANGUAGES,
+            // custom grammar options, see the Shiki documentation for how to provide these options
+            {
+              id: 'my-lang',
+              scopeName: 'source.my-lang',
+              aliases: ['mylang'], // Along with id, aliases will be included in the allowed names you can use when writing markdown.
+              path: '../../public/syntax/grammar.tmLanguage.json'
+            }
+          ]
+        })
     }
-  },
+  }
 })
 ```
 
@@ -345,16 +346,18 @@ Within `mdxOptions.rehypePrettyCodeOptions` you may also provide custom themes
 instead of [relying on CSS Variables](/docs/guide/syntax-highlighting):
 
 ```js {8}
-import {BUNDLED_LANGUAGES} from 'shiki';
+import { BUNDLED_LANGUAGES } from 'shiki'
 
 nextra({
-  ... // other options here
+  // ... other options
   mdxOptions: {
     rehypePrettyCodeOptions: {
       // VSCode theme or built-in Shiki theme, see Shiki documentation for more information
-      theme: JSON.parse(readFileSync('./public/syntax/arctis_light.json', 'utf-8'))
+      theme: JSON.parse(
+        readFileSync('./public/syntax/arctis_light.json', 'utf8')
+      )
     }
-  },
+  }
 })
 ```
 
@@ -364,18 +367,22 @@ Provide a record of themes to the `theme` option instead to provide multiple
 themes:
 
 ```js {7-10}
-import {BUNDLED_LANGUAGES} from 'shiki';
+import { BUNDLED_LANGUAGES } from 'shiki'
 
 nextra({
-  ... // other options here
+  // ... other options
   mdxOptions: {
     rehypePrettyCodeOptions: {
       theme: {
-        dark: JSON.parse(readFileSync('./public/syntax/arctis_dark.json', 'utf-8')),
-        light: JSON.parse(readFileSync('./public/syntax/arctis_light.json', 'utf-8'))
+        dark: JSON.parse(
+          readFileSync('./public/syntax/arctis_dark.json', 'utf8')
+        ),
+        light: JSON.parse(
+          readFileSync('./public/syntax/arctis_light.json', 'utf8')
+        )
       }
     }
-  },
+  }
 })
 ```
 
