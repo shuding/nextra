@@ -6,8 +6,10 @@ function visit(node, tagNames, handler, parent, idx) {
     handler(node, parent, idx)
     return
   }
-  for (const [i, n] of node.children.entries()) {
-    visit(n, tagNames, handler, node, i)
+  if ('children' in node) {
+    for (const [i, n] of node.children.entries()) {
+      visit(n, tagNames, handler, node, i)
+    }
   }
 }
 

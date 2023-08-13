@@ -311,10 +311,10 @@ Shiki accepts a
 for syntax highlighting with custom language grammars.
 
 You can provide these grammars by overriding the `getHighlighter` function in
-`mdxOptions.rehypePrettyCodeOptions` option in your Nextra config
-(`next.config.mjs`):
+`mdxOptions.rehypePrettyCodeOptions` option in your Nextra config inside
+`next.config.js`:
 
-```js {12-17}
+```js filename="next.config.js" {13-18}
 import { BUNDLED_LANGUAGES } from 'shiki'
 
 nextra({
@@ -345,9 +345,7 @@ nextra({
 Within `mdxOptions.rehypePrettyCodeOptions` you may also provide custom themes
 instead of [relying on CSS Variables](/docs/guide/syntax-highlighting):
 
-```js {8}
-import { BUNDLED_LANGUAGES } from 'shiki'
-
+```js filename="next.config.js" {4}
 nextra({
   // ... other options
   mdxOptions: {
@@ -366,9 +364,7 @@ nextra({
 Provide a record of themes to the `theme` option instead to provide multiple
 themes:
 
-```js {7-10}
-import { BUNDLED_LANGUAGES } from 'shiki'
-
+```js filename="next.config.js" {6-11}
 nextra({
   // ... other options
   mdxOptions: {
@@ -392,11 +388,8 @@ for every theme and tagged with an attribute `data-theme=[key]`, e.g.
 
 You can use CSS to show and hide these codeblocks accordingly:
 
-```css
-html[class~='dark'] :is(pre[data-theme='light'], code[data-theme='light']) {
-  display: none;
-}
-
+```css filename="global.css"
+html[class~='dark'] :is(pre[data-theme='light'],   code[data-theme='light']),
 html[class~='light'] :is(pre[data-theme='dark'], code[data-theme='dark']) {
   display: none;
 }
