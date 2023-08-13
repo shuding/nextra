@@ -389,7 +389,7 @@ for every theme and tagged with an attribute `data-theme=[key]`, e.g.
 You can use CSS to show and hide these codeblocks accordingly:
 
 ```css filename="global.css"
-html[class~='dark'] :is(pre[data-theme='light'],   code[data-theme='light']),
+html[class~='dark'] :is(pre[data-theme='light'], code[data-theme='light']),
 html[class~='light'] :is(pre[data-theme='dark'], code[data-theme='dark']) {
   display: none;
 }
