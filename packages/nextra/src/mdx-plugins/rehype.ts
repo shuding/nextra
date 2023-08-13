@@ -6,7 +6,9 @@ function visit(node, tagNames, handler, parent, idx) {
     handler(node, parent, idx)
     return
   }
-  node.children?.forEach((n, i) => visit(n, tagNames, handler, node, i))
+  for (const [i, n] of node.children.entries()) {
+    visit(n, tagNames, handler, node, i)
+  }
 }
 
 export const parseMeta =
@@ -28,17 +30,18 @@ export const parseMeta =
 
 export const attachMeta = () => tree => {
   visit(tree, ['div', 'pre'], (node, parent, idx) => {
-    const children = "data-rehype-pretty-code-fragment" in node.properties
-      ? node.children.map(child => ({ ...node, ...child }))
-      : [node];
+    const children =
+      'data-rehype-pretty-code-fragment' in node.properties
+        ? node.children.map(child => ({ ...node, ...child }))
+        : [node]
 
-    children.forEach((node) => {
-      node.properties.filename = node.__nextra_filename;
-      node.properties.hasCopyCode = node.__nextra_hasCopyCode;
-    });
+    for (const node of children) {
+      node.properties.filename = node.__nextra_filename
+      node.properties.hasCopyCode = node.__nextra_hasCopyCode
+    }
     // if this is a <div data-rehype-pretty-code-fragment /> element,
     // this flattens children that wraps <pre /> element(s) into sibling nodes
     // because we'll wrap with our own <div />
-    parent.children.splice(idx, 1, ...children);
+    parent.children.splice(idx, 1, ...children)
   })
 }

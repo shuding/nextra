@@ -11,13 +11,17 @@ interface Page extends MdxFile {
 
 const flattenPageMap = (page: Page, result: PageMapItem[] = []) => {
   if (Array.isArray(page.children!)) {
-    page.children.forEach(p => flattenPageMap(p, result))
+    for (const p of page.children) {
+      flattenPageMap(p, result)
+    }
   }
   result.push(page)
 }
 
 const flattenPageMaps = (pages: Page[], result: PageMapItem[] = []) => {
-  pages.forEach(v => flattenPageMap(v, result))
+  for (const v of pages) {
+    flattenPageMap(v, result)
+  }
 }
 export const getStaticTags = (pageMap: PageMapItem[]) => {
   const result: MdxFile[] = []
