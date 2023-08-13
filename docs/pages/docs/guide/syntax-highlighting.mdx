@@ -182,7 +182,7 @@ Renders:
 Check [this list](https://github.com/shikijs/shiki/blob/main/docs/languages.md)
 for all supported languages.
 
-## Customize The Theme
+## Customize the Theme
 
 Nextra uses CSS variables to define the colors for tokens. You can inject a
 [global CSS](https://nextjs.org/docs/basic-features/built-in-css-support#adding-a-global-stylesheet)
@@ -213,7 +213,7 @@ tokens and you can override any of these:
   --shiki-token-parameter: #ff9800;
   --shiki-token-function: #b392f0;
   --shiki-token-string-expression: #4bb74a;
-  --shiki-token-punctuation: #bbbbbb;
+  --shiki-token-punctuation: #bbb;
   --shiki-token-link: #ffab70;
 }
 ```
@@ -304,7 +304,7 @@ Nextra configuration (`next.config.js` file).
   ]}
 />
 
-### Custom Grammar
+## Custom Grammar
 
 Shiki accepts a
 [VSCode TextMate Grammar](https://code.visualstudio.com/api/language-extensions/syntax-highlight-guide)
@@ -382,11 +382,11 @@ nextra({
 })
 ```
 
-Since syntax highlighting is done at build-time, a code-block will be rendered
+Since syntax highlighting is done at build-time, a code block will be rendered
 for every theme and tagged with an attribute `data-theme=[key]`, e.g.
 `data-theme="dark"`.
 
-You can use CSS to show and hide these codeblocks accordingly:
+You can use CSS to show and hide these code blocks accordingly:
 
 ```css filename="global.css"
 html[class~='dark'] :is(pre[data-theme='light'], code[data-theme='light']),
