@@ -306,11 +306,13 @@ Nextra configuration (`next.config.js` file).
 
 ### Custom Grammar
 
-Shiki accepts a [VSCode TextMate Grammar](https://code.visualstudio.com/api/language-extensions/syntax-highlight-guide)
+Shiki accepts a
+[VSCode TextMate Grammar](https://code.visualstudio.com/api/language-extensions/syntax-highlight-guide)
 for syntax highlighting with custom language grammars.
 
 You can provide these grammars by overriding the `getHighlighter` function in
-`mdxOptions.rehypePrettyCodeOptions` option in your Nextra config (`next.config.mjs`):
+`mdxOptions.rehypePrettyCodeOptions` option in your Nextra config
+(`next.config.mjs`):
 
 ```js {12-17}
 import {BUNDLED_LANGUAGES} from 'shiki';
@@ -339,8 +341,8 @@ nextra({
 
 ## Custom Themes
 
-Within `mdxOptions.rehypePrettyCodeOptions` you may also provide custom themes instead of
-[relying on CSS Variables](/docs/guide/syntax-highlighting):
+Within `mdxOptions.rehypePrettyCodeOptions` you may also provide custom themes
+instead of [relying on CSS Variables](/docs/guide/syntax-highlighting):
 
 ```js {8}
 import {BUNDLED_LANGUAGES} from 'shiki';
@@ -358,7 +360,8 @@ nextra({
 
 ### Multiple Themes
 
-Provide a record of themes to the `theme` option instead to provide multiple themes:
+Provide a record of themes to the `theme` option instead to provide multiple
+themes:
 
 ```js {7-10}
 import {BUNDLED_LANGUAGES} from 'shiki';
@@ -376,17 +379,18 @@ nextra({
 })
 ```
 
-Since syntax highlighting is done at build-time, a codeblock will be rendered for every
-theme and tagged with an attribute `data-theme=[key]`, e.g. `data-theme="dark"`.
+Since syntax highlighting is done at build-time, a code-block will be rendered
+for every theme and tagged with an attribute `data-theme=[key]`, e.g.
+`data-theme="dark"`.
 
 You can use CSS to show and hide these codeblocks accordingly:
 
 ```css
-html[class~=dark] :is(pre[data-theme='light'], code[data-theme='light']) {
+html[class~='dark'] :is(pre[data-theme='light'], code[data-theme='light']) {
   display: none;
 }
 
-html[class~=light] :is(pre[data-theme='dark'], code[data-theme='dark']) {
+html[class~='light'] :is(pre[data-theme='dark'], code[data-theme='dark']) {
   display: none;
 }
 ```
