@@ -14,8 +14,7 @@ const isPost = (page: PageMapItem): page is MdxFile => {
     page.name.startsWith('_')
   )
     return false
-  const draft = page.frontMatter?.draft
-  const type = page.frontMatter?.type
+  const { draft, type } = page.frontMatter || {}
   return !draft && (!type || type === 'post')
 }
 
