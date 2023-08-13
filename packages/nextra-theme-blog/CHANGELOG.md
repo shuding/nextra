@@ -1,5 +1,23 @@
 # nextra-theme-blog
 
+## 2.11.0
+
+### Minor Changes
+
+- f750ef53: support draft posts via frontMatter's `draft: true` value
+
+### Patch Changes
+
+- f750ef53: use github-slugger for custom heading ids to prevent duplicated
+  headings
+- f750ef53: fix code blocks `box-decoration-theme: clone` can create confusing
+  output over line breaks, use `slice` instead
+- Updated dependencies [f750ef53]
+- Updated dependencies [f750ef53]
+- Updated dependencies [f750ef53]
+- Updated dependencies [f750ef53]
+  - nextra@2.11.0
+
 ## 2.10.0
 
 ### Minor Changes
