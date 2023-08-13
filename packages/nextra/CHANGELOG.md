@@ -1,17 +1,5 @@
 # nextra
 
-## 2.11.0
-
-### Patch Changes
-
-- f750ef53: use github-slugger for custom heading ids to prevent duplicated
-  headings
-- f750ef53: fix custom heading id in search result
-- f750ef53: fix
-  `Warning: Prop href did not match. Server: "/blog.en-US#" Client: "/blog#"` in
-  by `normalizePages` from nextra/normalize-pages`
-- f750ef53: strip `.html` extension from URL route for static export
-
 ## 2.10.0
 
 ### Minor Changes

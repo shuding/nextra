@@ -1,34 +1,5 @@
 # nextra-theme-docs
 
-## 2.11.0
-
-### Minor Changes
-
-- f750ef53: export `LocaleSwitch` from `nextra-theme-docs`
-
-### Patch Changes
-
-- f750ef53: use github-slugger for custom heading ids to prevent duplicated
-  headings
-- f750ef53: fix custom heading id in search result
-- f750ef53: fix
-  `Warning: Prop href did not match. Server: "/blog.en-US#" Client: "/blog#"` in
-  by `normalizePages` from nextra/normalize-pages`
-- f750ef53: improve hr contrast
-- f750ef53: fix search, trigger the search after the Input is complete for
-  languages like Chinese
-- f750ef53: strip `.html` extension from URL route for static export
-- f750ef53: fix memory leak in search for case `>  ` replaced previously to
-  `>||` + some character provoke memory leak because `RegExp#exec` will always
-  return a match
-- f750ef53: fix code blocks `box-decoration-theme: clone` can create confusing
-  output over line breaks, use `slice` instead
-- Updated dependencies [f750ef53]
-- Updated dependencies [f750ef53]
-- Updated dependencies [f750ef53]
-- Updated dependencies [f750ef53]
-  - nextra@2.11.0
-
 ## 2.10.0
 
 ### Minor Changes
