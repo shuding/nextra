@@ -1,5 +1,34 @@
 # nextra-theme-docs
 
+## 2.11.0
+
+### Minor Changes
+
+- 3bb480a4: export `LocaleSwitch` from `nextra-theme-docs`
+
+### Patch Changes
+
+- 3bb480a4: use github-slugger for custom heading ids to prevent duplicated
+  headings
+- 3bb480a4: fix custom heading id in search result
+- 3bb480a4: fix
+  `Warning: Prop href did not match. Server: "/blog.en-US#" Client: "/blog#"` in
+  by `normalizePages` from nextra/normalize-pages`
+- 3bb480a4: improve hr contrast
+- 3bb480a4: fix search, trigger the search after the Input is complete for
+  languages like Chinese
+- 3bb480a4: strip `.html` extension from URL route for static export
+- 3bb480a4: fix memory leak in search for case `>  ` replaced previously to
+  `>||` + some character provoke memory leak because `RegExp#exec` will always
+  return a match
+- 3bb480a4: fix code blocks `box-decoration-theme: clone` can create confusing
+  output over line breaks, use `slice` instead
+- Updated dependencies [3bb480a4]
+- Updated dependencies [3bb480a4]
+- Updated dependencies [3bb480a4]
+- Updated dependencies [3bb480a4]
+  - nextra@2.11.0
+
 ## 2.10.0
 
 ### Minor Changes
