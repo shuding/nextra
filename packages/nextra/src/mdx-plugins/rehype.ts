@@ -1,8 +1,5 @@
 // @ts-nocheck
-
-import Slugger from 'github-slugger'
 import { CODE_BLOCK_FILENAME_REGEX } from '../constants'
-import { getFlattenedValue } from './remark-headings'
 
 function visit(node, tagNames, handler, parent, idx) {
   if (tagNames.includes(node.tagName)) {
@@ -30,27 +27,17 @@ export const parseMeta =
   }
 
 export const attachMeta = () => tree => {
-  const slugger = new Slugger()
-
-  const headingsWithSlug = new Set(['h2', 'h3', 'h4', 'h5', 'h6'])
-
-  visit(tree, [...headingsWithSlug, 'div', 'pre'], (node, parent, idx) => {
-    if (headingsWithSlug.has(node.tagName)) {
-      // Attach slug
-      node.properties.id ||= slugger.slug(getFlattenedValue(node))
-      return
-    }
-
-    const children = "data-rehype-pretty-code-fragment" in node.properties 
-      ? node.children.map(child => ({ ...node, ...child })) 
+  visit(tree, ['div', 'pre'], (node, parent, idx) => {
+    const children = "data-rehype-pretty-code-fragment" in node.properties
+      ? node.children.map(child => ({ ...node, ...child }))
       : [node];
-    
+
     children.forEach((node) => {
       node.properties.filename = node.__nextra_filename;
       node.properties.hasCopyCode = node.__nextra_hasCopyCode;
     });
-    // if this is a <div data-rehype-pretty-code-fragment /> element, 
-    // this flattens children that wraps <pre /> element(s) into sibling nodes 
+    // if this is a <div data-rehype-pretty-code-fragment /> element,
+    // this flattens children that wraps <pre /> element(s) into sibling nodes
     // because we'll wrap with our own <div />
     parent.children.splice(idx, 1, ...children);
   })

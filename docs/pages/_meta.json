@@ -13,7 +13,11 @@
   },
   "showcase": {
     "type": "page",
-    "title": "Showcase"
+    "title": "Showcase",
+    "theme": {
+      "typesetting": "article",
+      "layout": "full"
+    }
   },
   "about": {
     "type": "page",

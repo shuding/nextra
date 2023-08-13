@@ -1,16 +1,13 @@
-# Tab Component
-
-A built-in tab component of the Docs Theme.
+# Tabs Component
 
 ## Example
 
-import { Tab, Tabs } from 'nextra-theme-docs'
+import { Tab, Tabs } from 'nextra/components'
 
+{/* prettier-ignore */}
 <Tabs items={['pnpm', 'npm', 'yarn']}>
   <Tab>**pnpm**: Fast, disk space efficient package manager.</Tab>
-  <Tab>
-    **npm** is a package manager for the JavaScript programming language.
-  </Tab>
+  <Tab>**npm** is a package manager for the JavaScript programming language.</Tab>
   <Tab>**Yarn** is a software packaging system.</Tab>
 </Tabs>
 
@@ -18,14 +15,13 @@ import { Tab, Tabs } from 'nextra-theme-docs'
 
 ### Default
 
+{/* prettier-ignore */}
 ```mdx
-import { Tab, Tabs } from 'nextra-theme-docs'
+import { Tabs, Tab } from 'nextra/components'
 
 <Tabs items={['pnpm', 'npm', 'yarn']}>
   <Tab>**pnpm**: Fast, disk space efficient package manager.</Tab>
-  <Tab>
-    **npm** is a package manager for the JavaScript programming language.
-  </Tab>
+  <Tab>**npm** is a package manager for the JavaScript programming language.</Tab>
   <Tab>**Yarn** is a software packaging system.</Tab>
 </Tabs>
 ```
@@ -35,7 +31,7 @@ import { Tab, Tabs } from 'nextra-theme-docs'
 You can use the `defaultIndex` prop to set the default tab index:
 
 ```mdx /defaultIndex="1"/
-import { Tab, Tabs } from 'nextra-theme-docs'
+import { Tab, Tabs } from 'nextra/components'
 
 <Tabs items={['pnpm', 'npm', 'yarn']} defaultIndex="1">
   ...
@@ -44,10 +40,9 @@ import { Tab, Tabs } from 'nextra-theme-docs'
 
 And you will have `npm` as the default tab:
 
+{/* prettier-ignore */}
 <Tabs items={['pnpm', 'npm', 'yarn']} defaultIndex="1">
   <Tab>**pnpm**: Fast, disk space efficient package manager.</Tab>
-  <Tab>
-    **npm** is a package manager for the JavaScript programming language.
-  </Tab>
+  <Tab>**npm** is a package manager for the JavaScript programming language.</Tab>
   <Tab>**Yarn** is a software packaging system.</Tab>
 </Tabs>

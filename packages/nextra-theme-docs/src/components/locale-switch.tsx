@@ -2,21 +2,24 @@ import { addBasePath } from 'next/dist/client/add-base-path'
 import { useRouter } from 'next/router'
 import { GlobeIcon } from 'nextra/icons'
 import type { ReactElement } from 'react'
-import type { DocsThemeConfig } from '../constants'
+import { useConfig } from '../contexts'
 import { Select } from './select'
 
 interface LocaleSwitchProps {
-  options: NonNullable<DocsThemeConfig['i18n']>
   lite?: boolean
   className?: string
 }
 
 export function LocaleSwitch({
-  options,
   lite,
   className
-}: LocaleSwitchProps): ReactElement {
+}: LocaleSwitchProps): ReactElement | null {
+  const config = useConfig()
   const { locale, asPath } = useRouter()
+
+  const options = config.i18n
+  if (!options.length) return null
+
   const selected = options.find(l => locale === l.locale)
   return (
     <Select

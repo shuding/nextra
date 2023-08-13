@@ -1,0 +1,11 @@
+.nextra-steps h3 {
+  counter-increment: step;
+
+  &:before {
+    @apply nx-absolute nx-w-[33px] nx-h-[33px];
+    @apply nx-border-4 nx-border-white nx-bg-gray-100 dark:nx-border-dark dark:nx-bg-neutral-800;
+    @apply nx-rounded-full nx-text-neutral-400 nx-text-base nx-font-normal nx-text-center -nx-indent-px;
+    @apply nx-mt-[3px] nx-ml-[-41px];
+    content: counter(step);
+  }
+}

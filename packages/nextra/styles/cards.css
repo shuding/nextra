@@ -1,0 +1,32 @@
+.nextra-cards {
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(max(250px, calc((100% - 1rem * 2) / var(--rows))), 1fr)
+  );
+}
+
+.nextra-card img {
+  user-select: none;
+}
+
+.nextra-card:hover svg {
+  color: currentColor;
+}
+
+.nextra-card svg {
+  width: 1.5rem;
+  color: #00000033;
+  transition: color 0.3s ease;
+}
+
+.nextra-card p {
+  margin-top: 0.5rem;
+}
+
+.dark .nextra-card svg {
+  color: #ffffff66;
+}
+
+.dark .nextra-card:hover svg {
+  color: currentColor;
+}

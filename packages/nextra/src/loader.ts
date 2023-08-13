@@ -321,7 +321,10 @@ const __nextraPageOptions = {
         (themeConfigImport && 'themeConfig: __nextra_themeConfig')
   }
 }
-${finalResult.replace('export default MDXContent;', '')}
+${
+  // Remove the last match of `export default MDXContent` because it can be existed in the raw MDX file
+  finalResult.slice(0, finalResult.lastIndexOf('export default MDXContent;'))
+}
 if (process.env.NODE_ENV !== 'production') {
   __nextraPageOptions.hot = module.hot
   __nextraPageOptions.pageOptsChecksum = ${stringifiedChecksum}
