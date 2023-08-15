@@ -64,7 +64,7 @@ export function Card({
             classes.title,
             'dark:nx-text-gray-300 dark:hover:nx-text-gray-100',
             {
-              "nx-pb-0": description,
+              'nx-pb-0': description
             }
           )}
         >
@@ -75,10 +75,12 @@ export function Card({
           </span>
 
           {description && (
-            <p className={cn(
-              classes.description,
-              'dark:nx-text-neutral-400 dark:group-hover:nx-text-neutral-100 nx-flex nx-items-center'
-            )}>
+            <p
+              className={cn(
+                classes.description,
+                'dark:nx-text-neutral-400 dark:group-hover:nx-text-neutral-100 nx-flex nx-items-center'
+              )}
+            >
               {description}
             </p>
           )}
@@ -101,7 +103,7 @@ export function Card({
           classes.title,
           'dark:nx-text-neutral-200 dark:hover:nx-text-neutral-50',
           {
-            "nx-pb-0": description,
+            'nx-pb-0': description
           }
         )}
       >
@@ -111,10 +113,12 @@ export function Card({
       </span>
 
       {description && (
-        <p className={cn(
-          classes.description,
-          'dark:nx-text-neutral-400 dark:group-hover:nx-text-neutral-100 nx-flex nx-items-center'
-        )}>
+        <p
+          className={cn(
+            classes.description,
+            'dark:nx-text-neutral-400 dark:group-hover:nx-text-neutral-100 nx-flex nx-items-center'
+          )}
+        >
           {description}
         </p>
       )}

@@ -1,4 +1,9 @@
-import { CardsIcon, OneIcon, WarningIcon, FolderTreeIcon } from '@components/icons'
+import {
+  CardsIcon,
+  FolderTreeIcon,
+  OneIcon,
+  WarningIcon
+} from '@components/icons'
 import { Card, Cards } from 'nextra/components'
 
 # Cards Component
@@ -16,8 +21,14 @@ import { Card, Cards } from 'nextra/components'
 </Cards>
 
 ### With Description
+
 <Cards>
-  <Card icon={<FolderTreeIcon />} title="FileTree" description="Display beautiful File trees alongside your content" href="/docs/guide/built-ins/filetree" />
+  <Card
+    icon={<FolderTreeIcon />}
+    title="FileTree"
+    description="Display beautiful File trees alongside your content"
+    href="/docs/guide/built-ins/filetree"
+  />
 </Cards>
 
 ## Usage
