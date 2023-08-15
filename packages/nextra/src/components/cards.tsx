@@ -16,6 +16,9 @@ const classes = {
   ),
   title: cn(
     'nx-flex nx-font-semibold nx-items-start nx-gap-2 nx-p-4 nx-text-gray-700 hover:nx-text-gray-900'
+  ),
+  description: cn(
+    'nx-flex nx-items-start nx-gap-2 nx-pb-4 nx-px-4 nx-text-sm nx-text-gray-600 group-hover:nx-text-gray-600 nx-duration-75 nx-transition-colors'
   )
 }
 
@@ -28,6 +31,7 @@ const arrowEl = (
 export function Card({
   children,
   title,
+  description,
   icon,
   image,
   arrow,
@@ -36,6 +40,7 @@ export function Card({
 }: {
   children: ReactNode
   title: string
+  description?: string
   icon: ReactNode
   image?: boolean
   arrow?: boolean
@@ -57,7 +62,10 @@ export function Card({
         <span
           className={cn(
             classes.title,
-            'dark:nx-text-gray-300 dark:hover:nx-text-gray-100'
+            'dark:nx-text-gray-300 dark:hover:nx-text-gray-100',
+            {
+              "nx-pb-0": description,
+            }
           )}
         >
           {icon}
@@ -65,6 +73,15 @@ export function Card({
             {title}
             {animatedArrow}
           </span>
+
+          {description && (
+            <p className={cn(
+              classes.description,
+              'dark:nx-text-neutral-400 dark:group-hover:nx-text-neutral-100 nx-flex nx-items-center'
+            )}>
+              {description}
+            </p>
+          )}
         </span>
       </NextLink>
     )
@@ -82,13 +99,25 @@ export function Card({
       <span
         className={cn(
           classes.title,
-          'dark:nx-text-neutral-200 dark:hover:nx-text-neutral-50 nx-flex nx-items-center'
+          'dark:nx-text-neutral-200 dark:hover:nx-text-neutral-50',
+          {
+            "nx-pb-0": description,
+          }
         )}
       >
         {icon}
         {title}
         {animatedArrow}
       </span>
+
+      {description && (
+        <p className={cn(
+          classes.description,
+          'dark:nx-text-neutral-400 dark:group-hover:nx-text-neutral-100 nx-flex nx-items-center'
+        )}>
+          {description}
+        </p>
+      )}
     </NextLink>
   )
 }
