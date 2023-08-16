@@ -56,7 +56,7 @@ export const remarkHeadings: Plugin<[], Root> = function (this: Processor) {
           if (hasJsxInH1) {
             headingMeta.hasJsxInH1 = true
           }
-          if (node.depth === 1) {
+          if (node.depth === 1 && !headingMeta.title) {
             headingMeta.title = heading.value
           }
 
