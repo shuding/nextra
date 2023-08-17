@@ -58,9 +58,9 @@ function HeadingLink({
       {...props}
     >
       {children}
-      <span className="nx-absolute -nx-mt-20" id={id} ref={obRef} />
       <a
         href={`#${id}`}
+        id={id}
         className="subheading-anchor"
         aria-label="Permalink for this section"
       />
