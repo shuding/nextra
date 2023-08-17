@@ -63,6 +63,7 @@ function HeadingLink({
         id={id}
         className="subheading-anchor"
         aria-label="Permalink for this section"
+        ref={obRef}
       />
     </Tag>
   )
