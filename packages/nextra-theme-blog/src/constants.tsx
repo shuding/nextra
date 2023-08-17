@@ -1,4 +1,5 @@
 /* eslint sort-keys: error */
+import { ERROR_ROUTES } from 'nextra/constants'
 import type { NextraBlogTheme } from './types'
 
 export const DEFAULT_THEME: NextraBlogTheme = {
@@ -7,6 +8,6 @@ export const DEFAULT_THEME: NextraBlogTheme = {
       CC BY-NC 4.0 {new Date().getFullYear()} © Shu Ding.
     </small>
   ),
-  hiddenPages: ['/404'],
+  hiddenPages: [...ERROR_ROUTES],
   readMore: 'Read More →'
 }

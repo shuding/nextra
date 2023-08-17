@@ -3,4 +3,4 @@
 "nextra": patch
 ---
 
-fix: default config to exclude /404 from search and posts
+fix: default config to exclude /404 and /500 from search and posts

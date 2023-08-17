@@ -12,6 +12,7 @@
     "./package.json": "./package.json",
     ".": "./dist/index.js",
     "./catch-all": "./dist/catch-all.js",
+    "./constants": "./dist/constants.mjs",
     "./data": {
       "import": "./dist/ssg.js",
       "types": "./dist/ssg.d.ts"
@@ -59,6 +60,9 @@
     "*": {
       "compile": [
         "./dist/compile.d.ts"
+      ],
+      "constants": [
+        "./dist/constants.d.ts"
       ],
       "context": [
         "./dist/context.d.ts"
