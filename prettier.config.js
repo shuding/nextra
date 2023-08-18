@@ -4,11 +4,11 @@ module.exports = {
   trailingComma: 'none',
   arrowParens: 'avoid',
   plugins: [
-    require('prettier-plugin-tailwindcss'),
+    'prettier-plugin-tailwindcss',
     // for sort fields in package.json
-    require('prettier-plugin-pkg'),
+    'prettier-plugin-pkg',
     // for sorting imports
-    require('@ianvs/prettier-plugin-sort-imports')
+    '@ianvs/prettier-plugin-sort-imports'
   ],
   overrides: [
     {
