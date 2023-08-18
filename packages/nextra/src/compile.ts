@@ -204,12 +204,12 @@ export async function compileMdx(
       'headings' | 'hasJsxInH1'
     >
     const readingTime = vFile.data.readingTime as ReadingTime | undefined
-
+    const title = headingMeta.headings.find(h => h.depth === 1)?.value
     return {
       // https://github.com/shuding/nextra/issues/1032
       result: String(vFile).replaceAll('__esModule', '_\\_esModule'),
       ...headingMeta,
-      title: headingMeta.headings.find(h => h.depth === 1)?.value,
+      ...(title && { title }),
       ...(readingTime && { readingTime }),
       structurizedData,
       searchIndexKey,
