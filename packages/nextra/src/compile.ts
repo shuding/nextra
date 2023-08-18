@@ -201,7 +201,7 @@ export async function compileMdx(
 
     const headingMeta = compiler.data('headingMeta') as Pick<
       PageOpts,
-      'headings' | 'hasJsxInH1' | 'title'
+      'headings' | 'hasJsxInH1'
     >
     const readingTime = vFile.data.readingTime as ReadingTime | undefined
 
@@ -209,6 +209,7 @@ export async function compileMdx(
       // https://github.com/shuding/nextra/issues/1032
       result: String(vFile).replaceAll('__esModule', '_\\_esModule'),
       ...headingMeta,
+      title: headingMeta.headings.find(h => h.depth === 1)?.value,
       ...(readingTime && { readingTime }),
       structurizedData,
       searchIndexKey,
