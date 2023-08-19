@@ -38,7 +38,12 @@ function HeadingLink({
   ...props
 }: ComponentProps<'h2'> & { tag: `h${2 | 3 | 4 | 5 | 6}` }): ReactElement {
   return (
-    <Tag className={`nx-not-prose subheading-${Tag} ${className}`} {...props}>
+    <Tag
+      className={`nx-not-prose subheading-${Tag} ${
+        className === 'sr-only' ? 'nx-sr-only' : className
+      }`}
+      {...props}
+    >
       {children}
       <a
         href={id && `#${id}`}

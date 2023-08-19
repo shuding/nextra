@@ -11,8 +11,7 @@
 @import './typesetting-article.css';
 
 html {
-  @apply nx-antialiased nx-text-base;
-  scroll-padding-top: var(--nextra-navbar-height);
+  @apply nx-antialiased nx-text-base nx-scroll-pt-[--nextra-navbar-height];
   font-feature-settings:
     'rlig' 1,
     'calt' 1,
@@ -155,21 +154,8 @@ input[type='search'] {
   }
 }
 
-.nextra-heading {
-  @apply nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100;
-}
-
-.nextra-h2 {
-  @apply nx-mt-10 nx-border-b nx-pb-1 nx-text-3xl nx-border-neutral-200/70 contrast-more:nx-border-neutral-400 dark:nx-border-primary-100/10 contrast-more:dark:nx-border-neutral-400;
-}
-
-.footnotes {
-  h2 {
-    @apply nextra-heading nextra-h2;
-  }
-  a[data-footnote-backref] {
-    font-family: initial;
-  }
+.footnotes a[data-footnote-backref] {
+  font-family: initial;
 }
 
 @keyframes nextra-fadein {
