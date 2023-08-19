@@ -82,7 +82,7 @@ export function Card({
       <span
         className={cn(
           classes.title,
-          'dark:nx-text-neutral-200 dark:hover:nx-text-neutral-50'
+          'dark:nx-text-neutral-200 dark:hover:nx-text-neutral-50 nx-flex nx-items-center'
         )}
       >
         {icon}

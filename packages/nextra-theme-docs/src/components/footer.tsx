@@ -16,7 +16,7 @@ export function Footer({ menu }: { menu?: boolean }): ReactElement {
             : 'nx-hidden'
         )}
       >
-        {config.i18n.length > 0 && <LocaleSwitch options={config.i18n} />}
+        <LocaleSwitch />
         {config.darkMode && renderComponent(config.themeSwitch.component)}
       </div>
       <hr className="dark:nx-border-neutral-800" />

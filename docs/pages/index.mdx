@@ -100,8 +100,8 @@ export function I18n() {
 
 <div className="home-content">
   <div className="content-container">
-    <h1 className="headline">Make beautiful websites <br className='sm:block hidden'/>with Next.js & MDX.</h1>
-    <p className="subtitle">Simple, powerful and flexible site generation framework <br className='sm:block hidden'/>with everything you love from <a className="nextjs-link" href="https://nextjs.org" target="_blank">Next.js</a>.</p>
+    <h1 className="headline">Make beautiful websites <br className='sm:block hidden'/>with Next.js & MDX</h1>
+    <p className="subtitle">Simple, powerful and flexible site generation framework <br className='sm:block hidden'/>with everything you love from <a className="nextjs-link" href="https://nextjs.org" target="_blank">Next.js</a></p>
     <p className="subtitle">
       <Link className={styles.cta} href="/docs">Get started <span>→</span></Link>
     </p>
@@ -306,11 +306,11 @@ export function I18n() {
         <Feature index={0} large centered id="docs-card" href="/docs/docs-theme/start">
           <Image src={docsCard} alt="Background" loading="eager" />
           <Image src={docsCardDark} alt="Background (Dark)" loading="eager" />
-          <h3>Full-power documentation <br className="show-on-mobile"/>in minutes.</h3>
+          <h3>Full-power documentation <br className="show-on-mobile"/>in minutes</h3>
         </Feature>
         <Feature index={1} centered className="card-with-border" href="/docs/guide/image">
           <div className="h-full flex flex-col justify-between">
-            <h3>Links and images are <br className="show-on-mobile"/>always <span style={{ fontWeight: 300 }}>optimized</span>.</h3>
+            <h3>Links and images are <br className="show-on-mobile"/>always <span className="font-light">optimized</span></h3>
             <p className='text-left mb-8'>Nextra automatically converts Markdown links and images to use [Next.js Link](https://nextjs.org/docs/routing/introduction#linking-between-pages) and [Next.js Image](https://nextjs.org/docs/basic-features/image-optimization#local-images) when possible. No slow navigation or layout shift.</p>
             <div>
               <div className={styles.optimization}>
@@ -332,11 +332,11 @@ export function I18n() {
           </div>
         </Feature>
         <Feature index={2} id="highlighting-card" href="/docs/guide/syntax-highlighting">
-          <h3>Advanced syntax <br className="show-on-mobile"/>highlighting solution.</h3>
+          <h3>Advanced syntax <br className="show-on-mobile"/>highlighting solution</h3>
           <p>Performant and reliable build-time syntax highlighting powered by [Shiki](https://shiki.matsu.io).</p>
         </Feature>
         <Feature index={3} href="/docs/guide/i18n">
-          <h3>I18n as easy as <br className="show-on-mobile"/>creating new files.</h3>
+          <h3>I18n as easy as <br className="show-on-mobile"/>creating new files</h3>
           <p className='mb-4'>Name your page files with locales suffixed, Nextra and Next.js will do the rest for you.</p>
           <I18n/>
         </Feature>
@@ -412,11 +412,11 @@ export function I18n() {
               position: 'relative',
               mixBlendMode: 'difference',
             }}
-          >Dark <br/>mode <br/>included.</motion.h3>
+          >Dark <br/>mode <br/>included</motion.h3>
         </Feature>
         <Feature index={6} large id="search-card" href="/docs/docs-theme/theme-configuration#search">
           <div style={{ zIndex: 2}}>
-            <h3>Full-text search, <br/>zero-config needed.</h3>
+            <h3>Full-text search, <br/>zero-config needed</h3>
             <p>Nextra indexes your content automatically at build-time and performs incredibly fast full-text search via [FlexSearch](https://github.com/nextapps-de/flexsearch).</p>
           </div>
           <div className="absolute w-full h-full inset-0 hidden sm:block bg-[linear-gradient(to_right,white_250px,_transparent)] dark:bg-[linear-gradient(to_right,#202020_250px,_transparent)] z-[1]"/>
@@ -436,18 +436,18 @@ export function I18n() {
           textShadow: '0 1px 6px rgb(38 59 82 / 18%)',
           aspectRatio: '1.765',
         }} href="/docs/docs-theme/page-configuration">
-          <h3>Organize pages intuitively, <br/>with file-system routing from Next.js.</h3>
+          <h3>Organize pages intuitively, <br/>with file-system routing from Next.js</h3>
         </Feature>
         <Feature index={8} id="a11y-card" className='card-with-border' style={{
           backgroundSize: 750,
           backgroundRepeat: 'no-repeat',
           minHeight: 288
         }}>
-          <h3>A11y as a top priority.</h3>
+          <h3>A11y as a top priority</h3>
           <p>Nextra respects system options <br className="show-on-mobile"/>such as <b>Increase Contrast</b> and <b>Reduce Motion</b>.</p>
         </Feature>
         <Feature index={9} href="/docs/guide/ssg">
-          <h3>Hybrid rendering, <br/>next generation.</h3>
+          <h3>Hybrid rendering, <br/>next generation</h3>
           <p className='mr-6'>You can leverage the hybrid rendering power from Next.js with your Markdown content including [SSG](https://nextjs.org/docs/basic-features/pages#static-generation-recommended), [SSR](https://nextjs.org/docs/basic-features/pages#server-side-rendering), and [ISR](https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration).</p>
         </Feature>
         <Feature index={10} large>

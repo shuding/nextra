@@ -69,7 +69,7 @@ describe('Process heading', () => {
     expect(result).toMatch(
       `<_components.h3 id="without-space">{"nospace"}</_components.h3>`
     )
-    expect(result).toMatch(`<_components.h4 id="другой язык">{"foo"}`)
+    expect(result).toMatch(`<_components.h4 id="другой-язык">{"foo"}`)
     expect(result).toMatch(`<_components.h5 id="bar-baz-">{"bar Baz []"}`)
     expect(result).toMatch(`<_components.h6 id="bar-qux-">{"bar Qux [#]"}`)
   })

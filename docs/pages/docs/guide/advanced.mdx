@@ -1,13 +1,44 @@
-# Advanced
-
-import { CloudIcon, TableIcon } from '@components/icons'
+import {
+  CloudIcon,
+  CodeIcon,
+  DiagramIcon,
+  FormulaIcon,
+  TableIcon,
+  TailwindIcon,
+  TerminalIcon
+} from '@components/icons'
 import { Card, Cards } from 'nextra/components'
 
 <Cards>
   <Card
+    icon={<TerminalIcon />}
+    title="Npm2Yarn"
+    href="/docs/guide/advanced/npm2yarn"
+  />
+  <Card
+    icon={<DiagramIcon />}
+    title="Mermaid"
+    href="/docs/guide/advanced/mermaid"
+  />
+  <Card
+    icon={<TailwindIcon className="h-6 w-6" />}
+    title="Tailwind CSS"
+    href="/docs/guide/advanced/tailwind-css"
+  />
+  <Card
+    icon={<FormulaIcon />}
+    title="LaTeX"
+    href="/docs/guide/advanced/latex"
+  />
+  <Card
     icon={<TableIcon />}
     title="Rendering Tables"
     href="/docs/guide/advanced/table"
+  />
+  <Card
+    icon={<CodeIcon />}
+    title="TypeScript"
+    href="/docs/guide/advanced/typescript"
   />
   <Card
     icon={<CloudIcon />}

@@ -61,7 +61,6 @@ function Profile() {
   const { data } = useSWR('/api/user', fetcher, { suspense: true })
 
   // `data` will never be `undefined`
-  // ...
 }
 ```
 
@@ -75,7 +74,6 @@ function Profile() {
   })
 
   // `data` will be `undefined` if `isReady` is false
-  // ...
 }
 ```
 

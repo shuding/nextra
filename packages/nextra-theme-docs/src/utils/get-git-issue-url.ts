@@ -15,7 +15,11 @@ export const getGitIssueUrl = ({
   if (repo.resource.includes('gitlab')) {
     return `${repo.protocol}://${repo.resource}/${repo.owner}/${
       repo.name
-    }/-/issues/new?issue[title]=${encodeURIComponent(title)}`
+    }/-/issues/new?issue[title]=${encodeURIComponent(title)}${
+      labels
+        ? `&issue[description]=/label${encodeURIComponent(` ~${labels}\n`)}`
+        : ''
+    }`
   }
   if (repo.resource.includes('github')) {
     return `${repo.protocol}://${repo.resource}/${repo.owner}/${
