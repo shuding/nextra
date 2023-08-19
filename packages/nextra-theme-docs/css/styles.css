@@ -154,10 +154,6 @@ input[type='search'] {
   }
 }
 
-.footnotes a[data-footnote-backref] {
-  font-family: initial;
-}
-
 @keyframes nextra-fadein {
   0% {
     opacity: 0;

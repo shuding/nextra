@@ -41,7 +41,3 @@ h1 {
 .nx-prose .nextra-callout p {
   @apply nx-m-0;
 }
-
-.footnotes a[data-footnote-backref] {
-  font-family: initial;
-}

@@ -15,7 +15,6 @@ function HeadingLink({
   context,
   children,
   id,
-  // can be added by footnotes
   className,
   ...props
 }: ComponentProps<'h2'> & {
@@ -47,17 +46,21 @@ function HeadingLink({
 
   return (
     <Tag
-      className={cn(
-        'nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100',
-        {
-          h2: 'nx-mt-10 nx-border-b nx-pb-1 nx-text-3xl nx-border-neutral-200/70 contrast-more:nx-border-neutral-400 dark:nx-border-primary-100/10 contrast-more:dark:nx-border-neutral-400',
-          h3: 'nx-mt-8 nx-text-2xl',
-          h4: 'nx-mt-8 nx-text-xl',
-          h5: 'nx-mt-8 nx-text-lg',
-          h6: 'nx-mt-8 nx-text-base'
-        }[Tag],
-        className === 'sr-only' ? 'nx-sr-only' : className
-      )}
+      className={
+        // can be added by footnotes
+        className === 'sr-only'
+          ? 'nx-sr-only'
+          : cn(
+              'nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100',
+              {
+                h2: 'nx-mt-10 nx-border-b nx-pb-1 nx-text-3xl nx-border-neutral-200/70 contrast-more:nx-border-neutral-400 dark:nx-border-primary-100/10 contrast-more:dark:nx-border-neutral-400',
+                h3: 'nx-mt-8 nx-text-2xl',
+                h4: 'nx-mt-8 nx-text-xl',
+                h5: 'nx-mt-8 nx-text-lg',
+                h6: 'nx-mt-8 nx-text-base'
+              }[Tag]
+            )
+      }
       {...props}
     >
       {children}

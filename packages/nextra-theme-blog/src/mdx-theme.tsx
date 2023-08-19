@@ -33,15 +33,17 @@ function HeadingLink({
   tag: Tag,
   children,
   id,
-  // can be added by footnotes
-  className = '',
+  className,
   ...props
 }: ComponentProps<'h2'> & { tag: `h${2 | 3 | 4 | 5 | 6}` }): ReactElement {
   return (
     <Tag
-      className={`nx-not-prose subheading-${Tag} ${
-        className === 'sr-only' ? 'nx-sr-only' : className
-      }`}
+      className={
+        // can be added by footnotes
+        className === 'sr-only'
+          ? 'nx-sr-only'
+          : `nx-not-prose subheading-${Tag}`
+      }
       {...props}
     >
       {children}
