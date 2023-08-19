@@ -1,15 +1,16 @@
 // @ts-nocheck
-
-import Slugger from 'github-slugger'
 import { CODE_BLOCK_FILENAME_REGEX } from '../constants'
-import { getFlattenedValue } from './remark-headings'
 
 function visit(node, tagNames, handler) {
   if (tagNames.includes(node.tagName)) {
     handler(node)
     return
   }
-  node.children?.forEach(n => visit(n, tagNames, handler))
+  if ('children' in node) {
+    for (const n of node.children) {
+      visit(n, tagNames, handler)
+    }
+  }
 }
 
 export const parseMeta =
@@ -30,17 +31,7 @@ export const parseMeta =
   }
 
 export const attachMeta = () => tree => {
-  const slugger = new Slugger()
-
-  const headingsWithSlug = new Set(['h2', 'h3', 'h4', 'h5', 'h6'])
-
-  visit(tree, [...headingsWithSlug, 'div', 'pre'], node => {
-    if (headingsWithSlug.has(node.tagName)) {
-      // Attach slug
-      node.properties.id ||= slugger.slug(getFlattenedValue(node))
-      return
-    }
-
+  visit(tree, ['div', 'pre'], node => {
     if ('data-rehype-pretty-code-fragment' in node.properties) {
       // remove <div data-rehype-pretty-code-fragment /> element that wraps <pre /> element
       // because we'll wrap with our own <div />

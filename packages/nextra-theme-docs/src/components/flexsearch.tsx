@@ -1,6 +1,8 @@
 import cn from 'clsx'
+// flexsearch types are incorrect, they were overwritten in tsconfig.json
 import FlexSearch from 'flexsearch'
 import { useRouter } from 'next/router'
+import type { SearchData } from 'nextra'
 import type { ReactElement, ReactNode } from 'react'
 import { useCallback, useState } from 'react'
 import { DEFAULT_LOCALE } from '../constants'
@@ -37,13 +39,6 @@ type Result = {
   children: ReactNode
 }
 
-type NextraData = {
-  [route: string]: {
-    title: string
-    data: Record<string, string>
-  }
-}
-
 // This can be global for better caching.
 const indexes: {
   [locale: string]: [PageIndex, SectionIndex]
@@ -68,7 +63,7 @@ const loadIndexesImpl = async (
   const response = await fetch(
     `${basePath}/_next/static/chunks/nextra-data-${locale}.json`
   )
-  const data = (await response.json()) as NextraData
+  const data = (await response.json()) as SearchData
 
   const pageIndex: PageIndex = new FlexSearch.Document({
     cache: 100,

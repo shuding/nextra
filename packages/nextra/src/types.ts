@@ -202,3 +202,10 @@ export type DynamicMetaDescriptor = {
   metaObjectKeyPath: string
   metaParentKeyPath: string
 }
+
+export type SearchData = {
+  [route: string]: {
+    title: string
+    data: Record<string, string>
+  }
+}

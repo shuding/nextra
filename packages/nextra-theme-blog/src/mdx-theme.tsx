@@ -33,14 +33,23 @@ function HeadingLink({
   tag: Tag,
   children,
   id,
+  className,
   ...props
 }: ComponentProps<'h2'> & { tag: `h${2 | 3 | 4 | 5 | 6}` }): ReactElement {
   return (
-    <Tag className={`subheading-${Tag}`} {...props}>
+    <Tag
+      className={
+        // can be added by footnotes
+        className === 'sr-only'
+          ? 'nx-sr-only'
+          : `nx-not-prose subheading-${Tag}`
+      }
+      {...props}
+    >
       {children}
-      <span className="nx-absolute -nx-mt-7" id={id} />
       <a
         href={id && `#${id}`}
+        id={id}
         className="subheading-anchor"
         aria-label="Permalink for this section"
       />
@@ -48,22 +57,22 @@ function HeadingLink({
   )
 }
 
-const A = ({ children, ...props }: ComponentProps<'a'>) => {
-  const isExternal =
-    props.href?.startsWith('https://') || props.href?.startsWith('http://')
-  if (isExternal) {
+const EXTERNAL_HREF_REGEX = /https?:\/\//
+
+const A = ({ children, href = '', ...props }: ComponentProps<'a'>) => {
+  if (EXTERNAL_HREF_REGEX.test(href)) {
     return (
-      <a target="_blank" rel="noreferrer" {...props}>
+      <a href={href} target="_blank" rel="noreferrer" {...props}>
         {children}
-        <span className="nx-sr-only"> (opens in a new tab)</span>
+        <span className="nx-sr-only nx-select-none"> (opens in a new tab)</span>
       </a>
     )
   }
-  return props.href ? (
-    <Link href={props.href} passHref legacyBehavior>
+  return (
+    <Link href={href} passHref legacyBehavior>
       <a {...props}>{children}</a>
     </Link>
-  ) : null
+  )
 }
 
 const useComponents = (): Components => {

@@ -1,0 +1,30 @@
+import { CardsIcon, OneIcon, WarningIcon } from '@components/icons'
+import { Card, Cards } from 'nextra/components'
+
+# Cards Component
+
+## Example
+
+<Cards>
+  <Card
+    icon={<WarningIcon />}
+    title="Callout"
+    href="/docs/guide/built-ins/callout"
+  />
+  <Card icon={<CardsIcon />} title="Tabs" href="/docs/guide/built-ins/tabs" />
+  <Card icon={<OneIcon />} title="Steps" href="/docs/guide/built-ins/steps" />
+</Cards>
+
+## Usage
+
+{/* prettier-ignore */}
+```mdx filename="Markdown"
+import { Cards, Card } from 'nextra/components'
+import { CardsIcon, OneIcon, WarningIcon } from '../../icons'
+
+<Cards>
+  <Card icon={<WarningIcon />} title="Callout" href="/docs/guide/built-ins/callout" />
+  <Card icon={<CardsIcon />} title="Tabs" href="/docs/guide/built-ins/tabs" />
+  <Card icon={<OneIcon />} title="Steps" href="/docs/guide/built-ins/steps" />
+</Cards>
+```

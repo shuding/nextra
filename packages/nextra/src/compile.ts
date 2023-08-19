@@ -4,6 +4,7 @@ import type { ProcessorOptions } from '@mdx-js/mdx'
 import { createProcessor } from '@mdx-js/mdx'
 import type { Processor } from '@mdx-js/mdx/lib/core'
 import { remarkMermaid } from '@theguild/remark-mermaid'
+import { remarkNpm2Yarn } from '@theguild/remark-npm2yarn'
 import grayMatter from 'gray-matter'
 import rehypeKatex from 'rehype-katex'
 import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
@@ -16,6 +17,7 @@ import {
   CODE_BLOCK_FILENAME_REGEX,
   CWD,
   DEFAULT_LOCALE,
+  ERROR_ROUTES,
   MARKDOWN_URL_EXTENSION_REGEX
 } from './constants'
 import {
@@ -88,22 +90,35 @@ export async function compileMdx(
 
   const structurizedData = Object.create(null)
 
+  const {
+    staticImage,
+    flexsearch,
+    readingTime,
+    latex,
+    codeHighlight,
+    defaultShowCopyCode,
+    route = '',
+    locale,
+    mdxOptions
+  } = loaderOptions
+
   let searchIndexKey: string | null = null
-  if (typeof loaderOptions.flexsearch === 'object') {
-    if (loaderOptions.flexsearch.indexKey) {
-      searchIndexKey = loaderOptions.flexsearch.indexKey(
-        filePath,
-        loaderOptions.route || '',
-        loaderOptions.locale
-      )
+  if (
+    ERROR_ROUTES.has(route) ||
+    route === '/_app' /* remove this check in v3 */
+  ) {
+    /* skip */
+  } else if (typeof flexsearch === 'object') {
+    if (flexsearch.indexKey) {
+      searchIndexKey = flexsearch.indexKey(filePath, route, locale)
       if (searchIndexKey === '') {
-        searchIndexKey = loaderOptions.locale || DEFAULT_LOCALE
+        searchIndexKey = locale || DEFAULT_LOCALE
       }
     } else {
-      searchIndexKey = loaderOptions.locale || DEFAULT_LOCALE
+      searchIndexKey = locale || DEFAULT_LOCALE
     }
-  } else if (loaderOptions.flexsearch) {
-    searchIndexKey = loaderOptions.locale || DEFAULT_LOCALE
+  } else if (flexsearch) {
+    searchIndexKey = locale || DEFAULT_LOCALE
   }
 
   const {
@@ -114,22 +129,13 @@ export async function compileMdx(
     rehypePlugins,
     rehypePrettyCodeOptions
   }: MdxOptions = {
-    ...loaderOptions.mdxOptions,
+    ...mdxOptions,
     // You can override MDX options in the frontMatter too.
     ...frontMatter.mdxOptions
   }
 
   const format =
     _format === 'detect' ? (filePath.endsWith('.mdx') ? 'mdx' : 'md') : _format
-
-  const {
-    staticImage,
-    flexsearch,
-    readingTime,
-    latex,
-    codeHighlight,
-    defaultShowCopyCode
-  } = loaderOptions
 
   // https://github.com/shuding/nextra/issues/1303
   const isFileOutsideCWD =
@@ -147,12 +153,21 @@ export async function compileMdx(
       remarkPlugins: [
         ...(remarkPlugins || []),
         remarkMermaid, // should be before remarkRemoveImports because contains `import { Mermaid } from ...`
+        [
+          remarkNpm2Yarn, // should be before remarkRemoveImports because contains `import { Tabs as $Tabs, Tab as $Tab } from ...`
+          {
+            packageName: 'nextra/components',
+            tabNamesProp: 'items',
+            storageKey: 'selectedPackageManager'
+          }
+        ] satisfies Pluggable,
         outputFormat === 'function-body' && remarkRemoveImports,
         remarkGfm,
         remarkCustomHeadingId,
         remarkHeadings,
-        staticImage && remarkStaticImage,
+        // structurize should be before remarkHeadings because we attach #id attribute to heading node
         searchIndexKey !== null && structurize(structurizedData, flexsearch),
+        staticImage && remarkStaticImage,
         readingTime && remarkReadingTime,
         latex && remarkMath,
         isFileOutsideCWD && remarkReplaceImports,
@@ -190,14 +205,15 @@ export async function compileMdx(
 
     const headingMeta = compiler.data('headingMeta') as Pick<
       PageOpts,
-      'headings' | 'hasJsxInH1' | 'title'
+      'headings' | 'hasJsxInH1'
     >
     const readingTime = vFile.data.readingTime as ReadingTime | undefined
-
+    const title = headingMeta.headings.find(h => h.depth === 1)?.value
     return {
       // https://github.com/shuding/nextra/issues/1032
       result: String(vFile).replaceAll('__esModule', '_\\_esModule'),
       ...headingMeta,
+      ...(title && { title }),
       ...(readingTime && { readingTime }),
       structurizedData,
       searchIndexKey,

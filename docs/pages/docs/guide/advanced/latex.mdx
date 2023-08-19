@@ -1,0 +1,40 @@
+# LaTeX
+
+Nextra uses [KaTeX](https://katex.org/) to render LaTeX expressions directly in MDX.
+To enable LaTeX support, you must enable the `latex` option in your `next.config.js` file:
+
+```js filename="next.config.js"
+module.exports = require('nextra')({
+  latex: true
+})
+```
+
+When enabled, KaTeX’s CSS and fonts will be automatically included in your site, and you can start writing math expressions in your MDX files. Using LaTeX within MDX is as simple as wrapping your expression in `$` or `$$`.
+
+## Example
+
+For example, the following Markdown code:
+
+```md filename="page.mdx"
+The **Pythagorean equation**: $a=\sqrt{b^2 + c^2}$.
+```
+
+will be rendered as:
+
+<div className="mt-6 rounded-xl border border-gray-200 p-4 dark:border-gray-900">
+  The **Pythagorean equation**: $a=\sqrt{b^2 + c^2}$.
+</div>
+
+You can still use [Markdown and MDX syntax](../markdown) in the same line as your LaTeX expression.
+
+import { Callout } from 'nextra/components'
+
+<Callout>
+  If you want to display `$` in your content instead of rendering it as an
+  equation, you can escape it with a backslash (`\`). For example `\$e = mc^2\$`
+  will be rendered as \$e = mc^2\$.
+</Callout>
+
+## API
+
+To learn more about KaTeX and its supported functions and conventions, visit [KaTeX’s documentation](https://katex.org/docs/supported.html).

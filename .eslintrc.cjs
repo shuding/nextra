@@ -32,7 +32,6 @@ module.exports = {
           'always',
           { enforceForIfStatements: true }
         ],
-        '@typescript-eslint/prefer-optional-chain': 'error',
         'no-else-return': ['error', { allowElseIf: false }],
         'no-lonely-if': 'error',
         'prefer-destructuring': [
@@ -44,6 +43,9 @@ module.exports = {
         'unicorn/no-negated-condition': 'error',
         'prefer-regex-literals': ['error', { disallowRedundantWrapping: true }],
         'object-shorthand': ['error', 'always'],
+        'unicorn/prefer-regexp-test': 'error',
+        'unicorn/no-array-for-each': 'error',
+        '@typescript-eslint/prefer-for-of': 'error',
         // todo: enable
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-non-null-assertion': 'off',
@@ -109,7 +111,8 @@ module.exports = {
       rules: {
         '@typescript-eslint/no-unnecessary-type-assertion': 'error',
         '@typescript-eslint/consistent-type-imports': 'error',
-        '@typescript-eslint/non-nullable-type-assertion-style': 'error'
+        '@typescript-eslint/non-nullable-type-assertion-style': 'error',
+        '@typescript-eslint/prefer-optional-chain': 'error'
       }
     },
     // ⚙️ nextra-theme-docs
@@ -154,7 +157,7 @@ module.exports = {
         tailwindcss: {
           config: 'packages/nextra-theme-docs/tailwind.config.js',
           callees: ['cn'],
-          whitelist: ['nextra-code-block']
+          whitelist: ['nextra-code-block', 'nextra-filetree']
         }
       }
     },

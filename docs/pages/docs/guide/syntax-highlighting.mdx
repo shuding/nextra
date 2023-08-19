@@ -1,9 +1,10 @@
 import { OptionTable } from 'components/table'
+import { Callout } from 'nextra/components'
 
 # Syntax Highlighting
 
 Nextra uses [Shiki](https://shiki.matsu.io) to do syntax highlighting at build
-time. It’s very reliable and performant. For example, adding this in your
+time. It's very reliable and performant. For example, adding this in your
 Markdown file:
 
 ````md filename="Markdown"
@@ -182,7 +183,7 @@ Renders:
 Check [this list](https://github.com/shikijs/shiki/blob/main/docs/languages.md)
 for all supported languages.
 
-## Customize The Theme
+## Customize the Theme
 
 Nextra uses CSS variables to define the colors for tokens. You can inject a
 [global CSS](https://nextjs.org/docs/basic-features/built-in-css-support#adding-a-global-stylesheet)
@@ -213,7 +214,7 @@ tokens and you can override any of these:
   --shiki-token-parameter: #ff9800;
   --shiki-token-function: #b392f0;
   --shiki-token-string-expression: #4bb74a;
-  --shiki-token-punctuation: #bbbbbb;
+  --shiki-token-punctuation: #bbb;
   --shiki-token-link: #ffab70;
 }
 ```
@@ -303,3 +304,71 @@ Nextra configuration (`next.config.js` file).
     ]
   ]}
 />
+
+## Custom Grammar
+
+Shiki accepts a
+[VSCode TextMate Grammar](https://code.visualstudio.com/api/language-extensions/syntax-highlight-guide)
+for syntax highlighting with custom language grammars.
+
+You can provide these grammars by overriding the `getHighlighter` function in
+`mdxOptions.rehypePrettyCodeOptions` option in your Nextra config inside
+`next.config.js`:
+
+```js filename="next.config.js" {13-18}
+import { BUNDLED_LANGUAGES } from 'shiki'
+
+nextra({
+  // ... other options
+  mdxOptions: {
+    rehypePrettyCodeOptions: {
+      getHighlighter: options =>
+        getHighlighter({
+          ...options,
+          langs: [
+            ...BUNDLED_LANGUAGES,
+            // custom grammar options, see the Shiki documentation for how to provide these options
+            {
+              id: 'my-lang',
+              scopeName: 'source.my-lang',
+              aliases: ['mylang'], // Along with id, aliases will be included in the allowed names you can use when writing markdown.
+              path: '../../public/syntax/grammar.tmLanguage.json'
+            }
+          ]
+        })
+    }
+  }
+})
+```
+
+## Custom Themes
+
+Within `mdxOptions.rehypePrettyCodeOptions` you may also provide custom themes
+instead of [relying on CSS Variables](/docs/guide/syntax-highlighting):
+
+```js filename="next.config.js" {4}
+nextra({
+  // ... other options
+  mdxOptions: {
+    rehypePrettyCodeOptions: {
+      // VSCode theme or built-in Shiki theme, see Shiki documentation for more information
+      theme: JSON.parse(
+        readFileSync('./public/syntax/arctis_light.json', 'utf8')
+      )
+    }
+  }
+})
+```
+
+### Multiple Themes
+
+Nextra currently doesn't support specifying multiple themes. Because Shiki
+renders multiple code blocks for every theme and tags them with an attribute
+`data-theme`, e.g. `data-theme="dark"`.
+
+<Callout type="info">
+  However, in the future, multiple themes will be supported. You can track the
+  progress in shikiji (newly fork of Shiki)
+  https://github.com/antfu/shikiji#multiple-themes that already supports
+  multiple themes without rendering multiple code blocks.
+</Callout>

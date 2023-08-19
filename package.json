@@ -1,12 +1,12 @@
 {
   "private": true,
-  "packageManager": "pnpm@8.6.5",
+  "packageManager": "pnpm@8.6.12",
   "scripts": {
     "build": "turbo run build:tailwind build --filter=./packages/\\*",
     "build:all": "turbo run build:tailwind build",
-    "build:core": "pnpm run build --filter=nextra",
-    "build:theme-blog": "pnpm run build --filter=nextra-theme-blog",
-    "build:theme-docs": "pnpm run build --filter=nextra-theme-docs",
+    "build:core": "pnpm build --filter=nextra",
+    "build:theme-blog": "pnpm build --filter=nextra-theme-blog",
+    "build:theme-docs": "pnpm build --filter=nextra-theme-docs",
     "clean": "turbo run clean",
     "dev:core": "turbo run dev --filter=nextra... --filter=!docs",
     "dev:theme-blog": "turbo run dev --filter=example-blog... --filter=!docs",
@@ -21,26 +21,26 @@
     "version": "changeset version"
   },
   "devDependencies": {
-    "@changesets/cli": "2.26.1",
-    "@edge-runtime/vm": "3.0.3",
-    "@ianvs/prettier-plugin-sort-imports": "^4.0.0-beta.0",
-    "@next/eslint-plugin-next": "13.4.7",
-    "@typescript-eslint/eslint-plugin": "5.60.1",
-    "@typescript-eslint/parser": "5.60.1",
-    "eslint": "8.43.0",
-    "eslint-config-prettier": "8.8.0",
-    "eslint-plugin-import": "2.27.5",
-    "eslint-plugin-react": "7.32.2",
+    "@changesets/cli": "2.26.2",
+    "@edge-runtime/vm": "3.0.4",
+    "@ianvs/prettier-plugin-sort-imports": "4.1.0",
+    "@next/eslint-plugin-next": "13.4.19",
+    "@typescript-eslint/eslint-plugin": "6.4.0",
+    "@typescript-eslint/parser": "6.4.0",
+    "eslint": "8.47.0",
+    "eslint-config-prettier": "9.0.0",
+    "eslint-plugin-import": "2.28.1",
+    "eslint-plugin-react": "7.33.2",
     "eslint-plugin-react-hooks": "4.6.0",
     "eslint-plugin-tailwindcss": "3.13.0",
     "eslint-plugin-typescript-sort-keys": "2.3.0",
-    "eslint-plugin-unicorn": "47.0.0",
-    "prettier": "2.8.8",
-    "prettier-plugin-pkg": "0.17.1",
-    "prettier-plugin-tailwindcss": "0.3.0",
+    "eslint-plugin-unicorn": "48.0.1",
+    "prettier": "3.0.2",
+    "prettier-plugin-pkg": "0.18.0",
+    "prettier-plugin-tailwindcss": "0.5.3",
     "rimraf": "5.0.1",
-    "tsup": "7.0.0",
-    "turbo": "1.10.6",
+    "tsup": "7.2.0",
+    "turbo": "1.10.12",
     "typescript": "5.1.6"
   },
   "pnpm": {
@@ -50,20 +50,12 @@
       "react-dom": "^18.2.0",
       "@mdx-js/react": "^2.3.0",
       "next-themes": "^0.2.1",
-      "next": "^13.4.6",
+      "next": "^13.4.8",
       "@types/react": "^18.0.15",
-      "@types/react-dom": "^18.0.6",
-      "postcss": "^8.4.21",
-      "postcss-cli": "^10.1.0",
-      "autoprefixer": "^10.4.13",
-      "tailwindcss": "^3.3.1",
-      "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
-      "@tailwindcss/typography": "^0.5.8",
-      "concurrently": "^7.3.0",
-      "postcss-import": "^14.1.0"
+      "@types/react-dom": "^18.0.6"
     },
     "patchedDependencies": {
-      "@changesets/assemble-release-plan@5.2.3": "patches/@changesets__assemble-release-plan@5.2.3.patch"
+      "@changesets/assemble-release-plan@5.2.4": "patches/@changesets__assemble-release-plan@5.2.4.patch"
     }
   }
 }
