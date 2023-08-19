@@ -33,14 +33,16 @@ function HeadingLink({
   tag: Tag,
   children,
   id,
+  // can be added by footnotes
+  className = '',
   ...props
 }: ComponentProps<'h2'> & { tag: `h${2 | 3 | 4 | 5 | 6}` }): ReactElement {
   return (
-    <Tag className={`subheading-${Tag}`} {...props}>
+    <Tag className={`nx-not-prose subheading-${Tag} ${className}`} {...props}>
       {children}
-      <span className="nx-absolute -nx-mt-7" id={id} />
       <a
         href={id && `#${id}`}
+        id={id}
         className="subheading-anchor"
         aria-label="Permalink for this section"
       />
@@ -48,22 +50,21 @@ function HeadingLink({
   )
 }
 
-const A = ({ children, ...props }: ComponentProps<'a'>) => {
-  const isExternal =
-    props.href?.startsWith('https://') || props.href?.startsWith('http://')
+const A = ({ children, href = '', ...props }: ComponentProps<'a'>) => {
+  const isExternal = href?.startsWith('https://') || href?.startsWith('http://')
   if (isExternal) {
     return (
-      <a target="_blank" rel="noreferrer" {...props}>
+      <a href={href} target="_blank" rel="noreferrer" {...props}>
         {children}
         <span className="nx-sr-only nx-select-none"> (opens in a new tab)</span>
       </a>
     )
   }
-  return props.href ? (
-    <Link href={props.href} passHref legacyBehavior>
+  return (
+    <Link href={href} passHref legacyBehavior>
       <a {...props}>{children}</a>
     </Link>
-  ) : null
+  )
 }
 
 const useComponents = (): Components => {
