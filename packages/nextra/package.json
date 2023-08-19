@@ -90,6 +90,9 @@
       "mdx": [
         "./dist/mdx.d.mts"
       ],
+      "filter-route-locale": [
+        "./dist/filter-route-locale.d.mts"
+      ],
       "normalize-pages": [
         "./dist/normalize-pages.d.mts"
       ],
