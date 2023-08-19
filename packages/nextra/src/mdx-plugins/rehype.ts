@@ -6,7 +6,11 @@ function visit(node, tagNames, handler) {
     handler(node)
     return
   }
-  node.children?.forEach(n => visit(n, tagNames, handler))
+  if ('children' in node) {
+    for (const n of node.children) {
+      visit(n, tagNames, handler)
+    }
+  }
 }
 
 export const parseMeta =
