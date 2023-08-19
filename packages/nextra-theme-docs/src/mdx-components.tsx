@@ -46,9 +46,9 @@ function HeadingLink({
   return (
     <Tag
       className={cn(
-        'mdx-header',
+        'nextra-heading',
         {
-          h2: 'mdx-h2',
+          h2: 'nextra-h2',
           h3: 'nx-mt-8 nx-text-2xl',
           h4: 'nx-mt-8 nx-text-xl',
           h5: 'nx-mt-8 nx-text-lg',
