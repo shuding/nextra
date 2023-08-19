@@ -57,7 +57,7 @@ const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS: RehypePrettyCodeOptions = {
   onVisitHighlightedWord(node: any) {
     node.properties.className = ['highlighted']
   },
-  filterMetaString: meta => meta.replace(CODE_BLOCK_FILENAME_REGEX, ''),
+  filterMetaString: meta => meta.replace(CODE_BLOCK_FILENAME_REGEX, '')
 }
 
 const cachedCompilerForFormat: Record<
