@@ -57,20 +57,8 @@
   "types": "./dist/types.d.mts",
   "typesVersions": {
     "*": {
-      "compile": [
-        "./dist/compile.d.mts"
-      ],
-      "context": [
-        "./dist/context.d.mts"
-      ],
       "data": [
         "./dist/ssg.d.mts"
-      ],
-      "ssg": [
-        "./dist/ssg.d.mts"
-      ],
-      "locales": [
-        "./dist/locales.d.mts"
       ],
       "icons": [
         "./dist/icons/index.d.mts"
@@ -81,20 +69,11 @@
       "hooks": [
         "./dist/hooks/index.d.mts"
       ],
-      "layout": [
-        "./dist/layout.d.mts"
-      ],
-      "remote": [
-        "./dist/remote.d.mts"
-      ],
-      "mdx": [
-        "./dist/mdx.d.mts"
-      ],
-      "normalize-pages": [
-        "./dist/normalize-pages.d.mts"
-      ],
       "mdx-plugins": [
         "./dist/mdx-plugins/index.d.mts"
+      ],
+      "*": [
+        "./dist/*.d.mts"
       ]
     }
   },
