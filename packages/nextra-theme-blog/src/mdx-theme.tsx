@@ -57,9 +57,10 @@ function HeadingLink({
   )
 }
 
+const EXTERNAL_HREF_REGEX = /https?:\/\//
+
 const A = ({ children, href = '', ...props }: ComponentProps<'a'>) => {
-  const isExternal = href?.startsWith('https://') || href?.startsWith('http://')
-  if (isExternal) {
+  if (EXTERNAL_HREF_REGEX.test(href)) {
     return (
       <a href={href} target="_blank" rel="noreferrer" {...props}>
         {children}
