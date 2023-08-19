@@ -9,7 +9,7 @@
 @import 'nextra/styles/cards.css';
 
 html {
-  @apply nx-scroll-pt-5
+  @apply nx-scroll-pt-5;
 }
 
 body {

@@ -1,8 +1,8 @@
 {
   "name": "example-blog",
+  "type": "module",
   "license": "MIT",
   "private": true,
-  "type": "module",
   "scripts": {
     "build": "next build",
     "clean": "rimraf .next .turbo",
