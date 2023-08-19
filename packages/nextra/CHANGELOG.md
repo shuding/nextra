@@ -1,5 +1,22 @@
 # nextra
 
+## 2.11.1
+
+### Patch Changes
+
+- ddddce95: skip search indexing for 404/500 pages
+- 6154e312: ensure first h1 is set as page title if frontmatter.title is missing
+- 46743ba4: fix TS error
+  `Cannot find module 'nextra/filter-route-locale' or its corresponding type declarations.`
+  while importing
+
+  ```js
+  import filterRouteLocale from 'nextra/filter-route-locale'
+  ```
+
+- 4dd720ad: remove `font-weight: 500;` from styles of code blocks since it gives
+  no effect
+
 ## 2.11.0
 
 ### Patch Changes

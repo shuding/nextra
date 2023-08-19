@@ -1,5 +1,18 @@
 # nextra-theme-blog
 
+## 2.11.1
+
+### Patch Changes
+
+- cf5f91ea: fix footnotes and backlink jump
+- 4dd720ad: remove `font-weight: 500;` from styles of code blocks since it gives
+  no effect
+- Updated dependencies [ddddce95]
+- Updated dependencies [6154e312]
+- Updated dependencies [46743ba4]
+- Updated dependencies [4dd720ad]
+  - nextra@2.11.1
+
 ## 2.11.0
 
 ### Minor Changes

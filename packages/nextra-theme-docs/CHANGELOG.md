@@ -1,5 +1,20 @@
 # nextra-theme-docs
 
+## 2.11.1
+
+### Patch Changes
+
+- cf5f91ea: fix footnotes and backlink jump
+- ddddce95: skip search indexing for 404/500 pages
+- 4dd720ad: remove `font-weight: 500;` from styles of code blocks since it gives
+  no effect
+- 29e35d81: fix feedback.labels for gitlab
+- Updated dependencies [ddddce95]
+- Updated dependencies [6154e312]
+- Updated dependencies [46743ba4]
+- Updated dependencies [4dd720ad]
+  - nextra@2.11.1
+
 ## 2.11.0
 
 ### Minor Changes
