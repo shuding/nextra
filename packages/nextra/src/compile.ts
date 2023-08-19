@@ -104,7 +104,10 @@ export async function compileMdx(
   } = loaderOptions
 
   let searchIndexKey: string | null = null
-  if (ERROR_ROUTES.has(route)) {
+  if (
+    ERROR_ROUTES.has(route) ||
+    route === '_app' /* remove this check in v3 */
+  ) {
     /* skip */
   } else if (typeof flexsearch === 'object') {
     if (flexsearch.indexKey) {
