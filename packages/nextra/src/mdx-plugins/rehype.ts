@@ -1,14 +1,14 @@
 // @ts-nocheck
 import { CODE_BLOCK_FILENAME_REGEX } from '../constants'
 
-function visit(node, tagNames, handler, parent, idx) {
+function visit(node, tagNames, handler) {
   if (tagNames.includes(node.tagName)) {
-    handler(node, parent, idx)
+    handler(node)
     return
   }
   if ('children' in node) {
-    for (const [i, n] of node.children.entries()) {
-      visit(n, tagNames, handler, node, i)
+    for (const n of node.children) {
+      visit(n, tagNames, handler)
     }
   }
 }
@@ -31,19 +31,14 @@ export const parseMeta =
   }
 
 export const attachMeta = () => tree => {
-  visit(tree, ['div', 'pre'], (node, parent, idx) => {
-    const children =
-      'data-rehype-pretty-code-fragment' in node.properties
-        ? node.children.map(child => ({ ...node, ...child }))
-        : [node]
-
-    for (const node of children) {
-      node.properties.filename = node.__nextra_filename
-      node.properties.hasCopyCode = node.__nextra_hasCopyCode
+  visit(tree, ['div', 'pre'], node => {
+    if ('data-rehype-pretty-code-fragment' in node.properties) {
+      // remove <div data-rehype-pretty-code-fragment /> element that wraps <pre /> element
+      // because we'll wrap with our own <div />
+      Object.assign(node, node.children[0])
     }
-    // if this is a <div data-rehype-pretty-code-fragment /> element,
-    // this flattens children that wraps <pre /> element(s) into sibling nodes
-    // because we'll wrap with our own <div />
-    parent.children.splice(idx, 1, ...children)
+
+    node.properties.filename = node.__nextra_filename
+    node.properties.hasCopyCode = node.__nextra_hasCopyCode
   })
 }

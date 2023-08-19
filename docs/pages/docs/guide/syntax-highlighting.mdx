@@ -1,9 +1,10 @@
 import { OptionTable } from 'components/table'
+import { Callout } from 'nextra/components'
 
 # Syntax Highlighting
 
 Nextra uses [Shiki](https://shiki.matsu.io) to do syntax highlighting at build
-time. It’s very reliable and performant. For example, adding this in your
+time. It's very reliable and performant. For example, adding this in your
 Markdown file:
 
 ````md filename="Markdown"
@@ -361,39 +362,13 @@ nextra({
 
 ### Multiple Themes
 
-Provide a record of themes to the `theme` option instead to provide multiple
-themes:
+Nextra currently doesn't support specifying multiple themes. Because Shiki
+renders multiple code blocks for every theme and tags them with an attribute
+`data-theme`, e.g. `data-theme="dark"`.
 
-```js filename="next.config.js" {6-11}
-nextra({
-  // ... other options
-  mdxOptions: {
-    rehypePrettyCodeOptions: {
-      theme: {
-        dark: JSON.parse(
-          readFileSync('./public/syntax/arctis_dark.json', 'utf8')
-        ),
-        light: JSON.parse(
-          readFileSync('./public/syntax/arctis_light.json', 'utf8')
-        )
-      }
-    }
-  }
-})
-```
-
-Since syntax highlighting is done at build-time, a code block will be rendered
-for every theme and tagged with an attribute `data-theme`, e.g. `data-theme="dark"{:css}`.
-
-You can use CSS to show and hide these code blocks accordingly:
-
-```css filename="global.css"
-/* hide code blocks */
-html[class~='dark'] .nextra-code-block:has([data-theme='light']),
-html[class~='light'] .nextra-code-block:has([data-theme='dark']),
-/* hide inline code blocks */
-html[class~='dark'] code[data-theme='light'],
-html[class~='light'] code[data-theme='dark'] {
-  display: none;
-}
-```
+<Callout type="info">
+  However, in the future, multiple themes will be supported. You can track the
+  progress in shikiji (newly fork of Shiki)
+  https://github.com/antfu/shikiji#multiple-themes that already supports
+  multiple themes without rendering multiple code blocks.
+</Callout>
