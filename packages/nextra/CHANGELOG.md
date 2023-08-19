@@ -4,13 +4,13 @@
 
 ### Patch Changes
 
-- daa557bc: use github-slugger for custom heading ids to prevent duplicated
+- 3bb480a4: use github-slugger for custom heading ids to prevent duplicated
   headings
-- 3812ed91: fix custom heading id in search result
-- fb5d39ba: fix
+- 3bb480a4: fix custom heading id in search result
+- 3bb480a4: fix
   `Warning: Prop href did not match. Server: "/blog.en-US#" Client: "/blog#"` in
   by `normalizePages` from nextra/normalize-pages`
-- 7f39c451: strip `.html` extension from URL route for static export
+- 3bb480a4: strip `.html` extension from URL route for static export
 
 ## 2.10.0
 

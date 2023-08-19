@@ -8,6 +8,10 @@
 @import 'nextra/styles/steps.css';
 @import 'nextra/styles/cards.css';
 
+html {
+  @apply nx-scroll-pt-5;
+}
+
 body {
   @apply nx-px-4;
 }
@@ -36,4 +40,8 @@ h1 {
 
 .nx-prose .nextra-callout p {
   @apply nx-m-0;
+}
+
+.footnotes a[data-footnote-backref] {
+  font-family: initial;
 }

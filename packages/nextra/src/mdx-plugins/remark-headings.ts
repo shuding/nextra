@@ -19,7 +19,7 @@ const getFlattenedValue = (node: Parent): string =>
 
 export const remarkHeadings: Plugin<[], Root> = function (this: Processor) {
   const { headingMeta } = this.data() as {
-    headingMeta: Pick<PageOpts, 'headings' | 'hasJsxInH1' | 'title'>
+    headingMeta: Pick<PageOpts, 'headings' | 'hasJsxInH1'>
   }
   const slugger = new Slugger()
   return (tree, _file, done) => {
@@ -55,9 +55,6 @@ export const remarkHeadings: Plugin<[], Root> = function (this: Processor) {
           headingMeta.headings.push(heading)
           if (hasJsxInH1) {
             headingMeta.hasJsxInH1 = true
-          }
-          if (node.depth === 1) {
-            headingMeta.title = heading.value
           }
 
           return

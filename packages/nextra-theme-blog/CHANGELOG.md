@@ -4,18 +4,18 @@
 
 ### Minor Changes
 
-- 23c3d6a3: support draft posts via frontMatter's `draft: true` value
+- 3bb480a4: support draft posts via frontMatter's `draft: true` value
 
 ### Patch Changes
 
-- daa557bc: use github-slugger for custom heading ids to prevent duplicated
+- 3bb480a4: use github-slugger for custom heading ids to prevent duplicated
   headings
-- 7d0e678b: fix code blocks `box-decoration-theme: clone` can create confusing
+- 3bb480a4: fix code blocks `box-decoration-theme: clone` can create confusing
   output over line breaks, use `slice` instead
-- Updated dependencies [daa557bc]
-- Updated dependencies [3812ed91]
-- Updated dependencies [fb5d39ba]
-- Updated dependencies [7f39c451]
+- Updated dependencies [3bb480a4]
+- Updated dependencies [3bb480a4]
+- Updated dependencies [3bb480a4]
+- Updated dependencies [3bb480a4]
   - nextra@2.11.0
 
 ## 2.10.0
