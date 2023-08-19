@@ -1,15 +1,9 @@
 .subheading-anchor {
   @apply nx-opacity-0 nx-transition-opacity ltr:nx-ml-1 rtl:nx-mr-1;
 
-  span:target + &,
   :hover > &,
   &:focus {
     @apply nx-opacity-100;
-  }
-
-  span + &,
-  :hover > & {
-    @apply !nx-no-underline;
   }
 
   &:after {

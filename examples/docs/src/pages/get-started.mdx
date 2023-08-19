@@ -1,3 +1,5 @@
+import { Callout, Steps } from 'nextra/components';
+
 # Get Started
 
 ## Quick Start with Vercel
@@ -11,51 +13,22 @@ Once done, every change in the repository will be deployed automatically.
 
 ## Create Manually
 
-Nextra works like a Next.js plugin, and it accepts a theme config (layout) to render the page. To start:
+Nextra works like a Next.js plugin, and it accepts a theme config (layout) to render the page. To start: [^3]
 
-1. Install Next.js, Nextra and React
+<Steps>
+### Install Next.js, Nextra and React [^1]
 
-import { Callout, Tabs, Tab } from 'nextra/components';
+```sh npm2yarn
+npm i react react-dom next nextra
+```
 
-<Tabs items={['npm', 'yarn', 'pnpm']} defaultIndex={1}>
-  <Tab>
-    ```bash
-    npm i react react-dom next nextra
-    ```
-  </Tab>
-  <Tab>
-    ```bash
-    yarn add react react-dom next nextra
-    ```
-  </Tab>
-  <Tab>
-    ```bash
-    pnpm i react react-dom next nextra
-    ```
-  </Tab>
-</Tabs>
+### Install the docs theme [^2]
 
-2. Install the docs theme
+```sh npm2yarn
+npm i nextra-theme-docs
+```
 
-<Tabs items={['npm', 'yarn', 'pnpm']} defaultIndex={1}>
-  <Tab>
-    ```bash
-    npm i nextra-theme-docs
-    ```
-  </Tab>
-  <Tab>
-    ```bash
-    yarn add nextra-theme-docs
-    ```
-  </Tab>
-  <Tab>
-    ```bash
-    pnpm i nextra-theme-docs
-    ```
-  </Tab>
-</Tabs>
-
-3. Create the following Next.js config and theme config under the root directory:
+### Create the following Next.js config and theme config under the root directory
 
 ```js filename="next.config.js"
 const withNextra = require('nextra')({
@@ -66,7 +39,7 @@ const withNextra = require('nextra')({
 module.exports = withNextra()
 ```
 
-4. Create a `theme.config.js` file for the docs theme:
+### Create a `theme.config.js` file for the docs theme
 
 ```js filename="theme.config.js"
 /**
@@ -111,7 +84,9 @@ export default {
   [here](/themes/docs/configuration).
 </Callout>
 
-5. You are good to go! Run `yarn next` to start.
+### You are good to go! Run `next dev` to start
+
+</Steps>
 
 ---
 
@@ -126,3 +101,7 @@ export default {
 <Callout>
 You can also use [`<style jsx>`](https://nextjs.org/docs/basic-features/built-in-css-support#css-in-js) to style elements inside `theme.config.js`.
 </Callout>
+
+[^1]: Install Next.js, Nextra and React.
+[^2]: Install the docs theme.
+[^3]: To start.

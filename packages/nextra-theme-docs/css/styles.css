@@ -11,7 +11,7 @@
 @import './typesetting-article.css';
 
 html {
-  @apply nx-antialiased nx-text-base;
+  @apply nx-antialiased nx-text-base nx-scroll-pt-[--nextra-navbar-height];
   font-feature-settings:
     'rlig' 1,
     'calt' 1,
@@ -152,6 +152,10 @@ input[type='search'] {
     opacity: 0;
     animation: nextra-fadein2 1s ease 0.2s forwards;
   }
+}
+
+.footnotes a[data-footnote-backref] {
+  font-family: initial;
 }
 
 @keyframes nextra-fadein {
