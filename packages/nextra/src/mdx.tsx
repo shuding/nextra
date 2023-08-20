@@ -7,6 +7,7 @@ const DEFAULT_COMPONENTS = {
     typeof props.src === 'object' ? (
       <Image {...(props as ImageProps)} />
     ) : (
+      // eslint-disable-next-line @next/next/no-img-element
       <img {...props} />
     )
 } satisfies Components
