@@ -18,3 +18,7 @@
 <script>
 require('child_process').spawn('echo', ['hack!']);
 </script>
+
+```sh npm2yarn
+npm i @graphql-eslint/eslint-plugin
+```

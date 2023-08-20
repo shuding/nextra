@@ -187,7 +187,12 @@ export async function compileMdx(
         ...(rehypePlugins || []),
         ...(format === 'md'
           ? [
-              rehypeRaw, // To render <details /> and <summary /> correctly
+              [
+                // To render <details /> and <summary /> correctly
+                rehypeRaw,
+                // fix Error: Cannot compile `mdxjsEsm` node for npm2yarn and mermaid
+                { passThrough: ['mdxjsEsm', 'mdxJsxFlowElement'] }
+              ],
               rehypeSanitize // To remove <script />
             ]
           : []),
