@@ -185,7 +185,12 @@ export async function compileMdx(
       ].filter(truthy),
       rehypePlugins: [
         ...(rehypePlugins || []),
-        ...(format === 'md' ? [rehypeRaw, rehypeSanitize] : []),
+        ...(format === 'md'
+          ? [
+              rehypeRaw, // To render <details /> and <summary /> correctly
+              rehypeSanitize // To remove <script />
+            ]
+          : []),
         [parseMeta, { defaultShowCopyCode }],
         codeHighlight !== false &&
           ([
