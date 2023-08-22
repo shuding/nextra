@@ -73,6 +73,7 @@ exports[`Page Process > pageMap en-US 1`] = `
           "title": "Examples",
           "type": "page",
         },
+        "foo": "Foo",
         "index": {
           "display": "hidden",
           "title": "Introduction",
@@ -634,6 +635,12 @@ exports[`Page Process > pageMap en-US 1`] = `
       "route": "/examples",
     },
     {
+      "kind": "MdxPage",
+      "locale": "en-US",
+      "name": "foo",
+      "route": "/foo",
+    },
+    {
       "frontMatter": {
         "searchable": false,
         "title": "React Hooks for Data Fetching",
@@ -1168,6 +1175,12 @@ exports[`Page Process > pageMap ru 1`] = `
       "kind": "MdxPage",
       "name": "500",
       "route": "/500",
+    },
+    {
+      "kind": "MdxPage",
+      "locale": "en-US",
+      "name": "foo",
+      "route": "/foo",
     },
     {
       "frontMatter": {

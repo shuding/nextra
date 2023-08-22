@@ -1008,6 +1008,12 @@ exports[`context > getAllPages() > should work 1`] = `
     "route": "/blog",
   },
   {
+    "kind": "MdxPage",
+    "locale": "en-US",
+    "name": "foo",
+    "route": "/foo",
+  },
+  {
     "frontMatter": {
       "mdxOptions": {
         "format": "md",

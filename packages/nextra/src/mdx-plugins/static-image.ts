@@ -8,43 +8,16 @@ import { existsSync } from '../file-system'
 import { truthy } from '../utils'
 
 /**
- * @ link https://github.com/vercel/next.js/blob/6cfebfb02c2a52a1f99fca59a2eac2d704d053db/packages/next/build/webpack/loaders/next-image-loader.js#L6
- * @ link https://github.com/vercel/next.js/blob/6cfebfb02c2a52a1f99fca59a2eac2d704d053db/packages/next/client/image.tsx#LL702
+ * @link https://github.com/vercel/next.js/blob/6cfebfb02c2a52a1f99fca59a2eac2d704d053db/packages/next/build/webpack/loaders/next-image-loader.js#L6
+ * @link https://github.com/vercel/next.js/blob/6cfebfb02c2a52a1f99fca59a2eac2d704d053db/packages/next/client/image.tsx#LL702
  */
 const VALID_BLUR_EXT = ['.jpeg', '.png', '.webp', '.avif', '.jpg']
-
-const getASTNodeImport = (name: string, from: string) => ({
-  type: 'mdxjsEsm',
-  value: `import ${name} from "${from}"`,
-  data: {
-    estree: {
-      type: 'Program',
-      sourceType: 'module',
-      body: [
-        {
-          type: 'ImportDeclaration',
-          specifiers: [
-            {
-              type: 'ImportDefaultSpecifier',
-              local: { type: 'Identifier', name }
-            }
-          ],
-          source: {
-            type: 'Literal',
-            value: from,
-            raw: `"${from}"`
-          }
-        }
-      ]
-    }
-  }
-})
 
 // Based on the remark-embed-images project
 // https://github.com/remarkjs/remark-embed-images
 export const remarkStaticImage: Plugin<[{ filePath: string }], Root> =
   () => (tree, _file, done) => {
-    const importsToInject: any[] = []
+    const importsToInject: { variableName: string; importPath: string }[] = []
 
     visit(tree, 'image', node => {
       // https://github.com/shuding/nextra/issues/1344
@@ -65,14 +38,14 @@ export const remarkStaticImage: Plugin<[{ filePath: string }], Root> =
         }
         url = slash(urlPath)
       }
-      // Unique variable name for the given static image URL.
-      const tempVariableName = `$nextraImage${importsToInject.length}`
-      const blur = VALID_BLUR_EXT.some(ext => url.endsWith(ext))
-      // Replace the image node with an MDX component node (Next.js Image).
+      // Unique variable name for the given static image URL
+      const variableName = `__img${importsToInject.length}`
+      const hasBlur = VALID_BLUR_EXT.some(ext => url.endsWith(ext))
+      importsToInject.push({ variableName, importPath: url })
+      // Replace the image node with an MDX component node (Next.js Image)
       Object.assign(node, {
         type: 'mdxJsxFlowElement',
-        name: '$NextImageNextra',
-        children: [],
+        name: 'img',
         attributes: [
           // do not render empty alt in html markup
           node.alt && {
@@ -80,7 +53,7 @@ export const remarkStaticImage: Plugin<[{ filePath: string }], Root> =
             name: 'alt',
             value: node.alt
           },
-          blur && {
+          hasBlur && {
             type: 'mdxJsxAttribute',
             name: 'placeholder',
             value: 'blur'
@@ -90,18 +63,13 @@ export const remarkStaticImage: Plugin<[{ filePath: string }], Root> =
             name: 'src',
             value: {
               type: 'mdxJsxAttributeValueExpression',
-              value: tempVariableName,
+              value: variableName,
               data: {
                 estree: {
-                  type: 'Program',
-                  sourceType: 'module',
                   body: [
                     {
                       type: 'ExpressionStatement',
-                      expression: {
-                        type: 'Identifier',
-                        name: tempVariableName
-                      }
+                      expression: { type: 'Identifier', name: variableName }
                     }
                   ]
                 }
@@ -110,14 +78,34 @@ export const remarkStaticImage: Plugin<[{ filePath: string }], Root> =
           }
         ].filter(truthy)
       })
-
-      // Inject the static image import into the root node.
-      importsToInject.push(getASTNodeImport(tempVariableName, url))
     })
 
-    tree.children.unshift(
-      getASTNodeImport('$NextImageNextra', 'next/image') as any,
-      ...importsToInject
-    )
+    if (importsToInject.length) {
+      tree.children.unshift(
+        ...importsToInject.map(
+          ({ variableName, importPath }) =>
+            ({
+              type: 'mdxjsEsm',
+              data: {
+                estree: {
+                  body: [
+                    {
+                      type: 'ImportDeclaration',
+                      source: { type: 'Literal', value: importPath },
+                      specifiers: [
+                        {
+                          type: 'ImportDefaultSpecifier',
+                          local: { type: 'Identifier', name: variableName }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }) as any
+        )
+      )
+    }
+
     done()
   }

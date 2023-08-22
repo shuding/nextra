@@ -9,6 +9,8 @@ import grayMatter from 'gray-matter'
 import rehypeKatex from 'rehype-katex'
 import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
 import rehypePrettyCode from 'rehype-pretty-code'
+import rehypeRaw from 'rehype-raw'
+import rehypeSanitize from 'rehype-sanitize'
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 import remarkReadingTime from 'remark-reading-time'
@@ -141,7 +143,6 @@ export async function compileMdx(
   // https://github.com/shuding/nextra/issues/1303
   const isFileOutsideCWD =
     !isPageImport && path.relative(CWD, filePath).startsWith('..')
-
   const compiler =
     (useCachedCompiler && cachedCompilerForFormat[format]) ||
     (cachedCompilerForFormat[format] = createProcessor({
@@ -184,6 +185,17 @@ export async function compileMdx(
       ].filter(truthy),
       rehypePlugins: [
         ...(rehypePlugins || []),
+        ...(format === 'md'
+          ? [
+              [
+                // To render <details /> and <summary /> correctly
+                rehypeRaw,
+                // fix Error: Cannot compile `mdxjsEsm` node for npm2yarn and mermaid
+                { passThrough: ['mdxjsEsm', 'mdxJsxFlowElement'] }
+              ],
+              rehypeSanitize // To remove <script />
+            ]
+          : []),
         [parseMeta, { defaultShowCopyCode }],
         codeHighlight !== false &&
           ([
@@ -210,9 +222,11 @@ export async function compileMdx(
     >
     const readingTime = vFile.data.readingTime as ReadingTime | undefined
     const title = headingMeta.headings.find(h => h.depth === 1)?.value
+    // https://github.com/shuding/nextra/issues/1032
+    const result = String(vFile).replaceAll('__esModule', '_\\_esModule')
+
     return {
-      // https://github.com/shuding/nextra/issues/1032
-      result: String(vFile).replaceAll('__esModule', '_\\_esModule'),
+      result,
       ...headingMeta,
       ...(title && { title }),
       ...(readingTime && { readingTime }),
