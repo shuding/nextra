@@ -90,9 +90,6 @@ export async function compileMdx(
 ) {
   // Extract frontMatter information if it exists
   const { data: frontMatter, content } = grayMatter(source)
-
-  const structurizedData = Object.create(null)
-
   const {
     staticImage,
     flexsearch,
@@ -168,7 +165,8 @@ export async function compileMdx(
         remarkCustomHeadingId,
         remarkHeadings,
         // structurize should be before remarkHeadings because we attach #id attribute to heading node
-        searchIndexKey !== null && structurize(structurizedData, flexsearch),
+        searchIndexKey !== null &&
+          ([structurize, flexsearch] satisfies Pluggable),
         staticImage && remarkStaticImage,
         readingTime && remarkReadingTime,
         latex && remarkMath,
@@ -212,9 +210,11 @@ export async function compileMdx(
   try {
     const vFile = await compiler.process({ value: content, path: filePath })
 
-    const { headings, hasJsxInH1, readingTime } = vFile.data as {
-      readingTime?: ReadingTime
-    } & Pick<PageOpts, 'headings' | 'hasJsxInH1'>
+    const { headings, hasJsxInH1, readingTime, structurizedData } =
+      vFile.data as {
+        readingTime?: ReadingTime
+        structurizedData: Record<string, unknown>
+      } & Pick<PageOpts, 'headings' | 'hasJsxInH1'>
 
     const title = headings.find(h => h.depth === 1)?.value
     // https://github.com/shuding/nextra/issues/1032

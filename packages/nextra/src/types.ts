@@ -109,7 +109,7 @@ export type ReadingTime = {
 }
 
 type Theme = string
-type Flexsearch =
+export type Flexsearch =
   | boolean
   | {
       /**
