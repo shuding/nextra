@@ -13,7 +13,6 @@ overrides:
   next: ^13.4.8
   '@types/react': ^18.0.15
   '@types/react-dom': ^18.0.6
-  '@types/mdast': 3.0.12
 
 patchedDependencies:
   '@changesets/assemble-release-plan@5.2.4':
@@ -325,7 +324,7 @@ importers:
         specifier: ^4.4.7
         version: 4.4.7
       '@types/mdast':
-        specifier: 3.0.12
+        specifier: ^3.0.12
         version: 3.0.12
       '@types/react':
         specifier: ^18.0.15
@@ -456,7 +455,7 @@ importers:
         version: 3.0.0
       zod:
         specifier: ^3.20.2
-        version: 3.20.2
+        version: 3.22.2
     devDependencies:
       '@tailwindcss/nesting':
         specifier: ^0.0.0-insiders.565cd3e
@@ -10407,10 +10406,6 @@ packages:
 
   /yoga-wasm-web@0.3.3:
     resolution: {integrity: sha512-N+d4UJSJbt/R3wqY7Coqs5pcV0aUj2j9IaQ3rNj9bVCLld8tTGKRa2USARjnvZJWVx1NDmQev8EknoczaOQDOA==}
-    dev: false
-
-  /zod@3.20.2:
-    resolution: {integrity: sha512-1MzNQdAvO+54H+EaK5YpyEy0T+Ejo/7YLHS93G3RnYWh5gaotGHwGeN/ZO687qEDU2y4CdStQYXVHIgrUl5UVQ==}
     dev: false
 
   /zod@3.21.4:
