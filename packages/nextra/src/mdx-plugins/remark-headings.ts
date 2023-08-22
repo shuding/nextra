@@ -18,11 +18,11 @@ const getFlattenedValue = (node: Parent): string =>
     .join('')
 
 export const remarkHeadings: Plugin<[], Root> = function (this: Processor) {
-  const { headingMeta } = this.data() as {
-    headingMeta: Pick<PageOpts, 'headings' | 'hasJsxInH1'>
+  const headingMeta: Pick<PageOpts, 'headings' | 'hasJsxInH1'> = {
+    headings: []
   }
   const slugger = new Slugger()
-  return (tree, _file, done) => {
+  return (tree, file, done) => {
     visit(
       tree,
       [
@@ -32,40 +32,37 @@ export const remarkHeadings: Plugin<[], Root> = function (this: Processor) {
         { name: 'details' }
       ],
       node => {
-        if (node.type === 'heading') {
-          const hasJsxInH1 =
-            node.depth === 1 &&
-            Array.isArray(node.children) &&
-            node.children.some(
-              (child: { type: string }) => child.type === 'mdxJsxTextElement'
-            )
-          const value = getFlattenedValue(node)
-
-          node.data ||= {}
-          const headingProps = (node.data.hProperties ||= {}) as HProperties
-          const id = slugger.slug(headingProps.id || value)
-          // Attach flattened/custom #id to heading node
-          headingProps.id = id
-
-          const heading = {
-            depth: node.depth,
-            value,
-            id
+        if (node.type !== 'heading') {
+          // Replace the <summary> and <details> with customized components
+          if (node.data) {
+            delete node.data._mdxExplicitJsx
           }
-          headingMeta.headings.push(heading)
-          if (hasJsxInH1) {
-            headingMeta.hasJsxInH1 = true
-          }
-
           return
         }
 
-        // Replace the <summary> and <details> with customized components.
-        if (node.data) {
-          delete node.data._mdxExplicitJsx
+        const hasJsxInH1 =
+          node.depth === 1 &&
+          node.children.some(
+            (child: { type: string }) => child.type === 'mdxJsxTextElement'
+          )
+        if (hasJsxInH1) {
+          headingMeta.hasJsxInH1 = true
         }
+        const value = getFlattenedValue(node)
+
+        node.data ||= {}
+        const headingProps = (node.data.hProperties ||= {}) as HProperties
+        const id = slugger.slug(headingProps.id || value)
+        // Attach flattened/custom #id to heading node
+        headingProps.id = id
+        headingMeta.headings.push({
+          depth: node.depth,
+          value,
+          id
+        })
       }
     )
+    Object.assign(file.data, headingMeta)
     done()
   }
 }

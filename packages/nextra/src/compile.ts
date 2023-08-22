@@ -209,25 +209,21 @@ export async function compileMdx(
         latex && rehypeKatex
       ].filter(truthy)
     }))
-
   try {
-    compiler.data('headingMeta', { headings: [] })
-    const vFile = await compiler.process(
-      filePath ? { value: content, path: filePath } : content
-    )
+    const vFile = await compiler.process({ value: content, path: filePath })
 
-    const headingMeta = compiler.data('headingMeta') as Pick<
-      PageOpts,
-      'headings' | 'hasJsxInH1'
-    >
-    const readingTime = vFile.data.readingTime as ReadingTime | undefined
-    const title = headingMeta.headings.find(h => h.depth === 1)?.value
+    const { headings, hasJsxInH1, readingTime } = vFile.data as {
+      readingTime?: ReadingTime
+    } & Pick<PageOpts, 'headings' | 'hasJsxInH1'>
+
+    const title = headings.find(h => h.depth === 1)?.value
     // https://github.com/shuding/nextra/issues/1032
     const result = String(vFile).replaceAll('__esModule', '_\\_esModule')
 
     return {
       result,
-      ...headingMeta,
+      headings,
+      ...(hasJsxInH1 && { hasJsxInH1 }),
       ...(title && { title }),
       ...(readingTime && { readingTime }),
       structurizedData,

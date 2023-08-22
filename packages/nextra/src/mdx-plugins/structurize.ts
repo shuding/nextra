@@ -19,7 +19,7 @@ export function structurize(
   let skip = false
   let content = ''
 
-  return function stripMarkdown() {
+  return () => {
     return node => {
       walk(node)
       structurizedData[activeSlug] = cleanup(content)
