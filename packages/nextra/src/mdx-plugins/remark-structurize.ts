@@ -5,10 +5,18 @@ import type { Flexsearch, StructurizedData } from '../types'
 function cleanup(content: string): string {
   return content
     .trim()
-    .split('\n')
+    .split(/\n+/)
     .map(line => line.trim())
     .join('\n')
 }
+
+const CODE_TABLE_QUOTE_LIST = new Set<string>([
+  'code',
+  'table',
+  'blockquote',
+  'list',
+  'mdxJsxFlowElement'
+])
 
 export const remarkStructurize: Plugin<[Flexsearch], Root> = options => {
   const opts = { codeblocks: true, ...(options as any) }
@@ -32,11 +40,7 @@ export const remarkStructurize: Plugin<[Flexsearch], Root> = options => {
       skip = true
     }
 
-    if (
-      ['code', 'table', 'blockquote', 'list', 'mdxJsxFlowElement'].includes(
-        type
-      )
-    ) {
+    if (CODE_TABLE_QUOTE_LIST.has(type)) {
       result += '\n'
       if (!skip) {
         content += '\n'
@@ -48,12 +52,8 @@ export const remarkStructurize: Plugin<[Flexsearch], Root> = options => {
         result += walk(child)
       }
     } else if (
-      [
-        opts.codeblocks ? 'code' : '',
-        'text',
-        'inlineCode',
-        'tableCell'
-      ].includes(type)
+      (opts.codeblocks && type === 'code') ||
+      ['text', 'inlineCode', 'tableCell'].includes(type)
     ) {
       result += node.value
       if (!skip) {
@@ -62,15 +62,8 @@ export const remarkStructurize: Plugin<[Flexsearch], Root> = options => {
     }
 
     if (
-      [
-        'code',
-        'table',
-        'blockquote',
-        'list',
-        'listItem',
-        'break',
-        'mdxJsxFlowElement'
-      ].includes(type)
+      CODE_TABLE_QUOTE_LIST.has(type) ||
+      ['listItem', 'break'].includes(type)
     ) {
       result += '\n'
       if (!skip) {
