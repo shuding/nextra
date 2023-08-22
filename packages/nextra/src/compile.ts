@@ -31,7 +31,7 @@ import {
   remarkRemoveImports,
   remarkReplaceImports,
   remarkStaticImage,
-  structurize
+  remarkStructurize
 } from './mdx-plugins'
 import theme from './theme.json'
 import type { LoaderOptions, PageOpts, ReadingTime } from './types'
@@ -166,7 +166,7 @@ export async function compileMdx(
         remarkHeadings,
         // structurize should be before remarkHeadings because we attach #id attribute to heading node
         searchIndexKey !== null &&
-          ([structurize, flexsearch] satisfies Pluggable),
+          ([remarkStructurize, flexsearch] satisfies Pluggable),
         staticImage && remarkStaticImage,
         readingTime && remarkReadingTime,
         latex && remarkMath,

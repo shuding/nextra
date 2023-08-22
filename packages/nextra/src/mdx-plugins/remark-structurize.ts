@@ -10,7 +10,7 @@ function cleanup(content: string): string {
     .join('\n')
 }
 
-export const structurize: Plugin<[Flexsearch], Root> = options => {
+export const remarkStructurize: Plugin<[Flexsearch], Root> = options => {
   const opts = { codeblocks: true, ...(options as any) }
   const structurizedData = Object.create(null)
   let activeSlug = ''
