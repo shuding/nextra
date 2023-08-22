@@ -203,9 +203,11 @@ export type DynamicMetaDescriptor = {
   metaParentKeyPath: string
 }
 
+export type StructurizedData = Record<string, string>
+
 export type SearchData = {
   [route: string]: {
     title: string
-    data: Record<string, string>
+    data: StructurizedData
   }
 }

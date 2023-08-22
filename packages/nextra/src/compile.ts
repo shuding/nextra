@@ -34,7 +34,12 @@ import {
   remarkStructurize
 } from './mdx-plugins'
 import theme from './theme.json'
-import type { LoaderOptions, PageOpts, ReadingTime } from './types'
+import type {
+  LoaderOptions,
+  PageOpts,
+  ReadingTime,
+  StructurizedData
+} from './types'
 import { truthy } from './utils'
 
 globalThis.__nextra_temp_do_not_use = () => {
@@ -208,12 +213,13 @@ export async function compileMdx(
       ].filter(truthy)
     }))
   try {
-    const vFile = await compiler.process({ value: content, path: filePath })
+    const processor = compiler()
+    const vFile = await processor.process({ value: content, path: filePath })
 
     const { headings, hasJsxInH1, readingTime, structurizedData } =
       vFile.data as {
         readingTime?: ReadingTime
-        structurizedData: Record<string, unknown>
+        structurizedData: StructurizedData
       } & Pick<PageOpts, 'headings' | 'hasJsxInH1'>
 
     const title = headings.find(h => h.depth === 1)?.value

@@ -1,6 +1,6 @@
 import type { Root } from 'mdast'
 import type { Plugin } from 'unified'
-import type { Flexsearch } from '../types'
+import type { Flexsearch, StructurizedData } from '../types'
 
 function cleanup(content: string): string {
   return content
@@ -12,10 +12,11 @@ function cleanup(content: string): string {
 
 export const remarkStructurize: Plugin<[Flexsearch], Root> = options => {
   const opts = { codeblocks: true, ...(options as any) }
-  const structurizedData = Object.create(null)
+  const structurizedData: StructurizedData = Object.create(null)
   let activeSlug = ''
   let skip = false
   let content = ''
+
   return (tree, file, done) => {
     walk(tree)
     structurizedData[activeSlug] = cleanup(content)
