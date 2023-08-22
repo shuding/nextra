@@ -170,8 +170,7 @@ export async function compileMdx(
         remarkCustomHeadingId,
         remarkHeadings,
         // structurize should be before remarkHeadings because we attach #id attribute to heading node
-        searchIndexKey !== null &&
-          ([remarkStructurize, flexsearch] satisfies Pluggable),
+        flexsearch && ([remarkStructurize, flexsearch] satisfies Pluggable),
         staticImage && remarkStaticImage,
         readingTime && remarkReadingTime,
         latex && remarkMath,
@@ -232,7 +231,7 @@ export async function compileMdx(
       ...(hasJsxInH1 && { hasJsxInH1 }),
       ...(title && { title }),
       ...(readingTime && { readingTime }),
-      structurizedData,
+      ...(searchIndexKey !== null && { structurizedData }),
       searchIndexKey,
       frontMatter
     }

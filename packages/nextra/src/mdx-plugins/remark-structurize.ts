@@ -42,9 +42,7 @@ export const remarkStructurize: Plugin<[Flexsearch], Root> = options => {
 
     if (CODE_TABLE_QUOTE_LIST.has(type)) {
       result += '\n'
-      if (!skip) {
-        content += '\n'
-      }
+      if (!skip) content += '\n'
     }
 
     if ('children' in node) {
@@ -56,9 +54,7 @@ export const remarkStructurize: Plugin<[Flexsearch], Root> = options => {
       ['text', 'inlineCode', 'tableCell'].includes(type)
     ) {
       result += node.value
-      if (!skip) {
-        content += node.value
-      }
+      if (!skip) content += node.value
     }
 
     if (
@@ -66,16 +62,12 @@ export const remarkStructurize: Plugin<[Flexsearch], Root> = options => {
       ['listItem', 'break'].includes(type)
     ) {
       result += '\n'
-      if (!skip) {
-        content += '\n'
-      }
+      if (!skip) content += '\n'
     }
 
     if (type === 'tableCell') {
       result += '\t'
-      if (!skip) {
-        content += '\t'
-      }
+      if (!skip) content += '\t'
     } else if (type === 'heading') {
       skip = false
       if (node.depth > 1) {
