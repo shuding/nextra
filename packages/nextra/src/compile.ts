@@ -186,16 +186,12 @@ export async function compileMdx(
       ].filter(truthy),
       rehypePlugins: [
         ...(rehypePlugins || []),
-        ...(format === 'md'
-          ? [
-              [
-                // To render <details /> and <summary /> correctly
-                rehypeRaw,
-                // fix Error: Cannot compile `mdxjsEsm` node for npm2yarn and mermaid
-                { passThrough: ['mdxjsEsm', 'mdxJsxFlowElement'] }
-              ]
-            ]
-          : []),
+        format === 'md' && [
+          // To render <details /> and <summary /> correctly
+          rehypeRaw,
+          // fix Error: Cannot compile `mdxjsEsm` node for npm2yarn and mermaid
+          { passThrough: ['mdxjsEsm', 'mdxJsxFlowElement'] }
+        ],
         [parseMeta, { defaultShowCopyCode }],
         codeHighlight !== false &&
           ([
