@@ -1,5 +1,22 @@
 # nextra
 
+## 2.12.0
+
+### Minor Changes
+
+- d9820746: - show headings for partial md/mdx in toc
+
+  - hide headings in toc when parent `<Tab />` or `<Tabs.Tab />`
+
+- 8962597e: - allow override static image component that was hardcoded to
+  `import Image from 'next/image'` now it's plain `<img />`
+
+  - support `<details />`/`<summary />` for `.md` files
+
+### Patch Changes
+
+- fbf003cd: cache md/mdx processor
+
 ## 2.11.1
 
 ### Patch Changes
