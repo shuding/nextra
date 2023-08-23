@@ -9,6 +9,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "sharp": "^0.32.5",
     "@vercel/og": "^0.5.0",
     "clsx": "^2.0.0",
     "framer-motion": "^10.0.0",

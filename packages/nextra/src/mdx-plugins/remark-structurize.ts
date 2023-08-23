@@ -27,9 +27,16 @@ export const remarkStructurize: Plugin<[Flexsearch], Root> = options => {
 
   return (tree, file, done) => {
     walk(tree)
-    structurizedData[activeSlug] = cleanup(content)
+    save()
     file.data.structurizedData = structurizedData
     done()
+  }
+
+  function save() {
+    const cleanedContent = cleanup(content)
+    if (activeSlug || cleanedContent) {
+      structurizedData[activeSlug] = cleanedContent
+    }
   }
 
   function walk(node: any): string {
@@ -71,8 +78,8 @@ export const remarkStructurize: Plugin<[Flexsearch], Root> = options => {
     } else if (type === 'heading') {
       skip = false
       if (node.depth > 1) {
-        structurizedData[activeSlug] = cleanup(content)
-        content = ''
+        save()
+        content = '' // reset content after h1 content
         activeSlug = node.data.hProperties.id + '#' + result
       }
     }
