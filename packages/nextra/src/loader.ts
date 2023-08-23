@@ -190,7 +190,7 @@ async function loader(
     },
     {
       filePath: mdxPath,
-      useCachedCompiler: false, // TODO: produce hydration errors or error - Create a new processor first, by calling it: use `processor()` instead of `processor`.
+      useCachedCompiler: true,
       isPageImport
     }
   )

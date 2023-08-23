@@ -14,9 +14,9 @@ export class NextraSearchPlugin {
           stage: webpack.Compilation.PROCESS_ASSETS_STAGE_ADDITIONS
         },
         assets => {
-          const indexFiles: Record<string, string> = {}
+          const indexFiles: Record<string, SearchData> = {}
 
-          for (const [, entry] of compilation.entries.entries()) {
+          for (const entry of compilation.entries.values()) {
             const entryDependency = entry.dependencies?.[0]
 
             // There are some Next.js refactors that might cause the MDX module
@@ -38,21 +38,13 @@ export class NextraSearchPlugin {
             if (nextraSearch) {
               const { title, data, indexKey, route } = nextraSearch
               const indexFilename = `nextra-data-${indexKey}.json`
-              if (indexFiles[indexFilename] === undefined) {
-                indexFiles[indexFilename] = '{'
-              }
-              if (indexFiles[indexFilename] !== '{') {
-                indexFiles[indexFilename] += ','
-              }
-              const payload: SearchData = {
-                [route]: { title, data }
-              }
-              indexFiles[indexFilename] += JSON.stringify(payload).slice(1, -1)
+              indexFiles[indexFilename] ??= {}
+              indexFiles[indexFilename][route] = { title, data }
             }
           }
           for (const [file, content] of Object.entries(indexFiles)) {
             assets[`${IS_PRODUCTION ? '../' : ''}../static/chunks/${file}`] =
-              new sources.RawSource(content + '}')
+              new sources.RawSource(JSON.stringify(content))
           }
         }
       )

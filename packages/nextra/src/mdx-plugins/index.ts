@@ -7,5 +7,5 @@ export {
   remarkLinkRewrite,
   type RemarkLinkRewriteOptions
 } from './remark-link-rewrite'
-export { remarkStaticImage } from './static-image'
-export { structurize } from './structurize'
+export { remarkStaticImage } from './remark-static-image'
+export { remarkStructurize } from './structurize'

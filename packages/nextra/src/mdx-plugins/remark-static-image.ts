@@ -15,7 +15,7 @@ const VALID_BLUR_EXT = ['.jpeg', '.png', '.webp', '.avif', '.jpg']
 
 // Based on the remark-embed-images project
 // https://github.com/remarkjs/remark-embed-images
-export const remarkStaticImage: Plugin<[{ filePath: string }], Root> =
+export const remarkStaticImage: Plugin<[], Root> =
   () => (tree, _file, done) => {
     const importsToInject: { variableName: string; importPath: string }[] = []
 

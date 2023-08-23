@@ -31,10 +31,15 @@ import {
   remarkRemoveImports,
   remarkReplaceImports,
   remarkStaticImage,
-  structurize
+  remarkStructurize
 } from './mdx-plugins'
 import theme from './theme.json'
-import type { LoaderOptions, PageOpts, ReadingTime } from './types'
+import type {
+  LoaderOptions,
+  PageOpts,
+  ReadingTime,
+  StructurizedData
+} from './types'
 import { truthy } from './utils'
 
 globalThis.__nextra_temp_do_not_use = () => {
@@ -90,9 +95,6 @@ export async function compileMdx(
 ) {
   // Extract frontMatter information if it exists
   const { data: frontMatter, content } = grayMatter(source)
-
-  const structurizedData = Object.create(null)
-
   const {
     staticImage,
     flexsearch,
@@ -168,7 +170,7 @@ export async function compileMdx(
         remarkCustomHeadingId,
         remarkHeadings,
         // structurize should be before remarkHeadings because we attach #id attribute to heading node
-        searchIndexKey !== null && structurize(structurizedData, flexsearch),
+        flexsearch && ([remarkStructurize, flexsearch] satisfies Pluggable),
         staticImage && remarkStaticImage,
         readingTime && remarkReadingTime,
         latex && remarkMath,
@@ -209,28 +211,29 @@ export async function compileMdx(
         latex && rehypeKatex
       ].filter(truthy)
     }))
-
   try {
-    compiler.data('headingMeta', { headings: [] })
-    const vFile = await compiler.process(
+    const processor = compiler()
+    const vFile = await processor.process(
       filePath ? { value: content, path: filePath } : content
     )
 
-    const headingMeta = compiler.data('headingMeta') as Pick<
-      PageOpts,
-      'headings' | 'hasJsxInH1'
-    >
-    const readingTime = vFile.data.readingTime as ReadingTime | undefined
-    const title = headingMeta.headings.find(h => h.depth === 1)?.value
+    const { headings, hasJsxInH1, readingTime, structurizedData } =
+      vFile.data as {
+        readingTime?: ReadingTime
+        structurizedData: StructurizedData
+      } & Pick<PageOpts, 'headings' | 'hasJsxInH1'>
+
+    const title = headings.find(h => h.depth === 1)?.value
     // https://github.com/shuding/nextra/issues/1032
     const result = String(vFile).replaceAll('__esModule', '_\\_esModule')
 
     return {
       result,
-      ...headingMeta,
+      headings,
+      ...(hasJsxInH1 && { hasJsxInH1 }),
       ...(title && { title }),
       ...(readingTime && { readingTime }),
-      structurizedData,
+      ...(searchIndexKey !== null && { structurizedData }),
       searchIndexKey,
       frontMatter
     }

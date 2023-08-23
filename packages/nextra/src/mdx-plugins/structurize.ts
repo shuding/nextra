@@ -1,101 +1,88 @@
-// @ts-nocheck
+import type { Root } from 'mdast'
+import type { Plugin } from 'unified'
+import type { Flexsearch, StructurizedData } from '../types'
+
 function cleanup(content: string): string {
   return content
     .trim()
-    .split('\n')
+    .split(/\n+/)
     .map(line => line.trim())
     .join('\n')
 }
 
-export function structurize(
-  structurizedData: Record<string, unknown>,
-  options
-) {
-  if (typeof options === 'boolean') {
-    options = {}
-  }
-  options = { codeblocks: true, ...options }
+const CODE_TABLE_QUOTE_LIST = new Set<string>([
+  'code',
+  'table',
+  'blockquote',
+  'list',
+  'mdxJsxFlowElement'
+])
+
+export const remarkStructurize: Plugin<[Flexsearch], Root> = options => {
+  const opts = { codeblocks: true, ...(options as any) }
+  const structurizedData: StructurizedData = Object.create(null)
   let activeSlug = ''
   let skip = false
   let content = ''
 
-  return function stripMarkdown() {
-    return node => {
-      walk(node)
-      structurizedData[activeSlug] = cleanup(content)
-      return node
+  return (tree, file, done) => {
+    walk(tree)
+    save()
+    file.data.structurizedData = structurizedData
+    done()
+  }
+
+  function save() {
+    const cleanedContent = cleanup(content)
+    if (activeSlug || cleanedContent) {
+      structurizedData[activeSlug] = cleanedContent
+    }
+  }
+
+  function walk(node: any): string {
+    let result = ''
+    const { type } = node
+
+    if (type === 'heading') {
+      skip = true
     }
 
-    function walk(node): string {
-      let result = ''
-
-      /** @type {Type} */
-      const { type } = node
-
-      if (type === 'heading') {
-        skip = true
-      }
-
-      if (
-        ['code', 'table', 'blockquote', 'list', 'mdxJsxFlowElement'].includes(
-          type
-        )
-      ) {
-        result += '\n'
-        if (!skip) {
-          content += '\n'
-        }
-      }
-
-      if ('children' in node) {
-        for (const child of node.children) {
-          result += walk(child)
-        }
-      } else if (
-        [
-          options.codeblocks ? 'code' : '',
-          'text',
-          'inlineCode',
-          'tableCell'
-        ].includes(type)
-      ) {
-        result += node.value
-        if (!skip) {
-          content += node.value
-        }
-      }
-
-      if (
-        [
-          'code',
-          'table',
-          'blockquote',
-          'list',
-          'listItem',
-          'break',
-          'mdxJsxFlowElement'
-        ].includes(type)
-      ) {
-        result += '\n'
-        if (!skip) {
-          content += '\n'
-        }
-      }
-
-      if (type === 'tableCell') {
-        result += '\t'
-        if (!skip) {
-          content += '\t'
-        }
-      } else if (type === 'heading') {
-        skip = false
-        if (node.depth > 1) {
-          structurizedData[activeSlug] = cleanup(content)
-          content = ''
-          activeSlug = node.data.hProperties.id + '#' + result
-        }
-      }
-      return result
+    if (CODE_TABLE_QUOTE_LIST.has(type)) {
+      result += '\n'
+      if (!skip) content += '\n'
     }
+
+    if ('children' in node) {
+      for (const child of node.children) {
+        result += walk(child)
+      }
+    } else if (
+      (opts.codeblocks && type === 'code') ||
+      ['text', 'inlineCode', 'tableCell'].includes(type)
+    ) {
+      result += node.value
+      if (!skip) content += node.value
+    }
+
+    if (
+      CODE_TABLE_QUOTE_LIST.has(type) ||
+      ['listItem', 'break'].includes(type)
+    ) {
+      result += '\n'
+      if (!skip) content += '\n'
+    }
+
+    if (type === 'tableCell') {
+      result += '\t'
+      if (!skip) content += '\t'
+    } else if (type === 'heading') {
+      skip = false
+      if (node.depth > 1) {
+        save()
+        content = '' // reset content after h1 content
+        activeSlug = node.data.hProperties.id + '#' + result
+      }
+    }
+    return result
   }
 }
