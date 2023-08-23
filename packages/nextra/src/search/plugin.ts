@@ -25,7 +25,7 @@ export class NextraSearchPlugin {
             // Nextra
             let entryModule =
               compilation.moduleGraph.getResolvedModule(entryDependency)
-            if (!entryModule?.buildInfo?.nextraSearch) {
+            if (entryModule && !entryModule.buildInfo?.nextraSearch) {
               for (const dependency of entryModule.dependencies) {
                 const mod =
                   compilation.moduleGraph.getResolvedModule(dependency)

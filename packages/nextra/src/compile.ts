@@ -224,8 +224,7 @@ export async function compileMdx(
       ...(hasJsxInH1 && { hasJsxInH1 }),
       ...(title && { title }),
       ...(readingTime && { readingTime }),
-      ...(searchIndexKey !== null && { structurizedData }),
-      searchIndexKey,
+      ...(searchIndexKey !== null && { searchIndexKey, structurizedData }),
       frontMatter
     }
   } catch (err) {
