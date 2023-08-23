@@ -8,4 +8,4 @@ export {
   type RemarkLinkRewriteOptions
 } from './remark-link-rewrite'
 export { remarkStaticImage } from './remark-static-image'
-export { remarkStructurize } from './remark-structurize'
+export { remarkStructurize } from './structurize'
