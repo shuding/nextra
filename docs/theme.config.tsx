@@ -159,7 +159,7 @@ const config: DocsThemeConfig = {
     )
   },
   toc: {
-    backToTop: true,
+    backToTop: true
   }
 }
 
