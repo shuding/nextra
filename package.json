@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@changesets/cli": "2.26.2",
-    "@edge-runtime/vm": "3.0.4",
+    "@edge-runtime/vm": "3.1.0",
     "@ianvs/prettier-plugin-sort-imports": "4.1.0",
     "@next/eslint-plugin-next": "13.4.19",
     "@typescript-eslint/eslint-plugin": "6.4.1",
@@ -40,7 +40,7 @@
     "prettier-plugin-tailwindcss": "0.5.3",
     "rimraf": "5.0.1",
     "tsup": "7.2.0",
-    "turbo": "1.10.12",
+    "turbo": "1.10.13",
     "typescript": "5.1.6"
   },
   "pnpm": {
