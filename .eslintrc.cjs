@@ -124,7 +124,12 @@ module.exports = {
         tailwindcss: {
           config: 'packages/nextra-theme-docs/tailwind.config.js',
           callees: ['cn'],
-          whitelist: ['nextra-breadcrumb', 'nextra-bleed']
+          whitelist: [
+            'nextra-breadcrumb',
+            'nextra-bleed',
+            'nextra-menu-desktop',
+            'nextra-menu-mobile'
+          ]
         }
       },
       rules: {
