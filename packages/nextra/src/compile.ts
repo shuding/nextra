@@ -213,7 +213,9 @@ export async function compileMdx(
     }))
   try {
     const processor = compiler()
-    const vFile = await processor.process({ value: content, path: filePath })
+    const vFile = await processor.process(
+      filePath ? { value: content, path: filePath } : content
+    )
 
     const { headings, hasJsxInH1, readingTime, structurizedData } =
       vFile.data as {

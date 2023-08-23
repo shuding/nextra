@@ -26,7 +26,6 @@ function MDXContent(props = {}) {
 export default MDXContent;
 ",
   "searchIndexKey": null,
-  "structurizedData": {},
   "title": "codegen.yml",
 }
 `;
@@ -57,7 +56,6 @@ function MDXContent(props = {}) {
 export default MDXContent;
 ",
   "searchIndexKey": null,
-  "structurizedData": {},
   "title": "codegen.yml file",
 }
 `;
@@ -93,7 +91,6 @@ function MDXContent(props = {}) {
 export default MDXContent;
 ",
   "searchIndexKey": null,
-  "structurizedData": {},
   "title": "Posts Tagged with “”",
 }
 `;
@@ -123,7 +120,6 @@ function MDXContent(props = {}) {
 export default MDXContent;
 ",
   "searchIndexKey": null,
-  "structurizedData": {},
 }
 `;
 
@@ -152,7 +148,6 @@ function MDXContent(props = {}) {
 export default MDXContent;
 ",
   "searchIndexKey": null,
-  "structurizedData": {},
   "title": "Hello World",
 }
 `;
