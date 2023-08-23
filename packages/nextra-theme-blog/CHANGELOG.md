@@ -1,5 +1,21 @@
 # nextra-theme-blog
 
+## 2.12.0
+
+### Minor Changes
+
+- 8962597e: - allow override static image component that was hardcoded to
+  `import Image from 'next/image'` now it's plain `<img />`
+
+  - support `<details />`/`<summary />` for `.md` files
+
+### Patch Changes
+
+- Updated dependencies [d9820746]
+- Updated dependencies [fbf003cd]
+- Updated dependencies [8962597e]
+  - nextra@2.12.0
+
 ## 2.11.1
 
 ### Patch Changes
