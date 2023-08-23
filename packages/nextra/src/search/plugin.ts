@@ -16,7 +16,7 @@ export class NextraSearchPlugin {
         assets => {
           const indexFiles: Record<string, SearchData> = {}
 
-          for (const [, entry] of compilation.entries.entries()) {
+          for (const entry of compilation.entries.values()) {
             const entryDependency = entry.dependencies?.[0]
 
             // There are some Next.js refactors that might cause the MDX module
@@ -25,7 +25,7 @@ export class NextraSearchPlugin {
             // Nextra
             let entryModule =
               compilation.moduleGraph.getResolvedModule(entryDependency)
-            if (entryModule && !entryModule.buildInfo?.nextraSearch) {
+            if (!entryModule?.buildInfo?.nextraSearch) {
               for (const dependency of entryModule.dependencies) {
                 const mod =
                   compilation.moduleGraph.getResolvedModule(dependency)
