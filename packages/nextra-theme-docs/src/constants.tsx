@@ -143,6 +143,7 @@ export const themeSchema = z.strictObject({
     useOptions: themeOptionsSchema.or(z.function().returns(themeOptionsSchema))
   }),
   toc: z.strictObject({
+    backToTop: z.boolean(),
     component: z.custom<ReactNode | FC<TOCProps>>(...reactNode),
     extraContent: z.custom<ReactNode | FC>(...reactNode),
     float: z.boolean(),
@@ -333,6 +334,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     }
   },
   toc: {
+    backToTop: false,
     component: TOC,
     float: true,
     title: 'On This Page'
