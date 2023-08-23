@@ -82,7 +82,8 @@ export type Page = (MdxFile | Folder<Page>) & {
   meta?: Exclude<Meta, string>
 }
 
-export type Heading = Omit<MDASTHeading, 'type' | 'children' | 'position'> & {
+export type Heading = {
+  depth: MDASTHeading['depth']
   value: string
   id: string
 }

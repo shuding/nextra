@@ -1,9 +1,9 @@
-import type { Processor } from '@mdx-js/mdx/lib/core'
 import Slugger from 'github-slugger'
 import type { Parent, Root } from 'mdast'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
-import type { PageOpts } from '../types'
+import { MARKDOWN_EXTENSION_REGEX } from '../constants'
+import type { Heading, PageOpts } from '../types'
 import type { HProperties } from './remark-custom-heading-id'
 
 const getFlattenedValue = (node: Parent): string =>
@@ -17,52 +17,145 @@ const getFlattenedValue = (node: Parent): string =>
     )
     .join('')
 
-export const remarkHeadings: Plugin<[], Root> = function (this: Processor) {
-  const headingMeta: Pick<PageOpts, 'headings' | 'hasJsxInH1'> = {
+const DISABLE_EXPLICIT_JSX = new Set(['summary', 'details'])
+const SKIP_FOR_PARENT_NAMES = new Set(['Tab', 'Tabs.Tab'])
+
+export const remarkHeadings: Plugin<[exportName?: string], Root> = (
+  exportName = '__headings'
+) => {
+  const headingMeta: Pick<PageOpts, 'hasJsxInH1'> & {
+    headings: (Heading | string)[]
+  } = {
     headings: []
   }
   const slugger = new Slugger()
   return (tree, file, done) => {
+    const PartialComponentToHeadingsName: Record<string, string> =
+      Object.create(null)
+
     visit(
       tree,
       [
-        // Match headings and <details>
-        { type: 'heading' },
-        { name: 'summary' },
-        { name: 'details' }
+        'heading',
+        // allow override details/summary + push partial component's __headings export name to headings list
+        'mdxJsxFlowElement',
+        // verify .md/.mdx exports and attach named __headings export
+        'mdxjsEsm'
       ],
-      node => {
-        if (node.type !== 'heading') {
-          // Replace the <summary> and <details> with customized components
-          if (node.data) {
-            delete node.data._mdxExplicitJsx
+      (node, _index, parent) => {
+        if (node.type === 'heading') {
+          const hasJsxInH1 =
+            node.depth === 1 &&
+            node.children.some(
+              (child: { type: string }) => child.type === 'mdxJsxTextElement'
+            )
+          if (hasJsxInH1) {
+            headingMeta.hasJsxInH1 = true
+          }
+          const value = getFlattenedValue(node)
+
+          node.data ||= {}
+          const headingProps = (node.data.hProperties ||= {}) as HProperties
+          const id = slugger.slug(headingProps.id || value)
+          // Attach flattened/custom #id to heading node
+          headingProps.id = id
+          if (!SKIP_FOR_PARENT_NAMES.has((parent as any).name)) {
+            headingMeta.headings.push({
+              depth: node.depth,
+              value,
+              id
+            })
           }
           return
         }
 
-        const hasJsxInH1 =
-          node.depth === 1 &&
-          node.children.some(
-            (child: { type: string }) => child.type === 'mdxJsxTextElement'
-          )
-        if (hasJsxInH1) {
-          headingMeta.hasJsxInH1 = true
-        }
-        const value = getFlattenedValue(node)
+        if ((node as any).type === 'mdxjsEsm') {
+          for (const child of (node as any).data.estree.body) {
+            if (child.type !== 'ImportDeclaration') continue
+            const importPath = child.source.value
+            const isMdxImport = MARKDOWN_EXTENSION_REGEX.test(importPath)
+            if (!isMdxImport) continue
 
-        node.data ||= {}
-        const headingProps = (node.data.hProperties ||= {}) as HProperties
-        const id = slugger.slug(headingProps.id || value)
-        // Attach flattened/custom #id to heading node
-        headingProps.id = id
-        headingMeta.headings.push({
-          depth: node.depth,
-          value,
-          id
-        })
+            const componentName = child.specifiers.find(
+              (o: any) => o.type === 'ImportDefaultSpecifier'
+            )?.local.name
+
+            if (!componentName) continue
+            const { length } = Object.keys(PartialComponentToHeadingsName)
+            const exportAsName = `${exportName}${length}`
+            PartialComponentToHeadingsName[componentName] = exportAsName
+
+            child.specifiers.push({
+              type: 'ImportSpecifier',
+              imported: { type: 'Identifier', name: exportName },
+              local: { type: 'Identifier', name: exportAsName }
+            })
+          }
+          return
+        }
+
+        const nodeName = (node as any).name
+        if (DISABLE_EXPLICIT_JSX.has(nodeName)) {
+          // Replace the <summary> and <details> with customized components
+          if (node.data) {
+            delete node.data._mdxExplicitJsx
+          }
+        } else {
+        // If component name equals default export name from .md/.mdx import
+          const headingsName = PartialComponentToHeadingsName[nodeName]
+          if (headingsName) {
+            headingMeta.headings.push(headingsName)
+          }
+        }
       }
     )
-    Object.assign(file.data, headingMeta)
+
+    const headingElements = headingMeta.headings.map(heading =>
+      typeof heading === 'string'
+        ? {
+            type: 'SpreadElement',
+            argument: { type: 'Identifier', name: heading }
+          }
+        : {
+            type: 'ObjectExpression',
+            properties: Object.entries(heading).map(([key, value]) => ({
+              type: 'Property',
+              kind: 'init',
+              key: { type: 'Identifier', name: key },
+              value: { type: 'Literal', value }
+            }))
+          }
+    )
+
+    tree.children.push({
+      type: 'mdxjsEsm',
+      data: {
+        estree: {
+          body: [
+            {
+              type: 'ExportNamedDeclaration',
+              specifiers: [],
+              declaration: {
+                type: 'VariableDeclaration',
+                kind: 'const',
+                declarations: [
+                  {
+                    type: 'VariableDeclarator',
+                    id: { type: 'Identifier', name: exportName },
+                    init: { type: 'ArrayExpression', elements: headingElements }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    } as any)
+
+    file.data.hasJsxInH1 = headingMeta.hasJsxInH1
+    file.data.title = headingMeta.headings.find(
+      (h): h is Heading => typeof h !== 'string' && h.depth === 1
+    )?.value
     done()
   }
 }

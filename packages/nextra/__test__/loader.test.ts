@@ -1,6 +1,5 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
-import { describe, expect, it } from 'vitest'
 import { CWD } from '../src/constants'
 
 describe('tree shaking', async () => {

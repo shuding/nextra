@@ -1,6 +1,5 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
-import { describe, expect, it } from 'vitest'
 import { compileMdx } from '../src/compile'
 import { CWD } from '../src/constants'
 
@@ -76,6 +75,80 @@ describe('Process heading', () => {
   it('use github-slugger', async () => {
     const { result } = await compileMdx(`### My Header`, { mdxOptions })
     expect(result).toMatch(`<_components.h3 id="my-header">{"My Header"}`)
+  })
+
+  it('should merge headings from partial components', async () => {
+    const { result } = await compileMdx(
+      `
+import FromMdx from './one.mdx'
+import FromMarkdown from './two.md'
+import IgnoreMe from './foo'
+
+## ❤️
+
+<FromMdx />
+
+## ✅
+
+<FromMarkdown />
+
+import Last from './three.mdx'
+
+<Last />
+
+<IgnoreMe />
+
+## 👋`,
+      { mdxOptions }
+    )
+    expect(result).toMatchInlineSnapshot(`
+      "/*@jsxRuntime automatic @jsxImportSource react*/
+      import {useMDXComponents as _provideComponents} from \\"nextra/mdx\\";
+      import FromMdx, {__headings as __headings0} from './one.mdx';
+      import FromMarkdown, {__headings as __headings1} from './two.md';
+      import IgnoreMe from './foo';
+      import Last, {__headings as __headings2} from './three.mdx';
+      export const __headings = [{
+        depth: 2,
+        value: \\"❤️\\",
+        id: \\"️\\"
+      }, ...__headings0, {
+        depth: 2,
+        value: \\"✅\\",
+        id: \\"\\"
+      }, ...__headings1, ...__headings2, {
+        depth: 2,
+        value: \\"👋\\",
+        id: \\"-1\\"
+      }];
+      function _createMdxContent(props) {
+        const _components = Object.assign({
+          h2: \\"h2\\"
+        }, _provideComponents(), props.components);
+        return <><_components.h2 id=\\"️\\">{\\"❤️\\"}</_components.h2>{\\"\\\\n\\"}<FromMdx />{\\"\\\\n\\"}<_components.h2 id=\\"\\">{\\"✅\\"}</_components.h2>{\\"\\\\n\\"}<FromMarkdown />{\\"\\\\n\\"}{\\"\\\\n\\"}<Last />{\\"\\\\n\\"}<IgnoreMe />{\\"\\\\n\\"}<_components.h2 id=\\"-1\\">{\\"👋\\"}</_components.h2></>;
+      }
+      function MDXContent(props = {}) {
+        const {wrapper: MDXLayout} = Object.assign({}, _provideComponents(), props.components);
+        return MDXLayout ? <MDXLayout {...props}><_createMdxContent {...props} /></MDXLayout> : _createMdxContent(props);
+      }
+      export default MDXContent;
+      "
+    `)
+  })
+  it('should not attach headings with parent Tab or Tabs.Tab', async () => {
+    const { result } = await compileMdx(
+      `
+<Tab>
+ ## hello
+</Tab>
+
+<Tabs.Tab>
+  ## World
+</Tabs.Tab>
+`,
+      { mdxOptions }
+    )
+    expect(result).toMatch('export const __headings = [];')
   })
 })
 

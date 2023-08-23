@@ -1,4 +1,3 @@
-import { describe, expect, it } from 'vitest'
 import { sortPages } from '../src/utils'
 
 const kind = 'MdxPage'

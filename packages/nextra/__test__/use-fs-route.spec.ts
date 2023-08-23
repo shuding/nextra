@@ -1,7 +1,6 @@
 import { renderHook } from '@testing-library/react'
 import { useRouter } from 'next/router'
 import type { Mock } from 'vitest'
-import { describe, expect, it, vi } from 'vitest'
 import { useFSRoute } from '../src/hooks'
 
 vi.mock('next/router', () => ({

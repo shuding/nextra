@@ -1,5 +1,4 @@
 import path from 'node:path'
-import { beforeAll, describe, expect, it } from 'vitest'
 import { CWD, NEXTRA_INTERNAL } from '../src/constants'
 import {
   getAllPages,

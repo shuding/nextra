@@ -10,7 +10,6 @@ import rehypeKatex from 'rehype-katex'
 import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
 import rehypePrettyCode from 'rehype-pretty-code'
 import rehypeRaw from 'rehype-raw'
-import rehypeSanitize from 'rehype-sanitize'
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 import remarkReadingTime from 'remark-reading-time'
@@ -187,17 +186,12 @@ export async function compileMdx(
       ].filter(truthy),
       rehypePlugins: [
         ...(rehypePlugins || []),
-        ...(format === 'md'
-          ? [
-              [
-                // To render <details /> and <summary /> correctly
-                rehypeRaw,
-                // fix Error: Cannot compile `mdxjsEsm` node for npm2yarn and mermaid
-                { passThrough: ['mdxjsEsm', 'mdxJsxFlowElement'] }
-              ],
-              rehypeSanitize // To remove <script />
-            ]
-          : []),
+        format === 'md' && [
+          // To render <details /> and <summary /> correctly
+          rehypeRaw,
+          // fix Error: Cannot compile `mdxjsEsm` node for npm2yarn and mermaid
+          { passThrough: ['mdxjsEsm', 'mdxJsxFlowElement'] }
+        ],
         [parseMeta, { defaultShowCopyCode }],
         codeHighlight !== false &&
           ([
@@ -217,24 +211,20 @@ export async function compileMdx(
       filePath ? { value: content, path: filePath } : content
     )
 
-    const { headings, hasJsxInH1, readingTime, structurizedData } =
-      vFile.data as {
-        readingTime?: ReadingTime
-        structurizedData: StructurizedData
-      } & Pick<PageOpts, 'headings' | 'hasJsxInH1'>
-
-    const title = headings.find(h => h.depth === 1)?.value
+    const { title, hasJsxInH1, readingTime, structurizedData } = vFile.data as {
+      readingTime?: ReadingTime
+      structurizedData: StructurizedData
+      title?: string
+    } & Pick<PageOpts, 'hasJsxInH1'>
     // https://github.com/shuding/nextra/issues/1032
     const result = String(vFile).replaceAll('__esModule', '_\\_esModule')
 
     return {
       result,
-      headings,
       ...(hasJsxInH1 && { hasJsxInH1 }),
       ...(title && { title }),
       ...(readingTime && { readingTime }),
-      ...(searchIndexKey !== null && { structurizedData }),
-      searchIndexKey,
+      ...(searchIndexKey !== null && { searchIndexKey, structurizedData }),
       frontMatter
     }
   } catch (err) {

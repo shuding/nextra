@@ -1,4 +1,3 @@
-import { describe, expect, it } from 'vitest'
 import { createCatchAllMeta } from '../src/catch-all'
 import { collectCatchAllRoutes } from '../src/setup-page'
 

@@ -1,17 +1,15 @@
-// Vitest Snapshot v1
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Process heading > code-h1 1`] = `
 {
   "frontMatter": {},
-  "headings": [
-    {
-      "depth": 1,
-      "id": "codegenyml",
-      "value": "codegen.yml",
-    },
-  ],
   "result": "/*@jsxRuntime automatic @jsxImportSource react*/
 import {useMDXComponents as _provideComponents} from \\"nextra/mdx\\";
+export const __headings = [{
+  depth: 1,
+  value: \\"codegen.yml\\",
+  id: \\"codegenyml\\"
+}];
 function _createMdxContent(props) {
   const _components = Object.assign({
     h1: \\"h1\\",
@@ -25,7 +23,6 @@ function MDXContent(props = {}) {
 }
 export default MDXContent;
 ",
-  "searchIndexKey": null,
   "title": "codegen.yml",
 }
 `;
@@ -33,15 +30,13 @@ export default MDXContent;
 exports[`Process heading > code-with-text-h1 1`] = `
 {
   "frontMatter": {},
-  "headings": [
-    {
-      "depth": 1,
-      "id": "codegenyml-file",
-      "value": "codegen.yml file",
-    },
-  ],
   "result": "/*@jsxRuntime automatic @jsxImportSource react*/
 import {useMDXComponents as _provideComponents} from \\"nextra/mdx\\";
+export const __headings = [{
+  depth: 1,
+  value: \\"codegen.yml file\\",
+  id: \\"codegenyml-file\\"
+}];
 function _createMdxContent(props) {
   const _components = Object.assign({
     h1: \\"h1\\",
@@ -55,7 +50,6 @@ function MDXContent(props = {}) {
 }
 export default MDXContent;
 ",
-  "searchIndexKey": null,
   "title": "codegen.yml file",
 }
 `;
@@ -64,13 +58,6 @@ exports[`Process heading > dynamic-h1 1`] = `
 {
   "frontMatter": {},
   "hasJsxInH1": true,
-  "headings": [
-    {
-      "depth": 1,
-      "id": "posts-tagged-with-",
-      "value": "Posts Tagged with “”",
-    },
-  ],
   "result": "/*@jsxRuntime automatic @jsxImportSource react*/
 import {useMDXComponents as _provideComponents} from \\"nextra/mdx\\";
 import {useRouter} from 'next/router';
@@ -78,6 +65,11 @@ export const TagName = () => {
   const {tag} = useRouter().query;
   return tag || null;
 };
+export const __headings = [{
+  depth: 1,
+  value: \\"Posts Tagged with “”\\",
+  id: \\"posts-tagged-with-\\"
+}];
 function _createMdxContent(props) {
   const _components = Object.assign({
     h1: \\"h1\\"
@@ -90,7 +82,6 @@ function MDXContent(props = {}) {
 }
 export default MDXContent;
 ",
-  "searchIndexKey": null,
   "title": "Posts Tagged with “”",
 }
 `;
@@ -98,15 +89,13 @@ export default MDXContent;
 exports[`Process heading > no-h1 1`] = `
 {
   "frontMatter": {},
-  "headings": [
-    {
-      "depth": 2,
-      "id": "h2",
-      "value": "H2",
-    },
-  ],
   "result": "/*@jsxRuntime automatic @jsxImportSource react*/
 import {useMDXComponents as _provideComponents} from \\"nextra/mdx\\";
+export const __headings = [{
+  depth: 2,
+  value: \\"H2\\",
+  id: \\"h2\\"
+}];
 function _createMdxContent(props) {
   const _components = Object.assign({
     h2: \\"h2\\"
@@ -119,22 +108,19 @@ function MDXContent(props = {}) {
 }
 export default MDXContent;
 ",
-  "searchIndexKey": null,
 }
 `;
 
 exports[`Process heading > static-h1 1`] = `
 {
   "frontMatter": {},
-  "headings": [
-    {
-      "depth": 1,
-      "id": "hello-world",
-      "value": "Hello World",
-    },
-  ],
   "result": "/*@jsxRuntime automatic @jsxImportSource react*/
 import {useMDXComponents as _provideComponents} from \\"nextra/mdx\\";
+export const __headings = [{
+  depth: 1,
+  value: \\"Hello World\\",
+  id: \\"hello-world\\"
+}];
 function _createMdxContent(props) {
   const _components = Object.assign({
     h1: \\"h1\\"
@@ -147,7 +133,6 @@ function MDXContent(props = {}) {
 }
 export default MDXContent;
 ",
-  "searchIndexKey": null,
   "title": "Hello World",
 }
 `;
