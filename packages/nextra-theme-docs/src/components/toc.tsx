@@ -6,6 +6,7 @@ import scrollIntoView from 'scroll-into-view-if-needed'
 import { useActiveAnchor, useConfig } from '../contexts'
 import { renderComponent } from '../utils'
 import { Anchor } from './anchor'
+import { BackToTop } from './back-to-top'
 
 export type TOCProps = {
   headings: Heading[]
@@ -125,6 +126,8 @@ export function TOC({ headings, filePath }: TOCProps): ReactElement {
           })}
 
           {renderComponent(config.toc.extraContent)}
+
+          {config.toc.backToTop && <BackToTop className={linkClassName} />}
         </div>
       )}
     </div>
