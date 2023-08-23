@@ -163,7 +163,6 @@ async function loader(
 
   const {
     result,
-    headings,
     title,
     frontMatter,
     structurizedData,
@@ -244,7 +243,6 @@ async function loader(
     filePath: slash(path.relative(CWD, mdxPath)),
     route,
     ...(Object.keys(frontMatter).length > 0 && { frontMatter }),
-    headings,
     hasJsxInH1,
     timestamp,
     pageMap,
@@ -293,7 +291,8 @@ ${
     delete pageOpts.pageMap
   }
 
-  const stringifiedPageOpts = JSON.stringify(pageOpts)
+  const stringifiedPageOpts =
+    JSON.stringify(pageOpts).slice(0, -1) + `,headings:__headings}`
   const stringifiedChecksum = IS_PRODUCTION
     ? "''"
     : JSON.stringify(hashFnv32a(stringifiedPageOpts))
@@ -307,9 +306,12 @@ ${
     )
     .join(',')
 
-  return `import { setupNextraPage } from 'nextra/setup-page'
+  const res = `import { setupNextraPage } from 'nextra/setup-page'
 ${HAS_UNDERSCORE_APP_MDX_FILE ? '' : pageImports}
-
+${
+  // Remove the last match of `export default MDXContent` because it can be existed in the raw MDX file
+  finalResult.slice(0, finalResult.lastIndexOf('export default MDXContent;'))
+}
 const __nextraPageOptions = {
   MDXContent,
   pageOpts: ${stringifiedPageOpts},
@@ -321,10 +323,6 @@ const __nextraPageOptions = {
         (themeConfigImport && 'themeConfig: __nextra_themeConfig')
   }
 }
-${
-  // Remove the last match of `export default MDXContent` because it can be existed in the raw MDX file
-  finalResult.slice(0, finalResult.lastIndexOf('export default MDXContent;'))
-}
 if (process.env.NODE_ENV !== 'production') {
   __nextraPageOptions.hot = module.hot
   __nextraPageOptions.pageOptsChecksum = ${stringifiedChecksum}
@@ -332,6 +330,7 @@ if (process.env.NODE_ENV !== 'production') {
 if (typeof window === 'undefined') __nextraPageOptions.dynamicMetaModules = [${dynamicMetaModules}]
 
 export default setupNextraPage(__nextraPageOptions)`
+  return res
 }
 
 export default function syncLoader(

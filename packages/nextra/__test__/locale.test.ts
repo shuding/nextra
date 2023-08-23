@@ -1,6 +1,5 @@
 import { NextRequest } from 'next/server'
 import type NextServer from 'next/server'
-import { describe, expect, it, vi } from 'vitest'
 import { locales as originalLocales } from '../src/locales'
 
 vi.mock('next/server', async () => {

@@ -103,7 +103,6 @@
   },
   "files": [
     "dist/*",
-    "icons/*",
     "loader.js",
     "styles/*"
   ],
@@ -139,7 +138,6 @@
     "rehype-katex": "^6.0.3",
     "rehype-pretty-code": "0.9.11",
     "rehype-raw": "^6.1.1",
-    "rehype-sanitize": "^5.0.1",
     "remark-gfm": "^3.0.1",
     "remark-math": "^5.1.1",
     "remark-reading-time": "^2.0.1",
@@ -159,12 +157,12 @@
     "@types/react-dom": "^18.2.7",
     "@types/webpack": "^5.28.2",
     "@types/webpack-env": "^1.18.1",
-    "@vitejs/plugin-react": "^3.0.1",
+    "@vitejs/plugin-react": "^4.0.4",
     "fast-glob": "^3.2.12",
-    "next": "^13.4.8",
+    "next": "^13.4.19",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "unified": "^10.1.2",
-    "vitest": "^0.34.0"
+    "vitest": "0.30.1"
   }
 }

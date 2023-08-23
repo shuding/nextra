@@ -1,5 +1,4 @@
 import path from 'node:path'
-import { beforeAll, describe, expect, it } from 'vitest'
 import { CWD } from '../src/constants'
 import { getDynamicMeta, resolvePageMap } from '../src/page-map'
 import { collectFiles } from '../src/plugin'

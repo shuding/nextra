@@ -1,4 +1,3 @@
-import { describe, expect, it } from 'vitest'
 import { parseFileName } from '../src/utils'
 
 describe('Utils', () => {
