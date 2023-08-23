@@ -440,7 +440,7 @@ export function Sidebar({
               {(!asPopover || !showSidebar) && (
                 <Collapse isOpen={showSidebar} horizontal>
                   <Menu
-                    className="nextra-sidebar-desktop max-md:nx-hidden"
+                    className="nextra-menu-desktop max-md:nx-hidden"
                     // The sidebar menu, shows only the docs directories.
                     directories={docsDirectories}
                     // When the viewport size is larger than `md`, hide the anchors in
@@ -452,7 +452,7 @@ export function Sidebar({
               )}
               {mounted && window.innerWidth < 768 && (
                 <Menu
-                  className="nextra-sidebar-mobile md:nx-hidden"
+                  className="nextra-menu-mobile md:nx-hidden"
                   // The mobile dropdown menu, shows all the directories.
                   directories={fullDirectories}
                   // Always show the anchor links on mobile (`md`).

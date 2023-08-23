@@ -127,8 +127,8 @@ module.exports = {
           whitelist: [
             'nextra-breadcrumb',
             'nextra-bleed',
-            'nextra-sidebar-desktop',
-            'nextra-sidebar-mobile'
+            'nextra-menu-desktop',
+            'nextra-menu-mobile'
           ]
         }
       },
