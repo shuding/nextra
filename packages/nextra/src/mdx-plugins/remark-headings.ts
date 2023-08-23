@@ -101,6 +101,7 @@ export const remarkHeadings: Plugin<[exportName?: string], Root> = (
             delete node.data._mdxExplicitJsx
           }
         } else {
+        // If component name equals default export name from .md/.mdx import
           const headingsName = PartialComponentToHeadingsName[nodeName]
           if (headingsName) {
             headingMeta.headings.push(headingsName)
