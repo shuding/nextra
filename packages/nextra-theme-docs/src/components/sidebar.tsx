@@ -1,7 +1,7 @@
 import cn from 'clsx'
 import { useRouter } from 'next/router'
 import type { Heading } from 'nextra'
-import { useFSRoute } from 'nextra/hooks'
+import { useFSRoute, useMounted } from 'nextra/hooks'
 import { ArrowRightIcon, ExpandIcon } from 'nextra/icons'
 import type { Item, MenuItem, PageItem } from 'nextra/normalize-pages'
 import type { ReactElement } from 'react'
@@ -348,7 +348,7 @@ export function Sidebar({
   const anchors = useMemo(() => headings.filter(v => v.depth === 2), [headings])
   const sidebarRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
-
+  const mounted = useMounted()
   useEffect(() => {
     if (menu) {
       document.body.classList.add('nx-overflow-hidden', 'md:nx-overflow-auto')
@@ -440,7 +440,7 @@ export function Sidebar({
               {(!asPopover || !showSidebar) && (
                 <Collapse isOpen={showSidebar} horizontal>
                   <Menu
-                    className="max-md:nx-hidden"
+                    className="nextra-desktop-sidebar max-md:nx-hidden"
                     // The sidebar menu, shows only the docs directories.
                     directories={docsDirectories}
                     // When the viewport size is larger than `md`, hide the anchors in
@@ -450,13 +450,15 @@ export function Sidebar({
                   />
                 </Collapse>
               )}
-              <Menu
-                className="md:nx-hidden"
-                // The mobile dropdown menu, shows all the directories.
-                directories={fullDirectories}
-                // Always show the anchor links on mobile (`md`).
-                anchors={anchors}
-              />
+              {mounted && window.innerWidth < 768 && (
+                <Menu
+                  className="nextra-mobile-sidebar md:nx-hidden"
+                  // The mobile dropdown menu, shows all the directories.
+                  directories={fullDirectories}
+                  // Always show the anchor links on mobile (`md`).
+                  anchors={anchors}
+                />
+              )}
             </div>
           </OnFocusItemContext.Provider>
         </FocusedItemContext.Provider>
