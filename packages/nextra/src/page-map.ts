@@ -91,7 +91,7 @@ export function resolvePageMap({
   }
 }
 
-class PageMapCache {
+export class PageMapCache {
   cache: {
     items: PageMapItem[]
     fileMap: FileMap

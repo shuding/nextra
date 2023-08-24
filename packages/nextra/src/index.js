@@ -6,7 +6,7 @@ import {
   MARKDOWN_EXTENSION_REGEX,
   MARKDOWN_EXTENSIONS
 } from './constants'
-import { pageMapCache } from './plugin'
+import { pageMapCache } from './page-map'
 import { NextraPlugin, NextraSearchPlugin } from './webpack-plugins'
 
 const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
