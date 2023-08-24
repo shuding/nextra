@@ -8,3 +8,5 @@
 
 - fix source code from loader was stripped starting from last match `export default MDXContent;` and
   until the end, so `transform` function was not applied
+
+- fix `headings` were `undefined` in remote content
