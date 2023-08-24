@@ -294,7 +294,7 @@ ${
     )
     .join(',')
 
-  const res = `import { setupNextraPage } from 'nextra/setup-page'
+  const rawJs = `import { setupNextraPage } from 'nextra/setup-page'
 ${HAS_UNDERSCORE_APP_MDX_FILE ? '' : pageImports}
 ${
   // Remove the last match of `export default MDXContent` because it can be existed in the raw MDX file
@@ -318,7 +318,7 @@ if (process.env.NODE_ENV !== 'production') {
 if (typeof window === 'undefined') __nextraPageOptions.dynamicMetaModules = [${dynamicMetaModules}]
 
 export default setupNextraPage(__nextraPageOptions)`
-  return res
+  return rawJs
 }
 
 export default function syncLoader(

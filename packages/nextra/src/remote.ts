@@ -2,9 +2,9 @@ import { compileMdx } from './compile'
 
 export async function buildDynamicMDX(
   content: string,
-  loaderOptions: Parameters<typeof compileMdx>[1]
+  compileMdxOptions: Parameters<typeof compileMdx>[1]
 ) {
-  if (loaderOptions && 'remarkLinkRewriteOptions' in loaderOptions) {
+  if (compileMdxOptions && 'remarkLinkRewriteOptions' in compileMdxOptions) {
     throw new Error(`\`remarkLinkRewriteOptions\` was removed. For overriding internal links use \`remarkLinkRewrite\` instead.
 
 import { remarkLinkRewrite } from 'nextra/mdx-plugins'
@@ -26,7 +26,7 @@ const result = await buildDynamicMDX(rawMdx, {
 
   const { result, frontMatter, title } = await compileMdx(
     content,
-    loaderOptions
+    compileMdxOptions
   )
 
   return {
@@ -36,11 +36,7 @@ const result = await buildDynamicMDX(rawMdx, {
 }
 
 export async function buildDynamicMeta() {
-  const resolvePageMap = globalThis.__nextra_resolvePageMap
-  if (resolvePageMap) {
-    return {
-      __nextra_pageMap: await resolvePageMap()
-    }
+  return {
+    __nextra_pageMap: await globalThis.__nextra_resolvePageMap()
   }
-  return {}
 }
