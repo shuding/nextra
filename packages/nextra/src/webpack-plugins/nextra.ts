@@ -1,6 +1,6 @@
 import type { Compiler } from 'webpack'
 import { PAGES_DIR } from '../file-system'
-import { pageMapCache } from '../page-map-cache'
+import { pageMapCache } from '../page-map'
 import { collectFiles } from '../plugin'
 import type { NextraConfig } from '../types'
 
