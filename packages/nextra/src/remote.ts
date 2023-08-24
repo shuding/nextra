@@ -24,14 +24,14 @@ const result = await buildDynamicMDX(rawMdx, {
 `)
   }
 
-  const { result, frontMatter, title } = await compileMdx(
+  const { result, headings, frontMatter, title } = await compileMdx(
     content,
     compileMdxOptions
   )
 
   return {
     __nextra_dynamic_mdx: result,
-    __nextra_dynamic_opts: JSON.stringify({ frontMatter, title })
+    __nextra_dynamic_opts: JSON.stringify({ headings, frontMatter, title })
   }
 }
 

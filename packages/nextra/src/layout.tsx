@@ -11,13 +11,13 @@ export default function Nextra({
   const { Content, ...restContext } = context
 
   if (__nextra_dynamic_opts) {
-    const data = JSON.parse(__nextra_dynamic_opts)
+    const { headings, title, frontMatter } = JSON.parse(__nextra_dynamic_opts)
     restContext.pageOpts = {
       ...restContext.pageOpts,
       ...(__nextra_pageMap && { pageMap: __nextra_pageMap }),
-      // headings: data.headings,
-      title: data.title,
-      frontMatter: data.frontMatter
+      headings,
+      title,
+      frontMatter
     }
   }
 
