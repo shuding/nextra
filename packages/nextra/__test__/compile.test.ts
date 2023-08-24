@@ -148,7 +148,7 @@ import Last from './three.mdx'
 `,
       { mdxOptions }
     )
-    expect(result).toMatch('export const __headings = [];')
+    expect(result).toMatch('export const __toc = [];')
   })
 })
 
