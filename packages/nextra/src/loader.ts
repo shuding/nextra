@@ -26,6 +26,8 @@ const UNDERSCORE_APP_FILENAME: string =
 
 const HAS_UNDERSCORE_APP_MDX_FILE = existsSync(APP_MDX_PATH)
 
+const FOOTER_TO_REMOVE = 'export default MDXContent;'
+
 if (UNDERSCORE_APP_FILENAME) {
   console.warn(
     `[nextra] Found "${UNDERSCORE_APP_FILENAME}" file, refactor it to "_app.mdx" for better performance.`
@@ -294,12 +296,16 @@ ${
     )
     .join(',')
 
+  const lastIndexOfFooter = finalResult.lastIndexOf(FOOTER_TO_REMOVE)
+
   const rawJs = `import { setupNextraPage } from 'nextra/setup-page'
 ${HAS_UNDERSCORE_APP_MDX_FILE ? '' : pageImports}
 ${
-  // Remove the last match of `export default MDXContent` because it can be existed in the raw MDX file
-  finalResult.slice(0, finalResult.lastIndexOf('export default MDXContent;'))
+  // Remove the last match of `export default MDXContent;` because it can be existed in the raw MDX file
+  finalResult.slice(0, lastIndexOfFooter) +
+  finalResult.slice(lastIndexOfFooter + FOOTER_TO_REMOVE.length)
 }
+
 const __nextraPageOptions = {
   MDXContent,
   pageOpts: ${stringifiedPageOpts},
