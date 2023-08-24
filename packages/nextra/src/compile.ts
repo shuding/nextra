@@ -92,6 +92,7 @@ type CompileMdxOptions = Pick<
   route?: string
   locale?: string
   filePath?: string
+  useCachedCompiler?: boolean
   isPageImport?: boolean
 }
 
@@ -108,6 +109,7 @@ export async function compileMdx(
     locale,
     mdxOptions,
     filePath = '',
+    useCachedCompiler,
     isPageImport = true
   }: CompileMdxOptions = {}
 ) {
@@ -155,9 +157,10 @@ export async function compileMdx(
 
   const isRemoteContent = outputFormat === 'function-body'
 
-  const compiler = isRemoteContent
-    ? createCompiler()
-    : (cachedCompilerForFormat[format] ??= createCompiler())
+  const compiler =
+    !useCachedCompiler || isRemoteContent
+      ? createCompiler()
+      : (cachedCompilerForFormat[format] ??= createCompiler())
   const processor = compiler()
 
   try {
