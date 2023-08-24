@@ -31,7 +31,11 @@ const result = await buildDynamicMDX(rawMdx, {
 
   return {
     __nextra_dynamic_mdx: result,
-    __nextra_dynamic_opts: JSON.stringify({ headings, frontMatter, title })
+    __nextra_dynamic_opts: JSON.stringify({
+      headings,
+      frontMatter,
+      title: frontMatter.title || title
+    })
   }
 }
 
