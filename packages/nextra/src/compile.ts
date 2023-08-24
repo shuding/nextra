@@ -98,11 +98,7 @@ type CompileMdxOptions = Pick<
 
 export async function compileMdx(
   source: string,
-  options: CompileMdxOptions = {}
-) {
-  // Extract frontMatter information if it exists
-  const { data: frontMatter, content } = grayMatter(source)
-  const {
+  {
     staticImage,
     flexsearch,
     readingTime,
@@ -115,7 +111,10 @@ export async function compileMdx(
     filePath = '',
     useCachedCompiler,
     isPageImport = true
-  } = options
+  }: CompileMdxOptions = {}
+) {
+  // Extract frontMatter information if it exists
+  const { data: frontMatter, content } = grayMatter(source)
 
   let searchIndexKey: string | null = null
   if (
