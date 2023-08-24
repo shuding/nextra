@@ -108,6 +108,7 @@ function MDXContent(props = {}) {
 }
 export default MDXContent;
 ",
+  "title": "",
 }
 `;
 
