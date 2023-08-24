@@ -5,7 +5,7 @@ exports[`Process heading > code-h1 1`] = `
   "frontMatter": {},
   "result": "/*@jsxRuntime automatic @jsxImportSource react*/
 import {useMDXComponents as _provideComponents} from \\"nextra/mdx\\";
-export const __headings = [{
+export const __toc = [{
   depth: 1,
   value: \\"codegen.yml\\",
   id: \\"codegenyml\\"
@@ -32,7 +32,7 @@ exports[`Process heading > code-with-text-h1 1`] = `
   "frontMatter": {},
   "result": "/*@jsxRuntime automatic @jsxImportSource react*/
 import {useMDXComponents as _provideComponents} from \\"nextra/mdx\\";
-export const __headings = [{
+export const __toc = [{
   depth: 1,
   value: \\"codegen.yml file\\",
   id: \\"codegenyml-file\\"
@@ -65,7 +65,7 @@ export const TagName = () => {
   const {tag} = useRouter().query;
   return tag || null;
 };
-export const __headings = [{
+export const __toc = [{
   depth: 1,
   value: \\"Posts Tagged with “”\\",
   id: \\"posts-tagged-with-\\"
@@ -91,7 +91,7 @@ exports[`Process heading > no-h1 1`] = `
   "frontMatter": {},
   "result": "/*@jsxRuntime automatic @jsxImportSource react*/
 import {useMDXComponents as _provideComponents} from \\"nextra/mdx\\";
-export const __headings = [{
+export const __toc = [{
   depth: 2,
   value: \\"H2\\",
   id: \\"h2\\"
@@ -116,7 +116,7 @@ exports[`Process heading > static-h1 1`] = `
   "frontMatter": {},
   "result": "/*@jsxRuntime automatic @jsxImportSource react*/
 import {useMDXComponents as _provideComponents} from \\"nextra/mdx\\";
-export const __headings = [{
+export const __toc = [{
   depth: 1,
   value: \\"Hello World\\",
   id: \\"hello-world\\"

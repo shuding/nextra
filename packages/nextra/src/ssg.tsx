@@ -23,13 +23,7 @@ export function RemoteContent({
       'RemoteContent must be used together with the `buildDynamicMDX` API'
     )
   }
+  const components = useMDXComponents(dynamicComponents)
 
-  const components = useMDXComponents()
-
-  return (
-    <MDXRemote
-      compiledSource={dynamicContext}
-      components={{ ...components, ...dynamicComponents }}
-    />
-  )
+  return <MDXRemote compiledSource={dynamicContext} components={components} />
 }

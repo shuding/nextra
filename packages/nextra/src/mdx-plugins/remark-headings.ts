@@ -20,9 +20,10 @@ const getFlattenedValue = (node: Parent): string =>
 const DISABLE_EXPLICIT_JSX = new Set(['summary', 'details'])
 const SKIP_FOR_PARENT_NAMES = new Set(['Tab', 'Tabs.Tab'])
 
-export const remarkHeadings: Plugin<[exportName?: string], Root> = (
-  exportName = '__headings'
-) => {
+export const remarkHeadings: Plugin<
+  [{ exportName?: string; isRemoteContent?: boolean }],
+  Root
+> = ({ exportName = '__toc', isRemoteContent }) => {
   const headingMeta: Pick<PageOpts, 'hasJsxInH1'> & {
     headings: (Heading | string)[]
   } = {
@@ -37,9 +38,9 @@ export const remarkHeadings: Plugin<[exportName?: string], Root> = (
       tree,
       [
         'heading',
-        // allow override details/summary + push partial component's __headings export name to headings list
+        // allow override details/summary + push partial component's __toc export name to headings list
         'mdxJsxFlowElement',
-        // verify .md/.mdx exports and attach named __headings export
+        // verify .md/.mdx exports and attach named __toc export
         'mdxjsEsm'
       ],
       (node, _index, parent) => {
@@ -69,7 +70,7 @@ export const remarkHeadings: Plugin<[exportName?: string], Root> = (
           return
         }
 
-        if ((node as any).type === 'mdxjsEsm') {
+        if (!isRemoteContent && (node as any).type === 'mdxjsEsm') {
           for (const child of (node as any).data.estree.body) {
             if (child.type !== 'ImportDeclaration') continue
             const importPath = child.source.value
@@ -100,7 +101,7 @@ export const remarkHeadings: Plugin<[exportName?: string], Root> = (
           if (node.data) {
             delete node.data._mdxExplicitJsx
           }
-        } else {
+        } else if (!isRemoteContent) {
           // If component name equals default export name from .md/.mdx import
           const headingsName = PartialComponentToHeadingsName[nodeName]
           if (headingsName) {
@@ -109,6 +110,18 @@ export const remarkHeadings: Plugin<[exportName?: string], Root> = (
         }
       }
     )
+
+    file.data.hasJsxInH1 = headingMeta.hasJsxInH1
+    file.data.title = headingMeta.headings.find(
+      (h): h is Heading => typeof h !== 'string' && h.depth === 1
+    )?.value
+
+    if (isRemoteContent) {
+      // Attach headings for remote content, because we can't access to __toc variable
+      file.data.headings = headingMeta.headings
+      done()
+      return
+    }
 
     const headingElements = headingMeta.headings.map(heading =>
       typeof heading === 'string'
@@ -152,10 +165,6 @@ export const remarkHeadings: Plugin<[exportName?: string], Root> = (
       }
     } as any)
 
-    file.data.hasJsxInH1 = headingMeta.hasJsxInH1
-    file.data.title = headingMeta.headings.find(
-      (h): h is Heading => typeof h !== 'string' && h.depth === 1
-    )?.value
     done()
   }
 }

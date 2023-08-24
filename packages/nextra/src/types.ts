@@ -9,7 +9,7 @@ import type {
   META_FILENAME,
   NEXTRA_INTERNAL
 } from './constants'
-import type { PageMapCache } from './plugin'
+import type { PageMapCache } from './page-map'
 
 type MetaFilename = typeof META_FILENAME
 type MarkdownExtension = (typeof MARKDOWN_EXTENSIONS)[number]

@@ -79,22 +79,26 @@ type MdxOptions = LoaderOptions['mdxOptions'] &
 // because we already use `remarkLinkRewrite` function to remove .mdx? extensions
 const clonedRemarkLinkRewrite = remarkLinkRewrite.bind(null)
 
+type CompileMdxOptions = Pick<
+  LoaderOptions,
+  | 'staticImage'
+  | 'flexsearch'
+  | 'defaultShowCopyCode'
+  | 'readingTime'
+  | 'latex'
+  | 'codeHighlight'
+> & {
+  mdxOptions?: MdxOptions
+  route?: string
+  locale?: string
+  filePath?: string
+  useCachedCompiler?: boolean
+  isPageImport?: boolean
+}
+
 export async function compileMdx(
   source: string,
-  loaderOptions: Pick<
-    LoaderOptions,
-    | 'staticImage'
-    | 'flexsearch'
-    | 'defaultShowCopyCode'
-    | 'readingTime'
-    | 'latex'
-    | 'codeHighlight'
-  > & { mdxOptions?: MdxOptions; route?: string; locale?: string } = {},
-  { filePath = '', useCachedCompiler = false, isPageImport = true } = {}
-) {
-  // Extract frontMatter information if it exists
-  const { data: frontMatter, content } = grayMatter(source)
-  const {
+  {
     staticImage,
     flexsearch,
     readingTime,
@@ -103,8 +107,14 @@ export async function compileMdx(
     defaultShowCopyCode,
     route = '',
     locale,
-    mdxOptions
-  } = loaderOptions
+    mdxOptions,
+    filePath = '',
+    useCachedCompiler,
+    isPageImport = true
+  }: CompileMdxOptions = {}
+) {
+  // Extract frontMatter information if it exists
+  const { data: frontMatter, content } = grayMatter(source)
 
   let searchIndexKey: string | null = null
   if (
@@ -144,9 +154,44 @@ export async function compileMdx(
   // https://github.com/shuding/nextra/issues/1303
   const isFileOutsideCWD =
     !isPageImport && path.relative(CWD, filePath).startsWith('..')
+
+  const isRemoteContent = outputFormat === 'function-body'
+
   const compiler =
-    (useCachedCompiler && cachedCompilerForFormat[format]) ||
-    (cachedCompilerForFormat[format] = createProcessor({
+    !useCachedCompiler || isRemoteContent
+      ? createCompiler()
+      : (cachedCompilerForFormat[format] ??= createCompiler())
+  const processor = compiler()
+
+  try {
+    const vFile = await processor.process(
+      filePath ? { value: content, path: filePath } : content
+    )
+
+    const { title, hasJsxInH1, readingTime, structurizedData } = vFile.data as {
+      readingTime?: ReadingTime
+      structurizedData: StructurizedData
+      title?: string
+    } & Pick<PageOpts, 'hasJsxInH1'>
+    // https://github.com/shuding/nextra/issues/1032
+    const result = String(vFile).replaceAll('__esModule', '_\\_esModule')
+
+    return {
+      result,
+      ...(title && { title }),
+      ...(hasJsxInH1 && { hasJsxInH1 }),
+      ...(readingTime && { readingTime }),
+      ...(searchIndexKey !== null && { searchIndexKey, structurizedData }),
+      ...(isRemoteContent && { headings: vFile.data.headings }),
+      frontMatter
+    }
+  } catch (err) {
+    console.error(`[nextra] Error compiling ${filePath}.`)
+    throw err
+  }
+
+  function createCompiler(): Processor {
+    return createProcessor({
       jsx,
       format,
       outputFormat,
@@ -164,10 +209,10 @@ export async function compileMdx(
             storageKey: 'selectedPackageManager'
           }
         ] satisfies Pluggable,
-        outputFormat === 'function-body' && remarkRemoveImports,
+        isRemoteContent && remarkRemoveImports,
         remarkGfm,
         remarkCustomHeadingId,
-        remarkHeadings,
+        [remarkHeadings, { isRemoteContent }] satisfies Pluggable,
         // structurize should be before remarkHeadings because we attach #id attribute to heading node
         flexsearch && ([remarkStructurize, flexsearch] satisfies Pluggable),
         staticImage && remarkStaticImage,
@@ -204,31 +249,6 @@ export async function compileMdx(
         attachMeta,
         latex && rehypeKatex
       ].filter(truthy)
-    }))
-  try {
-    const processor = compiler()
-    const vFile = await processor.process(
-      filePath ? { value: content, path: filePath } : content
-    )
-
-    const { title, hasJsxInH1, readingTime, structurizedData } = vFile.data as {
-      readingTime?: ReadingTime
-      structurizedData: StructurizedData
-      title?: string
-    } & Pick<PageOpts, 'hasJsxInH1'>
-    // https://github.com/shuding/nextra/issues/1032
-    const result = String(vFile).replaceAll('__esModule', '_\\_esModule')
-
-    return {
-      result,
-      ...(hasJsxInH1 && { hasJsxInH1 }),
-      ...(title && { title }),
-      ...(readingTime && { readingTime }),
-      ...(searchIndexKey !== null && { searchIndexKey, structurizedData }),
-      frontMatter
-    }
-  } catch (err) {
-    console.error(`[nextra] Error compiling ${filePath}.`)
-    throw err
+    })
   }
 }
