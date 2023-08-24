@@ -2,9 +2,7 @@
 'nextra': patch
 ---
 
-- remove `useCachedCompiler` from `compileMdx`, always cache compiler for non-remote content
-
-- never cache md/mdx compiler for remote content
+- always cache md/mdx compiler for non-remote content and never cache for remote content
 
 - refactor function arguments for `compileMdx`
 
