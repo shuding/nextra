@@ -39,7 +39,7 @@ import type {
   ReadingTime,
   StructurizedData
 } from './types'
-import { pageTitleFromFilename, parseFileName, truthy } from './utils'
+import { truthy } from './utils'
 
 globalThis.__nextra_temp_do_not_use = () => {
   import('./__temp__')
@@ -176,18 +176,9 @@ export async function compileMdx(
     // https://github.com/shuding/nextra/issues/1032
     const result = String(vFile).replaceAll('__esModule', '_\\_esModule')
 
-    // Logic for resolving the page title (used for search and as fallback):
-    // 1. If the frontMatter has a title, use it.
-    // 2. Use the first h1 heading if it exists.
-    // 3. Use the fallback, title-cased file name.
-    const fallbackTitle =
-      frontMatter.title ||
-      title ||
-      pageTitleFromFilename(parseFileName(filePath).name)
-
     return {
       result,
-      title: fallbackTitle,
+      ...(title && { title }),
       ...(hasJsxInH1 && { hasJsxInH1 }),
       ...(readingTime && { readingTime }),
       ...(searchIndexKey !== null && { searchIndexKey, structurizedData }),

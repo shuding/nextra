@@ -13,7 +13,7 @@ import { existsSync, PAGES_DIR } from './file-system'
 import { resolvePageMap } from './page-map'
 import { collectFiles, collectMdx } from './plugin'
 import type { LoaderOptions, MdxPath, PageOpts } from './types'
-import { hashFnv32a, parseFileName } from './utils'
+import { hashFnv32a, pageTitleFromFilename, parseFileName } from './utils'
 
 const IS_WEB_CONTAINER = !!process.versions.webcontainer
 
@@ -203,12 +203,19 @@ async function loader(
     items
   })
 
+  // Logic for resolving the page title (used for search and as fallback):
+  // 1. If the frontMatter has a title, use it.
+  // 2. Use the first h1 heading if it exists.
+  // 3. Use the fallback, title-cased file name.
+  const fallbackTitle =
+    frontMatter.title || title || pageTitleFromFilename(fileMap[mdxPath].name)
+
   if (searchIndexKey && frontMatter.searchable !== false) {
     // Store all the things in buildInfo.
     const { buildInfo } = context._module as any
     buildInfo.nextraSearch = {
       indexKey: searchIndexKey,
-      title,
+      title: fallbackTitle,
       data: structurizedData,
       route: pageNextRoute
     }
@@ -241,7 +248,7 @@ async function loader(
       newNextLinkBehavior // todo: remove in v3
     }),
     readingTime,
-    title
+    title: fallbackTitle
   }
   if (transformPageOpts) {
     // It is possible that a theme wants to attach customized data, or modify
