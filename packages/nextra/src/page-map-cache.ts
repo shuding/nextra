@@ -1,6 +1,6 @@
 import type { FileMap, PageMapItem } from './types'
 
-export class PageMapCache {
+class PageMapCache {
   cache: {
     items: PageMapItem[]
     fileMap: FileMap
