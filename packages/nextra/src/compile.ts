@@ -188,6 +188,7 @@ export async function compileMdx(
       ...(hasJsxInH1 && { hasJsxInH1 }),
       ...(readingTime && { readingTime }),
       ...(searchIndexKey !== null && { searchIndexKey, structurizedData }),
+      ...(isRemoteContent && { headings: vFile.data.headings }),
       frontMatter
     }
   } catch (err) {

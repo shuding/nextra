@@ -70,7 +70,7 @@ export const remarkHeadings: Plugin<
           return
         }
 
-        if ((node as any).type === 'mdxjsEsm') {
+        if (!isRemoteContent && (node as any).type === 'mdxjsEsm') {
           for (const child of (node as any).data.estree.body) {
             if (child.type !== 'ImportDeclaration') continue
             const importPath = child.source.value
@@ -101,7 +101,7 @@ export const remarkHeadings: Plugin<
           if (node.data) {
             delete node.data._mdxExplicitJsx
           }
-        } else {
+        } else if (!isRemoteContent) {
           // If component name equals default export name from .md/.mdx import
           const headingsName = PartialComponentToHeadingsName[nodeName]
           if (headingsName) {
@@ -110,6 +110,18 @@ export const remarkHeadings: Plugin<
         }
       }
     )
+
+    file.data.hasJsxInH1 = headingMeta.hasJsxInH1
+    file.data.title = headingMeta.headings.find(
+      (h): h is Heading => typeof h !== 'string' && h.depth === 1
+    )?.value
+
+    if (isRemoteContent) {
+      // Attach headings for remote content, because we can't access to __toc variable
+      file.data.headings = headingMeta.headings
+      done()
+      return
+    }
 
     const headingElements = headingMeta.headings.map(heading =>
       typeof heading === 'string'
@@ -153,10 +165,6 @@ export const remarkHeadings: Plugin<
       }
     } as any)
 
-    file.data.hasJsxInH1 = headingMeta.hasJsxInH1
-    file.data.title = headingMeta.headings.find(
-      (h): h is Heading => typeof h !== 'string' && h.depth === 1
-    )?.value
     done()
   }
 }
