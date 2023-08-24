@@ -169,30 +169,25 @@ async function loader(
     searchIndexKey,
     hasJsxInH1,
     readingTime
-  } = await compileMdx(
-    source,
-    {
-      mdxOptions: {
-        ...mdxOptions,
-        jsx: true,
-        outputFormat: 'program',
-        format: 'detect'
-      },
-      readingTime: _readingTime,
-      defaultShowCopyCode,
-      staticImage,
-      flexsearch,
-      latex,
-      codeHighlight,
-      route: pageNextRoute,
-      locale
+  } = await compileMdx(source, {
+    mdxOptions: {
+      ...mdxOptions,
+      jsx: true,
+      outputFormat: 'program',
+      format: 'detect'
     },
-    {
-      filePath: mdxPath,
-      useCachedCompiler: true,
-      isPageImport
-    }
-  )
+    readingTime: _readingTime,
+    defaultShowCopyCode,
+    staticImage,
+    flexsearch,
+    latex,
+    codeHighlight,
+    route: pageNextRoute,
+    locale,
+    filePath: mdxPath,
+    useCachedCompiler: true,
+    isPageImport
+  })
 
   // Imported as a normal component, no need to add the layout.
   if (!isPageImport) {
@@ -225,7 +220,7 @@ async function loader(
         path.relative(gitRoot, mdxPath)
       )
     } catch {
-      // Failed to get timestamp for this file. Silently ignore it.
+      // Failed to get timestamp for this file. Silently ignore it
     }
   }
 
@@ -250,7 +245,7 @@ async function loader(
     // It is possible that a theme wants to attach customized data, or modify
     // some fields of `pageOpts`. One example is that the theme doesn't need
     // to access the full pageMap or frontMatter of other pages, and it's not
-    // necessary to include them in the bundle.
+    // necessary to include them in the bundle
     pageOpts = transformPageOpts(pageOpts as any)
   }
   const themeConfigImport = themeConfig
