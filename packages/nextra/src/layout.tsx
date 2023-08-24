@@ -10,11 +10,17 @@ export default function Nextra({
   const { context, Layout } = useInternals()
   const { Content, ...restContext } = context
 
+  if (__nextra_pageMap) {
+    restContext.pageOpts = {
+      ...restContext.pageOpts,
+      pageMap: __nextra_pageMap
+    }
+  }
+
   if (__nextra_dynamic_opts) {
     const { headings, title, frontMatter } = JSON.parse(__nextra_dynamic_opts)
     restContext.pageOpts = {
       ...restContext.pageOpts,
-      ...(__nextra_pageMap && { pageMap: __nextra_pageMap }),
       headings,
       title,
       frontMatter
