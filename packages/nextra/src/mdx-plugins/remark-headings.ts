@@ -20,9 +20,10 @@ const getFlattenedValue = (node: Parent): string =>
 const DISABLE_EXPLICIT_JSX = new Set(['summary', 'details'])
 const SKIP_FOR_PARENT_NAMES = new Set(['Tab', 'Tabs.Tab'])
 
-export const remarkHeadings: Plugin<[exportName?: string], Root> = (
-  exportName = '__toc'
-) => {
+export const remarkHeadings: Plugin<
+  [{ exportName?: string; isRemoteContent?: boolean }],
+  Root
+> = ({ exportName = '__toc', isRemoteContent }) => {
   const headingMeta: Pick<PageOpts, 'hasJsxInH1'> & {
     headings: (Heading | string)[]
   } = {

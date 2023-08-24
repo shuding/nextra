@@ -154,9 +154,51 @@ export async function compileMdx(
   // https://github.com/shuding/nextra/issues/1303
   const isFileOutsideCWD =
     !isPageImport && path.relative(CWD, filePath).startsWith('..')
-  const compiler =
-    (useCachedCompiler && cachedCompilerForFormat[format]) ||
-    (cachedCompilerForFormat[format] = createProcessor({
+
+  const isRemoteContent = outputFormat === 'function-body'
+
+  const compiler = isRemoteContent
+    ? createCompiler()
+    : (cachedCompilerForFormat[format] ??= createCompiler())
+
+  try {
+    const processor = compiler()
+    const vFile = await processor.process(
+      filePath ? { value: content, path: filePath } : content
+    )
+
+    const { title, hasJsxInH1, readingTime, structurizedData } = vFile.data as {
+      readingTime?: ReadingTime
+      structurizedData: StructurizedData
+      title?: string
+    } & Pick<PageOpts, 'hasJsxInH1'>
+    // https://github.com/shuding/nextra/issues/1032
+    const result = String(vFile).replaceAll('__esModule', '_\\_esModule')
+
+    // Logic for resolving the page title (used for search and as fallback):
+    // 1. If the frontMatter has a title, use it.
+    // 2. Use the first h1 heading if it exists.
+    // 3. Use the fallback, title-cased file name.
+    const fallbackTitle =
+      frontMatter.title ||
+      title ||
+      pageTitleFromFilename(parseFileName(filePath).name)
+
+    return {
+      result,
+      title: fallbackTitle,
+      ...(hasJsxInH1 && { hasJsxInH1 }),
+      ...(readingTime && { readingTime }),
+      ...(searchIndexKey !== null && { searchIndexKey, structurizedData }),
+      frontMatter
+    }
+  } catch (err) {
+    console.error(`[nextra] Error compiling ${filePath}.`)
+    throw err
+  }
+
+  function createCompiler(): Processor {
+    return createProcessor({
       jsx,
       format,
       outputFormat,
@@ -174,10 +216,10 @@ export async function compileMdx(
             storageKey: 'selectedPackageManager'
           }
         ] satisfies Pluggable,
-        outputFormat === 'function-body' && remarkRemoveImports,
+        isRemoteContent && remarkRemoveImports,
         remarkGfm,
         remarkCustomHeadingId,
-        remarkHeadings,
+        [remarkHeadings, { isRemoteContent }] satisfies Pluggable,
         // structurize should be before remarkHeadings because we attach #id attribute to heading node
         flexsearch && ([remarkStructurize, flexsearch] satisfies Pluggable),
         staticImage && remarkStaticImage,
@@ -214,40 +256,6 @@ export async function compileMdx(
         attachMeta,
         latex && rehypeKatex
       ].filter(truthy)
-    }))
-  try {
-    const processor = compiler()
-    const vFile = await processor.process(
-      filePath ? { value: content, path: filePath } : content
-    )
-
-    const { title, hasJsxInH1, readingTime, structurizedData } = vFile.data as {
-      readingTime?: ReadingTime
-      structurizedData: StructurizedData
-      title?: string
-    } & Pick<PageOpts, 'hasJsxInH1'>
-    // https://github.com/shuding/nextra/issues/1032
-    const result = String(vFile).replaceAll('__esModule', '_\\_esModule')
-
-    // Logic for resolving the page title (used for search and as fallback):
-    // 1. If the frontMatter has a title, use it.
-    // 2. Use the first h1 heading if it exists.
-    // 3. Use the fallback, title-cased file name.
-    const fallbackTitle =
-      frontMatter.title ||
-      title ||
-      pageTitleFromFilename(parseFileName(filePath).name)
-
-    return {
-      result,
-      title: fallbackTitle,
-      ...(hasJsxInH1 && { hasJsxInH1 }),
-      ...(readingTime && { readingTime }),
-      ...(searchIndexKey !== null && { searchIndexKey, structurizedData }),
-      frontMatter
-    }
-  } catch (err) {
-    console.error(`[nextra] Error compiling ${filePath}.`)
-    throw err
+    })
   }
 }
