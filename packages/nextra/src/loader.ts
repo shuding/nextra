@@ -185,7 +185,6 @@ async function loader(
     route: pageNextRoute,
     locale,
     filePath: mdxPath,
-    useCachedCompiler: true,
     isPageImport
   })
 
