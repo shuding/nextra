@@ -39,7 +39,7 @@ import type {
   ReadingTime,
   StructurizedData
 } from './types'
-import { truthy } from './utils'
+import { pageTitleFromFilename, parseFileName, truthy } from './utils'
 
 globalThis.__nextra_temp_do_not_use = () => {
   import('./__temp__')
@@ -79,18 +79,26 @@ type MdxOptions = LoaderOptions['mdxOptions'] &
 // because we already use `remarkLinkRewrite` function to remove .mdx? extensions
 const clonedRemarkLinkRewrite = remarkLinkRewrite.bind(null)
 
+type CompileMdxOptions = Pick<
+  LoaderOptions,
+  | 'staticImage'
+  | 'flexsearch'
+  | 'defaultShowCopyCode'
+  | 'readingTime'
+  | 'latex'
+  | 'codeHighlight'
+> & {
+  mdxOptions?: MdxOptions
+  route?: string
+  locale?: string
+  filePath?: string
+  useCachedCompiler?: boolean
+  isPageImport?: boolean
+}
+
 export async function compileMdx(
   source: string,
-  loaderOptions: Pick<
-    LoaderOptions,
-    | 'staticImage'
-    | 'flexsearch'
-    | 'defaultShowCopyCode'
-    | 'readingTime'
-    | 'latex'
-    | 'codeHighlight'
-  > & { mdxOptions?: MdxOptions; route?: string; locale?: string } = {},
-  { filePath = '', useCachedCompiler = false, isPageImport = true } = {}
+  options: CompileMdxOptions = {}
 ) {
   // Extract frontMatter information if it exists
   const { data: frontMatter, content } = grayMatter(source)
@@ -103,8 +111,11 @@ export async function compileMdx(
     defaultShowCopyCode,
     route = '',
     locale,
-    mdxOptions
-  } = loaderOptions
+    mdxOptions,
+    filePath = '',
+    useCachedCompiler,
+    isPageImport = true
+  } = options
 
   let searchIndexKey: string | null = null
   if (
@@ -219,10 +230,19 @@ export async function compileMdx(
     // https://github.com/shuding/nextra/issues/1032
     const result = String(vFile).replaceAll('__esModule', '_\\_esModule')
 
+    // Logic for resolving the page title (used for search and as fallback):
+    // 1. If the frontMatter has a title, use it.
+    // 2. Use the first h1 heading if it exists.
+    // 3. Use the fallback, title-cased file name.
+    const fallbackTitle =
+      frontMatter.title ||
+      title ||
+      pageTitleFromFilename(parseFileName(filePath).name)
+
     return {
       result,
+      title: fallbackTitle,
       ...(hasJsxInH1 && { hasJsxInH1 }),
-      ...(title && { title }),
       ...(readingTime && { readingTime }),
       ...(searchIndexKey !== null && { searchIndexKey, structurizedData }),
       frontMatter
