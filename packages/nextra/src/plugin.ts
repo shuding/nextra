@@ -3,7 +3,6 @@ import { promisify } from 'node:util'
 import fs from 'graceful-fs'
 import grayMatter from 'gray-matter'
 import pLimit from 'p-limit'
-import type { Compiler } from 'webpack'
 import {
   CWD,
   DEFAULT_LOCALES,
@@ -11,7 +10,6 @@ import {
   MARKDOWN_EXTENSION_REGEX,
   META_FILENAME
 } from './constants'
-import { PAGES_DIR } from './file-system'
 import type {
   FileMap,
   Folder,
@@ -19,7 +17,6 @@ import type {
   MdxPath,
   MetaJsonFile,
   MetaJsonPath,
-  NextraConfig,
   PageMapItem
 } from './types'
 import {
@@ -277,23 +274,3 @@ export class PageMapCache {
 }
 
 export const pageMapCache = new PageMapCache()
-
-export class NextraPlugin {
-  constructor(private config: NextraConfig & { locales: string[] }) {}
-
-  apply(compiler: Compiler) {
-    compiler.hooks.beforeCompile.tapAsync(
-      'NextraPlugin',
-      async (_, callback) => {
-        const { locales } = this.config
-        try {
-          const result = await collectFiles({ dir: PAGES_DIR, locales })
-          pageMapCache.set(result)
-          callback()
-        } catch (err) {
-          callback(err as Error)
-        }
-      }
-    )
-  }
-}
