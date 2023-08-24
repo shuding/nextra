@@ -37,9 +37,9 @@ export const remarkHeadings: Plugin<[exportName?: string], Root> = (
       tree,
       [
         'heading',
-        // allow override details/summary + push partial component's __headings export name to headings list
+        // allow override details/summary + push partial component's __toc export name to headings list
         'mdxJsxFlowElement',
-        // verify .md/.mdx exports and attach named __headings export
+        // verify .md/.mdx exports and attach named __toc export
         'mdxjsEsm'
       ],
       (node, _index, parent) => {

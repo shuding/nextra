@@ -280,7 +280,7 @@ ${
   }
 
   const stringifiedPageOpts =
-    JSON.stringify(pageOpts).slice(0, -1) + `,headings:__headings}`
+    JSON.stringify(pageOpts).slice(0, -1) + `,headings:__toc}`
   const stringifiedChecksum = IS_PRODUCTION
     ? "''"
     : JSON.stringify(hashFnv32a(stringifiedPageOpts))
