@@ -71,7 +71,7 @@ export const remarkHeadings: Plugin<
 
         if (isRemoteContent) {
           // skip
-        } else if (!isRemoteContent && (node as any).type === 'mdxjsEsm') {
+        } else if ((node as any).type === 'mdxjsEsm') {
           for (const child of (node as any).data.estree.body) {
             if (child.type !== 'ImportDeclaration') continue
             const importPath = child.source.value
