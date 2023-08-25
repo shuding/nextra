@@ -2,14 +2,6 @@ import type { Root } from 'mdast'
 import type { Plugin } from 'unified'
 import type { Flexsearch, StructurizedData } from '../types'
 
-function cleanup(content: string): string {
-  return content
-    .trim()
-    .split(/\n+/)
-    .map(line => line.trim())
-    .join('\n')
-}
-
 const CODE_TABLE_QUOTE_LIST = new Set<string>([
   'code',
   'table',
@@ -33,7 +25,14 @@ export const remarkStructurize: Plugin<[Flexsearch], Root> = options => {
   }
 
   function save() {
-    const cleanedContent = cleanup(content)
+    const cleanedContent = content
+      .trim()
+      // Strip out large worlds since it can provoke out-of-memory while indexing them
+      // I took 50 since largest world in English has 45 characters
+      .replaceAll(/\w{50,}/g, '')
+      // Replace by new line or new lines
+      .split(/\n+/)
+      .join('\n')
     if (activeSlug || cleanedContent) {
       structurizedData[activeSlug] = cleanedContent
     }

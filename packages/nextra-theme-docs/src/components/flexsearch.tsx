@@ -102,18 +102,12 @@ const loadIndexesImpl = async (
     let pageContent = ''
     ++pageId
 
-    for (const [key, _content] of Object.entries(structurizedData.data)) {
+    for (const [key, content] of Object.entries(structurizedData.data)) {
       const [headingId, headingValue] = key.split('#')
       const url = route + (headingId ? '#' + headingId : '')
       const title = headingValue || structurizedData.title
+      const paragraphs = content.split('\n')
 
-      const content = _content
-        // strip out large worlds since it can provoke out-of-memory while indexing them
-        // I took 50 since largest world in English is 45 characters
-        // TODO: move it to remark-structurize plugin
-        .replaceAll(/\w{50,}/g, '')
-
-      const paragraphs = content.split('\n').filter(Boolean)
       sectionIndex.add({
         id: url,
         url,
