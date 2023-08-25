@@ -27,8 +27,9 @@ export const remarkStructurize: Plugin<[Flexsearch], Root> = options => {
   function save() {
     const cleanedContent = content
       .trim()
-      // Strip out large worlds since it can provoke out-of-memory while indexing them
-      // I took 50 since largest world in English has 45 characters
+      // Strip out large words starting from 50 chars since it can provoke out-of-memory while
+      // indexing them, I took 50 chars since largest word in English has 45 characters
+      // https://github.com/shuding/nextra/issues/2077#issuecomment-1693671011
       .replaceAll(/\w{50,}/g, '')
       // Replace by new line or new lines
       .split(/\n+/)
