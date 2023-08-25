@@ -17,7 +17,6 @@ const getFlattenedValue = (node: Parent): string =>
     )
     .join('')
 
-const DISABLE_EXPLICIT_JSX = new Set(['summary', 'details'])
 const SKIP_FOR_PARENT_NAMES = new Set(['Tab', 'Tabs.Tab'])
 
 export const remarkHeadings: Plugin<
@@ -38,7 +37,7 @@ export const remarkHeadings: Plugin<
       tree,
       [
         'heading',
-        // allow override details/summary + push partial component's __toc export name to headings list
+        // push partial component's __toc export name to headings list
         'mdxJsxFlowElement',
         // verify .md/.mdx exports and attach named __toc export
         'mdxjsEsm'
@@ -70,7 +69,9 @@ export const remarkHeadings: Plugin<
           return
         }
 
-        if (!isRemoteContent && (node as any).type === 'mdxjsEsm') {
+        if (isRemoteContent) {
+          // skip
+        } else if ((node as any).type === 'mdxjsEsm') {
           for (const child of (node as any).data.estree.body) {
             if (child.type !== 'ImportDeclaration') continue
             const importPath = child.source.value
@@ -92,18 +93,10 @@ export const remarkHeadings: Plugin<
               local: { type: 'Identifier', name: exportAsName }
             })
           }
-          return
-        }
-
-        const nodeName = (node as any).name
-        if (DISABLE_EXPLICIT_JSX.has(nodeName)) {
-          // Replace the <summary> and <details> with customized components
-          if (node.data) {
-            delete node.data._mdxExplicitJsx
-          }
-        } else if (!isRemoteContent) {
+        } else {
           // If component name equals default export name from .md/.mdx import
-          const headingsName = PartialComponentToHeadingsName[nodeName]
+          const headingsName =
+            PartialComponentToHeadingsName[(node as any).name]
           if (headingsName) {
             headingMeta.headings.push(headingsName)
           }

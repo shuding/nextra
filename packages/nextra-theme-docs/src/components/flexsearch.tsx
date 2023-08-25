@@ -63,7 +63,7 @@ const loadIndexesImpl = async (
   const response = await fetch(
     `${basePath}/_next/static/chunks/nextra-data-${locale}.json`
   )
-  const data = (await response.json()) as SearchData
+  const searchData = (await response.json()) as SearchData
 
   const pageIndex: PageIndex = new FlexSearch.Document({
     cache: 100,
@@ -97,17 +97,16 @@ const loadIndexesImpl = async (
   })
 
   let pageId = 0
-  for (const route in data) {
+
+  for (const [route, structurizedData] of Object.entries(searchData)) {
     let pageContent = ''
     ++pageId
 
-    for (const heading in data[route].data) {
-      const [hash, text] = heading.split('#')
-      const url = route + (hash ? '#' + hash : '')
-      const title = text || data[route].title
-
-      const content = data[route].data[heading] || ''
-      const paragraphs = content.split('\n').filter(Boolean)
+    for (const [key, content] of Object.entries(structurizedData.data)) {
+      const [headingId, headingValue] = key.split('#')
+      const url = route + (headingId ? '#' + headingId : '')
+      const title = headingValue || structurizedData.title
+      const paragraphs = content.split('\n')
 
       sectionIndex.add({
         id: url,
@@ -134,7 +133,7 @@ const loadIndexesImpl = async (
 
     pageIndex.add({
       id: pageId,
-      title: data[route].title,
+      title: structurizedData.title,
       content: pageContent
     })
   }

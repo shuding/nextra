@@ -27,6 +27,7 @@ import {
   remarkCustomHeadingId,
   remarkHeadings,
   remarkLinkRewrite,
+  remarkMdxDisableExplicitJsx,
   remarkRemoveImports,
   remarkReplaceImports,
   remarkStaticImage,
@@ -211,6 +212,12 @@ export async function compileMdx(
         ] satisfies Pluggable,
         isRemoteContent && remarkRemoveImports,
         remarkGfm,
+        format !== 'md' &&
+          ([
+            remarkMdxDisableExplicitJsx,
+            // Replace the <summary> and <details> with customized components
+            { whiteList: ['details', 'summary'] }
+          ] satisfies Pluggable),
         remarkCustomHeadingId,
         [remarkHeadings, { isRemoteContent }] satisfies Pluggable,
         // structurize should be before remarkHeadings because we attach #id attribute to heading node
