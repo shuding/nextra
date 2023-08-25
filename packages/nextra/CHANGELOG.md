@@ -1,5 +1,11 @@
 # nextra
 
+## 2.12.2
+
+### Patch Changes
+
+- 7c8c4989: fix `Out of Memory` in search while indexing large words
+
 ## 2.12.1
 
 ### Patch Changes
