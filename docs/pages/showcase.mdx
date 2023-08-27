@@ -2,7 +2,7 @@
 title: Showcase
 ---
 
-import { Card, Cards } from 'nextra/components'
+import { Cards } from 'nextra/components'
 
 {<h1 className="mt-10 mb-4 text-center text-[2.5rem] font-bold tracking-tight">Showcase</h1>}
 
@@ -158,7 +158,7 @@ source projects powered by Nextra</p>}
 
 export const ShowcaseCard = Object.assign(
   // Copy card component and add default props
-  Card.bind(),
+  Cards.Card.bind(),
   {
     displayName: 'ShowcaseCard',
     defaultProps: {
