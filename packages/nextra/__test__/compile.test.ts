@@ -131,16 +131,18 @@ import Last from './three.mdx'
     const { result } = await compileMdx(
       `
 <Tab>
- ## hello
+ ## foo
 </Tab>
 
 <Tabs.Tab>
-  ## World
+  ## bar
+  ## baz [#custom-id]
 </Tabs.Tab>
 `,
       { mdxOptions }
     )
     expect(result).toMatch('export const __toc = [];')
+    expect(result).not.toMatch('id="custom-id"')
   })
 })
 

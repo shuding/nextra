@@ -116,7 +116,7 @@ favicon, etc.
   ]}
 />
 
-#### Static head tags
+#### Static Head Tags
 
 If you have only static head tags, it’s easy to directly put them in `head`. For
 example:
@@ -133,7 +133,7 @@ export default {
 }
 ```
 
-#### Dynamic tags based on page
+#### Dynamic Tags Based on Page
 
 You can also use a _function component_ as `head` to dynamically generate the
 head tags based on the current page’s front matter. For example:
@@ -477,13 +477,13 @@ an active/focused route will automatically collapse up to the level set by
 `sidebar.defaultMenuCollapseLevel`. e.g. if `defaultMenuCollapseLevel` is `2`,
 then top-level folders will not auto-collapse.
 
-### Customize sidebar content
+### Customize Sidebar Content
 
 Together with the [Separators](/docs/docs-theme/page-configuration#separators)
 item, you can customize how the sidebar content is rendered by using the
 `sidebar.titleComponent` option:
 
-import { Tab, Tabs } from 'nextra/components'
+import { Tabs } from 'nextra/components'
 import sidebarTitleComponentImage from '../../../public/assets/docs/sidebar-customized.png'
 
 <Screenshot src={sidebarTitleComponentImage} alt="Customized Sidebar" />
@@ -494,7 +494,7 @@ import sidebarTitleComponentImage from '../../../public/assets/docs/sidebar-cust
 </div>
 
 <Tabs items={['theme.config.jsx', 'pages/_meta.json']}>
-  <Tab>
+  <Tabs.Tab>
     ```jsx
     export default {
       sidebar: {
@@ -512,8 +512,8 @@ import sidebarTitleComponentImage from '../../../public/assets/docs/sidebar-cust
       }
     }
     ```
-  </Tab>
-  <Tab>
+  </Tabs.Tab>
+  <Tabs.Tab>
     ```json
     {
       "index": "Intro",
@@ -525,7 +525,7 @@ import sidebarTitleComponentImage from '../../../public/assets/docs/sidebar-cust
       "about": "About"
     }
     ```
-  </Tab>
+  </Tabs.Tab>
 </Tabs>
 
 ## Content
@@ -723,7 +723,7 @@ default footer, or fully customize it with a custom component.
   ]}
 />
 
-### Copyright information
+### Copyright Information
 
 You can add some simple content, such as copyright information to the default
 footer:

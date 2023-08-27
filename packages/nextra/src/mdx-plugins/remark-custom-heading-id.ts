@@ -3,7 +3,7 @@ import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 
 export type HProperties = {
-  id: string
+  id?: string
 }
 
 export const remarkCustomHeadingId: Plugin<[], Root> =
@@ -17,7 +17,7 @@ export const remarkCustomHeadingId: Plugin<[], Root> =
 
       if (!matched) return
       node.data ||= {}
-      const headingProps = (node.data.hProperties ||= {}) as HProperties
+      const headingProps: HProperties = (node.data.hProperties ||= {})
       headingProps.id = matched[1]
 
       lastChild.value = heading.slice(0, matched.index)

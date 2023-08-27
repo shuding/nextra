@@ -1,6 +1,6 @@
 # Docs Theme
 
-import { Callout, Tabs, Tab } from 'nextra/components'
+import { Callout, Steps } from 'nextra/components'
 
 <Callout>This website is built with the docs theme.</Callout>
 
@@ -8,47 +8,21 @@ you can install the blog theme with the following commands:
 
 ## Getting start
 
-1. Install Next.js, Nextra and React
+<Steps>
 
-<Tabs items={['npm', 'yarn', 'pnpm']} defaultIndex={1}>
-  <Tab>
-    ```bash
-    npm i react react-dom next nextra
-    ```
-  </Tab>
-  <Tab>
-    ```bash
-    yarn add react react-dom next nextra
-    ```
-  </Tab>
-  <Tab>
-    ```bash
-    pnpm i react react-dom next nextra
-    ```
-  </Tab>
-</Tabs>
+### Install Next.js, Nextra and React
 
-2. Install the docs theme
+```sh npm2yarn
+npm i react react-dom next nextra
+```
 
-<Tabs items={['npm', 'yarn', 'pnpm']} defaultIndex={1}>
-  <Tab>
-    ```bash
-    npm i nextra-theme-docs
-    ```
-  </Tab>
-  <Tab>
-    ```bash
-    yarn add nextra-theme-docs
-    ```
-  </Tab>
-  <Tab>
-    ```bash
-    pnpm i nextra-theme-docs
-    ```
-  </Tab>
-</Tabs>
+### Install the docs theme
 
-3. Create the following Next.js config and theme config under the root directory:
+```sh npm2yarn
+npm i nextra-theme-docs
+```
+
+### Create the following Next.js config and theme config under the root directory:
 
 ```jsx filename="next.config.js"
 const withNextra = require('nextra')({
@@ -91,18 +65,9 @@ export default {
 }
 ```
 
-4. Create `pages/_app.js` and include the theme stylesheet:
+### You are good to go!
 
-```jsx filename="_app.js"
-import 'nextra-theme-docs/style.css'
-
-export default function Nextra({ Component, pageProps }) {
-  const getLayout = Component.getLayout || (page => page)
-  return <Component {...pageProps} />
-}
-```
-
-5. You are good to go!
+</Steps>
 
 ---
 

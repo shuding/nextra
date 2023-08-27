@@ -47,12 +47,14 @@ function HeadingLink({
       {...props}
     >
       {children}
-      <a
-        href={id && `#${id}`}
-        id={id}
-        className="subheading-anchor"
-        aria-label="Permalink for this section"
-      />
+      {id && (
+        <a
+          href={`#${id}`}
+          id={id}
+          className="subheading-anchor"
+          aria-label="Permalink for this section"
+        />
+      )}
     </Tag>
   )
 }

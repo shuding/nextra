@@ -34,7 +34,7 @@ export function normalizePageRoute(parentRoute: string, route: string): string {
 }
 
 export function pageTitleFromFilename(fileName: string) {
-  return title(fileName.replace(/[-_]/g, ' '))
+  return title(fileName.replaceAll(/[-_]/g, ' '))
 }
 
 export function sortPages(

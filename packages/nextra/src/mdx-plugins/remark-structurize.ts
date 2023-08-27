@@ -32,8 +32,7 @@ export const remarkStructurize: Plugin<[Flexsearch], Root> = options => {
       // https://github.com/shuding/nextra/issues/2077#issuecomment-1693671011
       .replaceAll(/\w{50,}/g, '')
       // Replace by new line or new lines
-      .split(/\n+/)
-      .join('\n')
+      .replaceAll(/\n+/g, '\n')
     if (activeSlug || cleanedContent) {
       structurizedData[activeSlug] = cleanedContent
     }

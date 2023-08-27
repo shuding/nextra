@@ -4,29 +4,29 @@ A built-in component provided by `nextra-theme-docs`.
 
 ## Example
 
-import { Tab, Tabs } from 'nextra/components'
+import { Tabs } from 'nextra/components'
 
 <Tabs items={['JavaScript', 'C++', {label:'C', disabled: true}, 'Python']} defaultIndex={1}>
-  <Tab>
+  <Tabs.Tab>
     ```js filename="hi.js"
     import { useState, useEffect } from 'react';
     ```
-  </Tab>
-  <Tab>
+  </Tabs.Tab>
+  <Tabs.Tab>
     ```cpp filename="hi.cpp"
     #include <iostream>
     ```
-  </Tab>
-  <Tab>
+  </Tabs.Tab>
+  <Tabs.Tab>
     ```c filename="hi.c"
     #include <stdio.h>
     ```
-  </Tab>
-  <Tab>
+  </Tabs.Tab>
+  <Tabs.Tab>
      ```python filename="hello.py"
     print('Hello, world!')
     ```
-  </Tab>
+  </Tabs.Tab>
 </Tabs>
 
 ## Usage
@@ -35,33 +35,34 @@ import { Tab, Tabs } from 'nextra/components'
 
 ````mdx filename="tabs.mdx"
 <Tabs items={['JavaScript', 'C++', {label:'C', disabled: true}, 'Python']} defaultIndex={1}>
-  <Tab>
+  <Tabs.Tab>
     ```js filename="hi.js"
     import { useState, useEffect } from 'react';
     ```
-  </Tab>
-  <Tab>
+  </Tabs.Tab>
+  <Tabs.Tab>
     ```cpp filename="hi.cpp"
     #include <iostream>
     ```
-  </Tab>
-  <Tab>
+  </Tabs.Tab>
+  <Tabs.Tab>
     ```c filename="hi.c"
     #include <stdio.h>
     ```
-  </Tab>
-  <Tab>
+  </Tabs.Tab>
+  <Tabs.Tab>
     ```python filename="hello.py"
     print('Hello, world!')
     ```
-  </Tab>
+  </Tabs.Tab>
 </Tabs>
 ````
 
 ### React Component
 
 ```jsx filename="tabs.jsx"
-import { Tabs, Tab } from 'nextra/components'
+import { Tabs } from 'nextra/components'
+
 const items = ['1', '2', '3', '4']
 const defaultIndex = 1
 const Component = () => (

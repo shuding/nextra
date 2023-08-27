@@ -45,6 +45,7 @@ module.exports = {
         'object-shorthand': ['error', 'always'],
         'unicorn/prefer-regexp-test': 'error',
         'unicorn/no-array-for-each': 'error',
+        'unicorn/prefer-string-replace-all': 'error',
         '@typescript-eslint/prefer-for-of': 'error',
         // todo: enable
         '@typescript-eslint/no-explicit-any': 'off',

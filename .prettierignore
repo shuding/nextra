@@ -6,7 +6,5 @@ packages/nextra/__test__/locale-with-base-path.test.ts
 
 # bellow files are broken since prettier doesn't support MDX2
 examples/swr-site/pages/remote/graphql-eslint/\[\[...slug\]\].mdx
-examples/docs/src/pages/themes/docs/index.mdx
-examples/docs/src/pages/get-started.mdx
 examples/swr-site/pages/blog.en-US.mdx
 docs/pages/docs/guide/advanced/latex.mdx

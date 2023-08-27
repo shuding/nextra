@@ -93,7 +93,7 @@ export function Card({
   )
 }
 
-export function Cards({
+function _Cards({
   children,
   num = 3,
   className,
@@ -115,3 +115,5 @@ export function Cards({
     </div>
   )
 }
+
+export const Cards = Object.assign(_Cards, { displayName: 'Cards', Card })
