@@ -3,7 +3,7 @@ import type { Parent, Root } from 'mdast'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 import { MARKDOWN_EXTENSION_REGEX } from '../constants'
-import type { Heading, PageOpts } from '../types'
+import type { Heading } from '../types'
 import type { HProperties } from './remark-custom-heading-id'
 
 const getFlattenedValue = (node: Parent): string =>
@@ -23,11 +23,10 @@ export const remarkHeadings: Plugin<
   [{ exportName?: string; isRemoteContent?: boolean }],
   Root
 > = ({ exportName = '__toc', isRemoteContent }) => {
-  const headingMeta: Pick<PageOpts, 'hasJsxInH1'> & {
-    headings: (Heading | string)[]
-  } = {
-    headings: []
-  }
+  const headings: (Heading | string)[] = []
+  let hasJsxInH1: boolean
+  let title: string
+
   const slugger = new Slugger()
   return (tree, file, done) => {
     const PartialComponentToHeadingsName: Record<string, string> =
@@ -44,14 +43,17 @@ export const remarkHeadings: Plugin<
       ],
       (node, _index, parent) => {
         if (node.type === 'heading') {
-          const hasJsxInH1 =
-            node.depth === 1 &&
-            node.children.some(
+          if (node.depth === 1) {
+            const hasJsx = node.children.some(
               (child: { type: string }) => child.type === 'mdxJsxTextElement'
             )
-          if (hasJsxInH1) {
-            headingMeta.hasJsxInH1 = true
+            if (hasJsx) {
+              hasJsxInH1 = true
+            }
+            title ||= getFlattenedValue(node)
+            return
           }
+
           node.data ||= {}
           const headingProps: HProperties = (node.data.hProperties ||= {})
           if (SKIP_FOR_PARENT_NAMES.has((parent as any).name)) {
@@ -61,11 +63,7 @@ export const remarkHeadings: Plugin<
             const id = slugger.slug(headingProps.id || value)
             // Attach flattened/custom #id to heading node
             headingProps.id = id
-            headingMeta.headings.push({
-              depth: node.depth,
-              value,
-              id
-            })
+            headings.push({ depth: node.depth, value, id })
           }
           return
         }
@@ -99,25 +97,23 @@ export const remarkHeadings: Plugin<
           const headingsName =
             PartialComponentToHeadingsName[(node as any).name]
           if (headingsName) {
-            headingMeta.headings.push(headingsName)
+            headings.push(headingsName)
           }
         }
       }
     )
 
-    file.data.hasJsxInH1 = headingMeta.hasJsxInH1
-    file.data.title = headingMeta.headings.find(
-      (h): h is Heading => typeof h !== 'string' && h.depth === 1
-    )?.value
+    file.data.hasJsxInH1 = hasJsxInH1
+    file.data.title = title
 
     if (isRemoteContent) {
       // Attach headings for remote content, because we can't access to __toc variable
-      file.data.headings = headingMeta.headings
+      file.data.headings = headings
       done()
       return
     }
 
-    const headingElements = headingMeta.headings.map(heading =>
+    const headingElements = headings.map(heading =>
       typeof heading === 'string'
         ? {
             type: 'SpreadElement',

@@ -5,17 +5,13 @@ exports[`Process heading > code-h1 1`] = `
   "frontMatter": {},
   "result": "/*@jsxRuntime automatic @jsxImportSource react*/
 import {useMDXComponents as _provideComponents} from \\"nextra/mdx\\";
-export const __toc = [{
-  depth: 1,
-  value: \\"codegen.yml\\",
-  id: \\"codegenyml\\"
-}];
+export const __toc = [];
 function _createMdxContent(props) {
   const _components = Object.assign({
     h1: \\"h1\\",
     code: \\"code\\"
   }, _provideComponents(), props.components);
-  return <_components.h1 id=\\"codegenyml\\"><_components.code>{\\"codegen.yml\\"}</_components.code></_components.h1>;
+  return <_components.h1><_components.code>{\\"codegen.yml\\"}</_components.code></_components.h1>;
 }
 function MDXContent(props = {}) {
   const {wrapper: MDXLayout} = Object.assign({}, _provideComponents(), props.components);
@@ -32,17 +28,13 @@ exports[`Process heading > code-with-text-h1 1`] = `
   "frontMatter": {},
   "result": "/*@jsxRuntime automatic @jsxImportSource react*/
 import {useMDXComponents as _provideComponents} from \\"nextra/mdx\\";
-export const __toc = [{
-  depth: 1,
-  value: \\"codegen.yml file\\",
-  id: \\"codegenyml-file\\"
-}];
+export const __toc = [];
 function _createMdxContent(props) {
   const _components = Object.assign({
     h1: \\"h1\\",
     code: \\"code\\"
   }, _provideComponents(), props.components);
-  return <_components.h1 id=\\"codegenyml-file\\"><_components.code>{\\"codegen.yml\\"}</_components.code>{\\" file\\"}</_components.h1>;
+  return <_components.h1><_components.code>{\\"codegen.yml\\"}</_components.code>{\\" file\\"}</_components.h1>;
 }
 function MDXContent(props = {}) {
   const {wrapper: MDXLayout} = Object.assign({}, _provideComponents(), props.components);
@@ -65,16 +57,12 @@ export const TagName = () => {
   const {tag} = useRouter().query;
   return tag || null;
 };
-export const __toc = [{
-  depth: 1,
-  value: \\"Posts Tagged with “”\\",
-  id: \\"posts-tagged-with-\\"
-}];
+export const __toc = [];
 function _createMdxContent(props) {
   const _components = Object.assign({
     h1: \\"h1\\"
   }, _provideComponents(), props.components);
-  return <_components.h1 id=\\"posts-tagged-with-\\">{\\"Posts Tagged with “\\"}<TagName />{\\"”\\"}</_components.h1>;
+  return <_components.h1>{\\"Posts Tagged with “\\"}<TagName />{\\"”\\"}</_components.h1>;
 }
 function MDXContent(props = {}) {
   const {wrapper: MDXLayout} = Object.assign({}, _provideComponents(), props.components);
@@ -116,16 +104,12 @@ exports[`Process heading > static-h1 1`] = `
   "frontMatter": {},
   "result": "/*@jsxRuntime automatic @jsxImportSource react*/
 import {useMDXComponents as _provideComponents} from \\"nextra/mdx\\";
-export const __toc = [{
-  depth: 1,
-  value: \\"Hello World\\",
-  id: \\"hello-world\\"
-}];
+export const __toc = [];
 function _createMdxContent(props) {
   const _components = Object.assign({
     h1: \\"h1\\"
   }, _provideComponents(), props.components);
-  return <_components.h1 id=\\"hello-world\\">{\\"Hello World\\"}</_components.h1>;
+  return <_components.h1>{\\"Hello World\\"}</_components.h1>;
 }
 function MDXContent(props = {}) {
   const {wrapper: MDXLayout} = Object.assign({}, _provideComponents(), props.components);
