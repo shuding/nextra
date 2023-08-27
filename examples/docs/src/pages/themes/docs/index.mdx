@@ -1,6 +1,6 @@
 # Docs Theme
 
-import { Callout, Tabs, Tab } from 'nextra/components'
+import { Callout } from 'nextra/components'
 
 <Callout>This website is built with the docs theme.</Callout>
 
@@ -10,45 +10,18 @@ you can install the blog theme with the following commands:
 
 1. Install Next.js, Nextra and React
 
-<Tabs items={['npm', 'yarn', 'pnpm']} defaultIndex={1}>
-  <Tab>
-    ```bash
-    npm i react react-dom next nextra
-    ```
-  </Tab>
-  <Tab>
-    ```bash
-    yarn add react react-dom next nextra
-    ```
-  </Tab>
-  <Tab>
-    ```bash
-    pnpm i react react-dom next nextra
-    ```
-  </Tab>
-</Tabs>
+```sh npm2yarn
+npm i react react-dom next nextra
+```
 
 2. Install the docs theme
 
-<Tabs items={['npm', 'yarn', 'pnpm']} defaultIndex={1}>
-  <Tab>
-    ```bash
-    npm i nextra-theme-docs
-    ```
-  </Tab>
-  <Tab>
-    ```bash
-    yarn add nextra-theme-docs
-    ```
-  </Tab>
-  <Tab>
-    ```bash
-    pnpm i nextra-theme-docs
-    ```
-  </Tab>
-</Tabs>
+```sh npm2yarn
+npm i nextra-theme-docs
+```
 
-3. Create the following Next.js config and theme config under the root directory:
+3. Create the following Next.js config and theme config under the root
+   directory:
 
 ```jsx filename="next.config.js"
 const withNextra = require('nextra')({
