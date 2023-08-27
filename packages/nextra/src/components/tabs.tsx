@@ -14,7 +14,7 @@ function isTabObjectItem(item: unknown): item is TabObjectItem {
   return !!item && typeof item === 'object' && 'label' in item
 }
 
-export function Tabs({
+function _Tabs({
   items,
   selectedIndex: _selectedIndex,
   defaultIndex = 0,
@@ -121,3 +121,5 @@ export function Tab({
     </HeadlessTab.Panel>
   )
 }
+
+export const Tabs = Object.assign(_Tabs, { displayName: 'Tabs', Tab })
