@@ -52,14 +52,15 @@ export const remarkHeadings: Plugin<
           if (hasJsxInH1) {
             headingMeta.hasJsxInH1 = true
           }
-          const value = getFlattenedValue(node)
-
           node.data ||= {}
-          const headingProps = (node.data.hProperties ||= {}) as HProperties
-          const id = slugger.slug(headingProps.id || value)
-          // Attach flattened/custom #id to heading node
-          headingProps.id = id
-          if (!SKIP_FOR_PARENT_NAMES.has((parent as any).name)) {
+          const headingProps: HProperties = (node.data.hProperties ||= {})
+          if (SKIP_FOR_PARENT_NAMES.has((parent as any).name)) {
+            delete headingProps.id
+          } else {
+            const value = getFlattenedValue(node)
+            const id = slugger.slug(headingProps.id || value)
+            // Attach flattened/custom #id to heading node
+            headingProps.id = id
             headingMeta.headings.push({
               depth: node.depth,
               value,

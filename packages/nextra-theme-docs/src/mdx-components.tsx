@@ -64,13 +64,15 @@ function HeadingLink({
       {...props}
     >
       {children}
-      <a
-        href={`#${id}`}
-        id={id}
-        className="subheading-anchor"
-        aria-label="Permalink for this section"
-        ref={obRef}
-      />
+      {id && (
+        <a
+          href={`#${id}`}
+          id={id}
+          className="subheading-anchor"
+          aria-label="Permalink for this section"
+          ref={obRef}
+        />
+      )}
     </Tag>
   )
 }

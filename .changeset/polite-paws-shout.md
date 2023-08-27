@@ -8,3 +8,5 @@
 - Add alias `Tabs.Tab` to `Tab` component
 
 - Add alias `Cards.Card` to `Card` component
+
+- should not attach custom heading id as id attribute if parent is `Tabs.Tab` or `Tab`
