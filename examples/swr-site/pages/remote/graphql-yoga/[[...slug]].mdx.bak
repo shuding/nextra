@@ -3,7 +3,7 @@ import {
   findPathWithExtension,
   findStaticPaths
 } from '@components/remote-utils'
-import { Callout, Tab, Tabs } from 'nextra/components'
+import { Callout, Tabs } from 'nextra/components'
 import { RemoteContent } from 'nextra/data'
 import { remarkLinkRewrite } from 'nextra/mdx-plugins'
 import { buildDynamicMDX, buildDynamicMeta } from 'nextra/remote'
@@ -51,7 +51,7 @@ export const getStaticPaths = async () => {
   components={{
     PackageCmd: () => null,
     CodegenCallout: () => null,
-    Tab,
+    Tab: Tabs.Tab,
     Tabs,
     Callout
   }}
