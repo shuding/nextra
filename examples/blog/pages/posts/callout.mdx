@@ -6,7 +6,7 @@ tag: web development
 author: Tristan Dubbeld
 ---
 
-import { Callout, Cards, FileTree, Steps, Tab, Tabs } from 'nextra/components'
+import { Callout, Cards, FileTree, Steps, Tabs } from 'nextra/components'
 import { CopyIcon, GitHubIcon, MenuIcon } from 'nextra/icons'
 
 ## Callout
@@ -49,9 +49,9 @@ Contents for step 2.
 
 {/* prettier-ignore */}
 <Tabs items={['pnpm', 'npm', 'yarn']}>
-  <Tab>**pnpm**: Fast, disk space efficient package manager.</Tab>
-  <Tab>**npm** is a package manager for the JavaScript programming language.</Tab>
-  <Tab>**Yarn** is a software packaging system.</Tab>
+  <Tabs.Tab>**pnpm**: Fast, disk space efficient package manager.</Tabs.Tab>
+  <Tabs.Tab>**npm** is a package manager for the JavaScript programming language.</Tabs.Tab>
+  <Tabs.Tab>**Yarn** is a software packaging system.</Tabs.Tab>
 </Tabs>
 
 ## FileTree
