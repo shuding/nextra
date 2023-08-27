@@ -11,8 +11,6 @@ overrides:
   '@mdx-js/react': ^2.3.0
   next-themes: ^0.2.1
   next: ^13.4.8
-  '@types/react': ^18.0.15
-  '@types/react-dom': ^18.0.6
 
 patchedDependencies:
   '@changesets/assemble-release-plan@5.2.4':
@@ -124,8 +122,8 @@ importers:
         specifier: ^18.11.18
         version: 18.11.18
       '@types/react':
-        specifier: ^18.0.15
-        version: 18.0.20
+        specifier: ^18.2.21
+        version: 18.2.21
       autoprefixer:
         specifier: ^10.4.15
         version: 10.4.15(postcss@8.4.28)
@@ -327,11 +325,11 @@ importers:
         specifier: ^3.0.12
         version: 3.0.12
       '@types/react':
-        specifier: ^18.0.15
-        version: 18.0.20
+        specifier: ^18.2.21
+        version: 18.2.21
       '@types/react-dom':
-        specifier: ^18.0.6
-        version: 18.0.6
+        specifier: ^18.2.7
+        version: 18.2.7
       '@types/webpack':
         specifier: ^5.28.2
         version: 5.28.2(esbuild@0.18.11)
@@ -373,11 +371,11 @@ importers:
         specifier: ^0.5.9
         version: 0.5.9(tailwindcss@3.3.3)
       '@types/react':
-        specifier: ^18.0.15
-        version: 18.0.20
+        specifier: ^18.2.21
+        version: 18.2.21
       '@types/react-dom':
-        specifier: ^18.0.6
-        version: 18.0.6
+        specifier: ^18.2.7
+        version: 18.2.7
       concurrently:
         specifier: ^8.0.0
         version: 8.0.0
@@ -470,11 +468,11 @@ importers:
         specifier: ^9.0.1
         version: 9.0.1
       '@types/react':
-        specifier: ^18.0.15
-        version: 18.0.20
+        specifier: ^18.2.21
+        version: 18.2.21
       '@types/react-dom':
-        specifier: ^18.0.6
-        version: 18.0.6
+        specifier: ^18.2.7
+        version: 18.2.7
       '@vitejs/plugin-react':
         specifier: ^3.0.1
         version: 3.0.1(vite@4.0.4)
@@ -2815,7 +2813,7 @@ packages:
       react: '>=16'
     dependencies:
       '@types/mdx': 2.0.2
-      '@types/react': 18.0.20
+      '@types/react': 18.2.21
       react: 18.2.0
     dev: false
 
@@ -3269,7 +3267,7 @@ packages:
     dependencies:
       '@babel/runtime': 7.20.7
       '@testing-library/dom': 9.0.0
-      '@types/react-dom': 18.0.6
+      '@types/react-dom': 18.2.7
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: true
@@ -3469,14 +3467,14 @@ packages:
   /@types/prop-types@15.7.5:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
 
-  /@types/react-dom@18.0.6:
-    resolution: {integrity: sha512-/5OFZgfIPSwy+YuIBP/FgJnQnsxhZhjjrnxudMddeblOouIodEQ75X14Rr4wGSG/bknL+Omy9iWlLo1u/9GzAA==}
+  /@types/react-dom@18.2.7:
+    resolution: {integrity: sha512-GRaAEriuT4zp9N4p1i8BDBYmEyfo+xQ3yHjJU4eiK5NDa1RmUZG+unZABUTK4/Ox/M+GaHwb6Ow8rUITrtjszA==}
     dependencies:
-      '@types/react': 18.0.20
+      '@types/react': 18.2.21
     dev: true
 
-  /@types/react@18.0.20:
-    resolution: {integrity: sha512-MWul1teSPxujEHVwZl4a5HxQ9vVNsjTchVA+xRqv/VYGCuKGAU6UhfrTdF5aBefwD1BHUD8i/zq+O/vyCm/FrA==}
+  /@types/react@18.2.21:
+    resolution: {integrity: sha512-neFKG/sBAwGxHgXiIxnbm3/AAVQ/cMRS93hvBpg8xYRbeQSPVABp9U2bRnPf0iI4+Ucdv3plSxKK+3CW2ENJxA==}
     dependencies:
       '@types/prop-types': 15.7.5
       '@types/scheduler': 0.16.2
