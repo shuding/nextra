@@ -3,6 +3,7 @@
   "author": "Shu Ding",
   "license": "Apache-2.0",
   "private": true,
+  "packageManager": "pnpm@8.6.12",
   "main": "index.js",
   "scripts": {
     "build": "next build",
@@ -19,8 +20,8 @@
     "next": "^13.4.19",
     "nextra": "workspace:*",
     "nextra-theme-docs": "workspace:*",
-    "react": "*",
-    "react-dom": "*",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-intersection-observer": "^8.26.2"
   },
   "dependenciesMeta": {
