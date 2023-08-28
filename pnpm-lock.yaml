@@ -203,10 +203,10 @@ importers:
         specifier: workspace:*
         version: file:packages/nextra-theme-docs(next@13.4.8)(nextra@2.12.3)(react-dom@18.2.0)(react@18.2.0)
       react:
-        specifier: ^18.2.0
+        specifier: '*'
         version: 18.2.0
       react-dom:
-        specifier: ^18.2.0
+        specifier: '*'
         version: 18.2.0(react@18.2.0)
       react-intersection-observer:
         specifier: ^8.26.2
