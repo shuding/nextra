@@ -3,10 +3,10 @@ import { createContext, useContext, useEffect, useRef, useState } from 'react'
 import 'intersection-observer'
 
 const ActiveAnchorContext = createContext('')
-const Observer = createContext<IntersectionObserver | null>(null)
+const ObserverContext = createContext<IntersectionObserver | null>(null)
 
 export const useActiveAnchor = () => useContext(ActiveAnchorContext)
-export const useObserver = () => useContext(Observer)
+export const useObserver = () => useContext(ObserverContext)
 
 export function ActiveAnchorProvider({
   children
@@ -14,7 +14,7 @@ export function ActiveAnchorProvider({
   children: ReactNode
 }): ReactElement {
   const [activeId, setActiveId] = useState('')
-  const observerRef = useRef<ContextType<typeof Observer>>(null)
+  const observerRef = useRef<ContextType<typeof ObserverContext>>(null)
 
   useEffect(() => {
     observerRef.current?.disconnect()
@@ -37,10 +37,10 @@ export function ActiveAnchorProvider({
   }, [])
 
   return (
-    <Observer.Provider value={observerRef.current}>
+    <ObserverContext.Provider value={observerRef.current}>
       <ActiveAnchorContext.Provider value={activeId}>
         {children}
       </ActiveAnchorContext.Provider>
-    </Observer.Provider>
+    </ObserverContext.Provider>
   )
 }
