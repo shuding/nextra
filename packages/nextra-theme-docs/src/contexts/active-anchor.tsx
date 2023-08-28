@@ -1,4 +1,3 @@
-import type { Heading } from 'nextra'
 import type { ContextType, ReactElement, ReactNode } from 'react'
 import { createContext, useContext, useEffect, useRef, useState } from 'react'
 import 'intersection-observer'
@@ -10,11 +9,9 @@ export const useActiveAnchor = () => useContext(ActiveAnchorContext)
 export const useObserver = () => useContext(Observer)
 
 export function ActiveAnchorProvider({
-  children,
-  headings
+  children
 }: {
   children: ReactNode
-  headings: Heading[]
 }): ReactElement {
   const [activeId, setActiveId] = useState('')
   const observerRef = useRef<ContextType<typeof Observer>>(null)
@@ -37,7 +34,7 @@ export function ActiveAnchorProvider({
     return () => {
       observer.disconnect()
     }
-  }, [headings])
+  }, [])
 
   return (
     <Observer.Provider value={observerRef.current}>

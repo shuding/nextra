@@ -195,7 +195,7 @@ const InnerLayout = ({
           themeContext.layout !== 'raw' && 'nx-max-w-[90rem]'
         )}
       >
-        <ActiveAnchorProvider headings={headings}>
+        <ActiveAnchorProvider>
           <Sidebar
             docsDirectories={docsDirectories}
             flatDirectories={flatDirectories}
