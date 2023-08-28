@@ -73,9 +73,9 @@ export function TOC({ headings, filePath }: TOCProps): ReactElement {
                       5: 'ltr:nx-pl-12 rtl:nx-pr-12',
                       6: 'ltr:nx-pl-16 rtl:nx-pr-16'
                     }[depth],
-                    'nx-inline-block',
+                    'nx-inline-block nx-transition-colors nx-subpixel-antialiased',
                     activeId === id
-                      ? 'nx-text-primary-600 nx-subpixel-antialiased contrast-more:!nx-text-primary-600'
+                      ? 'nx-text-primary-600 contrast-more:!nx-text-primary-600'
                       : 'nx-text-gray-500 hover:nx-text-gray-900 dark:nx-text-gray-400 dark:hover:nx-text-gray-300',
                     'contrast-more:nx-text-gray-900 contrast-more:nx-underline contrast-more:dark:nx-text-gray-50 nx-w-full nx-break-words'
                   )}
