@@ -1,5 +1,5 @@
 import type { Heading } from 'nextra'
-import type { ReactElement, ReactNode } from 'react'
+import type { ContextType, ReactElement, ReactNode } from 'react'
 import { createContext, useContext, useEffect, useRef, useState } from 'react'
 import 'intersection-observer'
 
@@ -17,7 +17,7 @@ export function ActiveAnchorProvider({
   headings: Heading[]
 }): ReactElement {
   const [activeId, setActiveId] = useState('')
-  const observerRef = useRef<IntersectionObserver>()
+  const observerRef = useRef<ContextType<typeof Observer>>(null)
 
   useEffect(() => {
     observerRef.current?.disconnect()
