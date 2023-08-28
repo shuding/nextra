@@ -234,7 +234,7 @@ function File({
 
   // It is possible that the item doesn't have any route - for example an external link.
   const active = item.route && [route, route + '/'].includes(item.route + '/')
-  const activeAnchor = useActiveAnchor()
+  const activeId = useActiveAnchor()
   const { setMenu } = useMenu()
   const config = useConfig()
 
@@ -279,7 +279,7 @@ function File({
                 className={cn(
                   classes.link,
                   'nx-flex nx-gap-2 before:nx-opacity-25 before:nx-content-["#"]',
-                  activeAnchor[id]?.isActive ? classes.active : classes.inactive
+                  activeId === id ? classes.active : classes.inactive
                 )}
                 onClick={() => {
                   setMenu(false)

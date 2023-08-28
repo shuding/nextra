@@ -1,7 +1,7 @@
 import cn from 'clsx'
 import type { Heading } from 'nextra'
 import type { ReactElement } from 'react'
-import { useEffect, useMemo, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import { useActiveAnchor, useConfig } from '../contexts'
 import { renderComponent } from '../utils'
@@ -19,31 +19,22 @@ const linkClassName = cn(
 )
 
 export function TOC({ headings, filePath }: TOCProps): ReactElement {
-  const activeAnchor = useActiveAnchor()
   const config = useConfig()
   const tocRef = useRef<HTMLDivElement>(null)
 
-  const items = useMemo(
-    () => headings.filter(heading => heading.depth > 1),
-    [headings]
-  )
-
-  const hasHeadings = items.length > 0
+  const hasHeadings = headings.length > 0
   const hasMetaInfo = Boolean(
     config.feedback.content ||
       config.editLink.component ||
       config.toc.extraContent
   )
 
-  const activeSlug = Object.entries(activeAnchor).find(
-    ([, { isActive }]) => isActive
-  )?.[0]
+  const activeId = useActiveAnchor()
+  const activeIndex = headings.findIndex(({ id }) => id === activeId)
 
   useEffect(() => {
-    if (!activeSlug) return
-    const anchor = tocRef.current?.querySelector(
-      `li > a[href="#${activeSlug}"]`
-    )
+    if (!activeId) return
+    const anchor = tocRef.current?.querySelector(`li > a[href="#${activeId}"]`)
 
     if (anchor) {
       scrollIntoView(anchor, {
@@ -54,7 +45,7 @@ export function TOC({ headings, filePath }: TOCProps): ReactElement {
         boundary: tocRef.current
       })
     }
-  }, [activeSlug])
+  }, [activeId])
 
   return (
     <div
@@ -70,7 +61,7 @@ export function TOC({ headings, filePath }: TOCProps): ReactElement {
             {renderComponent(config.toc.title)}
           </p>
           <ul>
-            {items.map(({ id, value, depth }) => (
+            {headings.map(({ id, value, depth }) => (
               <li className="nx-my-2 nx-scroll-my-6 nx-scroll-py-6" key={id}>
                 <a
                   href={`#${id}`}
@@ -81,9 +72,9 @@ export function TOC({ headings, filePath }: TOCProps): ReactElement {
                       4: 'ltr:nx-pl-8 rtl:nx-pr-8',
                       5: 'ltr:nx-pl-12 rtl:nx-pr-12',
                       6: 'ltr:nx-pl-16 rtl:nx-pr-16'
-                    }[depth as Exclude<typeof depth, 1>],
+                    }[depth],
                     'nx-inline-block',
-                    activeAnchor[id]?.isActive
+                    activeId === id
                       ? 'nx-text-primary-600 nx-subpixel-antialiased contrast-more:!nx-text-primary-600'
                       : 'nx-text-gray-500 hover:nx-text-gray-900 dark:nx-text-gray-400 dark:hover:nx-text-gray-300',
                     'contrast-more:nx-text-gray-900 contrast-more:nx-underline contrast-more:dark:nx-text-gray-50 nx-w-full nx-break-words'
@@ -127,7 +118,9 @@ export function TOC({ headings, filePath }: TOCProps): ReactElement {
 
           {renderComponent(config.toc.extraContent)}
 
-          {config.toc.backToTop && <BackToTop className={linkClassName} />}
+          {config.toc.backToTop && (
+            <BackToTop className={linkClassName} hidden={activeIndex < 2} />
+          )}
         </div>
       )}
     </div>
