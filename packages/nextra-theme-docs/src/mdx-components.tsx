@@ -10,60 +10,58 @@ import type { DocsThemeConfig } from './constants'
 import { DetailsProvider, useDetails, useObserver } from './contexts'
 
 // Anchor links
-function HeadingLink({
-  as: Tag,
-  children,
-  id,
-  className,
-  ...props
-}: ComponentProps<'h2'> & {
-  as: `h${Heading['depth']}`
-}): ReactElement {
-  const anchorRef = useRef<HTMLAnchorElement>(null)
-  const observer = useObserver()
+const createHeading = (Tag: `h${Heading['depth']}`) =>
+  function Heading({
+    children,
+    id,
+    className,
+    ...props
+  }: ComponentProps<'h2'>): ReactElement {
+    const anchorRef = useRef<HTMLAnchorElement>(null)
+    const observer = useObserver()
 
-  useEffect(() => {
-    if (!id || !observer) return
-    const el = anchorRef.current!
-    observer.observe(el)
+    useEffect(() => {
+      if (!id || !observer) return
+      const el = anchorRef.current!
+      observer.observe(el)
 
-    return () => {
-      observer.unobserve(el)
-    }
-  }, [id, observer])
-
-  return (
-    <Tag
-      className={
-        // can be added by footnotes
-        className === 'sr-only'
-          ? 'nx-sr-only'
-          : cn(
-              'nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100',
-              {
-                h2: 'nx-mt-10 nx-border-b nx-pb-1 nx-text-3xl nx-border-neutral-200/70 contrast-more:nx-border-neutral-400 dark:nx-border-primary-100/10 contrast-more:dark:nx-border-neutral-400',
-                h3: 'nx-mt-8 nx-text-2xl',
-                h4: 'nx-mt-8 nx-text-xl',
-                h5: 'nx-mt-8 nx-text-lg',
-                h6: 'nx-mt-8 nx-text-base'
-              }[Tag]
-            )
+      return () => {
+        observer.unobserve(el)
       }
-      {...props}
-    >
-      {children}
-      {id && (
-        <a
-          href={`#${id}`}
-          id={id}
-          className="subheading-anchor"
-          aria-label="Permalink for this section"
-          ref={anchorRef}
-        />
-      )}
-    </Tag>
-  )
-}
+    }, [id, observer])
+
+    return (
+      <Tag
+        className={
+          // can be added by footnotes
+          className === 'sr-only'
+            ? 'nx-sr-only'
+            : cn(
+                'nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100',
+                {
+                  h2: 'nx-mt-10 nx-border-b nx-pb-1 nx-text-3xl nx-border-neutral-200/70 contrast-more:nx-border-neutral-400 dark:nx-border-primary-100/10 contrast-more:dark:nx-border-neutral-400',
+                  h3: 'nx-mt-8 nx-text-2xl',
+                  h4: 'nx-mt-8 nx-text-xl',
+                  h5: 'nx-mt-8 nx-text-lg',
+                  h6: 'nx-mt-8 nx-text-base'
+                }[Tag]
+              )
+        }
+        {...props}
+      >
+        {children}
+        {id && (
+          <a
+            href={`#${id}`}
+            id={id}
+            className="subheading-anchor"
+            aria-label="Permalink for this section"
+            ref={anchorRef}
+          />
+        )}
+      </Tag>
+    )
+  }
 
 const findSummary = (children: ReactNode) => {
   let summary: ReactNode = null
@@ -190,11 +188,11 @@ const DEFAULT_COMPONENTS = {
       {...props}
     />
   ),
-  h2: props => <HeadingLink as="h2" {...props} />,
-  h3: props => <HeadingLink as="h3" {...props} />,
-  h4: props => <HeadingLink as="h4" {...props} />,
-  h5: props => <HeadingLink as="h5" {...props} />,
-  h6: props => <HeadingLink as="h6" {...props} />,
+  h2: createHeading('h2'),
+  h3: createHeading('h3'),
+  h4: createHeading('h4'),
+  h5: createHeading('h5'),
+  h6: createHeading('h6'),
   ul: props => (
     <ul
       className="nx-mt-6 nx-list-disc first:nx-mt-0 ltr:nx-ml-6 rtl:nx-mr-6"
