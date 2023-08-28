@@ -29,7 +29,7 @@ export function ActiveAnchorProvider({
           }
         }
       },
-      { rootMargin: '0px 0px -50%' }
+      { rootMargin: '0px 0px -80%' }
     )
     const observer = observerRef.current
 
