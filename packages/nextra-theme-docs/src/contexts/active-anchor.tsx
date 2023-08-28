@@ -24,7 +24,7 @@ export function ActiveAnchorProvider({
     observerRef.current = new IntersectionObserver(
       entries => {
         for (const entry of entries) {
-          if (entry.isIntersecting) {
+          if (entry.intersectionRatio > 0 && entry.isIntersecting) {
             setActiveId(entry.target.getAttribute('id')!)
           }
         }
