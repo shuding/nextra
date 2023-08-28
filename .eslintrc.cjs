@@ -47,6 +47,7 @@ module.exports = {
         'unicorn/no-array-for-each': 'error',
         'unicorn/prefer-string-replace-all': 'error',
         '@typescript-eslint/prefer-for-of': 'error',
+        '@typescript-eslint/no-unused-expressions': 'error',
         // todo: enable
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-non-null-assertion': 'off',

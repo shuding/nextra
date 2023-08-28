@@ -22,10 +22,14 @@ export function useScrollSpy(
       }
     }, options)
     for (const el of elements) {
-      el && observer.current?.observe(el)
+      if (el) {
+        observer.current?.observe(el)
+      }
     }
 
-    return () => observer.current?.disconnect()
+    return () => {
+      observer.current?.disconnect()
+    }
   }, [selectors])
 
   return activeId
