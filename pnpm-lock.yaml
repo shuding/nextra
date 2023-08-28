@@ -6,10 +6,6 @@ settings:
 
 overrides:
   vitest: ^0.29.8
-  react: ^18.2.0
-  react-dom: ^18.2.0
-  '@mdx-js/react': ^2.3.0
-  next-themes: ^0.2.1
   next: ^13.4.8
 
 patchedDependencies:
@@ -147,7 +143,7 @@ importers:
         version: file:packages/nextra(next@13.4.8)(react-dom@18.2.0)(react@18.2.0)
       nextra-theme-blog:
         specifier: workspace:*
-        version: file:packages/nextra-theme-blog(next@13.4.8)(nextra@2.12.2)(react-dom@18.2.0)(react@18.2.0)
+        version: file:packages/nextra-theme-blog(next@13.4.8)(nextra@2.12.3)(react-dom@18.2.0)(react@18.2.0)
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -170,7 +166,7 @@ importers:
         version: file:packages/nextra(next@13.4.8)(react-dom@18.2.0)(react@18.2.0)
       nextra-theme-docs:
         specifier: workspace:*
-        version: file:packages/nextra-theme-docs(next@13.4.8)(nextra@2.12.2)(react-dom@18.2.0)(react@18.2.0)
+        version: file:packages/nextra-theme-docs(next@13.4.8)(nextra@2.12.3)(react-dom@18.2.0)(react@18.2.0)
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -205,7 +201,7 @@ importers:
         version: file:packages/nextra(next@13.4.8)(react-dom@18.2.0)(react@18.2.0)
       nextra-theme-docs:
         specifier: workspace:*
-        version: file:packages/nextra-theme-docs(next@13.4.8)(nextra@2.12.2)(react-dom@18.2.0)(react@18.2.0)
+        version: file:packages/nextra-theme-docs(next@13.4.8)(nextra@2.12.3)(react-dom@18.2.0)(react@18.2.0)
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -11460,7 +11456,7 @@ packages:
       - supports-color
     dev: false
 
-  file:packages/nextra-theme-blog(next@13.4.8)(nextra@2.12.2)(react-dom@18.2.0)(react@18.2.0):
+  file:packages/nextra-theme-blog(next@13.4.8)(nextra@2.12.3)(react-dom@18.2.0)(react@18.2.0):
     resolution: {directory: packages/nextra-theme-blog, type: directory}
     id: file:packages/nextra-theme-blog
     name: nextra-theme-blog
@@ -11481,7 +11477,7 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
-  file:packages/nextra-theme-docs(next@13.4.8)(nextra@2.12.2)(react-dom@18.2.0)(react@18.2.0):
+  file:packages/nextra-theme-docs(next@13.4.8)(nextra@2.12.3)(react-dom@18.2.0)(react@18.2.0):
     resolution: {directory: packages/nextra-theme-docs, type: directory}
     id: file:packages/nextra-theme-docs
     name: nextra-theme-docs
