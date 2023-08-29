@@ -54,3 +54,20 @@ Contents for step 1.
 Contents for step 2.
 </Steps>
 ```
+
+If you don't want the steps to be visible in the table of contents, replace the markdown h3 headings with `{<h3>Title</h3>}`.
+
+{/* prettier-ignore */}
+```mdx
+import { Steps } from 'nextra/components'
+
+<Steps>
+{<h3>Step 1</h3>}
+
+Contents for step 1.
+
+{<h3>Step 2</h3>}
+
+Contents for step 2.
+</Steps>
+```
