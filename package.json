@@ -33,7 +33,7 @@
     "eslint-plugin-react": "7.33.2",
     "eslint-plugin-react-hooks": "4.6.0",
     "eslint-plugin-tailwindcss": "3.13.0",
-    "eslint-plugin-typescript-sort-keys": "2.3.0",
+    "eslint-plugin-typescript-sort-keys": "3.0.0",
     "eslint-plugin-unicorn": "48.0.1",
     "prettier": "3.0.3",
     "prettier-plugin-pkg": "0.18.0",
