@@ -34,7 +34,7 @@ export const Anchor = forwardRef<HTMLAnchorElement, AnchorProps>(function (
       </a>
     )
   }
-  
+
   return (
     <NextLink ref={forwardedRef} href={href} {...props}>
       {children}
