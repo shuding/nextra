@@ -2,6 +2,8 @@
 'nextra': major
 ---
 
-- remove `_app.mdx`, use `_app.{js,jsx}` or `_app.{ts,tsx}` for TypeScript projects instead
+- ❌ remove `_app.mdx`, use `_app.{js,jsx}` or `_app.{ts,tsx}` for TypeScript projects instead
 
-- add `nextra/fetch-filepaths-from-github`
+- ✅ add `nextra/fetch-filepaths-from-github`
+
+- ❌ remove Nextra middleware `nextra/locales`
