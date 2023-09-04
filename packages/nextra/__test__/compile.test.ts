@@ -50,23 +50,23 @@ export const TagName = () => {
 ###### bar Qux [#]`,
       { mdxOptions }
     )
-    expect(result).toMatch(`<_components.h1 id="test-id">{"My Header"}`)
+    expect(result).toMatch('<_components.h1 id="test-id">{"My Header"}')
     expect(result).toMatch(
-      `<_components.h2 id="extra-space">{"Some extra space"}</_components.h2>`
+      '<_components.h2 id="extra-space">{"Some extra space"}</_components.h2>'
     )
     expect(result).toMatch(
-      `<_components.h3 id="extra-space-in-heading">{"Some extra space in heading"}`
+      '<_components.h3 id="extra-space-in-heading">{"Some extra space in heading"}'
     )
     expect(result).toMatch(
-      `<_components.h3 id="without-space">{"nospace"}</_components.h3>`
+      '<_components.h3 id="without-space">{"nospace"}</_components.h3>'
     )
-    expect(result).toMatch(`<_components.h4 id="другой-язык">{"foo"}`)
-    expect(result).toMatch(`<_components.h5 id="bar-baz-">{"bar Baz []"}`)
-    expect(result).toMatch(`<_components.h6 id="bar-qux-">{"bar Qux [#]"}`)
+    expect(result).toMatch('<_components.h4 id="другой-язык">{"foo"}')
+    expect(result).toMatch('<_components.h5 id="bar-baz-">{"bar Baz []"}')
+    expect(result).toMatch('<_components.h6 id="bar-qux-">{"bar Qux [#]"}')
   })
   it('use github-slugger', async () => {
-    const { result } = await compileMdx(`### My Header`, { mdxOptions })
-    expect(result).toMatch(`<_components.h3 id="my-header">{"My Header"}`)
+    const { result } = await compileMdx('### My Header', { mdxOptions })
+    expect(result).toMatch('<_components.h3 id="my-header">{"My Header"}')
   })
 
   it('should merge headings from partial components', async () => {
@@ -148,50 +148,50 @@ import Last from './three.mdx'
 
 describe('Link', () => {
   it('supports .md links', async () => {
-    const { result } = await compileMdx(`[link](../file.md)`, { mdxOptions })
-    expect(result).toMatch(`<_components.a href="../file">`)
+    const { result } = await compileMdx('[link](../file.md)', { mdxOptions })
+    expect(result).toMatch('<_components.a href="../file">')
   })
 
   it('supports .mdx links', async () => {
-    const { result } = await compileMdx(`[link](../file.mdx)`, { mdxOptions })
-    expect(result).toMatch(`<_components.a href="../file">`)
+    const { result } = await compileMdx('[link](../file.mdx)', { mdxOptions })
+    expect(result).toMatch('<_components.a href="../file">')
   })
 
   it('supports URL links', async () => {
-    const { result } = await compileMdx(`[link](../file)`, { mdxOptions })
-    expect(result).toMatch(`<_components.a href="../file">`)
+    const { result } = await compileMdx('[link](../file)', { mdxOptions })
+    expect(result).toMatch('<_components.a href="../file">')
   })
 
   it('supports query', async () => {
-    const { result } = await compileMdx(`[link](../file.md?query=a)`, {
+    const { result } = await compileMdx('[link](../file.md?query=a)', {
       mdxOptions
     })
-    expect(result).toMatch(`<_components.a href="../file?query=a">`)
+    expect(result).toMatch('<_components.a href="../file?query=a">')
   })
 
   it('supports anchor', async () => {
-    const { result } = await compileMdx(`[link](../file.md#anchor)`, {
+    const { result } = await compileMdx('[link](../file.md#anchor)', {
       mdxOptions
     })
-    expect(result).toMatch(`<_components.a href="../file#anchor">`)
+    expect(result).toMatch('<_components.a href="../file#anchor">')
   })
 
   it('supports external .md links', async () => {
-    const { result } = await compileMdx(`[link](https://example.com/file.md)`, {
+    const { result } = await compileMdx('[link](https://example.com/file.md)', {
       mdxOptions
     })
-    expect(result).toMatch(`<_components.a href="https://example.com/file.md">`)
+    expect(result).toMatch('<_components.a href="https://example.com/file.md">')
   })
 
   it('supports external .mdx links', async () => {
     const { result } = await compileMdx(
-      `[link](https://example.com/file.mdx)`,
+      '[link](https://example.com/file.mdx)',
       {
         mdxOptions
       }
     )
     expect(result).toMatch(
-      `<_components.a href="https://example.com/file.mdx">`
+      '<_components.a href="https://example.com/file.mdx">'
     )
   })
 })
@@ -242,7 +242,7 @@ describe('Code block', () => {
   describe('Copy code button', () => {
     for (const codeHighlight of [true, false]) {
       describe(`codeHighlight: ${codeHighlight}`, () => {
-        it(`attach with "copy"`, async () => {
+        it('attach with "copy"', async () => {
           const { result } = await compileMdx('```js copy\n```', {
             mdxOptions,
             codeHighlight
@@ -250,7 +250,7 @@ describe('Code block', () => {
           expect(result).toMatch('hasCopyCode>')
         })
 
-        it(`attach with "defaultShowCopyCode: true"`, async () => {
+        it('attach with "defaultShowCopyCode: true"', async () => {
           const { result } = await compileMdx('```js\n```', {
             mdxOptions,
             defaultShowCopyCode: true,
@@ -259,7 +259,7 @@ describe('Code block', () => {
           expect(result).toMatch('hasCopyCode>')
         })
 
-        it(`not attach with "defaultShowCopyCode: true" and "copy=false"`, async () => {
+        it('not attach with "defaultShowCopyCode: true" and "copy=false"', async () => {
           const { result } = await compileMdx('```js copy=false\n```', {
             mdxOptions,
             defaultShowCopyCode: true,

@@ -323,7 +323,6 @@ function Menu({
 
 interface SideBarProps {
   docsDirectories: PageItem[]
-  flatDirectories: Item[]
   fullDirectories: Item[]
   asPopover?: boolean
   headings: Heading[]
@@ -332,7 +331,6 @@ interface SideBarProps {
 
 export function Sidebar({
   docsDirectories,
-  flatDirectories,
   fullDirectories,
   asPopover = false,
   headings,
@@ -417,11 +415,11 @@ export function Sidebar({
         )}
         ref={containerRef}
       >
-        <div className="nx-px-4 nx-pt-4 md:nx-hidden">
-          {renderComponent(config.search.component, {
-            directories: flatDirectories
-          })}
-        </div>
+        {config.flexsearch && (
+          <div className="nx-px-4 nx-pt-4 md:nx-hidden">
+            {renderComponent(config.search.component)}
+          </div>
+        )}
         <FocusedItemContext.Provider value={focused}>
           <OnFocusItemContext.Provider
             value={item => {

@@ -125,7 +125,6 @@ const InnerLayout = ({
     activePath,
     topLevelNavbarItems,
     docsDirectories,
-    flatDirectories,
     flatDocsDirectories,
     directories
   } = useMemo(
@@ -186,7 +185,6 @@ const InnerLayout = ({
       <Banner />
       {themeContext.navbar &&
         renderComponent(config.navbar.component, {
-          flatDirectories,
           items: topLevelNavbarItems
         })}
       <div
@@ -198,7 +196,6 @@ const InnerLayout = ({
         <ActiveAnchorProvider>
           <Sidebar
             docsDirectories={docsDirectories}
-            flatDirectories={flatDirectories}
             fullDirectories={directories}
             headings={headings}
             asPopover={hideSidebar}

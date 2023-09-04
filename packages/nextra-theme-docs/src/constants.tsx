@@ -2,12 +2,10 @@
 import type { NextSeoProps } from 'next-seo'
 import { useRouter } from 'next/router'
 import { DiscordIcon, GitHubIcon } from 'nextra/icons'
-import type { Item } from 'nextra/normalize-pages'
 import type { FC, ReactNode } from 'react'
 import { isValidElement } from 'react'
 import { z } from 'zod'
 import { Anchor, Flexsearch, Footer, Navbar, TOC } from './components'
-import { MatchSorterSearch } from './components/match-sorter-search'
 import type { NavBarProps } from './components/navbar'
 import { themeOptionsSchema, ThemeSwitch } from './components/theme-switch'
 import type { TOCProps } from './components/toc'
@@ -115,9 +113,7 @@ export const themeSchema = z.strictObject({
     link: z.string().startsWith('https://').optional()
   }),
   search: z.strictObject({
-    component: z.custom<
-      ReactNode | FC<{ className?: string; directories: Item[] }>
-    >(...reactNode),
+    component: z.custom<ReactNode | FC<{ className?: string }>>(...reactNode),
     emptyResult: z.custom<ReactNode | FC>(...reactNode),
     error: z.string().or(z.function().returns(z.string())),
     loading: z.custom<ReactNode | FC>(...reactNode),
@@ -285,14 +281,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     )
   },
   search: {
-    component: function Search({ className, directories }) {
-      const config = useConfig()
-      return config.flexsearch ? (
-        <Flexsearch className={className} />
-      ) : (
-        <MatchSorterSearch className={className} directories={directories} />
-      )
-    },
+    component: Flexsearch,
     emptyResult: (
       <span className="nx-block nx-select-none nx-p-8 nx-text-center nx-text-sm nx-text-gray-400">
         No results found.
