@@ -13,12 +13,9 @@ describe('Page Process', () => {
   let pageMap: PageMapItem[]
   let fileMap: FileMap
   beforeAll(async () => {
-    const nextConfig = await import(
-      path.join(CWD, '..', '..', 'examples', 'swr-site', 'next.config.mjs')
-    )
     const { items, fileMap: data } = await collectFiles({
       dir: PAGES_DIR,
-      locales: nextConfig.default.i18n.locales
+      locales: ['en', 'es', 'ru']
     })
     pageMap = items
     fileMap = data
