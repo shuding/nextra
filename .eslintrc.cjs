@@ -47,6 +47,7 @@ module.exports = {
         'unicorn/no-array-for-each': 'error',
         'unicorn/prefer-string-replace-all': 'error',
         '@typescript-eslint/prefer-for-of': 'error',
+        quotes: ['error', 'single', { avoidEscape: true }], // Matches Prettier, but also replaces backticks
         // todo: enable
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-non-null-assertion': 'off',
@@ -104,6 +105,7 @@ module.exports = {
       ],
       parserOptions: {
         project: [
+          'examples/*/tsconfig.json',
           'packages/*/tsconfig.json',
           'docs/tsconfig.json',
           'tsconfig.eslint.json'
