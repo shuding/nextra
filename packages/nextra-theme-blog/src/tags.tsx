@@ -1,6 +1,6 @@
 import type { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
-import { useSSG } from 'nextra/ssg'
+import { useSSG } from 'nextra/data'
 import { getStaticTags } from './utils/get-tags'
 
 const NEXTRA_INTERNAL = Symbol.for('__nextra_internal__')

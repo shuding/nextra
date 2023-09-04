@@ -13,12 +13,8 @@
     ".": "./dist/index.js",
     "./catch-all": "./dist/catch-all.js",
     "./data": {
-      "import": "./dist/ssg.js",
-      "types": "./dist/ssg.d.mts"
-    },
-    "./ssg": {
-      "import": "./dist/ssg.js",
-      "types": "./dist/ssg.d.mts"
+      "import": "./dist/data.js",
+      "types": "./dist/data.d.mts"
     },
     "./loader": "./loader.js",
     "./setup-page": {
@@ -72,10 +68,7 @@
         "./dist/context.d.mts"
       ],
       "data": [
-        "./dist/ssg.d.mts"
-      ],
-      "ssg": [
-        "./dist/ssg.d.mts"
+        "./dist/data.d.mts"
       ],
       "icons": [
         "./dist/icons/index.d.mts"

@@ -7,7 +7,7 @@ can also be cached by a CDN to maximize the performance.
 
 This is supported by Nextra too. Here's an example:
 
-import { useSSG } from 'nextra/ssg'
+import { useSSG } from 'nextra/data'
 
 export const getStaticProps = ({ params }) => {
   return fetch(`https://api.github.com/repos/shuding/nextra`)
@@ -44,7 +44,7 @@ enabled, it will be kept up to date.
 Here's the MDX code for the example above:
 
 ```js filename="ssg.mdx"
-import { useSSG } from 'nextra/ssg'
+import { useSSG } from 'nextra/data'
 
 export const getStaticProps = ({ params }) => {
   return fetch(`https://api.github.com/repos/shuding/nextra`)
