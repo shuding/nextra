@@ -7,11 +7,11 @@ const { findPagesDir, existsSync } = getDefault(findPagesDirImport)
 export { existsSync }
 
 export function findPagesDirectory(): string {
-  const res = findPagesDir(CWD, false)
-  return (
-    res.pagesDir || // next v13
-    (res as any).pages // next v12
-  )
+  const { pagesDir } = findPagesDir(CWD, false)
+  if (!pagesDir) {
+    throw new Error('Unable to find `pages` directory')
+  }
+  return pagesDir
 }
 
 export const PAGES_DIR = process.env.VITEST_WORKER_ID
