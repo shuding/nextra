@@ -7,7 +7,7 @@ import type { FileMap, PageMapItem } from '../src/types'
 const PAGES_DIR = path.join(CWD, '..', '..', 'examples', 'swr-site', 'pages')
 const filePath = (name: string) => path.join(PAGES_DIR, name)
 
-const defaultLocale = 'en-US'
+const defaultLocale = 'en'
 
 describe('Page Process', () => {
   let pageMap: PageMapItem[]
@@ -23,7 +23,7 @@ describe('Page Process', () => {
 
   it('pageMap en-US', () => {
     const indexData = resolvePageMap({
-      filePath: filePath('docs/data-fetching.en-US.mdx'),
+      filePath: filePath('en/docs/data-fetching.mdx'),
       items: pageMap,
       fileMap,
       defaultLocale
@@ -31,7 +31,7 @@ describe('Page Process', () => {
     expect([indexData.pageMap, indexData.route]).toMatchSnapshot()
 
     const gettingStartData = resolvePageMap({
-      filePath: filePath('docs/getting-started.en-US.mdx'),
+      filePath: filePath('en/docs/getting-started.mdx'),
       items: pageMap,
       fileMap,
       defaultLocale
@@ -41,7 +41,7 @@ describe('Page Process', () => {
 
   it('pageMap ru', () => {
     const indexData = resolvePageMap({
-      filePath: filePath('docs/data-fetching.ru.mdx'),
+      filePath: filePath('ru/docs/data-fetching.mdx'),
       items: pageMap,
       fileMap,
       defaultLocale
@@ -49,7 +49,7 @@ describe('Page Process', () => {
     expect([indexData.pageMap, indexData.route]).toMatchSnapshot()
 
     const gettingStartData = resolvePageMap({
-      filePath: filePath('docs/getting-started.ru.mdx'),
+      filePath: filePath('ru/docs/getting-started.mdx'),
       items: pageMap,
       fileMap,
       defaultLocale
