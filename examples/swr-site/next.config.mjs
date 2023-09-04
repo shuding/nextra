@@ -24,10 +24,10 @@ export function getStaticProps() {
  * @type {import('next').NextConfig}
  */
 export default withNextra({
-  i18n: {
-    locales: ['en-US', 'es-ES', 'ru'],
-    defaultLocale: 'en-US'
-  }, // basePath: "/some-base-path",
+  // i18n: {
+  //   locales: ['en-US', 'es-ES', 'ru'],
+  //   defaultLocale: 'en-US'
+  // }, // basePath: "/some-base-path",
   distDir: './.next', // Nextra supports custom `nextConfig.distDir`
   redirects: () => [
     // {
