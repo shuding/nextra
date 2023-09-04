@@ -1,4 +1,4 @@
-import { Callout, Tab, Tabs } from 'nextra/components'
+import { Callout, Tabs } from 'nextra/components'
 import { RemoteContent } from 'nextra/data'
 import { buildDynamicMDX, buildDynamicMeta } from 'nextra/remote'
 import json from '../../../../nextra-remote-filepaths/graphql-eslint.json'
@@ -29,4 +29,4 @@ export const getStaticPaths = () => ({
   }))
 })
 
-<RemoteContent components={{ Callout, $Tab: Tab, $Tabs: Tabs }} />
+<RemoteContent components={{ Callout, $Tabs: Tabs }} />
