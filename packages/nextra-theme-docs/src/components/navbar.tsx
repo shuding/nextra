@@ -2,14 +2,13 @@ import { Menu, Transition } from '@headlessui/react'
 import cn from 'clsx'
 import { useFSRoute } from 'nextra/hooks'
 import { ArrowRightIcon, MenuIcon } from 'nextra/icons'
-import type { Item, MenuItem, PageItem } from 'nextra/normalize-pages'
+import type { MenuItem, PageItem } from 'nextra/normalize-pages'
 import type { ReactElement, ReactNode } from 'react'
 import { useConfig, useMenu } from '../contexts'
 import { renderComponent } from '../utils'
 import { Anchor } from './anchor'
 
 export type NavBarProps = {
-  flatDirectories: Item[]
   items: (PageItem | MenuItem)[]
 }
 
@@ -81,7 +80,7 @@ function NavbarMenu({
   )
 }
 
-export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
+export function Navbar({ items }: NavBarProps): ReactElement {
   const config = useConfig()
   const activeRoute = useFSRoute()
   const { menu, setMenu } = useMenu()
@@ -165,10 +164,10 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
           )
         })}
 
-        {renderComponent(config.search.component, {
-          directories: flatDirectories,
-          className: 'nx-hidden md:nx-inline-block mx-min-w-[200px]'
-        })}
+        {config.flexsearch &&
+          renderComponent(config.search.component, {
+            className: 'nx-hidden md:nx-inline-block mx-min-w-[200px]'
+          })}
 
         {config.project.link ? (
           <Anchor
