@@ -2,7 +2,7 @@ name: Test
 
 on:
   pull_request:
-    branches: [main]
+    branches: [main, v3]
 
 jobs:
   test:
