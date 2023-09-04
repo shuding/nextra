@@ -65,6 +65,10 @@ const nextra = (themeOrNextraConfig, themeConfig) =>
 
     return {
       ...nextConfig,
+      env: {
+        NEXTRA_DEFAULT_LOCALE: nextraLoaderOptions.defaultLocale,
+        ...nextConfig.env
+      },
       ...(nextConfig.output !== 'export' && { rewrites }),
       pageExtensions: [
         ...(nextConfig.pageExtensions || DEFAULT_EXTENSIONS),
