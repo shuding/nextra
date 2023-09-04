@@ -5,7 +5,7 @@ const withNextra = nextra({
   themeConfig: './theme.config.tsx',
   defaultShowCopyCode: true,
   transform(content, { route }) {
-    if (route.startsWith('/docs/advanced/more/tree/two')) {
+    if (route.startsWith('/en/docs/advanced/dynamic-markdown-import')) {
       return `
 ${content}
 export function getStaticProps() {
@@ -24,10 +24,10 @@ export function getStaticProps() {
  * @type {import('next').NextConfig}
  */
 export default withNextra({
-  // i18n: {
-  //   locales: ['en-US', 'es-ES', 'ru'],
-  //   defaultLocale: 'en-US'
-  // }, // basePath: "/some-base-path",
+  i18n: {
+    locales: ['en', 'es', 'ru'],
+    defaultLocale: 'en'
+  }, // basePath: "/some-base-path",
   distDir: './.next', // Nextra supports custom `nextConfig.distDir`
   redirects: () => [
     // {
@@ -74,6 +74,11 @@ export default withNextra({
       source: '/examples',
       destination: '/examples/basic',
       statusCode: 302
+    },
+    {
+      source: '/',
+      destination: '/en',
+      permanent: true
     }
   ],
   reactStrictMode: true
