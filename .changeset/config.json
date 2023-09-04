@@ -5,7 +5,7 @@
   "fixed": [["nextra", "nextra-theme-docs", "nextra-theme-blog"]],
   "linked": [],
   "access": "public",
-  "baseBranch": "v3",
+  "baseBranch": "main",
   "updateInternalDependencies": "patch",
   "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {
     "onlyUpdatePeerDependentsWhenOutOfRange": true
