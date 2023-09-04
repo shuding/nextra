@@ -17,3 +17,12 @@
 - save `pageMap` to `.next/static/chunks/nextra-page-map-{locale}.mjs`
 
 - save `fileMap` to `.next/static/chunks/nextra-file-map.mjs`
+
+
+remove `__nextraPageOptions.pageNextRoute`
+
+remove `pageOpts.route` and `pageOpts.newNextLinkBehavior`
+
+remove `LoaderOptions.defaultLocale`
+
+remove `__nextra_internal__.context[route].themeConfig`

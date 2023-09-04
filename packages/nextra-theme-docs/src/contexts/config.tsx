@@ -10,10 +10,7 @@ import type { Context } from '../types'
 import { MenuProvider } from './menu'
 
 type Config<FrontMatterType = FrontMatter> = DocsThemeConfig &
-  Pick<
-    PageOpts<FrontMatterType>,
-    'flexsearch' | 'newNextLinkBehavior' | 'title' | 'frontMatter'
-  >
+  Pick<PageOpts<FrontMatterType>, 'flexsearch' | 'title' | 'frontMatter'>
 
 const ConfigContext = createContext<Config>({
   title: '',
@@ -75,15 +72,16 @@ export const ConfigProvider = ({
   // Merge only on first load
   theme ||= {
     ...DEFAULT_THEME,
-    ...Object.fromEntries(
-      Object.entries(themeConfig).map(([key, value]) => [
-        key,
-        value && typeof value === 'object' && DEEP_OBJECT_KEYS.includes(key)
-          ? // @ts-expect-error -- key has always object value
-            { ...DEFAULT_THEME[key], ...value }
-          : value
-      ])
-    )
+    ...(themeConfig &&
+      Object.fromEntries(
+        Object.entries(themeConfig).map(([key, value]) => [
+          key,
+          value && typeof value === 'object' && DEEP_OBJECT_KEYS.includes(key)
+            ? // @ts-expect-error -- key has always object value
+              { ...DEFAULT_THEME[key], ...value }
+            : value
+        ])
+      ))
   }
   if (process.env.NODE_ENV !== 'production' && !isValidated) {
     try {
@@ -101,9 +99,6 @@ export const ConfigProvider = ({
   const extendedConfig: Config = {
     ...theme,
     flexsearch: pageOpts.flexsearch,
-    ...(typeof pageOpts.newNextLinkBehavior === 'boolean' && {
-      newNextLinkBehavior: pageOpts.newNextLinkBehavior
-    }),
     title: pageOpts.title,
     frontMatter: pageOpts.frontMatter
   }
