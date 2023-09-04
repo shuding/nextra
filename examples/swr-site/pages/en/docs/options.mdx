@@ -71,7 +71,7 @@ const { data, error, isValidating, mutate } = useSWR(key, fetcher, options)
   fetched data and errors when it returns `true`. Returns `false` by default.
 - `use`: array of middleware functions [(details)](/docs/middleware)
 
-<Callout emoji="💡">
+<Callout>
   When under a slow network (2G, {'<='} 70Kbps), <code>errorRetryInterval</code>{' '}
   will be 10s, and <code>loadingTimeout</code> will be 5s by default.
 </Callout>

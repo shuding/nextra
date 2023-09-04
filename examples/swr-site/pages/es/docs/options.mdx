@@ -72,7 +72,7 @@ const { data, error, isValidating, mutate } = useSWR(key, fetcher, options)
   obtenidos y los errores cuando devuelva `true`. Devuelve `false` por defecto.
 - `use`: array of middleware functions [(details)](/docs/middleware)
 
-<Callout emoji="💡">
+<Callout>
   Cuando una red lenta (2G, {'<='} 70Kbps), `errorRetryInterval` serian 10
   segundos, y `loadingTimeout` serian 5 segundos por defecto.
 </Callout>
