@@ -1,22 +1,73 @@
+import { join } from 'node:path'
+import { promises as fs } from 'graceful-fs'
 import type { Compiler } from 'webpack'
+import { CHUNKS_DIR } from '../constants'
 import { PAGES_DIR } from '../file-system'
-import { pageMapCache } from '../page-map'
+import { getDynamicMeta } from '../page-map'
 import { collectFiles } from '../plugin'
-import type { NextraConfig } from '../types'
+import type { Folder } from '../types'
 
 export class NextraPlugin {
-  constructor(private config: NextraConfig & { locales: string[] }) {}
+  constructor(private config: { locales: string[] }) {}
 
   apply(compiler: Compiler) {
     const pluginName = this.constructor.name
+    const { locales } = this.config
+
     compiler.hooks.beforeCompile.tapAsync(pluginName, async (_, callback) => {
-      const { locales } = this.config
       try {
         const result = await collectFiles({ dir: PAGES_DIR, locales })
-        pageMapCache.set(result)
+
+        for (const locale of locales) {
+          const folderItem =
+            locale === ''
+              ? { children: result.items }
+              : result.items.find(
+                  (item): item is Folder =>
+                    'name' in item && item.name === locale
+                )
+
+          if (!folderItem) continue
+
+          await fs.mkdir(join(CHUNKS_DIR), { recursive: true })
+
+          const [dynamicMetaItems, filteredItems] = getDynamicMeta(
+            '',
+            folderItem.children
+          )
+
+          const dynamicMetaImports: string[] = []
+          const dynamicMetaFunctions: string[] = []
+
+          for (const [
+            index,
+            { metaFilePath, ...descriptor }
+          ] of dynamicMetaItems.entries()) {
+            dynamicMetaImports.push(
+              `import dynamicMeta${index} from '${metaFilePath}'`
+            )
+            dynamicMetaFunctions.push(
+              `[dynamicMeta${index}, ${JSON.stringify(descriptor)}]`
+            )
+          }
+
+          await fs.writeFile(
+            join(CHUNKS_DIR, `nextra-page-map-${locale}.mjs`),
+            `${dynamicMetaImports.join('\n')}
+
+export const dynamicMetaModules = [${dynamicMetaFunctions.join(',')}]
+
+export const pageMap = ${JSON.stringify(filteredItems)}`
+          )
+        }
+
+        await fs.writeFile(
+          join(CHUNKS_DIR, 'nextra-file-map.mjs'),
+          `export const fileMap = ${JSON.stringify(result.fileMap)}`
+        )
         callback()
-      } catch (err) {
-        callback(err as Error)
+      } catch (error) {
+        callback(error as Error)
       }
     })
   }
