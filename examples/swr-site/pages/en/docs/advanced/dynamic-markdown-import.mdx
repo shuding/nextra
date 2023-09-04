@@ -7,9 +7,9 @@ export function Renderer() {
   const [pageOne, setPageOne] = useState(true)
   const Page = dynamic(() => {
     if (pageOne) {
-      return import('./more/tree/one.en-US.mdx')
+      return import('./more/tree/one.mdx')
     }
-    return import('./more/tree/two.en-US.mdx')
+    return import('./more/tree/two.mdx')
   })
   return (
     <>

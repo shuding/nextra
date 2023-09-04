@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router'
+import { useRouter } from 'nextra/hooks'
 import styles from './features.module.css'
 
 const Feature = ({ text, icon }) => (
@@ -9,14 +9,14 @@ const Feature = ({ text, icon }) => (
 )
 
 const TITLE_WITH_TRANSLATIONS = {
-  'en-US': 'React Hooks for Data Fetching',
-  'es-ES': 'Biblioteca React Hooks para la obtención de datos',
+  en: 'React Hooks for Data Fetching',
+  es: 'Biblioteca React Hooks para la obtención de datos',
   ru: 'React хуки для выборки данных'
 }
 
 // Translations for Features
 const FEATURES_WITH_TRANSLATIONS = {
-  'en-US': {
+  en: {
     lightweight: 'Lightweight',
     realtime: 'Realtime',
     suspense: 'Suspense',
@@ -26,7 +26,7 @@ const FEATURES_WITH_TRANSLATIONS = {
     typescript: 'TypeScript Ready',
     remoteLocal: 'Remote + Local'
   },
-  'es-ES': {},
+  es: {},
   ru: {
     lightweight: 'Лёгкий',
     realtime: 'В реальном времени',
@@ -41,7 +41,6 @@ const FEATURES_WITH_TRANSLATIONS = {
 
 export default function Features() {
   const { locale, defaultLocale } = useRouter()
-
   const featureText = key =>
     FEATURES_WITH_TRANSLATIONS[locale]?.[key] ??
     FEATURES_WITH_TRANSLATIONS[defaultLocale][key] // Fallback for missing translations

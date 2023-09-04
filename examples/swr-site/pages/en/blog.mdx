@@ -3,17 +3,12 @@ searchable: false
 ---
 
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import { getPagesUnderRoute } from 'nextra/context'
-import filterRouteLocale from 'nextra/filter-route-locale'
+import { useRouter } from 'nextra/hooks'
 
 export function Page() {
-  const { locale, defaultLocale } = useRouter()
-  return filterRouteLocale(
-    getPagesUnderRoute('/blog'),
-    locale,
-    defaultLocale
-  ).map(page => (
+  const { locale } = useRouter()
+  return getPagesUnderRoute(`/${locale}/blog`).map(page => (
     <div key={page.route}>
       <Link
         href={page.route}
