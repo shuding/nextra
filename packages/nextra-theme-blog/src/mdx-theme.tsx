@@ -71,8 +71,9 @@ const A = ({ children, href = '', ...props }: ComponentProps<'a'>) => {
     )
   }
   return (
-    <Link href={href} passHref legacyBehavior>
-      <a {...props}>{children}</a>
+    // @ts-expect-error Types of property `ref` are incompatible.
+    <Link href={href} {...props}>
+      {children}
     </Link>
   )
 }
