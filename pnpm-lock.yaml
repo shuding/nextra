@@ -12,7 +12,7 @@ overrides:
 
 patchedDependencies:
   '@changesets/assemble-release-plan@5.2.4':
-    hash: 3wuhjtl4hjck4itk3w32z4cd5u
+    hash: jszomknpy2pkfhwjmylqvl7ldi
     path: patches/@changesets__assemble-release-plan@5.2.4.patch
 
 importers:
@@ -1993,7 +1993,7 @@ packages:
       semver: 7.5.4
     dev: true
 
-  /@changesets/assemble-release-plan@5.2.4(patch_hash=3wuhjtl4hjck4itk3w32z4cd5u):
+  /@changesets/assemble-release-plan@5.2.4(patch_hash=jszomknpy2pkfhwjmylqvl7ldi):
     resolution: {integrity: sha512-xJkWX+1/CUaOUWTguXEbCDTyWJFECEhmdtbkjhn5GVBGxdP/JwaHBIU9sW3FR6gD07UwZ7ovpiPclQZs+j+mvg==}
     dependencies:
       '@babel/runtime': 7.20.7
@@ -2017,7 +2017,7 @@ packages:
     dependencies:
       '@babel/runtime': 7.20.7
       '@changesets/apply-release-plan': 6.1.4
-      '@changesets/assemble-release-plan': 5.2.4(patch_hash=3wuhjtl4hjck4itk3w32z4cd5u)
+      '@changesets/assemble-release-plan': 5.2.4(patch_hash=jszomknpy2pkfhwjmylqvl7ldi)
       '@changesets/changelog-git': 0.1.14
       '@changesets/config': 2.3.1
       '@changesets/errors': 0.1.4
@@ -2082,7 +2082,7 @@ packages:
     resolution: {integrity: sha512-6IwKTubNEgoOZwDontYc2x2cWXfr6IKxP3IhKeK+WjyD6y3M4Gl/jdQvBw+m/5zWILSOCAaGLu2ZF6Q+WiPniw==}
     dependencies:
       '@babel/runtime': 7.20.7
-      '@changesets/assemble-release-plan': 5.2.4(patch_hash=3wuhjtl4hjck4itk3w32z4cd5u)
+      '@changesets/assemble-release-plan': 5.2.4(patch_hash=jszomknpy2pkfhwjmylqvl7ldi)
       '@changesets/config': 2.3.1
       '@changesets/pre': 1.0.14
       '@changesets/read': 0.5.9
@@ -11329,7 +11329,7 @@ packages:
     name: nextra
     engines: {node: '>=16'}
     peerDependencies:
-      next: '>=9.5.3'
+      next: '>=13'
       react: '>=16.13.1'
       react-dom: '>=16.13.1'
     dependencies:
@@ -11371,7 +11371,7 @@ packages:
     id: file:packages/nextra-theme-blog
     name: nextra-theme-blog
     peerDependencies:
-      next: '>=9.5.3'
+      next: '>=13'
       nextra: workspace:*
       react: '>=16.13.1'
       react-cusdis: ^2.1.3
@@ -11392,7 +11392,7 @@ packages:
     id: file:packages/nextra-theme-docs
     name: nextra-theme-docs
     peerDependencies:
-      next: '>=9.5.3'
+      next: '>=13'
       nextra: workspace:*
       react: '>=16.13.1'
       react-dom: '>=16.13.1'

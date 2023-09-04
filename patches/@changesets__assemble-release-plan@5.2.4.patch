@@ -1,5 +1,5 @@
 diff --git a/dist/assemble-release-plan.cjs.dev.js b/dist/assemble-release-plan.cjs.dev.js
-index e1376ca756d69816f8c79637ee7b45161f092167..8cb0a24dced96f422afffe4ec21cf3628b4951dd 100644
+index e1376ca756d69816f8c79637ee7b45161f092167..dba064deb138de4571e5663fb5a16972a57a7901 100644
 --- a/dist/assemble-release-plan.cjs.dev.js
 +++ b/dist/assemble-release-plan.cjs.dev.js
 @@ -257,7 +257,7 @@ function shouldBumpMajor({
@@ -11,8 +11,17 @@ index e1376ca756d69816f8c79637ee7b45161f092167..8cb0a24dced96f422afffe4ec21cf362
    !releases.has(dependent) || releases.has(dependent) && releases.get(dependent).type !== "major");
  }
  
+@@ -436,7 +436,7 @@ function applyLinks(releases, packagesByName, linked) {
+ 
+ function getPreVersion(version) {
+   let parsed = semverParse__default['default'](version);
+-  let preVersion = parsed.prerelease[1] === undefined ? -1 : parsed.prerelease[1];
++  let preVersion = parsed?.prerelease[1] === undefined ? -1 : parsed.prerelease[1];
+ 
+   if (typeof preVersion !== "number") {
+     throw new errors.InternalError("preVersion is not a number");
 diff --git a/dist/assemble-release-plan.cjs.prod.js b/dist/assemble-release-plan.cjs.prod.js
-index 3a83720644a94cdf6e62fa188a72c51c0384d00e..411ef794988c7f770545bca6a7a38f9419806cd6 100644
+index 3a83720644a94cdf6e62fa188a72c51c0384d00e..2313ee4afd511955ad537358cc90db4fc5b5ce47 100644
 --- a/dist/assemble-release-plan.cjs.prod.js
 +++ b/dist/assemble-release-plan.cjs.prod.js
 @@ -130,7 +130,7 @@ function getDependencyVersionRanges(dependentPkgJSON, dependencyRelease) {
@@ -24,3 +33,12 @@ index 3a83720644a94cdf6e62fa188a72c51c0384d00e..411ef794988c7f770545bca6a7a38f94
  }
  
  function flattenReleases(changesets, packagesByName, ignoredPackages) {
+@@ -214,7 +214,7 @@ function applyLinks(releases, packagesByName, linked) {
+ }
+ 
+ function getPreVersion(version) {
+-  let parsed = semverParse__default.default(version), preVersion = void 0 === parsed.prerelease[1] ? -1 : parsed.prerelease[1];
++  let parsed = semverParse__default.default(version), preVersion = void 0 === parsed?.prerelease[1] ? -1 : parsed.prerelease[1];
+   if ("number" != typeof preVersion) throw new errors.InternalError("preVersion is not a number");
+   return preVersion++, preVersion;
+ }
