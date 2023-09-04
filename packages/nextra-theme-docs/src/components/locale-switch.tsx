@@ -1,9 +1,11 @@
 import { addBasePath } from 'next/dist/client/add-base-path'
-import { useRouter } from 'next/router'
+import { useRouter } from 'nextra/hooks'
 import { GlobeIcon } from 'nextra/icons'
 import type { ReactElement } from 'react'
 import { useConfig } from '../contexts'
 import { Select } from './select'
+
+const ONE_YEAR = 365 * 24 * 60 * 60 * 1000
 
 interface LocaleSwitchProps {
   lite?: boolean
@@ -26,11 +28,12 @@ export function LocaleSwitch({
       title="Change language"
       className={className}
       onChange={option => {
-        const date = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000)
+        const date = new Date(Date.now() + ONE_YEAR)
         document.cookie = `NEXT_LOCALE=${
           option.key
         }; expires=${date.toUTCString()}; path=/`
-        location.href = addBasePath(asPath)
+        const href = addBasePath(asPath.replace(`/${locale}`, `/${option.key}`))
+        location.href = href
       }}
       selected={{
         key: selected?.locale || '',
