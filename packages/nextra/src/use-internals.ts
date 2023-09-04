@@ -40,9 +40,12 @@ export function useInternals() {
       'No content found for the current route. This is a Nextra bug.'
     )
   }
+  const { pageOpts, Content } = context
 
   return {
-    context,
-    Layout: __nextra_internal__.Layout
+    Layout: __nextra_internal__.Layout,
+    themeConfig: __nextra_internal__.themeConfig,
+    Content,
+    pageOpts
   }
 }

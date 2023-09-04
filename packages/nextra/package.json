@@ -25,6 +25,10 @@
       "import": "./dist/setup-page.js",
       "types": "./dist/setup-page.d.mts"
     },
+    "./context": {
+      "import": "./dist/context.js",
+      "types": "./dist/context.d.mts"
+    },
     "./mdx": {
       "import": "./dist/mdx.js",
       "types": "./dist/mdx.d.mts"
