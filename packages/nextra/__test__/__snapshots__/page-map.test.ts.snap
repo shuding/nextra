@@ -1716,6 +1716,17 @@ exports[`Page Process > should match i18n site page maps 1`] = `
             },
           ],
           "kind": "Folder",
+          "name": "graphql-eslint",
+          "route": "/en/remote/graphql-eslint",
+        },
+        {
+          "children": [
+            {
+              "data": {},
+              "kind": "Meta",
+            },
+          ],
+          "kind": "Folder",
           "name": "graphql-yoga",
           "route": "/en/remote/graphql-yoga",
         },
