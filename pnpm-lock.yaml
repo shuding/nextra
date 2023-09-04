@@ -244,8 +244,8 @@ importers:
         specifier: ^0.0.4
         version: 0.0.4(react@18.2.0)
       '@theguild/remark-npm2yarn':
-        specifier: ^0.1.1
-        version: 0.1.1
+        specifier: 0.2.0-alpha-20230904225308-5ba1c7b
+        version: 0.2.0-alpha-20230904225308-5ba1c7b
       clsx:
         specifier: ^2.0.0
         version: 2.0.0
@@ -3276,8 +3276,8 @@ packages:
       - supports-color
     dev: false
 
-  /@theguild/remark-npm2yarn@0.1.1:
-    resolution: {integrity: sha512-ZKwd/bjQ9V+pESLnu8+q8jqn15alXzJOuVckraebsXwqVBTw53Gmupiw9zCdLNHU829KTYNycJYea6m9HRLuOg==}
+  /@theguild/remark-npm2yarn@0.2.0-alpha-20230904225308-5ba1c7b:
+    resolution: {integrity: sha512-zBy2HxDE1cemL6ghKnAZrjxbNLNaHjDgwO5LNhvQddc2zasw678E+vzCP9kMAvl5vxXCAR8dEUji3ZttnzWz2g==}
     dependencies:
       npm-to-yarn: 2.0.0
       unist-util-visit: 5.0.0
@@ -11327,7 +11327,7 @@ packages:
     resolution: {directory: packages/nextra, type: directory}
     id: file:packages/nextra
     name: nextra
-    engines: {node: '>=16'}
+    engines: {node: '>=18'}
     peerDependencies:
       next: '>=13'
       react: '>=16.13.1'
@@ -11338,7 +11338,7 @@ packages:
       '@mdx-js/react': 2.3.0(react@18.2.0)
       '@napi-rs/simple-git': 0.1.9
       '@theguild/remark-mermaid': 0.0.4(react@18.2.0)
-      '@theguild/remark-npm2yarn': 0.1.1
+      '@theguild/remark-npm2yarn': 0.2.0-alpha-20230904225308-5ba1c7b
       clsx: 2.0.0
       github-slugger: 2.0.0
       graceful-fs: 4.2.11
