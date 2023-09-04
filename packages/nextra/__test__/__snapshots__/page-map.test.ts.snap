@@ -1197,3 +1197,2095 @@ exports[`Page Process > pageMap ru 1`] = `
   "/docs/data-fetching",
 ]
 `;
+
+exports[`Page Process > should match i18n site page maps 1`] = `
+{
+  "enPageMap": [
+    {
+      "data": {
+        "about": {
+          "items": {
+            "a-page": {
+              "title": "A Page",
+            },
+            "acknowledgement": {
+              "title": "Acknowledgement",
+            },
+            "changelog": {
+              "title": "Changelog",
+            },
+            "contributors": {
+              "href": "https://github.com/vercel/swr/graphs/contributors",
+              "newWindow": true,
+              "title": "Contributors",
+            },
+            "team": {
+              "title": "Team",
+            },
+          },
+          "title": "About",
+          "type": "menu",
+        },
+        "blog": {
+          "theme": {
+            "breadcrumb": false,
+            "sidebar": false,
+            "toc": true,
+            "typesetting": "article",
+          },
+          "title": "Blog",
+          "type": "page",
+        },
+        "docs": {
+          "title": "Docs",
+          "type": "page",
+        },
+        "examples": {
+          "theme": {
+            "layout": "full",
+          },
+          "title": "Examples",
+          "type": "page",
+        },
+        "index": {
+          "display": "hidden",
+          "title": "Introduction",
+          "type": "page",
+        },
+        "nextra_link": {
+          "href": "https://github.com/shuding/nextra",
+          "newWindow": true,
+          "title": "Nextra ↗",
+          "type": "page",
+        },
+        "remote": {
+          "href": "/remote/4423220",
+          "title": "Remote",
+          "type": "page",
+        },
+      },
+      "kind": "Meta",
+    },
+    {
+      "children": [
+        {
+          "data": {
+            "a-page": {
+              "display": "hidden",
+              "theme": {
+                "layout": "raw",
+              },
+              "type": "page",
+            },
+            "acknowledgement": "🧩 Acknowledgement",
+            "team": "👥 Team",
+          },
+          "kind": "Meta",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "a-page",
+          "route": "/en/about/a-page",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "acknowledgement",
+          "route": "/en/about/acknowledgement",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "changelog",
+          "route": "/en/about/changelog",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "team",
+          "route": "/en/about/team",
+        },
+      ],
+      "kind": "Folder",
+      "name": "about",
+      "route": "/en/about",
+    },
+    {
+      "children": [
+        {
+          "data": {
+            "swr-v1": {
+              "theme": {
+                "breadcrumb": true,
+              },
+              "title": "Announcing SWR 1.0",
+            },
+          },
+          "kind": "Meta",
+        },
+        {
+          "frontMatter": {
+            "description": "Almost 2 years ago we open sourced SWR, the tiny data-fetching React library that people love. Today we are reaching another milestone: the 1.0 version of SWR.",
+            "image": "https://assets.vercel.com/image/upload/v1630059453/swr/v1.png",
+          },
+          "kind": "MdxPage",
+          "name": "swr-v1",
+          "route": "/en/blog/swr-v1",
+        },
+      ],
+      "kind": "Folder",
+      "name": "blog",
+      "route": "/en/blog",
+    },
+    {
+      "frontMatter": {
+        "searchable": false,
+      },
+      "kind": "MdxPage",
+      "name": "blog",
+      "route": "/en/blog",
+    },
+    {
+      "children": [
+        {
+          "kind": "MdxPage",
+          "name": "404-500",
+          "route": "/en/docs/404-500",
+        },
+        {
+          "data": {
+            "--- hey": {
+              "title": "Getting Started",
+              "type": "separator",
+            },
+            "--- my_new_separator": {
+              "title": "Advanced",
+              "type": "separator",
+            },
+            "404-500": "404/500 Custom Error Pages",
+            "advanced": {},
+            "arguments": {},
+            "change-log": {
+              "theme": {
+                "sidebar": false,
+              },
+            },
+            "conditional-fetching": "Conditional Data Fetching",
+            "custom-header-ids": "Custom Header IDs",
+            "data-fetching": {},
+            "error-handling": {
+              "display": "hidden",
+            },
+            "getting-started": {},
+            "github_link": {
+              "href": "https://github.com/shuding/nextra",
+              "newWindow": true,
+              "title": "GitHub 🐙 →",
+            },
+            "global-configuration": {},
+            "middleware": {},
+            "mutation": {},
+            "options": {},
+            "pagination": {},
+            "prefetching": {},
+            "raw-layout": {
+              "theme": {
+                "layout": "raw",
+              },
+            },
+            "revalidation": "Auto Revalidation",
+            "suspense": {},
+            "typescript": "TypeScript :)",
+            "with-nextjs": "Next.js SSG and SSR",
+            "wrap-toc-items": "Wrap Table of Content Items",
+          },
+          "kind": "Meta",
+        },
+        {
+          "children": [
+            {
+              "data": {
+                "*": {
+                  "theme": {
+                    "footer": false,
+                  },
+                },
+                "--- yoo": {
+                  "title": "Do Not Use",
+                  "type": "separator",
+                },
+                "file-name.with.DOTS": "Filenames with Dots",
+                "more": "More: A Super Super Super Super Long Directory",
+              },
+              "kind": "Meta",
+            },
+            {
+              "kind": "MdxPage",
+              "name": "cache",
+              "route": "/en/docs/advanced/cache",
+            },
+            {
+              "kind": "MdxPage",
+              "name": "code-highlighting",
+              "route": "/en/docs/advanced/code-highlighting",
+            },
+            {
+              "kind": "MdxPage",
+              "name": "dynamic-markdown-import",
+              "route": "/en/docs/advanced/dynamic-markdown-import",
+            },
+            {
+              "kind": "MdxPage",
+              "name": "file-name.with.DOTS",
+              "route": "/en/docs/advanced/file-name.with.DOTS",
+            },
+            {
+              "kind": "MdxPage",
+              "name": "images",
+              "route": "/en/docs/advanced/images",
+            },
+            {
+              "kind": "MdxPage",
+              "name": "markdown-import",
+              "route": "/en/docs/advanced/markdown-import",
+            },
+            {
+              "children": [
+                {
+                  "kind": "MdxPage",
+                  "name": "loooooooooooooooooooong-title",
+                  "route": "/en/docs/advanced/more/loooooooooooooooooooong-title",
+                },
+                {
+                  "children": [
+                    {
+                      "kind": "MdxPage",
+                      "name": "one",
+                      "route": "/en/docs/advanced/more/tree/one",
+                    },
+                    {
+                      "kind": "MdxPage",
+                      "name": "three",
+                      "route": "/en/docs/advanced/more/tree/three",
+                    },
+                    {
+                      "kind": "MdxPage",
+                      "name": "two",
+                      "route": "/en/docs/advanced/more/tree/two",
+                    },
+                  ],
+                  "kind": "Folder",
+                  "name": "tree",
+                  "route": "/en/docs/advanced/more/tree",
+                },
+              ],
+              "kind": "Folder",
+              "name": "more",
+              "route": "/en/docs/advanced/more",
+            },
+            {
+              "kind": "MdxPage",
+              "name": "performance",
+              "route": "/en/docs/advanced/performance",
+            },
+            {
+              "kind": "MdxPage",
+              "name": "react-native",
+              "route": "/en/docs/advanced/react-native",
+            },
+            {
+              "kind": "MdxPage",
+              "name": "scrollbar-x",
+              "route": "/en/docs/advanced/scrollbar-x",
+            },
+          ],
+          "kind": "Folder",
+          "name": "advanced",
+          "route": "/en/docs/advanced",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "advanced",
+          "route": "/en/docs/advanced",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "arguments",
+          "route": "/en/docs/arguments",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "callout",
+          "route": "/en/docs/callout",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "change-log",
+          "route": "/en/docs/change-log",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "code-block-without-language",
+          "route": "/en/docs/code-block-without-language",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "conditional-fetching",
+          "route": "/en/docs/conditional-fetching",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "custom-header-ids",
+          "route": "/en/docs/custom-header-ids",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "data-fetching",
+          "route": "/en/docs/data-fetching",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "error-handling",
+          "route": "/en/docs/error-handling",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "getting-started",
+          "route": "/en/docs/getting-started",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "global-configuration",
+          "route": "/en/docs/global-configuration",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "middleware",
+          "route": "/en/docs/middleware",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "mutation",
+          "route": "/en/docs/mutation",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "options",
+          "route": "/en/docs/options",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "pagination",
+          "route": "/en/docs/pagination",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "prefetching",
+          "route": "/en/docs/prefetching",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "raw-layout",
+          "route": "/en/docs/raw-layout",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "revalidation",
+          "route": "/en/docs/revalidation",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "suspense",
+          "route": "/en/docs/suspense",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "typescript",
+          "route": "/en/docs/typescript",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "understanding",
+          "route": "/en/docs/understanding",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "with-nextjs",
+          "route": "/en/docs/with-nextjs",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "wrap-toc-items",
+          "route": "/en/docs/wrap-toc-items",
+        },
+      ],
+      "kind": "Folder",
+      "name": "docs",
+      "route": "/en/docs",
+    },
+    {
+      "children": [
+        {
+          "data": {
+            "auth": "Authentication",
+            "basic": "Basic Usage",
+            "error-handling": {},
+            "full": {
+              "theme": {
+                "layout": "raw",
+              },
+            },
+            "infinite-loading": {},
+            "ssr": "Next.js SSR",
+          },
+          "kind": "Meta",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Authentication",
+          },
+          "kind": "MdxPage",
+          "name": "auth",
+          "route": "/en/examples/auth",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Basic Usage",
+          },
+          "kind": "MdxPage",
+          "name": "basic",
+          "route": "/en/examples/basic",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Error Handling",
+          },
+          "kind": "MdxPage",
+          "name": "error-handling",
+          "route": "/en/examples/error-handling",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "full",
+          "route": "/en/examples/full",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Infinite Loading",
+          },
+          "kind": "MdxPage",
+          "name": "infinite-loading",
+          "route": "/en/examples/infinite-loading",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Next.js SSR",
+          },
+          "kind": "MdxPage",
+          "name": "ssr",
+          "route": "/en/examples/ssr",
+        },
+      ],
+      "kind": "Folder",
+      "name": "examples",
+      "route": "/en/examples",
+    },
+    {
+      "kind": "MdxPage",
+      "name": "foo",
+      "route": "/en/foo",
+    },
+    {
+      "frontMatter": {
+        "searchable": false,
+        "title": "React Hooks for Data Fetching",
+      },
+      "kind": "MdxPage",
+      "name": "index",
+      "route": "/en",
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "__nextra_src": "/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/remote/graphql-yoga/_meta.js",
+              "data": {},
+              "kind": "Meta",
+            },
+          ],
+          "kind": "Folder",
+          "name": "graphql-yoga",
+          "route": "/en/remote/graphql-yoga",
+        },
+      ],
+      "kind": "Folder",
+      "name": "remote",
+      "route": "/en/remote",
+    },
+    {
+      "frontMatter": {
+        "mdxOptions": {
+          "format": "md",
+        },
+      },
+      "kind": "MdxPage",
+      "name": "test",
+      "route": "/en/test",
+    },
+  ],
+  "esPageMap": [
+    {
+      "data": {
+        "blog": {
+          "title": "Blog",
+          "type": "page",
+        },
+        "docs": {
+          "title": "Docs",
+          "type": "page",
+        },
+        "examples": {
+          "title": "Ejemplos",
+          "type": "page",
+        },
+        "index": {
+          "display": "hidden",
+          "title": "Introducción",
+          "type": "page",
+        },
+      },
+      "kind": "Meta",
+    },
+    {
+      "children": [
+        {
+          "data": {
+            "advanced": "Avanzado",
+            "arguments": "Argumentos",
+            "change-log": "Registro de cambios",
+            "conditional-fetching": "Obtención De Datos Condicional",
+            "data-fetching": "Obtención De Datos",
+            "error-handling": "Gestión De Errores",
+            "getting-started": "Comienza",
+            "global-configuration": "Configuración Global",
+            "middleware": "Middleware",
+            "mutation": "Mutación",
+            "options": "Opciones",
+            "pagination": "Paginación",
+            "prefetching": "Prefetching",
+            "revalidation": "Revalidación Automática",
+            "suspense": "Suspense",
+            "typescript": "Typescript",
+            "with-nextjs": "Next.js SSG and SSR",
+            "wrap-toc-items": "Ajustar elementos de la tabla de contenido",
+          },
+          "kind": "Meta",
+        },
+        {
+          "children": [
+            {
+              "data": {
+                "cache": "Cache",
+                "file-name.with.DOTS": "Nombres de archivos con puntos",
+                "performance": "Rendimiento",
+                "react-native": "React Native",
+              },
+              "kind": "Meta",
+            },
+            {
+              "kind": "MdxPage",
+              "name": "file-name.with.DOTS",
+              "route": "/es/docs/advanced/file-name.with.DOTS",
+            },
+            {
+              "kind": "MdxPage",
+              "name": "performance",
+              "route": "/es/docs/advanced/performance",
+            },
+          ],
+          "kind": "Folder",
+          "name": "advanced",
+          "route": "/es/docs/advanced",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "arguments",
+          "route": "/es/docs/arguments",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "change-log",
+          "route": "/es/docs/change-log",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "conditional-fetching",
+          "route": "/es/docs/conditional-fetching",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "data-fetching",
+          "route": "/es/docs/data-fetching",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "error-handling",
+          "route": "/es/docs/error-handling",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "getting-started",
+          "route": "/es/docs/getting-started",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "global-configuration",
+          "route": "/es/docs/global-configuration",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "mutation",
+          "route": "/es/docs/mutation",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "options",
+          "route": "/es/docs/options",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "pagination",
+          "route": "/es/docs/pagination",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "prefetching",
+          "route": "/es/docs/prefetching",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "revalidation",
+          "route": "/es/docs/revalidation",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "suspense",
+          "route": "/es/docs/suspense",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "understanding",
+          "route": "/es/docs/understanding",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "with-nextjs",
+          "route": "/es/docs/with-nextjs",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "wrap-toc-items",
+          "route": "/es/docs/wrap-toc-items",
+        },
+      ],
+      "kind": "Folder",
+      "name": "docs",
+      "route": "/es/docs",
+    },
+    {
+      "children": [
+        {
+          "data": {
+            "auth": "Autenticación",
+            "basic": "Uso Básico",
+            "error-handling": "Manejo De Errores",
+            "infinite-loading": "Carga Infinita",
+            "ssr": "Next.js SSR",
+          },
+          "kind": "Meta",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Autenticación",
+          },
+          "kind": "MdxPage",
+          "name": "auth",
+          "route": "/es/examples/auth",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Uso Básico",
+          },
+          "kind": "MdxPage",
+          "name": "basic",
+          "route": "/es/examples/basic",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Manejo De Errores",
+          },
+          "kind": "MdxPage",
+          "name": "error-handling",
+          "route": "/es/examples/error-handling",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Carga Infinita",
+          },
+          "kind": "MdxPage",
+          "name": "infinite-loading",
+          "route": "/es/examples/infinite-loading",
+        },
+      ],
+      "kind": "Folder",
+      "name": "examples",
+      "route": "/es/examples",
+    },
+    {
+      "frontMatter": {
+        "title": "Biblioteca React Hooks para la obtención de datos",
+      },
+      "kind": "MdxPage",
+      "name": "index",
+      "route": "/es",
+    },
+  ],
+  "ruPageMap": [
+    {
+      "data": {
+        "blog": {
+          "theme": {
+            "breadcrumb": false,
+            "sidebar": false,
+            "timestamp": true,
+            "toc": true,
+            "typesetting": "article",
+          },
+          "title": "Блог",
+          "type": "page",
+        },
+        "docs": {
+          "title": "Документация",
+          "type": "page",
+        },
+        "examples": {
+          "title": "Примеры",
+          "type": "page",
+        },
+        "index": {
+          "display": "hidden",
+          "title": "Введение",
+          "type": "page",
+        },
+      },
+      "kind": "Meta",
+    },
+    {
+      "children": [
+        {
+          "data": {
+            "swr-v1": {
+              "theme": {
+                "breadcrumb": true,
+              },
+              "title": "Представляем SWR 1.0",
+            },
+          },
+          "kind": "Meta",
+        },
+        {
+          "frontMatter": {
+            "description": "Почти 2 года назад мы сделали SWR — крошечную React библиотеку с открытым исходным кодом для выборки данных, которую люди полюбили. Сегодня мы приближаемся к еще одной вехе: версии 1.0 SWR!",
+            "image": "https://assets.vercel.com/image/upload/v1630059453/swr/v1.png",
+          },
+          "kind": "MdxPage",
+          "name": "swr-v1",
+          "route": "/ru/blog/swr-v1",
+        },
+      ],
+      "kind": "Folder",
+      "name": "blog",
+      "route": "/ru/blog",
+    },
+    {
+      "kind": "MdxPage",
+      "name": "blog",
+      "route": "/ru/blog",
+    },
+    {
+      "children": [
+        {
+          "data": {
+            "advanced": "Продвинутые",
+            "arguments": "Аргументы",
+            "change-log": "Журнал изменений",
+            "conditional-fetching": "Условная выборка данных",
+            "data-fetching": "Выборка данных",
+            "error-handling": "Обработка ошибок",
+            "getting-started": "Начало работы",
+            "global-configuration": "Глобальная конфигурация",
+            "middleware": "Промежуточное ПО (Middleware)",
+            "mutation": "Мутация",
+            "options": "Опции",
+            "pagination": "Пагинация",
+            "prefetching": "Пред-выборка",
+            "revalidation": "Авто-ревалидация",
+            "suspense": "Задержка (Suspense)",
+            "typescript": "Typescript",
+            "with-nextjs": "Next.js SSG и SSR",
+            "wrap-toc-items": "Обернуть таблицу содержимого элементов",
+          },
+          "kind": "Meta",
+        },
+        {
+          "children": [
+            {
+              "data": {
+                "cache": "Кеш",
+                "file-name.with.DOTS": "Имя файла может содержать точки",
+                "performance": "Производительность",
+                "react-native": "React Native",
+              },
+              "kind": "Meta",
+            },
+            {
+              "kind": "MdxPage",
+              "name": "cache",
+              "route": "/ru/docs/advanced/cache",
+            },
+            {
+              "kind": "MdxPage",
+              "name": "file-name.with.DOTS",
+              "route": "/ru/docs/advanced/file-name.with.DOTS",
+            },
+            {
+              "kind": "MdxPage",
+              "name": "performance",
+              "route": "/ru/docs/advanced/performance",
+            },
+            {
+              "kind": "MdxPage",
+              "name": "react-native",
+              "route": "/ru/docs/advanced/react-native",
+            },
+          ],
+          "kind": "Folder",
+          "name": "advanced",
+          "route": "/ru/docs/advanced",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "arguments",
+          "route": "/ru/docs/arguments",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "change-log",
+          "route": "/ru/docs/change-log",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "conditional-fetching",
+          "route": "/ru/docs/conditional-fetching",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "data-fetching",
+          "route": "/ru/docs/data-fetching",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "error-handling",
+          "route": "/ru/docs/error-handling",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "getting-started",
+          "route": "/ru/docs/getting-started",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "global-configuration",
+          "route": "/ru/docs/global-configuration",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "middleware",
+          "route": "/ru/docs/middleware",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "mutation",
+          "route": "/ru/docs/mutation",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "options",
+          "route": "/ru/docs/options",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "pagination",
+          "route": "/ru/docs/pagination",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "prefetching",
+          "route": "/ru/docs/prefetching",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "revalidation",
+          "route": "/ru/docs/revalidation",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "suspense",
+          "route": "/ru/docs/suspense",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "understanding",
+          "route": "/ru/docs/understanding",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "with-nextjs",
+          "route": "/ru/docs/with-nextjs",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "wrap-toc-items",
+          "route": "/ru/docs/wrap-toc-items",
+        },
+      ],
+      "kind": "Folder",
+      "name": "docs",
+      "route": "/ru/docs",
+    },
+    {
+      "children": [
+        {
+          "data": {
+            "auth": "Аутентификация",
+            "basic": "Основное использование",
+            "error-handling": "Обработка ошибок",
+            "infinite-loading": "Бесконечная загрузка",
+            "ssr": "Next.js SSR",
+          },
+          "kind": "Meta",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Аутентификация",
+          },
+          "kind": "MdxPage",
+          "name": "auth",
+          "route": "/ru/examples/auth",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Основное использование",
+          },
+          "kind": "MdxPage",
+          "name": "basic",
+          "route": "/ru/examples/basic",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Обработка ошибок",
+          },
+          "kind": "MdxPage",
+          "name": "error-handling",
+          "route": "/ru/examples/error-handling",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Бесконечная загрузка",
+          },
+          "kind": "MdxPage",
+          "name": "infinite-loading",
+          "route": "/ru/examples/infinite-loading",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Next.js SSR",
+          },
+          "kind": "MdxPage",
+          "name": "ssr",
+          "route": "/ru/examples/ssr",
+        },
+      ],
+      "kind": "Folder",
+      "name": "examples",
+      "route": "/ru/examples",
+    },
+    {
+      "frontMatter": {
+        "title": "React хуки для получения данных",
+      },
+      "kind": "MdxPage",
+      "name": "index",
+      "route": "/ru",
+    },
+  ],
+}
+`;
+
+exports[`Page Process > tt 1`] = `
+{
+  "enPageMap": [
+    {
+      "data": {
+        "about": {
+          "items": {
+            "a-page": {
+              "title": "A Page",
+            },
+            "acknowledgement": {
+              "title": "Acknowledgement",
+            },
+            "changelog": {
+              "title": "Changelog",
+            },
+            "contributors": {
+              "href": "https://github.com/vercel/swr/graphs/contributors",
+              "newWindow": true,
+              "title": "Contributors",
+            },
+            "team": {
+              "title": "Team",
+            },
+          },
+          "title": "About",
+          "type": "menu",
+        },
+        "blog": {
+          "theme": {
+            "breadcrumb": false,
+            "sidebar": false,
+            "toc": true,
+            "typesetting": "article",
+          },
+          "title": "Blog",
+          "type": "page",
+        },
+        "docs": {
+          "title": "Docs",
+          "type": "page",
+        },
+        "examples": {
+          "theme": {
+            "layout": "full",
+          },
+          "title": "Examples",
+          "type": "page",
+        },
+        "index": {
+          "display": "hidden",
+          "title": "Introduction",
+          "type": "page",
+        },
+        "nextra_link": {
+          "href": "https://github.com/shuding/nextra",
+          "newWindow": true,
+          "title": "Nextra ↗",
+          "type": "page",
+        },
+        "remote": {
+          "href": "/remote/4423220",
+          "title": "Remote",
+          "type": "page",
+        },
+      },
+      "kind": "Meta",
+    },
+    {
+      "children": [
+        {
+          "data": {
+            "a-page": {
+              "display": "hidden",
+              "theme": {
+                "layout": "raw",
+              },
+              "type": "page",
+            },
+            "acknowledgement": "🧩 Acknowledgement",
+            "team": "👥 Team",
+          },
+          "kind": "Meta",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "a-page",
+          "route": "/en/about/a-page",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "acknowledgement",
+          "route": "/en/about/acknowledgement",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "changelog",
+          "route": "/en/about/changelog",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "team",
+          "route": "/en/about/team",
+        },
+      ],
+      "kind": "Folder",
+      "name": "about",
+      "route": "/en/about",
+    },
+    {
+      "children": [
+        {
+          "data": {
+            "swr-v1": {
+              "theme": {
+                "breadcrumb": true,
+              },
+              "title": "Announcing SWR 1.0",
+            },
+          },
+          "kind": "Meta",
+        },
+        {
+          "frontMatter": {
+            "description": "Almost 2 years ago we open sourced SWR, the tiny data-fetching React library that people love. Today we are reaching another milestone: the 1.0 version of SWR.",
+            "image": "https://assets.vercel.com/image/upload/v1630059453/swr/v1.png",
+          },
+          "kind": "MdxPage",
+          "name": "swr-v1",
+          "route": "/en/blog/swr-v1",
+        },
+      ],
+      "kind": "Folder",
+      "name": "blog",
+      "route": "/en/blog",
+    },
+    {
+      "frontMatter": {
+        "searchable": false,
+      },
+      "kind": "MdxPage",
+      "name": "blog",
+      "route": "/en/blog",
+    },
+    {
+      "children": [
+        {
+          "kind": "MdxPage",
+          "name": "404-500",
+          "route": "/en/docs/404-500",
+        },
+        {
+          "data": {
+            "--- hey": {
+              "title": "Getting Started",
+              "type": "separator",
+            },
+            "--- my_new_separator": {
+              "title": "Advanced",
+              "type": "separator",
+            },
+            "404-500": "404/500 Custom Error Pages",
+            "advanced": {},
+            "arguments": {},
+            "change-log": {
+              "theme": {
+                "sidebar": false,
+              },
+            },
+            "conditional-fetching": "Conditional Data Fetching",
+            "custom-header-ids": "Custom Header IDs",
+            "data-fetching": {},
+            "error-handling": {
+              "display": "hidden",
+            },
+            "getting-started": {},
+            "github_link": {
+              "href": "https://github.com/shuding/nextra",
+              "newWindow": true,
+              "title": "GitHub 🐙 →",
+            },
+            "global-configuration": {},
+            "middleware": {},
+            "mutation": {},
+            "options": {},
+            "pagination": {},
+            "prefetching": {},
+            "raw-layout": {
+              "theme": {
+                "layout": "raw",
+              },
+            },
+            "revalidation": "Auto Revalidation",
+            "suspense": {},
+            "typescript": "TypeScript :)",
+            "with-nextjs": "Next.js SSG and SSR",
+            "wrap-toc-items": "Wrap Table of Content Items",
+          },
+          "kind": "Meta",
+        },
+        {
+          "children": [
+            {
+              "data": {
+                "*": {
+                  "theme": {
+                    "footer": false,
+                  },
+                },
+                "--- yoo": {
+                  "title": "Do Not Use",
+                  "type": "separator",
+                },
+                "file-name.with.DOTS": "Filenames with Dots",
+                "more": "More: A Super Super Super Super Long Directory",
+              },
+              "kind": "Meta",
+            },
+            {
+              "kind": "MdxPage",
+              "name": "cache",
+              "route": "/en/docs/advanced/cache",
+            },
+            {
+              "kind": "MdxPage",
+              "name": "code-highlighting",
+              "route": "/en/docs/advanced/code-highlighting",
+            },
+            {
+              "kind": "MdxPage",
+              "name": "dynamic-markdown-import",
+              "route": "/en/docs/advanced/dynamic-markdown-import",
+            },
+            {
+              "kind": "MdxPage",
+              "name": "file-name.with.DOTS",
+              "route": "/en/docs/advanced/file-name.with.DOTS",
+            },
+            {
+              "kind": "MdxPage",
+              "name": "images",
+              "route": "/en/docs/advanced/images",
+            },
+            {
+              "kind": "MdxPage",
+              "name": "markdown-import",
+              "route": "/en/docs/advanced/markdown-import",
+            },
+            {
+              "children": [
+                {
+                  "kind": "MdxPage",
+                  "name": "loooooooooooooooooooong-title",
+                  "route": "/en/docs/advanced/more/loooooooooooooooooooong-title",
+                },
+                {
+                  "children": [
+                    {
+                      "kind": "MdxPage",
+                      "name": "one",
+                      "route": "/en/docs/advanced/more/tree/one",
+                    },
+                    {
+                      "kind": "MdxPage",
+                      "name": "three",
+                      "route": "/en/docs/advanced/more/tree/three",
+                    },
+                    {
+                      "kind": "MdxPage",
+                      "name": "two",
+                      "route": "/en/docs/advanced/more/tree/two",
+                    },
+                  ],
+                  "kind": "Folder",
+                  "name": "tree",
+                  "route": "/en/docs/advanced/more/tree",
+                },
+              ],
+              "kind": "Folder",
+              "name": "more",
+              "route": "/en/docs/advanced/more",
+            },
+            {
+              "kind": "MdxPage",
+              "name": "performance",
+              "route": "/en/docs/advanced/performance",
+            },
+            {
+              "kind": "MdxPage",
+              "name": "react-native",
+              "route": "/en/docs/advanced/react-native",
+            },
+            {
+              "kind": "MdxPage",
+              "name": "scrollbar-x",
+              "route": "/en/docs/advanced/scrollbar-x",
+            },
+          ],
+          "kind": "Folder",
+          "name": "advanced",
+          "route": "/en/docs/advanced",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "advanced",
+          "route": "/en/docs/advanced",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "arguments",
+          "route": "/en/docs/arguments",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "callout",
+          "route": "/en/docs/callout",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "change-log",
+          "route": "/en/docs/change-log",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "code-block-without-language",
+          "route": "/en/docs/code-block-without-language",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "conditional-fetching",
+          "route": "/en/docs/conditional-fetching",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "custom-header-ids",
+          "route": "/en/docs/custom-header-ids",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "data-fetching",
+          "route": "/en/docs/data-fetching",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "error-handling",
+          "route": "/en/docs/error-handling",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "getting-started",
+          "route": "/en/docs/getting-started",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "global-configuration",
+          "route": "/en/docs/global-configuration",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "middleware",
+          "route": "/en/docs/middleware",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "mutation",
+          "route": "/en/docs/mutation",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "options",
+          "route": "/en/docs/options",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "pagination",
+          "route": "/en/docs/pagination",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "prefetching",
+          "route": "/en/docs/prefetching",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "raw-layout",
+          "route": "/en/docs/raw-layout",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "revalidation",
+          "route": "/en/docs/revalidation",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "suspense",
+          "route": "/en/docs/suspense",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "typescript",
+          "route": "/en/docs/typescript",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "understanding",
+          "route": "/en/docs/understanding",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "with-nextjs",
+          "route": "/en/docs/with-nextjs",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "wrap-toc-items",
+          "route": "/en/docs/wrap-toc-items",
+        },
+      ],
+      "kind": "Folder",
+      "name": "docs",
+      "route": "/en/docs",
+    },
+    {
+      "children": [
+        {
+          "data": {
+            "auth": "Authentication",
+            "basic": "Basic Usage",
+            "error-handling": {},
+            "full": {
+              "theme": {
+                "layout": "raw",
+              },
+            },
+            "infinite-loading": {},
+            "ssr": "Next.js SSR",
+          },
+          "kind": "Meta",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Authentication",
+          },
+          "kind": "MdxPage",
+          "name": "auth",
+          "route": "/en/examples/auth",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Basic Usage",
+          },
+          "kind": "MdxPage",
+          "name": "basic",
+          "route": "/en/examples/basic",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Error Handling",
+          },
+          "kind": "MdxPage",
+          "name": "error-handling",
+          "route": "/en/examples/error-handling",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "full",
+          "route": "/en/examples/full",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Infinite Loading",
+          },
+          "kind": "MdxPage",
+          "name": "infinite-loading",
+          "route": "/en/examples/infinite-loading",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Next.js SSR",
+          },
+          "kind": "MdxPage",
+          "name": "ssr",
+          "route": "/en/examples/ssr",
+        },
+      ],
+      "kind": "Folder",
+      "name": "examples",
+      "route": "/en/examples",
+    },
+    {
+      "kind": "MdxPage",
+      "name": "foo",
+      "route": "/en/foo",
+    },
+    {
+      "frontMatter": {
+        "searchable": false,
+        "title": "React Hooks for Data Fetching",
+      },
+      "kind": "MdxPage",
+      "name": "index",
+      "route": "/en",
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "__nextra_src": "/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/remote/graphql-yoga/_meta.js",
+              "data": {},
+              "kind": "Meta",
+            },
+          ],
+          "kind": "Folder",
+          "name": "graphql-yoga",
+          "route": "/en/remote/graphql-yoga",
+        },
+      ],
+      "kind": "Folder",
+      "name": "remote",
+      "route": "/en/remote",
+    },
+    {
+      "frontMatter": {
+        "mdxOptions": {
+          "format": "md",
+        },
+      },
+      "kind": "MdxPage",
+      "name": "test",
+      "route": "/en/test",
+    },
+  ],
+  "esPageMap": [
+    {
+      "data": {
+        "blog": {
+          "title": "Blog",
+          "type": "page",
+        },
+        "docs": {
+          "title": "Docs",
+          "type": "page",
+        },
+        "examples": {
+          "title": "Ejemplos",
+          "type": "page",
+        },
+        "index": {
+          "display": "hidden",
+          "title": "Introducción",
+          "type": "page",
+        },
+      },
+      "kind": "Meta",
+    },
+    {
+      "children": [
+        {
+          "data": {
+            "advanced": "Avanzado",
+            "arguments": "Argumentos",
+            "change-log": "Registro de cambios",
+            "conditional-fetching": "Obtención De Datos Condicional",
+            "data-fetching": "Obtención De Datos",
+            "error-handling": "Gestión De Errores",
+            "getting-started": "Comienza",
+            "global-configuration": "Configuración Global",
+            "middleware": "Middleware",
+            "mutation": "Mutación",
+            "options": "Opciones",
+            "pagination": "Paginación",
+            "prefetching": "Prefetching",
+            "revalidation": "Revalidación Automática",
+            "suspense": "Suspense",
+            "typescript": "Typescript",
+            "with-nextjs": "Next.js SSG and SSR",
+            "wrap-toc-items": "Ajustar elementos de la tabla de contenido",
+          },
+          "kind": "Meta",
+        },
+        {
+          "children": [
+            {
+              "data": {
+                "cache": "Cache",
+                "file-name.with.DOTS": "Nombres de archivos con puntos",
+                "performance": "Rendimiento",
+                "react-native": "React Native",
+              },
+              "kind": "Meta",
+            },
+            {
+              "kind": "MdxPage",
+              "name": "file-name.with.DOTS",
+              "route": "/es/docs/advanced/file-name.with.DOTS",
+            },
+            {
+              "kind": "MdxPage",
+              "name": "performance",
+              "route": "/es/docs/advanced/performance",
+            },
+          ],
+          "kind": "Folder",
+          "name": "advanced",
+          "route": "/es/docs/advanced",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "arguments",
+          "route": "/es/docs/arguments",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "change-log",
+          "route": "/es/docs/change-log",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "conditional-fetching",
+          "route": "/es/docs/conditional-fetching",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "data-fetching",
+          "route": "/es/docs/data-fetching",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "error-handling",
+          "route": "/es/docs/error-handling",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "getting-started",
+          "route": "/es/docs/getting-started",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "global-configuration",
+          "route": "/es/docs/global-configuration",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "mutation",
+          "route": "/es/docs/mutation",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "options",
+          "route": "/es/docs/options",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "pagination",
+          "route": "/es/docs/pagination",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "prefetching",
+          "route": "/es/docs/prefetching",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "revalidation",
+          "route": "/es/docs/revalidation",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "suspense",
+          "route": "/es/docs/suspense",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "understanding",
+          "route": "/es/docs/understanding",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "with-nextjs",
+          "route": "/es/docs/with-nextjs",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "wrap-toc-items",
+          "route": "/es/docs/wrap-toc-items",
+        },
+      ],
+      "kind": "Folder",
+      "name": "docs",
+      "route": "/es/docs",
+    },
+    {
+      "children": [
+        {
+          "data": {
+            "auth": "Autenticación",
+            "basic": "Uso Básico",
+            "error-handling": "Manejo De Errores",
+            "infinite-loading": "Carga Infinita",
+            "ssr": "Next.js SSR",
+          },
+          "kind": "Meta",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Autenticación",
+          },
+          "kind": "MdxPage",
+          "name": "auth",
+          "route": "/es/examples/auth",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Uso Básico",
+          },
+          "kind": "MdxPage",
+          "name": "basic",
+          "route": "/es/examples/basic",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Manejo De Errores",
+          },
+          "kind": "MdxPage",
+          "name": "error-handling",
+          "route": "/es/examples/error-handling",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Carga Infinita",
+          },
+          "kind": "MdxPage",
+          "name": "infinite-loading",
+          "route": "/es/examples/infinite-loading",
+        },
+      ],
+      "kind": "Folder",
+      "name": "examples",
+      "route": "/es/examples",
+    },
+    {
+      "frontMatter": {
+        "title": "Biblioteca React Hooks para la obtención de datos",
+      },
+      "kind": "MdxPage",
+      "name": "index",
+      "route": "/es",
+    },
+  ],
+  "ruPageMap": [
+    {
+      "data": {
+        "blog": {
+          "theme": {
+            "breadcrumb": false,
+            "sidebar": false,
+            "timestamp": true,
+            "toc": true,
+            "typesetting": "article",
+          },
+          "title": "Блог",
+          "type": "page",
+        },
+        "docs": {
+          "title": "Документация",
+          "type": "page",
+        },
+        "examples": {
+          "title": "Примеры",
+          "type": "page",
+        },
+        "index": {
+          "display": "hidden",
+          "title": "Введение",
+          "type": "page",
+        },
+      },
+      "kind": "Meta",
+    },
+    {
+      "children": [
+        {
+          "data": {
+            "swr-v1": {
+              "theme": {
+                "breadcrumb": true,
+              },
+              "title": "Представляем SWR 1.0",
+            },
+          },
+          "kind": "Meta",
+        },
+        {
+          "frontMatter": {
+            "description": "Почти 2 года назад мы сделали SWR — крошечную React библиотеку с открытым исходным кодом для выборки данных, которую люди полюбили. Сегодня мы приближаемся к еще одной вехе: версии 1.0 SWR!",
+            "image": "https://assets.vercel.com/image/upload/v1630059453/swr/v1.png",
+          },
+          "kind": "MdxPage",
+          "name": "swr-v1",
+          "route": "/ru/blog/swr-v1",
+        },
+      ],
+      "kind": "Folder",
+      "name": "blog",
+      "route": "/ru/blog",
+    },
+    {
+      "kind": "MdxPage",
+      "name": "blog",
+      "route": "/ru/blog",
+    },
+    {
+      "children": [
+        {
+          "data": {
+            "advanced": "Продвинутые",
+            "arguments": "Аргументы",
+            "change-log": "Журнал изменений",
+            "conditional-fetching": "Условная выборка данных",
+            "data-fetching": "Выборка данных",
+            "error-handling": "Обработка ошибок",
+            "getting-started": "Начало работы",
+            "global-configuration": "Глобальная конфигурация",
+            "middleware": "Промежуточное ПО (Middleware)",
+            "mutation": "Мутация",
+            "options": "Опции",
+            "pagination": "Пагинация",
+            "prefetching": "Пред-выборка",
+            "revalidation": "Авто-ревалидация",
+            "suspense": "Задержка (Suspense)",
+            "typescript": "Typescript",
+            "with-nextjs": "Next.js SSG и SSR",
+            "wrap-toc-items": "Обернуть таблицу содержимого элементов",
+          },
+          "kind": "Meta",
+        },
+        {
+          "children": [
+            {
+              "data": {
+                "cache": "Кеш",
+                "file-name.with.DOTS": "Имя файла может содержать точки",
+                "performance": "Производительность",
+                "react-native": "React Native",
+              },
+              "kind": "Meta",
+            },
+            {
+              "kind": "MdxPage",
+              "name": "cache",
+              "route": "/ru/docs/advanced/cache",
+            },
+            {
+              "kind": "MdxPage",
+              "name": "file-name.with.DOTS",
+              "route": "/ru/docs/advanced/file-name.with.DOTS",
+            },
+            {
+              "kind": "MdxPage",
+              "name": "performance",
+              "route": "/ru/docs/advanced/performance",
+            },
+            {
+              "kind": "MdxPage",
+              "name": "react-native",
+              "route": "/ru/docs/advanced/react-native",
+            },
+          ],
+          "kind": "Folder",
+          "name": "advanced",
+          "route": "/ru/docs/advanced",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "arguments",
+          "route": "/ru/docs/arguments",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "change-log",
+          "route": "/ru/docs/change-log",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "conditional-fetching",
+          "route": "/ru/docs/conditional-fetching",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "data-fetching",
+          "route": "/ru/docs/data-fetching",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "error-handling",
+          "route": "/ru/docs/error-handling",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "getting-started",
+          "route": "/ru/docs/getting-started",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "global-configuration",
+          "route": "/ru/docs/global-configuration",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "middleware",
+          "route": "/ru/docs/middleware",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "mutation",
+          "route": "/ru/docs/mutation",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "options",
+          "route": "/ru/docs/options",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "pagination",
+          "route": "/ru/docs/pagination",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "prefetching",
+          "route": "/ru/docs/prefetching",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "revalidation",
+          "route": "/ru/docs/revalidation",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "suspense",
+          "route": "/ru/docs/suspense",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "understanding",
+          "route": "/ru/docs/understanding",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "with-nextjs",
+          "route": "/ru/docs/with-nextjs",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "wrap-toc-items",
+          "route": "/ru/docs/wrap-toc-items",
+        },
+      ],
+      "kind": "Folder",
+      "name": "docs",
+      "route": "/ru/docs",
+    },
+    {
+      "children": [
+        {
+          "data": {
+            "auth": "Аутентификация",
+            "basic": "Основное использование",
+            "error-handling": "Обработка ошибок",
+            "infinite-loading": "Бесконечная загрузка",
+            "ssr": "Next.js SSR",
+          },
+          "kind": "Meta",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Аутентификация",
+          },
+          "kind": "MdxPage",
+          "name": "auth",
+          "route": "/ru/examples/auth",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Основное использование",
+          },
+          "kind": "MdxPage",
+          "name": "basic",
+          "route": "/ru/examples/basic",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Обработка ошибок",
+          },
+          "kind": "MdxPage",
+          "name": "error-handling",
+          "route": "/ru/examples/error-handling",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Бесконечная загрузка",
+          },
+          "kind": "MdxPage",
+          "name": "infinite-loading",
+          "route": "/ru/examples/infinite-loading",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Next.js SSR",
+          },
+          "kind": "MdxPage",
+          "name": "ssr",
+          "route": "/ru/examples/ssr",
+        },
+      ],
+      "kind": "Folder",
+      "name": "examples",
+      "route": "/ru/examples",
+    },
+    {
+      "frontMatter": {
+        "title": "React хуки для получения данных",
+      },
+      "kind": "MdxPage",
+      "name": "index",
+      "route": "/ru",
+    },
+  ],
+}
+`;

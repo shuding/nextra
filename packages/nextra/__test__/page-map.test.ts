@@ -222,4 +222,27 @@ describe('Page Process', () => {
       `)
     })
   })
+
+  it('should match i18n site page maps', async () => {
+    const chunksPath = path.join(
+      CWD,
+      '..',
+      '..',
+      'examples',
+      'swr-site',
+      '.next',
+      'static',
+      'chunks'
+    )
+    const { pageMap: enPageMap } = await import(
+      chunksPath + '/nextra-page-map-en.mjs'
+    )
+    const { pageMap: esPageMap } = await import(
+      chunksPath + '/nextra-page-map-es.mjs'
+    )
+    const { pageMap: ruPageMap } = await import(
+      chunksPath + '/nextra-page-map-ru.mjs'
+    )
+    expect({ enPageMap, esPageMap, ruPageMap }).toMatchSnapshot()
+  })
 })

@@ -7,7 +7,7 @@ import type {
 } from './types'
 import { normalizeMeta } from './utils'
 
-function getContext(name: string): {
+function getContext(functionName: string): {
   pageMap: PageMapItem[]
   route: string
 } {
@@ -16,7 +16,7 @@ function getContext(name: string): {
   ]
   if (!__nextra_internal__) {
     throw new Error(
-      `Nextra context not found. Please make sure you are using "${name}" of "nextra/context" on a Nextra page.`
+      `Nextra context not found. Make sure you are using "${functionName}" of "nextra/context" on an md/mdx page.`
     )
   }
   return {
