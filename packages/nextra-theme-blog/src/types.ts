@@ -6,11 +6,6 @@ import type { ReactNode } from 'react'
 export interface NextraBlogTheme {
   comments?: ReactNode
   components?: Components
-  cusdis?: {
-    appId: string
-    host?: string
-    lang: string
-  }
   darkMode?: boolean
   dateFormatter?: (date: Date) => string
   footer?: ReactNode
