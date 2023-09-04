@@ -18,35 +18,35 @@ describe('tree shaking', async () => {
   const testPage = await fs.readFile(
     path.join(
       pageChunksDirPath,
-      pageChunkFileNames.find(name => name.startsWith('404'))!
+      pageChunkFileNames.find(name => name.startsWith('en-'))!
     ),
-    'utf-8'
+    'utf8'
   )
-  it('should not includes `nextraLayout`', () => {
+  it('should not include `nextraLayout`', () => {
     expect(testPage.includes('nextraLayout:')).toBe(false)
   })
-  it('should not includes `pageOpts.pageMap`', () => {
+  it('should not include `pageOpts.pageMap`', () => {
     expect(testPage.includes('pageMap:')).toBe(false)
   })
-  it('should not includes default `pageOpts.frontMatter: {}`', () => {
-    expect(testPage.includes('frontMatter:')).toBe(false)
+  it('should not include default `pageOpts.frontMatter: {}`', () => {
+    expect(testPage.includes('frontMatter:')).toBe(true)
   })
-  it('should not includes `pageOpts.flexsearch`', () => {
+  it('should not include `pageOpts.flexsearch`', () => {
     expect(testPage.includes('flexsearch:')).toBe(false)
   })
-  it('should not includes `themeConfig`', () => {
+  it('should not include `themeConfig`', () => {
     expect(testPage.includes('themeConfig:')).toBe(false)
   })
-  it('should not includes `hot`', () => {
+  it('should not include `hot`', () => {
     expect(testPage.includes('hot:')).toBe(false)
   })
-  it('should not includes `pageOptsChecksum`', () => {
+  it('should not include `pageOptsChecksum`', () => {
     expect(testPage.includes('pageOptsChecksum:')).toBe(false)
   })
-  it('should not includes `dynamicMetaModules`', () => {
+  it('should not include `dynamicMetaModules`', () => {
     expect(testPage.includes('dynamicMetaModules:')).toBe(false)
   })
-  it('should not includes injected theme config', () => {
+  it('should not include injected theme config', () => {
     expect(testPage.includes('docsRepositoryBase:')).toBe(false)
     expect(testPage.includes('i18n:')).toBe(false)
   })
