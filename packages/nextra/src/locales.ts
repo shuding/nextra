@@ -32,7 +32,7 @@ export function locales(request: NextRequest) {
 
   if (/\/_meta(\.[a-z]{2}-[A-Z]{2})?$/.test(nextUrl.pathname)) {
     const url = nextUrl.clone()
-    url.pathname = `/404`
+    url.pathname = '/404'
     return NextResponse.rewrite(url)
   }
 

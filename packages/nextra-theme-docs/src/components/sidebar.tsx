@@ -323,7 +323,6 @@ function Menu({
 
 interface SideBarProps {
   docsDirectories: PageItem[]
-  flatDirectories: Item[]
   fullDirectories: Item[]
   asPopover?: boolean
   headings: Heading[]
@@ -332,7 +331,6 @@ interface SideBarProps {
 
 export function Sidebar({
   docsDirectories,
-  flatDirectories,
   fullDirectories,
   asPopover = false,
   headings,
