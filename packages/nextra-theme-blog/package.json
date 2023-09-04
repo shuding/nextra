@@ -49,7 +49,7 @@
     "types:check": "tsc --noEmit"
   },
   "peerDependencies": {
-    "next": ">=9.5.3",
+    "next": ">=13",
     "nextra": "workspace:*",
     "react": ">=16.13.1",
     "react-cusdis": "^2.1.3",
