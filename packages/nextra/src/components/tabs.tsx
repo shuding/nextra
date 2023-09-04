@@ -111,10 +111,7 @@ function _Tabs({
   )
 }
 
-export function Tab({
-  children,
-  ...props
-}: ComponentProps<'div'>): ReactElement {
+function Tab({ children, ...props }: ComponentProps<'div'>): ReactElement {
   return (
     <HeadlessTab.Panel {...props} className="nx-rounded nx-pt-6">
       {children}

@@ -25,7 +25,7 @@ const arrowEl = (
   </span>
 )
 
-export function Card({
+function Card({
   children,
   title,
   icon,

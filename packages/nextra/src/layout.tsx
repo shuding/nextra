@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react'
-import { SSGContext } from './ssg'
+import { SSGContext } from './data'
 import { useInternals } from './use-internals'
 
 export default function Nextra({

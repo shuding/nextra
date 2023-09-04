@@ -1,4 +1,3 @@
-import { createRequire } from 'node:module'
 import path from 'node:path'
 import type { ProcessorOptions } from '@mdx-js/mdx'
 import { createProcessor } from '@mdx-js/mdx'
@@ -29,7 +28,6 @@ import {
   remarkLinkRewrite,
   remarkMdxDisableExplicitJsx,
   remarkRemoveImports,
-  remarkReplaceImports,
   remarkStaticImage,
   remarkStructurize
 } from './mdx-plugins'
@@ -45,8 +43,6 @@ import { truthy } from './utils'
 globalThis.__nextra_temp_do_not_use = () => {
   import('./__temp__')
 }
-
-const require = createRequire(import.meta.url)
 
 const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS: RehypePrettyCodeOptions = {
   // @ts-expect-error -- TODO: fix type error
@@ -153,6 +149,12 @@ export async function compileMdx(
   const isFileOutsideCWD =
     !isPageImport && path.relative(CWD, filePath).startsWith('..')
 
+  if (isFileOutsideCWD) {
+    throw new Error(
+      `Unexpected import of "${filePath}" that is outside of working directory, use symlinks instead`
+    )
+  }
+
   const isRemoteContent = outputFormat === 'function-body'
 
   const compiler =
@@ -193,9 +195,7 @@ export async function compileMdx(
       jsx,
       format,
       outputFormat,
-      providerImportSource: isFileOutsideCWD
-        ? require.resolve('nextra').replace(/index\.js$/, 'mdx.js') // fixes Package subpath './mdx' is not defined by "exports"
-        : 'nextra/mdx',
+      providerImportSource: 'nextra/mdx',
       remarkPlugins: [
         ...(remarkPlugins || []),
         remarkMermaid, // should be before remarkRemoveImports because contains `import { Mermaid } from ...`
@@ -222,7 +222,6 @@ export async function compileMdx(
         staticImage && remarkStaticImage,
         readingTime && remarkReadingTime,
         latex && remarkMath,
-        isFileOutsideCWD && remarkReplaceImports,
         // Remove the markdown file extension from links
         [
           clonedRemarkLinkRewrite,

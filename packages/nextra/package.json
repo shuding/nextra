@@ -5,7 +5,7 @@
   "repository": "https://github.com/shuding/nextra",
   "license": "MIT",
   "engines": {
-    "node": ">=16"
+    "node": ">=18"
   },
   "main": "./dist/index.js",
   "exports": {
@@ -13,12 +13,8 @@
     ".": "./dist/index.js",
     "./catch-all": "./dist/catch-all.js",
     "./data": {
-      "import": "./dist/ssg.js",
-      "types": "./dist/ssg.d.mts"
-    },
-    "./ssg": {
-      "import": "./dist/ssg.js",
-      "types": "./dist/ssg.d.mts"
+      "import": "./dist/data.js",
+      "types": "./dist/data.d.mts"
     },
     "./loader": "./loader.js",
     "./setup-page": {
@@ -72,10 +68,7 @@
         "./dist/context.d.mts"
       ],
       "data": [
-        "./dist/ssg.d.mts"
-      ],
-      "ssg": [
-        "./dist/ssg.d.mts"
+        "./dist/data.d.mts"
       ],
       "icons": [
         "./dist/icons/index.d.mts"
@@ -128,7 +121,7 @@
     "@mdx-js/react": "^2.3.0",
     "@napi-rs/simple-git": "^0.1.9",
     "@theguild/remark-mermaid": "^0.0.4",
-    "@theguild/remark-npm2yarn": "^0.1.1",
+    "@theguild/remark-npm2yarn": "0.2.0-alpha-20230904225308-5ba1c7b",
     "clsx": "^2.0.0",
     "github-slugger": "^2.0.0",
     "graceful-fs": "^4.2.11",
