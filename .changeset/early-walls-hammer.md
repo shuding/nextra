@@ -7,3 +7,7 @@
 - ✅ add `nextra/fetch-filepaths-from-github`
 
 - ❌ remove Nextra middleware `nextra/locales`
+
+- ❌ remove `parseFileName` from `nextra/utils`
+
+- ❌ remove `nextra/filter-route-locale`

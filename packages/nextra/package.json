@@ -49,6 +49,10 @@
       "import": "./dist/icons/index.js",
       "types": "./dist/icons/index.d.mts"
     },
+    "./fetch-filepaths-from-github": {
+      "import": "./dist/fetch-filepaths-from-github.mjs",
+      "types": "./dist/fetch-filepaths-from-github.d.mts"
+    },
     "./*": {
       "import": "./dist/*.mjs",
       "types": "./dist/*.d.mts"
@@ -86,9 +90,6 @@
       ],
       "mdx": [
         "./dist/mdx.d.mts"
-      ],
-      "filter-route-locale": [
-        "./dist/filter-route-locale.d.mts"
       ],
       "normalize-pages": [
         "./dist/normalize-pages.d.mts"
