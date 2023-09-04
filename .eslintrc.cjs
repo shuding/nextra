@@ -210,8 +210,8 @@ module.exports = {
     {
       files: [
         'prettier.config.js',
-        'postcss.config.js',
-        'tailwind.config.js',
+        'postcss.config.{js,cjs}',
+        'tailwind.config.{js,cjs}',
         'next.config.js',
         '.eslintrc.cjs'
       ],

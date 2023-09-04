@@ -2,25 +2,9 @@ import path from 'node:path'
 import { CWD } from '../src/constants'
 import { getDynamicMeta } from '../src/page-map'
 import { collectFiles } from '../src/plugin'
-import type { FileMap, PageMapItem } from '../src/types'
-
-const PAGES_DIR = path.join(CWD, '..', '..', 'examples', 'swr-site', 'pages')
-const filePath = (name: string) => path.join(PAGES_DIR, name)
-
-const defaultLocale = 'en'
+import type { PageMapItem } from '../src/types'
 
 describe('Page Process', () => {
-  let pageMap: PageMapItem[]
-  let fileMap: FileMap
-  beforeAll(async () => {
-    const { items, fileMap: data } = await collectFiles({
-      dir: PAGES_DIR,
-      locales: ['en', 'es', 'ru']
-    })
-    pageMap = items
-    fileMap = data
-  })
-
   it("should not add `_meta.json` file if folder doesn't contain markdown files", async () => {
     const { items } = await collectFiles({
       dir: path.join(
