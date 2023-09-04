@@ -1,0 +1,26 @@
+{
+  "user": "B2o5T",
+  "repo": "graphql-eslint",
+  "branch": "master",
+  "docsPath": "website/src/pages/docs/",
+  "filePaths": [
+    "configs.mdx",
+    "custom-rules.mdx",
+    "getting-started.mdx",
+    "getting-started/parser-options.mdx",
+    "getting-started/parser.mdx",
+    "index.mdx"
+  ],
+  "nestedMeta": {
+    "index": "Introduction",
+    "getting-started": {
+      "type": "folder",
+      "items": {
+        "parser-options": "Parser Options",
+        "parser": "Parser"
+      }
+    },
+    "configs": "Configs",
+    "custom-rules": "Custom Rules"
+  }
+}
