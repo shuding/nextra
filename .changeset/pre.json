@@ -1,0 +1,10 @@
+{
+  "mode": "pre",
+  "tag": "alpha",
+  "initialVersions": {
+    "nextra": "2.12.3",
+    "nextra-theme-blog": "2.12.3",
+    "nextra-theme-docs": "2.12.3"
+  },
+  "changesets": []
+}
