@@ -6,7 +6,7 @@ import {
   MARKDOWN_EXTENSION_REGEX,
   MARKDOWN_EXTENSIONS
 } from './constants'
-import { pageMapCache } from './page-map'
+import { logger } from './utils'
 import { NextraPlugin, NextraSearchPlugin } from './webpack-plugins'
 
 const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
@@ -20,13 +20,17 @@ const nextra = (themeOrNextraConfig, themeConfig) =>
         : themeOrNextraConfig)
     }
 
-    if (nextConfig.i18n?.locales) {
-      console.log(
-        '[nextra] You have Next.js i18n enabled, read here https://nextjs.org/docs/advanced-features/i18n-routing for the docs.'
+    const hasI18n = !!nextConfig.i18n?.locales
+
+    if (hasI18n) {
+      logger.info(
+        'You have Next.js i18n enabled, read here https://nextjs.org/docs/advanced-features/i18n-routing for the docs.'
+      )
+      logger.warn(
+        'When i18n enabled, Nextra set nextConfig.i18n = undefined, use `useRouter` from `nextra/hooks` if you need `locale` or `defaultLocale` values.'
       )
     }
     const locales = nextConfig.i18n?.locales || DEFAULT_LOCALES
-    const nextraPlugin = new NextraPlugin({ ...nextraConfig, locales })
 
     const rewrites = async () => {
       const rules = [
@@ -53,9 +57,7 @@ const nextra = (themeOrNextraConfig, themeConfig) =>
     const nextraLoaderOptions = {
       ...nextraConfig,
       locales,
-      defaultLocale: nextConfig.i18n?.defaultLocale || DEFAULT_LOCALE,
-      pageMapCache,
-      newNextLinkBehavior: nextConfig.experimental?.newNextLinkBehavior
+      defaultLocale: nextConfig.i18n?.defaultLocale || DEFAULT_LOCALE
     }
 
     // Check if there's a theme provided
@@ -65,11 +67,14 @@ const nextra = (themeOrNextraConfig, themeConfig) =>
 
     return {
       ...nextConfig,
-      env: {
-        NEXTRA_DEFAULT_LOCALE: 'en',
-        ...nextConfig.env
-      },
       ...(nextConfig.output !== 'export' && { rewrites }),
+      ...(hasI18n && {
+        env: {
+          NEXTRA_DEFAULT_LOCALE: nextraLoaderOptions.defaultLocale,
+          ...nextConfig.env
+        },
+        i18n: undefined
+      }),
       pageExtensions: [
         ...(nextConfig.pageExtensions || DEFAULT_EXTENSIONS),
         ...MARKDOWN_EXTENSIONS
@@ -77,11 +82,37 @@ const nextra = (themeOrNextraConfig, themeConfig) =>
       webpack(config, options) {
         if (options.nextRuntime !== 'edge' && options.isServer) {
           config.plugins ||= []
-          config.plugins.push(nextraPlugin)
+          config.plugins.push(new NextraPlugin({ locales }))
 
           if (nextraConfig.flexsearch) {
             config.plugins.push(new NextraSearchPlugin())
           }
+        }
+
+        /* Adds client-side webpack optimization rules for splitting chunks during build-time */
+        if (!options.isServer && config.optimization.splitChunks) {
+          config.optimization.splitChunks.cacheGroups = {
+            ...config.optimization.splitChunks.cacheGroups,
+            ...Object.fromEntries(
+              nextraLoaderOptions.locales.map(locale => [
+                `nextra-page-map-${locale}`,
+                {
+                  test: new RegExp(`nextra-page-map-${locale}`),
+                  name: `nextra-page-map-${locale}`,
+                  enforce: true
+                }
+              ])
+            )
+          }
+        }
+
+        const defaultESMAppPath = require.resolve('next/dist/esm/pages/_app.js')
+        const defaultCJSAppPath = require.resolve('next/dist/pages/_app.js')
+
+        config.resolve.alias = {
+          ...config.resolve.alias,
+          // Resolves ESM _app file instead cjs, so we could import theme.config via `import` statement
+          [defaultCJSAppPath]: defaultESMAppPath
         }
 
         config.module.rules.push(
@@ -117,14 +148,21 @@ const nextra = (themeOrNextraConfig, themeConfig) =>
           },
           {
             // Match dynamic meta files inside pages.
-            test: /_meta(\.[a-z]{2}-[A-Z]{2})?\.js$/,
+            test: /_meta\.js$/,
+            issuer: request => !request,
+            use: [options.defaultLoaders.babel, { loader: 'nextra/loader' }]
+          },
+          {
+            test: /pages\/_app\./,
             issuer: request => !request,
             use: [
               options.defaultLoaders.babel,
               {
                 loader: 'nextra/loader',
                 options: {
-                  isMetaImport: true
+                  theme: nextraLoaderOptions.theme,
+                  themeConfig: nextraLoaderOptions.themeConfig,
+                  flexsearch: nextraLoaderOptions.flexsearch
                 }
               }
             ]
