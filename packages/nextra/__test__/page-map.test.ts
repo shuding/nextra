@@ -1,6 +1,6 @@
 import path from 'node:path'
 import { CWD } from '../src/constants'
-import { getDynamicMeta, resolvePageMap } from '../src/page-map'
+import { getDynamicMeta } from '../src/page-map'
 import { collectFiles } from '../src/plugin'
 import type { FileMap, PageMapItem } from '../src/types'
 
@@ -19,42 +19,6 @@ describe('Page Process', () => {
     })
     pageMap = items
     fileMap = data
-  })
-
-  it.skip('pageMap en-US', () => {
-    const indexData = resolvePageMap({
-      filePath: filePath('en/docs/data-fetching.mdx'),
-      items: pageMap,
-      fileMap,
-      defaultLocale
-    })
-    expect([indexData.pageMap, indexData.route]).toMatchSnapshot()
-
-    const gettingStartData = resolvePageMap({
-      filePath: filePath('en/docs/getting-started.mdx'),
-      items: pageMap,
-      fileMap,
-      defaultLocale
-    })
-    expect(gettingStartData.pageMap).toEqual(indexData.pageMap)
-  })
-
-  it.skip('pageMap ru', () => {
-    const indexData = resolvePageMap({
-      filePath: filePath('ru/docs/data-fetching.mdx'),
-      items: pageMap,
-      fileMap,
-      defaultLocale
-    })
-    expect([indexData.pageMap, indexData.route]).toMatchSnapshot()
-
-    const gettingStartData = resolvePageMap({
-      filePath: filePath('ru/docs/getting-started.mdx'),
-      items: pageMap,
-      fileMap,
-      defaultLocale
-    })
-    expect(gettingStartData.pageMap).toEqual(indexData.pageMap)
   })
 
   it("should not add `_meta.json` file if folder doesn't contain markdown files", async () => {
