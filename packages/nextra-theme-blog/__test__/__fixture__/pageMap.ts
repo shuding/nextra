@@ -2,7 +2,6 @@ import type { BlogPageOpts } from '../../src'
 
 export const indexOpts: BlogPageOpts = {
   filePath: 'index.mdx',
-  route: '/',
   frontMatter: {
     type: 'page',
     title: 'About',
@@ -81,7 +80,6 @@ export const indexOpts: BlogPageOpts = {
 
 export const postsOpts: BlogPageOpts = {
   filePath: 'index.md',
-  route: '/posts',
   frontMatter: {
     type: 'posts',
     title: 'Random Thoughts',
@@ -160,7 +158,6 @@ export const postsOpts: BlogPageOpts = {
 
 export const articleOpts: BlogPageOpts = {
   filePath: 'aaron-swartz-a-programmable-web.mdx',
-  route: '/posts/aaron-swartz-a-programmable-web',
   frontMatter: {
     title: 'Notes on A Programmable Web by Aaron Swartz',
     date: '2016/5/21',

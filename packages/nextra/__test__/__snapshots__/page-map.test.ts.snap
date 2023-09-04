@@ -1,34 +1,10 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Page Process > pageMap en-US 1`] = `
-[
-  [
-    {
-      "kind": "MdxPage",
-      "name": "404",
-      "route": "/404",
-    },
-    {
-      "kind": "MdxPage",
-      "name": "500",
-      "route": "/500",
-    },
+exports[`Page Process > should match i18n site page maps 1`] = `
+{
+  "enPageMap": [
     {
       "data": {
-        "404": {
-          "theme": {
-            "timestamp": false,
-            "typesetting": "article",
-          },
-          "type": "page",
-        },
-        "500": {
-          "theme": {
-            "timestamp": false,
-            "typesetting": "article",
-          },
-          "type": "page",
-        },
         "about": {
           "items": {
             "a-page": {
@@ -73,7 +49,6 @@ exports[`Page Process > pageMap en-US 1`] = `
           "title": "Examples",
           "type": "page",
         },
-        "foo": "Foo",
         "index": {
           "display": "hidden",
           "title": "Introduction",
@@ -90,10 +65,8 @@ exports[`Page Process > pageMap en-US 1`] = `
           "title": "Remote",
           "type": "page",
         },
-        "test": "Test",
       },
       "kind": "Meta",
-      "locale": "en-US",
     },
     {
       "children": [
@@ -104,44 +77,37 @@ exports[`Page Process > pageMap en-US 1`] = `
               "theme": {
                 "layout": "raw",
               },
-              "title": "A Page",
               "type": "page",
             },
             "acknowledgement": "🧩 Acknowledgement",
-            "changelog": "Changelog",
             "team": "👥 Team",
           },
           "kind": "Meta",
-          "locale": "en-US",
         },
         {
           "kind": "MdxPage",
-          "locale": "en-US",
           "name": "a-page",
-          "route": "/about/a-page",
+          "route": "/en/about/a-page",
         },
         {
           "kind": "MdxPage",
-          "locale": "en-US",
           "name": "acknowledgement",
-          "route": "/about/acknowledgement",
+          "route": "/en/about/acknowledgement",
         },
         {
           "kind": "MdxPage",
-          "locale": "en-US",
           "name": "changelog",
-          "route": "/about/changelog",
+          "route": "/en/about/changelog",
         },
         {
           "kind": "MdxPage",
-          "locale": "en-US",
           "name": "team",
-          "route": "/about/team",
+          "route": "/en/about/team",
         },
       ],
       "kind": "Folder",
       "name": "about",
-      "route": "/about",
+      "route": "/en/about",
     },
     {
       "children": [
@@ -155,7 +121,6 @@ exports[`Page Process > pageMap en-US 1`] = `
             },
           },
           "kind": "Meta",
-          "locale": "en-US",
         },
         {
           "frontMatter": {
@@ -163,31 +128,28 @@ exports[`Page Process > pageMap en-US 1`] = `
             "image": "https://assets.vercel.com/image/upload/v1630059453/swr/v1.png",
           },
           "kind": "MdxPage",
-          "locale": "en-US",
           "name": "swr-v1",
-          "route": "/blog/swr-v1",
+          "route": "/en/blog/swr-v1",
         },
       ],
       "kind": "Folder",
       "name": "blog",
-      "route": "/blog",
+      "route": "/en/blog",
     },
     {
       "frontMatter": {
         "searchable": false,
       },
       "kind": "MdxPage",
-      "locale": "en-US",
       "name": "blog",
-      "route": "/blog",
+      "route": "/en/blog",
     },
     {
       "children": [
         {
           "kind": "MdxPage",
-          "locale": "en-US",
           "name": "404-500",
-          "route": "/docs/404-500",
+          "route": "/en/docs/404-500",
         },
         {
           "data": {
@@ -200,72 +162,43 @@ exports[`Page Process > pageMap en-US 1`] = `
               "type": "separator",
             },
             "404-500": "404/500 Custom Error Pages",
-            "advanced": {
-              "title": "Advanced",
-            },
-            "arguments": {
-              "title": "Arguments",
-            },
-            "callout": "Callout",
+            "advanced": {},
+            "arguments": {},
             "change-log": {
               "theme": {
                 "sidebar": false,
               },
-              "title": "Change Log",
             },
-            "code-block-without-language": "Code Block without Language",
             "conditional-fetching": "Conditional Data Fetching",
             "custom-header-ids": "Custom Header IDs",
-            "data-fetching": {
-              "title": "Data Fetching",
-            },
+            "data-fetching": {},
             "error-handling": {
               "display": "hidden",
-              "title": "Error Handling",
             },
-            "getting-started": {
-              "title": "Getting Started",
-            },
+            "getting-started": {},
             "github_link": {
               "href": "https://github.com/shuding/nextra",
               "newWindow": true,
               "title": "GitHub 🐙 →",
             },
-            "global-configuration": {
-              "title": "Global Configuration",
-            },
-            "middleware": {
-              "title": "Middleware",
-            },
-            "mutation": {
-              "title": "Mutation",
-            },
-            "options": {
-              "title": "Options",
-            },
-            "pagination": {
-              "title": "Pagination",
-            },
-            "prefetching": {
-              "title": "Prefetching",
-            },
+            "global-configuration": {},
+            "middleware": {},
+            "mutation": {},
+            "options": {},
+            "pagination": {},
+            "prefetching": {},
             "raw-layout": {
               "theme": {
                 "layout": "raw",
               },
-              "title": "Raw Layout",
             },
             "revalidation": "Auto Revalidation",
-            "suspense": {
-              "title": "Suspense",
-            },
+            "suspense": {},
             "typescript": "TypeScript :)",
-            "understanding": "Understanding",
             "with-nextjs": "Next.js SSG and SSR",
             "wrap-toc-items": "Wrap Table of Content Items",
           },
           "kind": "Meta",
-          "locale": "en-US",
         },
         {
           "children": [
@@ -280,275 +213,214 @@ exports[`Page Process > pageMap en-US 1`] = `
                   "title": "Do Not Use",
                   "type": "separator",
                 },
-                "cache": "Cache",
-                "code-highlighting": "Code Highlighting",
-                "dynamic-markdown-import": "Dynamic Markdown Import",
                 "file-name.with.DOTS": "Filenames with Dots",
-                "images": "Images",
-                "markdown-import": "Markdown Import",
                 "more": "More: A Super Super Super Super Long Directory",
-                "performance": "Performance",
-                "react-native": "React Native",
-                "scrollbar-x": "Scrollbar X",
               },
               "kind": "Meta",
-              "locale": "en-US",
             },
             {
               "kind": "MdxPage",
-              "locale": "en-US",
               "name": "cache",
-              "route": "/docs/advanced/cache",
+              "route": "/en/docs/advanced/cache",
             },
             {
               "kind": "MdxPage",
-              "locale": "en-US",
               "name": "code-highlighting",
-              "route": "/docs/advanced/code-highlighting",
+              "route": "/en/docs/advanced/code-highlighting",
             },
             {
               "kind": "MdxPage",
-              "locale": "en-US",
               "name": "dynamic-markdown-import",
-              "route": "/docs/advanced/dynamic-markdown-import",
+              "route": "/en/docs/advanced/dynamic-markdown-import",
             },
             {
               "kind": "MdxPage",
-              "locale": "en-US",
               "name": "file-name.with.DOTS",
-              "route": "/docs/advanced/file-name.with.DOTS",
+              "route": "/en/docs/advanced/file-name.with.DOTS",
             },
             {
               "kind": "MdxPage",
-              "locale": "en-US",
               "name": "images",
-              "route": "/docs/advanced/images",
+              "route": "/en/docs/advanced/images",
             },
             {
               "kind": "MdxPage",
-              "locale": "en-US",
               "name": "markdown-import",
-              "route": "/docs/advanced/markdown-import",
+              "route": "/en/docs/advanced/markdown-import",
             },
             {
               "children": [
                 {
                   "kind": "MdxPage",
-                  "locale": "en-US",
                   "name": "loooooooooooooooooooong-title",
-                  "route": "/docs/advanced/more/loooooooooooooooooooong-title",
+                  "route": "/en/docs/advanced/more/loooooooooooooooooooong-title",
                 },
                 {
                   "children": [
                     {
                       "kind": "MdxPage",
-                      "locale": "en-US",
                       "name": "one",
-                      "route": "/docs/advanced/more/tree/one",
+                      "route": "/en/docs/advanced/more/tree/one",
                     },
                     {
                       "kind": "MdxPage",
-                      "locale": "en-US",
                       "name": "three",
-                      "route": "/docs/advanced/more/tree/three",
+                      "route": "/en/docs/advanced/more/tree/three",
                     },
                     {
                       "kind": "MdxPage",
-                      "locale": "en-US",
                       "name": "two",
-                      "route": "/docs/advanced/more/tree/two",
-                    },
-                    {
-                      "data": {
-                        "one": "One",
-                        "three": "Three",
-                        "two": "Two",
-                      },
-                      "kind": "Meta",
-                      "locale": "en-US",
+                      "route": "/en/docs/advanced/more/tree/two",
                     },
                   ],
                   "kind": "Folder",
                   "name": "tree",
-                  "route": "/docs/advanced/more/tree",
-                },
-                {
-                  "data": {
-                    "loooooooooooooooooooong-title": "Loooooooooooooooooooong Title",
-                  },
-                  "kind": "Meta",
-                  "locale": "en-US",
+                  "route": "/en/docs/advanced/more/tree",
                 },
               ],
               "kind": "Folder",
               "name": "more",
-              "route": "/docs/advanced/more",
+              "route": "/en/docs/advanced/more",
             },
             {
               "kind": "MdxPage",
-              "locale": "en-US",
               "name": "performance",
-              "route": "/docs/advanced/performance",
+              "route": "/en/docs/advanced/performance",
             },
             {
               "kind": "MdxPage",
-              "locale": "en-US",
               "name": "react-native",
-              "route": "/docs/advanced/react-native",
+              "route": "/en/docs/advanced/react-native",
             },
             {
               "kind": "MdxPage",
-              "locale": "en-US",
               "name": "scrollbar-x",
-              "route": "/docs/advanced/scrollbar-x",
+              "route": "/en/docs/advanced/scrollbar-x",
             },
           ],
           "kind": "Folder",
           "name": "advanced",
-          "route": "/docs/advanced",
+          "route": "/en/docs/advanced",
         },
         {
           "kind": "MdxPage",
-          "locale": "en-US",
           "name": "advanced",
-          "route": "/docs/advanced",
+          "route": "/en/docs/advanced",
         },
         {
           "kind": "MdxPage",
-          "locale": "en-US",
           "name": "arguments",
-          "route": "/docs/arguments",
+          "route": "/en/docs/arguments",
         },
         {
           "kind": "MdxPage",
-          "locale": "en-US",
           "name": "callout",
-          "route": "/docs/callout",
+          "route": "/en/docs/callout",
         },
         {
           "kind": "MdxPage",
-          "locale": "en-US",
           "name": "change-log",
-          "route": "/docs/change-log",
+          "route": "/en/docs/change-log",
         },
         {
           "kind": "MdxPage",
-          "locale": "en-US",
           "name": "code-block-without-language",
-          "route": "/docs/code-block-without-language",
+          "route": "/en/docs/code-block-without-language",
         },
         {
           "kind": "MdxPage",
-          "locale": "en-US",
           "name": "conditional-fetching",
-          "route": "/docs/conditional-fetching",
+          "route": "/en/docs/conditional-fetching",
         },
         {
           "kind": "MdxPage",
-          "locale": "en-US",
           "name": "custom-header-ids",
-          "route": "/docs/custom-header-ids",
+          "route": "/en/docs/custom-header-ids",
         },
         {
           "kind": "MdxPage",
-          "locale": "en-US",
           "name": "data-fetching",
-          "route": "/docs/data-fetching",
+          "route": "/en/docs/data-fetching",
         },
         {
           "kind": "MdxPage",
-          "locale": "en-US",
           "name": "error-handling",
-          "route": "/docs/error-handling",
+          "route": "/en/docs/error-handling",
         },
         {
           "kind": "MdxPage",
-          "locale": "en-US",
           "name": "getting-started",
-          "route": "/docs/getting-started",
+          "route": "/en/docs/getting-started",
         },
         {
           "kind": "MdxPage",
-          "locale": "en-US",
           "name": "global-configuration",
-          "route": "/docs/global-configuration",
+          "route": "/en/docs/global-configuration",
         },
         {
           "kind": "MdxPage",
-          "locale": "en-US",
           "name": "middleware",
-          "route": "/docs/middleware",
+          "route": "/en/docs/middleware",
         },
         {
           "kind": "MdxPage",
-          "locale": "en-US",
           "name": "mutation",
-          "route": "/docs/mutation",
+          "route": "/en/docs/mutation",
         },
         {
           "kind": "MdxPage",
-          "locale": "en-US",
           "name": "options",
-          "route": "/docs/options",
+          "route": "/en/docs/options",
         },
         {
           "kind": "MdxPage",
-          "locale": "en-US",
           "name": "pagination",
-          "route": "/docs/pagination",
+          "route": "/en/docs/pagination",
         },
         {
           "kind": "MdxPage",
-          "locale": "en-US",
           "name": "prefetching",
-          "route": "/docs/prefetching",
+          "route": "/en/docs/prefetching",
         },
         {
           "kind": "MdxPage",
-          "locale": "en-US",
           "name": "raw-layout",
-          "route": "/docs/raw-layout",
+          "route": "/en/docs/raw-layout",
         },
         {
           "kind": "MdxPage",
-          "locale": "en-US",
           "name": "revalidation",
-          "route": "/docs/revalidation",
+          "route": "/en/docs/revalidation",
         },
         {
           "kind": "MdxPage",
-          "locale": "en-US",
           "name": "suspense",
-          "route": "/docs/suspense",
+          "route": "/en/docs/suspense",
         },
         {
           "kind": "MdxPage",
-          "locale": "en-US",
           "name": "typescript",
-          "route": "/docs/typescript",
+          "route": "/en/docs/typescript",
         },
         {
           "kind": "MdxPage",
-          "locale": "en-US",
           "name": "understanding",
-          "route": "/docs/understanding",
+          "route": "/en/docs/understanding",
         },
         {
           "kind": "MdxPage",
-          "locale": "en-US",
           "name": "with-nextjs",
-          "route": "/docs/with-nextjs",
+          "route": "/en/docs/with-nextjs",
         },
         {
           "kind": "MdxPage",
-          "locale": "en-US",
           "name": "wrap-toc-items",
-          "route": "/docs/wrap-toc-items",
+          "route": "/en/docs/wrap-toc-items",
         },
       ],
       "kind": "Folder",
       "name": "docs",
-      "route": "/docs",
+      "route": "/en/docs",
     },
     {
       "children": [
@@ -556,22 +428,16 @@ exports[`Page Process > pageMap en-US 1`] = `
           "data": {
             "auth": "Authentication",
             "basic": "Basic Usage",
-            "error-handling": {
-              "title": "Error Handling",
-            },
+            "error-handling": {},
             "full": {
               "theme": {
                 "layout": "raw",
               },
-              "title": "Full",
             },
-            "infinite-loading": {
-              "title": "Infinite Loading",
-            },
+            "infinite-loading": {},
             "ssr": "Next.js SSR",
           },
           "kind": "Meta",
-          "locale": "en-US",
         },
         {
           "frontMatter": {
@@ -579,9 +445,8 @@ exports[`Page Process > pageMap en-US 1`] = `
             "title": "Authentication",
           },
           "kind": "MdxPage",
-          "locale": "en-US",
           "name": "auth",
-          "route": "/examples/auth",
+          "route": "/en/examples/auth",
         },
         {
           "frontMatter": {
@@ -589,9 +454,8 @@ exports[`Page Process > pageMap en-US 1`] = `
             "title": "Basic Usage",
           },
           "kind": "MdxPage",
-          "locale": "en-US",
           "name": "basic",
-          "route": "/examples/basic",
+          "route": "/en/examples/basic",
         },
         {
           "frontMatter": {
@@ -599,15 +463,13 @@ exports[`Page Process > pageMap en-US 1`] = `
             "title": "Error Handling",
           },
           "kind": "MdxPage",
-          "locale": "en-US",
           "name": "error-handling",
-          "route": "/examples/error-handling",
+          "route": "/en/examples/error-handling",
         },
         {
           "kind": "MdxPage",
-          "locale": "en-US",
           "name": "full",
-          "route": "/examples/full",
+          "route": "/en/examples/full",
         },
         {
           "frontMatter": {
@@ -615,9 +477,8 @@ exports[`Page Process > pageMap en-US 1`] = `
             "title": "Infinite Loading",
           },
           "kind": "MdxPage",
-          "locale": "en-US",
           "name": "infinite-loading",
-          "route": "/examples/infinite-loading",
+          "route": "/en/examples/infinite-loading",
         },
         {
           "frontMatter": {
@@ -625,20 +486,18 @@ exports[`Page Process > pageMap en-US 1`] = `
             "title": "Next.js SSR",
           },
           "kind": "MdxPage",
-          "locale": "en-US",
           "name": "ssr",
-          "route": "/examples/ssr",
+          "route": "/en/examples/ssr",
         },
       ],
       "kind": "Folder",
       "name": "examples",
-      "route": "/examples",
+      "route": "/en/examples",
     },
     {
       "kind": "MdxPage",
-      "locale": "en-US",
       "name": "foo",
-      "route": "/foo",
+      "route": "/en/foo",
     },
     {
       "frontMatter": {
@@ -646,9 +505,37 @@ exports[`Page Process > pageMap en-US 1`] = `
         "title": "React Hooks for Data Fetching",
       },
       "kind": "MdxPage",
-      "locale": "en-US",
       "name": "index",
-      "route": "/",
+      "route": "/en",
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "data": {},
+              "kind": "Meta",
+            },
+          ],
+          "kind": "Folder",
+          "name": "graphql-eslint",
+          "route": "/en/remote/graphql-eslint",
+        },
+        {
+          "children": [
+            {
+              "data": {},
+              "kind": "Meta",
+            },
+          ],
+          "kind": "Folder",
+          "name": "graphql-yoga",
+          "route": "/en/remote/graphql-yoga",
+        },
+      ],
+      "kind": "Folder",
+      "name": "remote",
+      "route": "/en/remote",
     },
     {
       "frontMatter": {
@@ -657,18 +544,232 @@ exports[`Page Process > pageMap en-US 1`] = `
         },
       },
       "kind": "MdxPage",
-      "locale": "en-US",
       "name": "test",
-      "route": "/test",
+      "route": "/en/test",
     },
   ],
-  "/docs/data-fetching",
-]
-`;
-
-exports[`Page Process > pageMap ru 1`] = `
-[
-  [
+  "esPageMap": [
+    {
+      "data": {
+        "blog": {
+          "title": "Blog",
+          "type": "page",
+        },
+        "docs": {
+          "title": "Docs",
+          "type": "page",
+        },
+        "examples": {
+          "title": "Ejemplos",
+          "type": "page",
+        },
+        "index": {
+          "display": "hidden",
+          "title": "Introducción",
+          "type": "page",
+        },
+      },
+      "kind": "Meta",
+    },
+    {
+      "children": [
+        {
+          "data": {
+            "advanced": "Avanzado",
+            "arguments": "Argumentos",
+            "change-log": "Registro de cambios",
+            "conditional-fetching": "Obtención De Datos Condicional",
+            "data-fetching": "Obtención De Datos",
+            "error-handling": "Gestión De Errores",
+            "getting-started": "Comienza",
+            "global-configuration": "Configuración Global",
+            "middleware": "Middleware",
+            "mutation": "Mutación",
+            "options": "Opciones",
+            "pagination": "Paginación",
+            "prefetching": "Prefetching",
+            "revalidation": "Revalidación Automática",
+            "suspense": "Suspense",
+            "typescript": "Typescript",
+            "with-nextjs": "Next.js SSG and SSR",
+            "wrap-toc-items": "Ajustar elementos de la tabla de contenido",
+          },
+          "kind": "Meta",
+        },
+        {
+          "children": [
+            {
+              "data": {
+                "cache": "Cache",
+                "file-name.with.DOTS": "Nombres de archivos con puntos",
+                "performance": "Rendimiento",
+                "react-native": "React Native",
+              },
+              "kind": "Meta",
+            },
+            {
+              "kind": "MdxPage",
+              "name": "file-name.with.DOTS",
+              "route": "/es/docs/advanced/file-name.with.DOTS",
+            },
+            {
+              "kind": "MdxPage",
+              "name": "performance",
+              "route": "/es/docs/advanced/performance",
+            },
+          ],
+          "kind": "Folder",
+          "name": "advanced",
+          "route": "/es/docs/advanced",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "arguments",
+          "route": "/es/docs/arguments",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "change-log",
+          "route": "/es/docs/change-log",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "conditional-fetching",
+          "route": "/es/docs/conditional-fetching",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "data-fetching",
+          "route": "/es/docs/data-fetching",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "error-handling",
+          "route": "/es/docs/error-handling",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "getting-started",
+          "route": "/es/docs/getting-started",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "global-configuration",
+          "route": "/es/docs/global-configuration",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "mutation",
+          "route": "/es/docs/mutation",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "options",
+          "route": "/es/docs/options",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "pagination",
+          "route": "/es/docs/pagination",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "prefetching",
+          "route": "/es/docs/prefetching",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "revalidation",
+          "route": "/es/docs/revalidation",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "suspense",
+          "route": "/es/docs/suspense",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "understanding",
+          "route": "/es/docs/understanding",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "with-nextjs",
+          "route": "/es/docs/with-nextjs",
+        },
+        {
+          "kind": "MdxPage",
+          "name": "wrap-toc-items",
+          "route": "/es/docs/wrap-toc-items",
+        },
+      ],
+      "kind": "Folder",
+      "name": "docs",
+      "route": "/es/docs",
+    },
+    {
+      "children": [
+        {
+          "data": {
+            "auth": "Autenticación",
+            "basic": "Uso Básico",
+            "error-handling": "Manejo De Errores",
+            "infinite-loading": "Carga Infinita",
+            "ssr": "Next.js SSR",
+          },
+          "kind": "Meta",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Autenticación",
+          },
+          "kind": "MdxPage",
+          "name": "auth",
+          "route": "/es/examples/auth",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Uso Básico",
+          },
+          "kind": "MdxPage",
+          "name": "basic",
+          "route": "/es/examples/basic",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Manejo De Errores",
+          },
+          "kind": "MdxPage",
+          "name": "error-handling",
+          "route": "/es/examples/error-handling",
+        },
+        {
+          "frontMatter": {
+            "full": true,
+            "title": "Carga Infinita",
+          },
+          "kind": "MdxPage",
+          "name": "infinite-loading",
+          "route": "/es/examples/infinite-loading",
+        },
+      ],
+      "kind": "Folder",
+      "name": "examples",
+      "route": "/es/examples",
+    },
+    {
+      "frontMatter": {
+        "title": "Biblioteca React Hooks para la obtención de datos",
+      },
+      "kind": "MdxPage",
+      "name": "index",
+      "route": "/es",
+    },
+  ],
+  "ruPageMap": [
     {
       "data": {
         "blog": {
@@ -697,55 +798,6 @@ exports[`Page Process > pageMap ru 1`] = `
         },
       },
       "kind": "Meta",
-      "locale": "ru",
-    },
-    {
-      "children": [
-        {
-          "data": {
-            "a-page": {
-              "display": "hidden",
-              "theme": {
-                "layout": "raw",
-              },
-              "title": "A Page",
-              "type": "page",
-            },
-            "acknowledgement": "🧩 Acknowledgement",
-            "changelog": "Changelog",
-            "team": "👥 Team",
-          },
-          "kind": "Meta",
-          "locale": "en-US",
-        },
-        {
-          "kind": "MdxPage",
-          "locale": "en-US",
-          "name": "a-page",
-          "route": "/about/a-page",
-        },
-        {
-          "kind": "MdxPage",
-          "locale": "en-US",
-          "name": "acknowledgement",
-          "route": "/about/acknowledgement",
-        },
-        {
-          "kind": "MdxPage",
-          "locale": "en-US",
-          "name": "changelog",
-          "route": "/about/changelog",
-        },
-        {
-          "kind": "MdxPage",
-          "locale": "en-US",
-          "name": "team",
-          "route": "/about/team",
-        },
-      ],
-      "kind": "Folder",
-      "name": "about",
-      "route": "/about",
     },
     {
       "children": [
@@ -759,7 +811,6 @@ exports[`Page Process > pageMap ru 1`] = `
             },
           },
           "kind": "Meta",
-          "locale": "ru",
         },
         {
           "frontMatter": {
@@ -767,20 +818,18 @@ exports[`Page Process > pageMap ru 1`] = `
             "image": "https://assets.vercel.com/image/upload/v1630059453/swr/v1.png",
           },
           "kind": "MdxPage",
-          "locale": "ru",
           "name": "swr-v1",
-          "route": "/blog/swr-v1",
+          "route": "/ru/blog/swr-v1",
         },
       ],
       "kind": "Folder",
       "name": "blog",
-      "route": "/blog",
+      "route": "/ru/blog",
     },
     {
       "kind": "MdxPage",
-      "locale": "ru",
       "name": "blog",
-      "route": "/blog",
+      "route": "/ru/blog",
     },
     {
       "children": [
@@ -802,12 +851,10 @@ exports[`Page Process > pageMap ru 1`] = `
             "revalidation": "Авто-ревалидация",
             "suspense": "Задержка (Suspense)",
             "typescript": "Typescript",
-            "understanding": "Understanding",
             "with-nextjs": "Next.js SSG и SSR",
             "wrap-toc-items": "Обернуть таблицу содержимого элементов",
           },
           "kind": "Meta",
-          "locale": "ru",
         },
         {
           "children": [
@@ -819,269 +866,121 @@ exports[`Page Process > pageMap ru 1`] = `
                 "react-native": "React Native",
               },
               "kind": "Meta",
-              "locale": "ru",
             },
             {
               "kind": "MdxPage",
-              "locale": "ru",
               "name": "cache",
-              "route": "/docs/advanced/cache",
+              "route": "/ru/docs/advanced/cache",
             },
             {
               "kind": "MdxPage",
-              "locale": "ru",
               "name": "file-name.with.DOTS",
-              "route": "/docs/advanced/file-name.with.DOTS",
-            },
-            {
-              "children": [
-                {
-                  "children": [
-                    {
-                      "kind": "MdxPage",
-                      "locale": "en-US",
-                      "name": "one",
-                      "route": "/docs/advanced/more/tree/one",
-                    },
-                    {
-                      "kind": "MdxPage",
-                      "locale": "en-US",
-                      "name": "three",
-                      "route": "/docs/advanced/more/tree/three",
-                    },
-                    {
-                      "kind": "MdxPage",
-                      "locale": "en-US",
-                      "name": "two",
-                      "route": "/docs/advanced/more/tree/two",
-                    },
-                    {
-                      "data": {
-                        "one": "One",
-                        "three": "Three",
-                        "two": "Two",
-                      },
-                      "kind": "Meta",
-                      "locale": "en-US",
-                    },
-                  ],
-                  "kind": "Folder",
-                  "name": "tree",
-                  "route": "/docs/advanced/more/tree",
-                },
-                {
-                  "kind": "MdxPage",
-                  "locale": "en-US",
-                  "name": "loooooooooooooooooooong-title",
-                  "route": "/docs/advanced/more/loooooooooooooooooooong-title",
-                },
-                {
-                  "data": {
-                    "loooooooooooooooooooong-title": "Loooooooooooooooooooong Title",
-                  },
-                  "kind": "Meta",
-                  "locale": "en-US",
-                },
-              ],
-              "kind": "Folder",
-              "name": "more",
-              "route": "/docs/advanced/more",
+              "route": "/ru/docs/advanced/file-name.with.DOTS",
             },
             {
               "kind": "MdxPage",
-              "locale": "ru",
               "name": "performance",
-              "route": "/docs/advanced/performance",
+              "route": "/ru/docs/advanced/performance",
             },
             {
               "kind": "MdxPage",
-              "locale": "ru",
               "name": "react-native",
-              "route": "/docs/advanced/react-native",
-            },
-            {
-              "kind": "MdxPage",
-              "locale": "en-US",
-              "name": "code-highlighting",
-              "route": "/docs/advanced/code-highlighting",
-            },
-            {
-              "kind": "MdxPage",
-              "locale": "en-US",
-              "name": "dynamic-markdown-import",
-              "route": "/docs/advanced/dynamic-markdown-import",
-            },
-            {
-              "kind": "MdxPage",
-              "locale": "en-US",
-              "name": "images",
-              "route": "/docs/advanced/images",
-            },
-            {
-              "kind": "MdxPage",
-              "locale": "en-US",
-              "name": "markdown-import",
-              "route": "/docs/advanced/markdown-import",
-            },
-            {
-              "kind": "MdxPage",
-              "locale": "en-US",
-              "name": "scrollbar-x",
-              "route": "/docs/advanced/scrollbar-x",
+              "route": "/ru/docs/advanced/react-native",
             },
           ],
           "kind": "Folder",
           "name": "advanced",
-          "route": "/docs/advanced",
+          "route": "/ru/docs/advanced",
         },
         {
           "kind": "MdxPage",
-          "locale": "ru",
           "name": "arguments",
-          "route": "/docs/arguments",
+          "route": "/ru/docs/arguments",
         },
         {
           "kind": "MdxPage",
-          "locale": "ru",
           "name": "change-log",
-          "route": "/docs/change-log",
+          "route": "/ru/docs/change-log",
         },
         {
           "kind": "MdxPage",
-          "locale": "ru",
           "name": "conditional-fetching",
-          "route": "/docs/conditional-fetching",
+          "route": "/ru/docs/conditional-fetching",
         },
         {
           "kind": "MdxPage",
-          "locale": "ru",
           "name": "data-fetching",
-          "route": "/docs/data-fetching",
+          "route": "/ru/docs/data-fetching",
         },
         {
           "kind": "MdxPage",
-          "locale": "ru",
           "name": "error-handling",
-          "route": "/docs/error-handling",
+          "route": "/ru/docs/error-handling",
         },
         {
           "kind": "MdxPage",
-          "locale": "ru",
           "name": "getting-started",
-          "route": "/docs/getting-started",
+          "route": "/ru/docs/getting-started",
         },
         {
           "kind": "MdxPage",
-          "locale": "ru",
           "name": "global-configuration",
-          "route": "/docs/global-configuration",
+          "route": "/ru/docs/global-configuration",
         },
         {
           "kind": "MdxPage",
-          "locale": "ru",
           "name": "middleware",
-          "route": "/docs/middleware",
+          "route": "/ru/docs/middleware",
         },
         {
           "kind": "MdxPage",
-          "locale": "ru",
           "name": "mutation",
-          "route": "/docs/mutation",
+          "route": "/ru/docs/mutation",
         },
         {
           "kind": "MdxPage",
-          "locale": "ru",
           "name": "options",
-          "route": "/docs/options",
+          "route": "/ru/docs/options",
         },
         {
           "kind": "MdxPage",
-          "locale": "ru",
           "name": "pagination",
-          "route": "/docs/pagination",
+          "route": "/ru/docs/pagination",
         },
         {
           "kind": "MdxPage",
-          "locale": "ru",
           "name": "prefetching",
-          "route": "/docs/prefetching",
+          "route": "/ru/docs/prefetching",
         },
         {
           "kind": "MdxPage",
-          "locale": "ru",
           "name": "revalidation",
-          "route": "/docs/revalidation",
+          "route": "/ru/docs/revalidation",
         },
         {
           "kind": "MdxPage",
-          "locale": "ru",
           "name": "suspense",
-          "route": "/docs/suspense",
+          "route": "/ru/docs/suspense",
         },
         {
           "kind": "MdxPage",
-          "locale": "ru",
           "name": "understanding",
-          "route": "/docs/understanding",
+          "route": "/ru/docs/understanding",
         },
         {
           "kind": "MdxPage",
-          "locale": "ru",
           "name": "with-nextjs",
-          "route": "/docs/with-nextjs",
+          "route": "/ru/docs/with-nextjs",
         },
         {
           "kind": "MdxPage",
-          "locale": "ru",
           "name": "wrap-toc-items",
-          "route": "/docs/wrap-toc-items",
-        },
-        {
-          "kind": "MdxPage",
-          "locale": "en-US",
-          "name": "404-500",
-          "route": "/docs/404-500",
-        },
-        {
-          "kind": "MdxPage",
-          "locale": "en-US",
-          "name": "advanced",
-          "route": "/docs/advanced",
-        },
-        {
-          "kind": "MdxPage",
-          "locale": "en-US",
-          "name": "callout",
-          "route": "/docs/callout",
-        },
-        {
-          "kind": "MdxPage",
-          "locale": "en-US",
-          "name": "code-block-without-language",
-          "route": "/docs/code-block-without-language",
-        },
-        {
-          "kind": "MdxPage",
-          "locale": "en-US",
-          "name": "custom-header-ids",
-          "route": "/docs/custom-header-ids",
-        },
-        {
-          "kind": "MdxPage",
-          "locale": "en-US",
-          "name": "raw-layout",
-          "route": "/docs/raw-layout",
-        },
-        {
-          "kind": "MdxPage",
-          "locale": "en-US",
-          "name": "typescript",
-          "route": "/docs/typescript",
+          "route": "/ru/docs/wrap-toc-items",
         },
       ],
       "kind": "Folder",
       "name": "docs",
-      "route": "/docs",
+      "route": "/ru/docs",
     },
     {
       "children": [
@@ -1094,7 +993,6 @@ exports[`Page Process > pageMap ru 1`] = `
             "ssr": "Next.js SSR",
           },
           "kind": "Meta",
-          "locale": "ru",
         },
         {
           "frontMatter": {
@@ -1102,9 +1000,8 @@ exports[`Page Process > pageMap ru 1`] = `
             "title": "Аутентификация",
           },
           "kind": "MdxPage",
-          "locale": "ru",
           "name": "auth",
-          "route": "/examples/auth",
+          "route": "/ru/examples/auth",
         },
         {
           "frontMatter": {
@@ -1112,9 +1009,8 @@ exports[`Page Process > pageMap ru 1`] = `
             "title": "Основное использование",
           },
           "kind": "MdxPage",
-          "locale": "ru",
           "name": "basic",
-          "route": "/examples/basic",
+          "route": "/ru/examples/basic",
         },
         {
           "frontMatter": {
@@ -1122,9 +1018,8 @@ exports[`Page Process > pageMap ru 1`] = `
             "title": "Обработка ошибок",
           },
           "kind": "MdxPage",
-          "locale": "ru",
           "name": "error-handling",
-          "route": "/examples/error-handling",
+          "route": "/ru/examples/error-handling",
         },
         {
           "frontMatter": {
@@ -1132,9 +1027,8 @@ exports[`Page Process > pageMap ru 1`] = `
             "title": "Бесконечная загрузка",
           },
           "kind": "MdxPage",
-          "locale": "ru",
           "name": "infinite-loading",
-          "route": "/examples/infinite-loading",
+          "route": "/ru/examples/infinite-loading",
         },
         {
           "frontMatter": {
@@ -1142,58 +1036,22 @@ exports[`Page Process > pageMap ru 1`] = `
             "title": "Next.js SSR",
           },
           "kind": "MdxPage",
-          "locale": "ru",
           "name": "ssr",
-          "route": "/examples/ssr",
-        },
-        {
-          "kind": "MdxPage",
-          "locale": "en-US",
-          "name": "full",
-          "route": "/examples/full",
+          "route": "/ru/examples/ssr",
         },
       ],
       "kind": "Folder",
       "name": "examples",
-      "route": "/examples",
+      "route": "/ru/examples",
     },
     {
       "frontMatter": {
         "title": "React хуки для получения данных",
       },
       "kind": "MdxPage",
-      "locale": "ru",
       "name": "index",
-      "route": "/",
-    },
-    {
-      "kind": "MdxPage",
-      "name": "404",
-      "route": "/404",
-    },
-    {
-      "kind": "MdxPage",
-      "name": "500",
-      "route": "/500",
-    },
-    {
-      "kind": "MdxPage",
-      "locale": "en-US",
-      "name": "foo",
-      "route": "/foo",
-    },
-    {
-      "frontMatter": {
-        "mdxOptions": {
-          "format": "md",
-        },
-      },
-      "kind": "MdxPage",
-      "locale": "en-US",
-      "name": "test",
-      "route": "/test",
+      "route": "/ru",
     },
   ],
-  "/docs/data-fetching",
-]
+}
 `;

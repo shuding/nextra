@@ -25,6 +25,10 @@
       "import": "./dist/setup-page.js",
       "types": "./dist/setup-page.d.mts"
     },
+    "./context": {
+      "import": "./dist/context.js",
+      "types": "./dist/context.d.mts"
+    },
     "./mdx": {
       "import": "./dist/mdx.js",
       "types": "./dist/mdx.d.mts"
@@ -49,6 +53,10 @@
       "import": "./dist/icons/index.js",
       "types": "./dist/icons/index.d.mts"
     },
+    "./fetch-filepaths-from-github": {
+      "import": "./dist/fetch-filepaths-from-github.mjs",
+      "types": "./dist/fetch-filepaths-from-github.d.mts"
+    },
     "./*": {
       "import": "./dist/*.mjs",
       "types": "./dist/*.d.mts"
@@ -69,9 +77,6 @@
       "ssg": [
         "./dist/ssg.d.mts"
       ],
-      "locales": [
-        "./dist/locales.d.mts"
-      ],
       "icons": [
         "./dist/icons/index.d.mts"
       ],
@@ -89,9 +94,6 @@
       ],
       "mdx": [
         "./dist/mdx.d.mts"
-      ],
-      "filter-route-locale": [
-        "./dist/filter-route-locale.d.mts"
       ],
       "normalize-pages": [
         "./dist/normalize-pages.d.mts"

@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import type { MdxFile, PageMapItem } from 'nextra'
 import type { LayoutProps } from '../types'
 import { sortDate } from './date'
@@ -18,10 +19,11 @@ const isPost = (page: PageMapItem): page is MdxFile => {
   return !draft && (!type || type === 'post')
 }
 
-export const collectPostsAndNavs = ({ opts }: LayoutProps) => {
+export function collectPostsAndNavs({ opts }: LayoutProps) {
   const posts: MdxFile[] = []
   const navPages: (MdxFile & { active: boolean })[] = []
-  const { route } = opts
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { route } = useRouter()
   traverse(opts.pageMap, page => {
     if (isNav(page)) {
       navPages.push({ ...page, active: page.route === route })

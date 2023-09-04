@@ -52,19 +52,16 @@ describe('collectCatchAllRoutes', () => {
           },
           {
             "kind": "MdxPage",
-            "locale": "en-US",
             "name": "configs",
             "route": "/remote/nested/configs",
           },
           {
             "kind": "MdxPage",
-            "locale": "en-US",
             "name": "custom-rules",
             "route": "/remote/nested/custom-rules",
           },
           {
             "kind": "MdxPage",
-            "locale": "en-US",
             "name": "getting-started",
             "route": "/remote/nested/getting-started",
           },
@@ -77,17 +74,14 @@ describe('collectCatchAllRoutes', () => {
                   "third-level": "Third Level",
                 },
                 "kind": "Meta",
-                "locale": "en-US",
               },
               {
                 "kind": "MdxPage",
-                "locale": "en-US",
                 "name": "parser-options",
                 "route": "/remote/nested/getting-started/parser-options",
               },
               {
                 "kind": "MdxPage",
-                "locale": "en-US",
                 "name": "parser",
                 "route": "/remote/nested/getting-started/parser",
               },
@@ -98,11 +92,9 @@ describe('collectCatchAllRoutes', () => {
                       "foo": "Foo",
                     },
                     "kind": "Meta",
-                    "locale": "en-US",
                   },
                   {
                     "kind": "MdxPage",
-                    "locale": "en-US",
                     "name": "foo",
                     "route": "/remote/nested/getting-started/third-level/foo",
                   },
@@ -118,7 +110,6 @@ describe('collectCatchAllRoutes', () => {
           },
           {
             "kind": "MdxPage",
-            "locale": "en-US",
             "name": "index",
             "route": "/remote/nested",
           },

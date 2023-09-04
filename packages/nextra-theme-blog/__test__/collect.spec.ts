@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest'
+import { useRouter } from 'next/router'
+import type { Mock } from 'vitest'
 import { collectPostsAndNavs } from '../src/utils/collect'
 import {
   articleOpts,
@@ -7,8 +8,13 @@ import {
   postsOpts
 } from './__fixture__/pageMap'
 
+vi.mock('next/router', () => ({
+  useRouter: vi.fn()
+}))
+
 describe('collect', () => {
   it('page', () => {
+    ;(useRouter as Mock).mockReturnValue({ route: '/' })
     expect(collectPostsAndNavs({ opts: indexOpts, config }))
       .toMatchInlineSnapshot(`
         {
@@ -57,6 +63,7 @@ describe('collect', () => {
       `)
   })
   it('posts', () => {
+    ;(useRouter as Mock).mockReturnValue({ route: '/posts' })
     expect(collectPostsAndNavs({ opts: postsOpts, config }))
       .toMatchInlineSnapshot(`
         {
@@ -105,6 +112,9 @@ describe('collect', () => {
       `)
   })
   it('article', () => {
+    ;(useRouter as Mock).mockReturnValue({
+      route: '/posts/aaron-swartz-a-programmable-web'
+    })
     expect(collectPostsAndNavs({ opts: articleOpts, config }))
       .toMatchInlineSnapshot(`
         {

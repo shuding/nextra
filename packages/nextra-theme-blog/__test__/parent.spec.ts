@@ -1,9 +1,17 @@
-import { describe, expect, it } from 'vitest'
+import { useRouter } from 'next/router'
+import type { Mock } from 'vitest'
 import { getParent } from '../src/utils/parent'
 import { articleOpts, config } from './__fixture__/pageMap'
 
+vi.mock('next/router', () => ({
+  useRouter: vi.fn()
+}))
+
 describe('parent', () => {
   it('article', () => {
+    ;(useRouter as Mock).mockReturnValue({
+      route: '/posts/aaron-swartz-a-programmable-web'
+    })
     expect(getParent({ opts: articleOpts, config })).toMatchInlineSnapshot(`
       {
         "back": "/posts",

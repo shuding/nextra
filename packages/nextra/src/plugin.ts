@@ -21,8 +21,8 @@ import type {
 } from './types'
 import {
   isSerializable,
+  logger,
   normalizePageRoute,
-  parseFileName,
   sortPages,
   truthy
 } from './utils'
@@ -36,7 +36,7 @@ export const collectMdx = async (
   filePath: string,
   route = ''
 ): Promise<MdxFile> => {
-  const { name, locale } = parseFileName(filePath)
+  const { name } = path.parse(filePath)
 
   const content = await readFile(filePath, 'utf8')
   const { data } = grayMatter(content)
@@ -44,7 +44,6 @@ export const collectMdx = async (
     kind: 'MdxPage',
     name,
     route,
-    ...(locale && { locale }),
     ...(Object.keys(data).length && { frontMatter: data })
   }
 }
@@ -80,10 +79,7 @@ export async function collectFiles({
       }
     }
 
-    const { name, locale, ext } = isDirectory
-      ? // directory couldn't have extensions
-        { name: path.basename(filePath), locale: '', ext: '' }
-      : parseFileName(filePath)
+    const { name, ext } = path.parse(filePath)
     // We need to filter out dynamic routes, because we can't get all the
     // paths statically from here — they'll be generated separately.
     if (name.startsWith('[')) return
@@ -100,12 +96,12 @@ export async function collectFiles({
         isFollowingSymlink: isSymlinked
       })
       if (!items.length) return
-      return <Folder>{
+      return {
         kind: 'Folder',
         name: f.name,
         route: fileRoute,
         children: items
-      }
+      } satisfies Folder
     }
 
     // add concurrency because folder can contain a lot of files
@@ -130,7 +126,6 @@ export async function collectFiles({
           const content = await readFile(fp, 'utf8')
           fileMap[fp] = {
             kind: 'Meta',
-            ...(locale && { locale }),
             data: JSON.parse(content)
           }
           return fileMap[fp]
@@ -149,7 +144,6 @@ export async function collectFiles({
             // Dynamic. Add a special key (__nextra_src) and set data as empty.
             fileMap[fp] = {
               kind: 'Meta',
-              ...(locale && { locale }),
               __nextra_src: filePath,
               data: {}
             }
@@ -157,35 +151,34 @@ export async function collectFiles({
             // Static content, can be statically optimized.
             fileMap[fp] = {
               kind: 'Meta',
-              ...(locale && { locale }),
               // we spread object because default title could be incorrectly set when _meta.json/js
               // is imported/exported by another _meta.js
               data: { ...meta }
             }
           } else {
-            console.error(
-              `[nextra] "${fileName}" is not a valid meta file. The default export is required to be a serializable object or a function. Please check the following file:`,
+            logger.error(
+              `"${fileName}" is not a valid meta file. The default export is required to be a serializable object or a function. Please check the following file:`,
               path.relative(CWD, filePath)
             )
           }
           return fileMap[fp]
         }
-      } catch (err) {
+      } catch (error) {
         const relPath = path.relative(CWD, filePath)
-        console.error(
-          `[nextra] Error loading ${relPath}
-${(err as Error).name}: ${(err as Error).message}`
+        logger.error(
+          `Error loading ${relPath}
+${(error as Error).name}: ${(error as Error).message}`
         )
       }
 
       if (fileName === 'meta.json') {
-        console.warn(
-          '[nextra] "meta.json" was renamed to "_meta.json". Rename the following file:',
+        logger.warn(
+          '"meta.json" was renamed to "_meta.json". Rename the following file:',
           path.relative(CWD, filePath)
         )
       } else if (/_meta\.(jsx|ts|tsx|cjs|mjs)$/.test(fileName)) {
-        console.error(
-          `[nextra] "${fileName}" is not currently supported, please rename the following file to "${DYNAMIC_META_FILENAME}":`,
+        logger.error(
+          `"${fileName}" is not currently supported, please rename the following file to "${DYNAMIC_META_FILENAME}":`,
           path.relative(CWD, filePath)
         )
       }
@@ -222,9 +215,8 @@ ${(err as Error).name}: ${(err as Error).message}`
 
     if (metaIndex === undefined && defaultMeta.length > 0) {
       // Create a new meta file if it doesn't exist.
-      const meta = {
-        kind: 'Meta' as const,
-        ...(locale && { locale }),
+      const meta: MetaJsonFile = {
+        kind: 'Meta',
         data: Object.fromEntries(defaultMeta)
       }
       fileMap[metaPath] = meta

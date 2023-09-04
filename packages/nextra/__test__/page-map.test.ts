@@ -1,62 +1,10 @@
 import path from 'node:path'
 import { CWD } from '../src/constants'
-import { getDynamicMeta, resolvePageMap } from '../src/page-map'
+import { getDynamicMeta } from '../src/page-map'
 import { collectFiles } from '../src/plugin'
-import type { FileMap, PageMapItem } from '../src/types'
-
-const PAGES_DIR = path.join(CWD, '..', '..', 'examples', 'swr-site', 'pages')
-const filePath = (name: string) => path.join(PAGES_DIR, name)
-
-const defaultLocale = 'en'
+import type { PageMapItem } from '../src/types'
 
 describe('Page Process', () => {
-  let pageMap: PageMapItem[]
-  let fileMap: FileMap
-  beforeAll(async () => {
-    const { items, fileMap: data } = await collectFiles({
-      dir: PAGES_DIR,
-      locales: ['en', 'es', 'ru']
-    })
-    pageMap = items
-    fileMap = data
-  })
-
-  it.skip('pageMap en-US', () => {
-    const indexData = resolvePageMap({
-      filePath: filePath('en/docs/data-fetching.mdx'),
-      items: pageMap,
-      fileMap,
-      defaultLocale
-    })
-    expect([indexData.pageMap, indexData.route]).toMatchSnapshot()
-
-    const gettingStartData = resolvePageMap({
-      filePath: filePath('en/docs/getting-started.mdx'),
-      items: pageMap,
-      fileMap,
-      defaultLocale
-    })
-    expect(gettingStartData.pageMap).toEqual(indexData.pageMap)
-  })
-
-  it.skip('pageMap ru', () => {
-    const indexData = resolvePageMap({
-      filePath: filePath('ru/docs/data-fetching.mdx'),
-      items: pageMap,
-      fileMap,
-      defaultLocale
-    })
-    expect([indexData.pageMap, indexData.route]).toMatchSnapshot()
-
-    const gettingStartData = resolvePageMap({
-      filePath: filePath('ru/docs/getting-started.mdx'),
-      items: pageMap,
-      fileMap,
-      defaultLocale
-    })
-    expect(gettingStartData.pageMap).toEqual(indexData.pageMap)
-  })
-
   it("should not add `_meta.json` file if folder doesn't contain markdown files", async () => {
     const { items } = await collectFiles({
       dir: path.join(
@@ -155,14 +103,6 @@ describe('Page Process', () => {
         ]
       }
     ]
-    it('should not return dynamicItems for incorrect locale', () => {
-      expect(getDynamicMeta('', items, 'en-US')).toMatchInlineSnapshot(`
-        [
-          [],
-          [],
-        ]
-      `)
-    })
     it('should return dynamicItems for unset locale', () => {
       expect(getDynamicMeta('', items)).toMatchInlineSnapshot(`
         [
@@ -221,5 +161,28 @@ describe('Page Process', () => {
         ]
       `)
     })
+  })
+
+  it('should match i18n site page maps', async () => {
+    const chunksPath = path.join(
+      CWD,
+      '..',
+      '..',
+      'examples',
+      'swr-site',
+      '.next',
+      'static',
+      'chunks'
+    )
+    const { pageMap: enPageMap } = await import(
+      chunksPath + '/nextra-page-map-en.mjs'
+    )
+    const { pageMap: esPageMap } = await import(
+      chunksPath + '/nextra-page-map-es.mjs'
+    )
+    const { pageMap: ruPageMap } = await import(
+      chunksPath + '/nextra-page-map-ru.mjs'
+    )
+    expect({ enPageMap, esPageMap, ruPageMap }).toMatchSnapshot()
   })
 })

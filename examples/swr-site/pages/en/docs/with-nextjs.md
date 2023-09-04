@@ -66,6 +66,6 @@ The page is still pre-rendered. It's SEO friendly, fast to response, but also
 fully powered by SWR on the client side. The data can be dynamic and
 self-updated over time.
 
-<Callout emoji="💡">
+<Callout>
   The `Article` component will render the pre-generated data first, and after the page is hydrated, it will fetch the latest data again to keep it refresh.
 </Callout>

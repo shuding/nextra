@@ -118,10 +118,7 @@ export async function compileMdx(
   const { data: frontMatter, content } = grayMatter(source)
 
   let searchIndexKey: string | null = null
-  if (
-    ERROR_ROUTES.has(route) ||
-    route === '/_app' /* remove this check in v3 */
-  ) {
+  if (ERROR_ROUTES.has(route)) {
     /* skip */
   } else if (typeof flexsearch === 'object') {
     if (flexsearch.indexKey) {

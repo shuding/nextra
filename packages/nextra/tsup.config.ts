@@ -6,7 +6,7 @@ import type { Options } from 'tsup'
 import { defineConfig } from 'tsup'
 
 const CLIENT_ENTRY = [
-  'src/{use-internals,setup-page,normalize-pages,mdx}.ts',
+  'src/{use-internals,setup-page,normalize-pages,mdx,context}.ts',
   'src/{ssg,layout}.tsx',
   'src/{components,hooks,icons}/*.{ts,tsx}'
 ]

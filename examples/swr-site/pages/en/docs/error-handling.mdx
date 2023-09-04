@@ -48,7 +48,7 @@ const { data, error } = useSWR('/api/user', fetcher)
 // error.status === 403
 ```
 
-<Callout emoji="💡">
+<Callout>
   Note that <code>data</code> and <code>error</code> can exist at the same time.
   So the UI can display the existing data, while knowing the upcoming request
   has failed.

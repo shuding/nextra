@@ -16,8 +16,7 @@ import type {
   Folder,
   NextraInternalGlobal,
   PageMapItem,
-  PageOpts,
-  ThemeConfig
+  PageOpts
 } from './types'
 import { normalizePageRoute, pageTitleFromFilename } from './utils'
 
@@ -50,8 +49,7 @@ export function collectCatchAllRoutes(
       parent,
       {
         kind: 'Meta',
-        data: meta.data,
-        locale: meta.locale
+        data: meta.data
       },
       false
     )
@@ -65,7 +63,6 @@ export function collectCatchAllRoutes(
       }
       parent.children.push({
         kind: 'MdxPage',
-        ...(meta.locale && { locale: meta.locale }),
         name: key,
         route: normalizePageRoute(parent.route, key)
       })
@@ -79,7 +76,6 @@ export function collectCatchAllRoutes(
       children: [
         {
           kind: 'Meta',
-          ...(meta.locale && { locale: meta.locale }),
           data: normalizeMetaData(value.items)
         }
       ]
@@ -90,8 +86,7 @@ export function collectCatchAllRoutes(
       newParent,
       {
         kind: 'Meta',
-        data: value.items,
-        locale: meta.locale
+        data: value.items
       },
       false
     )
@@ -101,49 +96,36 @@ export function collectCatchAllRoutes(
 let cachedResolvedPageMap: PageMapItem[]
 
 export function setupNextraPage({
-  pageNextRoute,
   pageOpts,
-  nextraLayout,
-  themeConfig,
   MDXContent,
   hot,
   pageOptsChecksum,
-  dynamicMetaModules = []
+  dynamicMetaModules = [],
+  route
 }: {
-  pageNextRoute: string
   pageOpts: PageOpts
-  nextraLayout: FC
-  themeConfig: ThemeConfig
   MDXContent: FC
   hot?: __WebpackModuleApi.Hot
   pageOptsChecksum?: string
-  dynamicMetaModules?: [Promise<any>, DynamicMetaDescriptor][]
+  dynamicMetaModules?: [() => any, DynamicMetaDescriptor][]
+  route: string
 }) {
   if (typeof window === 'undefined') {
     globalThis.__nextra_resolvePageMap = async () => {
       if (process.env.NODE_ENV === 'production' && cachedResolvedPageMap) {
         return cachedResolvedPageMap
       }
-      const clonedPageMap: PageMapItem[] = JSON.parse(
-        JSON.stringify(__nextra_internal__.pageMap)
-      )
-
-      await Promise.all(
-        dynamicMetaModules.map(
-          async ([importMod, { metaObjectKeyPath, metaParentKeyPath }]) => {
-            const mod = await importMod
-            const metaData = await mod.default()
-            const meta: DynamicMetaJsonFile = get(
-              clonedPageMap,
-              metaObjectKeyPath
-            )
-            meta.data = metaData
-
-            const parent: Folder = get(clonedPageMap, metaParentKeyPath)
-            collectCatchAllRoutes(parent, meta)
-          }
-        )
-      )
+      const clonedPageMap = structuredClone(__nextra_internal__.pageMap)
+      for (const [
+        metaFunction,
+        { metaObjectKeyPath, metaParentKeyPath }
+      ] of dynamicMetaModules) {
+        const metaData = await metaFunction()
+        const meta: DynamicMetaJsonFile = get(clonedPageMap, metaObjectKeyPath)
+        meta.data = metaData
+        const parent: Folder = get(clonedPageMap, metaParentKeyPath)
+        collectCatchAllRoutes(parent, meta)
+      }
       return (cachedResolvedPageMap = clonedPageMap)
     }
   }
@@ -151,36 +133,17 @@ export function setupNextraPage({
   // Make sure the same component is always returned so Next.js will render the
   // stable layout. We then put the actual content into a global store and use
   // the route to identify it.
-  const __nextra_internal__ = ((globalThis as NextraInternalGlobal)[
+  const __nextra_internal__ = (globalThis as NextraInternalGlobal)[
     NEXTRA_INTERNAL
-  ] ||= Object.create(null))
+  ]
+  __nextra_internal__.route = route
+  __nextra_internal__.pageMap = pageOpts.pageMap
 
-  if (pageOpts.pageMap) {
-    __nextra_internal__.pageMap = pageOpts.pageMap
-    __nextra_internal__.Layout = nextraLayout
-  } else {
-    // while using `_app.md/mdx` pageMap will be injected in _app file to boost compilation time,
-    // and reduce bundle size
-    pageOpts = {
-      ...pageOpts,
-      pageMap: __nextra_internal__.pageMap,
-      flexsearch: __nextra_internal__.flexsearch
-    }
-    themeConfig = __nextra_internal__.themeConfig
-  }
-
-  pageOpts = {
-    // @ts-ignore ignore "'frontMatter' is specified more than once" error to treeshake empty object `{}` for each compiled page
-    frontMatter: {},
-    ...pageOpts
-  }
-
-  __nextra_internal__.route = pageOpts.route
-  __nextra_internal__.context ||= Object.create(null)
-  __nextra_internal__.context[pageNextRoute] = {
+  pageOpts.frontMatter ||= {}
+  pageOpts.flexsearch = __nextra_internal__.flexsearch
+  __nextra_internal__.context[route] = {
     Content: MDXContent,
-    pageOpts,
-    themeConfig
+    pageOpts
   }
 
   if (process.env.NODE_ENV !== 'production' && hot) {
@@ -188,8 +151,7 @@ export function setupNextraPage({
     const checksum = pageOptsChecksum
     hot.data ||= Object.create(null)
     if (hot.data.prevPageOptsChecksum !== checksum) {
-      const listeners =
-        __nextra_internal__.refreshListeners[pageNextRoute] || []
+      const listeners = __nextra_internal__.refreshListeners[route] || []
       for (const listener of listeners) {
         listener()
       }

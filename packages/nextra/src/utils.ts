@@ -1,23 +1,7 @@
 import path from 'node:path'
 import slash from 'slash'
 import title from 'title'
-import { LOCALE_REGEX } from './constants'
 import type { Folder, MdxFile, Meta } from './types'
-
-export function parseFileName(filePath: string): {
-  name: string
-  locale: string
-  ext: string
-} {
-  // Get file name and extension from file path
-  const { name, ext } = path.parse(filePath)
-  const locale = name.match(LOCALE_REGEX)?.[1] || ''
-  return {
-    name: locale ? name.replace(LOCALE_REGEX, '') : name,
-    locale,
-    ext
-  }
-}
 
 type Truthy<T> = T extends false | '' | 0 | null | undefined ? never : T // from lodash
 
@@ -103,4 +87,10 @@ export function hashFnv32a(str: string, seed = 0x811c9dc5): string {
 
 export function getDefault<T>(module: T & { default?: T }): T {
   return module.default || module
+}
+
+export const logger = {
+  info: console.log.bind(null, '- ', '\x1b[36minfo\x1b[0m', '[nextra]'),
+  warn: console.log.bind(null, '- ', '\x1b[33mwarn\x1b[0m', '[nextra]'),
+  error: console.log.bind(null, '- ', '\x1b[31mwarn\x1b[0m', '[nextra]')
 }

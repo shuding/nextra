@@ -26,7 +26,7 @@ describe('tree shaking', async () => {
     expect(testPage.includes('nextraLayout:')).toBe(false)
   })
   it('should not include `pageOpts.pageMap`', () => {
-    expect(testPage.includes('pageMap:')).toBe(false)
+    expect(testPage.includes('pageMap:')).toBe(true)
   })
   it('should not include default `pageOpts.frontMatter: {}`', () => {
     expect(testPage.includes('frontMatter:')).toBe(true)

@@ -7,8 +7,6 @@ export const MARKDOWN_URL_EXTENSION_REGEX = /\.mdx?(?:(?=[#?])|$)/
 
 export const IS_PRODUCTION = process.env.NODE_ENV === 'production'
 
-export const LOCALE_REGEX = /\.([a-z]{2}(-[A-Z]{2})?)$/
-
 export const DEFAULT_LOCALE = 'en-US'
 
 export const DEFAULT_CONFIG: Omit<NextraConfig, 'theme'> = {
@@ -39,3 +37,5 @@ export const CODE_BLOCK_FILENAME_REGEX = /filename="([^"]+)"/
 export const DEFAULT_LOCALES = ['']
 
 export const ERROR_ROUTES = new Set(['/404', '/500'])
+
+export const CHUNKS_DIR = path.join(CWD, '.next', 'static', 'chunks')
