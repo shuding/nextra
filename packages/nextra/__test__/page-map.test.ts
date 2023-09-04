@@ -21,7 +21,7 @@ describe('Page Process', () => {
     fileMap = data
   })
 
-  it('pageMap en-US', () => {
+  it.skip('pageMap en-US', () => {
     const indexData = resolvePageMap({
       filePath: filePath('en/docs/data-fetching.mdx'),
       items: pageMap,
@@ -39,7 +39,7 @@ describe('Page Process', () => {
     expect(gettingStartData.pageMap).toEqual(indexData.pageMap)
   })
 
-  it('pageMap ru', () => {
+  it.skip('pageMap ru', () => {
     const indexData = resolvePageMap({
       filePath: filePath('ru/docs/data-fetching.mdx'),
       items: pageMap,

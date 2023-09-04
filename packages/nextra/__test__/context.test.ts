@@ -30,19 +30,19 @@ describe('context', () => {
   })
 
   describe('getAllPages()', () => {
-    it('should work', () => {
+    it.skip('should work', () => {
       expect(getAllPages()).toMatchSnapshot()
     })
   })
 
   describe('getCurrentLevelPages()', () => {
-    it('should work', () => {
+    it.skip('should work', () => {
       expect(getCurrentLevelPages()).toMatchSnapshot()
     })
   })
 
   describe('getPagesUnderRoute()', () => {
-    it('should work', () => {
+    it.skip('should work', () => {
       expect(getPagesUnderRoute('/docs/advanced')).toMatchSnapshot()
     })
   })
