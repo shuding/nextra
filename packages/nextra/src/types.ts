@@ -14,12 +14,8 @@ type MetaFilename = typeof META_FILENAME
 type MarkdownExtension = (typeof MARKDOWN_EXTENSIONS)[number]
 
 export interface LoaderOptions extends NextraConfig {
-  isMetaImport?: boolean
   isPageImport?: boolean
   locales: string[]
-  defaultLocale: string
-  pageMapCache: PageMapCache
-  newNextLinkBehavior?: boolean
 }
 
 export interface Folder<FileType = PageMapItem> {
@@ -89,7 +85,6 @@ export type Heading = {
 
 export type PageOpts<FrontMatterType = FrontMatter> = {
   filePath: string
-  route: string
   frontMatter: FrontMatterType
   pageMap: PageMapItem[]
   title: string
@@ -97,7 +92,6 @@ export type PageOpts<FrontMatterType = FrontMatter> = {
   hasJsxInH1?: boolean
   timestamp?: number
   flexsearch?: Flexsearch
-  newNextLinkBehavior?: boolean
   readingTime?: ReadingTime
 }
 
@@ -182,14 +176,7 @@ export type NextraInternalGlobal = typeof globalThis & {
   [NEXTRA_INTERNAL]: {
     pageMap: PageMapItem[]
     route: string
-    context: Record<
-      string,
-      {
-        Content: FC
-        pageOpts: PageOpts
-        themeConfig: ThemeConfig
-      }
-    >
+    context: Record<string, { Content: FC; pageOpts: PageOpts }>
     refreshListeners: Record<string, (() => void)[]>
     Layout: FC<any>
     themeConfig?: ThemeConfig
