@@ -1711,7 +1711,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
         {
           "children": [
             {
-              "__nextra_src": "/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/remote/graphql-yoga/_meta.js",
               "data": {},
               "kind": "Meta",
             },
