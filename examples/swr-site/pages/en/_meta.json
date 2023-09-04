@@ -58,19 +58,5 @@
     "title": "Nextra ↗",
     "href": "https://github.com/shuding/nextra",
     "newWindow": true
-  },
-  "404": {
-    "type": "page",
-    "theme": {
-      "timestamp": false,
-      "typesetting": "article"
-    }
-  },
-  "500": {
-    "type": "page",
-    "theme": {
-      "timestamp": false,
-      "typesetting": "article"
-    }
   }
 }
