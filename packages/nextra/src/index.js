@@ -159,11 +159,7 @@ const nextra = (themeOrNextraConfig, themeConfig) =>
               options.defaultLoaders.babel,
               {
                 loader: 'nextra/loader',
-                options: {
-                  theme: nextraLoaderOptions.theme,
-                  themeConfig: nextraLoaderOptions.themeConfig,
-                  flexsearch: nextraLoaderOptions.flexsearch
-                }
+                options: nextraLoaderOptions
               }
             ]
           }
