@@ -24,14 +24,14 @@ export default function Nav(): ReactElement {
             )
           }
           return (
-            <Link key={page.route} href={page.route} passHref legacyBehavior>
-              <a>{name}</a>
+            <Link key={page.route} href={page.route}>
+              {name}
             </Link>
           )
         })}
         {config.navs?.map(nav => (
-          <Link key={nav.url} href={nav.url} passHref legacyBehavior>
-            <a>{nav.name}</a>
+          <Link key={nav.url} href={nav.url}>
+            {nav.name}
           </Link>
         ))}
       </div>

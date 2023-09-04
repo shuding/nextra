@@ -38,16 +38,16 @@ export function PostsLayout({
     return (
       <div key={post.route} className="post-item">
         <h3>
-          <Link href={post.route} passHref legacyBehavior>
-            <a className="!nx-no-underline">{postTitle}</a>
+          <Link href={post.route} className="!nx-no-underline">
+            {postTitle}
           </Link>
         </h3>
         {description && (
           <p className="nx-mb-2 dark:nx-text-gray-400 nx-text-gray-600">
             {description}
             {config.readMore && (
-              <Link href={post.route} passHref legacyBehavior>
-                <a className="post-item-more nx-ml-2">{config.readMore}</a>
+              <Link href={post.route} className="post-item-more nx-ml-2">
+                {config.readMore}
               </Link>
             )}
           </p>

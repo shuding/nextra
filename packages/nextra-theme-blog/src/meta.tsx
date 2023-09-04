@@ -12,9 +12,10 @@ export default function Meta(): ReactElement {
   const tags = tag ? split(tag) : []
 
   const tagsEl = tags.map(t => (
-    <Link key={t} href="/tags/[tag]" as={`/tags/${t}`} passHref legacyBehavior>
-      <a
-        className="
+    <Link
+      key={t}
+      href={`/tags/${t}`}
+      className="
           nx-select-none
           nx-rounded-md
           nx-bg-gray-200
@@ -29,9 +30,8 @@ export default function Meta(): ReactElement {
           dark:hover:nx-bg-gray-700
           dark:hover:nx-text-gray-200
         "
-      >
-        {t}
-      </a>
+    >
+      {t}
     </Link>
   ))
 
@@ -65,11 +65,7 @@ export default function Meta(): ReactElement {
         )}
       </div>
       <div className="nx-flex nx-items-center nx-gap-3 print:nx-hidden">
-        {back && (
-          <Link href={back} passHref legacyBehavior>
-            <a>Back</a>
-          </Link>
-        )}
+        {back && <Link href={back}>Back</Link>}
         {config.darkMode && <ThemeSwitch />}
       </div>
     </div>
