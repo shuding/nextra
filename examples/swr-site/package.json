@@ -5,14 +5,14 @@
   "license": "Apache-2.0",
   "private": true,
   "scripts": {
+    "analyze": "ANALYZE=true pnpm build",
     "build": "next build",
     "clean": "rimraf .next .turbo",
     "debug": "NODE_OPTIONS='--inspect' next dev",
     "dev": "next",
     "prebuild": "node nextra-remote-filepaths/fetch.js",
     "predev": "pnpm prebuild",
-    "start": "next start",
-    "analyze": "ANALYZE=true pnpm build"
+    "start": "next start"
   },
   "dependencies": {
     "focus-visible": "^5.1.0",
