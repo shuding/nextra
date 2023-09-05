@@ -156,12 +156,8 @@ export type NextraConfig = {
 }
 
 export type Nextra = (
-  ...args: [NextraConfig] | [theme: Theme, themeConfig: string]
+  nextraConfig: NextraConfig
 ) => (nextConfig: NextConfig) => NextConfig
-
-const nextra: Nextra = () => () => ({})
-
-export default nextra
 
 export type ThemeConfig = any | null
 

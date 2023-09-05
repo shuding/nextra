@@ -1,12 +1,16 @@
 # LaTeX
 
 Nextra uses [KaTeX](https://katex.org/) to render LaTeX expressions directly in MDX.
-To enable LaTeX support, you must enable the `latex` option in your `next.config.js` file:
+To enable LaTeX support, you must enable the `latex` option in your `next.config.mjs` file:
 
-```js filename="next.config.js"
-module.exports = require('nextra')({
+```js filename="next.config.mjs"
+import nextra from 'nextra'
+
+const withNextra = nextra({
   latex: true
 })
+
+export default withNextra()
 ```
 
 When enabled, KaTeX’s CSS and fonts will be automatically included in your site, and you can start writing math expressions in your MDX files. Using LaTeX within MDX is as simple as wrapping your expression in `$` or `$$`.

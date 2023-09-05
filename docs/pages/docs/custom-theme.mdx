@@ -21,15 +21,15 @@ First, you need to tell Nextra to use your custom theme file instead of official
 ones. In your Next.js config, you can pass the path to your theme file to the
 Nextra plugin:
 
-```js {2} filename="next.config.js"
-const withNextra = require('nextra')({
-  theme: './theme.tsx',
+```js {4} filename="next.config.mjs"
+import nextra from 'nextra'
+
+const withNextra = nextra({
+  theme: './theme.tsx'
 })
 
-module.exports = withNextra({
-  // Other Next.js configurations
-  ...
-})
+// If you have other Next.js configurations, you can pass them as the parameter:
+// export default withNextra({ /* other next.js config */ })
 ```
 
 ### Create a Basic Theme

@@ -1,7 +1,9 @@
-import { sources, webpack } from 'next/dist/compiled/webpack/webpack'
+import pkg from 'next/dist/compiled/webpack/webpack.js'
 import type { Compiler } from 'webpack'
 import { IS_PRODUCTION } from '../constants'
 import type { SearchData } from '../types'
+
+const { sources, webpack } = pkg
 
 export class NextraSearchPlugin {
   apply(compiler: Compiler) {

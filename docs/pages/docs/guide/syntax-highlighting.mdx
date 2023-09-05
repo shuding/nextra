@@ -103,7 +103,7 @@ console.log('hello, world')
 ```
 
 You can enable this feature globally by setting `defaultShowCopyCode: true` in
-your Nextra configuration (`next.config.js` file). Once it's enabled globally,
+your Nextra configuration (`next.config.mjs` file). Once it's enabled globally,
 you can disable it via the `copy=false` attribute.
 
 ### Line Numbers
@@ -293,7 +293,7 @@ to see how it works.
 
 You can opt out of syntax highlighting for using one of your own. You can
 disable syntax highlighting globally by setting `codeHighlight: false` in your
-Nextra configuration (`next.config.js` file).
+Nextra configuration (`next.config.mjs` file).
 
 <OptionTable
   options={[
@@ -313,9 +313,9 @@ for syntax highlighting with custom language grammars.
 
 You can provide these grammars by overriding the `getHighlighter` function in
 `mdxOptions.rehypePrettyCodeOptions` option in your Nextra config inside
-`next.config.js`:
+`next.config.mjs`:
 
-```js filename="next.config.js" {13-18}
+```js filename="next.config.mjs" {13-18}
 import { BUNDLED_LANGUAGES } from 'shiki'
 
 nextra({
@@ -346,7 +346,7 @@ nextra({
 Within `mdxOptions.rehypePrettyCodeOptions` you may also provide custom themes
 instead of [relying on CSS Variables](/docs/guide/syntax-highlighting):
 
-```js filename="next.config.js" {4}
+```js filename="next.config.mjs" {4}
 nextra({
   // ... other options
   mdxOptions: {

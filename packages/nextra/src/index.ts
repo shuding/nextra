@@ -1,4 +1,6 @@
 /* eslint-env node */
+import { createRequire } from 'node:module'
+import type { NextConfig } from 'next'
 import {
   DEFAULT_CONFIG,
   DEFAULT_LOCALE,
@@ -6,20 +8,16 @@ import {
   MARKDOWN_EXTENSION_REGEX,
   MARKDOWN_EXTENSIONS
 } from './constants'
+import type { Nextra } from './types'
 import { logger } from './utils'
 import { NextraPlugin, NextraSearchPlugin } from './webpack-plugins'
 
 const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
 
-const nextra = (themeOrNextraConfig, themeConfig) =>
-  function withNextra(nextConfig = {}) {
-    const nextraConfig = {
-      ...DEFAULT_CONFIG,
-      ...(typeof themeOrNextraConfig === 'string'
-        ? { theme: themeOrNextraConfig, themeConfig }
-        : themeOrNextraConfig)
-    }
+const require = createRequire(import.meta.url)
 
+const nextra: Nextra = nextraConfig =>
+  function withNextra(nextConfig = {}) {
     const hasI18n = !!nextConfig.i18n?.locales
 
     if (hasI18n) {
@@ -32,13 +30,8 @@ const nextra = (themeOrNextraConfig, themeConfig) =>
     }
     const locales = nextConfig.i18n?.locales || DEFAULT_LOCALES
 
-    const rewrites = async () => {
-      const rules = [
-        {
-          source: '/:path*/_meta',
-          destination: '/404'
-        }
-      ]
+    const rewrites: NextConfig['rewrites'] = async () => {
+      const rules = [{ source: '/:path*/_meta', destination: '/404' }]
 
       if (nextConfig.rewrites) {
         const originalRewrites = await nextConfig.rewrites()
@@ -55,13 +48,13 @@ const nextra = (themeOrNextraConfig, themeConfig) =>
     }
 
     const nextraLoaderOptions = {
+      ...DEFAULT_CONFIG,
       ...nextraConfig,
-      locales,
-      defaultLocale: nextConfig.i18n?.defaultLocale || DEFAULT_LOCALE
+      locales
     }
 
     // Check if there's a theme provided
-    if (!nextraLoaderOptions.theme) {
+    if (!nextraConfig.theme) {
       throw new Error('No Nextra theme found!')
     }
 
@@ -70,7 +63,8 @@ const nextra = (themeOrNextraConfig, themeConfig) =>
       ...(nextConfig.output !== 'export' && { rewrites }),
       ...(hasI18n && {
         env: {
-          NEXTRA_DEFAULT_LOCALE: nextraLoaderOptions.defaultLocale,
+          NEXTRA_DEFAULT_LOCALE:
+            nextConfig.i18n?.defaultLocale || DEFAULT_LOCALE,
           ...nextConfig.env
         },
         i18n: undefined
@@ -84,25 +78,8 @@ const nextra = (themeOrNextraConfig, themeConfig) =>
           config.plugins ||= []
           config.plugins.push(new NextraPlugin({ locales }))
 
-          if (nextraConfig.flexsearch) {
+          if (nextraLoaderOptions.flexsearch) {
             config.plugins.push(new NextraSearchPlugin())
-          }
-        }
-
-        /* Adds client-side webpack optimization rules for splitting chunks during build-time */
-        if (!options.isServer && config.optimization.splitChunks) {
-          config.optimization.splitChunks.cacheGroups = {
-            ...config.optimization.splitChunks.cacheGroups,
-            ...Object.fromEntries(
-              nextraLoaderOptions.locales.map(locale => [
-                `nextra-page-map-${locale}`,
-                {
-                  test: new RegExp(`nextra-page-map-${locale}`),
-                  name: `nextra-page-map-${locale}`,
-                  enforce: true
-                }
-              ])
-            )
           }
         }
 
@@ -114,8 +91,7 @@ const nextra = (themeOrNextraConfig, themeConfig) =>
           // Resolves ESM _app file instead cjs, so we could import theme.config via `import` statement
           [defaultCJSAppPath]: defaultESMAppPath
         }
-
-        config.module.rules.push(
+        ;(config.module.rules as RuleSetRule[]).push(
           {
             // Match Markdown imports from non-pages. These imports have an
             // issuer, which can be anything as long as it's not empty.
@@ -170,4 +146,13 @@ const nextra = (themeOrNextraConfig, themeConfig) =>
     }
   }
 
-module.exports = nextra
+// TODO: take this type from webpack directly
+type RuleSetRule = {
+  issuer: (value: string) => boolean
+  test: RegExp
+  use: unknown[]
+}
+
+export default nextra
+
+export type * from './types'

@@ -8,4 +8,4 @@
 
 - remove `Card` export, use `Cards.Card` instead
 
-- disallow import md/mdx files that are outside of the working directory, use symlinks instead
+- disallow import md/mdx files that are outside the working directory, use symlinks instead
