@@ -12,6 +12,9 @@
     "lib": ["es2022", "dom"],
     "moduleResolution": "node",
     "types": ["vitest/globals", "webpack-env"],
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "paths": {
+      "unified": ["./node_modules/unified"]
+    }
   }
 }

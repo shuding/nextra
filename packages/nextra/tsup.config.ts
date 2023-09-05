@@ -86,10 +86,5 @@ export default defineConfig([
     entry: CLIENT_ENTRY,
     outExtension: () => ({ js: '.js' }),
     ...sharedConfig
-  },
-  {
-    entry: ['src/types.ts'],
-    name: 'nextra-types',
-    dts: { only: true }
   }
 ])
