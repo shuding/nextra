@@ -1,4 +1,4 @@
-import * as z from 'zod' // use `import * as z` for better tree-shaking
+import * as z from 'zod' // use `import * as z` for better tree-shaking https://github.com/colinhacks/zod/issues/2596#issuecomment-1643053289
 import { ERROR_ROUTES } from './constants'
 import type { Folder, MdxFile, PageMapItem } from './types'
 
