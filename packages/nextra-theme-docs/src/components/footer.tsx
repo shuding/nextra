@@ -26,7 +26,7 @@ export function Footer({ menu }: { menu?: boolean }): ReactElement {
           'nx-pl-[max(env(safe-area-inset-left),1.5rem)] nx-pr-[max(env(safe-area-inset-right),1.5rem)]'
         )}
       >
-        {renderComponent(config.footer.text)}
+        {renderComponent(config.footer.content)}
       </div>
     </footer>
   )

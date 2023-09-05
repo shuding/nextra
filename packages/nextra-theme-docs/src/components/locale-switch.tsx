@@ -40,13 +40,13 @@ export function LocaleSwitch({
         name: (
           <span className="nx-flex nx-items-center nx-gap-2">
             <GlobeIcon />
-            <span className={lite ? 'nx-hidden' : ''}>{selected?.text}</span>
+            <span className={lite ? 'nx-hidden' : ''}>{selected?.name}</span>
           </span>
         )
       }}
       options={options.map(l => ({
         key: l.locale,
-        name: l.text
+        name: l.name
       }))}
     />
   )

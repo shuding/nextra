@@ -47,7 +47,7 @@ export const themeSchema = z.strictObject({
   banner: z.strictObject({
     content: z.custom<ReactNode | FC>(...reactNode).optional(),
     dismissible: z.boolean(),
-    key: z.string(),
+    key: z.string()
   }),
   chat: z.strictObject({
     icon: z.custom<ReactNode | FC>(...reactNode),
@@ -201,7 +201,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
         </Anchor>
       )
     },
-    text: 'Edit this page'
+    content: 'Edit this page'
   },
   feedback: {
     content: 'Question? Give us feedback →',
@@ -217,7 +217,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
   },
   footer: {
     component: Footer,
-    text: `MIT ${new Date().getFullYear()} © Nextra.`
+    content: `MIT ${new Date().getFullYear()} © Nextra.`
   },
   gitTimestamp: function GitTimestamp({ timestamp }) {
     const { locale = DEFAULT_LOCALE } = useRouter()
