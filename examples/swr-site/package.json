@@ -5,6 +5,7 @@
   "license": "Apache-2.0",
   "private": true,
   "scripts": {
+    "analyze": "ANALYZE=true pnpm build",
     "build": "next build",
     "clean": "rimraf .next .turbo",
     "debug": "NODE_OPTIONS='--inspect' next dev",
@@ -33,6 +34,7 @@
     }
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^13.4.19",
     "autoprefixer": "^10.4.15",
     "postcss": "^8.4.28",
     "tailwindcss": "^3.3.3"

@@ -1,5 +1,7 @@
 import { Menu, Transition } from '@headlessui/react'
 import cn from 'clsx'
+// eslint-disable-next-line no-restricted-imports -- since we don't need newWindow prop
+import NextLink from 'next/link'
 import { useFSRoute } from 'nextra/hooks'
 import { ArrowRightIcon, MenuIcon } from 'nextra/icons'
 import type { MenuItem, PageItem } from 'nextra/normalize-pages'
@@ -97,12 +99,12 @@ export function Navbar({ items }: NavBarProps): ReactElement {
       />
       <nav className="nx-mx-auto nx-flex nx-h-[var(--nextra-navbar-height)] nx-max-w-[90rem] nx-items-center nx-justify-end nx-gap-2 nx-pl-[max(env(safe-area-inset-left),1.5rem)] nx-pr-[max(env(safe-area-inset-right),1.5rem)]">
         {config.logoLink ? (
-          <Anchor
+          <NextLink
             href={typeof config.logoLink === 'string' ? config.logoLink : '/'}
             className="nx-flex nx-items-center hover:nx-opacity-75 ltr:nx-mr-auto rtl:nx-ml-auto"
           >
             {renderComponent(config.logo)}
-          </Anchor>
+          </NextLink>
         ) : (
           <div className="nx-flex nx-items-center ltr:nx-mr-auto rtl:nx-ml-auto">
             {renderComponent(config.logo)}

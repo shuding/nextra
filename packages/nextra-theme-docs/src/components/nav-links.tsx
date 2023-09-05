@@ -1,10 +1,11 @@
 import cn from 'clsx'
+// eslint-disable-next-line no-restricted-imports -- since we don't need newWindow prop
+import NextLink from 'next/link'
 import { ArrowRightIcon } from 'nextra/icons'
 import type { Item } from 'nextra/normalize-pages'
 import type { ReactElement } from 'react'
 import { useConfig } from '../contexts'
 import type { DocsThemeConfig } from '../index'
-import { Anchor } from './anchor'
 
 interface NavLinkProps {
   currentIndex: number
@@ -43,17 +44,17 @@ export const NavLinks = ({
       )}
     >
       {prev && (
-        <Anchor
+        <NextLink
           href={prev.route}
           title={prev.title}
           className={cn(classes.link, 'ltr:nx-pr-4 rtl:nx-pl-4')}
         >
           <ArrowRightIcon className={cn(classes.icon, 'ltr:nx-rotate-180')} />
           {prev.title}
-        </Anchor>
+        </NextLink>
       )}
       {next && (
-        <Anchor
+        <NextLink
           href={next.route}
           title={next.title}
           className={cn(
@@ -63,7 +64,7 @@ export const NavLinks = ({
         >
           {next.title}
           <ArrowRightIcon className={cn(classes.icon, 'rtl:nx-rotate-180')} />
-        </Anchor>
+        </NextLink>
       )}
     </div>
   )

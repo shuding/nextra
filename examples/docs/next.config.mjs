@@ -5,7 +5,7 @@ const withNextra = nextra({
   themeConfig: './src/theme.config.js',
   latex: true,
   search: {
-    codeblock: false
+    codeblocks: false
   }
 })
 

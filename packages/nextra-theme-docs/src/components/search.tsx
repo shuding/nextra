@@ -1,5 +1,7 @@
 import { Transition } from '@headlessui/react'
 import cn from 'clsx'
+// eslint-disable-next-line no-restricted-imports -- since we don't need newWindow prop
+import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 import { useMounted } from 'nextra/hooks'
 import { InformationCircleIcon, SpinnerIcon } from 'nextra/icons'
@@ -8,7 +10,6 @@ import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
 import { useConfig, useMenu } from '../contexts'
 import type { SearchResult } from '../types'
 import { renderComponent, renderString } from '../utils'
-import { Anchor } from './anchor'
 import { Input } from './input'
 
 type SearchProps = {
@@ -271,7 +272,7 @@ export function Search({
                       : 'nx-text-gray-800 contrast-more:nx-border-transparent dark:nx-text-gray-300'
                   )}
                 >
-                  <Anchor
+                  <NextLink
                     className="nx-block nx-scroll-m-12 nx-px-2.5 nx-py-2"
                     href={route}
                     data-index={i}
@@ -281,7 +282,7 @@ export function Search({
                     onKeyDown={handleKeyDown}
                   >
                     {children}
-                  </Anchor>
+                  </NextLink>
                 </li>
               </Fragment>
             ))

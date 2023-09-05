@@ -1,14 +1,14 @@
-import type { ProcessorOptions } from '@mdx-js/mdx'
 import type { GrayMatterFile } from 'gray-matter'
 import type { Heading as MDASTHeading } from 'mdast'
 import type { NextConfig } from 'next'
 import type { FC, ReactNode } from 'react'
-import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
+import type { z } from 'zod'
 import type {
   MARKDOWN_EXTENSIONS,
   META_FILENAME,
   NEXTRA_INTERNAL
 } from './constants'
+import type { nextraConfigSchema, searchSchema } from './schemas'
 
 type MetaFilename = typeof META_FILENAME
 type MarkdownExtension = (typeof MARKDOWN_EXTENSIONS)[number]
@@ -101,58 +101,9 @@ export type ReadingTime = {
   words: number
 }
 
-type Theme = string
-export type Search =
-  | boolean
-  | {
-      /**
-       * Whether to index code blocks
-       * @default true
-       */
-      codeblocks: boolean
-      /**
-       * A filter function to filter out files from indexing, and return the
-       * index file key, or null to skip indexing.
-       * A site can have multiple indexes, by default they're separated by
-       * locales as multiple index files.
-       */
-      indexKey?: (
-        filepath: string,
-        route: string,
-        locale?: string
-      ) => null | string
-    }
-type Transform = (
-  result: string,
-  options: {
-    route: string
-  }
-) => string | Promise<string>
+export type Search = z.infer<typeof searchSchema>
 
-export type NextraConfig = {
-  theme: Theme
-  themeConfig?: string
-  defaultShowCopyCode?: boolean
-  search?: Search
-  staticImage?: boolean
-  readingTime?: boolean
-  latex?: boolean
-  codeHighlight?: boolean
-  /**
-   * A function to modify the code of compiled MDX pages.
-   * @experimental
-   */
-  transform?: Transform
-  /**
-   * A function to modify the `pageOpts` prop passed to theme layouts.
-   * @experimental
-   */
-  transformPageOpts?: (pageOpts: PageOpts) => PageOpts
-  mdxOptions?: Pick<ProcessorOptions, 'rehypePlugins' | 'remarkPlugins'> & {
-    format?: 'detect' | 'mdx' | 'md'
-    rehypePrettyCodeOptions?: Partial<RehypePrettyCodeOptions>
-  }
-}
+export type NextraConfig = z.infer<typeof nextraConfigSchema>
 
 export type Nextra = (
   nextraConfig: NextraConfig
