@@ -113,27 +113,22 @@ ${OFFICIAL_THEMES.includes(theme) ? `import '${theme}/style.css'` : ''}`
   if (mdxPath.includes('/pages/_app.')) {
     isAppFileFromNodeModules = mdxPath.includes('/node_modules/')
     // Relative path instead of a package name
-    const [themeConfigImport, themeConfigAssign] = themeConfig
-      ? [
-          `import __nextra_themeConfig from '${slash(
-            path.resolve(themeConfig)
-          )}'`,
-          '__nextra_internal__.themeConfig = __nextra_themeConfig'
-        ]
-      : ['', '']
+    const themeConfigImport = themeConfig
+      ? `import __themeConfig from '${slash(path.resolve(themeConfig))}'`
+      : ''
 
     const content = isAppFileFromNodeModules
       ? 'export default function App({ Component, pageProps }) { return <Component {...pageProps} />}'
       : [cssImports, source].join('\n')
 
-    return `import __nextra_layout from '${layoutPath}'
+    return `import __layout from '${layoutPath}'
 ${themeConfigImport}
 ${content}
 
 const __nextra_internal__ = globalThis[Symbol.for('__nextra_internal__')] ||= Object.create(null)
 __nextra_internal__.context ||= Object.create(null)
-__nextra_internal__.Layout = __nextra_layout
-${themeConfigAssign}`
+__nextra_internal__.Layout = __layout
+${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
   }
 
   const { fileMap } = (await import(

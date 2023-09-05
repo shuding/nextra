@@ -61,15 +61,15 @@ const nextra: Nextra = nextraConfig =>
     return {
       ...nextConfig,
       ...(nextConfig.output !== 'export' && { rewrites }),
-      ...(hasI18n && {
-        env: {
+      env: {
+        ...nextConfig.env,
+        ...(hasI18n && {
           NEXTRA_DEFAULT_LOCALE:
-            nextConfig.i18n?.defaultLocale || DEFAULT_LOCALE,
-          ...nextConfig.env,
-          NEXTRA_SEARCH: !!loaderOptions.search
-        },
-        i18n: undefined
-      }),
+            nextConfig.i18n?.defaultLocale || DEFAULT_LOCALE
+        }),
+        NEXTRA_SEARCH: String(!!loaderOptions.search)
+      },
+      ...(hasI18n && { i18n: undefined }),
       pageExtensions: [
         ...(nextConfig.pageExtensions || DEFAULT_EXTENSIONS),
         ...MARKDOWN_EXTENSIONS
