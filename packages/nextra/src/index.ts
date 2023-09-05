@@ -1,12 +1,15 @@
 /* eslint-env node */
 import { createRequire } from 'node:module'
 import type { NextConfig } from 'next'
+import type { ZodError } from 'zod'
+import { fromZodError } from 'zod-validation-error'
 import {
   DEFAULT_CONFIG,
   DEFAULT_LOCALE,
   DEFAULT_LOCALES,
   MARKDOWN_EXTENSION_REGEX,
-  MARKDOWN_EXTENSIONS
+  MARKDOWN_EXTENSIONS,
+  nextraConfigSchema
 } from './constants'
 import type { Nextra } from './types'
 import { logger } from './utils'
@@ -16,8 +19,15 @@ const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
 
 const require = createRequire(import.meta.url)
 
-const nextra: Nextra = nextraConfig =>
-  function withNextra(nextConfig = {}) {
+const nextra: Nextra = nextraConfig => {
+  try {
+    nextraConfigSchema.parse(nextraConfig)
+  } catch (error) {
+    logger.error('Error validating nextraConfig')
+    throw fromZodError(error as ZodError)
+  }
+
+  return function withNextra(nextConfig = {}) {
     const hasI18n = !!nextConfig.i18n?.locales
 
     if (hasI18n) {
@@ -146,6 +156,7 @@ const nextra: Nextra = nextraConfig =>
       }
     }
   }
+}
 
 // TODO: take this type from webpack directly
 type RuleSetRule = {

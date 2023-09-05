@@ -92,5 +92,5 @@ export function getDefault<T>(module: T & { default?: T }): T {
 export const logger = {
   info: console.log.bind(null, '-', '\x1b[36minfo\x1b[0m', '[nextra]'),
   warn: console.log.bind(null, '-', '\x1b[33mwarn\x1b[0m', '[nextra]'),
-  error: console.log.bind(null, '-', '\x1b[31mwarn\x1b[0m', '[nextra]')
+  error: console.log.bind(null, '-', '\x1b[31merror\x1b[0m', '[nextra]')
 }
