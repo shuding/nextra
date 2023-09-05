@@ -16,12 +16,8 @@ const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
 
 const require = createRequire(import.meta.url)
 
-const nextra: Nextra = _nextraConfig =>
+const nextra: Nextra = nextraConfig =>
   function withNextra(nextConfig = {}) {
-    const nextraConfig = {
-      ...DEFAULT_CONFIG,
-      ..._nextraConfig
-    }
     const hasI18n = !!nextConfig.i18n?.locales
 
     if (hasI18n) {
@@ -35,12 +31,7 @@ const nextra: Nextra = _nextraConfig =>
     const locales = nextConfig.i18n?.locales || DEFAULT_LOCALES
 
     const rewrites: NextConfig['rewrites'] = async () => {
-      const rules = [
-        {
-          source: '/:path*/_meta',
-          destination: '/404'
-        }
-      ]
+      const rules = [{ source: '/:path*/_meta', destination: '/404' }]
 
       if (nextConfig.rewrites) {
         const originalRewrites = await nextConfig.rewrites()
@@ -57,6 +48,7 @@ const nextra: Nextra = _nextraConfig =>
     }
 
     const nextraLoaderOptions = {
+      ...DEFAULT_CONFIG,
       ...nextraConfig,
       locales
     }
@@ -86,27 +78,10 @@ const nextra: Nextra = _nextraConfig =>
           config.plugins ||= []
           config.plugins.push(new NextraPlugin({ locales }))
 
-          if (nextraConfig.flexsearch) {
+          if (nextraLoaderOptions.flexsearch) {
             config.plugins.push(new NextraSearchPlugin())
           }
         }
-
-        /* Adds client-side webpack optimization rules for splitting chunks during build-time */
-        // if (!options.isServer && config.optimization.splitChunks) {
-        //   config.optimization.splitChunks.cacheGroups = {
-        //     ...config.optimization.splitChunks.cacheGroups,
-        //     ...Object.fromEntries(
-        //       locales.map(locale => [
-        //         `nextra-page-map-${locale}`,
-        //         {
-        //           test: new RegExp(`nextra-page-map-${locale}`),
-        //           name: `nextra-page-map-${locale}`,
-        //           enforce: true
-        //         }
-        //       ])
-        //     )
-        //   }
-        // }
 
         const defaultESMAppPath = require.resolve('next/dist/esm/pages/_app.js')
         const defaultCJSAppPath = require.resolve('next/dist/pages/_app.js')
@@ -116,15 +91,14 @@ const nextra: Nextra = _nextraConfig =>
           // Resolves ESM _app file instead cjs, so we could import theme.config via `import` statement
           [defaultCJSAppPath]: defaultESMAppPath
         }
-
-        config.module.rules.push(
+        ;(config.module.rules as RuleSetRule[]).push(
           {
             // Match Markdown imports from non-pages. These imports have an
             // issuer, which can be anything as long as it's not empty.
             // When the issuer is null, it means that it can be imported via a
             // runtime import call such as `import('...')`.
             test: MARKDOWN_EXTENSION_REGEX,
-            issuer: (request: string) => !!request || request === null,
+            issuer: request => !!request || request === null,
             use: [
               options.defaultLoaders.babel,
               {
@@ -136,7 +110,7 @@ const nextra: Nextra = _nextraConfig =>
           {
             // Match pages (imports without an issuer request).
             test: MARKDOWN_EXTENSION_REGEX,
-            issuer: (request: string) => request === '',
+            issuer: request => request === '',
             use: [
               options.defaultLoaders.babel,
               {
@@ -151,12 +125,12 @@ const nextra: Nextra = _nextraConfig =>
           {
             // Match dynamic meta files inside pages.
             test: /_meta\.js$/,
-            issuer: (request: string) => !request,
+            issuer: request => !request,
             use: [options.defaultLoaders.babel, { loader: 'nextra/loader' }]
           },
           {
             test: /pages\/_app\./,
-            issuer: (request: string) => !request,
+            issuer: request => !request,
             use: [
               options.defaultLoaders.babel,
               {
@@ -171,6 +145,13 @@ const nextra: Nextra = _nextraConfig =>
       }
     }
   }
+
+// TODO: take this type from webpack directly
+type RuleSetRule = {
+  issuer: (value: string) => boolean
+  test: RegExp
+  use: unknown[]
+}
 
 export default nextra
 
