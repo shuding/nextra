@@ -1,9 +1,9 @@
-import type { FC, ReactNode } from 'react';
+import type { NextSeoProps } from 'next-seo'
+import type { FC, ReactNode } from 'react'
 import { isValidElement } from 'react'
 import { z } from 'zod'
 import type { NavBarProps } from './components/navbar'
 import type { TOCProps } from './components/toc'
-import type { NextSeoProps } from 'next-seo'
 
 function isReactNode(value: unknown): boolean {
   return (
@@ -31,6 +31,12 @@ const reactNode = [
   { message: 'Must be React.ReactNode or React.FC' }
 ] as const
 const fc = [isFunction, { message: 'Must be React.FC' }] as const
+
+export const themeOptionsSchema = z.strictObject({
+  light: z.string(),
+  dark: z.string(),
+  system: z.string()
+})
 
 export const themeSchema = z.strictObject({
   banner: z.strictObject({
