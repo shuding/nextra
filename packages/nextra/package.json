@@ -7,10 +7,9 @@
   "engines": {
     "node": ">=18"
   },
-  "main": "./dist/index.js",
   "exports": {
     "./package.json": "./package.json",
-    ".": "./dist/index.js",
+    ".": "./dist/index.mjs",
     "./catch-all": "./dist/catch-all.js",
     "./data": {
       "import": "./dist/data.js",
@@ -58,7 +57,7 @@
       "types": "./dist/*.d.mts"
     }
   },
-  "types": "./dist/types.d.mts",
+  "types": "./dist/index.d.mts",
   "typesVersions": {
     "*": {
       "compile": [

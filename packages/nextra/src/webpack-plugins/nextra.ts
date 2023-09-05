@@ -1,11 +1,13 @@
 import { join } from 'node:path'
-import { promises as fs } from 'graceful-fs'
+import pkg from 'graceful-fs'
 import type { Compiler } from 'webpack'
 import { CHUNKS_DIR } from '../constants'
 import { PAGES_DIR } from '../file-system'
 import { getDynamicMeta } from '../page-map'
 import { collectFiles } from '../plugin'
 import type { Folder } from '../types'
+
+const fs = pkg.promises
 
 export class NextraPlugin {
   constructor(private config: { locales: string[] }) {}

@@ -15,6 +15,6 @@ declare namespace globalThis {
   var __nextra_resolvePageMap: () => Promise<PageMapItem[]>
 }
 
-declare module 'next/dist/compiled/webpack/webpack' {
+declare module 'next/dist/compiled/webpack/webpack.js' {
   export { default as webpack, sources } from 'webpack'
 }

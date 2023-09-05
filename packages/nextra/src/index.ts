@@ -1,4 +1,5 @@
 /* eslint-env node */
+import { createRequire } from 'node:module'
 import type { NextConfig } from 'next'
 import {
   DEFAULT_CONFIG,
@@ -12,6 +13,8 @@ import { logger } from './utils'
 import { NextraPlugin, NextraSearchPlugin } from './webpack-plugins'
 
 const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
+
+const require = createRequire(import.meta.url)
 
 const nextra: Nextra = _nextraConfig =>
   function withNextra(nextConfig = {}) {
@@ -171,4 +174,4 @@ const nextra: Nextra = _nextraConfig =>
 
 export default nextra
 
-export * from './types'
+export type * from './types'
