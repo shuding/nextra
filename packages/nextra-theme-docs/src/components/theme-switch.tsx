@@ -2,7 +2,7 @@ import { useTheme } from 'next-themes'
 import { useMounted } from 'nextra/hooks'
 import { MoonIcon, SunIcon } from 'nextra/icons'
 import type { ReactElement } from 'react'
-import * as z from 'zod' // use `import * as z` for better tree-shaking
+import * as z from 'zod' // use `import * as z` for better tree-shaking https://github.com/colinhacks/zod/issues/2596#issuecomment-1643053289
 import { useConfig } from '../contexts'
 import { Select } from './select'
 
