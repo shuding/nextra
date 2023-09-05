@@ -3,11 +3,17 @@ import { useRouter } from 'next/router'
 import { DiscordIcon, GitHubIcon } from 'nextra/icons'
 import { isValidElement } from 'react'
 import type { z } from 'zod'
-import { Anchor, Flexsearch, Footer, Navbar, TOC } from './components'
-import { themeOptionsSchema, ThemeSwitch } from './components/theme-switch'
+import {
+  Anchor,
+  Flexsearch,
+  Footer,
+  Navbar,
+  ThemeSwitch,
+  TOC
+} from './components'
 import { useConfig } from './contexts'
+import type { publicThemeSchema, themeSchema } from './schemas'
 import { getGitIssueUrl, useGitEditUrl } from './utils'
-import type { themeSchema, publicThemeSchema } from './schemas'
 
 export const DEFAULT_LOCALE = 'en-US'
 
