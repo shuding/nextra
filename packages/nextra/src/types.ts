@@ -91,7 +91,6 @@ export type PageOpts<FrontMatterType = FrontMatter> = {
   headings: Heading[]
   hasJsxInH1?: boolean
   timestamp?: number
-  flexsearch?: Flexsearch
   readingTime?: ReadingTime
 }
 
@@ -103,7 +102,7 @@ export type ReadingTime = {
 }
 
 type Theme = string
-export type Flexsearch =
+export type Search =
   | boolean
   | {
       /**
@@ -134,7 +133,7 @@ export type NextraConfig = {
   theme: Theme
   themeConfig?: string
   defaultShowCopyCode?: boolean
-  flexsearch?: Flexsearch
+  search?: Search
   staticImage?: boolean
   readingTime?: boolean
   latex?: boolean
@@ -176,7 +175,6 @@ export type NextraInternalGlobal = typeof globalThis & {
     refreshListeners: Record<string, (() => void)[]>
     Layout: FC<any>
     themeConfig?: ThemeConfig
-    flexsearch?: Flexsearch
   }
 }
 

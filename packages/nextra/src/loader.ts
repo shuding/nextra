@@ -58,16 +58,16 @@ async function loader(
     isPageImport = false,
     theme,
     themeConfig,
-    locales,
     defaultShowCopyCode,
-    flexsearch,
-    latex,
+    search,
     staticImage,
     readingTime: _readingTime,
-    mdxOptions,
+    latex,
+    codeHighlight,
     transform,
     transformPageOpts,
-    codeHighlight
+    mdxOptions,
+    locales
   } = context.getOptions()
   context.cacheable(true)
 
@@ -114,26 +114,21 @@ ${OFFICIAL_THEMES.includes(theme) ? `import '${theme}/style.css'` : ''}`
     isAppFileFromNodeModules = mdxPath.includes('/node_modules/')
     // Relative path instead of a package name
     const themeConfigImport = themeConfig
-      ? `import __nextra_themeConfig from '${slash(path.resolve(themeConfig))}'`
+      ? `import __themeConfig from '${slash(path.resolve(themeConfig))}'`
       : ''
 
-    return `import __nextra_layout from '${layoutPath}'
+    const content = isAppFileFromNodeModules
+      ? 'export default function App({ Component, pageProps }) { return <Component {...pageProps} />}'
+      : [cssImports, source].join('\n')
+
+    return `import __layout from '${layoutPath}'
 ${themeConfigImport}
-${
-  isAppFileFromNodeModules
-    ? 'export default function App({ Component, pageProps }) { return <Component {...pageProps} />}'
-    : [cssImports, source].join('\n')
-}
+${content}
 
 const __nextra_internal__ = globalThis[Symbol.for('__nextra_internal__')] ||= Object.create(null)
 __nextra_internal__.context ||= Object.create(null)
-__nextra_internal__.Layout = __nextra_layout
-__nextra_internal__.flexsearch = ${JSON.stringify(flexsearch)}
-${
-  themeConfigImport
-    ? '__nextra_internal__.themeConfig = __nextra_themeConfig'
-    : ''
-}`
+__nextra_internal__.Layout = __layout
+${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
   }
 
   const { fileMap } = (await import(
@@ -196,7 +191,7 @@ ${
     readingTime: _readingTime,
     defaultShowCopyCode,
     staticImage,
-    flexsearch,
+    search,
     latex,
     codeHighlight,
     route,

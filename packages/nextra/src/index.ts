@@ -47,7 +47,7 @@ const nextra: Nextra = nextraConfig =>
       return rules
     }
 
-    const nextraLoaderOptions = {
+    const loaderOptions = {
       ...DEFAULT_CONFIG,
       ...nextraConfig,
       locales
@@ -61,14 +61,15 @@ const nextra: Nextra = nextraConfig =>
     return {
       ...nextConfig,
       ...(nextConfig.output !== 'export' && { rewrites }),
-      ...(hasI18n && {
-        env: {
+      env: {
+        ...nextConfig.env,
+        ...(hasI18n && {
           NEXTRA_DEFAULT_LOCALE:
-            nextConfig.i18n?.defaultLocale || DEFAULT_LOCALE,
-          ...nextConfig.env
-        },
-        i18n: undefined
-      }),
+            nextConfig.i18n?.defaultLocale || DEFAULT_LOCALE
+        }),
+        NEXTRA_SEARCH: String(!!loaderOptions.search)
+      },
+      ...(hasI18n && { i18n: undefined }),
       pageExtensions: [
         ...(nextConfig.pageExtensions || DEFAULT_EXTENSIONS),
         ...MARKDOWN_EXTENSIONS
@@ -78,7 +79,7 @@ const nextra: Nextra = nextraConfig =>
           config.plugins ||= []
           config.plugins.push(new NextraPlugin({ locales }))
 
-          if (nextraLoaderOptions.flexsearch) {
+          if (loaderOptions.search) {
             config.plugins.push(new NextraSearchPlugin())
           }
         }
@@ -103,7 +104,7 @@ const nextra: Nextra = nextraConfig =>
               options.defaultLoaders.babel,
               {
                 loader: 'nextra/loader',
-                options: nextraLoaderOptions
+                options: loaderOptions
               }
             ]
           },
@@ -116,7 +117,7 @@ const nextra: Nextra = nextraConfig =>
               {
                 loader: 'nextra/loader',
                 options: {
-                  ...nextraLoaderOptions,
+                  ...loaderOptions,
                   isPageImport: true
                 }
               }
@@ -135,7 +136,7 @@ const nextra: Nextra = nextraConfig =>
               options.defaultLoaders.babel,
               {
                 loader: 'nextra/loader',
-                options: nextraLoaderOptions
+                options: loaderOptions
               }
             ]
           }

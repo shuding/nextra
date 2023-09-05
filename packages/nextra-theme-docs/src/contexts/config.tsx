@@ -10,7 +10,7 @@ import type { Context } from '../types'
 import { MenuProvider } from './menu'
 
 type Config<FrontMatterType = FrontMatter> = DocsThemeConfig &
-  Pick<PageOpts<FrontMatterType>, 'flexsearch' | 'title' | 'frontMatter'>
+  Pick<PageOpts<FrontMatterType>, 'title' | 'frontMatter'>
 
 const ConfigContext = createContext<Config>({
   title: '',
@@ -98,7 +98,6 @@ export const ConfigProvider = ({
   }
   const extendedConfig: Config = {
     ...theme,
-    flexsearch: pageOpts.flexsearch,
     title: pageOpts.title,
     frontMatter: pageOpts.frontMatter
   }
