@@ -1,22 +1,17 @@
 /* eslint sort-keys: error */
-import type { NextSeoProps } from 'next-seo'
 import { useRouter } from 'next/router'
 import { DiscordIcon, GitHubIcon } from 'nextra/icons'
-import type { FC, ReactNode } from 'react'
 import { isValidElement } from 'react'
-import { z } from 'zod'
+import type { z } from 'zod'
 import { Anchor, Flexsearch, Footer, Navbar, TOC } from './components'
-import type { NavBarProps } from './components/navbar'
 import { themeOptionsSchema, ThemeSwitch } from './components/theme-switch'
-import type { TOCProps } from './components/toc'
 import { useConfig } from './contexts'
 import { getGitIssueUrl, useGitEditUrl } from './utils'
+import type { themeSchema, publicThemeSchema } from './schemas'
 
 export const DEFAULT_LOCALE = 'en-US'
 
 export const IS_BROWSER = typeof window !== 'undefined'
-
-
 
 export type DocsThemeConfig = z.infer<typeof themeSchema>
 export type PartialDocsThemeConfig = z.infer<typeof publicThemeSchema>
