@@ -1,4 +1,5 @@
 /* eslint-env node */
+import type { NextConfig } from 'next'
 import {
   DEFAULT_CONFIG,
   DEFAULT_LOCALE,
@@ -6,20 +7,18 @@ import {
   MARKDOWN_EXTENSION_REGEX,
   MARKDOWN_EXTENSIONS
 } from './constants'
+import type { Nextra } from './types'
 import { logger } from './utils'
 import { NextraPlugin, NextraSearchPlugin } from './webpack-plugins'
 
 const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
 
-const nextra = (themeOrNextraConfig, themeConfig) =>
+const nextra: Nextra = _nextraConfig =>
   function withNextra(nextConfig = {}) {
     const nextraConfig = {
       ...DEFAULT_CONFIG,
-      ...(typeof themeOrNextraConfig === 'string'
-        ? { theme: themeOrNextraConfig, themeConfig }
-        : themeOrNextraConfig)
+      ..._nextraConfig
     }
-
     const hasI18n = !!nextConfig.i18n?.locales
 
     if (hasI18n) {
@@ -32,7 +31,7 @@ const nextra = (themeOrNextraConfig, themeConfig) =>
     }
     const locales = nextConfig.i18n?.locales || DEFAULT_LOCALES
 
-    const rewrites = async () => {
+    const rewrites: NextConfig['rewrites'] = async () => {
       const rules = [
         {
           source: '/:path*/_meta',
@@ -56,12 +55,11 @@ const nextra = (themeOrNextraConfig, themeConfig) =>
 
     const nextraLoaderOptions = {
       ...nextraConfig,
-      locales,
-      defaultLocale: nextConfig.i18n?.defaultLocale || DEFAULT_LOCALE
+      locales
     }
 
     // Check if there's a theme provided
-    if (!nextraLoaderOptions.theme) {
+    if (!nextraConfig.theme) {
       throw new Error('No Nextra theme found!')
     }
 
@@ -70,7 +68,8 @@ const nextra = (themeOrNextraConfig, themeConfig) =>
       ...(nextConfig.output !== 'export' && { rewrites }),
       ...(hasI18n && {
         env: {
-          NEXTRA_DEFAULT_LOCALE: nextraLoaderOptions.defaultLocale,
+          NEXTRA_DEFAULT_LOCALE:
+            nextConfig.i18n?.defaultLocale || DEFAULT_LOCALE,
           ...nextConfig.env
         },
         i18n: undefined
@@ -94,7 +93,7 @@ const nextra = (themeOrNextraConfig, themeConfig) =>
           config.optimization.splitChunks.cacheGroups = {
             ...config.optimization.splitChunks.cacheGroups,
             ...Object.fromEntries(
-              nextraLoaderOptions.locales.map(locale => [
+              locales.map(locale => [
                 `nextra-page-map-${locale}`,
                 {
                   test: new RegExp(`nextra-page-map-${locale}`),
@@ -122,7 +121,7 @@ const nextra = (themeOrNextraConfig, themeConfig) =>
             // When the issuer is null, it means that it can be imported via a
             // runtime import call such as `import('...')`.
             test: MARKDOWN_EXTENSION_REGEX,
-            issuer: request => !!request || request === null,
+            issuer: (request: string) => !!request || request === null,
             use: [
               options.defaultLoaders.babel,
               {
@@ -134,7 +133,7 @@ const nextra = (themeOrNextraConfig, themeConfig) =>
           {
             // Match pages (imports without an issuer request).
             test: MARKDOWN_EXTENSION_REGEX,
-            issuer: request => request === '',
+            issuer: (request: string) => request === '',
             use: [
               options.defaultLoaders.babel,
               {
@@ -149,12 +148,12 @@ const nextra = (themeOrNextraConfig, themeConfig) =>
           {
             // Match dynamic meta files inside pages.
             test: /_meta\.js$/,
-            issuer: request => !request,
+            issuer: (request: string) => !request,
             use: [options.defaultLoaders.babel, { loader: 'nextra/loader' }]
           },
           {
             test: /pages\/_app\./,
-            issuer: request => !request,
+            issuer: (request: string) => !request,
             use: [
               options.defaultLoaders.babel,
               {
@@ -170,4 +169,6 @@ const nextra = (themeOrNextraConfig, themeConfig) =>
     }
   }
 
-module.exports = nextra
+export default nextra
+
+export * from './types'

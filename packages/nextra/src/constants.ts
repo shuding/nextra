@@ -9,13 +9,13 @@ export const IS_PRODUCTION = process.env.NODE_ENV === 'production'
 
 export const DEFAULT_LOCALE = 'en-US'
 
-export const DEFAULT_CONFIG: Omit<NextraConfig, 'theme'> = {
+export const DEFAULT_CONFIG = {
   staticImage: true,
   flexsearch: {
     codeblocks: true
   },
   codeHighlight: true
-}
+} satisfies Partial<NextraConfig>
 
 export const OFFICIAL_THEMES = ['nextra-theme-docs', 'nextra-theme-blog']
 

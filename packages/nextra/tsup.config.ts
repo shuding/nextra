@@ -66,7 +66,7 @@ const sharedConfig = {
 export default defineConfig([
   {
     name: 'nextra',
-    entry: ['src/index.js', 'src/__temp__.js', 'src/catch-all.ts'],
+    entry: ['src/__temp__.js', 'src/catch-all.ts'],
     format: 'cjs',
     dts: false
   },
