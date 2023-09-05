@@ -580,15 +580,17 @@ Enable Nextra built-in search
 
 **Example:**
 
-```js filename="next.config.js"
-const withNextra = require('nextra')({
+```js filename="next.config.mjs"
+import nextra from 'nextra'
+
+const withNextra = nextra({
   theme: 'nextra-theme-blog',
   themeConfig: './theme.config.js',
   flexsearch: {
     codeblock: false
   }
 })
-module.exports = withNextra()
+export default withNextra()
 ```
 
 <Unstable />

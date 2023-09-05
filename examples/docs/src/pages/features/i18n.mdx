@@ -11,12 +11,17 @@ Nextra supports
 out of the box.
 
 To add multi-language pages to your Nextra application, just need to config
-`i18n` in `next.config.js`:
+`i18n` in `next.config.mjs`:
 
-```js filename="next.config.js"
-const withNextra = require('nextra')('nextra-theme-docs', './theme.config.js')
+```js filename="next.config.mjs"
+import nextra from 'nextra'
 
-module.exports = withNextra({
+const withNextra = nextra({
+  theme: 'nextra-theme-docs',
+  themeConfig: './theme.config.js'
+})
+
+export default withNextra({
   i18n: {
     locales: ['en', 'zh', 'de'],
     defaultLocale: 'en'
