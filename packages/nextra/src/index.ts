@@ -92,21 +92,21 @@ const nextra: Nextra = _nextraConfig =>
         }
 
         /* Adds client-side webpack optimization rules for splitting chunks during build-time */
-        if (!options.isServer && config.optimization.splitChunks) {
-          config.optimization.splitChunks.cacheGroups = {
-            ...config.optimization.splitChunks.cacheGroups,
-            ...Object.fromEntries(
-              locales.map(locale => [
-                `nextra-page-map-${locale}`,
-                {
-                  test: new RegExp(`nextra-page-map-${locale}`),
-                  name: `nextra-page-map-${locale}`,
-                  enforce: true
-                }
-              ])
-            )
-          }
-        }
+        // if (!options.isServer && config.optimization.splitChunks) {
+        //   config.optimization.splitChunks.cacheGroups = {
+        //     ...config.optimization.splitChunks.cacheGroups,
+        //     ...Object.fromEntries(
+        //       locales.map(locale => [
+        //         `nextra-page-map-${locale}`,
+        //         {
+        //           test: new RegExp(`nextra-page-map-${locale}`),
+        //           name: `nextra-page-map-${locale}`,
+        //           enforce: true
+        //         }
+        //       ])
+        //     )
+        //   }
+        // }
 
         const defaultESMAppPath = require.resolve('next/dist/esm/pages/_app.js')
         const defaultCJSAppPath = require.resolve('next/dist/pages/_app.js')
