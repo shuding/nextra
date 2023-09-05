@@ -1,7 +1,7 @@
-import { z } from 'zod'
-import type { PageOpts } from './types'
 import type { ProcessorOptions } from '@mdx-js/mdx'
 import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
+import { z } from 'zod'
+import type { PageOpts } from './types'
 
 export const searchSchema = z.boolean().or(
   z.strictObject({
@@ -23,7 +23,6 @@ export const searchSchema = z.boolean().or(
       .optional()
   })
 )
-
 
 type Transform = (
   result: string,
