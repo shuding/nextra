@@ -76,7 +76,6 @@ export default defineConfig([
       'src/**/*.ts',
       '!src/**/*.d.ts',
       '!src/catch-all.ts',
-      '!src/types.ts',
       ...CLIENT_ENTRY.map(filePath => `!${filePath}`)
     ],
     ...sharedConfig

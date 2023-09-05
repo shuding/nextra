@@ -8,10 +8,10 @@ import {
   DEFAULT_LOCALE,
   DEFAULT_LOCALES,
   MARKDOWN_EXTENSION_REGEX,
-  MARKDOWN_EXTENSIONS,
-  nextraConfigSchema
+  MARKDOWN_EXTENSIONS
 } from './constants'
 import type { Nextra } from './types'
+import { nextraConfigSchema } from './types'
 import { logger } from './utils'
 import { NextraPlugin, NextraSearchPlugin } from './webpack-plugins'
 
