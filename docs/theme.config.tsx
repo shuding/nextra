@@ -104,7 +104,7 @@ const config: DocsThemeConfig = {
     )
   },
   editLink: {
-    text: 'Edit this page on GitHub →'
+    content: 'Edit this page on GitHub →'
   },
   feedback: {
     content: 'Question? Give us feedback →',
@@ -121,7 +121,7 @@ const config: DocsThemeConfig = {
     toggleButton: true
   },
   footer: {
-    text: (
+    content: (
       <div className="flex w-full flex-col items-center sm:items-start">
         <div>
           <a
