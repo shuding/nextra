@@ -140,7 +140,6 @@ export function setupNextraPage({
   __nextra_internal__.pageMap = pageOpts.pageMap
 
   pageOpts.frontMatter ||= {}
-  pageOpts.flexsearch = __nextra_internal__.flexsearch
   __nextra_internal__.context[route] = {
     Content: MDXContent,
     pageOpts

@@ -47,7 +47,7 @@ const nextra: Nextra = nextraConfig =>
       return rules
     }
 
-    const nextraLoaderOptions = {
+    const loaderOptions = {
       ...DEFAULT_CONFIG,
       ...nextraConfig,
       locales
@@ -65,7 +65,8 @@ const nextra: Nextra = nextraConfig =>
         env: {
           NEXTRA_DEFAULT_LOCALE:
             nextConfig.i18n?.defaultLocale || DEFAULT_LOCALE,
-          ...nextConfig.env
+          ...nextConfig.env,
+          NEXTRA_SEARCH: !!loaderOptions.search
         },
         i18n: undefined
       }),
@@ -78,7 +79,7 @@ const nextra: Nextra = nextraConfig =>
           config.plugins ||= []
           config.plugins.push(new NextraPlugin({ locales }))
 
-          if (nextraLoaderOptions.flexsearch) {
+          if (loaderOptions.search) {
             config.plugins.push(new NextraSearchPlugin())
           }
         }
@@ -103,7 +104,7 @@ const nextra: Nextra = nextraConfig =>
               options.defaultLoaders.babel,
               {
                 loader: 'nextra/loader',
-                options: nextraLoaderOptions
+                options: loaderOptions
               }
             ]
           },
@@ -116,7 +117,7 @@ const nextra: Nextra = nextraConfig =>
               {
                 loader: 'nextra/loader',
                 options: {
-                  ...nextraLoaderOptions,
+                  ...loaderOptions,
                   isPageImport: true
                 }
               }
@@ -135,7 +136,7 @@ const nextra: Nextra = nextraConfig =>
               options.defaultLoaders.babel,
               {
                 loader: 'nextra/loader',
-                options: nextraLoaderOptions
+                options: loaderOptions
               }
             ]
           }

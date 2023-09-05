@@ -79,7 +79,7 @@ const clonedRemarkLinkRewrite = remarkLinkRewrite.bind(null)
 type CompileMdxOptions = Pick<
   LoaderOptions,
   | 'staticImage'
-  | 'flexsearch'
+  | 'search'
   | 'defaultShowCopyCode'
   | 'readingTime'
   | 'latex'
@@ -97,7 +97,7 @@ export async function compileMdx(
   source: string,
   {
     staticImage,
-    flexsearch,
+    search,
     readingTime,
     latex,
     codeHighlight,
@@ -116,16 +116,16 @@ export async function compileMdx(
   let searchIndexKey: string | null = null
   if (ERROR_ROUTES.has(route)) {
     /* skip */
-  } else if (typeof flexsearch === 'object') {
-    if (flexsearch.indexKey) {
-      searchIndexKey = flexsearch.indexKey(filePath, route, locale)
+  } else if (typeof search === 'object') {
+    if (search.indexKey) {
+      searchIndexKey = search.indexKey(filePath, route, locale)
       if (searchIndexKey === '') {
         searchIndexKey = locale || DEFAULT_LOCALE
       }
     } else {
       searchIndexKey = locale || DEFAULT_LOCALE
     }
-  } else if (flexsearch) {
+  } else if (search) {
     searchIndexKey = locale || DEFAULT_LOCALE
   }
 
@@ -218,7 +218,7 @@ export async function compileMdx(
         remarkCustomHeadingId,
         [remarkHeadings, { isRemoteContent }] satisfies Pluggable,
         // structurize should be before remarkHeadings because we attach #id attribute to heading node
-        flexsearch && ([remarkStructurize, flexsearch] satisfies Pluggable),
+        search && ([remarkStructurize, search] satisfies Pluggable),
         staticImage && remarkStaticImage,
         readingTime && remarkReadingTime,
         latex && remarkMath,

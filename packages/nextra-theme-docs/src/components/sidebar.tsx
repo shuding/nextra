@@ -415,7 +415,7 @@ export function Sidebar({
         )}
         ref={containerRef}
       >
-        {config.flexsearch && (
+        {process.env.NEXTRA_SEARCH && (
           <div className="nx-px-4 nx-pt-4 md:nx-hidden">
             {renderComponent(config.search.component)}
           </div>

@@ -4,7 +4,7 @@ const withNextra = nextra({
   theme: 'nextra-theme-docs',
   themeConfig: './theme.config.tsx',
   latex: true,
-  flexsearch: {
+  search: {
     codeblocks: false
   },
   defaultShowCopyCode: true

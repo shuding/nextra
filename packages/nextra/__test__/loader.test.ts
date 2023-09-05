@@ -31,8 +31,8 @@ describe('tree shaking', async () => {
   it('should not include default `pageOpts.frontMatter: {}`', () => {
     expect(testPage.includes('frontMatter:')).toBe(true)
   })
-  it('should not include `pageOpts.flexsearch`', () => {
-    expect(testPage.includes('flexsearch:')).toBe(false)
+  it('should not include `pageOpts.search`', () => {
+    expect(testPage.includes('search:')).toBe(false)
   })
   it('should not include `themeConfig`', () => {
     expect(testPage.includes('themeConfig:')).toBe(false)

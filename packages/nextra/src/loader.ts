@@ -58,16 +58,16 @@ async function loader(
     isPageImport = false,
     theme,
     themeConfig,
-    locales,
     defaultShowCopyCode,
-    flexsearch,
-    latex,
+    search,
     staticImage,
     readingTime: _readingTime,
-    mdxOptions,
+    latex,
+    codeHighlight,
     transform,
     transformPageOpts,
-    codeHighlight
+    mdxOptions,
+    locales
   } = context.getOptions()
   context.cacheable(true)
 
@@ -113,27 +113,27 @@ ${OFFICIAL_THEMES.includes(theme) ? `import '${theme}/style.css'` : ''}`
   if (mdxPath.includes('/pages/_app.')) {
     isAppFileFromNodeModules = mdxPath.includes('/node_modules/')
     // Relative path instead of a package name
-    const themeConfigImport = themeConfig
-      ? `import __nextra_themeConfig from '${slash(path.resolve(themeConfig))}'`
-      : ''
+    const [themeConfigImport, themeConfigAssign] = themeConfig
+      ? [
+          `import __nextra_themeConfig from '${slash(
+            path.resolve(themeConfig)
+          )}'`,
+          '__nextra_internal__.themeConfig = __nextra_themeConfig'
+        ]
+      : ['', '']
+
+    const content = isAppFileFromNodeModules
+      ? 'export default function App({ Component, pageProps }) { return <Component {...pageProps} />}'
+      : [cssImports, source].join('\n')
 
     return `import __nextra_layout from '${layoutPath}'
 ${themeConfigImport}
-${
-  isAppFileFromNodeModules
-    ? 'export default function App({ Component, pageProps }) { return <Component {...pageProps} />}'
-    : [cssImports, source].join('\n')
-}
+${content}
 
 const __nextra_internal__ = globalThis[Symbol.for('__nextra_internal__')] ||= Object.create(null)
 __nextra_internal__.context ||= Object.create(null)
 __nextra_internal__.Layout = __nextra_layout
-__nextra_internal__.flexsearch = ${JSON.stringify(flexsearch)}
-${
-  themeConfigImport
-    ? '__nextra_internal__.themeConfig = __nextra_themeConfig'
-    : ''
-}`
+${themeConfigAssign}`
   }
 
   const { fileMap } = (await import(
@@ -196,7 +196,7 @@ ${
     readingTime: _readingTime,
     defaultShowCopyCode,
     staticImage,
-    flexsearch,
+    search,
     latex,
     codeHighlight,
     route,

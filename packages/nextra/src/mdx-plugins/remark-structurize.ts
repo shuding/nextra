@@ -1,6 +1,6 @@
 import type { Root } from 'mdast'
 import type { Plugin } from 'unified'
-import type { Flexsearch, StructurizedData } from '../types'
+import type { Search, StructurizedData } from '../types'
 
 const CODE_TABLE_QUOTE_LIST = new Set<string>([
   'code',
@@ -10,7 +10,7 @@ const CODE_TABLE_QUOTE_LIST = new Set<string>([
   'mdxJsxFlowElement'
 ])
 
-export const remarkStructurize: Plugin<[Flexsearch], Root> = options => {
+export const remarkStructurize: Plugin<[Search], Root> = options => {
   const opts = { codeblocks: true, ...(options as any) }
   const structurizedData: StructurizedData = Object.create(null)
   let activeSlug = ''

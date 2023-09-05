@@ -11,7 +11,7 @@ export const DEFAULT_LOCALE = 'en-US'
 
 export const DEFAULT_CONFIG = {
   staticImage: true,
-  flexsearch: {
+  search: {
     codeblocks: true
   },
   codeHighlight: true

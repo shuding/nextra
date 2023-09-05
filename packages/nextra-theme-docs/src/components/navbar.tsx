@@ -164,7 +164,7 @@ export function Navbar({ items }: NavBarProps): ReactElement {
           )
         })}
 
-        {config.flexsearch &&
+        {process.env.NEXTRA_SEARCH &&
           renderComponent(config.search.component, {
             className: 'nx-hidden md:nx-inline-block mx-min-w-[200px]'
           })}
