@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import * as z from 'zod' // use `import * as z` for better tree-shaking
 import { ERROR_ROUTES } from './constants'
 import type { Folder, MdxFile, PageMapItem } from './types'
 

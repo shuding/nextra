@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { DiscordIcon, GitHubIcon } from 'nextra/icons'
 import type { FC, ReactNode } from 'react'
 import { isValidElement } from 'react'
-import { z } from 'zod'
+import * as z from 'zod' // use `import * as z` for better tree-shaking
 import { Anchor, Flexsearch, Footer, Navbar, TOC } from './components'
 import type { NavBarProps } from './components/navbar'
 import { themeOptionsSchema, ThemeSwitch } from './components/theme-switch'
