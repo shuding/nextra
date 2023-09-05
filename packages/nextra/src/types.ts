@@ -8,7 +8,7 @@ import type {
   META_FILENAME,
   NEXTRA_INTERNAL
 } from './constants'
-import type { nextraConfigSchema, searchSchema } from './index'
+import type { nextraConfigSchema, searchSchema } from './schemas'
 
 type MetaFilename = typeof META_FILENAME
 type MarkdownExtension = (typeof MARKDOWN_EXTENSIONS)[number]
