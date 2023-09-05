@@ -122,7 +122,7 @@ export function TOC({ headings, filePath }: TOCProps): ReactElement {
           {renderComponent(config.editLink.component, {
             filePath,
             className: linkClassName,
-            children: renderComponent(config.editLink.text)
+            children: renderComponent(config.editLink.content)
           })}
 
           {renderComponent(config.toc.extraContent)}

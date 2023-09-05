@@ -30,25 +30,6 @@ export default withNextra({
 })
 ```
 
-### Add Middleware
-
-Then, you need to add a `middleware.js` file in the root of your project
-([related Next.js docs](https://nextjs.org/docs/advanced-features/middleware)):
-
-```js
-export { locales as middleware } from 'nextra/locales'
-```
-
-If you already have the middleware defined, you can do this instead:
-
-```js
-import { withLocales } from 'nextra/locales'
-
-export const middleware = withLocales(request => {
-  // Your middleware code...
-})
-```
-
 ### Add Locale to Filenames
 
 Then, add the locale codes to your file extensions (required for the default
@@ -72,10 +53,10 @@ language dropdown:
 
 ```js filename="theme.config.jsx"
 i18n: [
-  { locale: 'en', text: 'English' },
-  { locale: 'zh', text: '中文' },
-  { locale: 'de', text: 'Deutsch' },
-  { locale: 'ar', text: 'العربية', direction: 'rtl' }
+  { locale: 'en', name: 'English' },
+  { locale: 'zh', name: '中文' },
+  { locale: 'de', name: 'Deutsch' },
+  { locale: 'ar', name: 'العربية', direction: 'rtl' }
 ]
 ```
 

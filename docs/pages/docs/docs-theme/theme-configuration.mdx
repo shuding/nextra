@@ -1,4 +1,5 @@
 import { Screenshot } from 'components/screenshot'
+import { OptionTable } from 'components/table'
 
 # Theme Configuration
 
@@ -16,8 +17,6 @@ export default {
 ```
 
 Detailed information for each option is listed below.
-
-import { OptionTable } from 'components/table'
 
 ## Global
 
@@ -383,7 +382,7 @@ notice.
       'string',
       'Storage key to keep the banner state (dismissed or not).'
     ],
-    ['banner.text', 'React.ReactNode | React.FC', 'Text of the banner.']
+    ['banner.content', 'React.ReactNode | React.FC', 'Content of the banner.']
   ]}
 />
 
@@ -613,9 +612,9 @@ Show an “Edit this page” link on the page that points to the file URL on Git
 <OptionTable
   options={[
     [
-      'editLink.text',
+      'editLink.content',
       'React.ReactNode | React.FC',
-      'Content of the default edit link.'
+      'Content of the edit link.'
     ],
     [
       'editLink.component',
@@ -711,9 +710,9 @@ default footer, or fully customize it with a custom component.
 <OptionTable
   options={[
     [
-      'footer.text',
+      'footer.content',
       'React.ReactNode | React.FC',
-      'Content of the default footer component.'
+      'Content of the footer component.'
     ],
     [
       'footer.component',

@@ -63,14 +63,14 @@ const FOOTER_LINK_TEXT = {
 
 const config: DocsThemeConfig = {
   banner: {
-    key: 'swr-2',
-    text: 'SWR 2.0 is out! Read more →'
+    content: 'SWR 2.0 is out! Read more →',
+    key: 'swr-2'
   },
   darkMode: true,
   docsRepositoryBase:
     'https://github.com/shuding/nextra/blob/core/examples/swr-site',
   editLink: {
-    text: function useText() {
+    content: function useText() {
       const { locale } = useRouter()
       return EDIT_TEXT[locale]
     }
@@ -86,7 +86,7 @@ const config: DocsThemeConfig = {
     }
   },
   footer: {
-    text: function useText() {
+    content: function useText() {
       const { locale } = useRouter()
       return (
         <a
@@ -148,9 +148,9 @@ const config: DocsThemeConfig = {
     )
   },
   i18n: [
-    { locale: 'en', text: 'English' },
-    { direction: 'rtl', locale: 'es', text: 'Español RTL' },
-    { locale: 'ru', text: 'Русский' }
+    { locale: 'en', name: 'English' },
+    { direction: 'rtl', locale: 'es', name: 'Español RTL' },
+    { locale: 'ru', name: 'Русский' }
   ],
   logo: function Logo() {
     const { locale } = useRouter()

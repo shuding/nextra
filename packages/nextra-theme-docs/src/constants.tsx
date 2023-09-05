@@ -33,7 +33,7 @@ const i18nSchema = z.array(
   z.strictObject({
     direction: z.enum(['ltr', 'rtl']).optional(),
     locale: z.string(),
-    text: z.string()
+    name: z.string()
   })
 )
 
@@ -45,9 +45,9 @@ const fc = [isFunction, { message: 'Must be React.FC' }] as const
 
 export const themeSchema = z.strictObject({
   banner: z.strictObject({
+    content: z.custom<ReactNode | FC>(...reactNode).optional(),
     dismissible: z.boolean(),
-    key: z.string(),
-    text: z.custom<ReactNode | FC>(...reactNode).optional()
+    key: z.string()
   }),
   chat: z.strictObject({
     icon: z.custom<ReactNode | FC>(...reactNode),
@@ -65,7 +65,7 @@ export const themeSchema = z.strictObject({
         filePath?: string
       }>
     >(...fc),
-    text: z.custom<ReactNode | FC>(...reactNode)
+    content: z.custom<ReactNode | FC>(...reactNode)
   }),
   faviconGlyph: z.string().optional(),
   feedback: z.strictObject({
@@ -75,7 +75,7 @@ export const themeSchema = z.strictObject({
   }),
   footer: z.strictObject({
     component: z.custom<ReactNode | FC<{ menu: boolean }>>(...reactNode),
-    text: z.custom<ReactNode | FC>(...reactNode)
+    content: z.custom<ReactNode | FC>(...reactNode)
   }),
   gitTimestamp: z.custom<ReactNode | FC<{ timestamp: Date }>>(...reactNode),
   head: z.custom<ReactNode | FC>(...reactNode),
@@ -201,7 +201,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
         </Anchor>
       )
     },
-    text: 'Edit this page'
+    content: 'Edit this page'
   },
   feedback: {
     content: 'Question? Give us feedback →',
@@ -217,7 +217,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
   },
   footer: {
     component: Footer,
-    text: `MIT ${new Date().getFullYear()} © Nextra.`
+    content: `MIT ${new Date().getFullYear()} © Nextra.`
   },
   gitTimestamp: function GitTimestamp({ timestamp }) {
     const { locale = DEFAULT_LOCALE } = useRouter()

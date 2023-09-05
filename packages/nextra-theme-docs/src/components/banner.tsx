@@ -6,7 +6,7 @@ import { renderComponent } from '../utils'
 
 export function Banner(): ReactElement | null {
   const { banner } = useConfig()
-  if (!banner.text) {
+  if (!banner.content) {
     return null
   }
   const hideBannerScript = `try{if(localStorage.getItem(${JSON.stringify(
@@ -25,7 +25,7 @@ export function Banner(): ReactElement | null {
         )}
       >
         <div className="nx-w-full nx-truncate nx-px-4 nx-text-center nx-font-medium nx-text-sm">
-          {renderComponent(banner.text)}
+          {renderComponent(banner.content)}
         </div>
         {banner.dismissible && (
           <button

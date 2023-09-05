@@ -6,8 +6,8 @@ import { useConfig } from 'nextra-theme-docs'
  */
 export default {
   banner: {
-    key: 'Nextra 2',
-    text: 'Nextra 2 Alpha'
+    content: 'Nextra 2 Alpha',
+    key: 'Nextra 2'
   },
   chat: {
     link: 'https://discord.gg/hEM84NMkRv' // Next.js discord server,
@@ -15,7 +15,7 @@ export default {
   docsRepositoryBase:
     'https://github.com/shuding/nextra/blob/core/examples/docs',
   editLink: {
-    text: 'Edit this page on GitHub'
+    content: 'Edit this page on GitHub'
   },
   faviconGlyph: '✦',
   useNextSeoProps() {
