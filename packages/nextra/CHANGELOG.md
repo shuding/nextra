@@ -1,5 +1,49 @@
 # nextra
 
+## 3.0.0-alpha.0
+
+### Major Changes
+
+- 50a52fd1: - ❌ remove `_app.mdx`, use `_app.{js,jsx}` or `_app.{ts,tsx}` for
+  TypeScript projects instead
+
+  - ❌ remove Nextra middleware `nextra/locales`
+  - ❌ remove `parseFileName` from `nextra/utils`
+  - ❌ remove `nextra/filter-route-locale`
+  - ❌ remove `resolvePageMap` and `pageMapCache` from `nextra/page-map`
+  - ❌ remove `__nextraPageOptions.pageNextRoute`
+  - ❌ remove `pageOpts.route` and `pageOpts.newNextLinkBehavior`
+  - ❌ remove `LoaderOptions.defaultLocale`
+  - ❌ remove `__nextra_internal__.context[route].themeConfig`
+  - ✅ add `nextra/fetch-filepaths-from-github`
+  - save `pageMap` to `.next/static/chunks/nextra-page-map-{locale}.mjs`
+  - save `fileMap` to `.next/static/chunks/nextra-file-map.mjs`
+
+- 919fe977: set `"peerDependencies.next": ">=13"`
+- ad4823d9: add zod validation for nextraConfig
+- ab07609c: remove `locale` and `defaultLocale` from `normalizePages`
+- 2f3be336: - set `"engines.node": ">=18"`
+
+  - remove `Tab` export, use `Tabs.Tab` instead
+  - remove `Card` export, use `Cards.Card` instead
+  - disallow import md/mdx files that are outside the working directory, use
+    symlinks instead
+
+- 66cce1d1: **BREAKING** bundle to ESM only
+
+  > ⚠️⚠️⚠️ use `next.config.mjs` or `next.config.js` with `"type": "module"`
+
+- 576cb6f1: - rename `nextraConfig.flexsearch` to `nextraConfig.search`
+
+### Minor Changes
+
+- 0fe55db2: add `import { useRouter } from 'nextra/hooks'` for fetching `locale`
+  and `defaultLocale`
+
+### Patch Changes
+
+- d8a406b4: add `"sideEffects": false` for better tree-shaking
+
 ## 2.12.3
 
 ### Patch Changes

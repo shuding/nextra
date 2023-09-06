@@ -1,5 +1,48 @@
 # nextra-theme-docs
 
+## 3.0.0-alpha.0
+
+### Major Changes
+
+- 919fe977: set `"peerDependencies.next": ">=13"`
+- eca75354: - remove `Steps`, `Callout`, `Tabs`, `Tab`, `Cards`, `Card`,
+  `FileTree` exports, export them now from `nextra/components`
+
+  - remove `useMDXComponents` export, export it now from `nextra/mdx`
+  - set by default `sidebar.toggleButton` to true
+
+- f2dd18d2: - rename theme config options
+
+  `i18n.text` → `i18n.name`
+
+  `banner.text` → `banner.content`
+
+  `editLink.text` → `editLink.content`
+
+  `footer.text` → `footer.content`
+
+- 8c1b9d53: remove `<MatchSorterSearch />`
+
+### Minor Changes
+
+- 0fe55db2: add `import { useRouter } from 'nextra/hooks'` for fetching `locale`
+  and `defaultLocale`
+
+### Patch Changes
+
+- 80c9764b: ensure zod is removed from production build with `/* @__PURE__ */`
+  comments
+- Updated dependencies [0fe55db2]
+- Updated dependencies [50a52fd1]
+- Updated dependencies [919fe977]
+- Updated dependencies [ad4823d9]
+- Updated dependencies [ab07609c]
+- Updated dependencies [2f3be336]
+- Updated dependencies [66cce1d1]
+- Updated dependencies [d8a406b4]
+- Updated dependencies [576cb6f1]
+  - nextra@3.0.0-alpha.0
+
 ## 2.12.3
 
 ### Patch Changes

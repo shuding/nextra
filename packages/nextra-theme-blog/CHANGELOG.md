@@ -1,5 +1,29 @@
 # nextra-theme-blog
 
+## 3.0.0-alpha.0
+
+### Major Changes
+
+- 16ab7f78: - remove `legacyBehavior` from `NextLink`
+
+  - remove `config.cusdis`. Instead, now you need to pass cusdis options as
+    props in `Cusdis` component
+
+- 919fe977: set `"peerDependencies.next": ">=13"`
+
+### Patch Changes
+
+- Updated dependencies [0fe55db2]
+- Updated dependencies [50a52fd1]
+- Updated dependencies [919fe977]
+- Updated dependencies [ad4823d9]
+- Updated dependencies [ab07609c]
+- Updated dependencies [2f3be336]
+- Updated dependencies [66cce1d1]
+- Updated dependencies [d8a406b4]
+- Updated dependencies [576cb6f1]
+  - nextra@3.0.0-alpha.0
+
 ## 2.12.3
 
 ### Patch Changes
