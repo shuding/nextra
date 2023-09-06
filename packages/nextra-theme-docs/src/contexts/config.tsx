@@ -62,13 +62,13 @@ function validateMeta(pageMap: PageMapItem[]) {
   }
 }
 
-export const ConfigProvider = ({
+export function ConfigProvider({
   children,
   value: { themeConfig, pageOpts }
 }: {
   children: ReactNode
   value: Context
-}): ReactElement => {
+}): ReactElement {
   const [menu, setMenu] = useState(false)
   // Merge only on first load
   theme ||= {
