@@ -22,14 +22,10 @@ export function pageTitleFromFilename(fileName: string) {
 }
 
 export function sortPages(
-  pages: (
-    | Pick<MdxFile, 'kind' | 'name' | 'frontMatter'>
-    | Pick<Folder, 'kind' | 'name'>
-  )[],
+  pages: Pick<MdxFile, 'kind' | 'name' | 'frontMatter'>[],
   locale?: string
 ): [string, string][] {
   return pages
-    // .filter(item => item.kind === 'Folder')
     .map(item => ({
       name: item.name,
       date: 'frontMatter' in item && item.frontMatter?.date,

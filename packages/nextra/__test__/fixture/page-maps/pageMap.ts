@@ -177,7 +177,7 @@ export const cnPageMap: PageMapItem[] = [
         name: 'with-nextjs',
         route: '/docs/with-nextjs',
         locale: 'zh-CN'
-      },
+      }
     ],
     route: '/docs'
   },
@@ -235,7 +235,7 @@ export const cnPageMap: PageMapItem[] = [
           ssr: 'Next.js SSR'
         },
         locale: 'zh-CN'
-      },
+      }
     ],
     route: '/examples'
   },
@@ -559,5 +559,5 @@ export const usPageMap: PageMapItem[] = [
       }
     },
     locale: 'en-US'
-  },
+  }
 ]
