@@ -166,12 +166,8 @@ exports[`Page Process > should match i18n site page maps 1`] = `
               "type": "separator",
             },
             "404-500": "404/500 Custom Error Pages",
-            "advanced": {
-              "title": "Advanced",
-            },
-            "arguments": {
-              "title": "Arguments",
-            },
+            "advanced": "Advanced",
+            "arguments": "Arguments",
             "callout": "Callout",
             "change-log": {
               "theme": {
@@ -182,39 +178,23 @@ exports[`Page Process > should match i18n site page maps 1`] = `
             "code-block-without-language": "Code Block without Language",
             "conditional-fetching": "Conditional Data Fetching",
             "custom-header-ids": "Custom Header IDs",
-            "data-fetching": {
-              "title": "Data Fetching",
-            },
+            "data-fetching": "Data Fetching",
             "error-handling": {
               "display": "hidden",
               "title": "Error Handling",
             },
-            "getting-started": {
-              "title": "Getting Started",
-            },
+            "getting-started": "Getting Started",
             "github_link": {
               "href": "https://github.com/shuding/nextra",
               "newWindow": true,
               "title": "GitHub 🐙 →",
             },
-            "global-configuration": {
-              "title": "Global Configuration",
-            },
-            "middleware": {
-              "title": "Middleware",
-            },
-            "mutation": {
-              "title": "Mutation",
-            },
-            "options": {
-              "title": "Options",
-            },
-            "pagination": {
-              "title": "Pagination",
-            },
-            "prefetching": {
-              "title": "Prefetching",
-            },
+            "global-configuration": "Global Configuration",
+            "middleware": "Middleware",
+            "mutation": "Mutation",
+            "options": "Options",
+            "pagination": "Pagination",
+            "prefetching": "Prefetching",
             "raw-layout": {
               "theme": {
                 "layout": "raw",
@@ -222,9 +202,7 @@ exports[`Page Process > should match i18n site page maps 1`] = `
               "title": "Raw Layout",
             },
             "revalidation": "Auto Revalidation",
-            "suspense": {
-              "title": "Suspense",
-            },
+            "suspense": "Suspense",
             "typescript": "TypeScript :)",
             "understanding": "Understanding",
             "with-nextjs": "Next.js SSG and SSR",
@@ -482,18 +460,14 @@ exports[`Page Process > should match i18n site page maps 1`] = `
           "data": {
             "auth": "Authentication",
             "basic": "Basic Usage",
-            "error-handling": {
-              "title": "Error Handling",
-            },
+            "error-handling": "Error Handling",
             "full": {
               "theme": {
                 "layout": "raw",
               },
               "title": "Full",
             },
-            "infinite-loading": {
-              "title": "Infinite Loading",
-            },
+            "infinite-loading": "Infinite Loading",
             "ssr": "Next.js SSR",
           },
           "kind": "Meta",
