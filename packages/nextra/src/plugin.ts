@@ -188,57 +188,65 @@ ${(error as Error).name}: ${(error as Error).message}`
   const items = (await Promise.all(promises)).filter(truthy)
 
   const mdxPages: MdxFile[] = []
-  const metaLocaleIndexes = new Map<string, number>()
+  let hasMeta = false
 
-  for (let i = 0; i < items.length; i++) {
-    const item = items[i]
+  for (const item of items) {
     if (item.kind === 'MdxPage') {
       mdxPages.push(item)
     } else if (item.kind === 'Meta') {
-      // It is possible that it doesn't have a locale suffixed, we use '' here.
-      // @ts-expect-error TODO fix it
-      metaLocaleIndexes.set(item.locale || '', i)
+      hasMeta = true
     }
   }
 
-  // In the current level, find the corresponding meta file for each locale and
-  // extend the fallback meta data we get from the file system.
-  for (const locale of locales) {
-    let metaIndex = metaLocaleIndexes.get(locale)
+  // add `_meta.json` file if it's missing
+  if (!hasMeta && mdxPages.length > 0) {
+    const defaultMeta = sortPages(mdxPages)
 
-    const defaultMeta = sortPages(mdxPages, locale)
-
-    const metaFilename = locale
-      ? META_FILENAME.replace('.', `.${locale}.`)
-      : META_FILENAME
-
-    const metaPath = path.join(dir, metaFilename) as MetaJsonPath
-
-    if (metaIndex === undefined && defaultMeta.length > 0) {
-      // Create a new meta file if it doesn't exist.
-      const meta: MetaJsonFile = {
-        kind: 'Meta',
-        data: Object.fromEntries(defaultMeta)
-      }
-      fileMap[metaPath] = meta
-      items.push(meta)
-      metaIndex = items.length - 1
+    const meta: MetaJsonFile = {
+      kind: 'Meta',
+      data: Object.fromEntries(defaultMeta)
     }
-
-    if (metaIndex !== undefined) {
-      // Fill with the fallback. Note that we need to keep the original order.
-      const meta = { ...items[metaIndex] } as MetaJsonFile
-      for (const [key, capitalizedTitle] of defaultMeta) {
-        meta.data[key] ||= capitalizedTitle
-        const metaItem = meta.data[key]
-        if (typeof metaItem === 'object') {
-          metaItem.title ||= capitalizedTitle
-        }
-      }
-      fileMap[metaPath] = meta
-      items[metaIndex] = meta
-    }
+    items.push(meta)
   }
+
+  // // In the current level, find the corresponding meta file for each locale and
+  // // extend the fallback meta data we get from the file system.
+  // for (const locale of locales) {
+  //   let metaIndex = metaLocaleIndexes.get(locale)
+  //
+  //   const defaultMeta = sortPages(mdxPages, locale)
+  //
+  //   // const metaFilename = locale
+  //   //   ? META_FILENAME.replace('.', `.${locale}.`)
+  //   //   : META_FILENAME
+  //
+  //   // const metaPath = path.join(dir, metaFilename) as MetaJsonPath
+  //
+  //   if (metaIndex === undefined && defaultMeta.length > 0) {
+  //     // Create a new meta file if it doesn't exist.
+  //     const meta: MetaJsonFile = {
+  //       kind: 'Meta',
+  //       data: Object.fromEntries(defaultMeta)
+  //     }
+  //     // fileMap[metaPath] = meta
+  //     items.push(meta)
+  //     metaIndex = items.length - 1
+  //   }
+  //
+  //   if (metaIndex !== undefined) {
+  //     // Fill with the fallback. Note that we need to keep the original order.
+  //     const meta = { ...items[metaIndex] } as MetaJsonFile
+  //     for (const [key, capitalizedTitle] of defaultMeta) {
+  //       meta.data[key] ||= capitalizedTitle
+  //       const metaItem = meta.data[key]
+  //       if (typeof metaItem === 'object') {
+  //         metaItem.title ||= capitalizedTitle
+  //       }
+  //     }
+  //     fileMap[metaPath] = meta
+  //     items[metaIndex] = meta
+  //   }
+  // }
 
   return { items, fileMap }
 }
