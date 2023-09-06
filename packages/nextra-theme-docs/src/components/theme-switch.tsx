@@ -4,8 +4,8 @@ import { MoonIcon, SunIcon } from 'nextra/icons'
 import type { ReactElement } from 'react'
 import type { z } from 'zod'
 import { useConfig } from '../contexts'
-import { Select } from './select'
 import type { themeOptionsSchema } from '../schemas'
+import { Select } from './select'
 
 type ThemeSwitchProps = {
   lite?: boolean
