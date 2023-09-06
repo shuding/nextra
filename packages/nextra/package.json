@@ -87,6 +87,9 @@
       "mdx": [
         "./dist/mdx.d.mts"
       ],
+      "schemas": [
+        "./dist/schemas.d.mts"
+      ],
       "normalize-pages": [
         "./dist/normalize-pages.d.mts"
       ],

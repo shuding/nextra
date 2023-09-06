@@ -178,13 +178,13 @@ const A = ({ href = '', ...props }) => (
   <Anchor href={href} newWindow={EXTERNAL_HREF_REGEX.test(href)} {...props} />
 )
 
-export const getComponents = ({
+export function getComponents({
   isRawLayout,
   components
 }: {
   isRawLayout?: boolean
   components?: DocsThemeConfig['components']
-}): Components => {
+}): Components {
   if (isRawLayout) {
     return { a: A }
   }

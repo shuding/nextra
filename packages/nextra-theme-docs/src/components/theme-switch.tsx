@@ -2,20 +2,15 @@ import { useTheme } from 'next-themes'
 import { useMounted } from 'nextra/hooks'
 import { MoonIcon, SunIcon } from 'nextra/icons'
 import type { ReactElement } from 'react'
-import * as z from 'zod' // use `import * as z` for better tree-shaking https://github.com/colinhacks/zod/issues/2596#issuecomment-1643053289
+import type { z } from 'zod'
 import { useConfig } from '../contexts'
+import type { themeOptionsSchema } from '../schemas'
 import { Select } from './select'
 
 type ThemeSwitchProps = {
   lite?: boolean
   className?: string
 }
-
-export const themeOptionsSchema = z.strictObject({
-  light: z.string(),
-  dark: z.string(),
-  system: z.string()
-})
 
 type ThemeOptions = z.infer<typeof themeOptionsSchema>
 

@@ -1,11 +1,12 @@
 import { ThemeProvider } from 'next-themes'
 import type { FrontMatter, PageMapItem, PageOpts } from 'nextra'
-import { metaSchema } from 'nextra/normalize-pages'
+import { metaSchema } from 'nextra/schemas'
 import type { ReactElement, ReactNode } from 'react'
 import { createContext, useContext, useState } from 'react'
 import type { ZodError } from 'zod'
 import type { DocsThemeConfig } from '../constants'
-import { DEEP_OBJECT_KEYS, DEFAULT_THEME, themeSchema } from '../constants'
+import { DEEP_OBJECT_KEYS, DEFAULT_THEME } from '../constants'
+import { themeSchema } from '../schemas'
 import type { Context } from '../types'
 import { MenuProvider } from './menu'
 
@@ -61,13 +62,13 @@ function validateMeta(pageMap: PageMapItem[]) {
   }
 }
 
-export const ConfigProvider = ({
+export function ConfigProvider({
   children,
   value: { themeConfig, pageOpts }
 }: {
   children: ReactNode
   value: Context
-}): ReactElement => {
+}): ReactElement {
   const [menu, setMenu] = useState(false)
   // Merge only on first load
   theme ||= {

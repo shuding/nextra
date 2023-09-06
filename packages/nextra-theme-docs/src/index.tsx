@@ -37,13 +37,13 @@ const classes = {
   main: cn('nx-w-full nx-break-words')
 }
 
-const Body = ({
+function Body({
   themeContext,
   breadcrumb,
   timestamp,
   navigation,
   children
-}: BodyProps): ReactElement => {
+}: BodyProps): ReactElement {
   const config = useConfig()
   const mounted = useMounted()
 
