@@ -27,7 +27,6 @@ export interface Folder<FileType = PageMapItem> {
 
 export type MetaJsonFile = {
   kind: 'Meta'
-  locale?: string
   data: {
     [fileName: string]: Meta
   }
@@ -47,7 +46,6 @@ export type DynamicMeta = Record<string, DynamicMetaItem>
 
 export type DynamicMetaJsonFile = {
   kind: 'Meta'
-  locale?: string
   data: DynamicMeta
 }
 
@@ -58,7 +56,6 @@ export type MdxFile<FrontMatterType = FrontMatter> = {
   kind: 'MdxPage'
   name: string
   route: string
-  locale?: string
   frontMatter?: FrontMatterType
 }
 
@@ -113,7 +110,6 @@ export type ThemeConfig = any | null
 
 export type NextraThemeLayoutProps = {
   pageOpts: PageOpts
-  pageProps: any
   themeConfig: ThemeConfig
   children: ReactNode
 }
@@ -124,7 +120,7 @@ export type NextraInternalGlobal = typeof globalThis & {
     route: string
     context: Record<string, { Content: FC; pageOpts: PageOpts }>
     refreshListeners: Record<string, (() => void)[]>
-    Layout: FC<any>
+    Layout: FC<NextraThemeLayoutProps>
     themeConfig?: ThemeConfig
   }
 }

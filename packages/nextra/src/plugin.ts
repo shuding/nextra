@@ -196,6 +196,7 @@ ${(error as Error).name}: ${(error as Error).message}`
       mdxPages.push(item)
     } else if (item.kind === 'Meta') {
       // It is possible that it doesn't have a locale suffixed, we use '' here.
+      // @ts-expect-error TODO fix it
       metaLocaleIndexes.set(item.locale || '', i)
     }
   }

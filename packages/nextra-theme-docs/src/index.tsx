@@ -106,16 +106,16 @@ function Body({
   )
 }
 
-const InnerLayout = ({
+function InnerLayout({
   filePath,
   pageMap,
   frontMatter,
   headings,
   timestamp,
   children
-}: PageOpts & { children: ReactNode }): ReactElement => {
+}: PageOpts & { children: ReactNode }): ReactElement {
   const config = useConfig()
-  const { locale = DEFAULT_LOCALE, defaultLocale } = useRouter()
+  const { locale = DEFAULT_LOCALE } = useRouter()
   const fsPath = useFSRoute()
 
   const {
@@ -123,19 +123,13 @@ const InnerLayout = ({
     activeIndex,
     activeThemeContext,
     activePath,
-    topLevelNavbarItems,
+    directories,
     docsDirectories,
     flatDocsDirectories,
-    directories
+    topLevelNavbarItems
   } = useMemo(
-    () =>
-      normalizePages({
-        list: pageMap,
-        locale,
-        defaultLocale,
-        route: fsPath
-      }),
-    [pageMap, locale, defaultLocale, fsPath]
+    () => normalizePages({ list: pageMap, route: fsPath }),
+    [pageMap, fsPath]
   )
 
   const themeContext = { ...activeThemeContext, ...frontMatter }

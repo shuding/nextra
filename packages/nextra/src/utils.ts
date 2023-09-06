@@ -23,16 +23,13 @@ export function pageTitleFromFilename(fileName: string) {
 
 export function sortPages(
   pages: (
-    | Pick<MdxFile, 'kind' | 'name' | 'frontMatter' | 'locale'>
+    | Pick<MdxFile, 'kind' | 'name' | 'frontMatter'>
     | Pick<Folder, 'kind' | 'name'>
   )[],
   locale?: string
 ): [string, string][] {
-  if (locale === '') {
-    locale = undefined
-  }
   return pages
-    .filter(item => item.kind === 'Folder' || item.locale === locale)
+    .filter(item => item.kind === 'Folder')
     .map(item => ({
       name: item.name,
       date: 'frontMatter' in item && item.frontMatter?.date,
@@ -50,7 +47,9 @@ export function sortPages(
       if (b.date) {
         return 1 // sort a after b
       }
-      return a.title.localeCompare(b.title, locale, { numeric: true })
+      return a.title.localeCompare(b.title, locale || undefined, {
+        numeric: true
+      })
     })
     .map(item => [item.name, item.title])
 }

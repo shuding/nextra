@@ -82,16 +82,12 @@ function findFirstRoute(items: DocsItem[]): string | undefined {
 
 export function normalizePages({
   list,
-  locale,
-  defaultLocale,
   route,
   docsRoot = '',
   underCurrentDocsRoot = false,
   pageThemeContext = DEFAULT_PAGE_THEME
 }: {
   list: PageMapItem[]
-  locale: string
-  defaultLocale?: string
   route: string
   docsRoot?: string
   underCurrentDocsRoot?: boolean
@@ -100,12 +96,8 @@ export function normalizePages({
   let _meta: Record<string, any> | undefined
   for (const item of list) {
     if (item.kind === 'Meta') {
-      if (item.locale === locale) {
-        _meta = item.data
-        break
-      }
-      // fallback
-      _meta ||= item.data
+      _meta = item.data
+      break
     }
   }
   const meta = _meta || {}
@@ -147,14 +139,9 @@ export function normalizePages({
   const items = list
     .filter(
       (a): a is MdxFile | Folder =>
-        // not meta
         a.kind !== 'Meta' &&
         // not hidden routes
-        !a.name.startsWith('_') &&
-        // locale matches, or fallback to default locale
-        (!('locale' in a) ||
-          !a.locale ||
-          [locale, defaultLocale].includes(a.locale))
+        !a.name.startsWith('_')
     )
     .sort((a, b) => {
       const indexA = metaKeys.indexOf(a.name)
@@ -227,8 +214,6 @@ export function normalizePages({
       a.children &&
       normalizePages({
         list: a.children,
-        locale,
-        defaultLocale,
         route,
         docsRoot: type === 'page' || type === 'menu' ? a.route : docsRoot,
         underCurrentDocsRoot: underCurrentDocsRoot || isCurrentDocsTree,
