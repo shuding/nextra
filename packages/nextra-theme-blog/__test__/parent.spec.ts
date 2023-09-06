@@ -22,7 +22,6 @@ describe('parent', () => {
             "type": "posts",
           },
           "kind": "MdxPage",
-          "locale": "",
           "name": "index",
           "route": "/posts",
         },
