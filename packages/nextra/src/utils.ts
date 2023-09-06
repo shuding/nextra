@@ -1,7 +1,7 @@
 import path from 'node:path'
 import slash from 'slash'
 import title from 'title'
-import type { Folder, MdxFile, Meta } from './types'
+import type { MdxFile, Meta } from './types'
 
 type Truthy<T> = T extends false | '' | 0 | null | undefined ? never : T // from lodash
 
@@ -22,7 +22,7 @@ export function pageTitleFromFilename(fileName: string) {
 }
 
 export function sortPages(
-  pages: Pick<MdxFile, 'kind' | 'name' | 'frontMatter'>[],
+  pages: MdxFile[],
   locale?: string
 ): [string, string][] {
   return pages

@@ -31,10 +31,10 @@ const readFile = promisify(fs.readFile)
 const realpath = promisify(fs.realpath)
 const stat = promisify(fs.stat)
 
-export const collectMdx = async (
+export async function collectMdx(
   filePath: string,
   route = ''
-): Promise<MdxFile> => {
+): Promise<MdxFile> {
   const { name } = path.parse(filePath)
 
   const content = await readFile(filePath, 'utf8')
