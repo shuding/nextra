@@ -65,7 +65,7 @@ const fetcher = query => request('/api/graphql', query)
 
 function App() {
   const { data, error } = useSWR(
-    /* GraphQL */`{
+    /* GraphQL */ `{
       Movie(title: "Inception") {
         releaseDate
         actors {
