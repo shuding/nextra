@@ -1,8 +1,8 @@
 {
   "basic": "Basic Usage",
   "auth": "Authentication",
-  "infinite-loading": {},
-  "error-handling": {},
+  "infinite-loading": "",
+  "error-handling": "",
   "ssr": "Next.js SSR",
   "full": {
     "theme": {

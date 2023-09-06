@@ -1,6 +1,6 @@
 import type { ProcessorOptions } from '@mdx-js/mdx'
 import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
-import * as z from 'zod' // use `import * as z` for better tree-shaking https://github.com/colinhacks/zod/issues/2596#issuecomment-1643053289
+import { z } from 'zod'
 import type { PageOpts } from './types'
 
 export const searchSchema = z.boolean().or(

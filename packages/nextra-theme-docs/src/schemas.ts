@@ -1,7 +1,7 @@
 import type { NextSeoProps } from 'next-seo'
 import type { FC, ReactNode } from 'react'
 import { isValidElement } from 'react'
-import * as z from 'zod' // use `import * as z` for better tree-shaking https://github.com/colinhacks/zod/issues/2596#issuecomment-1643053289
+import { z } from 'zod'
 import type { NavBarProps } from './components/navbar'
 import type { TOCProps } from './components/toc'
 

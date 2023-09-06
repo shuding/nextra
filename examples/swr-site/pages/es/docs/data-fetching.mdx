@@ -35,9 +35,9 @@ function App() {
 
 <Callout>
   Si estás usando <strong>Next.js</strong>, no necesita importar este polyfill:
-  <br />
-  [Nuevos Polyfills Incorporados: fetch(), URL, y
-  Object.assign](https://nextjs.org/blog/next-9-1-7#new-built-in-polyfills-fetch-url-and-objectassign)
+
+[Nuevos Polyfills Incorporados: fetch(), URL, y Object.assign](https://nextjs.org/blog/next-9-1-7#new-built-in-polyfills-fetch-url-and-objectassign)
+
 </Callout>
 
 ## Axios
@@ -65,14 +65,16 @@ const fetcher = query => request('/api/graphql', query)
 
 function App() {
   const { data, error } = useSWR(
-    `{
-      Movie(title: "Inception") {
-        releaseDate
-        actors {
-          name
+    /* GraphQL */ `
+      {
+        Movie(title: "Inception") {
+          releaseDate
+          actors {
+            name
+          }
         }
       }
-    }`,
+    `,
     fetcher
   )
   // ...

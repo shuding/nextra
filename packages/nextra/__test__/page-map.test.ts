@@ -18,7 +18,7 @@ describe('Page Process', () => {
     expect(items).toEqual([])
   })
 
-  it('should add `_meta.json` file if it missing', async () => {
+  it("should add `_meta.json` file if it's missing", async () => {
     const { items } = await collectFiles({
       dir: path.join(
         CWD,

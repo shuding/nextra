@@ -18,7 +18,7 @@ export class NextraPlugin {
 
     compiler.hooks.beforeCompile.tapAsync(pluginName, async (_, callback) => {
       try {
-        const result = await collectFiles({ dir: PAGES_DIR, locales })
+        const result = await collectFiles({ dir: PAGES_DIR })
 
         for (const locale of locales) {
           const folderItem =

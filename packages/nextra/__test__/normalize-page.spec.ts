@@ -1,48 +1,34 @@
 import { normalizePages } from '../src/normalize-pages'
 import { cnPageMap, usPageMap } from './fixture/page-maps/pageMap'
 
-const defaultLocale = 'en-US'
-
 describe('normalize-page', () => {
   it('zh-CN home', () => {
-    const locale = 'zh-CN'
     const result = normalizePages({
       list: cnPageMap,
-      locale,
-      defaultLocale,
       route: '/'
     })
     expect(result).toMatchSnapshot()
   })
 
   it('zh-CN getting-started', () => {
-    const locale = 'zh-CN'
     const result = normalizePages({
       list: cnPageMap,
-      locale,
-      defaultLocale,
       route: '/docs/getting-started'
     })
     expect(result).toMatchSnapshot()
   })
 
   it('en-US home', () => {
-    const locale = 'en-US'
     const result = normalizePages({
       list: usPageMap,
-      locale,
-      defaultLocale,
       route: '/'
     })
     expect(result).toMatchSnapshot()
   })
 
   it('en-US getting-started', () => {
-    const locale = 'en-US'
     const result = normalizePages({
       list: usPageMap,
-      locale,
-      defaultLocale,
       route: '/docs/getting-started'
     })
     expect(result).toMatchSnapshot()
@@ -72,8 +58,6 @@ describe('normalize-page', () => {
           }
         }
       ],
-      locale: 'en-US',
-      defaultLocale: 'en-US',
       route: '/500ddd'
     })
     expect(result).toMatchSnapshot()
@@ -103,8 +87,6 @@ describe('normalize-page', () => {
           }
         }
       ],
-      locale: 'en-US',
-      defaultLocale: 'en-US',
       route: '/500'
     })
     expect(result).toMatchSnapshot()
@@ -159,7 +141,6 @@ describe('normalize-page', () => {
           route: '/showcase'
         }
       ],
-      locale: 'en-US',
       route: '/docs'
     })
     expect(result.topLevelNavbarItems).toMatchInlineSnapshot(`

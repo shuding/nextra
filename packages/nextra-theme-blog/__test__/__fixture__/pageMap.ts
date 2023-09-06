@@ -12,7 +12,6 @@ export const indexOpts: BlogPageOpts = {
       kind: 'MdxPage',
       name: 'index',
       route: '/',
-      locale: '',
       frontMatter: {
         type: 'page',
         title: 'About',
@@ -27,7 +26,6 @@ export const indexOpts: BlogPageOpts = {
           kind: 'MdxPage',
           name: 'aaron-swartz-a-programmable-web',
           route: '/posts/aaron-swartz-a-programmable-web',
-          locale: '',
           frontMatter: {
             title: 'Notes on A Programmable Web by Aaron Swartz',
             date: '2016/5/21',
@@ -41,7 +39,6 @@ export const indexOpts: BlogPageOpts = {
           kind: 'MdxPage',
           name: 'index',
           route: '/posts',
-          locale: '',
           frontMatter: {
             type: 'posts',
             title: 'Random Thoughts',
@@ -59,7 +56,6 @@ export const indexOpts: BlogPageOpts = {
           kind: 'MdxPage',
           name: '[tag]',
           route: '/tags/[tag]',
-          locale: '',
           frontMatter: {
             type: 'tag'
           }
@@ -90,7 +86,6 @@ export const postsOpts: BlogPageOpts = {
       kind: 'MdxPage',
       name: 'index',
       route: '/',
-      locale: '',
       frontMatter: {
         type: 'page',
         title: 'About',
@@ -105,7 +100,6 @@ export const postsOpts: BlogPageOpts = {
           kind: 'MdxPage',
           name: 'aaron-swartz-a-programmable-web',
           route: '/posts/aaron-swartz-a-programmable-web',
-          locale: '',
           frontMatter: {
             title: 'Notes on A Programmable Web by Aaron Swartz',
             date: '2016/5/21',
@@ -119,7 +113,6 @@ export const postsOpts: BlogPageOpts = {
           kind: 'MdxPage',
           name: 'index',
           route: '/posts',
-          locale: '',
           frontMatter: {
             type: 'posts',
             title: 'Random Thoughts',
@@ -137,7 +130,6 @@ export const postsOpts: BlogPageOpts = {
           kind: 'MdxPage',
           name: '[tag]',
           route: '/tags/[tag]',
-          locale: '',
           frontMatter: {
             type: 'tag'
           }
@@ -171,7 +163,6 @@ export const articleOpts: BlogPageOpts = {
       kind: 'MdxPage',
       name: 'index',
       route: '/',
-      locale: '',
       frontMatter: {
         type: 'page',
         title: 'About',
@@ -186,7 +177,6 @@ export const articleOpts: BlogPageOpts = {
           kind: 'MdxPage',
           name: 'aaron-swartz-a-programmable-web',
           route: '/posts/aaron-swartz-a-programmable-web',
-          locale: '',
           frontMatter: {
             title: 'Notes on A Programmable Web by Aaron Swartz',
             date: '2016/5/21',
@@ -200,7 +190,6 @@ export const articleOpts: BlogPageOpts = {
           kind: 'MdxPage',
           name: 'index',
           route: '/posts',
-          locale: '',
           frontMatter: {
             type: 'posts',
             title: 'Random Thoughts',
@@ -218,7 +207,6 @@ export const articleOpts: BlogPageOpts = {
           kind: 'MdxPage',
           name: '[tag]',
           route: '/tags/[tag]',
-          locale: '',
           frontMatter: {
             type: 'tag'
           }
