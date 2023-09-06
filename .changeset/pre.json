@@ -6,5 +6,20 @@
     "nextra-theme-blog": "2.12.3",
     "nextra-theme-docs": "2.12.3"
   },
-  "changesets": []
+  "changesets": [
+    "dirty-buttons-crash",
+    "early-walls-hammer",
+    "fluffy-rings-play",
+    "gentle-monkeys-smash",
+    "loud-schools-decide",
+    "metal-flowers-lie",
+    "mighty-cars-hear",
+    "moody-pianos-hide",
+    "plenty-chairs-raise",
+    "poor-carrots-raise",
+    "proud-laws-juggle",
+    "selfish-penguins-deliver",
+    "short-games-carry",
+    "wild-waves-invite"
+  ]
 }
