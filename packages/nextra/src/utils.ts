@@ -29,7 +29,7 @@ export function sortPages(
   locale?: string
 ): [string, string][] {
   return pages
-    .filter(item => item.kind === 'Folder')
+    // .filter(item => item.kind === 'Folder')
     .map(item => ({
       name: item.name,
       date: 'frontMatter' in item && item.frontMatter?.date,
