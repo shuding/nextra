@@ -109,6 +109,7 @@ export type ThemeConfig = any | null
 
 export type NextraThemeLayoutProps = {
   pageOpts: PageOpts
+  pageProps: any
   themeConfig: ThemeConfig
   children: ReactNode
 }
