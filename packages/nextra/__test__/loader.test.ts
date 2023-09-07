@@ -16,16 +16,25 @@ describe('tree shaking', async () => {
   )
   const pageChunkFileNames = await fs.readdir(pageChunksDirPath)
 
-  describe('_app', () => {
-    it('ensure zod is removed from production build with /* @__PURE__ */ comments', async () => {
-      const appFile = await fs.readFile(
-        path.join(
-          pageChunksDirPath,
-          pageChunkFileNames.find(name => name.startsWith('_app-'))!
-        ),
-        'utf8'
-      )
+  describe('_app', async () => {
+    const appFile = await fs.readFile(
+      path.join(
+        pageChunksDirPath,
+        pageChunkFileNames.find(name => name.startsWith('_app-'))!
+      ),
+      'utf8'
+    )
+    it('ensure `zod` is removed from production build with /* @__PURE__ */ comments', async () => {
       expect(appFile.includes('Zod')).toBe(false)
+    })
+    it('ensure `title` is removed', () => {
+      expect(appFile.includes('ZEIT Inc.')).toBe(false)
+    })
+    it('ensure nextra logger is removed', () => {
+      expect(appFile.includes('[nextra]')).toBe(false)
+    })
+    it('ensure `slash` is removed', () => {
+      expect(appFile.includes('\\\\?\\')).toBe(false)
     })
   })
 
