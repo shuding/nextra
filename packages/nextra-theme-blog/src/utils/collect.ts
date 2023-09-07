@@ -9,11 +9,7 @@ const isNav = (page: PageMapItem): page is MdxFile => {
   return type && ['page', 'posts'].includes(type)
 }
 const isPost = (page: PageMapItem): page is MdxFile => {
-  if (
-    page.kind === 'Folder' ||
-    page.kind === 'Meta' ||
-    page.name.startsWith('_')
-  )
+  if ('children' in page || 'data' in page || page.name.startsWith('_'))
     return false
   const { draft, type } = page.frontMatter || {}
   return !draft && (!type || type === 'post')

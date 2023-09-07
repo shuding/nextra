@@ -259,7 +259,7 @@ export function normalizePages({
       }
     }
     if (
-      (display === 'hidden' && !/* @__PURE__ */ isFolder(item)) ||
+      (display === 'hidden' && !(/* @__PURE__ */ isFolder(item))) ||
       ERROR_ROUTES.has(a.route)
     ) {
       continue
