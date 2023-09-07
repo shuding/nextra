@@ -1,15 +1,31 @@
+import { useRouter } from 'next/router'
 import type { ReactElement } from 'react'
+import { NEXTRA_INTERNAL } from './constants'
 import { SSGContext } from './data'
-import { useInternals } from './use-internals'
+import type { NextraInternalGlobal } from './types'
 
 export default function Nextra({
   __nextra_pageMap,
   __nextra_dynamic_opts,
   ...props
 }: any): ReactElement {
-  const { Layout, themeConfig, Content, ...rest } = useInternals()
+  const __nextra_internal__ = (globalThis as NextraInternalGlobal)[
+    NEXTRA_INTERNAL
+  ]
+  const { Layout, themeConfig } = __nextra_internal__
+  const { route } = useRouter()
+  console.log({ route })
 
-  let { pageOpts } = rest
+  const pageContext = __nextra_internal__.context[route]
+
+  if (!pageContext) {
+    throw new Error(
+      'No content found for the current route. This is a Nextra bug.'
+    )
+  }
+
+  let { pageOpts } = pageContext
+  const { Content } = pageContext
 
   if (__nextra_pageMap) {
     pageOpts = {
