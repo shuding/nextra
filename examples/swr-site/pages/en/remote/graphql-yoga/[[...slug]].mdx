@@ -11,6 +11,7 @@ export async function getStaticProps({ params }) {
   const response = await fetch(url)
   const data = await response.text()
   const { __nextra_pageMap } = await buildDynamicMeta()
+  console.log('__nextra_pageMap', __nextra_pageMap)
   return {
     props: {
       __nextra_pageMap,
@@ -18,7 +19,6 @@ export async function getStaticProps({ params }) {
         defaultShowCopyCode: true
       }))
     },
-    revalidate: 10
   }
 }
 
