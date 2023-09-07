@@ -571,11 +571,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
       "route": "/en/remote",
     },
     {
-      "frontMatter": {
-        "mdxOptions": {
-          "format": "md",
-        },
-      },
       "kind": "MdxPage",
       "name": "test",
       "route": "/en/test",
