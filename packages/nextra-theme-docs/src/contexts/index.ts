@@ -1,6 +1,6 @@
 export {
   useActiveAnchor,
-  useSetActiveAnchor,
+  useObserver,
   ActiveAnchorProvider
 } from './active-anchor'
 export { useConfig, ConfigProvider } from './config'

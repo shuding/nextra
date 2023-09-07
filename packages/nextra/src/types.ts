@@ -83,7 +83,7 @@ export type Page = (MdxFile | Folder<Page>) & {
 }
 
 export type Heading = {
-  depth: MDASTHeading['depth']
+  depth: Exclude<MDASTHeading['depth'], 1>
   value: string
   id: string
 }

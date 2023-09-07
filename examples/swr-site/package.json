@@ -3,6 +3,7 @@
   "author": "Shu Ding",
   "license": "Apache-2.0",
   "private": true,
+  "packageManager": "pnpm@8.6.12",
   "main": "index.js",
   "scripts": {
     "build": "next build",
