@@ -75,37 +75,37 @@ export function collectCatchAllRoutes(
 
 let cachedResolvedPageMap: PageMapItem[]
 
+export const resolvePageMap =
+  (dynamicMetaModules: [() => any, DynamicMetaDescriptor][]) => async () => {
+    const __nextra_internal__ = (globalThis as NextraInternalGlobal)[
+      NEXTRA_INTERNAL
+    ]
+    if (process.env.NODE_ENV === 'production' && cachedResolvedPageMap) {
+      return cachedResolvedPageMap
+    }
+    const clonedPageMap = structuredClone(__nextra_internal__.pageMap)
+    for (const [
+      metaFunction,
+      { metaObjectKeyPath, metaParentKeyPath }
+    ] of dynamicMetaModules) {
+      const metaData = await metaFunction()
+      const meta: DynamicMetaJsonFile = get(clonedPageMap, metaObjectKeyPath)
+      meta.data = metaData
+      const parent: Folder = get(clonedPageMap, metaParentKeyPath)
+      collectCatchAllRoutes(parent, meta)
+    }
+    return (cachedResolvedPageMap = clonedPageMap)
+  }
+
 export function setupNextraPage({
   pageOpts,
   MDXContent,
-  dynamicMetaModules = [],
   route
 }: {
   pageOpts: PageOpts
   MDXContent: FC
-  dynamicMetaModules?: [() => any, DynamicMetaDescriptor][]
   route: string
 }) {
-  if (typeof window === 'undefined') {
-    globalThis.__nextra_resolvePageMap = async () => {
-      if (process.env.NODE_ENV === 'production' && cachedResolvedPageMap) {
-        return cachedResolvedPageMap
-      }
-      const clonedPageMap = structuredClone(__nextra_internal__.pageMap)
-      for (const [
-        metaFunction,
-        { metaObjectKeyPath, metaParentKeyPath }
-      ] of dynamicMetaModules) {
-        const metaData = await metaFunction()
-        const meta: DynamicMetaJsonFile = get(clonedPageMap, metaObjectKeyPath)
-        meta.data = metaData
-        const parent: Folder = get(clonedPageMap, metaParentKeyPath)
-        collectCatchAllRoutes(parent, meta)
-      }
-      return (cachedResolvedPageMap = clonedPageMap)
-    }
-  }
-
   // Make sure the same component is always returned so Next.js will render the
   // stable layout. We then put the actual content into a global store and use
   // the route to identify it.
