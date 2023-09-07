@@ -9,6 +9,7 @@ import {
   MARKDOWN_EXTENSION_REGEX,
   META_FILENAME
 } from './constants'
+import { logger, sortPages } from './server/utils'
 import type {
   FileMap,
   Folder,
@@ -22,9 +23,7 @@ import {
   isMdxFile,
   isMeta,
   isSerializable,
-  logger,
   normalizePageRoute,
-  sortPages,
   truthy
 } from './utils'
 

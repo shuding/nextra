@@ -11,8 +11,8 @@ import {
   MARKDOWN_EXTENSIONS
 } from './constants'
 import { nextraConfigSchema } from './schemas'
+import { logger } from './server/utils'
 import type { Nextra } from './types'
-import { logger } from './utils'
 import { NextraPlugin, NextraSearchPlugin } from './webpack-plugins'
 
 const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']

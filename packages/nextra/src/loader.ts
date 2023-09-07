@@ -11,8 +11,9 @@ import {
 } from './constants'
 import { PAGES_DIR } from './file-system'
 import { collectMdx } from './plugin'
+import { logger, pageTitleFromFilename } from './server/utils'
 import type { FileMap, LoaderOptions, MdxPath, PageOpts } from './types'
-import { isMeta, logger, pageTitleFromFilename } from './utils'
+import { isMeta } from './utils'
 
 const initGitRepo = (async () => {
   const IS_WEB_CONTAINER = !!process.versions.webcontainer
@@ -266,7 +267,7 @@ ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
     finalResult.slice(lastIndexOfFooter + FOOTER_TO_REMOVE.length)
   const pageMapPath = path.join(CHUNKS_DIR, `nextra-page-map-${locale}.mjs`)
 
-  const rawJs = `import { setupNextraPage } from 'nextra/setup-page'
+  const rawJs = `import { setupNextraPage, resolvePageMap } from 'nextra/setup-page'
 import { pageMap as __nextraPageMap, dynamicMetaModules } from '${pageMapPath}'
 ${isAppFileFromNodeModules ? cssImports : ''}
 ${mdxContent}
@@ -277,7 +278,7 @@ const __nextraPageOptions = {
   pageOpts: ${stringifiedPageOpts}
 }
 if (typeof window === 'undefined') {
-  __nextraPageOptions.dynamicMetaModules = dynamicMetaModules
+  globalThis.__nextra_resolvePageMap = resolvePageMap(dynamicMetaModules)
 }
 
 export default setupNextraPage(__nextraPageOptions)`

@@ -96,7 +96,7 @@ export function normalizePages({
 }) {
   let _meta: Record<string, any> | undefined
   for (const item of list) {
-    if (/* @__PURE__ */ isMeta(item)) {
+    if (isMeta(item)) {
       _meta = item.data
       break
     }
@@ -140,7 +140,7 @@ export function normalizePages({
   const items = list
     .filter(
       (a): a is MdxFile | Folder =>
-        !(/* @__PURE__ */ isMeta(a)) &&
+        !isMeta(a) &&
         // not hidden routes
         !a.name.startsWith('_')
     )
@@ -259,7 +259,7 @@ export function normalizePages({
       }
     }
     if (
-      (display === 'hidden' && !(/* @__PURE__ */ isFolder(item))) ||
+      (display === 'hidden' && !isFolder(item)) ||
       ERROR_ROUTES.has(a.route)
     ) {
       continue
