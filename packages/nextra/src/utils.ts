@@ -14,7 +14,9 @@ export function normalizeMeta(meta: Meta): Exclude<Meta, string> {
 }
 
 export function normalizePageRoute(parentRoute: string, route: string): string {
-  return slash(path.join(parentRoute, route.replace(/^index$/, '')))
+  return /* @__PURE__ */ slash(
+    path.join(parentRoute, route.replace(/^index$/, ''))
+  )
 }
 
 export function pageTitleFromFilename(fileName: string) {
