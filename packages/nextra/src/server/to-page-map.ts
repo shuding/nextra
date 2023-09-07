@@ -8,7 +8,7 @@ import {
   DYNAMIC_META_FILENAME,
   MARKDOWN_EXTENSION_REGEX,
   META_FILENAME
-} from './constants'
+} from '../constants'
 import type {
   FileMap,
   Folder,
@@ -16,9 +16,9 @@ import type {
   MdxPath,
   MetaJsonPath,
   PageMapItem
-} from './types'
-import { isSerializable, normalizePageRoute, truthy } from './utils'
-import { logger } from './server/utils'
+} from '../types'
+import { isSerializable, normalizePageRoute, truthy } from '../utils'
+import { logger } from './utils'
 
 const readdir = promisify(fs.readdir)
 const realpath = promisify(fs.realpath)
@@ -84,7 +84,6 @@ async function collectFiles({
       if (!items.elements.length) return
 
       const folder = valueToEstree({
-        kind: 'Folder',
         name: f.name,
         route: fileRoute
       }) as any
@@ -107,12 +106,6 @@ async function collectFiles({
         return {
           type: 'ObjectExpression',
           properties: [
-            {
-              type: 'Property',
-              key: { type: 'Identifier', name: 'kind' },
-              value: { type: 'Literal', value: 'MdxPage' },
-              kind: 'init'
-            },
             {
               type: 'Property',
               key: { type: 'Identifier', name: 'name' },
@@ -145,12 +138,6 @@ async function collectFiles({
           properties: [
             {
               type: 'Property',
-              key: { type: 'Identifier', name: 'kind' },
-              value: { type: 'Literal', value: 'Meta' },
-              kind: 'init'
-            },
-            {
-              type: 'Property',
               key: { type: 'Identifier', name: 'data' },
               value: { type: 'Identifier', name: importName },
               kind: 'init'
@@ -171,14 +158,12 @@ async function collectFiles({
         // if (typeof meta === 'function') {
         //   // Dynamic. Add a special key (__nextra_src) and set data as empty.
         //   return {
-        //     kind: 'Meta',
         //     __nextra_src: filePath,
         //     data: {}
         //   }
         // } else if (meta && typeof meta === 'object' && isSerializable(meta)) {
         //   // Static content, can be statically optimized.
         //   return {
-        //     kind: 'Meta',
         //     // we spread object because default title could be incorrectly set when _meta.json/js
         //     // is imported/exported by another _meta.js
         //     data: { ...meta }

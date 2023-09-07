@@ -1,7 +1,7 @@
 import path from 'node:path'
 import { describe } from 'vitest'
 import { CWD } from '../src/constants'
-import { toPageMap } from '../src/to-page-map'
+import { toPageMap } from '../src/server/to-page-map'
 
 describe('toPageMap', () => {
   it('should work', async () => {
@@ -75,315 +75,250 @@ describe('toPageMap', () => {
       import {frontMatter as frontMatter50} from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/docs/advanced/more/tree/three.mdx\\";
       import {frontMatter as frontMatter51} from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/docs/advanced/more/tree/two.mdx\\";
       export const pageMap = [{
-        kind: \\"Meta\\",
         data: meta0
       }, {
-        \\"kind\\": \\"Folder\\",
         \\"name\\": \\"about\\",
         \\"route\\": \\"/about\\",
         children: [{
-          kind: \\"Meta\\",
           data: meta1
         }, {
-          kind: \\"MdxPage\\",
           name: \\"a-page\\",
           route: \\"/about/a-page\\",
           frontMatter: frontMatter4
         }, {
-          kind: \\"MdxPage\\",
           name: \\"acknowledgement\\",
           route: \\"/about/acknowledgement\\",
           frontMatter: frontMatter5
         }, {
-          kind: \\"MdxPage\\",
           name: \\"changelog\\",
           route: \\"/about/changelog\\",
           frontMatter: frontMatter6
         }, {
-          kind: \\"MdxPage\\",
           name: \\"team\\",
           route: \\"/about/team\\",
           frontMatter: frontMatter7
         }]
       }, {
-        \\"kind\\": \\"Folder\\",
         \\"name\\": \\"blog\\",
         \\"route\\": \\"/blog\\",
         children: [{
-          kind: \\"Meta\\",
           data: meta2
         }, {
-          kind: \\"MdxPage\\",
           name: \\"swr-v1\\",
           route: \\"/blog/swr-v1\\",
           frontMatter: frontMatter8
         }]
       }, {
-        kind: \\"MdxPage\\",
         name: \\"blog\\",
         route: \\"/blog\\",
         frontMatter: frontMatter0
       }, {
-        \\"kind\\": \\"Folder\\",
         \\"name\\": \\"docs\\",
         \\"route\\": \\"/docs\\",
         children: [{
-          kind: \\"MdxPage\\",
           name: \\"404-500\\",
           route: \\"/docs/404-500\\",
           frontMatter: frontMatter9
         }, {
-          kind: \\"Meta\\",
           data: meta3
         }, {
-          \\"kind\\": \\"Folder\\",
           \\"name\\": \\"advanced\\",
           \\"route\\": \\"/docs/advanced\\",
           children: [{
-            kind: \\"Meta\\",
             data: meta5
           }, {
-            kind: \\"MdxPage\\",
             name: \\"cache\\",
             route: \\"/docs/advanced/cache\\",
             frontMatter: frontMatter39
           }, {
-            kind: \\"MdxPage\\",
             name: \\"code-highlighting\\",
             route: \\"/docs/advanced/code-highlighting\\",
             frontMatter: frontMatter40
           }, {
-            kind: \\"MdxPage\\",
             name: \\"dynamic-markdown-import\\",
             route: \\"/docs/advanced/dynamic-markdown-import\\",
             frontMatter: frontMatter41
           }, {
-            kind: \\"MdxPage\\",
             name: \\"file-name.with.DOTS\\",
             route: \\"/docs/advanced/file-name.with.DOTS\\",
             frontMatter: frontMatter42
           }, {
-            kind: \\"MdxPage\\",
             name: \\"images\\",
             route: \\"/docs/advanced/images\\",
             frontMatter: frontMatter43
           }, {
-            kind: \\"MdxPage\\",
             name: \\"markdown-import\\",
             route: \\"/docs/advanced/markdown-import\\",
             frontMatter: frontMatter44
           }, {
-            \\"kind\\": \\"Folder\\",
             \\"name\\": \\"more\\",
             \\"route\\": \\"/docs/advanced/more\\",
             children: [{
-              kind: \\"MdxPage\\",
               name: \\"loooooooooooooooooooong-title\\",
               route: \\"/docs/advanced/more/loooooooooooooooooooong-title\\",
               frontMatter: frontMatter48
             }, {
-              \\"kind\\": \\"Folder\\",
               \\"name\\": \\"tree\\",
               \\"route\\": \\"/docs/advanced/more/tree\\",
               children: [{
-                kind: \\"MdxPage\\",
                 name: \\"one\\",
                 route: \\"/docs/advanced/more/tree/one\\",
                 frontMatter: frontMatter49
               }, {
-                kind: \\"MdxPage\\",
                 name: \\"three\\",
                 route: \\"/docs/advanced/more/tree/three\\",
                 frontMatter: frontMatter50
               }, {
-                kind: \\"MdxPage\\",
                 name: \\"two\\",
                 route: \\"/docs/advanced/more/tree/two\\",
                 frontMatter: frontMatter51
               }]
             }]
           }, {
-            kind: \\"MdxPage\\",
             name: \\"performance\\",
             route: \\"/docs/advanced/performance\\",
             frontMatter: frontMatter45
           }, {
-            kind: \\"MdxPage\\",
             name: \\"react-native\\",
             route: \\"/docs/advanced/react-native\\",
             frontMatter: frontMatter46
           }, {
-            kind: \\"MdxPage\\",
             name: \\"scrollbar-x\\",
             route: \\"/docs/advanced/scrollbar-x\\",
             frontMatter: frontMatter47
           }]
         }, {
-          kind: \\"MdxPage\\",
           name: \\"advanced\\",
           route: \\"/docs/advanced\\",
           frontMatter: frontMatter10
         }, {
-          kind: \\"MdxPage\\",
           name: \\"arguments\\",
           route: \\"/docs/arguments\\",
           frontMatter: frontMatter11
         }, {
-          kind: \\"MdxPage\\",
           name: \\"callout\\",
           route: \\"/docs/callout\\",
           frontMatter: frontMatter12
         }, {
-          kind: \\"MdxPage\\",
           name: \\"change-log\\",
           route: \\"/docs/change-log\\",
           frontMatter: frontMatter13
         }, {
-          kind: \\"MdxPage\\",
           name: \\"code-block-without-language\\",
           route: \\"/docs/code-block-without-language\\",
           frontMatter: frontMatter14
         }, {
-          kind: \\"MdxPage\\",
           name: \\"conditional-fetching\\",
           route: \\"/docs/conditional-fetching\\",
           frontMatter: frontMatter15
         }, {
-          kind: \\"MdxPage\\",
           name: \\"custom-header-ids\\",
           route: \\"/docs/custom-header-ids\\",
           frontMatter: frontMatter16
         }, {
-          kind: \\"MdxPage\\",
           name: \\"data-fetching\\",
           route: \\"/docs/data-fetching\\",
           frontMatter: frontMatter17
         }, {
-          kind: \\"MdxPage\\",
           name: \\"error-handling\\",
           route: \\"/docs/error-handling\\",
           frontMatter: frontMatter18
         }, {
-          kind: \\"MdxPage\\",
           name: \\"getting-started\\",
           route: \\"/docs/getting-started\\",
           frontMatter: frontMatter19
         }, {
-          kind: \\"MdxPage\\",
           name: \\"global-configuration\\",
           route: \\"/docs/global-configuration\\",
           frontMatter: frontMatter20
         }, {
-          kind: \\"MdxPage\\",
           name: \\"middleware\\",
           route: \\"/docs/middleware\\",
           frontMatter: frontMatter21
         }, {
-          kind: \\"MdxPage\\",
           name: \\"mutation\\",
           route: \\"/docs/mutation\\",
           frontMatter: frontMatter22
         }, {
-          kind: \\"MdxPage\\",
           name: \\"options\\",
           route: \\"/docs/options\\",
           frontMatter: frontMatter23
         }, {
-          kind: \\"MdxPage\\",
           name: \\"pagination\\",
           route: \\"/docs/pagination\\",
           frontMatter: frontMatter24
         }, {
-          kind: \\"MdxPage\\",
           name: \\"prefetching\\",
           route: \\"/docs/prefetching\\",
           frontMatter: frontMatter25
         }, {
-          kind: \\"MdxPage\\",
           name: \\"raw-layout\\",
           route: \\"/docs/raw-layout\\",
           frontMatter: frontMatter26
         }, {
-          kind: \\"MdxPage\\",
           name: \\"revalidation\\",
           route: \\"/docs/revalidation\\",
           frontMatter: frontMatter27
         }, {
-          kind: \\"MdxPage\\",
           name: \\"suspense\\",
           route: \\"/docs/suspense\\",
           frontMatter: frontMatter28
         }, {
-          kind: \\"MdxPage\\",
           name: \\"typescript\\",
           route: \\"/docs/typescript\\",
           frontMatter: frontMatter29
         }, {
-          kind: \\"MdxPage\\",
           name: \\"understanding\\",
           route: \\"/docs/understanding\\",
           frontMatter: frontMatter30
         }, {
-          kind: \\"MdxPage\\",
           name: \\"with-nextjs\\",
           route: \\"/docs/with-nextjs\\",
           frontMatter: frontMatter31
         }, {
-          kind: \\"MdxPage\\",
           name: \\"wrap-toc-items\\",
           route: \\"/docs/wrap-toc-items\\",
           frontMatter: frontMatter32
         }]
       }, {
-        \\"kind\\": \\"Folder\\",
         \\"name\\": \\"examples\\",
         \\"route\\": \\"/examples\\",
         children: [{
-          kind: \\"Meta\\",
           data: meta4
         }, {
-          kind: \\"MdxPage\\",
           name: \\"auth\\",
           route: \\"/examples/auth\\",
           frontMatter: frontMatter33
         }, {
-          kind: \\"MdxPage\\",
           name: \\"basic\\",
           route: \\"/examples/basic\\",
           frontMatter: frontMatter34
         }, {
-          kind: \\"MdxPage\\",
           name: \\"error-handling\\",
           route: \\"/examples/error-handling\\",
           frontMatter: frontMatter35
         }, {
-          kind: \\"MdxPage\\",
           name: \\"full\\",
           route: \\"/examples/full\\",
           frontMatter: frontMatter36
         }, {
-          kind: \\"MdxPage\\",
           name: \\"infinite-loading\\",
           route: \\"/examples/infinite-loading\\",
           frontMatter: frontMatter37
         }, {
-          kind: \\"MdxPage\\",
           name: \\"ssr\\",
           route: \\"/examples/ssr\\",
           frontMatter: frontMatter38
         }]
       }, {
-        kind: \\"MdxPage\\",
         name: \\"foo\\",
         route: \\"/foo\\",
         frontMatter: frontMatter1
       }, {
-        kind: \\"MdxPage\\",
         name: \\"index\\",
         route: \\"/\\",
         frontMatter: frontMatter2
       }, {
-        kind: \\"MdxPage\\",
         name: \\"test\\",
         route: \\"/test\\",
         frontMatter: frontMatter3
