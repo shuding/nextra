@@ -18,14 +18,12 @@ export interface LoaderOptions extends NextraConfig {
 }
 
 export interface Folder<FileType = PageMapItem> {
-  kind: 'Folder'
   name: string
   route: string
   children: FileType[]
 }
 
 export type MetaJsonFile = {
-  kind: 'Meta'
   data: {
     [fileName: string]: Meta
   }
@@ -44,7 +42,6 @@ export type DynamicMetaItem = Meta | DynamicFolder
 export type DynamicMeta = Record<string, DynamicMetaItem>
 
 export type DynamicMetaJsonFile = {
-  kind: 'Meta'
   data: DynamicMeta
 }
 
@@ -52,7 +49,6 @@ export type FrontMatter = Record<string, any>
 export type Meta = string | Record<string, any>
 
 export type MdxFile<FrontMatterType = FrontMatter> = {
-  kind: 'MdxPage'
   name: string
   route: string
   frontMatter?: FrontMatterType

@@ -1,4 +1,5 @@
 import type { DynamicMetaDescriptor, PageMapItem } from './types'
+import { isFolder, isMeta } from './utils'
 
 export function getDynamicMeta(
   path: string,
@@ -9,7 +10,7 @@ export function getDynamicMeta(
 
   for (let i = 0; i < items.length; i++) {
     const item = items[i]
-    if (item.kind === 'Folder') {
+    if (isFolder(item)) {
       const [dynamicItemsInChildren, newItemsInChildren] = getDynamicMeta(
         `${path}[${i}].children`,
         item.children
@@ -24,7 +25,7 @@ export function getDynamicMeta(
       continue
     }
 
-    if (item.kind === 'Meta' && item.__nextra_src) {
+    if (isMeta(item) && item.__nextra_src) {
       const { __nextra_src, ...newItem } = item
       dynamicMetaItems.push({
         metaFilePath: __nextra_src,

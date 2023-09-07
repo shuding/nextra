@@ -46,14 +46,7 @@ export function collectCatchAllRoutes(
   isRootFolder = true
 ): void {
   if (isRootFolder) {
-    collectCatchAllRoutes(
-      parent,
-      {
-        kind: 'Meta',
-        data: meta.data
-      },
-      false
-    )
+    collectCatchAllRoutes(parent, { data: meta.data }, false)
     meta.data = normalizeMetaData(meta.data)
     return
   }
@@ -63,7 +56,6 @@ export function collectCatchAllRoutes(
         continue
       }
       parent.children.push({
-        kind: 'MdxPage',
         name: key,
         route: normalizePageRoute(parent.route, key)
       })
@@ -71,26 +63,13 @@ export function collectCatchAllRoutes(
     }
     const routeWithoutSlashes = key.replace('/', '')
     const newParent: Folder = {
-      kind: 'Folder',
       name: routeWithoutSlashes,
       route: `${parent.route}/${routeWithoutSlashes}`,
-      children: [
-        {
-          kind: 'Meta',
-          data: normalizeMetaData(value.items)
-        }
-      ]
+      children: [{ data: normalizeMetaData(value.items) }]
     }
 
     parent.children.push(newParent)
-    collectCatchAllRoutes(
-      newParent,
-      {
-        kind: 'Meta',
-        data: value.items
-      },
-      false
-    )
+    collectCatchAllRoutes(newParent, { data: value.items }, false)
   }
 }
 

@@ -2,6 +2,7 @@ import type { z } from 'zod'
 import { ERROR_ROUTES } from './constants'
 import type { displaySchema, menuItemSchema, pageThemeSchema } from './schemas'
 import type { Folder, MdxFile, PageMapItem } from './types'
+import { isFolder, isMeta } from './utils'
 
 const DEFAULT_PAGE_THEME: PageTheme = {
   breadcrumb: true,
@@ -95,7 +96,7 @@ export function normalizePages({
 }) {
   let _meta: Record<string, any> | undefined
   for (const item of list) {
-    if (item.kind === 'Meta') {
+    if (isMeta(item)) {
       _meta = item.data
       break
     }
@@ -139,7 +140,7 @@ export function normalizePages({
   const items = list
     .filter(
       (a): a is MdxFile | Folder =>
-        a.kind !== 'Meta' &&
+        !isMeta(a) &&
         // not hidden routes
         !a.name.startsWith('_')
     )
@@ -258,7 +259,7 @@ export function normalizePages({
       }
     }
     if (
-      (display === 'hidden' && item.kind !== 'Folder') ||
+      (display === 'hidden' && !isFolder(item)) ||
       ERROR_ROUTES.has(a.route)
     ) {
       continue

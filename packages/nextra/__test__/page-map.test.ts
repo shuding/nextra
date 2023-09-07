@@ -29,9 +29,9 @@ describe('Page Process', () => {
       )
     })
     expect(items).toEqual([
-      { kind: 'MdxPage', name: 'callout', route: '/callout' },
-      { kind: 'MdxPage', name: 'tabs', route: '/tabs' },
-      { kind: 'Meta', data: { callout: 'Callout', tabs: 'Tabs' } }
+      { name: 'callout', route: '/callout' },
+      { name: 'tabs', route: '/tabs' },
+      { data: { callout: 'Callout', tabs: 'Tabs' } }
     ])
   })
 
@@ -48,39 +48,34 @@ describe('Page Process', () => {
     })
     expect(items).toEqual([
       {
-        kind: 'Folder',
         name: 'docs',
         route: '/docs',
         children: [
-          { kind: 'MdxPage', name: 'test2', route: '/docs/test2' },
-          { kind: 'Meta', data: { test2: 'Test2' } }
+          { name: 'test2', route: '/docs/test2' },
+          { data: { test2: 'Test2' } }
         ]
       },
-      { kind: 'MdxPage', name: 'test1', route: '/test1' },
-      { kind: 'Meta', data: { test1: 'Test1' } }
+      { name: 'test1', route: '/test1' },
+      { data: { test1: 'Test1' } }
     ])
   })
 
   describe('getDynamicMeta()', () => {
     const items: PageMapItem[] = [
       {
-        kind: 'Folder',
         name: 'remote',
         route: '/remote',
         children: [
           {
-            kind: 'Meta',
             __nextra_src:
               '/Users/dmytro/Desktop/nextra/examples/swr-site/pages/remote/_meta.js',
             data: {}
           },
           {
-            kind: 'Folder',
             name: 'graphql-eslint',
             route: '/remote/graphql-eslint',
             children: [
               {
-                kind: 'Meta',
                 __nextra_src:
                   '/Users/dmytro/Desktop/nextra/examples/swr-site/pages/remote/graphql-eslint/_meta.js',
                 data: {}
@@ -88,12 +83,10 @@ describe('Page Process', () => {
             ]
           },
           {
-            kind: 'Folder',
             name: 'graphql-yoga',
             route: '/remote/graphql-yoga',
             children: [
               {
-                kind: 'Meta',
                 __nextra_src:
                   '/Users/dmytro/Desktop/nextra/examples/swr-site/pages/remote/graphql-yoga/_meta.js',
                 data: {}
@@ -104,7 +97,8 @@ describe('Page Process', () => {
       }
     ]
     it('should return dynamicItems for unset locale', () => {
-      expect(getDynamicMeta('', items)).toMatchInlineSnapshot(`
+      const result = getDynamicMeta('', items)
+      expect(result).toMatchInlineSnapshot(`
         [
           [
             {
@@ -128,16 +122,13 @@ describe('Page Process', () => {
               "children": [
                 {
                   "data": {},
-                  "kind": "Meta",
                 },
                 {
                   "children": [
                     {
                       "data": {},
-                      "kind": "Meta",
                     },
                   ],
-                  "kind": "Folder",
                   "name": "graphql-eslint",
                   "route": "/remote/graphql-eslint",
                 },
@@ -145,15 +136,12 @@ describe('Page Process', () => {
                   "children": [
                     {
                       "data": {},
-                      "kind": "Meta",
                     },
                   ],
-                  "kind": "Folder",
                   "name": "graphql-yoga",
                   "route": "/remote/graphql-yoga",
                 },
               ],
-              "kind": "Folder",
               "name": "remote",
               "route": "/remote",
             },
