@@ -2,9 +2,7 @@ import { Callout } from 'nextra/components'
 
 # Middleware
 
-<Callout>
-  Upgrade to the latest version (≥ 1.0.0) to use this feature.
-</Callout>
+<Callout>Upgrade to the latest version (≥ 1.0.0) to use this feature.</Callout>
 
 The middleware feature is a new addition in SWR 1.0 that enables you to execute
 logic before and after SWR hooks.
@@ -182,7 +180,8 @@ const { data, isLagging, resetLaggy } = useSWR(key, fetcher, { use: [laggy] })
 ### Serialize Object Keys
 
 <Callout>
-  Since SWR 1.1.0, object-like keys will be serialized under the hood automatically. 
+  Since SWR 1.1.0, object-like keys will be serialized under the hood
+  automatically.
 </Callout>
 
 <Callout emoji="⚠️">
@@ -213,5 +212,7 @@ serialized to the same string, and the fetcher will still receive those object
 arguments.
 
 <Callout>
-  Furthermore, you can use libs like [fast-json-stable-stringify](https://github.com/epoberezkin/fast-json-stable-stringify) instead of `JSON.stringify` — faster and stabler.
+  Furthermore, you can use libs like
+  [fast-json-stable-stringify](https://github.com/epoberezkin/fast-json-stable-stringify)
+  instead of `JSON.stringify` — faster and stabler.
 </Callout>

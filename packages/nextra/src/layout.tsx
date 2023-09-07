@@ -7,19 +7,25 @@ export default function Nextra({
   __nextra_dynamic_opts,
   ...props
 }: any): ReactElement {
-  const { Layout, themeConfig, Content, pageOpts } = useInternals()
+  const { Layout, themeConfig, Content, ...rest } = useInternals()
+
+  let { pageOpts } = rest
 
   if (__nextra_pageMap) {
-    pageOpts.pageMap = __nextra_pageMap
+    pageOpts = {
+      ...pageOpts,
+      pageMap: __nextra_pageMap
+    }
   }
 
   if (__nextra_dynamic_opts) {
     const { headings, title, frontMatter } = JSON.parse(__nextra_dynamic_opts)
-    Object.assign(pageOpts, {
+    pageOpts = {
+      ...pageOpts,
       headings,
       title,
       frontMatter
-    })
+    }
   }
   return (
     <Layout themeConfig={themeConfig} pageOpts={pageOpts}>

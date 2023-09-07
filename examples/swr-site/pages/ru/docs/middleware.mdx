@@ -183,7 +183,8 @@ const { data, isLagging, resetLaggy } = useSWR(key, fetcher, { use: [laggy] })
 ### Сериализация ключей объекта
 
 <Callout>
-  Since SWR 1.1.0, object-like keys will be serialized under the hood automatically. 
+  Since SWR 1.1.0, object-like keys will be serialized under the hood
+  automatically.
 </Callout>
 
 <Callout emoji="⚠️">
@@ -214,5 +215,7 @@ useSWR(['/api/user', { id: '73' }], fetcher, { use: [serialize] })
 аргументы объекта.
 
 <Callout>
-  Кроме того, вы можете использовать такие библиотеки, как [fast-json-stable-stringify](https://github.com/epoberezkin/fast-json-stable-stringify) вместо `JSON.stringify` — быстрее и стабильнее.
+  Кроме того, вы можете использовать такие библиотеки, как
+  [fast-json-stable-stringify](https://github.com/epoberezkin/fast-json-stable-stringify)
+  вместо `JSON.stringify` — быстрее и стабильнее.
 </Callout>
