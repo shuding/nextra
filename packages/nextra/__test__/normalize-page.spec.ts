@@ -153,7 +153,6 @@ describe('normalize-page', () => {
           "type": "menu",
         },
         {
-          "kind": "MdxPage",
           "name": "showcase",
           "route": "/showcase",
           "title": "Showcase",
@@ -166,7 +165,6 @@ describe('normalize-page', () => {
           "type": "menu",
         },
         {
-          "kind": "MdxPage",
           "name": "about",
           "route": "/about",
           "title": "About",
