@@ -252,6 +252,9 @@ importers:
       clsx:
         specifier: ^2.0.0
         version: 2.0.0
+      estree-util-to-js:
+        specifier: ^2.0.0
+        version: 2.0.0
       estree-util-value-to-estree:
         specifier: ^3.0.1
         version: 3.0.1

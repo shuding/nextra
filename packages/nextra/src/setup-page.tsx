@@ -138,7 +138,7 @@ function NextraLayout({
 
   if (!pageContext) {
     throw new Error(
-      'No content found for the current route. This is a Nextra bug.'
+      `No content found for the "${route}" route. Please report it as a bug.`
     )
   }
 
