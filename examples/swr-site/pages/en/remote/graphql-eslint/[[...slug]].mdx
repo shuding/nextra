@@ -17,8 +17,7 @@ export async function getStaticProps({ params }) {
       ...(await buildDynamicMDX(data, {
         defaultShowCopyCode: true
       }))
-    },
-    revalidate: 10
+    }
   }
 }
 

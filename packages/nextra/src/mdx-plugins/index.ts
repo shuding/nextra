@@ -1,5 +1,6 @@
 export { parseMeta, attachMeta } from './rehype'
 export { remarkCustomHeadingId } from './remark-custom-heading-id'
+export { remarkMdxFrontMatter } from './remark-mdx-frontmatter'
 export { remarkHeadings } from './remark-headings'
 export { remarkRemoveImports } from './remark-remove-imports'
 export {

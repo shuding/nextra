@@ -96,6 +96,7 @@ import Last from './three.mdx'
     expect(result).toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic @jsxImportSource react*/
       import {useMDXComponents as _provideComponents} from \\"nextra/mdx\\";
+      export const frontMatter = {};
       import FromMdx, {__toc as __toc0} from './one.mdx';
       import FromMarkdown, {__toc as __toc1} from './two.md';
       import IgnoreMe from './foo';

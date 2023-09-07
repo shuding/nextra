@@ -4,11 +4,11 @@ import { createProcessor } from '@mdx-js/mdx'
 import type { Processor } from '@mdx-js/mdx/lib/core'
 import { remarkMermaid } from '@theguild/remark-mermaid'
 import { remarkNpm2Yarn } from '@theguild/remark-npm2yarn'
-import grayMatter from 'gray-matter'
 import rehypeKatex from 'rehype-katex'
 import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
 import rehypePrettyCode from 'rehype-pretty-code'
 import rehypeRaw from 'rehype-raw'
+import remarkFrontmatter from 'remark-frontmatter'
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 import remarkReadingTime from 'remark-reading-time'
@@ -27,12 +27,14 @@ import {
   remarkHeadings,
   remarkLinkRewrite,
   remarkMdxDisableExplicitJsx,
+  remarkMdxFrontMatter,
   remarkRemoveImports,
   remarkStaticImage,
   remarkStructurize
 } from './mdx-plugins'
 import theme from './theme.json'
 import type {
+  FrontMatter,
   LoaderOptions,
   PageOpts,
   ReadingTime,
@@ -104,15 +106,12 @@ export async function compileMdx(
     defaultShowCopyCode,
     route = '',
     locale,
-    mdxOptions,
+    mdxOptions = {},
     filePath = '',
     useCachedCompiler,
     isPageImport = true
   }: CompileMdxOptions = {}
 ) {
-  // Extract frontMatter information if it exists
-  const { data: frontMatter, content } = grayMatter(source)
-
   let searchIndexKey: string | null = null
   if (ERROR_ROUTES.has(route)) {
     /* skip */
@@ -136,11 +135,7 @@ export async function compileMdx(
     remarkPlugins,
     rehypePlugins,
     rehypePrettyCodeOptions
-  }: MdxOptions = {
-    ...mdxOptions,
-    // You can override MDX options in the frontMatter too.
-    ...frontMatter.mdxOptions
-  }
+  }: MdxOptions = mdxOptions
 
   const format =
     _format === 'detect' ? (filePath.endsWith('.mdx') ? 'mdx' : 'md') : _format
@@ -165,7 +160,7 @@ export async function compileMdx(
 
   try {
     const vFile = await processor.process(
-      filePath ? { value: content, path: filePath } : content
+      filePath ? { value: source, path: filePath } : source
     )
 
     const { title, hasJsxInH1, readingTime, structurizedData } = vFile.data as {
@@ -176,13 +171,21 @@ export async function compileMdx(
     // https://github.com/shuding/nextra/issues/1032
     const result = String(vFile).replaceAll('__esModule', '_\\_esModule')
 
+    const frontMatter = (vFile.data.frontMatter || {}) as FrontMatter
+
+    if (frontMatter.mdxOptions) {
+      throw new Error('`frontMatter.mdxOptions` is no longer supported')
+    }
+
     return {
       result,
       ...(title && { title }),
       ...(hasJsxInH1 && { hasJsxInH1 }),
       ...(readingTime && { readingTime }),
       ...(searchIndexKey !== null && { searchIndexKey, structurizedData }),
-      ...(isRemoteContent && { headings: vFile.data.headings }),
+      ...(isRemoteContent && {
+        headings: vFile.data.headings
+      }),
       frontMatter
     }
   } catch (err) {
@@ -208,6 +211,8 @@ export async function compileMdx(
           }
         ] satisfies Pluggable,
         isRemoteContent && remarkRemoveImports,
+        remarkFrontmatter, // parse and attach yaml node
+        [remarkMdxFrontMatter, { isRemoteContent }] satisfies Pluggable,
         remarkGfm,
         format !== 'md' &&
           ([

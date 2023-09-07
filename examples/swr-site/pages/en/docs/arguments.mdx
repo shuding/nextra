@@ -1,3 +1,5 @@
+import { Callout } from 'nextra/components'
+
 # Arguments
 
 By default, `key` will be passed to `fetcher` as the argument. So the following
@@ -34,13 +36,13 @@ key will also be associated with `token` now.
 
 ## Passing Objects
 
-import { Callout } from 'nextra/components'
-
 <Callout>
-  Since SWR 1.1.0, object-like keys will be serialized under the hood automatically. 
+  Since SWR 1.1.0, object-like keys will be serialized under the hood
+  automatically.
 </Callout>
-  
-Say you have another function that fetches data with a user scope: `fetchWithUser(api, user)`. You can do the following:
+
+Say you have another function that fetches data with a user scope:
+`fetchWithUser(api, user)`. You can do the following:
 
 ```js
 const { data: user } = useSWR(['/api/user', token], fetchWithToken)
@@ -60,5 +62,5 @@ const { data: orders } = useSWR({ url: '/api/orders', args: user }, fetcher)
 ```
 
 <Callout emoji="⚠️">
-  In older versions (< 1.1.0), SWR **shallowly** compares the arguments on every render, and triggers revalidation if any of them has changed. 
+  In older versions (< 1.1.0), SWR **shallowly** compares the arguments on every render, and triggers revalidation if any of them has changed.
 </Callout>
