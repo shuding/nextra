@@ -108,7 +108,7 @@
     "clean": "rimraf ./dist ./style.css",
     "dev": "tsup --watch",
     "prepublishOnly": "pnpm build",
-    "test": "vitest run",
+    "test": "vitest",
     "types": "tsup --dts-only",
     "types:check": "tsc --noEmit"
   },
@@ -125,6 +125,7 @@
     "@theguild/remark-mermaid": "^0.0.4",
     "@theguild/remark-npm2yarn": "0.2.0-alpha-20230904225308-5ba1c7b",
     "clsx": "^2.0.0",
+    "estree-util-value-to-estree": "^3.0.1",
     "github-slugger": "^2.0.0",
     "graceful-fs": "^4.2.11",
     "gray-matter": "^4.0.3",
@@ -135,6 +136,7 @@
     "rehype-katex": "^6.0.3",
     "rehype-pretty-code": "0.9.11",
     "rehype-raw": "^7.0.0",
+    "remark-frontmatter": "^4.0.1",
     "remark-gfm": "^3.0.1",
     "remark-math": "^5.1.1",
     "remark-reading-time": "^2.0.1",
@@ -143,6 +145,7 @@
     "title": "^3.5.3",
     "unist-util-remove": "^4.0.0",
     "unist-util-visit": "^5.0.0",
+    "yaml": "^2.3.2",
     "zod": "^3.22.2",
     "zod-validation-error": "^1.5.0"
   },

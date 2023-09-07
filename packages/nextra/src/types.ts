@@ -1,4 +1,3 @@
-import type { GrayMatterFile } from 'gray-matter'
 import type { Heading as MDASTHeading } from 'mdast'
 import type { NextConfig } from 'next'
 import type { FC, ReactNode } from 'react'
@@ -49,7 +48,7 @@ export type DynamicMetaJsonFile = {
   data: DynamicMeta
 }
 
-export type FrontMatter = GrayMatterFile<string>['data']
+export type FrontMatter = Record<string, any>
 export type Meta = string | Record<string, any>
 
 export type MdxFile<FrontMatterType = FrontMatter> = {

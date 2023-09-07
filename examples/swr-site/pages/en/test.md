@@ -1,7 +1,3 @@
----
-mdxOptions: { format: 'md' }
----
-
 # Hello!
 
 This is an MD file instead of MDX, which means you can use syntax like this:

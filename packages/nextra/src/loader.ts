@@ -168,11 +168,13 @@ ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
   const locale =
     locales[0] === '' ? '' : mdxPath.replace(PAGES_DIR, '').split('/')[1]
 
-  // todo: rethink to save to fileMap dynamic pages
-  const route = mdxPath.includes('[')
-    ? '/' +
-      path.relative(PAGES_DIR, mdxPath).replace(MARKDOWN_EXTENSION_REGEX, '')
-    : fileMap[mdxPath].route
+  const route =
+    '/' +
+    path
+      .relative(PAGES_DIR, mdxPath)
+      .replace(MARKDOWN_EXTENSION_REGEX, '')
+      .replace(/(^|\/)index$/, '')
+
   const {
     result,
     title,
@@ -205,13 +207,14 @@ ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
   if (!isPageImport) {
     return result
   }
-
   // Logic for resolving the page title (used for search and as fallback):
   // 1. If the frontMatter has a title, use it.
   // 2. Use the first h1 heading if it exists.
   // 3. Use the fallback, title-cased file name.
   const fallbackTitle =
-    frontMatter.title || title || pageTitleFromFilename(fileMap[mdxPath].name)
+    frontMatter.title ||
+    title ||
+    pageTitleFromFilename(path.parse(mdxPath).name)
 
   if (searchIndexKey && frontMatter.searchable !== false) {
     // Store all the things in buildInfo.
@@ -238,7 +241,6 @@ ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
 
   let pageOpts: Partial<PageOpts> = {
     filePath: slash(path.relative(CWD, mdxPath)),
-    ...(Object.keys(frontMatter).length > 0 && { frontMatter }),
     hasJsxInH1,
     timestamp,
     readingTime,
@@ -255,7 +257,7 @@ ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
 
   const stringifiedPageOpts =
     JSON.stringify(pageOpts).slice(0, -1) +
-    ',headings:__toc,pageMap:__nextraPageMap}'
+    ',headings:__toc,pageMap:__nextraPageMap,frontMatter}'
   const stringifiedChecksum = IS_PRODUCTION
     ? "''"
     : JSON.stringify(hashFnv32a(stringifiedPageOpts))

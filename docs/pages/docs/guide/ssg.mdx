@@ -1,3 +1,5 @@
+import { useData } from 'nextra/data'
+
 # Next.js SSG
 
 With Next.js, you can pre-render your page using
@@ -7,10 +9,8 @@ can also be cached by a CDN to maximize the performance.
 
 This is supported by Nextra too. Here's an example:
 
-import { useData } from 'nextra/data'
-
-export const getStaticProps = ({ params }) => {
-  return fetch(`https://api.github.com/repos/shuding/nextra`)
+export function getStaticProps() {
+  return fetch('https://api.github.com/repos/shuding/nextra')
     .then(res => res.json())
     .then(repo => ({
       props: {
@@ -25,7 +25,7 @@ export const getStaticProps = ({ params }) => {
     }))
 }
 
-export const Stars = () => {
+export function Stars() {
   // Get the data from SSG, and render it as a component.
   const { stars } = useData()
   return <strong>{stars}</strong>
@@ -46,8 +46,8 @@ Here's the MDX code for the example above:
 ```mdx
 import { useData } from 'nextra/data'
 
-export const getStaticProps = ({ params }) => {
-  return fetch(`https://api.github.com/repos/shuding/nextra`)
+export function getStaticProps() {
+  return fetch('https://api.github.com/repos/shuding/nextra')
     .then(res => res.json())
     .then(repo => ({
       props: {
@@ -62,7 +62,7 @@ export const getStaticProps = ({ params }) => {
     }))
 }
 
-export const Stars = () => {
+export function Stars() {
   // Get the data from SSG, and render it as a component.
   const { stars } = useData()
   return <strong>{stars}</strong>
