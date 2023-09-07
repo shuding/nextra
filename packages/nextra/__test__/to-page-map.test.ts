@@ -33,7 +33,7 @@ describe('toPageMap', () => {
       import {frontMatter as frontMatter8} from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/blog/swr-v1.mdx\\";
       import {frontMatter as frontMatter9} from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/docs/404-500.mdx\\";
       import {frontMatter as frontMatter10} from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/docs/advanced.mdx\\";
-      import {frontMatter as frontMatter11} from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/docs/arguments.md\\";
+      import {frontMatter as frontMatter11} from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/docs/arguments.mdx\\";
       import {frontMatter as frontMatter12} from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/docs/callout.mdx\\";
       import {frontMatter as frontMatter13} from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/docs/change-log.mdx\\";
       import {frontMatter as frontMatter14} from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/docs/code-block-without-language.mdx\\";
@@ -43,7 +43,7 @@ describe('toPageMap', () => {
       import {frontMatter as frontMatter18} from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/docs/error-handling.mdx\\";
       import {frontMatter as frontMatter19} from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/docs/getting-started.mdx\\";
       import {frontMatter as frontMatter20} from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/docs/global-configuration.md\\";
-      import {frontMatter as frontMatter21} from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/docs/middleware.md\\";
+      import {frontMatter as frontMatter21} from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/docs/middleware.mdx\\";
       import {frontMatter as frontMatter22} from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/docs/mutation.md\\";
       import {frontMatter as frontMatter23} from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/docs/options.mdx\\";
       import {frontMatter as frontMatter24} from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/docs/pagination.mdx\\";
@@ -53,7 +53,7 @@ describe('toPageMap', () => {
       import {frontMatter as frontMatter28} from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/docs/suspense.mdx\\";
       import {frontMatter as frontMatter29} from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/docs/typescript.mdx\\";
       import {frontMatter as frontMatter30} from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/docs/understanding.mdx\\";
-      import {frontMatter as frontMatter31} from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/docs/with-nextjs.md\\";
+      import {frontMatter as frontMatter31} from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/docs/with-nextjs.mdx\\";
       import {frontMatter as frontMatter32} from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/docs/wrap-toc-items.mdx\\";
       import {frontMatter as frontMatter33} from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/examples/auth.mdx\\";
       import {frontMatter as frontMatter34} from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/examples/basic.mdx\\";
