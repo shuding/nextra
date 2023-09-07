@@ -76,8 +76,8 @@ const { data, error, isValidating, mutate } = useSWR(key, fetcher, options)
 - `use`: массив middleware-функций [(подробнее)](/docs/middleware)
 
 <Callout>
-  В медленной сети (2G, {'<='} 70 Кбит/с), <code>errorRetryInterval</code> будет
-  10 секунд, а&nbsp;<code>loadingTimeout</code> будет по умолчанию 5 секунд.
+  В медленной сети (2G, {'<='} 70 Кбит/с), `errorRetryInterval` будет
+  10 секунд, а&nbsp;`loadingTimeout` будет по умолчанию 5 секунд.
 </Callout>
 
 Вы также можете использовать
