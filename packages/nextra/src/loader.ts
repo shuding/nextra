@@ -12,7 +12,7 @@ import {
 import { PAGES_DIR } from './file-system'
 import { collectMdx } from './plugin'
 import type { FileMap, LoaderOptions, MdxPath, PageOpts } from './types'
-import { hashFnv32a, logger, pageTitleFromFilename } from './utils'
+import { logger, pageTitleFromFilename } from './utils'
 
 const initGitRepo = (async () => {
   const IS_WEB_CONTAINER = !!process.versions.webcontainer
@@ -258,9 +258,6 @@ ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
   const stringifiedPageOpts =
     JSON.stringify(pageOpts).slice(0, -1) +
     ',headings:__toc,pageMap:__nextraPageMap,frontMatter}'
-  const stringifiedChecksum = IS_PRODUCTION
-    ? "''"
-    : JSON.stringify(hashFnv32a(stringifiedPageOpts))
 
   const lastIndexOfFooter = finalResult.lastIndexOf(FOOTER_TO_REMOVE)
   const mdxContent =
@@ -278,11 +275,6 @@ const __nextraPageOptions = {
   MDXContent,
   route: '${route}',
   pageOpts: ${stringifiedPageOpts}
-}
-
-if (process.env.NODE_ENV !== 'production') {
-  __nextraPageOptions.hot = module.hot
-  __nextraPageOptions.pageOptsChecksum = ${stringifiedChecksum}
 }
 if (typeof window === 'undefined') {
   __nextraPageOptions.dynamicMetaModules = dynamicMetaModules

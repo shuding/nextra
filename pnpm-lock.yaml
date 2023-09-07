@@ -343,9 +343,6 @@ importers:
       '@types/webpack':
         specifier: ^5.28.2
         version: 5.28.2(esbuild@0.18.11)
-      '@types/webpack-env':
-        specifier: ^1.18.1
-        version: 1.18.1
       '@vitejs/plugin-react':
         specifier: ^3.0.1
         version: 3.0.1(vite@4.0.4)
@@ -3360,10 +3357,6 @@ packages:
   /@types/unist@3.0.0:
     resolution: {integrity: sha512-MFETx3tbTjE7Uk6vvnWINA/1iJ7LuMdO4fcq8UfF0pRbj01aGLduVvQcRyswuACJdpnHgg8E3rQLhaRdNEJS0w==}
     dev: false
-
-  /@types/webpack-env@1.18.1:
-    resolution: {integrity: sha512-D0HJET2/UY6k9L6y3f5BL+IDxZmPkYmPT4+qBrRdmRLYRuV0qNKizMgTvYxXZYn+36zjPeoDZAEYBCM6XB+gww==}
-    dev: true
 
   /@types/webpack@5.28.2(esbuild@0.18.11):
     resolution: {integrity: sha512-7tcxyrIOd7WGimZIcWU6pDsNh2edGGnwYExOvd3l/nMvuxqwVPrFXnnTbYCnplqV9BJoU7Mo2mfFtiH8CNFvYw==}

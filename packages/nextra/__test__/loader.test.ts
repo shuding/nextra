@@ -43,20 +43,11 @@ describe('tree shaking', async () => {
     it('should not include `pageOpts.pageMap`', () => {
       expect(testPage.includes('pageMap:')).toBe(true)
     })
-    it('should not include default `pageOpts.frontMatter: {}`', () => {
-      expect(testPage.includes('frontMatter:')).toBe(true)
-    })
     it('should not include `pageOpts.search`', () => {
       expect(testPage.includes('search:')).toBe(false)
     })
     it('should not include `themeConfig`', () => {
       expect(testPage.includes('themeConfig:')).toBe(false)
-    })
-    it('should not include `hot`', () => {
-      expect(testPage.includes('hot:')).toBe(false)
-    })
-    it('should not include `pageOptsChecksum`', () => {
-      expect(testPage.includes('pageOptsChecksum:')).toBe(false)
     })
     it('should not include `dynamicMetaModules`', () => {
       expect(testPage.includes('dynamicMetaModules:')).toBe(false)

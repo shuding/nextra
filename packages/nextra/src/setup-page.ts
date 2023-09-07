@@ -98,15 +98,11 @@ let cachedResolvedPageMap: PageMapItem[]
 export function setupNextraPage({
   pageOpts,
   MDXContent,
-  hot,
-  pageOptsChecksum,
   dynamicMetaModules = [],
   route
 }: {
   pageOpts: PageOpts
   MDXContent: FC
-  hot?: __WebpackModuleApi.Hot
-  pageOptsChecksum?: string
   dynamicMetaModules?: [() => any, DynamicMetaDescriptor][]
   route: string
 }) {
@@ -138,26 +134,9 @@ export function setupNextraPage({
   ]
   __nextra_internal__.route = route
   __nextra_internal__.pageMap = pageOpts.pageMap
-
-  pageOpts.frontMatter ||= {}
   __nextra_internal__.context[route] = {
     Content: MDXContent,
     pageOpts
-  }
-
-  if (process.env.NODE_ENV !== 'production' && hot) {
-    __nextra_internal__.refreshListeners ||= Object.create(null)
-    const checksum = pageOptsChecksum
-    hot.data ||= Object.create(null)
-    if (hot.data.prevPageOptsChecksum !== checksum) {
-      const listeners = __nextra_internal__.refreshListeners[route] || []
-      for (const listener of listeners) {
-        listener()
-      }
-    }
-    hot.dispose(data => {
-      data.prevPageOptsChecksum = checksum
-    })
   }
   return NextraLayout
 }
