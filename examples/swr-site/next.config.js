@@ -30,6 +30,7 @@ const withBundleAnalyzer = bundleAnalyzer({
  */
 export default withBundleAnalyzer(
   withNextra({
+    cleanDistDir: true,
     i18n: {
       locales: ['en', 'es', 'ru'],
       defaultLocale: 'en'
