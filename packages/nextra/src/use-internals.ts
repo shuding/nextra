@@ -12,6 +12,7 @@ export function useInternals() {
     NEXTRA_INTERNAL
   ]
   const { route } = useRouter()
+  console.log({route})
   const rerender = useState({})[1]
 
   // The HMR handling logic is not needed for production builds, the condition
