@@ -32,10 +32,10 @@ function normalizeMetaData(obj: DynamicMeta): DynamicMeta {
         const keyWithoutSlash = key.replace('/', '')
         return [
           keyWithoutSlash,
-          value.title || pageTitleFromFilename(keyWithoutSlash)
+          value.title || /* @__PURE__ */ pageTitleFromFilename(keyWithoutSlash)
         ]
       }
-      return [key, value || pageTitleFromFilename(key)]
+      return [key, value || /* @__PURE__ */ pageTitleFromFilename(key)]
     })
   )
 }
@@ -57,7 +57,7 @@ export function collectCatchAllRoutes(
       }
       parent.children.push({
         name: key,
-        route: normalizePageRoute(parent.route, key)
+        route: /* @__PURE__ */ normalizePageRoute(parent.route, key)
       })
       continue
     }
