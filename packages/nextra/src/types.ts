@@ -109,6 +109,7 @@ export type ThemeConfig = any | null
 
 export type NextraThemeLayoutProps = {
   pageOpts: PageOpts
+  pageProps: any
   themeConfig: ThemeConfig
   children: ReactNode
 }
@@ -118,7 +119,6 @@ export type NextraInternalGlobal = typeof globalThis & {
     pageMap: PageMapItem[]
     route: string
     context: Record<string, { Content: FC; pageOpts: PageOpts }>
-    refreshListeners: Record<string, (() => void)[]>
     Layout: FC<NextraThemeLayoutProps>
     themeConfig?: ThemeConfig
   }

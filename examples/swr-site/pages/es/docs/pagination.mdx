@@ -4,7 +4,7 @@ import { Callout } from 'nextra/components'
 
 <Callout emoji="✅">
   Por favor, actualice a la última versión (≥ 0.3.0) para utilizar esta API. La
-  anterior API <code>useSWRPages</code> ha quedado obsoleta.
+  anterior API `useSWRPages` ha quedado obsoleta.
 </Callout>
 
 SWR proporciona una API dedicada `useSWRInfinite` para admitir patrones de UI
@@ -215,11 +215,12 @@ como un React state.
 En la carga infinita, una _page_ es una petición, y nuestro objetivo es obtener
 varias páginas y renderizarlas.
 
-<Callout emoji="⚠️">
+<Callout type='warning'>
   If you are using SWR 0.x versions, `useSWRInfinite` needs to be imported from
   `swr`:
-  <br />
-  `import {useSWRInfinite} from 'swr'`
+
+`import {useSWRInfinite} from 'swr'`
+
 </Callout>
 
 ### API

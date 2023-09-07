@@ -11,7 +11,7 @@
     "jsx": "react-jsx",
     "lib": ["es2022", "dom"],
     "moduleResolution": "node",
-    "types": ["vitest/globals", "webpack-env"],
+    "types": ["vitest/globals"],
     "resolveJsonModule": true,
     "paths": {
       "unified": ["./node_modules/unified"]

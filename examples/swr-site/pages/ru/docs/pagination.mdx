@@ -4,7 +4,7 @@ import { Callout } from 'nextra/components'
 
 <Callout emoji="✅">
   Пожалуйста, обновитесь до последней версии (≥ 0.3.0), чтобы использовать этот
-  API. Предыдущий API <code>useSWRPages</code> является устаревшим.
+  API. Предыдущий API `useSWRPages` является устаревшим.
 </Callout>
 
 SWR предоставляет специальный API `useSWRInfinite` для поддержки общепринятых UI
@@ -216,11 +216,12 @@ const { data, error, isValidating, mutate, size, setSize } = useSWRInfinite(
 При бесконечной загрузке одна _страница_ — это один запрос, и наша цель —
 получить несколько страниц и отобразить их.
 
-<Callout emoji="⚠️">
+<Callout type='warning'>
   Если вы используете версии SWR 0.x, `useSWRInfinite` необходимо импортировать
   из `swr`:
-  <br />
-  `import {useSWRInfinite} from 'swr'`
+
+`import {useSWRInfinite} from 'swr'`
+
 </Callout>
 
 ### API
