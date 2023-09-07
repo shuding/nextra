@@ -37,11 +37,10 @@ describe('normalize-page', () => {
   it('/404 page', () => {
     const result = normalizePages({
       list: [
-        { kind: 'MdxPage', name: '404', route: '/404' },
-        { kind: 'MdxPage', name: 'get-started', route: '/get-started' },
-        { kind: 'MdxPage', name: 'index', route: '/' },
+        { name: '404', route: '/404' },
+        { name: 'get-started', route: '/get-started' },
+        { name: 'index', route: '/' },
         {
-          kind: 'Meta',
           data: {
             '404': {
               type: 'page',
@@ -66,11 +65,10 @@ describe('normalize-page', () => {
   it('/500 page', () => {
     const result = normalizePages({
       list: [
-        { kind: 'MdxPage', name: '500', route: '/500' },
-        { kind: 'MdxPage', name: 'get-started', route: '/get-started' },
-        { kind: 'MdxPage', name: 'index', route: '/' },
+        { name: '500', route: '/500' },
+        { name: 'get-started', route: '/get-started' },
+        { name: 'index', route: '/' },
         {
-          kind: 'Meta',
           data: {
             '500': {
               type: 'page',
@@ -97,7 +95,6 @@ describe('normalize-page', () => {
     const result = normalizePages({
       list: [
         {
-          kind: 'Meta',
           data: {
             index: {
               type: 'page',
@@ -131,12 +128,10 @@ describe('normalize-page', () => {
           }
         },
         {
-          kind: 'MdxPage',
           name: 'about',
           route: '/about'
         },
         {
-          kind: 'MdxPage',
           name: 'showcase',
           route: '/showcase'
         }
@@ -158,7 +153,6 @@ describe('normalize-page', () => {
           "type": "menu",
         },
         {
-          "kind": "MdxPage",
           "name": "showcase",
           "route": "/showcase",
           "title": "Showcase",
@@ -171,7 +165,6 @@ describe('normalize-page', () => {
           "type": "menu",
         },
         {
-          "kind": "MdxPage",
           "name": "about",
           "route": "/about",
           "title": "About",

@@ -1,11 +1,6 @@
 import { NEXTRA_INTERNAL } from './constants'
-import type {
-  MetaJsonFile,
-  NextraInternalGlobal,
-  Page,
-  PageMapItem
-} from './types'
-import { normalizeMeta } from './utils'
+import type { NextraInternalGlobal, Page, PageMapItem } from './types'
+import { isFolder, isMeta, normalizeMeta } from './utils'
 
 function getContext(functionName: string): {
   pageMap: PageMapItem[]
@@ -34,20 +29,18 @@ function filter(
 } {
   let activeLevelPages: Page[] = []
   const items: Page[] = []
-  const meta = pageMap.find(
-    (item): item is MetaJsonFile => item.kind === 'Meta'
-  )
+  const meta = pageMap.find(/* @__PURE__ */ isMeta)
   const metaData = meta?.data || {}
 
   for (const item of pageMap) {
-    if (item.kind === 'Meta') continue
-    const meta = normalizeMeta(metaData[item.name])
+    if (/* @__PURE__ */ isMeta(item)) continue
+    const meta = /* @__PURE__ */ normalizeMeta(metaData[item.name])
     const page = {
       ...item,
       ...(Object.keys(meta || {}).length > 0 && { meta })
     } as Page
 
-    if (page.kind === 'Folder') {
+    if (/* @__PURE__ */ isFolder(page)) {
       const filtered = filter(page.children, activeLevel)
       page.children = filtered.items
       if (filtered.activeLevelPages.length) {

@@ -12,7 +12,7 @@ import {
 import { PAGES_DIR } from './file-system'
 import { collectMdx } from './plugin'
 import type { FileMap, LoaderOptions, MdxPath, PageOpts } from './types'
-import { logger, pageTitleFromFilename } from './utils'
+import { isMeta, logger, pageTitleFromFilename } from './utils'
 
 const initGitRepo = (async () => {
   const IS_WEB_CONTAINER = !!process.versions.webcontainer
@@ -144,7 +144,7 @@ ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
 
   if (!IS_PRODUCTION) {
     for (const [filePath, file] of Object.entries(fileMap)) {
-      if (file.kind === 'Meta') {
+      if (isMeta(file)) {
         context.addDependency(filePath)
       }
     }

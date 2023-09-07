@@ -4,9 +4,10 @@
  */
 
 import get from 'lodash.get'
-import type { FC } from 'react'
+import { useRouter } from 'next/router'
+import type { FC, ReactElement } from 'react'
 import { NEXTRA_INTERNAL } from './constants'
-import NextraLayout from './layout'
+import { SSGContext } from './data'
 import type {
   DynamicFolder,
   DynamicMeta,
@@ -31,10 +32,10 @@ function normalizeMetaData(obj: DynamicMeta): DynamicMeta {
         const keyWithoutSlash = key.replace('/', '')
         return [
           keyWithoutSlash,
-          value.title || pageTitleFromFilename(keyWithoutSlash)
+          value.title || /* @__PURE__ */ pageTitleFromFilename(keyWithoutSlash)
         ]
       }
-      return [key, value || pageTitleFromFilename(key)]
+      return [key, value || /* @__PURE__ */ pageTitleFromFilename(key)]
     })
   )
 }
@@ -45,14 +46,7 @@ export function collectCatchAllRoutes(
   isRootFolder = true
 ): void {
   if (isRootFolder) {
-    collectCatchAllRoutes(
-      parent,
-      {
-        kind: 'Meta',
-        data: meta.data
-      },
-      false
-    )
+    collectCatchAllRoutes(parent, { data: meta.data }, false)
     meta.data = normalizeMetaData(meta.data)
     return
   }
@@ -62,34 +56,20 @@ export function collectCatchAllRoutes(
         continue
       }
       parent.children.push({
-        kind: 'MdxPage',
         name: key,
-        route: normalizePageRoute(parent.route, key)
+        route: /* @__PURE__ */ normalizePageRoute(parent.route, key)
       })
       continue
     }
     const routeWithoutSlashes = key.replace('/', '')
     const newParent: Folder = {
-      kind: 'Folder',
       name: routeWithoutSlashes,
       route: `${parent.route}/${routeWithoutSlashes}`,
-      children: [
-        {
-          kind: 'Meta',
-          data: normalizeMetaData(value.items)
-        }
-      ]
+      children: [{ data: normalizeMetaData(value.items) }]
     }
 
     parent.children.push(newParent)
-    collectCatchAllRoutes(
-      newParent,
-      {
-        kind: 'Meta',
-        data: value.items
-      },
-      false
-    )
+    collectCatchAllRoutes(newParent, { data: value.items }, false)
   }
 }
 
@@ -139,4 +119,52 @@ export function setupNextraPage({
     pageOpts
   }
   return NextraLayout
+}
+
+function NextraLayout({
+  __nextra_pageMap,
+  __nextra_dynamic_opts,
+  ...props
+}: any): ReactElement {
+  const __nextra_internal__ = (globalThis as NextraInternalGlobal)[
+    NEXTRA_INTERNAL
+  ]
+  const { Layout, themeConfig } = __nextra_internal__
+  const { route } = useRouter()
+  console.log({ route })
+
+  const pageContext = __nextra_internal__.context[route]
+
+  if (!pageContext) {
+    throw new Error(
+      'No content found for the current route. This is a Nextra bug.'
+    )
+  }
+
+  let { pageOpts } = pageContext
+  const { Content } = pageContext
+
+  if (__nextra_pageMap) {
+    pageOpts = {
+      ...pageOpts,
+      pageMap: __nextra_pageMap
+    }
+  }
+
+  if (__nextra_dynamic_opts) {
+    const { headings, title, frontMatter } = JSON.parse(__nextra_dynamic_opts)
+    pageOpts = {
+      ...pageOpts,
+      headings,
+      title,
+      frontMatter
+    }
+  }
+  return (
+    <Layout themeConfig={themeConfig} pageOpts={pageOpts} pageProps={props}>
+      <SSGContext.Provider value={props}>
+        <Content />
+      </SSGContext.Provider>
+    </Layout>
+  )
 }

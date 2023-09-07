@@ -44,7 +44,7 @@ function normalizeZodMessage(error: unknown): string {
 
 function validateMeta(pageMap: PageMapItem[]) {
   for (const pageMapItem of pageMap) {
-    if (pageMapItem.kind === 'Meta') {
+    if ('data' in pageMapItem) {
       for (const [key, data] of Object.entries(pageMapItem.data)) {
         try {
           metaSchema.parse(data)
@@ -56,7 +56,7 @@ function validateMeta(pageMap: PageMapItem[]) {
           )
         }
       }
-    } else if (pageMapItem.kind === 'Folder') {
+    } else if ('children' in pageMapItem) {
       validateMeta(pageMapItem.children)
     }
   }

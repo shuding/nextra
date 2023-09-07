@@ -19,6 +19,8 @@ import type {
   PageMapItem
 } from './types'
 import {
+  isMdxFile,
+  isMeta,
   isSerializable,
   logger,
   normalizePageRoute,
@@ -40,7 +42,6 @@ export async function collectMdx(
   const content = await readFile(filePath, 'utf8')
   const { data } = grayMatter(content)
   return {
-    kind: 'MdxPage',
     name,
     route,
     ...(Object.keys(data).length && { frontMatter: data })
@@ -93,7 +94,6 @@ export async function collectFiles({
       })
       if (!items.length) return
       return {
-        kind: 'Folder',
         name: f.name,
         route: fileRoute,
         children: items
@@ -121,7 +121,6 @@ export async function collectFiles({
           const fp = filePath as MetaJsonPath
           const content = await readFile(fp, 'utf8')
           fileMap[fp] = {
-            kind: 'Meta',
             data: JSON.parse(content)
           }
           return fileMap[fp]
@@ -139,14 +138,12 @@ export async function collectFiles({
           if (typeof meta === 'function') {
             // Dynamic. Add a special key (__nextra_src) and set data as empty.
             fileMap[fp] = {
-              kind: 'Meta',
               __nextra_src: filePath,
               data: {}
             }
           } else if (meta && typeof meta === 'object' && isSerializable(meta)) {
             // Static content, can be statically optimized.
             fileMap[fp] = {
-              kind: 'Meta',
               // we spread object because default title could be incorrectly set when _meta.json/js
               // is imported/exported by another _meta.js
               data: { ...meta }
@@ -187,9 +184,9 @@ ${(error as Error).name}: ${(error as Error).message}`
   let metaFile: MetaJsonFile | undefined
 
   for (const item of items) {
-    if (item.kind === 'MdxPage') {
+    if (isMdxFile(item)) {
       mdxPages.push(item)
-    } else if (item.kind === 'Meta') {
+    } else if (isMeta(item)) {
       metaFile = item
     }
   }
@@ -198,7 +195,6 @@ ${(error as Error).name}: ${(error as Error).message}`
   // add `_meta.json` file if it's missing
   if (!metaFile && mdxPages.length > 0) {
     metaFile = {
-      kind: 'Meta',
       data: Object.fromEntries(defaultMeta)
     }
     items.push(metaFile)

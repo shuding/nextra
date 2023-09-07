@@ -9,7 +9,6 @@ export const indexOpts: BlogPageOpts = {
   },
   pageMap: [
     {
-      kind: 'MdxPage',
       name: 'index',
       route: '/',
       frontMatter: {
@@ -19,11 +18,9 @@ export const indexOpts: BlogPageOpts = {
       }
     },
     {
-      kind: 'Folder',
       name: 'posts',
       children: [
         {
-          kind: 'MdxPage',
           name: 'aaron-swartz-a-programmable-web',
           route: '/posts/aaron-swartz-a-programmable-web',
           frontMatter: {
@@ -36,7 +33,6 @@ export const indexOpts: BlogPageOpts = {
           }
         },
         {
-          kind: 'MdxPage',
           name: 'index',
           route: '/posts',
           frontMatter: {
@@ -49,11 +45,9 @@ export const indexOpts: BlogPageOpts = {
       route: '/posts'
     },
     {
-      kind: 'Folder',
       name: 'tags',
       children: [
         {
-          kind: 'MdxPage',
           name: '[tag]',
           route: '/tags/[tag]',
           frontMatter: {
@@ -83,7 +77,6 @@ export const postsOpts: BlogPageOpts = {
   },
   pageMap: [
     {
-      kind: 'MdxPage',
       name: 'index',
       route: '/',
       frontMatter: {
@@ -93,11 +86,9 @@ export const postsOpts: BlogPageOpts = {
       }
     },
     {
-      kind: 'Folder',
       name: 'posts',
       children: [
         {
-          kind: 'MdxPage',
           name: 'aaron-swartz-a-programmable-web',
           route: '/posts/aaron-swartz-a-programmable-web',
           frontMatter: {
@@ -110,7 +101,6 @@ export const postsOpts: BlogPageOpts = {
           }
         },
         {
-          kind: 'MdxPage',
           name: 'index',
           route: '/posts',
           frontMatter: {
@@ -123,11 +113,9 @@ export const postsOpts: BlogPageOpts = {
       route: '/posts'
     },
     {
-      kind: 'Folder',
       name: 'tags',
       children: [
         {
-          kind: 'MdxPage',
           name: '[tag]',
           route: '/tags/[tag]',
           frontMatter: {
@@ -160,7 +148,6 @@ export const articleOpts: BlogPageOpts = {
   },
   pageMap: [
     {
-      kind: 'MdxPage',
       name: 'index',
       route: '/',
       frontMatter: {
@@ -170,11 +157,9 @@ export const articleOpts: BlogPageOpts = {
       }
     },
     {
-      kind: 'Folder',
       name: 'posts',
       children: [
         {
-          kind: 'MdxPage',
           name: 'aaron-swartz-a-programmable-web',
           route: '/posts/aaron-swartz-a-programmable-web',
           frontMatter: {
@@ -187,7 +172,6 @@ export const articleOpts: BlogPageOpts = {
           }
         },
         {
-          kind: 'MdxPage',
           name: 'index',
           route: '/posts',
           frontMatter: {
@@ -200,11 +184,9 @@ export const articleOpts: BlogPageOpts = {
       route: '/posts'
     },
     {
-      kind: 'Folder',
       name: 'tags',
       children: [
         {
-          kind: 'MdxPage',
           name: '[tag]',
           route: '/tags/[tag]',
           frontMatter: {

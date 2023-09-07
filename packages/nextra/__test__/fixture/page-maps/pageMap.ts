@@ -2,17 +2,14 @@ import type { PageMapItem } from '../../../src/types'
 
 export const cnPageMap: PageMapItem[] = [
   {
-    kind: 'Folder',
     name: 'blog',
     children: [
       {
-        kind: 'Meta',
         data: {
           'swr-v1': 'SWR 1.0 发布'
         }
       },
       {
-        kind: 'MdxPage',
         name: 'swr-v1',
         route: '/blog/swr-v1',
         frontMatter: {
@@ -26,20 +23,16 @@ export const cnPageMap: PageMapItem[] = [
     route: '/blog'
   },
   {
-    kind: 'Folder',
     name: 'docs',
     children: [
       {
-        kind: 'Folder',
         name: 'advanced',
         children: [
           {
-            kind: 'MdxPage',
             name: 'cache',
             route: '/docs/advanced/cache'
           },
           {
-            kind: 'Meta',
             data: {
               cache: '缓存',
               performance: '性能',
@@ -47,12 +40,10 @@ export const cnPageMap: PageMapItem[] = [
             }
           },
           {
-            kind: 'MdxPage',
             name: 'performance',
             route: '/docs/advanced/performance'
           },
           {
-            kind: 'MdxPage',
             name: 'react-native',
             route: '/docs/advanced/react-native'
           }
@@ -60,42 +51,34 @@ export const cnPageMap: PageMapItem[] = [
         route: '/docs/advanced'
       },
       {
-        kind: 'MdxPage',
         name: 'arguments',
         route: '/docs/arguments'
       },
       {
-        kind: 'MdxPage',
         name: 'change-log',
         route: '/docs/change-log'
       },
       {
-        kind: 'MdxPage',
         name: 'conditional-fetching',
         route: '/docs/conditional-fetching'
       },
       {
-        kind: 'MdxPage',
         name: 'data-fetching',
         route: '/docs/data-fetching'
       },
       {
-        kind: 'MdxPage',
         name: 'error-handling',
         route: '/docs/error-handling'
       },
       {
-        kind: 'MdxPage',
         name: 'getting-started',
         route: '/docs/getting-started'
       },
       {
-        kind: 'MdxPage',
         name: 'global-configuration',
         route: '/docs/global-configuration'
       },
       {
-        kind: 'Meta',
         data: {
           'getting-started': '入门',
           options: '选项',
@@ -117,42 +100,34 @@ export const cnPageMap: PageMapItem[] = [
         }
       },
       {
-        kind: 'MdxPage',
         name: 'middleware',
         route: '/docs/middleware'
       },
       {
-        kind: 'MdxPage',
         name: 'mutation',
         route: '/docs/mutation'
       },
       {
-        kind: 'MdxPage',
         name: 'options',
         route: '/docs/options'
       },
       {
-        kind: 'MdxPage',
         name: 'pagination',
         route: '/docs/pagination'
       },
       {
-        kind: 'MdxPage',
         name: 'prefetching',
         route: '/docs/prefetching'
       },
       {
-        kind: 'MdxPage',
         name: 'revalidation',
         route: '/docs/revalidation'
       },
       {
-        kind: 'MdxPage',
         name: 'suspense',
         route: '/docs/suspense'
       },
       {
-        kind: 'MdxPage',
         name: 'with-nextjs',
         route: '/docs/with-nextjs'
       }
@@ -160,11 +135,9 @@ export const cnPageMap: PageMapItem[] = [
     route: '/docs'
   },
   {
-    kind: 'Folder',
     name: 'examples',
     children: [
       {
-        kind: 'MdxPage',
         name: 'auth',
         route: '/examples/auth',
         frontMatter: {
@@ -173,7 +146,6 @@ export const cnPageMap: PageMapItem[] = [
         }
       },
       {
-        kind: 'MdxPage',
         name: 'basic',
         route: '/examples/basic',
         frontMatter: {
@@ -182,7 +154,6 @@ export const cnPageMap: PageMapItem[] = [
         }
       },
       {
-        kind: 'MdxPage',
         name: 'error-handling',
         route: '/examples/error-handling',
         frontMatter: {
@@ -191,7 +162,6 @@ export const cnPageMap: PageMapItem[] = [
         }
       },
       {
-        kind: 'MdxPage',
         name: 'infinite-loading',
         route: '/examples/infinite-loading',
         frontMatter: {
@@ -200,7 +170,6 @@ export const cnPageMap: PageMapItem[] = [
         }
       },
       {
-        kind: 'Meta',
         data: {
           basic: '基本用法',
           auth: '身份验证',
@@ -213,7 +182,6 @@ export const cnPageMap: PageMapItem[] = [
     route: '/examples'
   },
   {
-    kind: 'MdxPage',
     name: 'index',
     route: '/',
     frontMatter: {
@@ -221,7 +189,6 @@ export const cnPageMap: PageMapItem[] = [
     }
   },
   {
-    kind: 'Meta',
     data: {
       index: {
         title: '简介',
@@ -246,17 +213,14 @@ export const cnPageMap: PageMapItem[] = [
 
 export const usPageMap: PageMapItem[] = [
   {
-    kind: 'Folder',
     name: 'blog',
     children: [
       {
-        kind: 'Meta',
         data: {
           'swr-v1': 'Announcing SWR 1.0'
         }
       },
       {
-        kind: 'MdxPage',
         name: 'swr-v1',
         route: '/blog/swr-v1',
         frontMatter: {
@@ -270,20 +234,16 @@ export const usPageMap: PageMapItem[] = [
     route: '/blog'
   },
   {
-    kind: 'Folder',
     name: 'docs',
     children: [
       {
-        kind: 'Folder',
         name: 'advanced',
         children: [
           {
-            kind: 'MdxPage',
             name: 'cache',
             route: '/docs/advanced/cache'
           },
           {
-            kind: 'Meta',
             data: {
               cache: 'Cache',
               performance: 'Performance',
@@ -291,12 +251,10 @@ export const usPageMap: PageMapItem[] = [
             }
           },
           {
-            kind: 'MdxPage',
             name: 'performance',
             route: '/docs/advanced/performance'
           },
           {
-            kind: 'MdxPage',
             name: 'react-native',
             route: '/docs/advanced/react-native'
           }
@@ -304,42 +262,34 @@ export const usPageMap: PageMapItem[] = [
         route: '/docs/advanced'
       },
       {
-        kind: 'MdxPage',
         name: 'arguments',
         route: '/docs/arguments'
       },
       {
-        kind: 'MdxPage',
         name: 'change-log',
         route: '/docs/change-log'
       },
       {
-        kind: 'MdxPage',
         name: 'conditional-fetching',
         route: '/docs/conditional-fetching'
       },
       {
-        kind: 'MdxPage',
         name: 'data-fetching',
         route: '/docs/data-fetching'
       },
       {
-        kind: 'MdxPage',
         name: 'error-handling',
         route: '/docs/error-handling'
       },
       {
-        kind: 'MdxPage',
         name: 'getting-started',
         route: '/docs/getting-started'
       },
       {
-        kind: 'MdxPage',
         name: 'global-configuration',
         route: '/docs/global-configuration'
       },
       {
-        kind: 'Meta',
         data: {
           'getting-started': 'Getting Started',
           options: 'Options',
@@ -361,47 +311,38 @@ export const usPageMap: PageMapItem[] = [
         }
       },
       {
-        kind: 'MdxPage',
         name: 'middleware',
         route: '/docs/middleware'
       },
       {
-        kind: 'MdxPage',
         name: 'mutation',
         route: '/docs/mutation'
       },
       {
-        kind: 'MdxPage',
         name: 'options',
         route: '/docs/options'
       },
       {
-        kind: 'MdxPage',
         name: 'pagination',
         route: '/docs/pagination'
       },
       {
-        kind: 'MdxPage',
         name: 'prefetching',
         route: '/docs/prefetching'
       },
       {
-        kind: 'MdxPage',
         name: 'revalidation',
         route: '/docs/revalidation'
       },
       {
-        kind: 'MdxPage',
         name: 'suspense',
         route: '/docs/suspense'
       },
       {
-        kind: 'MdxPage',
         name: 'typescript',
         route: '/docs/typescript'
       },
       {
-        kind: 'MdxPage',
         name: 'with-nextjs',
         route: '/docs/with-nextjs'
       }
@@ -409,11 +350,9 @@ export const usPageMap: PageMapItem[] = [
     route: '/docs'
   },
   {
-    kind: 'Folder',
     name: 'examples',
     children: [
       {
-        kind: 'MdxPage',
         name: 'auth',
         route: '/examples/auth',
         frontMatter: {
@@ -422,7 +361,6 @@ export const usPageMap: PageMapItem[] = [
         }
       },
       {
-        kind: 'MdxPage',
         name: 'basic',
         route: '/examples/basic',
         frontMatter: {
@@ -431,7 +369,6 @@ export const usPageMap: PageMapItem[] = [
         }
       },
       {
-        kind: 'MdxPage',
         name: 'error-handling',
         route: '/examples/error-handling',
         frontMatter: {
@@ -440,7 +377,6 @@ export const usPageMap: PageMapItem[] = [
         }
       },
       {
-        kind: 'MdxPage',
         name: 'infinite-loading',
         route: '/examples/infinite-loading',
         frontMatter: {
@@ -449,7 +385,6 @@ export const usPageMap: PageMapItem[] = [
         }
       },
       {
-        kind: 'Meta',
         data: {
           basic: 'Basic Usage',
           auth: 'Authentication',
@@ -459,7 +394,6 @@ export const usPageMap: PageMapItem[] = [
         }
       },
       {
-        kind: 'MdxPage',
         name: 'ssr',
         route: '/examples/ssr',
         frontMatter: {
@@ -471,7 +405,6 @@ export const usPageMap: PageMapItem[] = [
     route: '/examples'
   },
   {
-    kind: 'MdxPage',
     name: 'index',
     route: '/',
     frontMatter: {
@@ -479,7 +412,6 @@ export const usPageMap: PageMapItem[] = [
     }
   },
   {
-    kind: 'Meta',
     data: {
       index: {
         title: 'Introduction',
