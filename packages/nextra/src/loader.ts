@@ -11,8 +11,9 @@ import {
 } from './constants'
 import { PAGES_DIR } from './file-system'
 import { collectMdx } from './plugin'
+import { logger, pageTitleFromFilename } from './server/utils'
 import type { FileMap, LoaderOptions, MdxPath, PageOpts } from './types'
-import { isMeta, logger, pageTitleFromFilename } from './utils'
+import { isMeta } from './utils'
 
 const initGitRepo = (async () => {
   const IS_WEB_CONTAINER = !!process.versions.webcontainer
