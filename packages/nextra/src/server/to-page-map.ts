@@ -11,7 +11,6 @@ import {
   META_REGEX
 } from '../constants'
 import type {
-  FileMap,
   Folder,
   MdxFile,
   MdxPath,
@@ -34,20 +33,17 @@ type DynamicImport = { importName: string; route: string }
 async function collectFiles({
   dir,
   route = '/',
-  fileMap = Object.create(null),
   // isFollowingSymlink = false,
   metaImports = [],
   dynamicMetaImports = []
 }: {
   dir: string
   route?: string
-  fileMap?: FileMap
   isFollowingSymlink?: boolean
   metaImports?: Import[]
   dynamicMetaImports?: DynamicImport[]
 }): Promise<{
   items: PageMapItem[]
-  fileMap: FileMap
   metaImports: Import[]
   dynamicMetaImports: DynamicImport[]
 }> {
@@ -79,7 +75,6 @@ async function collectFiles({
       const { items } = (await collectFiles({
         dir: filePath,
         route: fileRoute,
-        fileMap,
         // isFollowingSymlink: isSymlinked,
         metaImports,
         dynamicMetaImports
@@ -188,7 +183,6 @@ async function collectFiles({
 
   return {
     items: { type: 'ArrayExpression', elements: items } as any,
-    fileMap,
     metaImports,
     dynamicMetaImports
   }
@@ -200,9 +194,11 @@ export async function toPageMap({
 }: {
   dir: string
   route: string
-}): Promise<{ rawJs: string; fileMap: FileMap }> {
-  const { items, metaImports, fileMap, dynamicMetaImports } =
-    await collectFiles({ dir, route })
+}): Promise<string> {
+  const { items, metaImports, dynamicMetaImports } = await collectFiles({
+    dir,
+    route
+  })
 
   const metaImportsAST = metaImports.map(({ filePath, importName }) => ({
     type: 'ImportDeclaration',
@@ -261,8 +257,5 @@ export async function toPageMap({
     ]
   })
 
-  return {
-    fileMap,
-    rawJs: result.value
-  }
+  return result.value
 }

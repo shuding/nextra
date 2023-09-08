@@ -11,7 +11,6 @@ import {
 } from './constants'
 import { logger, sortPages } from './server/utils'
 import type {
-  FileMap,
   Folder,
   MdxFile,
   MdxPath,
@@ -48,6 +47,8 @@ export async function collectMdx(
 }
 
 const limit = pLimit(20)
+
+type FileMap = any
 
 export async function collectFiles({
   dir,

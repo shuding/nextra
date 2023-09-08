@@ -58,11 +58,6 @@ export type MdxFile<FrontMatterType = FrontMatter> = {
 export type MetaJsonPath = `${string}/${MetaFilename}`
 export type MdxPath = `${string}.${MarkdownExtension}`
 
-export type FileMap = {
-  [jsonPath: MetaJsonPath]: MetaJsonFile
-  [mdxPath: MdxPath]: MdxFile
-}
-
 export type PageMapItem = Folder | MdxFile | MetaJsonFile
 
 // PageMapItem without MetaJsonFile and with its meta from _meta.json

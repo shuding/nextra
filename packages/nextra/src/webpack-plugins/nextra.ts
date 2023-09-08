@@ -17,9 +17,10 @@ export class NextraPlugin {
     compiler.hooks.beforeCompile.tapAsync(pluginName, async (_, callback) => {
       try {
         for (const locale of locales) {
-          const { rawJs } = await toPageMap({
-            dir: `${PAGES_DIR}/${locale}`,
-            route: `/${locale}`
+          const route = `/${locale}`
+          const rawJs = await toPageMap({
+            dir: PAGES_DIR + route,
+            route
           })
 
           await fs.mkdir(join(CHUNKS_DIR), { recursive: true })
