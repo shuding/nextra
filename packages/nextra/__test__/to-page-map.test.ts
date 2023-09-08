@@ -16,14 +16,14 @@ describe('toPageMap', () => {
     )
     const res = await toPageMap({ dir, route: '/en' })
     expect(res.rawJs).toMatchInlineSnapshot(`
-      "import meta0 from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/_meta.json\\";
-      import meta1 from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/about/_meta.json\\";
-      import meta2 from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/blog/_meta.json\\";
-      import meta3 from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/docs/_meta.json\\";
-      import meta4 from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/examples/_meta.json\\";
-      import meta5 from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/docs/advanced/_meta.json\\";
-      import meta6 from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/remote/graphql-eslint/_meta.js\\";
-      import meta7 from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/remote/graphql-yoga/_meta.js\\";
+      "import meta0 from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/_meta.ts\\";
+      import meta1 from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/about/_meta.ts\\";
+      import meta2 from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/blog/_meta.ts\\";
+      import meta3 from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/docs/_meta.ts\\";
+      import meta4 from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/examples/_meta.ts\\";
+      import meta5 from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/docs/advanced/_meta.ts\\";
+      import meta6 from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/remote/graphql-eslint/_meta.ts\\";
+      import meta7 from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/remote/graphql-yoga/_meta.ts\\";
       export const pageMap = [{
         data: meta0
       }, {
