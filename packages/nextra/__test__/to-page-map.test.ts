@@ -312,6 +312,10 @@ describe('toPageMap', () => {
         route: \\"/en/test\\",
         frontMatter: {}
       }];
+      export const dynamicMetaModules = {
+        /en/remote/graphql-eslint: meta6,
+        /en/remote/graphql-yoga: meta7
+      };
       "
     `)
   })

@@ -3,6 +3,7 @@ import { promisify } from 'node:util'
 import { toJs } from 'estree-util-to-js'
 import { valueToEstree } from 'estree-util-value-to-estree'
 import fs from 'graceful-fs'
+import grayMatter from 'gray-matter'
 import pLimit from 'p-limit'
 import {
   DYNAMIC_META_FILENAME,
@@ -23,10 +24,12 @@ import { logger } from './utils'
 const readdir = promisify(fs.readdir)
 const realpath = promisify(fs.realpath)
 const stat = promisify(fs.stat)
+const readFile = promisify(fs.readFile)
 
 const limit = pLimit(20)
 
 type Import = { filePath: string; importName: string }
+type DynamicImport = { importName: string; route: string }
 
 async function collectFiles({
   dir,
@@ -34,23 +37,23 @@ async function collectFiles({
   fileMap = Object.create(null),
   // isFollowingSymlink = false,
   metaImports = [],
-  frontMatterImports = []
+  dynamicMetaImports = []
 }: {
   dir: string
   route?: string
   fileMap?: FileMap
   isFollowingSymlink?: boolean
   metaImports?: Import[]
-  frontMatterImports?: Import[]
+  dynamicMetaImports?: DynamicImport[]
 }): Promise<{
   items: PageMapItem[]
   fileMap: FileMap
   metaImports: Import[]
-  frontMatterImports: Import[]
+  dynamicMetaImports: DynamicImport[]
 }> {
   const files = await readdir(dir, { withFileTypes: true })
 
-  const promises = files.map(async f => {
+  const promises = files.map(async (f, _index, array) => {
     const filePath = path.join(dir, f.name)
     const isDirectory = f.isDirectory()
 
@@ -79,7 +82,7 @@ async function collectFiles({
         fileMap,
         // isFollowingSymlink: isSymlinked,
         metaImports,
-        frontMatterImports
+        dynamicMetaImports
       })) as any
       if (!items.elements.length) return
 
@@ -101,8 +104,8 @@ async function collectFiles({
     // add concurrency because folder can contain a lot of files
     return limit(async () => {
       if (MARKDOWN_EXTENSION_REGEX.test(ext)) {
-        const importName = `frontMatter${frontMatterImports.length}`
-        frontMatterImports.push({ filePath, importName })
+        const content = await readFile(filePath, 'utf8')
+        const { data } = grayMatter(content)
         return {
           type: 'ObjectExpression',
           properties: [
@@ -121,7 +124,7 @@ async function collectFiles({
             {
               type: 'Property',
               key: { type: 'Identifier', name: 'frontMatter' },
-              value: { type: 'Identifier', name: importName },
+              value: valueToEstree(data),
               kind: 'init'
             }
           ]
@@ -147,6 +150,37 @@ async function collectFiles({
       }
 
       if (fileName === DYNAMIC_META_FILENAME) {
+        const dynamicPage = array.find(f => f.name.startsWith('['))
+        const importName = `meta${metaImports.length}`
+        metaImports.push({ filePath, importName })
+
+        if (dynamicPage) {
+          console.log()
+          dynamicMetaImports.push({ importName, route })
+          return {
+            type: 'ObjectExpression',
+            properties: [
+              {
+                type: 'Property',
+                key: { type: 'Identifier', name: 'data' },
+                value: { type: 'ObjectExpression', properties: [] },
+                kind: 'init'
+              }
+            ]
+          }
+        }
+        return {
+          type: 'ObjectExpression',
+          properties: [
+            {
+              type: 'Property',
+              key: { type: 'Identifier', name: 'data' },
+              value: { type: 'Identifier', name: importName },
+              kind: 'init'
+            }
+          ]
+        }
+
         // // _meta.js file. Need to check if it's dynamic (a function) or not.
         //
         // // querystring to disable caching of module
@@ -185,17 +219,19 @@ async function collectFiles({
     items: { type: 'ArrayExpression', elements: items } as any,
     fileMap,
     metaImports,
-    frontMatterImports
+    dynamicMetaImports
   }
 }
 
 export async function toPageMap({
-  dir
+  dir,
+  route
 }: {
   dir: string
+  route: string
 }): Promise<{ rawJs: string; fileMap: FileMap }> {
-  const { items, metaImports, frontMatterImports, fileMap } =
-    await collectFiles({ dir })
+  const { items, metaImports, fileMap, dynamicMetaImports } =
+    await collectFiles({ dir, route })
 
   const metaImportsAST = metaImports.map(({ filePath, importName }) => ({
     type: 'ImportDeclaration',
@@ -208,26 +244,11 @@ export async function toPageMap({
     source: { type: 'Literal', value: filePath }
   })) as any
 
-  const frontMatterImportsAST = frontMatterImports.map(
-    ({ filePath, importName }) => ({
-      type: 'ImportDeclaration',
-      specifiers: [
-        {
-          type: 'ImportSpecifier',
-          imported: { type: 'Identifier', name: 'frontMatter' },
-          local: { type: 'Identifier', name: importName }
-        }
-      ],
-      source: { type: 'Literal', value: filePath }
-    })
-  ) as any
-
   const result = toJs({
     type: 'Program',
     sourceType: 'module',
     body: [
       ...metaImportsAST,
-      ...frontMatterImportsAST,
       {
         type: 'ExportNamedDeclaration',
         specifiers: [],
@@ -239,6 +260,29 @@ export async function toPageMap({
               type: 'VariableDeclarator',
               id: { type: 'Identifier', name: 'pageMap' },
               init: items as any
+            }
+          ]
+        }
+      },
+      {
+        type: 'ExportNamedDeclaration',
+        specifiers: [],
+        declaration: {
+          type: 'VariableDeclaration',
+          kind: 'const',
+          declarations: [
+            {
+              type: 'VariableDeclarator',
+              id: { type: 'Identifier', name: 'dynamicMetaModules' },
+              init: {
+                type: 'ObjectExpression',
+                properties: dynamicMetaImports.map(({ importName, route }) => ({
+                  type: 'Property',
+                  key: { type: 'Identifier', name: route },
+                  value: { type: 'Identifier', name: importName },
+                  kind: 'init'
+                }))
+              }
             }
           ]
         }

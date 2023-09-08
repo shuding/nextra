@@ -258,7 +258,7 @@ ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
 
   const stringifiedPageOpts =
     JSON.stringify(pageOpts).slice(0, -1) +
-    ',headings:__toc,pageMap:__nextraPageMap,frontMatter}'
+    ',headings:__toc,pageMap,frontMatter}'
 
   const lastIndexOfFooter = finalResult.lastIndexOf(FOOTER_TO_REMOVE)
   const mdxContent =
@@ -268,7 +268,7 @@ ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
   const pageMapPath = path.join(CHUNKS_DIR, `nextra-page-map-${locale}.mjs`)
 
   const rawJs = `import { setupNextraPage, resolvePageMap } from 'nextra/setup-page'
-import { pageMap as __nextraPageMap, dynamicMetaModules } from '${pageMapPath}'
+import { pageMap, dynamicMetaModules } from '${pageMapPath}'
 ${isAppFileFromNodeModules ? cssImports : ''}
 ${mdxContent}
 
