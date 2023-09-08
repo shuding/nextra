@@ -270,9 +270,6 @@ importers:
       katex:
         specifier: ^0.16.8
         version: 0.16.8
-      lodash.get:
-        specifier: ^4.4.2
-        version: 4.4.2
       next-mdx-remote:
         specifier: ^4.2.1
         version: 4.2.1(react-dom@18.2.0)(react@18.2.0)

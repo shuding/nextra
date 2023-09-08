@@ -120,11 +120,7 @@ export type NextraInternalGlobal = typeof globalThis & {
   }
 }
 
-export type DynamicMetaDescriptor = {
-  metaFilePath: string
-  metaObjectKeyPath: string
-  metaParentKeyPath: string
-}
+export type DynamicMetaDescriptor = Record<string, () => any>
 
 export type StructurizedData = Record<string, string>
 

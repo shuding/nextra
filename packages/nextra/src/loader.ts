@@ -5,15 +5,12 @@ import { compileMdx } from './compile'
 import {
   CHUNKS_DIR,
   CWD,
-  IS_PRODUCTION,
   MARKDOWN_EXTENSION_REGEX,
   OFFICIAL_THEMES
 } from './constants'
 import { PAGES_DIR } from './file-system'
-import { collectMdx } from './plugin'
 import { logger, pageTitleFromFilename } from './server/utils'
-import type { FileMap, LoaderOptions, MdxPath, PageOpts } from './types'
-import { isMeta } from './utils'
+import type { LoaderOptions, MdxPath, PageOpts } from './types'
 
 const initGitRepo = (async () => {
   const IS_WEB_CONTAINER = !!process.versions.webcontainer
@@ -70,7 +67,6 @@ async function loader(
     mdxOptions,
     locales
   } = context.getOptions()
-  context.cacheable(true)
 
   const mdxPath = (
     context._module?.resourceResolveData
@@ -130,40 +126,6 @@ const __nextra_internal__ = globalThis[Symbol.for('__nextra_internal__')] ||= Ob
 __nextra_internal__.context ||= Object.create(null)
 __nextra_internal__.Layout = __layout
 ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
-  }
-
-  const { fileMap } = (await import(
-    path.join(CHUNKS_DIR, 'nextra-file-map.mjs')
-  )) as { fileMap: FileMap }
-
-  const existsInFileMap = !!fileMap[mdxPath]
-
-  // mdx is imported but is outside the `pages` directory
-  if (!existsInFileMap) {
-    fileMap[mdxPath] = await collectMdx(mdxPath)
-  }
-
-  if (!IS_PRODUCTION) {
-    for (const [filePath, file] of Object.entries(fileMap)) {
-      if (isMeta(file)) {
-        context.addDependency(filePath)
-      }
-    }
-    // Add the entire directory `pages` as the dependency,
-    // so we can generate the correct page map.
-    context.addContextDependency(PAGES_DIR)
-
-    // Add local theme as a dependency
-    if (isLocalTheme) {
-      context.addDependency(path.resolve(theme))
-    }
-    // Add theme config as a dependency
-    if (themeConfig) {
-      context.addDependency(path.resolve(themeConfig))
-    }
-    if (!existsInFileMap) {
-      context.addMissingDependency(mdxPath)
-    }
   }
 
   const locale =

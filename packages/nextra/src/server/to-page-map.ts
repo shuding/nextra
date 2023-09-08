@@ -180,35 +180,6 @@ async function collectFiles({
             }
           ]
         }
-
-        // // _meta.js file. Need to check if it's dynamic (a function) or not.
-        //
-        // // querystring to disable caching of module
-        // const importPath = `${filePath}?d=${Date.now()}`
-        // const metaMod = await import(importPath)
-        // const meta = metaMod.default
-        // const fp = filePath.replace(/\.js$/, '.json') as MetaJsonPath
-        //
-        // if (typeof meta === 'function') {
-        //   // Dynamic. Add a special key (__nextra_src) and set data as empty.
-        //   return {
-        //     __nextra_src: filePath,
-        //     data: {}
-        //   }
-        // } else if (meta && typeof meta === 'object' && isSerializable(meta)) {
-        //   // Static content, can be statically optimized.
-        //   return {
-        //     // we spread object because default title could be incorrectly set when _meta.json/js
-        //     // is imported/exported by another _meta.js
-        //     data: { ...meta }
-        //   }
-        // } else {
-        //   logger.error(
-        //     `"${fileName}" is not a valid meta file. The default export is required to be a serializable object or a function. Please check the following file:`,
-        //     path.relative(CWD, filePath)
-        //   )
-        // }
-        // return fileMap[fp]
       }
     })
   })
@@ -278,7 +249,7 @@ export async function toPageMap({
                 type: 'ObjectExpression',
                 properties: dynamicMetaImports.map(({ importName, route }) => ({
                   type: 'Property',
-                  key: { type: 'Identifier', name: route },
+                  key: { type: 'Literal', raw: `'${route}'`  },
                   value: { type: 'Identifier', name: importName },
                   kind: 'init'
                 }))

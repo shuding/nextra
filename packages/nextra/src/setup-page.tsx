@@ -76,8 +76,16 @@ export function collectCatchAllRoutes(
 
 let cachedResolvedPageMap: PageMapItem[]
 
+function findFolder(pageMap: PageMapItem[], [path, ...paths]: string[]): any {
+  for (const item of pageMap) {
+    if ('children' in item && path === item.name) {
+      return paths.length ? findFolder(item.children, paths) : item
+    }
+  }
+}
+
 export const resolvePageMap =
-  (dynamicMetaModules: [() => any, DynamicMetaDescriptor][]) => async () => {
+  (dynamicMetaModules: DynamicMetaDescriptor) => async () => {
     const __nextra_internal__ = (globalThis as NextraInternalGlobal)[
       NEXTRA_INTERNAL
     ]
@@ -85,15 +93,14 @@ export const resolvePageMap =
       return cachedResolvedPageMap
     }
     const clonedPageMap = structuredClone(__nextra_internal__.pageMap)
-    for (const [
-      metaFunction,
-      { metaObjectKeyPath, metaParentKeyPath }
-    ] of dynamicMetaModules) {
+
+    for (const [route, metaFunction] of Object.entries(dynamicMetaModules)) {
+      // TODO 2 for locale, 1 without local
+      const folder = findFolder(clonedPageMap, route.split('/').slice(2))
       const metaData = await metaFunction()
-      const meta: DynamicMetaJsonFile = get(clonedPageMap, metaObjectKeyPath)
+      const meta: DynamicMetaJsonFile = folder.children[0]
       meta.data = metaData
-      const parent: Folder = get(clonedPageMap, metaParentKeyPath)
-      collectCatchAllRoutes(parent, meta)
+      collectCatchAllRoutes(folder, meta)
     }
     return (cachedResolvedPageMap = clonedPageMap)
   }
