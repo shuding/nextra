@@ -3,7 +3,6 @@
  * This file should be never used directly, only in loader.ts
  */
 
-import get from 'lodash.get'
 import { useRouter } from 'next/router'
 import type { FC, ReactElement } from 'react'
 import { NEXTRA_INTERNAL } from './constants'
@@ -102,6 +101,7 @@ export const resolvePageMap =
       meta.data = metaData
       collectCatchAllRoutes(folder, meta)
     }
+    // TODO: found workaround to fix Reason: `symbol` cannot be serialized as JSON. Please only return JSON serializable data types.
     return (cachedResolvedPageMap = clonedPageMap)
   }
 

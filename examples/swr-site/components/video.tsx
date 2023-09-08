@@ -3,9 +3,7 @@ import { useInView } from 'react-intersection-observer'
 import 'intersection-observer'
 
 export default function Video({ src, caption, ratio }) {
-  const [inViewRef, inView] = useInView({
-    threshold: 1
-  })
+  const [inViewRef, inView] = useInView({ threshold: 1 })
   const videoRef = useRef()
 
   const setRefs = useCallback(
