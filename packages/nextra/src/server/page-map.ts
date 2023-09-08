@@ -188,7 +188,7 @@ async function collectFiles({
   }
 }
 
-export async function toPageMap({
+export async function collectPageMap({
   dir,
   route
 }: {

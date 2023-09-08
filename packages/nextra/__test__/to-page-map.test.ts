@@ -1,9 +1,9 @@
 import path from 'node:path'
 import { describe } from 'vitest'
 import { CWD } from '../src/constants'
-import { toPageMap } from '../src/server/to-page-map'
+import { collectPageMap } from '../src/server/page-map'
 
-describe('toPageMap', () => {
+describe('collectPageMap', () => {
   it('should work', async () => {
     const dir = path.join(
       CWD,
@@ -14,8 +14,8 @@ describe('toPageMap', () => {
       'pages',
       'en'
     )
-    const res = await toPageMap({ dir, route: '/en' })
-    expect(res.rawJs).toMatchInlineSnapshot(`
+    const rawJs = await collectPageMap({ dir, route: '/en' })
+    expect(rawJs).toMatchInlineSnapshot(`
       "import meta0 from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/_meta.ts\\";
       import meta1 from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/about/_meta.ts\\";
       import meta2 from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/blog/_meta.ts\\";
