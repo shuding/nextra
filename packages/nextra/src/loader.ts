@@ -54,6 +54,7 @@ async function loader(
 ): Promise<string> {
   const {
     isPageImport = false,
+    isMetaFile,
     theme,
     themeConfig,
     defaultShowCopyCode,
@@ -89,8 +90,8 @@ async function loader(
     )
     return ''
   }
-  // _meta.js used as a page.
-  if (mdxPath.endsWith('_meta.js')) {
+  if (isMetaFile) {
+    // _meta.[jt]sx? used as a page.
     return 'export default () => null'
   }
 

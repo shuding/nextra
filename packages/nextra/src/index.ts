@@ -8,7 +8,8 @@ import {
   DEFAULT_LOCALE,
   DEFAULT_LOCALES,
   MARKDOWN_EXTENSION_REGEX,
-  MARKDOWN_EXTENSIONS
+  MARKDOWN_EXTENSIONS,
+  META_REGEX
 } from './constants'
 import { nextraConfigSchema } from './schemas'
 import { logger } from './server/utils'
@@ -135,9 +136,17 @@ const nextra: Nextra = nextraConfig => {
           },
           {
             // Match dynamic meta files inside pages.
-            test: /_meta\.js$/,
+            test: META_REGEX,
             issuer: request => !request,
-            use: [options.defaultLoaders.babel, { loader: 'nextra/loader' }]
+            use: [
+              options.defaultLoaders.babel,
+              {
+                loader: 'nextra/loader',
+                options: {
+                  isMetaFile: true
+                }
+              }
+            ]
           },
           {
             test: /pages\/_app\./,

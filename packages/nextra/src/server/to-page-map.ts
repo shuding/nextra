@@ -6,9 +6,9 @@ import fs from 'graceful-fs'
 import grayMatter from 'gray-matter'
 import pLimit from 'p-limit'
 import {
-  DYNAMIC_META_FILENAME,
   MARKDOWN_EXTENSION_REGEX,
-  META_FILENAME
+  META_FILENAME,
+  META_REGEX
 } from '../constants'
 import type {
   FileMap,
@@ -149,7 +149,7 @@ async function collectFiles({
         }
       }
 
-      if (fileName === DYNAMIC_META_FILENAME) {
+      if (META_REGEX.test(fileName)) {
         const dynamicPage = array.find(f => f.name.startsWith('['))
         const importName = `meta${metaImports.length}`
         metaImports.push({ filePath, importName })
@@ -249,7 +249,7 @@ export async function toPageMap({
                 type: 'ObjectExpression',
                 properties: dynamicMetaImports.map(({ importName, route }) => ({
                   type: 'Property',
-                  key: { type: 'Literal', raw: `'${route}'`  },
+                  key: { type: 'Literal', raw: `'${route}'` },
                   value: { type: 'Identifier', name: importName },
                   kind: 'init'
                 }))
