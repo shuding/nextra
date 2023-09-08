@@ -22,6 +22,8 @@ describe('toPageMap', () => {
       import meta3 from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/docs/_meta.json\\";
       import meta4 from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/examples/_meta.json\\";
       import meta5 from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/docs/advanced/_meta.json\\";
+      import meta6 from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/remote/graphql-eslint/_meta.js\\";
+      import meta7 from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/remote/graphql-yoga/_meta.js\\";
       export const pageMap = [{
         data: meta0
       }, {
@@ -289,6 +291,22 @@ describe('toPageMap', () => {
           \\"title\\": \\"React Hooks for Data Fetching\\",
           \\"searchable\\": false
         }
+      }, {
+        \\"name\\": \\"remote\\",
+        \\"route\\": \\"/remote\\",
+        children: [{
+          \\"name\\": \\"graphql-eslint\\",
+          \\"route\\": \\"/remote/graphql-eslint\\",
+          children: [{
+            data: undefined
+          }]
+        }, {
+          \\"name\\": \\"graphql-yoga\\",
+          \\"route\\": \\"/remote/graphql-yoga\\",
+          children: [{
+            data: undefined
+          }]
+        }]
       }, {
         name: \\"test\\",
         route: \\"/test\\",
