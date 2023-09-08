@@ -4,15 +4,7 @@ export default {
     type: 'separator'
   },
   'getting-started': '',
-  options: {
-    title: (
-      <>
-        <strong>MA</strong>
-        <i>CHI</i>
-        <s>NA</s>
-      </>
-    )
-  },
+  options: '',
   'global-configuration': '',
   'data-fetching': '',
   'error-handling': {

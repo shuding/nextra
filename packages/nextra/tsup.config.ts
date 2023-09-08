@@ -6,7 +6,7 @@ import type { Options } from 'tsup'
 import { defineConfig } from 'tsup'
 
 const CLIENT_ENTRY = [
-  'src/{normalize-pages,mdx,context}.ts',
+  'src/{normalize-pages,mdx,context,catch-all}.ts',
   'src/{setup-page,data}.tsx',
   'src/{components,hooks,icons}/*.{ts,tsx}'
 ]
@@ -66,7 +66,7 @@ const sharedConfig = {
 export default defineConfig([
   {
     name: 'nextra',
-    entry: ['src/__temp__.js', 'src/catch-all.ts'],
+    entry: ['src/__temp__.js'],
     format: 'cjs',
     dts: false
   },
@@ -75,7 +75,6 @@ export default defineConfig([
     entry: [
       'src/**/*.ts',
       '!src/**/*.d.ts',
-      '!src/catch-all.ts',
       '!src/types.ts',
       ...CLIENT_ENTRY.map(filePath => `!${filePath}`)
     ],

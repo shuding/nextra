@@ -10,7 +10,10 @@
   "exports": {
     "./package.json": "./package.json",
     ".": "./dist/index.mjs",
-    "./catch-all": "./dist/catch-all.js",
+    "./catch-all": {
+      "import": "./dist/catch-all.js",
+      "types": "./dist/catch-all.d.mts"
+    },
     "./data": {
       "import": "./dist/data.js",
       "types": "./dist/data.d.mts"
@@ -60,6 +63,9 @@
   "types": "./dist/index.d.mts",
   "typesVersions": {
     "*": {
+      "catch-all": [
+        "./dist/catch-all.d.mts"
+      ],
       "compile": [
         "./dist/compile.d.mts"
       ],

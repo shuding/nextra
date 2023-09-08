@@ -4,5 +4,3 @@ pnpm-lock.yaml
 docs/pages/docs/guide/advanced/latex.mdx
 
 examples/swr-site/nextra-remote-filepaths/*.json
-examples/swr-site/pages/en/remote/graphql-eslint/_meta.js
-examples/swr-site/pages/en/remote/graphql-yoga/_meta.js
