@@ -25,7 +25,7 @@ const realpath = promisify(fs.realpath)
 const stat = promisify(fs.stat)
 const readFile = promisify(fs.readFile)
 
-const limit = pLimit(20)
+const limit = pLimit(1)
 
 type Import = { filePath: string; importName: string }
 type DynamicImport = { importName: string; route: string }
@@ -141,17 +141,7 @@ async function collectFiles({
 
         if (dynamicPage) {
           dynamicMetaImports.push({ importName, route })
-          return {
-            type: 'ObjectExpression',
-            properties: [
-              {
-                type: 'Property',
-                key: { type: 'Identifier', name: 'data' },
-                value: { type: 'ObjectExpression', properties: [] },
-                kind: 'init'
-              }
-            ]
-          }
+          return createAstObject({ data: createAstObject({}) })
         }
         return {
           type: 'ObjectExpression',
