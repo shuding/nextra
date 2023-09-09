@@ -105,12 +105,23 @@ describe('collectPageMap', () => {
             name: \\"more\\",
             route: \\"/en/docs/advanced/more\\",
             children: [{
+              data: {
+                \\"loooooooooooooooooooong-title\\": \\"Loooooooooooooooooooong Title\\",
+                \\"tree\\": \\"Tree\\"
+              }
+            }, {
               name: \\"loooooooooooooooooooong-title\\",
               route: \\"/en/docs/advanced/more/loooooooooooooooooooong-title\\"
             }, {
               name: \\"tree\\",
               route: \\"/en/docs/advanced/more/tree\\",
               children: [{
+                data: {
+                  \\"one\\": \\"One\\",
+                  \\"three\\": \\"Three\\",
+                  \\"two\\": \\"Two\\"
+                }
+              }, {
                 name: \\"one\\",
                 route: \\"/en/docs/advanced/more/tree/one\\"
               }, {
@@ -259,6 +270,11 @@ describe('collectPageMap', () => {
         name: \\"remote\\",
         route: \\"/en/remote\\",
         children: [{
+          data: {
+            \\"graphql-eslint\\": \\"GraphQL Eslint\\",
+            \\"graphql-yoga\\": \\"GraphQL Yoga\\"
+          }
+        }, {
           name: \\"graphql-eslint\\",
           route: \\"/en/remote/graphql-eslint\\",
           children: [{
@@ -295,13 +311,15 @@ describe('Page Process', () => {
       )
     })
     expect(rawJs).toMatchInlineSnapshot(`
-      "export const pageMap = [];
+      "export const pageMap = [{
+        data: {}
+      }];
       export const dynamicMetaModules = {};"
     `)
   })
 
-  it.skip("should add `_meta.json` file if it's missing", async () => {
-    const { items } = await collectFiles({
+  it("should add `_meta.json` file if it's missing", async () => {
+    const rawJs = await collectPageMap({
       dir: path.join(
         CWD,
         '__test__',
@@ -310,11 +328,21 @@ describe('Page Process', () => {
         'folder-without-meta-json'
       )
     })
-    expect(items).toEqual([
-      { name: 'callout', route: '/callout' },
-      { name: 'tabs', route: '/tabs' },
-      { data: { callout: 'Callout', tabs: 'Tabs' } }
-    ])
+    expect(rawJs).toMatchInlineSnapshot(`
+      "export const pageMap = [{
+        data: {
+          \\"callout\\": \\"Callout\\",
+          \\"tabs\\": \\"Tabs\\"
+        }
+      }, {
+        name: \\"callout\\",
+        route: \\"/callout\\"
+      }, {
+        name: \\"tabs\\",
+        route: \\"/tabs\\"
+      }];
+      export const dynamicMetaModules = {};"
+    `)
   })
 
   it.skip('should resolve symlinked files and directories', async () => {

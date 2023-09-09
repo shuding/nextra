@@ -12,7 +12,7 @@ import {
 } from '../constants'
 import type { PageMapItem } from '../types'
 import { truthy } from '../utils'
-import { normalizePageRoute } from './utils'
+import { normalizePageRoute, pageTitleFromFilename } from './utils'
 
 const readdir = promisify(fs.readdir)
 const readFile = promisify(fs.readFile)
@@ -95,7 +95,9 @@ async function collectFiles({
           metaImports,
           dynamicMetaImports
         })) as any
-        if (!pageMapAst.elements.length) return
+
+        const { elements } = pageMapAst
+        if (!elements.length) return
 
         return createAstObject({
           name: f.name,
@@ -140,6 +142,30 @@ async function collectFiles({
     })
 
   const items = (await Promise.all(promises)).filter(truthy)
+
+  const hasMeta = items.find(
+    item =>
+      item.type === 'ObjectExpression' && item.properties[0].key.name === 'data'
+  )
+
+  if (!hasMeta) {
+    const allPages = items
+      .filter(
+        item =>
+          item.type === 'ObjectExpression' &&
+          item.properties[0].key.name === 'name'
+      )
+      .map(item => item.properties[0].value.value)
+    items.unshift(
+      createAstObject({
+        data: valueToEstree(
+          Object.fromEntries(
+            allPages.map(name => [name, pageTitleFromFilename(name)])
+          )
+        )
+      })
+    )
+  }
 
   return {
     pageMapAst: { type: 'ArrayExpression', elements: items } as any,
