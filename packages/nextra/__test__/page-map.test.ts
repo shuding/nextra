@@ -23,21 +23,21 @@ describe('collectPageMap', () => {
     )
 
     expect(rawJsWithCleanImportPath).toMatchInlineSnapshot(`
-      "import meta0 from \\"../../examples/swr-site/pages/en/_meta.json\\";
-      import meta1 from \\"../../examples/swr-site/pages/en/about/_meta.ts\\";
-      import meta2 from \\"../../examples/swr-site/pages/en/blog/_meta.ts\\";
-      import meta3 from \\"../../examples/swr-site/pages/en/docs/_meta.ts\\";
-      import meta4 from \\"../../examples/swr-site/pages/en/examples/_meta.ts\\";
-      import meta5 from \\"../../examples/swr-site/pages/en/docs/advanced/_meta.ts\\";
-      import meta6 from \\"../../examples/swr-site/pages/en/remote/graphql-eslint/_meta.ts\\";
-      import meta7 from \\"../../examples/swr-site/pages/en/remote/graphql-yoga/_meta.ts\\";
+      "import _examples_swr_site_pages_en__meta_json from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/_meta.json\\";
+      import _examples_swr_site_pages_en_about__meta_ts from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/about/_meta.ts\\";
+      import _examples_swr_site_pages_en_blog__meta_ts from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/blog/_meta.ts\\";
+      import _examples_swr_site_pages_en_docs__meta_ts from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/docs/_meta.ts\\";
+      import _examples_swr_site_pages_en_examples__meta_ts from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/examples/_meta.ts\\";
+      import _examples_swr_site_pages_en_docs_advanced__meta_ts from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/docs/advanced/_meta.ts\\";
+      import _examples_swr_site_pages_en_remote_graphql_eslint__meta_ts from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/remote/graphql-eslint/_meta.ts\\";
+      import _examples_swr_site_pages_en_remote_graphql_yoga__meta_ts from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/remote/graphql-yoga/_meta.ts\\";
       export const pageMap = [{
-        data: meta0
+        data: _examples_swr_site_pages_en__meta_json
       }, {
         name: \\"about\\",
         route: \\"/en/about\\",
         children: [{
-          data: meta1
+          data: _examples_swr_site_pages_en_about__meta_ts
         }, {
           name: \\"a-page\\",
           route: \\"/en/about/a-page\\"
@@ -55,7 +55,7 @@ describe('collectPageMap', () => {
         name: \\"blog\\",
         route: \\"/en/blog\\",
         children: [{
-          data: meta2
+          data: _examples_swr_site_pages_en_blog__meta_ts
         }, {
           name: \\"swr-v1\\",
           route: \\"/en/blog/swr-v1\\",
@@ -74,7 +74,7 @@ describe('collectPageMap', () => {
         name: \\"docs\\",
         route: \\"/en/docs\\",
         children: [{
-          data: meta3
+          data: _examples_swr_site_pages_en_docs__meta_ts
         }, {
           name: \\"404-500\\",
           route: \\"/en/docs/404-500\\"
@@ -82,7 +82,7 @@ describe('collectPageMap', () => {
           name: \\"advanced\\",
           route: \\"/en/docs/advanced\\",
           children: [{
-            data: meta5
+            data: _examples_swr_site_pages_en_docs_advanced__meta_ts
           }, {
             name: \\"cache\\",
             route: \\"/en/docs/advanced/cache\\"
@@ -216,7 +216,7 @@ describe('collectPageMap', () => {
         name: \\"examples\\",
         route: \\"/en/examples\\",
         children: [{
-          data: meta4
+          data: _examples_swr_site_pages_en_examples__meta_ts
         }, {
           name: \\"auth\\",
           route: \\"/en/examples/auth\\",
@@ -292,8 +292,8 @@ describe('collectPageMap', () => {
         route: \\"/en/test\\"
       }];
       export const dynamicMetaModules = {
-        \\"/en/remote/graphql-eslint\\": meta6,
-        \\"/en/remote/graphql-yoga\\": meta7
+        \\"/en/remote/graphql-eslint\\": _examples_swr_site_pages_en_remote_graphql_eslint__meta_ts,
+        \\"/en/remote/graphql-yoga\\": _examples_swr_site_pages_en_remote_graphql_yoga__meta_ts
       };"
     `)
   })
