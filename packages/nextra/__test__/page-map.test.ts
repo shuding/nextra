@@ -345,7 +345,7 @@ describe('Page Process', () => {
     `)
   })
 
-  it.only('should resolve symlinked files and directories', async () => {
+  it('should resolve symlinked files and directories', async () => {
     const rawJs = await collectPageMap({
       dir: path.join(
         CWD,
