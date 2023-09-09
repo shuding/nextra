@@ -5,26 +5,32 @@ import {
   getCurrentLevelPages,
   getPagesUnderRoute
 } from '../src/context'
-import { collectFiles } from '../src/plugin'
 import type { NextraInternalGlobal } from '../src/types'
 
 describe('context', () => {
   beforeAll(async () => {
-    const PAGES_DIR = path.join(
+    const chunksPath = path.join(
       CWD,
       '..',
       '..',
       'examples',
       'swr-site',
-      'pages'
+      '.next',
+      'static',
+      'chunks'
     )
-    const { items } = await collectFiles({ dir: PAGES_DIR })
+    const { pageMap: enPageMap } = await import(
+      chunksPath + '/nextra-page-map-en.mjs'
+    )
+
     // @ts-expect-error -- we don't care about missing properties
     const __nextra_internal__ = ((globalThis as NextraInternalGlobal)[
       NEXTRA_INTERNAL
     ] ||= {})
+
     Object.assign(__nextra_internal__, {
-      pageMap: items,
+      pageMap: enPageMap,
+      // TODO: add here '/en/...'
       route: '/docs'
     })
   })
@@ -43,7 +49,7 @@ describe('context', () => {
 
   describe('getPagesUnderRoute()', () => {
     it.skip('should work', () => {
-      expect(getPagesUnderRoute('/docs/advanced')).toMatchSnapshot()
+      expect(getPagesUnderRoute('/en/docs/advanced')).toMatchSnapshot()
     })
   })
 })
