@@ -17,7 +17,7 @@ import type {
   MetaJsonPath,
   PageMapItem
 } from '../types'
-import { isSerializable, normalizePageRoute, truthy } from '../utils'
+import { normalizePageRoute, truthy } from '../utils'
 import { logger } from './utils'
 
 const readdir = promisify(fs.readdir)

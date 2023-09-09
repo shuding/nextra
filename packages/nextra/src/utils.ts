@@ -16,15 +16,6 @@ export function normalizePageRoute(parentRoute: string, route: string): string {
   return slash(path.join(parentRoute, route.replace(/^index$/, '')))
 }
 
-export function isSerializable(o: any): boolean {
-  try {
-    JSON.stringify(o)
-    return true
-  } catch (err) {
-    return false
-  }
-}
-
 export function getDefault<T>(module: T & { default?: T }): T {
   return module.default || module
 }
