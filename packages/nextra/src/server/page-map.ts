@@ -45,6 +45,24 @@ function createAstObject(obj: Record<string, unknown>) {
   }
 }
 
+function createExportConst(name: string, value: unknown) {
+  return {
+    type: 'ExportNamedDeclaration',
+    specifiers: [],
+    declaration: {
+      type: 'VariableDeclaration',
+      kind: 'const',
+      declarations: [
+        {
+          type: 'VariableDeclarator',
+          id: { type: 'Identifier', name },
+          init: value
+        }
+      ]
+    }
+  }
+}
+
 async function collectFiles({
   dir,
   route = '/',
@@ -179,44 +197,16 @@ export async function collectPageMap({
     sourceType: 'module',
     body: [
       ...metaImportsAST,
-      {
-        type: 'ExportNamedDeclaration',
-        specifiers: [],
-        declaration: {
-          type: 'VariableDeclaration',
-          kind: 'const',
-          declarations: [
-            {
-              type: 'VariableDeclarator',
-              id: { type: 'Identifier', name: 'pageMap' },
-              init: items as any
-            }
-          ]
-        }
-      },
-      {
-        type: 'ExportNamedDeclaration',
-        specifiers: [],
-        declaration: {
-          type: 'VariableDeclaration',
-          kind: 'const',
-          declarations: [
-            {
-              type: 'VariableDeclarator',
-              id: { type: 'Identifier', name: 'dynamicMetaModules' },
-              init: {
-                type: 'ObjectExpression',
-                properties: dynamicMetaImports.map(({ importName, route }) => ({
-                  type: 'Property',
-                  key: { type: 'Literal', raw: `'${route}'` },
-                  value: { type: 'Identifier', name: importName },
-                  kind: 'init'
-                }))
-              }
-            }
-          ]
-        }
-      }
+      createExportConst('pageMap', items),
+      createExportConst('dynamicMetaModules', {
+        type: 'ObjectExpression',
+        properties: dynamicMetaImports.map(({ importName, route }) => ({
+          type: 'Property',
+          key: { type: 'Literal', raw: `'${route}'` },
+          value: { type: 'Identifier', name: importName },
+          kind: 'init'
+        }))
+      })
     ]
   })
 
