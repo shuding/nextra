@@ -30,6 +30,21 @@ const limit = pLimit(20)
 type Import = { filePath: string; importName: string }
 type DynamicImport = { importName: string; route: string }
 
+function createAstObject(obj: Record<string, unknown>) {
+  return {
+    type: 'ObjectExpression',
+    properties: Object.entries(obj).map(([key, value]) => ({
+      type: 'Property',
+      kind: 'init',
+      key: { type: 'Identifier', name: key },
+      value:
+        ['string', 'number', 'boolean'].includes(typeof value) || value === null
+          ? { type: 'Literal', value }
+          : value
+    }))
+  }
+}
+
 async function collectFiles({
   dir,
   route = '/',
@@ -81,19 +96,11 @@ async function collectFiles({
       })) as any
       if (!items.elements.length) return
 
-      const folder = valueToEstree({
+      return createAstObject({
         name: f.name,
-        route: fileRoute
-      }) as any
-
-      folder.properties.push({
-        type: 'Property',
-        key: { type: 'Identifier', name: 'children' },
-        value: items,
-        kind: 'init'
+        route: fileRoute,
+        children: items
       })
-
-      return folder
     }
 
     // add concurrency because folder can contain a lot of files
@@ -150,7 +157,6 @@ async function collectFiles({
         metaImports.push({ filePath, importName })
 
         if (dynamicPage) {
-          console.log()
           dynamicMetaImports.push({ importName, route })
           return {
             type: 'ObjectExpression',

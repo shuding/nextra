@@ -27,8 +27,8 @@ describe('collectPageMap', () => {
       export const pageMap = [{
         data: meta0
       }, {
-        \\"name\\": \\"about\\",
-        \\"route\\": \\"/en/about\\",
+        name: \\"about\\",
+        route: \\"/en/about\\",
         children: [{
           data: meta1
         }, {
@@ -49,8 +49,8 @@ describe('collectPageMap', () => {
           frontMatter: {}
         }]
       }, {
-        \\"name\\": \\"blog\\",
-        \\"route\\": \\"/en/blog\\",
+        name: \\"blog\\",
+        route: \\"/en/blog\\",
         children: [{
           data: meta2
         }, {
@@ -68,8 +68,8 @@ describe('collectPageMap', () => {
           \\"searchable\\": false
         }
       }, {
-        \\"name\\": \\"docs\\",
-        \\"route\\": \\"/en/docs\\",
+        name: \\"docs\\",
+        route: \\"/en/docs\\",
         children: [{
           name: \\"404-500\\",
           route: \\"/en/docs/404-500\\",
@@ -77,8 +77,8 @@ describe('collectPageMap', () => {
         }, {
           data: meta3
         }, {
-          \\"name\\": \\"advanced\\",
-          \\"route\\": \\"/en/docs/advanced\\",
+          name: \\"advanced\\",
+          route: \\"/en/docs/advanced\\",
           children: [{
             data: meta5
           }, {
@@ -106,15 +106,15 @@ describe('collectPageMap', () => {
             route: \\"/en/docs/advanced/markdown-import\\",
             frontMatter: {}
           }, {
-            \\"name\\": \\"more\\",
-            \\"route\\": \\"/en/docs/advanced/more\\",
+            name: \\"more\\",
+            route: \\"/en/docs/advanced/more\\",
             children: [{
               name: \\"loooooooooooooooooooong-title\\",
               route: \\"/en/docs/advanced/more/loooooooooooooooooooong-title\\",
               frontMatter: {}
             }, {
-              \\"name\\": \\"tree\\",
-              \\"route\\": \\"/en/docs/advanced/more/tree\\",
+              name: \\"tree\\",
+              route: \\"/en/docs/advanced/more/tree\\",
               children: [{
                 name: \\"one\\",
                 route: \\"/en/docs/advanced/more/tree/one\\",
@@ -236,8 +236,8 @@ describe('collectPageMap', () => {
           frontMatter: {}
         }]
       }, {
-        \\"name\\": \\"examples\\",
-        \\"route\\": \\"/en/examples\\",
+        name: \\"examples\\",
+        route: \\"/en/examples\\",
         children: [{
           data: meta4
         }, {
@@ -292,17 +292,17 @@ describe('collectPageMap', () => {
           \\"searchable\\": false
         }
       }, {
-        \\"name\\": \\"remote\\",
-        \\"route\\": \\"/en/remote\\",
+        name: \\"remote\\",
+        route: \\"/en/remote\\",
         children: [{
-          \\"name\\": \\"graphql-eslint\\",
-          \\"route\\": \\"/en/remote/graphql-eslint\\",
+          name: \\"graphql-eslint\\",
+          route: \\"/en/remote/graphql-eslint\\",
           children: [{
             data: {}
           }]
         }, {
-          \\"name\\": \\"graphql-yoga\\",
-          \\"route\\": \\"/en/remote/graphql-yoga\\",
+          name: \\"graphql-yoga\\",
+          route: \\"/en/remote/graphql-yoga\\",
           children: [{
             data: {}
           }]
