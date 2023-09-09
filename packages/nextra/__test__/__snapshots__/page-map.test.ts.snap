@@ -231,11 +231,24 @@ exports[`Page Process > should match i18n site page maps 1`] = `
             {
               "children": [
                 {
+                  "data": {
+                    "loooooooooooooooooooong-title": "Loooooooooooooooooooong Title",
+                    "tree": "Tree",
+                  },
+                },
+                {
                   "name": "loooooooooooooooooooong-title",
                   "route": "/en/docs/advanced/more/loooooooooooooooooooong-title",
                 },
                 {
                   "children": [
+                    {
+                      "data": {
+                        "one": "One",
+                        "three": "Three",
+                        "two": "Two",
+                      },
+                    },
                     {
                       "name": "one",
                       "route": "/en/docs/advanced/more/tree/one",
@@ -446,6 +459,12 @@ exports[`Page Process > should match i18n site page maps 1`] = `
     },
     {
       "children": [
+        {
+          "data": {
+            "graphql-eslint": "GraphQL Eslint",
+            "graphql-yoga": "GraphQL Yoga",
+          },
+        },
         {
           "children": [
             {

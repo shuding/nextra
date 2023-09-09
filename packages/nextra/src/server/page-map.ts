@@ -143,19 +143,13 @@ async function collectFiles({
 
   const items = (await Promise.all(promises)).filter(truthy)
 
-  const hasMeta = items.find(
-    item =>
-      item.type === 'ObjectExpression' && item.properties[0].key.name === 'data'
-  )
+  const hasMeta = items.some(item => item.properties[0].key.name === 'data')
 
   if (!hasMeta) {
     const allPages = items
-      .filter(
-        item =>
-          item.type === 'ObjectExpression' &&
-          item.properties[0].key.name === 'name'
-      )
-      .map(item => item.properties[0].value.value)
+      // Capitalize name of pages and folders
+      .map(item => (item.properties[0].value as { value: string }).value)
+
     items.unshift(
       createAstObject({
         data: valueToEstree(
