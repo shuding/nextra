@@ -73,70 +73,67 @@ async function collectFiles({
 }> {
   const files = await readdir(dir, { withFileTypes: true })
 
-  const promises = files
-    // localeCompare is needed because import order on Windows is different and test on CI fails
-    .sort((a, b) => a.name.localeCompare(b.name))
-    .map(async (f, _index, array) => {
-      const filePath = path.join(dir, f.name)
-      const { name, ext } = path.parse(filePath)
+  const promises = files.map(async (f, _index, array) => {
+    const filePath = path.join(dir, f.name)
+    const { name, ext } = path.parse(filePath)
 
-      // We need to filter out dynamic routes, because we can't get all the
-      // paths statically from here — they'll be generated separately.
-      if (name.startsWith('[')) return
+    // We need to filter out dynamic routes, because we can't get all the
+    // paths statically from here — they'll be generated separately.
+    if (name.startsWith('[')) return
 
-      const fileRoute = normalizePageRoute(route, name)
+    const fileRoute = normalizePageRoute(route, name)
 
-      if (f.isDirectory()) {
-        if (fileRoute === '/api') return
-        const { pageMapAst } = (await collectFiles({
-          dir: filePath,
-          route: fileRoute,
-          metaImports,
-          dynamicMetaImports
-        })) as any
-        if (!pageMapAst.elements.length) return
+    if (f.isDirectory()) {
+      if (fileRoute === '/api') return
+      const { pageMapAst } = (await collectFiles({
+        dir: filePath,
+        route: fileRoute,
+        metaImports,
+        dynamicMetaImports
+      })) as any
+      if (!pageMapAst.elements.length) return
+
+      return createAstObject({
+        name: f.name,
+        route: fileRoute,
+        children: pageMapAst
+      })
+    }
+
+    // add concurrency because folder can contain a lot of files
+    return limit(async () => {
+      if (MARKDOWN_EXTENSION_REGEX.test(ext)) {
+        const content = await readFile(filePath, 'utf8')
+        const { data } = grayMatter(content)
 
         return createAstObject({
-          name: f.name,
+          name: path.parse(filePath).name,
           route: fileRoute,
-          children: pageMapAst
+          ...(Object.keys(data).length && {
+            frontMatter: valueToEstree(data)
+          })
         })
       }
 
-      // add concurrency because folder can contain a lot of files
-      return limit(async () => {
-        if (MARKDOWN_EXTENSION_REGEX.test(ext)) {
-          const content = await readFile(filePath, 'utf8')
-          const { data } = grayMatter(content)
+      const fileName = name + ext
+      const isMetaJs = META_REGEX.test(fileName)
 
-          return createAstObject({
-            name: path.parse(filePath).name,
-            route: fileRoute,
-            ...(Object.keys(data).length && {
-              frontMatter: valueToEstree(data)
-            })
-          })
-        }
-
-        const fileName = name + ext
-        const isMetaJs = META_REGEX.test(fileName)
-
-        if (fileName === META_FILENAME || isMetaJs) {
-          const importName = `meta${metaImports.length}`
-          metaImports.push({ importName, filePath })
-          if (isMetaJs) {
-            const dynamicPage = array.find(f => f.name.startsWith('['))
-            if (dynamicPage) {
-              dynamicMetaImports.push({ importName, route })
-              return createAstObject({ data: createAstObject({}) })
-            }
+      if (fileName === META_FILENAME || isMetaJs) {
+        const importName = `meta${metaImports.length}`
+        metaImports.push({ importName, filePath })
+        if (isMetaJs) {
+          const dynamicPage = array.find(f => f.name.startsWith('['))
+          if (dynamicPage) {
+            dynamicMetaImports.push({ importName, route })
+            return createAstObject({ data: createAstObject({}) })
           }
-          return createAstObject({
-            data: { type: 'Identifier', name: importName }
-          })
         }
-      })
+        return createAstObject({
+          data: { type: 'Identifier', name: importName }
+        })
+      }
     })
+  })
 
   const items = (await Promise.all(promises)).filter(truthy)
 

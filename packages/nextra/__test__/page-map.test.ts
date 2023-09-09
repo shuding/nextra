@@ -14,15 +14,23 @@ describe('collectPageMap', () => {
       'en'
     )
     const rawJs = await collectPageMap({ dir, route: '/en' })
-    expect(rawJs).toMatchInlineSnapshot(`
-      "import meta0 from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/_meta.json\\";
-      import meta1 from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/about/_meta.ts\\";
-      import meta2 from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/blog/_meta.ts\\";
-      import meta3 from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/docs/_meta.ts\\";
-      import meta4 from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/examples/_meta.ts\\";
-      import meta5 from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/docs/advanced/_meta.ts\\";
-      import meta6 from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/remote/graphql-eslint/_meta.ts\\";
-      import meta7 from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/remote/graphql-yoga/_meta.ts\\";
+
+    // To fix tests on CI
+    const rawJsWithCleanImportPath = rawJs.replaceAll(
+      /import meta\d+ from "(?<name>.*)"/g,
+      (matched, capture) =>
+        matched.replace(capture, path.relative(CWD, capture))
+    )
+
+    expect(rawJsWithCleanImportPath).toMatchInlineSnapshot(`
+      "import meta0 from \\"../../examples/swr-site/pages/en/_meta.json\\";
+      import meta1 from \\"../../examples/swr-site/pages/en/about/_meta.ts\\";
+      import meta2 from \\"../../examples/swr-site/pages/en/blog/_meta.ts\\";
+      import meta3 from \\"../../examples/swr-site/pages/en/docs/_meta.ts\\";
+      import meta4 from \\"../../examples/swr-site/pages/en/examples/_meta.ts\\";
+      import meta5 from \\"../../examples/swr-site/pages/en/docs/advanced/_meta.ts\\";
+      import meta6 from \\"../../examples/swr-site/pages/en/remote/graphql-eslint/_meta.ts\\";
+      import meta7 from \\"../../examples/swr-site/pages/en/remote/graphql-yoga/_meta.ts\\";
       export const pageMap = [{
         data: meta0
       }, {

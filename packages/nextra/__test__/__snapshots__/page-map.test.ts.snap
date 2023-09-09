@@ -136,10 +136,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
     {
       "children": [
         {
-          "name": "404-500",
-          "route": "/en/docs/404-500",
-        },
-        {
           "data": {
             "--- hey": {
               "title": "Getting Started",
@@ -186,6 +182,10 @@ exports[`Page Process > should match i18n site page maps 1`] = `
             "with-nextjs": "Next.js SSG and SSR",
             "wrap-toc-items": "Wrap Table of Content Items",
           },
+        },
+        {
+          "name": "404-500",
+          "route": "/en/docs/404-500",
         },
         {
           "children": [
