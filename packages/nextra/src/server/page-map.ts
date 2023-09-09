@@ -18,7 +18,7 @@ const readFile = promisify(fs.readFile)
 
 const limit = pLimit(1)
 
-type Import = { filePath: string; importName: string }
+type Import = { importName: string; filePath: string }
 type DynamicImport = { importName: string; route: string }
 
 function createAstObject(obj: Record<string, unknown>) {
@@ -34,7 +34,7 @@ function createAstObject(obj: Record<string, unknown>) {
   }
 }
 
-function createExportConst<T>(name: string, value: T) {
+function createAstExportConst<T>(name: string, value: T) {
   return {
     type: 'ExportNamedDeclaration',
     specifiers: [],
@@ -112,23 +112,17 @@ async function collectFiles({
       }
 
       const fileName = name + ext
-      if (fileName === META_FILENAME) {
+      const isMetaJs = META_REGEX.test(fileName)
+
+      if (fileName === META_FILENAME || isMetaJs) {
         const importName = `meta${metaImports.length}`
-        metaImports.push({ filePath, importName })
-
-        return createAstObject({
-          data: { type: 'Identifier', name: importName }
-        })
-      }
-
-      if (META_REGEX.test(fileName)) {
-        const dynamicPage = array.find(f => f.name.startsWith('['))
-        const importName = `meta${metaImports.length}`
-        metaImports.push({ filePath, importName })
-
-        if (dynamicPage) {
-          dynamicMetaImports.push({ importName, route })
-          return createAstObject({ data: createAstObject({}) })
+        metaImports.push({ importName, filePath })
+        if (isMetaJs) {
+          const dynamicPage = array.find(f => f.name.startsWith('['))
+          if (dynamicPage) {
+            dynamicMetaImports.push({ importName, route })
+            return createAstObject({ data: createAstObject({}) })
+          }
         }
         return createAstObject({
           data: { type: 'Identifier', name: importName }
@@ -174,8 +168,8 @@ export async function collectPageMap({
     sourceType: 'module',
     body: [
       ...metaImportsAST,
-      createExportConst('pageMap', items),
-      createExportConst('dynamicMetaModules', {
+      createAstExportConst('pageMap', items),
+      createAstExportConst('dynamicMetaModules', {
         type: 'ObjectExpression',
         properties: dynamicMetaImports.map(({ importName, route }) => ({
           type: 'Property',
