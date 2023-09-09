@@ -38,9 +38,7 @@ function createAstObject(obj: Record<string, unknown>) {
       kind: 'init',
       key: { type: 'Identifier', name: key },
       value:
-        ['string', 'number', 'boolean'].includes(typeof value) || value === null
-          ? { type: 'Literal', value }
-          : value
+        value && typeof value === 'object' ? value : { type: 'Literal', value }
     }))
   }
 }
