@@ -43,7 +43,7 @@ function createAstObject(obj: Record<string, unknown>) {
   }
 }
 
-function createExportConst(name: string, value: unknown) {
+function createExportConst<T>(name: string, value: T) {
   return {
     type: 'ExportNamedDeclaration',
     specifiers: [],

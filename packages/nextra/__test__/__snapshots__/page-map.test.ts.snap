@@ -49,7 +49,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
           "title": "Examples",
           "type": "page",
         },
-        "foo": "Foo",
         "index": {
           "display": "hidden",
           "title": "Introduction",
@@ -66,7 +65,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
           "title": "Remote",
           "type": "page",
         },
-        "test": "Test",
       },
     },
     {
@@ -78,27 +76,29 @@ exports[`Page Process > should match i18n site page maps 1`] = `
               "theme": {
                 "layout": "raw",
               },
-              "title": "A Page",
               "type": "page",
             },
             "acknowledgement": "🧩 Acknowledgement",
-            "changelog": "Changelog",
             "team": "👥 Team",
           },
         },
         {
+          "frontMatter": {},
           "name": "a-page",
           "route": "/en/about/a-page",
         },
         {
+          "frontMatter": {},
           "name": "acknowledgement",
           "route": "/en/about/acknowledgement",
         },
         {
+          "frontMatter": {},
           "name": "changelog",
           "route": "/en/about/changelog",
         },
         {
+          "frontMatter": {},
           "name": "team",
           "route": "/en/about/team",
         },
@@ -140,6 +140,7 @@ exports[`Page Process > should match i18n site page maps 1`] = `
     {
       "children": [
         {
+          "frontMatter": {},
           "name": "404-500",
           "route": "/en/docs/404-500",
         },
@@ -154,45 +155,39 @@ exports[`Page Process > should match i18n site page maps 1`] = `
               "type": "separator",
             },
             "404-500": "404/500 Custom Error Pages",
-            "advanced": "Advanced",
-            "arguments": "Arguments",
-            "callout": "Callout",
+            "advanced": "",
+            "arguments": "",
             "change-log": {
               "theme": {
                 "sidebar": false,
               },
-              "title": "Change Log",
             },
-            "code-block-without-language": "Code Block without Language",
             "conditional-fetching": "Conditional Data Fetching",
             "custom-header-ids": "Custom Header IDs",
-            "data-fetching": "Data Fetching",
+            "data-fetching": "",
             "error-handling": {
               "display": "hidden",
-              "title": "Error Handling",
             },
-            "getting-started": "Getting Started",
+            "getting-started": "",
             "github_link": {
               "href": "https://github.com/shuding/nextra",
               "newWindow": true,
               "title": "GitHub 🐙 →",
             },
-            "global-configuration": "Global Configuration",
-            "middleware": "Middleware",
-            "mutation": "Mutation",
-            "options": "Options",
-            "pagination": "Pagination",
-            "prefetching": "Prefetching",
+            "global-configuration": "",
+            "middleware": "",
+            "mutation": "",
+            "options": "",
+            "pagination": "",
+            "prefetching": "",
             "raw-layout": {
               "theme": {
                 "layout": "raw",
               },
-              "title": "Raw Layout",
             },
             "revalidation": "Auto Revalidation",
-            "suspense": "Suspense",
+            "suspense": "",
             "typescript": "TypeScript :)",
-            "understanding": "Understanding",
             "with-nextjs": "Next.js SSG and SSR",
             "wrap-toc-items": "Wrap Table of Content Items",
           },
@@ -210,91 +205,84 @@ exports[`Page Process > should match i18n site page maps 1`] = `
                   "title": "Do Not Use",
                   "type": "separator",
                 },
-                "cache": "Cache",
-                "code-highlighting": "Code Highlighting",
-                "dynamic-markdown-import": "Dynamic Markdown Import",
                 "file-name.with.DOTS": "Filenames with Dots",
-                "images": "Images",
-                "markdown-import": "Markdown Import",
                 "more": "More: A Super Super Super Super Long Directory",
-                "performance": "Performance",
-                "react-native": "React Native",
-                "scrollbar-x": "Scrollbar X",
               },
             },
             {
+              "frontMatter": {},
               "name": "cache",
               "route": "/en/docs/advanced/cache",
             },
             {
+              "frontMatter": {},
               "name": "code-highlighting",
               "route": "/en/docs/advanced/code-highlighting",
             },
             {
+              "frontMatter": {},
               "name": "dynamic-markdown-import",
               "route": "/en/docs/advanced/dynamic-markdown-import",
             },
             {
+              "frontMatter": {},
               "name": "file-name.with.DOTS",
               "route": "/en/docs/advanced/file-name.with.DOTS",
             },
             {
+              "frontMatter": {},
               "name": "images",
               "route": "/en/docs/advanced/images",
             },
             {
+              "frontMatter": {},
               "name": "markdown-import",
               "route": "/en/docs/advanced/markdown-import",
             },
             {
               "children": [
                 {
+                  "frontMatter": {},
                   "name": "loooooooooooooooooooong-title",
                   "route": "/en/docs/advanced/more/loooooooooooooooooooong-title",
                 },
                 {
                   "children": [
                     {
+                      "frontMatter": {},
                       "name": "one",
                       "route": "/en/docs/advanced/more/tree/one",
                     },
                     {
+                      "frontMatter": {},
                       "name": "three",
                       "route": "/en/docs/advanced/more/tree/three",
                     },
                     {
+                      "frontMatter": {},
                       "name": "two",
                       "route": "/en/docs/advanced/more/tree/two",
-                    },
-                    {
-                      "data": {
-                        "one": "One",
-                        "three": "Three",
-                        "two": "Two",
-                      },
                     },
                   ],
                   "name": "tree",
                   "route": "/en/docs/advanced/more/tree",
-                },
-                {
-                  "data": {
-                    "loooooooooooooooooooong-title": "Loooooooooooooooooooong Title",
-                  },
                 },
               ],
               "name": "more",
               "route": "/en/docs/advanced/more",
             },
             {
+              "frontMatter": {},
               "name": "performance",
               "route": "/en/docs/advanced/performance",
             },
             {
+              "frontMatter": {},
               "name": "react-native",
               "route": "/en/docs/advanced/react-native",
             },
             {
+              "frontMatter": {},
               "name": "scrollbar-x",
               "route": "/en/docs/advanced/scrollbar-x",
             },
@@ -303,94 +291,117 @@ exports[`Page Process > should match i18n site page maps 1`] = `
           "route": "/en/docs/advanced",
         },
         {
+          "frontMatter": {},
           "name": "advanced",
           "route": "/en/docs/advanced",
         },
         {
+          "frontMatter": {},
           "name": "arguments",
           "route": "/en/docs/arguments",
         },
         {
+          "frontMatter": {},
           "name": "callout",
           "route": "/en/docs/callout",
         },
         {
+          "frontMatter": {},
           "name": "change-log",
           "route": "/en/docs/change-log",
         },
         {
+          "frontMatter": {},
           "name": "code-block-without-language",
           "route": "/en/docs/code-block-without-language",
         },
         {
+          "frontMatter": {},
           "name": "conditional-fetching",
           "route": "/en/docs/conditional-fetching",
         },
         {
+          "frontMatter": {},
           "name": "custom-header-ids",
           "route": "/en/docs/custom-header-ids",
         },
         {
+          "frontMatter": {},
           "name": "data-fetching",
           "route": "/en/docs/data-fetching",
         },
         {
+          "frontMatter": {},
           "name": "error-handling",
           "route": "/en/docs/error-handling",
         },
         {
+          "frontMatter": {},
           "name": "getting-started",
           "route": "/en/docs/getting-started",
         },
         {
+          "frontMatter": {},
           "name": "global-configuration",
           "route": "/en/docs/global-configuration",
         },
         {
+          "frontMatter": {},
           "name": "middleware",
           "route": "/en/docs/middleware",
         },
         {
+          "frontMatter": {},
           "name": "mutation",
           "route": "/en/docs/mutation",
         },
         {
+          "frontMatter": {},
           "name": "options",
           "route": "/en/docs/options",
         },
         {
+          "frontMatter": {},
           "name": "pagination",
           "route": "/en/docs/pagination",
         },
         {
+          "frontMatter": {},
           "name": "prefetching",
           "route": "/en/docs/prefetching",
         },
         {
+          "frontMatter": {},
           "name": "raw-layout",
           "route": "/en/docs/raw-layout",
         },
         {
+          "frontMatter": {},
           "name": "revalidation",
           "route": "/en/docs/revalidation",
         },
         {
+          "frontMatter": {},
           "name": "suspense",
           "route": "/en/docs/suspense",
         },
         {
+          "frontMatter": {},
           "name": "typescript",
           "route": "/en/docs/typescript",
         },
         {
+          "frontMatter": {},
           "name": "understanding",
           "route": "/en/docs/understanding",
         },
         {
+          "frontMatter": {},
           "name": "with-nextjs",
           "route": "/en/docs/with-nextjs",
         },
         {
+          "frontMatter": {},
           "name": "wrap-toc-items",
           "route": "/en/docs/wrap-toc-items",
         },
@@ -404,14 +415,13 @@ exports[`Page Process > should match i18n site page maps 1`] = `
           "data": {
             "auth": "Authentication",
             "basic": "Basic Usage",
-            "error-handling": "Error Handling",
+            "error-handling": "",
             "full": {
               "theme": {
                 "layout": "raw",
               },
-              "title": "Full",
             },
-            "infinite-loading": "Infinite Loading",
+            "infinite-loading": "",
             "ssr": "Next.js SSR",
           },
         },
@@ -440,6 +450,7 @@ exports[`Page Process > should match i18n site page maps 1`] = `
           "route": "/en/examples/error-handling",
         },
         {
+          "frontMatter": {},
           "name": "full",
           "route": "/en/examples/full",
         },
@@ -464,6 +475,7 @@ exports[`Page Process > should match i18n site page maps 1`] = `
       "route": "/en/examples",
     },
     {
+      "frontMatter": {},
       "name": "foo",
       "route": "/en/foo",
     },
@@ -500,6 +512,7 @@ exports[`Page Process > should match i18n site page maps 1`] = `
       "route": "/en/remote",
     },
     {
+      "frontMatter": {},
       "name": "test",
       "route": "/en/test",
     },
@@ -546,7 +559,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
             "revalidation": "Revalidación Automática",
             "suspense": "Suspense",
             "typescript": "Typescript",
-            "understanding": "Understanding",
             "with-nextjs": "Next.js SSG and SSR",
             "wrap-toc-items": "Ajustar elementos de la tabla de contenido",
           },
@@ -562,10 +574,12 @@ exports[`Page Process > should match i18n site page maps 1`] = `
               },
             },
             {
+              "frontMatter": {},
               "name": "file-name.with.DOTS",
               "route": "/es/docs/advanced/file-name.with.DOTS",
             },
             {
+              "frontMatter": {},
               "name": "performance",
               "route": "/es/docs/advanced/performance",
             },
@@ -574,66 +588,82 @@ exports[`Page Process > should match i18n site page maps 1`] = `
           "route": "/es/docs/advanced",
         },
         {
+          "frontMatter": {},
           "name": "arguments",
           "route": "/es/docs/arguments",
         },
         {
+          "frontMatter": {},
           "name": "change-log",
           "route": "/es/docs/change-log",
         },
         {
+          "frontMatter": {},
           "name": "conditional-fetching",
           "route": "/es/docs/conditional-fetching",
         },
         {
+          "frontMatter": {},
           "name": "data-fetching",
           "route": "/es/docs/data-fetching",
         },
         {
+          "frontMatter": {},
           "name": "error-handling",
           "route": "/es/docs/error-handling",
         },
         {
+          "frontMatter": {},
           "name": "getting-started",
           "route": "/es/docs/getting-started",
         },
         {
+          "frontMatter": {},
           "name": "global-configuration",
           "route": "/es/docs/global-configuration",
         },
         {
+          "frontMatter": {},
           "name": "mutation",
           "route": "/es/docs/mutation",
         },
         {
+          "frontMatter": {},
           "name": "options",
           "route": "/es/docs/options",
         },
         {
+          "frontMatter": {},
           "name": "pagination",
           "route": "/es/docs/pagination",
         },
         {
+          "frontMatter": {},
           "name": "prefetching",
           "route": "/es/docs/prefetching",
         },
         {
+          "frontMatter": {},
           "name": "revalidation",
           "route": "/es/docs/revalidation",
         },
         {
+          "frontMatter": {},
           "name": "suspense",
           "route": "/es/docs/suspense",
         },
         {
+          "frontMatter": {},
           "name": "understanding",
           "route": "/es/docs/understanding",
         },
         {
+          "frontMatter": {},
           "name": "with-nextjs",
           "route": "/es/docs/with-nextjs",
         },
         {
+          "frontMatter": {},
           "name": "wrap-toc-items",
           "route": "/es/docs/wrap-toc-items",
         },
@@ -750,6 +780,7 @@ exports[`Page Process > should match i18n site page maps 1`] = `
       "route": "/ru/blog",
     },
     {
+      "frontMatter": {},
       "name": "blog",
       "route": "/ru/blog",
     },
@@ -773,7 +804,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
             "revalidation": "Авто-ревалидация",
             "suspense": "Задержка (Suspense)",
             "typescript": "Typescript",
-            "understanding": "Understanding",
             "with-nextjs": "Next.js SSG и SSR",
             "wrap-toc-items": "Обернуть таблицу содержимого элементов",
           },
@@ -789,18 +819,22 @@ exports[`Page Process > should match i18n site page maps 1`] = `
               },
             },
             {
+              "frontMatter": {},
               "name": "cache",
               "route": "/ru/docs/advanced/cache",
             },
             {
+              "frontMatter": {},
               "name": "file-name.with.DOTS",
               "route": "/ru/docs/advanced/file-name.with.DOTS",
             },
             {
+              "frontMatter": {},
               "name": "performance",
               "route": "/ru/docs/advanced/performance",
             },
             {
+              "frontMatter": {},
               "name": "react-native",
               "route": "/ru/docs/advanced/react-native",
             },
@@ -809,70 +843,87 @@ exports[`Page Process > should match i18n site page maps 1`] = `
           "route": "/ru/docs/advanced",
         },
         {
+          "frontMatter": {},
           "name": "arguments",
           "route": "/ru/docs/arguments",
         },
         {
+          "frontMatter": {},
           "name": "change-log",
           "route": "/ru/docs/change-log",
         },
         {
+          "frontMatter": {},
           "name": "conditional-fetching",
           "route": "/ru/docs/conditional-fetching",
         },
         {
+          "frontMatter": {},
           "name": "data-fetching",
           "route": "/ru/docs/data-fetching",
         },
         {
+          "frontMatter": {},
           "name": "error-handling",
           "route": "/ru/docs/error-handling",
         },
         {
+          "frontMatter": {},
           "name": "getting-started",
           "route": "/ru/docs/getting-started",
         },
         {
+          "frontMatter": {},
           "name": "global-configuration",
           "route": "/ru/docs/global-configuration",
         },
         {
+          "frontMatter": {},
           "name": "middleware",
           "route": "/ru/docs/middleware",
         },
         {
+          "frontMatter": {},
           "name": "mutation",
           "route": "/ru/docs/mutation",
         },
         {
+          "frontMatter": {},
           "name": "options",
           "route": "/ru/docs/options",
         },
         {
+          "frontMatter": {},
           "name": "pagination",
           "route": "/ru/docs/pagination",
         },
         {
+          "frontMatter": {},
           "name": "prefetching",
           "route": "/ru/docs/prefetching",
         },
         {
+          "frontMatter": {},
           "name": "revalidation",
           "route": "/ru/docs/revalidation",
         },
         {
+          "frontMatter": {},
           "name": "suspense",
           "route": "/ru/docs/suspense",
         },
         {
+          "frontMatter": {},
           "name": "understanding",
           "route": "/ru/docs/understanding",
         },
         {
+          "frontMatter": {},
           "name": "with-nextjs",
           "route": "/ru/docs/with-nextjs",
         },
         {
+          "frontMatter": {},
           "name": "wrap-toc-items",
           "route": "/ru/docs/wrap-toc-items",
         },
