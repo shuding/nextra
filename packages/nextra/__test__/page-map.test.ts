@@ -74,10 +74,10 @@ describe('collectPageMap', () => {
         name: \\"docs\\",
         route: \\"/en/docs\\",
         children: [{
+          data: meta3
+        }, {
           name: \\"404-500\\",
           route: \\"/en/docs/404-500\\"
-        }, {
-          data: meta3
         }, {
           name: \\"advanced\\",
           route: \\"/en/docs/advanced\\",
