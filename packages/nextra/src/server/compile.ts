@@ -19,7 +19,7 @@ import {
   DEFAULT_LOCALE,
   ERROR_ROUTES,
   MARKDOWN_URL_EXTENSION_REGEX
-} from './constants'
+} from '../constants'
 import {
   attachMeta,
   parseMeta,
@@ -39,11 +39,11 @@ import type {
   PageOpts,
   ReadingTime,
   StructurizedData
-} from './types'
-import { truthy } from './utils'
+} from '../types'
+import { truthy } from '../utils'
 
 globalThis.__nextra_temp_do_not_use = () => {
-  import('./__temp__')
+  import('../__temp__')
 }
 
 const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS: RehypePrettyCodeOptions = {

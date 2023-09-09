@@ -3,9 +3,9 @@ import type { Root } from 'mdast'
 import slash from 'slash'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
-import { EXTERNAL_URL_REGEX, PUBLIC_DIR } from '../constants'
+import { EXTERNAL_URL_REGEX, PUBLIC_DIR } from '../../constants'
 import { existsSync } from '../file-system'
-import { truthy } from '../utils'
+import { truthy } from '../../utils'
 
 /**
  * @link https://github.com/vercel/next.js/blob/6cfebfb02c2a52a1f99fca59a2eac2d704d053db/packages/next/build/webpack/loaders/next-image-loader.js#L6

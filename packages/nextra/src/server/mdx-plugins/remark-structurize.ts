@@ -1,6 +1,6 @@
 import type { Root } from 'mdast'
 import type { Plugin } from 'unified'
-import type { Search, StructurizedData } from '../types'
+import type { Search, StructurizedData } from '../../types'
 
 const CODE_TABLE_QUOTE_LIST = new Set<string>([
   'code',

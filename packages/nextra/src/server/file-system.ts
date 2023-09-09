@@ -1,5 +1,5 @@
 import * as pkg from 'next/dist/lib/find-pages-dir.js'
-import { CWD } from './constants'
+import { CWD } from '../constants'
 
 export const { existsSync } = pkg
 

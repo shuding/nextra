@@ -40,8 +40,8 @@
       "types": "./dist/components/index.d.mts"
     },
     "./mdx-plugins": {
-      "import": "./dist/mdx-plugins/index.mjs",
-      "types": "./dist/mdx-plugins/index.d.mts"
+      "import": "./dist/server/mdx-plugins/index.mjs",
+      "types": "./dist/server/mdx-plugins/index.d.mts"
     },
     "./hooks": {
       "import": "./dist/hooks/index.js",
@@ -51,9 +51,9 @@
       "import": "./dist/icons/index.js",
       "types": "./dist/icons/index.d.mts"
     },
-    "./fetch-filepaths-from-github": {
-      "import": "./dist/fetch-filepaths-from-github.mjs",
-      "types": "./dist/fetch-filepaths-from-github.d.mts"
+    "./compile": {
+      "import": "./server/compile.mjs",
+      "types": "./server/compile.d.mts"
     },
     "./*": {
       "import": "./dist/*.mjs",
@@ -67,7 +67,7 @@
         "./dist/catch-all.d.mts"
       ],
       "compile": [
-        "./dist/compile.d.mts"
+        "./dist/server/compile.d.mts"
       ],
       "context": [
         "./dist/context.d.mts"
