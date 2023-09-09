@@ -52,8 +52,12 @@
       "types": "./dist/icons/index.d.mts"
     },
     "./compile": {
-      "import": "./server/compile.mjs",
-      "types": "./server/compile.d.mts"
+      "import": "./dist/server/compile.mjs",
+      "types": "./dist/server/compile.d.mts"
+    },
+    "./remote": {
+      "import": "./dist/server/remote.mjs",
+      "types": "./dist/server/remote.d.mts"
     },
     "./*": {
       "import": "./dist/*.mjs",
@@ -63,11 +67,17 @@
   "types": "./dist/server/index.d.mts",
   "typesVersions": {
     "*": {
-      "catch-all": [
-        "./dist/catch-all.d.mts"
-      ],
       "compile": [
         "./dist/server/compile.d.mts"
+      ],
+      "mdx-plugins": [
+        "./dist/server/mdx-plugins/index.d.mts"
+      ],
+      "remote": [
+        "./dist/server/remote.d.mts"
+      ],
+      "catch-all": [
+        "./dist/catch-all.d.mts"
       ],
       "context": [
         "./dist/context.d.mts"
@@ -84,9 +94,6 @@
       "hooks": [
         "./dist/hooks/index.d.mts"
       ],
-      "layout": [
-        "./dist/layout.d.mts"
-      ],
       "mdx": [
         "./dist/mdx.d.mts"
       ],
@@ -95,9 +102,6 @@
       ],
       "normalize-pages": [
         "./dist/normalize-pages.d.mts"
-      ],
-      "mdx-plugins": [
-        "./dist/mdx-plugins/index.d.mts"
       ]
     }
   },
