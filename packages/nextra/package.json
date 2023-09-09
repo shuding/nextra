@@ -158,6 +158,7 @@
   },
   "devDependencies": {
     "@testing-library/react": "^14.0.0",
+    "@types/estree": "^1.0.1",
     "@types/graceful-fs": "^4.1.6",
     "@types/mdast": "^3.0.12",
     "@types/react": "^18.2.21",

@@ -1,5 +1,13 @@
 import path from 'node:path'
 import { promisify } from 'node:util'
+import type {
+  ArrayExpression,
+  ExportNamedDeclaration,
+  Expression,
+  ImportDeclaration,
+  ObjectExpression,
+  Property
+} from 'estree'
 import { toJs } from 'estree-util-to-js'
 import { valueToEstree } from 'estree-util-value-to-estree'
 import fs from 'graceful-fs'
@@ -24,12 +32,21 @@ const limit = pLimit(1)
 type Import = { importName: string; filePath: string }
 type DynamicImport = { importName: string; route: string }
 
-function createAstObject(obj: Record<string, unknown>) {
+const DEFAULT_OBJECT_PROPS: Omit<Property, 'key' | 'value'> = {
+  type: 'Property',
+  kind: 'init',
+  method: false,
+  shorthand: false,
+  computed: false
+}
+
+function createAstObject(
+  obj: Record<string, string | Expression>
+): ObjectExpression {
   return {
     type: 'ObjectExpression',
     properties: Object.entries(obj).map(([key, value]) => ({
-      type: 'Property',
-      kind: 'init',
+      ...DEFAULT_OBJECT_PROPS,
       key: { type: 'Identifier', name: key },
       value:
         value && typeof value === 'object' ? value : { type: 'Literal', value }
@@ -37,7 +54,10 @@ function createAstObject(obj: Record<string, unknown>) {
   }
 }
 
-function createAstExportConst<T>(name: string, value: T) {
+function createAstExportConst(
+  name: string,
+  value: ArrayExpression | ObjectExpression
+): ExportNamedDeclaration {
   return {
     type: 'ExportNamedDeclaration',
     specifiers: [],
@@ -70,7 +90,7 @@ async function collectFiles({
   dynamicMetaImports = [],
   isFollowingSymlink
 }: CollectFilesOptions): Promise<{
-  pageMapAst: { type: 'ArrayExpression'; elements: unknown[] }
+  pageMapAst: ArrayExpression
   metaImports: Import[]
   dynamicMetaImports: DynamicImport[]
 }> {
@@ -157,12 +177,14 @@ async function collectFiles({
 
   const items = (await Promise.all(promises)).filter(truthy)
 
+  // @ts-expect-error TODO: fix type
   const hasMeta = items.some(item => item.properties[0].key.name === 'data')
 
   if (!hasMeta) {
     const allPages = items
       // Capitalize name of pages and folders
-      .map(item => (item.properties[0].value as { value: string }).value)
+      // @ts-expect-error TODO: fix type
+      .map(item => item.properties[0].value.value)
 
     items.unshift(
       createAstObject({
@@ -195,16 +217,18 @@ export async function collectPageMap({
     isFollowingSymlink: false
   })
 
-  const metaImportsAST = metaImports.map(({ filePath, importName }) => ({
-    type: 'ImportDeclaration',
-    source: { type: 'Literal', value: filePath },
-    specifiers: [
-      {
-        type: 'ImportDefaultSpecifier',
-        local: { type: 'Identifier', name: importName }
-      }
-    ]
-  })) as any
+  const metaImportsAST: ImportDeclaration[] = metaImports.map(
+    ({ filePath, importName }) => ({
+      type: 'ImportDeclaration',
+      source: { type: 'Literal', value: filePath },
+      specifiers: [
+        {
+          type: 'ImportDefaultSpecifier',
+          local: { type: 'Identifier', name: importName }
+        }
+      ]
+    })
+  )
 
   const result = toJs({
     type: 'Program',
@@ -215,10 +239,9 @@ export async function collectPageMap({
       createAstExportConst('dynamicMetaModules', {
         type: 'ObjectExpression',
         properties: dynamicMetaImports.map(({ importName, route }) => ({
-          type: 'Property',
-          key: { type: 'Literal', raw: `'${route}'` },
-          value: { type: 'Identifier', name: importName },
-          kind: 'init'
+          ...DEFAULT_OBJECT_PROPS,
+          key: { type: 'Literal', value: route },
+          value: { type: 'Identifier', name: importName }
         }))
       })
     ]

@@ -292,8 +292,8 @@ describe('collectPageMap', () => {
         route: \\"/en/test\\"
       }];
       export const dynamicMetaModules = {
-        '/en/remote/graphql-eslint': meta6,
-        '/en/remote/graphql-yoga': meta7
+        \\"/en/remote/graphql-eslint\\": meta6,
+        \\"/en/remote/graphql-yoga\\": meta7
       };"
     `)
   })
