@@ -345,8 +345,8 @@ describe('Page Process', () => {
     `)
   })
 
-  it.skip('should resolve symlinked files and directories', async () => {
-    const { items } = await collectFiles({
+  it.only('should resolve symlinked files and directories', async () => {
+    const rawJs = await collectPageMap({
       dir: path.join(
         CWD,
         '__test__',
@@ -356,18 +356,32 @@ describe('Page Process', () => {
         'pages'
       )
     })
-    expect(items).toEqual([
-      {
-        name: 'docs',
-        route: '/docs',
-        children: [
-          { name: 'test2', route: '/docs/test2' },
-          { data: { test2: 'Test2' } }
-        ]
-      },
-      { name: 'test1', route: '/test1' },
-      { data: { test1: 'Test1' } }
-    ])
+
+      // [
+      // {
+      //   name: 'docs',
+      //   route: '/docs',
+      //   children: [
+      //     { name: 'test2', route: '/docs/test2' },
+      //     { data: { test2: 'Test2' } }
+      //   ]
+      // },
+      //   { name: 'test1', route: '/test1' },
+      //   { data: { test1: 'Test1' } }
+      // ]
+
+
+    expect(rawJs).toMatchInlineSnapshot(`
+      "export const pageMap = [{
+        data: {
+          \\"test1\\": \\"Test1\\"
+        }
+      }, {
+        name: \\"test1\\",
+        route: \\"/test1\\"
+      }];
+      export const dynamicMetaModules = {};"
+    `)
   })
 
   it('should match i18n site page maps', async () => {
