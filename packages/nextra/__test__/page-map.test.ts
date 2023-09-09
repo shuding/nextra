@@ -17,20 +17,20 @@ describe('collectPageMap', () => {
 
     // To fix tests on CI
     const rawJsWithCleanImportPath = rawJs.replaceAll(
-      /import meta\d+ from "(?<name>.*)"/g,
+      /import \w+ from "(?<name>.*)"/g,
       (matched, capture) =>
         matched.replace(capture, path.relative(CWD, capture))
     )
 
     expect(rawJsWithCleanImportPath).toMatchInlineSnapshot(`
-      "import examples_swr_site_pages_en_meta from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/_meta.json\\";
-      import examples_swr_site_pages_en_about_meta from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/about/_meta.ts\\";
-      import examples_swr_site_pages_en_blog_meta from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/blog/_meta.ts\\";
-      import examples_swr_site_pages_en_docs_meta from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/docs/_meta.ts\\";
-      import examples_swr_site_pages_en_examples_meta from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/examples/_meta.ts\\";
-      import examples_swr_site_pages_en_docs_advanced_meta from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/docs/advanced/_meta.ts\\";
-      import examples_swr_site_pages_en_remote_graphql_eslint_meta from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/remote/graphql-eslint/_meta.ts\\";
-      import examples_swr_site_pages_en_remote_graphql_yoga_meta from \\"/Users/dmytro/Desktop/nextra/examples/swr-site/pages/en/remote/graphql-yoga/_meta.ts\\";
+      "import examples_swr_site_pages_en_meta from \\"../../examples/swr-site/pages/en/_meta.json\\";
+      import examples_swr_site_pages_en_about_meta from \\"../../examples/swr-site/pages/en/about/_meta.ts\\";
+      import examples_swr_site_pages_en_blog_meta from \\"../../examples/swr-site/pages/en/blog/_meta.ts\\";
+      import examples_swr_site_pages_en_docs_meta from \\"../../examples/swr-site/pages/en/docs/_meta.ts\\";
+      import examples_swr_site_pages_en_examples_meta from \\"../../examples/swr-site/pages/en/examples/_meta.ts\\";
+      import examples_swr_site_pages_en_docs_advanced_meta from \\"../../examples/swr-site/pages/en/docs/advanced/_meta.ts\\";
+      import examples_swr_site_pages_en_remote_graphql_eslint_meta from \\"../../examples/swr-site/pages/en/remote/graphql-eslint/_meta.ts\\";
+      import examples_swr_site_pages_en_remote_graphql_yoga_meta from \\"../../examples/swr-site/pages/en/remote/graphql-yoga/_meta.ts\\";
       export const pageMap = [{
         data: examples_swr_site_pages_en_meta
       }, {
