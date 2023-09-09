@@ -55,10 +55,6 @@
       "import": "./server/compile.mjs",
       "types": "./server/compile.d.mts"
     },
-    "./remote": {
-      "import": "./server/remote.mjs",
-      "types": "./server/remote.d.mts"
-    },
     "./*": {
       "import": "./dist/*.mjs",
       "types": "./dist/*.d.mts"
@@ -90,9 +86,6 @@
       ],
       "layout": [
         "./dist/layout.d.mts"
-      ],
-      "remote": [
-        "./dist/server/remote.d.mts"
       ],
       "mdx": [
         "./dist/mdx.d.mts"

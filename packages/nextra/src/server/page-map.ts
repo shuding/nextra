@@ -64,7 +64,7 @@ async function collectFiles({
   metaImports?: Import[]
   dynamicMetaImports?: DynamicImport[]
 }): Promise<{
-  items: PageMapItem[]
+  pageMapAst: PageMapItem[]
   metaImports: Import[]
   dynamicMetaImports: DynamicImport[]
 }> {
@@ -72,29 +72,28 @@ async function collectFiles({
 
   const promises = files.map(async (f, _index, array) => {
     const filePath = path.join(dir, f.name)
-    const isDirectory = f.isDirectory()
-
     const { name, ext } = path.parse(filePath)
+
     // We need to filter out dynamic routes, because we can't get all the
     // paths statically from here — they'll be generated separately.
     if (name.startsWith('[')) return
 
     const fileRoute = normalizePageRoute(route, name)
 
-    if (isDirectory) {
+    if (f.isDirectory()) {
       if (fileRoute === '/api') return
-      const { items } = (await collectFiles({
+      const { pageMapAst } = (await collectFiles({
         dir: filePath,
         route: fileRoute,
         metaImports,
         dynamicMetaImports
       })) as any
-      if (!items.elements.length) return
+      if (!pageMapAst.elements.length) return
 
       return createAstObject({
         name: f.name,
         route: fileRoute,
-        children: items
+        children: pageMapAst
       })
     }
 
@@ -134,7 +133,7 @@ async function collectFiles({
   const items = (await Promise.all(promises)).filter(truthy)
 
   return {
-    items: { type: 'ArrayExpression', elements: items } as any,
+    pageMapAst: { type: 'ArrayExpression', elements: items } as any,
     metaImports,
     dynamicMetaImports
   }
@@ -147,20 +146,20 @@ export async function collectPageMap({
   dir: string
   route: string
 }): Promise<string> {
-  const { items, metaImports, dynamicMetaImports } = await collectFiles({
+  const { pageMapAst, metaImports, dynamicMetaImports } = await collectFiles({
     dir,
     route
   })
 
   const metaImportsAST = metaImports.map(({ filePath, importName }) => ({
     type: 'ImportDeclaration',
+    source: { type: 'Literal', value: filePath },
     specifiers: [
       {
         type: 'ImportDefaultSpecifier',
         local: { type: 'Identifier', name: importName }
       }
-    ],
-    source: { type: 'Literal', value: filePath }
+    ]
   })) as any
 
   const result = toJs({
@@ -168,7 +167,7 @@ export async function collectPageMap({
     sourceType: 'module',
     body: [
       ...metaImportsAST,
-      createAstExportConst('pageMap', items),
+      createAstExportConst('pageMap', pageMapAst),
       createAstExportConst('dynamicMetaModules', {
         type: 'ObjectExpression',
         properties: dynamicMetaImports.map(({ importName, route }) => ({

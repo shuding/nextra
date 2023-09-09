@@ -1,4 +1,4 @@
-import { compileMdx } from './compile'
+import { compileMdx } from './server/compile'
 
 export async function buildDynamicMDX(
   content: string,
