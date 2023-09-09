@@ -17,6 +17,8 @@ import { normalizePageRoute } from './utils'
 const readdir = promisify(fs.readdir)
 const readFile = promisify(fs.readFile)
 
+// TODO: `1` is set due race condition when import order is different, find a better solution to
+//  keep things more parallel
 const limit = pLimit(1)
 
 type Import = { importName: string; filePath: string }
@@ -71,65 +73,70 @@ async function collectFiles({
 }> {
   const files = await readdir(dir, { withFileTypes: true })
 
-  const promises = files.map(async (f, _index, array) => {
-    const filePath = path.join(dir, f.name)
-    const { name, ext } = path.parse(filePath)
+  const promises = files
+    // localeCompare is needed because import order on Windows is different and test on CI fails
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .map(async (f, _index, array) => {
+      const filePath = path.join(dir, f.name)
+      const { name, ext } = path.parse(filePath)
 
-    // We need to filter out dynamic routes, because we can't get all the
-    // paths statically from here — they'll be generated separately.
-    if (name.startsWith('[')) return
+      // We need to filter out dynamic routes, because we can't get all the
+      // paths statically from here — they'll be generated separately.
+      if (name.startsWith('[')) return
 
-    const fileRoute = normalizePageRoute(route, name)
+      const fileRoute = normalizePageRoute(route, name)
 
-    if (f.isDirectory()) {
-      if (fileRoute === '/api') return
-      const { pageMapAst } = (await collectFiles({
-        dir: filePath,
-        route: fileRoute,
-        metaImports,
-        dynamicMetaImports
-      })) as any
-      if (!pageMapAst.elements.length) return
-
-      return createAstObject({
-        name: f.name,
-        route: fileRoute,
-        children: pageMapAst
-      })
-    }
-
-    // add concurrency because folder can contain a lot of files
-    return limit(async () => {
-      if (MARKDOWN_EXTENSION_REGEX.test(ext)) {
-        const content = await readFile(filePath, 'utf8')
-        const { data } = grayMatter(content)
-
-        return createAstObject({
-          name: path.parse(filePath).name,
+      if (f.isDirectory()) {
+        if (fileRoute === '/api') return
+        const { pageMapAst } = (await collectFiles({
+          dir: filePath,
           route: fileRoute,
-          ...(Object.keys(data).length && { frontMatter: valueToEstree(data) })
-        })
-      }
+          metaImports,
+          dynamicMetaImports
+        })) as any
+        if (!pageMapAst.elements.length) return
 
-      const fileName = name + ext
-      const isMetaJs = META_REGEX.test(fileName)
-
-      if (fileName === META_FILENAME || isMetaJs) {
-        const importName = `meta${metaImports.length}`
-        metaImports.push({ importName, filePath })
-        if (isMetaJs) {
-          const dynamicPage = array.find(f => f.name.startsWith('['))
-          if (dynamicPage) {
-            dynamicMetaImports.push({ importName, route })
-            return createAstObject({ data: createAstObject({}) })
-          }
-        }
         return createAstObject({
-          data: { type: 'Identifier', name: importName }
+          name: f.name,
+          route: fileRoute,
+          children: pageMapAst
         })
       }
+
+      // add concurrency because folder can contain a lot of files
+      return limit(async () => {
+        if (MARKDOWN_EXTENSION_REGEX.test(ext)) {
+          const content = await readFile(filePath, 'utf8')
+          const { data } = grayMatter(content)
+
+          return createAstObject({
+            name: path.parse(filePath).name,
+            route: fileRoute,
+            ...(Object.keys(data).length && {
+              frontMatter: valueToEstree(data)
+            })
+          })
+        }
+
+        const fileName = name + ext
+        const isMetaJs = META_REGEX.test(fileName)
+
+        if (fileName === META_FILENAME || isMetaJs) {
+          const importName = `meta${metaImports.length}`
+          metaImports.push({ importName, filePath })
+          if (isMetaJs) {
+            const dynamicPage = array.find(f => f.name.startsWith('['))
+            if (dynamicPage) {
+              dynamicMetaImports.push({ importName, route })
+              return createAstObject({ data: createAstObject({}) })
+            }
+          }
+          return createAstObject({
+            data: { type: 'Identifier', name: importName }
+          })
+        }
+      })
     })
-  })
 
   const items = (await Promise.all(promises)).filter(truthy)
 
@@ -152,19 +159,16 @@ export async function collectPageMap({
     route
   })
 
-  const metaImportsAST = metaImports
-    // localeCompare is needed because import order on Windows is different and test on CI fails
-    .sort((a, b) => a.filePath.localeCompare(b.filePath))
-    .map(({ filePath, importName }) => ({
-      type: 'ImportDeclaration',
-      source: { type: 'Literal', value: filePath },
-      specifiers: [
-        {
-          type: 'ImportDefaultSpecifier',
-          local: { type: 'Identifier', name: importName }
-        }
-      ]
-    })) as any
+  const metaImportsAST = metaImports.map(({ filePath, importName }) => ({
+    type: 'ImportDeclaration',
+    source: { type: 'Literal', value: filePath },
+    specifiers: [
+      {
+        type: 'ImportDefaultSpecifier',
+        local: { type: 'Identifier', name: importName }
+      }
+    ]
+  })) as any
 
   const result = toJs({
     type: 'Program',

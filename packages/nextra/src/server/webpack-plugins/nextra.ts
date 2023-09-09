@@ -18,7 +18,7 @@ export class NextraPlugin {
     const { locales } = this.config
 
     // TODO: Improve this, this a temporal workaround to make things works
-    // Saving with fs is not ideal, we should attach to webpack's assets objects
+    //  Saving with fs is not ideal, we should attach to webpack's assets objects
     compiler.hooks.beforeCompile.tapAsync(pluginName, async (_, callback) => {
       // if (isSaved) {
       //   console.warn('PageMap is already saved, skipping…')

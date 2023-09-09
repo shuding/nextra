@@ -100,7 +100,8 @@ export const resolvePageMap =
       meta.data = metaData
       collectCatchAllRoutes(folder, meta)
     }
-    // TODO: found workaround to fix Reason: `symbol` cannot be serialized as JSON. Please only return JSON serializable data types.
+    // TODO: found workaround to fix Reason: `symbol` cannot be serialized as JSON. Please only
+    //  return JSON serializable data types.
     return (cachedResolvedPageMap = clonedPageMap)
   }
 
