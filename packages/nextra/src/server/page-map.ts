@@ -152,16 +152,19 @@ export async function collectPageMap({
     route
   })
 
-  const metaImportsAST = metaImports.map(({ filePath, importName }) => ({
-    type: 'ImportDeclaration',
-    source: { type: 'Literal', value: filePath },
-    specifiers: [
-      {
-        type: 'ImportDefaultSpecifier',
-        local: { type: 'Identifier', name: importName }
-      }
-    ]
-  })) as any
+  const metaImportsAST = metaImports
+    // localeCompare is needed because import order on Windows is different and test on CI fails
+    .sort((a, b) => a.filePath.localeCompare(b.filePath))
+    .map(({ filePath, importName }) => ({
+      type: 'ImportDeclaration',
+      source: { type: 'Literal', value: filePath },
+      specifiers: [
+        {
+          type: 'ImportDefaultSpecifier',
+          local: { type: 'Identifier', name: importName }
+        }
+      ]
+    })) as any
 
   const result = toJs({
     type: 'Program',
