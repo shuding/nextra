@@ -108,29 +108,12 @@ async function collectFiles({
       if (MARKDOWN_EXTENSION_REGEX.test(ext)) {
         const content = await readFile(filePath, 'utf8')
         const { data } = grayMatter(content)
-        return {
-          type: 'ObjectExpression',
-          properties: [
-            {
-              type: 'Property',
-              key: { type: 'Identifier', name: 'name' },
-              value: { type: 'Literal', value: path.parse(filePath).name },
-              kind: 'init'
-            },
-            {
-              type: 'Property',
-              key: { type: 'Identifier', name: 'route' },
-              value: { type: 'Literal', value: fileRoute },
-              kind: 'init'
-            },
-            {
-              type: 'Property',
-              key: { type: 'Identifier', name: 'frontMatter' },
-              value: valueToEstree(data),
-              kind: 'init'
-            }
-          ]
-        }
+
+        return createAstObject({
+          name: path.parse(filePath).name,
+          route: fileRoute,
+          frontMatter: valueToEstree(data)
+        })
       }
 
       const fileName = name + ext
