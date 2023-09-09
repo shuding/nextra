@@ -121,17 +121,9 @@ async function collectFiles({
         const importName = `meta${metaImports.length}`
         metaImports.push({ filePath, importName })
 
-        return {
-          type: 'ObjectExpression',
-          properties: [
-            {
-              type: 'Property',
-              key: { type: 'Identifier', name: 'data' },
-              value: { type: 'Identifier', name: importName },
-              kind: 'init'
-            }
-          ]
-        }
+        return createAstObject({
+          data: { type: 'Identifier', name: importName }
+        })
       }
 
       if (META_REGEX.test(fileName)) {
@@ -143,17 +135,9 @@ async function collectFiles({
           dynamicMetaImports.push({ importName, route })
           return createAstObject({ data: createAstObject({}) })
         }
-        return {
-          type: 'ObjectExpression',
-          properties: [
-            {
-              type: 'Property',
-              key: { type: 'Identifier', name: 'data' },
-              value: { type: 'Identifier', name: importName },
-              kind: 'init'
-            }
-          ]
-        }
+        return createAstObject({
+          data: { type: 'Identifier', name: importName }
+        })
       }
     })
   })
