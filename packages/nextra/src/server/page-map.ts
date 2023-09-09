@@ -19,15 +19,14 @@ import {
   META_REGEX
 } from '../constants'
 import { truthy } from '../utils'
+import { PAGES_DIR } from './file-system'
 import { normalizePageRoute, pageTitleFromFilename } from './utils'
 
 const readdir = promisify(fs.readdir)
 const readFile = promisify(fs.readFile)
 const stat = promisify(fs.stat)
 
-// TODO: `1` is set due race condition when import order is different, find a better solution to
-//  keep things more parallel
-const limit = pLimit(1)
+const limit = pLimit(20)
 
 type Import = { importName: string; filePath: string }
 type DynamicImport = { importName: string; route: string }
@@ -159,7 +158,11 @@ async function collectFiles({
         const isMetaJs = META_REGEX.test(fileName)
 
         if (fileName === META_FILENAME || isMetaJs) {
-          const importName = `meta${metaImports.length}`
+          const importName = path
+            .relative(PAGES_DIR, filePath)
+            .replace(/\.([jt]sx?|json)?$/, '')
+            .replaceAll(/[\W_]+/g, '_')
+            .replace(/^_/, '')
           metaImports.push({ importName, filePath })
           if (isMetaJs) {
             const dynamicPage = array.find(f => f.name.startsWith('['))
@@ -217,8 +220,10 @@ export async function collectPageMap({
     isFollowingSymlink: false
   })
 
-  const metaImportsAST: ImportDeclaration[] = metaImports.map(
-    ({ filePath, importName }) => ({
+  const metaImportsAST: ImportDeclaration[] = metaImports
+    // localeCompare to avoid race condition
+    .sort((a, b) => a.filePath.localeCompare(b.filePath))
+    .map(({ filePath, importName }) => ({
       type: 'ImportDeclaration',
       source: { type: 'Literal', value: filePath },
       specifiers: [
@@ -227,8 +232,7 @@ export async function collectPageMap({
           local: { type: 'Identifier', name: importName }
         }
       ]
-    })
-  )
+    }))
 
   const result = toJs({
     type: 'Program',
@@ -238,7 +242,10 @@ export async function collectPageMap({
       createAstExportConst('pageMap', pageMapAst),
       createAstExportConst('dynamicMetaModules', {
         type: 'ObjectExpression',
-        properties: dynamicMetaImports.map(({ importName, route }) => ({
+        properties: dynamicMetaImports
+          // localeCompare to avoid race condition
+          .sort((a, b) => a.route.localeCompare(b.route))
+          .map(({ importName, route }) => ({
           ...DEFAULT_OBJECT_PROPS,
           key: { type: 'Literal', value: route },
           value: { type: 'Identifier', name: importName }
