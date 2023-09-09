@@ -1,3 +1,5 @@
+import path from 'node:path'
+import slash from 'slash'
 import title from 'title'
 import type { Folder, MdxFile } from '../types'
 
@@ -38,4 +40,8 @@ export function sortPages(
       })
     })
     .map(item => [item.name, item.title])
+}
+
+export function normalizePageRoute(parentRoute: string, route: string): string {
+  return slash(path.join(parentRoute, route.replace(/^index$/, '')))
 }

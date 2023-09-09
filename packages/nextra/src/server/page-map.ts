@@ -11,7 +11,8 @@ import {
   META_REGEX
 } from '../constants'
 import type { PageMapItem } from '../types'
-import { normalizePageRoute, truthy } from '../utils'
+import { truthy } from '../utils'
+import { normalizePageRoute } from './utils'
 
 const readdir = promisify(fs.readdir)
 const readFile = promisify(fs.readFile)

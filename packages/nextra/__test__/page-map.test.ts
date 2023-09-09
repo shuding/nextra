@@ -1,5 +1,5 @@
 import path from 'node:path'
-import { CWD } from '../src/constants'
+import { CWD } from '../src/server/constants'
 import { collectPageMap } from '../src/server/page-map'
 
 describe('collectPageMap', () => {

@@ -15,7 +15,6 @@ import remarkReadingTime from 'remark-reading-time'
 import type { Pluggable } from 'unified'
 import {
   CODE_BLOCK_FILENAME_REGEX,
-  CWD,
   DEFAULT_LOCALE,
   ERROR_ROUTES,
   MARKDOWN_URL_EXTENSION_REGEX
@@ -28,6 +27,7 @@ import type {
   StructurizedData
 } from '../types'
 import { truthy } from '../utils'
+import { CWD } from './constants'
 import {
   attachMeta,
   parseMeta,

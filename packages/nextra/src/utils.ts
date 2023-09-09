@@ -1,5 +1,3 @@
-import path from 'node:path'
-import slash from 'slash'
 import type { Folder, MdxFile, Meta, MetaJsonFile, PageMapItem } from './types'
 
 type Truthy<T> = T extends false | '' | 0 | null | undefined ? never : T // from lodash
@@ -10,10 +8,6 @@ export function truthy<T>(value: T): value is Truthy<T> {
 
 export function normalizeMeta(meta: Meta): Exclude<Meta, string> {
   return typeof meta === 'string' ? { title: meta } : meta
-}
-
-export function normalizePageRoute(parentRoute: string, route: string): string {
-  return slash(path.join(parentRoute, route.replace(/^index$/, '')))
 }
 
 export function isMeta(item: PageMapItem): item is MetaJsonFile {

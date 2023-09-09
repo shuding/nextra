@@ -1,7 +1,7 @@
 import { join, relative } from 'node:path'
 import pkg from 'graceful-fs'
 import type { Compiler } from 'webpack'
-import { CHUNKS_DIR, CWD } from '../../constants'
+import { CHUNKS_DIR, CWD } from '../constants'
 import { PAGES_DIR } from '../file-system'
 import { collectPageMap } from '../page-map'
 import { logger } from '../utils'

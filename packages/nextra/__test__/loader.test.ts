@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
-import { CWD } from '../src/constants'
+import { CWD } from '../src/server/constants'
 
 describe('tree shaking', async () => {
   const pageChunksDirPath = path.join(
@@ -47,6 +47,9 @@ describe('tree shaking', async () => {
     })
     it('ensure `path` polyfill is removed', () => {
       expect(appFile.includes('basename:')).toBe(false)
+    })
+    it('ensure `process` polyfill is removed', () => {
+      expect(appFile.includes('process)')).toBe(false)
     })
   })
 
