@@ -357,25 +357,23 @@ describe('Page Process', () => {
       )
     })
 
-      // [
-      // {
-      //   name: 'docs',
-      //   route: '/docs',
-      //   children: [
-      //     { name: 'test2', route: '/docs/test2' },
-      //     { data: { test2: 'Test2' } }
-      //   ]
-      // },
-      //   { name: 'test1', route: '/test1' },
-      //   { data: { test1: 'Test1' } }
-      // ]
-
-
     expect(rawJs).toMatchInlineSnapshot(`
       "export const pageMap = [{
         data: {
+          \\"docs\\": \\"Docs\\",
           \\"test1\\": \\"Test1\\"
         }
+      }, {
+        name: \\"docs\\",
+        route: \\"/docs\\",
+        children: [{
+          data: {
+            \\"test2\\": \\"Test2\\"
+          }
+        }, {
+          name: \\"test2\\",
+          route: \\"/docs/test2\\"
+        }]
       }, {
         name: \\"test1\\",
         route: \\"/test1\\"

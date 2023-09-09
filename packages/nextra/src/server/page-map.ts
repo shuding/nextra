@@ -10,12 +10,12 @@ import {
   META_FILENAME,
   META_REGEX
 } from '../constants'
-import type { PageMapItem } from '../types'
 import { truthy } from '../utils'
 import { normalizePageRoute, pageTitleFromFilename } from './utils'
 
 const readdir = promisify(fs.readdir)
 const readFile = promisify(fs.readFile)
+const stat = promisify(fs.stat)
 
 // TODO: `1` is set due race condition when import order is different, find a better solution to
 //  keep things more parallel
@@ -60,15 +60,17 @@ type CollectFilesOptions = {
   route: string
   metaImports?: Import[]
   dynamicMetaImports?: DynamicImport[]
+  isFollowingSymlink: boolean
 }
 
 async function collectFiles({
   dir,
   route,
   metaImports = [],
-  dynamicMetaImports = []
+  dynamicMetaImports = [],
+  isFollowingSymlink
 }: CollectFilesOptions): Promise<{
-  pageMapAst: PageMapItem[]
+  pageMapAst: { type: 'ArrayExpression'; elements: unknown[] }
   metaImports: Import[]
   dynamicMetaImports: DynamicImport[]
 }> {
@@ -79,6 +81,17 @@ async function collectFiles({
     .sort((a, b) => a.name.localeCompare(b.name))
     .map(async (f, _index, array) => {
       const filePath = path.join(dir, f.name)
+
+      let isDirectory = f.isDirectory()
+
+      const isSymlinked = isFollowingSymlink || f.isSymbolicLink()
+      if (isSymlinked) {
+        const stats = await stat(filePath)
+        if (stats.isDirectory()) {
+          isDirectory = true
+        }
+      }
+
       const { name, ext } = path.parse(filePath)
 
       // We need to filter out dynamic routes, because we can't get all the
@@ -87,14 +100,15 @@ async function collectFiles({
 
       const fileRoute = normalizePageRoute(route, name)
 
-      if (f.isDirectory()) {
+      if (isDirectory) {
         if (fileRoute === '/api') return
-        const { pageMapAst } = (await collectFiles({
+        const { pageMapAst } = await collectFiles({
           dir: filePath,
           route: fileRoute,
           metaImports,
-          dynamicMetaImports
-        })) as any
+          dynamicMetaImports,
+          isFollowingSymlink
+        })
 
         const { elements } = pageMapAst
         if (!elements.length) return
@@ -162,7 +176,7 @@ async function collectFiles({
   }
 
   return {
-    pageMapAst: { type: 'ArrayExpression', elements: items } as any,
+    pageMapAst: { type: 'ArrayExpression', elements: items },
     metaImports,
     dynamicMetaImports
   }
@@ -177,7 +191,8 @@ export async function collectPageMap({
 }): Promise<string> {
   const { pageMapAst, metaImports, dynamicMetaImports } = await collectFiles({
     dir,
-    route
+    route,
+    isFollowingSymlink: false
   })
 
   const metaImportsAST = metaImports.map(({ filePath, importName }) => ({
