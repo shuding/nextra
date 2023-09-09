@@ -7,10 +7,10 @@ import {
   CWD,
   MARKDOWN_EXTENSION_REGEX,
   OFFICIAL_THEMES
-} from './constants'
+} from '../constants'
 import { PAGES_DIR } from './file-system'
-import { logger, pageTitleFromFilename } from './server/utils'
-import type { LoaderOptions, MdxPath, PageOpts } from './types'
+import { logger, pageTitleFromFilename } from './utils'
+import type { LoaderOptions, MdxPath, PageOpts } from '../types'
 
 const initGitRepo = (async () => {
   const IS_WEB_CONTAINER = !!process.versions.webcontainer

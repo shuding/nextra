@@ -9,7 +9,7 @@
   },
   "exports": {
     "./package.json": "./package.json",
-    ".": "./dist/index.mjs",
+    ".": "./dist/server/index.mjs",
     "./catch-all": {
       "import": "./dist/catch-all.js",
       "types": "./dist/catch-all.d.mts"
@@ -55,12 +55,16 @@
       "import": "./server/compile.mjs",
       "types": "./server/compile.d.mts"
     },
+    "./remote": {
+      "import": "./server/remote.mjs",
+      "types": "./server/remote.d.mts"
+    },
     "./*": {
       "import": "./dist/*.mjs",
       "types": "./dist/*.d.mts"
     }
   },
-  "types": "./dist/index.d.mts",
+  "types": "./dist/server/index.d.mts",
   "typesVersions": {
     "*": {
       "catch-all": [
@@ -88,7 +92,7 @@
         "./dist/layout.d.mts"
       ],
       "remote": [
-        "./dist/remote.d.mts"
+        "./dist/server/remote.d.mts"
       ],
       "mdx": [
         "./dist/mdx.d.mts"

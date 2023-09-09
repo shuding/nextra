@@ -10,10 +10,10 @@ import {
   MARKDOWN_EXTENSION_REGEX,
   MARKDOWN_EXTENSIONS,
   META_REGEX
-} from './constants'
-import { nextraConfigSchema } from './schemas'
-import { logger } from './server/utils'
-import type { Nextra } from './types'
+} from '../constants'
+import { nextraConfigSchema } from '../schemas'
+import type { Nextra } from '../types'
+import { logger } from './utils'
 import { NextraPlugin, NextraSearchPlugin } from './webpack-plugins'
 
 const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
@@ -177,4 +177,4 @@ type RuleSetRule = {
 
 export default nextra
 
-export type * from './types'
+export type * from '../types'
