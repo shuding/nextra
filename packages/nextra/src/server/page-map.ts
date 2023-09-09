@@ -55,18 +55,19 @@ function createAstExportConst<T>(name: string, value: T) {
   }
 }
 
-async function collectFiles({
-  dir,
-  route = '/',
-  metaImports = [],
-  dynamicMetaImports = []
-}: {
+type CollectFilesOptions = {
   dir: string
-  route?: string
-  isFollowingSymlink?: boolean
+  route: string
   metaImports?: Import[]
   dynamicMetaImports?: DynamicImport[]
-}): Promise<{
+}
+
+async function collectFiles({
+  dir,
+  route,
+  metaImports = [],
+  dynamicMetaImports = []
+}: CollectFilesOptions): Promise<{
   pageMapAst: PageMapItem[]
   metaImports: Import[]
   dynamicMetaImports: DynamicImport[]
@@ -149,10 +150,10 @@ async function collectFiles({
 
 export async function collectPageMap({
   dir,
-  route
+  route = '/'
 }: {
   dir: string
-  route: string
+  route?: string
 }): Promise<string> {
   const { pageMapAst, metaImports, dynamicMetaImports } = await collectFiles({
     dir,
@@ -188,5 +189,5 @@ export async function collectPageMap({
     ]
   })
 
-  return result.value
+  return result.value.trim()
 }

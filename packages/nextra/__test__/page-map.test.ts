@@ -278,15 +278,14 @@ describe('collectPageMap', () => {
       export const dynamicMetaModules = {
         '/en/remote/graphql-eslint': meta6,
         '/en/remote/graphql-yoga': meta7
-      };
-      "
+      };"
     `)
   })
 })
 
 describe('Page Process', () => {
-  it.skip("should not add `_meta.json` file if folder doesn't contain markdown files", async () => {
-    const { items } = await collectFiles({
+  it("should not add `_meta.json` file if folder doesn't contain markdown files", async () => {
+    const rawJs = await collectPageMap({
       dir: path.join(
         CWD,
         '__test__',
@@ -295,7 +294,10 @@ describe('Page Process', () => {
         'folder-without-markdown-files'
       )
     })
-    expect(items).toEqual([])
+    expect(rawJs).toMatchInlineSnapshot(`
+      "export const pageMap = [];
+      export const dynamicMetaModules = {};"
+    `)
   })
 
   it.skip("should add `_meta.json` file if it's missing", async () => {
