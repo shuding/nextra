@@ -16,10 +16,6 @@ export function normalizePageRoute(parentRoute: string, route: string): string {
   return slash(path.join(parentRoute, route.replace(/^index$/, '')))
 }
 
-export function getDefault<T>(module: T & { default?: T }): T {
-  return module.default || module
-}
-
 export function isMeta(item: PageMapItem): item is MetaJsonFile {
   return 'data' in item
 }

@@ -5,23 +5,7 @@ export async function buildDynamicMDX(
   compileMdxOptions: Parameters<typeof compileMdx>[1]
 ) {
   if (compileMdxOptions && 'remarkLinkRewriteOptions' in compileMdxOptions) {
-    throw new Error(`\`remarkLinkRewriteOptions\` was removed. For overriding internal links use \`remarkLinkRewrite\` instead.
-
-import { remarkLinkRewrite } from 'nextra/mdx-plugins'
-
-// ...
-
-const result = await buildDynamicMDX(rawMdx, {
-  mdxOptions: {
-    remarkPlugins: [
-      [remarkLinkRewrite, {
-        pattern: /^\\/docs(\\/.*)?$/,
-        replace: '/docs/2.0.0$1'
-      }]
-    ]
-  }
-})
-`)
+    throw new Error('`remarkLinkRewriteOptions` was removed')
   }
 
   const { result, headings, frontMatter, title } = await compileMdx(

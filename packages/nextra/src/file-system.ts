@@ -1,13 +1,10 @@
-import * as findPagesDirImport from 'next/dist/lib/find-pages-dir.js'
+import * as pkg from 'next/dist/lib/find-pages-dir.js'
 import { CWD } from './constants'
-import { getDefault } from './utils'
 
-const { findPagesDir, existsSync } = getDefault(findPagesDirImport)
-
-export { existsSync }
+export const { existsSync } = pkg
 
 export function findPagesDirectory(): string {
-  const { pagesDir } = findPagesDir(CWD, false)
+  const { pagesDir } = pkg.findPagesDir(CWD, false)
   if (!pagesDir) {
     throw new Error('Unable to find `pages` directory')
   }
