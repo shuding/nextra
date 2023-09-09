@@ -10,19 +10,10 @@ import {
   META_FILENAME,
   META_REGEX
 } from '../constants'
-import type {
-  Folder,
-  MdxFile,
-  MdxPath,
-  MetaJsonPath,
-  PageMapItem
-} from '../types'
+import type { PageMapItem } from '../types'
 import { normalizePageRoute, truthy } from '../utils'
-import { logger } from './utils'
 
 const readdir = promisify(fs.readdir)
-const realpath = promisify(fs.realpath)
-const stat = promisify(fs.stat)
 const readFile = promisify(fs.readFile)
 
 const limit = pLimit(1)
@@ -64,7 +55,6 @@ function createExportConst<T>(name: string, value: T) {
 async function collectFiles({
   dir,
   route = '/',
-  // isFollowingSymlink = false,
   metaImports = [],
   dynamicMetaImports = []
 }: {
@@ -84,16 +74,6 @@ async function collectFiles({
     const filePath = path.join(dir, f.name)
     const isDirectory = f.isDirectory()
 
-    // const isSymlinked = isFollowingSymlink || f.isSymbolicLink()
-    // let symlinkSource: string
-    // if (isSymlinked) {
-    //   symlinkSource = await realpath(filePath)
-    //   const stats = await stat(filePath)
-    //   if (stats.isDirectory()) {
-    //     isDirectory = true
-    //   }
-    // }
-
     const { name, ext } = path.parse(filePath)
     // We need to filter out dynamic routes, because we can't get all the
     // paths statically from here — they'll be generated separately.
@@ -106,7 +86,6 @@ async function collectFiles({
       const { items } = (await collectFiles({
         dir: filePath,
         route: fileRoute,
-        // isFollowingSymlink: isSymlinked,
         metaImports,
         dynamicMetaImports
       })) as any
@@ -128,7 +107,7 @@ async function collectFiles({
         return createAstObject({
           name: path.parse(filePath).name,
           route: fileRoute,
-          frontMatter: valueToEstree(data)
+          ...(Object.keys(data).length && { frontMatter: valueToEstree(data) })
         })
       }
 

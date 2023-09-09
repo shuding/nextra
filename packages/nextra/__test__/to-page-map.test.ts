@@ -33,20 +33,16 @@ describe('collectPageMap', () => {
           data: meta1
         }, {
           name: \\"a-page\\",
-          route: \\"/en/about/a-page\\",
-          frontMatter: {}
+          route: \\"/en/about/a-page\\"
         }, {
           name: \\"acknowledgement\\",
-          route: \\"/en/about/acknowledgement\\",
-          frontMatter: {}
+          route: \\"/en/about/acknowledgement\\"
         }, {
           name: \\"changelog\\",
-          route: \\"/en/about/changelog\\",
-          frontMatter: {}
+          route: \\"/en/about/changelog\\"
         }, {
           name: \\"team\\",
-          route: \\"/en/about/team\\",
-          frontMatter: {}
+          route: \\"/en/about/team\\"
         }]
       }, {
         name: \\"blog\\",
@@ -72,8 +68,7 @@ describe('collectPageMap', () => {
         route: \\"/en/docs\\",
         children: [{
           name: \\"404-500\\",
-          route: \\"/en/docs/404-500\\",
-          frontMatter: {}
+          route: \\"/en/docs/404-500\\"
         }, {
           data: meta3
         }, {
@@ -83,157 +78,121 @@ describe('collectPageMap', () => {
             data: meta5
           }, {
             name: \\"cache\\",
-            route: \\"/en/docs/advanced/cache\\",
-            frontMatter: {}
+            route: \\"/en/docs/advanced/cache\\"
           }, {
             name: \\"code-highlighting\\",
-            route: \\"/en/docs/advanced/code-highlighting\\",
-            frontMatter: {}
+            route: \\"/en/docs/advanced/code-highlighting\\"
           }, {
             name: \\"dynamic-markdown-import\\",
-            route: \\"/en/docs/advanced/dynamic-markdown-import\\",
-            frontMatter: {}
+            route: \\"/en/docs/advanced/dynamic-markdown-import\\"
           }, {
             name: \\"file-name.with.DOTS\\",
-            route: \\"/en/docs/advanced/file-name.with.DOTS\\",
-            frontMatter: {}
+            route: \\"/en/docs/advanced/file-name.with.DOTS\\"
           }, {
             name: \\"images\\",
-            route: \\"/en/docs/advanced/images\\",
-            frontMatter: {}
+            route: \\"/en/docs/advanced/images\\"
           }, {
             name: \\"markdown-import\\",
-            route: \\"/en/docs/advanced/markdown-import\\",
-            frontMatter: {}
+            route: \\"/en/docs/advanced/markdown-import\\"
           }, {
             name: \\"more\\",
             route: \\"/en/docs/advanced/more\\",
             children: [{
               name: \\"loooooooooooooooooooong-title\\",
-              route: \\"/en/docs/advanced/more/loooooooooooooooooooong-title\\",
-              frontMatter: {}
+              route: \\"/en/docs/advanced/more/loooooooooooooooooooong-title\\"
             }, {
               name: \\"tree\\",
               route: \\"/en/docs/advanced/more/tree\\",
               children: [{
                 name: \\"one\\",
-                route: \\"/en/docs/advanced/more/tree/one\\",
-                frontMatter: {}
+                route: \\"/en/docs/advanced/more/tree/one\\"
               }, {
                 name: \\"three\\",
-                route: \\"/en/docs/advanced/more/tree/three\\",
-                frontMatter: {}
+                route: \\"/en/docs/advanced/more/tree/three\\"
               }, {
                 name: \\"two\\",
-                route: \\"/en/docs/advanced/more/tree/two\\",
-                frontMatter: {}
+                route: \\"/en/docs/advanced/more/tree/two\\"
               }]
             }]
           }, {
             name: \\"performance\\",
-            route: \\"/en/docs/advanced/performance\\",
-            frontMatter: {}
+            route: \\"/en/docs/advanced/performance\\"
           }, {
             name: \\"react-native\\",
-            route: \\"/en/docs/advanced/react-native\\",
-            frontMatter: {}
+            route: \\"/en/docs/advanced/react-native\\"
           }, {
             name: \\"scrollbar-x\\",
-            route: \\"/en/docs/advanced/scrollbar-x\\",
-            frontMatter: {}
+            route: \\"/en/docs/advanced/scrollbar-x\\"
           }]
         }, {
           name: \\"advanced\\",
-          route: \\"/en/docs/advanced\\",
-          frontMatter: {}
+          route: \\"/en/docs/advanced\\"
         }, {
           name: \\"arguments\\",
-          route: \\"/en/docs/arguments\\",
-          frontMatter: {}
+          route: \\"/en/docs/arguments\\"
         }, {
           name: \\"callout\\",
-          route: \\"/en/docs/callout\\",
-          frontMatter: {}
+          route: \\"/en/docs/callout\\"
         }, {
           name: \\"change-log\\",
-          route: \\"/en/docs/change-log\\",
-          frontMatter: {}
+          route: \\"/en/docs/change-log\\"
         }, {
           name: \\"code-block-without-language\\",
-          route: \\"/en/docs/code-block-without-language\\",
-          frontMatter: {}
+          route: \\"/en/docs/code-block-without-language\\"
         }, {
           name: \\"conditional-fetching\\",
-          route: \\"/en/docs/conditional-fetching\\",
-          frontMatter: {}
+          route: \\"/en/docs/conditional-fetching\\"
         }, {
           name: \\"custom-header-ids\\",
-          route: \\"/en/docs/custom-header-ids\\",
-          frontMatter: {}
+          route: \\"/en/docs/custom-header-ids\\"
         }, {
           name: \\"data-fetching\\",
-          route: \\"/en/docs/data-fetching\\",
-          frontMatter: {}
+          route: \\"/en/docs/data-fetching\\"
         }, {
           name: \\"error-handling\\",
-          route: \\"/en/docs/error-handling\\",
-          frontMatter: {}
+          route: \\"/en/docs/error-handling\\"
         }, {
           name: \\"getting-started\\",
-          route: \\"/en/docs/getting-started\\",
-          frontMatter: {}
+          route: \\"/en/docs/getting-started\\"
         }, {
           name: \\"global-configuration\\",
-          route: \\"/en/docs/global-configuration\\",
-          frontMatter: {}
+          route: \\"/en/docs/global-configuration\\"
         }, {
           name: \\"middleware\\",
-          route: \\"/en/docs/middleware\\",
-          frontMatter: {}
+          route: \\"/en/docs/middleware\\"
         }, {
           name: \\"mutation\\",
-          route: \\"/en/docs/mutation\\",
-          frontMatter: {}
+          route: \\"/en/docs/mutation\\"
         }, {
           name: \\"options\\",
-          route: \\"/en/docs/options\\",
-          frontMatter: {}
+          route: \\"/en/docs/options\\"
         }, {
           name: \\"pagination\\",
-          route: \\"/en/docs/pagination\\",
-          frontMatter: {}
+          route: \\"/en/docs/pagination\\"
         }, {
           name: \\"prefetching\\",
-          route: \\"/en/docs/prefetching\\",
-          frontMatter: {}
+          route: \\"/en/docs/prefetching\\"
         }, {
           name: \\"raw-layout\\",
-          route: \\"/en/docs/raw-layout\\",
-          frontMatter: {}
+          route: \\"/en/docs/raw-layout\\"
         }, {
           name: \\"revalidation\\",
-          route: \\"/en/docs/revalidation\\",
-          frontMatter: {}
+          route: \\"/en/docs/revalidation\\"
         }, {
           name: \\"suspense\\",
-          route: \\"/en/docs/suspense\\",
-          frontMatter: {}
+          route: \\"/en/docs/suspense\\"
         }, {
           name: \\"typescript\\",
-          route: \\"/en/docs/typescript\\",
-          frontMatter: {}
+          route: \\"/en/docs/typescript\\"
         }, {
           name: \\"understanding\\",
-          route: \\"/en/docs/understanding\\",
-          frontMatter: {}
+          route: \\"/en/docs/understanding\\"
         }, {
           name: \\"with-nextjs\\",
-          route: \\"/en/docs/with-nextjs\\",
-          frontMatter: {}
+          route: \\"/en/docs/with-nextjs\\"
         }, {
           name: \\"wrap-toc-items\\",
-          route: \\"/en/docs/wrap-toc-items\\",
-          frontMatter: {}
+          route: \\"/en/docs/wrap-toc-items\\"
         }]
       }, {
         name: \\"examples\\",
@@ -263,8 +222,7 @@ describe('collectPageMap', () => {
           }
         }, {
           name: \\"full\\",
-          route: \\"/en/examples/full\\",
-          frontMatter: {}
+          route: \\"/en/examples/full\\"
         }, {
           name: \\"infinite-loading\\",
           route: \\"/en/examples/infinite-loading\\",
@@ -282,8 +240,7 @@ describe('collectPageMap', () => {
         }]
       }, {
         name: \\"foo\\",
-        route: \\"/en/foo\\",
-        frontMatter: {}
+        route: \\"/en/foo\\"
       }, {
         name: \\"index\\",
         route: \\"/en\\",
@@ -309,8 +266,7 @@ describe('collectPageMap', () => {
         }]
       }, {
         name: \\"test\\",
-        route: \\"/en/test\\",
-        frontMatter: {}
+        route: \\"/en/test\\"
       }];
       export const dynamicMetaModules = {
         '/en/remote/graphql-eslint': meta6,
