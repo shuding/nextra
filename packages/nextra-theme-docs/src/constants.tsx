@@ -131,6 +131,7 @@ export const themeSchema = z.strictObject({
   sidebar: z.strictObject({
     autoCollapse: z.boolean().optional(),
     defaultMenuCollapseLevel: z.number().min(1).int(),
+    firstComponent: z.custom<ReactNode | FC>(...reactNode),
     titleComponent: z.custom<
       ReactNode | FC<{ title: string; type: string; route: string }>
     >(...reactNode),
