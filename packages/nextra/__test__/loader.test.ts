@@ -36,6 +36,18 @@ describe('tree shaking', async () => {
     it('ensure `slash` is removed', () => {
       expect(appFile.includes('\\\\?\\')).toBe(false)
     })
+    it('ensure `constants.ts#CWD` is removed', () => {
+      expect(appFile.includes('cwd()')).toBe(false)
+    })
+    it('ensure `constants.ts#CHUNKS_DIR` is removed', () => {
+      expect(/"\.next",\s*"static",\s*"chunks"\)/.test(appFile)).toBe(false)
+    })
+    it('ensure `constants.ts#PUBLIC_DIR` is removed', () => {
+      expect(appFile.includes('"public")')).toBe(false)
+    })
+    it('ensure `path` polyfill is removed', () => {
+      expect(appFile.includes('basename:')).toBe(false)
+    })
   })
 
   describe('index page', async () => {

@@ -23,11 +23,11 @@ export const META_FILENAME = '_meta.json'
 
 export const META_REGEX = /_meta\.[jt]sx?$/
 
-export const CWD = process.cwd()
+export const CWD = /* @__PURE__ */ process.cwd()
 
 export const MARKDOWN_EXTENSIONS = ['md', 'mdx'] as const
 
-export const PUBLIC_DIR = path.join(CWD, 'public')
+export const PUBLIC_DIR = /* @__PURE__ */ path.join(CWD, 'public')
 
 export const EXTERNAL_URL_REGEX = /^https?:\/\//
 
@@ -39,4 +39,9 @@ export const DEFAULT_LOCALES = ['']
 
 export const ERROR_ROUTES = new Set(['/404', '/500'])
 
-export const CHUNKS_DIR = path.join(CWD, '.next', 'static', 'chunks')
+export const CHUNKS_DIR = /* @__PURE__ */ path.join(
+  CWD,
+  '.next',
+  'static',
+  'chunks'
+)
