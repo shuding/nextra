@@ -20,6 +20,14 @@ import {
   ERROR_ROUTES,
   MARKDOWN_URL_EXTENSION_REGEX
 } from '../constants'
+import type {
+  FrontMatter,
+  LoaderOptions,
+  PageOpts,
+  ReadingTime,
+  StructurizedData
+} from '../types'
+import { truthy } from '../utils'
 import {
   attachMeta,
   parseMeta,
@@ -33,14 +41,6 @@ import {
   remarkStructurize
 } from './mdx-plugins'
 import theme from './theme.json'
-import type {
-  FrontMatter,
-  LoaderOptions,
-  PageOpts,
-  ReadingTime,
-  StructurizedData
-} from '../types'
-import { truthy } from '../utils'
 
 globalThis.__nextra_temp_do_not_use = () => {
   import('../__temp__')

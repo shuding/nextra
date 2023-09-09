@@ -1,16 +1,16 @@
 import path from 'node:path'
 import slash from 'slash'
 import type { LoaderContext } from 'webpack'
-import { compileMdx } from './compile'
 import {
   CHUNKS_DIR,
   CWD,
   MARKDOWN_EXTENSION_REGEX,
   OFFICIAL_THEMES
 } from '../constants'
+import type { LoaderOptions, MdxPath, PageOpts } from '../types'
+import { compileMdx } from './compile'
 import { PAGES_DIR } from './file-system'
 import { logger, pageTitleFromFilename } from './utils'
-import type { LoaderOptions, MdxPath, PageOpts } from '../types'
 
 const initGitRepo = (async () => {
   const IS_WEB_CONTAINER = !!process.versions.webcontainer
