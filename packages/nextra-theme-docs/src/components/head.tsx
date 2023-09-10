@@ -17,6 +17,11 @@ export function Head(): ReactElement {
   const hue = config.primaryHue
   const { dark: darkHue, light: lightHue } =
     typeof hue === 'number' ? { dark: hue, light: hue } : hue
+  const saturation = config.primarySaturation
+  const { dark: darkSaturation, light: lightSaturation } =
+    typeof saturation === 'number'
+      ? { dark: saturation, light: saturation }
+      : saturation
   const frontMatter = config.frontMatter as NextSeoProps
 
   return (
@@ -61,6 +66,7 @@ export function Head(): ReactElement {
         <style>{`
         :root {
           --nextra-primary-hue: ${lightHue}deg;
+          --nextra-primary-saturation: ${lightSaturation}%;
           --nextra-navbar-height: 4rem;
           --nextra-menu-height: 3.75rem;
           --nextra-banner-height: 2.5rem;
@@ -68,6 +74,7 @@ export function Head(): ReactElement {
         
         .dark {
           --nextra-primary-hue: ${darkHue}deg;
+          --nextra-primary-saturation: ${darkSaturation}%;
         }
       `}</style>
         {head}

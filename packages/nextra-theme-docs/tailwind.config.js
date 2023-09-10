@@ -4,9 +4,9 @@ const makePrimaryColor =
   l =>
   ({ opacityValue }) => {
     if (opacityValue === undefined) {
-      return `hsl(var(--nextra-primary-hue) 100% ${l}%)`
+      return `hsl(var(--nextra-primary-hue) var(--nextra-primary-saturation) ${l}%)`
     }
-    return `hsl(var(--nextra-primary-hue) 100% ${l}% / ${opacityValue})`
+    return `hsl(var(--nextra-primary-hue) var(--nextra-primary-saturation) ${l}% / ${opacityValue})`
   }
 
 /** @type {import('tailwindcss').Config} */
