@@ -6,7 +6,7 @@ import { IS_PRODUCTION } from '../../constants'
 import { CHUNKS_DIR } from '../constants'
 import { PAGES_DIR } from '../file-system'
 import { collectPageMap } from '../page-map'
-import { logger } from '../utils'
+// import { logger } from '../utils'
 
 // const { webpack, sources } = pkg
 const fs = gracefulFs.promises
@@ -29,7 +29,7 @@ export class NextraPlugin {
       //   callback()
       //   return
       // }
-      if (IS_PRODUCTION && !isSaved) {
+      if (IS_PRODUCTION && isSaved) {
         callback()
         return
       }
