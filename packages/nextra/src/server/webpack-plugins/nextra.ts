@@ -1,4 +1,4 @@
-import { join } from 'node:path'
+import path from 'node:path'
 import gracefulFs from 'graceful-fs'
 import pkg from 'next/dist/compiled/webpack/webpack.js'
 import type { Compiler } from 'webpack'
@@ -11,6 +11,8 @@ import { logger } from '../utils'
 const { webpack, sources } = pkg
 const fs = gracefulFs.promises
 
+let isSaved = false
+
 export class NextraPlugin {
   constructor(private config: { locales: string[] }) {}
 
@@ -18,42 +20,63 @@ export class NextraPlugin {
     const pluginName = this.constructor.name
     const locales = new Set(this.config.locales)
 
-    compiler.hooks.compilation.tap(pluginName, (compilation, params) => {
+    compiler.hooks.beforeCompile.tapAsync(pluginName, async (_, callback) => {
+      if (isSaved || !IS_PRODUCTION) {
+        // Never call hook 2 times
+        // Also on `production` environment we get error:
+        // Module not found: Can't resolve '.../.next/static/chunks/nextra-page-map-en.mjs'
+        // while using only `processAssets` hook, but without `beforeCompile`
+        callback()
+        return
+      }
+
+      // Create chunks directory since it doesn't exist yet
+      await fs.mkdir(path.join(CHUNKS_DIR), { recursive: true })
+      try {
+        for (const locale of locales) {
+          const route = `/${locale}`
+          const dir = PAGES_DIR + route
+          const rawJs = await collectPageMap({ dir, route })
+
+          await fs.writeFile(
+            path.join(CHUNKS_DIR, `nextra-page-map-${locale}.mjs`),
+            rawJs
+          )
+        }
+        logger.info('`beforeCompile`')
+        isSaved = true
+        callback()
+      } catch (error) {
+        callback(error as Error)
+      }
+    })
+
+    if (IS_PRODUCTION) {
+      // Do not fire `processAssets` on production
+      return
+    }
+
+    compiler.hooks.compilation.tap(pluginName, compilation => {
       compilation.hooks.processAssets.tapAsync(
         {
           name: pluginName,
-          stage: webpack.Compilation.PROCESS_ASSETS_STAGE_ADDITIONS
+          stage: webpack.Compilation.PROCESS_ASSETS_STAGE_ADDITIONAL
         },
         async (assets, callback) => {
-          const lastPage = Object.keys(assets).findLast(assetPath =>
-            assetPath.startsWith('pages/')
-          )
-
-          const lastLocale = lastPage ? lastPage.split('/')[1] : ''
-          const allLocales = locales.has(lastLocale) ? [lastLocale] : locales
-
           try {
-            for (const locale of allLocales) {
+            // TODO: Find a way to get filename only for current asset? and get PageMap only for it
+            for (const locale of locales) {
               const route = `/${locale}`
               const dir = PAGES_DIR + route
-
               const rawJs = await collectPageMap({ dir, route })
-
-              const prev = await fs
-                .readFile(
-                  join(CHUNKS_DIR, `nextra-page-map-${locale}.mjs`),
-                  'utf8'
-                )
-                .catch(() => '')
-              if (prev === rawJs) continue
 
               const assetPath =
                 (IS_PRODUCTION ? '../' : '') +
                 `../static/chunks/nextra-page-map-${locale}.mjs`
-              assets[assetPath] ||= new sources.RawSource(rawJs)
 
-              logger.info(`PageMap "nextra-page-map-${locale}.mjs" saved`)
+              assets[assetPath] = new sources.RawSource(rawJs)
             }
+            logger.info('`processAssets`')
             callback()
           } catch (error) {
             callback(error as Error)

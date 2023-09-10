@@ -258,9 +258,6 @@ importers:
       estree-util-value-to-estree:
         specifier: ^3.0.1
         version: 3.0.1
-      git-diff:
-        specifier: ^2.0.6
-        version: 2.0.6
       github-slugger:
         specifier: ^2.0.0
         version: 2.0.0
