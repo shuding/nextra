@@ -50,7 +50,7 @@ export class NextraPlugin {
             rawJs
           )
         }
-        logger.info('`beforeCompile`')
+        // logger.info('`beforeCompile`')
         isSaved = true
         callback()
       } catch (error) {

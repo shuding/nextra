@@ -1,5 +1,4 @@
 import path from 'node:path'
-import { promisify } from 'node:util'
 import type {
   ArrayExpression,
   ExportNamedDeclaration,
@@ -10,7 +9,7 @@ import type {
 } from 'estree'
 import { toJs } from 'estree-util-to-js'
 import { valueToEstree } from 'estree-util-value-to-estree'
-import fs from 'graceful-fs'
+import gracefulFs from 'graceful-fs'
 import grayMatter from 'gray-matter'
 import pLimit from 'p-limit'
 import {
@@ -22,9 +21,7 @@ import { truthy } from '../utils'
 import { PAGES_DIR } from './file-system'
 import { normalizePageRoute, pageTitleFromFilename } from './utils'
 
-const readdir = promisify(fs.readdir)
-const readFile = promisify(fs.readFile)
-const stat = promisify(fs.stat)
+const fs = gracefulFs.promises
 
 const limit = pLimit(20)
 
@@ -93,7 +90,7 @@ async function collectFiles({
   metaImports: Import[]
   dynamicMetaImports: DynamicImport[]
 }> {
-  const files = await readdir(dir, { withFileTypes: true })
+  const files = await fs.readdir(dir, { withFileTypes: true })
 
   const promises = files
     // localeCompare is needed because order on Windows is different and test on CI fails
@@ -105,7 +102,7 @@ async function collectFiles({
 
       const isSymlinked = isFollowingSymlink || f.isSymbolicLink()
       if (isSymlinked) {
-        const stats = await stat(filePath)
+        const stats = await fs.stat(filePath)
         if (stats.isDirectory()) {
           isDirectory = true
         }
@@ -142,7 +139,7 @@ async function collectFiles({
       // add concurrency because folder can contain a lot of files
       return limit(async () => {
         if (MARKDOWN_EXTENSION_REGEX.test(ext)) {
-          const content = await readFile(filePath, 'utf8')
+          const content = await fs.readFile(filePath, 'utf8')
           const { data } = grayMatter(content)
 
           return createAstObject({
@@ -246,10 +243,10 @@ export async function collectPageMap({
           // localeCompare to avoid race condition
           .sort((a, b) => a.route.localeCompare(b.route))
           .map(({ importName, route }) => ({
-          ...DEFAULT_OBJECT_PROPS,
-          key: { type: 'Literal', value: route },
-          value: { type: 'Identifier', name: importName }
-        }))
+            ...DEFAULT_OBJECT_PROPS,
+            key: { type: 'Literal', value: route },
+            value: { type: 'Identifier', name: importName }
+          }))
       })
     ]
   })
