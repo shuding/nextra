@@ -1,5 +1,5 @@
 import type { z } from 'zod'
-import { ERROR_ROUTES } from './constants.js'
+import { ERROR_ROUTES } from '../constants.js'
 import type { displaySchema, menuItemSchema, pageThemeSchema } from '../server/schemas'
 import type { Folder, MdxFile, PageMapItem } from '../types'
 import { isFolder, isMeta } from './utils.js'

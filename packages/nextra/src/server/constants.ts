@@ -9,7 +9,7 @@ export {
   DEFAULT_LOCALE,
   ERROR_ROUTES,
   MARKDOWN_EXTENSION_REGEX
-} from '../client/constants.js'
+} from '../constants.js'
 
 export const CWD = process.cwd()
 

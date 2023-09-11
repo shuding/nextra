@@ -1,11 +1,5 @@
 import type { Folder, MdxFile, Meta, MetaJsonFile, PageMapItem } from '../types'
 
-type Truthy<T> = T extends false | '' | 0 | null | undefined ? never : T // from lodash
-
-export function truthy<T>(value: T): value is Truthy<T> {
-  return !!value
-}
-
 export function normalizeMeta(meta: Meta): Exclude<Meta, string> {
   return typeof meta === 'string' ? { title: meta } : meta
 }

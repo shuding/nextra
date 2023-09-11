@@ -1,4 +1,4 @@
-import { NEXTRA_INTERNAL } from './constants.js'
+import { NEXTRA_INTERNAL } from '../constants.js'
 import type { NextraInternalGlobal, Page, PageMapItem } from '../types'
 import { isFolder, isMeta, normalizeMeta } from './utils.js'
 
