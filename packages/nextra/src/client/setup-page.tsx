@@ -18,7 +18,7 @@ import type {
   PageMapItem,
   PageOpts
 } from '../types'
-import { SSGContext } from './data.js'
+import { DataProvider } from './data.js'
 
 function isFolder(value: DynamicMetaItem): value is DynamicFolder {
   return !!value && typeof value === 'object' && value.type === 'folder'
@@ -170,9 +170,9 @@ function NextraLayout({
   }
   return (
     <Layout themeConfig={themeConfig} pageOpts={pageOpts} pageProps={props}>
-      <SSGContext.Provider value={props}>
+      <DataProvider value={props}>
         <Content />
-      </SSGContext.Provider>
+      </DataProvider>
     </Layout>
   )
 }

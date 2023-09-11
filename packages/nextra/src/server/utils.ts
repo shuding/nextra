@@ -1,4 +1,4 @@
-import path from 'node:path'
+import path from 'path'
 import slash from 'slash'
 import title from 'title'
 import type { Folder, MdxFile } from '../types'
