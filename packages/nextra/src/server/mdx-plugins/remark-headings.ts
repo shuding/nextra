@@ -2,7 +2,7 @@ import Slugger from 'github-slugger'
 import type { Parent, Root } from 'mdast'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
-import { MARKDOWN_EXTENSION_REGEX } from '../../constants.js'
+import { MARKDOWN_EXTENSION_REGEX } from '../../client/constants.js'
 import type { Heading } from '../../types'
 import type { HProperties } from './remark-custom-heading-id'
 

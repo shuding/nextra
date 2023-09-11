@@ -1,10 +1,10 @@
 import path from 'node:path'
 import slash from 'slash'
 import type { LoaderContext } from 'webpack'
-import { MARKDOWN_EXTENSION_REGEX, OFFICIAL_THEMES } from '../constants.js'
+import { MARKDOWN_EXTENSION_REGEX } from '../client/constants.js'
 import type { LoaderOptions, MdxPath, PageOpts } from '../types'
 import { compileMdx } from './compile.js'
-import { CHUNKS_DIR, CWD } from './constants.js'
+import { CHUNKS_DIR, CWD, OFFICIAL_THEMES } from './constants.js'
 import { PAGES_DIR } from './file-system.js'
 import { logger, pageTitleFromFilename } from './utils.js'
 

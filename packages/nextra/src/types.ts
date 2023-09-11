@@ -2,12 +2,9 @@ import type { Heading as MDASTHeading } from 'mdast'
 import type { NextConfig } from 'next'
 import type { FC, ReactNode } from 'react'
 import type { z } from 'zod'
-import type {
-  MARKDOWN_EXTENSIONS,
-  META_FILENAME,
-  NEXTRA_INTERNAL
-} from './constants'
-import type { nextraConfigSchema, searchSchema } from './schemas'
+import type { NEXTRA_INTERNAL } from './client/constants'
+import type { MARKDOWN_EXTENSIONS, META_FILENAME } from './server/constants.js'
+import type { nextraConfigSchema, searchSchema } from './server/schemas'
 
 type MetaFilename = typeof META_FILENAME
 type MarkdownExtension = (typeof MARKDOWN_EXTENSIONS)[number]

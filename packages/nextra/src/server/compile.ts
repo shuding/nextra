@@ -13,12 +13,8 @@ import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 import remarkReadingTime from 'remark-reading-time'
 import type { Pluggable } from 'unified'
-import {
-  CODE_BLOCK_FILENAME_REGEX,
-  DEFAULT_LOCALE,
-  ERROR_ROUTES,
-  MARKDOWN_URL_EXTENSION_REGEX
-} from '../constants.js'
+import { DEFAULT_LOCALE, ERROR_ROUTES } from '../client/constants.js'
+import { truthy } from '../client/utils.js'
 import type {
   FrontMatter,
   LoaderOptions,
@@ -26,8 +22,11 @@ import type {
   ReadingTime,
   StructurizedData
 } from '../types'
-import { truthy } from '../utils.js'
-import { CWD } from './constants.js'
+import {
+  CODE_BLOCK_FILENAME_REGEX,
+  CWD,
+  MARKDOWN_URL_EXTENSION_REGEX
+} from './constants.js'
 import {
   attachMeta,
   parseMeta,
@@ -43,7 +42,7 @@ import {
 import theme from './theme.json'
 
 globalThis.__nextra_temp_do_not_use = () => {
-  import('../__temp__.cjs')
+  import('./__temp__.cjs')
 }
 
 const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS: RehypePrettyCodeOptions = {

@@ -1,4 +1,4 @@
-import type { Folder, MdxFile, Meta, MetaJsonFile, PageMapItem } from './types'
+import type { Folder, MdxFile, Meta, MetaJsonFile, PageMapItem } from '../types'
 
 type Truthy<T> = T extends false | '' | 0 | null | undefined ? never : T // from lodash
 

@@ -3,9 +3,8 @@ import type { Root } from 'mdast'
 import slash from 'slash'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
-import { EXTERNAL_URL_REGEX } from '../../constants.js'
-import { truthy } from '../../utils.js'
-import { PUBLIC_DIR } from '../constants.js'
+import { truthy } from '../../client/utils.js'
+import { EXTERNAL_URL_REGEX, PUBLIC_DIR } from '../constants.js'
 import { existsSync } from '../file-system.js'
 
 /**

@@ -12,12 +12,9 @@ import { valueToEstree } from 'estree-util-value-to-estree'
 import gracefulFs from 'graceful-fs'
 import grayMatter from 'gray-matter'
 import pLimit from 'p-limit'
-import {
-  MARKDOWN_EXTENSION_REGEX,
-  META_FILENAME,
-  META_REGEX
-} from '../constants.js'
-import { truthy } from '../utils.js'
+import { MARKDOWN_EXTENSION_REGEX } from '../client/constants.js'
+import { truthy } from '../client/utils.js'
+import { META_FILENAME, META_REGEX } from './constants.js'
 import { PAGES_DIR } from './file-system.js'
 import { normalizePageRoute, pageTitleFromFilename } from './utils.js'
 

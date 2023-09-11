@@ -12,10 +12,11 @@ export default defineConfig({
   splitting: false,
   bundle: false,
   external: ['shiki', './__temp__', 'webpack'],
+  outExtension: () => ({ js: '.js' }),
   async onSuccess() {
     await fs.copyFile(
-      path.join(CWD, 'src', '__temp__.cjs'),
-      path.join(CWD, 'dist', '__temp__.cjs')
+      path.join(CWD, 'src', 'server', '__temp__.cjs'),
+      path.join(CWD, 'dist', 'server', '__temp__.cjs')
     )
     await fs.copyFile(
       path.join(CWD, 'src', 'server', 'theme.json'),
