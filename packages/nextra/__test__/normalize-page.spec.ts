@@ -1,4 +1,4 @@
-import { normalizePages } from '../src/normalize-pages.js'
+import { normalizePages } from '../src/client/normalize-pages.js'
 import { cnPageMap, usPageMap } from './fixture/page-maps/pageMap.js'
 
 describe('normalize-page', () => {

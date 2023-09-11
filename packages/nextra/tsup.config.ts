@@ -14,12 +14,12 @@ export default defineConfig({
   external: ['shiki', './__temp__', 'webpack'],
   async onSuccess() {
     await fs.copyFile(
-      path.join(CWD, 'src', 'server', 'theme.json'),
-      path.join(CWD, 'dist', 'server', 'theme.json')
-    )
-    await fs.copyFile(
       path.join(CWD, 'src', '__temp__.cjs'),
       path.join(CWD, 'dist', '__temp__.cjs')
+    )
+    await fs.copyFile(
+      path.join(CWD, 'src', 'server', 'theme.json'),
+      path.join(CWD, 'dist', 'server', 'theme.json')
     )
     const filePath = path.join(CWD, 'dist', 'server', 'compile.js')
     const content = await fs.readFile(filePath, 'utf8')

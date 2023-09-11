@@ -4,7 +4,7 @@ import {
   getAllPages,
   getCurrentLevelPages,
   getPagesUnderRoute
-} from '../src/context.js'
+} from '../src/client/context.js'
 import { CWD } from '../src/server/constants.js'
 import type { NextraInternalGlobal } from '../src/types'
 
