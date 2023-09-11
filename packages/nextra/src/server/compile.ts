@@ -43,7 +43,7 @@ import {
 import theme from './theme.json'
 
 globalThis.__nextra_temp_do_not_use = () => {
-  import('../__temp__')
+  import('../__temp__.cjs')
 }
 
 const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS: RehypePrettyCodeOptions = {

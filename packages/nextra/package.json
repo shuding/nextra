@@ -7,107 +7,84 @@
   "engines": {
     "node": ">=18"
   },
+  "type": "module",
   "exports": {
     "./package.json": "./package.json",
-    ".": "./dist/server/index.mjs",
-    "./catch-all": {
-      "import": "./dist/catch-all.js",
-      "types": "./dist/catch-all.d.mts"
-    },
-    "./data": {
-      "import": "./dist/data.js",
-      "types": "./dist/data.d.mts"
-    },
-    "./loader": "./loader.js",
-    "./setup-page": {
-      "import": "./dist/setup-page.js",
-      "types": "./dist/setup-page.d.mts"
-    },
-    "./context": {
-      "import": "./dist/context.js",
-      "types": "./dist/context.d.mts"
-    },
-    "./mdx": {
-      "import": "./dist/mdx.js",
-      "types": "./dist/mdx.d.mts"
-    },
-    "./normalize-pages": {
-      "import": "./dist/normalize-pages.js",
-      "types": "./dist/normalize-pages.d.mts"
-    },
+    ".": "./dist/server/index.js",
+    "./loader": "./loader.cjs",
     "./components": {
       "import": "./dist/components/index.js",
-      "types": "./dist/components/index.d.mts"
+      "types": "./dist/components/index.d.ts"
     },
     "./mdx-plugins": {
-      "import": "./dist/server/mdx-plugins/index.mjs",
-      "types": "./dist/server/mdx-plugins/index.d.mts"
+      "import": "./dist/server/mdx-plugins/index.js",
+      "types": "./dist/server/mdx-plugins/index.d.ts"
     },
     "./hooks": {
       "import": "./dist/hooks/index.js",
-      "types": "./dist/hooks/index.d.mts"
+      "types": "./dist/hooks/index.d.ts"
     },
     "./icons": {
       "import": "./dist/icons/index.js",
-      "types": "./dist/icons/index.d.mts"
+      "types": "./dist/icons/index.d.ts"
     },
     "./compile": {
-      "import": "./dist/server/compile.mjs",
-      "types": "./dist/server/compile.d.mts"
+      "import": "./dist/server/compile.js",
+      "types": "./dist/server/compile.d.ts"
     },
     "./remote": {
-      "import": "./dist/server/remote.mjs",
-      "types": "./dist/server/remote.d.mts"
+      "import": "./dist/server/remote.js",
+      "types": "./dist/server/remote.d.ts"
     },
     "./*": {
-      "import": "./dist/*.mjs",
-      "types": "./dist/*.d.mts"
+      "import": "./dist/*.js",
+      "types": "./dist/*.d.ts"
     }
   },
-  "types": "./dist/server/index.d.mts",
+  "types": "./dist/server/index.d.ts",
   "typesVersions": {
     "*": {
       "compile": [
-        "./dist/server/compile.d.mts"
+        "./dist/server/compile.d.ts"
       ],
       "mdx-plugins": [
-        "./dist/server/mdx-plugins/index.d.mts"
+        "./dist/server/mdx-plugins/index.d.ts"
       ],
       "remote": [
-        "./dist/server/remote.d.mts"
+        "./dist/server/remote.d.ts"
       ],
       "catch-all": [
-        "./dist/catch-all.d.mts"
+        "./dist/catch-all.d.ts"
       ],
       "context": [
-        "./dist/context.d.mts"
+        "./dist/context.d.ts"
       ],
       "data": [
-        "./dist/data.d.mts"
+        "./dist/data.d.ts"
       ],
       "icons": [
-        "./dist/icons/index.d.mts"
+        "./dist/icons/index.d.ts"
       ],
       "components": [
-        "./dist/components/index.d.mts"
+        "./dist/components/index.d.ts"
       ],
       "hooks": [
-        "./dist/hooks/index.d.mts"
+        "./dist/hooks/index.d.ts"
       ],
       "mdx": [
-        "./dist/mdx.d.mts"
+        "./dist/mdx.d.ts"
       ],
       "schemas": [
-        "./dist/schemas.d.mts"
+        "./dist/schemas.d.ts"
       ],
       "normalize-pages": [
-        "./dist/normalize-pages.d.mts"
+        "./dist/normalize-pages.d.ts"
       ]
     }
   },
   "files": [
     "dist/*",
-    "loader.js",
+    "loader.cjs",
     "styles/*"
   ],
   "scripts": {
