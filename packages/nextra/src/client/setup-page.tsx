@@ -5,9 +5,9 @@
 
 import { useRouter } from 'next/router.js'
 import type { FC, ReactElement } from 'react'
-import { NEXTRA_INTERNAL } from './constants.js'
+import { NEXTRA_INTERNAL } from '../constants.js'
 import { SSGContext } from './data.js'
-import { normalizePageRoute, pageTitleFromFilename } from './server/utils.js'
+import { normalizePageRoute, pageTitleFromFilename } from '../server/utils.js'
 import type {
   DynamicFolder,
   DynamicMeta,
@@ -18,7 +18,7 @@ import type {
   NextraInternalGlobal,
   PageMapItem,
   PageOpts
-} from './types'
+} from '../types'
 
 function isFolder(value: DynamicMetaItem): value is DynamicFolder {
   return !!value && typeof value === 'object' && value.type === 'folder'

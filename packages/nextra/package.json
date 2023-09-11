@@ -13,20 +13,20 @@
     ".": "./dist/server/index.js",
     "./loader": "./loader.cjs",
     "./components": {
-      "import": "./dist/components/index.js",
-      "types": "./dist/components/index.d.ts"
+      "import": "./dist/client/components/index.js",
+      "types": "./dist/client/components/index.d.ts"
     },
     "./mdx-plugins": {
       "import": "./dist/server/mdx-plugins/index.js",
       "types": "./dist/server/mdx-plugins/index.d.ts"
     },
     "./hooks": {
-      "import": "./dist/hooks/index.js",
-      "types": "./dist/hooks/index.d.ts"
+      "import": "./dist/client/hooks/index.js",
+      "types": "./dist/client/hooks/index.d.ts"
     },
     "./icons": {
-      "import": "./dist/icons/index.js",
-      "types": "./dist/icons/index.d.ts"
+      "import": "./dist/client/icons/index.js",
+      "types": "./dist/client/icons/index.d.ts"
     },
     "./compile": {
       "import": "./dist/server/compile.js",
@@ -37,8 +37,8 @@
       "types": "./dist/server/remote.d.ts"
     },
     "./*": {
-      "import": "./dist/*.js",
-      "types": "./dist/*.d.ts"
+      "import": "./dist/client/*.js",
+      "types": "./dist/client/*.d.ts"
     }
   },
   "types": "./dist/server/index.d.ts",
@@ -54,31 +54,31 @@
         "./dist/server/remote.d.ts"
       ],
       "catch-all": [
-        "./dist/catch-all.d.ts"
+        "./dist/client/catch-all.d.ts"
       ],
       "context": [
-        "./dist/context.d.ts"
+        "./dist/client/context.d.ts"
       ],
       "data": [
-        "./dist/data.d.ts"
+        "./dist/client/data.d.ts"
       ],
       "icons": [
-        "./dist/icons/index.d.ts"
+        "./dist/client/icons/index.d.ts"
       ],
       "components": [
-        "./dist/components/index.d.ts"
+        "./dist/client/components/index.d.ts"
       ],
       "hooks": [
-        "./dist/hooks/index.d.ts"
+        "./dist/client/hooks/index.d.ts"
       ],
       "mdx": [
-        "./dist/mdx.d.ts"
+        "./dist/client/mdx.d.ts"
       ],
       "schemas": [
         "./dist/schemas.d.ts"
       ],
       "normalize-pages": [
-        "./dist/normalize-pages.d.ts"
+        "./dist/client/normalize-pages.d.ts"
       ]
     }
   },
