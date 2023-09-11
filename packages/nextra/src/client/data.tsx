@@ -3,7 +3,7 @@ import { createContext, useContext } from 'react'
 import type { Components } from './mdx'
 import { useMDXComponents } from './mdx.js'
 
-const SSGContext = createContext<Record<string, unknown>>({})
+const SSGContext = createContext<Record<string, any>>({})
 
 export const useSSG = (key = 'ssg') => useContext(SSGContext)[key]
 
