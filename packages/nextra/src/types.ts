@@ -14,6 +14,7 @@ type MarkdownExtension = (typeof MARKDOWN_EXTENSIONS)[number]
 
 export interface LoaderOptions extends NextraConfig {
   isPageImport?: boolean
+  isMetaFile?: boolean
   locales: string[]
 }
 
@@ -56,11 +57,6 @@ export type MdxFile<FrontMatterType = FrontMatter> = {
 
 export type MetaJsonPath = `${string}/${MetaFilename}`
 export type MdxPath = `${string}.${MarkdownExtension}`
-
-export type FileMap = {
-  [jsonPath: MetaJsonPath]: MetaJsonFile
-  [mdxPath: MdxPath]: MdxFile
-}
 
 export type PageMapItem = Folder | MdxFile | MetaJsonFile
 
@@ -120,11 +116,7 @@ export type NextraInternalGlobal = typeof globalThis & {
   }
 }
 
-export type DynamicMetaDescriptor = {
-  metaFilePath: string
-  metaObjectKeyPath: string
-  metaParentKeyPath: string
-}
+export type DynamicMetaDescriptor = Record<string, () => any>
 
 export type StructurizedData = Record<string, string>
 

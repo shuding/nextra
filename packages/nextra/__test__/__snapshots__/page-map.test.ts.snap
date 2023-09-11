@@ -49,7 +49,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
           "title": "Examples",
           "type": "page",
         },
-        "foo": "Foo",
         "index": {
           "display": "hidden",
           "title": "Introduction",
@@ -66,7 +65,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
           "title": "Remote",
           "type": "page",
         },
-        "test": "Test",
       },
     },
     {
@@ -78,11 +76,9 @@ exports[`Page Process > should match i18n site page maps 1`] = `
               "theme": {
                 "layout": "raw",
               },
-              "title": "A Page",
               "type": "page",
             },
             "acknowledgement": "🧩 Acknowledgement",
-            "changelog": "Changelog",
             "team": "👥 Team",
           },
         },
@@ -140,10 +136,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
     {
       "children": [
         {
-          "name": "404-500",
-          "route": "/en/docs/404-500",
-        },
-        {
           "data": {
             "--- hey": {
               "title": "Getting Started",
@@ -154,48 +146,46 @@ exports[`Page Process > should match i18n site page maps 1`] = `
               "type": "separator",
             },
             "404-500": "404/500 Custom Error Pages",
-            "advanced": "Advanced",
-            "arguments": "Arguments",
-            "callout": "Callout",
+            "advanced": "",
+            "arguments": "",
             "change-log": {
               "theme": {
                 "sidebar": false,
               },
-              "title": "Change Log",
             },
-            "code-block-without-language": "Code Block without Language",
             "conditional-fetching": "Conditional Data Fetching",
             "custom-header-ids": "Custom Header IDs",
-            "data-fetching": "Data Fetching",
+            "data-fetching": "",
             "error-handling": {
               "display": "hidden",
-              "title": "Error Handling",
             },
-            "getting-started": "Getting Started",
+            "getting-started": "",
             "github_link": {
               "href": "https://github.com/shuding/nextra",
               "newWindow": true,
               "title": "GitHub 🐙 →",
             },
-            "global-configuration": "Global Configuration",
-            "middleware": "Middleware",
-            "mutation": "Mutation",
-            "options": "Options",
-            "pagination": "Pagination",
-            "prefetching": "Prefetching",
+            "global-configuration": "",
+            "middleware": "",
+            "mutation": "",
+            "options": "",
+            "pagination": "",
+            "prefetching": "",
             "raw-layout": {
               "theme": {
                 "layout": "raw",
               },
-              "title": "Raw Layout",
             },
             "revalidation": "Auto Revalidation",
-            "suspense": "Suspense",
+            "suspense": "",
             "typescript": "TypeScript :)",
-            "understanding": "Understanding",
             "with-nextjs": "Next.js SSG and SSR",
             "wrap-toc-items": "Wrap Table of Content Items",
           },
+        },
+        {
+          "name": "404-500",
+          "route": "/en/docs/404-500",
         },
         {
           "children": [
@@ -210,16 +200,8 @@ exports[`Page Process > should match i18n site page maps 1`] = `
                   "title": "Do Not Use",
                   "type": "separator",
                 },
-                "cache": "Cache",
-                "code-highlighting": "Code Highlighting",
-                "dynamic-markdown-import": "Dynamic Markdown Import",
                 "file-name.with.DOTS": "Filenames with Dots",
-                "images": "Images",
-                "markdown-import": "Markdown Import",
                 "more": "More: A Super Super Super Super Long Directory",
-                "performance": "Performance",
-                "react-native": "React Native",
-                "scrollbar-x": "Scrollbar X",
               },
             },
             {
@@ -249,11 +231,24 @@ exports[`Page Process > should match i18n site page maps 1`] = `
             {
               "children": [
                 {
+                  "data": {
+                    "loooooooooooooooooooong-title": "Loooooooooooooooooooong Title",
+                    "tree": "Tree",
+                  },
+                },
+                {
                   "name": "loooooooooooooooooooong-title",
                   "route": "/en/docs/advanced/more/loooooooooooooooooooong-title",
                 },
                 {
                   "children": [
+                    {
+                      "data": {
+                        "one": "One",
+                        "three": "Three",
+                        "two": "Two",
+                      },
+                    },
                     {
                       "name": "one",
                       "route": "/en/docs/advanced/more/tree/one",
@@ -266,21 +261,9 @@ exports[`Page Process > should match i18n site page maps 1`] = `
                       "name": "two",
                       "route": "/en/docs/advanced/more/tree/two",
                     },
-                    {
-                      "data": {
-                        "one": "One",
-                        "three": "Three",
-                        "two": "Two",
-                      },
-                    },
                   ],
                   "name": "tree",
                   "route": "/en/docs/advanced/more/tree",
-                },
-                {
-                  "data": {
-                    "loooooooooooooooooooong-title": "Loooooooooooooooooooong Title",
-                  },
                 },
               ],
               "name": "more",
@@ -404,14 +387,13 @@ exports[`Page Process > should match i18n site page maps 1`] = `
           "data": {
             "auth": "Authentication",
             "basic": "Basic Usage",
-            "error-handling": "Error Handling",
+            "error-handling": "",
             "full": {
               "theme": {
                 "layout": "raw",
               },
-              "title": "Full",
             },
-            "infinite-loading": "Infinite Loading",
+            "infinite-loading": "",
             "ssr": "Next.js SSR",
           },
         },
@@ -477,6 +459,12 @@ exports[`Page Process > should match i18n site page maps 1`] = `
     },
     {
       "children": [
+        {
+          "data": {
+            "graphql-eslint": "GraphQL Eslint",
+            "graphql-yoga": "GraphQL Yoga",
+          },
+        },
         {
           "children": [
             {
@@ -546,7 +534,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
             "revalidation": "Revalidación Automática",
             "suspense": "Suspense",
             "typescript": "Typescript",
-            "understanding": "Understanding",
             "with-nextjs": "Next.js SSG and SSR",
             "wrap-toc-items": "Ajustar elementos de la tabla de contenido",
           },
@@ -773,7 +760,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
             "revalidation": "Авто-ревалидация",
             "suspense": "Задержка (Suspense)",
             "typescript": "Typescript",
-            "understanding": "Understanding",
             "with-nextjs": "Next.js SSG и SSR",
             "wrap-toc-items": "Обернуть таблицу содержимого элементов",
           },

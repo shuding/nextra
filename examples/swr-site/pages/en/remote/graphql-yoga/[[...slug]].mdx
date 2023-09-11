@@ -6,7 +6,9 @@ import json from '../../../../nextra-remote-filepaths/graphql-yoga.json'
 export async function getStaticProps({ params }) {
   const { user, repo, branch, docsPath, filePaths } = json
   const path = params.slug?.join('/') ?? 'index'
-  const foundPath = filePaths.find(filePath => filePath.startsWith(path))
+  const foundPath = filePaths.find(
+    filePath => filePath.replace(/\.mdx?/, '') === path
+  )
   const url = `https://raw.githubusercontent.com/${user}/${repo}/${branch}/${docsPath}${foundPath}`
   const response = await fetch(url)
   const data = await response.text()
