@@ -311,9 +311,7 @@ describe('Page Process', () => {
       )
     })
     expect(rawJs).toMatchInlineSnapshot(`
-      "export const pageMap = [{
-        data: {}
-      }];
+      "export const pageMap = [];
       export const dynamicMetaModules = {};"
     `)
   })

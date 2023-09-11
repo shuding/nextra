@@ -180,7 +180,7 @@ async function collectFiles({
   // @ts-expect-error TODO: fix type
   const hasMeta = items.some(item => item.properties[0].key.name === 'data')
 
-  if (!hasMeta) {
+  if (items.length && !hasMeta) {
     const allPages = items
       // Capitalize name of pages and folders
       // @ts-expect-error TODO: fix type
