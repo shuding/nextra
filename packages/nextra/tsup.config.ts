@@ -3,7 +3,7 @@ import { defineConfig } from 'tsup'
 export default defineConfig([
   {
     name: 'nextra',
-    entry: ['src/__temp__.js'],
+    entry: ['src/__temp__.cjs'],
     format: 'cjs',
     dts: false
   },

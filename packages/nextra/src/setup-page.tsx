@@ -3,11 +3,11 @@
  * This file should be never used directly, only in loader.ts
  */
 
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router.js'
 import type { FC, ReactElement } from 'react'
-import { NEXTRA_INTERNAL } from './constants'
-import { SSGContext } from './data'
-import { normalizePageRoute, pageTitleFromFilename } from './server/utils'
+import { NEXTRA_INTERNAL } from './constants.js'
+import { SSGContext } from './data.js'
+import { normalizePageRoute, pageTitleFromFilename } from './server/utils.js'
 import type {
   DynamicFolder,
   DynamicMeta,

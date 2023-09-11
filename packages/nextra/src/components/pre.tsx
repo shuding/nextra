@@ -1,9 +1,9 @@
 import cn from 'clsx'
 import type { ComponentProps, ReactElement } from 'react'
 import { useCallback, useRef } from 'react'
-import { WordWrapIcon } from '../icons'
-import { Button } from './button'
-import { CopyToClipboard } from './copy-to-clipboard'
+import { WordWrapIcon } from '../icons/index.js'
+import { Button } from './button.js'
+import { CopyToClipboard } from './copy-to-clipboard.js'
 
 export const Pre = ({
   children,

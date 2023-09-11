@@ -10,11 +10,11 @@ import {
   MARKDOWN_EXTENSION_REGEX,
   MARKDOWN_EXTENSIONS,
   META_REGEX
-} from '../constants'
-import { nextraConfigSchema } from '../schemas'
+} from '../constants.js'
+import { nextraConfigSchema } from '../schemas.js'
 import type { Nextra } from '../types'
-import { logger } from './utils'
-import { NextraPlugin, NextraSearchPlugin } from './webpack-plugins'
+import { logger } from './utils.js'
+import { NextraPlugin, NextraSearchPlugin } from './webpack-plugins/index.js'
 
 const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
 

@@ -1,4 +1,4 @@
-import { compileMdx } from '../src/server/compile'
+import { compileMdx } from '../src/server/compile.js'
 
 const mdxOptions = {
   jsx: true,

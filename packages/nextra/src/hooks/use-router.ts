@@ -1,4 +1,4 @@
-import { useRouter as useNextRouter } from 'next/router'
+import { useRouter as useNextRouter } from 'next/router.js'
 import { useMemo } from 'react'
 
 export const useRouter: typeof useNextRouter = () => {

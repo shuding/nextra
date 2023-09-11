@@ -1,11 +1,11 @@
 import path from 'node:path'
-import { NEXTRA_INTERNAL } from '../src/constants'
+import { NEXTRA_INTERNAL } from '../src/constants.js'
 import {
   getAllPages,
   getCurrentLevelPages,
   getPagesUnderRoute
-} from '../src/context'
-import { CWD } from '../src/server/constants'
+} from '../src/context.js'
+import { CWD } from '../src/server/constants.js'
 import type { NextraInternalGlobal } from '../src/types'
 
 describe('context', () => {

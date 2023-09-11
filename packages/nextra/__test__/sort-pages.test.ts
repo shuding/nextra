@@ -1,4 +1,4 @@
-import { sortPages } from '../src/server/utils'
+import { sortPages } from '../src/server/utils.js'
 
 describe('sortPages()', () => {
   it('should sort by date', () => {

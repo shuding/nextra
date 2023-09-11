@@ -1,5 +1,5 @@
 import cn from 'clsx'
-import NextLink from 'next/link'
+import NextLink from 'next/link.js'
 import type { ComponentProps, CSSProperties, ReactNode } from 'react'
 
 const classes = {

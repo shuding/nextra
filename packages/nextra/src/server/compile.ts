@@ -18,7 +18,7 @@ import {
   DEFAULT_LOCALE,
   ERROR_ROUTES,
   MARKDOWN_URL_EXTENSION_REGEX
-} from '../constants'
+} from '../constants.js'
 import type {
   FrontMatter,
   LoaderOptions,
@@ -26,8 +26,8 @@ import type {
   ReadingTime,
   StructurizedData
 } from '../types'
-import { truthy } from '../utils'
-import { CWD } from './constants'
+import { truthy } from '../utils.js'
+import { CWD } from './constants.js'
 import {
   attachMeta,
   parseMeta,
@@ -39,7 +39,7 @@ import {
   remarkRemoveImports,
   remarkStaticImage,
   remarkStructurize
-} from './mdx-plugins'
+} from './mdx-plugins/index.js'
 import theme from './theme.json'
 
 globalThis.__nextra_temp_do_not_use = () => {

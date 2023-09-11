@@ -1,6 +1,6 @@
 import path from 'node:path'
-import { CWD } from '../src/server/constants'
-import { collectPageMap } from '../src/server/page-map'
+import { CWD } from '../src/server/constants.js'
+import { collectPageMap } from '../src/server/page-map.js'
 
 describe('collectPageMap', () => {
   it('should work', async () => {
