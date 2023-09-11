@@ -440,9 +440,6 @@ importers:
       focus-visible:
         specifier: ^5.2.0
         version: 5.2.0
-      git-url-parse:
-        specifier: ^13.1.0
-        version: 13.1.0
       intersection-observer:
         specifier: ^0.12.2
         version: 0.12.2
@@ -468,9 +465,6 @@ importers:
       '@types/flexsearch':
         specifier: ^0.7.3
         version: 0.7.3
-      '@types/git-url-parse':
-        specifier: ^9.0.1
-        version: 9.0.1
       '@types/react':
         specifier: ^18.2.21
         version: 18.2.21
@@ -3225,10 +3219,6 @@ packages:
 
   /@types/flexsearch@0.7.3:
     resolution: {integrity: sha512-HXwADeHEP4exXkCIwy2n1+i0f1ilP1ETQOH5KDOugjkTFZPntWo0Gr8stZOaebkxsdx+k0X/K6obU/+it07ocg==}
-    dev: true
-
-  /@types/git-url-parse@9.0.1:
-    resolution: {integrity: sha512-Zf9mY4Mz7N3Nyi341nUkOtgVUQn4j6NS4ndqEha/lOgEbTkHzpD7wZuRagYKzrXNtvawWfsrojoC1nhsQexvNA==}
     dev: true
 
   /@types/graceful-fs@4.1.6:
