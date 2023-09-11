@@ -32,6 +32,13 @@ export default defineConfig({
       )
     )
     // this fixes hydration errors in client apps
-    await fs.writeFile(path.join(CWD, 'dist', 'client', 'package.json'), '{"sideEffects":false}')
+    await fs.writeFile(
+      path.join(CWD, 'dist', 'client', 'package.json'),
+      '{"sideEffects":false}'
+    )
+    await fs.writeFile(
+      path.join(CWD, 'dist', 'server', 'package.json'),
+      '{"type":"module","sideEffects":false}'
+    )
   }
 })

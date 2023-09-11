@@ -1,5 +1,5 @@
 import path from 'node:path'
-import { NEXTRA_INTERNAL } from '../src/constants.js'
+import { NEXTRA_INTERNAL } from '../src/client/constants.js'
 import {
   getAllPages,
   getCurrentLevelPages,

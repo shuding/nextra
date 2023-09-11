@@ -2,7 +2,7 @@ import type { Heading as MDASTHeading } from 'mdast'
 import type { NextConfig } from 'next'
 import type { FC, ReactNode } from 'react'
 import type { z } from 'zod'
-import type { NEXTRA_INTERNAL } from './constants'
+import type { NEXTRA_INTERNAL } from './client/constants.js'
 import type { MARKDOWN_EXTENSIONS, META_FILENAME } from './server/constants.js'
 import type { nextraConfigSchema, searchSchema } from './server/schemas'
 

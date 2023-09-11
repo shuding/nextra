@@ -1,7 +1,7 @@
 import pkg from 'next/dist/compiled/webpack/webpack.js'
 import type { Compiler } from 'webpack'
-import { IS_PRODUCTION } from '../constants.js'
 import type { SearchData } from '../../types'
+import { IS_PRODUCTION } from '../constants.js'
 
 const { sources, webpack } = pkg
 

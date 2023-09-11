@@ -5,11 +5,13 @@
 import path from 'node:path'
 import type { NextraConfig } from '../types'
 
-export {
-  DEFAULT_LOCALE,
-  ERROR_ROUTES,
-  MARKDOWN_EXTENSION_REGEX
-} from '../constants.js'
+export const MARKDOWN_EXTENSION_REGEX = /\.mdx?$/
+
+export const NEXTRA_INTERNAL = Symbol.for('__nextra_internal__')
+
+export const ERROR_ROUTES = new Set(['/404', '/500'])
+
+export const DEFAULT_LOCALE = 'en-US'
 
 export const CWD = process.cwd()
 
