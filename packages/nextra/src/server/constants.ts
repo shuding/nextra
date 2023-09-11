@@ -1,10 +1,15 @@
-import type { NextraConfig } from '../types'
-
 /*
  * Benefit of server/constants - do not include unneeded `path` polyfill in client bundle,
  * while importing constants in client file
  */
 import path from 'node:path'
+import type { NextraConfig } from '../types'
+
+export {
+  DEFAULT_LOCALE,
+  ERROR_ROUTES,
+  MARKDOWN_EXTENSION_REGEX
+} from '../client/constants.js'
 
 export const CWD = process.cwd()
 

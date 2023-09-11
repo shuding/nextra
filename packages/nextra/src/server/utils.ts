@@ -3,6 +3,8 @@ import slash from 'slash'
 import title from 'title'
 import type { Folder, MdxFile } from '../types'
 
+export { truthy } from '../client/utils.js'
+
 export const logger = {
   info: console.log.bind(null, '-', '\x1b[36minfo\x1b[0m', '[nextra]'),
   warn: console.log.bind(null, '-', '\x1b[33mwarn\x1b[0m', '[nextra]'),

@@ -13,8 +13,6 @@ import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 import remarkReadingTime from 'remark-reading-time'
 import type { Pluggable } from 'unified'
-import { DEFAULT_LOCALE, ERROR_ROUTES } from '../client/constants.js'
-import { truthy } from '../client/utils.js'
 import type {
   FrontMatter,
   LoaderOptions,
@@ -25,6 +23,8 @@ import type {
 import {
   CODE_BLOCK_FILENAME_REGEX,
   CWD,
+  DEFAULT_LOCALE,
+  ERROR_ROUTES,
   MARKDOWN_URL_EXTENSION_REGEX
 } from './constants.js'
 import {
@@ -40,6 +40,7 @@ import {
   remarkStructurize
 } from './mdx-plugins/index.js'
 import theme from './theme.json'
+import { truthy } from './utils.js'
 
 globalThis.__nextra_temp_do_not_use = () => {
   import('./__temp__.cjs')

@@ -3,14 +3,12 @@ import { createRequire } from 'node:module'
 import type { NextConfig } from 'next'
 import type { ZodError } from 'zod'
 import { fromZodError } from 'zod-validation-error'
-import {
-  DEFAULT_LOCALE,
-  MARKDOWN_EXTENSION_REGEX
-} from '../client/constants.js'
 import type { Nextra } from '../types'
 import {
   DEFAULT_CONFIG,
+  DEFAULT_LOCALE,
   DEFAULT_LOCALES,
+  MARKDOWN_EXTENSION_REGEX,
   MARKDOWN_EXTENSIONS,
   META_REGEX
 } from './constants.js'

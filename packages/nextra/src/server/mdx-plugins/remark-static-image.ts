@@ -3,7 +3,7 @@ import type { Root } from 'mdast'
 import slash from 'slash'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
-import { truthy } from '../../client/utils.js'
+import { truthy } from '../utils.js'
 import { EXTERNAL_URL_REGEX, PUBLIC_DIR } from '../constants.js'
 import { existsSync } from '../file-system.js'
 
