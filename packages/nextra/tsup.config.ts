@@ -1,4 +1,7 @@
+import fs from 'fs/promises'
+import path from 'node:path'
 import { defineConfig } from 'tsup'
+import { CWD } from './src/server/constants.js'
 
 export default defineConfig([
   {
@@ -15,6 +18,10 @@ export default defineConfig([
     format: 'esm',
     dts: true,
     splitting: false,
-    external: ['shiki', './__temp__', 'webpack']
+    external: ['shiki', './__temp__', 'webpack'],
+    async onSuccess() {
+      // this fixes hydration errors in client apps
+      await fs.writeFile(path.join(CWD, 'dist', 'client', 'package.json'), '{}')
+    }
   }
 ])

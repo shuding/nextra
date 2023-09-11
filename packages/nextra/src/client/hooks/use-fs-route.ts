@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router.js'
+import { useRouter } from 'next/router'
 import { useMemo } from 'react'
 import { DEFAULT_LOCALE, ERROR_ROUTES } from '../../constants.js'
 

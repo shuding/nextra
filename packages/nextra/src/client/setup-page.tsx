@@ -3,7 +3,7 @@
  * This file should be never used directly, only in loader.ts
  */
 
-import { useRouter } from 'next/router.js'
+import { useRouter } from 'next/router'
 import type { FC, ReactElement } from 'react'
 import { NEXTRA_INTERNAL } from '../constants.js'
 import { SSGContext } from './data.js'

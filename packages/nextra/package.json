@@ -36,6 +36,10 @@
       "import": "./dist/server/remote.js",
       "types": "./dist/server/remote.d.ts"
     },
+    "./schemas": {
+      "import": "./dist/schemas.js",
+      "types": "./dist/schemas.d.ts"
+    },
     "./*": {
       "import": "./dist/client/*.js",
       "types": "./dist/client/*.d.ts"
