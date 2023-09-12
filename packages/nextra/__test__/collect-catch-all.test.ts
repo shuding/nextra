@@ -4,8 +4,6 @@ import { collectCatchAllRoutes } from '../src/client/setup-page.js'
 describe('collectCatchAllRoutes', () => {
   it('should collect', () => {
     const meta = {
-      kind: 'Meta' as const,
-      locale: 'en-US',
       data: createCatchAllMeta([
         'configs.md',
         'custom-rules.md',
@@ -17,14 +15,9 @@ describe('collectCatchAllRoutes', () => {
       ])
     }
     const parent = {
-      kind: 'Folder' as const,
       name: 'nested',
       route: '/remote/nested',
-      children: [
-        meta,
-        { kind: 'Meta', locale: 'es-ES', data: {} },
-        { kind: 'Meta', locale: 'ru', data: {} }
-      ]
+      children: [meta]
     }
     collectCatchAllRoutes(parent, meta)
     expect(parent).toMatchInlineSnapshot(`
@@ -37,18 +30,6 @@ describe('collectCatchAllRoutes', () => {
               "getting-started": "Getting Started",
               "index": "Index",
             },
-            "kind": "Meta",
-            "locale": "en-US",
-          },
-          {
-            "data": {},
-            "kind": "Meta",
-            "locale": "es-ES",
-          },
-          {
-            "data": {},
-            "kind": "Meta",
-            "locale": "ru",
           },
           {
             "name": "configs",
@@ -103,7 +84,6 @@ describe('collectCatchAllRoutes', () => {
             "route": "/remote/nested",
           },
         ],
-        "kind": "Folder",
         "name": "nested",
         "route": "/remote/nested",
       }
@@ -112,7 +92,6 @@ describe('collectCatchAllRoutes', () => {
 
   it('should not create MdxPage for "*" key', () => {
     const meta = {
-      kind: 'Meta' as const,
       data: createCatchAllMeta([], {
         '*': {
           type: 'page',
@@ -125,7 +104,6 @@ describe('collectCatchAllRoutes', () => {
       })
     }
     const parent = {
-      kind: 'Folder' as const,
       name: 'nested',
       route: '/remote/nested',
       children: [meta]
@@ -145,10 +123,8 @@ describe('collectCatchAllRoutes', () => {
                 "type": "page",
               },
             },
-            "kind": "Meta",
           },
         ],
-        "kind": "Folder",
         "name": "nested",
         "route": "/remote/nested",
       }

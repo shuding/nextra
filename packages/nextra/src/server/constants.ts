@@ -2,7 +2,8 @@
  * Benefit of server/constants - do not include unneeded `path` polyfill in client bundle,
  * while importing constants in client file
  */
-import path from 'node:path'
+import path from 'path'
+import type { Property } from 'estree'
 import type { NextraConfig } from '../types'
 
 export {
@@ -42,3 +43,15 @@ export const EXTERNAL_URL_REGEX = /^https?:\/\//
 export const CODE_BLOCK_FILENAME_REGEX = /filename="([^"]+)"/
 
 export const DEFAULT_LOCALES = ['']
+
+// experimental, need to deep dive why bundle becomes bigger and there is full
+// reload while navigating between pages every time
+export const IMPORT_FRONTMATTER = false
+
+export const DEFAULT_PROPERTY_PROPS: Omit<Property, 'key' | 'value'> = {
+  type: 'Property',
+  kind: 'init',
+  method: false,
+  shorthand: false,
+  computed: false
+}

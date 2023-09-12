@@ -7,6 +7,7 @@ import type { nextraConfigSchema, searchSchema } from './server/schemas'
 
 export interface LoaderOptions extends NextraConfig {
   isPageImport?: boolean
+  isPageMapImport?: boolean
   isMetaFile?: boolean
   locales: string[]
 }

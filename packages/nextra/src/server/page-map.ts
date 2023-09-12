@@ -1,24 +1,25 @@
 import path from 'node:path'
-import type {
-  ArrayExpression,
-  ExportNamedDeclaration,
-  Expression,
-  ImportDeclaration,
-  ObjectExpression,
-  Property
-} from 'estree'
+import type { ArrayExpression, Expression, ImportDeclaration } from 'estree'
 import { toJs } from 'estree-util-to-js'
 import { valueToEstree } from 'estree-util-value-to-estree'
 import gracefulFs from 'graceful-fs'
 import grayMatter from 'gray-matter'
 import pLimit from 'p-limit'
 import {
+  DEFAULT_PROPERTY_PROPS,
+  IMPORT_FRONTMATTER,
   MARKDOWN_EXTENSION_REGEX,
   META_FILENAME,
   META_REGEX
 } from './constants.js'
 import { PAGES_DIR } from './file-system.js'
-import { normalizePageRoute, pageTitleFromFilename, truthy } from './utils.js'
+import {
+  createAstExportConst,
+  createAstObject,
+  normalizePageRoute,
+  pageTitleFromFilename,
+  truthy
+} from './utils.js'
 
 const fs = gracefulFs.promises
 
@@ -27,66 +28,35 @@ const limit = pLimit(20)
 type Import = { importName: string; filePath: string }
 type DynamicImport = { importName: string; route: string }
 
-const DEFAULT_OBJECT_PROPS: Omit<Property, 'key' | 'value'> = {
-  type: 'Property',
-  kind: 'init',
-  method: false,
-  shorthand: false,
-  computed: false
-}
-
-function createAstObject(
-  obj: Record<string, string | Expression>
-): ObjectExpression {
-  return {
-    type: 'ObjectExpression',
-    properties: Object.entries(obj).map(([key, value]) => ({
-      ...DEFAULT_OBJECT_PROPS,
-      key: { type: 'Identifier', name: key },
-      value:
-        value && typeof value === 'object' ? value : { type: 'Literal', value }
-    }))
-  }
-}
-
-function createAstExportConst(
-  name: string,
-  value: ArrayExpression | ObjectExpression
-): ExportNamedDeclaration {
-  return {
-    type: 'ExportNamedDeclaration',
-    specifiers: [],
-    declaration: {
-      type: 'VariableDeclaration',
-      kind: 'const',
-      declarations: [
-        {
-          type: 'VariableDeclarator',
-          id: { type: 'Identifier', name },
-          init: value
-        }
-      ]
-    }
-  }
-}
-
 type CollectFilesOptions = {
   dir: string
   route: string
-  metaImports?: Import[]
+  imports?: Import[]
   dynamicMetaImports?: DynamicImport[]
   isFollowingSymlink: boolean
+}
+
+function cleanFileName(name: string): string {
+  return (
+    path
+      .relative(PAGES_DIR, name)
+      .replace(/\.([jt]sx?|json|mdx?)$/, '')
+      .replaceAll(/[\W_]+/g, '_')
+      .replace(/^_/, '')
+      // Variable can't start with number
+      .replace(/^\d/, (match: string) => `_${match}`)
+  )
 }
 
 async function collectFiles({
   dir,
   route,
-  metaImports = [],
+  imports = [],
   dynamicMetaImports = [],
   isFollowingSymlink
 }: CollectFilesOptions): Promise<{
   pageMapAst: ArrayExpression
-  metaImports: Import[]
+  imports: Import[]
   dynamicMetaImports: DynamicImport[]
 }> {
   const files = await fs.readdir(dir, { withFileTypes: true })
@@ -120,7 +90,7 @@ async function collectFiles({
         const { pageMapAst } = await collectFiles({
           dir: filePath,
           route: fileRoute,
-          metaImports,
+          imports,
           dynamicMetaImports,
           isFollowingSymlink
         })
@@ -138,15 +108,25 @@ async function collectFiles({
       // add concurrency because folder can contain a lot of files
       return limit(async () => {
         if (MARKDOWN_EXTENSION_REGEX.test(ext)) {
-          const content = await fs.readFile(filePath, 'utf8')
-          const { data } = grayMatter(content)
+          let frontMatter: Expression
+
+          if (IMPORT_FRONTMATTER) {
+            const importName = cleanFileName(filePath)
+            imports.push({ importName, filePath })
+            frontMatter = { type: 'Identifier', name: importName }
+          } else {
+            const content = await fs.readFile(filePath, 'utf8')
+            const { data } = grayMatter(content)
+            frontMatter = valueToEstree({
+              sidebar_label: pageTitleFromFilename(name),
+              ...data
+            })
+          }
 
           return createAstObject({
             name: path.parse(filePath).name,
             route: fileRoute,
-            ...(Object.keys(data).length && {
-              frontMatter: valueToEstree(data)
-            })
+            frontMatter
           })
         }
 
@@ -154,12 +134,9 @@ async function collectFiles({
         const isMetaJs = META_REGEX.test(fileName)
 
         if (fileName === META_FILENAME || isMetaJs) {
-          const importName = path
-            .relative(PAGES_DIR, filePath)
-            .replace(/\.([jt]sx?|json)?$/, '')
-            .replaceAll(/[\W_]+/g, '_')
-            .replace(/^_/, '')
-          metaImports.push({ importName, filePath })
+          const importName = cleanFileName(filePath)
+          imports.push({ importName, filePath })
+
           if (isMetaJs) {
             const dynamicPage = array.find(f => f.name.startsWith('['))
             if (dynamicPage) {
@@ -198,7 +175,7 @@ async function collectFiles({
 
   return {
     pageMapAst: { type: 'ArrayExpression', elements: items },
-    metaImports,
+    imports,
     dynamicMetaImports
   }
 }
@@ -210,13 +187,13 @@ export async function collectPageMap({
   dir: string
   route?: string
 }): Promise<string> {
-  const { pageMapAst, metaImports, dynamicMetaImports } = await collectFiles({
+  const { pageMapAst, imports, dynamicMetaImports } = await collectFiles({
     dir,
     route,
     isFollowingSymlink: false
   })
 
-  const metaImportsAST: ImportDeclaration[] = metaImports
+  const metaImportsAST: ImportDeclaration[] = imports
     // localeCompare to avoid race condition
     .sort((a, b) => a.filePath.localeCompare(b.filePath))
     .map(({ filePath, importName }) => ({
@@ -224,8 +201,13 @@ export async function collectPageMap({
       source: { type: 'Literal', value: filePath },
       specifiers: [
         {
-          type: 'ImportDefaultSpecifier',
-          local: { type: 'Identifier', name: importName }
+          local: { type: 'Identifier', name: importName },
+          ...(IMPORT_FRONTMATTER && MARKDOWN_EXTENSION_REGEX.test(filePath)
+            ? {
+                type: 'ImportSpecifier',
+                imported: { type: 'Identifier', name: 'frontMatter' }
+              }
+            : { type: 'ImportDefaultSpecifier' })
         }
       ]
     }))
@@ -242,7 +224,7 @@ export async function collectPageMap({
           // localeCompare to avoid race condition
           .sort((a, b) => a.route.localeCompare(b.route))
           .map(({ importName, route }) => ({
-            ...DEFAULT_OBJECT_PROPS,
+            ...DEFAULT_PROPERTY_PROPS,
             key: { type: 'Literal', value: route },
             value: { type: 'Identifier', name: importName }
           }))

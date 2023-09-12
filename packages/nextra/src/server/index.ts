@@ -8,6 +8,7 @@ import {
   DEFAULT_CONFIG,
   DEFAULT_LOCALE,
   DEFAULT_LOCALES,
+  IMPORT_FRONTMATTER,
   MARKDOWN_EXTENSION_REGEX,
   MARKDOWN_EXTENSIONS,
   META_REGEX
@@ -104,14 +105,34 @@ const nextra: Nextra = nextraConfig => {
           // Resolves ESM _app file instead cjs, so we could import theme.config via `import` statement
           [defaultCJSAppPath]: defaultESMAppPath
         }
-        ;(config.module.rules as RuleSetRule[]).push(
+        const rules = config.module.rules as RuleSetRule[]
+
+        if (IMPORT_FRONTMATTER) {
+          rules.push({
+            test: MARKDOWN_EXTENSION_REGEX,
+            issuer: request =>
+              request.includes('.next/static/chunks/nextra-page-map'),
+            use: [
+              options.defaultLoaders.babel,
+              {
+                loader: 'nextra/loader',
+                options: { ...loaderOptions, isPageMapImport: true }
+              }
+            ]
+          })
+        }
+
+        rules.push(
           {
             // Match Markdown imports from non-pages. These imports have an
             // issuer, which can be anything as long as it's not empty.
             // When the issuer is null, it means that it can be imported via a
             // runtime import call such as `import('...')`.
             test: MARKDOWN_EXTENSION_REGEX,
-            issuer: request => !!request || request === null,
+            issuer: request =>
+              (!!request &&
+                !request.includes('.next/static/chunks/nextra-page-map')) ||
+              request === null,
             use: [
               options.defaultLoaders.babel,
               {
@@ -128,10 +149,7 @@ const nextra: Nextra = nextraConfig => {
               options.defaultLoaders.babel,
               {
                 loader: 'nextra/loader',
-                options: {
-                  ...loaderOptions,
-                  isPageImport: true
-                }
+                options: { ...loaderOptions, isPageImport: true }
               }
             ]
           },

@@ -153,7 +153,6 @@
     "@types/react-dom": "^18.2.7",
     "@types/webpack": "^5.28.2",
     "@vitejs/plugin-react": "^3.0.1",
-    "fast-glob": "^3.2.12",
     "next": "^13.4.19",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

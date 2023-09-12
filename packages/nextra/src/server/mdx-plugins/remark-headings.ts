@@ -1,9 +1,11 @@
+import type { SpreadElement } from 'estree'
 import Slugger from 'github-slugger'
 import type { Parent, Root } from 'mdast'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 import type { Heading } from '../../types'
 import { MARKDOWN_EXTENSION_REGEX } from '../constants.js'
+import { createAstExportConst, createAstObject } from '../utils.js'
 import type { HProperties } from './remark-custom-heading-id'
 
 const getFlattenedValue = (node: Parent): string =>
@@ -28,12 +30,12 @@ export const remarkHeadings: Plugin<
   let title: string
 
   const slugger = new Slugger()
-  return (tree, file, done) => {
+  return (ast, file) => {
     const PartialComponentToHeadingsName: Record<string, string> =
       Object.create(null)
 
     visit(
-      tree,
+      ast,
       [
         'heading',
         // push partial component's __toc export name to headings list
@@ -109,52 +111,30 @@ export const remarkHeadings: Plugin<
     if (isRemoteContent) {
       // Attach headings for remote content, because we can't access to __toc variable
       file.data.headings = headings
-      done()
       return
     }
 
     const headingElements = headings.map(heading =>
       typeof heading === 'string'
-        ? {
+        ? ({
             type: 'SpreadElement',
             argument: { type: 'Identifier', name: heading }
-          }
-        : {
-            type: 'ObjectExpression',
-            properties: Object.entries(heading).map(([key, value]) => ({
-              type: 'Property',
-              kind: 'init',
-              key: { type: 'Identifier', name: key },
-              value: { type: 'Literal', value }
-            }))
-          }
+          } satisfies SpreadElement)
+        : createAstObject(heading)
     )
 
-    tree.children.push({
+    ast.children.push({
       type: 'mdxjsEsm',
       data: {
         estree: {
           body: [
-            {
-              type: 'ExportNamedDeclaration',
-              specifiers: [],
-              declaration: {
-                type: 'VariableDeclaration',
-                kind: 'const',
-                declarations: [
-                  {
-                    type: 'VariableDeclarator',
-                    id: { type: 'Identifier', name: exportName },
-                    init: { type: 'ArrayExpression', elements: headingElements }
-                  }
-                ]
-              }
-            }
+            createAstExportConst(exportName, {
+              type: 'ArrayExpression',
+              elements: headingElements
+            })
           ]
         }
       }
     } as any)
-
-    done()
   }
 }

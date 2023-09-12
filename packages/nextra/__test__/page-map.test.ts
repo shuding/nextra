@@ -40,16 +40,28 @@ describe('collectPageMap', () => {
           data: examples_swr_site_pages_en_about_meta
         }, {
           name: \\"a-page\\",
-          route: \\"/en/about/a-page\\"
+          route: \\"/en/about/a-page\\",
+          frontMatter: {
+            \\"sidebar_label\\": \\"A Page\\"
+          }
         }, {
           name: \\"acknowledgement\\",
-          route: \\"/en/about/acknowledgement\\"
+          route: \\"/en/about/acknowledgement\\",
+          frontMatter: {
+            \\"sidebar_label\\": \\"Acknowledgement\\"
+          }
         }, {
           name: \\"changelog\\",
-          route: \\"/en/about/changelog\\"
+          route: \\"/en/about/changelog\\",
+          frontMatter: {
+            \\"sidebar_label\\": \\"Changelog\\"
+          }
         }, {
           name: \\"team\\",
-          route: \\"/en/about/team\\"
+          route: \\"/en/about/team\\",
+          frontMatter: {
+            \\"sidebar_label\\": \\"Team\\"
+          }
         }]
       }, {
         name: \\"blog\\",
@@ -60,6 +72,7 @@ describe('collectPageMap', () => {
           name: \\"swr-v1\\",
           route: \\"/en/blog/swr-v1\\",
           frontMatter: {
+            \\"sidebar_label\\": \\"SWR V1\\",
             \\"image\\": \\"https://assets.vercel.com/image/upload/v1630059453/swr/v1.png\\",
             \\"description\\": \\"Almost 2 years ago we open sourced SWR, the tiny data-fetching React library that people love. Today we are reaching another milestone: the 1.0 version of SWR.\\"
           }
@@ -68,6 +81,7 @@ describe('collectPageMap', () => {
         name: \\"blog\\",
         route: \\"/en/blog\\",
         frontMatter: {
+          \\"sidebar_label\\": \\"Blog\\",
           \\"searchable\\": false
         }
       }, {
@@ -77,7 +91,10 @@ describe('collectPageMap', () => {
           data: examples_swr_site_pages_en_docs_meta
         }, {
           name: \\"404-500\\",
-          route: \\"/en/docs/404-500\\"
+          route: \\"/en/docs/404-500\\",
+          frontMatter: {
+            \\"sidebar_label\\": \\"404 500\\"
+          }
         }, {
           name: \\"advanced\\",
           route: \\"/en/docs/advanced\\",
@@ -85,22 +102,40 @@ describe('collectPageMap', () => {
             data: examples_swr_site_pages_en_docs_advanced_meta
           }, {
             name: \\"cache\\",
-            route: \\"/en/docs/advanced/cache\\"
+            route: \\"/en/docs/advanced/cache\\",
+            frontMatter: {
+              \\"sidebar_label\\": \\"Cache\\"
+            }
           }, {
             name: \\"code-highlighting\\",
-            route: \\"/en/docs/advanced/code-highlighting\\"
+            route: \\"/en/docs/advanced/code-highlighting\\",
+            frontMatter: {
+              \\"sidebar_label\\": \\"Code Highlighting\\"
+            }
           }, {
             name: \\"dynamic-markdown-import\\",
-            route: \\"/en/docs/advanced/dynamic-markdown-import\\"
+            route: \\"/en/docs/advanced/dynamic-markdown-import\\",
+            frontMatter: {
+              \\"sidebar_label\\": \\"Dynamic Markdown Import\\"
+            }
           }, {
             name: \\"file-name.with.DOTS\\",
-            route: \\"/en/docs/advanced/file-name.with.DOTS\\"
+            route: \\"/en/docs/advanced/file-name.with.DOTS\\",
+            frontMatter: {
+              \\"sidebar_label\\": \\"File Name.with.dots\\"
+            }
           }, {
             name: \\"images\\",
-            route: \\"/en/docs/advanced/images\\"
+            route: \\"/en/docs/advanced/images\\",
+            frontMatter: {
+              \\"sidebar_label\\": \\"Images\\"
+            }
           }, {
             name: \\"markdown-import\\",
-            route: \\"/en/docs/advanced/markdown-import\\"
+            route: \\"/en/docs/advanced/markdown-import\\",
+            frontMatter: {
+              \\"sidebar_label\\": \\"Markdown Import\\"
+            }
           }, {
             name: \\"more\\",
             route: \\"/en/docs/advanced/more\\",
@@ -111,7 +146,10 @@ describe('collectPageMap', () => {
               }
             }, {
               name: \\"loooooooooooooooooooong-title\\",
-              route: \\"/en/docs/advanced/more/loooooooooooooooooooong-title\\"
+              route: \\"/en/docs/advanced/more/loooooooooooooooooooong-title\\",
+              frontMatter: {
+                \\"sidebar_label\\": \\"Loooooooooooooooooooong Title\\"
+              }
             }, {
               name: \\"tree\\",
               route: \\"/en/docs/advanced/more/tree\\",
@@ -123,94 +161,181 @@ describe('collectPageMap', () => {
                 }
               }, {
                 name: \\"one\\",
-                route: \\"/en/docs/advanced/more/tree/one\\"
+                route: \\"/en/docs/advanced/more/tree/one\\",
+                frontMatter: {
+                  \\"sidebar_label\\": \\"One\\"
+                }
               }, {
                 name: \\"three\\",
-                route: \\"/en/docs/advanced/more/tree/three\\"
+                route: \\"/en/docs/advanced/more/tree/three\\",
+                frontMatter: {
+                  \\"sidebar_label\\": \\"Three\\"
+                }
               }, {
                 name: \\"two\\",
-                route: \\"/en/docs/advanced/more/tree/two\\"
+                route: \\"/en/docs/advanced/more/tree/two\\",
+                frontMatter: {
+                  \\"sidebar_label\\": \\"Two\\"
+                }
               }]
             }]
           }, {
             name: \\"performance\\",
-            route: \\"/en/docs/advanced/performance\\"
+            route: \\"/en/docs/advanced/performance\\",
+            frontMatter: {
+              \\"sidebar_label\\": \\"Performance\\"
+            }
           }, {
             name: \\"react-native\\",
-            route: \\"/en/docs/advanced/react-native\\"
+            route: \\"/en/docs/advanced/react-native\\",
+            frontMatter: {
+              \\"sidebar_label\\": \\"React Native\\"
+            }
           }, {
             name: \\"scrollbar-x\\",
-            route: \\"/en/docs/advanced/scrollbar-x\\"
+            route: \\"/en/docs/advanced/scrollbar-x\\",
+            frontMatter: {
+              \\"sidebar_label\\": \\"Scrollbar X\\"
+            }
           }]
         }, {
           name: \\"advanced\\",
-          route: \\"/en/docs/advanced\\"
+          route: \\"/en/docs/advanced\\",
+          frontMatter: {
+            \\"sidebar_label\\": \\"Advanced\\"
+          }
         }, {
           name: \\"arguments\\",
-          route: \\"/en/docs/arguments\\"
+          route: \\"/en/docs/arguments\\",
+          frontMatter: {
+            \\"sidebar_label\\": \\"Arguments\\"
+          }
         }, {
           name: \\"callout\\",
-          route: \\"/en/docs/callout\\"
+          route: \\"/en/docs/callout\\",
+          frontMatter: {
+            \\"sidebar_label\\": \\"Callout\\"
+          }
         }, {
           name: \\"change-log\\",
-          route: \\"/en/docs/change-log\\"
+          route: \\"/en/docs/change-log\\",
+          frontMatter: {
+            \\"sidebar_label\\": \\"Change Log\\"
+          }
         }, {
           name: \\"code-block-without-language\\",
-          route: \\"/en/docs/code-block-without-language\\"
+          route: \\"/en/docs/code-block-without-language\\",
+          frontMatter: {
+            \\"sidebar_label\\": \\"Code Block without Language\\"
+          }
         }, {
           name: \\"conditional-fetching\\",
-          route: \\"/en/docs/conditional-fetching\\"
+          route: \\"/en/docs/conditional-fetching\\",
+          frontMatter: {
+            \\"sidebar_label\\": \\"Conditional Fetching\\"
+          }
         }, {
           name: \\"custom-header-ids\\",
-          route: \\"/en/docs/custom-header-ids\\"
+          route: \\"/en/docs/custom-header-ids\\",
+          frontMatter: {
+            \\"sidebar_label\\": \\"Custom Header Ids\\"
+          }
         }, {
           name: \\"data-fetching\\",
-          route: \\"/en/docs/data-fetching\\"
+          route: \\"/en/docs/data-fetching\\",
+          frontMatter: {
+            \\"sidebar_label\\": \\"Data Fetching\\"
+          }
         }, {
           name: \\"error-handling\\",
-          route: \\"/en/docs/error-handling\\"
+          route: \\"/en/docs/error-handling\\",
+          frontMatter: {
+            \\"sidebar_label\\": \\"Error Handling\\"
+          }
         }, {
           name: \\"getting-started\\",
-          route: \\"/en/docs/getting-started\\"
+          route: \\"/en/docs/getting-started\\",
+          frontMatter: {
+            \\"sidebar_label\\": \\"Getting Started\\"
+          }
         }, {
           name: \\"global-configuration\\",
-          route: \\"/en/docs/global-configuration\\"
+          route: \\"/en/docs/global-configuration\\",
+          frontMatter: {
+            \\"sidebar_label\\": \\"Global Configuration\\"
+          }
         }, {
           name: \\"middleware\\",
-          route: \\"/en/docs/middleware\\"
+          route: \\"/en/docs/middleware\\",
+          frontMatter: {
+            \\"sidebar_label\\": \\"Middleware\\"
+          }
         }, {
           name: \\"mutation\\",
-          route: \\"/en/docs/mutation\\"
+          route: \\"/en/docs/mutation\\",
+          frontMatter: {
+            \\"sidebar_label\\": \\"Mutation\\"
+          }
         }, {
           name: \\"options\\",
-          route: \\"/en/docs/options\\"
+          route: \\"/en/docs/options\\",
+          frontMatter: {
+            \\"sidebar_label\\": \\"Options\\"
+          }
         }, {
           name: \\"pagination\\",
-          route: \\"/en/docs/pagination\\"
+          route: \\"/en/docs/pagination\\",
+          frontMatter: {
+            \\"sidebar_label\\": \\"Pagination\\"
+          }
         }, {
           name: \\"prefetching\\",
-          route: \\"/en/docs/prefetching\\"
+          route: \\"/en/docs/prefetching\\",
+          frontMatter: {
+            \\"sidebar_label\\": \\"Prefetching\\"
+          }
         }, {
           name: \\"raw-layout\\",
-          route: \\"/en/docs/raw-layout\\"
+          route: \\"/en/docs/raw-layout\\",
+          frontMatter: {
+            \\"sidebar_label\\": \\"Raw Layout\\"
+          }
         }, {
           name: \\"revalidation\\",
-          route: \\"/en/docs/revalidation\\"
+          route: \\"/en/docs/revalidation\\",
+          frontMatter: {
+            \\"sidebar_label\\": \\"Revalidation\\"
+          }
         }, {
           name: \\"suspense\\",
-          route: \\"/en/docs/suspense\\"
+          route: \\"/en/docs/suspense\\",
+          frontMatter: {
+            \\"sidebar_label\\": \\"Suspense\\"
+          }
         }, {
           name: \\"typescript\\",
-          route: \\"/en/docs/typescript\\"
+          route: \\"/en/docs/typescript\\",
+          frontMatter: {
+            \\"sidebar_label\\": \\"TypeScript\\"
+          }
         }, {
           name: \\"understanding\\",
-          route: \\"/en/docs/understanding\\"
+          route: \\"/en/docs/understanding\\",
+          frontMatter: {
+            \\"sidebar_label\\": \\"Understanding\\"
+          }
         }, {
           name: \\"with-nextjs\\",
-          route: \\"/en/docs/with-nextjs\\"
+          route: \\"/en/docs/with-nextjs\\",
+          frontMatter: {
+            \\"sidebar_label\\": \\"With Nextjs\\"
+          }
         }, {
           name: \\"wrap-toc-items\\",
-          route: \\"/en/docs/wrap-toc-items\\"
+          route: \\"/en/docs/wrap-toc-items\\",
+          frontMatter: {
+            \\"sidebar_label\\": \\"Wrap Toc Items\\"
+          }
         }]
       }, {
         name: \\"examples\\",
@@ -221,6 +346,7 @@ describe('collectPageMap', () => {
           name: \\"auth\\",
           route: \\"/en/examples/auth\\",
           frontMatter: {
+            \\"sidebar_label\\": \\"Auth\\",
             \\"title\\": \\"Authentication\\",
             \\"full\\": true
           }
@@ -228,6 +354,7 @@ describe('collectPageMap', () => {
           name: \\"basic\\",
           route: \\"/en/examples/basic\\",
           frontMatter: {
+            \\"sidebar_label\\": \\"Basic\\",
             \\"title\\": \\"Basic Usage\\",
             \\"full\\": true
           }
@@ -235,16 +362,21 @@ describe('collectPageMap', () => {
           name: \\"error-handling\\",
           route: \\"/en/examples/error-handling\\",
           frontMatter: {
+            \\"sidebar_label\\": \\"Error Handling\\",
             \\"title\\": \\"Error Handling\\",
             \\"full\\": true
           }
         }, {
           name: \\"full\\",
-          route: \\"/en/examples/full\\"
+          route: \\"/en/examples/full\\",
+          frontMatter: {
+            \\"sidebar_label\\": \\"Full\\"
+          }
         }, {
           name: \\"infinite-loading\\",
           route: \\"/en/examples/infinite-loading\\",
           frontMatter: {
+            \\"sidebar_label\\": \\"Infinite Loading\\",
             \\"title\\": \\"Infinite Loading\\",
             \\"full\\": true
           }
@@ -252,17 +384,22 @@ describe('collectPageMap', () => {
           name: \\"ssr\\",
           route: \\"/en/examples/ssr\\",
           frontMatter: {
+            \\"sidebar_label\\": \\"SSR\\",
             \\"title\\": \\"Next.js SSR\\",
             \\"full\\": true
           }
         }]
       }, {
         name: \\"foo\\",
-        route: \\"/en/foo\\"
+        route: \\"/en/foo\\",
+        frontMatter: {
+          \\"sidebar_label\\": \\"Foo\\"
+        }
       }, {
         name: \\"index\\",
         route: \\"/en\\",
         frontMatter: {
+          \\"sidebar_label\\": \\"Index\\",
           \\"title\\": \\"React Hooks for Data Fetching\\",
           \\"searchable\\": false
         }
@@ -289,7 +426,10 @@ describe('collectPageMap', () => {
         }]
       }, {
         name: \\"test\\",
-        route: \\"/en/test\\"
+        route: \\"/en/test\\",
+        frontMatter: {
+          \\"sidebar_label\\": \\"Test\\"
+        }
       }];
       export const dynamicMetaModules = {
         \\"/en/remote/graphql-eslint\\": examples_swr_site_pages_en_remote_graphql_eslint_meta,
@@ -334,10 +474,16 @@ describe('Page Process', () => {
         }
       }, {
         name: \\"callout\\",
-        route: \\"/callout\\"
+        route: \\"/callout\\",
+        frontMatter: {
+          \\"sidebar_label\\": \\"Callout\\"
+        }
       }, {
         name: \\"tabs\\",
-        route: \\"/tabs\\"
+        route: \\"/tabs\\",
+        frontMatter: {
+          \\"sidebar_label\\": \\"Tabs\\"
+        }
       }];
       export const dynamicMetaModules = {};"
     `)
@@ -370,11 +516,17 @@ describe('Page Process', () => {
           }
         }, {
           name: \\"test2\\",
-          route: \\"/docs/test2\\"
+          route: \\"/docs/test2\\",
+          frontMatter: {
+            \\"sidebar_label\\": \\"Test2\\"
+          }
         }]
       }, {
         name: \\"test1\\",
-        route: \\"/test1\\"
+        route: \\"/test1\\",
+        frontMatter: {
+          \\"sidebar_label\\": \\"Test1\\"
+        }
       }];
       export const dynamicMetaModules = {};"
     `)

@@ -54,6 +54,7 @@ export async function loader(
 ): Promise<string> {
   const {
     isPageImport = false,
+    isPageMapImport,
     isMetaFile,
     theme,
     themeConfig,
@@ -162,9 +163,9 @@ ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
     locale,
     filePath: mdxPath,
     useCachedCompiler: true,
-    isPageImport
+    isPageImport,
+    isPageMapImport
   })
-
   // Imported as a normal component, no need to add the layout.
   if (!isPageImport) {
     return result

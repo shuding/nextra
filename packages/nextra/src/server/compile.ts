@@ -93,6 +93,7 @@ type CompileMdxOptions = Pick<
   filePath?: string
   useCachedCompiler?: boolean
   isPageImport?: boolean
+  isPageMapImport?: boolean
 }
 
 export async function compileMdx(
@@ -109,9 +110,41 @@ export async function compileMdx(
     mdxOptions = {},
     filePath = '',
     useCachedCompiler,
-    isPageImport = true
+    isPageImport = true,
+    isPageMapImport
   }: CompileMdxOptions = {}
 ) {
+  const {
+    jsx = false,
+    format: _format = 'mdx',
+    outputFormat = 'function-body',
+    remarkPlugins,
+    rehypePlugins,
+    rehypePrettyCodeOptions
+  }: MdxOptions = mdxOptions
+
+  const format =
+    _format === 'detect' ? (filePath.endsWith('.mdx') ? 'mdx' : 'md') : _format
+
+  if (isPageMapImport) {
+    const compiler = createProcessor({
+      format,
+      remarkPlugins: [
+        remarkFrontmatter, // parse and attach yaml node
+        remarkMdxFrontMatter
+      ]
+    })
+    const vFile = await compiler.process(
+      filePath ? { value: source, path: filePath } : source
+    )
+    const content = vFile.toString()
+
+    const index = content.lastIndexOf('function _createMdxContent(props) {')
+    const result = content.slice(0, index)
+
+    return { result } as any
+  }
+
   let searchIndexKey: string | null = null
   if (ERROR_ROUTES.has(route)) {
     /* skip */
@@ -127,18 +160,6 @@ export async function compileMdx(
   } else if (search) {
     searchIndexKey = locale || DEFAULT_LOCALE
   }
-
-  const {
-    jsx = false,
-    format: _format = 'mdx',
-    outputFormat = 'function-body',
-    remarkPlugins,
-    rehypePlugins,
-    rehypePrettyCodeOptions
-  }: MdxOptions = mdxOptions
-
-  const format =
-    _format === 'detect' ? (filePath.endsWith('.mdx') ? 'mdx' : 'md') : _format
 
   // https://github.com/shuding/nextra/issues/1303
   const isFileOutsideCWD =
