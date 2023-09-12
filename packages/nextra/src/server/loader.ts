@@ -140,17 +140,11 @@ ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
 
   const {
     result,
-    // @ts-expect-error
     title,
-    // @ts-expect-error
     frontMatter,
-    // @ts-expect-error
     structurizedData,
-    // @ts-expect-error
     searchIndexKey,
-    // @ts-expect-error
     hasJsxInH1,
-    // @ts-expect-error
     readingTime
   } = await compileMdx(source, {
     mdxOptions: {

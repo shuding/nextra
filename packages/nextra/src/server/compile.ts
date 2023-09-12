@@ -127,7 +127,7 @@ export async function compileMdx(
       0,
       result.lastIndexOf('function _createMdxContent(props) {')
     )
-    return { result: res }
+    return { result: res } as any
   }
 
   let searchIndexKey: string | null = null
