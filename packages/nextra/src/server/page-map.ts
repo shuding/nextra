@@ -153,26 +153,6 @@ async function collectFiles({
 
   const items = (await Promise.all(promises)).filter(truthy)
 
-  // @ts-expect-error TODO: fix type
-  const hasMeta = items.some(item => item.properties[0].key.name === 'data')
-
-  if (items.length && !hasMeta) {
-    const allPages = items
-      // Capitalize name of pages and folders
-      // @ts-expect-error TODO: fix type
-      .map(item => item.properties[0].value.value)
-
-    items.unshift(
-      createAstObject({
-        data: valueToEstree(
-          Object.fromEntries(
-            allPages.map(name => [name, pageTitleFromFilename(name)])
-          )
-        )
-      })
-    )
-  }
-
   return {
     pageMapAst: { type: 'ArrayExpression', elements: items },
     imports,

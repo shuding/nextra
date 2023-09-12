@@ -140,11 +140,6 @@ describe('collectPageMap', () => {
             name: \\"more\\",
             route: \\"/en/docs/advanced/more\\",
             children: [{
-              data: {
-                \\"loooooooooooooooooooong-title\\": \\"Loooooooooooooooooooong Title\\",
-                \\"tree\\": \\"Tree\\"
-              }
-            }, {
               name: \\"loooooooooooooooooooong-title\\",
               route: \\"/en/docs/advanced/more/loooooooooooooooooooong-title\\",
               frontMatter: {
@@ -154,12 +149,6 @@ describe('collectPageMap', () => {
               name: \\"tree\\",
               route: \\"/en/docs/advanced/more/tree\\",
               children: [{
-                data: {
-                  \\"one\\": \\"One\\",
-                  \\"three\\": \\"Three\\",
-                  \\"two\\": \\"Two\\"
-                }
-              }, {
                 name: \\"one\\",
                 route: \\"/en/docs/advanced/more/tree/one\\",
                 frontMatter: {
@@ -407,11 +396,6 @@ describe('collectPageMap', () => {
         name: \\"remote\\",
         route: \\"/en/remote\\",
         children: [{
-          data: {
-            \\"graphql-eslint\\": \\"GraphQL Eslint\\",
-            \\"graphql-yoga\\": \\"GraphQL Yoga\\"
-          }
-        }, {
           name: \\"graphql-eslint\\",
           route: \\"/en/remote/graphql-eslint\\",
           children: [{
@@ -456,7 +440,7 @@ describe('Page Process', () => {
     `)
   })
 
-  it("should add `_meta.json` file if it's missing", async () => {
+  it("should not add `_meta.json` file if it's missing", async () => {
     const rawJs = await collectPageMap({
       dir: path.join(
         CWD,
@@ -468,11 +452,6 @@ describe('Page Process', () => {
     })
     expect(rawJs).toMatchInlineSnapshot(`
       "export const pageMap = [{
-        data: {
-          \\"callout\\": \\"Callout\\",
-          \\"tabs\\": \\"Tabs\\"
-        }
-      }, {
         name: \\"callout\\",
         route: \\"/callout\\",
         frontMatter: {
@@ -503,18 +482,9 @@ describe('Page Process', () => {
 
     expect(rawJs).toMatchInlineSnapshot(`
       "export const pageMap = [{
-        data: {
-          \\"docs\\": \\"Docs\\",
-          \\"test1\\": \\"Test1\\"
-        }
-      }, {
         name: \\"docs\\",
         route: \\"/docs\\",
         children: [{
-          data: {
-            \\"test2\\": \\"Test2\\"
-          }
-        }, {
           name: \\"test2\\",
           route: \\"/docs/test2\\",
           frontMatter: {
