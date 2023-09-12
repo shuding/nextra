@@ -2,6 +2,10 @@ import path from 'node:path'
 import { CWD } from '../src/server/constants.js'
 import { collectPageMap } from '../src/server/page-map.js'
 
+function clean(content: string): string {
+  return content.replace(/\s+const dynamicMetaModules.+/s, '')
+}
+
 describe('collectPageMap', () => {
   it('should work', async () => {
     const dir = path.join(
@@ -13,7 +17,7 @@ describe('collectPageMap', () => {
       'pages',
       'en'
     )
-    const rawJs = await collectPageMap({ dir, route: '/en' })
+    const rawJs = await collectPageMap({ dir, route: '/en', locale: 'en' })
 
     // To fix tests on CI
     const rawJsWithCleanImportPath = rawJs.replaceAll(
@@ -424,7 +428,7 @@ describe('collectPageMap', () => {
 
       if (typeof window === 'undefined') {
         globalThis.__nextra_resolvePageMap ||= Object.create(null)
-        globalThis.__nextra_resolvePageMap['undefined'] = resolvePageMap('undefined', dynamicMetaModules)
+        globalThis.__nextra_resolvePageMap['en'] = resolvePageMap('en', dynamicMetaModules)
       }"
     `)
   })
@@ -441,16 +445,9 @@ describe('Page Process', () => {
         'folder-without-markdown-files'
       )
     })
-    expect(rawJs).toMatchInlineSnapshot(`
+    expect(clean(rawJs)).toMatchInlineSnapshot(`
       "export const pageMap = [];
-      const dynamicMetaModules = {};
-
-      import { resolvePageMap } from 'nextra/setup-page'
-
-      if (typeof window === 'undefined') {
-        globalThis.__nextra_resolvePageMap ||= Object.create(null)
-        globalThis.__nextra_resolvePageMap['undefined'] = resolvePageMap('undefined', dynamicMetaModules)
-      }"
+      "
     `)
   })
 
@@ -464,7 +461,7 @@ describe('Page Process', () => {
         'folder-without-meta-json'
       )
     })
-    expect(rawJs).toMatchInlineSnapshot(`
+    expect(clean(rawJs)).toMatchInlineSnapshot(`
       "export const pageMap = [{
         name: \\"callout\\",
         route: \\"/callout\\",
@@ -478,14 +475,7 @@ describe('Page Process', () => {
           \\"sidebar_label\\": \\"Tabs\\"
         }
       }];
-      const dynamicMetaModules = {};
-
-      import { resolvePageMap } from 'nextra/setup-page'
-
-      if (typeof window === 'undefined') {
-        globalThis.__nextra_resolvePageMap ||= Object.create(null)
-        globalThis.__nextra_resolvePageMap['undefined'] = resolvePageMap('undefined', dynamicMetaModules)
-      }"
+      "
     `)
   })
 
@@ -501,7 +491,7 @@ describe('Page Process', () => {
       )
     })
 
-    expect(rawJs).toMatchInlineSnapshot(`
+    expect(clean(rawJs)).toMatchInlineSnapshot(`
       "export const pageMap = [{
         name: \\"docs\\",
         route: \\"/docs\\",
@@ -519,14 +509,7 @@ describe('Page Process', () => {
           \\"sidebar_label\\": \\"Test1\\"
         }
       }];
-      const dynamicMetaModules = {};
-
-      import { resolvePageMap } from 'nextra/setup-page'
-
-      if (typeof window === 'undefined') {
-        globalThis.__nextra_resolvePageMap ||= Object.create(null)
-        globalThis.__nextra_resolvePageMap['undefined'] = resolvePageMap('undefined', dynamicMetaModules)
-      }"
+      "
     `)
   })
 
