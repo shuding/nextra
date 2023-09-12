@@ -22,7 +22,7 @@ export const logger = {
 }
 
 export function pageTitleFromFilename(fileName: string) {
-  return title(fileName.replaceAll(/[-_]/g, ' '))
+  return title(fileName.replaceAll(/[-_]/g, ' '), { special: ['SSR'] })
 }
 
 export function sortPages(

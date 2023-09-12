@@ -568,7 +568,7 @@ exports[`Page Process > should match i18n site page maps 1`] = `
         {
           "frontMatter": {
             "full": true,
-            "sidebar_label": "Ssr",
+            "sidebar_label": "SSR",
             "title": "Next.js SSR",
           },
           "name": "ssr",
@@ -1182,7 +1182,7 @@ exports[`Page Process > should match i18n site page maps 1`] = `
         {
           "frontMatter": {
             "full": true,
-            "sidebar_label": "Ssr",
+            "sidebar_label": "SSR",
             "title": "Next.js SSR",
           },
           "name": "ssr",
