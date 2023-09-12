@@ -105,15 +105,11 @@ export const resolvePageMap =
     return (cachedResolvedPageMap = clonedPageMap)
   }
 
-export function setupNextraPage({
-  pageOpts,
-  MDXContent,
-  route
-}: {
-  pageOpts: PageOpts
-  MDXContent: FC
-  route: string
-}) {
+export function setupNextraPage(
+  MDXContent: FC,
+  route: string,
+  { pageOpts }: { pageOpts: PageOpts }
+) {
   // Make sure the same component is always returned so Next.js will render the
   // stable layout. We then put the actual content into a global store and use
   // the route to identify it.

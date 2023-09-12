@@ -102,6 +102,10 @@ async function loader(
   const isLocalTheme = theme.startsWith('.') || theme.startsWith('/')
   const layoutPath = isLocalTheme ? slash(path.resolve(theme)) : theme
 
+  const cssImports = `
+${latex ? "import 'katex/dist/katex.min.css'" : ''}
+${OFFICIAL_THEMES.includes(theme) ? `import '${theme}/style.css'` : ''}`
+
   if (mdxPath.includes('/pages/_app.')) {
     isAppFileFromNodeModules = mdxPath.includes('/node_modules/')
     // Relative path instead of a package name
@@ -111,7 +115,7 @@ async function loader(
 
     const content = isAppFileFromNodeModules
       ? 'export default function App({ Component, pageProps }) { return <Component {...pageProps} />}'
-      : source
+      : [cssImports, source].join('\n')
 
     return `import __layout from '${layoutPath}'
 ${themeConfigImport}
@@ -226,13 +230,10 @@ ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
 
   const rawJs = `import { setupNextraPage, resolvePageMap } from 'nextra/setup-page'
 import { pageMap, dynamicMetaModules } from '${pageMapPath}'
-${latex ? "import 'katex/dist/katex.min.css'" : ''}
-${OFFICIAL_THEMES.includes(theme) ? `import '${theme}/style.css'` : ''}
+${isAppFileFromNodeModules ? cssImports : ''}
 ${mdxContent}
 
 const __nextraPageOptions = {
-  MDXContent,
-  route: '${route}',
   pageOpts: ${stringifiedPageOpts}
 }
 
@@ -240,7 +241,7 @@ if (typeof window === 'undefined') {
   globalThis.__nextra_resolvePageMap = resolvePageMap(dynamicMetaModules)
 }
 
-export default setupNextraPage(__nextraPageOptions)`
+export default setupNextraPage(MDXContent, '${route}', __nextraPageOptions)`
 
   return rawJs
 }
