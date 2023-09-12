@@ -93,6 +93,7 @@ type CompileMdxOptions = Pick<
   filePath?: string
   useCachedCompiler?: boolean
   isPageImport?: boolean
+  isPageMapImport?: boolean
 }
 
 export async function compileMdx(
@@ -109,9 +110,26 @@ export async function compileMdx(
     mdxOptions = {},
     filePath = '',
     useCachedCompiler,
-    isPageImport = true
+    isPageImport = true,
+    isPageMapImport
   }: CompileMdxOptions = {}
 ) {
+  if (isPageMapImport) {
+    const compiler = createProcessor({
+      remarkPlugins: [
+        remarkFrontmatter, // parse and attach yaml node
+        remarkMdxFrontMatter
+      ]
+    })
+    const vFile = await compiler.process(source)
+    const result = vFile.toString()
+    const res = result.slice(
+      0,
+      result.lastIndexOf('function _createMdxContent(props) {')
+    )
+    return { result: res }
+  }
+
   let searchIndexKey: string | null = null
   if (ERROR_ROUTES.has(route)) {
     /* skip */

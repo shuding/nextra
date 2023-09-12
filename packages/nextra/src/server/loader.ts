@@ -54,6 +54,7 @@ export async function loader(
 ): Promise<string> {
   const {
     isPageImport = false,
+    isPageMapImport,
     isMetaFile,
     theme,
     themeConfig,
@@ -139,11 +140,17 @@ ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
 
   const {
     result,
+    // @ts-expect-error
     title,
+    // @ts-expect-error
     frontMatter,
+    // @ts-expect-error
     structurizedData,
+    // @ts-expect-error
     searchIndexKey,
+    // @ts-expect-error
     hasJsxInH1,
+    // @ts-expect-error
     readingTime
   } = await compileMdx(source, {
     mdxOptions: {
@@ -162,11 +169,12 @@ ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
     locale,
     filePath: mdxPath,
     useCachedCompiler: true,
-    isPageImport
+    isPageImport,
+    isPageMapImport
   })
-
   // Imported as a normal component, no need to add the layout.
   if (!isPageImport) {
+    this.cacheable(false)
     return result
   }
   // Logic for resolving the page title (used for search and as fallback):

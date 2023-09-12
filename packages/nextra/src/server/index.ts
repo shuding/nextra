@@ -111,12 +111,27 @@ const nextra: Nextra = nextraConfig => {
             // When the issuer is null, it means that it can be imported via a
             // runtime import call such as `import('...')`.
             test: MARKDOWN_EXTENSION_REGEX,
-            issuer: request => !!request || request === null,
+            issuer: request =>
+              (!!request &&
+                !request.includes('.next/static/chunks/nextra-page-map')) ||
+              request === null,
             use: [
               options.defaultLoaders.babel,
               {
                 loader: 'nextra/loader',
                 options: loaderOptions
+              }
+            ]
+          },
+          {
+            test: MARKDOWN_EXTENSION_REGEX,
+            issuer: request =>
+              request.includes('.next/static/chunks/nextra-page-map'),
+            use: [
+              options.defaultLoaders.babel,
+              {
+                loader: 'nextra/loader',
+                options: { ...loaderOptions, isPageMapImport: true }
               }
             ]
           },
@@ -128,10 +143,7 @@ const nextra: Nextra = nextraConfig => {
               options.defaultLoaders.babel,
               {
                 loader: 'nextra/loader',
-                options: {
-                  ...loaderOptions,
-                  isPageImport: true
-                }
+                options: { ...loaderOptions, isPageImport: true }
               }
             ]
           },
