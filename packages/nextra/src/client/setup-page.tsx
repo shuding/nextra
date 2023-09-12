@@ -99,7 +99,10 @@ export const resolvePageMap =
     const __nextra_internal__ = (globalThis as NextraInternalGlobal)[
       NEXTRA_INTERNAL
     ]
-    if (process.env.NODE_ENV === 'production' && cachedResolvedPageMap[locale]) {
+    if (
+      process.env.NODE_ENV === 'production' &&
+      cachedResolvedPageMap[locale]
+    ) {
       return cachedResolvedPageMap[locale]
     }
     const { pageMap } = __nextra_internal__
