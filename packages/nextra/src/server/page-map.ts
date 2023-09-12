@@ -162,10 +162,12 @@ async function collectFiles({
 
 export async function collectPageMap({
   dir,
-  route = '/'
+  route = '/',
+  locale = ''
 }: {
   dir: string
   route?: string
+  locale?: string
 }): Promise<string> {
   const { pageMapAst, imports, dynamicMetaImports } = await collectFiles({
     dir,
@@ -198,19 +200,35 @@ export async function collectPageMap({
     body: [
       ...metaImportsAST,
       createAstExportConst('pageMap', pageMapAst),
-      createAstExportConst('dynamicMetaModules', {
-        type: 'ObjectExpression',
-        properties: dynamicMetaImports
-          // localeCompare to avoid race condition
-          .sort((a, b) => a.route.localeCompare(b.route))
-          .map(({ importName, route }) => ({
-            ...DEFAULT_PROPERTY_PROPS,
-            key: { type: 'Literal', value: route },
-            value: { type: 'Identifier', name: importName }
-          }))
-      })
+      {
+        type: 'VariableDeclaration',
+        kind: 'const',
+        declarations: [
+          {
+            type: 'VariableDeclarator',
+            id: { type: 'Identifier', name: 'dynamicMetaModules' },
+            init: {
+              type: 'ObjectExpression',
+              properties: dynamicMetaImports
+                // localeCompare to avoid race condition
+                .sort((a, b) => a.route.localeCompare(b.route))
+                .map(({ importName, route }) => ({
+                  ...DEFAULT_PROPERTY_PROPS,
+                  key: { type: 'Literal', value: route },
+                  value: { type: 'Identifier', name: importName }
+                }))
+            }
+          }
+        ]
+      }
     ]
   })
 
-  return result.value.trim()
+  return `${result.value}
+import { resolvePageMap } from 'nextra/setup-page'
+
+if (typeof window === 'undefined') {
+  globalThis.__nextra_resolvePageMap ||= Object.create(null)
+  globalThis.__nextra_resolvePageMap['${locale}'] = resolvePageMap('${locale}', dynamicMetaModules)
+}`
 }

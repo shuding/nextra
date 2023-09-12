@@ -84,7 +84,7 @@ export function collectCatchAllRoutes(
   }
 }
 
-let cachedResolvedPageMap: PageMapItem[]
+const cachedResolvedPageMap: Record<string, PageMapItem[]> = Object.create(null)
 
 function findFolder(pageMap: PageMapItem[], [path, ...paths]: string[]): any {
   for (const item of pageMap) {
@@ -95,19 +95,18 @@ function findFolder(pageMap: PageMapItem[], [path, ...paths]: string[]): any {
 }
 
 export const resolvePageMap =
-  (dynamicMetaModules: DynamicMetaDescriptor) => async () => {
+  (locale: string, dynamicMetaModules: DynamicMetaDescriptor) => async () => {
     const __nextra_internal__ = (globalThis as NextraInternalGlobal)[
       NEXTRA_INTERNAL
     ]
-    if (process.env.NODE_ENV === 'production' && cachedResolvedPageMap) {
-      return cachedResolvedPageMap
+    if (process.env.NODE_ENV === 'production' && cachedResolvedPageMap[locale]) {
+      return cachedResolvedPageMap[locale]
     }
     const { pageMap } = __nextra_internal__
     const result = []
 
     for (const [route, metaFunction] of Object.entries(dynamicMetaModules)) {
-      // TODO 2 for locale, 1 without local
-      const folder = findFolder(pageMap, route.split('/').slice(2))
+      const folder = findFolder(pageMap, route.split('/').slice(locale ? 2 : 1))
       const metaData = await metaFunction()
       result.push(
         collectCatchAllRoutes(
@@ -121,7 +120,7 @@ export const resolvePageMap =
       )
     }
 
-    return (cachedResolvedPageMap = result)
+    return (cachedResolvedPageMap[locale] = result)
   }
 
 export function setupNextraPage(

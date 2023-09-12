@@ -415,10 +415,17 @@ describe('collectPageMap', () => {
           \\"sidebar_label\\": \\"Test\\"
         }
       }];
-      export const dynamicMetaModules = {
+      const dynamicMetaModules = {
         \\"/en/remote/graphql-eslint\\": examples_swr_site_pages_en_remote_graphql_eslint_meta,
         \\"/en/remote/graphql-yoga\\": examples_swr_site_pages_en_remote_graphql_yoga_meta
-      };"
+      };
+
+      import { resolvePageMap } from 'nextra/setup-page'
+
+      if (typeof window === 'undefined') {
+        globalThis.__nextra_resolvePageMap ||= Object.create(null)
+        globalThis.__nextra_resolvePageMap['undefined'] = resolvePageMap('undefined', dynamicMetaModules)
+      }"
     `)
   })
 })
@@ -436,7 +443,14 @@ describe('Page Process', () => {
     })
     expect(rawJs).toMatchInlineSnapshot(`
       "export const pageMap = [];
-      export const dynamicMetaModules = {};"
+      const dynamicMetaModules = {};
+
+      import { resolvePageMap } from 'nextra/setup-page'
+
+      if (typeof window === 'undefined') {
+        globalThis.__nextra_resolvePageMap ||= Object.create(null)
+        globalThis.__nextra_resolvePageMap['undefined'] = resolvePageMap('undefined', dynamicMetaModules)
+      }"
     `)
   })
 
@@ -464,7 +478,14 @@ describe('Page Process', () => {
           \\"sidebar_label\\": \\"Tabs\\"
         }
       }];
-      export const dynamicMetaModules = {};"
+      const dynamicMetaModules = {};
+
+      import { resolvePageMap } from 'nextra/setup-page'
+
+      if (typeof window === 'undefined') {
+        globalThis.__nextra_resolvePageMap ||= Object.create(null)
+        globalThis.__nextra_resolvePageMap['undefined'] = resolvePageMap('undefined', dynamicMetaModules)
+      }"
     `)
   })
 
@@ -498,7 +519,14 @@ describe('Page Process', () => {
           \\"sidebar_label\\": \\"Test1\\"
         }
       }];
-      export const dynamicMetaModules = {};"
+      const dynamicMetaModules = {};
+
+      import { resolvePageMap } from 'nextra/setup-page'
+
+      if (typeof window === 'undefined') {
+        globalThis.__nextra_resolvePageMap ||= Object.create(null)
+        globalThis.__nextra_resolvePageMap['undefined'] = resolvePageMap('undefined', dynamicMetaModules)
+      }"
     `)
   })
 

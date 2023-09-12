@@ -12,7 +12,7 @@ export async function getStaticProps({ params }) {
   const url = `https://raw.githubusercontent.com/${user}/${repo}/${branch}/${docsPath}${foundPath}`
   const response = await fetch(url)
   const data = await response.text()
-  const { __nextra_pageMap } = await buildDynamicMeta()
+  const { __nextra_pageMap } = await buildDynamicMeta('en')
   return {
     props: {
       __nextra_pageMap,
