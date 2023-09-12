@@ -1,7 +1,6 @@
 import path from 'node:path'
 import type {
   ArrayExpression,
-  ExportNamedDeclaration,
   Expression,
   ImportDeclaration,
   ObjectExpression,
@@ -18,7 +17,12 @@ import {
   META_REGEX
 } from './constants.js'
 import { PAGES_DIR } from './file-system.js'
-import { normalizePageRoute, pageTitleFromFilename, truthy } from './utils.js'
+import {
+  createAstExportConst,
+  normalizePageRoute,
+  pageTitleFromFilename,
+  truthy
+} from './utils.js'
 
 const fs = gracefulFs.promises
 
@@ -46,27 +50,6 @@ function createAstObject(
       value:
         value && typeof value === 'object' ? value : { type: 'Literal', value }
     }))
-  }
-}
-
-function createAstExportConst(
-  name: string,
-  value: ArrayExpression | ObjectExpression
-): ExportNamedDeclaration {
-  return {
-    type: 'ExportNamedDeclaration',
-    specifiers: [],
-    declaration: {
-      type: 'VariableDeclaration',
-      kind: 'const',
-      declarations: [
-        {
-          type: 'VariableDeclarator',
-          id: { type: 'Identifier', name },
-          init: value
-        }
-      ]
-    }
   }
 }
 

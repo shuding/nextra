@@ -343,9 +343,6 @@ importers:
       '@vitejs/plugin-react':
         specifier: ^3.0.1
         version: 3.0.1(vite@4.0.4)
-      fast-glob:
-        specifier: ^3.2.12
-        version: 3.2.12
       next:
         specifier: ^13.4.19
         version: 13.4.19(@babel/core@7.21.8)(react-dom@18.2.0)(react@18.2.0)

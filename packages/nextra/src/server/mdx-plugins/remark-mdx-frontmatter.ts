@@ -2,29 +2,14 @@ import { valueToEstree } from 'estree-util-value-to-estree'
 import type { Parent, Root } from 'mdast'
 import type { Plugin } from 'unified'
 import { parse as parseYaml } from 'yaml'
+import { createAstExportConst } from '../utils.js'
 
 function createNode(data: Record<string, unknown>): any {
   return {
     type: 'mdxjsEsm',
     data: {
       estree: {
-        body: [
-          {
-            type: 'ExportNamedDeclaration',
-            specifiers: [],
-            declaration: {
-              type: 'VariableDeclaration',
-              kind: 'const',
-              declarations: [
-                {
-                  type: 'VariableDeclarator',
-                  id: { type: 'Identifier', name: 'frontMatter' },
-                  init: valueToEstree(data)
-                }
-              ]
-            }
-          }
-        ]
+        body: [createAstExportConst('frontMatter', valueToEstree(data))]
       }
     }
   }

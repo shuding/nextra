@@ -1,4 +1,10 @@
 import path from 'path'
+import type {
+  ArrayExpression,
+  ExportNamedDeclaration,
+  Expression,
+  ObjectExpression
+} from 'estree'
 import slash from 'slash'
 import title from 'title'
 import type { Folder, MdxFile } from '../types'
@@ -50,4 +56,25 @@ export function sortPages(
 
 export function normalizePageRoute(parentRoute: string, route: string): string {
   return slash(path.join(parentRoute, route.replace(/^index$/, '')))
+}
+
+export function createAstExportConst(
+  name: string,
+  value: ArrayExpression | ObjectExpression | Expression
+): ExportNamedDeclaration {
+  return {
+    type: 'ExportNamedDeclaration',
+    specifiers: [],
+    declaration: {
+      type: 'VariableDeclaration',
+      kind: 'const',
+      declarations: [
+        {
+          type: 'VariableDeclarator',
+          id: { type: 'Identifier', name },
+          init: value
+        }
+      ]
+    }
+  }
 }
