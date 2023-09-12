@@ -195,15 +195,7 @@ const config: DocsThemeConfig = {
       // eslint-disable-next-line @next/next/no-img-element -- ignore since url is external and dynamic
       <img alt="placeholder cat" src="https://placekitten.com/g/300/200" />
     ),
-    float: true,
-    headingComponent: function Heading({ id, children }) {
-      return (
-        <>
-          {children}
-          {id === 'installation' && ' 💿'}
-        </>
-      )
-    }
+    float: true
   },
   useNextSeoProps() {
     const { locale } = useRouter()

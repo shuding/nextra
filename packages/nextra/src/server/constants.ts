@@ -44,7 +44,7 @@ export const CODE_BLOCK_FILENAME_REGEX = /filename="([^"]+)"/
 
 export const DEFAULT_LOCALES = ['']
 
-// experimental, need to deep dive why bundle becomes bigger and there is full
+// Experimental, need to deep dive why bundle becomes bigger and there is full
 // reload while navigating between pages every time
 export const IMPORT_FRONTMATTER = false
 

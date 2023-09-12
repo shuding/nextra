@@ -266,12 +266,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
             {
               "children": [
                 {
-                  "data": {
-                    "loooooooooooooooooooong-title": "Loooooooooooooooooooong Title",
-                    "tree": "Tree",
-                  },
-                },
-                {
                   "frontMatter": {
                     "sidebar_label": "Loooooooooooooooooooong Title",
                   },
@@ -280,13 +274,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
                 },
                 {
                   "children": [
-                    {
-                      "data": {
-                        "one": "One",
-                        "three": "Three",
-                        "two": "Two",
-                      },
-                    },
                     {
                       "frontMatter": {
                         "sidebar_label": "One",
@@ -596,12 +583,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
     },
     {
       "children": [
-        {
-          "data": {
-            "graphql-eslint": "GraphQL Eslint",
-            "graphql-yoga": "GraphQL Yoga",
-          },
-        },
         {
           "children": [
             {

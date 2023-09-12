@@ -143,9 +143,6 @@ export const themeSchema = /* @__PURE__ */ (() =>
       component: z.custom<ReactNode | FC<TOCProps>>(...reactNode),
       extraContent: z.custom<ReactNode | FC>(...reactNode),
       float: z.boolean(),
-      headingComponent: z
-        .custom<FC<{ id: string; children: string }>>(...fc)
-        .optional(),
       title: z.custom<ReactNode | FC>(...reactNode)
     }),
     useNextSeoProps: z.custom<() => NextSeoProps | void>(isFunction)

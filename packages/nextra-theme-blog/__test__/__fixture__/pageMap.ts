@@ -59,13 +59,7 @@ export const indexOpts: BlogPageOpts = {
     }
   ],
   title: 'Nextra',
-  headings: [
-    {
-      depth: 1,
-      value: 'Nextra',
-      id: 'nextra'
-    }
-  ]
+  toc: []
 }
 
 export const postsOpts: BlogPageOpts = {
@@ -127,13 +121,7 @@ export const postsOpts: BlogPageOpts = {
     }
   ],
   title: 'Random Thoughts',
-  headings: [
-    {
-      depth: 1,
-      value: 'Random Thoughts',
-      id: 'random-thoughts'
-    }
-  ]
+  toc: []
 }
 
 export const articleOpts: BlogPageOpts = {
@@ -198,12 +186,7 @@ export const articleOpts: BlogPageOpts = {
     }
   ],
   title: 'Notes on A Programmable Web by Aaron Swartz',
-  headings: [
-    {
-      depth: 1,
-      value: 'Notes on A Programmable Web by Aaron Swartz',
-      id: 'notes-on-a-programmable-web-by-aaron-swartz'
-    },
+  toc: [
     {
       depth: 2,
       value: 'Quotes About WWW',

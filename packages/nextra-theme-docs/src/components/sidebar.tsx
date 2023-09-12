@@ -325,7 +325,7 @@ interface SideBarProps {
   docsDirectories: PageItem[]
   fullDirectories: Item[]
   asPopover?: boolean
-  headings: Heading[]
+  toc: Heading[]
   includePlaceholder: boolean
 }
 
@@ -333,7 +333,7 @@ export function Sidebar({
   docsDirectories,
   fullDirectories,
   asPopover = false,
-  headings,
+  toc,
   includePlaceholder
 }: SideBarProps): ReactElement {
   const config = useConfig()
@@ -343,7 +343,7 @@ export function Sidebar({
   const [showSidebar, setSidebar] = useState(true)
   const [showToggleAnimation, setToggleAnimation] = useState(false)
 
-  const anchors = useMemo(() => headings.filter(v => v.depth === 2), [headings])
+  const anchors = useMemo(() => toc.filter(v => v.depth === 2), [toc])
   const sidebarRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const mounted = useMounted()

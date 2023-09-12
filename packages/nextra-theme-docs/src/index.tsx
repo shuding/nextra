@@ -110,7 +110,7 @@ function InnerLayout({
   filePath,
   pageMap,
   frontMatter,
-  headings,
+  toc,
   timestamp,
   children
 }: PageOpts & { children: ReactNode }): ReactElement {
@@ -152,7 +152,7 @@ function InnerLayout({
         aria-label="table of contents"
       >
         {renderComponent(config.toc.component, {
-          headings: config.toc.float ? headings : [],
+          toc: config.toc.float ? toc : [],
           filePath
         })}
       </nav>
@@ -191,7 +191,7 @@ function InnerLayout({
           <Sidebar
             docsDirectories={docsDirectories}
             fullDirectories={directories}
-            headings={headings}
+            toc={toc}
             asPopover={hideSidebar}
             includePlaceholder={themeContext.layout === 'default'}
           />
