@@ -107,7 +107,8 @@ export const resolvePageMap =
 
 export function setupNextraPage(
   MDXContent: FC,
-  { route, pageOpts }: { route: string; pageOpts: PageOpts }
+  route: string,
+  pageOpts: PageOpts
 ) {
   // Make sure the same component is always returned so Next.js will render the
   // stable layout. We then put the actual content into a global store and use

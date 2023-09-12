@@ -4,7 +4,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build": "next build",
+    "build": "VERCEL_FORCE_NO_BUILD_CACHE=1 next build",
     "dev": "next",
     "start": "next start"
   },

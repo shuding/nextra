@@ -233,16 +233,11 @@ import { pageMap, dynamicMetaModules } from '${pageMapPath}'
 ${isAppFileFromNodeModules ? cssImports : ''}
 ${mdxContent}
 
-const __nextraPageOptions = {
-  route: '${route}',
-  pageOpts: ${stringifiedPageOpts}
-}
-
 if (typeof window === 'undefined') {
   globalThis.__nextra_resolvePageMap = resolvePageMap(dynamicMetaModules)
 }
 
-export default setupNextraPage(MDXContent, __nextraPageOptions)`
+export default setupNextraPage(MDXContent, '${route}', ${stringifiedPageOpts})`
 
   return rawJs
 }
