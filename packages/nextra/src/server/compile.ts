@@ -114,8 +114,21 @@ export async function compileMdx(
     isPageMapImport
   }: CompileMdxOptions = {}
 ) {
+  const {
+    jsx = false,
+    format: _format = 'mdx',
+    outputFormat = 'function-body',
+    remarkPlugins,
+    rehypePlugins,
+    rehypePrettyCodeOptions
+  }: MdxOptions = mdxOptions
+
+  const format =
+    _format === 'detect' ? (filePath.endsWith('.mdx') ? 'mdx' : 'md') : _format
+
   if (isPageMapImport) {
     const compiler = createProcessor({
+      format,
       remarkPlugins: [
         remarkFrontmatter, // parse and attach yaml node
         remarkMdxFrontMatter
@@ -125,10 +138,10 @@ export async function compileMdx(
       filePath ? { value: source, path: filePath } : source
     )
     const content = vFile.toString()
-    const result = content.slice(
-      0,
-      content.lastIndexOf('function _createMdxContent(props) {')
-    )
+
+    const index = content.lastIndexOf('function _createMdxContent(props) {')
+    const result = content.slice(0, index)
+
     return { result } as any
   }
 
@@ -147,18 +160,6 @@ export async function compileMdx(
   } else if (search) {
     searchIndexKey = locale || DEFAULT_LOCALE
   }
-
-  const {
-    jsx = false,
-    format: _format = 'mdx',
-    outputFormat = 'function-body',
-    remarkPlugins,
-    rehypePlugins,
-    rehypePrettyCodeOptions
-  }: MdxOptions = mdxOptions
-
-  const format =
-    _format === 'detect' ? (filePath.endsWith('.mdx') ? 'mdx' : 'md') : _format
 
   // https://github.com/shuding/nextra/issues/1303
   const isFileOutsideCWD =
