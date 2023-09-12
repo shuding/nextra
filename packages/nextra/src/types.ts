@@ -2,15 +2,8 @@ import type { Heading as MDASTHeading } from 'mdast'
 import type { NextConfig } from 'next'
 import type { FC, ReactNode } from 'react'
 import type { z } from 'zod'
-import type {
-  MARKDOWN_EXTENSIONS,
-  META_FILENAME,
-  NEXTRA_INTERNAL
-} from './constants'
-import type { nextraConfigSchema, searchSchema } from './schemas'
-
-type MetaFilename = typeof META_FILENAME
-type MarkdownExtension = (typeof MARKDOWN_EXTENSIONS)[number]
+import type { NEXTRA_INTERNAL } from './constants.js'
+import type { nextraConfigSchema, searchSchema } from './server/schemas'
 
 export interface LoaderOptions extends NextraConfig {
   isPageImport?: boolean
@@ -28,8 +21,6 @@ export type MetaJsonFile = {
   data: {
     [fileName: string]: Meta
   }
-  // The path to the _meta.json file. This is a private property needed by the loader.
-  __nextra_src?: string
 }
 
 export type DynamicFolder = {
@@ -54,9 +45,6 @@ export type MdxFile<FrontMatterType = FrontMatter> = {
   route: string
   frontMatter?: FrontMatterType
 }
-
-export type MetaJsonPath = `${string}/${MetaFilename}`
-export type MdxPath = `${string}.${MarkdownExtension}`
 
 export type PageMapItem = Folder | MdxFile | MetaJsonFile
 

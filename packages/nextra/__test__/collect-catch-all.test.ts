@@ -1,5 +1,5 @@
-import { createCatchAllMeta } from '../src/catch-all'
-import { collectCatchAllRoutes } from '../src/setup-page'
+import { createCatchAllMeta } from '../src/client/catch-all.js'
+import { collectCatchAllRoutes } from '../src/client/setup-page.js'
 
 describe('collectCatchAllRoutes', () => {
   it('should collect', () => {

@@ -3,6 +3,7 @@ import { createRequire } from 'node:module'
 import type { NextConfig } from 'next'
 import type { ZodError } from 'zod'
 import { fromZodError } from 'zod-validation-error'
+import type { Nextra } from '../types'
 import {
   DEFAULT_CONFIG,
   DEFAULT_LOCALE,
@@ -10,11 +11,10 @@ import {
   MARKDOWN_EXTENSION_REGEX,
   MARKDOWN_EXTENSIONS,
   META_REGEX
-} from '../constants'
-import { nextraConfigSchema } from '../schemas'
-import type { Nextra } from '../types'
-import { logger } from './utils'
-import { NextraPlugin, NextraSearchPlugin } from './webpack-plugins'
+} from './constants.js'
+import { nextraConfigSchema } from './schemas.js'
+import { logger } from './utils.js'
+import { NextraPlugin, NextraSearchPlugin } from './webpack-plugins/index.js'
 
 const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
 

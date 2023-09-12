@@ -1,7 +1,13 @@
-import path from 'node:path'
+import path from 'path'
 import slash from 'slash'
 import title from 'title'
 import type { Folder, MdxFile } from '../types'
+
+type Truthy<T> = T extends false | '' | 0 | null | undefined ? never : T // from lodash
+
+export function truthy<T>(value: T): value is Truthy<T> {
+  return !!value
+}
 
 export const logger = {
   info: console.log.bind(null, '-', '\x1b[36minfo\x1b[0m', '[nextra]'),

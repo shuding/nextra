@@ -167,6 +167,10 @@ module.exports = {
           callees: ['cn'],
           whitelist: ['nextra-code-block', 'nextra-filetree']
         }
+      },
+      rules: {
+        ...TAILWIND_CONFIG.rules,
+        'import/extensions': ['error', 'ignorePackages']
       }
     },
     // ⚙️ Docs

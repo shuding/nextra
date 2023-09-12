@@ -5,9 +5,8 @@
 
 import { useRouter } from 'next/router'
 import type { FC, ReactElement } from 'react'
-import { NEXTRA_INTERNAL } from './constants'
-import { SSGContext } from './data'
-import { normalizePageRoute, pageTitleFromFilename } from './server/utils'
+import { NEXTRA_INTERNAL } from '../constants.js'
+import { normalizePageRoute, pageTitleFromFilename } from '../server/utils.js'
 import type {
   DynamicFolder,
   DynamicMeta,
@@ -18,7 +17,8 @@ import type {
   NextraInternalGlobal,
   PageMapItem,
   PageOpts
-} from './types'
+} from '../types'
+import { DataProvider } from './data.js'
 
 function isFolder(value: DynamicMetaItem): value is DynamicFolder {
   return !!value && typeof value === 'object' && value.type === 'folder'
@@ -105,15 +105,11 @@ export const resolvePageMap =
     return (cachedResolvedPageMap = clonedPageMap)
   }
 
-export function setupNextraPage({
-  pageOpts,
-  MDXContent,
-  route
-}: {
+export function setupNextraPage(
+  MDXContent: FC,
+  route: string,
   pageOpts: PageOpts
-  MDXContent: FC
-  route: string
-}) {
+) {
   // Make sure the same component is always returned so Next.js will render the
   // stable layout. We then put the actual content into a global store and use
   // the route to identify it.
@@ -170,9 +166,9 @@ function NextraLayout({
   }
   return (
     <Layout themeConfig={themeConfig} pageOpts={pageOpts} pageProps={props}>
-      <SSGContext.Provider value={props}>
+      <DataProvider value={props}>
         <Content />
-      </SSGContext.Provider>
+      </DataProvider>
     </Layout>
   )
 }

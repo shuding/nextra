@@ -12,7 +12,8 @@
     "dev": "next",
     "prebuild": "node nextra-remote-filepaths/fetch.js",
     "predev": "pnpm prebuild",
-    "start": "next start"
+    "start": "next start",
+    "types:check": "tsc --noEmit"
   },
   "dependencies": {
     "focus-visible": "^5.1.0",

@@ -1,9 +1,9 @@
 import Markdown from 'markdown-to-jsx'
 import { useSSG } from 'nextra/data'
 
-export const getStaticProps = () => {
+export function getStaticProps() {
   return (
-    fetch(`https://api.github.com/repos/vercel/swr/releases`)
+    fetch('https://api.github.com/repos/vercel/swr/releases')
       .then(res => res.json())
       // we keep the most recent 5 releases here
       .then(releases => ({
@@ -13,7 +13,7 @@ export const getStaticProps = () => {
   )
 }
 
-export const ReleasesRenderer = () => {
+export function ReleasesRenderer() {
   const releases = useSSG()
   return (
     <Markdown>

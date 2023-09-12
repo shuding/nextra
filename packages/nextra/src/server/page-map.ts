@@ -16,10 +16,9 @@ import {
   MARKDOWN_EXTENSION_REGEX,
   META_FILENAME,
   META_REGEX
-} from '../constants'
-import { truthy } from '../utils'
-import { PAGES_DIR } from './file-system'
-import { normalizePageRoute, pageTitleFromFilename } from './utils'
+} from './constants.js'
+import { PAGES_DIR } from './file-system.js'
+import { normalizePageRoute, pageTitleFromFilename, truthy } from './utils.js'
 
 const fs = gracefulFs.promises
 

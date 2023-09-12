@@ -1,12 +1,16 @@
 import path from 'node:path'
 import slash from 'slash'
 import type { LoaderContext } from 'webpack'
-import { MARKDOWN_EXTENSION_REGEX, OFFICIAL_THEMES } from '../constants'
-import type { LoaderOptions, MdxPath, PageOpts } from '../types'
-import { compileMdx } from './compile'
-import { CHUNKS_DIR, CWD } from './constants'
-import { PAGES_DIR } from './file-system'
-import { logger, pageTitleFromFilename } from './utils'
+import type { LoaderOptions, PageOpts } from '../types'
+import { compileMdx } from './compile.js'
+import {
+  CHUNKS_DIR,
+  CWD,
+  MARKDOWN_EXTENSION_REGEX,
+  OFFICIAL_THEMES
+} from './constants.js'
+import { PAGES_DIR } from './file-system.js'
+import { logger, pageTitleFromFilename } from './utils.js'
 
 const initGitRepo = (async () => {
   const IS_WEB_CONTAINER = !!process.versions.webcontainer
@@ -44,8 +48,8 @@ const FOOTER_TO_REMOVE = 'export default MDXContent;'
 
 let isAppFileFromNodeModules = false
 
-async function loader(
-  context: LoaderContext<LoaderOptions>,
+export async function loader(
+  this: LoaderContext<LoaderOptions>,
   source: string
 ): Promise<string> {
   const {
@@ -63,22 +67,20 @@ async function loader(
     transformPageOpts,
     mdxOptions,
     locales
-  } = context.getOptions()
+  } = this.getOptions()
 
-  const mdxPath = (
-    context._module?.resourceResolveData
-      ? // to make it work with symlinks, resolve the mdx path based on the relative path
-        /*
-         * `context.rootContext` could include path chunk of
-         * `context._module.resourceResolveData.relativePath` use
-         * `context._module.resourceResolveData.descriptionFileRoot` instead
-         */
-        path.join(
-          context._module.resourceResolveData.descriptionFileRoot,
-          context._module.resourceResolveData.relativePath
-        )
-      : context.resourcePath
-  ) as MdxPath
+  const mdxPath = this._module?.resourceResolveData
+    ? // to make it work with symlinks, resolve the mdx path based on the relative path
+      /*
+       * `context.rootContext` could include path chunk of
+       * `context._module.resourceResolveData.relativePath` use
+       * `context._module.resourceResolveData.descriptionFileRoot` instead
+       */
+      path.join(
+        this._module.resourceResolveData.descriptionFileRoot,
+        this._module.resourceResolveData.relativePath
+      )
+    : this.resourcePath
 
   if (mdxPath.includes('/pages/api/')) {
     logger.warn(
@@ -178,7 +180,7 @@ ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
 
   if (searchIndexKey && frontMatter.searchable !== false) {
     // Store all the things in buildInfo.
-    const { buildInfo } = context._module as any
+    const { buildInfo } = this._module as any
     buildInfo.nextraSearch = {
       indexKey: searchIndexKey,
       title: fallbackTitle,
@@ -231,26 +233,11 @@ import { pageMap, dynamicMetaModules } from '${pageMapPath}'
 ${isAppFileFromNodeModules ? cssImports : ''}
 ${mdxContent}
 
-const __nextraPageOptions = {
-  MDXContent,
-  route: '${route}',
-  pageOpts: ${stringifiedPageOpts}
-}
 if (typeof window === 'undefined') {
   globalThis.__nextra_resolvePageMap = resolvePageMap(dynamicMetaModules)
 }
 
-export default setupNextraPage(__nextraPageOptions)`
+export default setupNextraPage(MDXContent, '${route}', ${stringifiedPageOpts})`
 
   return rawJs
-}
-
-export default function syncLoader(
-  this: LoaderContext<LoaderOptions>,
-  source: string,
-  callback: (err?: null | Error, content?: string) => void
-): void {
-  loader(this, source)
-    .then(result => callback(null, result))
-    .catch(error => callback(error))
 }

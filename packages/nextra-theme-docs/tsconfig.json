@@ -10,7 +10,7 @@
     "allowJs": true,
     "jsx": "react-jsx",
     "moduleResolution": "node",
-    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "lib": ["ESNext", "DOM"],
     "types": ["vitest/globals"],
     "resolveJsonModule": true,
     "paths": {

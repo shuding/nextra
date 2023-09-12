@@ -1,89 +1,39 @@
-import fs from 'node:fs/promises'
+import fs from 'fs/promises'
 import path from 'node:path'
-import fg from 'fast-glob'
-import slash from 'slash'
-import type { Options } from 'tsup'
 import { defineConfig } from 'tsup'
+import { CWD } from './src/server/constants.js'
 
-const CLIENT_ENTRY = [
-  'src/{normalize-pages,mdx,context,catch-all}.ts',
-  'src/{setup-page,data}.tsx',
-  'src/{components,hooks,icons}/*.{ts,tsx}'
-]
-
-const entries = fg.sync(CLIENT_ENTRY, { absolute: true })
-const entriesSet = new Set(entries)
-
-const sharedConfig = {
-  // import.meta is available only from es2020
+export default defineConfig({
+  name: 'nextra-esm',
+  entry: ['src/**/*.{ts,tsx}', '!src/**/*.d.ts', '!src/types.ts'],
   target: 'es2020',
   format: 'esm',
   dts: true,
   splitting: false,
-  external: ['shiki', './__temp__', 'webpack'],
-  esbuildPlugins: [
-    // https://github.com/evanw/esbuild/issues/622#issuecomment-769462611
-    {
-      name: 'add-mjs',
-      setup(build) {
-        build.onResolve({ filter: /.*/ }, async args => {
-          if (
-            args.importer &&
-            args.path.startsWith('.') &&
-            !args.path.endsWith('.json')
-          ) {
-            let isDir: boolean
-            const importPath = slash(path.join(args.resolveDir, args.path))
-            try {
-              isDir = (await fs.stat(importPath)).isDirectory()
-            } catch {
-              isDir = false
-            }
-
-            const isClientImporter = entriesSet.has(slash(args.importer))
-
-            if (isClientImporter) {
-              const isClientImport = entries.some(entry =>
-                entry.startsWith(importPath)
-              )
-              if (isClientImport) {
-                return { path: args.path, external: true }
-              }
-            }
-
-            if (isDir) {
-              // it's a directory
-              return { path: args.path + '/index.mjs', external: true }
-            }
-            return { path: args.path + '.mjs', external: true }
-          }
-        })
-      }
-    }
-  ]
-} satisfies Options
-
-export default defineConfig([
-  {
-    name: 'nextra',
-    entry: ['src/__temp__.js'],
-    format: 'cjs',
-    dts: false
-  },
-  {
-    name: 'nextra-esm',
-    entry: [
-      'src/**/*.ts',
-      '!src/**/*.d.ts',
-      '!src/types.ts',
-      ...CLIENT_ENTRY.map(filePath => `!${filePath}`)
-    ],
-    ...sharedConfig
-  },
-  {
-    name: 'nextra-client',
-    entry: CLIENT_ENTRY,
-    outExtension: () => ({ js: '.js' }),
-    ...sharedConfig
+  bundle: false,
+  external: ['shiki', 'webpack'],
+  async onSuccess() {
+    await fs.copyFile(
+      path.join(CWD, 'src', 'server', '__temp__.cjs'),
+      path.join(CWD, 'dist', 'server', '__temp__.cjs')
+    )
+    await fs.copyFile(
+      path.join(CWD, 'src', 'server', 'theme.json'),
+      path.join(CWD, 'dist', 'server', 'theme.json')
+    )
+    const filePath = path.join(CWD, 'dist', 'server', 'compile.js')
+    const content = await fs.readFile(filePath, 'utf8')
+    await fs.writeFile(
+      filePath,
+      content.replace(
+        'import theme from "./theme.json"',
+        'import theme from "./theme.json" assert { type: "json" }'
+      )
+    )
+    // this fixes hydration errors in client apps
+    await fs.writeFile(
+      path.join(CWD, 'dist', 'client', 'package.json'),
+      '{"sideEffects":false}'
+    )
   }
-])
+})

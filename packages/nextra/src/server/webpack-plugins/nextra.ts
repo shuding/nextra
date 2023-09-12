@@ -2,10 +2,9 @@ import path from 'node:path'
 import gracefulFs from 'graceful-fs'
 // import pkg from 'next/dist/compiled/webpack/webpack.js'
 import type { Compiler } from 'webpack'
-import { IS_PRODUCTION } from '../../constants'
-import { CHUNKS_DIR } from '../constants'
-import { PAGES_DIR } from '../file-system'
-import { collectPageMap } from '../page-map'
+import { CHUNKS_DIR, IS_PRODUCTION } from '../constants.js'
+import { PAGES_DIR } from '../file-system.js'
+import { collectPageMap } from '../page-map.js'
 
 // import { logger } from '../utils'
 

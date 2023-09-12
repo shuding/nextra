@@ -1,14 +1,15 @@
 import { MDXRemote } from 'next-mdx-remote'
 import { createContext, useContext } from 'react'
 import type { Components } from './mdx'
-import { useMDXComponents } from './mdx'
+import { useMDXComponents } from './mdx.js'
 
-export const SSGContext = createContext<any>(false)
-export const useSSG = (key = 'ssg') => useContext(SSGContext)?.[key]
+const SSGContext = createContext<Record<string, any>>({})
+
+export const useSSG = (key = 'ssg') => useContext(SSGContext)[key]
 
 // Make sure nextra/data remains functional, but we now recommend this new API.
 
-export const DataContext = SSGContext
+export const DataProvider = SSGContext.Provider
 export const useData = useSSG
 
 export function RemoteContent({
