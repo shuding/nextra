@@ -12,7 +12,7 @@ import gracefulFs from 'graceful-fs'
 import grayMatter from 'gray-matter'
 import pLimit from 'p-limit'
 import {
-  IS_PRODUCTION,
+  IMPORT_FRONTMATTER,
   MARKDOWN_EXTENSION_REGEX,
   META_FILENAME,
   META_REGEX
@@ -136,7 +136,7 @@ async function collectFiles({
         if (MARKDOWN_EXTENSION_REGEX.test(ext)) {
           let frontMatter: Expression
 
-          if (IS_PRODUCTION) {
+          if (IMPORT_FRONTMATTER) {
             const importName = cleanFileName(filePath)
             imports.push({ importName, filePath })
             frontMatter = { type: 'Identifier', name: importName }
@@ -228,7 +228,7 @@ export async function collectPageMap({
       specifiers: [
         {
           local: { type: 'Identifier', name: importName },
-          ...(IS_PRODUCTION && MARKDOWN_EXTENSION_REGEX.test(filePath)
+          ...(IMPORT_FRONTMATTER && MARKDOWN_EXTENSION_REGEX.test(filePath)
             ? {
                 type: 'ImportSpecifier',
                 imported: { type: 'Identifier', name: 'frontMatter' }
