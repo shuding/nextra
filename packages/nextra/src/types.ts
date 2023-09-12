@@ -3,10 +3,7 @@ import type { NextConfig } from 'next'
 import type { FC, ReactNode } from 'react'
 import type { z } from 'zod'
 import type { NEXTRA_INTERNAL } from './constants.js'
-import type { MARKDOWN_EXTENSIONS } from './server/constants.js'
 import type { nextraConfigSchema, searchSchema } from './server/schemas'
-
-type MarkdownExtension = (typeof MARKDOWN_EXTENSIONS)[number]
 
 export interface LoaderOptions extends NextraConfig {
   isPageImport?: boolean
@@ -48,8 +45,6 @@ export type MdxFile<FrontMatterType = FrontMatter> = {
   route: string
   frontMatter?: FrontMatterType
 }
-
-export type MdxPath = `${string}.${MarkdownExtension}`
 
 export type PageMapItem = Folder | MdxFile | MetaJsonFile
 

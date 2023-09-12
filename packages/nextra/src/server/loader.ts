@@ -1,7 +1,7 @@
 import path from 'node:path'
 import slash from 'slash'
 import type { LoaderContext } from 'webpack'
-import type { LoaderOptions, MdxPath, PageOpts } from '../types'
+import type { LoaderOptions, PageOpts } from '../types'
 import { compileMdx } from './compile.js'
 import {
   CHUNKS_DIR,
@@ -69,20 +69,18 @@ async function loader(
     locales
   } = context.getOptions()
 
-  const mdxPath = (
-    context._module?.resourceResolveData
-      ? // to make it work with symlinks, resolve the mdx path based on the relative path
-        /*
-         * `context.rootContext` could include path chunk of
-         * `context._module.resourceResolveData.relativePath` use
-         * `context._module.resourceResolveData.descriptionFileRoot` instead
-         */
-        path.join(
-          context._module.resourceResolveData.descriptionFileRoot,
-          context._module.resourceResolveData.relativePath
-        )
-      : context.resourcePath
-  ) as MdxPath
+  const mdxPath = context._module?.resourceResolveData
+    ? // to make it work with symlinks, resolve the mdx path based on the relative path
+      /*
+       * `context.rootContext` could include path chunk of
+       * `context._module.resourceResolveData.relativePath` use
+       * `context._module.resourceResolveData.descriptionFileRoot` instead
+       */
+      path.join(
+        context._module.resourceResolveData.descriptionFileRoot,
+        context._module.resourceResolveData.relativePath
+      )
+    : context.resourcePath
 
   if (mdxPath.includes('/pages/api/')) {
     logger.warn(
@@ -235,16 +233,11 @@ import { pageMap, dynamicMetaModules } from '${pageMapPath}'
 ${isAppFileFromNodeModules ? cssImports : ''}
 ${mdxContent}
 
-const __nextraPageOptions = {
-  MDXContent,
-  route: '${route}',
-  pageOpts: ${stringifiedPageOpts}
-}
 if (typeof window === 'undefined') {
   globalThis.__nextra_resolvePageMap = resolvePageMap(dynamicMetaModules)
 }
 
-export default setupNextraPage(__nextraPageOptions)`
+export default setupNextraPage(MDXContent, ${stringifiedPageOpts}, '${route}')`
 
   return rawJs
 }
