@@ -3,6 +3,7 @@
  * while importing constants in client file
  */
 import path from 'node:path'
+import type { Property } from 'estree'
 import type { NextraConfig } from '../types'
 
 export {
@@ -46,3 +47,11 @@ export const DEFAULT_LOCALES = ['']
 // experimental, need to deep dive why bundle becomes bigger and there is full
 // reload while navigating between pages every time
 export const IMPORT_FRONTMATTER = false
+
+export const DEFAULT_OBJECT_PROPS: Omit<Property, 'key' | 'value'> = {
+  type: 'Property',
+  kind: 'init',
+  method: false,
+  shorthand: false,
+  computed: false
+}

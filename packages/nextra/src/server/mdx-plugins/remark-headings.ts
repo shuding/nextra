@@ -4,6 +4,7 @@ import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 import type { Heading } from '../../types'
 import { MARKDOWN_EXTENSION_REGEX } from '../constants.js'
+import { createAstObject } from '../utils.js'
 import type { HProperties } from './remark-custom-heading-id'
 
 const getFlattenedValue = (node: Parent): string =>
@@ -119,15 +120,7 @@ export const remarkHeadings: Plugin<
             type: 'SpreadElement',
             argument: { type: 'Identifier', name: heading }
           }
-        : {
-            type: 'ObjectExpression',
-            properties: Object.entries(heading).map(([key, value]) => ({
-              type: 'Property',
-              kind: 'init',
-              key: { type: 'Identifier', name: key },
-              value: { type: 'Literal', value }
-            }))
-          }
+        : createAstObject(heading)
     )
 
     tree.children.push({

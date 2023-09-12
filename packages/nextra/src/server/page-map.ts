@@ -1,17 +1,12 @@
 import path from 'node:path'
-import type {
-  ArrayExpression,
-  Expression,
-  ImportDeclaration,
-  ObjectExpression,
-  Property
-} from 'estree'
+import type { ArrayExpression, Expression, ImportDeclaration } from 'estree'
 import { toJs } from 'estree-util-to-js'
 import { valueToEstree } from 'estree-util-value-to-estree'
 import gracefulFs from 'graceful-fs'
 import grayMatter from 'gray-matter'
 import pLimit from 'p-limit'
 import {
+  DEFAULT_OBJECT_PROPS,
   IMPORT_FRONTMATTER,
   MARKDOWN_EXTENSION_REGEX,
   META_FILENAME,
@@ -20,6 +15,7 @@ import {
 import { PAGES_DIR } from './file-system.js'
 import {
   createAstExportConst,
+  createAstObject,
   normalizePageRoute,
   pageTitleFromFilename,
   truthy
@@ -31,28 +27,6 @@ const limit = pLimit(20)
 
 type Import = { importName: string; filePath: string }
 type DynamicImport = { importName: string; route: string }
-
-const DEFAULT_OBJECT_PROPS: Omit<Property, 'key' | 'value'> = {
-  type: 'Property',
-  kind: 'init',
-  method: false,
-  shorthand: false,
-  computed: false
-}
-
-function createAstObject(
-  obj: Record<string, string | Expression>
-): ObjectExpression {
-  return {
-    type: 'ObjectExpression',
-    properties: Object.entries(obj).map(([key, value]) => ({
-      ...DEFAULT_OBJECT_PROPS,
-      key: { type: 'Identifier', name: key },
-      value:
-        value && typeof value === 'object' ? value : { type: 'Literal', value }
-    }))
-  }
-}
 
 type CollectFilesOptions = {
   dir: string
