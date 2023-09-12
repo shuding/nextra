@@ -89,10 +89,7 @@ export function TOC({ headings, filePath }: TOCProps): ReactElement {
                     'contrast-more:nx-text-gray-900 contrast-more:nx-underline contrast-more:dark:nx-text-gray-50 nx-w-full nx-break-words'
                   )}
                 >
-                  {config.toc.headingComponent?.({
-                    id,
-                    children: value
-                  }) ?? value}
+                  {value}
                 </a>
               </li>
             ))}
