@@ -48,7 +48,7 @@ export const DEFAULT_LOCALES = ['']
 // reload while navigating between pages every time
 export const IMPORT_FRONTMATTER = false
 
-export const DEFAULT_OBJECT_PROPS: Omit<Property, 'key' | 'value'> = {
+export const DEFAULT_PROPERTY_PROPS: Omit<Property, 'key' | 'value'> = {
   type: 'Property',
   kind: 'init',
   method: false,

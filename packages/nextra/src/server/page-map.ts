@@ -6,7 +6,7 @@ import gracefulFs from 'graceful-fs'
 import grayMatter from 'gray-matter'
 import pLimit from 'p-limit'
 import {
-  DEFAULT_OBJECT_PROPS,
+  DEFAULT_PROPERTY_PROPS,
   IMPORT_FRONTMATTER,
   MARKDOWN_EXTENSION_REGEX,
   META_FILENAME,
@@ -224,7 +224,7 @@ export async function collectPageMap({
           // localeCompare to avoid race condition
           .sort((a, b) => a.route.localeCompare(b.route))
           .map(({ importName, route }) => ({
-            ...DEFAULT_OBJECT_PROPS,
+            ...DEFAULT_PROPERTY_PROPS,
             key: { type: 'Literal', value: route },
             value: { type: 'Identifier', name: importName }
           }))

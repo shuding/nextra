@@ -8,7 +8,7 @@ import type {
 import slash from 'slash'
 import title from 'title'
 import type { Folder, MdxFile } from '../types'
-import { DEFAULT_OBJECT_PROPS } from './constants.js'
+import { DEFAULT_PROPERTY_PROPS } from './constants.js'
 
 type Truthy<T> = T extends false | '' | 0 | null | undefined ? never : T // from lodash
 
@@ -86,7 +86,7 @@ export function createAstObject(
   return {
     type: 'ObjectExpression',
     properties: Object.entries(obj).map(([key, value]) => ({
-      ...DEFAULT_OBJECT_PROPS,
+      ...DEFAULT_PROPERTY_PROPS,
       key: { type: 'Identifier', name: key },
       value:
         value && typeof value === 'object' ? value : { type: 'Literal', value }
