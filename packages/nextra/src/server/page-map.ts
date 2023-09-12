@@ -12,6 +12,7 @@ import gracefulFs from 'graceful-fs'
 import grayMatter from 'gray-matter'
 import pLimit from 'p-limit'
 import {
+  IS_PRODUCTION,
   MARKDOWN_EXTENSION_REGEX,
   META_FILENAME,
   META_REGEX
@@ -56,20 +57,32 @@ function createAstObject(
 type CollectFilesOptions = {
   dir: string
   route: string
-  metaImports?: Import[]
+  imports?: Import[]
   dynamicMetaImports?: DynamicImport[]
   isFollowingSymlink: boolean
+}
+
+function cleanFileName(name: string): string {
+  return (
+    path
+      .relative(PAGES_DIR, name)
+      .replace(/\.([jt]sx?|json|mdx?)?$/, '')
+      .replaceAll(/[\W_]+/g, '_')
+      .replace(/^_/, '')
+      // variable can't start with number
+      .replace(/^\d/, (match: string) => `_${match}`)
+  )
 }
 
 async function collectFiles({
   dir,
   route,
-  metaImports = [],
+  imports = [],
   dynamicMetaImports = [],
   isFollowingSymlink
 }: CollectFilesOptions): Promise<{
   pageMapAst: ArrayExpression
-  metaImports: Import[]
+  imports: Import[]
   dynamicMetaImports: DynamicImport[]
 }> {
   const files = await fs.readdir(dir, { withFileTypes: true })
@@ -103,7 +116,7 @@ async function collectFiles({
         const { pageMapAst } = await collectFiles({
           dir: filePath,
           route: fileRoute,
-          metaImports,
+          imports,
           dynamicMetaImports,
           isFollowingSymlink
         })
@@ -121,13 +134,25 @@ async function collectFiles({
       // add concurrency because folder can contain a lot of files
       return limit(async () => {
         if (MARKDOWN_EXTENSION_REGEX.test(ext)) {
-          const content = await fs.readFile(filePath, 'utf8')
-          const { data } = grayMatter(content)
-          data.sidebar_label ||= pageTitleFromFilename(name)
+          let frontMatter: Expression
+
+          if (IS_PRODUCTION) {
+            const importName = cleanFileName(filePath)
+            imports.push({ importName, filePath })
+            frontMatter = { type: 'Identifier', name: importName }
+          } else {
+            const content = await fs.readFile(filePath, 'utf8')
+            const { data } = grayMatter(content)
+            frontMatter = valueToEstree({
+              sidebar_label: pageTitleFromFilename(name),
+              ...data
+            })
+          }
+
           return createAstObject({
             name: path.parse(filePath).name,
             route: fileRoute,
-            frontMatter: valueToEstree(data)
+            frontMatter
           })
         }
 
@@ -135,12 +160,9 @@ async function collectFiles({
         const isMetaJs = META_REGEX.test(fileName)
 
         if (fileName === META_FILENAME || isMetaJs) {
-          const importName = path
-            .relative(PAGES_DIR, filePath)
-            .replace(/\.([jt]sx?|json)?$/, '')
-            .replaceAll(/[\W_]+/g, '_')
-            .replace(/^_/, '')
-          metaImports.push({ importName, filePath })
+          const importName = cleanFileName(filePath)
+          imports.push({ importName, filePath })
+
           if (isMetaJs) {
             const dynamicPage = array.find(f => f.name.startsWith('['))
             if (dynamicPage) {
@@ -179,7 +201,7 @@ async function collectFiles({
 
   return {
     pageMapAst: { type: 'ArrayExpression', elements: items },
-    metaImports,
+    imports,
     dynamicMetaImports
   }
 }
@@ -191,13 +213,13 @@ export async function collectPageMap({
   dir: string
   route?: string
 }): Promise<string> {
-  const { pageMapAst, metaImports, dynamicMetaImports } = await collectFiles({
+  const { pageMapAst, imports, dynamicMetaImports } = await collectFiles({
     dir,
     route,
     isFollowingSymlink: false
   })
 
-  const metaImportsAST: ImportDeclaration[] = metaImports
+  const metaImportsAST: ImportDeclaration[] = imports
     // localeCompare to avoid race condition
     .sort((a, b) => a.filePath.localeCompare(b.filePath))
     .map(({ filePath, importName }) => ({
@@ -205,8 +227,13 @@ export async function collectPageMap({
       source: { type: 'Literal', value: filePath },
       specifiers: [
         {
-          type: 'ImportDefaultSpecifier',
-          local: { type: 'Identifier', name: importName }
+          local: { type: 'Identifier', name: importName },
+          ...(IS_PRODUCTION && MARKDOWN_EXTENSION_REGEX.test(filePath)
+            ? {
+                type: 'ImportSpecifier',
+                imported: { type: 'Identifier', name: 'frontMatter' }
+              }
+            : { type: 'ImportDefaultSpecifier' })
         }
       ]
     }))

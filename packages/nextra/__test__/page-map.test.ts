@@ -72,17 +72,17 @@ describe('collectPageMap', () => {
           name: \\"swr-v1\\",
           route: \\"/en/blog/swr-v1\\",
           frontMatter: {
+            \\"sidebar_label\\": \\"SWR V1\\",
             \\"image\\": \\"https://assets.vercel.com/image/upload/v1630059453/swr/v1.png\\",
-            \\"description\\": \\"Almost 2 years ago we open sourced SWR, the tiny data-fetching React library that people love. Today we are reaching another milestone: the 1.0 version of SWR.\\",
-            \\"sidebar_label\\": \\"SWR V1\\"
+            \\"description\\": \\"Almost 2 years ago we open sourced SWR, the tiny data-fetching React library that people love. Today we are reaching another milestone: the 1.0 version of SWR.\\"
           }
         }]
       }, {
         name: \\"blog\\",
         route: \\"/en/blog\\",
         frontMatter: {
-          \\"searchable\\": false,
-          \\"sidebar_label\\": \\"Blog\\"
+          \\"sidebar_label\\": \\"Blog\\",
+          \\"searchable\\": false
         }
       }, {
         name: \\"docs\\",
@@ -346,25 +346,25 @@ describe('collectPageMap', () => {
           name: \\"auth\\",
           route: \\"/en/examples/auth\\",
           frontMatter: {
+            \\"sidebar_label\\": \\"Auth\\",
             \\"title\\": \\"Authentication\\",
-            \\"full\\": true,
-            \\"sidebar_label\\": \\"Auth\\"
+            \\"full\\": true
           }
         }, {
           name: \\"basic\\",
           route: \\"/en/examples/basic\\",
           frontMatter: {
+            \\"sidebar_label\\": \\"Basic\\",
             \\"title\\": \\"Basic Usage\\",
-            \\"full\\": true,
-            \\"sidebar_label\\": \\"Basic\\"
+            \\"full\\": true
           }
         }, {
           name: \\"error-handling\\",
           route: \\"/en/examples/error-handling\\",
           frontMatter: {
+            \\"sidebar_label\\": \\"Error Handling\\",
             \\"title\\": \\"Error Handling\\",
-            \\"full\\": true,
-            \\"sidebar_label\\": \\"Error Handling\\"
+            \\"full\\": true
           }
         }, {
           name: \\"full\\",
@@ -376,17 +376,17 @@ describe('collectPageMap', () => {
           name: \\"infinite-loading\\",
           route: \\"/en/examples/infinite-loading\\",
           frontMatter: {
+            \\"sidebar_label\\": \\"Infinite Loading\\",
             \\"title\\": \\"Infinite Loading\\",
-            \\"full\\": true,
-            \\"sidebar_label\\": \\"Infinite Loading\\"
+            \\"full\\": true
           }
         }, {
           name: \\"ssr\\",
           route: \\"/en/examples/ssr\\",
           frontMatter: {
+            \\"sidebar_label\\": \\"SSR\\",
             \\"title\\": \\"Next.js SSR\\",
-            \\"full\\": true,
-            \\"sidebar_label\\": \\"SSR\\"
+            \\"full\\": true
           }
         }]
       }, {
@@ -399,9 +399,9 @@ describe('collectPageMap', () => {
         name: \\"index\\",
         route: \\"/en\\",
         frontMatter: {
+          \\"sidebar_label\\": \\"Index\\",
           \\"title\\": \\"React Hooks for Data Fetching\\",
-          \\"searchable\\": false,
-          \\"sidebar_label\\": \\"Index\\"
+          \\"searchable\\": false
         }
       }, {
         name: \\"remote\\",
