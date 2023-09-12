@@ -1,11 +1,11 @@
 import type { z } from 'zod'
+import { ERROR_ROUTES } from '../constants.js'
 import type {
   displaySchema,
   menuItemSchema,
   pageThemeSchema
 } from '../server/schemas'
 import type { Folder, MdxFile, PageMapItem } from '../types'
-import { ERROR_ROUTES } from '../constants.js'
 import { isFolder, isMeta } from './utils.js'
 
 const DEFAULT_PAGE_THEME: PageTheme = {
