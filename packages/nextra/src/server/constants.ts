@@ -2,7 +2,7 @@
  * Benefit of server/constants - do not include unneeded `path` polyfill in client bundle,
  * while importing constants in client file
  */
-import path from 'node:path'
+import path from 'path'
 import type { Property } from 'estree'
 import type { NextraConfig } from '../types'
 

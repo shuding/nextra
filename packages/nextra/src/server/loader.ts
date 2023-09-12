@@ -168,7 +168,6 @@ ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
   })
   // Imported as a normal component, no need to add the layout.
   if (!isPageImport) {
-    // this.cacheable(false)
     return result
   }
   // Logic for resolving the page title (used for search and as fallback):

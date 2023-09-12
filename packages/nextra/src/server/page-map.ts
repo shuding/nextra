@@ -40,10 +40,10 @@ function cleanFileName(name: string): string {
   return (
     path
       .relative(PAGES_DIR, name)
-      .replace(/\.([jt]sx?|json|mdx?)?$/, '')
+      .replace(/\.([jt]sx?|json|mdx?)$/, '')
       .replaceAll(/[\W_]+/g, '_')
       .replace(/^_/, '')
-      // variable can't start with number
+      // Variable can't start with number
       .replace(/^\d/, (match: string) => `_${match}`)
   )
 }
