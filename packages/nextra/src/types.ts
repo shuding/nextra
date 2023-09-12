@@ -55,7 +55,7 @@ export type Page = (MdxFile | Folder<Page>) & {
 }
 
 export type Heading = {
-  depth: MDASTHeading['depth']
+  depth: Exclude<MDASTHeading['depth'], 1>
   value: string
   id: string
 }
@@ -65,7 +65,7 @@ export type PageOpts<FrontMatterType = FrontMatter> = {
   frontMatter: FrontMatterType
   pageMap: PageMapItem[]
   title: string
-  headings: Heading[]
+  toc: Heading[]
   hasJsxInH1?: boolean
   timestamp?: number
   readingTime?: ReadingTime

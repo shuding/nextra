@@ -220,7 +220,7 @@ ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
 
   const stringifiedPageOpts =
     JSON.stringify(pageOpts).slice(0, -1) +
-    ',headings:__toc,pageMap,frontMatter}'
+    ',toc,pageMap,frontMatter}'
 
   const lastIndexOfFooter = finalResult.lastIndexOf(FOOTER_TO_REMOVE)
   const mdxContent =

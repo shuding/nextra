@@ -80,7 +80,7 @@ import Head from 'next/head'
 import type { NextraThemeLayoutProps } from 'nextra'
 
 export default function Layout({ children, pageOpts }: NextraThemeLayoutProps) {
-  const { title, frontMatter, headings } = pageOpts
+  const { title, frontMatter, toc } = pageOpts
 
   return (
     <div>
@@ -91,7 +91,7 @@ export default function Layout({ children, pageOpts }: NextraThemeLayoutProps) {
       <h1>My Theme</h1>
       Table of Contents:
       <ul>
-        {headings.map(heading => (
+        {toc.map(heading => (
           <li key={heading.value}>{heading.value}</li>
         ))}
       </ul>

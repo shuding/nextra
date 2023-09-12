@@ -24,7 +24,7 @@ const SKIP_FOR_PARENT_NAMES = new Set(['Tab', 'Tabs.Tab'])
 export const remarkHeadings: Plugin<
   [{ exportName?: string; isRemoteContent?: boolean }],
   Root
-> = ({ exportName = '__toc', isRemoteContent }) => {
+> = ({ exportName = 'toc', isRemoteContent }) => {
   const headings: (Heading | string)[] = []
   let hasJsxInH1: boolean
   let title: string
@@ -38,9 +38,9 @@ export const remarkHeadings: Plugin<
       ast,
       [
         'heading',
-        // push partial component's __toc export name to headings list
+        // push partial component's `toc` export name to headings list
         'mdxJsxFlowElement',
-        // verify .md/.mdx exports and attach named __toc export
+        // verify .md/.mdx exports and attach named `toc` export
         'mdxjsEsm'
       ],
       (node, _index, parent) => {
@@ -109,7 +109,7 @@ export const remarkHeadings: Plugin<
     file.data.title = title
 
     if (isRemoteContent) {
-      // Attach headings for remote content, because we can't access to __toc variable
+      // Attach headings for remote content, because we can't access to `toc` variable
       file.data.headings = headings
       return
     }
