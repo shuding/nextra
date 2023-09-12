@@ -121,13 +121,15 @@ export async function compileMdx(
         remarkMdxFrontMatter
       ]
     })
-    const vFile = await compiler.process(source)
-    const result = vFile.toString()
-    const res = result.slice(
-      0,
-      result.lastIndexOf('function _createMdxContent(props) {')
+    const vFile = await compiler.process(
+      filePath ? { value: source, path: filePath } : source
     )
-    return { result: res } as any
+    const content = vFile.toString()
+    const result = content.slice(
+      0,
+      content.lastIndexOf('function _createMdxContent(props) {')
+    )
+    return { result } as any
   }
 
   let searchIndexKey: string | null = null
