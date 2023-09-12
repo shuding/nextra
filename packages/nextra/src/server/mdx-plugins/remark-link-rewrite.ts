@@ -9,17 +9,12 @@ export type RemarkLinkRewriteOptions = {
   excludeExternalLinks?: boolean
 }
 
-export const remarkLinkRewrite: Plugin<[RemarkLinkRewriteOptions], Root> = ({
-  pattern,
-  replace,
-  excludeExternalLinks
-}) => {
-  return (tree, _file, done) => {
-    visit(tree, 'link', node => {
+export const remarkLinkRewrite: Plugin<[RemarkLinkRewriteOptions], Root> =
+  ({ pattern, replace, excludeExternalLinks }) =>
+  ast => {
+    visit(ast, 'link', node => {
       if (!(excludeExternalLinks && EXTERNAL_URL_REGEX.test(node.url))) {
         node.url = node.url.replace(pattern, replace)
       }
     })
-    done()
   }
-}

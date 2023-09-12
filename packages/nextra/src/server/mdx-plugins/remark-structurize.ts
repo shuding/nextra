@@ -17,11 +17,10 @@ export const remarkStructurize: Plugin<[Search], Root> = options => {
   let skip = false
   let content = ''
 
-  return (tree, file, done) => {
+  return (tree, file) => {
     walk(tree)
     save()
     file.data.structurizedData = structurizedData
-    done()
   }
 
   function save() {
