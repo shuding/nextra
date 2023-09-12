@@ -198,6 +198,7 @@ export async function collectPageMap({
     ...metaImportsAST,
     createAstExportConst('pageMap', pageMapAst)
   ]
+  let footer = ''
 
   if (dynamicMetaImports.length) {
     body.push({
@@ -221,6 +222,14 @@ export async function collectPageMap({
         }
       ]
     })
+
+    footer = `
+import { resolvePageMap } from 'nextra/setup-page'
+
+if (typeof window === 'undefined') {
+  globalThis.__nextra_resolvePageMap ||= Object.create(null)
+  globalThis.__nextra_resolvePageMap['${locale}'] = resolvePageMap('${locale}', dynamicMetaModules)
+}`
   }
 
   const result = toJs({
@@ -229,13 +238,5 @@ export async function collectPageMap({
     body
   })
 
-  const footer = `import { resolvePageMap } from 'nextra/setup-page'
-
-if (typeof window === 'undefined') {
-  globalThis.__nextra_resolvePageMap ||= Object.create(null)
-  globalThis.__nextra_resolvePageMap['${locale}'] = resolvePageMap('${locale}', dynamicMetaModules)
-}`
-
-  return `${result.value}
-${dynamicMetaImports.length ? footer : ''}`.trim()
+  return `${result.value}${footer}`.trim()
 }
