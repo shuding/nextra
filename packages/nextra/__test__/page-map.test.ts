@@ -445,10 +445,7 @@ describe('Page Process', () => {
         'folder-without-markdown-files'
       )
     })
-    expect(clean(rawJs)).toMatchInlineSnapshot(`
-      "export const pageMap = [];
-      "
-    `)
+    expect(clean(rawJs)).toMatchInlineSnapshot('"export const pageMap = [];"')
   })
 
   it("should not add `_meta.json` file if it's missing", async () => {
@@ -474,8 +471,7 @@ describe('Page Process', () => {
         frontMatter: {
           \\"sidebar_label\\": \\"Tabs\\"
         }
-      }];
-      "
+      }];"
     `)
   })
 
@@ -508,8 +504,7 @@ describe('Page Process', () => {
         frontMatter: {
           \\"sidebar_label\\": \\"Test1\\"
         }
-      }];
-      "
+      }];"
     `)
   })
 
