@@ -43,7 +43,7 @@ export class NextraPlugin {
         for (const locale of locales) {
           const route = `/${locale}`
           const dir = PAGES_DIR + route
-          const rawJs = await collectPageMap({ dir, route })
+          const rawJs = await collectPageMap({ dir, route, locale })
 
           await fs.writeFile(
             path.join(CHUNKS_DIR, `nextra-page-map-${locale}.mjs`),

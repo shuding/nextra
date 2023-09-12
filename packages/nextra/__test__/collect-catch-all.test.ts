@@ -17,10 +17,9 @@ describe('collectCatchAllRoutes', () => {
     const parent = {
       name: 'nested',
       route: '/remote/nested',
-      children: [meta]
+      children: []
     }
-    collectCatchAllRoutes(parent, meta)
-    expect(parent).toMatchInlineSnapshot(`
+    expect(collectCatchAllRoutes(parent, meta)).toMatchInlineSnapshot(`
       {
         "children": [
           {

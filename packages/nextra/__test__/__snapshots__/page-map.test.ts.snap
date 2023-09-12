@@ -173,7 +173,17 @@ exports[`Page Process > should match i18n site page maps 1`] = `
             "error-handling": {
               "display": "hidden",
             },
-            "getting-started": "",
+            "getting-started": {
+              "title": <React.Fragment>
+                <i>
+                  Getting
+                </i>
+                 
+                <s>
+                  Started
+                </s>
+              </React.Fragment>,
+            },
             "github_link": {
               "href": "https://github.com/shuding/nextra",
               "newWindow": true,

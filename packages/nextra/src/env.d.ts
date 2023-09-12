@@ -12,7 +12,7 @@ declare namespace globalThis {
 
   var __nextra_temp_do_not_use: () => void
 
-  var __nextra_resolvePageMap: () => Promise<PageMapItem[]>
+  var __nextra_resolvePageMap: Record<string, () => Promise<PageMapItem[]>>
 }
 
 declare module 'next/dist/compiled/webpack/webpack.js' {

@@ -13,7 +13,7 @@ describe('collectPageMap', () => {
       'pages',
       'en'
     )
-    const rawJs = await collectPageMap({ dir, route: '/en' })
+    const rawJs = await collectPageMap({ dir, route: '/en', locale: 'en' })
 
     // To fix tests on CI
     const rawJsWithCleanImportPath = rawJs.replaceAll(
@@ -26,7 +26,7 @@ describe('collectPageMap', () => {
       "import examples_swr_site_pages_en_meta from \\"../../examples/swr-site/pages/en/_meta.json\\";
       import examples_swr_site_pages_en_about_meta from \\"../../examples/swr-site/pages/en/about/_meta.ts\\";
       import examples_swr_site_pages_en_blog_meta from \\"../../examples/swr-site/pages/en/blog/_meta.ts\\";
-      import examples_swr_site_pages_en_docs_meta from \\"../../examples/swr-site/pages/en/docs/_meta.ts\\";
+      import examples_swr_site_pages_en_docs_meta from \\"../../examples/swr-site/pages/en/docs/_meta.tsx\\";
       import examples_swr_site_pages_en_docs_advanced_meta from \\"../../examples/swr-site/pages/en/docs/advanced/_meta.ts\\";
       import examples_swr_site_pages_en_examples_meta from \\"../../examples/swr-site/pages/en/examples/_meta.ts\\";
       import examples_swr_site_pages_en_remote_graphql_eslint_meta from \\"../../examples/swr-site/pages/en/remote/graphql-eslint/_meta.ts\\";
@@ -415,10 +415,17 @@ describe('collectPageMap', () => {
           \\"sidebar_label\\": \\"Test\\"
         }
       }];
-      export const dynamicMetaModules = {
+      const dynamicMetaModules = {
         \\"/en/remote/graphql-eslint\\": examples_swr_site_pages_en_remote_graphql_eslint_meta,
         \\"/en/remote/graphql-yoga\\": examples_swr_site_pages_en_remote_graphql_yoga_meta
-      };"
+      };
+
+      import { resolvePageMap } from 'nextra/setup-page'
+
+      if (typeof window === 'undefined') {
+        globalThis.__nextra_resolvePageMap ||= Object.create(null)
+        globalThis.__nextra_resolvePageMap['en'] = resolvePageMap('en', dynamicMetaModules)
+      }"
     `)
   })
 })
@@ -434,10 +441,7 @@ describe('Page Process', () => {
         'folder-without-markdown-files'
       )
     })
-    expect(rawJs).toMatchInlineSnapshot(`
-      "export const pageMap = [];
-      export const dynamicMetaModules = {};"
-    `)
+    expect(rawJs).toMatchInlineSnapshot('"export const pageMap = [];"')
   })
 
   it("should not add `_meta.json` file if it's missing", async () => {
@@ -463,8 +467,7 @@ describe('Page Process', () => {
         frontMatter: {
           \\"sidebar_label\\": \\"Tabs\\"
         }
-      }];
-      export const dynamicMetaModules = {};"
+      }];"
     `)
   })
 
@@ -497,8 +500,7 @@ describe('Page Process', () => {
         frontMatter: {
           \\"sidebar_label\\": \\"Test1\\"
         }
-      }];
-      export const dynamicMetaModules = {};"
+      }];"
     `)
   })
 

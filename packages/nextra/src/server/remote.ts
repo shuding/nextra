@@ -23,8 +23,8 @@ export async function buildDynamicMDX(
   }
 }
 
-export async function buildDynamicMeta() {
+export async function buildDynamicMeta(locale = '') {
   return {
-    __nextra_pageMap: await globalThis.__nextra_resolvePageMap()
+    __nextra_pageMap: await globalThis.__nextra_resolvePageMap[locale]()
   }
 }

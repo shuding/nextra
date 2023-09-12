@@ -227,14 +227,10 @@ ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
     finalResult.slice(lastIndexOfFooter + FOOTER_TO_REMOVE.length)
   const pageMapPath = path.join(CHUNKS_DIR, `nextra-page-map-${locale}.mjs`)
 
-  const rawJs = `import { setupNextraPage, resolvePageMap } from 'nextra/setup-page'
-import { pageMap, dynamicMetaModules } from '${pageMapPath}'
+  const rawJs = `import { setupNextraPage } from 'nextra/setup-page'
+import { pageMap } from '${pageMapPath}'
 ${isAppFileFromNodeModules ? cssImports : ''}
 ${mdxContent}
-
-if (typeof window === 'undefined') {
-  globalThis.__nextra_resolvePageMap = resolvePageMap(dynamicMetaModules)
-}
 
 export default setupNextraPage(
   MDXContent,
