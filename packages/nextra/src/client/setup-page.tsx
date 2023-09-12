@@ -146,7 +146,6 @@ function NextraLayout({
   }
 
   let { pageOpts } = pageContext
-  const { Content } = pageContext
 
   if (__nextra_pageMap) {
     pageOpts = {
@@ -167,7 +166,7 @@ function NextraLayout({
   return (
     <Layout themeConfig={themeConfig} pageOpts={pageOpts} pageProps={props}>
       <DataProvider value={props}>
-        <Content />
+        <pageContext.Content />
       </DataProvider>
     </Layout>
   )

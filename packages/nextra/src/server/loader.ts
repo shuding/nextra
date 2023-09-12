@@ -218,8 +218,7 @@ ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
   }
   const finalResult = transform ? await transform(result, { route }) : result
 
-  const stringifiedPageOpts =
-    JSON.stringify(pageOpts).slice(0, -1) + ',toc,pageMap,frontMatter}'
+  const stringifiedPageOpts = JSON.stringify(pageOpts).slice(0, -1)
 
   const lastIndexOfFooter = finalResult.lastIndexOf(FOOTER_TO_REMOVE)
   const mdxContent =
@@ -237,7 +236,11 @@ if (typeof window === 'undefined') {
   globalThis.__nextra_resolvePageMap = resolvePageMap(dynamicMetaModules)
 }
 
-export default setupNextraPage(MDXContent, '${route}', ${stringifiedPageOpts})`
+export default setupNextraPage(
+  MDXContent,
+  '${route}',
+  ${stringifiedPageOpts},toc,pageMap,frontMatter}
+)`
 
   return rawJs
 }
