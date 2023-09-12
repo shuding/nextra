@@ -2,10 +2,6 @@ import path from 'node:path'
 import { CWD } from '../src/server/constants.js'
 import { collectPageMap } from '../src/server/page-map.js'
 
-function clean(content: string): string {
-  return content.replace(/\s+const dynamicMetaModules.+/s, '')
-}
-
 describe('collectPageMap', () => {
   it('should work', async () => {
     const dir = path.join(
@@ -445,7 +441,7 @@ describe('Page Process', () => {
         'folder-without-markdown-files'
       )
     })
-    expect(clean(rawJs)).toMatchInlineSnapshot('"export const pageMap = [];"')
+    expect(rawJs).toMatchInlineSnapshot('"export const pageMap = [];"')
   })
 
   it("should not add `_meta.json` file if it's missing", async () => {
@@ -458,7 +454,7 @@ describe('Page Process', () => {
         'folder-without-meta-json'
       )
     })
-    expect(clean(rawJs)).toMatchInlineSnapshot(`
+    expect(rawJs).toMatchInlineSnapshot(`
       "export const pageMap = [{
         name: \\"callout\\",
         route: \\"/callout\\",
@@ -487,7 +483,7 @@ describe('Page Process', () => {
       )
     })
 
-    expect(clean(rawJs)).toMatchInlineSnapshot(`
+    expect(rawJs).toMatchInlineSnapshot(`
       "export const pageMap = [{
         name: \\"docs\\",
         route: \\"/docs\\",

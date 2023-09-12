@@ -194,41 +194,48 @@ export async function collectPageMap({
       ]
     }))
 
+  const body: Parameters<typeof toJs>[0]['body'] = [
+    ...metaImportsAST,
+    createAstExportConst('pageMap', pageMapAst)
+  ]
+
+  if (dynamicMetaImports.length) {
+    body.push({
+      type: 'VariableDeclaration',
+      kind: 'const',
+      declarations: [
+        {
+          type: 'VariableDeclarator',
+          id: { type: 'Identifier', name: 'dynamicMetaModules' },
+          init: {
+            type: 'ObjectExpression',
+            properties: dynamicMetaImports
+              // localeCompare to avoid race condition
+              .sort((a, b) => a.route.localeCompare(b.route))
+              .map(({ importName, route }) => ({
+                ...DEFAULT_PROPERTY_PROPS,
+                key: { type: 'Literal', value: route },
+                value: { type: 'Identifier', name: importName }
+              }))
+          }
+        }
+      ]
+    })
+  }
+
   const result = toJs({
     type: 'Program',
     sourceType: 'module',
-    body: [
-      ...metaImportsAST,
-      createAstExportConst('pageMap', pageMapAst),
-      {
-        type: 'VariableDeclaration',
-        kind: 'const',
-        declarations: [
-          {
-            type: 'VariableDeclarator',
-            id: { type: 'Identifier', name: 'dynamicMetaModules' },
-            init: {
-              type: 'ObjectExpression',
-              properties: dynamicMetaImports
-                // localeCompare to avoid race condition
-                .sort((a, b) => a.route.localeCompare(b.route))
-                .map(({ importName, route }) => ({
-                  ...DEFAULT_PROPERTY_PROPS,
-                  key: { type: 'Literal', value: route },
-                  value: { type: 'Identifier', name: importName }
-                }))
-            }
-          }
-        ]
-      }
-    ]
+    body
   })
 
-  return `${result.value}
-import { resolvePageMap } from 'nextra/setup-page'
+  const footer = `import { resolvePageMap } from 'nextra/setup-page'
 
 if (typeof window === 'undefined') {
   globalThis.__nextra_resolvePageMap ||= Object.create(null)
   globalThis.__nextra_resolvePageMap['${locale}'] = resolvePageMap('${locale}', dynamicMetaModules)
 }`
+
+  return `${result.value}
+${dynamicMetaImports.length ? footer : ''}`.trim()
 }
