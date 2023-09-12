@@ -3,7 +3,13 @@ export default {
     title: 'Getting Started',
     type: 'separator'
   },
-  'getting-started': '',
+  'getting-started': {
+    title: (
+      <>
+        <i>Getting</i>&nbsp;<s>Started</s>
+      </>
+    )
+  },
   options: '',
   'global-configuration': '',
   'data-fetching': '',

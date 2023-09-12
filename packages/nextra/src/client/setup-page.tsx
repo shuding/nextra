@@ -40,21 +40,26 @@ function normalizeMetaData(obj: DynamicMeta): DynamicMeta {
 }
 
 export function collectCatchAllRoutes(
-  parent: Folder<any>,
+  parent: Folder,
   meta: DynamicMetaJsonFile,
   isRootFolder = true
-): void {
+): Folder {
   if (isRootFolder) {
-    collectCatchAllRoutes(parent, { data: meta.data }, false)
-    meta.data = normalizeMetaData(meta.data)
-    return
+    const folder = collectCatchAllRoutes(parent, meta, false)
+
+    return {
+      ...folder,
+      children: [{ data: normalizeMetaData(meta.data) }, ...folder.children]
+    }
   }
+  const result = []
+
   for (const [key, value] of Object.entries(meta.data)) {
     if (!isFolder(value)) {
       if (key === '*') {
         continue
       }
-      parent.children.push({
+      result.push({
         name: key,
         route: normalizePageRoute(parent.route, key)
       })
@@ -66,9 +71,16 @@ export function collectCatchAllRoutes(
       route: `${parent.route}/${routeWithoutSlashes}`,
       children: [{ data: normalizeMetaData(value.items) }]
     }
+    newParent.children.push(
+      ...collectCatchAllRoutes(newParent, { data: value.items }, false).children
+    )
+    result.push(newParent)
+  }
 
-    parent.children.push(newParent)
-    collectCatchAllRoutes(newParent, { data: value.items }, false)
+  return {
+    route: parent.route,
+    name: parent.name,
+    children: result
   }
 }
 
@@ -90,19 +102,26 @@ export const resolvePageMap =
     if (process.env.NODE_ENV === 'production' && cachedResolvedPageMap) {
       return cachedResolvedPageMap
     }
-    const clonedPageMap = structuredClone(__nextra_internal__.pageMap)
+    const { pageMap } = __nextra_internal__
+    const result = []
 
     for (const [route, metaFunction] of Object.entries(dynamicMetaModules)) {
       // TODO 2 for locale, 1 without local
-      const folder = findFolder(clonedPageMap, route.split('/').slice(2))
+      const folder = findFolder(pageMap, route.split('/').slice(2))
       const metaData = await metaFunction()
-      const meta: DynamicMetaJsonFile = folder.children[0]
-      meta.data = metaData
-      collectCatchAllRoutes(folder, meta)
+      result.push(
+        collectCatchAllRoutes(
+          {
+            ...folder,
+            // todo: remove this after fix in page-map.ts
+            children: []
+          },
+          { data: metaData }
+        )
+      )
     }
-    // TODO: found workaround to fix Reason: `symbol` cannot be serialized as JSON. Please only
-    //  return JSON serializable data types.
-    return (cachedResolvedPageMap = clonedPageMap)
+
+    return (cachedResolvedPageMap = result)
   }
 
 export function setupNextraPage(
@@ -126,7 +145,7 @@ export function setupNextraPage(
 }
 
 function NextraLayout({
-  __nextra_pageMap,
+  __nextra_pageMap = [],
   __nextra_dynamic_opts,
   ...props
 }: any): ReactElement {
@@ -147,11 +166,10 @@ function NextraLayout({
 
   let { pageOpts } = pageContext
 
-  if (__nextra_pageMap) {
-    pageOpts = {
-      ...pageOpts,
-      pageMap: __nextra_pageMap
-    }
+  for (const { route, children } of __nextra_pageMap) {
+    // TODO 2 for locale, 1 without local
+    const folder = findFolder(pageOpts.pageMap, route.split('/').slice(2))
+    folder.children = children
   }
 
   if (__nextra_dynamic_opts) {
