@@ -227,7 +227,7 @@ export function normalizePages({
 
     const title =
       extendedMeta.title ||
-      (type !== 'separator' && a.frontMatter?.sidebar_label)
+      (type !== 'separator' && (a.frontMatter?.sidebar_label || a.name))
     const getItem = (): Item => ({
       ...a,
       type,

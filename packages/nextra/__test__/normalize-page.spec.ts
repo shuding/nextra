@@ -76,12 +76,8 @@ describe('normalize-page', () => {
                 layout: 'raw'
               }
             },
-            index: {
-              title: 'Introduction'
-            },
-            'get-started': {
-              title: 'Get Started'
-            }
+            index: 'Introduction',
+            'get-started': 'Get Started'
           }
         }
       ],
