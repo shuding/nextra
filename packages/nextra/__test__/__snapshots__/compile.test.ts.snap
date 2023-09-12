@@ -6,7 +6,7 @@ exports[`Process heading > code-h1 1`] = `
   "result": "/*@jsxRuntime automatic @jsxImportSource react*/
 import {useMDXComponents as _provideComponents} from \\"nextra/mdx\\";
 export const frontMatter = {};
-export const __toc = [];
+export const toc = [];
 function _createMdxContent(props) {
   const _components = Object.assign({
     h1: \\"h1\\",
@@ -30,7 +30,7 @@ exports[`Process heading > code-with-text-h1 1`] = `
   "result": "/*@jsxRuntime automatic @jsxImportSource react*/
 import {useMDXComponents as _provideComponents} from \\"nextra/mdx\\";
 export const frontMatter = {};
-export const __toc = [];
+export const toc = [];
 function _createMdxContent(props) {
   const _components = Object.assign({
     h1: \\"h1\\",
@@ -60,7 +60,7 @@ export const TagName = () => {
   const {tag} = useRouter().query;
   return tag || null;
 };
-export const __toc = [];
+export const toc = [];
 function _createMdxContent(props) {
   const _components = Object.assign({
     h1: \\"h1\\"
@@ -83,7 +83,7 @@ exports[`Process heading > no-h1 1`] = `
   "result": "/*@jsxRuntime automatic @jsxImportSource react*/
 import {useMDXComponents as _provideComponents} from \\"nextra/mdx\\";
 export const frontMatter = {};
-export const __toc = [{
+export const toc = [{
   depth: 2,
   value: \\"H2\\",
   id: \\"h2\\"
@@ -109,7 +109,7 @@ exports[`Process heading > static-h1 1`] = `
   "result": "/*@jsxRuntime automatic @jsxImportSource react*/
 import {useMDXComponents as _provideComponents} from \\"nextra/mdx\\";
 export const frontMatter = {};
-export const __toc = [];
+export const toc = [];
 function _createMdxContent(props) {
   const _components = Object.assign({
     h1: \\"h1\\"

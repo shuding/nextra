@@ -219,8 +219,7 @@ ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
   const finalResult = transform ? await transform(result, { route }) : result
 
   const stringifiedPageOpts =
-    JSON.stringify(pageOpts).slice(0, -1) +
-    ',toc,pageMap,frontMatter}'
+    JSON.stringify(pageOpts).slice(0, -1) + ',toc,pageMap,frontMatter}'
 
   const lastIndexOfFooter = finalResult.lastIndexOf(FOOTER_TO_REMOVE)
   const mdxContent =

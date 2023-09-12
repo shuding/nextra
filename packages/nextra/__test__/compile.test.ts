@@ -97,19 +97,19 @@ import Last from './three.mdx'
       "/*@jsxRuntime automatic @jsxImportSource react*/
       import {useMDXComponents as _provideComponents} from \\"nextra/mdx\\";
       export const frontMatter = {};
-      import FromMdx, {__toc as __toc0} from './one.mdx';
-      import FromMarkdown, {__toc as __toc1} from './two.md';
+      import FromMdx, {toc as toc0} from './one.mdx';
+      import FromMarkdown, {toc as toc1} from './two.md';
       import IgnoreMe from './foo';
-      import Last, {__toc as __toc2} from './three.mdx';
-      export const __toc = [{
+      import Last, {toc as toc2} from './three.mdx';
+      export const toc = [{
         depth: 2,
         value: \\"❤️\\",
         id: \\"️\\"
-      }, ...__toc0, {
+      }, ...toc0, {
         depth: 2,
         value: \\"✅\\",
         id: \\"\\"
-      }, ...__toc1, ...__toc2, {
+      }, ...toc1, ...toc2, {
         depth: 2,
         value: \\"👋\\",
         id: \\"-1\\"
@@ -142,7 +142,7 @@ import Last from './three.mdx'
 `,
       { mdxOptions }
     )
-    expect(result).toMatch('export const __toc = [];')
+    expect(result).toMatch('export const toc = [];')
     expect(result).not.toMatch('id="custom-id"')
   })
 })
