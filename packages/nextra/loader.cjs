@@ -6,14 +6,19 @@
  *
  * @todo once webpack supports ESM loaders, remove this wrapper.
  *
- * @this {LoaderContext}
+ * @this {import('webpack').LoaderContext}
  * @param {string} code
+ * @return {Promise<void>}
  */
-module.exports = function (code) {
+module.exports = async function (code) {
   const callback = this.async()
 
-  // Note that `import()` caches, so this should be fast enough.
-  import('./dist/server/loader.js').then(mod =>
-    mod.default.call(this, code, callback)
-  )
+  try {
+    // Note that `import()` caches, so this should be fast enough.
+    const { loader } = await import('./dist/server/loader.js')
+    const result = await loader.call(this, code)
+    callback(null, result)
+  } catch (error) {
+    callback(error)
+  }
 }

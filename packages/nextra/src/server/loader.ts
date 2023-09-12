@@ -48,8 +48,8 @@ const FOOTER_TO_REMOVE = 'export default MDXContent;'
 
 let isAppFileFromNodeModules = false
 
-async function loader(
-  context: LoaderContext<LoaderOptions>,
+export async function loader(
+  this: LoaderContext<LoaderOptions>,
   source: string
 ): Promise<string> {
   const {
@@ -67,9 +67,9 @@ async function loader(
     transformPageOpts,
     mdxOptions,
     locales
-  } = context.getOptions()
+  } = this.getOptions()
 
-  const mdxPath = context._module?.resourceResolveData
+  const mdxPath = this._module?.resourceResolveData
     ? // to make it work with symlinks, resolve the mdx path based on the relative path
       /*
        * `context.rootContext` could include path chunk of
@@ -77,10 +77,10 @@ async function loader(
        * `context._module.resourceResolveData.descriptionFileRoot` instead
        */
       path.join(
-        context._module.resourceResolveData.descriptionFileRoot,
-        context._module.resourceResolveData.relativePath
+        this._module.resourceResolveData.descriptionFileRoot,
+        this._module.resourceResolveData.relativePath
       )
-    : context.resourcePath
+    : this.resourcePath
 
   if (mdxPath.includes('/pages/api/')) {
     logger.warn(
@@ -180,7 +180,7 @@ ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
 
   if (searchIndexKey && frontMatter.searchable !== false) {
     // Store all the things in buildInfo.
-    const { buildInfo } = context._module as any
+    const { buildInfo } = this._module as any
     buildInfo.nextraSearch = {
       indexKey: searchIndexKey,
       title: fallbackTitle,
@@ -240,14 +240,4 @@ if (typeof window === 'undefined') {
 export default setupNextraPage(MDXContent, '${route}', ${stringifiedPageOpts})`
 
   return rawJs
-}
-
-export default function syncLoader(
-  this: LoaderContext<LoaderOptions>,
-  source: string,
-  callback: (err?: null | Error, content?: string) => void
-): void {
-  loader(this, source)
-    .then(result => callback(null, result))
-    .catch(error => callback(error))
 }
