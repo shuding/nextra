@@ -225,7 +225,10 @@ export function normalizePages({
         pageThemeContext: extendedPageThemeContext
       })
 
-    const title = extendedMeta.title || (type !== 'separator' && a.name)
+    const title =
+      extendedMeta.title ||
+      (type !== 'separator' && a.name) ||
+      a.frontMatter?.sidebar_label
     const getItem = (): Item => ({
       ...a,
       type,

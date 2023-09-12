@@ -123,13 +123,11 @@ async function collectFiles({
         if (MARKDOWN_EXTENSION_REGEX.test(ext)) {
           const content = await fs.readFile(filePath, 'utf8')
           const { data } = grayMatter(content)
-
+          data.sidebar_label ||= pageTitleFromFilename(name)
           return createAstObject({
             name: path.parse(filePath).name,
             route: fileRoute,
-            ...(Object.keys(data).length && {
-              frontMatter: valueToEstree(data)
-            })
+            frontMatter: valueToEstree(data)
           })
         }
 
