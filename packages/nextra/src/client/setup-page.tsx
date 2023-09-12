@@ -105,11 +105,16 @@ export const resolvePageMap =
     ) {
       return cachedResolvedPageMap[locale]
     }
-    const { pageMap } = __nextra_internal__
+    const { pageMap } = locale
+      ? Object.entries(__nextra_internal__.context)
+          // Fix race condition. Find a better way to get pageMap?
+          .find(([route]) => route.startsWith(`/${locale}/`))![1].pageOpts
+      : __nextra_internal__
     const result = []
 
     for (const [route, metaFunction] of Object.entries(dynamicMetaModules)) {
-      const folder = findFolder(pageMap, route.split('/').slice(locale ? 2 : 1))
+      const paths = route.split('/').slice(locale ? 2 : 1)
+      const folder = findFolder(pageMap, paths)
       const metaData = await metaFunction()
       result.push(
         collectCatchAllRoutes(
@@ -170,7 +175,8 @@ function NextraLayout({
 
   for (const { route, children } of __nextra_pageMap) {
     // TODO 2 for locale, 1 without local
-    const folder = findFolder(pageOpts.pageMap, route.split('/').slice(2))
+    const paths = route.split('/').slice(2)
+    const folder = findFolder(pageOpts.pageMap, paths)
     folder.children = children
   }
 
