@@ -233,9 +233,7 @@ import { pageMap, dynamicMetaModules } from '${pageMapPath}'
 ${isAppFileFromNodeModules ? cssImports : ''}
 ${mdxContent}
 
-const __nextraPageOptions = {
-  pageOpts: ${stringifiedPageOpts}
-}
+const __nextraPageOptions = ${stringifiedPageOpts}
 
 if (typeof window === 'undefined') {
   globalThis.__nextra_resolvePageMap = resolvePageMap(dynamicMetaModules)
