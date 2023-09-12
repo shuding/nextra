@@ -1,6 +1,7 @@
 {
   "name": "nextra",
   "version": "3.0.0-alpha.0",
+  "type": "module",
   "description": "Next.js and MDX based site generator.",
   "repository": "https://github.com/shuding/nextra",
   "license": "MIT",
@@ -13,82 +14,82 @@
     "./loader": "./loader.cjs",
     "./components": {
       "import": "./dist/client/components/index.js",
-      "types": "./dist/client/components/index.d.mts"
+      "types": "./dist/client/components/index.d.ts"
     },
     "./mdx-plugins": {
       "import": "./dist/server/mdx-plugins/index.js",
-      "types": "./dist/server/mdx-plugins/index.d.mts"
+      "types": "./dist/server/mdx-plugins/index.d.ts"
     },
     "./hooks": {
       "import": "./dist/client/hooks/index.js",
-      "types": "./dist/client/hooks/index.d.mts"
+      "types": "./dist/client/hooks/index.d.ts"
     },
     "./icons": {
       "import": "./dist/client/icons/index.js",
-      "types": "./dist/client/icons/index.d.mts"
+      "types": "./dist/client/icons/index.d.ts"
     },
     "./compile": {
       "import": "./dist/server/compile.js",
-      "types": "./dist/server/compile.d.mts"
+      "types": "./dist/server/compile.d.ts"
     },
     "./remote": {
       "import": "./dist/server/remote.js",
-      "types": "./dist/server/remote.d.mts"
+      "types": "./dist/server/remote.d.ts"
     },
     "./schemas": {
       "import": "./dist/server/schemas.js",
-      "types": "./dist/server/schemas.d.mts"
+      "types": "./dist/server/schemas.d.ts"
     },
     "./fetch-filepaths-from-github": {
       "import": "./dist/server/fetch-filepaths-from-github.js",
-      "types": "./dist/server/fetch-filepaths-from-github.d.mts"
+      "types": "./dist/server/fetch-filepaths-from-github.d.ts"
     },
     "./*": {
       "import": "./dist/client/*.js",
-      "types": "./dist/client/*.d.mts"
+      "types": "./dist/client/*.d.ts"
     }
   },
-  "types": "./dist/server/index.d.mts",
+  "types": "./dist/server/index.d.ts",
   "typesVersions": {
     "*": {
       "compile": [
-        "./dist/server/compile.d.mts"
+        "./dist/server/compile.d.ts"
       ],
       "mdx-plugins": [
-        "./dist/server/mdx-plugins/index.d.mts"
+        "./dist/server/mdx-plugins/index.d.ts"
       ],
       "remote": [
-        "./dist/server/remote.d.mts"
+        "./dist/server/remote.d.ts"
       ],
       "catch-all": [
-        "./dist/client/catch-all.d.mts"
+        "./dist/client/catch-all.d.ts"
       ],
       "context": [
-        "./dist/client/context.d.mts"
+        "./dist/client/context.d.ts"
       ],
       "data": [
-        "./dist/client/data.d.mts"
+        "./dist/client/data.d.ts"
       ],
       "icons": [
-        "./dist/client/icons/index.d.mts"
+        "./dist/client/icons/index.d.ts"
       ],
       "components": [
-        "./dist/client/components/index.d.mts"
+        "./dist/client/components/index.d.ts"
       ],
       "hooks": [
-        "./dist/client/hooks/index.d.mts"
+        "./dist/client/hooks/index.d.ts"
       ],
       "mdx": [
-        "./dist/client/mdx.d.mts"
+        "./dist/client/mdx.d.ts"
       ],
       "schemas": [
-        "./dist/server/schemas.d.mts"
+        "./dist/server/schemas.d.ts"
       ],
       "normalize-pages": [
-        "./dist/client/normalize-pages.d.mts"
+        "./dist/client/normalize-pages.d.ts"
       ],
       "fetch-filepaths-from-github": [
-        "./dist/server/fetch-filepaths-from-github.d.mts"
+        "./dist/server/fetch-filepaths-from-github.d.ts"
       ]
     }
   },

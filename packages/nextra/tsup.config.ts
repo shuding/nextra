@@ -36,9 +36,5 @@ export default defineConfig({
       path.join(CWD, 'dist', 'client', 'package.json'),
       '{"sideEffects":false}'
     )
-    await fs.writeFile(
-      path.join(CWD, 'dist', 'server', 'package.json'),
-      '{"type":"module","sideEffects":false}'
-    )
   }
 })
