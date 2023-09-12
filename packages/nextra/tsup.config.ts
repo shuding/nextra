@@ -11,8 +11,7 @@ export default defineConfig({
   dts: true,
   splitting: false,
   bundle: false,
-  external: ['shiki', './__temp__', 'webpack'],
-  outExtension: () => ({ js: '.js' }),
+  external: ['shiki', 'webpack'],
   async onSuccess() {
     await fs.copyFile(
       path.join(CWD, 'src', 'server', '__temp__.cjs'),

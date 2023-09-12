@@ -17,7 +17,7 @@ import type {
   PageMapItem,
   PageOpts
 } from '../types'
-import { NEXTRA_INTERNAL } from './constants.js'
+import { NEXTRA_INTERNAL } from '../constants.js'
 import { DataProvider } from './data.js'
 
 function isFolder(value: DynamicMetaItem): value is DynamicFolder {

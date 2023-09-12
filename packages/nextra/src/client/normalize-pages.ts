@@ -5,7 +5,7 @@ import type {
   pageThemeSchema
 } from '../server/schemas'
 import type { Folder, MdxFile, PageMapItem } from '../types'
-import { ERROR_ROUTES } from './constants.js'
+import { ERROR_ROUTES } from '../constants.js'
 import { isFolder, isMeta } from './utils.js'
 
 const DEFAULT_PAGE_THEME: PageTheme = {

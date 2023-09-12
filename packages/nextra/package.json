@@ -61,6 +61,12 @@
       "remote": [
         "./dist/server/remote.d.ts"
       ],
+      "fetch-filepaths-from-github": [
+        "./dist/server/fetch-filepaths-from-github.d.ts"
+      ],
+      "schemas": [
+        "./dist/server/schemas.d.ts"
+      ],
       "catch-all": [
         "./dist/client/catch-all.d.ts"
       ],
@@ -82,14 +88,8 @@
       "mdx": [
         "./dist/client/mdx.d.ts"
       ],
-      "schemas": [
-        "./dist/server/schemas.d.ts"
-      ],
       "normalize-pages": [
         "./dist/client/normalize-pages.d.ts"
-      ],
-      "fetch-filepaths-from-github": [
-        "./dist/server/fetch-filepaths-from-github.d.ts"
       ]
     }
   },
