@@ -473,7 +473,7 @@ describe('Page Process', () => {
       dir: path.join(CWD, '__test__', 'fixture', 'page-maps', 'dynamic-route')
     })
     expect(clean(rawJs)).toMatchInlineSnapshot(`
-      "import test_fixture_page_maps_dynamic_route_my_dir_meta from \\"__test__/fixture/page-maps/dynamic-route/my-dir/_meta.tsx\\";
+      "import test_fixture_page_maps_dynamic_route_my_dir_meta from \\"__test__/fixture/page-maps/dynamic-route/my-dir/_meta.ts\\";
       export const pageMap = [{
         name: \\"my-dir\\",
         route: \\"/my-dir\\",
