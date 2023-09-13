@@ -42,12 +42,7 @@ import {
 import { theme } from './theme.js'
 import { truthy } from './utils.js'
 
-globalThis.__nextra_temp_do_not_use = () => {
-  import('./__temp__.cjs')
-}
-
 const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS: RehypePrettyCodeOptions = {
-  // @ts-expect-error -- TODO: fix type error
   theme,
   onVisitLine(node: any) {
     // Prevent lines from collapsing in `display: grid` mode, and
