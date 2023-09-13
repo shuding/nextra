@@ -483,7 +483,7 @@ describe('Page Process', () => {
         \\"/my-dir\\": test_fixture_page_maps_dynamic_route_my_dir_meta
       };
 
-      import { resolvePageMap } from 'nextra/remote'
+      import { resolvePageMap } from 'nextra/setup-page'
 
       if (typeof window === 'undefined') {
         globalThis.__nextra_resolvePageMap ||= Object.create(null)

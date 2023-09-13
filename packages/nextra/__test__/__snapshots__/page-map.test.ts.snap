@@ -594,20 +594,12 @@ exports[`Page Process > should match i18n site page maps 1`] = `
     {
       "children": [
         {
-          "children": [
-            {
-              "data": {},
-            },
-          ],
+          "children": [],
           "name": "graphql-eslint",
           "route": "/en/remote/graphql-eslint",
         },
         {
-          "children": [
-            {
-              "data": {},
-            },
-          ],
+          "children": [],
           "name": "graphql-yoga",
           "route": "/en/remote/graphql-yoga",
         },
