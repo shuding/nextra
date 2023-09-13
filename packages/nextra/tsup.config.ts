@@ -13,14 +13,8 @@ export default defineConfig({
   bundle: false,
   external: ['shiki', 'webpack'],
   async onSuccess() {
-    await fs.copyFile(
-      path.join(CWD, 'src', 'server', '__temp__.cjs'),
-      path.join(CWD, 'dist', 'server', '__temp__.cjs')
-    )
-    // this fixes hydration errors in client apps
-    await fs.writeFile(
-      path.join(CWD, 'dist', 'client', 'package.json'),
-      '{"sideEffects":false}'
-    )
+    // Fixes hydration errors in client apps due "type": "module" in root package.json
+    const clientPackageJSON = path.join(CWD, 'dist', 'client', 'package.json')
+    await fs.writeFile(clientPackageJSON, '{"sideEffects":false}')
   }
 })
