@@ -2,6 +2,14 @@ import path from 'node:path'
 import { CWD } from '../src/server/constants.js'
 import { collectPageMap } from '../src/server/page-map.js'
 
+// To fix tests on CI
+function clean(content: string): string {
+  return content.replaceAll(
+    /import \w+ from "(?<name>.*)"/g,
+    (matched, capture) => matched.replace(capture, path.relative(CWD, capture))
+  )
+}
+
 describe('collectPageMap', () => {
   it('should work', async () => {
     const dir = path.join(
@@ -15,14 +23,7 @@ describe('collectPageMap', () => {
     )
     const rawJs = await collectPageMap({ dir, route: '/en', locale: 'en' })
 
-    // To fix tests on CI
-    const rawJsWithCleanImportPath = rawJs.replaceAll(
-      /import \w+ from "(?<name>.*)"/g,
-      (matched, capture) =>
-        matched.replace(capture, path.relative(CWD, capture))
-    )
-
-    expect(rawJsWithCleanImportPath).toMatchInlineSnapshot(`
+    expect(clean(rawJs)).toMatchInlineSnapshot(`
       "import examples_swr_site_pages_en_meta from \\"../../examples/swr-site/pages/en/_meta.json\\";
       import examples_swr_site_pages_en_about_meta from \\"../../examples/swr-site/pages/en/about/_meta.ts\\";
       import examples_swr_site_pages_en_blog_meta from \\"../../examples/swr-site/pages/en/blog/_meta.ts\\";
@@ -398,15 +399,11 @@ describe('collectPageMap', () => {
         children: [{
           name: \\"graphql-eslint\\",
           route: \\"/en/remote/graphql-eslint\\",
-          children: [{
-            data: {}
-          }]
+          children: []
         }, {
           name: \\"graphql-yoga\\",
           route: \\"/en/remote/graphql-yoga\\",
-          children: [{
-            data: {}
-          }]
+          children: []
         }]
       }, {
         name: \\"test\\",
@@ -468,6 +465,30 @@ describe('Page Process', () => {
           \\"sidebar_label\\": \\"Tabs\\"
         }
       }];"
+    `)
+  })
+
+  it('should add folder for dynamic routes', async () => {
+    const rawJs = await collectPageMap({
+      dir: path.join(CWD, '__test__', 'fixture', 'page-maps', 'dynamic-route')
+    })
+    expect(clean(rawJs)).toMatchInlineSnapshot(`
+      "import test_fixture_page_maps_dynamic_route_my_dir_meta from \\"__test__/fixture/page-maps/dynamic-route/my-dir/_meta.tsx\\";
+      export const pageMap = [{
+        name: \\"my-dir\\",
+        route: \\"/my-dir\\",
+        children: []
+      }];
+      const dynamicMetaModules = {
+        \\"/my-dir\\": test_fixture_page_maps_dynamic_route_my_dir_meta
+      };
+
+      import { resolvePageMap } from 'nextra/remote'
+
+      if (typeof window === 'undefined') {
+        globalThis.__nextra_resolvePageMap ||= Object.create(null)
+        globalThis.__nextra_resolvePageMap[''] = resolvePageMap('', dynamicMetaModules)
+      }"
     `)
   })
 

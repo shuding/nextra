@@ -58,13 +58,16 @@ async function collectFiles({
   pageMapAst: ArrayExpression
   imports: Import[]
   dynamicMetaImports: DynamicImport[]
+  hasDynamicPage: boolean
 }> {
   const files = await fs.readdir(dir, { withFileTypes: true })
+
+  let hasDynamicPage = false
 
   const promises = files
     // localeCompare is needed because order on Windows is different and test on CI fails
     .sort((a, b) => a.name.localeCompare(b.name))
-    .map(async (f, _index, array) => {
+    .map(async f => {
       const filePath = path.join(dir, f.name)
 
       let isDirectory = f.isDirectory()
@@ -81,13 +84,16 @@ async function collectFiles({
 
       // We need to filter out dynamic routes, because we can't get all the
       // paths statically from here — they'll be generated separately.
-      if (name.startsWith('[')) return
+      if (name.startsWith('[')) {
+        hasDynamicPage = true
+        return
+      }
 
       const fileRoute = normalizePageRoute(route, name)
 
       if (isDirectory) {
         if (fileRoute === '/api') return
-        const { pageMapAst } = await collectFiles({
+        const { pageMapAst, hasDynamicPage } = await collectFiles({
           dir: filePath,
           route: fileRoute,
           imports,
@@ -96,7 +102,8 @@ async function collectFiles({
         })
 
         const { elements } = pageMapAst
-        if (!elements.length) return
+
+        if (!elements.length && !hasDynamicPage) return
 
         return createAstObject({
           name: f.name,
@@ -138,10 +145,9 @@ async function collectFiles({
           imports.push({ importName, filePath })
 
           if (isMetaJs) {
-            const dynamicPage = array.find(f => f.name.startsWith('['))
-            if (dynamicPage) {
+            if (hasDynamicPage) {
               dynamicMetaImports.push({ importName, route })
-              return createAstObject({ data: createAstObject({}) })
+              return
             }
           }
           return createAstObject({
@@ -156,7 +162,8 @@ async function collectFiles({
   return {
     pageMapAst: { type: 'ArrayExpression', elements: items },
     imports,
-    dynamicMetaImports
+    dynamicMetaImports,
+    hasDynamicPage
   }
 }
 
