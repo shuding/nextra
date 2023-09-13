@@ -110,23 +110,14 @@ export const resolvePageMap =
           // Fix race condition. Find a better way to get pageMap?
           .find(([route]) => route.startsWith(`/${locale}/`))![1].pageOpts
       : __nextra_internal__
-    const result = []
-
-    for (const [route, metaFunction] of Object.entries(dynamicMetaModules)) {
-      const paths = route.split('/').slice(locale ? 2 : 1)
-      const folder = findFolder(pageMap, paths)
-      const metaData = await metaFunction()
-      result.push(
-        collectCatchAllRoutes(
-          {
-            ...folder,
-            // todo: remove this after fix in page-map.ts
-            children: []
-          },
-          { data: metaData }
-        )
-      )
-    }
+    const result = await Promise.all(
+      Object.entries(dynamicMetaModules).map(async ([route, metaFunction]) => {
+        const paths = route.split('/').slice(locale ? 2 : 1)
+        const folder = findFolder(pageMap, paths)
+        const metaData = await metaFunction()
+        return collectCatchAllRoutes(folder, { data: metaData })
+      })
+    )
 
     return (cachedResolvedPageMap[locale] = result)
   }

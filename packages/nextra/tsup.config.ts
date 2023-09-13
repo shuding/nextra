@@ -17,19 +17,6 @@ export default defineConfig({
       path.join(CWD, 'src', 'server', '__temp__.cjs'),
       path.join(CWD, 'dist', 'server', '__temp__.cjs')
     )
-    await fs.copyFile(
-      path.join(CWD, 'src', 'server', 'theme.json'),
-      path.join(CWD, 'dist', 'server', 'theme.json')
-    )
-    const filePath = path.join(CWD, 'dist', 'server', 'compile.js')
-    const content = await fs.readFile(filePath, 'utf8')
-    await fs.writeFile(
-      filePath,
-      content.replace(
-        'import theme from "./theme.json"',
-        'import theme from "./theme.json" assert { type: "json" }'
-      )
-    )
     // this fixes hydration errors in client apps
     await fs.writeFile(
       path.join(CWD, 'dist', 'client', 'package.json'),
