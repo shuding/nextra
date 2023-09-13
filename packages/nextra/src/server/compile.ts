@@ -39,7 +39,7 @@ import {
   remarkStaticImage,
   remarkStructurize
 } from './mdx-plugins/index.js'
-import theme from './theme.json'
+import { theme } from './theme.js'
 import { truthy } from './utils.js'
 
 globalThis.__nextra_temp_do_not_use = () => {
