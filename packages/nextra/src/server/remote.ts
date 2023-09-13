@@ -15,11 +15,11 @@ export async function buildDynamicMDX(
 
   return {
     __nextra_dynamic_mdx: result,
-    __nextra_dynamic_opts: JSON.stringify({
+    __nextra_dynamic_opts: {
       toc,
       frontMatter,
       title: frontMatter.title || title
-    })
+    }
   }
 }
 

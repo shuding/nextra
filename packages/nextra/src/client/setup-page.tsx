@@ -172,7 +172,7 @@ function NextraLayout({
   }
 
   if (__nextra_dynamic_opts) {
-    const { toc, title, frontMatter } = JSON.parse(__nextra_dynamic_opts)
+    const { toc, title, frontMatter } = __nextra_dynamic_opts
     pageOpts = {
       ...pageOpts,
       toc,
