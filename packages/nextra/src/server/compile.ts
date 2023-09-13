@@ -13,6 +13,7 @@ import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 import remarkReadingTime from 'remark-reading-time'
 import type { Pluggable } from 'unified'
+import { visit } from 'unist-util-visit'
 import type {
   FrontMatter,
   LoaderOptions,
@@ -39,10 +40,25 @@ import {
   remarkStaticImage,
   remarkStructurize
 } from './mdx-plugins/index.js'
-import { theme } from './theme.js'
+import theme from './theme.json'
 import { truthy } from './utils.js'
 
+const replacements: Record<string, string> = {
+  '#000001': 'nx-color-text',
+  '#000002': 'nx-color-background',
+  '#000004': 'nx-token-constant',
+  '#000005': 'nx-token-string',
+  '#000006': 'nx-token-comment',
+  '#000007': 'nx-token-keyword',
+  '#000008': 'nx-token-parameter',
+  '#000009': 'nx-token-function',
+  '#000010': 'nx-token-string-expression',
+  '#000011': 'nx-token-punctuation',
+  '#000012': 'nx-token-link'
+}
+
 const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS: RehypePrettyCodeOptions = {
+  // @ts-expect-error
   theme,
   onVisitLine(node: any) {
     // Prevent lines from collapsing in `display: grid` mode, and
@@ -268,6 +284,22 @@ export async function compileMdx(
               ...rehypePrettyCodeOptions
             }
           ] as any),
+        () => (ast: any) => {
+          visit(ast, { tagName: 'span' }, node => {
+            for (const key in node.properties) {
+              if (key === 'style') {
+                const value = node.properties[key]
+                const hex = (value as string).replace('color:', '')
+                if (hex in replacements) {
+                  delete node.properties[key]
+                  node.properties.className ||= []
+                  node.properties.className.push(replacements[hex])
+                  // console.log(key, value, hex)
+                }
+              }
+            }
+          })
+        },
         attachMeta,
         latex && rehypeKatex
       ].filter(truthy)
