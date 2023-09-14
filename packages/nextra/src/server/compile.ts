@@ -12,8 +12,8 @@ import remarkFrontmatter from 'remark-frontmatter'
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 import remarkReadingTime from 'remark-reading-time'
+import { getHighlighter } from 'shiki'
 import type { Pluggable } from 'unified'
-import { visit } from 'unist-util-visit'
 import type {
   FrontMatter,
   LoaderOptions,
@@ -40,41 +40,44 @@ import {
   remarkStaticImage,
   remarkStructurize
 } from './mdx-plugins/index.js'
-import theme from './theme.json'
 import { truthy } from './utils.js'
 
-const replacements: Record<string, string> = {
-  '#000001': 'nx-color-text',
-  '#000002': 'nx-color-background',
-  '#000004': 'nx-token-constant',
-  '#000005': 'nx-token-string',
-  '#000006': 'nx-token-comment',
-  '#000007': 'nx-token-keyword',
-  '#000008': 'nx-token-parameter',
-  '#000009': 'nx-token-function',
-  '#000010': 'nx-token-string-expression',
-  '#000011': 'nx-token-punctuation',
-  '#000012': 'nx-token-link'
-}
-
 const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS: RehypePrettyCodeOptions = {
-  // @ts-expect-error
-  theme,
-  onVisitLine(node: any) {
+  keepBackground: false,
+  grid: false,
+  onVisitLine(node) {
     // Prevent lines from collapsing in `display: grid` mode, and
     // allow empty lines to be copy/pasted
     if (node.children.length === 0) {
       node.children = [{ type: 'text', value: ' ' }]
     }
   },
-  onVisitHighlightedLine(node: any) {
-    node.properties.className.push('highlighted')
-  },
-  onVisitHighlightedWord(node: any) {
-    node.properties.className = ['highlighted']
-  },
-  filterMetaString: (meta: string) =>
-    meta.replace(CODE_BLOCK_FILENAME_REGEX, '')
+  filterMetaString: meta => meta.replace(CODE_BLOCK_FILENAME_REGEX, ''),
+  async getHighlighter(_opts) {
+    const DEFAULT_OPTS = {
+      themes: {
+        light: 'github-light',
+        dark: 'github-dark'
+      },
+      defaultColor: false
+    }
+
+    const highlighter = await getHighlighter({
+      themes: Object.values(DEFAULT_OPTS.themes)
+    })
+
+    const originalCodeToHtml = highlighter.codeToHtml
+
+    return Object.assign(highlighter, {
+      codeToHtml(code: string, lang: string) {
+        // @ts-expect-error -- nothing wrong, conflicts with official shiki type
+        return originalCodeToHtml(code, lang, undefined, { ...DEFAULT_OPTS })
+      },
+      ansiToHtml(code: string) {
+        return this.codeToHtml(code, 'ansi')
+      }
+    })
+  }
 }
 
 const cachedCompilerForFormat: Record<
@@ -284,22 +287,6 @@ export async function compileMdx(
               ...rehypePrettyCodeOptions
             }
           ] as any),
-        () => (ast: any) => {
-          visit(ast, { tagName: 'span' }, node => {
-            for (const key in node.properties) {
-              if (key === 'style') {
-                const value = node.properties[key]
-                const hex = (value as string).replace('color:', '')
-                if (hex in replacements) {
-                  delete node.properties[key]
-                  node.properties.className ||= []
-                  node.properties.className.push(replacements[hex])
-                  // console.log(key, value, hex)
-                }
-              }
-            }
-          })
-        },
         attachMeta,
         latex && rehypeKatex
       ].filter(truthy)

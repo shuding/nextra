@@ -28,7 +28,7 @@ export const Pre = ({
   }, [])
 
   return (
-    <div className="nextra-code-block nx-relative nx-mt-6 first:nx-mt-0">
+    <div className="nextra-code nx-relative nx-mt-6 first:nx-mt-0">
       {filename && (
         <div className="nx-absolute nx-top-0 nx-z-[1] nx-w-full nx-truncate nx-rounded-t-xl nx-bg-primary-700/5 nx-py-2 nx-px-4 nx-text-xs nx-text-gray-700 dark:nx-bg-primary-300/10 dark:nx-text-gray-200">
           {filename}

@@ -18,8 +18,6 @@ export const parseMeta =
   ast => {
     visit(ast, ['pre'], preEl => {
       const [codeEl] = preEl.children
-      // Add default language `text` for code-blocks without languages
-      codeEl.properties.className ||= ['language-text']
       const meta = codeEl.data?.meta
       preEl.__nextra_filename = meta?.match(CODE_BLOCK_FILENAME_REGEX)?.[1]
 
@@ -31,14 +29,15 @@ export const parseMeta =
   }
 
 export const attachMeta = () => ast => {
-  visit(ast, ['div', 'pre'], node => {
+  visit(ast, ['div', 'pre', 'span'], node => {
     if ('data-rehype-pretty-code-fragment' in node.properties) {
       // remove <div data-rehype-pretty-code-fragment /> element that wraps <pre /> element
       // because we'll wrap with our own <div />
       Object.assign(node, node.children[0])
+      if (node.tagName !== 'span') {
+        node.properties.filename = node.__nextra_filename
+        node.properties.hasCopyCode = node.__nextra_hasCopyCode
+      }
     }
-
-    node.properties.filename = node.__nextra_filename
-    node.properties.hasCopyCode = node.__nextra_hasCopyCode
   })
 }

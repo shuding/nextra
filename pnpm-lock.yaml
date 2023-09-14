@@ -277,8 +277,8 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
       rehype-pretty-code:
-        specifier: 0.9.11
-        version: 0.9.11(shikiji-compat@0.6.8)
+        specifier: 0.10.1
+        version: 0.10.1(shikiji-compat@0.6.8)
       rehype-raw:
         specifier: ^7.0.0
         version: 7.0.0
@@ -2645,7 +2645,7 @@ packages:
       estree-util-is-identifier-name: 2.0.1
       estree-util-to-js: 1.1.0
       estree-walker: 3.0.1
-      hast-util-to-estree: 2.0.2
+      hast-util-to-estree: 2.3.3
       markdown-extensions: 1.1.1
       periscopic: 3.0.4
       remark-mdx: 2.3.0
@@ -6356,10 +6356,11 @@ packages:
       zwitch: 2.0.2
     dev: false
 
-  /hast-util-to-estree@2.0.2:
-    resolution: {integrity: sha512-UQrZVeBj6A9od0lpFvqHKNSH9zvDrNoyWKbveu1a2oSCXEDUI+3bnd6BoiQLPnLrcXXn/jzJ6y9hmJTTlvf8lQ==}
+  /hast-util-to-estree@2.3.3:
+    resolution: {integrity: sha512-ihhPIUPxN0v0w6M5+IiAZZrn0LH2uZomeWwhn7uP7avZC6TE7lIiEh2yBMPr5+zi1aUCXq6VoYRgs2Bw9xmycQ==}
     dependencies:
-      '@types/estree-jsx': 0.0.1
+      '@types/estree': 1.0.1
+      '@types/estree-jsx': 1.0.0
       '@types/hast': 2.3.4
       '@types/unist': 2.0.6
       comma-separated-tokens: 2.0.2
@@ -6370,9 +6371,9 @@ packages:
       mdast-util-mdxjs-esm: 1.2.1
       property-information: 6.1.1
       space-separated-tokens: 2.0.1
-      style-to-object: 0.3.0
+      style-to-object: 0.4.2
       unist-util-position: 4.0.3
-      zwitch: 2.0.2
+      zwitch: 2.0.4
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -9373,11 +9374,11 @@ packages:
       unist-util-visit: 4.1.2
     dev: false
 
-  /rehype-pretty-code@0.9.11(shikiji-compat@0.6.8):
-    resolution: {integrity: sha512-Eq90eCYXQJISktfRZ8PPtwc5SUyH6fJcxS8XOMnHPUQZBtC6RYo67gGlley9X2nR8vlniPj0/7oCDEYHKQa/oA==}
+  /rehype-pretty-code@0.10.1(shikiji-compat@0.6.8):
+    resolution: {integrity: sha512-WHjRvGlqPXG8BVRB9mK0255WvIOnzvHivAWhFkA2OG+NTkQWtTbCULZMokOHLf3Yy8q8I8/F8QNjDSQBhjMK5w==}
     engines: {node: '>=16'}
     peerDependencies:
-      shiki: '*'
+      shiki: 0.x
     dependencies:
       '@types/hast': 2.3.4
       hash-obj: 4.0.0
@@ -10070,8 +10071,8 @@ packages:
       acorn: 8.9.0
     dev: true
 
-  /style-to-object@0.3.0:
-    resolution: {integrity: sha512-CzFnRRXhzWIdItT3OmF8SQfWyahHhjq3HwcMNCNLn+N7klOOqPjMeG/4JSu77D7ypZdGvSzvkrbyeTMizz2VrA==}
+  /style-to-object@0.4.2:
+    resolution: {integrity: sha512-1JGpfPB3lo42ZX8cuPrheZbfQ6kqPPnPHlKMyeRYtfKD+0jG+QsXgXN57O/dvJlzlB2elI6dGmrPnl5VPQFPaA==}
     dependencies:
       inline-style-parser: 0.1.1
     dev: false
@@ -11476,7 +11477,7 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       rehype-katex: 6.0.3
-      rehype-pretty-code: 0.9.11(shikiji-compat@0.6.8)
+      rehype-pretty-code: 0.10.1(shikiji-compat@0.6.8)
       rehype-raw: 7.0.0
       remark: 14.0.3
       remark-frontmatter: 4.0.1
