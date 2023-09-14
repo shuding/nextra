@@ -5,19 +5,18 @@ import { useMDXComponents } from './mdx.js'
 
 const SSGContext = createContext<Record<string, any>>({})
 
-export const useSSG = (key = 'ssg') => useContext(SSGContext)[key]
+export const useData = (key = 'ssg') => useContext(SSGContext)[key]
 
 // Make sure nextra/data remains functional, but we now recommend this new API.
 
 export const DataProvider = SSGContext.Provider
-export const useData = useSSG
 
 export function RemoteContent({
   components: dynamicComponents
 }: {
   components?: Components
 }) {
-  const dynamicContext = useSSG('__nextra_dynamic_mdx')
+  const dynamicContext = useData('__nextra_dynamic_mdx')
 
   if (!dynamicContext) {
     throw new Error(

@@ -1,5 +1,0 @@
-.nextra-code,
-.nextra-inline-code span {
-  @apply nx-bg-[--shiki-light-bg] nx-text-[--shiki-light];
-  @apply dark:nx-bg-[--shiki-dark-bg] dark:nx-text-[--shiki-dark];
-}
