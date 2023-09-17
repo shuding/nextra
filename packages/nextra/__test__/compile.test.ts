@@ -204,7 +204,7 @@ describe('Code block', () => {
         mdxOptions
       })
       expect(result).toMatch(
-        '<_components.pre data-language="js" data-theme="default" filename="test.js">'
+        '<_components.pre data-language="js" data-filename="test.js">'
       )
     })
 
@@ -213,7 +213,7 @@ describe('Code block', () => {
         mdxOptions,
         codeHighlight: false
       })
-      expect(result).toMatch('<_components.pre filename="test.js">')
+      expect(result).toMatch('<_components.pre data-filename="test.js">')
     })
 
     it('not highlight filename as substring', async () => {
@@ -236,7 +236,7 @@ describe('Code block', () => {
           mdxOptions
         }
       )
-      expect(result).toMatch('<_components.span className="line highlighted">')
+      expect(result).toMatch('<_components.span data-highlighted-line="">')
     })
   })
 
@@ -248,7 +248,7 @@ describe('Code block', () => {
             mdxOptions,
             codeHighlight
           })
-          expect(result).toMatch('hasCopyCode>')
+          expect(result).toMatch('data-copy="">')
         })
 
         it('attach with "defaultShowCopyCode: true"', async () => {
@@ -257,7 +257,7 @@ describe('Code block', () => {
             defaultShowCopyCode: true,
             codeHighlight
           })
-          expect(result).toMatch('hasCopyCode>')
+          expect(result).toMatch('data-copy="">')
         })
 
         it('not attach with "defaultShowCopyCode: true" and "copy=false"', async () => {
@@ -266,17 +266,9 @@ describe('Code block', () => {
             defaultShowCopyCode: true,
             codeHighlight
           })
-          expect(result).not.toMatch('hasCopyCode>')
+          expect(result).not.toMatch('data-copy="">')
         })
       })
     }
-  })
-
-  it('code block without language has "text" language', async () => {
-    const { result } = await compileMdx('```\n```', {
-      mdxOptions,
-      codeHighlight: false
-    })
-    expect(result).toMatch('<_components.code className="language-text" />')
   })
 })

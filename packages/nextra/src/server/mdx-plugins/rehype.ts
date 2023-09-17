@@ -10,11 +10,15 @@ export const parseMeta: Plugin<[{ defaultShowCopyCode?: boolean }], any> =
       const meta = codeEl.data?.meta
 
       node.__filename = meta?.match(CODE_BLOCK_FILENAME_REGEX)?.[1]
+      node.properties['data-filename'] = node.__filename
 
       node.__hasCopyCode = meta
         ? (defaultShowCopyCode && !/( |^)copy=false($| )/.test(meta)) ||
           /( |^)copy($| )/.test(meta)
         : defaultShowCopyCode
+      if (node.__hasCopyCode) {
+        node.properties['data-copy'] = ''
+      }
     })
   }
 
