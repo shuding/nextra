@@ -15,7 +15,7 @@ code {
 pre {
   code {
     @apply nx-grid nx-min-w-full nx-rounded-none nx-border-none !nx-bg-transparent !nx-p-0 nx-text-sm nx-leading-5 nx-text-current dark:!nx-bg-transparent;
-    
+
     &[data-line-numbers] > span {
       @apply nx-pl-2;
       &::before {
@@ -27,7 +27,7 @@ pre {
 
     & > span {
       @apply nx-px-4;
-      
+
       &[data-highlighted-line] {
         @apply !nx-bg-primary-600/10 !nx-text-primary-600/50 nx-shadow-[2px_0_currentColor_inset];
       }
