@@ -51,6 +51,7 @@ const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS: RehypePrettyCodeOptions = {
     if (node.children.length === 0) {
       node.children = [{ type: 'text', value: ' ' }]
     }
+    delete node.properties['data-line']
   },
   filterMetaString: meta => meta.replace(CODE_BLOCK_FILENAME_REGEX, ''),
   async getHighlighter(_opts) {
