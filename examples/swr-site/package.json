@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "analyze": "ANALYZE=true pnpm build",
-    "build": "next build",
+    "build": "rm -rf .next && next build",
     "clean": "rimraf .next .turbo",
     "debug": "NODE_OPTIONS='--inspect' next dev",
     "dev": "next",
