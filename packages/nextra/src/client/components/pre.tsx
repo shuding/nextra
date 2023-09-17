@@ -8,12 +8,12 @@ import { CopyToClipboard } from './copy-to-clipboard.js'
 export const Pre = ({
   children,
   className,
-  hasCopyCode,
-  filename,
+  'data-filename': filename,
+  'data-copy': copy,
   ...props
 }: ComponentProps<'pre'> & {
-  filename?: string
-  hasCopyCode?: boolean
+  'data-filename'?: string
+  'data-copy'?: ''
 }): ReactElement => {
   const preRef = useRef<HTMLPreElement | null>(null)
 
@@ -66,7 +66,7 @@ export const Pre = ({
         >
           <WordWrapIcon className="nx-pointer-events-none nx-h-4 nx-w-4" />
         </Button>
-        {hasCopyCode && (
+        {copy === '' && (
           <CopyToClipboard
             getValue={() =>
               preRef.current?.querySelector('code')?.textContent || ''
