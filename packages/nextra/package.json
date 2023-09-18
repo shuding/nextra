@@ -24,10 +24,6 @@
       "import": "./dist/client/hooks/index.js",
       "types": "./dist/client/hooks/index.d.ts"
     },
-    "./icons": {
-      "import": "./dist/client/icons/index.js",
-      "types": "./dist/client/icons/index.d.ts"
-    },
     "./compile": {
       "import": "./dist/server/compile.js",
       "types": "./dist/server/compile.d.ts"
