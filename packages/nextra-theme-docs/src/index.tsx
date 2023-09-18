@@ -32,9 +32,9 @@ interface BodyProps {
 
 const classes = {
   toc: cn(
-    'nextra-toc x-order-last x-hidden x-w-64 x-shrink-0 xl:x-block print:x-hidden'
+    'nextra-toc _order-last _hidden _w-64 _shrink-0 xl:_block print:_hidden'
   ),
-  main: cn('x-w-full x-break-words')
+  main: cn('_w-full _break-words')
 }
 
 function Body({
@@ -59,11 +59,11 @@ function Body({
   const gitTimestampEl =
     // Because a user's time zone may be different from the server page
     mounted && date ? (
-      <div className="x-mt-12 x-mb-8 x-block x-text-xs x-text-gray-500 ltr:x-text-right rtl:x-text-left dark:x-text-gray-400">
+      <div className="_mt-12 _mb-8 _block _text-xs _text-gray-500 ltr:_text-right rtl:_text-left dark:_text-gray-400">
         {renderComponent(config.gitTimestamp, { timestamp: date })}
       </div>
     ) : (
-      <div className="x-mt-16" />
+      <div className="_mt-16" />
     )
 
   const content = (

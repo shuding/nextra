@@ -9,9 +9,9 @@ export const Button = ({
   return (
     <button
       className={cn(
-        'nextra-button nx-transition-all active:nx-opacity-50',
-        'nx-bg-primary-700/5 nx-border nx-border-black/5 nx-text-gray-600 hover:nx-text-gray-900 nx-rounded-md nx-p-1.5',
-        'dark:nx-bg-primary-300/10 dark:nx-border-white/10 dark:nx-text-gray-400 dark:hover:nx-text-gray-50',
+        'nextra-button _transition-all active:_opacity-50',
+        '_bg-primary-700/5 _border _border-black/5 _text-gray-600 hover:_text-gray-900 _rounded-md _p-1.5',
+        'dark:_bg-primary-300/10 dark:_border-white/10 dark:_text-gray-400 dark:hover:_text-gray-50',
         className
       )}
       {...props}

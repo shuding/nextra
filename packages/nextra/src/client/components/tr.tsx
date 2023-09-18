@@ -4,8 +4,8 @@ import type { ComponentProps } from 'react'
 export const Tr = ({ className = '', ...props }: ComponentProps<'tr'>) => (
   <tr
     className={cn(
-      'nx-m-0 nx-border-t nx-border-gray-300 nx-p-0 dark:nx-border-gray-600',
-      'even:nx-bg-gray-100 even:dark:nx-bg-gray-600/20',
+      '_m-0 _border-t _border-gray-300 _p-0 dark:_border-gray-600',
+      'even:_bg-gray-100 even:dark:_bg-gray-600/20',
       className
     )}
     {...props}
