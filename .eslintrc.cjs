@@ -172,7 +172,7 @@ module.exports = {
         tailwindcss: {
           config: 'packages/nextra-theme-docs/tailwind.config.js',
           callees: ['cn'],
-          whitelist: ['nextra-code', 'nextra-filetree', 'nextra-inline-code']
+          whitelist: ['nextra-code', 'nextra-filetree']
         }
       },
       rules: {

@@ -4,14 +4,15 @@ import type { ComponentProps, ReactElement } from 'react'
 export const Code = ({
   children,
   className,
+  'data-language': _language,
   ...props
-}: ComponentProps<'code'>): ReactElement => {
+}: ComponentProps<'code'> & {
+  'data-language': string
+}): ReactElement => {
   return (
     <code
       className={cn(
-        'nextra-inline-code',
-        'nx-border-black nx-border-opacity-[0.04] nx-bg-opacity-[0.03] nx-bg-black nx-break-words nx-rounded-md nx-border nx-py-0.5 nx-px-[.25em] nx-text-[.9em]',
-        'dark:nx-border-white/10 dark:nx-bg-white/10',
+        'nextra-code',
         'data-line-numbers' in props && '[counter-reset:line]',
         className
       )}

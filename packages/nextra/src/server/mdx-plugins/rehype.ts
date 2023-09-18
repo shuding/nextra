@@ -24,26 +24,28 @@ export const parseMeta: Plugin<[{ defaultShowCopyCode?: boolean }], any> =
 
 export const attachMeta: Plugin<[], any> = () => ast => {
   visit(ast, [{ tagName: 'div' }, { tagName: 'span' }], node => {
-    if ('data-rehype-pretty-code-fragment' in node.properties) {
-      // remove <div data-rehype-pretty-code-fragment /> element that wraps <pre /> element
-      // because we'll wrap with our own <div />
-      Object.assign(node, node.children[0])
-      delete node.properties['data-theme']
+    const isRehypePrettyCode =
+      'data-rehype-pretty-code-fragment' in node.properties
+    if (!isRehypePrettyCode) return
 
-      if (node.tagName === 'pre') {
-        const [codeEl] = node.children
-        delete codeEl.properties['data-theme']
+    // remove <div data-rehype-pretty-code-fragment /> element that wraps <pre /> element
+    // because we'll wrap with our own <div />
+    Object.assign(node, node.children[0])
+    delete node.properties['data-theme']
 
-        if (node.__filename) {
-          node.properties['data-filename'] = node.__filename
-        }
-        if (node.__hasCopyCode) {
-          node.properties['data-copy'] = ''
-        }
-      } else {
-        // remove class="line"
-        delete node.children[0].properties.className
+    if (node.tagName === 'pre') {
+      const [codeEl] = node.children
+      delete codeEl.properties['data-theme']
+
+      if (node.__filename) {
+        node.properties['data-filename'] = node.__filename
       }
+      if (node.__hasCopyCode) {
+        node.properties['data-copy'] = ''
+      }
+    } else {
+      // remove class="line"
+      delete node.children[0].properties.className
     }
   })
 }
