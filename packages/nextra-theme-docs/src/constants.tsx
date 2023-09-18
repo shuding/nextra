@@ -160,7 +160,6 @@ export const DEFAULT_THEME: DocsThemeConfig = {
   },
   sidebar: {
     defaultMenuCollapseLevel: 2,
-    titleComponent: ({ title }) => <>{title}</>,
     toggleButton: true
   },
   themeSwitch: {

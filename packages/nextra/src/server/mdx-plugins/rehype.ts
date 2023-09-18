@@ -5,9 +5,8 @@ import { CODE_BLOCK_FILENAME_REGEX } from '../constants.js'
 export const parseMeta: Plugin<[{ defaultShowCopyCode?: boolean }], any> =
   ({ defaultShowCopyCode }) =>
   ast => {
-    visit(ast, { tagName: 'pre' }, node => {
-      const [codeEl] = node.children
-      const meta = codeEl.data?.meta
+    visit(ast, { tagName: 'code' }, node => {
+      const meta = node.data?.meta
 
       node.__filename = meta?.match(CODE_BLOCK_FILENAME_REGEX)?.[1]
       node.properties['data-filename'] = node.__filename

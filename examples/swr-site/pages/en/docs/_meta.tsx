@@ -1,6 +1,18 @@
+import type { ReactNode } from 'react'
+import { SWRLogo } from '../../../theme.config'
+
+export function Separator({ children }: { children: ReactNode }) {
+  return (
+    <div className="flex items-center gap-2">
+      <SWRLogo className="h-1.5 shrink-0" />
+      {children}
+    </div>
+  )
+}
+
 export default {
   '--- hey': {
-    title: 'Getting Started',
+    title: <Separator>Getting Started</Separator>,
     type: 'separator'
   },
   'getting-started': {
@@ -22,7 +34,7 @@ export default {
   mutation: '',
   pagination: '',
   '--- my_new_separator': {
-    title: 'Advanced',
+    title: <Separator>Advanced</Separator>,
     type: 'separator'
   },
   prefetching: '',
