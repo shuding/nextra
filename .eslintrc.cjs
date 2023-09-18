@@ -48,6 +48,13 @@ module.exports = {
         'unicorn/prefer-string-replace-all': 'error',
         '@typescript-eslint/prefer-for-of': 'error',
         quotes: ['error', 'single', { avoidEscape: true }], // Matches Prettier, but also replaces backticks
+        '@typescript-eslint/no-unused-vars': [
+          'error',
+          {
+            argsIgnorePattern: '^_',
+            varsIgnorePattern: '^_' // allow underscores in destructuring
+          }
+        ],
         // todo: enable
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-non-null-assertion': 'off',
@@ -165,7 +172,7 @@ module.exports = {
         tailwindcss: {
           config: 'packages/nextra-theme-docs/tailwind.config.js',
           callees: ['cn'],
-          whitelist: ['nextra-code-block', 'nextra-filetree']
+          whitelist: ['nextra-code', 'nextra-filetree']
         }
       },
       rules: {

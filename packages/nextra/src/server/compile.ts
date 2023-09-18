@@ -12,6 +12,7 @@ import remarkFrontmatter from 'remark-frontmatter'
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 import remarkReadingTime from 'remark-reading-time'
+import { getHighlighter } from 'shiki'
 import type { Pluggable } from 'unified'
 import type {
   FrontMatter,
@@ -39,31 +40,45 @@ import {
   remarkStaticImage,
   remarkStructurize
 } from './mdx-plugins/index.js'
-import { theme } from './theme.js'
 import { truthy } from './utils.js'
 
-globalThis.__nextra_temp_do_not_use = () => {
-  import('./__temp__.cjs')
-}
-
 const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS: RehypePrettyCodeOptions = {
-  // @ts-expect-error -- TODO: fix type error
-  theme,
-  onVisitLine(node: any) {
+  keepBackground: false,
+  grid: false,
+  onVisitLine(node) {
     // Prevent lines from collapsing in `display: grid` mode, and
     // allow empty lines to be copy/pasted
     if (node.children.length === 0) {
-      node.children = [{ type: 'text', value: ' ' }]
+      node.children.push({ type: 'text', value: ' ' })
     }
+    delete node.properties['data-line']
   },
-  onVisitHighlightedLine(node: any) {
-    node.properties.className.push('highlighted')
-  },
-  onVisitHighlightedWord(node: any) {
-    node.properties.className = ['highlighted']
-  },
-  filterMetaString: (meta: string) =>
-    meta.replace(CODE_BLOCK_FILENAME_REGEX, '')
+  filterMetaString: meta => meta.replace(CODE_BLOCK_FILENAME_REGEX, ''),
+  async getHighlighter(_opts) {
+    const DEFAULT_OPTS = {
+      themes: {
+        light: 'github-light',
+        dark: 'github-dark'
+      },
+      defaultColor: false
+    }
+
+    const highlighter = await getHighlighter({
+      themes: Object.values(DEFAULT_OPTS.themes)
+    })
+
+    const originalCodeToHtml = highlighter.codeToHtml
+
+    return Object.assign(highlighter, {
+      codeToHtml(code: string, lang: string) {
+        // @ts-expect-error -- nothing wrong, conflicts with official shiki type
+        return originalCodeToHtml(code, lang, undefined, { ...DEFAULT_OPTS })
+      },
+      ansiToHtml(code: string) {
+        return this.codeToHtml(code, 'ansi')
+      }
+    })
+  }
 }
 
 const cachedCompilerForFormat: Record<
@@ -122,6 +137,12 @@ export async function compileMdx(
     rehypePlugins,
     rehypePrettyCodeOptions
   }: MdxOptions = mdxOptions
+
+  if (rehypePrettyCodeOptions) {
+    throw new Error(
+      "`rehypePrettyCodeOptions` is currently unsupported since `rehype-pretty-code` doesn't support `shikiji` package"
+    )
+  }
 
   const format =
     _format === 'detect' ? (filePath.endsWith('.mdx') ? 'mdx' : 'md') : _format

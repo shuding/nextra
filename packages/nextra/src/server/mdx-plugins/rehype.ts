@@ -1,44 +1,51 @@
-// @ts-nocheck
+import type { Plugin } from 'unified'
+import { visit } from 'unist-util-visit'
 import { CODE_BLOCK_FILENAME_REGEX } from '../constants.js'
 
-function visit(node, tagNames, handler) {
-  if (tagNames.includes(node.tagName)) {
-    handler(node)
-    return
-  }
-  if ('children' in node) {
-    for (const n of node.children) {
-      visit(n, tagNames, handler)
-    }
-  }
-}
-
-export const parseMeta =
+export const parseMeta: Plugin<[{ defaultShowCopyCode?: boolean }], any> =
   ({ defaultShowCopyCode }) =>
   ast => {
-    visit(ast, ['pre'], preEl => {
-      const [codeEl] = preEl.children
-      // Add default language `text` for code-blocks without languages
-      codeEl.properties.className ||= ['language-text']
+    visit(ast, { tagName: 'pre' }, node => {
+      const [codeEl] = node.children
       const meta = codeEl.data?.meta
-      preEl.__nextra_filename = meta?.match(CODE_BLOCK_FILENAME_REGEX)?.[1]
 
-      preEl.__nextra_hasCopyCode = meta
+      node.__filename = meta?.match(CODE_BLOCK_FILENAME_REGEX)?.[1]
+      node.properties['data-filename'] = node.__filename
+
+      node.__hasCopyCode = meta
         ? (defaultShowCopyCode && !/( |^)copy=false($| )/.test(meta)) ||
           /( |^)copy($| )/.test(meta)
         : defaultShowCopyCode
+      if (node.__hasCopyCode) {
+        node.properties['data-copy'] = ''
+      }
     })
   }
 
-export const attachMeta = () => ast => {
-  visit(ast, ['div', 'pre'], node => {
-    if ('data-rehype-pretty-code-fragment' in node.properties) {
-      // remove <div data-rehype-pretty-code-fragment /> element that wraps <pre /> element
-      // because we'll wrap with our own <div />
-      Object.assign(node, node.children[0])
-    }
+export const attachMeta: Plugin<[], any> = () => ast => {
+  visit(ast, [{ tagName: 'div' }, { tagName: 'span' }], node => {
+    const isRehypePrettyCode =
+      'data-rehype-pretty-code-fragment' in node.properties
+    if (!isRehypePrettyCode) return
 
-    node.properties.filename = node.__nextra_filename
-    node.properties.hasCopyCode = node.__nextra_hasCopyCode
+    // remove <div data-rehype-pretty-code-fragment /> element that wraps <pre /> element
+    // because we'll wrap with our own <div />
+    Object.assign(node, node.children[0])
+    delete node.properties['data-theme']
+
+    if (node.tagName === 'pre') {
+      const [codeEl] = node.children
+      delete codeEl.properties['data-theme']
+
+      if (node.__filename) {
+        node.properties['data-filename'] = node.__filename
+      }
+      if (node.__hasCopyCode) {
+        node.properties['data-copy'] = ''
+      }
+    } else {
+      // remove class="line"
+      delete node.children[0].properties.className
+    }
   })
 }

@@ -1,5 +1,5 @@
 import Markdown from 'markdown-to-jsx'
-import { useSSG } from 'nextra/data'
+import { useData } from 'nextra/data'
 
 export const getStaticProps = () => {
   return (
@@ -7,14 +7,13 @@ export const getStaticProps = () => {
       .then(res => res.json())
       // мы показываем здесь крайние 5 релизов
       .then(releases => ({
-        props: { ssg: Array.isArray(releases) ? releases.slice(0, 5) : [] },
-        revalidate: 10
+        props: { ssg: Array.isArray(releases) ? releases.slice(0, 5) : [] }
       }))
   )
 }
 
 export const ReleasesRenderer = () => {
-  const releases = useSSG()
+  const releases = useData()
   return (
     <Markdown>
       {releases
