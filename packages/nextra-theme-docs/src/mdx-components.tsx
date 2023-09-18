@@ -226,18 +226,18 @@ export function getComponents({
     ),
     hr: props => (
       <hr
-        className="nx-my-8 nx-border-neutral-200/70 contrast-more:nx-border-neutral-400 dark:nx-border-primary-100/10 contrast-more:dark:nx-border-neutral-400"
+        className="_my-8 _border-neutral-200/70 contrast-more:_border-neutral-400 dark:_border-primary-100/10 contrast-more:dark:_border-neutral-400"
         {...props}
       />
     ),
     a: Link,
     table: props => (
       <Table
-        className="nextra-scrollbar nx-mt-6 nx-p-0 first:nx-mt-0"
+        className="nextra-scrollbar _mt-6 _p-0 first:_mt-0"
         {...props}
       />
     ),
-    p: props => <p className="nx-mt-6 nx-leading-7 first:nx-mt-0" {...props} />,
+    p: props => <p className="_mt-6 _leading-7 first:_mt-0" {...props} />,
     tr: Tr,
     th: Th,
     td: Td,
