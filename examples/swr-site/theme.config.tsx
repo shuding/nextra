@@ -178,15 +178,6 @@ const config: DocsThemeConfig = {
   sidebar: {
     autoCollapse: true,
     defaultMenuCollapseLevel: 1,
-    titleComponent: ({ title, type }) =>
-      type === 'separator' ? (
-        <div className="flex items-center gap-2">
-          <SWRLogo className="h-1.5 shrink-0" />
-          {title}
-        </div>
-      ) : (
-        <>{title}</>
-      ),
     toggleButton: true
   },
   toc: {
