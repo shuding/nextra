@@ -28,7 +28,7 @@ export default defineConfig([
   {
     name: 'nextra-icons',
     entry: {
-      'client/icons': 'src/client/icons/index.ts'
+      'client/icons/index': 'src/client/icons/index.ts'
     },
     esbuildPlugins: [
       // @ts-expect-error idk what's wrong with types here
@@ -40,8 +40,8 @@ export default defineConfig([
     format: 'esm',
     target: 'es2020',
     treeshake: true,
+    // todo: find better way to export svg types
     async onSuccess() {
-      // Fixes hydration errors in client apps due "type": "module" in root package.json
       const filePath = path.join(CWD, 'dist', 'client', 'icons.js')
       const content = await fs.readFile(filePath, 'utf-8')
 
