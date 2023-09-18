@@ -16,11 +16,11 @@ export type NavBarProps = {
 
 const classes = {
   link: cn(
-    'nx-text-sm contrast-more:nx-text-gray-700 contrast-more:dark:nx-text-gray-100'
+    '_text-sm contrast-more:_text-gray-700 contrast-more:dark:_text-gray-100'
   ),
-  active: cn('nx-font-medium nx-subpixel-antialiased'),
+  active: cn('_font-medium _subpixel-antialiased'),
   inactive: cn(
-    'nx-text-gray-600 hover:nx-text-gray-800 dark:nx-text-gray-400 dark:hover:nx-text-gray-200'
+    '_text-gray-600 hover:_text-gray-800 dark:_text-gray-400 dark:hover:_text-gray-200'
   )
 }
 
@@ -39,12 +39,12 @@ function NavbarMenu({
   )
 
   return (
-    <div className="nx-relative nx-inline-block">
+    <div className="_relative _inline-block">
       <Menu>
         <Menu.Button
           className={cn(
             className,
-            '-nx-ml-2 nx-hidden nx-items-center nx-whitespace-nowrap nx-rounded nx-p-2 md:nx-inline-flex',
+            '-_ml-2 _hidden _items-center _whitespace-nowrap _rounded _p-2 md:_inline-flex',
             classes.inactive
           )}
         >

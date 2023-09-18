@@ -49,15 +49,15 @@ function HeadingLink({
       className={
         // can be added by footnotes
         className === 'sr-only'
-          ? 'x-sr-only'
+          ? '_sr-only'
           : cn(
-              'x-font-semibold x-tracking-tight x-text-slate-900 dark:x-text-slate-100',
+              '_font-semibold _tracking-tight _text-slate-900 dark:_text-slate-100',
               {
-                h2: 'x-mt-10 x-border-b x-pb-1 x-text-3xl x-border-neutral-200/70 contrast-more:x-border-neutral-400 dark:nx-border-primary-100/10 contrast-more:dark:nx-border-neutral-400',
-                h3: 'x-mt-8 x-text-2xl',
-                h4: 'x-mt-8 x-text-xl',
-                h5: 'x-mt-8 x-text-lg',
-                h6: 'x-mt-8 x-text-base'
+                h2: '_mt-10 _border-b _pb-1 _text-3xl _border-neutral-200/70 contrast-more:_border-neutral-400 dark:_border-primary-100/10 contrast-more:dark:_border-neutral-400',
+                h3: '_mt-8 _text-2xl',
+                h4: '_mt-8 _text-xl',
+                h5: '_mt-8 _text-lg',
+                h6: '_mt-8 _text-base'
               }[Tag]
             )
       }
@@ -131,7 +131,7 @@ const Details = ({
 
   return (
     <details
-      className="nx-my-4 nx-rounded nx-border nx-border-gray-200 nx-bg-white nx-p-2 nx-shadow-sm first:nx-mt-0 dark:nx-border-neutral-800 dark:nx-bg-neutral-900"
+      className="_my-4 _rounded _border _border-gray-200 _bg-white _p-2 _shadow-sm first:_mt-0 dark:_border-neutral-800 dark:_bg-neutral-900"
       {...props}
       open={delayedOpenState}
       {...(openState && { 'data-expanded': true })}

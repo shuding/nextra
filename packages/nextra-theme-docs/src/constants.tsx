@@ -128,14 +128,14 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     icon: (
       <>
         <GitHubIcon />
-        <span className="nx-sr-only">GitHub</span>
+        <span className="_sr-only">GitHub</span>
       </>
     )
   },
   search: {
     component: Flexsearch,
     emptyResult: (
-      <span className="nx-block nx-select-none nx-p-8 nx-text-center nx-text-sm nx-text-gray-400">
+      <span className="_block _select-none _p-8 _text-center _text-sm _text-gray-400">
         No results found.
       </span>
     ),

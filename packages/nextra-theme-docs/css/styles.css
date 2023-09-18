@@ -44,7 +44,7 @@ summary {
 
 @media (max-width: 767px) {
   .nextra-sidebar-container {
-    @apply x-fixed x-pt-[calc(var(--nextra-navbar-height))] x-top-0 x-w-full x-bottom-0 x-z-[15] x-overscroll-contain x-bg-white dark:nx-bg-dark;
+    @apply _fixed _pt-[calc(var(--nextra-navbar-height))] _top-0 _w-full _bottom-0 _z-[15] _overscroll-contain _bg-white dark:_bg-dark;
     transition: transform 0.8s cubic-bezier(0.52, 0.16, 0.04, 1);
     will-change: transform, opacity;
     contain: layout style;
@@ -58,22 +58,22 @@ summary {
 
   .nextra-banner-container ~ div {
     .nextra-sidebar-container {
-      @apply nx-pt-[6.5rem];
+      @apply _pt-[6.5rem];
     }
     &.nextra-nav-container {
-      @apply nx-top-10 md:nx-top-0;
+      @apply _top-10 md:_top-0;
     }
   }
   .nextra-banner-hidden {
     .nextra-banner-container ~ div .nextra-sidebar-container {
-      @apply nx-pt-16;
+      @apply _pt-16;
     }
     .nextra-nav-container {
-      @apply !nx-top-0;
+      @apply !_top-0;
     }
   }
   .nextra-search .excerpt {
-    @apply nx-overflow-hidden nx-text-ellipsis;
+    @apply _overflow-hidden _text-ellipsis;
     display: -webkit-box;
     line-clamp: 1;
     -webkit-line-clamp: 1;
@@ -86,14 +86,14 @@ summary {
   .nextra-sidebar-container,
   .nextra-sidebar-container.open,
   body.resizing .nextra-sidebar-container {
-    @apply nx-transition-none;
+    @apply _transition-none;
   }
 }
 
 /* Content Typography */
 article details > summary {
   &::-webkit-details-marker {
-    @apply nx-hidden;
+    @apply _hidden;
   }
   &::before {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'%3E%3Cpath fill-rule='evenodd' d='M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z' clip-rule='evenodd' /%3E%3C/svg%3E");
@@ -115,10 +115,10 @@ article details > summary {
   (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))
 ) {
   .nextra-search ul {
-    @apply nx-backdrop-blur-lg nx-bg-white/70 dark:nx-bg-dark/80;
+    @apply _backdrop-blur-lg _bg-white/70 dark:_bg-dark/80;
   }
   .nextra-nav-container-blur {
-    @apply nx-backdrop-blur-md nx-bg-white/[.85] dark:!nx-bg-dark/80;
+    @apply _backdrop-blur-md _bg-white/[.85] dark:!_bg-dark/80;
   }
 }
 
@@ -132,14 +132,14 @@ input[type='search'] {
 }
 
 .contains-task-list {
-  @apply nx-ml-0 nx-list-none;
+  @apply _ml-0 _list-none;
   input[type='checkbox'] {
-    @apply nx-mr-1;
+    @apply _mr-1;
   }
 }
 
 .nextra-banner-hidden .nextra-banner-container {
-  @apply nx-hidden;
+  @apply _hidden;
 }
 
 .nextra-sidebar-container {
