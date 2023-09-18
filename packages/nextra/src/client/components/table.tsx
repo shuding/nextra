@@ -5,8 +5,5 @@ export const Table = ({
   className = '',
   ...props
 }: ComponentProps<'table'>) => (
-  <table
-    className={cn('_block _overflow-x-scroll', className)}
-    {...props}
-  />
+  <table className={cn('_block _overflow-x-scroll', className)} {...props} />
 )
