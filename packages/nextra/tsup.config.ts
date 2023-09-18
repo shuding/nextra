@@ -50,7 +50,7 @@ export default defineConfig([
         .replaceAll(/\w+ as /g, '')
         .trimEnd()
         .split(', ')
-        .filter(component => !['ArrowRightIcon', 'ExpandIcon'].includes(component))
+        .filter(name => !['ArrowRightIcon', 'ExpandIcon'].includes(name))
 
       await fs.writeFile(
         filePath.replace('.js', '.d.ts'),
