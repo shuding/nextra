@@ -66,7 +66,7 @@ export const Pre = ({
           className="md:_hidden"
           title="Toggle word wrap"
         >
-          <WordWrapIcon className="nx-pointer-events-none nx-h-4 nx-w-4" />
+          <WordWrapIcon className="_pointer-events-none _h-4 _w-4" />
         </Button>
         {copy === '' && (
           <CopyToClipboard
