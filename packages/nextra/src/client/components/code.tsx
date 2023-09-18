@@ -7,7 +7,7 @@ export const Code = ({
   'data-language': _language,
   ...props
 }: ComponentProps<'code'> & {
-  'data-language': string
+  'data-language'?: string
 }): ReactElement => {
   return (
     <code

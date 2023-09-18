@@ -15,7 +15,7 @@ export const Pre = ({
 }: ComponentProps<'pre'> & {
   'data-filename'?: string
   'data-copy'?: ''
-  'data-language': string
+  'data-language'?: string
 }): ReactElement => {
   const preRef = useRef<HTMLPreElement | null>(null)
 
