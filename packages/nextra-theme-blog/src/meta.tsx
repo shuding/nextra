@@ -40,8 +40,7 @@ export default function Meta(): ReactElement {
   return (
     <div
       className={
-        '_mb-8 _flex _gap-3 ' +
-        (readingTime ? '_items-start' : '_items-center')
+        '_mb-8 _flex _gap-3 ' + (readingTime ? '_items-start' : '_items-center')
       }
     >
       <div className="_grow dark:_text-gray-400 _text-gray-600">

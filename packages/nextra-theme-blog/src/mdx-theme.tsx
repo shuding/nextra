@@ -40,9 +40,7 @@ function HeadingLink({
     <Tag
       className={
         // can be added by footnotes
-        className === 'sr-only'
-          ? '_sr-only'
-          : `_not-prose subheading-${Tag}`
+        className === 'sr-only' ? '_sr-only' : `_not-prose subheading-${Tag}`
       }
       {...props}
     >

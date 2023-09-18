@@ -147,10 +147,7 @@ function InnerLayout({
         <nav className={classes.toc} aria-label="table of contents" />
       )
     ) : (
-      <nav
-        className={cn(classes.toc, '_px-4')}
-        aria-label="table of contents"
-      >
+      <nav className={cn(classes.toc, '_px-4')} aria-label="table of contents">
         {renderComponent(config.toc.component, {
           toc: config.toc.float ? toc : [],
           filePath

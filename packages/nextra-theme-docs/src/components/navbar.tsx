@@ -118,11 +118,7 @@ export function Navbar({ items }: NavBarProps): ReactElement {
             return (
               <NavbarMenu
                 key={menu.title}
-                className={cn(
-                  classes.link,
-                  '_flex _gap-1',
-                  classes.inactive
-                )}
+                className={cn(classes.link, '_flex _gap-1', classes.inactive)}
                 menu={menu}
               >
                 {menu.title}

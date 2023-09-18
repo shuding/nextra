@@ -8,6 +8,6 @@
     @apply _mt-[3px] _ml-[-41px];
     content: counter(step);
     /* todo: bug in tailwindcss - The `-_indent-px` class does not exist */
-    text-indent: -1px
+    text-indent: -1px;
   }
 }

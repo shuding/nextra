@@ -232,10 +232,7 @@ export function getComponents({
     ),
     a: Link,
     table: props => (
-      <Table
-        className="nextra-scrollbar _mt-6 _p-0 first:_mt-0"
-        {...props}
-      />
+      <Table className="nextra-scrollbar _mt-6 _p-0 first:_mt-0" {...props} />
     ),
     p: props => <p className="_mt-6 _leading-7 first:_mt-0" {...props} />,
     tr: Tr,

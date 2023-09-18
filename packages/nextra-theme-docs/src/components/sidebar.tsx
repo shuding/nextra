@@ -247,13 +247,7 @@ function File({
         {item.title}
       </Anchor>
       {active && anchors.length > 0 && (
-        <ul
-          className={cn(
-            classes.list,
-            classes.border,
-            'ltr:_ml-3 rtl:_mr-3'
-          )}
-        >
+        <ul className={cn(classes.list, classes.border, 'ltr:_ml-3 rtl:_mr-3')}>
           {anchors.map(({ id, value }) => (
             <li key={id}>
               <a
@@ -337,10 +331,7 @@ export function Sidebar({
     if (menu) {
       document.body.classList.add('_overflow-hidden', 'md:_overflow-auto')
     } else {
-      document.body.classList.remove(
-        '_overflow-hidden',
-        'md:_overflow-auto'
-      )
+      document.body.classList.remove('_overflow-hidden', 'md:_overflow-auto')
     }
   }, [menu])
 
