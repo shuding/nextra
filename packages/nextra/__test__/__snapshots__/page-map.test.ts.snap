@@ -152,11 +152,15 @@ exports[`Page Process > should match i18n site page maps 1`] = `
         {
           "data": {
             "--- hey": {
-              "title": "Getting Started",
+              "title": <Separator>
+                Getting Started
+              </Separator>,
               "type": "separator",
             },
             "--- my_new_separator": {
-              "title": "Advanced",
+              "title": <Separator>
+                Advanced
+              </Separator>,
               "type": "separator",
             },
             "404-500": "404/500 Custom Error Pages",
@@ -224,7 +228,9 @@ exports[`Page Process > should match i18n site page maps 1`] = `
                   },
                 },
                 "--- yoo": {
-                  "title": "Do Not Use",
+                  "title": <Separator>
+                    Do Not Use
+                  </Separator>,
                   "type": "separator",
                 },
                 "file-name.with.DOTS": "Filenames with Dots",

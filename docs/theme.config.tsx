@@ -111,12 +111,6 @@ const config: DocsThemeConfig = {
     labels: 'feedback'
   },
   sidebar: {
-    titleComponent({ title, type }) {
-      if (type === 'separator') {
-        return <span className="cursor-default">{title}</span>
-      }
-      return <>{title}</>
-    },
     defaultMenuCollapseLevel: 1,
     toggleButton: true
   },

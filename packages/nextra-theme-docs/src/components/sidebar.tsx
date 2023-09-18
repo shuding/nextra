@@ -167,11 +167,7 @@ function FolderImpl({ item, anchors }: FolderProps): ReactElement {
           rerender({})
         }}
       >
-        {renderComponent(config.sidebar.titleComponent, {
-          title: item.title,
-          type: item.type,
-          route: item.route
-        })}
+        {item.title}
         <ArrowRightIcon
           className="nx-h-[18px] nx-min-w-[18px] nx-rounded-sm nx-p-0.5 hover:nx-bg-gray-800/5 dark:hover:nx-bg-gray-100/5"
           pathClassName={cn(
@@ -195,7 +191,6 @@ function FolderImpl({ item, anchors }: FolderProps): ReactElement {
 }
 
 function Separator({ title }: { title: string }): ReactElement {
-  const config = useConfig()
   return (
     <li
       className={cn(
@@ -206,11 +201,7 @@ function Separator({ title }: { title: string }): ReactElement {
       )}
     >
       {title ? (
-        renderComponent(config.sidebar.titleComponent, {
-          title,
-          type: 'separator',
-          route: ''
-        })
+        renderComponent(title)
       ) : (
         <hr className="nx-mx-2 nx-border-t nx-border-gray-200 dark:nx-border-primary-100/10" />
       )}
@@ -232,7 +223,6 @@ function File({
   const active = item.route && [route, route + '/'].includes(item.route + '/')
   const activeAnchor = useActiveAnchor()
   const { setMenu } = useMenu()
-  const config = useConfig()
 
   if (item.type === 'separator') {
     return <Separator title={item.title} />
@@ -254,11 +244,7 @@ function File({
           onFocus?.(null)
         }}
       >
-        {renderComponent(config.sidebar.titleComponent, {
-          title: item.title,
-          type: item.type,
-          route: item.route
-        })}
+        {item.title}
       </Anchor>
       {active && anchors.length > 0 && (
         <ul

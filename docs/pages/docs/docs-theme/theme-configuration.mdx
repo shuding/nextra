@@ -1,5 +1,6 @@
 import { Screenshot } from 'components/screenshot'
 import { OptionTable } from 'components/table'
+import sidebarTitleComponentImage from '../../../public/assets/docs/sidebar-customized.png'
 
 # Theme Configuration
 
@@ -448,15 +449,6 @@ Customize the entire navbar component.
       'If true, automatically collapse inactive folders above defaultMenuCollapseLevel.'
     ],
     [
-      'sidebar.titleComponent',
-      `React.ReactNode | React.FC<{
-  type: string;
-  title: string;
-  route: string;
-}>`,
-      'Custom renderer for sidebar titles.'
-    ],
-    [
       'sidebar.toggleButton',
       'boolean',
       'Hide/show sidebar toggle button. Defaults to `false`.'
@@ -479,53 +471,27 @@ then top-level folders will not auto-collapse.
 ### Customize Sidebar Content
 
 Together with the [Separators](/docs/docs-theme/page-configuration#separators)
-item, you can customize how the sidebar content is rendered by using the
-`sidebar.titleComponent` option:
+item, you can customize how the sidebar content is rendered by using JSX
+elements:
 
-import { Tabs } from 'nextra/components'
-import sidebarTitleComponentImage from '../../../public/assets/docs/sidebar-customized.png'
+```jsx filename="_meta.jsx" {5-10}
+export default {
+  index: 'Intro',
+  '--': {
+    type: 'separator',
+    title: (
+      <div className="flex items-center gap-2">
+        <MyLogo />
+        {children}
+      </div>
+    )
+  },
+  frameworks: 'JS Frameworks & Libs',
+  about: 'About'
+}
+```
 
 <Screenshot src={sidebarTitleComponentImage} alt="Customized Sidebar" />
-
-<div className="mt-8 text-center text-sm">
-  [Live example on StackBlitz
-  ↗](https://stackblitz.com/edit/nextra-2-docs-8xbfk3?file=pages%2F_meta.json,theme.config.jsx)
-</div>
-
-<Tabs items={['theme.config.jsx', 'pages/_meta.json']}>
-  <Tabs.Tab>
-    ```jsx
-    export default {
-      sidebar: {
-        titleComponent({ title, type }) {
-          if (type === 'separator') {
-            return (
-              <div style={{ background: 'cyan', textAlign: 'center' }}>{title}</div>
-            )
-          }
-          if (title === 'About') {
-            return <>❓ {title}</>
-          }
-          return <>👉 {title}</>
-        }
-      }
-    }
-    ```
-  </Tabs.Tab>
-  <Tabs.Tab>
-    ```json
-    {
-      "index": "Intro",
-      "--": {
-        "type": "separator",
-        "title": "A Separator"
-      },
-      "frameworks": "JS Frameworks & Libs",
-      "about": "About"
-    }
-    ```
-  </Tabs.Tab>
-</Tabs>
 
 ## Content
 

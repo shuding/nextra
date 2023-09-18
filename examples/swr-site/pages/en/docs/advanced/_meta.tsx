@@ -1,3 +1,5 @@
+import { Separator } from '../_meta'
+
 export default {
   '*': {
     theme: {
@@ -5,7 +7,7 @@ export default {
     }
   },
   '--- yoo': {
-    title: 'Do Not Use',
+    title: <Separator>Do Not Use</Separator>,
     type: 'separator'
   },
   more: 'More: A Super Super Super Super Long Directory',
