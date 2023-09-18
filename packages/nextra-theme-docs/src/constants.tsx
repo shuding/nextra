@@ -45,7 +45,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     icon: (
       <>
         <DiscordIcon />
-        <span className="nx-sr-only">Discord</span>
+        <span className="x-sr-only">Discord</span>
       </>
     )
   },
@@ -101,8 +101,8 @@ export const DEFAULT_THEME: DocsThemeConfig = {
   i18n: [],
   logo: (
     <>
-      <span className="nx-font-extrabold">Nextra</span>
-      <span className="nx-ml-2 nx-hidden nx-font-normal nx-text-gray-600 md:nx-inline">
+      <span className="x-font-extrabold">Nextra</span>
+      <span className="x-ml-2 x-hidden x-font-normal x-text-gray-600 md:x-inline">
         The Next Docs Builder
       </span>
     </>

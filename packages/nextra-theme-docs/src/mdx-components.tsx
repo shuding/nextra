@@ -49,15 +49,15 @@ function HeadingLink({
       className={
         // can be added by footnotes
         className === 'sr-only'
-          ? 'nx-sr-only'
+          ? 'x-sr-only'
           : cn(
-              'nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100',
+              'x-font-semibold x-tracking-tight x-text-slate-900 dark:x-text-slate-100',
               {
-                h2: 'nx-mt-10 nx-border-b nx-pb-1 nx-text-3xl nx-border-neutral-200/70 contrast-more:nx-border-neutral-400 dark:nx-border-primary-100/10 contrast-more:dark:nx-border-neutral-400',
-                h3: 'nx-mt-8 nx-text-2xl',
-                h4: 'nx-mt-8 nx-text-xl',
-                h5: 'nx-mt-8 nx-text-lg',
-                h6: 'nx-mt-8 nx-text-base'
+                h2: 'x-mt-10 x-border-b x-pb-1 x-text-3xl x-border-neutral-200/70 contrast-more:x-border-neutral-400 dark:nx-border-primary-100/10 contrast-more:dark:nx-border-neutral-400',
+                h3: 'x-mt-8 x-text-2xl',
+                h4: 'x-mt-8 x-text-xl',
+                h5: 'x-mt-8 x-text-lg',
+                h6: 'x-mt-8 x-text-base'
               }[Tag]
             )
       }
