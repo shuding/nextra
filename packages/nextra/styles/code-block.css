@@ -1,6 +1,6 @@
 .nextra-code span {
-  @apply nx-bg-[--shiki-light-bg] nx-text-[--shiki-light];
-  @apply dark:nx-bg-[--shiki-dark-bg] dark:nx-text-[--shiki-dark];
+  @apply _bg-[--shiki-light-bg] _text-[--shiki-light];
+  @apply dark:_bg-[--shiki-dark-bg] dark:_text-[--shiki-dark];
 }
 
 code {
@@ -11,41 +11,41 @@ code {
     'ss01' 1;
 
   :not(pre) > & {
-    @apply nx-border-black nx-border-opacity-[0.04] nx-bg-opacity-[0.03] nx-bg-black nx-break-words nx-rounded-md nx-border nx-py-0.5 nx-px-[.25em] nx-text-[.9em];
-    @apply dark:nx-border-white/10 dark:nx-bg-white/10;
+    @apply _border-black _border-opacity-[0.04] _bg-opacity-[0.03] _bg-black _break-words _rounded-md _border _py-0.5 _px-[.25em] _text-[.9em];
+    @apply dark:_border-white/10 dark:_bg-white/10;
   }
 }
 
 pre {
   code {
-    @apply nx-grid nx-text-sm nx-leading-5 nx-text-current;
+    @apply _grid _text-sm _leading-5 _text-current;
 
     &[data-line-numbers] > span {
-      @apply nx-pl-2;
+      @apply _pl-2;
       &::before {
         counter-increment: line;
         content: counter(line);
-        @apply nx-h-full nx-float-left nx-pr-4 nx-text-right nx-min-w-[2.6rem] nx-text-gray-500;
+        @apply _h-full _float-left _pr-4 _text-right _min-w-[2.6rem] _text-gray-500;
       }
     }
 
     & > span {
-      @apply nx-px-4;
+      @apply _px-4;
 
       &[data-highlighted-line] {
-        @apply !nx-bg-primary-600/10 !nx-text-primary-600/50 nx-shadow-[2px_0_currentColor_inset];
+        @apply !_bg-primary-600/10 !_text-primary-600/50 _shadow-[2px_0_currentColor_inset];
       }
       [data-highlighted-chars] {
-        @apply nx-rounded-sm nx-shadow-[0_0_0_2px_rgba(0,0,0,.3)];
-        @apply nx-bg-primary-800/10 nx-shadow-primary-800/10;
-        @apply dark:nx-bg-primary-300/10 dark:nx-shadow-primary-300/10;
+        @apply _rounded-sm _shadow-[0_0_0_2px_rgba(0,0,0,.3)];
+        @apply _bg-primary-800/10 _shadow-primary-800/10;
+        @apply dark:_bg-primary-300/10 dark:_shadow-primary-300/10;
       }
     }
   }
 
   html[data-nextra-word-wrap] & {
     word-break: break-word;
-    @apply nx-whitespace-pre-wrap md:nx-whitespace-pre;
+    @apply _whitespace-pre-wrap md:_whitespace-pre;
   }
 }
 
@@ -66,6 +66,6 @@ pre {
   (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))
 ) {
   .nextra-button {
-    @apply nx-backdrop-blur-md nx-bg-opacity-[.85] dark:nx-bg-opacity-80;
+    @apply _backdrop-blur-md _bg-opacity-[.85] dark:_bg-opacity-80;
   }
 }

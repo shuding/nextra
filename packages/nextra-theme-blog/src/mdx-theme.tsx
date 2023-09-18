@@ -41,8 +41,8 @@ function HeadingLink({
       className={
         // can be added by footnotes
         className === 'sr-only'
-          ? 'nx-sr-only'
-          : `nx-not-prose subheading-${Tag}`
+          ? '_sr-only'
+          : `_not-prose subheading-${Tag}`
       }
       {...props}
     >
@@ -66,7 +66,7 @@ const A = ({ children, href = '', ...props }: ComponentProps<'a'>) => {
     return (
       <a href={href} target="_blank" rel="noreferrer" {...props}>
         {children}
-        <span className="nx-sr-only nx-select-none"> (opens in a new tab)</span>
+        <span className="_sr-only _select-none"> (opens in a new tab)</span>
       </a>
     )
   }
@@ -89,14 +89,14 @@ const useComponents = (): Components => {
     h6: props => <HeadingLink tag="h6" {...props} />,
     a: A,
     pre: ({ children, ...props }) => (
-      <div className="nx-not-prose">
+      <div className="_not-prose">
         <Pre {...props}>{children}</Pre>
       </div>
     ),
     tr: Tr,
     th: Th,
     td: Td,
-    table: props => <Table className="nx-not-prose" {...props} />,
+    table: props => <Table className="_not-prose" {...props} />,
     code: Code,
     ...config.components
   }

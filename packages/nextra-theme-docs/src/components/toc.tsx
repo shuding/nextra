@@ -61,12 +61,12 @@ export function TOC({ toc, filePath }: TOCProps): ReactElement {
     >
       {hasHeadings && (
         <>
-          <p className="nx-mb-4 nx-font-semibold nx-tracking-tight">
+          <p className="_mb-4 _font-semibold _tracking-tight">
             {renderComponent(config.toc.title)}
           </p>
           <ul>
             {toc.map(({ id, value, depth }) => (
-              <li className="nx-my-2 nx-scroll-my-6 nx-scroll-py-6" key={id}>
+              <li className="_my-2 _scroll-my-6 _scroll-py-6" key={id}>
                 <a
                   href={`#${id}`}
                   className={cn(
@@ -96,9 +96,9 @@ export function TOC({ toc, filePath }: TOCProps): ReactElement {
         <div
           className={cn(
             hasHeadings &&
-              '_mt-8 _border-t _bg-white _pt-8 _shadow-[0_-12px_16px_white] dark:nx-bg-dark dark:nx-shadow-[0_-12px_16px_#111]',
-            '_sticky _bottom-0 _flex _flex-col _items-start _gap-2 nx-pb-8 dark:nx-border-neutral-800',
-            'contrast-more:nx-border-t contrast-more:_border-neutral-400 contrast-more:nx-shadow-none contrast-more:dark:nx-border-neutral-400'
+              '_mt-8 _border-t _bg-white _pt-8 _shadow-[0_-12px_16px_white] dark:_bg-dark dark:_shadow-[0_-12px_16px_#111]',
+            '_sticky _bottom-0 _flex _flex-col _items-start _gap-2 _pb-8 dark:_border-neutral-800',
+            'contrast-more:_border-t contrast-more:_border-neutral-400 contrast-more:_shadow-none contrast-more:dark:_border-neutral-400'
           )}
         >
           {config.feedback.content ? (
