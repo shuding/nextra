@@ -10,7 +10,7 @@
 @import './typesetting-article.css';
 
 html {
-  @apply x-antialiased x-text-base x-scroll-pt-[--nextra-navbar-height];
+  @apply _antialiased _text-base _scroll-pt-[--nextra-navbar-height];
   font-feature-settings:
     'rlig' 1,
     'calt' 1,
@@ -19,7 +19,7 @@ html {
 }
 
 body {
-  @apply x-w-full x-bg-white dark:x-bg-dark dark:x-text-gray-100;
+  @apply _w-full _bg-white dark:_bg-dark dark:_text-gray-100;
 }
 
 a,
@@ -27,19 +27,19 @@ summary,
 button,
 input,
 [tabindex]:not([tabindex='-1']) {
-  @apply x-outline-none;
+  @apply _outline-none;
   &:focus-visible {
-    @apply x-ring-2 x-ring-primary-200 x-ring-offset-1 x-ring-offset-primary-300 dark:x-ring-primary-800 dark:x-ring-offset-primary-700;
+    @apply _ring-2 _ring-primary-200 _ring-offset-1 _ring-offset-primary-300 dark:_ring-primary-800 dark:_ring-offset-primary-700;
   }
 }
 
 a,
 summary {
-  @apply x-rounded;
+  @apply _rounded;
 }
 
 .nextra-content {
-  @apply x-text-slate-700 dark:x-text-slate-200;
+  @apply _text-slate-700 dark:_text-slate-200;
 }
 
 @media (max-width: 767px) {

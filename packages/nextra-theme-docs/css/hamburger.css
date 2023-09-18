@@ -1,6 +1,6 @@
 .nextra-hamburger svg {
   g {
-    @apply x-origin-center;
+    @apply _origin-center;
     transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
   }
   path {
@@ -23,16 +23,17 @@
 
   &.open > {
     path {
-      @apply x-opacity-0;
+      @apply _opacity-0;
     }
     g:nth-of-type(1) {
-      @apply x-rotate-45;
+      @apply _rotate-45;
       path {
         transform: translate3d(0, 6px, 0);
       }
     }
     g:nth-of-type(2) {
-      @apply -x-rotate-45;
+      /* todo: bug in tailwindcss - The `-_rotate-45` class does not exist */
+      transform: rotate(-45deg);
       path {
         transform: translate3d(0, -6px, 0);
       }
