@@ -424,7 +424,7 @@ export function Sidebar({
               {(!asPopover || !showSidebar) && (
                 <Collapse isOpen={showSidebar} horizontal>
                   <Menu
-                    className="nextra-menu-desktop max-md:nx-hidden"
+                    className="nextra-menu-desktop max-md:_hidden"
                     // The sidebar menu, shows only the docs directories.
                     directories={docsDirectories}
                     // When the viewport size is larger than `md`, hide the anchors in
@@ -436,7 +436,7 @@ export function Sidebar({
               )}
               {mounted && window.innerWidth < 768 && (
                 <Menu
-                  className="nextra-menu-mobile md:nx-hidden"
+                  className="nextra-menu-mobile md:_hidden"
                   // The mobile dropdown menu, shows all the directories.
                   directories={fullDirectories}
                   // Always show the anchor links on mobile (`md`).
@@ -450,15 +450,15 @@ export function Sidebar({
         {hasMenu && (
           <div
             className={cn(
-              'nx-sticky nx-bottom-0',
-              'nx-bg-white dark:nx-bg-dark', // when banner is showed, sidebar links can be behind menu, set bg color as body bg color
-              'nx-mx-4 nx-py-4 nx-shadow-[0_-12px_16px_#fff]',
-              'nx-flex nx-items-center nx-gap-2',
-              'dark:nx-border-neutral-800 dark:nx-shadow-[0_-12px_16px_#111]',
-              'contrast-more:nx-border-neutral-400 contrast-more:nx-shadow-none contrast-more:dark:nx-shadow-none',
+              '_sticky _bottom-0',
+              '_bg-white dark:_bg-dark', // when banner is showed, sidebar links can be behind menu, set bg color as body bg color
+              '_mx-4 _py-4 _shadow-[0_-12px_16px_#fff]',
+              '_flex _items-center _gap-2',
+              'dark:_border-neutral-800 dark:_shadow-[0_-12px_16px_#111]',
+              'contrast-more:_border-neutral-400 contrast-more:_shadow-none contrast-more:dark:_shadow-none',
               showSidebar
-                ? cn(hasI18n && 'nx-justify-end', 'nx-border-t')
-                : 'nx-py-4 nx-flex-wrap nx-justify-center'
+                ? cn(hasI18n && '_justify-end', '_border-t')
+                : '_py-4 _flex-wrap _justify-center'
             )}
             data-toggle-animation={
               showToggleAnimation ? (showSidebar ? 'show' : 'hide') : 'off'
@@ -466,12 +466,12 @@ export function Sidebar({
           >
             <LocaleSwitch
               lite={!showSidebar}
-              className={cn(showSidebar ? 'nx-grow' : 'max-md:nx-grow')}
+              className={cn(showSidebar ? '_grow' : 'max-md:_grow')}
             />
             {config.darkMode && (
               <div
                 className={
-                  showSidebar && !hasI18n ? 'nx-grow nx-flex nx-flex-col' : ''
+                  showSidebar && !hasI18n ? '_grow _flex _flex-col' : ''
                 }
               >
                 {renderComponent(config.themeSwitch.component, {
@@ -482,7 +482,7 @@ export function Sidebar({
             {config.sidebar.toggleButton && (
               <button
                 title={showSidebar ? 'Hide sidebar' : 'Show sidebar'}
-                className="max-md:nx-hidden nx-h-7 nx-rounded-md nx-transition-colors nx-text-gray-600 dark:nx-text-gray-400 nx-px-2 hover:nx-bg-gray-100 hover:nx-text-gray-900 dark:hover:nx-bg-primary-100/5 dark:hover:nx-text-gray-50"
+                className="max-md:_hidden _h-7 _rounded-md _transition-colors _text-gray-600 dark:_text-gray-400 _px-2 hover:_bg-gray-100 hover:_text-gray-900 dark:hover:_bg-primary-100/5 dark:hover:_text-gray-50"
                 onClick={() => {
                   setSidebar(!showSidebar)
                   setToggleAnimation(true)
