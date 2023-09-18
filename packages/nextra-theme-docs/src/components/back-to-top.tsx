@@ -27,12 +27,12 @@ export function BackToTop({ className }: { className?: string }): ReactElement {
       aria-hidden="true"
       onClick={scrollToTop}
       className={cn(
-        'nx-flex nx-items-center nx-gap-1.5 nx-transition nx-opacity-0',
+        '_flex _items-center _gap-1.5 _transition _opacity-0',
         className
       )}
     >
       Scroll to top
-      <ArrowRightIcon className="-nx-rotate-90 nx-w-3.5 nx-h-3.5 nx-border nx-rounded-full nx-border-current" />
+      <ArrowRightIcon className="-_rotate-90 _w-3.5 _h-3.5 _border _rounded-full _border-current" />
     </button>
   )
 }

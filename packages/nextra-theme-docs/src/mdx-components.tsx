@@ -147,9 +147,9 @@ const Summary = (props: ComponentProps<'summary'>): ReactElement => {
   return (
     <summary
       className={cn(
-        'nx-flex nx-items-center nx-cursor-pointer nx-list-none nx-p-1 nx-transition-colors hover:nx-bg-gray-100 dark:hover:nx-bg-neutral-800',
-        "before:nx-mr-1 before:nx-inline-block before:nx-transition-transform before:nx-content-[''] dark:before:nx-invert before:nx-shrink-0",
-        'rtl:before:nx-rotate-180 [[data-expanded]>&]:before:nx-rotate-90'
+        '_flex _items-center _cursor-pointer _list-none _p-1 _transition-colors hover:_bg-gray-100 dark:hover:_bg-neutral-800',
+        "before:_mr-1 before:_inline-block before:_transition-transform before:_content-[''] dark:before:_invert before:_shrink-0",
+        'rtl:before:_rotate-180 [[data-expanded]>&]:before:_rotate-90'
       )}
       {...props}
       onClick={e => {
@@ -167,7 +167,7 @@ export const Link = ({ href = '', className, ...props }: AnchorProps) => (
     href={href}
     newWindow={EXTERNAL_HREF_REGEX.test(href)}
     className={cn(
-      'nx-text-primary-600 nx-underline nx-decoration-from-font [text-underline-position:from-font]',
+      '_text-primary-600 _underline _decoration-from-font [text-underline-position:from-font]',
       className
     )}
     {...props}
@@ -193,7 +193,7 @@ export function getComponents({
   return {
     h1: props => (
       <h1
-        className="nx-mt-2 nx-text-4xl nx-font-bold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100"
+        className="_mt-2 _text-4xl _font-bold _tracking-tight _text-slate-900 dark:_text-slate-100"
         {...props}
       />
     ),
@@ -204,22 +204,22 @@ export function getComponents({
     h6: props => <HeadingLink tag="h6" context={context} {...props} />,
     ul: props => (
       <ul
-        className="nx-mt-6 nx-list-disc first:nx-mt-0 ltr:nx-ml-6 rtl:nx-mr-6"
+        className="_mt-6 _list-disc first:_mt-0 ltr:_ml-6 rtl:_mr-6"
         {...props}
       />
     ),
     ol: props => (
       <ol
-        className="nx-mt-6 nx-list-decimal first:nx-mt-0 ltr:nx-ml-6 rtl:nx-mr-6"
+        className="_mt-6 _list-decimal first:_mt-0 ltr:_ml-6 rtl:_mr-6"
         {...props}
       />
     ),
-    li: props => <li className="nx-my-2" {...props} />,
+    li: props => <li className="_my-2" {...props} />,
     blockquote: props => (
       <blockquote
         className={cn(
-          'nx-mt-6 nx-border-gray-300 nx-italic nx-text-gray-700 dark:nx-border-gray-700 dark:nx-text-gray-400',
-          'first:nx-mt-0 ltr:nx-border-l-2 ltr:nx-pl-6 rtl:nx-border-r-2 rtl:nx-pr-6'
+          '_mt-6 _border-gray-300 _italic _text-gray-700 dark:_border-gray-700 dark:_text-gray-400',
+          'first:_mt-0 ltr:_border-l-2 ltr:_pl-6 rtl:_border-r-2 rtl:_pr-6'
         )}
         {...props}
       />

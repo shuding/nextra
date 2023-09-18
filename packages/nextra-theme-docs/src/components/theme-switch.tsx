@@ -43,9 +43,9 @@ export function ThemeSwitch({
       selected={{
         key: theme,
         name: (
-          <div className="nx-flex nx-items-center nx-gap-2 nx-capitalize">
+          <div className="_flex _items-center _gap-2 _capitalize">
             <IconToUse />
-            <span className={lite ? 'md:nx-hidden' : ''}>
+            <span className={lite ? 'md:_hidden' : ''}>
               {mounted ? options[theme as keyof typeof options] : options.light}
             </span>
           </div>

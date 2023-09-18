@@ -149,23 +149,23 @@ export function Search({
     <Transition
       show={mounted && (!show || Boolean(value))}
       as={Fragment}
-      enter="nx-transition-opacity"
-      enterFrom="nx-opacity-0"
-      enterTo="nx-opacity-100"
-      leave="nx-transition-opacity"
-      leaveFrom="nx-opacity-100"
-      leaveTo="nx-opacity-0"
+      enter="_transition-opacity"
+      enterFrom="_opacity-0"
+      enterTo="_opacity-100"
+      leave="_transition-opacity"
+      leaveFrom="_opacity-100"
+      leaveTo="_opacity-0"
     >
       <kbd
         className={cn(
-          'nx-absolute nx-my-1.5 nx-select-none ltr:nx-right-1.5 rtl:nx-left-1.5',
-          'nx-h-5 nx-rounded nx-bg-white nx-px-1.5 nx-font-mono nx-text-[10px] nx-font-medium nx-text-gray-500',
-          'nx-border dark:nx-border-gray-100/20 dark:nx-bg-dark/50',
-          'contrast-more:nx-border-current contrast-more:nx-text-current contrast-more:dark:nx-border-current',
-          'nx-items-center nx-gap-1 nx-transition-opacity',
+          '_absolute _my-1.5 _select-none ltr:_right-1.5 rtl:_left-1.5',
+          '_h-5 _rounded _bg-white _px-1.5 _font-mono _text-[10px] _font-medium _text-gray-500',
+          '_border dark:_border-gray-100/20 dark:_bg-dark/50',
+          'contrast-more:_border-current contrast-more:_text-current contrast-more:dark:_border-current',
+          '_items-center _gap-1 _transition-opacity',
           value
-            ? 'nx-z-20 nx-flex nx-cursor-pointer hover:nx-opacity-70'
-            : 'nx-pointer-events-none nx-hidden sm:nx-flex'
+            ? '_z-20 _flex _cursor-pointer hover:_opacity-70'
+            : '_pointer-events-none _hidden sm:_flex'
         )}
         title={value ? 'Clear' : undefined}
         onClick={() => {

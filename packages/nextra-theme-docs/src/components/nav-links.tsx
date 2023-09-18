@@ -47,9 +47,9 @@ export const NavLinks = ({
         <NextLink
           href={prev.route}
           title={prev.title}
-          className={cn(classes.link, 'ltr:nx-pr-4 rtl:nx-pl-4')}
+          className={cn(classes.link, 'ltr:_pr-4 rtl:_pl-4')}
         >
-          <ArrowRightIcon className={cn(classes.icon, 'ltr:nx-rotate-180')} />
+          <ArrowRightIcon className={cn(classes.icon, 'ltr:_rotate-180')} />
           {prev.title}
         </NextLink>
       )}
@@ -59,11 +59,11 @@ export const NavLinks = ({
           title={next.title}
           className={cn(
             classes.link,
-            'ltr:nx-ml-auto ltr:nx-pl-4 ltr:nx-text-right rtl:nx-mr-auto rtl:nx-pr-4 rtl:nx-text-left'
+            'ltr:_ml-auto ltr:_pl-4 ltr:_text-right rtl:_mr-auto rtl:_pr-4 rtl:_text-left'
           )}
         >
           {next.title}
-          <ArrowRightIcon className={cn(classes.icon, 'rtl:nx-rotate-180')} />
+          <ArrowRightIcon className={cn(classes.icon, 'rtl:_rotate-180')} />
         </NextLink>
       )}
     </div>

@@ -51,12 +51,12 @@ function NavbarMenu({
           {children}
         </Menu.Button>
         <Transition
-          leave="nx-transition-opacity"
-          leaveFrom="nx-opacity-100"
-          leaveTo="nx-opacity-0"
+          leave="_transition-opacity"
+          leaveFrom="_opacity-100"
+          leaveTo="_opacity-0"
         >
           <Menu.Items
-            className="nx-absolute nx-right-0 nx-z-20 nx-mt-1 nx-max-h-64 nx-min-w-full nx-overflow-auto nx-rounded-md nx-ring-1 nx-ring-black/5 nx-bg-white nx-py-1 nx-text-sm nx-shadow-lg dark:nx-ring-white/20 dark:nx-bg-neutral-800"
+            className="_absolute _right-0 _z-20 _mt-1 _max-h-64 _min-w-full _overflow-auto _rounded-md _ring-1 _ring-black/5 _bg-white _py-1 _text-sm _shadow-lg dark:_ring-white/20 dark:_bg-neutral-800"
             tabIndex={0}
           >
             {Object.entries(items || {}).map(([key, item]) => (
@@ -66,8 +66,8 @@ function NavbarMenu({
                     item.href || routes[key]?.route || menu.route + '/' + key
                   }
                   className={cn(
-                    'nx-relative nx-hidden nx-w-full nx-select-none nx-whitespace-nowrap nx-text-gray-600 hover:nx-text-gray-900 dark:nx-text-gray-400 dark:hover:nx-text-gray-100 md:nx-inline-block',
-                    'nx-py-1.5 nx-transition-colors ltr:nx-pl-3 ltr:nx-pr-9 rtl:nx-pr-3 rtl:nx-pl-9'
+                    '_relative _hidden _w-full _select-none _whitespace-nowrap _text-gray-600 hover:_text-gray-900 dark:_text-gray-400 dark:hover:_text-gray-100 md:_inline-block',
+                    '_py-1.5 _transition-colors ltr:_pl-3 ltr:_pr-9 rtl:_pr-3 rtl:_pl-9'
                   )}
                   newWindow={item.newWindow}
                 >

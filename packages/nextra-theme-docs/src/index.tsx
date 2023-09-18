@@ -148,7 +148,7 @@ function InnerLayout({
       )
     ) : (
       <nav
-        className={cn(classes.toc, 'nx-px-4')}
+        className={cn(classes.toc, '_px-4')}
         aria-label="table of contents"
       >
         {renderComponent(config.toc.component, {
@@ -183,8 +183,8 @@ function InnerLayout({
         })}
       <div
         className={cn(
-          'nx-mx-auto nx-flex',
-          themeContext.layout !== 'raw' && 'nx-max-w-[90rem]'
+          '_mx-auto _flex',
+          themeContext.layout !== 'raw' && '_max-w-[90rem]'
         )}
       >
         <ActiveAnchorProvider>
