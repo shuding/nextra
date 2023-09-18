@@ -73,7 +73,7 @@
         "./dist/client/data.d.ts"
       ],
       "icons": [
-        "./dist/client/icons/index.d.ts"
+        "./dist/client/icons.d.ts"
       ],
       "components": [
         "./dist/client/components/index.d.ts"

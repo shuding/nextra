@@ -50,12 +50,17 @@ export default defineConfig([
         .replaceAll(/\w+ as /g, '')
         .trimEnd()
         .split(', ')
+        .filter(component => !['ArrowRightIcon', 'ExpandIcon'].includes(component))
 
       await fs.writeFile(
         filePath.replace('.js', '.d.ts'),
         `import type { ComponentProps, ReactElement } from 'react'
 
 type Svg = (props: ComponentProps<'svg'>) => ReactElement
+
+export const ArrowRightIcon: (props: ComponentProps<'svg'> & { pathClassName?: string }): ReactElement
+
+export const ExpandIcon: (props: ComponentProps<'svg'> & { isOpen?: boolean }): ReactElement
 ${components.map(component => `export const ${component}: Svg`).join('\n')}`
       )
     }
