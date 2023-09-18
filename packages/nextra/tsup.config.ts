@@ -42,7 +42,7 @@ export default defineConfig([
     treeshake: true,
     // todo: find better way to export svg types
     async onSuccess() {
-      const filePath = path.join(CWD, 'dist', 'client', 'icons.js')
+      const filePath = path.join(CWD, 'dist', 'client', 'icons', 'index.js')
       const content = await fs.readFile(filePath, 'utf-8')
 
       const components = content
