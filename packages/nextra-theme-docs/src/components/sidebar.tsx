@@ -171,7 +171,7 @@ function FolderImpl({ item, anchors }: FolderProps): ReactElement {
         <ArrowRightIcon
           className="_h-[18px] _min-w-[18px] _rounded-sm _p-0.5 hover:_bg-gray-800/5 dark:hover:_bg-gray-100/5"
           pathClassName={cn(
-            '_origin-center _transition-transform rtl:-_rotate-180',
+            '_origin-center _transition-transform rtl:_-rotate-180',
             open && 'ltr:_rotate-90 rtl:_rotate-[-270deg]'
           )}
         />

@@ -32,7 +32,7 @@ export function BackToTop({ className }: { className?: string }): ReactElement {
       )}
     >
       Scroll to top
-      <ArrowRightIcon className="-_rotate-90 _w-3.5 _h-3.5 _border _rounded-full _border-current" />
+      <ArrowRightIcon className="_-rotate-90 _w-3.5 _h-3.5 _border _rounded-full _border-current" />
     </button>
   )
 }

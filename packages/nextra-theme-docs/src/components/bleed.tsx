@@ -11,7 +11,7 @@ export function Bleed({
   return (
     <div
       className={cn(
-        'nextra-bleed _relative -_mx-6 _mt-6 md:-_mx-8 2xl:-_mx-24',
+        'nextra-bleed _relative _-mx-6 _mt-6 md:_-mx-8 2xl:_-mx-24',
         full && [
           // 'md:mx:[calc(-50vw+50%+8rem)',
           'ltr:xl:_ml-[calc(50%-50vw+16rem)] ltr:xl:_mr-[calc(50%-50vw)]',

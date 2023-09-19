@@ -32,8 +32,7 @@
       }
     }
     g:nth-of-type(2) {
-      /* todo: bug in tailwindcss - The `-_rotate-45` class does not exist */
-      transform: rotate(-45deg);
+      @apply _-rotate-45;
       path {
         transform: translate3d(0, -6px, 0);
       }

@@ -43,7 +43,7 @@ function NavbarMenu({
           className={cn(
             classes.link,
             classes.inactive,
-            '-_ml-2 max-md:_hidden _items-center _whitespace-nowrap _rounded _p-2 _flex _gap-1'
+            '_-ml-2 max-md:_hidden _items-center _whitespace-nowrap _rounded _p-2 _flex _gap-1'
           )}
         >
           {children}
@@ -144,7 +144,7 @@ export function Navbar({ items }: NavBarProps): ReactElement {
               key={href}
               className={cn(
                 classes.link,
-                '_relative -_ml-2 max-md:_hidden _whitespace-nowrap _p-2',
+                '_relative _-ml-2 max-md:_hidden _whitespace-nowrap _p-2',
                 !isActive || page.newWindow ? classes.inactive : classes.active
               )}
               newWindow={page.newWindow}
@@ -188,7 +188,7 @@ export function Navbar({ items }: NavBarProps): ReactElement {
         <button
           type="button"
           aria-label="Menu"
-          className="nextra-hamburger -_mr-2 _rounded _p-2 active:_bg-gray-400/20 md:_hidden"
+          className="nextra-hamburger _-mr-2 _rounded _p-2 active:_bg-gray-400/20 md:_hidden"
           onClick={() => setMenu(!menu)}
         >
           <MenuIcon className={cn({ open: menu })} />

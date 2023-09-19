@@ -4,10 +4,8 @@
   &:before {
     @apply _absolute _w-[33px] _h-[33px];
     @apply _border-4 _border-white _bg-gray-100 dark:_border-dark dark:_bg-neutral-800;
-    @apply _rounded-full _text-neutral-400 _text-base _font-normal _text-center;
+    @apply _rounded-full _text-neutral-400 _text-base _font-normal _text-center _-indent-px;
     @apply _mt-[3px] _ml-[-41px];
     content: counter(step);
-    /* todo: bug in tailwindcss - The `-_indent-px` class does not exist */
-    text-indent: -1px;
   }
 }
