@@ -25,11 +25,9 @@ const classes = {
 }
 
 function NavbarMenu({
-  className,
   menu,
   children
 }: {
-  className?: string
   menu: MenuItem
   children: ReactNode
 }): ReactElement {
@@ -43,9 +41,9 @@ function NavbarMenu({
       <Menu>
         <Menu.Button
           className={cn(
-            className,
-            '-_ml-2 _hidden _items-center _whitespace-nowrap _rounded _p-2 md:_inline-flex',
-            classes.inactive
+            classes.link,
+            classes.inactive,
+            '-_ml-2 max-md:_hidden _items-center _whitespace-nowrap _rounded _p-2 _flex _gap-1'
           )}
         >
           {children}
@@ -54,28 +52,30 @@ function NavbarMenu({
           leave="_transition-opacity"
           leaveFrom="_opacity-100"
           leaveTo="_opacity-0"
+          as={Menu.Items}
+          className="_absolute _right-0 _z-20 _mt-1 _max-h-64 _min-w-full _overflow-auto _rounded-md _ring-1 _ring-black/5 _bg-white _py-1 _text-sm _shadow-lg dark:_ring-white/20 dark:_bg-neutral-800"
         >
-          <Menu.Items
-            className="_absolute _right-0 _z-20 _mt-1 _max-h-64 _min-w-full _overflow-auto _rounded-md _ring-1 _ring-black/5 _bg-white _py-1 _text-sm _shadow-lg dark:_ring-white/20 dark:_bg-neutral-800"
-            tabIndex={0}
-          >
-            {Object.entries(items || {}).map(([key, item]) => (
-              <Menu.Item key={key}>
+          {Object.entries(items || {}).map(([key, item]) => (
+            <Menu.Item key={key}>
+              {({ active }) => (
                 <Anchor
                   href={
                     item.href || routes[key]?.route || menu.route + '/' + key
                   }
                   className={cn(
-                    '_relative _hidden _w-full _select-none _whitespace-nowrap _text-gray-600 hover:_text-gray-900 dark:_text-gray-400 dark:hover:_text-gray-100 md:_inline-block',
-                    '_py-1.5 _transition-colors ltr:_pl-3 ltr:_pr-9 rtl:_pr-3 rtl:_pl-9'
+                    '_relative _w-full _select-none _whitespace-nowrap hover:_text-gray-900 dark:hover:_text-gray-100 _inline-block',
+                    '_py-1.5 _transition-colors ltr:_pl-3 ltr:_pr-9 rtl:_pr-3 rtl:_pl-9',
+                    active
+                      ? '_text-gray-900 dark:_text-gray-100'
+                      : '_text-gray-600 dark:_text-gray-400'
                   )}
                   newWindow={item.newWindow}
                 >
                   {item.title || key}
                 </Anchor>
-              </Menu.Item>
-            ))}
-          </Menu.Items>
+              )}
+            </Menu.Item>
+          ))}
         </Transition>
       </Menu>
     </div>
@@ -116,11 +116,7 @@ export function Navbar({ items }: NavBarProps): ReactElement {
           if (pageOrMenu.type === 'menu') {
             const menu = pageOrMenu as MenuItem
             return (
-              <NavbarMenu
-                key={menu.title}
-                className={cn(classes.link, '_flex _gap-1', classes.inactive)}
-                menu={menu}
-              >
+              <NavbarMenu key={menu.title} menu={menu}>
                 {menu.title}
                 <ArrowRightIcon
                   className="_h-[18px] _min-w-[18px] _rounded-sm _p-0.5"
@@ -148,7 +144,7 @@ export function Navbar({ items }: NavBarProps): ReactElement {
               key={href}
               className={cn(
                 classes.link,
-                '_relative -_ml-2 _hidden _whitespace-nowrap _p-2 md:_inline-block',
+                '_relative -_ml-2 max-md:_hidden _whitespace-nowrap _p-2',
                 !isActive || page.newWindow ? classes.inactive : classes.active
               )}
               newWindow={page.newWindow}
@@ -164,7 +160,7 @@ export function Navbar({ items }: NavBarProps): ReactElement {
 
         {process.env.NEXTRA_SEARCH &&
           renderComponent(config.search.component, {
-            className: '_hidden md:_inline-block mx-min-w-[200px]'
+            className: 'max-md:_hidden'
           })}
 
         {config.project.link ? (

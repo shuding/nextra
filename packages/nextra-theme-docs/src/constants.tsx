@@ -102,7 +102,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
   logo: (
     <>
       <span className="_font-extrabold">Nextra</span>
-      <span className="_ml-2 _hidden _font-normal _text-gray-600 md:_inline">
+      <span className="_ml-2 max-md:_hidden _font-normal _text-gray-600">
         The Next Docs Builder
       </span>
     </>

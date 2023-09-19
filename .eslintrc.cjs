@@ -138,7 +138,17 @@ module.exports = {
             'nextra-breadcrumb',
             'nextra-bleed',
             'nextra-menu-desktop',
-            'nextra-menu-mobile'
+            'nextra-menu-mobile',
+            // https://github.com/francoismassart/eslint-plugin-tailwindcss/issues/275
+            '-_mr-2',
+            '-_ml-4',
+            '-_mr-4',
+            '-_rotate-180',
+            '-_ml-2',
+            '-_mx-6',
+            '-_mx-8',
+            '-_mx-24',
+            '-_rotate-90'
           ]
         }
       },
@@ -172,7 +182,12 @@ module.exports = {
         tailwindcss: {
           config: 'packages/nextra-theme-docs/tailwind.config.js',
           callees: ['cn'],
-          whitelist: ['nextra-code', 'nextra-filetree']
+          whitelist: [
+            'nextra-code',
+            'nextra-filetree',
+            // https://github.com/francoismassart/eslint-plugin-tailwindcss/issues/275
+            '-_mb-0.5'
+          ]
         }
       },
       rules: {
