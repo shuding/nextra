@@ -147,9 +147,8 @@ const Summary = (props: ComponentProps<'summary'>): ReactElement => {
   return (
     <summary
       className={cn(
-        '_flex _items-center _cursor-pointer _list-none _p-1 _transition-colors hover:_bg-gray-100 dark:hover:_bg-neutral-800',
-        "before:_mr-1 before:_inline-block before:_transition-transform before:_content-[''] dark:before:_invert before:_shrink-0",
-        'rtl:before:_rotate-180 [[data-expanded]>&]:before:_rotate-90'
+        'nextra-summary',
+        '_flex _items-center _cursor-pointer _list-none _p-1 _transition-colors hover:_bg-gray-100 dark:hover:_bg-neutral-800'
       )}
       {...props}
       onClick={e => {
