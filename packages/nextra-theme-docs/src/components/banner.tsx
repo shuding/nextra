@@ -18,7 +18,7 @@ export function Banner(): ReactElement | null {
       <script dangerouslySetInnerHTML={{ __html: hideBannerScript }} />
       <div
         className={cn(
-          'nextra-banner-container _sticky _top-0 _z-20 _flex _items-center md:_relative',
+          'nextra-banner-container max-md:_sticky _top-0 _z-20 _flex _items-center',
           '_h-[var(--nextra-banner-height)] [body.nextra-banner-hidden_&]:_hidden',
           '_text-slate-50 dark:_text-white _bg-neutral-900 dark:_bg-[linear-gradient(1deg,#383838,#212121)]',
           '_px-2 ltr:_pl-10 rtl:_pr-10 print:_hidden'

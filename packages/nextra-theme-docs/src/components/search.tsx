@@ -162,10 +162,10 @@ export function Search({
           '_h-5 _rounded _bg-white _px-1.5 _font-mono _text-[10px] _font-medium _text-gray-500',
           '_border dark:_border-gray-100/20 dark:_bg-dark/50',
           'contrast-more:_border-current contrast-more:_text-current contrast-more:dark:_border-current',
-          '_items-center _gap-1 _transition-opacity',
+          '_items-center _gap-1 _transition-opacity _flex',
           value
-            ? '_z-20 _flex _cursor-pointer hover:_opacity-70'
-            : '_pointer-events-none _hidden sm:_flex'
+            ? '_z-20 _cursor-pointer hover:_opacity-70'
+            : '_pointer-events-none max-sm:_hidden'
         )}
         title={value ? 'Clear' : undefined}
         onClick={() => {
