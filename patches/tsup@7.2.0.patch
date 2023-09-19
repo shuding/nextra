@@ -1,21 +1,13 @@
 diff --git a/dist/rollup.js b/dist/rollup.js
-index 0f6400eedfad49091ca952ee5863bd027e3b8417..06bb0f91a7b6f4cf526d36d194f45d084afa7ad3 100644
+index 0f6400eedfad49091ca952ee5863bd027e3b8417..f5bb45596580ea7637a0d2e174c4aee7cd61ddcd 100644
 --- a/dist/rollup.js
 +++ b/dist/rollup.js
-@@ -12,6 +12,7 @@ var _chunkGEVDEBBWjs = require('./chunk-GEVDEBBW.js');
- 
- 
- 
-+const alias = require('@rollup/plugin-alias');
- 
- 
- 
-@@ -7929,6 +7930,10 @@ var getRollupConfig = async (options) => {
+@@ -7929,6 +7929,10 @@ var getRollupConfig = async (options) => {
          (0, import_rollup_plugin_hashbang.default)(),
          json(),
          ignoreFiles,
 +        // https://stackoverflow.com/a/72679927
-+        alias({
++        require('@rollup/plugin-alias')({
 +          entries: [{ find: /^.*\.svg$/, replacement: 'src/icon.d.ts' }]
 +        }),
          dtsPlugin.default({
