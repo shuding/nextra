@@ -13,7 +13,7 @@ patchedDependencies:
     hash: jszomknpy2pkfhwjmylqvl7ldi
     path: patches/@changesets__assemble-release-plan@5.2.4.patch
   tsup@7.2.0:
-    hash: ysrvmewobc6aqooslp4hypeyge
+    hash: s7osf23ae7sg4rhbetlmka4mje
     path: patches/tsup@7.2.0.patch
 
 importers:
@@ -76,7 +76,7 @@ importers:
         version: 5.0.1
       tsup:
         specifier: 7.2.0
-        version: 7.2.0(patch_hash=ysrvmewobc6aqooslp4hypeyge)(typescript@5.2.2)
+        version: 7.2.0(patch_hash=s7osf23ae7sg4rhbetlmka4mje)(typescript@5.2.2)
       turbo:
         specifier: 1.10.14
         version: 1.10.14
@@ -10124,7 +10124,7 @@ packages:
   /tslib@2.4.0:
     resolution: {integrity: sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==}
 
-  /tsup@7.2.0(patch_hash=ysrvmewobc6aqooslp4hypeyge)(typescript@5.2.2):
+  /tsup@7.2.0(patch_hash=s7osf23ae7sg4rhbetlmka4mje)(typescript@5.2.2):
     resolution: {integrity: sha512-vDHlczXbgUvY3rWvqFEbSqmC1L7woozbzngMqTtL2PGBODTtWlRwGDDawhvWzr5c1QjKe4OAKqJGfE1xeXUvtQ==}
     engines: {node: '>=16.14'}
     hasBin: true
