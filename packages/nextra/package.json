@@ -152,13 +152,13 @@
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
     "@types/webpack": "^5.28.2",
-    "@vitejs/plugin-react": "^3.0.1",
+    "@vitejs/plugin-react": "^4.0.4",
     "esbuild-plugin-svgr": "^2.1.0",
     "next": "^13.4.19",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "unified": "^10.1.2",
-    "vitest": "^0.34.0"
+    "vitest": "^0.34.4"
   },
   "sideEffects": false
 }
