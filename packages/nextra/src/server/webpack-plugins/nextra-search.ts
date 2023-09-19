@@ -1,9 +1,16 @@
-import pkg from 'next/dist/compiled/webpack/webpack.js'
+import { createRequire } from 'node:module'
 import type { Compiler } from 'webpack'
 import type { SearchData } from '../../types'
 import { IS_PRODUCTION } from '../constants.js'
 
-const { sources, webpack } = pkg
+const require = createRequire(import.meta.url)
+
+const pkg = require('next/dist/compiled/webpack/webpack.js')
+pkg.init()
+
+const { sources, webpack } =
+  // eslint-disable-next-line @typescript-eslint/consistent-type-imports
+  pkg as typeof import('next/dist/compiled/webpack/webpack.js')
 
 export class NextraSearchPlugin {
   apply(compiler: Compiler) {
