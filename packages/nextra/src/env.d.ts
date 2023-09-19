@@ -15,3 +15,10 @@ declare namespace globalThis {
 declare module 'next/dist/compiled/webpack/webpack.js' {
   export { default as webpack, sources } from 'webpack'
 }
+
+declare module '*.svg' {
+  import type { ComponentPropsWithRef, ReactElement } from 'react'
+  export const ReactComponent: (
+    _props: ComponentPropsWithRef<'svg'>
+  ) => ReactElement
+}
