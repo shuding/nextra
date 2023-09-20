@@ -18,72 +18,71 @@ import { useSetActiveAnchor } from './contexts'
 import { useIntersectionObserver, useSlugs } from './contexts/active-anchor'
 
 // Anchor links
-function HeadingLink({
-  tag: Tag,
-  context,
-  children,
-  id,
-  className,
-  ...props
-}: ComponentProps<'h2'> & {
-  tag: `h${2 | 3 | 4 | 5 | 6}`
+const createHeading = (
+  Tag: `h${2 | 3 | 4 | 5 | 6}`,
   context: { index: number }
-}): ReactElement {
-  const setActiveAnchor = useSetActiveAnchor()
-  const slugs = useSlugs()
-  const observer = useIntersectionObserver()
-  const obRef = useRef<HTMLAnchorElement>(null)
+) =>
+  function Heading({
+    children,
+    id,
+    className,
+    ...props
+  }: ComponentProps<'h2'>): ReactElement {
+    const setActiveAnchor = useSetActiveAnchor()
+    const slugs = useSlugs()
+    const observer = useIntersectionObserver()
+    const obRef = useRef<HTMLAnchorElement>(null)
 
-  useEffect(() => {
-    if (!id) return
-    const heading = obRef.current
-    if (!heading) return
-    slugs.set(heading, [id, (context.index += 1)])
-    observer?.observe(heading)
+    useEffect(() => {
+      if (!id) return
+      const heading = obRef.current
+      if (!heading) return
+      slugs.set(heading, [id, (context.index += 1)])
+      observer?.observe(heading)
 
-    return () => {
-      observer?.disconnect()
-      slugs.delete(heading)
-      setActiveAnchor(f => {
-        const ret = { ...f }
-        delete ret[id]
-        return ret
-      })
-    }
-  }, [id, context, slugs, observer, setActiveAnchor])
-
-  return (
-    <Tag
-      className={
-        // can be added by footnotes
-        className === 'sr-only'
-          ? '_sr-only'
-          : cn(
-              '_font-semibold _tracking-tight _text-slate-900 dark:_text-slate-100',
-              {
-                h2: '_mt-10 _border-b _pb-1 _text-3xl _border-neutral-200/70 contrast-more:_border-neutral-400 dark:_border-primary-100/10 contrast-more:dark:_border-neutral-400',
-                h3: '_mt-8 _text-2xl',
-                h4: '_mt-8 _text-xl',
-                h5: '_mt-8 _text-lg',
-                h6: '_mt-8 _text-base'
-              }[Tag]
-            )
+      return () => {
+        observer?.disconnect()
+        slugs.delete(heading)
+        setActiveAnchor(f => {
+          const ret = { ...f }
+          delete ret[id]
+          return ret
+        })
       }
-      {...props}
-    >
-      {children}
-      {id && (
-        <a
-          href={`#${id}`}
-          id={id}
-          className="subheading-anchor"
-          aria-label="Permalink for this section"
-          ref={obRef}
-        />
-      )}
-    </Tag>
-  )
-}
+    }, [id, slugs, observer, setActiveAnchor])
+
+    return (
+      <Tag
+        className={
+          // can be added by footnotes
+          className === 'sr-only'
+            ? '_sr-only'
+            : cn(
+                '_font-semibold _tracking-tight _text-slate-900 dark:_text-slate-100',
+                {
+                  h2: '_mt-10 _border-b _pb-1 _text-3xl _border-neutral-200/70 contrast-more:_border-neutral-400 dark:_border-primary-100/10 contrast-more:dark:_border-neutral-400',
+                  h3: '_mt-8 _text-2xl',
+                  h4: '_mt-8 _text-xl',
+                  h5: '_mt-8 _text-lg',
+                  h6: '_mt-8 _text-base'
+                }[Tag]
+              )
+        }
+        {...props}
+      >
+        {children}
+        {id && (
+          <a
+            href={`#${id}`}
+            id={id}
+            className="subheading-anchor"
+            aria-label="Permalink for this section"
+            ref={obRef}
+          />
+        )}
+      </Tag>
+    )
+  }
 
 function Details({
   children,
@@ -95,17 +94,15 @@ function Details({
   const [delayedOpenState, setDelayedOpenState] = useState(openState)
 
   useEffect(() => {
-    if (openState) {
-      setDelayedOpenState(true)
-    } else {
+    if (!openState) {
       const timeout = setTimeout(() => setDelayedOpenState(openState), 500)
       return () => clearTimeout(timeout)
     }
+    setDelayedOpenState(true)
   }, [openState])
 
-  const { restChildren, summary } = useMemo(() => {
+  const [summary, restChildren] = useMemo(() => {
     let summary: ReactElement | undefined
-
     const restChildren = Children.map(children, child => {
       const isSummary =
         child &&
@@ -122,7 +119,7 @@ function Details({
         }
       })
     })
-    return { restChildren, summary }
+    return [summary, restChildren]
   }, [children])
 
   return (
@@ -152,7 +149,7 @@ function Summary({
         className={cn(
           '_order-first', // if prettier formats `summary` it will have unexpected margin-top
           '_w-4 _h-4 _shrink-0 [&_path]:_stroke-[3px] _mx-1.5',
-          'rtl:_rotate-180 [[data-expanded]>summary>&]:_rotate-90 _transition-transform'
+          'rtl:_rotate-180 [[data-expanded]>summary>&]:_rotate-90 _transition'
         )}
       />
     </summary>
@@ -196,11 +193,11 @@ export function getComponents({
         {...props}
       />
     ),
-    h2: props => <HeadingLink tag="h2" context={context} {...props} />,
-    h3: props => <HeadingLink tag="h3" context={context} {...props} />,
-    h4: props => <HeadingLink tag="h4" context={context} {...props} />,
-    h5: props => <HeadingLink tag="h5" context={context} {...props} />,
-    h6: props => <HeadingLink tag="h6" context={context} {...props} />,
+    h2: createHeading('h2', context),
+    h3: createHeading('h3', context),
+    h4: createHeading('h4', context),
+    h5: createHeading('h5', context),
+    h6: createHeading('h6', context),
     ul: props => (
       <ul
         className="_mt-6 _list-disc first:_mt-0 ltr:_ml-6 rtl:_mr-6"

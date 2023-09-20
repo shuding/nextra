@@ -91,7 +91,7 @@ summary {
 }
 
 /* Content Typography */
-article details > summary::-webkit-details-marker {
+summary::-webkit-details-marker {
   @apply _hidden;
 }
 
