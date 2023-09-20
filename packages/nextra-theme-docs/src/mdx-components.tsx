@@ -1,5 +1,6 @@
 import cn from 'clsx'
 import { Code, Pre, Table, Td, Th, Tr } from 'nextra/components'
+import { ArrowRightIcon } from 'nextra/icons'
 import type { Components } from 'nextra/mdx'
 import type { ComponentProps, ReactElement, ReactNode } from 'react'
 import { Children, cloneElement, useEffect, useRef, useState } from 'react'
@@ -142,20 +143,29 @@ const Details = ({
   )
 }
 
-const Summary = (props: ComponentProps<'summary'>): ReactElement => {
+function Summary({
+  children,
+  ...props
+}: ComponentProps<'summary'>): ReactElement {
   const setOpen = useDetails()
   return (
     <summary
-      className={cn(
-        'nextra-summary',
-        '_flex _items-center _cursor-pointer _list-none _p-1 _transition-colors hover:_bg-gray-100 dark:hover:_bg-neutral-800'
-      )}
+      dir="rtl"
+      className="_flex _items-center _cursor-pointer _list-none _p-1 _transition-colors hover:_bg-gray-100 dark:hover:_bg-neutral-800"
       {...props}
       onClick={e => {
         e.preventDefault()
         setOpen(v => !v)
       }}
-    />
+    >
+      <ArrowRightIcon
+        className={cn(
+          '_w-4 _h-4 _shrink-0 [&_path]:_stroke-[3px] _mx-1.5',
+          'rtl:_rotate-180 [[data-expanded]>summary>&]:_rotate-90 _transition-transform'
+        )}
+      />
+      {children}
+    </summary>
   )
 }
 
