@@ -2,12 +2,19 @@ import cn from 'clsx'
 import { Code, Pre, Table, Td, Th, Tr } from 'nextra/components'
 import { ArrowRightIcon } from 'nextra/icons'
 import type { Components } from 'nextra/mdx'
-import type { ComponentProps, ReactElement, ReactNode } from 'react'
-import { Children, cloneElement, useEffect, useRef, useState } from 'react'
+import type { ComponentProps, ReactElement } from 'react'
+import {
+  Children,
+  cloneElement,
+  useEffect,
+  useMemo,
+  useRef,
+  useState
+} from 'react'
 import { Anchor, Collapse } from './components'
 import type { AnchorProps } from './components/anchor'
 import type { DocsThemeConfig } from './constants'
-import { DetailsProvider, useDetails, useSetActiveAnchor } from './contexts'
+import { useSetActiveAnchor } from './contexts'
 import { useIntersectionObserver, useSlugs } from './contexts/active-anchor'
 
 // Anchor links
@@ -78,49 +85,15 @@ function HeadingLink({
   )
 }
 
-const findSummary = (children: ReactNode) => {
-  let summary: ReactNode = null
-  const restChildren: ReactNode[] = []
-
-  Children.forEach(children, (child, index) => {
-    if (child && (child as ReactElement).type === Summary) {
-      summary ||= child
-      return
-    }
-
-    let c = child
-    if (
-      !summary &&
-      child &&
-      typeof child === 'object' &&
-      (child as ReactElement).type !== Details &&
-      'props' in child &&
-      child.props
-    ) {
-      const result = findSummary(child.props.children)
-      summary = result[0]
-      c = cloneElement(child, {
-        ...child.props,
-        children: result[1]?.length ? result[1] : undefined,
-        key: index
-      })
-    }
-    restChildren.push(c)
-  })
-
-  return [summary, restChildren]
-}
-
-const Details = ({
+function Details({
   children,
   open,
   ...props
-}: ComponentProps<'details'>): ReactElement => {
+}: ComponentProps<'details'>): ReactElement {
   const [openState, setOpen] = useState(!!open)
-  const [summary, restChildren] = findSummary(children)
-
   // To animate the close animation we have to delay the DOM node state here.
   const [delayedOpenState, setDelayedOpenState] = useState(openState)
+
   useEffect(() => {
     if (openState) {
       setDelayedOpenState(true)
@@ -130,14 +103,36 @@ const Details = ({
     }
   }, [openState])
 
+  const { restChildren, summary } = useMemo(() => {
+    let summary: ReactElement | undefined
+
+    const restChildren = Children.map(children, child => {
+      const isSummary =
+        child &&
+        typeof child === 'object' &&
+        'type' in child &&
+        child.type === Summary
+
+      if (!isSummary) return child
+
+      summary ||= cloneElement(child, {
+        onClick(event: MouseEvent) {
+          event.preventDefault()
+          setOpen(v => !v)
+        }
+      })
+    })
+    return { restChildren, summary }
+  }, [children])
+
   return (
     <details
       className="_my-4 _rounded _border _border-gray-200 _bg-white _p-2 _shadow-sm first:_mt-0 dark:_border-neutral-800 dark:_bg-neutral-900"
       {...props}
       open={delayedOpenState}
-      {...(openState && { 'data-expanded': true })}
+      data-expanded={openState ? '' : undefined}
     >
-      <DetailsProvider value={setOpen}>{summary}</DetailsProvider>
+      {summary}
       <Collapse isOpen={openState}>{restChildren}</Collapse>
     </details>
   )
@@ -147,24 +142,19 @@ function Summary({
   children,
   ...props
 }: ComponentProps<'summary'>): ReactElement {
-  const setOpen = useDetails()
   return (
     <summary
-      dir="rtl"
-      className="_flex _items-center _cursor-pointer _list-none _p-1 _transition-colors hover:_bg-gray-100 dark:hover:_bg-neutral-800"
+      className="_flex _items-center _cursor-pointer _p-1 _transition-colors hover:_bg-gray-100 dark:hover:_bg-neutral-800"
       {...props}
-      onClick={e => {
-        e.preventDefault()
-        setOpen(v => !v)
-      }}
     >
+      {children}
       <ArrowRightIcon
         className={cn(
+          '_order-first', // if prettier formats `summary` it will have unexpected margin-top
           '_w-4 _h-4 _shrink-0 [&_path]:_stroke-[3px] _mx-1.5',
           'rtl:_rotate-180 [[data-expanded]>summary>&]:_rotate-90 _transition-transform'
         )}
       />
-      {children}
     </summary>
   )
 }
