@@ -6,7 +6,7 @@
   "author": "Shu Ding <g@shud.in>",
   "license": "MIT",
   "exports": {
-    "./style.css": "./style.css",
+    "./style.css": "./dist/style.css",
     ".": {
       "import": "./dist/index.js",
       "types": "./dist/index.d.mts"
@@ -14,17 +14,16 @@
   },
   "types": "./dist/index.d.mts",
   "files": [
-    "dist",
-    "style.css"
+    "dist"
   ],
   "scripts": {
     "build": "tsup",
     "build:all": "pnpm build && pnpm build:tailwind",
-    "build:tailwind": "pnpm postcss css/styles.css -o style.css --verbose",
+    "build:tailwind": "pnpm postcss css/styles.css -o dist/style.css --verbose",
     "clean": "rimraf ./dist ./style.css",
     "dev": "concurrently \"pnpm dev:layout\" \"pnpm dev:tailwind\"",
     "dev:layout": "tsup --watch",
-    "dev:tailwind": "TAILWIND_MODE=watch pnpm postcss css/styles.css -o style.css --watch",
+    "dev:tailwind": "TAILWIND_MODE=watch pnpm postcss css/styles.css -o dist/style.css --watch",
     "prepublishOnly": "pnpm build:all",
     "test": "vitest",
     "types": "tsup --dts-only",
