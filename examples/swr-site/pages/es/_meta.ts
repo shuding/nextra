@@ -1,4 +1,4 @@
-import meta from '../en/_meta.json'
+import meta from '../en/_meta'
 
 export default {
   index: {
