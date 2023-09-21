@@ -1,0 +1,17 @@
+{
+  "exclude": ["templates"],
+  "compilerOptions": {
+    "target": "es2020",
+    "moduleResolution": "Bundler",
+    "module": "esnext",
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "outDir": "dist",
+    "rootDir": ".",
+    "allowJs": true
+  }
+}
