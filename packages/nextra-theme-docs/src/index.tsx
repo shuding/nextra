@@ -241,7 +241,6 @@ export {
   Bleed,
   Collapse,
   NotFoundPage,
-  ServerSideErrorPage,
   Navbar,
   SkipNavContent,
   SkipNavLink,

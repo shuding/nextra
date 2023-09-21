@@ -154,10 +154,6 @@ export const DEFAULT_THEME: DocsThemeConfig = {
       return `${text}…`
     }
   },
-  serverSideError: {
-    content: 'Submit an issue about error in url →',
-    labels: 'bug'
-  },
   sidebar: {
     defaultMenuCollapseLevel: 2,
     toggleButton: true
