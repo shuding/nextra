@@ -6,10 +6,10 @@ import gracefulFs from 'graceful-fs'
 import grayMatter from 'gray-matter'
 import pLimit from 'p-limit'
 import {
+  CWD,
   DEFAULT_PROPERTY_PROPS,
   IMPORT_FRONTMATTER,
   MARKDOWN_EXTENSION_REGEX,
-  META_FILENAME,
   META_REGEX
 } from './constants.js'
 import { PAGES_DIR } from './file-system.js'
@@ -140,15 +140,20 @@ async function collectFiles({
         const fileName = name + ext
         const isMetaJs = META_REGEX.test(fileName)
 
-        if (fileName === META_FILENAME || isMetaJs) {
+        if (fileName === '_meta.json') {
+          throw new Error(
+            'Support of "_meta.json" was removed, use "_meta.{js,jsx,ts,tsx}" instead. ' +
+              `Refactor following file "${path.relative(CWD, filePath)}".`
+          )
+        }
+
+        if (isMetaJs) {
           const importName = cleanFileName(filePath)
           imports.push({ importName, filePath })
 
-          if (isMetaJs) {
-            if (hasDynamicPage) {
-              dynamicMetaImports.push({ importName, route })
-              return
-            }
+          if (hasDynamicPage) {
+            dynamicMetaImports.push({ importName, route })
+            return
           }
           return createAstObject({
             data: { type: 'Identifier', name: importName }

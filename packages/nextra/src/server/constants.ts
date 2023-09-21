@@ -32,8 +32,6 @@ export const DEFAULT_CONFIG = {
 
 export const OFFICIAL_THEMES = ['nextra-theme-docs', 'nextra-theme-blog']
 
-export const META_FILENAME = '_meta.json'
-
 export const META_REGEX = /_meta\.[jt]sx?$/
 
 export const MARKDOWN_EXTENSIONS = ['md', 'mdx'] as const

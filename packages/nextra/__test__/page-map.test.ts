@@ -24,7 +24,7 @@ describe('collectPageMap', () => {
     const rawJs = await collectPageMap({ dir, route: '/en', locale: 'en' })
 
     expect(clean(rawJs)).toMatchInlineSnapshot(`
-      "import examples_swr_site_pages_en_meta from \\"../../examples/swr-site/pages/en/_meta.json\\";
+      "import examples_swr_site_pages_en_meta from \\"../../examples/swr-site/pages/en/_meta.ts\\";
       import examples_swr_site_pages_en_about_meta from \\"../../examples/swr-site/pages/en/about/_meta.ts\\";
       import examples_swr_site_pages_en_blog_meta from \\"../../examples/swr-site/pages/en/blog/_meta.ts\\";
       import examples_swr_site_pages_en_docs_meta from \\"../../examples/swr-site/pages/en/docs/_meta.tsx\\";

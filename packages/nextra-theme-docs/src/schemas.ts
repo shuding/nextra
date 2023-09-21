@@ -118,10 +118,6 @@ export const themeSchema = /* @__PURE__ */ (() =>
       // Can't be React component
       placeholder: z.string().or(z.function().returns(z.string()))
     }),
-    serverSideError: z.strictObject({
-      content: z.custom<ReactNode | FC>(...reactNode),
-      labels: z.string()
-    }),
     sidebar: z.strictObject({
       autoCollapse: z.boolean().optional(),
       defaultMenuCollapseLevel: z.number().min(1).int(),
