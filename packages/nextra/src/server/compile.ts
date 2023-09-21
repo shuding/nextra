@@ -12,7 +12,7 @@ import remarkFrontmatter from 'remark-frontmatter'
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 import remarkReadingTime from 'remark-reading-time'
-import { getHighlighter } from 'shiki'
+import { bundledLanguages, getHighlighter } from 'shiki'
 import type { Pluggable } from 'unified'
 import type {
   FrontMatter,
@@ -61,18 +61,18 @@ const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS: RehypePrettyCodeOptions = {
         dark: 'github-dark'
       },
       defaultColor: false
-    }
+    } as const
 
     const highlighter = await getHighlighter({
-      themes: Object.values(DEFAULT_OPTS.themes)
+      themes: Object.values(DEFAULT_OPTS.themes),
+      langs: Object.keys(bundledLanguages)
     })
 
     const originalCodeToHtml = highlighter.codeToHtml
 
     return Object.assign(highlighter, {
       codeToHtml(code: string, lang: string) {
-        // @ts-expect-error -- nothing wrong, conflicts with official shiki type
-        return originalCodeToHtml(code, lang, undefined, { ...DEFAULT_OPTS })
+        return originalCodeToHtml(code, { lang, ...DEFAULT_OPTS })
       },
       ansiToHtml(code: string) {
         return this.codeToHtml(code, 'ansi')
@@ -262,7 +262,7 @@ export async function compileMdx(
           ] satisfies Pluggable),
         remarkCustomHeadingId,
         [remarkHeadings, { isRemoteContent }] satisfies Pluggable,
-        // structurize should be before remarkHeadings because we attach #id attribute to heading node
+        // structurize should be before `remarkHeadings` because we attach #id attribute to heading node
         search && ([remarkStructurize, search] satisfies Pluggable),
         staticImage && remarkStaticImage,
         readingTime && remarkReadingTime,
@@ -286,15 +286,12 @@ export async function compileMdx(
           { passThrough: ['mdxjsEsm', 'mdxJsxFlowElement'] }
         ],
         [parseMeta, { defaultShowCopyCode }],
-        codeHighlight !== false &&
-          ([
-            rehypePrettyCode,
-            {
-              ...DEFAULT_REHYPE_PRETTY_CODE_OPTIONS,
-              ...rehypePrettyCodeOptions
-            }
-          ] as any),
-        attachMeta,
+        ...(codeHighlight === false
+          ? []
+          : [
+              [rehypePrettyCode, DEFAULT_REHYPE_PRETTY_CODE_OPTIONS] as any,
+              attachMeta
+            ]),
         latex && rehypeKatex
       ].filter(truthy)
     })

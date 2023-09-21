@@ -1,10 +1,9 @@
-import { useRouter } from 'next/router'
 import type { NextraThemeLayoutProps, PageOpts } from 'nextra'
 import type { ReactElement, ReactNode } from 'react'
 import { useMemo } from 'react'
 import 'focus-visible'
 import cn from 'clsx'
-import { useFSRoute, useMounted } from 'nextra/hooks'
+import { useFSRoute, useMounted, useRouter } from 'nextra/hooks'
 import { MDXProvider } from 'nextra/mdx'
 import './polyfill'
 import type { PageTheme } from 'nextra/normalize-pages'
@@ -17,7 +16,7 @@ import {
   Sidebar,
   SkipNavContent
 } from './components'
-import { DEFAULT_LOCALE, PartialDocsThemeConfig } from './constants'
+import { PartialDocsThemeConfig } from './constants'
 import { ActiveAnchorProvider, ConfigProvider, useConfig } from './contexts'
 import { getComponents } from './mdx-components'
 import { renderComponent } from './utils'
@@ -32,9 +31,9 @@ interface BodyProps {
 
 const classes = {
   toc: cn(
-    'nextra-toc nx-order-last nx-hidden nx-w-64 nx-shrink-0 xl:nx-block print:nx-hidden'
+    'nextra-toc _order-last max-xl:_hidden _w-64 _shrink-0 print:_hidden'
   ),
-  main: cn('nx-w-full nx-break-words')
+  main: cn('_w-full _break-words')
 }
 
 function Body({
@@ -59,11 +58,11 @@ function Body({
   const gitTimestampEl =
     // Because a user's time zone may be different from the server page
     mounted && date ? (
-      <div className="nx-mt-12 nx-mb-8 nx-block nx-text-xs nx-text-gray-500 ltr:nx-text-right rtl:nx-text-left dark:nx-text-gray-400">
+      <div className="_mt-12 _mb-8 _block _text-xs _text-gray-500 ltr:_text-right rtl:_text-left dark:_text-gray-400">
         {renderComponent(config.gitTimestamp, { timestamp: date })}
       </div>
     ) : (
-      <div className="nx-mt-16" />
+      <div className="_mt-16" />
     )
 
   const content = (
@@ -81,7 +80,7 @@ function Body({
       <article
         className={cn(
           classes.main,
-          'nextra-content nx-min-h-[calc(100vh-var(--nextra-navbar-height))] nx-pl-[max(env(safe-area-inset-left),1.5rem)] nx-pr-[max(env(safe-area-inset-right),1.5rem)]'
+          'nextra-content _min-h-[calc(100vh-var(--nextra-navbar-height))] _pl-[max(env(safe-area-inset-left),1.5rem)] _pr-[max(env(safe-area-inset-right),1.5rem)]'
         )}
       >
         {body}
@@ -93,12 +92,12 @@ function Body({
     <article
       className={cn(
         classes.main,
-        'nextra-content nx-flex nx-min-h-[calc(100vh-var(--nextra-navbar-height))] nx-min-w-0 nx-justify-center nx-pb-8 nx-pr-[calc(env(safe-area-inset-right)-1.5rem)]',
+        'nextra-content _flex _min-h-[calc(100vh-var(--nextra-navbar-height))] _min-w-0 _justify-center _pb-8 _pr-[calc(env(safe-area-inset-right)-1.5rem)]',
         themeContext.typesetting === 'article' &&
           'nextra-body-typesetting-article'
       )}
     >
-      <main className="nx-w-full nx-min-w-0 nx-max-w-6xl nx-px-6 nx-pt-4 md:nx-px-12">
+      <main className="_w-full _min-w-0 _max-w-6xl _px-6 _pt-4 md:_px-12">
         {breadcrumb}
         {body}
       </main>
@@ -115,7 +114,7 @@ function InnerLayout({
   children
 }: PageOpts & { children: ReactNode }): ReactElement {
   const config = useConfig()
-  const { locale = DEFAULT_LOCALE } = useRouter()
+  const { locale } = useRouter()
   const fsPath = useFSRoute()
 
   const {
@@ -147,10 +146,7 @@ function InnerLayout({
         <nav className={classes.toc} aria-label="table of contents" />
       )
     ) : (
-      <nav
-        className={cn(classes.toc, 'nx-px-4')}
-        aria-label="table of contents"
-      >
+      <nav className={cn(classes.toc, '_px-4')} aria-label="table of contents">
         {renderComponent(config.toc.component, {
           toc: config.toc.float ? toc : [],
           filePath
@@ -158,21 +154,17 @@ function InnerLayout({
       </nav>
     )
 
-  const localeConfig = config.i18n.find(l => l.locale === locale)
-  const isRTL = localeConfig
-    ? localeConfig.direction === 'rtl'
-    : config.direction === 'rtl'
-
-  const direction = isRTL ? 'rtl' : 'ltr'
+  const { direction } = config.i18n.find(l => l.locale === locale) || config
+  const dir = direction === 'rtl' ? 'rtl' : 'ltr'
 
   return (
     // This makes sure that selectors like `[dir=ltr] .nextra-container` work
     // before hydration as Tailwind expects the `dir` attribute to exist on the
     // `html` element.
-    <div dir={direction}>
+    <div dir={dir}>
       <script
         dangerouslySetInnerHTML={{
-          __html: `document.documentElement.setAttribute('dir','${direction}')`
+          __html: `document.documentElement.setAttribute('dir','${dir}')`
         }}
       />
       <Head />
@@ -183,8 +175,8 @@ function InnerLayout({
         })}
       <div
         className={cn(
-          'nx-mx-auto nx-flex',
-          themeContext.layout !== 'raw' && 'nx-max-w-[90rem]'
+          '_mx-auto _flex',
+          themeContext.layout !== 'raw' && '_max-w-[90rem]'
         )}
       >
         <ActiveAnchorProvider>

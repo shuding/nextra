@@ -38,9 +38,9 @@ export function LocaleSwitch({
       selected={{
         key: selected?.locale || '',
         name: (
-          <span className="nx-flex nx-items-center nx-gap-2">
+          <span className="_flex _items-center _gap-2">
             <GlobeIcon />
-            <span className={lite ? 'nx-hidden' : ''}>{selected?.name}</span>
+            <span className={lite ? '_hidden' : ''}>{selected?.name}</span>
           </span>
         )
       }}

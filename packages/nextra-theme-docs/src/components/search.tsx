@@ -149,23 +149,23 @@ export function Search({
     <Transition
       show={mounted && (!show || Boolean(value))}
       as={Fragment}
-      enter="nx-transition-opacity"
-      enterFrom="nx-opacity-0"
-      enterTo="nx-opacity-100"
-      leave="nx-transition-opacity"
-      leaveFrom="nx-opacity-100"
-      leaveTo="nx-opacity-0"
+      enter="_transition-opacity"
+      enterFrom="_opacity-0"
+      enterTo="_opacity-100"
+      leave="_transition-opacity"
+      leaveFrom="_opacity-100"
+      leaveTo="_opacity-0"
     >
       <kbd
         className={cn(
-          'nx-absolute nx-my-1.5 nx-select-none ltr:nx-right-1.5 rtl:nx-left-1.5',
-          'nx-h-5 nx-rounded nx-bg-white nx-px-1.5 nx-font-mono nx-text-[10px] nx-font-medium nx-text-gray-500',
-          'nx-border dark:nx-border-gray-100/20 dark:nx-bg-dark/50',
-          'contrast-more:nx-border-current contrast-more:nx-text-current contrast-more:dark:nx-border-current',
-          'nx-items-center nx-gap-1 nx-transition-opacity',
+          '_absolute _my-1.5 _select-none ltr:_right-1.5 rtl:_left-1.5',
+          '_h-5 _rounded _bg-white _px-1.5 _font-mono _text-[10px] _font-medium _text-gray-500',
+          '_border dark:_border-gray-100/20 dark:_bg-dark/50',
+          'contrast-more:_border-current contrast-more:_text-current contrast-more:dark:_border-current',
+          '_items-center _gap-1 _transition-opacity _flex',
           value
-            ? 'nx-z-20 nx-flex nx-cursor-pointer hover:nx-opacity-70'
-            : 'nx-pointer-events-none nx-hidden sm:nx-flex'
+            ? '_z-20 _cursor-pointer hover:_opacity-70'
+            : '_pointer-events-none max-sm:_hidden'
         )}
         title={value ? 'Clear' : undefined}
         onClick={() => {
@@ -177,7 +177,7 @@ export function Search({
           : mounted &&
             (navigator.userAgent.includes('Macintosh') ? (
               <>
-                <span className="nx-text-xs">⌘</span>K
+                <span className="_text-xs">⌘</span>K
               </>
             ) : (
               'CTRL K'
@@ -193,12 +193,9 @@ export function Search({
   )
 
   return (
-    <div className={cn('nextra-search nx-relative md:nx-w-64', className)}>
+    <div className={cn('nextra-search _relative md:_w-64', className)}>
       {renderList && (
-        <div
-          className="nx-fixed nx-inset-0 nx-z-10"
-          onClick={() => setShow(false)}
-        />
+        <div className="_fixed _inset-0 _z-10" onClick={() => setShow(false)} />
       )}
 
       <Input
@@ -228,20 +225,20 @@ export function Search({
         show={renderList}
         // Transition.Child is required here, otherwise popup will be still present in DOM after focus out
         as={Transition.Child}
-        leave="nx-transition-opacity nx-duration-100"
-        leaveFrom="nx-opacity-100"
-        leaveTo="nx-opacity-0"
+        leave="_transition-opacity _duration-100"
+        leaveFrom="_opacity-100"
+        leaveTo="_opacity-0"
       >
         <ul
           className={cn(
             'nextra-scrollbar',
             // Using bg-white as background-color when the browser didn't support backdrop-filter
-            'nx-border nx-border-gray-200 nx-bg-white nx-text-gray-100 dark:nx-border-neutral-800 dark:nx-bg-neutral-900',
-            'nx-absolute nx-top-full nx-z-20 nx-mt-2 nx-overflow-auto nx-overscroll-contain nx-rounded-xl nx-py-2.5 nx-shadow-xl',
-            'nx-max-h-[min(calc(50vh-11rem-env(safe-area-inset-bottom)),400px)]',
-            'md:nx-max-h-[min(calc(100vh-5rem-env(safe-area-inset-bottom)),400px)]',
-            'nx-inset-x-0 ltr:md:nx-left-auto rtl:md:nx-right-auto',
-            'contrast-more:nx-border contrast-more:nx-border-gray-900 contrast-more:dark:nx-border-gray-50',
+            '_border _border-gray-200 _bg-white _text-gray-100 dark:_border-neutral-800 dark:_bg-neutral-900',
+            '_absolute _top-full _z-20 _mt-2 _overflow-auto _overscroll-contain _rounded-xl _py-2.5 _shadow-xl',
+            '_max-h-[min(calc(50vh-11rem-env(safe-area-inset-bottom)),400px)]',
+            'md:_max-h-[min(calc(100vh-5rem-env(safe-area-inset-bottom)),400px)]',
+            '_inset-x-0 ltr:md:_left-auto rtl:md:_right-auto',
+            'contrast-more:_border contrast-more:_border-gray-900 contrast-more:dark:_border-gray-50',
             overlayClassName
           )}
           ref={ulRef}
@@ -250,13 +247,13 @@ export function Search({
           }}
         >
           {error ? (
-            <span className="nx-flex nx-select-none nx-justify-center nx-gap-2 nx-p-8 nx-text-center nx-text-sm nx-text-red-500">
-              <InformationCircleIcon className="nx-h-5 nx-w-5" />
+            <span className="_flex _select-none _justify-center _gap-2 _p-8 _text-center _text-sm _text-red-500">
+              <InformationCircleIcon className="_h-5 _w-5" />
               {renderString(config.search.error)}
             </span>
           ) : loading ? (
-            <span className="nx-flex nx-select-none nx-justify-center nx-gap-2 nx-p-8 nx-text-center nx-text-sm nx-text-gray-400">
-              <SpinnerIcon className="nx-h-5 nx-w-5 nx-animate-spin" />
+            <span className="_flex _select-none _justify-center _gap-2 _p-8 _text-center _text-sm _text-gray-400">
+              <SpinnerIcon className="_h-5 _w-5 _animate-spin" />
               {renderComponent(config.search.loading)}
             </span>
           ) : results.length > 0 ? (
@@ -265,15 +262,15 @@ export function Search({
                 {prefix}
                 <li
                   className={cn(
-                    'nx-mx-2.5 nx-break-words nx-rounded-md',
-                    'contrast-more:nx-border',
+                    '_mx-2.5 _break-words _rounded-md',
+                    'contrast-more:_border',
                     i === active
-                      ? 'nx-bg-primary-500/10 nx-text-primary-600 contrast-more:nx-border-primary-500'
-                      : 'nx-text-gray-800 contrast-more:nx-border-transparent dark:nx-text-gray-300'
+                      ? '_bg-primary-500/10 _text-primary-600 contrast-more:_border-primary-500'
+                      : '_text-gray-800 contrast-more:_border-transparent dark:_text-gray-300'
                   )}
                 >
                   <NextLink
-                    className="nx-block nx-scroll-m-12 nx-px-2.5 nx-py-2"
+                    className="_block _scroll-m-12 _px-2.5 _py-2"
                     href={route}
                     data-index={i}
                     onFocus={handleActive}

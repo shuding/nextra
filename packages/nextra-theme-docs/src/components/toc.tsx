@@ -14,8 +14,8 @@ export type TOCProps = {
 }
 
 const linkClassName = cn(
-  'nx-text-xs nx-font-medium nx-text-gray-500 hover:nx-text-gray-900 dark:nx-text-gray-400 dark:hover:nx-text-gray-100',
-  'contrast-more:nx-text-gray-800 contrast-more:dark:nx-text-gray-50'
+  '_text-xs _font-medium _text-gray-500 hover:_text-gray-900 dark:_text-gray-400 dark:hover:_text-gray-100',
+  'contrast-more:_text-gray-800 contrast-more:dark:_text-gray-50'
 )
 
 export function TOC({ toc, filePath }: TOCProps): ReactElement {
@@ -55,33 +55,33 @@ export function TOC({ toc, filePath }: TOCProps): ReactElement {
     <div
       ref={tocRef}
       className={cn(
-        'nextra-scrollbar nx-sticky nx-top-16 nx-overflow-y-auto nx-pr-4 nx-pt-6 nx-text-sm [hyphens:auto]',
-        'nx-max-h-[calc(100vh-var(--nextra-navbar-height)-env(safe-area-inset-bottom))] ltr:-nx-mr-4 rtl:-nx-ml-4'
+        'nextra-scrollbar _sticky _top-16 _overflow-y-auto _pr-4 _pt-6 _text-sm [hyphens:auto]',
+        '_max-h-[calc(100vh-var(--nextra-navbar-height)-env(safe-area-inset-bottom))] ltr:_-mr-4 rtl:_-ml-4'
       )}
     >
       {hasHeadings && (
         <>
-          <p className="nx-mb-4 nx-font-semibold nx-tracking-tight">
+          <p className="_mb-4 _font-semibold _tracking-tight">
             {renderComponent(config.toc.title)}
           </p>
           <ul>
             {toc.map(({ id, value, depth }) => (
-              <li className="nx-my-2 nx-scroll-my-6 nx-scroll-py-6" key={id}>
+              <li className="_my-2 _scroll-my-6 _scroll-py-6" key={id}>
                 <a
                   href={`#${id}`}
                   className={cn(
                     {
-                      2: 'nx-font-semibold',
-                      3: 'ltr:nx-pl-4 rtl:nx-pr-4',
-                      4: 'ltr:nx-pl-8 rtl:nx-pr-8',
-                      5: 'ltr:nx-pl-12 rtl:nx-pr-12',
-                      6: 'ltr:nx-pl-16 rtl:nx-pr-16'
+                      2: '_font-semibold',
+                      3: 'ltr:_pl-4 rtl:_pr-4',
+                      4: 'ltr:_pl-8 rtl:_pr-8',
+                      5: 'ltr:_pl-12 rtl:_pr-12',
+                      6: 'ltr:_pl-16 rtl:_pr-16'
                     }[depth],
-                    'nx-inline-block nx-transition-colors nx-subpixel-antialiased',
+                    '_inline-block _transition-colors _subpixel-antialiased',
                     activeAnchor[id]?.isActive
-                      ? 'nx-text-primary-600 contrast-more:!nx-text-primary-600'
-                      : 'nx-text-gray-500 hover:nx-text-gray-900 dark:nx-text-gray-400 dark:hover:nx-text-gray-300',
-                    'contrast-more:nx-text-gray-900 contrast-more:nx-underline contrast-more:dark:nx-text-gray-50 nx-w-full nx-break-words'
+                      ? '_text-primary-600 contrast-more:!_text-primary-600'
+                      : '_text-gray-500 hover:_text-gray-900 dark:_text-gray-400 dark:hover:_text-gray-300',
+                    'contrast-more:_text-gray-900 contrast-more:_underline contrast-more:dark:_text-gray-50 _w-full _break-words'
                   )}
                 >
                   {value}
@@ -96,9 +96,9 @@ export function TOC({ toc, filePath }: TOCProps): ReactElement {
         <div
           className={cn(
             hasHeadings &&
-              'nx-mt-8 nx-border-t nx-bg-white nx-pt-8 nx-shadow-[0_-12px_16px_white] dark:nx-bg-dark dark:nx-shadow-[0_-12px_16px_#111]',
-            'nx-sticky nx-bottom-0 nx-flex nx-flex-col nx-items-start nx-gap-2 nx-pb-8 dark:nx-border-neutral-800',
-            'contrast-more:nx-border-t contrast-more:nx-border-neutral-400 contrast-more:nx-shadow-none contrast-more:dark:nx-border-neutral-400'
+              '_mt-8 _border-t _bg-white _pt-8 _shadow-[0_-12px_16px_white] dark:_bg-dark dark:_shadow-[0_-12px_16px_#111]',
+            '_sticky _bottom-0 _flex _flex-col _items-start _gap-2 _pb-8 dark:_border-neutral-800',
+            'contrast-more:_border-t contrast-more:_border-neutral-400 contrast-more:_shadow-none contrast-more:dark:_border-neutral-400'
           )}
         >
           {config.feedback.content ? (

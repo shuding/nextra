@@ -66,6 +66,9 @@ const config: DocsThemeConfig = {
     content: 'SWR 2.0 is out! Read more →',
     key: 'swr-2'
   },
+  // chat: {
+  //   link: 'https://discord.com'
+  // },
   darkMode: true,
   docsRepositoryBase:
     'https://github.com/shuding/nextra/blob/core/examples/swr-site',
@@ -158,7 +161,7 @@ const config: DocsThemeConfig = {
       <>
         <SWRLogo className="h-3" />
         <span
-          className="hidden select-none font-extrabold ltr:ml-2 rtl:mr-2 md:inline"
+          className="max-md:hidden select-none font-extrabold ltr:ml-2 rtl:mr-2"
           title={`SWR: ${TITLE[locale] || ''}`}
         >
           SWR

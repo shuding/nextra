@@ -45,7 +45,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     icon: (
       <>
         <DiscordIcon />
-        <span className="nx-sr-only">Discord</span>
+        <span className="_sr-only">Discord</span>
       </>
     )
   },
@@ -101,8 +101,8 @@ export const DEFAULT_THEME: DocsThemeConfig = {
   i18n: [],
   logo: (
     <>
-      <span className="nx-font-extrabold">Nextra</span>
-      <span className="nx-ml-2 nx-hidden nx-font-normal nx-text-gray-600 md:nx-inline">
+      <span className="_font-extrabold">Nextra</span>
+      <span className="_ml-2 max-md:_hidden _font-normal _text-gray-600">
         The Next Docs Builder
       </span>
     </>
@@ -128,14 +128,14 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     icon: (
       <>
         <GitHubIcon />
-        <span className="nx-sr-only">GitHub</span>
+        <span className="_sr-only">GitHub</span>
       </>
     )
   },
   search: {
     component: Flexsearch,
     emptyResult: (
-      <span className="nx-block nx-select-none nx-p-8 nx-text-center nx-text-sm nx-text-gray-400">
+      <span className="_block _select-none _p-8 _text-center _text-sm _text-gray-400">
         No results found.
       </span>
     ),

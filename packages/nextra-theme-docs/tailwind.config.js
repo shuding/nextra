@@ -11,7 +11,7 @@ const makePrimaryColor =
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  prefix: 'nx-',
+  prefix: '_',
   content: [
     './src/**/*.tsx',
     '../nextra/src/client/icons/*.{tsx,svg}',

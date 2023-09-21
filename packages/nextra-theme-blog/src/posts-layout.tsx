@@ -38,15 +38,15 @@ export function PostsLayout({
     return (
       <div key={post.route} className="post-item">
         <h3>
-          <Link href={post.route} className="!nx-no-underline">
+          <Link href={post.route} className="!_no-underline">
             {postTitle}
           </Link>
         </h3>
         {description && (
-          <p className="nx-mb-2 dark:nx-text-gray-400 nx-text-gray-600">
+          <p className="_mb-2 dark:_text-gray-400 _text-gray-600">
             {description}
             {config.readMore && (
-              <Link href={post.route} className="post-item-more nx-ml-2">
+              <Link href={post.route} className="post-item-more _ml-2">
                 {config.readMore}
               </Link>
             )}
@@ -54,7 +54,7 @@ export function PostsLayout({
         )}
         {date && (
           <time
-            className="nx-text-sm dark:nx-text-gray-400 nx-text-gray-600"
+            className="_text-sm dark:_text-gray-400 _text-gray-600"
             dateTime={date.toISOString()}
           >
             {date.toDateString()}

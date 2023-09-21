@@ -40,24 +40,24 @@ const Folder = memo(function FolderInner(props: FolderProps) {
 
 const classes = {
   link: cn(
-    'nx-flex nx-rounded nx-px-2 nx-py-1.5 nx-text-sm nx-transition-colors [word-break:break-word]',
-    'nx-cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] contrast-more:nx-border'
+    '_flex _rounded _px-2 _py-1.5 _text-sm _transition-colors [word-break:break-word]',
+    '_cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] contrast-more:_border'
   ),
   inactive: cn(
-    'nx-text-gray-500 hover:nx-bg-gray-100 hover:nx-text-gray-900',
-    'dark:nx-text-neutral-400 dark:hover:nx-bg-primary-100/5 dark:hover:nx-text-gray-50',
-    'contrast-more:nx-text-gray-900 contrast-more:dark:nx-text-gray-50',
-    'contrast-more:nx-border-transparent contrast-more:hover:nx-border-gray-900 contrast-more:dark:hover:nx-border-gray-50'
+    '_text-gray-500 hover:_bg-gray-100 hover:_text-gray-900',
+    'dark:_text-neutral-400 dark:hover:_bg-primary-100/5 dark:hover:_text-gray-50',
+    'contrast-more:_text-gray-900 contrast-more:dark:_text-gray-50',
+    'contrast-more:_border-transparent contrast-more:hover:_border-gray-900 contrast-more:dark:hover:_border-gray-50'
   ),
   active: cn(
-    'nx-bg-primary-100 nx-font-semibold nx-text-primary-800 dark:nx-bg-primary-400/10 dark:nx-text-primary-600',
-    'contrast-more:nx-border-primary-500 contrast-more:dark:nx-border-primary-500'
+    '_bg-primary-100 _font-semibold _text-primary-800 dark:_bg-primary-400/10 dark:_text-primary-600',
+    'contrast-more:_border-primary-500 contrast-more:dark:_border-primary-500'
   ),
-  list: cn('nx-flex nx-flex-col nx-gap-1'),
+  list: cn('_flex _flex-col _gap-1'),
   border: cn(
-    'nx-relative before:nx-absolute before:nx-inset-y-1',
-    'before:nx-w-px before:nx-bg-gray-200 before:nx-content-[""] dark:before:nx-bg-neutral-800',
-    'ltr:nx-pl-3 ltr:before:nx-left-0 rtl:nx-pr-3 rtl:before:nx-right-0'
+    '_relative before:_absolute before:_inset-y-1',
+    'before:_w-px before:_bg-gray-200 before:_content-[""] dark:before:_bg-neutral-800',
+    'ltr:_pl-3 ltr:before:_left-0 rtl:_pr-3 rtl:before:_right-0'
   )
 }
 
@@ -139,8 +139,8 @@ function FolderImpl({ item, anchors }: FolderProps): ReactElement {
       <ComponentToUse
         href={isLink ? item.route : undefined}
         className={cn(
-          'nx-items-center nx-justify-between nx-gap-2',
-          !isLink && 'nx-text-left nx-w-full',
+          '_items-center _justify-between _gap-2',
+          !isLink && '_text-left _w-full',
           classes.link,
           active ? classes.active : classes.inactive
         )}
@@ -169,17 +169,17 @@ function FolderImpl({ item, anchors }: FolderProps): ReactElement {
       >
         {item.title}
         <ArrowRightIcon
-          className="nx-h-[18px] nx-min-w-[18px] nx-rounded-sm nx-p-0.5 hover:nx-bg-gray-800/5 dark:hover:nx-bg-gray-100/5"
+          className="_h-[18px] _min-w-[18px] _rounded-sm _p-0.5 hover:_bg-gray-800/5 dark:hover:_bg-gray-100/5"
           pathClassName={cn(
-            'nx-origin-center nx-transition-transform rtl:-nx-rotate-180',
-            open && 'ltr:nx-rotate-90 rtl:nx-rotate-[-270deg]'
+            '_origin-center _transition-transform rtl:_-rotate-180',
+            open && 'ltr:_rotate-90 rtl:_rotate-[-270deg]'
           )}
         />
       </ComponentToUse>
-      <Collapse className="ltr:nx-pr-0 rtl:nx-pl-0 nx-pt-1" isOpen={open}>
+      <Collapse className="ltr:_pr-0 rtl:_pl-0 _pt-1" isOpen={open}>
         {Array.isArray(item.children) ? (
           <Menu
-            className={cn(classes.border, 'ltr:nx-ml-3 rtl:nx-mr-3')}
+            className={cn(classes.border, 'ltr:_ml-3 rtl:_mr-3')}
             directories={item.children}
             base={item.route}
             anchors={anchors}
@@ -196,14 +196,14 @@ function Separator({ title }: { title: string }): ReactElement {
       className={cn(
         '[word-break:break-word]',
         title
-          ? 'nx-mt-5 nx-mb-2 nx-px-2 nx-py-1.5 nx-text-sm nx-font-semibold nx-text-gray-900 first:nx-mt-0 dark:nx-text-gray-100'
-          : 'nx-my-4'
+          ? '_mt-5 _mb-2 _px-2 _py-1.5 _text-sm _font-semibold _text-gray-900 first:_mt-0 dark:_text-gray-100'
+          : '_my-4'
       )}
     >
       {title ? (
         renderComponent(title)
       ) : (
-        <hr className="nx-mx-2 nx-border-t nx-border-gray-200 dark:nx-border-primary-100/10" />
+        <hr className="_mx-2 _border-t _border-gray-200 dark:_border-primary-100/10" />
       )}
     </li>
   )
@@ -247,20 +247,14 @@ function File({
         {item.title}
       </Anchor>
       {active && anchors.length > 0 && (
-        <ul
-          className={cn(
-            classes.list,
-            classes.border,
-            'ltr:nx-ml-3 rtl:nx-mr-3'
-          )}
-        >
+        <ul className={cn(classes.list, classes.border, 'ltr:_ml-3 rtl:_mr-3')}>
           {anchors.map(({ id, value }) => (
             <li key={id}>
               <a
                 href={`#${id}`}
                 className={cn(
                   classes.link,
-                  'nx-flex nx-gap-2 before:nx-opacity-25 before:nx-content-["#"]',
+                  '_flex _gap-2 before:_opacity-25 before:_content-["#"]',
                   activeAnchor[id]?.isActive ? classes.active : classes.inactive
                 )}
                 onClick={() => {
@@ -335,12 +329,9 @@ export function Sidebar({
   const mounted = useMounted()
   useEffect(() => {
     if (menu) {
-      document.body.classList.add('nx-overflow-hidden', 'md:nx-overflow-auto')
+      document.body.classList.add('_overflow-hidden', 'md:_overflow-auto')
     } else {
-      document.body.classList.remove(
-        'nx-overflow-hidden',
-        'md:nx-overflow-auto'
-      )
+      document.body.classList.remove('_overflow-hidden', 'md:_overflow-auto')
     }
   }, [menu])
 
@@ -376,25 +367,25 @@ export function Sidebar({
   return (
     <>
       {includePlaceholder && asPopover ? (
-        <div className="max-xl:nx-hidden nx-h-0 nx-w-64 nx-shrink-0" />
+        <div className="max-xl:_hidden _h-0 _w-64 _shrink-0" />
       ) : null}
       <div
         className={cn(
-          'motion-reduce:nx-transition-none [transition:background-color_1.5s_ease]',
+          'motion-reduce:_transition-none [transition:background-color_1.5s_ease]',
           menu
-            ? 'nx-fixed nx-inset-0 nx-z-10 nx-bg-black/80 dark:nx-bg-black/60'
-            : 'nx-bg-transparent'
+            ? '_fixed _inset-0 _z-10 _bg-black/80 dark:_bg-black/60'
+            : '_bg-transparent'
         )}
         onClick={() => setMenu(false)}
       />
       <aside
         className={cn(
-          'nextra-sidebar-container nx-flex nx-flex-col',
-          'md:nx-top-16 md:nx-shrink-0 motion-reduce:nx-transform-none',
-          'nx-transform-gpu nx-transition-all nx-ease-in-out',
-          'print:nx-hidden',
-          showSidebar ? 'md:nx-w-64' : 'md:nx-w-20',
-          asPopover ? 'md:nx-hidden' : 'md:nx-sticky md:nx-self-start',
+          'nextra-sidebar-container _flex _flex-col',
+          'md:_top-16 md:_shrink-0 motion-reduce:_transform-none',
+          '_transform-gpu _transition-all _ease-in-out',
+          'print:_hidden',
+          showSidebar ? 'md:_w-64' : 'md:_w-20',
+          asPopover ? 'md:_hidden' : 'md:_sticky md:_self-start',
           menu
             ? 'max-md:[transform:translate3d(0,0,0)]'
             : 'max-md:[transform:translate3d(0,-100%,0)]'
@@ -402,7 +393,7 @@ export function Sidebar({
         ref={containerRef}
       >
         {process.env.NEXTRA_SEARCH && (
-          <div className="nx-px-4 nx-pt-4 md:nx-hidden">
+          <div className="_px-4 _pt-4 md:_hidden">
             {renderComponent(config.search.component)}
           </div>
         )}
@@ -414,8 +405,8 @@ export function Sidebar({
           >
             <div
               className={cn(
-                'nx-overflow-y-auto nx-overflow-x-hidden',
-                'nx-p-4 nx-grow md:nx-h-[calc(100vh-var(--nextra-navbar-height)-var(--nextra-menu-height))]',
+                '_overflow-y-auto _overflow-x-hidden',
+                '_p-4 _grow md:_h-[calc(100vh-var(--nextra-navbar-height)-var(--nextra-menu-height))]',
                 showSidebar ? 'nextra-scrollbar' : 'no-scrollbar'
               )}
               ref={sidebarRef}
@@ -424,7 +415,7 @@ export function Sidebar({
               {(!asPopover || !showSidebar) && (
                 <Collapse isOpen={showSidebar} horizontal>
                   <Menu
-                    className="nextra-menu-desktop max-md:nx-hidden"
+                    className="nextra-menu-desktop max-md:_hidden"
                     // The sidebar menu, shows only the docs directories.
                     directories={docsDirectories}
                     // When the viewport size is larger than `md`, hide the anchors in
@@ -436,7 +427,7 @@ export function Sidebar({
               )}
               {mounted && window.innerWidth < 768 && (
                 <Menu
-                  className="nextra-menu-mobile md:nx-hidden"
+                  className="nextra-menu-mobile md:_hidden"
                   // The mobile dropdown menu, shows all the directories.
                   directories={fullDirectories}
                   // Always show the anchor links on mobile (`md`).
@@ -450,15 +441,15 @@ export function Sidebar({
         {hasMenu && (
           <div
             className={cn(
-              'nx-sticky nx-bottom-0',
-              'nx-bg-white dark:nx-bg-dark', // when banner is showed, sidebar links can be behind menu, set bg color as body bg color
-              'nx-mx-4 nx-py-4 nx-shadow-[0_-12px_16px_#fff]',
-              'nx-flex nx-items-center nx-gap-2',
-              'dark:nx-border-neutral-800 dark:nx-shadow-[0_-12px_16px_#111]',
-              'contrast-more:nx-border-neutral-400 contrast-more:nx-shadow-none contrast-more:dark:nx-shadow-none',
+              '_sticky _bottom-0',
+              '_bg-white dark:_bg-dark', // when banner is showed, sidebar links can be behind menu, set bg color as body bg color
+              '_mx-4 _py-4 _shadow-[0_-12px_16px_#fff]',
+              '_flex _items-center _gap-2',
+              'dark:_border-neutral-800 dark:_shadow-[0_-12px_16px_#111]',
+              'contrast-more:_border-neutral-400 contrast-more:_shadow-none contrast-more:dark:_shadow-none',
               showSidebar
-                ? cn(hasI18n && 'nx-justify-end', 'nx-border-t')
-                : 'nx-py-4 nx-flex-wrap nx-justify-center'
+                ? cn(hasI18n && '_justify-end', '_border-t')
+                : '_py-4 _flex-wrap _justify-center'
             )}
             data-toggle-animation={
               showToggleAnimation ? (showSidebar ? 'show' : 'hide') : 'off'
@@ -466,12 +457,12 @@ export function Sidebar({
           >
             <LocaleSwitch
               lite={!showSidebar}
-              className={cn(showSidebar ? 'nx-grow' : 'max-md:nx-grow')}
+              className={cn(showSidebar ? '_grow' : 'max-md:_grow')}
             />
             {config.darkMode && (
               <div
                 className={
-                  showSidebar && !hasI18n ? 'nx-grow nx-flex nx-flex-col' : ''
+                  showSidebar && !hasI18n ? '_grow _flex _flex-col' : ''
                 }
               >
                 {renderComponent(config.themeSwitch.component, {
@@ -482,7 +473,7 @@ export function Sidebar({
             {config.sidebar.toggleButton && (
               <button
                 title={showSidebar ? 'Hide sidebar' : 'Show sidebar'}
-                className="max-md:nx-hidden nx-h-7 nx-rounded-md nx-transition-colors nx-text-gray-600 dark:nx-text-gray-400 nx-px-2 hover:nx-bg-gray-100 hover:nx-text-gray-900 dark:hover:nx-bg-primary-100/5 dark:hover:nx-text-gray-50"
+                className="max-md:_hidden _h-7 _rounded-md _transition-colors _text-gray-600 dark:_text-gray-400 _px-2 hover:_bg-gray-100 hover:_text-gray-900 dark:hover:_bg-primary-100/5 dark:hover:_text-gray-50"
                 onClick={() => {
                   setSidebar(!showSidebar)
                   setToggleAnimation(true)

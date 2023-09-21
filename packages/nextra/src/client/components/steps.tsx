@@ -9,8 +9,8 @@ export function Steps({
   return (
     <div
       className={cn(
-        'nextra-steps nx-ml-4 nx-mb-12 nx-border-l nx-border-gray-200 nx-pl-6',
-        'dark:nx-border-neutral-800 [counter-reset:step]',
+        'nextra-steps _ml-4 _mb-12 _border-l _border-gray-200 _pl-6',
+        'dark:_border-neutral-800 [counter-reset:step]',
         className
       )}
       {...props}
