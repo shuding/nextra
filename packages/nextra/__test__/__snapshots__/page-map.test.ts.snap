@@ -624,9 +624,28 @@ exports[`Page Process > should match i18n site page maps 1`] = `
   "esPageMap": [
     {
       "data": {
-        "blog": {
-          "title": "Blog",
-          "type": "page",
+        "about": {
+          "items": {
+            "a-page": {
+              "title": "A Page",
+            },
+            "acknowledgement": {
+              "title": "Acknowledgement",
+            },
+            "changelog": {
+              "title": "Changelog",
+            },
+            "contributors": {
+              "href": "https://github.com/vercel/swr/graphs/contributors",
+              "newWindow": true,
+              "title": "Contributors",
+            },
+            "team": {
+              "title": "Team",
+            },
+          },
+          "title": "About",
+          "type": "menu",
         },
         "docs": {
           "title": "Docs",
