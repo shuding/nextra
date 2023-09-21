@@ -1,10 +1,9 @@
-import { useRouter } from 'next/router'
 import type { NextraThemeLayoutProps, PageOpts } from 'nextra'
 import type { ReactElement, ReactNode } from 'react'
 import { useMemo } from 'react'
 import 'focus-visible'
 import cn from 'clsx'
-import { useFSRoute, useMounted } from 'nextra/hooks'
+import { useFSRoute, useMounted, useRouter } from 'nextra/hooks'
 import { MDXProvider } from 'nextra/mdx'
 import './polyfill'
 import type { PageTheme } from 'nextra/normalize-pages'
@@ -17,7 +16,7 @@ import {
   Sidebar,
   SkipNavContent
 } from './components'
-import { DEFAULT_LOCALE, PartialDocsThemeConfig } from './constants'
+import { PartialDocsThemeConfig } from './constants'
 import { ActiveAnchorProvider, ConfigProvider, useConfig } from './contexts'
 import { getComponents } from './mdx-components'
 import { renderComponent } from './utils'
@@ -115,7 +114,7 @@ function InnerLayout({
   children
 }: PageOpts & { children: ReactNode }): ReactElement {
   const config = useConfig()
-  const { locale = DEFAULT_LOCALE } = useRouter()
+  const { locale } = useRouter()
   const fsPath = useFSRoute()
 
   const {
@@ -155,21 +154,17 @@ function InnerLayout({
       </nav>
     )
 
-  const localeConfig = config.i18n.find(l => l.locale === locale)
-  const isRTL = localeConfig
-    ? localeConfig.direction === 'rtl'
-    : config.direction === 'rtl'
-
-  const direction = isRTL ? 'rtl' : 'ltr'
+  const { direction } = config.i18n.find(l => l.locale === locale) || config
+  const dir = direction === 'rtl' ? 'rtl' : 'ltr'
 
   return (
     // This makes sure that selectors like `[dir=ltr] .nextra-container` work
     // before hydration as Tailwind expects the `dir` attribute to exist on the
     // `html` element.
-    <div dir={direction}>
+    <div dir={dir}>
       <script
         dangerouslySetInnerHTML={{
-          __html: `document.documentElement.setAttribute('dir','${direction}')`
+          __html: `document.documentElement.setAttribute('dir','${dir}')`
         }}
       />
       <Head />

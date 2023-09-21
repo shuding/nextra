@@ -37,48 +37,44 @@ function NavbarMenu({
   )
 
   return (
-    <div className="_relative _inline-block">
-      <Menu>
-        <Menu.Button
-          className={cn(
-            classes.link,
-            classes.inactive,
-            '_-ml-2 max-md:_hidden _items-center _whitespace-nowrap _rounded _p-2 _flex _gap-1'
-          )}
-        >
-          {children}
-        </Menu.Button>
-        <Transition
-          leave="_transition-opacity"
-          leaveFrom="_opacity-100"
-          leaveTo="_opacity-0"
-          as={Menu.Items}
-          className="_absolute _right-0 _z-20 _mt-1 _max-h-64 _min-w-full _overflow-auto _rounded-md _ring-1 _ring-black/5 _bg-white _py-1 _text-sm _shadow-lg dark:_ring-white/20 dark:_bg-neutral-800"
-        >
-          {Object.entries(items || {}).map(([key, item]) => (
-            <Menu.Item key={key}>
-              {({ active }) => (
-                <Anchor
-                  href={
-                    item.href || routes[key]?.route || menu.route + '/' + key
-                  }
-                  className={cn(
-                    '_relative _w-full _select-none _whitespace-nowrap hover:_text-gray-900 dark:hover:_text-gray-100 _inline-block',
-                    '_py-1.5 _transition-colors ltr:_pl-3 ltr:_pr-9 rtl:_pr-3 rtl:_pl-9',
-                    active
-                      ? '_text-gray-900 dark:_text-gray-100'
-                      : '_text-gray-600 dark:_text-gray-400'
-                  )}
-                  newWindow={item.newWindow}
-                >
-                  {item.title || key}
-                </Anchor>
-              )}
-            </Menu.Item>
-          ))}
-        </Transition>
-      </Menu>
-    </div>
+    <Menu as="div" className="_relative">
+      <Menu.Button
+        className={cn(
+          classes.link,
+          classes.inactive,
+          'max-md:_hidden _items-center _whitespace-nowrap _rounded _flex _gap-1'
+        )}
+      >
+        {children}
+      </Menu.Button>
+      <Transition
+        leave="_transition-opacity"
+        leaveFrom="_opacity-100"
+        leaveTo="_opacity-0"
+        as={Menu.Items}
+        className="_absolute _right-0 _z-20 _mt-1 _max-h-64 _min-w-full _overflow-auto _rounded-md _ring-1 _ring-black/5 _bg-white _py-1 _text-sm _shadow-lg dark:_ring-white/20 dark:_bg-neutral-800"
+      >
+        {Object.entries(items || {}).map(([key, item]) => (
+          <Menu.Item key={key}>
+            {({ active }) => (
+              <Anchor
+                href={item.href || routes[key]?.route || menu.route + '/' + key}
+                className={cn(
+                  '_relative _w-full _select-none _whitespace-nowrap hover:_text-gray-900 dark:hover:_text-gray-100 _inline-block',
+                  '_py-1.5 _transition-colors ltr:_pl-3 ltr:_pr-9 rtl:_pr-3 rtl:_pl-9',
+                  active
+                    ? '_text-gray-900 dark:_text-gray-100'
+                    : '_text-gray-600 dark:_text-gray-400'
+                )}
+                newWindow={item.newWindow}
+              >
+                {item.title || key}
+              </Anchor>
+            )}
+          </Menu.Item>
+        ))}
+      </Transition>
+    </Menu>
   )
 }
 
@@ -97,7 +93,7 @@ export function Navbar({ items }: NavBarProps): ReactElement {
           'contrast-more:_shadow-[0_0_0_1px_#000] contrast-more:dark:_shadow-[0_0_0_1px_#fff]'
         )}
       />
-      <nav className="_mx-auto _flex _h-[var(--nextra-navbar-height)] _max-w-[90rem] _items-center _justify-end _gap-2 _pl-[max(env(safe-area-inset-left),1.5rem)] _pr-[max(env(safe-area-inset-right),1.5rem)]">
+      <nav className="_mx-auto _flex _h-[var(--nextra-navbar-height)] _max-w-[90rem] _items-center _justify-end _gap-4 _pl-[max(env(safe-area-inset-left),1.5rem)] _pr-[max(env(safe-area-inset-right),1.5rem)]">
         {config.logoLink ? (
           <NextLink
             href={typeof config.logoLink === 'string' ? config.logoLink : '/'}
@@ -144,16 +140,13 @@ export function Navbar({ items }: NavBarProps): ReactElement {
               key={href}
               className={cn(
                 classes.link,
-                '_relative _-ml-2 max-md:_hidden _whitespace-nowrap _p-2',
+                'max-md:_hidden _whitespace-nowrap',
                 !isActive || page.newWindow ? classes.inactive : classes.active
               )}
               newWindow={page.newWindow}
               aria-current={!page.newWindow && isActive}
             >
-              <span className="_absolute _inset-x-0 _text-center">
-                {page.title}
-              </span>
-              <span className="_invisible _font-medium">{page.title}</span>
+              {page.title}
             </Anchor>
           )
         })}
@@ -164,21 +157,13 @@ export function Navbar({ items }: NavBarProps): ReactElement {
           })}
 
         {config.project.link ? (
-          <Anchor
-            className="_p-2 _text-current"
-            href={config.project.link}
-            newWindow
-          >
+          <Anchor href={config.project.link} newWindow>
             {renderComponent(config.project.icon)}
           </Anchor>
         ) : null}
 
         {config.chat.link ? (
-          <Anchor
-            className="_p-2 _text-current"
-            href={config.chat.link}
-            newWindow
-          >
+          <Anchor href={config.chat.link} newWindow>
             {renderComponent(config.chat.icon)}
           </Anchor>
         ) : null}
@@ -188,7 +173,7 @@ export function Navbar({ items }: NavBarProps): ReactElement {
         <button
           type="button"
           aria-label="Menu"
-          className="nextra-hamburger _-mr-2 _rounded _p-2 active:_bg-gray-400/20 md:_hidden"
+          className="nextra-hamburger _rounded active:_bg-gray-400/20 md:_hidden"
           onClick={() => setMenu(!menu)}
         >
           <MenuIcon className={cn({ open: menu })} />

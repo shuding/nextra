@@ -66,6 +66,9 @@ const config: DocsThemeConfig = {
     content: 'SWR 2.0 is out! Read more →',
     key: 'swr-2'
   },
+  // chat: {
+  //   link: 'https://discord.com'
+  // },
   darkMode: true,
   docsRepositoryBase:
     'https://github.com/shuding/nextra/blob/core/examples/swr-site',

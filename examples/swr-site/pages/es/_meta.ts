@@ -1,3 +1,5 @@
+import meta from '../en/_meta.json'
+
 export default {
   index: {
     title: 'Introducción',
@@ -12,8 +14,5 @@ export default {
     title: 'Ejemplos',
     type: 'page'
   },
-  blog: {
-    title: 'Blog',
-    type: 'page'
-  }
+  about: meta.about
 }
