@@ -213,7 +213,11 @@ saturation values for light and dark themes.
 
 Try it out for this website:
 
-<div className="mt-4">Hue</div>
+| Hue   | Saturation   |
+| ----- | ------------ |
+| {hue} | {saturation} |
+
+export const hue = (
 <div className="flex h-6 items-center gap-2">
   <input
     type="range"
@@ -222,31 +226,33 @@ Try it out for this website:
     step="1"
     onChange={e => {
       const value = `${e.target.value}deg`
+      e.target.nextSibling.textContent = value
       document.documentElement.style.setProperty('--nextra-primary-hue', value)
-      e.target.nextSibling.textContent = value
     }}
   />
-  <code className="text-sm text-gray-500" />
+  <code className="w-14 text-sm text-gray-500" />
 </div>
+)
 
-<div className="mt-2">Saturation</div>
-<div className="flex h-6 items-center gap-2">
-  <input
-    type="range"
-    min="0"
-    max="100"
-    step="1"
-    onChange={e => {
-      const value = `${e.target.value}%`
-      document.documentElement.style.setProperty(
-        '--nextra-primary-saturation',
-        value
-      )
-      e.target.nextSibling.textContent = value
-    }}
-  />
-  <code className="text-sm text-gray-500" />
-</div>
+export const saturation = (
+  <div className="flex h-6 items-center gap-2">
+    <input
+      type="range"
+      min="0"
+      max="100"
+      step="1"
+      onChange={e => {
+        const value = `${e.target.value}%`
+        e.target.nextSibling.textContent = value
+        document.documentElement.style.setProperty(
+          '--nextra-primary-saturation',
+          value
+        )
+      }}
+    />
+    <code className="text-sm text-gray-500 w-14" />
+  </div>
+)
 
 ## Navbar
 
