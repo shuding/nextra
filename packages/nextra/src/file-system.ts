@@ -7,7 +7,7 @@ const { findPagesDir, existsSync } = getDefault(findPagesDirImport)
 export { existsSync }
 
 export function findPagesDirectory(): string {
-  const res = findPagesDir(CWD, false)
+  const res = findPagesDir(CWD)
   return (
     res.pagesDir || // next v13
     (res as any).pages // next v12
