@@ -227,6 +227,7 @@ export default function Layout({
   children,
   ...context
 }: NextraThemeLayoutProps): ReactElement {
+  console.log('update me2')
   return (
     <ConfigProvider value={context}>
       <InnerLayout {...context.pageOpts}>{children}</InnerLayout>

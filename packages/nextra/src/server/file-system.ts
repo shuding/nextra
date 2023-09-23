@@ -1,10 +1,11 @@
+import fs from 'graceful-fs'
 import * as pkg from 'next/dist/lib/find-pages-dir.js'
 import { CWD } from './constants.js'
 
-export const { existsSync } = pkg
+export const { existsSync } = fs
 
 export function findPagesDirectory(): string {
-  const { pagesDir } = pkg.findPagesDir(CWD, false)
+  const { pagesDir } = (pkg as any).findPagesDir(CWD)
   if (!pagesDir) {
     throw new Error('Unable to find `pages` directory')
   }
