@@ -221,15 +221,12 @@ Try it out for this website:
     max="360"
     step="1"
     onChange={e => {
-      const hue = e.target.value
-      document.documentElement.style.setProperty(
-        '--nextra-primary-hue',
-        hue + 'deg'
-      )
-      document.getElementById('test-theme-hue').innerText = hue + 'deg'
+      const value = `${e.target.value}deg`
+      document.documentElement.style.setProperty('--nextra-primary-hue', value)
+      e.target.nextSibling.textContent = value
     }}
   />
-  <code id="test-theme-hue" className="text-sm text-gray-500"></code>
+  <code className="text-sm text-gray-500" />
 </div>
 
 <div className="mt-2">Saturation</div>
@@ -240,16 +237,15 @@ Try it out for this website:
     max="100"
     step="1"
     onChange={e => {
-      const saturation = e.target.value
+      const value = `${e.target.value}%`
       document.documentElement.style.setProperty(
         '--nextra-primary-saturation',
-        saturation + '%'
+        value
       )
-      document.getElementById('test-theme-saturation').innerText =
-        saturation + '%'
+      e.target.nextSibling.textContent = value
     }}
   />
-  <code id="test-theme-saturation" className="text-sm text-gray-500"></code>
+  <code className="text-sm text-gray-500" />
 </div>
 
 ## Navbar
