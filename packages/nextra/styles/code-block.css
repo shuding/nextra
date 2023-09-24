@@ -61,11 +61,3 @@ pre {
     opacity: 1;
   }
 }
-
-@supports (
-  (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))
-) {
-  .nextra-button {
-    @apply _backdrop-blur-md _bg-opacity-[.85] dark:_bg-opacity-80;
-  }
-}
