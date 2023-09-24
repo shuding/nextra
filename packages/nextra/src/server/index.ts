@@ -97,6 +97,18 @@ const nextra: Nextra = nextraConfig => {
           }
         }
 
+        // Fixes https://github.com/vercel/next.js/issues/55872
+        if (config.watchOptions.ignored instanceof RegExp) {
+          const ignored = config.watchOptions.ignored.source
+
+          config.watchOptions = {
+            ...config.watchOptions,
+            ignored: new RegExp(
+              ignored.replace('(\\.(git|next)|node_modules)', '\\.(git|next)')
+            )
+          }
+        }
+
         const defaultESMAppPath = require.resolve('next/dist/esm/pages/_app.js')
         const defaultCJSAppPath = require.resolve('next/dist/pages/_app.js')
 

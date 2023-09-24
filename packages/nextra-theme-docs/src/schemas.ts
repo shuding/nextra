@@ -100,18 +100,20 @@ export const themeSchema = /* @__PURE__ */ (() =>
       content: z.custom<ReactNode | FC>(...reactNode),
       labels: z.string()
     }),
-    primaryHue: z.number().or(
-      z.strictObject({
-        dark: z.number(),
-        light: z.number()
-      })
-    ),
-    primarySaturation: z.number().or(
-      z.strictObject({
-        dark: z.number(),
-        light: z.number()
-      })
-    ),
+    color: z.strictObject({
+      hue: z.number().or(
+        z.strictObject({
+          dark: z.number(),
+          light: z.number()
+        })
+      ),
+      saturation: z.number().or(
+        z.strictObject({
+          dark: z.number(),
+          light: z.number()
+        })
+      )
+    }),
     project: z.strictObject({
       icon: z.custom<ReactNode | FC>(...reactNode),
       link: z.string().startsWith('https://').optional()

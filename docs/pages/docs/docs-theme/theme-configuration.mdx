@@ -199,12 +199,12 @@ saturation values for light and dark themes.
 <OptionTable
   options={[
     [
-      'primaryHue',
+      'color.hue',
       'number | { dark: number; light: number }',
       'The hue of the primary theme color.'
     ],
     [
-      'primarySaturation',
+      'color.saturation',
       'number | { dark: number; light: number }',
       'The saturation of the primary theme color.'
     ]
@@ -233,7 +233,7 @@ export const hue = (
         )
       }}
     />
-    <code className="w-14 text-sm text-gray-500" />
+    <label className="text-sm text-gray-500 w-14" />
   </div>
 )
 
@@ -253,7 +253,7 @@ export const saturation = (
         )
       }}
     />
-    <code className="text-sm text-gray-500 w-14" />
+    <label className="text-sm text-gray-500 w-14" />
   </div>
 )
 
