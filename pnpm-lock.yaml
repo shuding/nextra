@@ -249,8 +249,8 @@ importers:
         specifier: ^0.0.5
         version: 0.0.5(react@18.2.0)
       '@theguild/remark-npm2yarn':
-        specifier: ^0.1.1
-        version: 0.1.1
+        specifier: ^0.2.0
+        version: 0.2.0
       clsx:
         specifier: ^2.0.0
         version: 2.0.0
@@ -3284,10 +3284,10 @@ packages:
       - supports-color
     dev: false
 
-  /@theguild/remark-npm2yarn@0.1.1:
-    resolution: {integrity: sha512-ZKwd/bjQ9V+pESLnu8+q8jqn15alXzJOuVckraebsXwqVBTw53Gmupiw9zCdLNHU829KTYNycJYea6m9HRLuOg==}
+  /@theguild/remark-npm2yarn@0.2.0:
+    resolution: {integrity: sha512-6NMsdxNQd0s+LBtsmLuZG0AFeGmRpqIyKkPA2FOt14ZFO8mXBkHY39+RWVrLIt/ltZCg78BvQPfJT7iF/sNvyg==}
     dependencies:
-      npm-to-yarn: 2.0.0
+      npm-to-yarn: 2.1.0
       unist-util-visit: 5.0.0
     dev: false
 
@@ -8596,9 +8596,9 @@ packages:
       path-key: 3.1.1
     dev: true
 
-  /npm-to-yarn@2.0.0:
-    resolution: {integrity: sha512-/IbjiJ7vqbxfxJxAZ+QI9CCRjnIbvGxn5KQcSY9xHh0lMKc/Sgqmm7yp7KPmd6TiTZX5/KiSBKlkGHo59ucZbg==}
-    engines: {node: '>=6.0.0'}
+  /npm-to-yarn@2.1.0:
+    resolution: {integrity: sha512-2C1IgJLdJngq1bSER7K7CGFszRr9s2rijEwvENPEgI0eK9xlD3tNwDc0UJnRj7FIT2aydWm72jB88uVswAhXHA==}
+    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: false
 
   /nth-check@2.1.1:
@@ -11518,7 +11518,7 @@ packages:
       '@mdx-js/react': 2.3.0(react@18.2.0)
       '@napi-rs/simple-git': 0.1.9
       '@theguild/remark-mermaid': 0.0.5(react@18.2.0)
-      '@theguild/remark-npm2yarn': 0.1.1
+      '@theguild/remark-npm2yarn': 0.2.0
       clsx: 2.0.0
       github-slugger: 2.0.0
       graceful-fs: 4.2.11
