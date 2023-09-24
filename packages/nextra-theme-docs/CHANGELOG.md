@@ -1,5 +1,17 @@
 # nextra-theme-docs
 
+## 2.13.0
+
+### Minor Changes
+
+- 7aec7bb5: add `primarySaturation` theme option
+- a55e4aa4: update `npm2yarn`, add bun tab
+
+### Patch Changes
+
+- a55e4aa4: do not scroll to top while calling cmd+k in search input
+  - nextra@2.13.0
+
 ## 2.12.3
 
 ### Patch Changes
