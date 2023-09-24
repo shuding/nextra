@@ -199,7 +199,11 @@ module.exports = {
       files: 'examples/swr-site/**',
       settings: {
         tailwindcss: {
-          config: 'examples/swr-site/tailwind.config.js'
+          config: 'examples/swr-site/tailwind.config.js',
+          cssFiles: [
+            'examples/swr-site/styles.css',
+            'packages/nextra-theme-docs/dist/style.css'
+          ]
         },
         next: { rootDir: 'examples/swr-site' }
       }

@@ -17,7 +17,7 @@ export function Blog() {
         {page.frontMatter?.description}
         <Link
           href={page.route}
-          className="block nx-text-primary-600 underline underline-offset-2 decoration-from-font"
+          className="block _text-primary-600 underline underline-offset-2 decoration-from-font"
         >
           Read more →
         </Link>
