@@ -23,7 +23,7 @@ export default {
     const title = `${config.title} – Nextra`
     const description =
       config.frontMatter.description || 'Nextra: the Next.js site builder'
-    const image = config.frontMatter.image || 'https://nextra.site/og.png'
+    const image = config.frontMatter.image || 'https://nextra.site/og.jpeg'
     return (
       <>
         <title>{title}</title>
