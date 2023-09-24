@@ -46,59 +46,6 @@ export default {
 
 Then Nextra will automatically generate the correct file path for all pages.
 
-### SEO Options
-
-You can configure SEO related settings via the `useNextSeoProps` option. The
-`useNextSeoProps` function returns the props that will be passed to the
-[Next SEO](https://github.com/garmeeh/next-seo#add-seo-to-page) component.
-
-It is also a hook, so you can use APIs like `useRouter` inside to return values
-conditionally.
-
-<OptionTable
-  options={[
-    [
-      'useNextSeoProps',
-      '() => NextSeoProps',
-      'A React hook function that returns options for Next SEO.'
-    ]
-  ]}
-/>
-
-For example, we can have all pages rendering the same suffix for `<title>`:
-
-import titleSuffixImage from '../../../public/assets/docs/title-suffix.png'
-
-<Screenshot src={titleSuffixImage} alt="Title suffix" />
-
-```js
-export default {
-  useNextSeoProps() {
-    return {
-      titleTemplate: '%s – SWR'
-    }
-  }
-}
-```
-
-The `%s` is a [placeholder](https://github.com/garmeeh/next-seo#title-template)
-that will be replaced by the page title.
-
-You can also return it conditionally to avoid adding the suffix to the homepage:
-
-```js
-export default {
-  useNextSeoProps() {
-    const { asPath } = useRouter()
-    if (asPath !== '/') {
-      return {
-        titleTemplate: '%s – SWR'
-      }
-    }
-  }
-}
-```
-
 ### Head Tags
 
 Configure the `<head>` tags of the website. You can add meta tags, title,

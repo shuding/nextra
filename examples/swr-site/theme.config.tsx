@@ -105,14 +105,20 @@ const config: DocsThemeConfig = {
   },
   head: function useHead() {
     const config = useConfig<{ description?: string; image?: string }>()
+    const { locale } = useRouter()
     const description =
       config.frontMatter.description ||
       'SWR is a React Hooks library for data fetching. SWR first returns the data from cache (stale), then sends the fetch request (revalidate), and finally comes with the up-to-date data again.'
     const image =
       config.frontMatter.image ||
       'https://assets.vercel.com/image/upload/v1572282926/swr/twitter-card.jpg'
+    const title = `${config.title} | SWR (${locale})`
     return (
       <>
+        <title>{title}</title>
+        <meta property="og:title" content={title} />
+        <meta name="description" content={description} />
+        <meta property="og:description" content={description} />
         {/* Favicons, meta */}
         <link
           rel="apple-touch-icon"
@@ -137,15 +143,11 @@ const config: DocsThemeConfig = {
           href="/favicon/safari-pinned-tab.svg"
           color="#000000"
         />
-        <meta name="msapplication-TileColor" content="#ffffff" />
+        <meta name="msapplication-TileColor" content="#fff" />
         <meta httpEquiv="Content-Language" content="en" />
-        <meta name="description" content={description} />
-        <meta name="og:description" content={description} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@vercel" />
-        <meta name="twitter:image" content={image} />
-        <meta name="og:title" content={`${config.title} – SWR`} />
-        <meta name="og:image" content={image} />
+        <meta property="og:image" content={image} />
         <meta name="apple-mobile-web-app-title" content="SWR" />
       </>
     )
@@ -190,12 +192,6 @@ const config: DocsThemeConfig = {
       <img alt="placeholder cat" src="https://placekitten.com/g/300/200" />
     ),
     float: true
-  },
-  useNextSeoProps() {
-    const { locale } = useRouter()
-    return {
-      titleTemplate: `%s | SWR (${locale})`
-    }
   }
 }
 

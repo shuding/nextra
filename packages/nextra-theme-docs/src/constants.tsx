@@ -104,7 +104,26 @@ export const DEFAULT_THEME: DocsThemeConfig = {
       </>
     )
   },
-  head: null,
+  head: function useHead() {
+    const config = useConfig()
+
+    const title = `${config.title} – Nextra`
+    const { description, canonical, image } = config.frontMatter
+    return (
+      <>
+        <title>{title}</title>
+        <meta property="og:title" content={title} />
+        {description && (
+          <>
+            <meta name="description" content={description} />
+            <meta property="og:description" content={description} />
+          </>
+        )}
+        {canonical && <link rel="canonical" href={canonical} />}
+        {image && <meta name="og:image" content={image} />}
+      </>
+    )
+  },
   i18n: [],
   logo: (
     <>
@@ -177,8 +196,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     component: TOC,
     float: true,
     title: 'On This Page'
-  },
-  useNextSeoProps: () => ({ titleTemplate: '%s – Nextra' })
+  }
 }
 
 export const DEEP_OBJECT_KEYS = Object.entries(DEFAULT_THEME)
