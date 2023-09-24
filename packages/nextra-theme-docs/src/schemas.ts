@@ -1,4 +1,3 @@
-import type { NextSeoProps } from 'next-seo'
 import type { FC, ReactNode } from 'react'
 import { isValidElement } from 'react'
 import { z } from 'zod'
@@ -146,7 +145,6 @@ export const themeSchema = /* @__PURE__ */ (() =>
       float: z.boolean(),
       title: z.custom<ReactNode | FC>(...reactNode)
     }),
-    useNextSeoProps: z.custom<() => NextSeoProps | void>(isFunction)
   }))()
 
 export const publicThemeSchema = /* @__PURE__ */ (() =>

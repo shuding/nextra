@@ -137,15 +137,14 @@ const config: DocsThemeConfig = {
           href="/favicon/safari-pinned-tab.svg"
           color="#000000"
         />
-        <meta name="msapplication-TileColor" content="#ffffff" />
+        <meta name="msapplication-TileColor" content="#fff" />
         <meta httpEquiv="Content-Language" content="en" />
         <meta name="description" content={description} />
-        <meta name="og:description" content={description} />
+        <meta property="og:description" content={description} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@vercel" />
-        <meta name="twitter:image" content={image} />
-        <meta name="og:title" content={`${config.title} – SWR`} />
-        <meta name="og:image" content={image} />
+        <meta property="og:title" content={`${config.title} – SWR`} />
+        <meta property="og:image" content={image} />
         <meta name="apple-mobile-web-app-title" content="SWR" />
       </>
     )
