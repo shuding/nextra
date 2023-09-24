@@ -193,8 +193,8 @@ Customize the theme behavior of the website.
 
 ### Theme Color
 
-You can adjust the theme color of the website by setting a primary hue value to
-dark or light themes.
+You can adjust the theme color of the website by setting primary hue and
+saturation values for light and dark themes.
 
 <OptionTable
   options={[
@@ -202,29 +202,60 @@ dark or light themes.
       'primaryHue',
       'number | { dark: number; light: number }',
       'The hue of the primary theme color.'
+    ],
+    [
+      'primarySaturation',
+      'number | { dark: number; light: number }',
+      'The saturation of the primary theme color.'
     ]
   ]}
 />
 
 Try it out for this website:
 
-<div className="mt-4 flex h-6 items-center gap-2">
-  <input
-    type="range"
-    min="0"
-    max="360"
-    step="1"
-    onChange={e => {
-      const hue = e.target.value
-      document.documentElement.style.setProperty(
-        '--nextra-primary-hue',
-        hue + 'deg'
-      )
-      document.getElementById('test-theme-hue').innerText = hue
-    }}
-  />
-  <code id="test-theme-hue" className="text-sm text-gray-500"></code>
-</div>
+| Hue   | Saturation   |
+| ----- | ------------ |
+| {hue} | {saturation} |
+
+export const hue = (
+  <div className="flex h-6 items-center gap-2">
+    <input
+      type="range"
+      min="0"
+      max="360"
+      step="1"
+      onChange={e => {
+        const value = `${e.target.value}deg`
+        e.target.nextSibling.textContent = value
+        document.documentElement.style.setProperty(
+          '--nextra-primary-hue',
+          value
+        )
+      }}
+    />
+    <code className="w-14 text-sm text-gray-500" />
+  </div>
+)
+
+export const saturation = (
+  <div className="flex h-6 items-center gap-2">
+    <input
+      type="range"
+      min="0"
+      max="100"
+      step="1"
+      onChange={e => {
+        const value = `${e.target.value}%`
+        e.target.nextSibling.textContent = value
+        document.documentElement.style.setProperty(
+          '--nextra-primary-saturation',
+          value
+        )
+      }}
+    />
+    <code className="text-sm text-gray-500 w-14" />
+  </div>
+)
 
 ## Navbar
 
