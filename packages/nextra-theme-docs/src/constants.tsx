@@ -124,6 +124,10 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     dark: 204,
     light: 212
   },
+  primarySaturation: {
+    dark: 100,
+    light: 100
+  },
   project: {
     icon: (
       <>

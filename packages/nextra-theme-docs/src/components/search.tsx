@@ -67,7 +67,8 @@ export function Search({
           (e.metaKey /* for Mac */ || /* for non-Mac */ e.ctrlKey))
       ) {
         e.preventDefault()
-        input.current.focus()
+        // prevent to scroll to top
+        input.current.focus({ preventScroll: true })
       } else if (e.key === 'Escape') {
         setShow(false)
         input.current.blur()
