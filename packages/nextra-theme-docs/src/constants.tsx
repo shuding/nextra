@@ -104,11 +104,11 @@ export const DEFAULT_THEME: DocsThemeConfig = {
       </>
     )
   },
-  head: function Head() {
+  head: function useHead() {
     const config = useConfig()
 
     const title = `${config.title} – Nextra`
-    const { description, canonical } = config.frontMatter
+    const { description, canonical, image } = config.frontMatter
     return (
       <>
         <title>{title}</title>
@@ -120,6 +120,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
           </>
         )}
         {canonical && <link rel="canonical" href={canonical} />}
+        {image && <meta name="og:image" content={image} />}
       </>
     )
   },

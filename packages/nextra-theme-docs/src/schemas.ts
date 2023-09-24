@@ -144,7 +144,7 @@ export const themeSchema = /* @__PURE__ */ (() =>
       extraContent: z.custom<ReactNode | FC>(...reactNode),
       float: z.boolean(),
       title: z.custom<ReactNode | FC>(...reactNode)
-    }),
+    })
   }))()
 
 export const publicThemeSchema = /* @__PURE__ */ (() =>
