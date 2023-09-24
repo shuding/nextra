@@ -106,6 +106,12 @@ export const themeSchema = /* @__PURE__ */ (() =>
         light: z.number()
       })
     ),
+    primarySaturation: z.number().or(
+      z.strictObject({
+        dark: z.number(),
+        light: z.number()
+      })
+    ),
     project: z.strictObject({
       icon: z.custom<ReactNode | FC>(...reactNode),
       link: z.string().startsWith('https://').optional()

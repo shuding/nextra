@@ -4,7 +4,7 @@ import { CWD } from './constants.js'
 export const { existsSync } = pkg
 
 export function findPagesDirectory(): string {
-  const { pagesDir } = pkg.findPagesDir(CWD, false)
+  const { pagesDir } = pkg.findPagesDir(CWD)
   if (!pagesDir) {
     throw new Error('Unable to find `pages` directory')
   }
