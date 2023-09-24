@@ -1,5 +1,7 @@
 # nextra
 
+## 2.13.0
+
 ## 2.12.3
 
 ### Patch Changes
