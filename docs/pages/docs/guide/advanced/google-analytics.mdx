@@ -15,27 +15,26 @@ This page describes how to configure your Nextra website with Google Analytics (
 Create a `lib/gtag.js` file that exports the following:
 
 ```js filename="lib/gtag.js"
-export const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID;
+export const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID
 
-export const pageview = (url) => {
-  window.gtag("config", GA_TRACKING_ID, {
-    page_path: url,
-  });
-};
+export const pageview = url => {
+  window.gtag('config', GA_TRACKING_ID, {
+    page_path: url
+  })
+}
 
 export const event = ({ action, category, label, value }) => {
-  window.gtag("event", action, {
+  window.gtag('event', action, {
     event_category: category,
     event_label: label,
-    value: value,
-  });
-};
+    value: value
+  })
+}
 ```
 
 - `GA_TRACKING_ID`: A reference to your environment variable's Google Analytics measurement id.
 - [`pageview`](https://developers.google.com/analytics/devguides/collection/gtagjs/pages): A function that sends a pageview to Google Analytics.
 - [`event`](https://developers.google.com/analytics/devguides/collection/gtagjs/events): A function that sends events to Google Analytics.
-
 
 ### Create a Custom App
 
@@ -46,121 +45,112 @@ Add a custom App (`_app.mdx`) to the `pages` directory of your project.
 Import the `lib/gtag.js` file. And use the `pageview` function to send pageviews to Google Analytics whenever users navigate to a new page.
 
 ```jsx filename="pages/_app.mdx"
-import { useEffect } from "react";
-import { useRouter } from "next/router";
-import * as gtag from "../lib/gtag";
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+import * as gtag from '../lib/gtag'
 
 export default function App({ Component, pageProps }) {
-  const router = useRouter();
+  const router = useRouter()
   useEffect(() => {
-    const handleRouteChange = (url) => {
-      gtag.pageview(url);
-    };
-    router.events.on("routeChangeComplete", handleRouteChange);
+    const handleRouteChange = url => {
+      gtag.pageview(url)
+    }
+    router.events.on('routeChangeComplete', handleRouteChange)
     return () => {
-      router.events.off("routeChangeComplete", handleRouteChange);
-    };
-  }, [router.events]);
+      router.events.off('routeChangeComplete', handleRouteChange)
+    }
+  }, [router.events])
 
-return (
-<>
-  <Component {...pageProps} />
-</>
-); }
+  return (
+    <>
+      <Component {...pageProps} />
+    </>
+  )
+}
 ```
 
 ### Add Google Tag to your website's `<head>`
 
-Use [`next/head`](https://nextjs.org/docs/pages/api-reference/components/head) to add Google Tag to your website's `<head>` as shown below:
+Use [`next/script`](https://nextjs.org/docs/pages/building-your-application/optimizing/scripts) and the [`beforeInteractive` script loading strategy](https://nextjs.org/docs/pages/api-reference/components/script#beforeinteractive) to add the inline Google Tag code to your website's `<head>`:
 
-```jsx filename="pages/_app.mdx" {1,20-34}
-import Head from "next/head";
-import { useEffect } from "react";
-import { useRouter } from "next/router";
-import * as gtag from "../lib/gtag";
+```jsx filename="pages/_app.mdx" {2,20-29}
+import { useRouter } from 'next/router'
+import Script from 'next/script'
+import { useEffect } from 'react'
+import * as gtag from '../lib/gtag'
 
 export default function App({ Component, pageProps }) {
-  const router = useRouter();
+  const router = useRouter()
   useEffect(() => {
-    const handleRouteChange = (url) => {
-      gtag.pageview(url);
-    };
-    router.events.on("routeChangeComplete", handleRouteChange);
+    const handleRouteChange = url => {
+      gtag.pageview(url)
+    }
+    router.events.on('routeChangeComplete', handleRouteChange)
     return () => {
-      router.events.off("routeChangeComplete", handleRouteChange);
-    };
-  }, [router.events]);
+      router.events.off('routeChangeComplete', handleRouteChange)
+    }
+  }, [router.events])
 
-return (
-<>
-  <Head>
-    <script
-      dangerouslySetInnerHTML={{
-        __html: `
+  return (
+    <>
+      <Script id="google-analytics-header-tag" strategy="beforeInteractive">
+        {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-
           gtag('config', '${gtag.GA_TRACKING_ID}', {
             page_path: window.location.pathname,
           });
-        `,
-      }}
-    />
-  </Head>
-  <Component {...pageProps} />
-</>
-); }
+        `}
+      </Script>
+      <Component {...pageProps} />
+    </>
+  )
+}
 ```
 
 ### Add Google Analytics to Your App
 
-Use [`next/script`](https://nextjs.org/docs/pages/building-your-application/optimizing/scripts) to add your Google Analytics tracking code to the custom App (`pages/_app.mdx`):
+Use [`next/script`](https://nextjs.org/docs/pages/building-your-application/optimizing/scripts) and the [`afterInteractive` script loading strategy](https://nextjs.org/docs/pages/api-reference/components/script#afterinteractive) to add the external Google tag code to your website:
 
-```jsx filename="pages/_app.mdx" {2,36-40}
-import Head from "next/head";
+```jsx filename="pages/_app.mdx" {2,30-33}
+import { useRouter } from 'next/router'
 import Script from 'next/script'
-import { useEffect } from "react";
-import { useRouter } from "next/router";
-import * as gtag from "../lib/gtag";
+import { useEffect } from 'react'
+import * as gtag from '../lib/gtag'
 
 export default function App({ Component, pageProps }) {
-  const router = useRouter();
+  const router = useRouter()
   useEffect(() => {
-    const handleRouteChange = (url) => {
-      gtag.pageview(url);
-    };
-    router.events.on("routeChangeComplete", handleRouteChange);
+    const handleRouteChange = url => {
+      gtag.pageview(url)
+    }
+    router.events.on('routeChangeComplete', handleRouteChange)
     return () => {
-      router.events.off("routeChangeComplete", handleRouteChange);
-    };
-  }, [router.events]);
+      router.events.off('routeChangeComplete', handleRouteChange)
+    }
+  }, [router.events])
 
-return (
-<>
-  <Head>
-    <script
-      dangerouslySetInnerHTML={{
-        __html: `
+  return (
+    <>
+      <Script id="google-analytics-header-tag" strategy="beforeInteractive">
+        {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-
           gtag('config', '${gtag.GA_TRACKING_ID}', {
             page_path: window.location.pathname,
           });
-        `,
-      }}
-    />
-  </Head>
-  {/* Global Site Tag (gtag.js) - Google Analytics */}
-  <Script
-    strategy="afterInteractive"
-    src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}
-  />
-  <Component {...pageProps} />
-</>
-); }
+        `}
+      </Script>
+      <Script
+        strategy="afterInteractive"
+        src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}
+      />
+      <Component {...pageProps} />
+    </>
+  )
+}
 ```
 
 ### Load Measurement ID into `process.env`
