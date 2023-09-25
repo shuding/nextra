@@ -1,10 +1,11 @@
 import * as findPagesDirImport from 'next/dist/lib/find-pages-dir.js'
 import { CWD } from './constants'
 import { getDefault } from './utils'
+import fs from 'graceful-fs'
 
-const { findPagesDir, existsSync } = getDefault(findPagesDirImport)
+const { findPagesDir } = getDefault(findPagesDirImport)
 
-export { existsSync }
+export const { existsSync } = fs
 
 export function findPagesDirectory(): string {
   const res = findPagesDir(CWD)
