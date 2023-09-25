@@ -138,7 +138,7 @@
     "rehype-katex": "^7.0.0",
     "rehype-pretty-code": "0.9.11",
     "rehype-raw": "^7.0.0",
-    "remark-gfm": "^3.0.1",
+    "remark-gfm": "^4.0.0",
     "remark-math": "^6.0.0",
     "remark-reading-time": "^2.0.1",
     "shiki": "^0.14.3",
