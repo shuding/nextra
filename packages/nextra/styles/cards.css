@@ -5,20 +5,20 @@
   );
 }
 
-.nextra-card img {
-  user-select: none;
-}
+.nextra-card {
+  img {
+    @apply _select-none;
+  }
 
-.nextra-card svg {
-  @apply _w-6 _h-auto;
-  color: #00000033;
-  transition: color 0.3s ease;
-}
+  svg {
+    @apply _w-6 _h-auto _transition _text-black/30 dark:_text-white/40;
+  }
 
-.nextra-card p {
-  margin-top: 0.5rem;
-}
+  &:hover svg {
+    @apply _text-current dark:_text-current;
+  }
 
-.dark .nextra-card svg {
-  color: #ffffff66;
+  p {
+    @apply _mt-2;
+  }
 }
