@@ -2,6 +2,7 @@ import cn from 'clsx'
 import type { ComponentProps, ReactElement } from 'react'
 import { useCallback, useRef } from 'react'
 import {
+  CssIcon,
   JavaScriptIcon,
   MarkdownIcon,
   MdxIcon,
@@ -31,6 +32,8 @@ function getIcon(language = '') {
     case 'sh':
     case 'bash':
       return TerminalIcon
+    case 'css':
+      return CssIcon
   }
 }
 
