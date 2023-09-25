@@ -1,10 +1,10 @@
 import path from 'node:path'
+import fs from 'graceful-fs'
 import type { Root } from 'mdast'
 import slash from 'slash'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 import { EXTERNAL_URL_REGEX, PUBLIC_DIR } from '../constants.js'
-import { existsSync } from '../file-system.js'
 import { truthy } from '../utils.js'
 
 /**
@@ -32,7 +32,7 @@ export const remarkStaticImage: Plugin<[], Root> = () => ast => {
 
     if (url.startsWith('/')) {
       const urlPath = path.join(PUBLIC_DIR, url)
-      if (!existsSync(urlPath)) {
+      if (!fs.existsSync(urlPath)) {
         return
       }
       url = slash(urlPath)

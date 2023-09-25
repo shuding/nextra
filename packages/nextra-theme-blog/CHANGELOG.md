@@ -24,6 +24,19 @@
 - Updated dependencies [576cb6f1]
   - nextra@3.0.0-alpha.0
 
+## 2.13.1
+
+### Patch Changes
+
+- Updated dependencies [ee02a483]
+  - nextra@2.13.1
+
+## 2.13.0
+
+### Patch Changes
+
+- nextra@2.13.0
+
 ## 2.12.3
 
 ### Patch Changes
