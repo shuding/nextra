@@ -2,4 +2,4 @@
 'nextra-theme-docs': patch
 ---
 
-fix showing sidebar when darkmode is turned off
+fix showing toggle sidebar button when darkmode is turned off and i18n was not set
