@@ -5,7 +5,8 @@ import {
   JavaScriptIcon,
   MarkdownIcon,
   TypeScriptIcon,
-  WordWrapIcon
+  WordWrapIcon,
+  MdxIcon
 } from '../icons/index.js'
 import { Button, classes } from './button.js'
 import { CopyToClipboard } from './copy-to-clipboard.js'
@@ -13,7 +14,8 @@ import { CopyToClipboard } from './copy-to-clipboard.js'
 const IconMap: Record<string, typeof JavaScriptIcon> = {
   js: JavaScriptIcon,
   ts: TypeScriptIcon,
-  md: MarkdownIcon
+  md: MarkdownIcon,
+  mdx: MdxIcon
 }
 
 export function Pre({
