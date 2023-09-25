@@ -1,5 +1,11 @@
 # nextra
 
+## 2.13.1
+
+### Patch Changes
+
+- ee02a483: fix `Property 'existsSync' does not exist on type`
+
 ## 2.13.0
 
 ## 2.12.3
