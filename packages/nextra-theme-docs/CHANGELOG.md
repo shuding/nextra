@@ -1,5 +1,14 @@
 # nextra-theme-docs
 
+## 2.13.1
+
+### Patch Changes
+
+- 3e5e1153: fix showing toggle sidebar button when darkmode is turned off and
+  i18n was not set
+- Updated dependencies [ee02a483]
+  - nextra@2.13.1
+
 ## 2.13.0
 
 ### Minor Changes
