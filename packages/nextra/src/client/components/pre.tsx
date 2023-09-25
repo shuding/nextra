@@ -6,7 +6,8 @@ import {
   MarkdownIcon,
   MdxIcon,
   TypeScriptIcon,
-  WordWrapIcon
+  WordWrapIcon,
+  TerminalIcon
 } from '../icons/index.js'
 import { Button, classes } from './button.js'
 import { CopyToClipboard } from './copy-to-clipboard.js'
@@ -27,6 +28,9 @@ function getIcon(language = '') {
       return MarkdownIcon
     case 'mdx':
       return MdxIcon
+    case 'sh':
+    case 'bash':
+      return TerminalIcon
   }
 }
 
