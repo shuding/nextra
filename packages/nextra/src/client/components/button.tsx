@@ -1,6 +1,13 @@
 import cn from 'clsx'
 import type { ComponentProps, ReactElement } from 'react'
 
+export const classes = {
+  border: cn(
+    '_border _border-gray-300 dark:_border-neutral-700',
+    'contrast-more:_border-gray-900 contrast-more:dark:_border-gray-50'
+  )
+}
+
 export function Button({
   children,
   className,
@@ -9,9 +16,8 @@ export function Button({
   return (
     <button
       className={cn(
-        'nextra-button _transition active:_opacity-50',
-        '_border _border-gray-300 hover:_text-gray-900 _rounded-md _p-1.5',
-        'dark:_border-neutral-700 dark:hover:_text-gray-50',
+        '_transition _rounded-md _p-1.5',
+        classes.border,
         className
       )}
       {...props}

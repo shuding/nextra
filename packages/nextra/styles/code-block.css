@@ -18,7 +18,7 @@ code {
 
 pre {
   code {
-    @apply _grid _text-sm _leading-5 _text-current;
+    @apply _grid _text-sm _leading-5;
 
     &[data-line-numbers] > span {
       @apply _pl-2;
@@ -33,12 +33,11 @@ pre {
       @apply _px-4;
 
       &[data-highlighted-line] {
-        @apply !_bg-primary-600/10 !_text-primary-600/50 _shadow-[2px_0_currentColor_inset];
+        @apply _bg-primary-600/10 dark:_bg-primary-600/20 !_text-primary-600/80 _shadow-[2px_0_currentColor_inset];
       }
       [data-highlighted-chars] {
-        @apply _rounded-sm _shadow-[0_0_0_2px_rgba(0,0,0,.3)];
-        @apply _bg-primary-800/10 _shadow-primary-800/10;
-        @apply dark:_bg-primary-300/10 dark:_shadow-primary-300/10;
+        @apply _rounded-sm _ring-2 _ring-primary-600/20 dark:_ring-primary-600/40;
+        @apply _bg-primary-600/20 dark:_bg-primary-600/40;
       }
     }
   }

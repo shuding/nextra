@@ -7,8 +7,14 @@ import {
   TypeScriptIcon,
   WordWrapIcon
 } from '../icons/index.js'
-import { Button } from './button.js'
+import { Button, classes } from './button.js'
 import { CopyToClipboard } from './copy-to-clipboard.js'
+
+const IconMap: Record<string, typeof JavaScriptIcon> = {
+  js: JavaScriptIcon,
+  ts: TypeScriptIcon,
+  md: MarkdownIcon
+}
 
 export const Pre = ({
   children,
@@ -43,57 +49,56 @@ export const Pre = ({
     />
   )
 
-  const IconToUse = {
-    js: JavaScriptIcon,
-    ts: TypeScriptIcon,
-    md: MarkdownIcon
-  }[language!]
+  const IconToUse = IconMap[language!]
 
   return (
     <div className="nextra-code _relative _mt-6 first:_mt-0">
       {filename && (
         <div
           className={cn(
-            '_absolute _z-[1] _w-full _truncate _rounded-t-md _pl-3 _pr-4 _text-xs _text-gray-700 dark:_text-gray-200',
-            '_bg-gray-100 _border _border-gray-300 dark:_border-neutral-700 dark:_bg-neutral-900',
-            '_flex _items-center _h-12 _gap-2'
+            '_px-4 _text-xs _text-gray-700 dark:_text-gray-200',
+            '_bg-gray-100 dark:_bg-neutral-900',
+            '_flex _items-center _h-12 _gap-2 _rounded-t-md',
+            classes.border,
+            '_border-b-0'
           )}
         >
-          {IconToUse && <IconToUse className="_h-5 _w-5" />}
-          {filename}
+          {IconToUse && <IconToUse className="_h-5 _w-5 _shrink-0" />}
+          <span className="_truncate">{filename}</span>
           {copyButton}
         </div>
       )}
       <pre
         className={cn(
-          '_border _border-gray-300 dark:_border-neutral-700',
-          '_mb-4 _overflow-x-auto _rounded-md _subpixel-antialiased _text-[.9em]',
-          'contrast-more:_border contrast-more:_border-primary-900/20 contrast-more:_contrast-150 contrast-more:dark:_border-primary-100/40',
-          filename ? '_pt-16 _pb-4' : '_py-4',
-          'dark:_bg-black _relative',
+          '_overflow-x-auto _subpixel-antialiased _text-[.9em]',
+          'dark:_bg-black _py-4',
+          '_ring-1 _ring-inset _ring-gray-300 dark:_ring-neutral-700',
+          'contrast-more:_ring-gray-900 contrast-more:dark:_ring-gray-50',
+          'contrast-more:_contrast-150',
+          filename ? '_rounded-b-md' : '_rounded-md',
           className
         )}
         ref={preRef}
         {...props}
       >
         {children}
-        <div
-          className={cn(
-            '_opacity-0 _transition [div:hover>pre>&]:_opacity-100 focus-within:_opacity-100',
-            '_flex _gap-1 _absolute _right-4',
-            filename ? '_top-14' : '_top-2'
-          )}
-        >
-          <Button
-            onClick={toggleWordWrap}
-            className="md:_hidden"
-            title="Toggle word wrap"
-          >
-            <WordWrapIcon className="_pointer-events-none _h-4 _w-4" />
-          </Button>
-          {!filename && copyButton}
-        </div>
       </pre>
+      <div
+        className={cn(
+          '_opacity-0 _transition [div:hover>&]:_opacity-100 focus-within:_opacity-100',
+          '_flex _gap-1 _absolute _right-4',
+          filename ? '_top-14' : '_top-2'
+        )}
+      >
+        <Button
+          onClick={toggleWordWrap}
+          className="md:_hidden"
+          title="Toggle word wrap"
+        >
+          <WordWrapIcon className="_h-4 _w-4" />
+        </Button>
+        {!filename && copyButton}
+      </div>
     </div>
   )
 }
