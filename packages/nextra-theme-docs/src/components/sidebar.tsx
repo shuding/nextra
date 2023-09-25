@@ -387,7 +387,7 @@ export function Sidebar({
   }, [router.asPath, setMenu])
 
   const hasI18n = config.i18n.length > 0
-  const hasMenu = config.darkMode || hasI18n || !!config.sidebar.toggleButton
+  const hasMenu = config.darkMode || hasI18n || config.sidebar.toggleButton
 
   return (
     <>
@@ -498,12 +498,7 @@ export function Sidebar({
             {config.sidebar.toggleButton && (
               <button
                 title={showSidebar ? 'Hide sidebar' : 'Show sidebar'}
-                className={cn(
-                  'max-md:nx-hidden nx-h-7 nx-rounded-md nx-transition-colors nx-text-gray-600 nx-px-2',
-                  'hover:nx-bg-gray-100 hover:nx-text-gray-900',
-                  'dark:nx-text-gray-400 dark:hover:nx-bg-primary-100/5 dark:hover:nx-text-gray-50',
-                  showSidebar && !config.darkMode ? 'nx-ml-auto' : ''
-                )}
+                className="max-md:nx-hidden nx-h-7 nx-rounded-md nx-transition-colors nx-text-gray-600 dark:nx-text-gray-400 nx-px-2 hover:nx-bg-gray-100 hover:nx-text-gray-900 dark:hover:nx-bg-primary-100/5 dark:hover:nx-text-gray-50"
                 onClick={() => {
                   setSidebar(!showSidebar)
                   setToggleAnimation(true)
