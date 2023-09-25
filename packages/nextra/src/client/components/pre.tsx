@@ -5,9 +5,9 @@ import {
   JavaScriptIcon,
   MarkdownIcon,
   MdxIcon,
+  TerminalIcon,
   TypeScriptIcon,
-  WordWrapIcon,
-  TerminalIcon
+  WordWrapIcon
 } from '../icons/index.js'
 import { Button, classes } from './button.js'
 import { CopyToClipboard } from './copy-to-clipboard.js'
