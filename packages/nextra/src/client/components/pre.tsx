@@ -4,18 +4,30 @@ import { useCallback, useRef } from 'react'
 import {
   JavaScriptIcon,
   MarkdownIcon,
+  MdxIcon,
   TypeScriptIcon,
-  WordWrapIcon,
-  MdxIcon
+  WordWrapIcon
 } from '../icons/index.js'
 import { Button, classes } from './button.js'
 import { CopyToClipboard } from './copy-to-clipboard.js'
 
-const IconMap: Record<string, typeof JavaScriptIcon> = {
-  js: JavaScriptIcon,
-  ts: TypeScriptIcon,
-  md: MarkdownIcon,
-  mdx: MdxIcon
+function getIcon(language = '') {
+  if (!language) {
+    return null
+  }
+
+  switch (language) {
+    case 'js':
+    case 'jsx':
+      return JavaScriptIcon
+    case 'ts':
+    case 'tsx':
+      return TypeScriptIcon
+    case 'md':
+      return MarkdownIcon
+    case 'mdx':
+      return MdxIcon
+  }
 }
 
 export function Pre({
@@ -49,7 +61,7 @@ export function Pre({
     />
   )
 
-  const IconToUse = IconMap[language!]
+  const IconToUse = getIcon(language)
 
   return (
     <div className="nextra-code _relative _mt-6 first:_mt-0">
@@ -63,7 +75,7 @@ export function Pre({
             '_border-b-0'
           )}
         >
-          {IconToUse && <IconToUse className="_h-5 _w-5 _shrink-0" />}
+          {IconToUse && <IconToUse className="_h-3.5 _w-auto _shrink-0" />}
           <span className="_truncate">{filename}</span>
           {copyButton}
         </div>
