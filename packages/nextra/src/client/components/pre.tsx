@@ -16,7 +16,7 @@ const IconMap: Record<string, typeof JavaScriptIcon> = {
   md: MarkdownIcon
 }
 
-export const Pre = ({
+export function Pre({
   children,
   className,
   'data-filename': filename,
@@ -27,7 +27,7 @@ export const Pre = ({
   'data-filename'?: string
   'data-copy'?: ''
   'data-language'?: string
-}): ReactElement => {
+}): ReactElement {
   const preRef = useRef<HTMLPreElement | null>(null)
 
   const toggleWordWrap = useCallback(() => {
@@ -40,9 +40,7 @@ export const Pre = ({
     }
   }, [])
 
-  const hasCopyCode = copy === ''
-
-  const copyButton = hasCopyCode && (
+  const copyButton = copy === '' && (
     <CopyToClipboard
       className={filename ? '_ml-auto' : ''}
       getValue={() => preRef.current?.querySelector('code')?.textContent || ''}
