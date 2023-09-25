@@ -107,7 +107,7 @@ export function Pre({
           className="md:_hidden"
           title="Toggle word wrap"
         >
-          <WordWrapIcon className="_h-4 _w-4" />
+          <WordWrapIcon className="_h-4 _w-auto" />
         </Button>
         {!filename && copyButton}
       </div>

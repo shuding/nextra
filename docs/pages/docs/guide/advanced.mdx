@@ -1,6 +1,5 @@
 import {
   CloudIcon,
-  CodeIcon,
   DiagramIcon,
   FormulaIcon,
   TableIcon,
@@ -8,6 +7,7 @@ import {
   TerminalIcon
 } from '@components/icons'
 import { Cards } from 'nextra/components'
+import { TypeScriptIcon } from 'nextra/icons'
 
 <Cards>
   <Cards.Card
@@ -21,7 +21,7 @@ import { Cards } from 'nextra/components'
     href="/docs/guide/advanced/mermaid"
   />
   <Cards.Card
-    icon={<TailwindIcon className="h-6 w-6" />}
+    icon={<TailwindIcon />}
     title="Tailwind CSS"
     href="/docs/guide/advanced/tailwind-css"
   />
@@ -36,7 +36,7 @@ import { Cards } from 'nextra/components'
     href="/docs/guide/advanced/table"
   />
   <Cards.Card
-    icon={<CodeIcon />}
+    icon={<TypeScriptIcon />}
     title="TypeScript"
     href="/docs/guide/advanced/typescript"
   />

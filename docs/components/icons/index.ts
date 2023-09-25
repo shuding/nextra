@@ -1,5 +1,4 @@
 export { default as FilesIcon } from './files.svg'
-export { default as MarkdownIcon } from './markdown.svg'
 export { default as TailwindIcon } from './tailwind.svg'
 export { default as LinkIcon } from './link.svg'
 export { default as LightningIcon } from './lightning.svg'

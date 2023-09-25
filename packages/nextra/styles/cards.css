@@ -9,12 +9,8 @@
   user-select: none;
 }
 
-.nextra-card:hover svg {
-  color: currentColor;
-}
-
 .nextra-card svg {
-  width: 1.5rem;
+  @apply _w-6 _h-auto;
   color: #00000033;
   transition: color 0.3s ease;
 }
@@ -25,8 +21,4 @@
 
 .dark .nextra-card svg {
   color: #ffffff66;
-}
-
-.dark .nextra-card:hover svg {
-  color: currentColor;
 }
