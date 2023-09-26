@@ -1,5 +1,5 @@
 import cn from 'clsx'
-import type { ComponentProps, ReactElement } from 'react'
+import type { ComponentProps, FC, ReactElement } from 'react'
 import { useCallback, useRef } from 'react'
 import {
   CssIcon,
@@ -42,12 +42,14 @@ export function Pre({
   className,
   'data-filename': filename,
   'data-copy': copy,
-  'data-language': language,
+  'data-language': _language,
+  icon: Icon,
   ...props
 }: ComponentProps<'pre'> & {
   'data-filename'?: string
   'data-copy'?: ''
   'data-language'?: string
+  icon?: FC<ComponentProps<'svg'>>
 }): ReactElement {
   const preRef = useRef<HTMLPreElement | null>(null)
 
@@ -68,8 +70,6 @@ export function Pre({
     />
   )
 
-  const IconToUse = getIcon(language)
-
   return (
     <div className="nextra-code _relative _mt-6 first:_mt-0">
       {filename && (
@@ -82,7 +82,7 @@ export function Pre({
             '_border-b-0'
           )}
         >
-          {IconToUse && <IconToUse className="_h-3.5 _w-auto _shrink-0" />}
+          {Icon && <Icon className="_h-3.5 _w-auto _shrink-0" />}
           <span className="_truncate">{filename}</span>
           {copyButton}
         </div>

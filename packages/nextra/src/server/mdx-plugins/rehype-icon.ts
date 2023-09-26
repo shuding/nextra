@@ -59,7 +59,12 @@ function attachIconProp(node: any, iconName: string) {
             }
           }
         }
-      }
+      },
+      ...Object.entries(node.properties).map(([name, value]) => ({
+        type: 'mdxJsxAttribute',
+        name,
+        value
+      }))
     ]
   })
 }
