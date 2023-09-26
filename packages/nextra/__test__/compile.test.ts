@@ -52,24 +52,22 @@ export const TagName = () => {
     )
     expect(result).toMatch('<_components.h1 id="test-id">{"My Header"}')
     expect(result).toMatch(
-      '<_components.h2 id="extra-space">{toc[0].value}</_components.h2>'
+      '<_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>'
     )
+    expect(result).toMatch('<_components.h3 id={toc[1].id}>{toc[1].value}')
     expect(result).toMatch(
-      '<_components.h3 id="extra-space-in-heading">{toc[1].value}'
+      '<_components.h3 id={toc[2].id}>{toc[2].value}</_components.h3>'
     )
-    expect(result).toMatch(
-      '<_components.h3 id="without-space">{toc[2].value}</_components.h3>'
-    )
-    expect(result).toMatch('<_components.h4 id="другой-язык">{toc[3].value}')
-    expect(result).toMatch('<_components.h5 id="bar-baz-">{toc[4].value}')
-    expect(result).toMatch('<_components.h6 id="bar-qux-">{toc[5].value}')
+    expect(result).toMatch('<_components.h4 id={toc[3].id}>{toc[3].value}')
+    expect(result).toMatch('<_components.h5 id={toc[4].id}>{toc[4].value}')
+    expect(result).toMatch('<_components.h6 id={toc[5].id}>{toc[5].value}')
   })
   it('use github-slugger', async () => {
     const { result } = await compileMdx('### My Header', { mdxOptions })
-    expect(result).toMatch('<_components.h3 id="my-header">{toc[0].value}')
+    expect(result).toMatch('<_components.h3 id={toc[0].id}>{toc[0].value}')
   })
 
-  it.only('should merge headings from partial components', async () => {
+  it('should merge headings from partial components', async () => {
     const { result } = await compileMdx(
       `
 import FromMdx from './one.mdx'
@@ -126,7 +124,7 @@ import Last from './three.mdx'
           h2: \\"h2\\"
         }, _provideComponents(), props.components), {Kek} = _components;
         if (!Kek) _missingMdxReference(\\"Kek\\", true);
-        return <><_components.h2 id=\\"️\\">{toc[0].value}</_components.h2>{\\"\\\\n\\"}<FromMdx />{\\"\\\\n\\"}<_components.h2 id=\\"\\">{toc[2].value}</_components.h2>{\\"\\\\n\\"}<FromMarkdown />{\\"\\\\n\\"}{\\"\\\\n\\"}<Last />{\\"\\\\n\\"}<IgnoreMe />{\\"\\\\n\\"}<_components.h2 id=\\"-1\\">{toc[5].value}</_components.h2>{\\"\\\\n\\"}<_components.h2 id=\\"kek-\\">{\\"kek \\"}<Kek /></_components.h2></>;
+        return <><_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>{\\"\\\\n\\"}<FromMdx />{\\"\\\\n\\"}<_components.h2 id={toc[2].id}>{toc[2].value}</_components.h2>{\\"\\\\n\\"}<FromMarkdown />{\\"\\\\n\\"}{\\"\\\\n\\"}<Last />{\\"\\\\n\\"}<IgnoreMe />{\\"\\\\n\\"}<_components.h2 id={toc[5].id}>{toc[5].value}</_components.h2>{\\"\\\\n\\"}<_components.h2 id={toc[6].id}>{\\"kek \\"}<Kek /></_components.h2></>;
       }
       function MDXContent(props = {}) {
         const {wrapper: MDXLayout} = Object.assign({}, _provideComponents(), props.components);
