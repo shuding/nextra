@@ -1,41 +1,9 @@
 import cn from 'clsx'
 import type { ComponentProps, FC, ReactElement } from 'react'
 import { useCallback, useRef } from 'react'
-import {
-  CssIcon,
-  JavaScriptIcon,
-  MarkdownIcon,
-  MdxIcon,
-  TerminalIcon,
-  TypeScriptIcon,
-  WordWrapIcon
-} from '../icons/index.js'
+import { WordWrapIcon } from '../icons/index.js'
 import { Button, classes } from './button.js'
 import { CopyToClipboard } from './copy-to-clipboard.js'
-
-function getIcon(language = '') {
-  if (!language) {
-    return null
-  }
-
-  switch (language) {
-    case 'js':
-    case 'jsx':
-      return JavaScriptIcon
-    case 'ts':
-    case 'tsx':
-      return TypeScriptIcon
-    case 'md':
-      return MarkdownIcon
-    case 'mdx':
-      return MdxIcon
-    case 'sh':
-    case 'bash':
-      return TerminalIcon
-    case 'css':
-      return CssIcon
-  }
-}
 
 export function Pre({
   children,
