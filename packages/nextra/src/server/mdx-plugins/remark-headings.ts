@@ -63,18 +63,16 @@ export const remarkHeadings: Plugin<
           if (SKIP_FOR_PARENT_NAMES.has((parent as any).name)) {
             delete headingProps.id
           } else {
-            const value = getFlattenedValue(node)
+            let value = getFlattenedValue(node)
             const id = slugger.slug(headingProps.id || value)
             // Attach flattened/custom #id to heading node
             headingProps.id = id
 
-            const hast = toHast(node)
-            const estree = toEstree(hast)
-
-            const { children } = estree.body[0].expression
-            const length = headings.push({
-              depth: node.depth,
-              value: {
+            if (!isRemoteContent) {
+              const hast = toHast(node)
+              const estree = toEstree(hast)
+              const { children } = estree.body[0].expression
+              value = {
                 type: 'JSXFragment',
                 openingFragment: {
                   type: 'JSXOpeningFragment'
@@ -83,27 +81,34 @@ export const remarkHeadings: Plugin<
                   type: 'JSXClosingFragment'
                 },
                 children
-              },
+              }
+            }
+
+            const length = headings.push({
+              depth: node.depth,
+              value,
               id
             })
-            node.children = [
-              {
-                type: 'mdxTextExpression',
-                data: {
-                  estree: {
-                    body: [
-                      {
-                        type: 'ExpressionStatement',
-                        expression: {
-                          type: 'Identifier',
-                          name: `toc[${length - 1}]`
+            if (!isRemoteContent) {
+              node.children = [
+                {
+                  type: 'mdxTextExpression',
+                  data: {
+                    estree: {
+                      body: [
+                        {
+                          type: 'ExpressionStatement',
+                          expression: {
+                            type: 'Identifier',
+                            name: `toc[${length - 1}].value`
+                          }
                         }
-                      }
-                    ]
+                      ]
+                    }
                   }
                 }
-              }
-            ]
+              ]
+            }
           }
           return
         }
