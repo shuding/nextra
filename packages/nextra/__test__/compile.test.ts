@@ -200,11 +200,11 @@ describe('Link', () => {
 describe('Code block', () => {
   describe('Filename', () => {
     it('attach with "codeHighlight: true" by default', async () => {
-      const { result } = await compileMdx('```js filename="test.js"\n```', {
+      const { result } = await compileMdx('```text filename="test.js"\n```', {
         mdxOptions
       })
       expect(result).toMatch(
-        '<_components.pre data-language="js" data-filename="test.js">'
+        '<_components.pre data-language="text" data-filename="test.js">'
       )
     })
 
