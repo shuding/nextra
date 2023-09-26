@@ -27,9 +27,7 @@ function clean(content: any): Promise<string> {
 }
 
 function createCodeBlock(...languages: string[]) {
-  return languages
-    .flatMap(lang => ['```' + lang, '', '```'])
-    .join('\n')
+  return languages.flatMap(lang => ['```' + lang, '', '```']).join('\n')
 }
 
 describe('rehypeIcon', () => {
