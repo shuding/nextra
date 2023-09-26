@@ -85,7 +85,7 @@ import {useMDXComponents as _provideComponents} from \\"nextra/mdx\\";
 export const frontMatter = {};
 export const toc = [{
   depth: 2,
-  value: <>{\\"H2\\"}</>,
+  value: \\"H2\\",
   id: \\"h2\\"
 }];
 function _createMdxContent(props) {

@@ -103,15 +103,15 @@ import Last from './three.mdx'
       import Last, {toc as toc2} from './three.mdx';
       export const toc = [{
         depth: 2,
-        value: <>{\\"❤️\\"}</>,
+        value: \\"❤️\\",
         id: \\"️\\"
       }, ...toc0, {
         depth: 2,
-        value: <>{\\"✅\\"}</>,
+        value: \\"✅\\",
         id: \\"\\"
       }, ...toc1, ...toc2, {
         depth: 2,
-        value: <>{\\"👋\\"}</>,
+        value: \\"👋\\",
         id: \\"-1\\"
       }];
       function _createMdxContent(props) {

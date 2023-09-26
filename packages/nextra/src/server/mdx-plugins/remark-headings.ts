@@ -68,7 +68,10 @@ export const remarkHeadings: Plugin<
             // Attach flattened/custom #id to heading node
             headingProps.id = id
 
-            if (!isRemoteContent) {
+            if (
+              !isRemoteContent &&
+              node.children.some(child => child.type !== 'text')
+            ) {
               // @ts-expect-error -- todo
               const hast = toHast(node)
               const estree = toEstree(hast)
