@@ -1,20 +1,20 @@
-import { visit } from 'unist-util-visit'
 import type { Plugin } from 'unified'
+import { visit } from 'unist-util-visit'
+
+export const REHYPE_ICON_DEFAULT_REPLACES: Record<string, string> = {
+  js: 'JavaScriptIcon',
+  jsx: 'JavaScriptIcon',
+  ts: 'TypeScriptIcon',
+  tsx: 'TypeScriptIcon',
+  md: 'MarkdownIcon',
+  mdx: 'MdxIcon',
+  sh: 'TerminalIcon',
+  bash: 'TerminalIcon',
+  css: 'CssIcon'
+}
 
 export const rehypeIcon: Plugin<[], any> =
-  (
-    replaces: Record<string, string> = {
-      js: 'JavaScriptIcon',
-      jsx: 'JavaScriptIcon',
-      ts: 'TypeScriptIcon',
-      tsx: 'TypeScriptIcon',
-      md: 'MarkdownIcon',
-      mdx: 'MdxIcon',
-      sh: 'TerminalIcon',
-      bash: 'TerminalIcon',
-      css: 'CssIcon'
-    }
-  ) =>
+  (replaces = REHYPE_ICON_DEFAULT_REPLACES) =>
   (ast: any) => {
     ast.children.push({
       type: 'mdxjsEsm',
