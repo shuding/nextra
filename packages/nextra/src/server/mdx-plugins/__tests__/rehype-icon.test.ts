@@ -33,7 +33,7 @@ function createCodeBlock(...languages: string[]) {
 }
 
 describe('rehypeIcon', () => {
-  it('should attach import only once', async () => {
+  it('should attach same import only once', async () => {
     const raw = createCodeBlock('css', 'css')
 
     const { value } = await process(raw)
