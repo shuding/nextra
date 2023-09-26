@@ -52,21 +52,21 @@ export const TagName = () => {
     )
     expect(result).toMatch('<_components.h1 id="test-id">{"My Header"}')
     expect(result).toMatch(
-      '<_components.h2 id="extra-space">{"Some extra space"}</_components.h2>'
+      '<_components.h2 id="extra-space">{toc[0].value}</_components.h2>'
     )
     expect(result).toMatch(
-      '<_components.h3 id="extra-space-in-heading">{"Some extra space in heading"}'
+      '<_components.h3 id="extra-space-in-heading">{toc[1].value}'
     )
     expect(result).toMatch(
-      '<_components.h3 id="without-space">{"nospace"}</_components.h3>'
+      '<_components.h3 id="without-space">{toc[2].value}</_components.h3>'
     )
-    expect(result).toMatch('<_components.h4 id="другой-язык">{"foo"}')
-    expect(result).toMatch('<_components.h5 id="bar-baz-">{"bar Baz []"}')
-    expect(result).toMatch('<_components.h6 id="bar-qux-">{"bar Qux [#]"}')
+    expect(result).toMatch('<_components.h4 id="другой-язык">{toc[3].value}')
+    expect(result).toMatch('<_components.h5 id="bar-baz-">{toc[4].value}')
+    expect(result).toMatch('<_components.h6 id="bar-qux-">{toc[5].value}')
   })
   it('use github-slugger', async () => {
     const { result } = await compileMdx('### My Header', { mdxOptions })
-    expect(result).toMatch('<_components.h3 id="my-header">{"My Header"}')
+    expect(result).toMatch('<_components.h3 id="my-header">{toc[0].value}')
   })
 
   it('should merge headings from partial components', async () => {
