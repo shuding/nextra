@@ -59,7 +59,7 @@ function attachIconProp(node: any, iconName: string) {
             }
           }
         }
-      },
+      }
     ]
   })
 }
