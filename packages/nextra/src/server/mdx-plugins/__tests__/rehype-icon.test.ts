@@ -33,7 +33,7 @@ function createCodeBlock(...languages: string[]) {
 }
 
 describe('rehypeIcon', () => {
-  it.only('should attach import only once', async () => {
+  it('should attach import only once', async () => {
     const raw = createCodeBlock('css', 'css')
 
     const { value } = await process(raw)
@@ -73,12 +73,9 @@ describe('rehypeIcon', () => {
     const { value } = await process(raw)
     expect(await clean(value)).toMatchInlineSnapshot(`
       "import { JavaScriptIcon } from \\"nextra/icons\\";
-      import { JavaScriptIcon } from \\"nextra/icons\\";
-      import { TypeScriptIcon } from \\"nextra/icons\\";
       import { TypeScriptIcon } from \\"nextra/icons\\";
       import { MarkdownIcon } from \\"nextra/icons\\";
       import { MdxIcon } from \\"nextra/icons\\";
-      import { TerminalIcon } from \\"nextra/icons\\";
       import { TerminalIcon } from \\"nextra/icons\\";
       import { CssIcon } from \\"nextra/icons\\";
       function _createMdxContent(props) {
