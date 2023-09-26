@@ -1,4 +1,5 @@
 export { parseMeta, attachMeta } from './rehype.js'
+export { rehypeIcon } from './rehype-icon.js'
 export { remarkCustomHeadingId } from './remark-custom-heading-id.js'
 export { remarkMdxFrontMatter } from './remark-mdx-frontmatter.js'
 export { remarkHeadings } from './remark-headings.js'
