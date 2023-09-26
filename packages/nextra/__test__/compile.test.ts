@@ -118,20 +118,24 @@ import Last from './three.mdx'
         id: \\"-1\\"
       }, {
         depth: 2,
-        value: <>{\\"kek \\"}<div /></>,
+        value: \\"kek \\",
         id: \\"kek-\\"
       }];
       function _createMdxContent(props) {
         const _components = Object.assign({
           h2: \\"h2\\"
-        }, _provideComponents(), props.components);
-        return <><_components.h2 id=\\"️\\">{toc[0].value}</_components.h2>{\\"\\\\n\\"}<FromMdx />{\\"\\\\n\\"}<_components.h2 id=\\"\\">{toc[2].value}</_components.h2>{\\"\\\\n\\"}<FromMarkdown />{\\"\\\\n\\"}{\\"\\\\n\\"}<Last />{\\"\\\\n\\"}<IgnoreMe />{\\"\\\\n\\"}<_components.h2 id=\\"-1\\">{toc[5].value}</_components.h2>{\\"\\\\n\\"}<_components.h2 id=\\"kek-\\">{toc[6].value}</_components.h2></>;
+        }, _provideComponents(), props.components), {Kek} = _components;
+        if (!Kek) _missingMdxReference(\\"Kek\\", true);
+        return <><_components.h2 id=\\"️\\">{toc[0].value}</_components.h2>{\\"\\\\n\\"}<FromMdx />{\\"\\\\n\\"}<_components.h2 id=\\"\\">{toc[2].value}</_components.h2>{\\"\\\\n\\"}<FromMarkdown />{\\"\\\\n\\"}{\\"\\\\n\\"}<Last />{\\"\\\\n\\"}<IgnoreMe />{\\"\\\\n\\"}<_components.h2 id=\\"-1\\">{toc[5].value}</_components.h2>{\\"\\\\n\\"}<_components.h2 id=\\"kek-\\">{\\"kek \\"}<Kek /></_components.h2></>;
       }
       function MDXContent(props = {}) {
         const {wrapper: MDXLayout} = Object.assign({}, _provideComponents(), props.components);
         return MDXLayout ? <MDXLayout {...props}><_createMdxContent {...props} /></MDXLayout> : _createMdxContent(props);
       }
       export default MDXContent;
+      function _missingMdxReference(id, component) {
+        throw new Error(\\"Expected \\" + (component ? \\"component\\" : \\"object\\") + \\" \`\\" + id + \\"\` to be defined: you likely forgot to import, pass, or provide it.\\");
+      }
       "
     `)
   })
