@@ -33,8 +33,7 @@ describe('rehypeIcon', () => {
       .join('\n')
     const { value } = await process(raw)
     expect(await clean(value)).toMatchInlineSnapshot(`
-      "import { MarkdownIcon } from \\"nextra/icons\\";
-      function _createMdxContent(props) {
+      "function _createMdxContent(props) {
         const _components = Object.assign(
           {
             pre: \\"pre\\",
@@ -45,7 +44,25 @@ describe('rehypeIcon', () => {
         );
         return (
           <>
-            <_components.pre icon={MarkdownIcon}>
+            <_components.pre icon={JavaScriptIcon}>
+              <_components.code>
+                <_components.span> </_components.span>
+              </_components.code>
+            </_components.pre>
+            {\\"\\\\n\\"}
+            <_components.pre icon={JavaScriptIcon}>
+              <_components.code>
+                <_components.span> </_components.span>
+              </_components.code>
+            </_components.pre>
+            {\\"\\\\n\\"}
+            <_components.pre icon={TypeScriptIcon}>
+              <_components.code>
+                <_components.span> </_components.span>
+              </_components.code>
+            </_components.pre>
+            {\\"\\\\n\\"}
+            <_components.pre icon={TypeScriptIcon}>
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
@@ -57,43 +74,25 @@ describe('rehypeIcon', () => {
               </_components.code>
             </_components.pre>
             {\\"\\\\n\\"}
-            <_components.pre icon={MarkdownIcon}>
+            <_components.pre icon={MdxIcon}>
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {\\"\\\\n\\"}
-            <_components.pre icon={MarkdownIcon}>
+            <_components.pre icon={TerminalIcon}>
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {\\"\\\\n\\"}
-            <_components.pre icon={MarkdownIcon}>
+            <_components.pre icon={TerminalIcon}>
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {\\"\\\\n\\"}
-            <_components.pre icon={MarkdownIcon}>
-              <_components.code>
-                <_components.span> </_components.span>
-              </_components.code>
-            </_components.pre>
-            {\\"\\\\n\\"}
-            <_components.pre icon={MarkdownIcon}>
-              <_components.code>
-                <_components.span> </_components.span>
-              </_components.code>
-            </_components.pre>
-            {\\"\\\\n\\"}
-            <_components.pre icon={MarkdownIcon}>
-              <_components.code>
-                <_components.span> </_components.span>
-              </_components.code>
-            </_components.pre>
-            {\\"\\\\n\\"}
-            <_components.pre icon={MarkdownIcon}>
+            <_components.pre icon={CssIcon}>
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
