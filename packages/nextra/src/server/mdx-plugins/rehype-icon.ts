@@ -56,8 +56,7 @@ export const rehypeIcon: Plugin<[], any> =
         //   { depth: null }
         // )
         const preEl = node.children[0]
-        delete preEl.tagName
-        // delete preEl.properties
+
         Object.assign(preEl, {
           type: 'mdxJsxFlowElement',
           name: 'pre',

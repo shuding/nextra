@@ -33,75 +33,75 @@ describe('rehypeIcon', () => {
       .join('\n')
     const { value } = await process(raw)
     expect(await clean(value)).toMatchInlineSnapshot(`
-        "import { MarkdownIcon } from \\"nextra/icons\\";
-        function _createMdxContent(props) {
-          const _components = Object.assign(
-            {
-              pre: \\"pre\\",
-              code: \\"code\\",
-              span: \\"span\\",
-            },
-            props.components,
-          );
-          return (
-            <>
-              <_components.pre icon={MarkdownIcon}>
-                <_components.code data-language=\\"js\\" data-theme=\\"default\\">
-                  <_components.span> </_components.span>
-                </_components.code>
-              </_components.pre>
-              {\\"\\\\n\\"}
-              <_components.pre icon={MarkdownIcon}>
-                <_components.code data-language=\\"jsx\\" data-theme=\\"default\\">
-                  <_components.span> </_components.span>
-                </_components.code>
-              </_components.pre>
-              {\\"\\\\n\\"}
-              <_components.pre icon={MarkdownIcon}>
-                <_components.code data-language=\\"ts\\" data-theme=\\"default\\">
-                  <_components.span> </_components.span>
-                </_components.code>
-              </_components.pre>
-              {\\"\\\\n\\"}
-              <_components.pre icon={MarkdownIcon}>
-                <_components.code data-language=\\"tsx\\" data-theme=\\"default\\">
-                  <_components.span> </_components.span>
-                </_components.code>
-              </_components.pre>
-              {\\"\\\\n\\"}
-              <_components.pre icon={MarkdownIcon}>
-                <_components.code data-language=\\"md\\" data-theme=\\"default\\">
-                  <_components.span> </_components.span>
-                </_components.code>
-              </_components.pre>
-              {\\"\\\\n\\"}
-              <_components.pre icon={MarkdownIcon}>
-                <_components.code data-language=\\"mdx\\" data-theme=\\"default\\">
-                  <_components.span> </_components.span>
-                </_components.code>
-              </_components.pre>
-              {\\"\\\\n\\"}
-              <_components.pre icon={MarkdownIcon}>
-                <_components.code data-language=\\"sh\\" data-theme=\\"default\\">
-                  <_components.span> </_components.span>
-                </_components.code>
-              </_components.pre>
-              {\\"\\\\n\\"}
-              <_components.pre icon={MarkdownIcon}>
-                <_components.code data-language=\\"bash\\" data-theme=\\"default\\">
-                  <_components.span> </_components.span>
-                </_components.code>
-              </_components.pre>
-              {\\"\\\\n\\"}
-              <_components.pre icon={MarkdownIcon}>
-                <_components.code data-language=\\"css\\" data-theme=\\"default\\">
-                  <_components.span> </_components.span>
-                </_components.code>
-              </_components.pre>
-            </>
-          );
-        }
-        "
-      `)
+      "import { MarkdownIcon } from \\"nextra/icons\\";
+      function _createMdxContent(props) {
+        const _components = Object.assign(
+          {
+            pre: \\"pre\\",
+            code: \\"code\\",
+            span: \\"span\\",
+          },
+          props.components,
+        );
+        return (
+          <>
+            <_components.pre icon={MarkdownIcon}>
+              <_components.code data-language=\\"js\\">
+                <_components.span> </_components.span>
+              </_components.code>
+            </_components.pre>
+            {\\"\\\\n\\"}
+            <_components.pre icon={MarkdownIcon}>
+              <_components.code data-language=\\"jsx\\">
+                <_components.span> </_components.span>
+              </_components.code>
+            </_components.pre>
+            {\\"\\\\n\\"}
+            <_components.pre icon={MarkdownIcon}>
+              <_components.code data-language=\\"ts\\">
+                <_components.span> </_components.span>
+              </_components.code>
+            </_components.pre>
+            {\\"\\\\n\\"}
+            <_components.pre icon={MarkdownIcon}>
+              <_components.code data-language=\\"tsx\\">
+                <_components.span> </_components.span>
+              </_components.code>
+            </_components.pre>
+            {\\"\\\\n\\"}
+            <_components.pre icon={MarkdownIcon}>
+              <_components.code data-language=\\"md\\">
+                <_components.span> </_components.span>
+              </_components.code>
+            </_components.pre>
+            {\\"\\\\n\\"}
+            <_components.pre icon={MarkdownIcon}>
+              <_components.code data-language=\\"mdx\\">
+                <_components.span> </_components.span>
+              </_components.code>
+            </_components.pre>
+            {\\"\\\\n\\"}
+            <_components.pre icon={MarkdownIcon}>
+              <_components.code data-language=\\"sh\\">
+                <_components.span> </_components.span>
+              </_components.code>
+            </_components.pre>
+            {\\"\\\\n\\"}
+            <_components.pre icon={MarkdownIcon}>
+              <_components.code data-language=\\"bash\\">
+                <_components.span> </_components.span>
+              </_components.code>
+            </_components.pre>
+            {\\"\\\\n\\"}
+            <_components.pre icon={MarkdownIcon}>
+              <_components.code data-language=\\"css\\">
+                <_components.span> </_components.span>
+              </_components.code>
+            </_components.pre>
+          </>
+        );
+      }
+      "
+    `)
   })
 })
