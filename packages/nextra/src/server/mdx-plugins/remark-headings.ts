@@ -69,9 +69,12 @@ export const remarkHeadings: Plugin<
             headingProps.id = id
 
             if (!isRemoteContent) {
+              // @ts-expect-error -- todo
               const hast = toHast(node)
               const estree = toEstree(hast)
+              // @ts-expect-error -- todo
               const { children } = estree.body[0].expression
+              // @ts-expect-error -- todo
               value = {
                 type: 'JSXFragment',
                 openingFragment: {
@@ -92,6 +95,7 @@ export const remarkHeadings: Plugin<
             if (!isRemoteContent) {
               node.children = [
                 {
+                  // @ts-expect-error -- todo
                   type: 'mdxTextExpression',
                   data: {
                     estree: {
