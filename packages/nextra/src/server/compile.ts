@@ -284,7 +284,9 @@ export async function compileMdx(
           // To render <details /> and <summary /> correctly
           rehypeRaw,
           // fix Error: Cannot compile `mdxjsEsm` node for npm2yarn and mermaid
-          { passThrough: ['mdxjsEsm', 'mdxJsxFlowElement'] }
+          {
+            passThrough: ['mdxjsEsm', 'mdxJsxFlowElement', 'mdxTextExpression']
+          }
         ],
         [parseMeta, { defaultShowCopyCode }],
         ...(codeHighlight === false
