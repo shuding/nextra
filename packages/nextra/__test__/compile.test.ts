@@ -103,22 +103,22 @@ import Last from './three.mdx'
       import Last, {toc as toc2} from './three.mdx';
       export const toc = [{
         depth: 2,
-        value: \\"❤️\\",
+        value: <>{\\"❤️\\"}</>,
         id: \\"️\\"
       }, ...toc0, {
         depth: 2,
-        value: \\"✅\\",
+        value: <>{\\"✅\\"}</>,
         id: \\"\\"
       }, ...toc1, ...toc2, {
         depth: 2,
-        value: \\"👋\\",
+        value: <>{\\"👋\\"}</>,
         id: \\"-1\\"
       }];
       function _createMdxContent(props) {
         const _components = Object.assign({
           h2: \\"h2\\"
         }, _provideComponents(), props.components);
-        return <><_components.h2 id=\\"️\\">{\\"❤️\\"}</_components.h2>{\\"\\\\n\\"}<FromMdx />{\\"\\\\n\\"}<_components.h2 id=\\"\\">{\\"✅\\"}</_components.h2>{\\"\\\\n\\"}<FromMarkdown />{\\"\\\\n\\"}{\\"\\\\n\\"}<Last />{\\"\\\\n\\"}<IgnoreMe />{\\"\\\\n\\"}<_components.h2 id=\\"-1\\">{\\"👋\\"}</_components.h2></>;
+        return <><_components.h2 id=\\"️\\">{toc[0]}</_components.h2>{\\"\\\\n\\"}<FromMdx />{\\"\\\\n\\"}<_components.h2 id=\\"\\">{toc[2]}</_components.h2>{\\"\\\\n\\"}<FromMarkdown />{\\"\\\\n\\"}{\\"\\\\n\\"}<Last />{\\"\\\\n\\"}<IgnoreMe />{\\"\\\\n\\"}<_components.h2 id=\\"-1\\">{toc[5]}</_components.h2></>;
       }
       function MDXContent(props = {}) {
         const {wrapper: MDXLayout} = Object.assign({}, _provideComponents(), props.components);

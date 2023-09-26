@@ -1,6 +1,8 @@
 import type { SpreadElement } from 'estree'
 import Slugger from 'github-slugger'
+import { toEstree } from 'hast-util-to-estree'
 import type { Parent, Root } from 'mdast'
+import { toHast } from 'mdast-util-to-hast'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 import type { Heading } from '../../types'
@@ -65,7 +67,43 @@ export const remarkHeadings: Plugin<
             const id = slugger.slug(headingProps.id || value)
             // Attach flattened/custom #id to heading node
             headingProps.id = id
-            headings.push({ depth: node.depth, value, id })
+
+            const hast = toHast(node)
+            const estree = toEstree(hast)
+
+            const { children } = estree.body[0].expression
+            const length = headings.push({
+              depth: node.depth,
+              value: {
+                type: 'JSXFragment',
+                openingFragment: {
+                  type: 'JSXOpeningFragment'
+                },
+                closingFragment: {
+                  type: 'JSXClosingFragment'
+                },
+                children
+              },
+              id
+            })
+            node.children = [
+              {
+                type: 'mdxTextExpression',
+                data: {
+                  estree: {
+                    body: [
+                      {
+                        type: 'ExpressionStatement',
+                        expression: {
+                          type: 'Identifier',
+                          name: `toc[${length - 1}]`
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
           }
           return
         }
