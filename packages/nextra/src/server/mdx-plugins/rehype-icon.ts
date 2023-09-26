@@ -69,15 +69,15 @@ function attachIconProp(node: any, iconName: string) {
   })
 }
 
+const isMdxJsEsm = (node: any) => node.type === 'mdxjsEsm'
+const isImportDeclaration = (node: any) =>
+  node.data.estree.body[0].type === 'ImportDeclaration'
+const isImportFrom = (node: any) =>
+  node.data.estree.body[0].source.value === 'nextra/icons'
+
 export const rehypeIcon: Plugin<[], any> =
   (replaces = REHYPE_ICON_DEFAULT_REPLACES) =>
-  (ast: any) => {
-    const isMdxJsEsm = (node: any) => node.type === 'mdxjsEsm'
-    const isImportDeclaration = (node: any) =>
-      node.data.estree.body[0].type === 'ImportDeclaration'
-    const isImportFrom = (node: any) =>
-      node.data.estree.body[0].source.value === 'nextra/icons'
-
+  ast => {
     const imports = ast.children.filter(
       (node: any) =>
         isMdxJsEsm(node) && isImportDeclaration(node) && isImportFrom(node)
@@ -111,7 +111,6 @@ export const rehypeIcon: Plugin<[], any> =
         const importNode = createImport(iconName)
         ast.children.push(importNode)
         imports.push(importNode)
-        // console.dir(importNode, { depth: null })
       }
       attachIconProp(preEl, findImportedName || iconName)
     })
