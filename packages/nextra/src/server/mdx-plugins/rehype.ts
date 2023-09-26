@@ -36,6 +36,7 @@ export const attachMeta: Plugin<[], any> = () => ast => {
     if (node.tagName === 'pre') {
       const [codeEl] = node.children
       delete codeEl.properties['data-theme']
+      delete codeEl.properties['data-language']
 
       if (node.__filename) {
         node.properties['data-filename'] = node.__filename

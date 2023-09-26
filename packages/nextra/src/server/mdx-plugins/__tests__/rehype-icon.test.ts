@@ -46,55 +46,55 @@ describe('rehypeIcon', () => {
         return (
           <>
             <_components.pre icon={MarkdownIcon}>
-              <_components.code data-language=\\"js\\">
+              <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {\\"\\\\n\\"}
             <_components.pre icon={MarkdownIcon}>
-              <_components.code data-language=\\"jsx\\">
+              <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {\\"\\\\n\\"}
             <_components.pre icon={MarkdownIcon}>
-              <_components.code data-language=\\"ts\\">
+              <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {\\"\\\\n\\"}
             <_components.pre icon={MarkdownIcon}>
-              <_components.code data-language=\\"tsx\\">
+              <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {\\"\\\\n\\"}
             <_components.pre icon={MarkdownIcon}>
-              <_components.code data-language=\\"md\\">
+              <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {\\"\\\\n\\"}
             <_components.pre icon={MarkdownIcon}>
-              <_components.code data-language=\\"mdx\\">
+              <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {\\"\\\\n\\"}
             <_components.pre icon={MarkdownIcon}>
-              <_components.code data-language=\\"sh\\">
+              <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {\\"\\\\n\\"}
             <_components.pre icon={MarkdownIcon}>
-              <_components.code data-language=\\"bash\\">
+              <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {\\"\\\\n\\"}
             <_components.pre icon={MarkdownIcon}>
-              <_components.code data-language=\\"css\\">
+              <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
