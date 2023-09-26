@@ -13,35 +13,59 @@ export const REHYPE_ICON_DEFAULT_REPLACES: Record<string, string> = {
   css: 'CssIcon'
 }
 
-export const rehypeIcon: Plugin<[], any> =
-  (replaces = REHYPE_ICON_DEFAULT_REPLACES) =>
-  (ast: any) => {
-    ast.children.push({
-      type: 'mdxjsEsm',
-      data: {
-        estree: {
-          body: [
-            {
-              type: 'ImportDeclaration',
-              source: { type: 'Literal', value: 'nextra/icons' },
-              specifiers: [
+function createImport(iconName: string) {
+  return {
+    type: 'mdxjsEsm',
+    data: {
+      estree: {
+        body: [
+          {
+            type: 'ImportDeclaration',
+            source: { type: 'Literal', value: 'nextra/icons' },
+            specifiers: [
+              {
+                type: 'ImportSpecifier',
+                imported: { type: 'Identifier', name: iconName },
+                local: { type: 'Identifier', name: iconName }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
+
+function attachIconProp(node: any, iconName: string) {
+  Object.assign(node, {
+    type: 'mdxJsxFlowElement',
+    name: 'pre',
+    attributes: [
+      {
+        type: 'mdxJsxAttribute',
+        name: 'icon',
+        value: {
+          type: 'mdxJsxAttributeValueExpression',
+          value: 'MarkdownIcon',
+          data: {
+            estree: {
+              body: [
                 {
-                  type: 'ImportSpecifier',
-                  imported: {
-                    type: 'Identifier',
-                    name: 'MarkdownIcon'
-                  },
-                  local: {
-                    type: 'Identifier',
-                    name: 'MarkdownIcon'
-                  }
+                  type: 'ExpressionStatement',
+                  expression: { type: 'Identifier', name: iconName }
                 }
               ]
             }
-          ]
+          }
         }
       }
-    })
+    ]
+  })
+}
+
+export const rehypeIcon: Plugin<[], any> =
+  (replaces = REHYPE_ICON_DEFAULT_REPLACES) =>
+  (ast: any) => {
     visit(ast, { tagName: 'div' }, node => {
       const isRehypePrettyCode =
         'data-rehype-pretty-code-fragment' in node.properties
@@ -56,41 +80,12 @@ export const rehypeIcon: Plugin<[], any> =
         //   { depth: null }
         // )
         const preEl = node.children[0]
-
-        Object.assign(preEl, {
-          type: 'mdxJsxFlowElement',
-          name: 'pre',
-          attributes: [
-            {
-              type: 'mdxJsxAttribute',
-              name: 'icon',
-              value: {
-                type: 'mdxJsxAttributeValueExpression',
-                value: 'MarkdownIcon',
-                data: {
-                  estree: {
-                    body: [
-                      {
-                        type: 'ExpressionStatement',
-                        expression: {
-                          type: 'Identifier',
-                          name: 'MarkdownIcon'
-                        }
-                      }
-                    ],
-                    sourceType: 'module',
-                    comments: []
-                  }
-                }
-              }
-            }
-          ],
-          data: {
-            _mdxExplicitJsx: false
-          }
-        })
-
-        console.log(preEl)
+        const lang = preEl.properties['data-language']
+        const iconName = replaces[lang]
+        if (iconName) {
+          ast.children.push(createImport(iconName))
+          attachIconProp(preEl, iconName)
+        }
       }
     })
   }

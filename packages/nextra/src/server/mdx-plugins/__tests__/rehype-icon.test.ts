@@ -33,7 +33,16 @@ describe('rehypeIcon', () => {
       .join('\n')
     const { value } = await process(raw)
     expect(await clean(value)).toMatchInlineSnapshot(`
-      "function _createMdxContent(props) {
+      "import { JavaScriptIcon } from \\"nextra/icons\\";
+      import { JavaScriptIcon } from \\"nextra/icons\\";
+      import { TypeScriptIcon } from \\"nextra/icons\\";
+      import { TypeScriptIcon } from \\"nextra/icons\\";
+      import { MarkdownIcon } from \\"nextra/icons\\";
+      import { MdxIcon } from \\"nextra/icons\\";
+      import { TerminalIcon } from \\"nextra/icons\\";
+      import { TerminalIcon } from \\"nextra/icons\\";
+      import { CssIcon } from \\"nextra/icons\\";
+      function _createMdxContent(props) {
         const _components = Object.assign(
           {
             pre: \\"pre\\",
