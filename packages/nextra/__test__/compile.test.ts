@@ -69,7 +69,7 @@ export const TagName = () => {
     expect(result).toMatch('<_components.h3 id="my-header">{toc[0].value}')
   })
 
-  it('should merge headings from partial components', async () => {
+  it.only('should merge headings from partial components', async () => {
     const { result } = await compileMdx(
       `
 import FromMdx from './one.mdx'
@@ -90,7 +90,10 @@ import Last from './three.mdx'
 
 <IgnoreMe />
 
-## 👋`,
+## 👋
+
+## kek <Kek />
+`,
       { mdxOptions }
     )
     expect(result).toMatchInlineSnapshot(`
@@ -113,12 +116,16 @@ import Last from './three.mdx'
         depth: 2,
         value: \\"👋\\",
         id: \\"-1\\"
+      }, {
+        depth: 2,
+        value: <>{\\"kek \\"}<div /></>,
+        id: \\"kek-\\"
       }];
       function _createMdxContent(props) {
         const _components = Object.assign({
           h2: \\"h2\\"
         }, _provideComponents(), props.components);
-        return <><_components.h2 id=\\"️\\">{toc[0].value}</_components.h2>{\\"\\\\n\\"}<FromMdx />{\\"\\\\n\\"}<_components.h2 id=\\"\\">{toc[2].value}</_components.h2>{\\"\\\\n\\"}<FromMarkdown />{\\"\\\\n\\"}{\\"\\\\n\\"}<Last />{\\"\\\\n\\"}<IgnoreMe />{\\"\\\\n\\"}<_components.h2 id=\\"-1\\">{toc[5].value}</_components.h2></>;
+        return <><_components.h2 id=\\"️\\">{toc[0].value}</_components.h2>{\\"\\\\n\\"}<FromMdx />{\\"\\\\n\\"}<_components.h2 id=\\"\\">{toc[2].value}</_components.h2>{\\"\\\\n\\"}<FromMarkdown />{\\"\\\\n\\"}{\\"\\\\n\\"}<Last />{\\"\\\\n\\"}<IgnoreMe />{\\"\\\\n\\"}<_components.h2 id=\\"-1\\">{toc[5].value}</_components.h2>{\\"\\\\n\\"}<_components.h2 id=\\"kek-\\">{toc[6].value}</_components.h2></>;
       }
       function MDXContent(props = {}) {
         const {wrapper: MDXLayout} = Object.assign({}, _provideComponents(), props.components);

@@ -95,6 +95,7 @@ export const remarkHeadings: Plugin<
               value,
               id
             })
+
             if (!isRemoteContent) {
               node.children = [
                 {
