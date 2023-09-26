@@ -31,6 +31,7 @@ import {
 import {
   attachMeta,
   parseMeta,
+  rehypeIcon,
   remarkCustomHeadingId,
   remarkHeadings,
   remarkLinkRewrite,
@@ -42,7 +43,7 @@ import {
 } from './mdx-plugins/index.js'
 import { truthy } from './utils.js'
 
-const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS: RehypePrettyCodeOptions = {
+export const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS: RehypePrettyCodeOptions = {
   keepBackground: false,
   grid: false,
   onVisitLine(node) {
@@ -290,6 +291,7 @@ export async function compileMdx(
           ? []
           : [
               [rehypePrettyCode, DEFAULT_REHYPE_PRETTY_CODE_OPTIONS] as any,
+              !isRemoteContent && rehypeIcon,
               attachMeta
             ]),
         latex && rehypeKatex
