@@ -1,3 +1,4 @@
+import type { ImportDeclaration, ImportSpecifier } from 'estree'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 
@@ -29,7 +30,7 @@ function createImport(iconName: string) {
                 local: { type: 'Identifier', name: iconName }
               }
             ]
-          }
+          } satisfies ImportDeclaration
         ]
       }
     }
@@ -69,23 +70,40 @@ export const rehypeIcon: Plugin<[], any> =
     const isMdxJsEsm = (node: any) => node.type === 'mdxjsEsm'
     const isImportDeclaration = (node: any) =>
       node.data.estree.body[0].type === 'ImportDeclaration'
+    const isImportFrom = (node: any) =>
+      node.data.estree.body[0].source.value === 'nextra/icons'
+
+    const imports = ast.children.filter(
+      node =>
+        isMdxJsEsm(node) && isImportDeclaration(node) && isImportFrom(node)
+    )
 
     visit(ast, { tagName: 'div' }, node => {
       const isRehypePrettyCode =
         'data-rehype-pretty-code-fragment' in node.properties
       if (isRehypePrettyCode) {
-        // console.dir(
-        //   ast.children
-        //     .filter(isMdxJsEsm)
-        //     .filter(isImportDeclaration),
-        //   { depth: null }
-        // )
         const preEl = node.children[0]
         const lang = preEl.properties['data-language']
         const iconName = replaces[lang]
         if (iconName) {
-          ast.children.push(createImport(iconName))
-          attachIconProp(preEl, iconName)
+          let findImportedName: string
+          for (const { data } of imports) {
+            const [{ specifiers }] = data.estree.body
+            const isMatch = (specifiers as ImportSpecifier[]).some(
+              spec => spec.imported.name === iconName
+            )
+            if (isMatch) {
+              findImportedName = specifiers[0].local.name
+              break
+            }
+          }
+          if (!findImportedName) {
+            const importNode = createImport(iconName)
+            ast.children.push(importNode)
+            imports.push(importNode)
+            // console.dir(importNode, { depth: null })
+          }
+          attachIconProp(preEl, findImportedName || iconName)
         }
       }
     })

@@ -39,7 +39,6 @@ describe('rehypeIcon', () => {
     const { value } = await process(raw)
     expect(await clean(value)).toMatchInlineSnapshot(`
       "import { CssIcon } from \\"nextra/icons\\";
-      import { CssIcon } from \\"nextra/icons\\";
       function _createMdxContent(props) {
         const _components = Object.assign(
           {
