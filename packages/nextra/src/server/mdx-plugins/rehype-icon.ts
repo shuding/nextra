@@ -66,13 +66,14 @@ function attachIconProp(node: any, iconName: string) {
 export const rehypeIcon: Plugin<[], any> =
   (replaces = REHYPE_ICON_DEFAULT_REPLACES) =>
   (ast: any) => {
+    const isMdxJsEsm = (node: any) => node.type === 'mdxjsEsm'
+    const isImportDeclaration = (node: any) =>
+      node.data.estree.body[0].type === 'ImportDeclaration'
+
     visit(ast, { tagName: 'div' }, node => {
       const isRehypePrettyCode =
         'data-rehype-pretty-code-fragment' in node.properties
       if (isRehypePrettyCode) {
-        // const isMdxJsEsm = (node: any) => node.type === 'mdxjsEsm'
-        // const isImportDeclaration = (node: any) =>
-        //   node.data.estree.body[0].type === 'ImportDeclaration'
         // console.dir(
         //   ast.children
         //     .filter(isMdxJsEsm)

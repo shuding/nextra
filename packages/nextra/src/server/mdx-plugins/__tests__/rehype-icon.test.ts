@@ -26,11 +26,51 @@ function clean(content: any): Promise<string> {
   return prettier.format(cleanedContent, { parser: 'typescript' })
 }
 
+function createCodeBlock(...languages: string[]) {
+  return languages
+    .flatMap(lang => ['```' + lang, '', '```'])
+    .join('\n')
+}
+
 describe('rehypeIcon', () => {
+  it.only('should attach import only once', async () => {
+    const raw = createCodeBlock('css', 'css')
+
+    const { value } = await process(raw)
+    expect(await clean(value)).toMatchInlineSnapshot(`
+      "import { CssIcon } from \\"nextra/icons\\";
+      import { CssIcon } from \\"nextra/icons\\";
+      function _createMdxContent(props) {
+        const _components = Object.assign(
+          {
+            pre: \\"pre\\",
+            code: \\"code\\",
+            span: \\"span\\",
+          },
+          props.components,
+        );
+        return (
+          <>
+            <_components.pre icon={CssIcon}>
+              <_components.code>
+                <_components.span> </_components.span>
+              </_components.code>
+            </_components.pre>
+            {\\"\\\\n\\"}
+            <_components.pre icon={CssIcon}>
+              <_components.code>
+                <_components.span> </_components.span>
+              </_components.code>
+            </_components.pre>
+          </>
+        );
+      }
+      "
+    `)
+  })
   it('should work with different language', async () => {
-    const raw = Object.keys(REHYPE_ICON_DEFAULT_REPLACES)
-      .flatMap(lang => ['```' + lang, '', '```'])
-      .join('\n')
+    const raw = createCodeBlock(...Object.keys(REHYPE_ICON_DEFAULT_REPLACES))
+
     const { value } = await process(raw)
     expect(await clean(value)).toMatchInlineSnapshot(`
       "import { JavaScriptIcon } from \\"nextra/icons\\";
