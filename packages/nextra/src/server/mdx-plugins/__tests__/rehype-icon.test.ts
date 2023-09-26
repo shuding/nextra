@@ -48,13 +48,13 @@ describe('rehypeIcon', () => {
         );
         return (
           <>
-            <_components.pre icon={CssIcon} data-language=\\"css\\" data-theme=\\"default\\">
+            <_components.pre icon={CssIcon} data-language=\\"css\\" data-copy=\\"\\">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {\\"\\\\n\\"}
-            <_components.pre icon={CssIcon} data-language=\\"css\\" data-theme=\\"default\\">
+            <_components.pre icon={CssIcon} data-language=\\"css\\" data-copy=\\"\\">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
@@ -87,83 +87,55 @@ describe('rehypeIcon', () => {
         );
         return (
           <>
-            <_components.pre
-              icon={JavaScriptIcon}
-              data-language=\\"js\\"
-              data-theme=\\"default\\"
-            >
+            <_components.pre icon={JavaScriptIcon} data-language=\\"js\\" data-copy=\\"\\">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {\\"\\\\n\\"}
-            <_components.pre
-              icon={JavaScriptIcon}
-              data-language=\\"jsx\\"
-              data-theme=\\"default\\"
-            >
+            <_components.pre icon={JavaScriptIcon} data-language=\\"jsx\\" data-copy=\\"\\">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {\\"\\\\n\\"}
-            <_components.pre
-              icon={TypeScriptIcon}
-              data-language=\\"ts\\"
-              data-theme=\\"default\\"
-            >
+            <_components.pre icon={TypeScriptIcon} data-language=\\"ts\\" data-copy=\\"\\">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {\\"\\\\n\\"}
-            <_components.pre
-              icon={TypeScriptIcon}
-              data-language=\\"tsx\\"
-              data-theme=\\"default\\"
-            >
+            <_components.pre icon={TypeScriptIcon} data-language=\\"tsx\\" data-copy=\\"\\">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {\\"\\\\n\\"}
-            <_components.pre
-              icon={MarkdownIcon}
-              data-language=\\"md\\"
-              data-theme=\\"default\\"
-            >
+            <_components.pre icon={MarkdownIcon} data-language=\\"md\\" data-copy=\\"\\">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {\\"\\\\n\\"}
-            <_components.pre icon={MdxIcon} data-language=\\"mdx\\" data-theme=\\"default\\">
+            <_components.pre icon={MdxIcon} data-language=\\"mdx\\" data-copy=\\"\\">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {\\"\\\\n\\"}
-            <_components.pre
-              icon={TerminalIcon}
-              data-language=\\"sh\\"
-              data-theme=\\"default\\"
-            >
+            <_components.pre icon={TerminalIcon} data-language=\\"sh\\" data-copy=\\"\\">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {\\"\\\\n\\"}
-            <_components.pre
-              icon={TerminalIcon}
-              data-language=\\"bash\\"
-              data-theme=\\"default\\"
-            >
+            <_components.pre icon={TerminalIcon} data-language=\\"bash\\" data-copy=\\"\\">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {\\"\\\\n\\"}
-            <_components.pre icon={CssIcon} data-language=\\"css\\" data-theme=\\"default\\">
+            <_components.pre icon={CssIcon} data-language=\\"css\\" data-copy=\\"\\">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>

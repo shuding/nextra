@@ -44,6 +44,15 @@ export const attachMeta: Plugin<[], any> = () => ast => {
       if (node.__hasCopyCode) {
         node.properties['data-copy'] = ''
       }
+      if (node.type === 'mdxJsxFlowElement') {
+        node.attributes.push(
+          ...Object.entries(node.properties).map(([name, value]) => ({
+            type: 'mdxJsxAttribute',
+            name,
+            value
+          }))
+        )
+      }
     } else {
       // remove class="line"
       delete node.children[0].properties.className
