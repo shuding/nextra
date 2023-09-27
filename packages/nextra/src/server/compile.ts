@@ -321,24 +321,34 @@ export async function compileMdx(
           )
 
           const tocProperties = toc.declaration.declarations[0].init.elements
-          console.dir(tocProperties, {depth: null})
+
           // console.dir(, { depth: 6 })
           for (const heading of headings) {
-            const id = heading.openingElement.attributes.find(
+            const idNode = heading.openingElement.attributes.find(
               attr => attr.name.name === 'id'
-            )?.value.value
+            )
+
+            const id = idNode.value.value
 
             const foundIndex = tocProperties.findIndex(o => {
               if (o.type !== 'ObjectExpression') return false
-              const object = Object.fromEntries(o.properties.map(prop => [prop.key.name, prop.value.value]))
+              const object = Object.fromEntries(
+                o.properties.map(prop => [prop.key.name, prop.value.value])
+              )
               return object.id === id
             })
+
             if (foundIndex === -1) continue
 
-            const valueNode = tocProperties[foundIndex].properties.find(prop => prop.key.name === 'value')
+            const valueNode = tocProperties[foundIndex].properties.find(
+              prop => prop.key.name === 'value'
+            )
 
-
-            const isMatch = heading.children.some(child => child.type !== 'JSXExpressionContainer' || child.expression.type !== 'Literal')
+            const isMatch = heading.children.some(
+              child =>
+                child.type !== 'JSXExpressionContainer' ||
+                child.expression.type !== 'Literal'
+            )
 
             if (isMatch) {
               valueNode.value = {
@@ -352,6 +362,14 @@ export async function compileMdx(
                   type: 'JSXClosingFragment'
                 },
                 children: heading.children
+              }
+            }
+
+            idNode.value = {
+              type: 'JSXExpressionContainer',
+              expression: {
+                type: 'Identifier',
+                name: `toc[${foundIndex}].id`
               }
             }
 
