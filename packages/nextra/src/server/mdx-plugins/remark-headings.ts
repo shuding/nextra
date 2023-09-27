@@ -125,7 +125,7 @@ export const remarkHeadings: Plugin<
                   }
                 ]
               })
-              if (isText) {
+              // if (isText) {
                 node.children = [
                   {
                     // @ts-expect-error -- todo
@@ -145,7 +145,7 @@ export const remarkHeadings: Plugin<
                     }
                   }
                 ]
-              }
+              // }
             }
           }
           return
