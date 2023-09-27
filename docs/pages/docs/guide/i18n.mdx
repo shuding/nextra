@@ -22,8 +22,8 @@ const withNextra = require('nextra')({
 
 module.exports = withNextra({
   i18n: {
-    locales: ['en', 'zh', 'de'],
-    defaultLocale: 'en'
+    locales: ['en-US', 'zh-CN', 'de-DE'],
+    defaultLocale: 'en-US'
   }
 })
 ```
@@ -54,12 +54,12 @@ locale too):
 
 ```plaintext
 /pages
-  _meta.en.json
-  _meta.zh.json
-  _meta.de.json
-  index.en.md
-  index.zh.md
-  index.de.md
+  _meta.en-US.json
+  _meta.zh-CN.json
+  _meta.de-DE.json
+  index.en-US.md
+  index.zh-CN.md
+  index.de-DE.md
   ...
 ```
 
@@ -70,10 +70,10 @@ language dropdown:
 
 ```js filename="theme.config.jsx"
 i18n: [
-  { locale: 'en', text: 'English' },
-  { locale: 'zh', text: '中文' },
-  { locale: 'de', text: 'Deutsch' },
-  { locale: 'ar', text: 'العربية', direction: 'rtl' }
+  { locale: 'en-US', text: 'English' },
+  { locale: 'zh-CN', text: '中文' },
+  { locale: 'de-DE', text: 'Deutsch' },
+  { locale: 'ar-SA', text: 'العربية', direction: 'rtl' }
 ]
 ```
 
