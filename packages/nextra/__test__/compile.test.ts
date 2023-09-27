@@ -127,12 +127,22 @@ import Last from './three.mdx'
           },
           {
             depth: 2,
-            value: \\"kek \\",
+            value: (
+              <>
+                {\\"kek \\"}
+                <div />
+              </>
+            ),
             id: \\"kek-\\",
           },
           {
             depth: 2,
-            value: \\"try me\\",
+            value: (
+              <>
+                <code>{\\"try\\"}</code>
+                {\\" me\\"}
+              </>
+            ),
             id: \\"try-me\\",
           },
         ];

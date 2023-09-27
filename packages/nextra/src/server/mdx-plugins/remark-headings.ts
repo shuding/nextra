@@ -1,8 +1,8 @@
 import type { SpreadElement } from 'estree'
 import Slugger from 'github-slugger'
-// import { toEstree } from 'hast-util-to-estree'
+import { toEstree } from 'hast-util-to-estree'
 import type { Parent, Root } from 'mdast'
-// import { toHast } from 'mdast-util-to-hast'
+import { toHast } from 'mdast-util-to-hast'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 import type { Heading } from '../../types'
@@ -63,31 +63,31 @@ export const remarkHeadings: Plugin<
           if (SKIP_FOR_PARENT_NAMES.has((parent as any).name)) {
             delete headingProps.id
           } else {
-            const value = getFlattenedValue(node)
+            let value = getFlattenedValue(node)
             const id = slugger.slug(headingProps.id || value)
             // Attach flattened/custom #id to heading node
             headingProps.id = id
 
             const isText = node.children.every(child => child.type === 'text')
 
-            // if (!isRemoteContent && !isText) {
-            //   // @ts-expect-error -- todo
-            //   const hast = toHast(node)
-            //   const estree = toEstree(hast)
-            //   // @ts-expect-error -- todo
-            //   const { children } = estree.body[0].expression
-            //   // @ts-expect-error -- todo
-            //   value = {
-            //     type: 'JSXFragment',
-            //     openingFragment: {
-            //       type: 'JSXOpeningFragment'
-            //     },
-            //     closingFragment: {
-            //       type: 'JSXClosingFragment'
-            //     },
-            //     children
-            //   }
-            // }
+            if (!isRemoteContent && !isText) {
+              // @ts-expect-error -- todo
+              const hast = toHast(node)
+              const estree = toEstree(hast)
+              // @ts-expect-error -- todo
+              const { children } = estree.body[0].expression
+              // @ts-expect-error -- todo
+              value = {
+                type: 'JSXFragment',
+                openingFragment: {
+                  type: 'JSXOpeningFragment'
+                },
+                closingFragment: {
+                  type: 'JSXClosingFragment'
+                },
+                children
+              }
+            }
 
             const length = headings.push({
               depth: node.depth,
