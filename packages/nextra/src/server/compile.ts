@@ -383,6 +383,10 @@ export async function compileMdx(
               }
             ]
           }
+
+          // Set toc as let and as empty array
+          toc.declaration.kind = 'let'
+          toc.declaration.declarations[0].init.elements = []
         }
       ]
     })
