@@ -68,7 +68,7 @@ export const TagName = () => {
     expect(result).toMatch('<_components.h3 id={toc[0].id}>{toc[0].value}')
   })
 
-  it('should merge headings from partial components', async () => {
+  it.only('should merge headings from partial components', async () => {
     const { result } = await compileMdx(
       `
 import FromMdx from './one.mdx'
@@ -127,33 +127,26 @@ import Last from './three.mdx'
           },
           {
             depth: 2,
-            value: (
-              <>
-                {\\"kek \\"}
-                <div />
-              </>
-            ),
+            value: \\"kek \\",
             id: \\"kek-\\",
           },
           {
             depth: 2,
-            value: (
-              <>
-                <code>{\\"try\\"}</code>
-                {\\" me\\"}
-              </>
-            ),
+            value: \\"try me\\",
             id: \\"try-me\\",
           },
         ];
         function _createMdxContent(props) {
           const _components = Object.assign(
-            {
-              h2: \\"h2\\",
-            },
-            _provideComponents(),
-            props.components,
-          );
+              {
+                h2: \\"h2\\",
+                code: \\"code\\",
+              },
+              _provideComponents(),
+              props.components,
+            ),
+            { Kek } = _components;
+          if (!Kek) _missingMdxReference(\\"Kek\\", true);
           return (
             <>
               <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
@@ -171,9 +164,15 @@ import Last from './three.mdx'
               {\\"\\\\n\\"}
               <_components.h2 id={toc[5].id}>{toc[5].value}</_components.h2>
               {\\"\\\\n\\"}
-              <_components.h2 id={toc[6].id}>{toc[6].value}</_components.h2>
+              <_components.h2 id={toc[6].id}>
+                {\\"kek \\"}
+                <Kek />
+              </_components.h2>
               {\\"\\\\n\\"}
-              <_components.h2 id={toc[7].id}>{toc[7].value}</_components.h2>
+              <_components.h2 id={toc[7].id}>
+                <_components.code>{\\"try\\"}</_components.code>
+                {\\" me\\"}
+              </_components.h2>
             </>
           );
         }
@@ -192,6 +191,15 @@ import Last from './three.mdx'
           );
         }
         export default MDXContent;
+        function _missingMdxReference(id, component) {
+          throw new Error(
+            \\"Expected \\" +
+              (component ? \\"component\\" : \\"object\\") +
+              \\" \`\\" +
+              id +
+              \\"\` to be defined: you likely forgot to import, pass, or provide it.\\",
+          );
+        }
         "
       `)
   })

@@ -63,31 +63,31 @@ export const remarkHeadings: Plugin<
           if (SKIP_FOR_PARENT_NAMES.has((parent as any).name)) {
             delete headingProps.id
           } else {
-            let value = getFlattenedValue(node)
+            const value = getFlattenedValue(node)
             const id = slugger.slug(headingProps.id || value)
             // Attach flattened/custom #id to heading node
             headingProps.id = id
 
             const isText = node.children.every(child => child.type === 'text')
 
-            if (!isRemoteContent && !isText) {
-              // @ts-expect-error -- todo
-              const hast = toHast(node)
-              const estree = toEstree(hast)
-              // @ts-expect-error -- todo
-              const { children } = estree.body[0].expression
-              // @ts-expect-error -- todo
-              value = {
-                type: 'JSXFragment',
-                openingFragment: {
-                  type: 'JSXOpeningFragment'
-                },
-                closingFragment: {
-                  type: 'JSXClosingFragment'
-                },
-                children
-              }
-            }
+            // if (!isRemoteContent && !isText) {
+            //   // @ts-expect-error -- todo
+            //   const hast = toHast(node)
+            //   const estree = toEstree(hast)
+            //   // @ts-expect-error -- todo
+            //   const { children } = estree.body[0].expression
+            //   // @ts-expect-error -- todo
+            //   value = {
+            //     type: 'JSXFragment',
+            //     openingFragment: {
+            //       type: 'JSXOpeningFragment'
+            //     },
+            //     closingFragment: {
+            //       type: 'JSXClosingFragment'
+            //     },
+            //     children
+            //   }
+            // }
 
             const length = headings.push({
               depth: node.depth,
@@ -125,7 +125,7 @@ export const remarkHeadings: Plugin<
                   }
                 ]
               })
-              // if (isText) {
+              if (isText) {
                 node.children = [
                   {
                     // @ts-expect-error -- todo
@@ -145,7 +145,7 @@ export const remarkHeadings: Plugin<
                     }
                   }
                 ]
-              // }
+              }
             }
           }
           return
