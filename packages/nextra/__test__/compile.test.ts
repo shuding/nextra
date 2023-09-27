@@ -106,46 +106,7 @@ import Last from './three.mdx'
         import FromMarkdown, { toc as toc1 } from \\"./two.md\\";
         import IgnoreMe from \\"./foo\\";
         import Last, { toc as toc2 } from \\"./three.mdx\\";
-        export const toc = [
-          {
-            depth: 2,
-            value: \\"❤️\\",
-            id: \\"️\\",
-          },
-          ...toc0,
-          {
-            depth: 2,
-            value: \\"✅\\",
-            id: \\"\\",
-          },
-          ...toc1,
-          ...toc2,
-          {
-            depth: 2,
-            value: \\"👋\\",
-            id: \\"-1\\",
-          },
-          {
-            depth: 2,
-            value: (
-              <>
-                {\\"kek \\"}
-                <Kek />
-              </>
-            ),
-            id: \\"kek-\\",
-          },
-          {
-            depth: 2,
-            value: (
-              <>
-                <_components.code>{\\"try\\"}</_components.code>
-                {\\" me\\"}
-              </>
-            ),
-            id: \\"try-me\\",
-          },
-        ];
+        export let toc = [];
         function _createMdxContent(props) {
           const _components = Object.assign(
               {
