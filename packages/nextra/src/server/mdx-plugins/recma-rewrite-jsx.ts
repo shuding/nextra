@@ -1,3 +1,5 @@
+import type { ObjectExpression, SpreadElement } from 'estree'
+import type { JsxAttribute } from 'estree-util-to-js/lib/jsx'
 import type { Plugin } from 'unified'
 
 export const recmaRewriteJsx: Plugin<[], any> = () => ast => {
@@ -26,14 +28,17 @@ export const recmaRewriteJsx: Plugin<[], any> = () => ast => {
   // console.dir(, { depth: 6 })
   for (const heading of headings) {
     const idNode = heading.openingElement.attributes.find(
-      attr => attr.name.name === 'id'
+      (attr: JsxAttribute) => attr.name.name === 'id'
     )
 
     const id = idNode.value.value
 
-    const foundIndex = tocProperties.findIndex(o => {
-      if (o.type !== 'ObjectExpression') return false
+    const foundIndex = (
+      tocProperties as (ObjectExpression | SpreadElement)[]
+    ).findIndex(o => {
+      if (o.type !== 'ObjectExpression') return
       const object = Object.fromEntries(
+        // @ts-expect-error
         o.properties.map(prop => [prop.key.name, prop.value.value])
       )
       return object.id === id
@@ -42,10 +47,12 @@ export const recmaRewriteJsx: Plugin<[], any> = () => ast => {
     if (foundIndex === -1) continue
 
     const valueNode = tocProperties[foundIndex].properties.find(
+      // @ts-expect-error
       prop => prop.key.name === 'value'
     )
 
     const isMatch = heading.children.some(
+      // @ts-expect-error
       child =>
         child.type !== 'JSXExpressionContainer' ||
         child.expression.type !== 'Literal'
