@@ -127,12 +127,22 @@ import Last from './three.mdx'
           },
           {
             depth: 2,
-            value: \\"kek \\",
+            value: (
+              <>
+                {\\"kek \\"}
+                <Kek />
+              </>
+            ),
             id: \\"kek-\\",
           },
           {
             depth: 2,
-            value: \\"try me\\",
+            value: (
+              <>
+                <_components.code>{\\"try\\"}</_components.code>
+                {\\" me\\"}
+              </>
+            ),
             id: \\"try-me\\",
           },
         ];
@@ -149,15 +159,11 @@ import Last from './three.mdx'
           if (!Kek) _missingMdxReference(\\"Kek\\", true);
           return (
             <>
-              <_components.h2 id=\\"️\\">
-                <>{\\"❤️\\"}</>
-              </_components.h2>
+              <_components.h2 id=\\"️\\">{toc[0].value}</_components.h2>
               {\\"\\\\n\\"}
               <FromMdx />
               {\\"\\\\n\\"}
-              <_components.h2 id=\\"\\">
-                <>{\\"✅\\"}</>
-              </_components.h2>
+              <_components.h2 id=\\"\\">{toc[2].value}</_components.h2>
               {\\"\\\\n\\"}
               <FromMarkdown />
               {\\"\\\\n\\"}
@@ -166,23 +172,11 @@ import Last from './three.mdx'
               {\\"\\\\n\\"}
               <IgnoreMe />
               {\\"\\\\n\\"}
-              <_components.h2 id=\\"-1\\">
-                <>{\\"👋\\"}</>
-              </_components.h2>
+              <_components.h2 id=\\"-1\\">{toc[5].value}</_components.h2>
               {\\"\\\\n\\"}
-              <_components.h2 id=\\"kek-\\">
-                <>
-                  {\\"kek \\"}
-                  <Kek />
-                </>
-              </_components.h2>
+              <_components.h2 id=\\"kek-\\">{toc[6].value}</_components.h2>
               {\\"\\\\n\\"}
-              <_components.h2 id=\\"try-me\\">
-                <>
-                  <_components.code>{\\"try\\"}</_components.code>
-                  {\\" me\\"}
-                </>
-              </_components.h2>
+              <_components.h2 id=\\"try-me\\">{toc[7].value}</_components.h2>
             </>
           );
         }
