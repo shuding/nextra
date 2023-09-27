@@ -305,9 +305,12 @@ export async function compileMdx(
               o.type === 'FunctionDeclaration' &&
               o.id.name === '_createMdxContent'
           )
-          const returnStatement = createMdxContent.body.body.find(
+          const returnStatementIndex = createMdxContent.body.body.findIndex(
             o => o.type === 'ReturnStatement'
           )
+
+          const returnStatement =
+            createMdxContent.body.body[returnStatementIndex]
           const isHeading = (o: any): boolean => {
             const name = o.openingElement?.name.property?.name
             if (!name) return false
@@ -383,6 +386,22 @@ export async function compileMdx(
               }
             ]
           }
+
+          createMdxContent.body.body.splice(returnStatementIndex - 1, 0, {
+            type: 'ExpressionStatement',
+            expression: {
+              type: 'AssignmentExpression',
+              operator: '=',
+              left: {
+                type: 'Identifier',
+                name: 'toc'
+              },
+              right: {
+                type: 'ArrayExpression',
+                elements: toc.declaration.declarations[0].init.elements
+              }
+            }
+          })
 
           // Set toc as let and as empty array
           toc.declaration.kind = 'let'

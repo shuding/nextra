@@ -117,6 +117,46 @@ import Last from './three.mdx'
               props.components,
             ),
             { Kek } = _components;
+          toc = [
+            {
+              depth: 2,
+              value: \\"❤️\\",
+              id: \\"️\\",
+            },
+            ...toc0,
+            {
+              depth: 2,
+              value: \\"✅\\",
+              id: \\"\\",
+            },
+            ...toc1,
+            ...toc2,
+            {
+              depth: 2,
+              value: \\"👋\\",
+              id: \\"-1\\",
+            },
+            {
+              depth: 2,
+              value: (
+                <>
+                  {\\"kek \\"}
+                  <Kek />
+                </>
+              ),
+              id: \\"kek-\\",
+            },
+            {
+              depth: 2,
+              value: (
+                <>
+                  <_components.code>{\\"try\\"}</_components.code>
+                  {\\" me\\"}
+                </>
+              ),
+              id: \\"try-me\\",
+            },
+          ];
           if (!Kek) _missingMdxReference(\\"Kek\\", true);
           return (
             <>
