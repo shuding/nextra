@@ -2,6 +2,8 @@ import type { ObjectExpression, SpreadElement } from 'estree'
 import type { JsxAttribute } from 'estree-util-to-js/lib/jsx'
 import type { Plugin } from 'unified'
 
+const HEADING_NAMES = new Set(['h2', 'h3', 'h4', 'h5', 'h6'])
+
 export const recmaRewriteJsx: Plugin<[], any> = () => ast => {
   const createMdxContent = ast.body.find(
     o => o.type === 'FunctionDeclaration' && o.id.name === '_createMdxContent'
@@ -11,21 +13,22 @@ export const recmaRewriteJsx: Plugin<[], any> = () => ast => {
   )
 
   const returnStatement = createMdxContent.body.body[returnStatementIndex]
-  const isHeading = (o: any): boolean => {
+
+  function isHeading(o: any): boolean {
     const name = o.openingElement?.name.property?.name
-    if (!name) return false
-    return new Set(['h2', 'h3', 'h4', 'h5', 'h6']).has(name)
+    return name && HEADING_NAMES.has(name)
   }
+
   const headings = returnStatement.argument.children.filter(isHeading)
   const toc = ast.body.find(
-    o =>
-      o.type === 'ExportNamedDeclaration' &&
-      o.declaration.declarations[0].id.name === 'toc'
+    // @ts-expect-error
+    node =>
+      node.type === 'ExportNamedDeclaration' &&
+      node.declaration.declarations[0].id.name === 'toc'
   )
 
   const tocProperties = toc.declaration.declarations[0].init.elements
 
-  // console.dir(, { depth: 6 })
   for (const heading of headings) {
     const idNode = heading.openingElement.attributes.find(
       (attr: JsxAttribute) => attr.name.name === 'id'
@@ -35,11 +38,11 @@ export const recmaRewriteJsx: Plugin<[], any> = () => ast => {
 
     const foundIndex = (
       tocProperties as (ObjectExpression | SpreadElement)[]
-    ).findIndex(o => {
-      if (o.type !== 'ObjectExpression') return
+    ).findIndex(node => {
+      if (node.type !== 'ObjectExpression') return
       const object = Object.fromEntries(
         // @ts-expect-error
-        o.properties.map(prop => [prop.key.name, prop.value.value])
+        node.properties.map(prop => [prop.key.name, prop.value.value])
       )
       return object.id === id
     })
@@ -48,14 +51,14 @@ export const recmaRewriteJsx: Plugin<[], any> = () => ast => {
 
     const valueNode = tocProperties[foundIndex].properties.find(
       // @ts-expect-error
-      prop => prop.key.name === 'value'
+      node => node.key.name === 'value'
     )
 
     const isMatch = heading.children.some(
       // @ts-expect-error
-      child =>
-        child.type !== 'JSXExpressionContainer' ||
-        child.expression.type !== 'Literal'
+      node =>
+        node.type !== 'JSXExpressionContainer' ||
+        node.expression.type !== 'Literal'
     )
 
     if (isMatch) {
