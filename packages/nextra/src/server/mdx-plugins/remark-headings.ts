@@ -95,18 +95,41 @@ export const remarkHeadings: Plugin<
               id
             })
 
-            // const hast = toHast(node)
-            // const estree = toEstree(hast)
-            // const hEl = estree.body[0].expression
-            Object.assign(node, {
-              type: 'mdxJsxFlowElement',
-              name: 'h' + node.depth,
-              attributes: [
-                {
-                  type: 'mdxJsxAttribute',
-                  name: 'id',
-                  value: {
-                    type: 'mdxJsxAttributeValueExpression',
+            if (!isRemoteContent) {
+              // const hast = toHast(node)
+              // const estree = toEstree(hast)
+              // const hEl = estree.body[0].expression
+              Object.assign(node, {
+                type: 'mdxJsxFlowElement',
+                name: 'h' + node.depth,
+                attributes: [
+                  {
+                    type: 'mdxJsxAttribute',
+                    name: 'id',
+                    value: {
+                      type: 'mdxJsxAttributeValueExpression',
+                      data: {
+                        estree: {
+                          body: [
+                            {
+                              type: 'ExpressionStatement',
+                              expression: {
+                                type: 'Identifier',
+                                name: `toc[${length - 1}].id`
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              })
+              if (isText) {
+                node.children = [
+                  {
+                    // @ts-expect-error -- todo
+                    type: 'mdxTextExpression',
                     data: {
                       estree: {
                         body: [
@@ -114,37 +137,15 @@ export const remarkHeadings: Plugin<
                             type: 'ExpressionStatement',
                             expression: {
                               type: 'Identifier',
-                              name: `toc[${length - 1}].id`
+                              name: `toc[${length - 1}].value`
                             }
                           }
                         ]
                       }
                     }
                   }
-                }
-              ]
-            })
-
-            if (!isRemoteContent && isText) {
-              node.children = [
-                {
-                  // @ts-expect-error -- todo
-                  type: 'mdxTextExpression',
-                  data: {
-                    estree: {
-                      body: [
-                        {
-                          type: 'ExpressionStatement',
-                          expression: {
-                            type: 'Identifier',
-                            name: `toc[${length - 1}].value`
-                          }
-                        }
-                      ]
-                    }
-                  }
-                }
-              ]
+                ]
+              }
             }
           }
           return
