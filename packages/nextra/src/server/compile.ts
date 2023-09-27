@@ -297,7 +297,37 @@ export async function compileMdx(
               attachMeta
             ]),
         latex && rehypeKatex
-      ].filter(truthy)
+      ].filter(truthy),
+      recmaPlugins: [
+        () => ast => {
+          const createMdxContent = ast.body.find(
+            o =>
+              o.type === 'FunctionDeclaration' &&
+              o.id.name === '_createMdxContent'
+          )
+          const returnStatement = createMdxContent.body.body.find(
+            o => o.type === 'ReturnStatement'
+          )
+          const isHeading = (o: any): boolean => {
+            const name = o.openingElement?.name.property?.name
+            if (!name) return false
+            return new Set(['h2', 'h3', 'h4', 'h5', 'h6']).has(name)
+          }
+          const headings = returnStatement.argument.children.filter(isHeading)
+
+          for (const heading of headings) {
+            heading.children = [
+              {
+                type: 'JSXExpressionContainer',
+                expression: {
+                  type: 'Identifier',
+                  name: 'hello'
+                }
+              }
+            ]
+          }
+        }
+      ]
     })
   }
 }

@@ -149,11 +149,11 @@ import Last from './three.mdx'
           if (!Kek) _missingMdxReference(\\"Kek\\", true);
           return (
             <>
-              <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
+              <_components.h2 id=\\"️\\">{hello}</_components.h2>
               {\\"\\\\n\\"}
               <FromMdx />
               {\\"\\\\n\\"}
-              <_components.h2 id={toc[2].id}>{toc[2].value}</_components.h2>
+              <_components.h2 id=\\"\\">{hello}</_components.h2>
               {\\"\\\\n\\"}
               <FromMarkdown />
               {\\"\\\\n\\"}
@@ -162,17 +162,11 @@ import Last from './three.mdx'
               {\\"\\\\n\\"}
               <IgnoreMe />
               {\\"\\\\n\\"}
-              <_components.h2 id={toc[5].id}>{toc[5].value}</_components.h2>
+              <_components.h2 id=\\"-1\\">{hello}</_components.h2>
               {\\"\\\\n\\"}
-              <_components.h2 id={toc[6].id}>
-                {\\"kek \\"}
-                <Kek />
-              </_components.h2>
+              <_components.h2 id=\\"kek-\\">{hello}</_components.h2>
               {\\"\\\\n\\"}
-              <_components.h2 id={toc[7].id}>
-                <_components.code>{\\"try\\"}</_components.code>
-                {\\" me\\"}
-              </_components.h2>
+              <_components.h2 id=\\"try-me\\">{hello}</_components.h2>
             </>
           );
         }
