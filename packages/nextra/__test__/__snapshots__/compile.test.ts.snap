@@ -29,27 +29,29 @@ export default MDXContent;
 `;
 
 exports[`Process heading > code-with-text-h1 1`] = `
-{
-  "frontMatter": {},
-  "result": "/*@jsxRuntime automatic @jsxImportSource react*/
-import {useMDXComponents as _provideComponents} from \\"nextra/mdx\\";
+"import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
 export const frontMatter = {};
-export const toc = [];
+export function useTOC(props) {
+  return [];
+}
 function _createMdxContent(props) {
-  const _components = Object.assign({
-    h1: \\"h1\\",
-    code: \\"code\\"
-  }, _provideComponents(), props.components);
-  return <_components.h1><_components.code>{\\"codegen.yml\\"}</_components.code>{\\" file\\"}</_components.h1>;
+  const { toc } = props;
+  const _components = Object.assign(
+    {
+      h1: \\"h1\\",
+      code: \\"code\\",
+    },
+    _provideComponents(),
+    props.components,
+  );
+  return (
+    <_components.h1>
+      <_components.code>{\\"codegen.yml\\"}</_components.code>
+      {\\" file\\"}
+    </_components.h1>
+  );
 }
-function MDXContent(props = {}) {
-  const {wrapper: MDXLayout} = Object.assign({}, _provideComponents(), props.components);
-  return MDXLayout ? <MDXLayout {...props}><_createMdxContent {...props} /></MDXLayout> : _createMdxContent(props);
-}
-export default MDXContent;
-",
-  "title": "codegen.yml file",
-}
+"
 `;
 
 exports[`Process heading > dynamic-h1 1`] = `

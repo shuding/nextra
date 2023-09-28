@@ -12,8 +12,8 @@ describe('Process heading', () => {
     expect(result).toMatchSnapshot()
   })
   it('code-with-text-h1', async () => {
-    const result = await compileMdx('# `codegen.yml` file', { mdxOptions })
-    expect(result).toMatchSnapshot()
+    const { result } = await compileMdx('# `codegen.yml` file', { mdxOptions })
+    expect(clean(result)).resolves.toMatchSnapshot()
   })
   it('static-h1', async () => {
     const { result } = await compileMdx('# Hello World', { mdxOptions })
