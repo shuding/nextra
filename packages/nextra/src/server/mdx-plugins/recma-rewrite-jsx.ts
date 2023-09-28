@@ -1,10 +1,4 @@
-import type {
-  FunctionDeclaration,
-  ObjectExpression,
-  Program,
-  ReturnStatement,
-  SpreadElement
-} from 'estree'
+import type { FunctionDeclaration, Program, ReturnStatement } from 'estree'
 import type { JsxAttribute } from 'estree-util-to-js/lib/jsx'
 import type { Plugin } from 'unified'
 import { DEFAULT_PROPERTY_PROPS } from '../constants.js'
@@ -70,7 +64,6 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => (ast, file) => {
       type: 'JSXClosingElement',
       attributes: []
     }
-    // }
   }
   const mdxContent = ast.body.find(
     // @ts-expect-error
@@ -138,6 +131,7 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => (ast, file) => {
 
   createMdxContent.body.body.unshift({
     type: 'VariableDeclaration',
+    kind: 'const',
     declarations: [
       {
         type: 'VariableDeclarator',
@@ -154,7 +148,6 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => (ast, file) => {
         },
         init: { type: 'Identifier', name: 'props' }
       }
-    ],
-    kind: 'const'
+    ]
   })
 }
