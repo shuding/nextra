@@ -19,7 +19,6 @@ import type {
   PageOpts
 } from '../types'
 import { DataProvider } from './data.js'
-import { useState } from 'react'
 
 function isFolder(value: DynamicMetaItem): value is DynamicFolder {
   return !!value && typeof value === 'object' && value.type === 'folder'
@@ -182,15 +181,10 @@ function NextraLayout({
     }
   }
 
-  const [toc, setToc] = useState([])
-
-  pageOpts.toc = toc
-
   return (
     <Layout themeConfig={themeConfig} pageOpts={pageOpts} pageProps={props}>
       <DataProvider value={props}>
-        {/* @ts-expect-error */}
-        <pageContext.Content setToc={setToc} />
+        <pageContext.Content />
       </DataProvider>
     </Layout>
   )
