@@ -268,6 +268,9 @@ importers:
       gray-matter:
         specifier: ^4.0.3
         version: 4.0.3
+      hast-util-to-estree:
+        specifier: ^3.1.0
+        version: 3.1.0
       katex:
         specifier: ^0.16.8
         version: 0.16.8

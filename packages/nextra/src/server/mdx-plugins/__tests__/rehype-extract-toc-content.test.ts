@@ -140,20 +140,17 @@ export const frontMatter = {
       export default MDXContent;
       function useToc(props) {
         const _components = Object.assign(
-            {
-              span: \\"span\\",
-              math: \\"math\\",
-              semantics: \\"semantics\\",
-              mrow: \\"mrow\\",
-              mi: \\"mi\\",
-              annotation: \\"annotation\\",
-              code: \\"code\\",
-            },
-            _provideComponents(),
-            props.components,
-          ),
-          { Test } = _components;
-        if (!Test) _missingMdxReference(\\"Test\\", true);
+          {
+            span: \\"span\\",
+            math: \\"math\\",
+            semantics: \\"semantics\\",
+            mrow: \\"mrow\\",
+            mi: \\"mi\\",
+            annotation: \\"annotation\\",
+            code: \\"code\\",
+          },
+          _provideComponents(),
+        );
         return [
           {
             value: (
@@ -258,16 +255,7 @@ export const frontMatter = {
             depth: 6,
           },
         ];
-      }
-      function _missingMdxReference(id, component) {
-        throw new Error(
-          \\"Expected \\" +
-            (component ? \\"component\\" : \\"object\\") +
-            \\" \`\\" +
-            id +
-            \\"\` to be defined: you likely forgot to import, pass, or provide it.\\",
-        );
-      }
+      };
       "
     `)
   })

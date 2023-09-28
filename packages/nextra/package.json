@@ -113,6 +113,7 @@
     "react-dom": ">=16.13.1"
   },
   "dependencies": {
+    "hast-util-to-estree": "^3.1.0",
     "@headlessui/react": "^1.7.10",
     "@mdx-js/mdx": "^2.3.0",
     "@mdx-js/react": "^2.3.0",
