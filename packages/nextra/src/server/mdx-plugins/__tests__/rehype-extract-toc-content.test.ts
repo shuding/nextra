@@ -47,12 +47,7 @@ export const frontMatter = {
       export const toc = [
         {
           depth: 2,
-          value: (
-            <>
-              {\\"Heading \\"}
-              {myVar}
-            </>
-          ),
+          value: \\"Heading myVar\\",
           id: \\"heading-myvar\\",
         },
         {
@@ -77,13 +72,6 @@ export const frontMatter = {
             h1: \\"h1\\",
             h2: \\"h2\\",
             h3: \\"h3\\",
-            span: \\"span\\",
-            math: \\"math\\",
-            semantics: \\"semantics\\",
-            mrow: \\"mrow\\",
-            mi: \\"mi\\",
-            annotation: \\"annotation\\",
-            code: \\"code\\",
             h4: \\"h4\\",
           },
           _provideComponents(),
@@ -94,70 +82,14 @@ export const frontMatter = {
             <_components.h1>{\\"Heading 1\\"}</_components.h1>
             {\\"\\\\n\\"}
             {\\"\\\\n\\"}
-            <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
+            <_components.h2 id={toc[0].id} />
             {\\"\\\\n\\"}
-            <_components.h3 id={toc[1].id}>
-              {\\"Heading \\"}
-              <_components.span className=\\"katex\\">
-                <_components.span className=\\"katex-mathml\\">
-                  <_components.math xmlns=\\"http://www.w3.org/1998/Math/MathML\\">
-                    <_components.semantics>
-                      <_components.mrow>
-                        <_components.mi>{\\"l\\"}</_components.mi>
-                        <_components.mi>{\\"a\\"}</_components.mi>
-                        <_components.mi>{\\"t\\"}</_components.mi>
-                        <_components.mi>{\\"e\\"}</_components.mi>
-                        <_components.mi>{\\"x\\"}</_components.mi>
-                      </_components.mrow>
-                      <_components.annotation encoding=\\"application/x-tex\\">
-                        {\\"latex\\"}
-                      </_components.annotation>
-                    </_components.semantics>
-                  </_components.math>
-                </_components.span>
-                <_components.span className=\\"katex-html\\" aria-hidden=\\"true\\">
-                  <_components.span className=\\"base\\">
-                    <_components.span
-                      className=\\"strut\\"
-                      style={{
-                        height: \\"0.6944em\\",
-                      }}
-                    />
-                    <_components.span
-                      className=\\"mord mathnormal\\"
-                      style={{
-                        marginRight: \\"0.01968em\\",
-                      }}
-                    >
-                      {\\"l\\"}
-                    </_components.span>
-                    <_components.span className=\\"mord mathnormal\\">
-                      {\\"a\\"}
-                    </_components.span>
-                    <_components.span className=\\"mord mathnormal\\">
-                      {\\"t\\"}
-                    </_components.span>
-                    <_components.span className=\\"mord mathnormal\\">
-                      {\\"e\\"}
-                    </_components.span>
-                    <_components.span className=\\"mord mathnormal\\">
-                      {\\"x\\"}
-                    </_components.span>
-                  </_components.span>
-                </_components.span>
-              </_components.span>
-            </_components.h3>
+            <_components.h3 id={toc[1].id} />
             {\\"\\\\n\\"}
-            <_components.h3 id={toc[2].id}>
-              {\\"Heading \\"}
-              <_components.code>{\\"<Code />:{jsx}\\"}</_components.code>
-            </_components.h3>
+            <_components.h3 id={toc[2].id} />
             {\\"\\\\n\\"}
             {\\"\\\\n\\"}
-            <_components.h4 id={toc[3].id}>
-              <Test />
-              {\\" World\\"}
-            </_components.h4>
+            <_components.h4 id={toc[3].id} />
           </>
         );
       }
