@@ -145,31 +145,74 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => ast => {
       ],
       kind: 'const'
     },
+    // {
+    //   type: 'ExpressionStatement',
+    //   expression: {
+    //     type: 'AssignmentExpression',
+    //     operator: '=',
+    //     left: { type: 'Identifier', name: 'props' },
+    //     right: {
+    //       type: 'ObjectExpression',
+    //       properties: [
+    //         {
+    //           type: 'SpreadElement',
+    //           argument: { type: 'Identifier', name: 'props' }
+    //         },
+    //         {
+    //           type: 'Property',
+    //           key: { type: 'Identifier', name: 'toc' },
+    //           value: { type: 'Identifier', name: 'toc' },
+    //           shorthand: true,
+    //           kind: 'init'
+    //         }
+    //       ]
+    //     }
+    //   }
+    // }
+  )
+
+  const attributes = [
     {
-      type: 'ExpressionStatement',
-      expression: {
-        type: 'AssignmentExpression',
-        operator: '=',
-        left: { type: 'Identifier', name: 'props' },
-        right: {
-          type: 'ObjectExpression',
-          properties: [
-            {
-              type: 'SpreadElement',
-              argument: { type: 'Identifier', name: 'props' }
-            },
-            {
-              type: 'Property',
-              key: { type: 'Identifier', name: 'toc' },
-              value: { type: 'Identifier', name: 'toc' },
-              shorthand: true,
-              kind: 'init'
-            }
-          ]
-        }
+      type: 'JSXSpreadAttribute',
+      argument: { type: 'Identifier', name: 'props' }
+    },
+    {
+      type: 'JSXAttribute',
+      name: { type: 'JSXIdentifier', name: 'toc' },
+      value: {
+        type: 'JSXExpressionContainer',
+        expression: { type: 'Identifier', name: 'toc' }
       }
     }
-  )
+  ]
+
+
+  mdxContent.body.body.at(-1).argument = {
+    type: 'ExpressionStatement',
+    expression: {
+      type: 'JSXElement',
+      openingElement: {
+        type: 'JSXOpeningElement',
+        name: { type: 'JSXIdentifier', name: 'MDXLayout' },
+        attributes
+      },
+      closingElement: {
+        type: 'JSXClosingElement',
+        name: { type: 'JSXIdentifier', name: 'MDXLayout' }
+      },
+      children: [
+        {
+          type: 'JSXElement',
+          openingElement: {
+            type: 'JSXOpeningElement',
+            selfClosing: true,
+            name: { type: 'JSXIdentifier', name: '_createMdxContent' },
+            attributes
+          }
+        }
+      ]
+    }
+  }
 
   createMdxContent.body.body.unshift({
     type: 'VariableDeclaration',

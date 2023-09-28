@@ -126,21 +126,15 @@ export const frontMatter = {
       }
       function MDXContent(props = {}) {
         const toc = useToc(props);
-        props = {
-          ...props,
-          toc,
-        };
         const { wrapper: MDXLayout } = Object.assign(
           {},
           _provideComponents(),
           props.components,
         );
-        return MDXLayout ? (
-          <MDXLayout {...props}>
-            <_createMdxContent {...props} />
+        return (
+          <MDXLayout {...props} toc={toc}>
+            <_createMdxContent {...props} toc={toc} />
           </MDXLayout>
-        ) : (
-          _createMdxContent(props)
         );
       }
       export default MDXContent;
