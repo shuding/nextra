@@ -1,11 +1,18 @@
 import type {
+  BaseNode,
   FunctionDeclaration,
+  Identifier,
+  Literal,
   ObjectExpression,
   Program,
+  Property,
   ReturnStatement,
   SpreadElement
 } from 'estree'
-import type { JsxAttribute } from 'estree-util-to-js/lib/jsx'
+import type {
+  JsxAttribute,
+  JsxExpressionContainer
+} from 'estree-util-to-js/lib/jsx'
 import type { Plugin } from 'unified'
 
 const HEADING_NAMES = new Set(['h2', 'h3', 'h4', 'h5', 'h6'])
@@ -34,8 +41,9 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => ast => {
   const toc = ast.body.find(
     node =>
       node.type === 'ExportNamedDeclaration' &&
+      node.declaration &&
       'declarations' in
-        node.declaration! /* doesn't exist for FunctionDeclaration */ &&
+        node.declaration /* doesn't exist for FunctionDeclaration */ &&
       // @ts-expect-error
       node.declaration.declarations[0].id.name === 'toc'
   ) as any
@@ -63,25 +71,20 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => ast => {
 
     if (foundIndex === -1) continue
 
-    // const valueNode = tocProperties[foundIndex].properties.find(
-    //   (node: Property) => (node.key as Identifier).name === 'value'
-    // )
-
-    const isFragment = heading.children.some(
-      // @ts-expect-error
-      node =>
-        node.type !== 'JSXExpressionContainer' ||
-        node.expression.type !== 'Literal'
+    // @ts-expect-error
+    const valueNode = tocProperties[foundIndex].properties.find(
+      (node: Property) => (node.key as Identifier).name === 'value'
     )
 
-    // if (isFragment) {
-    //   valueNode.value = {
-    //     type: 'JSXFragment',
-    //     openingFragment: { type: 'JSXOpeningFragment' },
-    //     closingFragment: { type: 'JSXClosingFragment' },
-    //     children: heading.children
-    //   }
-    // }
+    const isExpressionContainer = (
+      node: BaseNode
+    ): node is JsxExpressionContainer => node.type === 'JSXExpressionContainer'
+
+    const isIdentifier = (node: BaseNode): node is Identifier =>
+      isExpressionContainer(node) && node.expression.type === 'Identifier'
+
+    const isLiteral = (node: BaseNode): node is Literal =>
+      isExpressionContainer(node) && node.expression.type === 'Literal'
 
     idNode.value = {
       type: 'JSXExpressionContainer',
@@ -91,7 +94,20 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => ast => {
       }
     }
 
-    if (!isFragment) {
+    if (
+      heading.children.every(
+        (node: BaseNode) => isLiteral(node) || isIdentifier(node)
+      )
+    ) {
+      if (!heading.children.every(isLiteral)) {
+        valueNode.value = {
+          type: 'JSXFragment',
+          openingFragment: { type: 'JSXOpeningFragment' },
+          closingFragment: { type: 'JSXClosingFragment' },
+          children: heading.children
+        }
+      }
+
       heading.children = [
         {
           type: 'JSXExpressionContainer',
