@@ -19,7 +19,7 @@ export function getStaticProps() {
     }
     return content
   },
-  latex: true
+  // latex: true
 })
 
 const withBundleAnalyzer = bundleAnalyzer({
