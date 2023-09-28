@@ -190,58 +190,13 @@ import Last from './three.mdx'
     expect(await clean(result)).toMatchInlineSnapshot(`
       "import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
       export const frontMatter = {};
-      import FromMdx, { toc as toc0 } from \\"./one.mdx\\";
-      import FromMarkdown, { toc as toc1 } from \\"./two.md\\";
+      import FromMdx, { useTOC as useTOC0 } from \\"./one.mdx\\";
+      import FromMarkdown, { useTOC as useTOC1 } from \\"./two.md\\";
       import IgnoreMe from \\"./foo\\";
-      import Last, { toc as toc2 } from \\"./three.mdx\\";
-      export const toc = [
-        {
-          depth: 2,
-          value: \\"❤️\\",
-          id: \\"️\\",
-        },
-        ...toc0,
-        {
-          depth: 2,
-          value: \\"✅\\",
-          id: \\"\\",
-        },
-        ...toc1,
-        ...toc2,
-        {
-          depth: 2,
-          value: \\"👋\\",
-          id: \\"-1\\",
-        },
-        {
-          depth: 2,
-          value: \\"kek \\",
-          id: \\"kek-\\",
-        },
-        {
-          depth: 2,
-          value: \\"try me\\",
-          id: \\"try-me\\",
-        },
-        {
-          depth: 2,
-          value: \\"latex l\\",
-          id: \\"latex-l\\",
-        },
-        {
-          depth: 2,
-          value: (
-            <>
-              {\\"interpolate\\"} {1} {true} {null} {variable}
-            </>
-          ),
-          id: \\"interpolate-1-true-null-variable\\",
-        },
-      ];
-      function _createMdxContent(props) {
+      import Last, { useTOC as useTOC2 } from \\"./three.mdx\\";
+      export function useTOC(props) {
         const _components = Object.assign(
             {
-              h2: \\"h2\\",
               code: \\"code\\",
               span: \\"span\\",
               math: \\"math\\",
@@ -251,17 +206,116 @@ import Last from './three.mdx'
               annotation: \\"annotation\\",
             },
             _provideComponents(),
-            props.components,
           ),
           { Kek } = _components;
         if (!Kek) _missingMdxReference(\\"Kek\\", true);
+        return [
+          {
+            value: \\"❤️\\",
+            id: \\"️\\",
+            depth: 2,
+          },
+          ...useTOC0,
+          {
+            value: \\"✅\\",
+            id: \\"\\",
+            depth: 2,
+          },
+          ...useTOC1,
+          ...useTOC2,
+          {
+            value: \\"👋\\",
+            id: \\"-1\\",
+            depth: 2,
+          },
+          {
+            value: (
+              <>
+                {\\"kek \\"}
+                <Kek />
+              </>
+            ),
+            id: \\"kek-\\",
+            depth: 2,
+          },
+          {
+            value: (
+              <>
+                <_components.code>{\\"try\\"}</_components.code>
+                {\\" me\\"}
+              </>
+            ),
+            id: \\"try-me\\",
+            depth: 2,
+          },
+          {
+            value: (
+              <>
+                {\\"latex \\"}
+                <_components.span className=\\"katex\\">
+                  <_components.span className=\\"katex-mathml\\">
+                    <_components.math xmlns=\\"http://www.w3.org/1998/Math/MathML\\">
+                      <_components.semantics>
+                        <_components.mrow>
+                          <_components.mi>{\\"l\\"}</_components.mi>
+                        </_components.mrow>
+                        <_components.annotation encoding=\\"application/x-tex\\">
+                          {\\"l\\"}
+                        </_components.annotation>
+                      </_components.semantics>
+                    </_components.math>
+                  </_components.span>
+                  <_components.span className=\\"katex-html\\" aria-hidden=\\"true\\">
+                    <_components.span className=\\"base\\">
+                      <_components.span
+                        className=\\"strut\\"
+                        style={{
+                          height: \\"0.6944em\\",
+                        }}
+                      />
+                      <_components.span
+                        className=\\"mord mathnormal\\"
+                        style={{
+                          marginRight: \\"0.01968em\\",
+                        }}
+                      >
+                        {\\"l\\"}
+                      </_components.span>
+                    </_components.span>
+                  </_components.span>
+                </_components.span>
+              </>
+            ),
+            id: \\"latex-l\\",
+            depth: 2,
+          },
+          {
+            value: (
+              <>
+                {\\"interpolate\\"} {1} {true} {null} {variable}
+              </>
+            ),
+            id: \\"interpolate-1-true-null-variable\\",
+            depth: 2,
+          },
+        ];
+      }
+      function _createMdxContent(props) {
+        const { toc } = props;
+        const _components = Object.assign(
+          {
+            h2: \\"h2\\",
+          },
+          _provideComponents(),
+          props.components,
+        );
         return (
           <>
             <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
             {\\"\\\\n\\"}
             <FromMdx />
             {\\"\\\\n\\"}
-            <_components.h2 id={toc[2].id}>{toc[2].value}</_components.h2>
+            <_components.h2 id={toc[1].id}>{toc[1].value}</_components.h2>
             {\\"\\\\n\\"}
             <FromMarkdown />
             {\\"\\\\n\\"}
@@ -270,55 +324,15 @@ import Last from './three.mdx'
             {\\"\\\\n\\"}
             <IgnoreMe />
             {\\"\\\\n\\"}
+            <_components.h2 id={toc[2].id}>{toc[2].value}</_components.h2>
+            {\\"\\\\n\\"}
+            <_components.h2 id={toc[3].id}>{toc[3].value}</_components.h2>
+            {\\"\\\\n\\"}
+            <_components.h2 id={toc[4].id}>{toc[4].value}</_components.h2>
+            {\\"\\\\n\\"}
             <_components.h2 id={toc[5].id}>{toc[5].value}</_components.h2>
             {\\"\\\\n\\"}
-            <_components.h2 id={toc[6].id}>
-              {\\"kek \\"}
-              <Kek />
-            </_components.h2>
-            {\\"\\\\n\\"}
-            <_components.h2 id={toc[7].id}>
-              <_components.code>{\\"try\\"}</_components.code>
-              {\\" me\\"}
-            </_components.h2>
-            {\\"\\\\n\\"}
-            <_components.h2 id={toc[8].id}>
-              {\\"latex \\"}
-              <_components.span className=\\"katex\\">
-                <_components.span className=\\"katex-mathml\\">
-                  <_components.math xmlns=\\"http://www.w3.org/1998/Math/MathML\\">
-                    <_components.semantics>
-                      <_components.mrow>
-                        <_components.mi>{\\"l\\"}</_components.mi>
-                      </_components.mrow>
-                      <_components.annotation encoding=\\"application/x-tex\\">
-                        {\\"l\\"}
-                      </_components.annotation>
-                    </_components.semantics>
-                  </_components.math>
-                </_components.span>
-                <_components.span className=\\"katex-html\\" aria-hidden=\\"true\\">
-                  <_components.span className=\\"base\\">
-                    <_components.span
-                      className=\\"strut\\"
-                      style={{
-                        height: \\"0.6944em\\",
-                      }}
-                    />
-                    <_components.span
-                      className=\\"mord mathnormal\\"
-                      style={{
-                        marginRight: \\"0.01968em\\",
-                      }}
-                    >
-                      {\\"l\\"}
-                    </_components.span>
-                  </_components.span>
-                </_components.span>
-              </_components.span>
-            </_components.h2>
-            {\\"\\\\n\\"}
-            <_components.h2 id={toc[9].id}>{toc[9].value}</_components.h2>
+            <_components.h2 id={toc[6].id}>{toc[6].value}</_components.h2>
           </>
         );
       }

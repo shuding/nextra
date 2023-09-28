@@ -9,58 +9,80 @@ export const rehypeExtractTocContent: Plugin<[], any> = () => (ast, file) => {
     if (!/^h[2-6]$/.test(node.tagName)) return
 
     const { id } = node.properties
-    if (id) {
+    if (typeof id === 'string') {
       toc.push(structuredClone(node))
       node.children = []
     }
   })
 
-  const elements = toc
-    .map(t => toEstree(t))
-    // @ts-expect-error
-    .map(n => n.body[0].expression)
-    .map((node, i) => {
-      const isText = node.children.every(
-        // @ts-expect-error
-        child =>
-          child.type === 'JSXExpressionContainer' &&
-          child.expression.type === 'Literal'
-      )
+  const TocToExpression = Object.fromEntries(
+    toc.map(node =>
+      // @ts-expect-error
+      [node.properties.id, toEstree(node).body[0].expression]
+    )
+  )
 
-      const result = isText
-        ? // @ts-expect-error
-          node.children.map(n => n.expression)[0]
-        : {
-            type: 'JSXFragment',
-            openingFragment: { type: 'JSXOpeningFragment' },
-            closingFragment: { type: 'JSXClosingFragment' },
-            children: node.children
-          }
-
+  // @ts-expect-error
+  const elements = file.data.toc.map((n, i) => {
+    if (typeof n === 'string') {
       return {
-        type: 'ObjectExpression',
-        properties: [
-          {
-            type: 'Property',
-            key: { type: 'Identifier', name: 'value' },
-            value: result,
-            kind: 'init'
-          },
-          {
-            type: 'Property',
-            key: { type: 'Identifier', name: 'id' },
-            value: { type: 'Literal', value: toc[i].properties.id },
-            kind: 'init'
-          },
-          {
-            type: 'Property',
-            key: { type: 'Identifier', name: 'depth' },
-            value: { type: 'Literal', value: Number(toc[i].tagName[1]) },
-            kind: 'init'
-          }
-        ]
+        type: 'SpreadElement',
+        argument: { type: 'Identifier', name: n }
       }
-    })
+    }
+
+    const node = TocToExpression[n.id]
+
+    const isText = node.children.every(
+      // @ts-expect-error
+      child =>
+        child.type === 'JSXExpressionContainer' &&
+        child.expression.type === 'Literal'
+    )
+
+    const result = isText
+      ? // @ts-expect-error
+        node.children.map(n => n.expression)[0]
+      : {
+          type: 'JSXFragment',
+          openingFragment: { type: 'JSXOpeningFragment' },
+          closingFragment: { type: 'JSXClosingFragment' },
+          children: node.children
+        }
+
+    return {
+      type: 'ObjectExpression',
+      properties: [
+        {
+          type: 'Property',
+          key: { type: 'Identifier', name: 'value' },
+          value: result,
+          kind: 'init'
+        },
+        {
+          type: 'Property',
+          key: { type: 'Identifier', name: 'id' },
+          value: {
+            type: 'Literal',
+            value: node.openingElement.attributes.find(
+              // @ts-expect-error
+              attr => attr.name.name === 'id'
+            ).value.value
+          },
+          kind: 'init'
+        },
+        {
+          type: 'Property',
+          key: { type: 'Identifier', name: 'depth' },
+          value: {
+            type: 'Literal',
+            value: Number(node.openingElement.name.name[1])
+          },
+          kind: 'init'
+        }
+      ]
+    }
+  })
 
   ast.children.push({
     type: 'mdxjsEsm',

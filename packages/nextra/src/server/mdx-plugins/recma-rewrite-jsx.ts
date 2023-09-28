@@ -21,10 +21,11 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => (ast, file) => {
 
   const { argument } = returnStatement as any
 
-  const headings = (
-    // if return statements doesn't wrapped in fragment children will be []
-    argument.children.length ? argument.children : [argument]
-  ).filter(isHeading)
+  const headings =
+    // if return statements doesn't wrap in fragment children will be []
+    (argument.children.length ? argument.children : [argument]).filter(
+      isHeading
+    )
 
   const tocProperties = file.data.toc as (
     | { properties: { id: string } }
@@ -76,6 +77,7 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => (ast, file) => {
   // @ts-expect-error
   mdxContent.body.body.unshift({
     type: 'VariableDeclaration',
+    kind: 'const',
     declarations: [
       {
         type: 'VariableDeclarator',
@@ -86,8 +88,7 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => (ast, file) => {
           arguments: [{ type: 'Identifier', name: 'props' }]
         }
       }
-    ],
-    kind: 'const'
+    ]
   })
 
   const attributes = [

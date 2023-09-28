@@ -24,7 +24,7 @@ const SKIP_FOR_PARENT_NAMES = new Set(['Tab', 'Tabs.Tab'])
 export const remarkHeadings: Plugin<
   [{ exportName?: string; isRemoteContent?: boolean }],
   Root
-> = ({ exportName = 'toc', isRemoteContent }) => {
+> = ({ exportName = 'useTOC', isRemoteContent }) => {
   const headings: (Heading | string)[] = []
   let hasJsxInH1: boolean
   let title: string
