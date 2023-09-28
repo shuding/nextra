@@ -138,7 +138,7 @@ export const frontMatter = {
         );
       }
       export default MDXContent;
-      function useToc(props) {
+      export function useToc(props) {
         const _components = Object.assign(
           {
             span: \\"span\\",
@@ -255,7 +255,7 @@ export const frontMatter = {
             depth: 6,
           },
         ];
-      };
+      }
       "
     `)
   })

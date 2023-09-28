@@ -68,33 +68,24 @@ export const rehypeExtractTocContent: Plugin<[], any> = () => (ast, file) => {
         body: [
           {
             type: 'ExportNamedDeclaration',
-            specifiers: [],
             declaration: {
-              type: 'VariableDeclaration',
-              kind: 'const',
-              declarations: [
-                {
-                  type: 'VariableDeclarator',
-                  id: { type: 'Identifier', name: 'useToc' },
-                  init: {
-                    type: 'ArrowFunctionExpression',
-                    params: [],
-                    body: {
-                      type: 'BlockStatement',
-                      body: [
-                        {
-                          type: 'ReturnStatement',
-                          argument: {
-                            type: 'ArrayExpression',
-                            elements
-                          }
-                        }
-                      ]
-                    }
+              type: 'FunctionDeclaration',
+              id: { type: 'Identifier', name: 'useToc' },
+              params: [{ type: 'Identifier', name: 'props' }],
+              body: {
+                type: 'BlockStatement',
+                body: [
+                  {
+                    type: 'ReturnStatement',
+                    argument: { type: 'ArrayExpression', elements }
                   }
-                }
-              ]
-            }
+                ]
+              }
+            },
+            specifiers: [],
+            source: null,
+            exportKind: 'value',
+            assertions: []
           }
         ]
       }
