@@ -138,6 +138,11 @@ export const frontMatter = {
         );
       }
       function MDXContent(props = {}) {
+        const toc = useToc(props);
+        props = {
+          ...props,
+          toc,
+        };
         const { wrapper: MDXLayout } = Object.assign(
           {},
           _provideComponents(),
