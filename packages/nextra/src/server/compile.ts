@@ -31,6 +31,7 @@ import {
 import {
   attachMeta,
   parseMeta,
+  // recmaRewriteJsx,
   rehypeIcon,
   remarkCustomHeadingId,
   remarkHeadings,
@@ -284,7 +285,9 @@ export async function compileMdx(
           // To render <details /> and <summary /> correctly
           rehypeRaw,
           // fix Error: Cannot compile `mdxjsEsm` node for npm2yarn and mermaid
-          { passThrough: ['mdxjsEsm', 'mdxJsxFlowElement'] }
+          {
+            passThrough: ['mdxjsEsm', 'mdxJsxFlowElement', 'mdxTextExpression']
+          }
         ],
         [parseMeta, { defaultShowCopyCode }],
         ...(codeHighlight === false
@@ -296,6 +299,7 @@ export async function compileMdx(
             ]),
         latex && rehypeKatex
       ].filter(truthy)
+      // recmaPlugins: [!isRemoteContent && recmaRewriteJsx].filter(truthy)
     })
   }
 }

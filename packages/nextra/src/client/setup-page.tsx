@@ -180,6 +180,7 @@ function NextraLayout({
       frontMatter
     }
   }
+
   return (
     <Layout themeConfig={themeConfig} pageOpts={pageOpts} pageProps={props}>
       <DataProvider value={props}>

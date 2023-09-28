@@ -1,3 +1,4 @@
+import prettier from 'prettier'
 import { compileMdx } from '../src/server/compile.js'
 
 const mdxOptions = {
@@ -90,43 +91,119 @@ import Last from './three.mdx'
 
 <IgnoreMe />
 
-## 👋`,
+## 👋
+
+## kek <Kek />
+
+## \`try\` me
+`,
       { mdxOptions }
     )
-    expect(result).toMatchInlineSnapshot(`
-      "/*@jsxRuntime automatic @jsxImportSource react*/
-      import {useMDXComponents as _provideComponents} from \\"nextra/mdx\\";
-      export const frontMatter = {};
-      import FromMdx, {toc as toc0} from './one.mdx';
-      import FromMarkdown, {toc as toc1} from './two.md';
-      import IgnoreMe from './foo';
-      import Last, {toc as toc2} from './three.mdx';
-      export const toc = [{
-        depth: 2,
-        value: \\"❤️\\",
-        id: \\"️\\"
-      }, ...toc0, {
-        depth: 2,
-        value: \\"✅\\",
-        id: \\"\\"
-      }, ...toc1, ...toc2, {
-        depth: 2,
-        value: \\"👋\\",
-        id: \\"-1\\"
-      }];
-      function _createMdxContent(props) {
-        const _components = Object.assign({
-          h2: \\"h2\\"
-        }, _provideComponents(), props.components);
-        return <><_components.h2 id=\\"️\\">{\\"❤️\\"}</_components.h2>{\\"\\\\n\\"}<FromMdx />{\\"\\\\n\\"}<_components.h2 id=\\"\\">{\\"✅\\"}</_components.h2>{\\"\\\\n\\"}<FromMarkdown />{\\"\\\\n\\"}{\\"\\\\n\\"}<Last />{\\"\\\\n\\"}<IgnoreMe />{\\"\\\\n\\"}<_components.h2 id=\\"-1\\">{\\"👋\\"}</_components.h2></>;
-      }
-      function MDXContent(props = {}) {
-        const {wrapper: MDXLayout} = Object.assign({}, _provideComponents(), props.components);
-        return MDXLayout ? <MDXLayout {...props}><_createMdxContent {...props} /></MDXLayout> : _createMdxContent(props);
-      }
-      export default MDXContent;
-      "
-    `)
+    expect(await prettier.format(result, { parser: 'typescript' }))
+      .toMatchInlineSnapshot(`
+        "/*@jsxRuntime automatic @jsxImportSource react*/
+        import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
+        export const frontMatter = {};
+        import FromMdx, { toc as toc0 } from \\"./one.mdx\\";
+        import FromMarkdown, { toc as toc1 } from \\"./two.md\\";
+        import IgnoreMe from \\"./foo\\";
+        import Last, { toc as toc2 } from \\"./three.mdx\\";
+        export const toc = [
+          {
+            depth: 2,
+            value: \\"❤️\\",
+            id: \\"️\\",
+          },
+          ...toc0,
+          {
+            depth: 2,
+            value: \\"✅\\",
+            id: \\"\\",
+          },
+          ...toc1,
+          ...toc2,
+          {
+            depth: 2,
+            value: \\"👋\\",
+            id: \\"-1\\",
+          },
+          {
+            depth: 2,
+            value: \\"kek \\",
+            id: \\"kek-\\",
+          },
+          {
+            depth: 2,
+            value: \\"try me\\",
+            id: \\"try-me\\",
+          },
+        ];
+        function _createMdxContent(props) {
+          const _components = Object.assign(
+              {
+                h2: \\"h2\\",
+                code: \\"code\\",
+              },
+              _provideComponents(),
+              props.components,
+            ),
+            { Kek } = _components;
+          if (!Kek) _missingMdxReference(\\"Kek\\", true);
+          return (
+            <>
+              <_components.h2 id=\\"️\\">{\\"❤️\\"}</_components.h2>
+              {\\"\\\\n\\"}
+              <FromMdx />
+              {\\"\\\\n\\"}
+              <_components.h2 id=\\"\\">{\\"✅\\"}</_components.h2>
+              {\\"\\\\n\\"}
+              <FromMarkdown />
+              {\\"\\\\n\\"}
+              {\\"\\\\n\\"}
+              <Last />
+              {\\"\\\\n\\"}
+              <IgnoreMe />
+              {\\"\\\\n\\"}
+              <_components.h2 id=\\"-1\\">{\\"👋\\"}</_components.h2>
+              {\\"\\\\n\\"}
+              <_components.h2 id=\\"kek-\\">
+                {\\"kek \\"}
+                <Kek />
+              </_components.h2>
+              {\\"\\\\n\\"}
+              <_components.h2 id=\\"try-me\\">
+                <_components.code>{\\"try\\"}</_components.code>
+                {\\" me\\"}
+              </_components.h2>
+            </>
+          );
+        }
+        function MDXContent(props = {}) {
+          const { wrapper: MDXLayout } = Object.assign(
+            {},
+            _provideComponents(),
+            props.components,
+          );
+          return MDXLayout ? (
+            <MDXLayout {...props}>
+              <_createMdxContent {...props} />
+            </MDXLayout>
+          ) : (
+            _createMdxContent(props)
+          );
+        }
+        export default MDXContent;
+        function _missingMdxReference(id, component) {
+          throw new Error(
+            \\"Expected \\" +
+              (component ? \\"component\\" : \\"object\\") +
+              \\" \`\\" +
+              id +
+              \\"\` to be defined: you likely forgot to import, pass, or provide it.\\",
+          );
+        }
+        "
+      `)
   })
   it('should not attach headings with parent Tab or Tabs.Tab', async () => {
     const { result } = await compileMdx(
