@@ -277,14 +277,24 @@ export async function compileMdx(
           //     (attr: JsxAttribute) => attr.name.name === 'id'
           //   )
           // }
+
+          const elements = headings.map(node =>
+            node.children.every(
+              child =>
+                child.type === 'JSXExpressionContainer' &&
+                child.expression.type === 'Literal'
+            )
+              ? node.children.map(n => n.expression)[0]
+              : {
+                  type: 'JSXFragment',
+                  openingFragment: { type: 'JSXOpeningFragment' },
+                  closingFragment: { type: 'JSXClosingFragment' },
+                  children: node.children
+                }
+          )
           returnStatement.argument = {
             type: 'ArrayExpression',
-            elements: headings.map(node => ({
-              type: 'JSXFragment',
-              openingFragment: { type: 'JSXOpeningFragment' },
-              closingFragment: { type: 'JSXClosingFragment' },
-              children: node.children
-            }))
+            elements
           }
         }
       ]

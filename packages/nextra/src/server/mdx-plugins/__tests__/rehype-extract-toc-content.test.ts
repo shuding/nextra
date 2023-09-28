@@ -26,6 +26,8 @@ export const Test = () => <span>Hello</span>
 
 ###### 123
 
+###### Dada 123 true
+
 export const frontMatter = {
   test: 'extract toc content'
 }
@@ -80,6 +82,11 @@ export const frontMatter = {
           value: \\"123\\",
           id: \\"123\\",
         },
+        {
+          depth: 6,
+          value: \\"Dada 123 true\\",
+          id: \\"dada-123-true\\",
+        },
       ];
       function _createMdxContent(props) {
         const _components = Object.assign(
@@ -123,6 +130,10 @@ export const frontMatter = {
             <_components.h6 id={toc[5].id} />
             {toc[5].value}
             <_components.h6 id={toc[5].id} />
+            {\\"\\\\n\\"}
+            <_components.h6 id={toc[6].id} />
+            {toc[6].value}
+            <_components.h6 id={toc[6].id} />
           </>
         );
       }
@@ -226,8 +237,9 @@ export const frontMatter = {
             <Test />
             {\\" World\\"}
           </>,
-          <>{\\"String\\"}</>,
-          <>{\\"123\\"}</>,
+          \\"String\\",
+          \\"123\\",
+          \\"Dada 123 true\\",
         ];
       }
       function _missingMdxReference(id, component) {
