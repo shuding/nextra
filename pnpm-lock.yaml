@@ -268,15 +268,9 @@ importers:
       gray-matter:
         specifier: ^4.0.3
         version: 4.0.3
-      hast-util-to-estree:
-        specifier: ^3.1.0
-        version: 3.1.0
       katex:
         specifier: ^0.16.8
         version: 0.16.8
-      mdast-util-to-hast:
-        specifier: ^13.0.2
-        version: 13.0.2
       next-mdx-remote:
         specifier: ^4.2.1
         version: 4.2.1(react-dom@18.2.0)(react@18.2.0)

@@ -1,8 +1,6 @@
 import type { SpreadElement } from 'estree'
 import Slugger from 'github-slugger'
-import { toEstree } from 'hast-util-to-estree'
 import type { Parent, Root } from 'mdast'
-import { toHast } from 'mdast-util-to-hast'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 import type { Heading } from '../../types'
@@ -67,86 +65,7 @@ export const remarkHeadings: Plugin<
             const id = slugger.slug(headingProps.id || value)
             // Attach flattened/custom #id to heading node
             headingProps.id = id
-
-            const isText = node.children.every(child => child.type === 'text')
-
-            // if (!isRemoteContent && !isText) {
-            //   // @ts-expect-error -- todo
-            //   const hast = toHast(node)
-            //   const estree = toEstree(hast)
-            //   // @ts-expect-error -- todo
-            //   const { children } = estree.body[0].expression
-            //   // @ts-expect-error -- todo
-            //   value = {
-            //     type: 'JSXFragment',
-            //     openingFragment: {
-            //       type: 'JSXOpeningFragment'
-            //     },
-            //     closingFragment: {
-            //       type: 'JSXClosingFragment'
-            //     },
-            //     children
-            //   }
-            // }
-
-            const length = headings.push({
-              depth: node.depth,
-              value,
-              id
-            })
-
-            // if (!isRemoteContent) {
-            //   // const hast = toHast(node)
-            //   // const estree = toEstree(hast)
-            //   // const hEl = estree.body[0].expression
-            //   Object.assign(node, {
-            //     type: 'mdxJsxFlowElement',
-            //     name: 'h' + node.depth,
-            //     attributes: [
-            //       {
-            //         type: 'mdxJsxAttribute',
-            //         name: 'id',
-            //         value: {
-            //           type: 'mdxJsxAttributeValueExpression',
-            //           data: {
-            //             estree: {
-            //               body: [
-            //                 {
-            //                   type: 'ExpressionStatement',
-            //                   expression: {
-            //                     type: 'Identifier',
-            //                     name: `toc[${length - 1}].id`
-            //                   }
-            //                 }
-            //               ]
-            //             }
-            //           }
-            //         }
-            //       }
-            //     ]
-            //   })
-              // if (isText) {
-                // node.children = [
-                //   {
-                //     // @ts-expect-error -- todo
-                //     type: 'mdxTextExpression',
-                //     data: {
-                //       estree: {
-                //         body: [
-                //           {
-                //             type: 'ExpressionStatement',
-                //             expression: {
-                //               type: 'Identifier',
-                //               name: `toc[${length - 1}].value`
-                //             }
-                //           }
-                //         ]
-                //       }
-                //     }
-                //   }
-                // ]
-              // }
-            // }
+            headings.push({ depth: node.depth, value, id })
           }
           return
         }
