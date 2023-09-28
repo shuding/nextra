@@ -124,7 +124,7 @@ export const resolvePageMap =
   }
 
 export function setupNextraPage(
-  MDXContent: FC<{ toc: Heading[] }>,
+  MDXContent: FC,
   useTOC: () => Heading[],
   route: string,
   pageOpts: PageOpts
@@ -192,7 +192,7 @@ function NextraLayout({
   return (
     <Layout themeConfig={themeConfig} pageOpts={pageOpts} pageProps={props}>
       <DataProvider value={props}>
-        <Content toc={pageOpts.toc} />
+        <Content />
       </DataProvider>
     </Layout>
   )

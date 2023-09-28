@@ -102,7 +102,7 @@ export type NextraInternalGlobal = typeof globalThis & {
     context: Record<
       string,
       {
-        Content: FC<{ toc: Heading[] }>
+        Content: FC
         pageOpts: PageOpts
         useTOC: () => Heading[]
       }

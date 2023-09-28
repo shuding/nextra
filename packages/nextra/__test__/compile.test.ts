@@ -38,7 +38,7 @@ export const TagName = () => {
   })
   it('no-h1', async () => {
     const { result } = await compileMdx('## H2', { mdxOptions })
-    await expect(clean(result)).resolves.toMatchSnapshot()
+    expect(clean(result)).resolves.toMatchSnapshot()
   })
   it('use custom heading id', async () => {
     const { result } = await compileMdx(
