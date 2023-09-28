@@ -230,7 +230,11 @@ export async function compileMdx(
       providerImportSource: 'nextra/mdx',
       rehypePlugins: [
         () => ast => {
-          ast.children = vFile.data.toc
+          // Insert heading contents
+          ast.children = vFile.data.toc.map(node => ({
+            type: 'mdxJsxFlowElement',
+            children: node.children
+          }))
         }
       ],
       recmaPlugins: [

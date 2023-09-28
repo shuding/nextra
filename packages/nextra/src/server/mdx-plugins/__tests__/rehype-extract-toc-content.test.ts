@@ -155,8 +155,6 @@ export const frontMatter = {
       function useToc(props) {
         const _components = Object.assign(
             {
-              h2: \\"h2\\",
-              h3: \\"h3\\",
               span: \\"span\\",
               math: \\"math\\",
               semantics: \\"semantics\\",
@@ -164,9 +162,6 @@ export const frontMatter = {
               mi: \\"mi\\",
               annotation: \\"annotation\\",
               code: \\"code\\",
-              h4: \\"h4\\",
-              h5: \\"h5\\",
-              h6: \\"h6\\",
             },
             _provideComponents(),
             props.components,
