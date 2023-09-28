@@ -138,7 +138,7 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => ast => {
           id: { type: 'Identifier', name: 'toc' },
           init: {
             type: 'CallExpression',
-            callee: { type: 'Identifier', name: 'useToc' },
+            callee: { type: 'Identifier', name: 'useTOC' },
             arguments: [{ type: 'Identifier', name: 'props' }]
           }
         }
@@ -187,6 +187,7 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => ast => {
   ]
 
 
+  // @ts-expect-error
   mdxContent.body.body.at(-1).argument = {
     type: 'ExpressionStatement',
     expression: {
@@ -213,6 +214,11 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => ast => {
       ]
     }
   }
+
+  // Remove this
+  const [el] = ast.body.splice(5,1)
+
+  ast.body.push(el)
 
   createMdxContent.body.body.unshift({
     type: 'VariableDeclaration',

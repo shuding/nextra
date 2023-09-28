@@ -267,14 +267,14 @@ export async function compileMdx(
     //             node.source.value !== 'nextra/mdx'
     //         )
     //
-    //       // Rename `_createMdxContent` to `useToc`
+    //       // Rename `_createMdxContent` to `useTOC`
     //       const createMdxContent = ast.body.find(
     //         node =>
     //           node.type === 'FunctionDeclaration' &&
     //           // @ts-expect-error
     //           node.id.name === '_createMdxContent'
     //       ) as any
-    //       createMdxContent.id.name = 'useToc'
+    //       createMdxContent.id.name = 'useTOC'
     //
     //       const returnStatement = createMdxContent.body.body.find(
     //         // @ts-expect-error

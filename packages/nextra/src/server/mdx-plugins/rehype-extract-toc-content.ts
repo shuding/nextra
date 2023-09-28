@@ -17,6 +17,7 @@ export const rehypeExtractTocContent: Plugin<[], any> = () => (ast, file) => {
 
   const elements = toc
     .map(t => toEstree(t))
+    // @ts-expect-error
     .map(n => n.body[0].expression)
     .map((node, i) => {
       const isText = node.children.every(
@@ -71,7 +72,7 @@ export const rehypeExtractTocContent: Plugin<[], any> = () => (ast, file) => {
             specifiers: [],
             declaration: {
               type: 'FunctionDeclaration',
-              id: { type: 'Identifier', name: 'useToc' },
+              id: { type: 'Identifier', name: 'useTOC' },
               params: [{ type: 'Identifier', name: 'props' }],
               body: {
                 type: 'BlockStatement',

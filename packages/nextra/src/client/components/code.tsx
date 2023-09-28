@@ -1,14 +1,14 @@
 import cn from 'clsx'
 import type { ComponentProps, ReactElement } from 'react'
 
-export const Code = ({
+export function Code({
   children,
   className,
   'data-language': _language,
   ...props
 }: ComponentProps<'code'> & {
   'data-language'?: string
-}): ReactElement => {
+}): ReactElement {
   return (
     <code
       className={cn(

@@ -125,7 +125,7 @@ export const frontMatter = {
         );
       }
       function MDXContent(props = {}) {
-        const toc = useToc(props);
+        const toc = useTOC(props);
         const { wrapper: MDXLayout } = Object.assign(
           {},
           _provideComponents(),
@@ -138,7 +138,7 @@ export const frontMatter = {
         );
       }
       export default MDXContent;
-      export function useToc(props) {
+      export function useTOC(props) {
         const _components = Object.assign(
           {
             span: \\"span\\",
