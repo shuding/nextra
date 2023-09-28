@@ -22,6 +22,10 @@ export const Test = () => <span>Hello</span>
 
 #### <Test /> World
 
+##### String
+
+###### 123
+
 export const frontMatter = {
   test: 'extract toc content'
 }
@@ -66,6 +70,16 @@ export const frontMatter = {
           value: \\" World\\",
           id: \\"-world\\",
         },
+        {
+          depth: 5,
+          value: \\"String\\",
+          id: \\"string\\",
+        },
+        {
+          depth: 6,
+          value: \\"123\\",
+          id: \\"123\\",
+        },
       ];
       function _createMdxContent(props) {
         const _components = Object.assign(
@@ -74,6 +88,8 @@ export const frontMatter = {
             h2: \\"h2\\",
             h3: \\"h3\\",
             h4: \\"h4\\",
+            h5: \\"h5\\",
+            h6: \\"h6\\",
           },
           _provideComponents(),
           props.components,
@@ -99,6 +115,14 @@ export const frontMatter = {
             <_components.h4 id={toc[3].id} />
             {toc[3].value}
             <_components.h4 id={toc[3].id} />
+            {\\"\\\\n\\"}
+            <_components.h5 id={toc[4].id} />
+            {toc[4].value}
+            <_components.h5 id={toc[4].id} />
+            {\\"\\\\n\\"}
+            <_components.h6 id={toc[5].id} />
+            {toc[5].value}
+            <_components.h6 id={toc[5].id} />
           </>
         );
       }
@@ -120,6 +144,7 @@ export const frontMatter = {
       function useToc(props) {
         const _components = Object.assign(
             {
+              h6: \\"h6\\",
               h2: \\"h2\\",
               h3: \\"h3\\",
               span: \\"span\\",
@@ -130,6 +155,7 @@ export const frontMatter = {
               annotation: \\"annotation\\",
               code: \\"code\\",
               h4: \\"h4\\",
+              h5: \\"h5\\",
             },
             _provideComponents(),
             props.components,
@@ -137,6 +163,7 @@ export const frontMatter = {
           { Test } = _components;
         if (!Test) _missingMdxReference(\\"Test\\", true);
         return [
+          <>{\\"123\\"}</>,
           <>
             {\\"Heading \\"}
             {myVar}
@@ -200,6 +227,7 @@ export const frontMatter = {
             <Test />
             {\\" World\\"}
           </>,
+          <>{\\"String\\"}</>,
         ];
       }
       function _missingMdxReference(id, component) {
