@@ -42,6 +42,7 @@ import {
   remarkStaticImage,
   remarkStructurize
 } from './mdx-plugins/index.js'
+import { rehypeExtractTocContent } from './mdx-plugins/rehype-extract-toc-content.js'
 import { truthy } from './utils.js'
 
 export const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS: RehypePrettyCodeOptions = {
@@ -277,7 +278,8 @@ export async function compileMdx(
             replace: '',
             excludeExternalLinks: true
           }
-        ] satisfies Pluggable
+        ] satisfies Pluggable,
+        rehypeExtractTocContent
       ].filter(truthy),
       rehypePlugins: [
         ...(rehypePlugins || []),
