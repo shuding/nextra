@@ -1,4 +1,5 @@
 import type {
+  BaseNode,
   FunctionDeclaration,
   Identifier,
   Literal,
@@ -74,16 +75,15 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => ast => {
       (node: Property) => (node.key as Identifier).name === 'value'
     )
 
-    const isExpressionContainer = (node: any): node is JsxExpressionContainer =>
-      node.type === 'JSXExpressionContainer'
+    const isExpressionContainer = (
+      node: BaseNode
+    ): node is JsxExpressionContainer => node.type === 'JSXExpressionContainer'
 
-    const isIdentifier = (node: any): node is Identifier =>
+    const isIdentifier = (node: BaseNode): node is Identifier =>
       isExpressionContainer(node) && node.expression.type === 'Identifier'
 
-    const isLiteral = (node: any): node is Literal =>
+    const isLiteral = (node: BaseNode): node is Literal =>
       isExpressionContainer(node) && node.expression.type === 'Literal'
-
-    console.dir(heading.children, { depth: null })
 
     idNode.value = {
       type: 'JSXExpressionContainer',
@@ -93,7 +93,11 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => ast => {
       }
     }
 
-    if (heading.children.every(node => isLiteral(node) || isIdentifier(node))) {
+    if (
+      heading.children.every(
+        (node: BaseNode) => isLiteral(node) || isIdentifier(node)
+      )
+    ) {
       if (!heading.children.every(isLiteral)) {
         valueNode.value = {
           type: 'JSXFragment',
