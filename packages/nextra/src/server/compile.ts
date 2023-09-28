@@ -4,8 +4,7 @@ import { createProcessor } from '@mdx-js/mdx'
 import type { Processor } from '@mdx-js/mdx/lib/core'
 import { remarkMermaid } from '@theguild/remark-mermaid'
 import { remarkNpm2Yarn } from '@theguild/remark-npm2yarn'
-import type { ReturnStatement } from 'estree'
-import type { JsxAttribute } from 'estree-util-to-js/lib/jsx'
+import type { Program } from 'estree'
 import rehypeKatex from 'rehype-katex'
 import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
 import rehypePrettyCode from 'rehype-pretty-code'
@@ -223,7 +222,7 @@ export async function compileMdx(
       throw new Error('`frontMatter.mdxOptions` is no longer supported')
     }
 
-    const { toc } = vFile.data
+    const { toc } = vFile.data as any
 
     const tocVFile = await createProcessor({
       jsx,
@@ -233,6 +232,7 @@ export async function compileMdx(
       rehypePlugins: [
         () => ast => {
           // Insert heading contents
+          // @ts-expect-error
           ast.children = toc.map(node => ({
             type: 'mdxJsxFlowElement',
             children: node.children
@@ -240,9 +240,9 @@ export async function compileMdx(
         }
       ],
       recmaPlugins: [
-        () => ast => {
+        () => (ast: Program) => {
           // Remove top-level comment since main content have it already
-          ast.comments = ast.comments.filter(
+          ast.comments = ast.comments!.filter(
             comment =>
               comment.value !== '@jsxRuntime automatic @jsxImportSource react'
           )
@@ -251,12 +251,14 @@ export async function compileMdx(
             .filter(
               node =>
                 node.type !== 'ExportDefaultDeclaration' ||
+                // @ts-expect-error
                 node.declaration.name !== 'MDXContent'
             )
             // Remove function definition
             .filter(
               node =>
                 node.type !== 'FunctionDeclaration' ||
+                // @ts-expect-error
                 node.id.name !== 'MDXContent'
             )
             .filter(
@@ -269,13 +271,15 @@ export async function compileMdx(
           const createMdxContent = ast.body.find(
             node =>
               node.type === 'FunctionDeclaration' &&
+              // @ts-expect-error
               node.id.name === '_createMdxContent'
-          )
+          ) as any
           createMdxContent.id.name = 'useToc'
 
           const returnStatement = createMdxContent.body.body.find(
+            // @ts-expect-error
             node => node.type === 'ReturnStatement'
-          ) as ReturnStatement
+          )
           const headings = returnStatement.argument.children
 
           // for (const heading of headings) {
@@ -284,14 +288,17 @@ export async function compileMdx(
           //   )
           // }
 
+          // @ts-expect-error
           const elements = headings.map((node, i) => {
             const isText = node.children.every(
+              // @ts-expect-error
               child =>
                 child.type === 'JSXExpressionContainer' &&
                 child.expression.type === 'Literal'
             )
 
             const result = isText
+              // @ts-expect-error
               ? node.children.map(n => n.expression)[0]
               : {
                   type: 'JSXFragment',

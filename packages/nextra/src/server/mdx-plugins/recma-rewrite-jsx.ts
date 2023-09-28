@@ -107,7 +107,7 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => ast => {
     //   children: heading.children
     // }
     // }
-
+    delete heading.openingElement.selfClosing
     heading.children = [
       {
         type: 'JSXExpressionContainer',
@@ -117,12 +117,18 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => ast => {
         }
       }
     ]
-    heading.closingElement = { ...heading.openingElement, attributes: [] }
+    heading.closingElement = {
+      ...heading.openingElement,
+      type: 'JSXClosingElement',
+      attributes: []
+    }
     // }
   }
   const mdxContent = ast.body.find(
+    // @ts-expect-error
     node => node.type === 'FunctionDeclaration' && node.id.name === 'MDXContent'
   )
+  // @ts-expect-error
   mdxContent.body.body.unshift(
     {
       type: 'VariableDeclaration',
@@ -173,21 +179,17 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => ast => {
         id: {
           type: 'ObjectPattern',
           properties: [
+            // @ts-expect-error
             {
               type: 'Property',
               key: { type: 'Identifier', name: 'toc' },
               value: { type: 'Identifier', name: 'toc' },
-              computed: false,
-              method: false,
               shorthand: true,
               kind: 'init'
             }
           ]
         },
-        init: {
-          type: 'Identifier',
-          name: 'props'
-        }
+        init: { type: 'Identifier', name: 'props' }
       }
     ],
     kind: 'const'

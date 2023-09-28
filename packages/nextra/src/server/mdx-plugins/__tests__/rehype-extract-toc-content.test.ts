@@ -107,34 +107,20 @@ export const frontMatter = {
             <_components.h1>{\\"Heading 1\\"}</_components.h1>
             {\\"\\\\n\\"}
             {\\"\\\\n\\"}
-            <_components.h2 id={toc[0].id} />
-            {toc[0].value}
-            <_components.h2 />
+            <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
             {\\"\\\\n\\"}
-            <_components.h3 id={toc[1].id} />
-            {toc[1].value}
-            <_components.h3 />
+            <_components.h3 id={toc[1].id}>{toc[1].value}</_components.h3>
             {\\"\\\\n\\"}
-            <_components.h3 id={toc[2].id} />
-            {toc[2].value}
-            <_components.h3 />
+            <_components.h3 id={toc[2].id}>{toc[2].value}</_components.h3>
             {\\"\\\\n\\"}
             {\\"\\\\n\\"}
-            <_components.h4 id={toc[3].id} />
-            {toc[3].value}
-            <_components.h4 />
+            <_components.h4 id={toc[3].id}>{toc[3].value}</_components.h4>
             {\\"\\\\n\\"}
-            <_components.h5 id={toc[4].id} />
-            {toc[4].value}
-            <_components.h5 />
+            <_components.h5 id={toc[4].id}>{toc[4].value}</_components.h5>
             {\\"\\\\n\\"}
-            <_components.h6 id={toc[5].id} />
-            {toc[5].value}
-            <_components.h6 />
+            <_components.h6 id={toc[5].id}>{toc[5].value}</_components.h6>
             {\\"\\\\n\\"}
-            <_components.h6 id={toc[6].id} />
-            {toc[6].value}
-            <_components.h6 />
+            <_components.h6 id={toc[6].id}>{toc[6].value}</_components.h6>
           </>
         );
       }
