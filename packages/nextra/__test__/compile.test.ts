@@ -1,5 +1,5 @@
-import prettier from 'prettier'
 import { compileMdx } from '../src/server/compile.js'
+import { clean } from './test-utils.js'
 
 const mdxOptions = {
   jsx: true,
@@ -51,19 +51,74 @@ export const TagName = () => {
 ###### bar Qux [#]`,
       { mdxOptions }
     )
-    expect(result).toMatch('<_components.h1 id="test-id">{"My Header"}')
-    expect(result).toMatch(
-      '<_components.h2 id="extra-space">{"Some extra space"}</_components.h2>'
-    )
-    expect(result).toMatch(
-      '<_components.h3 id="extra-space-in-heading">{"Some extra space in heading"}'
-    )
-    expect(result).toMatch(
-      '<_components.h3 id="without-space">{"nospace"}</_components.h3>'
-    )
-    expect(result).toMatch('<_components.h4 id="другой-язык">{"foo"}')
-    expect(result).toMatch('<_components.h5 id="bar-baz-">{"bar Baz []"}')
-    expect(result).toMatch('<_components.h6 id="bar-qux-">{"bar Qux [#]"}')
+    expect(await clean(result)).toMatchInlineSnapshot(`
+      "import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
+      export const frontMatter = {};
+      export const toc = [
+        {
+          depth: 2,
+          value: \\"Some extra space\\",
+          id: \\"extra-space\\",
+        },
+        {
+          depth: 3,
+          value: \\"Some extra space in heading\\",
+          id: \\"extra-space-in-heading\\",
+        },
+        {
+          depth: 3,
+          value: \\"nospace\\",
+          id: \\"without-space\\",
+        },
+        {
+          depth: 4,
+          value: \\"foo\\",
+          id: \\"другой-язык\\",
+        },
+        {
+          depth: 5,
+          value: \\"bar Baz []\\",
+          id: \\"bar-baz-\\",
+        },
+        {
+          depth: 6,
+          value: \\"bar Qux [#]\\",
+          id: \\"bar-qux-\\",
+        },
+      ];
+      function _createMdxContent(props) {
+        const _components = Object.assign(
+          {
+            h1: \\"h1\\",
+            h2: \\"h2\\",
+            h3: \\"h3\\",
+            h4: \\"h4\\",
+            h5: \\"h5\\",
+            h6: \\"h6\\",
+          },
+          _provideComponents(),
+          props.components,
+        );
+        return (
+          <>
+            <_components.h1 id=\\"test-id\\">{\\"My Header\\"}</_components.h1>
+            {\\"\\\\n\\"}
+            <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
+            {\\"\\\\n\\"}
+            <_components.h3 id={toc[1].id}>{toc[1].value}</_components.h3>
+            {\\"\\\\n\\"}
+            <_components.h3 id={toc[2].id}>{toc[2].value}</_components.h3>
+            {\\"\\\\n\\"}
+            <_components.h4 id={toc[3].id}>{toc[3].value}</_components.h4>
+            {\\"\\\\n\\"}
+            <_components.h5 id={toc[4].id}>{toc[4].value}</_components.h5>
+            {\\"\\\\n\\"}
+            <_components.h6 id={toc[5].id}>{toc[5].value}</_components.h6>
+          </>
+        );
+      }
+      "
+    `)
   })
   it('use github-slugger', async () => {
     const { result } = await compileMdx('### My Header', { mdxOptions })
@@ -99,10 +154,9 @@ import Last from './three.mdx'
 `,
       { mdxOptions }
     )
-    expect(await prettier.format(result, { parser: 'typescript' }))
+    expect(await clean(result))
       .toMatchInlineSnapshot(`
-        "/*@jsxRuntime automatic @jsxImportSource react*/
-        import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
+        "import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
         export const frontMatter = {};
         import FromMdx, { toc as toc0 } from \\"./one.mdx\\";
         import FromMarkdown, { toc as toc1 } from \\"./two.md\\";
@@ -151,11 +205,11 @@ import Last from './three.mdx'
           if (!Kek) _missingMdxReference(\\"Kek\\", true);
           return (
             <>
-              <_components.h2 id=\\"️\\">{\\"❤️\\"}</_components.h2>
+              <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
               {\\"\\\\n\\"}
               <FromMdx />
               {\\"\\\\n\\"}
-              <_components.h2 id=\\"\\">{\\"✅\\"}</_components.h2>
+              <_components.h2 id={toc[2].id}>{toc[2].value}</_components.h2>
               {\\"\\\\n\\"}
               <FromMarkdown />
               {\\"\\\\n\\"}
@@ -164,42 +218,18 @@ import Last from './three.mdx'
               {\\"\\\\n\\"}
               <IgnoreMe />
               {\\"\\\\n\\"}
-              <_components.h2 id=\\"-1\\">{\\"👋\\"}</_components.h2>
+              <_components.h2 id={toc[5].id}>{toc[5].value}</_components.h2>
               {\\"\\\\n\\"}
-              <_components.h2 id=\\"kek-\\">
+              <_components.h2 id={toc[6].id}>
                 {\\"kek \\"}
                 <Kek />
               </_components.h2>
               {\\"\\\\n\\"}
-              <_components.h2 id=\\"try-me\\">
+              <_components.h2 id={toc[7].id}>
                 <_components.code>{\\"try\\"}</_components.code>
                 {\\" me\\"}
               </_components.h2>
             </>
-          );
-        }
-        function MDXContent(props = {}) {
-          const { wrapper: MDXLayout } = Object.assign(
-            {},
-            _provideComponents(),
-            props.components,
-          );
-          return MDXLayout ? (
-            <MDXLayout {...props}>
-              <_createMdxContent {...props} />
-            </MDXLayout>
-          ) : (
-            _createMdxContent(props)
-          );
-        }
-        export default MDXContent;
-        function _missingMdxReference(id, component) {
-          throw new Error(
-            \\"Expected \\" +
-              (component ? \\"component\\" : \\"object\\") +
-              \\" \`\\" +
-              id +
-              \\"\` to be defined: you likely forgot to import, pass, or provide it.\\",
           );
         }
         "
