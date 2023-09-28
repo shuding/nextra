@@ -109,8 +109,7 @@ export const frontMatter = {
         );
       }
       export default MDXContent;
-      import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
-      function _createMdxContent(props) {
+      function useToc(props) {
         const _components = Object.assign(
             {
               h2: \\"h2\\",

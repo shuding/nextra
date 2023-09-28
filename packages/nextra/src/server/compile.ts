@@ -220,7 +220,6 @@ export async function compileMdx(
     if (frontMatter.mdxOptions) {
       throw new Error('`frontMatter.mdxOptions` is no longer supported')
     }
-    console.log(vFile.data)
 
     const tocVFile = await createProcessor({
       jsx,
@@ -252,7 +251,16 @@ export async function compileMdx(
                 node.type !== 'FunctionDeclaration' ||
                 node.id.name !== 'MDXContent'
             )
-          // console.log(333, ast.body)
+            .filter(
+              node =>
+                node.type !== 'ImportDeclaration' ||
+                node.source.value !== 'nextra/mdx'
+            )
+
+          // Rename `_createMdxContent` to `useToc`
+          const createMdxContent = ast.body.find(node => node.type === 'FunctionDeclaration' && node.id.name === '_createMdxContent')
+          createMdxContent.id.name = 'useToc'
+
         }
       ]
     }).process(filePath ? { value: '', path: filePath } : '')
