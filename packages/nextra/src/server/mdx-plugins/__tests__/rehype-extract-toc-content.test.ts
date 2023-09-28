@@ -84,12 +84,20 @@ export const frontMatter = {
             {\\"\\\\n\\"}
             {\\"\\\\n\\"}
             <_components.h2 id={toc[0].id} />
+            {toc[0].value}
+            <_components.h2 id={toc[0].id} />
             {\\"\\\\n\\"}
+            <_components.h3 id={toc[1].id} />
+            {toc[1].value}
             <_components.h3 id={toc[1].id} />
             {\\"\\\\n\\"}
             <_components.h3 id={toc[2].id} />
+            {toc[2].value}
+            <_components.h3 id={toc[2].id} />
             {\\"\\\\n\\"}
             {\\"\\\\n\\"}
+            <_components.h4 id={toc[3].id} />
+            {toc[3].value}
             <_components.h4 id={toc[3].id} />
           </>
         );

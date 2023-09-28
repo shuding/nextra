@@ -94,29 +94,30 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => ast => {
       }
     }
 
-    if (
-      heading.children.every(
-        (node: BaseNode) => isLiteral(node) || isIdentifier(node)
-      )
-    ) {
-      if (!heading.children.every(isLiteral)) {
-        valueNode.value = {
-          type: 'JSXFragment',
-          openingFragment: { type: 'JSXOpeningFragment' },
-          closingFragment: { type: 'JSXClosingFragment' },
-          children: heading.children
+    // if (
+    //   heading.children.every(
+    //     (node: BaseNode) => isLiteral(node) || isIdentifier(node)
+    //   )
+    // ) {
+    //   if (!heading.children.every(isLiteral)) {
+    // valueNode.value = {
+    //   type: 'JSXFragment',
+    //   openingFragment: { type: 'JSXOpeningFragment' },
+    //   closingFragment: { type: 'JSXClosingFragment' },
+    //   children: heading.children
+    // }
+    // }
+
+    heading.children = [
+      {
+        type: 'JSXExpressionContainer',
+        expression: {
+          type: 'Identifier',
+          name: `toc[${foundIndex}].value`
         }
       }
-
-      heading.children = [
-        {
-          type: 'JSXExpressionContainer',
-          expression: {
-            type: 'Identifier',
-            name: `toc[${foundIndex}].value`
-          }
-        }
-      ]
-    }
+    ]
+    heading.closingElement = heading.openingElement
+    // }
   }
 }
