@@ -1,6 +1,6 @@
 import prettier from 'prettier'
 
-export function clean(content: any, minify = true): Promise<string> {
+export async function clean(content: any, minify = true): Promise<string> {
   if (minify) {
     content = content.slice(
       content.indexOf('\n'),
