@@ -353,8 +353,10 @@ import Last from './three.mdx'
 `,
       { mdxOptions }
     )
-    expect(result).toMatch('export const toc = [];')
-    expect(result).not.toMatch('id="custom-id"')
+    expect(result).toMatch(`export function useTOC(props) {
+  return [];
+}`)
+    expect(result).not.toMatch('id=')
   })
 })
 
