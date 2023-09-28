@@ -114,27 +114,6 @@ export const remarkHeadings: Plugin<
       return
     }
 
-    const headingElements = headings.map(heading =>
-      typeof heading === 'string'
-        ? ({
-            type: 'SpreadElement',
-            argument: { type: 'Identifier', name: heading }
-          } satisfies SpreadElement)
-        : createAstObject(heading)
-    )
-
-    ast.children.push({
-      type: 'mdxjsEsm',
-      data: {
-        estree: {
-          body: [
-            createAstExportConst(exportName, {
-              type: 'ArrayExpression',
-              elements: headingElements
-            })
-          ]
-        }
-      }
-    } as any)
+    file.data.toc = headings
   }
 }

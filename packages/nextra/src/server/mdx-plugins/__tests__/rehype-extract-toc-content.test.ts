@@ -54,43 +54,6 @@ export const frontMatter = {
       export const frontMatter = {
         test: \\"extract toc content\\",
       };
-      export const toc = [
-        {
-          depth: 2,
-          value: \\"Heading myVar\\",
-          id: \\"heading-myvar\\",
-        },
-        {
-          depth: 3,
-          value: \\"Heading latex\\",
-          id: \\"heading-latex\\",
-        },
-        {
-          depth: 3,
-          value: \\"Heading <Code />:{jsx}\\",
-          id: \\"heading-code-jsx\\",
-        },
-        {
-          depth: 4,
-          value: \\" World\\",
-          id: \\"-world\\",
-        },
-        {
-          depth: 5,
-          value: \\"String\\",
-          id: \\"string\\",
-        },
-        {
-          depth: 6,
-          value: \\"123\\",
-          id: \\"123\\",
-        },
-        {
-          depth: 6,
-          value: \\"Dada 123 true\\",
-          id: \\"dada-123-true\\",
-        },
-      ];
       export function useTOC(props) {
         const _components = Object.assign(
           {

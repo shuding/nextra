@@ -11,7 +11,7 @@ import { DEFAULT_PROPERTY_PROPS } from '../constants.js'
 
 const HEADING_NAMES = new Set(['h2', 'h3', 'h4', 'h5', 'h6'])
 
-export const recmaRewriteJsx: Plugin<[], Program> = () => ast => {
+export const recmaRewriteJsx: Plugin<[], Program> = () => (ast, file) => {
   const createMdxContent = ast.body.find(
     o => o.type === 'FunctionDeclaration' && o.id!.name === '_createMdxContent'
   ) as FunctionDeclaration
@@ -27,19 +27,10 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => ast => {
 
   // @ts-expect-error
   const headings = returnStatement.argument.children.filter(isHeading)
-  const toc = ast.body.find(
-    node =>
-      node.type === 'ExportNamedDeclaration' &&
-      node.declaration &&
-      'declarations' in
-        node.declaration /* doesn't exist for FunctionDeclaration */ &&
-      // @ts-expect-error
-      node.declaration.declarations[0].id.name === 'toc'
-  ) as any
 
-  const tocProperties = toc.declaration.declarations[0].init.elements as (
-    | ObjectExpression
-    | SpreadElement
+  const tocProperties = file.data.toc as (
+    | { properties: { id: string } }
+    | string
   )[]
 
   for (const heading of headings) {
@@ -50,12 +41,8 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => ast => {
     const id = idNode.value.value
 
     const foundIndex = tocProperties.findIndex(node => {
-      if (node.type !== 'ObjectExpression') return
-      const object = Object.fromEntries(
-        // @ts-expect-error
-        node.properties.map(prop => [prop.key.name, prop.value.value])
-      )
-      return object.id === id
+      if (typeof node === 'string') return
+      return node.properties.id === id
     })
 
     if (foundIndex === -1) continue
