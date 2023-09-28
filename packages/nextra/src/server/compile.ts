@@ -223,6 +223,8 @@ export async function compileMdx(
       throw new Error('`frontMatter.mdxOptions` is no longer supported')
     }
 
+    const { toc } = vFile.data
+
     const tocVFile = await createProcessor({
       jsx,
       format,
@@ -231,7 +233,7 @@ export async function compileMdx(
       rehypePlugins: [
         () => ast => {
           // Insert heading contents
-          ast.children = vFile.data.toc.map(node => ({
+          ast.children = toc.map(node => ({
             type: 'mdxJsxFlowElement',
             children: node.children
           }))
@@ -282,37 +284,41 @@ export async function compileMdx(
           //   )
           // }
 
-          const elements = headings.map(node => {
-            const result =  node.children.every(
+          const elements = headings.map((node, i) => {
+            const isText = node.children.every(
               child =>
                 child.type === 'JSXExpressionContainer' &&
                 child.expression.type === 'Literal'
             )
+
+            const result = isText
               ? node.children.map(n => n.expression)[0]
               : {
-                type: 'JSXFragment',
-                openingFragment: {
-                  type: 'JSXOpeningFragment'
-                },
-                closingFragment: {
-                  type: 'JSXClosingFragment'
-                },
-                children: node.children
-              }
+                  type: 'JSXFragment',
+                  openingFragment: { type: 'JSXOpeningFragment' },
+                  closingFragment: { type: 'JSXClosingFragment' },
+                  children: node.children
+                }
 
             return {
               type: 'ObjectExpression',
               properties: [
                 {
                   type: 'Property',
-                  key: {
-                    type: 'Identifier',
-                    name: 'value'
-                  },
+                  key: { type: 'Identifier', name: 'value' },
                   value: result,
-                  computed: false,
-                  method: false,
-                  shorthand: false,
+                  kind: 'init'
+                },
+                {
+                  type: 'Property',
+                  key: { type: 'Identifier', name: 'id' },
+                  value: { type: 'Literal', value: toc[i].properties.id },
+                  kind: 'init'
+                },
+                {
+                  type: 'Property',
+                  key: { type: 'Identifier', name: 'depth' },
+                  value: { type: 'Literal', value: Number(toc[i].tagName[1]) },
                   kind: 'init'
                 }
               ]

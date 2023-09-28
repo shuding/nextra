@@ -176,6 +176,8 @@ export const frontMatter = {
                 {myVar}
               </>
             ),
+            id: \\"heading-myvar\\",
+            depth: 2,
           },
           {
             value: (
@@ -231,6 +233,8 @@ export const frontMatter = {
                 </_components.span>
               </>
             ),
+            id: \\"heading-latex\\",
+            depth: 3,
           },
           {
             value: (
@@ -239,6 +243,8 @@ export const frontMatter = {
                 <_components.code>{\\"<Code />:{jsx}\\"}</_components.code>
               </>
             ),
+            id: \\"heading-code-jsx\\",
+            depth: 3,
           },
           {
             value: (
@@ -247,15 +253,23 @@ export const frontMatter = {
                 {\\" World\\"}
               </>
             ),
+            id: \\"-world\\",
+            depth: 4,
           },
           {
             value: \\"String\\",
+            id: \\"string\\",
+            depth: 5,
           },
           {
             value: \\"123\\",
+            id: \\"123\\",
+            depth: 6,
           },
           {
             value: \\"Dada 123 true\\",
+            id: \\"dada-123-true\\",
+            depth: 6,
           },
         ];
       }
