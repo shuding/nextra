@@ -154,8 +154,7 @@ import Last from './three.mdx'
 `,
       { mdxOptions }
     )
-    expect(await clean(result))
-      .toMatchInlineSnapshot(`
+    expect(await clean(result)).toMatchInlineSnapshot(`
         "import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
         export const frontMatter = {};
         import FromMdx, { toc as toc0 } from \\"./one.mdx\\";

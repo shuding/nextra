@@ -1,10 +1,10 @@
 import { compile } from '@mdx-js/mdx'
 import type { VFile } from '@mdx-js/mdx/lib/compile'
 import rehypePrettyCode from 'rehype-pretty-code'
+import { clean } from '../../../../__test__/test-utils.js'
 import { DEFAULT_REHYPE_PRETTY_CODE_OPTIONS } from '../../compile.js'
 import { attachMeta, parseMeta, rehypeIcon } from '../index.js'
 import { REHYPE_ICON_DEFAULT_REPLACES } from '../rehype-icon.js'
-import { clean } from '../../../../__test__/test-utils.js'
 
 function process(content: string): Promise<VFile> {
   return compile(content, {
