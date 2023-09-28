@@ -94,7 +94,7 @@ export function ConfigProvider({
         )}`
       )
     }
-    validateMeta(pageOpts.pageMap)
+    // validateMeta(pageOpts.pageMap)
     isValidated = true
   }
   const extendedConfig: Config = {

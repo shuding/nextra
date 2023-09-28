@@ -157,6 +157,9 @@ import Last from './three.mdx'
               id: \\"try-me\\",
             },
           ];
+          useEffect(() => {
+            props.setToc(toc);
+          }, []);
           if (!Kek) _missingMdxReference(\\"Kek\\", true);
           return (
             <>
