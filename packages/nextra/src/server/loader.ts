@@ -234,6 +234,7 @@ ${mdxContent}
 
 export default setupNextraPage(
   MDXContent,
+  useTOC,
   '${route}',
   ${stringifiedPageOpts},toc,pageMap,frontMatter}
 )`

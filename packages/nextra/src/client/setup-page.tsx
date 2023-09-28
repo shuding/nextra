@@ -18,8 +18,8 @@ import type {
   PageMapItem,
   PageOpts
 } from '../types'
-import { findFolder } from './utils.js'
 import { DataProvider } from './data.js'
+import { findFolder } from './utils.js'
 
 function isFolder(value: DynamicMetaItem): value is DynamicFolder {
   return !!value && typeof value === 'object' && value.type === 'folder'
@@ -117,6 +117,7 @@ export const resolvePageMap =
 
 export function setupNextraPage(
   MDXContent: FC,
+  useTOC: () => any[],
   route: string,
   pageOpts: PageOpts
 ) {
@@ -130,6 +131,7 @@ export function setupNextraPage(
   __nextra_internal__.pageMap = pageOpts.pageMap
   __nextra_internal__.context[route] = {
     Content: MDXContent,
+    useTOC,
     pageOpts
   }
   return NextraLayout
@@ -172,13 +174,14 @@ function NextraLayout({
       title,
       frontMatter
     }
+  } else {
+    pageOpts.toc = pageContext.useTOC()
   }
 
+  const mdxContent = <pageContext.Content />
   return (
     <Layout themeConfig={themeConfig} pageOpts={pageOpts} pageProps={props}>
-      <DataProvider value={props}>
-        <pageContext.Content />
-      </DataProvider>
+      <DataProvider value={props}>{mdxContent}</DataProvider>
     </Layout>
   )
 }
