@@ -117,7 +117,7 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => ast => {
         }
       }
     ]
-    heading.closingElement = heading.openingElement
+    heading.closingElement = { ...heading.openingElement, attributes: [] }
     // }
   }
 }
