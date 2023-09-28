@@ -1,12 +1,71 @@
 import { clean } from '../../../../__test__/test-utils.js'
 import { compileMdx } from '../../compile.js'
 
+const opts = {
+  mdxOptions: {
+    jsx: true,
+    outputFormat: 'program'
+  },
+  latex: true
+} as const
+
 describe('rehypeExtractTocContent', () => {
+  it('should fill heading deeply', async () => {
+    const { result } = await compileMdx(
+      `
+import { Steps } from 'nextra/components'
+
+## baz qux
+
+<Steps>
+  ### foo bar
+</Steps>
+`,
+      opts
+    )
+    expect(clean(result)).resolves.toMatchInlineSnapshot(`
+      "import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
+      export const frontMatter = {};
+      import { Steps } from \\"nextra/components\\";
+      export function useTOC(props) {
+        return [
+          {
+            value: \\"baz qux\\",
+            id: \\"baz-qux\\",
+            depth: 2,
+          },
+          {
+            value: \\"foo bar\\",
+            id: \\"foo-bar\\",
+            depth: 3,
+          },
+        ];
+      }
+      function _createMdxContent(props) {
+        const { toc } = props;
+        const _components = Object.assign(
+          {
+            h2: \\"h2\\",
+            h3: \\"h3\\",
+          },
+          _provideComponents(),
+          props.components,
+        );
+        return (
+          <>
+            <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
+            {\\"\\\\n\\"}
+            <Steps>
+              <_components.h3 id=\\"foo-bar\\" />
+            </Steps>
+          </>
+        );
+      }
+      "
+    `)
+  })
+
   it('should extract', async () => {
-    const mdxOptions = {
-      jsx: true,
-      outputFormat: 'program'
-    } as const
     const { result } = await compileMdx(
       `
 # Heading 1
@@ -33,10 +92,7 @@ export const frontMatter = {
   test: 'extract toc content'
 }
     `,
-      {
-        mdxOptions,
-        latex: true
-      }
+      opts
     )
     expect(await clean(result, false)).toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic @jsxImportSource react*/
