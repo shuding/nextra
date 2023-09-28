@@ -215,11 +215,6 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => ast => {
     }
   }
 
-  // Remove this
-  const [el] = ast.body.splice(5,1)
-
-  ast.body.push(el)
-
   createMdxContent.body.body.unshift({
     type: 'VariableDeclaration',
     declarations: [

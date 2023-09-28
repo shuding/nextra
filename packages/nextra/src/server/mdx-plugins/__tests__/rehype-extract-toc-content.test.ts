@@ -88,56 +88,6 @@ export const frontMatter = {
           id: \\"dada-123-true\\",
         },
       ];
-      function _createMdxContent(props) {
-        const { toc } = props;
-        const _components = Object.assign(
-          {
-            h1: \\"h1\\",
-            h2: \\"h2\\",
-            h3: \\"h3\\",
-            h4: \\"h4\\",
-            h5: \\"h5\\",
-            h6: \\"h6\\",
-          },
-          _provideComponents(),
-          props.components,
-        );
-        return (
-          <>
-            <_components.h1>{\\"Heading 1\\"}</_components.h1>
-            {\\"\\\\n\\"}
-            {\\"\\\\n\\"}
-            <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
-            {\\"\\\\n\\"}
-            <_components.h3 id={toc[1].id}>{toc[1].value}</_components.h3>
-            {\\"\\\\n\\"}
-            <_components.h3 id={toc[2].id}>{toc[2].value}</_components.h3>
-            {\\"\\\\n\\"}
-            {\\"\\\\n\\"}
-            <_components.h4 id={toc[3].id}>{toc[3].value}</_components.h4>
-            {\\"\\\\n\\"}
-            <_components.h5 id={toc[4].id}>{toc[4].value}</_components.h5>
-            {\\"\\\\n\\"}
-            <_components.h6 id={toc[5].id}>{toc[5].value}</_components.h6>
-            {\\"\\\\n\\"}
-            <_components.h6 id={toc[6].id}>{toc[6].value}</_components.h6>
-          </>
-        );
-      }
-      function MDXContent(props = {}) {
-        const toc = useTOC(props);
-        const { wrapper: MDXLayout } = Object.assign(
-          {},
-          _provideComponents(),
-          props.components,
-        );
-        return (
-          <MDXLayout {...props} toc={toc}>
-            <_createMdxContent {...props} toc={toc} />
-          </MDXLayout>
-        );
-      }
-      export default MDXContent;
       export function useTOC(props) {
         const _components = Object.assign(
           {
@@ -256,6 +206,56 @@ export const frontMatter = {
           },
         ];
       }
+      function _createMdxContent(props) {
+        const { toc } = props;
+        const _components = Object.assign(
+          {
+            h1: \\"h1\\",
+            h2: \\"h2\\",
+            h3: \\"h3\\",
+            h4: \\"h4\\",
+            h5: \\"h5\\",
+            h6: \\"h6\\",
+          },
+          _provideComponents(),
+          props.components,
+        );
+        return (
+          <>
+            <_components.h1>{\\"Heading 1\\"}</_components.h1>
+            {\\"\\\\n\\"}
+            {\\"\\\\n\\"}
+            <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
+            {\\"\\\\n\\"}
+            <_components.h3 id={toc[1].id}>{toc[1].value}</_components.h3>
+            {\\"\\\\n\\"}
+            <_components.h3 id={toc[2].id}>{toc[2].value}</_components.h3>
+            {\\"\\\\n\\"}
+            {\\"\\\\n\\"}
+            <_components.h4 id={toc[3].id}>{toc[3].value}</_components.h4>
+            {\\"\\\\n\\"}
+            <_components.h5 id={toc[4].id}>{toc[4].value}</_components.h5>
+            {\\"\\\\n\\"}
+            <_components.h6 id={toc[5].id}>{toc[5].value}</_components.h6>
+            {\\"\\\\n\\"}
+            <_components.h6 id={toc[6].id}>{toc[6].value}</_components.h6>
+          </>
+        );
+      }
+      function MDXContent(props = {}) {
+        const toc = useTOC(props);
+        const { wrapper: MDXLayout } = Object.assign(
+          {},
+          _provideComponents(),
+          props.components,
+        );
+        return (
+          <MDXLayout {...props} toc={toc}>
+            <_createMdxContent {...props} toc={toc} />
+          </MDXLayout>
+        );
+      }
+      export default MDXContent;
       "
     `)
   })
