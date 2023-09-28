@@ -120,4 +120,62 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => ast => {
     heading.closingElement = { ...heading.openingElement, attributes: [] }
     // }
   }
+  const mdxContent = ast.body.find(
+    node => node.type === 'FunctionDeclaration' && node.id.name === 'MDXContent'
+  )
+  mdxContent.body.body.unshift(
+    {
+      type: 'VariableDeclaration',
+      declarations: [
+        {
+          type: 'VariableDeclarator',
+          id: {
+            type: 'Identifier',
+            name: 'toc'
+          },
+          init: {
+            type: 'CallExpression',
+            callee: {
+              type: 'Identifier',
+              name: 'useToc'
+            },
+            arguments: [
+              {
+                type: 'Identifier',
+                name: 'props'
+              }
+            ],
+            optional: false
+          }
+        }
+      ],
+      kind: 'const'
+    },
+    {
+      type: 'ExpressionStatement',
+      expression: {
+        type: 'AssignmentExpression',
+        operator: '=',
+        left: { type: 'Identifier', name: 'props' },
+        right: {
+          type: 'ObjectExpression',
+          properties: [
+            {
+              type: 'SpreadElement',
+              argument: { type: 'Identifier', name: 'props' }
+            },
+            {
+              type: 'Property',
+              key: { type: 'Identifier', name: 'toc' },
+              value: { type: 'Identifier', name: 'toc' },
+              computed: false,
+              method: false,
+              shorthand: true,
+              kind: 'init'
+            }
+          ]
+        }
+      }
+    }
+  )
 }
