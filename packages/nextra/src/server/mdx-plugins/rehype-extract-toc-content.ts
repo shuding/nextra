@@ -83,7 +83,7 @@ export const rehypeExtractTocContent: Plugin<[], any> = () => (ast, file) => {
                   }
                 ]
               }
-            },
+            }
           }
         ]
       }

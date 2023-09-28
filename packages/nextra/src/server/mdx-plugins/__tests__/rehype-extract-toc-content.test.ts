@@ -1,5 +1,5 @@
-import { compileMdx } from '../../compile.js'
 import { clean } from '../../../../__test__/test-utils.js'
+import { compileMdx } from '../../compile.js'
 
 describe('rehypeExtractTocContent', () => {
   it('should extract', async () => {
@@ -7,7 +7,8 @@ describe('rehypeExtractTocContent', () => {
       jsx: true,
       outputFormat: 'program'
     } as const
-    const { result } = await compileMdx(`
+    const { result } = await compileMdx(
+      `
 # Heading 1
 
 export const myVar = 'interpolated'
@@ -31,10 +32,12 @@ export const Test = () => <span>Hello</span>
 export const frontMatter = {
   test: 'extract toc content'
 }
-    `, {
-      mdxOptions,
-      latex: true
-    })
+    `,
+      {
+        mdxOptions,
+        latex: true
+      }
+    )
     expect(await clean(result, false)).toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic @jsxImportSource react*/
       import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
