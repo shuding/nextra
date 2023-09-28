@@ -299,7 +299,7 @@ export async function compileMdx(
             ]),
         latex && rehypeKatex
       ].filter(truthy),
-      recmaPlugins: [recmaRewriteJsx]
+      recmaPlugins: [!isRemoteContent && recmaRewriteJsx].filter(truthy)
     })
   }
 }
