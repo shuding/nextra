@@ -238,7 +238,6 @@ export default setupNextraPage(
   '${route}',
   ${stringifiedPageOpts},pageMap,frontMatter}
 )`
-  // console.log(111)
-  // console.log(rawJs)
+
   return rawJs
 }
