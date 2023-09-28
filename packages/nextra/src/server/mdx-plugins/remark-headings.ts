@@ -1,11 +1,9 @@
-import type { SpreadElement } from 'estree'
 import Slugger from 'github-slugger'
 import type { Parent, Root } from 'mdast'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 import type { Heading } from '../../types'
 import { MARKDOWN_EXTENSION_REGEX } from '../constants.js'
-import { createAstExportConst, createAstObject } from '../utils.js'
 import type { HProperties } from './remark-custom-heading-id'
 
 const getFlattenedValue = (node: Parent): string =>
