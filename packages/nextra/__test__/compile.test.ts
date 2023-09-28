@@ -16,8 +16,8 @@ describe('Process heading', () => {
     expect(result).toMatchSnapshot()
   })
   it('static-h1', async () => {
-    const result = await compileMdx('# Hello World', { mdxOptions })
-    expect(result).toMatchSnapshot()
+    const { result } = await compileMdx('# Hello World', { mdxOptions })
+    expect(clean(result)).resolves.toMatchSnapshot()
   })
   it('dynamic-h1', async () => {
     const res = await compileMdx(

@@ -115,24 +115,21 @@ function _createMdxContent(props) {
 `;
 
 exports[`Process heading > static-h1 1`] = `
-{
-  "frontMatter": {},
-  "result": "/*@jsxRuntime automatic @jsxImportSource react*/
-import {useMDXComponents as _provideComponents} from \\"nextra/mdx\\";
+"import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
 export const frontMatter = {};
-export const toc = [];
+export function useTOC(props) {
+  return [];
+}
 function _createMdxContent(props) {
-  const _components = Object.assign({
-    h1: \\"h1\\"
-  }, _provideComponents(), props.components);
+  const { toc } = props;
+  const _components = Object.assign(
+    {
+      h1: \\"h1\\",
+    },
+    _provideComponents(),
+    props.components,
+  );
   return <_components.h1>{\\"Hello World\\"}</_components.h1>;
 }
-function MDXContent(props = {}) {
-  const {wrapper: MDXLayout} = Object.assign({}, _provideComponents(), props.components);
-  return MDXLayout ? <MDXLayout {...props}><_createMdxContent {...props} /></MDXLayout> : _createMdxContent(props);
-}
-export default MDXContent;
-",
-  "title": "Hello World",
-}
+"
 `;
