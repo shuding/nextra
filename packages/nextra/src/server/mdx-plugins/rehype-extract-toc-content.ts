@@ -23,11 +23,14 @@ export const rehypeExtractTocContent: Plugin<[], any> = () => (ast, file) => {
   )
 
   // @ts-expect-error
-  const elements = file.data.toc.map((n, i) => {
+  const elements = file.data.toc.map(n => {
     if (typeof n === 'string') {
       return {
         type: 'SpreadElement',
-        argument: { type: 'Identifier', name: n }
+        argument: {
+          type: 'CallExpression',
+          callee: { type: 'Identifier', name: n }
+        }
       }
     }
 

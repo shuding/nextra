@@ -215,14 +215,14 @@ import Last from './three.mdx'
             id: \\"️\\",
             depth: 2,
           },
-          ...useTOC0,
+          ...useTOC0(),
           {
             value: \\"✅\\",
             id: \\"\\",
             depth: 2,
           },
-          ...useTOC1,
-          ...useTOC2,
+          ...useTOC1(),
+          ...useTOC2(),
           {
             value: \\"👋\\",
             id: \\"-1\\",
