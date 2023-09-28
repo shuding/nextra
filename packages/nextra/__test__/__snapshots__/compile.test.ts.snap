@@ -6,8 +6,11 @@ exports[`Process heading > code-h1 1`] = `
   "result": "/*@jsxRuntime automatic @jsxImportSource react*/
 import {useMDXComponents as _provideComponents} from \\"nextra/mdx\\";
 export const frontMatter = {};
-export const toc = [];
+export function useTOC(props) {
+  return [];
+}
 function _createMdxContent(props) {
+  const {toc} = props;
   const _components = Object.assign({
     h1: \\"h1\\",
     code: \\"code\\"
@@ -15,8 +18,9 @@ function _createMdxContent(props) {
   return <_components.h1><_components.code>{\\"codegen.yml\\"}</_components.code></_components.h1>;
 }
 function MDXContent(props = {}) {
+  const toc = useTOC(props);
   const {wrapper: MDXLayout} = Object.assign({}, _provideComponents(), props.components);
-  return MDXLayout ? <MDXLayout {...props}><_createMdxContent {...props} /></MDXLayout> : _createMdxContent(props);
+  return <MDXLayout {...props} toc={toc}><_createMdxContent {...props} toc={toc} /></MDXLayout>;;
 }
 export default MDXContent;
 ",
