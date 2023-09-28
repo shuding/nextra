@@ -125,7 +125,31 @@ export const TagName = () => {
   })
   it('use github-slugger', async () => {
     const { result } = await compileMdx('### My Header', { mdxOptions })
-    expect(result).toMatch('<_components.h3 id="my-header">{"My Header"}')
+    expect(await clean(result)).toMatchInlineSnapshot(`
+      "import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
+      export const frontMatter = {};
+      export function useTOC(props) {
+        return [
+          {
+            value: \\"My Header\\",
+            id: \\"my-header\\",
+            depth: 3,
+          },
+        ];
+      }
+      function _createMdxContent(props) {
+        const { toc } = props;
+        const _components = Object.assign(
+          {
+            h3: \\"h3\\",
+          },
+          _provideComponents(),
+          props.components,
+        );
+        return <_components.h3 id={toc[0].id}>{toc[0].value}</_components.h3>;
+      }
+      "
+    `)
   })
 
   it('should merge headings from partial components', async () => {

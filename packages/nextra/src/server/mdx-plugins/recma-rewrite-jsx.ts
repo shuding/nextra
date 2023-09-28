@@ -19,8 +19,12 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => (ast, file) => {
     return name && HEADING_NAMES.has(name)
   }
 
-  // @ts-expect-error
-  const headings = returnStatement.argument.children.filter(isHeading)
+  const { argument } = returnStatement as any
+
+  const headings = (
+    // if return statements doesn't wrapped in fragment children will be []
+    argument.children.length ? argument.children : [argument]
+  ).filter(isHeading)
 
   const tocProperties = file.data.toc as (
     | { properties: { id: string } }
