@@ -68,6 +68,7 @@ export const rehypeExtractTocContent: Plugin<[], any> = () => (ast, file) => {
         body: [
           {
             type: 'ExportNamedDeclaration',
+            specifiers: [],
             declaration: {
               type: 'FunctionDeclaration',
               id: { type: 'Identifier', name: 'useToc' },
@@ -82,10 +83,6 @@ export const rehypeExtractTocContent: Plugin<[], any> = () => (ast, file) => {
                 ]
               }
             },
-            specifiers: [],
-            source: null,
-            exportKind: 'value',
-            assertions: []
           }
         ]
       }
