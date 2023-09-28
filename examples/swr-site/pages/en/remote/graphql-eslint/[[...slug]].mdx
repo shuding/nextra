@@ -13,12 +13,13 @@ export async function getStaticProps({ params }) {
   const response = await fetch(url)
   const data = await response.text()
   const { __nextra_pageMap } = await buildDynamicMeta('en')
+  const dynamicMdx = await buildDynamicMDX(data, {
+    defaultShowCopyCode: true
+  })
   return {
     props: {
       __nextra_pageMap,
-      ...(await buildDynamicMDX(data, {
-        defaultShowCopyCode: true
-      }))
+      ...dynamicMdx
     }
   }
 }
