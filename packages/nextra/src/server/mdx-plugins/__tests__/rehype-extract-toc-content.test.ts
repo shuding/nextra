@@ -29,8 +29,9 @@ export const frontMatter = {
       mdxOptions,
       latex: true
     })
-    expect(await clean(result)).toMatchInlineSnapshot(`
-      "import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
+    expect(await clean(result, false)).toMatchInlineSnapshot(`
+      "/*@jsxRuntime automatic @jsxImportSource react*/
+      import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
       export const myVar = \\"interpolated\\";
       export const Test = () => {
         const _components = Object.assign(
@@ -91,6 +92,134 @@ export const frontMatter = {
             {\\"\\\\n\\"}
             <_components.h4 id={toc[3].id} />
           </>
+        );
+      }
+      function MDXContent(props = {}) {
+        const { wrapper: MDXLayout } = Object.assign(
+          {},
+          _provideComponents(),
+          props.components,
+        );
+        return MDXLayout ? (
+          <MDXLayout {...props}>
+            <_createMdxContent {...props} />
+          </MDXLayout>
+        ) : (
+          _createMdxContent(props)
+        );
+      }
+      export default MDXContent;
+      /*@jsxRuntime automatic @jsxImportSource react*/
+      import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
+      function _createMdxContent(props) {
+        const _components = Object.assign(
+            {
+              h2: \\"h2\\",
+              h3: \\"h3\\",
+              span: \\"span\\",
+              math: \\"math\\",
+              semantics: \\"semantics\\",
+              mrow: \\"mrow\\",
+              mi: \\"mi\\",
+              annotation: \\"annotation\\",
+              code: \\"code\\",
+              h4: \\"h4\\",
+            },
+            _provideComponents(),
+            props.components,
+          ),
+          { Test } = _components;
+        if (!Test) _missingMdxReference(\\"Test\\", true);
+        return (
+          <>
+            <_components.h2 id=\\"heading-myvar\\">
+              {\\"Heading \\"}
+              {myVar}
+            </_components.h2>
+            <_components.h3 id=\\"heading-latex\\">
+              {\\"Heading \\"}
+              <_components.span className=\\"katex\\">
+                <_components.span className=\\"katex-mathml\\">
+                  <_components.math xmlns=\\"http://www.w3.org/1998/Math/MathML\\">
+                    <_components.semantics>
+                      <_components.mrow>
+                        <_components.mi>{\\"l\\"}</_components.mi>
+                        <_components.mi>{\\"a\\"}</_components.mi>
+                        <_components.mi>{\\"t\\"}</_components.mi>
+                        <_components.mi>{\\"e\\"}</_components.mi>
+                        <_components.mi>{\\"x\\"}</_components.mi>
+                      </_components.mrow>
+                      <_components.annotation encoding=\\"application/x-tex\\">
+                        {\\"latex\\"}
+                      </_components.annotation>
+                    </_components.semantics>
+                  </_components.math>
+                </_components.span>
+                <_components.span className=\\"katex-html\\" aria-hidden=\\"true\\">
+                  <_components.span className=\\"base\\">
+                    <_components.span
+                      className=\\"strut\\"
+                      style={{
+                        height: \\"0.6944em\\",
+                      }}
+                    />
+                    <_components.span
+                      className=\\"mord mathnormal\\"
+                      style={{
+                        marginRight: \\"0.01968em\\",
+                      }}
+                    >
+                      {\\"l\\"}
+                    </_components.span>
+                    <_components.span className=\\"mord mathnormal\\">
+                      {\\"a\\"}
+                    </_components.span>
+                    <_components.span className=\\"mord mathnormal\\">
+                      {\\"t\\"}
+                    </_components.span>
+                    <_components.span className=\\"mord mathnormal\\">
+                      {\\"e\\"}
+                    </_components.span>
+                    <_components.span className=\\"mord mathnormal\\">
+                      {\\"x\\"}
+                    </_components.span>
+                  </_components.span>
+                </_components.span>
+              </_components.span>
+            </_components.h3>
+            <_components.h3 id=\\"heading-code-jsx\\">
+              {\\"Heading \\"}
+              <_components.code>{\\"<Code />:{jsx}\\"}</_components.code>
+            </_components.h3>
+            <_components.h4 id=\\"-world\\">
+              <Test />
+              {\\" World\\"}
+            </_components.h4>
+          </>
+        );
+      }
+      function MDXContent(props = {}) {
+        const { wrapper: MDXLayout } = Object.assign(
+          {},
+          _provideComponents(),
+          props.components,
+        );
+        return MDXLayout ? (
+          <MDXLayout {...props}>
+            <_createMdxContent {...props} />
+          </MDXLayout>
+        ) : (
+          _createMdxContent(props)
+        );
+      }
+      export default MDXContent;
+      function _missingMdxReference(id, component) {
+        throw new Error(
+          \\"Expected \\" +
+            (component ? \\"component\\" : \\"object\\") +
+            \\" \`\\" +
+            id +
+            \\"\` to be defined: you likely forgot to import, pass, or provide it.\\",
         );
       }
       "
