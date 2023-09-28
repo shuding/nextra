@@ -127,22 +127,12 @@ import Last from './three.mdx'
           },
           {
             depth: 2,
-            value: (
-              <>
-                {\\"kek \\"}
-                <Kek />
-              </>
-            ),
+            value: \\"kek \\",
             id: \\"kek-\\",
           },
           {
             depth: 2,
-            value: (
-              <>
-                <_components.code>{\\"try\\"}</_components.code>
-                {\\" me\\"}
-              </>
-            ),
+            value: \\"try me\\",
             id: \\"try-me\\",
           },
         ];
@@ -174,9 +164,15 @@ import Last from './three.mdx'
               {\\"\\\\n\\"}
               <_components.h2 id={toc[5].id}>{toc[5].value}</_components.h2>
               {\\"\\\\n\\"}
-              <_components.h2 id={toc[6].id}>{toc[6].value}</_components.h2>
+              <_components.h2 id={toc[6].id}>
+                {\\"kek \\"}
+                <Kek />
+              </_components.h2>
               {\\"\\\\n\\"}
-              <_components.h2 id={toc[7].id}>{toc[7].value}</_components.h2>
+              <_components.h2 id={toc[7].id}>
+                <_components.code>{\\"try\\"}</_components.code>
+                {\\" me\\"}
+              </_components.h2>
             </>
           );
         }

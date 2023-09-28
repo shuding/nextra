@@ -1,9 +1,7 @@
 import type {
   FunctionDeclaration,
-  Identifier,
   ObjectExpression,
   Program,
-  Property,
   ReturnStatement,
   SpreadElement
 } from 'estree'
@@ -63,26 +61,25 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => ast => {
 
     if (foundIndex === -1) continue
 
-    // @ts-expect-error
-    const valueNode = tocProperties[foundIndex].properties.find(
-      (node: Property) => (node.key as Identifier).name === 'value'
-    )
+    // const valueNode = tocProperties[foundIndex].properties.find(
+    //   (node: Property) => (node.key as Identifier).name === 'value'
+    // )
 
-    const isMatch = heading.children.some(
+    const isFragment = heading.children.some(
       // @ts-expect-error
       node =>
         node.type !== 'JSXExpressionContainer' ||
         node.expression.type !== 'Literal'
     )
 
-    if (isMatch) {
-      valueNode.value = {
-        type: 'JSXFragment',
-        openingFragment: { type: 'JSXOpeningFragment' },
-        closingFragment: { type: 'JSXClosingFragment' },
-        children: heading.children
-      }
-    }
+    // if (isFragment) {
+    //   valueNode.value = {
+    //     type: 'JSXFragment',
+    //     openingFragment: { type: 'JSXOpeningFragment' },
+    //     closingFragment: { type: 'JSXClosingFragment' },
+    //     children: heading.children
+    //   }
+    // }
 
     idNode.value = {
       type: 'JSXExpressionContainer',
@@ -92,14 +89,16 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => ast => {
       }
     }
 
-    heading.children = [
-      {
-        type: 'JSXExpressionContainer',
-        expression: {
-          type: 'Identifier',
-          name: `toc[${foundIndex}].value`
+    if (!isFragment) {
+      heading.children = [
+        {
+          type: 'JSXExpressionContainer',
+          expression: {
+            type: 'Identifier',
+            name: `toc[${foundIndex}].value`
+          }
         }
-      }
-    ]
+      ]
+    }
   }
 }
