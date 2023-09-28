@@ -283,38 +283,40 @@ export async function compileMdx(
           // }
 
           const elements = headings.map(node => {
-            return node.children.every(
+            const result =  node.children.every(
               child =>
                 child.type === 'JSXExpressionContainer' &&
                 child.expression.type === 'Literal'
             )
               ? node.children.map(n => n.expression)[0]
               : {
-                  type: 'ObjectExpression',
-                  properties: [
-                    {
-                      type: 'Property',
-                      key: {
-                        type: 'Identifier',
-                        name: 'value'
-                      },
-                      value: {
-                        type: 'JSXFragment',
-                        openingFragment: {
-                          type: 'JSXOpeningFragment'
-                        },
-                        closingFragment: {
-                          type: 'JSXClosingFragment'
-                        },
-                        children: node.children
-                      },
-                      computed: false,
-                      method: false,
-                      shorthand: false,
-                      kind: 'init'
-                    }
-                  ]
+                type: 'JSXFragment',
+                openingFragment: {
+                  type: 'JSXOpeningFragment'
+                },
+                closingFragment: {
+                  type: 'JSXClosingFragment'
+                },
+                children: node.children
+              }
+
+            return {
+              type: 'ObjectExpression',
+              properties: [
+                {
+                  type: 'Property',
+                  key: {
+                    type: 'Identifier',
+                    name: 'value'
+                  },
+                  value: result,
+                  computed: false,
+                  method: false,
+                  shorthand: false,
+                  kind: 'init'
                 }
+              ]
+            }
           })
           returnStatement.argument = {
             type: 'ArrayExpression',

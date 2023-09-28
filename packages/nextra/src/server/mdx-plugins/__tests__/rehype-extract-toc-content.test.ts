@@ -169,72 +169,94 @@ export const frontMatter = {
           { Test } = _components;
         if (!Test) _missingMdxReference(\\"Test\\", true);
         return [
-          <>
-            {\\"Heading \\"}
-            {myVar}
-          </>,
-          <>
-            {\\"Heading \\"}
-            <_components.span className=\\"katex\\">
-              <_components.span className=\\"katex-mathml\\">
-                <_components.math xmlns=\\"http://www.w3.org/1998/Math/MathML\\">
-                  <_components.semantics>
-                    <_components.mrow>
-                      <_components.mi>{\\"l\\"}</_components.mi>
-                      <_components.mi>{\\"a\\"}</_components.mi>
-                      <_components.mi>{\\"t\\"}</_components.mi>
-                      <_components.mi>{\\"e\\"}</_components.mi>
-                      <_components.mi>{\\"x\\"}</_components.mi>
-                    </_components.mrow>
-                    <_components.annotation encoding=\\"application/x-tex\\">
-                      {\\"latex\\"}
-                    </_components.annotation>
-                  </_components.semantics>
-                </_components.math>
-              </_components.span>
-              <_components.span className=\\"katex-html\\" aria-hidden=\\"true\\">
-                <_components.span className=\\"base\\">
-                  <_components.span
-                    className=\\"strut\\"
-                    style={{
-                      height: \\"0.6944em\\",
-                    }}
-                  />
-                  <_components.span
-                    className=\\"mord mathnormal\\"
-                    style={{
-                      marginRight: \\"0.01968em\\",
-                    }}
-                  >
-                    {\\"l\\"}
+          {
+            value: (
+              <>
+                {\\"Heading \\"}
+                {myVar}
+              </>
+            ),
+          },
+          {
+            value: (
+              <>
+                {\\"Heading \\"}
+                <_components.span className=\\"katex\\">
+                  <_components.span className=\\"katex-mathml\\">
+                    <_components.math xmlns=\\"http://www.w3.org/1998/Math/MathML\\">
+                      <_components.semantics>
+                        <_components.mrow>
+                          <_components.mi>{\\"l\\"}</_components.mi>
+                          <_components.mi>{\\"a\\"}</_components.mi>
+                          <_components.mi>{\\"t\\"}</_components.mi>
+                          <_components.mi>{\\"e\\"}</_components.mi>
+                          <_components.mi>{\\"x\\"}</_components.mi>
+                        </_components.mrow>
+                        <_components.annotation encoding=\\"application/x-tex\\">
+                          {\\"latex\\"}
+                        </_components.annotation>
+                      </_components.semantics>
+                    </_components.math>
                   </_components.span>
-                  <_components.span className=\\"mord mathnormal\\">
-                    {\\"a\\"}
-                  </_components.span>
-                  <_components.span className=\\"mord mathnormal\\">
-                    {\\"t\\"}
-                  </_components.span>
-                  <_components.span className=\\"mord mathnormal\\">
-                    {\\"e\\"}
-                  </_components.span>
-                  <_components.span className=\\"mord mathnormal\\">
-                    {\\"x\\"}
+                  <_components.span className=\\"katex-html\\" aria-hidden=\\"true\\">
+                    <_components.span className=\\"base\\">
+                      <_components.span
+                        className=\\"strut\\"
+                        style={{
+                          height: \\"0.6944em\\",
+                        }}
+                      />
+                      <_components.span
+                        className=\\"mord mathnormal\\"
+                        style={{
+                          marginRight: \\"0.01968em\\",
+                        }}
+                      >
+                        {\\"l\\"}
+                      </_components.span>
+                      <_components.span className=\\"mord mathnormal\\">
+                        {\\"a\\"}
+                      </_components.span>
+                      <_components.span className=\\"mord mathnormal\\">
+                        {\\"t\\"}
+                      </_components.span>
+                      <_components.span className=\\"mord mathnormal\\">
+                        {\\"e\\"}
+                      </_components.span>
+                      <_components.span className=\\"mord mathnormal\\">
+                        {\\"x\\"}
+                      </_components.span>
+                    </_components.span>
                   </_components.span>
                 </_components.span>
-              </_components.span>
-            </_components.span>
-          </>,
-          <>
-            {\\"Heading \\"}
-            <_components.code>{\\"<Code />:{jsx}\\"}</_components.code>
-          </>,
-          <>
-            <Test />
-            {\\" World\\"}
-          </>,
-          \\"String\\",
-          \\"123\\",
-          \\"Dada 123 true\\",
+              </>
+            ),
+          },
+          {
+            value: (
+              <>
+                {\\"Heading \\"}
+                <_components.code>{\\"<Code />:{jsx}\\"}</_components.code>
+              </>
+            ),
+          },
+          {
+            value: (
+              <>
+                <Test />
+                {\\" World\\"}
+              </>
+            ),
+          },
+          {
+            value: \\"String\\",
+          },
+          {
+            value: \\"123\\",
+          },
+          {
+            value: \\"Dada 123 true\\",
+          },
         ];
       }
       function _missingMdxReference(id, component) {
