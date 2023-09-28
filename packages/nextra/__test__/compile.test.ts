@@ -151,88 +151,365 @@ import Last from './three.mdx'
 ## kek <Kek />
 
 ## \`try\` me
+
+## latex $a=\\sqrt{b^2 + c^2}$
+
+## {'interpolate'} {1} {true} {null} {variable}
+
 `,
-      { mdxOptions }
+      { mdxOptions, latex: true }
     )
     expect(await clean(result)).toMatchInlineSnapshot(`
-        "import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
-        export const frontMatter = {};
-        import FromMdx, { toc as toc0 } from \\"./one.mdx\\";
-        import FromMarkdown, { toc as toc1 } from \\"./two.md\\";
-        import IgnoreMe from \\"./foo\\";
-        import Last, { toc as toc2 } from \\"./three.mdx\\";
-        export const toc = [
-          {
-            depth: 2,
-            value: \\"❤️\\",
-            id: \\"️\\",
-          },
-          ...toc0,
-          {
-            depth: 2,
-            value: \\"✅\\",
-            id: \\"\\",
-          },
-          ...toc1,
-          ...toc2,
-          {
-            depth: 2,
-            value: \\"👋\\",
-            id: \\"-1\\",
-          },
-          {
-            depth: 2,
-            value: \\"kek \\",
-            id: \\"kek-\\",
-          },
-          {
-            depth: 2,
-            value: \\"try me\\",
-            id: \\"try-me\\",
-          },
-        ];
-        function _createMdxContent(props) {
-          const _components = Object.assign(
-              {
-                h2: \\"h2\\",
-                code: \\"code\\",
-              },
-              _provideComponents(),
-              props.components,
-            ),
-            { Kek } = _components;
-          if (!Kek) _missingMdxReference(\\"Kek\\", true);
-          return (
+      "import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
+      export const frontMatter = {};
+      import FromMdx, { toc as toc0 } from \\"./one.mdx\\";
+      import FromMarkdown, { toc as toc1 } from \\"./two.md\\";
+      import IgnoreMe from \\"./foo\\";
+      import Last, { toc as toc2 } from \\"./three.mdx\\";
+      export const toc = [
+        {
+          depth: 2,
+          value: \\"❤️\\",
+          id: \\"️\\",
+        },
+        ...toc0,
+        {
+          depth: 2,
+          value: \\"✅\\",
+          id: \\"\\",
+        },
+        ...toc1,
+        ...toc2,
+        {
+          depth: 2,
+          value: \\"👋\\",
+          id: \\"-1\\",
+        },
+        {
+          depth: 2,
+          value: \\"kek \\",
+          id: \\"kek-\\",
+        },
+        {
+          depth: 2,
+          value: \\"try me\\",
+          id: \\"try-me\\",
+        },
+        {
+          depth: 2,
+          value: \\"latex a=\\\\\\\\sqrt{b^2 + c^2}\\",
+          id: \\"latex-asqrtb2--c2\\",
+        },
+        {
+          depth: 2,
+          value: (
             <>
-              <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
-              {\\"\\\\n\\"}
-              <FromMdx />
-              {\\"\\\\n\\"}
-              <_components.h2 id={toc[2].id}>{toc[2].value}</_components.h2>
-              {\\"\\\\n\\"}
-              <FromMarkdown />
-              {\\"\\\\n\\"}
-              {\\"\\\\n\\"}
-              <Last />
-              {\\"\\\\n\\"}
-              <IgnoreMe />
-              {\\"\\\\n\\"}
-              <_components.h2 id={toc[5].id}>{toc[5].value}</_components.h2>
-              {\\"\\\\n\\"}
-              <_components.h2 id={toc[6].id}>
-                {\\"kek \\"}
-                <Kek />
-              </_components.h2>
-              {\\"\\\\n\\"}
-              <_components.h2 id={toc[7].id}>
-                <_components.code>{\\"try\\"}</_components.code>
-                {\\" me\\"}
-              </_components.h2>
+              {\\"interpolate\\"} {1} {true} {null} {variable}
             </>
-          );
-        }
-        "
-      `)
+          ),
+          id: \\"interpolate-1-true-null-variable\\",
+        },
+      ];
+      function _createMdxContent(props) {
+        const _components = Object.assign(
+            {
+              h2: \\"h2\\",
+              code: \\"code\\",
+              span: \\"span\\",
+              math: \\"math\\",
+              semantics: \\"semantics\\",
+              mrow: \\"mrow\\",
+              mi: \\"mi\\",
+              mo: \\"mo\\",
+              msqrt: \\"msqrt\\",
+              msup: \\"msup\\",
+              mn: \\"mn\\",
+              annotation: \\"annotation\\",
+              svg: \\"svg\\",
+              path: \\"path\\",
+            },
+            _provideComponents(),
+            props.components,
+          ),
+          { Kek } = _components;
+        if (!Kek) _missingMdxReference(\\"Kek\\", true);
+        return (
+          <>
+            <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
+            {\\"\\\\n\\"}
+            <FromMdx />
+            {\\"\\\\n\\"}
+            <_components.h2 id={toc[2].id}>{toc[2].value}</_components.h2>
+            {\\"\\\\n\\"}
+            <FromMarkdown />
+            {\\"\\\\n\\"}
+            {\\"\\\\n\\"}
+            <Last />
+            {\\"\\\\n\\"}
+            <IgnoreMe />
+            {\\"\\\\n\\"}
+            <_components.h2 id={toc[5].id}>{toc[5].value}</_components.h2>
+            {\\"\\\\n\\"}
+            <_components.h2 id={toc[6].id}>
+              {\\"kek \\"}
+              <Kek />
+            </_components.h2>
+            {\\"\\\\n\\"}
+            <_components.h2 id={toc[7].id}>
+              <_components.code>{\\"try\\"}</_components.code>
+              {\\" me\\"}
+            </_components.h2>
+            {\\"\\\\n\\"}
+            <_components.h2 id={toc[8].id}>
+              {\\"latex \\"}
+              <_components.span className=\\"katex\\">
+                <_components.span className=\\"katex-mathml\\">
+                  <_components.math xmlns=\\"http://www.w3.org/1998/Math/MathML\\">
+                    <_components.semantics>
+                      <_components.mrow>
+                        <_components.mi>{\\"a\\"}</_components.mi>
+                        <_components.mo>{\\"=\\"}</_components.mo>
+                        <_components.msqrt>
+                          <_components.mrow>
+                            <_components.msup>
+                              <_components.mi>{\\"b\\"}</_components.mi>
+                              <_components.mn>{\\"2\\"}</_components.mn>
+                            </_components.msup>
+                            <_components.mo>{\\"+\\"}</_components.mo>
+                            <_components.msup>
+                              <_components.mi>{\\"c\\"}</_components.mi>
+                              <_components.mn>{\\"2\\"}</_components.mn>
+                            </_components.msup>
+                          </_components.mrow>
+                        </_components.msqrt>
+                      </_components.mrow>
+                      <_components.annotation encoding=\\"application/x-tex\\">
+                        {\\"a=\\\\\\\\sqrt{b^2 + c^2}\\"}
+                      </_components.annotation>
+                    </_components.semantics>
+                  </_components.math>
+                </_components.span>
+                <_components.span className=\\"katex-html\\" aria-hidden=\\"true\\">
+                  <_components.span className=\\"base\\">
+                    <_components.span
+                      className=\\"strut\\"
+                      style={{
+                        height: \\"0.4306em\\",
+                      }}
+                    />
+                    <_components.span className=\\"mord mathnormal\\">
+                      {\\"a\\"}
+                    </_components.span>
+                    <_components.span
+                      className=\\"mspace\\"
+                      style={{
+                        marginRight: \\"0.2778em\\",
+                      }}
+                    />
+                    <_components.span className=\\"mrel\\">{\\"=\\"}</_components.span>
+                    <_components.span
+                      className=\\"mspace\\"
+                      style={{
+                        marginRight: \\"0.2778em\\",
+                      }}
+                    />
+                  </_components.span>
+                  <_components.span className=\\"base\\">
+                    <_components.span
+                      className=\\"strut\\"
+                      style={{
+                        height: \\"1.04em\\",
+                        verticalAlign: \\"-0.1266em\\",
+                      }}
+                    />
+                    <_components.span className=\\"mord sqrt\\">
+                      <_components.span className=\\"vlist-t vlist-t2\\">
+                        <_components.span className=\\"vlist-r\\">
+                          <_components.span
+                            className=\\"vlist\\"
+                            style={{
+                              height: \\"0.9134em\\",
+                            }}
+                          >
+                            <_components.span
+                              className=\\"svg-align\\"
+                              style={{
+                                top: \\"-3em\\",
+                              }}
+                            >
+                              <_components.span
+                                className=\\"pstrut\\"
+                                style={{
+                                  height: \\"3em\\",
+                                }}
+                              />
+                              <_components.span
+                                className=\\"mord\\"
+                                style={{
+                                  paddingLeft: \\"0.833em\\",
+                                }}
+                              >
+                                <_components.span className=\\"mord\\">
+                                  <_components.span className=\\"mord mathnormal\\">
+                                    {\\"b\\"}
+                                  </_components.span>
+                                  <_components.span className=\\"msupsub\\">
+                                    <_components.span className=\\"vlist-t\\">
+                                      <_components.span className=\\"vlist-r\\">
+                                        <_components.span
+                                          className=\\"vlist\\"
+                                          style={{
+                                            height: \\"0.7401em\\",
+                                          }}
+                                        >
+                                          <_components.span
+                                            style={{
+                                              top: \\"-2.989em\\",
+                                              marginRight: \\"0.05em\\",
+                                            }}
+                                          >
+                                            <_components.span
+                                              className=\\"pstrut\\"
+                                              style={{
+                                                height: \\"2.7em\\",
+                                              }}
+                                            />
+                                            <_components.span className=\\"sizing reset-size6 size3 mtight\\">
+                                              <_components.span className=\\"mord mtight\\">
+                                                {\\"2\\"}
+                                              </_components.span>
+                                            </_components.span>
+                                          </_components.span>
+                                        </_components.span>
+                                      </_components.span>
+                                    </_components.span>
+                                  </_components.span>
+                                </_components.span>
+                                <_components.span
+                                  className=\\"mspace\\"
+                                  style={{
+                                    marginRight: \\"0.2222em\\",
+                                  }}
+                                />
+                                <_components.span className=\\"mbin\\">
+                                  {\\"+\\"}
+                                </_components.span>
+                                <_components.span
+                                  className=\\"mspace\\"
+                                  style={{
+                                    marginRight: \\"0.2222em\\",
+                                  }}
+                                />
+                                <_components.span className=\\"mord\\">
+                                  <_components.span className=\\"mord mathnormal\\">
+                                    {\\"c\\"}
+                                  </_components.span>
+                                  <_components.span className=\\"msupsub\\">
+                                    <_components.span className=\\"vlist-t\\">
+                                      <_components.span className=\\"vlist-r\\">
+                                        <_components.span
+                                          className=\\"vlist\\"
+                                          style={{
+                                            height: \\"0.7401em\\",
+                                          }}
+                                        >
+                                          <_components.span
+                                            style={{
+                                              top: \\"-2.989em\\",
+                                              marginRight: \\"0.05em\\",
+                                            }}
+                                          >
+                                            <_components.span
+                                              className=\\"pstrut\\"
+                                              style={{
+                                                height: \\"2.7em\\",
+                                              }}
+                                            />
+                                            <_components.span className=\\"sizing reset-size6 size3 mtight\\">
+                                              <_components.span className=\\"mord mtight\\">
+                                                {\\"2\\"}
+                                              </_components.span>
+                                            </_components.span>
+                                          </_components.span>
+                                        </_components.span>
+                                      </_components.span>
+                                    </_components.span>
+                                  </_components.span>
+                                </_components.span>
+                              </_components.span>
+                            </_components.span>
+                            <_components.span
+                              style={{
+                                top: \\"-2.8734em\\",
+                              }}
+                            >
+                              <_components.span
+                                className=\\"pstrut\\"
+                                style={{
+                                  height: \\"3em\\",
+                                }}
+                              />
+                              <_components.span
+                                className=\\"hide-tail\\"
+                                style={{
+                                  minWidth: \\"0.853em\\",
+                                  height: \\"1.08em\\",
+                                }}
+                              >
+                                <_components.svg
+                                  xmlns=\\"http://www.w3.org/2000/svg\\"
+                                  width=\\"400em\\"
+                                  height=\\"1.08em\\"
+                                  viewBox=\\"0 0 400000 1080\\"
+                                  preserveAspectRatio=\\"xMinYMin slice\\"
+                                >
+                                  <_components.path
+                                    d=\\"M95,702
+      c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
+      c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
+      c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
+      s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429
+      c69,-144,104.5,-217.7,106.5,-221
+      l0 -0
+      c5.3,-9.3,12,-14,20,-14
+      H400000v40H845.2724
+      s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
+      c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
+      M834 80h400000v40h-400000z\\"
+                                  />
+                                </_components.svg>
+                              </_components.span>
+                            </_components.span>
+                          </_components.span>
+                          <_components.span className=\\"vlist-s\\">
+                            {\\"​\\"}
+                          </_components.span>
+                        </_components.span>
+                        <_components.span className=\\"vlist-r\\">
+                          <_components.span
+                            className=\\"vlist\\"
+                            style={{
+                              height: \\"0.1266em\\",
+                            }}
+                          >
+                            <_components.span />
+                          </_components.span>
+                        </_components.span>
+                      </_components.span>
+                    </_components.span>
+                  </_components.span>
+                </_components.span>
+              </_components.span>
+            </_components.h2>
+            {\\"\\\\n\\"}
+            <_components.h2 id={toc[9].id}>
+              {\\"interpolate\\"} {1} {true} {null} {variable}
+            </_components.h2>
+          </>
+        );
+      }
+      "
+    `)
   })
   it('should not attach headings with parent Tab or Tabs.Tab', async () => {
     const { result } = await compileMdx(
