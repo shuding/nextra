@@ -144,7 +144,6 @@ export const frontMatter = {
       function useToc(props) {
         const _components = Object.assign(
             {
-              h6: \\"h6\\",
               h2: \\"h2\\",
               h3: \\"h3\\",
               span: \\"span\\",
@@ -156,6 +155,7 @@ export const frontMatter = {
               code: \\"code\\",
               h4: \\"h4\\",
               h5: \\"h5\\",
+              h6: \\"h6\\",
             },
             _provideComponents(),
             props.components,
@@ -163,7 +163,6 @@ export const frontMatter = {
           { Test } = _components;
         if (!Test) _missingMdxReference(\\"Test\\", true);
         return [
-          <>{\\"123\\"}</>,
           <>
             {\\"Heading \\"}
             {myVar}
@@ -228,6 +227,7 @@ export const frontMatter = {
             {\\" World\\"}
           </>,
           <>{\\"String\\"}</>,
+          <>{\\"123\\"}</>,
         ];
       }
       function _missingMdxReference(id, component) {

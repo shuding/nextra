@@ -230,7 +230,7 @@ export async function compileMdx(
       providerImportSource: 'nextra/mdx',
       rehypePlugins: [
         () => ast => {
-          ast.children = Object.values(vFile.data.toc)
+          ast.children = vFile.data.toc
         }
       ],
       recmaPlugins: [
