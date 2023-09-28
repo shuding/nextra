@@ -4,6 +4,8 @@ import { createProcessor } from '@mdx-js/mdx'
 import type { Processor } from '@mdx-js/mdx/lib/core'
 import { remarkMermaid } from '@theguild/remark-mermaid'
 import { remarkNpm2Yarn } from '@theguild/remark-npm2yarn'
+import type { ReturnStatement } from 'estree'
+import type { JsxAttribute } from 'estree-util-to-js/lib/jsx'
 import rehypeKatex from 'rehype-katex'
 import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
 import rehypePrettyCode from 'rehype-pretty-code'
@@ -258,9 +260,32 @@ export async function compileMdx(
             )
 
           // Rename `_createMdxContent` to `useToc`
-          const createMdxContent = ast.body.find(node => node.type === 'FunctionDeclaration' && node.id.name === '_createMdxContent')
+          const createMdxContent = ast.body.find(
+            node =>
+              node.type === 'FunctionDeclaration' &&
+              node.id.name === '_createMdxContent'
+          )
           createMdxContent.id.name = 'useToc'
 
+          const returnStatement = createMdxContent.body.body.find(
+            node => node.type === 'ReturnStatement'
+          ) as ReturnStatement
+          const headings = returnStatement.argument.children
+
+          // for (const heading of headings) {
+          //   const idNode = heading.openingElement.attributes.find(
+          //     (attr: JsxAttribute) => attr.name.name === 'id'
+          //   )
+          // }
+          returnStatement.argument = {
+            type: 'ArrayExpression',
+            elements: headings.map(node => ({
+              type: 'JSXFragment',
+              openingFragment: { type: 'JSXOpeningFragment' },
+              closingFragment: { type: 'JSXClosingFragment' },
+              children: node.children
+            }))
+          }
         }
       ]
     }).process(filePath ? { value: '', path: filePath } : '')
