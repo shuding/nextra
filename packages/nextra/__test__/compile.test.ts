@@ -20,7 +20,7 @@ describe('Process heading', () => {
     expect(result).toMatchSnapshot()
   })
   it('dynamic-h1', async () => {
-    const result = await compileMdx(
+    const res = await compileMdx(
       `
 import { useRouter } from 'next/router'
 
@@ -33,7 +33,8 @@ export const TagName = () => {
     `,
       { mdxOptions }
     )
-    expect(result).toMatchSnapshot()
+    res.result = await clean(res.result)
+    expect(res).toMatchSnapshot()
   })
   it('no-h1', async () => {
     const { result } = await compileMdx('## H2', { mdxOptions })

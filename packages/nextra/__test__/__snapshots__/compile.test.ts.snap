@@ -56,26 +56,33 @@ exports[`Process heading > dynamic-h1 1`] = `
 {
   "frontMatter": {},
   "hasJsxInH1": true,
-  "result": "/*@jsxRuntime automatic @jsxImportSource react*/
-import {useMDXComponents as _provideComponents} from \\"nextra/mdx\\";
+  "result": "import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
 export const frontMatter = {};
-import {useRouter} from 'next/router';
+import { useRouter } from \\"next/router\\";
 export const TagName = () => {
-  const {tag} = useRouter().query;
+  const { tag } = useRouter().query;
   return tag || null;
 };
-export const toc = [];
+export function useTOC(props) {
+  return [];
+}
 function _createMdxContent(props) {
-  const _components = Object.assign({
-    h1: \\"h1\\"
-  }, _provideComponents(), props.components);
-  return <_components.h1>{\\"Posts Tagged with “\\"}<TagName />{\\"”\\"}</_components.h1>;
+  const { toc } = props;
+  const _components = Object.assign(
+    {
+      h1: \\"h1\\",
+    },
+    _provideComponents(),
+    props.components,
+  );
+  return (
+    <_components.h1>
+      {\\"Posts Tagged with “\\"}
+      <TagName />
+      {\\"”\\"}
+    </_components.h1>
+  );
 }
-function MDXContent(props = {}) {
-  const {wrapper: MDXLayout} = Object.assign({}, _provideComponents(), props.components);
-  return MDXLayout ? <MDXLayout {...props}><_createMdxContent {...props} /></MDXLayout> : _createMdxContent(props);
-}
-export default MDXContent;
 ",
   "title": "Posts Tagged with “”",
 }
