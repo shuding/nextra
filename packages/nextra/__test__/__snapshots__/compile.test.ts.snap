@@ -92,7 +92,7 @@ function _createMdxContent(props) {
   const _components = Object.assign({
     h2: \\"h2\\"
   }, _provideComponents(), props.components);
-  return <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>;
+  return <_components.h2 id=\\"h2\\">{\\"H2\\"}</_components.h2>;
 }
 function MDXContent(props = {}) {
   const {wrapper: MDXLayout} = Object.assign({}, _provideComponents(), props.components);

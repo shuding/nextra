@@ -53,22 +53,24 @@ export const TagName = () => {
     )
     expect(result).toMatch('<_components.h1 id="test-id">{"My Header"}')
     expect(result).toMatch(
-      '<_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>'
+      '<_components.h2 id="extra-space">{"Some extra space"}</_components.h2>'
     )
-    expect(result).toMatch('<_components.h3 id={toc[1].id}>{toc[1].value}')
     expect(result).toMatch(
-      '<_components.h3 id={toc[2].id}>{toc[2].value}</_components.h3>'
+      '<_components.h3 id="extra-space-in-heading">{"Some extra space in heading"}'
     )
-    expect(result).toMatch('<_components.h4 id={toc[3].id}>{toc[3].value}')
-    expect(result).toMatch('<_components.h5 id={toc[4].id}>{toc[4].value}')
-    expect(result).toMatch('<_components.h6 id={toc[5].id}>{toc[5].value}')
+    expect(result).toMatch(
+      '<_components.h3 id="without-space">{"nospace"}</_components.h3>'
+    )
+    expect(result).toMatch('<_components.h4 id="другой-язык">{"foo"}')
+    expect(result).toMatch('<_components.h5 id="bar-baz-">{"bar Baz []"}')
+    expect(result).toMatch('<_components.h6 id="bar-qux-">{"bar Qux [#]"}')
   })
   it('use github-slugger', async () => {
     const { result } = await compileMdx('### My Header', { mdxOptions })
-    expect(result).toMatch('<_components.h3 id={toc[0].id}>{toc[0].value}')
+    expect(result).toMatch('<_components.h3 id="my-header">{"My Header"}')
   })
 
-  it.only('should merge headings from partial components', async () => {
+  it('should merge headings from partial components', async () => {
     const { result } = await compileMdx(
       `
 import FromMdx from './one.mdx'
@@ -149,11 +151,11 @@ import Last from './three.mdx'
           if (!Kek) _missingMdxReference(\\"Kek\\", true);
           return (
             <>
-              <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
+              <_components.h2 id=\\"️\\">{\\"❤️\\"}</_components.h2>
               {\\"\\\\n\\"}
               <FromMdx />
               {\\"\\\\n\\"}
-              <_components.h2 id={toc[2].id}>{toc[2].value}</_components.h2>
+              <_components.h2 id=\\"\\">{\\"✅\\"}</_components.h2>
               {\\"\\\\n\\"}
               <FromMarkdown />
               {\\"\\\\n\\"}
@@ -162,14 +164,14 @@ import Last from './three.mdx'
               {\\"\\\\n\\"}
               <IgnoreMe />
               {\\"\\\\n\\"}
-              <_components.h2 id={toc[5].id}>{toc[5].value}</_components.h2>
+              <_components.h2 id=\\"-1\\">{\\"👋\\"}</_components.h2>
               {\\"\\\\n\\"}
-              <_components.h2 id={toc[6].id}>
+              <_components.h2 id=\\"kek-\\">
                 {\\"kek \\"}
                 <Kek />
               </_components.h2>
               {\\"\\\\n\\"}
-              <_components.h2 id={toc[7].id}>
+              <_components.h2 id=\\"try-me\\">
                 <_components.code>{\\"try\\"}</_components.code>
                 {\\" me\\"}
               </_components.h2>
