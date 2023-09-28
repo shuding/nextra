@@ -89,6 +89,7 @@ export const frontMatter = {
         },
       ];
       function _createMdxContent(props) {
+        const { toc } = props;
         const _components = Object.assign(
           {
             h1: \\"h1\\",

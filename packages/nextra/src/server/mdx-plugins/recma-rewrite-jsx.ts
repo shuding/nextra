@@ -129,23 +129,11 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => ast => {
       declarations: [
         {
           type: 'VariableDeclarator',
-          id: {
-            type: 'Identifier',
-            name: 'toc'
-          },
+          id: { type: 'Identifier', name: 'toc' },
           init: {
             type: 'CallExpression',
-            callee: {
-              type: 'Identifier',
-              name: 'useToc'
-            },
-            arguments: [
-              {
-                type: 'Identifier',
-                name: 'props'
-              }
-            ],
-            optional: false
+            callee: { type: 'Identifier', name: 'useToc' },
+            arguments: [{ type: 'Identifier', name: 'props' }]
           }
         }
       ],
@@ -168,8 +156,6 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => ast => {
               type: 'Property',
               key: { type: 'Identifier', name: 'toc' },
               value: { type: 'Identifier', name: 'toc' },
-              computed: false,
-              method: false,
               shorthand: true,
               kind: 'init'
             }
@@ -178,4 +164,32 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => ast => {
       }
     }
   )
+
+  createMdxContent.body.body.unshift({
+    type: 'VariableDeclaration',
+    declarations: [
+      {
+        type: 'VariableDeclarator',
+        id: {
+          type: 'ObjectPattern',
+          properties: [
+            {
+              type: 'Property',
+              key: { type: 'Identifier', name: 'toc' },
+              value: { type: 'Identifier', name: 'toc' },
+              computed: false,
+              method: false,
+              shorthand: true,
+              kind: 'init'
+            }
+          ]
+        },
+        init: {
+          type: 'Identifier',
+          name: 'props'
+        }
+      }
+    ],
+    kind: 'const'
+  })
 }
