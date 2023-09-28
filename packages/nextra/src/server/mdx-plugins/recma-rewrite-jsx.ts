@@ -41,8 +41,9 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => ast => {
   const toc = ast.body.find(
     node =>
       node.type === 'ExportNamedDeclaration' &&
+      node.declaration &&
       'declarations' in
-        node.declaration! /* doesn't exist for FunctionDeclaration */ &&
+        node.declaration /* doesn't exist for FunctionDeclaration */ &&
       // @ts-expect-error
       node.declaration.declarations[0].id.name === 'toc'
   ) as any
