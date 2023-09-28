@@ -8,8 +8,8 @@ const mdxOptions = {
 
 describe('Process heading', () => {
   it('code-h1', async () => {
-    const result = await compileMdx('# `codegen.yml`', { mdxOptions })
-    expect(result).toMatchSnapshot()
+    const { result } = await compileMdx('# `codegen.yml`', { mdxOptions })
+    expect(clean(result)).resolves.toMatchSnapshot()
   })
   it('code-with-text-h1', async () => {
     const { result } = await compileMdx('# `codegen.yml` file', { mdxOptions })
@@ -52,7 +52,7 @@ export const TagName = () => {
 ###### bar Qux [#]`,
       { mdxOptions }
     )
-    expect(await clean(result)).toMatchInlineSnapshot(`
+    expect(clean(result)).resolves.toMatchInlineSnapshot(`
       "import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
       export const frontMatter = {};
       export function useTOC(props) {
@@ -126,7 +126,7 @@ export const TagName = () => {
   })
   it('use github-slugger', async () => {
     const { result } = await compileMdx('### My Header', { mdxOptions })
-    expect(await clean(result)).toMatchInlineSnapshot(`
+    expect(clean(result)).resolves.toMatchInlineSnapshot(`
       "import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
       export const frontMatter = {};
       export function useTOC(props) {
@@ -187,7 +187,7 @@ import Last from './three.mdx'
 `,
       { mdxOptions, latex: true }
     )
-    expect(await clean(result)).toMatchInlineSnapshot(`
+    expect(clean(result)).resolves.toMatchInlineSnapshot(`
       "import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
       export const frontMatter = {};
       import FromMdx, { useTOC as useTOC0 } from \\"./one.mdx\\";
@@ -400,9 +400,7 @@ describe('Link', () => {
   it('supports external .mdx links', async () => {
     const { result } = await compileMdx(
       '[link](https://example.com/file.mdx)',
-      {
-        mdxOptions
-      }
+      { mdxOptions }
     )
     expect(result).toMatch(
       '<_components.a href="https://example.com/file.mdx">'
@@ -445,9 +443,7 @@ describe('Code block', () => {
     it('should support line highlights', async () => {
       const { result } = await compileMdx(
         '```js filename="test.js" {1}\n123\n```',
-        {
-          mdxOptions
-        }
+        { mdxOptions }
       )
       expect(result).toMatch('<_components.span data-highlighted-line="">')
     })

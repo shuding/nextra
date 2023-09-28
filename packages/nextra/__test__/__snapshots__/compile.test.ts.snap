@@ -1,31 +1,28 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Process heading > code-h1 1`] = `
-{
-  "frontMatter": {},
-  "result": "/*@jsxRuntime automatic @jsxImportSource react*/
-import {useMDXComponents as _provideComponents} from \\"nextra/mdx\\";
+"import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
 export const frontMatter = {};
 export function useTOC(props) {
   return [];
 }
 function _createMdxContent(props) {
-  const {toc} = props;
-  const _components = Object.assign({
-    h1: \\"h1\\",
-    code: \\"code\\"
-  }, _provideComponents(), props.components);
-  return <_components.h1><_components.code>{\\"codegen.yml\\"}</_components.code></_components.h1>;
+  const { toc } = props;
+  const _components = Object.assign(
+    {
+      h1: \\"h1\\",
+      code: \\"code\\",
+    },
+    _provideComponents(),
+    props.components,
+  );
+  return (
+    <_components.h1>
+      <_components.code>{\\"codegen.yml\\"}</_components.code>
+    </_components.h1>
+  );
 }
-function MDXContent(props = {}) {
-  const toc = useTOC(props);
-  const {wrapper: MDXLayout} = Object.assign({}, _provideComponents(), props.components);
-  return <MDXLayout {...props} toc={toc}><_createMdxContent {...props} toc={toc} /></MDXLayout>;;
-}
-export default MDXContent;
-",
-  "title": "codegen.yml",
-}
+"
 `;
 
 exports[`Process heading > code-with-text-h1 1`] = `

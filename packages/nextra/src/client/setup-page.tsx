@@ -19,7 +19,6 @@ import type {
   PageOpts
 } from '../types'
 import { DataProvider } from './data.js'
-import { findFolder } from './utils.js'
 
 function isFolder(value: DynamicMetaItem): value is DynamicFolder {
   return !!value && typeof value === 'object' && value.type === 'folder'
@@ -86,6 +85,14 @@ export function collectCatchAllRoutes(
 }
 
 const cachedResolvedPageMap: Record<string, PageMapItem[]> = Object.create(null)
+
+function findFolder(pageMap: PageMapItem[], [path, ...paths]: string[]): any {
+  for (const item of pageMap) {
+    if ('children' in item && path === item.name) {
+      return paths.length ? findFolder(item.children, paths) : item
+    }
+  }
+}
 
 export const resolvePageMap =
   (locale: string, dynamicMetaModules: DynamicMetaDescriptor) => async () => {
