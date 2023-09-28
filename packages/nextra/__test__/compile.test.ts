@@ -54,39 +54,42 @@ export const TagName = () => {
     expect(await clean(result)).toMatchInlineSnapshot(`
       "import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
       export const frontMatter = {};
-      export const toc = [
-        {
-          depth: 2,
-          value: \\"Some extra space\\",
-          id: \\"extra-space\\",
-        },
-        {
-          depth: 3,
-          value: \\"Some extra space in heading\\",
-          id: \\"extra-space-in-heading\\",
-        },
-        {
-          depth: 3,
-          value: \\"nospace\\",
-          id: \\"without-space\\",
-        },
-        {
-          depth: 4,
-          value: \\"foo\\",
-          id: \\"другой-язык\\",
-        },
-        {
-          depth: 5,
-          value: \\"bar Baz []\\",
-          id: \\"bar-baz-\\",
-        },
-        {
-          depth: 6,
-          value: \\"bar Qux [#]\\",
-          id: \\"bar-qux-\\",
-        },
-      ];
+      export function useTOC(props) {
+        return [
+          {
+            value: \\"Some extra space\\",
+            id: \\"extra-space\\",
+            depth: 2,
+          },
+          {
+            value: \\"Some extra space in heading\\",
+            id: \\"extra-space-in-heading\\",
+            depth: 3,
+          },
+          {
+            value: \\"nospace\\",
+            id: \\"without-space\\",
+            depth: 3,
+          },
+          {
+            value: \\"foo\\",
+            id: \\"другой-язык\\",
+            depth: 4,
+          },
+          {
+            value: \\"bar Baz []\\",
+            id: \\"bar-baz-\\",
+            depth: 5,
+          },
+          {
+            value: \\"bar Qux [#]\\",
+            id: \\"bar-qux-\\",
+            depth: 6,
+          },
+        ];
+      }
       function _createMdxContent(props) {
+        const { toc } = props;
         const _components = Object.assign(
           {
             h1: \\"h1\\",
