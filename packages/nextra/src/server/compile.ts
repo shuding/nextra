@@ -298,7 +298,7 @@ export async function compileMdx(
               attachMeta
             ]),
         latex && rehypeKatex,
-        rehypeExtractTocContent
+        !isRemoteContent && rehypeExtractTocContent
       ].filter(truthy),
       recmaPlugins: [!isRemoteContent && recmaRewriteJsx].filter(truthy)
     })

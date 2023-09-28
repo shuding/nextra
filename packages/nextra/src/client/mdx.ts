@@ -8,8 +8,7 @@ const DEFAULT_COMPONENTS = {
     createElement(
       typeof props.src === 'object' ? Image : 'img',
       props as ImageProps
-    ),
-  wrapper: ({ children }) => <>{children}</>
+    )
 } satisfies Components
 
 export const useMDXComponents: typeof originalUseMDXComponents = components => {
