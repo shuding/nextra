@@ -69,6 +69,7 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => ast => {
 
     if (foundIndex === -1) continue
 
+    // @ts-expect-error
     const valueNode = tocProperties[foundIndex].properties.find(
       (node: Property) => (node.key as Identifier).name === 'value'
     )
@@ -91,8 +92,17 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => ast => {
         name: `toc[${foundIndex}].id`
       }
     }
-    console.log(heading.children)
-    if (heading.children.every(isLiteral)) {
+
+    if (heading.children.every(node => isLiteral(node) || isIdentifier(node))) {
+      if (!heading.children.every(isLiteral)) {
+        valueNode.value = {
+          type: 'JSXFragment',
+          openingFragment: { type: 'JSXOpeningFragment' },
+          closingFragment: { type: 'JSXClosingFragment' },
+          children: heading.children
+        }
+      }
+
       heading.children = [
         {
           type: 'JSXExpressionContainer',
@@ -102,15 +112,6 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => ast => {
           }
         }
       ]
-    } else if (
-      heading.children.every(node => isLiteral(node) || isIdentifier(node))
-    ) {
-      valueNode.value = {
-        type: 'JSXFragment',
-        openingFragment: { type: 'JSXOpeningFragment' },
-        closingFragment: { type: 'JSXClosingFragment' },
-        children: heading.children
-      }
     }
   }
 }
