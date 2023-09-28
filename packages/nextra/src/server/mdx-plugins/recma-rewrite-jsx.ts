@@ -1,18 +1,11 @@
 import type {
-  BaseNode,
   FunctionDeclaration,
-  Identifier,
-  Literal,
   ObjectExpression,
   Program,
-  Property,
   ReturnStatement,
   SpreadElement
 } from 'estree'
-import type {
-  JsxAttribute,
-  JsxExpressionContainer
-} from 'estree-util-to-js/lib/jsx'
+import type { JsxAttribute } from 'estree-util-to-js/lib/jsx'
 import type { Plugin } from 'unified'
 import { DEFAULT_PROPERTY_PROPS } from '../constants.js'
 
@@ -20,16 +13,11 @@ const HEADING_NAMES = new Set(['h2', 'h3', 'h4', 'h5', 'h6'])
 
 export const recmaRewriteJsx: Plugin<[], Program> = () => ast => {
   const createMdxContent = ast.body.find(
-    // @ts-expect-error
-    o => o.type === 'FunctionDeclaration' && o.id.name === '_createMdxContent'
+    o => o.type === 'FunctionDeclaration' && o.id!.name === '_createMdxContent'
   ) as FunctionDeclaration
-  const returnStatementIndex = createMdxContent.body.body.findIndex(
+  const returnStatement = createMdxContent.body.body.find(
     o => o.type === 'ReturnStatement'
-  )
-
-  const returnStatement = createMdxContent.body.body[
-    returnStatementIndex
-  ] as ReturnStatement
+  ) as ReturnStatement
 
   // @ts-expect-error
   function isHeading(o): boolean {
@@ -72,21 +60,6 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => ast => {
 
     if (foundIndex === -1) continue
 
-    // @ts-expect-error
-    const valueNode = tocProperties[foundIndex].properties.find(
-      (node: Property) => (node.key as Identifier).name === 'value'
-    )
-
-    const isExpressionContainer = (
-      node: BaseNode
-    ): node is JsxExpressionContainer => node.type === 'JSXExpressionContainer'
-
-    const isIdentifier = (node: BaseNode): node is Identifier =>
-      isExpressionContainer(node) && node.expression.type === 'Identifier'
-
-    const isLiteral = (node: BaseNode): node is Literal =>
-      isExpressionContainer(node) && node.expression.type === 'Literal'
-
     idNode.value = {
       type: 'JSXExpressionContainer',
       expression: {
@@ -95,19 +68,6 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => ast => {
       }
     }
 
-    // if (
-    //   heading.children.every(
-    //     (node: BaseNode) => isLiteral(node) || isIdentifier(node)
-    //   )
-    // ) {
-    //   if (!heading.children.every(isLiteral)) {
-    // valueNode.value = {
-    //   type: 'JSXFragment',
-    //   openingFragment: { type: 'JSXOpeningFragment' },
-    //   closingFragment: { type: 'JSXClosingFragment' },
-    //   children: heading.children
-    // }
-    // }
     delete heading.openingElement.selfClosing
     heading.children = [
       {
@@ -130,47 +90,21 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => ast => {
     node => node.type === 'FunctionDeclaration' && node.id.name === 'MDXContent'
   )
   // @ts-expect-error
-  mdxContent.body.body.unshift(
-    {
-      type: 'VariableDeclaration',
-      declarations: [
-        {
-          type: 'VariableDeclarator',
-          id: { type: 'Identifier', name: 'toc' },
-          init: {
-            type: 'CallExpression',
-            callee: { type: 'Identifier', name: 'useTOC' },
-            arguments: [{ type: 'Identifier', name: 'props' }]
-          }
+  mdxContent.body.body.unshift({
+    type: 'VariableDeclaration',
+    declarations: [
+      {
+        type: 'VariableDeclarator',
+        id: { type: 'Identifier', name: 'toc' },
+        init: {
+          type: 'CallExpression',
+          callee: { type: 'Identifier', name: 'useTOC' },
+          arguments: [{ type: 'Identifier', name: 'props' }]
         }
-      ],
-      kind: 'const'
-    }
-    // {
-    //   type: 'ExpressionStatement',
-    //   expression: {
-    //     type: 'AssignmentExpression',
-    //     operator: '=',
-    //     left: { type: 'Identifier', name: 'props' },
-    //     right: {
-    //       type: 'ObjectExpression',
-    //       properties: [
-    //         {
-    //           type: 'SpreadElement',
-    //           argument: { type: 'Identifier', name: 'props' }
-    //         },
-    //         {
-    //           type: 'Property',
-    //           key: { type: 'Identifier', name: 'toc' },
-    //           value: { type: 'Identifier', name: 'toc' },
-    //           shorthand: true,
-    //           kind: 'init'
-    //         }
-    //       ]
-    //     }
-    //   }
-    // }
-  )
+      }
+    ],
+    kind: 'const'
+  })
 
   const attributes = [
     {
