@@ -14,6 +14,7 @@ import type {
   JsxExpressionContainer
 } from 'estree-util-to-js/lib/jsx'
 import type { Plugin } from 'unified'
+import { DEFAULT_PROPERTY_PROPS } from '../constants.js'
 
 const HEADING_NAMES = new Set(['h2', 'h3', 'h4', 'h5', 'h6'])
 
@@ -144,7 +145,7 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => ast => {
         }
       ],
       kind: 'const'
-    },
+    }
     // {
     //   type: 'ExpressionStatement',
     //   expression: {
@@ -186,7 +187,6 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => ast => {
     }
   ]
 
-
   // @ts-expect-error
   mdxContent.body.body.at(-1).argument = {
     type: 'ExpressionStatement',
@@ -223,13 +223,11 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => ast => {
         id: {
           type: 'ObjectPattern',
           properties: [
-            // @ts-expect-error
             {
-              type: 'Property',
+              ...DEFAULT_PROPERTY_PROPS,
               key: { type: 'Identifier', name: 'toc' },
               value: { type: 'Identifier', name: 'toc' },
-              shorthand: true,
-              kind: 'init'
+              shorthand: true
             }
           ]
         },
