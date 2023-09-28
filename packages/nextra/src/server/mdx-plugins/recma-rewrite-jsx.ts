@@ -76,63 +76,22 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => (ast, file) => {
   )
   // @ts-expect-error
   mdxContent.body.body.unshift({
-    type: 'VariableDeclaration',
-    kind: 'const',
-    declarations: [
-      {
-        type: 'VariableDeclarator',
-        id: { type: 'Identifier', name: 'toc' },
-        init: {
-          type: 'CallExpression',
-          callee: { type: 'Identifier', name: 'useTOC' },
-          arguments: [{ type: 'Identifier', name: 'props' }]
-        }
-      }
-    ]
-  })
-
-  const attributes = [
-    {
-      type: 'JSXSpreadAttribute',
-      argument: { type: 'Identifier', name: 'props' }
-    },
-    {
-      type: 'JSXAttribute',
-      name: { type: 'JSXIdentifier', name: 'toc' },
-      value: {
-        type: 'JSXExpressionContainer',
-        expression: { type: 'Identifier', name: 'toc' }
-      }
-    }
-  ]
-
-  // @ts-expect-error
-  mdxContent.body.body.at(-1).argument = {
     type: 'ExpressionStatement',
     expression: {
-      type: 'JSXElement',
-      openingElement: {
-        type: 'JSXOpeningElement',
-        name: { type: 'JSXIdentifier', name: 'MDXLayout' },
-        attributes
+      type: 'AssignmentExpression',
+      operator: '=',
+      left: {
+        type: 'MemberExpression',
+        object: { type: 'Identifier', name: 'props' },
+        property: { type: 'Identifier', name: 'toc' }
       },
-      closingElement: {
-        type: 'JSXClosingElement',
-        name: { type: 'JSXIdentifier', name: 'MDXLayout' }
-      },
-      children: [
-        {
-          type: 'JSXElement',
-          openingElement: {
-            type: 'JSXOpeningElement',
-            selfClosing: true,
-            name: { type: 'JSXIdentifier', name: '_createMdxContent' },
-            attributes
-          }
-        }
-      ]
+      right: {
+        type: 'CallExpression',
+        callee: { type: 'Identifier', name: 'useTOC' },
+        arguments: [{ type: 'Identifier', name: 'props' }]
+      }
     }
-  }
+  })
 
   createMdxContent.body.body.unshift({
     type: 'VariableDeclaration',
