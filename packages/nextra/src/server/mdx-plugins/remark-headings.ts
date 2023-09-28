@@ -38,9 +38,9 @@ export const remarkHeadings: Plugin<
       ast,
       [
         'heading',
-        // push partial component's `toc` export name to headings list
+        // push partial component's `useTOC` export name to headings list
         'mdxJsxFlowElement',
-        // verify .md/.mdx exports and attach named `toc` export
+        // verify .md/.mdx exports and attach named `useTOC` export
         'mdxjsEsm'
       ],
       (node, _index, parent) => {
@@ -108,12 +108,11 @@ export const remarkHeadings: Plugin<
     file.data.hasJsxInH1 = hasJsxInH1
     file.data.title = title
 
+    file.data.toc = headings
     if (isRemoteContent) {
-      // Attach headings for remote content, because we can't access to `toc` variable
+      // Attach headings for remote content, because we can't access to `useTOC` fn
       file.data.headings = headings
       return
     }
-
-    file.data.toc = headings
   }
 }
