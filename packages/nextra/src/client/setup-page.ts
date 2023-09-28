@@ -3,8 +3,7 @@
  * This file should be never used directly, only in loader.ts
  */
 
-import { useRouter } from 'next/router'
-import type { FC, ReactElement } from 'react'
+import type { FC } from 'react'
 import { NEXTRA_INTERNAL } from '../constants.js'
 import { normalizePageRoute, pageTitleFromFilename } from '../server/utils.js'
 import type {
@@ -18,7 +17,7 @@ import type {
   PageMapItem,
   PageOpts
 } from '../types'
-import { DataProvider } from './data.js'
+import { findFolder } from './utils.js'
 
 function isFolder(value: DynamicMetaItem): value is DynamicFolder {
   return !!value && typeof value === 'object' && value.type === 'folder'
@@ -86,14 +85,6 @@ export function collectCatchAllRoutes(
 
 const cachedResolvedPageMap: Record<string, PageMapItem[]> = Object.create(null)
 
-function findFolder(pageMap: PageMapItem[], [path, ...paths]: string[]): any {
-  for (const item of pageMap) {
-    if ('children' in item && path === item.name) {
-      return paths.length ? findFolder(item.children, paths) : item
-    }
-  }
-}
-
 export const resolvePageMap =
   (locale: string, dynamicMetaModules: DynamicMetaDescriptor) => async () => {
     const __nextra_internal__ = (globalThis as NextraInternalGlobal)[
@@ -139,53 +130,5 @@ export function setupNextraPage(
     Content: MDXContent,
     pageOpts
   }
-  return NextraLayout
-}
-
-function NextraLayout({
-  __nextra_pageMap = [],
-  __nextra_dynamic_opts,
-  ...props
-}: any): ReactElement {
-  const __nextra_internal__ = (globalThis as NextraInternalGlobal)[
-    NEXTRA_INTERNAL
-  ]
-  const { Layout, themeConfig } = __nextra_internal__
-  const { route } = useRouter()
-  console.log({ route })
-
-  const pageContext = __nextra_internal__.context[route]
-
-  if (!pageContext) {
-    throw new Error(
-      `No content found for the "${route}" route. Please report it as a bug.`
-    )
-  }
-
-  let { pageOpts } = pageContext
-
-  for (const { route, children } of __nextra_pageMap) {
-    // TODO 2 for locale, 1 without local
-    const paths = route.split('/').slice(2)
-    const folder = findFolder(pageOpts.pageMap, paths)
-    folder.children = children
-  }
-
-  if (__nextra_dynamic_opts) {
-    const { toc, title, frontMatter } = __nextra_dynamic_opts
-    pageOpts = {
-      ...pageOpts,
-      toc,
-      title,
-      frontMatter
-    }
-  }
-
-  return (
-    <Layout themeConfig={themeConfig} pageOpts={pageOpts} pageProps={props}>
-      <DataProvider value={props}>
-        <pageContext.Content />
-      </DataProvider>
-    </Layout>
-  )
+  return MDXContent
 }
