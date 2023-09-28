@@ -109,7 +109,6 @@ export const frontMatter = {
         );
       }
       export default MDXContent;
-      /*@jsxRuntime automatic @jsxImportSource react*/
       import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
       function _createMdxContent(props) {
         const _components = Object.assign(
@@ -198,21 +197,6 @@ export const frontMatter = {
           </>
         );
       }
-      function MDXContent(props = {}) {
-        const { wrapper: MDXLayout } = Object.assign(
-          {},
-          _provideComponents(),
-          props.components,
-        );
-        return MDXLayout ? (
-          <MDXLayout {...props}>
-            <_createMdxContent {...props} />
-          </MDXLayout>
-        ) : (
-          _createMdxContent(props)
-        );
-      }
-      export default MDXContent;
       function _missingMdxReference(id, component) {
         throw new Error(
           \\"Expected \\" +

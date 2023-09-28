@@ -229,15 +229,36 @@ export async function compileMdx(
       providerImportSource: 'nextra/mdx',
       rehypePlugins: [
         () => ast => {
-          ast.children = Object.values(vFile.data.toc).flat()
+          ast.children = Object.values(vFile.data.toc)
+        }
+      ],
+      recmaPlugins: [
+        () => ast => {
+          // Remove top-level comment since main content have it already
+          ast.comments = ast.comments.filter(
+            comment =>
+              comment.value !== '@jsxRuntime automatic @jsxImportSource react'
+          )
+          // Remove MDXContent export and definition
+          ast.body = ast.body
+            .filter(
+              node =>
+                node.type !== 'ExportDefaultDeclaration' ||
+                node.declaration.name !== 'MDXContent'
+            )
+            // Remove function definition
+            .filter(
+              node =>
+                node.type !== 'FunctionDeclaration' ||
+                node.id.name !== 'MDXContent'
+            )
+          // console.log(333, ast.body)
         }
       ]
     }).process(filePath ? { value: '', path: filePath } : '')
 
-    console.log(String(tocVFile))
-
     return {
-      result,
+      result: result + String(tocVFile),
       ...(title && { title }),
       ...(hasJsxInH1 && { hasJsxInH1 }),
       ...(readingTime && { readingTime }),
@@ -292,7 +313,7 @@ export async function compileMdx(
             replace: '',
             excludeExternalLinks: true
           }
-        ] satisfies Pluggable,
+        ] satisfies Pluggable
       ].filter(truthy),
       rehypePlugins: [
         ...(rehypePlugins || []),
