@@ -31,7 +31,7 @@ import {
 import {
   attachMeta,
   parseMeta,
-  recmaRewriteJsx,
+  // recmaRewriteJsx,
   rehypeIcon,
   remarkCustomHeadingId,
   remarkHeadings,
@@ -298,8 +298,8 @@ export async function compileMdx(
               attachMeta
             ]),
         latex && rehypeKatex
-      ].filter(truthy),
-      recmaPlugins: [!isRemoteContent && recmaRewriteJsx].filter(truthy)
+      ].filter(truthy)
+      // recmaPlugins: [!isRemoteContent && recmaRewriteJsx].filter(truthy)
     })
   }
 }

@@ -42,7 +42,7 @@ function normalizeZodMessage(error: unknown): string {
     .join('\n')
 }
 
-function validateMeta(pageMap: PageMapItem[]) {
+function _validateMeta(pageMap: PageMapItem[]) {
   for (const pageMapItem of pageMap) {
     if ('data' in pageMapItem) {
       for (const [key, data] of Object.entries(pageMapItem.data)) {
@@ -57,7 +57,7 @@ function validateMeta(pageMap: PageMapItem[]) {
         }
       }
     } else if ('children' in pageMapItem) {
-      validateMeta(pageMapItem.children)
+      _validateMeta(pageMapItem.children)
     }
   }
 }
