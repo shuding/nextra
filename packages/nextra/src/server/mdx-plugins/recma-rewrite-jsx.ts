@@ -27,8 +27,6 @@ export const recmaRewriteJsx: Plugin<[], Program> =
           node.id.name !== 'MDXContent'
       )
 
-    console.log(ast.body)
-
     const createMdxContent = ast.body.find(
       o =>
         o.type === 'FunctionDeclaration' && o.id!.name === '_createMdxContent'
