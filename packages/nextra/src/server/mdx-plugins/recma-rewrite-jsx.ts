@@ -34,8 +34,11 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => (ast, file) => {
     | string
   )[]
 
+  // Do not add `const toc = useTOC(props)`
+  if (!tocProperties.length) return
+
   visit(
-    // @ts-expect-error -- fixes type error
+    // @ts-expect-error -- fix type error
     { children: returnBody },
     'JSXElement',
     (heading: any, _index, parent) => {

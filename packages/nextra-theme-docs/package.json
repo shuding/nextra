@@ -50,22 +50,22 @@
   "devDependencies": {
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
     "@testing-library/react": "^14.0.0",
-    "@types/flexsearch": "^0.7.3",
-    "@types/react": "^18.2.21",
-    "@types/react-dom": "^18.2.7",
-    "@vitejs/plugin-react": "^4.0.4",
-    "concurrently": "^8.0.0",
-    "jsdom": "^22.0.0",
+    "@types/flexsearch": "^0.7.4",
+    "@types/react": "^18.2.23",
+    "@types/react-dom": "^18.2.8",
+    "@vitejs/plugin-react": "^4.1.0",
+    "concurrently": "^8.2.1",
+    "jsdom": "^22.1.0",
     "next": "^13.5.3",
     "nextra": "workspace:*",
-    "postcss": "^8.4.28",
+    "postcss": "^8.4.31",
     "postcss-cli": "^10.1.0",
     "postcss-import": "^15.1.0",
     "postcss-lightningcss": "^1.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tailwindcss": "^3.3.3",
-    "vitest": "^0.34.4"
+    "vitest": "^0.34.6"
   },
   "sideEffects": [
     "./src/polyfill.ts"
