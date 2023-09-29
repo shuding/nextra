@@ -169,7 +169,8 @@ function InnerLayout({
                 ...config.components,
                 // @ts-expect-error fixme
                 wrapper: function NextraWrapper({
-                  toc,
+                  // if there is no headings for toc, toc will be `undefined` without `useTOC` call
+                  toc = [],
                   children
                 }: {
                   children: ReactNode
