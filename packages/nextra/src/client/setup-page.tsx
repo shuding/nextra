@@ -210,11 +210,10 @@ export const HOC_MDXContent = (
     const { toc = useTOC(props) } = props
     props = { ...props, toc }
 
-    const { wrapper: MDXLayout } = Object.assign(
-      {},
-      _provideComponents(),
-      props.components
-    )
+    const { wrapper: MDXLayout } = {
+      ..._provideComponents(),
+      ...props.components
+    }
 
     return MDXLayout ? (
       <MDXLayout {...props}>
