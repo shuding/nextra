@@ -2,8 +2,7 @@ import type {
   CallExpression,
   FunctionDeclaration,
   Program,
-  ReturnStatement,
-  VariableDeclaration
+  ReturnStatement
 } from 'estree'
 import type { JsxAttribute } from 'estree-util-to-js/lib/jsx'
 import type { Plugin } from 'unified'
@@ -12,13 +11,23 @@ import { DEFAULT_PROPERTY_PROPS, TOC_HEADING_REGEX } from '../constants.js'
 
 export const recmaRewriteJsx: Plugin<[], Program> =
   () => (ast: Program, file) => {
-    // Remove `export default MDXContent;`
-    ast.body = ast.body.filter(
-      node =>
-        node.type !== 'ExportDefaultDeclaration' ||
-        // @ts-expect-error fixme
-        node.declaration.name !== 'MDXContent'
-    )
+    ast.body = ast.body
+      // Remove `export default MDXContent;`
+      .filter(
+        node =>
+          node.type !== 'ExportDefaultDeclaration' ||
+          // @ts-expect-error fixme
+          node.declaration.name !== 'MDXContent'
+      )
+      // Remove `MDXContent` since we use custom HOC_MDXContent
+      .filter(
+        node =>
+          node.type !== 'FunctionDeclaration' ||
+          // @ts-expect-error fixme
+          node.id.name !== 'MDXContent'
+      )
+
+    console.log(ast.body)
 
     const createMdxContent = ast.body.find(
       o =>
@@ -41,15 +50,6 @@ export const recmaRewriteJsx: Plugin<[], Program> =
 
     // Do not add `const toc = useTOC(props)`
     if (!tocProperties.length) return
-
-    const mdxContent = ast.body.find(
-      node =>
-        node.type === 'FunctionDeclaration' && node.id!.name === 'MDXContent'
-    ) as FunctionDeclaration
-
-    if (!mdxContent) {
-      throw new Error('`MDXContent` not found!')
-    }
 
     visit({ children: returnBody }, 'JSXElement', (heading: any) => {
       const { openingElement } = heading
@@ -102,7 +102,9 @@ export const recmaRewriteJsx: Plugin<[], Program> =
       optional: false
     } satisfies CallExpression
 
-    const toc = {
+    createMdxContent.params = [{ type: 'Identifier', name: 'props' }]
+    // Needs for partial imports since we remove `export default MDXContent` for them
+    createMdxContent.body.body.unshift({
       type: 'VariableDeclaration',
       kind: 'const',
       declarations: [
@@ -126,34 +128,5 @@ export const recmaRewriteJsx: Plugin<[], Program> =
           init: { type: 'Identifier', name: 'props' }
         }
       ]
-    } satisfies VariableDeclaration
-
-    createMdxContent.params = [{ type: 'Identifier', name: 'props' }]
-    // Needs for partial imports since we remove `export default MDXContent` for them
-    createMdxContent.body.body.unshift(toc)
-
-    mdxContent.params = createMdxContent.params
-    mdxContent.body.body.unshift(toc, {
-      type: 'ExpressionStatement',
-      expression: {
-        type: 'AssignmentExpression',
-        operator: '=',
-        left: { type: 'Identifier', name: 'props' },
-        right: {
-          type: 'ObjectExpression',
-          properties: [
-            {
-              type: 'SpreadElement',
-              argument: { type: 'Identifier', name: 'props' }
-            },
-            {
-              ...DEFAULT_PROPERTY_PROPS,
-              key: { type: 'Identifier', name: 'toc' },
-              value: { type: 'Identifier', name: 'toc' },
-              shorthand: true
-            }
-          ]
-        }
-      }
     })
   }

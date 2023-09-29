@@ -4,7 +4,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build": "next build",
+    "build": "rm -rf .next && next build",
     "dev": "next",
     "start": "next start"
   },
