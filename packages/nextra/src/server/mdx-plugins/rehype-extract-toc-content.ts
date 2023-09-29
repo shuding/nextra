@@ -4,8 +4,8 @@ import { toEstree } from 'hast-util-to-estree'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 import type { Heading } from '../../types'
-import { createAstObject } from '../utils.js'
 import { TOC_HEADING_REGEX } from '../constants.js'
+import { createAstObject } from '../utils.js'
 
 export const rehypeExtractTocContent: Plugin<[], any> = () => (ast, file) => {
   const toc: any[] = []

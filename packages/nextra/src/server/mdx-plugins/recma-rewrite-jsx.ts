@@ -92,18 +92,15 @@ export const recmaRewriteJsx: Plugin<[], Program> =
             type: 'ObjectPattern',
             properties: [
               {
-                type: 'Property',
+                ...DEFAULT_PROPERTY_PROPS,
                 key: { type: 'Identifier', name: 'toc' },
                 value: { type: 'Identifier', name: 'toc' },
-                computed: false,
-                method: false,
-                shorthand: true,
-                kind: 'init'
+                shorthand: true
               }
             ]
-          },
+          }
         }
-      ],
+      ]
     })
 
     mdxContent.body.body.unshift(
@@ -137,12 +134,8 @@ export const recmaRewriteJsx: Plugin<[], Program> =
                 argument: { type: 'Identifier', name: 'props' }
               },
               {
-                type: 'Property',
+                ...DEFAULT_PROPERTY_PROPS,
                 key: { type: 'Identifier', name: 'toc' },
-                computed: false,
-                method: false,
-                shorthand: false,
-                kind: 'init',
                 value: {
                   type: 'LogicalExpression',
                   operator: '||',
