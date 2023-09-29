@@ -10,6 +10,94 @@ const opts = {
 } as const
 
 describe('rehypeExtractTocContent', () => {
+  it('should work with footnotes or user ids', async () => {
+    const { result } = await compileMdx(
+      `
+## foo
+bar[^1]
+
+[^1]: bar description
+`,
+      opts
+    )
+    expect(clean(result)).resolves.toMatchInlineSnapshot(`
+      "import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
+      export const frontMatter = {};
+      export function useTOC(props) {
+        return [
+          {
+            value: \\"foo\\",
+            id: \\"foo\\",
+            depth: 2,
+          },
+        ];
+      }
+      function _createMdxContent(props) {
+        const toc = useTOC(props);
+        const _components = Object.assign(
+          {
+            h2: \\"h2\\",
+            p: \\"p\\",
+            sup: \\"sup\\",
+            a: \\"a\\",
+            section: \\"section\\",
+            ol: \\"ol\\",
+            li: \\"li\\",
+          },
+          _provideComponents(),
+          props.components,
+        );
+        return (
+          <>
+            <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
+            {\\"\\\\n\\"}
+            <_components.p>
+              {\\"bar\\"}
+              <_components.sup>
+                <_components.a
+                  href=\\"#user-content-fn-1\\"
+                  id=\\"user-content-fnref-1\\"
+                  data-footnote-ref
+                  aria-describedby=\\"footnote-label\\"
+                >
+                  {\\"1\\"}
+                </_components.a>
+              </_components.sup>
+            </_components.p>
+            {\\"\\\\n\\"}
+            <_components.section data-footnotes className=\\"footnotes\\">
+              <_components.h2 id={toc[1].id} className=\\"sr-only\\">
+                {toc[1].value}
+              </_components.h2>
+              {\\"\\\\n\\"}
+              <_components.ol>
+                {\\"\\\\n\\"}
+                <_components.li id=\\"user-content-fn-1\\">
+                  {\\"\\\\n\\"}
+                  <_components.p>
+                    {\\"bar description \\"}
+                    <_components.a
+                      href=\\"#user-content-fnref-1\\"
+                      data-footnote-backref
+                      className=\\"data-footnote-backref\\"
+                      aria-label=\\"Back to content\\"
+                    >
+                      {\\"↩\\"}
+                    </_components.a>
+                  </_components.p>
+                  {\\"\\\\n\\"}
+                </_components.li>
+                {\\"\\\\n\\"}
+              </_components.ol>
+              {\\"\\\\n\\"}
+            </_components.section>
+          </>
+        );
+      }
+      "
+    `)
+  })
+
   it('should fill heading deeply', async () => {
     const { result } = await compileMdx(
       `

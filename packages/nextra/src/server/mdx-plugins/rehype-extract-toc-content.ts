@@ -2,16 +2,18 @@ import type { JsxAttribute } from 'estree-util-to-js/lib/jsx'
 import { toEstree } from 'hast-util-to-estree'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
+import type { Heading } from '../../types'
 import { createAstObject } from '../utils.js'
 
 export const rehypeExtractTocContent: Plugin<[], any> = () => (ast, file) => {
   const toc: any[] = []
+  const idSet = new Set((file.data.toc as Heading[]).map(({ id }) => id))
 
   visit(ast, 'element', node => {
     if (!/^h[2-6]$/.test(node.tagName)) return
 
     const { id } = node.properties
-    if (typeof id === 'string') {
+    if (typeof id === 'string' && idSet.has(id)) {
       toc.push(structuredClone(node))
       node.children = []
     }

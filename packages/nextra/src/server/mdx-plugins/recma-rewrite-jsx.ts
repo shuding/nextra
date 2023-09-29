@@ -12,15 +12,6 @@ export const recmaRewriteJsx: Plugin<[], Program> =
         o.type === 'FunctionDeclaration' && o.id!.name === '_createMdxContent'
     ) as FunctionDeclaration
 
-    const mdxContent = ast.body.find(
-      node =>
-        node.type === 'FunctionDeclaration' && node.id!.name === 'MDXContent'
-    ) as FunctionDeclaration
-
-    if (!mdxContent) {
-      throw new Error('`MDXContent` not found!')
-    }
-
     const returnStatement = createMdxContent.body.body.find(
       o => o.type === 'ReturnStatement'
     ) as ReturnStatement
@@ -38,57 +29,49 @@ export const recmaRewriteJsx: Plugin<[], Program> =
     // Do not add `const toc = useTOC(props)`
     if (!tocProperties.length) return
 
-    visit(
-      // @ts-expect-error -- fix type error
-      { children: returnBody },
-      'JSXElement',
-      (heading: any, _index, parent) => {
-        const { openingElement } = heading
-        const name = openingElement?.name.property?.name
-        const isHeading = name && HEADING_NAMES.has(name)
-        // @ts-expect-error -- fixes type error
-        const isFootnotes = parent.openingElement?.attributes.some(
-          (attr: JsxAttribute) => attr.name.name === 'data-footnotes'
-        )
-        if (!isHeading || isFootnotes) return
-        const idNode = openingElement.attributes.find(
-          (attr: JsxAttribute) => attr.name.name === 'id'
-        )
-        if (!idNode) return
+    visit({ children: returnBody }, 'JSXElement', (heading: any) => {
+      const { openingElement } = heading
+      const name = openingElement?.name.property?.name
+      const isHeading = name && HEADING_NAMES.has(name)
+      if (!isHeading) return
 
-        const id = idNode.value.value
+      const idNode = openingElement.attributes.find(
+        (attr: JsxAttribute) => attr.name.name === 'id'
+      )
+      if (!idNode) return
 
-        const foundIndex = tocProperties.findIndex(node => {
-          if (typeof node === 'string') return
-          return node.properties.id === id
-        })
+      const id = idNode.value.value
 
-        if (foundIndex === -1) return
-        idNode.value = {
+      const foundIndex = tocProperties.findIndex(node => {
+        if (typeof node === 'string') return
+        return node.properties.id === id
+      })
+
+      if (foundIndex === -1) return
+      idNode.value = {
+        type: 'JSXExpressionContainer',
+        expression: {
+          type: 'Identifier',
+          name: `toc[${foundIndex}].id`
+        }
+      }
+
+      delete openingElement.selfClosing
+      heading.children = [
+        {
           type: 'JSXExpressionContainer',
           expression: {
             type: 'Identifier',
-            name: `toc[${foundIndex}].id`
+            name: `toc[${foundIndex}].value`
           }
         }
-
-        delete openingElement.selfClosing
-        heading.children = [
-          {
-            type: 'JSXExpressionContainer',
-            expression: {
-              type: 'Identifier',
-              name: `toc[${foundIndex}].value`
-            }
-          }
-        ]
-        heading.closingElement = {
-          ...openingElement,
-          type: 'JSXClosingElement',
-          attributes: []
-        }
+      ]
+      heading.closingElement = {
+        ...openingElement,
+        type: 'JSXClosingElement',
+        attributes: []
       }
-    )
+    })
 
     createMdxContent.body.body.unshift({
       type: 'VariableDeclaration',
