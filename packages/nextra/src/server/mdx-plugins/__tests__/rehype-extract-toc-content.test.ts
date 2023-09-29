@@ -91,8 +91,7 @@ export const frontMatter = {
       opts
     )
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
-      "/*@jsxRuntime automatic @jsxImportSource react*/
-      import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
+      "import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
       export const myVar = \\"interpolated\\";
       export const Test = () => {
         const _components = Object.assign(
@@ -240,21 +239,6 @@ export const frontMatter = {
           </>
         );
       }
-      function MDXContent(props = {}) {
-        const { wrapper: MDXLayout } = Object.assign(
-          {},
-          _provideComponents(),
-          props.components,
-        );
-        return MDXLayout ? (
-          <MDXLayout {...props}>
-            <_createMdxContent {...props} />
-          </MDXLayout>
-        ) : (
-          _createMdxContent(props)
-        );
-      }
-      export default MDXContent;
       "
     `)
   })
