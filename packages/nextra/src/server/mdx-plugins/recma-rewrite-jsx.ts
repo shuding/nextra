@@ -35,12 +35,14 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => (ast, file) => {
   )[]
 
   visit(
+    // @ts-expect-error -- fixes type error
     { children: returnBody },
     'JSXElement',
     (heading: any, _index, parent) => {
       const { openingElement } = heading
       const name = openingElement?.name.property?.name
       const isHeading = name && HEADING_NAMES.has(name)
+      // @ts-expect-error -- fixes type error
       const isFootnotes = parent.openingElement?.attributes.some(
         (attr: JsxAttribute) => attr.name.name === 'data-footnotes'
       )
