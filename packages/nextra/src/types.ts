@@ -95,6 +95,13 @@ export type NextraThemeLayoutProps = {
   children: ReactNode
 }
 
+export type UseTOC = (props?: Record<string, unknown>) => [
+  //
+  id: string,
+  value: string | ReactNode,
+  depth: Heading['depth']
+][]
+
 export type NextraInternalGlobal = typeof globalThis & {
   [NEXTRA_INTERNAL]: {
     pageMap: PageMapItem[]
@@ -104,7 +111,7 @@ export type NextraInternalGlobal = typeof globalThis & {
       {
         Content: FC
         pageOpts: PageOpts
-        useTOC: () => Heading[]
+        useTOC: UseTOC
       }
     >
     Layout: FC<NextraThemeLayoutProps>
