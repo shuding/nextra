@@ -66,8 +66,8 @@ bar[^1]
             </_components.p>
             {\\"\\\\n\\"}
             <_components.section data-footnotes className=\\"footnotes\\">
-              <_components.h2 id={toc[1].id} className=\\"sr-only\\">
-                {toc[1].value}
+              <_components.h2 id=\\"footnote-label\\" className=\\"sr-only\\">
+                {\\"Footnotes\\"}
               </_components.h2>
               {\\"\\\\n\\"}
               <_components.ol>
