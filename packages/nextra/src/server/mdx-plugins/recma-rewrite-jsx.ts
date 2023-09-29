@@ -10,6 +10,16 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => (ast, file) => {
   const createMdxContent = ast.body.find(
     o => o.type === 'FunctionDeclaration' && o.id!.name === '_createMdxContent'
   ) as FunctionDeclaration
+
+  const mdxContent = ast.body.find(
+    node =>
+      node.type === 'FunctionDeclaration' && node.id!.name === 'MDXContent'
+  ) as FunctionDeclaration
+
+  if (!mdxContent) {
+    throw new Error('`MDXContent` not found!')
+  }
+
   const returnStatement = createMdxContent.body.body.find(
     o => o.type === 'ReturnStatement'
   ) as ReturnStatement
@@ -24,56 +34,56 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => (ast, file) => {
     | string
   )[]
 
-  visit({ children: returnBody }, 'JSXElement', (heading: any) => {
-    const { openingElement } = heading
-    const name = openingElement?.name.property?.name
-    const isHeading = name && HEADING_NAMES.has(name)
+  visit(
+    { children: returnBody },
+    'JSXElement',
+    (heading: any, _index, parent) => {
+      const { openingElement } = heading
+      const name = openingElement?.name.property?.name
+      const isHeading = name && HEADING_NAMES.has(name)
+      const isFootnotes = parent.openingElement?.attributes.some(
+        (attr: JsxAttribute) => attr.name.name === 'data-footnotes'
+      )
+      if (!isHeading || isFootnotes) return
+      const idNode = openingElement.attributes.find(
+        (attr: JsxAttribute) => attr.name.name === 'id'
+      )
+      if (!idNode) return
 
-    if (!isHeading) return
-    const idNode = openingElement.attributes.find(
-      (attr: JsxAttribute) => attr.name.name === 'id'
-    )
-    if (!idNode) return
+      const id = idNode.value.value
 
-    const id = idNode.value.value
+      const foundIndex = tocProperties.findIndex(node => {
+        if (typeof node === 'string') return
+        return node.properties.id === id
+      })
 
-    const foundIndex = tocProperties.findIndex(node => {
-      if (typeof node === 'string') return
-      return node.properties.id === id
-    })
-
-    if (foundIndex === -1) return
-
-    idNode.value = {
-      type: 'JSXExpressionContainer',
-      expression: {
-        type: 'Identifier',
-        name: `toc[${foundIndex}].id`
-      }
-    }
-
-    delete openingElement.selfClosing
-    heading.children = [
-      {
+      if (foundIndex === -1) return
+      idNode.value = {
         type: 'JSXExpressionContainer',
         expression: {
           type: 'Identifier',
-          name: `toc[${foundIndex}].value`
+          name: `toc[${foundIndex}].id`
         }
       }
-    ]
-    heading.closingElement = {
-      ...openingElement,
-      type: 'JSXClosingElement',
-      attributes: []
-    }
-  })
 
-  const mdxContent = ast.body.find(
-    // @ts-expect-error
-    node => node.type === 'FunctionDeclaration' && node.id.name === 'MDXContent'
+      delete openingElement.selfClosing
+      heading.children = [
+        {
+          type: 'JSXExpressionContainer',
+          expression: {
+            type: 'Identifier',
+            name: `toc[${foundIndex}].value`
+          }
+        }
+      ]
+      heading.closingElement = {
+        ...openingElement,
+        type: 'JSXClosingElement',
+        attributes: []
+      }
+    }
   )
-  // @ts-expect-error
+
   mdxContent.body.body.unshift(
     {
       type: 'VariableDeclaration',
@@ -85,7 +95,8 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => (ast, file) => {
           init: {
             type: 'CallExpression',
             callee: { type: 'Identifier', name: 'useTOC' },
-            arguments: [{ type: 'Identifier', name: 'props' }]
+            arguments: [{ type: 'Identifier', name: 'props' }],
+            optional: false
           }
         }
       ]
