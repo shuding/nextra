@@ -10,7 +10,6 @@ export const remarkMdxDisableExplicitJsx: Plugin<
   ast => {
     const test = whiteList.map(name => ({ name }))
     visit(ast, test, node => {
-      // @ts-expect-error -- types are wrong here Property `_mdxExplicitJsx` does not exist on type `RootData`
       delete node.data!._mdxExplicitJsx
     })
   }

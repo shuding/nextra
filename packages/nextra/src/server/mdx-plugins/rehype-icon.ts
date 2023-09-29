@@ -1,4 +1,5 @@
 import type { ImportDeclaration, ImportSpecifier } from 'estree'
+import type { Element, Parent } from 'hast'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 
@@ -70,7 +71,7 @@ const isImportDeclaration = (node: any) =>
 const isImportFrom = (node: any) =>
   node.data.estree.body[0].source.value === 'nextra/icons'
 
-export const rehypeIcon: Plugin<[], any> =
+export const rehypeIcon: Plugin<[], Parent> =
   (replaces = REHYPE_ICON_DEFAULT_REPLACES) =>
   ast => {
     const imports = ast.children.filter(
@@ -84,14 +85,15 @@ export const rehypeIcon: Plugin<[], any> =
 
       if (!isRehypePrettyCode) return
 
-      const preEl = node.children[0]
-      const lang = preEl.properties['data-language']
+      const preEl = node.children[0] as Element
+      const lang = preEl.properties['data-language'] as string
       const iconName = replaces[lang]
 
       if (!iconName) return
 
       let findImportedName = ''
       for (const { data } of imports) {
+        // @ts-expect-error fixme
         const [{ specifiers }] = data.estree.body
         const isMatch = (specifiers as ImportSpecifier[]).some(
           spec => spec.imported.name === iconName
@@ -104,7 +106,9 @@ export const rehypeIcon: Plugin<[], any> =
 
       if (!findImportedName) {
         const importNode = createImport(iconName)
+        // @ts-expect-error fixme
         ast.children.push(importNode)
+        // @ts-expect-error fixme
         imports.push(importNode)
       }
       attachIconProp(preEl, findImportedName || iconName)
