@@ -1,5 +1,5 @@
 import type { ImportDeclaration, ImportSpecifier } from 'estree'
-import type { Element, Parent } from 'hast'
+import type { Element } from 'hast'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 
@@ -71,7 +71,7 @@ const isImportDeclaration = (node: any) =>
 const isImportFrom = (node: any) =>
   node.data.estree.body[0].source.value === 'nextra/icons'
 
-export const rehypeIcon: Plugin<[], Parent> =
+export const rehypeIcon: Plugin<[], any> =
   (replaces = REHYPE_ICON_DEFAULT_REPLACES) =>
   ast => {
     const imports = ast.children.filter(
@@ -79,7 +79,7 @@ export const rehypeIcon: Plugin<[], Parent> =
         isMdxJsEsm(node) && isImportDeclaration(node) && isImportFrom(node)
     )
 
-    visit(ast, { tagName: 'div' }, node => {
+    visit(ast, { tagName: 'div' }, (node: Element) => {
       const isRehypePrettyCode =
         'data-rehype-pretty-code-fragment' in node.properties
 
@@ -93,7 +93,6 @@ export const rehypeIcon: Plugin<[], Parent> =
 
       let findImportedName = ''
       for (const { data } of imports) {
-        // @ts-expect-error fixme
         const [{ specifiers }] = data.estree.body
         const isMatch = (specifiers as ImportSpecifier[]).some(
           spec => spec.imported.name === iconName
@@ -106,9 +105,7 @@ export const rehypeIcon: Plugin<[], Parent> =
 
       if (!findImportedName) {
         const importNode = createImport(iconName)
-        // @ts-expect-error fixme
         ast.children.push(importNode)
-        // @ts-expect-error fixme
         imports.push(importNode)
       }
       attachIconProp(preEl, findImportedName || iconName)
