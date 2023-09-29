@@ -185,8 +185,10 @@ function NextraLayout({
       frontMatter
     }
   } else {
-    // eslint-disable-next-line react-hooks/rules-of-hooks -- this is not really hook
-    pageOpts.toc = useTOC().map(([id, value, depth]) => ({ id, value, depth }))
+    // @ts-expect-error
+    pageOpts.toc =
+      // eslint-disable-next-line react-hooks/rules-of-hooks -- this is not really hook
+      useTOC().map(([id, value, depth]) => ({ id, value, depth }))
   }
 
   return (
