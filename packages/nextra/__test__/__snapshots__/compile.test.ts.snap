@@ -88,7 +88,13 @@ exports[`Process heading > no-h1 1`] = `
 "import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
 export const frontMatter = {};
 export function useTOC(props) {
-  return [[\\"h2\\", \\"H2\\", 2]];
+  return [
+    {
+      value: \\"H2\\",
+      id: \\"h2\\",
+      depth: 2,
+    },
+  ];
 }
 function _createMdxContent(props) {
   const toc = useTOC(props);
@@ -99,7 +105,7 @@ function _createMdxContent(props) {
     _provideComponents(),
     props.components,
   );
-  return <_components.h2 id={toc[0][0]}>{toc[0][1]}</_components.h2>;
+  return <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>;
 }
 "
 `;

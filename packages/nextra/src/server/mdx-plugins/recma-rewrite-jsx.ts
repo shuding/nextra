@@ -2,7 +2,6 @@ import type { FunctionDeclaration, Program, ReturnStatement } from 'estree'
 import type { JsxAttribute } from 'estree-util-to-js/lib/jsx'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
-import { DEFAULT_PROPERTY_PROPS } from '../constants.js'
 
 const HEADING_NAMES = new Set(['h2', 'h3', 'h4', 'h5', 'h6'])
 
@@ -67,7 +66,7 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => (ast, file) => {
         type: 'JSXExpressionContainer',
         expression: {
           type: 'Identifier',
-          name: `toc[${foundIndex}][0]`
+          name: `toc[${foundIndex}].id`
         }
       }
 
@@ -77,7 +76,7 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => (ast, file) => {
           type: 'JSXExpressionContainer',
           expression: {
             type: 'Identifier',
-            name: `toc[${foundIndex}][1]`
+            name: `toc[${foundIndex}].value`
           }
         }
       ]

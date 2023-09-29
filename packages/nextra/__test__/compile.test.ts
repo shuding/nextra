@@ -57,12 +57,36 @@ export const TagName = () => {
       export const frontMatter = {};
       export function useTOC(props) {
         return [
-          [\\"extra-space\\", \\"Some extra space\\", 2],
-          [\\"extra-space-in-heading\\", \\"Some extra space in heading\\", 3],
-          [\\"without-space\\", \\"nospace\\", 3],
-          [\\"другой-язык\\", \\"foo\\", 4],
-          [\\"bar-baz-\\", \\"bar Baz []\\", 5],
-          [\\"bar-qux-\\", \\"bar Qux [#]\\", 6],
+          {
+            value: \\"Some extra space\\",
+            id: \\"extra-space\\",
+            depth: 2,
+          },
+          {
+            value: \\"Some extra space in heading\\",
+            id: \\"extra-space-in-heading\\",
+            depth: 3,
+          },
+          {
+            value: \\"nospace\\",
+            id: \\"without-space\\",
+            depth: 3,
+          },
+          {
+            value: \\"foo\\",
+            id: \\"другой-язык\\",
+            depth: 4,
+          },
+          {
+            value: \\"bar Baz []\\",
+            id: \\"bar-baz-\\",
+            depth: 5,
+          },
+          {
+            value: \\"bar Qux [#]\\",
+            id: \\"bar-qux-\\",
+            depth: 6,
+          },
         ];
       }
       function _createMdxContent(props) {
@@ -83,17 +107,17 @@ export const TagName = () => {
           <>
             <_components.h1 id=\\"test-id\\">{\\"My Header\\"}</_components.h1>
             {\\"\\\\n\\"}
-            <_components.h2 id={toc[0][0]}>{toc[0][1]}</_components.h2>
+            <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
             {\\"\\\\n\\"}
-            <_components.h3 id={toc[1][0]}>{toc[1][1]}</_components.h3>
+            <_components.h3 id={toc[1].id}>{toc[1].value}</_components.h3>
             {\\"\\\\n\\"}
-            <_components.h3 id={toc[2][0]}>{toc[2][1]}</_components.h3>
+            <_components.h3 id={toc[2].id}>{toc[2].value}</_components.h3>
             {\\"\\\\n\\"}
-            <_components.h4 id={toc[3][0]}>{toc[3][1]}</_components.h4>
+            <_components.h4 id={toc[3].id}>{toc[3].value}</_components.h4>
             {\\"\\\\n\\"}
-            <_components.h5 id={toc[4][0]}>{toc[4][1]}</_components.h5>
+            <_components.h5 id={toc[4].id}>{toc[4].value}</_components.h5>
             {\\"\\\\n\\"}
-            <_components.h6 id={toc[5][0]}>{toc[5][1]}</_components.h6>
+            <_components.h6 id={toc[5].id}>{toc[5].value}</_components.h6>
           </>
         );
       }
@@ -106,7 +130,13 @@ export const TagName = () => {
       "import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
       export const frontMatter = {};
       export function useTOC(props) {
-        return [[\\"my-header\\", \\"My Header\\", 3]];
+        return [
+          {
+            value: \\"My Header\\",
+            id: \\"my-header\\",
+            depth: 3,
+          },
+        ];
       }
       function _createMdxContent(props) {
         const toc = useTOC(props);
@@ -117,7 +147,7 @@ export const TagName = () => {
           _provideComponents(),
           props.components,
         );
-        return <_components.h3 id={toc[0][0]}>{toc[0][1]}</_components.h3>;
+        return <_components.h3 id={toc[0].id}>{toc[0].value}</_components.h3>;
       }
       "
     `)
@@ -180,74 +210,94 @@ import Last from './three.mdx'
           { Kek } = _components;
         if (!Kek) _missingMdxReference(\\"Kek\\", true);
         return [
-          [\\"️\\", \\"❤️\\", 2],
+          {
+            value: \\"❤️\\",
+            id: \\"️\\",
+            depth: 2,
+          },
           ...useTOC0(),
-          [\\"\\", \\"✅\\", 2],
+          {
+            value: \\"✅\\",
+            id: \\"\\",
+            depth: 2,
+          },
           ...useTOC1(),
           ...useTOC2(),
-          [\\"-1\\", \\"👋\\", 2],
-          [
-            \\"kek-\\",
-            <>
-              {\\"kek \\"}
-              <Kek />
-            </>,
-            2,
-          ],
-          [
-            \\"try-me\\",
-            <>
-              <_components.code>{\\"try\\"}</_components.code>
-              {\\" me\\"}
-            </>,
-            2,
-          ],
-          [
-            \\"latex-l\\",
-            <>
-              {\\"latex \\"}
-              <_components.span className=\\"katex\\">
-                <_components.span className=\\"katex-mathml\\">
-                  <_components.math xmlns=\\"http://www.w3.org/1998/Math/MathML\\">
-                    <_components.semantics>
-                      <_components.mrow>
-                        <_components.mi>{\\"l\\"}</_components.mi>
-                      </_components.mrow>
-                      <_components.annotation encoding=\\"application/x-tex\\">
+          {
+            value: \\"👋\\",
+            id: \\"-1\\",
+            depth: 2,
+          },
+          {
+            value: (
+              <>
+                {\\"kek \\"}
+                <Kek />
+              </>
+            ),
+            id: \\"kek-\\",
+            depth: 2,
+          },
+          {
+            value: (
+              <>
+                <_components.code>{\\"try\\"}</_components.code>
+                {\\" me\\"}
+              </>
+            ),
+            id: \\"try-me\\",
+            depth: 2,
+          },
+          {
+            value: (
+              <>
+                {\\"latex \\"}
+                <_components.span className=\\"katex\\">
+                  <_components.span className=\\"katex-mathml\\">
+                    <_components.math xmlns=\\"http://www.w3.org/1998/Math/MathML\\">
+                      <_components.semantics>
+                        <_components.mrow>
+                          <_components.mi>{\\"l\\"}</_components.mi>
+                        </_components.mrow>
+                        <_components.annotation encoding=\\"application/x-tex\\">
+                          {\\"l\\"}
+                        </_components.annotation>
+                      </_components.semantics>
+                    </_components.math>
+                  </_components.span>
+                  <_components.span className=\\"katex-html\\" aria-hidden=\\"true\\">
+                    <_components.span className=\\"base\\">
+                      <_components.span
+                        className=\\"strut\\"
+                        style={{
+                          height: \\"0.6944em\\",
+                        }}
+                      />
+                      <_components.span
+                        className=\\"mord mathnormal\\"
+                        style={{
+                          marginRight: \\"0.01968em\\",
+                        }}
+                      >
                         {\\"l\\"}
-                      </_components.annotation>
-                    </_components.semantics>
-                  </_components.math>
-                </_components.span>
-                <_components.span className=\\"katex-html\\" aria-hidden=\\"true\\">
-                  <_components.span className=\\"base\\">
-                    <_components.span
-                      className=\\"strut\\"
-                      style={{
-                        height: \\"0.6944em\\",
-                      }}
-                    />
-                    <_components.span
-                      className=\\"mord mathnormal\\"
-                      style={{
-                        marginRight: \\"0.01968em\\",
-                      }}
-                    >
-                      {\\"l\\"}
+                      </_components.span>
                     </_components.span>
                   </_components.span>
                 </_components.span>
-              </_components.span>
-            </>,
-            2,
-          ],
-          [
-            \\"interpolate-1-true-null-variable\\",
-            <>
-              {\\"interpolate\\"} {1} {true} {null} {variable}
-            </>,
-            2,
-          ],
+              </>
+            ),
+            id: \\"latex-l\\",
+            depth: 2,
+          },
+          {
+            value: (
+              <>
+                {\\"interpolate\\"} {1} {true} {null} {variable}
+              </>
+            ),
+            id: \\"interpolate-1-true-null-variable\\",
+            depth: 2,
+          },
         ];
       }
       function _createMdxContent(props) {
@@ -261,11 +311,11 @@ import Last from './three.mdx'
         );
         return (
           <>
-            <_components.h2 id={toc[0][0]}>{toc[0][1]}</_components.h2>
+            <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
             {\\"\\\\n\\"}
             <FromMdx />
             {\\"\\\\n\\"}
-            <_components.h2 id={toc[1][0]}>{toc[1][1]}</_components.h2>
+            <_components.h2 id={toc[1].id}>{toc[1].value}</_components.h2>
             {\\"\\\\n\\"}
             <FromMarkdown />
             {\\"\\\\n\\"}
@@ -274,15 +324,15 @@ import Last from './three.mdx'
             {\\"\\\\n\\"}
             <IgnoreMe />
             {\\"\\\\n\\"}
-            <_components.h2 id={toc[2][0]}>{toc[2][1]}</_components.h2>
+            <_components.h2 id={toc[2].id}>{toc[2].value}</_components.h2>
             {\\"\\\\n\\"}
-            <_components.h2 id={toc[3][0]}>{toc[3][1]}</_components.h2>
+            <_components.h2 id={toc[3].id}>{toc[3].value}</_components.h2>
             {\\"\\\\n\\"}
-            <_components.h2 id={toc[4][0]}>{toc[4][1]}</_components.h2>
+            <_components.h2 id={toc[4].id}>{toc[4].value}</_components.h2>
             {\\"\\\\n\\"}
-            <_components.h2 id={toc[5][0]}>{toc[5][1]}</_components.h2>
+            <_components.h2 id={toc[5].id}>{toc[5].value}</_components.h2>
             {\\"\\\\n\\"}
-            <_components.h2 id={toc[6][0]}>{toc[6][1]}</_components.h2>
+            <_components.h2 id={toc[6].id}>{toc[6].value}</_components.h2>
           </>
         );
       }

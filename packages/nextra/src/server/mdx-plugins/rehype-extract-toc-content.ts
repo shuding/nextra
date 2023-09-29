@@ -1,4 +1,3 @@
-import type { JsxAttribute } from 'estree-util-to-js/lib/jsx'
 import { toEstree } from 'hast-util-to-estree'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
@@ -55,18 +54,34 @@ export const rehypeExtractTocContent: Plugin<[], any> = () => (ast, file) => {
         }
 
     return {
-      type: 'ArrayExpression',
-      elements: [
+      type: 'ObjectExpression',
+      properties: [
         {
-          type: 'Literal',
-          value: node.openingElement.attributes.find(
-            (attr: JsxAttribute) => attr.name.name === 'id'
-          ).value.value
+          type: 'Property',
+          key: { type: 'Identifier', name: 'value' },
+          value: result,
+          kind: 'init'
         },
-        result,
         {
-          type: 'Literal',
-          value: Number(node.openingElement.name.name[1])
+          type: 'Property',
+          key: { type: 'Identifier', name: 'id' },
+          value: {
+            type: 'Literal',
+            value: node.openingElement.attributes.find(
+              // @ts-expect-error
+              attr => attr.name.name === 'id'
+            ).value.value
+          },
+          kind: 'init'
+        },
+        {
+          type: 'Property',
+          key: { type: 'Identifier', name: 'depth' },
+          value: {
+            type: 'Literal',
+            value: Number(node.openingElement.name.name[1])
+          },
+          kind: 'init'
         }
       ]
     }
