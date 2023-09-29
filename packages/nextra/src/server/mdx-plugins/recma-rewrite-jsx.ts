@@ -64,7 +64,7 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => (ast, file) => {
         type: 'JSXExpressionContainer',
         expression: {
           type: 'Identifier',
-          name: `toc[${foundIndex}].id`
+          name: `toc[${foundIndex}][0]`
         }
       }
 
@@ -74,7 +74,7 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => (ast, file) => {
           type: 'JSXExpressionContainer',
           expression: {
             type: 'Identifier',
-            name: `toc[${foundIndex}].value`
+            name: `toc[${foundIndex}][1]`
           }
         }
       ]

@@ -31,16 +31,8 @@ import { Steps } from 'nextra/components'
       import { Steps } from \\"nextra/components\\";
       export function useTOC(props) {
         return [
-          {
-            value: \\"baz qux\\",
-            id: \\"baz-qux\\",
-            depth: 2,
-          },
-          {
-            value: \\"foo bar\\",
-            id: \\"foo-bar\\",
-            depth: 3,
-          },
+          [\\"baz-qux\\", \\"baz qux\\", 2],
+          [\\"foo-bar\\", \\"foo bar\\", 3],
         ];
       }
       function _createMdxContent(props) {
@@ -55,11 +47,11 @@ import { Steps } from 'nextra/components'
         );
         return (
           <>
-            <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
+            <_components.h2 id={toc[0][0]}>{toc[0][1]}</_components.h2>
             {\\"\\\\n\\"}
             <Steps>
               <div>
-                <_components.h3 id={toc[1].id}>{toc[1].value}</_components.h3>
+                <_components.h3 id={toc[1][0]}>{toc[1][1]}</_components.h3>
               </div>
             </Steps>
           </>
@@ -128,108 +120,88 @@ export const frontMatter = {
           _provideComponents(),
         );
         return [
-          {
-            value: (
-              <>
-                {\\"Heading \\"}
-                {myVar}
-              </>
-            ),
-            id: \\"heading-myvar\\",
-            depth: 2,
-          },
-          {
-            value: (
-              <>
-                {\\"Heading \\"}
-                <_components.span className=\\"katex\\">
-                  <_components.span className=\\"katex-mathml\\">
-                    <_components.math xmlns=\\"http://www.w3.org/1998/Math/MathML\\">
-                      <_components.semantics>
-                        <_components.mrow>
-                          <_components.mi>{\\"l\\"}</_components.mi>
-                          <_components.mi>{\\"a\\"}</_components.mi>
-                          <_components.mi>{\\"t\\"}</_components.mi>
-                          <_components.mi>{\\"e\\"}</_components.mi>
-                          <_components.mi>{\\"x\\"}</_components.mi>
-                        </_components.mrow>
-                        <_components.annotation encoding=\\"application/x-tex\\">
-                          {\\"latex\\"}
-                        </_components.annotation>
-                      </_components.semantics>
-                    </_components.math>
-                  </_components.span>
-                  <_components.span className=\\"katex-html\\" aria-hidden=\\"true\\">
-                    <_components.span className=\\"base\\">
-                      <_components.span
-                        className=\\"strut\\"
-                        style={{
-                          height: \\"0.6944em\\",
-                        }}
-                      />
-                      <_components.span
-                        className=\\"mord mathnormal\\"
-                        style={{
-                          marginRight: \\"0.01968em\\",
-                        }}
-                      >
-                        {\\"l\\"}
-                      </_components.span>
-                      <_components.span className=\\"mord mathnormal\\">
-                        {\\"a\\"}
-                      </_components.span>
-                      <_components.span className=\\"mord mathnormal\\">
-                        {\\"t\\"}
-                      </_components.span>
-                      <_components.span className=\\"mord mathnormal\\">
-                        {\\"e\\"}
-                      </_components.span>
-                      <_components.span className=\\"mord mathnormal\\">
-                        {\\"x\\"}
-                      </_components.span>
+          [
+            \\"heading-myvar\\",
+            <>
+              {\\"Heading \\"}
+              {myVar}
+            </>,
+            2,
+          ],
+          [
+            \\"heading-latex\\",
+            <>
+              {\\"Heading \\"}
+              <_components.span className=\\"katex\\">
+                <_components.span className=\\"katex-mathml\\">
+                  <_components.math xmlns=\\"http://www.w3.org/1998/Math/MathML\\">
+                    <_components.semantics>
+                      <_components.mrow>
+                        <_components.mi>{\\"l\\"}</_components.mi>
+                        <_components.mi>{\\"a\\"}</_components.mi>
+                        <_components.mi>{\\"t\\"}</_components.mi>
+                        <_components.mi>{\\"e\\"}</_components.mi>
+                        <_components.mi>{\\"x\\"}</_components.mi>
+                      </_components.mrow>
+                      <_components.annotation encoding=\\"application/x-tex\\">
+                        {\\"latex\\"}
+                      </_components.annotation>
+                    </_components.semantics>
+                  </_components.math>
+                </_components.span>
+                <_components.span className=\\"katex-html\\" aria-hidden=\\"true\\">
+                  <_components.span className=\\"base\\">
+                    <_components.span
+                      className=\\"strut\\"
+                      style={{
+                        height: \\"0.6944em\\",
+                      }}
+                    />
+                    <_components.span
+                      className=\\"mord mathnormal\\"
+                      style={{
+                        marginRight: \\"0.01968em\\",
+                      }}
+                    >
+                      {\\"l\\"}
+                    </_components.span>
+                    <_components.span className=\\"mord mathnormal\\">
+                      {\\"a\\"}
+                    </_components.span>
+                    <_components.span className=\\"mord mathnormal\\">
+                      {\\"t\\"}
+                    </_components.span>
+                    <_components.span className=\\"mord mathnormal\\">
+                      {\\"e\\"}
+                    </_components.span>
+                    <_components.span className=\\"mord mathnormal\\">
+                      {\\"x\\"}
                     </_components.span>
                   </_components.span>
                 </_components.span>
-              </>
-            ),
-            id: \\"heading-latex\\",
-            depth: 3,
-          },
-          {
-            value: (
-              <>
-                {\\"Heading \\"}
-                <_components.code>{\\"<Code />:{jsx}\\"}</_components.code>
-              </>
-            ),
-            id: \\"heading-code-jsx\\",
-            depth: 3,
-          },
-          {
-            value: (
-              <>
-                <Test />
-                {\\" World\\"}
-              </>
-            ),
-            id: \\"-world\\",
-            depth: 4,
-          },
-          {
-            value: \\"String\\",
-            id: \\"string\\",
-            depth: 5,
-          },
-          {
-            value: \\"123\\",
-            id: \\"123\\",
-            depth: 6,
-          },
-          {
-            value: \\"Dada 123 true\\",
-            id: \\"dada-123-true\\",
-            depth: 6,
-          },
+              </_components.span>
+            </>,
+            3,
+          ],
+          [
+            \\"heading-code-jsx\\",
+            <>
+              {\\"Heading \\"}
+              <_components.code>{\\"<Code />:{jsx}\\"}</_components.code>
+            </>,
+            3,
+          ],
+          [
+            \\"-world\\",
+            <>
+              <Test />
+              {\\" World\\"}
+            </>,
+            4,
+          ],
+          [\\"string\\", \\"String\\", 5],
+          [\\"123\\", \\"123\\", 6],
+          [\\"dada-123-true\\", \\"Dada 123 true\\", 6],
         ];
       }
       function _createMdxContent(props) {
@@ -251,20 +223,20 @@ export const frontMatter = {
             <_components.h1>{\\"Heading 1\\"}</_components.h1>
             {\\"\\\\n\\"}
             {\\"\\\\n\\"}
-            <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
+            <_components.h2 id={toc[0][0]}>{toc[0][1]}</_components.h2>
             {\\"\\\\n\\"}
-            <_components.h3 id={toc[1].id}>{toc[1].value}</_components.h3>
+            <_components.h3 id={toc[1][0]}>{toc[1][1]}</_components.h3>
             {\\"\\\\n\\"}
-            <_components.h3 id={toc[2].id}>{toc[2].value}</_components.h3>
+            <_components.h3 id={toc[2][0]}>{toc[2][1]}</_components.h3>
             {\\"\\\\n\\"}
             {\\"\\\\n\\"}
-            <_components.h4 id={toc[3].id}>{toc[3].value}</_components.h4>
+            <_components.h4 id={toc[3][0]}>{toc[3][1]}</_components.h4>
             {\\"\\\\n\\"}
-            <_components.h5 id={toc[4].id}>{toc[4].value}</_components.h5>
+            <_components.h5 id={toc[4][0]}>{toc[4][1]}</_components.h5>
             {\\"\\\\n\\"}
-            <_components.h6 id={toc[5].id}>{toc[5].value}</_components.h6>
+            <_components.h6 id={toc[5][0]}>{toc[5][1]}</_components.h6>
             {\\"\\\\n\\"}
-            <_components.h6 id={toc[6].id}>{toc[6].value}</_components.h6>
+            <_components.h6 id={toc[6][0]}>{toc[6][1]}</_components.h6>
           </>
         );
       }
