@@ -58,8 +58,7 @@ export const indexOpts: BlogPageOpts = {
       route: '/tags'
     }
   ],
-  title: 'Nextra',
-  toc: []
+  title: 'Nextra'
 }
 
 export const postsOpts: BlogPageOpts = {
@@ -112,16 +111,13 @@ export const postsOpts: BlogPageOpts = {
         {
           name: '[tag]',
           route: '/tags/[tag]',
-          frontMatter: {
-            type: 'tag'
-          }
+          frontMatter: { type: 'tag' }
         }
       ],
       route: '/tags'
     }
   ],
-  title: 'Random Thoughts',
-  toc: []
+  title: 'Random Thoughts'
 }
 
 export const articleOpts: BlogPageOpts = {
@@ -177,32 +173,13 @@ export const articleOpts: BlogPageOpts = {
         {
           name: '[tag]',
           route: '/tags/[tag]',
-          frontMatter: {
-            type: 'tag'
-          }
+          frontMatter: { type: 'tag' }
         }
       ],
       route: '/tags'
     }
   ],
-  title: 'Notes on A Programmable Web by Aaron Swartz',
-  toc: [
-    {
-      depth: 2,
-      value: 'Quotes About WWW',
-      id: 'quotes-about-www'
-    },
-    {
-      depth: 2,
-      value: 'Quotes from Aaron’s Post',
-      id: 'quotes-from-aarons-post'
-    },
-    {
-      depth: 2,
-      value: 'External links',
-      id: 'external-links'
-    }
-  ]
+  title: 'Notes on A Programmable Web by Aaron Swartz'
 }
 
 export const config = {

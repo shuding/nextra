@@ -4,7 +4,7 @@
  */
 
 import { useRouter } from 'next/router'
-import type { FC, ReactElement } from 'react'
+import type { ReactElement } from 'react'
 import { NEXTRA_INTERNAL } from '../constants.js'
 import { normalizePageRoute, pageTitleFromFilename } from '../server/utils.js'
 import type {
@@ -14,10 +14,11 @@ import type {
   DynamicMetaItem,
   DynamicMetaJsonFile,
   Folder,
+  Heading,
   NextraInternalGlobal,
+  NextraMDXContent,
   PageMapItem,
-  PageOpts,
-  UseTOC
+  PageOpts
 } from '../types'
 import { DataProvider } from './data.js'
 
@@ -124,8 +125,7 @@ export const resolvePageMap =
   }
 
 export function setupNextraPage(
-  MDXContent: FC,
-  useTOC: UseTOC,
+  MDXContent: NextraMDXContent,
   route: string,
   pageOpts: PageOpts
 ) {
@@ -139,8 +139,7 @@ export function setupNextraPage(
   __nextra_internal__.pageMap = pageOpts.pageMap
   __nextra_internal__.context[route] = {
     Content: MDXContent,
-    pageOpts,
-    useTOC
+    pageOpts
   }
   return NextraLayout
 }
@@ -174,15 +173,13 @@ function NextraLayout({
     folder.children = children
   }
 
-  const { Content, useTOC } = pageContext
-
-  pageOpts.toc = useTOC()
+  let tocList: Heading[] | undefined
 
   if (__nextra_dynamic_opts) {
     const { toc, title, frontMatter } = __nextra_dynamic_opts
+    tocList = toc
     pageOpts = {
       ...pageOpts,
-      toc,
       title,
       frontMatter
     }
@@ -191,7 +188,7 @@ function NextraLayout({
   return (
     <Layout themeConfig={themeConfig} pageOpts={pageOpts} pageProps={props}>
       <DataProvider value={props}>
-        <Content />
+        <pageContext.Content toc={tocList} />
       </DataProvider>
     </Layout>
   )

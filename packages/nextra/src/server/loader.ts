@@ -44,8 +44,6 @@ const initGitRepo = (async () => {
   return {}
 })()
 
-const FOOTER_TO_REMOVE = 'export default MDXContent;'
-
 let isAppFileFromNodeModules = false
 
 export async function loader(
@@ -168,7 +166,8 @@ ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
   })
   // Imported as a normal component, no need to add the layout.
   if (!isPageImport) {
-    return result
+    return `${result}
+export default _createMdxContent`
   }
   // Logic for resolving the page title (used for search and as fallback):
   // 1. If the frontMatter has a title, use it.
@@ -219,22 +218,15 @@ ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
   const finalResult = transform ? await transform(result, { route }) : result
 
   const stringifiedPageOpts = JSON.stringify(pageOpts).slice(0, -1)
-
-  const lastIndexOfFooter = finalResult.lastIndexOf(FOOTER_TO_REMOVE)
-  const mdxContent =
-    // Remove the last match of `export default MDXContent;` because it can be existed in the raw MDX file
-    finalResult.slice(0, lastIndexOfFooter) +
-    finalResult.slice(lastIndexOfFooter + FOOTER_TO_REMOVE.length)
   const pageMapPath = path.join(CHUNKS_DIR, `nextra-page-map-${locale}.mjs`)
 
   const rawJs = `import { setupNextraPage } from 'nextra/setup-page'
 import { pageMap } from '${pageMapPath}'
 ${isAppFileFromNodeModules ? cssImports : ''}
-${mdxContent}
+${finalResult}
 
 export default setupNextraPage(
-  _createMdxContent,
-  useTOC,
+  MDXContent,
   '${route}',
   ${stringifiedPageOpts},pageMap,frontMatter}
 )`

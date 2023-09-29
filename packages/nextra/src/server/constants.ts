@@ -53,3 +53,5 @@ export const DEFAULT_PROPERTY_PROPS = {
   shorthand: false,
   computed: false
 } satisfies Omit<Property, 'key' | 'value'>
+
+export const TOC_HEADING_REGEX = /^h[2-6]$/
