@@ -14,10 +14,10 @@ import type {
   DynamicMetaItem,
   DynamicMetaJsonFile,
   Folder,
-  Heading,
   NextraInternalGlobal,
   PageMapItem,
-  PageOpts
+  PageOpts,
+  UseTOC
 } from '../types'
 import { DataProvider } from './data.js'
 
@@ -125,7 +125,7 @@ export const resolvePageMap =
 
 export function setupNextraPage(
   MDXContent: FC,
-  useTOC: () => Heading[],
+  useTOC: UseTOC,
   route: string,
   pageOpts: PageOpts
 ) {
@@ -176,6 +176,8 @@ function NextraLayout({
 
   const { Content, useTOC } = pageContext
 
+  pageOpts.toc = useTOC()
+
   if (__nextra_dynamic_opts) {
     const { toc, title, frontMatter } = __nextra_dynamic_opts
     pageOpts = {
@@ -184,9 +186,6 @@ function NextraLayout({
       title,
       frontMatter
     }
-  } else {
-    // eslint-disable-next-line react-hooks/rules-of-hooks -- this is not really hook
-    pageOpts.toc = useTOC()
   }
 
   return (

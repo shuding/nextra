@@ -7,7 +7,6 @@ export function useTOC(props) {
   return [];
 }
 function _createMdxContent(props) {
-  const { toc } = props;
   const _components = Object.assign(
     {
       h1: \\"h1\\",
@@ -32,7 +31,6 @@ export function useTOC(props) {
   return [];
 }
 function _createMdxContent(props) {
-  const { toc } = props;
   const _components = Object.assign(
     {
       h1: \\"h1\\",
@@ -66,7 +64,6 @@ export function useTOC(props) {
   return [];
 }
 function _createMdxContent(props) {
-  const { toc } = props;
   const _components = Object.assign(
     {
       h1: \\"h1\\",
@@ -100,7 +97,7 @@ export function useTOC(props) {
   ];
 }
 function _createMdxContent(props) {
-  const { toc } = props;
+  const toc = useTOC(props);
   const _components = Object.assign(
     {
       h2: \\"h2\\",
@@ -120,7 +117,6 @@ export function useTOC(props) {
   return [];
 }
 function _createMdxContent(props) {
-  const { toc } = props;
   const _components = Object.assign(
     {
       h1: \\"h1\\",

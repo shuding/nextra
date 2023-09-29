@@ -2,51 +2,39 @@ import type { FunctionDeclaration, Program, ReturnStatement } from 'estree'
 import type { JsxAttribute } from 'estree-util-to-js/lib/jsx'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
-import { DEFAULT_PROPERTY_PROPS } from '../constants.js'
 
 const HEADING_NAMES = new Set(['h2', 'h3', 'h4', 'h5', 'h6'])
 
-export const recmaRewriteJsx: Plugin<[], Program> = () => (ast, file) => {
-  const createMdxContent = ast.body.find(
-    o => o.type === 'FunctionDeclaration' && o.id!.name === '_createMdxContent'
-  ) as FunctionDeclaration
+export const recmaRewriteJsx: Plugin<[], Program> =
+  () => (ast: Program, file) => {
+    const createMdxContent = ast.body.find(
+      o =>
+        o.type === 'FunctionDeclaration' && o.id!.name === '_createMdxContent'
+    ) as FunctionDeclaration
 
-  const mdxContent = ast.body.find(
-    node =>
-      node.type === 'FunctionDeclaration' && node.id!.name === 'MDXContent'
-  ) as FunctionDeclaration
+    const returnStatement = createMdxContent.body.body.find(
+      o => o.type === 'ReturnStatement'
+    ) as ReturnStatement
 
-  if (!mdxContent) {
-    throw new Error('`MDXContent` not found!')
-  }
+    const { argument } = returnStatement as any
 
-  const returnStatement = createMdxContent.body.body.find(
-    o => o.type === 'ReturnStatement'
-  ) as ReturnStatement
+    // if return statements doesn't wrap in fragment children will be []
+    const returnBody = argument.children.length ? argument.children : [argument]
 
-  const { argument } = returnStatement as any
+    const tocProperties = file.data.toc as (
+      | { properties: { id: string } }
+      | string
+    )[]
 
-  // if return statements doesn't wrap in fragment children will be []
-  const returnBody = argument.children.length ? argument.children : [argument]
+    // Do not add `const toc = useTOC(props)`
+    if (!tocProperties.length) return
 
-  const tocProperties = file.data.toc as (
-    | { properties: { id: string } }
-    | string
-  )[]
-
-  visit(
-    // @ts-expect-error -- fixes type error
-    { children: returnBody },
-    'JSXElement',
-    (heading: any, _index, parent) => {
+    visit({ children: returnBody }, 'JSXElement', (heading: any) => {
       const { openingElement } = heading
       const name = openingElement?.name.property?.name
       const isHeading = name && HEADING_NAMES.has(name)
-      // @ts-expect-error -- fixes type error
-      const isFootnotes = parent.openingElement?.attributes.some(
-        (attr: JsxAttribute) => attr.name.name === 'data-footnotes'
-      )
-      if (!isHeading || isFootnotes) return
+      if (!isHeading) return
+
       const idNode = openingElement.attributes.find(
         (attr: JsxAttribute) => attr.name.name === 'id'
       )
@@ -83,11 +71,9 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => (ast, file) => {
         type: 'JSXClosingElement',
         attributes: []
       }
-    }
-  )
+    })
 
-  mdxContent.body.body.unshift(
-    {
+    createMdxContent.body.body.unshift({
       type: 'VariableDeclaration',
       kind: 'const',
       declarations: [
@@ -102,51 +88,5 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => (ast, file) => {
           }
         }
       ]
-    },
-    {
-      type: 'ExpressionStatement',
-      expression: {
-        type: 'AssignmentExpression',
-        operator: '=',
-        left: { type: 'Identifier', name: 'props' },
-        right: {
-          type: 'ObjectExpression',
-          properties: [
-            {
-              type: 'SpreadElement',
-              argument: { type: 'Identifier', name: 'props' }
-            },
-            {
-              ...DEFAULT_PROPERTY_PROPS,
-              key: { type: 'Identifier', name: 'toc' },
-              value: { type: 'Identifier', name: 'toc' },
-              shorthand: true
-            }
-          ]
-        }
-      }
-    }
-  )
-
-  createMdxContent.body.body.unshift({
-    type: 'VariableDeclaration',
-    kind: 'const',
-    declarations: [
-      {
-        type: 'VariableDeclarator',
-        id: {
-          type: 'ObjectPattern',
-          properties: [
-            {
-              ...DEFAULT_PROPERTY_PROPS,
-              key: { type: 'Identifier', name: 'toc' },
-              value: { type: 'Identifier', name: 'toc' },
-              shorthand: true
-            }
-          ]
-        },
-        init: { type: 'Identifier', name: 'props' }
-      }
-    ]
-  })
-}
+    })
+  }

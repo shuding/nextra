@@ -1,4 +1,5 @@
 import type { ImportDeclaration, ImportSpecifier } from 'estree'
+import type { Element } from 'hast'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 
@@ -78,14 +79,14 @@ export const rehypeIcon: Plugin<[], any> =
         isMdxJsEsm(node) && isImportDeclaration(node) && isImportFrom(node)
     )
 
-    visit(ast, { tagName: 'div' }, node => {
+    visit(ast, { tagName: 'div' }, (node: Element) => {
       const isRehypePrettyCode =
         'data-rehype-pretty-code-fragment' in node.properties
 
       if (!isRehypePrettyCode) return
 
-      const preEl = node.children[0]
-      const lang = preEl.properties['data-language']
+      const preEl = node.children[0] as Element
+      const lang = preEl.properties['data-language'] as string
       const iconName = replaces[lang]
 
       if (!iconName) return

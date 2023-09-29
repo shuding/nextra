@@ -1,15 +1,20 @@
+import type { JsxAttribute } from 'estree-util-to-js/lib/jsx'
+import type { Element } from 'hast'
 import { toEstree } from 'hast-util-to-estree'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
+import type { Heading } from '../../types'
+import { createAstObject } from '../utils.js'
 
 export const rehypeExtractTocContent: Plugin<[], any> = () => (ast, file) => {
   const toc: any[] = []
+  const idSet = new Set((file.data.toc as Heading[]).map(({ id }) => id))
 
-  visit(ast, 'element', node => {
+  visit(ast, 'element', (node: Element) => {
     if (!/^h[2-6]$/.test(node.tagName)) return
 
     const { id } = node.properties
-    if (typeof id === 'string') {
+    if (typeof id === 'string' && idSet.has(id)) {
       toc.push(structuredClone(node))
       node.children = []
     }
@@ -53,38 +58,13 @@ export const rehypeExtractTocContent: Plugin<[], any> = () => (ast, file) => {
           children: node.children
         }
 
-    return {
-      type: 'ObjectExpression',
-      properties: [
-        {
-          type: 'Property',
-          key: { type: 'Identifier', name: 'value' },
-          value: result,
-          kind: 'init'
-        },
-        {
-          type: 'Property',
-          key: { type: 'Identifier', name: 'id' },
-          value: {
-            type: 'Literal',
-            value: node.openingElement.attributes.find(
-              // @ts-expect-error
-              attr => attr.name.name === 'id'
-            ).value.value
-          },
-          kind: 'init'
-        },
-        {
-          type: 'Property',
-          key: { type: 'Identifier', name: 'depth' },
-          value: {
-            type: 'Literal',
-            value: Number(node.openingElement.name.name[1])
-          },
-          kind: 'init'
-        }
-      ]
-    }
+    return createAstObject({
+      value: result,
+      id: node.openingElement.attributes.find(
+        (attr: JsxAttribute) => attr.name.name === 'id'
+      ).value.value,
+      depth: Number(node.openingElement.name.name[1])
+    })
   })
 
   ast.children.push({

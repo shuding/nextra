@@ -180,19 +180,19 @@ function InnerLayout({
         )}
       >
         <ActiveAnchorProvider>
-          <Sidebar
-            docsDirectories={docsDirectories}
-            fullDirectories={directories}
-            toc={toc}
-            asPopover={hideSidebar}
-            includePlaceholder={themeContext.layout === 'default'}
-          />
           <MDXProvider
             components={getComponents({
               isRawLayout: themeContext.layout === 'raw',
               components: config.components
             })}
           >
+            <Sidebar
+              docsDirectories={docsDirectories}
+              fullDirectories={directories}
+              toc={toc}
+              asPopover={hideSidebar}
+              includePlaceholder={themeContext.layout === 'default'}
+            />
             {tocEl}
             <SkipNavContent />
             <Body

@@ -27,7 +27,7 @@ describe('rehypeIcon', () => {
     const raw = createCodeBlock('css', 'css')
 
     const { value } = await process(raw)
-    expect(await clean(value)).toMatchInlineSnapshot(`
+    expect(clean(value)).resolves.toMatchInlineSnapshot(`
       "import { CssIcon } from \\"nextra/icons\\";
       function _createMdxContent(props) {
         const _components = Object.assign(
@@ -61,7 +61,7 @@ describe('rehypeIcon', () => {
     const raw = createCodeBlock(...Object.keys(REHYPE_ICON_DEFAULT_REPLACES))
 
     const { value } = await process(raw)
-    expect(await clean(value)).toMatchInlineSnapshot(`
+    expect(clean(value)).resolves.toMatchInlineSnapshot(`
       "import { JavaScriptIcon } from \\"nextra/icons\\";
       import { TypeScriptIcon } from \\"nextra/icons\\";
       import { MarkdownIcon } from \\"nextra/icons\\";

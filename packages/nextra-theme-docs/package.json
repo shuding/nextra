@@ -36,36 +36,36 @@
     "react-dom": ">=16.13.1"
   },
   "dependencies": {
-    "@headlessui/react": "^1.7.10",
-    "@popperjs/core": "^2.11.6",
+    "@headlessui/react": "^1.7.17",
+    "@popperjs/core": "^2.11.8",
     "clsx": "^2.0.0",
     "escape-string-regexp": "^5.0.0",
     "flexsearch": "^0.7.31",
     "focus-visible": "^5.2.0",
     "intersection-observer": "^0.12.2",
     "next-themes": "^0.2.1",
-    "scroll-into-view-if-needed": "^3.0.0",
-    "zod": "^3.20.2"
+    "scroll-into-view-if-needed": "^3.1.0",
+    "zod": "^3.22.2"
   },
   "devDependencies": {
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
     "@testing-library/react": "^14.0.0",
-    "@types/flexsearch": "^0.7.3",
-    "@types/react": "^18.2.21",
-    "@types/react-dom": "^18.2.7",
-    "@vitejs/plugin-react": "^4.0.4",
-    "concurrently": "^8.0.0",
-    "jsdom": "^22.0.0",
+    "@types/flexsearch": "^0.7.4",
+    "@types/react": "^18.2.23",
+    "@types/react-dom": "^18.2.8",
+    "@vitejs/plugin-react": "^4.1.0",
+    "concurrently": "^8.2.1",
+    "jsdom": "^22.1.0",
     "next": "^13.5.3",
     "nextra": "workspace:*",
-    "postcss": "^8.4.28",
+    "postcss": "^8.4.31",
     "postcss-cli": "^10.1.0",
     "postcss-import": "^15.1.0",
     "postcss-lightningcss": "^1.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tailwindcss": "^3.3.3",
-    "vitest": "^0.34.4"
+    "vitest": "^0.34.6"
   },
   "sideEffects": [
     "./src/polyfill.ts"
