@@ -36,7 +36,7 @@
     "react-dom": ">=16.13.1"
   },
   "dependencies": {
-    "@headlessui/react": "^1.7.10",
+    "@headlessui/react": "^1.7.17",
     "@popperjs/core": "^2.11.6",
     "clsx": "^2.0.0",
     "escape-string-regexp": "^5.0.0",
