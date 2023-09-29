@@ -90,7 +90,7 @@ export const TagName = () => {
         ];
       }
       function _createMdxContent(props) {
-        const { toc } = props;
+        const { toc = useTOC(props) } = props;
         const _components = Object.assign(
           {
             h1: \\"h1\\",
@@ -139,7 +139,7 @@ export const TagName = () => {
         ];
       }
       function _createMdxContent(props) {
-        const { toc } = props;
+        const { toc = useTOC(props) } = props;
         const _components = Object.assign(
           {
             h3: \\"h3\\",
@@ -301,7 +301,7 @@ import Last from './three.mdx'
         ];
       }
       function _createMdxContent(props) {
-        const { toc } = props;
+        const { toc = useTOC(props) } = props;
         const _components = Object.assign(
           {
             h2: \\"h2\\",
