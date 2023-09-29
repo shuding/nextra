@@ -381,6 +381,9 @@ importers:
       '@types/react':
         specifier: ^18.2.23
         version: 18.2.23
+      '@types/react-dom':
+        specifier: ^18.2.8
+        version: 18.2.8
       concurrently:
         specifier: ^8.2.1
         version: 8.2.1

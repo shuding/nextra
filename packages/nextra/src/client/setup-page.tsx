@@ -176,8 +176,7 @@ function NextraLayout({
 
   const { Content, useTOC } = pageContext
 
-  // @ts-expect-error
-  pageOpts.toc = useTOC().map(([id, value, depth]) => ({ id, value, depth }))
+  pageOpts.toc = useTOC()
 
   if (__nextra_dynamic_opts) {
     const { toc, title, frontMatter } = __nextra_dynamic_opts

@@ -95,12 +95,7 @@ export type NextraThemeLayoutProps = {
   children: ReactNode
 }
 
-export type UseTOC = (props?: Record<string, unknown>) => [
-  //
-  id: string,
-  value: string | ReactNode,
-  depth: Heading['depth']
-][]
+export type UseTOC = (props?: Record<string, unknown>) => Heading[]
 
 export type NextraInternalGlobal = typeof globalThis & {
   [NEXTRA_INTERNAL]: {
