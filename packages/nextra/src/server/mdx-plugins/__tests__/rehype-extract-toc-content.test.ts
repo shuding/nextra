@@ -90,7 +90,7 @@ export const frontMatter = {
     `,
       opts
     )
-    expect(await clean(result, false)).toMatchInlineSnapshot(`
+    expect(clean(result)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic @jsxImportSource react*/
       import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
       export const myVar = \\"interpolated\\";
