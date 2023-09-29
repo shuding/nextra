@@ -234,8 +234,9 @@ ${mdxContent}
 
 export default setupNextraPage(
   MDXContent,
+  useTOC,
   '${route}',
-  ${stringifiedPageOpts},toc,pageMap,frontMatter}
+  ${stringifiedPageOpts},pageMap,frontMatter}
 )`
 
   return rawJs

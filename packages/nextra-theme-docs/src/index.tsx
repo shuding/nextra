@@ -187,34 +187,34 @@ function InnerLayout({
             asPopover={hideSidebar}
             includePlaceholder={themeContext.layout === 'default'}
           />
-          {tocEl}
-          <SkipNavContent />
-          <Body
-            themeContext={themeContext}
-            breadcrumb={
-              activeType !== 'page' && themeContext.breadcrumb ? (
-                <Breadcrumb activePath={activePath} />
-              ) : null
-            }
-            timestamp={timestamp}
-            navigation={
-              activeType !== 'page' && themeContext.pagination ? (
-                <NavLinks
-                  flatDirectories={flatDocsDirectories}
-                  currentIndex={activeIndex}
-                />
-              ) : null
-            }
+          <MDXProvider
+            components={getComponents({
+              isRawLayout: themeContext.layout === 'raw',
+              components: config.components
+            })}
           >
-            <MDXProvider
-              components={getComponents({
-                isRawLayout: themeContext.layout === 'raw',
-                components: config.components
-              })}
+            {tocEl}
+            <SkipNavContent />
+            <Body
+              themeContext={themeContext}
+              breadcrumb={
+                activeType !== 'page' && themeContext.breadcrumb ? (
+                  <Breadcrumb activePath={activePath} />
+                ) : null
+              }
+              timestamp={timestamp}
+              navigation={
+                activeType !== 'page' && themeContext.pagination ? (
+                  <NavLinks
+                    flatDirectories={flatDocsDirectories}
+                    currentIndex={activeIndex}
+                  />
+                ) : null
+              }
             >
               {children}
-            </MDXProvider>
-          </Body>
+            </Body>
+          </MDXProvider>
         </ActiveAnchorProvider>
       </div>
       {themeContext.footer &&

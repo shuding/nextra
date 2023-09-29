@@ -14,6 +14,7 @@ import type {
   DynamicMetaItem,
   DynamicMetaJsonFile,
   Folder,
+  Heading,
   NextraInternalGlobal,
   PageMapItem,
   PageOpts
@@ -124,6 +125,7 @@ export const resolvePageMap =
 
 export function setupNextraPage(
   MDXContent: FC,
+  useTOC: () => Heading[],
   route: string,
   pageOpts: PageOpts
 ) {
@@ -137,7 +139,8 @@ export function setupNextraPage(
   __nextra_internal__.pageMap = pageOpts.pageMap
   __nextra_internal__.context[route] = {
     Content: MDXContent,
-    pageOpts
+    pageOpts,
+    useTOC
   }
   return NextraLayout
 }
@@ -171,6 +174,8 @@ function NextraLayout({
     folder.children = children
   }
 
+  const { Content, useTOC } = pageContext
+
   if (__nextra_dynamic_opts) {
     const { toc, title, frontMatter } = __nextra_dynamic_opts
     pageOpts = {
@@ -179,12 +184,15 @@ function NextraLayout({
       title,
       frontMatter
     }
+  } else {
+    // eslint-disable-next-line react-hooks/rules-of-hooks -- this is not really hook
+    pageOpts.toc = useTOC()
   }
 
   return (
     <Layout themeConfig={themeConfig} pageOpts={pageOpts} pageProps={props}>
       <DataProvider value={props}>
-        <pageContext.Content />
+        <Content />
       </DataProvider>
     </Layout>
   )

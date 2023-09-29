@@ -1,11 +1,9 @@
-import type { SpreadElement } from 'estree'
 import Slugger from 'github-slugger'
 import type { Parent, Root } from 'mdast'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 import type { Heading } from '../../types'
 import { MARKDOWN_EXTENSION_REGEX } from '../constants.js'
-import { createAstExportConst, createAstObject } from '../utils.js'
 import type { HProperties } from './remark-custom-heading-id'
 
 const getFlattenedValue = (node: Parent): string =>
@@ -24,7 +22,7 @@ const SKIP_FOR_PARENT_NAMES = new Set(['Tab', 'Tabs.Tab'])
 export const remarkHeadings: Plugin<
   [{ exportName?: string; isRemoteContent?: boolean }],
   Root
-> = ({ exportName = 'toc', isRemoteContent }) => {
+> = ({ exportName = 'useTOC', isRemoteContent }) => {
   const headings: (Heading | string)[] = []
   let hasJsxInH1: boolean
   let title: string
@@ -38,9 +36,9 @@ export const remarkHeadings: Plugin<
       ast,
       [
         'heading',
-        // push partial component's `toc` export name to headings list
+        // push partial component's `useTOC` export name to headings list
         'mdxJsxFlowElement',
-        // verify .md/.mdx exports and attach named `toc` export
+        // verify .md/.mdx exports and attach named `useTOC` export
         'mdxjsEsm'
       ],
       (node, _index, parent) => {
@@ -108,33 +106,11 @@ export const remarkHeadings: Plugin<
     file.data.hasJsxInH1 = hasJsxInH1
     file.data.title = title
 
+    file.data.toc = headings
     if (isRemoteContent) {
-      // Attach headings for remote content, because we can't access to `toc` variable
+      // Attach headings for remote content, because we can't access to `useTOC` fn
       file.data.headings = headings
       return
     }
-
-    const headingElements = headings.map(heading =>
-      typeof heading === 'string'
-        ? ({
-            type: 'SpreadElement',
-            argument: { type: 'Identifier', name: heading }
-          } satisfies SpreadElement)
-        : createAstObject(heading)
-    )
-
-    ast.children.push({
-      type: 'mdxjsEsm',
-      data: {
-        estree: {
-          body: [
-            createAstExportConst(exportName, {
-              type: 'ArrayExpression',
-              elements: headingElements
-            })
-          ]
-        }
-      }
-    } as any)
   }
 }

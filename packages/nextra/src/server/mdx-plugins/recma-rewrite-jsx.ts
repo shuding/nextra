@@ -1,113 +1,74 @@
-import type {
-  BaseNode,
-  FunctionDeclaration,
-  Identifier,
-  Literal,
-  ObjectExpression,
-  Program,
-  Property,
-  ReturnStatement,
-  SpreadElement
-} from 'estree'
-import type {
-  JsxAttribute,
-  JsxExpressionContainer
-} from 'estree-util-to-js/lib/jsx'
+import type { FunctionDeclaration, Program, ReturnStatement } from 'estree'
+import type { JsxAttribute } from 'estree-util-to-js/lib/jsx'
 import type { Plugin } from 'unified'
+import { visit } from 'unist-util-visit'
+import { DEFAULT_PROPERTY_PROPS } from '../constants.js'
 
 const HEADING_NAMES = new Set(['h2', 'h3', 'h4', 'h5', 'h6'])
 
-export const recmaRewriteJsx: Plugin<[], Program> = () => ast => {
+export const recmaRewriteJsx: Plugin<[], Program> = () => (ast, file) => {
   const createMdxContent = ast.body.find(
-    // @ts-expect-error
-    o => o.type === 'FunctionDeclaration' && o.id.name === '_createMdxContent'
+    o => o.type === 'FunctionDeclaration' && o.id!.name === '_createMdxContent'
   ) as FunctionDeclaration
-  const returnStatementIndex = createMdxContent.body.body.findIndex(
-    o => o.type === 'ReturnStatement'
-  )
 
-  const returnStatement = createMdxContent.body.body[
-    returnStatementIndex
-  ] as ReturnStatement
+  const mdxContent = ast.body.find(
+    node =>
+      node.type === 'FunctionDeclaration' && node.id!.name === 'MDXContent'
+  ) as FunctionDeclaration
 
-  // @ts-expect-error
-  function isHeading(o): boolean {
-    const name = o.openingElement?.name.property?.name
-    return name && HEADING_NAMES.has(name)
+  if (!mdxContent) {
+    throw new Error('`MDXContent` not found!')
   }
 
-  // @ts-expect-error
-  const headings = returnStatement.argument.children.filter(isHeading)
-  const toc = ast.body.find(
-    node =>
-      node.type === 'ExportNamedDeclaration' &&
-      node.declaration &&
-      'declarations' in
-        node.declaration /* doesn't exist for FunctionDeclaration */ &&
-      // @ts-expect-error
-      node.declaration.declarations[0].id.name === 'toc'
-  ) as any
+  const returnStatement = createMdxContent.body.body.find(
+    o => o.type === 'ReturnStatement'
+  ) as ReturnStatement
 
-  const tocProperties = toc.declaration.declarations[0].init.elements as (
-    | ObjectExpression
-    | SpreadElement
+  const { argument } = returnStatement as any
+
+  // if return statements doesn't wrap in fragment children will be []
+  const returnBody = argument.children.length ? argument.children : [argument]
+
+  const tocProperties = file.data.toc as (
+    | { properties: { id: string } }
+    | string
   )[]
 
-  for (const heading of headings) {
-    const idNode = heading.openingElement.attributes.find(
-      (attr: JsxAttribute) => attr.name.name === 'id'
-    )
-
-    const id = idNode.value.value
-
-    const foundIndex = tocProperties.findIndex(node => {
-      if (node.type !== 'ObjectExpression') return
-      const object = Object.fromEntries(
-        // @ts-expect-error
-        node.properties.map(prop => [prop.key.name, prop.value.value])
+  visit(
+    // @ts-expect-error -- fixes type error
+    { children: returnBody },
+    'JSXElement',
+    (heading: any, _index, parent) => {
+      const { openingElement } = heading
+      const name = openingElement?.name.property?.name
+      const isHeading = name && HEADING_NAMES.has(name)
+      // @ts-expect-error -- fixes type error
+      const isFootnotes = parent.openingElement?.attributes.some(
+        (attr: JsxAttribute) => attr.name.name === 'data-footnotes'
       )
-      return object.id === id
-    })
-
-    if (foundIndex === -1) continue
-
-    // @ts-expect-error
-    const valueNode = tocProperties[foundIndex].properties.find(
-      (node: Property) => (node.key as Identifier).name === 'value'
-    )
-
-    const isExpressionContainer = (
-      node: BaseNode
-    ): node is JsxExpressionContainer => node.type === 'JSXExpressionContainer'
-
-    const isIdentifier = (node: BaseNode): node is Identifier =>
-      isExpressionContainer(node) && node.expression.type === 'Identifier'
-
-    const isLiteral = (node: BaseNode): node is Literal =>
-      isExpressionContainer(node) && node.expression.type === 'Literal'
-
-    idNode.value = {
-      type: 'JSXExpressionContainer',
-      expression: {
-        type: 'Identifier',
-        name: `toc[${foundIndex}].id`
-      }
-    }
-
-    if (
-      heading.children.every(
-        (node: BaseNode) => isLiteral(node) || isIdentifier(node)
+      if (!isHeading || isFootnotes) return
+      const idNode = openingElement.attributes.find(
+        (attr: JsxAttribute) => attr.name.name === 'id'
       )
-    ) {
-      if (!heading.children.every(isLiteral)) {
-        valueNode.value = {
-          type: 'JSXFragment',
-          openingFragment: { type: 'JSXOpeningFragment' },
-          closingFragment: { type: 'JSXClosingFragment' },
-          children: heading.children
+      if (!idNode) return
+
+      const id = idNode.value.value
+
+      const foundIndex = tocProperties.findIndex(node => {
+        if (typeof node === 'string') return
+        return node.properties.id === id
+      })
+
+      if (foundIndex === -1) return
+      idNode.value = {
+        type: 'JSXExpressionContainer',
+        expression: {
+          type: 'Identifier',
+          name: `toc[${foundIndex}].id`
         }
       }
 
+      delete openingElement.selfClosing
       heading.children = [
         {
           type: 'JSXExpressionContainer',
@@ -117,6 +78,75 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => ast => {
           }
         }
       ]
+      heading.closingElement = {
+        ...openingElement,
+        type: 'JSXClosingElement',
+        attributes: []
+      }
     }
-  }
+  )
+
+  mdxContent.body.body.unshift(
+    {
+      type: 'VariableDeclaration',
+      kind: 'const',
+      declarations: [
+        {
+          type: 'VariableDeclarator',
+          id: { type: 'Identifier', name: 'toc' },
+          init: {
+            type: 'CallExpression',
+            callee: { type: 'Identifier', name: 'useTOC' },
+            arguments: [{ type: 'Identifier', name: 'props' }],
+            optional: false
+          }
+        }
+      ]
+    },
+    {
+      type: 'ExpressionStatement',
+      expression: {
+        type: 'AssignmentExpression',
+        operator: '=',
+        left: { type: 'Identifier', name: 'props' },
+        right: {
+          type: 'ObjectExpression',
+          properties: [
+            {
+              type: 'SpreadElement',
+              argument: { type: 'Identifier', name: 'props' }
+            },
+            {
+              ...DEFAULT_PROPERTY_PROPS,
+              key: { type: 'Identifier', name: 'toc' },
+              value: { type: 'Identifier', name: 'toc' },
+              shorthand: true
+            }
+          ]
+        }
+      }
+    }
+  )
+
+  createMdxContent.body.body.unshift({
+    type: 'VariableDeclaration',
+    kind: 'const',
+    declarations: [
+      {
+        type: 'VariableDeclarator',
+        id: {
+          type: 'ObjectPattern',
+          properties: [
+            {
+              ...DEFAULT_PROPERTY_PROPS,
+              key: { type: 'Identifier', name: 'toc' },
+              value: { type: 'Identifier', name: 'toc' },
+              shorthand: true
+            }
+          ]
+        },
+        init: { type: 'Identifier', name: 'props' }
+      }
+    ]
+  })
 }

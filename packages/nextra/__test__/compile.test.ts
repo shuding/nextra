@@ -8,19 +8,19 @@ const mdxOptions = {
 
 describe('Process heading', () => {
   it('code-h1', async () => {
-    const result = await compileMdx('# `codegen.yml`', { mdxOptions })
-    expect(result).toMatchSnapshot()
+    const { result } = await compileMdx('# `codegen.yml`', { mdxOptions })
+    expect(clean(result)).resolves.toMatchSnapshot()
   })
   it('code-with-text-h1', async () => {
-    const result = await compileMdx('# `codegen.yml` file', { mdxOptions })
-    expect(result).toMatchSnapshot()
+    const { result } = await compileMdx('# `codegen.yml` file', { mdxOptions })
+    expect(clean(result)).resolves.toMatchSnapshot()
   })
   it('static-h1', async () => {
-    const result = await compileMdx('# Hello World', { mdxOptions })
-    expect(result).toMatchSnapshot()
+    const { result } = await compileMdx('# Hello World', { mdxOptions })
+    expect(clean(result)).resolves.toMatchSnapshot()
   })
   it('dynamic-h1', async () => {
-    const result = await compileMdx(
+    const res = await compileMdx(
       `
 import { useRouter } from 'next/router'
 
@@ -33,11 +33,12 @@ export const TagName = () => {
     `,
       { mdxOptions }
     )
-    expect(result).toMatchSnapshot()
+    res.result = await clean(res.result)
+    expect(res).toMatchSnapshot()
   })
   it('no-h1', async () => {
-    const result = await compileMdx('## H2', { mdxOptions })
-    expect(result).toMatchSnapshot()
+    const { result } = await compileMdx('## H2', { mdxOptions })
+    expect(clean(result)).resolves.toMatchSnapshot()
   })
   it('use custom heading id', async () => {
     const { result } = await compileMdx(
@@ -51,42 +52,45 @@ export const TagName = () => {
 ###### bar Qux [#]`,
       { mdxOptions }
     )
-    expect(await clean(result)).toMatchInlineSnapshot(`
+    expect(clean(result)).resolves.toMatchInlineSnapshot(`
       "import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
       export const frontMatter = {};
-      export const toc = [
-        {
-          depth: 2,
-          value: \\"Some extra space\\",
-          id: \\"extra-space\\",
-        },
-        {
-          depth: 3,
-          value: \\"Some extra space in heading\\",
-          id: \\"extra-space-in-heading\\",
-        },
-        {
-          depth: 3,
-          value: \\"nospace\\",
-          id: \\"without-space\\",
-        },
-        {
-          depth: 4,
-          value: \\"foo\\",
-          id: \\"другой-язык\\",
-        },
-        {
-          depth: 5,
-          value: \\"bar Baz []\\",
-          id: \\"bar-baz-\\",
-        },
-        {
-          depth: 6,
-          value: \\"bar Qux [#]\\",
-          id: \\"bar-qux-\\",
-        },
-      ];
+      export function useTOC(props) {
+        return [
+          {
+            value: \\"Some extra space\\",
+            id: \\"extra-space\\",
+            depth: 2,
+          },
+          {
+            value: \\"Some extra space in heading\\",
+            id: \\"extra-space-in-heading\\",
+            depth: 3,
+          },
+          {
+            value: \\"nospace\\",
+            id: \\"without-space\\",
+            depth: 3,
+          },
+          {
+            value: \\"foo\\",
+            id: \\"другой-язык\\",
+            depth: 4,
+          },
+          {
+            value: \\"bar Baz []\\",
+            id: \\"bar-baz-\\",
+            depth: 5,
+          },
+          {
+            value: \\"bar Qux [#]\\",
+            id: \\"bar-qux-\\",
+            depth: 6,
+          },
+        ];
+      }
       function _createMdxContent(props) {
+        const { toc } = props;
         const _components = Object.assign(
           {
             h1: \\"h1\\",
@@ -122,7 +126,31 @@ export const TagName = () => {
   })
   it('use github-slugger', async () => {
     const { result } = await compileMdx('### My Header', { mdxOptions })
-    expect(result).toMatch('<_components.h3 id="my-header">{"My Header"}')
+    expect(clean(result)).resolves.toMatchInlineSnapshot(`
+      "import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
+      export const frontMatter = {};
+      export function useTOC(props) {
+        return [
+          {
+            value: \\"My Header\\",
+            id: \\"my-header\\",
+            depth: 3,
+          },
+        ];
+      }
+      function _createMdxContent(props) {
+        const { toc } = props;
+        const _components = Object.assign(
+          {
+            h3: \\"h3\\",
+          },
+          _provideComponents(),
+          props.components,
+        );
+        return <_components.h3 id={toc[0].id}>{toc[0].value}</_components.h3>;
+      }
+      "
+    `)
   })
 
   it('should merge headings from partial components', async () => {
@@ -159,61 +187,16 @@ import Last from './three.mdx'
 `,
       { mdxOptions, latex: true }
     )
-    expect(await clean(result)).toMatchInlineSnapshot(`
+    expect(clean(result)).resolves.toMatchInlineSnapshot(`
       "import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
       export const frontMatter = {};
-      import FromMdx, { toc as toc0 } from \\"./one.mdx\\";
-      import FromMarkdown, { toc as toc1 } from \\"./two.md\\";
+      import FromMdx, { useTOC as useTOC0 } from \\"./one.mdx\\";
+      import FromMarkdown, { useTOC as useTOC1 } from \\"./two.md\\";
       import IgnoreMe from \\"./foo\\";
-      import Last, { toc as toc2 } from \\"./three.mdx\\";
-      export const toc = [
-        {
-          depth: 2,
-          value: \\"❤️\\",
-          id: \\"️\\",
-        },
-        ...toc0,
-        {
-          depth: 2,
-          value: \\"✅\\",
-          id: \\"\\",
-        },
-        ...toc1,
-        ...toc2,
-        {
-          depth: 2,
-          value: \\"👋\\",
-          id: \\"-1\\",
-        },
-        {
-          depth: 2,
-          value: \\"kek \\",
-          id: \\"kek-\\",
-        },
-        {
-          depth: 2,
-          value: \\"try me\\",
-          id: \\"try-me\\",
-        },
-        {
-          depth: 2,
-          value: \\"latex l\\",
-          id: \\"latex-l\\",
-        },
-        {
-          depth: 2,
-          value: (
-            <>
-              {\\"interpolate\\"} {1} {true} {null} {variable}
-            </>
-          ),
-          id: \\"interpolate-1-true-null-variable\\",
-        },
-      ];
-      function _createMdxContent(props) {
+      import Last, { useTOC as useTOC2 } from \\"./three.mdx\\";
+      export function useTOC(props) {
         const _components = Object.assign(
             {
-              h2: \\"h2\\",
               code: \\"code\\",
               span: \\"span\\",
               math: \\"math\\",
@@ -223,17 +206,116 @@ import Last from './three.mdx'
               annotation: \\"annotation\\",
             },
             _provideComponents(),
-            props.components,
           ),
           { Kek } = _components;
         if (!Kek) _missingMdxReference(\\"Kek\\", true);
+        return [
+          {
+            value: \\"❤️\\",
+            id: \\"️\\",
+            depth: 2,
+          },
+          ...useTOC0(),
+          {
+            value: \\"✅\\",
+            id: \\"\\",
+            depth: 2,
+          },
+          ...useTOC1(),
+          ...useTOC2(),
+          {
+            value: \\"👋\\",
+            id: \\"-1\\",
+            depth: 2,
+          },
+          {
+            value: (
+              <>
+                {\\"kek \\"}
+                <Kek />
+              </>
+            ),
+            id: \\"kek-\\",
+            depth: 2,
+          },
+          {
+            value: (
+              <>
+                <_components.code>{\\"try\\"}</_components.code>
+                {\\" me\\"}
+              </>
+            ),
+            id: \\"try-me\\",
+            depth: 2,
+          },
+          {
+            value: (
+              <>
+                {\\"latex \\"}
+                <_components.span className=\\"katex\\">
+                  <_components.span className=\\"katex-mathml\\">
+                    <_components.math xmlns=\\"http://www.w3.org/1998/Math/MathML\\">
+                      <_components.semantics>
+                        <_components.mrow>
+                          <_components.mi>{\\"l\\"}</_components.mi>
+                        </_components.mrow>
+                        <_components.annotation encoding=\\"application/x-tex\\">
+                          {\\"l\\"}
+                        </_components.annotation>
+                      </_components.semantics>
+                    </_components.math>
+                  </_components.span>
+                  <_components.span className=\\"katex-html\\" aria-hidden=\\"true\\">
+                    <_components.span className=\\"base\\">
+                      <_components.span
+                        className=\\"strut\\"
+                        style={{
+                          height: \\"0.6944em\\",
+                        }}
+                      />
+                      <_components.span
+                        className=\\"mord mathnormal\\"
+                        style={{
+                          marginRight: \\"0.01968em\\",
+                        }}
+                      >
+                        {\\"l\\"}
+                      </_components.span>
+                    </_components.span>
+                  </_components.span>
+                </_components.span>
+              </>
+            ),
+            id: \\"latex-l\\",
+            depth: 2,
+          },
+          {
+            value: (
+              <>
+                {\\"interpolate\\"} {1} {true} {null} {variable}
+              </>
+            ),
+            id: \\"interpolate-1-true-null-variable\\",
+            depth: 2,
+          },
+        ];
+      }
+      function _createMdxContent(props) {
+        const { toc } = props;
+        const _components = Object.assign(
+          {
+            h2: \\"h2\\",
+          },
+          _provideComponents(),
+          props.components,
+        );
         return (
           <>
             <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
             {\\"\\\\n\\"}
             <FromMdx />
             {\\"\\\\n\\"}
-            <_components.h2 id={toc[2].id}>{toc[2].value}</_components.h2>
+            <_components.h2 id={toc[1].id}>{toc[1].value}</_components.h2>
             {\\"\\\\n\\"}
             <FromMarkdown />
             {\\"\\\\n\\"}
@@ -242,55 +324,15 @@ import Last from './three.mdx'
             {\\"\\\\n\\"}
             <IgnoreMe />
             {\\"\\\\n\\"}
+            <_components.h2 id={toc[2].id}>{toc[2].value}</_components.h2>
+            {\\"\\\\n\\"}
+            <_components.h2 id={toc[3].id}>{toc[3].value}</_components.h2>
+            {\\"\\\\n\\"}
+            <_components.h2 id={toc[4].id}>{toc[4].value}</_components.h2>
+            {\\"\\\\n\\"}
             <_components.h2 id={toc[5].id}>{toc[5].value}</_components.h2>
             {\\"\\\\n\\"}
-            <_components.h2 id={toc[6].id}>
-              {\\"kek \\"}
-              <Kek />
-            </_components.h2>
-            {\\"\\\\n\\"}
-            <_components.h2 id={toc[7].id}>
-              <_components.code>{\\"try\\"}</_components.code>
-              {\\" me\\"}
-            </_components.h2>
-            {\\"\\\\n\\"}
-            <_components.h2 id={toc[8].id}>
-              {\\"latex \\"}
-              <_components.span className=\\"katex\\">
-                <_components.span className=\\"katex-mathml\\">
-                  <_components.math xmlns=\\"http://www.w3.org/1998/Math/MathML\\">
-                    <_components.semantics>
-                      <_components.mrow>
-                        <_components.mi>{\\"l\\"}</_components.mi>
-                      </_components.mrow>
-                      <_components.annotation encoding=\\"application/x-tex\\">
-                        {\\"l\\"}
-                      </_components.annotation>
-                    </_components.semantics>
-                  </_components.math>
-                </_components.span>
-                <_components.span className=\\"katex-html\\" aria-hidden=\\"true\\">
-                  <_components.span className=\\"base\\">
-                    <_components.span
-                      className=\\"strut\\"
-                      style={{
-                        height: \\"0.6944em\\",
-                      }}
-                    />
-                    <_components.span
-                      className=\\"mord mathnormal\\"
-                      style={{
-                        marginRight: \\"0.01968em\\",
-                      }}
-                    >
-                      {\\"l\\"}
-                    </_components.span>
-                  </_components.span>
-                </_components.span>
-              </_components.span>
-            </_components.h2>
-            {\\"\\\\n\\"}
-            <_components.h2 id={toc[9].id}>{toc[9].value}</_components.h2>
+            <_components.h2 id={toc[6].id}>{toc[6].value}</_components.h2>
           </>
         );
       }
@@ -311,8 +353,10 @@ import Last from './three.mdx'
 `,
       { mdxOptions }
     )
-    expect(result).toMatch('export const toc = [];')
-    expect(result).not.toMatch('id="custom-id"')
+    expect(result).toMatch(`export function useTOC(props) {
+  return [];
+}`)
+    expect(result).not.toMatch('id=')
   })
 })
 
@@ -356,9 +400,7 @@ describe('Link', () => {
   it('supports external .mdx links', async () => {
     const { result } = await compileMdx(
       '[link](https://example.com/file.mdx)',
-      {
-        mdxOptions
-      }
+      { mdxOptions }
     )
     expect(result).toMatch(
       '<_components.a href="https://example.com/file.mdx">'
@@ -401,9 +443,7 @@ describe('Code block', () => {
     it('should support line highlights', async () => {
       const { result } = await compileMdx(
         '```js filename="test.js" {1}\n123\n```',
-        {
-          mdxOptions
-        }
+        { mdxOptions }
       )
       expect(result).toMatch('<_components.span data-highlighted-line="">')
     })

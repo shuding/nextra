@@ -42,6 +42,7 @@ import {
   remarkStaticImage,
   remarkStructurize
 } from './mdx-plugins/index.js'
+import { rehypeExtractTocContent } from './mdx-plugins/rehype-extract-toc-content.js'
 import { truthy } from './utils.js'
 
 export const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS: RehypePrettyCodeOptions = {
@@ -203,9 +204,8 @@ export async function compileMdx(
   const processor = compiler()
 
   try {
-    const vFile = await processor.process(
-      filePath ? { value: source, path: filePath } : source
-    )
+    const fileCompatible = filePath ? { value: source, path: filePath } : source
+    const vFile = await processor.process(fileCompatible)
 
     const { title, hasJsxInH1, readingTime, structurizedData } = vFile.data as {
       readingTime?: ReadingTime
@@ -297,7 +297,8 @@ export async function compileMdx(
               !isRemoteContent && rehypeIcon,
               attachMeta
             ]),
-        latex && rehypeKatex
+        latex && rehypeKatex,
+        !isRemoteContent && rehypeExtractTocContent
       ].filter(truthy),
       recmaPlugins: [!isRemoteContent && recmaRewriteJsx].filter(truthy)
     })
