@@ -100,6 +100,6 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => (ast, file) => {
           optional: false
         }
       }
-    ],
+    ]
   })
 }
