@@ -33,7 +33,7 @@ bar[^1]
         ];
       }
       function _createMdxContent(props) {
-        const toc = useTOC(props);
+        const { toc } = props;
         const _components = Object.assign(
           {
             h2: \\"h2\\",
@@ -132,7 +132,7 @@ import { Steps } from 'nextra/components'
         ];
       }
       function _createMdxContent(props) {
-        const toc = useTOC(props);
+        const { toc } = props;
         const _components = Object.assign(
           {
             h2: \\"h2\\",
@@ -186,8 +186,9 @@ export const frontMatter = {
     `,
       opts
     )
-    expect(clean(result)).resolves.toMatchInlineSnapshot(`
-      "import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
+    expect(clean(result, false)).resolves.toMatchInlineSnapshot(`
+      "/*@jsxRuntime automatic @jsxImportSource react*/
+      import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
       export const myVar = \\"interpolated\\";
       export const Test = () => {
         const _components = Object.assign(
@@ -320,7 +321,7 @@ export const frontMatter = {
         ];
       }
       function _createMdxContent(props) {
-        const toc = useTOC(props);
+        const { toc } = props;
         const _components = Object.assign(
           {
             h1: \\"h1\\",
@@ -355,6 +356,26 @@ export const frontMatter = {
           </>
         );
       }
+      function MDXContent(props = {}) {
+        const toc = useTOC();
+        props = {
+          ...props,
+          toc: props.toc || toc,
+        };
+        const { wrapper: MDXLayout } = Object.assign(
+          {},
+          _provideComponents(),
+          props.components,
+        );
+        return MDXLayout ? (
+          <MDXLayout {...props}>
+            <_createMdxContent {...props} />
+          </MDXLayout>
+        ) : (
+          _createMdxContent(props)
+        );
+      }
+      export default MDXContent;
       "
     `)
   })

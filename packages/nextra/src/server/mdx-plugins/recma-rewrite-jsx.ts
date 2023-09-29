@@ -2,8 +2,7 @@ import type { FunctionDeclaration, Program, ReturnStatement } from 'estree'
 import type { JsxAttribute } from 'estree-util-to-js/lib/jsx'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
-
-const HEADING_NAMES = new Set(['h2', 'h3', 'h4', 'h5', 'h6'])
+import { DEFAULT_PROPERTY_PROPS, TOC_HEADING_REGEX } from '../constants.js'
 
 export const recmaRewriteJsx: Plugin<[], Program> =
   () => (ast: Program, file) => {
@@ -32,7 +31,7 @@ export const recmaRewriteJsx: Plugin<[], Program> =
     visit({ children: returnBody }, 'JSXElement', (heading: any) => {
       const { openingElement } = heading
       const name = openingElement?.name.property?.name
-      const isHeading = name && HEADING_NAMES.has(name)
+      const isHeading = name && TOC_HEADING_REGEX.test(name)
       if (!isHeading) return
 
       const idNode = openingElement.attributes.find(
@@ -73,20 +72,93 @@ export const recmaRewriteJsx: Plugin<[], Program> =
       }
     })
 
+    const mdxContent = ast.body.find(
+      node =>
+        node.type === 'FunctionDeclaration' && node.id!.name === 'MDXContent'
+    ) as FunctionDeclaration
+
+    if (!mdxContent) {
+      throw new Error('`MDXContent` not found!')
+    }
+
     createMdxContent.body.body.unshift({
       type: 'VariableDeclaration',
       kind: 'const',
       declarations: [
         {
           type: 'VariableDeclarator',
-          id: { type: 'Identifier', name: 'toc' },
-          init: {
-            type: 'CallExpression',
-            callee: { type: 'Identifier', name: 'useTOC' },
-            arguments: [{ type: 'Identifier', name: 'props' }],
-            optional: false
+          init: { type: 'Identifier', name: 'props' },
+          id: {
+            type: 'ObjectPattern',
+            properties: [
+              {
+                type: 'Property',
+                key: { type: 'Identifier', name: 'toc' },
+                value: { type: 'Identifier', name: 'toc' },
+                computed: false,
+                method: false,
+                shorthand: true,
+                kind: 'init'
+              }
+            ]
+          },
+        }
+      ],
+    })
+
+    mdxContent.body.body.unshift(
+      {
+        type: 'VariableDeclaration',
+        kind: 'const',
+        declarations: [
+          {
+            type: 'VariableDeclarator',
+            id: { type: 'Identifier', name: 'toc' },
+            init: {
+              type: 'CallExpression',
+              callee: { type: 'Identifier', name: 'useTOC' },
+              arguments: [],
+              optional: false
+            }
+          }
+        ]
+      },
+      {
+        type: 'ExpressionStatement',
+        expression: {
+          type: 'AssignmentExpression',
+          operator: '=',
+          left: { type: 'Identifier', name: 'props' },
+          right: {
+            type: 'ObjectExpression',
+            properties: [
+              {
+                type: 'SpreadElement',
+                argument: { type: 'Identifier', name: 'props' }
+              },
+              {
+                type: 'Property',
+                key: { type: 'Identifier', name: 'toc' },
+                computed: false,
+                method: false,
+                shorthand: false,
+                kind: 'init',
+                value: {
+                  type: 'LogicalExpression',
+                  operator: '||',
+                  left: {
+                    type: 'MemberExpression',
+                    object: { type: 'Identifier', name: 'props' },
+                    property: { type: 'Identifier', name: 'toc' },
+                    computed: false,
+                    optional: false
+                  },
+                  right: { type: 'Identifier', name: 'toc' }
+                }
+              }
+            ]
           }
         }
-      ]
-    })
+      }
+    )
   }

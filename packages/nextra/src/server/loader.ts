@@ -233,8 +233,7 @@ ${isAppFileFromNodeModules ? cssImports : ''}
 ${mdxContent}
 
 export default setupNextraPage(
-  _createMdxContent,
-  useTOC,
+  MDXContent,
   '${route}',
   ${stringifiedPageOpts},pageMap,frontMatter}
 )`

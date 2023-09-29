@@ -1,4 +1,4 @@
-import type { NextraThemeLayoutProps, PageOpts } from 'nextra'
+import type { Heading, NextraThemeLayoutProps, PageOpts } from 'nextra'
 import type { ReactElement, ReactNode } from 'react'
 import { useMemo } from 'react'
 import 'focus-visible'
@@ -109,7 +109,6 @@ function InnerLayout({
   filePath,
   pageMap,
   frontMatter,
-  toc,
   timestamp,
   children
 }: PageOpts & { children: ReactNode }): ReactElement {
@@ -136,23 +135,6 @@ function InnerLayout({
     !themeContext.sidebar ||
     themeContext.layout === 'raw' ||
     activeType === 'page'
-
-  const tocEl =
-    activeType === 'page' ||
-    !themeContext.toc ||
-    themeContext.layout !== 'default' ? (
-      themeContext.layout !== 'full' &&
-      themeContext.layout !== 'raw' && (
-        <nav className={classes.toc} aria-label="table of contents" />
-      )
-    ) : (
-      <nav className={cn(classes.toc, '_px-4')} aria-label="table of contents">
-        {renderComponent(config.toc.component, {
-          toc: config.toc.float ? toc : [],
-          filePath
-        })}
-      </nav>
-    )
 
   const { direction } = config.i18n.find(l => l.locale === locale) || config
   const dir = direction === 'rtl' ? 'rtl' : 'ltr'
@@ -183,37 +165,76 @@ function InnerLayout({
           <MDXProvider
             components={getComponents({
               isRawLayout: themeContext.layout === 'raw',
-              components: config.components
+              components: {
+                ...config.components,
+                // @ts-expect-error fixme
+                wrapper: function NextraWrapper({
+                  toc = [],
+                  children
+                }: {
+                  children: ReactNode
+                  toc: Heading[]
+                }) {
+                  const tocEl =
+                    activeType === 'page' ||
+                    !themeContext.toc ||
+                    themeContext.layout !== 'default' ? (
+                      themeContext.layout !== 'full' &&
+                      themeContext.layout !== 'raw' && (
+                        <nav
+                          className={classes.toc}
+                          aria-label="table of contents"
+                        />
+                      )
+                    ) : (
+                      <nav
+                        className={cn(classes.toc, '_px-4')}
+                        aria-label="table of contents"
+                      >
+                        {renderComponent(config.toc.component, {
+                          toc: config.toc.float ? toc : [],
+                          filePath
+                        })}
+                      </nav>
+                    )
+
+                  return (
+                    <>
+                      <Sidebar
+                        docsDirectories={docsDirectories}
+                        fullDirectories={directories}
+                        toc={toc}
+                        asPopover={hideSidebar}
+                        includePlaceholder={themeContext.layout === 'default'}
+                      />
+                      {tocEl}
+                      <SkipNavContent />
+                      <Body
+                        themeContext={themeContext}
+                        breadcrumb={
+                          activeType !== 'page' && themeContext.breadcrumb ? (
+                            <Breadcrumb activePath={activePath} />
+                          ) : null
+                        }
+                        timestamp={timestamp}
+                        navigation={
+                          activeType !== 'page' && themeContext.pagination ? (
+                            <NavLinks
+                              flatDirectories={flatDocsDirectories}
+                              currentIndex={activeIndex}
+                            />
+                          ) : null
+                        }
+                      >
+                        {children}
+                      </Body>
+                    </>
+                  )
+                }
+              }
             })}
           >
-            <Sidebar
-              docsDirectories={docsDirectories}
-              fullDirectories={directories}
-              toc={toc}
-              asPopover={hideSidebar}
-              includePlaceholder={themeContext.layout === 'default'}
-            />
-            {tocEl}
-            <SkipNavContent />
-            <Body
-              themeContext={themeContext}
-              breadcrumb={
-                activeType !== 'page' && themeContext.breadcrumb ? (
-                  <Breadcrumb activePath={activePath} />
-                ) : null
-              }
-              timestamp={timestamp}
-              navigation={
-                activeType !== 'page' && themeContext.pagination ? (
-                  <NavLinks
-                    flatDirectories={flatDocsDirectories}
-                    currentIndex={activeIndex}
-                  />
-                ) : null
-              }
-            >
-              {children}
-            </Body>
+            {children}
           </MDXProvider>
         </ActiveAnchorProvider>
       </div>

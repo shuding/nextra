@@ -97,7 +97,7 @@ export function useTOC(props) {
   ];
 }
 function _createMdxContent(props) {
-  const toc = useTOC(props);
+  const { toc } = props;
   const _components = Object.assign(
     {
       h2: \\"h2\\",
