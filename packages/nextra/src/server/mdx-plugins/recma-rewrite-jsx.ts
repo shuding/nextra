@@ -1,6 +1,7 @@
 import type { FunctionDeclaration, Program, ReturnStatement } from 'estree'
 import type { JsxAttribute } from 'estree-util-to-js/lib/jsx'
 import type { Plugin } from 'unified'
+import { visit } from 'unist-util-visit'
 import { DEFAULT_PROPERTY_PROPS } from '../constants.js'
 
 const HEADING_NAMES = new Set(['h2', 'h3', 'h4', 'h5', 'h6'])
@@ -13,26 +14,21 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => (ast, file) => {
     o => o.type === 'ReturnStatement'
   ) as ReturnStatement
 
-  // @ts-expect-error
-  function isHeading(o): boolean {
-    const name = o.openingElement?.name.property?.name
-    return name && HEADING_NAMES.has(name)
-  }
-
   const { argument } = returnStatement as any
 
-  const headings =
-    // if return statements doesn't wrap in fragment children will be []
-    (argument.children.length ? argument.children : [argument]).filter(
-      isHeading
-    )
+  // if return statements doesn't wrap in fragment children will be []
+  const returnBody = argument.children.length ? argument.children : [argument]
 
   const tocProperties = file.data.toc as (
     | { properties: { id: string } }
     | string
   )[]
 
-  for (const heading of headings) {
+  visit({ children: returnBody }, 'JSXElement', (heading: any) => {
+    const name = heading.openingElement?.name.property?.name
+    const isHeading = name && HEADING_NAMES.has(name)
+
+    if (!isHeading) return
     const idNode = heading.openingElement.attributes.find(
       (attr: JsxAttribute) => attr.name.name === 'id'
     )
@@ -44,7 +40,7 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => (ast, file) => {
       return node.properties.id === id
     })
 
-    if (foundIndex === -1) continue
+    if (foundIndex === -1) return
 
     idNode.value = {
       type: 'JSXExpressionContainer',
@@ -69,7 +65,8 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => (ast, file) => {
       type: 'JSXClosingElement',
       attributes: []
     }
-  }
+  })
+
   const mdxContent = ast.body.find(
     // @ts-expect-error
     node => node.type === 'FunctionDeclaration' && node.id.name === 'MDXContent'

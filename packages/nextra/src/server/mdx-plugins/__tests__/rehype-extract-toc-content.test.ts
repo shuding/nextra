@@ -18,7 +18,9 @@ import { Steps } from 'nextra/components'
 ## baz qux
 
 <Steps>
+  <div>
   ### foo bar
+  </div>
 </Steps>
 `,
       opts
@@ -56,7 +58,9 @@ import { Steps } from 'nextra/components'
             <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
             {\\"\\\\n\\"}
             <Steps>
-              <_components.h3 id=\\"foo-bar\\" />
+              <div>
+                <_components.h3 id={toc[1].id}>{toc[1].value}</_components.h3>
+              </div>
             </Steps>
           </>
         );
