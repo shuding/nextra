@@ -176,6 +176,9 @@ function NextraLayout({
 
   const { Content, useTOC } = pageContext
 
+  // @ts-expect-error
+  pageOpts.toc = useTOC().map(([id, value, depth]) => ({ id, value, depth }))
+
   if (__nextra_dynamic_opts) {
     const { toc, title, frontMatter } = __nextra_dynamic_opts
     pageOpts = {
@@ -184,11 +187,6 @@ function NextraLayout({
       title,
       frontMatter
     }
-  } else {
-    // @ts-expect-error
-    pageOpts.toc =
-      // eslint-disable-next-line react-hooks/rules-of-hooks -- this is not really hook
-      useTOC().map(([id, value, depth]) => ({ id, value, depth }))
   }
 
   return (

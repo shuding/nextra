@@ -86,67 +86,20 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => (ast, file) => {
     }
   )
 
-  mdxContent.body.body.unshift(
-    {
-      type: 'VariableDeclaration',
-      kind: 'const',
-      declarations: [
-        {
-          type: 'VariableDeclarator',
-          id: { type: 'Identifier', name: 'toc' },
-          init: {
-            type: 'CallExpression',
-            callee: { type: 'Identifier', name: 'useTOC' },
-            arguments: [{ type: 'Identifier', name: 'props' }],
-            optional: false
-          }
-        }
-      ]
-    },
-    {
-      type: 'ExpressionStatement',
-      expression: {
-        type: 'AssignmentExpression',
-        operator: '=',
-        left: { type: 'Identifier', name: 'props' },
-        right: {
-          type: 'ObjectExpression',
-          properties: [
-            {
-              type: 'SpreadElement',
-              argument: { type: 'Identifier', name: 'props' }
-            },
-            {
-              ...DEFAULT_PROPERTY_PROPS,
-              key: { type: 'Identifier', name: 'toc' },
-              value: { type: 'Identifier', name: 'toc' },
-              shorthand: true
-            }
-          ]
-        }
-      }
-    }
-  )
-
   createMdxContent.body.body.unshift({
     type: 'VariableDeclaration',
     kind: 'const',
     declarations: [
       {
         type: 'VariableDeclarator',
-        id: {
-          type: 'ObjectPattern',
-          properties: [
-            {
-              ...DEFAULT_PROPERTY_PROPS,
-              key: { type: 'Identifier', name: 'toc' },
-              value: { type: 'Identifier', name: 'toc' },
-              shorthand: true
-            }
-          ]
-        },
-        init: { type: 'Identifier', name: 'props' }
+        id: { type: 'Identifier', name: 'toc' },
+        init: {
+          type: 'CallExpression',
+          callee: { type: 'Identifier', name: 'useTOC' },
+          arguments: [{ type: 'Identifier', name: 'props' }],
+          optional: false
+        }
       }
-    ]
+    ],
   })
 }
