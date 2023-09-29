@@ -25,13 +25,15 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => (ast, file) => {
   )[]
 
   visit({ children: returnBody }, 'JSXElement', (heading: any) => {
-    const name = heading.openingElement?.name.property?.name
+    const { openingElement } = heading
+    const name = openingElement?.name.property?.name
     const isHeading = name && HEADING_NAMES.has(name)
 
     if (!isHeading) return
-    const idNode = heading.openingElement.attributes.find(
+    const idNode = openingElement.attributes.find(
       (attr: JsxAttribute) => attr.name.name === 'id'
     )
+    if (!idNode) return
 
     const id = idNode.value.value
 
@@ -50,7 +52,7 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => (ast, file) => {
       }
     }
 
-    delete heading.openingElement.selfClosing
+    delete openingElement.selfClosing
     heading.children = [
       {
         type: 'JSXExpressionContainer',
@@ -61,7 +63,7 @@ export const recmaRewriteJsx: Plugin<[], Program> = () => (ast, file) => {
       }
     ]
     heading.closingElement = {
-      ...heading.openingElement,
+      ...openingElement,
       type: 'JSXClosingElement',
       attributes: []
     }
