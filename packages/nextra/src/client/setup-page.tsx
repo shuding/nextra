@@ -174,11 +174,8 @@ function NextraLayout({
     folder.children = children
   }
 
-  let tocList: Heading[] | undefined
-
   if (__nextra_dynamic_opts) {
-    const { toc, title, frontMatter } = __nextra_dynamic_opts
-    tocList = toc
+    const { title, frontMatter } = __nextra_dynamic_opts
     pageOpts = {
       ...pageOpts,
       title,
@@ -189,7 +186,7 @@ function NextraLayout({
   return (
     <Layout themeConfig={themeConfig} pageOpts={pageOpts} pageProps={props}>
       <DataProvider value={props}>
-        <pageContext.Content toc={tocList} />
+        <pageContext.Content />
       </DataProvider>
     </Layout>
   )
@@ -206,8 +203,7 @@ export const HOC_MDXContent = (
     children: ReactNode
     components: Components
   }) {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const { toc = useTOC(props) } = props
+    const toc = useTOC(props)
     props = { ...props, toc }
 
     const { wrapper: MDXLayout } = {

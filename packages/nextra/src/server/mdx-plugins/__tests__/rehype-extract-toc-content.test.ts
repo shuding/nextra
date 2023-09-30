@@ -363,7 +363,7 @@ export const frontMatter = {
       `
 ## hello
 
-<RemoteContent components={{}} />
+<RemoteContent components={{ Callout, $Tabs: Tabs }} />
     `,
       opts
     )
@@ -380,7 +380,7 @@ export const frontMatter = {
         ];
       }
       function _createMdxContent(props) {
-        const { frontMatter, useTOC, MDXRemote } = RemoteContent();
+        const { frontMatter, MDXRemote } = RemoteContent();
         const { toc = useTOC(props) } = props;
         const _components = Object.assign(
             {
@@ -395,7 +395,12 @@ export const frontMatter = {
           <>
             <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
             {\\"\\\\n\\"}
-            <MDXRemote />
+            <MDXRemote
+              components={{
+                Callout,
+                $Tabs: Tabs,
+              }}
+            />
           </>
         );
       }
@@ -407,6 +412,52 @@ export const frontMatter = {
             id +
             \\"\` to be defined: you likely forgot to import, pass, or provide it.\\",
         );
+      }
+      "
+    `)
+  })
+
+  it('should work with remote content2', async () => {
+    const { result } = await compileMdx(
+      `
+## hello
+
+<RemoteContent components={{ Callout, $Tabs: Tabs }} />
+    `,
+      { mdxOptions: { jsx: true } }
+    )
+    expect(result).toMatchInlineSnapshot(`
+      "/*@jsxRuntime automatic @jsxImportSource react*/
+      const {useMDXComponents: _provideComponents} = arguments[0];
+      const frontMatter = {};
+      function useTOC(props) {
+        return [{
+          value: \\"hello\\",
+          id: \\"hello\\",
+          depth: 2
+        }];
+      }
+      function _createMdxContent(props) {
+        const _components = Object.assign({
+          h2: \\"h2\\"
+        }, _provideComponents(), props.components), {RemoteContent} = _components;
+        if (!RemoteContent) _missingMdxReference(\\"RemoteContent\\", true);
+        return <><_components.h2 id=\\"hello\\" />{\\"\\\\n\\"}<RemoteContent components={{
+          Callout,
+          $Tabs: Tabs
+        }} /></>;
+      }
+      function MDXContent(props = {}) {
+        const {wrapper: MDXLayout} = Object.assign({}, _provideComponents(), props.components);
+        return MDXLayout ? <MDXLayout {...props}><_createMdxContent {...props} /></MDXLayout> : _createMdxContent(props);
+      }
+      return {
+        frontMatter,
+        useTOC,
+        default: MDXContent
+      };
+      function _missingMdxReference(id, component) {
+        throw new Error(\\"Expected \\" + (component ? \\"component\\" : \\"object\\") + \\" \`\\" + id + \\"\` to be defined: you likely forgot to import, pass, or provide it.\\");
       }
       "
     `)

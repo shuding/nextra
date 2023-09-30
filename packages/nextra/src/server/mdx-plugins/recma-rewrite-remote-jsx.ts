@@ -4,11 +4,9 @@ import type {
   Program,
   ReturnStatement
 } from 'estree'
-import type { JsxAttribute } from 'estree-util-to-js/lib/jsx'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
-import { DEFAULT_PROPERTY_PROPS, TOC_HEADING_REGEX } from '../constants.js'
-import { createAstObject } from '../utils'
+import { DEFAULT_PROPERTY_PROPS } from '../constants.js'
 
 export const recmaRewriteRemoteJsx: Plugin<[], Program> =
   () => (ast: Program, file) => {
@@ -47,7 +45,6 @@ export const recmaRewriteRemoteJsx: Plugin<[], Program> =
     // @ts-expect-error
     visit({ children: returnBody }, 'JSXElement', node => {
       // @ts-expect-error
-      console.dir(node.openingElement.attributes, { depth: 7 })
       if (node.openingElement.name.name === 'RemoteContent') {
         createMdxContent.body.body.unshift({
           type: 'VariableDeclaration',
@@ -64,12 +61,12 @@ export const recmaRewriteRemoteJsx: Plugin<[], Program> =
                     value: { type: 'Identifier', name: 'frontMatter' },
                     shorthand: true
                   },
-                  {
-                    ...DEFAULT_PROPERTY_PROPS,
-                    key: { type: 'Identifier', name: 'useTOC' },
-                    value: { type: 'Identifier', name: 'useTOC' },
-                    shorthand: true
-                  },
+                  // {
+                  //   ...DEFAULT_PROPERTY_PROPS,
+                  //   key: { type: 'Identifier', name: 'useTOC' },
+                  //   value: { type: 'Identifier', name: 'useTOC' },
+                  //   shorthand: true
+                  // },
                   {
                     ...DEFAULT_PROPERTY_PROPS,
                     key: { type: 'Identifier', name: 'MDXRemote' },
@@ -81,22 +78,12 @@ export const recmaRewriteRemoteJsx: Plugin<[], Program> =
               init: {
                 type: 'CallExpression',
                 callee: { type: 'Identifier', name: 'RemoteContent' },
-                optional: false,
-                // @ts-expect-error
-                arguments: createAstObject(
-                  Object.fromEntries(
-                    node.openingElement.attributes.map(attr => [
-                      attr.name.name,
-                      attr.value.expression
-                    ])
-                  )
-                )
+                arguments: [],
+                optional: false
               }
             }
           ]
         })
-        // @ts-expect-error
-        node.openingElement.attributes = []
         // @ts-expect-error
         node.openingElement.name.name = 'MDXRemote'
       }
