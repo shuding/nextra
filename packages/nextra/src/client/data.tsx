@@ -26,7 +26,6 @@ export function RemoteContent({
   const components = useMDXComponents(dynamicComponents)
 
   return (
-    // @ts-expect-error we don't care about missing `scope` and `frontmatter` props
     <MDXRemote
       compiledSource={dynamicContext}
       components={{
