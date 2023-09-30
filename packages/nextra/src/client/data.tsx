@@ -1,4 +1,4 @@
-import { MDXRemote } from 'next-mdx-remote'
+import { MDXRemote } from './remote/index.js'
 import { createContext, useContext } from 'react'
 import type { Components } from './mdx'
 import { useMDXComponents } from './mdx.js'
