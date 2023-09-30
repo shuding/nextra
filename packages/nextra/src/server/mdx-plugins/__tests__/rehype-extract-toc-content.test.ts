@@ -361,6 +361,8 @@ export const frontMatter = {
   it('should work with remote content', async () => {
     const { result } = await compileMdx(
       `
+import { RemoteContent } from 'nextra/data'
+
 ## hello
 
 <RemoteContent components={{ Callout, $Tabs: Tabs }} />
@@ -369,8 +371,10 @@ export const frontMatter = {
     )
     expect(result).toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic @jsxImportSource react*/
+      import {createElement} from \\"react\\";
       import {useMDXComponents as _provideComponents} from \\"nextra/mdx\\";
       export const frontMatter = {};
+      import {RemoteContent} from 'nextra/data';
       export function useTOC(props) {
         return [{
           value: \\"hello\\",
@@ -379,29 +383,25 @@ export const frontMatter = {
         }];
       }
       function _createMdxContent(props) {
-        const {frontMatter, MDXRemote} = RemoteContent();
         const {toc = useTOC(props)} = props;
         const _components = Object.assign({
           h2: \\"h2\\"
-        }, _provideComponents(), props.components), {RemoteContent} = _components;
-        if (!RemoteContent) _missingMdxReference(\\"RemoteContent\\", true);
-        return <><_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>{\\"\\\\n\\"}<MDXRemote components={{
-          Callout,
-          $Tabs: Tabs
-        }} /></>;
+        }, _provideComponents(), props.components);
+        return <><_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>{\\"\\\\n\\"}<>{props.children}</></>;
       }
       function MDXContent(props) {
+        const {frontMatter, useTOC, MDXRemote} = RemoteContent();
         const toc = useTOC(props);
         props = {
           ...props,
           toc
         };
         const {wrapper} = _provideComponents();
-        const child = createElement(_createMdxContent);
+        const child = createElement(_createMdxContent, props, <MDXRemote components={{
+          Callout,
+          $Tabs: Tabs
+        }} />);
         return wrapper ? createElement(wrapper, props, child) : child;
-      }
-      function _missingMdxReference(id, component) {
-        throw new Error(\\"Expected \\" + (component ? \\"component\\" : \\"object\\") + \\" \`\\" + id + \\"\` to be defined: you likely forgot to import, pass, or provide it.\\");
       }
       "
     `)
