@@ -1,31 +1,27 @@
-import React, { useState, useEffect, useMemo } from 'react'
-import { jsxRuntime } from './jsx-runtime.cjs'
 import * as mdx from '@mdx-js/react'
+import type React from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { jsxRuntime } from './jsx-runtime.cjs'
+
 /**
  * Copyright (c) HashiCorp, Inc.
  * SPDX-License-Identifier: MPL-2.0
  */
 
 if (typeof window !== 'undefined') {
-  window.requestIdleCallback =
-    window.requestIdleCallback ||
-    function(cb) {
-      var start = Date.now()
-      return setTimeout(function() {
-        cb({
-          didTimeout: false,
-          timeRemaining: function() {
-            return Math.max(0, 50 - (Date.now() - start))
-          }
-        })
-      }, 1)
-    }
+  window.requestIdleCallback ||= function (cb) {
+    const start = Date.now()
+    return window.setTimeout(function () {
+      cb({
+        didTimeout: false,
+        timeRemaining() {
+          return Math.max(0, 50 - (Date.now() - start))
+        }
+      })
+    }, 1)
+  }
 
-  window.cancelIdleCallback =
-    window.cancelIdleCallback ||
-    function(id) {
-      clearTimeout(id)
-    }
+  window.cancelIdleCallback ||= clearTimeout
 }
 
 /**
@@ -77,13 +73,15 @@ export type MDXRemoteProps<
  * Renders compiled source from next-mdx-remote/serialize.
  */
 export function MDXRemote<TScope, TFrontmatter>({
-                                                  compiledSource,
-                                                  frontmatter,
-                                                  scope,
-                                                  components = {},
-                                                  lazy,
-                                                }: MDXRemoteProps<TScope, TFrontmatter>) {
-  const [isReadyToRender, setIsReadyToRender] = useState(!lazy || typeof window === 'undefined')
+  compiledSource,
+  frontmatter,
+  scope,
+  components = {},
+  lazy
+}: MDXRemoteProps<TScope, TFrontmatter>) {
+  const [isReadyToRender, setIsReadyToRender] = useState(
+    !lazy || typeof window === 'undefined'
+  )
   // if we're on the client side and `lazy` is set to true, we hydrate the
   // mdx content inside requestIdleCallback, allowing the page to get to
   // interactive quicker, but the mdx content to hydrate slower.
@@ -99,7 +97,11 @@ export function MDXRemote<TScope, TFrontmatter>({
     // if we're ready to render, we can assemble the component tree and let React do its thing
     // first we set up the scope which has to include the mdx custom
     // create element function as well as any components we're using
-    const fullScope = Object.assign({ opts: { ...mdx, ...jsxRuntime } }, { frontmatter }, scope)
+    const fullScope = {
+      opts: { ...mdx, ...jsxRuntime },
+      frontmatter,
+      ...scope
+    }
     const keys = Object.keys(fullScope)
     const values = Object.values(fullScope)
     // now we eval the source code using a function constructor
@@ -107,19 +109,30 @@ export function MDXRemote<TScope, TFrontmatter>({
     // and all our components in scope for the function, which is the case here
     // we pass the names (via keys) in as the function's args, and execute the
     // function with the actual values.
-    const hydrateFn = Reflect.construct(Function, keys.concat(`${compiledSource}`))
+    const hydrateFn = Reflect.construct(
+      Function,
+      keys.concat(`${compiledSource}`)
+    )
     const result = hydrateFn.apply(hydrateFn, values)
-    console.log(55, { result }, result.useTOC())
+
+    console.log(44, { result }, result.useTOC())
+
     return result.default
   }, [scope, compiledSource])
+
   if (!isReadyToRender) {
     // If we're not ready to render, return an empty div to preserve SSR'd markup
-    return (React.createElement('div', { dangerouslySetInnerHTML: { __html: '' }, suppressHydrationWarning: true }))
+    return (
+      <div dangerouslySetInnerHTML={{ __html: '' }} suppressHydrationWarning />
+    )
   }
   // wrapping the content with MDXProvider will allow us to customize the standard
   // markdown components (such as "h1" or "a") with the "components" object
-  const content = (React.createElement(mdx.MDXProvider, { components: components },
-    React.createElement(Content, null)))
+  const content = (
+    <mdx.MDXProvider components={components}>
+      <Content />
+    </mdx.MDXProvider>
+  )
   // If lazy = true, we need to render a wrapping div to preserve the same markup structure that was SSR'd
   console.log({ content, compiledSource })
 
