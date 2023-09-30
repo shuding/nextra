@@ -32,6 +32,7 @@ import {
   attachMeta,
   parseMeta,
   recmaRewriteJsx,
+  recmaRewriteRemoteJsx,
   rehypeIcon,
   remarkCustomHeadingId,
   remarkHeadings,
@@ -298,9 +299,12 @@ export async function compileMdx(
               attachMeta
             ]),
         latex && rehypeKatex,
-        !isRemoteContent && rehypeExtractTocContent
+        rehypeExtractTocContent
       ].filter(truthy),
-      recmaPlugins: [!isRemoteContent && recmaRewriteJsx].filter(truthy)
+      recmaPlugins: [
+        !isRemoteContent && recmaRewriteJsx,
+        !isRemoteContent && recmaRewriteRemoteJsx
+      ].filter(truthy)
     })
   }
 }

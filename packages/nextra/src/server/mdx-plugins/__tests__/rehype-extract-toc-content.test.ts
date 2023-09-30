@@ -358,4 +358,57 @@ export const frontMatter = {
       "
     `)
   })
+  it.only('should work with remote content', async () => {
+    const { result } = await compileMdx(
+      `
+## hello
+
+<RemoteContent components={{}} />
+    `,
+      opts
+    )
+    expect(clean(result)).resolves.toMatchInlineSnapshot(`
+      "import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
+      export const frontMatter = {};
+      export function useTOC(props) {
+        return [
+          {
+            value: \\"hello\\",
+            id: \\"hello\\",
+            depth: 2,
+          },
+        ];
+      }
+      function _createMdxContent(props) {
+        const { frontMatter, useTOC, MDXRemote } = RemoteContent();
+        const { toc = useTOC(props) } = props;
+        const _components = Object.assign(
+            {
+              h2: \\"h2\\",
+            },
+            _provideComponents(),
+            props.components,
+          ),
+          { RemoteContent } = _components;
+        if (!RemoteContent) _missingMdxReference(\\"RemoteContent\\", true);
+        return (
+          <>
+            <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
+            {\\"\\\\n\\"}
+            <MDXRemote />
+          </>
+        );
+      }
+      function _missingMdxReference(id, component) {
+        throw new Error(
+          \\"Expected \\" +
+            (component ? \\"component\\" : \\"object\\") +
+            \\" \`\\" +
+            id +
+            \\"\` to be defined: you likely forgot to import, pass, or provide it.\\",
+        );
+      }
+      "
+    `)
+  })
 })

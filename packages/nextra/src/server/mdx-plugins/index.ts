@@ -1,4 +1,5 @@
 export { recmaRewriteJsx } from './recma-rewrite-jsx.js'
+export { recmaRewriteRemoteJsx } from './recma-rewrite-remote-jsx.js'
 export { parseMeta, attachMeta } from './rehype.js'
 export { rehypeIcon } from './rehype-icon.js'
 export { remarkCustomHeadingId } from './remark-custom-heading-id.js'
