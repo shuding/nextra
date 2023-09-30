@@ -1,17 +1,16 @@
+/**
+ * Copyright (c) HashiCorp, Inc.
+ * SPDX-License-Identifier: MPL-2.0
+ */
 import * as mdx from '@mdx-js/react'
 import type React from 'react'
 import { useEffect, useMemo, useState } from 'react'
 import { jsxRuntime } from './jsx-runtime.cjs'
 
-/**
- * Copyright (c) HashiCorp, Inc.
- * SPDX-License-Identifier: MPL-2.0
- */
-
 if (typeof window !== 'undefined') {
-  window.requestIdleCallback ||= function (cb) {
+  window.requestIdleCallback ||= cb => {
     const start = Date.now()
-    return window.setTimeout(function () {
+    return window.setTimeout(() => {
       cb({
         didTimeout: false,
         timeRemaining() {
@@ -24,10 +23,6 @@ if (typeof window !== 'undefined') {
   window.cancelIdleCallback ||= clearTimeout
 }
 
-/**
- * Copyright (c) HashiCorp, Inc.
- * SPDX-License-Identifier: MPL-2.0
- */
 /**
  * Represents the return value of a call to serialize()
  */
@@ -57,14 +52,14 @@ export type MDXRemoteProps<
   TFrontmatter = Record<string, unknown>
 > = MDXRemoteSerializeResult<TScope, TFrontmatter> & {
   /**
-   * A object mapping names to React components.
+   * An object mapping names to React components.
    * The key used will be the name accessible to MDX.
    *
    * For example: `{ ComponentName: Component }` will be accessible in the MDX as `<ComponentName/>`.
    */
   components?: React.ComponentProps<typeof mdx.MDXProvider>['components']
   /**
-   * Determines whether or not the content should be hydrated asynchronously, or "lazily"
+   * Determines whether the content should be hydrated asynchronously, or "lazily"
    */
   lazy?: boolean
 }
@@ -82,6 +77,7 @@ export function MDXRemote<TScope, TFrontmatter>({
   const [isReadyToRender, setIsReadyToRender] = useState(
     !lazy || typeof window === 'undefined'
   )
+
   // if we're on the client side and `lazy` is set to true, we hydrate the
   // mdx content inside requestIdleCallback, allowing the page to get to
   // interactive quicker, but the mdx content to hydrate slower.
@@ -93,6 +89,7 @@ export function MDXRemote<TScope, TFrontmatter>({
       return () => window.cancelIdleCallback(handle)
     }
   }, [])
+
   const Content = useMemo(() => {
     // if we're ready to render, we can assemble the component tree and let React do its thing
     // first we set up the scope which has to include the mdx custom
@@ -109,13 +106,11 @@ export function MDXRemote<TScope, TFrontmatter>({
     // and all our components in scope for the function, which is the case here
     // we pass the names (via keys) in as the function's args, and execute the
     // function with the actual values.
-    const hydrateFn = Reflect.construct(
-      Function,
-      keys.concat(`${compiledSource}`)
-    )
+    console.log({ compiledSource })
+    const hydrateFn = Reflect.construct(Function, keys.concat(compiledSource))
     const result = hydrateFn.apply(hydrateFn, values)
 
-    console.log(44, { result }, result.useTOC())
+    console.log(111, { result }, result.useTOC())
 
     return result.default
   }, [scope, compiledSource])
