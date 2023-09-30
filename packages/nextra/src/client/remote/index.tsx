@@ -33,10 +33,56 @@ if (typeof window !== 'undefined') {
  * SPDX-License-Identifier: MPL-2.0
  */
 /**
+ * Represents the return value of a call to serialize()
+ */
+export type MDXRemoteSerializeResult<
+  TScope = Record<string, unknown>,
+  TFrontmatter = Record<string, unknown>
+> = {
+  /**
+   * The compiledSource, generated from next-mdx-remote/serialize
+   */
+  compiledSource: string
+  /**
+   * An arbitrary object of data which will be supplied to the MDX.
+   *
+   * For example, in cases where you want to provide template variables to the MDX, like `my name is {name}`,
+   * you could provide scope as `{ name: "Some name" }`.
+   */
+  scope: TScope
+  /**
+   * If parseFrontmatter was set to true, contains any parsed frontmatter found in the MDX source.
+   */
+  frontmatter: TFrontmatter
+}
+
+export type MDXRemoteProps<
+  TScope = Record<string, unknown>,
+  TFrontmatter = Record<string, unknown>
+> = MDXRemoteSerializeResult<TScope, TFrontmatter> & {
+  /**
+   * A object mapping names to React components.
+   * The key used will be the name accessible to MDX.
+   *
+   * For example: `{ ComponentName: Component }` will be accessible in the MDX as `<ComponentName/>`.
+   */
+  components?: React.ComponentProps<typeof mdx.MDXProvider>['components']
+  /**
+   * Determines whether or not the content should be hydrated asynchronously, or "lazily"
+   */
+  lazy?: boolean
+}
+
+/**
  * Renders compiled source from next-mdx-remote/serialize.
  */
-// @ts-expect-error
-function MDXRemote({ compiledSource, frontmatter, scope, components = {}, lazy }) {
+export function MDXRemote<TScope, TFrontmatter>({
+                                                  compiledSource,
+                                                  frontmatter,
+                                                  scope,
+                                                  components = {},
+                                                  lazy,
+                                                }: MDXRemoteProps<TScope, TFrontmatter>) {
   const [isReadyToRender, setIsReadyToRender] = useState(!lazy || typeof window === 'undefined')
   // if we're on the client side and `lazy` is set to true, we hydrate the
   // mdx content inside requestIdleCallback, allowing the page to get to
@@ -63,7 +109,7 @@ function MDXRemote({ compiledSource, frontmatter, scope, components = {}, lazy }
     // function with the actual values.
     const hydrateFn = Reflect.construct(Function, keys.concat(`${compiledSource}`))
     const result = hydrateFn.apply(hydrateFn, values)
-    console.log(99999, { result }, result.useTOC())
+    console.log(55, { result }, result.useTOC())
     return result.default
   }, [scope, compiledSource])
   if (!isReadyToRender) {
@@ -76,7 +122,7 @@ function MDXRemote({ compiledSource, frontmatter, scope, components = {}, lazy }
     React.createElement(Content, null)))
   // If lazy = true, we need to render a wrapping div to preserve the same markup structure that was SSR'd
   console.log({ content, compiledSource })
-  return lazy ? React.createElement('div', null, content) : content
-}
 
-export { MDXRemote }
+  // If lazy = true, we need to render a wrapping div to preserve the same markup structure that was SSR'd
+  return lazy ? <div>{content}</div> : content
+}
