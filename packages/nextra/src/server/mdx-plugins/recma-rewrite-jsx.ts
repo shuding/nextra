@@ -20,12 +20,12 @@ export const recmaRewriteJsx: Plugin<[], Program> =
           node.declaration.name !== 'MDXContent'
       )
       // Remove `MDXContent` since we use custom HOC_MDXContent
-      .filter(
-        node =>
-          node.type !== 'FunctionDeclaration' ||
-          // @ts-expect-error fixme
-          node.id.name !== 'MDXContent'
-      )
+      // .filter(
+      //   node =>
+      //     node.type !== 'FunctionDeclaration' ||
+      //     // @ts-expect-error fixme
+      //     node.id.name !== 'MDXContent'
+      // )
 
     const createMdxContent = ast.body.find(
       o =>
@@ -48,6 +48,15 @@ export const recmaRewriteJsx: Plugin<[], Program> =
 
     // Do not add `const toc = useTOC(props)`
     if (!tocProperties.length) return
+
+    const mdxContent = ast.body.find(
+      node =>
+        node.type === 'FunctionDeclaration' && node.id!.name === 'MDXContent'
+    ) as FunctionDeclaration
+
+    if (!mdxContent) {
+      throw new Error('`MDXContent` not found!')
+    }
 
     visit({ children: returnBody }, 'JSXElement', (heading: any) => {
       const { openingElement } = heading
@@ -127,4 +136,110 @@ export const recmaRewriteJsx: Plugin<[], Program> =
         }
       ]
     })
+
+    mdxContent.params = createMdxContent.params
+    mdxContent.body.body = [
+      {
+        type: 'VariableDeclaration',
+        kind: 'const',
+        declarations: [
+          {
+            type: 'VariableDeclarator',
+            id: {
+              type: 'Identifier',
+              name: 'toc'
+            },
+            init: {
+              type: 'CallExpression',
+              callee: { type: 'Identifier', name: 'useTOC' },
+              arguments: [{ type: 'Identifier', name: 'props' }],
+              optional: false
+            }
+          }
+        ]
+      },
+      {
+        type: 'ExpressionStatement',
+        expression: {
+          type: 'AssignmentExpression',
+          operator: '=',
+          left: { type: 'Identifier', name: 'props' },
+          right: {
+            type: 'ObjectExpression',
+            properties: [
+              {
+                type: 'SpreadElement',
+                argument: { type: 'Identifier', name: 'props' }
+              },
+              {
+                ...DEFAULT_PROPERTY_PROPS,
+                key: { type: 'Identifier', name: 'toc' },
+                value: { type: 'Identifier', name: 'toc' },
+                shorthand: true
+              }
+            ]
+          }
+        }
+      },
+      {
+        type: 'VariableDeclaration',
+        declarations: [
+          {
+            type: 'VariableDeclarator',
+            id: {
+              type: 'ObjectPattern',
+              properties: [
+                {
+                  ...DEFAULT_PROPERTY_PROPS,
+                  key: { type: 'Identifier', name: 'wrapper' },
+                  value: { type: 'Identifier', name: 'wrapper' },
+                  shorthand: true
+                }
+              ]
+            },
+            init: {
+              type: 'CallExpression',
+              callee: { type: 'Identifier', name: '_provideComponents' },
+              arguments: [],
+              optional: false
+            }
+          }
+        ],
+        kind: 'const'
+      },
+      {
+        type: 'VariableDeclaration',
+        kind: 'const',
+        declarations: [
+          {
+            type: 'VariableDeclarator',
+            id: { type: 'Identifier', name: 'child' },
+            init: {
+              type: 'CallExpression',
+              callee: { type: 'Identifier', name: 'createElement' },
+              arguments: [{ type: 'Identifier', name: '_createMdxContent' }],
+              optional: false
+            }
+          }
+        ]
+      },
+      {
+        type: 'ReturnStatement',
+        argument: {
+          type: 'ConditionalExpression',
+          test: { type: 'Identifier', name: 'wrapper' },
+          consequent: {
+            type: 'CallExpression',
+            callee: { type: 'Identifier', name: 'createElement' },
+            optional: false,
+            arguments: [
+              { type: 'Identifier', name: 'wrapper' },
+              { type: 'Identifier', name: 'props' },
+              { type: 'Identifier', name: 'child' }
+            ]
+          },
+          alternate: { type: 'Identifier', name: 'child' }
+        }
+      }
+    ]
   }
