@@ -1,12 +1,11 @@
 import { ThemeProvider } from 'next-themes'
 import type { NextraThemeLayoutProps } from 'nextra'
-import type { ReactElement, ReactNode } from 'react'
 import { ArticleLayout } from './article-layout'
 import { BlogProvider } from './blog-context'
 import { DEFAULT_THEME } from './constants'
 import { PageLayout } from './page-layout'
 import { PostsLayout } from './posts-layout'
-import type { LayoutProps } from './types'
+import { isValidDate } from './utils/date'
 
 const layoutMap = {
   post: ArticleLayout,
@@ -29,10 +28,17 @@ export default function NextraLayout({
       `nextra-theme-blog does not support the layout type "${type}" It only supports "post", "page", "posts" and "tag"`
     )
   }
+  const { date } = opts.frontMatter
+
+  if (date && !isValidDate(date)) {
+    throw new Error(
+      `Invalid date "${date}". Provide date in "YYYY/M/D", "YYYY/M/D H:m", "YYYY-MM-DD", "[YYYY-MM-DD]T[HH:mm]" or "[YYYY-MM-DD]T[HH:mm:ss.SSS]Z" format.`
+    )
+  }
 
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-      <BlogProvider config={extendedConfig} opts={opts}>
+      <BlogProvider value={{ config: extendedConfig, opts }}>
         <Layout>{children}</Layout>
       </BlogProvider>
     </ThemeProvider>
