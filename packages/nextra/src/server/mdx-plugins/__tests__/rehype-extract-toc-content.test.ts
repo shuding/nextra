@@ -433,42 +433,74 @@ export const myVar = 123
 ### 123 {myVar}
 `
       const { result } = await compileMdx(rawMdx, { mdxOptions: { jsx: true } })
-      expect(result.trim()).toMatchInlineSnapshot(`
+      const res = await clean(result, false)
+      expect(res).toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic @jsxImportSource react*/
-        const {useMDXComponents: _provideComponents} = arguments[0];
-        const frontMatter = {};
+        const { useMDXComponents: _provideComponents } = arguments[0]
+        const frontMatter = {}
         function useTOC(props) {
-          return [{
-            value: \\"bar\\",
-            id: \\"bar\\",
-            depth: 2
-          }, {
-            value: <>{\\"123 \\"}{myVar}</>,
-            id: \\"123-myvar\\",
-            depth: 3
-          }];
+          return [
+            {
+              value: 'bar',
+              id: 'bar',
+              depth: 2
+            },
+            {
+              value: (
+                <>
+                  {'123 '}
+                  {myVar}
+                </>
+              ),
+              id: '123-myvar',
+              depth: 3
+            }
+          ]
         }
         function _createMdxContent(props) {
-          const _components = Object.assign({
-            h2: \\"h2\\",
-            h3: \\"h3\\"
-          }, _provideComponents(), props.components), {Foo} = _components;
-          if (!Foo) _missingMdxReference(\\"Foo\\", true);
-          return <><_components.h2 id=\\"bar\\">{\\"bar\\"}</_components.h2>{\\"\\\\n\\"}<Foo />{\\"\\\\n\\"}<_components.h3 id=\\"123-myvar\\">{\\"123 \\"}{myVar}</_components.h3></>;
+          const _components = Object.assign(
+              {
+                h2: 'h2',
+                h3: 'h3'
+              },
+              _provideComponents(),
+              props.components
+            ),
+            { Foo } = _components
+          if (!Foo) _missingMdxReference('Foo', true)
+          return (
+            <>
+              <_components.h2 id=\\"bar\\">{'bar'}</_components.h2>
+              {'\\\\n'}
+              <Foo />
+              {'\\\\n'}
+              <_components.h3 id=\\"123-myvar\\">
+                {'123 '}
+                {myVar}
+              </_components.h3>
+            </>
+          )
         }
         return {
           frontMatter,
           useTOC,
           default: _createMdxContent
-        };
+        }
         function _missingMdxReference(id, component) {
-          throw new Error(\\"Expected \\" + (component ? \\"component\\" : \\"object\\") + \\" \`\\" + id + \\"\` to be defined: you likely forgot to import, pass, or provide it.\\");
-        }"
+          throw new Error(
+            'Expected ' +
+              (component ? 'component' : 'object') +
+              ' \`' +
+              id +
+              '\` to be defined: you likely forgot to import, pass, or provide it.'
+          )
+        }
+        "
       `)
-      expect(result).toMatch('default: _createMdxContent')
-      expect(result).toMatch('const frontMatter')
-      expect(result).toMatch('function useTOC')
-      expect(result).not.toMatch('MDXContent')
+      expect(res).toMatch('default: _createMdxContent')
+      expect(res).toMatch('const frontMatter')
+      expect(res).toMatch('function useTOC')
+      expect(res).not.toMatch('MDXContent')
     })
   })
 })
