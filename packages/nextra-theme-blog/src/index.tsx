@@ -15,11 +15,13 @@ const layoutMap = {
   tag: PostsLayout
 }
 
-const BlogLayout = ({
-  config,
+export default function NextraLayout({
   children,
-  opts
-}: LayoutProps & { children: ReactNode }): ReactElement => {
+  pageOpts,
+  themeConfig
+}: NextraThemeLayoutProps) {
+  const opts = pageOpts
+  const extendedConfig = { ...DEFAULT_THEME, ...themeConfig }
   const type = opts.frontMatter.type || 'post'
   const Layout = layoutMap[type]
   if (!Layout) {
@@ -27,24 +29,12 @@ const BlogLayout = ({
       `nextra-theme-blog does not support the layout type "${type}" It only supports "post", "page", "posts" and "tag"`
     )
   }
-  return (
-    <BlogProvider opts={opts} config={config}>
-      <Layout>{children}</Layout>
-    </BlogProvider>
-  )
-}
-
-export default function Layout({
-  children,
-  ...context
-}: NextraThemeLayoutProps) {
-  const extendedConfig = { ...DEFAULT_THEME, ...context.themeConfig }
 
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-      <BlogLayout config={extendedConfig} opts={context.pageOpts}>
-        {children}
-      </BlogLayout>
+      <BlogProvider config={extendedConfig} opts={opts}>
+        <Layout>{children}</Layout>
+      </BlogProvider>
     </ThemeProvider>
   )
 }
