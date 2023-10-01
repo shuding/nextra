@@ -1,6 +1,7 @@
 import { compile } from '@mdx-js/mdx'
 import type { VFile } from '@mdx-js/mdx/lib/compile'
 import remarkFrontmatter from 'remark-frontmatter'
+import { clean } from '../../../../__test__/test-utils.js'
 import { remarkMdxFrontMatter } from '../remark-mdx-frontmatter.js'
 
 function process(content: string): Promise<VFile> {
@@ -12,14 +13,6 @@ function process(content: string): Promise<VFile> {
 
 const YAML_FRONTMATTER = '---\nfoo: bar\n---'
 const ESM_FRONTMATTER = "export const frontMatter = { foo: 'bar' }"
-
-function trim(value: VFile): string {
-  const string = String(value)
-  return string
-    .slice(0, string.indexOf('function _createMdxContent'))
-    .replace('/*@jsxRuntime automatic @jsxImportSource react*/', '')
-    .trim()
-}
 
 describe('remarkMdxFrontMatter', () => {
   it('should throw error if both yaml/esm frontmatter are used', () => {
@@ -33,10 +26,14 @@ describe('remarkMdxFrontMatter', () => {
     const file = await process(YAML_FRONTMATTER)
 
     it('should export yaml frontmatter', () => {
-      expect(trim(file)).toMatchInlineSnapshot(`
+      expect(clean(file)).resolves.toMatchInlineSnapshot(`
         "export const frontMatter = {
-          \\"foo\\": \\"bar\\"
-        };"
+          foo: 'bar'
+        }
+        function _createMdxContent(props) {
+          return <></>
+        }
+        "
       `)
     })
 
@@ -48,10 +45,14 @@ describe('remarkMdxFrontMatter', () => {
   describe('esm frontmatter', async () => {
     const file = await process(ESM_FRONTMATTER)
     it('should export esm frontmatter', () => {
-      expect(trim(file)).toMatchInlineSnapshot(`
+      expect(clean(file)).resolves.toMatchInlineSnapshot(`
         "export const frontMatter = {
           foo: 'bar'
-        };"
+        }
+        function _createMdxContent(props) {
+          return <></>
+        }
+        "
       `)
     })
     it('should not add file.data', () => {
