@@ -1,9 +1,10 @@
 import { ThemeProvider } from 'next-themes'
 import type { NextraThemeLayoutProps } from 'nextra'
+import { MDXProvider } from 'nextra/src/client/mdx'
 import { BasicLayout } from './basic-layout'
 import { BlogProvider } from './blog-context'
 import { DEFAULT_THEME } from './constants'
-import { MDXTheme } from './mdx-theme'
+import { components } from './mdx-theme'
 import Meta from './meta'
 import Nav from './nav'
 import { PostsLayout } from './posts-layout'
@@ -38,7 +39,14 @@ export default function NextraLayout({
       <BlogProvider value={{ config, opts }}>
         <BasicLayout>
           {type === 'post' ? <Meta /> : <Nav />}
-          <MDXTheme>{children}</MDXTheme>
+          <MDXProvider
+            components={{
+              ...components,
+              ...config.components
+            }}
+          >
+            {children}
+          </MDXProvider>
           {(() => {
             switch (type) {
               case 'post':
