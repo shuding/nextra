@@ -21,39 +21,39 @@ bar[^1]
       opts
     )
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
-      "import { createElement } from \\"react\\";
-      import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
-      export const frontMatter = {};
+      "import { createElement } from 'react'
+      import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+      export const frontMatter = {}
       export function useTOC(props) {
         return [
           {
-            value: \\"foo\\",
-            id: \\"foo\\",
-            depth: 2,
-          },
-        ];
+            value: 'foo',
+            id: 'foo',
+            depth: 2
+          }
+        ]
       }
       function _createMdxContent(props) {
-        const { toc = useTOC(props) } = props;
+        const { toc = useTOC(props) } = props
         const _components = Object.assign(
           {
-            h2: \\"h2\\",
-            p: \\"p\\",
-            sup: \\"sup\\",
-            a: \\"a\\",
-            section: \\"section\\",
-            ol: \\"ol\\",
-            li: \\"li\\",
+            h2: 'h2',
+            p: 'p',
+            sup: 'sup',
+            a: 'a',
+            section: 'section',
+            ol: 'ol',
+            li: 'li'
           },
           _provideComponents(),
-          props.components,
-        );
+          props.components
+        )
         return (
           <>
             <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
-            {\\"\\\\n\\"}
+            {'\\\\n'}
             <_components.p>
-              {\\"bar\\"}
+              {'bar'}
               <_components.sup>
                 <_components.a
                   href=\\"#user-content-fn-1\\"
@@ -61,39 +61,39 @@ bar[^1]
                   data-footnote-ref
                   aria-describedby=\\"footnote-label\\"
                 >
-                  {\\"1\\"}
+                  {'1'}
                 </_components.a>
               </_components.sup>
             </_components.p>
-            {\\"\\\\n\\"}
+            {'\\\\n'}
             <_components.section data-footnotes className=\\"footnotes\\">
               <_components.h2 id=\\"footnote-label\\" className=\\"sr-only\\">
-                {\\"Footnotes\\"}
+                {'Footnotes'}
               </_components.h2>
-              {\\"\\\\n\\"}
+              {'\\\\n'}
               <_components.ol>
-                {\\"\\\\n\\"}
+                {'\\\\n'}
                 <_components.li id=\\"user-content-fn-1\\">
-                  {\\"\\\\n\\"}
+                  {'\\\\n'}
                   <_components.p>
-                    {\\"bar description \\"}
+                    {'bar description '}
                     <_components.a
                       href=\\"#user-content-fnref-1\\"
                       data-footnote-backref
                       className=\\"data-footnote-backref\\"
                       aria-label=\\"Back to content\\"
                     >
-                      {\\"↩\\"}
+                      {'↩'}
                     </_components.a>
                   </_components.p>
-                  {\\"\\\\n\\"}
+                  {'\\\\n'}
                 </_components.li>
-                {\\"\\\\n\\"}
+                {'\\\\n'}
               </_components.ol>
-              {\\"\\\\n\\"}
+              {'\\\\n'}
             </_components.section>
           </>
-        );
+        )
       }
       "
     `)
@@ -115,45 +115,45 @@ import { Steps } from 'nextra/components'
       opts
     )
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
-      "import { createElement } from \\"react\\";
-      import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
-      export const frontMatter = {};
-      import { Steps } from \\"nextra/components\\";
+      "import { createElement } from 'react'
+      import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+      export const frontMatter = {}
+      import { Steps } from 'nextra/components'
       export function useTOC(props) {
         return [
           {
-            value: \\"baz qux\\",
-            id: \\"baz-qux\\",
-            depth: 2,
+            value: 'baz qux',
+            id: 'baz-qux',
+            depth: 2
           },
           {
-            value: \\"foo bar\\",
-            id: \\"foo-bar\\",
-            depth: 3,
-          },
-        ];
+            value: 'foo bar',
+            id: 'foo-bar',
+            depth: 3
+          }
+        ]
       }
       function _createMdxContent(props) {
-        const { toc = useTOC(props) } = props;
+        const { toc = useTOC(props) } = props
         const _components = Object.assign(
           {
-            h2: \\"h2\\",
-            h3: \\"h3\\",
+            h2: 'h2',
+            h3: 'h3'
           },
           _provideComponents(),
-          props.components,
-        );
+          props.components
+        )
         return (
           <>
             <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
-            {\\"\\\\n\\"}
+            {'\\\\n'}
             <Steps>
               <div>
                 <_components.h3 id={toc[1].id}>{toc[1].value}</_components.h3>
               </div>
             </Steps>
           </>
-        );
+        )
       }
       "
     `)
@@ -189,62 +189,62 @@ export const frontMatter = {
       opts
     )
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
-      "import { createElement } from \\"react\\";
-      import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
-      export const myVar = \\"interpolated\\";
+      "import { createElement } from 'react'
+      import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+      export const myVar = 'interpolated'
       export const Test = () => {
         const _components = Object.assign(
           {
-            span: \\"span\\",
+            span: 'span'
           },
-          _provideComponents(),
-        );
-        return <_components.span>Hello</_components.span>;
-      };
+          _provideComponents()
+        )
+        return <_components.span>Hello</_components.span>
+      }
       export const frontMatter = {
-        test: \\"extract toc content\\",
-      };
+        test: 'extract toc content'
+      }
       export function useTOC(props) {
         const _components = Object.assign(
           {
-            span: \\"span\\",
-            math: \\"math\\",
-            semantics: \\"semantics\\",
-            mrow: \\"mrow\\",
-            mi: \\"mi\\",
-            annotation: \\"annotation\\",
-            code: \\"code\\",
+            span: 'span',
+            math: 'math',
+            semantics: 'semantics',
+            mrow: 'mrow',
+            mi: 'mi',
+            annotation: 'annotation',
+            code: 'code'
           },
-          _provideComponents(),
-        );
+          _provideComponents()
+        )
         return [
           {
             value: (
               <>
-                {\\"Heading \\"}
+                {'Heading '}
                 {myVar}
               </>
             ),
-            id: \\"heading-myvar\\",
-            depth: 2,
+            id: 'heading-myvar',
+            depth: 2
           },
           {
             value: (
               <>
-                {\\"Heading \\"}
+                {'Heading '}
                 <_components.span className=\\"katex\\">
                   <_components.span className=\\"katex-mathml\\">
                     <_components.math xmlns=\\"http://www.w3.org/1998/Math/MathML\\">
                       <_components.semantics>
                         <_components.mrow>
-                          <_components.mi>{\\"l\\"}</_components.mi>
-                          <_components.mi>{\\"a\\"}</_components.mi>
-                          <_components.mi>{\\"t\\"}</_components.mi>
-                          <_components.mi>{\\"e\\"}</_components.mi>
-                          <_components.mi>{\\"x\\"}</_components.mi>
+                          <_components.mi>{'l'}</_components.mi>
+                          <_components.mi>{'a'}</_components.mi>
+                          <_components.mi>{'t'}</_components.mi>
+                          <_components.mi>{'e'}</_components.mi>
+                          <_components.mi>{'x'}</_components.mi>
                         </_components.mrow>
                         <_components.annotation encoding=\\"application/x-tex\\">
-                          {\\"latex\\"}
+                          {'latex'}
                         </_components.annotation>
                       </_components.semantics>
                     </_components.math>
@@ -254,109 +254,109 @@ export const frontMatter = {
                       <_components.span
                         className=\\"strut\\"
                         style={{
-                          height: \\"0.6944em\\",
+                          height: '0.6944em'
                         }}
                       />
                       <_components.span
                         className=\\"mord mathnormal\\"
                         style={{
-                          marginRight: \\"0.01968em\\",
+                          marginRight: '0.01968em'
                         }}
                       >
-                        {\\"l\\"}
+                        {'l'}
                       </_components.span>
                       <_components.span className=\\"mord mathnormal\\">
-                        {\\"a\\"}
+                        {'a'}
                       </_components.span>
                       <_components.span className=\\"mord mathnormal\\">
-                        {\\"t\\"}
+                        {'t'}
                       </_components.span>
                       <_components.span className=\\"mord mathnormal\\">
-                        {\\"e\\"}
+                        {'e'}
                       </_components.span>
                       <_components.span className=\\"mord mathnormal\\">
-                        {\\"x\\"}
+                        {'x'}
                       </_components.span>
                     </_components.span>
                   </_components.span>
                 </_components.span>
               </>
             ),
-            id: \\"heading-latex\\",
-            depth: 3,
+            id: 'heading-latex',
+            depth: 3
           },
           {
             value: (
               <>
-                {\\"Heading \\"}
-                <_components.code>{\\"<Code />:{jsx}\\"}</_components.code>
+                {'Heading '}
+                <_components.code>{'<Code />:{jsx}'}</_components.code>
               </>
             ),
-            id: \\"heading-code-jsx\\",
-            depth: 3,
+            id: 'heading-code-jsx',
+            depth: 3
           },
           {
             value: (
               <>
                 <Test />
-                {\\" World\\"}
+                {' World'}
               </>
             ),
-            id: \\"-world\\",
-            depth: 4,
+            id: '-world',
+            depth: 4
           },
           {
-            value: \\"String\\",
-            id: \\"string\\",
-            depth: 5,
+            value: 'String',
+            id: 'string',
+            depth: 5
           },
           {
-            value: \\"123\\",
-            id: \\"123\\",
-            depth: 6,
+            value: '123',
+            id: '123',
+            depth: 6
           },
           {
-            value: \\"Dada 123 true\\",
-            id: \\"dada-123-true\\",
-            depth: 6,
-          },
-        ];
+            value: 'Dada 123 true',
+            id: 'dada-123-true',
+            depth: 6
+          }
+        ]
       }
       function _createMdxContent(props) {
-        const { toc = useTOC(props) } = props;
+        const { toc = useTOC(props) } = props
         const _components = Object.assign(
           {
-            h1: \\"h1\\",
-            h2: \\"h2\\",
-            h3: \\"h3\\",
-            h4: \\"h4\\",
-            h5: \\"h5\\",
-            h6: \\"h6\\",
+            h1: 'h1',
+            h2: 'h2',
+            h3: 'h3',
+            h4: 'h4',
+            h5: 'h5',
+            h6: 'h6'
           },
           _provideComponents(),
-          props.components,
-        );
+          props.components
+        )
         return (
           <>
-            <_components.h1>{\\"Heading 1\\"}</_components.h1>
-            {\\"\\\\n\\"}
-            {\\"\\\\n\\"}
+            <_components.h1>{'Heading 1'}</_components.h1>
+            {'\\\\n'}
+            {'\\\\n'}
             <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
-            {\\"\\\\n\\"}
+            {'\\\\n'}
             <_components.h3 id={toc[1].id}>{toc[1].value}</_components.h3>
-            {\\"\\\\n\\"}
+            {'\\\\n'}
             <_components.h3 id={toc[2].id}>{toc[2].value}</_components.h3>
-            {\\"\\\\n\\"}
-            {\\"\\\\n\\"}
+            {'\\\\n'}
+            {'\\\\n'}
             <_components.h4 id={toc[3].id}>{toc[3].value}</_components.h4>
-            {\\"\\\\n\\"}
+            {'\\\\n'}
             <_components.h5 id={toc[4].id}>{toc[4].value}</_components.h5>
-            {\\"\\\\n\\"}
+            {'\\\\n'}
             <_components.h6 id={toc[5].id}>{toc[5].value}</_components.h6>
-            {\\"\\\\n\\"}
+            {'\\\\n'}
             <_components.h6 id={toc[6].id}>{toc[6].value}</_components.h6>
           </>
-        );
+        )
       }
       "
     `)
@@ -374,38 +374,50 @@ import { RemoteContent } from 'nextra/data'
         ...opts,
         filePath: '[[...slug]].mdx'
       })
-      expect(result.trim()).toMatchInlineSnapshot(`
+      const res = await clean(result, false)
+      expect(res).toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic @jsxImportSource react*/
-        import {createElement} from \\"react\\";
-        import {useMDXComponents as _provideComponents} from \\"nextra/mdx\\";
-        import {RemoteContent} from 'nextra/data';
+        import { createElement } from 'react'
+        import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+        import { RemoteContent } from 'nextra/data'
         function _createMdxContent(props) {
-          const {toc = useTOC(props)} = props;
-          const _components = Object.assign({
-            h2: \\"h2\\"
-          }, _provideComponents(), props.components);
-          return <><_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>{\\"\\\\n\\"}<>{props.children}</></>;
+          const { toc = useTOC(props) } = props
+          const _components = Object.assign(
+            {
+              h2: 'h2'
+            },
+            _provideComponents(),
+            props.components
+          )
+          return (
+            <>
+              <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
+              {'\\\\n'}
+              <>{props.children}</>
+            </>
+          )
         }
         function MDXContent(props) {
-          const {frontMatter, useTOC, mdxContent} = RemoteContent({
+          const { frontMatter, useTOC, mdxContent } = RemoteContent({
             components: {
               Callout,
               $Tabs: Tabs
             }
-          });
-          const {wrapper} = _provideComponents(props.components);
-          const toc = useTOC(props);
+          })
+          const { wrapper } = _provideComponents(props.components)
+          const toc = useTOC(props)
           props = {
             ...props,
             toc
-          };
-          const child = createElement(_createMdxContent, props, mdxContent);
-          return wrapper ? createElement(wrapper, props, child) : child;
-        }"
+          }
+          const child = createElement(_createMdxContent, props, mdxContent)
+          return wrapper ? createElement(wrapper, props, child) : child
+        }
+        "
       `)
-      expect(result).not.toMatch('const frontMatter')
-      expect(result).not.toMatch('function useTOC')
-      expect(result).toMatch('MDXContent')
+      expect(res).not.toMatch('const frontMatter')
+      expect(res).not.toMatch('function useTOC')
+      expect(res).toMatch('MDXContent')
     })
 
     it("outputFormat: 'function-body'", async () => {
