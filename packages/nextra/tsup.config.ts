@@ -24,20 +24,8 @@ export default defineConfig([
       const clientPackageJSON = path.join(CWD, 'dist', 'client', 'package.json')
       await fs.writeFile(clientPackageJSON, '{"sideEffects":false}')
 
-      const jsxRuntimeFrom = path.join(
-        CWD,
-        'src',
-        'client',
-        'remote',
-        'jsx-runtime.cjs'
-      )
-      const jsxRuntimeTo = path.join(
-        CWD,
-        'dist',
-        'client',
-        'remote',
-        'jsx-runtime.cjs'
-      )
+      const jsxRuntimeFrom = path.join(CWD, 'src', 'client', 'jsx-runtime.cjs')
+      const jsxRuntimeTo = path.join(CWD, 'dist', 'client', 'jsx-runtime.cjs')
 
       await fs.copyFile(jsxRuntimeFrom, jsxRuntimeTo)
     }

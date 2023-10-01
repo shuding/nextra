@@ -11,6 +11,7 @@ export async function clean(content: any, minify = true): Promise<string> {
     semi: false,
     trailingComma: 'none',
     singleQuote: true,
-    printWidth: 120
+    printWidth: 120,
+    arrowParens: 'avoid'
   })
 }

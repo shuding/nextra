@@ -352,19 +352,21 @@ export const frontMatter = {
     `)
   })
 
-  describe('remote mdx', () => {
-    it("outputFormat: 'program'", async () => {
+  describe('Remote MDX', () => {
+    it("with outputFormat: 'program'", async () => {
       const rawMdx = `
 import { RemoteContent } from 'nextra/data'
 
 ## hello
 
 <RemoteContent components={{ Callout, $Tabs: Tabs }} />`
+
       const { result } = await compileMdx(rawMdx, {
         ...opts,
         filePath: '[[...slug]].mdx'
       })
       const res = await clean(result, false)
+
       expect(res).toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic @jsxImportSource react*/
         import { createElement } from 'react'
@@ -388,14 +390,13 @@ import { RemoteContent } from 'nextra/data'
           )
         }
         function MDXContent(props) {
-          const { frontMatter, useTOC, mdxContent } = RemoteContent({
+          const { frontMatter, toc, mdxContent } = RemoteContent({
             components: {
               Callout,
               $Tabs: Tabs
             }
           })
           const { wrapper } = _provideComponents(props.components)
-          const toc = useTOC(props)
           props = {
             ...props,
             toc
@@ -410,7 +411,7 @@ import { RemoteContent } from 'nextra/data'
       expect(res).toMatch('MDXContent')
     })
 
-    it("outputFormat: 'function-body'", async () => {
+    it("with outputFormat: 'function-body'", async () => {
       const rawMdx = `
 import { Foo } from 'foo'
 
@@ -420,10 +421,11 @@ import { Foo } from 'foo'
 
 export const myVar = 123
 
-### 123 {myVar}
-`
+### 123 {myVar}`
+
       const { result } = await compileMdx(rawMdx, { mdxOptions: { jsx: true } })
       const res = await clean(result, false)
+
       expect(res).toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic @jsxImportSource react*/
         const { useMDXComponents: _provideComponents } = arguments[0]
