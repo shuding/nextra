@@ -390,17 +390,19 @@ import { RemoteContent } from 'nextra/data'
         return <><_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>{\\"\\\\n\\"}<>{props.children}</></>;
       }
       function MDXContent(props) {
-        const {frontMatter, useTOC, MDXRemote} = RemoteContent();
+        const {frontMatter, useTOC, mdxContent} = RemoteContent({
+          components: {
+            Callout,
+            $Tabs: Tabs
+          }
+        });
+        const {wrapper} = _provideComponents(props.components);
         const toc = useTOC(props);
         props = {
           ...props,
           toc
         };
-        const {wrapper} = _provideComponents();
-        const child = createElement(_createMdxContent, props, <MDXRemote components={{
-          Callout,
-          $Tabs: Tabs
-        }} />);
+        const child = createElement(_createMdxContent, props, mdxContent);
         return wrapper ? createElement(wrapper, props, child) : child;
       }
       "
@@ -432,19 +434,15 @@ import { RemoteContent } from 'nextra/data'
           h2: \\"h2\\"
         }, _provideComponents(), props.components), {RemoteContent} = _components;
         if (!RemoteContent) _missingMdxReference(\\"RemoteContent\\", true);
-        return <><_components.h2 id=\\"hello\\" />{\\"\\\\n\\"}<RemoteContent components={{
+        return <><_components.h2 id=\\"hello\\">{\\"hello\\"}</_components.h2>{\\"\\\\n\\"}<RemoteContent components={{
           Callout,
           $Tabs: Tabs
         }} /></>;
       }
-      function MDXContent(props = {}) {
-        const {wrapper: MDXLayout} = Object.assign({}, _provideComponents(), props.components);
-        return MDXLayout ? <MDXLayout {...props}><_createMdxContent {...props} /></MDXLayout> : _createMdxContent(props);
-      }
       return {
         frontMatter,
         useTOC,
-        default: MDXContent
+        default: _createMdxContent
       };
       function _missingMdxReference(id, component) {
         throw new Error(\\"Expected \\" + (component ? \\"component\\" : \\"object\\") + \\" \`\\" + id + \\"\` to be defined: you likely forgot to import, pass, or provide it.\\");
