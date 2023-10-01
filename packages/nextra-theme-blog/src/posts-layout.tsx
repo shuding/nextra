@@ -1,18 +1,11 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import type { ReactElement, ReactNode } from 'react'
-import { BasicLayout } from './basic-layout'
+import type { ReactElement } from 'react'
 import { useBlogContext } from './blog-context'
-import { MDXTheme } from './mdx-theme'
-import Nav from './nav'
 import { collectPostsAndNavs } from './utils/collect'
 import getTags from './utils/get-tags'
 
-export function PostsLayout({
-  children
-}: {
-  children: ReactNode
-}): ReactElement {
+export function PostsLayout(): ReactElement {
   const { config, opts } = useBlogContext()
   const { posts } = collectPostsAndNavs({ config, opts })
   const router = useRouter()
@@ -63,11 +56,5 @@ export function PostsLayout({
       </div>
     )
   })
-  return (
-    <BasicLayout>
-      <Nav />
-      <MDXTheme>{children}</MDXTheme>
-      {postList}
-    </BasicLayout>
-  )
+  return <>{postList}</>
 }

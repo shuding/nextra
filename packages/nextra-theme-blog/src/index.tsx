@@ -1,18 +1,15 @@
 import { ThemeProvider } from 'next-themes'
 import type { NextraThemeLayoutProps } from 'nextra'
-import { ArticleLayout } from './article-layout'
+import { BasicLayout } from './basic-layout'
 import { BlogProvider } from './blog-context'
 import { DEFAULT_THEME } from './constants'
-import { PageLayout } from './page-layout'
+import { MDXTheme } from './mdx-theme'
+import Meta from './meta'
+import Nav from './nav'
 import { PostsLayout } from './posts-layout'
 import { isValidDate } from './utils/date'
 
-const layoutMap = {
-  post: ArticleLayout,
-  page: PageLayout,
-  posts: PostsLayout,
-  tag: PostsLayout
-}
+const layoutSet = new Set(['post', 'page', 'posts', 'tag'])
 
 export default function NextraLayout({
   children,
@@ -20,15 +17,15 @@ export default function NextraLayout({
   themeConfig
 }: NextraThemeLayoutProps) {
   const opts = pageOpts
-  const extendedConfig = { ...DEFAULT_THEME, ...themeConfig }
+  const config = { ...DEFAULT_THEME, ...themeConfig }
   const type = opts.frontMatter.type || 'post'
-  const Layout = layoutMap[type]
-  if (!Layout) {
+  const { date } = opts.frontMatter
+
+  if (!layoutSet.has(type)) {
     throw new Error(
       `nextra-theme-blog does not support the layout type "${type}" It only supports "post", "page", "posts" and "tag"`
     )
   }
-  const { date } = opts.frontMatter
 
   if (date && !isValidDate(date)) {
     throw new Error(
@@ -38,8 +35,25 @@ export default function NextraLayout({
 
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-      <BlogProvider value={{ config: extendedConfig, opts }}>
-        <Layout>{children}</Layout>
+      <BlogProvider value={{ config, opts }}>
+        <BasicLayout>
+          {type === 'post' ? <Meta /> : <Nav />}
+          <MDXTheme>{children}</MDXTheme>
+          {(() => {
+            switch (type) {
+              case 'post':
+                return (
+                  <>
+                    {config.postFooter}
+                    {config.comments}
+                  </>
+                )
+              case 'posts':
+              case 'tag':
+                return <PostsLayout />
+            }
+          })()}
+        </BasicLayout>
       </BlogProvider>
     </ThemeProvider>
   )
