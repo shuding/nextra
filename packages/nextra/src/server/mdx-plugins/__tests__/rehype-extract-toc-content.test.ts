@@ -361,96 +361,88 @@ export const frontMatter = {
       "
     `)
   })
-  it('should work with remote content', async () => {
-    const { result } = await compileMdx(
-      `
+
+  describe('remote mdx', () => {
+    const rawMdx = `
 import { RemoteContent } from 'nextra/data'
 
 ## hello
 
-<RemoteContent components={{ Callout, $Tabs: Tabs }} />
-    `,
-      opts
-    )
-    expect(result).toMatchInlineSnapshot(`
-      "/*@jsxRuntime automatic @jsxImportSource react*/
-      import {createElement} from \\"react\\";
-      import {useMDXComponents as _provideComponents} from \\"nextra/mdx\\";
-      export const frontMatter = {};
-      import {RemoteContent} from 'nextra/data';
-      export function useTOC(props) {
-        return [{
-          value: \\"hello\\",
-          id: \\"hello\\",
-          depth: 2
-        }];
-      }
-      function _createMdxContent(props) {
-        const {toc = useTOC(props)} = props;
-        const _components = Object.assign({
-          h2: \\"h2\\"
-        }, _provideComponents(), props.components);
-        return <><_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>{\\"\\\\n\\"}<>{props.children}</></>;
-      }
-      function MDXContent(props) {
-        const {frontMatter, useTOC, mdxContent} = RemoteContent({
-          components: {
+<RemoteContent components={{ Callout, $Tabs: Tabs }} />`
+
+    it("outputFormat: 'function-body'", async () => {
+      const { result } = await compileMdx(rawMdx, opts)
+      expect(result.trim()).toMatchInlineSnapshot(`
+        "/*@jsxRuntime automatic @jsxImportSource react*/
+        import {createElement} from \\"react\\";
+        import {useMDXComponents as _provideComponents} from \\"nextra/mdx\\";
+        export const frontMatter = {};
+        import {RemoteContent} from 'nextra/data';
+        export function useTOC(props) {
+          return [{
+            value: \\"hello\\",
+            id: \\"hello\\",
+            depth: 2
+          }];
+        }
+        function _createMdxContent(props) {
+          const {toc = useTOC(props)} = props;
+          const _components = Object.assign({
+            h2: \\"h2\\"
+          }, _provideComponents(), props.components);
+          return <><_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>{\\"\\\\n\\"}<>{props.children}</></>;
+        }
+        function MDXContent(props) {
+          const {frontMatter, useTOC, mdxContent} = RemoteContent({
+            components: {
+              Callout,
+              $Tabs: Tabs
+            }
+          });
+          const {wrapper} = _provideComponents(props.components);
+          const toc = useTOC(props);
+          props = {
+            ...props,
+            toc
+          };
+          const child = createElement(_createMdxContent, props, mdxContent);
+          return wrapper ? createElement(wrapper, props, child) : child;
+        }"
+      `)
+    })
+
+    it("outputFormat: 'program'", async () => {
+      const { result } = await compileMdx(rawMdx, { mdxOptions: { jsx: true } })
+      expect(result.trim()).toMatchInlineSnapshot(`
+        "/*@jsxRuntime automatic @jsxImportSource react*/
+        const {useMDXComponents: _provideComponents} = arguments[0];
+        const frontMatter = {};
+        function useTOC(props) {
+          return [{
+            value: \\"hello\\",
+            id: \\"hello\\",
+            depth: 2
+          }];
+        }
+        function _createMdxContent(props) {
+          const _components = Object.assign({
+            h2: \\"h2\\"
+          }, _provideComponents(), props.components), {RemoteContent} = _components;
+          if (!RemoteContent) _missingMdxReference(\\"RemoteContent\\", true);
+          return <><_components.h2 id=\\"hello\\">{\\"hello\\"}</_components.h2>{\\"\\\\n\\"}<RemoteContent components={{
             Callout,
             $Tabs: Tabs
-          }
-        });
-        const {wrapper} = _provideComponents(props.components);
-        const toc = useTOC(props);
-        props = {
-          ...props,
-          toc
+          }} /></>;
+        }
+        return {
+          frontMatter,
+          useTOC,
+          default: _createMdxContent
         };
-        const child = createElement(_createMdxContent, props, mdxContent);
-        return wrapper ? createElement(wrapper, props, child) : child;
-      }
-      "
-    `)
-  })
-
-  it('should work with remote content2', async () => {
-    const { result } = await compileMdx(
-      `
-## hello
-
-<RemoteContent components={{ Callout, $Tabs: Tabs }} />
-    `,
-      { mdxOptions: { jsx: true } }
-    )
-    expect(result).toMatchInlineSnapshot(`
-      "/*@jsxRuntime automatic @jsxImportSource react*/
-      const {useMDXComponents: _provideComponents} = arguments[0];
-      const frontMatter = {};
-      function useTOC(props) {
-        return [{
-          value: \\"hello\\",
-          id: \\"hello\\",
-          depth: 2
-        }];
-      }
-      function _createMdxContent(props) {
-        const _components = Object.assign({
-          h2: \\"h2\\"
-        }, _provideComponents(), props.components), {RemoteContent} = _components;
-        if (!RemoteContent) _missingMdxReference(\\"RemoteContent\\", true);
-        return <><_components.h2 id=\\"hello\\">{\\"hello\\"}</_components.h2>{\\"\\\\n\\"}<RemoteContent components={{
-          Callout,
-          $Tabs: Tabs
-        }} /></>;
-      }
-      return {
-        frontMatter,
-        useTOC,
-        default: _createMdxContent
-      };
-      function _missingMdxReference(id, component) {
-        throw new Error(\\"Expected \\" + (component ? \\"component\\" : \\"object\\") + \\" \`\\" + id + \\"\` to be defined: you likely forgot to import, pass, or provide it.\\");
-      }
-      "
-    `)
+        function _missingMdxReference(id, component) {
+          throw new Error(\\"Expected \\" + (component ? \\"component\\" : \\"object\\") + \\" \`\\" + id + \\"\` to be defined: you likely forgot to import, pass, or provide it.\\");
+        }"
+      `)
+    })
   })
 })
