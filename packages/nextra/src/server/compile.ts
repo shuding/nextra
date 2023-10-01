@@ -255,7 +255,7 @@ export async function compileMdx(
         ] satisfies Pluggable,
         isRemoteContent && remarkRemoveImports,
         remarkFrontmatter, // parse and attach yaml node
-        [remarkMdxFrontMatter, { isRemoteContent }] satisfies Pluggable,
+        [remarkMdxFrontMatter] satisfies Pluggable,
         remarkGfm,
         format !== 'md' &&
           ([
