@@ -363,28 +363,22 @@ export const frontMatter = {
   })
 
   describe('remote mdx', () => {
-    const rawMdx = `
+    it("outputFormat: 'program'", async () => {
+      const rawMdx = `
 import { RemoteContent } from 'nextra/data'
 
 ## hello
 
 <RemoteContent components={{ Callout, $Tabs: Tabs }} />`
-
-    it("outputFormat: 'function-body'", async () => {
-      const { result } = await compileMdx(rawMdx, opts)
+      const { result } = await compileMdx(rawMdx, {
+        ...opts,
+        filePath: '[[...slug]].mdx'
+      })
       expect(result.trim()).toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic @jsxImportSource react*/
         import {createElement} from \\"react\\";
         import {useMDXComponents as _provideComponents} from \\"nextra/mdx\\";
-        export const frontMatter = {};
         import {RemoteContent} from 'nextra/data';
-        export function useTOC(props) {
-          return [{
-            value: \\"hello\\",
-            id: \\"hello\\",
-            depth: 2
-          }];
-        }
         function _createMdxContent(props) {
           const {toc = useTOC(props)} = props;
           const _components = Object.assign({
@@ -409,9 +403,23 @@ import { RemoteContent } from 'nextra/data'
           return wrapper ? createElement(wrapper, props, child) : child;
         }"
       `)
+      expect(result).not.toMatch('const frontMatter')
+      expect(result).not.toMatch('function useTOC')
+      expect(result).toMatch('MDXContent')
     })
 
-    it("outputFormat: 'program'", async () => {
+    it("outputFormat: 'function-body'", async () => {
+      const rawMdx = `
+import { Foo } from 'foo'
+
+## bar
+
+<Foo />
+
+export const myVar = 123
+
+### 123 {myVar}
+`
       const { result } = await compileMdx(rawMdx, { mdxOptions: { jsx: true } })
       expect(result.trim()).toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic @jsxImportSource react*/
@@ -419,20 +427,22 @@ import { RemoteContent } from 'nextra/data'
         const frontMatter = {};
         function useTOC(props) {
           return [{
-            value: \\"hello\\",
-            id: \\"hello\\",
+            value: \\"bar\\",
+            id: \\"bar\\",
             depth: 2
+          }, {
+            value: <>{\\"123 \\"}{myVar}</>,
+            id: \\"123-myvar\\",
+            depth: 3
           }];
         }
         function _createMdxContent(props) {
           const _components = Object.assign({
-            h2: \\"h2\\"
-          }, _provideComponents(), props.components), {RemoteContent} = _components;
-          if (!RemoteContent) _missingMdxReference(\\"RemoteContent\\", true);
-          return <><_components.h2 id=\\"hello\\">{\\"hello\\"}</_components.h2>{\\"\\\\n\\"}<RemoteContent components={{
-            Callout,
-            $Tabs: Tabs
-          }} /></>;
+            h2: \\"h2\\",
+            h3: \\"h3\\"
+          }, _provideComponents(), props.components), {Foo} = _components;
+          if (!Foo) _missingMdxReference(\\"Foo\\", true);
+          return <><_components.h2 id=\\"bar\\">{\\"bar\\"}</_components.h2>{\\"\\\\n\\"}<Foo />{\\"\\\\n\\"}<_components.h3 id=\\"123-myvar\\">{\\"123 \\"}{myVar}</_components.h3></>;
         }
         return {
           frontMatter,
@@ -443,6 +453,10 @@ import { RemoteContent } from 'nextra/data'
           throw new Error(\\"Expected \\" + (component ? \\"component\\" : \\"object\\") + \\" \`\\" + id + \\"\` to be defined: you likely forgot to import, pass, or provide it.\\");
         }"
       `)
+      expect(result).toMatch('default: _createMdxContent')
+      expect(result).toMatch('const frontMatter')
+      expect(result).toMatch('function useTOC')
+      expect(result).not.toMatch('MDXContent')
     })
   })
 })
