@@ -10,6 +10,7 @@ export async function clean(content: any, minify = true): Promise<string> {
     parser: 'typescript',
     semi: false,
     trailingComma: 'none',
-    singleQuote: true
+    singleQuote: true,
+    printWidth: 120
   })
 }

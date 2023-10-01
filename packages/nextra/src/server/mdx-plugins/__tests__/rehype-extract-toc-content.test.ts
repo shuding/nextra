@@ -243,9 +243,7 @@ export const frontMatter = {
                           <_components.mi>{'e'}</_components.mi>
                           <_components.mi>{'x'}</_components.mi>
                         </_components.mrow>
-                        <_components.annotation encoding=\\"application/x-tex\\">
-                          {'latex'}
-                        </_components.annotation>
+                        <_components.annotation encoding=\\"application/x-tex\\">{'latex'}</_components.annotation>
                       </_components.semantics>
                     </_components.math>
                   </_components.span>
@@ -265,18 +263,10 @@ export const frontMatter = {
                       >
                         {'l'}
                       </_components.span>
-                      <_components.span className=\\"mord mathnormal\\">
-                        {'a'}
-                      </_components.span>
-                      <_components.span className=\\"mord mathnormal\\">
-                        {'t'}
-                      </_components.span>
-                      <_components.span className=\\"mord mathnormal\\">
-                        {'e'}
-                      </_components.span>
-                      <_components.span className=\\"mord mathnormal\\">
-                        {'x'}
-                      </_components.span>
+                      <_components.span className=\\"mord mathnormal\\">{'a'}</_components.span>
+                      <_components.span className=\\"mord mathnormal\\">{'t'}</_components.span>
+                      <_components.span className=\\"mord mathnormal\\">{'e'}</_components.span>
+                      <_components.span className=\\"mord mathnormal\\">{'x'}</_components.span>
                     </_components.span>
                   </_components.span>
                 </_components.span>
