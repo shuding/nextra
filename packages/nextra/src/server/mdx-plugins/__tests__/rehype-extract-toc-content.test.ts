@@ -21,7 +21,8 @@ bar[^1]
       opts
     )
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
-      "import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
+      "import { createElement } from \\"react\\";
+      import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
       export const frontMatter = {};
       export function useTOC(props) {
         return [
@@ -114,7 +115,8 @@ import { Steps } from 'nextra/components'
       opts
     )
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
-      "import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
+      "import { createElement } from \\"react\\";
+      import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
       export const frontMatter = {};
       import { Steps } from \\"nextra/components\\";
       export function useTOC(props) {
@@ -187,7 +189,8 @@ export const frontMatter = {
       opts
     )
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
-      "import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
+      "import { createElement } from \\"react\\";
+      import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
       export const myVar = \\"interpolated\\";
       export const Test = () => {
         const _components = Object.assign(
