@@ -28,16 +28,16 @@ describe('rehypeIcon', () => {
 
     const { value } = await process(raw)
     expect(clean(value)).resolves.toMatchInlineSnapshot(`
-      "import { CssIcon } from \\"nextra/icons\\";
+      "import { CssIcon } from 'nextra/icons'
       function _createMdxContent(props) {
         const _components = Object.assign(
           {
-            pre: \\"pre\\",
-            code: \\"code\\",
-            span: \\"span\\",
+            pre: 'pre',
+            code: 'code',
+            span: 'span'
           },
-          props.components,
-        );
+          props.components
+        )
         return (
           <>
             <_components.pre icon={CssIcon} data-language=\\"css\\" data-copy=\\"\\">
@@ -45,14 +45,14 @@ describe('rehypeIcon', () => {
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
-            {\\"\\\\n\\"}
+            {'\\\\n'}
             <_components.pre icon={CssIcon} data-language=\\"css\\" data-copy=\\"\\">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
           </>
-        );
+        )
       }
       "
     `)
@@ -62,21 +62,21 @@ describe('rehypeIcon', () => {
 
     const { value } = await process(raw)
     expect(clean(value)).resolves.toMatchInlineSnapshot(`
-      "import { JavaScriptIcon } from \\"nextra/icons\\";
-      import { TypeScriptIcon } from \\"nextra/icons\\";
-      import { MarkdownIcon } from \\"nextra/icons\\";
-      import { MdxIcon } from \\"nextra/icons\\";
-      import { TerminalIcon } from \\"nextra/icons\\";
-      import { CssIcon } from \\"nextra/icons\\";
+      "import { JavaScriptIcon } from 'nextra/icons'
+      import { TypeScriptIcon } from 'nextra/icons'
+      import { MarkdownIcon } from 'nextra/icons'
+      import { MdxIcon } from 'nextra/icons'
+      import { TerminalIcon } from 'nextra/icons'
+      import { CssIcon } from 'nextra/icons'
       function _createMdxContent(props) {
         const _components = Object.assign(
           {
-            pre: \\"pre\\",
-            code: \\"code\\",
-            span: \\"span\\",
+            pre: 'pre',
+            code: 'code',
+            span: 'span'
           },
-          props.components,
-        );
+          props.components
+        )
         return (
           <>
             <_components.pre icon={JavaScriptIcon} data-language=\\"js\\" data-copy=\\"\\">
@@ -84,56 +84,56 @@ describe('rehypeIcon', () => {
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
-            {\\"\\\\n\\"}
+            {'\\\\n'}
             <_components.pre icon={JavaScriptIcon} data-language=\\"jsx\\" data-copy=\\"\\">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
-            {\\"\\\\n\\"}
+            {'\\\\n'}
             <_components.pre icon={TypeScriptIcon} data-language=\\"ts\\" data-copy=\\"\\">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
-            {\\"\\\\n\\"}
+            {'\\\\n'}
             <_components.pre icon={TypeScriptIcon} data-language=\\"tsx\\" data-copy=\\"\\">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
-            {\\"\\\\n\\"}
+            {'\\\\n'}
             <_components.pre icon={MarkdownIcon} data-language=\\"md\\" data-copy=\\"\\">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
-            {\\"\\\\n\\"}
+            {'\\\\n'}
             <_components.pre icon={MdxIcon} data-language=\\"mdx\\" data-copy=\\"\\">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
-            {\\"\\\\n\\"}
+            {'\\\\n'}
             <_components.pre icon={TerminalIcon} data-language=\\"sh\\" data-copy=\\"\\">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
-            {\\"\\\\n\\"}
+            {'\\\\n'}
             <_components.pre icon={TerminalIcon} data-language=\\"bash\\" data-copy=\\"\\">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
-            {\\"\\\\n\\"}
+            {'\\\\n'}
             <_components.pre icon={CssIcon} data-language=\\"css\\" data-copy=\\"\\">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
           </>
-        );
+        )
       }
       "
     `)

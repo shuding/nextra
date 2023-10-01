@@ -1,50 +1,52 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Process heading > code-h1 1`] = `
-"import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
-export const frontMatter = {};
+"import { createElement } from 'react'
+import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+export const frontMatter = {}
 export function useTOC(props) {
-  return [];
+  return []
 }
 function _createMdxContent(props) {
   const _components = Object.assign(
     {
-      h1: \\"h1\\",
-      code: \\"code\\",
+      h1: 'h1',
+      code: 'code'
     },
     _provideComponents(),
-    props.components,
-  );
+    props.components
+  )
   return (
     <_components.h1>
-      <_components.code>{\\"codegen.yml\\"}</_components.code>
+      <_components.code>{'codegen.yml'}</_components.code>
     </_components.h1>
-  );
+  )
 }
 "
 `;
 
 exports[`Process heading > code-with-text-h1 1`] = `
-"import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
-export const frontMatter = {};
+"import { createElement } from 'react'
+import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+export const frontMatter = {}
 export function useTOC(props) {
-  return [];
+  return []
 }
 function _createMdxContent(props) {
   const _components = Object.assign(
     {
-      h1: \\"h1\\",
-      code: \\"code\\",
+      h1: 'h1',
+      code: 'code'
     },
     _provideComponents(),
-    props.components,
-  );
+    props.components
+  )
   return (
     <_components.h1>
-      <_components.code>{\\"codegen.yml\\"}</_components.code>
-      {\\" file\\"}
+      <_components.code>{'codegen.yml'}</_components.code>
+      {' file'}
     </_components.h1>
-  );
+  )
 }
 "
 `;
@@ -53,31 +55,32 @@ exports[`Process heading > dynamic-h1 1`] = `
 {
   "frontMatter": {},
   "hasJsxInH1": true,
-  "result": "import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
-export const frontMatter = {};
-import { useRouter } from \\"next/router\\";
+  "result": "import { createElement } from 'react'
+import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+export const frontMatter = {}
+import { useRouter } from 'next/router'
 export const TagName = () => {
-  const { tag } = useRouter().query;
-  return tag || null;
-};
+  const { tag } = useRouter().query
+  return tag || null
+}
 export function useTOC(props) {
-  return [];
+  return []
 }
 function _createMdxContent(props) {
   const _components = Object.assign(
     {
-      h1: \\"h1\\",
+      h1: 'h1'
     },
     _provideComponents(),
-    props.components,
-  );
+    props.components
+  )
   return (
     <_components.h1>
-      {\\"Posts Tagged with “\\"}
+      {'Posts Tagged with “'}
       <TagName />
-      {\\"”\\"}
+      {'”'}
     </_components.h1>
-  );
+  )
 }
 ",
   "title": "Posts Tagged with “”",
@@ -85,46 +88,48 @@ function _createMdxContent(props) {
 `;
 
 exports[`Process heading > no-h1 1`] = `
-"import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
-export const frontMatter = {};
+"import { createElement } from 'react'
+import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+export const frontMatter = {}
 export function useTOC(props) {
   return [
     {
-      value: \\"H2\\",
-      id: \\"h2\\",
-      depth: 2,
-    },
-  ];
+      value: 'H2',
+      id: 'h2',
+      depth: 2
+    }
+  ]
 }
 function _createMdxContent(props) {
-  const { toc = useTOC(props) } = props;
+  const { toc = useTOC(props) } = props
   const _components = Object.assign(
     {
-      h2: \\"h2\\",
+      h2: 'h2'
     },
     _provideComponents(),
-    props.components,
-  );
-  return <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>;
+    props.components
+  )
+  return <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
 }
 "
 `;
 
 exports[`Process heading > static-h1 1`] = `
-"import { useMDXComponents as _provideComponents } from \\"nextra/mdx\\";
-export const frontMatter = {};
+"import { createElement } from 'react'
+import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+export const frontMatter = {}
 export function useTOC(props) {
-  return [];
+  return []
 }
 function _createMdxContent(props) {
   const _components = Object.assign(
     {
-      h1: \\"h1\\",
+      h1: 'h1'
     },
     _provideComponents(),
-    props.components,
-  );
-  return <_components.h1>{\\"Hello World\\"}</_components.h1>;
+    props.components
+  )
+  return <_components.h1>{'Hello World'}</_components.h1>
 }
 "
 `;
