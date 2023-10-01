@@ -60,9 +60,8 @@ export type Heading = {
   id: string
 }
 
-export type PageOpts<FrontMatterType = FrontMatter> = {
+export type PageOpts = {
   filePath: string
-  frontMatter: FrontMatterType
   pageMap: PageMapItem[]
   title: string
   hasJsxInH1?: boolean
@@ -94,7 +93,7 @@ export type NextraThemeLayoutProps = {
   children: ReactNode
 }
 
-export type NextraMDXContent = FC<{ toc?: Heading[] }>
+export type NextraMDXContent = FC<{ toc?: Heading[], frontMatter: Record<string, any> }>
 
 export type NextraInternalGlobal = typeof globalThis & {
   [NEXTRA_INTERNAL]: {

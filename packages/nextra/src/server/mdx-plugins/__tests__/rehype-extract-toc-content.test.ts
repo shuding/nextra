@@ -399,7 +399,8 @@ import { RemoteContent } from 'nextra/data'
           const { wrapper } = _provideComponents(props.components)
           props = {
             ...props,
-            toc
+            toc,
+            frontMatter
           }
           const child = createElement(_createMdxContent, props, mdxContent)
           return wrapper ? createElement(wrapper, props, child) : child
@@ -430,6 +431,7 @@ export const myVar = 123
         "/*@jsxRuntime automatic @jsxImportSource react*/
         const { useMDXComponents: _provideComponents } = arguments[0]
         const frontMatter = {}
+        const myVar = 123
         function useTOC(props) {
           return [
             {
@@ -466,6 +468,7 @@ export const myVar = 123
               {'\\\\n'}
               <Foo />
               {'\\\\n'}
+              {'\\\\n'}
               <_components.h3 id=\\"123-myvar\\">
                 {'123 '}
                 {myVar}
@@ -475,6 +478,7 @@ export const myVar = 123
         }
         return {
           frontMatter,
+          myVar,
           useTOC,
           default: _createMdxContent
         }

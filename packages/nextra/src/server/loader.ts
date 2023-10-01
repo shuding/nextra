@@ -220,15 +220,15 @@ export default _createMdxContent`
   const stringifiedPageOpts = JSON.stringify(pageOpts).slice(0, -1)
   const pageMapPath = path.join(CHUNKS_DIR, `nextra-page-map-${locale}.mjs`)
 
-  const rawJs = `import { setupNextraPage, HOC_MDXContent } from 'nextra/setup-page'
+  const rawJs = `import { setupNextraPage } from 'nextra/setup-page'
 import { pageMap } from '${pageMapPath}'
 ${isAppFileFromNodeModules ? cssImports : ''}
 ${finalResult}
 
 export default setupNextraPage(
-  HOC_MDXContent(_createMdxContent, _provideComponents, useTOC),
+  MDXContent,
   '${route}',
-  ${stringifiedPageOpts},pageMap,frontMatter}
+  ${stringifiedPageOpts},pageMap}
 )`
 
   return rawJs
