@@ -21,6 +21,7 @@ export const Test = ({value}) => value
     )
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
       "const { useMDXComponents: _provideComponents } = arguments[0]
+      const title = ''
       const frontMatter = {}
       const myVar = 123
       const Test = ({ value }) => value
@@ -52,6 +53,7 @@ export const Test = ({value}) => value
         )
       }
       return {
+        title,
         frontMatter,
         myVar,
         Test,

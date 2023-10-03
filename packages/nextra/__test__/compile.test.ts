@@ -55,6 +55,7 @@ export const TagName = () => {
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
       "import { createElement } from 'react'
       import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+      export const title = 'My Header [#test-id]'
       export const frontMatter = {}
       export function useTOC(props) {
         return [
@@ -130,6 +131,7 @@ export const TagName = () => {
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
       "import { createElement } from 'react'
       import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+      export const title = ''
       export const frontMatter = {}
       export function useTOC(props) {
         return [
@@ -192,6 +194,7 @@ import Last from './three.mdx'
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
       "import { createElement } from 'react'
       import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+      export const title = ''
       export const frontMatter = {}
       import FromMdx, { useTOC as useTOC0 } from './one.mdx'
       import FromMarkdown, { useTOC as useTOC1 } from './two.md'
