@@ -102,12 +102,9 @@ export const remarkHeadings: Plugin<
     )
 
     file.data.hasJsxInH1 = hasJsxInH1
-
     file.data.toc = headings
     if (isRemoteContent) {
-      // Attach headings for remote content, because we can't access to `useTOC` fn
       file.data.headings = headings
-      return
     }
   }
 }

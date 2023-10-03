@@ -8,14 +8,14 @@ export async function buildDynamicMDX(
     throw new Error('`remarkLinkRewriteOptions` was removed')
   }
 
-  const { result, frontMatter, title } = await compileMdx(
+  const { result, frontMatter, title, toc } = await compileMdx(
     content,
     compileMdxOptions
   )
 
   return {
     __nextra_dynamic_mdx: result,
-    __nextra_dynamic_opts: { frontMatter, title }
+    __nextra_dynamic_opts: { frontMatter, title, toc }
   }
 }
 

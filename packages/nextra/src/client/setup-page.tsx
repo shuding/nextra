@@ -5,6 +5,7 @@
 
 import { useRouter } from 'next/router'
 import type { FC, ReactElement, ReactNode } from 'react'
+import { createElement } from 'react'
 import { NEXTRA_INTERNAL } from '../constants.js'
 import { normalizePageRoute, pageTitleFromFilename } from '../server/utils.js'
 import type {
@@ -186,7 +187,8 @@ function NextraLayout({
   return (
     <Layout themeConfig={themeConfig} pageOpts={pageOpts} pageProps={props}>
       <DataProvider value={props}>
-        <pageContext.Content />
+        {/* @ts-expect-error */}
+        <pageContext.Content toc={__nextra_dynamic_opts?.toc} />
       </DataProvider>
     </Layout>
   )
@@ -203,19 +205,11 @@ export const HOC_MDXContent = (
     children: ReactNode
     components: Components
   }) {
-    const toc = useTOC(props)
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const { toc = useTOC(props) } = props
     props = { ...props, toc }
 
-    const { wrapper: MDXLayout } = {
-      ..._provideComponents(),
-      ...props.components
-    }
-
-    return MDXLayout ? (
-      <MDXLayout {...props}>
-        <_createMdxContent {...props} />
-      </MDXLayout>
-    ) : (
-      _createMdxContent(props)
-    )
+    const { wrapper } = _provideComponents()
+    const child = createElement(_createMdxContent)
+    return wrapper ? createElement(wrapper, props, child) : child
   }

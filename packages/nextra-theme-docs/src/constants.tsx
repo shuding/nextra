@@ -105,10 +105,10 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     )
   },
   head: function useHead() {
-    const config = useConfig()
+    const { frontMatter, title: pageTitle } = useConfig()
 
-    const title = `${config.title} – Nextra`
-    const { description, canonical, image } = config.frontMatter
+    const title = `${pageTitle} – Nextra`
+    const { description, canonical, image } = frontMatter
     return (
       <>
         <title>{title}</title>

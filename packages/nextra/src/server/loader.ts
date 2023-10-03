@@ -196,7 +196,7 @@ export default _createMdxContent`
     filePath: slash(path.relative(CWD, mdxPath)),
     hasJsxInH1,
     timestamp,
-    readingTime,
+    readingTime
   }
   if (transformPageOpts) {
     // It is possible that a theme wants to attach customized data, or modify
@@ -210,15 +210,19 @@ export default _createMdxContent`
   const stringifiedPageOpts = JSON.stringify(pageOpts).slice(0, -1)
   const pageMapPath = path.join(CHUNKS_DIR, `nextra-page-map-${locale}.mjs`)
 
-  const rawJs = `import { setupNextraPage } from 'nextra/setup-page'
+  const isDynamicPage = route.includes('[')
+
+  const rawJs = `import { setupNextraPage, HOC_MDXContent } from 'nextra/setup-page'
 import { pageMap } from '${pageMapPath}'
 ${isAppFileFromNodeModules ? cssImports : ''}
 ${finalResult}
 
 export default setupNextraPage(
-  MDXContent,
+  HOC_MDXContent(_createMdxContent,_provideComponents${
+    isDynamicPage ? '' : ',useTOC'
+  }),
   '${route}',
-  ${stringifiedPageOpts},pageMap}
+  ${stringifiedPageOpts},pageMap${isDynamicPage ? '' : ',frontMatter,title'}}
 )`
 
   return rawJs

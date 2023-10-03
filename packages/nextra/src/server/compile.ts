@@ -214,19 +214,25 @@ export async function compileMdx(
       structurizedData: StructurizedData
       title?: string
       frontMatter: FrontMatter
+      headings: Heading[]
     } & Pick<PageOpts, 'hasJsxInH1'>
 
-    const { hasJsxInH1, readingTime, structurizedData, title } = data
-    let { frontMatter } = data
+    const {
+      readingTime,
+      structurizedData,
+      title,
+      frontMatter,
+      headings,
+      hasJsxInH1
+    } = data
     // https://github.com/shuding/nextra/issues/1032
     const result = String(vFile).replaceAll('__esModule', '_\\_esModule')
 
-    if (!title) {
+    if (typeof title !== 'string') {
       logger.error('`title` is not defined')
     }
     if (!frontMatter) {
       logger.error('`frontMatter` is not defined')
-      frontMatter = {}
     }
 
     if (frontMatter.mdxOptions) {
@@ -239,7 +245,7 @@ export async function compileMdx(
       ...(hasJsxInH1 && { hasJsxInH1 }),
       ...(readingTime && { readingTime }),
       ...(searchIndexKey !== null && { searchIndexKey, structurizedData }),
-      ...(isRemoteContent && { toc: vFile.data.headings }),
+      ...(isRemoteContent && { toc: headings }),
       frontMatter
     }
   } catch (err) {
@@ -267,7 +273,6 @@ export async function compileMdx(
         isRemoteContent && remarkRemoveImports,
         remarkFrontmatter, // parse and attach yaml node
         [remarkMdxFrontMatter] satisfies Pluggable,
-        remarkMdxTitle,
         remarkGfm,
         format !== 'md' &&
           ([
@@ -276,6 +281,7 @@ export async function compileMdx(
             { whiteList: ['details', 'summary'] }
           ] satisfies Pluggable),
         remarkCustomHeadingId,
+        remarkMdxTitle,
         [remarkHeadings, { isRemoteContent }] satisfies Pluggable,
         // structurize should be before `remarkHeadings` because we attach #id attribute to heading node
         search && ([remarkStructurize, search] satisfies Pluggable),
