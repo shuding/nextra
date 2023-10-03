@@ -1,9 +1,10 @@
+import path from 'node:path'
 import type { Property } from 'estree'
 import type { MdxjsEsm } from 'hast-util-to-estree/lib/handlers/mdxjs-esm'
 import type { Root } from 'mdast'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
-import { createAstExportConst } from '../utils.js'
+import { createAstExportConst, pageTitleFromFilename } from '../utils.js'
 import { getFlattenedValue } from './remark-headings.js'
 
 function getFrontMatterASTObject(node: MdxjsEsm): Property[] {
@@ -11,7 +12,7 @@ function getFrontMatterASTObject(node: MdxjsEsm): Property[] {
   return (n as any).declaration.declarations[0].init.properties
 }
 
-export const remarkMdxTitle: Plugin<[], Root> = () => ast => {
+export const remarkMdxTitle: Plugin<[], Root> = () => (ast, file) => {
   let title = ''
   const frontMatterNode = ast.children.find((node: MdxjsEsm) => {
     if (node.type !== 'mdxjsEsm') return
@@ -39,6 +40,10 @@ export const remarkMdxTitle: Plugin<[], Root> = () => ast => {
       // Stop traversing immediately
       return false
     })
+  }
+  if (!title) {
+    const [filePath] = file.history
+    title = pageTitleFromFilename(path.parse(filePath).name)
   }
 
   ast.children.unshift({

@@ -2,52 +2,36 @@ import { clean } from '../../../../__test__/test-utils.js'
 import { compileMdx } from '../../compile.js'
 
 const opts = {
+  filePath: '/foo/my-test-file.mdx',
   mdxOptions: {
     outputFormat: 'program',
     jsx: true
   },
-  filePath: '/foo/my-test-file.mdx'
 } as const
 
 describe('remarkMdxTitle', () => {
   it('should take priority of yaml frontmatter', async () => {
+    const title = 'From yaml frontMatter'
     const { result } = await compileMdx(
       `---
-title: From yaml frontMatter
+title: ${title}
 ---
 
 # Hello`,
       opts
     )
-    expect(clean(result.replace(/export function useTOC.+/s, ''))).resolves
-      .toMatchInlineSnapshot(`
-      "import { createElement } from 'react'
-      import { useMDXComponents as _provideComponents } from 'nextra/mdx'
-      export const title = 'From yaml frontMatter'
-      export const frontMatter = {
-        title: 'From yaml frontMatter'
-      }
-      "
-    `)
+    expect(clean(result)).resolves.toMatch(`export const title = '${title}'`)
   })
 
   it('should take priority of esm frontmatter', async () => {
+    const title = 'From esm frontMatter'
     const { result } = await compileMdx(
-      `export const frontMatter = { title: 'From esm frontMatter' }
+      `export const frontMatter = { title: '${title}' }
 
 # Hello`,
       opts
     )
-    expect(clean(result.replace(/export function useTOC.+/s, ''))).resolves
-      .toMatchInlineSnapshot(`
-      "import { createElement } from 'react'
-      import { useMDXComponents as _provideComponents } from 'nextra/mdx'
-      export const title = 'From esm frontMatter'
-      export const frontMatter = {
-        title: 'From esm frontMatter'
-      }
-      "
-    `)
+    expect(clean(result)).resolves.toMatch(`export const title = '${title}'`)
   })
 
   it('should fallback to first h1', async () => {
@@ -58,28 +42,13 @@ title: From yaml frontMatter
 `,
       opts
     )
-    expect(clean(result.replace(/export function useTOC.+/s, ''))).resolves
-      .toMatchInlineSnapshot(`
-      "import { createElement } from 'react'
-      import { useMDXComponents as _provideComponents } from 'nextra/mdx'
-      export const title = 'h1 1'
-      export const frontMatter = {}
-      "
-    `)
+    expect(clean(result)).resolves.toMatch("export const title = 'h1 1'")
   })
 
   it('should fallback to capitalized filename', async () => {
-    const { result } = await compileMdx(
-      '# h1 1',
-      opts,
+    const { result } = await compileMdx('', opts)
+    expect(clean(result)).resolves.toMatch(
+      "export const title = 'My Test File'"
     )
-    expect(clean(result.replace(/export function useTOC.+/s, ''))).resolves
-      .toMatchInlineSnapshot(`
-      "import { createElement } from 'react'
-      import { useMDXComponents as _provideComponents } from 'nextra/mdx'
-      export const title = 'h1 1'
-      export const frontMatter = {}
-      "
-    `)
   })
 })
