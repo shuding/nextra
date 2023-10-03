@@ -57,7 +57,9 @@ export const remarkMdxTitle: Plugin<[], Root> = () => (ast, file) => {
   }
   if (!title) {
     const [filePath] = file.history
-    title = pageTitleFromFilename(path.parse(filePath).name)
+    if (filePath) {
+      title = pageTitleFromFilename(path.parse(filePath).name)
+    }
   }
 
   ast.children.unshift({

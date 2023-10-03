@@ -1,8 +1,7 @@
-import type { ReactElement} from 'react';
-import { createContext, useContext, useRef } from 'react'
+import { createContext, useContext } from 'react'
+import { jsxRuntime } from './jsx-runtime.cjs'
 import type { Components } from './mdx'
-import { MDXProvider, useMDXComponents } from './mdx.js'
-import { jsxRuntime } from './remote/jsx-runtime.cjs'
+import { useMDXComponents } from './mdx.js'
 
 const SSGContext = createContext<Record<string, any>>({})
 
@@ -12,53 +11,46 @@ export const useData = (key = 'ssg') => useContext(SSGContext)[key]
 
 export const DataProvider = SSGContext.Provider
 
-export function RemoteContent() {
-  const dynamicContext = useData('__nextra_dynamic_mdx')
-  const resulRef = useRef()
+function evaluate(compiledSource: string, scope: Record<string, unknown> = {}) {
+  // if we're ready to render, we can assemble the component tree and let React do its thing
+  // first we set up the scope which has to include the mdx custom
+  // create element function as well as any components we're using
+  const keys = Object.keys(scope)
+  const values = Object.values(scope)
+  // now we eval the source code using a function constructor
+  // in order for this to work we need to have React, the mdx createElement,
+  // and all our components in scope for the function, which is the case here
+  // we pass the names (via keys) in as the function's args, and execute the
+  // function with the actual values.
+  const hydrateFn = Reflect.construct(Function, ['$', ...keys, compiledSource])
 
-  if (!dynamicContext) {
+  return hydrateFn({ useMDXComponents, ...jsxRuntime }, ...values)
+}
+
+export function RemoteContent({
+  scope,
+  components
+}: {
+  /**
+   * An object mapping names to React components.
+   * The key used will be the name accessible to MDX.
+   *
+   * For example: `{ ComponentName: Component }` will be accessible in the MDX as `<ComponentName/>`.
+   */
+  components?: Components
+  /**
+   * Pass-through variables for use in the MDX content
+   */
+  scope?: Record<string, unknown>
+} = {}) {
+  const compiledSource = useData('__nextra_dynamic_mdx')
+  if (!compiledSource) {
     throw new Error(
       'RemoteContent must be used together with the `buildDynamicMDX` API'
     )
   }
 
-  if (!resulRef.current) {
-    const hydrateFn = Reflect.construct(Function, [dynamicContext])
-    resulRef.current = hydrateFn({ useMDXComponents, ...jsxRuntime })
-  }
+  const { default: MDXContent } = evaluate(compiledSource, scope)
 
-  const { default: MDXContent, frontMatter, useTOC } = resulRef.current as any
-
-  // wrapping the content with MDXProvider will allow us to customize the standard
-  // markdown components (such as "h1" or "a") with the "components" object
-  return {
-    frontMatter,
-    useTOC,
-    MDXRemote({
-      components: dynamicComponents
-    }: {
-      /**
-       * An object mapping names to React components.
-       * The key used will be the name accessible to MDX.
-       *
-       * For example: `{ ComponentName: Component }` will be accessible in the MDX as `<ComponentName/>`.
-       */
-      components?: Components
-    }): ReactElement {
-      const components = useMDXComponents(dynamicComponents)
-
-      return (
-        <MDXProvider
-          components={{
-            ...components,
-            // Unset wrapper component and pass `toc` through
-            // @ts-ignore
-            wrapper: ({ children }) => children
-          }}
-        >
-          <MDXContent />
-        </MDXProvider>
-      )
-    }
-  }
+  return <MDXContent components={components} />
 }
