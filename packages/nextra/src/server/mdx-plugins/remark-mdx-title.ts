@@ -2,7 +2,9 @@ import type { Property } from 'estree'
 import type { MdxjsEsm } from 'hast-util-to-estree/lib/handlers/mdxjs-esm'
 import type { Root } from 'mdast'
 import type { Plugin } from 'unified'
+import { visit } from 'unist-util-visit'
 import { createAstExportConst } from '../utils.js'
+import { getFlattenedValue } from './remark-headings.js'
 
 function getFrontMatterASTObject(node: MdxjsEsm): Property[] {
   const [n] = node.data!.estree!.body
@@ -30,6 +32,14 @@ export const remarkMdxTitle: Plugin<[], Root> = () => ast => {
       break
     }
   }
+
+  if (!title) {
+    visit(ast, { type: 'heading', depth: 1 }, node => {
+      title = getFlattenedValue(node)
+      return
+    })
+  }
+
   ast.children.unshift({
     type: 'mdxjsEsm',
     data: {

@@ -48,4 +48,22 @@ title: From yaml frontMatter
       "
     `)
   })
+
+  it('should fallback to first h1', async () => {
+    const { result } = await compileMdx(
+      `## h2
+# h1 1
+# h1 2
+`,
+      opts
+    )
+    expect(clean(result.replace(/export function useTOC.+/s, ''))).resolves
+      .toMatchInlineSnapshot(`
+      "import { createElement } from 'react'
+      import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+      export const title = 'h1 2'
+      export const frontMatter = {}
+      "
+    `)
+  })
 })
