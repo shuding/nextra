@@ -169,21 +169,12 @@ ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
     return `${result}
 export default _createMdxContent`
   }
-  // Logic for resolving the page title (used for search and as fallback):
-  // 1. If the frontMatter has a title, use it.
-  // 2. Use the first h1 heading if it exists.
-  // 3. Use the fallback, title-cased file name.
-  const fallbackTitle =
-    frontMatter.title ||
-    title ||
-    pageTitleFromFilename(path.parse(mdxPath).name)
-
   if (searchIndexKey && frontMatter.searchable !== false) {
     // Store all the things in buildInfo.
     const { buildInfo } = this._module as any
     buildInfo.nextraSearch = {
       indexKey: searchIndexKey,
-      title: fallbackTitle,
+      title,
       data: structurizedData,
       route
     }
@@ -206,7 +197,6 @@ export default _createMdxContent`
     hasJsxInH1,
     timestamp,
     readingTime,
-    title: fallbackTitle
   }
   if (transformPageOpts) {
     // It is possible that a theme wants to attach customized data, or modify

@@ -58,7 +58,6 @@ export const remarkMdxFrontMatter: Plugin<[], Root> =
         }
         if (node.type === 'ArrayExpression') {
           result.push(traverseArray(node.elements))
-          continue
         }
       }
       return result
