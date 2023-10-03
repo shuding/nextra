@@ -5,7 +5,8 @@ const opts = {
   mdxOptions: {
     outputFormat: 'program',
     jsx: true
-  }
+  },
+  filePath: '/foo/my-test-file.mdx'
 } as const
 
 describe('remarkMdxTitle', () => {
@@ -56,6 +57,21 @@ title: From yaml frontMatter
 # h1 2
 `,
       opts
+    )
+    expect(clean(result.replace(/export function useTOC.+/s, ''))).resolves
+      .toMatchInlineSnapshot(`
+      "import { createElement } from 'react'
+      import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+      export const title = 'h1 1'
+      export const frontMatter = {}
+      "
+    `)
+  })
+
+  it('should fallback to capitalized filename', async () => {
+    const { result } = await compileMdx(
+      '# h1 1',
+      opts,
     )
     expect(clean(result.replace(/export function useTOC.+/s, ''))).resolves
       .toMatchInlineSnapshot(`
