@@ -10,7 +10,7 @@ import {
   OFFICIAL_THEMES
 } from './constants.js'
 import { PAGES_DIR } from './file-system.js'
-import { logger, pageTitleFromFilename } from './utils.js'
+import { logger } from './utils.js'
 
 const initGitRepo = (async () => {
   const IS_WEB_CONTAINER = !!process.versions.webcontainer
@@ -210,16 +210,22 @@ export default _createMdxContent`
   const stringifiedPageOpts = JSON.stringify(pageOpts).slice(0, -1)
   const pageMapPath = path.join(CHUNKS_DIR, `nextra-page-map-${locale}.mjs`)
 
-  const rawJs = `import { setupNextraPage, HOC_MDXContent } from 'nextra/setup-page'
+  const rawJs = `import { HOC_MDXWrapper, HOC_MDXContent } from 'nextra/setup-page'
 import { pageMap } from '${pageMapPath}'
 ${isAppFileFromNodeModules ? cssImports : ''}
 ${finalResult}
 
-export default setupNextraPage(
+const hoc = HOC_MDXWrapper(
   HOC_MDXContent(_createMdxContent,_provideComponents,useTOC),
   '${route}',
   ${stringifiedPageOpts},pageMap,frontMatter,title}
-)`
+)
+
+// Exporting Capitalized function make hot works
+export default function HOC(props) {
+  return hoc(props)
+}
+`
 
   return rawJs
 }

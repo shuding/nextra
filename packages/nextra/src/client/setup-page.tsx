@@ -126,7 +126,7 @@ export const resolvePageMap =
     return (cachedResolvedPageMap[locale] = result)
   }
 
-export function setupNextraPage(
+export function HOC_MDXWrapper(
   MDXContent: NextraMDXContent,
   route: string,
   pageOpts: PageOpts
