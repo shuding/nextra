@@ -61,6 +61,21 @@ describe('remarkMdxFrontMatter', () => {
   })
 
   describe.only('should parse frontMatter', () => {
+    const result = {
+      string: 'Hello',
+      number: 222,
+      boolean: true,
+      object: {
+        prop: 'Foo',
+        nested: {
+          deep: {
+            val: null
+          }
+        }
+      },
+      array: ['foo', 1, null, { hello: 'world' }, ['undefined', true, 'Bool']]
+    }
+
     it('yaml', async () => {
       const file = await process(`---
 string: Hello
@@ -68,6 +83,9 @@ number: 222
 boolean: true
 object:
   prop: Foo
+  nested:
+    deep:
+      val: null
 array:
   - foo
   - 1
@@ -77,29 +95,13 @@ array:
   - [undefined, true, Bool]
 ---
 `)
-      expect(file.data.frontMatter).toMatchInlineSnapshot(`
-        {
-          "array": [
-            "foo",
-            1,
-            null,
-            {
-              "hello": "world",
-            },
-            [
-              "undefined",
-              true,
-              "Bool",
-            ],
-          ],
-          "boolean": true,
-          "number": 222,
-          "object": {
-            "prop": "Foo",
-          },
-          "string": "Hello",
-        }
-      `)
+      expect(file.data.frontMatter).toEqual(result)
+    })
+    it('esm', async () => {
+      const file = await process(
+        `export const frontMatter = ${JSON.stringify(result)}`
+      )
+      expect(file.data.frontMatter).toEqual(result)
     })
   })
 })
