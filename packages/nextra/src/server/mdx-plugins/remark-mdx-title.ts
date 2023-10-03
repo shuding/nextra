@@ -19,22 +19,23 @@ export const remarkMdxTitle: Plugin<[], Root> = () => ast => {
     return (n as any).declaration.declarations[0].id.name === 'frontMatter'
   })
   const frontMatter = getFrontMatterASTObject(frontMatterNode)
+
   for (const { key, value } of frontMatter) {
-    if (key.value === 'title') {
+    if (key.type === 'Literal' && key.value === 'title') {
+      title = value.value
+      break
+    }
+    if (key.type === 'Identifier' && key.name === 'title') {
       title = value.value
       break
     }
   }
-  ast.children.unshift(
-    {
-      type: 'mdxjsEsm',
-      data: {
-        estree: {
-          body: [
-            createAstExportConst('title', { type: 'Literal', value: title })
-          ]
-        }
+  ast.children.unshift({
+    type: 'mdxjsEsm',
+    data: {
+      estree: {
+        body: [createAstExportConst('title', { type: 'Literal', value: title })]
       }
     }
-  )
+  })
 }

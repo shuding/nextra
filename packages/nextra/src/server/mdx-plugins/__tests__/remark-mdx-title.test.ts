@@ -41,7 +41,7 @@ title: From yaml frontMatter
       .toMatchInlineSnapshot(`
       "import { createElement } from 'react'
       import { useMDXComponents as _provideComponents } from 'nextra/mdx'
-      export const title = ''
+      export const title = 'From esm frontMatter'
       export const frontMatter = {
         title: 'From esm frontMatter'
       }
