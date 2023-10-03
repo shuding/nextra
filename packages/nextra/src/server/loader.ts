@@ -218,11 +218,9 @@ ${isAppFileFromNodeModules ? cssImports : ''}
 ${finalResult}
 
 export default setupNextraPage(
-  HOC_MDXContent(_createMdxContent,_provideComponents${
-    isDynamicPage ? '' : ',useTOC'
-  }),
+  HOC_MDXContent(_createMdxContent,_provideComponents,useTOC),
   '${route}',
-  ${stringifiedPageOpts},pageMap${isDynamicPage ? '' : ',frontMatter,title'}}
+  ${stringifiedPageOpts},pageMap,frontMatter,title}
 )`
 
   return rawJs

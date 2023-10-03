@@ -16,6 +16,7 @@ import { bundledLanguages, getHighlighter } from 'shiki'
 import type { Pluggable } from 'unified'
 import type {
   FrontMatter,
+  Heading,
   LoaderOptions,
   PageOpts,
   ReadingTime,
@@ -317,7 +318,7 @@ export async function compileMdx(
               attachMeta
             ]),
         latex && rehypeKatex,
-        rehypeExtractTocContent
+        [rehypeExtractTocContent, { isRemoteContent }]
       ].filter(truthy),
       recmaPlugins: [
         !isRemoteContent && recmaRewriteJsx,

@@ -21,8 +21,7 @@ bar[^1]
       opts
     )
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
-      "import { createElement } from 'react'
-      import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+      "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
       export const title = ''
       export const frontMatter = {}
       export function useTOC(props) {
@@ -116,8 +115,7 @@ import { Steps } from 'nextra/components'
       opts
     )
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
-      "import { createElement } from 'react'
-      import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+      "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
       export const title = ''
       export const frontMatter = {}
       import { Steps } from 'nextra/components'
@@ -191,8 +189,7 @@ export const frontMatter = {
       opts
     )
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
-      "import { createElement } from 'react'
-      import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+      "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
       export const title = 'Heading 1'
       export const myVar = 'interpolated'
       export const Test = () => {
@@ -372,7 +369,6 @@ import { RemoteContent } from 'nextra/data'
 
       expect(res).toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic @jsxImportSource react*/
-        import { createElement } from 'react'
         import { useMDXComponents as _provideComponents } from 'nextra/mdx'
         import { RemoteContent } from 'nextra/data'
         function _createMdxContent(props) {
