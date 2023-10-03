@@ -9,6 +9,7 @@ import { components, HeadingContext } from './mdx-theme'
 import Meta from './meta'
 import Nav from './nav'
 import { PostsLayout } from './posts-layout'
+import type { BlogFrontMatter } from './types'
 import { isValidDate } from './utils/date'
 
 const layoutSet = new Set(['post', 'page', 'posts', 'tag'])
@@ -17,22 +18,22 @@ export default function NextraLayout({
   children,
   pageOpts,
   themeConfig
-}: NextraThemeLayoutProps) {
+}: NextraThemeLayoutProps<BlogFrontMatter>) {
   const config = { ...DEFAULT_THEME, ...themeConfig }
 
   const ref = useRef<HTMLHeadingElement>(null)
 
   const { title: pageTitle, frontMatter } = pageOpts
 
-  const type = frontMatter.type || 'post'
+  frontMatter.type ||= 'post'
 
+  const { type, date } = frontMatter
   if (!layoutSet.has(type)) {
     throw new Error(
       `nextra-theme-blog does not support the layout type "${type}" It only supports "post", "page", "posts" and "tag"`
     )
   }
 
-  const { date } = frontMatter
   if (date && !isValidDate(date)) {
     throw new Error(
       `Invalid date "${date}". Provide date in "YYYY/M/D", "YYYY/M/D H:m", "YYYY-MM-DD", "[YYYY-MM-DD]T[HH:mm]" or "[YYYY-MM-DD]T[HH:mm:ss.SSS]Z" format.`
@@ -40,6 +41,18 @@ export default function NextraLayout({
   }
 
   const title = `${pageTitle}${config.titleSuffix || ''}`
+
+  const Footer = {
+    post: () => (
+      <>
+        {config.postFooter}
+        {config.comments}
+      </>
+    ),
+    posts: PostsLayout,
+    tag: PostsLayout,
+    page: null
+  }[type]
 
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
@@ -61,14 +74,7 @@ export default function NextraLayout({
               {children}
             </MDXProvider>
 
-            {type === 'post' ? (
-              <>
-                {config.postFooter}
-                {config.comments}
-              </>
-            ) : (
-              ['posts', 'tag'].includes(type) && <PostsLayout type={type} />
-            )}
+            {Footer && <Footer />}
           </HeadingContext.Provider>
 
           {config.footer}
