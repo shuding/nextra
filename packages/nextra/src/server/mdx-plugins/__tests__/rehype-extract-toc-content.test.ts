@@ -352,7 +352,7 @@ export const frontMatter = {
     `)
   })
 
-  describe('Remote MDX', () => {
+  describe.only('Remote MDX', () => {
     it("with outputFormat: 'program'", async () => {
       const rawMdx = `
 import { RemoteContent } from 'nextra/data'
@@ -385,12 +385,16 @@ import { RemoteContent } from 'nextra/data'
             <>
               <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
               {'\\\\n'}
-              <>{props.children}</>
+              <RemoteContent
+                components={{
+                  Callout,
+                  $Tabs: Tabs
+                }}
+              />
             </>
           )
         }
         function MDXContent(props) {
-          const { useTOC, RemoteMDXContent } = RemoteContent()
           const { wrapper: MDXLayout } = Object.assign({}, _provideComponents(), props.components)
           return MDXLayout ? (
             <MDXLayout {...props}>
