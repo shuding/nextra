@@ -4,12 +4,12 @@ import type { ReactElement } from 'react'
 import { useBlogContext } from './blog-context'
 import { collectPostsAndNavs } from './utils/collect'
 import getTags from './utils/get-tags'
+import type { BlogFrontMatter } from './types'
 
-export function PostsLayout(): ReactElement {
+export function PostsLayout({ type }: { type: BlogFrontMatter['type'] }): ReactElement {
   const { config, opts } = useBlogContext()
   const { posts } = collectPostsAndNavs({ config, opts })
   const router = useRouter()
-  const { type } = opts.frontMatter
   const tagName = type === 'tag' ? router.query.tag : null
 
   const postList = posts.map(post => {

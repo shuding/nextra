@@ -21,10 +21,10 @@ export function isExportNode(
 
   if (n.type !== 'ExportNamedDeclaration') return false
 
-  const { declarations } = (n as any).declaration
-  if (!declarations) return false
+  const name = (n as any).declaration?.declarations?.[0].id.name
+  if (!name) return false
 
-  return declarations[0].id.name === varName
+  return name === varName
 }
 
 export const remarkMdxTitle: Plugin<[], Root> = () => (ast, file) => {

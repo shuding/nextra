@@ -25,8 +25,6 @@ export interface NextraBlogTheme {
   titleSuffix?: string
 }
 
-export type BlogPageOpts = PageOpts<BlogFrontMatter>
-
 export type BlogFrontMatter = {
   author?: string
   back?: string
@@ -39,5 +37,5 @@ export type BlogFrontMatter = {
 
 export interface LayoutProps {
   config: NextraBlogTheme
-  opts: BlogPageOpts
+  opts: PageOpts<BlogFrontMatter>
 }
