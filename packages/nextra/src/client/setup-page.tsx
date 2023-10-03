@@ -200,7 +200,7 @@ export const HOC_MDXContent = (
   _provideComponents: typeof useMDXComponents,
   useTOC: (props: Record<string, any>) => Heading[]
 ) =>
-  function MDXContent(props: {
+  function NextraMDXContent(props: {
     toc: Heading[]
     children: ReactNode
     components: Components

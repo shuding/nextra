@@ -342,7 +342,7 @@ export async function compileMdx(
                 const [{ id }] = declaration.declarations
                 varName = (id as any).name
               } else if (declaration.type === 'FunctionDeclaration') {
-                varName = declaration.id!.name = 'useTOC'
+                varName = declaration.id!.name
               } else {
                 throw new Error(`\`${declaration.type}\` unsupported.`)
               }

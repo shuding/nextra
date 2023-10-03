@@ -216,7 +216,11 @@ ${isAppFileFromNodeModules ? cssImports : ''}
 ${finalResult}
 
 const hoc = HOC_MDXWrapper(
-  HOC_MDXContent(_createMdxContent,_provideComponents,useTOC),
+  HOC_MDXContent(
+    _createMdxContent,
+    _provideComponents,
+    useTOC
+  ),
   '${route}',
   ${stringifiedPageOpts},pageMap,frontMatter,title}
 )
