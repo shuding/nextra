@@ -53,7 +53,7 @@ export const remarkMdxFrontMatter: Plugin<[], Root> =
           continue
         }
         if (node.type === 'ObjectExpression') {
-          result.push(traverse(node.properties))
+          result.push(estreeToValue(node.properties))
           continue
         }
         if (node.type === 'ArrayExpression') {
@@ -64,7 +64,7 @@ export const remarkMdxFrontMatter: Plugin<[], Root> =
       return result
     }
 
-    function traverse(astPropertyNode: Property[], result = {}) {
+    function estreeToValue(astPropertyNode: Property[], result = {}) {
       for (const { key, value } of astPropertyNode) {
         const keyName =
           key.type === 'Literal'
@@ -75,7 +75,7 @@ export const remarkMdxFrontMatter: Plugin<[], Root> =
         if (value.type === 'Literal') {
           result[keyName] = value.value
         } else if (value.type === 'ObjectExpression') {
-          result[keyName] = traverse(value.properties)
+          result[keyName] = estreeToValue(value.properties)
         } else if (value.type === 'ArrayExpression') {
           const val = traverseArray(value.elements)
           result[keyName] = val
@@ -84,5 +84,5 @@ export const remarkMdxFrontMatter: Plugin<[], Root> =
       return result
     }
 
-    file.data.frontMatter = traverse(frontMatter)
+    file.data.frontMatter = estreeToValue(frontMatter)
   }
