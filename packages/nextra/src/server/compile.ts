@@ -39,6 +39,7 @@ import {
   remarkLinkRewrite,
   remarkMdxDisableExplicitJsx,
   remarkMdxFrontMatter,
+  remarkMdxTitle,
   remarkRemoveImports,
   remarkStaticImage,
   remarkStructurize
@@ -208,15 +209,26 @@ export async function compileMdx(
     const fileCompatible = filePath ? { value: source, path: filePath } : source
     const vFile = await processor.process(fileCompatible)
 
-    const { title, hasJsxInH1, readingTime, structurizedData } = vFile.data as {
+    const data = vFile.data as {
       readingTime?: ReadingTime
       structurizedData: StructurizedData
       title?: string
+      frontMatter: FrontMatter
     } & Pick<PageOpts, 'hasJsxInH1'>
+
+    const { hasJsxInH1, readingTime, structurizedData } = data
+    let { title, frontMatter } = data
     // https://github.com/shuding/nextra/issues/1032
     const result = String(vFile).replaceAll('__esModule', '_\\_esModule')
 
-    const frontMatter = (vFile.data.frontMatter || {}) as FrontMatter
+    if (!title) {
+      logger.error('`title` is not defined')
+      title = ''
+    }
+    if (!frontMatter) {
+      logger.error('`frontMatter` is not defined')
+      frontMatter = {}
+    }
 
     if (frontMatter.mdxOptions) {
       throw new Error('`frontMatter.mdxOptions` is no longer supported')
@@ -256,6 +268,7 @@ export async function compileMdx(
         isRemoteContent && remarkRemoveImports,
         remarkFrontmatter, // parse and attach yaml node
         [remarkMdxFrontMatter] satisfies Pluggable,
+        remarkMdxTitle,
         remarkGfm,
         format !== 'md' &&
           ([

@@ -26,8 +26,8 @@ describe('rehypeIcon', () => {
   it('should attach same import only once', async () => {
     const raw = createCodeBlock('css', 'css')
 
-    const { value } = await process(raw)
-    expect(clean(value)).resolves.toMatchInlineSnapshot(`
+    const file = await process(raw)
+    expect(clean(file)).resolves.toMatchInlineSnapshot(`
       "import { CssIcon } from 'nextra/icons'
       function _createMdxContent(props) {
         const _components = Object.assign(
@@ -60,8 +60,8 @@ describe('rehypeIcon', () => {
   it('should work with different language', async () => {
     const raw = createCodeBlock(...Object.keys(REHYPE_ICON_DEFAULT_REPLACES))
 
-    const { value } = await process(raw)
-    expect(clean(value)).resolves.toMatchInlineSnapshot(`
+    const file = await process(raw)
+    expect(clean(file)).resolves.toMatchInlineSnapshot(`
       "import { JavaScriptIcon } from 'nextra/icons'
       import { TypeScriptIcon } from 'nextra/icons'
       import { MarkdownIcon } from 'nextra/icons'
