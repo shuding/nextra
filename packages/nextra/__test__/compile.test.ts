@@ -53,8 +53,7 @@ export const TagName = () => {
       { mdxOptions }
     )
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
-      "import { createElement } from 'react'
-      import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+      "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
       export const title = 'My Header'
       export const frontMatter = {}
       export function useTOC(props) {
@@ -129,8 +128,7 @@ export const TagName = () => {
   it('use github-slugger', async () => {
     const { result } = await compileMdx('### My Header', { mdxOptions })
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
-      "import { createElement } from 'react'
-      import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+      "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
       export const title = ''
       export const frontMatter = {}
       export function useTOC(props) {
@@ -192,8 +190,7 @@ import Last from './three.mdx'
       { mdxOptions, latex: true }
     )
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
-      "import { createElement } from 'react'
-      import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+      "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
       export const title = ''
       export const frontMatter = {}
       import FromMdx, { useTOC as useTOC0 } from './one.mdx'
