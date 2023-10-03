@@ -1,4 +1,4 @@
-import type { Heading, NextraThemeLayoutProps, PageOpts } from 'nextra'
+import type { NextraMDXContent, NextraThemeLayoutProps, PageOpts } from 'nextra'
 import type { ReactElement, ReactNode } from 'react'
 import { useMemo } from 'react'
 import 'focus-visible'
@@ -108,7 +108,6 @@ function Body({
 function InnerLayout({
   filePath,
   pageMap,
-  frontMatter,
   timestamp,
   children
 }: PageOpts & { children: ReactNode }): ReactElement {
@@ -119,7 +118,7 @@ function InnerLayout({
   const {
     activeType,
     activeIndex,
-    activeThemeContext,
+    activeThemeContext: themeContext,
     activePath,
     directories,
     docsDirectories,
@@ -130,14 +129,78 @@ function InnerLayout({
     [pageMap, fsPath]
   )
 
-  const themeContext = { ...activeThemeContext, ...frontMatter }
   const hideSidebar =
     !themeContext.sidebar ||
     themeContext.layout === 'raw' ||
     activeType === 'page'
-
   const { direction } = config.i18n.find(l => l.locale === locale) || config
   const dir = direction === 'rtl' ? 'rtl' : 'ltr'
+
+  const components = getComponents({
+    isRawLayout: themeContext.layout === 'raw',
+    components: {
+      ...config.components,
+      // @ts-expect-error fixme
+      wrapper: function NextraWrapper({ toc, children }) {
+        const tocEl =
+          activeType === 'page' ||
+          !themeContext.toc ||
+          themeContext.layout !== 'default' ? (
+            themeContext.layout !== 'full' &&
+            themeContext.layout !== 'raw' && (
+              <nav className={classes.toc} aria-label="table of contents" />
+            )
+          ) : (
+            <nav
+              className={cn(classes.toc, '_px-4')}
+              aria-label="table of contents"
+            >
+              {renderComponent(config.toc.component, {
+                toc: config.toc.float ? toc : [],
+                filePath
+              })}
+            </nav>
+          )
+        return (
+          <div
+            className={cn(
+              '_mx-auto _flex',
+              themeContext.layout !== 'raw' && '_max-w-[90rem]'
+            )}
+          >
+            <Sidebar
+              docsDirectories={docsDirectories}
+              fullDirectories={directories}
+              toc={toc}
+              asPopover={hideSidebar}
+              includePlaceholder={themeContext.layout === 'default'}
+            />
+            {tocEl}
+            <SkipNavContent />
+            <Body
+              themeContext={themeContext}
+              breadcrumb={
+                activeType !== 'page' && themeContext.breadcrumb ? (
+                  <Breadcrumb activePath={activePath} />
+                ) : null
+              }
+              timestamp={timestamp}
+              navigation={
+                activeType !== 'page' && themeContext.pagination ? (
+                  <NavLinks
+                    flatDirectories={flatDocsDirectories}
+                    currentIndex={activeIndex}
+                  />
+                ) : null
+              }
+            >
+              {children}
+            </Body>
+          </div>
+        )
+      } satisfies NextraMDXContent
+    }
+  })
 
   return (
     // This makes sure that selectors like `[dir=ltr] .nextra-container` work
@@ -156,83 +219,7 @@ function InnerLayout({
           items: topLevelNavbarItems
         })}
       <ActiveAnchorProvider>
-        <MDXProvider
-          components={getComponents({
-            isRawLayout: themeContext.layout === 'raw',
-            components: {
-              ...config.components,
-              // @ts-expect-error fixme
-              wrapper: function NextraWrapper({
-                toc,
-                children
-              }: {
-                children: ReactNode
-                toc: Heading[]
-              }) {
-                const tocEl =
-                  activeType === 'page' ||
-                  !themeContext.toc ||
-                  themeContext.layout !== 'default' ? (
-                    themeContext.layout !== 'full' &&
-                    themeContext.layout !== 'raw' && (
-                      <nav
-                        className={classes.toc}
-                        aria-label="table of contents"
-                      />
-                    )
-                  ) : (
-                    <nav
-                      className={cn(classes.toc, '_px-4')}
-                      aria-label="table of contents"
-                    >
-                      {renderComponent(config.toc.component, {
-                        toc: config.toc.float ? toc : [],
-                        filePath
-                      })}
-                    </nav>
-                  )
-
-                return (
-                  <div
-                    className={cn(
-                      '_mx-auto _flex',
-                      themeContext.layout !== 'raw' && '_max-w-[90rem]'
-                    )}
-                  >
-                    <Sidebar
-                      docsDirectories={docsDirectories}
-                      fullDirectories={directories}
-                      toc={toc}
-                      asPopover={hideSidebar}
-                      includePlaceholder={themeContext.layout === 'default'}
-                    />
-                    {tocEl}
-                    <SkipNavContent />
-                    <Body
-                      themeContext={themeContext}
-                      breadcrumb={
-                        activeType !== 'page' && themeContext.breadcrumb ? (
-                          <Breadcrumb activePath={activePath} />
-                        ) : null
-                      }
-                      timestamp={timestamp}
-                      navigation={
-                        activeType !== 'page' && themeContext.pagination ? (
-                          <NavLinks
-                            flatDirectories={flatDocsDirectories}
-                            currentIndex={activeIndex}
-                          />
-                        ) : null
-                      }
-                    >
-                      {children}
-                    </Body>
-                  </div>
-                )
-              }
-            }
-          })}
-        >
+        <MDXProvider disableParentContext components={components}>
           {children}
         </MDXProvider>
       </ActiveAnchorProvider>
