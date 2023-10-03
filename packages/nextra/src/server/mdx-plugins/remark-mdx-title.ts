@@ -36,7 +36,8 @@ export const remarkMdxTitle: Plugin<[], Root> = () => ast => {
   if (!title) {
     visit(ast, { type: 'heading', depth: 1 }, node => {
       title = getFlattenedValue(node)
-      return
+      // Stop traversing immediately
+      return false
     })
   }
 

@@ -6,7 +6,7 @@ import type { Heading } from '../../types'
 import { MARKDOWN_EXTENSION_REGEX } from '../constants.js'
 import type { HProperties } from './remark-custom-heading-id'
 
-const getFlattenedValue = (node: Parent): string =>
+export const getFlattenedValue = (node: Parent): string =>
   node.children
     .map(child =>
       'children' in child
