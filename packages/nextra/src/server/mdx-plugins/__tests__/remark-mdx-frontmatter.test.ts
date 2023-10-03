@@ -37,8 +37,8 @@ describe('remarkMdxFrontMatter', () => {
       `)
     })
 
-    it('should not add file.data', () => {
-      expect(file.data).toEqual({})
+    it('should add file.data', () => {
+      expect(file.data.frontMatter).toEqual({ foo: 'bar' })
     })
   })
 
@@ -55,12 +55,12 @@ describe('remarkMdxFrontMatter', () => {
         "
       `)
     })
-    it('should not add file.data', () => {
-      expect(file.data).toEqual({})
+    it('should add file.data', () => {
+      expect(file.data.frontMatter).toEqual({ foo: 'bar' })
     })
   })
 
-  describe.only('should parse frontMatter', () => {
+  describe('should parse frontMatter', () => {
     const result = {
       string: 'Hello',
       number: 222,

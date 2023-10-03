@@ -66,13 +66,19 @@ export const remarkMdxFrontMatter: Plugin<[], Root> =
 
     function traverse(astPropertyNode: Property[], result = {}) {
       for (const { key, value } of astPropertyNode) {
+        const keyName =
+          key.type === 'Literal'
+            ? key.value
+            : key.type === 'Identifier'
+            ? key.name
+            : ''
         if (value.type === 'Literal') {
-          result[key.value] = value.value
+          result[keyName] = value.value
         } else if (value.type === 'ObjectExpression') {
-          result[key.value] = traverse(value.properties)
+          result[keyName] = traverse(value.properties)
         } else if (value.type === 'ArrayExpression') {
           const val = traverseArray(value.elements)
-          result[key.value] = val
+          result[keyName] = val
         }
       }
       return result
