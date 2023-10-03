@@ -55,7 +55,7 @@ export const TagName = () => {
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
       "import { createElement } from 'react'
       import { useMDXComponents as _provideComponents } from 'nextra/mdx'
-      export const title = 'My Header [#test-id]'
+      export const title = 'My Header'
       export const frontMatter = {}
       export function useTOC(props) {
         return [
