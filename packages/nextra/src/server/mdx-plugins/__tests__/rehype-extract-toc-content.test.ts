@@ -373,7 +373,7 @@ import { RemoteContent } from 'nextra/data'
         import { useMDXComponents as _provideComponents } from 'nextra/mdx'
         import { RemoteContent } from 'nextra/data'
         function _createMdxContent(props) {
-          const { toc = useTOC(props) } = props
+          const { toc } = props
           const _components = Object.assign(
             {
               h2: 'h2'
@@ -390,19 +390,23 @@ import { RemoteContent } from 'nextra/data'
           )
         }
         function MDXContent(props) {
-          const { frontMatter, toc, mdxContent } = RemoteContent({
-            components: {
-              Callout,
-              $Tabs: Tabs
-            }
-          })
+          const { useTOC, RemoteMDXContent } = RemoteContent()
           const { wrapper } = _provideComponents(props.components)
+          const toc = useTOC(props)
           props = {
             ...props,
-            toc,
-            frontMatter
+            toc
           }
-          const child = createElement(_createMdxContent, props, mdxContent)
+          const child = createElement(
+            _createMdxContent,
+            props,
+            <RemoteMDXContent
+              components={{
+                Callout,
+                $Tabs: Tabs
+              }}
+            />
+          )
           return wrapper ? createElement(wrapper, props, child) : child
         }
         "
@@ -424,12 +428,14 @@ export const myVar = 123
 
 ### 123 {myVar}`
 
-      const { result } = await compileMdx(rawMdx, { mdxOptions: { jsx: true } })
+      const { result } = await compileMdx(rawMdx)
       const res = await clean(result, false)
 
       expect(res).toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic @jsxImportSource react*/
+        const { Fragment: _Fragment, jsx: _jsx, jsxs: _jsxs } = arguments[0]
         const { useMDXComponents: _provideComponents } = arguments[0]
+        const title = ''
         const frontMatter = {}
         const myVar = 123
         function useTOC(props) {
@@ -440,12 +446,9 @@ export const myVar = 123
               depth: 2
             },
             {
-              value: (
-                <>
-                  {'123 '}
-                  {myVar}
-                </>
-              ),
+              value: _jsxs(_Fragment, {
+                children: ['123 ', myVar]
+              }),
               id: '123-myvar',
               depth: 3
             }
@@ -462,21 +465,25 @@ export const myVar = 123
             ),
             { Foo } = _components
           if (!Foo) _missingMdxReference('Foo', true)
-          return (
-            <>
-              <_components.h2 id=\\"bar\\">{'bar'}</_components.h2>
-              {'\\\\n'}
-              <Foo />
-              {'\\\\n'}
-              {'\\\\n'}
-              <_components.h3 id=\\"123-myvar\\">
-                {'123 '}
-                {myVar}
-              </_components.h3>
-            </>
-          )
+          return _jsxs(_Fragment, {
+            children: [
+              _jsx(_components.h2, {
+                id: 'bar',
+                children: 'bar'
+              }),
+              '\\\\n',
+              _jsx(Foo, {}),
+              '\\\\n',
+              '\\\\n',
+              _jsxs(_components.h3, {
+                id: '123-myvar',
+                children: ['123 ', myVar]
+              })
+            ]
+          })
         }
         return {
+          title,
           frontMatter,
           myVar,
           useTOC,
