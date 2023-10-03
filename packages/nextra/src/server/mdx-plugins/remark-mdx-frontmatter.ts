@@ -1,4 +1,4 @@
-import type { Property } from 'estree'
+import type { ArrayExpression, ObjectExpression } from 'estree'
 import { valueToEstree } from 'estree-util-value-to-estree'
 import type { Parent, Root } from 'mdast'
 import type { Plugin } from 'unified'
@@ -42,13 +42,28 @@ export const remarkMdxFrontMatter: Plugin<[], Root> =
       ast.children.unshift(createNode({}))
     }
 
+    // @ts-expect-error
     const frontMatter = ast.children.find(node =>
+      // @ts-expect-error
       isExportNode(node, 'frontMatter')
     ).data.estree.body[0].declaration.declarations[0].init.properties
 
-    function traverseArray(nodes, result = []) {
+    function traverseArray(
+      nodes: ArrayExpression['elements'],
+      result: (
+        | string
+        | number
+        | boolean
+        | null
+        | unknown[]
+        | Record<string, unknown>
+      )[] = []
+    ) {
       for (const node of nodes) {
+        if (!node) continue
+
         if (node.type === 'Literal') {
+          // @ts-expect-error
           result.push(node.value)
           continue
         }
@@ -63,11 +78,17 @@ export const remarkMdxFrontMatter: Plugin<[], Root> =
       return result
     }
 
-    function estreeToValue(astPropertyNode: Property[], result = {}) {
-      for (const { key, value } of astPropertyNode) {
+    function estreeToValue(
+      nodes: ObjectExpression['properties'],
+      result: Record<string, unknown> = Object.create(null)
+    ) {
+      for (const node of nodes) {
+        if (node.type !== 'Property') continue
+        const { key, value } = node
+
         const keyName =
           key.type === 'Literal'
-            ? key.value
+            ? (key.value as string)
             : key.type === 'Identifier'
             ? key.name
             : ''
@@ -76,8 +97,7 @@ export const remarkMdxFrontMatter: Plugin<[], Root> =
         } else if (value.type === 'ObjectExpression') {
           result[keyName] = estreeToValue(value.properties)
         } else if (value.type === 'ArrayExpression') {
-          const val = traverseArray(value.elements)
-          result[keyName] = val
+          result[keyName] = traverseArray(value.elements)
         }
       }
       return result

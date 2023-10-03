@@ -33,7 +33,6 @@ export const remarkMdxTitle: Plugin<[], Root> = () => (ast, file) => {
   const frontMatterNode = ast.children.find((node: any) =>
     isExportNode(node, 'frontMatter')
   )
-  // @ts-expect-error
   const frontMatter = getFrontMatterASTObject(frontMatterNode)
 
   for (const { key, value } of frontMatter) {
