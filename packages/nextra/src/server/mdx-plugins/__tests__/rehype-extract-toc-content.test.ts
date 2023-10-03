@@ -373,7 +373,7 @@ import { RemoteContent } from 'nextra/data'
         import { useMDXComponents as _provideComponents } from 'nextra/mdx'
         import { RemoteContent } from 'nextra/data'
         function _createMdxContent(props) {
-          const { toc } = props
+          const { toc = useTOC(props) } = props
           const _components = Object.assign(
             {
               h2: 'h2'
@@ -391,23 +391,14 @@ import { RemoteContent } from 'nextra/data'
         }
         function MDXContent(props) {
           const { useTOC, RemoteMDXContent } = RemoteContent()
-          const { wrapper } = _provideComponents(props.components)
-          const toc = useTOC(props)
-          props = {
-            ...props,
-            toc
-          }
-          const child = createElement(
-            _createMdxContent,
-            props,
-            <RemoteMDXContent
-              components={{
-                Callout,
-                $Tabs: Tabs
-              }}
-            />
+          const { wrapper: MDXLayout } = Object.assign({}, _provideComponents(), props.components)
+          return MDXLayout ? (
+            <MDXLayout {...props}>
+              <_createMdxContent {...props} />
+            </MDXLayout>
+          ) : (
+            _createMdxContent(props)
           )
-          return wrapper ? createElement(wrapper, props, child) : child
         }
         "
       `)
