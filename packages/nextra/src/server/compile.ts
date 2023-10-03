@@ -330,6 +330,28 @@ export async function compileMdx(
                 node.type !== 'FunctionDeclaration' ||
                 node.id!.name !== 'MDXContent'
             )
+
+          const localExports = new Set(['title', 'frontMatter', 'useTOC'])
+
+          for (const node of ast.body) {
+            if (node.type === 'ExportNamedDeclaration') {
+              let varName: string
+              const declaration = node.declaration!
+
+              if (declaration.type === 'VariableDeclaration') {
+                const [{ id }] = declaration.declarations
+                varName = (id as any).name
+              } else if (declaration.type === 'FunctionDeclaration') {
+                varName = declaration.id!.name = 'useTOC'
+              } else {
+                throw new Error(`\`${declaration.type}\` unsupported.`)
+              }
+
+              if (localExports.has(varName)) {
+                Object.assign(node, node.declaration)
+              }
+            }
+          }
         },
         isRemoteContent ? recmaRewriteRemoteJsx : recmaRewriteJsx
       ].filter(truthy)

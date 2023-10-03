@@ -22,9 +22,9 @@ bar[^1]
     )
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
       "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
-      export const title = ''
-      export const frontMatter = {}
-      export function useTOC(props) {
+      const title = ''
+      const frontMatter = {}
+      function useTOC(props) {
         return [
           {
             value: 'foo',
@@ -116,10 +116,10 @@ import { Steps } from 'nextra/components'
     )
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
       "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
-      export const title = ''
-      export const frontMatter = {}
+      const title = ''
+      const frontMatter = {}
       import { Steps } from 'nextra/components'
-      export function useTOC(props) {
+      function useTOC(props) {
         return [
           {
             value: 'baz qux',
@@ -190,7 +190,7 @@ export const frontMatter = {
     )
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
       "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
-      export const title = 'Heading 1'
+      const title = 'Heading 1'
       export const myVar = 'interpolated'
       export const Test = () => {
         const _components = Object.assign(
@@ -201,10 +201,10 @@ export const frontMatter = {
         )
         return <_components.span>Hello</_components.span>
       }
-      export const frontMatter = {
+      const frontMatter = {
         test: 'extract toc content'
       }
-      export function useTOC(props) {
+      function useTOC(props) {
         const _components = Object.assign(
           {
             span: 'span',
@@ -370,10 +370,10 @@ import { RemoteContent } from 'nextra/data'
       expect(res).toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic @jsxImportSource react*/
         import { useMDXComponents as _provideComponents } from 'nextra/mdx'
-        export const title = '[[...slug]]'
-        export const frontMatter = {}
+        const title = '[[...slug]]'
+        const frontMatter = {}
         import { RemoteContent } from 'nextra/data'
-        export function useTOC(props) {
+        function useTOC(props) {
           return [
             {
               value: 'hello',
