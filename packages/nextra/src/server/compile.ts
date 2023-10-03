@@ -4,6 +4,7 @@ import { createProcessor } from '@mdx-js/mdx'
 import type { Processor } from '@mdx-js/mdx/lib/core'
 import { remarkMermaid } from '@theguild/remark-mermaid'
 import { remarkNpm2Yarn } from '@theguild/remark-npm2yarn'
+import type { Program } from 'estree'
 import rehypeKatex from 'rehype-katex'
 import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
 import rehypePrettyCode from 'rehype-pretty-code'
@@ -321,8 +322,16 @@ export async function compileMdx(
         [rehypeExtractTocContent, { isRemoteContent }]
       ].filter(truthy),
       recmaPlugins: [
-        !isRemoteContent && recmaRewriteJsx,
-        !isRemoteContent && recmaRewriteRemoteJsx
+        () => (ast: Program) => {
+          ast.body = ast.body
+            // Remove `MDXContent` since we use custom HOC_MDXContent
+            .filter(
+              node =>
+                node.type !== 'FunctionDeclaration' ||
+                node.id!.name !== 'MDXContent'
+            )
+        },
+        isRemoteContent ? recmaRewriteRemoteJsx : recmaRewriteJsx
       ].filter(truthy)
     })
   }

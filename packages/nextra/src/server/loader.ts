@@ -210,8 +210,6 @@ export default _createMdxContent`
   const stringifiedPageOpts = JSON.stringify(pageOpts).slice(0, -1)
   const pageMapPath = path.join(CHUNKS_DIR, `nextra-page-map-${locale}.mjs`)
 
-  const isDynamicPage = route.includes('[')
-
   const rawJs = `import { setupNextraPage, HOC_MDXContent } from 'nextra/setup-page'
 import { pageMap } from '${pageMapPath}'
 ${isAppFileFromNodeModules ? cssImports : ''}
