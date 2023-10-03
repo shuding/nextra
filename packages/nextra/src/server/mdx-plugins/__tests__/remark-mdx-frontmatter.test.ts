@@ -62,8 +62,44 @@ describe('remarkMdxFrontMatter', () => {
 
   describe.only('should parse frontMatter', () => {
     it('yaml', async () => {
-      const file = await process(ESM_FRONTMATTER)
-      expect(file.data.frontMatter).toMatchInlineSnapshot('{}')
+      const file = await process(`---
+string: Hello
+number: 222
+boolean: true
+object:
+  prop: Foo
+array:
+  - foo
+  - 1
+  - null
+  - 
+    hello: world
+  - [undefined, true, Bool]
+---
+`)
+      expect(file.data.frontMatter).toMatchInlineSnapshot(`
+        {
+          "array": [
+            "foo",
+            1,
+            null,
+            {
+              "hello": "world",
+            },
+            [
+              "undefined",
+              true,
+              "Bool",
+            ],
+          ],
+          "boolean": true,
+          "number": 222,
+          "object": {
+            "prop": "Foo",
+          },
+          "string": "Hello",
+        }
+      `)
     })
   })
 })

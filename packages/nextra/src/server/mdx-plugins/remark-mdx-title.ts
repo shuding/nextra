@@ -12,17 +12,25 @@ function getFrontMatterASTObject(node: MdxjsEsm): Property[] {
   return (n as any).declaration.declarations[0].init.properties
 }
 
+export function isExportNode(
+  node: MdxjsEsm,
+  varName: string
+): node is MdxjsEsm {
+  if (node.type !== 'mdxjsEsm') return false
+  const [n] = node.data!.estree!.body
+
+  if (n.type !== 'ExportNamedDeclaration') return false
+  const { name } = (n as any).declaration.declarations[0].id
+  return name === varName
+}
+
 export const remarkMdxTitle: Plugin<[], Root> = () => (ast, file) => {
   let title = ''
 
-  const frontMatterNode = ast.children.find((node: MdxjsEsm) => {
-    if (node.type !== 'mdxjsEsm') return
-    const [n] = node.data!.estree!.body
-
-    if (n.type !== 'ExportNamedDeclaration') return
-    return (n as any).declaration.declarations[0].id.name === 'frontMatter'
-  }) as MdxjsEsm
-
+  const frontMatterNode = ast.children.find((node: any) =>
+    isExportNode(node, 'frontMatter')
+  )
+  // @ts-expect-error
   const frontMatter = getFrontMatterASTObject(frontMatterNode)
 
   for (const { key, value } of frontMatter) {
