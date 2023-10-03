@@ -23,6 +23,7 @@ bar[^1]
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
       "import { createElement } from 'react'
       import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+      export const title = ''
       export const frontMatter = {}
       export function useTOC(props) {
         return [
@@ -117,6 +118,7 @@ import { Steps } from 'nextra/components'
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
       "import { createElement } from 'react'
       import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+      export const title = ''
       export const frontMatter = {}
       import { Steps } from 'nextra/components'
       export function useTOC(props) {
@@ -191,6 +193,7 @@ export const frontMatter = {
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
       "import { createElement } from 'react'
       import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+      export const title = 'Heading 1'
       export const myVar = 'interpolated'
       export const Test = () => {
         const _components = Object.assign(
@@ -352,7 +355,7 @@ export const frontMatter = {
     `)
   })
 
-  describe.only('Remote MDX', () => {
+  describe('Remote MDX', () => {
     it("with outputFormat: 'program'", async () => {
       const rawMdx = `
 import { RemoteContent } from 'nextra/data'
