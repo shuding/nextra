@@ -25,7 +25,6 @@ export const remarkHeadings: Plugin<
 > = ({ exportName = 'useTOC', isRemoteContent }) => {
   const headings: (Heading | string)[] = []
   let hasJsxInH1: boolean
-  let title: string
 
   const slugger = new Slugger()
   return (ast, file) => {
@@ -50,7 +49,6 @@ export const remarkHeadings: Plugin<
             if (hasJsx) {
               hasJsxInH1 = true
             }
-            title ||= getFlattenedValue(node)
             return
           }
 
@@ -104,7 +102,6 @@ export const remarkHeadings: Plugin<
     )
 
     file.data.hasJsxInH1 = hasJsxInH1
-    file.data.title = title
 
     file.data.toc = headings
     if (isRemoteContent) {

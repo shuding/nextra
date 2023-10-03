@@ -59,4 +59,11 @@ describe('remarkMdxFrontMatter', () => {
       expect(file.data).toEqual({})
     })
   })
+
+  describe.only('should parse frontMatter', () => {
+    it('yaml', async () => {
+      const file = await process(ESM_FRONTMATTER)
+      expect(file.data.frontMatter).toMatchInlineSnapshot('{}')
+    })
+  })
 })

@@ -45,7 +45,7 @@ import {
   remarkStructurize
 } from './mdx-plugins/index.js'
 import { rehypeExtractTocContent } from './mdx-plugins/rehype-extract-toc-content.js'
-import { truthy } from './utils.js'
+import { logger, truthy } from './utils.js'
 
 export const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS: RehypePrettyCodeOptions = {
   keepBackground: false,
@@ -216,14 +216,13 @@ export async function compileMdx(
       frontMatter: FrontMatter
     } & Pick<PageOpts, 'hasJsxInH1'>
 
-    const { hasJsxInH1, readingTime, structurizedData } = data
-    let { title, frontMatter } = data
+    const { hasJsxInH1, readingTime, structurizedData, title } = data
+    let { frontMatter } = data
     // https://github.com/shuding/nextra/issues/1032
     const result = String(vFile).replaceAll('__esModule', '_\\_esModule')
 
     if (!title) {
       logger.error('`title` is not defined')
-      title = ''
     }
     if (!frontMatter) {
       logger.error('`frontMatter` is not defined')

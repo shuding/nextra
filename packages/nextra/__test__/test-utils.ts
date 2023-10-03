@@ -11,7 +11,7 @@ export async function clean(content: VFile | string, minify = true): Promise<str
       // Remove everything starting from `function MDXContent` declaration
       .slice(content.indexOf('\n'), content.lastIndexOf('function MDXContent'))
   }
-  return prettier.format(content.trim(), {
+  return prettier.format(content, {
     parser: 'typescript',
     semi: false,
     trailingComma: 'none',

@@ -15,7 +15,7 @@ function createNode(data: Record<string, unknown>): any {
   }
 }
 
-export const remarkMdxFrontMatter: Plugin<[], Root> = () => (ast: Parent) => {
+export const remarkMdxFrontMatter: Plugin<[], Root> = () => (ast: Parent, file) => {
   const yamlNodeIndex = ast.children.findIndex(node => node.type === 'yaml')
   const esmNodeIndex = ast.children.findIndex((node: any) => {
     if (node.type !== 'mdxjsEsm') return
@@ -43,4 +43,5 @@ export const remarkMdxFrontMatter: Plugin<[], Root> = () => (ast: Parent) => {
     // Attach dummy node
     ast.children.unshift(createNode({}))
   }
+  file.data.frontMatter = {}
 }

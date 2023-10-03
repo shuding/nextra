@@ -14,7 +14,7 @@ function getFrontMatterASTObject(node: MdxjsEsm): Property[] {
 
 export const remarkMdxTitle: Plugin<[], Root> = () => (ast, file) => {
   let title = ''
-  // @ts-expect-error
+
   const frontMatterNode = ast.children.find((node: MdxjsEsm) => {
     if (node.type !== 'mdxjsEsm') return
     const [n] = node.data!.estree!.body
@@ -51,7 +51,6 @@ export const remarkMdxTitle: Plugin<[], Root> = () => (ast, file) => {
   }
 
   ast.children.unshift({
-    // @ts-expect-error
     type: 'mdxjsEsm',
     data: {
       estree: {
@@ -59,4 +58,5 @@ export const remarkMdxTitle: Plugin<[], Root> = () => (ast, file) => {
       }
     }
   })
+  file.data.title = title
 }
