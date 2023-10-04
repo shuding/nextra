@@ -1,5 +1,18 @@
 # nextra-theme-docs
 
+## 2.13.2
+
+### Patch Changes
+
+- ad7b31b0: downgrade remark-math from `6` to `5.1.1` to fix
+  `TypeError: Cannot read properties of undefined (reading 'mathFlowInside')`
+  error
+
+  fix support of ```math lang that was overridden by `rehype-pretty-code`
+
+- Updated dependencies [ad7b31b0]
+  - nextra@2.13.2
+
 ## 2.13.1
 
 ### Patch Changes
