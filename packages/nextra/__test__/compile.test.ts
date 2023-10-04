@@ -337,6 +337,15 @@ import Last from './three.mdx'
           </>
         )
       }
+      function _missingMdxReference(id, component) {
+        throw new Error(
+          \\"Expected \\" +
+            (component ? \\"component\\" : \\"object\\") +
+            \\" \`\\" +
+            id +
+            \\"\` to be defined: you likely forgot to import, pass, or provide it.\\",
+        );
+      }
       "
     `)
   })
