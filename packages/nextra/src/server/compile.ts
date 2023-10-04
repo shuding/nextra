@@ -132,7 +132,7 @@ export async function compileMdx(
     filePath = '',
     useCachedCompiler,
     isPageImport = true,
-    isPageMapImport
+    // isPageMapImport
   }: CompileMdxOptions = {}
 ) {
   const {
