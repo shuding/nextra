@@ -274,9 +274,6 @@ importers:
       katex:
         specifier: ^0.16.8
         version: 0.16.8
-      next-mdx-remote:
-        specifier: ^4.4.1
-        version: 4.4.1(react-dom@18.2.0)(react@18.2.0)
       p-limit:
         specifier: ^4.0.0
         version: 4.0.0
@@ -7800,7 +7797,7 @@ packages:
       mdast-util-to-string: 4.0.0
       micromark-util-decode-string: 2.0.0
       unist-util-visit: 5.0.0
-      zwitch: 2.0.2
+      zwitch: 2.0.4
     dev: false
 
   /mdast-util-to-string@3.1.0:
