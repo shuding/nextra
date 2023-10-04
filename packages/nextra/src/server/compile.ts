@@ -131,9 +131,9 @@ export async function compileMdx(
     mdxOptions = {},
     filePath = '',
     useCachedCompiler,
-    isPageImport = true,
-    // isPageMapImport
-  }: CompileMdxOptions = {}
+    isPageImport = true
+  } // isPageMapImport
+  : CompileMdxOptions = {}
 ) {
   const {
     jsx = false,

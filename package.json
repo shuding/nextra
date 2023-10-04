@@ -46,7 +46,7 @@
   "pnpm": {
     "overrides": {
       "esbuild": "^0.19.3",
-      "next": "13.5.5-canary.0"
+      "next": "13.5.3"
     },
     "patchedDependencies": {
       "@changesets/assemble-release-plan@5.2.4": "patches/@changesets__assemble-release-plan@5.2.4.patch",
