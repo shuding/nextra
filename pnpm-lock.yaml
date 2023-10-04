@@ -309,8 +309,8 @@ importers:
         specifier: ^5.0.0
         version: 5.0.0
       zod:
-        specifier: ^3.22.2
-        version: 3.22.2
+        specifier: ^3.22.3
+        version: 3.22.3
     devDependencies:
       '@testing-library/react':
         specifier: ^14.0.0
@@ -452,8 +452,8 @@ importers:
         specifier: ^3.0.0
         version: 3.0.3
       zod:
-        specifier: ^3.20.2
-        version: 3.20.2
+        specifier: ^3.22.3
+        version: 3.22.3
     devDependencies:
       '@tailwindcss/nesting':
         specifier: ^0.0.0-insiders.565cd3e
@@ -2653,8 +2653,8 @@ packages:
     resolution: {integrity: sha512-1m66h/5eayTEZVT2PI13/2PG3EVC7a9XalmUtVSC8X76pcyKYMuyX1XAL2RUtCr8WhoMa/KrDEyoeU5v+kSQOw==}
     engines: {node: '>=10'}
     peerDependencies:
-      react: ^16 || ^17 || ^18
-      react-dom: ^16 || ^17 || ^18
+      react: ^18.2.0
+      react-dom: ^18.2.0
     dependencies:
       client-only: 0.0.1
       react: 18.2.0
@@ -2810,7 +2810,7 @@ packages:
   /@mdx-js/react@2.3.0(react@18.2.0):
     resolution: {integrity: sha512-zQH//gdOmuu7nt2oJR29vFhDv88oGPmVw6BggmrHeMI+xgEkp1B2dX9/bMBSYtK0dyLX/aOmesKS09g222K1/g==}
     peerDependencies:
-      react: '>=16'
+      react: ^18.2.0
     dependencies:
       '@types/mdx': 2.0.2
       '@types/react': 18.2.21
@@ -3262,8 +3262,8 @@ packages:
     resolution: {integrity: sha512-S04gSNJbYE30TlIMLTzv6QCTzt9AqIF5y6s6SzVFILNcNvbV/jU96GeiTPillGQo+Ny64M/5PV7klNYYgv5Dfg==}
     engines: {node: '>=14'}
     peerDependencies:
-      react: ^18.0.0
-      react-dom: ^18.0.0
+      react: ^18.2.0
+      react-dom: ^18.2.0
     dependencies:
       '@babel/runtime': 7.20.7
       '@testing-library/dom': 9.0.0
@@ -6119,8 +6119,8 @@ packages:
   /framer-motion@10.0.0(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-qVmndcu4Z3q5ftqcbUCvVewHc5yiw4uIZyM0uvJ0/spj9lza/FnWywUUc8DNIZTG1my6nFsNLRPGDruP4o6eIw==}
     peerDependencies:
-      react: ^18.0.0
-      react-dom: ^18.0.0
+      react: ^18.2.0
+      react-dom: ^18.2.0
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -7490,7 +7490,7 @@ packages:
     resolution: {integrity: sha512-3lRCD5Sh+tfA52iGgfs/XZiw33f7fFX9Bn55aNnVNUd2GzLDkOWyKYYD8Yju2B1Vn+feiEdgJs8T6Tg0xNokPw==}
     engines: {node: '>= 4'}
     peerDependencies:
-      react: '>= 0.14.0'
+      react: ^18.2.0
     dependencies:
       prop-types: 15.8.1
       react: 18.2.0
@@ -8264,8 +8264,8 @@ packages:
     resolution: {integrity: sha512-PcVF1r5XTBjiNVXw0GyaIcOwQsklHo36+7ycfmtJb52TIkT0nM4Hzv4wgJwNg7+jvTbap99qWsMwdKUYR9WxAA==}
     engines: {node: '>=14', npm: '>=7'}
     peerDependencies:
-      react: '>=16.x <=18.x'
-      react-dom: '>=16.x <=18.x'
+      react: ^18.2.0
+      react-dom: ^18.2.0
     dependencies:
       '@mdx-js/mdx': 2.3.0
       '@mdx-js/react': 2.3.0(react@18.2.0)
@@ -8280,9 +8280,9 @@ packages:
   /next-seo@6.0.0(next@13.5.3)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-jKKt1p1z4otMA28AyeoAONixVjdYmgFCWwpEFtu+DwRHQDllVX3RjtyXbuCQiUZEfQ9rFPBpAI90vDeLZlMBdg==}
     peerDependencies:
-      next: ^8.1.1-canary.54 || >=9.0.0
-      react: '>=16.0.0'
-      react-dom: '>=16.0.0'
+      next: 13.5.3
+      react: ^18.2.0
+      react-dom: ^18.2.0
     dependencies:
       next: 13.5.3(@babel/core@7.21.8)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
@@ -8292,9 +8292,9 @@ packages:
   /next-themes@0.2.1(next@13.5.3)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-B+AKNfYNIzh0vqQQKqQItTS8evEouKD7H5Hj3kmuPERwddR2TxvDSFZuTj6T7Jfn1oyeUyJMydPl1Bkxkh0W7A==}
     peerDependencies:
-      next: '*'
-      react: '*'
-      react-dom: '*'
+      next: 13.5.3
+      react: ^18.2.0
+      react-dom: ^18.2.0
     dependencies:
       next: 13.5.3(@babel/core@7.21.8)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
@@ -9082,8 +9082,8 @@ packages:
   /react-cusdis@2.1.3(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-fUJOAUY7a3y21fNzlRWUSTr/ZMsejQAYWIWdsNuBPPZHbUrBvke/8Gw4OL5Mlrth7jLw8VTNssX0WBX5/prorQ==}
     peerDependencies:
-      react: ^17.0.0
-      react-dom: ^17.0.0
+      react: ^18.2.0
+      react-dom: ^18.2.0
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -9101,7 +9101,7 @@ packages:
   /react-intersection-observer@8.34.0(react@18.2.0):
     resolution: {integrity: sha512-TYKh52Zc0Uptp5/b4N91XydfSGKubEhgZRtcg1rhTKABXijc4Sdr1uTp5lJ8TN27jwUsdXxjHXtHa0kPj704sw==}
     peerDependencies:
-      react: ^15.0.0 || ^16.0.0 || ^17.0.0|| ^18.0.0
+      react: ^18.2.0
     dependencies:
       react: 18.2.0
     dev: false
@@ -9956,7 +9956,7 @@ packages:
     peerDependencies:
       '@babel/core': '*'
       babel-plugin-macros: '*'
-      react: '>= 16.8.0 || 17.x.x || ^18.0.0-0'
+      react: ^18.2.0
     peerDependenciesMeta:
       '@babel/core':
         optional: true
@@ -11276,15 +11276,11 @@ packages:
     resolution: {integrity: sha512-N+d4UJSJbt/R3wqY7Coqs5pcV0aUj2j9IaQ3rNj9bVCLld8tTGKRa2USARjnvZJWVx1NDmQev8EknoczaOQDOA==}
     dev: false
 
-  /zod@3.20.2:
-    resolution: {integrity: sha512-1MzNQdAvO+54H+EaK5YpyEy0T+Ejo/7YLHS93G3RnYWh5gaotGHwGeN/ZO687qEDU2y4CdStQYXVHIgrUl5UVQ==}
-    dev: false
-
   /zod@3.21.4:
     resolution: {integrity: sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==}
 
-  /zod@3.22.2:
-    resolution: {integrity: sha512-wvWkphh5WQsJbVk1tbx1l1Ly4yg+XecD+Mq280uBGt9wa5BKSWf4Mhp6GmrkPixhMxmabYY7RbzlwVP32pbGCg==}
+  /zod@3.22.3:
+    resolution: {integrity: sha512-EjIevzuJRiRPbVH4mGc8nApb/lVLKVpmUhAaR5R5doKGfAnGJ6Gr3CViAVjP+4FWSxCsybeWQdcgCtbX+7oZug==}
     dev: false
 
   /zwitch@2.0.2:
@@ -11297,9 +11293,9 @@ packages:
     name: nextra
     engines: {node: '>=16'}
     peerDependencies:
-      next: '>=9.5.3'
-      react: '>=16.13.1'
-      react-dom: '>=16.13.1'
+      next: 13.5.3
+      react: ^18.2.0
+      react-dom: ^18.2.0
     dependencies:
       '@headlessui/react': 1.7.10(react-dom@18.2.0)(react@18.2.0)
       '@mdx-js/mdx': 2.3.0
@@ -11329,7 +11325,7 @@ packages:
       title: 3.5.3
       unist-util-remove: 4.0.0
       unist-util-visit: 5.0.0
-      zod: 3.22.2
+      zod: 3.22.3
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -11339,11 +11335,11 @@ packages:
     id: file:packages/nextra-theme-blog
     name: nextra-theme-blog
     peerDependencies:
-      next: '>=9.5.3'
+      next: 13.5.3
       nextra: workspace:*
-      react: '>=16.13.1'
+      react: ^18.2.0
       react-cusdis: ^2.1.3
-      react-dom: '>=16.13.1'
+      react-dom: ^18.2.0
     peerDependenciesMeta:
       react-cusdis:
         optional: true
@@ -11360,10 +11356,10 @@ packages:
     id: file:packages/nextra-theme-docs
     name: nextra-theme-docs
     peerDependencies:
-      next: '>=9.5.3'
+      next: 13.5.3
       nextra: workspace:*
-      react: '>=16.13.1'
-      react-dom: '>=16.13.1'
+      react: ^18.2.0
+      react-dom: ^18.2.0
     dependencies:
       '@headlessui/react': 1.7.10(react-dom@18.2.0)(react@18.2.0)
       '@popperjs/core': 2.11.6
@@ -11381,5 +11377,5 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       scroll-into-view-if-needed: 3.0.3
-      zod: 3.22.2
+      zod: 3.22.3
     dev: false
