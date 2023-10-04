@@ -255,7 +255,7 @@ export async function compileMdx(
               ...rehypePrettyCodeOptions
             }
           ] as any),
-        attachMeta,
+        attachMeta
       ].filter(truthy)
     })
   }
