@@ -4,7 +4,7 @@
  */
 
 import { useRouter } from 'next/router'
-import type { ReactElement } from 'react'
+import type { FC, ReactElement, ReactNode } from 'react'
 import { NEXTRA_INTERNAL } from '../constants.js'
 import { normalizePageRoute, pageTitleFromFilename } from '../server/utils.js'
 import type {
@@ -21,6 +21,7 @@ import type {
   PageOpts
 } from '../types'
 import { DataProvider } from './data.js'
+import type { Components, useMDXComponents } from './mdx.js'
 
 function isFolder(value: DynamicMetaItem): value is DynamicFolder {
   return !!value && typeof value === 'object' && value.type === 'folder'
@@ -193,3 +194,32 @@ function NextraLayout({
     </Layout>
   )
 }
+
+// Copy of MDXContent from @mdx-js to reduce bundle size and avoid dealing with AST
+export const HOC_MDXContent = (
+  _createMdxContent: FC<Record<string, any>>,
+  _provideComponents: typeof useMDXComponents,
+  useTOC: (props: Record<string, any>) => Heading[]
+) =>
+  function MDXContent(props: {
+    toc: Heading[]
+    children: ReactNode
+    components: Components
+  }) {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const { toc = useTOC(props) } = props
+    props = { ...props, toc }
+
+    const { wrapper: MDXLayout } = {
+      ..._provideComponents(),
+      ...props.components
+    }
+
+    return MDXLayout ? (
+      <MDXLayout {...props}>
+        <_createMdxContent {...props} />
+      </MDXLayout>
+    ) : (
+      _createMdxContent(props)
+    )
+  }

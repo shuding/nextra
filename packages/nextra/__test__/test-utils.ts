@@ -1,14 +1,10 @@
 import prettier from 'prettier'
 
-export async function clean(content: any, minify = true): Promise<string> {
-  if (minify) {
-    content = content.slice(
-      content.indexOf('\n'),
-      content.lastIndexOf('function MDXContent')
-    )
-  }
-
-  const cleanedContent = content.trim()
+export async function clean(content: any): Promise<string> {
+  const cleanedContent = content
+    // Remove everything starting from `function MDXContent` declaration
+    .slice(content.indexOf('\n'), content.lastIndexOf('function MDXContent'))
+    .trim()
 
   return prettier.format(cleanedContent, { parser: 'typescript' })
 }

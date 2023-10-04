@@ -29,12 +29,16 @@ type IMenuItem = z.infer<typeof menuItemSchema>
 function extendMeta(
   meta: string | Record<string, any> = {},
   fallback: Record<string, any>
-) {
+): Record<string, any> {
   if (typeof meta === 'string') {
     meta = { title: meta }
   }
-  const theme: PageTheme = Object.assign({}, fallback.theme, meta.theme)
-  return Object.assign({}, fallback, meta, { theme })
+  const theme: PageTheme = { ...fallback.theme, ...meta.theme }
+  return {
+    ...fallback,
+    ...meta,
+    theme
+  }
 }
 
 type FolderWithoutChildren = Omit<Folder, 'children'>

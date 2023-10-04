@@ -55,6 +55,7 @@ module.exports = {
             varsIgnorePattern: '^_' // allow underscores in destructuring
           }
         ],
+        'prefer-object-spread': 'error',
         // todo: enable
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-non-null-assertion': 'off',
