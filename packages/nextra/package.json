@@ -111,7 +111,7 @@
     "clean": "rimraf ./dist ./style.css",
     "dev": "tsup --watch",
     "prepublishOnly": "pnpm build",
-    "test": "vitest run",
+    "test": "vitest",
     "types": "tsup --dts-only",
     "types:check": "tsc --noEmit"
   },

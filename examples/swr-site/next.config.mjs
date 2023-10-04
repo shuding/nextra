@@ -17,7 +17,8 @@ export function getStaticProps() {
 }`
     }
     return content
-  }
+  },
+  latex: true
 })
 
 /**

@@ -269,4 +269,35 @@ $$`,
       "
     `)
   })
+
+  it('should convert ```math code block language', async () => {
+    const { result } = await compileMdx(
+      `\`\`\`math
+x^2
+\`\`\``,
+      options
+    )
+    expect(result).toMatchInlineSnapshot(`
+      "/*@jsxRuntime automatic @jsxImportSource react*/
+      const {useMDXComponents: _provideComponents} = arguments[0];
+      function _createMdxContent(props) {
+        const _components = Object.assign({
+          pre: \\"pre\\",
+          code: \\"code\\",
+          span: \\"span\\"
+        }, _provideComponents(), props.components);
+        return <_components.pre data-language=\\"math\\" data-theme=\\"default\\"><_components.code data-language=\\"math\\" data-theme=\\"default\\"><_components.span className=\\"line\\"><_components.span style={{
+          color: \\"var(--shiki-color-text)\\"
+        }}>{\\"x^2\\"}</_components.span></_components.span></_components.code></_components.pre>;
+      }
+      function MDXContent(props = {}) {
+        const {wrapper: MDXLayout} = Object.assign({}, _provideComponents(), props.components);
+        return MDXLayout ? <MDXLayout {...props}><_createMdxContent {...props} /></MDXLayout> : _createMdxContent(props);
+      }
+      return {
+        default: MDXContent
+      };
+      "
+    `)
+  })
 })
