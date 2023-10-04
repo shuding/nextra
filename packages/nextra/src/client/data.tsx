@@ -10,6 +10,7 @@ export const useData = (key = 'ssg') => useContext(SSGContext)[key]
 // Make sure nextra/data remains functional, but we now recommend this new API.
 
 export const DataProvider = SSGContext.Provider
+SSGContext.displayName = 'SSG'
 
 function evaluate(compiledSource: string, scope: Record<string, unknown> = {}) {
   // if we're ready to render, we can assemble the component tree and let React do its thing
@@ -53,4 +54,10 @@ export function RemoteContent({
   const { default: MDXContent } = evaluate(compiledSource, scope)
 
   return <MDXContent components={components} />
+}
+
+RemoteContent.useTOC = (props: Record<string, unknown>) => {
+  const compiledSource = useData('__nextra_dynamic_mdx')
+  const { useTOC } = evaluate(compiledSource)
+  return useTOC(props)
 }

@@ -24,10 +24,13 @@ import { LocaleSwitch } from './locale-switch'
 const TreeState: Record<string, boolean> = Object.create(null)
 
 const FocusedItemContext = createContext<null | string>(null)
+FocusedItemContext.displayName = 'FocusedItem'
 const OnFocusItemContext = createContext<null | ((item: string | null) => any)>(
   null
 )
+OnFocusItemContext.displayName = 'OnFocusItem'
 const FolderLevelContext = createContext(0)
+FolderLevelContext.displayName = 'FolderLevel'
 
 const Folder = memo(function FolderInner(props: FolderProps) {
   const level = useContext(FolderLevelContext)

@@ -210,19 +210,16 @@ export default _createMdxContent`
   const stringifiedPageOpts = JSON.stringify(pageOpts).slice(0, -1)
   const pageMapPath = path.join(CHUNKS_DIR, `nextra-page-map-${locale}.mjs`)
 
-  const rawJs = `import { HOC_MDXWrapper, HOC_MDXContent } from 'nextra/setup-page'
+  const rawJs = `import { HOC_MDXWrapper } from 'nextra/setup-page'
 import { pageMap } from '${pageMapPath}'
 ${isAppFileFromNodeModules ? cssImports : ''}
 ${finalResult}
 
 const hoc = HOC_MDXWrapper(
-  HOC_MDXContent(
-    _createMdxContent,
-    _provideComponents,
-    useTOC
-  ),
+  _createMdxContent,
   '${route}',
-  ${stringifiedPageOpts},pageMap,frontMatter,title}
+  ${stringifiedPageOpts},pageMap,frontMatter,title},
+  typeof RemoteContent === 'undefined' ? useTOC : RemoteContent.useTOC
 )
 
 // Exporting Capitalized function make hot works

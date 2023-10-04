@@ -4,8 +4,7 @@
  */
 
 import { useRouter } from 'next/router'
-import type { FC, ReactElement, ReactNode } from 'react'
-import { createElement } from 'react'
+import type { ReactElement, ReactNode } from 'react'
 import { NEXTRA_INTERNAL } from '../constants.js'
 import { normalizePageRoute, pageTitleFromFilename } from '../server/utils.js'
 import type {
@@ -22,7 +21,7 @@ import type {
   PageOpts
 } from '../types'
 import { DataProvider } from './data.js'
-import type { Components, useMDXComponents } from './mdx.js'
+import { useMDXComponents } from './mdx.js'
 
 function isFolder(value: DynamicMetaItem): value is DynamicFolder {
   return !!value && typeof value === 'object' && value.type === 'folder'
@@ -129,7 +128,8 @@ export const resolvePageMap =
 export function HOC_MDXWrapper(
   MDXContent: NextraMDXContent,
   route: string,
-  pageOpts: PageOpts
+  pageOpts: PageOpts,
+  useTOC: UseTOC
 ) {
   // Make sure the same component is always returned so Next.js will render the
   // stable layout. We then put the actual content into a global store and use
@@ -143,73 +143,88 @@ export function HOC_MDXWrapper(
     Content: MDXContent,
     pageOpts
   }
-  return NextraLayout
-}
+  return function NextraLayout({
+    __nextra_pageMap = [],
+    __nextra_dynamic_opts,
+    ...props
+  }: any): ReactElement {
+    const __nextra_internal__ = (globalThis as NextraInternalGlobal)[
+      NEXTRA_INTERNAL
+    ]
+    const { Layout, themeConfig } = __nextra_internal__
+    const { route } = useRouter()
+    console.log({ route })
 
-function NextraLayout({
-  __nextra_pageMap = [],
-  __nextra_dynamic_opts,
-  ...props
-}: any): ReactElement {
-  const __nextra_internal__ = (globalThis as NextraInternalGlobal)[
-    NEXTRA_INTERNAL
-  ]
-  const { Layout, themeConfig } = __nextra_internal__
-  const { route } = useRouter()
-  console.log({ route })
+    const pageContext = __nextra_internal__.context[route]
 
-  const pageContext = __nextra_internal__.context[route]
+    if (!pageContext) {
+      throw new Error(
+        `No content found for the "${route}" route. Please report it as a bug.`
+      )
+    }
 
-  if (!pageContext) {
-    throw new Error(
-      `No content found for the "${route}" route. Please report it as a bug.`
+    let { pageOpts } = pageContext
+
+    for (const { route, children } of __nextra_pageMap) {
+      // TODO 2 for locale, 1 without local
+      const paths = route.split('/').slice(2)
+      const folder = findFolder(pageOpts.pageMap, paths)
+      folder.children = children
+    }
+
+    if (__nextra_dynamic_opts) {
+      const { title, frontMatter } = __nextra_dynamic_opts
+      pageOpts = {
+        ...pageOpts,
+        title,
+        frontMatter
+      }
+    }
+
+    return (
+      <Layout themeConfig={themeConfig} pageOpts={pageOpts} pageProps={props}>
+        <DataProvider value={props}>
+          <MDXWrapper useTOC={useTOC}>
+            {/* @ts-expect-error */}
+            <pageContext.Content />
+          </MDXWrapper>
+        </DataProvider>
+      </Layout>
     )
   }
+}
 
-  let { pageOpts } = pageContext
+type UseTOC = (props: Record<string, any>) => Heading[]
 
-  for (const { route, children } of __nextra_pageMap) {
-    // TODO 2 for locale, 1 without local
-    const paths = route.split('/').slice(2)
-    const folder = findFolder(pageOpts.pageMap, paths)
-    folder.children = children
-  }
-
-  if (__nextra_dynamic_opts) {
-    const { title, frontMatter } = __nextra_dynamic_opts
-    pageOpts = {
-      ...pageOpts,
-      title,
-      frontMatter
-    }
-  }
-
+function MDXWrapper({
+  children,
+  useTOC
+}: {
+  children: ReactNode
+  useTOC: UseTOC
+}): ReactElement {
+  const { wrapper } = useMDXComponents()
   return (
-    <Layout themeConfig={themeConfig} pageOpts={pageOpts} pageProps={props}>
-      <DataProvider value={props}>
-        {/* @ts-expect-error */}
-        <pageContext.Content toc={__nextra_dynamic_opts?.toc} />
-      </DataProvider>
-    </Layout>
+    <TOCWrapper useTOC={useTOC} wrapper={wrapper}>
+      {children}
+    </TOCWrapper>
   )
 }
 
-// Copy of MDXContent from @mdx-js to reduce bundle size and avoid dealing with AST
-export const HOC_MDXContent = (
-  _createMdxContent: FC<Record<string, any>>,
-  _provideComponents: typeof useMDXComponents,
-  useTOC: (props: Record<string, any>) => Heading[]
-) =>
-  function NextraMDXContent(props: {
-    toc: Heading[]
-    children: ReactNode
-    components: Components
-  }) {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const { toc = useTOC(props) } = props
-    props = { ...props, toc }
-
-    const { wrapper } = _provideComponents()
-    const child = createElement(_createMdxContent)
-    return wrapper ? createElement(wrapper, props, child) : child
-  }
+// Wrapper to avoid following errors:
+// Uncaught Error: Rendered fewer hooks than expected. This may be caused by an accidental early return statement.
+// and
+// Warning: React has detected a change in the order of Hooks called by NextraMDXContent. This will lead to bugs and errors if not fixed. For more information, read the Rules of Hooks
+function TOCWrapper({
+  children,
+  useTOC,
+  wrapper: Wrapper,
+  ...props
+}: {
+  children: ReactNode
+  useTOC: UseTOC
+  wrapper?: any
+}): ReactElement {
+  const toc = useTOC(props)
+  return Wrapper ? <Wrapper toc={toc}>{children}</Wrapper> : (children as any)
+}

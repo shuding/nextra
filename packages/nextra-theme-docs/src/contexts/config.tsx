@@ -18,6 +18,7 @@ const ConfigContext = createContext<Config>({
   frontMatter: {},
   ...DEFAULT_THEME
 })
+ConfigContext.displayName = 'Config'
 
 export function useConfig<FrontMatterType = FrontMatter>() {
   // @ts-expect-error TODO: fix Type 'Config<{ [key: string]: any; }>' is not assignable to type 'Config<FrontMatterType>'.

@@ -103,8 +103,5 @@ export const remarkHeadings: Plugin<
 
     file.data.hasJsxInH1 = hasJsxInH1
     file.data.toc = headings
-    if (isRemoteContent) {
-      file.data.headings = headings
-    }
   }
 }

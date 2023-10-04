@@ -1,4 +1,7 @@
-import { useMDXComponents as originalUseMDXComponents } from '@mdx-js/react'
+import {
+  MDXContext,
+  useMDXComponents as originalUseMDXComponents
+} from '@mdx-js/react'
 import type { Components } from '@mdx-js/react/lib'
 import Image, { type ImageProps } from 'next/image'
 import { createElement } from 'react'
@@ -21,3 +24,5 @@ export const useMDXComponents: typeof originalUseMDXComponents = components => {
 export { MDXProvider } from '@mdx-js/react'
 
 export type { Components }
+
+MDXContext.displayName = 'MDX'

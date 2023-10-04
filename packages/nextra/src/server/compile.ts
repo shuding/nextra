@@ -17,7 +17,6 @@ import { bundledLanguages, getHighlighter } from 'shiki'
 import type { Pluggable } from 'unified'
 import type {
   FrontMatter,
-  Heading,
   LoaderOptions,
   PageOpts,
   ReadingTime,
@@ -33,8 +32,8 @@ import {
 import {
   attachMeta,
   parseMeta,
+  recmaRewriteFunctionBody,
   recmaRewriteJsx,
-  recmaRewriteRemoteJsx,
   rehypeIcon,
   remarkCustomHeadingId,
   remarkHeadings,
@@ -154,24 +153,24 @@ export async function compileMdx(
   const format =
     _format === 'detect' ? (filePath.endsWith('.mdx') ? 'mdx' : 'md') : _format
 
-  if (isPageMapImport) {
-    const compiler = createProcessor({
-      format,
-      remarkPlugins: [
-        remarkFrontmatter, // parse and attach yaml node
-        remarkMdxFrontMatter
-      ]
-    })
-    const vFile = await compiler.process(
-      filePath ? { value: source, path: filePath } : source
-    )
-    const content = vFile.toString()
-
-    const index = content.lastIndexOf('function _createMdxContent(props) {')
-    const result = content.slice(0, index)
-
-    return { result } as any
-  }
+  // if (isPageMapImport) {
+  //   const compiler = createProcessor({
+  //     format,
+  //     remarkPlugins: [
+  //       remarkFrontmatter, // parse and attach yaml node
+  //       remarkMdxFrontMatter
+  //     ]
+  //   })
+  //   const vFile = await compiler.process(
+  //     filePath ? { value: source, path: filePath } : source
+  //   )
+  //   const content = vFile.toString()
+  //
+  //   const index = content.lastIndexOf('function _createMdxContent(props) {')
+  //   const result = content.slice(0, index)
+  //
+  //   return { result } as any
+  // }
 
   let searchIndexKey: string | null = null
   if (ERROR_ROUTES.has(route)) {
@@ -216,17 +215,10 @@ export async function compileMdx(
       structurizedData: StructurizedData
       title?: string
       frontMatter: FrontMatter
-      headings: Heading[]
     } & Pick<PageOpts, 'hasJsxInH1'>
 
-    const {
-      readingTime,
-      structurizedData,
-      title,
-      frontMatter,
-      headings,
-      hasJsxInH1
-    } = data
+    const { readingTime, structurizedData, title, frontMatter, hasJsxInH1 } =
+      data
     // https://github.com/shuding/nextra/issues/1032
     const result = String(vFile).replaceAll('__esModule', '_\\_esModule')
 
@@ -247,7 +239,6 @@ export async function compileMdx(
       ...(hasJsxInH1 && { hasJsxInH1 }),
       ...(readingTime && { readingTime }),
       ...(searchIndexKey !== null && { searchIndexKey, structurizedData }),
-      ...(isRemoteContent && { toc: headings }),
       frontMatter
     }
   } catch (err) {
@@ -330,8 +321,7 @@ export async function compileMdx(
                 node.type !== 'FunctionDeclaration' ||
                 node.id!.name !== 'MDXContent'
             )
-
-          const localExports = new Set(['title', 'frontMatter', 'useTOC'])
+          const localExports = new Set(['title', 'frontMatter' /* 'useTOC' */])
 
           for (const node of ast.body) {
             if (node.type === 'ExportNamedDeclaration') {
@@ -353,7 +343,7 @@ export async function compileMdx(
             }
           }
         },
-        isRemoteContent ? recmaRewriteRemoteJsx : recmaRewriteJsx
+        isRemoteContent ? recmaRewriteFunctionBody : recmaRewriteJsx
       ].filter(truthy)
     })
   }
