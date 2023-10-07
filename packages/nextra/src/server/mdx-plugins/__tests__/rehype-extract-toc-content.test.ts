@@ -24,7 +24,7 @@ bar[^1]
       "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
       const title = ''
       const frontMatter = {}
-      function useTOC(props) {
+      export function useTOC(props) {
         return [
           {
             value: 'foo',
@@ -119,7 +119,7 @@ import { Steps } from 'nextra/components'
       const title = ''
       const frontMatter = {}
       import { Steps } from 'nextra/components'
-      function useTOC(props) {
+      export function useTOC(props) {
         return [
           {
             value: 'baz qux',
@@ -204,7 +204,7 @@ export const frontMatter = {
       const frontMatter = {
         test: 'extract toc content'
       }
-      function useTOC(props) {
+      export function useTOC(props) {
         const _components = Object.assign(
           {
             span: 'span',
@@ -373,7 +373,7 @@ import { RemoteContent } from 'nextra/data'
         const title = '[[...slug]]'
         const frontMatter = {}
         import { RemoteContent } from 'nextra/data'
-        function useTOC(props) {
+        export function useTOC(props) {
           return [
             {
               value: 'hello',

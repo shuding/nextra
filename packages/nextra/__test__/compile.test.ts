@@ -54,8 +54,8 @@ export const TagName = () => {
     )
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
       "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
-      export const title = 'My Header'
-      export const frontMatter = {}
+      const title = 'My Header'
+      const frontMatter = {}
       export function useTOC(props) {
         return [
           {
@@ -129,8 +129,8 @@ export const TagName = () => {
     const { result } = await compileMdx('### My Header', { mdxOptions })
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
       "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
-      export const title = ''
-      export const frontMatter = {}
+      const title = ''
+      const frontMatter = {}
       export function useTOC(props) {
         return [
           {
@@ -191,8 +191,8 @@ import Last from './three.mdx'
     )
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
       "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
-      export const title = ''
-      export const frontMatter = {}
+      const title = ''
+      const frontMatter = {}
       import FromMdx, { useTOC as useTOC0 } from './one.mdx'
       import FromMarkdown, { useTOC as useTOC1 } from './two.md'
       import IgnoreMe from './foo'
@@ -339,12 +339,12 @@ import Last from './three.mdx'
       }
       function _missingMdxReference(id, component) {
         throw new Error(
-          \\"Expected \\" +
-            (component ? \\"component\\" : \\"object\\") +
-            \\" \`\\" +
+          'Expected ' +
+            (component ? 'component' : 'object') +
+            ' \`' +
             id +
-            \\"\` to be defined: you likely forgot to import, pass, or provide it.\\",
-        );
+            '\` to be defined: you likely forgot to import, pass, or provide it.'
+        )
       }
       "
     `)

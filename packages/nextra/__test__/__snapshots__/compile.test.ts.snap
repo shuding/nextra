@@ -2,8 +2,8 @@
 
 exports[`Process heading > code-h1 1`] = `
 "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
-export const title = 'codegen.yml'
-export const frontMatter = {}
+const title = 'codegen.yml'
+const frontMatter = {}
 export function useTOC(props) {
   return []
 }
@@ -27,8 +27,8 @@ function _createMdxContent(props) {
 
 exports[`Process heading > code-with-text-h1 1`] = `
 "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
-export const title = 'codegen.yml file'
-export const frontMatter = {}
+const title = 'codegen.yml file'
+const frontMatter = {}
 export function useTOC(props) {
   return []
 }
@@ -56,8 +56,8 @@ exports[`Process heading > dynamic-h1 1`] = `
   "frontMatter": {},
   "hasJsxInH1": true,
   "result": "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
-export const title = 'Posts Tagged with “”'
-export const frontMatter = {}
+const title = 'Posts Tagged with “”'
+const frontMatter = {}
 import { useRouter } from 'next/router'
 export const TagName = () => {
   const { tag } = useRouter().query
@@ -89,8 +89,8 @@ function _createMdxContent(props) {
 
 exports[`Process heading > no-h1 1`] = `
 "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
-export const title = ''
-export const frontMatter = {}
+const title = ''
+const frontMatter = {}
 export function useTOC(props) {
   return [
     {
@@ -116,8 +116,8 @@ function _createMdxContent(props) {
 
 exports[`Process heading > static-h1 1`] = `
 "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
-export const title = 'Hello World'
-export const frontMatter = {}
+const title = 'Hello World'
+const frontMatter = {}
 export function useTOC(props) {
   return []
 }

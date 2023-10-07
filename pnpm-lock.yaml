@@ -248,8 +248,8 @@ importers:
         specifier: ^0.0.5
         version: 0.0.5(react@18.2.0)
       '@theguild/remark-npm2yarn':
-        specifier: 0.2.0-alpha-20230904225308-5ba1c7b
-        version: 0.2.0-alpha-20230904225308-5ba1c7b
+        specifier: 0.3.0-alpha-20231007232355-2b5ea30
+        version: 0.3.0-alpha-20231007232355-2b5ea30
       clsx:
         specifier: ^2.0.0
         version: 2.0.0
@@ -3270,8 +3270,8 @@ packages:
       - supports-color
     dev: false
 
-  /@theguild/remark-npm2yarn@0.2.0-alpha-20230904225308-5ba1c7b:
-    resolution: {integrity: sha512-zBy2HxDE1cemL6ghKnAZrjxbNLNaHjDgwO5LNhvQddc2zasw678E+vzCP9kMAvl5vxXCAR8dEUji3ZttnzWz2g==}
+  /@theguild/remark-npm2yarn@0.3.0-alpha-20231007232355-2b5ea30:
+    resolution: {integrity: sha512-vnqnwU6/aeMgeDWSZg+wk1Xdn+9KMfwQmvPfrHj9NwiMuEUgVhCvfFL/T9lAZgTIB+LPNonaXwl7vhdOaDu78Q==}
     dependencies:
       npm-to-yarn: 2.1.0
       unist-util-visit: 5.0.0
@@ -11720,7 +11720,7 @@ packages:
       '@mdx-js/react': 2.3.0(react@18.2.0)
       '@napi-rs/simple-git': 0.1.9
       '@theguild/remark-mermaid': 0.0.5(react@18.2.0)
-      '@theguild/remark-npm2yarn': 0.2.0-alpha-20230904225308-5ba1c7b
+      '@theguild/remark-npm2yarn': 0.3.0-alpha-20231007232355-2b5ea30
       clsx: 2.0.0
       estree-util-to-js: 2.0.0
       estree-util-value-to-estree: 3.0.1
