@@ -326,9 +326,11 @@ export async function compileMdx(
           for (const node of ast.body) {
             if (node.type === 'ExportNamedDeclaration') {
               let varName: string
-              const declaration = node.declaration!
-
-              if (declaration.type === 'VariableDeclaration') {
+              const { declaration } = node
+              if (!declaration) {
+                // skip for `export ... from '...'` declaration
+                continue
+              } else if (declaration.type === 'VariableDeclaration') {
                 const [{ id }] = declaration.declarations
                 varName = (id as any).name
               } else if (declaration.type === 'FunctionDeclaration') {
