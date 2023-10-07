@@ -131,9 +131,9 @@ export async function compileMdx(
     mdxOptions = {},
     filePath = '',
     useCachedCompiler,
-    isPageImport = true
-  } // isPageMapImport
-  : CompileMdxOptions = {}
+    isPageImport = true,
+    isPageMapImport
+  }: CompileMdxOptions = {}
 ) {
   const {
     jsx = false,
@@ -153,24 +153,24 @@ export async function compileMdx(
   const format =
     _format === 'detect' ? (filePath.endsWith('.mdx') ? 'mdx' : 'md') : _format
 
-  // if (isPageMapImport) {
-  //   const compiler = createProcessor({
-  //     format,
-  //     remarkPlugins: [
-  //       remarkFrontmatter, // parse and attach yaml node
-  //       remarkMdxFrontMatter
-  //     ]
-  //   })
-  //   const vFile = await compiler.process(
-  //     filePath ? { value: source, path: filePath } : source
-  //   )
-  //   const content = vFile.toString()
-  //
-  //   const index = content.lastIndexOf('function _createMdxContent(props) {')
-  //   const result = content.slice(0, index)
-  //
-  //   return { result } as any
-  // }
+  if (isPageMapImport) {
+    const compiler = createProcessor({
+      format,
+      remarkPlugins: [
+        remarkFrontmatter, // parse and attach yaml node
+        remarkMdxFrontMatter
+      ]
+    })
+    const vFile = await compiler.process(
+      filePath ? { value: source, path: filePath } : source
+    )
+    const content = vFile.toString()
+
+    const index = content.lastIndexOf('function _createMdxContent(props) {')
+    const result = content.slice(0, index)
+
+    return { result } as any
+  }
 
   let searchIndexKey: string | null = null
   if (ERROR_ROUTES.has(route)) {

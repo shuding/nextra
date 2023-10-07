@@ -62,12 +62,12 @@ export type Heading = {
 
 export type PageOpts<FrontMatterType = FrontMatter> = {
   filePath: string
+  frontMatter: FrontMatterType
   pageMap: PageMapItem[]
   title: string
   hasJsxInH1?: boolean
   timestamp?: number
   readingTime?: ReadingTime
-  frontMatter: FrontMatterType
 }
 
 export type ReadingTime = {
