@@ -22,7 +22,7 @@ title: ${title}
 # Hello`,
         opts
       )
-      expect(clean(result)).resolves.toMatch(`export const title = '${title}'`)
+      expect(clean(result)).resolves.toMatch(`const title = '${title}'`)
     })
 
     it('esm', async () => {
@@ -33,7 +33,7 @@ title: ${title}
 # Hello`,
         opts
       )
-      expect(clean(result)).resolves.toMatch(`export const title = '${title}'`)
+      expect(clean(result)).resolves.toMatch(`const title = '${title}'`)
     })
   })
 
@@ -45,13 +45,11 @@ title: ${title}
 `,
       opts
     )
-    expect(clean(result)).resolves.toMatch("export const title = 'h1 1'")
+    expect(clean(result)).resolves.toMatch("const title = 'h1 1'")
   })
 
   it('should fallback to capitalized filename', async () => {
     const { result } = await compileMdx('', opts)
-    expect(clean(result)).resolves.toMatch(
-      "export const title = 'My Test File'"
-    )
+    expect(clean(result)).resolves.toMatch("const title = 'My Test File'")
   })
 })
