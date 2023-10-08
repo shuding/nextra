@@ -314,7 +314,7 @@ export async function compileMdx(
         [rehypeExtractTocContent, { isRemoteContent }]
       ].filter(truthy),
       recmaPlugins: [
-        (() => (ast, file) => {
+        (() => (ast: Program, file) => {
           const mdxContentIndex = ast.body.findIndex(
             node =>
               node.type === 'FunctionDeclaration' &&
@@ -324,8 +324,7 @@ export async function compileMdx(
           // Remove `MDXContent` since we use custom HOC_MDXContent
           const [mdxContent] = ast.body.splice(mdxContentIndex, 1)
 
-          // @ts-expect-error fixme
-          const mdxContentArgument = mdxContent.body.body[0].argument
+          const mdxContentArgument = (mdxContent as any).body.body[0].argument
 
           file.data.hasMdxLayout =
             !!mdxContentArgument &&
