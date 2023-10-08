@@ -216,7 +216,7 @@ ${isAppFileFromNodeModules ? cssImports : ''}
 ${finalResult}
 
 const hoc = HOC_MDXWrapper(
-  _createMdxContent,
+  MDXLayout,
   '${route}',
   ${stringifiedPageOpts},pageMap,frontMatter,title},
   typeof RemoteContent === 'undefined' ? useTOC : RemoteContent.useTOC

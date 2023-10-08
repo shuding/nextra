@@ -324,9 +324,11 @@ export async function compileMdx(
           // Remove `MDXContent` since we use custom HOC_MDXContent
           const [mdxContent] = ast.body.splice(mdxContentIndex, 1)
 
+          const mdxContentArgument = mdxContent.body.body[0].argument
+
           file.data.hasMdxLayout =
-            mdxContent.body.body[0].argument.openingElement.name.name ===
-            'MDXLayout'
+            !!mdxContentArgument &&
+            mdxContentArgument.openingElement.name.name === 'MDXLayout'
 
           const localExports = new Set(['title', 'frontMatter' /* 'useTOC' */])
 

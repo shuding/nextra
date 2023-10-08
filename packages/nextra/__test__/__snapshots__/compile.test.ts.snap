@@ -7,7 +7,7 @@ const frontMatter = {}
 export function useTOC(props) {
   return []
 }
-function _createMdxContent(props) {
+function MDXLayout(props) {
   const _components = Object.assign(
     {
       h1: 'h1',
@@ -32,7 +32,7 @@ const frontMatter = {}
 export function useTOC(props) {
   return []
 }
-function _createMdxContent(props) {
+function MDXLayout(props) {
   const _components = Object.assign(
     {
       h1: 'h1',
@@ -66,7 +66,7 @@ export const TagName = () => {
 export function useTOC(props) {
   return []
 }
-function _createMdxContent(props) {
+function MDXLayout(props) {
   const _components = Object.assign(
     {
       h1: 'h1'
@@ -100,7 +100,7 @@ export function useTOC(props) {
     }
   ]
 }
-function _createMdxContent(props) {
+function MDXLayout(props) {
   const { toc = useTOC(props) } = props
   const _components = Object.assign(
     {
@@ -121,7 +121,7 @@ const frontMatter = {}
 export function useTOC(props) {
   return []
 }
-function _createMdxContent(props) {
+function MDXLayout(props) {
   const _components = Object.assign(
     {
       h1: 'h1'
