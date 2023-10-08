@@ -5,28 +5,10 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import NextLink from 'next/link'
 import { Link } from 'nextra-theme-docs'
-import { ReactNode, useState } from 'react'
-import docsCardDark from '../../public/assets/card-1.dark.png'
-import docsCard from '../../public/assets/card-1.png'
+import docsCardDark from 'public/assets/card-1.dark.png'
+import docsCard from 'public/assets/card-1.png'
+import { useState } from 'react'
 import styles from './index.module.css'
-
-function Comparison({
-  a,
-  b,
-  invert
-}: {
-  a: ReactNode
-  b: ReactNode
-  invert?: boolean
-}) {
-  return (
-    <div className={cn(styles.comparison, invert && styles.invert)}>
-      {a}
-      <ArrowRightIcon width="1.2em" />
-      {b}
-    </div>
-  )
-}
 
 const LANGUAGES = [
   { lang: 'en', name: 'English' },
@@ -36,40 +18,38 @@ const LANGUAGES = [
 
 function I18n() {
   const [active, setActive] = useState('')
+
   return (
-    <Comparison
-      a={
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '.5rem' }}>
-          {LANGUAGES.map(({ lang }) => (
-            <span
-              key={lang}
-              className={cn(styles.file, active === lang && styles.active)}
-              onPointerOver={() => setActive(lang)}
-            >
-              /{lang}/hello.mdx
-            </span>
-          ))}
-        </div>
-      }
-      b={
-        <div className="menu overflow-auto rounded-md bg-white py-1 text-sm shadow-lg ring-1 ring-black ring-opacity-5 dark:bg-neutral-800 dark:ring-white dark:ring-opacity-20">
-          {LANGUAGES.map(({ lang, name }) => (
-            <div
-              key={lang}
-              className={cn(
-                'relative cursor-default select-none whitespace-nowrap px-4 py-1.5',
-                active === lang
-                  ? '_text-primary-600 _bg-primary-50 dark:_bg-primary-500/10'
-                  : 'text-gray-800 dark:text-gray-100 '
-              )}
-              onPointerOver={() => setActive(lang)}
-            >
-              {name}
-            </div>
-          ))}
-        </div>
-      }
-    />
+    <div className={cn(styles.comparison)}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '.5rem' }}>
+        {LANGUAGES.map(({ lang }) => (
+          <span
+            key={lang}
+            onPointerOver={() => setActive(lang)}
+            className={cn(styles.file, active === lang && styles.active)}
+          >
+            /{lang}/hello.mdx
+          </span>
+        ))}
+      </div>
+      <ArrowRightIcon width="1.2em" />
+      <div className="menu overflow-auto rounded-md bg-white py-1 text-sm shadow-lg ring-1 ring-black ring-opacity-5 dark:bg-neutral-800 dark:ring-white dark:ring-opacity-20">
+        {LANGUAGES.map(({ lang, name }) => (
+          <div
+            key={lang}
+            onPointerOver={() => setActive(lang)}
+            className={cn(
+              'relative cursor-default select-none whitespace-nowrap px-4 py-1.5',
+              active === lang
+                ? '_text-primary-600 _bg-primary-50 dark:_bg-primary-500/10'
+                : 'text-gray-800 dark:text-gray-100 '
+            )}
+          >
+            {name}
+          </div>
+        ))}
+      </div>
+    </div>
   )
 }
 
@@ -82,7 +62,7 @@ export const IndexPage = () => (
       </h1>
       <p className="subtitle">
         Simple, powerful and flexible site generation framework{' '}
-        <br className="sm:block hidden" />
+        <br className="max-md:hidden" />
         with everything you love from{' '}
         <a className="nextjs-link" href="https://nextjs.org" target="_blank">
           Next.js
