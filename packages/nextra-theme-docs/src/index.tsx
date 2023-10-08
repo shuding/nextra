@@ -136,12 +136,9 @@ function InnerLayout({
   const { direction } = config.i18n.find(l => l.locale === locale) || config
   const dir = direction === 'rtl' ? 'rtl' : 'ltr'
 
-  const components = getComponents({
-    isRawLayout: themeContext.layout === 'raw',
-    components: {
-      ...config.components,
-      // @ts-expect-error fixme
-      wrapper: function NextraWrapper({ toc, children }) {
+  const wrapper: NextraMDXContent = useMemo(
+    () =>
+      function NextraWrapper({ toc, children }) {
         const tocEl =
           activeType === 'page' ||
           !themeContext.toc ||
@@ -198,7 +195,29 @@ function InnerLayout({
             </Body>
           </div>
         )
-      } satisfies NextraMDXContent
+      },
+    [
+      activeIndex,
+      activePath,
+      activeType,
+      config.toc.component,
+      config.toc.float,
+      directories,
+      docsDirectories,
+      filePath,
+      flatDocsDirectories,
+      hideSidebar,
+      themeContext,
+      timestamp
+    ]
+  )
+
+  const components = getComponents({
+    isRawLayout: themeContext.layout === 'raw',
+    components: {
+      ...config.components,
+      // @ts-expect-error fixme
+      wrapper
     }
   })
 

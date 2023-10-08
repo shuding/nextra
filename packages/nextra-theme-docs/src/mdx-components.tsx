@@ -175,6 +175,55 @@ const A = ({ href = '', ...props }) => (
   <Anchor href={href} newWindow={EXTERNAL_HREF_REGEX.test(href)} {...props} />
 )
 
+const DEFAULT_COMPONENTS: Components = {
+  h1: props => (
+    <h1
+      className="_mt-2 _text-4xl _font-bold _tracking-tight _text-slate-900 dark:_text-slate-100"
+      {...props}
+    />
+  ),
+  ul: props => (
+    <ul
+      className="_mt-6 _list-disc first:_mt-0 ltr:_ml-6 rtl:_mr-6"
+      {...props}
+    />
+  ),
+  ol: props => (
+    <ol
+      className="_mt-6 _list-decimal first:_mt-0 ltr:_ml-6 rtl:_mr-6"
+      {...props}
+    />
+  ),
+  li: props => <li className="_my-2" {...props} />,
+  blockquote: props => (
+    <blockquote
+      className={cn(
+        '_mt-6 _border-gray-300 _italic _text-gray-700 dark:_border-gray-700 dark:_text-gray-400',
+        'first:_mt-0 ltr:_border-l-2 ltr:_pl-6 rtl:_border-r-2 rtl:_pr-6'
+      )}
+      {...props}
+    />
+  ),
+  hr: props => (
+    <hr
+      className="_my-8 _border-neutral-200/70 contrast-more:_border-neutral-400 dark:_border-primary-100/10 contrast-more:dark:_border-neutral-400"
+      {...props}
+    />
+  ),
+  a: Link,
+  table: props => (
+    <Table className="nextra-scrollbar _mt-6 _p-0 first:_mt-0" {...props} />
+  ),
+  p: props => <p className="_mt-6 _leading-7 first:_mt-0" {...props} />,
+  tr: Tr,
+  th: Th,
+  td: Td,
+  details: Details,
+  summary: Summary,
+  pre: Pre,
+  code: Code
+}
+
 export function getComponents({
   isRawLayout,
   components
@@ -188,57 +237,12 @@ export function getComponents({
 
   const context = { index: 0 }
   return {
-    h1: props => (
-      <h1
-        className="_mt-2 _text-4xl _font-bold _tracking-tight _text-slate-900 dark:_text-slate-100"
-        {...props}
-      />
-    ),
+    ...DEFAULT_COMPONENTS,
     h2: createHeading('h2', context),
     h3: createHeading('h3', context),
     h4: createHeading('h4', context),
     h5: createHeading('h5', context),
     h6: createHeading('h6', context),
-    ul: props => (
-      <ul
-        className="_mt-6 _list-disc first:_mt-0 ltr:_ml-6 rtl:_mr-6"
-        {...props}
-      />
-    ),
-    ol: props => (
-      <ol
-        className="_mt-6 _list-decimal first:_mt-0 ltr:_ml-6 rtl:_mr-6"
-        {...props}
-      />
-    ),
-    li: props => <li className="_my-2" {...props} />,
-    blockquote: props => (
-      <blockquote
-        className={cn(
-          '_mt-6 _border-gray-300 _italic _text-gray-700 dark:_border-gray-700 dark:_text-gray-400',
-          'first:_mt-0 ltr:_border-l-2 ltr:_pl-6 rtl:_border-r-2 rtl:_pr-6'
-        )}
-        {...props}
-      />
-    ),
-    hr: props => (
-      <hr
-        className="_my-8 _border-neutral-200/70 contrast-more:_border-neutral-400 dark:_border-primary-100/10 contrast-more:dark:_border-neutral-400"
-        {...props}
-      />
-    ),
-    a: Link,
-    table: props => (
-      <Table className="nextra-scrollbar _mt-6 _p-0 first:_mt-0" {...props} />
-    ),
-    p: props => <p className="_mt-6 _leading-7 first:_mt-0" {...props} />,
-    tr: Tr,
-    th: Th,
-    td: Td,
-    details: Details,
-    summary: Summary,
-    pre: Pre,
-    code: Code,
     ...components
   }
 }

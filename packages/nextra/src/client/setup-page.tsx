@@ -153,7 +153,6 @@ export function HOC_MDXWrapper(
     ]
     const { Layout, themeConfig } = __nextra_internal__
     const { route } = useRouter()
-    console.log({ route })
 
     const pageContext = __nextra_internal__.context[route]
 
