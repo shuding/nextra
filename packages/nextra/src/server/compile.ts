@@ -14,7 +14,7 @@ import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 import remarkReadingTime from 'remark-reading-time'
 import { bundledLanguages, getHighlighter } from 'shiki'
-import type { Pluggable } from 'unified'
+import type { Pluggable, Plugin } from 'unified'
 import type {
   FrontMatter,
   LoaderOptions,
@@ -314,7 +314,7 @@ export async function compileMdx(
         [rehypeExtractTocContent, { isRemoteContent }]
       ].filter(truthy),
       recmaPlugins: [
-        () => (ast: Program, file) => {
+        (() => (ast, file) => {
           const mdxContentIndex = ast.body.findIndex(
             node =>
               node.type === 'FunctionDeclaration' &&
@@ -324,6 +324,7 @@ export async function compileMdx(
           // Remove `MDXContent` since we use custom HOC_MDXContent
           const [mdxContent] = ast.body.splice(mdxContentIndex, 1)
 
+          // @ts-expect-error fixme
           const mdxContentArgument = mdxContent.body.body[0].argument
 
           file.data.hasMdxLayout =
@@ -353,7 +354,7 @@ export async function compileMdx(
               }
             }
           }
-        },
+        }) satisfies Plugin<[], Program>,
         isRemoteContent ? recmaRewriteFunctionBody : recmaRewriteJsx
       ].filter(truthy)
     })

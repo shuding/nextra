@@ -3,7 +3,8 @@ import { ArrowRightIcon } from '@components/icons'
 import cn from 'clsx'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import Link from 'next/link'
+import NextLink from 'next/link'
+import { Link } from 'nextra-theme-docs'
 import { useState } from 'react'
 import docsCardDark from '../../public/assets/card-1.dark.png'
 import docsCard from '../../public/assets/card-1.png'
@@ -110,9 +111,9 @@ export const IndexPage = () => (
         </a>
       </p>
       <p className="subtitle">
-        <Link className={styles.cta} href="/docs">
+        <NextLink className={styles.cta} href="/docs">
           Get started <span>→</span>
-        </Link>
+        </NextLink>
       </p>
     </div>
     <style jsx>{`
@@ -334,37 +335,38 @@ export const IndexPage = () => (
             className="card-with-border"
             href="/docs/guide/image"
           >
-            <div className="h-full flex flex-col justify-between">
-              <h3>
-                Links and images are <br className="show-on-mobile" />
-                always <span className="font-light">optimized</span>
-              </h3>
-              <p className="text-left mb-8">
-                Nextra automatically converts Markdown links and images to use
-                [Next.js
-                Link](https://nextjs.org/docs/routing/introduction#linking-between-pages)
-                and [Next.js
-                Image](https://nextjs.org/docs/basic-features/image-optimization#local-images)
-                when possible. No slow navigation or layout shift.
-              </p>
-              <div>
-                <div className={styles.optimization}>
-                  <div style={{ fontSize: '.9rem' }} className="leading-8">
-                    <code>{`[Learn more](/more)`}</code>
-                    <br />
-                    <code>{`![Hero](/hero.png)`}</code>
-                  </div>
+            <h3>
+              Links and images are <br className="show-on-mobile" />
+              always <span className="font-light">optimized</span>
+            </h3>
+            <p className="text-left mb-8">
+              Nextra automatically converts Markdown links and images to use{' '}
+              <Link href="https://nextjs.org/docs/routing/introduction#linking-between-pages">
+                Next.js Link
+              </Link>{' '}
+              and{' '}
+              <Link href="https://nextjs.org/docs/basic-features/image-optimization#local-images">
+                Next.js Image
+              </Link>{' '}
+              when possible. No slow navigation or layout shift.
+            </p>
+            <div>
+              <div className={styles.optimization}>
+                <div style={{ fontSize: '.9rem' }} className="leading-8">
+                  <code>[Learn more](/more)</code>
+                  <br />
+                  <code>![Hero](/hero.png)</code>
                 </div>
-                <ArrowRightIcon
-                  width="1.2em"
-                  className="text-neutral-400 rotate-90 my-6 mx-auto"
-                />
-                <div className={styles.optimization}>
-                  <div style={{ fontSize: '.9rem' }} className="leading-8">
-                    <code>{`<Link .../>`}</code>
-                    <br />
-                    <code>{`<Image .../>`}</code>
-                  </div>
+              </div>
+              <ArrowRightIcon
+                width="1.2em"
+                className="text-neutral-400 rotate-90 my-6 mx-auto"
+              />
+              <div className={styles.optimization}>
+                <div style={{ fontSize: '.9rem' }} className="leading-8">
+                  <code>{'<Link .../>'}</code>
+                  <br />
+                  <code>{'<Image .../>'}</code>
                 </div>
               </div>
             </div>
@@ -379,8 +381,8 @@ export const IndexPage = () => (
               highlighting solution
             </h3>
             <p>
-              Performant and reliable build-time syntax highlighting powered by
-              [Shiki](https://shiki.matsu.io).
+              Performant and reliable build-time syntax highlighting powered by{' '}
+              <Link href="https://shiki.matsu.io">Shiki</Link>.
             </p>
           </Feature>
           <Feature index={3} href="/docs/guide/i18n">
@@ -529,8 +531,11 @@ export const IndexPage = () => (
               </h3>
               <p>
                 Nextra indexes your content automatically at build-time and
-                performs incredibly fast full-text search via
-                [FlexSearch](https://github.com/nextapps-de/flexsearch).
+                performs incredibly fast full-text search via{' '}
+                <Link href="https://github.com/nextapps-de/flexsearch">
+                  FlexSearch
+                </Link>
+                .
               </p>
             </div>
             <div className="absolute w-full h-full inset-0 hidden sm:block bg-[linear-gradient(to_right,white_250px,_transparent)] dark:bg-[linear-gradient(to_right,#202020_250px,_transparent)] z-[1]" />
@@ -597,11 +602,19 @@ export const IndexPage = () => (
             </h3>
             <p className="mr-6">
               You can leverage the hybrid rendering power from Next.js with your
-              Markdown content including
-              [SSG](https://nextjs.org/docs/basic-features/pages#static-generation-recommended),
-              [SSR](https://nextjs.org/docs/basic-features/pages#server-side-rendering),
-              and
-              [ISR](https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration).
+              Markdown content including{' '}
+              <Link href="https://nextjs.org/docs/basic-features/pages#static-generation-recommended">
+                SSG
+              </Link>
+              ,{' '}
+              <Link href="https://nextjs.org/docs/basic-features/pages#server-side-rendering">
+                SSR
+              </Link>
+              , and{' '}
+              <Link href="https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration">
+                ISR
+              </Link>
+              .
             </p>
           </Feature>
           <Feature index={10} large>
@@ -612,9 +625,9 @@ export const IndexPage = () => (
               <br />A lot of new possibilities to be explored.
             </p>
             <p className="subtitle">
-              <Link className="!no-underline" href="/docs">
+              <NextLink className="!no-underline" href="/docs">
                 Start using Nextra →
-              </Link>
+              </NextLink>
             </p>
           </Feature>
         </Features>
