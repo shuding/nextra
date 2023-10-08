@@ -7,6 +7,8 @@ settings:
 overrides:
   esbuild: ^0.19.3
   next: 13.5.3
+  vite: ^4.4.11
+  hast-util-to-estree: ^2.3.3
 
 patchedDependencies:
   '@changesets/assemble-release-plan@5.2.4':
@@ -269,8 +271,8 @@ importers:
         specifier: ^4.0.3
         version: 4.0.3
       hast-util-to-estree:
-        specifier: ^3.1.0
-        version: 3.1.0
+        specifier: ^2.3.3
+        version: 2.3.3
       katex:
         specifier: ^0.16.9
         version: 0.16.9
@@ -2757,7 +2759,7 @@ packages:
       estree-util-is-identifier-name: 2.0.1
       estree-util-to-js: 1.1.0
       estree-walker: 3.0.1
-      hast-util-to-estree: 2.0.2
+      hast-util-to-estree: 2.3.3
       markdown-extensions: 1.1.1
       periscopic: 3.0.4
       remark-mdx: 2.2.1
@@ -5881,12 +5883,6 @@ packages:
       '@types/estree': 0.0.51
     dev: false
 
-  /estree-util-attach-comments@3.0.0:
-    resolution: {integrity: sha512-cKUwm/HUcTDsYh/9FgnuFqpfquUbwIqwKM26BVCGDPVgvaCl/nDCCjUfiLlx6lsEZ3Z4RFxNbOQ60pkaEwFxGw==}
-    dependencies:
-      '@types/estree': 1.0.2
-    dev: false
-
   /estree-util-build-jsx@2.1.0:
     resolution: {integrity: sha512-gsBGfsY6LOJUIDwmMkTOcgCX+3r/LUjRBccgHMSW55PHjhZsV13RmPl/iwpAvW8KcQqoN9P0FEFWTSS2Zc5bGA==}
     dependencies:
@@ -5897,10 +5893,6 @@ packages:
 
   /estree-util-is-identifier-name@2.0.1:
     resolution: {integrity: sha512-rxZj1GkQhY4x1j/CSnybK9cGuMFQYFPLq0iNyopqf14aOVLFtMv7Esika+ObJWPWiOHuMOAHz3YkWoLYYRnzWQ==}
-    dev: false
-
-  /estree-util-is-identifier-name@3.0.0:
-    resolution: {integrity: sha512-hFtqIDZTIUZ9BXLb8y4pYGyk6+wekIivNVTcmvk8NoOh+VeRn5y6cEHzbURrWbfp1fIqdVipilzj+lfaadNZmg==}
     dev: false
 
   /estree-util-to-js@1.1.0:
@@ -6528,10 +6520,11 @@ packages:
       zwitch: 2.0.2
     dev: false
 
-  /hast-util-to-estree@2.0.2:
-    resolution: {integrity: sha512-UQrZVeBj6A9od0lpFvqHKNSH9zvDrNoyWKbveu1a2oSCXEDUI+3bnd6BoiQLPnLrcXXn/jzJ6y9hmJTTlvf8lQ==}
+  /hast-util-to-estree@2.3.3:
+    resolution: {integrity: sha512-ihhPIUPxN0v0w6M5+IiAZZrn0LH2uZomeWwhn7uP7avZC6TE7lIiEh2yBMPr5+zi1aUCXq6VoYRgs2Bw9xmycQ==}
     dependencies:
-      '@types/estree-jsx': 0.0.1
+      '@types/estree': 1.0.2
+      '@types/estree-jsx': 1.0.0
       '@types/hast': 2.3.4
       '@types/unist': 2.0.6
       comma-separated-tokens: 2.0.2
@@ -6542,32 +6535,9 @@ packages:
       mdast-util-mdxjs-esm: 1.2.1
       property-information: 6.1.1
       space-separated-tokens: 2.0.1
-      style-to-object: 0.3.0
-      unist-util-position: 4.0.3
-      zwitch: 2.0.2
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
-
-  /hast-util-to-estree@3.1.0:
-    resolution: {integrity: sha512-lfX5g6hqVh9kjS/B9E2gSkvHH4SZNiQFiqWS0x9fENzEl+8W12RqdRxX6d/Cwxi30tPQs3bIO+aolQJNp1bIyw==}
-    dependencies:
-      '@types/estree': 1.0.2
-      '@types/estree-jsx': 1.0.0
-      '@types/hast': 3.0.1
-      comma-separated-tokens: 2.0.2
-      devlop: 1.1.0
-      estree-util-attach-comments: 3.0.0
-      estree-util-is-identifier-name: 3.0.0
-      hast-util-whitespace: 3.0.0
-      mdast-util-mdx-expression: 2.0.0
-      mdast-util-mdx-jsx: 3.0.0
-      mdast-util-mdxjs-esm: 2.0.1
-      property-information: 6.1.1
-      space-separated-tokens: 2.0.1
       style-to-object: 0.4.2
-      unist-util-position: 5.0.0
-      zwitch: 2.0.2
+      unist-util-position: 4.0.3
+      zwitch: 2.0.4
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -7677,19 +7647,6 @@ packages:
       - supports-color
     dev: false
 
-  /mdast-util-mdx-expression@2.0.0:
-    resolution: {integrity: sha512-fGCu8eWdKUKNu5mohVGkhBXCXGnOTLuFqOvGMvdikr+J1w7lDJgxThOKpwRWzzbyXAU2hhSwsmssOY4yTokluw==}
-    dependencies:
-      '@types/estree-jsx': 1.0.0
-      '@types/hast': 3.0.1
-      '@types/mdast': 4.0.0
-      devlop: 1.1.0
-      mdast-util-from-markdown: 2.0.0
-      mdast-util-to-markdown: 2.1.0
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
-
   /mdast-util-mdx-jsx@2.0.2:
     resolution: {integrity: sha512-Bs1HnFprSJW0al1h49ZQBaLfwROFEY3SLK98xWsA60fVhe6zEbPS8gVYxkuT07TeEZWIbkjyFYXkZ34ARxfYNQ==}
     dependencies:
@@ -7703,26 +7660,6 @@ packages:
       unist-util-remove-position: 4.0.1
       unist-util-stringify-position: 3.0.2
       vfile-message: 3.1.2
-    dev: false
-
-  /mdast-util-mdx-jsx@3.0.0:
-    resolution: {integrity: sha512-XZuPPzQNBPAlaqsTTgRrcJnyFbSOBovSadFgbFu8SnuNgm+6Bdx1K+IWoitsmj6Lq6MNtI+ytOqwN70n//NaBA==}
-    dependencies:
-      '@types/estree-jsx': 1.0.0
-      '@types/hast': 3.0.1
-      '@types/mdast': 4.0.0
-      '@types/unist': 3.0.0
-      ccount: 2.0.1
-      devlop: 1.1.0
-      mdast-util-from-markdown: 2.0.0
-      mdast-util-to-markdown: 2.1.0
-      parse-entities: 4.0.0
-      stringify-entities: 4.0.3
-      unist-util-remove-position: 5.0.0
-      unist-util-stringify-position: 4.0.0
-      vfile-message: 4.0.2
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   /mdast-util-mdx@2.0.0:
@@ -7743,19 +7680,6 @@ packages:
       '@types/mdast': 3.0.13
       mdast-util-from-markdown: 1.3.1
       mdast-util-to-markdown: 1.3.0
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
-
-  /mdast-util-mdxjs-esm@2.0.1:
-    resolution: {integrity: sha512-EcmOpxsZ96CvlP03NghtH1EsLtr0n9Tm4lPUJUBccV9RwUOneqSycg19n5HGzCf+10LozMRSObtVr3ee1WoHtg==}
-    dependencies:
-      '@types/estree-jsx': 1.0.0
-      '@types/hast': 3.0.1
-      '@types/mdast': 4.0.0
-      devlop: 1.1.0
-      mdast-util-from-markdown: 2.0.0
-      mdast-util-to-markdown: 2.1.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -10270,12 +10194,6 @@ packages:
       acorn: 8.10.0
     dev: true
 
-  /style-to-object@0.3.0:
-    resolution: {integrity: sha512-CzFnRRXhzWIdItT3OmF8SQfWyahHhjq3HwcMNCNLn+N7klOOqPjMeG/4JSu77D7ypZdGvSzvkrbyeTMizz2VrA==}
-    dependencies:
-      inline-style-parser: 0.1.1
-    dev: false
-
   /style-to-object@0.4.2:
     resolution: {integrity: sha512-1JGpfPB3lo42ZX8cuPrheZbfQ6kqPPnPHlKMyeRYtfKD+0jG+QsXgXN57O/dvJlzlB2elI6dGmrPnl5VPQFPaA==}
     dependencies:
@@ -11716,7 +11634,7 @@ packages:
       github-slugger: 2.0.0
       graceful-fs: 4.2.11
       gray-matter: 4.0.3
-      hast-util-to-estree: 3.1.0
+      hast-util-to-estree: 2.3.3
       katex: 0.16.9
       lodash.get: 4.4.2
       next: 13.5.3(@babel/core@7.21.8)(react-dom@18.2.0)(react@18.2.0)
