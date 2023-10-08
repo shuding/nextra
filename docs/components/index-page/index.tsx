@@ -3,7 +3,6 @@ import { ArrowRightIcon } from '@components/icons'
 import cn from 'clsx'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import NextLink from 'next/link'
 import { Link } from 'nextra-theme-docs'
 import docsCardDark from 'public/assets/card-1.dark.png'
 import docsCard from 'public/assets/card-1.png'
@@ -67,9 +66,9 @@ export const IndexPage = () => (
         <Link href="https://nextjs.org">Next.js</Link>.
       </p>
       <p className="subtitle">
-        <NextLink className={styles.cta} href="/docs">
+        <Link className={styles.cta} href="/docs">
           Get started <span>→</span>
-        </NextLink>
+        </Link>
       </p>
     </div>
     <style jsx>{`
@@ -383,13 +382,9 @@ export const IndexPage = () => (
                 textShadow: '0 2px 4px rgb(0 0 0 / 20%)'
               }}
             >
-              <a
-                href="https://mdxjs.com/blog/v2"
-                target="_blank"
-                style={{ color: 'currentColor' }}
-              >
+              <Link href="https://mdxjs.com/blog/v2" className="text-current">
                 MDX 2
-              </a>{' '}
+              </Link>{' '}
               lets you use Components inside Markdown,{' '}
               <br className="hide-medium" />
               with huge performance boost since v1.
@@ -576,9 +571,9 @@ export const IndexPage = () => (
               <br />A lot of new possibilities to be explored.
             </p>
             <p className="subtitle">
-              <NextLink className="!no-underline" href="/docs">
+              <Link className="no-underline" href="/docs">
                 Start using Nextra →
-              </NextLink>
+              </Link>
             </p>
           </Feature>
         </Features>
