@@ -64,9 +64,7 @@ export const IndexPage = () => (
         Simple, powerful and flexible site generation framework{' '}
         <br className="max-md:hidden" />
         with everything you love from{' '}
-        <a className="nextjs-link" href="https://nextjs.org" target="_blank">
-          Next.js
-        </a>
+        <Link href="https://nextjs.org">Next.js</Link>.
       </p>
       <p className="subtitle">
         <NextLink className={styles.cta} href="/docs">
@@ -117,11 +115,6 @@ export const IndexPage = () => (
         font-size: min(1.3rem, max(3.5vw, 1.2rem));
         font-feature-settings: initial;
         line-height: 1.6;
-      }
-      .nextjs-link {
-        color: currentColor;
-        text-decoration: none;
-        font-weight: 600;
       }
       :global(#docs-card) {
         color: #fff;
