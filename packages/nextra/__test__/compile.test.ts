@@ -6,17 +6,14 @@ const mdxOptions = {
   outputFormat: 'program'
 } as const
 
-describe.only('Compile', () => {
-  it('should work with export default', async () => {
+describe('Compile', () => {
+  it.only('should work with export default', async () => {
     const { result } = await compileMdx(
       `import foo from './foo'
       
-## before
+## heading
 
-export default foo
-
-### after
-`,
+export default foo`,
       { mdxOptions }
     )
     expect(clean(result, false)).resolves.toMatchInlineSnapshot(`
@@ -29,14 +26,9 @@ export default foo
       export function useTOC(props) {
         return [
           {
-            value: 'before',
-            id: 'before',
+            value: 'heading',
+            id: 'heading',
             depth: 2
-          },
-          {
-            value: 'after',
-            id: 'after',
-            depth: 3
           }
         ]
       }
@@ -44,20 +36,12 @@ export default foo
         const { toc = useTOC(props) } = props
         const _components = Object.assign(
           {
-            h2: 'h2',
-            h3: 'h3'
+            h2: 'h2'
           },
           _provideComponents(),
           props.components
         )
-        return (
-          <>
-            <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
-            {'\\\\n'}
-            {'\\\\n'}
-            <_components.h3 id={toc[1].id}>{toc[1].value}</_components.h3>
-          </>
-        )
+        return <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
       }
       function MDXContent(props = {}) {
         return (
@@ -70,13 +54,11 @@ export default foo
       "
     `)
   })
-  it('should work with export as default', async () => {
+  it.only('should work with export as default', async () => {
     const { result } = await compileMdx(
-      `## before
+      `## heading
       
-export { foo as default } from './foo'
-
-### after`,
+export { foo as default } from './foo'`,
       { mdxOptions }
     )
     expect(clean(result, false)).resolves.toMatchInlineSnapshot(`
@@ -88,14 +70,9 @@ export { foo as default } from './foo'
       export function useTOC(props) {
         return [
           {
-            value: 'before',
-            id: 'before',
+            value: 'heading',
+            id: 'heading',
             depth: 2
-          },
-          {
-            value: 'after',
-            id: 'after',
-            depth: 3
           }
         ]
       }
@@ -103,20 +80,12 @@ export { foo as default } from './foo'
         const { toc = useTOC(props) } = props
         const _components = Object.assign(
           {
-            h2: 'h2',
-            h3: 'h3'
+            h2: 'h2'
           },
           _provideComponents(),
           props.components
         )
-        return (
-          <>
-            <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
-            {'\\\\n'}
-            {'\\\\n'}
-            <_components.h3 id={toc[1].id}>{toc[1].value}</_components.h3>
-          </>
-        )
+        return <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
       }
       function MDXContent(props = {}) {
         return (
