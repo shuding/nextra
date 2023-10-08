@@ -13,17 +13,16 @@ describe.only('Compile', () => {
 export default foo`,
       { mdxOptions }
     )
-    expect(result).toMatchInlineSnapshot(`
-      "/*@jsxRuntime automatic @jsxImportSource react*/
-      const title = \\"\\";
-      const frontMatter = {};
-      import foo from './foo';
-      const MDXLayout = foo;
+    expect(clean(result)).resolves.toMatchInlineSnapshot(`
+      "const title = ''
+      const frontMatter = {}
+      import foo from './foo'
+      const MDXLayout = foo
       export function useTOC(props) {
-        return [];
+        return []
       }
       function _createMdxContent(props) {
-        return <></>;
+        return <></>
       }
       "
     `)
@@ -33,16 +32,15 @@ export default foo`,
       "export { foo as default } from './foo'",
       { mdxOptions }
     )
-    expect(result).toMatchInlineSnapshot(`
-      "/*@jsxRuntime automatic @jsxImportSource react*/
-      const title = \\"\\";
-      const frontMatter = {};
-      import {foo as MDXLayout} from \\"./foo\\";
+    expect(clean(result)).resolves.toMatchInlineSnapshot(`
+      "const title = ''
+      const frontMatter = {}
+      import { foo as MDXLayout } from './foo'
       export function useTOC(props) {
-        return [];
+        return []
       }
       function _createMdxContent(props) {
-        return <></>;
+        return <></>
       }
       "
     `)
