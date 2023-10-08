@@ -189,7 +189,18 @@ module.exports = {
         tailwindcss: {
           config: 'docs/tailwind.config.js',
           callees: ['cn'],
-          whitelist: ['dash-ring', 'theme-1', 'theme-2', 'theme-3', 'theme-4']
+          whitelist: [
+            'dash-ring',
+            'theme-1',
+            'theme-2',
+            'theme-3',
+            'theme-4',
+            'subtitle',
+            'headline',
+            'content-container',
+            'feat-darkmode',
+            'features-container'
+          ]
         },
         next: { rootDir: 'docs' }
       }

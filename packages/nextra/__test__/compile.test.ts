@@ -6,6 +6,62 @@ const mdxOptions = {
   outputFormat: 'program'
 } as const
 
+describe('Compile', () => {
+  it('should work with export default', async () => {
+    const { result } = await compileMdx(
+      `import foo from './foo'
+      
+## heading
+
+export default foo`,
+      { mdxOptions }
+    )
+    expect(clean(result, false)).resolves.toMatchInlineSnapshot(`
+      "/*@jsxRuntime automatic @jsxImportSource react*/
+      import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+      const title = ''
+      const frontMatter = {}
+      import foo from './foo'
+      const MDXLayout = foo
+      export function useTOC(props) {
+        return [
+          {
+            value: 'heading',
+            id: 'heading',
+            depth: 2
+          }
+        ]
+      }
+      "
+    `)
+  })
+  it('should work with export as default', async () => {
+    const { result } = await compileMdx(
+      `## heading
+      
+export { foo as default } from './foo'`,
+      { mdxOptions }
+    )
+    expect(clean(result, false)).resolves.toMatchInlineSnapshot(`
+      "/*@jsxRuntime automatic @jsxImportSource react*/
+      import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+      const title = ''
+      const frontMatter = {}
+      import { foo as MDXLayout } from './foo'
+      export function useTOC(props) {
+        return [
+          {
+            value: 'heading',
+            id: 'heading',
+            depth: 2
+          }
+        ]
+      }
+      "
+    `)
+  })
+})
+
 describe('Process heading', () => {
   it('code-h1', async () => {
     const { result } = await compileMdx('# `codegen.yml`', { mdxOptions })
@@ -90,7 +146,7 @@ export const TagName = () => {
           }
         ]
       }
-      function _createMdxContent(props) {
+      function MDXLayout(props) {
         const { toc = useTOC(props) } = props
         const _components = Object.assign(
           {
@@ -140,7 +196,7 @@ export const TagName = () => {
           }
         ]
       }
-      function _createMdxContent(props) {
+      function MDXLayout(props) {
         const { toc = useTOC(props) } = props
         const _components = Object.assign(
           {
@@ -301,7 +357,7 @@ import Last from './three.mdx'
           }
         ]
       }
-      function _createMdxContent(props) {
+      function MDXLayout(props) {
         const { toc = useTOC(props) } = props
         const _components = Object.assign(
           {

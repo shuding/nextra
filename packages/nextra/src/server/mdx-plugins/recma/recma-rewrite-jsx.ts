@@ -20,10 +20,29 @@ export const recmaRewriteJsx: Plugin<[], Program> =
           node.declaration.name !== 'MDXContent'
       )
 
-    const createMdxContent = ast.body.find(
+    const createMdxContentIndex = ast.body.findIndex(
       o =>
         o.type === 'FunctionDeclaration' && o.id!.name === '_createMdxContent'
-    ) as FunctionDeclaration
+    )
+
+    const createMdxContent = ast.body[
+      createMdxContentIndex
+    ] as FunctionDeclaration
+
+    if (file.data.hasMdxLayout) {
+      ast.body.splice(createMdxContentIndex, 1)
+      return
+    }
+
+    createMdxContent.id!.name = 'MDXLayout'
+
+    const tocProperties = file.data.toc as (
+      | { properties: { id: string } }
+      | string
+    )[]
+
+    // Do not add `const toc = useTOC(props)`
+    if (!tocProperties.length) return
 
     const returnStatement = createMdxContent.body.body.find(
       o => o.type === 'ReturnStatement'
@@ -33,14 +52,6 @@ export const recmaRewriteJsx: Plugin<[], Program> =
 
     // if return statements doesn't wrap in fragment children will be []
     const returnBody = argument.children.length ? argument.children : [argument]
-
-    const tocProperties = file.data.toc as (
-      | { properties: { id: string } }
-      | string
-    )[]
-
-    // Do not add `const toc = useTOC(props)`
-    if (!tocProperties.length) return
 
     visit({ children: returnBody }, 'JSXElement', (heading: any) => {
       const { openingElement } = heading

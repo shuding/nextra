@@ -14,7 +14,7 @@ import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 import remarkReadingTime from 'remark-reading-time'
 import { bundledLanguages, getHighlighter } from 'shiki'
-import type { Pluggable } from 'unified'
+import type { Pluggable, Plugin } from 'unified'
 import type {
   FrontMatter,
   LoaderOptions,
@@ -314,14 +314,22 @@ export async function compileMdx(
         [rehypeExtractTocContent, { isRemoteContent }]
       ].filter(truthy),
       recmaPlugins: [
-        () => (ast: Program) => {
-          ast.body = ast.body
-            // Remove `MDXContent` since we use custom HOC_MDXContent
-            .filter(
-              node =>
-                node.type !== 'FunctionDeclaration' ||
-                node.id!.name !== 'MDXContent'
-            )
+        (() => (ast: Program, file) => {
+          const mdxContentIndex = ast.body.findIndex(
+            node =>
+              node.type === 'FunctionDeclaration' &&
+              node.id!.name === 'MDXContent'
+          )
+
+          // Remove `MDXContent` since we use custom HOC_MDXContent
+          const [mdxContent] = ast.body.splice(mdxContentIndex, 1)
+
+          const mdxContentArgument = (mdxContent as any).body.body[0].argument
+
+          file.data.hasMdxLayout =
+            !!mdxContentArgument &&
+            mdxContentArgument.openingElement.name.name === 'MDXLayout'
+
           const localExports = new Set(['title', 'frontMatter' /* 'useTOC' */])
 
           for (const node of ast.body) {
@@ -345,7 +353,7 @@ export async function compileMdx(
               }
             }
           }
-        },
+        }) satisfies Plugin<[], Program>,
         isRemoteContent ? recmaRewriteFunctionBody : recmaRewriteJsx
       ].filter(truthy)
     })
