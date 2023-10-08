@@ -314,14 +314,20 @@ export async function compileMdx(
         [rehypeExtractTocContent, { isRemoteContent }]
       ].filter(truthy),
       recmaPlugins: [
-        () => (ast: Program) => {
-          ast.body = ast.body
-            // Remove `MDXContent` since we use custom HOC_MDXContent
-            .filter(
-              node =>
-                node.type !== 'FunctionDeclaration' ||
-                node.id!.name !== 'MDXContent'
-            )
+        () => (ast: Program, file) => {
+          const mdxContentIndex = ast.body.findIndex(
+            node =>
+              node.type === 'FunctionDeclaration' &&
+              node.id!.name === 'MDXContent'
+          )
+
+          // Remove `MDXContent` since we use custom HOC_MDXContent
+          const [mdxContent] = ast.body.splice(mdxContentIndex, 1)
+
+          file.data.hasMdxLayout =
+            mdxContent.body.body[0].argument.openingElement.name.name ===
+            'MDXLayout'
+
           const localExports = new Set(['title', 'frontMatter' /* 'useTOC' */])
 
           for (const node of ast.body) {

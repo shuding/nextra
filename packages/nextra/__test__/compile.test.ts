@@ -43,13 +43,6 @@ export default foo`,
         )
         return <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
       }
-      function MDXContent(props = {}) {
-        return (
-          <MDXLayout {...props}>
-            <_createMdxContent {...props} />
-          </MDXLayout>
-        )
-      }
       "
     `)
   })
@@ -85,13 +78,6 @@ export { foo as default } from './foo'`,
           props.components
         )
         return <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
-      }
-      function MDXContent(props = {}) {
-        return (
-          <MDXLayout {...props}>
-            <_createMdxContent {...props} />
-          </MDXLayout>
-        )
       }
       "
     `)
