@@ -167,7 +167,7 @@ ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
   // Imported as a normal component, no need to add the layout.
   if (!isPageImport) {
     return `${result}
-export default _createMdxContent`
+export default MDXLayout`
   }
   if (searchIndexKey && frontMatter.searchable !== false) {
     // Store all the things in buildInfo.
