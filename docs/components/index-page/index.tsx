@@ -5,28 +5,34 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import NextLink from 'next/link'
 import { Link } from 'nextra-theme-docs'
-import { useState } from 'react'
+import { ReactNode, useState } from 'react'
 import docsCardDark from '../../public/assets/card-1.dark.png'
 import docsCard from '../../public/assets/card-1.png'
 import styles from './index.module.css'
 
-function File({ name, className, ...props }) {
+function Comparison({
+  a,
+  b,
+  invert
+}: {
+  a: ReactNode
+  b: ReactNode
+  invert?: boolean
+}) {
   return (
-    <span className={cn(styles.file, className)} {...props}>
-      {name}
-    </span>
-  )
-}
-
-function Comparison({ a, b, invert, ...props }) {
-  return (
-    <div className={cn(styles.comparison, invert && styles.invert)} {...props}>
-      <div>{a}</div>
+    <div className={cn(styles.comparison, invert && styles.invert)}>
+      {a}
       <ArrowRightIcon width="1.2em" />
-      <div>{b}</div>
+      {b}
     </div>
   )
 }
+
+const LANGUAGES = [
+  { lang: 'en', name: 'English' },
+  { lang: 'de', name: 'Deutsch' },
+  { lang: 'ja', name: '日本語' }
+]
 
 function I18n() {
   const [active, setActive] = useState('')
@@ -34,61 +40,33 @@ function I18n() {
     <Comparison
       a={
         <div style={{ display: 'flex', flexDirection: 'column', gap: '.5rem' }}>
-          <File
-            name="/en/hello.mdx"
-            className={active === 'en' && styles.active}
-            onPointerOver={() => setActive('en')}
-          />
-          <File
-            name="/de/hello.mdx"
-            className={active === 'de' && styles.active}
-            onPointerOver={() => setActive('de')}
-          />
-          <File
-            name="/ja/hello.mdx"
-            className={active === 'ja' && styles.active}
-            onPointerOver={() => setActive('ja')}
-          />
+          {LANGUAGES.map(({ lang }) => (
+            <span
+              key={lang}
+              className={cn(styles.file, active === lang && styles.active)}
+              onPointerOver={() => setActive(lang)}
+            >
+              /{lang}/hello.mdx
+            </span>
+          ))}
         </div>
       }
       b={
-        <div
-          style={{ display: 'flex', flexDirection: 'column' }}
-          className="menu overflow-auto rounded-md bg-white py-1 text-sm shadow-lg ring-1 ring-black ring-opacity-5 dark:bg-neutral-800 dark:ring-white dark:ring-opacity-20"
-        >
-          <span
-            className={cn(
-              'relative cursor-default select-none whitespace-nowrap px-4 py-1.5',
-              active === 'en'
-                ? '_text-primary-600 _bg-primary-50 dark:_bg-primary-500/10'
-                : 'text-gray-800 dark:text-gray-100 '
-            )}
-            onPointerOver={() => setActive('en')}
-          >
-            English
-          </span>
-          <span
-            className={cn(
-              'relative cursor-default select-none whitespace-nowrap px-4 py-1.5',
-              active === 'de'
-                ? '_text-primary-600 _bg-primary-50 dark:_bg-primary-500/10'
-                : 'text-gray-800 dark:text-gray-100 '
-            )}
-            onPointerOver={() => setActive('de')}
-          >
-            Deutsch
-          </span>
-          <span
-            className={cn(
-              'relative cursor-default select-none whitespace-nowrap px-4 py-1.5',
-              active === 'ja'
-                ? '_text-primary-600 _bg-primary-50 dark:_bg-primary-500/10'
-                : 'text-gray-800 dark:text-gray-100 '
-            )}
-            onPointerOver={() => setActive('ja')}
-          >
-            日本語
-          </span>
+        <div className="menu overflow-auto rounded-md bg-white py-1 text-sm shadow-lg ring-1 ring-black ring-opacity-5 dark:bg-neutral-800 dark:ring-white dark:ring-opacity-20">
+          {LANGUAGES.map(({ lang, name }) => (
+            <div
+              key={lang}
+              className={cn(
+                'relative cursor-default select-none whitespace-nowrap px-4 py-1.5',
+                active === lang
+                  ? '_text-primary-600 _bg-primary-50 dark:_bg-primary-500/10'
+                  : 'text-gray-800 dark:text-gray-100 '
+              )}
+              onPointerOver={() => setActive(lang)}
+            >
+              {name}
+            </div>
+          ))}
         </div>
       }
     />
@@ -540,7 +518,7 @@ export const IndexPage = () => (
             </div>
             <div className="absolute w-full h-full inset-0 hidden sm:block bg-[linear-gradient(to_right,white_250px,_transparent)] dark:bg-[linear-gradient(to_right,#202020_250px,_transparent)] z-[1]" />
             <video
-              autoPlay="autoplay"
+              autoPlay
               loop
               muted
               playsInline
@@ -549,7 +527,7 @@ export const IndexPage = () => (
               <source src="/assets/search.mp4" type="video/mp4" />
             </video>
             <video
-              autoPlay="autoplay"
+              autoPlay
               loop
               muted
               playsInline
