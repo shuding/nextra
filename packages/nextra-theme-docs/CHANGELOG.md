@@ -1,5 +1,13 @@
 # nextra-theme-docs
 
+## 3.0.0-alpha.3
+
+### Patch Changes
+
+- fe5061b7: fix for remote docs
+- Updated dependencies [fe5061b7]
+  - nextra@3.0.0-alpha.3
+
 ## 3.0.0-alpha.2
 
 ### Patch Changes

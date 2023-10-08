@@ -1,5 +1,12 @@
 # nextra-theme-blog
 
+## 3.0.0-alpha.3
+
+### Patch Changes
+
+- Updated dependencies [fe5061b7]
+  - nextra@3.0.0-alpha.3
+
 ## 3.0.0-alpha.2
 
 ### Patch Changes
