@@ -33,7 +33,7 @@ bar[^1]
           }
         ]
       }
-      function _createMdxContent(props) {
+      function MDXLayout(props) {
         const { toc = useTOC(props) } = props
         const _components = Object.assign(
           {
@@ -133,7 +133,7 @@ import { Steps } from 'nextra/components'
           }
         ]
       }
-      function _createMdxContent(props) {
+      function MDXLayout(props) {
         const { toc = useTOC(props) } = props
         const _components = Object.assign(
           {
@@ -312,7 +312,7 @@ export const frontMatter = {
           }
         ]
       }
-      function _createMdxContent(props) {
+      function MDXLayout(props) {
         const { toc = useTOC(props) } = props
         const _components = Object.assign(
           {
@@ -382,7 +382,7 @@ import { RemoteContent } from 'nextra/data'
             }
           ]
         }
-        function _createMdxContent(props) {
+        function MDXLayout(props) {
           const { toc = useTOC(props) } = props
           const _components = Object.assign(
             {
