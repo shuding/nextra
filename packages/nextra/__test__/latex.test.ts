@@ -1,5 +1,5 @@
-import { compileMdx } from '../src/compile'
-import { clean } from './test-utils'
+import { compileMdx } from '../src/server/compile.js'
+import { clean } from './test-utils.js'
 
 const options = {
   mdxOptions: { jsx: true },
@@ -12,6 +12,11 @@ describe('latex', () => {
     const { result } = await compileMdx('$$\nx^2\n$$', options)
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
       "const { useMDXComponents: _provideComponents } = arguments[0]
+      const title = ''
+      const frontMatter = {}
+      function useTOC(props) {
+        return []
+      }
       function _createMdxContent(props) {
         const _components = Object.assign(
           {
@@ -89,6 +94,12 @@ describe('latex', () => {
           </_components.span>
         )
       }
+      return {
+        title,
+        frontMatter,
+        useTOC,
+        default: _createMdxContent
+      }
       "
     `)
   })
@@ -97,6 +108,11 @@ describe('latex', () => {
     const { result } = await compileMdx('```math\nx^2\n```', options)
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
       "const { useMDXComponents: _provideComponents } = arguments[0]
+      const title = ''
+      const frontMatter = {}
+      function useTOC(props) {
+        return []
+      }
       function _createMdxContent(props) {
         const _components = Object.assign(
           {
@@ -173,6 +189,12 @@ describe('latex', () => {
             </_components.span>
           </_components.span>
         )
+      }
+      return {
+        title,
+        frontMatter,
+        useTOC,
+        default: _createMdxContent
       }
       "
     `)
