@@ -249,8 +249,8 @@ importers:
         specifier: ^0.0.5
         version: 0.0.5(react@18.2.0)
       '@theguild/remark-npm2yarn':
-        specifier: ^0.2.0
-        version: 0.2.0
+        specifier: ^0.3.0
+        version: 0.3.0
       clsx:
         specifier: ^2.0.0
         version: 2.0.0
@@ -3284,8 +3284,8 @@ packages:
       - supports-color
     dev: false
 
-  /@theguild/remark-npm2yarn@0.2.0:
-    resolution: {integrity: sha512-6NMsdxNQd0s+LBtsmLuZG0AFeGmRpqIyKkPA2FOt14ZFO8mXBkHY39+RWVrLIt/ltZCg78BvQPfJT7iF/sNvyg==}
+  /@theguild/remark-npm2yarn@0.3.0:
+    resolution: {integrity: sha512-Fofw+9airYgjBd9G6PiHHCrptjyUybQ50JH9/5o9LCH54kggJ7stpCofzHjICB8L7VQbQ1Gwu23P/3CMVY1R4Q==}
     dependencies:
       npm-to-yarn: 2.1.0
       unist-util-visit: 5.0.0
@@ -11302,7 +11302,7 @@ packages:
       '@mdx-js/react': 2.3.0(react@18.2.0)
       '@napi-rs/simple-git': 0.1.9
       '@theguild/remark-mermaid': 0.0.5(react@18.2.0)
-      '@theguild/remark-npm2yarn': 0.2.0
+      '@theguild/remark-npm2yarn': 0.3.0
       clsx: 2.0.0
       github-slugger: 2.0.0
       graceful-fs: 4.2.11
