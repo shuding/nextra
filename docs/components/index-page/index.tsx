@@ -37,6 +37,7 @@ function I18n() {
           <div
             key={lang}
             onPointerOver={() => setActive(lang)}
+            // eslint-disable-next-line tailwindcss/no-custom-classname -- TODO: configure eslint-plugin-tailwindcss to import nextra-theme-docs styles so below classes could be removed
             className={cn(
               'relative cursor-default select-none whitespace-nowrap px-4 py-1.5',
               active === lang

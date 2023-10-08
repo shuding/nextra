@@ -199,11 +199,7 @@ module.exports = {
             'headline',
             'content-container',
             'feat-darkmode',
-            'features-container',
-            // TODO: configure eslint-plugin-tailwindcss to import nextra-theme-docs styles so below classes could be removed
-            '_text-primary-600',
-            '_bg-primary-50',
-            'dark:_bg-primary-500/10'
+            'features-container'
           ]
         },
         next: { rootDir: 'docs' }
