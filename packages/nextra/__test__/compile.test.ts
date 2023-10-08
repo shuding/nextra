@@ -10,38 +10,122 @@ describe.only('Compile', () => {
   it('should work with export default', async () => {
     const { result } = await compileMdx(
       `import foo from './foo'
-export default foo`,
+      
+## before
+
+export default foo
+
+### after
+`,
       { mdxOptions }
     )
-    expect(clean(result)).resolves.toMatchInlineSnapshot(`
-      "const title = ''
+    expect(clean(result, false)).resolves.toMatchInlineSnapshot(`
+      "/*@jsxRuntime automatic @jsxImportSource react*/
+      import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+      const title = ''
       const frontMatter = {}
       import foo from './foo'
       const MDXLayout = foo
       export function useTOC(props) {
-        return []
+        return [
+          {
+            value: 'before',
+            id: 'before',
+            depth: 2
+          },
+          {
+            value: 'after',
+            id: 'after',
+            depth: 3
+          }
+        ]
       }
       function _createMdxContent(props) {
-        return <></>
+        const { toc = useTOC(props) } = props
+        const _components = Object.assign(
+          {
+            h2: 'h2',
+            h3: 'h3'
+          },
+          _provideComponents(),
+          props.components
+        )
+        return (
+          <>
+            <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
+            {'\\\\n'}
+            {'\\\\n'}
+            <_components.h3 id={toc[1].id}>{toc[1].value}</_components.h3>
+          </>
+        )
       }
+      function MDXContent(props = {}) {
+        return (
+          <MDXLayout {...props}>
+            <_createMdxContent {...props} />
+          </MDXLayout>
+        )
+      }
+      export default MDXContent
       "
     `)
   })
   it('should work with export as default', async () => {
     const { result } = await compileMdx(
-      "export { foo as default } from './foo'",
+      `## before
+      
+export { foo as default } from './foo'
+
+### after`,
       { mdxOptions }
     )
-    expect(clean(result)).resolves.toMatchInlineSnapshot(`
-      "const title = ''
+    expect(clean(result, false)).resolves.toMatchInlineSnapshot(`
+      "/*@jsxRuntime automatic @jsxImportSource react*/
+      import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+      const title = ''
       const frontMatter = {}
       import { foo as MDXLayout } from './foo'
       export function useTOC(props) {
-        return []
+        return [
+          {
+            value: 'before',
+            id: 'before',
+            depth: 2
+          },
+          {
+            value: 'after',
+            id: 'after',
+            depth: 3
+          }
+        ]
       }
       function _createMdxContent(props) {
-        return <></>
+        const { toc = useTOC(props) } = props
+        const _components = Object.assign(
+          {
+            h2: 'h2',
+            h3: 'h3'
+          },
+          _provideComponents(),
+          props.components
+        )
+        return (
+          <>
+            <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
+            {'\\\\n'}
+            {'\\\\n'}
+            <_components.h3 id={toc[1].id}>{toc[1].value}</_components.h3>
+          </>
+        )
       }
+      function MDXContent(props = {}) {
+        return (
+          <MDXLayout {...props}>
+            <_createMdxContent {...props} />
+          </MDXLayout>
+        )
+      }
+      export default MDXContent
       "
     `)
   })
