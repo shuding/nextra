@@ -133,7 +133,7 @@
     "rehype-raw": "^7.0.0",
     "remark-frontmatter": "^4.0.1",
     "remark-gfm": "^3.0.1",
-    "remark-math": "^5.1.1",
+    "remark-math": "^6.0.0",
     "remark-reading-time": "^2.0.1",
     "shiki": "npm:shikiji@0.6.8",
     "slash": "^5.1.0",
