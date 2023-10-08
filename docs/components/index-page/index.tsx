@@ -32,7 +32,7 @@ function I18n() {
         ))}
       </div>
       <ArrowRightIcon width="1.2em" />
-      <div className="menu overflow-auto rounded-md bg-white py-1 text-sm shadow-lg ring-1 ring-black ring-opacity-5 dark:bg-neutral-800 dark:ring-white dark:ring-opacity-20">
+      <div className="overflow-auto rounded-md bg-white py-1 text-sm shadow-lg ring-1 ring-black/5 dark:bg-neutral-800 dark:ring-white/20">
         {LANGUAGES.map(({ lang, name }) => (
           <div
             key={lang}
@@ -279,12 +279,7 @@ export const IndexPage = () => (
               in minutes
             </h3>
           </Feature>
-          <Feature
-            index={1}
-            centered
-            className="card-with-border"
-            href="/docs/guide/image"
-          >
+          <Feature index={1} centered href="/docs/guide/image">
             <h3>
               Links and images are <br className="show-on-mobile" />
               always <span className="font-light">optimized</span>
@@ -409,7 +404,7 @@ export const IndexPage = () => (
                   '100% 100%'
                 ],
                 backgroundImage: [
-                  `radial-gradient(farthest-corner, #e2e5ea, #e2e5ea)`,
+                  'radial-gradient(farthest-corner, #e2e5ea, #e2e5ea)',
                   'radial-gradient(farthest-corner, #06080a, #e2e5ea)',
                   'radial-gradient(farthest-corner, #06080a, #e2e5ea)',
                   'radial-gradient(farthest-corner, #e2e5ea, #e2e5ea)'
@@ -436,7 +431,8 @@ export const IndexPage = () => (
                 left: 0,
                 width: '100%',
                 height: '100%',
-                backgroundImage: `radial-gradient(farthest-corner, #06080a, #e2e5ea)`,
+                backgroundImage:
+                  'radial-gradient(farthest-corner, #06080a, #e2e5ea)',
                 backgroundSize: '400% 400%',
                 backgroundRepeat: 'no-repeat'
               }}
@@ -528,7 +524,6 @@ export const IndexPage = () => (
           <Feature
             index={8}
             id="a11y-card"
-            className="card-with-border"
             style={{
               backgroundSize: 750,
               backgroundRepeat: 'no-repeat',

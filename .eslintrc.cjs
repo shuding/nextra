@@ -189,7 +189,22 @@ module.exports = {
         tailwindcss: {
           config: 'docs/tailwind.config.js',
           callees: ['cn'],
-          whitelist: ['dash-ring', 'theme-1', 'theme-2', 'theme-3', 'theme-4']
+          whitelist: [
+            'dash-ring',
+            'theme-1',
+            'theme-2',
+            'theme-3',
+            'theme-4',
+            'subtitle',
+            'headline',
+            'content-container',
+            'feat-darkmode',
+            'features-container',
+            // TODO: configure eslint-plugin-tailwindcss to import nextra-theme-docs styles so below classes could be removed
+            '_text-primary-600',
+            '_bg-primary-50',
+            'dark:_bg-primary-500/10'
+          ]
         },
         next: { rootDir: 'docs' }
       }
