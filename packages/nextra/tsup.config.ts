@@ -23,6 +23,11 @@ export default defineConfig([
       // Fixes hydration errors in client apps due "type": "module" in root package.json
       const clientPackageJSON = path.join(CWD, 'dist', 'client', 'package.json')
       await fs.writeFile(clientPackageJSON, '{"sideEffects":false}')
+
+      const jsxRuntimeFrom = path.join(CWD, 'src', 'client', 'jsx-runtime.cjs')
+      const jsxRuntimeTo = path.join(CWD, 'dist', 'client', 'jsx-runtime.cjs')
+
+      await fs.copyFile(jsxRuntimeFrom, jsxRuntimeTo)
     }
   },
   {

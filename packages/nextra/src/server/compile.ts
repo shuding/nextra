@@ -4,6 +4,7 @@ import { createProcessor } from '@mdx-js/mdx'
 import type { Processor } from '@mdx-js/mdx/lib/core'
 import { remarkMermaid } from '@theguild/remark-mermaid'
 import { remarkNpm2Yarn } from '@theguild/remark-npm2yarn'
+import type { Program } from 'estree'
 import rehypeKatex from 'rehype-katex'
 import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
 import rehypePrettyCode from 'rehype-pretty-code'
@@ -31,6 +32,7 @@ import {
 import {
   attachMeta,
   parseMeta,
+  recmaRewriteFunctionBody,
   recmaRewriteJsx,
   rehypeIcon,
   remarkCustomHeadingId,
@@ -38,12 +40,13 @@ import {
   remarkLinkRewrite,
   remarkMdxDisableExplicitJsx,
   remarkMdxFrontMatter,
+  remarkMdxTitle,
   remarkRemoveImports,
   remarkStaticImage,
   remarkStructurize
 } from './mdx-plugins/index.js'
 import { rehypeExtractTocContent } from './mdx-plugins/rehype-extract-toc-content.js'
-import { truthy } from './utils.js'
+import { logger, truthy } from './utils.js'
 
 export const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS: RehypePrettyCodeOptions = {
   keepBackground: false,
@@ -207,15 +210,24 @@ export async function compileMdx(
     const fileCompatible = filePath ? { value: source, path: filePath } : source
     const vFile = await processor.process(fileCompatible)
 
-    const { title, hasJsxInH1, readingTime, structurizedData } = vFile.data as {
+    const data = vFile.data as {
       readingTime?: ReadingTime
       structurizedData: StructurizedData
       title?: string
+      frontMatter: FrontMatter
     } & Pick<PageOpts, 'hasJsxInH1'>
+
+    const { readingTime, structurizedData, title, frontMatter, hasJsxInH1 } =
+      data
     // https://github.com/shuding/nextra/issues/1032
     const result = String(vFile).replaceAll('__esModule', '_\\_esModule')
 
-    const frontMatter = (vFile.data.frontMatter || {}) as FrontMatter
+    if (typeof title !== 'string') {
+      logger.error('`title` is not defined')
+    }
+    if (!frontMatter) {
+      logger.error('`frontMatter` is not defined')
+    }
 
     if (frontMatter.mdxOptions) {
       throw new Error('`frontMatter.mdxOptions` is no longer supported')
@@ -227,7 +239,6 @@ export async function compileMdx(
       ...(hasJsxInH1 && { hasJsxInH1 }),
       ...(readingTime && { readingTime }),
       ...(searchIndexKey !== null && { searchIndexKey, structurizedData }),
-      ...(isRemoteContent && { toc: vFile.data.headings }),
       frontMatter
     }
   } catch (err) {
@@ -254,7 +265,7 @@ export async function compileMdx(
         ] satisfies Pluggable,
         isRemoteContent && remarkRemoveImports,
         remarkFrontmatter, // parse and attach yaml node
-        [remarkMdxFrontMatter, { isRemoteContent }] satisfies Pluggable,
+        [remarkMdxFrontMatter] satisfies Pluggable,
         remarkGfm,
         format !== 'md' &&
           ([
@@ -263,6 +274,7 @@ export async function compileMdx(
             { whiteList: ['details', 'summary'] }
           ] satisfies Pluggable),
         remarkCustomHeadingId,
+        remarkMdxTitle,
         [remarkHeadings, { isRemoteContent }] satisfies Pluggable,
         // structurize should be before `remarkHeadings` because we attach #id attribute to heading node
         search && ([remarkStructurize, search] satisfies Pluggable),
@@ -298,9 +310,43 @@ export async function compileMdx(
               attachMeta
             ]),
         latex && rehypeKatex,
-        !isRemoteContent && rehypeExtractTocContent
+        [rehypeExtractTocContent, { isRemoteContent }]
       ].filter(truthy),
-      recmaPlugins: [!isRemoteContent && recmaRewriteJsx].filter(truthy)
+      recmaPlugins: [
+        () => (ast: Program) => {
+          ast.body = ast.body
+            // Remove `MDXContent` since we use custom HOC_MDXContent
+            .filter(
+              node =>
+                node.type !== 'FunctionDeclaration' ||
+                node.id!.name !== 'MDXContent'
+            )
+          const localExports = new Set(['title', 'frontMatter' /* 'useTOC' */])
+
+          for (const node of ast.body) {
+            if (node.type === 'ExportNamedDeclaration') {
+              let varName: string
+              const { declaration } = node
+              if (!declaration) {
+                // skip for `export ... from '...'` declaration
+                continue
+              } else if (declaration.type === 'VariableDeclaration') {
+                const [{ id }] = declaration.declarations
+                varName = (id as any).name
+              } else if (declaration.type === 'FunctionDeclaration') {
+                varName = declaration.id!.name
+              } else {
+                throw new Error(`\`${declaration.type}\` unsupported.`)
+              }
+
+              if (localExports.has(varName)) {
+                Object.assign(node, node.declaration)
+              }
+            }
+          }
+        },
+        isRemoteContent ? recmaRewriteFunctionBody : recmaRewriteJsx
+      ].filter(truthy)
     })
   }
 }

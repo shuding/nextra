@@ -87,14 +87,17 @@ export type Nextra = (
 
 export type ThemeConfig = any | null
 
-export type NextraThemeLayoutProps = {
-  pageOpts: PageOpts
+export type NextraThemeLayoutProps<F = FrontMatter> = {
+  pageOpts: PageOpts<F>
   pageProps: any
   themeConfig: ThemeConfig
   children: ReactNode
 }
 
-export type NextraMDXContent = FC<{ toc?: Heading[] }>
+export type NextraMDXContent = FC<{
+  toc: Heading[]
+  children: ReactNode
+}>
 
 export type NextraInternalGlobal = typeof globalThis & {
   [NEXTRA_INTERNAL]: {

@@ -7,7 +7,7 @@ import type {
 import type { JsxAttribute } from 'estree-util-to-js/lib/jsx'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
-import { DEFAULT_PROPERTY_PROPS, TOC_HEADING_REGEX } from '../constants.js'
+import { DEFAULT_PROPERTY_PROPS, TOC_HEADING_REGEX } from '../../constants.js'
 
 export const recmaRewriteJsx: Plugin<[], Program> =
   () => (ast: Program, file) => {
@@ -18,13 +18,6 @@ export const recmaRewriteJsx: Plugin<[], Program> =
           node.type !== 'ExportDefaultDeclaration' ||
           // @ts-expect-error fixme
           node.declaration.name !== 'MDXContent'
-      )
-      // Remove `MDXContent` since we use custom HOC_MDXContent
-      .filter(
-        node =>
-          node.type !== 'FunctionDeclaration' ||
-          // @ts-expect-error fixme
-          node.id.name !== 'MDXContent'
       )
 
     const createMdxContent = ast.body.find(
@@ -113,13 +106,13 @@ export const recmaRewriteJsx: Plugin<[], Program> =
             properties: [
               {
                 ...DEFAULT_PROPERTY_PROPS,
+                shorthand: true,
                 key: { type: 'Identifier', name: 'toc' },
                 value: {
                   type: 'AssignmentPattern',
                   left: { type: 'Identifier', name: 'toc' },
                   right: useTOC
-                },
-                shorthand: true
+                }
               }
             ]
           },
