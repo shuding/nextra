@@ -1,5 +1,39 @@
 # nextra-theme-blog
 
+## 3.0.0-alpha.1
+
+### Major Changes
+
+- 148278ce: rename tailwind prefix `nx-` to `_` to reduce bundle size
+- d7d8a3eb: new styles for code blocks aka in next.js
+- 128e195f: fix React warning, remove PageOpts.toc, use `toc` prop from
+  `components.wrapper`
+- 191e6c41: - use `shikiji` instead of `shiki`
+
+  - rename `useSSG` to `useData`
+
+- c7f03e54: rename `pageOpts.headings` to `toc`
+
+### Patch Changes
+
+- Updated dependencies [e7e8e849]
+- Updated dependencies [71882780]
+- Updated dependencies [023d37b1]
+- Updated dependencies [148278ce]
+- Updated dependencies [c7f03e54]
+- Updated dependencies [d7d8a3eb]
+- Updated dependencies [a52a869e]
+- Updated dependencies [63ca28be]
+- Updated dependencies [1f3e7cd4]
+- Updated dependencies [b9f88e34]
+- Updated dependencies [4e55c064]
+- Updated dependencies [128e195f]
+- Updated dependencies [1f3e7cd4]
+- Updated dependencies [198dbcca]
+- Updated dependencies [191e6c41]
+- Updated dependencies [c7f03e54]
+  - nextra@3.0.0-alpha.1
+
 ## 3.0.0-alpha.0
 
 ### Major Changes

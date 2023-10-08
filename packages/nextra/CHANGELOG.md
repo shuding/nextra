@@ -1,5 +1,51 @@
 # nextra
 
+## 3.0.0-alpha.1
+
+### Major Changes
+
+- e7e8e849: show react components, variable interpolation and latex in toc
+- 71882780: - insert `frontMatter` as export node via custom remark plugin
+
+  - remove `frontMatter.mdxOptions` support
+
+- 023d37b1: add `"type": "module"` to `nextra` package
+- 148278ce: rename tailwind prefix `nx-` to `_` to reduce bundle size
+- d7d8a3eb: new styles for code blocks aka in next.js
+- 63ca28be: Remove support of "\_meta.json", use "\_meta.{js,jsx,ts,tsx}"
+  instead.
+- b9f88e34: - remove `use-internals.ts`
+
+  - remove `layout.tsx`, move directly to `setup-page.tsx`
+  - remove `kind: 'Meta' | 'Folder' | 'MdxPage'` to keep page map smaller
+
+- 128e195f: fix React warning, remove PageOpts.toc, use `toc` prop from
+  `components.wrapper`
+- 1f3e7cd4: - remove `__nextraPageOptions.hot`
+
+  - remove `__nextraPageOptions.pageOptsChecksum`
+  - remove `__nextra_internal__.refreshListeners` (no longer needed since we
+    insert toc as esm node in remark plugin)
+  - remove `hashFnv32a`
+
+- 198dbcca: use toc with JSX elements for remote content
+- 191e6c41: - use `shikiji` instead of `shiki`
+
+  - rename `useSSG` to `useData`
+
+- c7f03e54: rename `pageOpts.headings` to `toc`
+
+### Minor Changes
+
+- c7f03e54: should not add virtual `_meta` file if missing
+- a52a869e: add `frontmatter.sidebar_label` support for setting page label in
+  sidebar via frontmatter
+- 4e55c064: add support for `_meta.{js,jsx,ts,tsx}` with JSX support
+
+### Patch Changes
+
+- 1f3e7cd4: fix `pageProps` for NextraLayout
+
 ## 3.0.0-alpha.0
 
 ### Major Changes
