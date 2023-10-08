@@ -1,5 +1,57 @@
 # nextra-theme-docs
 
+## 3.0.0-alpha.1
+
+### Major Changes
+
+- e7e8e849: show react components, variable interpolation and latex in toc
+- c7f03e54: remove `toc.headingComponent`
+- ea1a7362: remove `next-seo` and `useNextSeoProps`, use `head` option instead
+- 148278ce: rename tailwind prefix `nx-` to `_` to reduce bundle size
+- d7d8a3eb: new styles for code blocks aka in next.js
+- 63ca28be: Remove support of "\_meta.json", use "\_meta.{js,jsx,ts,tsx}"
+  instead.
+- ebe652db: remove `sidebar.titleComponent`, use JSX for styling separators and
+  titles
+- 128e195f: fix React warning, remove PageOpts.toc, use `toc` prop from
+  `components.wrapper`
+- 63ca28be: remove `config.serverSideError`
+- 198dbcca: use toc with JSX elements for remote content
+- 191e6c41: - use `shikiji` instead of `shiki`
+
+  - rename `useSSG` to `useData`
+
+- 6eb3118f: rename `primaryHue` and `primarySaturation` theme options to
+  `color.hue` and `color.saturation`
+- c7f03e54: rename `pageOpts.headings` to `toc`
+
+### Minor Changes
+
+- c77485ec: set default `head` option as `null`
+- a52a869e: add `frontmatter.sidebar_label` support for setting page label in
+  sidebar via frontmatter
+
+### Patch Changes
+
+- 7457d6b6: remove `git-url-parse` to keep bundle smaller
+- Updated dependencies [e7e8e849]
+- Updated dependencies [71882780]
+- Updated dependencies [023d37b1]
+- Updated dependencies [148278ce]
+- Updated dependencies [c7f03e54]
+- Updated dependencies [d7d8a3eb]
+- Updated dependencies [a52a869e]
+- Updated dependencies [63ca28be]
+- Updated dependencies [1f3e7cd4]
+- Updated dependencies [b9f88e34]
+- Updated dependencies [4e55c064]
+- Updated dependencies [128e195f]
+- Updated dependencies [1f3e7cd4]
+- Updated dependencies [198dbcca]
+- Updated dependencies [191e6c41]
+- Updated dependencies [c7f03e54]
+  - nextra@3.0.0-alpha.1
+
 ## 3.0.0-alpha.0
 
 ### Major Changes
