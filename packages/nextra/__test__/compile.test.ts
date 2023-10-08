@@ -32,17 +32,6 @@ export default foo`,
           }
         ]
       }
-      function _createMdxContent(props) {
-        const { toc = useTOC(props) } = props
-        const _components = Object.assign(
-          {
-            h2: 'h2'
-          },
-          _provideComponents(),
-          props.components
-        )
-        return <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
-      }
       "
     `)
   })
@@ -67,17 +56,6 @@ export { foo as default } from './foo'`,
             depth: 2
           }
         ]
-      }
-      function _createMdxContent(props) {
-        const { toc = useTOC(props) } = props
-        const _components = Object.assign(
-          {
-            h2: 'h2'
-          },
-          _provideComponents(),
-          props.components
-        )
-        return <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
       }
       "
     `)
@@ -133,13 +111,13 @@ export const TagName = () => {
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
       "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
       const title = 'My Header'
-      const frontMatter = {}
-      export function useTOC(props) {
-        return [
-          {
+              const frontMatter = {}
+              export function useTOC(props) {
+                return [
+                  {
             value: 'Some extra space',
             id: 'extra-space',
-            depth: 2
+                    depth: 2
           },
           {
             value: 'Some extra space in heading',
@@ -165,23 +143,23 @@ export const TagName = () => {
             value: 'bar Qux [#]',
             id: 'bar-qux-',
             depth: 6
-          }
-        ]
-      }
-      function _createMdxContent(props) {
-        const { toc = useTOC(props) } = props
-        const _components = Object.assign(
-          {
+                  }
+                ]
+              }
+              function _createMdxContent(props) {
+                const { toc = useTOC(props) } = props
+                const _components = Object.assign(
+                  {
             h1: 'h1',
             h2: 'h2',
             h3: 'h3',
             h4: 'h4',
             h5: 'h5',
             h6: 'h6'
-          },
-          _provideComponents(),
-          props.components
-        )
+                  },
+                  _provideComponents(),
+                  props.components
+                )
         return (
           <>
             <_components.h1 id=\\"test-id\\">{'My Header'}</_components.h1>
@@ -199,9 +177,9 @@ export const TagName = () => {
             <_components.h6 id={toc[5].id}>{toc[5].value}</_components.h6>
           </>
         )
-      }
-      "
-    `)
+              }
+              "
+            `)
   })
   it('use github-slugger', async () => {
     const { result } = await compileMdx('### My Header', { mdxOptions })

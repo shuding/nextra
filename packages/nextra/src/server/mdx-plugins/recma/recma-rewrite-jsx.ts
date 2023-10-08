@@ -20,6 +20,22 @@ export const recmaRewriteJsx: Plugin<[], Program> =
           node.declaration.name !== 'MDXContent'
       )
 
+    const createMdxContentIndex = ast.body.findIndex(
+      o =>
+        o.type === 'FunctionDeclaration' && o.id!.name === '_createMdxContent'
+    )
+
+    const createMdxContent = ast.body[
+      createMdxContentIndex
+    ] as FunctionDeclaration
+
+    if (file.data.hasMdxLayout) {
+      ast.body.splice(createMdxContentIndex, 1)
+      return
+    }
+
+    createMdxContent.id!.name = 'MDXLayout'
+
     const tocProperties = file.data.toc as (
       | { properties: { id: string } }
       | string
@@ -27,11 +43,6 @@ export const recmaRewriteJsx: Plugin<[], Program> =
 
     // Do not add `const toc = useTOC(props)`
     if (!tocProperties.length) return
-
-    const createMdxContent = ast.body.find(
-      o =>
-        o.type === 'FunctionDeclaration' && o.id!.name === '_createMdxContent'
-    ) as FunctionDeclaration
 
     const returnStatement = createMdxContent.body.body.find(
       o => o.type === 'ReturnStatement'
