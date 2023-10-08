@@ -5,8 +5,8 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
-import docsCardDark from '../public/assets/card-1.dark.png'
-import docsCard from '../public/assets/card-1.png'
+import docsCardDark from '../../public/assets/card-1.dark.png'
+import docsCard from '../../public/assets/card-1.png'
 import styles from './index.module.css'
 
 function File({ name, className, ...props }) {

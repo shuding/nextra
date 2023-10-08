@@ -6,6 +6,49 @@ const mdxOptions = {
   outputFormat: 'program'
 } as const
 
+describe.only('Compile', () => {
+  it('should work with export default', async () => {
+    const { result } = await compileMdx(
+      `import foo from './foo'
+export default foo`,
+      { mdxOptions }
+    )
+    expect(result).toMatchInlineSnapshot(`
+      "/*@jsxRuntime automatic @jsxImportSource react*/
+      const title = \\"\\";
+      const frontMatter = {};
+      import foo from './foo';
+      const MDXLayout = foo;
+      export function useTOC(props) {
+        return [];
+      }
+      function _createMdxContent(props) {
+        return <></>;
+      }
+      "
+    `)
+  })
+  it('should work with export as default', async () => {
+    const { result } = await compileMdx(
+      "export { foo as default } from './foo'",
+      { mdxOptions }
+    )
+    expect(result).toMatchInlineSnapshot(`
+      "/*@jsxRuntime automatic @jsxImportSource react*/
+      const title = \\"\\";
+      const frontMatter = {};
+      import {foo as MDXLayout} from \\"./foo\\";
+      export function useTOC(props) {
+        return [];
+      }
+      function _createMdxContent(props) {
+        return <></>;
+      }
+      "
+    `)
+  })
+})
+
 describe('Process heading', () => {
   it('code-h1', async () => {
     const { result } = await compileMdx('# `codegen.yml`', { mdxOptions })
