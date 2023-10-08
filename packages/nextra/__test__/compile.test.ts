@@ -50,7 +50,6 @@ export default foo`,
           </MDXLayout>
         )
       }
-      export default MDXContent
       "
     `)
   })
@@ -94,7 +93,6 @@ export { foo as default } from './foo'`,
           </MDXLayout>
         )
       }
-      export default MDXContent
       "
     `)
   })
