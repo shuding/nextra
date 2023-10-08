@@ -1,5 +1,14 @@
 # nextra-theme-docs
 
+## 3.0.0-alpha.2
+
+### Patch Changes
+
+- b045cc3e: fix invisible mobile menu after click on hamburger
+- cb247901: fix broken `export default` statement in mdx files
+- Updated dependencies [cb247901]
+  - nextra@3.0.0-alpha.2
+
 ## 3.0.0-alpha.1
 
 ### Major Changes
