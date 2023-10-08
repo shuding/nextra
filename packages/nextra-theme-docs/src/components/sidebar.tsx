@@ -1,5 +1,4 @@
 import cn from 'clsx'
-import { useRouter } from 'next/router'
 import type { Heading } from 'nextra'
 import { useFSRoute, useMounted } from 'nextra/hooks'
 import { ArrowRightIcon, ExpandIcon } from 'nextra/icons'
@@ -321,7 +320,6 @@ export function Sidebar({
 }: SideBarProps): ReactElement {
   const config = useConfig()
   const { menu, setMenu } = useMenu()
-  const router = useRouter()
   const [focused, setFocused] = useState<null | string>(null)
   const [showSidebar, setSidebar] = useState(true)
   const [showToggleAnimation, setToggleAnimation] = useState(false)
@@ -359,19 +357,14 @@ export function Sidebar({
     }
   }, [menu])
 
-  // Always close mobile nav when route was changed (e.g. logo click)
-  useEffect(() => {
-    setMenu(false)
-  }, [router.asPath, setMenu])
-
   const hasI18n = config.i18n.length > 0
   const hasMenu = config.darkMode || hasI18n || config.sidebar.toggleButton
 
   return (
     <>
-      {includePlaceholder && asPopover ? (
+      {includePlaceholder && asPopover && (
         <div className="max-xl:_hidden _h-0 _w-64 _shrink-0" />
-      ) : null}
+      )}
       <div
         className={cn(
           'motion-reduce:_transition-none [transition:background-color_1.5s_ease]',
@@ -460,7 +453,7 @@ export function Sidebar({
           >
             <LocaleSwitch
               lite={!showSidebar}
-              className={cn(showSidebar ? '_grow' : 'max-md:_grow')}
+              className={showSidebar ? '_grow' : 'max-md:_grow'}
             />
             {config.darkMode && (
               <div

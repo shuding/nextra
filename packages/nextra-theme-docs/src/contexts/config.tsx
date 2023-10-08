@@ -1,8 +1,9 @@
 import { ThemeProvider } from 'next-themes'
+import { useRouter } from 'next/router'
 import type { FrontMatter, PageMapItem, PageOpts } from 'nextra'
 import { metaSchema } from 'nextra/schemas'
 import type { ReactElement, ReactNode } from 'react'
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import type { ZodError } from 'zod'
 import type { DocsThemeConfig } from '../constants'
 import { DEEP_OBJECT_KEYS, DEFAULT_THEME } from '../constants'
@@ -71,6 +72,7 @@ export function ConfigProvider({
   value: Context
 }): ReactElement {
   const [menu, setMenu] = useState(false)
+  const { asPath } = useRouter()
   // Merge only on first load
   theme ||= {
     ...DEFAULT_THEME,
@@ -105,6 +107,11 @@ export function ConfigProvider({
   }
 
   const { nextThemes } = extendedConfig
+
+  // Always close mobile nav when route was changed (e.g. logo click)
+  useEffect(() => {
+    setMenu(false)
+  }, [asPath])
 
   return (
     <ThemeProvider
