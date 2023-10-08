@@ -33,7 +33,7 @@ export const remarkMdxTitle: Plugin<[], Root> = () => (ast, file) => {
   const frontMatterNode = ast.children.find((node: any) =>
     isExportNode(node, 'frontMatter')
   )
-  const frontMatter = getFrontMatterASTObject(frontMatterNode)
+  const frontMatter = getFrontMatterASTObject(frontMatterNode as any)
 
   for (const { key, value } of frontMatter) {
     if (key.type === 'Literal' && key.value === 'title') {
@@ -63,7 +63,7 @@ export const remarkMdxTitle: Plugin<[], Root> = () => (ast, file) => {
   }
 
   ast.children.unshift({
-    type: 'mdxjsEsm',
+    type: 'mdxjsEsm' as any,
     data: {
       estree: {
         body: [createAstExportConst('title', { type: 'Literal', value: title })]

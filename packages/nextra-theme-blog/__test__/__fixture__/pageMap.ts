@@ -1,6 +1,7 @@
-import type { BlogPageOpts } from '../../src'
+import type { PageOpts } from 'nextra'
+import type { NextraBlogTheme } from '../../src'
 
-export const indexOpts: BlogPageOpts = {
+export const indexOpts: PageOpts = {
   filePath: 'index.mdx',
   frontMatter: {
     type: 'page',
@@ -61,7 +62,7 @@ export const indexOpts: BlogPageOpts = {
   title: 'Nextra'
 }
 
-export const postsOpts: BlogPageOpts = {
+export const postsOpts: PageOpts = {
   filePath: 'index.md',
   frontMatter: {
     type: 'posts',
@@ -120,7 +121,7 @@ export const postsOpts: BlogPageOpts = {
   title: 'Random Thoughts'
 }
 
-export const articleOpts: BlogPageOpts = {
+export const articleOpts: PageOpts = {
   filePath: 'aaron-swartz-a-programmable-web.mdx',
   frontMatter: {
     title: 'Notes on A Programmable Web by Aaron Swartz',
@@ -182,7 +183,7 @@ export const articleOpts: BlogPageOpts = {
   title: 'Notes on A Programmable Web by Aaron Swartz'
 }
 
-export const config = {
+export const config: NextraBlogTheme = {
   readMore: 'Read More →',
   darkMode: true
 }
