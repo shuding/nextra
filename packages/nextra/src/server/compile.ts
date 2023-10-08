@@ -302,6 +302,8 @@ export async function compileMdx(
           }
         ],
         [parseMeta, { defaultShowCopyCode }],
+        // Should be before `rehypePrettyCode`
+        latex && rehypeKatex,
         ...(codeHighlight === false
           ? []
           : [
@@ -309,7 +311,6 @@ export async function compileMdx(
               !isRemoteContent && rehypeIcon,
               attachMeta
             ]),
-        latex && rehypeKatex,
         [rehypeExtractTocContent, { isRemoteContent }]
       ].filter(truthy),
       recmaPlugins: [

@@ -24,8 +24,8 @@ const withNextra = nextra({
 
 export default withNextra({
   i18n: {
-    locales: ['en', 'zh', 'de'],
-    defaultLocale: 'en'
+    locales: ['en-US', 'zh-CN', 'de-DE'],
+    defaultLocale: 'en-US'
   }
 })
 ```
@@ -37,12 +37,12 @@ locale too):
 
 ```plaintext
 /pages
-  _meta.en.json
-  _meta.zh.json
-  _meta.de.json
-  index.en.md
-  index.zh.md
-  index.de.md
+  _meta.en-US.json
+  _meta.zh-CN.json
+  _meta.de-DE.json
+  index.en-US.md
+  index.zh-CN.md
+  index.de-DE.md
   ...
 ```
 
@@ -53,10 +53,10 @@ language dropdown:
 
 ```js filename="theme.config.jsx"
 i18n: [
-  { locale: 'en', name: 'English' },
-  { locale: 'zh', name: '中文' },
-  { locale: 'de', name: 'Deutsch' },
-  { locale: 'ar', name: 'العربية', direction: 'rtl' }
+  { locale: 'en-US', name: 'English' },
+  { locale: 'zh-CN', name: '中文' },
+  { locale: 'de-DE', name: 'Deutsch' },
+  { locale: 'ar-SA', name: 'العربية', direction: 'rtl' }
 ]
 ```
 

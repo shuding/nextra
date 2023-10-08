@@ -44,6 +44,16 @@
 
 - d8a406b4: add `"sideEffects": false` for better tree-shaking
 
+## 2.13.2
+
+### Patch Changes
+
+- ad7b31b0: downgrade remark-math from `6` to `5.1.1` to fix
+  `TypeError: Cannot read properties of undefined (reading 'mathFlowInside')`
+  error
+
+  fix support of ```math lang that was overridden by `rehype-pretty-code`
+
 ## 2.13.1
 
 ### Patch Changes
