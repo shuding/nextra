@@ -3,7 +3,6 @@
  * This file should be never used directly, only in loader.ts
  */
 
-import { useRouter } from 'next/router'
 import type { ReactElement, ReactNode } from 'react'
 import { NEXTRA_INTERNAL } from '../constants.js'
 import { normalizePageRoute, pageTitleFromFilename } from '../server/utils.js'
@@ -21,6 +20,7 @@ import type {
   PageOpts
 } from '../types'
 import { DataProvider } from './data.js'
+import { useRouter } from './hooks/index.js'
 import { useMDXComponents } from './mdx.js'
 
 function isFolder(value: DynamicMetaItem): value is DynamicFolder {
@@ -152,7 +152,7 @@ export function HOC_MDXWrapper(
       NEXTRA_INTERNAL
     ]
     const { Layout, themeConfig } = __nextra_internal__
-    const { route } = useRouter()
+    const { route, locale } = useRouter()
 
     const pageContext = __nextra_internal__.context[route]
 
@@ -165,8 +165,7 @@ export function HOC_MDXWrapper(
     let { pageOpts } = pageContext
 
     for (const { route, children } of __nextra_pageMap) {
-      // TODO 2 for locale, 1 without local
-      const paths = route.split('/').slice(2)
+      const paths = route.split('/').slice(locale ? 2 : 1)
       const folder = findFolder(pageOpts.pageMap, paths)
       folder.children = children
     }
