@@ -4,7 +4,6 @@ import { Code, Pre, Table, Td, Th, Tr } from 'nextra/components'
 import { useMounted } from 'nextra/hooks'
 import { ArrowRightIcon } from 'nextra/icons'
 import type { Components } from 'nextra/mdx'
-import type { PageTheme } from 'nextra/normalize-pages'
 import type { ComponentProps, ReactElement, ReactNode } from 'react'
 import {
   Children,
