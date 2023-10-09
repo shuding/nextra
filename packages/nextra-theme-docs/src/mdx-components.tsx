@@ -187,9 +187,7 @@ const A = ({ href = '', ...props }) => (
 )
 
 interface BodyProps {
-  themeContext: PageTheme
   breadcrumb: ReactNode
-  timestamp?: number
   navigation: ReactNode
   children: ReactNode
 }
@@ -201,23 +199,18 @@ const classes = {
   main: cn('_w-full _break-words')
 }
 
-function Body({
-  themeContext,
-  breadcrumb,
-  timestamp,
-  navigation,
-  children
-}: BodyProps): ReactElement {
+function Body({ breadcrumb, navigation, children }: BodyProps): ReactElement {
   const config = useConfig()
   const mounted = useMounted()
+  const themeContext = config.normalizePagesResult.activeThemeContext
 
   if (themeContext.layout === 'raw') {
     return <div className={classes.main}>{children}</div>
   }
 
   const date =
-    themeContext.timestamp && config.gitTimestamp && timestamp
-      ? new Date(timestamp)
+    themeContext.timestamp && config.gitTimestamp && config.timestamp
+      ? new Date(config.timestamp)
       : null
 
   const gitTimestampEl =
@@ -365,12 +358,10 @@ const DEFAULT_COMPONENTS: Components = {
         {tocEl}
         <SkipNavContent />
         <Body
-          themeContext={themeContext}
           breadcrumb={
             activeType !== 'page' &&
             themeContext.breadcrumb && <Breadcrumb activePath={activePath} />
           }
-          timestamp={config.timestamp}
           navigation={
             activeType !== 'page' &&
             themeContext.pagination && (
