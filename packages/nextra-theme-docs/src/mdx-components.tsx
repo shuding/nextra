@@ -1,8 +1,11 @@
 import cn from 'clsx'
+import type { NextraMDXContent } from 'nextra'
 import { Code, Pre, Table, Td, Th, Tr } from 'nextra/components'
+import { useMounted } from 'nextra/hooks'
 import { ArrowRightIcon } from 'nextra/icons'
 import type { Components } from 'nextra/mdx'
-import type { ComponentProps, ReactElement } from 'react'
+import type { PageTheme } from 'nextra/normalize-pages'
+import type { ComponentProps, ReactElement, ReactNode } from 'react'
 import {
   Children,
   cloneElement,
@@ -11,11 +14,19 @@ import {
   useRef,
   useState
 } from 'react'
-import { Anchor, Collapse } from './components'
+import {
+  Anchor,
+  Breadcrumb,
+  Collapse,
+  NavLinks,
+  Sidebar,
+  SkipNavContent
+} from './components'
 import type { AnchorProps } from './components/anchor'
 import type { DocsThemeConfig } from './constants'
-import { useSetActiveAnchor } from './contexts'
+import { useConfig, useSetActiveAnchor } from './contexts'
 import { useIntersectionObserver, useSlugs } from './contexts/active-anchor'
+import { renderComponent } from './utils'
 
 // Anchor links
 const createHeading = (
@@ -175,6 +186,90 @@ const A = ({ href = '', ...props }) => (
   <Anchor href={href} newWindow={EXTERNAL_HREF_REGEX.test(href)} {...props} />
 )
 
+interface BodyProps {
+  themeContext: PageTheme
+  breadcrumb: ReactNode
+  timestamp?: number
+  navigation: ReactNode
+  children: ReactNode
+}
+
+const classes = {
+  toc: cn(
+    'nextra-toc _order-last max-xl:_hidden _w-64 _shrink-0 print:_hidden'
+  ),
+  main: cn('_w-full _break-words')
+}
+
+function Body({
+  themeContext,
+  breadcrumb,
+  timestamp,
+  navigation,
+  children
+}: BodyProps): ReactElement {
+  const config = useConfig()
+  const mounted = useMounted()
+
+  if (themeContext.layout === 'raw') {
+    return <div className={classes.main}>{children}</div>
+  }
+
+  const date =
+    themeContext.timestamp && config.gitTimestamp && timestamp
+      ? new Date(timestamp)
+      : null
+
+  const gitTimestampEl =
+    // Because a user's time zone may be different from the server page
+    mounted && date ? (
+      <div className="_mt-12 _mb-8 _block _text-xs _text-gray-500 ltr:_text-right rtl:_text-left dark:_text-gray-400">
+        {renderComponent(config.gitTimestamp, { timestamp: date })}
+      </div>
+    ) : (
+      <div className="_mt-16" />
+    )
+
+  const content = (
+    <>
+      {children}
+      {gitTimestampEl}
+      {navigation}
+    </>
+  )
+
+  const body = config.main?.({ children: content }) || content
+
+  if (themeContext.layout === 'full') {
+    return (
+      <article
+        className={cn(
+          classes.main,
+          'nextra-content _min-h-[calc(100vh-var(--nextra-navbar-height))] _pl-[max(env(safe-area-inset-left),1.5rem)] _pr-[max(env(safe-area-inset-right),1.5rem)]'
+        )}
+      >
+        {body}
+      </article>
+    )
+  }
+
+  return (
+    <article
+      className={cn(
+        classes.main,
+        'nextra-content _flex _min-h-[calc(100vh-var(--nextra-navbar-height))] _min-w-0 _justify-center _pb-8 _pr-[calc(env(safe-area-inset-right)-1.5rem)]',
+        themeContext.typesetting === 'article' &&
+          'nextra-body-typesetting-article'
+      )}
+    >
+      <main className="_w-full _min-w-0 _max-w-6xl _px-6 _pt-4 md:_px-12">
+        {breadcrumb}
+        {body}
+      </main>
+    </article>
+  )
+}
+
 const DEFAULT_COMPONENTS: Components = {
   h1: props => (
     <h1
@@ -221,7 +316,76 @@ const DEFAULT_COMPONENTS: Components = {
   details: Details,
   summary: Summary,
   pre: Pre,
-  code: Code
+  code: Code,
+  wrapper: function NextraWrapper({ toc, children }) {
+    const config = useConfig()
+    const {
+      activeType,
+      activeThemeContext: themeContext,
+      docsDirectories,
+      directories,
+      activePath,
+      flatDocsDirectories,
+      activeIndex
+    } = config.normalizePagesResult
+
+    const tocEl =
+      activeType === 'page' ||
+      !themeContext.toc ||
+      themeContext.layout !== 'default' ? (
+        themeContext.layout !== 'full' &&
+        themeContext.layout !== 'raw' && (
+          <nav className={classes.toc} aria-label="table of contents" />
+        )
+      ) : (
+        <nav
+          className={cn(classes.toc, '_px-4')}
+          aria-label="table of contents"
+        >
+          {renderComponent(config.toc.component, {
+            toc: config.toc.float ? toc : [],
+            filePath: config.filePath
+          })}
+        </nav>
+      )
+    return (
+      <div
+        className={cn(
+          '_mx-auto _flex',
+          themeContext.layout !== 'raw' && '_max-w-[90rem]'
+        )}
+      >
+        <Sidebar
+          docsDirectories={docsDirectories}
+          fullDirectories={directories}
+          toc={toc}
+          asPopover={config.hideSidebar}
+          includePlaceholder={themeContext.layout === 'default'}
+        />
+        {tocEl}
+        <SkipNavContent />
+        <Body
+          themeContext={themeContext}
+          breadcrumb={
+            activeType !== 'page' &&
+            themeContext.breadcrumb && <Breadcrumb activePath={activePath} />
+          }
+          timestamp={config.timestamp}
+          navigation={
+            activeType !== 'page' &&
+            themeContext.pagination && (
+              <NavLinks
+                flatDirectories={flatDocsDirectories}
+                currentIndex={activeIndex}
+              />
+            )
+          }
+        >
+          {children}
+        </Body>
+      </div>
+    )
+  } satisfies NextraMDXContent
 }
 
 export function getComponents({
@@ -232,7 +396,8 @@ export function getComponents({
   components?: DocsThemeConfig['components']
 }): Components {
   if (isRawLayout) {
-    return { a: A }
+    // @ts-expect-error
+    return { a: A, wrapper: DEFAULT_COMPONENTS.wrapper }
   }
 
   const context = { index: 0 }

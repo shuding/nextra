@@ -1,9 +1,11 @@
 import { ThemeProvider } from 'next-themes'
 import { useRouter } from 'next/router'
 import type { FrontMatter, PageMapItem, PageOpts } from 'nextra'
+import { useFSRoute } from 'nextra/hooks'
+import { normalizePages } from 'nextra/normalize-pages'
 import { metaSchema } from 'nextra/schemas'
 import type { ReactElement, ReactNode } from 'react'
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import type { ZodError } from 'zod'
 import type { DocsThemeConfig } from '../constants'
 import { DEEP_OBJECT_KEYS, DEFAULT_THEME } from '../constants'
@@ -12,11 +14,20 @@ import type { Context } from '../types'
 import { MenuProvider } from './menu'
 
 type Config<FrontMatterType = FrontMatter> = DocsThemeConfig &
-  Pick<PageOpts<FrontMatterType>, 'title' | 'frontMatter'>
+  Pick<
+    PageOpts<FrontMatterType>,
+    'title' | 'frontMatter' | 'filePath' | 'timestamp'
+  > & {
+    hideSidebar: boolean
+    normalizePagesResult: ReturnType<typeof normalizePages>
+  }
 
 const ConfigContext = createContext<Config>({
   title: '',
   frontMatter: {},
+  filePath: '',
+  hideSidebar: false,
+  normalizePagesResult: {} as ReturnType<typeof normalizePages>,
   ...DEFAULT_THEME
 })
 ConfigContext.displayName = 'Config'
@@ -100,10 +111,27 @@ export function ConfigProvider({
     // validateMeta(pageOpts.pageMap)
     isValidated = true
   }
+
+  const fsPath = useFSRoute()
+
+  const normalizePagesResult = useMemo(
+    () => normalizePages({ list: pageOpts.pageMap, route: fsPath }),
+    [pageOpts.pageMap, fsPath]
+  )
+
+  const { activeType, activeThemeContext: themeContext } = normalizePagesResult
+
   const extendedConfig: Config = {
     ...theme,
     title: pageOpts.title,
-    frontMatter: pageOpts.frontMatter
+    frontMatter: pageOpts.frontMatter,
+    filePath: pageOpts.filePath,
+    timestamp: pageOpts.timestamp,
+    hideSidebar:
+      !themeContext.sidebar ||
+      themeContext.layout === 'raw' ||
+      activeType === 'page',
+    normalizePagesResult
   }
 
   const { nextThemes } = extendedConfig
