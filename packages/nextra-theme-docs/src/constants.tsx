@@ -183,6 +183,15 @@ const PLACEHOLDER_LOCALES: Record<string, string> = {
   'zh-CN': '搜索文档'
 }
 
+function useLocaleText(localesMap: Record<string, string>) {
+  const { locale, defaultLocale = DEFAULT_LOCALE } = useRouter()
+  return (
+    (locale && localesMap[locale]) ||
+    localesMap[defaultLocale] ||
+    localesMap[DEFAULT_LOCALE]
+  )
+}
+
 export const DEFAULT_THEME: DocsThemeConfig = {
   banner: {
     dismissible: true,
@@ -310,17 +319,10 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     ),
     error: 'Failed to load search index.',
     loading: function useLoading() {
-      const { locale, defaultLocale = DEFAULT_LOCALE } = useRouter()
-      const text =
-        (locale && LOADING_LOCALES[locale]) || LOADING_LOCALES[defaultLocale]
-      return <>{text}…</>
+      return <>{useLocaleText(LOADING_LOCALES)}…</>
     },
     placeholder: function usePlaceholder() {
-      const { locale, defaultLocale = DEFAULT_LOCALE } = useRouter()
-      const text =
-        (locale && PLACEHOLDER_LOCALES[locale]) ||
-        PLACEHOLDER_LOCALES[defaultLocale]
-      return `${text}…`
+      return `${useLocaleText(PLACEHOLDER_LOCALES)}…`
     }
   },
   serverSideError: {
