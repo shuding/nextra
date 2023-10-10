@@ -362,7 +362,7 @@ export function normalizePages({
         docsDirectories.push(pageItem)
         break
       case 'doc':
-        if (display !== 'children') {
+        if (display !== 'children' && display !== 'hidden') {
           docsDirectories.push(docsItem)
         }
         break
