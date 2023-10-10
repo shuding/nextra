@@ -28,12 +28,10 @@ export function LocaleSwitch({
     <Select
       title="Change language"
       className={className}
-      onChange={option => {
+      onChange={value => {
         const date = new Date(Date.now() + ONE_YEAR)
-        document.cookie = `NEXT_LOCALE=${
-          option.key
-        }; expires=${date.toUTCString()}; path=/`
-        const href = addBasePath(asPath.replace(`/${locale}`, `/${option.key}`))
+        document.cookie = `NEXT_LOCALE=${value}; expires=${date.toUTCString()}; path=/`
+        const href = addBasePath(asPath.replace(`/${locale}`, `/${value}`))
         location.href = href
       }}
       selected={{

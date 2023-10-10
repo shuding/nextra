@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.17",
-    "@popperjs/core": "^2.11.8",
+    "@radix-ui/react-dropdown-menu": "^2.0.6",
     "clsx": "^2.0.0",
     "escape-string-regexp": "^5.0.0",
     "flexsearch": "^0.7.31",
