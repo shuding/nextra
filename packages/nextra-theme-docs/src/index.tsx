@@ -74,11 +74,12 @@ function InnerLayout({ children }: { children: ReactNode }): ReactElement {
 
 export default function Layout({
   children,
-  ...context
+  themeConfig,
+  pageOpts
 }: NextraThemeLayoutProps): ReactElement {
   return (
-    <ThemeConfigProvider value={context.themeConfig}>
-      <ConfigProvider value={context.pageOpts}>
+    <ThemeConfigProvider value={themeConfig}>
+      <ConfigProvider value={pageOpts}>
         <InnerLayout>{children}</InnerLayout>
       </ConfigProvider>
     </ThemeConfigProvider>
