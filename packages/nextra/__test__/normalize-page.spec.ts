@@ -233,44 +233,6 @@ describe('normalize-page', () => {
         ],
         "docsDirectories": [
           {
-            "children": [
-              {
-                "children": [
-                  {
-                    "children": [
-                      {
-                        "frontMatter": {
-                          "sidebar_label": "Qwe",
-                        },
-                        "isUnderCurrentDocsTree": true,
-                        "name": "qwe",
-                        "route": "/bar/baz/quz/qwe",
-                        "title": "Qwe",
-                        "type": "doc",
-                      },
-                    ],
-                    "isUnderCurrentDocsTree": true,
-                    "name": "quz",
-                    "route": "/bar/baz/quz",
-                    "title": "quz",
-                    "type": "doc",
-                  },
-                ],
-                "isUnderCurrentDocsTree": true,
-                "name": "baz",
-                "route": "/bar/baz",
-                "title": "baz",
-                "type": "doc",
-              },
-            ],
-            "display": "hidden",
-            "isUnderCurrentDocsTree": true,
-            "name": "bar",
-            "route": "/bar",
-            "title": "bar",
-            "type": "doc",
-          },
-          {
             "frontMatter": {
               "sidebar_label": "Index",
             },
