@@ -1,8 +1,8 @@
 import cn from 'clsx'
 import { XIcon } from 'nextra/icons'
 import type { ReactElement } from 'react'
-import { renderComponent } from '../utils'
 import { useThemeConfig } from '../contexts'
+import { renderComponent } from '../utils'
 
 export function Banner(): ReactElement | null {
   const { banner } = useThemeConfig()

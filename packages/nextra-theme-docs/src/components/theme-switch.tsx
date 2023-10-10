@@ -3,9 +3,9 @@ import { useMounted } from 'nextra/hooks'
 import { MoonIcon, SunIcon } from 'nextra/icons'
 import type { ReactElement } from 'react'
 import type { z } from 'zod'
+import { useThemeConfig } from '../contexts'
 import type { themeOptionsSchema } from '../schemas'
 import { Select } from './select'
-import { useThemeConfig } from '../contexts'
 
 type ThemeSwitchProps = {
   lite?: boolean

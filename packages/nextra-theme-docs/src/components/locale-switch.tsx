@@ -2,8 +2,8 @@ import { addBasePath } from 'next/dist/client/add-base-path'
 import { useRouter } from 'nextra/hooks'
 import { GlobeIcon } from 'nextra/icons'
 import type { ReactElement } from 'react'
-import { Select } from './select'
 import { useThemeConfig } from '../contexts'
+import { Select } from './select'
 
 const ONE_YEAR = 365 * 24 * 60 * 60 * 1000
 

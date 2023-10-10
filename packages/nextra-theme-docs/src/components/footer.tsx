@@ -1,8 +1,8 @@
 import cn from 'clsx'
 import type { ReactElement } from 'react'
+import { useThemeConfig } from '../contexts'
 import { renderComponent } from '../utils'
 import { LocaleSwitch } from './locale-switch'
-import { useThemeConfig } from '../contexts'
 
 export function Footer({ menu }: { menu?: boolean }): ReactElement {
   const themeConfig = useThemeConfig()
