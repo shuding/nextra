@@ -1,4 +1,11 @@
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
+import {
+  Content,
+  Portal,
+  RadioGroup,
+  RadioItem,
+  Root,
+  Trigger
+} from '@radix-ui/react-dropdown-menu'
 import cn from 'clsx'
 import { CheckIcon } from 'nextra/icons'
 import type { ReactElement } from 'react'
@@ -27,8 +34,8 @@ export function Select({
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <DropdownMenu.Root open={isOpen} onOpenChange={setIsOpen}>
-      <DropdownMenu.Trigger asChild>
+    <Root open={isOpen} onOpenChange={setIsOpen}>
+      <Trigger asChild>
         <button
           title={title}
           className={cn(
@@ -41,21 +48,18 @@ export function Select({
         >
           {selected.name}
         </button>
-      </DropdownMenu.Trigger>
+      </Trigger>
 
-      <DropdownMenu.Portal>
-        <DropdownMenu.Content
+      <Portal>
+        <Content
           sideOffset={5}
           align="start"
           className="_z-20 _max-h-64 _overflow-auto _rounded-md _ring-1 _ring-black/5 _bg-white _py-1 _text-sm _shadow-lg dark:_ring-white/20 dark:_bg-neutral-800 _min-w-[--radix-dropdown-menu-trigger-width]"
           asChild
         >
-          <DropdownMenu.RadioGroup
-            value={selected.key}
-            onValueChange={onChange}
-          >
+          <RadioGroup value={selected.key} onValueChange={onChange}>
             {options.map(option => (
-              <DropdownMenu.RadioItem
+              <RadioItem
                 key={option.key}
                 value={option.key}
                 className={cn(
@@ -71,11 +75,11 @@ export function Select({
                     <CheckIcon />
                   </span>
                 )}
-              </DropdownMenu.RadioItem>
+              </RadioItem>
             ))}
-          </DropdownMenu.RadioGroup>
-        </DropdownMenu.Content>
-      </DropdownMenu.Portal>
-    </DropdownMenu.Root>
+          </RadioGroup>
+        </Content>
+      </Portal>
+    </Root>
   )
 }
