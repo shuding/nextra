@@ -1,4 +1,7 @@
+import fs from 'fs/promises'
+import path from 'node:path'
 import { normalizePages } from '../src/client/normalize-pages.js'
+import { collectPageMap } from '../src/server/page-map.js'
 import { cnPageMap, usPageMap } from './fixture/page-maps/pageMap.js'
 
 describe('normalize-page', () => {
@@ -173,6 +176,155 @@ describe('normalize-page', () => {
           "type": "menu",
         },
       ]
+    `)
+  })
+
+  it('should hide items on mobile', async () => {
+    const dir = path.join(
+      __dirname,
+      'fixture',
+      'page-maps',
+      'display-hidden-for-mobile'
+    )
+    const rawJs = await collectPageMap({ dir })
+    await fs.writeFile(path.join(dir, 'generated-page-map.js'), rawJs)
+
+    const { pageMap } = await import(
+      './fixture/page-maps/display-hidden-for-mobile/generated-page-map.js'
+    )
+    const result = normalizePages({ list: pageMap, route: '/' })
+    expect(result).toMatchInlineSnapshot(`
+      {
+        "activeIndex": 1,
+        "activePath": [
+          {
+            "frontMatter": {
+              "sidebar_label": "Index",
+            },
+            "name": "index",
+            "route": "/",
+            "title": "Index",
+            "type": "doc",
+          },
+        ],
+        "activeThemeContext": {
+          "breadcrumb": true,
+          "collapsed": false,
+          "footer": true,
+          "layout": "default",
+          "navbar": true,
+          "pagination": true,
+          "sidebar": true,
+          "timestamp": true,
+          "toc": true,
+          "typesetting": "default",
+        },
+        "activeType": "doc",
+        "directories": [
+          {
+            "frontMatter": {
+              "sidebar_label": "Index",
+            },
+            "name": "index",
+            "route": "/",
+            "title": "Index",
+            "type": "doc",
+          },
+        ],
+        "docsDirectories": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "frontMatter": {
+                          "sidebar_label": "Qwe",
+                        },
+                        "isUnderCurrentDocsTree": true,
+                        "name": "qwe",
+                        "route": "/bar/baz/quz/qwe",
+                        "title": "Qwe",
+                        "type": "doc",
+                      },
+                    ],
+                    "isUnderCurrentDocsTree": true,
+                    "name": "quz",
+                    "route": "/bar/baz/quz",
+                    "title": "quz",
+                    "type": "doc",
+                  },
+                ],
+                "isUnderCurrentDocsTree": true,
+                "name": "baz",
+                "route": "/bar/baz",
+                "title": "baz",
+                "type": "doc",
+              },
+            ],
+            "display": "hidden",
+            "isUnderCurrentDocsTree": true,
+            "name": "bar",
+            "route": "/bar",
+            "title": "bar",
+            "type": "doc",
+          },
+          {
+            "frontMatter": {
+              "sidebar_label": "Index",
+            },
+            "isUnderCurrentDocsTree": true,
+            "name": "index",
+            "route": "/",
+            "title": "Index",
+            "type": "doc",
+          },
+        ],
+        "flatDirectories": [
+          {
+            "frontMatter": {
+              "sidebar_label": "Qwe",
+            },
+            "name": "qwe",
+            "route": "/bar/baz/quz/qwe",
+            "title": "Qwe",
+            "type": "doc",
+          },
+          {
+            "frontMatter": {
+              "sidebar_label": "Index",
+            },
+            "name": "index",
+            "route": "/",
+            "title": "Index",
+            "type": "doc",
+          },
+        ],
+        "flatDocsDirectories": [
+          {
+            "frontMatter": {
+              "sidebar_label": "Qwe",
+            },
+            "isUnderCurrentDocsTree": true,
+            "name": "qwe",
+            "route": "/bar/baz/quz/qwe",
+            "title": "Qwe",
+            "type": "doc",
+          },
+          {
+            "frontMatter": {
+              "sidebar_label": "Index",
+            },
+            "isUnderCurrentDocsTree": true,
+            "name": "index",
+            "route": "/",
+            "title": "Index",
+            "type": "doc",
+          },
+        ],
+        "topLevelNavbarItems": [],
+      }
     `)
   })
 })

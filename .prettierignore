@@ -1,5 +1,6 @@
 pnpm-lock.yaml
 .changeset/*.md
+generated-page-map.js
 
 docs/pages/docs/guide/advanced/latex.mdx
 

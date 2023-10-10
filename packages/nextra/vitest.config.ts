@@ -5,6 +5,7 @@ export default defineConfig({
   plugins: [react()],
   test: {
     globals: true,
-    environment: 'jsdom'
+    environment: 'jsdom',
+    watchExclude: ['**/node_modules/**', '**/dist/**', '**/generated-*']
   }
 })

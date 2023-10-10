@@ -118,7 +118,7 @@
     "@mdx-js/react": "^2.3.0",
     "@napi-rs/simple-git": "^0.1.9",
     "@theguild/remark-mermaid": "^0.0.5",
-    "@theguild/remark-npm2yarn": "0.3.0-alpha-20231007232355-2b5ea30",
+    "@theguild/remark-npm2yarn": "0.3.0",
     "clsx": "^2.0.0",
     "estree-util-to-js": "^2.0.0",
     "estree-util-value-to-estree": "^3.0.1",

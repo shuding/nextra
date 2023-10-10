@@ -13,7 +13,7 @@ const TAILWIND_CONFIG = {
 module.exports = {
   root: true,
   reportUnusedDisableDirectives: true,
-  ignorePatterns: ['next-env.d.ts'],
+  ignorePatterns: ['next-env.d.ts', 'generated-page-map.js'],
   overrides: [
     // Rules for all files
     {
