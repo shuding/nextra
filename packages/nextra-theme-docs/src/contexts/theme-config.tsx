@@ -4,7 +4,7 @@ import type { DocsThemeConfig } from '../constants'
 import { DEEP_OBJECT_KEYS, DEFAULT_THEME } from '../constants'
 
 const ThemeConfigContext = createContext<DocsThemeConfig>(DEFAULT_THEME)
-
+ThemeConfigContext.displayName = 'ThemeConfig'
 export const useThemeConfig = () => useContext(ThemeConfigContext)
 
 export function ThemeConfigProvider({
