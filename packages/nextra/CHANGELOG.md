@@ -1,5 +1,12 @@
 # nextra
 
+## 3.0.0-alpha.4
+
+### Patch Changes
+
+- 7faa0968: fix visible hidden pages on mobile which set up with
+  `display: 'hidden'`
+
 ## 3.0.0-alpha.3
 
 ### Patch Changes
