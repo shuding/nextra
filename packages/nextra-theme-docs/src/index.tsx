@@ -4,10 +4,12 @@ import 'focus-visible'
 import { useRouter } from 'nextra/hooks'
 import { MDXProvider } from 'nextra/mdx'
 import './polyfill'
+import { useEffect } from 'react'
 import { Banner, Head } from './components'
 import { PartialDocsThemeConfig } from './constants'
 import { ActiveAnchorProvider, ConfigProvider, useConfig } from './contexts'
 import { getComponents } from './mdx-components'
+import { useThemeConfigStore } from './stores'
 import { renderComponent } from './utils'
 
 function InnerLayout({ children }: { children: ReactNode }): ReactElement {
@@ -56,6 +58,12 @@ export default function Layout({
   children,
   ...context
 }: NextraThemeLayoutProps): ReactElement {
+  const { setThemeConfig } = useThemeConfigStore()
+
+  useEffect(() => {
+    setThemeConfig(context.themeConfig)
+  }, [context.themeConfig, setThemeConfig])
+
   return (
     <ConfigProvider value={context}>
       <InnerLayout>{children}</InnerLayout>
