@@ -187,7 +187,7 @@ describe('normalize-page', () => {
       'display-hidden-for-mobile'
     )
     const rawJs = await collectPageMap({ dir })
-    await fs.writeFile(path.join(dir, 'generated-page-map.ts'), rawJs)
+    await fs.writeFile(path.join(dir, 'generated-page-map.js'), rawJs)
 
     const { pageMap } = await import(
       './fixture/page-maps/display-hidden-for-mobile/generated-page-map.js'
