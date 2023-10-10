@@ -14,8 +14,7 @@ import {
   useState
 } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
-import { useActiveAnchor, useMenu } from '../contexts'
-import { useThemeConfigStore } from '../stores'
+import { useActiveAnchor, useMenu, useThemeConfig } from '../contexts'
 import { renderComponent } from '../utils'
 import { Anchor } from './anchor'
 import { Collapse } from './collapse'
@@ -81,7 +80,7 @@ function FolderImpl({ item, anchors }: FolderProps): ReactElement {
 
   const { setMenu } = useMenu()
   const { theme } = item as Item
-  const { themeConfig } = useThemeConfigStore()
+  const themeConfig = useThemeConfig()
 
   const open =
     TreeState[item.route] === undefined
@@ -360,7 +359,7 @@ export function Sidebar({
     }
   }, [menu])
 
-  const { themeConfig } = useThemeConfigStore()
+  const themeConfig = useThemeConfig()
   const hasI18n = themeConfig.i18n.length > 0
   const hasMenu =
     themeConfig.darkMode || hasI18n || themeConfig.sidebar.toggleButton

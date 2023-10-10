@@ -6,8 +6,7 @@ import { useFSRoute } from 'nextra/hooks'
 import { ArrowRightIcon, MenuIcon } from 'nextra/icons'
 import type { MenuItem, PageItem } from 'nextra/normalize-pages'
 import type { ReactElement, ReactNode } from 'react'
-import { useMenu } from '../contexts'
-import { useThemeConfigStore } from '../stores'
+import { useMenu, useThemeConfig } from '../contexts'
 import { renderComponent } from '../utils'
 import { Anchor } from './anchor'
 
@@ -80,7 +79,7 @@ function NavbarMenu({
 }
 
 export function Navbar({ items }: NavBarProps): ReactElement {
-  const { themeConfig } = useThemeConfigStore()
+  const themeConfig = useThemeConfig()
 
   const activeRoute = useFSRoute()
   const { menu, setMenu } = useMenu()

@@ -11,9 +11,8 @@ import {
   ThemeSwitch,
   TOC
 } from './components'
-import { useConfig } from './contexts'
+import { useConfig, useThemeConfig } from './contexts'
 import type { publicThemeSchema, themeSchema } from './schemas'
-import { useThemeConfigStore } from './stores'
 import { getGitIssueUrl, useGitEditUrl } from './utils'
 
 export const DEFAULT_LOCALE = 'en-US'
@@ -79,7 +78,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     labels: 'feedback',
     useLink() {
       const config = useConfig()
-      const { themeConfig } = useThemeConfigStore()
+      const themeConfig = useThemeConfig()
       return getGitIssueUrl({
         labels: themeConfig.feedback.labels,
         repository: themeConfig.docsRepositoryBase,

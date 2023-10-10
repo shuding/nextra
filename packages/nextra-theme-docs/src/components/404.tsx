@@ -1,12 +1,12 @@
 import { useRouter } from 'next/router'
 import { useMounted } from 'nextra/hooks'
 import type { ReactElement } from 'react'
-import { useThemeConfigStore } from '../stores'
 import { getGitIssueUrl, renderComponent } from '../utils'
 import { Anchor } from './anchor'
+import { useThemeConfig } from '../contexts'
 
 export function NotFoundPage(): ReactElement | null {
-  const { themeConfig } = useThemeConfigStore()
+  const themeConfig = useThemeConfig()
 
   const mounted = useMounted()
   const { asPath } = useRouter()

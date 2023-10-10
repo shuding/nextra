@@ -2,8 +2,8 @@ import { addBasePath } from 'next/dist/client/add-base-path'
 import { useRouter } from 'nextra/hooks'
 import { GlobeIcon } from 'nextra/icons'
 import type { ReactElement } from 'react'
-import { useThemeConfigStore } from '../stores'
 import { Select } from './select'
+import { useThemeConfig } from '../contexts'
 
 const ONE_YEAR = 365 * 24 * 60 * 60 * 1000
 
@@ -16,7 +16,7 @@ export function LocaleSwitch({
   lite,
   className
 }: LocaleSwitchProps): ReactElement | null {
-  const { themeConfig } = useThemeConfigStore()
+  const themeConfig = useThemeConfig()
 
   const { locale, asPath } = useRouter()
 

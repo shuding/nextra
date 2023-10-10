@@ -2,12 +2,12 @@ import { useTheme } from 'next-themes'
 import NextHead from 'next/head'
 import { useMounted } from 'nextra/hooks'
 import type { ReactElement } from 'react'
-import { useThemeConfigStore } from '../stores'
+import { useThemeConfig } from '../contexts'
 
 export function Head(): ReactElement {
   const { resolvedTheme } = useTheme()
   const mounted = useMounted()
-  const { themeConfig } = useThemeConfigStore()
+  const themeConfig = useThemeConfig()
 
   // `head` can be either FC or ReactNode. We have to directly call it if it's an
   // FC because hooks like Next.js' `useRouter` aren't allowed inside NextHead.

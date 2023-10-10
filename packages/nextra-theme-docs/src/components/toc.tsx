@@ -3,8 +3,7 @@ import type { Heading } from 'nextra'
 import type { ReactElement } from 'react'
 import { useEffect, useRef } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
-import { useActiveAnchor } from '../contexts'
-import { useThemeConfigStore } from '../stores'
+import { useActiveAnchor, useThemeConfig } from '../contexts'
 import { renderComponent } from '../utils'
 import { Anchor } from './anchor'
 import { BackToTop } from './back-to-top'
@@ -22,7 +21,7 @@ const linkClassName = cn(
 export function TOC({ toc, filePath }: TOCProps): ReactElement {
   const activeAnchor = useActiveAnchor()
   const tocRef = useRef<HTMLDivElement>(null)
-  const { themeConfig } = useThemeConfigStore()
+  const themeConfig = useThemeConfig()
 
   const hasHeadings = toc.length > 0
   const hasMetaInfo = Boolean(

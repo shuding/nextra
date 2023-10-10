@@ -4,8 +4,8 @@ import { MoonIcon, SunIcon } from 'nextra/icons'
 import type { ReactElement } from 'react'
 import type { z } from 'zod'
 import type { themeOptionsSchema } from '../schemas'
-import { useThemeConfigStore } from '../stores'
 import { Select } from './select'
+import { useThemeConfig } from '../contexts'
 
 type ThemeSwitchProps = {
   lite?: boolean
@@ -20,7 +20,7 @@ export function ThemeSwitch({
 }: ThemeSwitchProps): ReactElement {
   const { setTheme, resolvedTheme, theme = '' } = useTheme()
   const mounted = useMounted()
-  const config = useThemeConfigStore().themeConfig.themeSwitch
+  const config = useThemeConfig().themeSwitch
 
   const IconToUse = mounted && resolvedTheme === 'dark' ? MoonIcon : SunIcon
   const options: ThemeOptions =

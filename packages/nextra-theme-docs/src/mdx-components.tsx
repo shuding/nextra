@@ -23,9 +23,8 @@ import {
 } from './components'
 import type { AnchorProps } from './components/anchor'
 import type { DocsThemeConfig } from './constants'
-import { useConfig, useSetActiveAnchor } from './contexts'
+import { useConfig, useSetActiveAnchor, useThemeConfig } from './contexts'
 import { useIntersectionObserver, useSlugs } from './contexts/active-anchor'
-import { useThemeConfigStore } from './stores'
 import { renderComponent } from './utils'
 
 // Anchor links
@@ -201,7 +200,7 @@ const classes = {
 
 function Body({ breadcrumb, navigation, children }: BodyProps): ReactElement {
   const config = useConfig()
-  const { themeConfig } = useThemeConfigStore()
+  const themeConfig = useThemeConfig()
   const mounted = useMounted()
   const themeContext = config.normalizePagesResult.activeThemeContext
 
@@ -322,7 +321,7 @@ const DEFAULT_COMPONENTS: Components = {
       flatDocsDirectories,
       activeIndex
     } = config.normalizePagesResult
-    const { themeConfig } = useThemeConfigStore()
+    const themeConfig = useThemeConfig()
 
     const tocEl =
       activeType === 'page' ||

@@ -1,11 +1,11 @@
 import cn from 'clsx'
 import type { ReactElement } from 'react'
-import { useThemeConfigStore } from '../stores'
 import { renderComponent } from '../utils'
 import { LocaleSwitch } from './locale-switch'
+import { useThemeConfig } from '../contexts'
 
 export function Footer({ menu }: { menu?: boolean }): ReactElement {
-  const { themeConfig } = useThemeConfigStore()
+  const themeConfig = useThemeConfig()
   return (
     <footer className="_bg-gray-100 _pb-[env(safe-area-inset-bottom)] dark:_bg-neutral-900 print:_bg-transparent">
       <div

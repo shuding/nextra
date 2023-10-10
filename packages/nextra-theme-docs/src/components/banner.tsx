@@ -1,11 +1,11 @@
 import cn from 'clsx'
 import { XIcon } from 'nextra/icons'
 import type { ReactElement } from 'react'
-import { useThemeConfigStore } from '../stores'
 import { renderComponent } from '../utils'
+import { useThemeConfig } from '../contexts'
 
 export function Banner(): ReactElement | null {
-  const { banner } = useThemeConfigStore().themeConfig
+  const { banner } = useThemeConfig()
   if (!banner.content) {
     return null
   }
