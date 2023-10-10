@@ -1,20 +1,30 @@
-import type { NextraThemeLayoutProps } from 'nextra'
-import type { ReactElement, ReactNode } from 'react'
 import 'focus-visible'
+import './polyfill'
+import { ThemeProvider } from 'next-themes'
+import type { NextraThemeLayoutProps } from 'nextra'
 import { useRouter } from 'nextra/hooks'
 import { MDXProvider } from 'nextra/mdx'
-import './polyfill'
+import type { ReactElement, ReactNode } from 'react'
 import { Banner, Head } from './components'
 import { PartialDocsThemeConfig } from './constants'
-import { ActiveAnchorProvider, ConfigProvider, useConfig } from './contexts'
+import {
+  ActiveAnchorProvider,
+  ConfigProvider,
+  ThemeConfigProvider,
+  useConfig,
+  useThemeConfig
+} from './contexts'
 import { getComponents } from './mdx-components'
 import { renderComponent } from './utils'
 
 function InnerLayout({ children }: { children: ReactNode }): ReactElement {
+  const themeConfig = useThemeConfig()
+
   const config = useConfig()
   const { locale } = useRouter()
 
-  const { direction } = config.i18n.find(l => l.locale === locale) || config
+  const { direction } =
+    themeConfig.i18n.find(l => l.locale === locale) || themeConfig
   const dir = direction === 'rtl' ? 'rtl' : 'ltr'
 
   const { activeThemeContext: themeContext, topLevelNavbarItems } =
@@ -22,48 +32,61 @@ function InnerLayout({ children }: { children: ReactNode }): ReactElement {
 
   const components = getComponents({
     isRawLayout: themeContext.layout === 'raw',
-    components: config.components
+    components: themeConfig.components
   })
 
   return (
-    // This makes sure that selectors like `[dir=ltr] .nextra-container` work
-    // before hydration as Tailwind expects the `dir` attribute to exist on the
-    // `html` element.
-    <div dir={dir}>
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `document.documentElement.setAttribute('dir','${dir}')`
-        }}
-      />
-      <Head />
-      <Banner />
-      {themeContext.navbar &&
-        renderComponent(config.navbar.component, {
-          items: topLevelNavbarItems
-        })}
-      <ActiveAnchorProvider>
-        <MDXProvider disableParentContext components={components}>
-          {children}
-        </MDXProvider>
-      </ActiveAnchorProvider>
-      {themeContext.footer &&
-        renderComponent(config.footer.component, { menu: config.hideSidebar })}
-    </div>
+    <ThemeProvider
+      attribute="class"
+      disableTransitionOnChange
+      {...themeConfig.nextThemes}
+    >
+      {/*
+        This makes sure that selectors like `[dir=ltr] .nextra-container` work
+        before hydration as Tailwind expects the `dir` attribute to exist on the
+        `html` element.
+      */}
+      <div dir={dir}>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `document.documentElement.setAttribute('dir','${dir}')`
+          }}
+        />
+        <Head />
+        <Banner />
+        {themeContext.navbar &&
+          renderComponent(themeConfig.navbar.component, {
+            items: topLevelNavbarItems
+          })}
+        <ActiveAnchorProvider>
+          <MDXProvider disableParentContext components={components}>
+            {children}
+          </MDXProvider>
+        </ActiveAnchorProvider>
+        {themeContext.footer &&
+          renderComponent(themeConfig.footer.component, {
+            menu: config.hideSidebar
+          })}
+      </div>
+    </ThemeProvider>
   )
 }
 
 export default function Layout({
   children,
-  ...context
+  themeConfig,
+  pageOpts
 }: NextraThemeLayoutProps): ReactElement {
   return (
-    <ConfigProvider value={context}>
-      <InnerLayout>{children}</InnerLayout>
-    </ConfigProvider>
+    <ThemeConfigProvider value={themeConfig}>
+      <ConfigProvider value={pageOpts}>
+        <InnerLayout>{children}</InnerLayout>
+      </ConfigProvider>
+    </ThemeConfigProvider>
   )
 }
 
-export { useConfig, PartialDocsThemeConfig as DocsThemeConfig }
+export { useThemeConfig, useConfig, PartialDocsThemeConfig as DocsThemeConfig }
 export { useTheme } from 'next-themes'
 export { Link } from './mdx-components'
 export {

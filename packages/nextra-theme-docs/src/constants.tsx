@@ -11,7 +11,7 @@ import {
   ThemeSwitch,
   TOC
 } from './components'
-import { useConfig } from './contexts'
+import { useConfig, useThemeConfig } from './contexts'
 import type { publicThemeSchema, themeSchema } from './schemas'
 import { getGitIssueUrl, useGitEditUrl } from './utils'
 
@@ -78,9 +78,10 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     labels: 'feedback',
     useLink() {
       const config = useConfig()
+      const themeConfig = useThemeConfig()
       return getGitIssueUrl({
-        labels: config.feedback.labels,
-        repository: config.docsRepositoryBase,
+        labels: themeConfig.feedback.labels,
+        repository: themeConfig.docsRepositoryBase,
         title: `Feedback for “${config.title}”`
       })
     }

@@ -14,7 +14,7 @@ import {
   useState
 } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
-import { useActiveAnchor, useConfig, useMenu } from '../contexts'
+import { useActiveAnchor, useMenu, useThemeConfig } from '../contexts'
 import { renderComponent } from '../utils'
 import { Anchor } from './anchor'
 import { Collapse } from './collapse'
@@ -79,8 +79,9 @@ function FolderImpl({ item, anchors }: FolderProps): ReactElement {
   const level = useContext(FolderLevelContext)
 
   const { setMenu } = useMenu()
-  const config = useConfig()
   const { theme } = item as Item
+  const themeConfig = useThemeConfig()
+
   const open =
     TreeState[item.route] === undefined
       ? active ||
@@ -88,7 +89,7 @@ function FolderImpl({ item, anchors }: FolderProps): ReactElement {
         focusedRouteInside ||
         (theme && 'collapsed' in theme
           ? !theme.collapsed
-          : level < config.sidebar.defaultMenuCollapseLevel)
+          : level < themeConfig.sidebar.defaultMenuCollapseLevel)
       : TreeState[item.route] || focusedRouteInside
 
   const rerender = useState({})[1]
@@ -106,12 +107,14 @@ function FolderImpl({ item, anchors }: FolderProps): ReactElement {
         delete TreeState[item.route]
       }
     }
-    config.sidebar.autoCollapse ? updateAndPruneTreeState() : updateTreeState()
+    themeConfig.sidebar.autoCollapse
+      ? updateAndPruneTreeState()
+      : updateTreeState()
   }, [
     activeRouteInside,
     focusedRouteInside,
     item.route,
-    config.sidebar.autoCollapse
+    themeConfig.sidebar.autoCollapse
   ])
 
   if (item.type === 'menu') {
@@ -318,7 +321,6 @@ export function Sidebar({
   toc,
   includePlaceholder
 }: SideBarProps): ReactElement {
-  const config = useConfig()
   const { menu, setMenu } = useMenu()
   const [focused, setFocused] = useState<null | string>(null)
   const [showSidebar, setSidebar] = useState(true)
@@ -357,8 +359,10 @@ export function Sidebar({
     }
   }, [menu])
 
-  const hasI18n = config.i18n.length > 0
-  const hasMenu = config.darkMode || hasI18n || config.sidebar.toggleButton
+  const themeConfig = useThemeConfig()
+  const hasI18n = themeConfig.i18n.length > 0
+  const hasMenu =
+    themeConfig.darkMode || hasI18n || themeConfig.sidebar.toggleButton
 
   return (
     <>
@@ -390,7 +394,7 @@ export function Sidebar({
       >
         {process.env.NEXTRA_SEARCH && (
           <div className="_px-4 _pt-4 md:_hidden">
-            {renderComponent(config.search.component)}
+            {renderComponent(themeConfig.search.component)}
           </div>
         )}
         <FocusedItemContext.Provider value={focused}>
@@ -416,7 +420,7 @@ export function Sidebar({
                     directories={docsDirectories}
                     // When the viewport size is larger than `md`, hide the anchors in
                     // the sidebar when `floatTOC` is enabled.
-                    anchors={config.toc.float ? [] : anchors}
+                    anchors={themeConfig.toc.float ? [] : anchors}
                     onlyCurrentDocs
                   />
                 </Collapse>
@@ -455,18 +459,18 @@ export function Sidebar({
               lite={!showSidebar}
               className={showSidebar ? '_grow' : 'max-md:_grow'}
             />
-            {config.darkMode && (
+            {themeConfig.darkMode && (
               <div
                 className={
                   showSidebar && !hasI18n ? '_grow _flex _flex-col' : ''
                 }
               >
-                {renderComponent(config.themeSwitch.component, {
+                {renderComponent(themeConfig.themeSwitch.component, {
                   lite: !showSidebar || hasI18n
                 })}
               </div>
             )}
-            {config.sidebar.toggleButton && (
+            {themeConfig.sidebar.toggleButton && (
               <button
                 title={showSidebar ? 'Hide sidebar' : 'Show sidebar'}
                 className="max-md:_hidden _h-7 _rounded-md _transition-colors _text-gray-600 dark:_text-gray-400 _px-2 hover:_bg-gray-100 hover:_text-gray-900 dark:hover:_bg-primary-100/5 dark:hover:_text-gray-50"

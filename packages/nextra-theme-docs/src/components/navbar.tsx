@@ -6,7 +6,7 @@ import { useFSRoute } from 'nextra/hooks'
 import { ArrowRightIcon, MenuIcon } from 'nextra/icons'
 import type { MenuItem, PageItem } from 'nextra/normalize-pages'
 import type { ReactElement, ReactNode } from 'react'
-import { useConfig, useMenu } from '../contexts'
+import { useMenu, useThemeConfig } from '../contexts'
 import { renderComponent } from '../utils'
 import { Anchor } from './anchor'
 
@@ -79,7 +79,8 @@ function NavbarMenu({
 }
 
 export function Navbar({ items }: NavBarProps): ReactElement {
-  const config = useConfig()
+  const themeConfig = useThemeConfig()
+
   const activeRoute = useFSRoute()
   const { menu, setMenu } = useMenu()
 
@@ -94,16 +95,20 @@ export function Navbar({ items }: NavBarProps): ReactElement {
         )}
       />
       <nav className="_mx-auto _flex _h-[var(--nextra-navbar-height)] _max-w-[90rem] _items-center _justify-end _gap-4 _pl-[max(env(safe-area-inset-left),1.5rem)] _pr-[max(env(safe-area-inset-right),1.5rem)]">
-        {config.logoLink ? (
+        {themeConfig.logoLink ? (
           <NextLink
-            href={typeof config.logoLink === 'string' ? config.logoLink : '/'}
+            href={
+              typeof themeConfig.logoLink === 'string'
+                ? themeConfig.logoLink
+                : '/'
+            }
             className="_flex _items-center hover:_opacity-75 ltr:_mr-auto rtl:_ml-auto"
           >
-            {renderComponent(config.logo)}
+            {renderComponent(themeConfig.logo)}
           </NextLink>
         ) : (
           <div className="_flex _items-center ltr:_mr-auto rtl:_ml-auto">
-            {renderComponent(config.logo)}
+            {renderComponent(themeConfig.logo)}
           </div>
         )}
         {items.map(pageOrMenu => {
@@ -152,23 +157,23 @@ export function Navbar({ items }: NavBarProps): ReactElement {
         })}
 
         {process.env.NEXTRA_SEARCH &&
-          renderComponent(config.search.component, {
+          renderComponent(themeConfig.search.component, {
             className: 'max-md:_hidden'
           })}
 
-        {config.project.link ? (
-          <Anchor href={config.project.link} newWindow>
-            {renderComponent(config.project.icon)}
+        {themeConfig.project.link ? (
+          <Anchor href={themeConfig.project.link} newWindow>
+            {renderComponent(themeConfig.project.icon)}
           </Anchor>
         ) : null}
 
-        {config.chat.link ? (
-          <Anchor href={config.chat.link} newWindow>
-            {renderComponent(config.chat.icon)}
+        {themeConfig.chat.link ? (
+          <Anchor href={themeConfig.chat.link} newWindow>
+            {renderComponent(themeConfig.chat.icon)}
           </Anchor>
         ) : null}
 
-        {renderComponent(config.navbar.extraContent)}
+        {renderComponent(themeConfig.navbar.extraContent)}
 
         <button
           type="button"

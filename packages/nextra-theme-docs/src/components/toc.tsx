@@ -3,7 +3,7 @@ import type { Heading } from 'nextra'
 import type { ReactElement } from 'react'
 import { useEffect, useRef } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
-import { useActiveAnchor, useConfig } from '../contexts'
+import { useActiveAnchor, useThemeConfig } from '../contexts'
 import { renderComponent } from '../utils'
 import { Anchor } from './anchor'
 import { BackToTop } from './back-to-top'
@@ -20,14 +20,14 @@ const linkClassName = cn(
 
 export function TOC({ toc, filePath }: TOCProps): ReactElement {
   const activeAnchor = useActiveAnchor()
-  const config = useConfig()
   const tocRef = useRef<HTMLDivElement>(null)
+  const themeConfig = useThemeConfig()
 
   const hasHeadings = toc.length > 0
   const hasMetaInfo = Boolean(
-    config.feedback.content ||
-      config.editLink.component ||
-      config.toc.extraContent
+    themeConfig.feedback.content ||
+      themeConfig.editLink.component ||
+      themeConfig.toc.extraContent
   )
 
   const activeSlug = Object.entries(activeAnchor).find(
@@ -62,7 +62,7 @@ export function TOC({ toc, filePath }: TOCProps): ReactElement {
       {hasHeadings && (
         <>
           <p className="_mb-4 _font-semibold _tracking-tight">
-            {renderComponent(config.toc.title)}
+            {renderComponent(themeConfig.toc.title)}
           </p>
           <ul>
             {toc.map(({ id, value, depth }) => (
@@ -101,25 +101,25 @@ export function TOC({ toc, filePath }: TOCProps): ReactElement {
             'contrast-more:_border-t contrast-more:_border-neutral-400 contrast-more:_shadow-none contrast-more:dark:_border-neutral-400'
           )}
         >
-          {config.feedback.content ? (
+          {themeConfig.feedback.content ? (
             <Anchor
               className={linkClassName}
-              href={config.feedback.useLink()}
+              href={themeConfig.feedback.useLink()}
               newWindow
             >
-              {renderComponent(config.feedback.content)}
+              {renderComponent(themeConfig.feedback.content)}
             </Anchor>
           ) : null}
 
-          {renderComponent(config.editLink.component, {
+          {renderComponent(themeConfig.editLink.component, {
             filePath,
             className: linkClassName,
-            children: renderComponent(config.editLink.content)
+            children: renderComponent(themeConfig.editLink.content)
           })}
 
-          {renderComponent(config.toc.extraContent)}
+          {renderComponent(themeConfig.toc.extraContent)}
 
-          {config.toc.backToTop && <BackToTop className={linkClassName} />}
+          {themeConfig.toc.backToTop && <BackToTop className={linkClassName} />}
         </div>
       )}
     </div>
