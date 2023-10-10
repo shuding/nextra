@@ -192,48 +192,173 @@ describe('normalize-page', () => {
     const { pageMap } = await import(
       './fixture/page-maps/display-hidden-for-mobile/generated-page-map.js'
     )
-    expect(pageMap).toMatchInlineSnapshot(`
-      [
-        {
-          "data": {
-            "bar": {
-              "display": "hidden",
+    const result = normalizePages({ list: pageMap, route: '/' })
+    expect(result).toMatchInlineSnapshot(`
+      {
+        "activeIndex": 1,
+        "activePath": [
+          {
+            "frontMatter": {
+              "sidebar_label": "Index",
             },
+            "name": "index",
+            "route": "/",
+            "title": "Index",
+            "type": "doc",
           },
+        ],
+        "activeThemeContext": {
+          "breadcrumb": true,
+          "collapsed": false,
+          "footer": true,
+          "layout": "default",
+          "navbar": true,
+          "pagination": true,
+          "sidebar": true,
+          "timestamp": true,
+          "toc": true,
+          "typesetting": "default",
         },
-        {
-          "children": [
-            {
-              "children": [
-                {
-                  "children": [
-                    {
-                      "frontMatter": {
-                        "sidebar_label": "Qwe",
+        "activeType": "doc",
+        "directories": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "frontMatter": {
+                          "sidebar_label": "Qwe",
+                        },
+                        "name": "qwe",
+                        "route": "/bar/baz/quz/qwe",
+                        "title": "Qwe",
+                        "type": "doc",
                       },
-                      "name": "qwe",
-                      "route": "/bar/baz/quz/qwe",
-                    },
-                  ],
-                  "name": "quz",
-                  "route": "/bar/baz/quz",
-                },
-              ],
-              "name": "baz",
-              "route": "/bar/baz",
-            },
-          ],
-          "name": "bar",
-          "route": "/bar",
-        },
-        {
-          "frontMatter": {
-            "sidebar_label": "Foo",
+                    ],
+                    "name": "quz",
+                    "route": "/bar/baz/quz",
+                    "title": "quz",
+                    "type": "doc",
+                  },
+                ],
+                "name": "baz",
+                "route": "/bar/baz",
+                "title": "baz",
+                "type": "doc",
+              },
+            ],
+            "display": "hidden",
+            "name": "bar",
+            "route": "/bar",
+            "title": "bar",
+            "type": "doc",
           },
-          "name": "foo",
-          "route": "/foo",
-        },
-      ]
+          {
+            "frontMatter": {
+              "sidebar_label": "Index",
+            },
+            "name": "index",
+            "route": "/",
+            "title": "Index",
+            "type": "doc",
+          },
+        ],
+        "docsDirectories": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "frontMatter": {
+                          "sidebar_label": "Qwe",
+                        },
+                        "isUnderCurrentDocsTree": true,
+                        "name": "qwe",
+                        "route": "/bar/baz/quz/qwe",
+                        "title": "Qwe",
+                        "type": "doc",
+                      },
+                    ],
+                    "isUnderCurrentDocsTree": true,
+                    "name": "quz",
+                    "route": "/bar/baz/quz",
+                    "title": "quz",
+                    "type": "doc",
+                  },
+                ],
+                "isUnderCurrentDocsTree": true,
+                "name": "baz",
+                "route": "/bar/baz",
+                "title": "baz",
+                "type": "doc",
+              },
+            ],
+            "display": "hidden",
+            "isUnderCurrentDocsTree": true,
+            "name": "bar",
+            "route": "/bar",
+            "title": "bar",
+            "type": "doc",
+          },
+          {
+            "frontMatter": {
+              "sidebar_label": "Index",
+            },
+            "isUnderCurrentDocsTree": true,
+            "name": "index",
+            "route": "/",
+            "title": "Index",
+            "type": "doc",
+          },
+        ],
+        "flatDirectories": [
+          {
+            "frontMatter": {
+              "sidebar_label": "Qwe",
+            },
+            "name": "qwe",
+            "route": "/bar/baz/quz/qwe",
+            "title": "Qwe",
+            "type": "doc",
+          },
+          {
+            "frontMatter": {
+              "sidebar_label": "Index",
+            },
+            "name": "index",
+            "route": "/",
+            "title": "Index",
+            "type": "doc",
+          },
+        ],
+        "flatDocsDirectories": [
+          {
+            "frontMatter": {
+              "sidebar_label": "Qwe",
+            },
+            "isUnderCurrentDocsTree": true,
+            "name": "qwe",
+            "route": "/bar/baz/quz/qwe",
+            "title": "Qwe",
+            "type": "doc",
+          },
+          {
+            "frontMatter": {
+              "sidebar_label": "Index",
+            },
+            "isUnderCurrentDocsTree": true,
+            "name": "index",
+            "route": "/",
+            "title": "Index",
+            "type": "doc",
+          },
+        ],
+        "topLevelNavbarItems": [],
+      }
     `)
   })
 })

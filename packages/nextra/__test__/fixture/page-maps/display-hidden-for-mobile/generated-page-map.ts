@@ -20,9 +20,9 @@ export const pageMap = [{
     }]
   }]
 }, {
-  name: "foo",
-  route: "/foo",
+  name: "index",
+  route: "/",
   frontMatter: {
-    "sidebar_label": "Foo"
+    "sidebar_label": "Index"
   }
 }];
