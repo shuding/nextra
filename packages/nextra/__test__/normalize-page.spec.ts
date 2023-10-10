@@ -1,4 +1,7 @@
+import fs from 'fs/promises'
+import path from 'node:path'
 import { normalizePages } from '../src/client/normalize-pages.js'
+import { collectPageMap } from '../src/server/page-map.js'
 import { cnPageMap, usPageMap } from './fixture/page-maps/pageMap.js'
 
 describe('normalize-page', () => {
@@ -171,6 +174,64 @@ describe('normalize-page', () => {
           "route": "#",
           "title": "Explorers3",
           "type": "menu",
+        },
+      ]
+    `)
+  })
+
+  it('should hide items on mobile', async () => {
+    const dir = path.join(
+      __dirname,
+      'fixture',
+      'page-maps',
+      'display-hidden-for-mobile'
+    )
+    const rawJs = await collectPageMap({ dir })
+    await fs.writeFile(path.join(dir, 'generated-page-map.ts'), rawJs)
+
+    const { pageMap } = await import(
+      './fixture/page-maps/display-hidden-for-mobile/generated-page-map.js'
+    )
+    expect(pageMap).toMatchInlineSnapshot(`
+      [
+        {
+          "data": {
+            "bar": {
+              "display": "hidden",
+            },
+          },
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "frontMatter": {
+                        "sidebar_label": "Qwe",
+                      },
+                      "name": "qwe",
+                      "route": "/bar/baz/quz/qwe",
+                    },
+                  ],
+                  "name": "quz",
+                  "route": "/bar/baz/quz",
+                },
+              ],
+              "name": "baz",
+              "route": "/bar/baz",
+            },
+          ],
+          "name": "bar",
+          "route": "/bar",
+        },
+        {
+          "frontMatter": {
+            "sidebar_label": "Foo",
+          },
+          "name": "foo",
+          "route": "/foo",
         },
       ]
     `)
