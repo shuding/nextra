@@ -185,12 +185,6 @@ const A = ({ href = '', ...props }) => (
   <Anchor href={href} newWindow={EXTERNAL_HREF_REGEX.test(href)} {...props} />
 )
 
-interface BodyProps {
-  breadcrumb: ReactNode
-  navigation: ReactNode
-  children: ReactNode
-}
-
 const classes = {
   toc: cn(
     'nextra-toc _order-last max-xl:_hidden _w-64 _shrink-0 print:_hidden'
@@ -198,11 +192,17 @@ const classes = {
   main: cn('_w-full _break-words')
 }
 
-function Body({ breadcrumb, navigation, children }: BodyProps): ReactElement {
+function Body({ children }: { children: ReactNode }): ReactElement {
   const config = useConfig()
   const themeConfig = useThemeConfig()
   const mounted = useMounted()
-  const themeContext = config.normalizePagesResult.activeThemeContext
+  const {
+    activeThemeContext: themeContext,
+    activeType,
+    activeIndex,
+    flatDocsDirectories,
+    activePath
+  } = config.normalizePagesResult
 
   if (themeContext.layout === 'raw') {
     return <div className={classes.main}>{children}</div>
@@ -227,7 +227,12 @@ function Body({ breadcrumb, navigation, children }: BodyProps): ReactElement {
     <>
       {children}
       {gitTimestampEl}
-      {navigation}
+      {activeType !== 'page' && themeContext.pagination && (
+        <NavLinks
+          flatDirectories={flatDocsDirectories}
+          currentIndex={activeIndex}
+        />
+      )}
     </>
   )
 
@@ -256,7 +261,9 @@ function Body({ breadcrumb, navigation, children }: BodyProps): ReactElement {
       )}
     >
       <main className="_w-full _min-w-0 _max-w-6xl _px-6 _pt-4 md:_px-12">
-        {breadcrumb}
+        {activeType !== 'page' && themeContext.breadcrumb && (
+          <Breadcrumb activePath={activePath} />
+        )}
         {body}
       </main>
     </article>
@@ -312,16 +319,13 @@ const DEFAULT_COMPONENTS: Components = {
   code: Code,
   wrapper: function NextraWrapper({ toc, children }) {
     const config = useConfig()
+    const themeConfig = useThemeConfig()
     const {
       activeType,
       activeThemeContext: themeContext,
       docsDirectories,
-      directories,
-      activePath,
-      flatDocsDirectories,
-      activeIndex
+      directories
     } = config.normalizePagesResult
-    const themeConfig = useThemeConfig()
 
     const tocEl =
       activeType === 'page' ||
@@ -358,23 +362,7 @@ const DEFAULT_COMPONENTS: Components = {
         />
         {tocEl}
         <SkipNavContent />
-        <Body
-          breadcrumb={
-            activeType !== 'page' &&
-            themeContext.breadcrumb && <Breadcrumb activePath={activePath} />
-          }
-          navigation={
-            activeType !== 'page' &&
-            themeContext.pagination && (
-              <NavLinks
-                flatDirectories={flatDocsDirectories}
-                currentIndex={activeIndex}
-              />
-            )
-          }
-        >
-          {children}
-        </Body>
+        <Body>{children}</Body>
       </div>
     )
   } satisfies NextraMDXContent

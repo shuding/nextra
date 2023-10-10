@@ -222,40 +222,6 @@ describe('normalize-page', () => {
         "activeType": "doc",
         "directories": [
           {
-            "children": [
-              {
-                "children": [
-                  {
-                    "children": [
-                      {
-                        "frontMatter": {
-                          "sidebar_label": "Qwe",
-                        },
-                        "name": "qwe",
-                        "route": "/bar/baz/quz/qwe",
-                        "title": "Qwe",
-                        "type": "doc",
-                      },
-                    ],
-                    "name": "quz",
-                    "route": "/bar/baz/quz",
-                    "title": "quz",
-                    "type": "doc",
-                  },
-                ],
-                "name": "baz",
-                "route": "/bar/baz",
-                "title": "baz",
-                "type": "doc",
-              },
-            ],
-            "display": "hidden",
-            "name": "bar",
-            "route": "/bar",
-            "title": "bar",
-            "type": "doc",
-          },
-          {
             "frontMatter": {
               "sidebar_label": "Index",
             },
