@@ -14,6 +14,7 @@ import {
 import { useConfig } from './contexts'
 import type { publicThemeSchema, themeSchema } from './schemas'
 import { getGitIssueUrl, useGitEditUrl } from './utils'
+import { useThemeConfigStore } from './stores'
 
 export const DEFAULT_LOCALE = 'en-US'
 
@@ -78,9 +79,10 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     labels: 'feedback',
     useLink() {
       const config = useConfig()
+      const { themeConfig } = useThemeConfigStore()
       return getGitIssueUrl({
-        labels: config.feedback.labels,
-        repository: config.docsRepositoryBase,
+        labels: themeConfig.feedback.labels,
+        repository: themeConfig.docsRepositoryBase,
         title: `Feedback for “${config.title}”`
       })
     }

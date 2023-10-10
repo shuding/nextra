@@ -1,4 +1,3 @@
-import { ThemeProvider } from 'next-themes'
 import { useRouter } from 'next/router'
 import type { FrontMatter, PageOpts } from 'nextra'
 import { useFSRoute } from 'nextra/hooks'
@@ -67,16 +66,8 @@ export function ConfigProvider({
   }, [asPath])
 
   return (
-    <ThemeProvider
-      attribute="class"
-      disableTransitionOnChange
-      defaultTheme={nextThemes.defaultTheme}
-      storageKey={nextThemes.storageKey}
-      forcedTheme={nextThemes.forcedTheme}
-    >
-      <ConfigContext.Provider value={extendedConfig}>
-        <MenuProvider value={{ menu, setMenu }}>{children}</MenuProvider>
-      </ConfigContext.Provider>
-    </ThemeProvider>
+    <ConfigContext.Provider value={extendedConfig}>
+      <MenuProvider value={{ menu, setMenu }}>{children}</MenuProvider>
+    </ConfigContext.Provider>
   )
 }

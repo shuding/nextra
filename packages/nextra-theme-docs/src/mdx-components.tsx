@@ -26,6 +26,7 @@ import type { DocsThemeConfig } from './constants'
 import { useConfig, useSetActiveAnchor } from './contexts'
 import { useIntersectionObserver, useSlugs } from './contexts/active-anchor'
 import { renderComponent } from './utils'
+import { useThemeConfigStore } from './stores'
 
 // Anchor links
 const createHeading = (
@@ -200,6 +201,7 @@ const classes = {
 
 function Body({ breadcrumb, navigation, children }: BodyProps): ReactElement {
   const config = useConfig()
+  const { themeConfig } = useThemeConfigStore()
   const mounted = useMounted()
   const themeContext = config.normalizePagesResult.activeThemeContext
 
@@ -208,7 +210,7 @@ function Body({ breadcrumb, navigation, children }: BodyProps): ReactElement {
   }
 
   const date =
-    themeContext.timestamp && config.gitTimestamp && config.timestamp
+    themeContext.timestamp && themeConfig.gitTimestamp && config.timestamp
       ? new Date(config.timestamp)
       : null
 
@@ -216,7 +218,7 @@ function Body({ breadcrumb, navigation, children }: BodyProps): ReactElement {
     // Because a user's time zone may be different from the server page
     mounted && date ? (
       <div className="_mt-12 _mb-8 _block _text-xs _text-gray-500 ltr:_text-right rtl:_text-left dark:_text-gray-400">
-        {renderComponent(config.gitTimestamp, { timestamp: date })}
+        {renderComponent(themeConfig.gitTimestamp, { timestamp: date })}
       </div>
     ) : (
       <div className="_mt-16" />
@@ -230,7 +232,7 @@ function Body({ breadcrumb, navigation, children }: BodyProps): ReactElement {
     </>
   )
 
-  const body = config.main?.({ children: content }) || content
+  const body = themeConfig.main?.({ children: content }) || content
 
   if (themeContext.layout === 'full') {
     return (
@@ -320,6 +322,7 @@ const DEFAULT_COMPONENTS: Components = {
       flatDocsDirectories,
       activeIndex
     } = config.normalizePagesResult
+    const { themeConfig } = useThemeConfigStore()
 
     const tocEl =
       activeType === 'page' ||
@@ -334,8 +337,8 @@ const DEFAULT_COMPONENTS: Components = {
           className={cn(classes.toc, '_px-4')}
           aria-label="table of contents"
         >
-          {renderComponent(config.toc.component, {
-            toc: config.toc.float ? toc : [],
+          {renderComponent(themeConfig.toc.component, {
+            toc: themeConfig.toc.float ? toc : [],
             filePath: config.filePath
           })}
         </nav>

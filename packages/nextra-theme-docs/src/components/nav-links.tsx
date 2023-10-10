@@ -4,8 +4,8 @@ import NextLink from 'next/link'
 import { ArrowRightIcon } from 'nextra/icons'
 import type { Item } from 'nextra/normalize-pages'
 import type { ReactElement } from 'react'
-import { useConfig } from '../contexts'
 import type { DocsThemeConfig } from '../index'
+import { useThemeConfigStore } from '../stores'
 
 interface NavLinkProps {
   currentIndex: number
@@ -23,8 +23,8 @@ export const NavLinks = ({
   flatDirectories,
   currentIndex
 }: NavLinkProps): ReactElement | null => {
-  const config = useConfig()
-  const nav = config.navigation
+  const themeConfig = useThemeConfigStore()
+  const nav = themeConfig.navigation
   const navigation: Exclude<DocsThemeConfig['navigation'], boolean> =
     typeof nav === 'boolean' ? { prev: nav, next: nav } : nav
   let prev = navigation.prev && flatDirectories[currentIndex - 1]

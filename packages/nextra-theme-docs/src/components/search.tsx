@@ -7,10 +7,11 @@ import { useMounted } from 'nextra/hooks'
 import { InformationCircleIcon, SpinnerIcon } from 'nextra/icons'
 import type { CompositionEvent, KeyboardEvent, ReactElement } from 'react'
 import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
-import { useConfig, useMenu } from '../contexts'
+import { useMenu } from '../contexts'
 import type { SearchResult } from '../types'
 import { renderComponent, renderString } from '../utils'
 import { Input } from './input'
+import { useThemeConfigStore } from '../stores'
 
 type SearchProps = {
   className?: string
@@ -35,8 +36,8 @@ export function Search({
   error,
   results
 }: SearchProps): ReactElement {
+  const { themeConfig } = useThemeConfigStore()
   const [show, setShow] = useState(false)
-  const config = useConfig()
   const [active, setActive] = useState(0)
   const router = useRouter()
   const { setMenu } = useMenu()
@@ -217,7 +218,7 @@ export function Search({
         onCompositionStart={handleComposition}
         onCompositionEnd={handleComposition}
         type="search"
-        placeholder={renderString(config.search.placeholder)}
+        placeholder={renderString(themeConfig.search.placeholder)}
         onKeyDown={handleKeyDown}
         suffix={icon}
       />
@@ -250,12 +251,12 @@ export function Search({
           {error ? (
             <span className="_flex _select-none _justify-center _gap-2 _p-8 _text-center _text-sm _text-red-500">
               <InformationCircleIcon className="_h-5 _w-5" />
-              {renderString(config.search.error)}
+              {renderString(themeConfig.search.error)}
             </span>
           ) : loading ? (
             <span className="_flex _select-none _justify-center _gap-2 _p-8 _text-center _text-sm _text-gray-400">
               <SpinnerIcon className="_h-5 _w-5 _animate-spin" />
-              {renderComponent(config.search.loading)}
+              {renderComponent(themeConfig.search.loading)}
             </span>
           ) : results.length > 0 ? (
             results.map(({ route, prefix, children, id }, i) => (
@@ -285,7 +286,7 @@ export function Search({
               </Fragment>
             ))
           ) : (
-            renderComponent(config.search.emptyResult)
+            renderComponent(themeConfig.search.emptyResult)
           )}
         </ul>
       </Transition>

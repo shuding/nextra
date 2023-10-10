@@ -1,1 +1,1 @@
-export { useThemeConfigStore } from './theme-config'
+export { useThemeConfigStore, setThemeConfig } from './theme-config'

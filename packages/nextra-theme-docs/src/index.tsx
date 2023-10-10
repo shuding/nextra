@@ -4,19 +4,23 @@ import 'focus-visible'
 import { useRouter } from 'nextra/hooks'
 import { MDXProvider } from 'nextra/mdx'
 import './polyfill'
+import { ThemeProvider } from 'next-themes'
 import { useEffect } from 'react'
 import { Banner, Head } from './components'
 import { PartialDocsThemeConfig } from './constants'
 import { ActiveAnchorProvider, ConfigProvider, useConfig } from './contexts'
 import { getComponents } from './mdx-components'
-import { useThemeConfigStore } from './stores'
+import { setThemeConfig, useThemeConfigStore } from './stores'
 import { renderComponent } from './utils'
 
 function InnerLayout({ children }: { children: ReactNode }): ReactElement {
+  const { themeConfig } = useThemeConfigStore()
+
   const config = useConfig()
   const { locale } = useRouter()
 
-  const { direction } = config.i18n.find(l => l.locale === locale) || config
+  const { direction } =
+    themeConfig.i18n.find(l => l.locale === locale) || themeConfig
   const dir = direction === 'rtl' ? 'rtl' : 'ltr'
 
   const { activeThemeContext: themeContext, topLevelNavbarItems } =
@@ -24,7 +28,7 @@ function InnerLayout({ children }: { children: ReactNode }): ReactElement {
 
   const components = getComponents({
     isRawLayout: themeContext.layout === 'raw',
-    components: config.components
+    components: themeConfig.components
   })
 
   return (
@@ -40,7 +44,7 @@ function InnerLayout({ children }: { children: ReactNode }): ReactElement {
       <Head />
       <Banner />
       {themeContext.navbar &&
-        renderComponent(config.navbar.component, {
+        renderComponent(themeConfig.navbar.component, {
           items: topLevelNavbarItems
         })}
       <ActiveAnchorProvider>
@@ -49,7 +53,9 @@ function InnerLayout({ children }: { children: ReactNode }): ReactElement {
         </MDXProvider>
       </ActiveAnchorProvider>
       {themeContext.footer &&
-        renderComponent(config.footer.component, { menu: config.hideSidebar })}
+        renderComponent(themeConfig.footer.component, {
+          menu: config.hideSidebar
+        })}
     </div>
   )
 }
@@ -58,16 +64,22 @@ export default function Layout({
   children,
   ...context
 }: NextraThemeLayoutProps): ReactElement {
-  const { setThemeConfig } = useThemeConfigStore()
+  const { themeConfig } = useThemeConfigStore()
 
   useEffect(() => {
     setThemeConfig(context.themeConfig)
-  }, [context.themeConfig, setThemeConfig])
+  }, [context.themeConfig])
 
   return (
-    <ConfigProvider value={context}>
-      <InnerLayout>{children}</InnerLayout>
-    </ConfigProvider>
+    <ThemeProvider
+      attribute="class"
+      disableTransitionOnChange
+      {...themeConfig.nextThemes}
+    >
+      <ConfigProvider value={context}>
+        <InnerLayout>{children}</InnerLayout>
+      </ConfigProvider>
+    </ThemeProvider>
   )
 }
 
