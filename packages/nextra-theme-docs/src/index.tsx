@@ -1,4 +1,3 @@
-import { setThemeConfig, useThemeConfigStore } from './stores'
 import 'focus-visible'
 import './polyfill'
 import { ThemeProvider } from 'next-themes'
@@ -6,15 +5,20 @@ import type { NextraThemeLayoutProps } from 'nextra'
 import { useRouter } from 'nextra/hooks'
 import { MDXProvider } from 'nextra/mdx'
 import type { ReactElement, ReactNode } from 'react'
-import { useEffect } from 'react'
 import { Banner, Head } from './components'
 import { PartialDocsThemeConfig } from './constants'
-import { ActiveAnchorProvider, ConfigProvider, useConfig } from './contexts'
+import {
+  ActiveAnchorProvider,
+  ConfigProvider,
+  ThemeConfigProvider,
+  useConfig,
+  useThemeConfig
+} from './contexts'
 import { getComponents } from './mdx-components'
 import { renderComponent } from './utils'
 
 function InnerLayout({ children }: { children: ReactNode }): ReactElement {
-  const { themeConfig } = useThemeConfigStore()
+  const themeConfig = useThemeConfig()
 
   const config = useConfig()
   const { locale } = useRouter()
@@ -32,31 +36,39 @@ function InnerLayout({ children }: { children: ReactNode }): ReactElement {
   })
 
   return (
-    // This makes sure that selectors like `[dir=ltr] .nextra-container` work
-    // before hydration as Tailwind expects the `dir` attribute to exist on the
-    // `html` element.
-    <div dir={dir}>
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `document.documentElement.setAttribute('dir','${dir}')`
-        }}
-      />
-      <Head />
-      <Banner />
-      {themeContext.navbar &&
-        renderComponent(themeConfig.navbar.component, {
-          items: topLevelNavbarItems
-        })}
-      <ActiveAnchorProvider>
-        <MDXProvider disableParentContext components={components}>
-          {children}
-        </MDXProvider>
-      </ActiveAnchorProvider>
-      {themeContext.footer &&
-        renderComponent(themeConfig.footer.component, {
-          menu: config.hideSidebar
-        })}
-    </div>
+    <ThemeProvider
+      attribute="class"
+      disableTransitionOnChange
+      {...themeConfig.nextThemes}
+    >
+      {/*
+        This makes sure that selectors like `[dir=ltr] .nextra-container` work
+        before hydration as Tailwind expects the `dir` attribute to exist on the
+        `html` element.
+      */}
+      <div dir={dir}>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `document.documentElement.setAttribute('dir','${dir}')`
+          }}
+        />
+        <Head />
+        <Banner />
+        {themeContext.navbar &&
+          renderComponent(themeConfig.navbar.component, {
+            items: topLevelNavbarItems
+          })}
+        <ActiveAnchorProvider>
+          <MDXProvider disableParentContext components={components}>
+            {children}
+          </MDXProvider>
+        </ActiveAnchorProvider>
+        {themeContext.footer &&
+          renderComponent(themeConfig.footer.component, {
+            menu: config.hideSidebar
+          })}
+      </div>
+    </ThemeProvider>
   )
 }
 
@@ -64,22 +76,12 @@ export default function Layout({
   children,
   ...context
 }: NextraThemeLayoutProps): ReactElement {
-  const { themeConfig } = useThemeConfigStore()
-
-  useEffect(() => {
-    setThemeConfig(context.themeConfig)
-  }, [context.themeConfig])
-
   return (
-    <ThemeProvider
-      attribute="class"
-      disableTransitionOnChange
-      {...themeConfig.nextThemes}
-    >
-      <ConfigProvider value={context}>
+    <ThemeConfigProvider value={context.themeConfig}>
+      <ConfigProvider value={context.pageOpts}>
         <InnerLayout>{children}</InnerLayout>
       </ConfigProvider>
-    </ThemeProvider>
+    </ThemeConfigProvider>
   )
 }
 

@@ -4,7 +4,6 @@ import { useFSRoute } from 'nextra/hooks'
 import { normalizePages } from 'nextra/normalize-pages'
 import type { ReactElement, ReactNode } from 'react'
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
-import type { Context } from '../types'
 import { MenuProvider } from './menu'
 
 type Config<FrontMatterType = FrontMatter> = Pick<
@@ -31,10 +30,10 @@ export function useConfig<FrontMatterType = FrontMatter>() {
 
 export function ConfigProvider({
   children,
-  value: { pageOpts }
+  value: pageOpts
 }: {
   children: ReactNode
-  value: Context
+  value: PageOpts
 }): ReactElement {
   const [menu, setMenu] = useState(false)
   const { asPath } = useRouter()
