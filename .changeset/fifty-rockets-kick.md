@@ -2,4 +2,4 @@
 'nextra-theme-docs': minor
 ---
 
-add zustand
+export `useThemeConfig`
