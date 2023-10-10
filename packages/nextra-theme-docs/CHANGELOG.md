@@ -1,5 +1,20 @@
 # nextra-theme-docs
 
+## 3.0.0-alpha.4
+
+### Minor Changes
+
+- 1dcb91a0: export `useThemeConfig`
+
+### Patch Changes
+
+- 4fb24524: fix invisible mobile menu when `layout: "raw"` is specified in
+  \_meta file
+- 7faa0968: fix visible hidden pages on mobile which set up with
+  `display: 'hidden'`
+- Updated dependencies [7faa0968]
+  - nextra@3.0.0-alpha.4
+
 ## 3.0.0-alpha.3
 
 ### Patch Changes
