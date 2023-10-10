@@ -16,7 +16,7 @@ export function LocaleSwitch({
   lite,
   className
 }: LocaleSwitchProps): ReactElement | null {
-  const themeConfig = useThemeConfigStore()
+  const { themeConfig } = useThemeConfigStore()
 
   const { locale, asPath } = useRouter()
 

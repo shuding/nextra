@@ -1,11 +1,11 @@
 import cn from 'clsx'
 import type { ReactElement } from 'react'
+import { useThemeConfigStore } from '../stores'
 import { renderComponent } from '../utils'
 import { LocaleSwitch } from './locale-switch'
-import { useThemeConfigStore } from '../stores'
 
 export function Footer({ menu }: { menu?: boolean }): ReactElement {
-  const themeConfig = useThemeConfigStore()
+  const { themeConfig } = useThemeConfigStore()
   return (
     <footer className="_bg-gray-100 _pb-[env(safe-area-inset-bottom)] dark:_bg-neutral-900 print:_bg-transparent">
       <div
@@ -17,7 +17,8 @@ export function Footer({ menu }: { menu?: boolean }): ReactElement {
         )}
       >
         <LocaleSwitch />
-        {themeConfig.darkMode && renderComponent(themeConfig.themeSwitch.component)}
+        {themeConfig.darkMode &&
+          renderComponent(themeConfig.themeSwitch.component)}
       </div>
       <hr className="dark:_border-neutral-800" />
       <div

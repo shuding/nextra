@@ -25,8 +25,8 @@ import type { AnchorProps } from './components/anchor'
 import type { DocsThemeConfig } from './constants'
 import { useConfig, useSetActiveAnchor } from './contexts'
 import { useIntersectionObserver, useSlugs } from './contexts/active-anchor'
-import { renderComponent } from './utils'
 import { useThemeConfigStore } from './stores'
+import { renderComponent } from './utils'
 
 // Anchor links
 const createHeading = (

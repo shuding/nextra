@@ -23,7 +23,7 @@ export const NavLinks = ({
   flatDirectories,
   currentIndex
 }: NavLinkProps): ReactElement | null => {
-  const themeConfig = useThemeConfigStore()
+  const { themeConfig } = useThemeConfigStore()
   const nav = themeConfig.navigation
   const navigation: Exclude<DocsThemeConfig['navigation'], boolean> =
     typeof nav === 'boolean' ? { prev: nav, next: nav } : nav

@@ -8,10 +8,10 @@ import { InformationCircleIcon, SpinnerIcon } from 'nextra/icons'
 import type { CompositionEvent, KeyboardEvent, ReactElement } from 'react'
 import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
 import { useMenu } from '../contexts'
+import { useThemeConfigStore } from '../stores'
 import type { SearchResult } from '../types'
 import { renderComponent, renderString } from '../utils'
 import { Input } from './input'
-import { useThemeConfigStore } from '../stores'
 
 type SearchProps = {
   className?: string

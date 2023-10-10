@@ -7,9 +7,9 @@ import { ArrowRightIcon, MenuIcon } from 'nextra/icons'
 import type { MenuItem, PageItem } from 'nextra/normalize-pages'
 import type { ReactElement, ReactNode } from 'react'
 import { useMenu } from '../contexts'
+import { useThemeConfigStore } from '../stores'
 import { renderComponent } from '../utils'
 import { Anchor } from './anchor'
-import { useThemeConfigStore } from '../stores'
 
 export type NavBarProps = {
   items: (PageItem | MenuItem)[]
@@ -80,7 +80,7 @@ function NavbarMenu({
 }
 
 export function Navbar({ items }: NavBarProps): ReactElement {
-  const themeConfig = useThemeConfigStore()
+  const { themeConfig } = useThemeConfigStore()
 
   const activeRoute = useFSRoute()
   const { menu, setMenu } = useMenu()
@@ -98,7 +98,11 @@ export function Navbar({ items }: NavBarProps): ReactElement {
       <nav className="_mx-auto _flex _h-[var(--nextra-navbar-height)] _max-w-[90rem] _items-center _justify-end _gap-4 _pl-[max(env(safe-area-inset-left),1.5rem)] _pr-[max(env(safe-area-inset-right),1.5rem)]">
         {themeConfig.logoLink ? (
           <NextLink
-            href={typeof themeConfig.logoLink === 'string' ? themeConfig.logoLink : '/'}
+            href={
+              typeof themeConfig.logoLink === 'string'
+                ? themeConfig.logoLink
+                : '/'
+            }
             className="_flex _items-center hover:_opacity-75 ltr:_mr-auto rtl:_ml-auto"
           >
             {renderComponent(themeConfig.logo)}

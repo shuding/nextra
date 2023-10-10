@@ -5,7 +5,7 @@ import { useThemeConfigStore } from '../stores'
 import { renderComponent } from '../utils'
 
 export function Banner(): ReactElement | null {
-  const { banner } = useThemeConfigStore()
+  const { banner } = useThemeConfigStore().themeConfig
   if (!banner.content) {
     return null
   }
