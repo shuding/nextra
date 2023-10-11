@@ -64,7 +64,10 @@ export const IndexPage = () => (
         Simple, powerful and flexible site generation framework{' '}
         <br className="max-md:hidden" />
         with everything you love from{' '}
-        <Link href="https://nextjs.org">Next.js</Link>.
+        <Link href="https://nextjs.org" className="text-current">
+          Next.js
+        </Link>
+        .
       </p>
       <p className="subtitle">
         <Link className={styles.cta} href="/docs">

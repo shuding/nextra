@@ -89,7 +89,9 @@ export async function loader(
   }
   if (isMetaFile) {
     // _meta.[jt]sx? used as a page.
-    return 'export default () => null'
+    return `export default () => null
+
+export const getStaticProps = () => ({ notFound: true })`
   }
 
   if (mdxPath.includes('/pages/_app.mdx')) {
