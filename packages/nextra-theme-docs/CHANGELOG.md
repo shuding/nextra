@@ -1,5 +1,13 @@
 # nextra-theme-docs
 
+## 3.0.0-alpha.5
+
+### Patch Changes
+
+- 315ca826: remove possible links in toc elements
+- Updated dependencies [a3b67aea]
+  - nextra@3.0.0-alpha.5
+
 ## 3.0.0-alpha.4
 
 ### Minor Changes
