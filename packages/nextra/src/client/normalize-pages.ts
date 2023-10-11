@@ -183,6 +183,15 @@ export function normalizePages({
       return items
     })
 
+  const hasRoute = items.some(item => item.route === route)
+  // In case route is not exist in page map we still want to merge `*` theme settings
+  if (!hasRoute) {
+    activeThemeContext = {
+      ...activeThemeContext,
+      ...fallbackMeta.theme
+    }
+  }
+
   // Fill all skipped items in meta.
   for (let i = metaKeyIndex + 1; i < metaKeys.length; i++) {
     const key = metaKeys[i]

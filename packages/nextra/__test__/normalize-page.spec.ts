@@ -335,29 +335,38 @@ describe('normalize-page', () => {
       'page-maps',
       '*-settings-and-page-dont-exist'
     )
-    const rawJs = await collectPageMap({ dir })
-    await fs.writeFile(path.join(dir, 'generated-page-map.js'), rawJs.replace(
+    const rawJs = (await collectPageMap({ dir })).replace(
       "import { resolvePageMap } from 'nextra/setup-page'",
       'const resolvePageMap = () => {}'
-    ))
+    )
+    await fs.writeFile(path.join(dir, 'generated-page-map.js'), rawJs)
     const { pageMap } = await import(
       './fixture/page-maps/*-settings-and-page-dont-exist/generated-page-map.js'
     )
-    const result = normalizePages({ list: pageMap, route: '/' })
+
+    const meta = await import(
+      './fixture/page-maps/*-settings-and-page-dont-exist/_meta.js'
+    )
+
+    const result = normalizePages({
+      list: [{ data: meta.default() }, ...pageMap],
+      route: '/'
+    })
+
     expect(result).toMatchInlineSnapshot(`
       {
         "activeIndex": 0,
         "activePath": [],
         "activeThemeContext": {
-          "breadcrumb": true,
+          "breadcrumb": false,
           "collapsed": false,
-          "footer": true,
+          "footer": false,
           "layout": "default",
-          "navbar": true,
-          "pagination": true,
-          "sidebar": true,
-          "timestamp": true,
-          "toc": true,
+          "navbar": false,
+          "pagination": false,
+          "sidebar": false,
+          "timestamp": false,
+          "toc": false,
           "typesetting": "default",
         },
         "activeType": undefined,
