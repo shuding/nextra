@@ -1,10 +1,11 @@
 import cn from 'clsx'
 import type { Heading } from 'nextra'
 import type { ReactElement } from 'react'
-import { Children, cloneElement, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import { useActiveAnchor, useThemeConfig } from '../contexts'
 import { renderComponent } from '../utils'
+import { removeLinks } from '../utils/remove-links'
 import { Anchor } from './anchor'
 import { BackToTop } from './back-to-top'
 
@@ -17,26 +18,6 @@ const linkClassName = cn(
   '_text-xs _font-medium _text-gray-500 hover:_text-gray-900 dark:_text-gray-400 dark:hover:_text-gray-100',
   'contrast-more:_text-gray-800 contrast-more:dark:_text-gray-50'
 )
-
-type TOCElement = ReactElement | string
-
-function isLink(node: TOCElement): node is ReactElement {
-  return typeof node !== 'string' && !!node.props.href
-}
-
-function removeLinks(node: TOCElement): TOCElement[] {
-  return Children.map(node, child => {
-    if (isLink(child)) {
-      child = child.props.children
-    }
-
-    return typeof child === 'string'
-      ? child
-      : cloneElement(child, {
-          children: removeLinks(child.props.children)
-        })
-  })
-}
 
 export function TOC({ toc, filePath }: TOCProps): ReactElement {
   const activeAnchor = useActiveAnchor()
