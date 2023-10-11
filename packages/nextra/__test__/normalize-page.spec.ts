@@ -328,7 +328,7 @@ describe('normalize-page', () => {
     `)
   })
 
-  it('should apply `*` settings even page is not exists', async () => {
+  it('should apply `*` settings even if page is not exist', async () => {
     const dir = path.join(
       __dirname,
       'fixture',
