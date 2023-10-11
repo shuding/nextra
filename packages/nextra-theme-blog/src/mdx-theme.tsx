@@ -63,7 +63,6 @@ const A = ({ children, href = '', ...props }: ComponentProps<'a'>) => {
     return (
       <a href={href} target="_blank" rel="noreferrer" {...props}>
         {children}
-        <span className="_sr-only _select-none"> (opens in a new tab)</span>
       </a>
     )
   }
