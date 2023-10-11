@@ -1,5 +1,15 @@
 # nextra-theme-docs
 
+## 3.0.0-alpha.6
+
+### Patch Changes
+
+- 31c2ee70: fix `removeLinks` when input node is link
+- 03da778a: fix `*` theme settings for dynamic routes when route is not exist in
+  page map
+- Updated dependencies [03da778a]
+  - nextra@3.0.0-alpha.6
+
 ## 3.0.0-alpha.5
 
 ### Patch Changes

@@ -1,5 +1,12 @@
 # nextra
 
+## 3.0.0-alpha.6
+
+### Patch Changes
+
+- 03da778a: fix `*` theme settings for dynamic routes when route is not exist in
+  page map
+
 ## 3.0.0-alpha.5
 
 ### Patch Changes
