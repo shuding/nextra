@@ -1,5 +1,13 @@
 # nextra
 
+## 3.0.0-alpha.5
+
+### Patch Changes
+
+- a3b67aea: `_meta` should return
+  `export const getStaticProps = () => ({ notFound: true })` for static exports,
+  instead of page without contain
+
 ## 3.0.0-alpha.4
 
 ### Patch Changes
