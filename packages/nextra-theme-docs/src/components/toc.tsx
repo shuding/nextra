@@ -5,9 +5,9 @@ import { useEffect, useRef } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import { useActiveAnchor, useThemeConfig } from '../contexts'
 import { renderComponent } from '../utils'
+import { removeLinks } from '../utils/remove-links'
 import { Anchor } from './anchor'
 import { BackToTop } from './back-to-top'
-import { removeLinks } from '../utils/remove-links'
 
 export type TOCProps = {
   toc: Heading[]
