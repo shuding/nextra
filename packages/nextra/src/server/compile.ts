@@ -14,7 +14,7 @@ import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 import remarkReadingTime from 'remark-reading-time'
 import { bundledLanguages, getHighlighter } from 'shiki'
-import type { Pluggable, Plugin } from 'unified'
+import type { Pluggable, PluggableList, Plugin } from 'unified'
 import type {
   FrontMatter,
   LoaderOptions,
@@ -46,6 +46,7 @@ import {
   remarkStructurize
 } from './mdx-plugins/index.js'
 import { rehypeExtractTocContent } from './mdx-plugins/rehype-extract-toc-content.js'
+import { rehypeReactMathjax } from './mdx-plugins/rehype-mathjax-react.js'
 import { logger, truthy } from './utils.js'
 
 export const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS: RehypePrettyCodeOptions = {
@@ -152,6 +153,22 @@ export async function compileMdx(
 
   const format =
     _format === 'detect' ? (filePath.endsWith('.mdx') ? 'mdx' : 'md') : _format
+
+  const mathPlugin: PluggableList = []
+  if (latex) {
+    if (typeof latex === 'object') {
+      switch (latex.renderer) {
+        case 'katex':
+          mathPlugin.push(rehypeKatex)
+          break
+        case 'mathjax':
+          mathPlugin.push([rehypeReactMathjax, latex.options])
+          break
+      }
+    } else {
+      mathPlugin.push(rehypeKatex)
+    }
+  }
 
   if (isPageMapImport) {
     const compiler = createProcessor({
@@ -303,7 +320,7 @@ export async function compileMdx(
         ],
         [parseMeta, { defaultShowCopyCode }],
         // Should be before `rehypePrettyCode`
-        latex && rehypeKatex,
+        ...mathPlugin,
         ...(codeHighlight === false
           ? []
           : [

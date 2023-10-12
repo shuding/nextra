@@ -1,3 +1,7 @@
+import {MathJaxContext} from "better-react-mathjax"
+
+<MathJaxContext>
+
 # LaTeX
 
 Nextra uses [KaTeX](https://katex.org/) to render LaTeX expressions directly in
@@ -21,7 +25,14 @@ For example, the following code
 $\sqrt{a^2 + b^2}$
 ```
 
-will be rendered as: $\sqrt{a^2 + b^2}$
+will be rendered as: $\sqrt{a^2 + b^2}$.
+
+You can also do display math:
+```math
+\int_2^3x^3\,\mathrm{d}x
+```
 
 To learn more about KaTeX and its supported functions, visit their
 [documentation](https://katex.org/docs/supported.html).
+
+</MathJaxContext>
