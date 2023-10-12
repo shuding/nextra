@@ -131,12 +131,12 @@ ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
   const locale =
     locales[0] === '' ? '' : mdxPath.replace(PAGES_DIR, '').split('/')[1]
 
-  const route = slash(
+  const route =
     '/' +
-    path
-      .relative(PAGES_DIR, mdxPath)
+    slash(path
+      .relative(PAGES_DIR, mdxPath))
       .replace(MARKDOWN_EXTENSION_REGEX, '')
-      .replace(/(^|\/)index$/, ''))
+      .replace(/(^|\/)index$/, '')
 
   const {
     result,
