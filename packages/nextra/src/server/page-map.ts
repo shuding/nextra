@@ -50,12 +50,12 @@ function cleanFileName(name: string): string {
 }
 
 async function collectFiles({
-                              dir,
-                              route,
-                              imports = [],
-                              dynamicMetaImports = [],
-                              isFollowingSymlink
-                            }: CollectFilesOptions): Promise<{
+  dir,
+  route,
+  imports = [],
+  dynamicMetaImports = [],
+  isFollowingSymlink
+}: CollectFilesOptions): Promise<{
   pageMapAst: ArrayExpression
   imports: Import[]
   dynamicMetaImports: DynamicImport[]
@@ -69,10 +69,9 @@ async function collectFiles({
     // localeCompare is needed because order on Windows is different and test on CI fails
     .sort((a, b) => a.name.localeCompare(b.name))
     .map(async f => {
-      let filePath = path.join(dir, f.name)
-      console.log('bef', filePath)
-      filePath = slash(filePath)
-      console.log('aft', filePath)
+      const filePath = path.join(dir, f.name)
+      console.log('pageMap filePath', filePath)
+
       let isDirectory = f.isDirectory()
 
       const isSymlinked = isFollowingSymlink || f.isSymbolicLink()
@@ -146,7 +145,7 @@ async function collectFiles({
         if (fileName === '_meta.json') {
           throw new Error(
             'Support of "_meta.json" was removed, use "_meta.{js,jsx,ts,tsx}" instead. ' +
-            `Refactor following file "${path.relative(CWD, filePath)}".`
+              `Refactor following file "${path.relative(CWD, filePath)}".`
           )
         }
 
@@ -176,10 +175,10 @@ async function collectFiles({
 }
 
 export async function collectPageMap({
-                                       dir,
-                                       route = '/',
-                                       locale = ''
-                                     }: {
+  dir,
+  route = '/',
+  locale = ''
+}: {
   dir: string
   route?: string
   locale?: string
@@ -198,12 +197,12 @@ export async function collectPageMap({
       source: { type: 'Literal', value: filePath },
       specifiers: [
         {
-          local: { type: 'Identifier', name: importName },
+          local: { type: 'Identifier', name: 'file:///' + importName },
           ...(IMPORT_FRONTMATTER && MARKDOWN_EXTENSION_REGEX.test(filePath)
             ? {
-              type: 'ImportSpecifier',
-              imported: { type: 'Identifier', name: 'frontMatter' }
-            }
+                type: 'ImportSpecifier',
+                imported: { type: 'Identifier', name: 'frontMatter' }
+              }
             : { type: 'ImportDefaultSpecifier' })
         }
       ]
@@ -231,7 +230,7 @@ export async function collectPageMap({
               .map(({ importName, route }) => ({
                 ...DEFAULT_PROPERTY_PROPS,
                 key: { type: 'Literal', value: route },
-                value: { type: 'Identifier', name: importName }
+                value: { type: 'Identifier', name: 'file:///' + importName }
               }))
           }
         }
