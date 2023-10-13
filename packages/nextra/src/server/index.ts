@@ -182,7 +182,7 @@ const nextra: Nextra = nextraConfig => {
           },
           {
             // Use platform separator because /pages\/_app\./ will not work on windows
-            test: new RegExp(`pages${sep === '/' ? '/' : '\\'}_app\\.`),
+            test: new RegExp(`pages${sep === '/' ? '/' : '\\\\'}_app\\.`),
             issuer: request => !request,
             use: [
               options.defaultLoaders.babel,
