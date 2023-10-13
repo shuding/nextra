@@ -1,13 +1,14 @@
-import type { MathJaxContextProps } from 'better-react-mathjax'
+import type { MathJax3Config } from 'better-react-mathjax'
 import type { ImportDeclaration, ImportSpecifier } from 'estree'
 import type { Element, Root, RootContent } from 'hast'
+import type { MdxJsxAttribute } from 'hast-util-to-estree/lib'
 import { toText } from 'hast-util-to-text'
 import { SKIP, visitParents } from 'unist-util-visit-parents'
 
 const emptyOptions = {}
 const emptyClasses: string[] = []
 
-export type Options = MathJaxContextProps | undefined
+export type Options = { src?: string; config?: MathJax3Config } | undefined
 
 function createImport(name: string) {
   return {
@@ -32,14 +33,75 @@ function createImport(name: string) {
   }
 }
 
-function wrapInMathJaxContext(children: RootContent[]) {
+function wrapInMathJaxContext(
+  children: RootContent[],
+  options: NonNullable<Options>
+) {
+  const config = options.config || {}
+  const attributes: MdxJsxAttribute[] =
+    Object.keys(config).length === 0
+      ? []
+      : [
+          {
+            type: 'mdxJsxAttribute',
+            name: 'config',
+            value: {
+              type: 'mdxJsxAttributeValueExpression',
+              value: `JSON.parse(${JSON.stringify(JSON.stringify(config))})`,
+              data: {
+                estree: {
+                  type: 'Program',
+                  body: [
+                    {
+                      type: 'ExpressionStatement',
+                      expression: {
+                        type: 'CallExpression',
+                        callee: {
+                          type: 'MemberExpression',
+                          object: {
+                            type: 'Identifier',
+                            name: 'JSON'
+                          },
+                          property: {
+                            type: 'Identifier',
+                            name: 'parse'
+                          },
+                          computed: false,
+                          optional: false
+                        },
+                        arguments: [
+                          {
+                            type: 'Literal',
+                            value: JSON.stringify(config),
+                            raw: JSON.stringify(JSON.stringify(config))
+                          }
+                        ],
+                        optional: false
+                      }
+                    }
+                  ],
+                  sourceType: 'module',
+                  comments: []
+                }
+              }
+            }
+          }
+        ]
+  if (options.src) {
+    attributes.push({
+      type: 'mdxJsxAttribute',
+      name: 'src',
+      value: options.src
+    })
+  }
+
   return {
     type: 'root',
     children: [
       {
         type: 'mdxJsxFlowElement',
         name: 'MathJaxContext',
-        attributes: [],
+        attributes,
         children,
         data: {
           _mdxExplicitJsx: true
@@ -56,10 +118,25 @@ const isImportFrom = (node: any) =>
   node.data.estree.body[0].source.value === 'better-react-mathjax'
 
 /**
+ * Wrap the math in the appropriate braces. Defaults to `\(...\)` for inline and `\[...\]` for display,
+ * but will use the braces provided by `options` if they are present.
+ */
+function wrapInBraces(
+  source: string,
+  displayMath: boolean,
+  options: NonNullable<Options>
+): string {
+  const inlineBraces = options?.config?.tex?.inlineMath?.[0] || ['\\(', '\\)']
+  const displayBraces = options?.config?.tex?.displayMath?.[0] || ['\\[', '\\]']
+  const braces = displayMath ? displayBraces : inlineBraces
+  return `${braces[0]}${source}${braces[1]}`
+}
+
+/**
  * Wraps math in a `<MathJax>` component so that it can be rendered by `better-react-mathjax`.
  */
 export function rehypeBetterReactMathjax(options: Options) {
-  const _settings = options || emptyOptions
+  const settings = options || emptyOptions
 
   /**
    * Transform.
@@ -107,7 +184,7 @@ export function rehypeBetterReactMathjax(options: Options) {
       }
 
       const value = toText(scope, { whitespace: 'pre' })
-      const bracketedValue = displayMode ? `\\[${value}\\]` : `\\(${value}\\)`
+      const bracketedValue = wrapInBraces(value, displayMode, settings)
 
       const result: Element = {
         type: 'element',
@@ -145,7 +222,7 @@ export function rehypeBetterReactMathjax(options: Options) {
       }
 
       // Wrap everything in a `<MathJaxContext>` component.
-      tree.children = [wrapInMathJaxContext(tree.children) as any]
+      tree.children = [wrapInMathJaxContext(tree.children, settings) as any]
 
       if (!included.MathJax) {
         tree.children.push(createImport('MathJax') as any)
