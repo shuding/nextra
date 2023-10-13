@@ -209,8 +209,12 @@ export default MDXLayout`
   const finalResult = transform ? await transform(result, { route }) : result
 
   const stringifiedPageOpts = JSON.stringify(pageOpts).slice(0, -1)
-  const pageMapPath = path.join(CHUNKS_DIR, `nextra-page-map-${locale}.mjs`)
+  const pageMapPath = path.relative(
+    CWD,
+    path.join(CHUNKS_DIR, `nextra-page-map-${locale}.mjs`)
+  )
 
+  console.log({ pageMapPath })
   const rawJs = `import { HOC_MDXWrapper } from 'nextra/setup-page'
 import { pageMap } from '${pageMapPath}'
 ${isAppFileFromNodeModules ? cssImports : ''}

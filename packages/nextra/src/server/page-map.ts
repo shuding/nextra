@@ -177,6 +177,11 @@ async function collectFiles({
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url))
 
+
+/*
+ * Use relative path instead of absolute, because it's fails on Windows
+ * https://github.com/nodejs/node/issues/31710
+ */
 function getImportPath(filePath: string) {
   const filePath2 = path.relative(__dirname, filePath)
   console.log('pageMap', { filePath2 })
