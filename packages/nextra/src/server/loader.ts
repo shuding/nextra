@@ -11,7 +11,6 @@ import {
 } from './constants.js'
 import { PAGES_DIR } from './file-system.js'
 import { logger } from './utils.js'
-import fs from 'node:fs'
 
 const initGitRepo = (async () => {
   const IS_WEB_CONTAINER = !!process.versions.webcontainer
@@ -83,7 +82,7 @@ export async function loader(
     : this.resourcePath
 
   const currentPath = slash(mdxPath)
-  console.log({currentPath})
+  console.log({ currentPath })
   if (currentPath.includes('/pages/api/')) {
     logger.warn(
       `Ignoring ${currentPath} because it is located in the "pages/api" folder.`
@@ -135,7 +134,7 @@ ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
   const relativePath = slash(path.relative(PAGES_DIR, mdxPath))
 
   let locale = locales[0] === '' ? '' : relativePath.split('/')[0]
-  // In case partial document is outside `pages` directory
+  // In case when partial document is placed outside `pages` directory
   if (locale === '..') locale = ''
   console.log({ relativePath, locale })
   const route =
@@ -217,7 +216,7 @@ export default MDXLayout`
 
   const stringifiedPageOpts = JSON.stringify(pageOpts).slice(0, -1)
   const pageMapPath = path.join(CHUNKS_DIR, `nextra-page-map-${locale}.mjs`)
-  console.log({mdxPath})
+  console.log({ mdxPath })
 
   const rawJs = `import { HOC_MDXWrapper } from 'nextra/setup-page'
 import { pageMap } from '${slash(pageMapPath)}'
