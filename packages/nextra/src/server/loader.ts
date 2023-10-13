@@ -70,20 +70,22 @@ export async function loader(
 
   const mdxPath = this._module?.resourceResolveData
     ? // to make it work with symlinks, resolve the mdx path based on the relative path
-      /*
-       * `context.rootContext` could include path chunk of
-       * `context._module.resourceResolveData.relativePath` use
-       * `context._module.resourceResolveData.descriptionFileRoot` instead
-       */
-      path.join(
-        this._module.resourceResolveData.descriptionFileRoot,
-        this._module.resourceResolveData.relativePath
-      )
+    /*
+     * `context.rootContext` could include path chunk of
+     * `context._module.resourceResolveData.relativePath` use
+     * `context._module.resourceResolveData.descriptionFileRoot` instead
+     */
+    path.join(
+      this._module.resourceResolveData.descriptionFileRoot,
+      this._module.resourceResolveData.relativePath
+    )
     : this.resourcePath
-  console.log({mdxPath})
-  if (mdxPath.includes('/pages/api/')) {
+
+  const currentPath = slash(mdxPath)
+
+  if (currentPath.includes('/pages/api/')) {
     logger.warn(
-      `Ignoring ${mdxPath} because it is located in the "pages/api" folder.`
+      `Ignoring ${currentPath} because it is located in the "pages/api" folder.`
     )
     return ''
   }
@@ -94,7 +96,7 @@ export async function loader(
 export const getStaticProps = () => ({ notFound: true })`
   }
 
-  if (mdxPath.includes('/pages/_app.mdx')) {
+  if (currentPath.includes('/pages/_app.mdx')) {
     throw new Error(
       'Nextra v3 no longer supports _app.mdx, use _app.{js,jsx} or _app.{ts,tsx} for TypeScript projects instead.'
     )
@@ -104,14 +106,14 @@ export const getStaticProps = () => ({ notFound: true })`
   const layoutPath = isLocalTheme ? slash(path.resolve(theme)) : theme
 
   const cssImports = `
-${latex ? "import 'katex/dist/katex.min.css'" : ''}
+${latex ? 'import \'katex/dist/katex.min.css\'' : ''}
 ${OFFICIAL_THEMES.includes(theme) ? `import '${theme}/style.css'` : ''}`
 
-  if (mdxPath.includes('/pages/_app.')) {
-    isAppFileFromNodeModules = mdxPath.includes('/node_modules/')
+  if (currentPath.includes('/pages/_app.')) {
+    isAppFileFromNodeModules = currentPath.includes('/node_modules/')
     // Relative path instead of a package name
     const themeConfigImport = themeConfig
-      ? `import __themeConfig from 'file:///${slash(path.resolve(themeConfig))}'`
+      ? `import __themeConfig from '${slash(path.resolve(themeConfig))}'`
       : ''
 
     const content = isAppFileFromNodeModules
@@ -126,16 +128,17 @@ const __nextra_internal__ = globalThis[Symbol.for('__nextra_internal__')] ||= Ob
 __nextra_internal__.context ||= Object.create(null)
 __nextra_internal__.Layout = __layout
 ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
-    console.log({appContent})
+    console.log({ appContent })
     return appContent
   }
 
-  const locale =
-    locales[0] === '' ? '' : mdxPath.replace(PAGES_DIR, '').split('/')[1]
+  const relativePath = slash(path.relative(PAGES_DIR, mdxPath))
 
+  const locale = locales[0] === '' ? '' : relativePath.split('/')[1]
+  console.log({ relativePath, locale })
   const route =
     '/' +
-    slash(path.relative(PAGES_DIR, mdxPath))
+    relativePath
       .replace(MARKDOWN_EXTENSION_REGEX, '')
       .replace(/(^|\/)index$/, '')
 
