@@ -11,10 +11,7 @@ jobs:
     strategy:
       matrix:
         node-version: [18]
-        os: [
-            #          ubuntu-latest,
-            windows-latest
-          ]
+        os: [ubuntu-latest, windows-latest]
 
     steps:
       - name: Cancel Previous Runs
@@ -25,35 +22,19 @@ jobs:
       - name: Checkout Master
         uses: actions/checkout@v4
 
-      - name: Install Node.js
+      - uses: pnpm/action-setup@v2.4.0
+
+      - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-
-      - uses: pnpm/action-setup@v2
-        name: Install pnpm
-        with:
-          version: 8
-          run_install: false
-
-      - name: Get pnpm Store Directory
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - uses: actions/cache@v3
-        name: Setup pnpm Cache
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
+          cache: pnpm
 
       - name: Install Dependencies
         run: pnpm i
 
       - name: Build All
-        run: pnpm --filter swr-site build
+        run: pnpm build:all
 
       - name: Test
         run: pnpm test

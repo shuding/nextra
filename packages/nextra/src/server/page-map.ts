@@ -5,6 +5,7 @@ import { valueToEstree } from 'estree-util-value-to-estree'
 import gracefulFs from 'graceful-fs'
 import grayMatter from 'gray-matter'
 import pLimit from 'p-limit'
+import slash from 'slash'
 import {
   CHUNKS_DIR,
   CWD,
@@ -21,7 +22,6 @@ import {
   pageTitleFromFilename,
   truthy
 } from './utils.js'
-import slash from 'slash'
 
 const fs = gracefulFs.promises
 
@@ -151,7 +151,6 @@ async function collectFiles({
 
         if (isMetaJs) {
           const importName = cleanFileName(filePath)
-
           imports.push({ importName, filePath })
 
           if (hasDynamicPage) {
@@ -180,9 +179,7 @@ async function collectFiles({
  * https://github.com/nodejs/node/issues/31710
  */
 function getImportPath(filePath: string) {
-  const filePath2 = slash(path.relative(CHUNKS_DIR, filePath))
-
-  return filePath2
+  return slash(path.relative(CHUNKS_DIR, filePath))
 }
 
 export async function collectPageMap({
@@ -263,7 +260,5 @@ if (typeof window === 'undefined') {
     body
   })
 
-  const res = `${result.value}${footer}`.trim()
-
-  return res
+  return `${result.value}${footer}`.trim()
 }
