@@ -266,5 +266,8 @@ if (typeof window === 'undefined') {
     body
   })
 
-  return `${result.value}${footer}`.trim()
+  const res = `${result.value}${footer}`.trim()
+
+  console.log(res)
+  return res
 }
