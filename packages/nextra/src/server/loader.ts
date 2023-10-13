@@ -134,7 +134,9 @@ ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
 
   const relativePath = slash(path.relative(PAGES_DIR, mdxPath))
 
-  const locale = locales[0] === '' ? '' : relativePath.split('/')[0]
+  let locale = locales[0] === '' ? '' : relativePath.split('/')[0]
+  // In case partial document is outside `pages` directory
+  if (locale === '..') locale = ''
   console.log({ relativePath, locale })
   const route =
     '/' +
