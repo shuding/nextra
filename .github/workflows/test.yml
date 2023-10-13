@@ -31,7 +31,7 @@ jobs:
         id: pnpm-config
         shell: bash
         run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+          echo "STORE_PATH=$(pnpm store path | tr -d '\n')" >> $GITHUB_OUTPUT
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
