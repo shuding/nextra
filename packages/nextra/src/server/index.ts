@@ -1,5 +1,6 @@
 /* eslint-env node */
 import { createRequire } from 'node:module'
+import { sep } from 'node:path'
 import type { NextConfig } from 'next'
 import type { ZodError } from 'zod'
 import { fromZodError } from 'zod-validation-error'
@@ -20,6 +21,8 @@ import { NextraPlugin, NextraSearchPlugin } from './webpack-plugins/index.js'
 const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
 
 const require = createRequire(import.meta.url)
+
+const AGNOSTIC_PAGE_MAP_PATH = `.next${sep}static${sep}chunks${sep}nextra-page-map`
 
 const nextra: Nextra = nextraConfig => {
   try {
@@ -111,7 +114,7 @@ const nextra: Nextra = nextraConfig => {
 
         const defaultESMAppPath = require.resolve('next/dist/esm/pages/_app.js')
         const defaultCJSAppPath = require.resolve('next/dist/pages/_app.js')
-        console.log({defaultESMAppPath, defaultCJSAppPath})
+        console.log({ defaultESMAppPath, defaultCJSAppPath })
         config.resolve.alias = {
           ...config.resolve.alias,
           // Resolves ESM _app file instead cjs, so we could import theme.config via `import` statement
@@ -122,8 +125,7 @@ const nextra: Nextra = nextraConfig => {
         if (IMPORT_FRONTMATTER) {
           rules.push({
             test: MARKDOWN_EXTENSION_REGEX,
-            issuer: request =>
-              request.includes('.next/static/chunks/nextra-page-map'),
+            issuer: request => request.includes(AGNOSTIC_PAGE_MAP_PATH),
             use: [
               options.defaultLoaders.babel,
               {
@@ -142,8 +144,7 @@ const nextra: Nextra = nextraConfig => {
             // runtime import call such as `import('...')`.
             test: MARKDOWN_EXTENSION_REGEX,
             issuer: request =>
-              (!!request &&
-                !request.includes('.next/static/chunks/nextra-page-map')) ||
+              (!!request && !request.includes(AGNOSTIC_PAGE_MAP_PATH)) ||
               request === null,
             use: [
               options.defaultLoaders.babel,
@@ -180,7 +181,8 @@ const nextra: Nextra = nextraConfig => {
             ]
           },
           {
-            test: /pages\/_app\./,
+            // Use platform separator because /pages\/_app\./ will not work on windows
+            test: new RegExp(`pages${sep}_app\\.`),
             issuer: request => !request,
             use: [
               options.defaultLoaders.babel,
