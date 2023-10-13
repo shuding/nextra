@@ -45,8 +45,8 @@ import {
   remarkStaticImage,
   remarkStructurize
 } from './mdx-plugins/index.js'
+import { rehypeBetterReactMathjax } from './mdx-plugins/rehype-better-react-mathjax.js'
 import { rehypeExtractTocContent } from './mdx-plugins/rehype-extract-toc-content.js'
-import { rehypeReactMathjax } from './mdx-plugins/rehype-mathjax-react.js'
 import { logger, truthy } from './utils.js'
 
 export const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS: RehypePrettyCodeOptions = {
@@ -162,7 +162,7 @@ export async function compileMdx(
           mathPlugin.push(rehypeKatex)
           break
         case 'mathjax':
-          mathPlugin.push([rehypeReactMathjax, latex.options])
+          mathPlugin.push([rehypeBetterReactMathjax, latex.options])
           break
       }
     } else {
