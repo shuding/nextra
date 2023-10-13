@@ -7,6 +7,7 @@ import gracefulFs from 'graceful-fs'
 import grayMatter from 'gray-matter'
 import pLimit from 'p-limit'
 import {
+  CHUNKS_DIR,
   CWD,
   DEFAULT_PROPERTY_PROPS,
   IMPORT_FRONTMATTER,
@@ -151,7 +152,7 @@ async function collectFiles({
 
         if (isMetaJs) {
           const importName = cleanFileName(filePath)
-          console.log('pageMap', { importName })
+
           imports.push({ importName, filePath })
 
           if (hasDynamicPage) {
@@ -183,7 +184,7 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url))
  * https://github.com/nodejs/node/issues/31710
  */
 function getImportPath(filePath: string) {
-  const filePath2 = path.relative(__dirname, filePath)
+  const filePath2 = path.relative(CHUNKS_DIR, filePath)
   console.log('pageMap', { filePath2 })
   return filePath2
 }
@@ -268,6 +269,5 @@ if (typeof window === 'undefined') {
 
   const res = `${result.value}${footer}`.trim()
 
-  console.log(res)
   return res
 }

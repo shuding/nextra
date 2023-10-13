@@ -111,7 +111,7 @@ ${OFFICIAL_THEMES.includes(theme) ? `import '${theme}/style.css'` : ''}`
     isAppFileFromNodeModules = mdxPath.includes('/node_modules/')
     // Relative path instead of a package name
     const themeConfigImport = themeConfig
-      ? `import __themeConfig from '${slash(path.resolve(themeConfig))}'`
+      ? `import __themeConfig from 'file:///${slash(path.resolve(themeConfig))}'`
       : ''
 
     const content = isAppFileFromNodeModules
