@@ -53,7 +53,7 @@ jobs:
         run: pnpm i
 
       - name: Build All
-        run: pnpm build:all
+        run: pnpm --filter swr-site build
 
       - name: Test
         run: pnpm test

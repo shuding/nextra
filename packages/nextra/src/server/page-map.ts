@@ -1,5 +1,4 @@
 import path from 'node:path'
-import { fileURLToPath } from 'node:url'
 import type { ArrayExpression, Expression, ImportDeclaration } from 'estree'
 import { toJs } from 'estree-util-to-js'
 import { valueToEstree } from 'estree-util-value-to-estree'
@@ -71,7 +70,6 @@ async function collectFiles({
     .sort((a, b) => a.name.localeCompare(b.name))
     .map(async f => {
       const filePath = path.join(dir, f.name)
-      console.log('pageMap', { filePath })
 
       let isDirectory = f.isDirectory()
 
@@ -175,9 +173,6 @@ async function collectFiles({
     hasDynamicPage
   }
 }
-
-const __dirname = fileURLToPath(new URL('.', import.meta.url))
-
 
 /*
  * Use relative path instead of absolute, because it's fails on Windows

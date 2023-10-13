@@ -80,7 +80,7 @@ export async function loader(
         this._module.resourceResolveData.relativePath
       )
     : this.resourcePath
-
+  console.log({mdxPath})
   if (mdxPath.includes('/pages/api/')) {
     logger.warn(
       `Ignoring ${mdxPath} because it is located in the "pages/api" folder.`
