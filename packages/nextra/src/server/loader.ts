@@ -220,7 +220,7 @@ export default MDXLayout`
     path.join(CHUNKS_DIR, `nextra-page-map-${locale}.mjs`)
   )
 
-  console.log({ pageMapPath }, fs.existsSync(pageMapPath))
+  console.log({ pageMapPath, slash: slash(pageMapPath) }, fs.existsSync(path.join(CHUNKS_DIR, `nextra-page-map-${locale}.mjs`)))
   const rawJs = `import { HOC_MDXWrapper } from 'nextra/setup-page'
 import { pageMap } from '${slash(pageMapPath)}'
 ${isAppFileFromNodeModules ? cssImports : ''}

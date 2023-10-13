@@ -21,6 +21,7 @@ import {
   pageTitleFromFilename,
   truthy
 } from './utils.js'
+import slash from 'slash'
 
 const fs = gracefulFs.promises
 
@@ -179,7 +180,7 @@ async function collectFiles({
  * https://github.com/nodejs/node/issues/31710
  */
 function getImportPath(filePath: string) {
-  const filePath2 = path.relative(CHUNKS_DIR, filePath)
+  const filePath2 = slash(path.relative(CHUNKS_DIR, filePath))
   console.log('pageMap', { filePath2 })
   return filePath2
 }
