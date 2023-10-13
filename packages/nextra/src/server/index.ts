@@ -114,7 +114,7 @@ const nextra: Nextra = nextraConfig => {
 
         const defaultESMAppPath = require.resolve('next/dist/esm/pages/_app.js')
         const defaultCJSAppPath = require.resolve('next/dist/pages/_app.js')
-        console.log({ defaultESMAppPath, defaultCJSAppPath })
+
         config.resolve.alias = {
           ...config.resolve.alias,
           // Resolves ESM _app file instead cjs, so we could import theme.config via `import` statement
