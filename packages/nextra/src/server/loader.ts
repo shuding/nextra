@@ -70,15 +70,15 @@ export async function loader(
 
   const mdxPath = this._module?.resourceResolveData
     ? // to make it work with symlinks, resolve the mdx path based on the relative path
-    /*
-     * `context.rootContext` could include path chunk of
-     * `context._module.resourceResolveData.relativePath` use
-     * `context._module.resourceResolveData.descriptionFileRoot` instead
-     */
-    path.join(
-      this._module.resourceResolveData.descriptionFileRoot,
-      this._module.resourceResolveData.relativePath
-    )
+      /*
+       * `context.rootContext` could include path chunk of
+       * `context._module.resourceResolveData.relativePath` use
+       * `context._module.resourceResolveData.descriptionFileRoot` instead
+       */
+      path.join(
+        this._module.resourceResolveData.descriptionFileRoot,
+        this._module.resourceResolveData.relativePath
+      )
     : this.resourcePath
 
   const currentPath = slash(mdxPath)
@@ -106,7 +106,7 @@ export const getStaticProps = () => ({ notFound: true })`
   const layoutPath = isLocalTheme ? slash(path.resolve(theme)) : theme
 
   const cssImports = `
-${latex ? 'import \'katex/dist/katex.min.css\'' : ''}
+${latex ? "import 'katex/dist/katex.min.css'" : ''}
 ${OFFICIAL_THEMES.includes(theme) ? `import '${theme}/style.css'` : ''}`
 
   if (currentPath.includes('/pages/_app.')) {
@@ -214,11 +214,14 @@ export default MDXLayout`
   const finalResult = transform ? await transform(result, { route }) : result
 
   const stringifiedPageOpts = JSON.stringify(pageOpts).slice(0, -1)
-  const pageMapPath = path.join(CHUNKS_DIR, `nextra-page-map-${locale}.mjs`)
+  const pageMapPath = path.relative(
+    path.dirname(mdxPath),
+    path.join(CHUNKS_DIR, `nextra-page-map-${locale}.mjs`)
+  )
 
   console.log({ pageMapPath })
   const rawJs = `import { HOC_MDXWrapper } from 'nextra/setup-page'
-import { pageMap } from 'file:///${pageMapPath}'
+import { pageMap } from '${pageMapPath}'
 ${isAppFileFromNodeModules ? cssImports : ''}
 ${finalResult}
 
