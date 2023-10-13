@@ -5,6 +5,7 @@ import { valueToEstree } from 'estree-util-value-to-estree'
 import gracefulFs from 'graceful-fs'
 import grayMatter from 'gray-matter'
 import pLimit from 'p-limit'
+import slash from 'slash'
 import {
   CWD,
   DEFAULT_PROPERTY_PROPS,
@@ -195,7 +196,7 @@ export async function collectPageMap({
       source: { type: 'Literal', value: filePath },
       specifiers: [
         {
-          local: { type: 'Identifier', name: importName },
+          local: { type: 'Identifier', name: slash(importName) },
           ...(IMPORT_FRONTMATTER && MARKDOWN_EXTENSION_REGEX.test(filePath)
             ? {
                 type: 'ImportSpecifier',
