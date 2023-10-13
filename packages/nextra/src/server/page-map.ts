@@ -181,7 +181,7 @@ async function collectFiles({
  */
 function getImportPath(filePath: string) {
   const filePath2 = slash(path.relative(CHUNKS_DIR, filePath))
-  console.log('pageMap', { filePath2 })
+
   return filePath2
 }
 

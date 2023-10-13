@@ -1,4 +1,5 @@
 import path from 'node:path'
+import type { ImportDeclaration } from 'estree'
 import fs from 'graceful-fs'
 import type { Root } from 'mdast'
 import slash from 'slash'
@@ -97,7 +98,7 @@ export const remarkStaticImage: Plugin<[], Root> = () => ast => {
                         local: { type: 'Identifier', name: variableName }
                       }
                     ]
-                  }
+                  } satisfies ImportDeclaration
                 ]
               }
             }
