@@ -134,7 +134,7 @@ ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
 
   const relativePath = slash(path.relative(PAGES_DIR, mdxPath))
 
-  const locale = locales[0] === '' ? '' : relativePath.split('/')[1]
+  const locale = locales[0] === '' ? '' : relativePath.split('/')[0]
   console.log({ relativePath, locale })
   const route =
     '/' +
