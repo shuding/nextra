@@ -175,16 +175,16 @@ ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
     return `${result}
 export default MDXLayout`
   }
-  if (searchIndexKey && frontMatter.searchable !== false) {
-    // Store all the things in buildInfo.
-    const { buildInfo } = this._module as any
-    buildInfo.nextraSearch = {
-      indexKey: searchIndexKey,
-      title,
-      data: structurizedData,
-      route
-    }
-  }
+  // if (searchIndexKey && frontMatter.searchable !== false) {
+  //   // Store all the things in buildInfo.
+  //   const { buildInfo } = this._module as any
+  //   buildInfo.nextraSearch = {
+  //     indexKey: searchIndexKey,
+  //     title,
+  //     data: structurizedData,
+  //     route
+  //   }
+  // }
 
   let timestamp: PageOpts['timestamp']
   const { repository, gitRoot } = await initGitRepo

@@ -92,9 +92,9 @@ const nextra: Nextra = nextraConfig => {
           config.plugins ||= []
           config.plugins.push(new NextraPlugin({ locales }))
 
-          if (loaderOptions.search) {
-            config.plugins.push(new NextraSearchPlugin())
-          }
+          // if (loaderOptions.search) {
+          //   config.plugins.push(new NextraSearchPlugin())
+          // }
         }
 
         // Fixes https://github.com/vercel/next.js/issues/55872
