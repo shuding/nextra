@@ -1,11 +1,11 @@
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import type { ArrayExpression, Expression, ImportDeclaration } from 'estree'
 import { toJs } from 'estree-util-to-js'
 import { valueToEstree } from 'estree-util-value-to-estree'
 import gracefulFs from 'graceful-fs'
 import grayMatter from 'gray-matter'
 import pLimit from 'p-limit'
-import slash from 'slash'
 import {
   CWD,
   DEFAULT_PROPERTY_PROPS,
@@ -70,7 +70,7 @@ async function collectFiles({
     .sort((a, b) => a.name.localeCompare(b.name))
     .map(async f => {
       const filePath = path.join(dir, f.name)
-      console.log('pageMap filePath', filePath)
+      console.log('pageMap', { filePath })
 
       let isDirectory = f.isDirectory()
 
@@ -151,6 +151,7 @@ async function collectFiles({
 
         if (isMetaJs) {
           const importName = cleanFileName(filePath)
+          console.log('pageMap', { importName })
           imports.push({ importName, filePath })
 
           if (hasDynamicPage) {
@@ -174,6 +175,14 @@ async function collectFiles({
   }
 }
 
+const __dirname = fileURLToPath(new URL('.', import.meta.url))
+
+function getImportPath(filePath: string) {
+  const filePath2 = path.relative(__dirname, filePath)
+  console.log('pageMap', { filePath2 })
+  return filePath2
+}
+
 export async function collectPageMap({
   dir,
   route = '/',
@@ -194,10 +203,10 @@ export async function collectPageMap({
     .sort((a, b) => a.filePath.localeCompare(b.filePath))
     .map(({ filePath, importName }) => ({
       type: 'ImportDeclaration',
-      source: { type: 'Literal', value: filePath },
+      source: { type: 'Literal', value: getImportPath(filePath) },
       specifiers: [
         {
-          local: { type: 'Identifier', name: 'file:///' + importName },
+          local: { type: 'Identifier', name: importName },
           ...(IMPORT_FRONTMATTER && MARKDOWN_EXTENSION_REGEX.test(filePath)
             ? {
                 type: 'ImportSpecifier',
@@ -230,7 +239,7 @@ export async function collectPageMap({
               .map(({ importName, route }) => ({
                 ...DEFAULT_PROPERTY_PROPS,
                 key: { type: 'Literal', value: route },
-                value: { type: 'Identifier', name: 'file:///' + importName }
+                value: { type: 'Identifier', name: importName }
               }))
           }
         }
