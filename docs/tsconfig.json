@@ -16,7 +16,11 @@
     "module": "esnext",
     "resolveJsonModule": true,
     "paths": {
-      "@components/*": ["components/*"]
+      "@components/*": [
+        "components/*",
+        // For Windows
+        "components\\*"
+      ]
     },
     "plugins": [
       {
