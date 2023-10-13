@@ -133,8 +133,8 @@ ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
 
   const route =
     '/' +
-    slash(path
-      .relative(PAGES_DIR, mdxPath))
+    path
+      .relative(PAGES_DIR, mdxPath)
       .replace(MARKDOWN_EXTENSION_REGEX, '')
       .replace(/(^|\/)index$/, '')
 
