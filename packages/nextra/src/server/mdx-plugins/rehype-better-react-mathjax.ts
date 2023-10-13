@@ -1,6 +1,6 @@
 import type { MathJaxContextProps } from 'better-react-mathjax'
 import type { ImportDeclaration, ImportSpecifier } from 'estree'
-import type { Element, Root } from 'hast'
+import type { Element, Root, RootContent } from 'hast'
 import { toText } from 'hast-util-to-text'
 import { SKIP, visitParents } from 'unist-util-visit-parents'
 
@@ -31,6 +31,24 @@ function createImport(name: string) {
     }
   }
 }
+
+function wrapInMathJaxContext(children: RootContent[]) {
+  return {
+    type: 'root',
+    children: [
+      {
+        type: 'mdxJsxFlowElement',
+        name: 'MathJaxContext',
+        attributes: [],
+        children,
+        data: {
+          _mdxExplicitJsx: true
+        }
+      }
+    ]
+  }
+}
+
 const isMdxJsEsm = (node: any) => node.type === 'mdxjsEsm'
 const isImportDeclaration = (node: any) =>
   node.data.estree.body[0].type === 'ImportDeclaration'
@@ -125,15 +143,16 @@ export function rehypeBetterReactMathjax(options: Options) {
           }
         }
       }
+
+      // Wrap everything in a `<MathJaxContext>` component.
+      tree.children = [wrapInMathJaxContext(tree.children) as any]
+
       if (!included.MathJax) {
         tree.children.push(createImport('MathJax') as any)
       }
       if (!included.MathJaxContext) {
         tree.children.push(createImport('MathJaxContext') as any)
       }
-
-      // Wrap everything in a `<MathJaxContext>` component.
-      // XXX: we should only wrap the content of the page, not the import statements... How to do this?
     }
   }
 }
