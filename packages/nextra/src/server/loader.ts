@@ -11,6 +11,7 @@ import {
 } from './constants.js'
 import { PAGES_DIR } from './file-system.js'
 import { logger } from './utils.js'
+import fs from 'node:fs'
 
 const initGitRepo = (async () => {
   const IS_WEB_CONTAINER = !!process.versions.webcontainer
@@ -219,9 +220,9 @@ export default MDXLayout`
     path.join(CHUNKS_DIR, `nextra-page-map-${locale}.mjs`)
   )
 
-  console.log({ pageMapPath })
+  console.log({ pageMapPath }, fs.existsSync(pageMapPath))
   const rawJs = `import { HOC_MDXWrapper } from 'nextra/setup-page'
-import { pageMap } from '${pageMapPath}'
+import { pageMap } from '${slash(pageMapPath)}'
 ${isAppFileFromNodeModules ? cssImports : ''}
 ${finalResult}
 
