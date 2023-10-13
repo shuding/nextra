@@ -19,7 +19,7 @@
       "@components/*": [
         "components/*",
         // For Windows
-        "components\\*"
+        "components\\\\*"
       ]
     },
     "plugins": [
