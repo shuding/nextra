@@ -118,7 +118,7 @@ ${OFFICIAL_THEMES.includes(theme) ? `import '${theme}/style.css'` : ''}`
       ? 'export default function App({ Component, pageProps }) { return <Component {...pageProps} />}'
       : [cssImports, source].join('\n')
 
-    return `import __layout from '${layoutPath}'
+    const appContent = `import __layout from '${layoutPath}'
 ${themeConfigImport}
 ${content}
 
@@ -126,6 +126,8 @@ const __nextra_internal__ = globalThis[Symbol.for('__nextra_internal__')] ||= Ob
 __nextra_internal__.context ||= Object.create(null)
 __nextra_internal__.Layout = __layout
 ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
+    console.log({appContent})
+    return appContent
   }
 
   const locale =
