@@ -152,7 +152,7 @@ export async function compileMdx(
 
   const format =
     _format === 'detect' ? (filePath.endsWith('.mdx') ? 'mdx' : 'md') : _format
-
+  const fileCompatible = filePath ? { value: source, path: filePath } : source
   if (isPageMapImport) {
     const compiler = createProcessor({
       format,
@@ -161,9 +161,7 @@ export async function compileMdx(
         remarkMdxFrontMatter
       ]
     })
-    const vFile = await compiler.process(
-      filePath ? { value: source, path: filePath } : source
-    )
+    const vFile = await compiler.process(fileCompatible)
     const content = vFile.toString()
 
     const index = content.lastIndexOf('function _createMdxContent(props) {')
@@ -207,7 +205,6 @@ export async function compileMdx(
   const processor = compiler()
 
   try {
-    const fileCompatible = filePath ? { value: source, path: filePath } : source
     const vFile = await processor.process(fileCompatible)
 
     const data = vFile.data as {

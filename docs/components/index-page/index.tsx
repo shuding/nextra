@@ -19,7 +19,7 @@ function I18n() {
   const [active, setActive] = useState('')
 
   return (
-    <div className={cn(styles.comparison)}>
+    <div className={styles.comparison}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '.5rem' }}>
         {LANGUAGES.map(({ lang }) => (
           <span

@@ -9,6 +9,4 @@ export function findPagesDirectory(): string {
   return pagesDir
 }
 
-export const PAGES_DIR = process.env.VITEST_WORKER_ID
-  ? ''
-  : findPagesDirectory()
+export const PAGES_DIR = findPagesDirectory()

@@ -137,6 +137,7 @@ export function HOC_MDXWrapper(
   const __nextra_internal__ = (globalThis as NextraInternalGlobal)[
     NEXTRA_INTERNAL
   ]
+
   __nextra_internal__.route = route
   __nextra_internal__.pageMap = pageOpts.pageMap
   __nextra_internal__.context[route] = {
