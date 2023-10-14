@@ -37,9 +37,7 @@ export function ThemeSwitch({
         { key: 'dark', name: options.dark },
         { key: 'system', name: options.system }
       ]}
-      onChange={option => {
-        setTheme(option.key)
-      }}
+      onChange={setTheme}
       selected={{
         key: theme,
         name: (
