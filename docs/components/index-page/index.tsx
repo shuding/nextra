@@ -1,5 +1,3 @@
-import { Feature, Features } from '@components/features'
-import { ArrowRightIcon } from '@components/icons'
 import cn from 'clsx'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
@@ -7,6 +5,8 @@ import { Link } from 'nextra-theme-docs'
 import docsCardDark from 'public/assets/card-1.dark.png'
 import docsCard from 'public/assets/card-1.png'
 import { useState } from 'react'
+import { Feature, Features } from '../features'
+import { ArrowRightIcon } from '../icons'
 import styles from './index.module.css'
 
 const LANGUAGES = [
@@ -19,7 +19,7 @@ function I18n() {
   const [active, setActive] = useState('')
 
   return (
-    <div className={cn(styles.comparison)}>
+    <div className={styles.comparison}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '.5rem' }}>
         {LANGUAGES.map(({ lang }) => (
           <span

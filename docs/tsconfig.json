@@ -15,13 +15,6 @@
     "jsx": "preserve",
     "module": "esnext",
     "resolveJsonModule": true,
-    "paths": {
-      "@components/*": [
-        "components/*",
-        // For Windows
-        "components\\\\*"
-      ]
-    },
     "plugins": [
       {
         "name": "next"

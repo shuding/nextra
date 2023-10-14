@@ -1,8 +1,8 @@
-import { ArrowRightIcon } from '@components/icons'
 import cn from 'clsx'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import type { ComponentProps, ReactNode } from 'react'
+import { ArrowRightIcon } from '../icons'
 import styles from './style.module.css'
 
 export function Feature({
