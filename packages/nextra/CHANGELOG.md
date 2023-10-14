@@ -1,5 +1,26 @@
 # nextra
 
+## 3.0.0-alpha.7
+
+### Patch Changes
+
+- 0b5cc9d5: make nextra compatible with windows
+
+## 3.0.0-alpha.6
+
+### Patch Changes
+
+- 03da778a: fix `*` theme settings for dynamic routes when route is not exist in
+  page map
+
+## 3.0.0-alpha.5
+
+### Patch Changes
+
+- a3b67aea: `_meta` should return
+  `export const getStaticProps = () => ({ notFound: true })` for static exports,
+  instead of page without contain
+
 ## 3.0.0-alpha.4
 
 ### Patch Changes

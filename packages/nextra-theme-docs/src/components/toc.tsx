@@ -5,6 +5,7 @@ import { useEffect, useRef } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import { useActiveAnchor, useThemeConfig } from '../contexts'
 import { renderComponent } from '../utils'
+import { removeLinks } from '../utils/remove-links'
 import { Anchor } from './anchor'
 import { BackToTop } from './back-to-top'
 
@@ -84,7 +85,7 @@ export function TOC({ toc, filePath }: TOCProps): ReactElement {
                     'contrast-more:_text-gray-900 contrast-more:_underline contrast-more:dark:_text-gray-50 _w-full _break-words'
                   )}
                 >
-                  {value}
+                  {removeLinks(value)}
                 </a>
               </li>
             ))}

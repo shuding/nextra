@@ -1,5 +1,31 @@
 # nextra-theme-docs
 
+## 3.0.0-alpha.7
+
+### Patch Changes
+
+- 0b5cc9d5: make nextra compatible with windows
+- Updated dependencies [0b5cc9d5]
+  - nextra@3.0.0-alpha.7
+
+## 3.0.0-alpha.6
+
+### Patch Changes
+
+- 31c2ee70: fix `removeLinks` when input node is link
+- 03da778a: fix `*` theme settings for dynamic routes when route is not exist in
+  page map
+- Updated dependencies [03da778a]
+  - nextra@3.0.0-alpha.6
+
+## 3.0.0-alpha.5
+
+### Patch Changes
+
+- 315ca826: remove possible links in toc elements
+- Updated dependencies [a3b67aea]
+  - nextra@3.0.0-alpha.5
+
 ## 3.0.0-alpha.4
 
 ### Minor Changes

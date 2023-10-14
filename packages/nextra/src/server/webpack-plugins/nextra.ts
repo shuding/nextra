@@ -42,7 +42,7 @@ export class NextraPlugin {
       try {
         for (const locale of locales) {
           const route = `/${locale}`
-          const dir = PAGES_DIR + route
+          const dir = path.join(PAGES_DIR, locale)
           const rawJs = await collectPageMap({ dir, route, locale })
 
           await fs.writeFile(

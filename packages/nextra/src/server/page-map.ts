@@ -5,7 +5,9 @@ import { valueToEstree } from 'estree-util-value-to-estree'
 import gracefulFs from 'graceful-fs'
 import grayMatter from 'gray-matter'
 import pLimit from 'p-limit'
+import slash from 'slash'
 import {
+  CHUNKS_DIR,
   CWD,
   DEFAULT_PROPERTY_PROPS,
   IMPORT_FRONTMATTER,
@@ -172,6 +174,14 @@ async function collectFiles({
   }
 }
 
+/*
+ * Use relative path instead of absolute, because it's fails on Windows
+ * https://github.com/nodejs/node/issues/31710
+ */
+function getImportPath(filePath: string) {
+  return slash(path.relative(CHUNKS_DIR, filePath))
+}
+
 export async function collectPageMap({
   dir,
   route = '/',
@@ -192,7 +202,7 @@ export async function collectPageMap({
     .sort((a, b) => a.filePath.localeCompare(b.filePath))
     .map(({ filePath, importName }) => ({
       type: 'ImportDeclaration',
-      source: { type: 'Literal', value: filePath },
+      source: { type: 'Literal', value: getImportPath(filePath) },
       specifiers: [
         {
           local: { type: 'Identifier', name: importName },

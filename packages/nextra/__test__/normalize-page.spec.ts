@@ -4,6 +4,12 @@ import { normalizePages } from '../src/client/normalize-pages.js'
 import { collectPageMap } from '../src/server/page-map.js'
 import { cnPageMap, usPageMap } from './fixture/page-maps/pageMap.js'
 
+vi.mock('next/dist/lib/find-pages-dir.js', () => ({
+  findPagesDir: () => ({
+    pagesDir: 'update me in related test'
+  })
+}))
+
 describe('normalize-page', () => {
   it('zh-CN home', () => {
     const result = normalizePages({
@@ -186,7 +192,13 @@ describe('normalize-page', () => {
       'page-maps',
       'display-hidden-for-mobile'
     )
-    const rawJs = await collectPageMap({ dir })
+    let rawJs = await collectPageMap({ dir })
+    // TODO: quick fix, found better approach
+    rawJs = rawJs.replace(
+      /.*/,
+      'import test_fixture_page_maps_display_hidden_for_mobile_meta from "./_meta.ts";'
+    )
+
     await fs.writeFile(path.join(dir, 'generated-page-map.js'), rawJs)
 
     const { pageMap } = await import(
