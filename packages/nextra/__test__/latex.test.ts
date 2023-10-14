@@ -6,10 +6,11 @@ const options = {
   latex: true
 }
 
-describe('latex', () => {
-  it('should convert ```math code block language', async () => {
-    const { result } = await compileMdx('```math\nx^2\n```', options)
-    expect(clean(result)).resolves.toMatchInlineSnapshot(`
+describe('LaTeX', () => {
+  describe('KaTeX', () => {
+    it('should convert ```math code block language', async () => {
+      const { result } = await compileMdx('```math\nx^2\n```', options)
+      expect(clean(result)).resolves.toMatchInlineSnapshot(`
       "const { useMDXComponents: _provideComponents } = arguments[0]
       const title = ''
       const frontMatter = {}
@@ -101,6 +102,7 @@ describe('latex', () => {
       }
       "
     `)
+    })
   })
 
   describe('MathJax', () => {
@@ -112,7 +114,7 @@ describe('latex', () => {
     const INLINE_MATH = '$a=\\sqrt{b^2 + c^2}$'
     const MATH_LANG = '```math\nx^2\n```'
 
-    it('math inline', async () => {
+    it('should convert math inline', async () => {
       const { result } = await compileMdx(INLINE_MATH, options)
       expect(clean(result)).resolves.toMatchInlineSnapshot(`
         "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
@@ -144,7 +146,7 @@ describe('latex', () => {
       `)
     })
 
-    it('```math language', async () => {
+    it('should convert ```math code block language', async () => {
       const { result } = await compileMdx(MATH_LANG, options)
       expect(clean(result)).resolves.toMatchInlineSnapshot(`
       "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
@@ -168,13 +170,14 @@ describe('latex', () => {
     })
 
     it('should add imports only once, and move imports/exports at top', async () => {
-      const { result } = await compileMdx(`${INLINE_MATH}
+      const rawMdx = `${INLINE_MATH}
 
 import foo from 'foo'
 
 export let bar
 
-${MATH_LANG}`, options)
+${MATH_LANG}`
+      const { result } = await compileMdx(rawMdx, options)
       expect(clean(result)).resolves.toMatchInlineSnapshot(`
         "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
         const title = ''

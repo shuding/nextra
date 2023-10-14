@@ -70,8 +70,10 @@ function wrapInBraces(
   mathInline: boolean,
   options: NonNullable<MathJaxOptions>
 ): string {
-  const inlineBraces = options?.config?.tex?.inlineMath?.[0] || ['\\(', '\\)']
-  const displayBraces = options?.config?.tex?.displayMath?.[0] || ['\\[', '\\]']
+  const { inlineMath, displayMath } = options.config?.tex || {}
+
+  const inlineBraces = inlineMath?.[0] || ['\\(', '\\)']
+  const displayBraces = displayMath?.[0] || ['\\[', '\\]']
   const [before, after] = mathInline ? inlineBraces : displayBraces
   return `${before}${source}${after}`
 }
@@ -91,24 +93,24 @@ export const rehypeBetterReactMathjax: Plugin<
       const classes = Array.isArray(node.properties.className)
         ? node.properties.className
         : []
-      // This class can be generated from markdown with ` ```math `.
-      const languageMath = classes.includes('language-math')
-      if (!languageMath) return
+      // This class can be generated from markdown with ` ```math `
+      const hasMathLanguage = classes.includes('language-math')
+      if (!hasMathLanguage) return
 
-      // This class is used by `remark-math` for text math (inline, `$math$`).
-      const mathInline = classes.includes('math-inline')
+      // This class is used by `remark-math` for text math (inline, `$math$`)
+      const isInlineMath = classes.includes('math-inline')
 
       const [{ value }] = node.children as any
-      const bracketedValue = wrapInBraces(value, mathInline, options)
+      const bracketedValue = wrapInBraces(value, isInlineMath, options)
 
       const mathJaxNode: Element = {
         type: 'element',
         tagName: 'MathJax',
         children: [{ type: 'text', value: bracketedValue }],
-        properties: mathInline ? { inline: true } : {}
+        properties: isInlineMath ? { inline: true } : {}
       }
 
-      Object.assign((mathInline ? node : parent) as any, mathJaxNode)
+      Object.assign((isInlineMath ? node : parent) as any, mathJaxNode)
       hasMathJax = true
     })
 
