@@ -43,16 +43,18 @@ export const nextraConfigSchema = z
       z.discriminatedUnion('renderer', [
         z.strictObject({
           renderer: z.literal('mathjax'),
-          options: z.strictObject({
-            /**
-             * URL for MathJax. Defaults to `https://cdnjs.cloudflare.com`
-             */
-            src: z.optional(z.string()),
-            /**
-             * MathJax config. See https://docs.mathjax.org/en/latest/options/index.html
-             */
-            config: z.optional(z.any())
-          })
+          options: z
+            .strictObject({
+              /**
+               * URL for MathJax. Defaults to `https://cdnjs.cloudflare.com`
+               */
+              src: z.optional(z.string()),
+              /**
+               * MathJax config. See https://docs.mathjax.org/en/latest/options/index.html
+               */
+              config: z.optional(z.any())
+            })
+            .optional()
         }),
         z.strictObject({ renderer: z.literal('katex') })
       ])
