@@ -11,10 +11,7 @@ jobs:
     strategy:
       matrix:
         node-version: [18]
-        os: [
-            # ubuntu-latest,
-            windows-latest
-          ]
+        os: [ubuntu-latest, windows-latest]
 
     steps:
       - name: Cancel Previous Runs
