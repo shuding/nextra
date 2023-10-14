@@ -50,7 +50,7 @@ To learn more about KaTeX and its supported functions and conventions, visit
 You can use MathJax as the math renderer instead of KaTeX, by providing an object with
 `renderer: 'mathjax'`:
 
-```js filename="next.config.mjs"
+```js filename="next.config.mjs" {3}
 const withNextra = nextra({
   latex: {
     renderer: 'mathjax'
@@ -82,7 +82,7 @@ export async function getStaticProps() {
 \\int_2^3x^3\\,\\mathrm{d}x
 ~~~
 
-You can also provide additional options, that will be passed to
+You can provide additional options, that will be passed to
 [\`<MathJaxContext />\` component](https://github.com/fast-reflexes/better-react-mathjax#usage) as
 \`props\`.
 

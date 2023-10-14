@@ -14,7 +14,7 @@ import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 import remarkReadingTime from 'remark-reading-time'
 import { bundledLanguages, getHighlighter } from 'shiki'
-import type { Pluggable, PluggableList, Plugin } from 'unified'
+import type { Pluggable, Plugin } from 'unified'
 import type {
   FrontMatter,
   LoaderOptions,
@@ -153,22 +153,6 @@ export async function compileMdx(
 
   const format =
     _format === 'detect' ? (filePath.endsWith('.mdx') ? 'mdx' : 'md') : _format
-
-  const mathPlugin: PluggableList = []
-  if (latex) {
-    if (typeof latex === 'object') {
-      switch (latex.renderer) {
-        case 'katex':
-          mathPlugin.push(rehypeKatex)
-          break
-        case 'mathjax':
-          mathPlugin.push([rehypeBetterReactMathjax, latex.options])
-          break
-      }
-    } else {
-      mathPlugin.push(rehypeKatex)
-    }
-  }
 
   const fileCompatible = filePath ? { value: source, path: filePath } : source
   if (isPageMapImport) {
@@ -318,7 +302,10 @@ export async function compileMdx(
         ],
         [parseMeta, { defaultShowCopyCode }],
         // Should be before `rehypePrettyCode`
-        ...mathPlugin,
+        latex &&
+          (typeof latex === 'object' && latex.renderer === 'mathjax'
+            ? [rehypeBetterReactMathjax, latex.options]
+            : rehypeKatex),
         ...(codeHighlight === false
           ? []
           : [
