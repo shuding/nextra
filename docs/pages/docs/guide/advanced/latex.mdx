@@ -45,24 +45,57 @@ To learn more about KaTeX and its supported functions and conventions, visit
 
 ## MathJax
 
-You can also do display math:
+You can use MathJax as the math renderer instead of katex, by providing an object with
+`renderer: 'mathjax'`:
+
+```js filename="next.config.mjs"
+const withNextra = nextra({
+  latex: {
+    renderer: 'mathjax'
+  }
+})
+```
 
 <MathJaxExample components={{ MathJax, MathJaxContext }} />
 
+```js filename="next.config.mjs" {4-12}
+const withNextra = nextra({
+  latex: {
+    renderer: 'mathjax',
+    options: {
+      config: {
+        tex: {
+          macros: {
+            RR: '\\mathbb{R}'
+          }
+        }
+      }
+    }
+  }
+})
+```
+
 export async function getStaticProps() {
-  const rawMdx = [
-    '```math',
-    '\\int_2^3x^3\\,\\mathrm{d}x',
-    '```',
-    'or macros:',
-    '$\\RR$'
-  ].join('\n')
+  const rawMdx = `~~~math
+\\int_2^3x^3\\,\\mathrm{d}x
+~~~
+
+You can also provide additional options, that will be passed to \`<MathJax />\` component, for
+example macros $\\RR$:`
   const props = await buildDynamicMDX(
     rawMdx,
     {
       latex: {
         renderer: 'mathjax',
-        options: { config: { tex: { macros: { RR: '\\mathbb{R}' } } } }
+        options: {
+          config: {
+            tex: {
+              macros: {
+                RR: '\\mathbb{R}'
+              }
+            }
+          }
+        }
       },
     }
   )

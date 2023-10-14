@@ -6,9 +6,6 @@ import { toText } from 'hast-util-to-text'
 import type { Plugin } from 'unified'
 import { SKIP, visitParents } from 'unist-util-visit-parents'
 
-const emptyOptions = {}
-const emptyClasses: string[] = []
-
 export type Options = { src?: string; config?: MathJax3Config } | undefined
 
 function createImport(name: string) {
@@ -123,26 +120,22 @@ function wrapInBraces(
 ): string {
   const inlineBraces = options?.config?.tex?.inlineMath?.[0] || ['\\(', '\\)']
   const displayBraces = options?.config?.tex?.displayMath?.[0] || ['\\[', '\\]']
-  const braces = displayMath ? displayBraces : inlineBraces
-  return `${braces[0]}${source}${braces[1]}`
+  const [before, after] = displayMath ? displayBraces : inlineBraces
+  return `${before}${source}${after}`
 }
 
 /**
  * Wraps math in a `<MathJax>` component so that it can be rendered by `better-react-mathjax`.
  */
-export const rehypeBetterReactMathjax: Plugin<[Options], Root> = options => {
-  const settings = options || emptyOptions
-
-  /**
-   * Transform.
-   */
-  return tree => {
+export const rehypeBetterReactMathjax: Plugin<[Options], Root> =
+  (options = {}) =>
+  tree => {
     let insertedMath = false
 
     visitParents(tree, 'element', (element, parents) => {
       const classes = Array.isArray(element.properties.className)
         ? element.properties.className
-        : emptyClasses
+        : []
       // This class can be generated from markdown with ` ```math `.
       const languageMath = classes.includes('language-math')
       // This class is used by `remark-math` for flow math (block, `$$\nmath\n$$`).
@@ -179,7 +172,7 @@ export const rehypeBetterReactMathjax: Plugin<[Options], Root> = options => {
       }
 
       const value = toText(scope, { whitespace: 'pre' })
-      const bracketedValue = wrapInBraces(value, displayMode, settings)
+      const bracketedValue = wrapInBraces(value, displayMode, options)
 
       const result: Element = {
         type: 'element',
@@ -216,7 +209,7 @@ export const rehypeBetterReactMathjax: Plugin<[Options], Root> = options => {
       }
 
       // Wrap everything in a `<MathJaxContext>` component.
-      tree.children = [wrapInMathJaxContext(tree.children, settings) as any]
+      tree.children = [wrapInMathJaxContext(tree.children, options) as any]
 
       // if (!included.MathJax) {
       //   tree.children.push(createImport('MathJax') as any)
@@ -226,4 +219,3 @@ export const rehypeBetterReactMathjax: Plugin<[Options], Root> = options => {
       // }
     }
   }
-}
