@@ -1,4 +1,3 @@
-import type { MathJax3Config } from 'better-react-mathjax'
 import type { ImportDeclaration } from 'estree'
 import { valueToEstree } from 'estree-util-value-to-estree'
 import type { Element, Root, RootContent } from 'hast'
@@ -6,8 +5,9 @@ import type { MdxJsxAttribute } from 'hast-util-to-estree/lib'
 import { toText } from 'hast-util-to-text'
 import type { Plugin } from 'unified'
 import { SKIP, visitParents } from 'unist-util-visit-parents'
+import type { MathJaxOptions } from '../../types'
 
-export type Options = { src?: string; config?: MathJax3Config } | undefined
+export type Options = MathJaxOptions
 
 const MATHJAX_IMPORTS = {
   type: 'mdxjsEsm',

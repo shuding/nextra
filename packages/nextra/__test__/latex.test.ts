@@ -103,12 +103,47 @@ describe('latex', () => {
     `)
   })
 
-  it('should use mathjax', async () => {
-    const { result } = await compileMdx('```math\nx^2\n```', {
+  describe('MathJax', () => {
+    const options = {
       mdxOptions: { jsx: true, outputFormat: 'program' },
       latex: { renderer: 'mathjax' }
+    } as const
+
+    it('inline math', async () => {
+      const { result } = await compileMdx('$a=\\sqrt{b^2 + c^2}$', options)
+      expect(clean(result)).resolves.toMatchInlineSnapshot(`
+        "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+        const title = ''
+        const frontMatter = {}
+        import { MathJax, MathJaxContext } from 'nextra/components'
+        export function useTOC(props) {
+          return []
+        }
+        function MDXLayout(props) {
+          const _components = Object.assign(
+            {
+              p: 'p'
+            },
+            _provideComponents(),
+            props.components
+          )
+          return (
+            <MathJaxContext>
+              {'\\\\n'}
+              {'\\\\n'}
+              <_components.p>
+                <MathJax inline>{'\\\\\\\\(a=\\\\\\\\sqrt{b^2 + c^2}\\\\\\\\)'}</MathJax>
+              </_components.p>
+            </MathJaxContext>
+          )
+        }
+        "
+      `)
     })
-    expect(clean(result)).resolves.toMatchInlineSnapshot(`
+
+    it('```math language', async () => {
+      const { result } = await compileMdx('```math\nx^2\n```', options)
+      expect(clean(result)).resolves.toMatchInlineSnapshot(`
       "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
       const title = ''
       const frontMatter = {}
@@ -127,5 +162,6 @@ describe('latex', () => {
       }
       "
     `)
+    })
   })
 })

@@ -1,4 +1,5 @@
 import type { ProcessorOptions } from '@mdx-js/mdx'
+import type { MathJax3Config } from 'better-react-mathjax'
 import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
 import { z } from 'zod'
 import type { PageOpts } from '../types'
@@ -31,6 +32,20 @@ type Transform = (
   }
 ) => string | Promise<string>
 
+export const mathJaxOptionsSchema = z
+  .strictObject({
+    /**
+     * URL for MathJax. Defaults to `https://cdnjs.cloudflare.com`
+     */
+    src: z.string(),
+    /**
+     * MathJax config. See https://docs.mathjax.org/en/latest/options/index.html
+     */
+    config: z.custom<MathJax3Config>()
+  })
+  .deepPartial()
+  .optional()
+
 export const nextraConfigSchema = z
   .strictObject({
     themeConfig: z.string(),
@@ -38,27 +53,12 @@ export const nextraConfigSchema = z
     search: searchSchema,
     staticImage: z.boolean(),
     readingTime: z.boolean(),
-    latex: z.union([
-      z.boolean(),
-      z.discriminatedUnion('renderer', [
-        z.strictObject({
-          renderer: z.literal('mathjax'),
-          options: z
-            .strictObject({
-              /**
-               * URL for MathJax. Defaults to `https://cdnjs.cloudflare.com`
-               */
-              src: z.optional(z.string()),
-              /**
-               * MathJax config. See https://docs.mathjax.org/en/latest/options/index.html
-               */
-              config: z.optional(z.any())
-            })
-            .optional()
-        }),
-        z.strictObject({ renderer: z.literal('katex') })
-      ])
-    ]),
+    latex: z.boolean().or(
+      z.strictObject({
+        renderer: z.literal('mathjax'),
+        options: mathJaxOptionsSchema
+      })
+    ),
     codeHighlight: z.boolean(),
     /**
      * A function to modify the code of compiled MDX pages.
