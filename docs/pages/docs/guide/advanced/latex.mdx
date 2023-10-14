@@ -1,6 +1,8 @@
 import { buildDynamicMDX } from 'nextra/remote'
 import { Callout, RemoteContent as MathJaxExample, MathJax, MathJaxContext } from 'nextra/components'
 
+# LaTeX
+
 Nextra uses [KaTeX](https://katex.org/) to render LaTeX expressions directly in MDX.
 To enable LaTeX support, you must enable the `latex` option in your `next.config.mjs` file:
 
@@ -45,7 +47,7 @@ To learn more about KaTeX and its supported functions and conventions, visit
 
 ## MathJax
 
-You can use MathJax as the math renderer instead of katex, by providing an object with
+You can use MathJax as the math renderer instead of KaTeX, by providing an object with
 `renderer: 'mathjax'`:
 
 ```js filename="next.config.mjs"
@@ -80,8 +82,11 @@ export async function getStaticProps() {
 \\int_2^3x^3\\,\\mathrm{d}x
 ~~~
 
-You can also provide additional options, that will be passed to \`<MathJax />\` component, for
-example macros $\\RR$:`
+You can also provide additional options, that will be passed to
+[\`<MathJaxContext />\` component](https://github.com/fast-reflexes/better-react-mathjax#usage) as
+\`config\` attribute.
+
+For example macros \`$\\RR$\` will be rendered as $\\RR$, with following config:`
   const props = await buildDynamicMDX(
     rawMdx,
     {
@@ -99,5 +104,6 @@ example macros $\\RR$:`
       },
     }
   )
+  props.__nextra_dynamic_opts.title = 'LaTeX'
   return { props }
 }

@@ -1,5 +1,5 @@
 import type { MathJax3Config } from 'better-react-mathjax'
-import type { ImportDeclaration, ImportSpecifier } from 'estree'
+import type { ImportDeclaration } from 'estree'
 import type { Element, Root, RootContent } from 'hast'
 import type { MdxJsxAttribute } from 'hast-util-to-estree/lib'
 import { toText } from 'hast-util-to-text'
@@ -36,49 +36,48 @@ function wrapInMathJaxContext(
   options: NonNullable<Options>
 ) {
   const config = options.config || {}
-  const attributes: MdxJsxAttribute[] =
-    Object.keys(config).length === 0
-      ? []
-      : [
-          {
-            type: 'mdxJsxAttribute',
-            name: 'config',
-            value: {
-              type: 'mdxJsxAttributeValueExpression',
-              value: `JSON.parse(${JSON.stringify(JSON.stringify(config))})`,
-              data: {
-                estree: {
-                  type: 'Program',
-                  body: [
-                    {
-                      type: 'ExpressionStatement',
-                      expression: {
-                        type: 'CallExpression',
-                        callee: {
-                          type: 'MemberExpression',
-                          object: { type: 'Identifier', name: 'JSON' },
-                          property: { type: 'Identifier', name: 'parse' },
-                          computed: false,
-                          optional: false
-                        },
-                        arguments: [
-                          {
-                            type: 'Literal',
-                            value: JSON.stringify(config),
-                            raw: JSON.stringify(JSON.stringify(config))
-                          }
-                        ],
+  const attributes: MdxJsxAttribute[] = Object.keys(config).length
+    ? [
+        {
+          type: 'mdxJsxAttribute',
+          name: 'config',
+          value: {
+            type: 'mdxJsxAttributeValueExpression',
+            value: '',
+            data: {
+              estree: {
+                type: 'Program',
+                body: [
+                  {
+                    type: 'ExpressionStatement',
+                    expression: {
+                      type: 'CallExpression',
+                      optional: false,
+                      callee: {
+                        type: 'MemberExpression',
+                        object: { type: 'Identifier', name: 'JSON' },
+                        property: { type: 'Identifier', name: 'parse' },
+                        computed: false,
                         optional: false
-                      }
+                      },
+                      arguments: [
+                        {
+                          type: 'Literal',
+                          value: JSON.stringify(config),
+                          raw: JSON.stringify(JSON.stringify(config))
+                        }
+                      ]
                     }
-                  ],
-                  sourceType: 'module',
-                  comments: []
-                }
+                  }
+                ],
+                sourceType: 'module',
+                comments: []
               }
             }
           }
-        ]
+        }
+      ]
+    : []
   if (options.src) {
     attributes.push({
       type: 'mdxJsxAttribute',
@@ -94,20 +93,11 @@ function wrapInMathJaxContext(
         type: 'mdxJsxFlowElement',
         name: 'MathJaxContext',
         attributes,
-        children,
-        data: {
-          _mdxExplicitJsx: true
-        }
+        children
       }
     ]
   }
 }
-
-const isMdxJsEsm = (node: any) => node.type === 'mdxjsEsm'
-const isImportDeclaration = (node: any) =>
-  node.data.estree.body[0].type === 'ImportDeclaration'
-const isImportFrom = (node: any) =>
-  node.data.estree.body[0].source.value === 'better-react-mathjax'
 
 /**
  * Wrap the math in the appropriate braces. Defaults to `\(...\)` for inline and `\[...\]` for display,
@@ -130,7 +120,7 @@ function wrapInBraces(
 export const rehypeBetterReactMathjax: Plugin<[Options], Root> =
   (options = {}) =>
   tree => {
-    let insertedMath = false
+    let hasMathJax = false
 
     visitParents(tree, 'element', (element, parents) => {
       const classes = Array.isArray(element.properties.className)
@@ -183,39 +173,24 @@ export const rehypeBetterReactMathjax: Plugin<[Options], Root> =
 
       const index = parent.children.indexOf(scope)
       parent.children.splice(index, 1, result)
-      insertedMath = true
+      hasMathJax = true
       return SKIP
     })
 
-    if (insertedMath) {
-      // Add the import statement if one is not present.
-      const imports = tree.children.filter(
-        (node: any) =>
-          isMdxJsEsm(node) && isImportDeclaration(node) && isImportFrom(node)
-      )
-      // Look for `MathJax` and `MathJaxContext` in the import statements.
-      const included = { MathJax: false, MathJaxContext: false }
-      for (const { data: _data } of imports) {
-        const data = _data as any
-        const [{ specifiers }]: [{ specifiers: ImportSpecifier[] }] =
-          data.estree.body
-        for (const spec of specifiers) {
-          if (spec.imported.name === 'MathJax') {
-            included.MathJax = true
-          } else if (spec.imported.name === 'MathJaxContext') {
-            included.MathJaxContext = true
-          }
+    if (hasMathJax) {
+      const mdxjsEsmNodes = []
+      const rest = []
+      for (const child of tree.children) {
+        if (child.type === ('mdxjsEsm' as any)) {
+          mdxjsEsmNodes.push(child)
+        } else {
+          rest.push(child)
         }
       }
-
-      // Wrap everything in a `<MathJaxContext>` component.
-      tree.children = [wrapInMathJaxContext(tree.children, options) as any]
-
-      // if (!included.MathJax) {
-      //   tree.children.push(createImport('MathJax') as any)
-      // }
-      // if (!included.MathJaxContext) {
-      //   tree.children.push(createImport('MathJaxContext') as any)
-      // }
+      tree.children = [
+        ...mdxjsEsmNodes,
+        // Wrap everything in a `<MathJaxContext />` component.
+        wrapInMathJaxContext(rest, options)
+      ] as any
     }
   }
