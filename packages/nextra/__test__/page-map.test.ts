@@ -2,6 +2,12 @@ import path from 'node:path'
 import { CWD } from '../src/server/constants.js'
 import { collectPageMap } from '../src/server/page-map.js'
 
+vi.mock('next/dist/lib/find-pages-dir.js', () => ({
+  findPagesDir: () => ({
+    pagesDir: 'update me in related test'
+  })
+}))
+
 describe('collectPageMap', () => {
   it('should work', async () => {
     const dir = path.join(
