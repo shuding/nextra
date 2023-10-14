@@ -303,8 +303,10 @@ export async function compileMdx(
         [parseMeta, { defaultShowCopyCode }],
         // Should be before `rehypePrettyCode`
         latex &&
-          (typeof latex === 'object' && latex.renderer === 'mathjax'
-            ? [rehypeBetterReactMathjax, latex.options, isRemoteContent]
+          (typeof latex === 'object'
+            ? latex.renderer === 'mathjax'
+              ? [rehypeBetterReactMathjax, latex.options, isRemoteContent]
+              : [rehypeKatex, latex.options]
             : rehypeKatex),
         ...(codeHighlight === false
           ? []
