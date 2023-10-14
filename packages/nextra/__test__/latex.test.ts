@@ -109,7 +109,7 @@ describe('latex', () => {
       latex: { renderer: 'mathjax' }
     } as const
 
-    it('inline math', async () => {
+    it('math inline', async () => {
       const { result } = await compileMdx('$a=\\sqrt{b^2 + c^2}$', options)
       expect(clean(result)).resolves.toMatchInlineSnapshot(`
         "import { useMDXComponents as _provideComponents } from 'nextra/mdx'

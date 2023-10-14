@@ -7,8 +7,6 @@ import type { Plugin } from 'unified'
 import { SKIP, visitParents } from 'unist-util-visit-parents'
 import type { MathJaxOptions } from '../../types'
 
-export type Options = MathJaxOptions
-
 const MATHJAX_IMPORTS = {
   type: 'mdxjsEsm',
   data: {
@@ -30,7 +28,7 @@ const MATHJAX_IMPORTS = {
 
 function wrapInMathJaxContext(
   children: RootContent[],
-  { config, src }: NonNullable<Options>
+  { config, src }: NonNullable<MathJaxOptions>
 ) {
   const attributes: MdxJsxAttribute[] = []
   if (src) {
@@ -74,7 +72,7 @@ function wrapInMathJaxContext(
 function wrapInBraces(
   source: string,
   displayMath: boolean,
-  options: NonNullable<Options>
+  options: NonNullable<MathJaxOptions>
 ): string {
   const inlineBraces = options?.config?.tex?.inlineMath?.[0] || ['\\(', '\\)']
   const displayBraces = options?.config?.tex?.displayMath?.[0] || ['\\[', '\\]']
@@ -86,7 +84,7 @@ function wrapInBraces(
  * Wraps math in a `<MathJax>` component so that it can be rendered by `better-react-mathjax`.
  */
 export const rehypeBetterReactMathjax: Plugin<
-  [Opts: Options, isRemoteContent: boolean],
+  [Opts: MathJaxOptions, isRemoteContent: boolean],
   Root
 > =
   (options = {}, isRemoteContent) =>
@@ -99,16 +97,14 @@ export const rehypeBetterReactMathjax: Plugin<
         : []
       // This class can be generated from markdown with ` ```math `.
       const languageMath = classes.includes('language-math')
-      // This class is used by `remark-math` for flow math (block, `$$\nmath\n$$`).
-      const mathDisplay = classes.includes('math-display')
       // This class is used by `remark-math` for text math (inline, `$math$`).
       const mathInline = classes.includes('math-inline')
-      let displayMode = mathDisplay
 
       // Any class is fine.
-      if (!languageMath && !mathDisplay && !mathInline) {
+      if (!languageMath && !mathInline) {
         return
       }
+      let displayMode = false
 
       let parent = parents.at(-1)
       let scope = element
