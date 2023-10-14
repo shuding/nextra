@@ -42,7 +42,7 @@ type SkipNavLinkProps = Omit<
 }
 
 export const SkipNavLink = forwardRef<HTMLAnchorElement, SkipNavLinkProps>(
-  function (
+  (
     {
       className: providedClassName,
       id,
@@ -51,7 +51,7 @@ export const SkipNavLink = forwardRef<HTMLAnchorElement, SkipNavLinkProps>(
       ...props
     },
     forwardedRef
-  ): ReactElement {
+  ): ReactElement => {
     const className =
       providedClassName === undefined // Give the option to the user to pass a falsy other than undefined to remove the default styles
         ? styled // Give the user a way to opt-in the default style provided with the theme. Probably remove this option in the next major version (v3.x) and just do a check to use the providedClassName or the default
@@ -71,23 +71,19 @@ export const SkipNavLink = forwardRef<HTMLAnchorElement, SkipNavLinkProps>(
         ref={forwardedRef}
         href={`#${id || DEFAULT_ID}`}
         className={className}
-        // TODO: Remove in version v3.x. Must keep for compatibility reasons
-        data-reach-skip-link=""
       >
         {label}
       </a>
     )
   }
 )
-
 SkipNavLink.displayName = 'SkipNavLink'
 
 type SkipNavContentProps = Omit<ComponentProps<'div'>, 'ref' | 'children'>
 
 export const SkipNavContent = forwardRef<HTMLDivElement, SkipNavContentProps>(
-  function ({ id, ...props }, forwardedRef): ReactElement {
-    return <div {...props} ref={forwardedRef} id={id || DEFAULT_ID} />
-  }
+  ({ id, ...props }, forwardedRef): ReactElement => (
+    <div {...props} ref={forwardedRef} id={id || DEFAULT_ID} />
+  )
 )
-
 SkipNavContent.displayName = 'SkipNavContent'

@@ -56,6 +56,8 @@ module.exports = {
           }
         ],
         'prefer-object-spread': 'error',
+        'prefer-arrow-callback': ['error', { allowNamedFunctions: true }],
+        'unicorn/prefer-at': 'error',
         // todo: enable
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-non-null-assertion': 'off',

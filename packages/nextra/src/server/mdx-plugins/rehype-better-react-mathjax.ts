@@ -3,6 +3,7 @@ import type { ImportDeclaration, ImportSpecifier } from 'estree'
 import type { Element, Root, RootContent } from 'hast'
 import type { MdxJsxAttribute } from 'hast-util-to-estree/lib'
 import { toText } from 'hast-util-to-text'
+import type { Plugin } from 'unified'
 import { SKIP, visitParents } from 'unist-util-visit-parents'
 
 const emptyOptions = {}
@@ -58,14 +59,8 @@ function wrapInMathJaxContext(
                         type: 'CallExpression',
                         callee: {
                           type: 'MemberExpression',
-                          object: {
-                            type: 'Identifier',
-                            name: 'JSON'
-                          },
-                          property: {
-                            type: 'Identifier',
-                            name: 'parse'
-                          },
+                          object: { type: 'Identifier', name: 'JSON' },
+                          property: { type: 'Identifier', name: 'parse' },
                           computed: false,
                           optional: false
                         },
@@ -135,16 +130,16 @@ function wrapInBraces(
 /**
  * Wraps math in a `<MathJax>` component so that it can be rendered by `better-react-mathjax`.
  */
-export function rehypeBetterReactMathjax(options: Options) {
+export const rehypeBetterReactMathjax: Plugin<[Options], Root> = options => {
   const settings = options || emptyOptions
 
   /**
    * Transform.
    */
-  return function (tree: Root) {
+  return tree => {
     let insertedMath = false
 
-    visitParents(tree, 'element', function (element, parents) {
+    visitParents(tree, 'element', (element, parents) => {
       const classes = Array.isArray(element.properties.className)
         ? element.properties.className
         : emptyClasses
@@ -161,7 +156,7 @@ export function rehypeBetterReactMathjax(options: Options) {
         return
       }
 
-      let parent = parents[parents.length - 1]
+      let parent = parents.at(-1)
       let scope = element
 
       // If this was generated with ` ```math `, replace the `<pre>` and use
@@ -174,7 +169,7 @@ export function rehypeBetterReactMathjax(options: Options) {
         parent.tagName === 'pre'
       ) {
         scope = parent
-        parent = parents[parents.length - 2]
+        parent = parents.at(-2)!
         displayMode = true
       }
 
@@ -214,8 +209,7 @@ export function rehypeBetterReactMathjax(options: Options) {
         for (const spec of specifiers) {
           if (spec.imported.name === 'MathJax') {
             included.MathJax = true
-          }
-          if (spec.imported.name === 'MathJaxContext') {
+          } else if (spec.imported.name === 'MathJaxContext') {
             included.MathJaxContext = true
           }
         }
@@ -224,12 +218,12 @@ export function rehypeBetterReactMathjax(options: Options) {
       // Wrap everything in a `<MathJaxContext>` component.
       tree.children = [wrapInMathJaxContext(tree.children, settings) as any]
 
-      if (!included.MathJax) {
-        tree.children.push(createImport('MathJax') as any)
-      }
-      if (!included.MathJaxContext) {
-        tree.children.push(createImport('MathJaxContext') as any)
-      }
+      // if (!included.MathJax) {
+      //   tree.children.push(createImport('MathJax') as any)
+      // }
+      // if (!included.MathJaxContext) {
+      //   tree.children.push(createImport('MathJaxContext') as any)
+      // }
     }
   }
 }

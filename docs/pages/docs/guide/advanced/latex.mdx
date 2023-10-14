@@ -1,9 +1,10 @@
-# LaTeX
+import { buildDynamicMDX } from 'nextra/remote'
+import { Callout, RemoteContent as MathJaxExample, MathJax, MathJaxContext } from 'nextra/components'
 
 Nextra uses [KaTeX](https://katex.org/) to render LaTeX expressions directly in MDX.
 To enable LaTeX support, you must enable the `latex` option in your `next.config.mjs` file:
 
-```js filename="next.config.mjs"
+```js filename="next.config.mjs" {4}
 import nextra from 'nextra'
 
 const withNextra = nextra({
@@ -31,8 +32,6 @@ will be rendered as:
 
 You can still use [Markdown and MDX syntax](../markdown) in the same line as your LaTeX expression.
 
-import { Callout } from 'nextra/components'
-
 <Callout>
   If you want to display `$` in your content instead of rendering it as an
   equation, you can escape it with a backslash (`\`). For example `\$e = mc^2\$`
@@ -41,4 +40,31 @@ import { Callout } from 'nextra/components'
 
 ## API
 
-To learn more about KaTeX and its supported functions and conventions, visit [KaTeX’s documentation](https://katex.org/docs/supported.html).
+To learn more about KaTeX and its supported functions and conventions, visit
+[KaTeX’s documentation](https://katex.org/docs/supported.html).
+
+## MathJax
+
+You can also do display math:
+
+<MathJaxExample components={{ MathJax, MathJaxContext }} />
+
+export async function getStaticProps() {
+  const rawMdx = [
+    '```math',
+    '\\int_2^3x^3\\,\\mathrm{d}x',
+    '```',
+    'or macros:',
+    '$\\RR$'
+  ].join('\n')
+  const props = await buildDynamicMDX(
+    rawMdx,
+    {
+      latex: {
+        renderer: 'mathjax',
+        options: { config: { tex: { macros: { RR: '\\mathbb{R}' } } } }
+      },
+    }
+  )
+  return { props }
+}

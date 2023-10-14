@@ -143,7 +143,6 @@
     "unist-util-remove": "^4.0.0",
     "unist-util-visit": "^5.0.0",
     "unist-util-visit-parents": "^6.0.1",
-    "vfile": "^6.0.1",
     "yaml": "^2.3.2",
     "zod": "^3.22.3",
     "zod-validation-error": "^1.5.0"

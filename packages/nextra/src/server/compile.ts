@@ -250,7 +250,7 @@ export async function compileMdx(
 
     return {
       result,
-      ...(title && { title }),
+      title,
       ...(hasJsxInH1 && { hasJsxInH1 }),
       ...(readingTime && { readingTime }),
       ...(searchIndexKey !== null && { searchIndexKey, structurizedData }),
