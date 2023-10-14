@@ -304,7 +304,7 @@ export async function compileMdx(
         // Should be before `rehypePrettyCode`
         latex &&
           (typeof latex === 'object' && latex.renderer === 'mathjax'
-            ? [rehypeBetterReactMathjax, latex.options]
+            ? [rehypeBetterReactMathjax, latex.options, isRemoteContent]
             : rehypeKatex),
         ...(codeHighlight === false
           ? []

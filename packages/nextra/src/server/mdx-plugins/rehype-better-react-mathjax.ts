@@ -9,25 +9,21 @@ import { SKIP, visitParents } from 'unist-util-visit-parents'
 
 export type Options = { src?: string; config?: MathJax3Config } | undefined
 
-function createImport(name: string) {
-  return {
-    type: 'mdxjsEsm',
-    data: {
-      estree: {
-        body: [
-          {
-            type: 'ImportDeclaration',
-            source: { type: 'Literal', value: 'better-react-mathjax' },
-            specifiers: [
-              {
-                type: 'ImportSpecifier',
-                imported: { type: 'Identifier', name },
-                local: { type: 'Identifier', name }
-              }
-            ]
-          } satisfies ImportDeclaration
-        ]
-      }
+const MATHJAX_IMPORTS = {
+  type: 'mdxjsEsm',
+  data: {
+    estree: {
+      body: [
+        {
+          type: 'ImportDeclaration',
+          source: { type: 'Literal', value: 'nextra/components' },
+          specifiers: ['MathJax', 'MathJaxContext'].map(name => ({
+            type: 'ImportSpecifier',
+            imported: { type: 'Identifier', name },
+            local: { type: 'Identifier', name }
+          }))
+        } satisfies ImportDeclaration
+      ]
     }
   }
 }
@@ -94,80 +90,81 @@ function wrapInBraces(
 /**
  * Wraps math in a `<MathJax>` component so that it can be rendered by `better-react-mathjax`.
  */
-export const rehypeBetterReactMathjax: Plugin<[Options], Root> =
-  (options = {}) =>
-  tree => {
-    let hasMathJax = false
+export const rehypeBetterReactMathjax: Plugin<[Options, isRemoteContent: boolean], Root> =
+  (options = {}, isRemoteContent) =>
+    tree => {
+      let hasMathJax = false
 
-    visitParents(tree, 'element', (element, parents) => {
-      const classes = Array.isArray(element.properties.className)
-        ? element.properties.className
-        : []
-      // This class can be generated from markdown with ` ```math `.
-      const languageMath = classes.includes('language-math')
-      // This class is used by `remark-math` for flow math (block, `$$\nmath\n$$`).
-      const mathDisplay = classes.includes('math-display')
-      // This class is used by `remark-math` for text math (inline, `$math$`).
-      const mathInline = classes.includes('math-inline')
-      let displayMode = mathDisplay
+      visitParents(tree, 'element', (element, parents) => {
+        const classes = Array.isArray(element.properties.className)
+          ? element.properties.className
+          : []
+        // This class can be generated from markdown with ` ```math `.
+        const languageMath = classes.includes('language-math')
+        // This class is used by `remark-math` for flow math (block, `$$\nmath\n$$`).
+        const mathDisplay = classes.includes('math-display')
+        // This class is used by `remark-math` for text math (inline, `$math$`).
+        const mathInline = classes.includes('math-inline')
+        let displayMode = mathDisplay
 
-      // Any class is fine.
-      if (!languageMath && !mathDisplay && !mathInline) {
-        return
+        // Any class is fine.
+        if (!languageMath && !mathDisplay && !mathInline) {
+          return
+        }
+
+        let parent = parents.at(-1)
+        let scope = element
+
+        // If this was generated with ` ```math `, replace the `<pre>` and use
+        // display.
+        if (
+          element.tagName === 'code' &&
+          languageMath &&
+          parent &&
+          parent.type === 'element' &&
+          parent.tagName === 'pre'
+        ) {
+          scope = parent
+          parent = parents.at(-2)!
+          displayMode = true
+        }
+
+        /* c8 ignore next -- verbose to test. */
+        if (!parent) {
+          return
+        }
+
+        const value = toText(scope, { whitespace: 'pre' })
+        const bracketedValue = wrapInBraces(value, displayMode, options)
+
+        const result: Element = {
+          type: 'element',
+          tagName: 'MathJax',
+          children: [{ type: 'text', value: bracketedValue }],
+          properties: displayMode ? {} : { inline: true }
+        }
+
+        const index = parent.children.indexOf(scope)
+        parent.children.splice(index, 1, result)
+        hasMathJax = true
+        return SKIP
+      })
+
+      if (!hasMathJax) return
+
+      const mdxjsEsmNodes = []
+      const rest = []
+      for (const child of tree.children) {
+        if (child.type === ('mdxjsEsm' as any)) {
+          mdxjsEsmNodes.push(child)
+        } else {
+          rest.push(child)
+        }
       }
-
-      let parent = parents.at(-1)
-      let scope = element
-
-      // If this was generated with ` ```math `, replace the `<pre>` and use
-      // display.
-      if (
-        element.tagName === 'code' &&
-        languageMath &&
-        parent &&
-        parent.type === 'element' &&
-        parent.tagName === 'pre'
-      ) {
-        scope = parent
-        parent = parents.at(-2)!
-        displayMode = true
-      }
-
-      /* c8 ignore next -- verbose to test. */
-      if (!parent) {
-        return
-      }
-
-      const value = toText(scope, { whitespace: 'pre' })
-      const bracketedValue = wrapInBraces(value, displayMode, options)
-
-      const result: Element = {
-        type: 'element',
-        tagName: 'MathJax',
-        children: [{ type: 'text', value: bracketedValue }],
-        properties: displayMode ? {} : { inline: true }
-      }
-
-      const index = parent.children.indexOf(scope)
-      parent.children.splice(index, 1, result)
-      hasMathJax = true
-      return SKIP
-    })
-
-    if (!hasMathJax) return
-
-    const mdxjsEsmNodes = []
-    const rest = []
-    for (const child of tree.children) {
-      if (child.type === ('mdxjsEsm' as any)) {
-        mdxjsEsmNodes.push(child)
-      } else {
-        rest.push(child)
-      }
+      tree.children = [
+        ...mdxjsEsmNodes,
+        ...(isRemoteContent ? [] : [MATHJAX_IMPORTS]),
+        // Wrap everything in a `<MathJaxContext />` component.
+        wrapInMathJaxContext(rest, options)
+      ] as any
     }
-    tree.children = [
-      ...mdxjsEsmNodes,
-      // Wrap everything in a `<MathJaxContext />` component.
-      wrapInMathJaxContext(rest, options)
-    ] as any
-  }

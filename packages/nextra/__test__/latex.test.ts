@@ -112,28 +112,17 @@ describe('latex', () => {
       "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
       const title = ''
       const frontMatter = {}
+      import { MathJax, MathJaxContext } from 'nextra/components'
       export function useTOC(props) {
         return []
       }
       function MDXLayout(props) {
-        const { MathJaxContext, MathJax } = Object.assign({}, _provideComponents(), props.components)
-        if (!MathJax) _missingMdxReference('MathJax', true)
-        if (!MathJaxContext) _missingMdxReference('MathJaxContext', true)
         return (
           <MathJaxContext>
             {'\\\\n'}
             {'\\\\n'}
             <MathJax>{'\\\\\\\\[x^2\\\\n\\\\\\\\]'}</MathJax>
           </MathJaxContext>
-        )
-      }
-      function _missingMdxReference(id, component) {
-        throw new Error(
-          'Expected ' +
-            (component ? 'component' : 'object') +
-            ' \`' +
-            id +
-            '\` to be defined: you likely forgot to import, pass, or provide it.'
         )
       }
       "
