@@ -1,5 +1,16 @@
 # nextra-theme-blog
 
+## 3.0.0-alpha.8
+
+### Minor Changes
+
+- 440ff42d: add MathJax support
+
+### Patch Changes
+
+- Updated dependencies [440ff42d]
+  - nextra@3.0.0-alpha.8
+
 ## 3.0.0-alpha.7
 
 ### Patch Changes
