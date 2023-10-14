@@ -30,11 +30,13 @@ const MATHJAX_IMPORTS = {
 
 function wrapInMathJaxContext(
   children: RootContent[],
-  options: NonNullable<Options>
+  { config, src }: NonNullable<Options>
 ) {
-  const config = options.config || {}
   const attributes: MdxJsxAttribute[] = []
-  if (Object.keys(config).length) {
+  if (src) {
+    attributes.push({ type: 'mdxJsxAttribute', name: 'src', value: src })
+  }
+  if (config && Object.keys(config).length) {
     attributes.push({
       type: 'mdxJsxAttribute',
       name: 'config',
@@ -54,13 +56,6 @@ function wrapInMathJaxContext(
           }
         }
       }
-    })
-  }
-  if (options.src) {
-    attributes.push({
-      type: 'mdxJsxAttribute',
-      name: 'src',
-      value: options.src
     })
   }
 
