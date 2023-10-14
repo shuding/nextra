@@ -84,9 +84,9 @@ export async function getStaticProps() {
 
 You can also provide additional options, that will be passed to
 [\`<MathJaxContext />\` component](https://github.com/fast-reflexes/better-react-mathjax#usage) as
-\`config\` attribute.
+\`props\`.
 
-For example macros \`$\\RR$\` will be rendered as $\\RR$, with following config:`
+For example macros \`$\\RR$\` will be rendered as $\\RR$, while providing \`config\`:`
   const props = await buildDynamicMDX(
     rawMdx,
     {
