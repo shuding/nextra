@@ -6,10 +6,11 @@ const options = {
   latex: true
 }
 
-describe('latex', () => {
-  it('should convert ```math code block language', async () => {
-    const { result } = await compileMdx('```math\nx^2\n```', options)
-    expect(clean(result)).resolves.toMatchInlineSnapshot(`
+describe('LaTeX', () => {
+  describe('KaTeX', () => {
+    it('should convert ```math code block language', async () => {
+      const { result } = await compileMdx('```math\nx^2\n```', options)
+      expect(clean(result)).resolves.toMatchInlineSnapshot(`
       "const { useMDXComponents: _provideComponents } = arguments[0]
       const title = ''
       const frontMatter = {}
@@ -101,5 +102,116 @@ describe('latex', () => {
       }
       "
     `)
+    })
+  })
+
+  describe('MathJax', () => {
+    const options = {
+      mdxOptions: { jsx: true, outputFormat: 'program' },
+      latex: { renderer: 'mathjax' }
+    } as const
+
+    const INLINE_MATH = '$a=\\sqrt{b^2 + c^2}$'
+    const MATH_LANG = '```math\nx^2\n```'
+
+    it('should convert math inline', async () => {
+      const { result } = await compileMdx(INLINE_MATH, options)
+      expect(clean(result)).resolves.toMatchInlineSnapshot(`
+        "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+        const title = ''
+        const frontMatter = {}
+        import { MathJax, MathJaxContext } from 'nextra/components'
+        export function useTOC(props) {
+          return []
+        }
+        function MDXLayout(props) {
+          const _components = Object.assign(
+            {
+              p: 'p'
+            },
+            _provideComponents(),
+            props.components
+          )
+          return (
+            <MathJaxContext>
+              {'\\\\n'}
+              {'\\\\n'}
+              <_components.p>
+                <MathJax inline>{'\\\\\\\\(a=\\\\\\\\sqrt{b^2 + c^2}\\\\\\\\)'}</MathJax>
+              </_components.p>
+            </MathJaxContext>
+          )
+        }
+        "
+      `)
+    })
+
+    it('should convert ```math code block language', async () => {
+      const { result } = await compileMdx(MATH_LANG, options)
+      expect(clean(result)).resolves.toMatchInlineSnapshot(`
+      "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+      const title = ''
+      const frontMatter = {}
+      import { MathJax, MathJaxContext } from 'nextra/components'
+      export function useTOC(props) {
+        return []
+      }
+      function MDXLayout(props) {
+        return (
+          <MathJaxContext>
+            {'\\\\n'}
+            {'\\\\n'}
+            <MathJax>{'\\\\\\\\[x^2\\\\n\\\\\\\\]'}</MathJax>
+          </MathJaxContext>
+        )
+      }
+      "
+    `)
+    })
+
+    it('should add imports only once, and move imports/exports at top', async () => {
+      const rawMdx = `${INLINE_MATH}
+
+import foo from 'foo'
+
+export let bar
+
+${MATH_LANG}`
+      const { result } = await compileMdx(rawMdx, options)
+      expect(clean(result)).resolves.toMatchInlineSnapshot(`
+        "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+        const title = ''
+        const frontMatter = {}
+        import foo from 'foo'
+        export let bar
+        import { MathJax, MathJaxContext } from 'nextra/components'
+        export function useTOC(props) {
+          return []
+        }
+        function MDXLayout(props) {
+          const _components = Object.assign(
+            {
+              p: 'p'
+            },
+            _provideComponents(),
+            props.components
+          )
+          return (
+            <MathJaxContext>
+              {'\\\\n'}
+              {'\\\\n'}
+              <_components.p>
+                <MathJax inline>{'\\\\\\\\(a=\\\\\\\\sqrt{b^2 + c^2}\\\\\\\\)'}</MathJax>
+              </_components.p>
+              {'\\\\n'}
+              {'\\\\n'}
+              {'\\\\n'}
+              <MathJax>{'\\\\\\\\[x^2\\\\n\\\\\\\\]'}</MathJax>
+            </MathJaxContext>
+          )
+        }
+        "
+      `)
+    })
   })
 })

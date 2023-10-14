@@ -24,7 +24,7 @@ module.exports = {
         'plugin:import/typescript',
         'prettier'
       ],
-      plugins: ['import', 'unicorn'],
+      plugins: ['import', 'unicorn', 'sonarjs'],
       rules: {
         'prefer-object-has-own': 'error',
         'logical-assignment-operators': [
@@ -56,6 +56,9 @@ module.exports = {
           }
         ],
         'prefer-object-spread': 'error',
+        'prefer-arrow-callback': ['error', { allowNamedFunctions: true }],
+        'unicorn/prefer-at': 'error',
+        'sonarjs/no-small-switch': 'error',
         // todo: enable
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-non-null-assertion': 'off',

@@ -97,7 +97,7 @@ export function Search({
   )
 
   const handleKeyDown = useCallback(
-    function <T>(e: KeyboardEvent<T>) {
+    <T,>(e: KeyboardEvent<T>) => {
       switch (e.key) {
         case 'ArrowDown': {
           if (active + 1 < results.length) {

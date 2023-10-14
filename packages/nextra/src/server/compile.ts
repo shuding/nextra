@@ -45,6 +45,7 @@ import {
   remarkStaticImage,
   remarkStructurize
 } from './mdx-plugins/index.js'
+import { rehypeBetterReactMathjax } from './mdx-plugins/rehype-better-react-mathjax.js'
 import { rehypeExtractTocContent } from './mdx-plugins/rehype-extract-toc-content.js'
 import { logger, truthy } from './utils.js'
 
@@ -152,6 +153,7 @@ export async function compileMdx(
 
   const format =
     _format === 'detect' ? (filePath.endsWith('.mdx') ? 'mdx' : 'md') : _format
+
   const fileCompatible = filePath ? { value: source, path: filePath } : source
   if (isPageMapImport) {
     const compiler = createProcessor({
@@ -232,7 +234,7 @@ export async function compileMdx(
 
     return {
       result,
-      ...(title && { title }),
+      title,
       ...(hasJsxInH1 && { hasJsxInH1 }),
       ...(readingTime && { readingTime }),
       ...(searchIndexKey !== null && { searchIndexKey, structurizedData }),
@@ -300,7 +302,12 @@ export async function compileMdx(
         ],
         [parseMeta, { defaultShowCopyCode }],
         // Should be before `rehypePrettyCode`
-        latex && rehypeKatex,
+        latex &&
+          (typeof latex === 'object'
+            ? latex.renderer === 'mathjax'
+              ? [rehypeBetterReactMathjax, latex.options, isRemoteContent]
+              : [rehypeKatex, latex.options]
+            : rehypeKatex),
         ...(codeHighlight === false
           ? []
           : [
