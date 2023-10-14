@@ -2,9 +2,8 @@ import type { ImportDeclaration } from 'estree'
 import { valueToEstree } from 'estree-util-value-to-estree'
 import type { Element, Root, RootContent } from 'hast'
 import type { MdxJsxAttribute } from 'hast-util-to-estree/lib'
-import { toText } from 'hast-util-to-text'
 import type { Plugin } from 'unified'
-import { SKIP, visitParents } from 'unist-util-visit-parents'
+import { visit } from 'unist-util-visit'
 import type { MathJaxOptions } from '../../types'
 
 const MATHJAX_IMPORTS = {
@@ -71,12 +70,12 @@ function wrapInMathJaxContext(
  */
 function wrapInBraces(
   source: string,
-  displayMath: boolean,
+  mathInline: boolean,
   options: NonNullable<MathJaxOptions>
 ): string {
   const inlineBraces = options?.config?.tex?.inlineMath?.[0] || ['\\(', '\\)']
   const displayBraces = options?.config?.tex?.displayMath?.[0] || ['\\[', '\\]']
-  const [before, after] = displayMath ? displayBraces : inlineBraces
+  const [before, after] = mathInline ? inlineBraces : displayBraces
   return `${before}${source}${after}`
 }
 
@@ -91,57 +90,29 @@ export const rehypeBetterReactMathjax: Plugin<
   tree => {
     let hasMathJax = false
 
-    visitParents(tree, 'element', (element, parents) => {
+    visit(tree, { tagName: 'code' }, (element, _index, parent) => {
       const classes = Array.isArray(element.properties.className)
         ? element.properties.className
         : []
       // This class can be generated from markdown with ` ```math `.
       const languageMath = classes.includes('language-math')
+      if (!languageMath) return
+
       // This class is used by `remark-math` for text math (inline, `$math$`).
       const mathInline = classes.includes('math-inline')
 
-      // Any class is fine.
-      if (!languageMath && !mathInline) {
-        return
-      }
-      let displayMode = false
+      const { value } = element.children[0] as any
+      const bracketedValue = wrapInBraces(value, mathInline, options)
 
-      let parent = parents.at(-1)
-      let scope = element
-
-      // If this was generated with ` ```math `, replace the `<pre>` and use
-      // display.
-      if (
-        element.tagName === 'code' &&
-        languageMath &&
-        parent &&
-        parent.type === 'element' &&
-        parent.tagName === 'pre'
-      ) {
-        scope = parent
-        parent = parents.at(-2)!
-        displayMode = true
-      }
-
-      /* c8 ignore next -- verbose to test. */
-      if (!parent) {
-        return
-      }
-
-      const value = toText(scope, { whitespace: 'pre' })
-      const bracketedValue = wrapInBraces(value, displayMode, options)
-
-      const result: Element = {
+      const mathJaxNode: Element = {
         type: 'element',
         tagName: 'MathJax',
         children: [{ type: 'text', value: bracketedValue }],
-        properties: displayMode ? {} : { inline: true }
+        properties: mathInline ? { inline: true } : {}
       }
 
-      const index = parent.children.indexOf(scope)
-      parent.children.splice(index, 1, result)
+      Object.assign((mathInline ? element : parent) as any, mathJaxNode)
       hasMathJax = true
-      return SKIP
     })
 
     if (!hasMathJax) return

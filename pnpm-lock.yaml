@@ -279,9 +279,6 @@ importers:
       hast-util-to-estree:
         specifier: ^2.3.3
         version: 2.3.3
-      hast-util-to-text:
-        specifier: ^4.0.0
-        version: 4.0.0
       katex:
         specifier: ^0.16.9
         version: 0.16.9
@@ -324,9 +321,6 @@ importers:
       unist-util-visit:
         specifier: ^5.0.0
         version: 5.0.0
-      unist-util-visit-parents:
-        specifier: ^6.0.1
-        version: 6.0.1
       yaml:
         specifier: ^2.3.2
         version: 2.3.2
