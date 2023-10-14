@@ -1,5 +1,6 @@
 import type { MathJax3Config } from 'better-react-mathjax'
 import type { ImportDeclaration } from 'estree'
+import { valueToEstree } from 'estree-util-value-to-estree'
 import type { Element, Root, RootContent } from 'hast'
 import type { MdxJsxAttribute } from 'hast-util-to-estree/lib'
 import { toText } from 'hast-util-to-text'
@@ -47,31 +48,13 @@ function wrapInMathJaxContext(
             data: {
               estree: {
                 type: 'Program',
+                sourceType: 'module',
                 body: [
                   {
                     type: 'ExpressionStatement',
-                    expression: {
-                      type: 'CallExpression',
-                      optional: false,
-                      callee: {
-                        type: 'MemberExpression',
-                        object: { type: 'Identifier', name: 'JSON' },
-                        property: { type: 'Identifier', name: 'parse' },
-                        computed: false,
-                        optional: false
-                      },
-                      arguments: [
-                        {
-                          type: 'Literal',
-                          value: JSON.stringify(config),
-                          raw: JSON.stringify(JSON.stringify(config))
-                        }
-                      ]
-                    }
+                    expression: valueToEstree(config)
                   }
-                ],
-                sourceType: 'module',
-                comments: []
+                ]
               }
             }
           }
@@ -177,20 +160,20 @@ export const rehypeBetterReactMathjax: Plugin<[Options], Root> =
       return SKIP
     })
 
-    if (hasMathJax) {
-      const mdxjsEsmNodes = []
-      const rest = []
-      for (const child of tree.children) {
-        if (child.type === ('mdxjsEsm' as any)) {
-          mdxjsEsmNodes.push(child)
-        } else {
-          rest.push(child)
-        }
+    if (!hasMathJax) return
+
+    const mdxjsEsmNodes = []
+    const rest = []
+    for (const child of tree.children) {
+      if (child.type === ('mdxjsEsm' as any)) {
+        mdxjsEsmNodes.push(child)
+      } else {
+        rest.push(child)
       }
-      tree.children = [
-        ...mdxjsEsmNodes,
-        // Wrap everything in a `<MathJaxContext />` component.
-        wrapInMathJaxContext(rest, options)
-      ] as any
     }
+    tree.children = [
+      ...mdxjsEsmNodes,
+      // Wrap everything in a `<MathJaxContext />` component.
+      wrapInMathJaxContext(rest, options)
+    ] as any
   }
