@@ -196,8 +196,7 @@ describe('normalize-page', () => {
     // TODO: quick fix, found better approach
     rawJs = rawJs.replace(
       /.*/,
-      '' +
-        'import test_fixture_page_maps_display_hidden_for_mobile_meta from "./_meta.ts";'
+      'import test_fixture_page_maps_display_hidden_for_mobile_meta from "./_meta.ts";'
     )
 
     await fs.writeFile(path.join(dir, 'generated-page-map.js'), rawJs)
