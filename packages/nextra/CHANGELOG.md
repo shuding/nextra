@@ -1,5 +1,11 @@
 # nextra
 
+## 3.0.0-alpha.8
+
+### Minor Changes
+
+- 440ff42d: add MathJax support
+
 ## 3.0.0-alpha.7
 
 ### Patch Changes
