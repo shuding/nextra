@@ -109,8 +109,11 @@ describe('latex', () => {
       latex: { renderer: 'mathjax' }
     } as const
 
+    const INLINE_MATH = '$a=\\sqrt{b^2 + c^2}$'
+    const MATH_LANG = '```math\nx^2\n```'
+
     it('math inline', async () => {
-      const { result } = await compileMdx('$a=\\sqrt{b^2 + c^2}$', options)
+      const { result } = await compileMdx(INLINE_MATH, options)
       expect(clean(result)).resolves.toMatchInlineSnapshot(`
         "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
         const title = ''
@@ -142,7 +145,7 @@ describe('latex', () => {
     })
 
     it('```math language', async () => {
-      const { result } = await compileMdx('```math\nx^2\n```', options)
+      const { result } = await compileMdx(MATH_LANG, options)
       expect(clean(result)).resolves.toMatchInlineSnapshot(`
       "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
       const title = ''
@@ -162,6 +165,50 @@ describe('latex', () => {
       }
       "
     `)
+    })
+
+    it('should add imports only once, and move imports/exports at top', async () => {
+      const { result } = await compileMdx(`${INLINE_MATH}
+
+import foo from 'foo'
+
+export let bar
+
+${MATH_LANG}`, options)
+      expect(clean(result)).resolves.toMatchInlineSnapshot(`
+        "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+        const title = ''
+        const frontMatter = {}
+        import foo from 'foo'
+        export let bar
+        import { MathJax, MathJaxContext } from 'nextra/components'
+        export function useTOC(props) {
+          return []
+        }
+        function MDXLayout(props) {
+          const _components = Object.assign(
+            {
+              p: 'p'
+            },
+            _provideComponents(),
+            props.components
+          )
+          return (
+            <MathJaxContext>
+              {'\\\\n'}
+              {'\\\\n'}
+              <_components.p>
+                <MathJax inline>{'\\\\\\\\(a=\\\\\\\\sqrt{b^2 + c^2}\\\\\\\\)'}</MathJax>
+              </_components.p>
+              {'\\\\n'}
+              {'\\\\n'}
+              {'\\\\n'}
+              <MathJax>{'\\\\\\\\[x^2\\\\n\\\\\\\\]'}</MathJax>
+            </MathJaxContext>
+          )
+        }
+        "
+      `)
     })
   })
 })

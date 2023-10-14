@@ -45,10 +45,7 @@ function wrapInMathJaxContext(
             type: 'Program',
             sourceType: 'module',
             body: [
-              {
-                type: 'ExpressionStatement',
-                expression: valueToEstree(config)
-              }
+              { type: 'ExpressionStatement', expression: valueToEstree(config) }
             ]
           }
         }
@@ -87,12 +84,12 @@ export const rehypeBetterReactMathjax: Plugin<
   Root
 > =
   (options = {}, isRemoteContent) =>
-  tree => {
+  ast => {
     let hasMathJax = false
 
-    visit(tree, { tagName: 'code' }, (element, _index, parent) => {
-      const classes = Array.isArray(element.properties.className)
-        ? element.properties.className
+    visit(ast, { tagName: 'code' }, (node, _index, parent) => {
+      const classes = Array.isArray(node.properties.className)
+        ? node.properties.className
         : []
       // This class can be generated from markdown with ` ```math `.
       const languageMath = classes.includes('language-math')
@@ -101,7 +98,7 @@ export const rehypeBetterReactMathjax: Plugin<
       // This class is used by `remark-math` for text math (inline, `$math$`).
       const mathInline = classes.includes('math-inline')
 
-      const { value } = element.children[0] as any
+      const [{ value }] = node.children as any
       const bracketedValue = wrapInBraces(value, mathInline, options)
 
       const mathJaxNode: Element = {
@@ -111,7 +108,7 @@ export const rehypeBetterReactMathjax: Plugin<
         properties: mathInline ? { inline: true } : {}
       }
 
-      Object.assign((mathInline ? element : parent) as any, mathJaxNode)
+      Object.assign((mathInline ? node : parent) as any, mathJaxNode)
       hasMathJax = true
     })
 
@@ -119,14 +116,14 @@ export const rehypeBetterReactMathjax: Plugin<
 
     const mdxjsEsmNodes = []
     const rest = []
-    for (const child of tree.children) {
+    for (const child of ast.children) {
       if (child.type === ('mdxjsEsm' as any)) {
         mdxjsEsmNodes.push(child)
       } else {
         rest.push(child)
       }
     }
-    tree.children = [
+    ast.children = [
       ...mdxjsEsmNodes,
       ...(isRemoteContent ? [] : [MATHJAX_IMPORTS]),
       // Wrap everything in a `<MathJaxContext />` component.
