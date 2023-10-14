@@ -3,7 +3,7 @@ import { Callout, RemoteContent as MathJaxExample, MathJax, MathJaxContext } fro
 
 # LaTeX
 
-Nextra can use [KaTeX](https://katex.org) to pre-render LaTeX expressions directly in MDX or [MathJax](https://www.mathjax.org/) to
+Nextra can use [KaTeX](https://katex.org) to pre-render LaTeX expressions directly in MDX or [MathJax](https://mathjax.org) to
 dynamically render math in the browser.
 To enable LaTeX support, you must enable the `latex` option in your `next.config.mjs` file:
 
@@ -23,23 +23,23 @@ object `{ renderer: 'katex' }{:js}` or `{ renderer: 'mathjax' }{:js}` as the val
 When enabled, the required CSS and fonts will be automatically included in your site,
 and you can start writing math expressions by enclosing inline math in `$...$` or display math in a `math`-labeled fenced code block:
 
-````mdx
+~~~mdx
 ```math
 \int x^2
 ```
-````
+~~~
 
 ## Example
 
 For example, the following Markdown code:
 
-````md filename="page.md"
+~~~md filename="page.md"
 The **Pythagorean equation** is $a=\sqrt{b^2 + c^2}$ and the quadratic formula:
 
 ```math
 x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}
 ```
-````
+~~~
 
 will be rendered as:
 
@@ -64,7 +64,7 @@ You can still use [Markdown and MDX syntax](../markdown) in the same line as you
 ### KaTeX
 
 `rehype-katex` is used to pre-render LaTeX expressions in your content. You can pass
-supported [KaTeX options](https://katex.org/docs/options.html) via the `options` key in
+supported [KaTeX options](https://katex.org/docs/options) via the `options` key in
 your Nextra config. For example, to add a macro `\RR` that renders as `\mathbb{R}` you could
 use the following configuration.
 
@@ -85,13 +85,13 @@ See [KaTeX’s documentation](https://katex.org/docs/supported) for a list of su
 
 ### MathJax
 
-When MathJax is enabled (by setting `latex: { renderer: 'mathjax' }`) math is rendered on page load via
+When MathJax is enabled (by setting `latex: { renderer: 'mathjax' }{:js}`) math is rendered on page load via
 [`better-react-mathjax`](https://github.com/fast-reflexes/better-react-mathjax) instead of being pre-rendered.
-By default **MathJax is served via the MathJax CDN** instead of the files being directly included in your site.[^1]
+By default, **MathJax is served via the MathJax CDN** instead of the files being directly included in your site.[^1]
 
-[^1]: This can be changed by setting [`{options: {src: ...}}{:js}`](https://github.com/fast-reflexes/better-react-mathjax#src-string--undefined) in the Nextra config.
+[^1]: This can be changed by setting [`{ options: { src: ... } }{:js}`](https://github.com/fast-reflexes/better-react-mathjax#src-string--undefined) in the Nextra config.
 
-MathJax rendering is enabled by setting `renderer: 'mathjax'` in your Nextra config.
+MathJax rendering is enabled by setting `renderer: 'mathjax'{:js}` in your Nextra config.
 
 ```js filename="next.config.mjs" {3}
 const withNextra = nextra({

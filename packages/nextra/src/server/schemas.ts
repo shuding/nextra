@@ -54,20 +54,17 @@ export const nextraConfigSchema = z
     search: searchSchema,
     staticImage: z.boolean(),
     readingTime: z.boolean(),
-    latex: z
-      .boolean()
-      .or(
-        z.strictObject({
-          renderer: z.literal('mathjax'),
-          options: mathJaxOptionsSchema
-        })
-      )
-      .or(
-        z.strictObject({
-          renderer: z.literal('katex'),
-          options: z.custom<RehypeKatexOptions>()
-        })
-      ),
+    latex: z.union([
+      z.boolean(),
+      z.strictObject({
+        renderer: z.literal('mathjax'),
+        options: mathJaxOptionsSchema
+      }),
+      z.strictObject({
+        renderer: z.literal('katex'),
+        options: z.custom<RehypeKatexOptions>()
+      })
+    ]),
     codeHighlight: z.boolean(),
     /**
      * A function to modify the code of compiled MDX pages.
