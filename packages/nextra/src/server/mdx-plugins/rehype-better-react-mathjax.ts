@@ -37,30 +37,29 @@ function wrapInMathJaxContext(
   options: NonNullable<Options>
 ) {
   const config = options.config || {}
-  const attributes: MdxJsxAttribute[] = Object.keys(config).length
-    ? [
-        {
-          type: 'mdxJsxAttribute',
-          name: 'config',
-          value: {
-            type: 'mdxJsxAttributeValueExpression',
-            value: '',
-            data: {
-              estree: {
-                type: 'Program',
-                sourceType: 'module',
-                body: [
-                  {
-                    type: 'ExpressionStatement',
-                    expression: valueToEstree(config)
-                  }
-                ]
+  const attributes: MdxJsxAttribute[] = []
+  if (Object.keys(config).length) {
+    attributes.push({
+      type: 'mdxJsxAttribute',
+      name: 'config',
+      value: {
+        type: 'mdxJsxAttributeValueExpression',
+        value: '',
+        data: {
+          estree: {
+            type: 'Program',
+            sourceType: 'module',
+            body: [
+              {
+                type: 'ExpressionStatement',
+                expression: valueToEstree(config)
               }
-            }
+            ]
           }
         }
-      ]
-    : []
+      }
+    })
+  }
   if (options.src) {
     attributes.push({
       type: 'mdxJsxAttribute',
@@ -70,15 +69,10 @@ function wrapInMathJaxContext(
   }
 
   return {
-    type: 'root',
-    children: [
-      {
-        type: 'mdxJsxFlowElement',
-        name: 'MathJaxContext',
-        attributes,
-        children
-      }
-    ]
+    type: 'mdxJsxFlowElement',
+    name: 'MathJaxContext',
+    attributes,
+    children
   }
 }
 
