@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`search > should match structurizeData snapshot 1`] = `
+exports[`search > should match \`structurizedData\` snapshot 1`] = `
 {
   "/en/about/a-page": {
     "data": {},
