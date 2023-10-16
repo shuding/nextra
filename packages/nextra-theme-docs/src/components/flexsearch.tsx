@@ -46,7 +46,10 @@ const indexes: {
 
 // Caches promises that load the index
 const loadIndexesPromises = new Map<string, Promise<void>>()
-export const loadIndexes = (basePath: string, locale: string): Promise<void> => {
+export const loadIndexes = (
+  basePath: string,
+  locale: string
+): Promise<void> => {
   const key = basePath + '@' + locale
   if (loadIndexesPromises.has(key)) {
     return loadIndexesPromises.get(key)!
