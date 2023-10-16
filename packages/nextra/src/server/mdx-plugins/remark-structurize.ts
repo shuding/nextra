@@ -24,14 +24,19 @@ export const remarkStructurize: Plugin<[Search], Root> = options => {
   }
 
   function save() {
-    const cleanedContent = content
+    let cleanedContent = content
       .trim()
       // Strip out large words starting from 50 chars since it can provoke out-of-memory while
       // indexing them, I took 50 chars since largest word in English has 45 characters
       // https://github.com/shuding/nextra/issues/2077#issuecomment-1693671011
       .replaceAll(/\w{50,}/g, '')
-      // Replace by new line or new lines
-      .replaceAll(/\n+/g, '\n')
+
+    // Replace multiple new lines
+    cleanedContent =
+      process.platform === 'win32'
+        ? cleanedContent.replaceAll(/(\r\n)+/g, '\r\n')
+        : cleanedContent.replaceAll(/\n+/g, '\n')
+
     if (activeSlug || cleanedContent) {
       structurizedData[activeSlug] = cleanedContent
     }
