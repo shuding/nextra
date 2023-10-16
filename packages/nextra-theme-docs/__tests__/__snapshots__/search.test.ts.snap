@@ -1,24 +1,23 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`search > should  1`] = `
+exports[`search > should match structurizeData snapshot 1`] = `
 {
-  "default": {
-    "/en/about/a-page": {
-      "data": {},
-      "title": "This Is A Page",
-    },
-    "/en/about/acknowledgement": {
-      "data": {},
-      "title": "Acknowledgement",
-    },
-    "/en/about/changelog": {
-      "data": {
-        "": "The official website for SWR.To develop locally, clone this repository and run the following command to start
+  "/en/about/a-page": {
+    "data": {},
+    "title": "This Is A Page",
+  },
+  "/en/about/acknowledgement": {
+    "data": {},
+    "title": "Acknowledgement",
+  },
+  "/en/about/changelog": {
+    "data": {
+      "": "The official website for SWR.To develop locally, clone this repository and run the following command to start
 the local dev server:
 yarn
 yarn dev
 And visit localhost:3000 to preview your changes.",
-        "contributors#Contributors": "https://github.com/vercel/swr-site/graphs/contributors
+      "contributors#Contributors": "https://github.com/vercel/swr-site/graphs/contributors
 Simplified Chinese translation done by Fang Lu
 (@huzhengen)
 Spanish translation done by Markoz Peña
@@ -28,22 +27,22 @@ SHIOYA (@shioyang)
 Korean translation done by SeulGi Choi (@cs09g)
 Russian translation done by Valentin Politov
 (@valentinpolitov)",
-      },
-      "title": "SWR website",
     },
-    "/en/about/team": {
-      "data": {
-        "": "SWR is made by the team behind Next.js.",
-      },
-      "title": "Team",
+    "title": "SWR website",
+  },
+  "/en/about/team": {
+    "data": {
+      "": "SWR is made by the team behind Next.js.",
     },
-    "/en/blog/swr-v1": {
-      "data": {
-        "": "Almost 2 years ago we
+    "title": "Team",
+  },
+  "/en/blog/swr-v1": {
+    "data": {
+      "": "Almost 2 years ago we
 open sourced SWR, the
 tiny data-fetching React library that people love. Today we are reaching another
 milestone: the 1.0 version of SWR!",
-        "beta-and-unofficial-feature-users#Beta and Unofficial Feature Users": "If you are using a beta version of SWR, or using any undocumented APIs, please
+      "beta-and-unofficial-feature-users#Beta and Unofficial Feature Users": "If you are using a beta version of SWR, or using any undocumented APIs, please
 be aware of the following changes:
 import { cache } from 'swr' is removed; use the new
 useSWRConfig API instead.
@@ -51,14 +50,14 @@ import { createCache } from 'swr' is removed; use the new
 Cache Provider API instead.
 revalidateWhenStale is renamed to revalidateIfStale.
 middlewares is renamed to use.",
-        "change-revalidate-to-mutate#Change revalidate to mutate": "useSWR no longer returns the revalidate method, change to mutate instead:
+      "change-revalidate-to-mutate#Change revalidate to mutate": "useSWR no longer returns the revalidate method, change to mutate instead:
 - const { revalidate } = useSWR(key, fetcher, options)
 + const { mutate } = useSWR(key, fetcher, options)
   // ...
 - revalidate()
 + mutate()",
-        "changelog#Changelog": "Read the full Changelog on GitHub.",
-        "custom-cache-provider#Custom Cache Provider": "By default, SWR uses a single global cache to store all the data. In 1.0, you
+      "changelog#Changelog": "Read the full Changelog on GitHub.",
+      "custom-cache-provider#Custom Cache Provider": "By default, SWR uses a single global cache to store all the data. In 1.0, you
 are able to customize it with the new provider option:
 <SWRConfig
   value={{
@@ -74,7 +73,7 @@ LocalStorage Based Persistent Cache,
 Reset Cache Between Tests.This new cache provider API is also more compatible with concurrent rendering of
 React 18. If you are adding a cache provider, make sure to use the global
 mutate function returned from useSWRConfig().You can read the docs Cache Provider for more details.",
-        "docs-translations#Docs Translations": "Thanks to our
+      "docs-translations#Docs Translations": "Thanks to our
 contributors and
 Nextra’s i18n feature, we now offer SWR
 documentation in six different languages:
@@ -84,7 +83,7 @@ Simplified Chinese
 Japanese
 Korean
 Russian",
-        "fallback-data#Fallback Data": "In 1.0, there’s a new fallback option that you can provide any pre-fetched
+      "fallback-data#Fallback Data": "In 1.0, there’s a new fallback option that you can provide any pre-fetched
 data as the initial value of all SWR hooks with specific keys:
 <SWRConfig value={{
   fallback: {
@@ -100,7 +99,7 @@ testing. Check the docs Next.js SSG and SSR for more
 details.For better consistency and to avoid confusion, the old initialData is now
 renamed to fallbackData, which still provides a single fallback value for the
 given hook.",
-        "immutable-mode#Immutable Mode": "Sometimes you want to mark a resource as immutable if it will never change.
+      "immutable-mode#Immutable Mode": "Sometimes you want to mark a resource as immutable if it will never change.
 It's better to disable automatic revalidations for it and only make the request
 once. There is now a helper hook to make this easier:
 import useSWRImmutable from 'swr/immutable'
@@ -111,10 +110,10 @@ upon tab focus or network recovery. There's also a new option,
 revalidateIfStale, you can use to control the behavior precisely. More
 information can be found
 here.",
-        "improvements-and-better-test-coverage#Improvements and Better Test Coverage": "Since 0.x, we've made hundreds of small improvements and bugfixes. SWR now has
+      "improvements-and-better-test-coverage#Improvements and Better Test Coverage": "Since 0.x, we've made hundreds of small improvements and bugfixes. SWR now has
 157 tests that cover most of the edge cases in data fetching. Read the
 Changelog for more details.",
-        "middleware#Middleware": "SWR Middlewares provide a new way for you to build and reuse abstractions on top
+      "middleware#Middleware": "SWR Middlewares provide a new way for you to build and reuse abstractions on top
 of SWR hooks:
 <SWRConfig value={{ use: [...middleware] }}>
 // ... or directly in \`useSWR\`:
@@ -123,8 +122,8 @@ A lot of new ideas can be implemented with this feature, and we've built some
 examples: Request Logger,
 Keep Previous Data When Changing the Key,
 and Serialize Object Keys.Check the Middleware API for more details.",
-        "migration-guide#Migration Guide": "",
-        "no-more-default-fetcher#No More Default Fetcher": "SWR no longer provides the default fetcher (a fetch call that parses the data
+      "migration-guide#Migration Guide": "",
+      "no-more-default-fetcher#No More Default Fetcher": "SWR no longer provides the default fetcher (a fetch call that parses the data
 as JSON). The easiest way to migrate the change is to use the <SWRConfig>
 component:
 ;<SWRConfig value={{ fetcher: url => fetch(url).then(res => res.json()) }}>
@@ -132,7 +131,7 @@ component:
 </SWRConfig>
 // ... or
 useSWR(key, url => fetch(url).then(res => res.json()))",
-        "recommend-to-use-the-hook-returned-mutate#Recommend to Use the Hook-Returned mutate": "This is not a breaking change, but we will now recommend to always use the
+      "recommend-to-use-the-hook-returned-mutate#Recommend to Use the Hook-Returned mutate": "This is not a breaking change, but we will now recommend to always use the
 mutate returned from the useSWRConfig hook:
 - import { mutate } from 'swr'
 + import { useSWRConfig } from 'swr'
@@ -144,12 +143,12 @@ mutate returned from the useSWRConfig hook:
   }
 If you are not using a cache provider, the current global import
 import { mutate } from 'swr' still works.",
-        "rename-initialdata-to-fallbackdata#Rename initialData to fallbackData": "- useSWR(key, fetcher, { initialData: ... })
+      "rename-initialdata-to-fallbackdata#Rename initialData to fallbackData": "- useSWR(key, fetcher, { initialData: ... })
 + useSWR(key, fetcher, { fallbackData: ... })",
-        "renamed-types#Renamed Types": "If you are using TypeScript, the following type names have been changed for
+      "renamed-types#Renamed Types": "If you are using TypeScript, the following type names have been changed for
 consistency:
 0.x (deprecated)	1.0	Note	ConfigInterface	SWRConfiguration		keyInterface	Key		responseInterface	SWRResponse		RevalidateOptionInterface	RevalidatorOptions		revalidateType	Revalidator		SWRInfiniteResponseInterface	SWRInfiniteResponse	moved to swr/infinite	SWRInfiniteConfigInterface	SWRInfiniteConfiguration	moved to swr/infinite",
-        "smaller-size#Smaller Size": "Performance is one of the most important features
+      "smaller-size#Smaller Size": "Performance is one of the most important features
 of SWR. In 1.0, we made the library significantly smaller without removing any
 existing features:
 41% smaller core (24% smaller when gzipped, 3.9 kB)
@@ -162,7 +161,7 @@ import useSWR from 'swr'
 import useSWRInfinite from 'swr/infinite'
 If you are not using useSWRInfinite, it will not be included in your
 application.",
-        "thank-you#Thank You!": "Special thanks to Toru Kobayashi and
+      "thank-you#Thank You!": "Special thanks to Toru Kobayashi and
 Yixuan Xu for their contributions to the
 library, and Paco Coursey,
 uttk, Tomohiro SHIOYA,
@@ -174,13 +173,13 @@ translations and docs. This release can't happen without them.We also want to th
 110 contributors (+
 45 docs contributors),
 and everyone who helped and gave us feedback!",
-        "update-useswrinfinite-imports#Update useSWRInfinite Imports": "useSWRInfinite needs to be imported from swr/infinite:
+      "update-useswrinfinite-imports#Update useSWRInfinite Imports": "useSWRInfinite needs to be imported from swr/infinite:
 - import { useSWRInfinite } from 'swr'
 + import useSWRInfinite from 'swr/infinite'
 If you are using the corresponding types, update the import path too:
 - import { SWRInfiniteConfiguration, SWRInfiniteResponse } from 'swr'
 + import { SWRInfiniteConfiguration, SWRInfiniteResponse } from 'swr/infinite'",
-        "useswrconfig#useSWRConfig()": "There is a new Hook API to return all global configurations, including the
+      "useswrconfig#useSWRConfig()": "There is a new Hook API to return all global configurations, including the
 current cache provider and global mutate function:
 import { useSWRConfig } from 'swr'
 function Foo() {
@@ -189,25 +188,25 @@ function Foo() {
 }
 More information can be found
 here.",
-        "whats-new#What’s New": "",
-        "whats-next#What’s Next": "In future releases, we will keep improving the library while maintaining the
+      "whats-new#What’s New": "",
+      "whats-next#What’s Next": "In future releases, we will keep improving the library while maintaining the
 stability. We are also aiming to embrace future React versions, as several new
 features and improvements in 1.0 are already preparing for that. In addition, we
 are also working on new features to improve the experience of doing data
 fetching in React and the experience of using this library.If you have any feedback about this release, please
 let us know.",
-      },
-      "title": "Announcing SWR 1.0",
     },
-    "/en/docs/404-500": {
-      "data": {
-        "": "Nextra support custom 404.mdx/500.mdx pages.",
-        "404#404": "To add /404 page import NotFoundPage:
+    "title": "Announcing SWR 1.0",
+  },
+  "/en/docs/404-500": {
+    "data": {
+      "": "Nextra support custom 404.mdx/500.mdx pages.",
+      "404#404": "To add /404 page import NotFoundPage:
 import { NotFoundPage } from 'nextra-theme-docs'
 # 404 - This page could not be found
 <NotFoundPage />
 Click to try /404 page.",
-        "customize-layout#Customize Layout": "\\"404\\": {
+      "customize-layout#Customize Layout": "\\"404\\": {
   \\"type\\": \\"page\\"
 },
 \\"500\\": {
@@ -216,16 +215,16 @@ Click to try /404 page.",
     \\"layout\\": \\"full\\"
   }
 }",
-        "customize-theme-config-options#Customize Theme Config Options": "Also, you can customize following options:
+      "customize-theme-config-options#Customize Theme Config Options": "Also, you can customize following options:
 // ...
 notFoundLink?: ReactNode | FC
 notFoundLabels?: string",
-      },
-      "title": "404 / 500 pages",
     },
-    "/en/docs/advanced": {
-      "data": {
-        "": "You can create this index page now!
+    "title": "404 / 500 pages",
+  },
+  "/en/docs/advanced": {
+    "data": {
+      "": "You can create this index page now!
 Version History
 Version	Changes	v10.0.0	locale, locales, defaultLocale, and notFound options added.	v9.3.0	getServerSideProps introduced.	
 Second Level Details
@@ -233,12 +232,12 @@ Hello!
 Second Level Details
 Hello!
 hey!!",
-      },
-      "title": "Advanced features!",
     },
-    "/en/docs/advanced/cache": {
-      "data": {
-        "": "Upgrade to the latest version (≥ 1.0.0) to use this feature.
+    "title": "Advanced features!",
+  },
+  "/en/docs/advanced/cache": {
+    "data": {
+      "": "Upgrade to the latest version (≥ 1.0.0) to use this feature.
 In most cases, you shouldn't directly write to the cache, which might cause
 undefined behaviors of SWR. If you need to manually mutate a key, please
 consider using the SWR APIs.See also: Mutation,
@@ -246,7 +245,7 @@ Reset Cache Between Test Cases.
 By default, SWR uses a global cache to store and share data across all
 components. But you can also customize this behavior with the provider option
 of SWRConfig.Cache providers are intended to enable SWR with more customized storages.",
-        "access-current-cache-provider#Access Current Cache Provider": "When inside a React component, you need to use the
+      "access-current-cache-provider#Access Current Cache Provider": "When inside a React component, you need to use the
 useSWRConfig
 hook to get access to the current cache provider as well as other configurations
 including mutate:
@@ -256,12 +255,12 @@ function Avatar() {
   // ...
 }
 If it's not under any <SWRConfig>, it will return the default configurations.",
-        "access-to-the-cache#Access to the Cache": "Alert: you should not write to the cache directly, it might cause undefined
+      "access-to-the-cache#Access to the Cache": "Alert: you should not write to the cache directly, it might cause undefined
 behavior.
 const { cache } = useSWRConfig()
 cache.get(key) // Get the current data for a key.
 cache.clear() // ⚠️ Clear all the cache. SWR will revalidate upon re-render.",
-        "cache-provider#Cache Provider": "A cache provider is Map-like object which matches the following TypeScript
+      "cache-provider#Cache Provider": "A cache provider is Map-like object which matches the following TypeScript
 definition (which can be imported from swr):
 interface Cache<Data> {
   get(key: string): Data | undefined
@@ -271,7 +270,7 @@ interface Cache<Data> {
 For example, a
 JavaScript Map
 instance can be directly used as the cache provider for SWR.",
-        "create-cache-provider#Create Cache Provider": "The provider option of SWRConfig receives a function that returns a
+      "create-cache-provider#Create Cache Provider": "The provider option of SWRConfig receives a function that returns a
 cache provider. The provider will then be used by all SWR
 hooks inside that SWRConfig boundary. For example:
 import useSWR, { SWRConfig } from 'swr'
@@ -292,14 +291,14 @@ When nested, SWR hooks will use the upper-level cache provider. If there is no
 upper-level cache provider, it fallbacks to the default cache provider, which is
 an empty Map.
 If a cache provider is used, the global mutate will not work for SWR hooks under that <SWRConfig> boundary. Please use this instead.",
-        "examples#Examples": "",
-        "experimental-extend-cache-provider#Experimental: Extend Cache Provider": "This is an experimental feature, the behavior might change in future upgrades.
+      "examples#Examples": "",
+      "experimental-extend-cache-provider#Experimental: Extend Cache Provider": "This is an experimental feature, the behavior might change in future upgrades.
 When multiple <SWRConfig> components are nested, cache provider can be
 extended.The first argument for the provider function is the cache provider of the
 upper-level <SWRConfig> (or the default cache if there's no parent
 <SWRConfig>), you can use it to extend the cache provider:
 <SWRConfig value={{ provider: cache => newCache }}>...</SWRConfig>",
-        "localstorage-based-persistent-cache#LocalStorage Based Persistent Cache": "You might want to sync your cache to localStorage. Here's an example
+      "localstorage-based-persistent-cache#LocalStorage Based Persistent Cache": "You might want to sync your cache to localStorage. Here's an example
 implementation:
 function localStorageProvider() {
   // When initializing, we restore the data from \`localStorage\` into a map.
@@ -319,7 +318,7 @@ Then use it as a provider:
 As an improvement, you can also use the memory cache as a buffer, and write to
 localStorage periodically. You can also implement a similar layered cache
 with IndexedDB or WebSQL.",
-        "mutate-multiple-keys-from-regex#Mutate Multiple Keys from RegEx": "With the flexibility of the cache provider API, you can even build a \\"partial
+      "mutate-multiple-keys-from-regex#Mutate Multiple Keys from RegEx": "With the flexibility of the cache provider API, you can even build a \\"partial
 mutation\\" helper.In the example below, matchMutate can receive a regex expression as key, and
 be used to mutate the ones who matched this pattern.
 function useMatchMutate() {
@@ -350,7 +349,7 @@ function Button() {
   )
 }
 Note that this example requires the cache provider to be a Map instance.",
-        "reset-cache-between-test-cases#Reset Cache Between Test Cases": "When testing your application, you might want to reset the SWR cache between
+      "reset-cache-between-test-cases#Reset Cache Between Test Cases": "When testing your application, you might want to reset the SWR cache between
 test cases. You can simply wrap your application with an empty cache provider.
 Here's an example with Jest:
 describe('test suite', async () => {
@@ -362,16 +361,16 @@ describe('test suite', async () => {
     )
   })
 })",
-      },
-      "title": "Cache",
     },
-    "/en/docs/advanced/code-highlighting": {
-      "data": {
-        "test-filename-line-highlighting-and-empty-lines#Test filename, line highlighting and empty lines": "console.log('hello world')
+    "title": "Cache",
+  },
+  "/en/docs/advanced/code-highlighting": {
+    "data": {
+      "test-filename-line-highlighting-and-empty-lines#Test filename, line highlighting and empty lines": "console.log('hello world')
 console.log('goodbye world')",
-        "test-highlighting-inline-code#Test highlighting inline code": "import React from 'react'{:js}",
-        "test-link-in-code#Test link in code": "Link to googleLink to GitHub",
-        "test-showlinenumbers-and-word-highlighting#Test showLineNumbers and word highlighting": "object Hello {
+      "test-highlighting-inline-code#Test highlighting inline code": "import React from 'react'{:js}",
+      "test-link-in-code#Test link in code": "Link to googleLink to GitHub",
+      "test-showlinenumbers-and-word-highlighting#Test showLineNumbers and word highlighting": "object Hello {
   def main(args: Array[String]) = {
     println(\\"hello, world\\")
   }
@@ -381,54 +380,54 @@ object Hello {
     println(\\"hello, world\\")
   }
 }",
-        "test-without-specified-language#Test without specified language": "hello world",
-      },
-      "title": "Code highlighting",
+      "test-without-specified-language#Test without specified language": "hello world",
     },
-    "/en/docs/advanced/dynamic-markdown-import": {
-      "data": {},
-      "title": "Dynamic Markdown Import!",
-    },
-    "/en/docs/advanced/file-name.with.DOTS": {
-      "data": {},
-      "title": "You can add dots in your file names",
-    },
-    "/en/docs/advanced/images": {
-      "data": {},
-      "title": "Images",
-    },
-    "/en/docs/advanced/markdown-import": {
-      "data": {
-        "import-of-another-page#Import of another page": "You can also import complete pages:
+    "title": "Code highlighting",
+  },
+  "/en/docs/advanced/dynamic-markdown-import": {
+    "data": {},
+    "title": "Dynamic Markdown Import!",
+  },
+  "/en/docs/advanced/file-name.with.DOTS": {
+    "data": {},
+    "title": "You can add dots in your file names",
+  },
+  "/en/docs/advanced/images": {
+    "data": {},
+    "title": "Images",
+  },
+  "/en/docs/advanced/markdown-import": {
+    "data": {
+      "import-of-another-page#Import of another page": "You can also import complete pages:
 import IndexPage from '../../index.en-US.mdx'
 <IndexPage />",
-        "import-of-markdown-file#Import of markdown file": "import External from '@components/external.mdx'
+      "import-of-markdown-file#Import of markdown file": "import External from '@components/external.mdx'
 <External />",
-      },
-      "title": "Markdown import",
     },
-    "/en/docs/advanced/more/loooooooooooooooooooong-title": {
-      "data": {
-        "loooooooooooooooooooong-heading-2#loooooooooooooooooooong Heading 2": "",
-        "loooooooooooooooooooong-heading-3#loooooooooooooooooooong Heading 3": "",
-      },
-      "title": "loooooooooooooooooooong-title",
+    "title": "Markdown import",
+  },
+  "/en/docs/advanced/more/loooooooooooooooooooong-title": {
+    "data": {
+      "loooooooooooooooooooong-heading-2#loooooooooooooooooooong Heading 2": "",
+      "loooooooooooooooooooong-heading-3#loooooooooooooooooooong Heading 3": "",
     },
-    "/en/docs/advanced/more/tree/one": {
-      "data": {},
-      "title": "One",
-    },
-    "/en/docs/advanced/more/tree/three": {
-      "data": {},
-      "title": "Three",
-    },
-    "/en/docs/advanced/more/tree/two": {
-      "data": {},
-      "title": "Two",
-    },
-    "/en/docs/advanced/performance": {
-      "data": {
-        "": "SWR provides critical functionality in all kinds of web apps, so performance
+    "title": "loooooooooooooooooooong-title",
+  },
+  "/en/docs/advanced/more/tree/one": {
+    "data": {},
+    "title": "One",
+  },
+  "/en/docs/advanced/more/tree/three": {
+    "data": {},
+    "title": "Three",
+  },
+  "/en/docs/advanced/more/tree/two": {
+    "data": {},
+    "title": "Two",
+  },
+  "/en/docs/advanced/performance": {
+    "data": {
+      "": "SWR provides critical functionality in all kinds of web apps, so performance
 is a top priority.SWR’s built-in caching and deduplication skips
 unnecessary network requests, but the performance of the useSWR hook itself
 still matters. In a complex app, there could be hundreds of useSWR calls in a
@@ -437,7 +436,7 @@ no unnecessary requests
 no unnecessary re-renders
 no unnecessary code imported
 without any code changes from you.",
-        "deduplication#Deduplication": "It’s very common to reuse SWR hooks in your app. For example, an app that
+      "deduplication#Deduplication": "It’s very common to reuse SWR hooks in your app. For example, an app that
 renders the current user’s avatar 5 times:
 function useUser() {
   return useSWR('/api/user', fetcher)
@@ -464,12 +463,12 @@ SWR key and are rendered at the almost same time, only 1 network request will
 be made.You can reuse your data hooks (like useUser in the example above) everywhere,
 without worrying about performance or duplicated requests.There is also a dedupingInterval option for overriding the
 default deduplication interval.",
-        "deep-comparison#Deep Comparison": "SWR deep compares data changes by default. If the data value isn’t
+      "deep-comparison#Deep Comparison": "SWR deep compares data changes by default. If the data value isn’t
 changed, a re-render will not be triggered.You can also customize the comparison function via the
 compare option if you want to change the behavior. For
 example, some API responses return a server timestamp that you might want to
 exclude from the data diff.",
-        "dependency-collection#Dependency Collection": "useSWR returns 3 stateful values: data, error and isValidating, each
+      "dependency-collection#Dependency Collection": "useSWR returns 3 stateful values: data, error and isValidating, each
 one can be updated independently. For example, if we print those values within a
 full data-fetching lifecycle, it will be something like this:
 function App() {
@@ -500,22 +499,22 @@ first request, then we got the data from the retry. However, SWR only updates
 the states that are used by the component, which is only data now.If you are not always using all these 3 states, you are already benefitting from
 this feature. At Vercel, this optimization results in ~60%
 fewer re-renders.",
-        "tree-shaking#Tree Shaking": "The SWR package is tree-shakeable
+      "tree-shaking#Tree Shaking": "The SWR package is tree-shakeable
 and side-effect free. That means if you are only importing the core useSWR
 API, unused APIs like useSWRInfinite won't be bundled in your application.",
-      },
-      "title": "Performance",
     },
-    "/en/docs/advanced/react-native": {
-      "data": {
-        "": "Upgrade to the latest version (≥ 1.0.0) to experience this customization.
+    "title": "Performance",
+  },
+  "/en/docs/advanced/react-native": {
+    "data": {
+      "": "Upgrade to the latest version (≥ 1.0.0) to experience this customization.
 Unlike React running inside the browsers, React Native has a very different user
 experience. For example there is no “tab focus”, switching from the background
 to the app is considered as a “focus” instead. To customize these behaviors, you
 can replace the default browser focus and online events listeners with React
 Native’s app state detection and other native ported API, and configure SWR to
 use them.",
-        "customize-focus-and-reconnect-events#Customize focus and reconnect Events": "There're few configurations you need to take care of such as isOnline,
+      "customize-focus-and-reconnect-events#Customize focus and reconnect Events": "There're few configurations you need to take care of such as isOnline,
 isVisible, initFocus and initReconnect.isOnline and isVisible are functions that return a boolean, to determine if
 the application is \\"active\\". By default, SWR will bail out a revalidation if
 these conditions are not met.When using initFocus and initReconnect, it's required to also set up a
@@ -574,8 +573,8 @@ subscribe to the network status. The implementation will be similar to the
 example above: receiving a callback function and trigger it when the network
 recovers from offline, so SWR can start a revalidation to keep your data
 up-to-date.",
-        "example#Example": "",
-        "global-setup#Global Setup": "You can wrap your app under SWRConfig and preconfig all configurations there
+      "example#Example": "",
+      "global-setup#Global Setup": "You can wrap your app under SWRConfig and preconfig all configurations there
 <SWRConfig
   value={{
     /* ... */
@@ -583,25 +582,25 @@ up-to-date.",
 >
   <App>
 </SWRConfig>",
-      },
-      "title": "React Native",
     },
-    "/en/docs/advanced/scrollbar-x": {
-      "data": {
-        "": "Student ID	First Name	Last Name	Major	GPA	Graduation Year	Email	Phone Number	Address	Date of Birth	Gender	Class Standing	Enrollment Status	Enrollment Date	Graduation Date	Advisor ID	12345	John	Doe	Computer Science	3.5	2024	johndoe@example.com	555-555-5555	123 Main St, Anytown USA	01/01/2000	M	Junior	Full-time	01/01/2022	05/01/2024	54321	67890	Jane	Smith	Biology	3.2	2023	janesmith@example.com	555-555-5555	456 Park Ave, Anytown USA	02/02/1999	F	Senior	Full-time	01/01/2019	12/01/2022	56789	11111	Bob	Johnson	Mathematics	3.7	2022	bobjohnson@example.com	555-555-5555	789 Elm St, Anytown USA	03/03/1998	M	Senior	Part-time	01/01/2021	05/01/2022	98765	22222	Samantha	Williams	Chemistry	3.3	2024	samanthawilliams@example.com	555-555-5555	321 Oak St, Anytown USA	04/04/1997	F	Junior	Full-time	01/01/2022	05/01/2024	54321	33333	Michael	Brown	Political Science	3.0	2023	michaelbrown@example.com	555-555-5555	159 Pine St, Anytown USA	05/05/1996	M	Senior	Full-time	01/01/2019	12/01/2022	56789	44444	Ashley	Moore	Business	3.5	2022	ashleymoore@example.com	555-555-5555	753 Birch St, Anytown USA	06/06/1995	F	Senior	Part-time	01/01/2021	05/01/2022	98765	55555	David	Taylor	Engineering	3.9	2024	davidtaylor@example.com	555-555-5555	964 Maple St, Anytown USA	07/07/1994	M	Junior	Full-time	01/01/2022	05/01/2024	54321	77777	Jessica	Anderson	Communications	3.6	2023	jessicaanderson@example.com	555-555-5555	111 Cedar St, Anytown USA	08/08/1993	F	Senior	Full-time	01/01/2019	12/01/2022	56789	
+    "title": "React Native",
+  },
+  "/en/docs/advanced/scrollbar-x": {
+    "data": {
+      "": "Student ID	First Name	Last Name	Major	GPA	Graduation Year	Email	Phone Number	Address	Date of Birth	Gender	Class Standing	Enrollment Status	Enrollment Date	Graduation Date	Advisor ID	12345	John	Doe	Computer Science	3.5	2024	johndoe@example.com	555-555-5555	123 Main St, Anytown USA	01/01/2000	M	Junior	Full-time	01/01/2022	05/01/2024	54321	67890	Jane	Smith	Biology	3.2	2023	janesmith@example.com	555-555-5555	456 Park Ave, Anytown USA	02/02/1999	F	Senior	Full-time	01/01/2019	12/01/2022	56789	11111	Bob	Johnson	Mathematics	3.7	2022	bobjohnson@example.com	555-555-5555	789 Elm St, Anytown USA	03/03/1998	M	Senior	Part-time	01/01/2021	05/01/2022	98765	22222	Samantha	Williams	Chemistry	3.3	2024	samanthawilliams@example.com	555-555-5555	321 Oak St, Anytown USA	04/04/1997	F	Junior	Full-time	01/01/2022	05/01/2024	54321	33333	Michael	Brown	Political Science	3.0	2023	michaelbrown@example.com	555-555-5555	159 Pine St, Anytown USA	05/05/1996	M	Senior	Full-time	01/01/2019	12/01/2022	56789	44444	Ashley	Moore	Business	3.5	2022	ashleymoore@example.com	555-555-5555	753 Birch St, Anytown USA	06/06/1995	F	Senior	Part-time	01/01/2021	05/01/2022	98765	55555	David	Taylor	Engineering	3.9	2024	davidtaylor@example.com	555-555-5555	964 Maple St, Anytown USA	07/07/1994	M	Junior	Full-time	01/01/2022	05/01/2024	54321	77777	Jessica	Anderson	Communications	3.6	2023	jessicaanderson@example.com	555-555-5555	111 Cedar St, Anytown USA	08/08/1993	F	Senior	Full-time	01/01/2019	12/01/2022	56789	
 dada
 dadasd",
-      },
-      "title": "Scrollbar X",
     },
-    "/en/docs/arguments": {
-      "data": {
-        "": "By default, key will be passed to fetcher as the argument. So the following
+    "title": "Scrollbar X",
+  },
+  "/en/docs/arguments": {
+    "data": {
+      "": "By default, key will be passed to fetcher as the argument. So the following
 3 expressions are equivalent:
 useSWR('/api/user', () => fetcher('/api/user'))
 useSWR('/api/user', url => fetcher(url))
 useSWR('/api/user', fetcher)",
-        "multiple-arguments#Multiple Arguments": "In some scenarios, it's useful to pass multiple arguments (can be any value or
+      "multiple-arguments#Multiple Arguments": "In some scenarios, it's useful to pass multiple arguments (can be any value or
 object) to the fetcher function. For example an authorized fetch request:
 useSWR('/api/user', url => fetchWithToken(url, token))
 This is incorrect. Because the identifier (also the cache key) of the data
@@ -611,7 +610,7 @@ multiple arguments of fetcher:
 const { data: user } = useSWR(['/api/user', token], fetchWithToken)
 The function fetchWithToken still accepts the same 2 arguments, but the cache
 key will also be associated with token now.",
-        "passing-objects#Passing Objects": "Since SWR 1.1.0, object-like keys will be serialized under the hood
+      "passing-objects#Passing Objects": "Since SWR 1.1.0, object-like keys will be serialized under the hood
 automatically.
 Say you have another function that fetches data with a user scope:
 fetchWithUser(api, user). You can do the following:
@@ -625,37 +624,37 @@ You can directly pass an object as the key, and fetcher will receive that
 object too:
 const { data: orders } = useSWR({ url: '/api/orders', args: user }, fetcher)
 In older versions (< 1.1.0), SWR shallowly compares the arguments on every render, and triggers revalidation if any of them has changed.",
-      },
-      "title": "Arguments",
     },
-    "/en/docs/callout": {
-      "data": {
-        "": "<Callout>…
+    "title": "Arguments",
+  },
+  "/en/docs/callout": {
+    "data": {
+      "": "<Callout>…
 <Callout type=\\"info\\">…
 <Callout type=\\"warning\\">…
 <Callout type=\\"error\\">…
 <Callout type=\\"info\\" emoji=\\"🇫🇷\\">…",
-      },
-      "title": "<Callout /> Component",
     },
-    "/en/docs/change-log": {
-      "data": {
-        "": "This page should not have the sidebar because it has
+    "title": "<Callout /> Component",
+  },
+  "/en/docs/change-log": {
+    "data": {
+      "": "This page should not have the sidebar because it has
 \\"theme\\": {
   \\"sidebar\\": false
 }",
-      },
-      "title": "Change Log",
     },
-    "/en/docs/code-block-without-language": {
-      "data": {
-        "": "hello world",
-      },
-      "title": "Code blocks without language have Copy Code button",
+    "title": "Change Log",
+  },
+  "/en/docs/code-block-without-language": {
+    "data": {
+      "": "hello world",
     },
-    "/en/docs/conditional-fetching": {
-      "data": {
-        "conditional#Conditional": "Use null or pass a function as key to conditionally fetch data. If the
+    "title": "Code blocks without language have Copy Code button",
+  },
+  "/en/docs/conditional-fetching": {
+    "data": {
+      "conditional#Conditional": "Use null or pass a function as key to conditionally fetch data. If the
 function throws or returns a falsy value, SWR will not start the request.
 // conditionally fetch
 const { data } = useSWR(shouldFetch ? '/api/data' : null, fetcher)
@@ -663,7 +662,7 @@ const { data } = useSWR(shouldFetch ? '/api/data' : null, fetcher)
 const { data } = useSWR(() => (shouldFetch ? '/api/data' : null), fetcher)
 // ...or throw an error when user.id is not defined
 const { data } = useSWR(() => '/api/data?uid=' + user.id, fetcher)",
-        "dependent#Dependent": "SWR also allows you to fetch data that depends on other data. It ensures the
+      "dependent#Dependent": "SWR also allows you to fetch data that depends on other data. It ensures the
 maximum possible parallelism (avoiding waterfalls), as well as serial fetching
 when a piece of dynamic data is required for the next data fetch to happen.
 function MyProjects() {
@@ -677,36 +676,36 @@ function MyProjects() {
   if (!projects) return 'loading...'
   return 'You have ' + projects.length + ' projects'
 }",
-      },
-      "title": "Conditional Fetching",
     },
-    "/en/docs/custom-header-ids": {
-      "data": {
-        "": "You can specify custom header ids using the format, ## Header [#custom-id].
+    "title": "Conditional Fetching",
+  },
+  "/en/docs/custom-header-ids": {
+    "data": {
+      "": "You can specify custom header ids using the format, ## Header [#custom-id].
 For example:
 ## Foo [#bar]",
-        "custom-id-example#This Has a Custom Id": "You can see the custom header id in the header above. Note both by hovering over
+      "custom-id-example#This Has a Custom Id": "You can see the custom header id in the header above. Note both by hovering over
 the header, as well as in the table of contents, the custom-id-example href is
 in use.",
-        "this-has-no-custom-id#This Has No Custom Id": "This header has no custom id. The id is generated from the header text.",
-      },
-      "title": "Custom Header Ids",
+      "this-has-no-custom-id#This Has No Custom Id": "This header has no custom id. The id is generated from the header text.",
     },
-    "/en/docs/data-fetching": {
-      "data": {
-        "": "const { data, error } = useSWR(key, fetcher)
+    "title": "Custom Header Ids",
+  },
+  "/en/docs/data-fetching": {
+    "data": {
+      "": "const { data, error } = useSWR(key, fetcher)
 This is the very fundamental API of SWR. The fetcher here is an async function
 that accepts the key of SWR, and returns the data.The returned value will be passed as data, and if it throws, it will be caught
 as error.
 Note that fetcher can be omitted from the parameters if it's provided
 globally.",
-        "axios#Axios": "import axios from 'axios'
+      "axios#Axios": "import axios from 'axios'
 const fetcher = url => axios.get(url).then(res => res.data)
 function App() {
   const { data, error } = useSWR('/api/data', fetcher)
   // ...
 }",
-        "fetch#Fetch": "You can use any library to handle data fetching, for example a fetch polyfill
+      "fetch#Fetch": "You can use any library to handle data fetching, for example a fetch polyfill
 developit/unfetch:
 import fetch from 'unfetch'
 const fetcher = url => fetch(url).then(r => r.json())
@@ -716,7 +715,7 @@ function App() {
 }
 If you are using Next.js, you don't need to import this
 polyfill:New Built-In Polyfills: fetch(), URL, and Object.assign",
-        "graphql#GraphQL": "Or using GraphQL with libs like
+      "graphql#GraphQL": "Or using GraphQL with libs like
 graphql-request:
 import { request } from 'graphql-request'
 const fetcher = query => request('/api/graphql', query)
@@ -738,18 +737,18 @@ function App() {
 }
 If you want to pass variables to a GraphQL query, check out
 Multiple Arguments.",
-      },
-      "title": "Data Fetching",
     },
-    "/en/docs/error-handling": {
-      "data": {
-        "": "If an error is thrown inside fetcher, it will be
+    "title": "Data Fetching",
+  },
+  "/en/docs/error-handling": {
+    "data": {
+      "": "If an error is thrown inside fetcher, it will be
 returned as error by the hook.
 const fetcher = url => fetch(url).then(r => r.json())
 // ...
 const { data, error } = useSWR('/api/user', fetcher)
 The error object will be defined if the fetch promise is rejected.",
-        "error-retry#Error Retry": "SWR uses the
+      "error-retry#Error Retry": "SWR uses the
 exponential backoff algorithm
 to retry the request on error. The algorithm allows the app to recover from
 errors quickly, but not waste resources retrying too often.You can also override this behavior via the
@@ -769,7 +768,7 @@ useSWR('/api/user', fetcher, {
 This callback gives you the flexibility to retry based on various conditions.
 You can also disable it by setting shouldRetryOnError: false.It's also possible to provide it via the
 Global Configuration context.",
-        "global-error-report#Global Error Report": "You can always get the error object inside the component reactively. But in
+      "global-error-report#Global Error Report": "You can always get the error object inside the component reactively. But in
 case you want to handle the error globally, to notify the UI to show a
 toast or a
 snackbar, or report it somewhere
@@ -787,7 +786,7 @@ onError event:
 >
   <MyApp />
 </SWRConfig>",
-        "status-code-and-error-object#Status Code and Error Object": "Sometimes we want an API to return an error object alongside the status code.
+      "status-code-and-error-object#Status Code and Error Object": "Sometimes we want an API to return an error object alongside the status code.
 Both of them are useful for the client.We can customize our fetcher to return more information. If the status code is
 not 2xx, we consider it an error even if it can be parsed as JSON:
 const fetcher = async url => {
@@ -813,16 +812,16 @@ const { data, error } = useSWR('/api/user', fetcher)
 Note that data and error can exist at the same time. So the UI can display
 the existing data, while knowing the upcoming request has failed.
 Here we have an example.",
-      },
-      "title": "Error Handling",
     },
-    "/en/docs/getting-started": {
-      "data": {
-        "": "https://google.com/da; theme box-decoration-theme: clone can create confusing output over line breaks
+    "title": "Error Handling",
+  },
+  "/en/docs/getting-started": {
+    "data": {
+      "": "https://google.com/da; theme box-decoration-theme: clone can create confusing output over line breaks
 Link",
-        "bar-code#Bar code": "",
-        "da#Da": "",
-        "example#Example": "In a real-world example, our website shows a navbar and the content, both depend
+      "bar-code#Bar code": "",
+      "da#Da": "",
+      "example#Example": "In a real-world example, our website shows a navbar and the content, both depend
 on user:
 Traditionally, we fetch data once using useEffect in the top level component,
 and pass it to child components via props (notice that we don't handle error
@@ -904,10 +903,10 @@ cached and shared automatically.Also, the application now has the ability to ref
 user focus or network reconnect! That means, when the
 user's laptop wakes from sleep or they switch between browser tabs, the data
 will be refreshed automatically.",
-        "foo-myvar#Foo ": "",
-        "latex-latex2#Latex ": "",
-        "machina#MaChina": "",
-        "make-it-reusable#Make It Reusable": "Here's a JavaScript expression: const a = 1 + 2{:js}.When building a web app, you might need to reuse the data in many places of the
+      "foo-myvar#Foo ": "",
+      "latex-latex2#Latex ": "",
+      "machina#MaChina": "",
+      "make-it-reusable#Make It Reusable": "Here's a JavaScript expression: const a = 1 + 2{:js}.When building a web app, you might need to reuse the data in many places of the
 UI. It is incredibly easy to create reusable data hooks on top of SWR:
 function useUser(id) {
   const { data, error } = useSWR(\`/api/user/\${id}\`, fetcher)
@@ -928,14 +927,14 @@ By adopting this pattern, you can forget about fetching data in the
 imperative way: start the request, update the loading state, and return the
 final result. Instead, your code is more declarative: you just need to specify
 what data is used by the component.",
-        "my-file-is-myfile-js#My file is <MyFile />{:js}": "x^2
+      "my-file-is-myfile-js#My file is <MyFile />{:js}": "x^2
 \\\\int_1^2x^2
 Inside your React project directory, run the following:
 npm i swr __esModule
 pnpm add swr __esModule
 yarn add swr __esModule
 bun add swr __esModule",
-        "quick-start-latex#Quick Start ": "For normal RESTful APIs with JSON data, first you need to create a fetcher
+      "quick-start-latex#Quick Start ": "For normal RESTful APIs with JSON data, first you need to create a fetcher
 function, which is just a wrapper of the native fetch:
 const fetcher = (...args) => fetch(...args).then(res => res.json())
 If you want to use GraphQL API or libs like Axios, you can create your own
@@ -956,13 +955,13 @@ function Profile() {
 Normally, there're 3 possible states of a request: \\"loading\\", \\"ready\\", or
 \\"error\\". You can use the value of data and error to determine the current
 state of the request, and return the corresponding UI.",
-        "qux-#Qux ": "",
-      },
-      "title": "Getting Started",
+      "qux-#Qux ": "",
     },
-    "/en/docs/global-configuration": {
-      "data": {
-        "": "The context SWRConfig can provide global configurations
+    "title": "Getting Started",
+  },
+  "/en/docs/global-configuration": {
+    "data": {
+      "": "The context SWRConfig can provide global configurations
 (options) for all SWR hooks.
 <SWRConfig value={options}>
   <Component />
@@ -989,7 +988,7 @@ function App() {
     </SWRConfig>
   )
 }",
-        "access-to-global-configurations#Access To Global Configurations": "You can use the useSWRConfig hook to get the global configurations, as well as
+      "access-to-global-configurations#Access To Global Configurations": "You can use the useSWRConfig hook to get the global configurations, as well as
 mutate and cache:
 import { useSWRConfig } from 'swr'
 function Component() {
@@ -998,22 +997,22 @@ function Component() {
 }
 Nested configurations will be extended. If no <SWRConfig> is used, it will
 return the default ones.",
-        "cache-provider#Cache Provider": "Besides, all the options listed, SWRConfig also accepts an
+      "cache-provider#Cache Provider": "Besides, all the options listed, SWRConfig also accepts an
 optional provider function. Please refer to the Cache section
 for more details.
 <SWRConfig value={{ provider: () => new Map() }}>
   <Dashboard />
 </SWRConfig>",
-        "extra-apis#Extra APIs": "",
-      },
-      "title": "Global Configuration",
+      "extra-apis#Extra APIs": "",
     },
-    "/en/docs/middleware": {
-      "data": {
-        "": "Upgrade to the latest version (≥ 1.0.0) to use this feature.
+    "title": "Global Configuration",
+  },
+  "/en/docs/middleware": {
+    "data": {
+      "": "Upgrade to the latest version (≥ 1.0.0) to use this feature.
 The middleware feature is a new addition in SWR 1.0 that enables you to execute
 logic before and after SWR hooks.",
-        "api#API": "function myMiddleware(useSWRNext) {
+      "api#API": "function myMiddleware(useSWRNext) {
   return (key, fetcher, config) => {
     // Before hook runs...
     // Handle the next middleware, or the \`useSWR\` hook if this is the last one.
@@ -1026,8 +1025,8 @@ You can pass an array of middleware as an option to SWRConfig or useSWR:
 <SWRConfig value={{ use: [myMiddleware] }}>
 // or...
 useSWR(key, fetcher, { use: [myMiddleware] })",
-        "examples#Examples": "",
-        "extend#Extend": "Middleware will be extended like regular options. For example:
+      "examples#Examples": "",
+      "extend#Extend": "Middleware will be extended like regular options. For example:
 function Bar() {
   useSWR(key, fetcher, { use: [c] })
   // ...
@@ -1043,7 +1042,7 @@ function Foo() {
 }
 is equivalent to:
 useSWR(key, fetcher, { use: [a, b, c] })",
-        "keep-previous-result#Keep Previous Result": "Sometimes you want the data returned by useSWR to be \\"laggy\\". Even if the key
+      "keep-previous-result#Keep Previous Result": "Sometimes you want the data returned by useSWR to be \\"laggy\\". Even if the key
 changes, you still want it to return the previous result until the new data has
 loaded.This can be built as a laggy middleware together with useRef. In this example,
 we are also going to extend the returned object of the useSWR hook:
@@ -1081,7 +1080,7 @@ function laggy(useSWRNext) {
 }
 When you need a SWR hook to be laggy, you can then use this middleware:
 const { data, isLagging, resetLaggy } = useSWR(key, fetcher, { use: [laggy] })",
-        "multiple-middleware#Multiple Middleware": "Each middleware wraps the next middleware, and the last one just wraps the SWR
+      "multiple-middleware#Multiple Middleware": "Each middleware wraps the next middleware, and the last one just wraps the SWR
 hook. For example:
 useSWR(key, fetcher, { use: [a, b, c] })
 The order of middleware executions will be a → b → c, as shown below:
@@ -1092,7 +1091,7 @@ enter a
     exit  c
   exit  b
 exit  a",
-        "request-logger#Request Logger": "Let's build a simple request logger middleware as an example. It prints out all
+      "request-logger#Request Logger": "Let's build a simple request logger middleware as an example. It prints out all
 the fetcher requests sent from this SWR hook. You can also use this middleware
 for all SWR hooks by adding it to SWRConfig.
 function logger(useSWRNext) {
@@ -1111,7 +1110,7 @@ useSWR(key, fetcher, { use: [logger] })
 Every time the request is fired, it outputs the SWR key to the console:
 SWR Request: /api/user1
 SWR Request: /api/user2",
-        "serialize-object-keys#Serialize Object Keys": "Since SWR 1.1.0, object-like keys will be serialized under the hood
+      "serialize-object-keys#Serialize Object Keys": "Since SWR 1.1.0, object-like keys will be serialized under the hood
 automatically.
 In older versions (< 1.1.0), SWR shallowly compares the arguments on every render, and triggers revalidation if any of them has changed.
 If you are passing serializable objects as the key. You can serialize object keys to ensure its stability, a simple middleware can help:
@@ -1133,15 +1132,15 @@ arguments.
 Furthermore, you can use libs like
 fast-json-stable-stringify
 instead of JSON.stringify — faster and stabler.",
-        "usage#Usage": "Middleware receive the SWR hook and can execute logic before and after running
+      "usage#Usage": "Middleware receive the SWR hook and can execute logic before and after running
 it. If there are multiple middleware, each middleware wraps the next middleware.
 The last middleware in the list will receive the original SWR hook useSWR.",
-      },
-      "title": "Middleware",
     },
-    "/en/docs/mutation": {
-      "data": {
-        "bound-mutate#Bound Mutate": "The SWR object returned by useSWR also contains a mutate() function that is
+    "title": "Middleware",
+  },
+  "/en/docs/mutation": {
+    "data": {
+      "bound-mutate#Bound Mutate": "The SWR object returned by useSWR also contains a mutate() function that is
 pre-bound to the SWR's key.It is functionally equivalent to the global mutate function but does not
 require the key parameter.
 import useSWR from 'swr'
@@ -1165,7 +1164,7 @@ function Profile() {
     </div>
   )
 }",
-        "mutate-based-on-current-data#Mutate Based on Current Data": "Sometimes, you want to update a part of your data based on the current data.With mutate, you can pass an async function which will receive the current
+      "mutate-based-on-current-data#Mutate Based on Current Data": "Sometimes, you want to update a part of your data based on the current data.With mutate, you can pass an async function which will receive the current
 cached value, if any, and returns an updated document.
 mutate('/api/todos', async todos => {
   // let's update the todo with ID \`1\` to be completed,
@@ -1178,7 +1177,7 @@ mutate('/api/todos', async todos => {
   const filteredTodos = todos.filter(todo => todo.id !== '1')
   return [...filteredTodos, updatedTodo]
 })",
-        "mutation-and-post-request#Mutation and POST Request": "In many cases, applying local mutations to data is a good way to make changes
+      "mutation-and-post-request#Mutation and POST Request": "In many cases, applying local mutations to data is a good way to make changes
 feel faster — no need to wait for the remote source of data.With mutate, you can update your local data programmatically, while
 revalidating and finally replace it with the latest data.
 import useSWR, { useSWRConfig } from 'swr'
@@ -1212,7 +1211,7 @@ update” usage:
 mutate('/api/user', newUser, false) // use \`false\` to mutate without revalidation
 mutate('/api/user', updateUser(newUser), false) // \`updateUser\` is a Promise of the request,
 // which returns the updated document",
-        "returned-data-from-mutate#Returned Data from Mutate": "Most probably, you need some data to update the cache. The data is resolved or
+      "returned-data-from-mutate#Returned Data from Mutate": "Most probably, you need some data to update the cache. The data is resolved or
 returned from the promise or async function you passed to mutate.The function passed to mutate will return an updated document which is used to
 update the corresponding cache value. If there is an error thown while executing
 the function, the error will be thrown so it can be handled appropriately.
@@ -1221,7 +1220,7 @@ try {
 } catch (error) {
   // Handle an error while updating the user here
 }",
-        "revalidate#Revalidate": "You can get the mutate function from the useSWRConfig() hook, and broadcast
+      "revalidate#Revalidate": "You can get the mutate function from the useSWRConfig() hook, and broadcast
 a revalidation message globally to other SWR hooks* using the same
 key by calling mutate(key).This example shows how to automatically refetch the login info (e.g. inside
 <Profile/>) when the user clicks the “Logout” button.
@@ -1247,13 +1246,13 @@ function App() {
 }
 *: It broadcasts to SWR hooks under the same cache provider
 scope. If no cache provider exists, it will broadcast to all SWR hooks.",
-      },
-      "title": "Mutation",
     },
-    "/en/docs/options": {
-      "data": {
-        "": "const { data, error, isValidating, mutate } = useSWR(key, fetcher, options)",
-        "options#Options": "suspense = false: enable React Suspense mode (details)
+    "title": "Mutation",
+  },
+  "/en/docs/options": {
+    "data": {
+      "": "const { data, error, isValidating, mutate } = useSWR(key, fetcher, options)",
+      "options#Options": "suspense = false: enable React Suspense mode (details)
 fetcher(args): the fetcher function
 revalidateIfStale = true: automatic revalidation on mount even if there is
 stale data (details)
@@ -1302,27 +1301,27 @@ When under a slow network (2G,  70Kbps), errorRetryInterval will be
 10s, and loadingTimeout will be 5s by default.
 You can also use global configuration to provide
 default options.",
-        "parameters#Parameters": "key: a unique key string for the request (or a function / array / null)
+      "parameters#Parameters": "key: a unique key string for the request (or a function / array / null)
 (advanced usage)
 fetcher: (optional) a Promise returning function to fetch your data
 (details)
 options: (optional) an object of options for this SWR hook",
-        "return-values#Return Values": "data: data for the given key resolved by fetcher (or undefined if not
+      "return-values#Return Values": "data: data for the given key resolved by fetcher (or undefined if not
 loaded)
 error: error thrown by fetcher (or undefined)
 isValidating: if there's a request or revalidation loading
 mutate(data?, shouldRevalidate?): function to mutate the cached data
 (details)",
-      },
-      "title": "API Options",
     },
-    "/en/docs/pagination": {
-      "data": {
-        "": "Please update to the latest version (≥ 0.3.0) to use this API. The previous
+    "title": "API Options",
+  },
+  "/en/docs/pagination": {
+    "data": {
+      "": "Please update to the latest version (≥ 0.3.0) to use this API. The previous
 useSWRPages API is now deprecated.
 SWR provides a dedicated API useSWRInfinite to support common UI patterns such
 as pagination and infinite loading.",
-        "advanced-cases#Advanced Cases": "However, in some advanced use cases, the solution above doesn't work.For example, we are still implementing the same \\"Load More\\" UI, but also need to
+      "advanced-cases#Advanced Cases": "However, in some advanced use cases, the solution above doesn't work.For example, we are still implementing the same \\"Load More\\" UI, but also need to
 display a number about how many items are there in total. We can't use the
 <Page /> solution anymore because the top level UI (<App />) needs the data
 inside each page:
@@ -1343,15 +1342,15 @@ function App() {
 Also, if the pagination API is cursor based, that solution doesn't work
 either. Because each page needs the data from the previous page, they're not
 isolated.That's how this new useSWRInfinite Hook can help.",
-        "advanced-features#Advanced Features": "Here is an example showing how you can implement
+      "advanced-features#Advanced Features": "Here is an example showing how you can implement
 the following features with useSWRInfinite:
 loading states
 show a special UI if it's empty
 disable the \\"Load More\\" button if reached the end
 changeable data source
 refresh the entire list",
-        "api#API": "",
-        "example-1-index-based-paginated-api#Example 1: Index Based Paginated API": "For normal index based APIs:
+      "api#API": "",
+      "example-1-index-based-paginated-api#Example 1: Index Based Paginated API": "For normal index based APIs:
 GET /users?page=0&limit=10
 [
   { name: 'Alice', ... },
@@ -1406,7 +1405,7 @@ responses:
   ],
   ...
 ]",
-        "example-2-cursor-or-offset-based-paginated-api#Example 2: Cursor or Offset Based Paginated API": "Let's say the API now requires a cursor and returns the next cursor alongside
+      "example-2-cursor-or-offset-based-paginated-api#Example 2: Cursor or Offset Based Paginated API": "Let's say the API now requires a cursor and returns the next cursor alongside
 with the data:
 GET /users?cursor=123&limit=10
 {
@@ -1427,7 +1426,7 @@ const getKey = (pageIndex, previousPageData) => {
   // add the cursor to the API endpoint
   return \`/users?cursor=\${previousPageData.nextCursor}&limit=10\`
 }",
-        "infinite-loading#Infinite Loading": "Sometimes we want to build an infinite loading UI, with a \\"Load More\\" button
+      "infinite-loading#Infinite Loading": "Sometimes we want to build an infinite loading UI, with a \\"Load More\\" button
 that appends data to the list (or done automatically when you scroll):
 To implement this, we need to make dynamic number of requests on this page.
 React Hooks have a couple of rules,
@@ -1467,7 +1466,7 @@ function App() {
     </div>
   )
 }",
-        "pagination#Pagination": "First of all, we might NOT need useSWRInfinite but can use just useSWR
+      "pagination#Pagination": "First of all, we might NOT need useSWRInfinite but can use just useSWR
 if we are building something like this:
 ...which is a typical pagination UI. Let's see how it can be easily implemented
 with useSWR:
@@ -1520,7 +1519,7 @@ function App() {
 }
 With just 1 line of code, we get a much better UX. The useSWR hook is so
 powerful, that most scenarios are covered by it.",
-        "parameters#Parameters": "getKey: a function that accepts the index and the previous page data,
+      "parameters#Parameters": "getKey: a function that accepts the index and the previous page data,
 returns the key of a page
 fetcher: same as useSWR's fetcher function
 options: accepts all the options that useSWR supports, with 3 extra
@@ -1531,14 +1530,14 @@ revalidateFirstPage = true: always try to revalidate the first page
 persistSize = false: don't reset the page size to 1 (or initialSize if
 set) when the first page's key changes
 Note that the initialSize option is not allowed to change in the lifecycle.",
-        "return-values#Return Values": "data: an array of fetch response values of each page
+      "return-values#Return Values": "data: an array of fetch response values of each page
 error: same as useSWR's error
 isValidating: same as useSWR's isValidating
 mutate: same as useSWR's bound mutate function but manipulates the data
 array
 size: the number of pages that will be fetched and returned
 setSize: set the number of pages that need to be fetched",
-        "useswrinfinite#useSWRInfinite": "useSWRInfinite gives us the ability to trigger a number of requests with one
+      "useswrinfinite#useSWRInfinite": "useSWRInfinite gives us the ability to trigger a number of requests with one
 Hook. This is how it looks:
 import useSWRInfinite from 'swr/infinite'
 // ...
@@ -1552,20 +1551,20 @@ React state.In infinite loading, one page is one request, and our goal is to fet
 multiple pages and render them.
 If you are using SWR 0.x versions, useSWRInfinite needs to be imported from
 swr:import {useSWRInfinite} from 'swr'",
-        "when-to-use-useswr#When to Use useSWR": "",
-      },
-      "title": "Pagination",
+      "when-to-use-useswr#When to Use useSWR": "",
     },
-    "/en/docs/prefetching": {
-      "data": {
-        "pre-fill-data#Pre-fill Data": "If you want to pre-fill existing data into the SWR cache, you can use the
+    "title": "Pagination",
+  },
+  "/en/docs/prefetching": {
+    "data": {
+      "pre-fill-data#Pre-fill Data": "If you want to pre-fill existing data into the SWR cache, you can use the
 fallbackData option. For example:
 useSWR('/api/data', fetcher, { fallbackData: prefetchedData })
 If SWR hasn't fetched the data yet, this hook will return prefetchedData as a
 fallback.You can also configure this for all SWR hooks and multiple keys with
 <SWRConfig> and the fallback option. Check
 Next.js SSG and SSR for more details.",
-        "programmatically-prefetch#Programmatically Prefetch": "Sometimes, you want to preload a resource conditionally. For example, preloading
+      "programmatically-prefetch#Programmatically Prefetch": "Sometimes, you want to preload a resource conditionally. For example, preloading
 the data when the user is
 hovering
 a link. The most
@@ -1583,24 +1582,24 @@ function prefetch() {
 Together with techniques like
 page prefetching
 in Next.js, you will be able to load both next page and data instantly.",
-        "top-level-page-data#Top-Level Page Data": "There’re many ways to prefetch the data for SWR. For top level requests,
+      "top-level-page-data#Top-Level Page Data": "There’re many ways to prefetch the data for SWR. For top level requests,
 rel=\\"preload\\"
 is highly recommended:
 <link rel=\\"preload\\" href=\\"/api/data\\" as=\\"fetch\\" crossorigin=\\"anonymous\\" />
 Just put it inside your HTML <head>. It’s easy, fast and native.It will prefetch the data when the HTML loads, even before JavaScript starts to
 download. All your incoming fetch requests with the same URL will reuse the
 result (including SWR, of course).",
-      },
-      "title": "Prefetching Data",
     },
-    "/en/docs/raw-layout": {
-      "data": {
-        "": "Version	Changes	v10.0.0	locale, locales, defaultLocale, and notFound options added.	v9.3.0	getServerSideProps introduced.	
+    "title": "Prefetching Data",
+  },
+  "/en/docs/raw-layout": {
+    "data": {
+      "": "Version	Changes	v10.0.0	locale, locales, defaultLocale, and notFound options added.	v9.3.0	getServerSideProps introduced.	
 Version	Changes	v10.0.0	locale, locales, defaultLocale, and notFound options added.	v9.3.0	getServerSideProps introduced.",
-        "heading-2#Heading 2": "",
-        "heading-3#Heading 3": "",
-        "heading-4#Heading 4": "",
-        "heading-5#Heading 5": "one
+      "heading-2#Heading 2": "",
+      "heading-3#Heading 3": "",
+      "heading-4#Heading 4": "",
+      "heading-5#Heading 5": "one
 two
 three
 one
@@ -1623,13 +1622,13 @@ v9.3.0
 getServerSideProps introduced.
 Details
 Something small enough to escape casual notice.",
-      },
-      "title": "Raw Layout",
     },
-    "/en/docs/revalidation": {
-      "data": {
-        "": "If you want to manually revalidate the data, check mutation.",
-        "disable-automatic-revalidations#Disable Automatic Revalidations": "If the resource is immutable, that will never change if we revalidate again,
+    "title": "Raw Layout",
+  },
+  "/en/docs/revalidation": {
+    "data": {
+      "": "If you want to manually revalidate the data, check mutation.",
+      "disable-automatic-revalidations#Disable Automatic Revalidations": "If the resource is immutable, that will never change if we revalidate again,
 we can disable all kinds of automatic revalidations for it.Since version 1.0, SWR provides a helper hook useSWRImmutable to mark the
 resource as immutable:
 import useSWRImmutable from 'swr/immutable'
@@ -1647,13 +1646,13 @@ useSWRImmutable(key, fetcher)
 The revalidateIfStale controls if SWR should revalidate when it mounts and
 there is stale data.These 2 hooks above do the exact same thing. Once the data is cached, they
 will never request it again.",
-        "revalidate-on-focus#Revalidate on Focus": "When you re-focus a page or switch between tabs, SWR automatically revalidates
+      "revalidate-on-focus#Revalidate on Focus": "When you re-focus a page or switch between tabs, SWR automatically revalidates
 data.This can be useful to immediately synchronize to the latest state. This is
 helpful for refreshing data in scenarios like stale mobile tabs, or laptops that
 went to sleep.
 This feature is enabled by default. You can disable it via the
 revalidateOnFocus option.",
-        "revalidate-on-interval#Revalidate on Interval": "In many cases, data changes because of multiple devices, multiple users,
+      "revalidate-on-interval#Revalidate on Interval": "In many cases, data changes because of multiple devices, multiple users,
 multiple tabs. How can we over time update the data on screen?SWR will give you the option to automatically refetch data. It’s smart which
 means refetching will only happen if the component associated with the hook is
 on screen.
@@ -1662,17 +1661,17 @@ useSWR('/api/todos', fetcher, { refreshInterval: 1000 })
 There're also options such as refreshWhenHidden and refreshWhenOffline. Both
 are disabled by default so SWR won't fetch when the webpage is not on screen, or
 there's no network connection.",
-        "revalidate-on-reconnect#Revalidate on Reconnect": "It's useful to also revalidate when the user is back online. This scenario
+      "revalidate-on-reconnect#Revalidate on Reconnect": "It's useful to also revalidate when the user is back online. This scenario
 happens a lot when the user unlocks their computer, but the internet is not yet
 connected at the same moment.To make sure the data is always up-to-date, SWR automatically revalidates when
 network recovers.This feature is enabled by default. You can disable it via the
 revalidateOnReconnect option.",
-      },
-      "title": "Automatic Revalidation",
     },
-    "/en/docs/suspense": {
-      "data": {
-        "": "Suspense is currently an experimental feature of React. These
+    "title": "Automatic Revalidation",
+  },
+  "/en/docs/suspense": {
+    "data": {
+      "": "Suspense is currently an experimental feature of React. These
 APIs may change significantly and without a warning before they become a part
 of React.More information
 Note that React Suspense is not yet supported in SSR mode.
@@ -1700,7 +1699,7 @@ to catch it:
     <Profile />
   </Suspense>
 </ErrorBoundary>",
-        "note-with-conditional-fetching#Note: With Conditional Fetching": "Normally, when you enabled suspense it's guaranteed that data will always be
+      "note-with-conditional-fetching#Note: With Conditional Fetching": "Normally, when you enabled suspense it's guaranteed that data will always be
 ready on render:
 function Profile() {
   const { data } = useSWR('/api/user', fetcher, { suspense: true })
@@ -1716,15 +1715,15 @@ function Profile() {
 }
 If you want to read more technical details about this restriction, check
 the discussion here.",
-      },
-      "title": "Suspense",
     },
-    "/en/docs/typescript": {
-      "data": {
-        "": "SWR is friendly for apps written in TypeScript, with type safety out of the box.",
-        "basic-usage#Basic Usage": "By default, SWR will also infer the argument types of fetcher from key, so
+    "title": "Suspense",
+  },
+  "/en/docs/typescript": {
+    "data": {
+      "": "SWR is friendly for apps written in TypeScript, with type safety out of the box.",
+      "basic-usage#Basic Usage": "By default, SWR will also infer the argument types of fetcher from key, so
 you can have the preferred types automatically.",
-        "generics#Generics": "Speicifying the type of data is easy. By default, it will use the return type
+      "generics#Generics": "Speicifying the type of data is easy. By default, it will use the return type
 of fetcher (with undefined for the non-ready state) as the data type, but
 you can also pass it as a parameter:
 // 🔹 A. Use a typed fetcher:
@@ -1743,7 +1742,7 @@ const config: SWRConfiguration = {
   // ...
 }
 const { data } = useSWR<string[]>('/api/data', fetcher, config)",
-        "middleware-types#Middleware Types": "There're some extra type definitions you can import to help adding types to your
+      "middleware-types#Middleware Types": "There're some extra type definitions you can import to help adding types to your
 custom middleware.
 import useSWR, { Middleware, SWRHook } from 'swr'
 const swrMiddleware: Middleware =
@@ -1751,7 +1750,7 @@ const swrMiddleware: Middleware =
     // ...
     return useSWRNext(key, fetcher, config)
   }",
-        "useswr#useSWR": "// \`key\` is inferred to be \`string\`
+      "useswr#useSWR": "// \`key\` is inferred to be \`string\`
 useSWR('/api/user', key => {})
 useSWR(() => '/api/user', key => {})
 // \`key\` will be inferred as { a: string; b: { c: string; d: number } }
@@ -1766,19 +1765,19 @@ const uid: Key = '<user_id>'
 const fetcher: Fetcher<string, User> = id => getUserById(id)
 const { data } = useSWR(uid, fetcher)
 // \`data\` will be \`User | undefined\`.",
-        "useswrinfinite#useSWRInfinite": "Same for swr/inifite, you can either rely on the automatic type inference or
+      "useswrinfinite#useSWRInfinite": "Same for swr/inifite, you can either rely on the automatic type inference or
 explicitly sepicify the types by yourself.
 import { SWRInfiniteKeyLoader } from 'swr/infinite'
 const getKey: SWRInfiniteKeyLoader = (index, previousPageData) => {
   // ...
 }
 const { data } = useSWRInfinite(getKey, fetcher)",
-      },
-      "title": "TypeScript",
     },
-    "/en/docs/understanding": {
-      "data": {
-        "combining-with-isloading-and-isvalidating-for-better-ux#Combining with isLoading and isValidating for better UX": "Comparing to the existing isValidating value, isLoading is a new property
+    "title": "TypeScript",
+  },
+  "/en/docs/understanding": {
+    "data": {
+      "combining-with-isloading-and-isvalidating-for-better-ux#Combining with isLoading and isValidating for better UX": "Comparing to the existing isValidating value, isLoading is a new property
 that can help you for the more general loading cases for UX.
 isValidating becomes true whenever there is an ongoing request whatever
 the the data is loaded or not
@@ -1808,21 +1807,21 @@ function Stock() {
 }
 You can find the code example
 here",
-        "dependency-collection-for-performance#Dependency Collection for performance": "SWR only triggers re-rendering when the states used in the component have been
+      "dependency-collection-for-performance#Dependency Collection for performance": "SWR only triggers re-rendering when the states used in the component have been
 updated. If you only use data in the component, SWR ignores the updates of
 other properties like isValidating, and isLoading. This reduces rendering
 counts a lot. More information can be found
 here.",
-        "fallback#Fallback": "This pattern is to fetch data and revalidate it later with fallback data.",
-        "fetch-and-revalidate#Fetch and Revalidate": "This pattern is to fetch data and revalidate it later.",
-        "key-change#Key Change": "This pattern is to fetch data and change the key and revalidate it later.",
-        "key-change--fallback#Key Change + Fallback": "This pattern is to fetch data and change the key and revalidate it later with
+      "fallback#Fallback": "This pattern is to fetch data and revalidate it later with fallback data.",
+      "fetch-and-revalidate#Fetch and Revalidate": "This pattern is to fetch data and revalidate it later.",
+      "key-change#Key Change": "This pattern is to fetch data and change the key and revalidate it later.",
+      "key-change--fallback#Key Change + Fallback": "This pattern is to fetch data and change the key and revalidate it later with
 fallback data.",
-        "key-change--previous-data#Key Change + Previous Data": "This pattern is to fetch data and change the key and revalidate it later with
+      "key-change--previous-data#Key Change + Previous Data": "This pattern is to fetch data and change the key and revalidate it later with
 the keepPreviousData option.",
-        "key-change--previous-data--fallback#Key Change + Previous Data + Fallback": "This pattern is to fetch data and change the key and revalidate it later with
+      "key-change--previous-data--fallback#Key Change + Previous Data + Fallback": "This pattern is to fetch data and change the key and revalidate it later with
 the keepPreviousData option and fallback data.",
-        "return-previous-data-for-better-ux#Return previous data for better UX": "When doing data fetching based on continuous user actions, e.g. real-time search
+      "return-previous-data-for-better-ux#Return previous data for better UX": "When doing data fetching based on continuous user actions, e.g. real-time search
 when typing, keeping the previous fetched data can improve the UX a lot.
 keepPreviousData is an option to enable that behavior. Here's a simple search
 UI:
@@ -1849,15 +1848,15 @@ With keepPreviousData enabled, you will still get the previous data even if
 you change the SWR key and the data for the new key starts loading again.
 You can find the full code for this example here:
 https://codesandbox.io/s/swr-keeppreviousdata-fsjz3m.",
-        "state-machine#State Machine": "useSWR returns data, error, isLoading, and isValidating depending on
+      "state-machine#State Machine": "useSWR returns data, error, isLoading, and isValidating depending on
 the state of the fetcher function. This diagrams describe how SWR returns
 values in some scenarios.",
-      },
-      "title": "Understanding SWR",
     },
-    "/en/docs/with-nextjs": {
-      "data": {
-        "client-side-data-fetching#Client Side Data Fetching": "If your page contains frequently updating data, and you don’t need to pre-render
+    "title": "Understanding SWR",
+  },
+  "/en/docs/with-nextjs": {
+    "data": {
+      "client-side-data-fetching#Client Side Data Fetching": "If your page contains frequently updating data, and you don’t need to pre-render
 the data, SWR is a perfect fit and no special setup needed: just import useSWR
 and use the hook inside any components that use the data.Here’s how it works:
 First, immediately show the page without data. You can show loading states for
@@ -1867,7 +1866,7 @@ This approach works well for user dashboard pages, for example. Because a
 dashboard is a private, user-specific page, SEO is not relevant and the page
 doesn’t need to be pre-rendered. The data is frequently updated, which requires
 request-time data fetching.",
-        "pre-rendering-with-default-data#Pre-rendering with Default Data": "If the page must be pre-rendered, Next.js supports
+      "pre-rendering-with-default-data#Pre-rendering with Default Data": "If the page must be pre-rendered, Next.js supports
 2 forms of pre-rendering:
 Static Generation (SSG) and Server-side Rendering (SSR).Together with SWR, you can pre-render the page for SEO, and also have features
 such as caching, revalidation, focus tracking, refetching on interval on the
@@ -1903,13 +1902,13 @@ fully powered by SWR on the client side. The data can be dynamic and
 self-updated over time.
 The Article component will render the pre-generated data first, and after
 the page is hydrated, it will fetch the latest data again to keep it refresh.",
-      },
-      "title": "Usage with Next.js",
     },
-    "/en/docs/wrap-toc-items": {
-      "data": {
-        "": "Tests whether long table of content items are wrapped properly for alignment.",
-        "fifth-long-toc-item-that-definitely-needs-to-wrap#Fifth Long ToC Item That Definitely Needs to Wrap": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+    "title": "Usage with Next.js",
+  },
+  "/en/docs/wrap-toc-items": {
+    "data": {
+      "": "Tests whether long table of content items are wrapped properly for alignment.",
+      "fifth-long-toc-item-that-definitely-needs-to-wrap#Fifth Long ToC Item That Definitely Needs to Wrap": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
 incididunt ut labore et dolore magna aliqua. Tempus egestas sed sed risus
 pretium quam vulputate. Imperdiet proin fermentum leo vel orci porta non
 pulvinar. Commodo elit at imperdiet dui. Elit ullamcorper dignissim cras
@@ -1920,7 +1919,7 @@ adipiscing bibendum est. Et netus et malesuada fames. Nisl nisi scelerisque eu
 ultrices vitae auctor eu augue ut. Molestie a iaculis at erat pellentesque
 adipiscing. Leo vel fringilla est ullamcorper. Faucibus interdum posuere lorem
 ipsum. Sed arcu non odio euismod.",
-        "first-long-toc-item-that-definitely-needs-to-wrap#First Long ToC Item That Definitely Needs to Wrap": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+      "first-long-toc-item-that-definitely-needs-to-wrap#First Long ToC Item That Definitely Needs to Wrap": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
 incididunt ut labore et dolore magna aliqua. Tempus egestas sed sed risus
 pretium quam vulputate. Imperdiet proin fermentum leo vel orci porta non
 pulvinar. Commodo elit at imperdiet dui. Elit ullamcorper dignissim cras
@@ -1931,7 +1930,7 @@ adipiscing bibendum est. Et netus et malesuada fames. Nisl nisi scelerisque eu
 ultrices vitae auctor eu augue ut. Molestie a iaculis at erat pellentesque
 adipiscing. Leo vel fringilla est ullamcorper. Faucibus interdum posuere lorem
 ipsum. Sed arcu non odio euismod.",
-        "fourth-long-toc-item-that-definitely-needs-to-wrap#Fourth Long ToC Item That Definitely Needs to Wrap": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+      "fourth-long-toc-item-that-definitely-needs-to-wrap#Fourth Long ToC Item That Definitely Needs to Wrap": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
 incididunt ut labore et dolore magna aliqua. Tempus egestas sed sed risus
 pretium quam vulputate. Imperdiet proin fermentum leo vel orci porta non
 pulvinar. Commodo elit at imperdiet dui. Elit ullamcorper dignissim cras
@@ -1942,7 +1941,7 @@ adipiscing bibendum est. Et netus et malesuada fames. Nisl nisi scelerisque eu
 ultrices vitae auctor eu augue ut. Molestie a iaculis at erat pellentesque
 adipiscing. Leo vel fringilla est ullamcorper. Faucibus interdum posuere lorem
 ipsum. Sed arcu non odio euismod.",
-        "no-wrap#No Wrap": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+      "no-wrap#No Wrap": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
 incididunt ut labore et dolore magna aliqua. Tempus egestas sed sed risus
 pretium quam vulputate. Imperdiet proin fermentum leo vel orci porta non
 pulvinar. Commodo elit at imperdiet dui. Elit ullamcorper dignissim cras
@@ -1953,7 +1952,7 @@ adipiscing bibendum est. Et netus et malesuada fames. Nisl nisi scelerisque eu
 ultrices vitae auctor eu augue ut. Molestie a iaculis at erat pellentesque
 adipiscing. Leo vel fringilla est ullamcorper. Faucibus interdum posuere lorem
 ipsum. Sed arcu non odio euismod.",
-        "second-long-toc-item-that-definitely-needs-to-wrap#Second Long ToC Item That Definitely Needs to Wrap": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+      "second-long-toc-item-that-definitely-needs-to-wrap#Second Long ToC Item That Definitely Needs to Wrap": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
 incididunt ut labore et dolore magna aliqua. Tempus egestas sed sed risus
 pretium quam vulputate. Imperdiet proin fermentum leo vel orci porta non
 pulvinar. Commodo elit at imperdiet dui. Elit ullamcorper dignissim cras
@@ -1964,7 +1963,7 @@ adipiscing bibendum est. Et netus et malesuada fames. Nisl nisi scelerisque eu
 ultrices vitae auctor eu augue ut. Molestie a iaculis at erat pellentesque
 adipiscing. Leo vel fringilla est ullamcorper. Faucibus interdum posuere lorem
 ipsum. Sed arcu non odio euismod.",
-        "sixth-long-toc-item-that-definitely-needs-to-wrap#Sixth Long ToC Item That Definitely Needs to Wrap": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+      "sixth-long-toc-item-that-definitely-needs-to-wrap#Sixth Long ToC Item That Definitely Needs to Wrap": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
 incididunt ut labore et dolore magna aliqua. Tempus egestas sed sed risus
 pretium quam vulputate. Imperdiet proin fermentum leo vel orci porta non
 pulvinar. Commodo elit at imperdiet dui. Elit ullamcorper dignissim cras
@@ -1975,7 +1974,7 @@ adipiscing bibendum est. Et netus et malesuada fames. Nisl nisi scelerisque eu
 ultrices vitae auctor eu augue ut. Molestie a iaculis at erat pellentesque
 adipiscing. Leo vel fringilla est ullamcorper. Faucibus interdum posuere lorem
 ipsum. Sed arcu non odio euismod.",
-        "third-long-toc-item-that-definitely-needs-to-wrap#Third Long ToC Item That Definitely Needs to Wrap": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+      "third-long-toc-item-that-definitely-needs-to-wrap#Third Long ToC Item That Definitely Needs to Wrap": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
 incididunt ut labore et dolore magna aliqua. Tempus egestas sed sed risus
 pretium quam vulputate. Imperdiet proin fermentum leo vel orci porta non
 pulvinar. Commodo elit at imperdiet dui. Elit ullamcorper dignissim cras
@@ -1986,59 +1985,58 @@ adipiscing bibendum est. Et netus et malesuada fames. Nisl nisi scelerisque eu
 ultrices vitae auctor eu augue ut. Molestie a iaculis at erat pellentesque
 adipiscing. Leo vel fringilla est ullamcorper. Faucibus interdum posuere lorem
 ipsum. Sed arcu non odio euismod.",
-      },
-      "title": "Wrap Table of Content Items Properly",
     },
-    "/en/examples/auth": {
-      "data": {},
-      "title": "Authentication",
-    },
-    "/en/examples/basic": {
-      "data": {},
-      "title": "Basic Usage",
-    },
-    "/en/examples/error-handling": {
-      "data": {},
-      "title": "Error Handling",
-    },
-    "/en/examples/full": {
-      "data": {},
-      "title": "Full",
-    },
-    "/en/examples/infinite-loading": {
-      "data": {},
-      "title": "Infinite Loading",
-    },
-    "/en/examples/ssr": {
-      "data": {},
-      "title": "Next.js SSR",
-    },
-    "/en/foo": {
-      "data": {
-        "after#after": "npm i @graphql-eslint/eslint-plugin
+    "title": "Wrap Table of Content Items Properly",
+  },
+  "/en/examples/auth": {
+    "data": {},
+    "title": "Authentication",
+  },
+  "/en/examples/basic": {
+    "data": {},
+    "title": "Basic Usage",
+  },
+  "/en/examples/error-handling": {
+    "data": {},
+    "title": "Error Handling",
+  },
+  "/en/examples/full": {
+    "data": {},
+    "title": "Full",
+  },
+  "/en/examples/infinite-loading": {
+    "data": {},
+    "title": "Infinite Loading",
+  },
+  "/en/examples/ssr": {
+    "data": {},
+    "title": "Next.js SSR",
+  },
+  "/en/foo": {
+    "data": {
+      "after#after": "npm i @graphql-eslint/eslint-plugin
 pnpm add @graphql-eslint/eslint-plugin
 yarn add @graphql-eslint/eslint-plugin
 bun add @graphql-eslint/eslint-plugin",
-        "before#before": "",
-      },
-      "title": "Foo",
+      "before#before": "",
     },
-    "/en/remote/graphql-eslint/[[...slug]]": {
-      "data": {},
-      "title": "[[...slug]]",
-    },
-    "/en/remote/graphql-yoga/[[...slug]]": {
-      "data": {},
-      "title": "[[...slug]]",
-    },
-    "/en/test": {
-      "data": {
-        "": "This is an MD file instead of MDX, which means you can use syntax like this:
+    "title": "Foo",
+  },
+  "/en/remote/graphql-eslint/[[...slug]]": {
+    "data": {},
+    "title": "[[...slug]]",
+  },
+  "/en/remote/graphql-yoga/[[...slug]]": {
+    "data": {},
+    "title": "[[...slug]]",
+  },
+  "/en/test": {
+    "data": {
+      "": "This is an MD file instead of MDX, which means you can use syntax like this:
 <!-- this is a comment -->
 However, no JSX is allowed here.",
-      },
-      "title": "Hello!",
     },
+    "title": "Hello!",
   },
 }
 `;
