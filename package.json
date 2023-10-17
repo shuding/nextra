@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@changesets/cli": "2.26.2",
-    "@edge-runtime/vm": "3.1.0",
+    "@edge-runtime/vm": "3.1.5",
     "@ianvs/prettier-plugin-sort-imports": "4.1.0",
     "@next/eslint-plugin-next": "13.5.4",
     "@typescript-eslint/eslint-plugin": "6.7.4",
