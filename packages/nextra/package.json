@@ -10,7 +10,10 @@
   "main": "./dist/index.js",
   "exports": {
     "./package.json": "./package.json",
-    ".": "./dist/index.js",
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/types.d.mts"
+    },
     "./catch-all": "./dist/catch-all.js",
     "./data": {
       "import": "./dist/ssg.js",
