@@ -1,6 +1,10 @@
-import { createContext, useContext } from 'react'
+import {
+  createContext,
+  forwardRef,
+  useContext,
+  useImperativeHandle
+} from 'react'
 import { jsxRuntime } from './jsx-runtime.cjs'
-import type { Components } from './mdx'
 import { useMDXComponents } from './mdx.js'
 
 const SSGContext = createContext<Record<string, any>>({})
@@ -28,22 +32,22 @@ function evaluate(compiledSource: string, scope: Record<string, unknown> = {}) {
   return hydrateFn({ useMDXComponents, ...jsxRuntime }, ...values)
 }
 
-export function RemoteContent({
-  scope,
-  components
-}: {
-  /**
-   * An object mapping names to React components.
-   * The key used will be the name accessible to MDX.
-   *
-   * For example: `{ ComponentName: Component }` will be accessible in the MDX as `<ComponentName/>`.
-   */
-  components?: Components
-  /**
-   * Pass-through variables for use in the MDX content
-   */
-  scope?: Record<string, unknown>
-} = {}) {
+export const RemoteContent = forwardRef<
+  any,
+  {
+    /**
+     * An object mapping names to React components.
+     * The key used will be the name accessible to MDX.
+     *
+     * For example: `{ ComponentName: Component }` will be accessible in the MDX as `<ComponentName />`.
+     */
+    components?: any // Components
+    /**
+     * Pass-through variables for use in the MDX content
+     */
+    scope?: Record<string, unknown>
+  }
+>(({ scope, components }, ref) => {
   const compiledSource = useData('__nextra_dynamic_mdx')
   if (!compiledSource) {
     throw new Error(
@@ -51,13 +55,10 @@ export function RemoteContent({
     )
   }
 
-  const { default: MDXContent } = evaluate(compiledSource, scope)
+  const { default: MDXContent, useTOC } = evaluate(compiledSource, scope)
+
+  useImperativeHandle(ref, () => ({ useTOC }), [useTOC])
 
   return <MDXContent components={components} />
-}
-
-RemoteContent.useTOC = (props: Record<string, unknown>) => {
-  const compiledSource = useData('__nextra_dynamic_mdx')
-  const { useTOC } = evaluate(compiledSource)
-  return useTOC(props)
-}
+})
+RemoteContent.displayName = 'RemoteContent'
