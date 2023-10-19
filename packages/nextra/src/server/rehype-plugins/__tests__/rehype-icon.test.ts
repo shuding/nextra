@@ -3,17 +3,21 @@ import type { VFile } from '@mdx-js/mdx/lib/compile'
 import rehypePrettyCode from 'rehype-pretty-code'
 import { clean } from '../../../../__test__/test-utils.js'
 import { DEFAULT_REHYPE_PRETTY_CODE_OPTIONS } from '../../compile.js'
-import { attachMeta, parseMeta, rehypeIcon } from '../index.js'
+import {
+  rehypeAttachCodeMeta,
+  rehypeIcon,
+  rehypeParseCodeMeta
+} from '../index.js'
 import { REHYPE_ICON_DEFAULT_REPLACES } from '../rehype-icon.js'
 
 function process(content: string): Promise<VFile> {
   return compile(content, {
     jsx: true,
     rehypePlugins: [
-      [parseMeta, { defaultShowCopyCode: true }],
+      [rehypeParseCodeMeta, { defaultShowCopyCode: true }],
       [rehypePrettyCode, DEFAULT_REHYPE_PRETTY_CODE_OPTIONS] as any,
       rehypeIcon,
-      attachMeta
+      rehypeAttachCodeMeta
     ]
   })
 }
