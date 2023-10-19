@@ -9,6 +9,7 @@ import { useCallback, useState } from 'react'
 import { DEFAULT_LOCALE } from '../constants'
 import type { SearchResult } from '../types'
 import { Search } from './search'
+import {HighlightMatches} from "./highlight-matches";
 
 const TARGET_SUMMARY_LENGTH = 100
 const MIN_TOKEN_LENGTH = 3
@@ -120,7 +121,7 @@ const loadIndexesImpl = async (
   indexes[locale] = index
 }
 
-function compileQuery(query: string): RegExp {
+export function compileQuery(query: string): RegExp {
   const tokens = query
     .split(/\W+/)
     .filter(token => token.length >= MIN_TOKEN_LENGTH)
@@ -131,7 +132,7 @@ function compileQuery(query: string): RegExp {
     : /^$/
 }
 
-function scoreText(regex: RegExp, text: string): number {
+export function scoreText(regex: RegExp, text: string): number {
   let score = 0
   if (text) {
     regex.lastIndex = 0
@@ -140,7 +141,7 @@ function scoreText(regex: RegExp, text: string): number {
   return score
 }
 
-function summarize(content: string, highlights: number[]): SummaryPart[] {
+export function summarize(content: string, highlights: number[]): SummaryPart[] {
   // attempt to find highlights that fit within target summary length
   while (
     highlights.length > 2 &&
@@ -391,7 +392,7 @@ export function Flexsearch({
         setLoading(true)
         try {
           await loadIndexes(basePath, locale)
-        } catch (e) {
+        } catch {
           setError(true)
         }
         setLoading(false)
@@ -402,14 +403,12 @@ export function Flexsearch({
 
   const handleChange = async (value: string) => {
     setSearch(value)
-    if (loading) {
-      return
-    }
+    if (loading) return
     if (!indexes[locale]) {
       setLoading(true)
       try {
         await loadIndexes(basePath, locale)
-      } catch (e) {
+      } catch {
         setError(true)
       }
       setLoading(false)
