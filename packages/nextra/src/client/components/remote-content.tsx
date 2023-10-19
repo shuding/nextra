@@ -1,6 +1,6 @@
-import { forwardRef, useImperativeHandle } from 'react'
 import { useData } from '../hooks/index.js'
 import { jsxRuntime } from '../jsx-runtime.cjs'
+import type { Components } from '../mdx.js'
 import { useMDXComponents } from '../mdx.js'
 
 function evaluate(compiledSource: string, scope: Record<string, unknown> = {}) {
@@ -10,7 +10,7 @@ function evaluate(compiledSource: string, scope: Record<string, unknown> = {}) {
   const keys = Object.keys(scope)
   const values = Object.values(scope)
   // now we eval the source code using a function constructor
-  // in order for this to work we need to have React, the mdx createElement,
+  // in order for this to work we need to have React, the mdx `createElement`,
   // and all our components in scope for the function, which is the case here
   // we pass the names (via keys) in as the function's args, and execute the
   // function with the actual values.
@@ -19,32 +19,36 @@ function evaluate(compiledSource: string, scope: Record<string, unknown> = {}) {
   return hydrateFn({ useMDXComponents, ...jsxRuntime }, ...values)
 }
 
-export const RemoteContent = forwardRef<
-  any,
-  {
-    /**
-     * An object mapping names to React components.
-     * The key used will be the name accessible to MDX.
-     *
-     * For example: `{ ComponentName: Component }` will be accessible in the MDX as `<ComponentName />`.
-     */
-    components?: any // Components
-    /**
-     * Pass-through variables for use in the MDX content
-     */
-    scope?: Record<string, unknown>
-  }
->(({ scope, components }, ref) => {
+export function RemoteContent({
+  scope,
+  components
+}: {
+  /**
+   * An object mapping names to React components.
+   * The key used will be the name accessible to MDX.
+   *
+   * For example: `{ ComponentName: Component }` will be accessible in the MDX as `<ComponentName/>`.
+   */
+  components?: Components
+  /**
+   * Pass-through variables for use in the MDX content
+   */
+  scope?: Record<string, unknown>
+}) {
   const compiledSource = useData('__nextra_dynamic_mdx')
   if (!compiledSource) {
     throw new Error(
       'RemoteContent must be used together with the `buildDynamicMDX` API'
     )
   }
-  const { default: MDXContent, useTOC } = evaluate(compiledSource, scope)
 
-  useImperativeHandle(ref, () => ({ useTOC }), [useTOC])
+  const { default: MDXContent } = evaluate(compiledSource, scope)
 
   return <MDXContent components={components} />
-})
-RemoteContent.displayName = 'RemoteContent'
+}
+
+RemoteContent.useTOC = (props: Record<string, unknown>) => {
+  const compiledSource = useData('__nextra_dynamic_mdx')
+  const { useTOC } = evaluate(compiledSource)
+  return useTOC(props)
+}

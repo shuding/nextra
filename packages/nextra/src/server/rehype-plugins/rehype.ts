@@ -1,4 +1,6 @@
 import type { Element } from 'hast'
+import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
+import { bundledLanguages, getHighlighter } from 'shiki'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 import { CODE_BLOCK_FILENAME_REGEX } from '../constants.js'
@@ -6,6 +8,45 @@ import { CODE_BLOCK_FILENAME_REGEX } from '../constants.js'
 type PreElement = Element & {
   __filename?: string
   __hasCopyCode?: boolean
+}
+
+export const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS: RehypePrettyCodeOptions = {
+  keepBackground: false,
+  grid: false,
+  onVisitLine(node) {
+    // Prevent lines from collapsing in `display: grid` mode, and
+    // allow empty lines to be copy/pasted
+    if (node.children.length === 0) {
+      node.children.push({ type: 'text', value: ' ' })
+    }
+    delete node.properties['data-line']
+  },
+  filterMetaString: meta => meta.replace(CODE_BLOCK_FILENAME_REGEX, ''),
+  async getHighlighter(_opts) {
+    const DEFAULT_OPTS = {
+      themes: {
+        light: 'github-light',
+        dark: 'github-dark'
+      },
+      defaultColor: false
+    } as const
+
+    const highlighter = await getHighlighter({
+      themes: Object.values(DEFAULT_OPTS.themes),
+      langs: Object.keys(bundledLanguages)
+    })
+
+    const originalCodeToHtml = highlighter.codeToHtml
+
+    return Object.assign(highlighter, {
+      codeToHtml(code: string, lang: string) {
+        return originalCodeToHtml(code, { lang, ...DEFAULT_OPTS })
+      },
+      ansiToHtml(code: string) {
+        return this.codeToHtml(code, 'ansi')
+      }
+    })
+  }
 }
 
 export const rehypeParseCodeMeta: Plugin<

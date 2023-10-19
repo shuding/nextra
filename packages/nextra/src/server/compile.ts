@@ -6,14 +6,12 @@ import { remarkMermaid } from '@theguild/remark-mermaid'
 import { remarkNpm2Yarn } from '@theguild/remark-npm2yarn'
 import type { Program } from 'estree'
 import rehypeKatex from 'rehype-katex'
-import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
 import rehypePrettyCode from 'rehype-pretty-code'
 import rehypeRaw from 'rehype-raw'
 import remarkFrontmatter from 'remark-frontmatter'
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 import remarkReadingTime from 'remark-reading-time'
-import { bundledLanguages, getHighlighter } from 'shiki'
 import type { Pluggable, Plugin } from 'unified'
 import type {
   FrontMatter,
@@ -23,7 +21,6 @@ import type {
   StructurizedData
 } from '../types'
 import {
-  CODE_BLOCK_FILENAME_REGEX,
   CWD,
   DEFAULT_LOCALE,
   ERROR_ROUTES,
@@ -34,6 +31,7 @@ import {
   recmaRewriteJsx
 } from './recma-plugins/index.js'
 import {
+  DEFAULT_REHYPE_PRETTY_CODE_OPTIONS,
   rehypeAttachCodeMeta,
   rehypeBetterReactMathjax,
   rehypeExtractTocContent,
@@ -52,45 +50,6 @@ import {
   remarkStructurize
 } from './remark-plugins/index.js'
 import { logger, truthy } from './utils.js'
-
-export const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS: RehypePrettyCodeOptions = {
-  keepBackground: false,
-  grid: false,
-  onVisitLine(node) {
-    // Prevent lines from collapsing in `display: grid` mode, and
-    // allow empty lines to be copy/pasted
-    if (node.children.length === 0) {
-      node.children.push({ type: 'text', value: ' ' })
-    }
-    delete node.properties['data-line']
-  },
-  filterMetaString: meta => meta.replace(CODE_BLOCK_FILENAME_REGEX, ''),
-  async getHighlighter(_opts) {
-    const DEFAULT_OPTS = {
-      themes: {
-        light: 'github-light',
-        dark: 'github-dark'
-      },
-      defaultColor: false
-    } as const
-
-    const highlighter = await getHighlighter({
-      themes: Object.values(DEFAULT_OPTS.themes),
-      langs: Object.keys(bundledLanguages)
-    })
-
-    const originalCodeToHtml = highlighter.codeToHtml
-
-    return Object.assign(highlighter, {
-      codeToHtml(code: string, lang: string) {
-        return originalCodeToHtml(code, { lang, ...DEFAULT_OPTS })
-      },
-      ansiToHtml(code: string) {
-        return this.codeToHtml(code, 'ansi')
-      }
-    })
-  }
-}
 
 const cachedCompilerForFormat: Record<
   Exclude<ProcessorOptions['format'], undefined | null>,
