@@ -1,8 +1,4 @@
 /* eslint-env node */
-/**
- * Copyright (c) HashiCorp, Inc.
- * SPDX-License-Identifier: MPL-2.0
- */
 
 /**
  * Allow jsx-runtime to be successfully imported from either React 17 or React 18.
