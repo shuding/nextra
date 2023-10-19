@@ -77,9 +77,6 @@
       "context": [
         "./dist/client/context.d.ts"
       ],
-      "data": [
-        "./dist/client/data.d.ts"
-      ],
       "icons": [
         "./dist/client/icons/index.d.ts"
       ],

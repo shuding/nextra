@@ -1,20 +1,7 @@
-import {
-  createContext,
-  forwardRef,
-  useContext,
-  useImperativeHandle
-} from 'react'
+import { forwardRef, useImperativeHandle } from 'react'
+import { useData } from './hooks/index.js'
 import { jsxRuntime } from './jsx-runtime.cjs'
 import { useMDXComponents } from './mdx.js'
-
-const SSGContext = createContext<Record<string, any>>({})
-
-export const useData = (key = 'ssg') => useContext(SSGContext)[key]
-
-// Make sure nextra/data remains functional, but we now recommend this new API.
-
-export const DataProvider = SSGContext.Provider
-SSGContext.displayName = 'SSG'
 
 function evaluate(compiledSource: string, scope: Record<string, unknown> = {}) {
   // if we're ready to render, we can assemble the component tree and let React do its thing
@@ -54,7 +41,6 @@ export const RemoteContent = forwardRef<
       'RemoteContent must be used together with the `buildDynamicMDX` API'
     )
   }
-
   const { default: MDXContent, useTOC } = evaluate(compiledSource, scope)
 
   useImperativeHandle(ref, () => ({ useTOC }), [useTOC])

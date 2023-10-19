@@ -1,4 +1,4 @@
-import { useData } from 'nextra/data'
+import { useData } from 'nextra/hooks'
 
 # Next.js SSG
 
@@ -44,7 +44,7 @@ enabled, it will be kept up to date.
 Here's the MDX code for the example above:
 
 ```mdx filename="MDX"
-import { useData } from 'nextra/data'
+import { useData } from 'nextra/hooks'
 
 export function getStaticProps() {
   return fetch('https://api.github.com/repos/shuding/nextra')
