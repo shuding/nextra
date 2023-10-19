@@ -1,14 +1,7 @@
 import fs from 'fs/promises'
 import path from 'node:path'
 import { normalizePages } from '../src/client/normalize-pages.js'
-import { collectPageMap } from '../src/server/page-map.js'
 import { cnPageMap, usPageMap } from './fixture/page-maps/pageMap.js'
-
-vi.mock('next/dist/lib/find-pages-dir.js', () => ({
-  findPagesDir: () => ({
-    pagesDir: 'update me in related test'
-  })
-}))
 
 describe('normalize-page', () => {
   it('zh-CN home', () => {
@@ -192,17 +185,25 @@ describe('normalize-page', () => {
       'page-maps',
       'display-hidden-for-mobile'
     )
-    let rawJs = await collectPageMap({ dir })
-    // TODO: quick fix, found better approach
-    rawJs = rawJs.replace(
-      /.*/,
-      'import test_fixture_page_maps_display_hidden_for_mobile_meta from "./_meta.ts";'
-    )
+    vi.doMock('next/dist/lib/find-pages-dir', () => ({
+      findPagesDir: () => ({ pagesDir: '#' })
+    }))
 
-    await fs.writeFile(path.join(dir, 'generated-page-map.js'), rawJs)
+    vi.doMock('../src/server/constants', async () => {
+      const actual = await vi.importActual<object>('../src/server/constants')
+      return {
+        ...actual,
+        CHUNKS_DIR: path.resolve(dir, 'chunks')
+      }
+    })
+
+    const { collectPageMap } = await import('../src/server/page-map.js')
+
+    const rawJs = await collectPageMap({ dir })
+    await fs.writeFile(path.join(dir, 'chunks', 'generated-page-map.js'), rawJs)
 
     const { pageMap } = await import(
-      './fixture/page-maps/display-hidden-for-mobile/generated-page-map.js'
+      './fixture/page-maps/display-hidden-for-mobile/chunks/generated-page-map.js'
     )
     const result = normalizePages({ list: pageMap, route: '/' })
     expect(result).toMatchInlineSnapshot(`
