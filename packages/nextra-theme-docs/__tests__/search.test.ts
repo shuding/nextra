@@ -18,12 +18,19 @@ describe('search', () => {
 
   describe('results', async () => {
     await loadIndexes('', LOCALE)
+
+    const expectPage = (query: string, route: string) => {
+      return expect(
+        getResults(query, LOCALE).find(page => page.route === route)
+      )
+    }
+
     it.skip('should return no results for `>  a`', () => {
       expect(getResults('>  a', LOCALE)).toEqual([])
     })
 
-    it.skip('should return results for `showcase`', () => {
-      expect(getResults('showcase', LOCALE)).not.toEqual([])
+    it('should return results for `This Is A Page`', () => {
+      expectPage('This Is A Page', '/en/about/a-page').toBeDefined()
     })
   })
 })
