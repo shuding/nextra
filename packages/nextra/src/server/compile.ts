@@ -30,11 +30,17 @@ import {
   MARKDOWN_URL_EXTENSION_REGEX
 } from './constants.js'
 import {
-  attachMeta,
-  parseMeta,
   recmaRewriteFunctionBody,
-  recmaRewriteJsx,
+  recmaRewriteJsx
+} from './recma-plugins/index.js'
+import {
+  rehypeAttachCodeMeta,
+  rehypeBetterReactMathjax,
+  rehypeExtractTocContent,
   rehypeIcon,
+  rehypeParseCodeMeta
+} from './rehype-plugins/index.js'
+import {
   remarkCustomHeadingId,
   remarkHeadings,
   remarkLinkRewrite,
@@ -44,9 +50,7 @@ import {
   remarkRemoveImports,
   remarkStaticImage,
   remarkStructurize
-} from './mdx-plugins/index.js'
-import { rehypeBetterReactMathjax } from './mdx-plugins/rehype-better-react-mathjax.js'
-import { rehypeExtractTocContent } from './mdx-plugins/rehype-extract-toc-content.js'
+} from './remark-plugins/index.js'
 import { logger, truthy } from './utils.js'
 
 export const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS: RehypePrettyCodeOptions = {
@@ -300,7 +304,7 @@ export async function compileMdx(
             passThrough: ['mdxjsEsm', 'mdxJsxFlowElement', 'mdxTextExpression']
           }
         ],
-        [parseMeta, { defaultShowCopyCode }],
+        [rehypeParseCodeMeta, { defaultShowCopyCode }],
         // Should be before `rehypePrettyCode`
         latex &&
           (typeof latex === 'object'
@@ -313,7 +317,7 @@ export async function compileMdx(
           : [
               [rehypePrettyCode, DEFAULT_REHYPE_PRETTY_CODE_OPTIONS] as any,
               !isRemoteContent && rehypeIcon,
-              attachMeta
+              rehypeAttachCodeMeta
             ]),
         [rehypeExtractTocContent, { isRemoteContent }]
       ].filter(truthy),

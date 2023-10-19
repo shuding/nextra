@@ -1,7 +1,3 @@
-export { recmaRewriteJsx } from './recma/recma-rewrite-jsx.js'
-export { recmaRewriteFunctionBody } from './recma/recma-rewrite-function-body.js'
-export { parseMeta, attachMeta } from './rehype.js'
-export { rehypeIcon } from './rehype-icon.js'
 export { remarkCustomHeadingId } from './remark-custom-heading-id.js'
 export { remarkMdxFrontMatter } from './remark-mdx-frontmatter.js'
 export { remarkMdxTitle } from './remark-mdx-title.js'

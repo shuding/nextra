@@ -415,7 +415,7 @@ describe('collectPageMap', () => {
         \\"/en/remote/graphql-yoga\\": examples_swr_site_pages_en_remote_graphql_yoga_meta
       };
 
-      import { resolvePageMap } from 'nextra/setup-page'
+      import { resolvePageMap } from 'nextra/page-map-dynamic'
 
       if (typeof window === 'undefined') {
         globalThis.__nextra_resolvePageMap ||= Object.create(null)
@@ -481,7 +481,7 @@ describe('Page Process', () => {
         \\"/my-dir\\": test_fixture_page_maps_dynamic_route_my_dir_meta
       };
 
-      import { resolvePageMap } from 'nextra/setup-page'
+      import { resolvePageMap } from 'nextra/page-map-dynamic'
 
       if (typeof window === 'undefined') {
         globalThis.__nextra_resolvePageMap ||= Object.create(null)

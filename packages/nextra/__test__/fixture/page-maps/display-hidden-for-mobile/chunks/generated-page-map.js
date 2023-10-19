@@ -1,4 +1,4 @@
-import test_fixture_page_maps_display_hidden_for_mobile_meta from "./_meta.ts";
+import test_fixture_page_maps_display_hidden_for_mobile_meta from "../_meta.ts";
 export const pageMap = [{
   data: test_fixture_page_maps_display_hidden_for_mobile_meta
 }, {

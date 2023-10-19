@@ -11,7 +11,8 @@ export default defineConfig([
       'src/**/*.{ts,tsx}',
       '!src/**/*.d.ts',
       '!src/types.ts',
-      '!src/client/icons/**/*'
+      '!src/client/icons',
+      '!**/__tests__'
     ],
     target: 'es2020',
     format: 'esm',

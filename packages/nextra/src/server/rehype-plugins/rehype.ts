@@ -8,7 +8,10 @@ type PreElement = Element & {
   __hasCopyCode?: boolean
 }
 
-export const parseMeta: Plugin<[{ defaultShowCopyCode?: boolean }], any> =
+export const rehypeParseCodeMeta: Plugin<
+  [{ defaultShowCopyCode?: boolean }],
+  any
+> =
   ({ defaultShowCopyCode }) =>
   ast => {
     visit(ast, { tagName: 'pre' }, (node: PreElement) => {
@@ -29,7 +32,7 @@ export const parseMeta: Plugin<[{ defaultShowCopyCode?: boolean }], any> =
     })
   }
 
-export const attachMeta: Plugin<[], any> = () => ast => {
+export const rehypeAttachCodeMeta: Plugin<[], any> = () => ast => {
   visit(ast, [{ tagName: 'div' }, { tagName: 'span' }], (node: Element) => {
     const isRehypePrettyCode =
       'data-rehype-pretty-code-fragment' in node.properties
