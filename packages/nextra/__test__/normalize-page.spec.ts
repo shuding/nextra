@@ -185,6 +185,8 @@ describe('normalize-page', () => {
       'page-maps',
       'display-hidden-for-mobile'
     )
+    const pageMapPath = path.join(dir, 'chunks', 'generated-page-map.js')
+
     vi.doMock('next/dist/lib/find-pages-dir', () => ({
       findPagesDir: () => ({ pagesDir: '#' })
     }))
@@ -193,18 +195,16 @@ describe('normalize-page', () => {
       const actual = await vi.importActual<object>('../src/server/constants')
       return {
         ...actual,
-        CHUNKS_DIR: path.resolve(dir, 'chunks')
+        CHUNKS_DIR: path.dirname(pageMapPath)
       }
     })
 
     const { collectPageMap } = await import('../src/server/page-map.js')
 
     const rawJs = await collectPageMap({ dir })
-    await fs.writeFile(path.join(dir, 'chunks', 'generated-page-map.js'), rawJs)
+    await fs.writeFile(pageMapPath, rawJs)
 
-    const { pageMap } = await import(
-      './fixture/page-maps/display-hidden-for-mobile/chunks/generated-page-map.js'
-    )
+    const { pageMap } = await import(pageMapPath)
     const result = normalizePages({ list: pageMap, route: '/' })
     expect(result).toMatchInlineSnapshot(`
       {
