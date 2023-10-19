@@ -33,7 +33,7 @@ function normalizeMetaData(obj: DynamicMeta): DynamicMeta {
   )
 }
 
-function collectCatchAllRoutes(
+export function collectCatchAllRoutes(
   parent: Folder,
   meta: DynamicMetaJsonFile,
   isRootFolder = true
