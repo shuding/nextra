@@ -1,4 +1,4 @@
-import { RemoteContent } from 'nextra/hooks'
+import { RemoteContent } from 'nextra/components'
 import { buildDynamicMDX, buildDynamicMeta } from 'nextra/remote'
 
 export const getStaticProps = async ({ params }) => {

@@ -1,7 +1,7 @@
 import { forwardRef, useImperativeHandle } from 'react'
-import { useData } from './hooks/index.js'
-import { jsxRuntime } from './jsx-runtime.cjs'
-import { useMDXComponents } from './mdx.js'
+import { useData } from '../hooks/index.js'
+import { jsxRuntime } from '../jsx-runtime.cjs'
+import { useMDXComponents } from '../mdx.js'
 
 function evaluate(compiledSource: string, scope: Record<string, unknown> = {}) {
   // if we're ready to render, we can assemble the component tree and let React do its thing
