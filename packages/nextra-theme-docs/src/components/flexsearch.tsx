@@ -9,15 +9,14 @@ import { useCallback, useState } from 'react'
 import { DEFAULT_LOCALE } from '../constants'
 import type { SearchResult } from '../types'
 import { Search } from './search'
-import {HighlightMatches} from "./highlight-matches";
 
 const TARGET_SUMMARY_LENGTH = 100
 const MIN_TOKEN_LENGTH = 3
-const PAGE_TITLE_SCORE_BOOST = 8
-const SECTION_TITLE_SCORE_BOOST = 4
+const PAGE_TITLE_SCORE_BOOST = 10
+const SECTION_TITLE_SCORE_BOOST = 10
 
 const SEARCH_LIMIT = 100
-const PAGE_LIMIT = 5
+const PAGE_LIMIT = 10
 const SECTION_LIMIT = 3
 
 type Section = {
@@ -39,19 +38,19 @@ interface ScoredDocument {
   doc: Document
 }
 
-interface SummaryPart {
+interface ContentPart {
   highlight?: boolean
   value: string
 }
 
 type PageSection = {
-  title: string
+  title: ContentPart[]
   anchor: string
-  summaryParts: SummaryPart[]
+  content: ContentPart[]
 }
 
 type Page = {
-  title: string
+  title: ContentPart[]
   route: string
   sections: PageSection[]
 }
@@ -125,23 +124,34 @@ export function compileQuery(query: string): RegExp {
   const tokens = query
     .split(/\W+/)
     .filter(token => token.length >= MIN_TOKEN_LENGTH)
+    .filter((value, index, array) => array.indexOf(value) === index)
     .map(escapeStringRegexp)
 
-  return tokens.length
-    ? new RegExp('(' + tokens.map(escapeStringRegexp).join('|') + ')', 'ig')
-    : /^$/
+  return tokens.length ? new RegExp('(' + tokens.join('|') + ')', 'ig') : /^$/
 }
 
 export function scoreText(regex: RegExp, text: string): number {
+  if (!text) return 0
+
+  const scored: Record<string, boolean> = {}
   let score = 0
-  if (text) {
-    regex.lastIndex = 0
-    while (regex.exec(text)) score += 1
+
+  let result: RegExpExecArray | null = null
+  regex.lastIndex = 0
+  while ((result = regex.exec(text)) != null) {
+    const token = (result[1] || '').toLowerCase()
+    if (token.length >= 3 && !scored[token]) {
+      score += (result[1] || '').length
+      scored[token] = true
+    }
   }
+
   return score
 }
 
-export function summarize(content: string, highlights: number[]): SummaryPart[] {
+export function summarize(text: string, highlights: number[]): ContentPart[] {
+  if (!text) return []
+
   // attempt to find highlights that fit within target summary length
   while (
     highlights.length > 2 &&
@@ -160,8 +170,8 @@ export function summarize(content: string, highlights: number[]): SummaryPart[] 
 
     // remove gap
     highlights = highlights
-      .slice(0, largestGapIndex)
-      .concat(highlights.slice(largestGapIndex + 2))
+      .slice(0, largestGapIndex + 2)
+      .concat(highlights.slice(largestGapIndex + 4))
   }
 
   let startIndex = 0
@@ -171,10 +181,15 @@ export function summarize(content: string, highlights: number[]): SummaryPart[] 
     endIndex = highlights[highlights.length - 1]
   }
 
-  // expand start and end at word boundaries until we've hit our target summary
-  // length
   const wb = /\b/g
   let result: RegExpExecArray | null = null
+
+  // find first word
+  let firstIndex = startIndex
+  if ((result = wb.exec(text)) != null) firstIndex = result.index
+
+  // expand start and end at word boundaries until we've hit our target summary
+  // length
   let remaining = TARGET_SUMMARY_LENGTH - (endIndex - startIndex)
   while (remaining > 0) {
     // expand head using nearest left word boundary
@@ -182,12 +197,14 @@ export function summarize(content: string, highlights: number[]): SummaryPart[] 
     if (wb.lastIndex < startIndex) {
       let lastIndex = startIndex
 
-      while ((result = wb.exec(content)) != null && result.index < startIndex) {
+      while ((result = wb.exec(text)) != null && result.index < startIndex) {
         lastIndex = result.index
         wb.lastIndex = lastIndex + 1
       }
 
-      if (
+      if (lastIndex === firstIndex) {
+        startIndex = 0
+      } else if (
         lastIndex < startIndex &&
         endIndex - lastIndex < TARGET_SUMMARY_LENGTH
       ) {
@@ -197,7 +214,7 @@ export function summarize(content: string, highlights: number[]): SummaryPart[] 
 
     // expand tail using near right word boundary
     wb.lastIndex = endIndex + 1
-    result = wb.exec(content)
+    result = wb.exec(text)
     if (result != null && result.index - startIndex < TARGET_SUMMARY_LENGTH) {
       endIndex = result.index
     }
@@ -208,20 +225,24 @@ export function summarize(content: string, highlights: number[]): SummaryPart[] 
     remaining = newRemaining
   }
 
-  const parts: SummaryPart[] = []
+  if (endIndex + remaining > text.length) {
+    endIndex = text.length
+  }
+
+  const parts: ContentPart[] = []
 
   let bufferIndex = startIndex
   while (highlights.length) {
     // add leading non-highlighted text
     if (bufferIndex < highlights[0]) {
-      parts.push({ value: content.slice(bufferIndex, highlights[0]) })
+      parts.push({ value: text.slice(bufferIndex, highlights[0]) })
     }
 
     // add highlighted text
     const start = highlights.shift() as number
     const end = highlights.shift() as number
     parts.push({
-      value: content.slice(start, end),
+      value: text.slice(start, end),
       highlight: true
     })
     bufferIndex = end
@@ -229,11 +250,11 @@ export function summarize(content: string, highlights: number[]): SummaryPart[] 
 
   // if we have no highlights end index might be TARGET_SUMMARY_LENGTH,
   // truncate to actual length
-  endIndex = Math.min(endIndex, content.length)
+  endIndex = Math.min(endIndex, text.length)
 
   // add remaining text
   if (bufferIndex < endIndex) {
-    parts.push({ value: content.slice(bufferIndex, endIndex) })
+    parts.push({ value: text.slice(bufferIndex, endIndex) })
   }
 
   // add leading and trailing '...' if content truncated
@@ -247,7 +268,7 @@ export function summarize(content: string, highlights: number[]): SummaryPart[] 
         first.value = '... ' + first.value
       }
     }
-    if (endIndex < content.length) {
+    if (endIndex < text.length) {
       const last = parts[parts.length - 1]
       last.value = last.value.trimEnd()
       if (last.highlight) {
@@ -261,6 +282,18 @@ export function summarize(content: string, highlights: number[]): SummaryPart[] 
   return parts
 }
 
+export function highlight(regex: RegExp, text: string): ContentPart[] {
+  const highlights: number[] = []
+
+  let result: RegExpExecArray | null = null
+  regex.lastIndex = 0
+  while ((result = regex.exec(text)) != null) {
+    highlights.push(result.index, result.index + (result[1] || '').length)
+  }
+
+  return summarize(text, highlights)
+}
+
 export function getResults(query: string, locale: string) {
   if (!query) return []
 
@@ -268,12 +301,9 @@ export function getResults(query: string, locale: string) {
   if (!index) return []
 
   const resultSets = index.search<true>(query, SEARCH_LIMIT, {
-    enrich: true,
-    suggest: true
+    enrich: true
   })
-  if (!resultSets.length) {
-    return []
-  }
+  if (!resultSets.length) return []
 
   const queryRegex = compileQuery(query)
 
@@ -301,64 +331,48 @@ export function getResults(query: string, locale: string) {
   const results: Page[] = []
   for (const { doc } of scoredDocs) {
     // score each section and create summary with highlighted parts
-    let sections = doc.sections.map(({ title, content, anchor }) => {
-      let score = scoreText(queryRegex, title) * SECTION_TITLE_SCORE_BOOST
+    let sections = doc.sections.map(section => {
+      const title = highlight(queryRegex, section.title)
+      let score =
+        scoreText(queryRegex, section.title) * SECTION_TITLE_SCORE_BOOST
 
-      if (!content) {
+      if (!section.content) {
         return {
           score,
           title,
-          anchor,
-          summaryParts: []
+          anchor: section.anchor,
+          content: []
         }
-      }
-
-      const tokenScored: Record<string, boolean> = {}
-      const highlights: number[] = []
-      let result: RegExpExecArray | null = null
-
-      // find and score matched tokens
-      queryRegex.lastIndex = 0
-      while ((result = queryRegex.exec(content)) != null) {
-        const value = result[1] || ''
-
-        // only unique tokens contribute to score
-        const token = value.toLowerCase()
-        if (value.length >= 3) {
-          if (!tokenScored[token]) score += 1
-          tokenScored[token] = true
-        }
-
-        // track slices to highlight
-        highlights.push(result.index, result.index + value.length)
       }
 
       return {
-        score,
+        score: score + scoreText(queryRegex, section.content),
         title,
-        anchor,
-        summaryParts: summarize(content, highlights)
+        anchor: section.anchor,
+        content: highlight(queryRegex, section.content)
       }
     })
 
     sections.sort((a, b) => b.score - a.score)
 
-    let placeholderSummaryParts: SummaryPart[] = []
+    let sectionContent: ContentPart[] = []
 
     // remove zero score sections
     while (sections.length && sections[sections.length - 1].score === 0) {
       const section = sections.pop()
-      if (section?.summaryParts.length) {
-        placeholderSummaryParts = section.summaryParts
+      if (section?.content.length) {
+        sectionContent = section.content
       }
     }
+
+    const pageTitle = highlight(queryRegex, doc.title)
 
     // if we don't have any matched sections, add a placeholder
     if (!sections.length) {
       sections.push({
-        title: doc.title,
+        title: pageTitle,
         anchor: '',
-        summaryParts: placeholderSummaryParts,
+        content: sectionContent,
         score: 0
       })
     } else if (sections.length > SECTION_LIMIT) {
@@ -366,13 +380,32 @@ export function getResults(query: string, locale: string) {
     }
 
     results.push({
-      title: doc.title,
+      title: pageTitle,
       route: doc.route,
       sections: sections
     })
   }
 
   return results
+}
+
+function Content({
+  parts,
+  highlight
+}: {
+  parts: ContentPart[]
+  highlight?: boolean
+}) {
+  return parts.map((part, index) => {
+    return (
+      <span
+        key={index}
+        className={cn({ '_text-primary-600': highlight && part.highlight })}
+      >
+        {part.value}
+      </span>
+    )
+  })
 }
 
 export function Flexsearch({
@@ -431,26 +464,20 @@ export function Flexsearch({
                   'contrast-more:_border-gray-600 contrast-more:_text-gray-900 contrast-more:dark:_border-gray-50 contrast-more:dark:_text-gray-50'
                 )}
               >
-                {page.title}
+                <Content parts={page.title} />
               </div>
             ),
             children: (
               <>
                 <div className="_text-base _font-semibold _leading-5">
-                  {section.title || page.title}
+                  <Content
+                    parts={section.title.length ? section.title : page.title}
+                    highlight={true}
+                  />
                 </div>
-                {!!section.summaryParts.length && (
+                {!!section.content.length && (
                   <div className="excerpt _mt-1 _text-sm _leading-[1.35rem] _text-gray-600 dark:_text-gray-400 contrast-more:dark:_text-gray-50">
-                    {section.summaryParts.map(({ value, highlight }, index) => {
-                      return (
-                        <span
-                          key={index}
-                          className={cn({ '_text-primary-600': highlight })}
-                        >
-                          {value}
-                        </span>
-                      )
-                    })}
+                    <Content parts={section.content} highlight={true} />
                   </div>
                 )}
               </>
