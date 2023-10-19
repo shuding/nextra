@@ -9,8 +9,8 @@ import type {
   NextraInternalGlobal,
   PageMapItem
 } from '../types'
-import { normalizePageRoute, pageTitleFromFilename } from './utils.js'
 import { findFolder } from '../utils.js'
+import { normalizePageRoute, pageTitleFromFilename } from './utils.js'
 
 const cachedResolvedPageMap: Record<string, PageMapItem[]> = Object.create(null)
 
