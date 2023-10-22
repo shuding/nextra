@@ -79,12 +79,15 @@ describe('search', () => {
 
 describe('compileQuery', () => {
   it('should work', () => {
-    expect(compileQuery('').toString()).toEqual('/^$/')
-    expect(compileQuery('one').toString()).toEqual('/(one)/gi')
-    expect(compileQuery('one two').toString()).toEqual('/(one|two)/gi')
-    expect(compileQuery('google.com').toString()).toEqual('/(google|com)/gi')
-    expect(compileQuery('(one)(two)').toString()).toEqual('/(one|two)/gi')
-    expect(compileQuery('a of abc').toString()).toEqual('/(abc)/gi')
+    expect(compileQuery('')).toEqual(/^$/)
+    expect(compileQuery('one')).toEqual(/(one)/gi)
+    expect(compileQuery('one one')).toEqual(/(one)/gi)
+    expect(compileQuery('one two')).toEqual(/(one|two)/gi)
+    expect(compileQuery('google.com')).toEqual(/(google|com)/gi)
+    expect(compileQuery('(one)(two)')).toEqual(/(one|two)/gi)
+    expect(compileQuery('a of abc')).toEqual(/(abc)/gi)
+    expect(compileQuery('a of')).toEqual(/(a of)/gi)
+    expect(compileQuery('你好吗')).toEqual(/(你好吗)/gi)
   })
 })
 
@@ -93,6 +96,7 @@ describe('scoreText', () => {
     const empty = compileQuery('')
     const one = compileQuery('one')
     const oneTwo = compileQuery('one two')
+    const fallback = compileQuery('你好吗')
 
     expect(scoreText(empty, '')).toEqual(0)
     expect(scoreText(empty, ' ')).toEqual(0)
@@ -106,6 +110,7 @@ describe('scoreText', () => {
     expect(scoreText(oneTwo, 'onetwo')).toEqual(6)
     expect(scoreText(oneTwo, 'one two one')).toEqual(6)
     expect(scoreText(oneTwo, 'one two two one')).toEqual(6)
+    expect(scoreText(fallback, ' 你好吗 ')).toEqual(3)
   })
 })
 
@@ -127,6 +132,11 @@ describe('summarize', () => {
       { value: 'one ' },
       { value: 'two', highlight: true },
       { value: ' three' }
+    ])
+    expect(summarize('one two three', [0, 3, 8, 13])).toEqual([
+      { value: 'one', highlight: true },
+      { value: ' two ' },
+      { value: 'three', highlight: true }
     ])
     expect(summarize('one two three', [0, 7])).toEqual([
       { value: 'one two', highlight: true },
@@ -159,6 +169,12 @@ describe('summarize', () => {
       { value: 'zero', highlight: true },
       { value: ' one two ...' }
     ])
+    expect(summarize(' 你好吗 你好吗', [1, 4, 5, 8])).toEqual([
+      { value: ' ' },
+      { value: '你好吗', highlight: true },
+      { value: ' ' },
+      { value: '你好吗', highlight: true }
+    ])
   })
 })
 
@@ -183,6 +199,7 @@ describe('highlight', () => {
 
   it('should correctly orient highlights', () => {
     const regex = compileQuery('one two three four')
+
     expect(
       highlight(
         regex,
@@ -193,22 +210,54 @@ describe('highlight', () => {
       )
     ).toEqual([
       {
+        value:
+          '... hello hello hello hello hello hello hello hello hello hello hello hello hello '
+      },
+      { highlight: true, value: 'one' },
+      { value: ' ' },
+      { highlight: true, value: 'two' },
+      { value: ' ' },
+      { highlight: true, value: 'three' },
+      { value: ' ' },
+      { highlight: true, value: 'four' }
+    ])
+
+    expect(
+      highlight(
+        regex,
+        'foobar '.repeat(100) + 'one two ' + 'hello '.repeat(100) + 'one five'
+      )
+    ).toEqual([
+      {
         value: '... foobar foobar foobar foobar foobar foobar foobar '
       },
-      {
-        highlight: true,
-        value: 'one'
-      },
-      {
-        value: ' '
-      },
-      {
-        highlight: true,
-        value: 'two'
-      },
-      {
-        value: 'hello hello hello hello hello hello hello ...'
-      }
+      { highlight: true, value: 'one' },
+      { value: ' ' },
+      { highlight: true, value: 'two' },
+      { value: ' hello hello hello hello hello hello hello ...' }
+    ])
+  })
+
+  it('should return something when there are no word boundaries', () => {
+    expect(highlight(/^$/, '你好吗'.repeat(100))).toEqual([
+      { value: '你好吗'.repeat(100).slice(0, 100) + ' ...' }
+    ])
+
+    expect(highlight(/(你好吗)/gi, 'before 你好吗 after')).toEqual([
+      { value: 'before ' },
+      { value: '你好吗', highlight: true },
+      { value: ' after' }
+    ])
+
+    expect(
+      highlight(
+        /(你好吗)/gi,
+        'before '.repeat(100) + '你好吗' + ' after'.repeat(100)
+      )
+    ).toEqual([
+      { value: '... before before before before before before before ' },
+      { value: '你好吗', highlight: true },
+      { value: ' after after after after after after after ...' }
     ])
   })
 })

@@ -127,6 +127,11 @@ export function compileQuery(query: string): RegExp {
     .filter((value, index, array) => array.indexOf(value) === index)
     .map(escapeStringRegexp)
 
+  if (!tokens.length) {
+    query = query.trim()
+    if (query) tokens.push(escapeStringRegexp(query))
+  }
+
   return tokens.length ? new RegExp('(' + tokens.join('|') + ')', 'ig') : /^$/
 }
 
@@ -149,29 +154,61 @@ export function scoreText(regex: RegExp, text: string): number {
   return score
 }
 
+// summarize takes text and a list of highlights in the format
+// [startPos,endPos,startPos2,endPos2,...] and reduces the length of
+// the text to about TARGET_SUMMARY_LENGTH while attempting to
+// position the selected text around the provided highlights.
+//
+// It will add `...` to the beginning or end of the text if it
+// truncates the results.
+//
+// It returns a list of objects that include a section of the
+// text and whether it should be highlighted or not.
 export function summarize(text: string, highlights: number[]): ContentPart[] {
   if (!text) return []
 
   // attempt to find highlights that fit within target summary length
+  //
+  // this finds the gap length between highlighted sections and removes
+  // the largest gap on each iteration.
   while (
     highlights.length > 2 &&
     highlights[highlights.length - 1] - highlights[0] > TARGET_SUMMARY_LENGTH
   ) {
     let largestGap = 0
     let largestGapIndex = 0
+    let highlightLengthTotal = 0
+    let leftHighlightLeftTotal = 0
 
     for (let i = 0; i < highlights.length - 2; i += 2) {
       const gap = highlights[i + 2] - highlights[i + 1]
+
+      highlightLengthTotal += highlights[i + 1] - highlights[i]
+
       if (gap >= largestGap) {
         largestGap = gap
         largestGapIndex = i
+        leftHighlightLeftTotal = highlightLengthTotal
       }
     }
 
-    // remove gap
-    highlights = highlights
-      .slice(0, largestGapIndex + 2)
-      .concat(highlights.slice(largestGapIndex + 4))
+    // add last highlight length
+    highlightLengthTotal +=
+      highlights[highlights.length - 1] - highlights[highlights.length - 2]
+
+    // remove highlight to the side of the gap with the lower highlight length
+    if (
+      leftHighlightLeftTotal >=
+      highlightLengthTotal - leftHighlightLeftTotal
+    ) {
+      highlights = highlights
+        .slice(0, largestGapIndex + 2)
+        .concat(highlights.slice(largestGapIndex + 4))
+    } else {
+      highlights = highlights
+        .slice(0, largestGapIndex)
+        .concat(highlights.slice(largestGapIndex + 2))
+    }
   }
 
   let startIndex = 0
@@ -184,11 +221,13 @@ export function summarize(text: string, highlights: number[]): ContentPart[] {
   const wb = /\b/g
   let result: RegExpExecArray | null = null
 
-  // find first word
+  // find the first word boundary in the text, we need this to
+  // make sure we expand to the beginning of the text if the
+  // start of the text is a non-word
   let firstIndex = startIndex
   if ((result = wb.exec(text)) != null) firstIndex = result.index
 
-  // expand start and end at word boundaries until we've hit our target summary
+  // expand head/tail at word boundaries until we've hit our target summary
   // length
   let remaining = TARGET_SUMMARY_LENGTH - (endIndex - startIndex)
   while (remaining > 0) {
@@ -202,9 +241,11 @@ export function summarize(text: string, highlights: number[]): ContentPart[] {
         wb.lastIndex = lastIndex + 1
       }
 
-      if (lastIndex === firstIndex) {
-        startIndex = 0
-      } else if (
+      // ensure we expand to the beginning of text if first character
+      // is a non-word
+      if (lastIndex === firstIndex) lastIndex = 0
+
+      if (
         lastIndex < startIndex &&
         endIndex - lastIndex < TARGET_SUMMARY_LENGTH
       ) {
@@ -212,7 +253,7 @@ export function summarize(text: string, highlights: number[]): ContentPart[] {
       }
     }
 
-    // expand tail using near right word boundary
+    // expand tail using word boundary to the right of highlight
     wb.lastIndex = endIndex + 1
     result = wb.exec(text)
     if (result != null && result.index - startIndex < TARGET_SUMMARY_LENGTH) {
@@ -225,12 +266,12 @@ export function summarize(text: string, highlights: number[]): ContentPart[] {
     remaining = newRemaining
   }
 
-  if (endIndex + remaining > text.length) {
-    endIndex = text.length
-  }
+  // expand tail to end of the text
+  if (endIndex + remaining > text.length) endIndex = text.length
 
   const parts: ContentPart[] = []
 
+  // create contents list
   let bufferIndex = startIndex
   while (highlights.length) {
     // add leading non-highlighted text
@@ -248,7 +289,7 @@ export function summarize(text: string, highlights: number[]): ContentPart[] {
     bufferIndex = end
   }
 
-  // if we have no highlights end index might be TARGET_SUMMARY_LENGTH,
+  // if we have no highlights endIndex might be TARGET_SUMMARY_LENGTH,
   // truncate to actual length
   endIndex = Math.min(endIndex, text.length)
 
@@ -282,6 +323,9 @@ export function summarize(text: string, highlights: number[]): ContentPart[] {
   return parts
 }
 
+// highlight finds the positions to highlight in the form
+// [startPos,endPos,startPos2,endPos2,...] and summarizes
+// the results.
 export function highlight(regex: RegExp, text: string): ContentPart[] {
   const highlights: number[] = []
 
@@ -307,7 +351,7 @@ export function getResults(query: string, locale: string) {
 
   const queryRegex = compileQuery(query)
 
-  // score docs by number of times matched and title
+  // score docs by number of times matched and title score
   const scoredDocMap: Record<string, ScoredDocument> = {}
   for (const resultSet of resultSets) {
     for (const { doc } of resultSet.result) {
@@ -328,7 +372,7 @@ export function getResults(query: string, locale: string) {
     .sort((a, b) => b.score - a.score)
     .slice(0, PAGE_LIMIT)
 
-  const results: Page[] = []
+  const pages: Page[] = []
   for (const { doc } of scoredDocs) {
     // score each section and create summary with highlighted parts
     let sections = doc.sections.map(section => {
@@ -355,14 +399,12 @@ export function getResults(query: string, locale: string) {
 
     sections.sort((a, b) => b.score - a.score)
 
-    let sectionContent: ContentPart[] = []
+    let placeholderContent: ContentPart[] = []
 
     // remove zero score sections
     while (sections.length && sections[sections.length - 1].score === 0) {
       const section = sections.pop()
-      if (section?.content.length) {
-        sectionContent = section.content
-      }
+      if (section?.content.length) placeholderContent = section.content
     }
 
     const pageTitle = highlight(queryRegex, doc.title)
@@ -372,21 +414,21 @@ export function getResults(query: string, locale: string) {
       sections.push({
         title: pageTitle,
         anchor: '',
-        content: sectionContent,
+        content: placeholderContent,
         score: 0
       })
     } else if (sections.length > SECTION_LIMIT) {
       sections = sections.slice(0, SECTION_LIMIT)
     }
 
-    results.push({
+    pages.push({
       title: pageTitle,
       route: doc.route,
       sections: sections
     })
   }
 
-  return results
+  return pages
 }
 
 function Content({
@@ -396,12 +438,13 @@ function Content({
   parts: ContentPart[]
   highlight?: boolean
 }) {
+  if (!highlight) {
+    return parts.map(part => part.value).join('')
+  }
+
   return parts.map((part, index) => {
     return (
-      <span
-        key={index}
-        className={cn({ '_text-primary-600': highlight && part.highlight })}
-      >
+      <span key={index} className={cn({ '_text-primary-600': part.highlight })}>
         {part.value}
       </span>
     )
@@ -446,7 +489,7 @@ export function Flexsearch({
       }
       setLoading(false)
     }
-    const newResults = getResults(value, locale)
+
     setResults(
       getResults(value, locale).flatMap(page => {
         return page.sections.map((section, i) => {
