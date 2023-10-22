@@ -154,6 +154,69 @@ export function scoreText(regex: RegExp, text: string): number {
   return score
 }
 
+// attempt to find the largest group of highlights that fit within
+// the target length
+export function reduceHighlights(highlights: number[]): number[] {
+  if (
+    highlights.length <= 2 ||
+    highlights[highlights.length - 1] - highlights[0] < TARGET_SUMMARY_LENGTH
+  ) {
+    return highlights
+  }
+
+  // find largest gap
+  let largestGap = 0
+  let largestGapIndex = 0
+  for (let i = 0; i < highlights.length - 2; i += 2) {
+    const gap = highlights[i + 2] - highlights[i + 1]
+
+    if (gap >= largestGap) {
+      largestGap = gap
+      largestGapIndex = i + 2
+    }
+  }
+
+  // reduce left
+  let left = highlights.slice(0, largestGapIndex)
+  if (
+    left.length > 2 &&
+    left[left.length - 1] - left[0] > TARGET_SUMMARY_LENGTH
+  ) {
+    left = reduceHighlights(left)
+  }
+
+  // reduce right
+  let right = highlights.slice(largestGapIndex)
+  if (
+    right.length > 2 &&
+    right[right.length - 1] - right[0] > TARGET_SUMMARY_LENGTH
+  ) {
+    right = reduceHighlights(right)
+  }
+
+  // sum left highlights
+  let leftHighlightLength = 0
+  for (let i = 0; i < left.length; i += 2) {
+    leftHighlightLength += left[i + 1] - left[i]
+  }
+
+  // sum right highlights
+  let rightHighlightLength = 0
+  for (let i = 0; i < right.length; i += 2) {
+    rightHighlightLength += right[i + 1] - right[i]
+  }
+
+  // if both sides have content, prefer the one that doesn't
+  // exceed the target length
+  if (leftHighlightLength > 0 && rightHighlightLength > 0) {
+    const leftOver = left[left.length - 1] - left[0] > TARGET_SUMMARY_LENGTH
+    const rightOver = right[right.length - 1] - right[0] > TARGET_SUMMARY_LENGTH
+    if (leftOver != rightOver) return rightOver ? left : right
+  }
+
+  return rightHighlightLength > leftHighlightLength ? right : left
+}
+
 // summarize takes text and a list of highlights in the format
 // [startPos,endPos,startPos2,endPos2,...] and reduces the length of
 // the text to about TARGET_SUMMARY_LENGTH while attempting to
@@ -168,48 +231,7 @@ export function summarize(text: string, highlights: number[]): ContentPart[] {
   if (!text) return []
 
   // attempt to find highlights that fit within target summary length
-  //
-  // this finds the gap length between highlighted sections and removes
-  // the largest gap on each iteration.
-  while (
-    highlights.length > 2 &&
-    highlights[highlights.length - 1] - highlights[0] > TARGET_SUMMARY_LENGTH
-  ) {
-    let largestGap = 0
-    let largestGapIndex = 0
-    let highlightLengthTotal = 0
-    let leftHighlightLeftTotal = 0
-
-    for (let i = 0; i < highlights.length - 2; i += 2) {
-      const gap = highlights[i + 2] - highlights[i + 1]
-
-      highlightLengthTotal += highlights[i + 1] - highlights[i]
-
-      if (gap >= largestGap) {
-        largestGap = gap
-        largestGapIndex = i
-        leftHighlightLeftTotal = highlightLengthTotal
-      }
-    }
-
-    // add last highlight length
-    highlightLengthTotal +=
-      highlights[highlights.length - 1] - highlights[highlights.length - 2]
-
-    // remove highlight to the side of the gap with the lower highlight length
-    if (
-      leftHighlightLeftTotal >=
-      highlightLengthTotal - leftHighlightLeftTotal
-    ) {
-      highlights = highlights
-        .slice(0, largestGapIndex + 2)
-        .concat(highlights.slice(largestGapIndex + 4))
-    } else {
-      highlights = highlights
-        .slice(0, largestGapIndex)
-        .concat(highlights.slice(largestGapIndex + 2))
-    }
-  }
+  highlights = reduceHighlights(highlights)
 
   let startIndex = 0
   let endIndex = TARGET_SUMMARY_LENGTH

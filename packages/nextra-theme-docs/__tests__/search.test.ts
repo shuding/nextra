@@ -5,6 +5,7 @@ import {
   getResults,
   highlight,
   loadIndexes,
+  reduceHighlights,
   scoreText,
   summarize
 } from '../src/components/flexsearch'
@@ -111,6 +112,33 @@ describe('scoreText', () => {
     expect(scoreText(oneTwo, 'one two one')).toEqual(6)
     expect(scoreText(oneTwo, 'one two two one')).toEqual(6)
     expect(scoreText(fallback, ' 你好吗 ')).toEqual(3)
+  })
+})
+
+describe('reduceHighlights', () => {
+  it('should work', () => {
+    expect(reduceHighlights([])).toEqual([])
+    expect(reduceHighlights([0, 10])).toEqual([0, 10])
+    expect(reduceHighlights([0, 100])).toEqual([0, 100])
+    expect(reduceHighlights([0, 1000])).toEqual([0, 1000])
+    expect(reduceHighlights([0, 10, 200, 210])).toEqual([0, 10])
+    expect(reduceHighlights([0, 10, 200, 210, 230, 240])).toEqual([
+      200, 210, 230, 240
+    ])
+  })
+
+  it('should prefer highlights below length threshold', () => {
+    expect(
+      reduceHighlights([
+        0, 2, 3, 5, 100, 1000, 1010, 1012, 1500, 1501, 1502, 1503
+      ])
+    ).toEqual([0, 2, 3, 5])
+  })
+
+  it('should optimize for the final results', () => {
+    expect(
+      reduceHighlights([0, 2, 3, 5, 1000, 1001, 1500, 1503, 2000, 2003])
+    ).toEqual([0, 2, 3, 5])
   })
 })
 
