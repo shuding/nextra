@@ -1,16 +1,7 @@
-import { createContext, useContext } from 'react'
-import { jsxRuntime } from './jsx-runtime.cjs'
-import type { Components } from './mdx'
-import { useMDXComponents } from './mdx.js'
-
-const SSGContext = createContext<Record<string, any>>({})
-
-export const useData = (key = 'ssg') => useContext(SSGContext)[key]
-
-// Make sure nextra/data remains functional, but we now recommend this new API.
-
-export const DataProvider = SSGContext.Provider
-SSGContext.displayName = 'SSG'
+import { useData } from '../hooks/index.js'
+import { jsxRuntime } from '../jsx-runtime.cjs'
+import type { Components } from '../mdx.js'
+import { useMDXComponents } from '../mdx.js'
 
 function evaluate(compiledSource: string, scope: Record<string, unknown> = {}) {
   // if we're ready to render, we can assemble the component tree and let React do its thing
@@ -19,7 +10,7 @@ function evaluate(compiledSource: string, scope: Record<string, unknown> = {}) {
   const keys = Object.keys(scope)
   const values = Object.values(scope)
   // now we eval the source code using a function constructor
-  // in order for this to work we need to have React, the mdx createElement,
+  // in order for this to work we need to have React, the mdx `createElement`,
   // and all our components in scope for the function, which is the case here
   // we pass the names (via keys) in as the function's args, and execute the
   // function with the actual values.
@@ -43,7 +34,7 @@ export function RemoteContent({
    * Pass-through variables for use in the MDX content
    */
   scope?: Record<string, unknown>
-} = {}) {
+}) {
   const compiledSource = useData('__nextra_dynamic_mdx')
   if (!compiledSource) {
     throw new Error(

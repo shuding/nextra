@@ -355,7 +355,7 @@ export const frontMatter = {
   describe('Remote MDX', () => {
     it("with outputFormat: 'program'", async () => {
       const rawMdx = `
-import { RemoteContent } from 'nextra/data'
+import { RemoteContent } from 'nextra/components'
 
 ## hello
 
@@ -372,7 +372,7 @@ import { RemoteContent } from 'nextra/data'
         import { useMDXComponents as _provideComponents } from 'nextra/mdx'
         const title = '[[...slug]]'
         const frontMatter = {}
-        import { RemoteContent } from 'nextra/data'
+        import { RemoteContent } from 'nextra/components'
         export function useTOC(props) {
           return [
             {

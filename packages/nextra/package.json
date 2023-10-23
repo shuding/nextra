@@ -77,9 +77,6 @@
       "context": [
         "./dist/client/context.d.ts"
       ],
-      "data": [
-        "./dist/client/data.d.ts"
-      ],
       "icons": [
         "./dist/client/icons/index.d.ts"
       ],
@@ -140,7 +137,7 @@
     "remark-gfm": "^3.0.1",
     "remark-math": "^6.0.0",
     "remark-reading-time": "^2.0.1",
-    "shiki": "npm:shikiji@0.6.8",
+    "shiki": "npm:shikiji@0.6.10",
     "slash": "^5.1.0",
     "title": "^3.5.3",
     "unist-util-remove": "^4.0.0",

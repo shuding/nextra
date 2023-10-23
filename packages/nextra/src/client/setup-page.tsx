@@ -12,8 +12,8 @@ import type {
   PageOpts
 } from '../types'
 import { findFolder } from '../utils.js'
-import { DataProvider } from './data.js'
 import { useRouter } from './hooks/index.js'
+import { DataProvider } from './hooks/use-data.js'
 import { useMDXComponents } from './mdx.js'
 
 export function HOC_MDXWrapper(
