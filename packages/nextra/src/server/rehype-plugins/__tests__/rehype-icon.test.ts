@@ -2,8 +2,8 @@ import { compile } from '@mdx-js/mdx'
 import type { VFile } from '@mdx-js/mdx/lib/compile'
 import rehypePrettyCode from 'rehype-pretty-code'
 import { clean } from '../../../../__test__/test-utils.js'
-import { DEFAULT_REHYPE_PRETTY_CODE_OPTIONS } from '../../compile.js'
 import {
+  DEFAULT_REHYPE_PRETTY_CODE_OPTIONS,
   rehypeAttachCodeMeta,
   rehypeIcon,
   rehypeParseCodeMeta

@@ -38,8 +38,6 @@ export const MARKDOWN_EXTENSIONS = ['md', 'mdx'] as const
 
 export const EXTERNAL_URL_REGEX = /^https?:\/\//
 
-export const CODE_BLOCK_FILENAME_REGEX = /filename="([^"]+)"/
-
 export const DEFAULT_LOCALES = ['']
 
 // Experimental, need to deep dive why bundle becomes bigger and there is full

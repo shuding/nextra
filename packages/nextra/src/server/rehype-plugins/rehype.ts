@@ -3,12 +3,13 @@ import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
 import { bundledLanguages, getHighlighter } from 'shiki'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
-import { CODE_BLOCK_FILENAME_REGEX } from '../constants.js'
 
 type PreElement = Element & {
   __filename?: string
   __hasCopyCode?: boolean
 }
+
+const CODE_BLOCK_FILENAME_REGEX = /filename="([^"]+)"/
 
 export const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS: RehypePrettyCodeOptions = {
   keepBackground: false,
