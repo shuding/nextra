@@ -16,9 +16,9 @@
       "import": "./dist/client/components/index.js",
       "types": "./dist/client/components/index.d.ts"
     },
-    "./mdx-plugins": {
-      "import": "./dist/server/mdx-plugins/index.js",
-      "types": "./dist/server/mdx-plugins/index.d.ts"
+    "./remark-plugins": {
+      "import": "./dist/server/remark-plugins/index.js",
+      "types": "./dist/server/remark-plugins/index.d.ts"
     },
     "./hooks": {
       "import": "./dist/client/hooks/index.js",
@@ -59,8 +59,8 @@
       "compile": [
         "./dist/server/compile.d.ts"
       ],
-      "mdx-plugins": [
-        "./dist/server/mdx-plugins/index.d.ts"
+      "remark-plugins": [
+        "./dist/server/remark-plugins/index.d.ts"
       ],
       "remote": [
         "./dist/server/remote.d.ts"
