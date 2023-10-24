@@ -1,5 +1,13 @@
 # nextra
 
+## 3.0.0-alpha.9
+
+### Patch Changes
+
+- 8efbb45c: remove `nextra/data` export, move `useData` to `nextra/hooks`,
+  `RemoteContent` to `nextra/components`
+- 80e11e04: move `resolvePageMap` to `nextra/page-map-dynamic`
+
 ## 3.0.0-alpha.8
 
 ### Minor Changes
