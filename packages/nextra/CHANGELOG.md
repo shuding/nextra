@@ -1,5 +1,11 @@
 # nextra
 
+## 3.0.0-alpha.10
+
+### Patch Changes
+
+- 9099c354: remove `nextra/mdx-plugins`, add `nextra/remark-plugins`
+
 ## 3.0.0-alpha.9
 
 ### Patch Changes
