@@ -121,7 +121,7 @@
     "react-dom": ">=16.13.1"
   },
   "dependencies": {
-    "@headlessui/react": "^1.7.10",
+    "@headlessui/react": "^1.7.17",
     "@mdx-js/mdx": "^2.3.0",
     "@mdx-js/react": "^2.3.0",
     "@napi-rs/simple-git": "^0.1.9",
@@ -159,7 +159,7 @@
     "@types/webpack-env": "^1.18.1",
     "@vitejs/plugin-react": "^3.0.1",
     "fast-glob": "^3.2.12",
-    "next": "^13.5.3",
+    "next": "^13.5.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "unified": "^10.1.2",
