@@ -52,6 +52,22 @@ npm i next react react-dom nextra nextra-theme-docs
   install `nextra` and `nextra-theme-docs` as the add-ons.
 </Callout>
 
+Add the following scripts in package.json : 
+
+```
+"scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+},
+```
+
+You can either start the server with, for example if you use npm, `npm run dev`, which will run in development mode or `npm run build && npm run start` for production mode.
+
+<Callout>
+If you're not familiar with next, note that development mode is significantly slower since next compiles every page you navigate to.
+</Callout>
+
 ### Add Next.js Config
 
 Create the following `next.config.js` file in your project’s root directory:
