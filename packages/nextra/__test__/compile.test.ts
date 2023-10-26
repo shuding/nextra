@@ -250,18 +250,16 @@ import Last from './three.mdx'
       import IgnoreMe from './foo'
       import Last, { useTOC as useTOC2 } from './three.mdx'
       export function useTOC(props) {
-        const _components = Object.assign(
-            {
-              code: 'code',
-              span: 'span',
-              math: 'math',
-              semantics: 'semantics',
-              mrow: 'mrow',
-              mi: 'mi',
-              annotation: 'annotation'
-            },
-            _provideComponents()
-          ),
+        const _components = {
+            annotation: 'annotation',
+            code: 'code',
+            math: 'math',
+            mi: 'mi',
+            mrow: 'mrow',
+            semantics: 'semantics',
+            span: 'span',
+            ..._provideComponents()
+          },
           { Kek } = _components
         if (!Kek) _missingMdxReference('Kek', true)
         return [
@@ -355,13 +353,11 @@ import Last from './three.mdx'
       }
       function MDXLayout(props) {
         const { toc = useTOC(props) } = props
-        const _components = Object.assign(
-          {
-            h2: 'h2'
-          },
-          _provideComponents(),
-          props.components
-        )
+        const _components = {
+          h2: 'h2',
+          ..._provideComponents(),
+          ...props.components
+        }
         return (
           <>
             <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
