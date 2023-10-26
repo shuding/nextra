@@ -34,14 +34,12 @@ describe('rehypeIcon', () => {
     expect(clean(file)).resolves.toMatchInlineSnapshot(`
       "import { CssIcon } from 'nextra/icons'
       function _createMdxContent(props) {
-        const _components = Object.assign(
-          {
-            pre: 'pre',
-            code: 'code',
-            span: 'span'
-          },
-          props.components
-        )
+        const _components = {
+          code: 'code',
+          pre: 'pre',
+          span: 'span',
+          ...props.components
+        }
         return (
           <>
             <_components.pre icon={CssIcon} data-language=\\"css\\" data-copy=\\"\\">
@@ -73,14 +71,12 @@ describe('rehypeIcon', () => {
       import { TerminalIcon } from 'nextra/icons'
       import { CssIcon } from 'nextra/icons'
       function _createMdxContent(props) {
-        const _components = Object.assign(
-          {
-            pre: 'pre',
-            code: 'code',
-            span: 'span'
-          },
-          props.components
-        )
+        const _components = {
+          code: 'code',
+          pre: 'pre',
+          span: 'span',
+          ...props.components
+        }
         return (
           <>
             <_components.pre icon={JavaScriptIcon} data-language=\\"js\\" data-copy=\\"\\">
