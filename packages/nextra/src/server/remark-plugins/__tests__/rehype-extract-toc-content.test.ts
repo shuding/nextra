@@ -35,19 +35,17 @@ bar[^1]
       }
       function MDXLayout(props) {
         const { toc = useTOC(props) } = props
-        const _components = Object.assign(
-          {
-            h2: 'h2',
-            p: 'p',
-            sup: 'sup',
-            a: 'a',
-            section: 'section',
-            ol: 'ol',
-            li: 'li'
-          },
-          _provideComponents(),
-          props.components
-        )
+        const _components = {
+          a: 'a',
+          h2: 'h2',
+          li: 'li',
+          ol: 'ol',
+          p: 'p',
+          section: 'section',
+          sup: 'sup',
+          ..._provideComponents(),
+          ...props.components
+        }
         return (
           <>
             <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
@@ -67,7 +65,7 @@ bar[^1]
             </_components.p>
             {'\\\\n'}
             <_components.section data-footnotes className=\\"footnotes\\">
-              <_components.h2 id=\\"footnote-label\\" className=\\"sr-only\\">
+              <_components.h2 className=\\"sr-only\\" id=\\"footnote-label\\">
                 {'Footnotes'}
               </_components.h2>
               {'\\\\n'}
@@ -79,9 +77,9 @@ bar[^1]
                     {'bar description '}
                     <_components.a
                       href=\\"#user-content-fnref-1\\"
-                      data-footnote-backref
+                      data-footnote-backref=\\"\\"
+                      aria-label=\\"Back to reference 1\\"
                       className=\\"data-footnote-backref\\"
-                      aria-label=\\"Back to content\\"
                     >
                       {'↩'}
                     </_components.a>
@@ -135,14 +133,12 @@ import { Steps } from 'nextra/components'
       }
       function MDXLayout(props) {
         const { toc = useTOC(props) } = props
-        const _components = Object.assign(
-          {
-            h2: 'h2',
-            h3: 'h3'
-          },
-          _provideComponents(),
-          props.components
-        )
+        const _components = {
+          h2: 'h2',
+          h3: 'h3',
+          ..._provideComponents(),
+          ...props.components
+        }
         return (
           <>
             <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
@@ -193,30 +189,26 @@ export const frontMatter = {
       const title = 'Heading 1'
       export const myVar = 'interpolated'
       export const Test = () => {
-        const _components = Object.assign(
-          {
-            span: 'span'
-          },
-          _provideComponents()
-        )
+        const _components = {
+          span: 'span',
+          ..._provideComponents()
+        }
         return <_components.span>Hello</_components.span>
       }
       const frontMatter = {
         test: 'extract toc content'
       }
       export function useTOC(props) {
-        const _components = Object.assign(
-          {
-            span: 'span',
-            math: 'math',
-            semantics: 'semantics',
-            mrow: 'mrow',
-            mi: 'mi',
-            annotation: 'annotation',
-            code: 'code'
-          },
-          _provideComponents()
-        )
+        const _components = {
+          annotation: 'annotation',
+          code: 'code',
+          math: 'math',
+          mi: 'mi',
+          mrow: 'mrow',
+          semantics: 'semantics',
+          span: 'span',
+          ..._provideComponents()
+        }
         return [
           {
             value: (
@@ -314,18 +306,16 @@ export const frontMatter = {
       }
       function MDXLayout(props) {
         const { toc = useTOC(props) } = props
-        const _components = Object.assign(
-          {
-            h1: 'h1',
-            h2: 'h2',
-            h3: 'h3',
-            h4: 'h4',
-            h5: 'h5',
-            h6: 'h6'
-          },
-          _provideComponents(),
-          props.components
-        )
+        const _components = {
+          h1: 'h1',
+          h2: 'h2',
+          h3: 'h3',
+          h4: 'h4',
+          h5: 'h5',
+          h6: 'h6',
+          ..._provideComponents(),
+          ...props.components
+        }
         return (
           <>
             <_components.h1>{'Heading 1'}</_components.h1>
@@ -384,13 +374,11 @@ import { RemoteContent } from 'nextra/components'
         }
         function MDXLayout(props) {
           const { toc = useTOC(props) } = props
-          const _components = Object.assign(
-            {
-              h2: 'h2'
-            },
-            _provideComponents(),
-            props.components
-          )
+          const _components = {
+            h2: 'h2',
+            ..._provideComponents(),
+            ...props.components
+          }
           return (
             <>
               <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
@@ -427,7 +415,7 @@ export const myVar = 123
       const res = await clean(result, false)
 
       expect(res).toMatchInlineSnapshot(`
-        "/*@jsxRuntime automatic @jsxImportSource react*/
+        "'use strict'
         const { Fragment: _Fragment, jsx: _jsx, jsxs: _jsxs } = arguments[0]
         const { useMDXComponents: _provideComponents } = arguments[0]
         const title = ''
@@ -450,14 +438,12 @@ export const myVar = 123
           ]
         }
         function _createMdxContent(props) {
-          const _components = Object.assign(
-              {
-                h2: 'h2',
-                h3: 'h3'
-              },
-              _provideComponents(),
-              props.components
-            ),
+          const _components = {
+              h2: 'h2',
+              h3: 'h3',
+              ..._provideComponents(),
+              ...props.components
+            },
             { Foo } = _components
           if (!Foo) _missingMdxReference('Foo', true)
           return _jsxs(_Fragment, {

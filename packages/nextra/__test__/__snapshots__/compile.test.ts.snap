@@ -8,14 +8,12 @@ export function useTOC(props) {
   return []
 }
 function MDXLayout(props) {
-  const _components = Object.assign(
-    {
-      h1: 'h1',
-      code: 'code'
-    },
-    _provideComponents(),
-    props.components
-  )
+  const _components = {
+    code: 'code',
+    h1: 'h1',
+    ..._provideComponents(),
+    ...props.components
+  }
   return (
     <_components.h1>
       <_components.code>{'codegen.yml'}</_components.code>
@@ -33,14 +31,12 @@ export function useTOC(props) {
   return []
 }
 function MDXLayout(props) {
-  const _components = Object.assign(
-    {
-      h1: 'h1',
-      code: 'code'
-    },
-    _provideComponents(),
-    props.components
-  )
+  const _components = {
+    code: 'code',
+    h1: 'h1',
+    ..._provideComponents(),
+    ...props.components
+  }
   return (
     <_components.h1>
       <_components.code>{'codegen.yml'}</_components.code>
@@ -67,13 +63,11 @@ export function useTOC(props) {
   return []
 }
 function MDXLayout(props) {
-  const _components = Object.assign(
-    {
-      h1: 'h1'
-    },
-    _provideComponents(),
-    props.components
-  )
+  const _components = {
+    h1: 'h1',
+    ..._provideComponents(),
+    ...props.components
+  }
   return (
     <_components.h1>
       {'Posts Tagged with “'}
@@ -102,13 +96,11 @@ export function useTOC(props) {
 }
 function MDXLayout(props) {
   const { toc = useTOC(props) } = props
-  const _components = Object.assign(
-    {
-      h2: 'h2'
-    },
-    _provideComponents(),
-    props.components
-  )
+  const _components = {
+    h2: 'h2',
+    ..._provideComponents(),
+    ...props.components
+  }
   return <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
 }
 "
@@ -122,13 +114,11 @@ export function useTOC(props) {
   return []
 }
 function MDXLayout(props) {
-  const _components = Object.assign(
-    {
-      h1: 'h1'
-    },
-    _provideComponents(),
-    props.components
-  )
+  const _components = {
+    h1: 'h1',
+    ..._provideComponents(),
+    ...props.components
+  }
   return <_components.h1>{'Hello World'}</_components.h1>
 }
 "

@@ -282,16 +282,24 @@ export async function compileMdx(
       ].filter(truthy),
       recmaPlugins: [
         (() => (ast: Program, file) => {
-          const mdxContentIndex = ast.body.findIndex(
-            node =>
-              node.type === 'FunctionDeclaration' &&
-              node.id!.name === 'MDXContent'
-          )
+          const mdxContentIndex = ast.body.findIndex(node => {
+            if (node.type === 'ExportDefaultDeclaration') {
+              return (node.declaration as any).id.name === 'MDXContent'
+            }
+            if (node.type === 'FunctionDeclaration') {
+              return node.id!.name === 'MDXContent'
+            }
+          })
 
           // Remove `MDXContent` since we use custom HOC_MDXContent
-          const [mdxContent] = ast.body.splice(mdxContentIndex, 1)
+          let [mdxContent] = ast.body.splice(mdxContentIndex, 1) as any
 
-          const mdxContentArgument = (mdxContent as any).body.body[0].argument
+          // In MDX3 MDXContent is directly exported as export default when `outputFormat: 'program'` is specified
+          if (mdxContent.type === 'ExportDefaultDeclaration') {
+            mdxContent = mdxContent.declaration
+          }
+
+          const mdxContentArgument = mdxContent.body.body[0].argument
 
           file.data.hasMdxLayout =
             !!mdxContentArgument &&

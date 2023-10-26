@@ -1,11 +1,11 @@
 /* eslint typescript-sort-keys/interface: error */
 import type { PageOpts } from 'nextra'
-import type { Components } from 'nextra/mdx'
+import type { MDXComponents } from 'nextra/mdx'
 import type { ReactNode } from 'react'
 
 export interface NextraBlogTheme {
   comments?: ReactNode
-  components?: Components
+  components?: MDXComponents
   darkMode?: boolean
   dateFormatter?: (date: Date) => string
   footer?: ReactNode

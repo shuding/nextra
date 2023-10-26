@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { Code, Pre, Table, Td, Th, Tr } from 'nextra/components'
-import type { Components } from 'nextra/mdx'
+import type { MDXComponents } from 'nextra/mdx'
 import type { ComponentProps, ReactElement, ReactNode, RefObject } from 'react'
 import {
   createContext,
@@ -74,7 +74,7 @@ const A = ({ children, href = '', ...props }: ComponentProps<'a'>) => {
   )
 }
 
-export const components: Components = {
+export const components: MDXComponents = {
   h1: H1,
   h2: props => <HeadingLink tag="h2" {...props} />,
   h3: props => <HeadingLink tag="h3" {...props} />,

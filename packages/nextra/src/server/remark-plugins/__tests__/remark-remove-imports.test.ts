@@ -20,7 +20,8 @@ export const Test = ({value}) => value
       opts
     )
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
-      "const { useMDXComponents: _provideComponents } = arguments[0]
+      "'use strict'
+      const { useMDXComponents: _provideComponents } = arguments[0]
       const title = ''
       const frontMatter = {}
       const myVar = 123
@@ -39,13 +40,11 @@ export const Test = ({value}) => value
         ]
       }
       function _createMdxContent(props) {
-        const _components = Object.assign(
-          {
-            h2: 'h2'
-          },
-          _provideComponents(),
-          props.components
-        )
+        const _components = {
+          h2: 'h2',
+          ..._provideComponents(),
+          ...props.components
+        }
         return (
           <_components.h2 id=\\"-myvar\\">
             <Test value=\\"Hello\\" /> {myVar}
