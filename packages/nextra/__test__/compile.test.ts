@@ -148,18 +148,16 @@ export const TagName = () => {
       }
       function MDXLayout(props) {
         const { toc = useTOC(props) } = props
-        const _components = Object.assign(
-          {
-            h1: 'h1',
-            h2: 'h2',
-            h3: 'h3',
-            h4: 'h4',
-            h5: 'h5',
-            h6: 'h6'
-          },
-          _provideComponents(),
-          props.components
-        )
+        const _components = {
+          h1: 'h1',
+          h2: 'h2',
+          h3: 'h3',
+          h4: 'h4',
+          h5: 'h5',
+          h6: 'h6',
+          ..._provideComponents(),
+          ...props.components
+        }
         return (
           <>
             <_components.h1 id=\\"test-id\\">{'My Header'}</_components.h1>
@@ -198,13 +196,11 @@ export const TagName = () => {
       }
       function MDXLayout(props) {
         const { toc = useTOC(props) } = props
-        const _components = Object.assign(
-          {
-            h3: 'h3'
-          },
-          _provideComponents(),
-          props.components
-        )
+        const _components = {
+          h3: 'h3',
+          ..._provideComponents(),
+          ...props.components
+        }
         return <_components.h3 id={toc[0].id}>{toc[0].value}</_components.h3>
       }
       "
