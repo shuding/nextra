@@ -12,7 +12,10 @@ export async function clean(
   if (minify) {
     content = content
       // Remove everything starting from `function MDXContent` declaration
-      .slice(content.indexOf('\n'), content.lastIndexOf('export default function MDXContent'))
+      .slice(
+        content.indexOf('\n'),
+        content.lastIndexOf('export default function MDXContent')
+      )
   }
   return prettier.format(content, {
     parser: 'typescript',
