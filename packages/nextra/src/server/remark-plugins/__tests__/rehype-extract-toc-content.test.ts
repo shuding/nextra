@@ -189,30 +189,26 @@ export const frontMatter = {
       const title = 'Heading 1'
       export const myVar = 'interpolated'
       export const Test = () => {
-        const _components = Object.assign(
-          {
-            span: 'span'
-          },
-          _provideComponents()
-        )
+        const _components = {
+          span: 'span',
+          ..._provideComponents()
+        }
         return <_components.span>Hello</_components.span>
       }
       const frontMatter = {
         test: 'extract toc content'
       }
       export function useTOC(props) {
-        const _components = Object.assign(
-          {
-            span: 'span',
-            math: 'math',
-            semantics: 'semantics',
-            mrow: 'mrow',
-            mi: 'mi',
-            annotation: 'annotation',
-            code: 'code'
-          },
-          _provideComponents()
-        )
+        const _components = {
+          annotation: 'annotation',
+          code: 'code',
+          math: 'math',
+          mi: 'mi',
+          mrow: 'mrow',
+          semantics: 'semantics',
+          span: 'span',
+          ..._provideComponents()
+        }
         return [
           {
             value: (
@@ -310,18 +306,16 @@ export const frontMatter = {
       }
       function MDXLayout(props) {
         const { toc = useTOC(props) } = props
-        const _components = Object.assign(
-          {
-            h1: 'h1',
-            h2: 'h2',
-            h3: 'h3',
-            h4: 'h4',
-            h5: 'h5',
-            h6: 'h6'
-          },
-          _provideComponents(),
-          props.components
-        )
+        const _components = {
+          h1: 'h1',
+          h2: 'h2',
+          h3: 'h3',
+          h4: 'h4',
+          h5: 'h5',
+          h6: 'h6',
+          ..._provideComponents(),
+          ...props.components
+        }
         return (
           <>
             <_components.h1>{'Heading 1'}</_components.h1>
