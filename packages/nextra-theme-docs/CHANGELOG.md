@@ -1,5 +1,16 @@
 # nextra-theme-docs
 
+## 3.0.0-alpha.11
+
+### Major Changes
+
+- c2ad837d: update to MDX3
+
+### Patch Changes
+
+- Updated dependencies [c2ad837d]
+  - nextra@3.0.0-alpha.11
+
 ## 3.0.0-alpha.10
 
 ### Patch Changes
