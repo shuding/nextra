@@ -133,7 +133,7 @@
     "rehype-katex": "^7.0.0",
     "rehype-pretty-code": "0.10.1",
     "rehype-raw": "^7.0.0",
-    "remark-frontmatter": "^4.0.1",
+    "remark-frontmatter": "^5.0.0",
     "remark-gfm": "^4.0.0",
     "remark-math": "^6.0.0",
     "remark-reading-time": "^2.0.1",
