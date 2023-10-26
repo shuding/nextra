@@ -3,7 +3,7 @@ import type { NextraMDXContent } from 'nextra'
 import { Code, Pre, Table, Td, Th, Tr } from 'nextra/components'
 import { useMounted } from 'nextra/hooks'
 import { ArrowRightIcon } from 'nextra/icons'
-import type { Components } from 'nextra/mdx'
+import type { MDXComponents } from 'nextra/mdx'
 import type { ComponentProps, ReactElement, ReactNode } from 'react'
 import {
   Children,
@@ -270,7 +270,7 @@ function Body({ children }: { children: ReactNode }): ReactElement {
   )
 }
 
-const DEFAULT_COMPONENTS: Components = {
+const DEFAULT_COMPONENTS: MDXComponents = {
   h1: props => (
     <h1
       className="_mt-2 _text-4xl _font-bold _tracking-tight _text-slate-900 dark:_text-slate-100"
@@ -374,7 +374,7 @@ export function getComponents({
 }: {
   isRawLayout?: boolean
   components?: DocsThemeConfig['components']
-}): Components {
+}): MDXComponents {
   if (isRawLayout) {
     // @ts-expect-error
     return { a: A, wrapper: DEFAULT_COMPONENTS.wrapper }

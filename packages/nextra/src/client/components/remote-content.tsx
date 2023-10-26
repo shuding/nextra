@@ -1,6 +1,6 @@
 import { useData } from '../hooks/index.js'
 import { jsxRuntime } from '../jsx-runtime.cjs'
-import type { Components } from '../mdx.js'
+import type { MDXComponents } from '../mdx.js'
 import { useMDXComponents } from '../mdx.js'
 
 function evaluate(compiledSource: string, scope: Record<string, unknown> = {}) {
@@ -29,7 +29,7 @@ export function RemoteContent({
    *
    * For example: `{ ComponentName: Component }` will be accessible in the MDX as `<ComponentName/>`.
    */
-  components?: Components
+  components?: MDXComponents
   /**
    * Pass-through variables for use in the MDX content
    */
