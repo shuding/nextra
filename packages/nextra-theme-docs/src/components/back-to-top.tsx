@@ -12,7 +12,7 @@ export function BackToTop({ className }: { className?: string }): ReactElement {
   useEffect(() => {
     function toggleVisible() {
       const { scrollTop } = document.documentElement
-      ref.current?.classList.toggle('nx-opacity-0', scrollTop < 300)
+      ref.current?.classList.toggle('nx-invisible', scrollTop < 300)
     }
 
     window.addEventListener('scroll', toggleVisible)
@@ -27,7 +27,7 @@ export function BackToTop({ className }: { className?: string }): ReactElement {
       aria-hidden="true"
       onClick={scrollToTop}
       className={cn(
-        'nx-flex nx-items-center nx-gap-1.5 nx-transition nx-opacity-0',
+        'nx-flex nx-items-center nx-gap-1.5 nx-transition nx-invisible',
         className
       )}
     >
