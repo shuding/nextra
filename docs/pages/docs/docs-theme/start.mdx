@@ -1,4 +1,3 @@
-import { BoxIcon, GearIcon, RowsIcon } from '@components/icons'
 import { Callout, Card, Cards, Steps } from 'nextra/components'
 
 # Docs Theme
@@ -124,23 +123,49 @@ developing the project! 🎉
 
 </Steps>
 
+### Static Export
+Export your pages statically, and deploy with [Nginx](https://www.nginx.org/), [Github Pages](https://pages.github.com/) and more.
+
+<Steps>
+
+### Configuration
+
+```js filename="next.config.js"
+/**
+ * @type {import('next').NextConfig}
+ */
+
+const nextConfig = {  
+  output:'export', // from NextJs v13.3.0 next export is depricated
+  images: {
+   unoptimized: true, // mandatory, otherwise won't export
+ },
+  //Optional: Change the output directory `out` -> `dist`  
+//  distDir: "build"
+
+ }  
+ const withNextra = require('nextra')({  
+   theme: 'nextra-theme-docs',  
+   themeConfig: './theme.config.tsx',  
+ })  
+ module.exports = withNextra(nextConfig) //export the congifg as a dependency
+
+```
+### Buildng
+
+to staticly export run:
+
+```sh npm2yarn
+npm run build
+```
+
+By default, static export will be stored in `out` directory in the root of your project.
+
+
+For more in detail documentation fo static export visit [Nextjs offical docs](https://nextjs.org/docs/pages/building-your-application/deploying/static-exports) .
+</Steps>
+
 Next, check out the next section to learn about organizing the documentation
 structure and configuring the website theme:
 
-<Cards>
-  <Card
-    icon={<RowsIcon />}
-    title="Page Structure"
-    href="/docs/docs-theme/page-configuration"
-  />
-  <Card
-    icon={<GearIcon />}
-    title="Theme Configuration"
-    href="/docs/docs-theme/theme-configuration"
-  />
-  <Card
-    icon={<BoxIcon />}
-    title="Built-in Components"
-    href="/docs/docs-theme/built-ins"
-  />
-</Cards>
+
