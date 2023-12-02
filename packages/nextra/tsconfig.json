@@ -9,9 +9,12 @@
     "skipLibCheck": true,
     "allowJs": true,
     "jsx": "react-jsx",
-    "lib": ["es2022", "dom"],
+    "lib": ["es2023", "dom"],
     "moduleResolution": "node",
-    "types": ["vitest/globals", "webpack-env"],
-    "resolveJsonModule": true
+    "types": ["vitest/globals"],
+    "resolveJsonModule": true,
+    "paths": {
+      "unified": ["./node_modules/unified"]
+    }
   }
 }

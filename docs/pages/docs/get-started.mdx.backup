@@ -19,13 +19,15 @@ Nextra works like a Next.js plugin, and it accepts a theme config (layout) to re
 
 3. Create the following Next.js config:
 
-```js filename="next.config.js"
-const withNextra = require('nextra')({
+```js filename="next.config.mjs"
+import nextra from 'nextra'
+
+const withNextra = nextra({
   theme: 'nextra-theme-docs',
   themeConfig: './theme.config.jsx'
   // optional: add `staticImage: true` to enable Nextra's auto image import
 })
-module.exports = withNextra()
+export default withNextra()
 ```
 
 4. Create a `theme.config.jsx` file for the docs theme:

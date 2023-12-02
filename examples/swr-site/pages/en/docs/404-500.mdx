@@ -1,0 +1,41 @@
+# 404 / 500 pages
+
+Nextra support custom `404.mdx`/`500.mdx` pages.
+
+## 404
+
+To add `/404` page import `NotFoundPage`:
+
+```mdx filename="pages/404.mdx"
+import { NotFoundPage } from 'nextra-theme-docs'
+
+# 404 - This page could not be found
+
+<NotFoundPage />
+```
+
+[Click to try `/404` page.](/this-page-not-exist-trust-me)
+
+## Customize Theme Config Options
+
+Also, you can customize following options:
+
+```ts
+// ...
+notFoundLink?: ReactNode | FC
+notFoundLabels?: string
+```
+
+## Customize Layout
+
+```json filename="meta.json"
+"404": {
+  "type": "page"
+},
+"500": {
+  "type":"page",
+  "theme": {
+    "layout": "full"
+  }
+}
+```

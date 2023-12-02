@@ -1,5 +1,5 @@
 import { BoxIcon, GearIcon, RowsIcon } from '@components/icons'
-import { Callout, Card, Cards, Steps } from 'nextra/components'
+import { Callout, Cards, Steps } from 'nextra/components'
 
 # Docs Theme
 
@@ -52,39 +52,22 @@ npm i next react react-dom nextra nextra-theme-docs
   install `nextra` and `nextra-theme-docs` as the add-ons.
 </Callout>
 
-Add the following scripts in `package.json`:
-
-```json filename="package.json"
-"scripts": {
-  "dev": "next",
-  "build": "next build",
-  "start": "next start"
-},
-```
-
-You can either start the server with, for example if you use npm, `npm run dev`,
-which will run in development mode or `npm run build && npm run start` for
-production mode.
-
-<Callout>
-  If you're not familiar with Next.js, note that development mode is
-  significantly slower since Next.js compiles every page you navigate to.
-</Callout>
-
 ### Add Next.js Config
 
-Create the following `next.config.js` file in your project’s root directory:
+Create the following `next.config.mjs` file in your project’s root directory:
 
-```js filename="next.config.js"
-const withNextra = require('nextra')({
+```js filename="next.config.mjs"
+import nextra from 'nextra'
+
+const withNextra = nextra({
   theme: 'nextra-theme-docs',
   themeConfig: './theme.config.jsx'
 })
 
-module.exports = withNextra()
+export default withNextra()
 
 // If you have other Next.js configurations, you can pass them as the parameter:
-// module.exports = withNextra({ /* other next.js config */ })
+// export default withNextra({ /* other next.js config */ })
 ```
 
 With the above configuration, Nextra can handle Markdown files in your Next.js
@@ -128,17 +111,17 @@ Next, check out the next section to learn about organizing the documentation
 structure and configuring the website theme:
 
 <Cards>
-  <Card
+  <Cards.Card
     icon={<RowsIcon />}
     title="Page Structure"
     href="/docs/docs-theme/page-configuration"
   />
-  <Card
+  <Cards.Card
     icon={<GearIcon />}
     title="Theme Configuration"
     href="/docs/docs-theme/theme-configuration"
   />
-  <Card
+  <Cards.Card
     icon={<BoxIcon />}
     title="Built-in Components"
     href="/docs/docs-theme/built-ins"

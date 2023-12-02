@@ -1,12 +1,12 @@
 {
   "name": "nextra-theme-docs",
-  "version": "2.13.2",
+  "version": "3.0.0-alpha.11",
   "description": "A Nextra theme for documentation sites.",
   "repository": "https://github.com/shuding/nextra",
   "author": "Shu Ding <g@shud.in>",
   "license": "MIT",
   "exports": {
-    "./style.css": "./style.css",
+    "./style.css": "./dist/style.css",
     ".": {
       "import": "./dist/index.js",
       "types": "./dist/index.d.mts"
@@ -14,24 +14,23 @@
   },
   "types": "./dist/index.d.mts",
   "files": [
-    "dist",
-    "style.css"
+    "dist"
   ],
   "scripts": {
     "build": "tsup",
     "build:all": "pnpm build && pnpm build:tailwind",
-    "build:tailwind": "pnpm postcss css/styles.css -o style.css --verbose",
+    "build:tailwind": "pnpm postcss css/styles.css -o dist/style.css --verbose",
     "clean": "rimraf ./dist ./style.css",
     "dev": "concurrently \"pnpm dev:layout\" \"pnpm dev:tailwind\"",
     "dev:layout": "tsup --watch",
-    "dev:tailwind": "TAILWIND_MODE=watch pnpm postcss css/styles.css -o style.css --watch",
+    "dev:tailwind": "TAILWIND_MODE=watch pnpm postcss css/styles.css -o dist/style.css --watch",
     "prepublishOnly": "pnpm build:all",
-    "test": "echo ❗ No tests, previous tests were moved to the `nextra` package",
+    "test": "vitest",
     "types": "tsup --dts-only",
     "types:check": "tsc --noEmit"
   },
   "peerDependencies": {
-    "next": ">=9.5.3",
+    "next": ">=13",
     "nextra": "workspace:*",
     "react": ">=16.13.1",
     "react-dom": ">=16.13.1"
@@ -43,10 +42,7 @@
     "escape-string-regexp": "^5.0.0",
     "flexsearch": "^0.7.31",
     "focus-visible": "^5.2.0",
-    "git-url-parse": "^13.1.0",
     "intersection-observer": "^0.12.2",
-    "match-sorter": "^6.3.1",
-    "next-seo": "^6.0.0",
     "next-themes": "^0.2.1",
     "scroll-into-view-if-needed": "^3.1.0",
     "zod": "^3.22.3"
@@ -54,13 +50,12 @@
   "devDependencies": {
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
     "@testing-library/react": "^14.0.0",
-    "@types/flexsearch": "^0.7.3",
-    "@types/git-url-parse": "^9.0.1",
-    "@types/react": "^18.2.21",
-    "@types/react-dom": "^18.2.7",
-    "@vitejs/plugin-react": "^3.0.1",
-    "concurrently": "^8.0.0",
-    "jsdom": "^22.0.0",
+    "@types/flexsearch": "^0.7.4",
+    "@types/react": "^18.2.23",
+    "@types/react-dom": "^18.2.8",
+    "@vitejs/plugin-react": "^4.1.0",
+    "concurrently": "^8.2.1",
+    "jsdom": "^22.1.0",
     "next": "^13.5.6",
     "nextra": "workspace:*",
     "postcss": "^8.4.31",
@@ -70,7 +65,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tailwindcss": "^3.3.3",
-    "vitest": "^0.34.0"
+    "vitest": "^0.34.6"
   },
   "sideEffects": [
     "./src/polyfill.ts"

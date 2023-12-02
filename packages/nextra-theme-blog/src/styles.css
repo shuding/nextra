@@ -1,7 +1,6 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
-@import 'nextra/styles/variables.css';
 @import 'nextra/styles/code-block.css';
 @import 'nextra/styles/subheading-anchor.css';
 @import 'nextra/styles/scrollbar.css';
@@ -9,37 +8,37 @@
 @import 'nextra/styles/cards.css';
 
 html {
-  @apply nx-scroll-pt-5;
+  @apply _scroll-pt-5;
 }
 
 body {
-  @apply nx-px-4;
+  @apply _px-4;
 }
 
 article {
-  @apply nx-mx-auto nx-block nx-pt-20 nx-pb-32;
+  @apply _mx-auto _block _pt-20 _pb-32;
 }
 
 article img {
-  @apply nx-mx-auto;
+  @apply _mx-auto;
 }
 
 h1 {
   letter-spacing: -0.03em;
 }
 
-.nx-prose code {
+._prose code {
   &:before,
   &:after {
-    @apply nx-hidden;
+    @apply _hidden;
   }
   .line {
-    @apply nx-font-normal;
+    @apply _font-normal;
   }
 }
 
-.nx-prose .nextra-callout p {
-  @apply nx-m-0;
+._prose .nextra-callout p {
+  @apply _m-0;
 }
 
 .footnotes a[data-footnote-backref] {

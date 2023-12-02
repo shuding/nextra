@@ -1,4 +1,6 @@
 import { Screenshot } from 'components/screenshot'
+import { OptionTable } from 'components/table'
+import sidebarTitleComponentImage from 'public/assets/docs/sidebar-customized.png'
 
 # Theme Configuration
 
@@ -16,8 +18,6 @@ export default {
 ```
 
 Detailed information for each option is listed below.
-
-import { OptionTable } from 'components/table'
 
 ## Global
 
@@ -45,61 +45,6 @@ export default {
 ```
 
 Then Nextra will automatically generate the correct file path for all pages.
-
-### SEO Options
-
-You can configure SEO related settings via the `useNextSeoProps` option. The
-`useNextSeoProps` function returns the props that will be passed to the
-[Next SEO](https://github.com/garmeeh/next-seo#add-seo-to-page) component.
-
-It is also a hook, so you can use APIs like `useRouter` inside to return values
-conditionally.
-
-<OptionTable
-  options={[
-    [
-      'useNextSeoProps',
-      '() => NextSeoProps',
-      'A React hook function that returns options for Next SEO.'
-    ]
-  ]}
-/>
-
-For example, we can have all pages rendering the same suffix for `<title>`:
-
-import titleSuffixImage from '../../../public/assets/docs/title-suffix.png'
-
-<Screenshot src={titleSuffixImage} alt="Title suffix" />
-
-```js
-export default {
-  useNextSeoProps() {
-    return {
-      titleTemplate: '%s – SWR'
-    }
-  }
-}
-```
-
-The `%s` is a [placeholder](https://github.com/garmeeh/next-seo#title-template)
-that will be replaced by the page title.
-
-You can also return it conditionally to avoid adding the suffix to the homepage:
-
-```js
-import { useRouter } from 'next/router'
-
-export default {
-  useNextSeoProps() {
-    const { asPath } = useRouter()
-    if (asPath !== '/') {
-      return {
-        titleTemplate: '%s – SWR'
-      }
-    }
-  }
-}
-```
 
 ### Head Tags
 
@@ -201,12 +146,12 @@ saturation values for light and dark themes.
 <OptionTable
   options={[
     [
-      'primaryHue',
+      'color.hue',
       'number | { dark: number; light: number }',
       'The hue of the primary theme color.'
     ],
     [
-      'primarySaturation',
+      'color.saturation',
       'number | { dark: number; light: number }',
       'The saturation of the primary theme color.'
     ]
@@ -235,7 +180,7 @@ export const hue = (
         )
       }}
     />
-    <code className="w-14 text-sm text-gray-500" />
+    <label className="text-sm text-gray-500 w-14" />
   </div>
 )
 
@@ -255,7 +200,7 @@ export const saturation = (
         )
       }}
     />
-    <code className="text-sm text-gray-500 w-14" />
+    <label className="text-sm text-gray-500 w-14" />
   </div>
 )
 
@@ -273,7 +218,7 @@ function component.
   ]}
 />
 
-import logoImage from '../../../public/assets/docs/logo.png'
+import logoImage from 'public/assets/docs/logo.png'
 
 <Screenshot src={logoImage} alt="Customized Logo" />
 
@@ -319,7 +264,7 @@ it links to Nextra’s GitHub repository.
 You can configure `project.link` and `project.icon` to customize the project
 link, for example make it link to your GitLab repository:
 
-import projectLinkImage from '../../../public/assets/docs/project-link.png'
+import projectLinkImage from 'public/assets/docs/project-link.png'
 
 <Screenshot src={projectLinkImage} alt="Project link" full />
 
@@ -416,7 +361,7 @@ notice.
       'string',
       'Storage key to keep the banner state (dismissed or not).'
     ],
-    ['banner.text', 'React.ReactNode | React.FC', 'Text of the banner.']
+    ['banner.content', 'React.ReactNode | React.FC', 'Content of the banner.']
   ]}
 />
 
@@ -431,7 +376,7 @@ If you have updated your banner text, you should change the key to make sure the
 banner is shown again. The best practice is to always use a descriptive key for
 the current text, for example:
 
-import bannerImage from '../../../public/assets/docs/banner.png'
+import bannerImage from 'public/assets/docs/banner.png'
 
 <Screenshot src={bannerImage} alt="Banner" />
 
@@ -482,15 +427,6 @@ Customize the entire navbar component.
       'If true, automatically collapse inactive folders above defaultMenuCollapseLevel.'
     ],
     [
-      'sidebar.titleComponent',
-      `React.ReactNode | React.FC<{
-  type: string;
-  title: string;
-  route: string;
-}>`,
-      'Custom renderer for sidebar titles.'
-    ],
-    [
       'sidebar.toggleButton',
       'boolean',
       'Hide/show sidebar toggle button. Defaults to `false`.'
@@ -513,53 +449,27 @@ then top-level folders will not auto-collapse.
 ### Customize Sidebar Content
 
 Together with the [Separators](/docs/docs-theme/page-configuration#separators)
-item, you can customize how the sidebar content is rendered by using the
-`sidebar.titleComponent` option:
+item, you can customize how the sidebar content is rendered by using JSX
+elements:
 
-import { Tabs } from 'nextra/components'
-import sidebarTitleComponentImage from '../../../public/assets/docs/sidebar-customized.png'
+```jsx filename="_meta.jsx" {5-10}
+export default {
+  index: 'Intro',
+  '--': {
+    type: 'separator',
+    title: (
+      <div className="flex items-center gap-2">
+        <MyLogo />
+        {children}
+      </div>
+    )
+  },
+  frameworks: 'JS Frameworks & Libs',
+  about: 'About'
+}
+```
 
 <Screenshot src={sidebarTitleComponentImage} alt="Customized Sidebar" />
-
-<div className="mt-8 text-center text-sm">
-  [Live example on StackBlitz
-  ↗](https://stackblitz.com/edit/nextra-2-docs-8xbfk3?file=pages%2F_meta.json,theme.config.jsx)
-</div>
-
-<Tabs items={['theme.config.jsx', 'pages/_meta.json']}>
-  <Tabs.Tab>
-    ```jsx
-    export default {
-      sidebar: {
-        titleComponent({ title, type }) {
-          if (type === 'separator') {
-            return (
-              <div style={{ background: 'cyan', textAlign: 'center' }}>{title}</div>
-            )
-          }
-          if (title === 'About') {
-            return <>❓ {title}</>
-          }
-          return <>👉 {title}</>
-        }
-      }
-    }
-    ```
-  </Tabs.Tab>
-  <Tabs.Tab>
-    ```json
-    {
-      "index": "Intro",
-      "--": {
-        "type": "separator",
-        "title": "A Separator"
-      },
-      "frameworks": "JS Frameworks & Libs",
-      "about": "About"
-    }
-    ```
-  </Tabs.Tab>
-</Tabs>
 
 ## Content
 
@@ -623,11 +533,6 @@ navigating between headings.
       'React.ReactNode | React.FC',
       'Title of the TOC sidebar. By default it’s “On This Page”.'
     ],
-    [
-      'toc.headingComponent',
-      'React.FC<{ id: string, children: string }>',
-      'Custom renderer of TOC headings.'
-    ],
     ['toc.backToTop', 'boolean', 'Add `Scroll to top` link.']
   ]}
 />
@@ -646,9 +551,9 @@ Show an “Edit this page” link on the page that points to the file URL on Git
 <OptionTable
   options={[
     [
-      'editLink.text',
+      'editLink.content',
       'React.ReactNode | React.FC',
-      'Content of the default edit link.'
+      'Content of the edit link.'
     ],
     [
       'editLink.component',
@@ -706,7 +611,7 @@ navigating between pages.
   ]}
 />
 
-import navigationImage from '../../../public/assets/docs/navigation.png'
+import navigationImage from 'public/assets/docs/navigation.png'
 
 <Screenshot src={navigationImage} alt="Navigation" full />
 
@@ -744,9 +649,9 @@ default footer, or fully customize it with a custom component.
 <OptionTable
   options={[
     [
-      'footer.text',
+      'footer.content',
       'React.ReactNode | React.FC',
-      'Content of the default footer component.'
+      'Content of the footer component.'
     ],
     [
       'footer.component',
@@ -816,9 +721,7 @@ export default {
 
 ### 404 - Not Found
 
-### 500 - Internal Server Error
-
-## Favicon Glyph (Experimental)
+## Favicon Glyph
 
 This isn’t supported by all browsers, but it’s a nice way to customize the
 favicon of the website simply by using an emoji or character.

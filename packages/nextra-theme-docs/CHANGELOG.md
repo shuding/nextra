@@ -1,5 +1,195 @@
 # nextra-theme-docs
 
+## 3.0.0-alpha.11
+
+### Major Changes
+
+- c2ad837d: update to MDX3
+
+### Patch Changes
+
+- Updated dependencies [c2ad837d]
+  - nextra@3.0.0-alpha.11
+
+## 3.0.0-alpha.10
+
+### Patch Changes
+
+- Updated dependencies [9099c354]
+  - nextra@3.0.0-alpha.10
+
+## 3.0.0-alpha.9
+
+### Patch Changes
+
+- Updated dependencies [8efbb45c]
+- Updated dependencies [80e11e04]
+  - nextra@3.0.0-alpha.9
+
+## 3.0.0-alpha.8
+
+### Minor Changes
+
+- 440ff42d: add MathJax support
+
+### Patch Changes
+
+- Updated dependencies [440ff42d]
+  - nextra@3.0.0-alpha.8
+
+## 3.0.0-alpha.7
+
+### Patch Changes
+
+- 0b5cc9d5: make nextra compatible with windows
+- Updated dependencies [0b5cc9d5]
+  - nextra@3.0.0-alpha.7
+
+## 3.0.0-alpha.6
+
+### Patch Changes
+
+- 31c2ee70: fix `removeLinks` when input node is link
+- 03da778a: fix `*` theme settings for dynamic routes when route is not exist in
+  page map
+- Updated dependencies [03da778a]
+  - nextra@3.0.0-alpha.6
+
+## 3.0.0-alpha.5
+
+### Patch Changes
+
+- 315ca826: remove possible links in toc elements
+- Updated dependencies [a3b67aea]
+  - nextra@3.0.0-alpha.5
+
+## 3.0.0-alpha.4
+
+### Minor Changes
+
+- 1dcb91a0: export `useThemeConfig`
+
+### Patch Changes
+
+- 4fb24524: fix invisible mobile menu when `layout: "raw"` is specified in
+  \_meta file
+- 7faa0968: fix visible hidden pages on mobile which set up with
+  `display: 'hidden'`
+- Updated dependencies [7faa0968]
+  - nextra@3.0.0-alpha.4
+
+## 3.0.0-alpha.3
+
+### Patch Changes
+
+- fe5061b7: fix for remote docs
+- Updated dependencies [fe5061b7]
+  - nextra@3.0.0-alpha.3
+
+## 3.0.0-alpha.2
+
+### Patch Changes
+
+- b045cc3e: fix invisible mobile menu after click on hamburger
+- cb247901: fix broken `export default` statement in mdx files
+- Updated dependencies [cb247901]
+  - nextra@3.0.0-alpha.2
+
+## 3.0.0-alpha.1
+
+### Major Changes
+
+- e7e8e849: show react components, variable interpolation and latex in toc
+- c7f03e54: remove `toc.headingComponent`
+- ea1a7362: remove `next-seo` and `useNextSeoProps`, use `head` option instead
+- 148278ce: rename tailwind prefix `nx-` to `_` to reduce bundle size
+- d7d8a3eb: new styles for code blocks aka in next.js
+- 63ca28be: Remove support of "\_meta.json", use "\_meta.{js,jsx,ts,tsx}"
+  instead.
+- ebe652db: remove `sidebar.titleComponent`, use JSX for styling separators and
+  titles
+- 128e195f: fix React warning, remove PageOpts.toc, use `toc` prop from
+  `components.wrapper`
+- 63ca28be: remove `config.serverSideError`
+- 198dbcca: use toc with JSX elements for remote content
+- 191e6c41: - use `shikiji` instead of `shiki`
+
+  - rename `useSSG` to `useData`
+
+- 6eb3118f: rename `primaryHue` and `primarySaturation` theme options to
+  `color.hue` and `color.saturation`
+- c7f03e54: rename `pageOpts.headings` to `toc`
+
+### Minor Changes
+
+- c77485ec: set default `head` option as `null`
+- a52a869e: add `frontmatter.sidebar_label` support for setting page label in
+  sidebar via frontmatter
+
+### Patch Changes
+
+- 7457d6b6: remove `git-url-parse` to keep bundle smaller
+- Updated dependencies [e7e8e849]
+- Updated dependencies [71882780]
+- Updated dependencies [023d37b1]
+- Updated dependencies [148278ce]
+- Updated dependencies [c7f03e54]
+- Updated dependencies [d7d8a3eb]
+- Updated dependencies [a52a869e]
+- Updated dependencies [63ca28be]
+- Updated dependencies [1f3e7cd4]
+- Updated dependencies [b9f88e34]
+- Updated dependencies [4e55c064]
+- Updated dependencies [128e195f]
+- Updated dependencies [1f3e7cd4]
+- Updated dependencies [198dbcca]
+- Updated dependencies [191e6c41]
+- Updated dependencies [c7f03e54]
+  - nextra@3.0.0-alpha.1
+
+## 3.0.0-alpha.0
+
+### Major Changes
+
+- 919fe977: set `"peerDependencies.next": ">=13"`
+- eca75354: - remove `Steps`, `Callout`, `Tabs`, `Tab`, `Cards`, `Card`,
+  `FileTree` exports, export them now from `nextra/components`
+
+  - remove `useMDXComponents` export, export it now from `nextra/mdx`
+  - set by default `sidebar.toggleButton` to true
+
+- f2dd18d2: - rename theme config options
+
+  `i18n.text` → `i18n.name`
+
+  `banner.text` → `banner.content`
+
+  `editLink.text` → `editLink.content`
+
+  `footer.text` → `footer.content`
+
+- 8c1b9d53: remove `<MatchSorterSearch />`
+
+### Minor Changes
+
+- 0fe55db2: add `import { useRouter } from 'nextra/hooks'` for fetching `locale`
+  and `defaultLocale`
+
+### Patch Changes
+
+- 80c9764b: ensure zod is removed from production build with `/* @__PURE__ */`
+  comments
+- Updated dependencies [0fe55db2]
+- Updated dependencies [50a52fd1]
+- Updated dependencies [919fe977]
+- Updated dependencies [ad4823d9]
+- Updated dependencies [ab07609c]
+- Updated dependencies [2f3be336]
+- Updated dependencies [66cce1d1]
+- Updated dependencies [d8a406b4]
+- Updated dependencies [576cb6f1]
+  - nextra@3.0.0-alpha.0
+
 ## 2.13.2
 
 ### Patch Changes

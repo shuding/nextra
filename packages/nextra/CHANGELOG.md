@@ -1,5 +1,161 @@
 # nextra
 
+## 3.0.0-alpha.11
+
+### Major Changes
+
+- c2ad837d: update to MDX3
+
+## 3.0.0-alpha.10
+
+### Patch Changes
+
+- 9099c354: remove `nextra/mdx-plugins`, add `nextra/remark-plugins`
+
+## 3.0.0-alpha.9
+
+### Patch Changes
+
+- 8efbb45c: remove `nextra/data` export, move `useData` to `nextra/hooks`,
+  `RemoteContent` to `nextra/components`
+- 80e11e04: move `resolvePageMap` to `nextra/page-map-dynamic`
+
+## 3.0.0-alpha.8
+
+### Minor Changes
+
+- 440ff42d: add MathJax support
+
+## 3.0.0-alpha.7
+
+### Patch Changes
+
+- 0b5cc9d5: make nextra compatible with windows
+
+## 3.0.0-alpha.6
+
+### Patch Changes
+
+- 03da778a: fix `*` theme settings for dynamic routes when route is not exist in
+  page map
+
+## 3.0.0-alpha.5
+
+### Patch Changes
+
+- a3b67aea: `_meta` should return
+  `export const getStaticProps = () => ({ notFound: true })` for static exports,
+  instead of page without contain
+
+## 3.0.0-alpha.4
+
+### Patch Changes
+
+- 7faa0968: fix visible hidden pages on mobile which set up with
+  `display: 'hidden'`
+
+## 3.0.0-alpha.3
+
+### Patch Changes
+
+- fe5061b7: fix for remote docs
+
+## 3.0.0-alpha.2
+
+### Patch Changes
+
+- cb247901: fix broken `export default` statement in mdx files
+
+## 3.0.0-alpha.1
+
+### Major Changes
+
+- e7e8e849: show react components, variable interpolation and latex in toc
+- 71882780: - insert `frontMatter` as export node via custom remark plugin
+
+  - remove `frontMatter.mdxOptions` support
+
+- 023d37b1: add `"type": "module"` to `nextra` package
+- 148278ce: rename tailwind prefix `nx-` to `_` to reduce bundle size
+- d7d8a3eb: new styles for code blocks aka in next.js
+- 63ca28be: Remove support of "\_meta.json", use "\_meta.{js,jsx,ts,tsx}"
+  instead.
+- b9f88e34: - remove `use-internals.ts`
+
+  - remove `layout.tsx`, move directly to `setup-page.tsx`
+  - remove `kind: 'Meta' | 'Folder' | 'MdxPage'` to keep page map smaller
+
+- 128e195f: fix React warning, remove PageOpts.toc, use `toc` prop from
+  `components.wrapper`
+- 1f3e7cd4: - remove `__nextraPageOptions.hot`
+
+  - remove `__nextraPageOptions.pageOptsChecksum`
+  - remove `__nextra_internal__.refreshListeners` (no longer needed since we
+    insert toc as esm node in remark plugin)
+  - remove `hashFnv32a`
+
+- 198dbcca: use toc with JSX elements for remote content
+- 191e6c41: - use `shikiji` instead of `shiki`
+
+  - rename `useSSG` to `useData`
+
+- c7f03e54: rename `pageOpts.headings` to `toc`
+
+### Minor Changes
+
+- c7f03e54: should not add virtual `_meta` file if missing
+- a52a869e: add `frontmatter.sidebar_label` support for setting page label in
+  sidebar via frontmatter
+- 4e55c064: add support for `_meta.{js,jsx,ts,tsx}` with JSX support
+
+### Patch Changes
+
+- 1f3e7cd4: fix `pageProps` for NextraLayout
+
+## 3.0.0-alpha.0
+
+### Major Changes
+
+- 50a52fd1: - ❌ remove `_app.mdx`, use `_app.{js,jsx}` or `_app.{ts,tsx}` for
+  TypeScript projects instead
+
+  - ❌ remove Nextra middleware `nextra/locales`
+  - ❌ remove `parseFileName` from `nextra/utils`
+  - ❌ remove `nextra/filter-route-locale`
+  - ❌ remove `resolvePageMap` and `pageMapCache` from `nextra/page-map`
+  - ❌ remove `__nextraPageOptions.pageNextRoute`
+  - ❌ remove `pageOpts.route` and `pageOpts.newNextLinkBehavior`
+  - ❌ remove `LoaderOptions.defaultLocale`
+  - ❌ remove `__nextra_internal__.context[route].themeConfig`
+  - ✅ add `nextra/fetch-filepaths-from-github`
+  - save `pageMap` to `.next/static/chunks/nextra-page-map-{locale}.mjs`
+  - save `fileMap` to `.next/static/chunks/nextra-file-map.mjs`
+
+- 919fe977: set `"peerDependencies.next": ">=13"`
+- ad4823d9: add zod validation for nextraConfig
+- ab07609c: remove `locale` and `defaultLocale` from `normalizePages`
+- 2f3be336: - set `"engines.node": ">=18"`
+
+  - remove `Tab` export, use `Tabs.Tab` instead
+  - remove `Card` export, use `Cards.Card` instead
+  - disallow import md/mdx files that are outside the working directory, use
+    symlinks instead
+
+- 66cce1d1: **BREAKING** bundle to ESM only
+
+  > ⚠️⚠️⚠️ use `next.config.mjs` or `next.config.js` with `"type": "module"`
+
+- 576cb6f1: - rename `nextraConfig.flexsearch` to `nextraConfig.search`
+
+### Minor Changes
+
+- 0fe55db2: add `import { useRouter } from 'nextra/hooks'` for fetching `locale`
+  and `defaultLocale`
+
+### Patch Changes
+
+- d8a406b4: add `"sideEffects": false` for better tree-shaking
+
 ## 2.13.2
 
 ### Patch Changes

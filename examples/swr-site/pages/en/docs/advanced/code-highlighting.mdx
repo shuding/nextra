@@ -1,0 +1,41 @@
+# Code highlighting
+
+## Test `filename`, line highlighting and empty lines
+
+```js filename="test.js" {1}
+console.log('hello world')
+
+console.log('goodbye world')
+```
+
+## Test `showLineNumbers` and word highlighting
+
+```scala showLineNumbers {2-4} /println/
+object Hello {
+  def main(args: Array[String]) = {
+    println("hello, world")
+  }
+}
+
+object Hello {
+  def main(args: Array[String]) = {
+    println("hello, world")
+  }
+}
+```
+
+## Test highlighting inline code
+
+`import React from 'react'{:js}`
+
+## Test without specified language
+
+```text /hello/
+hello world
+```
+
+## Test link in code
+
+Link to [`google`](https://google.com)
+
+Link to [GitHub](https://github.com)

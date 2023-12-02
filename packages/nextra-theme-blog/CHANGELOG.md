@@ -1,5 +1,144 @@
 # nextra-theme-blog
 
+## 3.0.0-alpha.11
+
+### Major Changes
+
+- c2ad837d: update to MDX3
+
+### Patch Changes
+
+- Updated dependencies [c2ad837d]
+  - nextra@3.0.0-alpha.11
+
+## 3.0.0-alpha.10
+
+### Patch Changes
+
+- Updated dependencies [9099c354]
+  - nextra@3.0.0-alpha.10
+
+## 3.0.0-alpha.9
+
+### Patch Changes
+
+- Updated dependencies [8efbb45c]
+- Updated dependencies [80e11e04]
+  - nextra@3.0.0-alpha.9
+
+## 3.0.0-alpha.8
+
+### Minor Changes
+
+- 440ff42d: add MathJax support
+
+### Patch Changes
+
+- Updated dependencies [440ff42d]
+  - nextra@3.0.0-alpha.8
+
+## 3.0.0-alpha.7
+
+### Patch Changes
+
+- 0b5cc9d5: make nextra compatible with windows
+- Updated dependencies [0b5cc9d5]
+  - nextra@3.0.0-alpha.7
+
+## 3.0.0-alpha.6
+
+### Patch Changes
+
+- Updated dependencies [03da778a]
+  - nextra@3.0.0-alpha.6
+
+## 3.0.0-alpha.5
+
+### Patch Changes
+
+- Updated dependencies [a3b67aea]
+  - nextra@3.0.0-alpha.5
+
+## 3.0.0-alpha.4
+
+### Patch Changes
+
+- Updated dependencies [7faa0968]
+  - nextra@3.0.0-alpha.4
+
+## 3.0.0-alpha.3
+
+### Patch Changes
+
+- Updated dependencies [fe5061b7]
+  - nextra@3.0.0-alpha.3
+
+## 3.0.0-alpha.2
+
+### Patch Changes
+
+- cb247901: fix broken `export default` statement in mdx files
+- Updated dependencies [cb247901]
+  - nextra@3.0.0-alpha.2
+
+## 3.0.0-alpha.1
+
+### Major Changes
+
+- 148278ce: rename tailwind prefix `nx-` to `_` to reduce bundle size
+- d7d8a3eb: new styles for code blocks aka in next.js
+- 128e195f: fix React warning, remove PageOpts.toc, use `toc` prop from
+  `components.wrapper`
+- 191e6c41: - use `shikiji` instead of `shiki`
+
+  - rename `useSSG` to `useData`
+
+- c7f03e54: rename `pageOpts.headings` to `toc`
+
+### Patch Changes
+
+- Updated dependencies [e7e8e849]
+- Updated dependencies [71882780]
+- Updated dependencies [023d37b1]
+- Updated dependencies [148278ce]
+- Updated dependencies [c7f03e54]
+- Updated dependencies [d7d8a3eb]
+- Updated dependencies [a52a869e]
+- Updated dependencies [63ca28be]
+- Updated dependencies [1f3e7cd4]
+- Updated dependencies [b9f88e34]
+- Updated dependencies [4e55c064]
+- Updated dependencies [128e195f]
+- Updated dependencies [1f3e7cd4]
+- Updated dependencies [198dbcca]
+- Updated dependencies [191e6c41]
+- Updated dependencies [c7f03e54]
+  - nextra@3.0.0-alpha.1
+
+## 3.0.0-alpha.0
+
+### Major Changes
+
+- 16ab7f78: - remove `legacyBehavior` from `NextLink`
+
+  - remove `config.cusdis`. Instead, now you need to pass cusdis options as
+    props in `Cusdis` component
+
+- 919fe977: set `"peerDependencies.next": ">=13"`
+
+### Patch Changes
+
+- Updated dependencies [0fe55db2]
+- Updated dependencies [50a52fd1]
+- Updated dependencies [919fe977]
+- Updated dependencies [ad4823d9]
+- Updated dependencies [ab07609c]
+- Updated dependencies [2f3be336]
+- Updated dependencies [66cce1d1]
+- Updated dependencies [d8a406b4]
+- Updated dependencies [576cb6f1]
+  - nextra@3.0.0-alpha.0
+
 ## 2.13.2
 
 ### Patch Changes

@@ -1,122 +1,125 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Process heading > code-h1 1`] = `
-{
-  "frontMatter": {},
-  "result": "/*@jsxRuntime automatic @jsxImportSource react*/
-import {useMDXComponents as _provideComponents} from \\"nextra/mdx\\";
-export const __toc = [];
-function _createMdxContent(props) {
-  const _components = Object.assign({
-    h1: \\"h1\\",
-    code: \\"code\\"
-  }, _provideComponents(), props.components);
-  return <_components.h1><_components.code>{\\"codegen.yml\\"}</_components.code></_components.h1>;
+"import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+const title = 'codegen.yml'
+const frontMatter = {}
+export function useTOC(props) {
+  return []
 }
-function MDXContent(props = {}) {
-  const {wrapper: MDXLayout} = Object.assign({}, _provideComponents(), props.components);
-  return MDXLayout ? <MDXLayout {...props}><_createMdxContent {...props} /></MDXLayout> : _createMdxContent(props);
+function MDXLayout(props) {
+  const _components = {
+    code: 'code',
+    h1: 'h1',
+    ..._provideComponents(),
+    ...props.components
+  }
+  return (
+    <_components.h1>
+      <_components.code>{'codegen.yml'}</_components.code>
+    </_components.h1>
+  )
 }
-export default MDXContent;
-",
-  "title": "codegen.yml",
-}
+"
 `;
 
 exports[`Process heading > code-with-text-h1 1`] = `
-{
-  "frontMatter": {},
-  "result": "/*@jsxRuntime automatic @jsxImportSource react*/
-import {useMDXComponents as _provideComponents} from \\"nextra/mdx\\";
-export const __toc = [];
-function _createMdxContent(props) {
-  const _components = Object.assign({
-    h1: \\"h1\\",
-    code: \\"code\\"
-  }, _provideComponents(), props.components);
-  return <_components.h1><_components.code>{\\"codegen.yml\\"}</_components.code>{\\" file\\"}</_components.h1>;
+"import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+const title = 'codegen.yml file'
+const frontMatter = {}
+export function useTOC(props) {
+  return []
 }
-function MDXContent(props = {}) {
-  const {wrapper: MDXLayout} = Object.assign({}, _provideComponents(), props.components);
-  return MDXLayout ? <MDXLayout {...props}><_createMdxContent {...props} /></MDXLayout> : _createMdxContent(props);
+function MDXLayout(props) {
+  const _components = {
+    code: 'code',
+    h1: 'h1',
+    ..._provideComponents(),
+    ...props.components
+  }
+  return (
+    <_components.h1>
+      <_components.code>{'codegen.yml'}</_components.code>
+      {' file'}
+    </_components.h1>
+  )
 }
-export default MDXContent;
-",
-  "title": "codegen.yml file",
-}
+"
 `;
 
 exports[`Process heading > dynamic-h1 1`] = `
 {
   "frontMatter": {},
   "hasJsxInH1": true,
-  "result": "/*@jsxRuntime automatic @jsxImportSource react*/
-import {useMDXComponents as _provideComponents} from \\"nextra/mdx\\";
-import {useRouter} from 'next/router';
+  "result": "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+const title = 'Posts Tagged with “”'
+const frontMatter = {}
+import { useRouter } from 'next/router'
 export const TagName = () => {
-  const {tag} = useRouter().query;
-  return tag || null;
-};
-export const __toc = [];
-function _createMdxContent(props) {
-  const _components = Object.assign({
-    h1: \\"h1\\"
-  }, _provideComponents(), props.components);
-  return <_components.h1>{\\"Posts Tagged with “\\"}<TagName />{\\"”\\"}</_components.h1>;
+  const { tag } = useRouter().query
+  return tag || null
 }
-function MDXContent(props = {}) {
-  const {wrapper: MDXLayout} = Object.assign({}, _provideComponents(), props.components);
-  return MDXLayout ? <MDXLayout {...props}><_createMdxContent {...props} /></MDXLayout> : _createMdxContent(props);
+export function useTOC(props) {
+  return []
 }
-export default MDXContent;
+function MDXLayout(props) {
+  const _components = {
+    h1: 'h1',
+    ..._provideComponents(),
+    ...props.components
+  }
+  return (
+    <_components.h1>
+      {'Posts Tagged with “'}
+      <TagName />
+      {'”'}
+    </_components.h1>
+  )
+}
 ",
   "title": "Posts Tagged with “”",
 }
 `;
 
 exports[`Process heading > no-h1 1`] = `
-{
-  "frontMatter": {},
-  "result": "/*@jsxRuntime automatic @jsxImportSource react*/
-import {useMDXComponents as _provideComponents} from \\"nextra/mdx\\";
-export const __toc = [{
-  depth: 2,
-  value: \\"H2\\",
-  id: \\"h2\\"
-}];
-function _createMdxContent(props) {
-  const _components = Object.assign({
-    h2: \\"h2\\"
-  }, _provideComponents(), props.components);
-  return <_components.h2 id=\\"h2\\">{\\"H2\\"}</_components.h2>;
+"import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+const title = ''
+const frontMatter = {}
+export function useTOC(props) {
+  return [
+    {
+      value: 'H2',
+      id: 'h2',
+      depth: 2
+    }
+  ]
 }
-function MDXContent(props = {}) {
-  const {wrapper: MDXLayout} = Object.assign({}, _provideComponents(), props.components);
-  return MDXLayout ? <MDXLayout {...props}><_createMdxContent {...props} /></MDXLayout> : _createMdxContent(props);
+function MDXLayout(props) {
+  const { toc = useTOC(props) } = props
+  const _components = {
+    h2: 'h2',
+    ..._provideComponents(),
+    ...props.components
+  }
+  return <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
 }
-export default MDXContent;
-",
-}
+"
 `;
 
 exports[`Process heading > static-h1 1`] = `
-{
-  "frontMatter": {},
-  "result": "/*@jsxRuntime automatic @jsxImportSource react*/
-import {useMDXComponents as _provideComponents} from \\"nextra/mdx\\";
-export const __toc = [];
-function _createMdxContent(props) {
-  const _components = Object.assign({
-    h1: \\"h1\\"
-  }, _provideComponents(), props.components);
-  return <_components.h1>{\\"Hello World\\"}</_components.h1>;
+"import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+const title = 'Hello World'
+const frontMatter = {}
+export function useTOC(props) {
+  return []
 }
-function MDXContent(props = {}) {
-  const {wrapper: MDXLayout} = Object.assign({}, _provideComponents(), props.components);
-  return MDXLayout ? <MDXLayout {...props}><_createMdxContent {...props} /></MDXLayout> : _createMdxContent(props);
+function MDXLayout(props) {
+  const _components = {
+    h1: 'h1',
+    ..._provideComponents(),
+    ...props.components
+  }
+  return <_components.h1>{'Hello World'}</_components.h1>
 }
-export default MDXContent;
-",
-  "title": "Hello World",
-}
+"
 `;

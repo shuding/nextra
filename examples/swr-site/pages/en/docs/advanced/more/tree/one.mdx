@@ -1,0 +1,18 @@
+# One
+
+export function getStaticProps() {
+  return {
+    props: {
+      foo: 'bar'
+    }
+  }
+}
+
+export default function (props) {
+  return (
+    <>
+      {props.children}
+      <div>foo = {props.foo}</div>
+    </>
+  )
+}

@@ -1,48 +1,36 @@
-import { normalizePages } from '../src/normalize-pages'
-import { cnPageMap, usPageMap } from './fixture/page-maps/pageMap'
-
-const defaultLocale = 'en-US'
+import fs from 'fs/promises'
+import path from 'node:path'
+import { normalizePages } from '../src/client/normalize-pages.js'
+import { cnPageMap, usPageMap } from './fixture/page-maps/pageMap.js'
 
 describe('normalize-page', () => {
   it('zh-CN home', () => {
-    const locale = 'zh-CN'
     const result = normalizePages({
       list: cnPageMap,
-      locale,
-      defaultLocale,
       route: '/'
     })
     expect(result).toMatchSnapshot()
   })
 
   it('zh-CN getting-started', () => {
-    const locale = 'zh-CN'
     const result = normalizePages({
       list: cnPageMap,
-      locale,
-      defaultLocale,
       route: '/docs/getting-started'
     })
     expect(result).toMatchSnapshot()
   })
 
   it('en-US home', () => {
-    const locale = 'en-US'
     const result = normalizePages({
       list: usPageMap,
-      locale,
-      defaultLocale,
       route: '/'
     })
     expect(result).toMatchSnapshot()
   })
 
   it('en-US getting-started', () => {
-    const locale = 'en-US'
     const result = normalizePages({
       list: usPageMap,
-      locale,
-      defaultLocale,
       route: '/docs/getting-started'
     })
     expect(result).toMatchSnapshot()
@@ -51,11 +39,10 @@ describe('normalize-page', () => {
   it('/404 page', () => {
     const result = normalizePages({
       list: [
-        { kind: 'MdxPage', name: '404', route: '/404' },
-        { kind: 'MdxPage', name: 'get-started', route: '/get-started' },
-        { kind: 'MdxPage', name: 'index', route: '/' },
+        { name: '404', route: '/404' },
+        { name: 'get-started', route: '/get-started' },
+        { name: 'index', route: '/' },
         {
-          kind: 'Meta',
           data: {
             '404': {
               type: 'page',
@@ -72,8 +59,6 @@ describe('normalize-page', () => {
           }
         }
       ],
-      locale: 'en-US',
-      defaultLocale: 'en-US',
       route: '/500ddd'
     })
     expect(result).toMatchSnapshot()
@@ -82,11 +67,10 @@ describe('normalize-page', () => {
   it('/500 page', () => {
     const result = normalizePages({
       list: [
-        { kind: 'MdxPage', name: '500', route: '/500' },
-        { kind: 'MdxPage', name: 'get-started', route: '/get-started' },
-        { kind: 'MdxPage', name: 'index', route: '/' },
+        { name: '500', route: '/500' },
+        { name: 'get-started', route: '/get-started' },
+        { name: 'index', route: '/' },
         {
-          kind: 'Meta',
           data: {
             '500': {
               type: 'page',
@@ -94,17 +78,11 @@ describe('normalize-page', () => {
                 layout: 'raw'
               }
             },
-            index: {
-              title: 'Introduction'
-            },
-            'get-started': {
-              title: 'Get Started'
-            }
+            index: 'Introduction',
+            'get-started': 'Get Started'
           }
         }
       ],
-      locale: 'en-US',
-      defaultLocale: 'en-US',
       route: '/500'
     })
     expect(result).toMatchSnapshot()
@@ -115,7 +93,6 @@ describe('normalize-page', () => {
     const result = normalizePages({
       list: [
         {
-          kind: 'Meta',
           data: {
             index: {
               type: 'page',
@@ -149,17 +126,14 @@ describe('normalize-page', () => {
           }
         },
         {
-          kind: 'MdxPage',
           name: 'about',
           route: '/about'
         },
         {
-          kind: 'MdxPage',
           name: 'showcase',
           route: '/showcase'
         }
       ],
-      locale: 'en-US',
       route: '/docs'
     })
     expect(result.topLevelNavbarItems).toMatchInlineSnapshot(`
@@ -177,7 +151,6 @@ describe('normalize-page', () => {
           "type": "menu",
         },
         {
-          "kind": "MdxPage",
           "name": "showcase",
           "route": "/showcase",
           "title": "Showcase",
@@ -190,7 +163,6 @@ describe('normalize-page', () => {
           "type": "menu",
         },
         {
-          "kind": "MdxPage",
           "name": "about",
           "route": "/about",
           "title": "About",
@@ -203,6 +175,169 @@ describe('normalize-page', () => {
           "type": "menu",
         },
       ]
+    `)
+  })
+
+  it('should hide items on mobile', async () => {
+    const dir = path.join(
+      __dirname,
+      'fixture',
+      'page-maps',
+      'display-hidden-for-mobile'
+    )
+    const pageMapPath = path.join(dir, 'chunks', 'generated-page-map.js')
+
+    vi.doMock('next/dist/lib/find-pages-dir', () => ({
+      findPagesDir: () => ({ pagesDir: '#' })
+    }))
+
+    vi.doMock('../src/server/constants', async () => {
+      const actual = await vi.importActual<object>('../src/server/constants')
+      return {
+        ...actual,
+        CHUNKS_DIR: path.dirname(pageMapPath)
+      }
+    })
+
+    const { collectPageMap } = await import('../src/server/page-map.js')
+
+    const rawJs = await collectPageMap({ dir })
+    await fs.writeFile(pageMapPath, rawJs)
+
+    const { pageMap } = await import(pageMapPath)
+    const result = normalizePages({ list: pageMap, route: '/' })
+    expect(result).toMatchInlineSnapshot(`
+      {
+        "activeIndex": 1,
+        "activePath": [
+          {
+            "frontMatter": {
+              "sidebar_label": "Index",
+            },
+            "name": "index",
+            "route": "/",
+            "title": "Index",
+            "type": "doc",
+          },
+        ],
+        "activeThemeContext": {
+          "breadcrumb": true,
+          "collapsed": false,
+          "footer": true,
+          "layout": "default",
+          "navbar": true,
+          "pagination": true,
+          "sidebar": true,
+          "timestamp": true,
+          "toc": true,
+          "typesetting": "default",
+        },
+        "activeType": "doc",
+        "directories": [
+          {
+            "frontMatter": {
+              "sidebar_label": "Index",
+            },
+            "name": "index",
+            "route": "/",
+            "title": "Index",
+            "type": "doc",
+          },
+        ],
+        "docsDirectories": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "frontMatter": {
+                          "sidebar_label": "Qwe",
+                        },
+                        "isUnderCurrentDocsTree": true,
+                        "name": "qwe",
+                        "route": "/bar/baz/quz/qwe",
+                        "title": "Qwe",
+                        "type": "doc",
+                      },
+                    ],
+                    "isUnderCurrentDocsTree": true,
+                    "name": "quz",
+                    "route": "/bar/baz/quz",
+                    "title": "quz",
+                    "type": "doc",
+                  },
+                ],
+                "isUnderCurrentDocsTree": true,
+                "name": "baz",
+                "route": "/bar/baz",
+                "title": "baz",
+                "type": "doc",
+              },
+            ],
+            "display": "hidden",
+            "isUnderCurrentDocsTree": true,
+            "name": "bar",
+            "route": "/bar",
+            "title": "bar",
+            "type": "doc",
+          },
+          {
+            "frontMatter": {
+              "sidebar_label": "Index",
+            },
+            "isUnderCurrentDocsTree": true,
+            "name": "index",
+            "route": "/",
+            "title": "Index",
+            "type": "doc",
+          },
+        ],
+        "flatDirectories": [
+          {
+            "frontMatter": {
+              "sidebar_label": "Qwe",
+            },
+            "name": "qwe",
+            "route": "/bar/baz/quz/qwe",
+            "title": "Qwe",
+            "type": "doc",
+          },
+          {
+            "frontMatter": {
+              "sidebar_label": "Index",
+            },
+            "name": "index",
+            "route": "/",
+            "title": "Index",
+            "type": "doc",
+          },
+        ],
+        "flatDocsDirectories": [
+          {
+            "frontMatter": {
+              "sidebar_label": "Qwe",
+            },
+            "isUnderCurrentDocsTree": true,
+            "name": "qwe",
+            "route": "/bar/baz/quz/qwe",
+            "title": "Qwe",
+            "type": "doc",
+          },
+          {
+            "frontMatter": {
+              "sidebar_label": "Index",
+            },
+            "isUnderCurrentDocsTree": true,
+            "name": "index",
+            "route": "/",
+            "title": "Index",
+            "type": "doc",
+          },
+        ],
+        "topLevelNavbarItems": [],
+      }
     `)
   })
 })

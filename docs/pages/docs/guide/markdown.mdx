@@ -6,10 +6,10 @@ With Nextra, all your `.mdx` files under the pages directory will be rendered
 with [MDX](https://mdxjs.com/about), it's an advanced Markdown format with React
 component support.
 
-For example, you can use import and use React components inside your Markdown
-files like this:
+For example, you can use import and use React components inside your MDX files
+like this:
 
-```mdx filename="Markdown"
+```mdx filename="MDX"
 ## Hello MDX
 
 import { useState } from 'react'
@@ -29,7 +29,9 @@ export function Counter({ children }) {
 
 Generates:
 
+import { StarsIcon } from '@components/icons'
 import { Shadow } from '@components/utils/shadow'
+import { Cards } from 'nextra/components'
 import { useState } from 'react'
 
 export function Counter({ children }) {
@@ -114,13 +116,10 @@ default `#long-heading-about-nextra`.
 
 ## Extended Syntax Highlighting
 
-import { StarsIcon } from '@components/icons'
-import { Card, Cards } from 'nextra/components'
-
 Check out the Syntax Highlighting section for more information:
 
 <Cards>
-  <Card
+  <Cards.Card
     icon={<StarsIcon />}
     title="Syntax Highlighting"
     href="/docs/guide/syntax-highlighting"

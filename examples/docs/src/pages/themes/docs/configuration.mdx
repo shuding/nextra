@@ -385,11 +385,9 @@ The head that should be inserted into the html document.
  * @type {import('nextra-theme-docs').DocsThemeConfig}
  */
 export default {
-  head: ({ locale, title, config, meta }) => (
+  head: (
     <>
-      <meta name="msapplication-TileColor" content="#ffffff" />
-      <meta name="theme-color" content="#ffffff" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="msapplication-TileColor" content="#fff" />
       <meta httpEquiv="Content-Language" content="en" />
       <meta name="description" content="Nextra: the next docs builder" />
       <meta name="twitter:card" content="summary_large_image" />
@@ -572,23 +570,25 @@ export default {
 
 <Unstable />
 
-## `flexsearch`
+## `search`
 
 Enable Nextra built-in search
 
-**Type:** `boolean | { codeblock: boolean }`
+**Type:** `boolean | { codeblocks: boolean }`
 
 **Example:**
 
-```js filename="next.config.js"
-const withNextra = require('nextra')({
+```js filename="next.config.mjs"
+import nextra from 'nextra'
+
+const withNextra = nextra({
   theme: 'nextra-theme-blog',
   themeConfig: './theme.config.js',
-  flexsearch: {
-    codeblock: false
+  search: {
+    codeblocks: false
   }
 })
-module.exports = withNextra()
+export default withNextra()
 ```
 
 <Unstable />
@@ -597,7 +597,7 @@ module.exports = withNextra()
 
 Empty component for search result.
 
-**Type:** `boolean | { codeblock: boolean }`
+**Type:** `boolean | { codeblocks: boolean }`
 
 **Example:**
 

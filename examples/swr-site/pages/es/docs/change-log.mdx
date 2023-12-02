@@ -1,0 +1,42 @@
+import Markdown from 'markdown-to-jsx'
+import { useData } from 'nextra/hooks'
+
+export function getStaticProps() {
+  return (
+    fetch('https://api.github.com/repos/vercel/swr/releases')
+      .then(res => res.json())
+      // we keep the most recent 5 releases here
+      .then(releases => ({
+        props: { ssg: Array.isArray(releases) ? releases.slice(0, 5) : [] }
+      }))
+  )
+}
+
+export function ReleasesRenderer() {
+  const releases = useData()
+  return (
+    <Markdown>
+      {releases
+        .map(release => {
+          const body = release.body
+            .replace(/&#39;/g, "'")
+            .replace(
+              /@([a-zA-Z0-9_-]+)(?=(,| ))/g,
+              '<a href="https://github.com/$1" target="_blank" rel="noopener">@$1</a>'
+            )
+          return `## <a href="${
+            release.html_url
+          }" target="_blank" rel="noopener">${release.tag_name}</a>
+Publicado en ${new Date(release.published_at).toDateString()}.\n\n${body}`
+        })
+        .join('\n\n')}
+    </Markdown>
+  )
+}
+
+# Registro de cambios
+
+Se puede visitar [SWR release page](https://github.com/vercel/swr/releases) para
+ver todo el historial de lanzamientos.
+
+<ReleasesRenderer />

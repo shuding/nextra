@@ -1,0 +1,22 @@
+# Change Log
+
+import { useData } from 'nextra/hooks'
+
+export const ReleasesRenderer = () => {
+  const releases = useData()
+  return <i>{releases}</i>
+}
+
+export const getStaticProps = () => {
+  return { props: { ssg: 'Test SSG ' + Date.now() } }
+}
+
+<ReleasesRenderer />
+
+This page should not have the sidebar because it has
+
+```json
+"theme": {
+  "sidebar": false
+}
+```

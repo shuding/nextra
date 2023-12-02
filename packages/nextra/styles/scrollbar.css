@@ -4,19 +4,19 @@
 
   scrollbar-gutter: stable;
   &::-webkit-scrollbar {
-    @apply nx-w-3 nx-h-3;
+    @apply _w-3 _h-3;
   }
   &::-webkit-scrollbar-track {
-    @apply nx-bg-transparent;
+    @apply _bg-transparent;
   }
   &::-webkit-scrollbar-thumb {
-    @apply nx-rounded-[10px];
+    @apply _rounded-[10px];
   }
   &:hover::-webkit-scrollbar-thumb {
     border: 3px solid transparent;
     background-color: var(--tw-shadow-color);
     background-clip: content-box;
-    @apply nx-shadow-neutral-500/20 hover:nx-shadow-neutral-500/40;
+    @apply _shadow-neutral-500/20 hover:_shadow-neutral-500/40;
   }
 
   @media (max-width: 767px) {
@@ -32,6 +32,6 @@
   -ms-overflow-style: none; /* IE and Edge */
 
   &::-webkit-scrollbar {
-    @apply nx-hidden; /* Chrome, Safari and Opera */
+    @apply _hidden; /* Chrome, Safari and Opera */
   }
 }

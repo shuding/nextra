@@ -1,170 +1,23 @@
 /* eslint sort-keys: error */
-import type { NextSeoProps } from 'next-seo'
 import { useRouter } from 'next/router'
 import { DiscordIcon, GitHubIcon } from 'nextra/icons'
-import type { Item } from 'nextra/normalize-pages'
-import type { FC, ReactNode } from 'react'
 import { isValidElement } from 'react'
-import { z } from 'zod'
-import { Anchor, Flexsearch, Footer, Navbar, TOC } from './components'
-import { MatchSorterSearch } from './components/match-sorter-search'
-import type { NavBarProps } from './components/navbar'
-import { themeOptionsSchema, ThemeSwitch } from './components/theme-switch'
-import type { TOCProps } from './components/toc'
-import { useConfig } from './contexts'
+import type { z } from 'zod'
+import {
+  Anchor,
+  Flexsearch,
+  Footer,
+  Navbar,
+  ThemeSwitch,
+  TOC
+} from './components'
+import { useConfig, useThemeConfig } from './contexts'
+import type { publicThemeSchema, themeSchema } from './schemas'
 import { getGitIssueUrl, useGitEditUrl } from './utils'
 
 export const DEFAULT_LOCALE = 'en-US'
 
 export const IS_BROWSER = typeof window !== 'undefined'
-
-function isReactNode(value: unknown): boolean {
-  return (
-    value == null ||
-    typeof value === 'string' ||
-    isFunction(value) ||
-    isValidElement(value as any)
-  )
-}
-
-function isFunction(value: unknown): boolean {
-  return typeof value === 'function'
-}
-
-const i18nSchema = z.array(
-  z.strictObject({
-    direction: z.enum(['ltr', 'rtl']).optional(),
-    locale: z.string(),
-    text: z.string()
-  })
-)
-
-const reactNode = [
-  isReactNode,
-  { message: 'Must be React.ReactNode or React.FC' }
-] as const
-const fc = [isFunction, { message: 'Must be React.FC' }] as const
-
-export const themeSchema = z.strictObject({
-  banner: z.strictObject({
-    dismissible: z.boolean(),
-    key: z.string(),
-    text: z.custom<ReactNode | FC>(...reactNode).optional()
-  }),
-  chat: z.strictObject({
-    icon: z.custom<ReactNode | FC>(...reactNode),
-    link: z.string().startsWith('https://').optional()
-  }),
-  components: z.record(z.custom<FC>(...fc)).optional(),
-  darkMode: z.boolean(),
-  direction: z.enum(['ltr', 'rtl']),
-  docsRepositoryBase: z.string().startsWith('https://'),
-  editLink: z.strictObject({
-    component: z.custom<
-      FC<{
-        children: ReactNode
-        className?: string
-        filePath?: string
-      }>
-    >(...fc),
-    text: z.custom<ReactNode | FC>(...reactNode)
-  }),
-  faviconGlyph: z.string().optional(),
-  feedback: z.strictObject({
-    content: z.custom<ReactNode | FC>(...reactNode),
-    labels: z.string(),
-    useLink: z.function().returns(z.string())
-  }),
-  footer: z.strictObject({
-    component: z.custom<ReactNode | FC<{ menu: boolean }>>(...reactNode),
-    text: z.custom<ReactNode | FC>(...reactNode)
-  }),
-  gitTimestamp: z.custom<ReactNode | FC<{ timestamp: Date }>>(...reactNode),
-  head: z.custom<ReactNode | FC>(...reactNode),
-  i18n: i18nSchema,
-  logo: z.custom<ReactNode | FC>(...reactNode),
-  logoLink: z.boolean().or(z.string()),
-  main: z.custom<FC<{ children: ReactNode }>>(...fc).optional(),
-  navbar: z.strictObject({
-    component: z.custom<ReactNode | FC<NavBarProps>>(...reactNode),
-    extraContent: z.custom<ReactNode | FC>(...reactNode).optional()
-  }),
-  navigation: z.boolean().or(
-    z.strictObject({
-      next: z.boolean(),
-      prev: z.boolean()
-    })
-  ),
-  nextThemes: z.strictObject({
-    defaultTheme: z.string(),
-    forcedTheme: z.string().optional(),
-    storageKey: z.string()
-  }),
-  notFound: z.strictObject({
-    content: z.custom<ReactNode | FC>(...reactNode),
-    labels: z.string()
-  }),
-  primaryHue: z.number().or(
-    z.strictObject({
-      dark: z.number(),
-      light: z.number()
-    })
-  ),
-  primarySaturation: z.number().or(
-    z.strictObject({
-      dark: z.number(),
-      light: z.number()
-    })
-  ),
-  project: z.strictObject({
-    icon: z.custom<ReactNode | FC>(...reactNode),
-    link: z.string().startsWith('https://').optional()
-  }),
-  search: z.strictObject({
-    component: z.custom<
-      ReactNode | FC<{ className?: string; directories: Item[] }>
-    >(...reactNode),
-    emptyResult: z.custom<ReactNode | FC>(...reactNode),
-    error: z.string().or(z.function().returns(z.string())),
-    loading: z.custom<ReactNode | FC>(...reactNode),
-    // Can't be React component
-    placeholder: z.string().or(z.function().returns(z.string()))
-  }),
-  serverSideError: z.strictObject({
-    content: z.custom<ReactNode | FC>(...reactNode),
-    labels: z.string()
-  }),
-  sidebar: z.strictObject({
-    autoCollapse: z.boolean().optional(),
-    defaultMenuCollapseLevel: z.number().min(1).int(),
-    titleComponent: z.custom<
-      ReactNode | FC<{ title: string; type: string; route: string }>
-    >(...reactNode),
-    toggleButton: z.boolean()
-  }),
-  themeSwitch: z.strictObject({
-    component: z.custom<ReactNode | FC<{ lite?: boolean; className?: string }>>(
-      ...reactNode
-    ),
-    useOptions: themeOptionsSchema.or(z.function().returns(themeOptionsSchema))
-  }),
-  toc: z.strictObject({
-    backToTop: z.boolean(),
-    component: z.custom<ReactNode | FC<TOCProps>>(...reactNode),
-    extraContent: z.custom<ReactNode | FC>(...reactNode),
-    float: z.boolean(),
-    headingComponent: z
-      .custom<FC<{ id: string; children: string }>>(...fc)
-      .optional(),
-    title: z.custom<ReactNode | FC>(...reactNode)
-  }),
-  useNextSeoProps: z.custom<() => NextSeoProps | void>(isFunction)
-})
-
-const publicThemeSchema = themeSchema.deepPartial().extend({
-  // to have `locale` and `text` as required properties
-  i18n: i18nSchema.optional()
-})
 
 export type DocsThemeConfig = z.infer<typeof themeSchema>
 export type PartialDocsThemeConfig = z.infer<typeof publicThemeSchema>
@@ -192,9 +45,16 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     icon: (
       <>
         <DiscordIcon />
-        <span className="nx-sr-only">Discord</span>
+        <span className="_sr-only">Discord</span>
       </>
     )
+  },
+  color: {
+    hue: {
+      dark: 204,
+      light: 212
+    },
+    saturation: 100
   },
   darkMode: true,
   direction: 'ltr',
@@ -211,23 +71,24 @@ export const DEFAULT_THEME: DocsThemeConfig = {
         </Anchor>
       )
     },
-    text: 'Edit this page'
+    content: 'Edit this page'
   },
   feedback: {
     content: 'Question? Give us feedback →',
     labels: 'feedback',
     useLink() {
       const config = useConfig()
+      const themeConfig = useThemeConfig()
       return getGitIssueUrl({
-        labels: config.feedback.labels,
-        repository: config.docsRepositoryBase,
+        labels: themeConfig.feedback.labels,
+        repository: themeConfig.docsRepositoryBase,
         title: `Feedback for “${config.title}”`
       })
     }
   },
   footer: {
     component: Footer,
-    text: `MIT ${new Date().getFullYear()} © Nextra.`
+    content: `MIT ${new Date().getFullYear()} © Nextra.`
   },
   gitTimestamp: function GitTimestamp({ timestamp }) {
     const { locale = DEFAULT_LOCALE } = useRouter()
@@ -244,23 +105,31 @@ export const DEFAULT_THEME: DocsThemeConfig = {
       </>
     )
   },
-  head: (
-    <>
-      <meta name="msapplication-TileColor" content="#fff" />
-      <meta httpEquiv="Content-Language" content="en" />
-      <meta name="description" content="Nextra: the next docs builder" />
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content="@shuding_" />
-      <meta property="og:title" content="Nextra: the next docs builder" />
-      <meta property="og:description" content="Nextra: the next docs builder" />
-      <meta name="apple-mobile-web-app-title" content="Nextra" />
-    </>
-  ),
+  head: function useHead() {
+    const { frontMatter, title: pageTitle } = useConfig()
+
+    const title = `${pageTitle} – Nextra`
+    const { description, canonical, image } = frontMatter
+    return (
+      <>
+        <title>{title}</title>
+        <meta property="og:title" content={title} />
+        {description && (
+          <>
+            <meta name="description" content={description} />
+            <meta property="og:description" content={description} />
+          </>
+        )}
+        {canonical && <link rel="canonical" href={canonical} />}
+        {image && <meta name="og:image" content={image} />}
+      </>
+    )
+  },
   i18n: [],
   logo: (
     <>
-      <span className="nx-font-extrabold">Nextra</span>
-      <span className="nx-ml-2 nx-hidden nx-font-normal nx-text-gray-600 md:nx-inline">
+      <span className="_font-extrabold">Nextra</span>
+      <span className="_ml-2 max-md:_hidden _font-normal _text-gray-600">
         The Next Docs Builder
       </span>
     </>
@@ -278,33 +147,18 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     content: 'Submit an issue about broken link →',
     labels: 'bug'
   },
-  primaryHue: {
-    dark: 204,
-    light: 212
-  },
-  primarySaturation: {
-    dark: 100,
-    light: 100
-  },
   project: {
     icon: (
       <>
         <GitHubIcon />
-        <span className="nx-sr-only">GitHub</span>
+        <span className="_sr-only">GitHub</span>
       </>
     )
   },
   search: {
-    component: function Search({ className, directories }) {
-      const config = useConfig()
-      return config.flexsearch ? (
-        <Flexsearch className={className} />
-      ) : (
-        <MatchSorterSearch className={className} directories={directories} />
-      )
-    },
+    component: Flexsearch,
     emptyResult: (
-      <span className="nx-block nx-select-none nx-p-8 nx-text-center nx-text-sm nx-text-gray-400">
+      <span className="_block _select-none _p-8 _text-center _text-sm _text-gray-400">
         No results found.
       </span>
     ),
@@ -323,14 +177,9 @@ export const DEFAULT_THEME: DocsThemeConfig = {
       return `${text}…`
     }
   },
-  serverSideError: {
-    content: 'Submit an issue about error in url →',
-    labels: 'bug'
-  },
   sidebar: {
     defaultMenuCollapseLevel: 2,
-    titleComponent: ({ title }) => <>{title}</>,
-    toggleButton: false
+    toggleButton: true
   },
   themeSwitch: {
     component: ThemeSwitch,
@@ -348,8 +197,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     component: TOC,
     float: true,
     title: 'On This Page'
-  },
-  useNextSeoProps: () => ({ titleTemplate: '%s – Nextra' })
+  }
 }
 
 export const DEEP_OBJECT_KEYS = Object.entries(DEFAULT_THEME)

@@ -1,0 +1,85 @@
+import { Callout } from 'nextra/components'
+
+# Опции API
+
+```js
+const { data, error, isValidating, mutate } = useSWR(key, fetcher, options)
+```
+
+## Параметры
+
+- `key`: уникальный строчный ключ для запроса (или функция / массив / null)
+  [(продвинутое использование)](/docs/conditional-fetching)
+- `fetcher`: (_опционально_) Promise возвращающий функцию для выборки данных
+  [(подробнее)](/docs/data-fetching)
+- `options`: (_опционально_) объект опций для этого SWR хука
+
+## Возвращаемые значения
+
+- `data`: данные для данного ключа, разрешенные `fetcher` (или undefined, если
+  не загружено)
+- `error`: ошибка, выброшенная `fetcher`-ом (или undefined)
+- `isValidating`: если запрос или ревалидация загружается
+- `mutate(data?, shouldRevalidate?)`: функция для мутации закешированных данных
+  [(подробнее)](/docs/mutation)
+
+## Опции
+
+- `suspense = false`: включить режим задержки React Suspense
+  [(подробнее)](/docs/suspense)
+- `fetcher(args)`: функция-fetcher
+- `revalidateIfStale = true`: автоматическая ревалидация при монтировании, даже
+  если есть устаревшие данные
+  [(подробнее)](/docs/revalidation#отключение-автоматических-ревалидаций)
+- `revalidateOnMount`: включить или отключить автоматическую ревалидацию при
+  монтировании компонента
+- `revalidateOnFocus = true`: автоматически ревалидировать, когда окно
+  фокусируется [(подробнее)](/docs/revalidation)
+- `revalidateOnReconnect = true`: автоматически ревалидировать, когда браузер
+  восстанавливает сетевое подключение (через `navigator.onLine`)
+  [(подробнее)](/docs/revalidation)
+- `refreshInterval` [(подробнее)](/docs/revalidation):
+  - по умолчанию отключен: `refreshInterval = 0`
+  - If set to a number, интервал поллинга в миллисекундах
+  - If set to a function, the function will receive the latest data and should
+    return the interval in milliseconds
+- `refreshWhenHidden = false`: поллинг, когда окно невидемо (если
+  `refreshInterval` включён)
+- `refreshWhenOffline = false`: поллинг, когда браузер оффлайн (определяется
+  `navigator.onLine`)
+- `shouldRetryOnError = true`: повторить попытку, если в fetcher-е возникла
+  ошибка
+- `dedupingInterval = 2000`: дедупликация запросов с тем же ключом за этот
+  промежуток времени в миллисекундах
+- `focusThrottleInterval = 5000`: проверять только один раз за период времени в
+  миллисекундах
+- `loadingTimeout = 3000`: тайм-аут для запуска события onLoadingSlow в
+  миллисекундах
+- `errorRetryInterval = 5000`: интервал повторной попытки ошибки в миллисекундах
+- `errorRetryCount`: максимальное количество повторных попыток при ошибке
+- `fallback`: объект типа "ключ-значение" из нескольких резервных данных
+  [(example)](/docs/with-nextjs)
+- `fallbackData`: исходные данные, которые должны быть возвращены (примечание:
+  это для каждого хука)
+- `onLoadingSlow(key, config)`: колбэк-функция, когда запрос загружается слишком
+  долго (см. `loadingTimeout`)
+- `onSuccess(data, key, config)`: колбэк-функция при успешном завершении запроса
+- `onError(err, key, config)`: колбэк-функция, когда запрос возвращает ошибку
+- `onErrorRetry(err, key, config, revalidate, revalidateOps)`: обработчик
+  повторной попытки при ошибке
+- `compare(a, b)`: функция сравнения, используемая для определения того, когда
+  возвращаемые данные были изменены, чтобы избежать ложных повторных отрисовок.
+  По умолчанию используется [dequal](https://github.com/lukeed/dequal).
+- `isPaused()`: функция, определяющая, приостанавливается ли ревалидация,
+  игнорирует полученные данные и ошибки, когда возвращает `true`. По умолчанию
+  возвращает `false`.
+- `use`: массив middleware-функций [(подробнее)](/docs/middleware)
+
+<Callout>
+  В медленной сети (2G, {'<='} 70 Кбит/с), `errorRetryInterval` будет 10 секунд,
+  а&nbsp;`loadingTimeout` будет по умолчанию 5 секунд.
+</Callout>
+
+Вы также можете использовать
+[глобальную конфигурацию](/docs/global-configuration) для предоставления
+параметров по умолчанию.

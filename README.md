@@ -5,7 +5,7 @@ from Next.js.
 
 ## Documentation
 
-[https://nextra.site](https://nextra.site)
+https://nextra.site
 
 ## Development
 

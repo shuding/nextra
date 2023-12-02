@@ -22,9 +22,9 @@
   },
   "devDependencies": {
     "@changesets/cli": "2.26.2",
-    "@edge-runtime/vm": "3.1.0",
     "@ianvs/prettier-plugin-sort-imports": "4.1.1",
     "@next/eslint-plugin-next": "13.5.6",
+    "@rollup/plugin-alias": "^5.0.0",
     "@typescript-eslint/eslint-plugin": "6.9.0",
     "@typescript-eslint/parser": "6.9.0",
     "eslint": "8.52.0",
@@ -32,6 +32,7 @@
     "eslint-plugin-import": "2.29.0",
     "eslint-plugin-react": "7.33.2",
     "eslint-plugin-react-hooks": "4.6.0",
+    "eslint-plugin-sonarjs": "^0.21.0",
     "eslint-plugin-tailwindcss": "3.13.0",
     "eslint-plugin-typescript-sort-keys": "3.1.0",
     "eslint-plugin-unicorn": "48.0.1",
@@ -45,15 +46,14 @@
   },
   "pnpm": {
     "overrides": {
-      "vitest": "^0.29.8",
-      "react": "^18.2.0",
-      "react-dom": "^18.2.0",
-      "@mdx-js/react": "^2.3.0",
-      "next-themes": "^0.2.1",
-      "next": "13.5.6"
+      "esbuild": "^0.19.3",
+      "next": "13.5.6",
+      "vite": "^4.4.11",
+      "hast-util-to-estree": "^2.3.3"
     },
     "patchedDependencies": {
-      "@changesets/assemble-release-plan@5.2.4": "patches/@changesets__assemble-release-plan@5.2.4.patch"
+      "@changesets/assemble-release-plan@5.2.4": "patches/@changesets__assemble-release-plan@5.2.4.patch",
+      "tsup@7.2.0": "patches/tsup@7.2.0.patch"
     }
   }
 }
