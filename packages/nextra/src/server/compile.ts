@@ -17,15 +17,9 @@ import type {
   FrontMatter,
   LoaderOptions,
   PageOpts,
-  ReadingTime,
-  StructurizedData
+  ReadingTime
 } from '../types'
-import {
-  CWD,
-  DEFAULT_LOCALE,
-  ERROR_ROUTES,
-  MARKDOWN_URL_EXTENSION_REGEX
-} from './constants.js'
+import { CWD, MARKDOWN_URL_EXTENSION_REGEX } from './constants.js'
 import {
   recmaRewriteFunctionBody,
   recmaRewriteJsx
@@ -46,8 +40,7 @@ import {
   remarkMdxFrontMatter,
   remarkMdxTitle,
   remarkRemoveImports,
-  remarkStaticImage,
-  remarkStructurize
+  remarkStaticImage
 } from './remark-plugins/index.js'
 import { logger, truthy } from './utils.js'
 
@@ -66,15 +59,12 @@ const clonedRemarkLinkRewrite = remarkLinkRewrite.bind(null)
 type CompileMdxOptions = Pick<
   LoaderOptions,
   | 'staticImage'
-  | 'search'
   | 'defaultShowCopyCode'
   | 'readingTime'
   | 'latex'
   | 'codeHighlight'
 > & {
   mdxOptions?: MdxOptions
-  route?: string
-  locale?: string
   filePath?: string
   useCachedCompiler?: boolean
   isPageImport?: boolean
@@ -85,13 +75,10 @@ export async function compileMdx(
   source: string,
   {
     staticImage,
-    search,
     readingTime,
     latex,
     codeHighlight,
     defaultShowCopyCode,
-    route = '',
-    locale,
     mdxOptions = {},
     filePath = '',
     useCachedCompiler,
@@ -135,22 +122,6 @@ export async function compileMdx(
     return { result } as any
   }
 
-  let searchIndexKey: string | null = null
-  if (ERROR_ROUTES.has(route)) {
-    /* skip */
-  } else if (typeof search === 'object') {
-    if (search.indexKey) {
-      searchIndexKey = search.indexKey(filePath, route, locale)
-      if (searchIndexKey === '') {
-        searchIndexKey = locale || DEFAULT_LOCALE
-      }
-    } else {
-      searchIndexKey = locale || DEFAULT_LOCALE
-    }
-  } else if (search) {
-    searchIndexKey = locale || DEFAULT_LOCALE
-  }
-
   // https://github.com/shuding/nextra/issues/1303
   const isFileOutsideCWD =
     !isPageImport && path.relative(CWD, filePath).startsWith('..')
@@ -174,13 +145,11 @@ export async function compileMdx(
 
     const data = vFile.data as {
       readingTime?: ReadingTime
-      structurizedData: StructurizedData
       title?: string
       frontMatter: FrontMatter
     } & Pick<PageOpts, 'hasJsxInH1'>
 
-    const { readingTime, structurizedData, title, frontMatter, hasJsxInH1 } =
-      data
+    const { readingTime, title, frontMatter, hasJsxInH1 } = data
     // https://github.com/shuding/nextra/issues/1032
     const result = String(vFile).replaceAll('__esModule', '_\\_esModule')
 
@@ -200,7 +169,6 @@ export async function compileMdx(
       title,
       ...(hasJsxInH1 && { hasJsxInH1 }),
       ...(readingTime && { readingTime }),
-      ...(searchIndexKey !== null && { searchIndexKey, structurizedData }),
       frontMatter
     }
   } catch (err) {
@@ -238,8 +206,6 @@ export async function compileMdx(
         remarkCustomHeadingId,
         remarkMdxTitle,
         [remarkHeadings, { isRemoteContent }] satisfies Pluggable,
-        // structurize should be before `remarkHeadings` because we attach #id attribute to heading node
-        search && ([remarkStructurize, search] satisfies Pluggable),
         staticImage && remarkStaticImage,
         readingTime && remarkReadingTime,
         latex && remarkMath,

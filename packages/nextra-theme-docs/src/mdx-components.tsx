@@ -63,6 +63,7 @@ const createHeading = (
 
     return (
       <Tag
+        id={id}
         className={
           // can be added by footnotes
           className === 'sr-only'
@@ -84,7 +85,6 @@ const createHeading = (
         {id && (
           <a
             href={`#${id}`}
-            id={id}
             className="subheading-anchor"
             aria-label="Permalink for this section"
             ref={obRef}
@@ -241,6 +241,7 @@ function Body({ children }: { children: ReactNode }): ReactElement {
   if (themeContext.layout === 'full') {
     return (
       <article
+        data-pagefind-body
         className={cn(
           classes.main,
           'nextra-content _min-h-[calc(100vh-var(--nextra-navbar-height))] _pl-[max(env(safe-area-inset-left),1.5rem)] _pr-[max(env(safe-area-inset-right),1.5rem)]'
@@ -260,7 +261,10 @@ function Body({ children }: { children: ReactNode }): ReactElement {
           'nextra-body-typesetting-article'
       )}
     >
-      <main className="_w-full _min-w-0 _max-w-6xl _px-6 _pt-4 md:_px-12">
+      <main
+        data-pagefind-body
+        className="_w-full _min-w-0 _max-w-6xl _px-6 _pt-4 md:_px-12"
+      >
         {activeType !== 'page' && themeContext.breadcrumb && (
           <Breadcrumb activePath={activePath} />
         )}

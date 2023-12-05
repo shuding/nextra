@@ -117,11 +117,3 @@ export type NextraInternalGlobal = typeof globalThis & {
 
 export type DynamicMetaDescriptor = Record<string, () => any>
 
-export type StructurizedData = Record<string, string>
-
-export type SearchData = {
-  [route: string]: {
-    title: string
-    data: StructurizedData
-  }
-}

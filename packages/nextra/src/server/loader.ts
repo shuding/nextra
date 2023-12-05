@@ -57,7 +57,6 @@ export async function loader(
     theme,
     themeConfig,
     defaultShowCopyCode,
-    search,
     staticImage,
     readingTime: _readingTime,
     latex,
@@ -145,10 +144,6 @@ ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
 
   const {
     result,
-    title,
-    frontMatter,
-    structurizedData,
-    searchIndexKey,
     hasJsxInH1,
     readingTime
   } = await compileMdx(source, {
@@ -161,11 +156,8 @@ ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
     readingTime: _readingTime,
     defaultShowCopyCode,
     staticImage,
-    search,
     latex,
     codeHighlight,
-    route,
-    locale,
     filePath: mdxPath,
     useCachedCompiler: true,
     isPageImport,
@@ -175,16 +167,6 @@ ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
   if (!isPageImport) {
     return `${result}
 export default MDXLayout`
-  }
-  if (searchIndexKey && frontMatter.searchable !== false) {
-    // Store all the things in buildInfo.
-    const { buildInfo } = this._module as any
-    buildInfo.nextraSearch = {
-      indexKey: searchIndexKey,
-      title,
-      data: structurizedData,
-      route
-    }
   }
 
   let timestamp: PageOpts['timestamp']
@@ -232,8 +214,7 @@ const hoc = HOC_MDXWrapper(
 // Exporting Capitalized function make hot works
 export default function HOC(props) {
   return hoc(props)
-}
-`
+}`
 
   return rawJs
 }

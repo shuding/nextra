@@ -40,7 +40,6 @@
     "@popperjs/core": "^2.11.8",
     "clsx": "^2.0.0",
     "escape-string-regexp": "^5.0.0",
-    "flexsearch": "^0.7.31",
     "focus-visible": "^5.2.0",
     "intersection-observer": "^0.12.2",
     "next-themes": "^0.2.1",
@@ -50,7 +49,6 @@
   "devDependencies": {
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
     "@testing-library/react": "^14.0.0",
-    "@types/flexsearch": "^0.7.4",
     "@types/react": "^18.2.23",
     "@types/react-dom": "^18.2.8",
     "@vitejs/plugin-react": "^4.1.0",

@@ -39,7 +39,10 @@ export function Pre({
   )
 
   return (
-    <div className="nextra-code _relative _mt-6 first:_mt-0">
+    <div
+      data-pagefind-ignore="all"
+      className="nextra-code _relative _mt-6 first:_mt-0"
+    >
       {filename && (
         <div
           className={cn(

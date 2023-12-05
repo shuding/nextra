@@ -9,4 +9,3 @@ export {
 } from './remark-link-rewrite.js'
 export { remarkMdxDisableExplicitJsx } from './remark-mdx-disable-explicit-jsx.js'
 export { remarkStaticImage } from './remark-static-image.js'
-export { remarkStructurize } from './remark-structurize.js'

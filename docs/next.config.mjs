@@ -15,6 +15,9 @@ const sep = path.sep === '/' ? '/' : '\\\\'
 
 const ALLOWED_SVG_REGEX = new RegExp(`components${sep}icons${sep}.+\\.svg$`)
 
+/**
+ * @type {import('next').NextConfig}
+ */
 export default withNextra({
   reactStrictMode: true,
   eslint: {
