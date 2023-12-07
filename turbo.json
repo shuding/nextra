@@ -2,10 +2,7 @@
   "$schema": "https://turbo.build/schema.json",
   "pipeline": {
     "build": {
-      "dependsOn": [
-        // Run `build` in workspaces I depend on first
-        "^build"
-      ],
+      "dependsOn": ["^build"],
       "outputs": ["dist/**", ".next/**", "loader.js"]
     },
     "build:tailwind": {
@@ -14,10 +11,7 @@
     },
     "test": {},
     "types:check": {
-      "dependsOn": [
-        // Run `build` in workspaces I depend on first
-        "^build"
-      ]
+      "dependsOn": ["^build"]
     },
     "clean": {
       "cache": false
