@@ -1,7 +1,7 @@
 import cn from 'clsx'
 import { useRouter } from 'next/router'
 import type { Heading } from 'nextra'
-import { useFSRoute, useMounted } from 'nextra/hooks'
+import { useMounted } from 'nextra/hooks'
 import { ArrowRightIcon, ExpandIcon } from 'nextra/icons'
 import type { Item, MenuItem, PageItem } from 'nextra/normalize-pages'
 import type { ReactElement } from 'react'
@@ -61,16 +61,39 @@ const classes = {
   )
 }
 
+type ActiveRoute = {
+  active: boolean
+  activeRouteInside: boolean
+}
+
+function useActiveRoute(itemRoute: string | undefined): ActiveRoute {
+  const config = useConfig()
+  const route = config.useRoute()
+
+  // It is possible that the item doesn't have any route - for example an external link.
+  if (!itemRoute) {
+    return {
+      active: false,
+      activeRouteInside: false
+    }
+  }
+
+  const active = [route, route + '/'].includes(itemRoute + '/')
+  const activeRouteInside = active || route.startsWith(itemRoute + '/')
+
+  return {
+    active,
+    activeRouteInside
+  }
+}
+
 type FolderProps = {
   item: PageItem | MenuItem | Item
   anchors: Heading[]
 }
 
 function FolderImpl({ item, anchors }: FolderProps): ReactElement {
-  const routeOriginal = useFSRoute()
-  const [route] = routeOriginal.split('#')
-  const active = [route, route + '/'].includes(item.route + '/')
-  const activeRouteInside = active || route.startsWith(item.route + '/')
+  const { active, activeRouteInside } = useActiveRoute(item.route)
 
   const focusedRoute = useContext(FocusedItemContext)
   const focusedRouteInside = !!focusedRoute?.startsWith(item.route + '/')
@@ -225,11 +248,10 @@ function File({
   item: PageItem | Item
   anchors: Heading[]
 }): ReactElement {
-  const route = useFSRoute()
   const onFocus = useContext(OnFocusItemContext)
 
-  // It is possible that the item doesn't have any route - for example an external link.
-  const active = item.route && [route, route + '/'].includes(item.route + '/')
+  const { active } = useActiveRoute(item.route)
+
   const activeAnchor = useActiveAnchor()
   const { setMenu } = useMenu()
   const config = useConfig()

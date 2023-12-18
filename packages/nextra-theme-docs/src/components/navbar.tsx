@@ -1,6 +1,5 @@
 import { Menu, Transition } from '@headlessui/react'
 import cn from 'clsx'
-import { useFSRoute } from 'nextra/hooks'
 import { ArrowRightIcon, MenuIcon } from 'nextra/icons'
 import type { Item, MenuItem, PageItem } from 'nextra/normalize-pages'
 import type { ReactElement, ReactNode } from 'react'
@@ -80,7 +79,7 @@ function NavbarMenu({
 
 export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
   const config = useConfig()
-  const activeRoute = useFSRoute()
+  const activeRoute = config.useRoute()
   const { menu, setMenu } = useMenu()
 
   return (

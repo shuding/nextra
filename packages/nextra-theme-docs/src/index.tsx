@@ -4,7 +4,7 @@ import type { ReactElement, ReactNode } from 'react'
 import { useMemo } from 'react'
 import 'focus-visible'
 import cn from 'clsx'
-import { useFSRoute, useMounted } from 'nextra/hooks'
+import { useMounted } from 'nextra/hooks'
 import { MDXProvider } from 'nextra/mdx'
 import './polyfill'
 import type { PageTheme } from 'nextra/normalize-pages'
@@ -21,6 +21,7 @@ import { DEFAULT_LOCALE, PartialDocsThemeConfig } from './constants'
 import { ActiveAnchorProvider, ConfigProvider, useConfig } from './contexts'
 import { getComponents } from './mdx-components'
 import { renderComponent } from './utils'
+
 
 interface BodyProps {
   themeContext: PageTheme
@@ -116,7 +117,7 @@ const InnerLayout = ({
 }: PageOpts & { children: ReactNode }): ReactElement => {
   const config = useConfig()
   const { locale = DEFAULT_LOCALE, defaultLocale } = useRouter()
-  const fsPath = useFSRoute()
+  const route = config.useRoute()
 
   const {
     activeType,
@@ -134,9 +135,9 @@ const InnerLayout = ({
         list: pageMap,
         locale,
         defaultLocale,
-        route: fsPath
+        route
       }),
-    [pageMap, locale, defaultLocale, fsPath]
+    [pageMap, locale, defaultLocale, route]
   )
 
   const themeContext = { ...activeThemeContext, ...frontMatter }

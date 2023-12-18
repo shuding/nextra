@@ -1,18 +1,21 @@
+;
 /* eslint sort-keys: error */
-import type { NextSeoProps } from 'next-seo'
-import { useRouter } from 'next/router'
-import { DiscordIcon, GitHubIcon } from 'nextra/icons'
-import type { Item } from 'nextra/normalize-pages'
-import type { FC, ReactNode } from 'react'
-import { isValidElement } from 'react'
-import { z } from 'zod'
-import { Anchor, Flexsearch, Footer, Navbar, TOC } from './components'
-import { MatchSorterSearch } from './components/match-sorter-search'
-import type { NavBarProps } from './components/navbar'
-import { themeOptionsSchema, ThemeSwitch } from './components/theme-switch'
-import type { TOCProps } from './components/toc'
-import { useConfig } from './contexts'
-import { getGitIssueUrl, useGitEditUrl } from './utils'
+import type { NextSeoProps } from 'next-seo';
+import { useRouter } from 'next/router';
+import { useFSRoute } from "nextra/hooks";
+import { DiscordIcon, GitHubIcon } from 'nextra/icons';
+import type { Item } from 'nextra/normalize-pages';
+import type { FC, ReactNode } from 'react';
+import { isValidElement } from 'react';
+import { z } from 'zod';
+import { Anchor, Flexsearch, Footer, Navbar, TOC } from './components';
+import { MatchSorterSearch } from './components/match-sorter-search';
+import type { NavBarProps } from './components/navbar';
+import { themeOptionsSchema, ThemeSwitch } from './components/theme-switch';
+import type { TOCProps } from './components/toc';
+import { useConfig } from './contexts';
+import { getGitIssueUrl, useGitEditUrl } from './utils';
+
 
 export const DEFAULT_LOCALE = 'en-US'
 
@@ -158,7 +161,8 @@ export const themeSchema = z.strictObject({
       .optional(),
     title: z.custom<ReactNode | FC>(...reactNode)
   }),
-  useNextSeoProps: z.custom<() => NextSeoProps | void>(isFunction)
+  useNextSeoProps: z.custom<() => NextSeoProps | void>(isFunction),
+  useRoute: z.custom<() => string>(isFunction)
 })
 
 const publicThemeSchema = themeSchema.deepPartial().extend({
@@ -349,7 +353,8 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     float: true,
     title: 'On This Page'
   },
-  useNextSeoProps: () => ({ titleTemplate: '%s – Nextra' })
+  useNextSeoProps: () => ({ titleTemplate: '%s – Nextra' }),
+  useRoute: useFSRoute
 }
 
 export const DEEP_OBJECT_KEYS = Object.entries(DEFAULT_THEME)
