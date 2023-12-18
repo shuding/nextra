@@ -22,7 +22,6 @@ import { ActiveAnchorProvider, ConfigProvider, useConfig } from './contexts'
 import { getComponents } from './mdx-components'
 import { renderComponent } from './utils'
 
-
 interface BodyProps {
   themeContext: PageTheme
   breadcrumb: ReactNode

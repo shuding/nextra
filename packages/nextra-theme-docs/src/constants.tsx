@@ -1,4 +1,3 @@
-;
 /* eslint sort-keys: error */
 import type { NextSeoProps } from 'next-seo';
 import { useRouter } from 'next/router';
@@ -15,7 +14,6 @@ import { themeOptionsSchema, ThemeSwitch } from './components/theme-switch';
 import type { TOCProps } from './components/toc';
 import { useConfig } from './contexts';
 import { getGitIssueUrl, useGitEditUrl } from './utils';
-
 
 export const DEFAULT_LOCALE = 'en-US'
 
