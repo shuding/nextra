@@ -31,8 +31,8 @@ export function TOC({ headings, filePath }: TOCProps): ReactElement {
   const hasHeadings = items.length > 0
   const hasMetaInfo = Boolean(
     config.feedback.content ||
-      config.editLink.component ||
-      config.toc.extraContent
+    config.editLink.text ||
+    config.toc.extraContent
   )
 
   const activeSlug = Object.entries(activeAnchor).find(
@@ -119,11 +119,11 @@ export function TOC({ headings, filePath }: TOCProps): ReactElement {
             </Anchor>
           ) : null}
 
-          {renderComponent(config.editLink.component, {
+          {config.editLink.text ? renderComponent(config.editLink.component, {
             filePath,
             className: linkClassName,
             children: renderComponent(config.editLink.text)
-          })}
+          }) : null}
 
           {renderComponent(config.toc.extraContent)}
 
