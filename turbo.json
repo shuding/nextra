@@ -8,10 +8,6 @@
       ],
       "outputs": ["dist/**", ".next/**", "loader.js"]
     },
-    "build:tailwind": {
-      "dependsOn": [],
-      "outputs": ["style.css"]
-    },
     "test": {},
     "types:check": {
       "dependsOn": [
