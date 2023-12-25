@@ -6,26 +6,21 @@
   "author": "Shu Ding <g@shud.in>",
   "license": "MIT",
   "exports": {
-    "./style.css": "./style.css",
+    "./style.css": "./dist/css/styles.css",
     ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.mts"
+      "import": "./dist/src/index.js",
+      "types": "./dist/src/index.d.mts"
     }
   },
   "types": "./dist/index.d.mts",
   "files": [
-    "dist",
-    "style.css"
+    "dist"
   ],
   "scripts": {
-    "build": "tsup",
-    "build:all": "pnpm build && pnpm build:tailwind",
-    "build:tailwind": "pnpm postcss css/styles.css -o style.css --verbose",
-    "clean": "rimraf ./dist ./style.css",
-    "dev": "concurrently \"pnpm dev:layout\" \"pnpm dev:tailwind\"",
-    "dev:layout": "tsup --watch",
-    "dev:tailwind": "TAILWIND_MODE=watch pnpm postcss css/styles.css -o style.css --watch",
-    "prepublishOnly": "pnpm build:all",
+    "build": "tsup --minify",
+    "clean": "rimraf ./dist",
+    "dev": "tsup --watch",
+    "prepublishOnly": "pnpm build",
     "test": "echo ❗ No tests, previous tests were moved to the `nextra` package",
     "types": "tsup --dts-only",
     "types:check": "tsc --noEmit"
@@ -64,7 +59,6 @@
     "next": "^13.5.6",
     "nextra": "workspace:*",
     "postcss": "^8.4.31",
-    "postcss-cli": "^10.1.0",
     "postcss-import": "^15.1.0",
     "postcss-lightningcss": "^1.0.0",
     "react": "^18.2.0",
