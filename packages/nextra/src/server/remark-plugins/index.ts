@@ -10,3 +10,5 @@ export {
 export { remarkMdxDisableExplicitJsx } from './remark-mdx-disable-explicit-jsx.js'
 export { remarkStaticImage } from './remark-static-image.js'
 export { remarkStructurize } from './remark-structurize.js'
+export { remarkShikiTwoSlash } from './remark-shiki-twoslash.js'
+export { remarkHTMLToJsx } from './remark-html-to-jsx.js'

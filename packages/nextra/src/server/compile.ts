@@ -41,11 +41,13 @@ import {
 import {
   remarkCustomHeadingId,
   remarkHeadings,
+  remarkHTMLToJsx,
   remarkLinkRewrite,
   remarkMdxDisableExplicitJsx,
   remarkMdxFrontMatter,
   remarkMdxTitle,
   remarkRemoveImports,
+  remarkShikiTwoSlash,
   remarkStaticImage,
   remarkStructurize
 } from './remark-plugins/index.js'
@@ -216,6 +218,8 @@ export async function compileMdx(
       providerImportSource: 'nextra/mdx',
       remarkPlugins: [
         ...(remarkPlugins || []),
+        remarkShikiTwoSlash,
+        remarkHTMLToJsx,
         remarkMermaid, // should be before remarkRemoveImports because contains `import { Mermaid } from ...`
         [
           remarkNpm2Yarn, // should be before remarkRemoveImports because contains `import { Tabs as $Tabs, Tab as $Tab } from ...`
