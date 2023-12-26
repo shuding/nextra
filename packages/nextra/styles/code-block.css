@@ -12,14 +12,17 @@ Code blocks structurally look like:
 */
 
 pre {
-  background-color: transparent !important;
   position: relative;
-}
-pre.shiki {
-  /* overflow-x: auto; */
 }
 pre.shiki:hover .dim {
   opacity: 1;
+}
+pre.shiki.github-dark {
+  @apply _hidden dark:_block
+}
+
+pre.shiki.github-light {
+  @apply dark:_hidden
 }
 pre.shiki div.dim {
   opacity: 0.5;
