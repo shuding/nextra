@@ -79,9 +79,9 @@ export const rehypeIcon: Plugin<[], any> =
         isMdxJsEsm(node) && isImportDeclaration(node) && isImportFrom(node)
     )
 
-    visit(ast, { tagName: 'div' }, (node: Element) => {
+    visit(ast, { tagName: 'figure' }, (node: Element) => {
       const isRehypePrettyCode =
-        'data-rehype-pretty-code-fragment' in node.properties
+        'data-rehype-pretty-code-figure' in node.properties
 
       if (!isRehypePrettyCode) return
 

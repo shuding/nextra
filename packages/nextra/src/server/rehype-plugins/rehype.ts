@@ -69,12 +69,12 @@ export const rehypeParseCodeMeta: Plugin<
   }
 
 export const rehypeAttachCodeMeta: Plugin<[], any> = () => ast => {
-  visit(ast, [{ tagName: 'div' }, { tagName: 'span' }], (node: Element) => {
+  visit(ast, [{ tagName: 'figure' }, { tagName: 'span' }], (node: Element) => {
     const isRehypePrettyCode =
-      'data-rehype-pretty-code-fragment' in node.properties
+      'data-rehype-pretty-code-figure' in node.properties
     if (!isRehypePrettyCode) return
 
-    // remove <div data-rehype-pretty-code-fragment /> element that wraps <pre /> element
+    // remove <figure data-rehype-pretty-code-figure /> element that wraps <pre /> element
     // because we'll wrap with our own <div />
     const preEl: PreElement = Object.assign(node, node.children[0])
     delete preEl.properties['data-theme']
@@ -94,11 +94,15 @@ export const rehypeAttachCodeMeta: Plugin<[], any> = () => ast => {
       if (preEl.type === 'mdxJsxFlowElement') {
         // @ts-expect-error fixme
         preEl.attributes.push(
-          ...Object.entries(node.properties).map(([name, value]) => ({
-            type: 'mdxJsxAttribute',
-            name,
-            value
-          }))
+          ...Object.entries(node.properties)
+            .map(([name, value]) => {
+              return {
+                type: 'mdxJsxAttribute',
+                name,
+                value
+              }
+            })
+            .filter(attr => attr.value !== undefined)
         )
       }
     } else {
