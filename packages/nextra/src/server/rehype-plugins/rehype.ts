@@ -1,6 +1,8 @@
 import type { Element } from 'hast'
 import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
-import { bundledLanguages, getHighlighter } from 'shiki'
+// import type { CodeToHastOptions } from 'shikiji'
+import { bundledLanguages, getHighlighter } from 'shikiji'
+import { rendererRich, transformerTwoSlash } from 'shikiji-twoslash'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 
@@ -22,31 +24,24 @@ export const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS: RehypePrettyCodeOptions = {
     }
     delete node.properties['data-line']
   },
+  transformers: [
+    transformerTwoSlash({
+      renderer: rendererRich(),
+      explicitTrigger: true
+    })
+  ],
+  theme: {
+    light: 'github-light',
+    dark: 'github-dark'
+  },
   filterMetaString: meta => meta.replace(CODE_BLOCK_FILENAME_REGEX, ''),
   async getHighlighter(_opts) {
-    const DEFAULT_OPTS = {
-      themes: {
-        light: 'github-light',
-        dark: 'github-dark'
-      },
-      defaultColor: false
-    } as const
-
     const highlighter = await getHighlighter({
-      themes: Object.values(DEFAULT_OPTS.themes),
+      ..._opts,
+      themes: ['github-light', 'github-dark'],
       langs: Object.keys(bundledLanguages)
     })
-
-    const originalCodeToHtml = highlighter.codeToHtml
-
-    return Object.assign(highlighter, {
-      codeToHtml(code: string, lang: string) {
-        return originalCodeToHtml(code, { lang, ...DEFAULT_OPTS })
-      },
-      ansiToHtml(code: string) {
-        return this.codeToHtml(code, 'ansi')
-      }
-    })
+    return highlighter
   }
 }
 
@@ -60,7 +55,6 @@ export const rehypeParseCodeMeta: Plugin<
       const [codeEl] = node.children as Element[]
       // @ts-expect-error fixme
       const meta = codeEl.data?.meta
-
       node.__filename = meta?.match(CODE_BLOCK_FILENAME_REGEX)?.[1]
       node.properties['data-filename'] = node.__filename
 
