@@ -96,13 +96,16 @@ export const rehypeAttachCodeMeta: Plugin<[], any> = () => ast => {
         preEl.attributes.push(
           ...Object.entries(node.properties)
             .map(([name, value]) => {
+              if (name === 'style') {
+                return null
+              }
               return {
                 type: 'mdxJsxAttribute',
                 name,
                 value
               }
             })
-            .filter(attr => attr.value !== undefined)
+            .filter(Boolean)
         )
       }
     } else {
