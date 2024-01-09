@@ -118,19 +118,31 @@ exports[`Page Process > should match i18n site page maps 1`] = `
       "children": [
         {
           "data": {
-            "swr-v1": {
+            "*": {
               "theme": {
                 "breadcrumb": true,
+                "topContent": [Function],
               },
-              "title": "Announcing SWR 1.0",
             },
           },
         },
         {
           "frontMatter": {
-            "description": "Almost 2 years ago we open sourced SWR, the tiny data-fetching React library that people love. Today we are reaching another milestone: the 1.0 version of SWR.",
+            "authors": [
+              {
+                "link": "https://twitter.com/shuding_",
+                "name": "Shu Ding",
+              },
+              {
+                "link": "https://twitter.com/huozhi",
+                "name": "Jiachi Liu",
+              },
+            ],
+            "date": 2021-08-27T00:00:00.000Z,
+            "description": "Almost 2 years ago we open sourced SWR, the tiny data-fetching React library that people love. Today we are reaching another milestone: the 1.0 version of SWR",
             "image": "https://assets.vercel.com/image/upload/v1630059453/swr/v1.png",
             "sidebar_label": "SWR V1",
+            "title": "Announcing SWR 1.0",
           },
           "name": "swr-v1",
           "route": "/en/blog/swr-v1",
@@ -923,19 +935,31 @@ exports[`Page Process > should match i18n site page maps 1`] = `
       "children": [
         {
           "data": {
-            "swr-v1": {
+            "*": {
               "theme": {
                 "breadcrumb": true,
+                "topContent": [Function],
               },
-              "title": "Представляем SWR 1.0",
             },
           },
         },
         {
           "frontMatter": {
+            "authors": [
+              {
+                "link": "https://twitter.com/shuding_",
+                "name": "Shu Ding",
+              },
+              {
+                "link": "https://twitter.com/huozhi",
+                "name": "Jiachi Liu",
+              },
+            ],
+            "date": 2021-08-27T00:00:00.000Z,
             "description": "Почти 2 года назад мы сделали SWR — крошечную React библиотеку с открытым исходным кодом для выборки данных, которую люди полюбили. Сегодня мы приближаемся к еще одной вехе: версии 1.0 SWR!",
             "image": "https://assets.vercel.com/image/upload/v1630059453/swr/v1.png",
             "sidebar_label": "SWR V1",
+            "title": "Представляем SWR 1.0",
           },
           "name": "swr-v1",
           "route": "/ru/blog/swr-v1",
