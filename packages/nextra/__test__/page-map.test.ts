@@ -24,7 +24,7 @@ describe('collectPageMap', () => {
     expect(rawJs).toMatchInlineSnapshot(`
       "import examples_swr_site_pages_en_meta from \\"../../../../../examples/swr-site/pages/en/_meta.ts\\";
       import examples_swr_site_pages_en_about_meta from \\"../../../../../examples/swr-site/pages/en/about/_meta.ts\\";
-      import examples_swr_site_pages_en_blog_meta from \\"../../../../../examples/swr-site/pages/en/blog/_meta.ts\\";
+      import examples_swr_site_pages_en_blog_meta from \\"../../../../../examples/swr-site/pages/en/blog/_meta.tsx\\";
       import examples_swr_site_pages_en_docs_meta from \\"../../../../../examples/swr-site/pages/en/docs/_meta.tsx\\";
       import examples_swr_site_pages_en_docs_advanced_meta from \\"../../../../../examples/swr-site/pages/en/docs/advanced/_meta.tsx\\";
       import examples_swr_site_pages_en_examples_meta from \\"../../../../../examples/swr-site/pages/en/examples/_meta.ts\\";
@@ -72,8 +72,17 @@ describe('collectPageMap', () => {
           route: \\"/en/blog/swr-v1\\",
           frontMatter: {
             \\"sidebar_label\\": \\"SWR V1\\",
+            \\"title\\": \\"Announcing SWR 1.0\\",
             \\"image\\": \\"https://assets.vercel.com/image/upload/v1630059453/swr/v1.png\\",
-            \\"description\\": \\"Almost 2 years ago we open sourced SWR, the tiny data-fetching React library that people love. Today we are reaching another milestone: the 1.0 version of SWR.\\"
+            \\"description\\": \\"Almost 2 years ago we open sourced SWR, the tiny data-fetching React library that people love. Today we are reaching another milestone: the 1.0 version of SWR\\",
+            \\"date\\": new Date(1630022400000),
+            \\"authors\\": [{
+              \\"name\\": \\"Shu Ding\\",
+              \\"link\\": \\"https://twitter.com/shuding_\\"
+            }, {
+              \\"name\\": \\"Jiachi Liu\\",
+              \\"link\\": \\"https://twitter.com/huozhi\\"
+            }]
           }
         }]
       }, {
