@@ -1,5 +1,11 @@
 # nextra
 
+## 3.0.0-alpha.11
+
+### Major Changes
+
+- c2ad837d: update to MDX3
+
 ## 3.0.0-alpha.10
 
 ### Patch Changes

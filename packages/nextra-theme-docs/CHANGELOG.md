@@ -1,5 +1,22 @@
 # nextra-theme-docs
 
+## 3.0.0-alpha.11
+
+### Major Changes
+
+- c2ad837d: update to MDX3
+
+### Minor Changes
+
+- eb943d00: add `theme.topContent` and `theme.bottomContent`
+
+### Patch Changes
+
+- eb943d00: hardcode flexsearch version to 0.7.31, because package is broken on
+  0.7.41
+- Updated dependencies [c2ad837d]
+  - nextra@3.0.0-alpha.11
+
 ## 3.0.0-alpha.10
 
 ### Patch Changes
