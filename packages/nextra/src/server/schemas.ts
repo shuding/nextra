@@ -1,9 +1,31 @@
 import type { ProcessorOptions } from '@mdx-js/mdx'
 import type { MathJax3Config } from 'better-react-mathjax'
+import type { FC, ReactNode } from 'react'
+import { isValidElement } from 'react'
 import type { Options as RehypeKatexOptions } from 'rehype-katex'
 import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
 import { z } from 'zod'
 import type { PageOpts } from '../types'
+
+function isFunction(value: unknown): boolean {
+  return typeof value === 'function'
+}
+
+export const fc = [isFunction, { message: 'Must be React.FC' }] as const
+
+function isReactNode(value: unknown): boolean {
+  return (
+    value == null ||
+    typeof value === 'string' ||
+    isFunction(value) ||
+    isValidElement(value as any)
+  )
+}
+
+export const reactNode = [
+  isReactNode,
+  { message: 'Must be React.ReactNode or React.FC' }
+] as const
 
 export const searchSchema = z.boolean().or(
   z.strictObject({
@@ -96,7 +118,9 @@ export const pageThemeSchema = z.strictObject({
   sidebar: z.boolean(),
   timestamp: z.boolean(),
   toc: z.boolean(),
-  typesetting: z.enum(['default', 'article'])
+  typesetting: z.enum(['default', 'article']),
+  topContent: z.custom<ReactNode | FC>(...reactNode),
+  bottomContent: z.custom<ReactNode | FC>(...reactNode)
 })
 
 /**

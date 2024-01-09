@@ -1,21 +1,8 @@
+import { fc, reactNode } from 'nextra/schemas'
 import type { FC, ReactNode } from 'react'
-import { isValidElement } from 'react'
 import { z } from 'zod'
 import type { NavBarProps } from './components/navbar'
 import type { TOCProps } from './components/toc'
-
-function isReactNode(value: unknown): boolean {
-  return (
-    value == null ||
-    typeof value === 'string' ||
-    isFunction(value) ||
-    isValidElement(value as any)
-  )
-}
-
-function isFunction(value: unknown): boolean {
-  return typeof value === 'function'
-}
 
 const i18nSchema = /* @__PURE__ */ (() =>
   z.array(
@@ -25,12 +12,6 @@ const i18nSchema = /* @__PURE__ */ (() =>
       name: z.string()
     })
   ))()
-
-const reactNode = [
-  isReactNode,
-  { message: 'Must be React.ReactNode or React.FC' }
-] as const
-const fc = [isFunction, { message: 'Must be React.FC' }] as const
 
 export const themeOptionsSchema = /* @__PURE__ */ (() =>
   z.strictObject({
