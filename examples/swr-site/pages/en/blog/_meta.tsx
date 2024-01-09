@@ -39,8 +39,6 @@ export function Author({ name, link }) {
   )
 }
 
-
-
 function TopContent() {
   const config = useConfig()
   return (
