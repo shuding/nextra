@@ -444,7 +444,7 @@ importers:
         specifier: ^5.0.0
         version: 5.0.0
       flexsearch:
-        specifier: ^0.7.31
+        specifier: 0.7.31
         version: 0.7.31
       focus-visible:
         specifier: ^5.2.0

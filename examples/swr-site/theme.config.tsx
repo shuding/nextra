@@ -75,6 +75,7 @@ const config: DocsThemeConfig = {
   editLink: {
     content: function useText() {
       const { locale } = useRouter()
+      // @ts-expect-error Type "undefined" cannot be used as an index type
       return EDIT_TEXT[locale]
     }
   },
@@ -96,8 +97,10 @@ const config: DocsThemeConfig = {
           rel="noreferrer"
           target="_blank"
           className="flex items-center gap-2 font-semibold"
+          // @ts-expect-error Type "undefined" cannot be used as an index type
           href={FOOTER_LINK[locale]}
         >
+          {/* @ts-expect-error Type "undefined" cannot be used as an index type */}
           {FOOTER_LINK_TEXT[locale]}
         </a>
       )
@@ -164,6 +167,7 @@ const config: DocsThemeConfig = {
         <SWRLogo className="h-3" />
         <span
           className="max-md:hidden select-none font-extrabold ltr:ml-2 rtl:mr-2"
+          // @ts-expect-error Type "undefined" cannot be used as an index type
           title={`SWR: ${TITLE[locale] || ''}`}
         >
           SWR

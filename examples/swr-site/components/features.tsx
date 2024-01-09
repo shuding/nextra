@@ -41,6 +41,10 @@ const FEATURES_WITH_TRANSLATIONS = {
 
 export default function Features() {
   const { locale, defaultLocale } = useRouter()
+
+  if (!locale) throw new Error('locale is undefined')
+  if (!defaultLocale) throw new Error('defaultLocale is undefined')
+
   const featureText = key =>
     FEATURES_WITH_TRANSLATIONS[locale]?.[key] ??
     FEATURES_WITH_TRANSLATIONS[defaultLocale][key] // Fallback for missing translations

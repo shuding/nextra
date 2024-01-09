@@ -40,7 +40,7 @@
     "@popperjs/core": "^2.11.8",
     "clsx": "^2.0.0",
     "escape-string-regexp": "^5.0.0",
-    "flexsearch": "^0.7.31",
+    "flexsearch": "0.7.31",
     "focus-visible": "^5.2.0",
     "intersection-observer": "^0.12.2",
     "next-themes": "^0.2.1",
