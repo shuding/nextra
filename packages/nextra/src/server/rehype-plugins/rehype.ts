@@ -99,6 +99,13 @@ export const rehypeAttachCodeMeta: Plugin<[], any> = () => ast => {
               if (name === 'style') {
                 return null
               }
+              if (name === 'className') {
+                return {
+                  type: 'mdxJsxAttribute',
+                  name,
+                  value: Array.isArray(value) ? value?.join(' ') : value
+                }
+              }
               return {
                 type: 'mdxJsxAttribute',
                 name,
