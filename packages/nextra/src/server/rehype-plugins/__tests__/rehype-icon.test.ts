@@ -42,13 +42,13 @@ describe('rehypeIcon', () => {
         }
         return (
           <>
-            <_components.pre icon={CssIcon} data-language=\\"css\\" data-copy=\\"\\">
+            <_components.pre icon={CssIcon} className tabIndex=\\"0\\" data-language=\\"css\\" data-copy=\\"\\">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {'\\\\n'}
-            <_components.pre icon={CssIcon} data-language=\\"css\\" data-copy=\\"\\">
+            <_components.pre icon={CssIcon} className tabIndex=\\"0\\" data-language=\\"css\\" data-copy=\\"\\">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
@@ -79,55 +79,55 @@ describe('rehypeIcon', () => {
         }
         return (
           <>
-            <_components.pre icon={JavaScriptIcon} data-language=\\"js\\" data-copy=\\"\\">
+            <_components.pre icon={JavaScriptIcon} className tabIndex=\\"0\\" data-language=\\"js\\" data-copy=\\"\\">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {'\\\\n'}
-            <_components.pre icon={JavaScriptIcon} data-language=\\"jsx\\" data-copy=\\"\\">
+            <_components.pre icon={JavaScriptIcon} className tabIndex=\\"0\\" data-language=\\"jsx\\" data-copy=\\"\\">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {'\\\\n'}
-            <_components.pre icon={TypeScriptIcon} data-language=\\"ts\\" data-copy=\\"\\">
+            <_components.pre icon={TypeScriptIcon} className tabIndex=\\"0\\" data-language=\\"ts\\" data-copy=\\"\\">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {'\\\\n'}
-            <_components.pre icon={TypeScriptIcon} data-language=\\"tsx\\" data-copy=\\"\\">
+            <_components.pre icon={TypeScriptIcon} className tabIndex=\\"0\\" data-language=\\"tsx\\" data-copy=\\"\\">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {'\\\\n'}
-            <_components.pre icon={MarkdownIcon} data-language=\\"md\\" data-copy=\\"\\">
+            <_components.pre icon={MarkdownIcon} className tabIndex=\\"0\\" data-language=\\"md\\" data-copy=\\"\\">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {'\\\\n'}
-            <_components.pre icon={MdxIcon} data-language=\\"mdx\\" data-copy=\\"\\">
+            <_components.pre icon={MdxIcon} className tabIndex=\\"0\\" data-language=\\"mdx\\" data-copy=\\"\\">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {'\\\\n'}
-            <_components.pre icon={TerminalIcon} data-language=\\"sh\\" data-copy=\\"\\">
+            <_components.pre icon={TerminalIcon} className tabIndex=\\"0\\" data-language=\\"sh\\" data-copy=\\"\\">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {'\\\\n'}
-            <_components.pre icon={TerminalIcon} data-language=\\"bash\\" data-copy=\\"\\">
+            <_components.pre icon={TerminalIcon} className tabIndex=\\"0\\" data-language=\\"bash\\" data-copy=\\"\\">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {'\\\\n'}
-            <_components.pre icon={CssIcon} data-language=\\"css\\" data-copy=\\"\\">
+            <_components.pre icon={CssIcon} className tabIndex=\\"0\\" data-language=\\"css\\" data-copy=\\"\\">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
