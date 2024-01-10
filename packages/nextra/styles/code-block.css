@@ -110,6 +110,7 @@ pre code {
   user-select: none;
   text-align: left;
   box-shadow: var(--twoslash-popup-shadow);
+  @apply dark:_bg-black
 }
 
 .twoslash .twoslash-query-presisted .twoslash-popup-info {
@@ -138,6 +139,7 @@ pre code {
   width: 6px;
   height: 6px;
   pointer-events: none;
+  @apply dark:_bg-black
 }
 
 .twoslash .twoslash-popup-jsdoc {
@@ -187,6 +189,7 @@ pre code {
   flex-direction: column;
   gap: 4px;
   box-shadow: var(--twoslash-popup-shadow);
+  @apply dark:_bg-black
 }
 .twoslash .twoslash-completions-list ul:hover {
   user-select: auto;
@@ -209,6 +212,7 @@ pre code {
 }
 .twoslash .twoslash-completions-list ul li span.twoslash-completions-unmatched {
   color: var(--twoslash-unmatched-color);
+  @apply dark:_text-white
 }
 .twoslash .twoslash-completions-list ul .deprecated {
   text-decoration: line-through;
@@ -222,6 +226,7 @@ pre code {
   color: var(--twoslash-unmatched-color);
   width: 1em;
   flex: none;
+  @apply dark:_text-white
 }
 /* Custom Tags */
 .twoslash .twoslash-tag-line {
