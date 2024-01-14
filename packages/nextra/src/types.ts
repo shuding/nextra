@@ -111,11 +111,14 @@ export type NextraInternalGlobal = typeof globalThis & {
   [NEXTRA_INTERNAL]: {
     pageMap: PageMapItem[]
     route: string
-    context: Record<string, {
-      Content: NextraMDXContent;
-      pageOpts: PageOpts,
-      useTOC: UseTOC
-    }>
+    context: Record<
+      string,
+      {
+        Content: NextraMDXContent
+        pageOpts: PageOpts
+        useTOC: UseTOC
+      }
+    >
     Layout: FC<NextraThemeLayoutProps>
     themeConfig?: ThemeConfig
   }
