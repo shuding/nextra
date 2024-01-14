@@ -1,6 +1,6 @@
 import cn from 'clsx'
 import { ArrowRightIcon } from 'nextra/icons'
-import type { Item } from 'nextra/normalize-pages'
+import type { PageItem } from 'nextra/normalize-pages'
 import type { ReactElement } from 'react'
 import { useConfig } from '../contexts'
 import type { DocsThemeConfig } from '../index'
@@ -8,7 +8,7 @@ import { Anchor } from './anchor'
 
 interface NavLinkProps {
   currentIndex: number
-  flatDirectories: Item[]
+  flatDirectories: PageItem[]
 }
 
 const classes = {
@@ -44,7 +44,8 @@ export const NavLinks = ({
     >
       {prev && (
         <Anchor
-          href={prev.route}
+          href={prev.href || prev.route}
+          newWindow={prev.newWindow}
           title={prev.title}
           className={cn(classes.link, 'ltr:nx-pr-4 rtl:nx-pl-4')}
         >
@@ -54,7 +55,8 @@ export const NavLinks = ({
       )}
       {next && (
         <Anchor
-          href={next.route}
+          href={next.href || next.route}
+          newWindow={next.newWindow}
           title={next.title}
           className={cn(
             classes.link,
