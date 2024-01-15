@@ -12,6 +12,7 @@ import remarkFrontmatter from 'remark-frontmatter'
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 import remarkReadingTime from 'remark-reading-time'
+import remarkSmartypants from 'remark-smartypants'
 import type { Pluggable, Plugin } from 'unified'
 import type {
   FrontMatter,
@@ -251,7 +252,8 @@ export async function compileMdx(
             replace: '',
             excludeExternalLinks: true
           }
-        ] satisfies Pluggable
+        ] satisfies Pluggable,
+        remarkSmartypants
       ].filter(truthy),
       rehypePlugins: [
         ...(rehypePlugins || []),
