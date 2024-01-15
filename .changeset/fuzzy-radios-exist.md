@@ -2,4 +2,4 @@
 'nextra': minor
 ---
 
-dd
+add `remark-smartypants`
