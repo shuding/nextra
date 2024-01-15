@@ -2,6 +2,46 @@ import { compileMdx } from '../../compile.js'
 import { clean } from '../../../../__test__/test-utils.js'
 
 describe('remarkStaticImages', () => {
+  it.only('should insert same import only once', async () => {
+    const { result } = await compileMdx(
+      `
+![][/foo.png]
+
+![][/foo.png]`, {
+        mdxOptions: {
+          jsx: true,
+          outputFormat: 'program'
+        },
+        staticImage: true
+      }
+    )
+
+    expect(clean(result)).resolves.toMatchInlineSnapshot(`
+      "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+      const title = ''
+      const frontMatter = {}
+      export function useTOC(props) {
+        return []
+      }
+      function MDXLayout(props) {
+        const _components = {
+          p: 'p',
+          ..._provideComponents(),
+          ...props.components
+        }
+        return (
+          <>
+            <_components.p>{'![][/foo.png]'}</_components.p>
+            {'\\\\n'}
+            <_components.p>{'![][/foo.png]'}</_components.p>
+          </>
+        )
+      }
+      "
+    `)
+  })
+
+
   it('should work with link definitions', async () => {
     const { result } = await compileMdx(
       `
@@ -13,7 +53,8 @@ describe('remarkStaticImages', () => {
         mdxOptions: {
           jsx: true,
           outputFormat: 'program'
-        }
+        },
+        staticImage: true
       }
     )
 
