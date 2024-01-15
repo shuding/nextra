@@ -59,6 +59,7 @@ module.exports = {
         'prefer-arrow-callback': ['error', { allowNamedFunctions: true }],
         'unicorn/prefer-at': 'error',
         'sonarjs/no-small-switch': 'error',
+        'prefer-const': ['error', { destructuring: 'all' }],
         // todo: enable
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-non-null-assertion': 'off',
