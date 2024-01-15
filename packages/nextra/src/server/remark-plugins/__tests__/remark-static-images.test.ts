@@ -1,5 +1,5 @@
-import { compileMdx } from '../../compile.js'
 import { clean } from '../../../../__test__/test-utils.js'
+import { compileMdx } from '../../compile.js'
 
 describe('remarkStaticImages', () => {
   it('should insert same import only once', async () => {
@@ -9,7 +9,8 @@ describe('remarkStaticImages', () => {
 
 ![](../bar.jpeg)
 
-![](../foo.png)`, {
+![](../foo.png)`,
+      {
         mdxOptions: {
           jsx: true,
           outputFormat: 'program'
@@ -54,7 +55,6 @@ describe('remarkStaticImages', () => {
     `)
   })
 
-
   it('should work with link definitions', async () => {
     const { result } = await compileMdx(
       `
@@ -69,7 +69,8 @@ describe('remarkStaticImages', () => {
 ![External][external-link-def]
 
 [link-def]: ../foo.png
-[external-link-def]: https://foo.png`, {
+[external-link-def]: https://foo.png`,
+      {
         mdxOptions: {
           jsx: true,
           outputFormat: 'program'
