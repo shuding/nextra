@@ -222,18 +222,11 @@ import { pageMap } from '${slash(pageMapPath)}'
 ${isAppFileFromNodeModules ? cssImports : ''}
 ${finalResult}
 
-const hoc = HOC_MDXWrapper(
+export default HOC_MDXWrapper(
   MDXLayout,
   '${route}',
   ${stringifiedPageOpts},pageMap,frontMatter,title},
   typeof RemoteContent === 'undefined' ? useTOC : RemoteContent.useTOC
-)
-
-// Exporting Capitalized function make hot works
-export default function HOC(props) {
-  return hoc(props)
-}
-`
-
+)`
   return rawJs
 }
