@@ -62,11 +62,14 @@ describe('remarkStaticImages', () => {
 
 ![](../foo.png)
 
-![Two][link-def]
-
 ![](./bar.svg)
 
-[link-def]: ../foo.png`, {
+![Two][link-def]
+
+![External][external-link-def]
+
+[link-def]: ../foo.png
+[external-link-def]: https://foo.png`, {
         mdxOptions: {
           jsx: true,
           outputFormat: 'program'
@@ -102,11 +105,15 @@ describe('remarkStaticImages', () => {
             </_components.p>
             {'\\\\n'}
             <_components.p>
+              <_components.img src={__img1} />
+            </_components.p>
+            {'\\\\n'}
+            <_components.p>
               <_components.img alt=\\"Two\\" placeholder=\\"blur\\" src={__img0} />
             </_components.p>
             {'\\\\n'}
             <_components.p>
-              <_components.img src={__img1} />
+              <_components.img src=\\"https://foo.png\\" alt=\\"External\\" />
             </_components.p>
           </>
         )
