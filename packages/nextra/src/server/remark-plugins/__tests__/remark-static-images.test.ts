@@ -18,6 +18,8 @@ describe('remarkStaticImages', () => {
 
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
       "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+      import __img0 from '../foo.png'
+      import __img1 from '../foo.png'
       const title = ''
       const frontMatter = {}
       export function useTOC(props) {
@@ -25,15 +27,20 @@ describe('remarkStaticImages', () => {
       }
       function MDXLayout(props) {
         const _components = {
+          img: 'img',
           p: 'p',
           ..._provideComponents(),
           ...props.components
         }
         return (
           <>
-            <_components.p>{'![][/foo.png]'}</_components.p>
+            <_components.p>
+              <_components.img placeholder=\\"blur\\" src={__img0} />
+            </_components.p>
             {'\\\\n'}
-            <_components.p>{'![][/foo.png]'}</_components.p>
+            <_components.p>
+              <_components.img placeholder=\\"blur\\" src={__img1} />
+            </_components.p>
           </>
         )
       }
