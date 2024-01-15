@@ -1,4 +1,5 @@
 import { compileMdx } from '../../compile.js'
+import { clean } from '../../../../__test__/test-utils.js'
 
 describe('remarkStaticImages', () => {
   it('should work with link definitions', async () => {
@@ -10,35 +11,38 @@ describe('remarkStaticImages', () => {
 
 [link-def]: /favicon/android-chrome-512x512.png`, {
         mdxOptions: {
-          jsx: true
+          jsx: true,
+          outputFormat: 'program'
         }
       }
     )
 
-    expect(result).toMatchInlineSnapshot(`
-      "/*@jsxRuntime automatic @jsxImportSource react*/
-      \\"use strict\\";
-      const {useMDXComponents: _provideComponents} = arguments[0];
-      const title = \\"\\";
-      const frontMatter = {};
-      function useTOC(props) {
-        return [];
+    expect(clean(result)).resolves.toMatchInlineSnapshot(`
+      "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+      const title = ''
+      const frontMatter = {}
+      export function useTOC(props) {
+        return []
       }
-      function _createMdxContent(props) {
+      function MDXLayout(props) {
         const _components = {
-          img: \\"img\\",
-          p: \\"p\\",
+          img: 'img',
+          p: 'p',
           ..._provideComponents(),
           ...props.components
-        };
-        return <><_components.p><_components.img src=\\"/favicon/android-chrome-512x512.png\\" alt=\\"\\" /></_components.p>{\\"\\\\n\\"}<_components.p><_components.img src=\\"/favicon/android-chrome-512x512.png\\" alt=\\"\\" /></_components.p></>;
+        }
+        return (
+          <>
+            <_components.p>
+              <_components.img src=\\"/favicon/android-chrome-512x512.png\\" alt=\\"\\" />
+            </_components.p>
+            {'\\\\n'}
+            <_components.p>
+              <_components.img src=\\"/favicon/android-chrome-512x512.png\\" alt=\\"\\" />
+            </_components.p>
+          </>
+        )
       }
-      return {
-        title,
-        frontMatter,
-        useTOC,
-        default: _createMdxContent
-      };
       "
     `)
   })
