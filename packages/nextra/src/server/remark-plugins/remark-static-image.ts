@@ -1,7 +1,6 @@
 import path from 'node:path'
 import type { ImportDeclaration } from 'estree'
-import fs from 'graceful-fs'
-import type { Root } from 'mdast'
+import type { Definition, Image, ImageReference, Root } from 'mdast'
 import slash from 'slash'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
@@ -14,14 +13,31 @@ import { truthy } from '../utils.js'
  */
 const VALID_BLUR_EXT = ['.jpeg', '.png', '.webp', '.avif', '.jpg']
 
+const VARIABLE_PREFIX = '__img'
+
 // Based on the remark-embed-images project
 // https://github.com/remarkjs/remark-embed-images
 export const remarkStaticImage: Plugin<[], Root> = () => ast => {
-  const importsToInject: { variableName: string; importPath: string }[] = []
+  const definitionNodes: Definition[] = []
 
-  visit(ast, 'image', node => {
+  const imageImports = new Set<string>()
+  const imageNodes: (Image | ImageReference)[] = []
+
+  visit(ast, 'definition', node => {
+    definitionNodes.push(node)
+  })
+
+  visit(ast, ['image', 'imageReference'], _node => {
+    const node = _node as Image | ImageReference
     // https://github.com/shuding/nextra/issues/1344
-    let url = decodeURI(node.url)
+    let url = decodeURI(
+      node.type === 'image'
+        ? node.url
+        : definitionNodes.find(
+            definition => definition.identifier === node.identifier
+          )?.url ?? ''
+    )
+
     if (!url) {
       return
     }
@@ -33,15 +49,22 @@ export const remarkStaticImage: Plugin<[], Root> = () => ast => {
 
     if (url.startsWith('/')) {
       const urlPath = path.join(PUBLIC_DIR, url)
-      if (!fs.existsSync(urlPath)) {
-        return
-      }
       url = slash(urlPath)
     }
-    // Unique variable name for the given static image URL
-    const variableName = `__img${importsToInject.length}`
+    imageImports.add(url)
+    // @ts-expect-error -- we assign explicitly
+    node.url = url
+    imageNodes.push(node)
+  })
+
+  const imageUrls = [...imageImports]
+
+  for (const node of imageNodes) {
+    // @ts-expect-error -- we assigned explicitly
+    const { url } = node
+    const imageIndex = imageUrls.indexOf(url)
+    const variableName = `${VARIABLE_PREFIX}${imageIndex}`
     const hasBlur = VALID_BLUR_EXT.some(ext => url.endsWith(ext))
-    importsToInject.push({ variableName, importPath: url })
     // Replace the image node with an MDX component node (Next.js Image)
     Object.assign(node, {
       type: 'mdxJsxFlowElement',
@@ -78,12 +101,12 @@ export const remarkStaticImage: Plugin<[], Root> = () => ast => {
         }
       ].filter(truthy)
     })
-  })
+  }
 
-  if (importsToInject.length) {
+  if (imageUrls.length) {
     ast.children.unshift(
-      ...importsToInject.map(
-        ({ variableName, importPath }) =>
+      ...imageUrls.map(
+        (imageUrl, index) =>
           ({
             type: 'mdxjsEsm',
             data: {
@@ -91,11 +114,14 @@ export const remarkStaticImage: Plugin<[], Root> = () => ast => {
                 body: [
                   {
                     type: 'ImportDeclaration',
-                    source: { type: 'Literal', value: importPath },
+                    source: { type: 'Literal', value: imageUrl },
                     specifiers: [
                       {
                         type: 'ImportDefaultSpecifier',
-                        local: { type: 'Identifier', name: variableName }
+                        local: {
+                          type: 'Identifier',
+                          name: `${VARIABLE_PREFIX}${index}`
+                        }
                       }
                     ]
                   } satisfies ImportDeclaration
