@@ -215,6 +215,8 @@ export async function compileMdx(
       format,
       outputFormat,
       providerImportSource: 'nextra/mdx',
+      // Fix TypeError: _jsx is not a function for remote content
+      development: process.env.NODE_ENV === 'development',
       remarkPlugins: [
         ...(remarkPlugins || []),
         remarkMermaid, // should be before remarkRemoveImports because contains `import { Mermaid } from ...`
