@@ -5,9 +5,9 @@ describe('remarkStaticImages', () => {
   it.only('should insert same import only once', async () => {
     const { result } = await compileMdx(
       `
-![][/foo.png]
+![](../foo.png)
 
-![][/foo.png]`, {
+![](../foo.png)`, {
         mdxOptions: {
           jsx: true,
           outputFormat: 'program'
