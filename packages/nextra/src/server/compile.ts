@@ -25,7 +25,6 @@ import {
   CWD,
   DEFAULT_LOCALE,
   ERROR_ROUTES,
-  IS_PRODUCTION,
   MARKDOWN_URL_EXTENSION_REGEX
 } from './constants.js'
 import {
@@ -217,7 +216,7 @@ export async function compileMdx(
       outputFormat,
       providerImportSource: 'nextra/mdx',
       // Fix TypeError: _jsx is not a function for remote content
-      development: !IS_PRODUCTION,
+      development: process.env.NODE_ENV === 'development',
       remarkPlugins: [
         ...(remarkPlugins || []),
         remarkMermaid, // should be before remarkRemoveImports because contains `import { Mermaid } from ...`
