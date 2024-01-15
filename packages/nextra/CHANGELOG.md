@@ -1,5 +1,15 @@
 # nextra
 
+## 3.0.0-alpha.12
+
+### Minor Changes
+
+- 3644e1c2: add `remark-smartypants`
+
+### Patch Changes
+
+- 57bc0e2a: fix reload of nextra layout on route change, reported by sound.xyz
+
 ## 3.0.0-alpha.11
 
 ### Major Changes
