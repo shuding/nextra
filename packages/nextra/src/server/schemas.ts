@@ -5,7 +5,7 @@ import { isValidElement } from 'react'
 import type { Options as RehypeKatexOptions } from 'rehype-katex'
 import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
 import { z } from 'zod'
-import type { PageOpts } from '../types'
+import type { PageMapItem } from '../types'
 
 function isFunction(value: unknown): boolean {
   return typeof value === 'function'
@@ -94,10 +94,11 @@ export const nextraConfigSchema = z
      */
     transform: z.custom<Transform>(),
     /**
-     * A function to modify the `pageOpts` prop passed to theme layouts.
+     * A function to modify the `pageMap` passed to theme layouts.
      * @experimental
      */
-    transformPageOpts: z.custom<(pageOpts: PageOpts) => PageOpts>(),
+    transformPageMap:
+      z.custom<(pageMap: PageMapItem[], locale: string) => PageMapItem[]>(),
     mdxOptions: z.strictObject({
       rehypePlugins: z.custom<ProcessorOptions['rehypePlugins']>(),
       remarkPlugins: z.custom<ProcessorOptions['remarkPlugins']>(),

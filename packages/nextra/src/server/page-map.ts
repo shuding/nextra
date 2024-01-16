@@ -6,7 +6,7 @@ import gracefulFs from 'graceful-fs'
 import grayMatter from 'gray-matter'
 import pLimit from 'p-limit'
 import slash from 'slash'
-import type { PageMapItem } from '../types'
+import type { NextraConfig, PageMapItem } from '../types'
 import {
   CHUNKS_DIR,
   CWD,
@@ -132,7 +132,7 @@ async function collectFiles({
           // }
 
           return {
-            name: path.parse(filePath).name,
+            name,
             route: fileRoute,
             frontMatter
           }
@@ -208,11 +208,13 @@ function convertPageMapToAst(pageMap: PageMapItem[]): ArrayExpression {
 export async function collectPageMap({
   dir,
   route = '/',
-  locale = ''
+  locale = '',
+  transformPageMap
 }: {
   dir: string
   route?: string
   locale?: string
+  transformPageMap?: NextraConfig['transformPageMap']
 }): Promise<string> {
   const { pageMap, imports, dynamicMetaImports } = await collectFiles({
     dir,
@@ -220,7 +222,9 @@ export async function collectPageMap({
     isFollowingSymlink: false
   })
 
-  const pageMapAst = convertPageMapToAst(pageMap)
+  const pageMapAst = convertPageMapToAst(
+    transformPageMap ? transformPageMap(pageMap, locale) : pageMap
+  )
 
   const metaImportsAST: ImportDeclaration[] = imports
     // localeCompare to avoid race condition
