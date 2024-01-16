@@ -1,11 +1,12 @@
 import path from 'node:path'
-import type { ArrayExpression, Expression, ImportDeclaration } from 'estree'
+import type { ArrayExpression, ImportDeclaration } from 'estree'
 import { toJs } from 'estree-util-to-js'
 import { valueToEstree } from 'estree-util-value-to-estree'
 import gracefulFs from 'graceful-fs'
 import grayMatter from 'gray-matter'
 import pLimit from 'p-limit'
 import slash from 'slash'
+import type { PageMapItem } from '../types'
 import {
   CHUNKS_DIR,
   CWD,
@@ -57,7 +58,7 @@ async function collectFiles({
   dynamicMetaImports = [],
   isFollowingSymlink
 }: CollectFilesOptions): Promise<{
-  pageMapAst: ArrayExpression
+  pageMap: PageMapItem[]
   imports: Import[]
   dynamicMetaImports: DynamicImport[]
   hasDynamicPage: boolean
@@ -95,7 +96,7 @@ async function collectFiles({
 
       if (isDirectory) {
         if (fileRoute === '/api') return
-        const { pageMapAst, hasDynamicPage } = await collectFiles({
+        const { pageMap: children, hasDynamicPage } = await collectFiles({
           dir: filePath,
           route: fileRoute,
           imports,
@@ -103,40 +104,38 @@ async function collectFiles({
           isFollowingSymlink
         })
 
-        const { elements } = pageMapAst
+        if (!children.length && !hasDynamicPage) return
 
-        if (!elements.length && !hasDynamicPage) return
-
-        return createAstObject({
+        return {
           name: f.name,
           route: fileRoute,
-          children: pageMapAst
-        })
+          children
+        }
       }
 
       // add concurrency because folder can contain a lot of files
       return limit(async () => {
         if (MARKDOWN_EXTENSION_REGEX.test(ext)) {
-          let frontMatter: Expression
+          // let frontMatter: Expression
 
-          if (IMPORT_FRONTMATTER) {
-            const importName = cleanFileName(filePath)
-            imports.push({ importName, filePath })
-            frontMatter = { type: 'Identifier', name: importName }
-          } else {
-            const content = await fs.readFile(filePath, 'utf8')
-            const { data } = grayMatter(content)
-            frontMatter = valueToEstree({
-              sidebar_label: pageTitleFromFilename(name),
-              ...data
-            })
+          // if (IMPORT_FRONTMATTER) {
+          // const importName = cleanFileName(filePath)
+          // imports.push({ importName, filePath })
+          // frontMatter = { type: 'Identifier', name: importName }
+          // } else {
+          const content = await fs.readFile(filePath, 'utf8')
+          const { data } = grayMatter(content)
+          const frontMatter = {
+            sidebar_label: pageTitleFromFilename(name),
+            ...data
           }
+          // }
 
-          return createAstObject({
+          return {
             name: path.parse(filePath).name,
             route: fileRoute,
             frontMatter
-          })
+          }
         }
 
         const fileName = name + ext
@@ -157,17 +156,16 @@ async function collectFiles({
             dynamicMetaImports.push({ importName, route })
             return
           }
-          return createAstObject({
-            data: { type: 'Identifier', name: importName }
-          })
+          return { data: importName }
         }
       })
     })
 
-  const items = (await Promise.all(promises)).filter(truthy)
+  const pageMap = (await Promise.all(promises)).filter(truthy)
 
   return {
-    pageMapAst: { type: 'ArrayExpression', elements: items },
+    // @ts-expect-error -- fixme
+    pageMap,
     imports,
     dynamicMetaImports,
     hasDynamicPage
@@ -182,6 +180,31 @@ function getImportPath(filePath: string) {
   return slash(path.relative(CHUNKS_DIR, filePath))
 }
 
+function convertPageMapToAst(pageMap: PageMapItem[]): ArrayExpression {
+  const elements = pageMap.map(item => {
+    if ('children' in item) {
+      return createAstObject({
+        name: item.name,
+        route: item.route,
+        children: convertPageMapToAst(item.children)
+      })
+    }
+    if ('route' in item) {
+      return createAstObject({
+        name: item.name,
+        route: item.route,
+        frontMatter: valueToEstree(item.frontMatter)
+      })
+    }
+    return createAstObject({
+      // @ts-expect-error -- item.data is string
+      data: { type: 'Identifier', name: item.data }
+    })
+  })
+
+  return { type: 'ArrayExpression', elements }
+}
+
 export async function collectPageMap({
   dir,
   route = '/',
@@ -191,11 +214,13 @@ export async function collectPageMap({
   route?: string
   locale?: string
 }): Promise<string> {
-  const { pageMapAst, imports, dynamicMetaImports } = await collectFiles({
+  const { pageMap, imports, dynamicMetaImports } = await collectFiles({
     dir,
     route,
     isFollowingSymlink: false
   })
+
+  const pageMapAst = convertPageMapToAst(pageMap)
 
   const metaImportsAST: ImportDeclaration[] = imports
     // localeCompare to avoid race condition
