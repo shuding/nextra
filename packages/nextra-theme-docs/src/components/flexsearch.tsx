@@ -63,7 +63,9 @@ const loadIndexesImpl = async (
     fetch(`${basePath}/_next/static/chunks/nextra-data-${locale}.json`).then(
       response => response.json() as Promise<SearchData>
     ),
-    import('flexsearch').then(mod => mod.default.Document)
+    import(/* webpackIgnore: true */ 'flexsearch').then(
+      mod => mod.default.Document
+    )
   ])
 
   const pageIndex: PageIndex = new Document({
