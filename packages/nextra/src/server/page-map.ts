@@ -126,7 +126,7 @@ async function collectFiles({
           const content = await fs.readFile(filePath, 'utf8')
           const { data } = grayMatter(content)
           const frontMatter = {
-            sidebar_label: pageTitleFromFilename(name),
+            sidebarTitle: pageTitleFromFilename(name),
             ...data
           }
           // }

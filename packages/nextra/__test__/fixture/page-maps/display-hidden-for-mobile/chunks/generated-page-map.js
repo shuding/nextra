@@ -14,7 +14,7 @@ export const pageMap = [{
         name: "qwe",
         route: "/bar/baz/quz/qwe",
         frontMatter: {
-          "sidebar_label": "Qwe"
+          "sidebarTitle": "Qwe"
         }
       }]
     }]
@@ -23,6 +23,6 @@ export const pageMap = [{
   name: "index",
   route: "/",
   frontMatter: {
-    "sidebar_label": "Index"
+    "sidebarTitle": "Index"
   }
 }];

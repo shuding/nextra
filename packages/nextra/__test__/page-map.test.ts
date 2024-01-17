@@ -41,25 +41,25 @@ describe('collectPageMap', () => {
           name: "a-page",
           route: "/en/about/a-page",
           frontMatter: {
-            "sidebar_label": "A Page"
+            "sidebarTitle": "A Page"
           }
         }, {
           name: "acknowledgement",
           route: "/en/about/acknowledgement",
           frontMatter: {
-            "sidebar_label": "Acknowledgement"
+            "sidebarTitle": "Acknowledgement"
           }
         }, {
           name: "changelog",
           route: "/en/about/changelog",
           frontMatter: {
-            "sidebar_label": "Changelog"
+            "sidebarTitle": "Changelog"
           }
         }, {
           name: "team",
           route: "/en/about/team",
           frontMatter: {
-            "sidebar_label": "Team"
+            "sidebarTitle": "Team"
           }
         }]
       }, {
@@ -71,7 +71,7 @@ describe('collectPageMap', () => {
           name: "swr-v1",
           route: "/en/blog/swr-v1",
           frontMatter: {
-            "sidebar_label": "SWR V1",
+            "sidebarTitle": "SWR V1",
             "title": "Announcing SWR 1.0",
             "image": "https://assets.vercel.com/image/upload/v1630059453/swr/v1.png",
             "description": "Almost 2 years ago we open sourced SWR, the tiny data-fetching React library that people love. Today we are reaching another milestone: the 1.0 version of SWR",
@@ -89,7 +89,7 @@ describe('collectPageMap', () => {
         name: "blog",
         route: "/en/blog",
         frontMatter: {
-          "sidebar_label": "Blog",
+          "sidebarTitle": "Blog",
           "searchable": false
         }
       }, {
@@ -101,7 +101,7 @@ describe('collectPageMap', () => {
           name: "404-500",
           route: "/en/docs/404-500",
           frontMatter: {
-            "sidebar_label": "404 500"
+            "sidebarTitle": "404 500"
           }
         }, {
           name: "advanced",
@@ -112,37 +112,37 @@ describe('collectPageMap', () => {
             name: "cache",
             route: "/en/docs/advanced/cache",
             frontMatter: {
-              "sidebar_label": "Cache"
+              "sidebarTitle": "Cache"
             }
           }, {
             name: "code-highlighting",
             route: "/en/docs/advanced/code-highlighting",
             frontMatter: {
-              "sidebar_label": "Code Highlighting"
+              "sidebarTitle": "Code Highlighting"
             }
           }, {
             name: "dynamic-markdown-import",
             route: "/en/docs/advanced/dynamic-markdown-import",
             frontMatter: {
-              "sidebar_label": "Dynamic Markdown Import"
+              "sidebarTitle": "Dynamic Markdown Import"
             }
           }, {
             name: "file-name.with.DOTS",
             route: "/en/docs/advanced/file-name.with.DOTS",
             frontMatter: {
-              "sidebar_label": "File Name.with.dots"
+              "sidebarTitle": "File Name.with.dots"
             }
           }, {
             name: "images",
             route: "/en/docs/advanced/images",
             frontMatter: {
-              "sidebar_label": "Images"
+              "sidebarTitle": "Images"
             }
           }, {
             name: "markdown-import",
             route: "/en/docs/advanced/markdown-import",
             frontMatter: {
-              "sidebar_label": "Markdown Import"
+              "sidebarTitle": "Markdown Import"
             }
           }, {
             name: "more",
@@ -151,7 +151,7 @@ describe('collectPageMap', () => {
               name: "loooooooooooooooooooong-title",
               route: "/en/docs/advanced/more/loooooooooooooooooooong-title",
               frontMatter: {
-                "sidebar_label": "Loooooooooooooooooooong Title"
+                "sidebarTitle": "Loooooooooooooooooooong Title"
               }
             }, {
               name: "tree",
@@ -160,19 +160,19 @@ describe('collectPageMap', () => {
                 name: "one",
                 route: "/en/docs/advanced/more/tree/one",
                 frontMatter: {
-                  "sidebar_label": "One"
+                  "sidebarTitle": "One"
                 }
               }, {
                 name: "three",
                 route: "/en/docs/advanced/more/tree/three",
                 frontMatter: {
-                  "sidebar_label": "Three"
+                  "sidebarTitle": "Three"
                 }
               }, {
                 name: "two",
                 route: "/en/docs/advanced/more/tree/two",
                 frontMatter: {
-                  "sidebar_label": "Two"
+                  "sidebarTitle": "Two"
                 }
               }]
             }]
@@ -180,158 +180,158 @@ describe('collectPageMap', () => {
             name: "performance",
             route: "/en/docs/advanced/performance",
             frontMatter: {
-              "sidebar_label": "Performance"
+              "sidebarTitle": "Performance"
             }
           }, {
             name: "react-native",
             route: "/en/docs/advanced/react-native",
             frontMatter: {
-              "sidebar_label": "React Native"
+              "sidebarTitle": "React Native"
             }
           }, {
             name: "scrollbar-x",
             route: "/en/docs/advanced/scrollbar-x",
             frontMatter: {
-              "sidebar_label": "Scrollbar X"
+              "sidebarTitle": "Scrollbar X"
             }
           }]
         }, {
           name: "advanced",
           route: "/en/docs/advanced",
           frontMatter: {
-            "sidebar_label": "Advanced"
+            "sidebarTitle": "Advanced"
           }
         }, {
           name: "arguments",
           route: "/en/docs/arguments",
           frontMatter: {
-            "sidebar_label": "Arguments"
+            "sidebarTitle": "Arguments"
           }
         }, {
           name: "callout",
           route: "/en/docs/callout",
           frontMatter: {
-            "sidebar_label": "Callout"
+            "sidebarTitle": "Callout"
           }
         }, {
           name: "change-log",
           route: "/en/docs/change-log",
           frontMatter: {
-            "sidebar_label": "Change Log"
+            "sidebarTitle": "Change Log"
           }
         }, {
           name: "code-block-without-language",
           route: "/en/docs/code-block-without-language",
           frontMatter: {
-            "sidebar_label": "Code Block without Language"
+            "sidebarTitle": "Code Block without Language"
           }
         }, {
           name: "conditional-fetching",
           route: "/en/docs/conditional-fetching",
           frontMatter: {
-            "sidebar_label": "Conditional Fetching"
+            "sidebarTitle": "Conditional Fetching"
           }
         }, {
           name: "custom-header-ids",
           route: "/en/docs/custom-header-ids",
           frontMatter: {
-            "sidebar_label": "Custom Header Ids"
+            "sidebarTitle": "Custom Header Ids"
           }
         }, {
           name: "data-fetching",
           route: "/en/docs/data-fetching",
           frontMatter: {
-            "sidebar_label": "Data Fetching"
+            "sidebarTitle": "Data Fetching"
           }
         }, {
           name: "error-handling",
           route: "/en/docs/error-handling",
           frontMatter: {
-            "sidebar_label": "Error Handling"
+            "sidebarTitle": "Error Handling"
           }
         }, {
           name: "getting-started",
           route: "/en/docs/getting-started",
           frontMatter: {
-            "sidebar_label": "Getting Started"
+            "sidebarTitle": "Getting Started"
           }
         }, {
           name: "global-configuration",
           route: "/en/docs/global-configuration",
           frontMatter: {
-            "sidebar_label": "Global Configuration"
+            "sidebarTitle": "Global Configuration"
           }
         }, {
           name: "middleware",
           route: "/en/docs/middleware",
           frontMatter: {
-            "sidebar_label": "Middleware"
+            "sidebarTitle": "Middleware"
           }
         }, {
           name: "mutation",
           route: "/en/docs/mutation",
           frontMatter: {
-            "sidebar_label": "Mutation"
+            "sidebarTitle": "Mutation"
           }
         }, {
           name: "options",
           route: "/en/docs/options",
           frontMatter: {
-            "sidebar_label": "Options"
+            "sidebarTitle": "Options"
           }
         }, {
           name: "pagination",
           route: "/en/docs/pagination",
           frontMatter: {
-            "sidebar_label": "Pagination"
+            "sidebarTitle": "Pagination"
           }
         }, {
           name: "prefetching",
           route: "/en/docs/prefetching",
           frontMatter: {
-            "sidebar_label": "Prefetching"
+            "sidebarTitle": "Prefetching"
           }
         }, {
           name: "raw-layout",
           route: "/en/docs/raw-layout",
           frontMatter: {
-            "sidebar_label": "Raw Layout"
+            "sidebarTitle": "Raw Layout"
           }
         }, {
           name: "revalidation",
           route: "/en/docs/revalidation",
           frontMatter: {
-            "sidebar_label": "Revalidation"
+            "sidebarTitle": "Revalidation"
           }
         }, {
           name: "suspense",
           route: "/en/docs/suspense",
           frontMatter: {
-            "sidebar_label": "Suspense"
+            "sidebarTitle": "Suspense"
           }
         }, {
           name: "typescript",
           route: "/en/docs/typescript",
           frontMatter: {
-            "sidebar_label": "TypeScript"
+            "sidebarTitle": "TypeScript"
           }
         }, {
           name: "understanding",
           route: "/en/docs/understanding",
           frontMatter: {
-            "sidebar_label": "Understanding"
+            "sidebarTitle": "Understanding"
           }
         }, {
           name: "with-nextjs",
           route: "/en/docs/with-nextjs",
           frontMatter: {
-            "sidebar_label": "With Nextjs"
+            "sidebarTitle": "With Nextjs"
           }
         }, {
           name: "wrap-toc-items",
           route: "/en/docs/wrap-toc-items",
           frontMatter: {
-            "sidebar_label": "Wrap Toc Items"
+            "sidebarTitle": "Wrap Toc Items"
           }
         }]
       }, {
@@ -343,7 +343,7 @@ describe('collectPageMap', () => {
           name: "auth",
           route: "/en/examples/auth",
           frontMatter: {
-            "sidebar_label": "Auth",
+            "sidebarTitle": "Auth",
             "title": "Authentication",
             "full": true
           }
@@ -351,7 +351,7 @@ describe('collectPageMap', () => {
           name: "basic",
           route: "/en/examples/basic",
           frontMatter: {
-            "sidebar_label": "Basic",
+            "sidebarTitle": "Basic",
             "title": "Basic Usage",
             "full": true
           }
@@ -359,7 +359,7 @@ describe('collectPageMap', () => {
           name: "error-handling",
           route: "/en/examples/error-handling",
           frontMatter: {
-            "sidebar_label": "Error Handling",
+            "sidebarTitle": "Error Handling",
             "title": "Error Handling",
             "full": true
           }
@@ -367,13 +367,13 @@ describe('collectPageMap', () => {
           name: "full",
           route: "/en/examples/full",
           frontMatter: {
-            "sidebar_label": "Full"
+            "sidebarTitle": "Full"
           }
         }, {
           name: "infinite-loading",
           route: "/en/examples/infinite-loading",
           frontMatter: {
-            "sidebar_label": "Infinite Loading",
+            "sidebarTitle": "Infinite Loading",
             "title": "Infinite Loading",
             "full": true
           }
@@ -381,7 +381,7 @@ describe('collectPageMap', () => {
           name: "ssr",
           route: "/en/examples/ssr",
           frontMatter: {
-            "sidebar_label": "SSR",
+            "sidebarTitle": "SSR",
             "title": "Next.js SSR",
             "full": true
           }
@@ -390,13 +390,13 @@ describe('collectPageMap', () => {
         name: "foo",
         route: "/en/foo",
         frontMatter: {
-          "sidebar_label": "Foo"
+          "sidebarTitle": "Foo"
         }
       }, {
         name: "index",
         route: "/en",
         frontMatter: {
-          "sidebar_label": "Index",
+          "sidebarTitle": "Index",
           "title": "React Hooks for Data Fetching",
           "searchable": false
         }
@@ -416,7 +416,7 @@ describe('collectPageMap', () => {
         name: "test",
         route: "/en/test",
         frontMatter: {
-          "sidebar_label": "Test"
+          "sidebarTitle": "Test"
         }
       }];
       const dynamicMetaModules = {
@@ -463,13 +463,13 @@ describe('Page Process', () => {
         name: "callout",
         route: "/callout",
         frontMatter: {
-          "sidebar_label": "Callout"
+          "sidebarTitle": "Callout"
         }
       }, {
         name: "tabs",
         route: "/tabs",
         frontMatter: {
-          "sidebar_label": "Tabs"
+          "sidebarTitle": "Tabs"
         }
       }];"
     `)
@@ -519,14 +519,14 @@ describe('Page Process', () => {
           name: "test2",
           route: "/docs/test2",
           frontMatter: {
-            "sidebar_label": "Test2"
+            "sidebarTitle": "Test2"
           }
         }]
       }, {
         name: "test1",
         route: "/test1",
         frontMatter: {
-          "sidebar_label": "Test1"
+          "sidebarTitle": "Test1"
         }
       }];"
     `)

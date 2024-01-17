@@ -212,7 +212,7 @@ describe('normalize-page', () => {
         "activePath": [
           {
             "frontMatter": {
-              "sidebar_label": "Index",
+              "sidebarTitle": "Index",
             },
             "name": "index",
             "route": "/",
@@ -236,7 +236,7 @@ describe('normalize-page', () => {
         "directories": [
           {
             "frontMatter": {
-              "sidebar_label": "Index",
+              "sidebarTitle": "Index",
             },
             "name": "index",
             "route": "/",
@@ -253,7 +253,7 @@ describe('normalize-page', () => {
                     "children": [
                       {
                         "frontMatter": {
-                          "sidebar_label": "Qwe",
+                          "sidebarTitle": "Qwe",
                         },
                         "isUnderCurrentDocsTree": true,
                         "name": "qwe",
@@ -285,7 +285,7 @@ describe('normalize-page', () => {
           },
           {
             "frontMatter": {
-              "sidebar_label": "Index",
+              "sidebarTitle": "Index",
             },
             "isUnderCurrentDocsTree": true,
             "name": "index",
@@ -297,7 +297,7 @@ describe('normalize-page', () => {
         "flatDirectories": [
           {
             "frontMatter": {
-              "sidebar_label": "Qwe",
+              "sidebarTitle": "Qwe",
             },
             "name": "qwe",
             "route": "/bar/baz/quz/qwe",
@@ -306,7 +306,7 @@ describe('normalize-page', () => {
           },
           {
             "frontMatter": {
-              "sidebar_label": "Index",
+              "sidebarTitle": "Index",
             },
             "name": "index",
             "route": "/",
@@ -317,7 +317,7 @@ describe('normalize-page', () => {
         "flatDocsDirectories": [
           {
             "frontMatter": {
-              "sidebar_label": "Qwe",
+              "sidebarTitle": "Qwe",
             },
             "isUnderCurrentDocsTree": true,
             "name": "qwe",
@@ -327,7 +327,7 @@ describe('normalize-page', () => {
           },
           {
             "frontMatter": {
-              "sidebar_label": "Index",
+              "sidebarTitle": "Index",
             },
             "isUnderCurrentDocsTree": true,
             "name": "index",
