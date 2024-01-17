@@ -1,5 +1,4 @@
 import cn from 'clsx'
-// flexsearch types are incorrect, they were overwritten in tsconfig.json
 import FlexSearch from 'flexsearch'
 import type { SearchData } from 'nextra'
 import { useRouter } from 'nextra/hooks'
