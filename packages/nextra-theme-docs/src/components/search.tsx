@@ -249,12 +249,12 @@ export function Search({
         >
           {error ? (
             <span className="_flex _select-none _justify-center _gap-2 _p-8 _text-center _text-sm _text-red-500">
-              <InformationCircleIcon className="_h-5 _w-5" />
+              <InformationCircleIcon className="_size-5" />
               {renderString(themeConfig.search.error)}
             </span>
           ) : loading ? (
             <span className="_flex _select-none _justify-center _gap-2 _p-8 _text-center _text-sm _text-gray-400">
-              <SpinnerIcon className="_h-5 _w-5 _animate-spin" />
+              <SpinnerIcon className="_size-5 _animate-spin" />
               {renderComponent(themeConfig.search.loading)}
             </span>
           ) : results.length > 0 ? (

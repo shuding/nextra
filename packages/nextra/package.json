@@ -89,6 +89,9 @@
       "mdx": [
         "./dist/client/mdx.d.ts"
       ],
+      "remove-links": [
+        "./dist/client/remove-links.d.ts"
+      ],
       "normalize-pages": [
         "./dist/client/normalize-pages.d.ts"
       ]

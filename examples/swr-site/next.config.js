@@ -26,7 +26,7 @@ export function getStaticProps() {
         {
           name: 'virtual-page',
           route: '/en/virtual-page',
-          frontMatter: { sidebar_label: 'Virtual Page' }
+          frontMatter: { sidebarTitle: 'Virtual Page' }
         }
       ]
     }
