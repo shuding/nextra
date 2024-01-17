@@ -6,7 +6,7 @@
 
 - ❌ remove Nextra middleware `nextra/locales`
 
-- ❌ remove `parseFileName` from `nextra/remove-links`
+- ❌ remove `parseFileName` from `nextra/utils`
 
 - ❌ remove `nextra/filter-route-locale`
 
