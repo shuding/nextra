@@ -1,5 +1,24 @@
 # nextra
 
+## 3.0.0-alpha.13
+
+### Minor Changes
+
+- 60ec68c4: improvements for remarkStaticImage:
+
+  - import same image only once
+  - support importing images by markdown image definitions
+
+- 6070b025: rename `frontmatter.sidebar_label` to `frontmatter.sidebarTitle`
+- 8bce16d3: replace `transformPageOpts` nextra option by `transformPageMap`
+- 6070b025: move `removeLinks` function from `nextra-theme-docs` to
+  `nextra/remove-links`
+
+### Patch Changes
+
+- c74ae90a: Fix TypeError: \_jsx is not a function for remote content on
+  development environment
+
 ## 3.0.0-alpha.12
 
 ### Minor Changes
