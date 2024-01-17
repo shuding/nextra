@@ -231,7 +231,7 @@ function Body({ children }: { children: ReactNode }): ReactElement {
       {renderComponent(themeContext.bottomContent)}
       {activeType !== 'page' && themeContext.pagination && (
         <NavLinks
-          flatDirectories={flatDocsDirectories}
+          flatDocsDirectories={flatDocsDirectories}
           currentIndex={activeIndex}
         />
       )}

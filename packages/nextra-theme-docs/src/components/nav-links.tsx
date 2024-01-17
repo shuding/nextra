@@ -9,7 +9,7 @@ import type { DocsThemeConfig } from '../index'
 
 interface NavLinkProps {
   currentIndex: number
-  flatDirectories: Item[]
+  flatDocsDirectories: Item[]
 }
 
 const classes = {
@@ -19,16 +19,16 @@ const classes = {
   icon: cn('_inline _h-5 _shrink-0')
 }
 
-export const NavLinks = ({
-  flatDirectories,
+export function NavLinks({
+  flatDocsDirectories,
   currentIndex
-}: NavLinkProps): ReactElement | null => {
+}: NavLinkProps): ReactElement | null {
   const themeConfig = useThemeConfig()
   const nav = themeConfig.navigation
   const navigation: Exclude<DocsThemeConfig['navigation'], boolean> =
     typeof nav === 'boolean' ? { prev: nav, next: nav } : nav
-  let prev = navigation.prev && flatDirectories[currentIndex - 1]
-  let next = navigation.next && flatDirectories[currentIndex + 1]
+  let prev = navigation.prev && flatDocsDirectories[currentIndex - 1]
+  let next = navigation.next && flatDocsDirectories[currentIndex + 1]
 
   if (prev && !prev.isUnderCurrentDocsTree) prev = false
   if (next && !next.isUnderCurrentDocsTree) next = false
