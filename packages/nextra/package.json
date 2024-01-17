@@ -89,6 +89,9 @@
       "mdx": [
         "./dist/client/mdx.d.ts"
       ],
+      "utils": [
+        "./dist/client/utils.d.ts"
+      ],
       "normalize-pages": [
         "./dist/client/normalize-pages.d.ts"
       ]

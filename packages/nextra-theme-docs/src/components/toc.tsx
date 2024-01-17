@@ -1,11 +1,11 @@
 import cn from 'clsx'
 import type { Heading } from 'nextra'
+import { removeLinks } from 'nextra/utils'
 import type { ReactElement } from 'react'
 import { useEffect, useRef } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import { useActiveAnchor, useThemeConfig } from '../contexts'
 import { renderComponent } from '../utils'
-import { removeLinks } from '../utils/remove-links'
 import { Anchor } from './anchor'
 import { BackToTop } from './back-to-top'
 
