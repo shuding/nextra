@@ -1,6 +1,6 @@
 import cn from 'clsx'
 import type { Heading } from 'nextra'
-import { removeLinks } from 'nextra/utils'
+import { removeLinks } from 'nextra/remove-links'
 import type { ReactElement } from 'react'
 import { useEffect, useRef } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
