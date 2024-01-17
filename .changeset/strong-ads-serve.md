@@ -3,4 +3,4 @@
 'nextra': minor
 ---
 
-move `removeLinks` function from `nextra-theme-docs` to `nextra`
+move `removeLinks` function from `nextra-theme-docs` to `nextra/utils`
