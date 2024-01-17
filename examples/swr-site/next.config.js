@@ -19,6 +19,19 @@ export function getStaticProps() {
     }
     return content
   },
+  transformPageMap(pageMap, locale) {
+    if (locale === 'en') {
+      pageMap = [
+        ...pageMap,
+        {
+          name: 'virtual-page',
+          route: '/en/virtual-page',
+          frontMatter: { sidebar_label: 'Virtual Page' }
+        }
+      ]
+    }
+    return pageMap
+  },
   latex: true
 })
 

@@ -93,7 +93,12 @@ const nextra: Nextra = nextraConfig => {
       webpack(config, options) {
         if (options.nextRuntime !== 'edge' && options.isServer) {
           config.plugins ||= []
-          config.plugins.push(new NextraPlugin({ locales }))
+          config.plugins.push(
+            new NextraPlugin({
+              locales,
+              transformPageMap: nextraConfig.transformPageMap
+            })
+          )
 
           if (loaderOptions.search) {
             config.plugins.push(new NextraSearchPlugin())

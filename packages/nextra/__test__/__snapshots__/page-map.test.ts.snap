@@ -632,6 +632,13 @@ exports[`Page Process > should match i18n site page maps 1`] = `
       "name": "test",
       "route": "/en/test",
     },
+    {
+      "frontMatter": {
+        "sidebar_label": "Virtual Page",
+      },
+      "name": "virtual-page",
+      "route": "/en/virtual-page",
+    },
   ],
   "esPageMap": [
     {

@@ -2,6 +2,7 @@ import path from 'node:path'
 import gracefulFs from 'graceful-fs'
 // import pkg from 'next/dist/compiled/webpack/webpack.js'
 import type { Compiler } from 'webpack'
+import type { NextraConfig } from '../../types'
 import { CHUNKS_DIR, IS_PRODUCTION } from '../constants.js'
 import { PAGES_DIR } from '../file-system.js'
 import { collectPageMap } from '../page-map.js'
@@ -14,11 +15,16 @@ const fs = gracefulFs.promises
 let isSaved = false
 
 export class NextraPlugin {
-  constructor(private config: { locales: string[] }) {}
+  constructor(
+    private config: {
+      locales: string[]
+      transformPageMap?: NextraConfig['transformPageMap']
+    }
+  ) {}
 
   apply(compiler: Compiler) {
     const pluginName = this.constructor.name
-    const locales = new Set(this.config.locales)
+    const { locales, transformPageMap } = this.config
 
     compiler.hooks.beforeCompile.tapAsync(pluginName, async (_, callback) => {
       // if (isSaved || !IS_PRODUCTION) {
@@ -43,7 +49,12 @@ export class NextraPlugin {
         for (const locale of locales) {
           const route = `/${locale}`
           const dir = path.join(PAGES_DIR, locale)
-          const rawJs = await collectPageMap({ dir, route, locale })
+          const rawJs = await collectPageMap({
+            dir,
+            route,
+            locale,
+            transformPageMap
+          })
 
           await fs.writeFile(
             path.join(CHUNKS_DIR, `nextra-page-map-${locale}.mjs`),
