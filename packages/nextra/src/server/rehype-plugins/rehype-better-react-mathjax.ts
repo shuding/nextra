@@ -1,7 +1,7 @@
 import type { ImportDeclaration } from 'estree'
 import { valueToEstree } from 'estree-util-value-to-estree'
 import type { Element, Root, RootContent } from 'hast'
-import type { MdxJsxAttribute } from 'hast-util-to-estree/lib'
+import type { MdxJsxAttribute } from 'hast-util-to-estree/lib/state'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 import type { MathJaxOptions } from '../../types'

@@ -31,7 +31,7 @@ export const Test = ({value}) => value
           {
             value: (
               <>
-                <Test value=\\"Hello\\" /> {myVar}
+                <Test value="Hello" /> {myVar}
               </>
             ),
             id: '-myvar',
@@ -46,8 +46,8 @@ export const Test = ({value}) => value
           ...props.components
         }
         return (
-          <_components.h2 id=\\"-myvar\\">
-            <Test value=\\"Hello\\" /> {myVar}
+          <_components.h2 id="-myvar">
+            <Test value="Hello" /> {myVar}
           </_components.h2>
         )
       }

@@ -38,15 +38,15 @@ describe('remarkStaticImages', () => {
         return (
           <>
             <_components.p>
-              <_components.img placeholder=\\"blur\\" src={__img0} />
+              <_components.img placeholder="blur" src={__img0} />
             </_components.p>
-            {'\\\\n'}
+            {'\\n'}
             <_components.p>
-              <_components.img placeholder=\\"blur\\" src={__img1} />
+              <_components.img placeholder="blur" src={__img1} />
             </_components.p>
-            {'\\\\n'}
+            {'\\n'}
             <_components.p>
-              <_components.img placeholder=\\"blur\\" src={__img0} />
+              <_components.img placeholder="blur" src={__img0} />
             </_components.p>
           </>
         )
@@ -98,23 +98,23 @@ describe('remarkStaticImages', () => {
         return (
           <>
             <_components.p>
-              <_components.img alt=\\"One\\" placeholder=\\"blur\\" src={__img0} />
+              <_components.img alt="One" placeholder="blur" src={__img0} />
             </_components.p>
-            {'\\\\n'}
+            {'\\n'}
             <_components.p>
-              <_components.img placeholder=\\"blur\\" src={__img0} />
+              <_components.img placeholder="blur" src={__img0} />
             </_components.p>
-            {'\\\\n'}
+            {'\\n'}
             <_components.p>
               <_components.img src={__img1} />
             </_components.p>
-            {'\\\\n'}
+            {'\\n'}
             <_components.p>
-              <_components.img alt=\\"Two\\" placeholder=\\"blur\\" src={__img0} />
+              <_components.img alt="Two" placeholder="blur" src={__img0} />
             </_components.p>
-            {'\\\\n'}
+            {'\\n'}
             <_components.p>
-              <_components.img src=\\"https://foo.png\\" alt=\\"External\\" />
+              <_components.img src="https://foo.png" alt="External" />
             </_components.p>
           </>
         )
