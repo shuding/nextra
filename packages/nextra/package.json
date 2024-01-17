@@ -161,7 +161,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "unified": "^11.0.3",
-    "vitest": "^0.34.6"
+    "vitest": "^1.2.0"
   },
   "sideEffects": false
 }
