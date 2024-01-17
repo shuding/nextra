@@ -75,7 +75,7 @@ const config: DocsThemeConfig = {
   editLink: {
     content: function useText() {
       const { locale } = useRouter()
-      return EDIT_TEXT[locale!]
+      return EDIT_TEXT[locale!] // eslint-disable-line @typescript-eslint/no-unnecessary-type-assertion
     }
   },
   feedback: {
@@ -96,8 +96,9 @@ const config: DocsThemeConfig = {
           rel="noreferrer"
           target="_blank"
           className="flex items-center gap-2 font-semibold"
-          href={FOOTER_LINK[locale!]}
+          href={FOOTER_LINK[locale!]} // eslint-disable-line @typescript-eslint/no-unnecessary-type-assertion
         >
+          {/* eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion */}
           {FOOTER_LINK_TEXT[locale!]}
         </a>
       )
@@ -164,7 +165,7 @@ const config: DocsThemeConfig = {
         <SWRLogo className="h-3" />
         <span
           className="max-md:hidden select-none font-extrabold ltr:ml-2 rtl:mr-2"
-          title={`SWR: ${TITLE[locale!] || ''}`}
+          title={`SWR: ${TITLE[locale!] || ''}`} // eslint-disable-line @typescript-eslint/no-unnecessary-type-assertion
         >
           SWR
         </span>
