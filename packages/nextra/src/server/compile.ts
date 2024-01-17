@@ -291,7 +291,7 @@ export async function compileMdx(
               return (node.declaration as any).id.name === 'MDXContent'
             }
             if (node.type === 'FunctionDeclaration') {
-              return node.id!.name === 'MDXContent'
+              return node.id.name === 'MDXContent'
             }
           })
 
@@ -322,7 +322,7 @@ export async function compileMdx(
                 const [{ id }] = declaration.declarations
                 varName = (id as any).name
               } else if (declaration.type === 'FunctionDeclaration') {
-                varName = declaration.id!.name
+                varName = declaration.id.name
               } else {
                 throw new Error(`\`${declaration.type}\` unsupported.`)
               }

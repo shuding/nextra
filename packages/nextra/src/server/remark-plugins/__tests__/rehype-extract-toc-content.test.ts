@@ -49,46 +49,46 @@ bar[^1]
         return (
           <>
             <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
-            {'\\\\n'}
+            {'\\n'}
             <_components.p>
               {'bar'}
               <_components.sup>
                 <_components.a
-                  href=\\"#user-content-fn-1\\"
-                  id=\\"user-content-fnref-1\\"
+                  href="#user-content-fn-1"
+                  id="user-content-fnref-1"
                   data-footnote-ref
-                  aria-describedby=\\"footnote-label\\"
+                  aria-describedby="footnote-label"
                 >
                   {'1'}
                 </_components.a>
               </_components.sup>
             </_components.p>
-            {'\\\\n'}
-            <_components.section data-footnotes className=\\"footnotes\\">
-              <_components.h2 className=\\"sr-only\\" id=\\"footnote-label\\">
+            {'\\n'}
+            <_components.section data-footnotes className="footnotes">
+              <_components.h2 className="sr-only" id="footnote-label">
                 {'Footnotes'}
               </_components.h2>
-              {'\\\\n'}
+              {'\\n'}
               <_components.ol>
-                {'\\\\n'}
-                <_components.li id=\\"user-content-fn-1\\">
-                  {'\\\\n'}
+                {'\\n'}
+                <_components.li id="user-content-fn-1">
+                  {'\\n'}
                   <_components.p>
                     {'bar description '}
                     <_components.a
-                      href=\\"#user-content-fnref-1\\"
-                      data-footnote-backref=\\"\\"
-                      aria-label=\\"Back to reference 1\\"
-                      className=\\"data-footnote-backref\\"
+                      href="#user-content-fnref-1"
+                      data-footnote-backref=""
+                      aria-label="Back to reference 1"
+                      className="data-footnote-backref"
                     >
                       {'↩'}
                     </_components.a>
                   </_components.p>
-                  {'\\\\n'}
+                  {'\\n'}
                 </_components.li>
-                {'\\\\n'}
+                {'\\n'}
               </_components.ol>
-              {'\\\\n'}
+              {'\\n'}
             </_components.section>
           </>
         )
@@ -142,7 +142,7 @@ import { Steps } from 'nextra/components'
         return (
           <>
             <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
-            {'\\\\n'}
+            {'\\n'}
             <Steps>
               <div>
                 <_components.h3 id={toc[1].id}>{toc[1].value}</_components.h3>
@@ -224,9 +224,9 @@ export const frontMatter = {
             value: (
               <>
                 {'Heading '}
-                <_components.span className=\\"katex\\">
-                  <_components.span className=\\"katex-mathml\\">
-                    <_components.math xmlns=\\"http://www.w3.org/1998/Math/MathML\\">
+                <_components.span className="katex">
+                  <_components.span className="katex-mathml">
+                    <_components.math xmlns="http://www.w3.org/1998/Math/MathML">
                       <_components.semantics>
                         <_components.mrow>
                           <_components.mi>{'l'}</_components.mi>
@@ -235,30 +235,30 @@ export const frontMatter = {
                           <_components.mi>{'e'}</_components.mi>
                           <_components.mi>{'x'}</_components.mi>
                         </_components.mrow>
-                        <_components.annotation encoding=\\"application/x-tex\\">{'latex'}</_components.annotation>
+                        <_components.annotation encoding="application/x-tex">{'latex'}</_components.annotation>
                       </_components.semantics>
                     </_components.math>
                   </_components.span>
-                  <_components.span className=\\"katex-html\\" aria-hidden=\\"true\\">
-                    <_components.span className=\\"base\\">
+                  <_components.span className="katex-html" aria-hidden="true">
+                    <_components.span className="base">
                       <_components.span
-                        className=\\"strut\\"
+                        className="strut"
                         style={{
                           height: '0.6944em'
                         }}
                       />
                       <_components.span
-                        className=\\"mord mathnormal\\"
+                        className="mord mathnormal"
                         style={{
                           marginRight: '0.01968em'
                         }}
                       >
                         {'l'}
                       </_components.span>
-                      <_components.span className=\\"mord mathnormal\\">{'a'}</_components.span>
-                      <_components.span className=\\"mord mathnormal\\">{'t'}</_components.span>
-                      <_components.span className=\\"mord mathnormal\\">{'e'}</_components.span>
-                      <_components.span className=\\"mord mathnormal\\">{'x'}</_components.span>
+                      <_components.span className="mord mathnormal">{'a'}</_components.span>
+                      <_components.span className="mord mathnormal">{'t'}</_components.span>
+                      <_components.span className="mord mathnormal">{'e'}</_components.span>
+                      <_components.span className="mord mathnormal">{'x'}</_components.span>
                     </_components.span>
                   </_components.span>
                 </_components.span>
@@ -319,21 +319,21 @@ export const frontMatter = {
         return (
           <>
             <_components.h1>{'Heading 1'}</_components.h1>
-            {'\\\\n'}
-            {'\\\\n'}
+            {'\\n'}
+            {'\\n'}
             <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
-            {'\\\\n'}
+            {'\\n'}
             <_components.h3 id={toc[1].id}>{toc[1].value}</_components.h3>
-            {'\\\\n'}
+            {'\\n'}
             <_components.h3 id={toc[2].id}>{toc[2].value}</_components.h3>
-            {'\\\\n'}
-            {'\\\\n'}
+            {'\\n'}
+            {'\\n'}
             <_components.h4 id={toc[3].id}>{toc[3].value}</_components.h4>
-            {'\\\\n'}
+            {'\\n'}
             <_components.h5 id={toc[4].id}>{toc[4].value}</_components.h5>
-            {'\\\\n'}
+            {'\\n'}
             <_components.h6 id={toc[5].id}>{toc[5].value}</_components.h6>
-            {'\\\\n'}
+            {'\\n'}
             <_components.h6 id={toc[6].id}>{toc[6].value}</_components.h6>
           </>
         )
@@ -382,7 +382,7 @@ import { RemoteContent } from 'nextra/components'
           return (
             <>
               <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
-              {'\\\\n'}
+              {'\\n'}
               <RemoteContent
                 components={{
                   Callout,
@@ -452,10 +452,10 @@ export const myVar = 123
                 id: 'bar',
                 children: 'bar'
               }),
-              '\\\\n',
+              '\\n',
               _jsx(Foo, {}),
-              '\\\\n',
-              '\\\\n',
+              '\\n',
+              '\\n',
               _jsxs(_components.h3, {
                 id: '123-myvar',
                 children: ['123 ', myVar]
