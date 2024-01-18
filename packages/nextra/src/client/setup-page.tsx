@@ -12,7 +12,7 @@ import type {
   PageOpts,
   UseTOC
 } from '../types'
-import { findFolder } from '../utils.js'
+import { clonePageMap, findFolder } from '../utils.js'
 import { useRouter } from './hooks/index.js'
 import { DataProvider } from './hooks/use-data.js'
 import { useMDXComponents } from './mdx.js'
@@ -61,18 +61,16 @@ function NextraLayout({
 
   let { pageOpts, useTOC, Content } = pageContext
 
+  let { pageMap } = pageOpts
+
   if (__nextra_internal__.route.startsWith('/[')) {
-    pageOpts = {
-      ...pageOpts,
-      pageMap: (pageOpts.pageMap as unknown as Record<string, PageMapItem[]>)[
-        locale!
-      ]
-    }
+    pageMap = (pageMap as unknown as Record<string, PageMapItem[]>)[locale!]
   }
 
   for (const { route, children } of __nextra_pageMap) {
     const paths = route.split('/').slice(locale ? 2 : 1)
-    const folder = findFolder(pageOpts.pageMap, paths)
+    pageMap = clonePageMap(pageMap)
+    const folder = findFolder(pageMap, paths)
     folder.children = children
   }
 
@@ -80,6 +78,7 @@ function NextraLayout({
     const { title, frontMatter } = __nextra_dynamic_opts
     pageOpts = {
       ...pageOpts,
+      pageMap,
       title,
       frontMatter
     }
