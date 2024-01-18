@@ -20,16 +20,14 @@ export function getStaticProps() {
     return content
   },
   transformPageMap(pageMap, locale) {
-    if (locale === 'en') {
-      pageMap = [
-        ...pageMap,
-        {
-          name: 'virtual-page',
-          route: '/en/virtual-page',
-          frontMatter: { sidebarTitle: 'Virtual Page' }
-        }
-      ]
-    }
+    pageMap = [
+      ...pageMap,
+      {
+        name: 'index',
+        route: `/${locale}`,
+        frontMatter: {}
+      }
+    ]
     return pageMap
   },
   latex: true

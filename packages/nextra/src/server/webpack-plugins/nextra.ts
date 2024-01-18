@@ -61,6 +61,19 @@ export class NextraPlugin {
             rawJs
           )
         }
+        const dirs = await fs.readdir(PAGES_DIR, { withFileTypes: true })
+
+        for (const dir of dirs) {
+          if (dir.isDirectory() && dir.name.startsWith('[')) {
+            await fs.writeFile(
+              path.join(CHUNKS_DIR, `nextra-page-map-${dir.name}.mjs`),
+              locales.map(
+                locale =>
+                  `export { pageMap as ${locale} } from './nextra-page-map-${locale}.mjs'`
+              ).join('\n')
+            )
+          }
+        }
         // logger.info('`beforeCompile`')
         isSaved = true
         callback()

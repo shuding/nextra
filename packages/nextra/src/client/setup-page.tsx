@@ -8,6 +8,7 @@ import { NEXTRA_INTERNAL } from '../constants.js'
 import type {
   NextraInternalGlobal,
   NextraMDXContent,
+  PageMapItem,
   PageOpts,
   UseTOC
 } from '../types'
@@ -59,6 +60,15 @@ function NextraLayout({
   }
 
   let { pageOpts, useTOC, Content } = pageContext
+
+  if (__nextra_internal__.route.startsWith('/[')) {
+    pageOpts = {
+      ...pageOpts,
+      pageMap: (pageOpts.pageMap as unknown as Record<string, PageMapItem[]>)[
+        locale!
+      ]
+    }
+  }
 
   for (const { route, children } of __nextra_pageMap) {
     const paths = route.split('/').slice(locale ? 2 : 1)

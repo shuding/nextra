@@ -1,0 +1,19 @@
+## foo {JSON.stringify(props)}
+
+export function getStaticPaths() {
+  return {
+    paths: ['en', 'es', 'ru'].map(lang => ({ params: { lang } })),
+    fallback: false
+  }
+}
+
+export function getStaticProps({ params: { lang } }) {
+  return {
+    props: {
+      __nextra_dynamic_opts: {
+        frontMatter: {},
+        title: `Lang: "${lang}"`
+      }
+    }
+  }
+}
