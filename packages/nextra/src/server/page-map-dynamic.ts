@@ -9,7 +9,7 @@ import type {
   NextraInternalGlobal,
   PageMapItem
 } from '../types'
-import { findFolder } from '../utils.js'
+import { clonePageMap, findFolder } from '../utils.js'
 import { normalizePageRoute, pageTitleFromFilename } from './utils.js'
 
 const cachedResolvedPageMap: Record<string, PageMapItem[]> = Object.create(null)
@@ -89,11 +89,12 @@ export const resolvePageMap =
     ) {
       return cachedResolvedPageMap[locale]
     }
-    const { pageMap } = locale
+    let { pageMap } = locale
       ? Object.entries(__nextra_internal__.context)
           // Fix race condition. Find a better way to get pageMap?
           .find(([route]) => route.startsWith(`/${locale}/`))![1].pageOpts
       : __nextra_internal__
+    pageMap = clonePageMap(pageMap)
     const result = await Promise.all(
       Object.entries(dynamicMetaModules).map(async ([route, metaFunction]) => {
         const paths = route.split('/').slice(locale ? 2 : 1)
