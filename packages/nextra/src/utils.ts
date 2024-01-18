@@ -10,11 +10,3 @@ export function findFolder(
     }
   }
 }
-
-export function clonePageMap(pageMap: PageMapItem[]): PageMapItem[] {
-  return pageMap.map(item => {
-    return 'children' in item
-      ? { ...item, children: clonePageMap(item.children) }
-      : item
-  })
-}

@@ -4,6 +4,7 @@
  */
 
 import type { ReactElement, ReactNode } from 'react'
+import { useMemo } from 'react'
 import { NEXTRA_INTERNAL } from '../constants.js'
 import type {
   NextraInternalGlobal,
@@ -48,7 +49,7 @@ function NextraLayout({
   const __nextra_internal__ = (globalThis as NextraInternalGlobal)[
     NEXTRA_INTERNAL
   ]
-  const { Layout, themeConfig } = __nextra_internal__
+  const { Layout, themeConfig, route: mdxRoute } = __nextra_internal__
   const { route, locale } = useRouter()
 
   const pageContext = __nextra_internal__.context[route]
@@ -61,28 +62,31 @@ function NextraLayout({
 
   let { pageOpts, useTOC, Content } = pageContext
 
-  let { pageMap } = pageOpts
+  pageOpts = useMemo(() => {
+    let { pageMap } = pageOpts
 
-  if (__nextra_internal__.route.startsWith('/[')) {
-    pageMap = (pageMap as unknown as Record<string, PageMapItem[]>)[locale!]
-  }
-
-  for (const { route, children } of __nextra_pageMap) {
-    const paths = route.split('/').slice(locale ? 2 : 1)
-    pageMap = clonePageMap(pageMap)
-    const folder = findFolder(pageMap, paths)
-    folder.children = children
-  }
-
-  if (__nextra_dynamic_opts) {
-    const { title, frontMatter } = __nextra_dynamic_opts
-    pageOpts = {
-      ...pageOpts,
-      pageMap,
-      title,
-      frontMatter
+    if (mdxRoute.startsWith('/[')) {
+      pageMap = (pageMap as unknown as Record<string, PageMapItem[]>)[locale!]
     }
-  }
+    pageMap = clonePageMap(pageMap)
+
+    for (const { route, children } of __nextra_pageMap) {
+      const paths = route.split('/').slice(locale ? 2 : 1)
+      const folder = findFolder(pageMap, paths)
+      folder.children = children
+    }
+
+    if (__nextra_dynamic_opts) {
+      const { title, frontMatter } = __nextra_dynamic_opts
+      return {
+        ...pageOpts,
+        pageMap,
+        title,
+        frontMatter
+      }
+    }
+    return pageOpts
+  }, [__nextra_dynamic_opts, mdxRoute, __nextra_pageMap, locale, pageOpts])
 
   return (
     <Layout themeConfig={themeConfig} pageOpts={pageOpts} pageProps={props}>
