@@ -67,10 +67,12 @@ export class NextraPlugin {
           if (dir.isDirectory() && dir.name.startsWith('[')) {
             await fs.writeFile(
               path.join(CHUNKS_DIR, `nextra-page-map-${dir.name}.mjs`),
-              locales.map(
-                locale =>
-                  `export { pageMap as ${locale} } from './nextra-page-map-${locale}.mjs'`
-              ).join('\n')
+              locales
+                .map(
+                  locale =>
+                    `export { pageMap as ${locale} } from './nextra-page-map-${locale}.mjs'`
+                )
+                .join('\n')
             )
           }
         }

@@ -211,7 +211,9 @@ export default MDXLayout`
   const dynamicLocale = locale.startsWith('[')
 
   const rawJs = `import { HOC_MDXWrapper } from 'nextra/setup-page'
-import ${dynamicLocale ? '* as pageMap' : '{ pageMap }'} from '${slash(pageMapPath)}'
+import ${dynamicLocale ? '* as pageMap' : '{ pageMap }'} from '${slash(
+    pageMapPath
+  )}'
 ${isAppFileFromNodeModules ? cssImports : ''}
 ${finalResult}
 
