@@ -1,6 +1,6 @@
 import { ArrowRightIcon } from '@components/icons'
 import cn from 'clsx'
-import { motion } from 'framer-motion'
+import { MotionDiv } from '../../app/_components/framer-motion'
 import Link from 'next/link'
 import type { ComponentProps, ReactNode } from 'react'
 import styles from './style.module.css'
@@ -21,9 +21,9 @@ export function Feature({
   lightOnly?: boolean
   href?: string
   index: number
-} & ComponentProps<typeof motion.div>) {
+} & ComponentProps<typeof MotionDiv>) {
   return (
-    <motion.div
+    <MotionDiv
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true, margin: '-20px' }}
@@ -43,7 +43,7 @@ export function Feature({
           <ArrowRightIcon width="1.5em" />
         </Link>
       ) : null}
-    </motion.div>
+    </MotionDiv>
   )
 }
 

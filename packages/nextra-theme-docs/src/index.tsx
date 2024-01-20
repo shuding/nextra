@@ -1,3 +1,4 @@
+'use client';
 import 'focus-visible'
 import './polyfill'
 import { ThemeProvider } from 'next-themes'

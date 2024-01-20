@@ -1,0 +1,49 @@
+'use client'
+import { ArrowRightIcon } from '@components/icons'
+import cn from 'clsx'
+import { useState } from 'react'
+import styles from '../index.module.css'
+
+const LANGUAGES = [
+  { lang: 'en', name: 'English' },
+  { lang: 'de', name: 'Deutsch' },
+  { lang: 'ja', name: '日本語' }
+]
+
+export function I18n() {
+  const [active, setActive] = useState('')
+
+  return (
+    <div className={styles.comparison}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '.5rem' }}>
+        {LANGUAGES.map(({ lang }) => (
+          <span
+            key={lang}
+            onPointerOver={() => setActive(lang)}
+            className={cn(styles.file, active === lang && styles.active)}
+          >
+            /{lang}/hello.mdx
+          </span>
+        ))}
+      </div>
+      <ArrowRightIcon width="1.2em" />
+      <div className="overflow-auto rounded-md bg-white py-1 text-sm shadow-lg ring-1 ring-black/5 dark:bg-neutral-800 dark:ring-white/20">
+        {LANGUAGES.map(({ lang, name }) => (
+          <div
+            key={lang}
+            onPointerOver={() => setActive(lang)}
+            // eslint-disable-next-line tailwindcss/no-custom-classname -- TODO: configure eslint-plugin-tailwindcss to import nextra-theme-docs styles so below classes could be removed
+            className={cn(
+              'relative cursor-default select-none whitespace-nowrap px-4 py-1.5',
+              active === lang
+                ? '_text-primary-600 _bg-primary-50 dark:_bg-primary-500/10'
+                : 'text-gray-800 dark:text-gray-100 '
+            )}
+          >
+            {name}
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
