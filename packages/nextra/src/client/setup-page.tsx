@@ -48,6 +48,7 @@ function NextraLayout({
     NEXTRA_INTERNAL
   ]
   const { Layout, themeConfig } = __nextra_internal__
+  // @ts-expect-error -- todo: remove it
   const { route, locale } = useRouter()
 
   const pageContext = __nextra_internal__.context[route]
