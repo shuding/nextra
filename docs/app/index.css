@@ -13,7 +13,7 @@
 .features-container .content-container {
   margin-top: -8rem;
 }
-:global(.dark) .features-container {
+.dark .features-container {
   background-color: #000;
   border-bottom: 1px solid rgb(38, 38, 38);
 }
@@ -32,7 +32,7 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-:global(.dark) .headline {
+.dark .headline {
   background-image: linear-gradient(146deg, #fff, #757a7d);
 }
 .subtitle {
@@ -41,12 +41,12 @@
   font-feature-settings: initial;
   line-height: 1.6;
 }
-:global(#docs-card) {
+#docs-card {
   color: #fff;
   text-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
 }
 
-:global(#docs-card img) {
+#docs-card img {
   object-fit: cover;
   object-position: left;
   position: absolute;
@@ -59,16 +59,16 @@
   user-select: none;
   pointer-events: none;
 }
-:global(#docs-card img:nth-child(2)) {
+#docs-card img:nth-child(2) {
   display: none;
 }
-:global(.dark #docs-card img:nth-child(2)) {
+.dark #docs-card img:nth-child(2) {
   display: initial;
 }
-:global(.dark #docs-card img:nth-child(1)) {
+.dark #docs-card img:nth-child(1) {
   display: none;
 }
-:global(#highlighting-card) {
+#highlighting-card {
   min-height: 300px;
   background-image: linear-gradient(to top, transparent, #fff 50%),
   url(/assets/syntax-highlighting.svg);
@@ -76,25 +76,25 @@
   background-position: -6px calc(100% + 4px);
   background-repeat: no-repeat;
 }
-:global(.dark #highlighting-card) {
+.dark #highlighting-card {
   background-image: linear-gradient(to top, transparent, #202020 50%),
   url(/assets/syntax-highlighting.svg);
 }
-:global(.feat-darkmode) {
+.feat-darkmode {
   min-height: 300px;
 }
-:global(.feat-darkmode h3) {
+.feat-darkmode h3 {
   font-size: 48px;
 }
-:global(#search-card) {
+#search-card {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-:global(#search-card p) {
+#search-card p {
   max-width: 320px;
 }
-:global(#search-card video) {
+#search-card video {
   position: absolute;
   right: 0;
   top: 24px;
@@ -102,33 +102,33 @@
   pointer-events: none;
   max-width: 60%;
 }
-:global(#fs-card) {
+#fs-card {
   min-height: 240px;
 }
-:global(#fs-card h3) {
+#fs-card h3 {
   text-align: left;
   width: min(300px, 41%);
   min-width: 155px;
 }
-:global(#a11y-card) {
+#a11y-card {
   background-image: url(/assets/high-contrast.png);
   background-position: -160px 160px;
 }
 @media screen and (max-width: 1300px) {
-  :global(#a11y-card) {
+  #a11y-card {
     background-image: linear-gradient(to bottom, white, transparent),
     url(/assets/high-contrast.png);
   }
 }
 @media screen and (max-width: 1200px) {
-  :global(#highlighting-card) {
+  #highlighting-card {
     aspect-ratio: auto;
   }
-  :global(.feat-darkmode h3) {
+  .feat-darkmode h3 {
     font-size: 4vw;
     font-size: min(48px, max(4vw, 30px));
   }
-  :global(#search-card video) {
+  #search-card video {
     aspect-ratio: 787/623;
     height: auto;
   }
@@ -137,54 +137,54 @@
   }
 }
 @media screen and (max-width: 1024px) {
-  :global(#docs-card) {
+  #docs-card {
     aspect-ratio: 135/86;
   }
-  :global(#search-card) {
+  #search-card {
     aspect-ratio: 8/3;
   }
-  :global(#search-card h3) {
+  #search-card h3 {
     text-align: left;
   }
-  :global(#highlighting-card) {
+  #highlighting-card {
     background-size: 136%;
   }
-  :global(#a11y-card) {
+  #a11y-card {
     background-image: url(/assets/high-contrast.png);
     background-position: center 160px;
   }
 }
 @media screen and (max-width: 768px) {
-  :global(#docs-card) {
+  #docs-card {
     min-height: 348px;
     width: 100%;
     aspect-ratio: auto;
   }
-  :global(#docs-card img) {
+  #docs-card img {
     object-position: -26px 0;
     width: 250%;
     max-width: initial;
   }
 }
 @media screen and (max-width: 640px) {
-  :global(#search-card) {
+  #search-card {
     aspect-ratio: 2.5/2;
     justify-content: flex-start;
     align-items: stretch;
     min-height: 350px;
   }
-  :global(#search-card h3) {
+  #search-card h3 {
     text-align: center;
   }
-  :global(#search-card p) {
+  #search-card p {
     max-width: 100%;
   }
-  :global(#search-card video) {
+  #search-card video {
     position: relative;
     margin: 0.75em -1.75em 0;
     max-width: calc(100% + 3.5em);
   }
-  :global(.dark #search-card video) {
+  .dark #search-card video {
     mix-blend-mode: lighten;
   }
 }
