@@ -4,7 +4,7 @@ import './polyfill'
 import { ThemeProvider } from 'next-themes'
 import type { NextraThemeLayoutProps } from 'nextra'
 import { useRouter } from 'nextra/hooks'
-import { MDXProvider } from 'nextra/mdx'
+import { MDXProvider } from 'nextra/components'
 import type { ReactElement, ReactNode } from 'react'
 import { Banner, Head } from './components'
 import { PartialDocsThemeConfig } from './constants'
@@ -22,6 +22,7 @@ function InnerLayout({ children }: { children: ReactNode }): ReactElement {
   const themeConfig = useThemeConfig()
 
   const config = useConfig()
+  // @ts-expect-error -- todo: remove it
   const { locale } = useRouter()
 
   const { direction } =

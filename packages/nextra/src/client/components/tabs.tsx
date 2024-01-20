@@ -1,3 +1,4 @@
+'use client'
 import { Tab as HeadlessTab } from '@headlessui/react'
 import cn from 'clsx'
 import type { ComponentProps, ReactElement, ReactNode } from 'react'

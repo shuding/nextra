@@ -147,6 +147,7 @@ export function Flexsearch({
 }: {
   className?: string
 }): ReactElement {
+  // @ts-expect-error -- todo: remove it
   const { locale = DEFAULT_LOCALE, basePath } = useRouter()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)

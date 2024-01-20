@@ -1,3 +1,4 @@
+'use client'
 import cn from 'clsx'
 import { createContext, memo, useCallback, useContext, useState } from 'react'
 import type { ReactElement, ReactNode } from 'react'

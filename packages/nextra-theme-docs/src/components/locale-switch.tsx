@@ -17,7 +17,7 @@ export function LocaleSwitch({
   className
 }: LocaleSwitchProps): ReactElement | null {
   const themeConfig = useThemeConfig()
-
+  // @ts-expect-error -- todo: remove it
   const { locale, asPath } = useRouter()
 
   const options = themeConfig.i18n

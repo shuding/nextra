@@ -1,3 +1,4 @@
+'use client'
 import cn from 'clsx'
 import type { ComponentProps, FC, ReactElement } from 'react'
 import { useCallback, useRef } from 'react'

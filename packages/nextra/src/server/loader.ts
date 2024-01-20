@@ -4,10 +4,10 @@ import type { LoaderContext } from 'webpack'
 import type { LoaderOptions, PageOpts } from '../types'
 import { compileMdx } from './compile.js'
 import {
-  CHUNKS_DIR,
+  // CHUNKS_DIR,
   CWD,
   MARKDOWN_EXTENSION_REGEX,
-  OFFICIAL_THEMES
+  // OFFICIAL_THEMES
 } from './constants.js'
 import { PAGES_DIR } from './file-system.js'
 import { logger } from './utils.js'
@@ -44,7 +44,7 @@ const initGitRepo = (async () => {
   return {}
 })()
 
-let isAppFileFromNodeModules = false
+// let isAppFileFromNodeModules = false
 
 export async function loader(
   this: LoaderContext<LoaderOptions>,
@@ -54,8 +54,8 @@ export async function loader(
     isPageImport = false,
     isPageMapImport,
     isMetaFile,
-    theme,
-    themeConfig,
+    // theme,
+    // themeConfig,
     defaultShowCopyCode,
     search,
     staticImage,
@@ -101,34 +101,34 @@ export const getStaticProps = () => ({ notFound: true })`
     )
   }
 
-  const isLocalTheme = theme.startsWith('.') || theme.startsWith('/')
-  const layoutPath = isLocalTheme ? slash(path.resolve(theme)) : theme
+  // const isLocalTheme = theme.startsWith('.') || theme.startsWith('/')
+  // const layoutPath = isLocalTheme ? slash(path.resolve(theme)) : theme
 
-  const cssImports = `
-${latex ? "import 'katex/dist/katex.min.css'" : ''}
-${OFFICIAL_THEMES.includes(theme) ? `import '${theme}/style.css'` : ''}`
+//   const cssImports = `
+// ${latex ? "import 'katex/dist/katex.min.css'" : ''}
+// ${OFFICIAL_THEMES.includes(theme) ? `import '${theme}/style.css'` : ''}`
 
-  if (currentPath.includes('/pages/_app.')) {
-    isAppFileFromNodeModules = currentPath.includes('/node_modules/')
-    // Relative path instead of a package name
-    const themeConfigImport = themeConfig
-      ? `import __themeConfig from '${slash(path.resolve(themeConfig))}'`
-      : ''
-
-    const content = isAppFileFromNodeModules
-      ? 'export default function App({ Component, pageProps }) { return <Component {...pageProps} />}'
-      : [cssImports, source].join('\n')
-
-    const appRawJs = `import __layout from '${layoutPath}'
-${themeConfigImport}
-${content}
-
-const __nextra_internal__ = globalThis[Symbol.for('__nextra_internal__')] ||= Object.create(null)
-__nextra_internal__.context ||= Object.create(null)
-__nextra_internal__.Layout = __layout
-${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
-    return appRawJs
-  }
+//   if (currentPath.includes('/pages/_app.')) {
+//     isAppFileFromNodeModules = currentPath.includes('/node_modules/')
+//     // Relative path instead of a package name
+//     const themeConfigImport = themeConfig
+//       ? `import __themeConfig from '${slash(path.resolve(themeConfig))}'`
+//       : ''
+//
+//     const content = isAppFileFromNodeModules
+//       ? 'export default function App({ Component, pageProps }) { return <Component {...pageProps} />}'
+//       : [cssImports, source].join('\n')
+//
+//     const appRawJs = `import __layout from '${layoutPath}'
+// ${themeConfigImport}
+// ${content}
+//
+// const __nextra_internal__ = globalThis[Symbol.for('__nextra_internal__')] ||= Object.create(null)
+// __nextra_internal__.context ||= Object.create(null)
+// __nextra_internal__.Layout = __layout
+// ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
+//     return appRawJs
+//   }
 
   const relativePath = slash(path.relative(PAGES_DIR, mdxPath))
 
@@ -207,7 +207,7 @@ export default MDXLayout`
   const finalResult = transform ? await transform(result, { route }) : result
 
   const stringifiedPageOpts = JSON.stringify(pageOpts).slice(0, -1)
-  const pageMapPath = path.join(CHUNKS_DIR, `nextra-page-map-${locale}.mjs`)
+  // const pageMapPath = path.join(CHUNKS_DIR, `nextra-page-map-${locale}.mjs`)
 
   const rawJs = `import { HOC_MDXWrapper } from 'nextra/setup-page'
 import { pageMap } from '${slash(pageMapPath)}'

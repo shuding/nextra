@@ -1,3 +1,4 @@
+'use client'
 import type { ComponentProps, ReactElement } from 'react'
 import { useCallback, useEffect, useState } from 'react'
 import { CheckIcon, CopyIcon } from '../icons/index.js'
