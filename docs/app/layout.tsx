@@ -15,17 +15,9 @@ export default async function RootLayout({
     dir: path.join(process.cwd(), 'docs'),
     route: '/'
   })
-  await fs.writeFile(
-    path.join(
-      process.cwd(),
-      '.next',
-      'static',
-      'chunks',
-      'nextra-page-map.mjs'
-    ),
-    rawJs
-  )
-  const { pageMap } = await import('.next/static/chunks/nextra-page-map.mjs')
+  const pageMapPath = path.join(process.cwd(), 'nextra-page-map.mjs')
+  await fs.writeFile(pageMapPath, rawJs)
+  const { pageMap } = await import('../nextra-page-map.mjs')
 
   return (
     <html lang="en">

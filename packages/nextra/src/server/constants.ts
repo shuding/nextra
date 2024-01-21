@@ -16,7 +16,7 @@ export const CWD = process.cwd()
 
 export const PUBLIC_DIR = path.join(CWD, 'public')
 
-export const CHUNKS_DIR = path.join(CWD, '.next', 'static', 'chunks')
+export const CHUNKS_DIR = path.join(CWD)
 
 export const MARKDOWN_URL_EXTENSION_REGEX = /\.mdx?(?:(?=[#?])|$)/
 
