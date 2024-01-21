@@ -36,7 +36,7 @@ export default async function RootLayout({
   const { pageMap } = await import('../nextra-page-map.mjs')
 
   return (
-    <html lang="en">
+    <html lang="en" dir="ltr">
       <body>
         <Layout
           themeConfig={{

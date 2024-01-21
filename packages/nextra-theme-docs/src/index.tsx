@@ -5,7 +5,6 @@ import './polyfill'
 import { ThemeProvider } from 'next-themes'
 import type { NextraThemeLayoutProps } from 'nextra'
 import { MDXProvider } from 'nextra/components'
-import { useRouter } from 'nextra/hooks'
 import type { ReactElement, ReactNode } from 'react'
 import { Banner, Head } from './components'
 import { PartialDocsThemeConfig } from './constants'
@@ -23,12 +22,6 @@ function InnerLayout({ children }: { children: ReactNode }): ReactElement {
   const themeConfig = useThemeConfig()
 
   const config = useConfig()
-  // @ts-expect-error -- todo: remove it
-  const { locale } = useRouter()
-
-  const { direction } =
-    themeConfig.i18n.find(l => l.locale === locale) || themeConfig
-  const dir = direction === 'rtl' ? 'rtl' : 'ltr'
 
   const { activeThemeContext: themeContext, topLevelNavbarItems } =
     config.normalizePagesResult
@@ -44,33 +37,21 @@ function InnerLayout({ children }: { children: ReactNode }): ReactElement {
       disableTransitionOnChange
       {...themeConfig.nextThemes}
     >
-      {/*
-        This makes sure that selectors like `[dir=ltr] .nextra-container` work
-        before hydration as Tailwind expects the `dir` attribute to exist on the
-        `html` element.
-      */}
-      <div dir={dir}>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `document.documentElement.setAttribute('dir','${dir}')`
-          }}
-        />
-        <Head />
-        <Banner />
-        {themeContext.navbar &&
-          renderComponent(themeConfig.navbar.component, {
-            items: topLevelNavbarItems
-          })}
-        <ActiveAnchorProvider>
-          <MDXProvider disableParentContext components={components}>
-            {children}
-          </MDXProvider>
-        </ActiveAnchorProvider>
-        {themeContext.footer &&
-          renderComponent(themeConfig.footer.component, {
-            menu: config.hideSidebar
-          })}
-      </div>
+      <Head />
+      <Banner />
+      {themeContext.navbar &&
+        renderComponent(themeConfig.navbar.component, {
+          items: topLevelNavbarItems
+        })}
+      <ActiveAnchorProvider>
+        <MDXProvider disableParentContext components={components}>
+          {children}
+        </MDXProvider>
+      </ActiveAnchorProvider>
+      {themeContext.footer &&
+        renderComponent(themeConfig.footer.component, {
+          menu: config.hideSidebar
+        })}
     </ThemeProvider>
   )
 }
