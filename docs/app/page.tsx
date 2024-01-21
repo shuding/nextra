@@ -8,6 +8,11 @@ import { MotionDiv, MotionH3 } from './_components/framer-motion'
 import { I18n } from './_components/i18n-demo'
 import styles from './index.module.css'
 import './index.css'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Nextra – Next.js Static Site Generator'
+}
 
 export default function IndexPage() {
   return (

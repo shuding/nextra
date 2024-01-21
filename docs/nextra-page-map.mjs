@@ -274,8 +274,7 @@ export const pageMap = [{
   name: "index",
   route: "/",
   frontMatter: {
-    "sidebarTitle": "Index",
-    "title": "Nextra – Next.js Static Site Generator"
+    "sidebarTitle": "Index"
   }
 }, {
   name: "showcase",
