@@ -1,10 +1,15 @@
 import fs from 'fs/promises'
 import path from 'path'
+import type { Metadata } from 'next'
 import { Layout } from 'nextra-theme-docs'
 import { collectPageMap } from 'nextra/page-map'
 import type { ReactNode } from 'react'
 import 'nextra-theme-docs/style.css'
 import '../style.css'
+
+export const metadata: Metadata = {
+  description: 'Make beautiful websites with Next.js & MDX.'
+}
 
 export default async function RootLayout({
   children

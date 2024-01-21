@@ -22,17 +22,10 @@ const config: DocsThemeConfig = {
 
     return (
       <>
-        <title>{title}</title>
-        <meta property="og:title" content={title} />
-        <meta name="description" content={description} />
-        <meta property="og:description" content={description} />
         <meta property="og:image" content={image} />
 
         <meta name="msapplication-TileColor" content="#fff" />
         <meta httpEquiv="Content-Language" content="en" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site:domain" content="nextra.site" />
-        <meta name="twitter:url" content="https://nextra.site" />
         <meta name="apple-mobile-web-app-title" content="Nextra" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="icon" href="/favicon.png" type="image/png" />
