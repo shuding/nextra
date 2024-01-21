@@ -1,10 +1,11 @@
-'use client';
+'use client'
+
 import 'focus-visible'
 import './polyfill'
 import { ThemeProvider } from 'next-themes'
 import type { NextraThemeLayoutProps } from 'nextra'
-import { useRouter } from 'nextra/hooks'
 import { MDXProvider } from 'nextra/components'
+import { useRouter } from 'nextra/hooks'
 import type { ReactElement, ReactNode } from 'react'
 import { Banner, Head } from './components'
 import { PartialDocsThemeConfig } from './constants'
@@ -74,7 +75,7 @@ function InnerLayout({ children }: { children: ReactNode }): ReactElement {
   )
 }
 
-export default function Layout({
+export function Layout({
   children,
   themeConfig,
   pageOpts

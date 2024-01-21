@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 import type { FrontMatter, PageOpts } from 'nextra'
 import { useFSRoute } from 'nextra/hooks'
 import { normalizePages } from 'nextra/normalize-pages'
@@ -36,8 +35,6 @@ export function ConfigProvider({
   value: PageOpts
 }): ReactElement {
   const [menu, setMenu] = useState(false)
-  const { asPath } = useRouter()
-
   const fsPath = useFSRoute()
 
   const normalizePagesResult = useMemo(
@@ -62,7 +59,7 @@ export function ConfigProvider({
   // Always close mobile nav when route was changed (e.g. logo click)
   useEffect(() => {
     setMenu(false)
-  }, [asPath])
+  }, [fsPath])
 
   return (
     <ConfigContext.Provider value={extendedConfig}>

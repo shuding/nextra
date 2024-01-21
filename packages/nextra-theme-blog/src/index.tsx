@@ -1,7 +1,7 @@
 import { ThemeProvider } from 'next-themes'
 import Head from 'next/head'
 import type { NextraThemeLayoutProps } from 'nextra'
-import { MDXProvider } from 'nextra/mdx'
+import { MDXProvider } from 'nextra/components'
 import { useRef } from 'react'
 import { BlogProvider } from './blog-context'
 import { DEFAULT_THEME } from './constants'

@@ -48,6 +48,10 @@
       "import": "./dist/server/page-map-dynamic.js",
       "types": "./dist/server/page-map-dynamic.d.ts"
     },
+    "./page-map": {
+      "import": "./dist/server/page-map.js",
+      "types": "./dist/server/page-map.d.ts"
+    },
     "./*": {
       "import": "./dist/client/*.js",
       "types": "./dist/client/*.d.ts"
@@ -56,6 +60,9 @@
   "types": "./dist/server/index.d.ts",
   "typesVersions": {
     "*": {
+      "page-map": [
+        "./dist/server/page-map.d.ts"
+      ],
       "compile": [
         "./dist/server/compile.d.ts"
       ],

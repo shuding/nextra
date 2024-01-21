@@ -1,5 +1,5 @@
 /* eslint sort-keys: error */
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import { DiscordIcon, GitHubIcon } from 'nextra/icons'
 import { isValidElement } from 'react'
 import type { z } from 'zod'

@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import { useMounted } from 'nextra/hooks'
 import type { ReactElement } from 'react'
 import { useThemeConfig } from '../contexts'
