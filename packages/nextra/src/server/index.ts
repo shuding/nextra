@@ -65,9 +65,9 @@ const nextra: Nextra = nextraConfig => {
     }
 
     // Check if there's a theme provided
-    if (!nextraConfig.theme) {
-      throw new Error('No Nextra theme found!')
-    }
+    // if (!nextraConfig.theme) {
+    //   throw new Error('No Nextra theme found!')
+    // }
 
     return {
       ...nextConfig,

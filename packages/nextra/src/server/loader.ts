@@ -6,7 +6,7 @@ import { compileMdx } from './compile.js'
 import {
   // CHUNKS_DIR,
   CWD,
-  MARKDOWN_EXTENSION_REGEX,
+  MARKDOWN_EXTENSION_REGEX
   // OFFICIAL_THEMES
 } from './constants.js'
 import { PAGES_DIR } from './file-system.js'

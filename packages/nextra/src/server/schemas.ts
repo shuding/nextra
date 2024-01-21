@@ -71,7 +71,6 @@ export const mathJaxOptionsSchema = z
 
 export const nextraConfigSchema = z
   .strictObject({
-    themeConfig: z.string(),
     defaultShowCopyCode: z.boolean(),
     search: searchSchema,
     staticImage: z.boolean(),
@@ -100,6 +99,7 @@ export const nextraConfigSchema = z
     transformPageMap:
       z.custom<(pageMap: PageMapItem[], locale: string) => PageMapItem[]>(),
     mdxOptions: z.strictObject({
+      providerImportSource: z.string(),
       rehypePlugins: z.custom<ProcessorOptions['rehypePlugins']>(),
       remarkPlugins: z.custom<ProcessorOptions['remarkPlugins']>(),
       format: z.enum(['detect', 'mdx', 'md']),
@@ -107,7 +107,6 @@ export const nextraConfigSchema = z
     })
   })
   .deepPartial()
-  .extend({ theme: z.string() })
 
 export const pageThemeSchema = z.strictObject({
   breadcrumb: z.boolean(),

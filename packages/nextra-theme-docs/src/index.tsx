@@ -4,7 +4,6 @@ import 'focus-visible'
 import './polyfill'
 import { ThemeProvider } from 'next-themes'
 import type { NextraThemeLayoutProps } from 'nextra'
-import { MDXProvider } from 'nextra/components'
 import type { ReactElement, ReactNode } from 'react'
 import { Banner, Head } from './components'
 import { PartialDocsThemeConfig } from './constants'
@@ -15,7 +14,6 @@ import {
   useConfig,
   useThemeConfig
 } from './contexts'
-import { getComponents } from './mdx-components'
 import { renderComponent } from './utils'
 
 function InnerLayout({ children }: { children: ReactNode }): ReactElement {
@@ -26,10 +24,10 @@ function InnerLayout({ children }: { children: ReactNode }): ReactElement {
   const { activeThemeContext: themeContext, topLevelNavbarItems } =
     config.normalizePagesResult
 
-  const components = getComponents({
-    isRawLayout: themeContext.layout === 'raw',
-    components: themeConfig.components
-  })
+  // const components = getComponents({
+  //   isRawLayout: themeContext.layout === 'raw',
+  //   components: themeConfig.components
+  // })
 
   return (
     <ThemeProvider
@@ -43,11 +41,7 @@ function InnerLayout({ children }: { children: ReactNode }): ReactElement {
         renderComponent(themeConfig.navbar.component, {
           items: topLevelNavbarItems
         })}
-      <ActiveAnchorProvider>
-        <MDXProvider disableParentContext components={components}>
-          {children}
-        </MDXProvider>
-      </ActiveAnchorProvider>
+      <ActiveAnchorProvider>{children}</ActiveAnchorProvider>
       {themeContext.footer &&
         renderComponent(themeConfig.footer.component, {
           menu: config.hideSidebar

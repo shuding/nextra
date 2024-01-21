@@ -3,7 +3,7 @@ import type { MDXComponents } from '@mdx-js/react/lib'
 import Image, { type ImageProps } from 'next/image'
 import { createElement } from 'react'
 
-const DEFAULT_COMPONENTS = {
+export const DEFAULT_COMPONENTS = {
   img: props =>
     createElement(
       typeof props.src === 'object' ? Image : 'img',
@@ -11,7 +11,9 @@ const DEFAULT_COMPONENTS = {
     )
 } satisfies MDXComponents
 
-export const useMDXComponents: typeof originalUseMDXComponents = components => {
+export type UseMDXComponents = typeof originalUseMDXComponents
+
+export const useMDXComponents: UseMDXComponents = components => {
   return {
     ...DEFAULT_COMPONENTS,
     ...components

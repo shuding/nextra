@@ -2,21 +2,12 @@ import cn from 'clsx'
 import type { NextraMDXContent } from 'nextra'
 import { Code, Pre, Table, Td, Th, Tr } from 'nextra/components'
 import { useMounted } from 'nextra/hooks'
-import { ArrowRightIcon } from 'nextra/icons'
 import type { MDXComponents } from 'nextra/mdx'
 import type { ComponentProps, ReactElement, ReactNode } from 'react'
-import {
-  Children,
-  cloneElement,
-  useEffect,
-  useMemo,
-  useRef,
-  useState
-} from 'react'
+import { useEffect, useRef } from 'react'
 import {
   Anchor,
   Breadcrumb,
-  Collapse,
   NavLinks,
   Sidebar,
   SkipNavContent
@@ -93,79 +84,6 @@ const createHeading = (
       </Tag>
     )
   }
-
-function Details({
-  children,
-  open,
-  ...props
-}: ComponentProps<'details'>): ReactElement {
-  const [openState, setOpen] = useState(!!open)
-  // To animate the close animation we have to delay the DOM node state here.
-  const [delayedOpenState, setDelayedOpenState] = useState(openState)
-
-  useEffect(() => {
-    if (!openState) {
-      const timeout = setTimeout(() => setDelayedOpenState(openState), 500)
-      return () => clearTimeout(timeout)
-    }
-    setDelayedOpenState(true)
-  }, [openState])
-
-  const [summary, restChildren] = useMemo(() => {
-    let summary: ReactElement | undefined
-    const restChildren = Children.map(children, child => {
-      const isSummary =
-        child &&
-        typeof child === 'object' &&
-        'type' in child &&
-        child.type === Summary
-
-      if (!isSummary) return child
-
-      summary ||= cloneElement(child, {
-        onClick(event: MouseEvent) {
-          event.preventDefault()
-          setOpen(v => !v)
-        }
-      })
-    })
-    return [summary, restChildren]
-  }, [children])
-
-  return (
-    <details
-      className="_my-4 _rounded _border _border-gray-200 _bg-white _p-2 _shadow-sm first:_mt-0 dark:_border-neutral-800 dark:_bg-neutral-900"
-      {...props}
-      open={delayedOpenState}
-      data-expanded={openState ? '' : undefined}
-    >
-      {summary}
-      <Collapse isOpen={openState}>{restChildren}</Collapse>
-    </details>
-  )
-}
-
-function Summary({
-  children,
-  ...props
-}: ComponentProps<'summary'>): ReactElement {
-  return (
-    <summary
-      className="_flex _items-center _cursor-pointer _p-1 _transition-colors hover:_bg-gray-100 dark:hover:_bg-neutral-800"
-      {...props}
-    >
-      {children}
-      <ArrowRightIcon
-        className={cn(
-          '_order-first', // if prettier formats `summary` it will have unexpected margin-top
-          '_size-4 _shrink-0 _mx-1.5',
-          'rtl:_rotate-180 [[data-expanded]>summary>&]:_rotate-90 _transition'
-        )}
-        pathClassName="_stroke-[3px]"
-      />
-    </summary>
-  )
-}
 
 const EXTERNAL_HREF_REGEX = /https?:\/\//
 
@@ -315,8 +233,6 @@ const DEFAULT_COMPONENTS: MDXComponents = {
   tr: Tr,
   th: Th,
   td: Td,
-  details: Details,
-  summary: Summary,
   pre: Pre,
   code: Code,
   wrapper: function NextraWrapper({ toc, children }) {

@@ -1,7 +1,6 @@
 import { ThemeProvider } from 'next-themes'
 import Head from 'next/head'
 import type { NextraThemeLayoutProps } from 'nextra'
-import { MDXProvider } from 'nextra/components'
 import { useRef } from 'react'
 import { BlogProvider } from './blog-context'
 import { DEFAULT_THEME } from './constants'
@@ -70,10 +69,9 @@ export default function NextraLayout({
             {pageOpts.hasJsxInH1 ? null : <h1>{pageTitle}</h1>}
             {type === 'post' ? <Meta /> : <Nav />}
 
-            <MDXProvider components={{ ...components, ...config.components }}>
-              {children}
-            </MDXProvider>
-
+            {/*<MDXProvider components={{ ...components, ...config.components }}>*/}
+            {children}
+            {/*</MDXProvider>*/}
             {Footer && <Footer />}
           </HeadingContext.Provider>
 
