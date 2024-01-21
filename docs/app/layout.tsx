@@ -8,7 +8,18 @@ import 'nextra-theme-docs/style.css'
 import '../style.css'
 
 export const metadata: Metadata = {
-  description: 'Make beautiful websites with Next.js & MDX.'
+  description: 'Make beautiful websites with Next.js & MDX.',
+  openGraph: {
+    images: '/og.jpeg'
+  },
+  metadataBase: new URL('https://nextra.site'),
+  keywords: ['Nextra', 'Next.js', 'React', 'JavaScript'],
+  generator: 'Next.js',
+  applicationName: 'Nextra',
+  title: {
+    absolute: '',
+    template: '%s | Nextra'
+  }
 }
 
 export default async function RootLayout({
