@@ -3,9 +3,6 @@ import type { DocsThemeConfig } from 'nextra-theme-docs'
 import { useConfig } from 'nextra-theme-docs'
 
 const config: DocsThemeConfig = {
-  project: {
-    link: 'https://github.com/shuding/nextra'
-  },
   docsRepositoryBase: 'https://github.com/shuding/nextra/tree/main/docs',
   head: function useHead() {
     const config = useConfig()
@@ -15,15 +12,8 @@ const config: DocsThemeConfig = {
       'https://nextra.site/' +
       (isDefault ? 'og.jpeg' : `api/og?title=${config.title}`)
 
-    const description =
-      config.frontMatter.description ||
-      'Make beautiful websites with Next.js & MDX.'
-    const title = config.title + (route === '/' ? '' : ' - Nextra')
-
     return (
       <>
-        <meta property="og:image" content={image} />
-
         <meta name="msapplication-TileColor" content="#fff" />
         <meta httpEquiv="Content-Language" content="en" />
         <meta name="apple-mobile-web-app-title" content="Nextra" />

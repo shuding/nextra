@@ -40,7 +40,10 @@ export default async function RootLayout({
       <body>
         <Layout
           themeConfig={{
-            logo
+            logo,
+            project: {
+              link: 'https://github.com/shuding/nextra'
+            }
           }}
           // @ts-expect-error todo: remove it
           pageOpts={{ pageMap, frontMatter: {} }}
