@@ -4,6 +4,7 @@ import { ArrowRightIcon } from 'nextra/icons'
 import type { UseMDXComponents } from 'nextra/mdx'
 import { DEFAULT_COMPONENTS } from 'nextra/mdx'
 import { Details } from './details'
+import { H2, H3, H4, H5, H6 } from './heading'
 import { Wrapper } from './wrapper'
 
 /* eslint sort-keys: error */
@@ -26,6 +27,11 @@ export const useMDXComponents: UseMDXComponents = components => {
         {...props}
       />
     ),
+    h2: H2,
+    h3: H3,
+    h4: H4,
+    h5: H5,
+    h6: H6,
     hr: props => (
       <hr
         className="_my-8 _border-neutral-200/70 contrast-more:_border-neutral-400 dark:_border-primary-100/10 contrast-more:dark:_border-neutral-400"
