@@ -1,3 +1,5 @@
+'use client'
+
 import cn from 'clsx'
 import type { Document } from 'flexsearch'
 import type { SearchData } from 'nextra'

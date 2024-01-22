@@ -1,3 +1,5 @@
+'use client'
+
 import cn from 'clsx'
 import type { ReactElement, ReactNode } from 'react'
 import { useEffect, useRef } from 'react'

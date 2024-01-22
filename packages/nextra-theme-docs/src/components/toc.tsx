@@ -1,3 +1,5 @@
+'use client'
+
 import cn from 'clsx'
 import type { Heading } from 'nextra'
 import { removeLinks } from 'nextra/remove-links'

@@ -1,3 +1,5 @@
+'use client'
+
 import { Transition } from '@headlessui/react'
 import cn from 'clsx'
 // eslint-disable-next-line no-restricted-imports -- since we don't need newWindow prop

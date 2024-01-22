@@ -1,3 +1,5 @@
+'use client'
+
 import type { ReactElement, ReactNode } from 'react'
 import { createContext, useContext, useRef } from 'react'
 import type { DocsThemeConfig } from '../constants'

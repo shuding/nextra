@@ -1,3 +1,5 @@
+'use client'
+
 import cn from 'clsx'
 import type { NextraMDXContent } from 'nextra'
 import { useMounted } from 'nextra/hooks'
