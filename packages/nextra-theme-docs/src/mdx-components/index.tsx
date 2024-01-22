@@ -4,6 +4,7 @@ import { ArrowRightIcon } from 'nextra/icons'
 import type { UseMDXComponents } from 'nextra/mdx'
 import { DEFAULT_COMPONENTS } from 'nextra/mdx'
 import { Details } from './details'
+import { Wrapper } from './wrapper'
 
 /* eslint sort-keys: error */
 export const useMDXComponents: UseMDXComponents = components => {
@@ -72,6 +73,7 @@ export const useMDXComponents: UseMDXComponents = components => {
         {...props}
       />
     ),
+    wrapper: Wrapper as any,
     ...components
   }
 }
