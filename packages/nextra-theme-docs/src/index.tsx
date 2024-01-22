@@ -23,11 +23,6 @@ function InnerLayout({ children }: { children: ReactNode }): ReactElement {
   const { activeThemeContext: themeContext, topLevelNavbarItems } =
     config.normalizePagesResult
 
-  // const components = getComponents({
-  //   isRawLayout: themeContext.layout === 'raw',
-  //   components: themeConfig.components
-  // })
-
   return (
     <ThemeProvider
       attribute="class"
