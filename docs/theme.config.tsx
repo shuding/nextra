@@ -1,8 +1,7 @@
 import { useRouter } from 'next/router'
-import type { DocsThemeConfig } from 'nextra-theme-docs'
 import { useConfig } from 'nextra-theme-docs'
 
-const config: DocsThemeConfig = {
+const config = {
   docsRepositoryBase: 'https://github.com/shuding/nextra/tree/main/docs',
   head: function useHead() {
     const config = useConfig()
