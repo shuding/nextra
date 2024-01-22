@@ -1,11 +1,10 @@
 import cn from 'clsx'
-import { Code, Pre } from 'nextra/components'
-import type { MDXComponents } from 'nextra/mdx'
-import { Anchor } from './components'
-import type { AnchorProps } from './components/anchor'
+import type { AnchorProps } from './anchor'
+import { Anchor } from './anchor'
 
 const EXTERNAL_HREF_REGEX = /https?:\/\//
 
+// TODO: use remark plugin which adds target="_blank" to external links
 export const Link = ({ href = '', className, ...props }: AnchorProps) => (
   <Anchor
     href={href}
@@ -17,9 +16,3 @@ export const Link = ({ href = '', className, ...props }: AnchorProps) => (
     {...props}
   />
 )
-
-const DEFAULT_COMPONENTS: MDXComponents = {
-  a: Link,
-  pre: Pre,
-  code: Code
-}

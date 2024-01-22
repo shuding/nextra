@@ -3,6 +3,7 @@ import { Table, Td, Th, Tr } from 'nextra/components'
 import { ArrowRightIcon } from 'nextra/icons'
 import type { UseMDXComponents } from 'nextra/mdx'
 import { DEFAULT_COMPONENTS } from 'nextra/mdx'
+import { Link } from '../components'
 import { Details } from './details'
 import { H2, H3, H4, H5, H6 } from './heading'
 import { Wrapper } from './wrapper'
@@ -11,6 +12,7 @@ import { Wrapper } from './wrapper'
 export const useMDXComponents: UseMDXComponents = components => {
   return {
     ...DEFAULT_COMPONENTS,
+    a: Link,
     blockquote: props => (
       <blockquote
         className={cn(

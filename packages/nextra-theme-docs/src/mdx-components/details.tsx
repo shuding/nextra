@@ -2,7 +2,7 @@
 
 import type { ComponentProps, ReactElement } from 'react'
 import { Children, cloneElement, useEffect, useMemo, useState } from 'react'
-import { Collapse } from '../components/collapse'
+import { Collapse } from '../components'
 
 export function Details({
   children,

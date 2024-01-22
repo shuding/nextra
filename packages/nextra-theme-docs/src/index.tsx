@@ -6,7 +6,6 @@ import { ThemeProvider } from 'next-themes'
 import type { NextraThemeLayoutProps } from 'nextra'
 import type { ReactElement, ReactNode } from 'react'
 import { Banner, Head } from './components'
-import { PartialDocsThemeConfig } from './constants'
 import {
   ActiveAnchorProvider,
   ConfigProvider,
@@ -70,7 +69,6 @@ export {
   // PartialDocsThemeConfig as DocsThemeConfig
 }
 export { useTheme } from 'next-themes'
-export { Link } from './mdx-components'
 export {
   Bleed,
   Collapse,
@@ -79,5 +77,6 @@ export {
   SkipNavContent,
   SkipNavLink,
   ThemeSwitch,
-  LocaleSwitch
+  LocaleSwitch,
+  Link
 } from './components'
