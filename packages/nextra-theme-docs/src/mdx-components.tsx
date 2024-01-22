@@ -99,10 +99,6 @@ export const Link = ({ href = '', className, ...props }: AnchorProps) => (
   />
 )
 
-const A = ({ href = '', ...props }) => (
-  <Anchor href={href} newWindow={EXTERNAL_HREF_REGEX.test(href)} {...props} />
-)
-
 const classes = {
   toc: cn(
     'nextra-toc _order-last max-xl:_hidden _w-64 _shrink-0 print:_hidden'
@@ -191,34 +187,6 @@ function Body({ children }: { children: ReactNode }): ReactElement {
 }
 
 const DEFAULT_COMPONENTS: MDXComponents = {
-  ul: props => (
-    <ul
-      className="_mt-6 _list-disc first:_mt-0 ltr:_ml-6 rtl:_mr-6"
-      {...props}
-    />
-  ),
-  ol: props => (
-    <ol
-      className="_mt-6 _list-decimal first:_mt-0 ltr:_ml-6 rtl:_mr-6"
-      {...props}
-    />
-  ),
-  li: props => <li className="_my-2" {...props} />,
-  blockquote: props => (
-    <blockquote
-      className={cn(
-        '_mt-6 _border-gray-300 _italic _text-gray-700 dark:_border-gray-700 dark:_text-gray-400',
-        'first:_mt-0 ltr:_border-l-2 ltr:_pl-6 rtl:_border-r-2 rtl:_pr-6'
-      )}
-      {...props}
-    />
-  ),
-  hr: props => (
-    <hr
-      className="_my-8 _border-neutral-200/70 contrast-more:_border-neutral-400 dark:_border-primary-100/10 contrast-more:dark:_border-neutral-400"
-      {...props}
-    />
-  ),
   a: Link,
   pre: Pre,
   code: Code,
