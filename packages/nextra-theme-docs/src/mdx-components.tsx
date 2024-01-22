@@ -1,6 +1,6 @@
 import cn from 'clsx'
 import type { NextraMDXContent } from 'nextra'
-import { Code, Pre, Table, Td, Th, Tr } from 'nextra/components'
+import { Code, Pre } from 'nextra/components'
 import { useMounted } from 'nextra/hooks'
 import type { MDXComponents } from 'nextra/mdx'
 import type { ComponentProps, ReactElement, ReactNode } from 'react'
@@ -191,12 +191,6 @@ function Body({ children }: { children: ReactNode }): ReactElement {
 }
 
 const DEFAULT_COMPONENTS: MDXComponents = {
-  h1: props => (
-    <h1
-      className="_mt-2 _text-4xl _font-bold _tracking-tight _text-slate-900 dark:_text-slate-100"
-      {...props}
-    />
-  ),
   ul: props => (
     <ul
       className="_mt-6 _list-disc first:_mt-0 ltr:_ml-6 rtl:_mr-6"
@@ -226,13 +220,6 @@ const DEFAULT_COMPONENTS: MDXComponents = {
     />
   ),
   a: Link,
-  table: props => (
-    <Table className="nextra-scrollbar _mt-6 _p-0 first:_mt-0" {...props} />
-  ),
-  p: props => <p className="_mt-6 _leading-7 first:_mt-0" {...props} />,
-  tr: Tr,
-  th: Th,
-  td: Td,
   pre: Pre,
   code: Code,
   wrapper: function NextraWrapper({ toc, children }) {
@@ -287,17 +274,10 @@ const DEFAULT_COMPONENTS: MDXComponents = {
 }
 
 export function getComponents({
-  isRawLayout,
   components
 }: {
-  isRawLayout?: boolean
   components?: DocsThemeConfig['components']
 }): MDXComponents {
-  if (isRawLayout) {
-    // @ts-expect-error
-    return { a: A, wrapper: DEFAULT_COMPONENTS.wrapper }
-  }
-
   const context = { index: 0 }
   return {
     ...DEFAULT_COMPONENTS,
