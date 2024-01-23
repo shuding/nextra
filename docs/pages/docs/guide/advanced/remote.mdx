@@ -2,15 +2,15 @@ import { useData } from 'nextra/data'
 import { serialize } from 'next-mdx-remote/serialize'
 import { MDXRemote } from 'next-mdx-remote'
 
-export const getStaticProps = ({ params }) => {
-  const source = fetch(`https://gist.githubusercontent.com/eiiot/55984a720d8bf986b41d347b9895ed4b/raw/c6c48d57ca92ac2222cf358350494faf02c07d81/nextra-remote.md`)
-    .then(res => res.text())
-  const mdxSource = await serialize(source)
+export const getStaticProps = async () => {
+  const sourceRes = await fetch(`https://gist.githubusercontent.com/eiiot/55984a720d8bf986b41d347b9895ed4b/raw/f7a100728a5f9723241a37d84c359db1e636304c/nextra-remote.md`)
+  const source = await sourceRes.text();
+  const mdxSource = await serialize(source);
   return { props: { ssg: { source: mdxSource } } }
 }
 
 export const Remote = () => {
-  const { source } = useData()
+  const { source } = useData();
   return <MDXRemote {...source} />
 }
 
@@ -26,15 +26,15 @@ import { useData } from 'nextra/data'
 import { serialize } from 'next-mdx-remote/serialize'
 import { MDXRemote } from 'next-mdx-remote'
 
-export const getStaticProps = ({ params }) => {
-  const source = fetch(`https://gist.githubusercontent.com/eiiot/55984a720d8bf986b41d347b9895ed4b/raw/c6c48d57ca92ac2222cf358350494faf02c07d81/nextra-remote.md`)
-    .then(res => res.text())
-  const mdxSource = await serialize(source)
+export const getStaticProps = async () => {
+  const sourceRes = await fetch(`https://gist.githubusercontent.com/eiiot/55984a720d8bf986b41d347b9895ed4b/raw/f7a100728a5f9723241a37d84c359db1e636304c/nextra-remote.md`)
+  const source = await sourceRes.text();
+  const mdxSource = await serialize(source);
   return { props: { ssg: { source: mdxSource } } }
 }
 
 export const Remote = () => {
-  const { source } = useData()
+  const { source } = useData();
   return <MDXRemote {...source} />
 }
 
