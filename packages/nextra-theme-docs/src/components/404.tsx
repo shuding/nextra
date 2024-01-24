@@ -1,33 +1,39 @@
-import { useRouter } from 'next/navigation'
-import { useMounted } from 'nextra/hooks'
-import type { ReactElement } from 'react'
+'use client'
+
+import { usePathname } from 'next/navigation'
+import type { ReactElement, ReactNode } from 'react'
 import { useThemeConfig } from '../contexts'
+import { H1 } from '../mdx-components/h1'
 import { getGitIssueUrl, renderComponent } from '../utils'
-import { Anchor } from './anchor'
+import { Link } from './link'
 
-export function NotFoundPage(): ReactElement | null {
-  const themeConfig = useThemeConfig()
+type NotFoundPageProps = {
+  content?: ReactNode
+  labels?: string
+  children?: ReactNode
+}
 
-  const mounted = useMounted()
-  const { asPath } = useRouter()
-  const { content, labels } = themeConfig.notFound
-  if (!content) {
-    return null
-  }
+export function NotFoundPage({
+  content = 'Submit an issue about broken link →',
+  labels = 'bug',
+  children = <H1>404: Page Not Found</H1>
+}: NotFoundPageProps): ReactElement {
+  const config = useThemeConfig()
+  const pathname = usePathname()
 
   return (
-    <p className="_text-center">
-      <Anchor
+    <div className="_flex _flex-col _justify-center _items-center _gap-6 _h-screen">
+      {children}
+      <Link
         href={getGitIssueUrl({
-          repository: themeConfig.docsRepositoryBase,
-          title: `Found broken \`${mounted ? asPath : ''}\` link. Please fix!`,
+          repository: config.docsRepositoryBase,
+          title: `Found broken \`${pathname}\` link. Please fix!`,
           labels
         })}
         newWindow
-        className="_text-primary-600 _underline _decoration-from-font [text-underline-position:from-font]"
       >
         {renderComponent(content)}
-      </Anchor>
-    </p>
+      </Link>
+    </div>
   )
 }

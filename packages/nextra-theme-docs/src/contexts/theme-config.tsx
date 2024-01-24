@@ -98,10 +98,6 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     defaultTheme: 'system',
     storageKey: 'theme'
   },
-  notFound: {
-    content: 'Submit an issue about broken link →',
-    labels: 'bug'
-  },
   project: {
     icon: (
       <>

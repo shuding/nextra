@@ -5,6 +5,7 @@ import type { UseMDXComponents } from 'nextra/mdx'
 import { DEFAULT_COMPONENTS } from 'nextra/mdx'
 import { Link } from '../components'
 import { Details } from './details'
+import { H1 } from './h1'
 import { H2, H3, H4, H5, H6 } from './heading'
 import { Wrapper } from './wrapper'
 
@@ -23,12 +24,7 @@ export const useMDXComponents: UseMDXComponents = components => {
       />
     ),
     details: Details,
-    h1: props => (
-      <h1
-        className="_mt-2 _text-4xl _font-bold _tracking-tight _text-slate-900 dark:_text-slate-100"
-        {...props}
-      />
-    ),
+    h1: H1,
     h2: H2,
     h3: H3,
     h4: H4,

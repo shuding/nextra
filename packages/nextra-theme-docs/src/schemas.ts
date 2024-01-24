@@ -74,10 +74,6 @@ export const themeSchema = /* @__PURE__ */ (() =>
       forcedTheme: z.string().optional(),
       storageKey: z.string()
     }),
-    notFound: z.strictObject({
-      content: z.custom<ReactNode | FC>(...reactNode),
-      labels: z.string()
-    }),
     project: z.strictObject({
       icon: z.custom<ReactNode | FC>(...reactNode),
       link: z.string().startsWith('https://').optional()
