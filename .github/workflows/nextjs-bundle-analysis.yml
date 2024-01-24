@@ -54,7 +54,7 @@ jobs:
         run: cd examples/swr-site && npx -p nextjs-bundle-analysis report
 
       - name: Upload bundle
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: bundle
           path: examples/swr-site/.next/analyze/__bundle_analysis.json
