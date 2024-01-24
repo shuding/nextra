@@ -1,11 +1,13 @@
 import fs from 'fs/promises'
 import path from 'path'
-import type { Metadata } from 'next'
-import { Layout } from 'nextra-theme-docs'
+import type { Metadata, Viewport } from 'next'
+import { Head, Layout } from 'nextra-theme-docs'
 import { collectPageMap } from 'nextra/page-map'
 import type { ReactNode } from 'react'
 import 'nextra-theme-docs/style.css'
 import '../style.css'
+
+export const viewport: Viewport = Head.viewport
 
 export const metadata: Metadata = {
   description: 'Make beautiful websites with Next.js & MDX.',
@@ -13,7 +15,15 @@ export const metadata: Metadata = {
     images: '/og.jpeg'
   },
   metadataBase: new URL('https://nextra.site'),
-  keywords: ['Nextra', 'Next.js', 'React', 'JavaScript'],
+  keywords: [
+    'Nextra',
+    'Next.js',
+    'React',
+    'JavaScript',
+    'MDX',
+    'Markdown',
+    'Static Site Generator'
+  ],
   generator: 'Next.js',
   applicationName: 'Nextra',
   title: {
@@ -37,6 +47,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en" dir="ltr">
+      <Head />
       <body>
         <Layout
           themeConfig={{
