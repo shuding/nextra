@@ -1,5 +1,4 @@
 /* eslint sort-keys: error */
-import { useRouter } from 'next/navigation'
 import { DiscordIcon, GitHubIcon } from 'nextra/icons'
 import { isValidElement } from 'react'
 import type { z } from 'zod'
@@ -77,12 +76,11 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     content: `MIT ${new Date().getFullYear()} © Nextra.`
   },
   gitTimestamp: function GitTimestamp({ timestamp }) {
-    const { locale = DEFAULT_LOCALE } = useRouter()
     return (
       <>
         Last updated on{' '}
         <time dateTime={timestamp.toISOString()}>
-          {timestamp.toLocaleDateString(locale, {
+          {timestamp.toLocaleDateString('en', {
             day: 'numeric',
             month: 'long',
             year: 'numeric'
