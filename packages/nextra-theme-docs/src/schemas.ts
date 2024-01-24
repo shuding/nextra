@@ -33,7 +33,6 @@ export const themeSchema = /* @__PURE__ */ (() =>
     }),
     components: z.record(z.custom<FC>(...fc)).optional(),
     darkMode: z.boolean(),
-    direction: z.enum(['ltr', 'rtl']),
     docsRepositoryBase: z.string().startsWith('https://'),
     editLink: z.strictObject({
       component: z.custom<
@@ -56,7 +55,6 @@ export const themeSchema = /* @__PURE__ */ (() =>
       content: z.custom<ReactNode | FC>(...reactNode)
     }),
     gitTimestamp: z.custom<ReactNode | FC<{ timestamp: Date }>>(...reactNode),
-    head: z.custom<ReactNode | FC>(...reactNode),
     i18n: i18nSchema,
     logo: z.custom<ReactNode | FC>(...reactNode),
     logoLink: z.boolean().or(z.string()),
@@ -79,20 +77,6 @@ export const themeSchema = /* @__PURE__ */ (() =>
     notFound: z.strictObject({
       content: z.custom<ReactNode | FC>(...reactNode),
       labels: z.string()
-    }),
-    color: z.strictObject({
-      hue: z.number().or(
-        z.strictObject({
-          dark: z.number(),
-          light: z.number()
-        })
-      ),
-      saturation: z.number().or(
-        z.strictObject({
-          dark: z.number(),
-          light: z.number()
-        })
-      )
     }),
     project: z.strictObject({
       icon: z.custom<ReactNode | FC>(...reactNode),

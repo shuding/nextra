@@ -33,15 +33,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
       </>
     )
   },
-  color: {
-    hue: {
-      dark: 204,
-      light: 212
-    },
-    saturation: 100
-  },
   darkMode: true,
-  direction: 'ltr',
   docsRepositoryBase: 'https://github.com/shuding/nextra',
   editLink: {
     component: function EditLink({ className, filePath, children }) {
@@ -85,26 +77,6 @@ export const DEFAULT_THEME: DocsThemeConfig = {
             year: 'numeric'
           })}
         </time>
-      </>
-    )
-  },
-  head: function useHead() {
-    const { frontMatter, title: pageTitle } = useConfig()
-
-    const title = `${pageTitle} – Nextra`
-    const { description, canonical, image } = frontMatter
-    return (
-      <>
-        <title>{title}</title>
-        <meta property="og:title" content={title} />
-        {description && (
-          <>
-            <meta name="description" content={description} />
-            <meta property="og:description" content={description} />
-          </>
-        )}
-        {canonical && <link rel="canonical" href={canonical} />}
-        {image && <meta name="og:image" content={image} />}
       </>
     )
   },
