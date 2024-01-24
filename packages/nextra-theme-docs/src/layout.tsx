@@ -5,7 +5,7 @@ import './polyfill'
 import { ThemeProvider } from 'next-themes'
 import type { NextraThemeLayoutProps } from 'nextra'
 import type { ReactElement, ReactNode } from 'react'
-import { Banner, Head } from './components'
+import { Banner } from './components'
 import {
   ActiveAnchorProvider,
   ConfigProvider,
@@ -29,7 +29,6 @@ function InnerLayout({ children }: { children: ReactNode }): ReactElement {
       disableTransitionOnChange
       {...themeConfig.nextThemes}
     >
-      <Head />
       <Banner />
       {themeContext.navbar &&
         renderComponent(themeConfig.navbar.component, {
@@ -57,21 +56,3 @@ export function Layout({
     </ThemeConfigProvider>
   )
 }
-
-export {
-  useThemeConfig,
-  useConfig
-  // PartialDocsThemeConfig as DocsThemeConfig
-}
-export { useTheme } from 'next-themes'
-export {
-  Bleed,
-  Collapse,
-  NotFoundPage,
-  Navbar,
-  SkipNavContent,
-  SkipNavLink,
-  ThemeSwitch,
-  LocaleSwitch,
-  Link
-} from './components'

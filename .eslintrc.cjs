@@ -34,7 +34,7 @@ module.exports = {
         ],
         'no-else-return': ['error', { allowElseIf: false }],
         'no-lonely-if': 'error',
-        'prefer-destructuring': [
+        '@typescript-eslint/prefer-destructuring': [
           'error',
           { VariableDeclarator: { object: true } }
         ],
