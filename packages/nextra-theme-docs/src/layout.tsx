@@ -3,7 +3,8 @@ import { DiscordIcon, GitHubIcon } from 'nextra/icons'
 import type { ReactElement, ReactNode } from 'react'
 import { isValidElement } from 'react'
 import { Flexsearch, InnerLayout } from './components'
-import { ConfigProvider, ThemeConfigProvider } from './contexts'
+import type { ThemeProviderProps } from './contexts'
+import { ConfigProvider, ThemeConfigProvider, ThemeProvider } from './contexts'
 import type { DocsThemeConfig } from './contexts/theme-config'
 
 const DEFAULT_THEME: DocsThemeConfig = {
@@ -39,10 +40,6 @@ const DEFAULT_THEME: DocsThemeConfig = {
   logoLink: true,
   navigation: true,
   navbar: {},
-  nextThemes: {
-    defaultTheme: 'system',
-    storageKey: 'theme'
-  },
   project: {
     icon: (
       <>
@@ -87,9 +84,11 @@ export function Layout({
   children,
   themeConfig,
   pageOpts,
-  banner
+  banner,
+  nextThemes
 }: NextraThemeLayoutProps & {
   banner?: ReactNode
+  nextThemes?: ThemeProviderProps
 }): ReactElement {
   const date = pageOpts.timestamp ? new Date(pageOpts.timestamp) : null
   const extendedThemeConfig = {
@@ -122,7 +121,15 @@ export function Layout({
     <ThemeConfigProvider value={extendedThemeConfig}>
       <ConfigProvider value={pageOpts}>
         {banner}
-        <InnerLayout>{children}</InnerLayout>
+        <ThemeProvider
+          attribute="class"
+          disableTransitionOnChange
+          defaultTheme="system"
+          storageKey="theme"
+          {...nextThemes}
+        >
+          <InnerLayout>{children}</InnerLayout>
+        </ThemeProvider>
       </ConfigProvider>
     </ThemeConfigProvider>
   )

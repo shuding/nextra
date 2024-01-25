@@ -2,7 +2,6 @@
 
 import 'focus-visible'
 import '../polyfill'
-import { ThemeProvider } from 'next-themes'
 import type { ReactElement, ReactNode } from 'react'
 import { ActiveAnchorProvider, useConfig, useThemeConfig } from '../contexts'
 import { renderComponent } from '../utils'
@@ -19,11 +18,7 @@ export function InnerLayout({
     normalizePagesResult
 
   return (
-    <ThemeProvider
-      attribute="class"
-      disableTransitionOnChange
-      {...themeConfig.nextThemes}
-    >
+    <>
       {themeContext.navbar &&
         renderComponent(themeConfig.navbar.component, {
           items: topLevelNavbarItems
@@ -33,6 +28,6 @@ export function InnerLayout({
         renderComponent(themeConfig.footer.component, {
           menu: hideSidebar
         })}
-    </ThemeProvider>
+    </>
   )
 }

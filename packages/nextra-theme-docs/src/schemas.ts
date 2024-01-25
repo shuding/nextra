@@ -63,11 +63,6 @@ export const themeSchema = /* @__PURE__ */ (() =>
         prev: z.boolean()
       })
     ),
-    nextThemes: z.strictObject({
-      defaultTheme: z.string(),
-      forcedTheme: z.string().optional(),
-      storageKey: z.string()
-    }),
     project: z.strictObject({
       icon: z.custom<ReactNode | FC>(...reactNode),
       link: z.string().startsWith('https://').optional()
