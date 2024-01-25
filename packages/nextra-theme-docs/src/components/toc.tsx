@@ -2,7 +2,6 @@
 
 import cn from 'clsx'
 import type { Heading } from 'nextra'
-import { removeLinks } from 'nextra/remove-links'
 import type { ReactElement } from 'react'
 import { useEffect, useRef } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
@@ -87,7 +86,7 @@ export function TOC({ toc, filePath }: TOCProps): ReactElement {
                     'contrast-more:_text-gray-900 contrast-more:_underline contrast-more:dark:_text-gray-50 _w-full _break-words'
                   )}
                 >
-                  {removeLinks(value)}
+                  {value}
                 </a>
               </li>
             ))}

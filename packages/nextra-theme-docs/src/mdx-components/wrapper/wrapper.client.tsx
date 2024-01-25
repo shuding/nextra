@@ -3,9 +3,9 @@
 import cn from 'clsx'
 import type { NextraMDXContent } from 'nextra'
 import type { ReactElement, ReactNode } from 'react'
-import { Breadcrumb, NavLinks, Sidebar, SkipNavContent } from '../components'
-import { useConfig, useThemeConfig } from '../contexts'
-import { renderComponent } from '../utils'
+import { Breadcrumb, NavLinks, Sidebar, SkipNavContent } from '../../components'
+import { useConfig, useThemeConfig } from '../../contexts'
+import { renderComponent } from '../../utils'
 
 const classes = {
   toc: cn(
@@ -87,7 +87,7 @@ function Body({ children }: { children: ReactNode }): ReactElement {
   )
 }
 
-export const Wrapper: NextraMDXContent = ({ toc, children }) => {
+export const ClientWrapper: NextraMDXContent = ({ toc, children }) => {
   const config = useConfig()
   const themeConfig = useThemeConfig()
   const {

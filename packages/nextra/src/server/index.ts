@@ -5,19 +5,15 @@ import { fromZodError } from 'zod-validation-error'
 import type { Nextra } from '../types'
 import {
   DEFAULT_CONFIG,
-  DEFAULT_LOCALE,
   DEFAULT_LOCALES,
   MARKDOWN_EXTENSION_REGEX,
-  MARKDOWN_EXTENSIONS,
-  META_REGEX
+  MARKDOWN_EXTENSIONS
 } from './constants.js'
 import { nextraConfigSchema } from './schemas.js'
 import { logger } from './utils.js'
 import { NextraSearchPlugin } from './webpack-plugins/index.js'
 
 const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
-
-// const AGNOSTIC_PAGE_MAP_PATH = `.next${sep}static${sep}chunks${sep}nextra-page-map`
 
 const nextra: Nextra = nextraConfig => {
   try {
@@ -64,23 +60,9 @@ const nextra: Nextra = nextraConfig => {
       locales
     }
 
-    // Check if there's a theme provided
-    // if (!nextraConfig.theme) {
-    //   throw new Error('No Nextra theme found!')
-    // }
-
     return {
       ...nextConfig,
       ...(nextConfig.output !== 'export' && { rewrites }),
-      env: {
-        ...nextConfig.env,
-        ...(hasI18n && {
-          NEXTRA_DEFAULT_LOCALE:
-            nextConfig.i18n?.defaultLocale || DEFAULT_LOCALE
-        }),
-        NEXTRA_SEARCH: String(!!loaderOptions.search)
-      },
-      ...(hasI18n && { i18n: undefined }),
       pageExtensions: [
         ...(nextConfig.pageExtensions || DEFAULT_EXTENSIONS),
         ...MARKDOWN_EXTENSIONS
@@ -112,14 +94,6 @@ const nextra: Nextra = nextraConfig => {
           }
         }
 
-        // const defaultESMAppPath = require.resolve('next/dist/esm/pages/_app.js')
-        // const defaultCJSAppPath = require.resolve('next/dist/pages/_app.js')
-
-        // config.resolve.alias = {
-        //   ...config.resolve.alias,
-        //   // Resolves ESM _app file instead cjs, so we could import theme.config via `import` statement
-        //   [defaultCJSAppPath]: defaultESMAppPath
-        // }
         const rules = config.module.rules as RuleSetRule[]
 
         // if (IMPORT_FRONTMATTER) {
@@ -166,33 +140,7 @@ const nextra: Nextra = nextraConfig => {
                 options: { ...loaderOptions, isPageImport: true }
               }
             ]
-          },
-          // {
-          //   // Match dynamic meta files inside pages.
-          //   test: META_REGEX,
-          //   issuer: request => !request,
-          //   use: [
-          //     options.defaultLoaders.babel,
-          //     {
-          //       loader: 'nextra/loader',
-          //       options: {
-          //         isMetaFile: true
-          //       }
-          //     }
-          //   ]
-          // }
-          // {
-          //   // Use platform separator because /pages\/_app\./ will not work on windows
-          //   test: new RegExp(`pages${sep === '/' ? '/' : '\\\\'}_app\\.`),
-          //   issuer: request => !request,
-          //   use: [
-          //     options.defaultLoaders.babel,
-          //     {
-          //       loader: 'nextra/loader',
-          //       options: loaderOptions
-          //     }
-          //   ]
-          // }
+          }
         )
 
         return nextConfig.webpack?.(config, options) || config
