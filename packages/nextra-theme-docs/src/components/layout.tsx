@@ -65,7 +65,7 @@ const DEFAULT_THEME: DocsThemeConfig = {
     }
   },
   toc: {
-    backToTop: false,
+    backToTop: true,
     float: true,
     title: 'On This Page'
   }
