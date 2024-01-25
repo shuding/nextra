@@ -1,0 +1,148 @@
+import { BoxIcon, GearIcon, RowsIcon } from '@components/icons'
+import { Callout, Cards, Steps } from 'nextra/components'
+
+# Docs Theme
+
+Nextra Docs Theme is a theme that includes almost everything you need to build a
+modern documentation website. It includes a top navigation bar, a search bar, a
+pages sidebar, a TOC sidebar, and other built-in components.
+
+This website itself is built with the Nextra Docs Theme.
+
+## Quick Start from Template
+
+### Deploy to Vercel
+
+You can start by creating your own Nextra site and deploying to Vercel by
+clicking the link:
+
+<a
+  className="mt-3 inline-flex"
+  target="_blank"
+  href="https://vercel.com/new/clone?s=https%3A%2F%2Fgithub.com%2Fshuding%2Fnextra-docs-template&showOptionalTeamCreation=false"
+>
+  ![](https://vercel.com/button)
+</a>
+
+Vercel will fork the
+[Nextra Docs template](https://github.com/shuding/nextra-docs-template) and
+deploy the site for you. Once done, every commit in the repository will be
+deployed automatically.
+
+### Fork the Template
+
+You can also manually fork the
+[template repository](https://github.com/shuding/nextra-docs-template).
+
+## Start as New Project
+
+<Steps>
+### Install
+
+To create a Nextra Docs site manually, you have to install **Next.js**,
+**React**, **Nextra**, and **Nextra Docs Theme**. In your project directory, run
+the following command to install the dependencies:
+
+```sh npm2yarn
+npm i next react react-dom nextra nextra-theme-docs
+```
+
+<Callout>
+  If you already have Next.js installed in your project, you only need to
+  install `nextra` and `nextra-theme-docs` as the add-ons.
+</Callout>
+
+Add the following scripts in `package.json`:
+
+```json filename="package.json"
+"scripts": {
+  "dev": "next",
+  "build": "next build",
+  "start": "next start"
+},
+```
+
+You can either start the server with, for example if you use npm, `npm run dev`,
+which will run in development mode or `npm run build && npm run start` for
+production mode.
+
+<Callout>
+  If you're not familiar with Next.js, note that development mode is
+  significantly slower since Next.js compiles every page you navigate to.
+</Callout>
+
+### Add Next.js Config
+
+Create the following `next.config.mjs` file in your project’s root directory:
+
+```js filename="next.config.mjs"
+import nextra from 'nextra'
+
+const withNextra = nextra({
+  theme: 'nextra-theme-docs',
+  themeConfig: './theme.config.jsx'
+})
+
+export default withNextra()
+
+// If you have other Next.js configurations, you can pass them as the parameter:
+// export default withNextra({ /* other next.js config */ })
+```
+
+With the above configuration, Nextra can handle Markdown files in your Next.js
+project, with the specified theme. Other Nextra configurations can be found in
+[Guide](/docs/guide).
+
+### Create Docs Theme Config
+
+Lastly, create the corresponding `theme.config.jsx` file in your project’s root
+directory. This will be used to configure the Nextra Docs theme:
+
+```jsx filename="theme.config.jsx"
+export default {
+  logo: <span>My Nextra Documentation</span>,
+  project: {
+    link: 'https://github.com/shuding/nextra'
+  }
+  // ... other theme options
+}
+```
+
+Full theme configurations can be found
+[here](/docs/docs-theme/theme-configuration).
+
+### Ready to Go!
+
+Now, you can create your first MDX page as `pages/index.mdx`:
+
+```mdx filename="pages/index.mdx"
+# Welcome to Nextra
+
+Hello, world!
+```
+
+And run the `next` or `next dev` command specified in `package.json`to start
+developing the project! 🎉
+
+</Steps>
+
+Next, check out the next section to learn about organizing the documentation
+structure and configuring the website theme:
+
+<Cards>
+  <Cards.Card
+    icon={<RowsIcon />}
+    title="Page Structure"
+    href="/docs/docs-theme/page-configuration"
+  />
+  <Cards.Card
+    icon={<GearIcon />}
+    title="Theme Configuration"
+    href="/docs/docs-theme/theme-configuration"
+  />
+  <Cards.Card
+    icon={<BoxIcon />}
+    title="Built-in Components"
+    href="/docs/docs-theme/built-ins"
+  />
+</Cards>
