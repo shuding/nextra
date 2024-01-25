@@ -1,0 +1,24 @@
+# Npm2Yarn
+
+Nextra uses
+[`@theguild/remark-npm2yarn`](https://npmjs.com/package/@theguild/remark-npm2yarn)
+package that replaces the code block that has `npm2yarn` metadata with
+[`<Tabs />` and `<Tabs.Tab />` components](/docs/guide/built-ins/tabs) from
+`nextra/components`.
+
+The chosen tab is saved in the local storage, which will be chosen in future
+page renders.
+
+## Example
+
+```sh npm2yarn
+npm i -D @graphql-eslint/eslint-plugin
+```
+
+## Usage
+
+````md filename="Markdown" /npm2yarn/
+```sh npm2yarn
+npm i -D @graphql-eslint/eslint-plugin
+```
+````
