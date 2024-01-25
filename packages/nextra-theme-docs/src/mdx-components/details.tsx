@@ -23,7 +23,7 @@ export function Details({
     setDelayedOpenState(true)
   }, [openState])
 
-  const [summary, restChildren] = useMemo(() => {
+  const [summaryElement, restChildren] = useMemo(() => {
     let summary: ReactElement | undefined
     const restChildren = Children.map(children, child => {
       const isSummary =
@@ -54,7 +54,7 @@ export function Details({
       open={delayedOpenState}
       data-expanded={openState ? '' : undefined}
     >
-      {summary}
+      {summaryElement}
       <Collapse isOpen={openState}>{restChildren}</Collapse>
     </details>
   )

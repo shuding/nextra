@@ -1,3 +1,7 @@
+import { compileMdx } from 'nextra/compile'
+import { RemoteContent } from 'nextra/components'
+import { useMDXComponents } from 'nextra-theme-docs/mdx-components'
+
 # Next.js SSG
 
 With Next.js, you can pre-render your page using
@@ -7,18 +11,22 @@ can also be cached by a CDN to maximize the performance.
 
 This is supported by Nextra too. Here's an example:
 
-export async function Stars() {
+<SSGPage />
+
+export async function SSGPage() {
+  const starsComponent = `export async function Stars() {
   const response = await fetch('https://api.github.com/repos/shuding/nextra')
   const repo = await response.json()
   const stars = repo.stargazers_count
   return <b>{stars}</b>
-}
+}`
+  const mdx = `${starsComponent}
 
 <div className="mt-6 rounded-xl border border-gray-200 p-4 dark:border-gray-900">
   Nextra has <Stars /> stars on GitHub!
 </div>
 
-The number above was generated at build time via `getStaticProps`. With
+The number above was generated at build time via \`getStaticProps\`. With
 [Incremental Static Regeneration](https://nextjs.org/docs/basic-features/data-fetching#incremental-static-regeneration)
 enabled, it will be kept up to date.
 
@@ -26,13 +34,12 @@ enabled, it will be kept up to date.
 
 Here's the MDX code for the example above:
 
-```mdx filename="MDX"
-export async function Stars() {
-  const response = await fetch('https://api.github.com/repos/shuding/nextra')
-  const repo = await response.json()
-  const stars = repo.stargazers_count
-  return <b>{stars}</b>
-}
+~~~mdx filename="MDX"
+${starsComponent}
 
 Nextra has <Stars /> stars on GitHub!
-```
+~~~
+`
+  const { result } = await compileMdx(mdx)
+  return <RemoteContent compiledSource={result} components={useMDXComponents()} />
+}

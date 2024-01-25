@@ -31,7 +31,6 @@ export const themeSchema = /* @__PURE__ */ (() =>
       icon: z.custom<ReactNode | FC>(...reactNode),
       link: z.string().startsWith('https://').optional()
     }),
-    components: z.record(z.custom<FC>(...fc)).optional(),
     darkMode: z.boolean(),
     docsRepositoryBase: z.string().startsWith('https://'),
     editLink: z.strictObject({

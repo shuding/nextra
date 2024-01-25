@@ -1,9 +1,6 @@
 export { useTheme } from 'next-themes'
-export {
-  useThemeConfig,
-  useConfig
-  // PartialDocsThemeConfig as DocsThemeConfig
-} from './contexts'
+export { useThemeConfig, useConfig } from './contexts'
+export { Layout } from './layout'
 export {
   Bleed,
   Collapse,
@@ -16,4 +13,3 @@ export {
   Link,
   Head
 } from './components'
-export { Layout } from './layout'

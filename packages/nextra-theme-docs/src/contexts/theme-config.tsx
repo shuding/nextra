@@ -13,12 +13,11 @@ import {
   ThemeSwitch,
   TOC
 } from '../components'
-import type { publicThemeSchema, themeSchema } from '../schemas'
+import type { themeSchema } from '../schemas'
 import { getGitIssueUrl, useGitEditUrl } from '../utils'
 import { useConfig } from './config'
 
 export type DocsThemeConfig = z.infer<typeof themeSchema>
-export type PartialDocsThemeConfig = z.infer<typeof publicThemeSchema>
 
 export const DEFAULT_THEME: DocsThemeConfig = {
   banner: {
