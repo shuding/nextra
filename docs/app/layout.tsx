@@ -49,9 +49,6 @@ export default async function RootLayout({
       <body>
         <Layout
           themeConfig={{
-            project: {
-              link: 'https://github.com/shuding/nextra'
-            },
             docsRepositoryBase:
               'https://github.com/shuding/nextra/tree/main/docs',
             editLink: {
@@ -68,7 +65,12 @@ export default async function RootLayout({
               </a>
             </Banner>
           }
-          navbar={<Navbar logo={<NextraLogo className="nextra-logo" />} />}
+          navbar={
+            <Navbar
+              logo={<NextraLogo className="nextra-logo" />}
+              projectLink="https://github.com/shuding/nextra"
+            />
+          }
           footer={
             <Footer className="flex-col max-sm:items-center">
               <a

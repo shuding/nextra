@@ -1,5 +1,4 @@
 import type { NextraThemeLayoutProps } from 'nextra'
-import { DiscordIcon, GitHubIcon } from 'nextra/icons'
 import type { ReactElement, ReactNode } from 'react'
 import { isValidElement } from 'react'
 import { Flexsearch, Footer, InnerLayout, Navbar } from './components'
@@ -13,14 +12,6 @@ import {
 import type { DocsThemeConfig } from './contexts/theme-config'
 
 const DEFAULT_THEME: DocsThemeConfig = {
-  chat: {
-    icon: (
-      <>
-        <DiscordIcon />
-        <span className="_sr-only">Discord</span>
-      </>
-    )
-  },
   darkMode: true,
   docsRepositoryBase: 'https://github.com/shuding/nextra',
   editLink: {
@@ -32,14 +23,6 @@ const DEFAULT_THEME: DocsThemeConfig = {
   },
   i18n: [],
   navigation: true,
-  project: {
-    icon: (
-      <>
-        <GitHubIcon />
-        <span className="_sr-only">GitHub</span>
-      </>
-    )
-  },
   search: <Flexsearch />,
   sidebar: {
     defaultMenuCollapseLevel: 2,

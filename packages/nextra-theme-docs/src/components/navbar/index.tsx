@@ -1,13 +1,19 @@
 import cn from 'clsx'
 // eslint-disable-next-line no-restricted-imports -- since we don't need newWindow prop
 import NextLink from 'next/link'
+import { DiscordIcon, GitHubIcon } from 'nextra/icons'
 import type { ReactElement, ReactNode } from 'react'
+import { Anchor } from '../anchor'
 import { Navbar as NavbarInner } from './navbar'
 
 type NavbarProps = {
   children?: ReactNode
   logoLink?: string | boolean
   logo?: ReactNode
+  projectLink?: string
+  projectIcon?: ReactNode
+  chatLink?: string
+  chatIcon?: ReactNode
 }
 
 export function Navbar({
@@ -20,8 +26,33 @@ export function Navbar({
         The Next Docs Builder
       </span>
     </>
+  ),
+  projectLink,
+  projectIcon = (
+    <>
+      <GitHubIcon />
+      <span className="_sr-only">GitHub</span>
+    </>
+  ),
+  chatLink,
+  chatIcon = (
+    <>
+      <DiscordIcon />
+      <span className="_sr-only">Discord</span>
+    </>
   )
 }: NavbarProps): ReactElement {
+  const project = projectLink ? (
+    <Anchor href={projectLink} newWindow>
+      {projectIcon}
+    </Anchor>
+  ) : null
+  const chat = chatLink ? (
+    <Anchor href={chatLink} newWindow>
+      {chatIcon}
+    </Anchor>
+  ) : null
+
   return (
     <div className="nextra-nav-container _sticky _top-0 _z-20 _w-full _bg-transparent print:_hidden">
       <div
@@ -45,7 +76,9 @@ export function Navbar({
             {logo}
           </div>
         )}
-        <NavbarInner>{children}</NavbarInner>
+        <NavbarInner project={project} chat={chat}>
+          {children}
+        </NavbarInner>
       </nav>
     </div>
   )

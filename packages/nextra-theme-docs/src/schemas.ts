@@ -21,10 +21,6 @@ export const themeOptionsSchema = /* @__PURE__ */ (() =>
 
 export const themeSchema = /* @__PURE__ */ (() =>
   z.strictObject({
-    chat: z.strictObject({
-      icon: z.custom<ReactNode | FC>(...reactNode),
-      link: z.string().startsWith('https://').optional()
-    }),
     darkMode: z.boolean(),
     docsRepositoryBase: z.string().startsWith('https://'),
     editLink: z.strictObject({
@@ -52,10 +48,6 @@ export const themeSchema = /* @__PURE__ */ (() =>
         prev: z.boolean()
       })
     ),
-    project: z.strictObject({
-      icon: z.custom<ReactNode | FC>(...reactNode),
-      link: z.string().startsWith('https://').optional()
-    }),
     search: z.custom<ReactNode>(...reactNode),
     sidebar: z.strictObject({
       autoCollapse: z.boolean().optional(),

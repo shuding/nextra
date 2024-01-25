@@ -76,9 +76,11 @@ function NavbarMenu({
 
 export type NavbarProps = {
   children?: ReactNode
+  project?: ReactNode
+  chat?: ReactNode
 }
 
-export function Navbar({ children }: NavbarProps): ReactElement {
+export function Navbar({ children, project, chat }: NavbarProps): ReactElement {
   const items = useConfig().normalizePagesResult.topLevelNavbarItems
   const themeConfig = useThemeConfig()
 
@@ -130,20 +132,10 @@ export function Navbar({ children }: NavbarProps): ReactElement {
           </Anchor>
         )
       })}
-
       {themeConfig.search}
 
-      {themeConfig.project.link ? (
-        <Anchor href={themeConfig.project.link} newWindow>
-          {renderComponent(themeConfig.project.icon)}
-        </Anchor>
-      ) : null}
-
-      {themeConfig.chat.link ? (
-        <Anchor href={themeConfig.chat.link} newWindow>
-          {renderComponent(themeConfig.chat.icon)}
-        </Anchor>
-      ) : null}
+      {project}
+      {chat}
 
       {children}
 
