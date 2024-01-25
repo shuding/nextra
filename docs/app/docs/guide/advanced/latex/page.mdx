@@ -1,5 +1,9 @@
-import { buildDynamicMDX } from 'nextra/remote'
-import { Callout, RemoteContent as MathJaxExample, MathJax, MathJaxContext } from 'nextra/components'
+import { compileMdx } from 'nextra/compile'
+import { Callout, RemoteContent, MathJax, MathJaxContext } from 'nextra/components'
+
+{/* TODO: inject in loader */}
+
+import 'katex/dist/katex.min.css'
 
 # LaTeX
 
@@ -144,17 +148,17 @@ The following two examples show the same formula rendered with KaTeX (first) and
 
 ```
 
-<MathJaxExample components={{ MathJax, MathJaxContext }} />
+<MathJaxExample />
 
 Because of MathJax's accessibility features, the second formula is tab-accessible and has a context menu that helps screen readers reprocess math for the visually impaired.
 
 
-export async function getStaticProps() {
+export async function MathJaxExample() {
   const rawMdx = `~~~math
 \\int_2^3x^3\\,\\mathrm{d}x
 ~~~
 `
-  const props = await buildDynamicMDX(
+  const { result } = await compileMdx(
     rawMdx,
     {
       latex: {
@@ -171,6 +175,6 @@ export async function getStaticProps() {
       },
     }
   )
-  props.__nextra_dynamic_opts.title = 'LaTeX'
-  return { props }
+
+  return <RemoteContent compiledSource={result} components={{ MathJax, MathJaxContext }} />
 }
