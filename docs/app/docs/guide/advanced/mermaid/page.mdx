@@ -1,3 +1,7 @@
+import { compileMdx } from 'nextra/compile'
+import { RemoteContent, Mermaid } from 'nextra/components'
+import { useMDXComponents } from 'nextra-theme-docs/mdx-components'
+
 # Mermaid
 
 Nextra supports [mermaid](https://mermaid.js.org) diagrams. Like in GitHub you
@@ -8,7 +12,10 @@ package that replaces the code block with the `<Mermaid />` component.
 
 ## Example
 
-```mermaid
+<Demo />
+
+export async function Demo() {
+  const mermaidCodeblock = `\`\`\`mermaid
 graph TD;
 subgraph AA [Consumers]
 A[Mobile app];
@@ -27,29 +34,17 @@ C --> Z;
 Z --> E;
 Z --> F;
 Z --> G;
-```
+\`\`\``
+  const { result } = await compileMdx(`${mermaidCodeblock}
 
 ## Usage
 
-````md filename="Markdown"
-```mermaid
-graph TD;
-subgraph AA [Consumers]
-A[Mobile app];
-B[Web app];
-C[Node.js client];
-end
-subgraph BB [Services]
-E[REST API];
-F[GraphQL API];
-G[SOAP API];
-end
-Z[GraphQL API];
-A --> Z;
-B --> Z;
-C --> Z;
-Z --> E;
-Z --> F;
-Z --> G;
-```
-````
+~~~md filename="Markdown"
+${mermaidCodeblock}
+~~~
+`)
+
+  const components = useMDXComponents({ Mermaid })
+
+  return <RemoteContent compiledSource={result} components={components} />
+}

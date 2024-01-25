@@ -11,6 +11,7 @@ export { Table } from './table.js'
 export { Td } from './td.js'
 export { Th } from './th.js'
 export { Tr } from './tr.js'
-// export { Mermaid } from '@theguild/remark-mermaid/mermaid'
+// @ts-expect-error -- fixme
+export { Mermaid } from '@theguild/remark-mermaid/mermaid'
 export { MathJax, MathJaxContext } from './mathjax.js'
 export { withIcons } from './with-icons.js'

@@ -254,8 +254,8 @@ importers:
         specifier: ^0.1.9
         version: 0.1.9
       '@theguild/remark-mermaid':
-        specifier: ^0.0.6
-        version: 0.0.6(react@18.2.0)
+        specifier: 0.0.7-alpha-20240125050247-b972d40
+        version: 0.0.7-alpha-20240125050247-b972d40(react@18.2.0)
       '@theguild/remark-npm2yarn':
         specifier: 0.3.0
         version: 0.3.0
@@ -3350,8 +3350,8 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: true
 
-  /@theguild/remark-mermaid@0.0.6(react@18.2.0):
-    resolution: {integrity: sha512-WaOOaSz2tEmsE8SFL4WCiTRzwMlOIkKONnlc6DjKbqaJr+lVGlm0aWZAVTuvvVEebgmLzaFvmPUVf2M2GWwsJQ==}
+  /@theguild/remark-mermaid@0.0.7-alpha-20240125050247-b972d40(react@18.2.0):
+    resolution: {integrity: sha512-Jypzjr39ntGO/y2IrkQfrt+94cHmR2jC+8r5n8xxFVAYhcsV7qzm7RVomjdXbF+Bz0a0YDRygKEOvB+sAt+u5g==}
     peerDependencies:
       react: ^18.2.0
     dependencies:
@@ -11900,7 +11900,7 @@ packages:
       '@mdx-js/mdx': 3.0.0
       '@mdx-js/react': 3.0.0(@types/react@18.2.48)(react@18.2.0)
       '@napi-rs/simple-git': 0.1.9
-      '@theguild/remark-mermaid': 0.0.6(react@18.2.0)
+      '@theguild/remark-mermaid': 0.0.7-alpha-20240125050247-b972d40(react@18.2.0)
       '@theguild/remark-npm2yarn': 0.3.0
       better-react-mathjax: 2.0.3(react@18.2.0)
       clsx: 2.0.0
