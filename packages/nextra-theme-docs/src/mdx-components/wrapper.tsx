@@ -55,8 +55,6 @@ function Body({ children }: { children: ReactNode }): ReactElement {
     </>
   )
 
-  const body = themeConfig.main?.({ children: content }) || content
-
   if (themeContext.layout === 'full') {
     return (
       <article
@@ -65,7 +63,7 @@ function Body({ children }: { children: ReactNode }): ReactElement {
           'nextra-content _min-h-[calc(100vh-var(--nextra-navbar-height))] _pl-[max(env(safe-area-inset-left),1.5rem)] _pr-[max(env(safe-area-inset-right),1.5rem)]'
         )}
       >
-        {body}
+        {content}
       </article>
     )
   }
@@ -83,7 +81,7 @@ function Body({ children }: { children: ReactNode }): ReactElement {
         {activeType !== 'page' && themeContext.breadcrumb && (
           <Breadcrumb activePath={activePath} />
         )}
-        {body}
+        {content}
       </main>
     </article>
   )
