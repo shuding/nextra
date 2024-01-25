@@ -2,7 +2,6 @@
 
 import cn from 'clsx'
 import type { NextraMDXContent } from 'nextra'
-import { useMounted } from 'nextra/hooks'
 import type { ReactElement, ReactNode } from 'react'
 import { Breadcrumb, NavLinks, Sidebar, SkipNavContent } from '../components'
 import { useConfig, useThemeConfig } from '../contexts'
@@ -18,7 +17,6 @@ const classes = {
 function Body({ children }: { children: ReactNode }): ReactElement {
   const config = useConfig()
   const themeConfig = useThemeConfig()
-  const mounted = useMounted()
   const {
     activeThemeContext: themeContext,
     activeType,
@@ -36,15 +34,17 @@ function Body({ children }: { children: ReactNode }): ReactElement {
       ? new Date(config.timestamp)
       : null
 
-  const gitTimestampEl =
-    // Because a user's time zone may be different from the server page
-    mounted && date ? (
-      <div className="_mt-12 _mb-8 _block _text-xs _text-gray-500 ltr:_text-right rtl:_text-left dark:_text-gray-400">
-        {renderComponent(themeConfig.gitTimestamp, { timestamp: date })}
-      </div>
-    ) : (
-      <div className="_mt-16" />
-    )
+  const gitTimestampEl = date ? (
+    <div
+      // Because a user's time zone may be different from the server page
+      suppressHydrationWarning
+      className="_mt-12 _mb-8 _block _text-xs _text-gray-500 ltr:_text-right rtl:_text-left dark:_text-gray-400"
+    >
+      {renderComponent(themeConfig.gitTimestamp, { timestamp: date })}
+    </div>
+  ) : (
+    <div className="_mt-16" />
+  )
 
   const content = (
     <>

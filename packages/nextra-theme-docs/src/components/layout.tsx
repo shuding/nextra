@@ -42,6 +42,7 @@ const DEFAULT_THEME: DocsThemeConfig = {
   ),
   logoLink: true,
   navigation: true,
+  navbar: {},
   nextThemes: {
     defaultTheme: 'system',
     storageKey: 'theme'
