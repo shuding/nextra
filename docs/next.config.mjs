@@ -6,7 +6,7 @@ import nextra from 'nextra'
  */
 const withNextra = nextra({
   mdxOptions: {
-    providerImportSource: 'nextra-theme-docs/mdx-components'
+    providerImportSource: 'nextra-theme-docs'
   },
   latex: true,
   search: {

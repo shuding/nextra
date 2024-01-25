@@ -9,10 +9,6 @@
     ".": {
       "import": "./dist/index.js",
       "types": "./dist/index.d.mts"
-    },
-    "./mdx-components": {
-      "import": "./dist/mdx-components/index.js",
-      "types": "./dist/mdx-components/index.d.mts"
     }
   },
   "types": "./dist/index.d.mts",
