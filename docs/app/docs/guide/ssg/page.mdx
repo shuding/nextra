@@ -1,5 +1,3 @@
-import { useData } from 'nextra/hooks'
-
 # Next.js SSG
 
 With Next.js, you can pre-render your page using
@@ -9,26 +7,11 @@ can also be cached by a CDN to maximize the performance.
 
 This is supported by Nextra too. Here's an example:
 
-export function getStaticProps() {
-  return fetch('https://api.github.com/repos/shuding/nextra')
-    .then(res => res.json())
-    .then(repo => ({
-      props: {
-        // We add an `ssg` field to the page props,
-        // which will be provided to the Nextra `useData` hook.
-        ssg: {
-          stars: repo.stargazers_count
-        }
-      },
-      // The page will be considered as stale and regenerated every 60 seconds.
-      revalidate: 60
-    }))
-}
-
-export function Stars() {
-  // Get the data from SSG, and render it as a component.
-  const { stars } = useData()
-  return <strong>{stars}</strong>
+export async function Stars() {
+  const response = await fetch('https://api.github.com/repos/shuding/nextra')
+  const repo = await response.json()
+  const stars = repo.stargazers_count
+  return <b>{stars}</b>
 }
 
 <div className="mt-6 rounded-xl border border-gray-200 p-4 dark:border-gray-900">
@@ -44,28 +27,11 @@ enabled, it will be kept up to date.
 Here's the MDX code for the example above:
 
 ```mdx filename="MDX"
-import { useData } from 'nextra/hooks'
-
-export function getStaticProps() {
-  return fetch('https://api.github.com/repos/shuding/nextra')
-    .then(res => res.json())
-    .then(repo => ({
-      props: {
-        // We add an `ssg` field to the page props,
-        // which will be provided to the Nextra `useData` hook.
-        ssg: {
-          stars: repo.stargazers_count
-        }
-      },
-      // The page will be considered as stale and regenerated every 60 seconds.
-      revalidate: 60
-    }))
-}
-
-export function Stars() {
-  // Get the data from SSG, and render it as a component.
-  const { stars } = useData()
-  return <strong>{stars}</strong>
+export async function Stars() {
+  const response = await fetch('https://api.github.com/repos/shuding/nextra')
+  const repo = await response.json()
+  const stars = repo.stargazers_count
+  return <b>{stars}</b>
 }
 
 Nextra has <Stars /> stars on GitHub!

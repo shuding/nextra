@@ -22,8 +22,9 @@ export function DynamicCode({ children }) {
       </div>
       <button
         onClick={() => {
-          tokenRef.current!.innerText =
-            String(parseInt(tokenRef.current!.innerText) || 0) + 1
+          tokenRef.current!.innerText = String(
+            (parseInt(tokenRef.current!.innerText) || 0) + 1
+          )
         }}
         className="_text-primary-600 _select-none _mt-6"
       >
