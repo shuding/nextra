@@ -2,6 +2,7 @@ import path from 'node:path'
 import type { ProcessorOptions } from '@mdx-js/mdx'
 import { createProcessor } from '@mdx-js/mdx'
 import type { Processor } from '@mdx-js/mdx/lib/core'
+// @ts-expect-error -- fixme
 import { remarkMermaid } from '@theguild/remark-mermaid'
 import { remarkNpm2Yarn } from '@theguild/remark-npm2yarn'
 import type { Program } from 'estree'
@@ -36,7 +37,6 @@ import {
   rehypeAttachCodeMeta,
   rehypeBetterReactMathjax,
   rehypeExtractTocContent,
-  rehypeIcon,
   rehypeParseCodeMeta
 } from './rehype-plugins/index.js'
 import {
@@ -280,7 +280,6 @@ export async function compileMdx(
           ? []
           : [
               [rehypePrettyCode, DEFAULT_REHYPE_PRETTY_CODE_OPTIONS] as any,
-              // !isRemoteContent && rehypeIcon,
               rehypeAttachCodeMeta
             ]),
         [rehypeExtractTocContent, { isRemoteContent }]
