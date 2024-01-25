@@ -280,7 +280,7 @@ export async function compileMdx(
           ? []
           : [
               [rehypePrettyCode, DEFAULT_REHYPE_PRETTY_CODE_OPTIONS] as any,
-              !isRemoteContent && rehypeIcon,
+              // !isRemoteContent && rehypeIcon,
               rehypeAttachCodeMeta
             ]),
         [rehypeExtractTocContent, { isRemoteContent }]

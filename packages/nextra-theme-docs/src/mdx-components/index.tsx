@@ -1,5 +1,5 @@
 import cn from 'clsx'
-import { Table, Td, Th, Tr } from 'nextra/components'
+import { Code, Pre, Table, Td, Th, Tr, withIcons } from 'nextra/components'
 import { ArrowRightIcon } from 'nextra/icons'
 import type { UseMDXComponents } from 'nextra/mdx'
 import { DEFAULT_COMPONENTS } from 'nextra/mdx'
@@ -23,6 +23,7 @@ export const useMDXComponents: UseMDXComponents = components => {
         {...props}
       />
     ),
+    code: Code,
     details: Details,
     h1: H1,
     h2: H2,
@@ -44,6 +45,7 @@ export const useMDXComponents: UseMDXComponents = components => {
       />
     ),
     p: props => <p className="_mt-6 _leading-7 first:_mt-0" {...props} />,
+    pre: withIcons(Pre),
     summary: ({ children, ...props }) => (
       <summary
         className={cn(

@@ -1,6 +1,7 @@
 'use client'
+
 import cn from 'clsx'
-import type { ComponentProps, FC, ReactElement } from 'react'
+import type { ComponentProps, ReactElement, ReactNode } from 'react'
 import { useCallback, useRef } from 'react'
 import { WordWrapIcon } from '../icons/index.js'
 import { Button, classes } from './button.js'
@@ -12,13 +13,13 @@ export function Pre({
   'data-filename': filename,
   'data-copy': copy,
   'data-language': _language,
-  icon: Icon,
+  icon,
   ...props
 }: ComponentProps<'pre'> & {
   'data-filename'?: string
   'data-copy'?: ''
   'data-language'?: string
-  icon?: FC<ComponentProps<'svg'>>
+  icon?: ReactNode
 }): ReactElement {
   const preRef = useRef<HTMLPreElement | null>(null)
 
@@ -51,7 +52,7 @@ export function Pre({
             '_border-b-0'
           )}
         >
-          {Icon && <Icon className="_h-3.5 _w-auto _shrink-0" />}
+          {icon}
           <span className="_truncate">{filename}</span>
           {copyButton}
         </div>
