@@ -36,38 +36,28 @@ type SkipNavLinkProps = Omit<
   'ref' | 'href' | 'children'
 > & {
   label?: string
-  styled?: boolean
 }
 
 export const SkipNavLink = forwardRef<HTMLAnchorElement, SkipNavLinkProps>(
   (
     {
-      className: providedClassName,
+      // Give the option to the user to pass a falsy other than undefined to remove the default styles
+      className = 'nextra-skip-nav',
       id,
       label = DEFAULT_LABEL,
-      styled,
       ...props
     },
     forwardedRef
-  ): ReactElement => {
-    const className =
-      providedClassName === undefined // Give the option to the user to pass a falsy other than undefined to remove the default styles
-        ? styled // Give the user a way to opt-in the default style provided with the theme. Probably remove this option in the next major version (v3.x) and just do a check to use the providedClassName or the default
-          ? 'nextra-skip-nav'
-          : undefined
-        : providedClassName
-
-    return (
-      <a
-        {...props}
-        ref={forwardedRef}
-        href={`#${id || DEFAULT_ID}`}
-        className={className}
-      >
-        {label}
-      </a>
-    )
-  }
+  ): ReactElement => (
+    <a
+      {...props}
+      ref={forwardedRef}
+      href={`#${id || DEFAULT_ID}`}
+      className={className}
+    >
+      {label}
+    </a>
+  )
 )
 SkipNavLink.displayName = 'SkipNavLink'
 
