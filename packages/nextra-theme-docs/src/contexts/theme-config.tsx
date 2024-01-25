@@ -4,14 +4,7 @@
 import type { ReactElement, ReactNode } from 'react'
 import { createContext, useContext, useRef } from 'react'
 import type { z } from 'zod'
-import {
-  Anchor,
-  Flexsearch,
-  Footer,
-  Navbar,
-  ThemeSwitch,
-  TOC
-} from '../components'
+import { Anchor, Footer, Navbar, ThemeSwitch, TOC } from '../components'
 import type { themeSchema } from '../schemas'
 import { getGitIssueUrl, useGitEditUrl } from '../utils'
 import { useConfig } from './config'

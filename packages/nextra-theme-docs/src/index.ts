@@ -1,5 +1,6 @@
 export { useTheme } from 'next-themes'
 export { useThemeConfig, useConfig } from './contexts'
+export { Layout } from './layout'
 export {
   Bleed,
   Collapse,
@@ -11,7 +12,6 @@ export {
   LocaleSwitch,
   Link,
   Head,
-  Layout,
   Banner,
   Flexsearch as Search
 } from './components'

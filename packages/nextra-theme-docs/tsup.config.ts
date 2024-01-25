@@ -15,9 +15,9 @@ export default defineConfig([
     outExtension: () => ({ js: '.js' }),
     bundle: false,
     async onSuccess() {
-      const layoutPath = './dist/components/layout.js'
+      const layoutPath = './dist/layout.js'
       const layoutContent = await fs.readFile(layoutPath, 'utf8')
-      await fs.writeFile(layoutPath, "import '../style.css'\n" + layoutContent)
+      await fs.writeFile(layoutPath, "import './style.css'\n" + layoutContent)
     }
   }
 ])

@@ -2,10 +2,9 @@ import type { NextraThemeLayoutProps } from 'nextra'
 import { DiscordIcon, GitHubIcon } from 'nextra/icons'
 import type { ReactElement, ReactNode } from 'react'
 import { isValidElement } from 'react'
-import { ConfigProvider, ThemeConfigProvider } from '../contexts'
-import type { DocsThemeConfig } from '../contexts/theme-config'
-import { InnerLayout } from './inner-layout'
-import { Flexsearch } from './search'
+import { Flexsearch, InnerLayout } from './components'
+import { ConfigProvider, ThemeConfigProvider } from './contexts'
+import type { DocsThemeConfig } from './contexts/theme-config'
 
 const DEFAULT_THEME: DocsThemeConfig = {
   chat: {
