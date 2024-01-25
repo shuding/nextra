@@ -48,10 +48,8 @@ function Body({ children }: { children: ReactNode }): ReactElement {
 
   const content = (
     <>
-      {renderComponent(themeContext.topContent)}
       {children}
       {gitTimestampEl}
-      {renderComponent(themeContext.bottomContent)}
       {activeType !== 'page' && themeContext.pagination && (
         <NavLinks
           flatDocsDirectories={flatDocsDirectories}

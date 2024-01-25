@@ -119,8 +119,6 @@ export const pageThemeSchema = z.strictObject({
   timestamp: z.boolean(),
   toc: z.boolean(),
   typesetting: z.enum(['default', 'article']),
-  topContent: z.custom<ReactNode | FC>(...reactNode),
-  bottomContent: z.custom<ReactNode | FC>(...reactNode)
 })
 
 /**
