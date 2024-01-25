@@ -113,7 +113,7 @@ export const ClientWrapper: NextraMDXContent = ({ toc, children }) => {
       </nav>
     )
   return (
-    <div className="_mx-auto _flex _max-w-[90rem]">
+    <>
       <Sidebar
         docsDirectories={docsDirectories}
         fullDirectories={directories}
@@ -124,6 +124,6 @@ export const ClientWrapper: NextraMDXContent = ({ toc, children }) => {
       {tocEl}
       <SkipNavContent />
       <Body>{children}</Body>
-    </div>
+    </>
   )
 }
