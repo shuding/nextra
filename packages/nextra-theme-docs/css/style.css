@@ -166,3 +166,13 @@ input[type='search'] {
     opacity: 1;
   }
 }
+
+.nextra-skip-nav {
+  @apply _sr-only;
+  &:focus {
+    @apply _not-sr-only _fixed _z-50 _m-3 _ml-4 _h-[calc(var(--nextra-navbar-height)-1.5rem)] _rounded-lg _border _px-3 _py-2 _align-middle _text-sm _font-bold;
+    @apply _text-gray-900 dark:_text-gray-100;
+    @apply _bg-white dark:_bg-neutral-900;
+    @apply _border-neutral-400 dark:_border-neutral-800;
+  }
+}

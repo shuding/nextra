@@ -25,12 +25,10 @@
  *
  * Source: https://github.com/reach/reach-ui/blob/43f450db7bcb25a743121fe31355f2294065a049/LICENSE
  */
-import cn from 'clsx'
 import type { ComponentProps, ReactElement } from 'react'
 import { forwardRef } from 'react'
 
-// TODO: Change the DEFAULT_ID for `nextra-skip-nav` or something else on the next major version (v3.x). The DEFAULT_ID must be 'reach-skip-nav' because changing this value is a breaking change for users that use v2.0.1 and earlier
-const DEFAULT_ID = 'reach-skip-nav'
+const DEFAULT_ID = 'nextra-skip-nav'
 const DEFAULT_LABEL = 'Skip to content'
 
 type SkipNavLinkProps = Omit<
@@ -55,14 +53,8 @@ export const SkipNavLink = forwardRef<HTMLAnchorElement, SkipNavLinkProps>(
     const className =
       providedClassName === undefined // Give the option to the user to pass a falsy other than undefined to remove the default styles
         ? styled // Give the user a way to opt-in the default style provided with the theme. Probably remove this option in the next major version (v3.x) and just do a check to use the providedClassName or the default
-          ? cn(
-              '_sr-only',
-              'focus:_not-sr-only focus:_fixed focus:_z-50 focus:_m-3 focus:_ml-4 focus:_h-[calc(var(--nextra-navbar-height)-1.5rem)] focus:_rounded-lg focus:_border focus:_px-3 focus:_py-2 focus:_align-middle focus:_text-sm focus:_font-bold',
-              'focus:_text-gray-900 focus:dark:_text-gray-100',
-              'focus:_bg-white focus:dark:_bg-neutral-900',
-              'focus:_border-neutral-400 focus:dark:_border-neutral-800'
-            )
-          : ''
+          ? 'nextra-skip-nav'
+          : undefined
         : providedClassName
 
     return (

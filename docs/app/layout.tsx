@@ -71,7 +71,7 @@ export default async function RootLayout({
             />
           }
           footer={
-            <Footer className="flex-col max-sm:items-center">
+            <Footer className="flex-col items-center sm:items-start">
               <a
                 className="flex items-center gap-1 text-current"
                 target="_blank"
