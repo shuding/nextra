@@ -35,10 +35,7 @@ project. If you have a question that isn't answered here, please
 
 export function FAQBox({ title, children }) {
   return (
-    <details
-      open
-      className="last-of-type:mb-0 rounded-lg bg-neutral-50 dark:bg-neutral-800 p-2 mt-4"
-    >
+    <details open className="!rounded-lg !bg-neutral-50 dark:!bg-neutral-800">
       <summary>
         <strong className="text-lg">{title}</strong>
       </summary>
@@ -47,11 +44,8 @@ export function FAQBox({ title, children }) {
   )
 }
 
-<FAQBox title="Can I use Nextra with Next.js app router?">
-  No, Nextra only works with the `/pages` directory at the moment. Support for
-  the app router has not been implemented yet. But you can use `/app` and
-  `/pages` at the same time - just put your docs inside `/pages` and your other
-  routes in `/app`
+<FAQBox title="Can I use Nextra with Next.js `pages` router?">
+  Nextra 4 only works with the `app` router. Only Nextra 1/2/3 supports the `pages` router.
 </FAQBox>
 
 <FAQBox title="Can I use X with Nextra?">

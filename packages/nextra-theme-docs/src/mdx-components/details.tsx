@@ -1,5 +1,6 @@
 'use client'
 
+import cn from 'clsx'
 import type { ComponentProps, ReactElement } from 'react'
 import { Children, cloneElement, useEffect, useMemo, useState } from 'react'
 import { Collapse } from '../components'
@@ -7,6 +8,7 @@ import { Collapse } from '../components'
 export function Details({
   children,
   open,
+  className,
   ...props
 }: ComponentProps<'details'>): ReactElement {
   const [openState, setOpen] = useState(!!open)
@@ -44,7 +46,10 @@ export function Details({
 
   return (
     <details
-      className="_my-4 _rounded _border _border-gray-200 _bg-white _p-2 _shadow-sm first:_mt-0 dark:_border-neutral-800 dark:_bg-neutral-900"
+      className={cn(
+        '_my-4 _rounded _border _border-gray-200 _bg-white _p-2 _shadow-sm first:_mt-0 dark:_border-neutral-800 dark:_bg-neutral-900',
+        className
+      )}
       {...props}
       open={delayedOpenState}
       data-expanded={openState ? '' : undefined}
