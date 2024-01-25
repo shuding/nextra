@@ -1,8 +1,9 @@
 import { CardsIcon, OneIcon, WarningIcon } from '@components/icons'
 import { Cards, RemoteContent } from 'nextra/components'
-import { buildDynamicMDX } from 'nextra/remote'
+import { compileMdx } from 'nextra/compile'
+import { useMDXComponents } from 'nextra-theme-docs/mdx-components'
 
-export async function getStaticProps() {
+export async function CardsPage() {
   const mdx = `
 <Cards>
   <Cards.Card
@@ -21,7 +22,7 @@ export async function getStaticProps() {
     href="/docs/guide/built-ins/steps"
   />
 </Cards>`
-  const props = await buildDynamicMDX(`
+  const { result } = await compileMdx(`
 # Cards Component
 
 ## Example
@@ -34,7 +35,8 @@ import { Cards } from 'nextra/components'
 import { CardsIcon, OneIcon, WarningIcon } from '../../icons'
 ${mdx}
 ~~~`)
-  return { props }
+  const components = useMDXComponents({ Cards, CardsIcon, OneIcon, WarningIcon })
+  return <RemoteContent compiledSource={result} components={components}  />
 }
 
-<RemoteContent components={{ Cards, CardsIcon, OneIcon, WarningIcon }} />
+<CardsPage />

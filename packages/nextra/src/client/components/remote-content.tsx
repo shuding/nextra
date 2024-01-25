@@ -21,7 +21,8 @@ function evaluate(compiledSource: string, scope: Record<string, unknown> = {}) {
 
 export function RemoteContent({
   scope,
-  components
+  components,
+  compiledSource
 }: {
   /**
    * An object mapping names to React components.
@@ -34,14 +35,8 @@ export function RemoteContent({
    * Pass-through variables for use in the MDX content
    */
   scope?: Record<string, unknown>
+  compiledSource: string
 }) {
-  const compiledSource = useData('__nextra_dynamic_mdx')
-  if (!compiledSource) {
-    throw new Error(
-      'RemoteContent must be used together with the `buildDynamicMDX` API'
-    )
-  }
-
   const { default: MDXContent } = evaluate(compiledSource, scope)
 
   return <MDXContent components={components} />
