@@ -11,5 +11,6 @@ export {
   LocaleSwitch,
   Link,
   Head,
-  Layout
+  Layout,
+  Banner
 } from './components'

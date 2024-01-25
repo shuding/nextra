@@ -1,7 +1,7 @@
 import fs from 'fs/promises'
 import path from 'path'
 import type { Metadata, Viewport } from 'next'
-import { Head, Layout } from 'nextra-theme-docs'
+import { Banner, Head, Layout } from 'nextra-theme-docs'
 import { collectPageMap } from 'nextra/page-map'
 import type { ReactNode } from 'react'
 import 'nextra-theme-docs/style.css'
@@ -62,6 +62,13 @@ export default async function RootLayout({
             frontMatter: {},
             timestamp: new Date().getTime()
           }}
+          banner={
+            <Banner storageKey="4.0-release">
+              <a href="https://nextra.site" target="_blank" rel="noreferrer">
+                🎉 Nextra 4.0 is released. Read more →
+              </a>
+            </Banner>
+          }
         >
           {children}
         </Layout>

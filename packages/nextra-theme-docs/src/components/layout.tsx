@@ -1,6 +1,6 @@
 import type { NextraThemeLayoutProps } from 'nextra'
 import { DiscordIcon, GitHubIcon } from 'nextra/icons'
-import type { ReactElement } from 'react'
+import type { ReactElement, ReactNode } from 'react'
 import { isValidElement } from 'react'
 import { ConfigProvider, ThemeConfigProvider } from '../contexts'
 import type { DocsThemeConfig } from '../contexts/theme-config'
@@ -95,8 +95,11 @@ const DEEP_OBJECT_KEYS = Object.entries(DEFAULT_THEME)
 export function Layout({
   children,
   themeConfig,
-  pageOpts
-}: NextraThemeLayoutProps): ReactElement {
+  pageOpts,
+  banner
+}: NextraThemeLayoutProps & {
+  banner?: ReactNode
+}): ReactElement {
   const date = pageOpts.timestamp ? new Date(pageOpts.timestamp) : null
   const extendedThemeConfig = {
     ...DEFAULT_THEME,
@@ -126,6 +129,7 @@ export function Layout({
   return (
     <ThemeConfigProvider value={extendedThemeConfig}>
       <ConfigProvider value={pageOpts}>
+        {banner}
         <InnerLayout>{children}</InnerLayout>
       </ConfigProvider>
     </ThemeConfigProvider>
