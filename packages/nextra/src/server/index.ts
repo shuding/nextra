@@ -167,20 +167,20 @@ const nextra: Nextra = nextraConfig => {
               }
             ]
           },
-          {
-            // Match dynamic meta files inside pages.
-            test: META_REGEX,
-            issuer: request => !request,
-            use: [
-              options.defaultLoaders.babel,
-              {
-                loader: 'nextra/loader',
-                options: {
-                  isMetaFile: true
-                }
-              }
-            ]
-          }
+          // {
+          //   // Match dynamic meta files inside pages.
+          //   test: META_REGEX,
+          //   issuer: request => !request,
+          //   use: [
+          //     options.defaultLoaders.babel,
+          //     {
+          //       loader: 'nextra/loader',
+          //       options: {
+          //         isMetaFile: true
+          //       }
+          //     }
+          //   ]
+          // }
           // {
           //   // Use platform separator because /pages\/_app\./ will not work on windows
           //   test: new RegExp(`pages${sep === '/' ? '/' : '\\\\'}_app\\.`),

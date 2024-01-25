@@ -9,7 +9,7 @@ import {
   MARKDOWN_EXTENSION_REGEX
   // OFFICIAL_THEMES
 } from './constants.js'
-import { PAGES_DIR } from './file-system.js'
+import { APP_DIR } from './file-system.js'
 import { logger } from './utils.js'
 
 const initGitRepo = (async () => {
@@ -53,9 +53,6 @@ export async function loader(
   const {
     isPageImport = false,
     isPageMapImport,
-    isMetaFile,
-    // theme,
-    // themeConfig,
     defaultShowCopyCode,
     search,
     staticImage,
@@ -88,49 +85,8 @@ export async function loader(
     )
     return ''
   }
-  if (isMetaFile) {
-    // _meta.[jt]sx? used as a page.
-    return `export default () => null
 
-export const getStaticProps = () => ({ notFound: true })`
-  }
-
-  if (currentPath.includes('/pages/_app.mdx')) {
-    throw new Error(
-      'Nextra v3 no longer supports _app.mdx, use _app.{js,jsx} or _app.{ts,tsx} for TypeScript projects instead.'
-    )
-  }
-
-  // const isLocalTheme = theme.startsWith('.') || theme.startsWith('/')
-  // const layoutPath = isLocalTheme ? slash(path.resolve(theme)) : theme
-
-//   const cssImports = `
-// ${latex ? "import 'katex/dist/katex.min.css'" : ''}
-// ${OFFICIAL_THEMES.includes(theme) ? `import '${theme}/style.css'` : ''}`
-
-//   if (currentPath.includes('/pages/_app.')) {
-//     isAppFileFromNodeModules = currentPath.includes('/node_modules/')
-//     // Relative path instead of a package name
-//     const themeConfigImport = themeConfig
-//       ? `import __themeConfig from '${slash(path.resolve(themeConfig))}'`
-//       : ''
-//
-//     const content = isAppFileFromNodeModules
-//       ? 'export default function App({ Component, pageProps }) { return <Component {...pageProps} />}'
-//       : [cssImports, source].join('\n')
-//
-//     const appRawJs = `import __layout from '${layoutPath}'
-// ${themeConfigImport}
-// ${content}
-//
-// const __nextra_internal__ = globalThis[Symbol.for('__nextra_internal__')] ||= Object.create(null)
-// __nextra_internal__.context ||= Object.create(null)
-// __nextra_internal__.Layout = __layout
-// ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
-//     return appRawJs
-//   }
-
-  const relativePath = slash(path.relative(PAGES_DIR, mdxPath))
+  const relativePath = slash(path.relative(APP_DIR, mdxPath))
 
   let locale = locales[0] === '' ? '' : relativePath.split('/')[0]
   // In case when partial document is placed outside `pages` directory
@@ -140,8 +96,8 @@ export const getStaticProps = () => ({ notFound: true })`
     '/' +
     relativePath
       .replace(MARKDOWN_EXTENSION_REGEX, '')
-      .replace(/(^|\/)index$/, '')
-
+      .replace(/\/page$/, '')
+      .replace(/^app\//, '')
   const {
     result,
     title,
@@ -170,6 +126,7 @@ export const getStaticProps = () => ({ notFound: true })`
     isPageImport,
     isPageMapImport
   })
+  console.log({ route, isPageImport })
   // Imported as a normal component, no need to add the layout.
   if (!isPageImport) {
     return `${result}

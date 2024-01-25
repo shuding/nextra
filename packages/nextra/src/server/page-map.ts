@@ -15,7 +15,7 @@ import {
   MARKDOWN_EXTENSION_REGEX,
   META_REGEX
 } from './constants.js'
-import { PAGES_DIR } from './file-system.js'
+import { APP_DIR } from './file-system.js'
 import {
   createAstExportConst,
   createAstObject,
@@ -42,7 +42,7 @@ type CollectFilesOptions = {
 function cleanFileName(name: string): string {
   return (
     path
-      .relative(PAGES_DIR, name)
+      .relative(APP_DIR, name)
       .replace(/\.([jt]sx?|json|mdx?)$/, '')
       .replaceAll(/[\W_]+/g, '_')
       .replace(/^_/, '')

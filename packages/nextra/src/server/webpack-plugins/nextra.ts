@@ -4,7 +4,7 @@ import gracefulFs from 'graceful-fs'
 import type { Compiler } from 'webpack'
 import type { NextraConfig } from '../../types'
 import { CHUNKS_DIR, IS_PRODUCTION } from '../constants.js'
-import { PAGES_DIR } from '../file-system.js'
+import { APP_DIR } from '../file-system.js'
 import { collectPageMap } from '../page-map.js'
 
 // import { logger } from '../utils'
@@ -48,7 +48,7 @@ export class NextraPlugin {
       try {
         for (const locale of locales) {
           const route = `/${locale}`
-          const dir = path.join(PAGES_DIR, locale)
+          const dir = path.join(APP_DIR, locale)
           const rawJs = await collectPageMap({
             dir,
             route,

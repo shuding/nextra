@@ -12,7 +12,6 @@ import type {
 export interface LoaderOptions extends NextraConfig {
   isPageImport?: boolean
   isPageMapImport?: boolean
-  isMetaFile?: boolean
   locales: string[]
 }
 

@@ -31,7 +31,7 @@ export function Banner({
           '_px-2 ltr:_pl-10 rtl:_pr-10 print:_hidden'
         )}
       >
-        <div className="_w-full _truncate _px-4 _text-center _font-medium _text-sm">
+        <div className="_w-full _truncate _text-center _font-medium _text-sm">
           {renderComponent(children)}
         </div>
         {dismissible && (

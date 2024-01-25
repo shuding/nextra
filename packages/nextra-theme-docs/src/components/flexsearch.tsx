@@ -3,7 +3,6 @@
 import cn from 'clsx'
 import type { Document } from 'flexsearch'
 import type { SearchData } from 'nextra'
-import { useRouter } from 'nextra/hooks'
 import type { ReactElement, ReactNode } from 'react'
 import { useCallback, useState } from 'react'
 import { DEFAULT_LOCALE } from '../constants'
@@ -149,8 +148,8 @@ export function Flexsearch({
 }: {
   className?: string
 }): ReactElement {
-  // @ts-expect-error -- todo: remove it
-  const { locale = DEFAULT_LOCALE, basePath } = useRouter()
+  const locale = DEFAULT_LOCALE
+  const basePath = ''
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
   const [results, setResults] = useState<SearchResult[]>([])
