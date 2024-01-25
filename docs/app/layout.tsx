@@ -4,7 +4,6 @@ import type { Metadata, Viewport } from 'next'
 import { Banner, Head, Layout } from 'nextra-theme-docs'
 import { collectPageMap } from 'nextra/page-map'
 import type { ReactNode } from 'react'
-import 'nextra-theme-docs/style.css'
 import './globals.css'
 
 export const viewport: Viewport = Head.viewport
