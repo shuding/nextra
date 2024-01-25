@@ -2,8 +2,6 @@
 
 import { Menu, Transition } from '@headlessui/react'
 import cn from 'clsx'
-// eslint-disable-next-line no-restricted-imports -- since we don't need newWindow prop
-import NextLink from 'next/link'
 import { useFSRoute } from 'nextra/hooks'
 import { ArrowRightIcon, MenuIcon } from 'nextra/icons'
 import type { MenuItem, PageItem } from 'nextra/normalize-pages'
@@ -80,9 +78,7 @@ export type NavbarProps = {
   children?: ReactNode
 }
 
-export function Navbar({
-  children
-}: NavbarProps): ReactElement {
+export function Navbar({ children }: NavbarProps): ReactElement {
   const items = useConfig().normalizePagesResult.topLevelNavbarItems
   const themeConfig = useThemeConfig()
 
@@ -90,102 +86,75 @@ export function Navbar({
   const { menu, setMenu } = useMenu()
 
   return (
-    <div className="nextra-nav-container _sticky _top-0 _z-20 _w-full _bg-transparent print:_hidden">
-      <div
-        className={cn(
-          'nextra-nav-container-blur',
-          '_pointer-events-none _absolute _z-[-1] _size-full _bg-white dark:_bg-dark',
-          '_shadow-[0_2px_4px_rgba(0,0,0,.02),0_1px_0_rgba(0,0,0,.06)] dark:_shadow-[0_-1px_0_rgba(255,255,255,.1)_inset]',
-          'contrast-more:_shadow-[0_0_0_1px_#000] contrast-more:dark:_shadow-[0_0_0_1px_#fff]'
-        )}
-      />
-      <nav className="_mx-auto _flex _h-[var(--nextra-navbar-height)] _max-w-[90rem] _items-center _justify-end _gap-4 _pl-[max(env(safe-area-inset-left),1.5rem)] _pr-[max(env(safe-area-inset-right),1.5rem)]">
-        {themeConfig.logoLink ? (
-          <NextLink
-            href={
-              typeof themeConfig.logoLink === 'string'
-                ? themeConfig.logoLink
-                : '/'
-            }
-            className="_flex _items-center hover:_opacity-75 ltr:_mr-auto rtl:_ml-auto"
-          >
-            {renderComponent(themeConfig.logo)}
-          </NextLink>
-        ) : (
-          <div className="_flex _items-center ltr:_mr-auto rtl:_ml-auto">
-            {renderComponent(themeConfig.logo)}
-          </div>
-        )}
-        {items.map(pageOrMenu => {
-          if (pageOrMenu.display === 'hidden') return null
+    <>
+      {items.map(pageOrMenu => {
+        if (pageOrMenu.display === 'hidden') return null
 
-          if (pageOrMenu.type === 'menu') {
-            const menu = pageOrMenu as MenuItem
-            return (
-              <NavbarMenu key={menu.title} menu={menu}>
-                {menu.title}
-                <ArrowRightIcon
-                  className="_h-[18px] _min-w-[18px] _rounded-sm _p-0.5"
-                  pathClassName="_origin-center _transition-transform _rotate-90"
-                />
-              </NavbarMenu>
-            )
-          }
-          const page = pageOrMenu as PageItem
-          let href = page.href || page.route || '#'
-
-          // If it's a directory
-          if (page.children) {
-            href =
-              (page.withIndexPage ? page.route : page.firstChildRoute) || href
-          }
-
-          const isActive =
-            page.route === activeRoute ||
-            activeRoute.startsWith(page.route + '/')
-
+        if (pageOrMenu.type === 'menu') {
+          const menu = pageOrMenu as MenuItem
           return (
-            <Anchor
-              href={href}
-              key={href}
-              className={cn(
-                classes.link,
-                'max-md:_hidden _whitespace-nowrap',
-                !isActive || page.newWindow ? classes.inactive : classes.active
-              )}
-              newWindow={page.newWindow}
-              aria-current={!page.newWindow && isActive}
-            >
-              {page.title}
-            </Anchor>
+            <NavbarMenu key={menu.title} menu={menu}>
+              {menu.title}
+              <ArrowRightIcon
+                className="_h-[18px] _min-w-[18px] _rounded-sm _p-0.5"
+                pathClassName="_origin-center _transition-transform _rotate-90"
+              />
+            </NavbarMenu>
           )
-        })}
+        }
+        const page = pageOrMenu as PageItem
+        let href = page.href || page.route || '#'
 
-        {themeConfig.search}
+        // If it's a directory
+        if (page.children) {
+          href =
+            (page.withIndexPage ? page.route : page.firstChildRoute) || href
+        }
 
-        {themeConfig.project.link ? (
-          <Anchor href={themeConfig.project.link} newWindow>
-            {renderComponent(themeConfig.project.icon)}
+        const isActive =
+          page.route === activeRoute || activeRoute.startsWith(page.route + '/')
+
+        return (
+          <Anchor
+            href={href}
+            key={href}
+            className={cn(
+              classes.link,
+              'max-md:_hidden _whitespace-nowrap',
+              !isActive || page.newWindow ? classes.inactive : classes.active
+            )}
+            newWindow={page.newWindow}
+            aria-current={!page.newWindow && isActive}
+          >
+            {page.title}
           </Anchor>
-        ) : null}
+        )
+      })}
 
-        {themeConfig.chat.link ? (
-          <Anchor href={themeConfig.chat.link} newWindow>
-            {renderComponent(themeConfig.chat.icon)}
-          </Anchor>
-        ) : null}
+      {themeConfig.search}
 
-        {children}
+      {themeConfig.project.link ? (
+        <Anchor href={themeConfig.project.link} newWindow>
+          {renderComponent(themeConfig.project.icon)}
+        </Anchor>
+      ) : null}
 
-        <button
-          type="button"
-          aria-label="Menu"
-          className="nextra-hamburger _rounded active:_bg-gray-400/20 md:_hidden"
-          onClick={() => setMenu(!menu)}
-        >
-          <MenuIcon className={cn({ open: menu })} />
-        </button>
-      </nav>
-    </div>
+      {themeConfig.chat.link ? (
+        <Anchor href={themeConfig.chat.link} newWindow>
+          {renderComponent(themeConfig.chat.icon)}
+        </Anchor>
+      ) : null}
+
+      {children}
+
+      <button
+        type="button"
+        aria-label="Menu"
+        className="nextra-hamburger _rounded active:_bg-gray-400/20 md:_hidden"
+        onClick={() => setMenu(!menu)}
+      >
+        <MenuIcon className={cn({ open: menu })} />
+      </button>
+    </>
   )
 }
