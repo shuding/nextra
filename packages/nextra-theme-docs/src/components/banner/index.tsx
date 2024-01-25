@@ -1,16 +1,23 @@
 import cn from 'clsx'
 import { XIcon } from 'nextra/icons'
-import type { ReactElement } from 'react'
-import { useThemeConfig } from '../contexts'
-import { renderComponent } from '../utils'
+import type { ReactElement, ReactNode } from 'react'
+import { renderComponent } from '../../utils'
+import { CloseBannerButton } from './close-banner-button'
 
-export function Banner(): ReactElement | null {
-  const { banner } = useThemeConfig()
-  if (!banner.content) {
+export function Banner({
+  children,
+  dismissible = true,
+  storageKey = 'nextra-banner'
+}: {
+  children: ReactNode
+  dismissible?: boolean
+  storageKey?: string
+}): ReactElement | null {
+  if (!children) {
     return null
   }
   const hideBannerScript = `try{if(localStorage.getItem(${JSON.stringify(
-    banner.key
+    storageKey
   )})==='0'){document.body.classList.add('nextra-banner-hidden')}}catch(e){}`
 
   return (
@@ -25,24 +32,12 @@ export function Banner(): ReactElement | null {
         )}
       >
         <div className="_w-full _truncate _px-4 _text-center _font-medium _text-sm">
-          {renderComponent(banner.content)}
+          {renderComponent(children)}
         </div>
-        {banner.dismissible && (
-          <button
-            type="button"
-            aria-label="Dismiss banner"
-            className="_w-8 _h-8 _opacity-80 hover:_opacity-100"
-            onClick={() => {
-              try {
-                localStorage.setItem(banner.key, '0')
-              } catch {
-                /* ignore */
-              }
-              document.body.classList.add('nextra-banner-hidden')
-            }}
-          >
+        {dismissible && (
+          <CloseBannerButton storageKey={storageKey}>
             <XIcon className="_mx-auto _h-4 _w-4" />
-          </button>
+          </CloseBannerButton>
         )}
       </div>
     </>

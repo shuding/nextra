@@ -6,7 +6,6 @@ import { ThemeProvider } from 'next-themes'
 import type { ReactElement, ReactNode } from 'react'
 import { ActiveAnchorProvider, useConfig, useThemeConfig } from '../contexts'
 import { renderComponent } from '../utils'
-import { Banner } from './banner'
 
 export function InnerLayout({
   children
@@ -25,7 +24,6 @@ export function InnerLayout({
       disableTransitionOnChange
       {...themeConfig.nextThemes}
     >
-      <Banner />
       {themeContext.navbar &&
         renderComponent(themeConfig.navbar.component, {
           items: topLevelNavbarItems

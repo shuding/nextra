@@ -22,11 +22,6 @@ export const themeOptionsSchema = /* @__PURE__ */ (() =>
 
 export const themeSchema = /* @__PURE__ */ (() =>
   z.strictObject({
-    banner: z.strictObject({
-      content: z.custom<ReactNode | FC>(...reactNode).optional(),
-      dismissible: z.boolean(),
-      key: z.string()
-    }),
     chat: z.strictObject({
       icon: z.custom<ReactNode | FC>(...reactNode),
       link: z.string().startsWith('https://').optional()

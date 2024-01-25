@@ -7,10 +7,6 @@ import type { DocsThemeConfig } from '../contexts/theme-config'
 import { InnerLayout } from './inner-layout'
 
 const DEFAULT_THEME: DocsThemeConfig = {
-  banner: {
-    dismissible: true,
-    key: 'nextra-banner'
-  },
   chat: {
     icon: (
       <>
