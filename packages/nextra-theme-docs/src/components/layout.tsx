@@ -31,20 +31,6 @@ const DEFAULT_THEME: DocsThemeConfig = {
   footer: {
     content: `MIT ${new Date().getFullYear()} © Nextra.`
   },
-  // gitTimestamp: function GitTimestamp({ timestamp }) {
-  //   return (
-  //     <>
-  //       Last updated on{' '}
-  //       <time dateTime={timestamp.toISOString()}>
-  //         {timestamp.toLocaleDateString('en', {
-  //           day: 'numeric',
-  //           month: 'long',
-  //           year: 'numeric'
-  //         })}
-  //       </time>
-  //     </>
-  //   )
-  // },
   i18n: [],
   logo: (
     <>
@@ -114,8 +100,21 @@ export function Layout({
   themeConfig,
   pageOpts
 }: NextraThemeLayoutProps): ReactElement {
+  const date = pageOpts.timestamp ? new Date(pageOpts.timestamp) : null
   const extendedThemeConfig = {
     ...DEFAULT_THEME,
+    gitTimestamp: date && (
+      <>
+        Last updated on{' '}
+        <time dateTime={date.toISOString()}>
+          {date.toLocaleDateString('en', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+          })}
+        </time>
+      </>
+    ),
     ...(themeConfig &&
       Object.fromEntries(
         Object.entries(themeConfig).map(([key, value]) => [

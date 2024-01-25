@@ -27,7 +27,7 @@ export function InnerLayout({
     >
       <Banner />
       {themeContext.navbar &&
-        renderComponent(themeConfig.navbar.component, {
+        renderComponent(themeConfig.navbar!.component, {
           items: topLevelNavbarItems
         })}
       <ActiveAnchorProvider>{children}</ActiveAnchorProvider>
