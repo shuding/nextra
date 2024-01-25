@@ -1,10 +1,10 @@
 'use client'
 
+import cn from 'clsx'
 import type { ComponentProps, ReactElement } from 'react'
 import { useEffect, useRef } from 'react'
 import { useSetActiveAnchor } from '../contexts'
 import { useIntersectionObserver, useSlugs } from '../contexts/active-anchor'
-import cn from 'clsx'
 
 // Anchor links
 const createHeading = (
