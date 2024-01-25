@@ -9,18 +9,19 @@ import { useMounted } from 'nextra/hooks'
 import { InformationCircleIcon, SpinnerIcon } from 'nextra/icons'
 import type { CompositionEvent, KeyboardEvent, ReactElement } from 'react'
 import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
-import { useMenu, useThemeConfig } from '../../contexts'
+import { useMenu } from '../../contexts'
 import type { SearchResult } from '../../types'
-import { renderComponent, renderString } from '../../utils'
+import { renderComponent } from '../../utils'
 import { Input } from '../input'
+import type { FlexsearchProps } from './index'
 
-type SearchProps = {
+type SearchProps = FlexsearchProps & {
   className?: string
   overlayClassName?: string
   value: string
   onChange: (newValue: string) => void
   onActive?: (active: boolean) => void
-  loading?: boolean
+  isLoading?: boolean
   error?: boolean
   results: SearchResult[]
 }
@@ -33,11 +34,18 @@ export function Search({
   value,
   onChange,
   onActive,
-  loading,
+  isLoading,
   error,
-  results
+  results,
+  emptyResult = (
+    <span className="_block _select-none _p-8 _text-center _text-sm _text-gray-400">
+      No results found.
+    </span>
+  ),
+  errorText = 'Failed to load search index.',
+  loading = 'Loading…',
+  placeholder = 'Search documentation…'
 }: SearchProps): ReactElement {
-  const themeConfig = useThemeConfig()
   const [show, setShow] = useState(false)
   const [active, setActive] = useState(0)
   const router = useRouter()
@@ -219,7 +227,7 @@ export function Search({
         onCompositionStart={handleComposition}
         onCompositionEnd={handleComposition}
         type="search"
-        placeholder={renderString(themeConfig.search.placeholder)}
+        placeholder={placeholder}
         onKeyDown={handleKeyDown}
         suffix={icon}
       />
@@ -252,12 +260,12 @@ export function Search({
           {error ? (
             <span className="_flex _select-none _justify-center _gap-2 _p-8 _text-center _text-sm _text-red-500">
               <InformationCircleIcon className="_size-5" />
-              {renderString(themeConfig.search.error)}
+              {errorText}
             </span>
-          ) : loading ? (
+          ) : isLoading ? (
             <span className="_flex _select-none _justify-center _gap-2 _p-8 _text-center _text-sm _text-gray-400">
               <SpinnerIcon className="_size-5 _animate-spin" />
-              {renderComponent(themeConfig.search.loading)}
+              {renderComponent(loading)}
             </span>
           ) : results.length > 0 ? (
             results.map(({ route, prefix, children, id }, i) => (
@@ -287,7 +295,7 @@ export function Search({
               </Fragment>
             ))
           ) : (
-            renderComponent(themeConfig.search.emptyResult)
+            renderComponent(emptyResult)
           )}
         </ul>
       </Transition>

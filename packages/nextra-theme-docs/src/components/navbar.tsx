@@ -158,10 +158,7 @@ export function Navbar({ items }: NavBarProps): ReactElement {
           )
         })}
 
-        {process.env.NEXTRA_SEARCH &&
-          renderComponent(themeConfig.search.component, {
-            className: 'max-md:_hidden'
-          })}
+        {themeConfig.search}
 
         {themeConfig.project.link ? (
           <Anchor href={themeConfig.project.link} newWindow>

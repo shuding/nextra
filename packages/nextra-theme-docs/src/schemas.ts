@@ -72,14 +72,7 @@ export const themeSchema = /* @__PURE__ */ (() =>
       icon: z.custom<ReactNode | FC>(...reactNode),
       link: z.string().startsWith('https://').optional()
     }),
-    search: z.strictObject({
-      component: z.custom<ReactNode | FC<{ className?: string }>>(...reactNode),
-      emptyResult: z.custom<ReactNode | FC>(...reactNode),
-      error: z.string().or(z.function().returns(z.string())),
-      loading: z.custom<ReactNode | FC>(...reactNode),
-      // Can't be React component
-      placeholder: z.string().or(z.function().returns(z.string()))
-    }),
+    search: z.custom<ReactNode>(...reactNode),
     sidebar: z.strictObject({
       autoCollapse: z.boolean().optional(),
       defaultMenuCollapseLevel: z.number().min(1).int(),

@@ -5,6 +5,7 @@ import { isValidElement } from 'react'
 import { ConfigProvider, ThemeConfigProvider } from '../contexts'
 import type { DocsThemeConfig } from '../contexts/theme-config'
 import { InnerLayout } from './inner-layout'
+import { Flexsearch } from './search'
 
 const DEFAULT_THEME: DocsThemeConfig = {
   chat: {
@@ -51,16 +52,7 @@ const DEFAULT_THEME: DocsThemeConfig = {
       </>
     )
   },
-  search: {
-    emptyResult: (
-      <span className="_block _select-none _p-8 _text-center _text-sm _text-gray-400">
-        No results found.
-      </span>
-    ),
-    error: 'Failed to load search index.',
-    loading: 'Loading…',
-    placeholder: 'Search documentation…'
-  },
+  search: <Flexsearch />,
   sidebar: {
     defaultMenuCollapseLevel: 2,
     toggleButton: true
@@ -126,6 +118,7 @@ export function Layout({
         ])
       ))
   }
+
   return (
     <ThemeConfigProvider value={extendedThemeConfig}>
       <ConfigProvider value={pageOpts}>

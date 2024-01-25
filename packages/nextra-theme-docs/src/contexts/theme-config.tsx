@@ -66,10 +66,6 @@ export function ThemeConfigProvider({
       component: Navbar,
       ...value.navbar
     },
-    search: {
-      component: Flexsearch,
-      ...value.search
-    },
     themeSwitch: {
       component: ThemeSwitch,
       ...value.themeSwitch

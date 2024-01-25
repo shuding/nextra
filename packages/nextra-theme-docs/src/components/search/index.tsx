@@ -143,14 +143,17 @@ const loadIndexesImpl = async (
   indexes[locale] = [pageIndex, sectionIndex]
 }
 
-export function Flexsearch({
-  className
-}: {
-  className?: string
-}): ReactElement {
+export type FlexsearchProps = {
+  emptyResult?: ReactNode
+  errorText?: string
+  loading?: ReactNode
+  placeholder?: string
+}
+
+export function Flexsearch(props: FlexsearchProps): ReactElement {
   const locale = DEFAULT_LOCALE
   const basePath = ''
-  const [loading, setLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(false)
   const [results, setResults] = useState<SearchResult[]>([])
   const [search, setSearch] = useState('')
@@ -249,13 +252,13 @@ export function Flexsearch({
   const preload = useCallback(
     async (active: boolean) => {
       if (active && !indexes[locale]) {
-        setLoading(true)
+        setIsLoading(true)
         try {
           await loadIndexes(basePath, locale)
         } catch (e) {
           setError(true)
         }
-        setLoading(false)
+        setIsLoading(false)
       }
     },
     [locale, basePath]
@@ -263,31 +266,32 @@ export function Flexsearch({
 
   const handleChange = async (value: string) => {
     setSearch(value)
-    if (loading) {
+    if (isLoading) {
       return
     }
     if (!indexes[locale]) {
-      setLoading(true)
+      setIsLoading(true)
       try {
         await loadIndexes(basePath, locale)
       } catch (e) {
         setError(true)
       }
-      setLoading(false)
+      setIsLoading(false)
     }
     doSearch(value)
   }
 
   return (
     <Search
-      loading={loading}
+      isLoading={isLoading}
       error={error}
       value={search}
       onChange={handleChange}
       onActive={preload}
-      className={className}
+      className="max-md:_hidden"
       overlayClassName="_w-screen _min-h-[100px] _max-w-[min(calc(100vw-2rem),calc(100%+20rem))]"
       results={results}
+      {...props}
     />
   )
 }
