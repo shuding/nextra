@@ -1,0 +1,108 @@
+# Callout Component
+
+A built-in component to show important information to the reader.
+
+import { Callout } from 'nextra/components'
+
+## Example
+
+<Callout>
+  A **callout** is a short piece of text intended to attract attention.
+</Callout>
+
+<Callout type="info">
+  A **callout** is a short piece of text intended to attract attention.
+</Callout>
+
+<Callout type="warning">
+  A **callout** is a short piece of text intended to attract attention.
+</Callout>
+
+<Callout type="error">
+  A **callout** is a short piece of text intended to attract attention.
+</Callout>
+
+## Usage
+
+### Default
+
+<Callout emoji="👾">
+  **Space Invaders** is a 1978 shoot 'em up arcade game developed by Tomohiro
+  Nishikado.
+</Callout>
+
+```mdx
+import { Callout } from 'nextra/components'
+
+<Callout emoji="👾">
+  **Space Invaders** is a 1978 shoot 'em up arcade game developed by Tomohiro
+  Nishikado.
+</Callout>
+```
+
+### Info
+
+<Callout type="info" emoji="ℹ️">
+  Today is Friday.
+</Callout>
+
+```mdx
+import { Callout } from 'nextra/components'
+
+<Callout type="info" emoji="ℹ️">
+  Today is Friday.
+</Callout>
+```
+
+### Warning
+
+<Callout type="warning" emoji="⚠️">
+  This API will be deprecated soon.
+</Callout>
+
+```mdx
+import { Callout } from 'nextra/components'
+
+<Callout type="warning" emoji="⚠️">
+  This API will be deprecated soon.
+</Callout>
+```
+
+### Error
+
+<Callout type="error" emoji="🚫">
+  This is a dangerous feature that can cause everything to explode.
+</Callout>
+
+```mdx
+import { Callout } from 'nextra/components'
+
+<Callout type="error" emoji="️🚫">
+  This is a dangerous feature that can cause everything to explode.
+</Callout>
+```
+
+## API
+
+The `Callout` component takes the following props:
+
+### `type` (optional)
+
+The type of the Callout.
+
+- Type: `'default' | 'info' | 'warning' | 'error'`
+- Default: `'default'`
+
+### `emoji` (optional)
+
+The icon to show in the Callout. You can also show your custom icon using this
+prop.
+
+- Type: `string | ReactNode`
+- Default: `'💡'`
+
+### `children`
+
+The content of the Callout.
+
+- Type: `ReactNode`

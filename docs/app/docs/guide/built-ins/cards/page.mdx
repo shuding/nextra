@@ -1,0 +1,40 @@
+import { CardsIcon, OneIcon, WarningIcon } from '@components/icons'
+import { Cards, RemoteContent } from 'nextra/components'
+import { buildDynamicMDX } from 'nextra/remote'
+
+export async function getStaticProps() {
+  const mdx = `
+<Cards>
+  <Cards.Card
+    icon={<WarningIcon />}
+    title="Callout"
+    href="/docs/guide/built-ins/callout"
+  />
+  <Cards.Card
+    icon={<CardsIcon />}
+    title="Tabs"
+    href="/docs/guide/built-ins/tabs"
+  />
+  <Cards.Card
+    icon={<OneIcon />}
+    title="Steps"
+    href="/docs/guide/built-ins/steps"
+  />
+</Cards>`
+  const props = await buildDynamicMDX(`
+# Cards Component
+
+## Example
+${mdx}
+
+## Usage
+
+~~~mdx filename="MDX"
+import { Cards } from 'nextra/components'
+import { CardsIcon, OneIcon, WarningIcon } from '../../icons'
+${mdx}
+~~~`)
+  return { props }
+}
+
+<RemoteContent components={{ Cards, CardsIcon, OneIcon, WarningIcon }} />
