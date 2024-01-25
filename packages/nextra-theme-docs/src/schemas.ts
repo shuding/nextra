@@ -45,8 +45,6 @@ export const themeSchema = /* @__PURE__ */ (() =>
     }),
     gitTimestamp: z.custom<ReactNode | FC<{ timestamp: Date }>>(...reactNode),
     i18n: i18nSchema,
-    logo: z.custom<ReactNode | FC>(...reactNode),
-    logoLink: z.boolean().or(z.string()),
     main: z.custom<FC<{ children: ReactNode }>>(...fc).optional(),
     navigation: z.boolean().or(
       z.strictObject({

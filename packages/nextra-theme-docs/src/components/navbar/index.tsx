@@ -2,7 +2,7 @@ import cn from 'clsx'
 // eslint-disable-next-line no-restricted-imports -- since we don't need newWindow prop
 import NextLink from 'next/link'
 import type { ReactElement, ReactNode } from 'react'
-import { Navbar } from './navbar'
+import { Navbar as NavbarInner } from './navbar'
 
 type NavbarProps = {
   children?: ReactNode
@@ -10,10 +10,17 @@ type NavbarProps = {
   logo?: ReactNode
 }
 
-export default function NavbarWrapper({
+export function Navbar({
   children,
-  logoLink,
-  logo
+  logoLink = true,
+  logo = (
+    <>
+      <span className="_font-extrabold">Nextra</span>
+      <span className="_ml-2 max-md:_hidden _font-normal _text-gray-600">
+        The Next Docs Builder
+      </span>
+    </>
+  )
 }: NavbarProps): ReactElement {
   return (
     <div className="nextra-nav-container _sticky _top-0 _z-20 _w-full _bg-transparent print:_hidden">
@@ -38,7 +45,7 @@ export default function NavbarWrapper({
             {logo}
           </div>
         )}
-        <Navbar>{children}</Navbar>
+        <NavbarInner>{children}</NavbarInner>
       </nav>
     </div>
   )

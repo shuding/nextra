@@ -31,15 +31,6 @@ const DEFAULT_THEME: DocsThemeConfig = {
     labels: 'feedback'
   },
   i18n: [],
-  logo: (
-    <>
-      <span className="_font-extrabold">Nextra</span>
-      <span className="_ml-2 max-md:_hidden _font-normal _text-gray-600">
-        The Next Docs Builder
-      </span>
-    </>
-  ),
-  logoLink: true,
   navigation: true,
   project: {
     icon: (

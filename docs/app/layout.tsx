@@ -1,7 +1,7 @@
 import fs from 'fs/promises'
 import path from 'path'
 import type { Metadata, Viewport } from 'next'
-import { Banner, Footer, Head, Layout } from 'nextra-theme-docs'
+import { Banner, Footer, Head, Layout, Navbar } from 'nextra-theme-docs'
 import { collectPageMap } from 'nextra/page-map'
 import type { ReactNode } from 'react'
 import './globals.css'
@@ -49,7 +49,6 @@ export default async function RootLayout({
       <body>
         <Layout
           themeConfig={{
-            logo: <NextraLogo className="nextra-logo" />,
             project: {
               link: 'https://github.com/shuding/nextra'
             },
@@ -62,6 +61,14 @@ export default async function RootLayout({
               defaultMenuCollapseLevel: 1
             }
           }}
+          banner={
+            <Banner storageKey="4.0-release">
+              <a href="https://nextra.site" target="_blank" rel="noreferrer">
+                🎉 Nextra 4.0 is released. Read more →
+              </a>
+            </Banner>
+          }
+          navbar={<Navbar logo={<NextraLogo className="nextra-logo" />} />}
           footer={
             <Footer className="flex-col max-sm:items-center">
               <a
@@ -85,13 +92,6 @@ export default async function RootLayout({
             frontMatter: {},
             timestamp: new Date().getTime()
           }}
-          banner={
-            <Banner storageKey="4.0-release">
-              <a href="https://nextra.site" target="_blank" rel="noreferrer">
-                🎉 Nextra 4.0 is released. Read more →
-              </a>
-            </Banner>
-          }
         >
           {children}
         </Layout>
