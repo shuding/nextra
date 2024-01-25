@@ -40,15 +40,11 @@ export function Tree({ children }: { children: ReactNode }): ReactElement {
   )
 }
 
-function Ident(): ReactElement {
+function Ident(): ReactElement[] {
   const length = useIndent()
-  return (
-    <>
-      {Array.from({ length }, (_, i) => (
-        <span className="_w-5" key={i} />
-      ))}
-    </>
-  )
+  return Array.from({ length }, (_, index) => (
+    <span className="_w-5" key={index} />
+  ))
 }
 
 export const Folder = memo<FolderProps>(
@@ -68,7 +64,7 @@ export const Folder = memo<FolderProps>(
         <button
           onClick={toggle}
           title={name}
-          className="_inline-flex _cursor-pointer _items-center _py-1 hover:_opacity-60"
+          className="_flex _items-center _py-1 hover:_opacity-60"
         >
           <Ident />
           <svg width="1em" height="1em" viewBox="0 0 24 24">
@@ -105,7 +101,7 @@ export const File = memo<FileProps>(({ label, name, active }) => (
       active && '_text-primary-600 contrast-more:_underline'
     )}
   >
-    <span className="_inline-flex _cursor-default _items-center _py-1">
+    <span className="_flex _items-center _py-1">
       <Ident />
       <svg width="1em" height="1em" viewBox="0 0 24 24">
         <path

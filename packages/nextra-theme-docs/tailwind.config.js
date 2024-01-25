@@ -15,7 +15,7 @@ module.exports = {
   content: [
     './src/**/*.tsx',
     '../nextra/src/client/icons/*.{tsx,svg}',
-    '../nextra/src/client/components/*.tsx'
+    '../nextra/src/client/components/**/*.tsx'
   ],
   theme: {
     screens: {

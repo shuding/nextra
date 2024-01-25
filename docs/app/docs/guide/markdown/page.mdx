@@ -32,17 +32,7 @@ Generates:
 import { StarsIcon } from '@components/icons'
 import { Shadow } from '@components/utils/shadow'
 import { Cards } from 'nextra/components'
-import { useState } from 'react'
-
-export function Counter({ children }) {
-  const [count, setCount] = useState(0)
-  return (
-    <button onClick={() => setCount(count + 1)}>
-      {children}
-      {count}
-    </button>
-  )
-}
+import { Counter } from './_counter'
 
 <div className="mt-6 rounded-xl border border-gray-200 p-4 dark:border-gray-900">
   <Shadow mode="open">
