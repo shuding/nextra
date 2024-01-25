@@ -13,5 +13,5 @@ export {
   Head,
   Layout,
   Banner,
-  Search
+  Flexsearch as Search
 } from './components'
