@@ -6,7 +6,7 @@ import { createContext, useContext, useRef } from 'react'
 import type { z } from 'zod'
 import {
   Anchor,
-  Flexsearch,
+  Search,
   Footer,
   Navbar,
   ThemeSwitch,
@@ -67,7 +67,7 @@ export function ThemeConfigProvider({
       ...value.navbar
     },
     search: {
-      component: Flexsearch,
+      component: Search,
       ...value.search
     },
     themeSwitch: {

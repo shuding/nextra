@@ -9,10 +9,10 @@ import { useMounted } from 'nextra/hooks'
 import { InformationCircleIcon, SpinnerIcon } from 'nextra/icons'
 import type { CompositionEvent, KeyboardEvent, ReactElement } from 'react'
 import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
-import { useMenu, useThemeConfig } from '../contexts'
-import type { SearchResult } from '../types'
-import { renderComponent, renderString } from '../utils'
-import { Input } from './input'
+import { useMenu, useThemeConfig } from '../../contexts'
+import type { SearchResult } from '../../types'
+import { renderComponent, renderString } from '../../utils'
+import { Input } from '../input'
 
 type SearchProps = {
   className?: string

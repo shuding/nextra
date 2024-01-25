@@ -12,5 +12,6 @@ export {
   Link,
   Head,
   Layout,
-  Banner
+  Banner,
+  Search
 } from './components'
