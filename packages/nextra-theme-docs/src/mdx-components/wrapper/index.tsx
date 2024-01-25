@@ -1,5 +1,6 @@
 import type { NextraMDXContent } from 'nextra'
 import { removeLinks } from 'nextra/remove-links'
+import { SkipNavContent } from '../../components'
 import { ClientWrapper } from './wrapper.client'
 
 export const Wrapper: NextraMDXContent = ({ toc, children }) => {
@@ -11,6 +12,7 @@ export const Wrapper: NextraMDXContent = ({ toc, children }) => {
           ...item,
           value: removeLinks(item.value)
         }))}
+        skipNavContent={<SkipNavContent />}
       >
         {children}
       </ClientWrapper>

@@ -2,8 +2,8 @@
 
 import cn from 'clsx'
 import type { NextraMDXContent } from 'nextra'
-import type { ReactElement, ReactNode } from 'react'
-import { Breadcrumb, NavLinks, Sidebar, SkipNavContent } from '../../components'
+import type { ComponentProps, ReactElement, ReactNode } from 'react'
+import { Breadcrumb, NavLinks, Sidebar } from '../../components'
 import { useConfig, useThemeConfig } from '../../contexts'
 import { renderComponent } from '../../utils'
 
@@ -87,7 +87,11 @@ function Body({ children }: { children: ReactNode }): ReactElement {
   )
 }
 
-export const ClientWrapper: NextraMDXContent = ({ toc, children }) => {
+export function ClientWrapper({
+  toc,
+  children,
+  skipNavContent
+}: ComponentProps<NextraMDXContent> & { skipNavContent: ReactNode }) {
   const config = useConfig()
   const themeConfig = useThemeConfig()
   const {
@@ -122,7 +126,7 @@ export const ClientWrapper: NextraMDXContent = ({ toc, children }) => {
         includePlaceholder={themeContext.layout === 'default'}
       />
       {tocEl}
-      <SkipNavContent />
+      {skipNavContent}
       <Body>{children}</Body>
     </>
   )
