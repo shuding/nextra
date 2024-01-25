@@ -1,0 +1,91 @@
+import { Callout, Steps } from 'nextra/components'
+
+# Get Started
+
+<Callout type="warning">Docs for this theme is under construction.</Callout>
+
+<Callout>
+  An example of the blog theme can be found [here](https://demo.vercel.blog),
+  with source code [here](https://github.com/vercel/nextjs-portfolio-starter).
+</Callout>
+
+Similar to the [Docs Theme](/docs/docs-theme/start), you can install the blog
+theme with the following commands:
+
+## Quick Start from Template
+
+## Start as New Project
+
+<Steps>
+### Install
+
+To create a Nextra Docs site manually, you have to install **Next.js**,
+**React**, **Nextra**, and **Nextra Blog Theme**. In your project directory, run
+the following command to install the dependencies:
+
+```sh npm2yarn
+npm i next react react-dom nextra nextra-theme-blog
+```
+
+<Callout>
+  If you already have Next.js installed in your project, you only need to
+  install `nextra` and `nextra-theme-blog` as the add-ons.
+</Callout>
+
+### Add Next.js Config
+
+Create the following `next.config.mjs` file in your project’s root directory:
+
+```js filename="next.config.mjs"
+import nextra from 'nextra'
+
+const withNextra = nextra({
+  theme: 'nextra-theme-blog',
+  themeConfig: './theme.config.jsx'
+})
+
+export default withNextra()
+
+// If you have other Next.js configurations, you can pass them as the parameter:
+// export default withNextra({ /* other next.js config */ })
+```
+
+With the above configuration, Nextra can handle Markdown files in your Next.js
+project, with the specified theme. Other Nextra configurations can be found in
+[Guide](/docs/guide).
+
+### Create Blog Theme Config
+
+Lastly, create the corresponding `theme.config.jsx` file in your project’s root
+directory. This will be used to configure the Nextra Blog theme:
+
+```jsx filename="theme.config.jsx"
+export default {
+  footer: <p>MIT 2023 © Nextra.</p>,
+  head: ({ title, meta }) => (
+    <>
+      {meta.description && (
+        <meta name="description" content={meta.description} />
+      )}
+      {meta.tag && <meta name="keywords" content={meta.tag} />}
+      {meta.author && <meta name="author" content={meta.author} />}
+    </>
+  ),
+  readMore: 'Read More →',
+  postFooter: null,
+  darkMode: false,
+  navs: [
+    {
+      url: 'https://github.com/shuding/nextra',
+      name: 'Nextra'
+    }
+  ]
+}
+```
+
+### Ready to Go!
+
+Now, you can run the `next` or `next dev` command specified in `package.json` to
+start developing the project! 🎉
+
+</Steps>
