@@ -2,7 +2,7 @@ import type { NextraThemeLayoutProps } from 'nextra'
 import { DiscordIcon, GitHubIcon } from 'nextra/icons'
 import type { ReactElement, ReactNode } from 'react'
 import { isValidElement } from 'react'
-import { Flexsearch, Footer, InnerLayout } from './components'
+import { Flexsearch, Footer, InnerLayout, Navbar } from './components'
 import type { ThemeProviderProps } from './contexts'
 import {
   ActiveAnchorProvider,
@@ -41,7 +41,6 @@ const DEFAULT_THEME: DocsThemeConfig = {
   ),
   logoLink: true,
   navigation: true,
-  navbar: {},
   project: {
     icon: (
       <>
@@ -88,11 +87,13 @@ export function Layout({
   pageOpts,
   banner,
   nextThemes,
-  footer = <Footer>MIT {new Date().getFullYear()} © Nextra.</Footer>
+  footer = <Footer>MIT {new Date().getFullYear()} © Nextra.</Footer>,
+  navbar = <Navbar />
 }: NextraThemeLayoutProps & {
   banner?: ReactNode
   nextThemes?: ThemeProviderProps
   footer?: ReactNode
+  navbar?: ReactNode
 }): ReactElement {
   const date = pageOpts.timestamp ? new Date(pageOpts.timestamp) : null
   const extendedThemeConfig = {
@@ -132,7 +133,7 @@ export function Layout({
           storageKey="theme"
           {...nextThemes}
         >
-          <InnerLayout footer={footer}>
+          <InnerLayout footer={footer} navbar={navbar}>
             <ActiveAnchorProvider>{children}</ActiveAnchorProvider>
           </InnerLayout>
         </ThemeProvider>

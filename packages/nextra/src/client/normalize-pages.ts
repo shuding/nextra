@@ -131,7 +131,7 @@ export function normalizePages({
   const flatDocsDirectories: DocsItem[] = []
 
   // Page directories
-  const topLevelNavbarItems: PageItem[] = []
+  const topLevelNavbarItems: (PageItem | MenuItem)[] = []
 
   let activeType: string | undefined
   let activeIndex = 0

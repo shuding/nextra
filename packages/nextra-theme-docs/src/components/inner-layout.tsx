@@ -3,30 +3,23 @@
 import 'focus-visible'
 import '../polyfill'
 import type { ReactElement, ReactNode } from 'react'
-import { useConfig, useThemeConfig } from '../contexts'
-import { renderComponent } from '../utils'
+import { useConfig } from '../contexts'
 
 export function InnerLayout({
   children,
-  footer
+  footer,
+  navbar
 }: {
   children: ReactNode
   footer: ReactNode
+  navbar: ReactNode
 }): ReactElement {
-  const themeConfig = useThemeConfig()
-  const { normalizePagesResult } = useConfig()
-
-  const { activeThemeContext: themeContext, topLevelNavbarItems } =
-    normalizePagesResult
-
+  const { activeThemeContext } = useConfig().normalizePagesResult
   return (
     <>
-      {themeContext.navbar &&
-        renderComponent(themeConfig.navbar.component, {
-          items: topLevelNavbarItems
-        })}
+      {activeThemeContext.navbar && navbar}
       {children}
-      {themeContext.footer && footer}
+      {activeThemeContext.footer && footer}
     </>
   )
 }

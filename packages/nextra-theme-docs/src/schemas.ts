@@ -1,7 +1,6 @@
 import { fc, reactNode } from 'nextra/schemas'
 import type { FC, ReactNode } from 'react'
 import { z } from 'zod'
-import type { NavBarProps } from './components/navbar'
 import type { TOCProps } from './components/toc'
 
 const i18nSchema = /* @__PURE__ */ (() =>
@@ -49,10 +48,6 @@ export const themeSchema = /* @__PURE__ */ (() =>
     logo: z.custom<ReactNode | FC>(...reactNode),
     logoLink: z.boolean().or(z.string()),
     main: z.custom<FC<{ children: ReactNode }>>(...fc).optional(),
-    navbar: z.strictObject({
-      component: z.custom<ReactNode | FC<NavBarProps>>(...reactNode),
-      extraContent: z.custom<ReactNode | FC>(...reactNode).optional()
-    }),
     navigation: z.boolean().or(
       z.strictObject({
         next: z.boolean(),

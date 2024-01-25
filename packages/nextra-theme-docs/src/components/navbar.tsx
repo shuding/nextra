@@ -8,13 +8,9 @@ import { useFSRoute } from 'nextra/hooks'
 import { ArrowRightIcon, MenuIcon } from 'nextra/icons'
 import type { MenuItem, PageItem } from 'nextra/normalize-pages'
 import type { ReactElement, ReactNode } from 'react'
-import { useMenu, useThemeConfig } from '../contexts'
+import { useConfig, useMenu, useThemeConfig } from '../contexts'
 import { renderComponent } from '../utils'
 import { Anchor } from './anchor'
-
-export type NavBarProps = {
-  items: (PageItem | MenuItem)[]
-}
 
 const classes = {
   link: cn(
@@ -80,7 +76,12 @@ function NavbarMenu({
   )
 }
 
-export function Navbar({ items }: NavBarProps): ReactElement {
+export function Navbar({
+  children
+}: {
+  children?: ReactNode
+}): ReactElement {
+  const items = useConfig().normalizePagesResult.topLevelNavbarItems
   const themeConfig = useThemeConfig()
 
   const activeRoute = useFSRoute()
@@ -172,7 +173,7 @@ export function Navbar({ items }: NavBarProps): ReactElement {
           </Anchor>
         ) : null}
 
-        {renderComponent(themeConfig.navbar.extraContent)}
+        {children}
 
         <button
           type="button"
