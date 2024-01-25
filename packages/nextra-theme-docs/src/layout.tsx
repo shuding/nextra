@@ -4,7 +4,12 @@ import type { ReactElement, ReactNode } from 'react'
 import { isValidElement } from 'react'
 import { Flexsearch, Footer, InnerLayout } from './components'
 import type { ThemeProviderProps } from './contexts'
-import { ConfigProvider, ThemeConfigProvider, ThemeProvider } from './contexts'
+import {
+  ActiveAnchorProvider,
+  ConfigProvider,
+  ThemeConfigProvider,
+  ThemeProvider
+} from './contexts'
 import type { DocsThemeConfig } from './contexts/theme-config'
 
 const DEFAULT_THEME: DocsThemeConfig = {
@@ -127,7 +132,9 @@ export function Layout({
           storageKey="theme"
           {...nextThemes}
         >
-          <InnerLayout footer={footer}>{children}</InnerLayout>
+          <InnerLayout footer={footer}>
+            <ActiveAnchorProvider>{children}</ActiveAnchorProvider>
+          </InnerLayout>
         </ThemeProvider>
       </ConfigProvider>
     </ThemeConfigProvider>

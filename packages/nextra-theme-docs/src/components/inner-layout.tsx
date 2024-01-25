@@ -3,7 +3,7 @@
 import 'focus-visible'
 import '../polyfill'
 import type { ReactElement, ReactNode } from 'react'
-import { ActiveAnchorProvider, useConfig, useThemeConfig } from '../contexts'
+import { useConfig, useThemeConfig } from '../contexts'
 import { renderComponent } from '../utils'
 
 export function InnerLayout({
@@ -25,7 +25,7 @@ export function InnerLayout({
         renderComponent(themeConfig.navbar.component, {
           items: topLevelNavbarItems
         })}
-      <ActiveAnchorProvider>{children}</ActiveAnchorProvider>
+      {children}
       {themeContext.footer && footer}
     </>
   )
