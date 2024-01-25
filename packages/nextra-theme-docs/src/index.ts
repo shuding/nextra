@@ -13,5 +13,6 @@ export {
   Link,
   Head,
   Banner,
-  Flexsearch as Search
+  Flexsearch as Search,
+  Footer,
 } from './components'

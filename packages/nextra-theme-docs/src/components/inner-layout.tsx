@@ -7,12 +7,14 @@ import { ActiveAnchorProvider, useConfig, useThemeConfig } from '../contexts'
 import { renderComponent } from '../utils'
 
 export function InnerLayout({
-  children
+  children,
+  footer
 }: {
   children: ReactNode
+  footer: ReactNode
 }): ReactElement {
   const themeConfig = useThemeConfig()
-  const { normalizePagesResult, hideSidebar } = useConfig()
+  const { normalizePagesResult } = useConfig()
 
   const { activeThemeContext: themeContext, topLevelNavbarItems } =
     normalizePagesResult
@@ -24,10 +26,7 @@ export function InnerLayout({
           items: topLevelNavbarItems
         })}
       <ActiveAnchorProvider>{children}</ActiveAnchorProvider>
-      {themeContext.footer &&
-        renderComponent(themeConfig.footer.component, {
-          menu: hideSidebar
-        })}
+      {themeContext.footer && footer}
     </>
   )
 }

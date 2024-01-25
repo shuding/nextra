@@ -4,7 +4,7 @@
 import type { ReactElement, ReactNode } from 'react'
 import { createContext, useContext, useRef } from 'react'
 import type { z } from 'zod'
-import { Anchor, Footer, Navbar, ThemeSwitch, TOC } from '../components'
+import { Anchor, Navbar, ThemeSwitch, TOC } from '../components'
 import type { themeSchema } from '../schemas'
 import { getGitIssueUrl, useGitEditUrl } from '../utils'
 import { useConfig } from './config'
@@ -50,10 +50,6 @@ export function ThemeConfigProvider({
         })
       },
       ...value.feedback
-    },
-    footer: {
-      component: Footer,
-      ...value.footer
     },
     navbar: {
       component: Navbar,

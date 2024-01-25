@@ -2,7 +2,7 @@ import type { NextraThemeLayoutProps } from 'nextra'
 import { DiscordIcon, GitHubIcon } from 'nextra/icons'
 import type { ReactElement, ReactNode } from 'react'
 import { isValidElement } from 'react'
-import { Flexsearch, InnerLayout } from './components'
+import { Flexsearch, Footer, InnerLayout } from './components'
 import type { ThemeProviderProps } from './contexts'
 import { ConfigProvider, ThemeConfigProvider, ThemeProvider } from './contexts'
 import type { DocsThemeConfig } from './contexts/theme-config'
@@ -24,9 +24,6 @@ const DEFAULT_THEME: DocsThemeConfig = {
   feedback: {
     content: 'Question? Give us feedback →',
     labels: 'feedback'
-  },
-  footer: {
-    content: `MIT ${new Date().getFullYear()} © Nextra.`
   },
   i18n: [],
   logo: (
@@ -85,10 +82,12 @@ export function Layout({
   themeConfig,
   pageOpts,
   banner,
-  nextThemes
+  nextThemes,
+  footer = <Footer>MIT {new Date().getFullYear()} © Nextra.</Footer>
 }: NextraThemeLayoutProps & {
   banner?: ReactNode
   nextThemes?: ThemeProviderProps
+  footer?: ReactNode
 }): ReactElement {
   const date = pageOpts.timestamp ? new Date(pageOpts.timestamp) : null
   const extendedThemeConfig = {
@@ -128,7 +127,7 @@ export function Layout({
           storageKey="theme"
           {...nextThemes}
         >
-          <InnerLayout>{children}</InnerLayout>
+          <InnerLayout footer={footer}>{children}</InnerLayout>
         </ThemeProvider>
       </ConfigProvider>
     </ThemeConfigProvider>

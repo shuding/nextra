@@ -44,10 +44,6 @@ export const themeSchema = /* @__PURE__ */ (() =>
       labels: z.string(),
       useLink: z.function().returns(z.string()).optional()
     }),
-    footer: z.strictObject({
-      component: z.custom<ReactNode | FC<{ menu: boolean }>>(...reactNode),
-      content: z.custom<ReactNode | FC>(...reactNode)
-    }),
     gitTimestamp: z.custom<ReactNode | FC<{ timestamp: Date }>>(...reactNode),
     i18n: i18nSchema,
     logo: z.custom<ReactNode | FC>(...reactNode),
