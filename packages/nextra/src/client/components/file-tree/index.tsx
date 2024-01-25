@@ -1,4 +1,5 @@
 'use client'
+
 import cn from 'clsx'
 import { createContext, memo, useCallback, useContext, useState } from 'react'
 import type { ReactElement, ReactNode } from 'react'
@@ -9,7 +10,7 @@ function useIndent() {
   return useContext(ctx)
 }
 
-interface FolderProps {
+type FolderProps = {
   name: string
   label?: ReactElement
   open?: boolean
@@ -18,13 +19,13 @@ interface FolderProps {
   children: ReactNode
 }
 
-interface FileProps {
+type FileProps = {
   name: string
   label?: ReactElement
   active?: boolean
 }
 
-function Tree({ children }: { children: ReactNode }): ReactElement {
+export function Tree({ children }: { children: ReactNode }): ReactElement {
   return (
     <div
       className={cn(
@@ -50,7 +51,7 @@ function Ident(): ReactElement {
   )
 }
 
-const Folder = memo<FolderProps>(
+export const Folder = memo<FolderProps>(
   ({ label, name, open, children, defaultOpen = false, onToggle }) => {
     const indent = useIndent()
     const [isOpen, setIsOpen] = useState(defaultOpen)
@@ -97,7 +98,7 @@ const Folder = memo<FolderProps>(
 )
 Folder.displayName = 'Folder'
 
-const File = memo<FileProps>(({ label, name, active }) => (
+export const File = memo<FileProps>(({ label, name, active }) => (
   <li
     className={cn(
       '_flex _list-none',
@@ -121,5 +122,3 @@ const File = memo<FileProps>(({ label, name, active }) => (
   </li>
 ))
 File.displayName = 'File'
-
-export const FileTree = Object.assign(Tree, { Folder, File })

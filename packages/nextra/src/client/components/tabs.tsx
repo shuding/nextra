@@ -1,4 +1,5 @@
 'use client'
+
 import { Tab as HeadlessTab } from '@headlessui/react'
 import cn from 'clsx'
 import type { ComponentProps, ReactElement, ReactNode } from 'react'
@@ -15,7 +16,7 @@ function isTabObjectItem(item: unknown): item is TabObjectItem {
   return !!item && typeof item === 'object' && 'label' in item
 }
 
-function _Tabs({
+export function Tabs({
   items,
   selectedIndex: _selectedIndex,
   defaultIndex = 0,
@@ -112,7 +113,7 @@ function _Tabs({
   )
 }
 
-function Tab({
+export function Tab({
   children,
   ...props
 }: ComponentProps<typeof HeadlessTab.Panel>): ReactElement {
@@ -122,5 +123,3 @@ function Tab({
     </HeadlessTab.Panel>
   )
 }
-
-export const Tabs = Object.assign(_Tabs, { displayName: 'Tabs', Tab })
