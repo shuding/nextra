@@ -51,5 +51,12 @@ export default withNextra({
       use: ['@svgr/webpack']
     })
     return config
+  },
+  experimental: {
+    optimizePackageImports: [
+      '@components/icons',
+      'nextra/components',
+      'nextra/hooks'
+    ]
   }
 })

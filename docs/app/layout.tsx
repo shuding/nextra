@@ -5,8 +5,7 @@ import { Banner, Footer, Head, Layout, Navbar } from 'nextra-theme-docs'
 import { collectPageMap } from 'nextra/page-map'
 import type { ReactNode } from 'react'
 import './globals.css'
-import NextraLogo from 'components/icons/nextra.svg'
-import VercelLogo from 'components/icons/vercel.svg'
+import { NextraLogo, VercelLogo } from '@components/icons'
 
 export const viewport: Viewport = Head.viewport
 
