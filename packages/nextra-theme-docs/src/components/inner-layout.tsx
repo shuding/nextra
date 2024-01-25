@@ -1,27 +1,23 @@
 'use client'
 
 import 'focus-visible'
-import './polyfill'
+import '../polyfill'
 import { ThemeProvider } from 'next-themes'
-import type { NextraThemeLayoutProps } from 'nextra'
 import type { ReactElement, ReactNode } from 'react'
-import { Banner } from './banner'
-import {
-  ActiveAnchorProvider,
-  ConfigProvider,
-  ThemeConfigProvider,
-  useConfig,
-  useThemeConfig
-} from '../contexts'
+import { ActiveAnchorProvider, useConfig, useThemeConfig } from '../contexts'
 import { renderComponent } from '../utils'
+import { Banner } from './banner'
 
-export function InnerLayout({ children }: { children: ReactNode }): ReactElement {
+export function InnerLayout({
+  children
+}: {
+  children: ReactNode
+}): ReactElement {
   const themeConfig = useThemeConfig()
-
-  const config = useConfig()
+  const { normalizePagesResult, hideSidebar } = useConfig()
 
   const { activeThemeContext: themeContext, topLevelNavbarItems } =
-    config.normalizePagesResult
+    normalizePagesResult
 
   return (
     <ThemeProvider
@@ -37,22 +33,8 @@ export function InnerLayout({ children }: { children: ReactNode }): ReactElement
       <ActiveAnchorProvider>{children}</ActiveAnchorProvider>
       {themeContext.footer &&
         renderComponent(themeConfig.footer.component, {
-          menu: config.hideSidebar
+          menu: hideSidebar
         })}
     </ThemeProvider>
-  )
-}
-
-export function Layout({
-  children,
-  themeConfig,
-  pageOpts
-}: NextraThemeLayoutProps): ReactElement {
-  return (
-    <ThemeConfigProvider value={themeConfig}>
-      <ConfigProvider value={pageOpts}>
-        <InnerLayout>{children}</InnerLayout>
-      </ConfigProvider>
-    </ThemeConfigProvider>
   )
 }

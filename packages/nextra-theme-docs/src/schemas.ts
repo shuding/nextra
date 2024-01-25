@@ -40,14 +40,14 @@ export const themeSchema = /* @__PURE__ */ (() =>
           className?: string
           filePath?: string
         }>
-      >(...fc),
+      >(...fc).optional(),
       content: z.custom<ReactNode | FC>(...reactNode)
     }),
     faviconGlyph: z.string().optional(),
     feedback: z.strictObject({
       content: z.custom<ReactNode | FC>(...reactNode),
       labels: z.string(),
-      useLink: z.function().returns(z.string())
+      useLink: z.function().returns(z.string()).optional()
     }),
     footer: z.strictObject({
       component: z.custom<ReactNode | FC<{ menu: boolean }>>(...reactNode),
@@ -61,7 +61,7 @@ export const themeSchema = /* @__PURE__ */ (() =>
     navbar: z.strictObject({
       component: z.custom<ReactNode | FC<NavBarProps>>(...reactNode),
       extraContent: z.custom<ReactNode | FC>(...reactNode).optional()
-    }),
+    }).optional(),
     navigation: z.boolean().or(
       z.strictObject({
         next: z.boolean(),

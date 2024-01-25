@@ -1,3 +1,5 @@
+'use client'
+
 import { Listbox, Transition } from '@headlessui/react'
 import cn from 'clsx'
 import { useMounted } from 'nextra/hooks'
