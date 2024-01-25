@@ -6,8 +6,8 @@ import docsCard from 'public/assets/card-1.png'
 import { Feature, Features } from './_components/features'
 import { MotionDiv, MotionH3 } from './_components/framer-motion'
 import { I18n } from './_components/i18n-demo'
-import styles from './index.module.css'
-import './index.css'
+import styles from './page.module.css'
+import './page.css'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {

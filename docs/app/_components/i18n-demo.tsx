@@ -3,7 +3,7 @@
 import { ArrowRightIcon } from '@components/icons'
 import cn from 'clsx'
 import { useState } from 'react'
-import styles from '../index.module.css'
+import styles from '../page.module.css'
 
 const LANGUAGES = [
   { lang: 'en', name: 'English' },

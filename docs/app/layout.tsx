@@ -11,9 +11,6 @@ export const viewport: Viewport = Head.viewport
 
 export const metadata: Metadata = {
   description: 'Make beautiful websites with Next.js & MDX.',
-  openGraph: {
-    images: '/og.jpeg'
-  },
   metadataBase: new URL('https://nextra.site'),
   keywords: [
     'Nextra',
