@@ -1,7 +1,7 @@
 export { useTheme } from 'next-themes'
 export { useThemeConfig, useConfig } from './contexts'
 export { useMDXComponents } from './mdx-components'
-export { Layout } from './layout'
+export { Layout } from './layout.server'
 export {
   Bleed,
   Collapse,
@@ -15,5 +15,5 @@ export {
   Head,
   Banner,
   Flexsearch as Search,
-  Footer,
+  Footer
 } from './components'

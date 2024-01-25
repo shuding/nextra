@@ -1,11 +1,11 @@
 'use client'
 
 import 'focus-visible'
-import '../polyfill'
+import './polyfill'
 import type { ReactElement, ReactNode } from 'react'
-import { useConfig } from '../contexts'
+import { useConfig } from './contexts'
 
-export function InnerLayout({
+export function ClientLayout({
   children,
   footer,
   navbar

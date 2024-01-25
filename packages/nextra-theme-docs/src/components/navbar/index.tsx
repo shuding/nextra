@@ -4,7 +4,7 @@ import NextLink from 'next/link'
 import { DiscordIcon, GitHubIcon } from 'nextra/icons'
 import type { ReactElement, ReactNode } from 'react'
 import { Anchor } from '../anchor'
-import { Navbar as NavbarInner } from './navbar'
+import { ClientNavbar } from './navbar.client'
 
 type NavbarProps = {
   children?: ReactNode
@@ -76,9 +76,9 @@ export function Navbar({
             {logo}
           </div>
         )}
-        <NavbarInner project={project} chat={chat}>
+        <ClientNavbar project={project} chat={chat}>
           {children}
-        </NavbarInner>
+        </ClientNavbar>
       </nav>
     </div>
   )

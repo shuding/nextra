@@ -80,7 +80,7 @@ export type NavbarProps = {
   chat?: ReactNode
 }
 
-export function Navbar({ children, project, chat }: NavbarProps): ReactElement {
+export function ClientNavbar({ children, project, chat }: NavbarProps): ReactElement {
   const items = useConfig().normalizePagesResult.topLevelNavbarItems
   const themeConfig = useThemeConfig()
 
