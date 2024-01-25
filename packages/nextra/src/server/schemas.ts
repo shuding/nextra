@@ -112,7 +112,7 @@ export const pageThemeSchema = z.strictObject({
   breadcrumb: z.boolean(),
   collapsed: z.boolean(),
   footer: z.boolean(),
-  layout: z.enum(['default', 'full', 'raw']),
+  layout: z.enum(['default', 'full']),
   navbar: z.boolean(),
   pagination: z.boolean(),
   sidebar: z.boolean(),

@@ -51,10 +51,7 @@ export function ConfigProvider({
     frontMatter: pageOpts.frontMatter,
     filePath: pageOpts.filePath,
     timestamp: pageOpts.timestamp,
-    hideSidebar:
-      !themeContext.sidebar ||
-      themeContext.layout === 'raw' ||
-      activeType === 'page',
+    hideSidebar: !themeContext.sidebar || activeType === 'page',
     normalizePagesResult
   }
 

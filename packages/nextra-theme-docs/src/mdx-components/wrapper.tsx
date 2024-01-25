@@ -25,10 +25,6 @@ function Body({ children }: { children: ReactNode }): ReactElement {
     activePath
   } = config.normalizePagesResult
 
-  if (themeContext.layout === 'raw') {
-    return <div className={classes.main}>{children}</div>
-  }
-
   const date =
     themeContext.timestamp && themeConfig.gitTimestamp && config.timestamp
       ? new Date(config.timestamp)
@@ -107,8 +103,7 @@ export const Wrapper: NextraMDXContent = ({ toc, children }) => {
     activeType === 'page' ||
     !themeContext.toc ||
     themeContext.layout !== 'default' ? (
-      themeContext.layout !== 'full' &&
-      themeContext.layout !== 'raw' && (
+      themeContext.layout !== 'full' && (
         <nav className={classes.toc} aria-label="table of contents" />
       )
     ) : (
@@ -120,12 +115,7 @@ export const Wrapper: NextraMDXContent = ({ toc, children }) => {
       </nav>
     )
   return (
-    <div
-      className={cn(
-        '_mx-auto _flex',
-        themeContext.layout !== 'raw' && '_max-w-[90rem]'
-      )}
-    >
+    <div className="_mx-auto _flex _max-w-[90rem]">
       <Sidebar
         docsDirectories={docsDirectories}
         fullDirectories={directories}
