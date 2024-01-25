@@ -1,0 +1,47 @@
+import {
+  CloudIcon,
+  DiagramIcon,
+  FormulaIcon,
+  TableIcon,
+  TailwindIcon
+} from '@components/icons'
+import { Cards } from 'nextra/components'
+import { TerminalIcon, TypeScriptIcon } from 'nextra/icons'
+
+<Cards>
+  <Cards.Card
+    icon={<TerminalIcon />}
+    title="Npm2Yarn"
+    href="/docs/guide/advanced/npm2yarn"
+  />
+  <Cards.Card
+    icon={<DiagramIcon />}
+    title="Mermaid"
+    href="/docs/guide/advanced/mermaid"
+  />
+  <Cards.Card
+    icon={<TailwindIcon />}
+    title="Tailwind CSS"
+    href="/docs/guide/advanced/tailwind-css"
+  />
+  <Cards.Card
+    icon={<FormulaIcon />}
+    title="LaTeX"
+    href="/docs/guide/advanced/latex"
+  />
+  <Cards.Card
+    icon={<TableIcon />}
+    title="Rendering Tables"
+    href="/docs/guide/advanced/table"
+  />
+  <Cards.Card
+    icon={<TypeScriptIcon />}
+    title="TypeScript"
+    href="/docs/guide/advanced/typescript"
+  />
+  <Cards.Card
+    icon={<CloudIcon />}
+    title="Remote Content"
+    href="/docs/guide/advanced/remote"
+  />
+</Cards>

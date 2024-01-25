@@ -1,0 +1,20 @@
+# Next.js Link
+
+All relative Markdown links are automatically converted to Next.js links. This
+means that the target page will be prefetched. And when you click on a link, the
+page will be loaded on the client-side like a SPA, without making a full page
+load. For example:
+
+```md filename="Markdown"
+Click [here](/about) to read more.
+```
+
+Will be equivalent to:
+
+```mdx filename="MDX"
+import Link from 'next/link'
+
+Click <Link href="/about">here</Link> to read more.
+```
+
+This feature makes navigation between Nextra pages fast and seamless.
