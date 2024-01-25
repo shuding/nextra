@@ -1,0 +1,149 @@
+import { Screenshot } from 'components/screenshot'
+import { Callout, Steps } from 'nextra/components'
+
+# Custom Theme
+
+A theme in Nextra works like a layout, that will be rendered as a wrapper for
+all pages. This docs will walk you through the process of creating a custom
+theme.
+
+Optionally, you can deploy an example and build further on it by following the
+below steps:
+
+[![](https://vercel.com/button)](https://vercel.com/new/clone?s=https%3A%2F%2Fgithub.com%2Fshuding%2Fnextra-example&showOptionalTeamCreation=false)
+
+## Create a Custom Theme
+
+<Steps>
+### Configure Nextra to Use the Theme
+
+First, you need to tell Nextra to use your custom theme file instead of official
+ones. In your Next.js config, you can pass the path to your theme file to the
+Nextra plugin:
+
+```js {4} filename="next.config.mjs"
+import nextra from 'nextra'
+
+const withNextra = nextra({
+  theme: './theme.tsx'
+})
+
+// If you have other Next.js configurations, you can pass them as the parameter:
+// export default withNextra({ /* other next.js config */ })
+```
+
+### Create a Basic Theme
+
+You can now start working on your theme! In your root directory, create the
+corresponding `theme.tsx` file with basic content:
+
+```tsx filename="theme.tsx" /children/
+import type { NextraThemeLayoutProps } from 'nextra'
+
+export default function Layout({ children }: NextraThemeLayoutProps) {
+  return (
+    <div>
+      <h1>My Theme</h1>
+      <div style={{ border: '1px solid' }}>{children}</div>
+    </div>
+  )
+}
+```
+
+It accepts a `children` prop, which is the MDX content of the current page, and
+wraps some other elements around the content. After creating the theme, you can
+simply add a MDX file as `pages/index.mdx` and see the result:
+
+import customThemeImage from 'public/assets/docs/custom-theme.png'
+
+<Screenshot src={customThemeImage} alt="Custom theme" />
+
+<br />
+
+Inside your theme layout, you can use CSS imports or other ways to style it.
+Next.js hooks such as `useRouter`, `Head` are also available.
+
+### Render Metadata for the Active Page
+
+Other than `children`, some other useful props are passed to the theme layout
+too. With the `pageOpts` props, the theme can access the page’s meta
+information.
+
+For example, let’s implement these features:
+
+- Render the page title in `<title>`
+- Show a simple table of contents
+- Add a meta tag for `og:image` via the front matter
+
+```tsx filename="theme.tsx" /pageOpts/
+import Head from 'next/head'
+import type { NextraThemeLayoutProps } from 'nextra'
+
+export default function Layout({ children, pageOpts }: NextraThemeLayoutProps) {
+  const { title, frontMatter, toc } = pageOpts
+
+  return (
+    <div>
+      <Head>
+        <title>{title}</title>
+        <meta name="og:image" content={frontMatter.image} />
+      </Head>
+      <h1>My Theme</h1>
+      Table of Contents:
+      <ul>
+        {toc.map(heading => (
+          <li key={heading.value}>{heading.value}</li>
+        ))}
+      </ul>
+      <div style={{ border: '1px solid' }}>{children}</div>
+    </div>
+  )
+}
+```
+
+### Use Page Map of the Entire Site
+
+Now, if you want to render something like a sidebar or a navigation bar, which
+relies on information of not only the current page but also other pages, you can
+use the `pageMap` value.
+
+For example, we can render a simple navigation list with all the pages in the
+top level:
+
+```tsx filename="theme.tsx" /pageMap/
+import Link from 'next/link'
+import type { NextraThemeLayoutProps } from 'nextra'
+
+export default function Layout({ children, pageOpts }: NextraThemeLayoutProps) {
+  const { pageMap } = pageOpts
+
+  return (
+    <div>
+      <h1>My Theme</h1>
+      {pageMap.map(item => {
+        if (item.kind === 'MdxPage') {
+          return (
+            <Link key={item.name} href={item.route}>
+              {item.route}
+            </Link>
+          )
+        }
+        return null
+      })}
+      <div style={{ border: '1px solid' }}>{children}</div>
+    </div>
+  )
+}
+```
+
+There are other item kinds such as `Folder` (for directories) and `Meta` (for
+`_meta.json` files). All the items are typed so you can easily know the
+properties.
+
+</Steps>
+
+## Advanced Usage
+
+<Callout type="warning">
+  Docs for advanced usage are under construction.
+</Callout>

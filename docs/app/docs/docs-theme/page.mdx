@@ -1,0 +1,32 @@
+# Nextra Docs Theme
+
+import {
+  BoxIcon,
+  ChevronRightIcon,
+  GearIcon,
+  RowsIcon
+} from '@components/icons'
+import { Cards } from 'nextra/components'
+
+<Cards>
+  <Cards.Card
+    icon={<ChevronRightIcon />}
+    title="Get Started"
+    href="/docs/docs-theme/start"
+  />
+  <Cards.Card
+    icon={<RowsIcon />}
+    title="Page Configuration"
+    href="/docs/docs-theme/page-configuration"
+  />
+  <Cards.Card
+    icon={<GearIcon />}
+    title="Theme Configuration"
+    href="/docs/docs-theme/theme-configuration"
+  />
+  <Cards.Card
+    icon={<BoxIcon />}
+    title="Built-in Components"
+    href="/docs/docs-theme/built-ins"
+  />
+</Cards>
