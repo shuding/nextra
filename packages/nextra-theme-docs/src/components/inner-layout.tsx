@@ -5,17 +5,17 @@ import './polyfill'
 import { ThemeProvider } from 'next-themes'
 import type { NextraThemeLayoutProps } from 'nextra'
 import type { ReactElement, ReactNode } from 'react'
-import { Banner } from './components'
+import { Banner } from './banner'
 import {
   ActiveAnchorProvider,
   ConfigProvider,
   ThemeConfigProvider,
   useConfig,
   useThemeConfig
-} from './contexts'
-import { renderComponent } from './utils'
+} from '../contexts'
+import { renderComponent } from '../utils'
 
-function InnerLayout({ children }: { children: ReactNode }): ReactElement {
+export function InnerLayout({ children }: { children: ReactNode }): ReactElement {
   const themeConfig = useThemeConfig()
 
   const config = useConfig()
