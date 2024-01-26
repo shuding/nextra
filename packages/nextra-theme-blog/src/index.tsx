@@ -69,9 +69,7 @@ export default function NextraLayout({
             {pageOpts.hasJsxInH1 ? null : <h1>{pageTitle}</h1>}
             {type === 'post' ? <Meta /> : <Nav />}
 
-            {/*<MDXProvider components={{ ...components, ...config.components }}>*/}
             {children}
-            {/*</MDXProvider>*/}
             {Footer && <Footer />}
           </HeadingContext.Provider>
 

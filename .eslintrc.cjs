@@ -34,7 +34,7 @@ module.exports = {
         ],
         'no-else-return': ['error', { allowElseIf: false }],
         'no-lonely-if': 'error',
-        '@typescript-eslint/prefer-destructuring': [
+        'prefer-destructuring': [
           'error',
           { VariableDeclarator: { object: true } }
         ],
@@ -129,7 +129,12 @@ module.exports = {
         '@typescript-eslint/no-unnecessary-type-assertion': 'error',
         '@typescript-eslint/consistent-type-imports': 'error',
         '@typescript-eslint/non-nullable-type-assertion-style': 'error',
-        '@typescript-eslint/prefer-optional-chain': 'error'
+        '@typescript-eslint/prefer-optional-chain': 'error',
+        'prefer-destructuring': 'off',
+        '@typescript-eslint/prefer-destructuring': [
+          'error',
+          { VariableDeclarator: { object: true } }
+        ]
       }
     },
     // ⚙️ nextra-theme-docs

@@ -1,7 +1,6 @@
 import { fc, reactNode } from 'nextra/schemas'
 import type { FC, ReactNode } from 'react'
 import { z } from 'zod'
-import type { TOCProps } from './components/toc'
 
 const i18nSchema = /* @__PURE__ */ (() =>
   z.array(

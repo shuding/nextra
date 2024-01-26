@@ -33,7 +33,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "@popperjs/core": "^2.11.8",
-    "clsx": "^2.0.0",
+    "clsx": "^2.1.0",
     "escape-string-regexp": "^5.0.0",
     "flexsearch": "^0.7.43",
     "focus-visible": "^5.2.0",
