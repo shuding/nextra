@@ -17,7 +17,7 @@ export default defineConfig([
     async onSuccess() {
       const layoutPath = './dist/index.js'
       const layoutContent = await fs.readFile(layoutPath, 'utf8')
-      await fs.writeFile(layoutPath, "'use client';\nimport './style.css'\n" + layoutContent)
+      await fs.writeFile(layoutPath, "import './style.css'\n" + layoutContent)
     }
   }
 ])

@@ -1,3 +1,4 @@
+'use client'
 import type { NextraThemeLayoutProps } from 'nextra'
 import { useRef } from 'react'
 import { BlogProvider } from './blog-context'
@@ -72,9 +73,3 @@ export function Layout({
     </ThemeProvider>
   )
 }
-
-export { useTheme } from './next-themes'
-export { useMDXComponents } from './mdx-components'
-export { useBlogContext } from './blog-context'
-export { getStaticTags } from './utils/get-tags'
-export * from './types'
