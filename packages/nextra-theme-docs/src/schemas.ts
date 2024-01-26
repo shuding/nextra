@@ -49,9 +49,6 @@ export const themeSchema = /* @__PURE__ */ (() =>
       toggleButton: z.boolean()
     }),
     themeSwitch: z.strictObject({
-      component: z.custom<
-        ReactNode | FC<{ lite?: boolean; className?: string }>
-      >(...reactNode),
       options: z.strictObject({
         light: z.string(),
         dark: z.string(),
@@ -60,7 +57,6 @@ export const themeSchema = /* @__PURE__ */ (() =>
     }),
     toc: z.strictObject({
       backToTop: z.boolean(),
-      component: z.custom<ReactNode | FC<TOCProps>>(...reactNode),
       extraContent: z.custom<ReactNode | FC>(...reactNode),
       float: z.boolean(),
       title: z.custom<ReactNode | FC>(...reactNode)

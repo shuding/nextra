@@ -51,14 +51,6 @@ export function ThemeConfigProvider({
       },
       ...value.feedback
     },
-    themeSwitch: {
-      component: ThemeSwitch,
-      ...value.themeSwitch
-    },
-    toc: {
-      component: TOC,
-      ...value.toc
-    }
   }
   return (
     <ThemeConfigContext.Provider value={storeRef.current}>

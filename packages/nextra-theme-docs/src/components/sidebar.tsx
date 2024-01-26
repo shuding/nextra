@@ -21,6 +21,7 @@ import { renderComponent } from '../utils'
 import { Anchor } from './anchor'
 import { Collapse } from './collapse'
 import { LocaleSwitch } from './locale-switch'
+import { ThemeSwitch } from './theme-switch'
 
 const TreeState: Record<string, boolean> = Object.create(null)
 
@@ -465,9 +466,7 @@ export function Sidebar({
                   showSidebar && !hasI18n ? '_grow _flex _flex-col' : ''
                 }
               >
-                {renderComponent(themeConfig.themeSwitch.component, {
-                  lite: !showSidebar || hasI18n
-                })}
+                <ThemeSwitch lite={!showSidebar || hasI18n} />
               </div>
             )}
             {themeConfig.sidebar.toggleButton && (

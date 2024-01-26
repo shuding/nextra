@@ -3,8 +3,8 @@
 import cn from 'clsx'
 import type { ComponentProps, ReactElement } from 'react'
 import { useConfig, useThemeConfig } from '../contexts'
-import { renderComponent } from '../utils'
 import { LocaleSwitch } from './locale-switch'
+import { ThemeSwitch } from './theme-switch'
 
 export function Footer({
   children,
@@ -23,8 +23,7 @@ export function Footer({
         )}
       >
         <LocaleSwitch />
-        {themeConfig.darkMode &&
-          renderComponent(themeConfig.themeSwitch.component)}
+        {themeConfig.darkMode && <ThemeSwitch />}
       </div>
       <hr className="dark:_border-neutral-800" />
       <footer

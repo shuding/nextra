@@ -3,7 +3,7 @@
 import cn from 'clsx'
 import type { NextraMDXContent } from 'nextra'
 import type { ComponentProps, ReactElement, ReactNode } from 'react'
-import { Breadcrumb, NavLinks, Sidebar } from '../../components'
+import { Breadcrumb, NavLinks, Sidebar, TOC } from '../../components'
 import { useConfig, useThemeConfig } from '../../contexts'
 import { renderComponent } from '../../utils'
 
@@ -91,7 +91,9 @@ export function ClientWrapper({
   toc,
   children,
   skipNavContent
-}: ComponentProps<NextraMDXContent> & { skipNavContent: ReactNode }) {
+}: ComponentProps<NextraMDXContent> & {
+  skipNavContent: ReactNode
+}) {
   const config = useConfig()
   const themeConfig = useThemeConfig()
   const {
@@ -110,10 +112,10 @@ export function ClientWrapper({
       )
     ) : (
       <nav className={cn(classes.toc, '_px-4')} aria-label="table of contents">
-        {renderComponent(themeConfig.toc.component, {
-          toc: themeConfig.toc.float ? toc : [],
-          filePath: config.filePath
-        })}
+        <TOC
+          toc={themeConfig.toc.float ? toc : []}
+          filePath={config.filePath}
+        />
       </nav>
     )
   return (
