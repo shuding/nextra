@@ -7,7 +7,6 @@ import { ArrowRightIcon, MenuIcon } from 'nextra/icons'
 import type { MenuItem, PageItem } from 'nextra/normalize-pages'
 import type { ReactElement, ReactNode } from 'react'
 import { useConfig, useMenu, useThemeConfig } from '../../contexts'
-import { renderComponent } from '../../utils'
 import { Anchor } from '../anchor'
 
 const classes = {
