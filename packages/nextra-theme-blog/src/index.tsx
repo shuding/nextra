@@ -1,5 +1,3 @@
-import { ThemeProvider } from 'next-themes'
-import Head from 'next/head'
 import type { NextraThemeLayoutProps } from 'nextra'
 import { useRef } from 'react'
 import { BlogProvider } from './blog-context'
@@ -7,13 +5,14 @@ import { DEFAULT_THEME } from './constants'
 import { HeadingContext } from './mdx-theme'
 import Meta from './meta'
 import Nav from './nav'
+import { ThemeProvider } from './next-themes'
 import { PostsLayout } from './posts-layout'
 import type { BlogFrontMatter } from './types'
 import { isValidDate } from './utils/date'
 
 const layoutSet = new Set(['post', 'page', 'posts', 'tag'])
 
-export default function NextraLayout({
+export function Layout({
   children,
   pageOpts,
   themeConfig
@@ -39,8 +38,6 @@ export default function NextraLayout({
     )
   }
 
-  const title = `${pageTitle}${config.titleSuffix || ''}`
-
   const Footer = {
     post: () => (
       <>
@@ -55,10 +52,6 @@ export default function NextraLayout({
 
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-      <Head>
-        <title>{title}</title>
-        {config.head?.({ title, meta: frontMatter })}
-      </Head>
       <BlogProvider value={{ config, opts: pageOpts }}>
         <article
           className="_container _prose max-md:_prose-sm dark:_prose-dark"
@@ -80,7 +73,8 @@ export default function NextraLayout({
   )
 }
 
-export { useTheme } from 'next-themes'
+export { useTheme } from './next-themes'
+export { useMDXComponents } from './mdx-components'
 export { useBlogContext } from './blog-context'
 export { getStaticTags } from './utils/get-tags'
 export * from './types'
