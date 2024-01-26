@@ -1,19 +1,17 @@
 'use client'
+
+import { usePathname } from 'next/navigation'
 import type { NextraThemeLayoutProps } from 'nextra'
-import { useRef } from 'react'
 import { BlogProvider } from './blog-context'
-import { DEFAULT_THEME } from './constants'
-import { HeadingContext } from './mdx-theme'
 import Meta from './meta'
 import Nav from './nav'
-import { ThemeProvider } from './next-themes'
 import { PostsLayout } from './posts-layout'
 import type { BlogFrontMatter } from './types'
 import { isValidDate } from './utils/date'
 
 const layoutSet = new Set(['post', 'page', 'posts', 'tag'])
 
-export function Layout({
+export function ClientLayout({
   children,
   pageOpts,
   themeConfig
@@ -42,8 +40,8 @@ export function Layout({
   const Footer = {
     post: () => (
       <>
-        {config.postFooter}
-        {config.comments}
+        {themeConfig.postFooter}
+        {themeConfig.comments}
       </>
     ),
     posts: PostsLayout,
@@ -52,24 +50,14 @@ export function Layout({
   }[type]
 
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-      <BlogProvider value={{ config, opts: pageOpts }}>
-        <article
-          className="_container _prose max-md:_prose-sm dark:_prose-dark"
-          dir="ltr"
-        >
-          <HeadingContext.Provider value={ref}>
-            {pageOpts.hasJsxInH1 ? <h1 ref={ref} /> : null}
-            {pageOpts.hasJsxInH1 ? null : <h1>{pageTitle}</h1>}
-            {type === 'post' ? <Meta /> : <Nav />}
+    <BlogProvider value={{ config: themeConfig, opts: pageOpts }}>
+      <h1>{pageTitle}</h1>
+      {type === 'post' ? <Meta /> : <Nav />}
 
-            {children}
-            {Footer && <Footer />}
-          </HeadingContext.Provider>
+      {children}
 
-          {config.footer}
-        </article>
-      </BlogProvider>
-    </ThemeProvider>
+      {Footer && <Footer />}
+      {themeConfig.footer}
+    </BlogProvider>
   )
 }
