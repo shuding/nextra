@@ -1,11 +1,16 @@
-'use client'
-
 import cn from 'clsx'
 import type { ComponentProps, ReactElement, ReactNode } from 'react'
-import { useCallback, useRef } from 'react'
-import { WordWrapIcon } from '../icons/index.js'
-import { Button, classes } from './button.js'
+import { classes } from '../button.js'
 import { CopyToClipboard } from './copy-to-clipboard.js'
+import { ToggleWordWrapButton } from './toggle-word-wrap-button.js'
+import { WordWrapIcon } from '../../icons/index.js'
+
+export type PreProps = ComponentProps<'pre'> & {
+  'data-filename'?: string
+  'data-copy'?: ''
+  'data-language'?: string
+  icon?: ReactNode
+}
 
 export function Pre({
   children,
@@ -15,29 +20,9 @@ export function Pre({
   'data-language': _language,
   icon,
   ...props
-}: ComponentProps<'pre'> & {
-  'data-filename'?: string
-  'data-copy'?: ''
-  'data-language'?: string
-  icon?: ReactNode
-}): ReactElement {
-  const preRef = useRef<HTMLPreElement | null>(null)
-
-  const toggleWordWrap = useCallback(() => {
-    const htmlDataset = document.documentElement.dataset
-    const hasWordWrap = 'nextraWordWrap' in htmlDataset
-    if (hasWordWrap) {
-      delete htmlDataset.nextraWordWrap
-    } else {
-      htmlDataset.nextraWordWrap = ''
-    }
-  }, [])
-
+}: PreProps): ReactElement {
   const copyButton = copy === '' && (
-    <CopyToClipboard
-      className={filename ? '_ml-auto' : ''}
-      getValue={() => preRef.current?.querySelector('code')?.textContent || ''}
-    />
+    <CopyToClipboard className={filename ? '_ml-auto' : ''} />
   )
 
   return (
@@ -67,7 +52,6 @@ export function Pre({
           filename ? '_rounded-b-md' : '_rounded-md',
           className
         )}
-        ref={preRef}
         {...props}
       >
         {children}
@@ -79,13 +63,9 @@ export function Pre({
           filename ? '_top-14' : '_top-2'
         )}
       >
-        <Button
-          onClick={toggleWordWrap}
-          className="md:_hidden"
-          title="Toggle word wrap"
-        >
+        <ToggleWordWrapButton>
           <WordWrapIcon className="_h-4 _w-auto" />
-        </Button>
+        </ToggleWordWrapButton>
         {!filename && copyButton}
       </div>
     </div>

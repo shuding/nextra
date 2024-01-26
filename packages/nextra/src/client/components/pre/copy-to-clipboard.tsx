@@ -2,15 +2,10 @@
 
 import type { ComponentProps, ReactElement } from 'react'
 import { useCallback, useEffect, useState } from 'react'
-import { CheckIcon, CopyIcon } from '../icons/index.js'
-import { Button } from './button.js'
+import { CheckIcon, CopyIcon } from '../../icons/index.js'
+import { Button } from '../button.js'
 
-export const CopyToClipboard = ({
-  getValue,
-  ...props
-}: {
-  getValue: () => string
-} & ComponentProps<'button'>): ReactElement => {
+export function CopyToClipboard(props: ComponentProps<'button'>): ReactElement {
   const [isCopied, setCopied] = useState(false)
 
   useEffect(() => {
@@ -26,23 +21,26 @@ export const CopyToClipboard = ({
 
   const handleClick = useCallback<
     NonNullable<ComponentProps<'button'>['onClick']>
-  >(async () => {
+  >(async event => {
     setCopied(true)
-    if (!navigator?.clipboard) {
+    if (!navigator.clipboard) {
       console.error('Access to clipboard rejected!')
+      return
     }
     try {
-      await navigator.clipboard.writeText(getValue())
+      const container = (event.target as any).parentNode.parentNode
+      const content = container.querySelector('pre code')?.textContent || ''
+      await navigator.clipboard.writeText(content)
     } catch {
       console.error('Failed to copy!')
     }
-  }, [getValue])
+  }, [])
 
   const IconToUse = isCopied ? CheckIcon : CopyIcon
 
   return (
     <Button onClick={handleClick} title="Copy code" tabIndex={0} {...props}>
-      <IconToUse className="nextra-copy-icon _pointer-events-none _h-4 _w-4" />
+      <IconToUse className="nextra-copy-icon _pointer-events-none _size-4" />
     </Button>
   )
 }

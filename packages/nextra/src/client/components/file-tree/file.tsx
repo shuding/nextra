@@ -9,7 +9,7 @@ type FileProps = {
   active?: boolean
 }
 
-export const File = memo<FileProps>(({ label, name, active }) => (
+export const File = ({ label, name, active }: FileProps) => (
   <li
     className={cn(
       '_flex _list-none',
@@ -31,5 +31,4 @@ export const File = memo<FileProps>(({ label, name, active }) => (
       <span className="_ml-1">{label ?? name}</span>
     </span>
   </li>
-))
-File.displayName = 'File'
+)

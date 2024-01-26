@@ -1,9 +1,4 @@
-import type {
-  ComponentProps,
-  ComponentPropsWithRef,
-  FC,
-  ReactElement
-} from 'react'
+import type { ComponentPropsWithRef, FC, ReactElement } from 'react'
 import {
   CssIcon,
   JavaScriptIcon,
@@ -12,7 +7,7 @@ import {
   TerminalIcon,
   TypeScriptIcon
 } from '../icons/index.js'
-import type { Pre } from './pre.js'
+import type { PreProps } from './pre/index.js'
 
 export const LanguageToIcon: Record<
   string,
@@ -32,7 +27,7 @@ export const LanguageToIcon: Record<
 export const withIcons =
   (Component: FC) =>
   // eslint-disable-next-line react/display-name -- HOC
-  (props: ComponentProps<typeof Pre>): ReactElement => {
+  (props: PreProps): ReactElement => {
     const language = props['data-language']
     const Icon = language ? LanguageToIcon[language] : null
 
