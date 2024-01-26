@@ -2,7 +2,6 @@
 import fs from 'fs/promises'
 import path from 'path'
 import { Footer, Layout } from 'nextra-theme-blog'
-
 import { collectPageMap } from 'nextra/page-map'
 
 export const metadata = {
@@ -25,7 +24,11 @@ export default async function RootLayout({ children }) {
         <Layout
           pageOpts={{ frontMatter: {}, pageMap }}
           themeConfig={{
-            darkMode: true
+            darkMode: true,
+            navs: [
+              { url: '/posts', name: 'Posts' },
+              { url: '/', name: 'About' }
+            ]
           }}
         >
           {children}
@@ -37,7 +40,9 @@ export default async function RootLayout({ children }) {
               CC BY-NC 4.0
             </abbr>{' '}
             {new Date().getFullYear()} © Shu Ding.
-            <a href="/feed.xml" style={{ float: 'right' }}>RSS</a>
+            <a href="/feed.xml" style={{ float: 'right' }}>
+              RSS
+            </a>
           </Footer>
         </Layout>
       </body>
