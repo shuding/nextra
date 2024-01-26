@@ -13,10 +13,6 @@
     "./cusdis": {
       "import": "./dist/cusdis.js",
       "types": "./dist/cusdis.d.mts"
-    },
-    "./tags": {
-      "import": "./dist/tags.js",
-      "types": "./dist/tags.d.mts"
     }
   },
   "types": "./dist/index.d.mts",
@@ -24,9 +20,6 @@
     "*": {
       "cusdis": [
         "./dist/cusdis.d.mts"
-      ],
-      "tags": [
-        "./dist/tags.d.mts"
       ]
     }
   },

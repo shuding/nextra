@@ -5,12 +5,8 @@ import type { NextraThemeLayoutProps } from 'nextra'
 import { BlogProvider } from './blog-context'
 import Meta from './meta'
 import Nav from './nav'
-import { PostsLayout } from './posts-layout'
 import type { BlogFrontMatter } from './types'
 import { isValidDate } from './utils/date'
-
-const layoutSet = new Set(['post', 'page', 'posts', 'tag'])
-
 export function ClientLayout({
   children,
   pageOpts,
@@ -37,6 +33,7 @@ export function ClientLayout({
     )
   }
 
+  // @ts-expect-error
   const Footer = {
     post: () => (
       <>
@@ -44,8 +41,6 @@ export function ClientLayout({
         {themeConfig.comments}
       </>
     ),
-    posts: PostsLayout,
-    tag: PostsLayout,
     page: null
   }[type]
 
@@ -53,11 +48,8 @@ export function ClientLayout({
     <BlogProvider value={{ config: themeConfig, opts: pageOpts }}>
       <h1>{pageTitle}</h1>
       {type === 'post' ? <Meta /> : <Nav />}
-
-      {children}
-
       {Footer && <Footer />}
-      {themeConfig.footer}
+      {children}
     </BlogProvider>
   )
 }

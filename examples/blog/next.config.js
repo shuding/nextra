@@ -10,5 +10,11 @@ const withNextra = nextra({
 
 export default withNextra({
   reactStrictMode: true,
-  cleanDistDir: true
+  cleanDistDir: true,
+  experimental: {
+    optimizePackageImports: [
+      'nextra/components',
+      // 'nextra/hooks'
+    ]
+  }
 })
