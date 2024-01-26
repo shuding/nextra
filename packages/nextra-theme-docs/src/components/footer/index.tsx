@@ -1,5 +1,3 @@
-'use client'
-
 import cn from 'clsx'
 import type { ComponentProps, ReactElement } from 'react'
 import { Switchers } from './switchers'
