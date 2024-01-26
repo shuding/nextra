@@ -1,3 +1,7 @@
+import { compileMdx } from 'nextra/compile'
+import { RemoteContent, Tabs } from 'nextra/components'
+import { useMDXComponents } from 'nextra-theme-docs'
+
 # Npm2Yarn
 
 Nextra uses
@@ -11,14 +15,20 @@ page renders.
 
 ## Example
 
-```sh npm2yarn
-npm i -D @graphql-eslint/eslint-plugin
-```
+<Page/>
 
+export async function Page() {
+  const codeBlock = `\`\`\`sh npm2yarn
+npm i -D @graphql-eslint/eslint-plugin
+\`\`\``
+  const { result } = await compileMdx(`${codeBlock}
 ## Usage
 
-````md filename="Markdown" /npm2yarn/
-```sh npm2yarn
-npm i -D @graphql-eslint/eslint-plugin
-```
-````
+~~~md filename="Markdown" /npm2yarn/
+${codeBlock}
+~~~`)
+  return <RemoteContent
+    compiledSource={result}
+    components={useMDXComponents({ $Tabs: Tabs })}
+  />
+}
