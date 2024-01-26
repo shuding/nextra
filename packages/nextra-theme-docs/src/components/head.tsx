@@ -35,6 +35,7 @@ export function Head({
       : saturation
 
   return (
+    // eslint-disable-next-line @next/next/no-head-element -- ignore since we use app router
     <head>
       {children}
       <style>{`:root{--nextra-primary-hue:${lightHue}deg;--nextra-primary-saturation:${lightSaturation}%;--nextra-navbar-height:4rem;--nextra-menu-height:3.75rem;--nextra-banner-height:2.5rem;}.dark{--nextra-primary-hue:${darkHue}deg;--nextra-primary-saturation:${darkSaturation}%;}`}</style>

@@ -3,12 +3,7 @@ import slash from 'slash'
 import type { LoaderContext } from 'webpack'
 import type { LoaderOptions, PageOpts } from '../types'
 import { compileMdx } from './compile.js'
-import {
-  // CHUNKS_DIR,
-  CWD,
-  MARKDOWN_EXTENSION_REGEX
-  // OFFICIAL_THEMES
-} from './constants.js'
+import { CWD, MARKDOWN_EXTENSION_REGEX } from './constants.js'
 import { APP_DIR } from './file-system.js'
 import { logger } from './utils.js'
 
@@ -43,8 +38,6 @@ const initGitRepo = (async () => {
   }
   return {}
 })()
-
-// let isAppFileFromNodeModules = false
 
 export async function loader(
   this: LoaderContext<LoaderOptions>,
