@@ -1,5 +1,7 @@
 import type { ComponentProps } from 'react'
-import { File, Folder, Tree } from './file-tree.js'
+import { Folder } from './file-tree.js'
+import { File } from './file.js'
+import { Tree } from './tree.js'
 
 // Workaround to fix
 // Error: Cannot access File.propTypes on the server. You cannot dot into a client module from a
