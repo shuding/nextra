@@ -1,7 +1,6 @@
 import cn from 'clsx'
 import type { ReactElement } from 'react'
-import { memo } from 'react'
-import { Indent } from './file-tree.js'
+import { Indent } from './folder.js'
 
 type FileProps = {
   name: string
