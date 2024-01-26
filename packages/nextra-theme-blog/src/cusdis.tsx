@@ -1,11 +1,11 @@
 'use client'
 
-import { useTheme } from './next-themes'
 import dynamic from 'next/dynamic'
 import { usePathname } from 'next/navigation'
 import type { ReactElement } from 'react'
 import { useEffect } from 'react'
 import { useBlogContext } from './blog-context'
+import { useTheme } from './next-themes'
 
 const Cusdis = dynamic(
   () => import('react-cusdis').then(mod => mod.ReactCusdis),

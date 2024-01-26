@@ -9,6 +9,10 @@
     ".": {
       "import": "./dist/index.js",
       "types": "./dist/index.d.mts"
+    },
+    "./cusdis": {
+      "import": "./dist/cusdis.js",
+      "types": "./dist/cusdis.d.mts"
     }
   },
   "types": "./dist/index.d.mts",

@@ -1,4 +1,4 @@
-import { Comments } from 'nextra-theme-blog'
+import { Comments } from 'nextra-theme-blog/cusdis'
 
 export default function CommentsLayout({ children }) {
   return (
