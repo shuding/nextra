@@ -1,6 +1,8 @@
-import { useTheme } from 'next-themes'
+'use client'
+
+import { useTheme } from './next-themes'
 import dynamic from 'next/dynamic'
-import { useRouter } from 'next/router'
+import { usePathname } from 'next/navigation'
 import type { ReactElement } from 'react'
 import { useEffect } from 'react'
 import { useBlogContext } from './blog-context'
@@ -10,7 +12,7 @@ const Cusdis = dynamic(
   { ssr: false }
 )
 
-function Comments({
+export function Comments({
   appId,
   host = 'https://cusdis.com',
   lang
@@ -20,7 +22,7 @@ function Comments({
   lang: string
 }): ReactElement | null {
   const { opts } = useBlogContext()
-  const router = useRouter()
+  const pathname = usePathname()
   const { resolvedTheme } = useTheme()
 
   const theme = resolvedTheme === 'dark' ? 'dark' : 'light'
@@ -41,12 +43,10 @@ function Comments({
       attrs={{
         host,
         appId,
-        pageId: router.pathname,
+        pageId: pathname,
         pageTitle: opts.title,
         theme
       }}
     />
   )
 }
-
-export default Comments

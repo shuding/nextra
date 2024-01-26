@@ -1,8 +1,5 @@
-import Cusdis from 'nextra-theme-blog/cusdis'
-
 /* eslint sort-keys: error */
 export default {
-  comments: <Cusdis lang="en" appId="a2d11511-7012-4254-9483-cb49c8f4dfe8" />,
   components: {
     h1: ({ children }) => (
       <h1

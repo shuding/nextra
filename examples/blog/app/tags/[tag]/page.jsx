@@ -8,8 +8,8 @@ export function generateMetadata({ params }) {
 }
 
 export async function generateStaticParams() {
-  const posts = await getPosts()
-  return posts.map(post => ({ tag: post.name }))
+  const tags = (await getPosts()).flatMap(post => post.frontMatter.tags)
+  return [...new Set(tags)].map(tag => ({ tag }))
 }
 
 export default function TagPage({ params }) {
