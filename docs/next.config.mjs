@@ -48,7 +48,16 @@ export default withNextra({
 
     config.module.rules.push({
       test: ALLOWED_SVG_REGEX,
-      use: ['@svgr/webpack']
+      use: [
+        {
+          loader: '@svgr/webpack',
+          options: {
+            svgoConfig: {
+              plugins: ['removeXMLNS']
+            }
+          }
+        }
+      ]
     })
     return config
   },
