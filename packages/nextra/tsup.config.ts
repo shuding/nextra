@@ -40,7 +40,18 @@ export default defineConfig([
     esbuildPlugins: [
       svgr({
         exportType: 'named',
-        typescript: true
+        typescript: true,
+        jsx: {
+          // svgo's removeXMLNS plugin doesn't work for some reason...
+          babelConfig: {
+            plugins: [
+              [
+                '@svgr/babel-plugin-remove-jsx-attribute',
+                { elements: ['svg'], attributes: ['xmlns'] }
+              ]
+            ]
+          }
+        }
       })
     ],
     format: 'esm',
