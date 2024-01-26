@@ -1,7 +1,9 @@
-// import fs from 'fs/promises'
-// import path from 'path'
-import { Layout } from 'nextra-theme-blog'
-// import { collectPageMap } from 'nextra/page-map'
+/* eslint-env node */
+import fs from 'fs/promises'
+import path from 'path'
+import { Footer, Layout } from 'nextra-theme-blog'
+
+import { collectPageMap } from 'nextra/page-map'
 
 export const metadata = {
   // title: 'Next.js',
@@ -9,12 +11,12 @@ export const metadata = {
 }
 
 export default async function RootLayout({ children }) {
-  // const rawJs = await collectPageMap({
-  //   dir: path.join(process.cwd(), 'app'),
-  //   route: '/'
-  // })
-  // const pageMapPath = path.join(process.cwd(), 'nextra-page-map.mjs')
-  // await fs.writeFile(pageMapPath, rawJs)
+  const rawJs = await collectPageMap({
+    dir: path.join(process.cwd(), 'app'),
+    route: '/'
+  })
+  const pageMapPath = path.join(process.cwd(), 'nextra-page-map.mjs')
+  await fs.writeFile(pageMapPath, rawJs)
   const { pageMap } = await import('../nextra-page-map.mjs')
 
   return (
@@ -27,6 +29,7 @@ export default async function RootLayout({ children }) {
           }}
         >
           {children}
+          <Footer />
         </Layout>
       </body>
     </html>
