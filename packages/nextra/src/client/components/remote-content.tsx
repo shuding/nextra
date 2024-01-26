@@ -1,4 +1,3 @@
-import { useData } from '../hooks/index.js'
 import { jsxRuntime } from '../jsx-runtime.cjs'
 import type { MDXComponents } from '../mdx.js'
 import { useMDXComponents } from '../mdx.js'
@@ -40,10 +39,4 @@ export function RemoteContent({
   const { default: MDXContent } = evaluate(compiledSource, scope)
 
   return <MDXContent components={components} />
-}
-
-RemoteContent.useTOC = (props: Record<string, unknown>) => {
-  const compiledSource = useData('__nextra_dynamic_mdx')
-  const { useTOC } = evaluate(compiledSource)
-  return useTOC(props)
 }

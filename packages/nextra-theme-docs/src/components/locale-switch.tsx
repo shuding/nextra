@@ -1,5 +1,5 @@
 import { addBasePath } from 'next/dist/client/add-base-path'
-import { useRouter } from 'nextra/hooks'
+import { usePathname } from 'next/navigation'
 import { GlobeIcon } from 'nextra/icons'
 import type { ReactElement } from 'react'
 import { useThemeConfig } from '../contexts'
@@ -17,8 +17,8 @@ export function LocaleSwitch({
   className
 }: LocaleSwitchProps): ReactElement | null {
   const themeConfig = useThemeConfig()
-  // @ts-expect-error -- todo: remove it
-  const { locale, asPath } = useRouter()
+  const pathname = usePathname()
+  const locale = ''
 
   const options = themeConfig.i18n
   if (!options.length) return null
@@ -33,7 +33,7 @@ export function LocaleSwitch({
         document.cookie = `NEXT_LOCALE=${
           option.key
         }; expires=${date.toUTCString()}; path=/`
-        const href = addBasePath(asPath.replace(`/${locale}`, `/${option.key}`))
+        const href = addBasePath(pathname.replace(`/${locale}`, `/${option.key}`))
         location.href = href
       }}
       selected={{
