@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { Code, Pre, Table, Td, Th, Tr } from 'nextra/components'
 import type { UseMDXComponents } from 'nextra/mdx'
+import { DEFAULT_COMPONENTS } from 'nextra/mdx'
 import type { ComponentProps, ReactElement } from 'react'
 
 function HeadingLink({
@@ -50,6 +51,7 @@ const A = ({ children, href = '', ...props }: ComponentProps<'a'>) => {
 }
 
 export const useMDXComponents: UseMDXComponents = components => ({
+  ...DEFAULT_COMPONENTS,
   h2: props => <HeadingLink tag="h2" {...props} />,
   h3: props => <HeadingLink tag="h3" {...props} />,
   h4: props => <HeadingLink tag="h4" {...props} />,

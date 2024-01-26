@@ -6,7 +6,7 @@ import { CWD } from './src/server/constants.js'
 
 export default defineConfig([
   {
-    name: 'nextra-esm',
+    name: 'nextra',
     entry: [
       'src/**/*.{ts,tsx}',
       '!src/**/*.d.ts',
@@ -33,7 +33,7 @@ export default defineConfig([
     }
   },
   {
-    name: 'nextra-icons',
+    name: 'nextra/icons',
     entry: {
       'client/icons/index': 'src/client/icons/index.ts'
     },
