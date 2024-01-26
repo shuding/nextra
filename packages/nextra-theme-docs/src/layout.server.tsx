@@ -30,7 +30,7 @@ const DEFAULT_THEME: DocsThemeConfig = {
     toggleButton: true
   },
   themeSwitch: {
-    useOptions: {
+    options: {
       dark: 'Dark',
       light: 'Light',
       system: 'System'

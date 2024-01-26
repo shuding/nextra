@@ -12,25 +12,20 @@ const i18nSchema = /* @__PURE__ */ (() =>
     })
   ))()
 
-export const themeOptionsSchema = /* @__PURE__ */ (() =>
-  z.strictObject({
-    light: z.string(),
-    dark: z.string(),
-    system: z.string()
-  }))()
-
 export const themeSchema = /* @__PURE__ */ (() =>
   z.strictObject({
     darkMode: z.boolean(),
     docsRepositoryBase: z.string().startsWith('https://'),
     editLink: z.strictObject({
-      component: z.custom<
-        FC<{
-          children: ReactNode
-          className?: string
-          filePath?: string
-        }>
-      >(...fc).optional(),
+      component: z
+        .custom<
+          FC<{
+            children: ReactNode
+            className?: string
+            filePath?: string
+          }>
+        >(...fc)
+        .optional(),
       content: z.custom<ReactNode | FC>(...reactNode)
     }),
     faviconGlyph: z.string().optional(),
@@ -57,9 +52,11 @@ export const themeSchema = /* @__PURE__ */ (() =>
       component: z.custom<
         ReactNode | FC<{ lite?: boolean; className?: string }>
       >(...reactNode),
-      useOptions: themeOptionsSchema.or(
-        z.function().returns(themeOptionsSchema)
-      )
+      options: z.strictObject({
+        light: z.string(),
+        dark: z.string(),
+        system: z.string()
+      })
     }),
     toc: z.strictObject({
       backToTop: z.boolean(),
