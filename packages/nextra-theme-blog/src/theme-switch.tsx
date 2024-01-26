@@ -2,19 +2,20 @@ import { useTheme } from 'next-themes'
 import { useMounted } from 'nextra/hooks'
 import { MoonIcon, SunIcon } from 'nextra/icons'
 
-export default function ThemeSwitch() {
+export function ThemeSwitch() {
   const { setTheme, resolvedTheme } = useTheme()
   const mounted = useMounted()
   const isDark = resolvedTheme === 'dark'
 
-  // @TODO: system theme
+  // TODO: system theme
   const toggleTheme = () => {
     setTheme(isDark ? 'light' : 'dark')
   }
 
+  const IconToUse = mounted && isDark ? MoonIcon : SunIcon
+
   return (
-    <span
-      role="button"
+    <button
       aria-label="Toggle Dark Mode"
       className="_cursor-pointer _p-2 _text-current"
       tabIndex={0}
@@ -23,7 +24,7 @@ export default function ThemeSwitch() {
         if (e.key === 'Enter') toggleTheme()
       }}
     >
-      {mounted && isDark ? <MoonIcon /> : <SunIcon />}
-    </span>
+      <IconToUse />
+    </button>
   )
 }

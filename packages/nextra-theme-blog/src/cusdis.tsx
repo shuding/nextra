@@ -1,16 +1,12 @@
 'use client'
 
-import dynamic from 'next/dynamic'
 import { usePathname } from 'next/navigation'
+import { useMounted } from 'nextra/hooks'
 import type { ReactElement } from 'react'
 import { useEffect } from 'react'
+import { ReactCusdis } from 'react-cusdis'
 import { useBlogContext } from './blog-context'
 import { useTheme } from './next-themes'
-
-const Cusdis = dynamic(
-  () => import('react-cusdis').then(mod => mod.ReactCusdis),
-  { ssr: false }
-)
 
 export function Comments({
   appId,
@@ -20,13 +16,12 @@ export function Comments({
   appId: string
   host?: string
   lang: string
-}): ReactElement | null {
+}): ReactElement | false {
   const { opts } = useBlogContext()
   const pathname = usePathname()
   const { resolvedTheme } = useTheme()
-
   const theme = resolvedTheme === 'dark' ? 'dark' : 'light'
-
+  const mounted = useMounted()
   // update the theme for the cusdis iframe when theme changed
   useEffect(() => {
     window.CUSDIS?.setTheme(theme)
@@ -34,19 +29,21 @@ export function Comments({
 
   if (!appId) {
     console.warn('[nextra/cusdis] `appId` is required')
-    return null
+    return false
   }
   return (
-    <Cusdis
-      lang={lang}
-      style={{ marginTop: '4rem' }}
-      attrs={{
-        host,
-        appId,
-        pageId: pathname,
-        pageTitle: opts.title,
-        theme
-      }}
-    />
+    mounted && (
+      <ReactCusdis
+        lang={lang}
+        style={{ marginTop: '4rem' }}
+        attrs={{
+          host,
+          appId,
+          pageId: pathname,
+          pageTitle: opts.title,
+          theme
+        }}
+      />
+    )
   )
 }

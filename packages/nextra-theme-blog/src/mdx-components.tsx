@@ -34,22 +34,6 @@ function HeadingLink({
 
 const EXTERNAL_HREF_REGEX = /https?:\/\//
 
-const A = ({ children, href = '', ...props }: ComponentProps<'a'>) => {
-  if (EXTERNAL_HREF_REGEX.test(href)) {
-    return (
-      <a href={href} target="_blank" rel="noreferrer" {...props}>
-        {children}
-      </a>
-    )
-  }
-  return (
-    // @ts-expect-error Types of property `ref` are incompatible.
-    <Link href={href} {...props}>
-      {children}
-    </Link>
-  )
-}
-
 export const useMDXComponents: UseMDXComponents = components => ({
   ...DEFAULT_COMPONENTS,
   h2: props => <HeadingLink tag="h2" {...props} />,
@@ -57,7 +41,21 @@ export const useMDXComponents: UseMDXComponents = components => ({
   h4: props => <HeadingLink tag="h4" {...props} />,
   h5: props => <HeadingLink tag="h5" {...props} />,
   h6: props => <HeadingLink tag="h6" {...props} />,
-  a: A,
+  a({ children, href = '', ...props }) {
+    if (EXTERNAL_HREF_REGEX.test(href)) {
+      return (
+        <a href={href} target="_blank" rel="noreferrer" {...props}>
+          {children}
+        </a>
+      )
+    }
+    return (
+      // @ts-expect-error Types of property `ref` are incompatible.
+      <Link href={href} {...props}>
+        {children}
+      </Link>
+    )
+  },
   pre: ({ children, ...props }) => (
     <div className="_not-prose">
       <Pre {...props}>{children}</Pre>
