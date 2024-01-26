@@ -1,5 +1,5 @@
 import type { ComponentProps } from 'react'
-import { Folder } from './file-tree.js'
+import { Folder } from './folder.js'
 import { File } from './file.js'
 import { Tree } from './tree.js'
 
