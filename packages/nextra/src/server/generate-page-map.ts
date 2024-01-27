@@ -12,7 +12,7 @@ export async function getFilepaths({ appDir, cwd }: Params): Promise<string[]> {
     throw new Error('Unable to find `app` directory')
   }
   const result = await fg(
-    path.join(appDir, '**/page.{js,jsx,jsx,tsx,md,mdx}'),
+    path.join(appDir, '**/(page.{js,jsx,jsx,tsx,md,mdx}|_meta.{js,jsx,ts,tsx})'),
     { cwd }
   )
   const relativePaths = result.map(r => path.relative(appDir, r))
@@ -25,6 +25,9 @@ export function generatePageMapFromFilepaths(filepaths: string[]): any {
 
     if (pathInfo.name === 'page') {
       return [pathInfo.dir.replace(/\(.*\)\//, ''), r]
+    }
+    if (pathInfo.name === '_meta') {
+      return [`${pathInfo.dir}/_meta`.replace(/^\//, ''), r]
     }
     throw new Error('unchecked')
   }))
@@ -45,6 +48,12 @@ export function generatePageMapFromFilepaths(filepaths: string[]): any {
     for (const [key, value] of Object.entries(obj)) {
       const route = `${prefix}/${key}`
 
+      if (key === '_meta') {
+        // @ts-expect-error
+        list.push({ __metaPath: paths.get(route.slice(1)) })
+        continue
+      }
+
       const item: Folder | MdxFile = {
         name: key,
         route: route.replace(/\/index$/, '') || '/'
@@ -58,7 +67,8 @@ export function generatePageMapFromFilepaths(filepaths: string[]): any {
           a.name.localeCompare(b.name)
         )
       } else {
-        item.__filePath = paths.get(item.route.slice(1))
+        // @ts-expect-error
+        item.__pagePath = paths.get(item.route.slice(1))
       }
       list.push(item)
     }
