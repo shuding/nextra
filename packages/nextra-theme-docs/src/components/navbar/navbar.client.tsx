@@ -79,7 +79,11 @@ export type NavbarProps = {
   chat?: ReactNode
 }
 
-export function ClientNavbar({ children, project, chat }: NavbarProps): ReactElement {
+export function ClientNavbar({
+  children,
+  project,
+  chat
+}: NavbarProps): ReactElement {
   const items = useConfig().normalizePagesResult.topLevelNavbarItems
   const themeConfig = useThemeConfig()
 
@@ -131,7 +135,7 @@ export function ClientNavbar({ children, project, chat }: NavbarProps): ReactEle
           </Anchor>
         )
       })}
-      {themeConfig.search}
+      <div className="max-md:_hidden">{themeConfig.search}</div>
 
       {project}
       {chat}

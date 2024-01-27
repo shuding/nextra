@@ -295,16 +295,16 @@ function Menu({
 }: MenuProps): ReactElement {
   return (
     <ul className={cn(classes.list, className)}>
-      {directories.map(item =>
-        !onlyCurrentDocs || item.isUnderCurrentDocsTree ? (
+      {directories.map(item => {
+        return !onlyCurrentDocs || item.isUnderCurrentDocsTree ? (
           item.type === 'menu' ||
           (item.children && (item.children.length || !item.withIndexPage)) ? (
             <Folder key={item.name} item={item} anchors={anchors} />
           ) : (
-            <File key={item.name} item={item} anchors={anchors} />
+            <File key={item.route || item.name} item={item} anchors={anchors} />
           )
         ) : null
-      )}
+      })}
     </ul>
   )
 }

@@ -194,7 +194,6 @@ export function normalizePages({
     if (key !== '*') {
       items.push({
         name: key,
-        route: '#',
         ...meta[key]
       })
     }
@@ -295,7 +294,8 @@ export function normalizePages({
       ) {
         activeThemeContext = normalizedChildren.activeThemeContext
         activeType = normalizedChildren.activeType
-        activePath = [item, ...normalizedChildren.activePath]
+        activePath = [item, ...normalizedChildren.activePath.filter(item => item.display !== 'children')]
+
         switch (activeType) {
           case 'page':
           case 'menu':
