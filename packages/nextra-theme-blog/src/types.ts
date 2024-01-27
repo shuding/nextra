@@ -1,9 +1,8 @@
 /* eslint typescript-sort-keys/interface: error */
 import type { ReadingTime } from 'nextra'
 
-export type NextraBlogTheme =  {
+export type NextraBlogTheme = {
   dateFormatter?: (date: Date) => string
-  readMore?: string
 }
 
 export type BlogFrontMatter = {

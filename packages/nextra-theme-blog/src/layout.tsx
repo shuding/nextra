@@ -12,17 +12,15 @@ export function Footer({
 }
 
 export function Layout({ children, themeConfig }: NextraThemeLayoutProps) {
-  const config = {
-    readMore: 'Read More →',
-    ...themeConfig
-  }
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <article
         className="_container _prose max-md:_prose-sm dark:_prose-dark"
         dir="ltr"
       >
-        <ThemeConfigProvider value={config}>{children}</ThemeConfigProvider>
+        <ThemeConfigProvider value={themeConfig}>
+          {children}
+        </ThemeConfigProvider>
       </article>
     </ThemeProvider>
   )

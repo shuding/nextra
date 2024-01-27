@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import type { ReactElement } from 'react'
-import { ReadMore } from './read-more'
 import type { BlogFrontMatter } from './types'
 
 type PostCardProps = {
@@ -8,9 +7,13 @@ type PostCardProps = {
     route: string
     frontMatter: BlogFrontMatter
   }
+  readMore?: string
 }
 
-export function PostCard({ post }: PostCardProps): ReactElement {
+export function PostCard({
+  post,
+  readMore = 'Read More →'
+}: PostCardProps): ReactElement {
   const { description, date, title } = post.frontMatter
 
   return (
@@ -23,7 +26,11 @@ export function PostCard({ post }: PostCardProps): ReactElement {
       {description && (
         <p className="_mb-2 dark:_text-gray-400 _text-gray-600">
           {description}
-          <ReadMore route={post.route} />
+          {readMore && (
+            <Link href={post.route} className="post-item-more _ml-2">
+              {readMore}
+            </Link>
+          )}
         </p>
       )}
       {date && (
