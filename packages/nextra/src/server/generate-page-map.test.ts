@@ -57,6 +57,12 @@ describe('generatePageMapFromFilepaths()', () => {
           "route": "/posts",
         },
         {
+          "children": [
+            {
+              "name": "[tag]",
+              "route": "/tags/[tag]",
+            },
+          ],
           "name": "tags",
           "route": "/tags",
         },
@@ -64,7 +70,7 @@ describe('generatePageMapFromFilepaths()', () => {
     `)
   })
 
-  it.only('should work', async () => {
+  it('should work', async () => {
     const cwd = path.join(process.cwd(), '..', '..', 'docs')
     const { appDir } = findPagesDir(cwd)
 
