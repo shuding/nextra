@@ -2,12 +2,7 @@
 import type { ReadingTime } from 'nextra'
 
 export type NextraBlogTheme =  {
-  darkMode?: boolean
   dateFormatter?: (date: Date) => string
-  navs?: {
-    name: string
-    url: string
-  }[]
   readMore?: string
 }
 
