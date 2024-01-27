@@ -1,5 +1,6 @@
 import path from 'path'
 import fg from 'fast-glob'
+import type { Folder, MdxFile } from '../types'
 
 type Params = {
   appDir: string
@@ -36,22 +37,33 @@ export function generatePageMapFromFilepaths(filepaths: string[]): any {
     }, obj)
   }
 
-  function getPageMap(obj, list: any[], prefix = '') {
+  function getPageMap<T extends Record<string, T>>(
+    obj: T,
+    list: (Folder | MdxFile)[],
+    prefix = ''
+  ) {
     for (const [key, value] of Object.entries(obj)) {
       const route = `${prefix}/${key}`
-      const isFolder = Object.keys(value).length > 1
-      list.push({
+
+      const item: Folder | MdxFile = {
         name: key,
-        route: route.replace(/\/index$/, '') || '/',
-        ...(isFolder && {
-          children: getPageMap(value, [], route).sort((a, b) =>
-            a.name.localeCompare(b.name)
-          )
-        })
-      })
+        route: route.replace(/\/index$/, '') || '/'
+      }
+      const keys = Object.keys(value)
+
+      const isFolder =
+        keys.length > 1 || (keys.length === 1 && keys[0] !== 'index')
+      if (isFolder) {
+        ;(item as Folder).children = getPageMap(value, [], route).sort((a, b) =>
+          a.name.localeCompare(b.name)
+        )
+      }
+      list.push(item)
     }
     return list
   }
 
-  return getPageMap(obj, [])
+  const pageMap = getPageMap(obj, [])
+
+  return pageMap
 }

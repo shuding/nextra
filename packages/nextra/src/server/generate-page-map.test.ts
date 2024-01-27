@@ -140,6 +140,12 @@ describe('generatePageMapFromFilepaths()', () => {
             {
               "children": [
                 {
+                  "children": [
+                    {
+                      "name": "use-config",
+                      "route": "/docs/docs-theme/api/use-config",
+                    },
+                  ],
                   "name": "api",
                   "route": "/docs/docs-theme/api",
                 },
