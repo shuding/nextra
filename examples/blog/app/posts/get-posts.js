@@ -11,3 +11,8 @@ export function getPosts() {
     .filter(post => !post.frontMatter.draft)
     .sort((a, b) => b.frontMatter.date - a.frontMatter.date)
 }
+
+export function getTags() {
+  const tags = getPosts().flatMap(post => post.frontMatter.tags)
+  return tags
+}

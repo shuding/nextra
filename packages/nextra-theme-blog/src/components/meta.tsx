@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import type { ReactElement, ReactNode } from 'react'
-import { GoBack } from './go-back'
 import type { BlogFrontMatter } from '../types'
+import { GoBack } from './go-back'
 
 export function Meta({
   author,
@@ -11,14 +11,7 @@ export function Meta({
   children
 }: BlogFrontMatter & { children?: ReactNode }): ReactElement {
   const tagsEl = tags?.map(t => (
-    <Link
-      key={t}
-      href={`/tags/${t}`}
-      className={[
-        '_select-none _rounded-md _bg-gray-200 _px-1 _text-sm _text-gray-400 _transition-colors',
-        'hover:_bg-gray-300 hover:_text-gray-500 dark:_bg-gray-600 dark:_text-gray-300 dark:hover:_bg-gray-700 dark:hover:_text-gray-200'
-      ].join(' ')}
-    >
+    <Link key={t} href={`/tags/${t}`} className="nextra-tag">
       {t}
     </Link>
   ))

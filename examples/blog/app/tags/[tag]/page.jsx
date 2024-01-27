@@ -1,15 +1,15 @@
 import { PostCard } from 'nextra-theme-blog'
-import { getPosts } from '../../posts/get-posts'
+import { getPosts, getTags } from '../../posts/get-posts'
 
 export function generateMetadata({ params }) {
   return {
-    title: `Posts Tagged with “${decodeURI(params.tag)}”`
+    title: `Posts Tagged with “${decodeURIComponent(params.tag)}”`
   }
 }
 
-export async function generateStaticParams() {
-  const tags = (await getPosts()).flatMap(post => post.frontMatter.tags)
-  return [...new Set(tags)].map(tag => ({ tag }))
+export function generateStaticParams() {
+  const allTags = getTags()
+  return [...new Set(allTags)].map(tag => ({ tag }))
 }
 
 export default function TagPage({ params }) {
@@ -17,7 +17,7 @@ export default function TagPage({ params }) {
     <>
       <h1>{generateMetadata({ params }).title}</h1>
       {getPosts()
-        .filter(post => post.frontMatter.tags.includes(decodeURI(params.tag)))
+        .filter(post => post.frontMatter.tags.includes(decodeURIComponent(params.tag)))
         .map(post => (
           <PostCard key={post.route} post={post} />
         ))}
