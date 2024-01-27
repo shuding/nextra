@@ -1,8 +1,8 @@
 import type { NextraThemeLayoutProps } from 'nextra'
 import type { ReactElement, ReactNode } from 'react'
-import { ThemeConfigProvider } from './theme-config'
-import { Nav } from './nav'
 import { ThemeProvider } from './contexts'
+import { Nav } from './nav'
+import { ThemeConfigProvider } from './theme-config'
 import type { BlogFrontMatter } from './types'
 
 export function Footer({
@@ -29,7 +29,9 @@ export function Layout({
             ...themeConfig
           }}
         >
-          <Nav />
+          <div className="_mb-8 _flex _items-center _gap-3">
+            <Nav />
+          </div>
           {children}
         </ThemeConfigProvider>
       </article>

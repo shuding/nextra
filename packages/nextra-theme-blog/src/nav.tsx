@@ -10,7 +10,7 @@ export function Nav(): ReactElement {
   const pathname = usePathname()
 
   return (
-    <div className="_mb-8 _flex _items-center _gap-3">
+    <>
       <div className="_flex _grow _flex-wrap _items-center _justify-end _gap-3">
         {navs?.map(nav =>
           nav.url === pathname ? (
@@ -28,6 +28,6 @@ export function Nav(): ReactElement {
         )}
       </div>
       {darkMode && <ThemeSwitch />}
-    </div>
+    </>
   )
 }
