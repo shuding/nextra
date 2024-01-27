@@ -14,6 +14,12 @@ export function useMDXComponents() {
       >
         {children}
       </h1>
-    )
+    ),
+    DateFormatter: ({ date }) =>
+      `Last updated at ${date.toLocaleDateString('en', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+      })}`
   })
 }

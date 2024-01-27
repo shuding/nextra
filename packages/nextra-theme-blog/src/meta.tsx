@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import type { ReactElement } from 'react'
+import type { ReactElement, ReactNode } from 'react'
 import { GoBack } from './go-back'
 import type { BlogFrontMatter } from './types'
 
@@ -7,8 +7,9 @@ export function Meta({
   author,
   tags,
   date,
-  readingTime
-}: BlogFrontMatter): ReactElement {
+  readingTime,
+  children
+}: BlogFrontMatter & { children?: ReactNode }): ReactElement {
   const tagsEl = tags?.map(t => (
     <Link
       key={t}
@@ -23,7 +24,7 @@ export function Meta({
   ))
 
   const readingTimeText = readingTime?.text
-  const dateObj = date ? new Date(date) : null
+
   return (
     <div
       className={
@@ -35,14 +36,9 @@ export function Meta({
         <div className="_not-prose _flex _flex-wrap _items-center _gap-1">
           {author}
           {author && date && ','}
-          {dateObj && (
-            <time dateTime={dateObj.toISOString()}>
-              {
-                // config.dateFormatter?.(dateObj) ||
-                dateObj.toDateString()
-              }
-            </time>
-          )}
+
+          {children}
+
           {(author || date) && (readingTime || tags?.length) && (
             <span className="_px-1">•</span>
           )}

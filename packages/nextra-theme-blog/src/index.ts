@@ -1,4 +1,4 @@
-export { useTheme, useThemeConfig } from './contexts'
+export { useTheme } from './contexts'
 export { useMDXComponents } from './mdx-components'
 export * from './types'
 export { Layout, Footer } from './layout'

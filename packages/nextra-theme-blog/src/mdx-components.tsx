@@ -68,16 +68,28 @@ export const useMDXComponents: UseMDXComponents = components => ({
   td: Td,
   table: props => <Table className="_not-prose" {...props} />,
   code: Code,
-  wrapper: ({ children, frontMatter, title, ...props }) => {
+  wrapper({ children, frontMatter, title }) {
     if (frontMatter.date && !isValidDate(frontMatter.date)) {
       throw new Error(
         `Invalid date "${frontMatter.date}". Provide date in "YYYY/M/D", "YYYY/M/D H:m", "YYYY-MM-DD", "[YYYY-MM-DD]T[HH:mm]" or "[YYYY-MM-DD]T[HH:mm:ss.SSS]Z" format.`
       )
     }
+    const dateObj = frontMatter.date ? new Date(frontMatter.date) : null
+
+    // @ts-expect-error
+    const DateFormatter = components?.DateFormatter
+
     return (
       <>
         <h1>{title}</h1>
-        <Meta {...frontMatter} />
+        <Meta {...frontMatter}>
+          {dateObj && (
+            <time dateTime={dateObj.toISOString()}>
+              {(DateFormatter && <DateFormatter date={dateObj} />) ||
+                dateObj.toLocaleDateString()}
+            </time>
+          )}
+        </Meta>
         {children}
       </>
     )
