@@ -127,9 +127,6 @@ const config: DocsThemeConfig = {
         </p>
       </div>
     )
-  },
-  toc: {
-    backToTop: true
   }
 }
 
