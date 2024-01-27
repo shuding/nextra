@@ -3,6 +3,67 @@ import { findPagesDir } from 'next/dist/lib/find-pages-dir.js'
 import { generatePageMapFromFilepaths, getFilepaths } from './generate-page-map'
 
 describe('generatePageMapFromFilepaths()', () => {
+  it('should work for blog example', async() => {
+    const cwd = path.join(process.cwd(), '..', '..', 'examples', 'blog')
+    const { appDir } = findPagesDir(cwd)
+
+    const pagePaths = await getFilepaths({ appDir, cwd })
+    expect(pagePaths.sort((a, b) => a.localeCompare(b))).toMatchInlineSnapshot(`
+      [
+        "page.mdx",
+        "posts/(with-comments)/aaron-swartz-a-programmable-web/page.mdx",
+        "posts/(with-comments)/code-blocks/page.mdx",
+        "posts/(with-comments)/draft/page.mdx",
+        "posts/(with-comments)/nextra-components/page.mdx",
+        "posts/(with-comments)/table/page.mdx",
+        "posts/page.jsx",
+        "tags/[tag]/page.jsx",
+      ]
+    `)
+    expect(generatePageMapFromFilepaths(pagePaths)).toMatchInlineSnapshot(`
+      [
+        {
+          "name": "index",
+          "route": "/",
+        },
+        {
+          "children": [
+            {
+              "name": "aaron-swartz-a-programmable-web",
+              "route": "/posts/aaron-swartz-a-programmable-web",
+            },
+            {
+              "name": "code-blocks",
+              "route": "/posts/code-blocks",
+            },
+            {
+              "name": "draft",
+              "route": "/posts/draft",
+            },
+            {
+              "name": "index",
+              "route": "/posts",
+            },
+            {
+              "name": "nextra-components",
+              "route": "/posts/nextra-components",
+            },
+            {
+              "name": "table",
+              "route": "/posts/table",
+            },
+          ],
+          "name": "posts",
+          "route": "/posts",
+        },
+        {
+          "name": "tags",
+          "route": "/tags",
+        },
+      ]
+    `)
+  })
+
   it('should work', async () => {
     const cwd = path.join(process.cwd(), '..', '..', 'docs')
     const { appDir } = findPagesDir(cwd)
