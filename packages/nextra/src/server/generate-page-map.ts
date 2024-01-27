@@ -58,7 +58,7 @@ export function generatePageMapFromFilepaths(filepaths: string[]): any {
           a.name.localeCompare(b.name)
         )
       } else {
-        item.__pagePath = paths.get(item.route.slice(1))
+        item.__filePath = paths.get(item.route.slice(1))
       }
       list.push(item)
     }
