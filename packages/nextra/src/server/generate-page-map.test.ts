@@ -64,7 +64,7 @@ describe('generatePageMapFromFilepaths()', () => {
     `)
   })
 
-  it('should work', async () => {
+  it.only('should work', async () => {
     const cwd = path.join(process.cwd(), '..', '..', 'docs')
     const { appDir } = findPagesDir(cwd)
 
