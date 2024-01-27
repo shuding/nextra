@@ -4,7 +4,7 @@ import type { Folder, MdxFile } from '../types'
 
 type Params = {
   appDir: string
-  cwd: string
+  cwd?: string
 }
 
 export async function getFilepaths({ appDir, cwd }: Params): Promise<string[]> {
@@ -57,6 +57,8 @@ export function generatePageMapFromFilepaths(filepaths: string[]): any {
         ;(item as Folder).children = getPageMap(value, [], route).sort((a, b) =>
           a.name.localeCompare(b.name)
         )
+      } else {
+        item.frontMatter = {}
       }
       list.push(item)
     }

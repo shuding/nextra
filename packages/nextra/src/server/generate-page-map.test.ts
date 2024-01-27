@@ -23,32 +23,39 @@ describe('generatePageMapFromFilepaths()', () => {
     expect(generatePageMapFromFilepaths(pagePaths)).toMatchInlineSnapshot(`
       [
         {
+          "frontMatter": {},
           "name": "index",
           "route": "/",
         },
         {
           "children": [
             {
+              "frontMatter": {},
               "name": "aaron-swartz-a-programmable-web",
               "route": "/posts/aaron-swartz-a-programmable-web",
             },
             {
+              "frontMatter": {},
               "name": "code-blocks",
               "route": "/posts/code-blocks",
             },
             {
+              "frontMatter": {},
               "name": "draft",
               "route": "/posts/draft",
             },
             {
+              "frontMatter": {},
               "name": "index",
               "route": "/posts",
             },
             {
+              "frontMatter": {},
               "name": "nextra-components",
               "route": "/posts/nextra-components",
             },
             {
+              "frontMatter": {},
               "name": "table",
               "route": "/posts/table",
             },
@@ -59,6 +66,7 @@ describe('generatePageMapFromFilepaths()', () => {
         {
           "children": [
             {
+              "frontMatter": {},
               "name": "[tag]",
               "route": "/tags/[tag]",
             },
@@ -120,6 +128,7 @@ describe('generatePageMapFromFilepaths()', () => {
     expect(generatePageMapFromFilepaths(pagePaths)).toMatchInlineSnapshot(`
       [
         {
+          "frontMatter": {},
           "name": "about",
           "route": "/about",
         },
@@ -128,10 +137,12 @@ describe('generatePageMapFromFilepaths()', () => {
             {
               "children": [
                 {
+                  "frontMatter": {},
                   "name": "index",
                   "route": "/docs/blog-theme",
                 },
                 {
+                  "frontMatter": {},
                   "name": "start",
                   "route": "/docs/blog-theme/start",
                 },
@@ -140,6 +151,7 @@ describe('generatePageMapFromFilepaths()', () => {
               "route": "/docs/blog-theme",
             },
             {
+              "frontMatter": {},
               "name": "custom-theme",
               "route": "/docs/custom-theme",
             },
@@ -148,6 +160,7 @@ describe('generatePageMapFromFilepaths()', () => {
                 {
                   "children": [
                     {
+                      "frontMatter": {},
                       "name": "use-config",
                       "route": "/docs/docs-theme/api/use-config",
                     },
@@ -158,10 +171,12 @@ describe('generatePageMapFromFilepaths()', () => {
                 {
                   "children": [
                     {
+                      "frontMatter": {},
                       "name": "bleed",
                       "route": "/docs/docs-theme/built-ins/bleed",
                     },
                     {
+                      "frontMatter": {},
                       "name": "index",
                       "route": "/docs/docs-theme/built-ins",
                     },
@@ -170,18 +185,22 @@ describe('generatePageMapFromFilepaths()', () => {
                   "route": "/docs/docs-theme/built-ins",
                 },
                 {
+                  "frontMatter": {},
                   "name": "index",
                   "route": "/docs/docs-theme",
                 },
                 {
+                  "frontMatter": {},
                   "name": "page-configuration",
                   "route": "/docs/docs-theme/page-configuration",
                 },
                 {
+                  "frontMatter": {},
                   "name": "start",
                   "route": "/docs/docs-theme/start",
                 },
                 {
+                  "frontMatter": {},
                   "name": "theme-configuration",
                   "route": "/docs/docs-theme/theme-configuration",
                 },
@@ -194,34 +213,42 @@ describe('generatePageMapFromFilepaths()', () => {
                 {
                   "children": [
                     {
+                      "frontMatter": {},
                       "name": "index",
                       "route": "/docs/guide/advanced",
                     },
                     {
+                      "frontMatter": {},
                       "name": "latex",
                       "route": "/docs/guide/advanced/latex",
                     },
                     {
+                      "frontMatter": {},
                       "name": "mermaid",
                       "route": "/docs/guide/advanced/mermaid",
                     },
                     {
+                      "frontMatter": {},
                       "name": "npm2yarn",
                       "route": "/docs/guide/advanced/npm2yarn",
                     },
                     {
+                      "frontMatter": {},
                       "name": "remote",
                       "route": "/docs/guide/advanced/remote",
                     },
                     {
+                      "frontMatter": {},
                       "name": "table",
                       "route": "/docs/guide/advanced/table",
                     },
                     {
+                      "frontMatter": {},
                       "name": "tailwind-css",
                       "route": "/docs/guide/advanced/tailwind-css",
                     },
                     {
+                      "frontMatter": {},
                       "name": "typescript",
                       "route": "/docs/guide/advanced/typescript",
                     },
@@ -232,26 +259,32 @@ describe('generatePageMapFromFilepaths()', () => {
                 {
                   "children": [
                     {
+                      "frontMatter": {},
                       "name": "callout",
                       "route": "/docs/guide/built-ins/callout",
                     },
                     {
+                      "frontMatter": {},
                       "name": "cards",
                       "route": "/docs/guide/built-ins/cards",
                     },
                     {
+                      "frontMatter": {},
                       "name": "filetree",
                       "route": "/docs/guide/built-ins/filetree",
                     },
                     {
+                      "frontMatter": {},
                       "name": "index",
                       "route": "/docs/guide/built-ins",
                     },
                     {
+                      "frontMatter": {},
                       "name": "steps",
                       "route": "/docs/guide/built-ins/steps",
                     },
                     {
+                      "frontMatter": {},
                       "name": "tabs",
                       "route": "/docs/guide/built-ins/tabs",
                     },
@@ -260,38 +293,47 @@ describe('generatePageMapFromFilepaths()', () => {
                   "route": "/docs/guide/built-ins",
                 },
                 {
+                  "frontMatter": {},
                   "name": "custom-css",
                   "route": "/docs/guide/custom-css",
                 },
                 {
+                  "frontMatter": {},
                   "name": "i18n",
                   "route": "/docs/guide/i18n",
                 },
                 {
+                  "frontMatter": {},
                   "name": "image",
                   "route": "/docs/guide/image",
                 },
                 {
+                  "frontMatter": {},
                   "name": "index",
                   "route": "/docs/guide",
                 },
                 {
+                  "frontMatter": {},
                   "name": "link",
                   "route": "/docs/guide/link",
                 },
                 {
+                  "frontMatter": {},
                   "name": "markdown",
                   "route": "/docs/guide/markdown",
                 },
                 {
+                  "frontMatter": {},
                   "name": "organize-files",
                   "route": "/docs/guide/organize-files",
                 },
                 {
+                  "frontMatter": {},
                   "name": "ssg",
                   "route": "/docs/guide/ssg",
                 },
                 {
+                  "frontMatter": {},
                   "name": "syntax-highlighting",
                   "route": "/docs/guide/syntax-highlighting",
                 },
@@ -300,6 +342,7 @@ describe('generatePageMapFromFilepaths()', () => {
               "route": "/docs/guide",
             },
             {
+              "frontMatter": {},
               "name": "index",
               "route": "/docs",
             },
@@ -308,10 +351,12 @@ describe('generatePageMapFromFilepaths()', () => {
           "route": "/docs",
         },
         {
+          "frontMatter": {},
           "name": "index",
           "route": "/",
         },
         {
+          "frontMatter": {},
           "name": "showcase",
           "route": "/showcase",
         },
