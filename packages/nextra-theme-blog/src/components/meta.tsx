@@ -50,7 +50,7 @@ export function Meta({
           </div>
         )}
       </div>
-      <GoBack className="print:_hidden" />
+      <GoBack />
     </div>
   )
 }

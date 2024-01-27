@@ -1,6 +1,7 @@
 import type { NextraThemeLayoutProps } from 'nextra'
 import type { ReactElement, ReactNode } from 'react'
-import { ThemeProvider } from '../next-themes'
+import { ThemeProvider } from './next-themes'
+import '../style.css'
 
 export function Footer({
   children = `CC BY-NC 4.0 ${new Date().getFullYear()} © Shu Ding.`
