@@ -212,27 +212,29 @@ export function normalizePages({
   }
 
   for (let i = 0; i < items.length; i++) {
-    const a = items[i]
+    const currentItem = items[i]
+    const nextItem = items[i + 1]
 
     // If there are two items with the same name, they must be a directory and a
     // page. In that case we merge them, and use the page's link.
-    if (i + 1 < items.length && a.name === items[i + 1].name) {
-      items[i + 1] = { ...items[i + 1], withIndexPage: true }
-      if (a.children && !items[i + 1].children) {
-        items[i + 1].children = a.children
+    if (nextItem && nextItem.name == currentItem.name) {
+      items[i + 1] = {
+        ...nextItem,
+        withIndexPage: true,
+        children: nextItem.children || currentItem.children
       }
       continue
     }
 
     // Get the item's meta information.
     const extendedMeta = extendMeta(
-      meta[a.name],
+      meta[currentItem.name],
       fallbackMeta,
       list.find(
-        (item): item is MdxFile => 'frontMatter' in item && item.name === a.name
+        (item): item is MdxFile =>
+          'frontMatter' in item && item.name === currentItem.name
       )?.frontMatter || {}
     )
-
     const { display, type = 'doc' } = extendedMeta
     const extendedPageThemeContext = {
       ...pageThemeContext,
@@ -243,11 +245,12 @@ export function normalizePages({
     const isCurrentDocsTree = route.startsWith(docsRoot)
 
     const normalizedChildren: undefined | NormalizedResult =
-      a.children &&
+      currentItem.children &&
       normalizePages({
-        list: a.children,
+        list: currentItem.children,
         route,
-        docsRoot: type === 'page' || type === 'menu' ? a.route : docsRoot,
+        docsRoot:
+          type === 'page' || type === 'menu' ? currentItem.route : docsRoot,
         underCurrentDocsRoot: underCurrentDocsRoot || isCurrentDocsTree,
         pageThemeContext: extendedPageThemeContext
       })
@@ -255,10 +258,12 @@ export function normalizePages({
     const title =
       extendedMeta.title ||
       (type !== 'separator' &&
-        (a.frontMatter?.sidebarTitle || a.frontMatter?.title || a.name))
+        (currentItem.frontMatter?.sidebarTitle ||
+          currentItem.frontMatter?.title ||
+          currentItem.name))
 
     const getItem = (): Item => ({
-      ...a,
+      ...currentItem,
       type,
       ...(title && { title }),
       ...(display && { display }),
@@ -274,7 +279,7 @@ export function normalizePages({
     }
 
     // This item is currently active, we collect the active path etc.
-    if (a.route === route) {
+    if (currentItem.route === route) {
       activePath = [item]
       activeType = type
       // There can be multiple matches.
@@ -324,7 +329,7 @@ export function normalizePages({
               flatDocsDirectories.length + normalizedChildren.activeIndex
             break
         }
-        if (a.withIndexPage && type === 'doc') {
+        if (currentItem.withIndexPage && type === 'doc') {
           activeIndex++
         }
       }
@@ -402,6 +407,7 @@ export function normalizePages({
         docsDirectories.push(item)
     }
   }
+
   return {
     activeType,
     activeIndex,
