@@ -23,39 +23,39 @@ describe('generatePageMapFromFilepaths()', () => {
     expect(generatePageMapFromFilepaths(pagePaths)).toMatchInlineSnapshot(`
       [
         {
-          "frontMatter": {},
+          "__pagePath": "page.mdx",
           "name": "index",
           "route": "/",
         },
         {
           "children": [
             {
-              "frontMatter": {},
+              "__pagePath": "posts/(with-comments)/aaron-swartz-a-programmable-web/page.mdx",
               "name": "aaron-swartz-a-programmable-web",
               "route": "/posts/aaron-swartz-a-programmable-web",
             },
             {
-              "frontMatter": {},
+              "__pagePath": "posts/(with-comments)/code-blocks/page.mdx",
               "name": "code-blocks",
               "route": "/posts/code-blocks",
             },
             {
-              "frontMatter": {},
+              "__pagePath": "posts/(with-comments)/draft/page.mdx",
               "name": "draft",
               "route": "/posts/draft",
             },
             {
-              "frontMatter": {},
+              "__pagePath": "posts/page.jsx",
               "name": "index",
               "route": "/posts",
             },
             {
-              "frontMatter": {},
+              "__pagePath": "posts/(with-comments)/nextra-components/page.mdx",
               "name": "nextra-components",
               "route": "/posts/nextra-components",
             },
             {
-              "frontMatter": {},
+              "__pagePath": "posts/(with-comments)/table/page.mdx",
               "name": "table",
               "route": "/posts/table",
             },
@@ -66,7 +66,7 @@ describe('generatePageMapFromFilepaths()', () => {
         {
           "children": [
             {
-              "frontMatter": {},
+              "__pagePath": "tags/[tag]/page.jsx",
               "name": "[tag]",
               "route": "/tags/[tag]",
             },
@@ -128,7 +128,7 @@ describe('generatePageMapFromFilepaths()', () => {
     expect(generatePageMapFromFilepaths(pagePaths)).toMatchInlineSnapshot(`
       [
         {
-          "frontMatter": {},
+          "__pagePath": "about/page.mdx",
           "name": "about",
           "route": "/about",
         },
@@ -137,12 +137,12 @@ describe('generatePageMapFromFilepaths()', () => {
             {
               "children": [
                 {
-                  "frontMatter": {},
+                  "__pagePath": "docs/blog-theme/page.mdx",
                   "name": "index",
                   "route": "/docs/blog-theme",
                 },
                 {
-                  "frontMatter": {},
+                  "__pagePath": "docs/blog-theme/start/page.mdx",
                   "name": "start",
                   "route": "/docs/blog-theme/start",
                 },
@@ -151,7 +151,7 @@ describe('generatePageMapFromFilepaths()', () => {
               "route": "/docs/blog-theme",
             },
             {
-              "frontMatter": {},
+              "__pagePath": "docs/custom-theme/page.mdx",
               "name": "custom-theme",
               "route": "/docs/custom-theme",
             },
@@ -160,7 +160,7 @@ describe('generatePageMapFromFilepaths()', () => {
                 {
                   "children": [
                     {
-                      "frontMatter": {},
+                      "__pagePath": "docs/docs-theme/api/use-config/page.mdx",
                       "name": "use-config",
                       "route": "/docs/docs-theme/api/use-config",
                     },
@@ -171,12 +171,12 @@ describe('generatePageMapFromFilepaths()', () => {
                 {
                   "children": [
                     {
-                      "frontMatter": {},
+                      "__pagePath": "docs/docs-theme/built-ins/bleed/page.mdx",
                       "name": "bleed",
                       "route": "/docs/docs-theme/built-ins/bleed",
                     },
                     {
-                      "frontMatter": {},
+                      "__pagePath": "docs/docs-theme/built-ins/page.mdx",
                       "name": "index",
                       "route": "/docs/docs-theme/built-ins",
                     },
@@ -185,22 +185,22 @@ describe('generatePageMapFromFilepaths()', () => {
                   "route": "/docs/docs-theme/built-ins",
                 },
                 {
-                  "frontMatter": {},
+                  "__pagePath": "docs/docs-theme/page.mdx",
                   "name": "index",
                   "route": "/docs/docs-theme",
                 },
                 {
-                  "frontMatter": {},
+                  "__pagePath": "docs/docs-theme/page-configuration/page.mdx",
                   "name": "page-configuration",
                   "route": "/docs/docs-theme/page-configuration",
                 },
                 {
-                  "frontMatter": {},
+                  "__pagePath": "docs/docs-theme/start/page.mdx",
                   "name": "start",
                   "route": "/docs/docs-theme/start",
                 },
                 {
-                  "frontMatter": {},
+                  "__pagePath": "docs/docs-theme/theme-configuration/page.mdx",
                   "name": "theme-configuration",
                   "route": "/docs/docs-theme/theme-configuration",
                 },
@@ -213,42 +213,42 @@ describe('generatePageMapFromFilepaths()', () => {
                 {
                   "children": [
                     {
-                      "frontMatter": {},
+                      "__pagePath": "docs/guide/advanced/page.mdx",
                       "name": "index",
                       "route": "/docs/guide/advanced",
                     },
                     {
-                      "frontMatter": {},
+                      "__pagePath": "docs/guide/advanced/latex/page.mdx",
                       "name": "latex",
                       "route": "/docs/guide/advanced/latex",
                     },
                     {
-                      "frontMatter": {},
+                      "__pagePath": "docs/guide/advanced/mermaid/page.mdx",
                       "name": "mermaid",
                       "route": "/docs/guide/advanced/mermaid",
                     },
                     {
-                      "frontMatter": {},
+                      "__pagePath": "docs/guide/advanced/npm2yarn/page.mdx",
                       "name": "npm2yarn",
                       "route": "/docs/guide/advanced/npm2yarn",
                     },
                     {
-                      "frontMatter": {},
+                      "__pagePath": "docs/guide/advanced/remote/page.mdx",
                       "name": "remote",
                       "route": "/docs/guide/advanced/remote",
                     },
                     {
-                      "frontMatter": {},
+                      "__pagePath": "docs/guide/advanced/table/page.mdx",
                       "name": "table",
                       "route": "/docs/guide/advanced/table",
                     },
                     {
-                      "frontMatter": {},
+                      "__pagePath": "docs/guide/advanced/tailwind-css/page.mdx",
                       "name": "tailwind-css",
                       "route": "/docs/guide/advanced/tailwind-css",
                     },
                     {
-                      "frontMatter": {},
+                      "__pagePath": "docs/guide/advanced/typescript/page.mdx",
                       "name": "typescript",
                       "route": "/docs/guide/advanced/typescript",
                     },
@@ -259,32 +259,32 @@ describe('generatePageMapFromFilepaths()', () => {
                 {
                   "children": [
                     {
-                      "frontMatter": {},
+                      "__pagePath": "docs/guide/built-ins/callout/page.mdx",
                       "name": "callout",
                       "route": "/docs/guide/built-ins/callout",
                     },
                     {
-                      "frontMatter": {},
+                      "__pagePath": "docs/guide/built-ins/cards/page.mdx",
                       "name": "cards",
                       "route": "/docs/guide/built-ins/cards",
                     },
                     {
-                      "frontMatter": {},
+                      "__pagePath": "docs/guide/built-ins/filetree/page.mdx",
                       "name": "filetree",
                       "route": "/docs/guide/built-ins/filetree",
                     },
                     {
-                      "frontMatter": {},
+                      "__pagePath": "docs/guide/built-ins/page.mdx",
                       "name": "index",
                       "route": "/docs/guide/built-ins",
                     },
                     {
-                      "frontMatter": {},
+                      "__pagePath": "docs/guide/built-ins/steps/page.mdx",
                       "name": "steps",
                       "route": "/docs/guide/built-ins/steps",
                     },
                     {
-                      "frontMatter": {},
+                      "__pagePath": "docs/guide/built-ins/tabs/page.mdx",
                       "name": "tabs",
                       "route": "/docs/guide/built-ins/tabs",
                     },
@@ -293,47 +293,47 @@ describe('generatePageMapFromFilepaths()', () => {
                   "route": "/docs/guide/built-ins",
                 },
                 {
-                  "frontMatter": {},
+                  "__pagePath": "docs/guide/custom-css/page.mdx",
                   "name": "custom-css",
                   "route": "/docs/guide/custom-css",
                 },
                 {
-                  "frontMatter": {},
+                  "__pagePath": "docs/guide/i18n/page.mdx",
                   "name": "i18n",
                   "route": "/docs/guide/i18n",
                 },
                 {
-                  "frontMatter": {},
+                  "__pagePath": "docs/guide/image/page.mdx",
                   "name": "image",
                   "route": "/docs/guide/image",
                 },
                 {
-                  "frontMatter": {},
+                  "__pagePath": "docs/guide/page.mdx",
                   "name": "index",
                   "route": "/docs/guide",
                 },
                 {
-                  "frontMatter": {},
+                  "__pagePath": "docs/guide/link/page.mdx",
                   "name": "link",
                   "route": "/docs/guide/link",
                 },
                 {
-                  "frontMatter": {},
+                  "__pagePath": "docs/guide/markdown/page.mdx",
                   "name": "markdown",
                   "route": "/docs/guide/markdown",
                 },
                 {
-                  "frontMatter": {},
+                  "__pagePath": "docs/guide/organize-files/page.mdx",
                   "name": "organize-files",
                   "route": "/docs/guide/organize-files",
                 },
                 {
-                  "frontMatter": {},
+                  "__pagePath": "docs/guide/ssg/page.mdx",
                   "name": "ssg",
                   "route": "/docs/guide/ssg",
                 },
                 {
-                  "frontMatter": {},
+                  "__pagePath": "docs/guide/syntax-highlighting/page.mdx",
                   "name": "syntax-highlighting",
                   "route": "/docs/guide/syntax-highlighting",
                 },
@@ -342,7 +342,7 @@ describe('generatePageMapFromFilepaths()', () => {
               "route": "/docs/guide",
             },
             {
-              "frontMatter": {},
+              "__pagePath": "docs/page.mdx",
               "name": "index",
               "route": "/docs",
             },
@@ -351,12 +351,12 @@ describe('generatePageMapFromFilepaths()', () => {
           "route": "/docs",
         },
         {
-          "frontMatter": {},
+          "__pagePath": "page.tsx",
           "name": "index",
           "route": "/",
         },
         {
-          "frontMatter": {},
+          "__pagePath": "showcase/page.mdx",
           "name": "showcase",
           "route": "/showcase",
         },

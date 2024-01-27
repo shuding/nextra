@@ -20,19 +20,19 @@ export async function getFilepaths({ appDir, cwd }: Params): Promise<string[]> {
 }
 
 export function generatePageMapFromFilepaths(filepaths: string[]): any {
-  const paths = filepaths.map(r => {
+  const paths = new Map(filepaths.map(r => {
     const pathInfo = path.parse(r)
 
     if (pathInfo.name === 'page') {
-      return `${pathInfo.dir.replace(/\(.*\)\//, '')}/index`.replace(/^\//, '')
+      return [pathInfo.dir.replace(/\(.*\)\//, ''), r]
     }
     throw new Error('unchecked')
-  })
+  }))
 
   const obj = Object.create(null)
 
-  for (const path of paths) {
-    path.split('/').reduce((r, e) => {
+  for (const path of paths.keys()) {
+    `${path}/index`.replace(/^\//, '').split('/').reduce((r, e) => {
       return (r[e] ||= {})
     }, obj)
   }
@@ -58,7 +58,7 @@ export function generatePageMapFromFilepaths(filepaths: string[]): any {
           a.name.localeCompare(b.name)
         )
       } else {
-        item.frontMatter = {}
+        item.__pagePath = paths.get(item.route.slice(1))
       }
       list.push(item)
     }
