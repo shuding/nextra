@@ -16,7 +16,7 @@ export function Navbar({ navs, children }: NavbarProps): ReactElement {
   const pathname = usePathname()
 
   return (
-    <div className="_mb-8 _flex _items-center _gap-3 _justify-end">
+    <header className="_mb-8 _flex _items-center _gap-3 _justify-end">
       {navs?.map(nav =>
         nav.url === pathname ? (
           <span
@@ -32,6 +32,6 @@ export function Navbar({ navs, children }: NavbarProps): ReactElement {
         )
       )}
       {children}
-    </div>
+    </header>
   )
 }
