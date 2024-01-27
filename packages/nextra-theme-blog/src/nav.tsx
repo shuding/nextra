@@ -5,13 +5,13 @@ import { useBlogContext } from './blog-context'
 import { ThemeSwitch } from './theme-switch'
 
 export function Nav(): ReactElement {
-  const { config } = useBlogContext()
+  const { navs, darkMode } = useBlogContext()
   const pathname = usePathname()
 
   return (
     <div className="_mb-8 _flex _items-center _gap-3">
       <div className="_flex _grow _flex-wrap _items-center _justify-end _gap-3">
-        {config.navs?.map(nav =>
+        {navs?.map(nav =>
           pathname === nav.url ? (
             <span
               key={nav.url}
@@ -26,7 +26,7 @@ export function Nav(): ReactElement {
           )
         )}
       </div>
-      {config.darkMode && <ThemeSwitch />}
+      {darkMode && <ThemeSwitch />}
     </div>
   )
 }

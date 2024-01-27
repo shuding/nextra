@@ -5,7 +5,6 @@ import { useMounted } from 'nextra/hooks'
 import type { ReactElement } from 'react'
 import { useEffect } from 'react'
 import { ReactCusdis } from 'react-cusdis'
-import { useBlogContext } from './blog-context'
 import { useTheme } from './next-themes'
 
 export function Comments({
@@ -17,14 +16,15 @@ export function Comments({
   host?: string
   lang: string
 }): ReactElement | false {
-  const { opts } = useBlogContext()
   const pathname = usePathname()
   const { resolvedTheme } = useTheme()
   const theme = resolvedTheme === 'dark' ? 'dark' : 'light'
   const mounted = useMounted()
   // update the theme for the cusdis iframe when theme changed
   useEffect(() => {
-    window.CUSDIS?.setTheme(theme)
+    try {
+      window.CUSDIS?.setTheme(theme)
+    } catch {}
   }, [theme])
 
   if (!appId) {
@@ -40,7 +40,7 @@ export function Comments({
           host,
           appId,
           pageId: pathname,
-          pageTitle: opts.title,
+          pageTitle: document.title,
           theme
         }}
       />

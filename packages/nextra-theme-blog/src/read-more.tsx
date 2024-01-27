@@ -4,11 +4,11 @@ import Link from 'next/link'
 import { useBlogContext } from './blog-context'
 
 export function ReadMore({ route }: { route: string }) {
-  const { config } = useBlogContext()
+  const { readMore } = useBlogContext()
   return (
-    config.readMore && (
+    readMore && (
       <Link href={route} className="post-item-more _ml-2">
-        {config.readMore}
+        {readMore}
       </Link>
     )
   )

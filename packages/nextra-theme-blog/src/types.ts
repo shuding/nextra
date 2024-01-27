@@ -1,8 +1,8 @@
 /* eslint typescript-sort-keys/interface: error */
-import type { PageOpts } from 'nextra'
+import type { ReadingTime } from 'nextra'
 import type { ReactNode } from 'react'
 
-export interface NextraBlogTheme {
+export type NextraBlogTheme =  {
   darkMode?: boolean
   dateFormatter?: (date: Date) => string
   footer?: ReactNode
@@ -15,13 +15,9 @@ export interface NextraBlogTheme {
 
 export type BlogFrontMatter = {
   author?: string
-  date?: string
+  date?: Date
   description?: string
-  tags: []
+  readingTime?: ReadingTime
+  tags?: []
   title?: string
-}
-
-export interface LayoutProps {
-  config: NextraBlogTheme
-  opts: PageOpts<BlogFrontMatter>
 }

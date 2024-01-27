@@ -70,15 +70,6 @@ export async function loader(
       )
     : this.resourcePath
 
-  const currentPath = slash(mdxPath)
-
-  if (currentPath.includes('/pages/api/')) {
-    logger.warn(
-      `Ignoring ${currentPath} because it is located in the "pages/api" folder.`
-    )
-    return ''
-  }
-
   const relativePath = slash(path.relative(APP_DIR, mdxPath))
 
   let locale = locales[0] === '' ? '' : relativePath.split('/')[0]
@@ -97,7 +88,6 @@ export async function loader(
     frontMatter,
     structurizedData,
     searchIndexKey,
-    hasJsxInH1,
     readingTime
   } = await compileMdx(source, {
     mdxOptions: {
@@ -148,21 +138,18 @@ export default MDXLayout`
     }
   }
 
-  const pageOpts: Partial<PageOpts> = {
+  const restProps: Partial<PageOpts> = {
     filePath: slash(path.relative(CWD, mdxPath)),
-    hasJsxInH1,
     timestamp,
     readingTime
   }
   const finalResult = transform ? await transform(result, { route }) : result
-
-  const stringifiedPageOpts = JSON.stringify(pageOpts).slice(0, -1)
-  // const pageMapPath = path.join(CHUNKS_DIR, `nextra-page-map-${locale}.mjs`)
-
   const rawJs = `
 import { HOC_MDXWrapper } from 'nextra/setup-page'
 ${finalResult}
 
-export default HOC_MDXWrapper(MDXLayout, _provideComponents, useTOC)`
+export default HOC_MDXWrapper(MDXLayout, _provideComponents, useTOC, ${JSON.stringify(
+    restProps
+  ).slice(0, -1)},frontMatter,title})`
   return rawJs
 }

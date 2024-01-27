@@ -4,8 +4,7 @@ export const pageMap = [{
   frontMatter: {
     "sidebarTitle": "Page",
     "type": "page",
-    "title": "About",
-    "date": new Date(1577836800000)
+    "title": "About"
   }
 }, {
   name: "posts",
@@ -26,21 +25,6 @@ export const pageMap = [{
           "description": "At the time when I was getting into web development, I had the chance to read one of the most inspiring book about the web, Aaron Swartz's A Programmable Web. And it completely changed my mind.",
           "tags": ["web development"],
           "author": "Shu"
-        }
-      }]
-    }, {
-      name: "callout",
-      route: "/posts/(with-comments)/callout",
-      children: [{
-        name: "page",
-        route: "/posts/(with-comments)/callout/page",
-        frontMatter: {
-          "sidebarTitle": "Page",
-          "title": "Callout",
-          "date": new Date(1684108800000),
-          "description": "En example of using the Callout component in your blog.",
-          "tags": ["web development"],
-          "author": "Tristan Dubbeld"
         }
       }]
     }, {
@@ -72,6 +56,21 @@ export const pageMap = [{
           "draft": true,
           "tags": ["web development"],
           "author": "Ada Lovelace"
+        }
+      }]
+    }, {
+      name: "nextra-components",
+      route: "/posts/(with-comments)/nextra-components",
+      children: [{
+        name: "page",
+        route: "/posts/(with-comments)/nextra-components/page",
+        frontMatter: {
+          "sidebarTitle": "Page",
+          "title": "Nextra Components",
+          "date": new Date(1684108800000),
+          "description": "En example of using the Callout component in your blog.",
+          "tags": ["web development"],
+          "author": "Tristan Dubbeld"
         }
       }]
     }, {

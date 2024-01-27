@@ -3,6 +3,7 @@ import { Code, Pre, Table, Td, Th, Tr } from 'nextra/components'
 import type { UseMDXComponents } from 'nextra/mdx'
 import { DEFAULT_COMPONENTS } from 'nextra/mdx'
 import type { ComponentProps, ReactElement } from 'react'
+import { Meta } from './meta'
 
 function HeadingLink({
   tag: Tag,
@@ -66,5 +67,14 @@ export const useMDXComponents: UseMDXComponents = components => ({
   td: Td,
   table: props => <Table className="_not-prose" {...props} />,
   code: Code,
+  wrapper: ({ children, frontMatter, title, ...props }) => {
+    return (
+      <>
+        <Meta {...frontMatter} />
+        <h1>{title}</h1>
+        {children}
+      </>
+    )
+  },
   ...components
 })

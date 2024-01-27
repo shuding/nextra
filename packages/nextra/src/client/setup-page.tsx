@@ -11,7 +11,8 @@ import type { UseMDXComponents } from './mdx.js'
 export function HOC_MDXWrapper(
   MDXContent: NextraMDXContent,
   useMDXComponents: UseMDXComponents,
-  useTOC: UseTOC
+  useTOC: UseTOC,
+  restProps: any
 ): FC {
   return function MDXWrapper(props): ReactElement {
     const { wrapper: Wrapper } = useMDXComponents()
@@ -21,7 +22,7 @@ export function HOC_MDXWrapper(
     return Wrapper ? (
       // @ts-expect-error -- fixme
       // eslint-disable-next-line react-hooks/rules-of-hooks
-      <Wrapper toc={useTOC()}>{children}</Wrapper>
+      <Wrapper toc={useTOC()} {...restProps}>{children}</Wrapper>
     ) : (
       children
     )

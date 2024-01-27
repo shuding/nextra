@@ -1,6 +1,5 @@
 import type { NextraThemeLayoutProps } from 'nextra'
 import type { ReactElement, ReactNode } from 'react'
-import { DEFAULT_THEME } from './constants'
 import { ClientLayout } from './layout.client'
 import { ThemeProvider } from './next-themes'
 import type { BlogFrontMatter } from './types'
@@ -25,7 +24,10 @@ export function Layout({
         dir="ltr"
       >
         <ClientLayout
-          themeConfig={{ ...DEFAULT_THEME, ...themeConfig }}
+          themeConfig={{
+            readMore: 'Read More →',
+            ...themeConfig
+          }}
           {...props}
         >
           {children}
