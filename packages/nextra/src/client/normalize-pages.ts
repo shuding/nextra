@@ -269,10 +269,7 @@ export function normalizePages({
           activeIndex = flatDocsDirectories.length
       }
     }
-    if (
-      (display === 'hidden' && !isFolder(item)) ||
-      ERROR_ROUTES.has(a.route)
-    ) {
+    if (display === 'hidden') {
       continue
     }
 
@@ -357,7 +354,7 @@ export function normalizePages({
         directories.push(...docsItem.children)
         docsDirectories.push(...docsItem.children)
       }
-    } else if (display !== 'hidden') {
+    } else {
       directories.push(item)
     }
 

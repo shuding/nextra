@@ -86,7 +86,7 @@ export function ClientWrapper({
     </>
   )
 
-  const main =
+  const mainEl =
     themeContext.layout === 'full' ? (
       <article
         className={cn(
@@ -125,8 +125,7 @@ export function ClientWrapper({
       />
       {tocEl}
       {skipNavContent}
-
-      {main}
+      {mainEl}
     </>
   )
 }
