@@ -1,6 +1,6 @@
 'use client'
 
-import cn from 'clsx/clsx'
+import cn from 'clsx'
 import { LocaleSwitch } from '../locale-switch'
 import { ThemeSwitch } from '../theme-switch'
 import { useConfig, useThemeConfig } from '../../contexts'

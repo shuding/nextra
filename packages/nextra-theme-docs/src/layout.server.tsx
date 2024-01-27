@@ -11,6 +11,7 @@ import {
 } from './contexts'
 import type { DocsThemeConfig } from './contexts/theme-config'
 import { ClientLayout } from './layout.client'
+import './style.css'
 
 const DEFAULT_THEME: DocsThemeConfig = {
   darkMode: true,
