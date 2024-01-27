@@ -342,8 +342,12 @@ export function normalizePages({
         case 'menu':
           topLevelNavbarItems.push(pageItem)
           break
-        case 'doc':
-          flatDocsDirectories.push(docsItem)
+        case 'doc': {
+          const withHrefProp = 'href' in item
+          if (!withHrefProp) {
+            flatDocsDirectories.push(docsItem)
+          }
+        }
       }
     }
 
