@@ -1,18 +1,19 @@
+'use client'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import type { ReactElement } from 'react'
-import { useBlogContext } from './blog-context'
+import { useThemeConfig } from './contexts'
 import { ThemeSwitch } from './theme-switch'
 
 export function Nav(): ReactElement {
-  const { navs, darkMode } = useBlogContext()
+  const { navs, darkMode } = useThemeConfig()
   const pathname = usePathname()
 
   return (
     <div className="_mb-8 _flex _items-center _gap-3">
       <div className="_flex _grow _flex-wrap _items-center _justify-end _gap-3">
         {navs?.map(nav =>
-          pathname === nav.url ? (
+          nav.url === pathname ? (
             <span
               key={nav.url}
               className="_cursor-default dark:_text-gray-400 _text-gray-600"

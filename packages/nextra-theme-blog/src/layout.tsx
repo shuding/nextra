@@ -1,7 +1,8 @@
 import type { NextraThemeLayoutProps } from 'nextra'
 import type { ReactElement, ReactNode } from 'react'
-import { ClientLayout } from './layout.client'
-import { ThemeProvider } from './next-themes'
+import { ThemeConfigProvider } from './theme-config'
+import { Nav } from './nav'
+import { ThemeProvider } from './contexts'
 import type { BlogFrontMatter } from './types'
 
 export function Footer({
@@ -14,8 +15,7 @@ export function Footer({
 
 export function Layout({
   children,
-  themeConfig,
-  ...props
+  themeConfig
 }: NextraThemeLayoutProps<BlogFrontMatter>) {
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
@@ -23,15 +23,15 @@ export function Layout({
         className="_container _prose max-md:_prose-sm dark:_prose-dark"
         dir="ltr"
       >
-        <ClientLayout
-          themeConfig={{
+        <ThemeConfigProvider
+          value={{
             readMore: 'Read More →',
             ...themeConfig
           }}
-          {...props}
         >
+          <Nav />
           {children}
-        </ClientLayout>
+        </ThemeConfigProvider>
       </article>
     </ThemeProvider>
   )

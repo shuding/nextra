@@ -1,3 +1,5 @@
+'use client'
+
 import { useTheme } from 'next-themes'
 import { useMounted } from 'nextra/hooks'
 import { MoonIcon, SunIcon } from 'nextra/icons'

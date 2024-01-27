@@ -1,6 +1,5 @@
-export { useTheme } from './next-themes'
+export { useTheme, useThemeConfig } from './contexts'
 export { useMDXComponents } from './mdx-components'
-export { useBlogContext } from './blog-context'
 export * from './types'
-export { Layout, Footer } from './layout.server'
+export { Layout, Footer } from './layout'
 export { PostCard } from './post-card'

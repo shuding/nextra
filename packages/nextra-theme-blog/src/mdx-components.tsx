@@ -3,6 +3,7 @@ import { Code, Pre, Table, Td, Th, Tr } from 'nextra/components'
 import type { UseMDXComponents } from 'nextra/mdx'
 import { DEFAULT_COMPONENTS } from 'nextra/mdx'
 import type { ComponentProps, ReactElement } from 'react'
+import { isValidDate } from './date'
 import { Meta } from './meta'
 
 function HeadingLink({
@@ -68,10 +69,15 @@ export const useMDXComponents: UseMDXComponents = components => ({
   table: props => <Table className="_not-prose" {...props} />,
   code: Code,
   wrapper: ({ children, frontMatter, title, ...props }) => {
+    if (frontMatter.date && !isValidDate(frontMatter.date)) {
+      throw new Error(
+        `Invalid date "${frontMatter.date}". Provide date in "YYYY/M/D", "YYYY/M/D H:m", "YYYY-MM-DD", "[YYYY-MM-DD]T[HH:mm]" or "[YYYY-MM-DD]T[HH:mm:ss.SSS]Z" format.`
+      )
+    }
     return (
       <>
-        <Meta {...frontMatter} />
         <h1>{title}</h1>
+        <Meta {...frontMatter} />
         {children}
       </>
     )
