@@ -5,7 +5,7 @@ import { useMounted } from 'nextra/hooks'
 import type { ReactElement } from 'react'
 import { useEffect } from 'react'
 import { ReactCusdis } from 'react-cusdis'
-import { useTheme } from './contexts'
+import { useTheme } from '../next-themes'
 
 export function Comments({
   appId,

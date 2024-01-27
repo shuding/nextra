@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import type { ReactElement } from 'react'
-import type { BlogFrontMatter } from './types'
+import type { BlogFrontMatter } from '../types'
 
 type PostCardProps = {
   post: {

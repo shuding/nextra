@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import type { ReactElement, ReactNode } from 'react'
 import { GoBack } from './go-back'
-import type { BlogFrontMatter } from './types'
+import type { BlogFrontMatter } from '../types'
 
 export function Meta({
   author,

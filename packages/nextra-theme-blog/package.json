@@ -11,8 +11,8 @@
       "types": "./dist/index.d.mts"
     },
     "./cusdis": {
-      "import": "./dist/cusdis.js",
-      "types": "./dist/cusdis.d.mts"
+      "import": "./dist/components/cusdis.js",
+      "types": "./dist/components/cusdis.d.mts"
     }
   },
   "types": "./dist/index.d.mts",

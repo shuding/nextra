@@ -4,7 +4,7 @@ import type { UseMDXComponents } from 'nextra/mdx'
 import { DEFAULT_COMPONENTS } from 'nextra/mdx'
 import type { ComponentProps, ReactElement } from 'react'
 import { isValidDate } from './date'
-import { Meta } from './meta'
+import { Meta } from './components/meta'
 
 function HeadingLink({
   tag: Tag,
