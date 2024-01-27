@@ -1,6 +1,6 @@
-import Link from 'next/link.js'
+import Link from 'next/link'
 import { PostCard } from 'nextra-theme-blog'
-import { getPosts, getTags } from './get-posts.js'
+import { getPosts, getTags } from './get-posts'
 
 export const metadata = {
   title: 'Posts'
