@@ -1,5 +1,3 @@
-import fs from 'fs/promises'
-import path from 'node:path'
 import { normalizePages } from '../src/client/normalize-pages.js'
 import { cnPageMap, usPageMap } from './fixture/page-maps/pageMap.js'
 
@@ -170,7 +168,6 @@ describe('normalize-page', () => {
         },
         {
           "name": "explorers3",
-          "route": "#",
           "title": "Explorers3",
           "type": "menu",
         },

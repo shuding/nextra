@@ -186,7 +186,6 @@ const config: DocsThemeConfig = {
     toggleButton: true
   },
   toc: {
-    backToTop: true,
     extraContent: (
       // eslint-disable-next-line @next/next/no-img-element -- ignore since url is external and dynamic
       <img alt="placeholder cat" src="https://placekitten.com/g/300/200" />

@@ -313,6 +313,7 @@ export function normalizePages({
         activeType = normalizedChildren.activeType
         activePath = [
           item,
+          // Do not include folder which shows only his children
           ...normalizedChildren.activePath.filter(
             item => item.display !== 'children'
           )
@@ -376,6 +377,7 @@ export function normalizePages({
           break
         case 'doc': {
           const withHrefProp = 'href' in item
+          // Do not include links with href in pagination
           if (!withHrefProp) {
             flatDocsDirectories.push(docsItem)
           }

@@ -60,8 +60,18 @@ const nextra: Nextra = nextraConfig => {
       locales
     }
 
+    // const optimizedImports = new Set(
+    //   nextConfig.experimental?.optimizePackageImports || []
+    // )
+    //
+    // optimizedImports.add('nextra/components')
+
     return {
       ...nextConfig,
+      // experimental: {
+      //   ...nextConfig.experimental,
+      //   optimizePackageImports: [...optimizedImports]
+      // },
       ...(nextConfig.output !== 'export' && { rewrites }),
       pageExtensions: [
         ...(nextConfig.pageExtensions || DEFAULT_EXTENSIONS),

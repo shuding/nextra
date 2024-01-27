@@ -857,7 +857,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
             "basic": "Uso Básico",
             "error-handling": "Manejo De Errores",
             "infinite-loading": "Carga Infinita",
-            "ssr": "Next.js SSR",
           },
         },
         {
