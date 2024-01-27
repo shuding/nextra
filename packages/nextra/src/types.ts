@@ -68,7 +68,6 @@ export type PageOpts<FrontMatterType = FrontMatter> = {
   frontMatter: FrontMatterType
   pageMap: PageMapItem[]
   title: string
-  hasJsxInH1?: boolean
   timestamp?: number
   readingTime?: ReadingTime
 }

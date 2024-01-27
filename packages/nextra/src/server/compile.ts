@@ -179,9 +179,9 @@ export async function compileMdx(
       structurizedData: StructurizedData
       title?: string
       frontMatter: FrontMatter
-    } & Pick<PageOpts, 'hasJsxInH1'>
+    }
 
-    const { readingTime, structurizedData, title, frontMatter, hasJsxInH1 } =
+    const { readingTime, structurizedData, title, frontMatter } =
       data
     // https://github.com/shuding/nextra/issues/1032
     const result = String(vFile).replaceAll('__esModule', '_\\_esModule')
@@ -200,7 +200,6 @@ export async function compileMdx(
     return {
       result,
       title,
-      ...(hasJsxInH1 && { hasJsxInH1 }),
       ...(readingTime && { readingTime }),
       ...(searchIndexKey !== null && { searchIndexKey, structurizedData }),
       frontMatter

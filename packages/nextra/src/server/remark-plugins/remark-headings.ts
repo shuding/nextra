@@ -24,7 +24,6 @@ export const remarkHeadings: Plugin<
   Root
 > = ({ exportName = 'useTOC', isRemoteContent }) => {
   const headings: (Heading | string)[] = []
-  let hasJsxInH1: boolean
 
   const slugger = new Slugger()
   return (ast, file) => {
@@ -43,12 +42,6 @@ export const remarkHeadings: Plugin<
       (node, _index, parent) => {
         if (node.type === 'heading') {
           if (node.depth === 1) {
-            const hasJsx = node.children.some(
-              (child: { type: string }) => child.type === 'mdxJsxTextElement'
-            )
-            if (hasJsx) {
-              hasJsxInH1 = true
-            }
             return
           }
 
@@ -101,7 +94,6 @@ export const remarkHeadings: Plugin<
       }
     )
 
-    file.data.hasJsxInH1 = hasJsxInH1
     file.data.toc = headings
   }
 }
