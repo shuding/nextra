@@ -1,11 +1,7 @@
 export default {
   index: {
     type: 'page',
-    title: 'Nextra',
-    display: 'hidden',
-    theme: {
-      layout: 'raw'
-    }
+    display: 'hidden'
   },
   docs: {
     type: 'page',
@@ -13,7 +9,6 @@ export default {
   },
   showcase: {
     type: 'page',
-    title: 'Showcase',
     theme: {
       typesetting: 'article',
       layout: 'full'
@@ -21,7 +16,6 @@ export default {
   },
   about: {
     type: 'page',
-    title: 'About',
     theme: {
       typesetting: 'article'
     }
