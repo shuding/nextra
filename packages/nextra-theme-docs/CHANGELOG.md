@@ -1,5 +1,20 @@
 # nextra-theme-docs
 
+## 3.0.0-alpha.14
+
+### Patch Changes
+
+- 45471df5: fix “Scroll to top” is not supposed to be interactable when it is
+  hidden.
+
+  `display:children` doesn't collapse breadcrumbs
+
+  hide external links from pagination
+
+  remove xmlns attribute from icons
+
+  - nextra@3.0.0-alpha.14
+
 ## 3.0.0-alpha.13
 
 ### Minor Changes
