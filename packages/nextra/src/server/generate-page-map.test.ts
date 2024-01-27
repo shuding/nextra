@@ -49,5 +49,200 @@ describe('generatePageMapFromFilepaths()', () => {
         "showcase/page.mdx",
       ]
     `)
+
+    expect(generatePageMapFromFilepaths(pagePaths)).toMatchInlineSnapshot(`
+      [
+        {
+          "name": "about",
+          "route": "/about",
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "name": "index",
+                  "route": "/docs/blog-theme",
+                },
+                {
+                  "name": "start",
+                  "route": "/docs/blog-theme/start",
+                },
+              ],
+              "name": "blog-theme",
+              "route": "/docs/blog-theme",
+            },
+            {
+              "name": "custom-theme",
+              "route": "/docs/custom-theme",
+            },
+            {
+              "children": [
+                {
+                  "name": "api",
+                  "route": "/docs/docs-theme/api",
+                },
+                {
+                  "children": [
+                    {
+                      "name": "bleed",
+                      "route": "/docs/docs-theme/built-ins/bleed",
+                    },
+                    {
+                      "name": "index",
+                      "route": "/docs/docs-theme/built-ins",
+                    },
+                  ],
+                  "name": "built-ins",
+                  "route": "/docs/docs-theme/built-ins",
+                },
+                {
+                  "name": "index",
+                  "route": "/docs/docs-theme",
+                },
+                {
+                  "name": "page-configuration",
+                  "route": "/docs/docs-theme/page-configuration",
+                },
+                {
+                  "name": "start",
+                  "route": "/docs/docs-theme/start",
+                },
+                {
+                  "name": "theme-configuration",
+                  "route": "/docs/docs-theme/theme-configuration",
+                },
+              ],
+              "name": "docs-theme",
+              "route": "/docs/docs-theme",
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "name": "index",
+                      "route": "/docs/guide/advanced",
+                    },
+                    {
+                      "name": "latex",
+                      "route": "/docs/guide/advanced/latex",
+                    },
+                    {
+                      "name": "mermaid",
+                      "route": "/docs/guide/advanced/mermaid",
+                    },
+                    {
+                      "name": "npm2yarn",
+                      "route": "/docs/guide/advanced/npm2yarn",
+                    },
+                    {
+                      "name": "remote",
+                      "route": "/docs/guide/advanced/remote",
+                    },
+                    {
+                      "name": "table",
+                      "route": "/docs/guide/advanced/table",
+                    },
+                    {
+                      "name": "tailwind-css",
+                      "route": "/docs/guide/advanced/tailwind-css",
+                    },
+                    {
+                      "name": "typescript",
+                      "route": "/docs/guide/advanced/typescript",
+                    },
+                  ],
+                  "name": "advanced",
+                  "route": "/docs/guide/advanced",
+                },
+                {
+                  "children": [
+                    {
+                      "name": "callout",
+                      "route": "/docs/guide/built-ins/callout",
+                    },
+                    {
+                      "name": "cards",
+                      "route": "/docs/guide/built-ins/cards",
+                    },
+                    {
+                      "name": "filetree",
+                      "route": "/docs/guide/built-ins/filetree",
+                    },
+                    {
+                      "name": "index",
+                      "route": "/docs/guide/built-ins",
+                    },
+                    {
+                      "name": "steps",
+                      "route": "/docs/guide/built-ins/steps",
+                    },
+                    {
+                      "name": "tabs",
+                      "route": "/docs/guide/built-ins/tabs",
+                    },
+                  ],
+                  "name": "built-ins",
+                  "route": "/docs/guide/built-ins",
+                },
+                {
+                  "name": "custom-css",
+                  "route": "/docs/guide/custom-css",
+                },
+                {
+                  "name": "i18n",
+                  "route": "/docs/guide/i18n",
+                },
+                {
+                  "name": "image",
+                  "route": "/docs/guide/image",
+                },
+                {
+                  "name": "index",
+                  "route": "/docs/guide",
+                },
+                {
+                  "name": "link",
+                  "route": "/docs/guide/link",
+                },
+                {
+                  "name": "markdown",
+                  "route": "/docs/guide/markdown",
+                },
+                {
+                  "name": "organize-files",
+                  "route": "/docs/guide/organize-files",
+                },
+                {
+                  "name": "ssg",
+                  "route": "/docs/guide/ssg",
+                },
+                {
+                  "name": "syntax-highlighting",
+                  "route": "/docs/guide/syntax-highlighting",
+                },
+              ],
+              "name": "guide",
+              "route": "/docs/guide",
+            },
+            {
+              "name": "index",
+              "route": "/docs",
+            },
+          ],
+          "name": "docs",
+          "route": "/docs",
+        },
+        {
+          "name": "index",
+          "route": "/",
+        },
+        {
+          "name": "showcase",
+          "route": "/showcase",
+        },
+      ]
+    `)
   })
 })
