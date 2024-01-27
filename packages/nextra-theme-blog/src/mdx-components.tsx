@@ -74,13 +74,13 @@ export const useMDXComponents: UseMDXComponents = components => ({
   td: Td,
   table: props => <Table className="_not-prose" {...props} />,
   code: Code,
-  wrapper({ children, frontMatter, title }) {
-    if (frontMatter.date && !isValidDate(frontMatter.date)) {
+  wrapper({ children, metadata, title }) {
+    if (metadata.date && !isValidDate(metadata.date)) {
       throw new Error(
-        `Invalid date "${frontMatter.date}". Provide date in "YYYY/M/D", "YYYY/M/D H:m", "YYYY-MM-DD", "[YYYY-MM-DD]T[HH:mm]" or "[YYYY-MM-DD]T[HH:mm:ss.SSS]Z" format.`
+        `Invalid date "${metadata.date}". Provide date in "YYYY/M/D", "YYYY/M/D H:m", "YYYY-MM-DD", "[YYYY-MM-DD]T[HH:mm]" or "[YYYY-MM-DD]T[HH:mm:ss.SSS]Z" format.`
       )
     }
-    const dateObj = frontMatter.date ? new Date(frontMatter.date) : null
+    const dateObj = metadata.date && new Date(metadata.date)
 
     // @ts-expect-error
     const DateFormatter = components?.DateFormatter
@@ -88,7 +88,7 @@ export const useMDXComponents: UseMDXComponents = components => ({
     return (
       <>
         <h1>{title}</h1>
-        <Meta {...frontMatter}>
+        <Meta {...metadata}>
           {dateObj && (
             <time dateTime={dateObj.toISOString()}>
               {(DateFormatter && <DateFormatter date={dateObj} />) ||

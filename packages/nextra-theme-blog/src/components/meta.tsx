@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import type { ReactElement, ReactNode } from 'react'
-import type { BlogFrontMatter } from '../types'
+import type { BlogMetadata } from '../types'
 import { GoBack } from './go-back'
 
 export function Meta({
@@ -9,7 +9,7 @@ export function Meta({
   date,
   readingTime,
   children
-}: BlogFrontMatter & { children?: ReactNode }): ReactElement {
+}: BlogMetadata & { children?: ReactNode }): ReactElement {
   const tagsEl = tags?.map(t => (
     <Link key={t} href={`/tags/${t}`} className="nextra-tag">
       {t}

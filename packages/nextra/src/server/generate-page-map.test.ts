@@ -66,7 +66,6 @@ describe('generatePageMapFromFilepaths()', () => {
         {
           "children": [
             {
-              "__pagePath": "tags/[tag]/page.jsx",
               "name": "[tag]",
               "route": "/tags/[tag]",
             },
@@ -93,7 +92,6 @@ describe('generatePageMapFromFilepaths()', () => {
         "docs/blog-theme/start/page.mdx",
         "docs/custom-theme/page.mdx",
         "docs/docs-theme/_meta.ts",
-        "docs/docs-theme/api/_meta.ts",
         "docs/docs-theme/api/use-config/page.mdx",
         "docs/docs-theme/built-ins/bleed/page.mdx",
         "docs/docs-theme/built-ins/page.mdx",
@@ -111,6 +109,7 @@ describe('generatePageMapFromFilepaths()', () => {
         "docs/guide/advanced/table/page.mdx",
         "docs/guide/advanced/tailwind-css/page.mdx",
         "docs/guide/advanced/typescript/page.mdx",
+        "docs/guide/built-ins/_meta.ts",
         "docs/guide/built-ins/callout/page.mdx",
         "docs/guide/built-ins/cards/page.mdx",
         "docs/guide/built-ins/filetree/page.mdx",
@@ -172,9 +171,6 @@ describe('generatePageMapFromFilepaths()', () => {
               "children": [
                 {
                   "children": [
-                    {
-                      "__metaPath": "docs/docs-theme/api/_meta.ts",
-                    },
                     {
                       "__pagePath": "docs/docs-theme/api/use-config/page.mdx",
                       "name": "use-config",
@@ -309,6 +305,9 @@ describe('generatePageMapFromFilepaths()', () => {
                       "__pagePath": "docs/guide/built-ins/tabs/page.mdx",
                       "name": "tabs",
                       "route": "/docs/guide/built-ins/tabs",
+                    },
+                    {
+                      "__metaPath": "docs/guide/built-ins/_meta.ts",
                     },
                   ],
                   "name": "built-ins",

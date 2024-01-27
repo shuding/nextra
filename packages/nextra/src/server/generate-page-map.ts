@@ -45,17 +45,17 @@ export function generatePageMapFromFilepaths(filepaths: string[]): any {
     list: (Folder | MdxFile)[],
     prefix = ''
   ) {
-    for (const [key, value] of Object.entries(obj)) {
-      const route = `${prefix}/${key}`
+    for (const [name, value] of Object.entries(obj)) {
+      const route = `${prefix}/${name}`
 
-      if (key === '_meta') {
+      if (name === '_meta') {
         // @ts-expect-error
         list.push({ __metaPath: paths.get(route.slice(1)) })
         continue
       }
 
       const item: Folder | MdxFile = {
-        name: key,
+        name,
         route: route.replace(/\/index$/, '') || '/'
       }
       const keys = Object.keys(value)
@@ -66,7 +66,7 @@ export function generatePageMapFromFilepaths(filepaths: string[]): any {
         ;(item as Folder).children = getPageMap(value, [], route).sort((a, b) =>
           a.name.localeCompare(b.name)
         )
-      } else {
+      } else if (!name.startsWith('[')) {
         // @ts-expect-error
         item.__pagePath = paths.get(item.route.slice(1))
       }

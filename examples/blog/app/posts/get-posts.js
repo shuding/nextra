@@ -1,18 +1,15 @@
-import { pageMap } from '../../nextra-page-map.mjs'
+export async function getPosts() {
+  const { pageMap } = await import(
+    '../../.next/static/chunks/nextra-page-map-.mjs'
+  )
 
-export function getPosts() {
   return pageMap
-    .find(item => item.route === '/posts')
-    .children[0].children.map(post => ({
-      ...post.children[0],
-      name: post.name,
-      route: post.route.replace(/\/\(.*\)/, '')
-    }))
-    .filter(post => !post.frontMatter.draft)
+    .find(item => item.route === '/posts').children
+    .filter(post => !post.frontMatter.draft && post.name !== 'index')
     .sort((a, b) => b.frontMatter.date - a.frontMatter.date)
 }
 
-export function getTags() {
-  const tags = getPosts().flatMap(post => post.frontMatter.tags)
+export async function getTags() {
+  const tags = (await getPosts()).flatMap(post => post.frontMatter.tags)
   return tags
 }

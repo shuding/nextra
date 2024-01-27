@@ -7,17 +7,19 @@ export function generateMetadata({ params }) {
   }
 }
 
-export function generateStaticParams() {
-  const allTags = getTags()
+export async function generateStaticParams() {
+  const allTags = await getTags()
   return [...new Set(allTags)].map(tag => ({ tag }))
 }
 
-export default function TagPage({ params }) {
+export default async function TagPage({ params }) {
   return (
     <>
       <h1>{generateMetadata({ params }).title}</h1>
-      {getPosts()
-        .filter(post => post.frontMatter.tags.includes(decodeURIComponent(params.tag)))
+      {(await getPosts())
+        .filter(post =>
+          post.frontMatter.tags.includes(decodeURIComponent(params.tag))
+        )
         .map(post => (
           <PostCard key={post.route} post={post} />
         ))}

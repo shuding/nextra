@@ -271,6 +271,9 @@ importers:
       estree-util-value-to-estree:
         specifier: ^3.0.1
         version: 3.0.1
+      fast-glob:
+        specifier: ^3.3.2
+        version: 3.3.2
       github-slugger:
         specifier: ^2.0.0
         version: 2.0.0
@@ -11813,6 +11816,7 @@ packages:
       clsx: 2.1.0
       estree-util-to-js: 2.0.0
       estree-util-value-to-estree: 3.0.1
+      fast-glob: 3.3.2
       github-slugger: 2.0.0
       graceful-fs: 4.2.11
       gray-matter: 4.0.3

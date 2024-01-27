@@ -1,11 +1,11 @@
 import Link from 'next/link'
 import type { ReactElement } from 'react'
-import type { BlogFrontMatter } from '../types'
+import type { BlogMetadata } from '../types'
 
 type PostCardProps = {
   post: {
     route: string
-    frontMatter: BlogFrontMatter
+    frontMatter: BlogMetadata
   }
   readMore?: string
 }
@@ -15,7 +15,7 @@ export function PostCard({
   readMore = 'Read More →'
 }: PostCardProps): ReactElement {
   const { description, date, title } = post.frontMatter
-
+  const dateObj = date && new Date(date)
   return (
     <div key={post.route} className="post-item">
       <h3>
@@ -33,12 +33,12 @@ export function PostCard({
           )}
         </p>
       )}
-      {date && (
+      {dateObj && (
         <time
           className="_text-sm dark:_text-gray-400 _text-gray-600"
-          dateTime={date.toISOString()}
+          dateTime={dateObj.toISOString()}
         >
-          {date.toDateString()}
+          {dateObj.toDateString()}
         </time>
       )}
     </div>

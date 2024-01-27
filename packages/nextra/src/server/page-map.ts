@@ -1,7 +1,6 @@
 import path from 'node:path'
 import type { ArrayExpression, ImportDeclaration } from 'estree'
 import { toJs } from 'estree-util-to-js'
-import { valueToEstree } from 'estree-util-value-to-estree'
 import gracefulFs from 'graceful-fs'
 import grayMatter from 'gray-matter'
 import pLimit from 'p-limit'
@@ -11,7 +10,6 @@ import {
   CHUNKS_DIR,
   CWD,
   DEFAULT_PROPERTY_PROPS,
-  IMPORT_FRONTMATTER,
   MARKDOWN_EXTENSION_REGEX,
   META_REGEX
 } from './constants.js'
@@ -194,16 +192,20 @@ function convertPageMapToAst(
     }
     if ('route' in item) {
       // @ts-expect-error
-      const name = cleanFileName(item.__pagePath)
-      // @ts-expect-error
-      imports.push({ importName: name, filePath: item.__pagePath })
+      const pagePath = item.__pagePath
+      let name = ''
+
+      if (pagePath) {
+        name = cleanFileName(pagePath)
+        imports.push({ importName: name, filePath: pagePath })
+      }
       return createAstObject({
         name: item.name,
         route: item.route,
-        frontMatter: { type: 'Identifier', name }
+        ...(name && { frontMatter: { type: 'Identifier', name } })
       })
     }
-      // @ts-expect-error
+    // @ts-expect-error
     const name = cleanFileName(item.__metaPath)
     // @ts-expect-error
     imports.push({ importName: name, filePath: item.__metaPath })
