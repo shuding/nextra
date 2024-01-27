@@ -3,6 +3,7 @@ import fs from 'fs/promises'
 import path from 'path'
 import { Footer, Layout, Navbar, ThemeSwitch } from 'nextra-theme-blog'
 import { collectPageMap } from 'nextra/page-map'
+import 'nextra-theme-blog/style.css'
 
 export const metadata = {
   title: 'Blog Example'

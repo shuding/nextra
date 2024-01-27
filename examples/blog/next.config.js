@@ -1,5 +1,5 @@
-import nextra from 'nextra'
 import path from 'path'
+import nextra from 'nextra'
 
 const withNextra = nextra({
   mdxOptions: {
@@ -14,6 +14,6 @@ export default withNextra({
   reactStrictMode: true,
   cleanDistDir: true,
   experimental: {
-    optimizePackageImports: ['nextra/components']
+    optimizePackageImports: ['nextra/components', 'nextra-theme-blog']
   }
 })
