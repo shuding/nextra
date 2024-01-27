@@ -127,7 +127,7 @@ const config: DocsThemeConfig = {
         </p>
       </div>
     )
-  },
+  }
 }
 
 export default config
