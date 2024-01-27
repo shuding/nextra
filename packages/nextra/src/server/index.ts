@@ -74,18 +74,18 @@ const nextra: Nextra = nextraConfig => {
       throw new Error('No Nextra theme found!')
     }
 
-    const optimizedImports = new Set(
-      nextConfig.experimental?.optimizePackageImports || []
-    )
-
-    optimizedImports.add('nextra/hooks')
+    // const optimizedImports = new Set(
+    //   nextConfig.experimental?.optimizePackageImports || []
+    // )
+    //
+    // optimizedImports.add('nextra/hooks')
 
     return {
       ...nextConfig,
-      experimental: {
-        ...nextConfig.experimental,
-        optimizePackageImports: [...optimizedImports]
-      },
+      // experimental: {
+      //   ...nextConfig.experimental,
+      //   optimizePackageImports: [...optimizedImports]
+      // },
       ...(nextConfig.output !== 'export' && { rewrites }),
       env: {
         ...nextConfig.env,
