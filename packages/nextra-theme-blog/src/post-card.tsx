@@ -1,16 +1,12 @@
 import Link from 'next/link'
 import type { ReactElement } from 'react'
 import { ReadMore } from './read-more'
+import type { BlogFrontMatter } from './types'
 
 type PostCardProps = {
   post: {
     route: string
-    frontMatter: {
-      description?: string
-      title?: string
-      date?: Date
-      tags: string[]
-    }
+    frontMatter: BlogFrontMatter
   }
 }
 

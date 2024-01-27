@@ -3,7 +3,6 @@ export const pageMap = [{
   route: "/page",
   frontMatter: {
     "sidebarTitle": "Page",
-    "type": "page",
     "title": "About"
   }
 }, {

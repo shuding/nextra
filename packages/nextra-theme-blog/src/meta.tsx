@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import type { ReactElement } from 'react'
+import { GoBack } from './go-back'
 import type { BlogFrontMatter } from './types'
 
 export function Meta({
@@ -53,10 +54,7 @@ export function Meta({
           </div>
         )}
       </div>
-      {/*<div className="_flex _items-center _gap-3 print:_hidden">*/}
-      {/*  <Link href={pathname.split('/').slice(0, -1).join('/')}>Back</Link>*/}
-      {/*  {config.darkMode && <ThemeSwitch />}*/}
-      {/*</div>*/}
+      <GoBack className="print:_hidden" />
     </div>
   )
 }

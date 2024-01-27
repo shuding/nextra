@@ -29,10 +29,8 @@ export function Layout({
         dir="ltr"
       >
         <ThemeConfigProvider value={config}>
-          <div className="_mb-8 _flex _items-center _gap-3">
-            <div className="_flex _grow _flex-wrap _items-center _justify-end _gap-3">
-              <Nav />
-            </div>
+          <div className="_mb-8 _flex _items-center _gap-3 _justify-end">
+            <Nav />
             {config.darkMode && <ThemeSwitch />}
           </div>
           {children}
