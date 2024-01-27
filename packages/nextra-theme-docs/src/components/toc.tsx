@@ -105,7 +105,7 @@ export function TOC({ toc, filePath, pageTitle }: TOCProps): ReactElement {
           {themeConfig.feedback.content ? (
             <Anchor
               className={linkClassName}
-              href={themeConfig.feedback.useLink(pageTitle)}
+              href={themeConfig.feedback.useLink?.(pageTitle)}
               newWindow
             >
               {renderComponent(themeConfig.feedback.content)}

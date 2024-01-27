@@ -1,12 +1,11 @@
 import type { z } from 'zod'
-import { ERROR_ROUTES } from '../constants.js'
 import type {
   displaySchema,
   menuItemSchema,
   pageThemeSchema
 } from '../server/schemas'
 import type { Folder, MdxFile, PageMapItem } from '../types'
-import { isFolder, isMeta } from './utils.js'
+import { isMeta } from './utils.js'
 
 const DEFAULT_PAGE_THEME: PageTheme = {
   breadcrumb: true,
@@ -27,16 +26,22 @@ type Display = z.infer<typeof displaySchema>
 type IMenuItem = z.infer<typeof menuItemSchema>
 
 function extendMeta(
-  meta: string | Record<string, any> = {},
-  fallback: Record<string, any>
+  _meta: string | Record<string, any> = {},
+  fallback: Record<string, any>,
+  metadata: Record<string, any>
 ): Record<string, any> {
-  if (typeof meta === 'string') {
-    meta = { title: meta }
+  if (typeof _meta === 'string') {
+    _meta = { title: _meta }
   }
-  const theme: PageTheme = { ...fallback.theme, ...meta.theme }
+  const theme: PageTheme = {
+    ...fallback.theme,
+    ..._meta.theme,
+    ...metadata.theme
+  }
   return {
     ...fallback,
-    ...meta,
+    ..._meta,
+    display: metadata.display || _meta.display,
     theme
   }
 }
@@ -209,7 +214,14 @@ export function normalizePages({
     }
 
     // Get the item's meta information.
-    const extendedMeta = extendMeta(meta[a.name], fallbackMeta)
+    const extendedMeta = extendMeta(
+      meta[a.name],
+      fallbackMeta,
+      list.find(
+        (item): item is MdxFile => 'frontMatter' in item && item.name === a.name
+      )?.frontMatter || {}
+    )
+
     const { display, type = 'doc' } = extendedMeta
     const extendedPageThemeContext = {
       ...pageThemeContext,
@@ -233,6 +245,7 @@ export function normalizePages({
       extendedMeta.title ||
       (type !== 'separator' &&
         (a.frontMatter?.sidebarTitle || a.frontMatter?.title || a.name))
+
     const getItem = (): Item => ({
       ...a,
       type,
