@@ -85,10 +85,15 @@ describe('generatePageMapFromFilepaths()', () => {
     const pagePaths = await getFilepaths({ appDir, cwd })
     expect(pagePaths.sort((a, b) => a.localeCompare(b))).toMatchInlineSnapshot(`
       [
+        "_meta.ts",
         "about/page.mdx",
+        "docs/_meta.ts",
+        "docs/blog-theme/_meta.ts",
         "docs/blog-theme/page.mdx",
         "docs/blog-theme/start/page.mdx",
         "docs/custom-theme/page.mdx",
+        "docs/docs-theme/_meta.ts",
+        "docs/docs-theme/api/_meta.ts",
         "docs/docs-theme/api/use-config/page.mdx",
         "docs/docs-theme/built-ins/bleed/page.mdx",
         "docs/docs-theme/built-ins/page.mdx",
@@ -96,6 +101,8 @@ describe('generatePageMapFromFilepaths()', () => {
         "docs/docs-theme/page.mdx",
         "docs/docs-theme/start/page.mdx",
         "docs/docs-theme/theme-configuration/page.mdx",
+        "docs/guide/_meta.ts",
+        "docs/guide/advanced/_meta.ts",
         "docs/guide/advanced/latex/page.mdx",
         "docs/guide/advanced/mermaid/page.mdx",
         "docs/guide/advanced/npm2yarn/page.mdx",
@@ -128,6 +135,9 @@ describe('generatePageMapFromFilepaths()', () => {
     expect(generatePageMapFromFilepaths(pagePaths)).toMatchInlineSnapshot(`
       [
         {
+          "__filePath": "_meta.ts",
+        },
+        {
           "__filePath": "about/page.mdx",
           "name": "about",
           "route": "/about",
@@ -146,6 +156,9 @@ describe('generatePageMapFromFilepaths()', () => {
                   "name": "start",
                   "route": "/docs/blog-theme/start",
                 },
+                {
+                  "__filePath": "docs/blog-theme/_meta.ts",
+                },
               ],
               "name": "blog-theme",
               "route": "/docs/blog-theme",
@@ -159,6 +172,9 @@ describe('generatePageMapFromFilepaths()', () => {
               "children": [
                 {
                   "children": [
+                    {
+                      "__filePath": "docs/docs-theme/api/_meta.ts",
+                    },
                     {
                       "__filePath": "docs/docs-theme/api/use-config/page.mdx",
                       "name": "use-config",
@@ -203,6 +219,9 @@ describe('generatePageMapFromFilepaths()', () => {
                   "__filePath": "docs/docs-theme/theme-configuration/page.mdx",
                   "name": "theme-configuration",
                   "route": "/docs/docs-theme/theme-configuration",
+                },
+                {
+                  "__filePath": "docs/docs-theme/_meta.ts",
                 },
               ],
               "name": "docs-theme",
@@ -251,6 +270,9 @@ describe('generatePageMapFromFilepaths()', () => {
                       "__filePath": "docs/guide/advanced/typescript/page.mdx",
                       "name": "typescript",
                       "route": "/docs/guide/advanced/typescript",
+                    },
+                    {
+                      "__filePath": "docs/guide/advanced/_meta.ts",
                     },
                   ],
                   "name": "advanced",
@@ -337,6 +359,9 @@ describe('generatePageMapFromFilepaths()', () => {
                   "name": "syntax-highlighting",
                   "route": "/docs/guide/syntax-highlighting",
                 },
+                {
+                  "__filePath": "docs/guide/_meta.ts",
+                },
               ],
               "name": "guide",
               "route": "/docs/guide",
@@ -345,6 +370,9 @@ describe('generatePageMapFromFilepaths()', () => {
               "__filePath": "docs/page.mdx",
               "name": "index",
               "route": "/docs",
+            },
+            {
+              "__filePath": "docs/_meta.ts",
             },
           ],
           "name": "docs",
