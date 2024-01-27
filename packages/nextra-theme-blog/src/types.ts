@@ -1,11 +1,9 @@
 /* eslint typescript-sort-keys/interface: error */
 import type { ReadingTime } from 'nextra'
-import type { ReactNode } from 'react'
 
 export type NextraBlogTheme =  {
   darkMode?: boolean
   dateFormatter?: (date: Date) => string
-  footer?: ReactNode
   navs?: {
     name: string
     url: string
@@ -17,6 +15,7 @@ export type BlogFrontMatter = {
   author?: string
   date?: Date
   description?: string
+  draft?: boolean
   readingTime?: ReadingTime
   tags?: []
   title?: string
