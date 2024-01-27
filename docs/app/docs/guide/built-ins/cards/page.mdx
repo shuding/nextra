@@ -1,7 +1,13 @@
+export const metadata = {
+  sidebarTitle: 'Cards'
+}
+
 import { CardsIcon, OneIcon, WarningIcon } from '@components/icons'
 import { Cards, RemoteContent } from 'nextra/components'
 import { compileMdx } from 'nextra/compile'
 import { useMDXComponents } from 'nextra-theme-docs'
+
+# Cards Component
 
 export async function CardsPage() {
   const mdx = `
@@ -23,8 +29,6 @@ export async function CardsPage() {
   />
 </Cards>`
   const { result } = await compileMdx(`
-# Cards Component
-
 ## Example
 ${mdx}
 

@@ -1,9 +1,10 @@
 export default {
-  npm2yarn: 'Npm2Yarn',
+  'index': 'Overview',
+  npm2yarn: '',
   mermaid: '',
   'tailwind-css': '',
-  latex: 'LaTeX',
-  table: 'Rendering Tables',
+  latex: '',
+  table: '',
   typescript: '',
-  remote: 'Remote Content'
+  remote: ''
 }

@@ -1,3 +1,4 @@
 export default {
-  start: 'Get Started'
+  index: '',
+  start: ''
 }

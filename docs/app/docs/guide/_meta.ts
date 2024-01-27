@@ -1,12 +1,13 @@
 export default {
+  'index': 'Overview',
   'organize-files': '',
   markdown: '',
   'syntax-highlighting': '',
-  link: 'Next.js Link',
-  image: 'Next.js Image',
-  ssg: 'Next.js SSG',
-  i18n: 'Next.js I18n',
+  link: '',
+  image: '',
+  ssg: '',
+  i18n: '',
   'custom-css': '',
-  advanced: '',
+  advanced: 'Advanced',
   'built-ins': 'Built-ins'
 }

@@ -1,5 +1,6 @@
 export default {
-  start: 'Get Started',
+  'index': '',
+  start: '',
   'page-configuration': '',
   'theme-configuration': '',
   'built-ins': 'Built-ins',
