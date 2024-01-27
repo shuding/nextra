@@ -128,9 +128,6 @@ const config: DocsThemeConfig = {
       </div>
     )
   },
-  toc: {
-    backToTop: true
-  }
 }
 
 export default config
