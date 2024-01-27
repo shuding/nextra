@@ -150,6 +150,6 @@ ${finalResult}
 
 export default HOC_MDXWrapper(MDXLayout, _provideComponents, useTOC, ${JSON.stringify(
     restProps
-  ).slice(0, -1)},frontMatter,title})`
+  ).slice(0, -1)},metadata,title})`
   return rawJs
 }

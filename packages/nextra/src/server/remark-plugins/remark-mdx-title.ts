@@ -4,6 +4,7 @@ import type { MdxjsEsm } from 'hast-util-to-estree/lib/handlers/mdxjs-esm'
 import type { Root } from 'mdast'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
+import { DEFAULT_PROPERTY_PROPS } from '../constants.js'
 import { createAstExportConst, pageTitleFromFilename } from '../utils.js'
 import { getFlattenedValue } from './remark-headings.js'
 
@@ -31,7 +32,7 @@ export const remarkMdxTitle: Plugin<[], Root> = () => (ast, file) => {
   let title = ''
 
   const frontMatterNode = ast.children.find((node: any) =>
-    isExportNode(node, 'frontMatter')
+    isExportNode(node, 'metadata')
   )
   const frontMatter = getFrontMatterASTObject(frontMatterNode as any)
 
@@ -51,6 +52,11 @@ export const remarkMdxTitle: Plugin<[], Root> = () => (ast, file) => {
   if (!title) {
     visit(ast, { type: 'heading', depth: 1 }, node => {
       title = getFlattenedValue(node)
+      frontMatter.push({
+        ...DEFAULT_PROPERTY_PROPS,
+        key: { type: 'Literal', value: 'title' },
+        value: { type: 'Literal', value: title }
+      })
       // Stop traversing immediately
       return false
     })

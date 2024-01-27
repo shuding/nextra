@@ -12,7 +12,7 @@ function process(content: string): Promise<VFile> {
 }
 
 const YAML_FRONTMATTER = '---\nfoo: bar\n---'
-const ESM_FRONTMATTER = "export const frontMatter = { foo: 'bar' }"
+const ESM_FRONTMATTER = "export const metadata = { foo: 'bar' }"
 
 describe('remarkMdxFrontMatter', () => {
   it('should throw error if both yaml/esm frontmatter are used', () => {
@@ -27,7 +27,7 @@ describe('remarkMdxFrontMatter', () => {
 
     it('should export yaml frontmatter', () => {
       expect(clean(file)).resolves.toMatchInlineSnapshot(`
-        "export const frontMatter = {
+        "export const metadata = {
           foo: 'bar'
         }
         function _createMdxContent(props) {
@@ -46,7 +46,7 @@ describe('remarkMdxFrontMatter', () => {
     const file = await process(ESM_FRONTMATTER)
     it('should export esm frontmatter', () => {
       expect(clean(file)).resolves.toMatchInlineSnapshot(`
-        "export const frontMatter = {
+        "export const metadata = {
           foo: 'bar'
         }
         function _createMdxContent(props) {
@@ -99,7 +99,7 @@ array:
     })
     it('esm', async () => {
       const file = await process(
-        `export const frontMatter = ${JSON.stringify(result)}`
+        `export const metadata = ${JSON.stringify(result)}`
       )
       expect(file.data.frontMatter).toEqual(result)
     })

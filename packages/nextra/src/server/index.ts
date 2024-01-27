@@ -11,7 +11,7 @@ import {
 } from './constants.js'
 import { nextraConfigSchema } from './schemas.js'
 import { logger } from './utils.js'
-import { NextraSearchPlugin } from './webpack-plugins/index.js'
+import { NextraPlugin, NextraSearchPlugin } from './webpack-plugins/index.js'
 
 const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
 
@@ -70,12 +70,12 @@ const nextra: Nextra = nextraConfig => {
       webpack(config, options) {
         if (options.nextRuntime !== 'edge' && options.isServer) {
           config.plugins ||= []
-          // config.plugins.push(
-          //   new NextraPlugin({
-          //     locales,
-          //     transformPageMap: nextraConfig.transformPageMap
-          //   })
-          // )
+          config.plugins.push(
+            new NextraPlugin({
+              locales
+              // transformPageMap: nextraConfig.transformPageMap
+            })
+          )
 
           if (loaderOptions.search) {
             config.plugins.push(new NextraSearchPlugin())

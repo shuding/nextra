@@ -11,7 +11,7 @@ function createNode(data: Record<string, unknown>): any {
     type: 'mdxjsEsm',
     data: {
       estree: {
-        body: [createAstExportConst('frontMatter', valueToEstree(data))]
+        body: [createAstExportConst('metadata', valueToEstree(data))]
       }
     }
   }
@@ -21,7 +21,7 @@ export const remarkMdxFrontMatter: Plugin<[], Root> =
   () => (ast: Parent, file) => {
     const yamlNodeIndex = ast.children.findIndex(node => node.type === 'yaml')
     const esmNodeIndex = ast.children.findIndex((node: any) =>
-      isExportNode(node, 'frontMatter')
+      isExportNode(node, 'metadata')
     )
     const hasYaml = yamlNodeIndex !== -1
     const hasEsm = esmNodeIndex !== -1
@@ -45,7 +45,7 @@ export const remarkMdxFrontMatter: Plugin<[], Root> =
     // @ts-expect-error
     const frontMatter = ast.children.find(node =>
       // @ts-expect-error
-      isExportNode(node, 'frontMatter')
+      isExportNode(node, 'metadata')
     ).data.estree.body[0].declaration.declarations[0].init.properties
 
     file.data.frontMatter = estreeToValue(frontMatter)

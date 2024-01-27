@@ -16,7 +16,7 @@ export const CWD = process.cwd()
 
 export const PUBLIC_DIR = path.join(CWD, 'public')
 
-export const CHUNKS_DIR = path.join(CWD)
+export const CHUNKS_DIR = path.join(CWD, '.next', 'static', 'chunks')
 
 export const MARKDOWN_URL_EXTENSION_REGEX = /\.mdx?(?:(?=[#?])|$)/
 
@@ -29,8 +29,6 @@ export const DEFAULT_CONFIG = {
   },
   codeHighlight: true
 } satisfies Partial<NextraConfig>
-
-export const OFFICIAL_THEMES = ['nextra-theme-docs', 'nextra-theme-blog']
 
 export const META_REGEX = /_meta\.[jt]sx?$/
 

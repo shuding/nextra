@@ -1,8 +1,5 @@
-import fs from 'fs/promises'
-import path from 'path'
 import type { Metadata, Viewport } from 'next'
 import { Banner, Footer, Head, Layout, Navbar } from 'nextra-theme-docs'
-import { collectPageMap } from 'nextra/page-map'
 import type { ReactNode } from 'react'
 import './globals.css'
 import { NextraLogo, VercelLogo } from '@components/icons'
@@ -34,12 +31,6 @@ export default async function RootLayout({
 }: {
   children: ReactNode
 }) {
-  const rawJs = await collectPageMap({
-    dir: path.join(process.cwd(), 'docs'),
-    route: '/'
-  })
-  const pageMapPath = path.join(process.cwd(), 'nextra-page-map.mjs')
-  await fs.writeFile(pageMapPath, rawJs)
   const { pageMap } = await import('../nextra-page-map.mjs')
 
   return (

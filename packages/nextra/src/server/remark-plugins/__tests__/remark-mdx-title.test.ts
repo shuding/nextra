@@ -28,7 +28,7 @@ title: ${title}
     it('esm', async () => {
       const title = 'From esm frontMatter'
       const { result } = await compileMdx(
-        `export const frontMatter = { title: '${title}' }
+        `export const metadata = { title: '${title}' }
 
 # Hello`,
         opts
@@ -51,5 +51,12 @@ title: ${title}
   it('should fallback to capitalized filename', async () => {
     const { result } = await compileMdx('', opts)
     expect(clean(result)).resolves.toMatch("const title = 'My Test File'")
+  })
+
+  it('should set metadata.title if missing', async () => {
+    const { result } = await compileMdx('# should attach', opts)
+    expect(clean(result)).resolves.toMatch(`export const metadata = {
+  title: 'should attach'
+}`)
   })
 })
