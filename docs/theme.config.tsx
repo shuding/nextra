@@ -1,14 +1,12 @@
-import { useRouter } from 'next/router'
-import { useConfig } from 'nextra-theme-docs'
+import { usePathname } from 'next/navigation'
 
 const config = {
   head: function useHead() {
-    const config = useConfig()
-    const { route } = useRouter()
-    const isDefault = route === '/' || !config.title
+    const pathname = usePathname()
+    const pageTitle = ''
     const image =
       'https://nextra.site/' +
-      (isDefault ? 'og.jpeg' : `api/og?title=${config.title}`)
+      (pathname === '/' ? 'og.jpeg' : `api/og?title=${pageTitle}`)
 
     return (
       <>
@@ -31,5 +29,5 @@ const config = {
         />
       </>
     )
-  },
+  }
 }

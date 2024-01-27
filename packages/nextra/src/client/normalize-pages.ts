@@ -94,6 +94,18 @@ function findFirstRoute(items: DocsItem[]): string | undefined {
   }
 }
 
+type NormalizedResult = {
+  activeType?: string
+  activeIndex: number
+  activeThemeContext: PageTheme
+  activePath: Item[]
+  directories: Item[]
+  flatDirectories: Item[]
+  docsDirectories: DocsItem[]
+  flatDocsDirectories: DocsItem[]
+  topLevelNavbarItems: (PageItem | MenuItem)[]
+}
+
 export function normalizePages({
   list,
   route,
@@ -106,7 +118,7 @@ export function normalizePages({
   docsRoot?: string
   underCurrentDocsRoot?: boolean
   pageThemeContext?: PageTheme
-}) {
+}): NormalizedResult {
   let _meta: Record<string, any> | undefined
   for (const item of list) {
     if (isMeta(item)) {
@@ -230,7 +242,7 @@ export function normalizePages({
     // If the doc is under the active page root.
     const isCurrentDocsTree = route.startsWith(docsRoot)
 
-    const normalizedChildren: any =
+    const normalizedChildren: undefined | NormalizedResult =
       a.children &&
       normalizePages({
         list: a.children,
@@ -294,7 +306,12 @@ export function normalizePages({
       ) {
         activeThemeContext = normalizedChildren.activeThemeContext
         activeType = normalizedChildren.activeType
-        activePath = [item, ...normalizedChildren.activePath.filter(item => item.display !== 'children')]
+        activePath = [
+          item,
+          ...normalizedChildren.activePath.filter(
+            item => item.display !== 'children'
+          )
+        ]
 
         switch (activeType) {
           case 'page':
