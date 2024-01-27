@@ -31,7 +31,7 @@ export default async function RootLayout({
 }: {
   children: ReactNode
 }) {
-  const { pageMap } = await import('../nextra-page-map.mjs')
+  const { pageMap } = await import('.next/static/chunks/nextra-page-map-.mjs')
 
   return (
     <html lang="en" dir="ltr">

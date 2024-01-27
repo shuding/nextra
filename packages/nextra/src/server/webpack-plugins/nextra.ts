@@ -5,7 +5,11 @@ import type { Compiler } from 'webpack'
 import type { NextraConfig } from '../../types'
 import { CHUNKS_DIR, IS_PRODUCTION } from '../constants.js'
 import { APP_DIR } from '../file-system.js'
-import { collectPageMap } from '../page-map.js'
+import {
+  generatePageMapFromFilepaths,
+  getFilepaths
+} from '../generate-page-map.js'
+import { collectFiles, collectPageMap } from '../page-map.js'
 
 // import { logger } from '../utils'
 
@@ -47,13 +51,21 @@ export class NextraPlugin {
 
       try {
         for (const locale of locales) {
-          const route = `/${locale}`
-          const dir = path.join(APP_DIR, locale)
+          // const route = `/${locale}`
+          // const dir = path.join(APP_DIR, locale)
+
+          // const { pageMap, imports, dynamicMetaImports } = await collectFiles({
+          //   dir,
+          //   route,
+          //   isFollowingSymlink: false
+          // })
+
+          const relativePaths = await getFilepaths({ appDir: APP_DIR })
+
+          const pageMap = generatePageMapFromFilepaths(relativePaths)
           const rawJs = await collectPageMap({
-            dir,
-            route,
             locale,
-            transformPageMap
+            pageMap
           })
 
           await fs.writeFile(

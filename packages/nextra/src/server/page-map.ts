@@ -6,7 +6,7 @@ import gracefulFs from 'graceful-fs'
 import grayMatter from 'gray-matter'
 import pLimit from 'p-limit'
 import slash from 'slash'
-import type { NextraConfig, PageMapItem } from '../types'
+import type { PageMapItem } from '../types'
 import {
   CHUNKS_DIR,
   CWD,
@@ -51,7 +51,7 @@ function cleanFileName(name: string): string {
   )
 }
 
-async function collectFiles({
+export async function collectFiles({
   dir,
   route,
   imports = [],
@@ -177,28 +177,38 @@ async function collectFiles({
  * https://github.com/nodejs/node/issues/31710
  */
 function getImportPath(filePath: string) {
-  return slash('./' + path.relative(CHUNKS_DIR, filePath))
+  return slash(path.relative(CHUNKS_DIR, path.join(APP_DIR, filePath)))
 }
 
-function convertPageMapToAst(pageMap: PageMapItem[]): ArrayExpression {
+function convertPageMapToAst(
+  pageMap: PageMapItem[],
+  imports: Import[]
+): ArrayExpression {
   const elements = pageMap.map(item => {
     if ('children' in item) {
       return createAstObject({
         name: item.name,
         route: item.route,
-        children: convertPageMapToAst(item.children)
+        children: convertPageMapToAst(item.children, imports)
       })
     }
     if ('route' in item) {
+      // @ts-expect-error
+      const name = cleanFileName(item.__pagePath)
+      // @ts-expect-error
+      imports.push({ importName: name, filePath: item.__pagePath })
       return createAstObject({
         name: item.name,
         route: item.route,
-        frontMatter: valueToEstree(item.frontMatter)
+        frontMatter: { type: 'Identifier', name }
       })
     }
+      // @ts-expect-error
+    const name = cleanFileName(item.__metaPath)
+    // @ts-expect-error
+    imports.push({ importName: name, filePath: item.__metaPath })
     return createAstObject({
-      // @ts-expect-error -- item.data is string
-      data: { type: 'Identifier', name: item.data }
+      data: { type: 'Identifier', name }
     })
   })
 
@@ -206,27 +216,24 @@ function convertPageMapToAst(pageMap: PageMapItem[]): ArrayExpression {
 }
 
 export async function collectPageMap({
-  dir,
-  route = '/',
   locale = '',
-  transformPageMap
+  pageMap,
+  imports = [],
+  dynamicMetaImports = []
 }: {
-  dir: string
-  route?: string
   locale?: string
-  transformPageMap?: NextraConfig['transformPageMap']
+  pageMap: PageMapItem[]
+  imports?: Import[]
+  dynamicMetaImports?: DynamicImport[]
 }): Promise<string> {
-  const { pageMap, imports, dynamicMetaImports } = await collectFiles({
-    dir,
-    route,
-    isFollowingSymlink: false
-  })
-
+  const someImports: Import[] = []
   const pageMapAst = convertPageMapToAst(
-    transformPageMap ? transformPageMap(pageMap, locale) : pageMap
+    pageMap,
+    someImports
+    // transformPageMap ? transformPageMap(pageMap, locale) : pageMap
   )
 
-  const metaImportsAST: ImportDeclaration[] = imports
+  const metaImportsAST: ImportDeclaration[] = someImports
     // localeCompare to avoid race condition
     .sort((a, b) => a.filePath.localeCompare(b.filePath))
     .map(({ filePath, importName }) => ({
@@ -235,12 +242,12 @@ export async function collectPageMap({
       specifiers: [
         {
           local: { type: 'Identifier', name: importName },
-          ...(IMPORT_FRONTMATTER && MARKDOWN_EXTENSION_REGEX.test(filePath)
-            ? {
+          ...(META_REGEX.test(filePath)
+            ? { type: 'ImportDefaultSpecifier' }
+            : {
                 type: 'ImportSpecifier',
-                imported: { type: 'Identifier', name: 'frontMatter' }
-              }
-            : { type: 'ImportDefaultSpecifier' })
+                imported: { type: 'Identifier', name: 'metadata' }
+              })
         }
       ]
     }))
