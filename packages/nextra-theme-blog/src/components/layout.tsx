@@ -1,4 +1,3 @@
-import type { NextraThemeLayoutProps } from 'nextra'
 import type { ReactElement, ReactNode } from 'react'
 import { ThemeProvider } from './next-themes'
 import '../style.css'
@@ -11,7 +10,7 @@ export function Footer({
   return <small className="_mt-32 _block">{children}</small>
 }
 
-export function Layout({ children }: NextraThemeLayoutProps) {
+export function Layout({ children }: { children: ReactNode }): ReactElement {
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <article
