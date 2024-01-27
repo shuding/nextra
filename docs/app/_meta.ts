@@ -25,12 +25,5 @@ export default {
     theme: {
       typesetting: 'article'
     }
-  },
-  '404': {
-    type: 'page',
-    theme: {
-      timestamp: false,
-      typesetting: 'article'
-    }
   }
 }
