@@ -25,7 +25,6 @@ import type {
 import {
   CWD,
   DEFAULT_LOCALE,
-  ERROR_ROUTES,
   MARKDOWN_URL_EXTENSION_REGEX
 } from './constants.js'
 import {
@@ -138,9 +137,7 @@ export async function compileMdx(
   }
 
   let searchIndexKey: string | null = null
-  if (ERROR_ROUTES.has(route)) {
-    /* skip */
-  } else if (typeof search === 'object') {
+  if (typeof search === 'object') {
     if (search.indexKey) {
       searchIndexKey = search.indexKey(filePath, route, locale)
       if (searchIndexKey === '') {

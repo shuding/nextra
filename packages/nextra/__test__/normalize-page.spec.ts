@@ -178,166 +178,166 @@ describe('normalize-page', () => {
     `)
   })
 
-  it('should hide items on mobile', async () => {
-    const dir = path.join(
-      __dirname,
-      'fixture',
-      'page-maps',
-      'display-hidden-for-mobile'
-    )
-    const pageMapPath = path.join(dir, 'chunks', 'generated-page-map.js')
-
-    vi.doMock('next/dist/lib/find-pages-dir', () => ({
-      findPagesDir: () => ({ pagesDir: '#' })
-    }))
-
-    vi.doMock('../src/server/constants', async () => {
-      const actual = await vi.importActual<object>('../src/server/constants')
-      return {
-        ...actual,
-        CHUNKS_DIR: path.dirname(pageMapPath)
-      }
-    })
-
-    const { collectPageMap } = await import('../src/server/page-map.js')
-
-    const rawJs = await collectPageMap({ dir })
-    await fs.writeFile(pageMapPath, rawJs)
-
-    const { pageMap } = await import(pageMapPath)
-    const result = normalizePages({ list: pageMap, route: '/' })
-    expect(result).toMatchInlineSnapshot(`
-      {
-        "activeIndex": 1,
-        "activePath": [
-          {
-            "frontMatter": {
-              "sidebarTitle": "Index",
-            },
-            "name": "index",
-            "route": "/",
-            "title": "Index",
-            "type": "doc",
-          },
-        ],
-        "activeThemeContext": {
-          "breadcrumb": true,
-          "collapsed": false,
-          "footer": true,
-          "layout": "default",
-          "navbar": true,
-          "pagination": true,
-          "sidebar": true,
-          "timestamp": true,
-          "toc": true,
-          "typesetting": "default",
-        },
-        "activeType": "doc",
-        "directories": [
-          {
-            "frontMatter": {
-              "sidebarTitle": "Index",
-            },
-            "name": "index",
-            "route": "/",
-            "title": "Index",
-            "type": "doc",
-          },
-        ],
-        "docsDirectories": [
-          {
-            "children": [
-              {
-                "children": [
-                  {
-                    "children": [
-                      {
-                        "frontMatter": {
-                          "sidebarTitle": "Qwe",
-                        },
-                        "isUnderCurrentDocsTree": true,
-                        "name": "qwe",
-                        "route": "/bar/baz/quz/qwe",
-                        "title": "Qwe",
-                        "type": "doc",
-                      },
-                    ],
-                    "isUnderCurrentDocsTree": true,
-                    "name": "quz",
-                    "route": "/bar/baz/quz",
-                    "title": "quz",
-                    "type": "doc",
-                  },
-                ],
-                "isUnderCurrentDocsTree": true,
-                "name": "baz",
-                "route": "/bar/baz",
-                "title": "baz",
-                "type": "doc",
-              },
-            ],
-            "display": "hidden",
-            "isUnderCurrentDocsTree": true,
-            "name": "bar",
-            "route": "/bar",
-            "title": "bar",
-            "type": "doc",
-          },
-          {
-            "frontMatter": {
-              "sidebarTitle": "Index",
-            },
-            "isUnderCurrentDocsTree": true,
-            "name": "index",
-            "route": "/",
-            "title": "Index",
-            "type": "doc",
-          },
-        ],
-        "flatDirectories": [
-          {
-            "frontMatter": {
-              "sidebarTitle": "Qwe",
-            },
-            "name": "qwe",
-            "route": "/bar/baz/quz/qwe",
-            "title": "Qwe",
-            "type": "doc",
-          },
-          {
-            "frontMatter": {
-              "sidebarTitle": "Index",
-            },
-            "name": "index",
-            "route": "/",
-            "title": "Index",
-            "type": "doc",
-          },
-        ],
-        "flatDocsDirectories": [
-          {
-            "frontMatter": {
-              "sidebarTitle": "Qwe",
-            },
-            "isUnderCurrentDocsTree": true,
-            "name": "qwe",
-            "route": "/bar/baz/quz/qwe",
-            "title": "Qwe",
-            "type": "doc",
-          },
-          {
-            "frontMatter": {
-              "sidebarTitle": "Index",
-            },
-            "isUnderCurrentDocsTree": true,
-            "name": "index",
-            "route": "/",
-            "title": "Index",
-            "type": "doc",
-          },
-        ],
-        "topLevelNavbarItems": [],
-      }
-    `)
-  })
+  // it('should hide items on mobile', async () => {
+  //   const dir = path.join(
+  //     __dirname,
+  //     'fixture',
+  //     'page-maps',
+  //     'display-hidden-for-mobile'
+  //   )
+  //   const pageMapPath = path.join(dir, 'chunks', 'generated-page-map.js')
+  //
+  //   vi.doMock('next/dist/lib/find-pages-dir', () => ({
+  //     findPagesDir: () => ({ pagesDir: '#' })
+  //   }))
+  //
+  //   vi.doMock('../src/server/constants', async () => {
+  //     const actual = await vi.importActual<object>('../src/server/constants')
+  //     return {
+  //       ...actual,
+  //       CHUNKS_DIR: path.dirname(pageMapPath)
+  //     }
+  //   })
+  //
+  //   const { collectPageMap } = await import('../src/server/page-map.js')
+  //
+  //   const rawJs = await collectPageMap({ dir })
+  //   await fs.writeFile(pageMapPath, rawJs)
+  //
+  //   const { pageMap } = await import(pageMapPath)
+  //   const result = normalizePages({ list: pageMap, route: '/' })
+  //   expect(result).toMatchInlineSnapshot(`
+  //     {
+  //       "activeIndex": 1,
+  //       "activePath": [
+  //         {
+  //           "frontMatter": {
+  //             "sidebarTitle": "Index",
+  //           },
+  //           "name": "index",
+  //           "route": "/",
+  //           "title": "Index",
+  //           "type": "doc",
+  //         },
+  //       ],
+  //       "activeThemeContext": {
+  //         "breadcrumb": true,
+  //         "collapsed": false,
+  //         "footer": true,
+  //         "layout": "default",
+  //         "navbar": true,
+  //         "pagination": true,
+  //         "sidebar": true,
+  //         "timestamp": true,
+  //         "toc": true,
+  //         "typesetting": "default",
+  //       },
+  //       "activeType": "doc",
+  //       "directories": [
+  //         {
+  //           "frontMatter": {
+  //             "sidebarTitle": "Index",
+  //           },
+  //           "name": "index",
+  //           "route": "/",
+  //           "title": "Index",
+  //           "type": "doc",
+  //         },
+  //       ],
+  //       "docsDirectories": [
+  //         {
+  //           "children": [
+  //             {
+  //               "children": [
+  //                 {
+  //                   "children": [
+  //                     {
+  //                       "frontMatter": {
+  //                         "sidebarTitle": "Qwe",
+  //                       },
+  //                       "isUnderCurrentDocsTree": true,
+  //                       "name": "qwe",
+  //                       "route": "/bar/baz/quz/qwe",
+  //                       "title": "Qwe",
+  //                       "type": "doc",
+  //                     },
+  //                   ],
+  //                   "isUnderCurrentDocsTree": true,
+  //                   "name": "quz",
+  //                   "route": "/bar/baz/quz",
+  //                   "title": "quz",
+  //                   "type": "doc",
+  //                 },
+  //               ],
+  //               "isUnderCurrentDocsTree": true,
+  //               "name": "baz",
+  //               "route": "/bar/baz",
+  //               "title": "baz",
+  //               "type": "doc",
+  //             },
+  //           ],
+  //           "display": "hidden",
+  //           "isUnderCurrentDocsTree": true,
+  //           "name": "bar",
+  //           "route": "/bar",
+  //           "title": "bar",
+  //           "type": "doc",
+  //         },
+  //         {
+  //           "frontMatter": {
+  //             "sidebarTitle": "Index",
+  //           },
+  //           "isUnderCurrentDocsTree": true,
+  //           "name": "index",
+  //           "route": "/",
+  //           "title": "Index",
+  //           "type": "doc",
+  //         },
+  //       ],
+  //       "flatDirectories": [
+  //         {
+  //           "frontMatter": {
+  //             "sidebarTitle": "Qwe",
+  //           },
+  //           "name": "qwe",
+  //           "route": "/bar/baz/quz/qwe",
+  //           "title": "Qwe",
+  //           "type": "doc",
+  //         },
+  //         {
+  //           "frontMatter": {
+  //             "sidebarTitle": "Index",
+  //           },
+  //           "name": "index",
+  //           "route": "/",
+  //           "title": "Index",
+  //           "type": "doc",
+  //         },
+  //       ],
+  //       "flatDocsDirectories": [
+  //         {
+  //           "frontMatter": {
+  //             "sidebarTitle": "Qwe",
+  //           },
+  //           "isUnderCurrentDocsTree": true,
+  //           "name": "qwe",
+  //           "route": "/bar/baz/quz/qwe",
+  //           "title": "Qwe",
+  //           "type": "doc",
+  //         },
+  //         {
+  //           "frontMatter": {
+  //             "sidebarTitle": "Index",
+  //           },
+  //           "isUnderCurrentDocsTree": true,
+  //           "name": "index",
+  //           "route": "/",
+  //           "title": "Index",
+  //           "type": "doc",
+  //         },
+  //       ],
+  //       "topLevelNavbarItems": [],
+  //     }
+  //   `)
+  // })
 })

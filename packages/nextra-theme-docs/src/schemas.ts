@@ -31,7 +31,7 @@ export const themeSchema = /* @__PURE__ */ (() =>
     feedback: z.strictObject({
       content: z.custom<ReactNode | FC>(...reactNode),
       labels: z.string(),
-      useLink: z.function().returns(z.string()).optional()
+      useLink: z.custom<(title: string) => string>()
     }),
     gitTimestamp: z.custom<ReactNode | FC<{ timestamp: Date }>>(...reactNode),
     i18n: i18nSchema,

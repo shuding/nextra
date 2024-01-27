@@ -7,7 +7,6 @@ import type { z } from 'zod'
 import { Anchor } from '../components'
 import type { themeSchema } from '../schemas'
 import { getGitIssueUrl, useGitEditUrl } from '../utils'
-import { useConfig } from './config'
 
 export type DocsThemeConfig = z.infer<typeof themeSchema>
 
@@ -40,13 +39,12 @@ export function ThemeConfigProvider({
       ...value.editLink
     },
     feedback: {
-      useLink() {
-        const config = useConfig()
+      useLink(title) {
         const themeConfig = useThemeConfig()
         return getGitIssueUrl({
           labels: themeConfig.feedback.labels,
           repository: themeConfig.docsRepositoryBase,
-          title: `Feedback for “${config.title}”`
+          title: `Feedback for “${title}”`
         })
       },
       ...value.feedback

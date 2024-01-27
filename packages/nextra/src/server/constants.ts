@@ -6,11 +6,7 @@ import path from 'path'
 import type { Property } from 'estree'
 import type { NextraConfig } from '../types'
 
-export {
-  MARKDOWN_EXTENSION_REGEX,
-  ERROR_ROUTES,
-  DEFAULT_LOCALE
-} from '../constants.js'
+export { MARKDOWN_EXTENSION_REGEX, DEFAULT_LOCALE } from '../constants.js'
 
 export const CWD = process.cwd()
 

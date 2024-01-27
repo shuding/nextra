@@ -13,6 +13,7 @@ import { BackToTop } from './back-to-top'
 export type TOCProps = {
   toc: Heading[]
   filePath: string
+  pageTitle: string
 }
 
 const linkClassName = cn(
@@ -20,7 +21,7 @@ const linkClassName = cn(
   'contrast-more:_text-gray-800 contrast-more:dark:_text-gray-50'
 )
 
-export function TOC({ toc, filePath }: TOCProps): ReactElement {
+export function TOC({ toc, filePath, pageTitle }: TOCProps): ReactElement {
   const activeAnchor = useActiveAnchor()
   const tocRef = useRef<HTMLUListElement>(null)
   const themeConfig = useThemeConfig()
@@ -104,7 +105,7 @@ export function TOC({ toc, filePath }: TOCProps): ReactElement {
           {themeConfig.feedback.content ? (
             <Anchor
               className={linkClassName}
-              href={themeConfig.feedback.useLink?.()}
+              href={themeConfig.feedback.useLink(pageTitle)}
               newWindow
             >
               {renderComponent(themeConfig.feedback.content)}
