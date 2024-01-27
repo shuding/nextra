@@ -2,5 +2,5 @@ export default {
   basic: 'Uso Básico',
   auth: 'Autenticación',
   'infinite-loading': 'Carga Infinita',
-  'error-handling': 'Manejo De Errores',
+  'error-handling': 'Manejo De Errores'
 }
