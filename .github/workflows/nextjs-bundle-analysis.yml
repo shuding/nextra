@@ -1,7 +1,7 @@
 name: Next.js Bundle Analysis
 
 on:
-  pull_request:
+  pull_request_target:
   push:
     branches: [main, v3]
   workflow_dispatch:
