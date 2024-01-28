@@ -22,8 +22,8 @@ bar[^1]
     )
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
       "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
-      const title = ''
-      const frontMatter = {}
+      export const title = ''
+      export const metadata = {}
       export function useTOC(props) {
         return [
           {
@@ -114,8 +114,8 @@ import { Steps } from 'nextra/components'
     )
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
       "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
-      const title = ''
-      const frontMatter = {}
+      export const title = ''
+      export const metadata = {}
       import { Steps } from 'nextra/components'
       export function useTOC(props) {
         return [
