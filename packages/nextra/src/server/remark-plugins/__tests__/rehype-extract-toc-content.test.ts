@@ -186,7 +186,10 @@ export const frontMatter = {
     )
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
       "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
-      const title = 'Heading 1'
+      export const title = 'Heading 1'
+      export const metadata = {
+        title: 'Heading 1'
+      }
       export const myVar = 'interpolated'
       export const Test = () => {
         const _components = {
@@ -360,8 +363,8 @@ import { RemoteContent } from 'nextra/components'
       expect(res).toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic @jsxImportSource react*/
         import { useMDXComponents as _provideComponents } from 'nextra/mdx'
-        const title = '[[...slug]]'
-        const frontMatter = {}
+        export const title = '[[...slug]]'
+        export const metadata = {}
         import { RemoteContent } from 'nextra/components'
         export function useTOC(props) {
           return [
@@ -419,7 +422,7 @@ export const myVar = 123
         const { Fragment: _Fragment, jsx: _jsx, jsxs: _jsxs } = arguments[0]
         const { useMDXComponents: _provideComponents } = arguments[0]
         const title = ''
-        const frontMatter = {}
+        const metadata = {}
         const myVar = 123
         function useTOC(props) {
           return [
@@ -465,7 +468,7 @@ export const myVar = 123
         }
         return {
           title,
-          frontMatter,
+          metadata,
           myVar,
           useTOC,
           default: _createMdxContent

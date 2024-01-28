@@ -23,7 +23,7 @@ export const Test = ({value}) => value
       "'use strict'
       const { useMDXComponents: _provideComponents } = arguments[0]
       const title = ''
-      const frontMatter = {}
+      const metadata = {}
       const myVar = 123
       const Test = ({ value }) => value
       function useTOC(props) {
@@ -53,7 +53,7 @@ export const Test = ({value}) => value
       }
       return {
         title,
-        frontMatter,
+        metadata,
         myVar,
         Test,
         useTOC,
