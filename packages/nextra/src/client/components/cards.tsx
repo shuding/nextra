@@ -34,13 +34,20 @@ function Card({
   href,
   ...props
 }: {
-  children: ReactNode
   title: string
   icon: ReactNode
-  image?: boolean
   arrow?: boolean
   href: string
-}) {
+} & (
+  | {
+      children?: never
+      image?: false
+    }
+  | {
+      children: ReactNode
+      image: true
+    }
+)) {
   const animatedArrow = arrow ? arrowEl : null
 
   if (image) {
