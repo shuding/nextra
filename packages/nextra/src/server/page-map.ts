@@ -123,16 +123,15 @@ export async function collectFiles({
           // } else {
           const content = await fs.readFile(filePath, 'utf8')
           const { data } = grayMatter(content)
-          const frontMatter = {
-            sidebarTitle: pageTitleFromFilename(name),
-            ...data
+          if (!data.title) {
+            data.sidebarTitle = pageTitleFromFilename(name)
           }
           // }
 
           return {
             name,
             route: fileRoute,
-            frontMatter
+            frontMatter: data
           }
         }
 

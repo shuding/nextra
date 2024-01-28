@@ -1,5 +1,11 @@
 # nextra
 
+## 3.0.0-alpha.15
+
+### Patch Changes
+
+- 1a364694: add `frontMatter.sidebarTitle` only if `frontMatter.title` is empty
+
 ## 3.0.0-alpha.14
 
 ## 3.0.0-alpha.13
