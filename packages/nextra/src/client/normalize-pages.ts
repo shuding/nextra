@@ -42,7 +42,7 @@ function extendMeta(
   return {
     ...fallback,
     ..._meta,
-    display: metadata.display || _meta.display,
+    display: metadata.display || _meta.display || fallback.display,
     theme
   }
 }
