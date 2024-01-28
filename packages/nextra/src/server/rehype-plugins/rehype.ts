@@ -1,6 +1,6 @@
 import type { Element } from 'hast'
 import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
-import { bundledLanguages, getHighlighter } from 'shikiji'
+import { bundledLanguages, getHighlighter } from 'shiki'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 
@@ -27,6 +27,7 @@ export const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS: RehypePrettyCodeOptions = {
     light: 'github-light',
     dark: 'github-dark'
   },
+  // @ts-expect-error wait for https://github.com/rehype-pretty/rehype-pretty-code/pull/172
   getHighlighter(opts) {
     return getHighlighter({
       ...opts,
