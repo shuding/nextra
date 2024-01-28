@@ -141,7 +141,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
             "date": 2021-08-27T00:00:00.000Z,
             "description": "Almost 2 years ago we open sourced SWR, the tiny data-fetching React library that people love. Today we are reaching another milestone: the 1.0 version of SWR",
             "image": "https://assets.vercel.com/image/upload/v1630059453/swr/v1.png",
-            "sidebarTitle": "SWR V1",
             "title": "Announcing SWR 1.0",
           },
           "name": "swr-v1",
@@ -540,7 +539,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
         {
           "frontMatter": {
             "full": true,
-            "sidebarTitle": "Auth",
             "title": "Authentication",
           },
           "name": "auth",
@@ -549,7 +547,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
         {
           "frontMatter": {
             "full": true,
-            "sidebarTitle": "Basic",
             "title": "Basic Usage",
           },
           "name": "basic",
@@ -558,7 +555,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
         {
           "frontMatter": {
             "full": true,
-            "sidebarTitle": "Error Handling",
             "title": "Error Handling",
           },
           "name": "error-handling",
@@ -574,7 +570,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
         {
           "frontMatter": {
             "full": true,
-            "sidebarTitle": "Infinite Loading",
             "title": "Infinite Loading",
           },
           "name": "infinite-loading",
@@ -583,7 +578,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
         {
           "frontMatter": {
             "full": true,
-            "sidebarTitle": "SSR",
             "title": "Next.js SSR",
           },
           "name": "ssr",
@@ -603,7 +597,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
     {
       "frontMatter": {
         "searchable": false,
-        "sidebarTitle": "Index",
         "title": "React Hooks for Data Fetching",
       },
       "name": "index",
@@ -862,7 +855,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
         {
           "frontMatter": {
             "full": true,
-            "sidebarTitle": "Auth",
             "title": "Autenticación",
           },
           "name": "auth",
@@ -871,7 +863,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
         {
           "frontMatter": {
             "full": true,
-            "sidebarTitle": "Basic",
             "title": "Uso Básico",
           },
           "name": "basic",
@@ -880,7 +871,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
         {
           "frontMatter": {
             "full": true,
-            "sidebarTitle": "Error Handling",
             "title": "Manejo De Errores",
           },
           "name": "error-handling",
@@ -889,7 +879,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
         {
           "frontMatter": {
             "full": true,
-            "sidebarTitle": "Infinite Loading",
             "title": "Carga Infinita",
           },
           "name": "infinite-loading",
@@ -901,7 +890,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
     },
     {
       "frontMatter": {
-        "sidebarTitle": "Index",
         "title": "Biblioteca React Hooks para la obtención de datos",
       },
       "name": "index",
@@ -964,7 +952,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
             "date": 2021-08-27T00:00:00.000Z,
             "description": "Почти 2 года назад мы сделали SWR — крошечную React библиотеку с открытым исходным кодом для выборки данных, которую люди полюбили. Сегодня мы приближаемся к еще одной вехе: версии 1.0 SWR!",
             "image": "https://assets.vercel.com/image/upload/v1630059453/swr/v1.png",
-            "sidebarTitle": "SWR V1",
             "title": "Представляем SWR 1.0",
           },
           "name": "swr-v1",
@@ -1184,7 +1171,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
         {
           "frontMatter": {
             "full": true,
-            "sidebarTitle": "Auth",
             "title": "Аутентификация",
           },
           "name": "auth",
@@ -1193,7 +1179,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
         {
           "frontMatter": {
             "full": true,
-            "sidebarTitle": "Basic",
             "title": "Основное использование",
           },
           "name": "basic",
@@ -1202,7 +1187,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
         {
           "frontMatter": {
             "full": true,
-            "sidebarTitle": "Error Handling",
             "title": "Обработка ошибок",
           },
           "name": "error-handling",
@@ -1211,7 +1195,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
         {
           "frontMatter": {
             "full": true,
-            "sidebarTitle": "Infinite Loading",
             "title": "Бесконечная загрузка",
           },
           "name": "infinite-loading",
@@ -1220,7 +1203,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
         {
           "frontMatter": {
             "full": true,
-            "sidebarTitle": "SSR",
             "title": "Next.js SSR",
           },
           "name": "ssr",
@@ -1232,7 +1214,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
     },
     {
       "frontMatter": {
-        "sidebarTitle": "Index",
         "title": "React хуки для получения данных",
       },
       "name": "index",

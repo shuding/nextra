@@ -71,7 +71,6 @@ describe('collectPageMap', () => {
           name: "swr-v1",
           route: "/en/blog/swr-v1",
           frontMatter: {
-            "sidebarTitle": "SWR V1",
             "title": "Announcing SWR 1.0",
             "image": "https://assets.vercel.com/image/upload/v1630059453/swr/v1.png",
             "description": "Almost 2 years ago we open sourced SWR, the tiny data-fetching React library that people love. Today we are reaching another milestone: the 1.0 version of SWR",
@@ -89,8 +88,8 @@ describe('collectPageMap', () => {
         name: "blog",
         route: "/en/blog",
         frontMatter: {
-          "sidebarTitle": "Blog",
-          "searchable": false
+          "searchable": false,
+          "sidebarTitle": "Blog"
         }
       }, {
         name: "docs",
@@ -343,7 +342,6 @@ describe('collectPageMap', () => {
           name: "auth",
           route: "/en/examples/auth",
           frontMatter: {
-            "sidebarTitle": "Auth",
             "title": "Authentication",
             "full": true
           }
@@ -351,7 +349,6 @@ describe('collectPageMap', () => {
           name: "basic",
           route: "/en/examples/basic",
           frontMatter: {
-            "sidebarTitle": "Basic",
             "title": "Basic Usage",
             "full": true
           }
@@ -359,7 +356,6 @@ describe('collectPageMap', () => {
           name: "error-handling",
           route: "/en/examples/error-handling",
           frontMatter: {
-            "sidebarTitle": "Error Handling",
             "title": "Error Handling",
             "full": true
           }
@@ -373,7 +369,6 @@ describe('collectPageMap', () => {
           name: "infinite-loading",
           route: "/en/examples/infinite-loading",
           frontMatter: {
-            "sidebarTitle": "Infinite Loading",
             "title": "Infinite Loading",
             "full": true
           }
@@ -381,7 +376,6 @@ describe('collectPageMap', () => {
           name: "ssr",
           route: "/en/examples/ssr",
           frontMatter: {
-            "sidebarTitle": "SSR",
             "title": "Next.js SSR",
             "full": true
           }
@@ -396,7 +390,6 @@ describe('collectPageMap', () => {
         name: "index",
         route: "/en",
         frontMatter: {
-          "sidebarTitle": "Index",
           "title": "React Hooks for Data Fetching",
           "searchable": false
         }
