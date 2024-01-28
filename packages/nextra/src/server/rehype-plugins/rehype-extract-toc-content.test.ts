@@ -1,5 +1,5 @@
-import { clean } from '../../../../__test__/test-utils.js'
-import { compileMdx } from '../../compile.js'
+import { clean } from '../../../__test__/test-utils.js'
+import { compileMdx } from '../compile.js'
 
 const opts = {
   mdxOptions: {
@@ -178,7 +178,7 @@ export const Test = () => <span>Hello</span>
 
 ###### Dada 123 true
 
-export const frontMatter = {
+export const metadata = {
   test: 'extract toc content'
 }
     `,
@@ -187,9 +187,6 @@ export const frontMatter = {
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
       "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
       export const title = 'Heading 1'
-      export const metadata = {
-        title: 'Heading 1'
-      }
       export const myVar = 'interpolated'
       export const Test = () => {
         const _components = {
@@ -198,8 +195,9 @@ export const frontMatter = {
         }
         return <_components.span>Hello</_components.span>
       }
-      const frontMatter = {
-        test: 'extract toc content'
+      export const metadata = {
+        test: 'extract toc content',
+        title: 'Heading 1'
       }
       export function useTOC(props) {
         const _components = {
@@ -485,7 +483,7 @@ export const myVar = 123
         "
       `)
       expect(res).toMatch('default: _createMdxContent')
-      expect(res).toMatch('const frontMatter')
+      expect(res).toMatch('const metadata = {')
       expect(res).toMatch('function useTOC')
       expect(res).not.toMatch('MDXContent')
     })
