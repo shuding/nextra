@@ -1,7 +1,10 @@
 export default {
   index: {
     type: 'page',
-    display: 'hidden'
+    display: 'hidden',
+    theme: {
+      layout: 'raw'
+    }
   },
   docs: {
     type: 'page',

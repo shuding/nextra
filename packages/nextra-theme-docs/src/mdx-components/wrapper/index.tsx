@@ -5,7 +5,7 @@ import { ClientWrapper } from './wrapper.client'
 
 export const Wrapper: NextraMDXContent = ({ toc, children, ...restProps }) => {
   return (
-    <div className="_mx-auto _flex _max-w-[90rem]">
+    <>
       <ClientWrapper
         // @ts-expect-error fixme
         toc={toc.map(item => ({
@@ -17,6 +17,6 @@ export const Wrapper: NextraMDXContent = ({ toc, children, ...restProps }) => {
       >
         {children}
       </ClientWrapper>
-    </div>
+    </>
   )
 }

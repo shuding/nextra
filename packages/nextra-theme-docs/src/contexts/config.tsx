@@ -6,7 +6,8 @@ import type { PageOpts } from 'nextra'
 import { useFSRoute } from 'nextra/hooks'
 import { normalizePages } from 'nextra/normalize-pages'
 import type { ReactElement, ReactNode } from 'react'
-import { createContext, useContext, useEffect, useMemo, useState } from 'react'
+import { createContext, useContext, useMemo, useState } from 'react'
+import { Sidebar } from '../components'
 import { MenuProvider } from './menu'
 
 type Config = {
@@ -43,23 +44,40 @@ export function ConfigProvider({
     [pageOpts.pageMap, fsPath]
   )
 
-  const { activeType, activeThemeContext } = normalizePagesResult
+  const { activeType, activeThemeContext, directories, docsDirectories } =
+    normalizePagesResult
+  const hideSidebar = !activeThemeContext.sidebar || activeType === 'page'
 
   const extendedConfig: Config = {
-    hideSidebar: !activeThemeContext.sidebar || activeType === 'page',
+    hideSidebar,
     normalizePagesResult
   }
 
-  // Always close mobile nav when route was changed (e.g. logo click)
-  useEffect(() => {
-    setMenu(false)
-  }, [fsPath])
+  const content = (
+    <>
+      <Sidebar
+        docsDirectories={docsDirectories}
+        directories={directories}
+        // toc={toc}
+        asPopover={hideSidebar}
+        includePlaceholder={activeThemeContext.layout === 'default'}
+      />
+      {children}
+    </>
+  )
+
+  const main = // @ts-expect-error -- fixme
+    activeThemeContext.layout === 'raw' ? (
+      content
+    ) : (
+      <div className="_mx-auto _flex _max-w-[90rem]">{content}</div>
+    )
 
   return (
     <ConfigContext.Provider value={extendedConfig}>
       <MenuProvider value={{ menu, setMenu }}>
         {activeThemeContext.navbar && navbar}
-        {children}
+        {main}
         {activeThemeContext.footer && footer}
       </MenuProvider>
     </ConfigContext.Provider>

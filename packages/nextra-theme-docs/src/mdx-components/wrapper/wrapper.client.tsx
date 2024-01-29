@@ -3,7 +3,7 @@
 import cn from 'clsx'
 import type { NextraMDXContent } from 'nextra'
 import type { ComponentProps, ReactNode } from 'react'
-import { Breadcrumb, NavLinks, Sidebar, TOC } from '../../components'
+import { Breadcrumb, NavLinks, TOC } from '../../components'
 import { useConfig, useThemeConfig } from '../../contexts'
 import { renderComponent } from '../../utils'
 
@@ -32,8 +32,6 @@ export function ClientWrapper({
   const {
     activeType,
     activeThemeContext: themeContext,
-    docsDirectories,
-    directories,
     activePath,
     flatDocsDirectories,
     activeIndex
@@ -116,13 +114,6 @@ export function ClientWrapper({
 
   return (
     <>
-      <Sidebar
-        docsDirectories={docsDirectories}
-        directories={directories}
-        toc={toc}
-        asPopover={config.hideSidebar}
-        includePlaceholder={themeContext.layout === 'default'}
-      />
       {tocEl}
       {skipNavContent}
       {mainEl}
