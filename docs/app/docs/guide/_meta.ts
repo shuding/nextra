@@ -7,6 +7,6 @@ export default {
   ssg: '',
   i18n: '',
   'custom-css': '',
-  advanced: 'Advanced',
-  'built-ins': 'Built-ins'
+  advanced: '',
+  'built-ins': ''
 }

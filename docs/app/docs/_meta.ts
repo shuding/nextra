@@ -1,12 +1,12 @@
 export default {
   index: '',
-  guide: 'Guide',
+  guide: '',
   '-- Themes': {
     type: 'separator',
     title: 'Themes'
   },
-  'docs-theme': 'Docs Theme',
-  'blog-theme': 'Blog Theme',
+  'docs-theme': '',
+  'blog-theme': '',
   'custom-theme': '',
   '-- More': {
     type: 'separator',
