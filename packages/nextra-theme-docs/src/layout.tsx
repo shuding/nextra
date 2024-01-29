@@ -10,7 +10,6 @@ import {
   ThemeProvider
 } from './contexts'
 import type { DocsThemeConfig } from './contexts/theme-config'
-import { ClientLayout } from './layout.client'
 import './style.css'
 
 const DEFAULT_THEME: DocsThemeConfig = {
@@ -100,7 +99,7 @@ export function Layout({
 
   return (
     <ThemeConfigProvider value={extendedThemeConfig}>
-      <ConfigProvider value={pageOpts}>
+      <ConfigProvider value={pageOpts} footer={footer} navbar={navbar}>
         {banner}
         <ThemeProvider
           attribute="class"
@@ -109,9 +108,7 @@ export function Layout({
           storageKey="theme"
           {...nextThemes}
         >
-          <ClientLayout footer={footer} navbar={navbar}>
-            <ActiveAnchorProvider>{children}</ActiveAnchorProvider>
-          </ClientLayout>
+          <ActiveAnchorProvider>{children}</ActiveAnchorProvider>
         </ThemeProvider>
       </ConfigProvider>
     </ThemeConfigProvider>

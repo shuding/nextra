@@ -1,5 +1,7 @@
 'use client'
 
+import 'focus-visible'
+import '../polyfill'
 import type { PageOpts } from 'nextra'
 import { useFSRoute } from 'nextra/hooks'
 import { normalizePages } from 'nextra/normalize-pages'
@@ -24,10 +26,14 @@ export function useConfig() {
 
 export function ConfigProvider({
   children,
-  value: pageOpts
+  value: pageOpts,
+  footer,
+  navbar
 }: {
   children: ReactNode
   value: PageOpts
+  footer: ReactNode
+  navbar: ReactNode
 }): ReactElement {
   const [menu, setMenu] = useState(false)
   const fsPath = useFSRoute()
@@ -37,10 +43,10 @@ export function ConfigProvider({
     [pageOpts.pageMap, fsPath]
   )
 
-  const { activeType, activeThemeContext: themeContext } = normalizePagesResult
+  const { activeType, activeThemeContext } = normalizePagesResult
 
   const extendedConfig: Config = {
-    hideSidebar: !themeContext.sidebar || activeType === 'page',
+    hideSidebar: !activeThemeContext.sidebar || activeType === 'page',
     normalizePagesResult
   }
 
@@ -51,7 +57,11 @@ export function ConfigProvider({
 
   return (
     <ConfigContext.Provider value={extendedConfig}>
-      <MenuProvider value={{ menu, setMenu }}>{children}</MenuProvider>
+      <MenuProvider value={{ menu, setMenu }}>
+        {activeThemeContext.navbar && navbar}
+        {children}
+        {activeThemeContext.footer && footer}
+      </MenuProvider>
     </ConfigContext.Provider>
   )
 }
