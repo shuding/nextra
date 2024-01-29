@@ -311,16 +311,16 @@ function Menu({
 
 interface SideBarProps {
   docsDirectories: PageItem[]
-  fullDirectories: Item[]
-  asPopover?: boolean
+  directories: Item[]
+  asPopover: boolean
   toc: Heading[]
   includePlaceholder: boolean
 }
 
 export function Sidebar({
   docsDirectories,
-  fullDirectories,
-  asPopover = false,
+  directories,
+  asPopover,
   toc,
   includePlaceholder
 }: SideBarProps): ReactElement {
@@ -399,11 +399,7 @@ export function Sidebar({
           <div className="_px-4 _pt-4 md:_hidden">{themeConfig.search}</div>
         )}
         <FocusedItemContext.Provider value={focused}>
-          <OnFocusItemContext.Provider
-            value={item => {
-              setFocused(item)
-            }}
-          >
+          <OnFocusItemContext.Provider value={setFocused}>
             <div
               className={cn(
                 '_overflow-y-auto _overflow-x-hidden',
@@ -430,7 +426,7 @@ export function Sidebar({
                 <Menu
                   className="nextra-menu-mobile md:_hidden"
                   // The mobile dropdown menu, shows all the directories.
-                  directories={fullDirectories}
+                  directories={directories}
                   // Always show the anchor links on mobile (`md`).
                   anchors={anchors}
                 />

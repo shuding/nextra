@@ -118,7 +118,7 @@ export function ClientWrapper({
     <>
       <Sidebar
         docsDirectories={docsDirectories}
-        fullDirectories={directories}
+        directories={directories}
         toc={toc}
         asPopover={config.hideSidebar}
         includePlaceholder={themeContext.layout === 'default'}
