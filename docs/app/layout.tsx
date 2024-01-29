@@ -23,6 +23,20 @@ export const metadata: Metadata = {
   title: {
     absolute: '',
     template: '%s | Nextra'
+  },
+  icons: {
+    icon: [
+      {
+        media: '(prefers-color-scheme: dark)',
+        url: '/favicon-dark.svg',
+        type: 'image/svg+xml'
+      },
+      {
+        media: '(prefers-color-scheme: light)',
+        url: '/favicon.svg',
+        type: 'image/svg+xml'
+      }
+    ]
   }
 }
 
