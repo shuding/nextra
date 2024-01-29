@@ -56,7 +56,7 @@ summary {
     }
   }
 
-  .nextra-banner-container ~ div {
+  .nextra-banner-container ~ header {
     .nextra-sidebar-container {
       @apply _pt-[6.5rem];
     }

@@ -146,7 +146,7 @@ export function ClientNavbar({
         type="button"
         aria-label="Menu"
         className="nextra-hamburger _rounded active:_bg-gray-400/20 md:_hidden"
-        onClick={() => setMenu(!menu)}
+        onClick={() => setMenu(prev => !prev)}
       >
         <MenuIcon className={cn({ open: menu })} />
       </button>

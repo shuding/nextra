@@ -99,18 +99,18 @@ export function Layout({
 
   return (
     <ThemeConfigProvider value={extendedThemeConfig}>
-      <ConfigProvider value={pageOpts} footer={footer} navbar={navbar}>
-        {banner}
-        <ThemeProvider
-          attribute="class"
-          disableTransitionOnChange
-          defaultTheme="system"
-          storageKey="theme"
-          {...nextThemes}
-        >
+      {banner}
+      <ThemeProvider
+        attribute="class"
+        disableTransitionOnChange
+        defaultTheme="system"
+        storageKey="theme"
+        {...nextThemes}
+      >
+        <ConfigProvider value={pageOpts} footer={footer} navbar={navbar}>
           <ActiveAnchorProvider>{children}</ActiveAnchorProvider>
-        </ThemeProvider>
-      </ConfigProvider>
+        </ConfigProvider>
+      </ThemeProvider>
     </ThemeConfigProvider>
   )
 }

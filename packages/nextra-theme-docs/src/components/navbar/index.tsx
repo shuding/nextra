@@ -54,7 +54,7 @@ export function Navbar({
   ) : null
 
   return (
-    <div className="nextra-nav-container _sticky _top-0 _z-20 _w-full _bg-transparent print:_hidden">
+    <header className="nextra-nav-container _sticky _top-0 _z-20 _w-full _bg-transparent print:_hidden">
       <div
         className={cn(
           'nextra-nav-container-blur',
@@ -80,6 +80,6 @@ export function Navbar({
           {children}
         </ClientNavbar>
       </nav>
-    </div>
+    </header>
   )
 }

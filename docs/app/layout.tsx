@@ -53,6 +53,10 @@ export default async function RootLayout({
       <body>
         <Layout
           themeConfig={{
+            // i18n: [
+            //   {locale: 'en', name: 'English'},
+            //   {locale: 'ru', name: 'Russia'}
+            // ],
             docsRepositoryBase:
               'https://github.com/shuding/nextra/tree/main/docs',
             editLink: {

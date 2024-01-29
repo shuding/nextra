@@ -461,13 +461,10 @@ export function Sidebar({
               className={showSidebar ? '_grow' : 'max-md:_grow'}
             />
             {themeConfig.darkMode && (
-              <div
-                className={
-                  showSidebar && !hasI18n ? '_grow _flex _flex-col' : ''
-                }
-              >
-                <ThemeSwitch lite={!showSidebar || hasI18n} />
-              </div>
+              <ThemeSwitch
+                lite={!showSidebar || hasI18n}
+                className={hasI18n ? '' : '_grow'}
+              />
             )}
             {themeConfig.sidebar.toggleButton && (
               <button

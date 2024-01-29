@@ -1,24 +1,21 @@
 'use client'
 
-import cn from 'clsx'
+import { useConfig, useThemeConfig } from '../../contexts'
 import { LocaleSwitch } from '../locale-switch'
 import { ThemeSwitch } from '../theme-switch'
-import { useConfig, useThemeConfig } from '../../contexts'
 
 export function Switchers() {
   const { hideSidebar } = useConfig()
-  const themeConfig = useThemeConfig()
+  const { i18n, darkMode } = useThemeConfig()
+
+  if (!hideSidebar || (!darkMode && !i18n.length)) {
+    return null
+  }
+
   return (
-    <div
-      className={cn(
-        '_mx-auto _flex _max-w-[90rem] _gap-2 _py-2 _px-4',
-        hideSidebar && (themeConfig.i18n.length > 0 || themeConfig.darkMode)
-          ? '_flex'
-          : '_hidden'
-      )}
-    >
+    <div className="_mx-auto _flex _max-w-[90rem] _gap-2 _py-2 _px-4 _flex">
       <LocaleSwitch />
-      {themeConfig.darkMode && <ThemeSwitch />}
+      {darkMode && <ThemeSwitch />}
     </div>
   )
 }
