@@ -24,7 +24,7 @@ jobs:
       - uses: pnpm/action-setup@v2.4.0
 
       - name: Install Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18
           cache: 'pnpm'
@@ -54,7 +54,7 @@ jobs:
         run: cd examples/swr-site && npx -p nextjs-bundle-analysis report
 
       - name: Upload bundle
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: bundle
           path: examples/swr-site/.next/analyze/__bundle_analysis.json
