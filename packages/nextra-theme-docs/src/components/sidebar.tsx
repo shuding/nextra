@@ -335,6 +335,7 @@ export function Sidebar({
   const sidebarRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const mounted = useMounted()
+
   useEffect(() => {
     if (menu) {
       document.body.classList.add('_overflow-hidden', 'md:_overflow-auto')
@@ -447,7 +448,7 @@ export function Sidebar({
               'dark:_border-neutral-800 dark:_shadow-[0_-12px_16px_#111]',
               'contrast-more:_border-neutral-400 contrast-more:_shadow-none contrast-more:dark:_shadow-none',
               showSidebar
-                ? cn(hasI18n && '_justify-end', '_border-t')
+                ? [hasI18n && '_justify-end', '_border-t']
                 : '_py-4 _flex-wrap _justify-center'
             )}
             data-toggle-animation={

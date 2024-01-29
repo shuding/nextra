@@ -27,7 +27,7 @@ export function useConfig() {
 
 export function ConfigProvider({
   children,
-  value: pageOpts,
+  value: { pageMap },
   footer,
   navbar
 }: {
@@ -40,8 +40,8 @@ export function ConfigProvider({
   const fsPath = useFSRoute()
 
   const normalizePagesResult = useMemo(
-    () => normalizePages({ list: pageOpts.pageMap, route: fsPath }),
-    [pageOpts.pageMap, fsPath]
+    () => normalizePages({ list: pageMap, route: fsPath }),
+    [pageMap, fsPath]
   )
 
   const { activeType, activeThemeContext, directories, docsDirectories } =
