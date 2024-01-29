@@ -1,3 +1,4 @@
 export default {
-  index: 'Overview'
+  callout: '',
+  tabs: ''
 }

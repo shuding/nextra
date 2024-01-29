@@ -1,5 +1,4 @@
 export default {
-  'index': '',
   start: '',
   'page-configuration': '',
   'theme-configuration': '',

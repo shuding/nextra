@@ -5,7 +5,7 @@ import gracefulFs from 'graceful-fs'
 import grayMatter from 'gray-matter'
 import pLimit from 'p-limit'
 import slash from 'slash'
-import type { PageMapItem } from '../types'
+import type { Folder, FrontMatter, MdxFile, PageMapItem } from '../types'
 import {
   CHUNKS_DIR,
   CWD,
@@ -255,41 +255,51 @@ export async function collectPageMap({
 
   const body: Parameters<typeof toJs>[0]['body'] = [
     ...metaImportsAST,
-    createAstExportConst('pageMap', pageMapAst)
-  ]
-  let footer = ''
-
-  if (dynamicMetaImports.length) {
-    body.push({
+    {
       type: 'VariableDeclaration',
       kind: 'const',
       declarations: [
         {
           type: 'VariableDeclarator',
-          id: { type: 'Identifier', name: 'dynamicMetaModules' },
-          init: {
-            type: 'ObjectExpression',
-            properties: dynamicMetaImports
-              // localeCompare to avoid race condition
-              .sort((a, b) => a.route.localeCompare(b.route))
-              .map(({ importName, route }) => ({
-                ...DEFAULT_PROPERTY_PROPS,
-                key: { type: 'Literal', value: route },
-                value: { type: 'Identifier', name: importName }
-              }))
-          }
+          id: { type: 'Identifier', name: '_pageMap' },
+          init: pageMapAst
         }
       ]
-    })
+    }
+  ]
+  // let footer = ''
 
-    footer = `
-import { resolvePageMap } from 'nextra/page-map-dynamic'
+  // if (dynamicMetaImports.length) {
+  //   body.push({
+  //     type: 'VariableDeclaration',
+  //     kind: 'const',
+  //     declarations: [
+  //       {
+  //         type: 'VariableDeclarator',
+  //         id: { type: 'Identifier', name: 'dynamicMetaModules' },
+  //         init: {
+  //           type: 'ObjectExpression',
+  //           properties: dynamicMetaImports
+  //             // localeCompare to avoid race condition
+  //             .sort((a, b) => a.route.localeCompare(b.route))
+  //             .map(({ importName, route }) => ({
+  //               ...DEFAULT_PROPERTY_PROPS,
+  //               key: { type: 'Literal', value: route },
+  //               value: { type: 'Identifier', name: importName }
+  //             }))
+  //         }
+  //       }
+  //     ]
+  //   })
 
-if (typeof window === 'undefined') {
-  globalThis.__nextra_resolvePageMap ||= Object.create(null)
-  globalThis.__nextra_resolvePageMap['${locale}'] = resolvePageMap('${locale}', dynamicMetaModules)
-}`
-  }
+  //     footer = `
+  // import { resolvePageMap } from 'nextra/page-map-dynamic'
+  //
+  // if (typeof window === 'undefined') {
+  //   globalThis.__nextra_resolvePageMap ||= Object.create(null)
+  //   globalThis.__nextra_resolvePageMap['${locale}'] = resolvePageMap('${locale}', dynamicMetaModules)
+  // }`
+  //   }
 
   const result = toJs({
     type: 'Program',
@@ -297,5 +307,43 @@ if (typeof window === 'undefined') {
     body
   })
 
-  return `${result.value}${footer}`.trim()
+  return `import { normalizePageMap } from 'nextra/page-map'
+${result.value}
+  
+export const pageMap = normalizePageMap(_pageMap)`
+}
+
+export function normalizePageMap(pageMap: PageMapItem[] | Folder): any {
+  if (Array.isArray(pageMap)) {
+    return pageMap.map(item =>
+      'children' in item ? normalizePageMap(item) : item
+    )
+  }
+
+  const newChildren: PageMapItem[] = []
+
+  const folder = { ...pageMap } as Folder & {
+    frontMatter: FrontMatter
+    withIndexPage?: true
+  }
+
+  for (const item of folder.children) {
+    if (
+      'frontMatter' in item &&
+      item.frontMatter?.asIndexPage &&
+      item.route === folder.route
+    ) {
+      folder.frontMatter = item.frontMatter
+      folder.withIndexPage = true
+    } else if ('children' in item) {
+      newChildren.push(normalizePageMap(item))
+    } else {
+      newChildren.push(item)
+    }
+  }
+
+  return {
+    ...folder,
+    children: newChildren
+  }
 }

@@ -1,5 +1,4 @@
 export default {
-  'index': 'Overview',
   'organize-files': '',
   markdown: '',
   'syntax-highlighting': '',
