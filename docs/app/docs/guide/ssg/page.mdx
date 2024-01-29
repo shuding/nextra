@@ -1,5 +1,5 @@
 import { compileMdx } from 'nextra/compile'
-import { RemoteContent } from 'nextra/components'
+import { RemoteContent, Callout } from 'nextra/components'
 import { useMDXComponents } from 'nextra-theme-docs'
 
 # Next.js SSG
@@ -14,19 +14,30 @@ This is supported by Nextra too. Here's an example:
 <SSGPage />
 
 export async function SSGPage() {
-  const starsComponent = `export async function Stars() {
+  const starsComponent = `{/* Via async components */}
+export async function Stars() {
   const response = await fetch('https://api.github.com/repos/shuding/nextra')
   const repo = await response.json()
   const stars = repo.stargazers_count
   return <b>{stars}</b>
-}`
+}
+
+{/* Via async functions */}
+export async function getUpdatedAt() {
+  const response = await fetch('https://api.github.com/repos/shuding/nextra')
+  const repo = await response.json()
+  const updatedAt = repo.updated_at
+  return new Date(updatedAt).toLocaleDateString()
+}
+
+<Callout emoji="🏆">
+  Nextra has <Stars /> stars on GitHub!
+
+  Last repository update _{await getUpdatedAt()}_.
+</Callout>`
   const mdx = `${starsComponent}
 
-<div className="mt-6 rounded-xl border border-gray-200 p-4 dark:border-gray-900">
-  Nextra has <Stars /> stars on GitHub!
-</div>
-
-The number above was generated at build time via \`getStaticProps\`. With
+The number above was generated at build time via MDX server components. With
 [Incremental Static Regeneration](https://nextjs.org/docs/basic-features/data-fetching#incremental-static-regeneration)
 enabled, it will be kept up to date.
 
@@ -36,10 +47,8 @@ Here's the MDX code for the example above:
 
 ~~~mdx filename="MDX"
 ${starsComponent}
-
-Nextra has <Stars /> stars on GitHub!
 ~~~
 `
   const { result } = await compileMdx(mdx)
-  return <RemoteContent compiledSource={result} components={useMDXComponents()} />
+  return <RemoteContent compiledSource={result} components={useMDXComponents({Callout})} />
 }
