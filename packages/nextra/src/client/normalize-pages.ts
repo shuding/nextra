@@ -26,8 +26,8 @@ type IMenuItem = z.infer<typeof menuItemSchema>
 
 function extendMeta(
   _meta: string | Record<string, any> = {},
-  fallback: Record<string, any>,
-  metadata: Record<string, any>
+  fallback: Record<string, any> = {},
+  metadata: Record<string, any> = {}
 ): Record<string, any> {
   if (typeof _meta === 'string') {
     _meta = { title: _meta }
@@ -138,12 +138,8 @@ export function normalizePages({
 
   const meta =
     'data' in list[0]
-      ? (list[0].data as Record<string, Record<string, any>>)
+      ? (list[0].data as Record<string, Record<string, any> | undefined>)
       : {}
-
-  const fallbackMeta = meta['*'] || {}
-  delete fallbackMeta.title
-  delete fallbackMeta.href
 
   // Normalize items based on files and _meta.json.
   const items = ('data' in list[0] ? list.slice(1) : list) as (
@@ -173,11 +169,11 @@ export function normalizePages({
     // Get the item's meta information.
     const extendedMeta = extendMeta(
       meta[currentItem.name],
-      fallbackMeta,
+      meta['*'],
       list.find(
         (item): item is MdxFile =>
           'frontMatter' in item && item.name === currentItem.name
-      )?.frontMatter || {}
+      )?.frontMatter
     )
     const { display, type = 'doc' } = extendedMeta
     const extendedPageThemeContext = {

@@ -359,6 +359,10 @@ export function sortFolder(pageMap: PageMapItem[] | Folder) {
           typeof titleOrObject === 'string'
             ? { title: titleOrObject }
             : titleOrObject
+        if (key === '*') {
+          delete meta['*'].title
+          delete meta['*'].href
+        }
       }
     } else {
       newChildren.push(item)
