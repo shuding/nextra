@@ -87,7 +87,6 @@ describe('generatePageMapFromFilepaths()', () => {
         "_meta.ts",
         "about/page.mdx",
         "docs/_meta.ts",
-        "docs/blog-theme/_meta.ts",
         "docs/blog-theme/page.mdx",
         "docs/blog-theme/start/page.mdx",
         "docs/custom-theme/page.mdx",
@@ -154,9 +153,6 @@ describe('generatePageMapFromFilepaths()', () => {
                   "__pagePath": "docs/blog-theme/start/page.mdx",
                   "name": "start",
                   "route": "/docs/blog-theme/start",
-                },
-                {
-                  "__metaPath": "docs/blog-theme/_meta.ts",
                 },
               ],
               "name": "blog-theme",

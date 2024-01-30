@@ -1,10 +1,11 @@
 import { normalizePages } from '../src/client/normalize-pages.js'
 import { cnPageMap, usPageMap } from './fixture/page-maps/pageMap.js'
+import { normalizePageMap } from '../src/server/normalize-page-map.js'
 
 describe('normalize-page', () => {
   it('zh-CN home', () => {
     const result = normalizePages({
-      list: cnPageMap,
+      list: normalizePageMap(cnPageMap),
       route: '/'
     })
     expect(result).toMatchSnapshot()
@@ -12,7 +13,7 @@ describe('normalize-page', () => {
 
   it('zh-CN getting-started', () => {
     const result = normalizePages({
-      list: cnPageMap,
+      list: normalizePageMap(cnPageMap),
       route: '/docs/getting-started'
     })
     expect(result).toMatchSnapshot()
@@ -20,7 +21,7 @@ describe('normalize-page', () => {
 
   it('en-US home', () => {
     const result = normalizePages({
-      list: usPageMap,
+      list: normalizePageMap(usPageMap),
       route: '/'
     })
     expect(result).toMatchSnapshot()
@@ -28,7 +29,7 @@ describe('normalize-page', () => {
 
   it('en-US getting-started', () => {
     const result = normalizePages({
-      list: usPageMap,
+      list: normalizePageMap(usPageMap),
       route: '/docs/getting-started'
     })
     expect(result).toMatchSnapshot()
@@ -36,50 +37,51 @@ describe('normalize-page', () => {
 
   // https://github.com/shuding/nextra/issues/1888
   it('should set `route: #` for `type: menu`', () => {
-    const result = normalizePages({
-      list: [
-        {
-          data: {
-            index: {
-              type: 'page',
-              title: 'Nextra',
-              display: 'hidden'
-            },
-            docs: {
-              type: 'page',
-              title: 'Documentation'
-            },
-            explorers: {
-              title: 'Explorers',
-              type: 'menu'
-            },
-            showcase: {
-              type: 'page',
-              title: 'Showcase'
-            },
-            explorers2: {
-              title: 'Explorers2',
-              type: 'menu'
-            },
-            about: {
-              type: 'page',
-              title: 'About'
-            },
-            explorers3: {
-              title: 'Explorers3',
-              type: 'menu'
-            }
+    const pageMap = [
+      {
+        data: {
+          index: {
+            type: 'page',
+            title: 'Nextra',
+            display: 'hidden'
+          },
+          docs: {
+            type: 'page',
+            title: 'Documentation'
+          },
+          explorers: {
+            title: 'Explorers',
+            type: 'menu'
+          },
+          showcase: {
+            type: 'page',
+            title: 'Showcase'
+          },
+          explorers2: {
+            title: 'Explorers2',
+            type: 'menu'
+          },
+          about: {
+            type: 'page',
+            title: 'About'
+          },
+          explorers3: {
+            title: 'Explorers3',
+            type: 'menu'
           }
-        },
-        {
-          name: 'about',
-          route: '/about'
-        },
-        {
-          name: 'showcase',
-          route: '/showcase'
         }
-      ],
+      },
+      {
+        name: 'about',
+        route: '/about'
+      },
+      {
+        name: 'showcase',
+        route: '/showcase'
+      }
+    ]
+    const result = normalizePages({
+      list: normalizePageMap(pageMap),
       route: '/docs'
     })
     expect(result.topLevelNavbarItems).toMatchInlineSnapshot(`
