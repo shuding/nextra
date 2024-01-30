@@ -9,7 +9,6 @@ import type { Folder, FrontMatter, MdxFile, PageMapItem } from '../types'
 import {
   CHUNKS_DIR,
   CWD,
-  DEFAULT_PROPERTY_PROPS,
   MARKDOWN_EXTENSION_REGEX,
   META_REGEX
 } from './constants.js'
@@ -320,12 +319,13 @@ export function normalizePageMap(pageMap: PageMapItem[] | Folder): any {
     )
   }
 
-  const newChildren: PageMapItem[] = []
+  const newChildren: (Folder | MdxFile)[] = []
 
   const folder = { ...pageMap } as Folder & {
     frontMatter: FrontMatter
     withIndexPage?: true
   }
+  const meta: Record<string, Record<string, any>> = {}
 
   for (const item of folder.children) {
     if (
@@ -337,13 +337,71 @@ export function normalizePageMap(pageMap: PageMapItem[] | Folder): any {
       folder.withIndexPage = true
     } else if ('children' in item) {
       newChildren.push(normalizePageMap(item))
+    } else if ('data' in item) {
+      for (const [key, titleOrObject] of Object.entries(item.data)) {
+        meta[key] =
+          typeof titleOrObject === 'string'
+            ? { title: titleOrObject }
+            : titleOrObject
+      }
     } else {
       newChildren.push(item)
     }
   }
 
+  const metaKeys = Object.keys(meta || {})
+  let metaKeyIndex = -1
+
+  const children = newChildren
+    .sort((a, b) => {
+      const indexA = metaKeys.indexOf(a.name)
+      const indexB = metaKeys.indexOf(b.name)
+      if (indexA === -1 && indexB === -1) return a.name.localeCompare(b.name)
+      if (indexA === -1) return 1
+      if (indexB === -1) return -1
+      return indexA - indexB
+    })
+    .flatMap(item => {
+      const items = []
+      const index = metaKeys.indexOf(item.name)
+      let extendedItem
+      if (index !== -1) {
+        // Fill all skipped items in meta.
+        for (let i = metaKeyIndex + 1; i < index; i++) {
+          const key = metaKeys[i]
+          if (key !== '*') {
+            items.push({
+              name: key,
+              route: '',
+              ...meta[key]
+            })
+          }
+        }
+        metaKeyIndex = index
+        extendedItem = { ...meta[item.name], ...item }
+      }
+      items.push(extendedItem || item)
+      return items
+    })
+
+  // Fill all skipped items in meta.
+  for (let i = metaKeyIndex + 1; i < metaKeys.length; i++) {
+    const key = metaKeys[i]
+    if (key !== '*') {
+      children.push({
+        name: key,
+        ...meta[key]
+      } as MdxFile)
+    }
+  }
+
+  if (meta) {
+    // @ts-expect-error
+    children.unshift({ data: meta })
+  }
+
   return {
     ...folder,
-    children: newChildren
+    children
   }
 }
