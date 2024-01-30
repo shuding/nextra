@@ -25,13 +25,10 @@ type Display = z.infer<typeof displaySchema>
 type IMenuItem = z.infer<typeof menuItemSchema>
 
 function extendMeta(
-  _meta: string | Record<string, any> = {},
   fallback: Record<string, any> = {},
+  _meta: Record<string, any> = {},
   metadata: Record<string, any> = {}
 ): Record<string, any> {
-  if (typeof _meta === 'string') {
-    _meta = { title: _meta }
-  }
   const theme: PageTheme = {
     ...fallback.theme,
     ..._meta.theme,
@@ -168,12 +165,10 @@ export function normalizePages({
 
     // Get the item's meta information.
     const extendedMeta = extendMeta(
-      meta[currentItem.name],
       meta['*'],
-      list.find(
-        (item): item is MdxFile =>
-          'frontMatter' in item && item.name === currentItem.name
-      )?.frontMatter
+      meta[currentItem.name],
+      items.find((item): item is MdxFile => item.name === currentItem.name)
+        ?.frontMatter
     )
     const { display, type = 'doc' } = extendedMeta
     const extendedPageThemeContext = {
