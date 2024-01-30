@@ -15,12 +15,15 @@ export function Breadcrumb({
     <div className="nextra-breadcrumb _mt-1.5 _flex _items-center _gap-1 _overflow-hidden _text-sm _text-gray-500 dark:_text-gray-400 contrast-more:_text-current">
       {activePath.map((item, index) => {
         const isLast = index === activePath.length - 1
-        const isLink =
-          !isLast &&
-          (item.withIndexPage ||
-            item.children![0].route !== activePath.at(index + 1)!.route)
+        const href = isLast
+          ? ''
+          : item.withIndexPage
+          ? item.route
+          : item.children![0].route === activePath.at(index + 1)?.route
+          ? ''
+          : item.children![0].route
 
-        const ComponentToUse = isLink ? NextLink : 'span'
+        const ComponentToUse = href ? NextLink : 'span'
 
         return (
           <Fragment key={item.route + item.name}>
@@ -33,10 +36,10 @@ export function Breadcrumb({
                 isLast
                   ? '_font-medium _text-gray-700 contrast-more:_font-bold contrast-more:_text-current dark:_text-gray-100 contrast-more:dark:_text-current'
                   : '_min-w-[24px] _overflow-hidden _text-ellipsis',
-                isLink && 'hover:_text-gray-900 dark:hover:_text-gray-100'
+                href && 'hover:_text-gray-900 dark:hover:_text-gray-100'
               )}
               title={item.title}
-              {...(isLink && { href: item.route } as any)}
+              {...(href && ({ href } as any))}
             >
               {item.title}
             </ComponentToUse>
