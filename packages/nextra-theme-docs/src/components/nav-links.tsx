@@ -47,7 +47,7 @@ export function NavLinks({
         <NextLink
           href={prev.route}
           title={prev.title}
-          className={cn(classes.link, 'ltr:_pr-4 rtl:_pl-4')}
+          className={cn(classes.link, '_pe-4')}
         >
           <ArrowRightIcon className={cn(classes.icon, 'ltr:_rotate-180')} />
           {prev.title}
@@ -59,7 +59,7 @@ export function NavLinks({
           title={next.title}
           className={cn(
             classes.link,
-            'ltr:_ml-auto ltr:_pl-4 ltr:_text-right rtl:_mr-auto rtl:_pr-4 rtl:_text-left'
+            '_ps-4 _ms-auto ltr:_text-right rtl:_text-left'
           )}
         >
           {next.title}

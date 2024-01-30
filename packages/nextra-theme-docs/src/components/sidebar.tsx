@@ -61,7 +61,7 @@ const classes = {
   border: cn(
     '_relative before:_absolute before:_inset-y-1',
     'before:_w-px before:_bg-gray-200 before:_content-[""] dark:before:_bg-neutral-800',
-    'ltr:_pl-3 ltr:before:_left-0 rtl:_pr-3 rtl:before:_right-0'
+    '_ps-3 before:_start-0'
   )
 }
 
@@ -183,10 +183,10 @@ function FolderImpl({ item, anchors }: FolderProps): ReactElement {
           )}
         />
       </ComponentToUse>
-      <Collapse className="ltr:_pr-0 rtl:_pl-0 _pt-1" isOpen={open}>
+      <Collapse className="_pe-0 _pt-1" isOpen={open}>
         {Array.isArray(item.children) ? (
           <Menu
-            className={cn(classes.border, 'ltr:_ml-3 rtl:_mr-3')}
+            className={cn(classes.border, '_ms-3')}
             directories={item.children}
             base={item.route}
             anchors={anchors}
@@ -254,7 +254,7 @@ function File({
         {item.title}
       </Anchor>
       {active && anchors.length > 0 && (
-        <ul className={cn(classes.list, classes.border, 'ltr:_ml-3 rtl:_mr-3')}>
+        <ul className={cn(classes.list, classes.border, '_ms-3')}>
           {anchors.map(({ id, value }) => (
             <li key={id}>
               <a

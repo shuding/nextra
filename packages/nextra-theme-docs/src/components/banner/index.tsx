@@ -28,7 +28,7 @@ export function Banner({
           'nextra-banner-container max-md:_sticky _top-0 _z-20 _flex _items-center',
           '_h-[var(--nextra-banner-height)] [body.nextra-banner-hidden_&]:_hidden',
           '_text-slate-50 dark:_text-white _bg-neutral-900 dark:_bg-[linear-gradient(1deg,#383838,#212121)]',
-          '_px-2 ltr:_pl-10 rtl:_pr-10 print:_hidden'
+          '_px-2 _ps-10 print:_hidden'
         )}
       >
         <div className="_w-full _truncate _text-center _font-medium _text-sm">

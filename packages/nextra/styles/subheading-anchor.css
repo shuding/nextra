@@ -1,5 +1,5 @@
 .subheading-anchor {
-  @apply _opacity-0 _transition-opacity ltr:_ml-1 rtl:_mr-1;
+  @apply _opacity-0 _transition-opacity _ms-1;
 
   :hover > &,
   &:focus {

@@ -57,7 +57,7 @@ export function TOC({ toc, filePath, pageTitle }: TOCProps): ReactElement {
     <div
       className={cn(
         'nextra-scrollbar _sticky _top-16 _overflow-y-auto _pr-4 _pt-6 _text-sm [hyphens:auto]',
-        '_max-h-[calc(100vh-var(--nextra-navbar-height)-env(safe-area-inset-bottom))] ltr:_-mr-4 rtl:_-ml-4'
+        '_max-h-[calc(100vh-var(--nextra-navbar-height)-env(safe-area-inset-bottom))] _-me-4'
       )}
     >
       {hasHeadings && (
@@ -73,10 +73,10 @@ export function TOC({ toc, filePath, pageTitle }: TOCProps): ReactElement {
                   className={cn(
                     {
                       2: '_font-semibold',
-                      3: 'ltr:_pl-4 rtl:_pr-4',
-                      4: 'ltr:_pl-8 rtl:_pr-8',
-                      5: 'ltr:_pl-12 rtl:_pr-12',
-                      6: 'ltr:_pl-16 rtl:_pr-16'
+                      3: '_ps-4',
+                      4: '_ps-8',
+                      5: '_ps-12',
+                      6: '_ps-16'
                     }[depth],
                     '_inline-block _transition-colors _subpixel-antialiased',
                     activeAnchor[id]?.isActive

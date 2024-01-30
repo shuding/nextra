@@ -18,7 +18,7 @@ export const useMDXComponents: UseMDXComponents = components => {
       <blockquote
         className={cn(
           '_mt-6 _border-gray-300 _italic _text-gray-700 dark:_border-gray-700 dark:_text-gray-400',
-          'first:_mt-0 ltr:_border-l-2 ltr:_pl-6 rtl:_border-r-2 rtl:_pr-6'
+          'first:_mt-0 _border-s-2 _ps-6'
         )}
         {...props}
       />
@@ -40,7 +40,7 @@ export const useMDXComponents: UseMDXComponents = components => {
     li: props => <li className="_my-2" {...props} />,
     ol: props => (
       <ol
-        className="_mt-6 _list-decimal first:_mt-0 ltr:_ml-6 rtl:_mr-6"
+        className="_mt-6 _list-decimal first:_mt-0 _ms-6"
         {...props}
       />
     ),
@@ -75,7 +75,7 @@ export const useMDXComponents: UseMDXComponents = components => {
     tr: Tr,
     ul: props => (
       <ul
-        className="_mt-6 _list-disc first:_mt-0 ltr:_ml-6 rtl:_mr-6"
+        className="_mt-6 _list-disc first:_mt-0 _ms-6"
         {...props}
       />
     ),

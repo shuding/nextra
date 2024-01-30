@@ -67,12 +67,12 @@ export function Navbar({
         {logoLink ? (
           <NextLink
             href={typeof logoLink === 'string' ? logoLink : '/'}
-            className="_flex _items-center hover:_opacity-75 ltr:_mr-auto rtl:_ml-auto"
+            className="_flex _items-center hover:_opacity-75 _me-auto"
           >
             {logo}
           </NextLink>
         ) : (
-          <div className="_flex _items-center ltr:_mr-auto rtl:_ml-auto">
+          <div className="_flex _items-center _me-auto">
             {logo}
           </div>
         )}

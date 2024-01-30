@@ -80,13 +80,13 @@ export function Select({
                         ? '_bg-primary-50 _text-primary-600 dark:_bg-primary-500/10'
                         : '_text-gray-800 dark:_text-gray-100',
                       '_relative _cursor-pointer _whitespace-nowrap _py-1.5',
-                      '_transition-colors ltr:_pl-3 ltr:_pr-9 rtl:_pr-3 rtl:_pl-9'
+                      '_transition-colors _ps-3 _pe-9'
                     )
                   }
                 >
                   {option.name}
                   {option.key === selected.key && (
-                    <span className="_absolute _inset-y-0 _flex _items-center ltr:_right-3 rtl:_left-3">
+                    <span className="_absolute _inset-y-0 _flex _items-center _end-3">
                       <CheckIcon />
                     </span>
                   )}
