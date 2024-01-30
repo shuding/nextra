@@ -22,7 +22,7 @@ export function Navbar({
   logo = (
     <>
       <span className="_font-extrabold">Nextra</span>
-      <span className="_ml-2 max-md:_hidden _font-normal _text-gray-600">
+      <span className="_ms-2 max-md:_hidden _font-normal _text-gray-600">
         The Next Docs Builder
       </span>
     </>

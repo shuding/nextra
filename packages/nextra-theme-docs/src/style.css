@@ -124,9 +124,9 @@ input[type='search'] {
 }
 
 .contains-task-list {
-  @apply _ml-0 _list-none;
+  @apply _mt-6;
   input[type='checkbox'] {
-    @apply _mr-1;
+    @apply _me-1;
   }
 }
 
