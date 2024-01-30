@@ -4,8 +4,8 @@ export async function getPosts() {
   )
 
   return pageMap
-    .find(item => item.route === '/posts').children
-    .filter(post => !post.frontMatter.draft && post.name !== 'index')
+    .find(item => item.route === '/posts')
+    .children.filter(post => !post.frontMatter.draft && post.name !== 'index')
     .sort((a, b) => b.frontMatter.date - a.frontMatter.date)
 }
 

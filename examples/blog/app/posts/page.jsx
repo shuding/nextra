@@ -26,7 +26,9 @@ export default async function PostsPage() {
           </Link>
         ))}
       </div>
-      {(await getPosts()).map(post => <PostCard key={post.route} post={post} />)}
+      {(await getPosts()).map(post => (
+        <PostCard key={post.route} post={post} />
+      ))}
     </>
   )
 }
