@@ -1,5 +1,10 @@
 import { compileMdx } from 'nextra/compile'
-import { Callout, RemoteContent, MathJax, MathJaxContext } from 'nextra/components'
+import {
+  Callout,
+  MathJax,
+  MathJaxContext,
+  RemoteContent
+} from 'nextra/components'
 
 {/* TODO: inject in loader */}
 
@@ -7,9 +12,10 @@ import 'katex/dist/katex.min.css'
 
 # LaTeX
 
-Nextra can use [KaTeX](https://katex.org) to pre-render LaTeX expressions directly in MDX or [MathJax](https://mathjax.org) to
-dynamically render math in the browser.
-To enable LaTeX support, you must enable the `latex` option in your `next.config.mjs` file:
+Nextra can use [KaTeX](https://katex.org) to pre-render LaTeX expressions
+directly in MDX or [MathJax](https://mathjax.org) to dynamically render math in
+the browser. To enable LaTeX support, you must enable the `latex` option in your
+`next.config.mjs` file:
 
 ```js filename="next.config.mjs" {4}
 import nextra from 'nextra'
@@ -21,11 +27,14 @@ const withNextra = nextra({
 export default withNextra()
 ```
 
-A value of `true{:js}` will use KaTeX as the math renderer. To explicitly specify the renderer, you may instead provide an
-object `{ renderer: 'katex' }{:js}` or `{ renderer: 'mathjax' }{:js}` as the value to `latex: ...`.
+A value of `true{:js}` will use KaTeX as the math renderer. To explicitly
+specify the renderer, you may instead provide an object
+`{ renderer: 'katex' }{:js}` or `{ renderer: 'mathjax' }{:js}` as the value to
+`latex: ...`.
 
-When enabled, the required CSS and fonts will be automatically included in your site,
-and you can start writing math expressions by enclosing inline math in `$...$` or display math in a `math`-labeled fenced code block:
+When enabled, the required CSS and fonts will be automatically included in your
+site, and you can start writing math expressions by enclosing inline math in
+`$...$` or display math in a `math`-labeled fenced code block:
 
 ~~~mdx
 ```math
@@ -55,7 +64,8 @@ will be rendered as:
   ```
 </div>
 
-You can still use [Markdown and MDX syntax](../markdown) in the same line as your LaTeX expression.
+You can still use [Markdown and MDX syntax](../markdown) in the same line as
+your LaTeX expression.
 
 <Callout>
   If you want to display `$` in your content instead of rendering it as an
@@ -67,10 +77,10 @@ You can still use [Markdown and MDX syntax](../markdown) in the same line as you
 
 ### KaTeX
 
-`rehype-katex` is used to pre-render LaTeX expressions in your content. You can pass
-supported [KaTeX options](https://katex.org/docs/options) via the `options` key in
-your Nextra config. For example, to add a macro `\RR` that renders as `\mathbb{R}` you could
-use the following configuration.
+`rehype-katex` is used to pre-render LaTeX expressions in your content. You can
+pass supported [KaTeX options](https://katex.org/docs/options) via the `options`
+key in your Nextra config. For example, to add a macro `\RR` that renders as
+`\mathbb{R}` you could use the following configuration.
 
 ```js filename="next.config.mjs" {4-8}
 const withNextra = nextra({
@@ -85,17 +95,24 @@ const withNextra = nextra({
 })
 ```
 
-See [KaTeX’s documentation](https://katex.org/docs/supported) for a list of supported commands.
+See [KaTeX’s documentation](https://katex.org/docs/supported) for a list of
+supported commands.
 
 ### MathJax
 
-When MathJax is enabled (by setting `latex: { renderer: 'mathjax' }{:js}`) math is rendered on page load via
-[`better-react-mathjax`](https://github.com/fast-reflexes/better-react-mathjax) instead of being pre-rendered.
-By default, **MathJax is served via the MathJax CDN** instead of the files being directly included in your site.[^1]
+When MathJax is enabled (by setting `latex: { renderer: 'mathjax' }{:js}`) math
+is rendered on page load via
+[`better-react-mathjax`](https://github.com/fast-reflexes/better-react-mathjax)
+instead of being pre-rendered. By default, **MathJax is served via the MathJax
+CDN** instead of the files being directly included in your site.[^1]
 
-[^1]: This can be changed by setting [`{ options: { src: ... } }{:js}`](https://github.com/fast-reflexes/better-react-mathjax#src-string--undefined) in the Nextra config.
+[^1]:
+    This can be changed by setting
+    [`{ options: { src: ... } }{:js}`](https://github.com/fast-reflexes/better-react-mathjax#src-string--undefined)
+    in the Nextra config.
 
-MathJax rendering is enabled by setting `renderer: 'mathjax'{:js}` in your Nextra config.
+MathJax rendering is enabled by setting `renderer: 'mathjax'{:js}` in your
+Nextra config.
 
 ```js filename="next.config.mjs" {3}
 const withNextra = nextra({
@@ -105,13 +122,18 @@ const withNextra = nextra({
 })
 ```
 
-You can pass additional options to `better-react-mathjax` via the `options` key in your Nextra config. The `config: ...` option sets the
-[MathJax configuration](https://docs.mathjax.org/en/latest/options/index.html). However, note that you can only pass serializable
-options to `better-react-mathjax` via the `options` key in your Nextra config.[^2]
+You can pass additional options to `better-react-mathjax` via the `options` key
+in your Nextra config. The `config: ...` option sets the
+[MathJax configuration](https://docs.mathjax.org/en/latest/options/index.html).
+However, note that you can only pass serializable options to
+`better-react-mathjax` via the `options` key in your Nextra config.[^2]
 
-[^2]: To pass non-serializable objects like Functions, you must use the `<MathJaxContext config={...} />{:jsx}` component directly in your source.
+[^2]:
+    To pass non-serializable objects like Functions, you must use the
+    `<MathJaxContext config={...} />{:jsx}` component directly in your source.
 
-For example, to configure MathJax to render `\RR` as `\mathbb{R}` you could use the following configuration.
+For example, to configure MathJax to render `\RR` as `\mathbb{R}` you could use
+the following configuration.
 
 ```js filename="next.config.mjs" {4-12}
 const withNextra = nextra({
@@ -132,16 +154,21 @@ const withNextra = nextra({
 
 #### MathJax CDN
 
-By default, MathJax is served via the MathJax CDN. To serve files from another location (including locally in your project), you
-must pass the `src: ...` option to the latex config. See the [better-react-mathjax documentation](https://github.com/fast-reflexes/better-react-mathjax#src-string--undefined)
-for details about the `src` option. Additionally, you may need to copy the MathJax distribution into your `/public` folder for it to be served locally.
+By default, MathJax is served via the MathJax CDN. To serve files from another
+location (including locally in your project), you must pass the `src: ...`
+option to the latex config. See the
+[better-react-mathjax documentation](https://github.com/fast-reflexes/better-react-mathjax#src-string--undefined)
+for details about the `src` option. Additionally, you may need to copy the
+MathJax distribution into your `/public` folder for it to be served locally.
 
 ## KaTeX vs. MathJax
 
-With KaTeX, math is pre-rendered which means flicker-free and faster page loads. However, KaTeX does not support all of the features
-of MathJax, especially features related to accessibility.
+With KaTeX, math is pre-rendered which means flicker-free and faster page loads.
+However, KaTeX does not support all of the features of MathJax, especially
+features related to accessibility.
 
-The following two examples show the same formula rendered with KaTeX (first) and MathJax (second).
+The following two examples show the same formula rendered with KaTeX (first) and
+MathJax (second).
 
 ```math
 \int_2^3x^3\,\mathrm{d}x
@@ -150,8 +177,9 @@ The following two examples show the same formula rendered with KaTeX (first) and
 
 <MathJaxExample />
 
-Because of MathJax's accessibility features, the second formula is tab-accessible and has a context menu that helps screen readers reprocess math for the visually impaired.
-
+Because of MathJax's accessibility features, the second formula is
+tab-accessible and has a context menu that helps screen readers reprocess math
+for the visually impaired.
 
 export async function MathJaxExample() {
   const rawMdx = `~~~math
