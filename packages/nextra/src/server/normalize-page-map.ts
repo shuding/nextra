@@ -72,13 +72,15 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
         // Fill all skipped items in meta.
         for (let i = metaKeyIndex + 1; i < index; i++) {
           const key = metaKeys[i]
-          if (key !== '*') {
-            items.push({
-              name: key,
-              route: '',
-              ...meta[key]
-            })
+          if (key === '*') continue
+          const value = meta[key]
+          const isValid = value.type === 'separator'
+          if (!isValid) {
+            throw new Error(
+              `Field key "${key}" in \`_meta\` file points to nothing, remove him`
+            )
           }
+          items.push({ name: key, ...value })
         }
         metaKeyIndex = index
         extendedItem = { ...meta[item.name], ...item }
@@ -90,12 +92,16 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
   // Fill all skipped items in meta.
   for (let i = metaKeyIndex + 1; i < metaKeys.length; i++) {
     const key = metaKeys[i]
-    if (key !== '*') {
-      children.push({
-        name: key,
-        ...meta[key]
-      } as MdxFile)
+    const value = meta[key]
+    if (key === '*') continue
+    const isValid =
+      value.type === 'separator' || value.href || value.type === 'menu'
+    if (!isValid) {
+      throw new Error(
+        `Field key "${key}" in \`_meta\` file points to nothing, remove him`
+      )
     }
+    children.push({ name: key, ...value } as MdxFile)
   }
 
   if (metaKeys.length) {
