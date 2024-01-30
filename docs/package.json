@@ -17,11 +17,11 @@
     "nextra-theme-docs": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "sharp": "^0.32.5"
+    "sharp": "^0.32.6"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.0.1",
-    "@types/node": "^18.11.18",
+    "@types/node": "^20.0.0",
     "@types/react": "^18.2.21",
     "autoprefixer": "^10.4.15",
     "eslint": "^8.30.0",
