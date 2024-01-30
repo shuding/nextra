@@ -36,6 +36,11 @@ type CollectFilesOptions = {
   isFollowingSymlink: boolean
 }
 
+export {
+  generatePageMapFromFilepaths,
+  getFilepaths
+} from './generate-page-map.js'
+
 function cleanFileName(name: string): string {
   return (
     path
@@ -314,21 +319,32 @@ export const pageMap = normalizePageMap(_pageMap)`
 
 export function normalizePageMap(pageMap: PageMapItem[] | Folder): any {
   if (Array.isArray(pageMap)) {
-    return pageMap.map(item =>
-      'children' in item ? normalizePageMap(item) : item
+    return sortFolder(
+      pageMap.map(item => ('children' in item ? normalizePageMap(item) : item))
     )
   }
+  return sortFolder(pageMap)
+}
 
+type ParsedFolder = Folder & {
+  frontMatter: FrontMatter
+  withIndexPage?: true
+}
+
+export function sortFolder(pageMap: PageMapItem[] | Folder) {
   const newChildren: (Folder | MdxFile)[] = []
 
-  const folder = { ...pageMap } as Folder & {
-    frontMatter: FrontMatter
-    withIndexPage?: true
-  }
+  const isFolder = !Array.isArray(pageMap)
+
+  const folder = (
+    isFolder ? { ...pageMap } : { children: pageMap }
+  ) as ParsedFolder
+
   const meta: Record<string, Record<string, any>> = {}
 
   for (const item of folder.children) {
     if (
+      isFolder &&
       'frontMatter' in item &&
       item.frontMatter?.asIndexPage &&
       item.route === folder.route
@@ -395,13 +411,10 @@ export function normalizePageMap(pageMap: PageMapItem[] | Folder): any {
     }
   }
 
-  if (meta) {
+  if (metaKeys.length) {
     // @ts-expect-error
     children.unshift({ data: meta })
   }
 
-  return {
-    ...folder,
-    children
-  }
+  return isFolder ? { ...folder, children } : children
 }
