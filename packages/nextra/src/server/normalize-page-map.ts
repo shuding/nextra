@@ -74,7 +74,8 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
           const key = metaKeys[i]
           if (key === '*') continue
           const value = meta[key]
-          const isValid = value.type === 'separator'
+          const isValid = value.type === 'separator' || value.href
+
           if (!isValid) {
             throw new Error(
               `Field key "${key}" in \`_meta\` file points to nothing, remove him`
@@ -96,6 +97,7 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
     if (key === '*') continue
     const isValid =
       value.type === 'separator' || value.href || value.type === 'menu'
+
     if (!isValid) {
       throw new Error(
         `Field key "${key}" in \`_meta\` file points to nothing, remove him`
