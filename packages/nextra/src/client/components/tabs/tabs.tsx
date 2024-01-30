@@ -92,7 +92,7 @@ export function Tabs({
                 disabled={disabled}
                 className={({ selected }) =>
                   cn(
-                    '_mr-2 _rounded-t _p-2 _font-medium _leading-5 _transition-colors',
+                    '_me-2 _rounded-t _p-2 _font-medium _leading-5 _transition-colors',
                     '_-mb-0.5 _select-none _border-b-2',
                     selected
                       ? '_border-primary-500 _text-primary-600'

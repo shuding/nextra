@@ -47,7 +47,7 @@ function NavbarMenu({
         leaveFrom="_opacity-100"
         leaveTo="_opacity-0"
         as={Menu.Items}
-        className="_absolute _right-0 _z-20 _mt-1 _max-h-64 _min-w-full _overflow-auto _rounded-md _ring-1 _ring-black/5 _bg-white _py-1 _text-sm _shadow-lg dark:_ring-white/20 dark:_bg-neutral-800"
+        className="_absolute _end-0 _z-20 _mt-1 _max-h-64 _min-w-full _overflow-auto _rounded-md _ring-1 _ring-black/5 _bg-white _py-1 _text-sm _shadow-lg dark:_ring-white/20 dark:_bg-neutral-800"
       >
         {Object.entries(items || {}).map(([key, item]) => (
           <Menu.Item key={key}>

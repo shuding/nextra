@@ -22,7 +22,7 @@ export function Pre({
   ...props
 }: PreProps): ReactElement {
   const copyButton = copy === '' && (
-    <CopyToClipboard className={filename ? '_ml-auto' : ''} />
+    <CopyToClipboard className={filename ? '_ms-auto' : ''} />
   )
 
   return (

@@ -59,7 +59,7 @@ export const Folder = memo<FolderProps>(
               }
             />
           </svg>
-          <span className="_ml-1">{label ?? name}</span>
+          <span className="_ms-1">{label ?? name}</span>
         </button>
         {isFolderOpen && (
           <ul>
