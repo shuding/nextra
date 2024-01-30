@@ -167,8 +167,7 @@ export function normalizePages({
     const extendedMeta = extendMeta(
       meta['*'],
       meta[currentItem.name],
-      items.find((item): item is MdxFile => item.name === currentItem.name)
-        ?.frontMatter
+      currentItem.frontMatter
     )
     const { display, type = 'doc' } = extendedMeta
     const extendedPageThemeContext = {

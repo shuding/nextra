@@ -14,32 +14,32 @@ export function Breadcrumb({
   return (
     <div className="nextra-breadcrumb _mt-1.5 _flex _items-center _gap-1 _overflow-hidden _text-sm _text-gray-500 dark:_text-gray-400 contrast-more:_text-current">
       {activePath.map((item, index) => {
-        const isLink = !item.children || item.withIndexPage
-        const isActive = index === activePath.length - 1
+        const isLast = index === activePath.length - 1
+        const isLink =
+          !isLast &&
+          (item.withIndexPage ||
+            item.children![0].route !== activePath.at(index + 1)!.route)
+
+        const ComponentToUse = isLink ? NextLink : 'span'
 
         return (
           <Fragment key={item.route + item.name}>
             {index > 0 && (
               <ArrowRightIcon className="_w-3.5 _shrink-0 rtl:_rotate-180" />
             )}
-            <div
+            <ComponentToUse
               className={cn(
                 '_whitespace-nowrap _transition-colors',
-                isActive
+                isLast
                   ? '_font-medium _text-gray-700 contrast-more:_font-bold contrast-more:_text-current dark:_text-gray-100 contrast-more:dark:_text-current'
-                  : [
-                      '_min-w-[24px] _overflow-hidden _text-ellipsis',
-                      isLink && 'hover:_text-gray-900 dark:hover:_text-gray-100'
-                    ]
+                  : '_min-w-[24px] _overflow-hidden _text-ellipsis',
+                isLink && 'hover:_text-gray-900 dark:hover:_text-gray-100'
               )}
               title={item.title}
+              {...(isLink && { href: item.route } as any)}
             >
-              {isLink && !isActive ? (
-                <NextLink href={item.route}>{item.title}</NextLink>
-              ) : (
-                item.title
-              )}
-            </div>
+              {item.title}
+            </ComponentToUse>
           </Fragment>
         )
       })}
