@@ -48,7 +48,7 @@ export function ThemeConfigProvider({
         })
       },
       ...value.feedback
-    },
+    }
   }
   return (
     <ThemeConfigContext.Provider value={storeRef.current}>

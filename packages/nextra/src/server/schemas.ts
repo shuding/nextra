@@ -117,7 +117,7 @@ export const pageThemeSchema = z.strictObject({
   sidebar: z.boolean(),
   timestamp: z.boolean(),
   toc: z.boolean(),
-  typesetting: z.enum(['default', 'article']),
+  typesetting: z.enum(['default', 'article'])
 })
 
 /**

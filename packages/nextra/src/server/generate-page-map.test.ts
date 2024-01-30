@@ -3,7 +3,7 @@ import { findPagesDir } from 'next/dist/lib/find-pages-dir.js'
 import { generatePageMapFromFilepaths, getFilepaths } from './generate-page-map'
 
 describe('generatePageMapFromFilepaths()', () => {
-  it('should work for blog example', async() => {
+  it('should work for blog example', async () => {
     const cwd = path.join(process.cwd(), '..', '..', 'examples', 'blog')
     const { appDir } = findPagesDir(cwd)
 

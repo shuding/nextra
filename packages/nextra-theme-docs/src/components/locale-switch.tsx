@@ -33,7 +33,9 @@ export function LocaleSwitch({
         document.cookie = `NEXT_LOCALE=${
           option.key
         }; expires=${date.toUTCString()}; path=/`
-        const href = addBasePath(pathname.replace(`/${locale}`, `/${option.key}`))
+        const href = addBasePath(
+          pathname.replace(`/${locale}`, `/${option.key}`)
+        )
         location.href = href
       }}
       selected={{

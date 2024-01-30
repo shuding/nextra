@@ -1,6 +1,6 @@
 import type { ComponentProps } from 'react'
-import { Folder } from './folder.js'
 import { File } from './file.js'
+import { Folder } from './folder.js'
 import { Tree } from './tree.js'
 
 // Workaround to fix

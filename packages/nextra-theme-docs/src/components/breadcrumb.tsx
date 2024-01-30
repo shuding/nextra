@@ -19,7 +19,9 @@ export function Breadcrumb({
 
         return (
           <Fragment key={item.route + item.name}>
-            {index > 0 && <ArrowRightIcon className="_w-3.5 _shrink-0 rtl:_rotate-180" />}
+            {index > 0 && (
+              <ArrowRightIcon className="_w-3.5 _shrink-0 rtl:_rotate-180" />
+            )}
             <div
               className={cn(
                 '_whitespace-nowrap _transition-colors',

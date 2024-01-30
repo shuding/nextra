@@ -12,7 +12,10 @@ export async function getFilepaths({ appDir, cwd }: Params): Promise<string[]> {
     throw new Error('Unable to find `app` directory')
   }
   const result = await fg(
-    path.join(appDir, '**/(page.{js,jsx,jsx,tsx,md,mdx}|_meta.{js,jsx,ts,tsx})'),
+    path.join(
+      appDir,
+      '**/(page.{js,jsx,jsx,tsx,md,mdx}|_meta.{js,jsx,ts,tsx})'
+    ),
     { cwd }
   )
   const relativePaths = result.map(r => path.relative(appDir, r))
@@ -20,24 +23,29 @@ export async function getFilepaths({ appDir, cwd }: Params): Promise<string[]> {
 }
 
 export function generatePageMapFromFilepaths(filepaths: string[]): any {
-  const paths = new Map(filepaths.map(r => {
-    const pathInfo = path.parse(r)
+  const paths = new Map(
+    filepaths.map(r => {
+      const pathInfo = path.parse(r)
 
-    if (pathInfo.name === 'page') {
-      return [pathInfo.dir.replace(/\(.*\)\//, ''), r]
-    }
-    if (pathInfo.name === '_meta') {
-      return [`${pathInfo.dir}/_meta`.replace(/^\//, ''), r]
-    }
-    throw new Error('unchecked')
-  }))
+      if (pathInfo.name === 'page') {
+        return [pathInfo.dir.replace(/\(.*\)\//, ''), r]
+      }
+      if (pathInfo.name === '_meta') {
+        return [`${pathInfo.dir}/_meta`.replace(/^\//, ''), r]
+      }
+      throw new Error('unchecked')
+    })
+  )
 
   const obj = Object.create(null)
 
   for (const path of paths.keys()) {
-    `${path}/index`.replace(/^\//, '').split('/').reduce((r, e) => {
-      return (r[e] ||= {})
-    }, obj)
+    ;`${path}/index`
+      .replace(/^\//, '')
+      .split('/')
+      .reduce((r, e) => {
+        return (r[e] ||= {})
+      }, obj)
   }
 
   function getPageMap<T extends Record<string, T>>(

@@ -22,7 +22,9 @@ export function HOC_MDXWrapper(
     return Wrapper ? (
       // @ts-expect-error -- fixme
       // eslint-disable-next-line react-hooks/rules-of-hooks
-      <Wrapper toc={useTOC()} {...restProps}>{children}</Wrapper>
+      <Wrapper toc={useTOC()} {...restProps}>
+        {children}
+      </Wrapper>
     ) : (
       children
     )

@@ -72,9 +72,7 @@ export function Navbar({
             {logo}
           </NextLink>
         ) : (
-          <div className="_flex _items-center _me-auto">
-            {logo}
-          </div>
+          <div className="_flex _items-center _me-auto">{logo}</div>
         )}
         <ClientNavbar project={project} chat={chat}>
           {children}

@@ -12,6 +12,6 @@ export default defineConfig([
     format: 'esm',
     dts: true,
     outExtension: () => ({ js: '.js' }),
-    bundle: false,
+    bundle: false
   }
 ])

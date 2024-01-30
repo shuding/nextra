@@ -39,10 +39,7 @@ export const useMDXComponents: UseMDXComponents = components => {
     ),
     li: props => <li className="_my-2" {...props} />,
     ol: props => (
-      <ol
-        className="_mt-6 _list-decimal first:_mt-0 _ms-6"
-        {...props}
-      />
+      <ol className="_mt-6 _list-decimal first:_mt-0 _ms-6" {...props} />
     ),
     p: props => <p className="_mt-6 _leading-7 first:_mt-0" {...props} />,
     pre: withIcons(Pre),
@@ -74,10 +71,7 @@ export const useMDXComponents: UseMDXComponents = components => {
     th: Th,
     tr: Tr,
     ul: props => (
-      <ul
-        className="_mt-6 _list-disc first:_mt-0 _ms-6"
-        {...props}
-      />
+      <ul className="_mt-6 _list-disc first:_mt-0 _ms-6" {...props} />
     ),
     wrapper: Wrapper as any,
     ...components
