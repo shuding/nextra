@@ -3,11 +3,13 @@ import { Code, Pre, Table, Td, Th, Tr, withIcons } from 'nextra/components'
 import { ArrowRightIcon } from 'nextra/icons'
 import type { UseMDXComponents } from 'nextra/mdx'
 import { DEFAULT_COMPONENTS } from 'nextra/mdx'
-import { Link } from '../components'
 import { Details } from './details'
 import { H1 } from './h1'
 import { H2, H3, H4, H5, H6 } from './heading'
+import { Link } from './link'
 import { Wrapper } from './wrapper'
+
+export { Link, H1 }
 
 /* eslint sort-keys: error */
 export const useMDXComponents: UseMDXComponents = components => {

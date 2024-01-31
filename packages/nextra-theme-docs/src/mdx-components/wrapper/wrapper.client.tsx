@@ -3,7 +3,7 @@
 import cn from 'clsx'
 import type { NextraMDXContent } from 'nextra'
 import type { ComponentProps, ReactNode } from 'react'
-import { Breadcrumb, NavLinks, TOC } from '../../components'
+import { Breadcrumb, Pagination, TOC } from '../../components'
 import { useConfig, useThemeConfig } from '../../contexts'
 import { renderComponent } from '../../utils'
 
@@ -76,7 +76,7 @@ export function ClientWrapper({
       {children}
       {gitTimestampEl}
       {activeType !== 'page' && themeContext.pagination && (
-        <NavLinks
+        <Pagination
           flatDocsDirectories={flatDocsDirectories}
           currentIndex={activeIndex}
         />

@@ -1,6 +1,6 @@
 export { useTheme } from 'next-themes'
 export { useThemeConfig, useConfig } from './contexts'
-export { useMDXComponents } from './mdx-components'
+export { useMDXComponents, Link, H1 } from './mdx-components'
 export { Layout } from './layout'
 export {
   Bleed,
@@ -11,7 +11,6 @@ export {
   SkipNavLink,
   ThemeSwitch,
   LocaleSwitch,
-  Link,
   Head,
   Banner,
   Flexsearch as Search,

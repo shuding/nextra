@@ -19,7 +19,7 @@ const classes = {
   icon: cn('_inline _h-5 _shrink-0')
 }
 
-export function NavLinks({
+export function Pagination({
   flatDocsDirectories,
   currentIndex
 }: NavLinkProps): ReactElement | null {

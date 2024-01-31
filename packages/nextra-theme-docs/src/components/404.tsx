@@ -3,9 +3,8 @@
 import { usePathname } from 'next/navigation'
 import type { ReactElement, ReactNode } from 'react'
 import { useThemeConfig } from '../contexts'
-import { H1 } from '../mdx-components/h1'
+import { H1, Link } from '../mdx-components'
 import { getGitIssueUrl, renderComponent } from '../utils'
-import { Link } from './link'
 
 type NotFoundPageProps = {
   content?: ReactNode

@@ -16,14 +16,13 @@ export function LocaleSwitch({
   lite,
   className
 }: LocaleSwitchProps): ReactElement | null {
-  const themeConfig = useThemeConfig()
+  const { i18n } = useThemeConfig()
   const pathname = usePathname()
   const locale = ''
 
-  const options = themeConfig.i18n
-  if (!options.length) return null
+  if (!i18n.length) return null
 
-  const selected = options.find(l => locale === l.locale)
+  const selected = i18n.find(l => locale === l.locale)
   return (
     <Select
       title="Change language"
@@ -47,7 +46,7 @@ export function LocaleSwitch({
           </span>
         )
       }}
-      options={options.map(l => ({
+      options={i18n.map(l => ({
         key: l.locale,
         name: l.name
       }))}
