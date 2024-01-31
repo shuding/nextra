@@ -3,7 +3,6 @@
 import type { Dispatch, ReactElement, ReactNode, SetStateAction } from 'react'
 import 'intersection-observer'
 import { createContext, useContext, useRef, useState } from 'react'
-import { IS_BROWSER } from '../constants'
 
 type ActiveAnchor = Record<
   string,
@@ -46,7 +45,7 @@ export const ActiveAnchorProvider = ({
 }): ReactElement => {
   const [activeAnchor, setActiveAnchor] = useState<ActiveAnchor>({})
   const observerRef = useRef<IntersectionObserver | null>(null)
-  if (IS_BROWSER && !observerRef.current) {
+  if (typeof window !== 'undefined' && !observerRef.current) {
     observerRef.current = new IntersectionObserver(
       entries => {
         setActiveAnchor(f => {

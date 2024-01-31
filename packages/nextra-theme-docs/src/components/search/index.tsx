@@ -5,7 +5,6 @@ import type { Document } from 'flexsearch'
 import type { SearchData } from 'nextra'
 import type { ReactElement, ReactNode } from 'react'
 import { useCallback, useState } from 'react'
-import { DEFAULT_LOCALE } from '../../constants'
 import type { SearchResult } from '../../types'
 import { HighlightMatches } from './highlight-matches'
 import { Search } from './search'
@@ -151,7 +150,7 @@ export type FlexsearchProps = {
 }
 
 export function Flexsearch(props: FlexsearchProps): ReactElement {
-  const locale = DEFAULT_LOCALE
+  const locale = 'en-US'
   const basePath = ''
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(false)
