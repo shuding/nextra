@@ -119,22 +119,26 @@ export async function compileMdx(
     _format === 'detect' ? (filePath.endsWith('.mdx') ? 'mdx' : 'md') : _format
 
   const fileCompatible = filePath ? { value: source, path: filePath } : source
-  if (isPageMapImport) {
-    const compiler = createProcessor({
-      format,
-      remarkPlugins: [
-        remarkFrontmatter, // parse and attach yaml node
-        remarkMdxFrontMatter
-      ]
-    })
-    const vFile = await compiler.process(fileCompatible)
-    const content = vFile.toString()
-
-    const index = content.lastIndexOf('function _createMdxContent(props) {')
-    const result = content.slice(0, index)
-
-    return { result } as any
-  }
+  // if (isPageMapImport) {
+  //   const compiler = createProcessor({
+  //     format,
+  //     remarkPlugins: [
+  //       remarkFrontmatter, // parse and attach yaml node
+  //       remarkMdxFrontMatter,
+  //       remarkMdxTitle
+  //     ]
+  //   })
+  //   const vFile = await compiler.process(fileCompatible)
+  //   const content = vFile.toString()
+  //   console.log(content)
+  //
+  //   const index = content.lastIndexOf('export default function MDXContent')
+  //   const result = content
+  //     .slice(0, index)
+  //     .replace('function _createMdxContent', 'function MDXLayout')
+  //   console.log(result)
+  //   return { result } as any
+  // }
 
   let searchIndexKey: string | null = null
   if (typeof search === 'object') {
@@ -178,8 +182,7 @@ export async function compileMdx(
       frontMatter: FrontMatter
     }
 
-    const { readingTime, structurizedData, title, frontMatter } =
-      data
+    const { readingTime, structurizedData, title, frontMatter } = data
     // https://github.com/shuding/nextra/issues/1032
     const result = String(vFile).replaceAll('__esModule', '_\\_esModule')
 
