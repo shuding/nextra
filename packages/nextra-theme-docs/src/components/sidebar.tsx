@@ -15,7 +15,12 @@ import {
   useState
 } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
-import { useActiveAnchor, useMenu, useThemeConfig } from '../contexts'
+import {
+  useActiveAnchor,
+  useConfig,
+  useMenu,
+  useThemeConfig
+} from '../contexts'
 import { renderComponent } from '../utils'
 import { Anchor } from './anchor'
 import { Collapse } from './collapse'
@@ -235,15 +240,17 @@ function File({
     return <Separator title={item.title} />
   }
 
+  const handleClick = () => {
+    setMenu(false)
+  }
+
   return (
     <li className={cn(classes.list, { active })}>
       <Anchor
         href={(item as PageItem).href || item.route}
         newWindow={(item as PageItem).newWindow}
         className={cn(classes.link, active ? classes.active : classes.inactive)}
-        onClick={() => {
-          setMenu(false)
-        }}
+        onClick={handleClick}
         onFocus={() => {
           onFocus?.(item.route)
         }}
@@ -264,9 +271,7 @@ function File({
                   '_flex _gap-2 before:_opacity-25 before:_content-["#"]',
                   activeAnchor[id]?.isActive ? classes.active : classes.inactive
                 )}
-                onClick={() => {
-                  setMenu(false)
-                }}
+                onClick={handleClick}
               >
                 {value}
               </a>
@@ -308,24 +313,15 @@ function Menu({
   )
 }
 
-interface SideBarProps {
-  docsDirectories: PageItem[]
-  directories: Item[]
-  asPopover: boolean
-  // toc: Heading[]
-  includePlaceholder: boolean
-}
-
 // TODO: fix me
 const anchors: Heading[] = []
 
-export function Sidebar({
-  docsDirectories,
-  directories,
-  asPopover,
-  // toc,
-  includePlaceholder
-}: SideBarProps): ReactElement {
+export function Sidebar(): ReactElement {
+  const { normalizePagesResult, hideSidebar: asPopover } = useConfig()
+  const { docsDirectories, directories, activeThemeContext } =
+    normalizePagesResult
+  const includePlaceholder = activeThemeContext.layout === 'default'
+
   const { menu, setMenu } = useMenu()
   const [focused, setFocused] = useState<null | string>(null)
   const [showSidebar, setSidebar] = useState(true)
@@ -333,7 +329,6 @@ export function Sidebar({
 
   // const anchors = useMemo(() => toc.filter(v => v.depth === 2), [toc])
   const sidebarRef = useRef<HTMLDivElement>(null)
-  const containerRef = useRef<HTMLDivElement>(null)
   const mounted = useMounted()
 
   useEffect(() => {
@@ -353,7 +348,7 @@ export function Sidebar({
           block: 'center',
           inline: 'center',
           scrollMode: 'always',
-          boundary: containerRef.current
+          boundary: sidebarRef.current!.parentNode as HTMLDivElement
         })
       }
       if (menu) {
@@ -396,7 +391,6 @@ export function Sidebar({
             ? 'max-md:[transform:translate3d(0,0,0)]'
             : 'max-md:[transform:translate3d(0,-100%,0)]'
         )}
-        ref={containerRef}
       >
         {themeConfig.search && (
           <div className="_px-4 _pt-4 md:_hidden">{themeConfig.search}</div>

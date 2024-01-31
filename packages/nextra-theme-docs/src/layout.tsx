@@ -1,7 +1,7 @@
 import type { NextraThemeLayoutProps } from 'nextra'
 import type { ReactElement, ReactNode } from 'react'
 import { isValidElement } from 'react'
-import { Flexsearch, Footer, Navbar } from './components'
+import { Flexsearch, Footer, Navbar, Sidebar } from './components'
 import type { ThemeProviderProps } from './contexts'
 import {
   ActiveAnchorProvider,
@@ -108,7 +108,10 @@ export function Layout({
         {...nextThemes}
       >
         <ConfigProvider value={pageOpts} footer={footer} navbar={navbar}>
-          <ActiveAnchorProvider>{children}</ActiveAnchorProvider>
+          <ActiveAnchorProvider>
+            <Sidebar />
+            {children}
+          </ActiveAnchorProvider>
         </ConfigProvider>
       </ThemeProvider>
     </ThemeConfigProvider>

@@ -53,24 +53,11 @@ export function ConfigProvider({
     normalizePagesResult
   }
 
-  const content = (
-    <>
-      <Sidebar
-        docsDirectories={docsDirectories}
-        directories={directories}
-        // toc={toc}
-        asPopover={hideSidebar}
-        includePlaceholder={activeThemeContext.layout === 'default'}
-      />
-      {children}
-    </>
-  )
-
   const main = // @ts-expect-error -- fixme
     activeThemeContext.layout === 'raw' ? (
-      content
+      children
     ) : (
-      <div className="_mx-auto _flex _max-w-[90rem]">{content}</div>
+      <div className="_mx-auto _flex _max-w-[90rem]">{children}</div>
     )
 
   return (

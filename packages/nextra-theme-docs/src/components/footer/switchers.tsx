@@ -13,7 +13,7 @@ export function Switchers() {
   }
 
   return (
-    <div className="_mx-auto _flex _max-w-[90rem] _gap-2 _py-2 _px-4 _flex">
+    <div className="_mx-auto _flex _max-w-[90rem] _gap-2 _py-2 _px-4">
       <LocaleSwitch />
       {darkMode && <ThemeSwitch />}
     </div>
