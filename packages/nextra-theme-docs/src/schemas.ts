@@ -36,13 +36,15 @@ export const themeSchema = /* @__PURE__ */ (() =>
     direction: z.enum(['ltr', 'rtl']),
     docsRepositoryBase: z.string().startsWith('https://'),
     editLink: z.strictObject({
-      component: z.custom<
-        FC<{
-          children: ReactNode
-          className?: string
-          filePath?: string
-        }>
-      >(...fc),
+      component: z
+        .custom<
+          FC<{
+            children: ReactNode
+            className?: string
+            filePath?: string
+          }>
+        >(...fc)
+        .or(z.null()),
       content: z.custom<ReactNode | FC>(...reactNode)
     }),
     faviconGlyph: z.string().optional(),
