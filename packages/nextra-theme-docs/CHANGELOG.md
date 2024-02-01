@@ -1,5 +1,16 @@
 # nextra-theme-docs
 
+## 2.13.3
+
+### Patch Changes
+
+- 93b57052: allow to disable `editLink` by specifying `editLink.component: null`
+  in theme config
+- 93b57052: fix `type: 'separator'` zod validation, mark `title` field as
+  optional
+- Updated dependencies [93b57052]
+  - nextra@2.13.3
+
 ## 2.13.2
 
 ### Patch Changes
