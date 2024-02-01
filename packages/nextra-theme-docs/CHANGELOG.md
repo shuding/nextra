@@ -1,5 +1,39 @@
 # nextra-theme-docs
 
+## 2.13.2
+
+### Patch Changes
+
+- ad7b31b0: downgrade remark-math from `6` to `5.1.1` to fix
+  `TypeError: Cannot read properties of undefined (reading 'mathFlowInside')`
+  error
+
+  fix support of ```math lang that was overridden by `rehype-pretty-code`
+
+- Updated dependencies [ad7b31b0]
+  - nextra@2.13.2
+
+## 2.13.1
+
+### Patch Changes
+
+- 3e5e1153: fix showing toggle sidebar button when darkmode is turned off and
+  i18n was not set
+- Updated dependencies [ee02a483]
+  - nextra@2.13.1
+
+## 2.13.0
+
+### Minor Changes
+
+- 7aec7bb5: add `primarySaturation` theme option
+- a55e4aa4: update `npm2yarn`, add bun tab
+
+### Patch Changes
+
+- a55e4aa4: do not scroll to top while calling cmd+k in search input
+  - nextra@2.13.0
+
 ## 2.12.3
 
 ### Patch Changes

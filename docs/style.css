@@ -14,12 +14,17 @@ body {
 }
 
 .home-content a {
-  --tw-ring-color: hsl(var(--nextra-primary-hue) 100% 50%/0.3);
+  --tw-ring-color: hsl(
+    var(--nextra-primary-hue) var(--nextra-primary-saturation) 50%/0.3
+  );
   --tw-text-opacity: 1;
   text-underline-position: under;
   text-decoration-line: underline;
   text-decoration-thickness: from-font;
-  color: hsl(var(--nextra-primary-hue) 100% 50% / var(--tw-text-opacity));
+  color: hsl(
+    var(--nextra-primary-hue) var(--nextra-primary-saturation) 50% /
+      var(--tw-text-opacity)
+  );
 }
 
 figcaption {

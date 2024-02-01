@@ -110,6 +110,12 @@ export const themeSchema = z.strictObject({
       light: z.number()
     })
   ),
+  primarySaturation: z.number().or(
+    z.strictObject({
+      dark: z.number(),
+      light: z.number()
+    })
+  ),
   project: z.strictObject({
     icon: z.custom<ReactNode | FC>(...reactNode),
     link: z.string().startsWith('https://').optional()
@@ -275,6 +281,10 @@ export const DEFAULT_THEME: DocsThemeConfig = {
   primaryHue: {
     dark: 204,
     light: 212
+  },
+  primarySaturation: {
+    dark: 100,
+    light: 100
   },
   project: {
     icon: (

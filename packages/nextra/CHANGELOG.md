@@ -1,5 +1,23 @@
 # nextra
 
+## 2.13.2
+
+### Patch Changes
+
+- ad7b31b0: downgrade remark-math from `6` to `5.1.1` to fix
+  `TypeError: Cannot read properties of undefined (reading 'mathFlowInside')`
+  error
+
+  fix support of ```math lang that was overridden by `rehype-pretty-code`
+
+## 2.13.1
+
+### Patch Changes
+
+- ee02a483: fix `Property 'existsSync' does not exist on type`
+
+## 2.13.0
+
 ## 2.12.3
 
 ### Patch Changes

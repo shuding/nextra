@@ -18,3 +18,4 @@ packages/nextra-theme-*/style.css
 .env
 
 tsup.config.bundled*
+tsconfig.tsbuildinfo

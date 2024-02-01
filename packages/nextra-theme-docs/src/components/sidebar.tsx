@@ -387,7 +387,7 @@ export function Sidebar({
   }, [router.asPath, setMenu])
 
   const hasI18n = config.i18n.length > 0
-  const hasMenu = config.darkMode || hasI18n
+  const hasMenu = config.darkMode || hasI18n || config.sidebar.toggleButton
 
   return (
     <>

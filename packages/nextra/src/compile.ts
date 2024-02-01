@@ -245,6 +245,8 @@ export async function compileMdx(
           { passThrough: ['mdxjsEsm', 'mdxJsxFlowElement'] }
         ],
         [parseMeta, { defaultShowCopyCode }],
+        // Should be before `rehypePrettyCode`
+        latex && rehypeKatex,
         codeHighlight !== false &&
           ([
             rehypePrettyCode,
@@ -253,8 +255,7 @@ export async function compileMdx(
               ...rehypePrettyCodeOptions
             }
           ] as any),
-        attachMeta,
-        latex && rehypeKatex
+        attachMeta
       ].filter(truthy)
     })
   }

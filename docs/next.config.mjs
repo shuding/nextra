@@ -13,7 +13,7 @@ const withNextra = nextra({
 export default withNextra({
   reactStrictMode: true,
   eslint: {
-    // Eslint behaves weirdly in this monorepo.
+    // ESLint behaves weirdly in this monorepo.
     ignoreDuringBuilds: true
   },
   redirects: () => [
@@ -32,7 +32,7 @@ export default withNextra({
     const allowedSvgRegex = /components\/icons\/.+\.svg$/
 
     const fileLoaderRule = config.module.rules.find(rule =>
-      rule.test?.test('.svg')
+      rule.test?.test?.('.svg')
     )
     fileLoaderRule.exclude = allowedSvgRegex
 

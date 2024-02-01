@@ -21,6 +21,10 @@
         'prettier-plugin-pkg',
         '@ianvs/prettier-plugin-sort-imports'
       ]
+    },
+    {
+      groupName: 'latex',
+      matchPackageNames: ['remark-math', 'rehype-katex']
     }
   ]
 }

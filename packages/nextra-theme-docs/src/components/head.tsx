@@ -14,9 +14,13 @@ export function Head(): ReactElement {
   // `head` can be either FC or ReactNode. We have to directly call it if it's an
   // FC because hooks like Next.js' `useRouter` aren't allowed inside NextHead.
   const head = typeof config.head === 'function' ? config.head({}) : config.head
-  const hue = config.primaryHue
+  const { primaryHue: hue, primarySaturation: saturation } = config
   const { dark: darkHue, light: lightHue } =
     typeof hue === 'number' ? { dark: hue, light: hue } : hue
+  const { dark: darkSaturation, light: lightSaturation } =
+    typeof saturation === 'number'
+      ? { dark: saturation, light: saturation }
+      : saturation
   const frontMatter = config.frontMatter as NextSeoProps
 
   return (
@@ -61,6 +65,7 @@ export function Head(): ReactElement {
         <style>{`
         :root {
           --nextra-primary-hue: ${lightHue}deg;
+          --nextra-primary-saturation: ${lightSaturation}%;
           --nextra-navbar-height: 4rem;
           --nextra-menu-height: 3.75rem;
           --nextra-banner-height: 2.5rem;
@@ -68,6 +73,7 @@ export function Head(): ReactElement {
         
         .dark {
           --nextra-primary-hue: ${darkHue}deg;
+          --nextra-primary-saturation: ${darkSaturation}%;
         }
       `}</style>
         {head}
