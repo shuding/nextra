@@ -1,5 +1,21 @@
 # nextra-theme-blog
 
+## 3.0.0-alpha.17
+
+### Minor Changes
+
+- 30438264: add shikiji twoslash
+
+  Demo feature:
+  https://nextra-v2-na3obnhub-shuding1.vercel.app/docs/guide/twoslash-support
+
+### Patch Changes
+
+- 9f55bd1f: update rehype-pretty-code/shikiji to latest
+- Updated dependencies [9f55bd1f]
+- Updated dependencies [30438264]
+  - nextra@3.0.0-alpha.17
+
 ## 3.0.0-alpha.16
 
 ### Minor Changes
