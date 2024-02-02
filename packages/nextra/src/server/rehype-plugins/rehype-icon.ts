@@ -20,7 +20,7 @@ export const REHYPE_ICON_DEFAULT_REPLACES: Record<string, string> = {
   'c#': 'CsharpIcon',
   graphql: 'GraphQLIcon',
   python: 'PythonIcon',
-  py: 'PythonIcon',
+  py: 'PythonIcon'
 }
 
 function createImport(iconName: string) {
