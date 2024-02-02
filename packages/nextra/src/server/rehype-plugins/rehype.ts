@@ -85,7 +85,8 @@ export const rehypeAttachCodeMeta: Plugin<[], any> = () => ast => {
       }
       // @ts-expect-error fixme
       if (preEl.type === 'mdxJsxFlowElement') {
-        if (node.properties.className === undefined) delete node.properties.className
+        if (node.properties.className === undefined)
+          delete node.properties.className
         if (node.properties.style === undefined) delete node.properties.style
         // @ts-expect-error fixme
         preEl.attributes.push(
