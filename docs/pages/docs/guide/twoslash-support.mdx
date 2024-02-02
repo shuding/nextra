@@ -4,8 +4,7 @@ Twoslash provides an inline type hove inside the code block.
 
 ### Basic usage
 
-You can enable twoslash to your code blocks by adding a `twoslash`
-attribute:
+You can enable twoslash to your code blocks by adding a `twoslash` attribute:
 
 ````md copy=false filename="Markdown"
 ```ts twoslash
@@ -15,8 +14,8 @@ interface Todo {
 }
 
 const todo: Readonly<Todo> = {
-  title: 'Delete inactive users'.toUpperCase(),
-//  ^?
+  title: 'Delete inactive users'.toUpperCase()
+  //  ^?
 }
 
 todo.title = 'Hello'
@@ -24,9 +23,9 @@ todo.title = 'Hello'
 Number.parseInt('123', 10)
 //      ^|
 
-               //
-               //
-               //
+//
+//
+//
 ```
 ````
 
@@ -39,8 +38,8 @@ interface Todo {
 }
 
 const todo: Readonly<Todo> = {
-  title: 'Delete inactive users'.toUpperCase(),
-//  ^?
+  title: 'Delete inactive users'.toUpperCase()
+  //  ^?
 }
 
 todo.title = 'Hello'
@@ -48,14 +47,15 @@ todo.title = 'Hello'
 Number.parseInt('123', 10)
 //      ^|
 
-               //
-               //
-               //
+//
+//
+//
 ```
 
 ### Custom log message
 
 You can add log message to your code by adding:
+
 - `@log: <message>` Custom log message
 - `@error: <message>` Custom error message
 - `@warn: <message>` Custom warn message
