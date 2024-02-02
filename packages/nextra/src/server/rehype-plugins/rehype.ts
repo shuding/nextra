@@ -1,6 +1,6 @@
 import type { Element } from 'hast'
 import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
-import { rendererRich, transformerTwoslash } from 'shikiji-twoslash'
+import { bundledLanguages, getHighlighter } from 'shikiji'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 
@@ -23,15 +23,17 @@ export const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS: RehypePrettyCodeOptions = {
     }
     delete node.properties['data-line']
   },
-  transformers: [
-    transformerTwoslash({
-      renderer: rendererRich(),
-      explicitTrigger: true
-    })
-  ],
   theme: {
     light: 'github-light',
     dark: 'github-dark'
+  },
+  getHighlighter(_opts) {
+    return getHighlighter({
+      themes: ['github-light', 'github-dark'],
+      ..._opts,
+      // Without `getHighlighter` MDX lang is not highlighted?
+      langs: Object.keys(bundledLanguages)
+    })
   },
   filterMetaString: meta => meta.replace(CODE_BLOCK_FILENAME_REGEX, '')
 }
