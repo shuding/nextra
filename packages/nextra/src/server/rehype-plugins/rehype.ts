@@ -27,11 +27,10 @@ export const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS: RehypePrettyCodeOptions = {
     light: 'github-light',
     dark: 'github-dark'
   },
-  getHighlighter(_opts) {
+  getHighlighter(opts) {
     return getHighlighter({
-      themes: ['github-light', 'github-dark'],
-      ..._opts,
-      // Without `getHighlighter` MDX lang is not highlighted?
+      ...opts,
+      // Without `getHighlighter` option ```mdx lang is not highlighted...
       langs: Object.keys(bundledLanguages)
     })
   },
