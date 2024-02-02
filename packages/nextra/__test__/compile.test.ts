@@ -482,7 +482,9 @@ describe('Code block', () => {
         mdxOptions,
         codeHighlight: false
       })
-      expect(result).toMatch('<_components.pre data-word-wrap="" data-filename="test.js">')
+      expect(result).toMatch(
+        '<_components.pre data-word-wrap="" data-filename="test.js">'
+      )
     })
 
     it('not highlight filename as substring', async () => {
