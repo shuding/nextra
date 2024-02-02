@@ -1,5 +1,24 @@
 # nextra
 
+## 3.0.0-alpha.16
+
+### Minor Changes
+
+- 5a637010: add icons for following languages:
+
+  - GraphQL (`graphql`)
+  - C++ (`c++`, `cpp`)
+  - C# (`csharp`, `c#`, `cs`)
+  - Python (`python`, `py`)
+
+  allow disallow mobile word wrap button in code blocks with `word-wrap=false`
+  meta data setting
+
+### Patch Changes
+
+- 90c129e6: children in Card component is required only if the image prop is
+  true
+
 ## 3.0.0-alpha.15
 
 ### Patch Changes
