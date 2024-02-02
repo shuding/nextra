@@ -1,5 +1,25 @@
 # nextra-theme-docs
 
+## 3.0.0-alpha.16
+
+### Minor Changes
+
+- 5a637010: add icons for following languages:
+
+  - GraphQL (`graphql`)
+  - C++ (`c++`, `cpp`)
+  - C# (`csharp`, `c#`, `cs`)
+  - Python (`python`, `py`)
+
+  allow disallow mobile word wrap button in code blocks with `word-wrap=false`
+  meta data setting
+
+### Patch Changes
+
+- Updated dependencies [5a637010]
+- Updated dependencies [90c129e6]
+  - nextra@3.0.0-alpha.16
+
 ## 3.0.0-alpha.15
 
 ### Patch Changes
