@@ -473,7 +473,7 @@ describe('Code block', () => {
         mdxOptions
       })
       expect(result).toMatch(
-        '<_components.pre data-language="text" data-word-wrap="" data-filename="test.js">'
+        '<_components.pre tabIndex="0" data-language="text" data-word-wrap="" data-filename="test.js">'
       )
     })
 
