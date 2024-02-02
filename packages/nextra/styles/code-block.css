@@ -146,7 +146,7 @@ pre code:not([class*='twoslash-']) {
 
 .twoslash-popup-code,
 .twoslash-popup-docs {
-  padding: 6px 8px !important;
+  padding: 6px 8px;
 }
 
 .twoslash-popup-code {
