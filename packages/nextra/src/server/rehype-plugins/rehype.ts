@@ -1,5 +1,6 @@
 import type { Element } from 'hast'
 import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
+import { bundledLanguages, getHighlighter } from 'shikiji'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 
@@ -22,11 +23,18 @@ export const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS: RehypePrettyCodeOptions = {
     }
     delete node.properties['data-line']
   },
-  filterMetaString: meta => meta.replace(CODE_BLOCK_FILENAME_REGEX, ''),
   theme: {
     light: 'github-light',
     dark: 'github-dark'
-  }
+  },
+  getHighlighter(opts) {
+    return getHighlighter({
+      ...opts,
+      // Without `getHighlighter` option ```mdx lang is not highlighted...
+      langs: Object.keys(bundledLanguages)
+    })
+  },
+  filterMetaString: meta => meta.replace(CODE_BLOCK_FILENAME_REGEX, '')
 }
 
 export const rehypeParseCodeMeta: Plugin<
@@ -63,7 +71,8 @@ export const rehypeAttachCodeMeta: Plugin<[], any> = () => ast => {
     const isRehypePrettyCode =
       'data-rehype-pretty-code-figure' in node.properties
     if (!isRehypePrettyCode) return
-    // remove <div data-rehype-pretty-code-fragment /> element that wraps <pre /> element
+
+    // remove <figure data-rehype-pretty-code-figure /> element that wraps <pre /> element
     // because we'll wrap with our own <div />
     const preEl: PreElement = Object.assign(node, node.children[0])
     delete preEl.properties['data-theme']
@@ -93,7 +102,7 @@ export const rehypeAttachCodeMeta: Plugin<[], any> = () => ast => {
           ...Object.entries(node.properties).map(([name, value]) => ({
             type: 'mdxJsxAttribute',
             name,
-            value
+            value: Array.isArray(value) ? value.join(' ') : value
           }))
         )
       }

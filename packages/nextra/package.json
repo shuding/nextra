@@ -142,6 +142,7 @@
     "remark-reading-time": "^2.0.1",
     "remark-smartypants": "^2.1.0",
     "shikiji": "^0.10.2",
+    "shikiji-twoslash": "^0.10.2",
     "slash": "^5.1.0",
     "title": "^3.5.3",
     "unist-util-remove": "^4.0.0",
