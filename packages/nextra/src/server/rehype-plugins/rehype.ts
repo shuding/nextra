@@ -7,6 +7,7 @@ import { visit } from 'unist-util-visit'
 type PreElement = Element & {
   __filename?: string
   __hasCopyCode?: boolean
+  __hasWordWrap?: boolean
 }
 
 const CODE_BLOCK_FILENAME_REGEX = /filename="([^"]+)"/
@@ -59,18 +60,17 @@ export const rehypeParseCodeMeta: Plugin<
     visit(ast, { tagName: 'pre' }, (node: PreElement) => {
       const [codeEl] = node.children as Element[]
       // @ts-expect-error fixme
-      const meta = codeEl.data?.meta
+      const { meta = '' } = codeEl.data || {}
 
-      node.__filename = meta?.match(CODE_BLOCK_FILENAME_REGEX)?.[1]
+      node.__filename = meta.match(CODE_BLOCK_FILENAME_REGEX)?.[1]
       node.properties['data-filename'] = node.__filename
 
       node.__hasCopyCode = meta
         ? (defaultShowCopyCode && !/( |^)copy=false($| )/.test(meta)) ||
           /( |^)copy($| )/.test(meta)
         : defaultShowCopyCode
-      if (node.__hasCopyCode) {
-        node.properties['data-copy'] = ''
-      }
+
+      node.__hasWordWrap = meta.includes('word-wrap=false') ? false : true
     })
   }
 
@@ -89,6 +89,10 @@ export const rehypeAttachCodeMeta: Plugin<[], any> = () => ast => {
       const [codeEl] = preEl.children as Element[]
       delete codeEl.properties['data-theme']
       delete codeEl.properties['data-language']
+
+      if (preEl.__hasWordWrap) {
+        preEl.properties['data-word-wrap'] = ''
+      }
 
       if (preEl.__filename) {
         preEl.properties['data-filename'] = preEl.__filename
