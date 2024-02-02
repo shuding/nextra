@@ -147,7 +147,7 @@ export const menuItemSchema = z.strictObject({
 })
 
 const separatorItemSchema = z.strictObject({
-  title: titleSchema.optional(),
+  title: titleSchema,
   type: z.literal('separator')
 })
 

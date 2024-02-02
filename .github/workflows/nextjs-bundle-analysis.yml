@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.12.1
+        uses: styfle/cancel-workflow-action@0.12.0
         with:
           access_token: ${{ github.token }}
 
@@ -33,7 +33,7 @@ jobs:
         run: pnpm i
 
       - name: Restore Next.js Build
-        uses: actions/cache@v4
+        uses: actions/cache@v3
         id: restore-build-cache
         env:
           cache-name: cache-next-build

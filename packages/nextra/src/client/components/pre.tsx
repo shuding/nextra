@@ -1,19 +1,9 @@
 import cn from 'clsx'
 import type { ComponentProps, FC, ReactElement } from 'react'
-import { useRef } from 'react'
+import { useCallback, useRef } from 'react'
 import { WordWrapIcon } from '../icons/index.js'
 import { Button, classes } from './button.js'
 import { CopyToClipboard } from './copy-to-clipboard.js'
-
-function toggleWordWrap() {
-  const htmlDataset = document.documentElement.dataset
-  const hasWordWrap = 'nextraWordWrap' in htmlDataset
-  if (hasWordWrap) {
-    delete htmlDataset.nextraWordWrap
-  } else {
-    htmlDataset.nextraWordWrap = ''
-  }
-}
 
 export function Pre({
   children,
@@ -21,17 +11,25 @@ export function Pre({
   'data-filename': filename,
   'data-copy': copy,
   'data-language': _language,
-  'data-word-wrap': hasWordWrap,
   icon: Icon,
   ...props
 }: ComponentProps<'pre'> & {
   'data-filename'?: string
   'data-copy'?: ''
   'data-language'?: string
-  'data-word-wrap'?: ''
   icon?: FC<ComponentProps<'svg'>>
 }): ReactElement {
   const preRef = useRef<HTMLPreElement | null>(null)
+
+  const toggleWordWrap = useCallback(() => {
+    const htmlDataset = document.documentElement.dataset
+    const hasWordWrap = 'nextraWordWrap' in htmlDataset
+    if (hasWordWrap) {
+      delete htmlDataset.nextraWordWrap
+    } else {
+      htmlDataset.nextraWordWrap = ''
+    }
+  }, [])
 
   const copyButton = copy === '' && (
     <CopyToClipboard
@@ -79,15 +77,13 @@ export function Pre({
           filename ? '_top-14' : '_top-2'
         )}
       >
-        {hasWordWrap === '' && (
-          <Button
-            onClick={toggleWordWrap}
-            className="md:_hidden"
-            title="Toggle word wrap"
-          >
-            <WordWrapIcon className="_h-4 _w-auto" />
-          </Button>
-        )}
+        <Button
+          onClick={toggleWordWrap}
+          className="md:_hidden"
+          title="Toggle word wrap"
+        >
+          <WordWrapIcon className="_h-4 _w-auto" />
+        </Button>
         {!filename && copyButton}
       </div>
     </div>

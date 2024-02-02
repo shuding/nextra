@@ -193,13 +193,6 @@
 
 - d8a406b4: add `"sideEffects": false` for better tree-shaking
 
-## 2.13.3
-
-### Patch Changes
-
-- 93b57052: fix `type: 'separator'` zod validation, mark `title` field as
-  optional
-
 ## 2.13.2
 
 ### Patch Changes

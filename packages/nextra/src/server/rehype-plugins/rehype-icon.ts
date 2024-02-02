@@ -12,15 +12,7 @@ export const REHYPE_ICON_DEFAULT_REPLACES: Record<string, string> = {
   mdx: 'MdxIcon',
   sh: 'TerminalIcon',
   bash: 'TerminalIcon',
-  css: 'CssIcon',
-  'c++': 'CPPIcon',
-  cpp: 'CPPIcon',
-  csharp: 'CsharpIcon',
-  cs: 'CsharpIcon',
-  'c#': 'CsharpIcon',
-  graphql: 'GraphQLIcon',
-  python: 'PythonIcon',
-  py: 'PythonIcon'
+  css: 'CssIcon'
 }
 
 function createImport(iconName: string) {
