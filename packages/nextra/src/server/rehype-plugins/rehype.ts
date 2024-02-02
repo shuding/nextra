@@ -69,8 +69,14 @@ export const rehypeParseCodeMeta: Plugin<
         ? (defaultShowCopyCode && !/( |^)copy=false($| )/.test(meta)) ||
           /( |^)copy($| )/.test(meta)
         : defaultShowCopyCode
+      if (node.__hasCopyCode) {
+        node.properties['data-copy'] = ''
+      }
 
       node.__hasWordWrap = meta.includes('word-wrap=false') ? false : true
+      if (node.__hasWordWrap) {
+        node.properties['data-word-wrap'] = ''
+      }
     })
   }
 
