@@ -1,5 +1,12 @@
 # nextra-theme-blog
 
+## 2.13.3
+
+### Patch Changes
+
+- Updated dependencies [93b57052]
+  - nextra@2.13.3
+
 ## 2.13.2
 
 ### Patch Changes
