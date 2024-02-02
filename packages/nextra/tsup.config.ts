@@ -6,13 +6,14 @@ import { CWD } from './src/server/constants.js'
 
 export default defineConfig([
   {
-    name: 'nextra-esm',
+    name: 'nextra',
     entry: [
       'src/**/*.{ts,tsx}',
       '!src/**/*.d.ts',
       '!src/types.ts',
       '!src/client/icons',
-      '!**/__tests__'
+      '!**/__tests__',
+      '!**/*.{test,spec}.{ts,tsx}'
     ],
     target: 'es2020',
     format: 'esm',
@@ -32,14 +33,25 @@ export default defineConfig([
     }
   },
   {
-    name: 'nextra-icons',
+    name: 'nextra/icons',
     entry: {
       'client/icons/index': 'src/client/icons/index.ts'
     },
     esbuildPlugins: [
       svgr({
         exportType: 'named',
-        typescript: true
+        typescript: true,
+        jsx: {
+          // svgo's removeXMLNS plugin doesn't work for some reason...
+          babelConfig: {
+            plugins: [
+              [
+                '@svgr/babel-plugin-remove-jsx-attribute',
+                { elements: ['svg'], attributes: ['xmlns'] }
+              ]
+            ]
+          }
+        }
       })
     ],
     format: 'esm',

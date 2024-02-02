@@ -74,8 +74,18 @@ const nextra: Nextra = nextraConfig => {
       throw new Error('No Nextra theme found!')
     }
 
+    // const optimizedImports = new Set(
+    //   nextConfig.experimental?.optimizePackageImports || []
+    // )
+    //
+    // optimizedImports.add('nextra/components')
+
     return {
       ...nextConfig,
+      // experimental: {
+      //   ...nextConfig.experimental,
+      //   optimizePackageImports: [...optimizedImports]
+      // },
       ...(nextConfig.output !== 'export' && { rewrites }),
       env: {
         ...nextConfig.env,
@@ -93,7 +103,12 @@ const nextra: Nextra = nextraConfig => {
       webpack(config, options) {
         if (options.nextRuntime !== 'edge' && options.isServer) {
           config.plugins ||= []
-          config.plugins.push(new NextraPlugin({ locales }))
+          config.plugins.push(
+            new NextraPlugin({
+              locales,
+              transformPageMap: nextraConfig.transformPageMap
+            })
+          )
 
           if (loaderOptions.search) {
             config.plugins.push(new NextraSearchPlugin())

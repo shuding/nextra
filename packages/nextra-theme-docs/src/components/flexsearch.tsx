@@ -1,6 +1,5 @@
 import cn from 'clsx'
-// flexsearch types are incorrect, they were overwritten in tsconfig.json
-import FlexSearch from 'flexsearch'
+import type { Document } from 'flexsearch'
 import type { SearchData } from 'nextra'
 import { useRouter } from 'nextra/hooks'
 import type { ReactElement, ReactNode } from 'react'
@@ -10,7 +9,7 @@ import type { SearchResult } from '../types'
 import { HighlightMatches } from './highlight-matches'
 import { Search } from './search'
 
-type SectionIndex = FlexSearch.Document<
+type SectionIndex = Document<
   {
     id: string
     url: string
@@ -22,7 +21,7 @@ type SectionIndex = FlexSearch.Document<
   ['title', 'content', 'url', 'display']
 >
 
-type PageIndex = FlexSearch.Document<
+type PageIndex = Document<
   {
     id: number
     title: string
@@ -60,12 +59,14 @@ const loadIndexesImpl = async (
   basePath: string,
   locale: string
 ): Promise<void> => {
-  const response = await fetch(
-    `${basePath}/_next/static/chunks/nextra-data-${locale}.json`
-  )
-  const searchData = (await response.json()) as SearchData
+  const [searchData, Document] = await Promise.all([
+    fetch(`${basePath}/_next/static/chunks/nextra-data-${locale}.json`).then(
+      response => response.json() as Promise<SearchData>
+    ),
+    import('flexsearch').then(mod => mod.default.Document)
+  ])
 
-  const pageIndex: PageIndex = new FlexSearch.Document({
+  const pageIndex: PageIndex = new Document({
     cache: 100,
     tokenize: 'full',
     document: {
@@ -80,7 +81,7 @@ const loadIndexesImpl = async (
     }
   })
 
-  const sectionIndex: SectionIndex = new FlexSearch.Document({
+  const sectionIndex: SectionIndex = new Document({
     cache: 100,
     tokenize: 'full',
     document: {

@@ -1,5 +1,90 @@
 # nextra-theme-docs
 
+## 3.0.0-alpha.16
+
+### Minor Changes
+
+- 5a637010: add icons for following languages:
+
+  - GraphQL (`graphql`)
+  - C++ (`c++`, `cpp`)
+  - C# (`csharp`, `c#`, `cs`)
+  - Python (`python`, `py`)
+
+  allow disallow mobile word wrap button in code blocks with `word-wrap=false`
+  meta data setting
+
+### Patch Changes
+
+- Updated dependencies [5a637010]
+- Updated dependencies [90c129e6]
+  - nextra@3.0.0-alpha.16
+
+## 3.0.0-alpha.15
+
+### Patch Changes
+
+- Updated dependencies [1a364694]
+  - nextra@3.0.0-alpha.15
+
+## 3.0.0-alpha.14
+
+### Patch Changes
+
+- 45471df5: fix “Scroll to top” is not supposed to be interactable when it is
+  hidden.
+
+  `display:children` doesn't collapse breadcrumbs
+
+  hide external links from pagination
+
+  remove xmlns attribute from icons
+
+  - nextra@3.0.0-alpha.14
+
+## 3.0.0-alpha.13
+
+### Minor Changes
+
+- 6070b025: rename `frontmatter.sidebar_label` to `frontmatter.sidebarTitle`
+- 6070b025: move `removeLinks` function from `nextra-theme-docs` to
+  `nextra/remove-links`
+
+### Patch Changes
+
+- 6070b025: load `flexsearch` dynamically to reduce bundle size
+- Updated dependencies [60ec68c4]
+- Updated dependencies [c74ae90a]
+- Updated dependencies [6070b025]
+- Updated dependencies [8bce16d3]
+- Updated dependencies [6070b025]
+  - nextra@3.0.0-alpha.13
+
+## 3.0.0-alpha.12
+
+### Patch Changes
+
+- Updated dependencies [3644e1c2]
+- Updated dependencies [57bc0e2a]
+  - nextra@3.0.0-alpha.12
+
+## 3.0.0-alpha.11
+
+### Major Changes
+
+- c2ad837d: update to MDX3
+
+### Minor Changes
+
+- eb943d00: add `theme.topContent` and `theme.bottomContent`
+
+### Patch Changes
+
+- eb943d00: hardcode flexsearch version to 0.7.31, because package is broken on
+  0.7.41
+- Updated dependencies [c2ad837d]
+  - nextra@3.0.0-alpha.11
+
 ## 3.0.0-alpha.10
 
 ### Patch Changes
@@ -178,6 +263,17 @@
 - Updated dependencies [d8a406b4]
 - Updated dependencies [576cb6f1]
   - nextra@3.0.0-alpha.0
+
+## 2.13.3
+
+### Patch Changes
+
+- 93b57052: allow to disable `editLink` by specifying `editLink.component: null`
+  in theme config
+- 93b57052: fix `type: 'separator'` zod validation, mark `title` field as
+  optional
+- Updated dependencies [93b57052]
+  - nextra@2.13.3
 
 ## 2.13.2
 

@@ -1,5 +1,68 @@
 # nextra-theme-blog
 
+## 3.0.0-alpha.16
+
+### Minor Changes
+
+- 5a637010: add icons for following languages:
+
+  - GraphQL (`graphql`)
+  - C++ (`c++`, `cpp`)
+  - C# (`csharp`, `c#`, `cs`)
+  - Python (`python`, `py`)
+
+  allow disallow mobile word wrap button in code blocks with `word-wrap=false`
+  meta data setting
+
+### Patch Changes
+
+- Updated dependencies [5a637010]
+- Updated dependencies [90c129e6]
+  - nextra@3.0.0-alpha.16
+
+## 3.0.0-alpha.15
+
+### Patch Changes
+
+- Updated dependencies [1a364694]
+  - nextra@3.0.0-alpha.15
+
+## 3.0.0-alpha.14
+
+### Patch Changes
+
+- nextra@3.0.0-alpha.14
+
+## 3.0.0-alpha.13
+
+### Patch Changes
+
+- Updated dependencies [60ec68c4]
+- Updated dependencies [c74ae90a]
+- Updated dependencies [6070b025]
+- Updated dependencies [8bce16d3]
+- Updated dependencies [6070b025]
+  - nextra@3.0.0-alpha.13
+
+## 3.0.0-alpha.12
+
+### Patch Changes
+
+- Updated dependencies [3644e1c2]
+- Updated dependencies [57bc0e2a]
+  - nextra@3.0.0-alpha.12
+
+## 3.0.0-alpha.11
+
+### Major Changes
+
+- c2ad837d: update to MDX3
+
+### Patch Changes
+
+- Updated dependencies [c2ad837d]
+  - nextra@3.0.0-alpha.11
+
 ## 3.0.0-alpha.10
 
 ### Patch Changes
@@ -127,6 +190,13 @@
 - Updated dependencies [d8a406b4]
 - Updated dependencies [576cb6f1]
   - nextra@3.0.0-alpha.0
+
+## 2.13.3
+
+### Patch Changes
+
+- Updated dependencies [93b57052]
+  - nextra@2.13.3
 
 ## 2.13.2
 

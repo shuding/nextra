@@ -1913,7 +1913,6 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
         },
         {
           "name": "ssr",
-          "route": "#",
           "title": "Next.js SSR",
           "type": "doc",
         },
@@ -2110,7 +2109,6 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
     },
     {
       "name": "ssr",
-      "route": "#",
       "title": "Next.js SSR",
       "type": "doc",
     },
@@ -2306,7 +2304,6 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
     {
       "isUnderCurrentDocsTree": true,
       "name": "ssr",
-      "route": "#",
       "title": "Next.js SSR",
       "type": "doc",
     },
@@ -2539,7 +2536,6 @@ exports[`normalize-page > zh-CN home 1`] = `
         },
         {
           "name": "ssr",
-          "route": "#",
           "title": "Next.js SSR",
           "type": "doc",
         },
@@ -2736,7 +2732,6 @@ exports[`normalize-page > zh-CN home 1`] = `
     },
     {
       "name": "ssr",
-      "route": "#",
       "title": "Next.js SSR",
       "type": "doc",
     },
@@ -2932,7 +2927,6 @@ exports[`normalize-page > zh-CN home 1`] = `
     {
       "isUnderCurrentDocsTree": true,
       "name": "ssr",
-      "route": "#",
       "title": "Next.js SSR",
       "type": "doc",
     },

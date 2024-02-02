@@ -21,8 +21,7 @@ export const recmaRewriteJsx: Plugin<[], Program> =
       )
 
     const createMdxContentIndex = ast.body.findIndex(
-      o =>
-        o.type === 'FunctionDeclaration' && o.id!.name === '_createMdxContent'
+      o => o.type === 'FunctionDeclaration' && o.id.name === '_createMdxContent'
     )
 
     const createMdxContent = ast.body[
@@ -34,7 +33,7 @@ export const recmaRewriteJsx: Plugin<[], Program> =
       return
     }
 
-    createMdxContent.id!.name = 'MDXLayout'
+    createMdxContent.id.name = 'MDXLayout'
 
     const tocProperties = file.data.toc as (
       | { properties: { id: string } }

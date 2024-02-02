@@ -6,10 +6,10 @@
 import type { ReactElement, ReactNode } from 'react'
 import { NEXTRA_INTERNAL } from '../constants.js'
 import type {
-  Heading,
   NextraInternalGlobal,
   NextraMDXContent,
-  PageOpts
+  PageOpts,
+  UseTOC
 } from '../types'
 import { findFolder } from '../utils.js'
 import { useRouter } from './hooks/index.js'
@@ -33,58 +33,58 @@ export function HOC_MDXWrapper(
   __nextra_internal__.pageMap = pageOpts.pageMap
   __nextra_internal__.context[route] = {
     Content: MDXContent,
-    pageOpts
+    pageOpts,
+    useTOC
   }
-  return function NextraLayout({
-    __nextra_pageMap = [],
-    __nextra_dynamic_opts,
-    ...props
-  }: any): ReactElement {
-    const __nextra_internal__ = (globalThis as NextraInternalGlobal)[
-      NEXTRA_INTERNAL
-    ]
-    const { Layout, themeConfig } = __nextra_internal__
-    const { route, locale } = useRouter()
-
-    const pageContext = __nextra_internal__.context[route]
-
-    if (!pageContext) {
-      throw new Error(
-        `No content found for the "${route}" route. Please report it as a bug.`
-      )
-    }
-
-    let { pageOpts } = pageContext
-
-    for (const { route, children } of __nextra_pageMap) {
-      const paths = route.split('/').slice(locale ? 2 : 1)
-      const folder = findFolder(pageOpts.pageMap, paths)
-      folder.children = children
-    }
-
-    if (__nextra_dynamic_opts) {
-      const { title, frontMatter } = __nextra_dynamic_opts
-      pageOpts = {
-        ...pageOpts,
-        title,
-        frontMatter
-      }
-    }
-
-    return (
-      <Layout themeConfig={themeConfig} pageOpts={pageOpts} pageProps={props}>
-        <DataProvider value={props}>
-          <MDXWrapper useTOC={useTOC}>
-            {/* @ts-expect-error */}
-            <pageContext.Content />
-          </MDXWrapper>
-        </DataProvider>
-      </Layout>
-    )
-  }
+  return NextraLayout
 }
 
-type UseTOC = (props: Record<string, any>) => Heading[]
+function NextraLayout({
+  __nextra_pageMap = [],
+  __nextra_dynamic_opts,
+  ...props
+}: any): ReactElement {
+  const __nextra_internal__ = (globalThis as NextraInternalGlobal)[
+    NEXTRA_INTERNAL
+  ]
+  const { Layout, themeConfig } = __nextra_internal__
+  const { route, locale } = useRouter()
+
+  const pageContext = __nextra_internal__.context[route]
+
+  if (!pageContext) {
+    throw new Error(
+      `No content found for the "${route}" route. Please report it as a bug.`
+    )
+  }
+
+  let { pageOpts, useTOC, Content } = pageContext
+
+  for (const { route, children } of __nextra_pageMap) {
+    const paths = route.split('/').slice(locale ? 2 : 1)
+    const folder = findFolder(pageOpts.pageMap, paths)
+    folder.children = children
+  }
+
+  if (__nextra_dynamic_opts) {
+    const { title, frontMatter } = __nextra_dynamic_opts
+    pageOpts = {
+      ...pageOpts,
+      title,
+      frontMatter
+    }
+  }
+
+  return (
+    <Layout themeConfig={themeConfig} pageOpts={pageOpts} pageProps={props}>
+      <DataProvider value={props}>
+        <MDXWrapper useTOC={useTOC}>
+          <Content {...props} />
+        </MDXWrapper>
+      </DataProvider>
+    </Layout>
+  )
+}
 
 function MDXWrapper({
   children,

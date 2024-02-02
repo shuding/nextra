@@ -1,21 +1,8 @@
+import { fc, reactNode } from 'nextra/schemas'
 import type { FC, ReactNode } from 'react'
-import { isValidElement } from 'react'
 import { z } from 'zod'
 import type { NavBarProps } from './components/navbar'
 import type { TOCProps } from './components/toc'
-
-function isReactNode(value: unknown): boolean {
-  return (
-    value == null ||
-    typeof value === 'string' ||
-    isFunction(value) ||
-    isValidElement(value as any)
-  )
-}
-
-function isFunction(value: unknown): boolean {
-  return typeof value === 'function'
-}
 
 const i18nSchema = /* @__PURE__ */ (() =>
   z.array(
@@ -25,12 +12,6 @@ const i18nSchema = /* @__PURE__ */ (() =>
       name: z.string()
     })
   ))()
-
-const reactNode = [
-  isReactNode,
-  { message: 'Must be React.ReactNode or React.FC' }
-] as const
-const fc = [isFunction, { message: 'Must be React.FC' }] as const
 
 export const themeOptionsSchema = /* @__PURE__ */ (() =>
   z.strictObject({
@@ -55,13 +36,15 @@ export const themeSchema = /* @__PURE__ */ (() =>
     direction: z.enum(['ltr', 'rtl']),
     docsRepositoryBase: z.string().startsWith('https://'),
     editLink: z.strictObject({
-      component: z.custom<
-        FC<{
-          children: ReactNode
-          className?: string
-          filePath?: string
-        }>
-      >(...fc),
+      component: z
+        .custom<
+          FC<{
+            children: ReactNode
+            className?: string
+            filePath?: string
+          }>
+        >(...fc)
+        .or(z.null()),
       content: z.custom<ReactNode | FC>(...reactNode)
     }),
     faviconGlyph: z.string().optional(),

@@ -1,4 +1,4 @@
-import { removeLinks } from './remove-links'
+import { removeLinks } from './remove-links.js'
 
 describe('removeLinks()', () => {
   it('should return string', () => {

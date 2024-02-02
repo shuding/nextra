@@ -1,6 +1,5 @@
 import type { Element } from 'hast'
 import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
-// import type { CodeToHastOptions } from 'shikiji'
 import { bundledLanguages, getHighlighter } from 'shikiji'
 import { rendererRich, transformerTwoSlash } from 'shikiji-twoslash'
 import type { Plugin } from 'unified'
@@ -9,6 +8,7 @@ import { visit } from 'unist-util-visit'
 type PreElement = Element & {
   __filename?: string
   __hasCopyCode?: boolean
+  __hasWordWrap?: boolean
 }
 
 const CODE_BLOCK_FILENAME_REGEX = /filename="([^"]+)"/
@@ -35,14 +35,6 @@ export const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS: RehypePrettyCodeOptions = {
     dark: 'github-dark'
   },
   filterMetaString: meta => meta.replace(CODE_BLOCK_FILENAME_REGEX, ''),
-  async getHighlighter(_opts) {
-    const highlighter = await getHighlighter({
-      ..._opts,
-      themes: ['github-light', 'github-dark'],
-      langs: Object.keys(bundledLanguages)
-    })
-    return highlighter
-  }
 }
 
 export const rehypeParseCodeMeta: Plugin<
@@ -54,9 +46,15 @@ export const rehypeParseCodeMeta: Plugin<
     visit(ast, { tagName: 'pre' }, (node: PreElement) => {
       const [codeEl] = node.children as Element[]
       // @ts-expect-error fixme
-      const meta = codeEl.data?.meta
-      node.__filename = meta?.match(CODE_BLOCK_FILENAME_REGEX)?.[1]
+      const { meta = '' } = codeEl.data || {}
+
+      node.__filename = meta.match(CODE_BLOCK_FILENAME_REGEX)?.[1]
       node.properties['data-filename'] = node.__filename
+
+      node.__hasWordWrap = meta.includes('word-wrap=false') ? false : true
+      if (node.__hasWordWrap) {
+        node.properties['data-word-wrap'] = ''
+      }
 
       node.__hasCopyCode = meta
         ? (defaultShowCopyCode && !/( |^)copy=false($| )/.test(meta)) ||
@@ -84,6 +82,10 @@ export const rehypeAttachCodeMeta: Plugin<[], any> = () => ast => {
       delete codeEl.properties['data-theme']
       delete codeEl.properties['data-language']
 
+      if (preEl.__hasWordWrap) {
+        preEl.properties['data-word-wrap'] = ''
+      }
+
       if (preEl.__filename) {
         preEl.properties['data-filename'] = preEl.__filename
       }
@@ -92,27 +94,16 @@ export const rehypeAttachCodeMeta: Plugin<[], any> = () => ast => {
       }
       // @ts-expect-error fixme
       if (preEl.type === 'mdxJsxFlowElement') {
+        if (node.properties.className === undefined)
+          delete node.properties.className
+        if (node.properties.style === undefined) delete node.properties.style
         // @ts-expect-error fixme
         preEl.attributes.push(
-          ...Object.entries(node.properties)
-            .map(([name, value]) => {
-              if (name === 'style') {
-                return null
-              }
-              if (name === 'className') {
-                return {
-                  type: 'mdxJsxAttribute',
-                  name,
-                  value: Array.isArray(value) ? value?.join(' ') : value
-                }
-              }
-              return {
-                type: 'mdxJsxAttribute',
-                name,
-                value
-              }
-            })
-            .filter(Boolean)
+          ...Object.entries(node.properties).map(([name, value]) => ({
+            type: 'mdxJsxAttribute',
+            name,
+            value
+          }))
         )
       }
     } else {

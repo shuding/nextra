@@ -1,5 +1,7 @@
 import type { Folder, MdxFile, Meta, MetaJsonFile, PageMapItem } from '../types'
 
+export { removeLinks } from './remove-links.js'
+
 export function normalizeMeta(meta: Meta): Exclude<Meta, string> {
   return typeof meta === 'string' ? { title: meta } : meta
 }

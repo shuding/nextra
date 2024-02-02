@@ -63,7 +63,6 @@ export async function loader(
     latex,
     codeHighlight,
     transform,
-    transformPageOpts,
     mdxOptions,
     locales
   } = this.getOptions()
@@ -199,18 +198,11 @@ export default MDXLayout`
     }
   }
 
-  let pageOpts: Partial<PageOpts> = {
+  const pageOpts: Partial<PageOpts> = {
     filePath: slash(path.relative(CWD, mdxPath)),
     hasJsxInH1,
     timestamp,
     readingTime
-  }
-  if (transformPageOpts) {
-    // It is possible that a theme wants to attach customized data, or modify
-    // some fields of `pageOpts`. One example is that the theme doesn't need
-    // to access the full pageMap or frontMatter of other pages, and it's not
-    // necessary to include them in the bundle
-    pageOpts = transformPageOpts(pageOpts as any)
   }
   const finalResult = transform ? await transform(result, { route }) : result
 
@@ -222,18 +214,11 @@ import { pageMap } from '${slash(pageMapPath)}'
 ${isAppFileFromNodeModules ? cssImports : ''}
 ${finalResult}
 
-const hoc = HOC_MDXWrapper(
+export default HOC_MDXWrapper(
   MDXLayout,
   '${route}',
   ${stringifiedPageOpts},pageMap,frontMatter,title},
   typeof RemoteContent === 'undefined' ? useTOC : RemoteContent.useTOC
-)
-
-// Exporting Capitalized function make hot works
-export default function HOC(props) {
-  return hoc(props)
-}
-`
-
+)`
   return rawJs
 }

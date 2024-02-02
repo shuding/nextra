@@ -84,28 +84,28 @@ exports[`Page Process > should match i18n site page maps 1`] = `
         },
         {
           "frontMatter": {
-            "sidebar_label": "A Page",
+            "sidebarTitle": "A Page",
           },
           "name": "a-page",
           "route": "/en/about/a-page",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Acknowledgement",
+            "sidebarTitle": "Acknowledgement",
           },
           "name": "acknowledgement",
           "route": "/en/about/acknowledgement",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Changelog",
+            "sidebarTitle": "Changelog",
           },
           "name": "changelog",
           "route": "/en/about/changelog",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Team",
+            "sidebarTitle": "Team",
           },
           "name": "team",
           "route": "/en/about/team",
@@ -118,19 +118,30 @@ exports[`Page Process > should match i18n site page maps 1`] = `
       "children": [
         {
           "data": {
-            "swr-v1": {
+            "*": {
               "theme": {
                 "breadcrumb": true,
+                "topContent": [Function],
               },
-              "title": "Announcing SWR 1.0",
             },
           },
         },
         {
           "frontMatter": {
-            "description": "Almost 2 years ago we open sourced SWR, the tiny data-fetching React library that people love. Today we are reaching another milestone: the 1.0 version of SWR.",
+            "authors": [
+              {
+                "link": "https://twitter.com/shuding_",
+                "name": "Shu Ding",
+              },
+              {
+                "link": "https://twitter.com/huozhi",
+                "name": "Jiachi Liu",
+              },
+            ],
+            "date": 2021-08-27T00:00:00.000Z,
+            "description": "Almost 2 years ago we open sourced SWR, the tiny data-fetching React library that people love. Today we are reaching another milestone: the 1.0 version of SWR",
             "image": "https://assets.vercel.com/image/upload/v1630059453/swr/v1.png",
-            "sidebar_label": "SWR V1",
+            "title": "Announcing SWR 1.0",
           },
           "name": "swr-v1",
           "route": "/en/blog/swr-v1",
@@ -142,7 +153,7 @@ exports[`Page Process > should match i18n site page maps 1`] = `
     {
       "frontMatter": {
         "searchable": false,
-        "sidebar_label": "Blog",
+        "sidebarTitle": "Blog",
       },
       "name": "blog",
       "route": "/en/blog",
@@ -213,7 +224,7 @@ exports[`Page Process > should match i18n site page maps 1`] = `
         },
         {
           "frontMatter": {
-            "sidebar_label": "404 500",
+            "sidebarTitle": "404 500",
           },
           "name": "404-500",
           "route": "/en/docs/404-500",
@@ -239,42 +250,42 @@ exports[`Page Process > should match i18n site page maps 1`] = `
             },
             {
               "frontMatter": {
-                "sidebar_label": "Cache",
+                "sidebarTitle": "Cache",
               },
               "name": "cache",
               "route": "/en/docs/advanced/cache",
             },
             {
               "frontMatter": {
-                "sidebar_label": "Code Highlighting",
+                "sidebarTitle": "Code Highlighting",
               },
               "name": "code-highlighting",
               "route": "/en/docs/advanced/code-highlighting",
             },
             {
               "frontMatter": {
-                "sidebar_label": "Dynamic Markdown Import",
+                "sidebarTitle": "Dynamic Markdown Import",
               },
               "name": "dynamic-markdown-import",
               "route": "/en/docs/advanced/dynamic-markdown-import",
             },
             {
               "frontMatter": {
-                "sidebar_label": "File Name.with.dots",
+                "sidebarTitle": "File Name.with.dots",
               },
               "name": "file-name.with.DOTS",
               "route": "/en/docs/advanced/file-name.with.DOTS",
             },
             {
               "frontMatter": {
-                "sidebar_label": "Images",
+                "sidebarTitle": "Images",
               },
               "name": "images",
               "route": "/en/docs/advanced/images",
             },
             {
               "frontMatter": {
-                "sidebar_label": "Markdown Import",
+                "sidebarTitle": "Markdown Import",
               },
               "name": "markdown-import",
               "route": "/en/docs/advanced/markdown-import",
@@ -283,7 +294,7 @@ exports[`Page Process > should match i18n site page maps 1`] = `
               "children": [
                 {
                   "frontMatter": {
-                    "sidebar_label": "Loooooooooooooooooooong Title",
+                    "sidebarTitle": "Loooooooooooooooooooong Title",
                   },
                   "name": "loooooooooooooooooooong-title",
                   "route": "/en/docs/advanced/more/loooooooooooooooooooong-title",
@@ -292,21 +303,21 @@ exports[`Page Process > should match i18n site page maps 1`] = `
                   "children": [
                     {
                       "frontMatter": {
-                        "sidebar_label": "One",
+                        "sidebarTitle": "One",
                       },
                       "name": "one",
                       "route": "/en/docs/advanced/more/tree/one",
                     },
                     {
                       "frontMatter": {
-                        "sidebar_label": "Three",
+                        "sidebarTitle": "Three",
                       },
                       "name": "three",
                       "route": "/en/docs/advanced/more/tree/three",
                     },
                     {
                       "frontMatter": {
-                        "sidebar_label": "Two",
+                        "sidebarTitle": "Two",
                       },
                       "name": "two",
                       "route": "/en/docs/advanced/more/tree/two",
@@ -321,21 +332,21 @@ exports[`Page Process > should match i18n site page maps 1`] = `
             },
             {
               "frontMatter": {
-                "sidebar_label": "Performance",
+                "sidebarTitle": "Performance",
               },
               "name": "performance",
               "route": "/en/docs/advanced/performance",
             },
             {
               "frontMatter": {
-                "sidebar_label": "React Native",
+                "sidebarTitle": "React Native",
               },
               "name": "react-native",
               "route": "/en/docs/advanced/react-native",
             },
             {
               "frontMatter": {
-                "sidebar_label": "Scrollbar X",
+                "sidebarTitle": "Scrollbar X",
               },
               "name": "scrollbar-x",
               "route": "/en/docs/advanced/scrollbar-x",
@@ -346,161 +357,161 @@ exports[`Page Process > should match i18n site page maps 1`] = `
         },
         {
           "frontMatter": {
-            "sidebar_label": "Advanced",
+            "sidebarTitle": "Advanced",
           },
           "name": "advanced",
           "route": "/en/docs/advanced",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Arguments",
+            "sidebarTitle": "Arguments",
           },
           "name": "arguments",
           "route": "/en/docs/arguments",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Callout",
+            "sidebarTitle": "Callout",
           },
           "name": "callout",
           "route": "/en/docs/callout",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Change Log",
+            "sidebarTitle": "Change Log",
           },
           "name": "change-log",
           "route": "/en/docs/change-log",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Code Block without Language",
+            "sidebarTitle": "Code Block without Language",
           },
           "name": "code-block-without-language",
           "route": "/en/docs/code-block-without-language",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Conditional Fetching",
+            "sidebarTitle": "Conditional Fetching",
           },
           "name": "conditional-fetching",
           "route": "/en/docs/conditional-fetching",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Custom Header Ids",
+            "sidebarTitle": "Custom Header Ids",
           },
           "name": "custom-header-ids",
           "route": "/en/docs/custom-header-ids",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Data Fetching",
+            "sidebarTitle": "Data Fetching",
           },
           "name": "data-fetching",
           "route": "/en/docs/data-fetching",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Error Handling",
+            "sidebarTitle": "Error Handling",
           },
           "name": "error-handling",
           "route": "/en/docs/error-handling",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Getting Started",
+            "sidebarTitle": "Getting Started",
           },
           "name": "getting-started",
           "route": "/en/docs/getting-started",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Global Configuration",
+            "sidebarTitle": "Global Configuration",
           },
           "name": "global-configuration",
           "route": "/en/docs/global-configuration",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Middleware",
+            "sidebarTitle": "Middleware",
           },
           "name": "middleware",
           "route": "/en/docs/middleware",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Mutation",
+            "sidebarTitle": "Mutation",
           },
           "name": "mutation",
           "route": "/en/docs/mutation",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Options",
+            "sidebarTitle": "Options",
           },
           "name": "options",
           "route": "/en/docs/options",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Pagination",
+            "sidebarTitle": "Pagination",
           },
           "name": "pagination",
           "route": "/en/docs/pagination",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Prefetching",
+            "sidebarTitle": "Prefetching",
           },
           "name": "prefetching",
           "route": "/en/docs/prefetching",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Raw Layout",
+            "sidebarTitle": "Raw Layout",
           },
           "name": "raw-layout",
           "route": "/en/docs/raw-layout",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Revalidation",
+            "sidebarTitle": "Revalidation",
           },
           "name": "revalidation",
           "route": "/en/docs/revalidation",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Suspense",
+            "sidebarTitle": "Suspense",
           },
           "name": "suspense",
           "route": "/en/docs/suspense",
         },
         {
           "frontMatter": {
-            "sidebar_label": "TypeScript",
+            "sidebarTitle": "TypeScript",
           },
           "name": "typescript",
           "route": "/en/docs/typescript",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Understanding",
+            "sidebarTitle": "Understanding",
           },
           "name": "understanding",
           "route": "/en/docs/understanding",
         },
         {
           "frontMatter": {
-            "sidebar_label": "With Nextjs",
+            "sidebarTitle": "With Nextjs",
           },
           "name": "with-nextjs",
           "route": "/en/docs/with-nextjs",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Wrap Toc Items",
+            "sidebarTitle": "Wrap Toc Items",
           },
           "name": "wrap-toc-items",
           "route": "/en/docs/wrap-toc-items",
@@ -528,7 +539,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
         {
           "frontMatter": {
             "full": true,
-            "sidebar_label": "Auth",
             "title": "Authentication",
           },
           "name": "auth",
@@ -537,7 +547,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
         {
           "frontMatter": {
             "full": true,
-            "sidebar_label": "Basic",
             "title": "Basic Usage",
           },
           "name": "basic",
@@ -546,7 +555,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
         {
           "frontMatter": {
             "full": true,
-            "sidebar_label": "Error Handling",
             "title": "Error Handling",
           },
           "name": "error-handling",
@@ -554,7 +562,7 @@ exports[`Page Process > should match i18n site page maps 1`] = `
         },
         {
           "frontMatter": {
-            "sidebar_label": "Full",
+            "sidebarTitle": "Full",
           },
           "name": "full",
           "route": "/en/examples/full",
@@ -562,7 +570,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
         {
           "frontMatter": {
             "full": true,
-            "sidebar_label": "Infinite Loading",
             "title": "Infinite Loading",
           },
           "name": "infinite-loading",
@@ -571,7 +578,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
         {
           "frontMatter": {
             "full": true,
-            "sidebar_label": "SSR",
             "title": "Next.js SSR",
           },
           "name": "ssr",
@@ -583,7 +589,7 @@ exports[`Page Process > should match i18n site page maps 1`] = `
     },
     {
       "frontMatter": {
-        "sidebar_label": "Foo",
+        "sidebarTitle": "Foo",
       },
       "name": "foo",
       "route": "/en/foo",
@@ -591,7 +597,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
     {
       "frontMatter": {
         "searchable": false,
-        "sidebar_label": "Index",
         "title": "React Hooks for Data Fetching",
       },
       "name": "index",
@@ -615,10 +620,17 @@ exports[`Page Process > should match i18n site page maps 1`] = `
     },
     {
       "frontMatter": {
-        "sidebar_label": "Test",
+        "sidebarTitle": "Test",
       },
       "name": "test",
       "route": "/en/test",
+    },
+    {
+      "frontMatter": {
+        "sidebarTitle": "Virtual Page",
+      },
+      "name": "virtual-page",
+      "route": "/en/virtual-page",
     },
   ],
   "esPageMap": [
@@ -698,14 +710,14 @@ exports[`Page Process > should match i18n site page maps 1`] = `
             },
             {
               "frontMatter": {
-                "sidebar_label": "File Name.with.dots",
+                "sidebarTitle": "File Name.with.dots",
               },
               "name": "file-name.with.DOTS",
               "route": "/es/docs/advanced/file-name.with.DOTS",
             },
             {
               "frontMatter": {
-                "sidebar_label": "Performance",
+                "sidebarTitle": "Performance",
               },
               "name": "performance",
               "route": "/es/docs/advanced/performance",
@@ -716,112 +728,112 @@ exports[`Page Process > should match i18n site page maps 1`] = `
         },
         {
           "frontMatter": {
-            "sidebar_label": "Arguments",
+            "sidebarTitle": "Arguments",
           },
           "name": "arguments",
           "route": "/es/docs/arguments",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Change Log",
+            "sidebarTitle": "Change Log",
           },
           "name": "change-log",
           "route": "/es/docs/change-log",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Conditional Fetching",
+            "sidebarTitle": "Conditional Fetching",
           },
           "name": "conditional-fetching",
           "route": "/es/docs/conditional-fetching",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Data Fetching",
+            "sidebarTitle": "Data Fetching",
           },
           "name": "data-fetching",
           "route": "/es/docs/data-fetching",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Error Handling",
+            "sidebarTitle": "Error Handling",
           },
           "name": "error-handling",
           "route": "/es/docs/error-handling",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Getting Started",
+            "sidebarTitle": "Getting Started",
           },
           "name": "getting-started",
           "route": "/es/docs/getting-started",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Global Configuration",
+            "sidebarTitle": "Global Configuration",
           },
           "name": "global-configuration",
           "route": "/es/docs/global-configuration",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Mutation",
+            "sidebarTitle": "Mutation",
           },
           "name": "mutation",
           "route": "/es/docs/mutation",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Options",
+            "sidebarTitle": "Options",
           },
           "name": "options",
           "route": "/es/docs/options",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Pagination",
+            "sidebarTitle": "Pagination",
           },
           "name": "pagination",
           "route": "/es/docs/pagination",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Prefetching",
+            "sidebarTitle": "Prefetching",
           },
           "name": "prefetching",
           "route": "/es/docs/prefetching",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Revalidation",
+            "sidebarTitle": "Revalidation",
           },
           "name": "revalidation",
           "route": "/es/docs/revalidation",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Suspense",
+            "sidebarTitle": "Suspense",
           },
           "name": "suspense",
           "route": "/es/docs/suspense",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Understanding",
+            "sidebarTitle": "Understanding",
           },
           "name": "understanding",
           "route": "/es/docs/understanding",
         },
         {
           "frontMatter": {
-            "sidebar_label": "With Nextjs",
+            "sidebarTitle": "With Nextjs",
           },
           "name": "with-nextjs",
           "route": "/es/docs/with-nextjs",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Wrap Toc Items",
+            "sidebarTitle": "Wrap Toc Items",
           },
           "name": "wrap-toc-items",
           "route": "/es/docs/wrap-toc-items",
@@ -838,13 +850,11 @@ exports[`Page Process > should match i18n site page maps 1`] = `
             "basic": "Uso Básico",
             "error-handling": "Manejo De Errores",
             "infinite-loading": "Carga Infinita",
-            "ssr": "Next.js SSR",
           },
         },
         {
           "frontMatter": {
             "full": true,
-            "sidebar_label": "Auth",
             "title": "Autenticación",
           },
           "name": "auth",
@@ -853,7 +863,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
         {
           "frontMatter": {
             "full": true,
-            "sidebar_label": "Basic",
             "title": "Uso Básico",
           },
           "name": "basic",
@@ -862,7 +871,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
         {
           "frontMatter": {
             "full": true,
-            "sidebar_label": "Error Handling",
             "title": "Manejo De Errores",
           },
           "name": "error-handling",
@@ -871,7 +879,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
         {
           "frontMatter": {
             "full": true,
-            "sidebar_label": "Infinite Loading",
             "title": "Carga Infinita",
           },
           "name": "infinite-loading",
@@ -883,7 +890,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
     },
     {
       "frontMatter": {
-        "sidebar_label": "Index",
         "title": "Biblioteca React Hooks para la obtención de datos",
       },
       "name": "index",
@@ -923,19 +929,30 @@ exports[`Page Process > should match i18n site page maps 1`] = `
       "children": [
         {
           "data": {
-            "swr-v1": {
+            "*": {
               "theme": {
                 "breadcrumb": true,
+                "topContent": [Function],
               },
-              "title": "Представляем SWR 1.0",
             },
           },
         },
         {
           "frontMatter": {
+            "authors": [
+              {
+                "link": "https://twitter.com/shuding_",
+                "name": "Shu Ding",
+              },
+              {
+                "link": "https://twitter.com/huozhi",
+                "name": "Jiachi Liu",
+              },
+            ],
+            "date": 2021-08-27T00:00:00.000Z,
             "description": "Почти 2 года назад мы сделали SWR — крошечную React библиотеку с открытым исходным кодом для выборки данных, которую люди полюбили. Сегодня мы приближаемся к еще одной вехе: версии 1.0 SWR!",
             "image": "https://assets.vercel.com/image/upload/v1630059453/swr/v1.png",
-            "sidebar_label": "SWR V1",
+            "title": "Представляем SWR 1.0",
           },
           "name": "swr-v1",
           "route": "/ru/blog/swr-v1",
@@ -946,7 +963,7 @@ exports[`Page Process > should match i18n site page maps 1`] = `
     },
     {
       "frontMatter": {
-        "sidebar_label": "Blog",
+        "sidebarTitle": "Blog",
       },
       "name": "blog",
       "route": "/ru/blog",
@@ -987,28 +1004,28 @@ exports[`Page Process > should match i18n site page maps 1`] = `
             },
             {
               "frontMatter": {
-                "sidebar_label": "Cache",
+                "sidebarTitle": "Cache",
               },
               "name": "cache",
               "route": "/ru/docs/advanced/cache",
             },
             {
               "frontMatter": {
-                "sidebar_label": "File Name.with.dots",
+                "sidebarTitle": "File Name.with.dots",
               },
               "name": "file-name.with.DOTS",
               "route": "/ru/docs/advanced/file-name.with.DOTS",
             },
             {
               "frontMatter": {
-                "sidebar_label": "Performance",
+                "sidebarTitle": "Performance",
               },
               "name": "performance",
               "route": "/ru/docs/advanced/performance",
             },
             {
               "frontMatter": {
-                "sidebar_label": "React Native",
+                "sidebarTitle": "React Native",
               },
               "name": "react-native",
               "route": "/ru/docs/advanced/react-native",
@@ -1019,119 +1036,119 @@ exports[`Page Process > should match i18n site page maps 1`] = `
         },
         {
           "frontMatter": {
-            "sidebar_label": "Arguments",
+            "sidebarTitle": "Arguments",
           },
           "name": "arguments",
           "route": "/ru/docs/arguments",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Change Log",
+            "sidebarTitle": "Change Log",
           },
           "name": "change-log",
           "route": "/ru/docs/change-log",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Conditional Fetching",
+            "sidebarTitle": "Conditional Fetching",
           },
           "name": "conditional-fetching",
           "route": "/ru/docs/conditional-fetching",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Data Fetching",
+            "sidebarTitle": "Data Fetching",
           },
           "name": "data-fetching",
           "route": "/ru/docs/data-fetching",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Error Handling",
+            "sidebarTitle": "Error Handling",
           },
           "name": "error-handling",
           "route": "/ru/docs/error-handling",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Getting Started",
+            "sidebarTitle": "Getting Started",
           },
           "name": "getting-started",
           "route": "/ru/docs/getting-started",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Global Configuration",
+            "sidebarTitle": "Global Configuration",
           },
           "name": "global-configuration",
           "route": "/ru/docs/global-configuration",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Middleware",
+            "sidebarTitle": "Middleware",
           },
           "name": "middleware",
           "route": "/ru/docs/middleware",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Mutation",
+            "sidebarTitle": "Mutation",
           },
           "name": "mutation",
           "route": "/ru/docs/mutation",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Options",
+            "sidebarTitle": "Options",
           },
           "name": "options",
           "route": "/ru/docs/options",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Pagination",
+            "sidebarTitle": "Pagination",
           },
           "name": "pagination",
           "route": "/ru/docs/pagination",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Prefetching",
+            "sidebarTitle": "Prefetching",
           },
           "name": "prefetching",
           "route": "/ru/docs/prefetching",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Revalidation",
+            "sidebarTitle": "Revalidation",
           },
           "name": "revalidation",
           "route": "/ru/docs/revalidation",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Suspense",
+            "sidebarTitle": "Suspense",
           },
           "name": "suspense",
           "route": "/ru/docs/suspense",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Understanding",
+            "sidebarTitle": "Understanding",
           },
           "name": "understanding",
           "route": "/ru/docs/understanding",
         },
         {
           "frontMatter": {
-            "sidebar_label": "With Nextjs",
+            "sidebarTitle": "With Nextjs",
           },
           "name": "with-nextjs",
           "route": "/ru/docs/with-nextjs",
         },
         {
           "frontMatter": {
-            "sidebar_label": "Wrap Toc Items",
+            "sidebarTitle": "Wrap Toc Items",
           },
           "name": "wrap-toc-items",
           "route": "/ru/docs/wrap-toc-items",
@@ -1154,7 +1171,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
         {
           "frontMatter": {
             "full": true,
-            "sidebar_label": "Auth",
             "title": "Аутентификация",
           },
           "name": "auth",
@@ -1163,7 +1179,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
         {
           "frontMatter": {
             "full": true,
-            "sidebar_label": "Basic",
             "title": "Основное использование",
           },
           "name": "basic",
@@ -1172,7 +1187,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
         {
           "frontMatter": {
             "full": true,
-            "sidebar_label": "Error Handling",
             "title": "Обработка ошибок",
           },
           "name": "error-handling",
@@ -1181,7 +1195,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
         {
           "frontMatter": {
             "full": true,
-            "sidebar_label": "Infinite Loading",
             "title": "Бесконечная загрузка",
           },
           "name": "infinite-loading",
@@ -1190,7 +1203,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
         {
           "frontMatter": {
             "full": true,
-            "sidebar_label": "SSR",
             "title": "Next.js SSR",
           },
           "name": "ssr",
@@ -1202,7 +1214,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
     },
     {
       "frontMatter": {
-        "sidebar_label": "Index",
         "title": "React хуки для получения данных",
       },
       "name": "index",

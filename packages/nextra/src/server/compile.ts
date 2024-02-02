@@ -12,6 +12,7 @@ import remarkFrontmatter from 'remark-frontmatter'
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 import remarkReadingTime from 'remark-reading-time'
+import remarkSmartypants from 'remark-smartypants'
 import type { Pluggable, Plugin } from 'unified'
 import type {
   FrontMatter,
@@ -107,12 +108,6 @@ export async function compileMdx(
     rehypePlugins,
     rehypePrettyCodeOptions
   }: MdxOptions = mdxOptions
-
-  if (rehypePrettyCodeOptions) {
-    throw new Error(
-      "`rehypePrettyCodeOptions` is currently unsupported since `rehype-pretty-code` doesn't support `shikiji` package"
-    )
-  }
 
   const format =
     _format === 'detect' ? (filePath.endsWith('.mdx') ? 'mdx' : 'md') : _format
@@ -214,6 +209,8 @@ export async function compileMdx(
       format,
       outputFormat,
       providerImportSource: 'nextra/mdx',
+      // Fix TypeError: _jsx is not a function for remote content
+      development: process.env.NODE_ENV === 'development',
       remarkPlugins: [
         ...(remarkPlugins || []),
         remarkMermaid, // should be before remarkRemoveImports because contains `import { Mermaid } from ...`
@@ -251,7 +248,8 @@ export async function compileMdx(
             replace: '',
             excludeExternalLinks: true
           }
-        ] satisfies Pluggable
+        ] satisfies Pluggable,
+        remarkSmartypants
       ].filter(truthy),
       rehypePlugins: [
         ...(rehypePlugins || []),
@@ -274,7 +272,13 @@ export async function compileMdx(
         ...(codeHighlight === false
           ? []
           : [
-              [rehypePrettyCode, DEFAULT_REHYPE_PRETTY_CODE_OPTIONS] as any,
+              [
+                rehypePrettyCode,
+                {
+                  ...DEFAULT_REHYPE_PRETTY_CODE_OPTIONS,
+                  ...rehypePrettyCodeOptions
+                }
+              ] as any,
               !isRemoteContent && rehypeIcon,
               rehypeAttachCodeMeta
             ]),
@@ -287,7 +291,7 @@ export async function compileMdx(
               return (node.declaration as any).id.name === 'MDXContent'
             }
             if (node.type === 'FunctionDeclaration') {
-              return node.id!.name === 'MDXContent'
+              return node.id.name === 'MDXContent'
             }
           })
 
@@ -318,7 +322,7 @@ export async function compileMdx(
                 const [{ id }] = declaration.declarations
                 varName = (id as any).name
               } else if (declaration.type === 'FunctionDeclaration') {
-                varName = declaration.id!.name
+                varName = declaration.id.name
               } else {
                 throw new Error(`\`${declaration.type}\` unsupported.`)
               }

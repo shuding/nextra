@@ -3,4 +3,4 @@
 'nextra': minor
 ---
 
-add `frontmatter.sidebar_label` support for setting page label in sidebar via frontmatter
+add `frontmatter.sidebarTitle` support for setting page label in sidebar via frontmatter

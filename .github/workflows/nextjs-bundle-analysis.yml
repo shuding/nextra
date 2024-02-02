@@ -1,7 +1,7 @@
 name: Next.js Bundle Analysis
 
 on:
-  pull_request:
+  pull_request_target:
   push:
     branches: [main, v3]
   workflow_dispatch:
@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.12.0
+        uses: styfle/cancel-workflow-action@0.12.1
         with:
           access_token: ${{ github.token }}
 
@@ -33,7 +33,7 @@ jobs:
         run: pnpm i
 
       - name: Restore Next.js Build
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         id: restore-build-cache
         env:
           cache-name: cache-next-build
@@ -54,7 +54,7 @@ jobs:
         run: cd examples/swr-site && npx -p nextjs-bundle-analysis report
 
       - name: Upload bundle
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: bundle
           path: examples/swr-site/.next/analyze/__bundle_analysis.json

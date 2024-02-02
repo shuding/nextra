@@ -160,18 +160,18 @@ export const TagName = () => {
         }
         return (
           <>
-            <_components.h1 id=\\"test-id\\">{'My Header'}</_components.h1>
-            {'\\\\n'}
+            <_components.h1 id="test-id">{'My Header'}</_components.h1>
+            {'\\n'}
             <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
-            {'\\\\n'}
+            {'\\n'}
             <_components.h3 id={toc[1].id}>{toc[1].value}</_components.h3>
-            {'\\\\n'}
+            {'\\n'}
             <_components.h3 id={toc[2].id}>{toc[2].value}</_components.h3>
-            {'\\\\n'}
+            {'\\n'}
             <_components.h4 id={toc[3].id}>{toc[3].value}</_components.h4>
-            {'\\\\n'}
+            {'\\n'}
             <_components.h5 id={toc[4].id}>{toc[4].value}</_components.h5>
-            {'\\\\n'}
+            {'\\n'}
             <_components.h6 id={toc[5].id}>{toc[5].value}</_components.h6>
           </>
         )
@@ -305,27 +305,27 @@ import Last from './three.mdx'
             value: (
               <>
                 {'latex '}
-                <_components.span className=\\"katex\\">
-                  <_components.span className=\\"katex-mathml\\">
-                    <_components.math xmlns=\\"http://www.w3.org/1998/Math/MathML\\">
+                <_components.span className="katex">
+                  <_components.span className="katex-mathml">
+                    <_components.math xmlns="http://www.w3.org/1998/Math/MathML">
                       <_components.semantics>
                         <_components.mrow>
                           <_components.mi>{'l'}</_components.mi>
                         </_components.mrow>
-                        <_components.annotation encoding=\\"application/x-tex\\">{'l'}</_components.annotation>
+                        <_components.annotation encoding="application/x-tex">{'l'}</_components.annotation>
                       </_components.semantics>
                     </_components.math>
                   </_components.span>
-                  <_components.span className=\\"katex-html\\" aria-hidden=\\"true\\">
-                    <_components.span className=\\"base\\">
+                  <_components.span className="katex-html" aria-hidden="true">
+                    <_components.span className="base">
                       <_components.span
-                        className=\\"strut\\"
+                        className="strut"
                         style={{
                           height: '0.6944em'
                         }}
                       />
                       <_components.span
-                        className=\\"mord mathnormal\\"
+                        className="mord mathnormal"
                         style={{
                           marginRight: '0.01968em'
                         }}
@@ -361,26 +361,26 @@ import Last from './three.mdx'
         return (
           <>
             <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
-            {'\\\\n'}
+            {'\\n'}
             <FromMdx />
-            {'\\\\n'}
+            {'\\n'}
             <_components.h2 id={toc[1].id}>{toc[1].value}</_components.h2>
-            {'\\\\n'}
+            {'\\n'}
             <FromMarkdown />
-            {'\\\\n'}
-            {'\\\\n'}
+            {'\\n'}
+            {'\\n'}
             <Last />
-            {'\\\\n'}
+            {'\\n'}
             <IgnoreMe />
-            {'\\\\n'}
+            {'\\n'}
             <_components.h2 id={toc[2].id}>{toc[2].value}</_components.h2>
-            {'\\\\n'}
+            {'\\n'}
             <_components.h2 id={toc[3].id}>{toc[3].value}</_components.h2>
-            {'\\\\n'}
+            {'\\n'}
             <_components.h2 id={toc[4].id}>{toc[4].value}</_components.h2>
-            {'\\\\n'}
+            {'\\n'}
             <_components.h2 id={toc[5].id}>{toc[5].value}</_components.h2>
-            {'\\\\n'}
+            {'\\n'}
             <_components.h2 id={toc[6].id}>{toc[6].value}</_components.h2>
           </>
         )
@@ -473,7 +473,7 @@ describe('Code block', () => {
         mdxOptions
       })
       expect(result).toMatch(
-        '<_components.pre data-language="text" data-filename="test.js">'
+        '<_components.pre tabIndex="0" data-language="text" data-word-wrap="" data-filename="test.js">'
       )
     })
 
@@ -482,7 +482,9 @@ describe('Code block', () => {
         mdxOptions,
         codeHighlight: false
       })
-      expect(result).toMatch('<_components.pre data-filename="test.js">')
+      expect(result).toMatch(
+        '<_components.pre data-filename="test.js" data-word-wrap="">'
+      )
     })
 
     it('not highlight filename as substring', async () => {
@@ -515,7 +517,7 @@ describe('Code block', () => {
             mdxOptions,
             codeHighlight
           })
-          expect(result).toMatch('data-copy="">')
+          expect(result).toMatch('data-word-wrap="" data-copy="">')
         })
 
         it('attach with "defaultShowCopyCode: true"', async () => {
@@ -524,7 +526,7 @@ describe('Code block', () => {
             defaultShowCopyCode: true,
             codeHighlight
           })
-          expect(result).toMatch('data-copy="">')
+          expect(result).toMatch('data-word-wrap="" data-copy="">')
         })
 
         it('not attach with "defaultShowCopyCode: true" and "copy=false"', async () => {
@@ -533,7 +535,7 @@ describe('Code block', () => {
             defaultShowCopyCode: true,
             codeHighlight
           })
-          expect(result).not.toMatch('data-copy="">')
+          expect(result).not.toMatch('data-copy=""')
         })
       })
     }

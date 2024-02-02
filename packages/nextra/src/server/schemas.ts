@@ -1,9 +1,31 @@
 import type { ProcessorOptions } from '@mdx-js/mdx'
 import type { MathJax3Config } from 'better-react-mathjax'
+import type { FC, ReactNode } from 'react'
+import { isValidElement } from 'react'
 import type { Options as RehypeKatexOptions } from 'rehype-katex'
 import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
 import { z } from 'zod'
-import type { PageOpts } from '../types'
+import type { PageMapItem } from '../types'
+
+function isFunction(value: unknown): boolean {
+  return typeof value === 'function'
+}
+
+export const fc = [isFunction, { message: 'Must be React.FC' }] as const
+
+function isReactNode(value: unknown): boolean {
+  return (
+    value == null ||
+    typeof value === 'string' ||
+    isFunction(value) ||
+    isValidElement(value as any)
+  )
+}
+
+export const reactNode = [
+  isReactNode,
+  { message: 'Must be React.ReactNode or React.FC' }
+] as const
 
 export const searchSchema = z.boolean().or(
   z.strictObject({
@@ -72,10 +94,11 @@ export const nextraConfigSchema = z
      */
     transform: z.custom<Transform>(),
     /**
-     * A function to modify the `pageOpts` prop passed to theme layouts.
+     * A function to modify the `pageMap` passed to theme layouts.
      * @experimental
      */
-    transformPageOpts: z.custom<(pageOpts: PageOpts) => PageOpts>(),
+    transformPageMap:
+      z.custom<(pageMap: PageMapItem[], locale: string) => PageMapItem[]>(),
     mdxOptions: z.strictObject({
       rehypePlugins: z.custom<ProcessorOptions['rehypePlugins']>(),
       remarkPlugins: z.custom<ProcessorOptions['remarkPlugins']>(),
@@ -96,7 +119,9 @@ export const pageThemeSchema = z.strictObject({
   sidebar: z.boolean(),
   timestamp: z.boolean(),
   toc: z.boolean(),
-  typesetting: z.enum(['default', 'article'])
+  typesetting: z.enum(['default', 'article']),
+  topContent: z.custom<ReactNode | FC>(...reactNode),
+  bottomContent: z.custom<ReactNode | FC>(...reactNode)
 })
 
 /**
@@ -122,7 +147,7 @@ export const menuItemSchema = z.strictObject({
 })
 
 const separatorItemSchema = z.strictObject({
-  title: titleSchema,
+  title: titleSchema.optional(),
   type: z.literal('separator')
 })
 
