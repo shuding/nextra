@@ -62,7 +62,7 @@ pre code:not([class*='twoslash-']) {
 
 /* ===== Basic ===== */
 :root {
-  --twoslash-border-color: #8888;
+  --twoslash-border-color: #e5e7eb;
   --twoslash-underline-color: currentColor;
   --twoslash-highlighted-border: #c37d0d50;
   --twoslash-highlighted-bg: #c37d0d20;
@@ -86,6 +86,17 @@ pre code:not([class*='twoslash-']) {
   --twoslash-tag-annotate-bg: #1ba67320;
 }
 
+.dark {
+  --twoslash-popup-bg: #000;
+  --twoslash-border-color: #404040;
+}
+
+.twoslash-completion-list,
+.twoslash-popup-container {
+  @apply _rounded;
+  /*!_bg-white dark:!_bg-black*/
+}
+
 /* Respect people's wishes to not have animations */
 @media (prefers-reduced-motion: reduce) {
   .twoslash * {
@@ -106,23 +117,15 @@ pre code:not([class*='twoslash-']) {
 }
 
 .twoslash .twoslash-popup-container {
-  position: absolute;
-  opacity: 0;
-  display: inline-flex;
-  flex-direction: column;
+  @apply _inline-flex _flex-col _opacity-0 _absolute _transition-opacity _duration-300 _z-10;
   transform: translateY(1.1em);
-  background: var(--twoslash-popup-bg);
+  background: var(--twoslash-popup-bg) !important;
   color: var(--twoslash-popup-color);
   border: 1px solid var(--twoslash-border-color);
-  transition: opacity 0.3s;
-  border-radius: 4px;
-  pointer-events: none;
-  z-index: 10;
-  user-select: none;
-  text-align: left;
-  box-shadow: var(--twoslash-popup-shadow);
-  
-  @apply _overflow-hidden;
+  /*pointer-events: none;*/
+  /*user-select: none;*/
+  /*text-align: left;*/
+  /*box-shadow: var(--twoslash-popup-shadow);*/
 }
 
 .twoslash .twoslash-query-presisted .twoslash-popup-container {
@@ -161,8 +164,6 @@ pre code:not([class*='twoslash-']) {
 .twoslash .twoslash-popup-code {
   font-family: var(--twoslach-code-font);
   font-size: var(--twoslach-code-font-size);
-  
-  @apply _bg-[#111];
 }
 
 .twoslash .twoslash-popup-docs {
@@ -216,19 +217,15 @@ pre code:not([class*='twoslash-']) {
   transform: translate(0, 1.2em);
   margin: 3px 0 0 -1px;
   display: inline-block;
-  z-index: 8;
-  box-shadow: var(--twoslash-popup-shadow);
+  z-index: 0;
+  /*box-shadow: var(--twoslash-popup-shadow);*/
   background: var(--twoslash-popup-bg);
   border: 1px solid var(--twoslash-border-color);
 }
 
 .twoslash-completion-list {
-  width: 240px;
   font-size: 0.8rem;
-  padding: 4px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  @apply _py-1 _px-2 _w-60;
 }
 
 .twoslash-completion-list:hover {
