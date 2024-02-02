@@ -101,7 +101,7 @@ export const rehypeAttachCodeMeta: Plugin<[], any> = () => ast => {
           ...Object.entries(node.properties).map(([name, value]) => ({
             type: 'mdxJsxAttribute',
             name,
-            value
+            value: Array.isArray(value) ? value.join(' ') : value
           }))
         )
       }
