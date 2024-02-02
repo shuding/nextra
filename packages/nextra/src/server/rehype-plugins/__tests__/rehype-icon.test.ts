@@ -42,13 +42,13 @@ describe('rehypeIcon', () => {
         }
         return (
           <>
-            <_components.pre icon={CssIcon} data-language="css" data-word-wrap="" data-copy="">
+            <_components.pre icon={CssIcon} tabIndex="0" data-language="css" data-word-wrap="" data-copy="">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {'\\n'}
-            <_components.pre icon={CssIcon} data-language="css" data-word-wrap="" data-copy="">
+            <_components.pre icon={CssIcon} tabIndex="0" data-language="css" data-word-wrap="" data-copy="">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
@@ -83,103 +83,103 @@ describe('rehypeIcon', () => {
         }
         return (
           <>
-            <_components.pre icon={JavaScriptIcon} data-language="js" data-word-wrap="" data-copy="">
+            <_components.pre icon={JavaScriptIcon} tabIndex="0" data-language="js" data-word-wrap="" data-copy="">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {'\\n'}
-            <_components.pre icon={JavaScriptIcon} data-language="jsx" data-word-wrap="" data-copy="">
+            <_components.pre icon={JavaScriptIcon} tabIndex="0" data-language="jsx" data-word-wrap="" data-copy="">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {'\\n'}
-            <_components.pre icon={TypeScriptIcon} data-language="ts" data-word-wrap="" data-copy="">
+            <_components.pre icon={TypeScriptIcon} tabIndex="0" data-language="ts" data-word-wrap="" data-copy="">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {'\\n'}
-            <_components.pre icon={TypeScriptIcon} data-language="tsx" data-word-wrap="" data-copy="">
+            <_components.pre icon={TypeScriptIcon} tabIndex="0" data-language="tsx" data-word-wrap="" data-copy="">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {'\\n'}
-            <_components.pre icon={MarkdownIcon} data-language="md" data-word-wrap="" data-copy="">
+            <_components.pre icon={MarkdownIcon} tabIndex="0" data-language="md" data-word-wrap="" data-copy="">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {'\\n'}
-            <_components.pre icon={MdxIcon} data-language="mdx" data-word-wrap="" data-copy="">
+            <_components.pre icon={MdxIcon} tabIndex="0" data-language="mdx" data-word-wrap="" data-copy="">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {'\\n'}
-            <_components.pre icon={TerminalIcon} data-language="sh" data-word-wrap="" data-copy="">
+            <_components.pre icon={TerminalIcon} tabIndex="0" data-language="sh" data-word-wrap="" data-copy="">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {'\\n'}
-            <_components.pre icon={TerminalIcon} data-language="bash" data-word-wrap="" data-copy="">
+            <_components.pre icon={TerminalIcon} tabIndex="0" data-language="bash" data-word-wrap="" data-copy="">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {'\\n'}
-            <_components.pre icon={CssIcon} data-language="css" data-word-wrap="" data-copy="">
+            <_components.pre icon={CssIcon} tabIndex="0" data-language="css" data-word-wrap="" data-copy="">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {'\\n'}
-            <_components.pre icon={CPPIcon} data-language="c++" data-word-wrap="" data-copy="">
+            <_components.pre icon={CPPIcon} tabIndex="0" data-language="c++" data-word-wrap="" data-copy="">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {'\\n'}
-            <_components.pre icon={CPPIcon} data-language="cpp" data-word-wrap="" data-copy="">
+            <_components.pre icon={CPPIcon} tabIndex="0" data-language="cpp" data-word-wrap="" data-copy="">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {'\\n'}
-            <_components.pre icon={CsharpIcon} data-language="csharp" data-word-wrap="" data-copy="">
+            <_components.pre icon={CsharpIcon} tabIndex="0" data-language="csharp" data-word-wrap="" data-copy="">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {'\\n'}
-            <_components.pre icon={CsharpIcon} data-language="cs" data-word-wrap="" data-copy="">
+            <_components.pre icon={CsharpIcon} tabIndex="0" data-language="cs" data-word-wrap="" data-copy="">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {'\\n'}
-            <_components.pre icon={CsharpIcon} data-language="c#" data-word-wrap="" data-copy="">
+            <_components.pre icon={CsharpIcon} tabIndex="0" data-language="c#" data-word-wrap="" data-copy="">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {'\\n'}
-            <_components.pre icon={GraphQLIcon} data-language="graphql" data-word-wrap="" data-copy="">
+            <_components.pre icon={GraphQLIcon} tabIndex="0" data-language="graphql" data-word-wrap="" data-copy="">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {'\\n'}
-            <_components.pre icon={PythonIcon} data-language="python" data-word-wrap="" data-copy="">
+            <_components.pre icon={PythonIcon} tabIndex="0" data-language="python" data-word-wrap="" data-copy="">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {'\\n'}
-            <_components.pre icon={PythonIcon} data-language="py" data-word-wrap="" data-copy="">
+            <_components.pre icon={PythonIcon} tabIndex="0" data-language="py" data-word-wrap="" data-copy="">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>

@@ -109,12 +109,6 @@ export async function compileMdx(
     rehypePrettyCodeOptions
   }: MdxOptions = mdxOptions
 
-  if (rehypePrettyCodeOptions) {
-    throw new Error(
-      "`rehypePrettyCodeOptions` is currently unsupported since `rehype-pretty-code` doesn't support `shikiji` package"
-    )
-  }
-
   const format =
     _format === 'detect' ? (filePath.endsWith('.mdx') ? 'mdx' : 'md') : _format
 
@@ -278,7 +272,13 @@ export async function compileMdx(
         ...(codeHighlight === false
           ? []
           : [
-              [rehypePrettyCode, DEFAULT_REHYPE_PRETTY_CODE_OPTIONS] as any,
+              [
+                rehypePrettyCode,
+                {
+                  ...DEFAULT_REHYPE_PRETTY_CODE_OPTIONS,
+                  ...rehypePrettyCodeOptions
+                }
+              ] as any,
               !isRemoteContent && rehypeIcon,
               rehypeAttachCodeMeta
             ]),

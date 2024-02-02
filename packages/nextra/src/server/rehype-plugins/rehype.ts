@@ -1,6 +1,5 @@
 import type { Element } from 'hast'
 import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
-import { bundledLanguages, getHighlighter } from 'shiki'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 
@@ -24,30 +23,9 @@ export const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS: RehypePrettyCodeOptions = {
     delete node.properties['data-line']
   },
   filterMetaString: meta => meta.replace(CODE_BLOCK_FILENAME_REGEX, ''),
-  async getHighlighter(_opts) {
-    const DEFAULT_OPTS = {
-      themes: {
-        light: 'github-light',
-        dark: 'github-dark'
-      },
-      defaultColor: false
-    } as const
-
-    const highlighter = await getHighlighter({
-      themes: Object.values(DEFAULT_OPTS.themes),
-      langs: Object.keys(bundledLanguages)
-    })
-
-    const originalCodeToHtml = highlighter.codeToHtml
-
-    return Object.assign(highlighter, {
-      codeToHtml(code: string, lang: string) {
-        return originalCodeToHtml(code, { lang, ...DEFAULT_OPTS })
-      },
-      ansiToHtml(code: string) {
-        return this.codeToHtml(code, 'ansi')
-      }
-    })
+  theme: {
+    light: 'github-light',
+    dark: 'github-dark'
   }
 }
 
@@ -81,11 +59,10 @@ export const rehypeParseCodeMeta: Plugin<
   }
 
 export const rehypeAttachCodeMeta: Plugin<[], any> = () => ast => {
-  visit(ast, [{ tagName: 'div' }, { tagName: 'span' }], (node: Element) => {
+  visit(ast, [{ tagName: 'figure' }, { tagName: 'span' }], (node: Element) => {
     const isRehypePrettyCode =
-      'data-rehype-pretty-code-fragment' in node.properties
+      'data-rehype-pretty-code-figure' in node.properties
     if (!isRehypePrettyCode) return
-
     // remove <div data-rehype-pretty-code-fragment /> element that wraps <pre /> element
     // because we'll wrap with our own <div />
     const preEl: PreElement = Object.assign(node, node.children[0])
@@ -108,6 +85,9 @@ export const rehypeAttachCodeMeta: Plugin<[], any> = () => ast => {
       }
       // @ts-expect-error fixme
       if (preEl.type === 'mdxJsxFlowElement') {
+        if (node.properties.className === undefined)
+          delete node.properties.className
+        if (node.properties.style === undefined) delete node.properties.style
         // @ts-expect-error fixme
         preEl.attributes.push(
           ...Object.entries(node.properties).map(([name, value]) => ({
