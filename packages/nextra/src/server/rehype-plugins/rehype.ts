@@ -1,7 +1,6 @@
 import type { Element } from 'hast'
 import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
-import { bundledLanguages, getHighlighter } from 'shikiji'
-import { rendererRich, transformerTwoSlash } from 'shikiji-twoslash'
+import { rendererRich, transformerTwoslash } from 'shikiji-twoslash'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 
@@ -25,7 +24,7 @@ export const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS: RehypePrettyCodeOptions = {
     delete node.properties['data-line']
   },
   transformers: [
-    transformerTwoSlash({
+    transformerTwoslash({
       renderer: rendererRich(),
       explicitTrigger: true
     })
@@ -34,7 +33,7 @@ export const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS: RehypePrettyCodeOptions = {
     light: 'github-light',
     dark: 'github-dark'
   },
-  filterMetaString: meta => meta.replace(CODE_BLOCK_FILENAME_REGEX, ''),
+  filterMetaString: meta => meta.replace(CODE_BLOCK_FILENAME_REGEX, '')
 }
 
 export const rehypeParseCodeMeta: Plugin<
