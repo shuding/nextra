@@ -65,17 +65,17 @@ export const rehypeParseCodeMeta: Plugin<
       node.__filename = meta.match(CODE_BLOCK_FILENAME_REGEX)?.[1]
       node.properties['data-filename'] = node.__filename
 
+      node.__hasWordWrap = meta.includes('word-wrap=false') ? false : true
+      if (node.__hasWordWrap) {
+        node.properties['data-word-wrap'] = ''
+      }
+
       node.__hasCopyCode = meta
         ? (defaultShowCopyCode && !/( |^)copy=false($| )/.test(meta)) ||
           /( |^)copy($| )/.test(meta)
         : defaultShowCopyCode
       if (node.__hasCopyCode) {
         node.properties['data-copy'] = ''
-      }
-
-      node.__hasWordWrap = meta.includes('word-wrap=false') ? false : true
-      if (node.__hasWordWrap) {
-        node.properties['data-word-wrap'] = ''
       }
     })
   }
