@@ -41,6 +41,7 @@ export function generatePageMapFromFilepaths(filepaths: string[]): any {
       if (pathInfo.name === '_meta') {
         return [`${pathInfo.dir}/_meta`.replace(/^\//, ''), r]
       }
+      return [`/${pathInfo.dir}/${pathInfo.name}`, r]
       throw new Error('unchecked')
     })
   )

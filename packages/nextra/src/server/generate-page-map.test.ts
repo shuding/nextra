@@ -393,7 +393,7 @@ describe('generatePageMapFromFilepaths()', () => {
     `)
   })
 
-  it('should work for docs example', async () => {
+  it.only('should work for docs example', async () => {
     const cwd = path.join(process.cwd(), '..', '..', 'examples', 'docs')
     const pagePaths = await getFilepaths({ dir: path.join(cwd, 'mdx'), cwd })
     expect(pagePaths.sort((a, b) => a.localeCompare(b))).toMatchInlineSnapshot(`
@@ -422,81 +422,137 @@ describe('generatePageMapFromFilepaths()', () => {
       ]
     `)
     expect(generatePageMapFromFilepaths(pagePaths)).toMatchInlineSnapshot(`
-    [
-      {
-        "__metaPath": "_meta.js",
-      },
-      {
-        "children": [
-          {
-            "__pagePath": "advanced/code-highlighting.mdx",
-            "name": "index",
-            "route": "/advanced",
-          },
-          {
-            "__metaPath": "advanced/_meta.js",
-          },
-        ],
-        "name": "advanced",
-        "route": "/advanced",
-      },
-      {
-        "children": [
-          {
-            "__pagePath": "features/themes.mdx",
-            "name": "index",
-            "route": "/features",
-          },
-          {
-            "__metaPath": "features/_meta.js",
-          },
-        ],
-        "name": "features",
-        "route": "/features",
-      },
-      {
-        "__pagePath": "index.mdx",
-        "name": "index",
-        "route": "/",
-      },
-      {
-        "children": [
-          {
-            "children": [
-              {
-                "__pagePath": "themes/blog/index.mdx",
-                "name": "index",
-                "route": "/themes/blog",
-              },
-              {
-                "__metaPath": "themes/blog/_meta.js",
-              },
-            ],
-            "name": "blog",
-            "route": "/themes/blog",
-          },
-          {
-            "children": [
-              {
-                "__pagePath": "themes/docs/tabs.mdx",
-                "name": "index",
-                "route": "/themes/docs",
-              },
-              {
-                "__metaPath": "themes/docs/_meta.js",
-              },
-            ],
-            "name": "docs",
-            "route": "/themes/docs",
-          },
-          {
-            "__metaPath": "themes/_meta.js",
-          },
-        ],
-        "name": "themes",
-        "route": "/themes",
-      },
-    ]
-  `)
+      [
+        {
+          "__metaPath": "_meta.js",
+        },
+        {
+          "children": [
+            {
+              "__pagePath": "advanced/code-highlighting.mdx",
+              "name": "code-highlighting",
+              "route": "/advanced/code-highlighting",
+            },
+            {
+              "__metaPath": "advanced/_meta.js",
+            },
+          ],
+          "name": "advanced",
+          "route": "/advanced",
+        },
+        {
+          "children": [
+            {
+              "__pagePath": "features/i18n.mdx",
+              "name": "i18n",
+              "route": "/features/i18n",
+            },
+            {
+              "__pagePath": "features/image.mdx",
+              "name": "image",
+              "route": "/features/image",
+            },
+            {
+              "__pagePath": "features/latex.mdx",
+              "name": "latex",
+              "route": "/features/latex",
+            },
+            {
+              "__pagePath": "features/mdx.mdx",
+              "name": "mdx",
+              "route": "/features/mdx",
+            },
+            {
+              "__pagePath": "features/ssg.mdx",
+              "name": "ssg",
+              "route": "/features/ssg",
+            },
+            {
+              "__pagePath": "features/themes.mdx",
+              "name": "themes",
+              "route": "/features/themes",
+            },
+            {
+              "__metaPath": "features/_meta.js",
+            },
+          ],
+          "name": "features",
+          "route": "/features",
+        },
+        {
+          "children": [
+            {
+              "__pagePath": "get-started.mdx",
+              "name": "get-started",
+              "route": "//get-started",
+            },
+            {
+              "__pagePath": undefined,
+              "name": "index",
+              "route": "/",
+            },
+          ],
+          "name": "",
+          "route": "/",
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "__pagePath": undefined,
+                  "name": "index",
+                  "route": "/themes/blog",
+                },
+                {
+                  "__metaPath": "themes/blog/_meta.js",
+                },
+              ],
+              "name": "blog",
+              "route": "/themes/blog",
+            },
+            {
+              "children": [
+                {
+                  "__pagePath": "themes/docs/bleed.mdx",
+                  "name": "bleed",
+                  "route": "/themes/docs/bleed",
+                },
+                {
+                  "__pagePath": "themes/docs/callout.mdx",
+                  "name": "callout",
+                  "route": "/themes/docs/callout",
+                },
+                {
+                  "__pagePath": "themes/docs/configuration.mdx",
+                  "name": "configuration",
+                  "route": "/themes/docs/configuration",
+                },
+                {
+                  "__pagePath": undefined,
+                  "name": "index",
+                  "route": "/themes/docs",
+                },
+                {
+                  "__pagePath": "themes/docs/tabs.mdx",
+                  "name": "tabs",
+                  "route": "/themes/docs/tabs",
+                },
+                {
+                  "__metaPath": "themes/docs/_meta.js",
+                },
+              ],
+              "name": "docs",
+              "route": "/themes/docs",
+            },
+            {
+              "__metaPath": "themes/_meta.js",
+            },
+          ],
+          "name": "themes",
+          "route": "/themes",
+        },
+      ]
+    `)
   })
 })
