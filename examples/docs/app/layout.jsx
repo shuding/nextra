@@ -7,7 +7,12 @@ export const metadata = {
   title: {
     template: '%s - Nextra'
   },
-  description: 'Nextra: the Next.js site builder'
+  description: 'Nextra: the Next.js site builder',
+  applicationName: 'Nextra',
+  generator: 'Next.js',
+  appleWebApp: {
+    title: 'Nextra'
+  },
 }
 
 export default async function RootLayout({ children }) {
@@ -17,13 +22,15 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang="en" dir="ltr">
-      <Head />
+      <Head faviconGlyph="✦" />
       <body>
         <Layout
           themeConfig={{
             editLink: {
               content: 'Edit this page on GitHub'
-            }
+            },
+            docsRepositoryBase:
+              'https://github.com/shuding/nextra/blob/core/examples/docs'
           }}
           pageOpts={{
             pageMap,

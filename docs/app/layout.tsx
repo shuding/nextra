@@ -20,6 +20,9 @@ export const metadata: Metadata = {
   ],
   generator: 'Next.js',
   applicationName: 'Nextra',
+  appleWebApp: {
+    title: 'Nextra'
+  },
   title: {
     absolute: '',
     template: '%s | Nextra'

@@ -1,7 +1,4 @@
 export default {
-  docsRepositoryBase:
-    'https://github.com/shuding/nextra/blob/core/examples/docs',
-  faviconGlyph: '✦',
   head: function useHead() {
     return (
       <>
