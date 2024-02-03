@@ -5,7 +5,11 @@ import {
   MarkdownIcon,
   MdxIcon,
   TerminalIcon,
-  TypeScriptIcon
+  TypeScriptIcon,
+  CPPIcon,
+  CsharpIcon,
+  GraphQLIcon,
+  PythonIcon
 } from '../icons/index.js'
 import type { PreProps } from './pre/index.js'
 
@@ -21,7 +25,15 @@ export const LanguageToIcon: Record<
   mdx: MdxIcon,
   sh: TerminalIcon,
   bash: TerminalIcon,
-  css: CssIcon
+  css: CssIcon,
+  'c++': CPPIcon,
+  cpp: CPPIcon,
+  csharp: CsharpIcon,
+  cs: CsharpIcon,
+  'c#': CsharpIcon,
+  graphql: GraphQLIcon,
+  python: PythonIcon,
+  py: PythonIcon
 }
 
 export const withIcons =
