@@ -13,6 +13,10 @@ export const metadata = {
   appleWebApp: {
     title: 'Nextra'
   },
+  other: {
+    'msapplication-TileImage': '/ms-icon-144x144.png',
+    'msapplication-TileColor': '#fff'
+  }
 }
 
 export default async function RootLayout({ children }) {
