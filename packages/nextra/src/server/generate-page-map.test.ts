@@ -77,7 +77,7 @@ describe('generatePageMapFromFilepaths()', () => {
     `)
   })
 
-  it('should work', async () => {
+  it('should work for nextra.site', async () => {
     const cwd = path.join(process.cwd(), '..', '..', 'docs')
     const { appDir } = findPagesDir(cwd)
 
@@ -389,6 +389,18 @@ describe('generatePageMapFromFilepaths()', () => {
           "name": "showcase",
           "route": "/showcase",
         },
+      ]
+    `)
+  })
+
+  it('should work for docs example', async () => {
+    const cwd = path.join(process.cwd(), '..', '..', 'examples', 'docs')
+    const { appDir } = findPagesDir(cwd)
+
+    const pagePaths = await getFilepaths({ dir: appDir, cwd })
+    expect(pagePaths.sort((a, b) => a.localeCompare(b))).toMatchInlineSnapshot(`
+      [
+        "docs/page.jsx",
       ]
     `)
   })
