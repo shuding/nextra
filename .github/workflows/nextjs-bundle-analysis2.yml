@@ -83,8 +83,8 @@ jobs:
       - name: Compare with Base Branch Bundle
         if: success() && github.event.number
         run:
-          ls -laR docs/.next/analyze/base && cd docs
-          && npx -p nextjs-bundle-analysis compare
+          ls -laR docs/.next/analyze/base && cd docs && npx -p
+          nextjs-bundle-analysis compare
 
       - name: Get Comment Body
         id: get-comment-body
