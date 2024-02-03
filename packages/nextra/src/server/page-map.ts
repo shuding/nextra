@@ -24,8 +24,14 @@ const fs = gracefulFs.promises
 
 const limit = pLimit(20)
 
-type Import = { importName: string; filePath: string }
-type DynamicImport = { importName: string; route: string }
+type Import = {
+  importName: string
+  filePath: string
+}
+type DynamicImport = {
+  importName: string
+  route: string
+}
 
 type CollectFilesOptions = {
   dir: string
@@ -226,6 +232,7 @@ function convertPageMapToAst(
 export async function collectPageMap({
   locale = '',
   pageMap,
+  mdxPages,
   imports = [],
   dynamicMetaImports = []
 }: {
@@ -233,6 +240,7 @@ export async function collectPageMap({
   pageMap: PageMapItem[]
   imports?: Import[]
   dynamicMetaImports?: DynamicImport[]
+  mdxPages: Record<string, string>
 }): Promise<string> {
   const someImports: Import[] = []
   const pageMapAst = convertPageMapToAst(
@@ -277,6 +285,7 @@ export async function collectPageMap({
       ]
     }
   ]
+
   // let footer = ''
 
   // if (dynamicMetaImports.length) {
@@ -320,5 +329,7 @@ export async function collectPageMap({
   return `import { normalizePageMap } from 'nextra/page-map'
 ${result.value}
   
-export const pageMap = normalizePageMap(_pageMap)`
+export const pageMap = normalizePageMap(_pageMap)
+
+export const RouteToFilepath = ${JSON.stringify(mdxPages, null, 2)}`
 }

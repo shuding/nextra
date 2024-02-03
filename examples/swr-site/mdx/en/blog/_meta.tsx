@@ -1,5 +1,5 @@
 import { useConfig } from 'nextra-theme-docs'
-import { useRouter } from 'nextra/hooks'
+import { useRouter } from 'next/navigation'
 
 const text = {
   en: 'by',

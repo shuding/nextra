@@ -66,10 +66,12 @@ export class NextraPlugin {
             isAppDir: !mdxBaseDir
           })
 
-          const pageMap = generatePageMapFromFilepaths(relativePaths)
+          const { pageMap, mdxPages } =
+            generatePageMapFromFilepaths(relativePaths)
           const rawJs = await collectPageMap({
             locale,
-            pageMap
+            pageMap,
+            mdxPages
           })
 
           await fs.writeFile(

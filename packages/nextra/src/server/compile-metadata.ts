@@ -14,7 +14,11 @@ import {
 
 export async function compileMetadata(
   source: string,
-  { filePath = '' }: { filePath?: string } = {}
+  {
+    filePath = ''
+  }: {
+    filePath?: string
+  } = {}
 ): Promise<string> {
   const format = filePath.endsWith('.mdx') ? 'mdx' : 'md'
 
@@ -30,11 +34,14 @@ export async function compileMetadata(
     ],
     recmaPlugins: [
       () => ast => {
+        const [importReact] = ast.body.splice(0, 1)
+
         ast.body = ast.body.filter(
           (node: any) =>
             node.type === 'ExportNamedDeclaration' &&
             node.declaration?.declarations[0].id.name === 'metadata'
         )
+        ast.body.unshift(importReact)
       }
     ]
   })

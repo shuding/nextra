@@ -20,7 +20,7 @@ describe('generatePageMapFromFilepaths()', () => {
         "tags/[tag]/page.jsx",
       ]
     `)
-    expect(generatePageMapFromFilepaths(pagePaths)).toMatchInlineSnapshot(`
+    expect(generatePageMapFromFilepaths(pagePaths).pageMap).toMatchInlineSnapshot(`
       [
         {
           "__pagePath": "page.mdx",
@@ -131,7 +131,8 @@ describe('generatePageMapFromFilepaths()', () => {
       ]
     `)
 
-    expect(generatePageMapFromFilepaths(pagePaths)).toMatchInlineSnapshot(`
+    expect(generatePageMapFromFilepaths(pagePaths).pageMap)
+      .toMatchInlineSnapshot(`
       [
         {
           "__pagePath": "about/page.mdx",
@@ -420,7 +421,8 @@ describe('generatePageMapFromFilepaths()', () => {
         "themes/docs/tabs.mdx",
       ]
     `)
-    expect(generatePageMapFromFilepaths(pagePaths)).toMatchInlineSnapshot(`
+    expect(generatePageMapFromFilepaths(pagePaths).pageMap)
+      .toMatchInlineSnapshot(`
       [
         {
           "children": [
