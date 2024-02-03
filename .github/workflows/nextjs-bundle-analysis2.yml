@@ -1,4 +1,4 @@
-name: Next.js Bundle Analysis
+name: 'Bundle Analysis: Docs Theme (nextra.site)'
 
 on:
   pull_request:

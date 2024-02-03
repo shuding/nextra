@@ -1,4 +1,4 @@
-name: Next.js Bundle Analysis
+name: 'Bundle Analysis: I18n Example (SWR Site)'
 
 on:
   pull_request:
