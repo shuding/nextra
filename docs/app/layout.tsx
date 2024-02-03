@@ -40,6 +40,9 @@ export const metadata: Metadata = {
         type: 'image/svg+xml'
       }
     ]
+  },
+  other: {
+    'msapplication-TileColor': '#fff'
   }
 }
 
