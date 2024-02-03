@@ -1,5 +1,6 @@
 import { Screenshot } from 'components/screenshot'
 import { OptionTable } from 'components/table'
+import { Callout } from 'nextra/components'
 import sidebarTitleComponentImage from 'public/assets/docs/sidebar-customized.png'
 
 # Theme Configuration
@@ -13,7 +14,7 @@ export default {
   project: {
     link: 'https://github.com/shuding/nextra'
   },
-  logo: <strong>Project</strong>
+  logo: <b>Project</b>
 }
 ```
 
@@ -523,11 +524,15 @@ Show an “Edit this page” link on the page that points to the file URL on Git
   children: React.ReactNode
   className?: string
   filePath?: string
-}>`,
+}> | null`,
       'Customized edit link component.'
     ]
   ]}
 />
+
+<Callout type="info">
+  To disable it, you can set `editLink.component` to `null`.
+</Callout>
 
 ### Feedback Link
 
@@ -556,7 +561,9 @@ the docs repository, with the current website title prefilled:
   ]}
 />
 
-To disable it, you can set `feedback.content` to `null`.
+<Callout type="info">
+  To disable it, you can set `feedback.content` to `null`.
+</Callout>
 
 ## End of Page
 

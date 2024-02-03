@@ -475,7 +475,7 @@ describe('Code block', () => {
         mdxOptions
       })
       expect(result).toMatch(
-        '<_components.pre data-language="text" data-filename="test.js">'
+        '<_components.pre tabIndex="0" data-language="text" data-word-wrap="" data-filename="test.js">'
       )
     })
 
@@ -484,7 +484,9 @@ describe('Code block', () => {
         mdxOptions,
         codeHighlight: false
       })
-      expect(result).toMatch('<_components.pre data-filename="test.js">')
+      expect(result).toMatch(
+        '<_components.pre data-filename="test.js" data-word-wrap="">'
+      )
     })
 
     it('not highlight filename as substring', async () => {
@@ -517,7 +519,7 @@ describe('Code block', () => {
             mdxOptions,
             codeHighlight
           })
-          expect(result).toMatch('data-copy="">')
+          expect(result).toMatch('data-word-wrap="" data-copy="">')
         })
 
         it('attach with "defaultShowCopyCode: true"', async () => {
@@ -526,7 +528,7 @@ describe('Code block', () => {
             defaultShowCopyCode: true,
             codeHighlight
           })
-          expect(result).toMatch('data-copy="">')
+          expect(result).toMatch('data-word-wrap="" data-copy="">')
         })
 
         it('not attach with "defaultShowCopyCode: true" and "copy=false"', async () => {
@@ -535,7 +537,7 @@ describe('Code block', () => {
             defaultShowCopyCode: true,
             codeHighlight
           })
-          expect(result).not.toMatch('data-copy="">')
+          expect(result).not.toMatch('data-copy=""')
         })
       })
     }

@@ -9,6 +9,7 @@ export type PreProps = ComponentProps<'pre'> & {
   'data-filename'?: string
   'data-copy'?: ''
   'data-language'?: string
+  'data-word-wrap'?: ''
   icon?: ReactNode
 }
 
@@ -18,6 +19,7 @@ export function Pre({
   'data-filename': filename,
   'data-copy': copy,
   'data-language': _language,
+  'data-word-wrap': hasWordWrap,
   icon,
   ...props
 }: PreProps): ReactElement {
@@ -63,9 +65,11 @@ export function Pre({
           filename ? '_top-14' : '_top-2'
         )}
       >
-        <ToggleWordWrapButton>
-          <WordWrapIcon className="_h-4 _w-auto" />
-        </ToggleWordWrapButton>
+        {hasWordWrap === '' && (
+          <ToggleWordWrapButton>
+            <WordWrapIcon className="_h-4 _w-auto" />
+          </ToggleWordWrapButton>
+        )}
         {!filename && copyButton}
       </div>
     </div>

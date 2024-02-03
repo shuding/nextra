@@ -1,5 +1,41 @@
 # nextra-theme-blog
 
+## 3.0.0-alpha.17
+
+### Minor Changes
+
+- 30438264: add shikiji twoslash
+
+  Demo feature:
+  https://nextra-v2-na3obnhub-shuding1.vercel.app/docs/guide/twoslash-support
+
+### Patch Changes
+
+- 9f55bd1f: update rehype-pretty-code/shikiji to latest
+- Updated dependencies [9f55bd1f]
+- Updated dependencies [30438264]
+  - nextra@3.0.0-alpha.17
+
+## 3.0.0-alpha.16
+
+### Minor Changes
+
+- 5a637010: add icons for following languages:
+
+  - GraphQL (`graphql`)
+  - C++ (`c++`, `cpp`)
+  - C# (`csharp`, `c#`, `cs`)
+  - Python (`python`, `py`)
+
+  allow disallow mobile word wrap button in code blocks with `word-wrap=false`
+  meta data setting
+
+### Patch Changes
+
+- Updated dependencies [5a637010]
+- Updated dependencies [90c129e6]
+  - nextra@3.0.0-alpha.16
+
 ## 3.0.0-alpha.15
 
 ### Patch Changes
@@ -170,6 +206,13 @@
 - Updated dependencies [d8a406b4]
 - Updated dependencies [576cb6f1]
   - nextra@3.0.0-alpha.0
+
+## 2.13.3
+
+### Patch Changes
+
+- Updated dependencies [93b57052]
+  - nextra@2.13.3
 
 ## 2.13.2
 

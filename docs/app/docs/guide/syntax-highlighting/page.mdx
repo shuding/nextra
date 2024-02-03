@@ -289,15 +289,20 @@ nextra({
 })
 ```
 
-### Multiple Themes
+### Multiple Themes (Dark and Light Mode)
 
-Nextra currently doesn't support specifying multiple themes. Because Shiki
-renders multiple code blocks for every theme and tags them with an attribute
-`data-theme`, e.g. `data-theme="dark"`.
+Pass your themes to `theme`, where the keys represent the color mode:
 
-<Callout type="info">
-  However, in the future, multiple themes will be supported. You can track the
-  progress in shikiji (newly fork of Shiki)
-  https://github.com/antfu/shikiji#multiple-themes that already supports
-  multiple themes without rendering multiple code blocks.
-</Callout>
+```js copy=false filename="next.config.mjs" {5-8}
+nextra({
+  // ...
+  mdxOptions: {
+    rehypePrettyCodeOptions: {
+      theme: {
+        dark: 'nord',
+        light: 'min-light'
+      }
+    }
+  }
+})
+```

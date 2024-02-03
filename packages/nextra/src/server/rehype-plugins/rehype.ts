@@ -1,12 +1,13 @@
 import type { Element } from 'hast'
 import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
-import { bundledLanguages, getHighlighter } from 'shiki'
+import { bundledLanguages, getHighlighter } from 'shikiji'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 
 type PreElement = Element & {
   __filename?: string
   __hasCopyCode?: boolean
+  __hasWordWrap?: boolean
 }
 
 const CODE_BLOCK_FILENAME_REGEX = /filename="([^"]+)"/
@@ -22,32 +23,18 @@ export const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS: RehypePrettyCodeOptions = {
     }
     delete node.properties['data-line']
   },
-  filterMetaString: meta => meta.replace(CODE_BLOCK_FILENAME_REGEX, ''),
-  async getHighlighter(_opts) {
-    const DEFAULT_OPTS = {
-      themes: {
-        light: 'github-light',
-        dark: 'github-dark'
-      },
-      defaultColor: false
-    } as const
-
-    const highlighter = await getHighlighter({
-      themes: Object.values(DEFAULT_OPTS.themes),
+  theme: {
+    light: 'github-light',
+    dark: 'github-dark'
+  },
+  getHighlighter(opts) {
+    return getHighlighter({
+      ...opts,
+      // Without `getHighlighter` option ```mdx lang is not highlighted...
       langs: Object.keys(bundledLanguages)
     })
-
-    const originalCodeToHtml = highlighter.codeToHtml
-
-    return Object.assign(highlighter, {
-      codeToHtml(code: string, lang: string) {
-        return originalCodeToHtml(code, { lang, ...DEFAULT_OPTS })
-      },
-      ansiToHtml(code: string) {
-        return this.codeToHtml(code, 'ansi')
-      }
-    })
-  }
+  },
+  filterMetaString: meta => meta.replace(CODE_BLOCK_FILENAME_REGEX, '')
 }
 
 export const rehypeParseCodeMeta: Plugin<
@@ -59,10 +46,15 @@ export const rehypeParseCodeMeta: Plugin<
     visit(ast, { tagName: 'pre' }, (node: PreElement) => {
       const [codeEl] = node.children as Element[]
       // @ts-expect-error fixme
-      const meta = codeEl.data?.meta
+      const { meta = '' } = codeEl.data || {}
 
-      node.__filename = meta?.match(CODE_BLOCK_FILENAME_REGEX)?.[1]
+      node.__filename = meta.match(CODE_BLOCK_FILENAME_REGEX)?.[1]
       node.properties['data-filename'] = node.__filename
+
+      node.__hasWordWrap = meta.includes('word-wrap=false') ? false : true
+      if (node.__hasWordWrap) {
+        node.properties['data-word-wrap'] = ''
+      }
 
       node.__hasCopyCode = meta
         ? (defaultShowCopyCode && !/( |^)copy=false($| )/.test(meta)) ||
@@ -75,12 +67,12 @@ export const rehypeParseCodeMeta: Plugin<
   }
 
 export const rehypeAttachCodeMeta: Plugin<[], any> = () => ast => {
-  visit(ast, [{ tagName: 'div' }, { tagName: 'span' }], (node: Element) => {
+  visit(ast, [{ tagName: 'figure' }, { tagName: 'span' }], (node: Element) => {
     const isRehypePrettyCode =
-      'data-rehype-pretty-code-fragment' in node.properties
+      'data-rehype-pretty-code-figure' in node.properties
     if (!isRehypePrettyCode) return
 
-    // remove <div data-rehype-pretty-code-fragment /> element that wraps <pre /> element
+    // remove <figure data-rehype-pretty-code-figure /> element that wraps <pre /> element
     // because we'll wrap with our own <div />
     const preEl: PreElement = Object.assign(node, node.children[0])
     delete preEl.properties['data-theme']
@@ -90,6 +82,10 @@ export const rehypeAttachCodeMeta: Plugin<[], any> = () => ast => {
       delete codeEl.properties['data-theme']
       delete codeEl.properties['data-language']
 
+      if (preEl.__hasWordWrap) {
+        preEl.properties['data-word-wrap'] = ''
+      }
+
       if (preEl.__filename) {
         preEl.properties['data-filename'] = preEl.__filename
       }
@@ -98,12 +94,15 @@ export const rehypeAttachCodeMeta: Plugin<[], any> = () => ast => {
       }
       // @ts-expect-error fixme
       if (preEl.type === 'mdxJsxFlowElement') {
+        if (node.properties.className === undefined)
+          delete node.properties.className
+        if (node.properties.style === undefined) delete node.properties.style
         // @ts-expect-error fixme
         preEl.attributes.push(
           ...Object.entries(node.properties).map(([name, value]) => ({
             type: 'mdxJsxAttribute',
             name,
-            value
+            value: Array.isArray(value) ? value.join(' ') : value
           }))
         )
       }

@@ -24,7 +24,7 @@ export const themeSchema = /* @__PURE__ */ (() =>
             filePath?: string
           }>
         >(...fc)
-        .optional(),
+        .or(z.null()),
       content: z.custom<ReactNode | FC>(...reactNode)
     }),
     faviconGlyph: z.string().optional(),
