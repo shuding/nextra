@@ -4,7 +4,8 @@ const withNextra = nextra({
   latex: true,
   search: {
     codeblocks: false
-  }
+  },
+  mdxBaseDir: './mdx'
 })
 
 export default withNextra({
