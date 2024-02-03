@@ -15,7 +15,7 @@ export const remarkExportOnlyMetadata: Plugin<[], Root> = () => ast => {
     if (!isExportNamed) return true
 
     const isVariableDeclaration =
-      body.declaration.type === 'VariableDeclaration'
+      body.declaration && body.declaration.type === 'VariableDeclaration'
     if (!isVariableDeclaration) return true
 
     const isMetadata = body.declaration.declarations[0].id.name === 'metadata'
