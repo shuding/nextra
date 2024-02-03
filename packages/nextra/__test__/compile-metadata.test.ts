@@ -38,6 +38,15 @@ export const MyComponent = () => null
       "`)
   })
   it('should remove everything with export default', () => {
+    const result = compileMetadata('export { default } from "./foo.mdx"', {
+      filePath: 'bar.mdx'
+    })
+    expect(result).resolves.toMatchInlineSnapshot(`
+      "export const metadata = {};
+      "`)
+  })
+
+  it('should remove everything for `format: "md"` which is by default', () => {
     const result = compileMetadata(`
 <!-- export title: "Foo" -->
 
