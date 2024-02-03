@@ -30,7 +30,9 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang="en" dir="ltr">
-      <Head faviconGlyph="✦" />
+      <Head
+      // faviconGlyph="✦"
+      />
       <body>
         <Layout
           themeConfig={{
@@ -38,7 +40,10 @@ export default async function RootLayout({ children }) {
               content: 'Edit this page on GitHub'
             },
             docsRepositoryBase:
-              'https://github.com/shuding/nextra/blob/core/examples/docs'
+              'https://github.com/shuding/nextra/blob/core/examples/docs',
+            sidebar: {
+              defaultMenuCollapseLevel: 1
+            }
           }}
           pageOpts={{
             pageMap,
