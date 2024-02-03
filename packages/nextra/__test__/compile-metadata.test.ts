@@ -1,7 +1,8 @@
 import { compileMetadata } from '../src/server/compile-metadata.js'
 
 describe('compileMetadata()', () => {
-  const mdx = `---
+  it('should remove everything', () => {
+    const mdx = `---
 title: Foo
 description: Bar
 ---
@@ -28,21 +29,23 @@ export const MyComponent = () => null
 
 <MyComponent />
 `
-  it('should remove everything', () => {
     const result = compileMetadata(mdx, { filePath: 'foo.mdx' })
     expect(result).resolves.toMatchInlineSnapshot(`
       "export const metadata = {
         "title": "Foo",
         "description": "Bar"
       };
-      "
-    `)
+      "`)
   })
   it('should remove everything with export default', () => {
-    const result = compileMetadata('export { default } from "./bar.mdx"', { filePath: 'bar.mdx' })
+    const result = compileMetadata(`
+<!-- export title: "Foo" -->
+
+# world`)
     expect(result).resolves.toMatchInlineSnapshot(`
-      "export const metadata = {};
-      "
-    `)
+      "export const metadata = {
+        "title": "world"
+      };
+      "`)
   })
 })

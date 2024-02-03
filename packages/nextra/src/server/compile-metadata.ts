@@ -14,7 +14,7 @@ import {
 
 export async function compileMetadata(
   source: string,
-  { filePath = '' }: { filePath?: string }
+  { filePath = '' }: { filePath?: string } = {}
 ): Promise<string> {
   const format = filePath.endsWith('.mdx') ? 'mdx' : 'md'
 
@@ -39,5 +39,6 @@ export async function compileMetadata(
     ]
   })
   const vFile = await compiler.process(fileCompatible)
-  return vFile.toString()
+
+  return vFile.value as string
 }
