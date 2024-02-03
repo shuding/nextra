@@ -20,21 +20,25 @@ const FileMap = {
   'themes/docs/tabs': 'themes/docs/tabs.mdx'
 }
 
-export default async function Page(props) {
-  const { mdxPath = [''] } = props.params
+export async function generateMetadata({ params: { mdxPath = [''] } }) {
+  const { metadata } = await import(`../../mdx/${FileMap[mdxPath.join('/')]}`)
+  return metadata
+}
 
-  // const filePath = path.join(process.cwd(), 'mdx', ...mdxPath)
+export default async function Page({ params: { mdxPath = [''] } }) {
+  const {
+    default: MDXContent,
+    useTOC,
+    Stars: _Stars,
+    ...props
+  } = await import(`../../mdx/${FileMap[mdxPath.join('/')]}`)
+  console.log({ props })
 
-  // const { result } = compileMdx(filePath)
-
-  const result = await import(`../../mdx/${FileMap[mdxPath.join('/')]}`)
-  console.log({ result })
-
-  const components = useMDXComponents()
+  const { wrapper: Wrapper, ...components } = useMDXComponents()
 
   return (
-    <div>
-      <result.default components={components} />
-    </div>
+    <Wrapper toc={useTOC()} {...props}>
+      <MDXContent components={components} />
+    </Wrapper>
   )
 }
