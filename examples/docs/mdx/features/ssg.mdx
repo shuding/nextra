@@ -7,8 +7,6 @@ can also be cached by a CDN to maximize the performance.
 
 This is supported by Nextra too. Here's an example:
 
-import { useData } from 'nextra/hooks'
-
 export const getStaticProps = ({ params }) => {
   return fetch(`https://api.github.com/repos/shuding/nextra`)
     .then(res => res.json())
@@ -27,8 +25,8 @@ export const getStaticProps = ({ params }) => {
 
 export const Stars = () => {
   // Get the data from SSG, and render it as a component.
-  const { stars } = useData()
-  return <strong>{stars}</strong>
+  const stars = 0
+  return <b>{stars}</b>
 }
 
 <div className="mt-6 rounded border border-gray-200 p-4 dark:border-gray-900">
@@ -44,8 +42,6 @@ enabled, it will be kept up to date.
 Here's the MDX code for the example above:
 
 ```js filename="ssg.mdx"
-import { useData } from 'nextra/hooks'
-
 export const getStaticProps = ({ params }) => {
   return fetch(`https://api.github.com/repos/shuding/nextra`)
     .then((res) => res.json())
@@ -65,7 +61,7 @@ export const getStaticProps = ({ params }) => {
 export const Stars = () => {
   // Get the data from SSG, and render it as a component.
   const { stars } = useData()
-  return <strong>{stars}</strong>
+  return <b>{stars}</b>
 }
 
 

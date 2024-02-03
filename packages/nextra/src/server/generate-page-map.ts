@@ -47,10 +47,8 @@ export function generatePageMapFromFilepaths(filepaths: string[]): any {
           .replace(/^\//, ''),
         r
       ]
-      throw new Error('unchecked')
     })
   )
-
   const obj = Object.create(null)
 
   for (const path of paths.keys()) {

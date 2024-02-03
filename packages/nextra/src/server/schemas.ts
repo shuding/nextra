@@ -103,7 +103,8 @@ export const nextraConfigSchema = z
       remarkPlugins: z.custom<ProcessorOptions['remarkPlugins']>(),
       format: z.enum(['detect', 'mdx', 'md']),
       rehypePrettyCodeOptions: z.custom<RehypePrettyCodeOptions>()
-    })
+    }),
+    mdxBaseDir: z.string().optional(),
   })
   .deepPartial()
 

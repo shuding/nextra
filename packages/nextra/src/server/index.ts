@@ -85,7 +85,8 @@ const nextra: Nextra = nextraConfig => {
           config.plugins ||= []
           config.plugins.push(
             new NextraPlugin({
-              locales
+              locales,
+              mdxBaseDir: loaderOptions.mdxBaseDir,
               // transformPageMap: nextraConfig.transformPageMap
             })
           )

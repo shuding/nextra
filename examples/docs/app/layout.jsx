@@ -1,10 +1,10 @@
-import { Head } from 'nextra-theme-docs'
+import { Head, Layout } from 'nextra-theme-docs'
 
 export const viewport = Head.viewport
 
 export const metadata = {}
 
-export default async function Layout({ children }) {
+export default async function RootLayout({ children }) {
   const { pageMap } = await import(
     '../.next/static/chunks/nextra-page-map-.mjs'
   )
