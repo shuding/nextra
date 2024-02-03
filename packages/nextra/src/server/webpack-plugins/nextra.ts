@@ -23,12 +23,13 @@ export class NextraPlugin {
     private config: {
       locales: string[]
       transformPageMap?: NextraConfig['transformPageMap']
+      mdxBaseDir?: NextraConfig['mdxBaseDir']
     }
   ) {}
 
   apply(compiler: Compiler) {
     const pluginName = this.constructor.name
-    const { locales, transformPageMap } = this.config
+    const { locales, transformPageMap, mdxBaseDir } = this.config
 
     compiler.hooks.beforeCompile.tapAsync(pluginName, async (_, callback) => {
       // if (isSaved || !IS_PRODUCTION) {
@@ -60,7 +61,10 @@ export class NextraPlugin {
           //   isFollowingSymlink: false
           // })
 
-          const relativePaths = await getFilepaths({ dir: APP_DIR })
+          const relativePaths = await getFilepaths({
+            dir: mdxBaseDir || APP_DIR,
+            isAppDir: !mdxBaseDir
+          })
 
           const pageMap = generatePageMapFromFilepaths(relativePaths)
           const rawJs = await collectPageMap({
