@@ -177,8 +177,11 @@ export async function collectFiles({
  * Use relative path instead of absolute, because it's fails on Windows
  * https://github.com/nodejs/node/issues/31710
  */
-function getImportPath(filePath: string) {
-  return slash(path.relative(CHUNKS_DIR, path.join(APP_DIR, filePath)))
+function getImportPath(filePaths: string[]) {
+  return slash(
+    path.relative(CHUNKS_DIR, path.join(process.cwd(), 'mdx', ...filePaths))
+  )
+  // return slash(path.relative(CHUNKS_DIR, path.join(APP_DIR, filePath)))
 }
 
 function convertPageMapToAst(
@@ -243,7 +246,10 @@ export async function collectPageMap({
     .sort((a, b) => a.filePath.localeCompare(b.filePath))
     .map(({ filePath, importName }) => ({
       type: 'ImportDeclaration',
-      source: { type: 'Literal', value: getImportPath(filePath) },
+      source: {
+        type: 'Literal',
+        value: getImportPath(locale ? [locale, filePath] : [filePath])
+      },
       specifiers: [
         {
           local: { type: 'Identifier', name: importName },

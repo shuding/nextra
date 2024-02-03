@@ -1,5 +1,5 @@
 /* eslint sort-keys: error */
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import { LocaleSwitch, useConfig } from 'nextra-theme-docs'
 import type { ComponentProps, ReactElement } from 'react'
 

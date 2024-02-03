@@ -1,4 +1,6 @@
-import { useRouter } from 'nextra/hooks'
+'use client'
+
+import { useRouter } from 'next/navigation'
 import styles from './features.module.css'
 
 const Feature = ({ text, icon }) => (
@@ -40,7 +42,7 @@ const FEATURES_WITH_TRANSLATIONS = {
 }
 
 export default function Features() {
-  const { locale, defaultLocale } = useRouter()
+  const { locale = 'en', defaultLocale = 'en' } = useRouter()
 
   const featureText = key =>
     FEATURES_WITH_TRANSLATIONS[locale!]?.[key] ??

@@ -62,7 +62,7 @@ export class NextraPlugin {
           // })
 
           const relativePaths = await getFilepaths({
-            dir: mdxBaseDir || APP_DIR,
+            dir: mdxBaseDir ? path.join(mdxBaseDir, locale) : APP_DIR,
             isAppDir: !mdxBaseDir
           })
 
