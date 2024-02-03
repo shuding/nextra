@@ -2,8 +2,6 @@ import bundleAnalyzer from '@next/bundle-analyzer'
 import nextra from 'nextra'
 
 const withNextra = nextra({
-  theme: 'nextra-theme-docs',
-  themeConfig: './theme.config.tsx',
   defaultShowCopyCode: true,
   transform(content, { route }) {
     if (route.startsWith('/en/docs/advanced/dynamic-markdown-import')) {
@@ -32,7 +30,8 @@ export function getStaticProps() {
     }
     return pageMap
   },
-  latex: true
+  latex: true,
+  mdxBaseDir: './mdx'
 })
 
 const withBundleAnalyzer = bundleAnalyzer({
