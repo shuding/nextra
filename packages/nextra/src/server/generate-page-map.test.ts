@@ -421,5 +421,82 @@ describe('generatePageMapFromFilepaths()', () => {
         "themes/docs/tabs.mdx",
       ]
     `)
+    expect(generatePageMapFromFilepaths(pagePaths)).toMatchInlineSnapshot(`
+    [
+      {
+        "__metaPath": "_meta.js",
+      },
+      {
+        "children": [
+          {
+            "__pagePath": "advanced/code-highlighting.mdx",
+            "name": "index",
+            "route": "/advanced",
+          },
+          {
+            "__metaPath": "advanced/_meta.js",
+          },
+        ],
+        "name": "advanced",
+        "route": "/advanced",
+      },
+      {
+        "children": [
+          {
+            "__pagePath": "features/themes.mdx",
+            "name": "index",
+            "route": "/features",
+          },
+          {
+            "__metaPath": "features/_meta.js",
+          },
+        ],
+        "name": "features",
+        "route": "/features",
+      },
+      {
+        "__pagePath": "index.mdx",
+        "name": "index",
+        "route": "/",
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "__pagePath": "themes/blog/index.mdx",
+                "name": "index",
+                "route": "/themes/blog",
+              },
+              {
+                "__metaPath": "themes/blog/_meta.js",
+              },
+            ],
+            "name": "blog",
+            "route": "/themes/blog",
+          },
+          {
+            "children": [
+              {
+                "__pagePath": "themes/docs/tabs.mdx",
+                "name": "index",
+                "route": "/themes/docs",
+              },
+              {
+                "__metaPath": "themes/docs/_meta.js",
+              },
+            ],
+            "name": "docs",
+            "route": "/themes/docs",
+          },
+          {
+            "__metaPath": "themes/_meta.js",
+          },
+        ],
+        "name": "themes",
+        "route": "/themes",
+      },
+    ]
+  `)
   })
 })
