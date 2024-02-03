@@ -27,6 +27,15 @@ export async function compileMetadata(
       remarkMdxFrontMatter,
       remarkMdxTitle,
       remarkExportOnlyMetadata
+    ],
+    recmaPlugins: [
+      () => ast => {
+        ast.body = ast.body.filter(
+          (node: any) =>
+            node.type === 'ExportNamedDeclaration' &&
+            node.declaration?.declarations[0].id.name === 'metadata'
+        )
+      }
     ]
   })
   const vFile = await compiler.process(fileCompatible)
