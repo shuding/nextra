@@ -1,20 +1,6 @@
-/* eslint sort-keys: error */
-/**
- * @type {import('nextra-theme-docs').DocsThemeConfig}
- */
 export default {
-  banner: {
-    content: 'Nextra 2 Alpha',
-    key: 'Nextra 2'
-  },
-  chat: {
-    link: 'https://discord.gg/hEM84NMkRv' // Next.js discord server,
-  },
   docsRepositoryBase:
     'https://github.com/shuding/nextra/blob/core/examples/docs',
-  editLink: {
-    content: 'Edit this page on GitHub'
-  },
   faviconGlyph: '✦',
   head: function useHead() {
     return (

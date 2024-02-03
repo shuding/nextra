@@ -1,4 +1,4 @@
-import { Head, Layout } from 'nextra-theme-docs'
+import { Banner, Head, Layout, Navbar } from 'nextra-theme-docs'
 
 export const viewport = Head.viewport
 
@@ -20,12 +20,23 @@ export default async function RootLayout({ children }) {
       <Head />
       <body>
         <Layout
-          themeConfig={{}}
+          themeConfig={{
+            editLink: {
+              content: 'Edit this page on GitHub'
+            }
+          }}
           pageOpts={{
             pageMap,
             frontMatter: {},
             timestamp: new Date().getTime()
           }}
+          banner={<Banner storageKey="Nextra 2">Nextra 2 Alpha</Banner>}
+          navbar={
+            <Navbar
+              // Next.js discord server
+              chatLink="https://discord.gg/hEM84NMkRv"
+            />
+          }
         >
           {children}
         </Layout>
