@@ -1,7 +1,7 @@
 // @ts-nocheck
 import Link from 'next/link'
 import { getPagesUnderRoute } from 'nextra/context'
-import { useRouter } from 'nextra/hooks'
+import { useRouter } from 'next/navigation'
 
 export function Blog() {
   const { locale } = useRouter()

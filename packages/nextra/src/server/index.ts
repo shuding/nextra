@@ -35,7 +35,7 @@ const nextra: Nextra = nextraConfig => {
       )
       logger.warn(
         "Next.js doesn't support i18n by locale folder names.\n" +
-          'When i18n enabled, Nextra unset nextConfig.i18n to `undefined`, use `useRouter` from `nextra/hooks` if you need `locale` or `defaultLocale` values.'
+        'When i18n enabled, Nextra unset nextConfig.i18n to `undefined`.'
       )
     }
     const locales = nextConfig.i18n?.locales || DEFAULT_LOCALES

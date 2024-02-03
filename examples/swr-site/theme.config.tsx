@@ -1,7 +1,6 @@
 /* eslint sort-keys: error */
-import type { DocsThemeConfig } from 'nextra-theme-docs'
+import { useRouter } from 'next/router'
 import { LocaleSwitch, useConfig } from 'nextra-theme-docs'
-import { useRouter } from 'nextra/hooks'
 import type { ComponentProps, ReactElement } from 'react'
 
 export const SWRLogo = (props: ComponentProps<'svg'>): ReactElement => (
@@ -61,7 +60,7 @@ const FOOTER_LINK_TEXT = {
   )
 }
 
-const config: DocsThemeConfig = {
+const config = {
   banner: {
     content: 'SWR 2.0 is out! Read more →',
     key: 'swr-2'

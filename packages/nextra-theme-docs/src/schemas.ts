@@ -28,7 +28,6 @@ export const themeSchema = /* @__PURE__ */ (() =>
         .optional(),
       content: z.custom<ReactNode | FC>(...reactNode)
     }),
-    faviconGlyph: z.string().optional(),
     feedback: z.strictObject({
       content: z.custom<ReactNode | FC>(...reactNode),
       labels: z.string(),

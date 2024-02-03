@@ -1,5 +1,6 @@
 import bundleAnalyzer from '@next/bundle-analyzer'
 import nextra from 'nextra'
+import path from 'node:path'
 
 const withNextra = nextra({
   defaultShowCopyCode: true,
@@ -37,6 +38,10 @@ export function getStaticProps() {
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === 'true'
 })
+
+const sep = path.sep === '/' ? '/' : '\\\\'
+
+const ALLOWED_SVG_REGEX = new RegExp(`_icons${sep}.+\\.svg$`)
 
 /**
  * @type {import('next').NextConfig}
@@ -104,6 +109,18 @@ export default withBundleAnalyzer(
         permanent: true
       }
     ],
-    reactStrictMode: true
-  })
+    reactStrictMode: true,
+    webpack(config) {
+      const fileLoaderRule = config.module.rules.find(rule =>
+        rule.test?.test?.('.svg')
+      )
+      fileLoaderRule.exclude = ALLOWED_SVG_REGEX
+
+      config.module.rules.push({
+        test: ALLOWED_SVG_REGEX,
+        use: ['@svgr/webpack']
+      })
+      return config
+    }
+  }),
 )
