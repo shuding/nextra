@@ -79,7 +79,6 @@ type CompileMdxOptions = Pick<
   filePath?: string
   useCachedCompiler?: boolean
   isPageImport?: boolean
-  isPageMapImport?: boolean
 }
 
 export async function compileMdx(
@@ -96,8 +95,7 @@ export async function compileMdx(
     mdxOptions = {},
     filePath = '',
     useCachedCompiler,
-    isPageImport = true,
-    isPageMapImport
+    isPageImport = true
   }: CompileMdxOptions = {}
 ) {
   const {
@@ -114,23 +112,6 @@ export async function compileMdx(
     _format === 'detect' ? (filePath.endsWith('.mdx') ? 'mdx' : 'md') : _format
 
   const fileCompatible = filePath ? { value: source, path: filePath } : source
-  if (isPageMapImport) {
-    const compiler = createProcessor({
-      format,
-      remarkPlugins: [
-        remarkFrontmatter, // parse and attach yaml node
-        remarkMdxFrontMatter,
-        remarkMdxTitle,
-        remarkExportOnlyMetadata
-      ]
-    })
-    const vFile = await compiler.process(fileCompatible)
-    const content = vFile.toString()
-    const result = vFile
-      .toString()
-      .slice(0, content.lastIndexOf('function _createMdxContent'))
-    return { result } as any
-  }
 
   let searchIndexKey: string | null = null
   if (typeof search === 'object') {

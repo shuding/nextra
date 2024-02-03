@@ -2,6 +2,7 @@ import path from 'node:path'
 import slash from 'slash'
 import type { LoaderContext } from 'webpack'
 import type { LoaderOptions, PageOpts } from '../types'
+import { compileMetadata } from './compile-metadata.js'
 import { compileMdx } from './compile.js'
 import { CWD, MARKDOWN_EXTENSION_REGEX } from './constants.js'
 import { APP_DIR } from './file-system.js'
@@ -70,6 +71,12 @@ export async function loader(
       )
     : this.resourcePath
 
+  if (isPageMapImport) {
+    return compileMetadata(source, {
+      filePath: mdxPath
+    })
+  }
+
   const relativePath = slash(path.relative(APP_DIR, mdxPath))
 
   let locale = locales[0] === '' ? '' : relativePath.split('/')[0]
@@ -106,13 +113,11 @@ export async function loader(
     locale,
     filePath: mdxPath,
     useCachedCompiler: true,
-    isPageImport,
-    isPageMapImport
+    isPageImport
   })
   console.log({ route, isPageImport })
   // Imported as a normal component, no need to add the layout.
   if (!isPageImport) {
-    if (isPageMapImport) return result
     return `${result}
 export default MDXLayout`
   }
