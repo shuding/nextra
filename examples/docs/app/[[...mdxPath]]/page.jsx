@@ -1,6 +1,4 @@
-import path from 'path'
 import { useMDXComponents } from 'nextra-theme-docs'
-import { compileMdx } from 'nextra/compile'
 
 const FileMap = {
   'advanced/code-highlighting': 'advanced/code-highlighting.mdx',
@@ -20,24 +18,30 @@ const FileMap = {
   'themes/docs/tabs': 'themes/docs/tabs.mdx'
 }
 
+export function generateStaticParams() {
+  return Object.keys(FileMap).map(mdxPath => ({ mdxPath: mdxPath.split('/') }))
+}
+
 export async function generateMetadata({ params: { mdxPath = [''] } }) {
-  const { metadata } = await import(`../../mdx/${FileMap[mdxPath.join('/')]}`)
-  return metadata
+  // Can't use destructuring
+  const result = await import(`../../mdx/${FileMap[mdxPath.join('/')]}`)
+  return result.metadata
 }
 
 export default async function Page({ params: { mdxPath = [''] } }) {
   const {
     default: MDXContent,
     useTOC,
-    Stars: _Stars,
+    metadata,
+    title,
     ...props
   } = await import(`../../mdx/${FileMap[mdxPath.join('/')]}`)
-  console.log({ props })
+  console.log(props)
 
   const { wrapper: Wrapper, ...components } = useMDXComponents()
 
   return (
-    <Wrapper toc={useTOC()} {...props}>
+    <Wrapper toc={useTOC()} metadata={metadata} title={title}>
       <MDXContent components={components} />
     </Wrapper>
   )
