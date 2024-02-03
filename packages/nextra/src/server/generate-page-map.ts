@@ -3,22 +3,30 @@ import fg from 'fast-glob'
 import type { Folder, MdxFile } from '../types'
 
 type Params = {
-  appDir: string
+  dir: string
   cwd?: string
+  isAppDir?: boolean
 }
 
-export async function getFilepaths({ appDir, cwd }: Params): Promise<string[]> {
-  if (!appDir) {
-    throw new Error('Unable to find `app` directory')
+export async function getFilepaths({
+  dir,
+  cwd,
+  isAppDir
+}: Params): Promise<string[]> {
+  if (!dir) {
+    throw new Error('`dir` is required')
   }
   const result = await fg(
-    path.join(
-      appDir,
-      '**/(page.{js,jsx,jsx,tsx,md,mdx}|_meta.{js,jsx,ts,tsx})'
-    ),
+    [
+      path.join(
+        dir,
+        isAppDir ? '**/page.{js,jsx,jsx,tsx,md,mdx}' : '**/*.{md,mdx}'
+      ),
+      path.join(dir, '**/_meta.{js,jsx,ts,tsx}')
+    ],
     { cwd }
   )
-  const relativePaths = result.map(r => path.relative(appDir, r))
+  const relativePaths = result.map(r => path.relative(dir, r))
   return relativePaths
 }
 

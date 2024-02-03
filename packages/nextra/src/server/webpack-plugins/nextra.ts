@@ -60,7 +60,7 @@ export class NextraPlugin {
           //   isFollowingSymlink: false
           // })
 
-          const relativePaths = await getFilepaths({ appDir: APP_DIR })
+          const relativePaths = await getFilepaths({ dir: APP_DIR })
 
           const pageMap = generatePageMapFromFilepaths(relativePaths)
           const rawJs = await collectPageMap({

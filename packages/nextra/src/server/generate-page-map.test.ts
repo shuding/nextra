@@ -7,7 +7,7 @@ describe('generatePageMapFromFilepaths()', () => {
     const cwd = path.join(process.cwd(), '..', '..', 'examples', 'blog')
     const { appDir } = findPagesDir(cwd)
 
-    const pagePaths = await getFilepaths({ appDir, cwd })
+    const pagePaths = await getFilepaths({ dir: appDir, cwd, isAppDir: true })
     expect(pagePaths.sort((a, b) => a.localeCompare(b))).toMatchInlineSnapshot(`
       [
         "page.mdx",
@@ -81,7 +81,7 @@ describe('generatePageMapFromFilepaths()', () => {
     const cwd = path.join(process.cwd(), '..', '..', 'docs')
     const { appDir } = findPagesDir(cwd)
 
-    const pagePaths = await getFilepaths({ appDir, cwd })
+    const pagePaths = await getFilepaths({ dir: appDir, cwd, isAppDir: true })
     expect(pagePaths.sort((a, b) => a.localeCompare(b))).toMatchInlineSnapshot(`
       [
         "_meta.ts",
@@ -124,6 +124,7 @@ describe('generatePageMapFromFilepaths()', () => {
         "docs/guide/page.mdx",
         "docs/guide/ssg/page.mdx",
         "docs/guide/syntax-highlighting/page.mdx",
+        "docs/guide/twoslash/page.mdx",
         "docs/page.mdx",
         "page.tsx",
         "showcase/page.mdx",
@@ -353,6 +354,11 @@ describe('generatePageMapFromFilepaths()', () => {
                   "__pagePath": "docs/guide/syntax-highlighting/page.mdx",
                   "name": "syntax-highlighting",
                   "route": "/docs/guide/syntax-highlighting",
+                },
+                {
+                  "__pagePath": "docs/guide/twoslash/page.mdx",
+                  "name": "twoslash",
+                  "route": "/docs/guide/twoslash",
                 },
                 {
                   "__metaPath": "docs/guide/_meta.ts",
