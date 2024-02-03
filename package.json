@@ -10,7 +10,7 @@
     "clean": "turbo run clean",
     "dev:core": "turbo run dev --filter=nextra... --filter=!docs",
     "dev:theme-blog": "turbo run dev --filter=example-blog... --filter=!docs",
-    "dev:theme-docs": "turbo run dev --filter=example-docs... --filter=!docs",
+    "dev:theme-docs": "turbo run dev --filter=swr-site... --filter=!docs",
     "dev:website": "turbo run dev --filter=docs...",
     "lint": "eslint --cache --ignore-path .gitignore --max-warnings 0 .",
     "lint:prettier": "prettier --cache --check --ignore-path .gitignore --ignore-path .prettierignore .",
