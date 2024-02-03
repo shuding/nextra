@@ -395,12 +395,30 @@ describe('generatePageMapFromFilepaths()', () => {
 
   it('should work for docs example', async () => {
     const cwd = path.join(process.cwd(), '..', '..', 'examples', 'docs')
-    const { appDir } = findPagesDir(cwd)
-
-    const pagePaths = await getFilepaths({ dir: appDir, cwd })
+    const pagePaths = await getFilepaths({ dir: path.join(cwd, 'mdx'), cwd })
     expect(pagePaths.sort((a, b) => a.localeCompare(b))).toMatchInlineSnapshot(`
       [
-        "docs/page.jsx",
+        "_meta.js",
+        "advanced/_meta.js",
+        "advanced/code-highlighting.mdx",
+        "features/_meta.js",
+        "features/i18n.mdx",
+        "features/image.mdx",
+        "features/latex.mdx",
+        "features/mdx.mdx",
+        "features/ssg.mdx",
+        "features/themes.mdx",
+        "get-started.mdx",
+        "index.mdx",
+        "themes/_meta.js",
+        "themes/blog/_meta.js",
+        "themes/blog/index.mdx",
+        "themes/docs/_meta.js",
+        "themes/docs/bleed.mdx",
+        "themes/docs/callout.mdx",
+        "themes/docs/configuration.mdx",
+        "themes/docs/index.mdx",
+        "themes/docs/tabs.mdx",
       ]
     `)
   })
