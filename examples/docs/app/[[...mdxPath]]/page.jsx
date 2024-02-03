@@ -1,3 +1,5 @@
+/* eslint-env node */
+
 import { useMDXComponents } from 'nextra-theme-docs'
 
 const FileMap = {

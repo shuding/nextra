@@ -43,6 +43,9 @@ export const metadata: Metadata = {
   },
   other: {
     'msapplication-TileColor': '#fff'
+  },
+  twitter: {
+    site: 'https://nextra.site'
   }
 }
 

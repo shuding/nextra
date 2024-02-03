@@ -1,6 +1,7 @@
+/* eslint-env node */
 import { Banner, Head, Layout, Navbar } from 'nextra-theme-docs'
 
-export const viewport = Head.viewport
+export const { viewport } = Head
 
 export const metadata = {
   metadataBase: new URL('https://nextra.site'),
@@ -16,6 +17,9 @@ export const metadata = {
   other: {
     'msapplication-TileImage': '/ms-icon-144x144.png',
     'msapplication-TileColor': '#fff'
+  },
+  twitter: {
+    site: 'https://nextra.site'
   }
 }
 
