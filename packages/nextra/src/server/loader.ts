@@ -112,6 +112,7 @@ export async function loader(
   console.log({ route, isPageImport })
   // Imported as a normal component, no need to add the layout.
   if (!isPageImport) {
+    if (isPageMapImport) return result
     return `${result}
 export default MDXLayout`
   }

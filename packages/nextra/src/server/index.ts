@@ -1,5 +1,5 @@
 /* eslint-env node */
-// import { sep } from 'node:path'
+import { sep } from 'node:path'
 import type { NextConfig } from 'next'
 import type { ZodError } from 'zod'
 import { fromZodError } from 'zod-validation-error'
@@ -16,7 +16,7 @@ import { NextraPlugin, NextraSearchPlugin } from './webpack-plugins/index.js'
 
 const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
 
-// const AGNOSTIC_PAGE_MAP_PATH = `.next${sep}static${sep}chunks${sep}nextra-page-map`
+const AGNOSTIC_PAGE_MAP_PATH = `.next${sep}static${sep}chunks${sep}nextra-page-map`
 
 const nextra: Nextra = nextraConfig => {
   try {
@@ -86,7 +86,7 @@ const nextra: Nextra = nextraConfig => {
           config.plugins.push(
             new NextraPlugin({
               locales,
-              mdxBaseDir: loaderOptions.mdxBaseDir,
+              mdxBaseDir: loaderOptions.mdxBaseDir
               // transformPageMap: nextraConfig.transformPageMap
             })
           )
@@ -111,17 +111,17 @@ const nextra: Nextra = nextraConfig => {
         const rules = config.module.rules as RuleSetRule[]
 
         rules.push(
-          // {
-          //   test: MARKDOWN_EXTENSION_REGEX,
-          //   issuer: request => request.includes(AGNOSTIC_PAGE_MAP_PATH),
-          //   use: [
-          //     options.defaultLoaders.babel,
-          //     {
-          //       loader: 'nextra/loader',
-          //       options: { ...loaderOptions, isPageMapImport: true }
-          //     }
-          //   ]
-          // },
+          {
+            test: MARKDOWN_EXTENSION_REGEX,
+            issuer: request => request.includes(AGNOSTIC_PAGE_MAP_PATH),
+            use: [
+              options.defaultLoaders.babel,
+              {
+                loader: 'nextra/loader',
+                options: { ...loaderOptions, isPageMapImport: true }
+              }
+            ]
+          },
           {
             // Match Markdown imports from non-pages. These imports have an
             // issuer, which can be anything as long as it's not empty.
@@ -129,8 +129,7 @@ const nextra: Nextra = nextraConfig => {
             // runtime import call such as `import('...')`.
             test: MARKDOWN_EXTENSION_REGEX,
             issuer: request =>
-              !!request ||
-              // && !request.includes(AGNOSTIC_PAGE_MAP_PATH)
+              (!!request && !request.includes(AGNOSTIC_PAGE_MAP_PATH)) ||
               request === null,
             use: [
               options.defaultLoaders.babel,

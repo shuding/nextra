@@ -19,7 +19,6 @@ import type { Pluggable, Plugin } from 'unified'
 import type {
   FrontMatter,
   LoaderOptions,
-  PageOpts,
   ReadingTime,
   StructurizedData
 } from '../types'
@@ -41,6 +40,7 @@ import {
 } from './rehype-plugins/index.js'
 import {
   remarkCustomHeadingId,
+  remarkExportOnlyMetadata,
   remarkHeadings,
   remarkLinkRewrite,
   remarkMdxDisableExplicitJsx,
@@ -114,26 +114,23 @@ export async function compileMdx(
     _format === 'detect' ? (filePath.endsWith('.mdx') ? 'mdx' : 'md') : _format
 
   const fileCompatible = filePath ? { value: source, path: filePath } : source
-  // if (isPageMapImport) {
-  //   const compiler = createProcessor({
-  //     format,
-  //     remarkPlugins: [
-  //       remarkFrontmatter, // parse and attach yaml node
-  //       remarkMdxFrontMatter,
-  //       remarkMdxTitle
-  //     ]
-  //   })
-  //   const vFile = await compiler.process(fileCompatible)
-  //   const content = vFile.toString()
-  //   console.log(content)
-  //
-  //   const index = content.lastIndexOf('export default function MDXContent')
-  //   const result = content
-  //     .slice(0, index)
-  //     .replace('function _createMdxContent', 'function MDXLayout')
-  //   console.log(result)
-  //   return { result } as any
-  // }
+  if (isPageMapImport) {
+    const compiler = createProcessor({
+      format,
+      remarkPlugins: [
+        remarkFrontmatter, // parse and attach yaml node
+        remarkMdxFrontMatter,
+        remarkMdxTitle,
+        remarkExportOnlyMetadata
+      ]
+    })
+    const vFile = await compiler.process(fileCompatible)
+    const content = vFile.toString()
+    const result = vFile
+      .toString()
+      .slice(0, content.lastIndexOf('function _createMdxContent'))
+    return { result } as any
+  }
 
   let searchIndexKey: string | null = null
   if (typeof search === 'object') {
