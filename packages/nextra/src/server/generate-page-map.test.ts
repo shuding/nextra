@@ -7,7 +7,7 @@ describe('generatePageMapFromFilepaths()', () => {
     const cwd = path.join(process.cwd(), '..', '..', 'examples', 'blog')
     const { appDir } = findPagesDir(cwd)
 
-    const pagePaths = await getFilepaths({ dir: appDir, cwd, isAppDir: true })
+    const pagePaths = await getFilepaths({ dir: appDir!, cwd, isAppDir: true })
     expect(pagePaths.sort((a, b) => a.localeCompare(b))).toMatchInlineSnapshot(`
       [
         "page.mdx",
@@ -81,7 +81,7 @@ describe('generatePageMapFromFilepaths()', () => {
     const cwd = path.join(process.cwd(), '..', '..', 'docs')
     const { appDir } = findPagesDir(cwd)
 
-    const pagePaths = await getFilepaths({ dir: appDir, cwd, isAppDir: true })
+    const pagePaths = await getFilepaths({ dir: appDir!, cwd, isAppDir: true })
     expect(pagePaths.sort((a, b) => a.localeCompare(b))).toMatchInlineSnapshot(`
       [
         "_meta.ts",
@@ -133,9 +133,6 @@ describe('generatePageMapFromFilepaths()', () => {
 
     expect(generatePageMapFromFilepaths(pagePaths)).toMatchInlineSnapshot(`
       [
-        {
-          "__metaPath": "_meta.ts",
-        },
         {
           "__pagePath": "about/page.mdx",
           "name": "about",
@@ -389,17 +386,19 @@ describe('generatePageMapFromFilepaths()', () => {
           "name": "showcase",
           "route": "/showcase",
         },
+        {
+          "__metaPath": "_meta.ts",
+        },
       ]
     `)
   })
 
-  it.only('should work for docs example', async () => {
+  it('should work for docs example', async () => {
     const cwd = path.join(process.cwd(), '..', '..', 'examples', 'docs')
     const pagePaths = await getFilepaths({ dir: path.join(cwd, 'mdx'), cwd })
     expect(pagePaths.sort((a, b) => a.localeCompare(b))).toMatchInlineSnapshot(`
       [
         "_meta.js",
-        "advanced/_meta.js",
         "advanced/code-highlighting.mdx",
         "features/_meta.js",
         "features/i18n.mdx",
@@ -424,17 +423,11 @@ describe('generatePageMapFromFilepaths()', () => {
     expect(generatePageMapFromFilepaths(pagePaths)).toMatchInlineSnapshot(`
       [
         {
-          "__metaPath": "_meta.js",
-        },
-        {
           "children": [
             {
               "__pagePath": "advanced/code-highlighting.mdx",
               "name": "code-highlighting",
               "route": "/advanced/code-highlighting",
-            },
-            {
-              "__metaPath": "advanced/_meta.js",
             },
           ],
           "name": "advanced",
@@ -545,6 +538,9 @@ describe('generatePageMapFromFilepaths()', () => {
           ],
           "name": "themes",
           "route": "/themes",
+        },
+        {
+          "__metaPath": "_meta.js",
         },
       ]
     `)

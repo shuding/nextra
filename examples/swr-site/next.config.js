@@ -53,6 +53,13 @@ export default withBundleAnalyzer(
       locales: ['en', 'es', 'ru'],
       defaultLocale: 'en'
     },
+    redirects: () => [
+      {
+        source: '/docs',
+        destination: '/docs/getting-started',
+        statusCode: 302
+      }
+    ],
     webpack(config) {
       const fileLoaderRule = config.module.rules.find(rule =>
         rule.test?.test?.('.svg')

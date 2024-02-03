@@ -1,6 +1,5 @@
 /* eslint-env node */
 import { sep } from 'node:path'
-import type { NextConfig } from 'next'
 import type { ZodError } from 'zod'
 import { fromZodError } from 'zod-validation-error'
 import type { Nextra } from '../types'
@@ -33,29 +32,8 @@ const nextra: Nextra = nextraConfig => {
       logger.info(
         'You have Next.js i18n enabled, read here https://nextjs.org/docs/advanced-features/i18n-routing for the docs.'
       )
-      logger.warn(
-        "Next.js doesn't support i18n by locale folder names.\n" +
-        'When i18n enabled, Nextra unset nextConfig.i18n to `undefined`.'
-      )
     }
     const locales = nextConfig.i18n?.locales || DEFAULT_LOCALES
-
-    const rewrites: NextConfig['rewrites'] = async () => {
-      const rules = [{ source: '/:path*/_meta', destination: '/404' }]
-
-      if (nextConfig.rewrites) {
-        const originalRewrites = await nextConfig.rewrites()
-        if (Array.isArray(originalRewrites)) {
-          return [...originalRewrites, ...rules]
-        }
-        return {
-          ...originalRewrites,
-          beforeFiles: [...(originalRewrites.beforeFiles || []), ...rules]
-        }
-      }
-
-      return rules
-    }
 
     const loaderOptions = {
       ...DEFAULT_CONFIG,
@@ -75,7 +53,6 @@ const nextra: Nextra = nextraConfig => {
       //   ...nextConfig.experimental,
       //   optimizePackageImports: [...optimizedImports]
       // },
-      ...(nextConfig.output !== 'export' && { rewrites }),
       pageExtensions: [
         ...(nextConfig.pageExtensions || DEFAULT_EXTENSIONS),
         ...MARKDOWN_EXTENSIONS
