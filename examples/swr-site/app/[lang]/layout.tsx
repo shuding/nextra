@@ -1,14 +1,17 @@
 /* eslint-env node */
 import { SwrIcon } from '@app/_icons'
 import type { Metadata } from 'next'
-import { Head, Layout, Navbar, SkipNavLink } from 'nextra-theme-docs'
+import { Banner, Head, Layout, Navbar, SkipNavLink } from 'nextra-theme-docs'
 import { getDictionary, getDirection } from '../_dictionaries/get-dictionary'
 import './styles.css'
 import '../_components/features.css'
 
 export const { viewport } = Head
 
-export const metadata: Metadata = {}
+export const metadata: Metadata = {
+  description:
+    'SWR is a React Hooks library for data fetching. SWR first returns the data from cache (stale), then sends the fetch request (revalidate), and finally comes with the up-to-date data again.'
+}
 
 export default async function RootLayout({ children, params: { lang } }) {
   const dictionary = await getDictionary(lang)
@@ -27,14 +30,19 @@ export default async function RootLayout({ children, params: { lang } }) {
       <body>
         <SkipNavLink />
         <Layout
-          themeConfig={{}}
+          themeConfig={{
+            docsRepositoryBase:
+              'https://github.com/shuding/nextra/blob/core/examples/swr-site'
+          }}
           // @ts-expect-error fixme
           pageOpts={{
             pageMap,
             frontMatter: {},
             timestamp: new Date().getTime()
           }}
-          // banner={}
+          banner={
+            <Banner storageKey="swr-2">SWR 2.0 is out! Read more →</Banner>
+          }
           navbar={
             <Navbar
               logo={

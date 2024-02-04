@@ -45,16 +45,9 @@ const FOOTER_LINK_TEXT = {
 }
 
 const config = {
-  banner: {
-    content: 'SWR 2.0 is out! Read more →',
-    key: 'swr-2'
-  },
   // chat: {
   //   link: 'https://discord.com'
   // },
-  darkMode: true,
-  docsRepositoryBase:
-    'https://github.com/shuding/nextra/blob/core/examples/swr-site',
   editLink: {
     content: function useText() {
       // @ts-expect-error
@@ -93,9 +86,6 @@ const config = {
     // @ts-expect-error
     const config = useConfig<{ description?: string; image?: string }>() as any
     const { locale } = useRouter() as any
-    const description =
-      config.frontMatter.description ||
-      'SWR is a React Hooks library for data fetching. SWR first returns the data from cache (stale), then sends the fetch request (revalidate), and finally comes with the up-to-date data again.'
     const image =
       config.frontMatter.image ||
       'https://assets.vercel.com/image/upload/v1572282926/swr/twitter-card.jpg'
@@ -104,8 +94,6 @@ const config = {
       <>
         <title>{title}</title>
         <meta property="og:title" content={title} />
-        <meta name="description" content={description} />
-        <meta property="og:description" content={description} />
         {/* Favicons, meta */}
         <link
           rel="apple-touch-icon"

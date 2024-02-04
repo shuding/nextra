@@ -7,7 +7,6 @@ import { useFSRoute } from 'nextra/hooks'
 import { normalizePages } from 'nextra/normalize-pages'
 import type { ReactElement, ReactNode } from 'react'
 import { createContext, useContext, useMemo, useState } from 'react'
-import { Sidebar } from '../components'
 import { MenuProvider } from './menu'
 
 type Config = {
