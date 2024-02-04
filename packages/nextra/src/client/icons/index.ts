@@ -22,3 +22,4 @@ export { ReactComponent as CPPIcon } from './c++.svg'
 export { ReactComponent as CsharpIcon } from './csharp.svg'
 export { ReactComponent as GraphQLIcon } from './graphql.svg'
 export { ReactComponent as PythonIcon } from './python.svg'
+export { ReactComponent as RustIcon } from './rust.svg';
