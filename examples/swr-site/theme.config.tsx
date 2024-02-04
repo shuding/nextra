@@ -32,12 +32,6 @@ const config = {
       <>
         {/* Favicons, meta */}
         <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="/favicon/apple-touch-icon.png"
-        />
-        <link rel="manifest" href="/favicon/site.webmanifest" />
-        <link
           rel="mask-icon"
           href="/favicon/safari-pinned-tab.svg"
           color="#000000"

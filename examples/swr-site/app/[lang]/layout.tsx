@@ -23,6 +23,7 @@ export const metadata: Metadata = {
     absolute: '',
     template: '%s | SWR'
   },
+  metadataBase: new URL('https://swr.vercel.app'),
   openGraph: {
     images:
       'https://assets.vercel.com/image/upload/v1572282926/swr/twitter-card.jpg'
