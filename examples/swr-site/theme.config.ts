@@ -27,21 +27,7 @@ const config = {
       )}`
     }
   },
-  head: function useHead() {
-    return (
-      <>
-        {/* Favicons, meta */}
-        <link
-          rel="mask-icon"
-          href="/favicon/safari-pinned-tab.svg"
-          color="#000000"
-        />
-      </>
-    )
-  },
   nextThemes: {
     defaultTheme: 'dark'
   },
 }
-
-export default config
