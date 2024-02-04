@@ -49,10 +49,5 @@ export default {
   },
   'wrap-toc-items': 'Wrap Table of Content Items',
   'custom-header-ids': 'Custom Header IDs',
-  '404-500': '404/500 Custom Error Pages',
-  'raw-layout': {
-    theme: {
-      layout: 'raw'
-    }
-  }
+  '404-500': '404/500 Custom Error Pages'
 }

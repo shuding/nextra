@@ -4,8 +4,5 @@ export default {
   'a-page': {
     type: 'page',
     display: 'hidden',
-    theme: {
-      layout: 'raw'
-    }
   }
 }
