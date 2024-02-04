@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { isValidDate } from '../src/utils/date'
+import { isValidDate } from '../src/mdx-components'
 
 describe('date', () => {
   describe('isValidDate()', () => {
