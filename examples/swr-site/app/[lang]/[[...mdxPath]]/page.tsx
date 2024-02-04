@@ -3,6 +3,7 @@
 import { ExampleDynamicMarkdownImport } from '@app/_components/example-dynamic-markdown-import'
 import { Video } from '@app/_components/video'
 import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 import type { Heading } from 'nextra'
 import { useMDXComponents } from 'nextra-theme-docs'
 import type { MDXComponents } from 'nextra/mdx'
@@ -81,7 +82,11 @@ async function loadPage(
   const { RouteToFilepath } = await import(
     `.next/static/chunks/nextra-page-map-${lang}.mjs`
   )
-  return await import(
-    `../../../mdx/${lang}/${RouteToFilepath[mdxPath.join('/')]}`
-  )
+  try {
+    return await import(
+      `../../../mdx/${lang}/${RouteToFilepath[mdxPath.join('/')]}`
+    )
+  } catch {
+    notFound()
+  }
 }
