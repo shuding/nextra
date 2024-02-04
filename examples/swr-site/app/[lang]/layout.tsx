@@ -26,6 +26,15 @@ export const metadata: Metadata = {
   openGraph: {
     images:
       'https://assets.vercel.com/image/upload/v1572282926/swr/twitter-card.jpg'
+  },
+  twitter: {
+    site: '@vercel'
+  },
+  appleWebApp: {
+    title: 'SWR'
+  },
+  other: {
+    'msapplication-TileColor': '#fff'
   }
 }
 
