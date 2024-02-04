@@ -1,11 +1,13 @@
 pnpm-lock.yaml
 .changeset/*.md
-generated-page-map.js
-
-docs/pages/docs/guide/advanced/latex.mdx
 
 examples/swr-site/nextra-remote-filepaths/*.json
-examples/swr-site/pages/en/remote/graphql-eslint/_meta.ts
-examples/swr-site/pages/en/remote/graphql-yoga/_meta.ts
 
-docs/pages/docs/guide/built-ins/cards.mdx
+examples/swr-site/app/_icons/remote/graphql-eslint/_meta.ts
+examples/swr-site/app/_icons/remote/graphql-yoga/_meta.ts
+docs/app/docs/guide/advanced/latex/page.mdx
+docs/app/docs/guide/advanced/mermaid/page.mdx
+docs/app/docs/guide/advanced/npm2yarn/page.mdx
+docs/app/docs/guide/built-ins/cards/page.mdx
+docs/app/docs/guide/ssg/page.mdx
+docs/app/docs/guide/syntax-highlighting/page.mdx

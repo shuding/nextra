@@ -3,6 +3,6 @@ export default {
   acknowledgement: '🧩 Acknowledgement',
   'a-page': {
     type: 'page',
-    display: 'hidden',
+    display: 'hidden'
   }
 }

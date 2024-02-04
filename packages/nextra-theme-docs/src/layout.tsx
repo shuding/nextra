@@ -108,9 +108,7 @@ export function Layout({
         {...nextThemes}
       >
         <ConfigProvider value={pageOpts} footer={footer} navbar={navbar}>
-          <ActiveAnchorProvider>
-            {children}
-          </ActiveAnchorProvider>
+          <ActiveAnchorProvider>{children}</ActiveAnchorProvider>
         </ConfigProvider>
       </ThemeProvider>
     </ThemeConfigProvider>
