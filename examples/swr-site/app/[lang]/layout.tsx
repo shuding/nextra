@@ -79,6 +79,13 @@ export default async function RootLayout({ children, params: { lang } }) {
             },
             editLink: {
               content: dictionary.editPage
+            },
+            feedback: {
+              // useLink(title) {
+              //   return `https://google.com/search?q=${encodeURIComponent(
+              //     `Feedback for ${title}`
+              //   )}`
+              // }
             }
           }}
           // @ts-expect-error fixme
@@ -121,6 +128,9 @@ export default async function RootLayout({ children, params: { lang } }) {
               </a>
             </Footer>
           }
+          nextThemes={{
+            defaultTheme: 'dark'
+          }}
         >
           {children}
         </Layout>
