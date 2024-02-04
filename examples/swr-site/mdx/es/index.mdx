@@ -1,14 +1,15 @@
 ---
 title: Biblioteca React Hooks para la obtención de datos
+searchable: false
 ---
 
-import Features from '@components/features'
+import { Features } from '@app/_components/features'
 import { Callout } from 'nextra/components'
 
 {/* wrapped with {} to mark it as javascript so mdx will not put it under a p tag */}
 {<h1 className="text-center font-extrabold md:text-5xl mt-8">SWR</h1>}
 
-<Features />
+<Features lang={props.params.lang} title={metadata.title} />
 
 El nombre “SWR” es derivado de `stale-while-revalidate`, una estrategia de
 invalidación de caché HTTP popularizada por
