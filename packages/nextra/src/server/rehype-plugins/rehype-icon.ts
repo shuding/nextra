@@ -22,7 +22,8 @@ export const REHYPE_ICON_DEFAULT_REPLACES: Record<string, string> = {
   python: 'PythonIcon',
   py: 'PythonIcon',
   rust: 'RustIcon',
-  rs: 'RustIcon'
+  rs: 'RustIcon',
+  move: 'MoveIcon'
 }
 
 function createImport(iconName: string) {
