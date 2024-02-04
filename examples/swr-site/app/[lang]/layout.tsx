@@ -1,23 +1,22 @@
 /* eslint-env node */
 import type { Metadata } from 'next'
-import { Head, Layout, SkipNavLink } from 'nextra-theme-docs'
+import { Head, Layout, Navbar, SkipNavLink } from 'nextra-theme-docs'
 import { getDictionary, getDirection } from '../_dictionaries/get-dictionary'
+import { default as SwrIcon } from '../_icons/swr.svg'
 import './styles.css'
+import '../_components/features.css'
 
 export const { viewport } = Head
 
 export const metadata: Metadata = {}
 
-const locales = new Set(['en', 'es', 'ru'])
-
-export default async function RootLayout({ children, params }) {
-  const dictionary = await getDictionary(params.lang)
-  const lang = locales.has(params.lang) ? params.lang : 'en'
+export default async function RootLayout({ children, params: { lang } }) {
+  const dictionary = await getDictionary(lang)
 
   const { pageMap } = await import(
     `.next/static/chunks/nextra-page-map-${lang}.mjs`
   )
-  console.log('RootLayout', { params, lang })
+
   return (
     <html
       // need to set true RTL language
@@ -36,7 +35,21 @@ export default async function RootLayout({ children, params }) {
             timestamp: new Date().getTime()
           }}
           // banner={}
-          // navbar={}
+          navbar={
+            <Navbar
+              logo={
+                <>
+                  <SwrIcon className="h-3" />
+                  <span
+                    className="max-md:hidden select-none font-extrabold ltr:ml-2 rtl:mr-2"
+                    title={`SWR: ${dictionary.logo.title}`}
+                  >
+                    SWR
+                  </span>
+                </>
+              }
+            />
+          }
         >
           {children}
         </Layout>

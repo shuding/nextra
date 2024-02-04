@@ -5,11 +5,9 @@
   margin: 2.5rem 0 2rem;
 }
 .feature {
-  align-items: center;
-  display: inline-flex;
+  @apply inline-flex items-center gap-2 max-sm:justify-center;
 }
 .feature h4 {
-  margin: 0 0 0 0.5rem;
   font-weight: 700;
   font-size: 1.1rem;
   white-space: nowrap;
@@ -17,13 +15,6 @@
 @media (max-width: 860px) {
   .features {
     gap: 1rem 0.5rem;
-  }
-  .feature {
-    padding-left: 0;
-    justify-content: center;
-  }
-  .feature svg {
-    width: 20px;
   }
   .feature h4 {
     font-size: 0.9rem;

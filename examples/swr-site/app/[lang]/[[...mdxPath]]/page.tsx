@@ -26,14 +26,16 @@ export async function generateMetadata({ params: { mdxPath, lang } }) {
   return metadata
 }
 
-export default async function Page({
-  params: { mdxPath, lang }
-}: {
+type PageProps = {
   params: {
     mdxPath: string[]
     lang: string
   }
-}) {
+}
+
+export default async function Page(pageProps: PageProps) {
+  const { mdxPath, lang } = pageProps.params
+
   console.log('Page', { mdxPath })
   const {
     default: MDXContent,
@@ -48,7 +50,7 @@ export default async function Page({
   return (
     // @ts-expect-error -- fixme
     <Wrapper toc={useTOC()} metadata={metadata} title={title}>
-      <MDXContent components={components} />
+      <MDXContent components={components} {...pageProps} />
     </Wrapper>
   )
 }

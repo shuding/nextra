@@ -10,17 +10,16 @@ import {
   PulseIcon,
   RainIcon
 } from '../_icons'
-import styles from './features.module.css'
 
-export default async function Features({ lang }: { lang: Locale }) {
+export async function Features({ lang, title }: { lang: Locale, title: string }) {
   const dictionary = await getDictionary(lang)
 
   return (
     <div className="mx-auto mb-10 w-[880px] max-w-full px-4 text-center">
       <p className="mb-2 text-lg text-gray-600 md:!text-2xl">
-        {dictionary.baseDescription}
+        {title}
       </p>
-      <div className={styles.features}>
+      <ul className="features">
         {[
           {
             name: dictionary.lightweight,
@@ -55,12 +54,12 @@ export default async function Features({ lang }: { lang: Locale }) {
             icon: PulseIcon
           }
         ].map(({ name, icon: Icon }) => (
-          <div key={name} className={styles.feature}>
+          <li key={name} className="feature">
             <Icon />
             <h4>{name}</h4>
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   )
 }

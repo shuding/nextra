@@ -1,19 +1,18 @@
 export default {
-  // logo: {
-  //   title: 'React Hooks for Data Fetching'
-  // },
+  logo: {
+    title: 'React Hooks for Data Fetching'
+  },
   // notFound: 'This page could not be found',
   // poweredBy: 'Powered by',
   // link: {
   //   vercel: 'https://vercel.com/?utm_source=swr'
   // },
-  // baseDescription: 'React Hooks for Data Fetching',
-  // lightweight: 'Lightweight',
-  // realtime: 'Realtime',
-  // suspense: 'Suspense',
-  // pagination: 'Pagination',
-  // backendAgnostic: 'Backend Agnostic',
-  // renderingStrategies: 'SSR / SSG Ready',
-  // typescript: 'TypeScript Ready',
-  // remoteLocal: 'Remote + Local'
+  lightweight: 'Lightweight',
+  realtime: 'Realtime',
+  suspense: 'Suspense',
+  pagination: 'Pagination',
+  backendAgnostic: 'Backend Agnostic',
+  renderingStrategies: 'SSR / SSG Ready',
+  typescript: 'TypeScript Ready',
+  remoteLocal: 'Remote + Local'
 }
