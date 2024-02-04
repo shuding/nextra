@@ -1,22 +1,14 @@
 import Markdown from 'markdown-to-jsx'
-import { useData } from 'nextra/hooks'
 
-export const getStaticProps = () => {
-  return (
-    fetch(`https://api.github.com/repos/vercel/swr/releases`)
-      .then(res => res.json())
-      // мы показываем здесь крайние 5 релизов
-      .then(releases => ({
-        props: { ssg: Array.isArray(releases) ? releases.slice(0, 5) : [] }
-      }))
-  )
-}
-
-export const ReleasesRenderer = () => {
-  const releases = useData()
+export async function ReleasesRenderer() {
+  const releases = await fetch(
+    `https://api.github.com/repos/vercel/swr/releases`
+  ).then(res => res.json())
   return (
     <Markdown>
       {releases
+        // мы показываем здесь крайние 5 релизов
+        .slice(0, 5)
         .map(release => {
           const body = release.body
             .replace(/&#39;/g, "'")
