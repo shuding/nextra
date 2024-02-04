@@ -11,14 +11,18 @@ import {
   RainIcon
 } from '../_icons'
 
-export async function Features({ lang, title }: { lang: Locale, title: string }) {
+export async function Features({
+  lang,
+  title
+}: {
+  lang: Locale
+  title: string
+}) {
   const dictionary = await getDictionary(lang)
 
   return (
     <div className="mx-auto mb-10 w-[880px] max-w-full px-4 text-center">
-      <p className="mb-2 text-lg text-gray-600 md:!text-2xl">
-        {title}
-      </p>
+      <p className="mb-2 text-lg text-gray-600 md:!text-2xl">{title}</p>
       <ul className="features">
         {[
           {

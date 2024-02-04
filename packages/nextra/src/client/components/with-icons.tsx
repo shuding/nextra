@@ -1,15 +1,15 @@
 import type { ComponentPropsWithRef, FC, ReactElement } from 'react'
 import {
+  CPPIcon,
+  CsharpIcon,
   CssIcon,
+  GraphQLIcon,
   JavaScriptIcon,
   MarkdownIcon,
   MdxIcon,
+  PythonIcon,
   TerminalIcon,
-  TypeScriptIcon,
-  CPPIcon,
-  CsharpIcon,
-  GraphQLIcon,
-  PythonIcon
+  TypeScriptIcon
 } from '../icons/index.js'
 import type { PreProps } from './pre/index.js'
 

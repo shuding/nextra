@@ -51,7 +51,7 @@ export function generatePageMapFromFilepaths(filepaths: string[]): any {
 
   const obj = Object.create(null)
 
-  for (const path of [ ...Object.keys(metaFiles), ...Object.keys(mdxPages)]) {
+  for (const path of [...Object.keys(metaFiles), ...Object.keys(mdxPages)]) {
     ;`${path}/index`
       .replace(/^\//, '')
       .split('/')
@@ -83,8 +83,8 @@ export function generatePageMapFromFilepaths(filepaths: string[]): any {
       const isFolder =
         keys.length > 1 || (keys.length === 1 && keys[0] !== 'index')
       if (isFolder) {
-        ;(item as Folder).children = getPageMap(value, [], route).sort(
-          (a, b) => a.name.localeCompare(b.name)
+        ;(item as Folder).children = getPageMap(value, [], route).sort((a, b) =>
+          a.name.localeCompare(b.name)
         )
       } else if (!name.startsWith('[')) {
         // @ts-expect-error

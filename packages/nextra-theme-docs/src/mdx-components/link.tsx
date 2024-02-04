@@ -1,6 +1,6 @@
 import cn from 'clsx'
-import type { AnchorProps } from '../components/anchor'
 import { Anchor } from '../components'
+import type { AnchorProps } from '../components/anchor'
 
 const EXTERNAL_HREF_REGEX = /https?:\/\//
 

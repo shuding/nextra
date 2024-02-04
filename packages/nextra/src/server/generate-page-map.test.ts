@@ -20,7 +20,8 @@ describe('generatePageMapFromFilepaths()', () => {
         "tags/[tag]/page.jsx",
       ]
     `)
-    expect(generatePageMapFromFilepaths(pagePaths).pageMap).toMatchInlineSnapshot(`
+    expect(generatePageMapFromFilepaths(pagePaths).pageMap)
+      .toMatchInlineSnapshot(`
       [
         {
           "__pagePath": "page.mdx",

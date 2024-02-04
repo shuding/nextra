@@ -1,5 +1,5 @@
-import type { ReactNode } from 'react'
 import { SwrIcon } from '@app/_icons'
+import type { ReactNode } from 'react'
 
 export function Separator({ children }: { children: ReactNode }) {
   return (

@@ -104,7 +104,7 @@ export const nextraConfigSchema = z
       format: z.enum(['detect', 'mdx', 'md']),
       rehypePrettyCodeOptions: z.custom<RehypePrettyCodeOptions>()
     }),
-    mdxBaseDir: z.string().optional(),
+    mdxBaseDir: z.string().optional()
   })
   .deepPartial()
 

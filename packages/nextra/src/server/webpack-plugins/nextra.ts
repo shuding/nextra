@@ -72,7 +72,7 @@ export class NextraPlugin {
             locale,
             pageMap,
             mdxPages,
-            fromAppDir: !mdxBaseDir,
+            fromAppDir: !mdxBaseDir
           })
 
           await fs.writeFile(

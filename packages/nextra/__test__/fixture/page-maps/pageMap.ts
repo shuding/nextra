@@ -173,7 +173,7 @@ export const cnPageMap: PageMapItem[] = [
           basic: '基本用法',
           auth: '身份验证',
           'infinite-loading': '无限加载',
-          'error-handling': '错误处理',
+          'error-handling': '错误处理'
         }
       }
     ],

@@ -1,7 +1,7 @@
 export default {
   '*': {
     theme: {
-      breadcrumb: true,
+      breadcrumb: true
     }
   }
 }
