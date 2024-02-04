@@ -43,7 +43,8 @@ export function middleware(request: NextRequest) {
 
   // Redirect if there is no locale
   if (pathnameIsMissingLocale) {
-    const locale = getLocale(request)
+    const locale =
+      request.cookies.get('NEXT_LOCALE')?.value || getLocale(request)
 
     // e.g. incoming request is /products
     // The new URL is now /en-US/products
@@ -58,5 +59,7 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   // Matcher ignoring `/_next/` and `/api/`
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|icon.svg|apple-icon.png|manifest).*)']
+  matcher: [
+    '/((?!api|_next/static|_next/image|favicon.ico|icon.svg|apple-icon.png|manifest).*)'
+  ]
 }
