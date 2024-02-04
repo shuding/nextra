@@ -1,8 +1,9 @@
 /* eslint-env node */
-import { SwrIcon } from '@app/_icons'
+import { SwrIcon, VercelIcon } from '@app/_icons'
 import type { Metadata } from 'next'
 import {
   Banner,
+  Footer,
   Head,
   Layout,
   LocaleSwitch,
@@ -44,7 +45,20 @@ export default async function RootLayout({ children, params: { lang } }) {
               { locale: 'en', name: 'English' },
               { direction: 'rtl', locale: 'es', name: 'Español RTL' },
               { locale: 'ru', name: 'Русский' }
-            ]
+            ],
+            sidebar: {
+              defaultMenuCollapseLevel: 1,
+              autoCollapse: true
+            },
+            toc: {
+              extraContent: (
+                // eslint-disable-next-line @next/next/no-img-element -- ignore since url is external and dynamic
+                <img
+                  alt="placeholder cat"
+                  src="https://placekitten.com/g/300/200"
+                />
+              )
+            }
           }}
           // @ts-expect-error fixme
           pageOpts={{
@@ -73,6 +87,18 @@ export default async function RootLayout({ children, params: { lang } }) {
             >
               <LocaleSwitch className="[&>span>span]:hidden" />
             </Navbar>
+          }
+          footer={
+            <Footer>
+              <a
+                rel="noreferrer"
+                target="_blank"
+                className="flex items-center gap-2 font-semibold"
+                href={dictionary.link.vercel}
+              >
+                {dictionary.poweredBy} <VercelIcon />
+              </a>
+            </Footer>
           }
         >
           {children}

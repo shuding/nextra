@@ -3,10 +3,10 @@ export default {
     title: 'React Hooks for Data Fetching'
   },
   // notFound: 'This page could not be found',
-  // poweredBy: 'Powered by',
-  // link: {
-  //   vercel: 'https://vercel.com/?utm_source=swr'
-  // },
+  poweredBy: 'Powered by',
+  link: {
+    vercel: 'https://vercel.com/?utm_source=swr'
+  },
   lightweight: 'Lightweight',
   realtime: 'Realtime',
   suspense: 'Suspense',
