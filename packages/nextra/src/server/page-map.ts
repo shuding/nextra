@@ -179,17 +179,6 @@ export async function collectFiles({
   }
 }
 
-/*
- * Use relative path instead of absolute, because it's fails on Windows
- * https://github.com/nodejs/node/issues/31710
- */
-function getImportPath(filePaths: string[]) {
-  return slash(
-    path.relative(CHUNKS_DIR, path.join(process.cwd(), 'mdx', ...filePaths))
-  )
-  // return slash(path.relative(CHUNKS_DIR, path.join(APP_DIR, filePath)))
-}
-
 function convertPageMapToAst(
   pageMap: PageMapItem[],
   imports: Import[]
@@ -234,13 +223,15 @@ export async function collectPageMap({
   pageMap,
   mdxPages,
   imports = [],
-  dynamicMetaImports = []
+  dynamicMetaImports = [],
+  fromAppDir
 }: {
   locale?: string
   pageMap: PageMapItem[]
   imports?: Import[]
   dynamicMetaImports?: DynamicImport[]
   mdxPages: Record<string, string>
+  fromAppDir: boolean
 }): Promise<string> {
   const someImports: Import[] = []
   const pageMapAst = convertPageMapToAst(
@@ -248,6 +239,21 @@ export async function collectPageMap({
     someImports
     // transformPageMap ? transformPageMap(pageMap, locale) : pageMap
   )
+
+  /*
+   * Use relative path instead of absolute, because it's fails on Windows
+   * https://github.com/nodejs/node/issues/31710
+   */
+  function getImportPath(filePaths: string[]) {
+    return slash(
+      path.relative(
+        CHUNKS_DIR,
+        fromAppDir
+          ? path.join(APP_DIR, ...filePaths)
+          : path.join(process.cwd(), 'mdx', ...filePaths)
+      )
+    )
+  }
 
   const metaImportsAST: ImportDeclaration[] = someImports
     // localeCompare to avoid race condition

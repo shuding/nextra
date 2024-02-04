@@ -1,4 +1,3 @@
-import { RemoteContent } from 'nextra/components'
 import { buildDynamicMDX, buildDynamicMeta } from 'nextra/remote'
 
 export const getStaticProps = async ({ params }) => {
@@ -54,5 +53,3 @@ export const getStaticPaths = async () => {
     fallback: 'blocking'
   }
 }
-
-<RemoteContent />

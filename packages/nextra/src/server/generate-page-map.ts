@@ -51,7 +51,7 @@ export function generatePageMapFromFilepaths(filepaths: string[]): any {
 
   const obj = Object.create(null)
 
-  for (const path of [...Object.keys(mdxPages), ...Object.keys(metaFiles)]) {
+  for (const path of [ ...Object.keys(metaFiles), ...Object.keys(mdxPages)]) {
     ;`${path}/index`
       .replace(/^\//, '')
       .split('/')

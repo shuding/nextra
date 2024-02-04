@@ -1,6 +1,6 @@
-/* eslint-disable */
+/* eslint-env node */
 
-module.exports = async () => {
+export default async () => {
   const token = process.env.GITHUB_TEST_REMOTE_MDX
   const res = await fetch(
     'https://api.github.com/gists/c204a2da82cd3ed8e676f35c493ab59f/comments',

@@ -71,7 +71,8 @@ export class NextraPlugin {
           const rawJs = await collectPageMap({
             locale,
             pageMap,
-            mdxPages
+            mdxPages,
+            fromAppDir: !mdxBaseDir,
           })
 
           await fs.writeFile(

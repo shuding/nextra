@@ -1,4 +1,3 @@
-import { Callout, RemoteContent, Tabs } from 'nextra/components'
 import { buildDynamicMDX, buildDynamicMeta } from 'nextra/remote'
 import json from '../../../../nextra-remote-filepaths/graphql-yoga.json'
 
@@ -28,12 +27,3 @@ export const getStaticPaths = () => ({
     params: { slug: filePath.replace(/\.mdx?$/, '').split('/') }
   }))
 })
-
-<RemoteContent
-  components={{
-    Callout,
-    PackageCmd: () => null,
-    Tab: Tabs.Tab,
-    Tabs
-  }}
-/>

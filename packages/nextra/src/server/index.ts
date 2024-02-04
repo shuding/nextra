@@ -97,7 +97,7 @@ const nextra: Nextra = nextraConfig => {
         rules.push(
           {
             test: MARKDOWN_EXTENSION_REGEX,
-            issuer: request => request.includes(AGNOSTIC_PAGE_MAP_PATH),
+            issuer: request => request?.includes(AGNOSTIC_PAGE_MAP_PATH),
             use: [
               options.defaultLoaders.babel,
               {
