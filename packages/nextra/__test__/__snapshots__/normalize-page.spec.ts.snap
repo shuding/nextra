@@ -1481,12 +1481,6 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
           "type": "doc",
         },
         {
-          "name": "typescript",
-          "route": "",
-          "title": "Typescript",
-          "type": "doc",
-        },
-        {
           "name": "suspense",
           "route": "/docs/suspense",
           "title": "Suspense",
@@ -1642,12 +1636,6 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
           "type": "doc",
         },
         {
-          "name": "typescript",
-          "route": "",
-          "title": "Typescript",
-          "type": "doc",
-        },
-        {
           "name": "suspense",
           "route": "/docs/suspense",
           "title": "Suspense",
@@ -1737,11 +1725,6 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
           "name": "error-handling",
           "route": "/examples/error-handling",
           "title": "错误处理",
-          "type": "doc",
-        },
-        {
-          "name": "ssr",
-          "title": "Next.js SSR",
           "type": "doc",
         },
       ],
@@ -1854,12 +1837,6 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
       "type": "doc",
     },
     {
-      "name": "typescript",
-      "route": "",
-      "title": "Typescript",
-      "type": "doc",
-    },
-    {
       "name": "suspense",
       "route": "/docs/suspense",
       "title": "Suspense",
@@ -1933,11 +1910,6 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
       "name": "error-handling",
       "route": "/examples/error-handling",
       "title": "错误处理",
-      "type": "doc",
-    },
-    {
-      "name": "ssr",
-      "title": "Next.js SSR",
       "type": "doc",
     },
     {
@@ -2038,13 +2010,6 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
     },
     {
       "isUnderCurrentDocsTree": true,
-      "name": "typescript",
-      "route": "",
-      "title": "Typescript",
-      "type": "doc",
-    },
-    {
-      "isUnderCurrentDocsTree": true,
       "name": "suspense",
       "route": "/docs/suspense",
       "title": "Suspense",
@@ -2127,12 +2092,6 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
       "name": "error-handling",
       "route": "/examples/error-handling",
       "title": "错误处理",
-      "type": "doc",
-    },
-    {
-      "isUnderCurrentDocsTree": true,
-      "name": "ssr",
-      "title": "Next.js SSR",
       "type": "doc",
     },
     {
@@ -2265,12 +2224,6 @@ exports[`normalize-page > zh-CN home 1`] = `
           "type": "doc",
         },
         {
-          "name": "typescript",
-          "route": "",
-          "title": "Typescript",
-          "type": "doc",
-        },
-        {
           "name": "suspense",
           "route": "/docs/suspense",
           "title": "Suspense",
@@ -2360,11 +2313,6 @@ exports[`normalize-page > zh-CN home 1`] = `
           "name": "error-handling",
           "route": "/examples/error-handling",
           "title": "错误处理",
-          "type": "doc",
-        },
-        {
-          "name": "ssr",
-          "title": "Next.js SSR",
           "type": "doc",
         },
       ],
@@ -2477,12 +2425,6 @@ exports[`normalize-page > zh-CN home 1`] = `
       "type": "doc",
     },
     {
-      "name": "typescript",
-      "route": "",
-      "title": "Typescript",
-      "type": "doc",
-    },
-    {
       "name": "suspense",
       "route": "/docs/suspense",
       "title": "Suspense",
@@ -2556,11 +2498,6 @@ exports[`normalize-page > zh-CN home 1`] = `
       "name": "error-handling",
       "route": "/examples/error-handling",
       "title": "错误处理",
-      "type": "doc",
-    },
-    {
-      "name": "ssr",
-      "title": "Next.js SSR",
       "type": "doc",
     },
     {
@@ -2661,13 +2598,6 @@ exports[`normalize-page > zh-CN home 1`] = `
     },
     {
       "isUnderCurrentDocsTree": true,
-      "name": "typescript",
-      "route": "",
-      "title": "Typescript",
-      "type": "doc",
-    },
-    {
-      "isUnderCurrentDocsTree": true,
       "name": "suspense",
       "route": "/docs/suspense",
       "title": "Suspense",
@@ -2750,12 +2680,6 @@ exports[`normalize-page > zh-CN home 1`] = `
       "name": "error-handling",
       "route": "/examples/error-handling",
       "title": "错误处理",
-      "type": "doc",
-    },
-    {
-      "isUnderCurrentDocsTree": true,
-      "name": "ssr",
-      "title": "Next.js SSR",
       "type": "doc",
     },
     {

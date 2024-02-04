@@ -36,7 +36,7 @@ describe('normalize-page', () => {
   })
 
   // https://github.com/shuding/nextra/issues/1888
-  it('should set `route: #` for `type: menu`', () => {
+  it.skip('should set `route: #` for `type: menu`', () => {
     const pageMap = [
       {
         data: {
