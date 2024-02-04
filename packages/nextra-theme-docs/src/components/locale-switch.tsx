@@ -1,3 +1,5 @@
+'use client'
+
 import { addBasePath } from 'next/dist/client/add-base-path'
 import { usePathname } from 'next/navigation'
 import { GlobeIcon } from 'nextra/icons'
@@ -18,8 +20,7 @@ export function LocaleSwitch({
 }: LocaleSwitchProps): ReactElement | null {
   const { i18n } = useThemeConfig()
   const pathname = usePathname()
-  const locale = ''
-
+  const locale = pathname.split('/')[1]
   if (!i18n.length) return null
 
   const selected = i18n.find(l => locale === l.locale)
