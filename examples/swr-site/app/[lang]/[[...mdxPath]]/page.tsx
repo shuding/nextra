@@ -6,23 +6,24 @@ import { useMDXComponents } from 'nextra-theme-docs'
 import type { MDXComponents } from 'nextra/mdx'
 import type { FC } from 'react'
 
-// export async function generateStaticParams() {
-//   const { RouteToFilepath } = await import(
-//     '../../../.next/static/chunks/nextra-page-map-en.mjs'
-//   )
-//
-//   return Object.keys(RouteToFilepath).map(mdxPath => {
-//     return {
-//       lang: 'en',
-//       ...(mdxPath && { mdxPath: mdxPath.split('/') })
-//     }
-//   })
-// }
+export async function generateStaticParams() {
+  const en = await import('../../../.next/static/chunks/nextra-page-map-en.mjs')
+  const es = await import('../../../.next/static/chunks/nextra-page-map-es.mjs')
+  const ru = await import('../../../.next/static/chunks/nextra-page-map-ru.mjs')
+
+  return Object.entries({ en, es, ru }).flatMap(
+    ([lang, { RouteToFilepath }]) => {
+      return Object.keys(RouteToFilepath).map(mdxPath => ({
+        lang,
+        ...(mdxPath && { mdxPath: mdxPath.split('/') })
+      }))
+    }
+  )
+}
 
 export async function generateMetadata({ params: { mdxPath, lang } }) {
-  // Can't use destructuring
-  const result = await loadPage(lang, mdxPath)
-  return result.metadata
+  const { metadata } = await loadPage(lang, mdxPath)
+  return metadata
 }
 
 export default async function Page({
@@ -63,8 +64,9 @@ async function loadPage(
   metadata: Metadata
   title: string
 }> {
-  const { RouteToFilepath } = await import(
-    '.next/static/chunks/nextra-page-map-en.mjs'
+  // prettier-ignore
+  const { RouteToFilepath } = await import('.next/static/chunks/nextra-page-map-en.mjs')
+  return await import(
+    `../../../mdx/${lang}/${RouteToFilepath[mdxPath.join('/')]}`
   )
-  return import(`../../../mdx/${lang}/${RouteToFilepath[mdxPath.join('/')]}`)
 }

@@ -73,6 +73,7 @@ const config = {
     'https://github.com/shuding/nextra/blob/core/examples/swr-site',
   editLink: {
     content: function useText() {
+      // @ts-expect-error
       const { locale } = useRouter()
       return EDIT_TEXT[locale!]
     }
@@ -83,12 +84,14 @@ const config = {
     useLink() {
       const config = useConfig()
       return `https://google.com/search?q=${encodeURIComponent(
+        // @ts-expect-error
         `Feedback for ${config.title}`
       )}`
     }
   },
   footer: {
     content: function useText() {
+      // @ts-expect-error
       const { locale } = useRouter()
       return (
         <a
@@ -103,8 +106,9 @@ const config = {
     }
   },
   head: function useHead() {
-    const config = useConfig<{ description?: string; image?: string }>()
-    const { locale } = useRouter()
+    // @ts-expect-error
+    const config = useConfig<{ description?: string; image?: string }>() as any
+    const { locale } = useRouter() as any
     const description =
       config.frontMatter.description ||
       'SWR is a React Hooks library for data fetching. SWR first returns the data from cache (stale), then sends the fetch request (revalidate), and finally comes with the up-to-date data again.'
@@ -157,6 +161,7 @@ const config = {
     { locale: 'ru', name: 'Русский' }
   ],
   logo: function Logo() {
+    // @ts-expect-error
     const { locale } = useRouter()
     return (
       <>

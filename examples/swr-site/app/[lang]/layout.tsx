@@ -17,9 +17,13 @@ export default async function RootLayout({ children, params }) {
   const { pageMap } = await import(
     `.next/static/chunks/nextra-page-map-${lang}.mjs`
   )
-  console.log('RootLayout', {params, lang})
+  console.log('RootLayout', { params, lang })
   return (
-    <html lang={lang} dir={getDirection(lang)}>
+    <html
+      // need to set true RTL language
+      lang={lang === 'es' ? 'he' : lang}
+      dir={getDirection(lang)}
+    >
       <Head />
       <body>
         <SkipNavLink />

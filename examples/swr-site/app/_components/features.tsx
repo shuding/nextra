@@ -1,5 +1,5 @@
 import { getDictionary } from '../_dictionaries/get-dictionary'
-import { Locale } from '../_dictionaries/i18n-config'
+import type { Locale } from '../_dictionaries/i18n-config'
 import {
   BoxIcon,
   DotsVerticalIcon,
