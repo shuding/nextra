@@ -9,7 +9,7 @@ import {
   generatePageMapFromFilepaths,
   getFilepaths
 } from '../generate-page-map.js'
-import { collectFiles, collectPageMap } from '../page-map.js'
+import { collectPageMap } from '../page-map.js'
 
 // import { logger } from '../utils'
 
@@ -29,7 +29,7 @@ export class NextraPlugin {
 
   apply(compiler: Compiler) {
     const pluginName = this.constructor.name
-    const { locales, transformPageMap, mdxBaseDir } = this.config
+    const { locales, mdxBaseDir } = this.config
 
     compiler.hooks.beforeCompile.tapAsync(pluginName, async (_, callback) => {
       // if (isSaved || !IS_PRODUCTION) {

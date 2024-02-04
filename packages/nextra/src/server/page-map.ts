@@ -222,14 +222,10 @@ export async function collectPageMap({
   locale = '',
   pageMap,
   mdxPages,
-  imports = [],
-  dynamicMetaImports = [],
   fromAppDir
 }: {
   locale?: string
   pageMap: PageMapItem[]
-  imports?: Import[]
-  dynamicMetaImports?: DynamicImport[]
   mdxPages: Record<string, string>
   fromAppDir: boolean
 }): Promise<string> {

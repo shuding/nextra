@@ -46,7 +46,7 @@ export default async function Page(pageProps: PageProps) {
     useTOC,
     metadata,
     title,
-    ...props
+    ..._props
   } = await loadPage(lang, mdxPath)
 
   const { wrapper: Wrapper, ...components } = useMDXComponents()

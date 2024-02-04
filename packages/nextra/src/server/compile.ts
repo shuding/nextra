@@ -40,7 +40,6 @@ import {
 } from './rehype-plugins/index.js'
 import {
   remarkCustomHeadingId,
-  remarkExportOnlyMetadata,
   remarkHeadings,
   remarkLinkRewrite,
   remarkMdxDisableExplicitJsx,

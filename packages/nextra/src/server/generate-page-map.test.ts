@@ -1,6 +1,6 @@
 import path from 'node:path'
 import { findPagesDir } from 'next/dist/lib/find-pages-dir.js'
-import { generatePageMapFromFilepaths, getFilepaths } from './generate-page-map'
+import { generatePageMapFromFilepaths, getFilepaths } from './generate-page-map.js'
 
 describe('generatePageMapFromFilepaths()', () => {
   it('should work for blog example', async () => {
