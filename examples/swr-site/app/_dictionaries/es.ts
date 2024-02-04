@@ -18,4 +18,5 @@ export default {
   typescript: 'TypeScript',
   remoteLocal: 'Remoto + Local',
   editPage: 'Edite esta página en GitHub →',
+  by: 'por'
 } satisfies Dictionary

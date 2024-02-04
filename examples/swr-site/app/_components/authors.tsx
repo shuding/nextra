@@ -1,9 +1,3 @@
-const text = {
-  en: 'by',
-  ru: 'от',
-  es: 'por'
-}
-
 function Authors({ date, children, lang }) {
   date = new Date(date)
   return (

@@ -18,4 +18,5 @@ export default {
   typescript: 'TypeScript',
   remoteLocal: 'Удалённо + Локально',
   editPage: 'Редактировать на GitHub →',
+  by: 'от'
 } satisfies Dictionary
