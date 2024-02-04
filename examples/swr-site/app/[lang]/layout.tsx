@@ -1,7 +1,14 @@
 /* eslint-env node */
 import { SwrIcon } from '@app/_icons'
 import type { Metadata } from 'next'
-import { Banner, Head, Layout, Navbar, SkipNavLink } from 'nextra-theme-docs'
+import {
+  Banner,
+  Head,
+  Layout,
+  LocaleSwitch,
+  Navbar,
+  SkipNavLink
+} from 'nextra-theme-docs'
 import { getDictionary, getDirection } from '../_dictionaries/get-dictionary'
 import './styles.css'
 import '../_components/features.css'
@@ -32,7 +39,12 @@ export default async function RootLayout({ children, params: { lang } }) {
         <Layout
           themeConfig={{
             docsRepositoryBase:
-              'https://github.com/shuding/nextra/blob/core/examples/swr-site'
+              'https://github.com/shuding/nextra/blob/core/examples/swr-site',
+            i18n: [
+              { locale: 'en', name: 'English' },
+              { direction: 'rtl', locale: 'es', name: 'Español RTL' },
+              { locale: 'ru', name: 'Русский' }
+            ]
           }}
           // @ts-expect-error fixme
           pageOpts={{
@@ -56,7 +68,11 @@ export default async function RootLayout({ children, params: { lang } }) {
                   </span>
                 </>
               }
-            />
+              projectLink="https://github.com/vercel/swr"
+              chatLink="https://discord.com"
+            >
+              <LocaleSwitch className="[&>span>span]:hidden" />
+            </Navbar>
           }
         >
           {children}

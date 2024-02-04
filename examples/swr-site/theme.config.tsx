@@ -45,9 +45,6 @@ const FOOTER_LINK_TEXT = {
 }
 
 const config = {
-  // chat: {
-  //   link: 'https://discord.com'
-  // },
   editLink: {
     content: function useText() {
       // @ts-expect-error
@@ -127,19 +124,8 @@ const config = {
       </>
     )
   },
-  i18n: [
-    { locale: 'en', name: 'English' },
-    { direction: 'rtl', locale: 'es', name: 'Español RTL' },
-    { locale: 'ru', name: 'Русский' }
-  ],
-  navbar: {
-    extraContent: LocaleSwitch
-  },
   nextThemes: {
     defaultTheme: 'dark'
-  },
-  project: {
-    link: 'https://github.com/vercel/swr'
   },
   sidebar: {
     autoCollapse: true,
