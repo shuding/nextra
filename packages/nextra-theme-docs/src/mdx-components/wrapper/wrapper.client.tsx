@@ -3,7 +3,7 @@
 import cn from 'clsx'
 import type { NextraMDXContent } from 'nextra'
 import type { ComponentProps, ReactNode } from 'react'
-import { Breadcrumb, Pagination, TOC } from '../../components'
+import { Breadcrumb, Pagination, Sidebar, TOC } from '../../components'
 import { useConfig, useThemeConfig } from '../../contexts'
 import { renderComponent } from '../../utils'
 
@@ -113,10 +113,11 @@ export function ClientWrapper({
     )
 
   return (
-    <>
+    <div className="_mx-auto _flex _max-w-[90rem]">
+      <Sidebar />
       {tocEl}
       {skipNavContent}
       {mainEl}
-    </>
+    </div>
   )
 }

@@ -43,8 +43,7 @@ export function ConfigProvider({
     [pageMap, fsPath]
   )
 
-  const { activeType, activeThemeContext, directories, docsDirectories } =
-    normalizePagesResult
+  const { activeType, activeThemeContext } = normalizePagesResult
   const hideSidebar = !activeThemeContext.sidebar || activeType === 'page'
 
   const extendedConfig: Config = {
@@ -52,18 +51,11 @@ export function ConfigProvider({
     normalizePagesResult
   }
 
-  const main = // @ts-expect-error -- fixme
-    activeThemeContext.layout === 'raw' ? (
-      children
-    ) : (
-      <div className="_mx-auto _flex _max-w-[90rem]">{children}</div>
-    )
-
   return (
     <ConfigContext.Provider value={extendedConfig}>
       <MenuProvider value={{ menu, setMenu }}>
         {activeThemeContext.navbar && navbar}
-        {main}
+        {children}
         {activeThemeContext.footer && footer}
       </MenuProvider>
     </ConfigContext.Provider>
