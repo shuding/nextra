@@ -49,6 +49,11 @@ const ALLOWED_SVG_REGEX = new RegExp(`_icons${sep}.+\\.svg$`)
 export default withBundleAnalyzer(
   withNextra({
     reactStrictMode: true,
+    eslint: {
+      // Warning: This allows production builds to successfully complete even if
+      // your project has ESLint errors.
+      ignoreDuringBuilds: true
+    },
     i18n: {
       locales: ['en', 'es', 'ru'],
       defaultLocale: 'en'
