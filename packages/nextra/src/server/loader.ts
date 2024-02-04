@@ -115,7 +115,7 @@ export async function loader(
     useCachedCompiler: true,
     isPageImport
   })
-  console.log({ route, isPageImport })
+
   // Imported as a normal component, no need to add the layout.
   if (!isPageImport) {
     return `${result}

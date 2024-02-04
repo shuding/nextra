@@ -1,6 +1,6 @@
 import type EnglishLocale from './en'
 
-const i18n = {
+export const i18n = {
   defaultLocale: 'en',
   locales: ['en', 'es', 'ru']
 } as const

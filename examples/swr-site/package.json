@@ -16,9 +16,11 @@
     "types:check": "tsc --noEmit"
   },
   "dependencies": {
+    "@formatjs/intl-localematcher": "^0.5.4",
     "focus-visible": "^5.1.0",
     "intersection-observer": "^0.10.0",
     "markdown-to-jsx": "^6.11.4",
+    "negotiator": "^0.6.3",
     "next": "^14.1.0",
     "nextra": "workspace:*",
     "nextra-theme-docs": "workspace:*",
