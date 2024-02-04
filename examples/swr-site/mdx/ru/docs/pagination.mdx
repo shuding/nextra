@@ -102,11 +102,9 @@ function App() {
 ещё», которая добавляет данные в список (или делает это автоматически при
 прокрутке):
 
-import { Infinite } from '@components/diagrams/infinite'
+import { InfiniteImage } from '@app/_icons'
 
-<div className="mt-8">
-  <Infinite />
-</div>
+<InfiniteImage className="dark:invert mt-6" />
 
 Чтобы реализовать это, нам нужно сделать **динамическое количество запросов** на
 этой странице. У хуков React есть

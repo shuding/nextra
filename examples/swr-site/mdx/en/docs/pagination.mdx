@@ -100,11 +100,9 @@ powerful, that most scenarios are covered by it.
 Sometimes we want to build an **infinite loading** UI, with a "Load More" button
 that appends data to the list (or done automatically when you scroll):
 
-import { Infinite } from '@components/diagrams/infinite'
+import { InfiniteImage } from '@app/_icons'
 
-<div className="mt-8">
-  <Infinite />
-</div>
+<InfiniteImage className="dark:invert mt-6" />
 
 To implement this, we need to make **dynamic number of requests** on this page.
 React Hooks have [a couple of rules](https://reactjs.org/docs/hooks-rules.html),
