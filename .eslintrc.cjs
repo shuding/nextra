@@ -211,6 +211,11 @@ module.exports = {
             'content-container',
             'feat-darkmode',
             'features-container'
+          ],
+          cssFiles: [
+            'docs/app/globals.css',
+            // 'docs/app/_components/features/style.module.css',
+            'packages/nextra-theme-docs/dist/style.css'
           ]
         },
         next: { rootDir: 'docs' }

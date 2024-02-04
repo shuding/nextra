@@ -34,7 +34,7 @@ export function DynamicCode({ children }) {
         onClick={() => {
           tokenRef.current!.innerText = '1 + 1'
         }}
-        className="_text-primary-600 _select-none _ml-2 _mt-6"
+        className="_text-primary-600 _select-none _ms-2 _mt-6"
       >
         Change to `1 + 1`
       </button>
