@@ -1,5 +1,6 @@
 /* eslint-env node */
 
+import { ExampleDynamicMarkdownImport } from '@app/_components/example-dynamic-markdown-import'
 import { Video } from '@app/_components/video'
 import type { Metadata } from 'next'
 import type { Heading } from 'nextra'
@@ -53,9 +54,10 @@ export default async function Page(pageProps: PageProps) {
       <MDXContent
         components={{
           ...components,
-          // fixes Error: Could not find the module "/nextra/examples/swr-site/app/_components/video.tsx#Video" in the React Client Manifest.
+          // fixes Error: Could not find the module "nextra/examples/swr-site/app/_components/video.tsx#Video" in the React Client Manifest.
           // This is probably a bug in the React Server Components bundler.
-          Video
+          Video,
+          ExampleDynamicMarkdownImport
         }}
         {...pageProps}
       />
