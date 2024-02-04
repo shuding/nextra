@@ -11,7 +11,6 @@ export default {
   pagination: 'Пагинация',
   prefetching: 'Пред-выборка',
   'with-nextjs': 'Next.js SSG и SSR',
-  typescript: 'Typescript',
   suspense: 'Задержка (Suspense)',
   middleware: 'Промежуточное ПО (Middleware)',
   advanced: 'Продвинутые',
