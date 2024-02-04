@@ -69,11 +69,9 @@ function App() {
   выше в дереве компонентов или вне рендеринга.
 </Callout>
 
-import { Cache } from '@components/diagrams/cache'
+import { CacheImage } from '@app/_icons'
 
-<div className="my-8">
-  <Cache />
-</div>
+<CacheImage className="dark:invert mt-6" />
 
 При вложенности, хуки SWR будут использовать провайдер кеша верхнего уровня.
 Если нет провайдера кеша верхнего уровня, он возвращается к провайдеру кэша по

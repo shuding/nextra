@@ -8,3 +8,5 @@ export { default as PulseIcon } from './pulse.svg'
 export { default as RainIcon } from './rain.svg'
 export { default as SwrIcon } from './swr.svg'
 export { default as VercelIcon } from './vercel.svg'
+
+export { default as CacheImage } from './image.cache.svg'

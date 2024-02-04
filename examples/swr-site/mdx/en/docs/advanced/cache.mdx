@@ -65,11 +65,9 @@ case.
   tree, or outside of render.
 </Callout>
 
-import { Cache } from '@components/diagrams/cache'
+import { CacheImage } from '@app/_icons'
 
-<div className="my-8">
-  <Cache />
-</div>
+<CacheImage className="dark:invert mt-6" />
 
 When nested, SWR hooks will use the upper-level cache provider. If there is no
 upper-level cache provider, it fallbacks to the default cache provider, which is
