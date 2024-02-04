@@ -23,7 +23,9 @@ export async function generateStaticParams() {
   )
 }
 
-export async function generateMetadata({ params: { mdxPath, lang } }) {
+export async function generateMetadata({
+  params: { mdxPath, lang }
+}: PageProps) {
   const { metadata } = await loadPage(lang, mdxPath)
   return metadata
 }
