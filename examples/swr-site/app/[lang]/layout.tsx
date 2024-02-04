@@ -1,8 +1,8 @@
 /* eslint-env node */
+import { SwrIcon } from '@app/_icons'
 import type { Metadata } from 'next'
 import { Head, Layout, Navbar, SkipNavLink } from 'nextra-theme-docs'
 import { getDictionary, getDirection } from '../_dictionaries/get-dictionary'
-import { default as SwrIcon } from '../_icons/swr.svg'
 import './styles.css'
 import '../_components/features.css'
 
@@ -41,7 +41,7 @@ export default async function RootLayout({ children, params: { lang } }) {
                 <>
                   <SwrIcon className="h-3" />
                   <span
-                    className="max-md:hidden select-none font-extrabold ltr:ml-2 rtl:mr-2"
+                    className="max-md:hidden select-none font-extrabold ms-2"
                     title={`SWR: ${dictionary.logo.title}`}
                   >
                     SWR

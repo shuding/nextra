@@ -36,7 +36,6 @@ type PageProps = {
 export default async function Page(pageProps: PageProps) {
   const { mdxPath, lang } = pageProps.params
 
-  console.log('Page', { mdxPath })
   const {
     default: MDXContent,
     useTOC,

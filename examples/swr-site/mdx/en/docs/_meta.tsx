@@ -1,10 +1,10 @@
 import type { ReactNode } from 'react'
-import { SWRLogo } from '../../../theme.config'
+import { SwrIcon } from '@app/_icons'
 
 export function Separator({ children }: { children: ReactNode }) {
   return (
     <div className="flex items-center gap-2">
-      <SWRLogo className="h-1.5 shrink-0" />
+      <SwrIcon className="h-1.5 shrink-0" />
       {children}
     </div>
   )
@@ -43,7 +43,7 @@ export default {
     }
   },
   github_link: {
-    title: 'GitHub 🐙 →',
+    title: 'GitHub 🐙 ↗',
     href: 'https://github.com/shuding/nextra',
     newWindow: true
   },
