@@ -76,6 +76,12 @@ export default withBundleAnalyzer(
         use: ['@svgr/webpack']
       })
       return config
+    },
+    experimental: {
+      optimizePackageImports: [
+        '@app/_icons'
+        // 'nextra/components',
+      ]
     }
   })
 )
