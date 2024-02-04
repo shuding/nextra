@@ -7,6 +7,7 @@ import { i18n } from './app/_dictionaries/i18n-config'
 function getLocale(request: NextRequest): string | undefined {
   // Negotiator expects plain object so we need to transform headers
   const negotiatorHeaders: Record<string, string> = {}
+  // eslint-disable-next-line unicorn/no-array-for-each
   request.headers.forEach((value, key) => (negotiatorHeaders[key] = value))
 
   // @ts-ignore locales are readonly

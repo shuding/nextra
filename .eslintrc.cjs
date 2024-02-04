@@ -214,7 +214,7 @@ module.exports = {
           ],
           cssFiles: [
             'docs/app/globals.css',
-            // 'docs/app/_components/features/style.module.css',
+            'docs/app/_components/features/style.module.css',
             'packages/nextra-theme-docs/dist/style.css'
           ]
         },
@@ -229,7 +229,8 @@ module.exports = {
         tailwindcss: {
           config: 'examples/swr-site/tailwind.config.js',
           cssFiles: [
-            'examples/swr-site/styles.css',
+            'examples/swr-site/app/[lang]/styles.css',
+            'examples/swr-site/app/_components/features.css',
             'packages/nextra-theme-docs/dist/style.css'
           ]
         },

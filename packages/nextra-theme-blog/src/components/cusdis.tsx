@@ -20,11 +20,13 @@ export function Comments({
   const { resolvedTheme } = useTheme()
   const theme = resolvedTheme === 'dark' ? 'dark' : 'light'
   const mounted = useMounted()
-  // update the theme for the cusdis iframe when theme changed
   useEffect(() => {
     try {
+      // update the theme for the cusdis iframe when theme changed
       window.CUSDIS?.setTheme(theme)
-    } catch {}
+    } catch (error) {
+      console.error(error)
+    }
   }, [theme])
 
   if (!appId) {
