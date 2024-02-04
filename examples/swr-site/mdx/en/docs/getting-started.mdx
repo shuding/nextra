@@ -6,7 +6,6 @@ export const metadata = {
   )
 }
 
-import { Welcome } from '@components/diagrams/welcome'
 import { Link } from 'nextra-theme-docs'
 import { Callout, FileTree } from 'nextra/components'
 
@@ -185,9 +184,9 @@ what data is used by the component.
 In a real-world example, our website shows a navbar and the content, both depend
 on `user`:
 
-<div className="mt-8">
-  <Welcome />
-</div>
+import { WelcomeImage } from '@app/_icons'
+
+<WelcomeImage className="mt-6 dark:invert" />
 
 Traditionally, we fetch data once using `useEffect` in the top level component,
 and pass it to child components via props (notice that we don't handle error

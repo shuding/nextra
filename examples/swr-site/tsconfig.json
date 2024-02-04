@@ -16,7 +16,6 @@
     "moduleResolution": "node",
     "baseUrl": "./",
     "paths": {
-      "@components/*": ["./components/*"],
       "@app/*": ["./app/*"]
     },
     "plugins": [

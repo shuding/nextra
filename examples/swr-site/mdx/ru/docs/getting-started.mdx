@@ -86,11 +86,9 @@ function Avatar({ id }) {
 В реальном примере наш веб-сайт показывает панель навигации и контент, оба
 зависят от `user`:
 
-import { Welcome } from '@components/diagrams/welcome'
+import { WelcomeImage } from '@app/_icons'
 
-<div className="mt-8">
-  <Welcome />
-</div>
+<WelcomeImage className="mt-6 dark:invert" />
 
 Традиционно мы получаем данные один раз, используя `useEffect` в компоненте
 верхнего уровня, и передаем их дочерним компонентам через пропсы (обратите

@@ -85,11 +85,9 @@ especificar qué datos utiliza el componente.
 En un ejemplo del mundo real, nuestro sitio web muestra una barra de navegación
 y el contenido, ambos dependen del `user`:
 
-import { Welcome } from '@components/diagrams/welcome'
+import { WelcomeImage } from '@app/_icons'
 
-<div className="mt-8">
-  <Welcome />
-</div>
+<WelcomeImage className="mt-6 dark:invert" />
 
 Tradicionalmente, obtenemos los datos una vez utilizando `useEffect` en el
 componente de nivel superiror, y pasarlo a los componentes hijos a través de
