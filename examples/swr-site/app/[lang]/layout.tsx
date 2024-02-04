@@ -76,6 +76,9 @@ export default async function RootLayout({ children, params: { lang } }) {
                   src="https://placekitten.com/g/300/200"
                 />
               )
+            },
+            editLink: {
+              content: dictionary.editPage
             }
           }}
           // @ts-expect-error fixme

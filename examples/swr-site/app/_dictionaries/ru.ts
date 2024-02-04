@@ -16,5 +16,6 @@ export default {
   backendAgnostic: 'Бэкэнд-независимый',
   renderingStrategies: 'SSR / SSG',
   typescript: 'TypeScript',
-  remoteLocal: 'Удалённо + Локально'
+  remoteLocal: 'Удалённо + Локально',
+  editPage: 'Редактировать на GitHub →',
 } satisfies Dictionary

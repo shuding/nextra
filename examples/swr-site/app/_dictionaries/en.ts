@@ -14,5 +14,6 @@ export default {
   backendAgnostic: 'Backend Agnostic',
   renderingStrategies: 'SSR / SSG Ready',
   typescript: 'TypeScript Ready',
-  remoteLocal: 'Remote + Local'
+  remoteLocal: 'Remote + Local',
+  editPage: 'Edit this page on GitHub →',
 }

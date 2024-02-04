@@ -16,5 +16,6 @@ export default {
   backendAgnostic: 'Agnóstico del Backend',
   renderingStrategies: 'SSR / SSG',
   typescript: 'TypeScript',
-  remoteLocal: 'Remoto + Local'
+  remoteLocal: 'Remoto + Local',
+  editPage: 'Edite esta página en GitHub →',
 } satisfies Dictionary
