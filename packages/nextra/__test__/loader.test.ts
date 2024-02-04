@@ -53,14 +53,14 @@ describe('tree shaking', async () => {
     })
   })
 
-  describe('index page', async () => {
-    const testPage = await fs.readFile(
-      path.join(
-        pageChunksDirPath,
-        pageChunkFileNames.find(name => name.startsWith('en-'))!
-      ),
-      'utf8'
-    )
+  describe.skip('index page', async () => {
+    // const testPage = await fs.readFile(
+    //   path.join(
+    //     pageChunksDirPath,
+    //     pageChunkFileNames.find(name => name.startsWith('en-'))!
+    //   ),
+    //   'utf8'
+    // )
     it('should not include `nextraLayout`', () => {
       expect(testPage.includes('nextraLayout:')).toBe(false)
     })

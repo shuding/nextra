@@ -31,19 +31,23 @@ export const MyComponent = () => null
 `
     const result = compileMetadata(mdx, { filePath: 'foo.mdx' })
     expect(result).resolves.toMatchInlineSnapshot(`
-      "export const metadata = {
+      "import {Fragment as _Fragment, jsx as _jsx} from "react/jsx-runtime";
+      export const metadata = {
         "title": "Foo",
         "description": "Bar"
       };
-      "`)
+      "
+    `)
   })
   it('should remove everything with export default', () => {
     const result = compileMetadata('export { default } from "./foo.mdx"', {
       filePath: 'bar.mdx'
     })
     expect(result).resolves.toMatchInlineSnapshot(`
-      "export const metadata = {};
-      "`)
+      "import {Fragment as _Fragment, jsx as _jsx} from "react/jsx-runtime";
+      export const metadata = {};
+      "
+    `)
   })
 
   it('should remove everything for `format: "md"` which is by default', () => {
@@ -52,9 +56,11 @@ export const MyComponent = () => null
 
 # world`)
     expect(result).resolves.toMatchInlineSnapshot(`
-      "export const metadata = {
+      "import {Fragment as _Fragment, jsx as _jsx} from "react/jsx-runtime";
+      export const metadata = {
         "title": "world"
       };
-      "`)
+      "
+    `)
   })
 })
