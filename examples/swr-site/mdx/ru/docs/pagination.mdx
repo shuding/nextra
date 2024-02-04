@@ -17,11 +17,9 @@ SWR предоставляет специальный API `useSWRInfinite` дл�
 Для начала, нам может **НЕ** понадобится `useSWRInfinite`, а вместо него
 использовать просто `useSWR`, если мы создаем что-то вроде этого:
 
-import { Pagination } from '@components/diagrams/pagination'
+import { PaginationImage } from '@app/_icons'
 
-<div className="mt-8">
-  <Pagination />
-</div>
+<PaginationImage className="mt-6 dark:invert" />
 
 ...что является типичной UI пагинацией. Посмотрим, как это легко реализовать с
 помощью `useSWR`:

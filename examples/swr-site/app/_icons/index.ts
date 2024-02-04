@@ -11,3 +11,4 @@ export { default as VercelIcon } from './vercel.svg'
 
 export { default as CacheImage } from './image.cache.svg'
 export { default as InfiniteImage } from './image.infinite.svg'
+export { default as PaginationImage } from './image.pagination.svg'

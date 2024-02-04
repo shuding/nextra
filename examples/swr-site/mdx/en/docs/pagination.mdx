@@ -17,11 +17,9 @@ as **pagination** and **infinite loading**.
 First of all, we might **NOT** need `useSWRInfinite` but can use just `useSWR`
 if we are building something like this:
 
-import { Pagination } from '@components/diagrams/pagination'
+import { PaginationImage } from '@app/_icons'
 
-<div className="mt-8">
-  <Pagination />
-</div>
+<PaginationImage className="mt-6 dark:invert" />
 
 ...which is a typical pagination UI. Let's see how it can be easily implemented
 with `useSWR`:
