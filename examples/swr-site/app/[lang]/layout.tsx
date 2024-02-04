@@ -18,7 +18,15 @@ export const { viewport } = Head
 
 export const metadata: Metadata = {
   description:
-    'SWR is a React Hooks library for data fetching. SWR first returns the data from cache (stale), then sends the fetch request (revalidate), and finally comes with the up-to-date data again.'
+    'SWR is a React Hooks library for data fetching. SWR first returns the data from cache (stale), then sends the fetch request (revalidate), and finally comes with the up-to-date data again.',
+  title: {
+    absolute: '',
+    template: '%s | SWR'
+  },
+  openGraph: {
+    images:
+      'https://assets.vercel.com/image/upload/v1572282926/swr/twitter-card.jpg'
+  }
 }
 
 export default async function RootLayout({ children, params: { lang } }) {

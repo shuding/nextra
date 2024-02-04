@@ -28,17 +28,8 @@ const config = {
     }
   },
   head: function useHead() {
-    // @ts-expect-error
-    const config = useConfig<{ description?: string; image?: string }>() as any
-    const { locale } = useRouter() as any
-    const image =
-      config.frontMatter.image ||
-      'https://assets.vercel.com/image/upload/v1572282926/swr/twitter-card.jpg'
-    const title = `${config.title} | SWR (${locale})`
     return (
       <>
-        <title>{title}</title>
-        <meta property="og:title" content={title} />
         {/* Favicons, meta */}
         <link
           rel="apple-touch-icon"
@@ -64,10 +55,7 @@ const config = {
           color="#000000"
         />
         <meta name="msapplication-TileColor" content="#fff" />
-        <meta httpEquiv="Content-Language" content="en" />
-        <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@vercel" />
-        <meta property="og:image" content={image} />
         <meta name="apple-mobile-web-app-title" content="SWR" />
       </>
     )
