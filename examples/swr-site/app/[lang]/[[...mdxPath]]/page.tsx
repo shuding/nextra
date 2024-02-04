@@ -8,9 +8,9 @@ import type { MDXComponents } from 'nextra/mdx'
 import type { FC } from 'react'
 
 export async function generateStaticParams() {
-  const en = await import('../../../.next/static/chunks/nextra-page-map-en.mjs')
-  const es = await import('../../../.next/static/chunks/nextra-page-map-es.mjs')
-  const ru = await import('../../../.next/static/chunks/nextra-page-map-ru.mjs')
+  const en = await import('.next/static/chunks/nextra-page-map-en.mjs')
+  const es = await import('.next/static/chunks/nextra-page-map-es.mjs')
+  const ru = await import('.next/static/chunks/nextra-page-map-ru.mjs')
 
   return Object.entries({ en, es, ru }).flatMap(
     ([lang, { RouteToFilepath }]) => {
@@ -74,8 +74,9 @@ async function loadPage(
   metadata: Metadata
   title: string
 }> {
-  // prettier-ignore
-  const { RouteToFilepath } = await import('.next/static/chunks/nextra-page-map-en.mjs')
+  const { RouteToFilepath } = await import(
+    `.next/static/chunks/nextra-page-map-${lang}.mjs`
+  )
   return await import(
     `../../../mdx/${lang}/${RouteToFilepath[mdxPath.join('/')]}`
   )
