@@ -19,6 +19,7 @@ describe.skip('collectPageMap', () => {
       'pages',
       'en'
     )
+    // @ts-expect-error fixme
     const rawJs = await collectPageMap({ dir, route: '/en', locale: 'en' })
 
     expect(rawJs).toMatchInlineSnapshot(`
@@ -430,6 +431,7 @@ describe.skip('collectPageMap', () => {
 describe.skip('Page Process', () => {
   it("should not add `_meta.json` file if folder doesn't contain markdown files", async () => {
     const rawJs = await collectPageMap({
+      // @ts-expect-error fixme
       dir: path.join(
         CWD,
         '__test__',
@@ -443,6 +445,7 @@ describe.skip('Page Process', () => {
 
   it("should not add `_meta.json` file if it's missing", async () => {
     const rawJs = await collectPageMap({
+      // @ts-expect-error fixme
       dir: path.join(
         CWD,
         '__test__',
@@ -470,6 +473,7 @@ describe.skip('Page Process', () => {
 
   it('should add folder for dynamic routes', async () => {
     const rawJs = await collectPageMap({
+      // @ts-expect-error fixme
       dir: path.join(CWD, '__test__', 'fixture', 'page-maps', 'dynamic-route')
     })
     expect(rawJs).toMatchInlineSnapshot(`
@@ -494,6 +498,7 @@ describe.skip('Page Process', () => {
 
   it('should resolve symlinked files and directories', async () => {
     const rawJs = await collectPageMap({
+      // @ts-expect-error fixme
       dir: path.join(
         CWD,
         '__test__',
