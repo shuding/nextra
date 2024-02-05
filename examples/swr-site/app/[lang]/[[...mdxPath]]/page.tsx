@@ -49,14 +49,13 @@ export default async function Page(pageProps: PageProps) {
     ..._props
   } = await loadPage(lang, mdxPath)
 
-  const { wrapper: Wrapper, ...components } = useMDXComponents()
+  const { wrapper: Wrapper } = useMDXComponents()
 
   return (
     // @ts-expect-error -- fixme
     <Wrapper toc={useTOC()} metadata={metadata} title={title}>
       <MDXContent
         components={{
-          ...components,
           // fixes Error: Could not find the module "nextra/examples/swr-site/app/_components/video.tsx#Video" in the React Client Manifest.
           // This is probably a bug in the React Server Components bundler.
           Video,

@@ -4,7 +4,7 @@ import type { LoaderContext } from 'webpack'
 import type { LoaderOptions, PageOpts } from '../types'
 import { compileMetadata } from './compile-metadata.js'
 import { compileMdx } from './compile.js'
-import { CWD, MARKDOWN_EXTENSION_REGEX } from './constants.js'
+import { CWD, IS_PRODUCTION, MARKDOWN_EXTENSION_REGEX } from './constants.js'
 import { APP_DIR } from './file-system.js'
 import { logger } from './utils.js'
 
@@ -71,7 +71,7 @@ export async function loader(
       )
     : this.resourcePath
 
-  if (isPageMapImport) {
+  if (!IS_PRODUCTION && isPageMapImport) {
     return compileMetadata(source, {
       filePath: mdxPath
     })

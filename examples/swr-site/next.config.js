@@ -32,7 +32,10 @@ export function getStaticProps() {
     return pageMap
   },
   latex: true,
-  mdxBaseDir: './mdx'
+  mdxBaseDir: './mdx',
+  mdxOptions: {
+    providerImportSource: 'nextra-theme-docs'
+  }
 })
 
 const withBundleAnalyzer = bundleAnalyzer({

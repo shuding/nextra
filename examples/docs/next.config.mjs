@@ -5,7 +5,10 @@ const withNextra = nextra({
   search: {
     codeblocks: false
   },
-  mdxBaseDir: './mdx'
+  mdxBaseDir: './mdx',
+  mdxOptions: {
+    providerImportSource: 'nextra-theme-docs'
+  }
 })
 
 export default withNextra({
