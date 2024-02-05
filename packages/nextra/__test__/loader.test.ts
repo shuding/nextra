@@ -52,33 +52,4 @@ describe('tree shaking', async () => {
       expect(appFile.includes('process)')).toBe(false)
     })
   })
-
-  describe.skip('index page', async () => {
-    const testPage = ''
-      // await fs.readFile(
-      // path.join(
-      //   pageChunksDirPath,
-      //   pageChunkFileNames.find(name => name.startsWith('en-'))!
-      // ),
-      // 'utf8')
-    it('should not include `nextraLayout`', () => {
-      expect(testPage.includes('nextraLayout:')).toBe(false)
-    })
-    it('should not include `pageOpts.pageMap`', () => {
-      expect(testPage.includes('pageMap:')).toBe(true)
-    })
-    it('should not include `pageOpts.search`', () => {
-      expect(testPage.includes('search:')).toBe(false)
-    })
-    it('should not include `themeConfig`', () => {
-      expect(testPage.includes('themeConfig:')).toBe(false)
-    })
-    it('should not include `dynamicMetaModules`', () => {
-      expect(testPage.includes('dynamicMetaModules:')).toBe(false)
-    })
-    it('should not include injected theme config', () => {
-      expect(testPage.includes('docsRepositoryBase:')).toBe(false)
-      expect(testPage.includes('i18n:')).toBe(false)
-    })
-  })
 })
