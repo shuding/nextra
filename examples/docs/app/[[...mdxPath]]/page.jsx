@@ -1,5 +1,6 @@
 /* eslint-env node */
 
+import { notFound } from 'next/navigation'
 import { useMDXComponents } from 'nextra-theme-docs'
 
 export async function generateStaticParams() {
@@ -38,5 +39,9 @@ async function loadPage(mdxPath = []) {
   const { RouteToFilepath } = await import(
     '../../.next/static/chunks/nextra-page-map-.mjs'
   )
-  return await import(`../../mdx/${RouteToFilepath[mdxPath.join('/')]}`)
+  try {
+    return await import(`../../mdx/${RouteToFilepath[mdxPath.join('/')]}`)
+  } catch {
+    notFound()
+  }
 }

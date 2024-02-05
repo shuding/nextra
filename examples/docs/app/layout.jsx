@@ -30,9 +30,7 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang="en" dir="ltr">
-      <Head
-      // faviconGlyph="✦"
-      />
+      <Head faviconGlyph="✦" />
       <body>
         <Layout
           themeConfig={{
