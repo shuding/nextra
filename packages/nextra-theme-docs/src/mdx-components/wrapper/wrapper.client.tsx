@@ -113,11 +113,11 @@ export function ClientWrapper({
     )
 
   return (
-    <div className="_mx-auto _flex _max-w-[90rem]">
+    <>
       <Sidebar />
       {tocEl}
       {skipNavContent}
       {mainEl}
-    </div>
+    </>
   )
 }
