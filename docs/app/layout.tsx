@@ -61,6 +61,7 @@ export default async function RootLayout({
       <Head />
       <body>
         <Layout
+          pageMap={pageMap}
           themeConfig={{
             docsRepositoryBase:
               'https://github.com/shuding/nextra/tree/main/docs',
@@ -101,7 +102,6 @@ export default async function RootLayout({
               </p>
             </Footer>
           }
-          pageMap={pageMap}
         >
           {children}
         </Layout>

@@ -11,6 +11,7 @@ import {
   memo,
   useContext,
   useEffect,
+  useMemo,
   useRef,
   useState
 } from 'react'
@@ -313,10 +314,7 @@ function Menu({
   )
 }
 
-// TODO: fix me
-const anchors: Heading[] = []
-
-export function Sidebar(): ReactElement {
+export function Sidebar({ toc }: { toc: Heading[] }): ReactElement {
   const { normalizePagesResult, hideSidebar: asPopover } = useConfig()
   const { docsDirectories, directories, activeThemeContext } =
     normalizePagesResult
@@ -327,7 +325,7 @@ export function Sidebar(): ReactElement {
   const [showSidebar, setSidebar] = useState(true)
   const [showToggleAnimation, setToggleAnimation] = useState(false)
 
-  // const anchors = useMemo(() => toc.filter(v => v.depth === 2), [toc])
+  const anchors = useMemo(() => toc.filter(v => v.depth === 2), [toc])
   const sidebarRef = useRef<HTMLDivElement>(null)
   const mounted = useMounted()
 

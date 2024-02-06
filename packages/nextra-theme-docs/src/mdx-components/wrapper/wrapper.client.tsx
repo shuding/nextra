@@ -117,7 +117,7 @@ export function ClientWrapper({
 
   return (
     <>
-      <Sidebar />
+      <Sidebar toc={toc} />
       {tocEl}
       {skipNavContent}
       {mainEl}

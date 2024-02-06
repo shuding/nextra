@@ -27,10 +27,10 @@ const createHeading = (
       const heading = obRef.current
       if (!heading) return
       slugs.set(heading, [id, (context.index += 1)])
-      observer?.observe(heading)
+      observer!.observe(heading)
 
       return () => {
-        observer?.disconnect()
+        observer!.disconnect()
         slugs.delete(heading)
         setActiveAnchor(f => {
           const ret = { ...f }

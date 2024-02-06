@@ -23,7 +23,7 @@ const linkClassName = cn(
 
 export function TOC({ toc, filePath, pageTitle }: TOCProps): ReactElement {
   const activeAnchor = useActiveAnchor()
-  const tocRef = useRef<HTMLUListElement>(null)
+  const tocRef = useRef<HTMLDivElement>(null)
   const themeConfig = useThemeConfig()
 
   const hasHeadings = toc.length > 0
@@ -40,7 +40,9 @@ export function TOC({ toc, filePath, pageTitle }: TOCProps): ReactElement {
 
   useEffect(() => {
     if (!activeSlug) return
-    const anchor = tocRef.current?.querySelector(`a[href="#${activeSlug}"]`)
+    const anchor = tocRef.current!.children[1].querySelector(
+      `a[href="#${activeSlug}"]`
+    )
 
     if (anchor) {
       scrollIntoView(anchor, {
@@ -59,13 +61,14 @@ export function TOC({ toc, filePath, pageTitle }: TOCProps): ReactElement {
         'nextra-scrollbar _sticky _top-16 _overflow-y-auto _pt-6 _text-sm [hyphens:auto]',
         '_max-h-[calc(100vh-var(--nextra-navbar-height)-env(safe-area-inset-bottom))] _-me-4 _pe-4'
       )}
+      ref={tocRef}
     >
       {hasHeadings && (
         <>
           <p className="_mb-4 _font-semibold _tracking-tight">
             {renderComponent(themeConfig.toc.title)}
           </p>
-          <ul ref={tocRef}>
+          <ul>
             {toc.map(({ id, value, depth }) => (
               <li className="_my-2 _scroll-my-6 _scroll-py-6" key={id}>
                 <a
