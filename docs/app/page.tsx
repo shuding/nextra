@@ -7,8 +7,9 @@ import { Feature, Features } from './_components/features'
 import { MotionDiv, MotionH3 } from './_components/framer-motion'
 import { I18n } from './_components/i18n-demo'
 import styles from './page.module.css'
-import './page.css'
 import type { Metadata } from 'next'
+import { MdxIcon } from 'nextra/icons'
+import './page.css'
 
 export const metadata: Metadata = {
   title: 'Nextra – Next.js Static Site Generator'
@@ -135,29 +136,10 @@ export default function IndexPage() {
               }}
               href="/docs/guide/markdown"
             >
-              <svg
-                width="70%"
-                viewBox="0 0 69 29"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                style={{
-                  filter: 'drop-shadow(0 2px 10px rgba(0, 0, 0, .1))'
-                }}
-              >
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M66.375 0.375H2.625C1.38236 0.375 0.375 1.38236 0.375 2.625V25.875C0.375 27.1176 1.38236 28.125 2.625 28.125H66.375C67.6176 28.125 68.625 27.1176 68.625 25.875V2.625C68.625 1.38236 67.6176 0.375 66.375 0.375ZM23.625 5.75368V9.375V21.875H20.625V12.9963L16.1857 17.4357L15.125 18.4963L14.0643 17.4357L9.75 13.1213V22H6.75V9.5V5.87868L9.31066 8.43934L15.125 14.2537L21.0643 8.31434L23.625 5.75368ZM29.5607 12.5643L33.75 16.7537V5.375H36.75V16.7537L40.9393 12.5643L43.0607 14.6857L36.3107 21.4357L35.25 22.4963L34.1893 21.4357L27.4393 14.6857L29.5607 12.5643ZM62.3105 19.5592L56.1228 13.3736L62.4357 7.06066L60.3143 4.93934L54.0011 11.2526L47.6855 4.93916L45.5645 7.06084L51.8798 13.3739L45.6893 19.5643L47.8107 21.6857L54.0014 15.4949L60.1895 21.6808L62.3105 19.5592Z"
-                  fill="#fff"
-                />
-              </svg>
-              <p
-                style={{
-                  textShadow: '0 2px 4px rgb(0 0 0 / 20%)'
-                }}
-              >
-                <Link href="https://mdxjs.com/blog/v2" className="text-current">
-                  MDX 2
+              <MdxIcon className="w-4/6 h-auto [filter:drop-shadow(0_2px_10px_rgba(0,0,0,.1))]" />
+              <p style={{ textShadow: '0 2px 4px rgb(0 0 0 / 20%)' }}>
+                <Link href="https://mdxjs.com/blog/v3" className="!text-current">
+                  MDX 3
                 </Link>{' '}
                 lets you use Components inside Markdown,{' '}
                 <br className="hide-medium" />
