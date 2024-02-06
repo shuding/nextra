@@ -4,21 +4,16 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { i18n } from './app/_dictionaries/i18n-config'
 
-function getLocale(request: NextRequest): string | undefined {
-  // Negotiator expects plain object so we need to transform headers
-  const negotiatorHeaders: Record<string, string> = {}
-  // eslint-disable-next-line unicorn/no-array-for-each
-  request.headers.forEach((value, key) => (negotiatorHeaders[key] = value))
+const { locales, defaultLocale } = i18n
+const COOKIE_NAME = 'NEXT_LOCALE'
+const HAS_LOCALE_REGEX = new RegExp(`^\\/(${locales.join('|')})(\\/|$)`)
 
-  // @ts-ignore locales are readonly
-  const locales: string[] = i18n.locales
+function getHeadersLocale(request: NextRequest): string {
+  const headers = Object.fromEntries(request.headers.entries())
 
   // Use negotiator and intl-localematcher to get best locale
-  const languages = new Negotiator({ headers: negotiatorHeaders }).languages(
-    locales
-  )
-
-  const locale = matchLocale(languages, locales, i18n.defaultLocale)
+  const languages = new Negotiator({ headers }).languages(locales)
+  const locale = matchLocale(languages, locales, defaultLocale)
 
   return locale
 }
@@ -26,26 +21,13 @@ function getLocale(request: NextRequest): string | undefined {
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  // // `/_next/` and `/api/` are ignored by the watcher, but we need to ignore files in `public` manually.
-  // // If you have one
-  // if (
-  //   [
-  //     '/manifest.json',
-  //     '/favicon.ico',
-  //     // Your other files in `public`
-  //   ].includes(pathname)
-  // )
-  //   return
-
   // Check if there is any supported locale in the pathname
-  const pathnameIsMissingLocale = i18n.locales.every(
-    locale => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
-  )
+  const pathnameHasLocale = HAS_LOCALE_REGEX.test(pathname)
+  const cookieLocale = request.cookies.get(COOKIE_NAME)?.value
 
   // Redirect if there is no locale
-  if (pathnameIsMissingLocale) {
-    const locale =
-      request.cookies.get('NEXT_LOCALE')?.value || getLocale(request)
+  if (!pathnameHasLocale) {
+    const locale = cookieLocale || getHeadersLocale(request)
 
     // e.g. incoming request is /products
     // The new URL is now /en-US/products
@@ -55,6 +37,14 @@ export function middleware(request: NextRequest) {
         request.url
       )
     )
+  }
+
+  const requestLocale = pathname.split('/')[1]
+
+  if (requestLocale !== cookieLocale) {
+    const response = NextResponse.next()
+    response.cookies.set(COOKIE_NAME, requestLocale)
+    return response
   }
 }
 
