@@ -88,12 +88,7 @@ export default async function RootLayout({ children, params: { lang } }) {
               // }
             }
           }}
-          // @ts-expect-error fixme
-          pageOpts={{
-            pageMap,
-            frontMatter: {},
-            timestamp: new Date().getTime()
-          }}
+          pageMap={pageMap}
           banner={
             <Banner storageKey="swr-2">SWR 2.0 is out! Read more →</Banner>
           }

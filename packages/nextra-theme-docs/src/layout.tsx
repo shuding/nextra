@@ -59,7 +59,7 @@ const DEEP_OBJECT_KEYS = Object.entries(DEFAULT_THEME)
 export function Layout({
   children,
   themeConfig,
-  pageOpts,
+  pageMap,
   banner,
   nextThemes,
   footer = <Footer>MIT {new Date().getFullYear()} © Nextra.</Footer>,
@@ -70,21 +70,8 @@ export function Layout({
   footer?: ReactNode
   navbar?: ReactNode
 }): ReactElement {
-  const date = pageOpts.timestamp ? new Date(pageOpts.timestamp) : null
   const extendedThemeConfig = {
     ...DEFAULT_THEME,
-    gitTimestamp: date && (
-      <>
-        Last updated on{' '}
-        <time dateTime={date.toISOString()}>
-          {date.toLocaleDateString('en', {
-            day: 'numeric',
-            month: 'long',
-            year: 'numeric'
-          })}
-        </time>
-      </>
-    ),
     ...(themeConfig &&
       Object.fromEntries(
         Object.entries(themeConfig).map(([key, value]) => [
@@ -107,7 +94,7 @@ export function Layout({
         storageKey="theme"
         {...nextThemes}
       >
-        <ConfigProvider value={pageOpts} footer={footer} navbar={navbar}>
+        <ConfigProvider pageMap={pageMap} footer={footer} navbar={navbar}>
           <ActiveAnchorProvider>{children}</ActiveAnchorProvider>
         </ConfigProvider>
       </ThemeProvider>

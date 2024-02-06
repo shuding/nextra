@@ -1,11 +1,10 @@
 'use client'
 
 import cn from 'clsx'
-import type { NextraMDXContent } from 'nextra'
+import type { MDXWrapper } from 'nextra'
 import type { ComponentProps, ReactNode } from 'react'
 import { Breadcrumb, Pagination, Sidebar, TOC } from '../../components'
 import { useConfig, useThemeConfig } from '../../contexts'
-import { renderComponent } from '../../utils'
 
 const classes = {
   toc: cn(
@@ -21,11 +20,8 @@ export function ClientWrapper({
   children,
   skipNavContent,
   ...props
-}: ComponentProps<NextraMDXContent> & {
+}: ComponentProps<MDXWrapper> & {
   skipNavContent: ReactNode
-  filePath: string
-  timestamp?: number
-  title: string
 }) {
   const config = useConfig()
   const themeConfig = useThemeConfig()
@@ -65,7 +61,14 @@ export function ClientWrapper({
       suppressHydrationWarning
       className="_mt-12 _mb-8 _block _text-xs _text-gray-500 ltr:_text-right rtl:_text-left dark:_text-gray-400"
     >
-      {renderComponent(themeConfig.gitTimestamp, { timestamp: date })}
+      Last updated on{' '}
+      <time dateTime={date.toISOString()}>
+        {date.toLocaleDateString('en', {
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric'
+        })}
+      </time>
     </div>
   ) : (
     <div className="_mt-16" />

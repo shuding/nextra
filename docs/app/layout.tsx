@@ -101,12 +101,7 @@ export default async function RootLayout({
               </p>
             </Footer>
           }
-          // @ts-expect-error todo: remove it
-          pageOpts={{
-            pageMap,
-            frontMatter: {},
-            timestamp: new Date().getTime()
-          }}
+          pageMap={pageMap}
         >
           {children}
         </Layout>

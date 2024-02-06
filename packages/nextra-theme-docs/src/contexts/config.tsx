@@ -2,7 +2,7 @@
 
 import 'focus-visible'
 import '../polyfill'
-import type { PageOpts } from 'nextra'
+import type { PageMapItem } from 'nextra'
 import { useFSRoute } from 'nextra/hooks'
 import { normalizePages } from 'nextra/normalize-pages'
 import type { ReactElement, ReactNode } from 'react'
@@ -26,12 +26,12 @@ export function useConfig() {
 
 export function ConfigProvider({
   children,
-  value: { pageMap },
+  pageMap,
   footer,
   navbar
 }: {
   children: ReactNode
-  value: PageOpts
+  pageMap: PageMapItem[]
   footer: ReactNode
   navbar: ReactNode
 }): ReactElement {

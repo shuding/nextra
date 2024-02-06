@@ -1,5 +1,5 @@
 import type { Heading as MDASTHeading } from 'mdast'
-import type { NextConfig } from 'next'
+import type { Metadata, NextConfig } from 'next'
 import type { FC, ReactNode } from 'react'
 import type { z } from 'zod'
 import type { NEXTRA_INTERNAL } from './constants.js'
@@ -63,13 +63,12 @@ export type Heading = {
   id: string
 }
 
-export type PageOpts<FrontMatterType = FrontMatter> = {
+export type PageOpts = {
   filePath: string
-  frontMatter: FrontMatterType
-  pageMap: PageMapItem[]
-  title: string
   timestamp?: number
   readingTime?: ReadingTime
+  title: string
+  metadata: Metadata
 }
 
 export type ReadingTime = {
@@ -91,17 +90,18 @@ export type Nextra = (
 
 export type ThemeConfig = any | null
 
-export type NextraThemeLayoutProps<F = FrontMatter> = {
-  pageOpts: PageOpts<F>
-  pageProps: any
+export type NextraThemeLayoutProps = {
+  pageMap: PageMapItem[]
   themeConfig: ThemeConfig
   children: ReactNode
 }
 
-export type NextraMDXContent = FC<{
-  toc: Heading[]
-  children: ReactNode
-}>
+export type MDXWrapper = FC<
+  {
+    toc: Heading[]
+    children: ReactNode
+  } & PageOpts
+>
 
 export type UseTOC = (props: Record<string, any>) => Heading[]
 
@@ -112,8 +112,7 @@ export type NextraInternalGlobal = typeof globalThis & {
     context: Record<
       string,
       {
-        Content: NextraMDXContent
-        pageOpts: PageOpts
+        Content: MDXWrapper
         useTOC: UseTOC
       }
     >

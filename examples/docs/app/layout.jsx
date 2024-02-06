@@ -43,11 +43,7 @@ export default async function RootLayout({ children }) {
               defaultMenuCollapseLevel: 1
             }
           }}
-          pageOpts={{
-            pageMap,
-            frontMatter: {},
-            timestamp: new Date().getTime()
-          }}
+          pageMap={pageMap}
           banner={<Banner storageKey="Nextra 2">Nextra 2 Alpha</Banner>}
           navbar={
             <Navbar
