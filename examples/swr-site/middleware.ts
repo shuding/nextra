@@ -5,8 +5,10 @@ import type { NextRequest } from 'next/server'
 import { i18n } from './app/_dictionaries/i18n-config'
 
 const { locales, defaultLocale } = i18n
-const COOKIE_NAME = 'NEXT_LOCALE'
+
 const HAS_LOCALE_REGEX = new RegExp(`^\\/(${locales.join('|')})(\\/|$)`)
+
+const COOKIE_NAME = 'NEXT_LOCALE'
 
 function getHeadersLocale(request: NextRequest): string {
   const headers = Object.fromEntries(request.headers.entries())
