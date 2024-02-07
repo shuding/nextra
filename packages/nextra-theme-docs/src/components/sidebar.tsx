@@ -2,7 +2,7 @@
 
 import cn from 'clsx'
 import type { Heading } from 'nextra'
-import { useFSRoute, useMounted } from 'nextra/hooks'
+import { useFSRoute } from 'nextra/hooks'
 import { ArrowRightIcon, ExpandIcon } from 'nextra/icons'
 import type { Item, MenuItem, PageItem } from 'nextra/normalize-pages'
 import type { ReactElement } from 'react'
@@ -68,6 +68,24 @@ const classes = {
     '_relative before:_absolute before:_inset-y-1',
     'before:_w-px before:_bg-gray-200 before:_content-[""] dark:before:_bg-neutral-800',
     '_ps-3 before:_start-0'
+  ),
+  aside: cn(
+    'nextra-sidebar-container _flex _flex-col',
+    'md:_top-16 md:_shrink-0 motion-reduce:_transform-none',
+    '_transform-gpu _transition-all _ease-in-out',
+    'print:_hidden'
+  ),
+  wrapper: cn(
+    '_overflow-y-auto _overflow-x-hidden',
+    '_p-4 _grow md:_h-[calc(100vh-var(--nextra-navbar-height)-var(--nextra-menu-height))]'
+  ),
+  bottomMenu: cn(
+    '_sticky _bottom-0',
+    '_bg-white dark:_bg-dark', // when banner is showed, sidebar links can be behind menu, set bg color as body bg color
+    '_mx-4 _py-4 _shadow-[0_-12px_16px_#fff]',
+    '_flex _items-center _gap-2',
+    'dark:_border-neutral-800 dark:_shadow-[0_-12px_16px_#111]',
+    'contrast-more:_border-neutral-400 contrast-more:_shadow-none contrast-more:dark:_shadow-none'
   )
 }
 
@@ -364,10 +382,8 @@ export function MobileNav() {
       />
       <aside
         className={cn(
-          'md:_hidden nextra-sidebar-container _flex _flex-col',
-          'md:_top-16 md:_shrink-0 motion-reduce:_transform-none',
-          '_transform-gpu _transition-all _ease-in-out',
-          'print:_hidden',
+          'md:_hidden',
+          classes.aside,
           true ? 'md:_w-64' : 'md:_w-20',
           false ? 'md:_hidden' : 'md:_sticky md:_self-start',
           menu
@@ -380,8 +396,7 @@ export function MobileNav() {
         )}
         <div
           className={cn(
-            '_overflow-y-auto _overflow-x-hidden',
-            '_p-4 _grow md:_h-[calc(100vh-var(--nextra-navbar-height)-var(--nextra-menu-height))]',
+            classes.wrapper,
             true ? 'nextra-scrollbar' : 'no-scrollbar'
           )}
           ref={sidebarRef}
@@ -398,12 +413,7 @@ export function MobileNav() {
         {hasMenu && (
           <div
             className={cn(
-              '_sticky _bottom-0',
-              '_bg-white dark:_bg-dark', // when banner is showed, sidebar links can be behind menu, set bg color as body bg color
-              '_mx-4 _py-4 _shadow-[0_-12px_16px_#fff]',
-              '_flex _items-center _gap-2',
-              'dark:_border-neutral-800 dark:_shadow-[0_-12px_16px_#111]',
-              'contrast-more:_border-neutral-400 contrast-more:_shadow-none contrast-more:dark:_shadow-none',
+              classes.bottomMenu,
               true
                 ? [hasI18n && '_justify-end', '_border-t']
                 : '_py-4 _flex-wrap _justify-center'
@@ -463,10 +473,8 @@ export function Sidebar({ toc }: { toc: Heading[] }): ReactElement {
       )}
       <aside
         className={cn(
-          'max-md:_hidden nextra-sidebar-container _flex _flex-col',
-          'md:_top-16 md:_shrink-0 motion-reduce:_transform-none',
-          '_transform-gpu _transition-all _ease-in-out',
-          'print:_hidden',
+          'max-md:_hidden',
+          classes.aside,
           showSidebar ? 'md:_w-64' : 'md:_w-20',
           asPopover ? 'md:_hidden' : 'md:_sticky md:_self-start'
         )}
@@ -475,8 +483,7 @@ export function Sidebar({ toc }: { toc: Heading[] }): ReactElement {
           <OnFocusItemContext.Provider value={setFocused}>
             <div
               className={cn(
-                '_overflow-y-auto _overflow-x-hidden',
-                '_p-4 _grow md:_h-[calc(100vh-var(--nextra-navbar-height)-var(--nextra-menu-height))]',
+                classes.wrapper,
                 showSidebar ? 'nextra-scrollbar' : 'no-scrollbar'
               )}
               ref={sidebarRef}
@@ -502,12 +509,7 @@ export function Sidebar({ toc }: { toc: Heading[] }): ReactElement {
         {hasMenu && (
           <div
             className={cn(
-              '_sticky _bottom-0',
-              '_bg-white dark:_bg-dark', // when banner is showed, sidebar links can be behind menu, set bg color as body bg color
-              '_mx-4 _py-4 _shadow-[0_-12px_16px_#fff]',
-              '_flex _items-center _gap-2',
-              'dark:_border-neutral-800 dark:_shadow-[0_-12px_16px_#111]',
-              'contrast-more:_border-neutral-400 contrast-more:_shadow-none contrast-more:dark:_shadow-none',
+              classes.bottomMenu,
               showSidebar
                 ? [hasI18n && '_justify-end', '_border-t']
                 : '_py-4 _flex-wrap _justify-center'
