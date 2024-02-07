@@ -1,6 +1,7 @@
 'use client'
 
 import cn from 'clsx'
+import { usePathname } from 'next/navigation'
 import type { Heading } from 'nextra'
 import { useFSRoute } from 'nextra/hooks'
 import { ArrowRightIcon, ExpandIcon } from 'nextra/icons'
@@ -104,7 +105,6 @@ function FolderImpl({ item, anchors }: FolderProps): ReactElement {
   const focusedRouteInside = !!focusedRoute?.startsWith(item.route + '/')
   const level = useContext(FolderLevelContext)
 
-  const { setMenu } = useMenu()
   const { theme } = item as Item
   const themeConfig = useThemeConfig()
 
@@ -188,7 +188,6 @@ function FolderImpl({ item, anchors }: FolderProps): ReactElement {
               TreeState[item.route] = !open
             } else {
               TreeState[item.route] = true
-              setMenu(false)
             }
             rerender({})
             return
@@ -269,7 +268,6 @@ function File({
         href={(item as PageItem).href || item.route}
         newWindow={(item as PageItem).newWindow}
         className={cn(classes.link, active ? classes.active : classes.inactive)}
-        onClick={handleClick}
         onFocus={() => {
           onFocus?.(item.route)
         }}
@@ -340,6 +338,12 @@ export function MobileNav() {
 
   const { menu, setMenu } = useMenu()
 
+  const pathname = usePathname()
+
+  useEffect(() => {
+    setMenu(false)
+  }, [pathname, setMenu])
+
   const anchors = useMemo(() => (toc || []).filter(v => v.depth === 2), [toc])
   const sidebarRef = useRef<HTMLDivElement>(null)
 
@@ -378,7 +382,6 @@ export function MobileNav() {
             ? '_fixed _inset-0 _z-10 _bg-black/80 dark:_bg-black/60'
             : '_bg-transparent'
         )}
-        onClick={() => setMenu(false)}
       />
       <aside
         className={cn(
