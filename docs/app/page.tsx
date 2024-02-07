@@ -1,14 +1,14 @@
 import { ArrowRightIcon } from '@components/icons'
+import type { Metadata } from 'next'
 import Image from 'next/image'
 import { Link } from 'nextra-theme-docs'
+import { MdxIcon } from 'nextra/icons'
 import docsCardDark from 'public/assets/card-1.dark.png'
 import docsCard from 'public/assets/card-1.png'
 import { Feature, Features } from './_components/features'
 import { MotionDiv, MotionH3 } from './_components/framer-motion'
 import { I18n } from './_components/i18n-demo'
 import styles from './page.module.css'
-import type { Metadata } from 'next'
-import { MdxIcon } from 'nextra/icons'
 import './page.css'
 
 export const metadata: Metadata = {
@@ -138,7 +138,10 @@ export default function IndexPage() {
             >
               <MdxIcon className="w-4/6 h-auto [filter:drop-shadow(0_2px_10px_rgba(0,0,0,.1))]" />
               <p style={{ textShadow: '0 2px 4px rgb(0 0 0 / 20%)' }}>
-                <Link href="https://mdxjs.com/blog/v3" className="!text-current">
+                <Link
+                  href="https://mdxjs.com/blog/v3"
+                  className="!text-current"
+                >
                   MDX 3
                 </Link>{' '}
                 lets you use Components inside Markdown,{' '}

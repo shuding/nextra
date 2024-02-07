@@ -2,7 +2,7 @@
 
 import 'focus-visible'
 import '../polyfill'
-import type { PageMapItem, Heading } from 'nextra'
+import type { Heading, PageMapItem } from 'nextra'
 import { useFSRoute } from 'nextra/hooks'
 import { normalizePages } from 'nextra/normalize-pages'
 import type { ReactElement, ReactNode } from 'react'
@@ -11,8 +11,8 @@ import { MenuProvider } from './menu'
 
 type Config = {
   hideSidebar: boolean
-  normalizePagesResult: ReturnType<typeof normalizePages>,
-  toc: Heading[],
+  normalizePagesResult: ReturnType<typeof normalizePages>
+  toc: Heading[]
   setTOC: (toc: Heading[]) => void
 }
 
