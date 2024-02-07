@@ -40,7 +40,7 @@ export function TOC({ toc, filePath, pageTitle }: TOCProps): ReactElement {
 
   useEffect(() => {
     if (!activeSlug) return
-    const anchor = tocRef.current!.children[1].querySelector(
+    const anchor = tocRef.current!.children[1]?.querySelector(
       `a[href="#${activeSlug}"]`
     )
 

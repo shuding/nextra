@@ -387,8 +387,6 @@ export function MobileNav() {
         className={cn(
           'md:_hidden',
           classes.aside,
-          true ? 'md:_w-64' : 'md:_w-20',
-          false ? 'md:_hidden' : 'md:_sticky md:_self-start',
           menu
             ? 'max-md:[transform:translate3d(0,0,0)]'
             : 'max-md:[transform:translate3d(0,-100%,0)]'
@@ -398,10 +396,7 @@ export function MobileNav() {
           <div className="_px-4 _pt-4 md:_hidden">{themeConfig.search}</div>
         )}
         <div
-          className={cn(
-            classes.wrapper,
-            true ? 'nextra-scrollbar' : 'no-scrollbar'
-          )}
+          className={cn(classes.wrapper, 'nextra-scrollbar')}
           ref={sidebarRef}
         >
           <Menu
@@ -417,20 +412,13 @@ export function MobileNav() {
           <div
             className={cn(
               classes.bottomMenu,
-              true
-                ? [hasI18n && '_justify-end', '_border-t']
-                : '_py-4 _flex-wrap _justify-center'
+              hasI18n && '_justify-end',
+              '_border-t'
             )}
           >
-            <LocaleSwitch
-              lite={!true}
-              className={true ? '_grow' : 'max-md:_grow'}
-            />
+            <LocaleSwitch className="_grow" />
             {themeConfig.darkMode && (
-              <ThemeSwitch
-                lite={!true || hasI18n}
-                className={hasI18n ? '' : '_grow'}
-              />
+              <ThemeSwitch lite={hasI18n} className={hasI18n ? '' : '_grow'} />
             )}
           </div>
         )}
