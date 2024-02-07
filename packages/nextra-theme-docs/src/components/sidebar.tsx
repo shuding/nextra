@@ -314,10 +314,11 @@ function Menu({
   )
 }
 
-export function MobileNav({ toc }: { toc?: Heading[] }) {
-  const { normalizePagesResult, hideSidebar: asPopover } = useConfig()
-  const { directories, activeThemeContext } = normalizePagesResult
-  const includePlaceholder = activeThemeContext.layout === 'default'
+export function MobileNav() {
+  const {
+    normalizePagesResult: { directories },
+    toc
+  } = useConfig()
 
   const { menu, setMenu } = useMenu()
 
@@ -336,20 +337,12 @@ export function MobileNav({ toc }: { toc?: Heading[] }) {
     const activeElement = sidebarRef.current?.querySelector('li.active')
 
     if (activeElement && menu) {
-      const scroll = () => {
-        scrollIntoView(activeElement, {
-          block: 'center',
-          inline: 'center',
-          scrollMode: 'always',
-          boundary: sidebarRef.current!.parentNode as HTMLDivElement
-        })
-      }
-      if (menu) {
-        // needs for mobile since menu has transition transform
-        setTimeout(scroll, 300)
-      } else {
-        scroll()
-      }
+      scrollIntoView(activeElement, {
+        block: 'center',
+        inline: 'center',
+        scrollMode: 'always',
+        boundary: sidebarRef.current!.parentNode as HTMLDivElement
+      })
     }
   }, [menu])
 
@@ -360,9 +353,6 @@ export function MobileNav({ toc }: { toc?: Heading[] }) {
 
   return (
     <>
-      {includePlaceholder && asPopover && (
-        <div className="max-xl:_hidden _h-0 _w-64 _shrink-0" />
-      )}
       <div
         className={cn(
           'motion-reduce:_transition-none [transition:background-color_1.5s_ease]',
@@ -374,12 +364,12 @@ export function MobileNav({ toc }: { toc?: Heading[] }) {
       />
       <aside
         className={cn(
-          'nextra-sidebar-container _flex _flex-col',
+          'md:_hidden nextra-sidebar-container _flex _flex-col',
           'md:_top-16 md:_shrink-0 motion-reduce:_transform-none',
           '_transform-gpu _transition-all _ease-in-out',
           'print:_hidden',
           true ? 'md:_w-64' : 'md:_w-20',
-          asPopover ? 'md:_hidden' : 'md:_sticky md:_self-start',
+          false ? 'md:_hidden' : 'md:_sticky md:_self-start',
           menu
             ? 'max-md:[transform:translate3d(0,0,0)]'
             : 'max-md:[transform:translate3d(0,-100%,0)]'
@@ -397,7 +387,7 @@ export function MobileNav({ toc }: { toc?: Heading[] }) {
           ref={sidebarRef}
         >
           <Menu
-            className="nextra-menu-mobile md:_hidden"
+            className="nextra-menu-mobile"
             // The mobile dropdown menu, shows all the directories.
             directories={directories}
             // Always show the anchor links on mobile (`md`).
@@ -438,47 +428,28 @@ export function MobileNav({ toc }: { toc?: Heading[] }) {
 
 export function Sidebar({ toc }: { toc: Heading[] }): ReactElement {
   const { normalizePagesResult, hideSidebar: asPopover } = useConfig()
-  const { docsDirectories, directories, activeThemeContext } =
-    normalizePagesResult
+  const { docsDirectories, activeThemeContext } = normalizePagesResult
   const includePlaceholder = activeThemeContext.layout === 'default'
 
-  const { menu, setMenu } = useMenu()
   const [focused, setFocused] = useState<null | string>(null)
   const [showSidebar, setSidebar] = useState(true)
   const [showToggleAnimation, setToggleAnimation] = useState(false)
 
   const anchors = useMemo(() => toc.filter(v => v.depth === 2), [toc])
   const sidebarRef = useRef<HTMLDivElement>(null)
-  const mounted = useMounted()
-
-  useEffect(() => {
-    if (menu) {
-      document.body.classList.add('_overflow-hidden', 'md:_overflow-auto')
-    } else {
-      document.body.classList.remove('_overflow-hidden', 'md:_overflow-auto')
-    }
-  }, [menu])
 
   useEffect(() => {
     const activeElement = sidebarRef.current?.querySelector('li.active')
 
-    if (activeElement && (window.innerWidth > 767 || menu)) {
-      const scroll = () => {
-        scrollIntoView(activeElement, {
-          block: 'center',
-          inline: 'center',
-          scrollMode: 'always',
-          boundary: sidebarRef.current!.parentNode as HTMLDivElement
-        })
-      }
-      if (menu) {
-        // needs for mobile since menu has transition transform
-        setTimeout(scroll, 300)
-      } else {
-        scroll()
-      }
+    if (activeElement && window.innerWidth > 767) {
+      scrollIntoView(activeElement, {
+        block: 'center',
+        inline: 'center',
+        scrollMode: 'always',
+        boundary: sidebarRef.current!.parentNode as HTMLDivElement
+      })
     }
-  }, [menu])
+  }, [])
 
   const themeConfig = useThemeConfig()
   const hasI18n = themeConfig.i18n.length > 0
@@ -490,31 +461,16 @@ export function Sidebar({ toc }: { toc: Heading[] }): ReactElement {
       {includePlaceholder && asPopover && (
         <div className="max-xl:_hidden _h-0 _w-64 _shrink-0" />
       )}
-      <div
-        className={cn(
-          'motion-reduce:_transition-none [transition:background-color_1.5s_ease]',
-          menu
-            ? '_fixed _inset-0 _z-10 _bg-black/80 dark:_bg-black/60'
-            : '_bg-transparent'
-        )}
-        onClick={() => setMenu(false)}
-      />
       <aside
         className={cn(
-          'nextra-sidebar-container _flex _flex-col',
+          'max-md:_hidden nextra-sidebar-container _flex _flex-col',
           'md:_top-16 md:_shrink-0 motion-reduce:_transform-none',
           '_transform-gpu _transition-all _ease-in-out',
           'print:_hidden',
           showSidebar ? 'md:_w-64' : 'md:_w-20',
-          asPopover ? 'md:_hidden' : 'md:_sticky md:_self-start',
-          menu
-            ? 'max-md:[transform:translate3d(0,0,0)]'
-            : 'max-md:[transform:translate3d(0,-100%,0)]'
+          asPopover ? 'md:_hidden' : 'md:_sticky md:_self-start'
         )}
       >
-        {themeConfig.search && (
-          <div className="_px-4 _pt-4 md:_hidden">{themeConfig.search}</div>
-        )}
         <FocusedItemContext.Provider value={focused}>
           <OnFocusItemContext.Provider value={setFocused}>
             <div
@@ -529,7 +485,7 @@ export function Sidebar({ toc }: { toc: Heading[] }): ReactElement {
               {(!asPopover || !showSidebar) && (
                 <Collapse isOpen={showSidebar} horizontal>
                   <Menu
-                    className="nextra-menu-desktop max-md:_hidden"
+                    className="nextra-menu-desktop"
                     // The sidebar menu, shows only the docs directories.
                     directories={docsDirectories}
                     // When the viewport size is larger than `md`, hide the anchors in
@@ -538,15 +494,6 @@ export function Sidebar({ toc }: { toc: Heading[] }): ReactElement {
                     onlyCurrentDocs
                   />
                 </Collapse>
-              )}
-              {mounted && window.innerWidth < 768 && (
-                <Menu
-                  className="nextra-menu-mobile md:_hidden"
-                  // The mobile dropdown menu, shows all the directories.
-                  directories={directories}
-                  // Always show the anchor links on mobile (`md`).
-                  anchors={anchors}
-                />
               )}
             </div>
           </OnFocusItemContext.Provider>

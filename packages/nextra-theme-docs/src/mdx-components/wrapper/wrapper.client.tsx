@@ -3,6 +3,7 @@
 import cn from 'clsx'
 import type { MDXWrapper } from 'nextra'
 import type { ComponentProps, ReactNode } from 'react'
+import { useEffect } from 'react'
 import { Breadcrumb, Pagination, Sidebar, TOC } from '../../components'
 import { useConfig, useThemeConfig } from '../../contexts'
 
@@ -23,7 +24,7 @@ export function ClientWrapper({
 }: ComponentProps<MDXWrapper> & {
   skipNavContent: ReactNode
 }) {
-  const config = useConfig()
+  const { normalizePagesResult, setTOC } = useConfig()
   const themeConfig = useThemeConfig()
   const {
     activeType,
@@ -31,7 +32,7 @@ export function ClientWrapper({
     activePath,
     flatDocsDirectories,
     activeIndex
-  } = config.normalizePagesResult
+  } = normalizePagesResult
 
   const tocEl =
     activeType === 'page' ||
@@ -114,6 +115,11 @@ export function ClientWrapper({
         </main>
       </article>
     )
+
+  useEffect(() => {
+    // I didn't find other way to pass toc to src/layout
+    setTOC(toc)
+  }, [setTOC, toc])
 
   return (
     <>

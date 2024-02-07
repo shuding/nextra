@@ -2,7 +2,7 @@
 
 import 'focus-visible'
 import '../polyfill'
-import type { PageMapItem } from 'nextra'
+import type { PageMapItem, Heading } from 'nextra'
 import { useFSRoute } from 'nextra/hooks'
 import { normalizePages } from 'nextra/normalize-pages'
 import type { ReactElement, ReactNode } from 'react'
@@ -11,12 +11,16 @@ import { MenuProvider } from './menu'
 
 type Config = {
   hideSidebar: boolean
-  normalizePagesResult: ReturnType<typeof normalizePages>
+  normalizePagesResult: ReturnType<typeof normalizePages>,
+  toc: Heading[],
+  setTOC: (toc: Heading[]) => void
 }
 
 const ConfigContext = createContext<Config>({
   hideSidebar: false,
-  normalizePagesResult: {} as ReturnType<typeof normalizePages>
+  normalizePagesResult: {} as ReturnType<typeof normalizePages>,
+  toc: [],
+  setTOC: () => {}
 })
 ConfigContext.displayName = 'Config'
 
@@ -46,9 +50,13 @@ export function ConfigProvider({
   const { activeType, activeThemeContext } = normalizePagesResult
   const hideSidebar = !activeThemeContext.sidebar || activeType === 'page'
 
+  const [toc, setTOC] = useState<Heading[]>([])
+
   const extendedConfig: Config = {
     hideSidebar,
-    normalizePagesResult
+    normalizePagesResult,
+    toc,
+    setTOC
   }
 
   return (
