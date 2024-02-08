@@ -36,7 +36,7 @@ export default async function Page({ params: { slug = [] } }) {
     Callout,
     Tabs,
     Tab: Tabs.Tab,
-    PackageCmd: () => null,
+    PackageCmd: () => null
   })
 
   return (
