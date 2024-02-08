@@ -1,7 +1,8 @@
 import type { useMDXComponents as originalUseMDXComponents } from '@mdx-js/react'
-import type { MDXComponents } from '@mdx-js/react/lib'
+import type { MDXComponents as _MDXComponents } from '@mdx-js/react/lib'
 import Image, { type ImageProps } from 'next/image'
 import { createElement } from 'react'
+import type { MDXWrapper } from '../types'
 
 export const DEFAULT_COMPONENTS = {
   img: props =>
@@ -9,7 +10,7 @@ export const DEFAULT_COMPONENTS = {
       typeof props.src === 'object' ? Image : 'img',
       props as ImageProps
     )
-} satisfies MDXComponents
+} satisfies _MDXComponents
 
 export type UseMDXComponents = typeof originalUseMDXComponents
 
@@ -20,4 +21,6 @@ export const useMDXComponents: UseMDXComponents = components => {
   }
 }
 
-export type { MDXComponents }
+export type MDXComponents = Omit<_MDXComponents, 'wrapper'> & {
+  wrapper?: MDXWrapper
+}

@@ -1,7 +1,7 @@
 import cn from 'clsx'
 import { Code, Pre, Table, Td, Th, Tr, withIcons } from 'nextra/components'
 import { ArrowRightIcon } from 'nextra/icons'
-import type { UseMDXComponents } from 'nextra/mdx'
+import type { MDXComponents } from 'nextra/mdx'
 import { DEFAULT_COMPONENTS } from 'nextra/mdx'
 import { Details } from './details'
 import { H1 } from './h1'
@@ -12,7 +12,7 @@ import { Wrapper } from './wrapper'
 export { Link, H1 }
 
 /* eslint sort-keys: error */
-export const useMDXComponents: UseMDXComponents = components => {
+export function useMDXComponents<T extends MDXComponents>(components: T) {
   return {
     ...DEFAULT_COMPONENTS,
     a: Link,
@@ -75,7 +75,7 @@ export const useMDXComponents: UseMDXComponents = components => {
     ul: props => (
       <ul className="_mt-6 _list-disc first:_mt-0 _ms-6" {...props} />
     ),
-    wrapper: Wrapper as any,
+    wrapper: Wrapper,
     ...components
-  }
+  } satisfies MDXComponents
 }

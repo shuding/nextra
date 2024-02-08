@@ -13,6 +13,8 @@ import {
 import { getDictionary, getDirection } from '../_dictionaries/get-dictionary'
 import './styles.css'
 import '../_components/features.css'
+import { normalizePageMap } from 'nextra/page-map'
+import { pageMap as graphqlEslintPageMap } from './remote/graphql-eslint/[[...slug]]/page'
 
 export const { viewport } = Head
 
@@ -42,9 +44,13 @@ export const metadata: Metadata = {
 export default async function RootLayout({ children, params: { lang } }) {
   const dictionary = await getDictionary(lang)
 
-  const { pageMap } = await import(
+  let { pageMap } = await import(
     `.next/static/chunks/nextra-page-map-${lang}.mjs`
   )
+
+  if (lang === 'en') {
+    pageMap = [...pageMap, ...normalizePageMap(graphqlEslintPageMap)]
+  }
 
   return (
     <html

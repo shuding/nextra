@@ -8,11 +8,6 @@ export default {
     type: 'page',
     title: 'Docs'
   },
-  remote: {
-    type: 'page',
-    title: 'Remote',
-    href: '/remote/4423220'
-  },
   about: {
     type: 'menu',
     title: 'About',
