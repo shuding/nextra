@@ -1,7 +1,7 @@
 name: 'Bundle Analysis: Docs Theme (nextra.site)'
 
 on:
-  pull_request:
+  pull_request_target:
   push:
     branches: [main, v3, v4-v2]
   workflow_dispatch:
