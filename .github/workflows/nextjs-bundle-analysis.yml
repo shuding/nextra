@@ -57,14 +57,16 @@ jobs:
       - name: Upload bundle
         uses: actions/upload-artifact@v4
         with:
-          name: bundle-${{ toJSON(matrix.package) }}
+          # Check since we can't use slashes in name
+          name: bundle-${{ matrix.package == 'docs' && 'docs' || 'swr-site' }}
           path: ${{ matrix.package }}/.next/analyze/__bundle_analysis.json
 
       - name: Download Base Branch Bundle Stats
         uses: dawidd6/action-download-artifact@v3
         if: success() && github.event.number
         with:
-          name: bundle-${{ toJSON(matrix.package) }}
+          # Check since we can't use slashes in name
+          name: bundle-${{ matrix.package == 'docs' && 'docs' || 'swr-site' }}
           workflow: nextjs-bundle-analysis.yml
           branch: ${{ github.event.pull_request.base.ref }}
           path: ${{ matrix.package }}/.next/analyze/base
