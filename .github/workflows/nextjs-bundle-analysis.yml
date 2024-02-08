@@ -6,10 +6,6 @@ on:
     branches: [main, v3, v4-v2]
   workflow_dispatch:
 
-defaults:
-  run:
-    working-directory: ./
-
 jobs:
   analyze:
     runs-on: ubuntu-latest
@@ -61,13 +57,14 @@ jobs:
       - name: Upload bundle
         uses: actions/upload-artifact@v4
         with:
-          name: bundle
+          name: bundle-${{ matrix.package }}
           path: ${{ matrix.package }}/.next/analyze/__bundle_analysis.json
 
       - name: Download Base Branch Bundle Stats
         uses: dawidd6/action-download-artifact@v3
         if: success() && github.event.number
         with:
+          name: bundle-${{ matrix.package }}
           workflow: nextjs-bundle-analysis.yml
           branch: ${{ github.event.pull_request.base.ref }}
           path: ${{ matrix.package }}/.next/analyze/base
@@ -99,26 +96,9 @@ jobs:
           echo "$(cat ${{ matrix.package }}/.next/analyze/__bundle_analysis_comment.txt)" >> $GITHUB_OUTPUT
           echo EOF >> $GITHUB_OUTPUT
 
-      - name: Find Comment
-        uses: peter-evans/find-comment@v2
+      - name: Add comment to PR
+        uses: marocchino/sticky-pull-request-comment@v2.9.0
         if: success() && github.event.number
-        id: fc
         with:
-          issue-number: ${{ github.event.number }}
-          body-includes: <!-- __NEXTJS_BUNDLE_swr-site
-
-      - name: Create Comment
-        uses: peter-evans/create-or-update-comment@v3.1.0
-        if: success() && github.event.number && steps.fc.outputs.comment-id == 0
-        with:
-          issue-number: ${{ github.event.number }}
-          body: ${{ steps.get-comment-body.outputs.body }}
-
-      - name: Update Comment
-        uses: peter-evans/create-or-update-comment@v3.1.0
-        if: success() && github.event.number && steps.fc.outputs.comment-id != 0
-        with:
-          issue-number: ${{ github.event.number }}
-          body: ${{ steps.get-comment-body.outputs.body }}
-          comment-id: ${{ steps.fc.outputs.comment-id }}
-          edit-mode: replace
+          header: 'bundle-analysis-${{ matrix.package }}'
+          message: ${{ steps.get-comment-body.outputs.body }}
