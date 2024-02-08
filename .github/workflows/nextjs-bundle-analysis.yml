@@ -1,4 +1,4 @@
-name: 'Bundle Analysis'
+name: Bundle Analysis
 
 on:
   pull_request_target:
@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        package: ['examples/swr-site', 'docs']
+        package: ['examples/swr-site', docs]
 
     steps:
       - name: Cancel Previous Runs
@@ -57,14 +57,14 @@ jobs:
       - name: Upload bundle
         uses: actions/upload-artifact@v4
         with:
-          name: bundle-${{ matrix.package }}
+          name: bundle-${{ hashFiles(matrix.package) }}
           path: ${{ matrix.package }}/.next/analyze/__bundle_analysis.json
 
       - name: Download Base Branch Bundle Stats
         uses: dawidd6/action-download-artifact@v3
         if: success() && github.event.number
         with:
-          name: bundle-${{ matrix.package }}
+          name: bundle-${{ hashFiles(matrix.package) }}
           workflow: nextjs-bundle-analysis.yml
           branch: ${{ github.event.pull_request.base.ref }}
           path: ${{ matrix.package }}/.next/analyze/base
