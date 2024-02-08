@@ -3,8 +3,6 @@ pnpm-lock.yaml
 
 examples/swr-site/nextra-remote-filepaths/*.json
 
-examples/swr-site/app/_icons/remote/graphql-eslint/_meta.ts
-examples/swr-site/app/_icons/remote/graphql-yoga/_meta.ts
 docs/app/docs/guide/advanced/latex/page.mdx
 docs/app/docs/guide/advanced/mermaid/page.mdx
 docs/app/docs/guide/advanced/npm2yarn/page.mdx

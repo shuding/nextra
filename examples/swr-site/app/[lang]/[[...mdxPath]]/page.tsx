@@ -52,7 +52,6 @@ export default async function Page(pageProps: PageProps) {
   const { wrapper: Wrapper } = useMDXComponents()
 
   return (
-    // @ts-expect-error -- fixme
     <Wrapper toc={useTOC()} metadata={metadata} title={title}>
       <MDXContent
         components={{

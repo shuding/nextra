@@ -12,7 +12,7 @@ import { Wrapper } from './wrapper'
 export { Link, H1 }
 
 /* eslint sort-keys: error */
-export function useMDXComponents<T extends MDXComponents>(components: T) {
+export function useMDXComponents(components?: any) {
   return {
     ...DEFAULT_COMPONENTS,
     a: Link,

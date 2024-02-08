@@ -15,6 +15,7 @@ import './styles.css'
 import '../_components/features.css'
 import { normalizePageMap } from 'nextra/page-map'
 import { pageMap as graphqlEslintPageMap } from './remote/graphql-eslint/[[...slug]]/page'
+import { pageMap as graphqlYogaPageMap } from './remote/graphql-yoga/[[...slug]]/page'
 
 export const { viewport } = Head
 
@@ -49,7 +50,11 @@ export default async function RootLayout({ children, params: { lang } }) {
   )
 
   if (lang === 'en') {
-    pageMap = [...pageMap, ...normalizePageMap(graphqlEslintPageMap)]
+    pageMap = [
+      ...pageMap,
+      ...normalizePageMap(graphqlEslintPageMap),
+      ...normalizePageMap(graphqlYogaPageMap)
+    ]
   }
 
   return (

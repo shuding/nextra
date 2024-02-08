@@ -3,14 +3,14 @@ import { useMDXComponents } from 'nextra-theme-docs'
 import { compileMdx } from 'nextra/compile'
 import { Callout, evaluate, Tabs } from 'nextra/components'
 import { generatePageMapFromFilepaths } from 'nextra/page-map'
-import json from '../../../../../nextra-remote-filepaths/graphql-eslint.json'
+import json from '../../../../../nextra-remote-filepaths/graphql-yoga.json'
 
 const { branch, docsPath, filePaths, repo, user } = json
 
 const { mdxPages } = generatePageMapFromFilepaths(filePaths)
 
 const res = generatePageMapFromFilepaths(
-  filePaths.map(filePath => `remote/graphql-eslint/${filePath}`)
+  filePaths.map(filePath => `remote/graphql-yoga/${filePath}`)
 )
 
 export const pageMap = res.pageMap[0].children
@@ -33,8 +33,10 @@ export default async function Page({ params: { slug = [] } }) {
   const { default: MDXContent, useTOC, ...props } = evaluate(result)
 
   const { wrapper: Wrapper, ...components } = useMDXComponents({
-    $Tabs: Tabs,
-    Callout
+    Callout,
+    Tabs,
+    Tab: Tabs.Tab,
+    PackageCmd: () => null,
   })
 
   return (
