@@ -331,7 +331,7 @@ export const IndexPage = () => (
             </h3>
             <p>
               Performant and reliable build-time syntax highlighting powered by{' '}
-              <Link href="https://shiki.matsu.io">Shiki</Link>.
+              <Link href="https://shiki.style">Shiki</Link>.
             </p>
           </Feature>
           <Feature index={3} href="/docs/guide/i18n">

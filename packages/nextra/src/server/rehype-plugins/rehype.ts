@@ -27,7 +27,6 @@ export const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS: RehypePrettyCodeOptions = {
     light: 'github-light',
     dark: 'github-dark'
   },
-  // @ts-expect-error wait for https://github.com/rehype-pretty/rehype-pretty-code/pull/172
   getHighlighter(opts) {
     return getHighlighter({
       ...opts,
