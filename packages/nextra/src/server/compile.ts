@@ -2,6 +2,7 @@ import path from 'node:path'
 import type { ProcessorOptions } from '@mdx-js/mdx'
 import { createProcessor } from '@mdx-js/mdx'
 import type { Processor } from '@mdx-js/mdx/lib/core'
+import { rendererRich, transformerTwoslash } from '@shikijs/twoslash'
 // @ts-expect-error -- fixme
 import { remarkMermaid } from '@theguild/remark-mermaid'
 import { remarkNpm2Yarn } from '@theguild/remark-npm2yarn'
@@ -14,7 +15,6 @@ import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 import remarkReadingTime from 'remark-reading-time'
 import remarkSmartypants from 'remark-smartypants'
-import { rendererRich, transformerTwoslash } from 'shikiji-twoslash'
 import type { Pluggable, Plugin } from 'unified'
 import type {
   FrontMatter,
