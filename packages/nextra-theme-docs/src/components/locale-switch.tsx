@@ -1,5 +1,7 @@
+'use client'
+
 import { addBasePath } from 'next/dist/client/add-base-path'
-import { useRouter } from 'nextra/hooks'
+import { usePathname } from 'next/navigation'
 import { GlobeIcon } from 'nextra/icons'
 import type { ReactElement } from 'react'
 import { useThemeConfig } from '../contexts'
@@ -16,14 +18,12 @@ export function LocaleSwitch({
   lite,
   className
 }: LocaleSwitchProps): ReactElement | null {
-  const themeConfig = useThemeConfig()
+  const { i18n } = useThemeConfig()
+  const pathname = usePathname()
+  const locale = pathname.split('/')[1]
+  if (!i18n.length) return null
 
-  const { locale, asPath } = useRouter()
-
-  const options = themeConfig.i18n
-  if (!options.length) return null
-
-  const selected = options.find(l => locale === l.locale)
+  const selected = i18n.find(l => locale === l.locale)
   return (
     <Select
       title="Change language"
@@ -33,7 +33,9 @@ export function LocaleSwitch({
         document.cookie = `NEXT_LOCALE=${
           option.key
         }; expires=${date.toUTCString()}; path=/`
-        const href = addBasePath(asPath.replace(`/${locale}`, `/${option.key}`))
+        const href = addBasePath(
+          pathname.replace(`/${locale}`, `/${option.key}`)
+        )
         location.href = href
       }}
       selected={{
@@ -45,7 +47,7 @@ export function LocaleSwitch({
           </span>
         )
       }}
-      options={options.map(l => ({
+      options={i18n.map(l => ({
         key: l.locale,
         name: l.name
       }))}

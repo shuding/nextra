@@ -48,6 +48,10 @@
       "import": "./dist/server/page-map-dynamic.js",
       "types": "./dist/server/page-map-dynamic.d.ts"
     },
+    "./page-map": {
+      "import": "./dist/server/page-map.js",
+      "types": "./dist/server/page-map.d.ts"
+    },
     "./*": {
       "import": "./dist/client/*.js",
       "types": "./dist/client/*.d.ts"
@@ -56,6 +60,9 @@
   "types": "./dist/server/index.d.ts",
   "typesVersions": {
     "*": {
+      "page-map": [
+        "./dist/server/page-map.d.ts"
+      ],
       "compile": [
         "./dist/server/compile.d.ts"
       ],
@@ -107,7 +114,7 @@
     "clean": "rimraf ./dist ./style.css",
     "dev": "tsup --watch",
     "prepublishOnly": "pnpm build",
-    "test": "vitest run",
+    "test": "vitest",
     "types": "tsup --dts-only",
     "types:check": "tsc --noEmit"
   },
@@ -117,17 +124,18 @@
     "react-dom": ">=16.13.1"
   },
   "dependencies": {
-    "@headlessui/react": "^1.7.17",
+    "@headlessui/react": "^1.7.18",
     "@mdx-js/mdx": "^3.0.0",
     "@mdx-js/react": "^3.0.0",
     "@napi-rs/simple-git": "^0.1.9",
     "@shikijs/twoslash": "^1.0.0",
-    "@theguild/remark-mermaid": "^0.0.5",
+    "@theguild/remark-mermaid": "0.0.7-alpha-20240125050247-b972d40",
     "@theguild/remark-npm2yarn": "0.3.0",
     "better-react-mathjax": "^2.0.3",
-    "clsx": "^2.0.0",
+    "clsx": "^2.1.0",
     "estree-util-to-js": "^2.0.0",
     "estree-util-value-to-estree": "^3.0.1",
+    "fast-glob": "^3.3.2",
     "github-slugger": "^2.0.0",
     "graceful-fs": "^4.2.11",
     "gray-matter": "^4.0.3",
@@ -162,7 +170,7 @@
     "@types/webpack": "^5.28.3",
     "@vitejs/plugin-react": "^4.1.0",
     "esbuild-plugin-svgr": "^2.1.0",
-    "next": "^13.5.6",
+    "next": "^14.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "unified": "^11.0.3",

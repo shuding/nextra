@@ -2,14 +2,10 @@ import path from 'node:path'
 import slash from 'slash'
 import type { LoaderContext } from 'webpack'
 import type { LoaderOptions, PageOpts } from '../types'
+import { compileMetadata } from './compile-metadata.js'
 import { compileMdx } from './compile.js'
-import {
-  CHUNKS_DIR,
-  CWD,
-  MARKDOWN_EXTENSION_REGEX,
-  OFFICIAL_THEMES
-} from './constants.js'
-import { PAGES_DIR } from './file-system.js'
+import { CWD, IS_PRODUCTION, MARKDOWN_EXTENSION_REGEX } from './constants.js'
+import { APP_DIR } from './file-system.js'
 import { logger } from './utils.js'
 
 const initGitRepo = (async () => {
@@ -44,8 +40,6 @@ const initGitRepo = (async () => {
   return {}
 })()
 
-let isAppFileFromNodeModules = false
-
 export async function loader(
   this: LoaderContext<LoaderOptions>,
   source: string
@@ -53,9 +47,6 @@ export async function loader(
   const {
     isPageImport = false,
     isPageMapImport,
-    isMetaFile,
-    theme,
-    themeConfig,
     defaultShowCopyCode,
     search,
     staticImage,
@@ -80,57 +71,13 @@ export async function loader(
       )
     : this.resourcePath
 
-  const currentPath = slash(mdxPath)
-
-  if (currentPath.includes('/pages/api/')) {
-    logger.warn(
-      `Ignoring ${currentPath} because it is located in the "pages/api" folder.`
-    )
-    return ''
-  }
-  if (isMetaFile) {
-    // _meta.[jt]sx? used as a page.
-    return `export default () => null
-
-export const getStaticProps = () => ({ notFound: true })`
+  if (!IS_PRODUCTION && isPageMapImport) {
+    return compileMetadata(source, {
+      filePath: mdxPath
+    })
   }
 
-  if (currentPath.includes('/pages/_app.mdx')) {
-    throw new Error(
-      'Nextra v3 no longer supports _app.mdx, use _app.{js,jsx} or _app.{ts,tsx} for TypeScript projects instead.'
-    )
-  }
-
-  const isLocalTheme = theme.startsWith('.') || theme.startsWith('/')
-  const layoutPath = isLocalTheme ? slash(path.resolve(theme)) : theme
-
-  const cssImports = `
-${latex ? "import 'katex/dist/katex.min.css'" : ''}
-${OFFICIAL_THEMES.includes(theme) ? `import '${theme}/style.css'` : ''}`
-
-  if (currentPath.includes('/pages/_app.')) {
-    isAppFileFromNodeModules = currentPath.includes('/node_modules/')
-    // Relative path instead of a package name
-    const themeConfigImport = themeConfig
-      ? `import __themeConfig from '${slash(path.resolve(themeConfig))}'`
-      : ''
-
-    const content = isAppFileFromNodeModules
-      ? 'export default function App({ Component, pageProps }) { return <Component {...pageProps} />}'
-      : [cssImports, source].join('\n')
-
-    const appRawJs = `import __layout from '${layoutPath}'
-${themeConfigImport}
-${content}
-
-const __nextra_internal__ = globalThis[Symbol.for('__nextra_internal__')] ||= Object.create(null)
-__nextra_internal__.context ||= Object.create(null)
-__nextra_internal__.Layout = __layout
-${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
-    return appRawJs
-  }
-
-  const relativePath = slash(path.relative(PAGES_DIR, mdxPath))
+  const relativePath = slash(path.relative(APP_DIR, mdxPath))
 
   let locale = locales[0] === '' ? '' : relativePath.split('/')[0]
   // In case when partial document is placed outside `pages` directory
@@ -140,15 +87,14 @@ ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
     '/' +
     relativePath
       .replace(MARKDOWN_EXTENSION_REGEX, '')
-      .replace(/(^|\/)index$/, '')
-
+      .replace(/\/page$/, '')
+      .replace(/^app\//, '')
   const {
     result,
     title,
     frontMatter,
     structurizedData,
     searchIndexKey,
-    hasJsxInH1,
     readingTime
   } = await compileMdx(source, {
     mdxOptions: {
@@ -167,9 +113,9 @@ ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
     locale,
     filePath: mdxPath,
     useCachedCompiler: true,
-    isPageImport,
-    isPageMapImport
+    isPageImport
   })
+
   // Imported as a normal component, no need to add the layout.
   if (!isPageImport) {
     return `${result}
@@ -198,27 +144,18 @@ export default MDXLayout`
     }
   }
 
-  const pageOpts: Partial<PageOpts> = {
+  const restProps: Partial<PageOpts> = {
     filePath: slash(path.relative(CWD, mdxPath)),
-    hasJsxInH1,
     timestamp,
     readingTime
   }
   const finalResult = transform ? await transform(result, { route }) : result
-
-  const stringifiedPageOpts = JSON.stringify(pageOpts).slice(0, -1)
-  const pageMapPath = path.join(CHUNKS_DIR, `nextra-page-map-${locale}.mjs`)
-
-  const rawJs = `import { HOC_MDXWrapper } from 'nextra/setup-page'
-import { pageMap } from '${slash(pageMapPath)}'
-${isAppFileFromNodeModules ? cssImports : ''}
+  const rawJs = `
+import { HOC_MDXWrapper } from 'nextra/setup-page'
 ${finalResult}
 
-export default HOC_MDXWrapper(
-  MDXLayout,
-  '${route}',
-  ${stringifiedPageOpts},pageMap,frontMatter,title},
-  typeof RemoteContent === 'undefined' ? useTOC : RemoteContent.useTOC
-)`
+export default HOC_MDXWrapper(MDXLayout, _provideComponents, useTOC, ${JSON.stringify(
+    restProps
+  ).slice(0, -1)},metadata,title})`
   return rawJs
 }

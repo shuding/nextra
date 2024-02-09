@@ -1,9 +1,11 @@
-import { useData } from '../hooks/index.js'
 import { jsxRuntime } from '../jsx-runtime.cjs'
 import type { MDXComponents } from '../mdx.js'
 import { useMDXComponents } from '../mdx.js'
 
-function evaluate(compiledSource: string, scope: Record<string, unknown> = {}) {
+export function evaluate(
+  compiledSource: string,
+  scope: Record<string, unknown> = {}
+) {
   // if we're ready to render, we can assemble the component tree and let React do its thing
   // first we set up the scope which has to include the mdx custom
   // create element function as well as any components we're using
@@ -21,7 +23,8 @@ function evaluate(compiledSource: string, scope: Record<string, unknown> = {}) {
 
 export function RemoteContent({
   scope,
-  components
+  components,
+  compiledSource
 }: {
   /**
    * An object mapping names to React components.
@@ -34,21 +37,9 @@ export function RemoteContent({
    * Pass-through variables for use in the MDX content
    */
   scope?: Record<string, unknown>
+  compiledSource: string
 }) {
-  const compiledSource = useData('__nextra_dynamic_mdx')
-  if (!compiledSource) {
-    throw new Error(
-      'RemoteContent must be used together with the `buildDynamicMDX` API'
-    )
-  }
-
   const { default: MDXContent } = evaluate(compiledSource, scope)
 
   return <MDXContent components={components} />
-}
-
-RemoteContent.useTOC = (props: Record<string, unknown>) => {
-  const compiledSource = useData('__nextra_dynamic_mdx')
-  const { useTOC } = evaluate(compiledSource)
-  return useTOC(props)
 }

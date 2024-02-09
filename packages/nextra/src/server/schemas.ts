@@ -1,6 +1,5 @@
 import type { ProcessorOptions } from '@mdx-js/mdx'
 import type { MathJax3Config } from 'better-react-mathjax'
-import type { FC, ReactNode } from 'react'
 import { isValidElement } from 'react'
 import type { Options as RehypeKatexOptions } from 'rehype-katex'
 import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
@@ -71,7 +70,6 @@ export const mathJaxOptionsSchema = z
 
 export const nextraConfigSchema = z
   .strictObject({
-    themeConfig: z.string(),
     defaultShowCopyCode: z.boolean(),
     search: searchSchema,
     staticImage: z.boolean(),
@@ -100,28 +98,27 @@ export const nextraConfigSchema = z
     transformPageMap:
       z.custom<(pageMap: PageMapItem[], locale: string) => PageMapItem[]>(),
     mdxOptions: z.strictObject({
+      providerImportSource: z.string(),
       rehypePlugins: z.custom<ProcessorOptions['rehypePlugins']>(),
       remarkPlugins: z.custom<ProcessorOptions['remarkPlugins']>(),
       format: z.enum(['detect', 'mdx', 'md']),
       rehypePrettyCodeOptions: z.custom<RehypePrettyCodeOptions>()
-    })
+    }),
+    mdxBaseDir: z.string().optional()
   })
   .deepPartial()
-  .extend({ theme: z.string() })
 
 export const pageThemeSchema = z.strictObject({
   breadcrumb: z.boolean(),
   collapsed: z.boolean(),
   footer: z.boolean(),
-  layout: z.enum(['default', 'full', 'raw']),
+  layout: z.enum(['default', 'full']),
   navbar: z.boolean(),
   pagination: z.boolean(),
   sidebar: z.boolean(),
   timestamp: z.boolean(),
   toc: z.boolean(),
-  typesetting: z.enum(['default', 'article']),
-  topContent: z.custom<ReactNode | FC>(...reactNode),
-  bottomContent: z.custom<ReactNode | FC>(...reactNode)
+  typesetting: z.enum(['default', 'article'])
 })
 
 /**
