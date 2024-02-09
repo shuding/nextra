@@ -69,7 +69,7 @@ jobs:
           name: bundle-${{ matrix.package == 'docs' && 'docs' || 'swr-site' }}
           workflow: nextjs-bundle-analysis.yml
           branch: ${{ github.event.pull_request.base.ref }}
-          path: ${{ matrix.package }}/.next/analyze/base
+          path: ${{ matrix.package }}/.next/analyze/base/bundle
 
       # And here's the second place - this runs after we have both the current and
       # base branch bundle stats, and will compare them to determine what changed.
@@ -86,9 +86,8 @@ jobs:
       # entry in your package.json file.
       - name: Compare with Base Branch Bundle
         if: success() && github.event.number
-        run:
-          ls -laR ${{ matrix.package }}/.next/analyze/base && cd ${{
-          matrix.package }} && npx -p nextjs-bundle-analysis compare
+        working-directory: ${{ matrix.package }}
+        run: ls -laR .next/analyze/base && npx -p nextjs-bundle-analysis compare
 
       - name: Get Comment Body
         id: get-comment-body
