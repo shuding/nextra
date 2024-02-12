@@ -155,9 +155,10 @@ export default {
 
     return (
       <>
-        <meta property="og:url" content={url} />
-        <meta property="og:title" content={frontMatter.title || 'Nextra'} />
+        <meta key="og:url" property="og:url" content={url} />
+        <meta key="og:title" property="og:title" content={frontMatter.title || 'Nextra'} />
         <meta
+          key="og:description"
           property="og:description"
           content={frontMatter.description || 'The next site builder'}
         />
