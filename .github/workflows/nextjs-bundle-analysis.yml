@@ -1,4 +1,4 @@
-name: Bundle Analysis
+name: Next.js Bundle Analysis
 
 on:
   pull_request_target:
@@ -39,14 +39,14 @@ jobs:
         env:
           cache-name: cache-next-build
         with:
-          # if you use a custom build directory, replace all instances of `.next` in this file with your build directory
+          # If you use a custom build directory, replace all instances of `.next` in this file with your build directory
           # ex: if your app builds to `dist`, replace `.next` with `dist`
           path: ${{ matrix.package }}/.next/cache
-          # change this if you prefer a more strict cache
+          # Change this if you prefer a more strict cache
           key: ${{ runner.os }}-build-${{ env.cache-name }}
 
       - name: Build Next.js App
-        # change this if your site requires a custom build command
+        # Change this if your site requires a custom build command
         run: cd ${{ matrix.package }} && ./node_modules/.bin/next build
 
       # Here's the first place where next-bundle-analysis' own script is used
@@ -65,11 +65,9 @@ jobs:
         uses: dawidd6/action-download-artifact@v3
         if: success() && github.event.number
         with:
-          # Check since we can't use slashes in name
-          name: bundle-${{ matrix.package == 'docs' && 'docs' || 'swr-site' }}
           workflow: nextjs-bundle-analysis.yml
           branch: ${{ github.event.pull_request.base.ref }}
-          path: ${{ matrix.package }}/.next/analyze/base/bundle
+          path: ${{ matrix.package }}/.next/analyze/base
 
       # And here's the second place - this runs after we have both the current and
       # base branch bundle stats, and will compare them to determine what changed.
