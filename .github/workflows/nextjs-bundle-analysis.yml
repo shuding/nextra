@@ -43,7 +43,7 @@ jobs:
         env:
           cache-name: cache-next-build
         with:
-          name: bundle-${{ matrix.package//\//- }}
+          name: bundle-${{ matrix.package == 'docs' && 'docs' || 'swr-site' }}
           workflow: nextjs-bundle-analysis.yml
           branch: ${{ github.event.pull_request.base.ref }}
           path: ${{ matrix.package }}/.next/analyze/base/bundle
