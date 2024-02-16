@@ -1,10 +1,14 @@
 name: Next.js Bundle Analysis
 
 on:
-  pull_request_target:
+  pull_request:
   push:
     branches: [main, v3, v4-v2]
   workflow_dispatch:
+
+permissions:
+  pull-requests: write
+  contents: read
 
 jobs:
   analyze:
@@ -39,11 +43,10 @@ jobs:
         env:
           cache-name: cache-next-build
         with:
-          # If you use a custom build directory, replace all instances of `.next` in this file with your build directory
-          # ex: if your app builds to `dist`, replace `.next` with `dist`
-          path: ${{ matrix.package }}/.next/cache
-          # Change this if you prefer a more strict cache
-          key: ${{ runner.os }}-build-${{ env.cache-name }}
+          name: bundle-${{ matrix.package//\//- }}
+          workflow: nextjs-bundle-analysis.yml
+          branch: ${{ github.event.pull_request.base.ref }}
+          path: ${{ matrix.package }}/.next/analyze/base/bundle
 
       - name: Build Next.js App
         # Change this if your site requires a custom build command
