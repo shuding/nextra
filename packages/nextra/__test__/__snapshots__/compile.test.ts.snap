@@ -1,7 +1,9 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Process heading > code-h1 1`] = `
-"import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+"/*@jsxRuntime automatic*/
+/*@jsxImportSource react*/
+import { useMDXComponents as _provideComponents } from 'nextra/mdx'
 const title = 'codegen.yml'
 const frontMatter = {}
 export function useTOC(props) {
@@ -24,7 +26,9 @@ function MDXLayout(props) {
 `;
 
 exports[`Process heading > code-with-text-h1 1`] = `
-"import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+"/*@jsxRuntime automatic*/
+/*@jsxImportSource react*/
+import { useMDXComponents as _provideComponents } from 'nextra/mdx'
 const title = 'codegen.yml file'
 const frontMatter = {}
 export function useTOC(props) {
@@ -51,7 +55,9 @@ exports[`Process heading > dynamic-h1 1`] = `
 {
   "frontMatter": {},
   "hasJsxInH1": true,
-  "result": "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+  "result": "/*@jsxRuntime automatic*/
+/*@jsxImportSource react*/
+import { useMDXComponents as _provideComponents } from 'nextra/mdx'
 const title = 'Posts Tagged with “”'
 const frontMatter = {}
 import { useRouter } from 'next/router'
@@ -82,7 +88,9 @@ function MDXLayout(props) {
 `;
 
 exports[`Process heading > no-h1 1`] = `
-"import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+"/*@jsxRuntime automatic*/
+/*@jsxImportSource react*/
+import { useMDXComponents as _provideComponents } from 'nextra/mdx'
 const title = ''
 const frontMatter = {}
 export function useTOC(props) {
@@ -107,7 +115,9 @@ function MDXLayout(props) {
 `;
 
 exports[`Process heading > static-h1 1`] = `
-"import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+"/*@jsxRuntime automatic*/
+/*@jsxImportSource react*/
+import { useMDXComponents as _provideComponents } from 'nextra/mdx'
 const title = 'Hello World'
 const frontMatter = {}
 export function useTOC(props) {

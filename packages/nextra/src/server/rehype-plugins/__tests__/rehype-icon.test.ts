@@ -32,7 +32,9 @@ describe('rehypeIcon', () => {
 
     const file = await process(raw)
     expect(clean(file)).resolves.toMatchInlineSnapshot(`
-      "import { CssIcon } from 'nextra/icons'
+      "/*@jsxRuntime automatic*/
+      /*@jsxImportSource react*/
+      import { CssIcon } from 'nextra/icons'
       function _createMdxContent(props) {
         const _components = {
           code: 'code',
@@ -56,6 +58,16 @@ describe('rehypeIcon', () => {
           </>
         )
       }
+      export default function MDXContent(props = {}) {
+        const { wrapper: MDXLayout } = props.components || {}
+        return MDXLayout ? (
+          <MDXLayout {...props}>
+            <_createMdxContent {...props} />
+          </MDXLayout>
+        ) : (
+          _createMdxContent(props)
+        )
+      }
       "
     `)
   })
@@ -64,7 +76,9 @@ describe('rehypeIcon', () => {
 
     const file = await process(raw)
     expect(clean(file)).resolves.toMatchInlineSnapshot(`
-      "import { JavaScriptIcon } from 'nextra/icons'
+      "/*@jsxRuntime automatic*/
+      /*@jsxImportSource react*/
+      import { JavaScriptIcon } from 'nextra/icons'
       import { TypeScriptIcon } from 'nextra/icons'
       import { MarkdownIcon } from 'nextra/icons'
       import { MdxIcon } from 'nextra/icons'
@@ -185,6 +199,16 @@ describe('rehypeIcon', () => {
               </_components.code>
             </_components.pre>
           </>
+        )
+      }
+      export default function MDXContent(props = {}) {
+        const { wrapper: MDXLayout } = props.components || {}
+        return MDXLayout ? (
+          <MDXLayout {...props}>
+            <_createMdxContent {...props} />
+          </MDXLayout>
+        ) : (
+          _createMdxContent(props)
         )
       }
       "

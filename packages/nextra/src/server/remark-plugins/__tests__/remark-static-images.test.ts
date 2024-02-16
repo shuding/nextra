@@ -20,7 +20,9 @@ describe('remarkStaticImages', () => {
     )
 
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
-      "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+      "/*@jsxRuntime automatic*/
+      /*@jsxImportSource react*/
+      import { useMDXComponents as _provideComponents } from 'nextra/mdx'
       import __img0 from '../foo.png'
       import __img1 from '../bar.jpeg'
       const title = ''
@@ -80,7 +82,9 @@ describe('remarkStaticImages', () => {
     )
 
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
-      "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+      "/*@jsxRuntime automatic*/
+      /*@jsxImportSource react*/
+      import { useMDXComponents as _provideComponents } from 'nextra/mdx'
       import __img0 from '../foo.png'
       import __img1 from './bar.svg'
       const title = ''

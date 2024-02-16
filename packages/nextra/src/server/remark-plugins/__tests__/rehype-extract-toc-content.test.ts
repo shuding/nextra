@@ -21,7 +21,9 @@ bar[^1]
       opts
     )
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
-      "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+      "/*@jsxRuntime automatic*/
+      /*@jsxImportSource react*/
+      import { useMDXComponents as _provideComponents } from 'nextra/mdx'
       const title = ''
       const frontMatter = {}
       export function useTOC(props) {
@@ -113,7 +115,9 @@ import { Steps } from 'nextra/components'
       opts
     )
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
-      "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+      "/*@jsxRuntime automatic*/
+      /*@jsxImportSource react*/
+      import { useMDXComponents as _provideComponents } from 'nextra/mdx'
       const title = ''
       const frontMatter = {}
       import { Steps } from 'nextra/components'
@@ -185,7 +189,9 @@ export const frontMatter = {
       opts
     )
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
-      "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+      "/*@jsxRuntime automatic*/
+      /*@jsxImportSource react*/
+      import { useMDXComponents as _provideComponents } from 'nextra/mdx'
       const title = 'Heading 1'
       export const myVar = 'interpolated'
       export const Test = () => {
@@ -355,10 +361,11 @@ import { RemoteContent } from 'nextra/components'
         ...opts,
         filePath: '[[...slug]].mdx'
       })
-      const res = await clean(result, false)
+      const res = await clean(result)
 
       expect(res).toMatchInlineSnapshot(`
-        "/*@jsxRuntime automatic @jsxImportSource react*/
+        "/*@jsxRuntime automatic*/
+        /*@jsxImportSource react*/
         import { useMDXComponents as _provideComponents } from 'nextra/mdx'
         const title = '[[...slug]]'
         const frontMatter = {}
@@ -412,7 +419,7 @@ export const myVar = 123
 ### 123 {myVar}`
 
       const { result } = await compileMdx(rawMdx)
-      const res = await clean(result, false)
+      const res = await clean(result)
 
       expect(res).toMatchInlineSnapshot(`
         "'use strict'

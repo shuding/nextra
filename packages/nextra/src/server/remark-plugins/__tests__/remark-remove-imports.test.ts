@@ -20,7 +20,9 @@ export const Test = ({value}) => value
       opts
     )
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
-      "'use strict'
+      "/*@jsxRuntime automatic*/
+      /*@jsxImportSource react*/
+      'use strict'
       const { useMDXComponents: _provideComponents } = arguments[0]
       const title = ''
       const frontMatter = {}

@@ -16,8 +16,9 @@ describe('Compile', () => {
 export default foo`,
       { mdxOptions }
     )
-    expect(clean(result, false)).resolves.toMatchInlineSnapshot(`
-      "/*@jsxRuntime automatic @jsxImportSource react*/
+    expect(clean(result)).resolves.toMatchInlineSnapshot(`
+      "/*@jsxRuntime automatic*/
+      /*@jsxImportSource react*/
       import { useMDXComponents as _provideComponents } from 'nextra/mdx'
       const title = ''
       const frontMatter = {}
@@ -42,8 +43,9 @@ export default foo`,
 export { foo as default } from './foo'`,
       { mdxOptions }
     )
-    expect(clean(result, false)).resolves.toMatchInlineSnapshot(`
-      "/*@jsxRuntime automatic @jsxImportSource react*/
+    expect(clean(result)).resolves.toMatchInlineSnapshot(`
+      "/*@jsxRuntime automatic*/
+      /*@jsxImportSource react*/
       import { useMDXComponents as _provideComponents } from 'nextra/mdx'
       const title = ''
       const frontMatter = {}
@@ -109,7 +111,9 @@ export const TagName = () => {
       { mdxOptions }
     )
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
-      "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+      "/*@jsxRuntime automatic*/
+      /*@jsxImportSource react*/
+      import { useMDXComponents as _provideComponents } from 'nextra/mdx'
       const title = 'My Header'
       const frontMatter = {}
       export function useTOC(props) {
@@ -182,7 +186,9 @@ export const TagName = () => {
   it('use github-slugger', async () => {
     const { result } = await compileMdx('### My Header', { mdxOptions })
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
-      "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+      "/*@jsxRuntime automatic*/
+      /*@jsxImportSource react*/
+      import { useMDXComponents as _provideComponents } from 'nextra/mdx'
       const title = ''
       const frontMatter = {}
       export function useTOC(props) {
@@ -242,7 +248,9 @@ import Last from './three.mdx'
       { mdxOptions, latex: true }
     )
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
-      "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+      "/*@jsxRuntime automatic*/
+      /*@jsxImportSource react*/
+      import { useMDXComponents as _provideComponents } from 'nextra/mdx'
       const title = ''
       const frontMatter = {}
       import FromMdx, { useTOC as useTOC0 } from './one.mdx'

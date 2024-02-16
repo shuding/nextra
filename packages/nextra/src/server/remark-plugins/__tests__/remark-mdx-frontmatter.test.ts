@@ -27,11 +27,23 @@ describe('remarkMdxFrontMatter', () => {
 
     it('should export yaml frontmatter', () => {
       expect(clean(file)).resolves.toMatchInlineSnapshot(`
-        "export const frontMatter = {
+        "/*@jsxRuntime automatic*/
+        /*@jsxImportSource react*/
+        export const frontMatter = {
           foo: 'bar'
         }
         function _createMdxContent(props) {
           return <></>
+        }
+        export default function MDXContent(props = {}) {
+          const { wrapper: MDXLayout } = props.components || {}
+          return MDXLayout ? (
+            <MDXLayout {...props}>
+              <_createMdxContent {...props} />
+            </MDXLayout>
+          ) : (
+            _createMdxContent(props)
+          )
         }
         "
       `)
@@ -46,11 +58,23 @@ describe('remarkMdxFrontMatter', () => {
     const file = await process(ESM_FRONTMATTER)
     it('should export esm frontmatter', () => {
       expect(clean(file)).resolves.toMatchInlineSnapshot(`
-        "export const frontMatter = {
+        "/*@jsxRuntime automatic*/
+        /*@jsxImportSource react*/
+        export const frontMatter = {
           foo: 'bar'
         }
         function _createMdxContent(props) {
           return <></>
+        }
+        export default function MDXContent(props = {}) {
+          const { wrapper: MDXLayout } = props.components || {}
+          return MDXLayout ? (
+            <MDXLayout {...props}>
+              <_createMdxContent {...props} />
+            </MDXLayout>
+          ) : (
+            _createMdxContent(props)
+          )
         }
         "
       `)
