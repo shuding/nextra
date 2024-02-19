@@ -1,5 +1,12 @@
 # nextra-theme-docs
 
+## 3.0.0-alpha.19
+
+### Patch Changes
+
+- d21634d5: export `getComponents`
+  - nextra@3.0.0-alpha.19
+
 ## 3.0.0-alpha.18
 
 ### Patch Changes
