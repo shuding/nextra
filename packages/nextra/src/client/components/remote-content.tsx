@@ -3,7 +3,7 @@ import { jsxRuntime } from '../jsx-runtime.cjs'
 import type { MDXComponents } from '../mdx.js'
 import { useMDXComponents } from '../mdx.js'
 
-function evaluate(compiledSource: string, scope: Record<string, unknown> = {}) {
+export function evaluate(compiledSource: string, scope: Record<string, unknown> = {}) {
   // if we're ready to render, we can assemble the component tree and let React do its thing
   // first we set up the scope which has to include the mdx custom
   // create element function as well as any components we're using
