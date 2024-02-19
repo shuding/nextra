@@ -86,7 +86,12 @@ export default function Layout({
   )
 }
 
-export { useThemeConfig, useConfig, PartialDocsThemeConfig as DocsThemeConfig }
+export {
+  useThemeConfig,
+  useConfig,
+  PartialDocsThemeConfig as DocsThemeConfig,
+  getComponents
+}
 export { useTheme } from 'next-themes'
 export { Link } from './mdx-components'
 export {
