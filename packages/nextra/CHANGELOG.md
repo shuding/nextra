@@ -1,5 +1,16 @@
 # nextra
 
+## 3.0.0-alpha.18
+
+### Minor Changes
+
+- f71e660e: change to shiki again
+
+### Patch Changes
+
+- 98f439ca: export `evaluate` function for remote content
+- 98f439ca: add rust icon
+
 ## 3.0.0-alpha.17
 
 ### Minor Changes
