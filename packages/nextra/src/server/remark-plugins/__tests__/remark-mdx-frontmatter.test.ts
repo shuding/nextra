@@ -27,8 +27,7 @@ describe('remarkMdxFrontMatter', () => {
 
     it('should export yaml frontmatter', () => {
       expect(clean(file)).resolves.toMatchInlineSnapshot(`
-        "/*@jsxRuntime automatic*/
-        /*@jsxImportSource react*/
+        "/*@jsxRuntime automatic @jsxImportSource react*/
         export const frontMatter = {
           foo: 'bar'
         }
@@ -58,8 +57,7 @@ describe('remarkMdxFrontMatter', () => {
     const file = await process(ESM_FRONTMATTER)
     it('should export esm frontmatter', () => {
       expect(clean(file)).resolves.toMatchInlineSnapshot(`
-        "/*@jsxRuntime automatic*/
-        /*@jsxImportSource react*/
+        "/*@jsxRuntime automatic @jsxImportSource react*/
         export const frontMatter = {
           foo: 'bar'
         }
