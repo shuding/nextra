@@ -62,6 +62,10 @@ const FOOTER_LINK_TEXT = {
 }
 
 const config: DocsThemeConfig = {
+  backgroundColor: {
+    dark: '15,23,42',
+    light: '254,252,232'
+  },
   banner: {
     content: 'SWR 2.0 is out! Read more →',
     key: 'swr-2'
