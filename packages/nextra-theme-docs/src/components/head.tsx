@@ -54,7 +54,7 @@ export function Head(): ReactElement {
         name="viewport"
         content="width=device-width, initial-scale=1.0, viewport-fit=cover"
       />
-      <style>{`:root{--nextra-primary-hue:${lightHue}deg;--nextra-primary-saturation:${lightSaturation}%;--nextra-navbar-height:4rem;--nextra-menu-height:3.75rem;--nextra-banner-height:2.5rem;--nextra-bg:#fafafa;}.dark{--nextra-primary-hue:${darkHue}deg;--nextra-primary-saturation:${darkSaturation}%;--nextra-bg:#111;}`}</style>
+      <style>{`:root{--nextra-primary-hue:${lightHue}deg;--nextra-primary-saturation:${lightSaturation}%;--nextra-navbar-height:4rem;--nextra-menu-height:3.75rem;--nextra-banner-height:2.5rem;--nextra-bg:250,250,250;}.dark{--nextra-primary-hue:${darkHue}deg;--nextra-primary-saturation:${darkSaturation}%;--nextra-bg:17,17,17;}`}</style>
       {head}
     </NextHead>
   )
