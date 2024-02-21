@@ -139,7 +139,7 @@ module.exports = {
       plugins: ['typescript-sort-keys'],
       settings: {
         tailwindcss: {
-          config: 'packages/nextra-theme-docs/tailwind.config.js',
+          config: 'packages/nextra-theme-docs/tailwind.config.ts',
           callees: ['cn'],
           whitelist: [
             'nextra-breadcrumb',
@@ -166,7 +166,7 @@ module.exports = {
       files: 'packages/nextra-theme-blog/**',
       settings: {
         tailwindcss: {
-          config: 'packages/nextra-theme-blog/tailwind.config.js',
+          config: 'packages/nextra-theme-blog/tailwind.config.ts',
           whitelist: ['subheading-', 'post-item', 'post-item-more']
         }
       }
@@ -177,7 +177,7 @@ module.exports = {
       files: 'packages/nextra/**',
       settings: {
         tailwindcss: {
-          config: 'packages/nextra-theme-docs/tailwind.config.js',
+          config: 'packages/nextra-theme-docs/tailwind.config.ts',
           callees: ['cn'],
           whitelist: ['nextra-code', 'nextra-filetree']
         }
@@ -193,7 +193,7 @@ module.exports = {
       files: 'docs/**',
       settings: {
         tailwindcss: {
-          config: 'docs/tailwind.config.js',
+          config: 'docs/tailwind.config.ts',
           callees: ['cn'],
           whitelist: [
             'dash-ring',
@@ -217,7 +217,7 @@ module.exports = {
       files: 'examples/swr-site/**',
       settings: {
         tailwindcss: {
-          config: 'examples/swr-site/tailwind.config.js',
+          config: 'examples/swr-site/tailwind.config.ts',
           cssFiles: [
             'examples/swr-site/styles.css',
             'packages/nextra-theme-docs/dist/style.css'
@@ -244,7 +244,6 @@ module.exports = {
       files: [
         'prettier.config.js',
         'postcss.config.{js,cjs}',
-        'tailwind.config.{js,cjs}',
         'next.config.js',
         '.eslintrc.cjs'
       ],

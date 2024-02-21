@@ -1,6 +1,6 @@
+import typography from '@tailwindcss/typography'
 import type { Config } from 'tailwindcss'
 import colors from 'tailwindcss/colors'
-import typography from '@tailwindcss/typography'
 import docsConfig from '../nextra-theme-docs/tailwind.config'
 
 export default {
