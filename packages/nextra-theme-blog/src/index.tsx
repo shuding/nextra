@@ -59,7 +59,9 @@ export default function NextraLayout({
       <Head>
         <title>{title}</title>
         {config.head?.({ title, meta: frontMatter })}
-        <style>{':root{--nextra-bg:250,250,250;}.dark{--nextra-bg:17,17,17;}'}</style>
+        <style>
+          {':root{--nextra-bg:250,250,250;}.dark{--nextra-bg:17,17,17;}'}
+        </style>
       </Head>
       <BlogProvider value={{ config, opts: pageOpts }}>
         <article
