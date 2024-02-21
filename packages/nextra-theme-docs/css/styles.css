@@ -19,7 +19,7 @@ html {
 }
 
 body {
-  @apply _w-full _bg-white dark:_bg-dark dark:_text-gray-100;
+  @apply _w-full dark:_text-gray-100;
 }
 
 a,
@@ -44,7 +44,7 @@ summary {
 
 @media (max-width: 767px) {
   .nextra-sidebar-container {
-    @apply _fixed _pt-[calc(var(--nextra-navbar-height))] _top-0 _w-full _bottom-0 _z-[15] _overscroll-contain _bg-white dark:_bg-dark;
+    @apply _fixed _pt-[calc(var(--nextra-navbar-height))] _top-0 _w-full _bottom-0 _z-[15] _overscroll-contain;
     transition: transform 0.8s cubic-bezier(0.52, 0.16, 0.04, 1);
     will-change: transform, opacity;
     contain: layout style;
@@ -103,17 +103,6 @@ summary::-webkit-details-marker {
   }
 }
 
-@supports (
-  (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))
-) {
-  .nextra-search ul {
-    @apply _backdrop-blur-lg _bg-white/70 dark:_bg-dark/80;
-  }
-  .nextra-nav-container-blur {
-    @apply _backdrop-blur-md _bg-white/[.85] dark:!_bg-dark/80;
-  }
-}
-
 input[type='search'] {
   &::-webkit-search-decoration,
   &::-webkit-search-cancel-button,
@@ -165,4 +154,40 @@ input[type='search'] {
   100% {
     opacity: 1;
   }
+}
+
+body,
+.nextra-nav-container-blur,
+.nextra-toc-footer,
+.nextra-sidebar-footer {
+  @apply _bg-[rgb(var(--nextra-bg))];
+}
+.nextra-sidebar-container {
+  @apply max-md:_bg-[rgb(var(--nextra-bg))];
+}
+
+.nextra-nav-container-blur {
+  @apply _pointer-events-none _absolute _z-[-1] _size-full;
+  @apply _shadow-[0_2px_4px_rgba(0,0,0,.02),0_1px_0_rgba(0,0,0,.06)];
+  @apply dark:_shadow-[0_-1px_0_rgba(255,255,255,.1)_inset];
+  @apply contrast-more:_shadow-[0_0_0_1px_#000];
+  @apply contrast-more:dark:_shadow-[0_0_0_1px_#fff];
+  @apply _backdrop-blur-md _bg-[rgba(var(--nextra-bg),.7)];
+}
+
+.nextra-toc-footer,
+.nextra-sidebar-footer {
+  @apply _border-t dark:_border-neutral-800;
+  @apply contrast-more:_shadow-none contrast-more:_border-neutral-400 contrast-more:dark:_border-neutral-400;
+  @apply _shadow-[0_-12px_16px_rgb(var(--nextra-bg))];
+}
+
+.nextra-search-results {
+  @apply _border _border-gray-200 _text-gray-100 dark:_border-neutral-800;
+  @apply _absolute _top-full _z-20 _mt-2 _overflow-auto _overscroll-contain _rounded-xl _py-2.5 _shadow-xl;
+  @apply _max-h-[min(calc(50vh-11rem-env(safe-area-inset-bottom)),400px)];
+  @apply md:_max-h-[min(calc(100vh-5rem-env(safe-area-inset-bottom)),400px)];
+  @apply _inset-x-0 ltr:md:_left-auto rtl:md:_right-auto;
+  @apply contrast-more:_border contrast-more:_border-gray-900 contrast-more:dark:_border-gray-50;
+  @apply _backdrop-blur-lg _bg-[rgb(var(--nextra-bg),.8)];
 }

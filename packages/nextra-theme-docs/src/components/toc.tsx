@@ -94,10 +94,8 @@ export function TOC({ toc, filePath }: TOCProps): ReactElement {
       {hasMetaInfo && (
         <div
           className={cn(
-            hasHeadings &&
-              '_mt-8 _border-t _bg-white _pt-8 _shadow-[0_-12px_16px_white] dark:_bg-dark dark:_shadow-[0_-12px_16px_#111]',
-            '_sticky _bottom-0 _flex _flex-col _items-start _gap-2 _pb-8 dark:_border-neutral-800',
-            'contrast-more:_border-t contrast-more:_border-neutral-400 contrast-more:_shadow-none contrast-more:dark:_border-neutral-400'
+            hasHeadings && 'nextra-toc-footer _mt-8 _pt-8',
+            '_sticky _bottom-0 _flex _flex-col _items-start _gap-2 _pb-8'
           )}
         >
           {themeConfig.feedback.content ? (

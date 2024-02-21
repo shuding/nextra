@@ -37,6 +37,10 @@ const PLACEHOLDER_LOCALES: Record<string, string> = {
 }
 
 export const DEFAULT_THEME: DocsThemeConfig = {
+  backgroundColor: {
+    dark: '17,17,17',
+    light: '250,250,250'
+  },
   banner: {
     dismissible: true,
     key: 'nextra-banner'
