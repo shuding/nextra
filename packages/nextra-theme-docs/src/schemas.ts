@@ -27,6 +27,10 @@ export const themeSchema = /* @__PURE__ */ (() =>
       dismissible: z.boolean(),
       key: z.string()
     }),
+    backgroundColor: z.strictObject({
+      dark: z.string(),
+      light: z.string(),
+    }),
     chat: z.strictObject({
       icon: z.custom<ReactNode | FC>(...reactNode),
       link: z.string().startsWith('https://').optional()
