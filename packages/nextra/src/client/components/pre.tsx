@@ -60,7 +60,7 @@ export function Pre({
       <pre
         className={cn(
           '_overflow-x-auto _subpixel-antialiased _text-[.9em]',
-          'dark:_bg-black _py-4',
+          '_bg-white dark:_bg-black _py-4',
           '_ring-1 _ring-inset _ring-gray-300 dark:_ring-neutral-700',
           'contrast-more:_ring-gray-900 contrast-more:dark:_ring-gray-50',
           'contrast-more:_contrast-150',
