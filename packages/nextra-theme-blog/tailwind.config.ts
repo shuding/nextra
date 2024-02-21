@@ -12,7 +12,7 @@ export default {
       primary: colors.blue
     },
     extend: {
-      typography: theme => ({
+      typography: (theme: (str: string) => string) => ({
         dark: {
           css: {
             color: theme('colors.gray[300]'),
