@@ -29,7 +29,7 @@ export const themeSchema = /* @__PURE__ */ (() =>
     }),
     backgroundColor: z.strictObject({
       dark: z.string(),
-      light: z.string(),
+      light: z.string()
     }),
     chat: z.strictObject({
       icon: z.custom<ReactNode | FC>(...reactNode),

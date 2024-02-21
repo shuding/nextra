@@ -65,11 +65,6 @@ module.exports = {
         800: makePrimaryColor(32),
         900: makePrimaryColor(24)
       }
-    },
-    extend: {
-      colors: {
-        dark: '#111'
-      }
     }
   },
   darkMode: ['class', 'html[class~="dark"]']
