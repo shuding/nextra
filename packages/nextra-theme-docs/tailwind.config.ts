@@ -1,16 +1,15 @@
-const colors = require('tailwindcss/colors')
+import type { Config } from 'tailwindcss'
+import colors from 'tailwindcss/colors'
 
-const makePrimaryColor =
-  l =>
-  ({ opacityValue }) => {
+const makePrimaryColor: any =
+  (l: number) =>
+  ({ opacityValue }: { opacityValue?: string }) => {
     return (
       `hsl(var(--nextra-primary-hue) var(--nextra-primary-saturation) ${l}%` +
       (opacityValue ? ` / ${opacityValue})` : ')')
     )
   }
-
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   prefix: '_',
   content: [
     './src/**/*.tsx',
@@ -68,4 +67,4 @@ module.exports = {
     }
   },
   darkMode: ['class', 'html[class~="dark"]']
-}
+} satisfies Config

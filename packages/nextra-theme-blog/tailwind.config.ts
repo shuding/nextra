@@ -1,8 +1,9 @@
-const colors = require('tailwindcss/colors')
-const docsConfig = require('../nextra-theme-docs/tailwind.config')
+import type { Config } from 'tailwindcss'
+import colors from 'tailwindcss/colors'
+import typography from '@tailwindcss/typography'
+import docsConfig from '../nextra-theme-docs/tailwind.config'
 
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   prefix: docsConfig.prefix,
   content: docsConfig.content,
   theme: {
@@ -11,7 +12,6 @@ module.exports = {
       primary: colors.blue
     },
     extend: {
-      colors: docsConfig.theme.extend.colors,
       typography: theme => ({
         dark: {
           css: {
@@ -50,6 +50,6 @@ module.exports = {
       typography: ['dark']
     }
   },
-  plugins: [require('@tailwindcss/typography')],
+  plugins: [typography],
   darkMode: docsConfig.darkMode
-}
+} satisfies Config
