@@ -1,5 +1,15 @@
 # nextra-theme-docs
 
+## 3.0.0-alpha.20
+
+### Minor Changes
+
+- b776b162: add `backgroundColor.light` and `backgroundColor.dark` theme options
+
+### Patch Changes
+
+- nextra@3.0.0-alpha.20
+
 ## 3.0.0-alpha.19
 
 ### Patch Changes
