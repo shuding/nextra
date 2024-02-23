@@ -12,10 +12,6 @@
   @import './hamburger.css';
   @import './typesetting-article.css';
 
-  .thing {
-    background-color: green;
-  }
-
   html {
     @apply nx-antialiased nx-text-base nx-scroll-pt-[--nextra-navbar-height];
     font-feature-settings:
