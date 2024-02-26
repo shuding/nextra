@@ -161,18 +161,21 @@ By default, all MDX routes in the filesystem will be shown on the sidebar. But
 you can hide a specific pages or folders by using the `"display": "hidden"`
 configuration:
 
-```json filename="pages/_meta.json" {4}
+```json filename="pages/_meta.json" {11}
 {
   "index": "My Homepage",
   "contact": {
+     // The page will still be accessible via the `/contact` URL, 
+     // but it will not be shown in the sidebar.
     "display": "hidden"
   },
+  "draft": {
+    "type": "folder", // This is required for hiding folders.
+    "display": "hidden"
+  }
   "about": "About Us"
 }
 ```
-
-The page will still be accessible via the `/contact` URL, but it will not be
-shown in the sidebar.
 
 ## Navbar Items
 
