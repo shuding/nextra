@@ -78,7 +78,7 @@ export default async function (req) {
             letterSpacing: -4,
             backgroundImage: 'linear-gradient(90deg, #fff 40%, #aaa)',
             backgroundClip: 'text',
-            '-webkit-background-clip': 'text',
+            WebkitBackgroundClip: 'text',
             color: 'transparent'
           }}
         >
