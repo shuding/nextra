@@ -7,32 +7,6 @@ type MatchArgs = {
   match: string
 }
 
-/**
- * Processes the user's search term by escaping each word, separated by spaces,
- * and then joining them with '|'. This supports searching for multiple words,
- * allowing each word to be searched independently.
- *
- * For example, the search term "apple  banana" (with two spaces) is transformed
- * into "apple|banana", enabling the search for any results containing "apple" or "banana".
- * This approach also gracefully handles extra spaces between words.
- *
- * @param searchTerm - The user's search term.
- * @returns A RegExp object constructed from the processed search term.
- */
-const processSearchTerm = (searchTerm: string): RegExp => {
-  const trimmedSearchTerm = searchTerm.trim()
-
-  const searchWords = trimmedSearchTerm.split(/\s+/).filter(Boolean)
-
-  if (searchWords.length > 0) {
-    const escapedSearch = searchWords.map(escapeStringRegexp).join('|')
-
-    return new RegExp(escapedSearch, 'ig')
-  }
-
-  return /$.^/gi
-}
-
 export const HighlightMatches = memo<MatchArgs>(function HighlightMatches({
   value,
   match
@@ -41,7 +15,8 @@ export const HighlightMatches = memo<MatchArgs>(function HighlightMatches({
     return null
   }
   const splitText = value.split('')
-  const regexp = processSearchTerm(match)
+  const escapedSearch = escapeStringRegexp(match.trim())
+  const regexp = new RegExp(escapedSearch.replaceAll(/\s+/g, '|'), 'ig')
   let result
   let index = 0
   const content: (string | ReactNode)[] = []
