@@ -1,5 +1,13 @@
 # nextra-theme-docs
 
+## 2.13.4
+
+### Patch Changes
+
+- f7fc10b4: fix for the memory leak issue in the `highlight-matches.tsx`
+  component when search query contain multiple whitespaces
+  - nextra@2.13.4
+
 ## 2.13.3
 
 ### Patch Changes
