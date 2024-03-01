@@ -1,3 +1,4 @@
+const path = require('path')
 const colors = require('tailwindcss/colors')
 
 const makePrimaryColor =
@@ -14,8 +15,8 @@ module.exports = {
   prefix: 'nx-',
   content: [
     './src/**/*.tsx',
-    '../nextra/src/icons/*.tsx',
-    '../nextra/src/components/*.tsx'
+    path.join(path.dirname(require.resolve('nextra')), '/components/*.js'),
+    path.join(path.dirname(require.resolve('nextra')), '/icons/*.js')
   ],
   theme: {
     screens: {
