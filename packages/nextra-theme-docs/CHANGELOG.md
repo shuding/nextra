@@ -1,5 +1,16 @@
 # nextra-theme-docs
 
+## 3.0.0-alpha.21
+
+### Minor Changes
+
+- 962cea6b: allow `items: Map` for `type: 'menu'` since object can't guaranty
+  the insertion order
+
+### Patch Changes
+
+- nextra@3.0.0-alpha.21
+
 ## 3.0.0-alpha.20
 
 ### Minor Changes
