@@ -31,7 +31,7 @@ export function Banner(): ReactElement | null {
           <button
             type="button"
             aria-label="Dismiss banner"
-            className="nx-w-8 nx-h-8 nx-opacity-80 hover:nx-opacity-100"
+            className="nx-w-8 nx-h-8 nx-opacity-80 hover:nx-opacity-100 nextra-focusable"
             onClick={() => {
               try {
                 localStorage.setItem(banner.key, '0')

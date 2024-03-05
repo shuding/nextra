@@ -68,7 +68,7 @@ function HeadingLink({
         <a
           href={`#${id}`}
           id={id}
-          className="subheading-anchor"
+          className="subheading-anchor nextra-focusable"
           aria-label="Permalink for this section"
           ref={obRef}
         />
@@ -149,7 +149,7 @@ const Summary = (props: ComponentProps<'summary'>): ReactElement => {
       className={cn(
         'nx-flex nx-items-center nx-cursor-pointer nx-list-none nx-p-1 nx-transition-colors hover:nx-bg-gray-100 dark:hover:nx-bg-neutral-800',
         "before:nx-mr-1 before:nx-inline-block before:nx-transition-transform before:nx-content-[''] dark:before:nx-invert before:nx-shrink-0",
-        'rtl:before:nx-rotate-180 [[data-expanded]>&]:before:nx-rotate-90'
+        'rtl:before:nx-rotate-180 [[data-expanded]>&]:before:nx-rotate-90 nextra-focusable'
       )}
       {...props}
       onClick={e => {
@@ -167,7 +167,7 @@ export const Link = ({ href = '', className, ...props }: AnchorProps) => (
     href={href}
     newWindow={EXTERNAL_HREF_REGEX.test(href)}
     className={cn(
-      'nx-text-primary-600 nx-underline nx-decoration-from-font [text-underline-position:from-font]',
+      'nx-text-primary-600 nx-underline nx-decoration-from-font nextra-focusable [text-underline-position:from-font]',
       className
     )}
     {...props}

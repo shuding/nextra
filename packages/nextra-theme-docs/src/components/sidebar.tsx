@@ -274,7 +274,7 @@ function File({
                 href={`#${id}`}
                 className={cn(
                   classes.link,
-                  'nx-flex nx-gap-2 before:nx-opacity-25 before:nx-content-["#"]',
+                  'nx-flex nx-gap-2 before:nx-opacity-25 before:nx-content-["#"] nextra-focusable',
                   activeAnchor[id]?.isActive ? classes.active : classes.inactive
                 )}
                 onClick={() => {
@@ -498,7 +498,7 @@ export function Sidebar({
             {config.sidebar.toggleButton && (
               <button
                 title={showSidebar ? 'Hide sidebar' : 'Show sidebar'}
-                className="max-md:nx-hidden nx-h-7 nx-rounded-md nx-transition-colors nx-text-gray-600 dark:nx-text-gray-400 nx-px-2 hover:nx-bg-gray-100 hover:nx-text-gray-900 dark:hover:nx-bg-primary-100/5 dark:hover:nx-text-gray-50"
+                className="max-md:nx-hidden nx-h-7 nx-rounded-md nx-transition-colors nx-text-gray-600 dark:nx-text-gray-400 nx-px-2 hover:nx-bg-gray-100 hover:nx-text-gray-900 dark:hover:nx-bg-primary-100/5 dark:hover:nx-text-gray-50 nextra-focusable"
                 onClick={() => {
                   setSidebar(!showSidebar)
                   setToggleAnimation(true)

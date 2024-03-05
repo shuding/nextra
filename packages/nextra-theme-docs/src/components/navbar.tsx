@@ -43,7 +43,7 @@ function NavbarMenu({
         <Menu.Button
           className={cn(
             className,
-            '-nx-ml-2 nx-hidden nx-items-center nx-whitespace-nowrap nx-rounded nx-p-2 md:nx-inline-flex',
+            '-nx-ml-2 nx-hidden nx-items-center nx-whitespace-nowrap nx-rounded nx-p-2 md:nx-inline-flex nextra-focusable',
             classes.inactive
           )}
         >
@@ -192,7 +192,7 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
         <button
           type="button"
           aria-label="Menu"
-          className="nextra-hamburger -nx-mr-2 nx-rounded nx-p-2 active:nx-bg-gray-400/20 md:nx-hidden"
+          className="nextra-hamburger -nx-mr-2 nx-rounded nx-p-2 active:nx-bg-gray-400/20 md:nx-hidden nextra-focusable"
           onClick={() => setMenu(!menu)}
         >
           <MenuIcon className={cn({ open: menu })} />

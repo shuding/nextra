@@ -86,7 +86,7 @@ export function TOC({ headings, filePath }: TOCProps): ReactElement {
                     activeAnchor[id]?.isActive
                       ? 'nx-text-primary-600 nx-subpixel-antialiased contrast-more:!nx-text-primary-600'
                       : 'nx-text-gray-500 hover:nx-text-gray-900 dark:nx-text-gray-400 dark:hover:nx-text-gray-300',
-                    'contrast-more:nx-text-gray-900 contrast-more:nx-underline contrast-more:dark:nx-text-gray-50 nx-w-full nx-break-words'
+                    'contrast-more:nx-text-gray-900 contrast-more:nx-underline contrast-more:dark:nx-text-gray-50 nx-w-full nx-break-words nextra-focusable'
                   )}
                 >
                   {config.toc.headingComponent?.({

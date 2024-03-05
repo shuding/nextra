@@ -27,7 +27,7 @@ export function BackToTop({ className }: { className?: string }): ReactElement {
       aria-hidden="true"
       onClick={scrollToTop}
       className={cn(
-        'nx-flex nx-items-center nx-gap-1.5 nx-transition nx-opacity-0',
+        'nx-flex nx-items-center nx-gap-1.5 nx-transition nx-opacity-0 nextra-focusable',
         className
       )}
     >
