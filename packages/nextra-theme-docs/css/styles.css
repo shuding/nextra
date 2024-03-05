@@ -84,7 +84,7 @@ body {
 }
 
 /* Content Typography */
-.nx-summary {
+.nextra-summary {
   &::-webkit-details-marker {
     @apply nx-hidden;
   }
