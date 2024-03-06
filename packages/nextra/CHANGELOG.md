@@ -1,5 +1,13 @@
 # nextra
 
+## 3.0.0-alpha.22
+
+### Patch Changes
+
+- 2630461c: fix
+  `TypeError: undefined is not iterable (cannot read property Symbol(Symbol.iterator))`
+  on dev environment when `frontMatter.searchable: false`
+
 ## 3.0.0-alpha.21
 
 ## 3.0.0-alpha.20
