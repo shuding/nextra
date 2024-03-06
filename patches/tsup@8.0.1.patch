@@ -1,0 +1,15 @@
+diff --git a/dist/rollup.js b/dist/rollup.js
+index daba939dbbfab21c360e4021e5723abf8fe997ea..9d9be8a782a6fed1f3ce891c19a40c7543dc1910 100644
+--- a/dist/rollup.js
++++ b/dist/rollup.js
+@@ -8160,6 +8160,10 @@ var getRollupConfig = async (options) => {
+         tsResolveOptions && tsResolvePlugin(tsResolveOptions),
+         json(),
+         ignoreFiles,
++        // https://stackoverflow.com/a/72679927
++        require('@rollup/plugin-alias')({
++          entries: [{ find: /^.*\.svg$/, replacement: 'src/icon.d.ts' }]
++        }),
+         dtsPlugin.default({
+           tsconfig: options.tsconfig,
+           compilerOptions: {

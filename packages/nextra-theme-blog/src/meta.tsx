@@ -12,26 +12,26 @@ export default function Meta(): ReactElement {
   const tags = tag ? split(tag) : []
 
   const tagsEl = tags.map(t => (
-    <Link key={t} href="/tags/[tag]" as={`/tags/${t}`} passHref legacyBehavior>
-      <a
-        className="
-          nx-select-none
-          nx-rounded-md
-          nx-bg-gray-200
-          nx-px-1
-          nx-text-sm
-          nx-text-gray-400
-          nx-transition-colors
-          hover:nx-bg-gray-300
-          hover:nx-text-gray-500
-          dark:nx-bg-gray-600
-          dark:nx-text-gray-300
-          dark:hover:nx-bg-gray-700
-          dark:hover:nx-text-gray-200
+    <Link
+      key={t}
+      href={`/tags/${t}`}
+      className="
+          _select-none
+          _rounded-md
+          _bg-gray-200
+          _px-1
+          _text-sm
+          _text-gray-400
+          _transition-colors
+          hover:_bg-gray-300
+          hover:_text-gray-500
+          dark:_bg-gray-600
+          dark:_text-gray-300
+          dark:hover:_bg-gray-700
+          dark:hover:_text-gray-200
         "
-      >
-        {t}
-      </a>
+    >
+      {t}
     </Link>
   ))
 
@@ -40,12 +40,11 @@ export default function Meta(): ReactElement {
   return (
     <div
       className={
-        'nx-mb-8 nx-flex nx-gap-3 ' +
-        (readingTime ? 'nx-items-start' : 'nx-items-center')
+        '_mb-8 _flex _gap-3 ' + (readingTime ? '_items-start' : '_items-center')
       }
     >
-      <div className="nx-grow dark:nx-text-gray-400 nx-text-gray-600">
-        <div className="nx-not-prose nx-flex nx-flex-wrap nx-items-center nx-gap-1">
+      <div className="_grow dark:_text-gray-400 _text-gray-600">
+        <div className="_not-prose _flex _flex-wrap _items-center _gap-1">
           {author}
           {author && date && ','}
           {dateObj && (
@@ -54,22 +53,18 @@ export default function Meta(): ReactElement {
             </time>
           )}
           {(author || date) && (readingTime || tags.length > 0) && (
-            <span className="nx-px-1">•</span>
+            <span className="_px-1">•</span>
           )}
           {readingTime || tagsEl}
         </div>
         {readingTime && (
-          <div className="nx-not-prose nx-mt-1 nx-flex nx-flex-wrap nx-items-center nx-gap-1">
+          <div className="_not-prose _mt-1 _flex _flex-wrap _items-center _gap-1">
             {tagsEl}
           </div>
         )}
       </div>
-      <div className="nx-flex nx-items-center nx-gap-3 print:nx-hidden">
-        {back && (
-          <Link href={back} passHref legacyBehavior>
-            <a>Back</a>
-          </Link>
-        )}
+      <div className="_flex _items-center _gap-3 print:_hidden">
+        {back && <Link href={back}>Back</Link>}
         {config.darkMode && <ThemeSwitch />}
       </div>
     </div>

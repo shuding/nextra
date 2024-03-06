@@ -13,7 +13,7 @@ const TAILWIND_CONFIG = {
 module.exports = {
   root: true,
   reportUnusedDisableDirectives: true,
-  ignorePatterns: ['next-env.d.ts'],
+  ignorePatterns: ['next-env.d.ts', 'generated-page-map.js'],
   overrides: [
     // Rules for all files
     {
@@ -24,7 +24,7 @@ module.exports = {
         'plugin:import/typescript',
         'prettier'
       ],
-      plugins: ['import', 'unicorn'],
+      plugins: ['import', 'unicorn', 'sonarjs'],
       rules: {
         'prefer-object-has-own': 'error',
         'logical-assignment-operators': [
@@ -47,6 +47,21 @@ module.exports = {
         'unicorn/no-array-for-each': 'error',
         'unicorn/prefer-string-replace-all': 'error',
         '@typescript-eslint/prefer-for-of': 'error',
+        quotes: ['error', 'single', { avoidEscape: true }], // Matches Prettier, but also replaces backticks
+        '@typescript-eslint/no-unused-vars': [
+          'error',
+          {
+            argsIgnorePattern: '^_',
+            varsIgnorePattern: '^_' // allow underscores in destructuring
+          }
+        ],
+        'prefer-object-spread': 'error',
+        'prefer-arrow-callback': ['error', { allowNamedFunctions: true }],
+        'unicorn/prefer-at': 'error',
+        'sonarjs/no-small-switch': 'error',
+        'prefer-const': ['error', { destructuring: 'all' }],
+        'unicorn/prefer-array-index-of': 'error',
+        'sonarjs/no-unused-collection': 'error',
         // todo: enable
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-non-null-assertion': 'off',
@@ -104,6 +119,7 @@ module.exports = {
       ],
       parserOptions: {
         project: [
+          'examples/*/tsconfig.json',
           'packages/*/tsconfig.json',
           'docs/tsconfig.json',
           'tsconfig.eslint.json'
@@ -123,7 +139,7 @@ module.exports = {
       plugins: ['typescript-sort-keys'],
       settings: {
         tailwindcss: {
-          config: 'packages/nextra-theme-docs/tailwind.config.js',
+          config: 'packages/nextra-theme-docs/tailwind.config.ts',
           callees: ['cn'],
           whitelist: [
             'nextra-breadcrumb',
@@ -150,7 +166,7 @@ module.exports = {
       files: 'packages/nextra-theme-blog/**',
       settings: {
         tailwindcss: {
-          config: 'packages/nextra-theme-blog/tailwind.config.js',
+          config: 'packages/nextra-theme-blog/tailwind.config.ts',
           whitelist: ['subheading-', 'post-item', 'post-item-more']
         }
       }
@@ -161,10 +177,14 @@ module.exports = {
       files: 'packages/nextra/**',
       settings: {
         tailwindcss: {
-          config: 'packages/nextra-theme-docs/tailwind.config.js',
+          config: 'packages/nextra-theme-docs/tailwind.config.ts',
           callees: ['cn'],
-          whitelist: ['nextra-code-block', 'nextra-filetree']
+          whitelist: ['nextra-code', 'nextra-filetree']
         }
+      },
+      rules: {
+        ...TAILWIND_CONFIG.rules,
+        'import/extensions': ['error', 'ignorePackages']
       }
     },
     // ⚙️ Docs
@@ -173,9 +193,20 @@ module.exports = {
       files: 'docs/**',
       settings: {
         tailwindcss: {
-          config: 'docs/tailwind.config.js',
+          config: 'docs/tailwind.config.ts',
           callees: ['cn'],
-          whitelist: ['dash-ring', 'theme-1', 'theme-2', 'theme-3', 'theme-4']
+          whitelist: [
+            'dash-ring',
+            'theme-1',
+            'theme-2',
+            'theme-3',
+            'theme-4',
+            'subtitle',
+            'headline',
+            'content-container',
+            'feat-darkmode',
+            'features-container'
+          ]
         },
         next: { rootDir: 'docs' }
       }
@@ -186,7 +217,11 @@ module.exports = {
       files: 'examples/swr-site/**',
       settings: {
         tailwindcss: {
-          config: 'examples/swr-site/tailwind.config.js'
+          config: 'examples/swr-site/tailwind.config.ts',
+          cssFiles: [
+            'examples/swr-site/styles.css',
+            'packages/nextra-theme-docs/dist/style.css'
+          ]
         },
         next: { rootDir: 'examples/swr-site' }
       }
@@ -208,8 +243,7 @@ module.exports = {
     {
       files: [
         'prettier.config.js',
-        'postcss.config.js',
-        'tailwind.config.js',
+        'postcss.config.{js,cjs}',
         'next.config.js',
         '.eslintrc.cjs'
       ],

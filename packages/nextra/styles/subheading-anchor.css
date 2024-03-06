@@ -1,17 +1,17 @@
 .subheading-anchor {
-  @apply nx-opacity-0 nx-transition-opacity ltr:nx-ml-1 rtl:nx-mr-1;
+  @apply _opacity-0 _transition-opacity ltr:_ml-1 rtl:_mr-1;
 
   :hover > &,
   &:focus {
-    @apply nx-opacity-100;
+    @apply _opacity-100;
   }
 
   &:after {
-    @apply nx-content-['#'] nx-px-1;
-    @apply nx-text-gray-300 dark:nx-text-neutral-700;
+    @apply _content-['#'] _px-1;
+    @apply _text-gray-300 dark:_text-neutral-700;
     span:target + & {
-      @apply nx-text-gray-400;
-      @apply dark:nx-text-neutral-500;
+      @apply _text-gray-400;
+      @apply dark:_text-neutral-500;
     }
   }
 }

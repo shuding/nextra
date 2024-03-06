@@ -33,13 +33,15 @@ npm i nextra-theme-docs
 
 ### Create the following Next.js config and theme config under the root directory
 
-```js filename="next.config.js"
-const withNextra = require('nextra')({
+```js filename="next.config.mjs"
+import nextra from 'nextra'
+
+const withNextra = nextra({
   theme: 'nextra-theme-blog',
   themeConfig: './theme.config.js'
   // optional: add `staticImage: true` to enable Nextra's auto image import
 })
-module.exports = withNextra()
+export default withNextra()
 ```
 
 ### Create a `theme.config.js` file for the docs theme

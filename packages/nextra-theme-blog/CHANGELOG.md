@@ -1,5 +1,239 @@
 # nextra-theme-blog
 
+## 3.0.0-alpha.21
+
+### Patch Changes
+
+- nextra@3.0.0-alpha.21
+
+## 3.0.0-alpha.20
+
+### Patch Changes
+
+- nextra@3.0.0-alpha.20
+
+## 3.0.0-alpha.19
+
+### Patch Changes
+
+- nextra@3.0.0-alpha.19
+
+## 3.0.0-alpha.18
+
+### Patch Changes
+
+- Updated dependencies [98f439ca]
+- Updated dependencies [f71e660e]
+- Updated dependencies [98f439ca]
+  - nextra@3.0.0-alpha.18
+
+## 3.0.0-alpha.17
+
+### Minor Changes
+
+- 30438264: add shikiji twoslash
+
+  Demo feature:
+  https://nextra-v2-na3obnhub-shuding1.vercel.app/docs/guide/twoslash-support
+
+### Patch Changes
+
+- 9f55bd1f: update rehype-pretty-code/shikiji to latest
+- Updated dependencies [9f55bd1f]
+- Updated dependencies [30438264]
+  - nextra@3.0.0-alpha.17
+
+## 3.0.0-alpha.16
+
+### Minor Changes
+
+- 5a637010: add icons for following languages:
+
+  - GraphQL (`graphql`)
+  - C++ (`c++`, `cpp`)
+  - C# (`csharp`, `c#`, `cs`)
+  - Python (`python`, `py`)
+
+  allow disallow mobile word wrap button in code blocks with `word-wrap=false`
+  meta data setting
+
+### Patch Changes
+
+- Updated dependencies [5a637010]
+- Updated dependencies [90c129e6]
+  - nextra@3.0.0-alpha.16
+
+## 3.0.0-alpha.15
+
+### Patch Changes
+
+- Updated dependencies [1a364694]
+  - nextra@3.0.0-alpha.15
+
+## 3.0.0-alpha.14
+
+### Patch Changes
+
+- nextra@3.0.0-alpha.14
+
+## 3.0.0-alpha.13
+
+### Patch Changes
+
+- Updated dependencies [60ec68c4]
+- Updated dependencies [c74ae90a]
+- Updated dependencies [6070b025]
+- Updated dependencies [8bce16d3]
+- Updated dependencies [6070b025]
+  - nextra@3.0.0-alpha.13
+
+## 3.0.0-alpha.12
+
+### Patch Changes
+
+- Updated dependencies [3644e1c2]
+- Updated dependencies [57bc0e2a]
+  - nextra@3.0.0-alpha.12
+
+## 3.0.0-alpha.11
+
+### Major Changes
+
+- c2ad837d: update to MDX3
+
+### Patch Changes
+
+- Updated dependencies [c2ad837d]
+  - nextra@3.0.0-alpha.11
+
+## 3.0.0-alpha.10
+
+### Patch Changes
+
+- Updated dependencies [9099c354]
+  - nextra@3.0.0-alpha.10
+
+## 3.0.0-alpha.9
+
+### Patch Changes
+
+- Updated dependencies [8efbb45c]
+- Updated dependencies [80e11e04]
+  - nextra@3.0.0-alpha.9
+
+## 3.0.0-alpha.8
+
+### Minor Changes
+
+- 440ff42d: add MathJax support
+
+### Patch Changes
+
+- Updated dependencies [440ff42d]
+  - nextra@3.0.0-alpha.8
+
+## 3.0.0-alpha.7
+
+### Patch Changes
+
+- 0b5cc9d5: make nextra compatible with windows
+- Updated dependencies [0b5cc9d5]
+  - nextra@3.0.0-alpha.7
+
+## 3.0.0-alpha.6
+
+### Patch Changes
+
+- Updated dependencies [03da778a]
+  - nextra@3.0.0-alpha.6
+
+## 3.0.0-alpha.5
+
+### Patch Changes
+
+- Updated dependencies [a3b67aea]
+  - nextra@3.0.0-alpha.5
+
+## 3.0.0-alpha.4
+
+### Patch Changes
+
+- Updated dependencies [7faa0968]
+  - nextra@3.0.0-alpha.4
+
+## 3.0.0-alpha.3
+
+### Patch Changes
+
+- Updated dependencies [fe5061b7]
+  - nextra@3.0.0-alpha.3
+
+## 3.0.0-alpha.2
+
+### Patch Changes
+
+- cb247901: fix broken `export default` statement in mdx files
+- Updated dependencies [cb247901]
+  - nextra@3.0.0-alpha.2
+
+## 3.0.0-alpha.1
+
+### Major Changes
+
+- 148278ce: rename tailwind prefix `nx-` to `_` to reduce bundle size
+- d7d8a3eb: new styles for code blocks aka in next.js
+- 128e195f: fix React warning, remove PageOpts.toc, use `toc` prop from
+  `components.wrapper`
+- 191e6c41: - use `shikiji` instead of `shiki`
+
+  - rename `useSSG` to `useData`
+
+- c7f03e54: rename `pageOpts.headings` to `toc`
+
+### Patch Changes
+
+- Updated dependencies [e7e8e849]
+- Updated dependencies [71882780]
+- Updated dependencies [023d37b1]
+- Updated dependencies [148278ce]
+- Updated dependencies [c7f03e54]
+- Updated dependencies [d7d8a3eb]
+- Updated dependencies [a52a869e]
+- Updated dependencies [63ca28be]
+- Updated dependencies [1f3e7cd4]
+- Updated dependencies [b9f88e34]
+- Updated dependencies [4e55c064]
+- Updated dependencies [128e195f]
+- Updated dependencies [1f3e7cd4]
+- Updated dependencies [198dbcca]
+- Updated dependencies [191e6c41]
+- Updated dependencies [c7f03e54]
+  - nextra@3.0.0-alpha.1
+
+## 3.0.0-alpha.0
+
+### Major Changes
+
+- 16ab7f78: - remove `legacyBehavior` from `NextLink`
+
+  - remove `config.cusdis`. Instead, now you need to pass cusdis options as
+    props in `Cusdis` component
+
+- 919fe977: set `"peerDependencies.next": ">=13"`
+
+### Patch Changes
+
+- Updated dependencies [0fe55db2]
+- Updated dependencies [50a52fd1]
+- Updated dependencies [919fe977]
+- Updated dependencies [ad4823d9]
+- Updated dependencies [ab07609c]
+- Updated dependencies [2f3be336]
+- Updated dependencies [66cce1d1]
+- Updated dependencies [d8a406b4]
+- Updated dependencies [576cb6f1]
+  - nextra@3.0.0-alpha.0
+
 ## 2.13.4
 
 ### Patch Changes

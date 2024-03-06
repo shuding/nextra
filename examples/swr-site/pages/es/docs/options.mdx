@@ -1,0 +1,81 @@
+import { Callout } from 'nextra/components'
+
+# API Options
+
+```js
+const { data, error, isValidating, mutate } = useSWR(key, fetcher, options)
+```
+
+## Parámetros
+
+- `key`: un string key único para la solicitud (o una función / array / null)
+  [(uso avanzado)](/docs/conditional-fetching)
+- `fetcher`: (_opcional_) una función que devuelve una Promise para recuperar
+  sus datos [(detalles)](/docs/data-fetching)
+- `options`: (_opcional_) un objecto de opciónes para el hook useSWR
+
+## Valores devueltos
+
+- `data`: data de la key dada resueltos por el `fetcher` (o undefined si no está
+  cargado)
+- `error`: error lanzado por el `fetcher` (o undefined)
+- `isValidating`: si hay una solicitud o carga de revalidación
+- `mutate(data?, shouldRevalidate?`: función para mutar los datos en caché
+  [(detalles)](/docs/mutation)
+
+## Opciónes
+
+- `suspense = false`: activar el modo React Suspense
+  [(detalles)](/docs/suspense)
+- `fetcher(args)`: la fetcher función
+- `revalidateIfStale = true`: automatic revalidation on mount even if there is
+  stale data [(details)](/docs/revalidation#disable-automatic-revalidations)
+- `revalidateOnMount`: activar o desactivar la revalidación automática cuando se
+  monta el componente
+- `revalidateOnFocus = true`: revalidación automática cuanto window gets focused
+  [(detalles)](/docs/revalidation)
+- `revalidateOnReconnect = true`: revalidación automática cuando el navegador
+  recupera la conexión a la red (a través de `navigator.onLine`)
+  [(detalles)](/docs/revalidation)
+- `refreshInterval` [(detalles)](/docs/revalidation):
+  - desactivado por defecto: `refreshInterval = 0`
+  - If set to a number, polling interval
+  - If set to a function, the function will receive the latest data and should
+    return the interval in milliseconds
+- `refreshWhenHidden = false`: polling cuando window es invisible (si
+  `refreshInterval` está activado)
+- `refreshWhenOffline = false`: polling cuando el navegador está desconectado
+  (determinado por `navigator.onLine`)
+- `shouldRetryOnError = true`: reitentar cuando el fetcher tiene un error
+- `dedupingInterval = 2000`: solicitudes de deduplicación con la misma key en
+  este lapso de tiempo
+- `focusThrottleInterval = 5000`: sólo revalidar una vez durante un periodo de
+  tiempo
+- `loadingTimeout = 3000`: tiempo de espera para activar el evento onLoadingSlow
+- `errorRetryInterval = 5000`: error retry interval
+- `errorRetryCount`: número máximo de reintentos de error
+- `fallback`: a key-value object of multiple fallback data
+  [(example)](/docs/with-nextjs)
+- `fallbackData`: datos iniciales a devolver (nota: Esto es por un hook)
+- `onLoadingSlow(key, config)`: función callback cuando una petición tarda
+  demasiado en cargase (véase: `loadingTimeout`)
+- `onSuccess(data, key, config)`: función callback cuando una petición termina
+  con éxito
+- `onError(err, key, config)`: función callback cuando una petición devuelve un
+  error
+- `onErrorRetry(err, key, config, revalidate, revalidateOps)`: manejador para el
+  reintento de error
+- `compare(a, b)`: función de comparación utilizada para detectar cuando los
+  datos devueltos han cambiado, para evitar spurious rerenders. Por defecto, se
+  utiliza [dequal](https://github.com/lukeed/dequal).
+- `isPaused()`: para detectar si pause revalidations, ignorará los datos
+  obtenidos y los errores cuando devuelva `true`. Devuelve `false` por defecto.
+- `use`: array of middleware functions [(details)](/docs/middleware)
+
+<Callout>
+  Cuando una red lenta (2G, {'<='} 70Kbps), `errorRetryInterval` serian 10
+  segundos, y `loadingTimeout` serian 5 segundos por defecto.
+</Callout>
+
+También puede utilizar la [configuración global](/docs/global-configuration)
+para proporcionar opciónes por defecto.

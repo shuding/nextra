@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest'
+import { useRouter } from 'next/router'
+import type { Mock } from 'vitest'
 import { collectPostsAndNavs } from '../src/utils/collect'
 import {
   articleOpts,
@@ -7,8 +8,13 @@ import {
   postsOpts
 } from './__fixture__/pageMap'
 
+vi.mock('next/router', () => ({
+  useRouter: vi.fn()
+}))
+
 describe('collect', () => {
   it('page', () => {
+    ;(useRouter as Mock).mockReturnValue({ route: '/' })
     expect(collectPostsAndNavs({ opts: indexOpts, config }))
       .toMatchInlineSnapshot(`
         {
@@ -20,8 +26,6 @@ describe('collect', () => {
                 "title": "Random Thoughts",
                 "type": "posts",
               },
-              "kind": "MdxPage",
-              "locale": "",
               "name": "index",
               "route": "/posts",
             },
@@ -32,8 +36,6 @@ describe('collect', () => {
                 "title": "About",
                 "type": "page",
               },
-              "kind": "MdxPage",
-              "locale": "",
               "name": "index",
               "route": "/",
             },
@@ -47,8 +49,6 @@ describe('collect', () => {
                 "tag": "web development",
                 "title": "Notes on A Programmable Web by Aaron Swartz",
               },
-              "kind": "MdxPage",
-              "locale": "",
               "name": "aaron-swartz-a-programmable-web",
               "route": "/posts/aaron-swartz-a-programmable-web",
             },
@@ -57,6 +57,7 @@ describe('collect', () => {
       `)
   })
   it('posts', () => {
+    ;(useRouter as Mock).mockReturnValue({ route: '/posts' })
     expect(collectPostsAndNavs({ opts: postsOpts, config }))
       .toMatchInlineSnapshot(`
         {
@@ -68,8 +69,6 @@ describe('collect', () => {
                 "title": "Random Thoughts",
                 "type": "posts",
               },
-              "kind": "MdxPage",
-              "locale": "",
               "name": "index",
               "route": "/posts",
             },
@@ -80,8 +79,6 @@ describe('collect', () => {
                 "title": "About",
                 "type": "page",
               },
-              "kind": "MdxPage",
-              "locale": "",
               "name": "index",
               "route": "/",
             },
@@ -95,8 +92,6 @@ describe('collect', () => {
                 "tag": "web development",
                 "title": "Notes on A Programmable Web by Aaron Swartz",
               },
-              "kind": "MdxPage",
-              "locale": "",
               "name": "aaron-swartz-a-programmable-web",
               "route": "/posts/aaron-swartz-a-programmable-web",
             },
@@ -105,6 +100,9 @@ describe('collect', () => {
       `)
   })
   it('article', () => {
+    ;(useRouter as Mock).mockReturnValue({
+      route: '/posts/aaron-swartz-a-programmable-web'
+    })
     expect(collectPostsAndNavs({ opts: articleOpts, config }))
       .toMatchInlineSnapshot(`
         {
@@ -116,8 +114,6 @@ describe('collect', () => {
                 "title": "Random Thoughts",
                 "type": "posts",
               },
-              "kind": "MdxPage",
-              "locale": "",
               "name": "index",
               "route": "/posts",
             },
@@ -128,8 +124,6 @@ describe('collect', () => {
                 "title": "About",
                 "type": "page",
               },
-              "kind": "MdxPage",
-              "locale": "",
               "name": "index",
               "route": "/",
             },
@@ -143,8 +137,6 @@ describe('collect', () => {
                 "tag": "web development",
                 "title": "Notes on A Programmable Web by Aaron Swartz",
               },
-              "kind": "MdxPage",
-              "locale": "",
               "name": "aaron-swartz-a-programmable-web",
               "route": "/posts/aaron-swartz-a-programmable-web",
             },

@@ -42,7 +42,7 @@ type SkipNavLinkProps = Omit<
 }
 
 export const SkipNavLink = forwardRef<HTMLAnchorElement, SkipNavLinkProps>(
-  function (
+  (
     {
       className: providedClassName,
       id,
@@ -51,16 +51,16 @@ export const SkipNavLink = forwardRef<HTMLAnchorElement, SkipNavLinkProps>(
       ...props
     },
     forwardedRef
-  ): ReactElement {
+  ): ReactElement => {
     const className =
       providedClassName === undefined // Give the option to the user to pass a falsy other than undefined to remove the default styles
         ? styled // Give the user a way to opt-in the default style provided with the theme. Probably remove this option in the next major version (v3.x) and just do a check to use the providedClassName or the default
           ? cn(
-              'nx-sr-only',
-              'focus:nx-not-sr-only focus:nx-fixed focus:nx-z-50 focus:nx-m-3 focus:nx-ml-4 focus:nx-h-[calc(var(--nextra-navbar-height)-1.5rem)] focus:nx-rounded-lg focus:nx-border focus:nx-px-3 focus:nx-py-2 focus:nx-align-middle focus:nx-text-sm focus:nx-font-bold',
-              'focus:nx-text-gray-900 focus:dark:nx-text-gray-100',
-              'focus:nx-bg-white focus:dark:nx-bg-neutral-900',
-              'focus:nx-border-neutral-400 focus:dark:nx-border-neutral-800'
+              '_sr-only',
+              'focus:_not-sr-only focus:_fixed focus:_z-50 focus:_m-3 focus:_ml-4 focus:_h-[calc(var(--nextra-navbar-height)-1.5rem)] focus:_rounded-lg focus:_border focus:_px-3 focus:_py-2 focus:_align-middle focus:_text-sm focus:_font-bold',
+              'focus:_text-gray-900 focus:dark:_text-gray-100',
+              'focus:_bg-white focus:dark:_bg-neutral-900',
+              'focus:_border-neutral-400 focus:dark:_border-neutral-800'
             )
           : ''
         : providedClassName
@@ -71,23 +71,19 @@ export const SkipNavLink = forwardRef<HTMLAnchorElement, SkipNavLinkProps>(
         ref={forwardedRef}
         href={`#${id || DEFAULT_ID}`}
         className={className}
-        // TODO: Remove in version v3.x. Must keep for compatibility reasons
-        data-reach-skip-link=""
       >
         {label}
       </a>
     )
   }
 )
-
 SkipNavLink.displayName = 'SkipNavLink'
 
 type SkipNavContentProps = Omit<ComponentProps<'div'>, 'ref' | 'children'>
 
 export const SkipNavContent = forwardRef<HTMLDivElement, SkipNavContentProps>(
-  function ({ id, ...props }, forwardedRef): ReactElement {
-    return <div {...props} ref={forwardedRef} id={id || DEFAULT_ID} />
-  }
+  ({ id, ...props }, forwardedRef): ReactElement => (
+    <div {...props} ref={forwardedRef} id={id || DEFAULT_ID} />
+  )
 )
-
 SkipNavContent.displayName = 'SkipNavContent'
