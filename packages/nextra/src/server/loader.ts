@@ -175,14 +175,16 @@ ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
     return `${result}
 export default MDXLayout`
   }
-  if (searchIndexKey && frontMatter.searchable !== false) {
+  if (searchIndexKey) {
     // Store all the things in buildInfo.
     const { buildInfo } = this._module as any
     buildInfo.nextraSearch = {
       indexKey: searchIndexKey,
-      title,
-      data: structurizedData,
-      route
+      ...(frontMatter.searchable !== false && {
+        title,
+        data: structurizedData,
+        route
+      })
     }
   }
 

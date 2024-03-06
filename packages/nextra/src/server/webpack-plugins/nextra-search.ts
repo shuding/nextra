@@ -48,7 +48,9 @@ export class NextraSearchPlugin {
               const { title, data, indexKey, route } = nextraSearch
               const indexFilename = `nextra-data-${indexKey}.json`
               indexFiles[indexFilename] ??= {}
-              indexFiles[indexFilename][route] = { title, data }
+              if (route) {
+                indexFiles[indexFilename][route] = { title, data }
+              }
             }
           }
           for (const [file, content] of Object.entries(indexFiles)) {
