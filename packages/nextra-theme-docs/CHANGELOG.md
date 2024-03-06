@@ -1,5 +1,19 @@
 # nextra-theme-docs
 
+## 3.0.0-alpha.22
+
+### Patch Changes
+
+- eeb4c4cd: enable `outline: 'none'` only for `:focus-visible` state, to fix
+  double ring in Firefox
+- 9b411804: `backToTop` is hidden when enabled but when `toc.extraContent`,
+  `feedback.content` and `editLink.component` are falsy
+- 2630461c: fix
+  `TypeError: undefined is not iterable (cannot read property Symbol(Symbol.iterator))`
+  on dev environment when `frontMatter.searchable: false`
+- Updated dependencies [2630461c]
+  - nextra@3.0.0-alpha.22
+
 ## 3.0.0-alpha.21
 
 ### Minor Changes
