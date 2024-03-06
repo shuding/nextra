@@ -27,8 +27,8 @@ summary,
 button,
 input,
 [tabindex]:not([tabindex='-1']) {
-  @apply _outline-none;
   &:focus-visible {
+    @apply _outline-none;
     @apply _ring-2 _ring-primary-200 _ring-offset-1 _ring-offset-primary-300 dark:_ring-primary-800 dark:_ring-offset-primary-700;
   }
 }
