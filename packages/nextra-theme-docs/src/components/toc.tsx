@@ -32,7 +32,8 @@ export function TOC({ headings, filePath }: TOCProps): ReactElement {
   const hasMetaInfo = Boolean(
     config.feedback.content ||
       config.editLink.component ||
-      config.toc.extraContent
+      config.toc.extraContent ||
+      config.toc.backToTop
   )
 
   const activeSlug = Object.entries(activeAnchor).find(
