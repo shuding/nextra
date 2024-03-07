@@ -16,26 +16,27 @@ export const HighlightMatches = memo<MatchArgs>(function HighlightMatches({
   }
   const splitText = value.split('')
   const escapedSearch = escapeStringRegexp(match.trim())
-  const regexp = new RegExp(escapedSearch.replaceAll(' ', '|'), 'ig')
+  const regexp = new RegExp(escapedSearch.replaceAll(/\s+/g, '|'), 'ig')
   let result
   let index = 0
   const content: (string | ReactNode)[] = []
 
-  while (
-    (result = regexp.exec(value)) &&
-    // case `>  ` replaced previously to `>||` + some character provoke memory leak because
-    // `RegExp#exec` will always return a match
-    regexp.lastIndex !== 0
-  ) {
-    const before = splitText.splice(0, result.index - index).join('')
-    const after = splitText.splice(0, regexp.lastIndex - result.index).join('')
-    content.push(
-      before,
-      <span key={result.index} className="nx-text-primary-600">
-        {after}
-      </span>
-    )
-    index = regexp.lastIndex
+  while ((result = regexp.exec(value))) {
+    if (result.index === regexp.lastIndex) {
+      regexp.lastIndex++
+    } else {
+      const before = splitText.splice(0, result.index - index).join('')
+      const after = splitText
+        .splice(0, regexp.lastIndex - result.index)
+        .join('')
+      content.push(
+        before,
+        <span key={result.index} className="nx-text-primary-600">
+          {after}
+        </span>
+      )
+      index = regexp.lastIndex
+    }
   }
 
   return (
