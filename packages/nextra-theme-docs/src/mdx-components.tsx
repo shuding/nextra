@@ -85,7 +85,7 @@ const createHeading = (
           <a
             href={`#${id}`}
             id={id}
-            className="subheading-anchor"
+            className="subheading-anchor nextra-focusable"
             aria-label="Permalink for this section"
             ref={obRef}
           />
@@ -151,7 +151,7 @@ function Summary({
 }: ComponentProps<'summary'>): ReactElement {
   return (
     <summary
-      className="_flex _items-center _cursor-pointer _p-1 _transition-colors hover:_bg-gray-100 dark:hover:_bg-neutral-800"
+      className="_flex _items-center _cursor-pointer _p-1 _transition-colors hover:_bg-gray-100 dark:hover:_bg-neutral-800 nextra-summary nextra-focusable"
       {...props}
     >
       {children}
@@ -174,7 +174,7 @@ export const Link = ({ href = '', className, ...props }: AnchorProps) => (
     href={href}
     newWindow={EXTERNAL_HREF_REGEX.test(href)}
     className={cn(
-      '_text-primary-600 _underline _decoration-from-font [text-underline-position:from-font]',
+      '_text-primary-600 _underline _decoration-from-font [text-underline-position:from-font] nextra-focusable',
       className
     )}
     {...props}
