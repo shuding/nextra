@@ -55,6 +55,10 @@ export const themeSchema = z.strictObject({
     icon: z.custom<ReactNode | FC>(...reactNode),
     link: z.string().startsWith('https://').optional()
   }),
+  links: z.strictObject({
+    icon: z.custom<ReactNode | FC>(...reactNode),
+    link: z.string().startsWith('https://').optional()
+  }).array(),
   components: z.record(z.custom<FC>(...fc)).optional(),
   darkMode: z.boolean(),
   direction: z.enum(['ltr', 'rtl']),
@@ -198,6 +202,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
       </>
     )
   },
+  links: [],
   darkMode: true,
   direction: 'ltr',
   docsRepositoryBase: 'https://github.com/shuding/nextra',
