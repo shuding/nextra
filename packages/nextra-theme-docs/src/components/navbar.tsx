@@ -3,7 +3,7 @@ import cn from 'clsx'
 import { useFSRoute } from 'nextra/hooks'
 import { ArrowRightIcon, MenuIcon } from 'nextra/icons'
 import type { Item, MenuItem, PageItem } from 'nextra/normalize-pages'
-import type { ReactElement, ReactNode } from 'react'
+import { useEffect, ReactElement, ReactNode } from 'react'
 import { useConfig, useMenu } from '../contexts'
 import { renderComponent } from '../utils'
 import { Anchor } from './anchor'
@@ -82,6 +82,31 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
   const config = useConfig()
   const activeRoute = useFSRoute()
   const { menu, setMenu } = useMenu()
+
+  useEffect(() => {
+    if ( config.chat.link ) {
+      config.links.push({
+        link: config.chat.link,
+        icon: config.chat.icon
+      })
+
+      // set to undefined to avoid duplication because seems to render twice
+      // because of StrictMode ?
+      config.chat.link = undefined;
+    }
+  
+    if ( config.project.link ) {
+      config.links.push({
+        link: config.project.link,
+        icon: config.project.icon
+      })
+
+      // set to undefined to avoid duplication because seems to render twice
+      // because of StrictMode ?
+      config.project.link = undefined;
+    }
+
+  }, [])
 
   return (
     <div className="nextra-nav-container nx-sticky nx-top-0 nx-z-20 nx-w-full nx-bg-transparent print:nx-hidden">
@@ -167,25 +192,19 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
           className: 'nx-hidden md:nx-inline-block mx-min-w-[200px]'
         })}
 
-        {config.project.link ? (
-          <Anchor
-            className="nx-p-2 nx-text-current"
-            href={config.project.link}
-            newWindow
-          >
-            {renderComponent(config.project.icon)}
-          </Anchor>
-        ) : null}
-
-        {config.chat.link ? (
-          <Anchor
-            className="nx-p-2 nx-text-current"
-            href={config.chat.link}
-            newWindow
-          >
-            {renderComponent(config.chat.icon)}
-          </Anchor>
-        ) : null}
+        {config.links ? 
+          config.links.map((link: any, index: number) => (
+            <Anchor
+              key={index}
+              className="nx-p-2 nx-text-current"
+              href={link.link}
+              newWindow
+            >
+              {renderComponent(link.icon)}
+            </Anchor>
+          )) 
+          : null
+        }
 
         {renderComponent(config.navbar.extraContent)}
 
