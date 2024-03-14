@@ -93,7 +93,7 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
           'contrast-more:nx-shadow-[0_0_0_1px_#000] contrast-more:dark:nx-shadow-[0_0_0_1px_#fff]'
         )}
       />
-      <nav className="nx-mx-auto nx-flex nx-h-[var(--nextra-navbar-height)] nx-max-w-[90rem] nx-items-center nx-justify-end nx-gap-2 nx-pl-[max(env(safe-area-inset-left),1.5rem)] nx-pr-[max(env(safe-area-inset-right),1.5rem)]">
+      <nav className="nx-mx-auto nx-flex nx-h-[var(--nextra-navbar-height)] nx-max-w-[90rem] nx-items-center nx-justify-between nx-gap-2 nx-pl-[max(env(safe-area-inset-left),1.5rem)] nx-pr-[max(env(safe-area-inset-right),1.5rem)]">
         {config.logoLink ? (
           <Anchor
             href={typeof config.logoLink === 'string' ? config.logoLink : '/'}
@@ -106,61 +106,71 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
             {renderComponent(config.logo)}
           </div>
         )}
-        {items.map(pageOrMenu => {
-          if (pageOrMenu.display === 'hidden') return null
 
-          if (pageOrMenu.type === 'menu') {
-            const menu = pageOrMenu as MenuItem
-            return (
-              <NavbarMenu
-                key={menu.title}
-                className={cn(
-                  classes.link,
-                  'nx-flex nx-gap-1',
-                  classes.inactive
-                )}
-                menu={menu}
-              >
-                {menu.title}
-                <ArrowRightIcon
-                  className="nx-h-[18px] nx-min-w-[18px] nx-rounded-sm nx-p-0.5"
-                  pathClassName="nx-origin-center nx-transition-transform nx-rotate-90"
-                />
-              </NavbarMenu>
-            )
-          }
-          const page = pageOrMenu as PageItem
-          let href = page.href || page.route || '#'
+        <div className="nx-flex-auto nx-overflow-auto">
+          <div className="nx-flex nx-flex-row-reverse">
+            {items.map(pageOrMenu => {
+              if (pageOrMenu.display === 'hidden') return null
 
-          // If it's a directory
-          if (page.children) {
-            href =
-              (page.withIndexPage ? page.route : page.firstChildRoute) || href
-          }
+              if (pageOrMenu.type === 'menu') {
+                const menu = pageOrMenu as MenuItem
+                return (
+                  <NavbarMenu
+                    key={menu.title}
+                    className={cn(
+                      classes.link,
+                      'nx-flex nx-gap-1',
+                      classes.inactive
+                    )}
+                    menu={menu}
+                  >
+                    {menu.title}
+                    <ArrowRightIcon
+                      className="nx-h-[18px] nx-min-w-[18px] nx-rounded-sm nx-p-0.5"
+                      pathClassName="nx-origin-center nx-transition-transform nx-rotate-90"
+                    />
+                  </NavbarMenu>
+                )
+              }
+              const page = pageOrMenu as PageItem
+              let href = page.href || page.route || '#'
 
-          const isActive =
-            page.route === activeRoute ||
-            activeRoute.startsWith(page.route + '/')
+              // If it's a directory
+              if (page.children) {
+                href =
+                  (page.withIndexPage ? page.route : page.firstChildRoute) ||
+                  href
+              }
 
-          return (
-            <Anchor
-              href={href}
-              key={href}
-              className={cn(
-                classes.link,
-                'nx-relative -nx-ml-2 nx-hidden nx-whitespace-nowrap nx-p-2 md:nx-inline-block',
-                !isActive || page.newWindow ? classes.inactive : classes.active
-              )}
-              newWindow={page.newWindow}
-              aria-current={!page.newWindow && isActive}
-            >
-              <span className="nx-absolute nx-inset-x-0 nx-text-center">
-                {page.title}
-              </span>
-              <span className="nx-invisible nx-font-medium">{page.title}</span>
-            </Anchor>
-          )
-        })}
+              const isActive =
+                page.route === activeRoute ||
+                activeRoute.startsWith(page.route + '/')
+
+              return (
+                <Anchor
+                  href={href}
+                  key={href}
+                  className={cn(
+                    classes.link,
+                    'nx-relative -nx-ml-2 nx-hidden nx-whitespace-nowrap nx-p-2 md:nx-inline-block',
+                    !isActive || page.newWindow
+                      ? classes.inactive
+                      : classes.active
+                  )}
+                  newWindow={page.newWindow}
+                  aria-current={!page.newWindow && isActive}
+                >
+                  <span className="nx-absolute nx-inset-x-0 nx-text-center">
+                    {page.title}
+                  </span>
+                  <span className="nx-invisible nx-font-medium">
+                    {page.title}
+                  </span>
+                </Anchor>
+              )
+            })}
+          </div>
+        </div>
 
         {renderComponent(config.search.component, {
           directories: flatDirectories,
