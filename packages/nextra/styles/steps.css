@@ -1,6 +1,6 @@
 .nextra-steps h3 {
   counter-increment: var(--counter-id);
-  
+
   &:before {
     @apply _absolute _size-[33px];
     @apply _border-4 _border-[rgb(var(--nextra-bg))] _bg-gray-100 dark:_bg-neutral-800;
