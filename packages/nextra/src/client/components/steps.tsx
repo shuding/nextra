@@ -18,8 +18,8 @@ export function Steps({
       )}
       style={
         {
-          '--counter-id': id,
-          ...style
+          ...style,
+          '--counter-id': id
         } as CSSProperties
       }
       {...props}
