@@ -21,7 +21,7 @@
     "version": "changeset version"
   },
   "devDependencies": {
-    "@changesets/cli": "2.26.2",
+    "@changesets/cli": "2.27.1",
     "@edge-runtime/vm": "3.1.0",
     "@ianvs/prettier-plugin-sort-imports": "4.1.1",
     "@next/eslint-plugin-next": "14.0.4",
