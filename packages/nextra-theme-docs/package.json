@@ -43,7 +43,7 @@
     "flexsearch": "^0.7.43",
     "focus-visible": "^5.2.0",
     "intersection-observer": "^0.12.2",
-    "next-themes": "^0.2.1",
+    "next-themes": "^0.3.0",
     "scroll-into-view-if-needed": "^3.1.0",
     "zod": "^3.22.3"
   },

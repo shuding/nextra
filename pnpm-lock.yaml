@@ -149,7 +149,7 @@ importers:
         version: file:packages/nextra(@types/react@18.2.55)(next@13.5.6)(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3)
       nextra-theme-blog:
         specifier: workspace:*
-        version: file:packages/nextra-theme-blog(next@13.5.6)(nextra@3.0.0-alpha.17)(react-dom@18.2.0)(react@18.2.0)
+        version: file:packages/nextra-theme-blog(next@13.5.6)(nextra@3.0.0-alpha.22)(react-dom@18.2.0)(react@18.2.0)
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -172,7 +172,7 @@ importers:
         version: file:packages/nextra(@types/react@18.2.55)(next@13.5.6)(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3)
       nextra-theme-docs:
         specifier: workspace:*
-        version: file:packages/nextra-theme-docs(next@13.5.6)(nextra@3.0.0-alpha.17)(react-dom@18.2.0)(react@18.2.0)
+        version: file:packages/nextra-theme-docs(next@13.5.6)(nextra@3.0.0-alpha.22)(react-dom@18.2.0)(react@18.2.0)
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -204,7 +204,7 @@ importers:
         version: file:packages/nextra(@types/react@18.2.55)(next@13.5.6)(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3)
       nextra-theme-docs:
         specifier: workspace:*
-        version: file:packages/nextra-theme-docs(next@13.5.6)(nextra@3.0.0-alpha.17)(react-dom@18.2.0)(react@18.2.0)
+        version: file:packages/nextra-theme-docs(next@13.5.6)(nextra@3.0.0-alpha.22)(react-dom@18.2.0)(react@18.2.0)
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -337,7 +337,7 @@ importers:
     devDependencies:
       '@svgr/babel-plugin-remove-jsx-attribute':
         specifier: ^8.0.0
-        version: 8.0.0(@babel/core@7.21.8)
+        version: 8.0.0(@babel/core@7.23.9)
       '@testing-library/react':
         specifier: ^14.0.0
         version: 14.0.0(react-dom@18.2.0)(react@18.2.0)
@@ -367,7 +367,7 @@ importers:
         version: 2.1.0(esbuild@0.19.12)
       next:
         specifier: 13.5.6
-        version: 13.5.6(@babel/core@7.21.8)(react-dom@18.2.0)(react@18.2.0)
+        version: 13.5.6(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -384,8 +384,8 @@ importers:
   packages/nextra-theme-blog:
     dependencies:
       next-themes:
-        specifier: ^0.2.1
-        version: 0.2.1(next@13.5.6)(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^0.3.0
+        version: 0.3.0(react-dom@18.2.0)(react@18.2.0)
     devDependencies:
       '@tailwindcss/nesting':
         specifier: ^0.0.0-insiders.565cd3e
@@ -460,8 +460,8 @@ importers:
         specifier: ^0.12.2
         version: 0.12.2
       next-themes:
-        specifier: ^0.2.1
-        version: 0.2.1(next@13.5.6)(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^0.3.0
+        version: 0.3.0(react-dom@18.2.0)(react@18.2.0)
       scroll-into-view-if-needed:
         specifier: ^3.1.0
         version: 3.1.0
@@ -3193,6 +3193,15 @@ packages:
       '@babel/core': 7.21.8
     dev: true
 
+  /@svgr/babel-plugin-remove-jsx-attribute@8.0.0(@babel/core@7.23.9):
+    resolution: {integrity: sha512-BcCkm/STipKvbCl6b7QFrMh/vx00vIP63k2eM66MfHJzPr6O2U0jYEViXkHJWqXqQYjdeA9cuCl5KWmlwjDvbA==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/core': 7.23.9
+    dev: true
+
   /@svgr/babel-plugin-remove-jsx-empty-expression@8.0.0(@babel/core@7.21.8):
     resolution: {integrity: sha512-5BcGCBfBxB5+XSDSWnhTThfI9jcO5f0Ai2V24gZpG+wXF14BzwxxdDb4g6trdOux0rhibGs385BeFMSmxtS3uA==}
     engines: {node: '>=14'}
@@ -4593,7 +4602,7 @@ packages:
       normalize-path: 3.0.0
       readdirp: 3.6.0
     optionalDependencies:
-      fsevents: 2.3.2
+      fsevents: 2.3.3
     dev: true
 
   /chownr@1.1.4:
@@ -6318,14 +6327,6 @@ packages:
   /fs.realpath@1.0.0:
     resolution: {integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==}
     dev: true
-
-  /fsevents@2.3.2:
-    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
-    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
-    os: [darwin]
-    requiresBuild: true
-    dev: true
-    optional: true
 
   /fsevents@2.3.3:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
@@ -8667,14 +8668,12 @@ packages:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
     dev: true
 
-  /next-themes@0.2.1(next@13.5.6)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-B+AKNfYNIzh0vqQQKqQItTS8evEouKD7H5Hj3kmuPERwddR2TxvDSFZuTj6T7Jfn1oyeUyJMydPl1Bkxkh0W7A==}
+  /next-themes@0.3.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-/QHIrsYpd6Kfk7xakK4svpDI5mmXP0gfvCoJdGpZQ2TOrQZmsW0QxjaiLn8wbIKjtm4BTSqLoix4lxYYOnLJ/w==}
     peerDependencies:
-      next: 13.5.6
-      react: '*'
-      react-dom: '*'
+      react: ^16.8 || ^17 || ^18
+      react-dom: ^16.8 || ^17 || ^18
     dependencies:
-      next: 13.5.6(@babel/core@7.21.8)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
@@ -10013,7 +10012,7 @@ packages:
       '@rollup/rollup-win32-arm64-msvc': 4.11.0
       '@rollup/rollup-win32-ia32-msvc': 4.11.0
       '@rollup/rollup-win32-x64-msvc': 4.11.0
-      fsevents: 2.3.2
+      fsevents: 2.3.3
     dev: true
 
   /rrweb-cssom@0.6.0:
@@ -11999,7 +11998,7 @@ packages:
       - typescript
     dev: false
 
-  file:packages/nextra-theme-blog(next@13.5.6)(nextra@3.0.0-alpha.17)(react-dom@18.2.0)(react@18.2.0):
+  file:packages/nextra-theme-blog(next@13.5.6)(nextra@3.0.0-alpha.22)(react-dom@18.2.0)(react@18.2.0):
     resolution: {directory: packages/nextra-theme-blog, type: directory}
     id: file:packages/nextra-theme-blog
     name: nextra-theme-blog
@@ -12014,13 +12013,13 @@ packages:
         optional: true
     dependencies:
       next: 13.5.6(@babel/core@7.21.8)(react-dom@18.2.0)(react@18.2.0)
-      next-themes: 0.2.1(next@13.5.6)(react-dom@18.2.0)(react@18.2.0)
+      next-themes: 0.3.0(react-dom@18.2.0)(react@18.2.0)
       nextra: file:packages/nextra(@types/react@18.2.55)(next@13.5.6)(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
-  file:packages/nextra-theme-docs(next@13.5.6)(nextra@3.0.0-alpha.17)(react-dom@18.2.0)(react@18.2.0):
+  file:packages/nextra-theme-docs(next@13.5.6)(nextra@3.0.0-alpha.22)(react-dom@18.2.0)(react@18.2.0):
     resolution: {directory: packages/nextra-theme-docs, type: directory}
     id: file:packages/nextra-theme-docs
     name: nextra-theme-docs
@@ -12038,7 +12037,7 @@ packages:
       focus-visible: 5.2.0
       intersection-observer: 0.12.2
       next: 13.5.6(@babel/core@7.21.8)(react-dom@18.2.0)(react@18.2.0)
-      next-themes: 0.2.1(next@13.5.6)(react-dom@18.2.0)(react@18.2.0)
+      next-themes: 0.3.0(react-dom@18.2.0)(react@18.2.0)
       nextra: file:packages/nextra(@types/react@18.2.55)(next@13.5.6)(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
