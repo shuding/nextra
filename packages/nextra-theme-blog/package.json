@@ -60,7 +60,7 @@
     }
   },
   "dependencies": {
-    "next-themes": "^0.2.1"
+    "next-themes": "^0.3.0"
   },
   "devDependencies": {
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
