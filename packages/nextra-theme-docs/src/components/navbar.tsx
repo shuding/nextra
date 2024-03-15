@@ -108,7 +108,7 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
         )}
 
         <div className="nx-flex-auto nx-overflow-auto">
-          <div className="nx-flex nx-flex-row-reverse">
+          <div className="nx-flex nx-justify-end">
             {items.map(pageOrMenu => {
               if (pageOrMenu.display === 'hidden') return null
 
