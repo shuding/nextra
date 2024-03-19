@@ -16,7 +16,7 @@ import {
 } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import { useActiveAnchor, useConfig, useMenu } from '../contexts'
-import { NavOverflowProvider, useNavOverflow } from '../contexts/nav-overflow'
+import { useNavOverflow } from '../contexts/nav-overflow'
 import { renderComponent } from '../utils'
 import { Anchor } from './anchor'
 import { Collapse } from './collapse'
@@ -444,24 +444,17 @@ export function Sidebar({
                   <Menu
                     className="nextra-menu-desktop max-md:nx-hidden"
                     // The sidebar menu, shows only the docs directories.
-                    directories={docsDirectories}
+                    directories={
+                      navOverflow ? fullDirectories : docsDirectories
+                    }
                     // When the viewport size is larger than `md`, hide the anchors in
                     // the sidebar when `floatTOC` is enabled.
                     anchors={config.toc.float ? [] : anchors}
-                    onlyCurrentDocs
+                    onlyCurrentDocs={!navOverflow}
                   />
                 </Collapse>
               )}
               {mounted && (window.innerWidth < 768 || navOverflow) && (
-                <Menu
-                  className="nextra-menu-mobile"
-                  // The mobile dropdown menu, shows all the directories.
-                  directories={fullDirectories}
-                  // Always show the anchor links on mobile (`md`).
-                  anchors={anchors}
-                />
-              )}
-              {/* {mounted && window.innerWidth < 768 && (
                 <Menu
                   className="nextra-menu-mobile md:nx-hidden"
                   // The mobile dropdown menu, shows all the directories.
@@ -469,7 +462,7 @@ export function Sidebar({
                   // Always show the anchor links on mobile (`md`).
                   anchors={anchors}
                 />
-              )} */}
+              )}
             </div>
           </OnFocusItemContext.Provider>
         </FocusedItemContext.Provider>
