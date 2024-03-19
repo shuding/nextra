@@ -454,7 +454,7 @@ export function Sidebar({
                   />
                 </Collapse>
               )}
-              {mounted && (window.innerWidth < 768 || navOverflow) && (
+              {mounted && window.innerWidth < 768 && (
                 <Menu
                   className="nextra-menu-mobile md:nx-hidden"
                   // The mobile dropdown menu, shows all the directories.
