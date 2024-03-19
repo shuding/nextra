@@ -16,6 +16,7 @@ import {
 } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import { useActiveAnchor, useConfig, useMenu } from '../contexts'
+import { NavOverflowProvider, useNavOverflow } from '../contexts/nav-overflow'
 import { renderComponent } from '../utils'
 import { Anchor } from './anchor'
 import { Collapse } from './collapse'
@@ -344,6 +345,7 @@ export function Sidebar({
   const [focused, setFocused] = useState<null | string>(null)
   const [showSidebar, setSidebar] = useState(true)
   const [showToggleAnimation, setToggleAnimation] = useState(false)
+  const { navOverflow } = useNavOverflow()
 
   const anchors = useMemo(() => headings.filter(v => v.depth === 2), [headings])
   const sidebarRef = useRef<HTMLDivElement>(null)
@@ -450,7 +452,16 @@ export function Sidebar({
                   />
                 </Collapse>
               )}
-              {mounted && window.innerWidth < 768 && (
+              {mounted && (window.innerWidth < 768 || navOverflow) && (
+                <Menu
+                  className="nextra-menu-mobile"
+                  // The mobile dropdown menu, shows all the directories.
+                  directories={fullDirectories}
+                  // Always show the anchor links on mobile (`md`).
+                  anchors={anchors}
+                />
+              )}
+              {/* {mounted && window.innerWidth < 768 && (
                 <Menu
                   className="nextra-menu-mobile md:nx-hidden"
                   // The mobile dropdown menu, shows all the directories.
@@ -458,7 +469,7 @@ export function Sidebar({
                   // Always show the anchor links on mobile (`md`).
                   anchors={anchors}
                 />
-              )}
+              )} */}
             </div>
           </OnFocusItemContext.Provider>
         </FocusedItemContext.Provider>

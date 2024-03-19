@@ -4,7 +4,9 @@ import { useFSRoute } from 'nextra/hooks'
 import { ArrowRightIcon, MenuIcon } from 'nextra/icons'
 import type { Item, MenuItem, PageItem } from 'nextra/normalize-pages'
 import type { ReactElement, ReactNode } from 'react'
+import { useEffect, useRef } from 'react'
 import { useConfig, useMenu } from '../contexts'
+import { useNavOverflow } from '../contexts/nav-overflow'
 import { renderComponent } from '../utils'
 import { Anchor } from './anchor'
 
@@ -82,6 +84,35 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
   const config = useConfig()
   const activeRoute = useFSRoute()
   const { menu, setMenu } = useMenu()
+  const { navOverflow, setNavOverflow } = useNavOverflow()
+
+  const navbarRef = useRef(null) // Ref for the navbar container
+  const itemsContainerRef = useRef(null) // Ref for the direct container of the items
+
+  console.log({ navOverflow })
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (navbarRef.current && itemsContainerRef.current) {
+        // @ts-ignore
+        const navbarWidth = navbarRef.current.offsetWidth
+        // @ts-ignore
+        const itemsWidth = itemsContainerRef.current.offsetWidth
+        const availableSpace = navbarWidth * 0.9
+
+        const isOverflowed = itemsWidth >= availableSpace
+
+        // console.log({ itemsWidth, navbarWidth, availableSpace, isOverflowed })
+
+        setNavOverflow(isOverflowed)
+      }
+    }
+
+    handleResize()
+    window.addEventListener('resize', handleResize)
+
+    return () => window.removeEventListener('resize', handleResize)
+  }, [items, setNavOverflow])
 
   return (
     <div className="nextra-nav-container nx-sticky nx-top-0 nx-z-20 nx-w-full nx-bg-transparent print:nx-hidden">
@@ -93,7 +124,7 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
           'contrast-more:nx-shadow-[0_0_0_1px_#000] contrast-more:dark:nx-shadow-[0_0_0_1px_#fff]'
         )}
       />
-      <nav className="nx-mx-auto nx-flex nx-h-[var(--nextra-navbar-height)] nx-max-w-[90rem] nx-items-center nx-justify-between nx-gap-2 nx-pl-[max(env(safe-area-inset-left),1.5rem)] nx-pr-[max(env(safe-area-inset-right),1.5rem)]">
+      <nav className="nx-mx-auto nx-flex nx-h-[var(--nextra-navbar-height)] nx-max-w-[90rem] nx-items-center nx-justify-end nx-gap-2 nx-pl-[max(env(safe-area-inset-left),1.5rem)] nx-pr-[max(env(safe-area-inset-right),1.5rem)]">
         {config.logoLink ? (
           <Anchor
             href={typeof config.logoLink === 'string' ? config.logoLink : '/'}
@@ -107,8 +138,13 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
           </div>
         )}
 
-        <div className="nx-flex-auto">
-          <div className="nx-flex nx-justify-end">
+        <div
+          ref={navbarRef}
+          className={
+            navOverflow ? 'nx-hidden' : 'nx-flex nx-justify-end nx-w-full'
+          }
+        >
+          <div ref={itemsContainerRef} className="nx-flex nx-items-center">
             {items.map(pageOrMenu => {
               if (pageOrMenu.display === 'hidden') return null
 

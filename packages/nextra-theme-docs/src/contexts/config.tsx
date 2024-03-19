@@ -8,6 +8,7 @@ import type { DocsThemeConfig } from '../constants'
 import { DEEP_OBJECT_KEYS, DEFAULT_THEME, themeSchema } from '../constants'
 import type { Context } from '../types'
 import { MenuProvider } from './menu'
+import { NavOverflowProvider } from './nav-overflow'
 
 type Config<FrontMatterType = FrontMatter> = DocsThemeConfig &
   Pick<
@@ -72,6 +73,8 @@ export const ConfigProvider = ({
   value: Context
 }): ReactElement => {
   const [menu, setMenu] = useState(false)
+  const [navOverflow, setNavOverflow] = useState(false)
+
   // Merge only on first load
   theme ||= {
     ...DEFAULT_THEME,
@@ -119,7 +122,11 @@ export const ConfigProvider = ({
       forcedTheme={nextThemes.forcedTheme}
     >
       <ConfigContext.Provider value={extendedConfig}>
-        <MenuProvider value={{ menu, setMenu }}>{children}</MenuProvider>
+        <MenuProvider value={{ menu, setMenu }}>
+          <NavOverflowProvider value={{ navOverflow, setNavOverflow }}>
+            {children}
+          </NavOverflowProvider>
+        </MenuProvider>
       </ConfigContext.Provider>
     </ThemeProvider>
   )
