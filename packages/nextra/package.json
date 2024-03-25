@@ -131,7 +131,7 @@
     "github-slugger": "^2.0.0",
     "graceful-fs": "^4.2.11",
     "gray-matter": "^4.0.3",
-    "katex": "^0.16.9",
+    "katex": "^0.16.10",
     "lodash.get": "^4.4.2",
     "next-mdx-remote": "^4.2.1",
     "p-limit": "^3.1.0",
