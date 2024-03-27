@@ -1,8 +1,8 @@
-import type { BlogPageOpts } from '../../src'
+import type { PageOpts } from 'nextra'
+import type { NextraBlogTheme } from '../../src'
 
-export const indexOpts: BlogPageOpts = {
+export const indexOpts: PageOpts = {
   filePath: 'index.mdx',
-  route: '/',
   frontMatter: {
     type: 'page',
     title: 'About',
@@ -10,10 +10,8 @@ export const indexOpts: BlogPageOpts = {
   },
   pageMap: [
     {
-      kind: 'MdxPage',
       name: 'index',
       route: '/',
-      locale: '',
       frontMatter: {
         type: 'page',
         title: 'About',
@@ -21,14 +19,11 @@ export const indexOpts: BlogPageOpts = {
       }
     },
     {
-      kind: 'Folder',
       name: 'posts',
       children: [
         {
-          kind: 'MdxPage',
           name: 'aaron-swartz-a-programmable-web',
           route: '/posts/aaron-swartz-a-programmable-web',
-          locale: '',
           frontMatter: {
             title: 'Notes on A Programmable Web by Aaron Swartz',
             date: '2016/5/21',
@@ -39,10 +34,8 @@ export const indexOpts: BlogPageOpts = {
           }
         },
         {
-          kind: 'MdxPage',
           name: 'index',
           route: '/posts',
-          locale: '',
           frontMatter: {
             type: 'posts',
             title: 'Random Thoughts',
@@ -53,14 +46,11 @@ export const indexOpts: BlogPageOpts = {
       route: '/posts'
     },
     {
-      kind: 'Folder',
       name: 'tags',
       children: [
         {
-          kind: 'MdxPage',
           name: '[tag]',
           route: '/tags/[tag]',
-          locale: '',
           frontMatter: {
             type: 'tag'
           }
@@ -69,19 +59,11 @@ export const indexOpts: BlogPageOpts = {
       route: '/tags'
     }
   ],
-  title: 'Nextra',
-  headings: [
-    {
-      depth: 1,
-      value: 'Nextra',
-      id: 'nextra'
-    }
-  ]
+  title: 'Nextra'
 }
 
-export const postsOpts: BlogPageOpts = {
+export const postsOpts: PageOpts = {
   filePath: 'index.md',
-  route: '/posts',
   frontMatter: {
     type: 'posts',
     title: 'Random Thoughts',
@@ -89,10 +71,8 @@ export const postsOpts: BlogPageOpts = {
   },
   pageMap: [
     {
-      kind: 'MdxPage',
       name: 'index',
       route: '/',
-      locale: '',
       frontMatter: {
         type: 'page',
         title: 'About',
@@ -100,14 +80,11 @@ export const postsOpts: BlogPageOpts = {
       }
     },
     {
-      kind: 'Folder',
       name: 'posts',
       children: [
         {
-          kind: 'MdxPage',
           name: 'aaron-swartz-a-programmable-web',
           route: '/posts/aaron-swartz-a-programmable-web',
-          locale: '',
           frontMatter: {
             title: 'Notes on A Programmable Web by Aaron Swartz',
             date: '2016/5/21',
@@ -118,10 +95,8 @@ export const postsOpts: BlogPageOpts = {
           }
         },
         {
-          kind: 'MdxPage',
           name: 'index',
           route: '/posts',
-          locale: '',
           frontMatter: {
             type: 'posts',
             title: 'Random Thoughts',
@@ -132,35 +107,22 @@ export const postsOpts: BlogPageOpts = {
       route: '/posts'
     },
     {
-      kind: 'Folder',
       name: 'tags',
       children: [
         {
-          kind: 'MdxPage',
           name: '[tag]',
           route: '/tags/[tag]',
-          locale: '',
-          frontMatter: {
-            type: 'tag'
-          }
+          frontMatter: { type: 'tag' }
         }
       ],
       route: '/tags'
     }
   ],
-  title: 'Random Thoughts',
-  headings: [
-    {
-      depth: 1,
-      value: 'Random Thoughts',
-      id: 'random-thoughts'
-    }
-  ]
+  title: 'Random Thoughts'
 }
 
-export const articleOpts: BlogPageOpts = {
+export const articleOpts: PageOpts = {
   filePath: 'aaron-swartz-a-programmable-web.mdx',
-  route: '/posts/aaron-swartz-a-programmable-web',
   frontMatter: {
     title: 'Notes on A Programmable Web by Aaron Swartz',
     date: '2016/5/21',
@@ -171,10 +133,8 @@ export const articleOpts: BlogPageOpts = {
   },
   pageMap: [
     {
-      kind: 'MdxPage',
       name: 'index',
       route: '/',
-      locale: '',
       frontMatter: {
         type: 'page',
         title: 'About',
@@ -182,14 +142,11 @@ export const articleOpts: BlogPageOpts = {
       }
     },
     {
-      kind: 'Folder',
       name: 'posts',
       children: [
         {
-          kind: 'MdxPage',
           name: 'aaron-swartz-a-programmable-web',
           route: '/posts/aaron-swartz-a-programmable-web',
-          locale: '',
           frontMatter: {
             title: 'Notes on A Programmable Web by Aaron Swartz',
             date: '2016/5/21',
@@ -200,10 +157,8 @@ export const articleOpts: BlogPageOpts = {
           }
         },
         {
-          kind: 'MdxPage',
           name: 'index',
           route: '/posts',
-          locale: '',
           frontMatter: {
             type: 'posts',
             title: 'Random Thoughts',
@@ -214,48 +169,21 @@ export const articleOpts: BlogPageOpts = {
       route: '/posts'
     },
     {
-      kind: 'Folder',
       name: 'tags',
       children: [
         {
-          kind: 'MdxPage',
           name: '[tag]',
           route: '/tags/[tag]',
-          locale: '',
-          frontMatter: {
-            type: 'tag'
-          }
+          frontMatter: { type: 'tag' }
         }
       ],
       route: '/tags'
     }
   ],
-  title: 'Notes on A Programmable Web by Aaron Swartz',
-  headings: [
-    {
-      depth: 1,
-      value: 'Notes on A Programmable Web by Aaron Swartz',
-      id: 'notes-on-a-programmable-web-by-aaron-swartz'
-    },
-    {
-      depth: 2,
-      value: 'Quotes About WWW',
-      id: 'quotes-about-www'
-    },
-    {
-      depth: 2,
-      value: 'Quotes from Aaron’s Post',
-      id: 'quotes-from-aarons-post'
-    },
-    {
-      depth: 2,
-      value: 'External links',
-      id: 'external-links'
-    }
-  ]
+  title: 'Notes on A Programmable Web by Aaron Swartz'
 }
 
-export const config = {
+export const config: NextraBlogTheme = {
   readMore: 'Read More →',
   darkMode: true
 }

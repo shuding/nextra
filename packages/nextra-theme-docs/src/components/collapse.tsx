@@ -28,8 +28,8 @@ export function Collapse({
     }
     if (initialRender.current || !container || !inner) return
 
-    container.classList.toggle('nx-duration-500', !isOpen)
-    container.classList.toggle('nx-duration-300', isOpen)
+    container.classList.toggle('_duration-500', !isOpen)
+    container.classList.toggle('_duration-300', isOpen)
 
     if (horizontal) {
       // save initial width to avoid word wrapping when container width will be changed
@@ -62,14 +62,14 @@ export function Collapse({
   return (
     <div
       ref={containerRef}
-      className="nx-transform-gpu nx-overflow-hidden nx-transition-all nx-ease-in-out motion-reduce:nx-transition-none"
+      className="_transform-gpu _overflow-hidden _transition-all _ease-in-out motion-reduce:_transition-none"
       style={initialOpen.current || horizontal ? undefined : { height: 0 }}
     >
       <div
         ref={innerRef}
         className={cn(
-          'nx-transition-opacity nx-duration-500 nx-ease-in-out motion-reduce:nx-transition-none',
-          isOpen ? 'nx-opacity-100' : 'nx-opacity-0',
+          '_transition-opacity _duration-500 _ease-in-out motion-reduce:_transition-none',
+          isOpen ? '_opacity-100' : '_opacity-0',
           className
         )}
       >

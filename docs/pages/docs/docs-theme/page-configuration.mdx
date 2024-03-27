@@ -8,9 +8,9 @@ Those configurations affect the overall layout of the theme, especially the
 navigation bar and the sidebar.
 
 import { Screenshot } from 'components/screenshot'
-import Video from 'components/video'
+import { Video } from 'components/video'
 import { Callout, FileTree } from 'nextra/components'
-import menuImage from '../../../public/assets/docs/menu.png'
+import menuImage from 'public/assets/docs/menu.png'
 
 <Callout>
   Read more about Nextra's `_meta.json` files
@@ -330,10 +330,8 @@ separator line between items in the sidebar:
 ```
 
 <Callout>
-  Together with the
-  [`sidebar.titleComponent`](/docs/docs-theme/theme-configuration#sidebar) theme
-  option, you can customize the look of titles and separator lines in the
-  sidebar.
+  To customize the look of titles and separator lines in the sidebar use JSX
+  elements.
 </Callout>
 
 ## Advanced

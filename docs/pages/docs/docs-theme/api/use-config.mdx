@@ -2,10 +2,12 @@ import { Callout } from 'nextra/components'
 
 # useConfig
 
-<Callout type="warning">
-  **The `useConfig` hook is made to dynamically configure your project**. See
-  [Theme Configuration](/docs/docs-theme/theme-configuration) for more
-  information about each customizable feature.
+<Callout type="info">
+  **The `useConfig` hook is made to dynamically configure your project**.
+
+See [Theme Configuration](/docs/docs-theme/theme-configuration) for more
+information about each customizable feature.
+
 </Callout>
 
 The `useConfig` hook returns data from your theme configuration and current page
@@ -47,14 +49,9 @@ context.
 - `project`: data about
   [Project Link](/docs/docs-theme/theme-configuration#project-link)
 - `search`: data about [Search](/docs/docs-theme/theme-configuration#search)
-- `serverSideError`: data to display when a server-side error happens (requires
-  `500.mdx` page too)
 - `sidebar`: data about [Sidebar](/docs/docs-theme/theme-configuration#sidebar)
 - `toc`: data about
   [Table of Contents Sidebar](/docs/docs-theme/theme-configuration#toc-sidebar)
-- `useNextSeoOptions`: a function that passes data to Next.js SEO component.
-  (see [SEO Options](/docs/docs-theme/theme-configuration#seo-options))
-- `flexsearch`: data about search configuration
-- `title`: Title about current document
+- `title`: title about current page
 - `frontMatter`: parsed [front matter](https://jekyllrb.com/docs/front-matter)
   data

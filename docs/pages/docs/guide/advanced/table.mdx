@@ -7,7 +7,7 @@ import { Callout, Steps } from 'nextra/components'
 In markdown is preferable write table via
 [GFM syntax](https://github.github.com/gfm/#tables-extension-).
 
-```mdx filename="Markdown"
+```mdx filename="MDX"
 | left   | center | right |
 | :----- | :----: | ----: |
 | foo    |  bar   |   baz |
@@ -25,7 +25,7 @@ will be rendered as:
 
 If you try to render the following literal `<table />{:jsx}` element:
 
-```mdx filename="Markdown"
+```mdx filename="MDX"
 <table>
   <thead>
     <tr>
@@ -85,7 +85,7 @@ you'll get the following result:
 Want to render dynamic table? You can use embedded JavaScript expressions into
 your table for it:
 
-```mdx filename="Markdown"
+```mdx filename="MDX"
 <table>
   <thead>
     <tr>
@@ -164,7 +164,8 @@ aka `mt-6`.
 
 Just wrap your table with curly braces `{` and `}`, e.g.
 
-```text filename="Markdown"
+{/* prettier-ignore */}
+```mdx filename="MDX"
 {<table>
   ...
 </table>}

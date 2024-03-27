@@ -4,25 +4,25 @@ article.nextra-body-typesetting-article {
     'rlig' 1,
     'calt' 1;
   h1 {
-    @apply nx-mt-6 nx-mb-4 nx-text-center;
+    @apply _mt-6 _mb-4 _text-center;
     font-size: 2.5rem;
   }
   h2 {
-    @apply nx-border-none;
+    @apply _border-none;
   }
   a {
-    @apply nx-no-underline hover:nx-underline;
+    @apply _no-underline hover:_underline;
   }
   p {
-    @apply nx-leading-8;
+    @apply _leading-8;
   }
   code {
-    @apply nx-border-none dark:nx-bg-neutral-700;
+    @apply _border-none dark:_bg-neutral-700;
   }
   pre code {
-    @apply dark:nx-bg-transparent;
+    @apply dark:_bg-transparent;
   }
   .subheading-anchor + a {
-    @apply nx-no-underline hover:nx-no-underline after:nx-hidden;
+    @apply _no-underline hover:_no-underline after:_hidden;
   }
 }
