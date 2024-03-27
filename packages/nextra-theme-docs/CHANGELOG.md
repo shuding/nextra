@@ -1,5 +1,20 @@
 # nextra-theme-docs
 
+## 3.0.0-alpha.23
+
+### Minor Changes
+
+- b47880d5: export `useMenu` hook
+
+### Patch Changes
+
+- 217f7082: update next-themes
+
+  fix wrong numbering for nested `<Steps />`
+
+- Updated dependencies [217f7082]
+  - nextra@3.0.0-alpha.23
+
 ## 3.0.0-alpha.22
 
 ### Patch Changes

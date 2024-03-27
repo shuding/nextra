@@ -1,5 +1,13 @@
 # nextra
 
+## 3.0.0-alpha.23
+
+### Patch Changes
+
+- 217f7082: update next-themes
+
+  fix wrong numbering for nested `<Steps />`
+
 ## 3.0.0-alpha.22
 
 ### Patch Changes
