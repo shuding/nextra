@@ -89,6 +89,7 @@ describe('rehypeIcon', () => {
       import { GraphQLIcon } from 'nextra/icons'
       import { PythonIcon } from 'nextra/icons'
       import { RustIcon } from 'nextra/icons'
+      import { MoveIcon } from 'nextra/icons'
       function _createMdxContent(props) {
         const _components = {
           code: 'code',
@@ -207,6 +208,12 @@ describe('rehypeIcon', () => {
             </_components.pre>
             {'\\n'}
             <_components.pre icon={RustIcon} tabIndex="0" data-language="rs" data-word-wrap="" data-copy="">
+              <_components.code>
+                <_components.span> </_components.span>
+              </_components.code>
+            </_components.pre>
+            {'\\n'}
+            <_components.pre icon={MoveIcon} tabIndex="0" data-language="move" data-word-wrap="" data-copy="">
               <_components.code>
                 <_components.span> </_components.span>
               </_components.code>
