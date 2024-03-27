@@ -104,3 +104,7 @@ export {
   ThemeSwitch,
   LocaleSwitch
 } from './components'
+
+export {
+  useMenu
+} from './contexts'
