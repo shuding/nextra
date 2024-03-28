@@ -105,6 +105,4 @@ export {
   LocaleSwitch
 } from './components'
 
-export {
-  useMenu
-} from './contexts'
+export { useMenu } from './contexts'
