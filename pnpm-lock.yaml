@@ -1,4 +1,4 @@
-lockfileVersion: '6.0'
+lockfileVersion: '6.1'
 
 settings:
   autoInstallPeers: true
@@ -11461,6 +11461,7 @@ packages:
     resolution: {directory: packages/nextra, type: directory}
     id: file:packages/nextra
     name: nextra
+    version: 2.10.0
     engines: {node: '>=16'}
     peerDependencies:
       next: 13.5.6
@@ -11504,6 +11505,7 @@ packages:
     resolution: {directory: packages/nextra-theme-blog, type: directory}
     id: file:packages/nextra-theme-blog
     name: nextra-theme-blog
+    version: 2.10.0
     peerDependencies:
       next: 13.5.6
       nextra: workspace:*
@@ -11525,6 +11527,7 @@ packages:
     resolution: {directory: packages/nextra-theme-docs, type: directory}
     id: file:packages/nextra-theme-docs
     name: nextra-theme-docs
+    version: 2.10.0
     peerDependencies:
       next: 13.5.6
       nextra: workspace:*
