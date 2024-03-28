@@ -19,7 +19,7 @@ export function BackToTop({
       onClick={scrollToTop}
       disabled={hidden}
       className={cn(
-        '_flex _items-center _gap-1.5 _transition _opacity-100 disabled:_opacity-0',
+        '_flex _items-center _gap-1.5 _transition _opacity-100 disabled:_opacity-0 nextra-focusable',
         className
       )}
     >

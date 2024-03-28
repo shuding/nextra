@@ -259,7 +259,7 @@ function File({
                 href={`#${id}`}
                 className={cn(
                   classes.link,
-                  '_flex _gap-2 before:_opacity-25 before:_content-["#"]',
+                  '_flex _gap-2 before:_opacity-25 before:_content-["#"] nextra-focusable',
                   activeAnchor[id]?.isActive ? classes.active : classes.inactive
                 )}
                 onClick={() => {
@@ -469,7 +469,7 @@ export function Sidebar({
             {themeConfig.sidebar.toggleButton && (
               <button
                 title={showSidebar ? 'Hide sidebar' : 'Show sidebar'}
-                className="max-md:_hidden _h-7 _rounded-md _transition-colors _text-gray-600 dark:_text-gray-400 _px-2 hover:_bg-gray-100 hover:_text-gray-900 dark:hover:_bg-primary-100/5 dark:hover:_text-gray-50"
+                className="max-md:_hidden _h-7 _rounded-md _transition-colors _text-gray-600 dark:_text-gray-400 _px-2 hover:_bg-gray-100 hover:_text-gray-900 dark:hover:_bg-primary-100/5 dark:hover:_text-gray-50 nextra-focusable"
                 onClick={() => {
                   setSidebar(!showSidebar)
                   setToggleAnimation(true)

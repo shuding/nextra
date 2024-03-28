@@ -81,7 +81,7 @@ export function TOC({ toc, filePath }: TOCProps): ReactElement {
                     activeAnchor[id]?.isActive
                       ? '_text-primary-600 contrast-more:!_text-primary-600'
                       : '_text-gray-500 hover:_text-gray-900 dark:_text-gray-400 dark:hover:_text-gray-300',
-                    'contrast-more:_text-gray-900 contrast-more:_underline contrast-more:dark:_text-gray-50 _w-full _break-words'
+                    'contrast-more:_text-gray-900 contrast-more:_underline contrast-more:dark:_text-gray-50 _w-full _break-words nextra-focusable'
                   )}
                 >
                   {removeLinks(value)}
