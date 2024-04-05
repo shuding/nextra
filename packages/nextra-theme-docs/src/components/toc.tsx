@@ -56,7 +56,8 @@ export function TOC({ toc, filePath }: TOCProps): ReactElement {
     <div
       className={cn(
         'nextra-scrollbar _sticky _top-16 _overflow-y-auto _pr-4 _pt-6 _text-sm [hyphens:auto]',
-        '_max-h-[calc(100vh-var(--nextra-navbar-height)-env(safe-area-inset-bottom))] ltr:_-mr-4 rtl:_-ml-4'
+        '_max-h-[calc(100vh-var(--nextra-navbar-height)-env(safe-area-inset-bottom))] ltr:_-mr-4 rtl:_-ml-4',
+        '_z-[-1]' // for firefox https://github.com/shuding/nextra/issues/2824
       )}
     >
       {hasHeadings && (
