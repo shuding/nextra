@@ -90,6 +90,7 @@ describe('rehypeIcon', () => {
       import { PythonIcon } from 'nextra/icons'
       import { RustIcon } from 'nextra/icons'
       import { TerraformIcon } from 'nextra/icons'
+      import { MoveIcon } from 'nextra/icons'
       function _createMdxContent(props) {
         const _components = {
           code: 'code',
@@ -226,6 +227,12 @@ describe('rehypeIcon', () => {
                 <_components.span>
                   <_components.span />
                 </_components.span>
+              </_components.code>
+            </_components.pre>
+            {'\\n'}
+            <_components.pre icon={MoveIcon} tabIndex="0" data-language="move" data-word-wrap="" data-copy="">
+              <_components.code>
+                <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
           </>

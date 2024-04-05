@@ -24,7 +24,8 @@ export const REHYPE_ICON_DEFAULT_REPLACES: Record<string, string> = {
   rust: 'RustIcon',
   rs: 'RustIcon',
   terraform: 'TerraformIcon',
-  tf: 'TerraformIcon'
+  tf: 'TerraformIcon',
+  move: 'MoveIcon'
 }
 
 function createImport(iconName: string) {
