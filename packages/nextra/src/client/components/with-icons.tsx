@@ -7,8 +7,11 @@ import {
   JavaScriptIcon,
   MarkdownIcon,
   MdxIcon,
+  MoveIcon,
   PythonIcon,
+  RustIcon,
   TerminalIcon,
+  TerraformIcon,
   TypeScriptIcon
 } from '../icons/index.js'
 import type { PreProps } from './pre/index.js'
@@ -33,7 +36,12 @@ export const LanguageToIcon: Record<
   'c#': CsharpIcon,
   graphql: GraphQLIcon,
   python: PythonIcon,
-  py: PythonIcon
+  py: PythonIcon,
+  rust: RustIcon,
+  rs: RustIcon,
+  terraform: TerraformIcon,
+  tf: TerraformIcon,
+  move: MoveIcon
 }
 
 export const withIcons =
@@ -45,7 +53,7 @@ export const withIcons =
 
     return (
       <Component
-        icon={Icon && <Icon className="_h-3.5 _w-auto _shrink-0" />}
+        icon={Icon && <Icon className="_h-4 _w-auto _shrink-0" />}
         {...props}
       />
     )

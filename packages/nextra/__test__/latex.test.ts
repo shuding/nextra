@@ -11,7 +11,9 @@ describe('LaTeX', () => {
     it('should convert ```math code block language', async () => {
       const { result } = await compileMdx('```math\nx^2\n```', options)
       expect(clean(result)).resolves.toMatchInlineSnapshot(`
-        "'use strict'
+        "/*@jsxRuntime automatic*/
+        /*@jsxImportSource react*/
+        'use strict'
         const { useMDXComponents: _provideComponents } = arguments[0]
         const title = ''
         const metadata = {}
@@ -116,7 +118,9 @@ describe('LaTeX', () => {
     it('should convert math inline', async () => {
       const { result } = await compileMdx(INLINE_MATH, options)
       expect(clean(result)).resolves.toMatchInlineSnapshot(`
-        "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+        "/*@jsxRuntime automatic*/
+        /*@jsxImportSource react*/
+        import { useMDXComponents as _provideComponents } from 'nextra/mdx'
         export const title = ''
         export const metadata = {}
         import { MathJax, MathJaxContext } from 'nextra/components'
@@ -146,7 +150,9 @@ describe('LaTeX', () => {
     it('should convert ```math code block language', async () => {
       const { result } = await compileMdx(MATH_LANG, options)
       expect(clean(result)).resolves.toMatchInlineSnapshot(`
-        "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+        "/*@jsxRuntime automatic*/
+        /*@jsxImportSource react*/
+        import { useMDXComponents as _provideComponents } from 'nextra/mdx'
         export const title = ''
         export const metadata = {}
         import { MathJax, MathJaxContext } from 'nextra/components'
@@ -176,7 +182,9 @@ export let bar
 ${MATH_LANG}`
       const { result } = await compileMdx(rawMdx, options)
       expect(clean(result)).resolves.toMatchInlineSnapshot(`
-        "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+        "/*@jsxRuntime automatic*/
+        /*@jsxImportSource react*/
+        import { useMDXComponents as _provideComponents } from 'nextra/mdx'
         export const title = ''
         export const metadata = {}
         import foo from 'foo'

@@ -187,7 +187,7 @@ body,
   @apply _absolute _top-full _z-20 _mt-2 _overflow-auto _overscroll-contain _rounded-xl _py-2.5 _shadow-xl;
   @apply _max-h-[min(calc(50vh-11rem-env(safe-area-inset-bottom)),400px)];
   @apply md:_max-h-[min(calc(100vh-5rem-env(safe-area-inset-bottom)),400px)];
-  @apply _inset-x-0 ltr:md:_left-auto rtl:md:_right-auto;
+  @apply _inset-x-0 md:_start-auto;
   @apply contrast-more:_border contrast-more:_border-gray-900 contrast-more:dark:_border-gray-50;
   @apply _backdrop-blur-lg _bg-[rgb(var(--nextra-bg),.8)];
 }

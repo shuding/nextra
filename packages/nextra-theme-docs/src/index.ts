@@ -1,5 +1,5 @@
 export { useTheme } from 'next-themes'
-export { useThemeConfig, useConfig } from './contexts'
+export { useThemeConfig, useConfig, useMenu } from './contexts'
 export { useMDXComponents, Link, H1 } from './mdx-components'
 export { Layout } from './layout'
 export {

@@ -111,7 +111,9 @@ export const TagName = () => {
       { mdxOptions }
     )
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
-      "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+      "/*@jsxRuntime automatic*/
+      /*@jsxImportSource react*/
+      import { useMDXComponents as _provideComponents } from 'nextra/mdx'
       export const title = 'My Header'
       export const metadata = {
         title: 'My Header'
@@ -186,7 +188,9 @@ export const TagName = () => {
   it('use github-slugger', async () => {
     const { result } = await compileMdx('### My Header', { mdxOptions })
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
-      "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+      "/*@jsxRuntime automatic*/
+      /*@jsxImportSource react*/
+      import { useMDXComponents as _provideComponents } from 'nextra/mdx'
       export const title = ''
       export const metadata = {}
       export function useTOC(props) {
@@ -246,7 +250,9 @@ import Last from './three.mdx'
       { mdxOptions, latex: true }
     )
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
-      "import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+      "/*@jsxRuntime automatic*/
+      /*@jsxImportSource react*/
+      import { useMDXComponents as _provideComponents } from 'nextra/mdx'
       export const title = ''
       export const metadata = {}
       import FromMdx, { useTOC as useTOC0 } from './one.mdx'

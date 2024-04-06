@@ -12,6 +12,11 @@ const defaultColor = {
   saturation: 100
 }
 
+const defaultBackgroundColor = {
+  dark: '17,17,17',
+  light: '250,250,250'
+}
+
 type HeadProps = {
   children?: ReactNode
   color?: {
@@ -19,12 +24,17 @@ type HeadProps = {
     saturation: Color
   }
   faviconGlyph?: string
+  backgroundColor?: {
+    dark: string
+    light: string
+  }
 }
 
 export function Head({
   children,
   color = defaultColor,
-  faviconGlyph
+  faviconGlyph,
+  backgroundColor: bgColor = defaultBackgroundColor
 }: HeadProps): ReactElement {
   const { hue, saturation } = color
   const { dark: darkHue, light: lightHue } =
@@ -33,8 +43,6 @@ export function Head({
     typeof saturation === 'number'
       ? { dark: saturation, light: saturation }
       : saturation
-
-  const bgColor = themeConfig.backgroundColor
 
   return (
     // eslint-disable-next-line @next/next/no-head-element -- ignore since we use app router
