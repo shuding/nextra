@@ -6,23 +6,28 @@ exports[`Page Process > should match i18n site page maps 1`] = `
     {
       "data": {
         "about": {
-          "items": {
-            "a-page": {
-              "title": "A Page",
-            },
-            "acknowledgement": {
-              "title": "Acknowledgement",
-            },
-            "changelog": {
-              "title": "Changelog",
-            },
-            "contributors": {
+          "items": Map {
+            "contributors" => {
               "href": "https://github.com/vercel/swr/graphs/contributors",
               "newWindow": true,
               "title": "Contributors",
             },
-            "team": {
+            "team" => {
               "title": "Team",
+            },
+            "acknowledgement" => {
+              "title": "Acknowledgement",
+            },
+            "a-page" => {
+              "title": "A Page",
+            },
+            "changelog" => {
+              "title": "Changelog",
+            },
+            "123" => {
+              "href": "https://google.com",
+              "newWindow": true,
+              "title": "Last, key is number",
             },
           },
           "title": "About",
@@ -637,23 +642,28 @@ exports[`Page Process > should match i18n site page maps 1`] = `
     {
       "data": {
         "about": {
-          "items": {
-            "a-page": {
-              "title": "A Page",
-            },
-            "acknowledgement": {
-              "title": "Acknowledgement",
-            },
-            "changelog": {
-              "title": "Changelog",
-            },
-            "contributors": {
+          "items": Map {
+            "contributors" => {
               "href": "https://github.com/vercel/swr/graphs/contributors",
               "newWindow": true,
               "title": "Contributors",
             },
-            "team": {
+            "team" => {
               "title": "Team",
+            },
+            "acknowledgement" => {
+              "title": "Acknowledgement",
+            },
+            "a-page" => {
+              "title": "A Page",
+            },
+            "changelog" => {
+              "title": "Changelog",
+            },
+            "123" => {
+              "href": "https://google.com",
+              "newWindow": true,
+              "title": "Last, key is number",
             },
           },
           "title": "About",

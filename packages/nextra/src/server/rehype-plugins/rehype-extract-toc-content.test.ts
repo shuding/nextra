@@ -356,7 +356,7 @@ import { RemoteContent } from 'nextra/components'
         ...opts,
         filePath: '[[...slug]].mdx'
       })
-      const res = await clean(result, false)
+      const res = await clean(result)
 
       expect(res).toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic @jsxImportSource react*/
@@ -413,7 +413,7 @@ export const myVar = 123
 ### 123 {myVar}`
 
       const { result } = await compileMdx(rawMdx)
-      const res = await clean(result, false)
+      const res = await clean(result)
 
       expect(res).toMatchInlineSnapshot(`
         "'use strict'

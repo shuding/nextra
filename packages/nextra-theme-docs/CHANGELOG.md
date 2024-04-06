@@ -1,5 +1,56 @@
 # nextra-theme-docs
 
+## 3.0.0-alpha.22
+
+### Patch Changes
+
+- eeb4c4cd: enable `outline: 'none'` only for `:focus-visible` state, to fix
+  double ring in Firefox
+- 9b411804: `backToTop` is hidden when enabled but when `toc.extraContent`,
+  `feedback.content` and `editLink.component` are falsy
+- 2630461c: fix
+  `TypeError: undefined is not iterable (cannot read property Symbol(Symbol.iterator))`
+  on dev environment when `frontMatter.searchable: false`
+- Updated dependencies [2630461c]
+  - nextra@3.0.0-alpha.22
+
+## 3.0.0-alpha.21
+
+### Minor Changes
+
+- 962cea6b: allow `items: Map` for `type: 'menu'` since object can't guaranty
+  the insertion order
+
+### Patch Changes
+
+- nextra@3.0.0-alpha.21
+
+## 3.0.0-alpha.20
+
+### Minor Changes
+
+- b776b162: add `backgroundColor.light` and `backgroundColor.dark` theme options
+
+### Patch Changes
+
+- nextra@3.0.0-alpha.20
+
+## 3.0.0-alpha.19
+
+### Patch Changes
+
+- d21634d5: export `getComponents`
+  - nextra@3.0.0-alpha.19
+
+## 3.0.0-alpha.18
+
+### Patch Changes
+
+- Updated dependencies [98f439ca]
+- Updated dependencies [f71e660e]
+- Updated dependencies [98f439ca]
+  - nextra@3.0.0-alpha.18
+
 ## 3.0.0-alpha.17
 
 ### Minor Changes
@@ -279,6 +330,14 @@
 - Updated dependencies [d8a406b4]
 - Updated dependencies [576cb6f1]
   - nextra@3.0.0-alpha.0
+
+## 2.13.4
+
+### Patch Changes
+
+- f7fc10b4: fix for the memory leak issue in the `highlight-matches.tsx`
+  component when search query contain multiple whitespaces
+  - nextra@2.13.4
 
 ## 2.13.3
 

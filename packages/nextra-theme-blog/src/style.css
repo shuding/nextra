@@ -12,7 +12,7 @@ html {
 }
 
 body {
-  @apply _px-4;
+  @apply _px-4 _bg-[rgb(var(--nextra-bg))];
 }
 
 article {

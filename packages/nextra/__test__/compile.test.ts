@@ -16,8 +16,9 @@ describe('Compile', () => {
 export default foo`,
       { mdxOptions }
     )
-    expect(clean(result, false)).resolves.toMatchInlineSnapshot(`
-      "/*@jsxRuntime automatic @jsxImportSource react*/
+    expect(clean(result)).resolves.toMatchInlineSnapshot(`
+      "/*@jsxRuntime automatic*/
+      /*@jsxImportSource react*/
       import { useMDXComponents as _provideComponents } from 'nextra/mdx'
       export const title = ''
       export const metadata = {}
@@ -42,8 +43,9 @@ export default foo`,
 export { foo as default } from './foo'`,
       { mdxOptions }
     )
-    expect(clean(result, false)).resolves.toMatchInlineSnapshot(`
-      "/*@jsxRuntime automatic @jsxImportSource react*/
+    expect(clean(result)).resolves.toMatchInlineSnapshot(`
+      "/*@jsxRuntime automatic*/
+      /*@jsxImportSource react*/
       import { useMDXComponents as _provideComponents } from 'nextra/mdx'
       export const title = ''
       export const metadata = {}

@@ -115,10 +115,12 @@ export function Tabs({
 
 export function Tab({
   children,
+  // For SEO display all the Panel in the DOM and set `display: none;` for those that are not selected
+  unmount = false,
   ...props
-}: ComponentProps<typeof HeadlessTab.Panel>): ReactElement {
+}: Omit<ComponentProps<typeof HeadlessTab.Panel>, 'static'>): ReactElement {
   return (
-    <HeadlessTab.Panel {...props} className="_rounded _pt-6">
+    <HeadlessTab.Panel {...props} unmount={unmount} className="_rounded _pt-6">
       {children}
     </HeadlessTab.Panel>
   )

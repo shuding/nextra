@@ -1,5 +1,30 @@
 # nextra
 
+## 3.0.0-alpha.22
+
+### Patch Changes
+
+- 2630461c: fix
+  `TypeError: undefined is not iterable (cannot read property Symbol(Symbol.iterator))`
+  on dev environment when `frontMatter.searchable: false`
+
+## 3.0.0-alpha.21
+
+## 3.0.0-alpha.20
+
+## 3.0.0-alpha.19
+
+## 3.0.0-alpha.18
+
+### Minor Changes
+
+- f71e660e: change to shiki again
+
+### Patch Changes
+
+- 98f439ca: export `evaluate` function for remote content
+- 98f439ca: add rust icon
+
 ## 3.0.0-alpha.17
 
 ### Minor Changes
@@ -224,6 +249,8 @@
 ### Patch Changes
 
 - d8a406b4: add `"sideEffects": false` for better tree-shaking
+
+## 2.13.4
 
 ## 2.13.3
 

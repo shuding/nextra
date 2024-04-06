@@ -171,7 +171,7 @@ export function Search({
         className={cn(
           '_absolute _my-1.5 _select-none _end-1.5',
           '_h-5 _rounded _bg-white _px-1.5 _font-mono _text-[10px] _font-medium _text-gray-500',
-          '_border dark:_border-gray-100/20 dark:_bg-dark/50',
+          '_border dark:_border-gray-100/20 dark:_bg-black/50',
           'contrast-more:_border-current contrast-more:_text-current contrast-more:dark:_border-current',
           '_items-center _gap-1 _transition-opacity _flex',
           value
@@ -242,14 +242,7 @@ export function Search({
       >
         <ul
           className={cn(
-            'nextra-scrollbar',
-            // Using bg-white as background-color when the browser didn't support backdrop-filter
-            '_border _border-gray-200 _bg-white _text-gray-100 dark:_border-neutral-800 dark:_bg-neutral-900',
-            '_absolute _top-full _z-20 _mt-2 _overflow-auto _overscroll-contain _rounded-xl _py-2.5 _shadow-xl',
-            '_max-h-[min(calc(50vh-11rem-env(safe-area-inset-bottom)),400px)]',
-            'md:_max-h-[min(calc(100vh-5rem-env(safe-area-inset-bottom)),400px)]',
-            '_inset-x-0 md:_start-auto',
-            'contrast-more:_border contrast-more:_border-gray-900 contrast-more:dark:_border-gray-50',
+            'nextra-search-results nextra-scrollbar',
             overlayClassName
           )}
           ref={ulRef}

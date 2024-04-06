@@ -81,12 +81,8 @@ const classes = {
     '_p-4 _grow md:_h-[calc(100vh-var(--nextra-navbar-height)-var(--nextra-menu-height))]'
   ),
   bottomMenu: cn(
-    '_sticky _bottom-0',
-    '_bg-white dark:_bg-dark', // when banner is showed, sidebar links can be behind menu, set bg color as body bg color
-    '_mx-4 _py-4 _shadow-[0_-12px_16px_#fff]',
-    '_flex _items-center _gap-2',
-    'dark:_border-neutral-800 dark:_shadow-[0_-12px_16px_#111]',
-    'contrast-more:_border-neutral-400 contrast-more:_shadow-none contrast-more:dark:_shadow-none'
+    'nextra-sidebar-footer _sticky _bottom-0',
+    '_flex _items-center _gap-2 _mx-4 _py-4',
   )
 }
 
