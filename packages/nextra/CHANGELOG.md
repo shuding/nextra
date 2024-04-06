@@ -1,5 +1,21 @@
 # nextra
 
+## 3.0.0-alpha.23
+
+### Minor Changes
+
+- 6ec3241c: Add Terraform/Move icon https://github.com/shuding/nextra/pull/2811
+  https://github.com/shuding/nextra/pull/2808
+- 6ec3241c: Make the `<Tab />` component be crawlable and indexable by search
+  engines by default
+
+### Patch Changes
+
+- ad108ff7: use `overflow-x-auto` instead `overflow-x-scroll` for `<Table />`
+- 217f7082: update next-themes
+
+  fix wrong numbering for nested `<Steps />`
+
 ## 3.0.0-alpha.22
 
 ### Patch Changes
