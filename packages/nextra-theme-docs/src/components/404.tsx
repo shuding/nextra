@@ -1,10 +1,11 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
+import { useMounted } from 'nextra/hooks'
 import type { ReactElement, ReactNode } from 'react'
 import { useThemeConfig } from '../contexts'
 import { H1, Link } from '../mdx-components'
-import { getGitIssueUrl, renderComponent } from '../utils'
+import { getGitIssueUrl } from '../utils'
 
 type NotFoundPageProps = {
   content?: ReactNode
@@ -19,19 +20,22 @@ export function NotFoundPage({
 }: NotFoundPageProps): ReactElement {
   const config = useThemeConfig()
   const pathname = usePathname()
+  const mounted = useMounted()
 
   return (
-    <div className="_flex _flex-col _justify-center _items-center _gap-6 _h-screen">
+    <div className="_flex _flex-col _justify-center _items-center _gap-6 _h-[calc(100dvh-var(--nextra-navbar-height))]">
       {children}
       <Link
         href={getGitIssueUrl({
           repository: config.docsRepositoryBase,
-          title: `Found broken \`${pathname}\` link. Please fix!`,
+          title: `Found broken \`${
+            mounted ? pathname : ''
+          }\` link. Please fix!`,
           labels
         })}
         newWindow
       >
-        {renderComponent(content)}
+        {content}
       </Link>
     </div>
   )

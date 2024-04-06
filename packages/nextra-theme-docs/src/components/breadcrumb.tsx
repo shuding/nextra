@@ -35,7 +35,7 @@ export function Breadcrumb({
                 '_whitespace-nowrap _transition-colors',
                 isLast
                   ? '_font-medium _text-gray-700 contrast-more:_font-bold contrast-more:_text-current dark:_text-gray-100 contrast-more:dark:_text-current'
-                  : '_min-w-[24px] _overflow-hidden _text-ellipsis',
+                  : '_min-w-6 _overflow-hidden _text-ellipsis',
                 href && 'hover:_text-gray-900 dark:hover:_text-gray-100'
               )}
               title={item.title}

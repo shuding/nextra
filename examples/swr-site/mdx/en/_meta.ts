@@ -11,28 +11,25 @@ export default {
   about: {
     type: 'menu',
     title: 'About',
-    items: new Map([
-      [
-        'contributors',
-        {
-          title: 'Contributors',
-          href: 'https://github.com/vercel/swr/graphs/contributors',
-          newWindow: true
-        }
-      ],
-      ['team', { title: 'Team' }],
-      ['acknowledgement', { title: 'Acknowledgement' }],
-      ['a-page', { title: 'A Page' }],
-      ['changelog', { title: 'Changelog' }],
-      [
-        '123',
-        {
-          title: 'Last, key is number',
-          href: 'https://google.com',
-          newWindow: true
-        }
-      ]
-    ])
+    items: {
+      contributors: {
+        title: 'Contributors',
+        href: 'https://github.com/vercel/swr/graphs/contributors',
+        newWindow: true
+      },
+      team: {
+        title: 'Team'
+      },
+      acknowledgement: {
+        title: 'Acknowledgement'
+      },
+      'a-page': {
+        title: 'A Page'
+      },
+      changelog: {
+        title: 'Changelog'
+      }
+    }
   },
   examples: {
     type: 'page',
