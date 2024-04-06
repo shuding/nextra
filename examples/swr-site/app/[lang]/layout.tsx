@@ -63,7 +63,12 @@ export default async function RootLayout({ children, params: { lang } }) {
       lang={lang === 'es' ? 'he' : lang}
       dir={getDirection(lang)}
     >
-      <Head />
+      <Head
+        backgroundColor={{
+          dark: '15,23,42',
+          light: '254,252,232'
+        }}
+      />
       <body>
         <SkipNavLink />
         <Layout

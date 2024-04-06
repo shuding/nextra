@@ -1,4 +1,4 @@
-import { Footer, Layout, Navbar, ThemeSwitch } from 'nextra-theme-blog'
+import { Footer, Head, Layout, Navbar, ThemeSwitch } from 'nextra-theme-blog'
 import 'nextra-theme-blog/style.css'
 
 export const metadata = {
@@ -8,6 +8,12 @@ export const metadata = {
 export default async function RootLayout({ children }) {
   return (
     <html lang="en">
+      <Head
+        backgroundColor={{
+          dark: '15,23,42',
+          light: '254,252,232'
+        }}
+      />
       <body>
         <Layout>
           <Navbar

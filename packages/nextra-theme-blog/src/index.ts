@@ -5,6 +5,7 @@ export {
   Navbar,
   Layout,
   Footer,
-  useTheme
+  useTheme,
+  Head
 } from './components'
 export * from './types'
