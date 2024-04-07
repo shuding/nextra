@@ -1,18 +1,14 @@
 import meta from '../en/_meta'
 
 export default {
-  index: {
-    title: 'Introducción',
-    type: 'page',
-    display: 'hidden'
-  },
+  index: meta.index,
   docs: {
-    title: 'Docs',
-    type: 'page'
+    ...meta.docs,
+    title: 'Documentación',
   },
   examples: {
-    title: 'Ejemplos',
-    type: 'page'
+    ...meta.examples,
+    title: 'Ejemplos'
   },
   about: meta.about
 }

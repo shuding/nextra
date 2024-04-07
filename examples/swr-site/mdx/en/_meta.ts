@@ -1,12 +1,14 @@
 export default {
   index: {
-    title: 'Introduction',
     type: 'page',
-    display: 'hidden'
+    display: 'hidden',
+    theme: {
+      typesetting: 'article'
+    }
   },
   docs: {
     type: 'page',
-    title: 'Docs'
+    title: 'Documentation',
   },
   about: {
     type: 'menu',
@@ -43,8 +45,6 @@ export default {
     title: 'Blog',
     theme: {
       sidebar: false,
-      toc: true,
-      breadcrumb: false,
       typesetting: 'article'
     }
   },

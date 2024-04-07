@@ -1,26 +1,17 @@
+import meta from '../en/_meta'
+
 export default {
-  index: {
-    title: 'Введение',
-    type: 'page',
-    display: 'hidden'
-  },
+  index: meta.index,
   docs: {
-    title: 'Документация',
-    type: 'page'
+    ...meta.docs,
+    title: 'Документация'
   },
   examples: {
-    title: 'Примеры',
-    type: 'page'
+    ...meta.examples,
+    title: 'Примеры'
   },
   blog: {
-    title: 'Блог',
-    type: 'page',
-    theme: {
-      timestamp: true,
-      sidebar: false,
-      toc: true,
-      breadcrumb: false,
-      typesetting: 'article'
-    }
+    ...meta.blog,
+    title: 'Блог'
   }
 }
