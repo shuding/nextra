@@ -1,0 +1,27 @@
+import External from '@app/_components/external.mdx'
+
+# Markdown import
+
+## Import of markdown file
+
+```mdx
+import External from '@app/_components/external.mdx'
+
+<External />
+```
+
+<External />
+
+## Import of another page
+
+You can also import complete pages:
+
+```mdx filename="not-index.md"
+import IndexPage from '../../index.mdx'
+
+<IndexPage params={props.params} />
+```
+
+import IndexPage from '../../index.mdx'
+
+<IndexPage params={props.params} />

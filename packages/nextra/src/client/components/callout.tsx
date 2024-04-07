@@ -40,13 +40,13 @@ export function Callout({
   return (
     <div
       className={cn(
-        'nextra-callout _overflow-x-auto _mt-6 _flex _rounded-lg _border _py-2 ltr:_pr-4 rtl:_pl-4',
+        'nextra-callout _overflow-x-auto _mt-6 _flex _rounded-lg _border _py-2 _pe-4',
         'contrast-more:_border-current contrast-more:dark:_border-current',
         classes[type]
       )}
     >
       <div
-        className="_select-none _text-xl ltr:_pl-3 ltr:_pr-2 rtl:_pr-3 rtl:_pl-2"
+        className="_select-none _text-xl _ps-3 _pe-2"
         style={{
           fontFamily: '"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
         }}

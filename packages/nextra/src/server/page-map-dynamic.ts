@@ -92,6 +92,7 @@ export const resolvePageMap =
     const { pageMap } = locale
       ? Object.entries(__nextra_internal__.context)
           // Fix race condition. Find a better way to get pageMap?
+          // @ts-expect-error -- fixme
           .find(([route]) => route.startsWith(`/${locale}/`))![1].pageOpts
       : __nextra_internal__
     const result = await Promise.all(

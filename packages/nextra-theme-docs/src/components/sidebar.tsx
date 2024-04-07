@@ -1,6 +1,9 @@
+'use client'
+
 import cn from 'clsx'
+import { usePathname } from 'next/navigation'
 import type { Heading } from 'nextra'
-import { useFSRoute, useMounted } from 'nextra/hooks'
+import { useFSRoute } from 'nextra/hooks'
 import { ArrowRightIcon, ExpandIcon } from 'nextra/icons'
 import type { Item, MenuItem, PageItem } from 'nextra/normalize-pages'
 import type { ReactElement } from 'react'
@@ -14,11 +17,17 @@ import {
   useState
 } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
-import { useActiveAnchor, useMenu, useThemeConfig } from '../contexts'
+import {
+  useActiveAnchor,
+  useConfig,
+  useMenu,
+  useThemeConfig
+} from '../contexts'
 import { renderComponent } from '../utils'
 import { Anchor } from './anchor'
 import { Collapse } from './collapse'
 import { LocaleSwitch } from './locale-switch'
+import { ThemeSwitch } from './theme-switch'
 
 const TreeState: Record<string, boolean> = Object.create(null)
 
@@ -59,7 +68,21 @@ const classes = {
   border: cn(
     '_relative before:_absolute before:_inset-y-1',
     'before:_w-px before:_bg-gray-200 before:_content-[""] dark:before:_bg-neutral-800',
-    'ltr:_pl-3 ltr:before:_left-0 rtl:_pr-3 rtl:before:_right-0'
+    '_ps-3 before:_start-0'
+  ),
+  aside: cn(
+    'nextra-sidebar-container _flex _flex-col',
+    'md:_top-16 md:_shrink-0 motion-reduce:_transform-none',
+    '_transform-gpu _transition-all _ease-in-out',
+    'print:_hidden'
+  ),
+  wrapper: cn(
+    '_overflow-y-auto _overflow-x-hidden',
+    '_p-4 _grow md:_h-[calc(100vh-var(--nextra-navbar-height)-var(--nextra-menu-height))]'
+  ),
+  bottomMenu: cn(
+    'nextra-sidebar-footer _sticky _bottom-0',
+    '_flex _items-center _gap-2 _mx-4 _py-4'
   )
 }
 
@@ -78,7 +101,6 @@ function FolderImpl({ item, anchors }: FolderProps): ReactElement {
   const focusedRouteInside = !!focusedRoute?.startsWith(item.route + '/')
   const level = useContext(FolderLevelContext)
 
-  const { setMenu } = useMenu()
   const { theme } = item as Item
   const themeConfig = useThemeConfig()
 
@@ -162,7 +184,6 @@ function FolderImpl({ item, anchors }: FolderProps): ReactElement {
               TreeState[item.route] = !open
             } else {
               TreeState[item.route] = true
-              setMenu(false)
             }
             rerender({})
             return
@@ -181,10 +202,10 @@ function FolderImpl({ item, anchors }: FolderProps): ReactElement {
           )}
         />
       </ComponentToUse>
-      <Collapse className="ltr:_pr-0 rtl:_pl-0 _pt-1" isOpen={open}>
+      <Collapse className="_pe-0 _pt-1" isOpen={open}>
         {Array.isArray(item.children) ? (
           <Menu
-            className={cn(classes.border, 'ltr:_ml-3 rtl:_mr-3')}
+            className={cn(classes.border, '_ms-3')}
             directories={item.children}
             base={item.route}
             anchors={anchors}
@@ -233,15 +254,16 @@ function File({
     return <Separator title={item.title} />
   }
 
+  const handleClick = () => {
+    setMenu(false)
+  }
+
   return (
     <li className={cn(classes.list, { active })}>
       <Anchor
         href={(item as PageItem).href || item.route}
         newWindow={(item as PageItem).newWindow}
         className={cn(classes.link, active ? classes.active : classes.inactive)}
-        onClick={() => {
-          setMenu(false)
-        }}
         onFocus={() => {
           onFocus?.(item.route)
         }}
@@ -252,7 +274,7 @@ function File({
         {item.title}
       </Anchor>
       {active && anchors.length > 0 && (
-        <ul className={cn(classes.list, classes.border, 'ltr:_ml-3 rtl:_mr-3')}>
+        <ul className={cn(classes.list, classes.border, '_ms-3')}>
           {anchors.map(({ id, value }) => (
             <li key={id}>
               <a
@@ -262,9 +284,7 @@ function File({
                   '_flex _gap-2 before:_opacity-25 before:_content-["#"]',
                   activeAnchor[id]?.isActive ? classes.active : classes.inactive
                 )}
-                onClick={() => {
-                  setMenu(false)
-                }}
+                onClick={handleClick}
               >
                 {value}
               </a>
@@ -292,44 +312,37 @@ function Menu({
 }: MenuProps): ReactElement {
   return (
     <ul className={cn(classes.list, className)}>
-      {directories.map(item =>
-        !onlyCurrentDocs || item.isUnderCurrentDocsTree ? (
+      {directories.map(item => {
+        return !onlyCurrentDocs || item.isUnderCurrentDocsTree ? (
           item.type === 'menu' ||
           (item.children && (item.children.length || !item.withIndexPage)) ? (
             <Folder key={item.name} item={item} anchors={anchors} />
           ) : (
-            <File key={item.name} item={item} anchors={anchors} />
+            <File key={item.route || item.name} item={item} anchors={anchors} />
           )
         ) : null
-      )}
+      })}
     </ul>
   )
 }
 
-interface SideBarProps {
-  docsDirectories: PageItem[]
-  fullDirectories: Item[]
-  asPopover?: boolean
-  toc: Heading[]
-  includePlaceholder: boolean
-}
+export function MobileNav() {
+  const {
+    normalizePagesResult: { directories },
+    toc
+  } = useConfig()
 
-export function Sidebar({
-  docsDirectories,
-  fullDirectories,
-  asPopover = false,
-  toc,
-  includePlaceholder
-}: SideBarProps): ReactElement {
   const { menu, setMenu } = useMenu()
-  const [focused, setFocused] = useState<null | string>(null)
-  const [showSidebar, setSidebar] = useState(true)
-  const [showToggleAnimation, setToggleAnimation] = useState(false)
 
-  const anchors = useMemo(() => toc.filter(v => v.depth === 2), [toc])
+  const pathname = usePathname()
+
+  useEffect(() => {
+    setMenu(false)
+  }, [pathname, setMenu])
+
+  const anchors = useMemo(() => (toc || []).filter(v => v.depth === 2), [toc])
   const sidebarRef = useRef<HTMLDivElement>(null)
-  const containerRef = useRef<HTMLDivElement>(null)
-  const mounted = useMounted()
+
   useEffect(() => {
     if (menu) {
       document.body.classList.add('_overflow-hidden', 'md:_overflow-auto')
@@ -341,23 +354,99 @@ export function Sidebar({
   useEffect(() => {
     const activeElement = sidebarRef.current?.querySelector('li.active')
 
-    if (activeElement && (window.innerWidth > 767 || menu)) {
-      const scroll = () => {
-        scrollIntoView(activeElement, {
-          block: 'center',
-          inline: 'center',
-          scrollMode: 'always',
-          boundary: containerRef.current
-        })
-      }
-      if (menu) {
-        // needs for mobile since menu has transition transform
-        setTimeout(scroll, 300)
-      } else {
-        scroll()
-      }
+    if (activeElement && menu) {
+      scrollIntoView(activeElement, {
+        block: 'center',
+        inline: 'center',
+        scrollMode: 'always',
+        boundary: sidebarRef.current!.parentNode as HTMLDivElement
+      })
     }
   }, [menu])
+
+  const themeConfig = useThemeConfig()
+  const hasI18n = themeConfig.i18n.length > 0
+  const hasMenu =
+    themeConfig.darkMode || hasI18n || themeConfig.sidebar.toggleButton
+
+  return (
+    <>
+      <div
+        className={cn(
+          'motion-reduce:_transition-none [transition:background-color_1.5s_ease]',
+          menu
+            ? '_fixed _inset-0 _z-10 _bg-black/80 dark:_bg-black/60'
+            : '_bg-transparent'
+        )}
+      />
+      <aside
+        className={cn(
+          'md:_hidden',
+          classes.aside,
+          menu
+            ? 'max-md:[transform:translate3d(0,0,0)]'
+            : 'max-md:[transform:translate3d(0,-100%,0)]'
+        )}
+      >
+        {themeConfig.search && (
+          <div className="_px-4 _pt-4 md:_hidden">{themeConfig.search}</div>
+        )}
+        <div
+          className={cn(classes.wrapper, 'nextra-scrollbar')}
+          ref={sidebarRef}
+        >
+          <Menu
+            className="nextra-menu-mobile"
+            // The mobile dropdown menu, shows all the directories.
+            directories={directories}
+            // Always show the anchor links on mobile (`md`).
+            anchors={anchors}
+          />
+        </div>
+
+        {hasMenu && (
+          <div
+            className={cn(
+              classes.bottomMenu,
+              hasI18n && '_justify-end',
+              '_border-t'
+            )}
+          >
+            <LocaleSwitch className="_grow" />
+            {themeConfig.darkMode && (
+              <ThemeSwitch lite={hasI18n} className={hasI18n ? '' : '_grow'} />
+            )}
+          </div>
+        )}
+      </aside>
+    </>
+  )
+}
+
+export function Sidebar({ toc }: { toc: Heading[] }): ReactElement {
+  const { normalizePagesResult, hideSidebar: asPopover } = useConfig()
+  const { docsDirectories, activeThemeContext } = normalizePagesResult
+  const includePlaceholder = activeThemeContext.layout === 'default'
+
+  const [focused, setFocused] = useState<null | string>(null)
+  const [showSidebar, setSidebar] = useState(true)
+  const [showToggleAnimation, setToggleAnimation] = useState(false)
+
+  const anchors = useMemo(() => toc.filter(v => v.depth === 2), [toc])
+  const sidebarRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const activeElement = sidebarRef.current?.querySelector('li.active')
+
+    if (activeElement && window.innerWidth > 767) {
+      scrollIntoView(activeElement, {
+        block: 'center',
+        inline: 'center',
+        scrollMode: 'always',
+        boundary: sidebarRef.current!.parentNode as HTMLDivElement
+      })
+    }
+  }, [])
 
   const themeConfig = useThemeConfig()
   const hasI18n = themeConfig.i18n.length > 0
@@ -369,44 +458,19 @@ export function Sidebar({
       {includePlaceholder && asPopover && (
         <div className="max-xl:_hidden _h-0 _w-64 _shrink-0" />
       )}
-      <div
-        className={cn(
-          'motion-reduce:_transition-none [transition:background-color_1.5s_ease]',
-          menu
-            ? '_fixed _inset-0 _z-10 _bg-black/80 dark:_bg-black/60'
-            : '_bg-transparent'
-        )}
-        onClick={() => setMenu(false)}
-      />
       <aside
         className={cn(
-          'nextra-sidebar-container _flex _flex-col',
-          'md:_top-16 md:_shrink-0 motion-reduce:_transform-none',
-          '_transform-gpu _transition-all _ease-in-out',
-          'print:_hidden',
+          'max-md:_hidden',
+          classes.aside,
           showSidebar ? 'md:_w-64' : 'md:_w-20',
-          asPopover ? 'md:_hidden' : 'md:_sticky md:_self-start',
-          menu
-            ? 'max-md:[transform:translate3d(0,0,0)]'
-            : 'max-md:[transform:translate3d(0,-100%,0)]'
+          asPopover ? 'md:_hidden' : 'md:_sticky md:_self-start'
         )}
-        ref={containerRef}
       >
-        {process.env.NEXTRA_SEARCH && (
-          <div className="_px-4 _pt-4 md:_hidden">
-            {renderComponent(themeConfig.search.component)}
-          </div>
-        )}
         <FocusedItemContext.Provider value={focused}>
-          <OnFocusItemContext.Provider
-            value={item => {
-              setFocused(item)
-            }}
-          >
+          <OnFocusItemContext.Provider value={setFocused}>
             <div
               className={cn(
-                '_overflow-y-auto _overflow-x-hidden',
-                '_p-4 _grow md:_h-[calc(100vh-var(--nextra-navbar-height)-var(--nextra-menu-height))]',
+                classes.wrapper,
                 showSidebar ? 'nextra-scrollbar' : 'no-scrollbar'
               )}
               ref={sidebarRef}
@@ -415,7 +479,7 @@ export function Sidebar({
               {(!asPopover || !showSidebar) && (
                 <Collapse isOpen={showSidebar} horizontal>
                   <Menu
-                    className="nextra-menu-desktop max-md:_hidden"
+                    className="nextra-menu-desktop"
                     // The sidebar menu, shows only the docs directories.
                     directories={docsDirectories}
                     // When the viewport size is larger than `md`, hide the anchors in
@@ -425,15 +489,6 @@ export function Sidebar({
                   />
                 </Collapse>
               )}
-              {mounted && window.innerWidth < 768 && (
-                <Menu
-                  className="nextra-menu-mobile md:_hidden"
-                  // The mobile dropdown menu, shows all the directories.
-                  directories={fullDirectories}
-                  // Always show the anchor links on mobile (`md`).
-                  anchors={anchors}
-                />
-              )}
             </div>
           </OnFocusItemContext.Provider>
         </FocusedItemContext.Provider>
@@ -441,10 +496,9 @@ export function Sidebar({
         {hasMenu && (
           <div
             className={cn(
-              'nextra-sidebar-footer _sticky _bottom-0',
-              '_flex _items-center _gap-2 _mx-4 _py-4',
+              classes.bottomMenu,
               showSidebar
-                ? hasI18n && '_justify-end'
+                ? [hasI18n && '_justify-end', '_border-t']
                 : '_py-4 _flex-wrap _justify-center'
             )}
             data-toggle-animation={
@@ -456,15 +510,10 @@ export function Sidebar({
               className={showSidebar ? '_grow' : 'max-md:_grow'}
             />
             {themeConfig.darkMode && (
-              <div
-                className={
-                  showSidebar && !hasI18n ? '_grow _flex _flex-col' : ''
-                }
-              >
-                {renderComponent(themeConfig.themeSwitch.component, {
-                  lite: !showSidebar || hasI18n
-                })}
-              </div>
+              <ThemeSwitch
+                lite={!showSidebar || hasI18n}
+                className={hasI18n ? '' : '_grow'}
+              />
             )}
             {themeConfig.sidebar.toggleButton && (
               <button

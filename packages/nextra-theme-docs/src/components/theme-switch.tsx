@@ -1,10 +1,10 @@
+'use client'
+
 import { useTheme } from 'next-themes'
 import { useMounted } from 'nextra/hooks'
 import { MoonIcon, SunIcon } from 'nextra/icons'
 import type { ReactElement } from 'react'
-import type { z } from 'zod'
 import { useThemeConfig } from '../contexts'
-import type { themeOptionsSchema } from '../schemas'
 import { Select } from './select'
 
 type ThemeSwitchProps = {
@@ -12,21 +12,16 @@ type ThemeSwitchProps = {
   className?: string
 }
 
-type ThemeOptions = z.infer<typeof themeOptionsSchema>
-
 export function ThemeSwitch({
   lite,
   className
 }: ThemeSwitchProps): ReactElement {
   const { setTheme, resolvedTheme, theme = '' } = useTheme()
   const mounted = useMounted()
-  const config = useThemeConfig().themeSwitch
+  const config = useThemeConfig()
 
   const IconToUse = mounted && resolvedTheme === 'dark' ? MoonIcon : SunIcon
-  const options: ThemeOptions =
-    typeof config.useOptions === 'function'
-      ? config.useOptions()
-      : config.useOptions
+  const { options } = config.themeSwitch
 
   return (
     <Select
@@ -43,12 +38,12 @@ export function ThemeSwitch({
       selected={{
         key: theme,
         name: (
-          <div className="_flex _items-center _gap-2 _capitalize">
+          <span className="_flex _items-center _gap-2 _capitalize">
             <IconToUse />
             <span className={lite ? 'md:_hidden' : ''}>
               {mounted ? options[theme as keyof typeof options] : options.light}
             </span>
-          </div>
+          </span>
         )
       }}
     />

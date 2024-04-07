@@ -1,23 +1,19 @@
 import path from 'node:path'
 import type { ArrayExpression, ImportDeclaration } from 'estree'
 import { toJs } from 'estree-util-to-js'
-import { valueToEstree } from 'estree-util-value-to-estree'
 import gracefulFs from 'graceful-fs'
 import grayMatter from 'gray-matter'
 import pLimit from 'p-limit'
 import slash from 'slash'
-import type { NextraConfig, PageMapItem } from '../types'
+import type { PageMapItem } from '../types'
 import {
   CHUNKS_DIR,
   CWD,
-  DEFAULT_PROPERTY_PROPS,
-  IMPORT_FRONTMATTER,
   MARKDOWN_EXTENSION_REGEX,
   META_REGEX
 } from './constants.js'
-import { PAGES_DIR } from './file-system.js'
+import { APP_DIR } from './file-system.js'
 import {
-  createAstExportConst,
   createAstObject,
   normalizePageRoute,
   pageTitleFromFilename,
@@ -28,8 +24,14 @@ const fs = gracefulFs.promises
 
 const limit = pLimit(20)
 
-type Import = { importName: string; filePath: string }
-type DynamicImport = { importName: string; route: string }
+type Import = {
+  importName: string
+  filePath: string
+}
+type DynamicImport = {
+  importName: string
+  route: string
+}
 
 type CollectFilesOptions = {
   dir: string
@@ -39,10 +41,16 @@ type CollectFilesOptions = {
   isFollowingSymlink: boolean
 }
 
+export {
+  generatePageMapFromFilepaths,
+  getFilepaths
+} from './generate-page-map.js'
+export { normalizePageMap } from './normalize-page-map.js'
+
 function cleanFileName(name: string): string {
   return (
     path
-      .relative(PAGES_DIR, name)
+      .relative(APP_DIR, name)
       .replace(/\.([jt]sx?|json|mdx?)$/, '')
       .replaceAll(/[\W_]+/g, '_')
       .replace(/^_/, '')
@@ -51,7 +59,7 @@ function cleanFileName(name: string): string {
   )
 }
 
-async function collectFiles({
+export async function collectFiles({
   dir,
   route,
   imports = [],
@@ -171,33 +179,39 @@ async function collectFiles({
   }
 }
 
-/*
- * Use relative path instead of absolute, because it's fails on Windows
- * https://github.com/nodejs/node/issues/31710
- */
-function getImportPath(filePath: string) {
-  return slash(path.relative(CHUNKS_DIR, filePath))
-}
-
-function convertPageMapToAst(pageMap: PageMapItem[]): ArrayExpression {
+function convertPageMapToAst(
+  pageMap: PageMapItem[],
+  imports: Import[]
+): ArrayExpression {
   const elements = pageMap.map(item => {
     if ('children' in item) {
       return createAstObject({
         name: item.name,
         route: item.route,
-        children: convertPageMapToAst(item.children)
+        children: convertPageMapToAst(item.children, imports)
       })
     }
     if ('route' in item) {
+      // @ts-expect-error
+      const pagePath = item.__pagePath
+      let name = ''
+
+      if (pagePath) {
+        name = cleanFileName(pagePath)
+        imports.push({ importName: name, filePath: pagePath })
+      }
       return createAstObject({
         name: item.name,
         route: item.route,
-        frontMatter: valueToEstree(item.frontMatter)
+        ...(name && { frontMatter: { type: 'Identifier', name } })
       })
     }
+    // @ts-expect-error
+    const name = cleanFileName(item.__metaPath)
+    // @ts-expect-error
+    imports.push({ importName: name, filePath: item.__metaPath })
     return createAstObject({
-      // @ts-expect-error -- item.data is string
-      data: { type: 'Identifier', name: item.data }
+      data: { type: 'Identifier', name }
     })
   })
 
@@ -205,82 +219,108 @@ function convertPageMapToAst(pageMap: PageMapItem[]): ArrayExpression {
 }
 
 export async function collectPageMap({
-  dir,
-  route = '/',
   locale = '',
-  transformPageMap
+  pageMap,
+  mdxPages,
+  fromAppDir
 }: {
-  dir: string
-  route?: string
   locale?: string
-  transformPageMap?: NextraConfig['transformPageMap']
+  pageMap: PageMapItem[]
+  mdxPages: Record<string, string>
+  fromAppDir: boolean
 }): Promise<string> {
-  const { pageMap, imports, dynamicMetaImports } = await collectFiles({
-    dir,
-    route,
-    isFollowingSymlink: false
-  })
-
+  const someImports: Import[] = []
   const pageMapAst = convertPageMapToAst(
-    transformPageMap ? transformPageMap(pageMap, locale) : pageMap
+    pageMap,
+    someImports
+    // transformPageMap ? transformPageMap(pageMap, locale) : pageMap
   )
 
-  const metaImportsAST: ImportDeclaration[] = imports
+  /*
+   * Use relative path instead of absolute, because it's fails on Windows
+   * https://github.com/nodejs/node/issues/31710
+   */
+  function getImportPath(filePaths: string[]) {
+    return slash(
+      path.relative(
+        CHUNKS_DIR,
+        fromAppDir
+          ? path.join(APP_DIR, ...filePaths)
+          : path.join(process.cwd(), 'mdx', ...filePaths)
+      )
+    )
+  }
+
+  const metaImportsAST: ImportDeclaration[] = someImports
     // localeCompare to avoid race condition
     .sort((a, b) => a.filePath.localeCompare(b.filePath))
     .map(({ filePath, importName }) => ({
       type: 'ImportDeclaration',
-      source: { type: 'Literal', value: getImportPath(filePath) },
+      source: {
+        type: 'Literal',
+        value: getImportPath(locale ? [locale, filePath] : [filePath])
+      },
       specifiers: [
         {
           local: { type: 'Identifier', name: importName },
-          ...(IMPORT_FRONTMATTER && MARKDOWN_EXTENSION_REGEX.test(filePath)
-            ? {
+          ...(META_REGEX.test(filePath)
+            ? { type: 'ImportDefaultSpecifier' }
+            : {
                 type: 'ImportSpecifier',
-                imported: { type: 'Identifier', name: 'frontMatter' }
-              }
-            : { type: 'ImportDefaultSpecifier' })
+                imported: { type: 'Identifier', name: 'metadata' }
+              })
         }
       ]
     }))
 
   const body: Parameters<typeof toJs>[0]['body'] = [
     ...metaImportsAST,
-    createAstExportConst('pageMap', pageMapAst)
-  ]
-  let footer = ''
-
-  if (dynamicMetaImports.length) {
-    body.push({
+    {
       type: 'VariableDeclaration',
       kind: 'const',
       declarations: [
         {
           type: 'VariableDeclarator',
-          id: { type: 'Identifier', name: 'dynamicMetaModules' },
-          init: {
-            type: 'ObjectExpression',
-            properties: dynamicMetaImports
-              // localeCompare to avoid race condition
-              .sort((a, b) => a.route.localeCompare(b.route))
-              .map(({ importName, route }) => ({
-                ...DEFAULT_PROPERTY_PROPS,
-                key: { type: 'Literal', value: route },
-                value: { type: 'Identifier', name: importName }
-              }))
-          }
+          id: { type: 'Identifier', name: '_pageMap' },
+          init: pageMapAst
         }
       ]
-    })
+    }
+  ]
 
-    footer = `
-import { resolvePageMap } from 'nextra/page-map-dynamic'
+  // let footer = ''
 
-if (typeof window === 'undefined') {
-  globalThis.__nextra_resolvePageMap ||= Object.create(null)
-  globalThis.__nextra_resolvePageMap['${locale}'] = resolvePageMap('${locale}', dynamicMetaModules)
-}`
-  }
+  // if (dynamicMetaImports.length) {
+  //   body.push({
+  //     type: 'VariableDeclaration',
+  //     kind: 'const',
+  //     declarations: [
+  //       {
+  //         type: 'VariableDeclarator',
+  //         id: { type: 'Identifier', name: 'dynamicMetaModules' },
+  //         init: {
+  //           type: 'ObjectExpression',
+  //           properties: dynamicMetaImports
+  //             // localeCompare to avoid race condition
+  //             .sort((a, b) => a.route.localeCompare(b.route))
+  //             .map(({ importName, route }) => ({
+  //               ...DEFAULT_PROPERTY_PROPS,
+  //               key: { type: 'Literal', value: route },
+  //               value: { type: 'Identifier', name: importName }
+  //             }))
+  //         }
+  //       }
+  //     ]
+  //   })
+
+  //     footer = `
+  // import { resolvePageMap } from 'nextra/page-map-dynamic'
+  //
+  // if (typeof window === 'undefined') {
+  //   globalThis.__nextra_resolvePageMap ||= Object.create(null)
+  //   globalThis.__nextra_resolvePageMap['${locale}'] = resolvePageMap('${locale}', dynamicMetaModules)
+  // }`
+  //   }
 
   const result = toJs({
     type: 'Program',
@@ -288,5 +328,10 @@ if (typeof window === 'undefined') {
     body
   })
 
-  return `${result.value}${footer}`.trim()
+  return `import { normalizePageMap } from 'nextra/page-map'
+${result.value}
+  
+export const pageMap = normalizePageMap(_pageMap)
+
+export const RouteToFilepath = ${JSON.stringify(mdxPages, null, 2)}`
 }

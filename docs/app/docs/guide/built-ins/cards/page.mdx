@@ -1,0 +1,46 @@
+export const metadata = {
+  sidebarTitle: 'Cards'
+}
+
+import { CardsIcon, OneIcon, WarningIcon } from '@components/icons'
+import { useMDXComponents } from 'nextra-theme-docs'
+import { compileMdx } from 'nextra/compile'
+import { Cards, RemoteContent } from 'nextra/components'
+
+# Cards Component
+
+export async function CardsPage() {
+  const mdx = `
+<Cards>
+  <Cards.Card
+    icon={<WarningIcon />}
+    title="Callout"
+    href="/docs/guide/built-ins/callout"
+  />
+  <Cards.Card
+    icon={<CardsIcon />}
+    title="Tabs"
+    href="/docs/guide/built-ins/tabs"
+  />
+  <Cards.Card
+    icon={<OneIcon />}
+    title="Steps"
+    href="/docs/guide/built-ins/steps"
+  />
+</Cards>`
+  const { result } = await compileMdx(`
+## Example
+${mdx}
+
+## Usage
+
+~~~mdx filename="MDX"
+import { Cards } from 'nextra/components'
+import { CardsIcon, OneIcon, WarningIcon } from '../../icons'
+${mdx}
+~~~`)
+  const components = useMDXComponents({ Cards, CardsIcon, OneIcon, WarningIcon })
+  return <RemoteContent compiledSource={result} components={components}  />
+}
+
+<CardsPage />
