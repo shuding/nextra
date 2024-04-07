@@ -81,7 +81,7 @@ export default async function RootLayout({
           }
           navbar={
             <Navbar
-              logo={<NextraLogo className="nextra-logo" />}
+              logo={<NextraLogo className="nextra-logo h-5" />}
               projectLink="https://github.com/shuding/nextra"
             />
           }
