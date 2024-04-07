@@ -82,7 +82,7 @@ const classes = {
   ),
   bottomMenu: cn(
     'nextra-sidebar-footer _sticky _bottom-0',
-    '_flex _items-center _gap-2 _mx-4 _py-4',
+    '_flex _items-center _gap-2 _mx-4 _py-4'
   )
 }
 

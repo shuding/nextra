@@ -5,7 +5,7 @@ export {
   Navbar,
   Layout,
   Footer,
-  useTheme,
   Head
 } from './components'
 export * from './types'
+export { useTheme } from 'next-themes'

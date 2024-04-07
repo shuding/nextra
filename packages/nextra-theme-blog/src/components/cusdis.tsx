@@ -1,11 +1,11 @@
 'use client'
 
+import { useTheme } from 'next-themes'
 import { usePathname } from 'next/navigation'
 import { useMounted } from 'nextra/hooks'
 import type { ReactElement } from 'react'
 import { useEffect } from 'react'
 import { ReactCusdis } from 'react-cusdis'
-import { useTheme } from './next-themes'
 
 export function Comments({
   appId,

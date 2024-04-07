@@ -1,5 +1,5 @@
+import { ThemeProvider } from 'next-themes'
 import type { ReactElement, ReactNode } from 'react'
-import { ThemeProvider } from './next-themes'
 import '../style.css'
 
 export function Footer({

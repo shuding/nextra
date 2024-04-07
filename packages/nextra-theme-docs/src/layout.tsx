@@ -1,13 +1,12 @@
+import { ThemeProvider } from 'next-themes'
 import type { NextraThemeLayoutProps } from 'nextra'
-import type { ReactElement, ReactNode } from 'react'
+import type { ComponentProps, ReactElement, ReactNode } from 'react'
 import { isValidElement } from 'react'
 import { Flexsearch, Footer, MobileNav, Navbar } from './components'
-import type { ThemeProviderProps } from './contexts'
 import {
   ActiveAnchorProvider,
   ConfigProvider,
-  ThemeConfigProvider,
-  ThemeProvider
+  ThemeConfigProvider
 } from './contexts'
 import type { DocsThemeConfig } from './contexts/theme-config'
 import './style.css'
@@ -55,6 +54,8 @@ const DEEP_OBJECT_KEYS = Object.entries(DEFAULT_THEME)
     }
   })
   .filter(Boolean)
+
+type ThemeProviderProps = Omit<ComponentProps<typeof ThemeProvider>, 'children'>
 
 export function Layout({
   children,
