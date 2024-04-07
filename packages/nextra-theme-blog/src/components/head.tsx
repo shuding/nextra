@@ -12,6 +12,7 @@ export function Head({
   }
 }) {
   return (
+    // eslint-disable-next-line @next/next/no-head-element -- ignore since we use app router
     <head>
       <style>
         {`:root{--nextra-bg:${bgColor.light};}.dark{--nextra-bg:${bgColor.dark};}`}
