@@ -1,0 +1,107 @@
+# Custom Font Support
+
+If you want to add custom fonts in your project, you can use Next.js' font library. 
+Firstly, lets create a module named fonts.tsx to load our fonts, like this:
+
+```tsx filename="alet/fonts.tsx"
+import { Amiri, Figtree } from 'next/font/google'
+ 
+export const fontAmiri = Amiri({ 
+    subsets: ['arabic'],
+    display: 'swap',
+    adjustFontFallback: false,
+    style: ['normal'],
+    weight:  [ "400", "700" ],
+    variable: '--font-amiri',
+})
+
+export const fontFigtree = Figtree({ 
+    subsets: ['latin'],
+    display: 'swap',
+    adjustFontFallback: false,
+    style: ['normal'],
+    weight:  [ "400", "700" ],
+    variable: '--font-figtree',
+})
+```
+
+We will use variable field to reference these fonts, like this:
+
+```css filename="_app.tsx"
+import type { AppProps } from "next/app";
+import { fontFigtree, fontAmiri } from "@/alet/fonts";
+import "@/bediiyyet/globals.css";
+
+// This default export is required in a new `pages/_app.js` file.
+export default function Tatbiki({ Component, pageProps }: AppProps) {
+  return (
+    <div
+      className={`${fontFigtree.variable} ${fontAmiri.variable}`}
+    >
+      <Component {...pageProps} />
+    </div>
+  );
+}
+```
+
+## CSS Module
+
+Inside our globals.css file:
+
+```css filename="bediiyyet/globals.css"
+html {
+  font-family: var(--font-figtree);
+}
+
+kadimElifba {
+  font-family: var(--font-amiri);
+  font-size: 1.7rem;
+}
+```
+
+Figtree will be applied globally, and any tags with class kadimElifba will be styled with Amiri.
+
+We can define font variables in tailwind.config.ts then reference them like any other Tailwind CSS classname:
+
+## Tailwind CSS
+
+```css filename="tailwind.config.ts"
+import type { Config } from "tailwindcss";
+
+const config: Config = {
+  content: [
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/unsurlar/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
+  theme: {
+    fontFamily: {
+      amiri: ["var(--font-amiri)"],
+      figtree: ["var(--font-figtree)"],
+    },
+  },
+  plugins: [],
+};
+export default config;
+```
+
+```css filename="_app.tsx"
+import type { AppProps } from "next/app";
+import { fontFigtree, fontAmiri } from "@/alet/fonts";
+import "@/bediiyyet/globals.css";
+
+// This default export is required in a new `pages/_app.js` file.
+export default function Tatbiki({ Component, pageProps }: AppProps) {
+  return (
+    <div
+      className={`${fontFigtree.variable} ${fontAmiri.variable} font-figtree`}
+    >
+      <Component {...pageProps} />
+    </div>
+  );
+}
+```
+
+To learn more about custom font support in Next.js, check out the
+[Next.js Pages Router - Fonts](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts)
+[Next.js App Router - Fonts](https://nextjs.org/docs/app/building-your-application/optimizing/fonts)
