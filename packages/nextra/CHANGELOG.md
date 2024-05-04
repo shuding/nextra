@@ -1,5 +1,13 @@
 # nextra
 
+## 3.0.0-alpha.24
+
+### Patch Changes
+
+- 6f4c83a8: fix unclickable links in TOC
+
+  allow passing `recmaPlugins` in `mdxOptions`
+
 ## 3.0.0-alpha.23
 
 ### Minor Changes
