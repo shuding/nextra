@@ -46,7 +46,7 @@ function NavbarMenu({
         className={cn(
           classes.link,
           classes.inactive,
-          'max-md:_hidden _items-center _whitespace-nowrap _rounded _flex _gap-1'
+          'max-md:_hidden _items-center _whitespace-nowrap _rounded _flex _gap-1 nextra-focusable'
         )}
       >
         {children}
@@ -91,7 +91,7 @@ export function Navbar({ items }: NavBarProps): ReactElement {
   return (
     <div className="nextra-nav-container _sticky _top-0 _z-20 _w-full _bg-transparent print:_hidden">
       <div className="nextra-nav-container-blur" />
-      <nav className="_mx-auto _flex _h-[var(--nextra-navbar-height)] _max-w-[90rem] _items-center _justify-end _gap-4 _pl-[max(env(safe-area-inset-left),1.5rem)] _pr-[max(env(safe-area-inset-right),1.5rem)]">
+      <nav className="_mx-auto _flex _h-[var(--nextra-navbar-height)] _max-w-[90rem] _items-center _justify-end _gap-4 _pl-[max(env(safe-area-inset-left),1.5rem)] _pr-[max(env(safe-area-inset-right),1.5rem)] nextra-landmark">
         {themeConfig.logoLink ? (
           <NextLink
             href={
@@ -175,7 +175,7 @@ export function Navbar({ items }: NavBarProps): ReactElement {
         <button
           type="button"
           aria-label="Menu"
-          className="nextra-hamburger _rounded active:_bg-gray-400/20 md:_hidden"
+          className="nextra-hamburger _rounded active:_bg-gray-400/20 md:_hidden nextra-focusable"
           onClick={() => setMenu(!menu)}
         >
           <MenuIcon className={cn({ open: menu })} />

@@ -22,19 +22,18 @@ body {
   @apply _w-full dark:_text-gray-100;
 }
 
-a,
-summary,
-button,
-input,
-[tabindex]:not([tabindex='-1']) {
+.nextra-focusable,
+.nextra-landmark a,
+.nextra-landmark button,
+.nextra-landmark input {
+  @apply _outline-none;
   &:focus-visible {
     @apply _outline-none;
     @apply _ring-2 _ring-primary-200 _ring-offset-1 _ring-offset-primary-300 dark:_ring-primary-800 dark:_ring-offset-primary-700;
   }
 }
 
-a,
-summary {
+.nextra-landmark a {
   @apply _rounded;
 }
 
@@ -82,7 +81,7 @@ summary {
 }
 
 @media (prefers-reduced-motion: reduce) and (max-width: 767px) {
-  article:before,
+  article::before,
   .nextra-sidebar-container,
   .nextra-sidebar-container.open,
   body.resizing .nextra-sidebar-container {
@@ -91,7 +90,7 @@ summary {
 }
 
 /* Content Typography */
-summary::-webkit-details-marker {
+.nextra-summary::-webkit-details-marker {
   @apply _hidden;
 }
 
