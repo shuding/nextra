@@ -102,6 +102,7 @@ export const nextraConfigSchema = z
     mdxOptions: z.strictObject({
       rehypePlugins: z.custom<ProcessorOptions['rehypePlugins']>(),
       remarkPlugins: z.custom<ProcessorOptions['remarkPlugins']>(),
+      recmaPlugins: z.custom<ProcessorOptions['recmaPlugins']>(),
       format: z.enum(['detect', 'mdx', 'md']),
       rehypePrettyCodeOptions: z.custom<RehypePrettyCodeOptions>()
     })
