@@ -20,10 +20,10 @@ export default function Meta(): ReactElement {
           nx-bg-gray-200
           nx-px-1
           nx-text-sm
-          nx-text-gray-400
+          nx-text-gray-600
           nx-transition-colors
           hover:nx-bg-gray-300
-          hover:nx-text-gray-500
+          hover:nx-text-gray-700
           dark:nx-bg-gray-600
           dark:nx-text-gray-300
           dark:hover:nx-bg-gray-700
