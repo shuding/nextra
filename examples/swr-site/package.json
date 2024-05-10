@@ -16,7 +16,7 @@
     "intersection-observer": "^0.10.0",
     "isomorphic-git": "1.21.0",
     "markdown-to-jsx": "^6.11.4",
-    "next": "^13.5.6",
+    "next": "^14.1.1",
     "nextra": "workspace:*",
     "nextra-theme-docs": "workspace:*",
     "react": "^18.2.0",
