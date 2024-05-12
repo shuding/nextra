@@ -118,6 +118,7 @@ export const pageThemeSchema = z.strictObject({
   navbar: z.boolean(),
   pagination: z.boolean(),
   sidebar: z.boolean(),
+  topLevelLink: z.boolean(),
   timestamp: z.boolean(),
   toc: z.boolean(),
   typesetting: z.enum(['default', 'article']),
