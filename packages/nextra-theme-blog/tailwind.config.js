@@ -16,6 +16,7 @@ module.exports = {
         dark: {
           css: {
             color: theme('colors.gray[300]'),
+            'li::marker': { color: theme('colors.gray[300]') },
             '[class~="lead"]': { color: theme('colors.gray[400]') },
             a: { color: theme('colors.gray[100]') },
             strong: { color: theme('colors.gray[100]') },
