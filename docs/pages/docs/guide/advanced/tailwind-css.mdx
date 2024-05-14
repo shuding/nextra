@@ -24,3 +24,26 @@ module.exports = {
   plugins: []
 }
 ```
+
+Next step, create a CSS file for Tailwind directives, `globals.css` for example:
+
+```css filename=globals.css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+Then import into `pages/_app.{jsx,tsx}`
+
+```tsx filename=_app.tsx
+import React from "react"
+
+import "../path/to/your/globals.css"
+
+// This default export is required in a new `pages/_app.tsx` file.
+export default function App({ Component, pageProps }) {
+  return <Component {...pageProps} />
+}
+```
+
+You might need to restart dev server to see the change.
