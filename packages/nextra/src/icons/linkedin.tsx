@@ -1,6 +1,6 @@
 import type { ComponentProps, ReactElement } from 'react'
 
-export function Linkedin(props: ComponentProps<'svg'>): ReactElement {
+export function LinkedinIcon(props: ComponentProps<'svg'>): ReactElement {
   return (
     <svg xmlns="http://www.w3.org/2000/svg"
          width="20"
