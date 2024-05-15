@@ -27,7 +27,7 @@ module.exports = {
 
 Next step, create a CSS file for Tailwind directives, `globals.css` for example:
 
-```css filename="globals.css" /md,mdx/
+```css filename="globals.css"
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -35,7 +35,7 @@ Next step, create a CSS file for Tailwind directives, `globals.css` for example:
 
 Then import into `pages/_app.{jsx,tsx}`
 
-```tsx filename="_app.tsx" /md,mdx/
+```tsx filename="_app.tsx"
 import React from "react"
 
 import "../path/to/your/globals.css"
