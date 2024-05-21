@@ -351,7 +351,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     backToTopLabel: 'Scroll to top',
     component: TOC,
     float: true,
-    title: 'On This Page',
+    title: 'On This Page'
   },
   useNextSeoProps: () => ({ titleTemplate: '%s – Nextra' })
 }
