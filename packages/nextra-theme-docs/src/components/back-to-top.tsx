@@ -2,6 +2,8 @@ import cn from 'clsx'
 import { ArrowRightIcon } from 'nextra/icons'
 import type { ReactElement } from 'react'
 import { useEffect, useRef } from 'react'
+import { useConfig } from '../contexts'
+import { renderString } from '../utils'
 
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -9,6 +11,7 @@ function scrollToTop() {
 
 export function BackToTop({ className }: { className?: string }): ReactElement {
   const ref = useRef<HTMLButtonElement>(null)
+  const config = useConfig()
   useEffect(() => {
     function toggleVisible() {
       const { scrollTop } = document.documentElement
@@ -31,7 +34,7 @@ export function BackToTop({ className }: { className?: string }): ReactElement {
         className
       )}
     >
-      Scroll to top
+      {renderString(config.toc.scrollToTop)}
       <ArrowRightIcon className="-nx-rotate-90 nx-w-3.5 nx-h-3.5 nx-border nx-rounded-full nx-border-current" />
     </button>
   )
