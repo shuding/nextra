@@ -8,7 +8,7 @@ const classes = {
     '_not-prose' // for nextra-theme-blog
   ),
   card: cn(
-    'nextra-card _group _flex _flex-col _justify-start _overflow-hidden _rounded-lg _border _border-gray-200',
+    'nextra-card _group _flex _flex-col _justify-center _overflow-hidden _rounded-lg _border _border-gray-200',
     '_text-current _no-underline dark:_shadow-none',
     'hover:_shadow-gray-100 dark:hover:_shadow-none _shadow-gray-100',
     'active:_shadow-sm active:_shadow-gray-200',
