@@ -404,6 +404,22 @@ to learn how to add custom menus or links to the navbar.
   ]}
 />
 
+<Callout type="info">
+  When using a custom search component, make sure to pass on the `className` prop to the root element of the component to ensure proper responsiveness for mobile devices.
+  ```tsx filename="theme.config.jsx"
+  export default {
+    search: {
+      component: ({ className }) => (
+        <div className={className}>
+          <CustomSearch type="text" placeholder="Search..." />
+        </div>
+      )
+    }
+  }
+  
+  ```
+</Callout>
+
 ### Banner
 
 Show a banner on the top of the website. It can be used to show a warning or a
