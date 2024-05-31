@@ -24,13 +24,15 @@ npm i nextra-theme-docs
 
 ### Create the following Next.js config and theme config under the root directory:
 
-```jsx filename="next.config.js"
-const withNextra = require('nextra')({
+```jsx filename="next.config.mjs"
+import nextra from 'nextra'
+
+const withNextra = nextra({
   theme: 'nextra-theme-blog',
   themeConfig: './theme.config.js'
   // optional: add `staticImage: true` to enable Nextra's auto image import
 })
-module.exports = withNextra()
+export default withNextra()
 ```
 
 ```jsx filename="theme.config.js"

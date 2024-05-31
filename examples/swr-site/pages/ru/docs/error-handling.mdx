@@ -1,0 +1,117 @@
+import { Callout } from 'nextra/components'
+
+# Обработка ошибок
+
+Если ошибка возникает внутри [`fetcher`-а](/docs/data-fetching), она будет
+возвращена хуком как `error`.
+
+```js
+const fetcher = url => fetch(url).then(r => r.json())
+
+// ...
+const { data, error } = useSWR('/api/user', fetcher)
+```
+
+Объект `error` будет определен, если промис выборки будет отклонён.
+
+## Статус код и Объект ошибки
+
+Иногда мы хотим, чтобы API возвращал объект ошибки вместе со статус кодом. Оба
+они полезны для клиента.
+
+Мы можем настроить наш `fetcher`, чтобы он возвращал больше информации. Если
+статус код не `2xx`, мы считаем это ошибкой, даже если он может быть
+проанализирован как JSON:
+
+```js
+const fetcher = async url => {
+  const res = await fetch(url)
+
+  // Если статус код не в диапазоне 200-299,
+  // мы все равно пытаемся его разобрать и выбросить.
+  if (!res.ok) {
+    const error = new Error('An error occurred while fetching the data.')
+    // Добавление дополнительной информации в объект ошибки.
+    error.info = await res.json()
+    error.status = res.status
+    throw error
+  }
+
+  return res.json()
+}
+
+// ...
+const { data, error } = useSWR('/api/user', fetcher)
+// error.info === {
+//   message: "У вас нет прав доступа к этому ресурсу.",
+//   documentation_url: "..."
+// }
+// error.status === 403
+```
+
+<Callout>
+  Обратите внимание, что `data` и `error` могут существовать одновременно. Таким
+  образом, пользовательский интерфейс может отображать существующие данные,
+  зная, что предстоящий запрос потерпел неудачу.
+</Callout>
+
+[Здесь](/examples/error-handling) у нас есть пример.
+
+## Повтор при ошибке
+
+SWR использует
+[алгоритм экспоненциальной выдержки](https://ru.wikipedia.org/wiki/Экспоненциальная_выдержка)
+для повторной попытки запроса в случае ошибки. Алгоритм позволяет приложению
+быстро восстанавливаться после ошибок, но не тратить ресурсы на повторные
+попытки слишком часто.
+
+Вы также можете изменить это поведение с помощью опции
+[onErrorRetry](/docs/options#опции):
+
+```js
+useSWR('/api/user', fetcher, {
+  onErrorRetry: (error, key, config, revalidate, { retryCount }) => {
+    // Никогда не повторяйте попытку при 404.
+    if (error.status === 404) return
+
+    // Никогда не повторяйте попытку при конкретном ключе.
+    if (key === '/api/user') return
+
+    // Повторить попытку до 10 раз.
+    if (retryCount >= 10) return
+
+    // Повторить попытку через 5 секунд.
+    setTimeout(() => revalidate({ retryCount }), 5000)
+  }
+})
+```
+
+Этот колбэк дает вам возможность повторить попытку в зависимости от различных
+условий. Вы также можете отключить его, установив `shouldRetryOnError: false`.
+
+Также возможно предоставить его через контекст
+[Глобальной конфигурации](/docs/global-configuration).
+
+## Отчёт о глобальной ошибке
+
+Вы всегда можете реактивно получить объект `error` внутри компонента. Но в
+случае, если вы хотите обработать ошибку глобально, чтобы уведомить UI, чтобы
+показать [toast](https://vercel.com/design/toast) или
+[snackbar](https://material.io/components/snackbars), или сообщить об этом
+куда-нибудь, например в [Sentry](https://sentry.io), есть событие
+[`onError`](/docs/options#опции):
+
+```jsx
+<SWRConfig
+  value={{
+    onError: (error, key) => {
+      if (error.status !== 403 && error.status !== 404) {
+        // Мы можем отправить ошибку в Sentry,
+        // или показать уведомление в UI.
+      }
+    }
+  }}
+>
+  <MyApp />
+</SWRConfig>
+```

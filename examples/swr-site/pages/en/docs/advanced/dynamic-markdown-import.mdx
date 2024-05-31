@@ -1,0 +1,22 @@
+# Dynamic Markdown Import!
+
+import dynamic from 'next/dynamic'
+import { useState } from 'react'
+
+export function Renderer() {
+  const [pageOne, setPageOne] = useState(true)
+  const Page = dynamic(() => {
+    if (pageOne) {
+      return import('./more/tree/one.mdx')
+    }
+    return import('./more/tree/two.mdx')
+  })
+  return (
+    <>
+      <Page />
+      <button onClick={() => setPageOne(!pageOne)}>Toggle Content</button>
+    </>
+  )
+}
+
+<Renderer />
