@@ -4,7 +4,9 @@ import { useFSRoute } from 'nextra/hooks'
 import { ArrowRightIcon, MenuIcon } from 'nextra/icons'
 import type { Item, MenuItem, PageItem } from 'nextra/normalize-pages'
 import type { ReactElement, ReactNode } from 'react'
+import { useEffect, useRef } from 'react'
 import { useConfig, useMenu } from '../contexts'
+import { useNavOverflow } from '../contexts/nav-overflow'
 import { renderComponent } from '../utils'
 import { Anchor } from './anchor'
 
@@ -82,6 +84,35 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
   const config = useConfig()
   const activeRoute = useFSRoute()
   const { menu, setMenu } = useMenu()
+  const { navOverflow, setNavOverflow } = useNavOverflow()
+
+  const navbarRef = useRef(null) // Ref for the navbar container
+  const itemsContainerRef = useRef(null) // Ref for the direct container of the items
+
+  console.log({ navOverflow })
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (navbarRef.current && itemsContainerRef.current) {
+        // @ts-ignore
+        const navbarWidth = navbarRef.current.offsetWidth
+        // @ts-ignore
+        const itemsWidth = itemsContainerRef.current.offsetWidth
+        const availableSpace = navbarWidth * 0.9
+
+        const isOverflowed = itemsWidth >= availableSpace
+
+        // console.log({ itemsWidth, navbarWidth, availableSpace, isOverflowed })
+
+        setNavOverflow(isOverflowed)
+      }
+    }
+
+    handleResize()
+    window.addEventListener('resize', handleResize)
+
+    return () => window.removeEventListener('resize', handleResize)
+  }, [items, setNavOverflow])
 
   return (
     <div className="nextra-nav-container nx-sticky nx-top-0 nx-z-20 nx-w-full nx-bg-transparent print:nx-hidden">
@@ -106,61 +137,76 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
             {renderComponent(config.logo)}
           </div>
         )}
-        {items.map(pageOrMenu => {
-          if (pageOrMenu.display === 'hidden') return null
 
-          if (pageOrMenu.type === 'menu') {
-            const menu = pageOrMenu as MenuItem
-            return (
-              <NavbarMenu
-                key={menu.title}
-                className={cn(
-                  classes.link,
-                  'nx-flex nx-gap-1',
-                  classes.inactive
-                )}
-                menu={menu}
-              >
-                {menu.title}
-                <ArrowRightIcon
-                  className="nx-h-[18px] nx-min-w-[18px] nx-rounded-sm nx-p-0.5"
-                  pathClassName="nx-origin-center nx-transition-transform nx-rotate-90"
-                />
-              </NavbarMenu>
-            )
+        <div
+          ref={navbarRef}
+          className={
+            navOverflow ? 'nx-hidden' : 'nx-flex nx-justify-end nx-w-full'
           }
-          const page = pageOrMenu as PageItem
-          let href = page.href || page.route || '#'
+        >
+          <div ref={itemsContainerRef} className="nx-flex nx-items-center">
+            {items.map(pageOrMenu => {
+              if (pageOrMenu.display === 'hidden') return null
 
-          // If it's a directory
-          if (page.children) {
-            href =
-              (page.withIndexPage ? page.route : page.firstChildRoute) || href
-          }
+              if (pageOrMenu.type === 'menu') {
+                const menu = pageOrMenu as MenuItem
+                return (
+                  <NavbarMenu
+                    key={menu.title}
+                    className={cn(
+                      classes.link,
+                      'nx-flex nx-gap-1',
+                      classes.inactive
+                    )}
+                    menu={menu}
+                  >
+                    {menu.title}
+                    <ArrowRightIcon
+                      className="nx-h-[18px] nx-min-w-[18px] nx-rounded-sm nx-p-0.5"
+                      pathClassName="nx-origin-center nx-transition-transform nx-rotate-90"
+                    />
+                  </NavbarMenu>
+                )
+              }
+              const page = pageOrMenu as PageItem
+              let href = page.href || page.route || '#'
 
-          const isActive =
-            page.route === activeRoute ||
-            activeRoute.startsWith(page.route + '/')
+              // If it's a directory
+              if (page.children) {
+                href =
+                  (page.withIndexPage ? page.route : page.firstChildRoute) ||
+                  href
+              }
 
-          return (
-            <Anchor
-              href={href}
-              key={href}
-              className={cn(
-                classes.link,
-                'nx-relative -nx-ml-2 nx-hidden nx-whitespace-nowrap nx-p-2 md:nx-inline-block',
-                !isActive || page.newWindow ? classes.inactive : classes.active
-              )}
-              newWindow={page.newWindow}
-              aria-current={!page.newWindow && isActive}
-            >
-              <span className="nx-absolute nx-inset-x-0 nx-text-center">
-                {page.title}
-              </span>
-              <span className="nx-invisible nx-font-medium">{page.title}</span>
-            </Anchor>
-          )
-        })}
+              const isActive =
+                page.route === activeRoute ||
+                activeRoute.startsWith(page.route + '/')
+
+              return (
+                <Anchor
+                  href={href}
+                  key={href}
+                  className={cn(
+                    classes.link,
+                    'nx-relative -nx-ml-2 nx-hidden nx-whitespace-nowrap nx-p-2 md:nx-inline-block',
+                    !isActive || page.newWindow
+                      ? classes.inactive
+                      : classes.active
+                  )}
+                  newWindow={page.newWindow}
+                  aria-current={!page.newWindow && isActive}
+                >
+                  <span className="nx-absolute nx-inset-x-0 nx-text-center">
+                    {page.title}
+                  </span>
+                  <span className="nx-invisible nx-font-medium">
+                    {page.title}
+                  </span>
+                </Anchor>
+              )
+            })}
+          </div>
+        </div>
 
         {renderComponent(config.search.component, {
           directories: flatDirectories,
