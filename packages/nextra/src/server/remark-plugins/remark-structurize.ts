@@ -1,6 +1,9 @@
 import type { Root } from 'mdast'
 import type { Plugin } from 'unified'
 import type { Search, StructurizedData } from '../../types'
+import { HProperties } from './remark-custom-heading-id'
+
+type RootContent = Root['children'][number]
 
 const CODE_TABLE_QUOTE_LIST = new Set<string>([
   'code',
@@ -37,7 +40,7 @@ export const remarkStructurize: Plugin<[Search], Root> = options => {
     }
   }
 
-  function walk(node: any): string {
+  function walk(node: RootContent | Root): string {
     let result = ''
     const { type } = node
 
@@ -56,10 +59,18 @@ export const remarkStructurize: Plugin<[Search], Root> = options => {
       }
     } else if (
       (opts.codeblocks && type === 'code') ||
-      ['text', 'inlineCode', 'tableCell'].includes(type)
+      type === 'text' ||
+      type === 'inlineCode' ||
+      type === 'tableCell'
     ) {
-      result += node.value
-      if (!skip) content += node.value
+      // Because of markdown extensions, inline code may have a `{:type}` suffix.
+      // Trim this off if it exists.
+      const value =
+        type === 'inlineCode'
+          ? node.value.replace(/\s*\{:\w+\}$/, '')
+          : node.value
+      result += value
+      if (!skip) content += value
     }
 
     if (
@@ -78,7 +89,8 @@ export const remarkStructurize: Plugin<[Search], Root> = options => {
       if (node.depth > 1) {
         save()
         content = '' // reset content after h1 content
-        activeSlug = node.data.hProperties.id + '#' + result
+        const hProperties = node.data!.hProperties as HProperties
+        activeSlug = hProperties.id + '#' + result
       }
     }
     return result
