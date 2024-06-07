@@ -1,7 +1,7 @@
 import type { Root } from 'mdast'
 import type { Plugin } from 'unified'
 import type { Search, StructurizedData } from '../../types'
-import { HProperties } from './remark-custom-heading-id'
+import type { HProperties } from './remark-custom-heading-id'
 
 type RootContent = Root['children'][number]
 
