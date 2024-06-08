@@ -65,9 +65,7 @@ export const remarkStructurize: Plugin<[Search], Root> = options => {
     ) {
       // Inline code may have an `{:language}` suffix, trim this off if it exists.
       const value =
-        type === 'inlineCode'
-          ? node.value.replace(/\{:\w+\}$/, '')
-          : node.value
+        type === 'inlineCode' ? node.value.replace(/\{:\w+\}$/, '') : node.value
       result += value
       if (!skip) content += value
     }
