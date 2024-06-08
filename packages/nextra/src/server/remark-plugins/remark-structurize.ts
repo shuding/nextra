@@ -63,11 +63,10 @@ export const remarkStructurize: Plugin<[Search], Root> = options => {
       type === 'inlineCode' ||
       type === 'tableCell'
     ) {
-      // Because of markdown extensions, inline code may have a `{:type}` suffix.
-      // Trim this off if it exists.
+      // Inline code may have an `{:language}` suffix, trim this off if it exists.
       const value =
         type === 'inlineCode'
-          ? node.value.replace(/\s*\{:\w+\}$/, '')
+          ? node.value.replace(/\{:\w+\}$/, '')
           : node.value
       result += value
       if (!skip) content += value
