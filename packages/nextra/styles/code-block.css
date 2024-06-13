@@ -25,7 +25,7 @@ pre code:not([class*='twoslash-']) {
     &::before {
       counter-increment: line;
       content: counter(line);
-      @apply _float-left _pr-4 _text-right _min-w-[2.6rem] _text-gray-500;
+      @apply _inline-block _pr-4 _text-right _min-w-[2.6rem] _text-gray-500;
     }
   }
 
