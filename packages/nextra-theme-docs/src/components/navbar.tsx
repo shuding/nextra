@@ -88,6 +88,8 @@ export function Navbar({ items }: NavBarProps): ReactElement {
   const activeRoute = useFSRoute()
   const { menu, setMenu } = useMenu()
 
+  const { visibilityCheck } = themeConfig.menuItems
+
   return (
     <div className="nextra-nav-container _sticky _top-0 _z-20 _w-full _bg-transparent print:_hidden">
       <div className="nextra-nav-container-blur" />
@@ -109,6 +111,10 @@ export function Navbar({ items }: NavBarProps): ReactElement {
           </div>
         )}
         {items.map(pageOrMenu => {
+          if (visibilityCheck && !visibilityCheck(pageOrMenu)) {
+            return null
+          }
+
           if (pageOrMenu.display === 'hidden') return null
 
           if (pageOrMenu.type === 'menu') {
