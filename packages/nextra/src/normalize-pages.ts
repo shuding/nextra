@@ -247,7 +247,7 @@ export function normalizePages({
     if (key !== '*') {
       items.push({
         name: key,
-        route: '#',
+        route: meta[key]['href'], // updating --More section's route
         ...meta[key]
       })
     }
