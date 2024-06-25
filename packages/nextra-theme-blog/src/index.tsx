@@ -1,4 +1,4 @@
-import { ThemeProvider } from 'next-themes'
+import { ThemeSwitcher } from 'nextjs-themes'
 import type { NextraThemeLayoutProps } from 'nextra'
 import type { ReactElement, ReactNode } from 'react'
 import { ArticleLayout } from './article-layout'
@@ -41,15 +41,16 @@ export default function Layout({
   const extendedConfig = { ...DEFAULT_THEME, ...context.themeConfig }
 
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+    <>
+      <ThemeSwitcher />
       <BlogLayout config={extendedConfig} opts={context.pageOpts}>
         {children}
       </BlogLayout>
-    </ThemeProvider>
+    </>
   )
 }
 
-export { useTheme } from 'next-themes'
+export { useTheme } from 'nextjs-themes'
 export { useBlogContext } from './blog-context'
 export { getStaticTags } from './utils/get-tags'
 export * from './types'
