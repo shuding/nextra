@@ -262,7 +262,7 @@ export {
   Card,
   FileTree
 } from 'nextra/components'
-export { useTheme } from 'next-themes'
+export { useTheme } from 'nextjs-themes'
 export { Link } from './mdx-components'
 export {
   Bleed,

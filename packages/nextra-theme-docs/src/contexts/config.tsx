@@ -1,4 +1,4 @@
-import { ThemeProvider } from 'next-themes'
+import { ThemeSwitcher } from 'nextjs-themes'
 import type { FrontMatter, PageMapItem, PageOpts } from 'nextra'
 import { metaSchema } from 'nextra/normalize-pages'
 import type { ReactElement, ReactNode } from 'react'
@@ -108,19 +108,14 @@ export const ConfigProvider = ({
     frontMatter: pageOpts.frontMatter
   }
 
-  const { nextThemes } = extendedConfig
+  const { nextThemes: nextjsThemes } = extendedConfig
 
   return (
-    <ThemeProvider
-      attribute="class"
-      disableTransitionOnChange
-      defaultTheme={nextThemes.defaultTheme}
-      storageKey={nextThemes.storageKey}
-      forcedTheme={nextThemes.forcedTheme}
-    >
+    <>
+      <ThemeSwitcher {...nextjsThemes} />
       <ConfigContext.Provider value={extendedConfig}>
         <MenuProvider value={{ menu, setMenu }}>{children}</MenuProvider>
       </ConfigContext.Provider>
-    </ThemeProvider>
+    </>
   )
 }
