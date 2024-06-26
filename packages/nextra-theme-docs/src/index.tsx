@@ -102,7 +102,9 @@ export {
   SkipNavContent,
   SkipNavLink,
   ThemeSwitch,
-  LocaleSwitch
+  LocaleSwitch,
+  TOC,
+  Sidebar
 } from './components'
 
 export { useMenu } from './contexts'

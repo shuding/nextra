@@ -3,6 +3,7 @@ import type { FC, ReactNode } from 'react'
 import { z } from 'zod'
 import type { NavBarProps } from './components/navbar'
 import type { TOCProps } from './components/toc'
+import type { SideBarProps } from './components/sidebar';
 
 const i18nSchema = /* @__PURE__ */ (() =>
   z.array(
@@ -113,6 +114,7 @@ export const themeSchema = /* @__PURE__ */ (() =>
       placeholder: z.string().or(z.function().returns(z.string()))
     }),
     sidebar: z.strictObject({
+      component: z.custom<ReactNode | FC<SideBarProps>>(...reactNode),
       autoCollapse: z.boolean().optional(),
       defaultMenuCollapseLevel: z.number().min(1).int(),
       toggleButton: z.boolean()

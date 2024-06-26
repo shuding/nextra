@@ -8,6 +8,7 @@ import {
   Flexsearch,
   Footer,
   Navbar,
+  Sidebar,
   ThemeSwitch,
   TOC
 } from './components'
@@ -182,6 +183,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     }
   },
   sidebar: {
+    component: Sidebar,
     defaultMenuCollapseLevel: 2,
     toggleButton: true
   },

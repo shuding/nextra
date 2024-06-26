@@ -306,7 +306,7 @@ function Menu({
   )
 }
 
-interface SideBarProps {
+export type SideBarProps = {
   docsDirectories: PageItem[]
   fullDirectories: Item[]
   asPopover?: boolean

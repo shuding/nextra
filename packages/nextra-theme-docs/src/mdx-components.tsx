@@ -26,6 +26,7 @@ import type { DocsThemeConfig } from './constants'
 import { useConfig, useSetActiveAnchor, useThemeConfig } from './contexts'
 import { useIntersectionObserver, useSlugs } from './contexts/active-anchor'
 import { renderComponent } from './utils'
+import { SideBarProps } from './components/sidebar';
 
 // Anchor links
 const createHeading = (
@@ -348,6 +349,15 @@ const DEFAULT_COMPONENTS: MDXComponents = {
           })}
         </nav>
       )
+
+    const sidebarProps: SideBarProps = {
+      docsDirectories: docsDirectories,
+      fullDirectories: directories,
+      toc: toc,
+      asPopover: config.hideSidebar,
+      includePlaceholder: themeContext.layout === 'default'
+    }
+
     return (
       <div
         className={cn(
@@ -355,13 +365,11 @@ const DEFAULT_COMPONENTS: MDXComponents = {
           themeContext.layout !== 'raw' && '_max-w-[90rem]'
         )}
       >
-        <Sidebar
-          docsDirectories={docsDirectories}
-          fullDirectories={directories}
-          toc={toc}
-          asPopover={config.hideSidebar}
-          includePlaceholder={themeContext.layout === 'default'}
-        />
+        {
+          themeConfig.sidebar.component
+            ? renderComponent(themeConfig.sidebar.component, sidebarProps)
+            : <Sidebar {...sidebarProps}/>
+        }
         {tocEl}
         <SkipNavContent />
         <Body>{children}</Body>
