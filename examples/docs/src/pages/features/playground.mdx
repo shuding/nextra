@@ -1,0 +1,59 @@
+import { Playground } from 'nextra/components'
+
+# Playground
+
+<Playground 
+  fallback={<div>Loading playground component...</div>} 
+  source={`
+## Description
+
+Playground components allow you to write Nextra compatible MDX that renders only
+on the client. It's modeled after the functionality found in
+[MDX Playground](https://mdxjs.com/playground/).
+
+In some instances where remote loading MDX is not an option, this may work as a
+great alternative.
+
+Here's an example of a codeblock.
+
+\`\`\`ts console.log("Hello world, this is a playground component!"); \`\`\`
+
+## Caveats
+
+Due to the purely client-side nature of this component, there are some features
+(namely several remark plugins) that will not work due to their dependence on
+\`'path'\` which is only available in a server-side context. Here are some
+examples below:
+
+<br />
+
+- [x] Table of Contents
+- [x] Frontmatter
+- [x] Mermaid.js
+
+For more information, see \`compileMdxClient.ts\`.
+
+`} />
+
+## Usage
+
+```mdx
+import { Playground } from 'nextra/components'
+
+# Playground
+
+Below is a playground component. It mixes into the rest of your MDX perfectly.
+
+<Playground source={`## Hello world`} />
+```
+
+You may also specify a fallback component like so
+
+```mdx
+import { Playground } from 'nextra/components'
+
+<Playground
+  source={`## Hello world`}
+  fallback={<div>Loading playground...</div>}
+/>
+```
