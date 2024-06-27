@@ -3,5 +3,6 @@ export default {
   'get-started': 'Get Started',
   features: 'Features',
   themes: 'Themes',
-  advanced: 'Advanced'
+  advanced: 'Advanced',
+  playground: 'Playground'
 }
