@@ -134,7 +134,7 @@ function Details({
 
   return (
     <details
-      className="_my-4 _rounded _border _border-gray-200 _bg-white _p-2 _shadow-sm first:_mt-0 dark:_border-neutral-800 dark:_bg-neutral-900"
+      className="[&:not(:first-child)]:_mt-4 _rounded _border _border-gray-200 _bg-white _p-2 _shadow-sm dark:_border-neutral-800 dark:_bg-neutral-900"
       {...props}
       open={delayedOpenState}
       data-expanded={openState ? '' : undefined}
@@ -281,13 +281,13 @@ const DEFAULT_COMPONENTS: MDXComponents = {
   ),
   ul: props => (
     <ul
-      className="_mt-6 _list-disc first:_mt-0 ltr:_ml-6 rtl:_mr-6"
+      className="[:is(ol,ul)_&]:_my-3 [&:not(:first-child)]:_mt-6 _list-disc ltr:_ml-6 rtl:_mr-6"
       {...props}
     />
   ),
   ol: props => (
     <ol
-      className="_mt-6 _list-decimal first:_mt-0 ltr:_ml-6 rtl:_mr-6"
+      className="[:is(ol,ul)_&]:_my-3 [&:not(:first-child)]:_mt-6 _list-decimal ltr:_ml-6 rtl:_mr-6"
       {...props}
     />
   ),
@@ -295,8 +295,8 @@ const DEFAULT_COMPONENTS: MDXComponents = {
   blockquote: props => (
     <blockquote
       className={cn(
-        '_mt-6 _border-gray-300 _italic _text-gray-700 dark:_border-gray-700 dark:_text-gray-400',
-        'first:_mt-0 ltr:_border-l-2 ltr:_pl-6 rtl:_border-r-2 rtl:_pr-6'
+        '[&:not(:first-child)]:_mt-6 _border-gray-300 _italic _text-gray-700 dark:_border-gray-700 dark:_text-gray-400',
+        'ltr:_border-l-2 ltr:_pl-6 rtl:_border-r-2 rtl:_pr-6'
       )}
       {...props}
     />
@@ -309,9 +309,14 @@ const DEFAULT_COMPONENTS: MDXComponents = {
   ),
   a: Link,
   table: props => (
-    <Table className="nextra-scrollbar _mt-6 _p-0 first:_mt-0" {...props} />
+    <Table
+      className="nextra-scrollbar [&:not(:first-child)]:_mt-6 _p-0"
+      {...props}
+    />
   ),
-  p: props => <p className="_mt-6 _leading-7 first:_mt-0" {...props} />,
+  p: props => (
+    <p className="[&:not(:first-child)]:_mt-6 _leading-7" {...props} />
+  ),
   tr: Tr,
   th: Th,
   td: Td,
