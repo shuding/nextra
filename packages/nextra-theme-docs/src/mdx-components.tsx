@@ -309,9 +309,14 @@ const DEFAULT_COMPONENTS: MDXComponents = {
   ),
   a: Link,
   table: props => (
-    <Table className="nextra-scrollbar [&:not(:first-child)]:_mt-6 _p-0" {...props} />
+    <Table
+      className="nextra-scrollbar [&:not(:first-child)]:_mt-6 _p-0"
+      {...props}
+    />
   ),
-  p: props => <p className="[&:not(:first-child)]:_mt-6 _leading-7" {...props} />,
+  p: props => (
+    <p className="[&:not(:first-child)]:_mt-6 _leading-7" {...props} />
+  ),
   tr: Tr,
   th: Th,
   td: Td,
