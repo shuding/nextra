@@ -1,5 +1,7 @@
 # nextra
 
+## 3.0.0-alpha.25
+
 ## 3.0.0-alpha.24
 
 ### Patch Changes

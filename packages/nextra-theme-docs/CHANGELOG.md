@@ -1,5 +1,13 @@
 # nextra-theme-docs
 
+## 3.0.0-alpha.25
+
+### Patch Changes
+
+- de565078: fix vertical margin for nested ordered `<ol />` and unordered
+  `<ul />` lists
+  - nextra@3.0.0-alpha.25
+
 ## 3.0.0-alpha.24
 
 ### Patch Changes
