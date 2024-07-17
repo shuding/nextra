@@ -1,18 +1,20 @@
 import cn from 'clsx'
 import { ArrowRightIcon } from 'nextra/icons'
 import type { ReactElement } from 'react'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
 export function BackToTop({ className }: { className?: string }): ReactElement {
+  const [visible, setVisible] = useState(false)
   const ref = useRef<HTMLButtonElement>(null)
+
   useEffect(() => {
     function toggleVisible() {
       const { scrollTop } = document.documentElement
-      ref.current?.classList.toggle('_opacity-0', scrollTop < 300)
+      setVisible(scrollTop > 300)
     }
 
     window.addEventListener('scroll', toggleVisible)
@@ -26,10 +28,10 @@ export function BackToTop({ className }: { className?: string }): ReactElement {
       aria-hidden="true"
       ref={ref}
       onClick={scrollToTop}
-      className={cn(
-        '_flex _items-center _gap-1.5 _transition _opacity-0',
-        className
-      )}
+      className={cn('_flex _items-center _gap-1.5 _transition', className, {
+        '_opacity-100': visible,
+        '_opacity-0': !visible
+      })}
     >
       Scroll to top
       <ArrowRightIcon className="_-rotate-90 _size-4 _border _rounded-full _border-current" />
