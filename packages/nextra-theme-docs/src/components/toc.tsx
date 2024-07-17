@@ -35,7 +35,6 @@ export function TOC({ toc, filePath }: TOCProps): ReactElement {
   const activeSlug = Object.entries(activeAnchor).find(
     ([, { isActive }]) => isActive
   )?.[0]
-  const activeIndex = toc.findIndex(({ id }) => id === activeSlug)
 
   useEffect(() => {
     if (!activeSlug) return
@@ -117,9 +116,7 @@ export function TOC({ toc, filePath }: TOCProps): ReactElement {
 
           {renderComponent(themeConfig.toc.extraContent)}
 
-          {themeConfig.toc.backToTop && (
-           <BackToTop className={linkClassName} />
-          )}
+          {themeConfig.toc.backToTop && <BackToTop className={linkClassName} />}
         </div>
       )}
     </div>
