@@ -118,7 +118,7 @@ export function TOC({ toc, filePath }: TOCProps): ReactElement {
           {renderComponent(themeConfig.toc.extraContent)}
 
           {themeConfig.toc.backToTop && (
-            <BackToTop className={linkClassName} hidden={activeIndex < 2} />
+            <BackToTop className={linkClassName} />
           )}
         </div>
       )}
