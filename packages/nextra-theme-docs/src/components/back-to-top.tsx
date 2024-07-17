@@ -26,6 +26,7 @@ export function BackToTop({ className }: { className?: string }): ReactElement {
   return (
     <button
       aria-hidden="true"
+      disabled={!visible}
       ref={ref}
       onClick={scrollToTop}
       className={cn('_flex _items-center _gap-1.5 _transition', className, {
