@@ -27,7 +27,7 @@ export function BackToTop({ className }: { className?: string }): ReactElement {
       ref={ref}
       onClick={scrollToTop}
       className={cn(
-        '_flex _items-center _gap-1.5 _transition _opacity-100 disabled:_opacity-0',
+        '_flex _items-center _gap-1.5 _transition _opacity-0',
         className
       )}
     >
