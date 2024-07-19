@@ -1,9 +1,20 @@
 import cn from 'clsx'
 import { ArrowRightIcon } from 'nextra/icons'
-import type { ReactElement } from 'react'
+import type { ComponentProps, ReactElement } from 'react'
 
-function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: 'smooth' })
+const SCROLL_TO_OPTIONS = { top: 0, behavior: 'smooth' } as const
+
+const scrollToTop: ComponentProps<'button'>['onClick'] = event => {
+  const buttonElement = event.target as HTMLButtonElement
+  const tocElement = buttonElement.parentElement!
+    .parentElement as HTMLDivElement
+
+  window.scrollTo(SCROLL_TO_OPTIONS)
+  tocElement.scrollTo(SCROLL_TO_OPTIONS)
+
+  // Fixes https://github.com/facebook/react/issues/20770
+  // Fixes https://github.com/shuding/nextra/issues/2917
+  buttonElement.disabled = true
 }
 
 export function BackToTop({
