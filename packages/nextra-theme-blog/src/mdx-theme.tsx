@@ -12,9 +12,8 @@ import {
 import { createPortal } from 'react-dom'
 import { useBlogContext } from './blog-context'
 
-export const HeadingContext = createContext<
-  RefObject<HTMLHeadingElement | null>
->(createRef())
+export const HeadingContext =
+  createContext<RefObject<HTMLHeadingElement | null>>(createRef())
 
 const H1 = ({ children }: { children?: ReactNode }): ReactElement => {
   const ref = useContext(HeadingContext)
