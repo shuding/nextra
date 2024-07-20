@@ -5,7 +5,12 @@ import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 import { useMounted } from 'nextra/hooks'
 import { InformationCircleIcon, SpinnerIcon } from 'nextra/icons'
-import type { CompositionEvent, KeyboardEvent, ReactElement } from 'react'
+import type {
+  CompositionEvent,
+  FocusEventHandler,
+  KeyboardEvent,
+  ReactElement
+} from 'react'
 import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
 import { useMenu, useThemeConfig } from '../contexts'
 import type { SearchResult } from '../types'
@@ -17,7 +22,7 @@ type SearchProps = {
   overlayClassName?: string
   value: string
   onChange: (newValue: string) => void
-  onActive?: (active: boolean) => void
+  onActive?: () => void
   loading?: boolean
   error?: boolean
   results: SearchResult[]
@@ -193,6 +198,18 @@ export function Search({
     []
   )
 
+  const handleFocus = useCallback<FocusEventHandler>(
+    event => {
+      const isFocus = event.type === 'focus'
+      const htmlStyle = document.documentElement.style
+      // Fixes page scroll jump https://github.com/shuding/nextra/issues/2840
+      htmlStyle.scrollPaddingTop = isFocus ? '0' : 'var(--nextra-navbar-height)'
+      if (isFocus) onActive?.()
+      setFocused(isFocus)
+    },
+    [onActive]
+  )
+
   return (
     <div className={cn('nextra-search _relative md:_w-64', className)}>
       {renderList && (
@@ -207,13 +224,8 @@ export function Search({
           onChange(value)
           setShow(Boolean(value))
         }}
-        onFocus={() => {
-          onActive?.(true)
-          setFocused(true)
-        }}
-        onBlur={() => {
-          setFocused(false)
-        }}
+        onFocus={handleFocus}
+        onBlur={handleFocus}
         onCompositionStart={handleComposition}
         onCompositionEnd={handleComposition}
         type="search"

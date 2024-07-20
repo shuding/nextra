@@ -1,5 +1,25 @@
 # nextra-theme-docs
 
+## 3.0.0-alpha.26
+
+### Patch Changes
+
+- 376b8954: fixes case when setting `disabled: true` on the scroll to top button
+  prevents scrolling to most top
+
+  scroll to most top in toc element too
+
+- 7b0b7e98: fix page scroll jump while entering characters in the search input
+  - nextra@3.0.0-alpha.26
+
+## 3.0.0-alpha.25
+
+### Patch Changes
+
+- de565078: fix vertical margin for nested ordered `<ol />` and unordered
+  `<ul />` lists
+  - nextra@3.0.0-alpha.25
+
 ## 3.0.0-alpha.24
 
 ### Patch Changes

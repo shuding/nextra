@@ -1,6 +1,6 @@
 {
   "name": "nextra-theme-blog",
-  "version": "3.0.0-alpha.24",
+  "version": "3.0.0-alpha.26",
   "description": "A Nextra theme for blogs.",
   "repository": "https://github.com/shuding/nextra",
   "author": "Shu Ding <g@shud.in>",
@@ -68,7 +68,7 @@
     "@types/react": "^18.2.23",
     "@types/react-dom": "^18.2.8",
     "concurrently": "^8.2.1",
-    "next": "^13.5.3",
+    "next": "^14.2.5",
     "nextra": "workspace:*",
     "postcss": "^8.4.33",
     "postcss-cli": "^10.1.0",

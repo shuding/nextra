@@ -62,6 +62,8 @@ module.exports = {
         'prefer-const': ['error', { destructuring: 'all' }],
         'unicorn/prefer-array-index-of': 'error',
         'sonarjs/no-unused-collection': 'error',
+        'unicorn/catch-error-name': 'error',
+        'unicorn/prefer-optional-catch-binding': 'error',
         // todo: enable
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-non-null-assertion': 'off',
