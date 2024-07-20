@@ -48,7 +48,7 @@
   "pnpm": {
     "overrides": {
       "esbuild": "^0.19.3",
-      "next": "13.5.6"
+      "next": "14.2.5"
     },
     "patchedDependencies": {
       "@changesets/assemble-release-plan@5.2.4": "patches/@changesets__assemble-release-plan@5.2.4.patch",
