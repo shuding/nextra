@@ -131,7 +131,7 @@ importers:
         version: 18.2.55
       autoprefixer:
         specifier: ^10.4.16
-        version: 10.4.17(postcss@8.4.35)
+        version: 10.4.19(postcss@8.4.35)
       postcss:
         specifier: ^8.4.33
         version: 8.4.35
@@ -146,7 +146,7 @@ importers:
         version: 14.2.5(@babel/core@7.24.3)(react-dom@18.2.0)(react@18.2.0)
       nextra:
         specifier: workspace:*
-        version: file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3)
+        version: file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.2.0)(react@18.2.0)(typescript@5.5.3)
       nextra-theme-blog:
         specifier: workspace:*
         version: file:packages/nextra-theme-blog(next@14.2.5)(nextra@3.0.0-alpha.27)(react-dom@18.2.0)(react@18.2.0)
@@ -169,7 +169,7 @@ importers:
         version: 14.2.5(@babel/core@7.24.3)(react-dom@18.2.0)(react@18.2.0)
       nextra:
         specifier: workspace:*
-        version: file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3)
+        version: file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.2.0)(react@18.2.0)(typescript@5.5.3)
       nextra-theme-docs:
         specifier: workspace:*
         version: file:packages/nextra-theme-docs(next@14.2.5)(nextra@3.0.0-alpha.27)(react-dom@18.2.0)(react@18.2.0)
@@ -201,7 +201,7 @@ importers:
         version: 14.2.5(@babel/core@7.24.3)(react-dom@18.2.0)(react@18.2.0)
       nextra:
         specifier: workspace:*
-        version: file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3)
+        version: file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.2.0)(react@18.2.0)(typescript@5.5.3)
       nextra-theme-docs:
         specifier: workspace:*
         version: file:packages/nextra-theme-docs(next@14.2.5)(nextra@3.0.0-alpha.27)(react-dom@18.2.0)(react@18.2.0)
@@ -220,7 +220,7 @@ importers:
         version: 13.5.6
       autoprefixer:
         specifier: ^10.4.16
-        version: 10.4.17(postcss@8.4.35)
+        version: 10.4.19(postcss@8.4.35)
       postcss:
         specifier: ^8.4.33
         version: 8.4.35
@@ -249,7 +249,7 @@ importers:
         version: 0.1.9
       '@shikijs/twoslash':
         specifier: ^1.0.0
-        version: 1.1.2(typescript@5.3.3)
+        version: 1.1.2(typescript@5.5.3)
       '@theguild/remark-mermaid':
         specifier: ^0.0.5
         version: 0.0.5(react@18.2.0)
@@ -4953,11 +4953,11 @@ packages:
     resolution: {integrity: sha512-ERVzNQz88ZkDqUpWeC57Kp+Kmx5RjqeDBR1M8AGWGom4yrkITiTfXCGmjchlDSw12MhDTuPYR4HVFW8uT61RaQ==}
     dev: false
 
-  /@shikijs/twoslash@1.1.2(typescript@5.3.3):
+  /@shikijs/twoslash@1.1.2(typescript@5.5.3):
     resolution: {integrity: sha512-Jt8QAudENcCS7cgxjbXMpUCA7IAOy1kot+Qo5yyyLl9VwVKvZMW0BDrrigbOia8602X2Z76U6XEs9UXyD6LnsQ==}
     dependencies:
       '@shikijs/core': 1.1.2
-      twoslash: 0.2.2(typescript@5.3.3)
+      twoslash: 0.2.2(typescript@5.5.3)
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -6273,18 +6273,18 @@ packages:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}
     dev: true
 
-  /autoprefixer@10.4.17(postcss@8.4.35):
-    resolution: {integrity: sha512-/cpVNRLSfhOtcGflT13P2794gVSgmPgTR+erw5ifnMLZb0UnSlkK4tquLmkd3BhA+nLo5tX8Cu0upUsGKvKbmg==}
+  /autoprefixer@10.4.19(postcss@8.4.35):
+    resolution: {integrity: sha512-BaENR2+zBZ8xXhM4pUaKUxlVdxZ0EZhjvbopwnXmxRUfqDmwSpC2lAi/QXvx7NRdPCo1WKEcEF6mV64si1z4Ew==}
     engines: {node: ^10 || ^12 || >=14}
     hasBin: true
     peerDependencies:
       postcss: ^8.1.0
     dependencies:
-      browserslist: 4.22.2
-      caniuse-lite: 1.0.30001578
+      browserslist: 4.23.2
+      caniuse-lite: 1.0.30001642
       fraction.js: 4.3.7
       normalize-range: 0.1.2
-      picocolors: 1.0.0
+      picocolors: 1.0.1
       postcss: 8.4.35
       postcss-value-parser: 4.2.0
     dev: true
@@ -6480,8 +6480,8 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001642
-      electron-to-chromium: 1.4.831
-      node-releases: 2.0.14
+      electron-to-chromium: 1.4.832
+      node-releases: 2.0.17
       update-browserslist-db: 1.1.0(browserslist@4.23.2)
 
   /buffer-from@1.1.2:
@@ -7588,8 +7588,8 @@ packages:
     resolution: {integrity: sha512-iu/2D0zolKU3iDGXXxdOzNf72Jnokn+K1IN6Kk4iV6l1Tr2g/qy+mvmtfAiBwZe5S3aB5r92vp+zSZ69scYRrg==}
     dev: true
 
-  /electron-to-chromium@1.4.831:
-    resolution: {integrity: sha512-6cKy9msoQGWhBF30n6y5ck80BdunKdwMRugM1lr74DMMXhjDRxSwMvrD1ncPP+n1PjF+KKmZZydvEF29skNZ1Q==}
+  /electron-to-chromium@1.4.832:
+    resolution: {integrity: sha512-cTen3SB0H2SGU7x467NRe1eVcQgcuS6jckKfWJHia2eo0cHIGOqHoAxevIYZD4eRHcWjkvFzo93bi3vJ9W+1lA==}
 
   /elkjs@0.8.2:
     resolution: {integrity: sha512-L6uRgvZTH+4OF5NE/MBbzQx/WYpru1xCBE9respNj6qznEewGUIfhzmm7horWWxbNO2M0WckQypGctR8lH79xQ==}
@@ -11336,6 +11336,10 @@ packages:
 
   /node-releases@2.0.14:
     resolution: {integrity: sha512-y10wOWt8yZpqXmOgRo77WaHEmhYQYGNA6y421PKsKYWEK8aW+cqAphborZDhqfyKrbZEN92CN1X2KbafY2s7Yw==}
+    dev: true
+
+  /node-releases@2.0.17:
+    resolution: {integrity: sha512-Ww6ZlOiEQfPfXM45v17oabk77Z7mg5bOt7AjDyzy7RjK9OrLrLC8dyZQoAPEOtFX9SaNf1Tdvr5gRJWdTJj7GA==}
 
   /non-layered-tidy-tree-layout@2.0.2:
     resolution: {integrity: sha512-gkXMxRzUH+PB0ax9dUN0yYF0S25BqeAYqhgMaLUFmpXLEk7Fcu8f4emJuOAY0V8kjDICxROIKsTAKsV/v355xw==}
@@ -13858,14 +13862,14 @@ packages:
     resolution: {integrity: sha512-vwmMzoVkRk9yOElqn1xzCGwnv4rpfWHGtD177NkGc+A6KK5JhZtmugyW/T96g+Fwx2JrZB67FhAvdU5ptsXrUQ==}
     dev: false
 
-  /twoslash@0.2.2(typescript@5.3.3):
+  /twoslash@0.2.2(typescript@5.5.3):
     resolution: {integrity: sha512-34VeMQiwiC6Jn2fSxo39z0BtINrOAeYb9WRfEQyW47cgMjw4NUuM3ym5qwL0g4xFoocuH1fKXlSl96EE2DghVQ==}
     peerDependencies:
       typescript: '*'
     dependencies:
       '@typescript/vfs': 1.5.0
       twoslash-protocol: 0.2.2
-      typescript: 5.3.3
+      typescript: 5.5.3
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -13983,6 +13987,13 @@ packages:
     resolution: {integrity: sha512-pXWcraxM0uxAS+tN0AG/BF2TyqmHO014Z070UsJ+pFvYuRSq8KH8DmWpnbXe0pEPDHXZV3FcAbJkijJ5oNEnWw==}
     engines: {node: '>=14.17'}
     hasBin: true
+    dev: true
+
+  /typescript@5.5.3:
+    resolution: {integrity: sha512-/hreyEujaB0w76zKo6717l3L0o/qEUtRgdvUBvlkhoWeOVMjMuHNHk0BRBzikzuGDqNmPQbg5ifMEqsHLiIUcQ==}
+    engines: {node: '>=14.17'}
+    hasBin: true
+    dev: false
 
   /unbox-primitive@1.0.2:
     resolution: {integrity: sha512-61pPlCD9h51VoreyJ0BReideM3MDKMKnh6+V9L08331ipq6Q8OFXZYiqP6n/tbHx4s5I9uRhcye6BrbkizkBDw==}
@@ -14203,8 +14214,8 @@ packages:
       browserslist: '>= 4.21.0'
     dependencies:
       browserslist: 4.22.2
-      escalade: 3.1.1
-      picocolors: 1.0.0
+      escalade: 3.1.2
+      picocolors: 1.0.1
     dev: true
 
   /update-browserslist-db@1.1.0(browserslist@4.23.2):
@@ -14842,7 +14853,7 @@ packages:
     resolution: {integrity: sha512-JZxotl7SxAJH0j7dN4pxsTV6ZLXoLdGME+PsjkL/DaBrVryK9kTGq06GfKrwcSOqypP+fdXGoCHE36b99fWVoA==}
     dev: false
 
-  file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3):
+  file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.2.0)(react@18.2.0)(typescript@5.5.3):
     resolution: {directory: packages/nextra, type: directory}
     id: file:packages/nextra
     name: nextra
@@ -14856,7 +14867,7 @@ packages:
       '@mdx-js/mdx': 3.0.1
       '@mdx-js/react': 3.0.1(@types/react@18.3.3)(react@18.2.0)
       '@napi-rs/simple-git': 0.1.9
-      '@shikijs/twoslash': 1.1.2(typescript@5.3.3)
+      '@shikijs/twoslash': 1.1.2(typescript@5.5.3)
       '@theguild/remark-mermaid': 0.0.5(react@18.2.0)
       '@theguild/remark-npm2yarn': 0.3.0
       better-react-mathjax: 2.0.3(react@18.2.0)
@@ -14910,7 +14921,7 @@ packages:
     dependencies:
       next: 14.2.5(@babel/core@7.24.3)(react-dom@18.2.0)(react@18.2.0)
       next-themes: 0.3.0(react-dom@18.2.0)(react@18.2.0)
-      nextra: file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3)
+      nextra: file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.2.0)(react@18.2.0)(typescript@5.5.3)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
@@ -14934,7 +14945,7 @@ packages:
       intersection-observer: 0.12.2
       next: 14.2.5(@babel/core@7.24.3)(react-dom@18.2.0)(react@18.2.0)
       next-themes: 0.3.0(react-dom@18.2.0)(react@18.2.0)
-      nextra: file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3)
+      nextra: file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.2.0)(react@18.2.0)(typescript@5.5.3)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       scroll-into-view-if-needed: 3.1.0
