@@ -71,7 +71,7 @@
     "next": "^14.2.5",
     "nextra": "workspace:*",
     "postcss": "^8.4.33",
-    "postcss-cli": "^10.1.0",
+    "postcss-cli": "^11.0.0",
     "postcss-import": "^16.0.0",
     "postcss-lightningcss": "^1.0.0",
     "react": "^18.2.0",
