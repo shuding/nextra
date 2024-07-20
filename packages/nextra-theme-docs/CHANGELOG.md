@@ -5,11 +5,14 @@
 ### Patch Changes
 
 - 4f0f6b27: Omit `...{:type}` inline code annotations from search index #2922
-- e95faa16: - fixed `<summary />` lost whitespaces when there is some HTML element inside
+- e95faa16: - fixed `<summary />` lost whitespaces when there is some HTML
+  element inside
 
-  - fixed hydration errors and `<summary />` was not rendered when `<details />` text content follows directly after `<summary />` element
+  - fixed hydration errors and `<summary />` was not rendered when `<details />`
+    text content follows directly after `<summary />` element
 
-- a95e7454: Fix the line highlighting background-color does not extend to the full width of the code block when a scrollbar appears with line numbers.
+- a95e7454: Fix the line highlighting background-color does not extend to the
+  full width of the code block when a scrollbar appears with line numbers.
 - Updated dependencies [4f0f6b27]
 - Updated dependencies [a95e7454]
   - nextra@3.0.0-alpha.27
@@ -584,19 +587,19 @@
   and `nextra-theme-docs`
 
   ```js
-  import { Card, Cards } from "nextra/components";
+  import { Card, Cards } from 'nextra/components'
   ```
 
   ```js
-  import { Tab, Tabs } from "nextra/components";
+  import { Tab, Tabs } from 'nextra/components'
   ```
 
   ```js
-  import { Steps } from "nextra/components";
+  import { Steps } from 'nextra/components'
   ```
 
   ```js
-  import { FileTree } from "nextra/components";
+  import { FileTree } from 'nextra/components'
   ```
 
 ### Patch Changes
@@ -1172,14 +1175,14 @@
 - 582ad96: feat: bump `rehype-pretty-code` version, support `showLineNumbers`
 - da998e6: move react components to `components` folder and replace exports:
   ```ts
-  import Bleed from "nextra-theme-docs/bleed";
-  import Callout from "nextra-theme-docs/callout";
-  import Collapse from "nextra-theme-docs/collapse";
-  import { Tab, Tabs } from "nextra-theme-docs/tabs";
+  import Bleed from 'nextra-theme-docs/bleed'
+  import Callout from 'nextra-theme-docs/callout'
+  import Collapse from 'nextra-theme-docs/collapse'
+  import { Tab, Tabs } from 'nextra-theme-docs/tabs'
   ```
   by
   ```ts
-  import { Bleed, Callout, Collapse, Tab, Tabs } from "nextra-theme-docs";
+  import { Bleed, Callout, Collapse, Tab, Tabs } from 'nextra-theme-docs'
   ```
 - e6771ca: move `withLayout` logic directly in nextra loader
 - 8ad9507: fix unable expanding folder items in sidebar
@@ -1499,14 +1502,14 @@
 - 48e0ac2: export `useConfig` and `useTheme`
 - da998e6: move react components to `components` folder and replace exports:
   ```ts
-  import Bleed from "nextra-theme-docs/bleed";
-  import Callout from "nextra-theme-docs/callout";
-  import Collapse from "nextra-theme-docs/collapse";
-  import { Tab, Tabs } from "nextra-theme-docs/tabs";
+  import Bleed from 'nextra-theme-docs/bleed'
+  import Callout from 'nextra-theme-docs/callout'
+  import Collapse from 'nextra-theme-docs/collapse'
+  import { Tab, Tabs } from 'nextra-theme-docs/tabs'
   ```
   by
   ```ts
-  import { Bleed, Callout, Collapse, Tab, Tabs } from "nextra-theme-docs";
+  import { Bleed, Callout, Collapse, Tab, Tabs } from 'nextra-theme-docs'
   ```
 - 43409ad: fix: mdx theme is missing
 
