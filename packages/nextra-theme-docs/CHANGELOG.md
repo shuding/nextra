@@ -1,5 +1,16 @@
 # nextra-theme-docs
 
+## 3.0.0-alpha.26
+
+### Patch Changes
+
+- 376b8954: fixes case when setting `disabled: true` on the scroll to top button prevents scrolling to most top
+
+  scroll to most top in toc element too
+
+- 7b0b7e98: fix page scroll jump while entering characters in the search input
+  - nextra@3.0.0-alpha.26
+
 ## 3.0.0-alpha.25
 
 ### Patch Changes
@@ -558,19 +569,19 @@
   and `nextra-theme-docs`
 
   ```js
-  import { Card, Cards } from 'nextra/components'
+  import { Card, Cards } from "nextra/components";
   ```
 
   ```js
-  import { Tab, Tabs } from 'nextra/components'
+  import { Tab, Tabs } from "nextra/components";
   ```
 
   ```js
-  import { Steps } from 'nextra/components'
+  import { Steps } from "nextra/components";
   ```
 
   ```js
-  import { FileTree } from 'nextra/components'
+  import { FileTree } from "nextra/components";
   ```
 
 ### Patch Changes
@@ -1146,14 +1157,14 @@
 - 582ad96: feat: bump `rehype-pretty-code` version, support `showLineNumbers`
 - da998e6: move react components to `components` folder and replace exports:
   ```ts
-  import Bleed from 'nextra-theme-docs/bleed'
-  import Callout from 'nextra-theme-docs/callout'
-  import Collapse from 'nextra-theme-docs/collapse'
-  import { Tab, Tabs } from 'nextra-theme-docs/tabs'
+  import Bleed from "nextra-theme-docs/bleed";
+  import Callout from "nextra-theme-docs/callout";
+  import Collapse from "nextra-theme-docs/collapse";
+  import { Tab, Tabs } from "nextra-theme-docs/tabs";
   ```
   by
   ```ts
-  import { Bleed, Callout, Collapse, Tab, Tabs } from 'nextra-theme-docs'
+  import { Bleed, Callout, Collapse, Tab, Tabs } from "nextra-theme-docs";
   ```
 - e6771ca: move `withLayout` logic directly in nextra loader
 - 8ad9507: fix unable expanding folder items in sidebar
@@ -1473,14 +1484,14 @@
 - 48e0ac2: export `useConfig` and `useTheme`
 - da998e6: move react components to `components` folder and replace exports:
   ```ts
-  import Bleed from 'nextra-theme-docs/bleed'
-  import Callout from 'nextra-theme-docs/callout'
-  import Collapse from 'nextra-theme-docs/collapse'
-  import { Tab, Tabs } from 'nextra-theme-docs/tabs'
+  import Bleed from "nextra-theme-docs/bleed";
+  import Callout from "nextra-theme-docs/callout";
+  import Collapse from "nextra-theme-docs/collapse";
+  import { Tab, Tabs } from "nextra-theme-docs/tabs";
   ```
   by
   ```ts
-  import { Bleed, Callout, Collapse, Tab, Tabs } from 'nextra-theme-docs'
+  import { Bleed, Callout, Collapse, Tab, Tabs } from "nextra-theme-docs";
   ```
 - 43409ad: fix: mdx theme is missing
 
