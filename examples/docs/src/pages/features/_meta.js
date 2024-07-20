@@ -4,6 +4,5 @@ export default {
   i18n: 'Next.js i18n',
   image: 'Next.js Image',
   themes: 'Themes',
-  latex: 'LaTeX',
-  search: 'Search'
+  latex: 'LaTeX'
 }
