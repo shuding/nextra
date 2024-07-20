@@ -141,7 +141,7 @@
     "remark-gfm": "^4.0.0",
     "remark-math": "^6.0.0",
     "remark-reading-time": "^2.0.1",
-    "remark-smartypants": "^2.1.0",
+    "remark-smartypants": "^3.0.0",
     "shiki": "^1.0.0",
     "slash": "^5.1.0",
     "title": "^3.5.3",
