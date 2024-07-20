@@ -101,54 +101,41 @@ function Details({
   className,
   ...props
 }: ComponentProps<'details'>): ReactElement {
-  const [openState, setOpen] = useState(!!open)
+  const [isOpen, setIsOpen] = useState(!!open)
   // To animate the close animation we have to delay the DOM node state here.
-  const [delayedOpenState, setDelayedOpenState] = useState(openState)
+  const [delayedOpenState, setDelayedOpenState] = useState(isOpen)
 
   useEffect(() => {
-    if (!openState) {
-      const timeout = setTimeout(() => setDelayedOpenState(openState), 500)
+    if (!isOpen) {
+      const timeout = setTimeout(() => setDelayedOpenState(isOpen), 500)
       return () => clearTimeout(timeout)
     }
     setDelayedOpenState(true)
-  }, [openState])
+  }, [isOpen])
 
-  const handleSummaryClick = useCallback((event: MouseEvent) => {
-    event.preventDefault()
-    setOpen(v => !v)
-  }, [])
+  const [summaryElement, restChildren] = useMemo(() => {
+    let summary: ReactNode
 
-  const [summaryElement, restChildren] = useMemo(
-    function findSummary(list = children): [summary: ReactNode, ReactNode[]] {
-      let summary: ReactNode = null
-      const rest: ReactNode[] = []
+    const rest = Children.map(children, child => {
+      const isSummary =
+        !summary && // Add onClick only for first summary
+        child &&
+        typeof child === 'object' &&
+        'type' in child &&
+        child.type === Summary
 
-      Children.forEach(list, (child, index) => {
-        if (child && typeof child === 'object') {
-          if ('type' in child && child.type === Summary) {
-            summary = cloneElement(child, {
-              onClick: handleSummaryClick
-            })
-            return
-          }
+      if (!isSummary) return child
 
-          if (!summary && 'props' in child) {
-            const result = findSummary(child.props.children)
-            summary = result[0]
-            child = cloneElement(child, {
-              ...child.props,
-              children: result[1],
-              key: index
-            })
-          }
+      summary = cloneElement(child, {
+        onClick(event: MouseEvent) {
+          event.preventDefault()
+          setIsOpen(v => !v)
         }
-        rest.push(child)
       })
+    })
 
-      return [summary, rest]
-    },
-    [children, handleSummaryClick]
-  )
+    return [summary, rest]
+  }, [children])
 
   return (
     <details
@@ -158,10 +145,10 @@ function Details({
       )}
       {...props}
       open={delayedOpenState}
-      data-expanded={openState ? '' : undefined}
+      data-expanded={isOpen ? '' : undefined}
     >
       {summaryElement}
-      <Collapse isOpen={openState}>{restChildren}</Collapse>
+      <Collapse isOpen={isOpen}>{restChildren}</Collapse>
     </details>
   )
 }
@@ -185,7 +172,7 @@ function Summary({
         className={cn(
           '_order-first', // if prettier formats `summary` it will have unexpected margin-top
           '_size-4 _shrink-0 _mx-1.5',
-          'rtl:_rotate-180 [[data-expanded]>summary>&]:_rotate-90 _transition'
+          'rtl:_rotate-180 [[data-expanded]>summary:first-child>&]:_rotate-90 _transition'
         )}
         pathClassName="_stroke-[3px]"
       />
