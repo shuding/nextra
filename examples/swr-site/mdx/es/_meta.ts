@@ -4,7 +4,7 @@ export default {
   index: meta.index,
   docs: {
     ...meta.docs,
-    title: 'Documentación',
+    title: 'Documentación'
   },
   examples: {
     ...meta.examples,

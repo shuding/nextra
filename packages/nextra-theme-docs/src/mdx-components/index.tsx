@@ -41,9 +41,14 @@ export function useMDXComponents(components?: any) {
     ),
     li: props => <li className="_my-2" {...props} />,
     ol: props => (
-      <ol className="[:is(ol,ul)_&]:_my-3 [&:not(:first-child)]:_mt-6 _list-decimal _ms-6" {...props} />
+      <ol
+        className="[:is(ol,ul)_&]:_my-3 [&:not(:first-child)]:_mt-6 _list-decimal _ms-6"
+        {...props}
+      />
     ),
-    p: props => <p className="[&:not(:first-child)]:_mt-6 _leading-7" {...props} />,
+    p: props => (
+      <p className="[&:not(:first-child)]:_mt-6 _leading-7" {...props} />
+    ),
     pre: withIcons(Pre),
     summary: ({ children, ...props }) => (
       <summary
@@ -67,13 +72,19 @@ export function useMDXComponents(components?: any) {
       </summary>
     ),
     table: props => (
-      <Table className="nextra-scrollbar [&:not(:first-child)]:_mt-6 _p-0" {...props} />
+      <Table
+        className="nextra-scrollbar [&:not(:first-child)]:_mt-6 _p-0"
+        {...props}
+      />
     ),
     td: Td,
     th: Th,
     tr: Tr,
     ul: props => (
-      <ul className="[:is(ol,ul)_&]:_my-3 [&:not(:first-child)]:_mt-6 _list-disc _ms-6" {...props} />
+      <ul
+        className="[:is(ol,ul)_&]:_my-3 [&:not(:first-child)]:_mt-6 _list-disc _ms-6"
+        {...props}
+      />
     ),
     wrapper: Wrapper,
     ...components
