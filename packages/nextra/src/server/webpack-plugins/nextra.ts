@@ -4,7 +4,11 @@ import gracefulFs from 'graceful-fs'
 import type { Compiler } from 'webpack'
 import type { NextraConfig } from '../../types'
 import { CHUNKS_DIR, IS_PRODUCTION } from '../constants.js'
-import { PAGES_DIR } from '../file-system.js'
+import { APP_DIR } from '../file-system.js'
+import {
+  generatePageMapFromFilepaths,
+  getFilepaths
+} from '../generate-page-map.js'
 import { collectPageMap } from '../page-map.js'
 
 // import { logger } from '../utils'
@@ -19,12 +23,13 @@ export class NextraPlugin {
     private config: {
       locales: string[]
       transformPageMap?: NextraConfig['transformPageMap']
+      mdxBaseDir?: NextraConfig['mdxBaseDir']
     }
   ) {}
 
   apply(compiler: Compiler) {
     const pluginName = this.constructor.name
-    const { locales, transformPageMap } = this.config
+    const { locales, mdxBaseDir } = this.config
 
     compiler.hooks.beforeCompile.tapAsync(pluginName, async (_, callback) => {
       // if (isSaved || !IS_PRODUCTION) {
@@ -47,13 +52,27 @@ export class NextraPlugin {
 
       try {
         for (const locale of locales) {
-          const route = `/${locale}`
-          const dir = path.join(PAGES_DIR, locale)
+          // const route = `/${locale}`
+          // const dir = path.join(APP_DIR, locale)
+
+          // const { pageMap, imports, dynamicMetaImports } = await collectFiles({
+          //   dir,
+          //   route,
+          //   isFollowingSymlink: false
+          // })
+
+          const relativePaths = await getFilepaths({
+            dir: mdxBaseDir ? path.join(mdxBaseDir, locale) : APP_DIR,
+            isAppDir: !mdxBaseDir
+          })
+
+          const { pageMap, mdxPages } =
+            generatePageMapFromFilepaths(relativePaths)
           const rawJs = await collectPageMap({
-            dir,
-            route,
             locale,
-            transformPageMap
+            pageMap,
+            mdxPages,
+            fromAppDir: !mdxBaseDir
           })
 
           await fs.writeFile(

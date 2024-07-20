@@ -15,8 +15,7 @@ export function Bleed({
         '_z-[1]', // for firefox https://github.com/shuding/nextra/issues/2824
         full && [
           // 'md:mx:[calc(-50vw+50%+8rem)',
-          'ltr:xl:_ml-[calc(50%-50vw+16rem)] ltr:xl:_mr-[calc(50%-50vw)]',
-          'rtl:xl:_ml-[calc(50%-50vw)] rtl:xl:_mr-[calc(50%-50vw+16rem)]'
+          'xl:_me-[calc(50%-50vw)] xl:_ms-[calc(50%-50vw+16rem)]'
         ]
       )}
     >

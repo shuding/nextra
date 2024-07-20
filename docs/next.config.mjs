@@ -1,9 +1,13 @@
 import path from 'node:path'
 import nextra from 'nextra'
 
+/**
+ * @type {import('nextra').NextraConfig}
+ */
 const withNextra = nextra({
-  theme: 'nextra-theme-docs',
-  themeConfig: './theme.config.tsx',
+  mdxOptions: {
+    providerImportSource: 'nextra-theme-docs'
+  },
   latex: true,
   search: {
     codeblocks: false
@@ -15,6 +19,9 @@ const sep = path.sep === '/' ? '/' : '\\\\'
 
 const ALLOWED_SVG_REGEX = new RegExp(`components${sep}icons${sep}.+\\.svg$`)
 
+/**
+ * @type {import('next').NextConfig}
+ */
 export default withNextra({
   reactStrictMode: true,
   eslint: {
@@ -41,8 +48,24 @@ export default withNextra({
 
     config.module.rules.push({
       test: ALLOWED_SVG_REGEX,
-      use: ['@svgr/webpack']
+      use: [
+        {
+          loader: '@svgr/webpack',
+          options: {
+            svgoConfig: {
+              plugins: ['removeXMLNS']
+            }
+          }
+        }
+      ]
     })
     return config
+  },
+  experimental: {
+    optimizePackageImports: [
+      '@components/icons',
+      'nextra/components',
+      'nextra/hooks'
+    ]
   }
 })

@@ -129,7 +129,12 @@ module.exports = {
         '@typescript-eslint/no-unnecessary-type-assertion': 'error',
         '@typescript-eslint/consistent-type-imports': 'error',
         '@typescript-eslint/non-nullable-type-assertion-style': 'error',
-        '@typescript-eslint/prefer-optional-chain': 'error'
+        '@typescript-eslint/prefer-optional-chain': 'error',
+        'prefer-destructuring': 'off',
+        '@typescript-eslint/prefer-destructuring': [
+          'error',
+          { VariableDeclarator: { object: true } }
+        ]
       }
     },
     // ⚙️ nextra-theme-docs
@@ -206,6 +211,11 @@ module.exports = {
             'content-container',
             'feat-darkmode',
             'features-container'
+          ],
+          cssFiles: [
+            'docs/app/globals.css',
+            'docs/app/_components/features/style.module.css',
+            'packages/nextra-theme-docs/dist/style.css'
           ]
         },
         next: { rootDir: 'docs' }
@@ -219,7 +229,8 @@ module.exports = {
         tailwindcss: {
           config: 'examples/swr-site/tailwind.config.ts',
           cssFiles: [
-            'examples/swr-site/styles.css',
+            'examples/swr-site/app/[lang]/styles.css',
+            'examples/swr-site/app/_components/features.css',
             'packages/nextra-theme-docs/dist/style.css'
           ]
         },

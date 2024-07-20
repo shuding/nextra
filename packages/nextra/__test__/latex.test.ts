@@ -16,7 +16,7 @@ describe('LaTeX', () => {
         'use strict'
         const { useMDXComponents: _provideComponents } = arguments[0]
         const title = ''
-        const frontMatter = {}
+        const metadata = {}
         function useTOC(props) {
           return []
         }
@@ -97,7 +97,7 @@ describe('LaTeX', () => {
         }
         return {
           title,
-          frontMatter,
+          metadata,
           useTOC,
           default: _createMdxContent
         }
@@ -121,8 +121,8 @@ describe('LaTeX', () => {
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         import { useMDXComponents as _provideComponents } from 'nextra/mdx'
-        const title = ''
-        const frontMatter = {}
+        export const title = ''
+        export const metadata = {}
         import { MathJax, MathJaxContext } from 'nextra/components'
         export function useTOC(props) {
           return []
@@ -153,8 +153,8 @@ describe('LaTeX', () => {
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         import { useMDXComponents as _provideComponents } from 'nextra/mdx'
-        const title = ''
-        const frontMatter = {}
+        export const title = ''
+        export const metadata = {}
         import { MathJax, MathJaxContext } from 'nextra/components'
         export function useTOC(props) {
           return []
@@ -185,8 +185,8 @@ ${MATH_LANG}`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         import { useMDXComponents as _provideComponents } from 'nextra/mdx'
-        const title = ''
-        const frontMatter = {}
+        export const title = ''
+        export const metadata = {}
         import foo from 'foo'
         export let bar
         import { MathJax, MathJaxContext } from 'nextra/components'

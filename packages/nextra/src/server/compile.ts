@@ -3,6 +3,7 @@ import type { ProcessorOptions } from '@mdx-js/mdx'
 import { createProcessor } from '@mdx-js/mdx'
 import type { Processor } from '@mdx-js/mdx/lib/core'
 import { rendererRich, transformerTwoslash } from '@shikijs/twoslash'
+// @ts-expect-error -- fixme
 import { remarkMermaid } from '@theguild/remark-mermaid'
 import { remarkNpm2Yarn } from '@theguild/remark-npm2yarn'
 import type { Program } from 'estree'
@@ -18,14 +19,12 @@ import type { Pluggable, Plugin } from 'unified'
 import type {
   FrontMatter,
   LoaderOptions,
-  PageOpts,
   ReadingTime,
   StructurizedData
 } from '../types'
 import {
   CWD,
   DEFAULT_LOCALE,
-  ERROR_ROUTES,
   MARKDOWN_URL_EXTENSION_REGEX
 } from './constants.js'
 import {
@@ -37,7 +36,6 @@ import {
   rehypeAttachCodeMeta,
   rehypeBetterReactMathjax,
   rehypeExtractTocContent,
-  rehypeIcon,
   rehypeParseCodeMeta
 } from './rehype-plugins/index.js'
 import {
@@ -80,7 +78,6 @@ type CompileMdxOptions = Pick<
   filePath?: string
   useCachedCompiler?: boolean
   isPageImport?: boolean
-  isPageMapImport?: boolean
 }
 
 export async function compileMdx(
@@ -97,14 +94,14 @@ export async function compileMdx(
     mdxOptions = {},
     filePath = '',
     useCachedCompiler,
-    isPageImport = true,
-    isPageMapImport
+    isPageImport = true
   }: CompileMdxOptions = {}
 ) {
   const {
     jsx = false,
     format: _format = 'mdx',
     outputFormat = 'function-body',
+    providerImportSource = 'nextra/mdx',
     remarkPlugins,
     rehypePlugins,
     recmaPlugins,
@@ -115,27 +112,9 @@ export async function compileMdx(
     _format === 'detect' ? (filePath.endsWith('.mdx') ? 'mdx' : 'md') : _format
 
   const fileCompatible = filePath ? { value: source, path: filePath } : source
-  if (isPageMapImport) {
-    const compiler = createProcessor({
-      format,
-      remarkPlugins: [
-        remarkFrontmatter, // parse and attach yaml node
-        remarkMdxFrontMatter
-      ]
-    })
-    const vFile = await compiler.process(fileCompatible)
-    const content = vFile.toString()
-
-    const index = content.lastIndexOf('function _createMdxContent(props) {')
-    const result = content.slice(0, index)
-
-    return { result } as any
-  }
 
   let searchIndexKey: string | null = null
-  if (ERROR_ROUTES.has(route)) {
-    /* skip */
-  } else if (typeof search === 'object') {
+  if (typeof search === 'object') {
     if (search.indexKey) {
       searchIndexKey = search.indexKey(filePath, route, locale)
       if (searchIndexKey === '') {
@@ -174,10 +153,9 @@ export async function compileMdx(
       structurizedData: StructurizedData
       title?: string
       frontMatter: FrontMatter
-    } & Pick<PageOpts, 'hasJsxInH1'>
+    }
 
-    const { readingTime, structurizedData, title, frontMatter, hasJsxInH1 } =
-      data
+    const { readingTime, structurizedData, title, frontMatter } = data
     // https://github.com/shuding/nextra/issues/1032
     const result = String(vFile).replaceAll('__esModule', '_\\_esModule')
 
@@ -195,7 +173,6 @@ export async function compileMdx(
     return {
       result,
       title,
-      ...(hasJsxInH1 && { hasJsxInH1 }),
       ...(readingTime && { readingTime }),
       ...(searchIndexKey !== null && { searchIndexKey, structurizedData }),
       frontMatter
@@ -210,7 +187,7 @@ export async function compileMdx(
       jsx,
       format,
       outputFormat,
-      providerImportSource: 'nextra/mdx',
+      providerImportSource,
       // Fix TypeError: _jsx is not a function for remote content
       development: process.env.NODE_ENV === 'development',
       remarkPlugins: [
@@ -291,7 +268,6 @@ export async function compileMdx(
                   ...rehypePrettyCodeOptions
                 }
               ] as any,
-              !isRemoteContent && rehypeIcon,
               rehypeAttachCodeMeta
             ]),
         [rehypeExtractTocContent, { isRemoteContent }]
@@ -321,29 +297,29 @@ export async function compileMdx(
             !!mdxContentArgument &&
             mdxContentArgument.openingElement.name.name === 'MDXLayout'
 
-          const localExports = new Set(['title', 'frontMatter' /* 'useTOC' */])
+          // const localExports = new Set(['title', 'frontMatter' /* 'useTOC' */])
 
-          for (const node of ast.body) {
-            if (node.type === 'ExportNamedDeclaration') {
-              let varName: string
-              const { declaration } = node
-              if (!declaration) {
-                // skip for `export ... from '...'` declaration
-                continue
-              } else if (declaration.type === 'VariableDeclaration') {
-                const [{ id }] = declaration.declarations
-                varName = (id as any).name
-              } else if (declaration.type === 'FunctionDeclaration') {
-                varName = declaration.id.name
-              } else {
-                throw new Error(`\`${declaration.type}\` unsupported.`)
-              }
-
-              if (localExports.has(varName)) {
-                Object.assign(node, node.declaration)
-              }
-            }
-          }
+          // for (const node of ast.body) {
+          //   if (node.type === 'ExportNamedDeclaration') {
+          //     let varName: string
+          //     const { declaration } = node
+          //     if (!declaration) {
+          //       // skip for `export ... from '...'` declaration
+          //       continue
+          //     } else if (declaration.type === 'VariableDeclaration') {
+          //       const [{ id }] = declaration.declarations
+          //       varName = (id as any).name
+          //     } else if (declaration.type === 'FunctionDeclaration') {
+          //       varName = declaration.id.name
+          //     } else {
+          //       throw new Error(`\`${declaration.type}\` unsupported.`)
+          //     }
+          //
+          //     // if (localExports.has(varName)) {
+          //     //   Object.assign(node, node.declaration)
+          //     // }
+          //   }
+          // }
         }) satisfies Plugin<[], Program>,
         isRemoteContent ? recmaRewriteFunctionBody : recmaRewriteJsx,
         ...(recmaPlugins || [])

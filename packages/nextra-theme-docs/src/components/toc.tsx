@@ -1,6 +1,7 @@
+'use client'
+
 import cn from 'clsx'
 import type { Heading } from 'nextra'
-import { removeLinks } from 'nextra/remove-links'
 import type { ReactElement } from 'react'
 import { useEffect, useRef } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
@@ -12,6 +13,7 @@ import { BackToTop } from './back-to-top'
 export type TOCProps = {
   toc: Heading[]
   filePath: string
+  pageTitle: string
 }
 
 const linkClassName = cn(
@@ -19,9 +21,9 @@ const linkClassName = cn(
   'contrast-more:_text-gray-800 contrast-more:dark:_text-gray-50'
 )
 
-export function TOC({ toc, filePath }: TOCProps): ReactElement {
+export function TOC({ toc, filePath, pageTitle }: TOCProps): ReactElement {
   const activeAnchor = useActiveAnchor()
-  const tocRef = useRef<HTMLUListElement>(null)
+  const tocRef = useRef<HTMLDivElement>(null)
   const themeConfig = useThemeConfig()
 
   const hasHeadings = toc.length > 0
@@ -39,7 +41,9 @@ export function TOC({ toc, filePath }: TOCProps): ReactElement {
 
   useEffect(() => {
     if (!activeSlug) return
-    const anchor = tocRef.current?.querySelector(`a[href="#${activeSlug}"]`)
+    const anchor = tocRef.current!.children[1]?.querySelector(
+      `a[href="#${activeSlug}"]`
+    )
 
     if (anchor) {
       scrollIntoView(anchor, {
@@ -55,16 +59,17 @@ export function TOC({ toc, filePath }: TOCProps): ReactElement {
   return (
     <div
       className={cn(
-        'nextra-scrollbar _sticky _top-16 _overflow-y-auto _pr-4 _pt-6 _text-sm [hyphens:auto]',
-        '_max-h-[calc(100vh-var(--nextra-navbar-height)-env(safe-area-inset-bottom))] ltr:_-mr-4 rtl:_-ml-4'
+        'nextra-scrollbar _sticky _top-16 _overflow-y-auto _pt-6 _text-sm [hyphens:auto]',
+        '_max-h-[calc(100vh-var(--nextra-navbar-height)-env(safe-area-inset-bottom))] _-me-4 _pe-4'
       )}
+      ref={tocRef}
     >
       {hasHeadings && (
         <>
           <p className="_mb-4 _font-semibold _tracking-tight">
             {renderComponent(themeConfig.toc.title)}
           </p>
-          <ul ref={tocRef}>
+          <ul>
             {toc.map(({ id, value, depth }) => (
               <li className="_my-2 _scroll-my-6 _scroll-py-6" key={id}>
                 <a
@@ -72,10 +77,10 @@ export function TOC({ toc, filePath }: TOCProps): ReactElement {
                   className={cn(
                     {
                       2: '_font-semibold',
-                      3: 'ltr:_pl-4 rtl:_pr-4',
-                      4: 'ltr:_pl-8 rtl:_pr-8',
-                      5: 'ltr:_pl-12 rtl:_pr-12',
-                      6: 'ltr:_pl-16 rtl:_pr-16'
+                      3: '_ps-4',
+                      4: '_ps-8',
+                      5: '_ps-12',
+                      6: '_ps-16'
                     }[depth],
                     '_inline-block _transition-colors _subpixel-antialiased',
                     activeAnchor[id]?.isActive
@@ -84,7 +89,7 @@ export function TOC({ toc, filePath }: TOCProps): ReactElement {
                     'contrast-more:_text-gray-900 contrast-more:_underline contrast-more:dark:_text-gray-50 _w-full _break-words'
                   )}
                 >
-                  {removeLinks(value)}
+                  {value}
                 </a>
               </li>
             ))}
@@ -102,7 +107,7 @@ export function TOC({ toc, filePath }: TOCProps): ReactElement {
           {themeConfig.feedback.content ? (
             <Anchor
               className={linkClassName}
-              href={themeConfig.feedback.useLink()}
+              href={themeConfig.feedback.useLink?.(pageTitle)}
               newWindow
             >
               {renderComponent(themeConfig.feedback.content)}

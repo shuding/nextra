@@ -6,11 +6,7 @@ import path from 'path'
 import type { Property } from 'estree'
 import type { NextraConfig } from '../types'
 
-export {
-  MARKDOWN_EXTENSION_REGEX,
-  ERROR_ROUTES,
-  DEFAULT_LOCALE
-} from '../constants.js'
+export { MARKDOWN_EXTENSION_REGEX, DEFAULT_LOCALE } from '../constants.js'
 
 export const CWD = process.cwd()
 
@@ -29,8 +25,6 @@ export const DEFAULT_CONFIG = {
   },
   codeHighlight: true
 } satisfies Partial<NextraConfig>
-
-export const OFFICIAL_THEMES = ['nextra-theme-docs', 'nextra-theme-blog']
 
 export const META_REGEX = /_meta\.[jt]sx?$/
 
