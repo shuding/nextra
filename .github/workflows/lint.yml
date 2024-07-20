@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18]
+        node-version: [22]
 
     steps:
       - name: Cancel Previous Runs
@@ -17,7 +17,7 @@ jobs:
         with:
           access_token: ${{ github.token }}
 
-      - name: Checkout Master
+      - name: Checkout Main
         uses: actions/checkout@v4
 
       - uses: pnpm/action-setup@v4

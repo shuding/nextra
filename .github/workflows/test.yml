@@ -10,7 +10,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        node-version: [18]
+        node-version: [22]
         os: [ubuntu-latest, windows-latest]
 
     steps:
@@ -19,7 +19,7 @@ jobs:
         with:
           access_token: ${{ github.token }}
 
-      - name: Checkout Master
+      - name: Checkout Main
         uses: actions/checkout@v4
 
       - uses: pnpm/action-setup@v4
