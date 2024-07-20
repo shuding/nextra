@@ -8,6 +8,7 @@ import type { ComponentProps, ReactElement, ReactNode } from 'react'
 import {
   Children,
   cloneElement,
+  useCallback,
   useEffect,
   useMemo,
   useRef,
@@ -112,26 +113,42 @@ function Details({
     setDelayedOpenState(true)
   }, [openState])
 
-  const [summaryElement, restChildren] = useMemo(() => {
-    let summary: ReactElement | undefined
-    const restChildren = Children.map(children, child => {
-      const isSummary =
-        child &&
-        typeof child === 'object' &&
-        'type' in child &&
-        child.type === Summary
+  const handleSummaryClick = useCallback((event: MouseEvent) => {
+    event.preventDefault()
+    setOpen(v => !v)
+  }, [])
 
-      if (!isSummary) return child
+  const [summaryElement, restChildren] = useMemo(
+    function findSummary(list = children): [summary: ReactNode, ReactNode[]] {
+      let summary: ReactNode = null
+      const rest: ReactNode[] = []
 
-      summary ||= cloneElement(child, {
-        onClick(event: MouseEvent) {
-          event.preventDefault()
-          setOpen(v => !v)
+      Children.forEach(list, (child, index) => {
+        if (child && typeof child === 'object') {
+          if ('type' in child && child.type === Summary) {
+            summary = cloneElement(child, {
+              onClick: handleSummaryClick
+            })
+            return
+          }
+
+          if (!summary && 'props' in child) {
+            const result = findSummary(child.props.children)
+            summary = result[0]
+            child = cloneElement(child, {
+              ...child.props,
+              children: result[1],
+              key: index
+            })
+          }
         }
+        rest.push(child)
       })
-    })
-    return [summary, restChildren]
-  }, [children])
+
+      return [summary, rest]
+    },
+    [children, handleSummaryClick]
+  )
 
   return (
     <details
