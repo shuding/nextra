@@ -26,5 +26,6 @@
       groupName: 'latex',
       matchPackageNames: ['remark-math', 'rehype-katex']
     }
-  ]
+  ],
+  baseBranches: ['v3']
 }
