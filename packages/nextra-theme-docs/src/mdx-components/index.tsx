@@ -19,8 +19,8 @@ export function useMDXComponents(components?: any) {
     blockquote: props => (
       <blockquote
         className={cn(
-          '_mt-6 _border-gray-300 _italic _text-gray-700 dark:_border-gray-700 dark:_text-gray-400',
-          'first:_mt-0 _border-s-2 _ps-6'
+          '[&:not(:first-child)]:_mt-6 _border-gray-300 _italic _text-gray-700 dark:_border-gray-700 dark:_text-gray-400',
+          '_border-s-2 _ps-6'
         )}
         {...props}
       />
@@ -41,9 +41,9 @@ export function useMDXComponents(components?: any) {
     ),
     li: props => <li className="_my-2" {...props} />,
     ol: props => (
-      <ol className="_mt-6 _list-decimal first:_mt-0 _ms-6" {...props} />
+      <ol className="[:is(ol,ul)_&]:_my-3 [&:not(:first-child)]:_mt-6 _list-decimal _ms-6" {...props} />
     ),
-    p: props => <p className="_mt-6 _leading-7 first:_mt-0" {...props} />,
+    p: props => <p className="[&:not(:first-child)]:_mt-6 _leading-7" {...props} />,
     pre: withIcons(Pre),
     summary: ({ children, ...props }) => (
       <summary
@@ -67,13 +67,13 @@ export function useMDXComponents(components?: any) {
       </summary>
     ),
     table: props => (
-      <Table className="nextra-scrollbar _mt-6 _p-0 first:_mt-0" {...props} />
+      <Table className="nextra-scrollbar [&:not(:first-child)]:_mt-6 _p-0" {...props} />
     ),
     td: Td,
     th: Th,
     tr: Tr,
     ul: props => (
-      <ul className="_mt-6 _list-disc first:_mt-0 _ms-6" {...props} />
+      <ul className="[:is(ol,ul)_&]:_my-3 [&:not(:first-child)]:_mt-6 _list-disc _ms-6" {...props} />
     ),
     wrapper: Wrapper,
     ...components

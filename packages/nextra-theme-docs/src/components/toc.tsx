@@ -61,7 +61,6 @@ export function TOC({ toc, filePath, pageTitle }: TOCProps): ReactElement {
       className={cn(
         'nextra-scrollbar _sticky _top-16 _overflow-y-auto _pt-6 _text-sm [hyphens:auto]',
         '_max-h-[calc(100vh-var(--nextra-navbar-height)-env(safe-area-inset-bottom))] _-me-4 _pe-4',
-        '_z-[-1]' // for firefox https://github.com/shuding/nextra/issues/2824
       )}
       ref={tocRef}
     >

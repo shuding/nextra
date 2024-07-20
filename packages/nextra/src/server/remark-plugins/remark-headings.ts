@@ -12,8 +12,8 @@ export const getFlattenedValue = (node: Parent): string =>
       'children' in child
         ? getFlattenedValue(child)
         : 'value' in child
-        ? child.value
-        : ''
+          ? child.value
+          : ''
     )
     .join('')
 

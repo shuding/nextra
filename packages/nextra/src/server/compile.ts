@@ -104,6 +104,7 @@ export async function compileMdx(
     providerImportSource = 'nextra/mdx',
     remarkPlugins,
     rehypePlugins,
+    recmaPlugins,
     rehypePrettyCodeOptions
   }: MdxOptions = mdxOptions
 
@@ -320,7 +321,8 @@ export async function compileMdx(
           //   }
           // }
         }) satisfies Plugin<[], Program>,
-        isRemoteContent ? recmaRewriteFunctionBody : recmaRewriteJsx
+        isRemoteContent ? recmaRewriteFunctionBody : recmaRewriteJsx,
+        ...(recmaPlugins || [])
       ].filter(truthy)
     })
   }

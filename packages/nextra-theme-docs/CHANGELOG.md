@@ -1,5 +1,48 @@
 # nextra-theme-docs
 
+## 3.0.0-alpha.25
+
+### Patch Changes
+
+- de565078: fix vertical margin for nested ordered `<ol />` and unordered
+  `<ul />` lists
+  - nextra@3.0.0-alpha.25
+
+## 3.0.0-alpha.24
+
+### Patch Changes
+
+- 6f4c83a8: fix unclickable links in TOC
+
+  allow passing `recmaPlugins` in `mdxOptions`
+
+- Updated dependencies [6f4c83a8]
+  - nextra@3.0.0-alpha.24
+
+## 3.0.0-alpha.23
+
+### Minor Changes
+
+- 6ec3241c: Add Terraform/Move icon https://github.com/shuding/nextra/pull/2811
+  https://github.com/shuding/nextra/pull/2808
+- 6ec3241c: Make the `<Tab />` component be crawlable and indexable by search
+  engines by default
+- b47880d5: export `useMenu` hook
+
+### Patch Changes
+
+- ad108ff7: use `overflow-x-auto` instead `overflow-x-scroll` for `<Table />`
+- 217f7082: update next-themes
+
+  fix wrong numbering for nested `<Steps />`
+
+- ad108ff7: fix `<Bleed />` overflows incorrectly in firefox
+- Updated dependencies [6ec3241c]
+- Updated dependencies [6ec3241c]
+- Updated dependencies [ad108ff7]
+- Updated dependencies [217f7082]
+  - nextra@3.0.0-alpha.23
+
 ## 3.0.0-alpha.22
 
 ### Patch Changes

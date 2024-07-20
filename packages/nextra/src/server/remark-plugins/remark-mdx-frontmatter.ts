@@ -93,8 +93,8 @@ function estreeToValue(
       key.type === 'Literal'
         ? (key.value as string)
         : key.type === 'Identifier'
-        ? key.name
-        : ''
+          ? key.name
+          : ''
     if (value.type === 'Literal') {
       result[keyName] = value.value
     } else if (value.type === 'ObjectExpression') {

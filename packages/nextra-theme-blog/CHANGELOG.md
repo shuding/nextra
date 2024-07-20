@@ -1,5 +1,36 @@
 # nextra-theme-blog
 
+## 3.0.0-alpha.25
+
+### Patch Changes
+
+- nextra@3.0.0-alpha.25
+
+## 3.0.0-alpha.24
+
+### Patch Changes
+
+- Updated dependencies [6f4c83a8]
+  - nextra@3.0.0-alpha.24
+
+## 3.0.0-alpha.23
+
+### Minor Changes
+
+- 6ec3241c: Add Terraform/Move icon https://github.com/shuding/nextra/pull/2811
+  https://github.com/shuding/nextra/pull/2808
+- 6ec3241c: Make the `<Tab />` component be crawlable and indexable by search
+  engines by default
+
+### Patch Changes
+
+- ad108ff7: use `overflow-x-auto` instead `overflow-x-scroll` for `<Table />`
+- Updated dependencies [6ec3241c]
+- Updated dependencies [6ec3241c]
+- Updated dependencies [ad108ff7]
+- Updated dependencies [217f7082]
+  - nextra@3.0.0-alpha.23
+
 ## 3.0.0-alpha.22
 
 ### Patch Changes

@@ -101,6 +101,7 @@ export const nextraConfigSchema = z
       providerImportSource: z.string(),
       rehypePlugins: z.custom<ProcessorOptions['rehypePlugins']>(),
       remarkPlugins: z.custom<ProcessorOptions['remarkPlugins']>(),
+      recmaPlugins: z.custom<ProcessorOptions['recmaPlugins']>(),
       format: z.enum(['detect', 'mdx', 'md']),
       rehypePrettyCodeOptions: z.custom<RehypePrettyCodeOptions>()
     }),
