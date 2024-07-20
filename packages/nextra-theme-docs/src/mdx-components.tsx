@@ -97,6 +97,7 @@ const createHeading = (
 function Details({
   children,
   open,
+  className,
   ...props
 }: ComponentProps<'details'>): ReactElement {
   const [openState, setOpen] = useState(!!open)
@@ -111,7 +112,7 @@ function Details({
     setDelayedOpenState(true)
   }, [openState])
 
-  const [summary, restChildren] = useMemo(() => {
+  const [summaryElement, restChildren] = useMemo(() => {
     let summary: ReactElement | undefined
     const restChildren = Children.map(children, child => {
       const isSummary =
@@ -134,12 +135,15 @@ function Details({
 
   return (
     <details
-      className="[&:not(:first-child)]:_mt-4 _rounded _border _border-gray-200 _bg-white _p-2 _shadow-sm dark:_border-neutral-800 dark:_bg-neutral-900"
+      className={cn(
+        '[&:not(:first-child)]:_mt-4 _rounded _border _border-gray-200 _bg-white _p-2 _shadow-sm dark:_border-neutral-800 dark:_bg-neutral-900',
+        className
+      )}
       {...props}
       open={delayedOpenState}
       data-expanded={openState ? '' : undefined}
     >
-      {summary}
+      {summaryElement}
       <Collapse isOpen={openState}>{restChildren}</Collapse>
     </details>
   )
@@ -151,7 +155,12 @@ function Summary({
 }: ComponentProps<'summary'>): ReactElement {
   return (
     <summary
-      className="_flex _items-center _cursor-pointer _p-1 _transition-colors hover:_bg-gray-100 dark:hover:_bg-neutral-800"
+      className={cn(
+        '_flex _items-center _cursor-pointer _p-1 _transition-colors hover:_bg-gray-100 dark:hover:_bg-neutral-800',
+        // display: flex removes whitespace when `<summary />` contains text with other elements, like `foo <strong>bar</strong>`
+        '_whitespace-pre-wrap',
+        '_select-none'
+      )}
       {...props}
     >
       {children}
