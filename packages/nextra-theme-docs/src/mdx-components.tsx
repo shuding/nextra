@@ -112,29 +112,37 @@ function Details({
     setDelayedOpenState(true)
   }, [isOpen])
 
-  const [summaryElement, restChildren] = useMemo(() => {
-    let summary: ReactNode
+  const [summaryElement, restChildren] = useMemo(
+    function findSummary(list = children): [summary: ReactNode, ReactNode] {
+      let summary: ReactNode
 
-    const rest = Children.map(children, child => {
-      const isSummary =
-        !summary && // Add onClick only for first summary
-        child &&
-        typeof child === 'object' &&
-        'type' in child &&
-        child.type === Summary
-
-      if (!isSummary) return child
-
-      summary = cloneElement(child, {
-        onClick(event: MouseEvent) {
-          event.preventDefault()
-          setIsOpen(v => !v)
+      const rest = Children.map(list, child => {
+        if (
+          !summary && // Add onClick only for first summary
+          child &&
+          typeof child === 'object' &&
+          'type' in child
+        ) {
+          if (child.type === Summary) {
+            summary = cloneElement(child, {
+              onClick(event: MouseEvent) {
+                event.preventDefault()
+                setIsOpen(v => !v)
+              }
+            })
+            return
+          }
+          if (child.type !== Details) {
+            ;[summary, child] = findSummary(child.props.children)
+          }
         }
+        return child
       })
-    })
 
-    return [summary, rest]
-  }, [children])
+      return [summary, rest]
+    },
+    [children]
+  )
 
   return (
     <details
