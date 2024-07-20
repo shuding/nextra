@@ -244,35 +244,20 @@ export function Flexsearch({
     )
   }
 
-  const preload = useCallback(
-    async (active: boolean) => {
-      if (active && !indexes[locale]) {
-        setLoading(true)
-        try {
-          await loadIndexes(basePath, locale)
-        } catch (e) {
-          setError(true)
-        }
-        setLoading(false)
-      }
-    },
-    [locale, basePath]
-  )
+  const preload = useCallback(async () => {
+    if (indexes[locale]) return
+    setLoading(true)
+    try {
+      await loadIndexes(basePath, locale)
+    } catch {
+      setError(true)
+    }
+    setLoading(false)
+  }, [locale, basePath])
 
-  const handleChange = async (value: string) => {
+  const handleChange = (value: string) => {
     setSearch(value)
-    if (loading) {
-      return
-    }
-    if (!indexes[locale]) {
-      setLoading(true)
-      try {
-        await loadIndexes(basePath, locale)
-      } catch (e) {
-        setError(true)
-      }
-      setLoading(false)
-    }
+    if (loading) return
     doSearch(value)
   }
 
