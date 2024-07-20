@@ -1,5 +1,15 @@
 # nextra-theme-blog
 
+## 3.0.0-alpha.27
+
+### Patch Changes
+
+- 4f0f6b27: Omit `...{:type}` inline code annotations from search index #2922
+- a95e7454: Fix the line highlighting background-color does not extend to the full width of the code block when a scrollbar appears with line numbers.
+- Updated dependencies [4f0f6b27]
+- Updated dependencies [a95e7454]
+  - nextra@3.0.0-alpha.27
+
 ## 3.0.0-alpha.26
 
 ### Patch Changes
@@ -418,19 +428,19 @@
   and `nextra-theme-docs`
 
   ```js
-  import { Card, Cards } from 'nextra/components'
+  import { Card, Cards } from "nextra/components";
   ```
 
   ```js
-  import { Tab, Tabs } from 'nextra/components'
+  import { Tab, Tabs } from "nextra/components";
   ```
 
   ```js
-  import { Steps } from 'nextra/components'
+  import { Steps } from "nextra/components";
   ```
 
   ```js
-  import { FileTree } from 'nextra/components'
+  import { FileTree } from "nextra/components";
   ```
 
 ### Patch Changes

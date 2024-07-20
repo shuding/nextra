@@ -1,5 +1,12 @@
 # nextra
 
+## 3.0.0-alpha.27
+
+### Patch Changes
+
+- 4f0f6b27: Omit `...{:type}` inline code annotations from search index #2922
+- a95e7454: Fix the line highlighting background-color does not extend to the full width of the code block when a scrollbar appears with line numbers.
+
 ## 3.0.0-alpha.26
 
 ## 3.0.0-alpha.25
@@ -366,7 +373,7 @@
   while importing
 
   ```js
-  import filterRouteLocale from 'nextra/filter-route-locale'
+  import filterRouteLocale from "nextra/filter-route-locale";
   ```
 
 - 4dd720ad: remove `font-weight: 500;` from styles of code blocks since it gives
@@ -412,19 +419,19 @@
   and `nextra-theme-docs`
 
   ```js
-  import { Card, Cards } from 'nextra/components'
+  import { Card, Cards } from "nextra/components";
   ```
 
   ```js
-  import { Tab, Tabs } from 'nextra/components'
+  import { Tab, Tabs } from "nextra/components";
   ```
 
   ```js
-  import { Steps } from 'nextra/components'
+  import { Steps } from "nextra/components";
   ```
 
   ```js
-  import { FileTree } from 'nextra/components'
+  import { FileTree } from "nextra/components";
   ```
 
 ### Patch Changes
