@@ -418,19 +418,19 @@
   and `nextra-theme-docs`
 
   ```js
-  import { Card, Cards } from "nextra/components";
+  import { Card, Cards } from 'nextra/components'
   ```
 
   ```js
-  import { Tab, Tabs } from "nextra/components";
+  import { Tab, Tabs } from 'nextra/components'
   ```
 
   ```js
-  import { Steps } from "nextra/components";
+  import { Steps } from 'nextra/components'
   ```
 
   ```js
-  import { FileTree } from "nextra/components";
+  import { FileTree } from 'nextra/components'
   ```
 
 ### Patch Changes
