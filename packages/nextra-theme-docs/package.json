@@ -59,7 +59,7 @@
     "nextra": "workspace:*",
     "postcss": "^8.4.33",
     "postcss-cli": "^10.1.0",
-    "postcss-import": "^15.1.0",
+    "postcss-import": "^16.0.0",
     "postcss-lightningcss": "^1.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

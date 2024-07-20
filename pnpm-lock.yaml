@@ -415,8 +415,8 @@ importers:
         specifier: ^10.1.0
         version: 10.1.0(postcss@8.4.39)
       postcss-import:
-        specifier: ^15.1.0
-        version: 15.1.0(postcss@8.4.39)
+        specifier: ^16.0.0
+        version: 16.1.0(postcss@8.4.39)
       postcss-lightningcss:
         specifier: ^1.0.0
         version: 1.0.0(postcss@8.4.39)
@@ -503,8 +503,8 @@ importers:
         specifier: ^10.1.0
         version: 10.1.0(postcss@8.4.39)
       postcss-import:
-        specifier: ^15.1.0
-        version: 15.1.0(postcss@8.4.39)
+        specifier: ^16.0.0
+        version: 16.1.0(postcss@8.4.39)
       postcss-lightningcss:
         specifier: ^1.0.0
         version: 1.0.0(postcss@8.4.39)
@@ -11983,6 +11983,18 @@ packages:
       postcss-value-parser: 4.2.0
       read-cache: 1.0.0
       resolve: 1.22.2
+    dev: true
+
+  /postcss-import@16.1.0(postcss@8.4.39):
+    resolution: {integrity: sha512-7hsAZ4xGXl4MW+OKEWCnF6T5jqBw80/EE9aXg1r2yyn1RsVEU8EtKXbijEODa+rg7iih4bKf7vlvTGYR4CnPNg==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      postcss: ^8.0.0
+    dependencies:
+      postcss: 8.4.39
+      postcss-value-parser: 4.2.0
+      read-cache: 1.0.0
+      resolve: 1.22.8
     dev: true
 
   /postcss-js@4.0.1(postcss@8.4.39):
