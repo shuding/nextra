@@ -97,61 +97,83 @@ const createHeading = (
 function Details({
   children,
   open,
+  className,
   ...props
 }: ComponentProps<'details'>): ReactElement {
-  const [openState, setOpen] = useState(!!open)
+  const [isOpen, setIsOpen] = useState(!!open)
   // To animate the close animation we have to delay the DOM node state here.
-  const [delayedOpenState, setDelayedOpenState] = useState(openState)
+  const [delayedOpenState, setDelayedOpenState] = useState(isOpen)
 
   useEffect(() => {
-    if (!openState) {
-      const timeout = setTimeout(() => setDelayedOpenState(openState), 500)
+    if (!isOpen) {
+      const timeout = setTimeout(() => setDelayedOpenState(isOpen), 500)
       return () => clearTimeout(timeout)
     }
     setDelayedOpenState(true)
-  }, [openState])
+  }, [isOpen])
 
-  const [summary, restChildren] = useMemo(() => {
-    let summary: ReactElement | undefined
-    const restChildren = Children.map(children, child => {
-      const isSummary =
-        child &&
-        typeof child === 'object' &&
-        'type' in child &&
-        child.type === Summary
+  const [summaryElement, restChildren] = useMemo(
+    function findSummary(list = children): [summary: ReactNode, ReactNode] {
+      let summary: ReactNode
 
-      if (!isSummary) return child
-
-      summary ||= cloneElement(child, {
-        onClick(event: MouseEvent) {
-          event.preventDefault()
-          setOpen(v => !v)
+      const rest = Children.map(list, child => {
+        if (
+          !summary && // Add onClick only for first summary
+          child &&
+          typeof child === 'object' &&
+          'type' in child
+        ) {
+          if (child.type === Summary) {
+            summary = cloneElement(child, {
+              onClick(event: MouseEvent) {
+                event.preventDefault()
+                setIsOpen(v => !v)
+              }
+            })
+            return
+          }
+          if (child.type !== Details) {
+            ;[summary, child] = findSummary(child.props.children)
+          }
         }
+        return child
       })
-    })
-    return [summary, restChildren]
-  }, [children])
+
+      return [summary, rest]
+    },
+    [children]
+  )
 
   return (
     <details
-      className="[&:not(:first-child)]:_mt-4 _rounded _border _border-gray-200 _bg-white _p-2 _shadow-sm dark:_border-neutral-800 dark:_bg-neutral-900"
+      className={cn(
+        '[&:not(:first-child)]:_mt-4 _rounded _border _border-gray-200 _bg-white _p-2 _shadow-sm dark:_border-neutral-800 dark:_bg-neutral-900',
+        className
+      )}
       {...props}
       open={delayedOpenState}
-      data-expanded={openState ? '' : undefined}
+      data-expanded={isOpen ? '' : undefined}
     >
-      {summary}
-      <Collapse isOpen={openState}>{restChildren}</Collapse>
+      {summaryElement}
+      <Collapse isOpen={isOpen}>{restChildren}</Collapse>
     </details>
   )
 }
 
 function Summary({
   children,
+  className,
   ...props
 }: ComponentProps<'summary'>): ReactElement {
   return (
     <summary
-      className="_flex _items-center _cursor-pointer _p-1 _transition-colors hover:_bg-gray-100 dark:hover:_bg-neutral-800"
+      className={cn(
+        '_flex _items-center _cursor-pointer _p-1 _transition-colors hover:_bg-gray-100 dark:hover:_bg-neutral-800',
+        // display: flex removes whitespace when `<summary />` contains text with other elements, like `foo <strong>bar</strong>`
+        '_whitespace-pre-wrap',
+        '_select-none',
+        className
+      )}
       {...props}
     >
       {children}
@@ -159,7 +181,7 @@ function Summary({
         className={cn(
           '_order-first', // if prettier formats `summary` it will have unexpected margin-top
           '_size-4 _shrink-0 _mx-1.5',
-          'rtl:_rotate-180 [[data-expanded]>summary>&]:_rotate-90 _transition'
+          'rtl:_rotate-180 [[data-expanded]>summary:first-child>&]:_rotate-90 _transition'
         )}
         pathClassName="_stroke-[3px]"
       />
