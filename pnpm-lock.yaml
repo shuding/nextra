@@ -251,8 +251,8 @@ importers:
         specifier: ^1.0.0
         version: 1.1.2(typescript@5.3.3)
       '@theguild/remark-mermaid':
-        specifier: 0.0.7-alpha-20240720230209-36c36fca1bb9d89d8da4b0448cb406439de76f54
-        version: 0.0.7-alpha-20240720230209-36c36fca1bb9d89d8da4b0448cb406439de76f54(react@18.2.0)
+        specifier: ^0.0.5
+        version: 0.0.5(react@18.2.0)
       '@theguild/remark-npm2yarn':
         specifier: 0.3.0
         version: 0.3.0
@@ -282,7 +282,7 @@ importers:
         version: 3.1.0
       katex:
         specifier: ^0.16.9
-        version: 0.16.10
+        version: 0.16.11
       p-limit:
         specifier: ^4.0.0
         version: 4.0.0
@@ -290,8 +290,8 @@ importers:
         specifier: ^7.0.0
         version: 7.0.0
       rehype-pretty-code:
-        specifier: 0.13.0
-        version: 0.13.0(shiki@1.1.2)
+        specifier: 0.13.2
+        version: 0.13.2(shiki@1.1.2)
       rehype-raw:
         specifier: ^7.0.0
         version: 7.0.0
@@ -5369,8 +5369,8 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: true
 
-  /@theguild/remark-mermaid@0.0.7-alpha-20240720230209-36c36fca1bb9d89d8da4b0448cb406439de76f54(react@18.2.0):
-    resolution: {integrity: sha512-mlAisw1rLmG/mOp5irA+ffC7+BVaKgr4VicjftLOxd7dljLFBh7tcMri1Qt3477mgdXXihtZ+tbEnBsZFbRQLg==}
+  /@theguild/remark-mermaid@0.0.5(react@18.2.0):
+    resolution: {integrity: sha512-e+ZIyJkEv9jabI4m7q29wZtZv+2iwPGsXJ2d46Zi7e+QcFudiyuqhLhHG/3gX3ZEB+hxTch+fpItyMS8jwbIcw==}
     peerDependencies:
       react: ^18.2.0
     dependencies:
@@ -7547,6 +7547,7 @@ packages:
         optional: true
     dependencies:
       ms: 2.1.2
+    dev: true
 
   /decamelize-keys@1.1.0:
     resolution: {integrity: sha512-ocLWuYzRPoS9bfiSdDd3cxvrzovVMZnRDVEzAs+hWIVXGDbHxWMECij2OBuyB/An0FFW/nLuq6Kv1i/YC5Qfzg==}
@@ -9989,8 +9990,8 @@ packages:
       object.values: 1.2.0
     dev: true
 
-  /katex@0.16.10:
-    resolution: {integrity: sha512-ZiqaC04tp2O5utMsl2TEZTXxa6WSC4yo0fv5ML++D3QZv/vx2Mct0mTlRx3O+uUkjfuAgOkzsCmq5MiUEsDDdA==}
+  /katex@0.16.11:
+    resolution: {integrity: sha512-RQrI8rlHY92OLf3rho/Ts8i/XvjgguEjOkO1BEXcU3N8BqPpSzBNwV/G0Ukr+P/l3ivvJUE/Fa/CwbS6HesGNQ==}
     hasBin: true
     dependencies:
       commander: 8.3.0
@@ -10342,7 +10343,7 @@ packages:
       micromark-util-normalize-identifier: 1.0.0
       micromark-util-symbol: 1.0.1
       micromark-util-types: 1.0.2
-      unist-util-stringify-position: 3.0.3
+      unist-util-stringify-position: 3.0.2
       uvu: 0.5.6
     transitivePeerDependencies:
       - supports-color
@@ -10754,7 +10755,7 @@ packages:
     dependencies:
       '@types/katex': 0.16.3
       devlop: 1.1.0
-      katex: 0.16.10
+      katex: 0.16.11
       micromark-factory-space: 2.0.0
       micromark-util-character: 2.0.1
       micromark-util-symbol: 2.0.0
@@ -11113,7 +11114,7 @@ packages:
     resolution: {integrity: sha512-ryTDy6UUunOXy2HPjelppgJ2sNfcPz1pLlMdA6Rz9jPzhLikWXv/irpWV/I2jd68Uhmny7hHxAlAhk4+vWggpg==}
     dependencies:
       '@types/debug': 4.1.7
-      debug: 4.3.5
+      debug: 4.3.4
       decode-named-character-reference: 1.0.2
       micromark-core-commonmark: 1.0.6
       micromark-factory-space: 1.0.0
@@ -12477,7 +12478,7 @@ packages:
       '@types/katex': 0.16.3
       hast-util-from-html-isomorphic: 2.0.0
       hast-util-to-text: 4.0.0
-      katex: 0.16.10
+      katex: 0.16.11
       unist-util-visit-parents: 6.0.1
       vfile: 6.0.1
     dev: false
@@ -12490,11 +12491,11 @@ packages:
       unified: 11.0.5
     dev: false
 
-  /rehype-pretty-code@0.13.0(shiki@1.1.2):
-    resolution: {integrity: sha512-+22dz1StXlF7dlMyOySNaVxgcGhMI4BCxq0JxJJPWYGiKsI6cu5jyuIKGHXHvH18D8sv1rdKtvsY9UEfN3++SQ==}
+  /rehype-pretty-code@0.13.2(shiki@1.1.2):
+    resolution: {integrity: sha512-F+PaFMscfJOcSHcR2b//+hk/0jT56hmGDqXcVD6VC9j0CUSGiqv8YxaWUyhR7qEIRRSbzAVxx+0uxzk+akXs+w==}
     engines: {node: '>=18'}
     peerDependencies:
-      shiki: ^1.0.0
+      shiki: ^1.3.0
     dependencies:
       '@types/hast': 3.0.4
       hast-util-to-string: 3.0.0
@@ -14161,6 +14162,12 @@ packages:
       unist-util-visit-parents: 6.0.1
     dev: false
 
+  /unist-util-stringify-position@3.0.2:
+    resolution: {integrity: sha512-7A6eiDCs9UtjcwZOcCpM4aPII3bAAGv13E96IkawkOAW0OhH+yRxtY0lzo8KiHpzEMfH7Q+FizUmwp8Iqy5EWg==}
+    dependencies:
+      '@types/unist': 2.0.10
+    dev: false
+
   /unist-util-stringify-position@3.0.3:
     resolution: {integrity: sha512-k5GzIBZ/QatR8N5X2y+drfpWG8IDBzdnVj6OInRNWm1oXrzydiaAT2OQiA8DPRRZyAKb9b6I2a6PxYklZD0gKg==}
     dependencies:
@@ -14317,7 +14324,7 @@ packages:
     resolution: {integrity: sha512-NXPYyxyBSH7zB5U6+3uDdd6Nybz6o6/od9rk8bp9H8GR3L+cm/fC0uUTbqBmUTnMCUDslAGBOIKNfvvb+gGlDg==}
     dependencies:
       '@types/unist': 3.0.2
-      vfile: 6.0.1
+      vfile: 6.0.2
     dev: false
 
   /vfile-message@3.1.4:
@@ -14921,7 +14928,7 @@ packages:
       '@mdx-js/react': 3.0.1(@types/react@18.3.3)(react@18.2.0)
       '@napi-rs/simple-git': 0.1.9
       '@shikijs/twoslash': 1.1.2(typescript@5.3.3)
-      '@theguild/remark-mermaid': 0.0.7-alpha-20240720230209-36c36fca1bb9d89d8da4b0448cb406439de76f54(react@18.2.0)
+      '@theguild/remark-mermaid': 0.0.5(react@18.2.0)
       '@theguild/remark-npm2yarn': 0.3.0
       better-react-mathjax: 2.0.3(react@18.2.0)
       clsx: 2.0.0
@@ -14937,7 +14944,7 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       rehype-katex: 7.0.0
-      rehype-pretty-code: 0.13.0(shiki@1.1.2)
+      rehype-pretty-code: 0.13.2(shiki@1.1.2)
       rehype-raw: 7.0.0
       remark-frontmatter: 5.0.0
       remark-gfm: 4.0.0
