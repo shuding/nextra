@@ -153,7 +153,7 @@
   },
   "devDependencies": {
     "@svgr/babel-plugin-remove-jsx-attribute": "^8.0.0",
-    "@testing-library/react": "^14.0.0",
+    "@testing-library/react": "^16.0.0",
     "@types/estree": "^1.0.2",
     "@types/graceful-fs": "^4.1.7",
     "@types/hast": "^3.0.1",
