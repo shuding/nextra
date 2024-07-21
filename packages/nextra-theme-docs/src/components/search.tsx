@@ -154,7 +154,6 @@ export function Search({
   const icon = (
     <Transition
       show={mounted && (!show || Boolean(value))}
-      as={Fragment}
       enter="_transition-opacity"
       enterFrom="_opacity-0"
       enterTo="_opacity-100"
