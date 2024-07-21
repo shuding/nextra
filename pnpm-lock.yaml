@@ -82,7 +82,7 @@ importers:
         version: 8.1.0(patch_hash=diueyelliusos6rdt3adu65x6m)(typescript@5.3.3)
       tsx:
         specifier: ^4.7.0
-        version: 4.7.1
+        version: 4.16.2
       turbo:
         specifier: 1.12.4
         version: 1.12.4
@@ -413,7 +413,7 @@ importers:
         version: 8.4.39
       postcss-cli:
         specifier: ^11.0.0
-        version: 11.0.0(postcss@8.4.39)(tsx@4.7.1)
+        version: 11.0.0(postcss@8.4.39)(tsx@4.16.2)
       postcss-import:
         specifier: ^16.0.0
         version: 16.1.0(postcss@8.4.39)
@@ -501,7 +501,7 @@ importers:
         version: 8.4.39
       postcss-cli:
         specifier: ^11.0.0
-        version: 11.0.0(postcss@8.4.39)(tsx@4.7.1)
+        version: 11.0.0(postcss@8.4.39)(tsx@4.16.2)
       postcss-import:
         specifier: ^16.0.0
         version: 16.1.0(postcss@8.4.39)
@@ -9003,8 +9003,8 @@ packages:
       get-intrinsic: 1.2.4
     dev: true
 
-  /get-tsconfig@4.7.2:
-    resolution: {integrity: sha512-wuMsz4leaj5hbGgg4IvDU0bqJagpftG5l5cXIAvo8uZrqn0NJqwtfupTN00VnkQJPcIRrxYrm1Ue24btpCha2A==}
+  /get-tsconfig@4.7.6:
+    resolution: {integrity: sha512-ZAqrLlu18NbDdRaHq+AKXzAmqIUPswPWKUchfytdAjiRFnCe5ojG2bstg6mRiZabkKfCoL/e98pbBELIV/YCeA==}
     dependencies:
       resolve-pkg-maps: 1.0.0
     dev: true
@@ -11995,7 +11995,7 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /postcss-cli@11.0.0(postcss@8.4.39)(tsx@4.7.1):
+  /postcss-cli@11.0.0(postcss@8.4.39)(tsx@4.16.2):
     resolution: {integrity: sha512-xMITAI7M0u1yolVcXJ9XTZiO9aO49mcoKQy6pCDFdMh9kGqhzLVpWxeD/32M/QBmkhcGypZFFOLNLmIW4Pg4RA==}
     engines: {node: '>=18'}
     hasBin: true
@@ -12009,7 +12009,7 @@ packages:
       globby: 14.0.2
       picocolors: 1.0.1
       postcss: 8.4.39
-      postcss-load-config: 5.1.0(postcss@8.4.39)(tsx@4.7.1)
+      postcss-load-config: 5.1.0(postcss@8.4.39)(tsx@4.16.2)
       postcss-reporter: 7.0.5(postcss@8.4.39)
       pretty-hrtime: 1.0.3
       read-cache: 1.0.0
@@ -12098,7 +12098,7 @@ packages:
       yaml: 2.4.5
     dev: true
 
-  /postcss-load-config@5.1.0(postcss@8.4.39)(tsx@4.7.1):
+  /postcss-load-config@5.1.0(postcss@8.4.39)(tsx@4.16.2):
     resolution: {integrity: sha512-G5AJ+IX0aD0dygOE0yFZQ/huFFMSNneyfp0e3/bT05a8OfPC5FUoZRPfGijUdGOJNMewJiwzcHJXFafFzeKFVA==}
     engines: {node: '>= 18'}
     peerDependencies:
@@ -12115,7 +12115,7 @@ packages:
     dependencies:
       lilconfig: 3.1.2
       postcss: 8.4.39
-      tsx: 4.7.1
+      tsx: 4.16.2
       yaml: 2.4.5
     dev: true
 
@@ -13874,13 +13874,13 @@ packages:
       typescript: 5.3.3
     dev: true
 
-  /tsx@4.7.1:
-    resolution: {integrity: sha512-8d6VuibXHtlN5E3zFkgY8u4DX7Y3Z27zvvPKVmLon/D4AjuKzarkUBTLDBgj9iTQ0hg5xM7c/mYiRVM+HETf0g==}
+  /tsx@4.16.2:
+    resolution: {integrity: sha512-C1uWweJDgdtX2x600HjaFaucXTilT7tgUZHbOE4+ypskZ1OP8CRCSDkCxG6Vya9EwaFIVagWwpaVAn5wzypaqQ==}
     engines: {node: '>=18.0.0'}
     hasBin: true
     dependencies:
       esbuild: 0.23.0
-      get-tsconfig: 4.7.2
+      get-tsconfig: 4.7.6
     optionalDependencies:
       fsevents: 2.3.3
     dev: true
