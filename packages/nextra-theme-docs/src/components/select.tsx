@@ -1,4 +1,4 @@
-import { Listbox, Transition } from '@headlessui/react'
+import { Listbox, Transition, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
 import cn from 'clsx'
 import { useMounted } from 'nextra/hooks'
 import { CheckIcon } from 'nextra/icons'
@@ -46,7 +46,7 @@ export function Select({
   return (
     <Listbox value={selected} onChange={onChange}>
       {({ open }) => (
-        <Listbox.Button
+        <ListboxButton
           ref={trigger}
           title={title}
           className={cn(
@@ -62,19 +62,19 @@ export function Select({
             <Transition
               ref={container}
               show={open}
-              as={Listbox.Options}
+              as={ListboxOptions}
               className="_z-20 _max-h-64 _overflow-auto _rounded-md _ring-1 _ring-black/5 _bg-white _py-1 _text-sm _shadow-lg dark:_ring-white/20 dark:_bg-neutral-800"
               leave="_transition-opacity"
               leaveFrom="_opacity-100"
               leaveTo="_opacity-0"
             >
               {options.map(option => (
-                <Listbox.Option
+                <ListboxOption
                   key={option.key}
                   value={option}
-                  className={({ active }) =>
+                  className={({ focus }) =>
                     cn(
-                      active
+                      focus
                         ? '_bg-primary-50 _text-primary-600 dark:_bg-primary-500/10'
                         : '_text-gray-800 dark:_text-gray-100',
                       '_relative _cursor-pointer _whitespace-nowrap _py-1.5',
@@ -88,11 +88,11 @@ export function Select({
                       <CheckIcon />
                     </span>
                   )}
-                </Listbox.Option>
+                </ListboxOption>
               ))}
             </Transition>
           </Portal>
-        </Listbox.Button>
+        </ListboxButton>
       )}
     </Listbox>
   )

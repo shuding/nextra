@@ -1,4 +1,4 @@
-import { Transition } from '@headlessui/react'
+import { Transition, TransitionChild } from '@headlessui/react'
 import cn from 'clsx'
 // eslint-disable-next-line no-restricted-imports -- since we don't need newWindow prop
 import NextLink from 'next/link'
@@ -236,7 +236,7 @@ export function Search({
       <Transition
         show={renderList}
         // Transition.Child is required here, otherwise popup will be still present in DOM after focus out
-        as={Transition.Child}
+        as={TransitionChild}
         leave="_transition-opacity _duration-100"
         leaveFrom="_opacity-100"
         leaveTo="_opacity-0"

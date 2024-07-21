@@ -1,4 +1,10 @@
-import { Tab as HeadlessTab } from '@headlessui/react'
+import {
+  Tab as HeadlessTab,
+  TabGroup,
+  TabList,
+  TabPanel,
+  TabPanels
+} from '@headlessui/react'
 import cn from 'clsx'
 import type { ComponentProps, ReactElement, ReactNode } from 'react'
 import { useCallback, useEffect, useState } from 'react'
@@ -75,13 +81,13 @@ function _Tabs({
   }, []) // eslint-disable-line react-hooks/exhaustive-deps -- only on mount
 
   return (
-    <HeadlessTab.Group
+    <TabGroup
       selectedIndex={selectedIndex}
       defaultIndex={defaultIndex}
       onChange={handleChange}
     >
       <div className="nextra-scrollbar _overflow-x-auto _overflow-y-hidden _overscroll-x-contain">
-        <HeadlessTab.List className="_mt-4 _flex _w-max _min-w-full _border-b _border-gray-200 _pb-px dark:_border-neutral-800">
+        <TabList className="_mt-4 _flex _w-max _min-w-full _border-b _border-gray-200 _pb-px dark:_border-neutral-800">
           {items.map((item, index) => {
             const disabled = isTabObjectItem(item) && item.disabled
             return (
@@ -104,10 +110,10 @@ function _Tabs({
               </HeadlessTab>
             )
           })}
-        </HeadlessTab.List>
+        </TabList>
       </div>
-      <HeadlessTab.Panels>{children}</HeadlessTab.Panels>
-    </HeadlessTab.Group>
+      <TabPanels>{children}</TabPanels>
+    </TabGroup>
   )
 }
 
@@ -116,11 +122,11 @@ function Tab({
   // For SEO display all the Panel in the DOM and set `display: none;` for those that are not selected
   unmount = false,
   ...props
-}: Omit<ComponentProps<typeof HeadlessTab.Panel>, 'static'>): ReactElement {
+}: Omit<ComponentProps<typeof TabPanel>, 'static'>): ReactElement {
   return (
-    <HeadlessTab.Panel {...props} unmount={unmount} className="_rounded _pt-6">
+    <TabPanel {...props} unmount={unmount} className="_rounded _pt-6">
       {children}
-    </HeadlessTab.Panel>
+    </TabPanel>
   )
 }
 
