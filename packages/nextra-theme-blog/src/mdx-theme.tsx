@@ -66,7 +66,6 @@ const A = ({ children, href = '', ...props }: ComponentProps<'a'>) => {
     )
   }
   return (
-    // @ts-expect-error Types of property `ref` are incompatible.
     <Link href={href} {...props}>
       {children}
     </Link>
