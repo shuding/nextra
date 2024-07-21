@@ -51,7 +51,7 @@
       "next": "14.2.5"
     },
     "patchedDependencies": {
-      "@changesets/assemble-release-plan@5.2.4": "patches/@changesets__assemble-release-plan@5.2.4.patch",
+      "@changesets/assemble-release-plan@6.0.3": "patches/@changesets__assemble-release-plan@6.0.3.patch",
       "tsup@8.1.0": "patches/tsup@8.0.1.patch"
     }
   }
