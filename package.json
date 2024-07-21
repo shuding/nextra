@@ -1,4 +1,5 @@
 {
+  "name": "nextra-monorepo",
   "private": true,
   "packageManager": "pnpm@8.15.9",
   "scripts": {
@@ -21,7 +22,7 @@
     "version": "changeset version"
   },
   "devDependencies": {
-    "@changesets/cli": "2.26.2",
+    "@changesets/cli": "2.27.7",
     "@ianvs/prettier-plugin-sort-imports": "4.3.1",
     "@next/eslint-plugin-next": "14.2.5",
     "@rollup/plugin-alias": "^5.0.0",
@@ -33,7 +34,7 @@
     "eslint-plugin-react": "7.35.0",
     "eslint-plugin-react-hooks": "4.6.2",
     "eslint-plugin-sonarjs": "^1.0.4-alpha.1",
-    "eslint-plugin-tailwindcss": "3.16.0",
+    "eslint-plugin-tailwindcss": "3.17.3",
     "eslint-plugin-typescript-sort-keys": "3.2.0",
     "eslint-plugin-unicorn": "54.0.0",
     "prettier": "3.3.3",
@@ -42,7 +43,7 @@
     "rimraf": "6.0.1",
     "tsup": "8.1.0",
     "tsx": "^4.7.0",
-    "turbo": "1.13.4",
+    "turbo": "2.0.9",
     "typescript": "5.3.3"
   },
   "pnpm": {
@@ -51,7 +52,7 @@
       "next": "14.2.5"
     },
     "patchedDependencies": {
-      "@changesets/assemble-release-plan@5.2.4": "patches/@changesets__assemble-release-plan@5.2.4.patch",
+      "@changesets/assemble-release-plan@6.0.3": "patches/@changesets__assemble-release-plan@6.0.3.patch",
       "tsup@8.1.0": "patches/tsup@8.0.1.patch"
     }
   }
