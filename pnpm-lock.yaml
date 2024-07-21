@@ -330,10 +330,10 @@ importers:
         version: 2.3.4
       zod:
         specifier: ^3.22.3
-        version: 3.22.3
+        version: 3.23.8
       zod-validation-error:
         specifier: ^1.5.0
-        version: 1.5.0(zod@3.22.3)
+        version: 1.5.0(zod@3.23.8)
     devDependencies:
       '@svgr/babel-plugin-remove-jsx-attribute':
         specifier: ^8.0.0
@@ -467,7 +467,7 @@ importers:
         version: 3.1.0
       zod:
         specifier: ^3.22.3
-        version: 3.22.3
+        version: 3.23.8
     devDependencies:
       '@tailwindcss/nesting':
         specifier: ^0.0.0-insiders.565cd3e
@@ -14895,8 +14895,21 @@ packages:
       zod: 3.22.3
     dev: false
 
+  /zod-validation-error@1.5.0(zod@3.23.8):
+    resolution: {integrity: sha512-/7eFkAI4qV0tcxMBB/3+d2c1P6jzzZYdYSlBuAklzMuCrJu5bzJfHS0yVAS87dRHVlhftd6RFJDIvv03JgkSbw==}
+    engines: {node: '>=16.0.0'}
+    peerDependencies:
+      zod: ^3.18.0
+    dependencies:
+      zod: 3.23.8
+    dev: false
+
   /zod@3.22.3:
     resolution: {integrity: sha512-EjIevzuJRiRPbVH4mGc8nApb/lVLKVpmUhAaR5R5doKGfAnGJ6Gr3CViAVjP+4FWSxCsybeWQdcgCtbX+7oZug==}
+    dev: false
+
+  /zod@3.23.8:
+    resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
     dev: false
 
   /zwitch@2.0.2:
