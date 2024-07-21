@@ -28,7 +28,7 @@
     "@rollup/plugin-alias": "^5.0.0",
     "@typescript-eslint/eslint-plugin": "7.16.1",
     "@typescript-eslint/parser": "7.16.1",
-    "eslint": "8.57.0",
+    "eslint": "9.7.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-import": "2.29.1",
     "eslint-plugin-react": "7.35.0",
