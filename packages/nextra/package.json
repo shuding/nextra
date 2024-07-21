@@ -149,7 +149,7 @@
     "unist-util-visit": "^5.0.0",
     "yaml": "^2.3.2",
     "zod": "^3.22.3",
-    "zod-validation-error": "^1.5.0"
+    "zod-validation-error": "^3.0.0"
   },
   "devDependencies": {
     "@svgr/babel-plugin-remove-jsx-attribute": "^8.0.0",
