@@ -332,8 +332,8 @@ importers:
         specifier: ^3.22.3
         version: 3.23.8
       zod-validation-error:
-        specifier: ^1.5.0
-        version: 1.5.0(zod@3.23.8)
+        specifier: ^3.0.0
+        version: 3.3.0(zod@3.23.8)
     devDependencies:
       '@svgr/babel-plugin-remove-jsx-attribute':
         specifier: ^8.0.0
@@ -14849,18 +14849,18 @@ packages:
     resolution: {integrity: sha512-N+d4UJSJbt/R3wqY7Coqs5pcV0aUj2j9IaQ3rNj9bVCLld8tTGKRa2USARjnvZJWVx1NDmQev8EknoczaOQDOA==}
     dev: false
 
-  /zod-validation-error@1.5.0(zod@3.22.3):
-    resolution: {integrity: sha512-/7eFkAI4qV0tcxMBB/3+d2c1P6jzzZYdYSlBuAklzMuCrJu5bzJfHS0yVAS87dRHVlhftd6RFJDIvv03JgkSbw==}
-    engines: {node: '>=16.0.0'}
+  /zod-validation-error@3.3.0(zod@3.22.3):
+    resolution: {integrity: sha512-Syib9oumw1NTqEv4LT0e6U83Td9aVRk9iTXPUQr1otyV1PuXQKOvOwhMNqZIq5hluzHP2pMgnOmHEo7kPdI2mw==}
+    engines: {node: '>=18.0.0'}
     peerDependencies:
       zod: ^3.18.0
     dependencies:
       zod: 3.22.3
     dev: false
 
-  /zod-validation-error@1.5.0(zod@3.23.8):
-    resolution: {integrity: sha512-/7eFkAI4qV0tcxMBB/3+d2c1P6jzzZYdYSlBuAklzMuCrJu5bzJfHS0yVAS87dRHVlhftd6RFJDIvv03JgkSbw==}
-    engines: {node: '>=16.0.0'}
+  /zod-validation-error@3.3.0(zod@3.23.8):
+    resolution: {integrity: sha512-Syib9oumw1NTqEv4LT0e6U83Td9aVRk9iTXPUQr1otyV1PuXQKOvOwhMNqZIq5hluzHP2pMgnOmHEo7kPdI2mw==}
+    engines: {node: '>=18.0.0'}
     peerDependencies:
       zod: ^3.18.0
     dependencies:
@@ -14924,7 +14924,7 @@ packages:
       unist-util-visit: 5.0.0
       yaml: 2.3.4
       zod: 3.22.3
-      zod-validation-error: 1.5.0(zod@3.22.3)
+      zod-validation-error: 3.3.0(zod@3.22.3)
     transitivePeerDependencies:
       - '@types/react'
       - supports-color
