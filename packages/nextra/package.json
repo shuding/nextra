@@ -133,7 +133,7 @@
     "gray-matter": "^4.0.3",
     "hast-util-to-estree": "^3.1.0",
     "katex": "^0.16.9",
-    "p-limit": "^4.0.0",
+    "p-limit": "^6.0.0",
     "rehype-katex": "^7.0.0",
     "rehype-pretty-code": "0.13.2",
     "rehype-raw": "^7.0.0",
@@ -149,7 +149,7 @@
     "unist-util-visit": "^5.0.0",
     "yaml": "^2.3.2",
     "zod": "^3.22.3",
-    "zod-validation-error": "^1.5.0"
+    "zod-validation-error": "^3.0.0"
   },
   "devDependencies": {
     "@svgr/babel-plugin-remove-jsx-attribute": "^8.0.0",
