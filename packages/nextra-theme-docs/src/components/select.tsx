@@ -1,4 +1,10 @@
-import { Listbox, Transition, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
+import {
+  Listbox,
+  ListboxButton,
+  ListboxOption,
+  ListboxOptions,
+  Transition
+} from '@headlessui/react'
 import cn from 'clsx'
 import { useMounted } from 'nextra/hooks'
 import { CheckIcon } from 'nextra/icons'
