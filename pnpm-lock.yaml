@@ -100,10 +100,10 @@ importers:
         version: 2.1.1
       framer-motion:
         specifier: ^10.0.0
-        version: 10.18.0(react-dom@18.2.0)(react@18.2.0)
+        version: 10.18.0(react-dom@18.3.1)(react@18.3.1)
       next:
         specifier: 14.2.5
-        version: 14.2.5(@babel/core@7.24.9)(react-dom@18.2.0)(react@18.2.0)
+        version: 14.2.5(@babel/core@7.24.9)(react-dom@18.3.1)(react@18.3.1)
       nextra:
         specifier: workspace:*
         version: link:../packages/nextra
@@ -112,10 +112,10 @@ importers:
         version: link:../packages/nextra-theme-docs
       react:
         specifier: ^18.2.0
-        version: 18.2.0
+        version: 18.3.1
       react-dom:
         specifier: ^18.2.0
-        version: 18.2.0(react@18.2.0)
+        version: 18.3.1(react@18.3.1)
       sharp:
         specifier: ^0.33.0
         version: 0.33.4
@@ -128,7 +128,7 @@ importers:
         version: 20.14.11
       '@types/react':
         specifier: ^18.2.23
-        version: 18.2.55
+        version: 18.3.3
       autoprefixer:
         specifier: ^10.4.16
         version: 10.4.19(postcss@8.4.39)
@@ -143,19 +143,19 @@ importers:
     dependencies:
       next:
         specifier: 14.2.5
-        version: 14.2.5(@babel/core@7.24.3)(react-dom@18.2.0)(react@18.2.0)
+        version: 14.2.5(@babel/core@7.24.3)(react-dom@18.3.1)(react@18.3.1)
       nextra:
         specifier: workspace:*
-        version: file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.2.0)(react@18.2.0)(typescript@5.5.3)
+        version: file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
       nextra-theme-blog:
         specifier: workspace:*
-        version: file:packages/nextra-theme-blog(next@14.2.5)(nextra@3.0.0-alpha.27)(react-dom@18.2.0)(react@18.2.0)
+        version: file:packages/nextra-theme-blog(next@14.2.5)(nextra@3.0.0-alpha.27)(react-dom@18.3.1)(react@18.3.1)
       react:
         specifier: ^18.2.0
-        version: 18.2.0
+        version: 18.3.1
       react-dom:
         specifier: ^18.2.0
-        version: 18.2.0(react@18.2.0)
+        version: 18.3.1(react@18.3.1)
     dependenciesMeta:
       nextra:
         injected: true
@@ -166,19 +166,19 @@ importers:
     dependencies:
       next:
         specifier: 14.2.5
-        version: 14.2.5(@babel/core@7.24.3)(react-dom@18.2.0)(react@18.2.0)
+        version: 14.2.5(@babel/core@7.24.3)(react-dom@18.3.1)(react@18.3.1)
       nextra:
         specifier: workspace:*
-        version: file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.2.0)(react@18.2.0)(typescript@5.5.3)
+        version: file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
       nextra-theme-docs:
         specifier: workspace:*
-        version: file:packages/nextra-theme-docs(next@14.2.5)(nextra@3.0.0-alpha.27)(react-dom@18.2.0)(react@18.2.0)
+        version: file:packages/nextra-theme-docs(next@14.2.5)(nextra@3.0.0-alpha.27)(react-dom@18.3.1)(react@18.3.1)
       react:
         specifier: ^18.2.0
-        version: 18.2.0
+        version: 18.3.1
       react-dom:
         specifier: ^18.2.0
-        version: 18.2.0(react@18.2.0)
+        version: 18.3.1(react@18.3.1)
     dependenciesMeta:
       nextra:
         injected: true
@@ -195,25 +195,25 @@ importers:
         version: 0.10.0
       markdown-to-jsx:
         specifier: ^6.11.4
-        version: 6.11.4(react@18.2.0)
+        version: 6.11.4(react@18.3.1)
       next:
         specifier: 14.2.5
-        version: 14.2.5(@babel/core@7.24.3)(react-dom@18.2.0)(react@18.2.0)
+        version: 14.2.5(@babel/core@7.24.3)(react-dom@18.3.1)(react@18.3.1)
       nextra:
         specifier: workspace:*
-        version: file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.2.0)(react@18.2.0)(typescript@5.5.3)
+        version: file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
       nextra-theme-docs:
         specifier: workspace:*
-        version: file:packages/nextra-theme-docs(next@14.2.5)(nextra@3.0.0-alpha.27)(react-dom@18.2.0)(react@18.2.0)
+        version: file:packages/nextra-theme-docs(next@14.2.5)(nextra@3.0.0-alpha.27)(react-dom@18.3.1)(react@18.3.1)
       react:
         specifier: ^18.2.0
-        version: 18.2.0
+        version: 18.3.1
       react-dom:
         specifier: ^18.2.0
-        version: 18.2.0(react@18.2.0)
+        version: 18.3.1(react@18.3.1)
       react-intersection-observer:
         specifier: ^8.26.2
-        version: 8.34.0(react@18.2.0)
+        version: 8.34.0(react@18.3.1)
     devDependencies:
       '@next/bundle-analyzer':
         specifier: ^13.4.19
@@ -237,13 +237,13 @@ importers:
     dependencies:
       '@headlessui/react':
         specifier: ^1.7.17
-        version: 1.7.19(react-dom@18.2.0)(react@18.2.0)
+        version: 1.7.19(react-dom@18.3.1)(react@18.3.1)
       '@mdx-js/mdx':
         specifier: ^3.0.0
         version: 3.0.1
       '@mdx-js/react':
         specifier: ^3.0.0
-        version: 3.0.1(@types/react@18.2.55)(react@18.2.0)
+        version: 3.0.1(@types/react@18.3.3)(react@18.3.1)
       '@napi-rs/simple-git':
         specifier: ^0.1.9
         version: 0.1.17
@@ -252,13 +252,13 @@ importers:
         version: 1.1.2(typescript@5.5.3)
       '@theguild/remark-mermaid':
         specifier: ^0.0.7
-        version: 0.0.7(react@18.2.0)
+        version: 0.0.7(react@18.3.1)
       '@theguild/remark-npm2yarn':
         specifier: 0.3.0
         version: 0.3.0
       better-react-mathjax:
         specifier: ^2.0.3
-        version: 2.0.3(react@18.2.0)
+        version: 2.0.3(react@18.3.1)
       clsx:
         specifier: ^2.0.0
         version: 2.1.1
@@ -340,7 +340,7 @@ importers:
         version: 8.0.0(@babel/core@7.24.9)
       '@testing-library/react':
         specifier: ^16.0.0
-        version: 16.0.0(@testing-library/dom@10.3.2)(@types/react-dom@18.2.19)(@types/react@18.2.55)(react-dom@18.2.0)(react@18.2.0)
+        version: 16.0.0(@testing-library/dom@10.3.2)(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
       '@types/estree':
         specifier: ^1.0.2
         version: 1.0.5
@@ -355,7 +355,7 @@ importers:
         version: 3.0.15
       '@types/react':
         specifier: ^18.2.23
-        version: 18.2.55
+        version: 18.3.3
       '@types/webpack':
         specifier: ^5.28.3
         version: 5.28.5(esbuild@0.23.0)
@@ -367,13 +367,13 @@ importers:
         version: 2.1.0(esbuild@0.23.0)
       next:
         specifier: 14.2.5
-        version: 14.2.5(@babel/core@7.24.9)(react-dom@18.2.0)(react@18.2.0)
+        version: 14.2.5(@babel/core@7.24.9)(react-dom@18.3.1)(react@18.3.1)
       react:
         specifier: ^18.2.0
-        version: 18.2.0
+        version: 18.3.1
       react-dom:
         specifier: ^18.2.0
-        version: 18.2.0(react@18.2.0)
+        version: 18.3.1(react@18.3.1)
       unified:
         specifier: ^11.0.3
         version: 11.0.5
@@ -385,7 +385,7 @@ importers:
     dependencies:
       next-themes:
         specifier: ^0.3.0
-        version: 0.3.0(react-dom@18.2.0)(react@18.2.0)
+        version: 0.3.0(react-dom@18.3.1)(react@18.3.1)
     devDependencies:
       '@tailwindcss/nesting':
         specifier: ^0.0.0-insiders.565cd3e
@@ -395,16 +395,16 @@ importers:
         version: 0.5.13(tailwindcss@3.4.6)
       '@types/react':
         specifier: ^18.2.23
-        version: 18.2.55
+        version: 18.3.3
       '@types/react-dom':
         specifier: ^18.2.8
-        version: 18.2.19
+        version: 18.3.0
       concurrently:
         specifier: ^8.2.1
         version: 8.2.2
       next:
         specifier: 14.2.5
-        version: 14.2.5(@babel/core@7.24.3)(react-dom@18.2.0)(react@18.2.0)
+        version: 14.2.5(@babel/core@7.24.3)(react-dom@18.3.1)(react@18.3.1)
       nextra:
         specifier: workspace:*
         version: link:../nextra
@@ -422,13 +422,13 @@ importers:
         version: 1.0.0(postcss@8.4.39)
       react:
         specifier: ^18.2.0
-        version: 18.2.0
+        version: 18.3.1
       react-cusdis:
         specifier: ^2.1.3
-        version: 2.1.3(react-dom@18.2.0)(react@18.2.0)
+        version: 2.1.3(react-dom@18.3.1)(react@18.3.1)
       react-dom:
         specifier: ^18.2.0
-        version: 18.2.0(react@18.2.0)
+        version: 18.3.1(react@18.3.1)
       tailwindcss:
         specifier: ^3.4.1
         version: 3.4.6
@@ -440,7 +440,7 @@ importers:
     dependencies:
       '@headlessui/react':
         specifier: ^1.7.17
-        version: 1.7.19(react-dom@18.2.0)(react@18.2.0)
+        version: 1.7.19(react-dom@18.3.1)(react@18.3.1)
       '@popperjs/core':
         specifier: ^2.11.8
         version: 2.11.8
@@ -461,7 +461,7 @@ importers:
         version: 0.12.2
       next-themes:
         specifier: ^0.3.0
-        version: 0.3.0(react-dom@18.2.0)(react@18.2.0)
+        version: 0.3.0(react-dom@18.3.1)(react@18.3.1)
       scroll-into-view-if-needed:
         specifier: ^3.1.0
         version: 3.1.0
@@ -474,13 +474,13 @@ importers:
         version: 0.0.0-insiders.565cd3e(postcss@8.4.39)
       '@testing-library/react':
         specifier: ^16.0.0
-        version: 16.0.0(@testing-library/dom@10.3.2)(@types/react-dom@18.2.19)(@types/react@18.2.55)(react-dom@18.2.0)(react@18.2.0)
+        version: 16.0.0(@testing-library/dom@10.3.2)(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
       '@types/react':
         specifier: ^18.2.23
-        version: 18.2.55
+        version: 18.3.3
       '@types/react-dom':
         specifier: ^18.2.8
-        version: 18.2.19
+        version: 18.3.0
       '@vitejs/plugin-react':
         specifier: ^4.1.0
         version: 4.2.1(vite@5.3.4)
@@ -492,7 +492,7 @@ importers:
         version: 24.1.0
       next:
         specifier: 14.2.5
-        version: 14.2.5(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)
+        version: 14.2.5(@babel/core@7.23.9)(react-dom@18.3.1)(react@18.3.1)
       nextra:
         specifier: workspace:*
         version: link:../nextra
@@ -510,10 +510,10 @@ importers:
         version: 1.0.0(postcss@8.4.39)
       react:
         specifier: ^18.2.0
-        version: 18.2.0
+        version: 18.3.1
       react-dom:
         specifier: ^18.2.0
-        version: 18.2.0(react@18.2.0)
+        version: 18.3.1(react@18.3.1)
       tailwindcss:
         specifier: ^3.4.1
         version: 3.4.6
@@ -1808,8 +1808,8 @@ packages:
       '@babel/core': ^7.0.0
     dependencies:
       '@babel/core': 7.24.3
-      '@babel/helper-create-regexp-features-plugin': 7.22.6(@babel/core@7.24.3)
-      '@babel/helper-plugin-utils': 7.22.5
+      '@babel/helper-create-regexp-features-plugin': 7.24.7(@babel/core@7.24.3)
+      '@babel/helper-plugin-utils': 7.24.8
     dev: true
 
   /@babel/plugin-syntax-unicode-sets-regex@7.18.6(@babel/core@7.24.9):
@@ -4030,7 +4030,7 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
-  /@headlessui/react@1.7.17(react-dom@18.2.0)(react@18.2.0):
+  /@headlessui/react@1.7.17(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-4am+tzvkqDSSgiwrsEpGWqgGo9dz8qU5M3znCkC4PgkpY4HcCZzEDEvozltGGGHIKl9jbXbZPSH5TWn4sWJdow==}
     engines: {node: '>=10'}
     peerDependencies:
@@ -4038,21 +4038,21 @@ packages:
       react-dom: ^16 || ^17 || ^18
     dependencies:
       client-only: 0.0.1
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
     dev: false
 
-  /@headlessui/react@1.7.19(react-dom@18.2.0)(react@18.2.0):
+  /@headlessui/react@1.7.19(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-Ll+8q3OlMJfJbAKM/+/Y2q6PPYbryqNTXDbryx7SXLIDamkF6iQFbriYHga0dY44PvDhvvBWCx1Xj4U5+G4hOw==}
     engines: {node: '>=10'}
     peerDependencies:
       react: ^16 || ^17 || ^18
       react-dom: ^16 || ^17 || ^18
     dependencies:
-      '@tanstack/react-virtual': 3.8.3(react-dom@18.2.0)(react@18.2.0)
+      '@tanstack/react-virtual': 3.8.3(react-dom@18.3.1)(react@18.3.1)
       client-only: 0.0.1
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
     dev: false
 
   /@humanwhocodes/config-array@0.11.14:
@@ -4411,18 +4411,7 @@ packages:
       - supports-color
     dev: false
 
-  /@mdx-js/react@3.0.1(@types/react@18.2.55)(react@18.2.0):
-    resolution: {integrity: sha512-9ZrPIU4MGf6et1m1ov3zKf+q9+deetI51zprKB1D/z3NOb+rUxxtEl3mCjW5wTGh6VhRdwPueh1oRzi6ezkA8A==}
-    peerDependencies:
-      '@types/react': '>=16'
-      react: '>=16'
-    dependencies:
-      '@types/mdx': 2.0.2
-      '@types/react': 18.2.55
-      react: 18.2.0
-    dev: false
-
-  /@mdx-js/react@3.0.1(@types/react@18.3.3)(react@18.2.0):
+  /@mdx-js/react@3.0.1(@types/react@18.3.3)(react@18.3.1):
     resolution: {integrity: sha512-9ZrPIU4MGf6et1m1ov3zKf+q9+deetI51zprKB1D/z3NOb+rUxxtEl3mCjW5wTGh6VhRdwPueh1oRzi6ezkA8A==}
     peerDependencies:
       '@types/react': '>=16'
@@ -4430,7 +4419,7 @@ packages:
     dependencies:
       '@types/mdx': 2.0.2
       '@types/react': 18.3.3
-      react: 18.2.0
+      react: 18.3.1
     dev: false
 
   /@napi-rs/simple-git-android-arm-eabi@0.1.17:
@@ -5413,15 +5402,15 @@ packages:
       tailwindcss: 3.4.6
     dev: true
 
-  /@tanstack/react-virtual@3.8.3(react-dom@18.2.0)(react@18.2.0):
+  /@tanstack/react-virtual@3.8.3(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-9ICwbDUUzN99CJIGc373i8NLoj6zFTKI2Hlcmo0+lCSAhPQ5mxq4dGOMKmLYoEFyHcGQ64Bd6ZVbnPpM6lNK5w==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
       '@tanstack/virtual-core': 3.8.3
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
     dev: false
 
   /@tanstack/virtual-core@3.8.3:
@@ -5442,7 +5431,7 @@ packages:
       pretty-format: 27.5.1
     dev: true
 
-  /@testing-library/react@16.0.0(@testing-library/dom@10.3.2)(@types/react-dom@18.2.19)(@types/react@18.2.55)(react-dom@18.2.0)(react@18.2.0):
+  /@testing-library/react@16.0.0(@testing-library/dom@10.3.2)(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-guuxUKRWQ+FgNX0h0NS0FIq3Q3uLtWVpBzcLOggmfMoUpgBnzBzvLLd4fbm6yS8ydJd94cIfY4yP9qUQjM2KwQ==}
     engines: {node: '>=18'}
     peerDependencies:
@@ -5459,19 +5448,19 @@ packages:
     dependencies:
       '@babel/runtime': 7.23.9
       '@testing-library/dom': 10.3.2
-      '@types/react': 18.2.55
-      '@types/react-dom': 18.2.19
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
+      '@types/react': 18.3.3
+      '@types/react-dom': 18.3.0
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
     dev: true
 
-  /@theguild/remark-mermaid@0.0.7(react@18.2.0):
+  /@theguild/remark-mermaid@0.0.7(react@18.3.1):
     resolution: {integrity: sha512-sh2xlwOllU6Abh+MPWdJDlNwirDcjdlH1wrDWxNLFNVbEzyVb1BTwhecc6ot5hxBUe38z1Ecja8xor9Wkb61gg==}
     peerDependencies:
       react: ^18.2.0
     dependencies:
       mermaid: 10.2.2
-      react: 18.2.0
+      react: 18.3.1
       unist-util-visit: 5.0.0
     transitivePeerDependencies:
       - supports-color
@@ -5639,33 +5628,18 @@ packages:
 
   /@types/prop-types@15.7.12:
     resolution: {integrity: sha512-5zvhXYtRNRluoE/jAp4GVsSduVUzNWKkOZrCDBWYtE7biZywwdC2AcEzg+cSMLFRfVgeAFqpfNabiPjxFddV1Q==}
-    dev: false
 
-  /@types/prop-types@15.7.5:
-    resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
-
-  /@types/react-dom@18.2.19:
-    resolution: {integrity: sha512-aZvQL6uUbIJpjZk4U8JZGbau9KDeAwMfmhyWorxgBkqDIEf6ROjRozcmPIicqsUwPUjbkDfHKgGee1Lq65APcA==}
+  /@types/react-dom@18.3.0:
+    resolution: {integrity: sha512-EhwApuTmMBmXuFOikhQLIBUn6uFg81SwLMOAUgodJF14SOBOCMdU04gDoYi0WOJJHD144TL32z4yDqCW3dnkQg==}
     dependencies:
-      '@types/react': 18.2.55
+      '@types/react': 18.3.3
     dev: true
-
-  /@types/react@18.2.55:
-    resolution: {integrity: sha512-Y2Tz5P4yz23brwm2d7jNon39qoAtMMmalOQv6+fEFt1mT+FcM3D841wDpoUvFXhaYenuROCy3FZYqdTjM7qVyA==}
-    dependencies:
-      '@types/prop-types': 15.7.5
-      '@types/scheduler': 0.16.2
-      csstype: 3.1.0
 
   /@types/react@18.3.3:
     resolution: {integrity: sha512-hti/R0pS0q1/xx+TsI73XIqk26eBsISZ2R0wUijXIngRK9R/e7Xw/cXVxQK7R5JjW+SV4zGcn5hXjudkN/pLIw==}
     dependencies:
       '@types/prop-types': 15.7.12
       csstype: 3.1.3
-    dev: false
-
-  /@types/scheduler@0.16.2:
-    resolution: {integrity: sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==}
 
   /@types/semver@7.5.0:
     resolution: {integrity: sha512-G8hZ6XJiHnuhQKR7ZmysCeJWE08o8T0AXtk5darsCaTVsYZhhgUrq53jizaR2FvsoeCwJhlmwTjkXBY5Pn/ZHw==}
@@ -6670,13 +6644,13 @@ packages:
       is-windows: 1.0.2
     dev: true
 
-  /better-react-mathjax@2.0.3(react@18.2.0):
+  /better-react-mathjax@2.0.3(react@18.3.1):
     resolution: {integrity: sha512-wfifT8GFOKb1TWm2+E50I6DJpLZ5kLbch283Lu043EJtwSv0XvZDjr4YfR4d2MjAhqP6SH4VjjrKgbX8R00oCQ==}
     peerDependencies:
       react: '>=16.8'
     dependencies:
       mathjax-full: 3.2.2
-      react: 18.2.0
+      react: 18.3.1
     dev: false
 
   /binary-extensions@2.3.0:
@@ -7244,12 +7218,8 @@ packages:
       rrweb-cssom: 0.6.0
     dev: true
 
-  /csstype@3.1.0:
-    resolution: {integrity: sha512-uX1KG+x9h5hIJsaKR9xHUeUraxf8IODOwq9JLNPq6BwB04a/xgpq3rcx47l5BZu5zBPlgD342tdke3Hom/nJRA==}
-
   /csstype@3.1.3:
     resolution: {integrity: sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw==}
-    dev: false
 
   /csv-generate@3.4.3:
     resolution: {integrity: sha512-w/T+rqR0vwvHqWs/1ZyMDWtHHSJaN06klRqJXBEpDJaM/+dZkso0OKh1VcuuYvK3XM53KysVNq8Ko/epCK8wOw==}
@@ -8840,7 +8810,7 @@ packages:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
     dev: true
 
-  /framer-motion@10.18.0(react-dom@18.2.0)(react@18.2.0):
+  /framer-motion@10.18.0(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-oGlDh1Q1XqYPksuTD/usb0I70hq95OUzmL9+6Zd+Hs4XV0oaISBa/UUMSjYiq6m8EUF32132mOJ8xVZS+I0S6w==}
     peerDependencies:
       react: ^18.0.0
@@ -8851,8 +8821,8 @@ packages:
       react-dom:
         optional: true
     dependencies:
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
       tslib: 2.6.3
     optionalDependencies:
       '@emotion/is-prop-valid': 0.8.8
@@ -10386,14 +10356,14 @@ packages:
     resolution: {integrity: sha512-y8j3a5/DkJCmS5x4dMCQL+OR0+2EAq3DOtio1COSHsmW2BGXnNCK3v12hJt1LrUz5iZH5g0LmuYOjDdI+czghA==}
     dev: false
 
-  /markdown-to-jsx@6.11.4(react@18.2.0):
+  /markdown-to-jsx@6.11.4(react@18.3.1):
     resolution: {integrity: sha512-3lRCD5Sh+tfA52iGgfs/XZiw33f7fFX9Bn55aNnVNUd2GzLDkOWyKYYD8Yju2B1Vn+feiEdgJs8T6Tg0xNokPw==}
     engines: {node: '>= 4'}
     peerDependencies:
       react: '>= 0.14.0'
     dependencies:
       prop-types: 15.8.1
-      react: 18.2.0
+      react: 18.3.1
       unquote: 1.1.1
     dev: false
 
@@ -11379,17 +11349,17 @@ packages:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
     dev: true
 
-  /next-themes@0.3.0(react-dom@18.2.0)(react@18.2.0):
+  /next-themes@0.3.0(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-/QHIrsYpd6Kfk7xakK4svpDI5mmXP0gfvCoJdGpZQ2TOrQZmsW0QxjaiLn8wbIKjtm4BTSqLoix4lxYYOnLJ/w==}
     peerDependencies:
       react: ^16.8 || ^17 || ^18
       react-dom: ^16.8 || ^17 || ^18
     dependencies:
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
     dev: false
 
-  /next@14.2.5(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0):
+  /next@14.2.5(@babel/core@7.23.9)(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-0f8aRfBVL+mpzfBjYfQuLWh2WyAwtJXCRfkPF4UJ5qd2YwrHczsrSzXU4tRMV0OAxR8ZJZWPFn6uhSC56UTsLA==}
     engines: {node: '>=18.17.0'}
     hasBin: true
@@ -11413,9 +11383,9 @@ packages:
       caniuse-lite: 1.0.30001642
       graceful-fs: 4.2.11
       postcss: 8.4.31
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      styled-jsx: 5.1.1(@babel/core@7.23.9)(react@18.2.0)
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      styled-jsx: 5.1.1(@babel/core@7.23.9)(react@18.3.1)
     optionalDependencies:
       '@next/swc-darwin-arm64': 14.2.5
       '@next/swc-darwin-x64': 14.2.5
@@ -11431,7 +11401,7 @@ packages:
       - babel-plugin-macros
     dev: true
 
-  /next@14.2.5(@babel/core@7.24.3)(react-dom@18.2.0)(react@18.2.0):
+  /next@14.2.5(@babel/core@7.24.3)(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-0f8aRfBVL+mpzfBjYfQuLWh2WyAwtJXCRfkPF4UJ5qd2YwrHczsrSzXU4tRMV0OAxR8ZJZWPFn6uhSC56UTsLA==}
     engines: {node: '>=18.17.0'}
     hasBin: true
@@ -11455,9 +11425,9 @@ packages:
       caniuse-lite: 1.0.30001642
       graceful-fs: 4.2.11
       postcss: 8.4.31
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      styled-jsx: 5.1.1(@babel/core@7.24.3)(react@18.2.0)
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      styled-jsx: 5.1.1(@babel/core@7.24.3)(react@18.3.1)
     optionalDependencies:
       '@next/swc-darwin-arm64': 14.2.5
       '@next/swc-darwin-x64': 14.2.5
@@ -11472,7 +11442,7 @@ packages:
       - '@babel/core'
       - babel-plugin-macros
 
-  /next@14.2.5(@babel/core@7.24.9)(react-dom@18.2.0)(react@18.2.0):
+  /next@14.2.5(@babel/core@7.24.9)(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-0f8aRfBVL+mpzfBjYfQuLWh2WyAwtJXCRfkPF4UJ5qd2YwrHczsrSzXU4tRMV0OAxR8ZJZWPFn6uhSC56UTsLA==}
     engines: {node: '>=18.17.0'}
     hasBin: true
@@ -11496,9 +11466,9 @@ packages:
       caniuse-lite: 1.0.30001642
       graceful-fs: 4.2.11
       postcss: 8.4.31
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      styled-jsx: 5.1.1(@babel/core@7.24.9)(react@18.2.0)
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      styled-jsx: 5.1.1(@babel/core@7.24.9)(react@18.3.1)
     optionalDependencies:
       '@next/swc-darwin-arm64': 14.2.5
       '@next/swc-darwin-x64': 14.2.5
@@ -12342,31 +12312,31 @@ packages:
       safe-buffer: 5.2.1
     dev: true
 
-  /react-cusdis@2.1.3(react-dom@18.2.0)(react@18.2.0):
+  /react-cusdis@2.1.3(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-fUJOAUY7a3y21fNzlRWUSTr/ZMsejQAYWIWdsNuBPPZHbUrBvke/8Gw4OL5Mlrth7jLw8VTNssX0WBX5/prorQ==}
     peerDependencies:
       react: ^17.0.0
       react-dom: ^17.0.0
     dependencies:
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
     dev: true
 
-  /react-dom@18.2.0(react@18.2.0):
-    resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==}
+  /react-dom@18.3.1(react@18.3.1):
+    resolution: {integrity: sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw==}
     peerDependencies:
-      react: ^18.2.0
+      react: ^18.3.1
     dependencies:
       loose-envify: 1.4.0
-      react: 18.2.0
-      scheduler: 0.23.0
+      react: 18.3.1
+      scheduler: 0.23.2
 
-  /react-intersection-observer@8.34.0(react@18.2.0):
+  /react-intersection-observer@8.34.0(react@18.3.1):
     resolution: {integrity: sha512-TYKh52Zc0Uptp5/b4N91XydfSGKubEhgZRtcg1rhTKABXijc4Sdr1uTp5lJ8TN27jwUsdXxjHXtHa0kPj704sw==}
     peerDependencies:
       react: ^15.0.0 || ^16.0.0 || ^17.0.0|| ^18.0.0
     dependencies:
-      react: 18.2.0
+      react: 18.3.1
     dev: false
 
   /react-is@16.13.1:
@@ -12381,8 +12351,8 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /react@18.2.0:
-    resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==}
+  /react@18.3.1:
+    resolution: {integrity: sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==}
     engines: {node: '>=0.10.0'}
     dependencies:
       loose-envify: 1.4.0
@@ -12939,8 +12909,8 @@ packages:
       xmlchars: 2.2.0
     dev: true
 
-  /scheduler@0.23.0:
-    resolution: {integrity: sha512-CtuThmgHNg7zIZWAXi3AsyIzA3n4xx7aNyjwC2VJldO2LMVDhFK+63xGqq6CsJH4rTAt6/M+N4GhZiDYPx9eUw==}
+  /scheduler@0.23.2:
+    resolution: {integrity: sha512-UOShsPwz7NrMUqhR6t0hWjFduvOzbtv7toDH1/hIrfRNIDBnnBWd0CwJTGvTpngVlmwGCdP9/Zl/tVrDqcuYzQ==}
     dependencies:
       loose-envify: 1.4.0
 
@@ -13450,7 +13420,7 @@ packages:
       inline-style-parser: 0.2.2
     dev: false
 
-  /styled-jsx@5.1.1(@babel/core@7.23.9)(react@18.2.0):
+  /styled-jsx@5.1.1(@babel/core@7.23.9)(react@18.3.1):
     resolution: {integrity: sha512-pW7uC1l4mBZ8ugbiZrcIsiIvVx1UmTfw7UkC3Um2tmfUq9Bhk8IiyEIPl6F8agHgjzku6j0xQEZbfA5uSgSaCw==}
     engines: {node: '>= 12.0.0'}
     peerDependencies:
@@ -13465,10 +13435,10 @@ packages:
     dependencies:
       '@babel/core': 7.23.9
       client-only: 0.0.1
-      react: 18.2.0
+      react: 18.3.1
     dev: true
 
-  /styled-jsx@5.1.1(@babel/core@7.24.3)(react@18.2.0):
+  /styled-jsx@5.1.1(@babel/core@7.24.3)(react@18.3.1):
     resolution: {integrity: sha512-pW7uC1l4mBZ8ugbiZrcIsiIvVx1UmTfw7UkC3Um2tmfUq9Bhk8IiyEIPl6F8agHgjzku6j0xQEZbfA5uSgSaCw==}
     engines: {node: '>= 12.0.0'}
     peerDependencies:
@@ -13483,9 +13453,9 @@ packages:
     dependencies:
       '@babel/core': 7.24.3
       client-only: 0.0.1
-      react: 18.2.0
+      react: 18.3.1
 
-  /styled-jsx@5.1.1(@babel/core@7.24.9)(react@18.2.0):
+  /styled-jsx@5.1.1(@babel/core@7.24.9)(react@18.3.1):
     resolution: {integrity: sha512-pW7uC1l4mBZ8ugbiZrcIsiIvVx1UmTfw7UkC3Um2tmfUq9Bhk8IiyEIPl6F8agHgjzku6j0xQEZbfA5uSgSaCw==}
     engines: {node: '>= 12.0.0'}
     peerDependencies:
@@ -13500,7 +13470,7 @@ packages:
     dependencies:
       '@babel/core': 7.24.9
       client-only: 0.0.1
-      react: 18.2.0
+      react: 18.3.1
 
   /stylis@4.2.0:
     resolution: {integrity: sha512-Orov6g6BB1sDfYgzWfTHDOxamtX1bE/zo104Dh9e6fqJ3PooipYyfJ0pUmrZO2wAvO8YbEyeFrkV91XTsGMSrw==}
@@ -14916,7 +14886,7 @@ packages:
     resolution: {integrity: sha512-JZxotl7SxAJH0j7dN4pxsTV6ZLXoLdGME+PsjkL/DaBrVryK9kTGq06GfKrwcSOqypP+fdXGoCHE36b99fWVoA==}
     dev: false
 
-  file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.2.0)(react@18.2.0)(typescript@5.5.3):
+  file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3):
     resolution: {directory: packages/nextra, type: directory}
     id: file:packages/nextra
     name: nextra
@@ -14926,14 +14896,14 @@ packages:
       react: '>=16.13.1'
       react-dom: '>=16.13.1'
     dependencies:
-      '@headlessui/react': 1.7.17(react-dom@18.2.0)(react@18.2.0)
+      '@headlessui/react': 1.7.17(react-dom@18.3.1)(react@18.3.1)
       '@mdx-js/mdx': 3.0.1
-      '@mdx-js/react': 3.0.1(@types/react@18.3.3)(react@18.2.0)
+      '@mdx-js/react': 3.0.1(@types/react@18.3.3)(react@18.3.1)
       '@napi-rs/simple-git': 0.1.9
       '@shikijs/twoslash': 1.1.2(typescript@5.5.3)
-      '@theguild/remark-mermaid': 0.0.7(react@18.2.0)
+      '@theguild/remark-mermaid': 0.0.7(react@18.3.1)
       '@theguild/remark-npm2yarn': 0.3.0
-      better-react-mathjax: 2.0.3(react@18.2.0)
+      better-react-mathjax: 2.0.3(react@18.3.1)
       clsx: 2.1.1
       estree-util-to-js: 2.0.0
       estree-util-value-to-estree: 3.0.1
@@ -14942,10 +14912,10 @@ packages:
       gray-matter: 4.0.3
       hast-util-to-estree: 3.1.0
       katex: 0.16.9
-      next: 14.2.5(@babel/core@7.24.3)(react-dom@18.2.0)(react@18.2.0)
+      next: 14.2.5(@babel/core@7.24.3)(react-dom@18.3.1)(react@18.3.1)
       p-limit: 4.0.0
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
       rehype-katex: 7.0.0
       rehype-pretty-code: 0.13.2(shiki@1.1.2)
       rehype-raw: 7.0.0
@@ -14968,7 +14938,7 @@ packages:
       - typescript
     dev: false
 
-  file:packages/nextra-theme-blog(next@14.2.5)(nextra@3.0.0-alpha.27)(react-dom@18.2.0)(react@18.2.0):
+  file:packages/nextra-theme-blog(next@14.2.5)(nextra@3.0.0-alpha.27)(react-dom@18.3.1)(react@18.3.1):
     resolution: {directory: packages/nextra-theme-blog, type: directory}
     id: file:packages/nextra-theme-blog
     name: nextra-theme-blog
@@ -14982,14 +14952,14 @@ packages:
       react-cusdis:
         optional: true
     dependencies:
-      next: 14.2.5(@babel/core@7.24.3)(react-dom@18.2.0)(react@18.2.0)
-      next-themes: 0.3.0(react-dom@18.2.0)(react@18.2.0)
-      nextra: file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.2.0)(react@18.2.0)(typescript@5.5.3)
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
+      next: 14.2.5(@babel/core@7.24.3)(react-dom@18.3.1)(react@18.3.1)
+      next-themes: 0.3.0(react-dom@18.3.1)(react@18.3.1)
+      nextra: file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
     dev: false
 
-  file:packages/nextra-theme-docs(next@14.2.5)(nextra@3.0.0-alpha.27)(react-dom@18.2.0)(react@18.2.0):
+  file:packages/nextra-theme-docs(next@14.2.5)(nextra@3.0.0-alpha.27)(react-dom@18.3.1)(react@18.3.1):
     resolution: {directory: packages/nextra-theme-docs, type: directory}
     id: file:packages/nextra-theme-docs
     name: nextra-theme-docs
@@ -14999,18 +14969,18 @@ packages:
       react: '>=16.13.1'
       react-dom: '>=16.13.1'
     dependencies:
-      '@headlessui/react': 1.7.17(react-dom@18.2.0)(react@18.2.0)
+      '@headlessui/react': 1.7.17(react-dom@18.3.1)(react@18.3.1)
       '@popperjs/core': 2.11.8
       clsx: 2.1.1
       escape-string-regexp: 5.0.0
       flexsearch: 0.7.43
       focus-visible: 5.2.0
       intersection-observer: 0.12.2
-      next: 14.2.5(@babel/core@7.24.3)(react-dom@18.2.0)(react@18.2.0)
-      next-themes: 0.3.0(react-dom@18.2.0)(react@18.2.0)
-      nextra: file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.2.0)(react@18.2.0)(typescript@5.5.3)
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
+      next: 14.2.5(@babel/core@7.24.3)(react-dom@18.3.1)(react@18.3.1)
+      next-themes: 0.3.0(react-dom@18.3.1)(react@18.3.1)
+      nextra: file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
       scroll-into-view-if-needed: 3.1.0
       zod: 3.22.3
     dev: false
