@@ -43,7 +43,8 @@ function Ident(): ReactElement {
   return (
     <>
       {Array.from({ length }, (_, i) => (
-        <span className="_w-5" key={i} />
+        // Text can shrink indent
+        <span className="_w-5 _shrink-0" key={i} />
       ))}
     </>
   )
@@ -69,7 +70,13 @@ const Folder = memo<FolderProps>(
           className="_inline-flex _cursor-pointer _items-center _py-1 hover:_opacity-60"
         >
           <Ident />
-          <svg width="1em" height="1em" viewBox="0 0 24 24">
+          <svg
+            width="1em"
+            height="1em"
+            viewBox="0 0 24 24"
+            // Text can shrink icon
+            className="_shrink-0"
+          >
             <path
               fill="none"
               stroke="currentColor"
@@ -105,7 +112,13 @@ const File = memo<FileProps>(({ label, name, active }) => (
   >
     <span className="_inline-flex _cursor-default _items-center _py-1">
       <Ident />
-      <svg width="1em" height="1em" viewBox="0 0 24 24">
+      <svg
+        width="1em"
+        height="1em"
+        viewBox="0 0 24 24"
+        // Text can shrink icon
+        className="_shrink-0"
+      >
         <path
           fill="none"
           stroke="currentColor"
