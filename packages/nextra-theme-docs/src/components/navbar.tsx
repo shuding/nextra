@@ -1,4 +1,10 @@
-import { Menu, Transition } from '@headlessui/react'
+import {
+  MenuItem as _MenuItem,
+  Menu,
+  MenuButton,
+  MenuItems,
+  Transition
+} from '@headlessui/react'
 import cn from 'clsx'
 // eslint-disable-next-line no-restricted-imports -- since we don't need newWindow prop
 import NextLink from 'next/link'
@@ -42,7 +48,7 @@ function NavbarMenu({
 
   return (
     <Menu as="div" className="_relative">
-      <Menu.Button
+      <MenuButton
         className={cn(
           classes.link,
           classes.inactive,
@@ -50,23 +56,23 @@ function NavbarMenu({
         )}
       >
         {children}
-      </Menu.Button>
+      </MenuButton>
       <Transition
         leave="_transition-opacity"
         leaveFrom="_opacity-100"
         leaveTo="_opacity-0"
-        as={Menu.Items}
+        as={MenuItems}
         className="_absolute _right-0 _z-20 _mt-1 _max-h-64 _min-w-full _overflow-auto _rounded-md _ring-1 _ring-black/5 _bg-white _py-1 _text-sm _shadow-lg dark:_ring-white/20 dark:_bg-neutral-800"
       >
         {entries.map(([key, item]) => (
-          <Menu.Item key={key}>
-            {({ active }) => (
+          <_MenuItem key={key}>
+            {({ focus }) => (
               <Anchor
                 href={item.href || routes[key]?.route || menu.route + '/' + key}
                 className={cn(
                   '_relative _w-full _select-none _whitespace-nowrap hover:_text-gray-900 dark:hover:_text-gray-100 _inline-block',
                   '_py-1.5 _transition-colors ltr:_pl-3 ltr:_pr-9 rtl:_pr-3 rtl:_pl-9',
-                  active
+                  focus
                     ? '_text-gray-900 dark:_text-gray-100'
                     : '_text-gray-600 dark:_text-gray-400'
                 )}
@@ -75,7 +81,7 @@ function NavbarMenu({
                 {item.title || key}
               </Anchor>
             )}
-          </Menu.Item>
+          </_MenuItem>
         ))}
       </Transition>
     </Menu>

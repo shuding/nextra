@@ -135,6 +135,7 @@ export const themeSchema = /* @__PURE__ */ (() =>
   }))()
 
 export const publicThemeSchema = /* @__PURE__ */ (() =>
+  // eslint-disable-next-line deprecation/deprecation -- fixme
   themeSchema.deepPartial().extend({
     // to have `locale` and `text` as required properties
     i18n: i18nSchema.optional()
