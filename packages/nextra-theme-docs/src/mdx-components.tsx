@@ -132,7 +132,7 @@ function Details({
             })
             return
           }
-          if (child.type !== Details) {
+          if (child.type !== Details && child.props.children) {
             ;[summary, child] = findSummary(child.props.children)
           }
         }
