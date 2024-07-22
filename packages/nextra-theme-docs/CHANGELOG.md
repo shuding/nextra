@@ -1,5 +1,18 @@
 # nextra-theme-docs
 
+## 3.0.0-alpha.28
+
+### Patch Changes
+
+- a8c2196: use dynamic import for loading `mermaid`
+- 363b85f: add `flex-shrink: 0` for indent in `FileTree` for `<Ident />` and svg
+  icons in `<Folder />` and `<File />`
+- 363b85f: fix `RangeError: Maximum call stack size exceeded` in `findSummary`
+  when `child.props.children` is `undefined`
+- Updated dependencies [a8c2196]
+- Updated dependencies [363b85f]
+  - nextra@3.0.0-alpha.28
+
 ## 3.0.0-alpha.27
 
 ### Patch Changes

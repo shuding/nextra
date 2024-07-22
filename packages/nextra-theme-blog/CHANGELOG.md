@@ -1,5 +1,16 @@
 # nextra-theme-blog
 
+## 3.0.0-alpha.28
+
+### Patch Changes
+
+- a8c2196: use dynamic import for loading `mermaid`
+- 363b85f: add `flex-shrink: 0` for indent in `FileTree` for `<Ident />` and svg
+  icons in `<Folder />` and `<File />`
+- Updated dependencies [a8c2196]
+- Updated dependencies [363b85f]
+  - nextra@3.0.0-alpha.28
+
 ## 3.0.0-alpha.27
 
 ### Patch Changes
