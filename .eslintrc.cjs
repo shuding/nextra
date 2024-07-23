@@ -26,6 +26,10 @@ module.exports = {
       ],
       plugins: ['import', 'unicorn', 'sonarjs'],
       rules: {
+        // 'no-extra-boolean-cast': [
+        //   'error',
+        //   { enforceForInnerExpressions: true }
+        // ],
         'prefer-object-has-own': 'error',
         'logical-assignment-operators': [
           'error',
