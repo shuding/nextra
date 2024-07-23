@@ -45,7 +45,7 @@ export const recmaRewriteJsx: Plugin<[], Program> =
 
     const returnStatement = createMdxContent.body.body.find(
       o => o.type === 'ReturnStatement'
-    ) as ReturnStatement
+    )!
 
     const { argument } = returnStatement as any
 

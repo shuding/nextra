@@ -154,19 +154,19 @@
   "devDependencies": {
     "@svgr/babel-plugin-remove-jsx-attribute": "^8.0.0",
     "@testing-library/react": "^16.0.0",
-    "@types/estree": "^1.0.2",
-    "@types/graceful-fs": "^4.1.7",
-    "@types/hast": "^3.0.1",
-    "@types/mdast": "^3.0.13",
-    "@types/react": "^18.2.23",
-    "@types/webpack": "^5.28.3",
-    "@vitejs/plugin-react": "^4.1.0",
+    "@types/estree": "^1.0.5",
+    "@types/graceful-fs": "^4.1.9",
+    "@types/hast": "^3.0.4",
+    "@types/mdast": "^4.0.4",
+    "@types/react": "^18.3.3",
+    "@types/webpack": "^5.28.5",
+    "@vitejs/plugin-react": "^4.3.1",
     "esbuild-plugin-svgr": "^2.1.0",
     "next": "^14.2.5",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "unified": "^11.0.3",
-    "vitest": "^2.0.3"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "unified": "^11.0.5",
+    "vitest": "^2.0.4"
   },
   "sideEffects": false
 }
