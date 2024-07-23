@@ -100,7 +100,7 @@ importers:
         version: 2.1.1
       framer-motion:
         specifier: ^11.0.0
-        version: 11.3.8(react-dom@18.3.1)(react@18.3.1)
+        version: 11.3.9(react-dom@18.3.1)(react@18.3.1)
       next:
         specifier: 14.2.5
         version: 14.2.5(@babel/core@7.24.9)(react-dom@18.3.1)(react@18.3.1)
@@ -146,10 +146,10 @@ importers:
         version: 14.2.5(@babel/core@7.24.3)(react-dom@18.3.1)(react@18.3.1)
       nextra:
         specifier: workspace:*
-        version: file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
+        version: file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.4)
       nextra-theme-blog:
         specifier: workspace:*
-        version: file:packages/nextra-theme-blog(next@14.2.5)(nextra@3.0.0-alpha.27)(react-dom@18.3.1)(react@18.3.1)
+        version: file:packages/nextra-theme-blog(next@14.2.5)(nextra@3.0.0-alpha.28)(react-dom@18.3.1)(react@18.3.1)
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -169,10 +169,10 @@ importers:
         version: 14.2.5(@babel/core@7.24.3)(react-dom@18.3.1)(react@18.3.1)
       nextra:
         specifier: workspace:*
-        version: file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
+        version: file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.4)
       nextra-theme-docs:
         specifier: workspace:*
-        version: file:packages/nextra-theme-docs(next@14.2.5)(nextra@3.0.0-alpha.27)(react-dom@18.3.1)(react@18.3.1)
+        version: file:packages/nextra-theme-docs(next@14.2.5)(nextra@3.0.0-alpha.28)(react-dom@18.3.1)(react@18.3.1)
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -201,10 +201,10 @@ importers:
         version: 14.2.5(@babel/core@7.24.3)(react-dom@18.3.1)(react@18.3.1)
       nextra:
         specifier: workspace:*
-        version: file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
+        version: file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.4)
       nextra-theme-docs:
         specifier: workspace:*
-        version: file:packages/nextra-theme-docs(next@14.2.5)(nextra@3.0.0-alpha.27)(react-dom@18.3.1)(react@18.3.1)
+        version: file:packages/nextra-theme-docs(next@14.2.5)(nextra@3.0.0-alpha.28)(react-dom@18.3.1)(react@18.3.1)
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -249,7 +249,7 @@ importers:
         version: 0.1.17
       '@shikijs/twoslash':
         specifier: ^1.0.0
-        version: 1.1.2(typescript@5.5.3)
+        version: 1.1.2(typescript@5.5.4)
       '@theguild/remark-mermaid':
         specifier: ^0.0.7
         version: 0.0.7(react@18.3.1)
@@ -340,7 +340,7 @@ importers:
         version: 8.0.0(@babel/core@7.24.9)
       '@testing-library/react':
         specifier: ^16.0.0
-        version: 16.0.0(@testing-library/dom@10.3.2)(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+        version: 16.0.0(@testing-library/dom@10.4.0)(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
       '@types/estree':
         specifier: ^1.0.2
         version: 1.0.5
@@ -474,7 +474,7 @@ importers:
         version: 0.0.0-insiders.565cd3e(postcss@8.4.39)
       '@testing-library/react':
         specifier: ^16.0.0
-        version: 16.0.0(@testing-library/dom@10.3.2)(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+        version: 16.0.0(@testing-library/dom@10.4.0)(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
       '@types/react':
         specifier: ^18.2.23
         version: 18.3.3
@@ -4929,11 +4929,11 @@ packages:
     resolution: {integrity: sha512-ERVzNQz88ZkDqUpWeC57Kp+Kmx5RjqeDBR1M8AGWGom4yrkITiTfXCGmjchlDSw12MhDTuPYR4HVFW8uT61RaQ==}
     dev: false
 
-  /@shikijs/twoslash@1.1.2(typescript@5.5.3):
+  /@shikijs/twoslash@1.1.2(typescript@5.5.4):
     resolution: {integrity: sha512-Jt8QAudENcCS7cgxjbXMpUCA7IAOy1kot+Qo5yyyLl9VwVKvZMW0BDrrigbOia8602X2Z76U6XEs9UXyD6LnsQ==}
     dependencies:
       '@shikijs/core': 1.1.2
-      twoslash: 0.2.2(typescript@5.5.3)
+      twoslash: 0.2.2(typescript@5.5.4)
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -5272,8 +5272,8 @@ packages:
     resolution: {integrity: sha512-vd2A2TnM5lbnWZnHi9B+L2gPtkSeOtJOAw358JqokIH1+v2J7vUAzFVPwB/wrye12RFOurffXu33plm4uQ+JBQ==}
     dev: false
 
-  /@testing-library/dom@10.3.2:
-    resolution: {integrity: sha512-0bxIdP9mmPiOJ6wHLj8bdJRq+51oddObeCGdEf6PNEhYd93ZYAN+lPRnEOVFtheVwDM7+p+tza3LAQgp0PTudg==}
+  /@testing-library/dom@10.4.0:
+    resolution: {integrity: sha512-pemlzrSESWbdAloYml3bAJMEfNh1Z7EduzqPKprCH5S341frlpYnUEW0H72dLxa6IsYr+mPno20GiSm+h9dEdQ==}
     engines: {node: '>=18'}
     dependencies:
       '@babel/code-frame': 7.24.7
@@ -5286,7 +5286,7 @@ packages:
       pretty-format: 27.5.1
     dev: true
 
-  /@testing-library/react@16.0.0(@testing-library/dom@10.3.2)(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1):
+  /@testing-library/react@16.0.0(@testing-library/dom@10.4.0)(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-guuxUKRWQ+FgNX0h0NS0FIq3Q3uLtWVpBzcLOggmfMoUpgBnzBzvLLd4fbm6yS8ydJd94cIfY4yP9qUQjM2KwQ==}
     engines: {node: '>=18'}
     peerDependencies:
@@ -5302,7 +5302,7 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.23.9
-      '@testing-library/dom': 10.3.2
+      '@testing-library/dom': 10.4.0
       '@types/react': 18.3.3
       '@types/react-dom': 18.3.0
       react: 18.3.1
@@ -8562,8 +8562,8 @@ packages:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
     dev: true
 
-  /framer-motion@11.3.8(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-1D+RDTsIp4Rz2dq/oToqSEc9idEQwgBRQyBq4rGpFba+0Z+GCbj9z1s0+ikFbanWe3YJ0SqkNlDe08GcpFGj5A==}
+  /framer-motion@11.3.9(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-6oW/GDxuLBZqWJJeC8+zkEQeYDe6BYXPaNDUiJNCbzj4KDfVpcScWpM+6A7YoQGCfbtL7Q3ZqAZDYXPUF5r54w==}
     peerDependencies:
       '@emotion/is-prop-valid': '*'
       react: ^18.0.0
@@ -13499,14 +13499,14 @@ packages:
     resolution: {integrity: sha512-vwmMzoVkRk9yOElqn1xzCGwnv4rpfWHGtD177NkGc+A6KK5JhZtmugyW/T96g+Fwx2JrZB67FhAvdU5ptsXrUQ==}
     dev: false
 
-  /twoslash@0.2.2(typescript@5.5.3):
+  /twoslash@0.2.2(typescript@5.5.4):
     resolution: {integrity: sha512-34VeMQiwiC6Jn2fSxo39z0BtINrOAeYb9WRfEQyW47cgMjw4NUuM3ym5qwL0g4xFoocuH1fKXlSl96EE2DghVQ==}
     peerDependencies:
       typescript: '*'
     dependencies:
       '@typescript/vfs': 1.5.0
       twoslash-protocol: 0.2.2
-      typescript: 5.5.3
+      typescript: 5.5.4
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -13621,8 +13621,8 @@ packages:
     hasBin: true
     dev: true
 
-  /typescript@5.5.3:
-    resolution: {integrity: sha512-/hreyEujaB0w76zKo6717l3L0o/qEUtRgdvUBvlkhoWeOVMjMuHNHk0BRBzikzuGDqNmPQbg5ifMEqsHLiIUcQ==}
+  /typescript@5.5.4:
+    resolution: {integrity: sha512-Mtq29sKDAEYP7aljRgtPOpTvOfbwRWlS6dPRzwjdE+C0R4brX/GUyhHSecbHMFLNBLcJIPt9nl9yG5TZ1weH+Q==}
     engines: {node: '>=14.17'}
     hasBin: true
     dev: false
@@ -14399,7 +14399,7 @@ packages:
     resolution: {integrity: sha512-JZxotl7SxAJH0j7dN4pxsTV6ZLXoLdGME+PsjkL/DaBrVryK9kTGq06GfKrwcSOqypP+fdXGoCHE36b99fWVoA==}
     dev: false
 
-  file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3):
+  file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.4):
     resolution: {directory: packages/nextra, type: directory}
     id: file:packages/nextra
     name: nextra
@@ -14413,7 +14413,7 @@ packages:
       '@mdx-js/mdx': 3.0.1
       '@mdx-js/react': 3.0.1(@types/react@18.3.3)(react@18.3.1)
       '@napi-rs/simple-git': 0.1.9
-      '@shikijs/twoslash': 1.1.2(typescript@5.5.3)
+      '@shikijs/twoslash': 1.1.2(typescript@5.5.4)
       '@theguild/remark-mermaid': 0.0.7(react@18.3.1)
       '@theguild/remark-npm2yarn': 0.3.0
       better-react-mathjax: 2.0.3(react@18.3.1)
@@ -14451,7 +14451,7 @@ packages:
       - typescript
     dev: false
 
-  file:packages/nextra-theme-blog(next@14.2.5)(nextra@3.0.0-alpha.27)(react-dom@18.3.1)(react@18.3.1):
+  file:packages/nextra-theme-blog(next@14.2.5)(nextra@3.0.0-alpha.28)(react-dom@18.3.1)(react@18.3.1):
     resolution: {directory: packages/nextra-theme-blog, type: directory}
     id: file:packages/nextra-theme-blog
     name: nextra-theme-blog
@@ -14467,12 +14467,12 @@ packages:
     dependencies:
       next: 14.2.5(@babel/core@7.24.3)(react-dom@18.3.1)(react@18.3.1)
       next-themes: 0.3.0(react-dom@18.3.1)(react@18.3.1)
-      nextra: file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
+      nextra: file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.4)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
     dev: false
 
-  file:packages/nextra-theme-docs(next@14.2.5)(nextra@3.0.0-alpha.27)(react-dom@18.3.1)(react@18.3.1):
+  file:packages/nextra-theme-docs(next@14.2.5)(nextra@3.0.0-alpha.28)(react-dom@18.3.1)(react@18.3.1):
     resolution: {directory: packages/nextra-theme-docs, type: directory}
     id: file:packages/nextra-theme-docs
     name: nextra-theme-docs
@@ -14491,7 +14491,7 @@ packages:
       intersection-observer: 0.12.2
       next: 14.2.5(@babel/core@7.24.3)(react-dom@18.3.1)(react@18.3.1)
       next-themes: 0.3.0(react-dom@18.3.1)(react@18.3.1)
-      nextra: file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
+      nextra: file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.4)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       scroll-into-view-if-needed: 3.1.0
