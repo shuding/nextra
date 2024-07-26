@@ -23,6 +23,10 @@
       ]
     },
     {
+      matchPackageNames: ['eslint-plugin-react-hooks'],
+      matchUpdateTypes: ['major', 'minor', 'patch']
+    },
+    {
       groupName: 'latex',
       matchPackageNames: ['remark-math', 'rehype-katex']
     }
