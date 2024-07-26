@@ -26,10 +26,10 @@ module.exports = {
       ],
       plugins: ['import', 'unicorn', 'sonarjs'],
       rules: {
-        // 'no-extra-boolean-cast': [
-        //   'error',
-        //   { enforceForInnerExpressions: true }
-        // ],
+        'no-extra-boolean-cast': [
+          'error',
+          { enforceForInnerExpressions: true }
+        ],
         'prefer-object-has-own': 'error',
         'logical-assignment-operators': [
           'error',
@@ -81,8 +81,8 @@ module.exports = {
       extends: [
         'plugin:react/recommended',
         'plugin:react/jsx-runtime',
-        'plugin:react-hooks/recommended',
-        'plugin:@next/next/recommended'
+        'plugin:react-hooks/recommended'
+        // 'plugin:@next/next/recommended'
       ],
       rules: {
         'react/prop-types': 'off',
