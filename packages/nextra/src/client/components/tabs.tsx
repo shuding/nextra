@@ -14,7 +14,7 @@ function isTabObjectItem(item: unknown): item is TabObjectItem {
   return !!item && typeof item === 'object' && 'label' in item
 }
 
-function _Tabs({
+function Tabs_({
   items,
   selectedIndex: _selectedIndex,
   defaultIndex = 0,
@@ -124,4 +124,4 @@ function Tab({
   )
 }
 
-export const Tabs = Object.assign(_Tabs, { displayName: 'Tabs', Tab })
+export const Tabs = Object.assign(Tabs_, { displayName: 'Tabs', Tab })
