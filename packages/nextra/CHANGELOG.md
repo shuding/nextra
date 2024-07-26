@@ -1,5 +1,11 @@
 # nextra
 
+## 3.0.0-alpha.29
+
+### Patch Changes
+
+- fef635e: ignore loading pageMap for dynamic locale `/[locale]`
+
 ## 3.0.0-alpha.28
 
 ### Patch Changes
