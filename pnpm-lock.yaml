@@ -327,7 +327,7 @@ importers:
         version: 5.0.0
       yaml:
         specifier: ^2.3.2
-        version: 2.4.5
+        version: 2.5.0
       zod:
         specifier: ^3.22.3
         version: 3.23.8
@@ -9741,7 +9741,7 @@ packages:
       lilconfig: 3.1.2
       postcss: 8.4.40
       tsx: 4.16.2
-      yaml: 2.4.5
+      yaml: 2.5.0
     dev: true
 
   /postcss-nested@5.0.6(postcss@8.4.40):
@@ -12114,16 +12114,10 @@ packages:
     engines: {node: '>= 14'}
     dev: false
 
-  /yaml@2.4.5:
-    resolution: {integrity: sha512-aBx2bnqDzVOyNKfsysjA2ms5ZlnjSAW2eG3/L5G/CSujfjLJTJsEw1bGw8kCf04KodQWk1pxlGnZ56CRxiawmg==}
-    engines: {node: '>= 14'}
-    hasBin: true
-
   /yaml@2.5.0:
     resolution: {integrity: sha512-2wWLbGbYDiSqqIKoPjar3MPgB94ErzCtrNE1FdqGuaO0pi2JGjmE8aW8TDZwzU7vuxcGRdL/4gPQwQ7hD5AMSw==}
     engines: {node: '>= 14'}
     hasBin: true
-    dev: true
 
   /yargs-parser@21.1.1:
     resolution: {integrity: sha512-tVpsJW7DdjecAiFpbIB1e3qxIQsE6NoPc5/eTdrbbIC4h0LVsWhnoa3g+m2HclBIujHzsxZ4VJVA+GUuc2/LBw==}
