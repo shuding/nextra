@@ -125,7 +125,7 @@ importers:
         version: 8.1.0(typescript@5.5.4)
       '@types/node':
         specifier: ^20.0.0
-        version: 20.14.12
+        version: 20.14.13
       '@types/react':
         specifier: ^18.2.23
         version: 18.3.3
@@ -149,7 +149,7 @@ importers:
         version: file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.4)
       nextra-theme-blog:
         specifier: workspace:*
-        version: file:packages/nextra-theme-blog(next@14.2.5)(nextra@3.0.0-alpha.28)(react-dom@18.3.1)(react@18.3.1)
+        version: file:packages/nextra-theme-blog(next@14.2.5)(nextra@3.0.0-alpha.29)(react-dom@18.3.1)(react@18.3.1)
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -172,7 +172,7 @@ importers:
         version: file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.4)
       nextra-theme-docs:
         specifier: workspace:*
-        version: file:packages/nextra-theme-docs(next@14.2.5)(nextra@3.0.0-alpha.28)(react-dom@18.3.1)(react@18.3.1)
+        version: file:packages/nextra-theme-docs(next@14.2.5)(nextra@3.0.0-alpha.29)(react-dom@18.3.1)(react@18.3.1)
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -204,7 +204,7 @@ importers:
         version: file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.4)
       nextra-theme-docs:
         specifier: workspace:*
-        version: file:packages/nextra-theme-docs(next@14.2.5)(nextra@3.0.0-alpha.28)(react-dom@18.3.1)(react@18.3.1)
+        version: file:packages/nextra-theme-docs(next@14.2.5)(nextra@3.0.0-alpha.29)(react-dom@18.3.1)(react@18.3.1)
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -4063,7 +4063,7 @@ packages:
   /@types/graceful-fs@4.1.9:
     resolution: {integrity: sha512-olP3sd1qOEe5dXTSaFvQG+02VdRXcdytWLAZsAq1PecU8uqQAhkrnbli7DagjtXKW/Bl7YJbUsa8MPcuc8LHEQ==}
     dependencies:
-      '@types/node': 20.14.12
+      '@types/node': 22.0.0
     dev: true
 
   /@types/hast@3.0.4:
@@ -4116,10 +4116,16 @@ packages:
     resolution: {integrity: sha512-J8xLz7q2OFulZ2cyGTLE1TbbZcjpno7FaN6zdJNrgAdrJ+DZzh/uFR6YrTb4C+nXakvud8Q4+rbhoIWlYQbUFQ==}
     dev: true
 
-  /@types/node@20.14.12:
-    resolution: {integrity: sha512-r7wNXakLeSsGT0H1AU863vS2wa5wBOK4bWMjZz2wj+8nBx+m5PeIn0k8AloSLpRuiwdRQZwarZqHE4FNArPuJQ==}
+  /@types/node@20.14.13:
+    resolution: {integrity: sha512-+bHoGiZb8UiQ0+WEtmph2IWQCjIqg8MDZMAV+ppRRhUZnquF5mQkP/9vpSwJClEiSM/C7fZZExPzfU0vJTyp8w==}
     dependencies:
       undici-types: 5.26.5
+    dev: true
+
+  /@types/node@22.0.0:
+    resolution: {integrity: sha512-VT7KSYudcPOzP5Q0wfbowyNLaVR8QWUdw+088uFWwfvpY6uCWaXpqV6ieLAu9WBcnTa7H4Z5RLK8I5t2FuOcqw==}
+    dependencies:
+      undici-types: 6.11.1
     dev: true
 
   /@types/normalize-package-data@2.4.1:
@@ -4163,7 +4169,7 @@ packages:
   /@types/webpack@5.28.5(esbuild@0.23.0):
     resolution: {integrity: sha512-wR87cgvxj3p6D0Crt1r5avwqffqPXUkNlnQ1mjU93G7gCuFjufZR4I6j8cz5g1F1tTYpfOOFvly+cmIQwL9wvw==}
     dependencies:
-      '@types/node': 20.14.12
+      '@types/node': 22.0.0
       tapable: 2.2.1
       webpack: 5.73.0(esbuild@0.23.0)
     transitivePeerDependencies:
@@ -7720,7 +7726,7 @@ packages:
     resolution: {integrity: sha512-7vuh85V5cdDofPyxn58nrPjBktZo0u9x1g8WtjQol+jZDaE+fhN+cIvTj11GndBnMnyfrUOG1sZQxCdjKh+DKg==}
     engines: {node: '>= 10.13.0'}
     dependencies:
-      '@types/node': 20.14.12
+      '@types/node': 22.0.0
       merge-stream: 2.0.0
       supports-color: 8.1.1
     dev: true
@@ -11460,6 +11466,10 @@ packages:
     resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
     dev: true
 
+  /undici-types@6.11.1:
+    resolution: {integrity: sha512-mIDEX2ek50x0OlRgxryxsenE5XaQD4on5U2inY7RApK3SOJpofyw7uW2AyfMKkhAxXIceo2DeWGVGwyvng1GNQ==}
+    dev: true
+
   /unicode-canonical-property-names-ecmascript@2.0.0:
     resolution: {integrity: sha512-yY5PpDlfVIU5+y/BSCxAJRBIS1Zc2dDG3Ujq+sR0U+JjUevW2JhocOF+soROYDSaAezOzOKuyyixhD6mBknSmQ==}
     engines: {node: '>=4'}
@@ -12231,7 +12241,7 @@ packages:
       - typescript
     dev: false
 
-  file:packages/nextra-theme-blog(next@14.2.5)(nextra@3.0.0-alpha.28)(react-dom@18.3.1)(react@18.3.1):
+  file:packages/nextra-theme-blog(next@14.2.5)(nextra@3.0.0-alpha.29)(react-dom@18.3.1)(react@18.3.1):
     resolution: {directory: packages/nextra-theme-blog, type: directory}
     id: file:packages/nextra-theme-blog
     name: nextra-theme-blog
@@ -12252,7 +12262,7 @@ packages:
       react-dom: 18.3.1(react@18.3.1)
     dev: false
 
-  file:packages/nextra-theme-docs(next@14.2.5)(nextra@3.0.0-alpha.28)(react-dom@18.3.1)(react@18.3.1):
+  file:packages/nextra-theme-docs(next@14.2.5)(nextra@3.0.0-alpha.29)(react-dom@18.3.1)(react@18.3.1):
     resolution: {directory: packages/nextra-theme-docs, type: directory}
     id: file:packages/nextra-theme-docs
     name: nextra-theme-docs
