@@ -1,5 +1,12 @@
 # nextra
 
+## 3.0.0-alpha.30
+
+### Patch Changes
+
+- 7615b62: fix `useRouter` in `nextra/hooks`, use `asPath` instead `route`
+  because locale can be dynamic `/[locale]`
+
 ## 3.0.0-alpha.29
 
 ### Patch Changes
