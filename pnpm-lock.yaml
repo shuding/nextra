@@ -100,7 +100,7 @@ importers:
         version: 2.1.1
       framer-motion:
         specifier: ^11.0.0
-        version: 11.3.18(react-dom@18.3.1)(react@18.3.1)
+        version: 11.3.19(react-dom@18.3.1)(react@18.3.1)
       next:
         specifier: 14.2.5
         version: 14.2.5(@babel/core@7.24.9)(react-dom@18.3.1)(react@18.3.1)
@@ -149,7 +149,7 @@ importers:
         version: file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.4)
       nextra-theme-blog:
         specifier: workspace:*
-        version: file:packages/nextra-theme-blog(next@14.2.5)(nextra@3.0.0-alpha.28)(react-dom@18.3.1)(react@18.3.1)
+        version: file:packages/nextra-theme-blog(next@14.2.5)(nextra@3.0.0-alpha.29)(react-dom@18.3.1)(react@18.3.1)
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -172,7 +172,7 @@ importers:
         version: file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.4)
       nextra-theme-docs:
         specifier: workspace:*
-        version: file:packages/nextra-theme-docs(next@14.2.5)(nextra@3.0.0-alpha.28)(react-dom@18.3.1)(react@18.3.1)
+        version: file:packages/nextra-theme-docs(next@14.2.5)(nextra@3.0.0-alpha.29)(react-dom@18.3.1)(react@18.3.1)
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -204,7 +204,7 @@ importers:
         version: file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.4)
       nextra-theme-docs:
         specifier: workspace:*
-        version: file:packages/nextra-theme-docs(next@14.2.5)(nextra@3.0.0-alpha.28)(react-dom@18.3.1)(react@18.3.1)
+        version: file:packages/nextra-theme-docs(next@14.2.5)(nextra@3.0.0-alpha.29)(react-dom@18.3.1)(react@18.3.1)
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -6770,8 +6770,8 @@ packages:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
     dev: true
 
-  /framer-motion@11.3.18(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-pPJXcshW+AABch6FQxFCeBd/bZFaZC2w/VdkSEZGvKIaVGA4IsOS2SqUEIWMKMJJsKwr96O+7vY66M+/S7mOlw==}
+  /framer-motion@11.3.19(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-+luuQdx4AsamyMcvzW7jUAJYIKvQs1KE7oHvKkW3eNzmo0S+3PSDWjBuQkuIP9WyneGnKGMLUSuHs8OP7jKpQg==}
     peerDependencies:
       '@emotion/is-prop-valid': '*'
       react: ^18.0.0
@@ -12231,7 +12231,7 @@ packages:
       - typescript
     dev: false
 
-  file:packages/nextra-theme-blog(next@14.2.5)(nextra@3.0.0-alpha.28)(react-dom@18.3.1)(react@18.3.1):
+  file:packages/nextra-theme-blog(next@14.2.5)(nextra@3.0.0-alpha.29)(react-dom@18.3.1)(react@18.3.1):
     resolution: {directory: packages/nextra-theme-blog, type: directory}
     id: file:packages/nextra-theme-blog
     name: nextra-theme-blog
@@ -12252,7 +12252,7 @@ packages:
       react-dom: 18.3.1(react@18.3.1)
     dev: false
 
-  file:packages/nextra-theme-docs(next@14.2.5)(nextra@3.0.0-alpha.28)(react-dom@18.3.1)(react@18.3.1):
+  file:packages/nextra-theme-docs(next@14.2.5)(nextra@3.0.0-alpha.29)(react-dom@18.3.1)(react@18.3.1):
     resolution: {directory: packages/nextra-theme-docs, type: directory}
     id: file:packages/nextra-theme-docs
     name: nextra-theme-docs
