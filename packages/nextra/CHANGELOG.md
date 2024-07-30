@@ -1,5 +1,11 @@
 # nextra
 
+## 3.0.0-alpha.31
+
+### Patch Changes
+
+- d1e3e9a: handle case when meta object was added in `transformPageMap`
+
 ## 3.0.0-alpha.30
 
 ### Patch Changes

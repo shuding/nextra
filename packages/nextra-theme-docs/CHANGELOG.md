@@ -1,5 +1,12 @@
 # nextra-theme-docs
 
+## 3.0.0-alpha.31
+
+### Patch Changes
+
+- Updated dependencies [d1e3e9a]
+  - nextra@3.0.0-alpha.31
+
 ## 3.0.0-alpha.30
 
 ### Patch Changes
