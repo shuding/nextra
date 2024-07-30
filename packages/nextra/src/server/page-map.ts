@@ -196,8 +196,10 @@ function convertPageMapToAst(pageMap: PageMapItem[]): ArrayExpression {
       })
     }
     return createAstObject({
-      // @ts-expect-error -- item.data is string
-      data: { type: 'Identifier', name: item.data }
+      data:
+        typeof item.data === 'string'
+          ? { type: 'Identifier', name: item.data }
+          : valueToEstree(item.data)
     })
   })
 
