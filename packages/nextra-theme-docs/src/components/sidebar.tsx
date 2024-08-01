@@ -16,6 +16,7 @@ import {
 } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import { useActiveAnchor, useConfig, useMenu } from '../contexts'
+import { useNavOverflow } from '../contexts/nav-overflow'
 import { renderComponent } from '../utils'
 import { Anchor } from './anchor'
 import { Collapse } from './collapse'
@@ -344,6 +345,7 @@ export function Sidebar({
   const [focused, setFocused] = useState<null | string>(null)
   const [showSidebar, setSidebar] = useState(true)
   const [showToggleAnimation, setToggleAnimation] = useState(false)
+  const { navOverflow } = useNavOverflow()
 
   const anchors = useMemo(() => headings.filter(v => v.depth === 2), [headings])
   const sidebarRef = useRef<HTMLDivElement>(null)
@@ -442,11 +444,13 @@ export function Sidebar({
                   <Menu
                     className="nextra-menu-desktop max-md:nx-hidden"
                     // The sidebar menu, shows only the docs directories.
-                    directories={docsDirectories}
+                    directories={
+                      navOverflow ? fullDirectories : docsDirectories
+                    }
                     // When the viewport size is larger than `md`, hide the anchors in
                     // the sidebar when `floatTOC` is enabled.
                     anchors={config.toc.float ? [] : anchors}
-                    onlyCurrentDocs
+                    onlyCurrentDocs={!navOverflow}
                   />
                 </Collapse>
               )}
