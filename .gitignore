@@ -5,14 +5,8 @@ node_modules/
 dist/
 .turbo/
 out/
-# Theme styles
-packages/nextra-theme-*/style.css
 
-# Stork related
-*/**/public/*.st
-*/**/public/*.toml
-
-.vercel
+.vercel/
 .idea/
 .eslintcache
 .env

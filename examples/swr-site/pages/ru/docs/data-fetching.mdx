@@ -1,0 +1,86 @@
+import { Callout } from 'nextra/components'
+
+# Выборка данных
+
+```js
+const { data, error } = useSWR(key, fetcher)
+```
+
+Это самый фундаментальный API SWR. `fetcher` здесь представляет собой
+асинхронную функцию, которая **принимает `key`** SWR и возвращает данные.
+
+Возвращаемое значение будет передано как `data`, и если оно будет выброшено, оно
+будет перехвачено как `error`.
+
+<Callout>
+  Обратите внимание, что `fetcher` можно не указывать в параметрах, если он
+  [предоставляется глобально](/docs/global-configuration).
+</Callout>
+
+## Выборка (Fetch)
+
+Вы можете использовать любую библиотеку для обработки выборки данных, например,
+полифил `fetch` — [developit/unfetch](https://github.com/developit/unfetch):
+
+```js
+import fetch from 'unfetch'
+
+const fetcher = url => fetch(url).then(r => r.json())
+
+function App() {
+  const { data, error } = useSWR('/api/data', fetcher)
+  // ...
+}
+```
+
+<Callout>
+  Если вы используете **Next.js**, вам не нужно импортировать этот
+  полифил:
+
+[Новые встроенные полифилы: fetch(), URL, и Object.assign](https://nextjs.org/blog/next-9-1-7#new-built-in-polyfills-fetch-url-and-objectassign)
+
+</Callout>
+
+## Axios
+
+```js
+import axios from 'axios'
+
+const fetcher = url => axios.get(url).then(res => res.data)
+
+function App() {
+  const { data, error } = useSWR('/api/data', fetcher)
+  // ...
+}
+```
+
+## GraphQL
+
+Или используйте GraphQL с такими библиотеками, как
+[graphql-request](https://github.com/prisma-labs/graphql-request):
+
+```js
+import { request } from 'graphql-request'
+
+const fetcher = query => request('/api/graphql', query)
+
+function App() {
+  const { data, error } = useSWR(
+    /* GraphQL */ `
+      {
+        Movie(title: "Начало") {
+          releaseDate
+          actors {
+            name
+          }
+        }
+      }
+    `,
+    fetcher
+  )
+  // ...
+}
+```
+
+_Если вы хотите передавать переменные в запрос GraphQL, ознакомьтесь с разделом
+[Множественные аргументы](/docs/arguments)._

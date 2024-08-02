@@ -2,7 +2,7 @@ import { ArrowRightIcon } from '@components/icons'
 import cn from 'clsx'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import type { ReactNode } from 'react'
+import type { ComponentProps, ReactNode } from 'react'
 import styles from './style.module.css'
 
 export function Feature({
@@ -14,7 +14,14 @@ export function Feature({
   href,
   index,
   ...props
-}) {
+}: {
+  large?: boolean
+  centered?: boolean
+  children: ReactNode
+  lightOnly?: boolean
+  href?: string
+  index: number
+} & ComponentProps<typeof motion.div>) {
   return (
     <motion.div
       initial={{ opacity: 0 }}

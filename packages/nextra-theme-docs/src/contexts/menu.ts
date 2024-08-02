@@ -10,7 +10,7 @@ const MenuContext = createContext<Menu>({
   menu: false,
   setMenu: () => false
 })
-
+MenuContext.displayName = 'Menu'
 export const useMenu = () => useContext(MenuContext)
 
 export const MenuProvider = MenuContext.Provider
