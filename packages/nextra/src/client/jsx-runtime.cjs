@@ -1,4 +1,5 @@
 /* eslint-env node */
+/* eslint-disable @typescript-eslint/no-require-imports */
 
 /**
  * Allow jsx-runtime to be successfully imported from either React 17 or React 18.
