@@ -51,14 +51,14 @@ importers:
         specifier: 7.35.0
         version: 7.35.0(eslint@9.8.0)
       eslint-plugin-react-hooks:
-        specifier: 5.1.0-rc-14a4699f-20240725
-        version: 5.1.0-rc-14a4699f-20240725(eslint@9.8.0)
+        specifier: 5.1.0-rc-fb9a90fa48-20240614
+        version: 5.1.0-rc-fb9a90fa48-20240614(eslint@9.8.0)
       eslint-plugin-sonarjs:
         specifier: ^1.0.4-alpha.1
         version: 1.0.4(eslint@9.8.0)
       eslint-plugin-tailwindcss:
-        specifier: 3.17.3
-        version: 3.17.3(tailwindcss@3.4.7)
+        specifier: 3.17.4
+        version: 3.17.4(tailwindcss@3.4.7)
       eslint-plugin-typescript-sort-keys:
         specifier: 3.2.0
         version: 3.2.0(@typescript-eslint/parser@8.0.0)(eslint@9.8.0)(typescript@5.5.4)
@@ -6420,8 +6420,8 @@ packages:
       - supports-color
     dev: true
 
-  /eslint-plugin-react-hooks@5.1.0-rc-14a4699f-20240725(eslint@9.8.0):
-    resolution: {integrity: sha512-o7XiCRg42hxbpGPCO+LFMh55fMGc2yv0DK9pYaO61KZx9PtW3XXSCO4Ch4IBZHDYnzhrWY7FHKsfoTtSdPTXoA==}
+  /eslint-plugin-react-hooks@5.1.0-rc-fb9a90fa48-20240614(eslint@9.8.0):
+    resolution: {integrity: sha512-xsiRwaDNF5wWNC4ZHLut+x/YcAxksUd9Rizt7LaEn3bV8VyYRpXnRJQlLOfYaVy9esk4DFP4zPPnoNVjq5Gc0w==}
     engines: {node: '>=10'}
     peerDependencies:
       eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0
@@ -6465,8 +6465,8 @@ packages:
       eslint: 9.8.0
     dev: true
 
-  /eslint-plugin-tailwindcss@3.17.3(tailwindcss@3.4.7):
-    resolution: {integrity: sha512-DVMVVUFQ+lPraRSuUk2I41XMnusXT6b3WaQZYlUHduULnERaqe9sNfmpRY1IyxlzmKoQxSbZ8IHRhl9ePo8PeA==}
+  /eslint-plugin-tailwindcss@3.17.4(tailwindcss@3.4.7):
+    resolution: {integrity: sha512-gJAEHmCq2XFfUP/+vwEfEJ9igrPeZFg+skeMtsxquSQdxba9XRk5bn0Bp9jxG1VV9/wwPKi1g3ZjItu6MIjhNg==}
     engines: {node: '>=18.12.0'}
     peerDependencies:
       tailwindcss: ^3.4.0
