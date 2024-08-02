@@ -24,7 +24,7 @@
     },
     {
       matchPackageNames: ['eslint-plugin-react-hooks'],
-      matchUpdateTypes: ['major', 'minor', 'patch']
+      enabled: false
     },
     {
       groupName: 'latex',
