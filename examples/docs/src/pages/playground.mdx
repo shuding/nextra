@@ -1,0 +1,55 @@
+import { Playground } from 'nextra/components'
+
+# Playground
+
+<Playground source={`
+<a id="0x1_guid"></a>
+
+# Module \`0x1::guid\`
+
+A module for generating globally unique identifiers
+
+- [Struct \`GUID\`](#0x1_guid_GUID)
+- [Struct \`ID\`](#0x1_guid_ID)
+- [Constants](#@Constants_0)
+- [Function \`create\`](#0x1_guid_create)
+- [Function \`create_id\`](#0x1_guid_create_id)
+- [Function \`id\`](#0x1_guid_id)
+- [Function \`creator_address\`](#0x1_guid_creator_address)
+- [Function \`id_creator_address\`](#0x1_guid_id_creator_address)
+- [Function \`creation_num\`](#0x1_guid_creation_num)
+- [Function \`id_creation_num\`](#0x1_guid_id_creation_num)
+- [Function \`eq_id\`](#0x1_guid_eq_id)
+- [Specification](#@Specification_1)
+  - [High-level Requirements](#high-level-req)
+  - [Module-level Specification](#module-level-spec)
+  - [Function \`create\`](#@Specification_1_create)
+  - [Function \`create_id\`](#@Specification_1_create_id)
+  - [Function \`id\`](#@Specification_1_id)
+  - [Function \`creator_address\`](#@Specification_1_creator_address)
+  - [Function \`id_creator_address\`](#@Specification_1_id_creator_address)
+  - [Function \`creation_num\`](#@Specification_1_creation_num)
+  - [Function \`id_creation_num\`](#@Specification_1_id_creation_num)
+  - [Function \`eq_id\`](#@Specification_1_eq_id)
+
+\`\`\`move module 0x1::guid { } \`\`\`
+
+<a id="0x1_guid_GUID"></a>
+
+## Struct \`GUID\`
+
+A globally unique identifier derived from the sender&apos;s address and a
+counter
+
+\`\`\`move module 0x1::guid { struct GUID has drop, store } \`\`\`
+
+### High-level Requirements
+
+| No. | Requirement                                                                                                   | Criticality | Implementation                                                                                                                                                      | Enforcement                                                                                                                                                                                                                                                                 |
+| --- | ------------------------------------------------------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | The creation of GUID constructs a unique GUID by combining an address with an incremented creation number.    | Low         | The create function generates a new GUID by combining an address with an incremented creation number, effectively creating a unique identifier.                     | Enforced via [#high-level-req-1](create).                                                                                                                                                                                                                                   |
+| 2   | The operations on GUID and ID, such as construction, field access, and equality comparison, should not abort. | Low         | The following functions will never abort: (1) create_id, (2) id, (3) creator_address, (4) id_creator_address, (5) creation_num, (6) id_creation_num, and (7) eq_id. | Verified via [#high-level-req-2.1](create_id), [#high-level-req-2.2](id), [#high-level-req-2.3](creator_address), [#high-level-req-2.4](id_creator_address), [#high-level-req-2.5](creation_num), [#high-level-req-2.6](id_creation_num), and [#high-level-req-2.7](eq_id). |
+| 3   | The creation number should increment by 1 with each new creation.                                             | Low         | An account can only own up to MAX_U64 resources. Not incrementing the guid_creation_num constantly could lead to shrinking the space for new resources.             | Enforced via [#high-level-req-3](create).                                                                                                                                                                                                                                   |
+| 4   | The creation number and address of an ID / GUID must be immutable.                                            | Medium      | The addr and creation_num values are meant to be constant and never updated as they are unique and used for identification.                                         | Audited: This is enforced through missing functionality to update the creation_num or addr.                                                                                                                                                                                 |
+
+`} />
