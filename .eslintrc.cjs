@@ -168,7 +168,7 @@ module.exports = {
       settings: {
         tailwindcss: {
           config: 'packages/nextra-theme-blog/tailwind.config.ts',
-          whitelist: ['subheading-', 'post-item', 'post-item-more']
+          whitelist: ['subheading-']
         }
       }
     },
