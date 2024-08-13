@@ -5,7 +5,8 @@ import traverse from './traverse'
 
 const isNav = (page: PageMapItem): page is MdxFile => {
   const type = 'frontMatter' in page && page.frontMatter?.type
-  return type && ['page', 'posts'].includes(type)
+  const display = 'frontMatter' in page && page.frontMatter?.display
+  return type && ['page', 'posts'].includes(type) && display !== 'hidden'
 }
 const isPost = (page: PageMapItem): page is MdxFile => {
   if (
@@ -14,8 +15,8 @@ const isPost = (page: PageMapItem): page is MdxFile => {
     page.name.startsWith('_')
   )
     return false
-  const { draft, type } = page.frontMatter || {}
-  return !draft && (!type || type === 'post')
+  const { draft, type, display } = page.frontMatter || {}
+  return !draft && (!type || type === 'post') && display !== 'hidden'
 }
 
 export const collectPostsAndNavs = ({ opts }: LayoutProps) => {
