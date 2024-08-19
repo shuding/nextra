@@ -54,7 +54,13 @@ the watch mode for both nextra and the theme in separated terminals.
 
 ### Sponsors
 
-<div style="display:grid;grid-template-columns: repeat(2, minmax(0, 1fr));">
+<div class="sponsors">
+  <style>
+    .sponsors {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+ </style> 
  <a href="https://speakeasyapi.dev/docs?utm_source=github&utm_campaign=nextra&utm_content=logolink">
    <img src="/docs/pages/showcase/speakeasy.png" alt='Speakeasy'>
  </a>
