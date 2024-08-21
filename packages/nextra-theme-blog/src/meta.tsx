@@ -44,7 +44,7 @@ export default function Meta(): ReactElement {
       }
     >
       <div className="_grow dark:_text-gray-400 _text-gray-600">
-        <div className="_not-prose _flex _flex-wrap _items-center _gap-1">
+        <div className="_flex _flex-wrap _items-center _gap-1">
           {author}
           {author && date && ','}
           {dateObj && (

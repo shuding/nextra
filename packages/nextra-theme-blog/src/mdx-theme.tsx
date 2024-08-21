@@ -81,9 +81,9 @@ export const components: MDXComponents = {
   h6: props => <HeadingLink tag="h6" {...props} />,
   a: A,
   pre: ({ children, ...props }) => (
-    <div className="_not-prose">
-      <Pre {...props}>{children}</Pre>
-    </div>
+    <Pre className="_not-prose" {...props}>
+      {children}
+    </Pre>
   ),
   tr: Tr,
   th: Th,
