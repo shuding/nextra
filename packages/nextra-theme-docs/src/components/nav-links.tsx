@@ -14,7 +14,10 @@ interface NavLinkProps {
 
 const classes = {
   link: cn(
-    '_flex _max-w-[50%] _items-center _gap-1 _py-4 _text-base _font-medium _text-gray-600 _transition-colors [word-break:break-word] hover:_text-primary-600 dark:_text-gray-300 dark:hover:_text-primary-600 md:_text-lg'
+    '_text-gray-600 dark:_text-gray-400',
+    'hover:_text-gray-800 dark:hover:_text-gray-200',
+    'contrast-more:_text-gray-700 contrast-more:dark:_text-gray-100',
+    '_flex _max-w-[50%] _items-center _gap-1 _py-4 _text-base _font-medium _transition-colors [word-break:break-word] md:_text-lg'
   ),
   icon: cn('_inline _h-5 _shrink-0')
 }
