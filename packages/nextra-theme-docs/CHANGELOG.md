@@ -1,5 +1,25 @@
 # nextra-theme-docs
 
+## 3.0.0-alpha.32
+
+### Patch Changes
+
+- 73239c4: To ensure consistent horizontal padding, set the default language as
+  plaintext for code blocks. This prevents any loss of formatting for code
+  blocks without a specified language.
+- 150184b: attach heading anchor `id` attribute to heading (like Pagefind do)
+  and fix heading anchor styles when `theme.typesetting: 'article'` is set
+- 9df7f58: Fix nav-links not highlighting on hover in dark mode
+- 3c6193d: Remove unnecessary `sortPages` from `server/utils.ts`
+- 799174f: fixed react warning
+  `Warning: React has detected a change in the order of Hooks called by Body`
+  when `themeConfig.main` options is used
+- Updated dependencies [73239c4]
+- Updated dependencies [799174f]
+- Updated dependencies [150184b]
+- Updated dependencies [3c6193d]
+  - nextra@3.0.0-alpha.32
+
 ## 3.0.0-alpha.31
 
 ### Patch Changes
