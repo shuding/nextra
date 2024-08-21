@@ -1,5 +1,21 @@
 # nextra
 
+## 3.0.0-alpha.32
+
+### Patch Changes
+
+- 73239c4: To ensure consistent horizontal padding, set the default language as
+  plaintext for code blocks. This prevents any loss of formatting for code
+  blocks without a specified language.
+- 799174f: fixed creating `pageMap` items for folders with dots
+
+  remove requirement of passing `filePaths` with `.md`/`.mdx` extensions for
+  `createCatchAllMeta` function
+
+- 150184b: attach heading anchor `id` attribute to heading (like Pagefind do)
+  and fix heading anchor styles when `theme.typesetting: 'article'` is set
+- 3c6193d: Remove unnecessary `sortPages` from `server/utils.ts`
+
 ## 3.0.0-alpha.31
 
 ### Patch Changes

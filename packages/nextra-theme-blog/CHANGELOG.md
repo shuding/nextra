@@ -1,5 +1,26 @@
 # nextra-theme-blog
 
+## 3.0.0-alpha.32
+
+### Patch Changes
+
+- 73239c4: To ensure consistent horizontal padding, set the default language as
+  plaintext for code blocks. This prevents any loss of formatting for code
+  blocks without a specified language.
+- 7e57ddb: Avoid skipping the heading level in the posts layout, removes
+  `.post-item` and `.post-item-more` classes
+- 150184b: attach heading anchor `id` attribute to heading (like Pagefind do)
+  and fix heading anchor styles when `theme.typesetting: 'article'` is set
+- a90b90f: Switch to the dark theme provided by `@tailwindcss/typography` in
+  theme-blog.
+- 49a9627: fix theme-blog heading styles in post layout
+- 3c6193d: Remove unnecessary `sortPages` from `server/utils.ts`
+- Updated dependencies [73239c4]
+- Updated dependencies [799174f]
+- Updated dependencies [150184b]
+- Updated dependencies [3c6193d]
+  - nextra@3.0.0-alpha.32
+
 ## 3.0.0-alpha.31
 
 ### Patch Changes
