@@ -22,7 +22,7 @@ article.nextra-body-typesetting-article {
   pre code {
     @apply dark:_bg-transparent;
   }
-  .subheading-anchor + a {
-    @apply _no-underline hover:_no-underline after:_hidden;
+  .subheading-anchor {
+    @apply hover:_no-underline;
   }
 }
