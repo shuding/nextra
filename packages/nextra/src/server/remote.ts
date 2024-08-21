@@ -20,7 +20,9 @@ export async function buildDynamicMDX(
 }
 
 export async function buildDynamicMeta(locale = '') {
+  const pageMap = await globalThis.__nextra_resolvePageMap[locale]()
+
   return {
-    __nextra_pageMap: await globalThis.__nextra_resolvePageMap[locale]()
+    __nextra_pageMap: pageMap
   }
 }
