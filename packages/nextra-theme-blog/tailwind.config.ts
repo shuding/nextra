@@ -10,7 +10,7 @@ export default {
     colors: {
       ...docsConfig.theme.colors,
       primary: colors.blue
-    },
+    }
   },
   plugins: [typography],
   darkMode: docsConfig.darkMode
