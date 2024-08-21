@@ -27,6 +27,9 @@ export const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS: RehypePrettyCodeOptions = {
     light: 'github-light',
     dark: 'github-dark'
   },
+  defaultLang: {
+    block: 'plaintext'
+  },
   getHighlighter(opts) {
     return getHighlighter({
       ...opts,

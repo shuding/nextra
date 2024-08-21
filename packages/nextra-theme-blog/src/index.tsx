@@ -65,7 +65,7 @@ export default function NextraLayout({
       </Head>
       <BlogProvider value={{ config, opts: pageOpts }}>
         <article
-          className="_container _prose max-md:_prose-sm dark:_prose-dark"
+          className="_container _prose max-md:_prose-sm dark:_prose-invert"
           dir="ltr"
         >
           <HeadingContext.Provider value={ref}>
