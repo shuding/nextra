@@ -260,7 +260,11 @@ function Body({ children }: { children: ReactNode }): ReactElement {
     </>
   )
 
-  const body = themeConfig.main?.({ children: content }) || content
+  const body = themeConfig.main ? (
+    <themeConfig.main>{content}</themeConfig.main>
+  ) : (
+    content
+  )
 
   if (themeContext.layout === 'full') {
     return (
