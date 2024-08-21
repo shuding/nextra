@@ -43,7 +43,7 @@ export default function Meta(): ReactElement {
         '_mb-8 _flex _gap-3 ' + (readingTime ? '_items-start' : '_items-center')
       }
     >
-      <div className="_grow dark:_text-gray-400 _text-gray-600">
+      <div className="_not-prose _grow dark:_text-gray-400 _text-gray-600">
         <div className="_flex _flex-wrap _items-center _gap-1">
           {author}
           {author && date && ','}
@@ -58,7 +58,7 @@ export default function Meta(): ReactElement {
           {readingTime || tagsEl}
         </div>
         {readingTime && (
-          <div className="_not-prose _mt-1 _flex _flex-wrap _items-center _gap-1">
+          <div className="_mt-1 _flex _flex-wrap _items-center _gap-1">
             {tagsEl}
           </div>
         )}
