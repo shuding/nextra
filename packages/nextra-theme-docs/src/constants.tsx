@@ -118,12 +118,11 @@ export const DEFAULT_THEME: DocsThemeConfig = {
       <>
         <title>{title}</title>
         <meta property="og:title" content={title} />
-        {description && (
-          <>
-            <meta name="description" content={description} />
-            <meta property="og:description" content={description} />
-          </>
-        )}
+        {/* We can't use React.Fragment https://nextjs.org/docs/pages/api-reference/components/head#use-minimal-nesting https://github.com/vercel/next.js/pull/67667 */}
+        {description && [
+          <meta key={0} name="description" content={description} />,
+          <meta key={1} property="og:description" content={description} />
+        ]}
         {canonical && <link rel="canonical" href={canonical} />}
         {image && <meta name="og:image" content={image} />}
       </>
