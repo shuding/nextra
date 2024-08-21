@@ -84,8 +84,8 @@ importers:
         specifier: ^4.7.0
         version: 4.16.5
       turbo:
-        specifier: 2.0.11
-        version: 2.0.11
+        specifier: 2.0.12
+        version: 2.0.12
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -100,7 +100,7 @@ importers:
         version: 2.1.1
       framer-motion:
         specifier: ^11.0.0
-        version: 11.3.21(react-dom@18.3.1)(react@18.3.1)
+        version: 11.3.22(react-dom@18.3.1)(react@18.3.1)
       next:
         specifier: 14.2.5
         version: 14.2.5(@babel/core@7.24.9)(react-dom@18.3.1)(react@18.3.1)
@@ -131,10 +131,10 @@ importers:
         version: 18.3.3
       autoprefixer:
         specifier: ^10.4.16
-        version: 10.4.20(postcss@8.4.40)
+        version: 10.4.20(postcss@8.4.41)
       postcss:
         specifier: ^8.4.33
-        version: 8.4.40
+        version: 8.4.41
       tailwindcss:
         specifier: ^3.4.1
         version: 3.4.7
@@ -220,10 +220,10 @@ importers:
         version: 13.5.6
       autoprefixer:
         specifier: ^10.4.16
-        version: 10.4.20(postcss@8.4.40)
+        version: 10.4.20(postcss@8.4.41)
       postcss:
         specifier: ^8.4.33
-        version: 8.4.40
+        version: 8.4.41
       tailwindcss:
         specifier: ^3.4.1
         version: 3.4.7
@@ -389,7 +389,7 @@ importers:
     devDependencies:
       '@tailwindcss/nesting':
         specifier: ^0.0.0-insiders.565cd3e
-        version: 0.0.0-insiders.565cd3e(postcss@8.4.40)
+        version: 0.0.0-insiders.565cd3e(postcss@8.4.41)
       '@tailwindcss/typography':
         specifier: ^0.5.9
         version: 0.5.13(tailwindcss@3.4.7)
@@ -410,16 +410,16 @@ importers:
         version: link:../nextra
       postcss:
         specifier: ^8.4.33
-        version: 8.4.40
+        version: 8.4.41
       postcss-cli:
         specifier: ^11.0.0
-        version: 11.0.0(postcss@8.4.40)(tsx@4.16.5)
+        version: 11.0.0(postcss@8.4.41)(tsx@4.16.5)
       postcss-import:
         specifier: ^16.0.0
-        version: 16.1.0(postcss@8.4.40)
+        version: 16.1.0(postcss@8.4.41)
       postcss-lightningcss:
         specifier: ^1.0.0
-        version: 1.0.0(postcss@8.4.40)
+        version: 1.0.0(postcss@8.4.41)
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -471,7 +471,7 @@ importers:
     devDependencies:
       '@tailwindcss/nesting':
         specifier: ^0.0.0-insiders.565cd3e
-        version: 0.0.0-insiders.565cd3e(postcss@8.4.40)
+        version: 0.0.0-insiders.565cd3e(postcss@8.4.41)
       '@testing-library/react':
         specifier: ^16.0.0
         version: 16.0.0(@testing-library/dom@10.4.0)(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
@@ -498,16 +498,16 @@ importers:
         version: link:../nextra
       postcss:
         specifier: ^8.4.33
-        version: 8.4.40
+        version: 8.4.41
       postcss-cli:
         specifier: ^11.0.0
-        version: 11.0.0(postcss@8.4.40)(tsx@4.16.5)
+        version: 11.0.0(postcss@8.4.41)(tsx@4.16.5)
       postcss-import:
         specifier: ^16.0.0
-        version: 16.1.0(postcss@8.4.40)
+        version: 16.1.0(postcss@8.4.41)
       postcss-lightningcss:
         specifier: ^1.0.0
-        version: 1.0.0(postcss@8.4.40)
+        version: 1.0.0(postcss@8.4.41)
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -4013,13 +4013,13 @@ packages:
       '@swc/counter': 0.1.3
       tslib: 2.6.3
 
-  /@tailwindcss/nesting@0.0.0-insiders.565cd3e(postcss@8.4.40):
+  /@tailwindcss/nesting@0.0.0-insiders.565cd3e(postcss@8.4.41):
     resolution: {integrity: sha512-WhHoFBx19TnH/c+xLwT/sxei6+4RpdfiyG3MYXfmLaMsADmVqBkF7B6lDalgZD9YdM459MF7DtxVbWkOrV7IaQ==}
     peerDependencies:
       postcss: ^8.2.15
     dependencies:
-      postcss: 8.4.40
-      postcss-nested: 5.0.6(postcss@8.4.40)
+      postcss: 8.4.41
+      postcss-nested: 5.0.6(postcss@8.4.41)
     dev: true
 
   /@tailwindcss/typography@0.5.13(tailwindcss@3.4.7):
@@ -4961,7 +4961,7 @@ packages:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}
     dev: true
 
-  /autoprefixer@10.4.20(postcss@8.4.40):
+  /autoprefixer@10.4.20(postcss@8.4.41):
     resolution: {integrity: sha512-XY25y5xSv/wEoqzDyXXME4AFfkZI0P23z6Fs3YgymDnKJkCGOnkL0iTxCa85UTqaSgfcqyf3UA6+c7wUvx/16g==}
     engines: {node: ^10 || ^12 || >=14}
     hasBin: true
@@ -4973,7 +4973,7 @@ packages:
       fraction.js: 4.3.7
       normalize-range: 0.1.2
       picocolors: 1.0.1
-      postcss: 8.4.40
+      postcss: 8.4.41
       postcss-value-parser: 4.2.0
     dev: true
 
@@ -6452,7 +6452,7 @@ packages:
       tailwindcss: ^3.4.0
     dependencies:
       fast-glob: 3.3.2
-      postcss: 8.4.40
+      postcss: 8.4.41
       tailwindcss: 3.4.7
     dev: true
 
@@ -6907,8 +6907,8 @@ packages:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
     dev: true
 
-  /framer-motion@11.3.21(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-D+hfIsvzV8eL/iycld4K+tKlg2Q2LdwnrcBEohtGw3cG1AIuNYATbT5RUqIM1ndsAk+EfGhoSGf0UaiFodc5Tw==}
+  /framer-motion@11.3.22(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-NS9TnPOJhkUrKKe7sl9zAMmQlzm70bwzJ6/gs/DkYP3kCqc0wO350CEqiEcBuVjhyqVNnDf33SkenzByi8x8Gg==}
     peerDependencies:
       '@emotion/is-prop-valid': '*'
       react: ^18.0.0
@@ -9797,7 +9797,7 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /postcss-cli@11.0.0(postcss@8.4.40)(tsx@4.16.5):
+  /postcss-cli@11.0.0(postcss@8.4.41)(tsx@4.16.5):
     resolution: {integrity: sha512-xMITAI7M0u1yolVcXJ9XTZiO9aO49mcoKQy6pCDFdMh9kGqhzLVpWxeD/32M/QBmkhcGypZFFOLNLmIW4Pg4RA==}
     engines: {node: '>=18'}
     hasBin: true
@@ -9810,9 +9810,9 @@ packages:
       get-stdin: 9.0.0
       globby: 14.0.2
       picocolors: 1.0.1
-      postcss: 8.4.40
-      postcss-load-config: 5.1.0(postcss@8.4.40)(tsx@4.16.5)
-      postcss-reporter: 7.0.5(postcss@8.4.40)
+      postcss: 8.4.41
+      postcss-load-config: 5.1.0(postcss@8.4.41)(tsx@4.16.5)
+      postcss-reporter: 7.0.5(postcss@8.4.41)
       pretty-hrtime: 1.0.3
       read-cache: 1.0.0
       slash: 5.1.0
@@ -9822,41 +9822,41 @@ packages:
       - tsx
     dev: true
 
-  /postcss-import@15.1.0(postcss@8.4.40):
+  /postcss-import@15.1.0(postcss@8.4.41):
     resolution: {integrity: sha512-hpr+J05B2FVYUAXHeK1YyI267J/dDDhMU6B6civm8hSY1jYJnBXxzKDKDswzJmtLHryrjhnDjqqp/49t8FALew==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       postcss: ^8.0.0
     dependencies:
-      postcss: 8.4.40
+      postcss: 8.4.41
       postcss-value-parser: 4.2.0
       read-cache: 1.0.0
       resolve: 1.22.8
     dev: true
 
-  /postcss-import@16.1.0(postcss@8.4.40):
+  /postcss-import@16.1.0(postcss@8.4.41):
     resolution: {integrity: sha512-7hsAZ4xGXl4MW+OKEWCnF6T5jqBw80/EE9aXg1r2yyn1RsVEU8EtKXbijEODa+rg7iih4bKf7vlvTGYR4CnPNg==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       postcss: ^8.0.0
     dependencies:
-      postcss: 8.4.40
+      postcss: 8.4.41
       postcss-value-parser: 4.2.0
       read-cache: 1.0.0
       resolve: 1.22.8
     dev: true
 
-  /postcss-js@4.0.1(postcss@8.4.40):
+  /postcss-js@4.0.1(postcss@8.4.41):
     resolution: {integrity: sha512-dDLF8pEO191hJMtlHFPRa8xsizHaM82MLfNkUHdUtVEV3tgTp5oj+8qbEqYM57SLfc74KSbw//4SeJma2LRVIw==}
     engines: {node: ^12 || ^14 || >= 16}
     peerDependencies:
       postcss: ^8.4.21
     dependencies:
       camelcase-css: 2.0.1
-      postcss: 8.4.40
+      postcss: 8.4.41
     dev: true
 
-  /postcss-lightningcss@1.0.0(postcss@8.4.40):
+  /postcss-lightningcss@1.0.0(postcss@8.4.41):
     resolution: {integrity: sha512-sLNRVh+DINZHf5b31KUZnv3w4sf/CEdmvYP5JWzyyB8++E6WdaE7yxsrhfXiUFqISNBXcSrKfAF/MtTZrYAlbg==}
     engines: {node: ^16.0.0 || ^18.0.0 || >= 20, npm: '>=7.0.0'}
     peerDependencies:
@@ -9864,7 +9864,7 @@ packages:
     dependencies:
       browserslist: 4.21.10
       lightningcss: 1.22.0
-      postcss: 8.4.40
+      postcss: 8.4.41
     dev: true
 
   /postcss-load-config@4.0.1:
@@ -9883,7 +9883,7 @@ packages:
       yaml: 2.5.0
     dev: true
 
-  /postcss-load-config@4.0.2(postcss@8.4.40):
+  /postcss-load-config@4.0.2(postcss@8.4.41):
     resolution: {integrity: sha512-bSVhyJGL00wMVoPUzAVAnbEoWyqRxkjv64tUl427SKnPrENtq6hJwUojroMz2VB+Q1edmi4IfrAPpami5VVgMQ==}
     engines: {node: '>= 14'}
     peerDependencies:
@@ -9896,11 +9896,11 @@ packages:
         optional: true
     dependencies:
       lilconfig: 3.1.2
-      postcss: 8.4.40
+      postcss: 8.4.41
       yaml: 2.5.0
     dev: true
 
-  /postcss-load-config@5.1.0(postcss@8.4.40)(tsx@4.16.5):
+  /postcss-load-config@5.1.0(postcss@8.4.41)(tsx@4.16.5):
     resolution: {integrity: sha512-G5AJ+IX0aD0dygOE0yFZQ/huFFMSNneyfp0e3/bT05a8OfPC5FUoZRPfGijUdGOJNMewJiwzcHJXFafFzeKFVA==}
     engines: {node: '>= 18'}
     peerDependencies:
@@ -9916,39 +9916,39 @@ packages:
         optional: true
     dependencies:
       lilconfig: 3.1.2
-      postcss: 8.4.40
+      postcss: 8.4.41
       tsx: 4.16.5
       yaml: 2.5.0
     dev: true
 
-  /postcss-nested@5.0.6(postcss@8.4.40):
+  /postcss-nested@5.0.6(postcss@8.4.41):
     resolution: {integrity: sha512-rKqm2Fk0KbA8Vt3AdGN0FB9OBOMDVajMG6ZCf/GoHgdxUJ4sBFp0A/uMIRm+MJUdo33YXEtjqIz8u7DAp8B7DA==}
     engines: {node: '>=12.0'}
     peerDependencies:
       postcss: ^8.2.14
     dependencies:
-      postcss: 8.4.40
+      postcss: 8.4.41
       postcss-selector-parser: 6.0.11
     dev: true
 
-  /postcss-nested@6.2.0(postcss@8.4.40):
+  /postcss-nested@6.2.0(postcss@8.4.41):
     resolution: {integrity: sha512-HQbt28KulC5AJzG+cZtj9kvKB93CFCdLvog1WFLf1D+xmMvPGlBstkpTEZfK5+AN9hfJocyBFCNiqyS48bpgzQ==}
     engines: {node: '>=12.0'}
     peerDependencies:
       postcss: ^8.2.14
     dependencies:
-      postcss: 8.4.40
+      postcss: 8.4.41
       postcss-selector-parser: 6.1.1
     dev: true
 
-  /postcss-reporter@7.0.5(postcss@8.4.40):
+  /postcss-reporter@7.0.5(postcss@8.4.41):
     resolution: {integrity: sha512-glWg7VZBilooZGOFPhN9msJ3FQs19Hie7l5a/eE6WglzYqVeH3ong3ShFcp9kDWJT1g2Y/wd59cocf9XxBtkWA==}
     engines: {node: '>=10'}
     peerDependencies:
       postcss: ^8.1.0
     dependencies:
       picocolors: 1.0.1
-      postcss: 8.4.40
+      postcss: 8.4.41
       thenby: 1.3.4
     dev: true
 
@@ -9987,8 +9987,8 @@ packages:
       picocolors: 1.0.1
       source-map-js: 1.2.0
 
-  /postcss@8.4.40:
-    resolution: {integrity: sha512-YF2kKIUzAofPMpfH6hOi2cGnv/HrUlfucspc7pDyvv7kGdqXrfj8SCl/t8owkEgKEuu8ZcRjSOxFxVLqwChZ2Q==}
+  /postcss@8.4.41:
+    resolution: {integrity: sha512-TesUflQ0WKZqAvg52PWL6kHgLKP6xB6heTOdoYM0Wt2UHyxNa4K25EZZMgKns3BH1RLVbZCREPpLY0rhnNoHVQ==}
     engines: {node: ^10 || ^12 || >=14}
     dependencies:
       nanoid: 3.3.7
@@ -11232,11 +11232,11 @@ packages:
       normalize-path: 3.0.0
       object-hash: 3.0.0
       picocolors: 1.0.1
-      postcss: 8.4.40
-      postcss-import: 15.1.0(postcss@8.4.40)
-      postcss-js: 4.0.1(postcss@8.4.40)
-      postcss-load-config: 4.0.2(postcss@8.4.40)
-      postcss-nested: 6.2.0(postcss@8.4.40)
+      postcss: 8.4.41
+      postcss-import: 15.1.0(postcss@8.4.41)
+      postcss-js: 4.0.1(postcss@8.4.41)
+      postcss-load-config: 4.0.2(postcss@8.4.41)
+      postcss-nested: 6.2.0(postcss@8.4.41)
       postcss-selector-parser: 6.1.1
       resolve: 1.22.8
       sucrase: 3.35.0
@@ -11502,64 +11502,64 @@ packages:
       fsevents: 2.3.3
     dev: true
 
-  /turbo-darwin-64@2.0.11:
-    resolution: {integrity: sha512-YlHEEhcm+jI1BSZoLugGHUWDfRXaNaQIv7tGQBfadYjo9kixBnqoTOU6s1ubOrQMID+lizZZQs79GXwqM6vohg==}
+  /turbo-darwin-64@2.0.12:
+    resolution: {integrity: sha512-NAgfgbXxX/JScWQmmQnGbPuFZq7LIswHfcMk5JwyBXQM/xmklNOxxac7MnGGIOf19Z2f6S3qHy17VIj0SeGfnA==}
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-darwin-arm64@2.0.11:
-    resolution: {integrity: sha512-K/YW+hWzRQ/wGmtffxllH4M1tgy8OlwgXODrIiAGzkSpZl9+pIsem/F86UULlhsIeavBYK/LS5+dzV3DPMjJ9w==}
+  /turbo-darwin-arm64@2.0.12:
+    resolution: {integrity: sha512-cP02uer5KSJ+fXL+OfRRk5hnVjV0c60hxDgNcJxrZpfhun7HHoKDDR7w2xhQntiA45aC6ZZEXRqMKpj6GAmKbg==}
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-linux-64@2.0.11:
-    resolution: {integrity: sha512-mv8CwGP06UPweMh1Vlp6PI6OWnkuibxfIJ4Vlof7xqjohAaZU5FLqeOeHkjQflH/6YrCVuS9wrK0TFOu+meTtA==}
+  /turbo-linux-64@2.0.12:
+    resolution: {integrity: sha512-+mQgGfg1eq5qF+wenK/FKJaNMNAo5DQLC4htQy+8osW+fx6U+8+6UlPQPaycAWDEqwOI7NwuqkeHfkEQLQUTyQ==}
     cpu: [x64]
     os: [linux]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-linux-arm64@2.0.11:
-    resolution: {integrity: sha512-wLE5tl4oriTmHbuayc0ki0csaCplmVLj+uCWtecM/mfBuZgNS9ICNM9c4sB+Cfl5tlBBFeepqRNgvRvn8WeVZg==}
+  /turbo-linux-arm64@2.0.12:
+    resolution: {integrity: sha512-KFyEZDXfPU1DK4zimxdCcqAcK7IIttX4mfsgB7NsSEOmH0dhHOih/YFYiyEDC1lTRx0C2RlzQ0Kjjdz48AN5Eg==}
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-windows-64@2.0.11:
-    resolution: {integrity: sha512-tja3zvVCSWu3HizOoeQv0qDJ+GeWGWRFOOM6a8i3BYnXLgGKAaDZFcjwzgC50tWiAw4aowIVR4OouwIyRhLBaQ==}
+  /turbo-windows-64@2.0.12:
+    resolution: {integrity: sha512-kJj4KCkZTkDTDCqsSw1m1dbO4WeoQq1mYUm/thXOH0OkeqYbSMt0EyoTcJOgKUDsrMnzZD2gPfYrlYHtV69lVA==}
     cpu: [x64]
     os: [win32]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-windows-arm64@2.0.11:
-    resolution: {integrity: sha512-sYjXP6k94Bqh99R+y3M1Ks6LRIEZybMz+7enA8GKl6JJ2ZFaXxTnS6q+/2+ii1+rRwxohj5OBb4gxODcF8Jd4w==}
+  /turbo-windows-arm64@2.0.12:
+    resolution: {integrity: sha512-TY3ROxguDilN2olCwcZMaePdW01Xhma0pZU7bNhsQEqca9RGAmsZBuzfGnTMcWPmv4tpnb/PlX1hrt1Hod/44Q==}
     cpu: [arm64]
     os: [win32]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo@2.0.11:
-    resolution: {integrity: sha512-imDlFFAvitbCm1JtDFJ6eG882qwxHUmVT2noPb3p2jq5o5DuXOchMbkVS9kUeC3/4WpY5N0GBZ3RvqNyjHZw1Q==}
+  /turbo@2.0.12:
+    resolution: {integrity: sha512-8s2KwqjwQj7z8Z53SUZSKVkQOZ2/Sl4D2F440oaBY/k2lGju60dW6srEpnn8/RIDeICZmQn3pQHF79Jfnc5Skw==}
     hasBin: true
     optionalDependencies:
-      turbo-darwin-64: 2.0.11
-      turbo-darwin-arm64: 2.0.11
-      turbo-linux-64: 2.0.11
-      turbo-linux-arm64: 2.0.11
-      turbo-windows-64: 2.0.11
-      turbo-windows-arm64: 2.0.11
+      turbo-darwin-64: 2.0.12
+      turbo-darwin-arm64: 2.0.12
+      turbo-linux-64: 2.0.12
+      turbo-linux-arm64: 2.0.12
+      turbo-windows-64: 2.0.12
+      turbo-windows-arm64: 2.0.12
     dev: true
 
   /twoslash-protocol@0.2.2:
@@ -11963,7 +11963,7 @@ packages:
         optional: true
     dependencies:
       esbuild: 0.23.0
-      postcss: 8.4.40
+      postcss: 8.4.41
       rollup: 4.19.1
     optionalDependencies:
       fsevents: 2.3.3
