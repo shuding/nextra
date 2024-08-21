@@ -63,6 +63,7 @@ const createHeading = (
 
     return (
       <Tag
+        id={id}
         className={
           // can be added by footnotes
           className === 'sr-only'
@@ -84,7 +85,6 @@ const createHeading = (
         {id && (
           <a
             href={`#${id}`}
-            id={id}
             className="subheading-anchor"
             aria-label="Permalink for this section"
             ref={obRef}

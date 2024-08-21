@@ -36,6 +36,7 @@ function HeadingLink({
 }: ComponentProps<'h2'> & { tag: `h${2 | 3 | 4 | 5 | 6}` }): ReactElement {
   return (
     <Tag
+      id={id}
       className={
         // can be added by footnotes
         className === 'sr-only' ? '_sr-only' : `subheading-${Tag}`
@@ -46,7 +47,6 @@ function HeadingLink({
       {id && (
         <a
           href={`#${id}`}
-          id={id}
           className="_not-prose subheading-anchor"
           aria-label="Permalink for this section"
         />
