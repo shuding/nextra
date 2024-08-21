@@ -31,9 +31,7 @@ export function PostsLayout(): ReactElement {
     return (
       <div key={post.route}>
         <h2 className="_not-prose _mt-6 _mb-2 _text-xl _font-semibold">
-          <Link href={post.route} className="!_no-underline dark:_text-gray-100">
-            {postTitle}
-          </Link>
+          <Link href={post.route}>{postTitle}</Link>
         </h2>
         {description && (
           <p className="_mb-2 dark:_text-gray-400 _text-gray-600">
