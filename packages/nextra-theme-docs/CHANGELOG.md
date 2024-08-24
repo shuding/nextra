@@ -1,5 +1,16 @@
 # nextra-theme-docs
 
+## 3.0.0-alpha.33
+
+### Patch Changes
+
+- 6945f38: fix not rendered default `<meta name="description" />` and
+  `<meta property="og:description" />`
+- 7bb18e3: Add a generic for `themeConfig` in `NextraThemeLayoutProps` to
+  improve type inference.
+- Updated dependencies [7bb18e3]
+  - nextra@3.0.0-alpha.33
+
 ## 3.0.0-alpha.32
 
 ### Patch Changes

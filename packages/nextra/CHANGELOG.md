@@ -1,5 +1,12 @@
 # nextra
 
+## 3.0.0-alpha.33
+
+### Patch Changes
+
+- 7bb18e3: Add a generic for `themeConfig` in `NextraThemeLayoutProps` to
+  improve type inference.
+
 ## 3.0.0-alpha.32
 
 ### Patch Changes
