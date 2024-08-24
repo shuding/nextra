@@ -9,7 +9,7 @@ import { components, HeadingContext } from './mdx-theme'
 import Meta from './meta'
 import Nav from './nav'
 import { PostsLayout } from './posts-layout'
-import type { BlogFrontMatter } from './types'
+import type { BlogFrontMatter, NextraBlogTheme } from './types'
 import { isValidDate } from './utils/date'
 
 const layoutSet = new Set(['post', 'page', 'posts', 'tag'])
@@ -18,7 +18,7 @@ export default function NextraLayout({
   children,
   pageOpts,
   themeConfig
-}: NextraThemeLayoutProps<BlogFrontMatter>) {
+}: NextraThemeLayoutProps<BlogFrontMatter, NextraBlogTheme>) {
   const config = { ...DEFAULT_THEME, ...themeConfig }
 
   const ref = useRef<HTMLHeadingElement>(null)
