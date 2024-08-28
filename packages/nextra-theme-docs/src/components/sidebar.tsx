@@ -3,7 +3,7 @@ import type { Heading } from 'nextra'
 import { useFSRoute, useMounted } from 'nextra/hooks'
 import { ArrowRightIcon, ExpandIcon } from 'nextra/icons'
 import type { Item, MenuItem, PageItem } from 'nextra/normalize-pages'
-import type { ReactElement } from 'react'
+import type { ReactElement, ReactNode } from 'react'
 import {
   createContext,
   memo,
@@ -24,10 +24,73 @@ const TreeState: Record<string, boolean> = Object.create(null)
 
 const FocusedItemContext = createContext<null | string>(null)
 FocusedItemContext.displayName = 'FocusedItem'
-const OnFocusItemContext = createContext<null | ((item: string | null) => any)>(
+
+type FocusControlContextValue = {
+  setFocused: (itemRoute: string | null) => void
+  setBlurred: (itemRoute: string | null) => void
+}
+
+const FocusControlContext = createContext<null | FocusControlContextValue>(
   null
 )
-OnFocusItemContext.displayName = 'OnFocusItem'
+FocusControlContext.displayName = 'FocusControl'
+
+type FocusControlProviderProps = {
+  enabled: boolean
+  children: ReactNode
+}
+
+function FocusedItemControlProvider({ enabled, children }: FocusControlProviderProps) {
+  const [focused, setFocusedState] = useState<null | string>(null)
+  const focusedRef = useRef<typeof focused>(null)
+  const blurredRef = useRef<typeof focused>(null)
+  const focusCheckTimerRef = useRef<ReturnType<typeof setTimeout>>()
+  useEffect(() => () => {
+    clearTimeout(focusCheckTimerRef.current)
+  }, [])
+
+  useEffect(() => {
+    if (!enabled && focused !== null) {
+      clearTimeout(focusCheckTimerRef.current)
+      focusCheckTimerRef.current = undefined
+      focusedRef.current = null
+      blurredRef.current = null
+      setFocusedState(null)
+    }
+  }, [enabled])
+
+  const focusControl = useMemo<FocusControlContextValue>(() => ({
+    setFocused: (itemRoute) => {
+      if (!enabled) return
+      focusedRef.current = itemRoute
+      setFocusedState(itemRoute)
+    },
+    setBlurred: (itemRoute) => {
+      if (!enabled) return
+      blurredRef.current = itemRoute
+      clearTimeout(focusCheckTimerRef.current)
+
+      focusCheckTimerRef.current = setTimeout(() => {
+        focusCheckTimerRef.current = undefined
+        if (blurredRef.current === null) return
+        if (blurredRef.current === focusedRef.current) {
+          blurredRef.current = null
+          focusedRef.current = null
+          setFocusedState(null)
+        }
+      }, 16.666)
+    },
+  }), [])
+  
+  return (
+    <FocusedItemContext.Provider value={focused}>
+      <FocusControlContext.Provider value={focusControl}>
+        {children}
+      </FocusControlContext.Provider>
+    </FocusedItemContext.Provider>
+  );
+}
+
 const FolderLevelContext = createContext(0)
 FolderLevelContext.displayName = 'FolderLevel'
 
@@ -119,6 +182,7 @@ function FolderImpl({ item, anchors }: FolderProps): ReactElement {
     themeConfig.sidebar.autoCollapse
   ])
 
+  const focusControl = useContext(FocusControlContext)
   if (item.type === 'menu') {
     const menu = item as MenuItem
     const routes = Object.fromEntries(
@@ -173,6 +237,12 @@ function FolderImpl({ item, anchors }: FolderProps): ReactElement {
           TreeState[item.route] = !open
           rerender({})
         }}
+        onFocus={() => {
+          focusControl?.setFocused(item.route)
+        }}
+        onBlur={() => {
+          focusControl?.setBlurred(item.route)
+        }}
       >
         {item.title}
         <ArrowRightIcon
@@ -224,7 +294,7 @@ function File({
   anchors: Heading[]
 }): ReactElement {
   const route = useFSRoute()
-  const onFocus = useContext(OnFocusItemContext)
+  const focusControl = useContext(FocusControlContext)
 
   // It is possible that the item doesn't have any route - for example an external link.
   const active = item.route && [route, route + '/'].includes(item.route + '/')
@@ -245,10 +315,10 @@ function File({
           setMenu(false)
         }}
         onFocus={() => {
-          onFocus?.(item.route)
+          focusControl?.setFocused?.(item.route)
         }}
         onBlur={() => {
-          onFocus?.(null)
+          focusControl?.setBlurred?.(item.route)
         }}
       >
         {item.title}
@@ -324,7 +394,6 @@ export function Sidebar({
   includePlaceholder
 }: SideBarProps): ReactElement {
   const { menu, setMenu } = useMenu()
-  const [focused, setFocused] = useState<null | string>(null)
   const [showSidebar, setSidebar] = useState(true)
   const [showToggleAnimation, setToggleAnimation] = useState(false)
 
@@ -399,42 +468,40 @@ export function Sidebar({
             {renderComponent(themeConfig.search.component)}
           </div>
         )}
-        <FocusedItemContext.Provider value={focused}>
-          <OnFocusItemContext.Provider value={setFocused}>
-            <div
-              className={cn(
-                '_overflow-y-auto _overflow-x-hidden',
-                '_grow md:_h-[calc(100vh-var(--nextra-navbar-height)-var(--nextra-menu-height))]',
-                showSidebar ? 'nextra-scrollbar' : 'no-scrollbar'
-              )}
-              ref={sidebarRef}
-            >
-              {/* without asPopover check <Collapse />'s inner.clientWidth on `layout: "raw"` will be 0 and element will not have width on initial loading */}
-              {(!asPopover || !showSidebar) && (
-                <Collapse isOpen={showSidebar} horizontal className="_p-4">
-                  <Menu
-                    className="nextra-menu-desktop max-md:_hidden"
-                    // The sidebar menu, shows only the docs directories.
-                    directories={docsDirectories}
-                    // When the viewport size is larger than `md`, hide the anchors in
-                    // the sidebar when `floatTOC` is enabled.
-                    anchors={themeConfig.toc.float ? [] : anchors}
-                    onlyCurrentDocs
-                  />
-                </Collapse>
-              )}
-              {mounted && window.innerWidth < 768 && (
+        <FocusedItemControlProvider enabled={!asPopover && showSidebar}>
+          <div
+            className={cn(
+              '_overflow-y-auto _overflow-x-hidden',
+              '_grow md:_h-[calc(100vh-var(--nextra-navbar-height)-var(--nextra-menu-height))]',
+              showSidebar ? 'nextra-scrollbar' : 'no-scrollbar'
+            )}
+            ref={sidebarRef}
+          >
+            {/* without asPopover check <Collapse />'s inner.clientWidth on `layout: "raw"` will be 0 and element will not have width on initial loading */}
+            {(!asPopover || !showSidebar) && (
+              <Collapse isOpen={showSidebar} horizontal className="_p-4">
                 <Menu
-                  className="nextra-menu-mobile md:_hidden"
-                  // The mobile dropdown menu, shows all the directories.
-                  directories={fullDirectories}
-                  // Always show the anchor links on mobile (`md`).
-                  anchors={anchors}
+                  className="nextra-menu-desktop max-md:_hidden"
+                  // The sidebar menu, shows only the docs directories.
+                  directories={docsDirectories}
+                  // When the viewport size is larger than `md`, hide the anchors in
+                  // the sidebar when `floatTOC` is enabled.
+                  anchors={themeConfig.toc.float ? [] : anchors}
+                  onlyCurrentDocs
                 />
-              )}
-            </div>
-          </OnFocusItemContext.Provider>
-        </FocusedItemContext.Provider>
+              </Collapse>
+            )}
+            {mounted && window.innerWidth < 768 && (
+              <Menu
+                className="nextra-menu-mobile md:_hidden"
+                // The mobile dropdown menu, shows all the directories.
+                directories={fullDirectories}
+                // Always show the anchor links on mobile (`md`).
+                anchors={anchors}
+              />
+            )}
+          </div>
+        </FocusedItemControlProvider>
 
         {hasMenu && (
           <div
