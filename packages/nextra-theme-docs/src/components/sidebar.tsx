@@ -183,7 +183,7 @@ function FolderImpl({ item, anchors }: FolderProps): ReactElement {
           )}
         />
       </ComponentToUse>
-      <Collapse className="ltr:_pr-0 rtl:_pl-0 _pt-1" isOpen={open}>
+      <Collapse className="_p-1" isOpen={open}>
         {Array.isArray(item.children) ? (
           <Menu
             className={cn(classes.border, 'ltr:_ml-3 rtl:_mr-3')}
@@ -400,22 +400,18 @@ export function Sidebar({
           </div>
         )}
         <FocusedItemContext.Provider value={focused}>
-          <OnFocusItemContext.Provider
-            value={item => {
-              setFocused(item)
-            }}
-          >
+          <OnFocusItemContext.Provider value={setFocused}>
             <div
               className={cn(
                 '_overflow-y-auto _overflow-x-hidden',
-                '_p-4 _grow md:_h-[calc(100vh-var(--nextra-navbar-height)-var(--nextra-menu-height))]',
+                '_grow md:_h-[calc(100vh-var(--nextra-navbar-height)-var(--nextra-menu-height))]',
                 showSidebar ? 'nextra-scrollbar' : 'no-scrollbar'
               )}
               ref={sidebarRef}
             >
               {/* without asPopover check <Collapse />'s inner.clientWidth on `layout: "raw"` will be 0 and element will not have width on initial loading */}
               {(!asPopover || !showSidebar) && (
-                <Collapse isOpen={showSidebar} horizontal>
+                <Collapse isOpen={showSidebar} horizontal className="_p-4">
                   <Menu
                     className="nextra-menu-desktop max-md:_hidden"
                     // The sidebar menu, shows only the docs directories.
