@@ -370,7 +370,7 @@ const DEFAULT_COMPONENTS: MDXComponents = {
         )
       ) : (
         <nav
-          className={cn(classes.toc, '_px-4')}
+          className={cn(classes.toc, '_pr-4')}
           aria-label="table of contents"
         >
           {renderComponent(themeConfig.toc.component, {
