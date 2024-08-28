@@ -1,4 +1,3 @@
-import 'focus-visible'
 import './polyfill'
 import { ThemeProvider } from 'next-themes'
 import type { NextraThemeLayoutProps } from 'nextra'
