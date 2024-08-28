@@ -149,7 +149,7 @@ importers:
         version: file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.4)
       nextra-theme-blog:
         specifier: workspace:*
-        version: file:packages/nextra-theme-blog(next@14.2.5)(nextra@3.0.0-alpha.31)(react-dom@18.3.1)(react@18.3.1)
+        version: file:packages/nextra-theme-blog(next@14.2.5)(nextra@3.0.0-alpha.33)(react-dom@18.3.1)(react@18.3.1)
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -172,7 +172,7 @@ importers:
         version: file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.4)
       nextra-theme-docs:
         specifier: workspace:*
-        version: file:packages/nextra-theme-docs(next@14.2.5)(nextra@3.0.0-alpha.31)(react-dom@18.3.1)(react@18.3.1)
+        version: file:packages/nextra-theme-docs(next@14.2.5)(nextra@3.0.0-alpha.33)(react-dom@18.3.1)(react@18.3.1)
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -187,9 +187,6 @@ importers:
 
   examples/swr-site:
     dependencies:
-      focus-visible:
-        specifier: ^5.1.0
-        version: 5.2.0
       intersection-observer:
         specifier: ^0.10.0
         version: 0.10.0
@@ -204,7 +201,7 @@ importers:
         version: file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.4)
       nextra-theme-docs:
         specifier: workspace:*
-        version: file:packages/nextra-theme-docs(next@14.2.5)(nextra@3.0.0-alpha.31)(react-dom@18.3.1)(react@18.3.1)
+        version: file:packages/nextra-theme-docs(next@14.2.5)(nextra@3.0.0-alpha.33)(react-dom@18.3.1)(react@18.3.1)
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -453,9 +450,6 @@ importers:
       flexsearch:
         specifier: ^0.7.43
         version: 0.7.43
-      focus-visible:
-        specifier: ^5.2.0
-        version: 5.2.0
       intersection-observer:
         specifier: ^0.12.2
         version: 0.12.2
@@ -6863,10 +6857,6 @@ packages:
     resolution: {integrity: sha512-c5o/+Um8aqCSOXGcZoqZOm+NqtVwNsvVpWv6lfmSclU954O3wvQKxxK8zj74fPaSJbXpSLTs4PRhh+wnoCXnKg==}
     dev: false
 
-  /focus-visible@5.2.0:
-    resolution: {integrity: sha512-Rwix9pBtC1Nuy5wysTmKy+UjbDJpIfg8eHjw0rjZ1mX4GNLz1Bmd16uDpI3Gk1i70Fgcs8Csg2lPm8HULFg9DQ==}
-    dev: false
-
   /for-each@0.3.3:
     resolution: {integrity: sha512-jqYfLp7mo9vIyQf8ykW2v7A+2N4QjeCeI5+Dz9XraiO1ign81wjiH7Fb9vSOWvQfNtmSa4H2RoQTrrXivdUZmw==}
     dependencies:
@@ -12432,7 +12422,7 @@ packages:
       - typescript
     dev: false
 
-  file:packages/nextra-theme-blog(next@14.2.5)(nextra@3.0.0-alpha.31)(react-dom@18.3.1)(react@18.3.1):
+  file:packages/nextra-theme-blog(next@14.2.5)(nextra@3.0.0-alpha.33)(react-dom@18.3.1)(react@18.3.1):
     resolution: {directory: packages/nextra-theme-blog, type: directory}
     id: file:packages/nextra-theme-blog
     name: nextra-theme-blog
@@ -12453,7 +12443,7 @@ packages:
       react-dom: 18.3.1(react@18.3.1)
     dev: false
 
-  file:packages/nextra-theme-docs(next@14.2.5)(nextra@3.0.0-alpha.31)(react-dom@18.3.1)(react@18.3.1):
+  file:packages/nextra-theme-docs(next@14.2.5)(nextra@3.0.0-alpha.33)(react-dom@18.3.1)(react@18.3.1):
     resolution: {directory: packages/nextra-theme-docs, type: directory}
     id: file:packages/nextra-theme-docs
     name: nextra-theme-docs
@@ -12468,7 +12458,6 @@ packages:
       clsx: 2.1.1
       escape-string-regexp: 5.0.0
       flexsearch: 0.7.43
-      focus-visible: 5.2.0
       intersection-observer: 0.12.2
       next: 14.2.5(@babel/core@7.24.9)(react-dom@18.3.1)(react@18.3.1)
       next-themes: 0.3.0(react-dom@18.3.1)(react@18.3.1)
