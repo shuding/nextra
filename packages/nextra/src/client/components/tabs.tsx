@@ -90,6 +90,7 @@ function Tabs_({
                 disabled={disabled}
                 className={({ selected }) =>
                   cn(
+                    index === 0 && '_ml-1', // avoid focus-visible style being cut off
                     '_mr-2 _rounded-t _p-2 _font-medium _leading-5 _transition-colors',
                     '_-mb-0.5 _select-none _border-b-2',
                     selected
