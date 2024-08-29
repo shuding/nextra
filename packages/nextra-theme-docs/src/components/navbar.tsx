@@ -89,7 +89,7 @@ export function Navbar({ items }: NavBarProps): ReactElement {
   const { menu, setMenu } = useMenu()
 
   return (
-    <div className="nextra-nav-container _sticky _top-0 _z-20 _w-full _bg-transparent print:_hidden">
+    <div className="nextra-nav-container nextra-focus-ring-scope _sticky _top-0 _z-20 _w-full _bg-transparent print:_hidden">
       <div className="nextra-nav-container-blur" />
       <nav className="_mx-auto _flex _h-[var(--nextra-navbar-height)] _max-w-[90rem] _items-center _justify-end _gap-4 _pl-[max(env(safe-area-inset-left),1.5rem)] _pr-[max(env(safe-area-inset-right),1.5rem)]">
         {themeConfig.logoLink ? (

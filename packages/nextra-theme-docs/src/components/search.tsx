@@ -211,7 +211,7 @@ export function Search({
   )
 
   return (
-    <div className={cn('nextra-search _relative md:_w-64', className)}>
+    <div className={cn('nextra-search nextra-focus-ring-scope _relative md:_w-64', className)}>
       {renderList && (
         <div className="_fixed _inset-0 _z-10" onClick={() => setShow(false)} />
       )}

@@ -11,7 +11,7 @@ export function Bleed({
   return (
     <div
       className={cn(
-        'nextra-bleed _relative _-mx-6 _mt-6 md:_-mx-8 2xl:_-mx-24',
+        'nextra-focus-ring-scope nextra-bleed _relative _-mx-6 _mt-6 md:_-mx-8 2xl:_-mx-24',
         '_z-[1]', // for firefox https://github.com/shuding/nextra/issues/2824
         full && [
           // 'md:mx:[calc(-50vw+50%+8rem)',

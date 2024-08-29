@@ -7,7 +7,7 @@ import { LocaleSwitch } from './locale-switch'
 export function Footer({ menu }: { menu?: boolean }): ReactElement {
   const themeConfig = useThemeConfig()
   return (
-    <footer className="_bg-gray-100 _pb-[env(safe-area-inset-bottom)] dark:_bg-neutral-900 print:_bg-transparent">
+    <footer className="nextra-focus-ring-scope _bg-gray-100 _pb-[env(safe-area-inset-bottom)] dark:_bg-neutral-900 print:_bg-transparent">
       <div
         className={cn(
           '_mx-auto _flex _max-w-[90rem] _gap-2 _py-2 _px-4',

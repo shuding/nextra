@@ -24,7 +24,7 @@ export function NotFoundPage(): ReactElement | null {
           labels
         })}
         newWindow
-        className="_text-primary-600 _underline _decoration-from-font [text-underline-position:from-font]"
+        className="nextra-focus-ring _text-primary-600 _underline _decoration-from-font [text-underline-position:from-font]"
       >
         {renderComponent(content)}
       </Anchor>

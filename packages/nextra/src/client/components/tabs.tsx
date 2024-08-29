@@ -93,7 +93,7 @@ function Tabs_({
                     '_mr-2 _rounded-t _p-2 _font-medium _leading-5 _transition-colors',
                     '_-mb-0.5 _select-none _border-b-2',
                     selected
-                      ? '_border-primary-500 _text-primary-600'
+                      ? '_border-primary-500 _text-primary-600 nextra-focus-ring'
                       : '_border-transparent _text-gray-600 hover:_border-gray-200 hover:_text-black dark:_text-gray-200 dark:hover:_border-neutral-800 dark:hover:_text-white',
                     disabled &&
                       '_pointer-events-none _text-gray-400 dark:_text-neutral-600'
@@ -118,7 +118,7 @@ function Tab({
   ...props
 }: Omit<ComponentProps<typeof HeadlessTab.Panel>, 'static'>): ReactElement {
   return (
-    <HeadlessTab.Panel {...props} unmount={unmount} className="_rounded _pt-6">
+    <HeadlessTab.Panel {...props} unmount={unmount} className="_rounded _pt-6 nextra-focus-ring">
       {children}
     </HeadlessTab.Panel>
   )

@@ -70,7 +70,7 @@ export const SkipNavLink = forwardRef<HTMLAnchorElement, SkipNavLinkProps>(
         {...props}
         ref={forwardedRef}
         href={`#${id || DEFAULT_ID}`}
-        className={className}
+        className={cn('nextra-focus-ring', className)}
       >
         {label}
       </a>

@@ -41,7 +41,7 @@ export function Pre({
   )
 
   return (
-    <div className="nextra-code _relative [&:not(:first-child)]:_mt-6">
+    <div className="nextra-code nextra-focus-ring-scope _relative [&:not(:first-child)]:_mt-6">
       {filename && (
         <div
           className={cn(

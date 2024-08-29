@@ -382,7 +382,7 @@ export function Sidebar({
       />
       <aside
         className={cn(
-          'nextra-sidebar-container _flex _flex-col',
+          'nextra-focus-ring-scope nextra-sidebar-container _flex _flex-col',
           'md:_top-16 md:_shrink-0 motion-reduce:_transform-none',
           '_transform-gpu _transition-all _ease-in-out',
           'print:_hidden',

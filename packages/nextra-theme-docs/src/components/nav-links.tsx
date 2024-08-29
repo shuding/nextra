@@ -41,7 +41,7 @@ export function NavLinks({
   return (
     <div
       className={cn(
-        '_mb-8 _flex _items-center _border-t _pt-8 dark:_border-neutral-800',
+        'nextra-focus-ring-scope _mb-8 _flex _items-center _border-t _pt-8 dark:_border-neutral-800',
         'contrast-more:_border-neutral-400 dark:contrast-more:_border-neutral-400',
         'print:_hidden'
       )}
