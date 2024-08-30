@@ -2,4 +2,4 @@
 'nextra-theme-docs': patch
 ---
 
-Avoid the derived state `focusedRouteInside` reacting too early to make the sidebar auto-collapse appear more as expected.
+Avoid the sidebar collapse having unintended animations when auto-collapse is enabled.
