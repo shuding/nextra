@@ -9,7 +9,7 @@ export type AnchorProps = Omit<ComponentProps<'a'>, 'ref'> & {
 
 export const Anchor = forwardRef<HTMLAnchorElement, AnchorProps>(
   (
-    { href = '', children, newWindow, className, ...props },
+    { href = '', children, newWindow, ...props },
     // ref is used in <NavbarMenu />
     forwardedRef
   ): ReactElement => {
@@ -18,7 +18,6 @@ export const Anchor = forwardRef<HTMLAnchorElement, AnchorProps>(
         <a
           ref={forwardedRef}
           href={href}
-          className={className}
           target="_blank"
           rel="noreferrer"
           {...props}
@@ -37,7 +36,7 @@ export const Anchor = forwardRef<HTMLAnchorElement, AnchorProps>(
     }
 
     return (
-      <NextLink ref={forwardedRef} href={href} className={className} {...props}>
+      <NextLink ref={forwardedRef} href={href} {...props}>
         {children}
       </NextLink>
     )
