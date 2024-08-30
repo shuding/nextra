@@ -1,5 +1,11 @@
 # nextra
 
+## 3.0.0-alpha.34
+
+### Patch Changes
+
+- 1a634cd: remove explicit `ZodError` assertion
+
 ## 3.0.0-alpha.33
 
 ### Patch Changes
