@@ -4,4 +4,4 @@
 'nextra': patch
 ---
 
-reduce focus-visible style conflicts with external components.
+reduce global style conflicts with external components.
