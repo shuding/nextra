@@ -2,7 +2,6 @@
 import NextLink from 'next/link'
 import type { ComponentProps, ReactElement } from 'react'
 import { forwardRef } from 'react'
-import cn from 'clsx'
 
 export type AnchorProps = Omit<ComponentProps<'a'>, 'ref'> & {
   newWindow?: boolean
@@ -19,7 +18,7 @@ export const Anchor = forwardRef<HTMLAnchorElement, AnchorProps>(
         <a
           ref={forwardedRef}
           href={href}
-          className={cn(['nextra-focus-ring', className])}
+          className={className}
           target="_blank"
           rel="noreferrer"
           {...props}
@@ -38,7 +37,7 @@ export const Anchor = forwardRef<HTMLAnchorElement, AnchorProps>(
     }
 
     return (
-      <NextLink ref={forwardedRef} href={href} className={cn(['nextra-focus-ring', className])} {...props}>
+      <NextLink ref={forwardedRef} href={href} className={className} {...props}>
         {children}
       </NextLink>
     )

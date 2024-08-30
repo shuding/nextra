@@ -85,7 +85,7 @@ const createHeading = (
         {id && (
           <a
             href={`#${id}`}
-            className="subheading-anchor nextra-focus-ring"
+            className="subheading-anchor"
             aria-label="Permalink for this section"
             ref={obRef}
           />
@@ -168,7 +168,6 @@ function Summary({
   return (
     <summary
       className={cn(
-        'nextra-focus-ring',
         '_flex _items-center _cursor-pointer _p-1 _transition-colors hover:_bg-gray-100 dark:hover:_bg-neutral-800',
         // display: flex removes whitespace when `<summary />` contains text with other elements, like `foo <strong>bar</strong>`
         '_whitespace-pre-wrap',
@@ -197,7 +196,7 @@ export const Link = ({ href = '', className, ...props }: AnchorProps) => (
     href={href}
     newWindow={EXTERNAL_HREF_REGEX.test(href)}
     className={cn(
-      'nextra-focus-ring _text-primary-600 _underline _decoration-from-font [text-underline-position:from-font]',
+      '_text-primary-600 _underline _decoration-from-font [text-underline-position:from-font]',
       className
     )}
     {...props}

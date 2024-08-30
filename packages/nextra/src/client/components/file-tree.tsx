@@ -67,7 +67,7 @@ const Folder = memo<FolderProps>(
         <button
           onClick={toggle}
           title={name}
-          className="nextra-focus-ring _inline-flex _cursor-pointer _items-center _py-1 hover:_opacity-60"
+          className="_inline-flex _cursor-pointer _items-center _py-1 hover:_opacity-60"
         >
           <Ident />
           <svg

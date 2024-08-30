@@ -12,7 +12,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         spellCheck={false}
         className={cn(
           className,
-          'nextra-focus-ring',
           '_w-full _appearance-none _rounded-lg _px-3 _py-2 _transition-colors',
           '_text-base _leading-tight md:_text-sm',
           '_bg-black/[.05] dark:_bg-gray-50/10',

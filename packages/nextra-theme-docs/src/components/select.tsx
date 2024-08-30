@@ -50,7 +50,7 @@ export function Select({
           ref={trigger}
           title={title}
           className={cn(
-            'nextra-focus-ring _h-7 _rounded-md _px-2 _text-left _text-xs _font-medium _text-gray-600 _transition-colors dark:_text-gray-400',
+            '_h-7 _rounded-md _px-2 _text-left _text-xs _font-medium _text-gray-600 _transition-colors dark:_text-gray-400',
             open
               ? '_bg-gray-200 _text-gray-900 dark:_bg-primary-100/10 dark:_text-gray-50'
               : 'hover:_bg-gray-100 hover:_text-gray-900 dark:hover:_bg-primary-100/5 dark:hover:_text-gray-50',

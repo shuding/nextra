@@ -3,7 +3,6 @@ import type { ComponentProps, ReactElement } from 'react'
 
 export const classes = {
   border: cn(
-    'nextra-focus-ring',
     '_border _border-gray-300 dark:_border-neutral-700',
     'contrast-more:_border-gray-900 contrast-more:dark:_border-gray-50'
   )

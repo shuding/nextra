@@ -4,7 +4,6 @@ import type { ComponentProps, CSSProperties, ReactNode } from 'react'
 
 const classes = {
   cards: cn(
-    'nextra-focus-ring-scope',
     'nextra-cards _mt-4 _gap-4 _grid',
     '_not-prose' // for nextra-theme-blog
   ),

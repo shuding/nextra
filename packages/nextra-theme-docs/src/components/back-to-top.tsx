@@ -30,7 +30,6 @@ export function BackToTop({
       onClick={scrollToTop}
       disabled={hidden}
       className={cn(
-        'nextra-focus-ring',
         '_flex _items-center _gap-1.5 _transition _opacity-100 disabled:_opacity-0',
         className
       )}
