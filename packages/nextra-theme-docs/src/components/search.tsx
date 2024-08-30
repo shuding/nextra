@@ -216,15 +216,15 @@ export function Search({
   const handleChange = useCallback(
     (e: ChangeEvent<HTMLInputElement> | CompositionEvent<HTMLInputElement>) => {
       if (!compositionStateRef.current.compositioning) {
-        const value = (e.target as HTMLInputElement).value
+        const { value } = (e.target as HTMLInputElement)
         onChangeProp(value)
         setShow(Boolean(value))
         compositionStateRef.current.emitted = true
-      } else {
-        compositionStateRef.current.emitted = false
+        return
       }
+      compositionStateRef.current.emitted = false
     },
-    []
+    [onChangeProp]
   )
 
   const handleCompositionStart = useCallback(() => {
