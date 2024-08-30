@@ -3,7 +3,7 @@ import type { Heading } from 'nextra'
 import { useFSRoute, useMounted } from 'nextra/hooks'
 import { ArrowRightIcon, ExpandIcon } from 'nextra/icons'
 import type { Item, MenuItem, PageItem } from 'nextra/normalize-pages'
-import type { ReactElement, ReactNode } from 'react'
+import type { MutableRefObject, ReactElement, ReactNode } from 'react'
 import {
   createContext,
   memo,
@@ -24,71 +24,48 @@ const TreeState: Record<string, boolean> = Object.create(null)
 
 const FocusedItemContext = createContext<null | string>(null)
 FocusedItemContext.displayName = 'FocusedItem'
-
-type FocusControlContextValue = {
-  setFocused: (itemRoute: string | null) => void
-  setBlurred: (itemRoute: string | null) => void
-}
-
-const FocusControlContext = createContext<null | FocusControlContextValue>(
+const OnFocusItemContext = createContext<null | ((item: string | null) => any)>(
   null
 )
-FocusControlContext.displayName = 'FocusControl'
+OnFocusItemContext.displayName = 'OnFocusItem'
 
 type FocusControlProviderProps = {
-  enabled: boolean
   children: ReactNode
+  sidebarRef: MutableRefObject<HTMLDivElement | null>
 }
 
-function FocusedItemControlProvider({ enabled, children }: FocusControlProviderProps) {
-  const [focused, setFocusedState] = useState<null | string>(null)
-  const focusedRef = useRef<typeof focused>(null)
-  const blurredRef = useRef<typeof focused>(null)
-  const focusCheckTimerRef = useRef<ReturnType<typeof setTimeout>>()
-  useEffect(() => () => {
-    clearTimeout(focusCheckTimerRef.current)
-  }, [])
+function FocusedItemControlProvider({
+  children,
+  sidebarRef
+}: FocusControlProviderProps) {
+  const [focused, setFocused] = useState<null | string>(null)
 
   useEffect(() => {
-    if (!enabled && focused !== null) {
-      clearTimeout(focusCheckTimerRef.current)
-      focusCheckTimerRef.current = undefined
-      focusedRef.current = null
-      blurredRef.current = null
-      setFocusedState(null)
+    const sidebarEl = sidebarRef.current
+    if (!sidebarEl) return
+    let timer: ReturnType<typeof setTimeout>
+    const handleFocusout = () => {
+      clearTimeout(timer)
+      timer = setTimeout(() => {
+        if (sidebarRef.current?.contains(document.activeElement)) return
+        setFocused(null)
+      }, 50)
     }
-  }, [enabled])
 
-  const focusControl = useMemo<FocusControlContextValue>(() => ({
-    setFocused: (itemRoute) => {
-      if (!enabled) return
-      focusedRef.current = itemRoute
-      setFocusedState(itemRoute)
-    },
-    setBlurred: (itemRoute) => {
-      if (!enabled) return
-      blurredRef.current = itemRoute
-      clearTimeout(focusCheckTimerRef.current)
+    sidebarEl.addEventListener('focusout', handleFocusout)
+    return () => {
+      clearTimeout(timer)
+      sidebarEl.removeEventListener('focusout', handleFocusout)
+    }
+  }, [sidebarRef])
 
-      focusCheckTimerRef.current = setTimeout(() => {
-        focusCheckTimerRef.current = undefined
-        if (blurredRef.current === null) return
-        if (blurredRef.current === focusedRef.current) {
-          blurredRef.current = null
-          focusedRef.current = null
-          setFocusedState(null)
-        }
-      }, 16.666)
-    },
-  }), [])
-  
   return (
     <FocusedItemContext.Provider value={focused}>
-      <FocusControlContext.Provider value={focusControl}>
+      <OnFocusItemContext.Provider value={setFocused}>
         {children}
-      </FocusControlContext.Provider>
+      </OnFocusItemContext.Provider>
     </FocusedItemContext.Provider>
-  );
+  )
 }
 
 const FolderLevelContext = createContext(0)
@@ -182,7 +159,7 @@ function FolderImpl({ item, anchors }: FolderProps): ReactElement {
     themeConfig.sidebar.autoCollapse
   ])
 
-  const focusControl = useContext(FocusControlContext)
+  const onFocus = useContext(OnFocusItemContext)
   if (item.type === 'menu') {
     const menu = item as MenuItem
     const routes = Object.fromEntries(
@@ -238,10 +215,7 @@ function FolderImpl({ item, anchors }: FolderProps): ReactElement {
           rerender({})
         }}
         onFocus={() => {
-          focusControl?.setFocused(item.route)
-        }}
-        onBlur={() => {
-          focusControl?.setBlurred(item.route)
+          onFocus?.(item.route)
         }}
       >
         {item.title}
@@ -294,7 +268,7 @@ function File({
   anchors: Heading[]
 }): ReactElement {
   const route = useFSRoute()
-  const focusControl = useContext(FocusControlContext)
+  const onFocus = useContext(OnFocusItemContext)
 
   // It is possible that the item doesn't have any route - for example an external link.
   const active = item.route && [route, route + '/'].includes(item.route + '/')
@@ -315,10 +289,7 @@ function File({
           setMenu(false)
         }}
         onFocus={() => {
-          focusControl?.setFocused?.(item.route)
-        }}
-        onBlur={() => {
-          focusControl?.setBlurred?.(item.route)
+          onFocus?.(item.route)
         }}
       >
         {item.title}
@@ -468,7 +439,7 @@ export function Sidebar({
             {renderComponent(themeConfig.search.component)}
           </div>
         )}
-        <FocusedItemControlProvider enabled={!asPopover && showSidebar}>
+        <FocusedItemControlProvider sidebarRef={sidebarRef}>
           <div
             className={cn(
               '_overflow-y-auto _overflow-x-hidden',
