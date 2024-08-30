@@ -33,7 +33,7 @@ function InnerLayout({ children }: { children: ReactNode }): ReactElement {
     isRawLayout: themeContext.layout === 'raw',
     components: themeConfig.components
   })
-  
+
   return (
     <ThemeProvider
       attribute="class"
@@ -45,7 +45,10 @@ function InnerLayout({ children }: { children: ReactNode }): ReactElement {
         before hydration as Tailwind expects the `dir` attribute to exist on the
         `html` element.
       */}
-      <div dir={dir} className={themeConfig.focusRing ? 'nextra-focus-ring' : undefined}>
+      <div
+        dir={dir}
+        className={themeConfig.focusRing ? 'nextra-focus-ring' : undefined}
+      >
         <script
           dangerouslySetInnerHTML={{
             __html: `document.documentElement.setAttribute('dir','${dir}')`

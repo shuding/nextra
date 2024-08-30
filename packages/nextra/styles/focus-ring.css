@@ -1,4 +1,6 @@
-.nextra-focus-ring:where(:not([class~=not-nextra-focus-ring], [class~=not-nextra-focus-ring] *)) {
+.nextra-focus-ring:where(
+    :not([class~='not-nextra-focus-ring'], [class~='not-nextra-focus-ring'] *)
+  ) {
   a,
   summary,
   button,
