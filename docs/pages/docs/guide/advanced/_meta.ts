@@ -5,5 +5,6 @@ export default {
   latex: 'LaTeX',
   table: 'Rendering Tables',
   typescript: '',
-  remote: 'Remote Content'
+  remote: 'Remote Content',
+  playground: 'Playground',
 }
