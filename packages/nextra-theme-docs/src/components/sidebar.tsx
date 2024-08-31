@@ -293,18 +293,36 @@ function Menu({
   className,
   onlyCurrentDocs
 }: MenuProps): ReactElement {
+  const onFocus = useContext(OnFocusItemContext)
+
+  const handleFocus: FocusEventHandler = useCallback(event => {
+    const route =
+      event.target.getAttribute('href') ||
+      event.target.getAttribute('data-href') ||
+      ''
+    onFocus(route)
+  }, [])
+
   return (
     <ul className={cn(classes.list, className)}>
-      {directories.map(item =>
-        !onlyCurrentDocs || item.isUnderCurrentDocsTree ? (
+      {directories.map(item => {
+        if (onlyCurrentDocs && !item.isUnderCurrentDocsTree) return
+
+        const ComponentToUse =
           item.type === 'menu' ||
-          (item.children && (item.children.length || !item.withIndexPage)) ? (
-            <Folder key={item.name} item={item} anchors={anchors} />
-          ) : (
-            <File key={item.name} item={item} anchors={anchors} />
-          )
-        ) : null
-      )}
+          (item.children && (item.children.length || !item.withIndexPage))
+            ? Folder
+            : File
+
+        return (
+          <ComponentToUse
+            key={item.name}
+            item={item}
+            anchors={anchors}
+            onFocus={handleFocus}
+          />
+        )
+      })}
     </ul>
   )
 }
