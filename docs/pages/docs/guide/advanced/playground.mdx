@@ -1,18 +1,15 @@
 import { Playground } from 'nextra/components'
+import { useState } from 'react'
+import cn from 'clsx'
 
 # Playground
 
-<Playground
-  fallback={<div>Loading playground component...</div>}
-  source={`
-## Description
+export function Demo() {
+  const [rawMdx, setRawMdx] = useState(`## Description
 
-Playground components allow you to write Nextra compatible MDX that renders only
-on the client. It's modeled after the functionality found in
-[MDX Playground](https://mdxjs.com/playground/).
+Playground components allow you to write Nextra compatible MDX that renders only on the client. It's modeled after the functionality found in [MDX Playground](https://mdxjs.com/playground).
 
-In some instances where remote loading MDX is not an option, this may work as a
-great alternative.
+In some instances where remote loading MDX is not an option, this may work as a great alternative.
 
 Here's an example of a codeblock.
 
@@ -22,10 +19,7 @@ console.log("Hello world, this is a playground component!");
 
 ## Caveats
 
-Due to the purely client-side nature of this component, there are some features
-(namely several remark plugins) that will not work due to their dependence on
-\`'path'\` which is only available in a server-side context. Here are some
-examples below:
+Due to the purely client-side nature of this component, there are some features (namely several remark plugins) that will not work due to their dependence on \`'path'\` which is only available in a server-side context. Here are some examples below:
 
 <br />
 
@@ -33,9 +27,26 @@ examples below:
 - [x] Frontmatter
 - [x] Mermaid.js
 
-For more information, see \`compileMdxClient.ts\`.
+For more information, see \`compileMdxClient.ts\`.`)
+  return (
+    <div className='grid grid-cols-2 gap-2 mt-6'>
+      <textarea value={rawMdx} onChange={event => setRawMdx(event.target.value)} className={
+        cn(
+          '_rounded-lg _px-3 _py-2',
+          '_bg-black/[.05] dark:_bg-gray-50/10',
+          'resize-none [field-sizing:content]'
+        )
+      } />
+      <div>
+        <Playground
+          fallback={<div className='flex h-full items-center text-center text-4xl'>Loading playground component...</div>}
+          source={rawMdx} />
+      </div>
+    </div>
+ )
+}
 
-`} />
+<Demo />
 
 ## Usage
 
