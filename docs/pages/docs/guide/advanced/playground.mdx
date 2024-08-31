@@ -1,6 +1,6 @@
+import cn from 'clsx'
 import { Playground } from 'nextra/components'
 import { useState } from 'react'
-import cn from 'clsx'
 
 # Playground
 
@@ -29,21 +29,28 @@ Due to the purely client-side nature of this component, there are some features 
 
 For more information, see \`compileMdxClient.ts\`.`)
   return (
-    <div className='grid grid-cols-2 gap-2 mt-6'>
-      <textarea value={rawMdx} onChange={event => setRawMdx(event.target.value)} className={
-        cn(
+    <div className="grid grid-cols-2 gap-2 mt-6">
+      <textarea
+        value={rawMdx}
+        onChange={event => setRawMdx(event.target.value)}
+        className={cn(
           '_rounded-lg _px-3 _py-2',
           '_bg-black/[.05] dark:_bg-gray-50/10',
           'resize-none [field-sizing:content]'
-        )
-      } />
+        )}
+      />
       <div>
         <Playground
-          fallback={<div className='flex h-full items-center text-center text-4xl'>Loading playground component...</div>}
-          source={rawMdx} />
+          fallback={
+            <div className="flex h-full items-center text-center text-4xl">
+              Loading playground component...
+            </div>
+          }
+          source={rawMdx}
+        />
       </div>
     </div>
- )
+  )
 }
 
 <Demo />
