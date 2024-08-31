@@ -49,7 +49,7 @@ export function TOC({ toc, filePath }: TOCProps): ReactElement {
         block: 'center',
         inline: 'center',
         scrollMode: 'always',
-        boundary: tocRef.current
+        boundary: tocRef.current!.parentElement
       })
     }
   }, [activeSlug])
@@ -57,7 +57,7 @@ export function TOC({ toc, filePath }: TOCProps): ReactElement {
   return (
     <div
       className={cn(
-        'nextra-scrollbar _sticky _top-16 _overflow-y-auto _pr-4 _pt-6 _text-sm [hyphens:auto]',
+        'nextra-scrollbar _sticky _top-16 _overflow-y-auto _px-4 _pt-6 _text-sm [hyphens:auto]',
         '_max-h-[calc(100vh-var(--nextra-navbar-height)-env(safe-area-inset-bottom))] ltr:_-mr-4 rtl:_-ml-4'
       )}
     >
@@ -74,16 +74,16 @@ export function TOC({ toc, filePath }: TOCProps): ReactElement {
                   className={cn(
                     {
                       2: '_font-semibold',
-                      3: 'ltr:_pl-4 rtl:_pr-4',
-                      4: 'ltr:_pl-8 rtl:_pr-8',
-                      5: 'ltr:_pl-12 rtl:_pr-12',
-                      6: 'ltr:_pl-16 rtl:_pr-16'
+                      3: 'ltr:_ml-4 rtl:_mr-4',
+                      4: 'ltr:_ml-8 rtl:_mr-8',
+                      5: 'ltr:_ml-12 rtl:_mr-12',
+                      6: 'ltr:_ml-16 rtl:_mr-16'
                     }[depth],
-                    '_inline-block _transition-colors _subpixel-antialiased',
+                    '_block _transition-colors _subpixel-antialiased',
                     activeAnchor[id]?.isActive
                       ? '_text-primary-600 contrast-more:!_text-primary-600'
                       : '_text-gray-500 hover:_text-gray-900 dark:_text-gray-400 dark:hover:_text-gray-300',
-                    'contrast-more:_text-gray-900 contrast-more:_underline contrast-more:dark:_text-gray-50 _w-full _break-words'
+                    'contrast-more:_text-gray-900 contrast-more:_underline contrast-more:dark:_text-gray-50 _break-words'
                   )}
                 >
                   {removeLinks(value)}
@@ -98,7 +98,8 @@ export function TOC({ toc, filePath }: TOCProps): ReactElement {
         <div
           className={cn(
             hasHeadings && 'nextra-toc-footer _mt-8 _pt-8',
-            '_sticky _bottom-0 _flex _flex-col _items-start _gap-2 _pb-8'
+            '_sticky _bottom-0 _flex _flex-col _items-start _gap-2 _pb-8',
+            '_-mx-1 _px-1' // to hide focused toc links
           )}
         >
           {themeConfig.feedback.content ? (
