@@ -122,7 +122,7 @@
     "@mdx-js/react": "^3.0.0",
     "@napi-rs/simple-git": "^0.1.9",
     "@shikijs/twoslash": "^1.0.0",
-    "@theguild/remark-mermaid": "^0.0.7",
+    "@theguild/remark-mermaid": "0.1.0-alpha-20240831085007-99592c495628eba9e360854870814fbacaa61f7e",
     "@theguild/remark-npm2yarn": "0.3.0",
     "better-react-mathjax": "^2.0.3",
     "clsx": "^2.0.0",

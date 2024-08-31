@@ -149,7 +149,7 @@ importers:
         version: file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.4)
       nextra-theme-blog:
         specifier: workspace:*
-        version: file:packages/nextra-theme-blog(next@14.2.5)(nextra@3.0.0-alpha.33)(react-dom@18.3.1)(react@18.3.1)
+        version: file:packages/nextra-theme-blog(next@14.2.5)(nextra@3.0.0-alpha.34)(react-dom@18.3.1)(react@18.3.1)
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -172,7 +172,7 @@ importers:
         version: file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.4)
       nextra-theme-docs:
         specifier: workspace:*
-        version: file:packages/nextra-theme-docs(next@14.2.5)(nextra@3.0.0-alpha.33)(react-dom@18.3.1)(react@18.3.1)
+        version: file:packages/nextra-theme-docs(next@14.2.5)(nextra@3.0.0-alpha.34)(react-dom@18.3.1)(react@18.3.1)
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -201,7 +201,7 @@ importers:
         version: file:packages/nextra(@types/react@18.3.3)(next@14.2.5)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.4)
       nextra-theme-docs:
         specifier: workspace:*
-        version: file:packages/nextra-theme-docs(next@14.2.5)(nextra@3.0.0-alpha.33)(react-dom@18.3.1)(react@18.3.1)
+        version: file:packages/nextra-theme-docs(next@14.2.5)(nextra@3.0.0-alpha.34)(react-dom@18.3.1)(react@18.3.1)
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -248,8 +248,8 @@ importers:
         specifier: ^1.0.0
         version: 1.1.2(typescript@5.5.4)
       '@theguild/remark-mermaid':
-        specifier: ^0.0.7
-        version: 0.0.7(react@18.3.1)
+        specifier: 0.1.0-alpha-20240831085007-99592c495628eba9e360854870814fbacaa61f7e
+        version: 0.1.0-alpha-20240831085007-99592c495628eba9e360854870814fbacaa61f7e(react@18.3.1)
       '@theguild/remark-npm2yarn':
         specifier: 0.3.0
         version: 0.3.0
@@ -4080,8 +4080,8 @@ packages:
       react-dom: 18.3.1(react@18.3.1)
     dev: true
 
-  /@theguild/remark-mermaid@0.0.7(react@18.3.1):
-    resolution: {integrity: sha512-sh2xlwOllU6Abh+MPWdJDlNwirDcjdlH1wrDWxNLFNVbEzyVb1BTwhecc6ot5hxBUe38z1Ecja8xor9Wkb61gg==}
+  /@theguild/remark-mermaid@0.1.0-alpha-20240831085007-99592c495628eba9e360854870814fbacaa61f7e(react@18.3.1):
+    resolution: {integrity: sha512-6HXWHCMk4NKMbkZfxXuyBUs13mMLzvrzF1Jq0w4737U3REXW5FEe4JbPyNi3+SQhTsVoXBHiQwxpH1mhVNEizg==}
     peerDependencies:
       react: ^18.2.0
     dependencies:
@@ -12385,7 +12385,7 @@ packages:
       '@mdx-js/react': 3.0.1(@types/react@18.3.3)(react@18.3.1)
       '@napi-rs/simple-git': 0.1.9
       '@shikijs/twoslash': 1.1.2(typescript@5.5.4)
-      '@theguild/remark-mermaid': 0.0.7(react@18.3.1)
+      '@theguild/remark-mermaid': 0.1.0-alpha-20240831085007-99592c495628eba9e360854870814fbacaa61f7e(react@18.3.1)
       '@theguild/remark-npm2yarn': 0.3.0
       better-react-mathjax: 2.0.3(react@18.3.1)
       clsx: 2.1.1
@@ -12422,7 +12422,7 @@ packages:
       - typescript
     dev: false
 
-  file:packages/nextra-theme-blog(next@14.2.5)(nextra@3.0.0-alpha.33)(react-dom@18.3.1)(react@18.3.1):
+  file:packages/nextra-theme-blog(next@14.2.5)(nextra@3.0.0-alpha.34)(react-dom@18.3.1)(react@18.3.1):
     resolution: {directory: packages/nextra-theme-blog, type: directory}
     id: file:packages/nextra-theme-blog
     name: nextra-theme-blog
@@ -12443,7 +12443,7 @@ packages:
       react-dom: 18.3.1(react@18.3.1)
     dev: false
 
-  file:packages/nextra-theme-docs(next@14.2.5)(nextra@3.0.0-alpha.33)(react-dom@18.3.1)(react@18.3.1):
+  file:packages/nextra-theme-docs(next@14.2.5)(nextra@3.0.0-alpha.34)(react-dom@18.3.1)(react@18.3.1):
     resolution: {directory: packages/nextra-theme-docs, type: directory}
     id: file:packages/nextra-theme-docs
     name: nextra-theme-docs

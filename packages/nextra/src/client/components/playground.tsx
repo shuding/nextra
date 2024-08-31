@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import type { ReactElement } from 'react'
-import { compileMdxClient } from '../compile-mdx-client.js'
+import { compileMdx } from '../../server/compile.js'
 import { CrossCircledIcon } from '../icons/index.js'
 import type { MDXComponents } from '../mdx.js'
 import { Code } from './code.js'
@@ -41,7 +41,7 @@ export function Playground({
   useEffect(() => {
     async function doCompile() {
       try {
-        const mdx = await compileMdxClient(source)
+        const mdx = await compileMdx(source)
         setCompiledSource(mdx.result)
         setError(null)
       } catch (error) {
