@@ -1,5 +1,109 @@
 # nextra-theme-docs
 
+## 3.0.0-alpha.34
+
+### Patch Changes
+
+- 8c99baf: enhance search input to better support CJK language users
+- 8ffe2fe: remove focus-visible polyfill
+- 1a634cd: remove explicit `ZodError` assertion
+- Updated dependencies [1a634cd]
+  - nextra@3.0.0-alpha.34
+
+## 3.0.0-alpha.33
+
+### Patch Changes
+
+- 6945f38: fix not rendered default `<meta name="description" />` and
+  `<meta property="og:description" />`
+- 7bb18e3: Add a generic for `themeConfig` in `NextraThemeLayoutProps` to
+  improve type inference.
+- Updated dependencies [7bb18e3]
+  - nextra@3.0.0-alpha.33
+
+## 3.0.0-alpha.32
+
+### Patch Changes
+
+- 73239c4: To ensure consistent horizontal padding, set the default language as
+  plaintext for code blocks. This prevents any loss of formatting for code
+  blocks without a specified language.
+- 150184b: attach heading anchor `id` attribute to heading (like Pagefind do)
+  and fix heading anchor styles when `theme.typesetting: 'article'` is set
+- 9df7f58: Fix nav-links not highlighting on hover in dark mode
+- 3c6193d: Remove unnecessary `sortPages` from `server/utils.ts`
+- 799174f: fixed react warning
+  `Warning: React has detected a change in the order of Hooks called by Body`
+  when `themeConfig.main` options is used
+- Updated dependencies [73239c4]
+- Updated dependencies [799174f]
+- Updated dependencies [150184b]
+- Updated dependencies [3c6193d]
+  - nextra@3.0.0-alpha.32
+
+## 3.0.0-alpha.31
+
+### Patch Changes
+
+- Updated dependencies [d1e3e9a]
+  - nextra@3.0.0-alpha.31
+
+## 3.0.0-alpha.30
+
+### Patch Changes
+
+- Updated dependencies [7615b62]
+  - nextra@3.0.0-alpha.30
+
+## 3.0.0-alpha.29
+
+### Patch Changes
+
+- Updated dependencies [fef635e]
+  - nextra@3.0.0-alpha.29
+
+## 3.0.0-alpha.28
+
+### Patch Changes
+
+- a8c2196: use dynamic import for loading `mermaid`
+- 363b85f: add `flex-shrink: 0` for indent in `FileTree` for `<Ident />` and svg
+  icons in `<Folder />` and `<File />`
+- 363b85f: fix `RangeError: Maximum call stack size exceeded` in `findSummary`
+  when `child.props.children` is `undefined`
+- Updated dependencies [a8c2196]
+- Updated dependencies [363b85f]
+  - nextra@3.0.0-alpha.28
+
+## 3.0.0-alpha.27
+
+### Patch Changes
+
+- 4f0f6b27: Omit `...{:type}` inline code annotations from search index #2922
+- e95faa16: - fixed `<summary />` lost whitespaces when there is some HTML
+  element inside
+
+  - fixed hydration errors and `<summary />` was not rendered when `<details />`
+    text content follows directly after `<summary />` element
+
+- a95e7454: Fix the line highlighting background-color does not extend to the
+  full width of the code block when a scrollbar appears with line numbers.
+- Updated dependencies [4f0f6b27]
+- Updated dependencies [a95e7454]
+  - nextra@3.0.0-alpha.27
+
+## 3.0.0-alpha.26
+
+### Patch Changes
+
+- 376b8954: fixes case when setting `disabled: true` on the scroll to top button
+  prevents scrolling to most top
+
+  scroll to most top in toc element too
+
+- 7b0b7e98: fix page scroll jump while entering characters in the search input
+  - nextra@3.0.0-alpha.26
+
 ## 3.0.0-alpha.25
 
 ### Patch Changes

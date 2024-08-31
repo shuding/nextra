@@ -69,12 +69,12 @@ export const remarkMdxTitle: Plugin<[], Root> = () => (ast, file) => {
   }
 
   ast.children.unshift({
-    type: 'mdxjsEsm' as any,
+    type: 'mdxjsEsm',
     data: {
       estree: {
         body: [createAstExportConst('title', { type: 'Literal', value: title })]
       }
     }
-  })
+  } as any)
   file.data.title = title
 }

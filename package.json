@@ -1,4 +1,5 @@
 {
+  "name": "nextra-monorepo",
   "private": true,
   "packageManager": "pnpm@8.15.9",
   "scripts": {
@@ -12,7 +13,7 @@
     "dev:theme-blog": "turbo run dev --filter=example-blog... --filter=!docs",
     "dev:theme-docs": "turbo run dev --filter=swr-site... --filter=!docs",
     "dev:website": "turbo run dev --filter=docs...",
-    "lint": "eslint --cache --ignore-path .gitignore --max-warnings 0 .",
+    "lint": "ESLINT_USE_FLAT_CONFIG=false eslint --cache --ignore-path .gitignore --max-warnings 0 .",
     "lint:prettier": "prettier --cache --check --ignore-path .gitignore --ignore-path .prettierignore .",
     "prettier": "pnpm lint:prettier --write",
     "release": "changeset publish",
@@ -21,38 +22,39 @@
     "version": "changeset version"
   },
   "devDependencies": {
-    "@changesets/cli": "2.26.2",
+    "@changesets/cli": "2.27.7",
     "@ianvs/prettier-plugin-sort-imports": "4.3.1",
-    "@next/eslint-plugin-next": "14.0.4",
+    "@next/eslint-plugin-next": "14.2.5",
     "@rollup/plugin-alias": "^5.0.0",
-    "@typescript-eslint/eslint-plugin": "6.19.0",
-    "@typescript-eslint/parser": "6.19.0",
-    "eslint": "8.56.0",
+    "@typescript-eslint/eslint-plugin": "8.0.0",
+    "@typescript-eslint/parser": "8.0.0",
+    "eslint": "9.8.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-import": "2.29.1",
-    "eslint-plugin-react": "7.33.2",
-    "eslint-plugin-react-hooks": "4.6.0",
-    "eslint-plugin-sonarjs": "^0.23.0",
-    "eslint-plugin-tailwindcss": "3.14.0",
-    "eslint-plugin-typescript-sort-keys": "3.1.0",
-    "eslint-plugin-unicorn": "50.0.1",
+    "eslint-plugin-react": "7.35.0",
+    "eslint-plugin-react-hooks": "5.1.0-rc-14a4699f-20240725",
+    "eslint-plugin-sonarjs": "^1.0.4-alpha.1",
+    "eslint-plugin-tailwindcss": "3.17.3",
+    "eslint-plugin-typescript-sort-keys": "3.2.0",
+    "eslint-plugin-unicorn": "55.0.0",
     "prettier": "3.3.3",
     "prettier-plugin-pkg": "0.18.1",
     "prettier-plugin-tailwindcss": "0.6.5",
-    "rimraf": "5.0.5",
-    "tsup": "8.0.1",
+    "rimraf": "6.0.1",
+    "tsup": "8.1.0",
     "tsx": "^4.7.0",
-    "turbo": "1.12.4",
-    "typescript": "5.3.3"
+    "turbo": "2.0.12",
+    "typescript": "5.5.4"
   },
   "pnpm": {
     "overrides": {
-      "esbuild": "^0.19.3",
+      "vite": "5.4.2",
+      "esbuild": "0.23.0",
       "next": "14.1.4"
     },
     "patchedDependencies": {
-      "@changesets/assemble-release-plan@5.2.4": "patches/@changesets__assemble-release-plan@5.2.4.patch",
-      "tsup@8.0.1": "patches/tsup@8.0.1.patch",
+      "@changesets/assemble-release-plan@6.0.3": "patches/@changesets__assemble-release-plan@6.0.3.patch",
+      "tsup@8.1.0": "patches/tsup@8.0.1.patch",
       "next@14.1.4": "patches/next@13.5.6.patch"
     }
   }

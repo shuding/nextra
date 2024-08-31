@@ -12,12 +12,12 @@
     "clsx": "^2.1.0",
     "fast-glob": "^3.3.2",
     "framer-motion": "^10.0.0",
-    "next": "^14.1.4",
+    "next": "^14.2.5",
     "nextra": "workspace:*",
     "nextra-theme-docs": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "sharp": "^0.32.6"
+    "sharp": "^0.33.0"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.0.1",

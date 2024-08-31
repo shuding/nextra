@@ -100,7 +100,11 @@ export async function collectFiles({
         return
       }
 
-      const fileRoute = normalizePageRoute(route, name)
+      const fileRoute = normalizePageRoute(
+        route,
+        // Directory could have dot, e.g. graphql-eslint-3.14
+        isDirectory ? name + ext : name
+      )
 
       if (isDirectory) {
         if (fileRoute === '/api') return

@@ -248,35 +248,20 @@ export function Flexsearch(props: FlexsearchProps): ReactElement {
     )
   }
 
-  const preload = useCallback(
-    async (active: boolean) => {
-      if (active && !indexes[locale]) {
-        setIsLoading(true)
-        try {
-          await loadIndexes(basePath, locale)
-        } catch (e) {
-          setError(true)
-        }
-        setIsLoading(false)
-      }
-    },
-    [locale, basePath]
-  )
+  const preload = useCallback(async () => {
+    if (indexes[locale]) return
+    setIsLoading(true)
+    try {
+      await loadIndexes(basePath, locale)
+    } catch {
+      setError(true)
+    }
+    setIsLoading(false)
+  }, [locale, basePath])
 
-  const handleChange = async (value: string) => {
+  const handleChange = (value: string) => {
     setSearch(value)
-    if (isLoading) {
-      return
-    }
-    if (!indexes[locale]) {
-      setIsLoading(true)
-      try {
-        await loadIndexes(basePath, locale)
-      } catch (e) {
-        setError(true)
-      }
-      setIsLoading(false)
-    }
+    if (isLoading) return
     doSearch(value)
   }
 

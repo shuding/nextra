@@ -129,9 +129,11 @@ function FolderImpl({ item, anchors }: FolderProps): ReactElement {
         delete TreeState[item.route]
       }
     }
-    themeConfig.sidebar.autoCollapse
-      ? updateAndPruneTreeState()
-      : updateTreeState()
+    if (themeConfig.sidebar.autoCollapse) {
+      updateAndPruneTreeState()
+    } else {
+      updateTreeState()
+    }
   }, [
     activeRouteInside,
     focusedRouteInside,

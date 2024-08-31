@@ -1,17 +1,19 @@
 .subheading-anchor {
   @apply _opacity-0 _transition-opacity _ms-1;
 
-  :hover > &,
+  :target > &,
+  &:hover,
   &:focus {
     @apply _opacity-100;
+  }
+
+  :target > &:after {
+    @apply _text-gray-400;
+    @apply dark:_text-neutral-500;
   }
 
   &:after {
     @apply _content-['#'] _px-1;
     @apply _text-gray-300 dark:_text-neutral-700;
-    span:target + & {
-      @apply _text-gray-400;
-      @apply dark:_text-neutral-500;
-    }
   }
 }

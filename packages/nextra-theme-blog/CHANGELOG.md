@@ -1,5 +1,92 @@
 # nextra-theme-blog
 
+## 3.0.0-alpha.34
+
+### Patch Changes
+
+- 1a634cd: remove explicit `ZodError` assertion
+- Updated dependencies [1a634cd]
+  - nextra@3.0.0-alpha.34
+
+## 3.0.0-alpha.33
+
+### Patch Changes
+
+- 7bb18e3: Add a generic for `themeConfig` in `NextraThemeLayoutProps` to
+  improve type inference.
+- Updated dependencies [7bb18e3]
+  - nextra@3.0.0-alpha.33
+
+## 3.0.0-alpha.32
+
+### Patch Changes
+
+- 73239c4: To ensure consistent horizontal padding, set the default language as
+  plaintext for code blocks. This prevents any loss of formatting for code
+  blocks without a specified language.
+- 7e57ddb: Avoid skipping the heading level in the posts layout, removes
+  `.post-item` and `.post-item-more` classes
+- 150184b: attach heading anchor `id` attribute to heading (like Pagefind do)
+  and fix heading anchor styles when `theme.typesetting: 'article'` is set
+- a90b90f: Switch to the dark theme provided by `@tailwindcss/typography` in
+  theme-blog.
+- 49a9627: fix theme-blog heading styles in post layout
+- 3c6193d: Remove unnecessary `sortPages` from `server/utils.ts`
+- Updated dependencies [73239c4]
+- Updated dependencies [799174f]
+- Updated dependencies [150184b]
+- Updated dependencies [3c6193d]
+  - nextra@3.0.0-alpha.32
+
+## 3.0.0-alpha.31
+
+### Patch Changes
+
+- Updated dependencies [d1e3e9a]
+  - nextra@3.0.0-alpha.31
+
+## 3.0.0-alpha.30
+
+### Patch Changes
+
+- Updated dependencies [7615b62]
+  - nextra@3.0.0-alpha.30
+
+## 3.0.0-alpha.29
+
+### Patch Changes
+
+- Updated dependencies [fef635e]
+  - nextra@3.0.0-alpha.29
+
+## 3.0.0-alpha.28
+
+### Patch Changes
+
+- a8c2196: use dynamic import for loading `mermaid`
+- 363b85f: add `flex-shrink: 0` for indent in `FileTree` for `<Ident />` and svg
+  icons in `<Folder />` and `<File />`
+- Updated dependencies [a8c2196]
+- Updated dependencies [363b85f]
+  - nextra@3.0.0-alpha.28
+
+## 3.0.0-alpha.27
+
+### Patch Changes
+
+- 4f0f6b27: Omit `...{:type}` inline code annotations from search index #2922
+- a95e7454: Fix the line highlighting background-color does not extend to the
+  full width of the code block when a scrollbar appears with line numbers.
+- Updated dependencies [4f0f6b27]
+- Updated dependencies [a95e7454]
+  - nextra@3.0.0-alpha.27
+
+## 3.0.0-alpha.26
+
+### Patch Changes
+
+- nextra@3.0.0-alpha.26
+
 ## 3.0.0-alpha.25
 
 ### Patch Changes

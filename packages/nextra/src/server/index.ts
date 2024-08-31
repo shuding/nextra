@@ -1,6 +1,5 @@
 /* eslint-env node */
 import { sep } from 'node:path'
-import type { ZodError } from 'zod'
 import { fromZodError } from 'zod-validation-error'
 import type { Nextra } from '../types'
 import {
@@ -18,11 +17,10 @@ const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
 const AGNOSTIC_PAGE_MAP_PATH = `.next${sep}static${sep}chunks${sep}nextra-page-map`
 
 const nextra: Nextra = nextraConfig => {
-  try {
-    nextraConfigSchema.parse(nextraConfig)
-  } catch (error) {
+  const { error } = nextraConfigSchema.safeParse(nextraConfig)
+  if (error) {
     logger.error('Error validating nextraConfig')
-    throw fromZodError(error as ZodError)
+    throw fromZodError(error)
   }
 
   return function withNextra(nextConfig = {}) {

@@ -17,8 +17,10 @@ export type TOCProps = {
 }
 
 const linkClassName = cn(
-  '_text-xs _font-medium _text-gray-500 hover:_text-gray-900 dark:_text-gray-400 dark:hover:_text-gray-100',
-  'contrast-more:_text-gray-800 contrast-more:dark:_text-gray-50'
+  '_text-xs _font-medium',
+  '_text-gray-600 dark:_text-gray-400',
+  'hover:_text-gray-800 dark:hover:_text-gray-200',
+  'contrast-more:_text-gray-700 contrast-more:dark:_text-gray-100'
 )
 
 export function TOC({ toc, filePath, pageTitle }: TOCProps): ReactElement {
