@@ -42,8 +42,8 @@ For more information, see \`compileMdxClient.ts\`.`)
       <div>
         <Playground
           fallback={
-            <div className="flex h-full items-center text-center text-4xl">
-              Loading playground component...
+            <div className="flex h-full items-center justify-center text-4xl">
+              Loading playground...
             </div>
           }
           source={rawMdx}
@@ -64,16 +64,16 @@ import { Playground } from 'nextra/components'
 
 Below is a playground component. It mixes into the rest of your MDX perfectly.
 
-<Playground source={`## Hello world`} />
+<Playground source="## Hello world" />
 ```
 
-You may also specify a fallback component like so
+You may also specify a fallback component like so:
 
 ```mdx
 import { Playground } from 'nextra/components'
 
 <Playground
-  source={`## Hello world`}
+  source="## Hello world"
   fallback={<div>Loading playground...</div>}
 />
 ```
