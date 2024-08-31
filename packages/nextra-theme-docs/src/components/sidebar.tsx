@@ -3,10 +3,12 @@ import type { Heading } from 'nextra'
 import { useFSRoute, useMounted } from 'nextra/hooks'
 import { ArrowRightIcon, ExpandIcon } from 'nextra/icons'
 import type { Item, MenuItem, PageItem } from 'nextra/normalize-pages'
-import type { ReactElement } from 'react'
 import {
   createContext,
+  FocusEventHandler,
   memo,
+  ReactElement,
+  useCallback,
   useContext,
   useEffect,
   useMemo,
@@ -22,11 +24,9 @@ import { LocaleSwitch } from './locale-switch'
 
 const TreeState: Record<string, boolean> = Object.create(null)
 
-const FocusedItemContext = createContext<null | string>(null)
+const FocusedItemContext = createContext('')
 FocusedItemContext.displayName = 'FocusedItem'
-const OnFocusItemContext = createContext<null | ((item: string | null) => any)>(
-  null
-)
+const OnFocusItemContext = createContext<(route: string) => void>(() => {})
 OnFocusItemContext.displayName = 'OnFocusItem'
 const FolderLevelContext = createContext(0)
 FolderLevelContext.displayName = 'FolderLevel'
