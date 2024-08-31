@@ -407,7 +407,7 @@ export function Sidebar({
           >
             <div
               className={cn(
-                '_overflow-y-auto _overflow-x-hidden',
+                '_overflow-y-auto',
                 '_p-4 _grow md:_h-[calc(100vh-var(--nextra-navbar-height)-var(--nextra-menu-height))]',
                 showSidebar ? 'nextra-scrollbar' : 'no-scrollbar'
               )}
@@ -444,7 +444,8 @@ export function Sidebar({
           <div
             className={cn(
               'nextra-sidebar-footer _sticky _bottom-0',
-              '_flex _items-center _gap-2 _mx-4 _py-4',
+              '_flex _items-center _gap-2 _py-4',
+              '_mx-3 _px-1', // to hide focused sidebar links
               showSidebar
                 ? hasI18n && '_justify-end'
                 : '_py-4 _flex-wrap _justify-center'
