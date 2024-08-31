@@ -18,7 +18,6 @@ export function Head({
   children
 }: HeadProps) {
   return (
-    // eslint-disable-next-line @next/next/no-head-element -- ignore since we use app router
     <head>
       {children}
       <style>

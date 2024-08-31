@@ -33,8 +33,7 @@ export async function compileMetadata(
       remarkExportOnlyMetadata
     ],
     recmaPlugins: [
-      // @ts-expect-error fix me
-      () => ast => {
+      () => (ast: any) => {
         const [importReact] = ast.body.splice(0, 1)
 
         ast.body = ast.body.filter(
