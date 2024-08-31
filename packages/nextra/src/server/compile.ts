@@ -200,9 +200,9 @@ export async function compileMdx(
       ...(searchIndexKey !== null && { searchIndexKey, structurizedData }),
       frontMatter
     }
-  } catch (err) {
+  } catch (error) {
     console.error(`[nextra] Error compiling ${filePath}.`)
-    throw err
+    throw error
   }
 
   function createCompiler(): Processor {

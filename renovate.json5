@@ -3,6 +3,13 @@
   extends: ['config:base'],
   packageRules: [
     {
+      matchPackageNames: [
+        'eslint-plugin-react-hooks',
+        'eslint-plugin-tailwindcss'
+      ],
+      enabled: false
+    },
+    {
       groupName: 'lint',
       matchPackageNames: [
         '@next/eslint-plugin-next',
@@ -12,8 +19,8 @@
         'eslint-config-prettier',
         'eslint-plugin-import',
         'eslint-plugin-react',
-        'eslint-plugin-react-hooks',
-        'eslint-plugin-tailwindcss',
+        // 'eslint-plugin-react-hooks',
+        // 'eslint-plugin-tailwindcss',
         'eslint-plugin-typescript-sort-keys',
         'eslint-plugin-unicorn',
         'prettier',
@@ -26,5 +33,6 @@
       groupName: 'latex',
       matchPackageNames: ['remark-math', 'rehype-katex']
     }
-  ]
+  ],
+  baseBranches: ['v3']
 }

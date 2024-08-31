@@ -10,6 +10,6 @@ export const remarkMdxDisableExplicitJsx: Plugin<
   ast => {
     const test = whiteList.map(name => ({ name }))
     visit(ast, test, node => {
-      delete node.data!._mdxExplicitJsx
+      delete (node.data as any)._mdxExplicitJsx
     })
   }

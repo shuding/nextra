@@ -5,7 +5,13 @@ import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 import { useMounted } from 'nextra/hooks'
 import { InformationCircleIcon, SpinnerIcon } from 'nextra/icons'
-import type { CompositionEvent, KeyboardEvent, ReactElement } from 'react'
+import type {
+  ChangeEvent,
+  CompositionEvent,
+  FocusEventHandler,
+  KeyboardEvent,
+  ReactElement
+} from 'react'
 import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
 import { useMenu, useThemeConfig } from '../contexts'
 import type { SearchResult } from '../types'
@@ -17,7 +23,7 @@ type SearchProps = {
   overlayClassName?: string
   value: string
   onChange: (newValue: string) => void
-  onActive?: (active: boolean) => void
+  onActive?: () => void
   loading?: boolean
   error?: boolean
   results: SearchResult[]
@@ -29,7 +35,7 @@ export function Search({
   className,
   overlayClassName,
   value,
-  onChange,
+  onChange: onChangeProp,
   onActive,
   loading,
   error,
@@ -43,8 +49,6 @@ export function Search({
   const input = useRef<HTMLInputElement>(null)
   const ulRef = useRef<HTMLUListElement>(null)
   const [focused, setFocused] = useState(false)
-  //  Trigger the search after the Input is complete for languages like Chinese
-  const [composition, setComposition] = useState(true)
 
   useEffect(() => {
     setActive(0)
@@ -81,12 +85,15 @@ export function Search({
     }
   }, [])
 
+  const clearValue = useCallback(() => {
+    onChangeProp('')
+  }, [onChangeProp])
   const finishSearch = useCallback(() => {
     input.current?.blur()
-    onChange('')
+    clearValue()
     setShow(false)
     setMenu(false)
-  }, [onChange, setMenu])
+  }, [clearValue, setMenu])
 
   const handleActive = useCallback(
     (e: { currentTarget: { dataset: DOMStringMap } }) => {
@@ -98,6 +105,9 @@ export function Search({
 
   const handleKeyDown = useCallback(
     <T,>(e: KeyboardEvent<T>) => {
+      // skip the character selection process in the IME for CJK language users.
+      if (e.nativeEvent.isComposing) return
+
       switch (e.key) {
         case 'ArrowDown': {
           if (active + 1 < results.length) {
@@ -127,7 +137,7 @@ export function Search({
         }
         case 'Enter': {
           const result = results[active]
-          if (result && composition) {
+          if (result) {
             void router.push(result.route)
             finishSearch()
           }
@@ -140,7 +150,7 @@ export function Search({
         }
       }
     },
-    [active, results, router, finishSearch, handleActive, composition]
+    [active, results, router, finishSearch, handleActive]
   )
 
   const mounted = useMounted()
@@ -169,9 +179,7 @@ export function Search({
             : '_pointer-events-none max-sm:_hidden'
         )}
         title={value ? 'Clear' : undefined}
-        onClick={() => {
-          onChange('')
-        }}
+        onClick={clearValue}
       >
         {value && focused
           ? 'ESC'
@@ -186,11 +194,52 @@ export function Search({
       </kbd>
     </Transition>
   )
-  const handleComposition = useCallback(
-    (e: CompositionEvent<HTMLInputElement>) => {
-      setComposition(e.type === 'compositionend')
+
+  const handleFocus = useCallback<FocusEventHandler>(
+    event => {
+      const isFocus = event.type === 'focus'
+      const htmlStyle = document.documentElement.style
+      // Fixes page scroll jump https://github.com/shuding/nextra/issues/2840
+      htmlStyle.scrollPaddingTop = isFocus ? '0' : 'var(--nextra-navbar-height)'
+      if (isFocus) onActive?.()
+      setFocused(isFocus)
     },
-    []
+    [onActive]
+  )
+
+  // To handle CJK language users, refer to the following approach: https://github.com/SukkaW/foxact/commit/fe17304b410cddc4803d4fdbebf3cd5ecb070618
+  // An explicit explanation can be found here: https://github.com/SukkaW/foxact/blob/2b54157187d33ef873c1ab4a9b8700dfdb2e7288/docs/src/pages/use-composition-input.mdx
+  const compositionStateRef = useRef({
+    compositioning: false,
+    emitted: false
+  })
+  const handleChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement> | CompositionEvent<HTMLInputElement>) => {
+      if (!compositionStateRef.current.compositioning) {
+        const { value } = e.target as HTMLInputElement
+        onChangeProp(value)
+        setShow(Boolean(value))
+        compositionStateRef.current.emitted = true
+        return
+      }
+      compositionStateRef.current.emitted = false
+    },
+    [onChangeProp]
+  )
+
+  const handleCompositionStart = useCallback(() => {
+    compositionStateRef.current.compositioning = true
+    compositionStateRef.current.emitted = false
+  }, [])
+
+  const handleCompositionEnd = useCallback(
+    (e: CompositionEvent<HTMLInputElement>) => {
+      compositionStateRef.current.compositioning = false
+      if (!compositionStateRef.current.emitted) {
+        handleChange(e)
+      }
+    },
+    [handleChange]
   )
 
   return (
@@ -201,21 +250,11 @@ export function Search({
 
       <Input
         ref={input}
-        value={value}
-        onChange={e => {
-          const { value } = e.target
-          onChange(value)
-          setShow(Boolean(value))
-        }}
-        onFocus={() => {
-          onActive?.(true)
-          setFocused(true)
-        }}
-        onBlur={() => {
-          setFocused(false)
-        }}
-        onCompositionStart={handleComposition}
-        onCompositionEnd={handleComposition}
+        onCompositionStart={handleCompositionStart}
+        onCompositionEnd={handleCompositionEnd}
+        onChange={handleChange}
+        onFocus={handleFocus}
+        onBlur={handleFocus}
         type="search"
         placeholder={renderString(themeConfig.search.placeholder)}
         onKeyDown={handleKeyDown}

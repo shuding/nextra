@@ -107,9 +107,11 @@ function FolderImpl({ item, anchors }: FolderProps): ReactElement {
         delete TreeState[item.route]
       }
     }
-    themeConfig.sidebar.autoCollapse
-      ? updateAndPruneTreeState()
-      : updateTreeState()
+    if (themeConfig.sidebar.autoCollapse) {
+      updateAndPruneTreeState()
+    } else {
+      updateTreeState()
+    }
   }, [
     activeRouteInside,
     focusedRouteInside,
@@ -201,7 +203,7 @@ function Separator({ title }: { title: string }): ReactElement {
       className={cn(
         '[word-break:break-word]',
         title
-          ? '_mt-5 _mb-2 _px-2 _py-1.5 _text-sm _font-semibold _text-gray-900 first:_mt-0 dark:_text-gray-100'
+          ? '[&:not(:first-child)]:_mt-5 _mb-2 _px-2 _py-1.5 _text-sm _font-semibold _text-gray-900 dark:_text-gray-100'
           : '_my-4'
       )}
     >

@@ -1,5 +1,73 @@
 # nextra
 
+## 3.0.0-alpha.34
+
+### Patch Changes
+
+- 1a634cd: remove explicit `ZodError` assertion
+
+## 3.0.0-alpha.33
+
+### Patch Changes
+
+- 7bb18e3: Add a generic for `themeConfig` in `NextraThemeLayoutProps` to
+  improve type inference.
+
+## 3.0.0-alpha.32
+
+### Patch Changes
+
+- 73239c4: To ensure consistent horizontal padding, set the default language as
+  plaintext for code blocks. This prevents any loss of formatting for code
+  blocks without a specified language.
+- 799174f: fixed creating `pageMap` items for folders with dots
+
+  remove requirement of passing `filePaths` with `.md`/`.mdx` extensions for
+  `createCatchAllMeta` function
+
+- 150184b: attach heading anchor `id` attribute to heading (like Pagefind do)
+  and fix heading anchor styles when `theme.typesetting: 'article'` is set
+- 3c6193d: Remove unnecessary `sortPages` from `server/utils.ts`
+
+## 3.0.0-alpha.31
+
+### Patch Changes
+
+- d1e3e9a: handle case when meta object was added in `transformPageMap`
+
+## 3.0.0-alpha.30
+
+### Patch Changes
+
+- 7615b62: fix `useRouter` in `nextra/hooks`, use `asPath` instead `route`
+  because locale can be dynamic `/[locale]`
+
+## 3.0.0-alpha.29
+
+### Patch Changes
+
+- fef635e: ignore loading pageMap for dynamic locale `/[locale]`
+
+## 3.0.0-alpha.28
+
+### Patch Changes
+
+- a8c2196: use dynamic import for loading `mermaid`
+- 363b85f: add `flex-shrink: 0` for indent in `FileTree` for `<Ident />` and svg
+  icons in `<Folder />` and `<File />`
+
+## 3.0.0-alpha.27
+
+### Patch Changes
+
+- 4f0f6b27: Omit `...{:type}` inline code annotations from search index #2922
+- a95e7454: Fix the line highlighting background-color does not extend to the
+  full width of the code block when a scrollbar appears with line numbers.
+
+## 3.0.0-alpha.26
+
+## 3.0.0-alpha.25
+
 ## 3.0.0-alpha.24
 
 ### Patch Changes

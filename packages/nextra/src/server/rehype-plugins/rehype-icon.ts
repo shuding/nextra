@@ -1,5 +1,5 @@
 import type { ImportDeclaration, ImportSpecifier } from 'estree'
-import type { Element } from 'hast'
+import type { Element, Root } from 'hast'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 
@@ -84,7 +84,7 @@ const isImportDeclaration = (node: any) =>
 const isImportFrom = (node: any) =>
   node.data.estree.body[0].source.value === 'nextra/icons'
 
-export const rehypeIcon: Plugin<[], any> =
+export const rehypeIcon: Plugin<[], Root> =
   (replaces = REHYPE_ICON_DEFAULT_REPLACES) =>
   ast => {
     const imports = ast.children.filter(
@@ -106,7 +106,7 @@ export const rehypeIcon: Plugin<[], any> =
 
       let findImportedName = ''
       for (const { data } of imports) {
-        const [{ specifiers }] = data.estree.body
+        const [{ specifiers }] = (data as any).estree.body
         const isMatch = (specifiers as ImportSpecifier[]).some(
           spec => spec.imported.name === iconName
         )
@@ -118,8 +118,8 @@ export const rehypeIcon: Plugin<[], any> =
 
       if (!findImportedName) {
         const importNode = createImport(iconName)
-        ast.children.push(importNode)
-        imports.push(importNode)
+        ast.children.push(importNode as any)
+        imports.push(importNode as any)
       }
       attachIconProp(preEl, findImportedName || iconName)
     })

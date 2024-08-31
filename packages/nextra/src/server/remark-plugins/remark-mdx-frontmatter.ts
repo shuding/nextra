@@ -42,10 +42,12 @@ export const remarkMdxFrontMatter: Plugin<[], Root> =
       ast.children.unshift(createNode({}))
     }
 
-    // @ts-expect-error
-    const frontMatter = ast.children.find(node =>
-      // @ts-expect-error
-      isExportNode(node, 'frontMatter')
+    // @ts-expect-error -- fixme
+    const frontMatter = ast.children.find(
+      node =>
+        // @ts-expect-error -- fixme
+        isExportNode(node, 'frontMatter')
+      // @ts-expect-error -- fixme
     ).data.estree.body[0].declaration.declarations[0].init.properties
 
     file.data.frontMatter = estreeToValue(frontMatter)
@@ -93,8 +95,8 @@ function estreeToValue(
       key.type === 'Literal'
         ? (key.value as string)
         : key.type === 'Identifier'
-        ? key.name
-        : ''
+          ? key.name
+          : ''
     if (value.type === 'Literal') {
       result[keyName] = value.value
     } else if (value.type === 'ObjectExpression') {

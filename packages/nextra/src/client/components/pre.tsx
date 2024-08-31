@@ -41,7 +41,7 @@ export function Pre({
   )
 
   return (
-    <div className="nextra-code _relative _mt-6 first:_mt-0">
+    <div className="nextra-code _relative [&:not(:first-child)]:_mt-6">
       {filename && (
         <div
           className={cn(

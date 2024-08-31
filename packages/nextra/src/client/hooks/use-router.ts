@@ -9,7 +9,7 @@ export const useRouter: typeof useNextRouter = () => {
     return {
       ...router,
       defaultLocale,
-      ...(defaultLocale && { locale: router.route.split('/')[1] })
+      ...(defaultLocale && { locale: router.asPath.split('/')[1] })
     }
   }, [router])
 }
