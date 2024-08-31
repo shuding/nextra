@@ -96,17 +96,19 @@ function FolderImpl({ item, anchors, onFocus }: FolderProps): ReactElement {
   const rerender = useState({})[1]
 
   useEffect(() => {
+    const route = item.route
+
     function updateTreeState() {
       if (activeRouteInside || focusedRouteInside) {
-        TreeState[item.route] = true
+        TreeState[route] = true
       }
     }
 
     function updateAndPruneTreeState() {
       if (activeRouteInside && focusedRouteInside) {
-        TreeState[item.route] = true
+        TreeState[route] = true
       } else {
-        delete TreeState[item.route]
+        delete TreeState[route]
       }
     }
 
