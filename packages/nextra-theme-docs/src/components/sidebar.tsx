@@ -3,11 +3,10 @@ import type { Heading } from 'nextra'
 import { useFSRoute, useMounted } from 'nextra/hooks'
 import { ArrowRightIcon, ExpandIcon } from 'nextra/icons'
 import type { Item, MenuItem, PageItem } from 'nextra/normalize-pages'
+import type { FocusEventHandler, ReactElement } from 'react'
 import {
   createContext,
-  FocusEventHandler,
   memo,
-  ReactElement,
   useCallback,
   useContext,
   useEffect,
@@ -96,19 +95,17 @@ function FolderImpl({ item, anchors, onFocus }: FolderProps): ReactElement {
   const rerender = useState({})[1]
 
   useEffect(() => {
-    const route = item.route
-
     function updateTreeState() {
       if (activeRouteInside || focusedRouteInside) {
-        TreeState[route] = true
+        TreeState[item.route] = true
       }
     }
 
     function updateAndPruneTreeState() {
       if (activeRouteInside && focusedRouteInside) {
-        TreeState[route] = true
+        TreeState[item.route] = true
       } else {
-        delete TreeState[route]
+        delete TreeState[item.route]
       }
     }
 
@@ -297,13 +294,16 @@ function Menu({
 }: MenuProps): ReactElement {
   const onFocus = useContext(OnFocusItemContext)
 
-  const handleFocus: FocusEventHandler = useCallback(event => {
-    const route =
-      event.target.getAttribute('href') ||
-      event.target.getAttribute('data-href') ||
-      ''
-    onFocus(route)
-  }, [])
+  const handleFocus: FocusEventHandler = useCallback(
+    event => {
+      const route =
+        event.target.getAttribute('href') ||
+        event.target.getAttribute('data-href') ||
+        ''
+      onFocus(route)
+    },
+    [onFocus]
+  )
 
   return (
     <ul className={cn(classes.list, className)}>
