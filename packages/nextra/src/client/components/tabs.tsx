@@ -3,7 +3,7 @@ import cn from 'clsx'
 import type { ComponentProps, ReactElement, ReactNode } from 'react'
 import { useCallback, useEffect, useState } from 'react'
 
-type TabItem = string | ReactNode
+type TabItem = string | ReactElement
 
 type TabObjectItem = {
   label: TabItem
@@ -80,8 +80,11 @@ function Tabs_({
       defaultIndex={defaultIndex}
       onChange={handleChange}
     >
-      <div className="nextra-scrollbar _overflow-x-auto _overflow-y-hidden _overscroll-x-contain">
-        <HeadlessTab.List className="_mt-4 _flex _w-max _min-w-full _border-b _border-gray-200 _pb-px dark:_border-neutral-800">
+      <div
+        className={cn('nextra-scrollbar _overflow-x-auto')}
+        tabIndex={-1} // disables focus in Firefox
+      >
+        <HeadlessTab.List className="_mt-4 _flex _w-max _min-w-full _gap-2 _border-b _border-gray-200 _pb-px dark:_border-neutral-800">
           {items.map((item, index) => {
             const disabled = isTabObjectItem(item) && item.disabled
             return (
@@ -90,7 +93,8 @@ function Tabs_({
                 disabled={disabled}
                 className={({ selected }) =>
                   cn(
-                    '_mr-2 _rounded-t _p-2 _font-medium _leading-5 _transition-colors',
+                    '_ring-inset',
+                    '_rounded-t _p-2 _font-medium _leading-5 _transition-colors',
                     '_-mb-0.5 _select-none _border-b-2',
                     selected
                       ? '_border-primary-500 _text-primary-600'
@@ -118,7 +122,7 @@ function Tab({
   ...props
 }: Omit<ComponentProps<typeof HeadlessTab.Panel>, 'static'>): ReactElement {
   return (
-    <HeadlessTab.Panel {...props} unmount={unmount} className="_rounded _pt-6">
+    <HeadlessTab.Panel {...props} unmount={unmount} className="_rounded _mt-6">
       {children}
     </HeadlessTab.Panel>
   )
