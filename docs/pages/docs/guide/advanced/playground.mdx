@@ -1,6 +1,5 @@
-import cn from 'clsx'
-import { Mermaid, Playground } from 'nextra/components'
-import { useState } from 'react'
+import { Mermaid, Playground, Code, Pre } from 'nextra/components'
+import { useRef, useCallback, useState } from 'react'
 
 export function Demo() {
   const [rawMdx, setRawMdx] = useState(`## Description
@@ -17,46 +16,54 @@ console.log("Hello world, this is a playground component!");
 
 ## Caveats
 
-Due to the purely client-side nature of this component, there are some features (namely several remark plugins) that will not work due to their dependence on \`'path'\` which is only available in a server-side context. Here are some examples below:
+Due to the purely client-side nature of this component, features "Table of Contents" and "Frontmatter" will not work.
 
-<br />
-
-- [x] Table of Contents
-- [x] Frontmatter
-- [x] Mermaid.js
+## Mermaid Example
 
 \`\`\`mermaid
-graph TD;
+graph TD
 subgraph AA [Consumers]
-A[Mobile app];
-B[Web app];
-C[Node.js client];
+A[Mobile App]
+B[Web App]
+C[Node.js Client]
 end
 subgraph BB [Services]
-E[REST API];
-F[GraphQL API];
-G[SOAP API];
+E[REST API]
+F[GraphQL API]
+G[SOAP API]
 end
-Z[GraphQL API];
-A --> Z;
-B --> Z;
-C --> Z;
-Z --> E;
-Z --> F;
-Z --> G;
-\`\`\`
-`)
+Z[GraphQL API]
+A --> Z
+B --> Z
+C --> Z
+Z --> E
+Z --> F
+Z --> G
+\`\`\``)
+  const handleInput = useCallback(e => {
+    setRawMdx(e.currentTarget.textContent ?? '')
+  }, [])
+
+  const spanRef = useRef(null)
+  const initialRender = useRef(false)
+
+  if (!initialRender.current && spanRef.current) {
+    initialRender.current = true
+    spanRef.current.textContent = rawMdx
+  }
   return (
     <div className="grid grid-cols-2 gap-2 mt-6">
-      <textarea
-        value={rawMdx}
-        onChange={event => setRawMdx(event.target.value)}
-        className={cn(
-          '_rounded-lg _px-3 _py-2',
-          '_bg-black/[.05] dark:_bg-gray-50/10',
-          'resize-none [field-sizing:content] outline-none focus:ring'
-        )}
-      />
+      <Pre data-filename="MDX" icon={MdxIcon}>
+        <Code>
+          <span
+            ref={spanRef}
+            contentEditable
+            suppressContentEditableWarning
+            className="outline-none"
+            onInput={handleInput}
+          />
+        </Code>
+      </Pre>
       <div>
         <Playground
           fallback={
@@ -78,7 +85,7 @@ Z --> G;
 
 ## Usage
 
-```mdx
+```mdx filename="Basic Usage"
 import { Playground } from 'nextra/components'
 
 # Playground
@@ -90,7 +97,7 @@ Below is a playground component. It mixes into the rest of your MDX perfectly.
 
 You may also specify a fallback component like so:
 
-```mdx
+```mdx filename="Usage with Fallback"
 import { Playground } from 'nextra/components'
 
 <Playground
