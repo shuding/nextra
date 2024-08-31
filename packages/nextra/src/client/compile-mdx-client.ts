@@ -2,7 +2,6 @@ import type { ProcessorOptions } from '@mdx-js/mdx'
 import { createProcessor } from '@mdx-js/mdx'
 import type { Processor } from '@mdx-js/mdx/lib/core'
 import { remarkNpm2Yarn } from '@theguild/remark-npm2yarn'
-import type { Program } from 'estree'
 import rehypeKatex from 'rehype-katex'
 import rehypePrettyCode from 'rehype-pretty-code'
 import rehypeRaw from 'rehype-raw'
@@ -11,11 +10,8 @@ import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 import remarkReadingTime from 'remark-reading-time'
 import remarkSmartypants from 'remark-smartypants'
-import type { Pluggable, Plugin } from 'unified'
-import {
-  recmaRewriteFunctionBody,
-  recmaRewriteJsx
-} from '../server/recma-plugins/index.js'
+import type { Pluggable } from 'unified'
+import { recmaRewriteJsx } from '../server/recma-plugins/index.js'
 import {
   DEFAULT_REHYPE_PRETTY_CODE_OPTIONS,
   rehypeAttachCodeMeta,
@@ -73,7 +69,6 @@ export async function compileMdxClient(
     outputFormat = 'function-body',
     remarkPlugins,
     rehypePlugins,
-    recmaPlugins,
     rehypePrettyCodeOptions
   }: MdxOptions = mdxOptions
 
@@ -163,58 +158,7 @@ export async function compileMdxClient(
               rehypeAttachCodeMeta
             ])
       ].filter(truthy),
-      recmaPlugins: [
-        (() => (ast: Program, file) => {
-          const mdxContentIndex = ast.body.findIndex(node => {
-            if (node.type === 'ExportDefaultDeclaration') {
-              return (node.declaration as any).id.name === 'MDXContent'
-            }
-            if (node.type === 'FunctionDeclaration') {
-              return node.id.name === 'MDXContent'
-            }
-          })
-
-          // Remove `MDXContent` since we use custom HOC_MDXContent
-          let [mdxContent] = ast.body.splice(mdxContentIndex, 1) as any
-
-          // In MDX3 MDXContent is directly exported as export default when `outputFormat: 'program'` is specified
-          if (mdxContent.type === 'ExportDefaultDeclaration') {
-            mdxContent = mdxContent.declaration
-          }
-
-          const mdxContentArgument = mdxContent.body.body[0].argument
-
-          file.data.hasMdxLayout =
-            !!mdxContentArgument &&
-            mdxContentArgument.openingElement.name.name === 'MDXLayout'
-
-          const localExports = new Set(['title', 'frontMatter' /* 'useTOC' */])
-
-          for (const node of ast.body) {
-            if (node.type === 'ExportNamedDeclaration') {
-              let varName: string
-              const { declaration } = node
-              if (!declaration) {
-                // skip for `export ... from '...'` declaration
-                continue
-              } else if (declaration.type === 'VariableDeclaration') {
-                const [{ id }] = declaration.declarations
-                varName = (id as any).name
-              } else if (declaration.type === 'FunctionDeclaration') {
-                varName = declaration.id.name
-              } else {
-                throw new Error(`\`${declaration.type}\` unsupported.`)
-              }
-
-              if (localExports.has(varName)) {
-                Object.assign(node, node.declaration)
-              }
-            }
-          }
-        }) satisfies Plugin<[], Program>,
-        isRemoteContent ? recmaRewriteFunctionBody : recmaRewriteJsx,
-        ...(recmaPlugins || [])
-      ].filter(truthy)
+      recmaPlugins: [recmaRewriteJsx]
     })
   }
 }
