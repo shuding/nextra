@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import type { ReactElement } from 'react'
-import { compileMdx } from '../../server/compile.js'
 import { CrossCircledIcon } from '../icons/index.js'
 import type { MDXComponents } from '../mdx.js'
 import { Code } from './code.js'
@@ -40,6 +39,8 @@ export function Playground({
 
   useEffect(() => {
     async function doCompile() {
+      // Importing in useEffect to not increase global bundle size
+      const { compileMdx } = await import('../../server/compile.js')
       try {
         const mdx = await compileMdx(source)
         setCompiledSource(mdx.result)
