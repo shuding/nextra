@@ -390,7 +390,7 @@ importers:
         version: 0.0.0-insiders.565cd3e(postcss@8.4.41)
       '@tailwindcss/typography':
         specifier: ^0.5.9
-        version: 0.5.13(tailwindcss@3.4.10)
+        version: 0.5.15(tailwindcss@3.4.10)
       '@types/react':
         specifier: ^18.2.23
         version: 18.3.3
@@ -4020,10 +4020,10 @@ packages:
       postcss-nested: 5.0.6(postcss@8.4.41)
     dev: true
 
-  /@tailwindcss/typography@0.5.13(tailwindcss@3.4.10):
-    resolution: {integrity: sha512-ADGcJ8dX21dVVHIwTRgzrcunY6YY9uSlAHHGVKvkA+vLc5qLwEszvKts40lx7z0qc4clpjclwLeK5rVCV2P/uw==}
+  /@tailwindcss/typography@0.5.15(tailwindcss@3.4.10):
+    resolution: {integrity: sha512-AqhlCXl+8grUz8uqExv5OTtgpjuVIwFTSXTrh8y9/pw6q2ek7fJ+Y8ZEVw7EB2DCcuCOtEjf9w3+J3rzts01uA==}
     peerDependencies:
-      tailwindcss: '>=3.0.0 || insiders'
+      tailwindcss: '>=3.0.0 || insiders || >=4.0.0-alpha.20'
     dependencies:
       lodash.castarray: 4.4.0
       lodash.isplainobject: 4.0.6
@@ -9978,7 +9978,7 @@ packages:
       postcss: ^8.2.14
     dependencies:
       postcss: 8.4.41
-      postcss-selector-parser: 6.0.11
+      postcss-selector-parser: 6.1.2
     dev: true
 
   /postcss-nested@6.2.0(postcss@8.4.41):
@@ -10004,14 +10004,6 @@ packages:
 
   /postcss-selector-parser@6.0.10:
     resolution: {integrity: sha512-IQ7TZdoaqbT+LCpShg46jnZVlhWD2w6iQYAcYXfHARZ7X1t/UGhhceQDs5X0cGqKvYlHNOuv7Oa1xmb0oQuA3w==}
-    engines: {node: '>=4'}
-    dependencies:
-      cssesc: 3.0.0
-      util-deprecate: 1.0.2
-    dev: true
-
-  /postcss-selector-parser@6.0.11:
-    resolution: {integrity: sha512-zbARubNdogI9j7WY4nQJBiNqQf3sLS3wCP4WfOidu+p28LofJqDH1tcXypGrcmMHhDk2t9wGhCsYe/+szLTy1g==}
     engines: {node: '>=4'}
     dependencies:
       cssesc: 3.0.0
