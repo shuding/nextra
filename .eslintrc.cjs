@@ -68,6 +68,7 @@ module.exports = {
         'sonarjs/no-unused-collection': 'error',
         'unicorn/catch-error-name': 'error',
         'unicorn/prefer-optional-catch-binding': 'error',
+        'unicorn/filename-case': 'error',
         // todo: enable
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-non-null-assertion': 'off',

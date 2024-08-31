@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import type { Mock } from 'vitest'
 import { getParent } from '../src/utils/parent'
-import { articleOpts, config } from './__fixture__/pageMap'
+import { articleOpts, config } from './__fixture__/page-map'
 
 vi.mock('next/router', () => ({
   useRouter: vi.fn()
