@@ -33,7 +33,7 @@
     "eslint-plugin-import": "2.29.1",
     "eslint-plugin-react": "7.35.0",
     "eslint-plugin-react-hooks": "5.1.0-rc-14a4699f-20240725",
-    "eslint-plugin-sonarjs": "^1.0.4-alpha.1",
+    "eslint-plugin-sonarjs": "^2.0.0",
     "eslint-plugin-tailwindcss": "3.17.3",
     "eslint-plugin-typescript-sort-keys": "3.2.0",
     "eslint-plugin-unicorn": "55.0.0",
