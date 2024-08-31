@@ -1,5 +1,5 @@
 import { Mermaid, Playground, Code, Pre, Tabs } from 'nextra/components'
-import { useRef, useCallback, useState } from 'react'
+import { useRef, useCallback, useState, useEffect } from 'react'
 
 export function Demo() {
   const [rawMdx, setRawMdx] = useState(`Playground components allow you to write Nextra compatible MDX that renders only on the client. It's modeled after the functionality found in [MDX Playground](https://mdxjs.com/playground).
@@ -45,10 +45,13 @@ Z --> G
   const spanRef = useRef(null)
   const initialRender = useRef(false)
 
-  if (!initialRender.current && spanRef.current) {
-    initialRender.current = true
-    spanRef.current.textContent = rawMdx
-  }
+  useEffect(() => {
+    if (!initialRender.current && spanRef.current) {
+      initialRender.current = true
+      spanRef.current.textContent = rawMdx
+    }
+  }, []);
+
   return (
     <div className="grid grid-cols-2 gap-2 mt-6">
       <Pre data-filename="MDX" icon={MdxIcon}>
