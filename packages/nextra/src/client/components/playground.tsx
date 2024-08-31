@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import type { ReactElement } from 'react'
-import { compileMdxClient } from '../compileMdxClient.js'
+import { compileMdxClient } from '../compile-mdx-client.js'
 import { CrossCircledIcon } from '../icons/index.js'
 import type { MDXComponents } from '../mdx.js'
 import { Code } from './code.js'
