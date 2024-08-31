@@ -1,5 +1,13 @@
 # nextra-theme-blog
 
+## 3.0.0-alpha.34
+
+### Patch Changes
+
+- 1a634cd: remove explicit `ZodError` assertion
+- Updated dependencies [1a634cd]
+  - nextra@3.0.0-alpha.34
+
 ## 3.0.0-alpha.33
 
 ### Patch Changes
