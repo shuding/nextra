@@ -57,7 +57,6 @@ export function Playground({
       <div className="[&_svg]:_text-red-500">
         <Pre
           data-filename="Could not compile code"
-          // @ts-expect-error todo: fix type
           icon={CrossCircledIcon}
           className="_whitespace-pre-wrap"
         >
