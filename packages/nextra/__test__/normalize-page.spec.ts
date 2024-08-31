@@ -1,5 +1,5 @@
 import { normalizePages } from '../src/client/normalize-pages.js'
-import { cnPageMap, usPageMap } from './fixture/page-maps/pageMap.js'
+import { cnPageMap, usPageMap } from './fixture/page-maps/page-map.js'
 
 describe('normalize-page', () => {
   it('zh-CN home', () => {

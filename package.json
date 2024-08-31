@@ -41,7 +41,7 @@
     "prettier-plugin-pkg": "0.18.1",
     "prettier-plugin-tailwindcss": "0.6.5",
     "rimraf": "6.0.1",
-    "tsup": "8.1.0",
+    "tsup": "8.2.4",
     "tsx": "^4.7.0",
     "turbo": "2.1.1",
     "typescript": "5.5.4"
@@ -54,7 +54,7 @@
     },
     "patchedDependencies": {
       "@changesets/assemble-release-plan@6.0.3": "patches/@changesets__assemble-release-plan@6.0.3.patch",
-      "tsup@8.1.0": "patches/tsup@8.0.1.patch"
+      "tsup@8.2.4": "patches/tsup.patch"
     }
   }
 }

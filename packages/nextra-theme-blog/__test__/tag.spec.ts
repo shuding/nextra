@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { getStaticTags } from '../src/utils/get-tags'
-import { articleOpts, indexOpts, postsOpts } from './__fixture__/pageMap'
+import { articleOpts, indexOpts, postsOpts } from './__fixture__/page-map'
 
 describe('parent', () => {
   it('string', () => {
