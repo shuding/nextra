@@ -6,5 +6,5 @@ export default {
   table: 'Rendering Tables',
   typescript: '',
   remote: 'Remote Content',
-  playground: 'Playground',
+  playground: 'Playground'
 }
