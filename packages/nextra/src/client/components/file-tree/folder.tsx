@@ -21,7 +21,8 @@ type FolderProps = {
 export function Indent(): ReactElement[] {
   const length = useIndent()
   return Array.from({ length }, (_, index) => (
-    <span className="_w-5" key={index} />
+    // Text can shrink indent
+    <span className="_w-5 _shrink-0" key={index} />
   ))
 }
 
@@ -45,7 +46,13 @@ export const Folder = memo<FolderProps>(
           className="_flex _items-center _py-1 hover:_opacity-60"
         >
           <Indent />
-          <svg width="1em" height="1em" viewBox="0 0 24 24">
+          <svg
+            width="1em"
+            height="1em"
+            viewBox="0 0 24 24"
+            // Text can shrink icon
+            className="_shrink-0"
+          >
             <path
               fill="none"
               stroke="currentColor"

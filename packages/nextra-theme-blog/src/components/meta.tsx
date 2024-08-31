@@ -25,8 +25,8 @@ export function Meta({
         (readingTimeText ? '_items-start' : '_items-center')
       }
     >
-      <div className="_grow dark:_text-gray-400 _text-gray-600">
-        <div className="_not-prose _flex _flex-wrap _items-center _gap-1">
+      <div className="_not-prose _grow dark:_text-gray-400 _text-gray-600">
+        <div className="_flex _flex-wrap _items-center _gap-1">
           {author}
           {author && date && ','}
 
@@ -38,7 +38,7 @@ export function Meta({
           {readingTimeText || tagsEl}
         </div>
         {readingTime && (
-          <div className="_not-prose _mt-1 _flex _flex-wrap _items-center _gap-1">
+          <div className="_mt-1 _flex _flex-wrap _items-center _gap-1">
             {tagsEl}
           </div>
         )}

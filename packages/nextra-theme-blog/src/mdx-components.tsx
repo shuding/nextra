@@ -20,9 +20,10 @@ function HeadingLink({
 }: ComponentProps<'h2'> & { tag: `h${2 | 3 | 4 | 5 | 6}` }): ReactElement {
   return (
     <Tag
+      id={id}
       className={
         // can be added by footnotes
-        className === 'sr-only' ? '_sr-only' : `_not-prose subheading-${Tag}`
+        className === 'sr-only' ? '_sr-only' : `subheading-${Tag}`
       }
       {...props}
     >
@@ -30,8 +31,7 @@ function HeadingLink({
       {id && (
         <a
           href={`#${id}`}
-          id={id}
-          className="subheading-anchor"
+          className="_not-prose subheading-anchor"
           aria-label="Permalink for this section"
         />
       )}
@@ -57,16 +57,15 @@ export const useMDXComponents: UseMDXComponents = components => ({
       )
     }
     return (
-      // @ts-expect-error Types of property `ref` are incompatible.
       <Link href={href} {...props}>
         {children}
       </Link>
     )
   },
   pre: ({ children, ...props }) => (
-    <div className="_not-prose">
-      <Pre {...props}>{children}</Pre>
-    </div>
+    <Pre className="_not-prose" {...props}>
+      {children}
+    </Pre>
   ),
   tr: Tr,
   th: Th,

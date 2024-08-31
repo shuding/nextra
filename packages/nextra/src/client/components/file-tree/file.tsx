@@ -17,7 +17,13 @@ export const File = ({ label, name, active }: FileProps) => (
   >
     <span className="_flex _items-center _py-1">
       <Indent />
-      <svg width="1em" height="1em" viewBox="0 0 24 24">
+      <svg
+        width="1em"
+        height="1em"
+        viewBox="0 0 24 24"
+        // Text can shrink icon
+        className="_shrink-0"
+      >
         <path
           fill="none"
           stroke="currentColor"

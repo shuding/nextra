@@ -1,6 +1,5 @@
 'use client'
 
-import 'focus-visible'
 import '../polyfill'
 import type { Heading, PageMapItem } from 'nextra'
 import { useFSRoute } from 'nextra/hooks'

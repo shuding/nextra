@@ -1,48 +1,59 @@
 'use client'
 
 import cn from 'clsx'
-import type { ComponentProps, ReactElement } from 'react'
+import type { ComponentProps, ReactElement, ReactNode } from 'react'
 import { Children, cloneElement, useEffect, useMemo, useState } from 'react'
 import { Collapse } from '../components'
 
-export function Details({
+function Details({
   children,
   open,
   className,
   ...props
 }: ComponentProps<'details'>): ReactElement {
-  const [openState, setOpen] = useState(!!open)
+  const [isOpen, setIsOpen] = useState(!!open)
   // To animate the close animation we have to delay the DOM node state here.
-  const [delayedOpenState, setDelayedOpenState] = useState(openState)
+  const [delayedOpenState, setDelayedOpenState] = useState(isOpen)
 
   useEffect(() => {
-    if (!openState) {
-      const timeout = setTimeout(() => setDelayedOpenState(openState), 500)
+    if (!isOpen) {
+      const timeout = setTimeout(() => setDelayedOpenState(isOpen), 500)
       return () => clearTimeout(timeout)
     }
     setDelayedOpenState(true)
-  }, [openState])
+  }, [isOpen])
 
-  const [summaryElement, restChildren] = useMemo(() => {
-    let summary: ReactElement | undefined
-    const restChildren = Children.map(children, child => {
-      const isSummary =
-        child &&
-        typeof child === 'object' &&
-        'type' in child &&
-        child.type === 'summary'
+  const [summaryElement, restChildren] = useMemo(
+    function findSummary(list = children): [summary: ReactNode, ReactNode] {
+      let summary: ReactNode
 
-      if (!isSummary) return child
-
-      summary ||= cloneElement(child, {
-        onClick(event: MouseEvent) {
-          event.preventDefault()
-          setOpen(v => !v)
+      const rest = Children.map(list, child => {
+        if (
+          !summary && // Add onClick only for first summary
+          child &&
+          typeof child === 'object' &&
+          'type' in child
+        ) {
+          if (child.type === 'summary') {
+            summary = cloneElement(child, {
+              onClick(event: MouseEvent) {
+                event.preventDefault()
+                setIsOpen(v => !v)
+              }
+            })
+            return
+          }
+          if (child.type !== Details && child.props.children) {
+            ;[summary, child] = findSummary(child.props.children)
+          }
         }
+        return child
       })
-    })
-    return [summary, restChildren]
-  }, [children])
+
+      return [summary, rest]
+    },
+    [children]
+  )
 
   return (
     <details
@@ -52,10 +63,10 @@ export function Details({
       )}
       {...props}
       open={delayedOpenState}
-      data-expanded={openState ? '' : undefined}
+      data-expanded={isOpen ? '' : undefined}
     >
       {summaryElement}
-      <Collapse isOpen={openState}>{restChildren}</Collapse>
+      <Collapse isOpen={isOpen}>{restChildren}</Collapse>
     </details>
   )
 }
