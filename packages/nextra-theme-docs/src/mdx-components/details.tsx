@@ -5,7 +5,7 @@ import type { ComponentProps, ReactElement, ReactNode } from 'react'
 import { Children, cloneElement, useEffect, useMemo, useState } from 'react'
 import { Collapse } from '../components'
 
-function Details({
+export function Details({
   children,
   open,
   className,
