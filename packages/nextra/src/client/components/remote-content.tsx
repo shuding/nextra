@@ -45,13 +45,13 @@ export function RemoteContent({
     )
   }
 
-  const MDXContent = /* @__PURE__ */ evaluate(compiledSource, scope).default
+  const MDXContent = evaluate(compiledSource, scope).default
 
   return <MDXContent components={components} />
 }
 
 RemoteContent.useTOC = (props: Record<string, unknown>) => {
   const compiledSource = useData('__nextra_dynamic_mdx')
-  const { useTOC } = /* @__PURE__ */ evaluate(compiledSource)
+  const { useTOC } = evaluate(compiledSource)
   return useTOC(props)
 }

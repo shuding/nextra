@@ -74,7 +74,7 @@ export function Playground({
   }
 
   if (compiledSource) {
-    const MDXContent = /* @__PURE__ */ evaluate(compiledSource, scope).default
+    const MDXContent = evaluate(compiledSource, scope).default
     return <MDXContent components={components} />
   }
 
