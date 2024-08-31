@@ -1,10 +1,8 @@
-import { Mermaid, Playground, Code, Pre } from 'nextra/components'
+import { Mermaid, Playground, Code, Pre, Tabs } from 'nextra/components'
 import { useRef, useCallback, useState } from 'react'
 
 export function Demo() {
-  const [rawMdx, setRawMdx] = useState(`## Description
-
-Playground components allow you to write Nextra compatible MDX that renders only on the client. It's modeled after the functionality found in [MDX Playground](https://mdxjs.com/playground).
+  const [rawMdx, setRawMdx] = useState(`Playground components allow you to write Nextra compatible MDX that renders only on the client. It's modeled after the functionality found in [MDX Playground](https://mdxjs.com/playground).
 
 In some instances where remote loading MDX is not an option, this may work as a great alternative.
 
@@ -72,7 +70,7 @@ Z --> G
             </div>
           }
           source={rawMdx}
-          components={{ Mermaid }}
+          components={{ Mermaid, $Tabs: Tabs }}
         />
       </div>
     </div>

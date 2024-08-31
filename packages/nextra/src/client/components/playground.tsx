@@ -63,7 +63,7 @@ export function Playground({
           <Code>
             <span>
               {error instanceof Error
-                ? `${error.name} ${error.message}`
+                ? `${error.name}: ${error.message}`
                 : String(error)}
             </span>
           </Code>
