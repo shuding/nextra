@@ -12,7 +12,6 @@ import remarkMath from 'remark-math'
 import remarkReadingTime from 'remark-reading-time'
 import remarkSmartypants from 'remark-smartypants'
 import type { Pluggable, Plugin } from 'unified'
-import { DEFAULT_LOCALE, ERROR_ROUTES } from '../server/constants.js'
 import {
   recmaRewriteFunctionBody,
   recmaRewriteJsx
@@ -24,14 +23,8 @@ import {
   rehypeIcon,
   rehypeParseCodeMeta
 } from '../server/rehype-plugins/index.js'
-import { logger, truthy } from '../server/utils.js'
-import type {
-  FrontMatter,
-  LoaderOptions,
-  PageOpts,
-  ReadingTime,
-  StructurizedData
-} from '../types'
+import { truthy } from '../server/utils.js'
+import type { LoaderOptions } from '../types'
 
 const cachedCompilerForFormat: Record<
   Exclude<ProcessorOptions['format'], undefined | null>,
@@ -65,17 +58,13 @@ type CompileMdxOptions = Pick<
 export async function compileMdxClient(
   source: string,
   {
-    search,
     readingTime,
     latex,
     codeHighlight,
     defaultShowCopyCode,
-    route = '',
-    locale,
     mdxOptions = {},
     filePath = '',
-    useCachedCompiler,
-    isPageMapImport
+    useCachedCompiler
   }: CompileMdxOptions = {}
 ) {
   const {
@@ -92,38 +81,6 @@ export async function compileMdxClient(
     _format === 'detect' ? (filePath.endsWith('.mdx') ? 'mdx' : 'md') : _format
 
   const fileCompatible = filePath ? { value: source, path: filePath } : source
-  if (isPageMapImport) {
-    const compiler = createProcessor({
-      format,
-      remarkPlugins: [
-        remarkFrontmatter // parse and attach yaml node
-        // remarkMdxFrontMatter
-      ]
-    })
-    const vFile = await compiler.process(fileCompatible)
-    const content = vFile.toString()
-
-    const index = content.lastIndexOf('function _createMdxContent(props) {')
-    const result = content.slice(0, index)
-
-    return { result } as any
-  }
-
-  let searchIndexKey: string | null = null
-  if (ERROR_ROUTES.has(route)) {
-    /* skip */
-  } else if (typeof search === 'object') {
-    if (search.indexKey) {
-      searchIndexKey = search.indexKey(filePath, route, locale)
-      if (searchIndexKey === '') {
-        searchIndexKey = locale || DEFAULT_LOCALE
-      }
-    } else {
-      searchIndexKey = locale || DEFAULT_LOCALE
-    }
-  } else if (search) {
-    searchIndexKey = locale || DEFAULT_LOCALE
-  }
 
   const isRemoteContent = outputFormat === 'function-body'
 
@@ -136,33 +93,10 @@ export async function compileMdxClient(
   try {
     const vFile = await processor.process(fileCompatible)
 
-    const data = vFile.data as {
-      readingTime?: ReadingTime
-      structurizedData: StructurizedData
-      title?: string
-      frontMatter: FrontMatter
-    } & Pick<PageOpts, 'hasJsxInH1'>
-
-    const { readingTime, structurizedData, title, frontMatter, hasJsxInH1 } =
-      data
     // https://github.com/shuding/nextra/issues/1032
     const result = String(vFile).replaceAll('__esModule', '_\\_esModule')
 
-    if (typeof title !== 'string') {
-      logger.error('`title` is not defined')
-    }
-    if (!frontMatter) {
-      logger.error('`frontMatter` is not defined')
-    }
-
-    return {
-      result,
-      title,
-      ...(hasJsxInH1 && { hasJsxInH1 }),
-      ...(readingTime && { readingTime }),
-      ...(searchIndexKey !== null && { searchIndexKey, structurizedData }),
-      frontMatter
-    }
+    return { result }
   } catch (error) {
     console.error(`[nextra] Error compiling ${filePath}.`)
     throw error
