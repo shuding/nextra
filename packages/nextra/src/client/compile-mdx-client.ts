@@ -11,7 +11,7 @@ import remarkMath from 'remark-math'
 import remarkReadingTime from 'remark-reading-time'
 import remarkSmartypants from 'remark-smartypants'
 import type { Pluggable } from 'unified'
-import { recmaRewriteJsx } from '../server/recma-plugins/index.js'
+import { recmaRewriteFunctionBody } from '../server/recma-plugins/index.js'
 import {
   DEFAULT_REHYPE_PRETTY_CODE_OPTIONS,
   rehypeAttachCodeMeta,
@@ -158,7 +158,7 @@ export async function compileMdxClient(
               rehypeAttachCodeMeta
             ])
       ].filter(truthy),
-      recmaPlugins: [recmaRewriteJsx]
+      recmaPlugins: [recmaRewriteFunctionBody]
     })
   }
 }
