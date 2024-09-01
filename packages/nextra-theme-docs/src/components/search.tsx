@@ -114,21 +114,10 @@ export function Search({
     [onActive]
   )
 
-  // To handle CJK language users, refer to the following approach: https://github.com/SukkaW/foxact/commit/fe17304b410cddc4803d4fdbebf3cd5ecb070618
-  // An explicit explanation can be found here: https://github.com/SukkaW/foxact/blob/2b54157187d33ef873c1ab4a9b8700dfdb2e7288/docs/src/pages/use-composition-input.mdx
-  const compositionStateRef = useRef({
-    compositioning: false,
-    emitted: false
-  })
   const handleChange = useCallback(
     (event: SyntheticEvent<HTMLInputElement>) => {
-      if (!compositionStateRef.current.compositioning) {
-        const { value } = event.currentTarget
-        onChange(value)
-        compositionStateRef.current.emitted = true
-        return
-      }
-      compositionStateRef.current.emitted = false
+      const { value } = event.currentTarget
+      onChange(value)
     },
     [onChange]
   )
