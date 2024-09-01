@@ -216,17 +216,13 @@ describe('rehypeIcon', () => {
             {'\\n'}
             <_components.pre icon={TerraformIcon} tabIndex="0" data-language="terraform" data-word-wrap="" data-copy="">
               <_components.code>
-                <_components.span>
-                  <_components.span />
-                </_components.span>
+                <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {'\\n'}
             <_components.pre icon={TerraformIcon} tabIndex="0" data-language="tf" data-word-wrap="" data-copy="">
               <_components.code>
-                <_components.span>
-                  <_components.span />
-                </_components.span>
+                <_components.span> </_components.span>
               </_components.code>
             </_components.pre>
             {'\\n'}
