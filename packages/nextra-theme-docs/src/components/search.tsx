@@ -10,8 +10,15 @@ import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 import { useMounted } from 'nextra/hooks'
 import { InformationCircleIcon, SpinnerIcon } from 'nextra/icons'
-import type { FocusEventHandler, ReactElement, SyntheticEvent } from 'react'
-import { Fragment, useCallback, useRef, useState } from 'react'
+import {
+  FocusEventHandler,
+  Fragment,
+  ReactElement,
+  SyntheticEvent,
+  useCallback,
+  useRef,
+  useState
+} from 'react'
 import { useMenu, useThemeConfig } from '../contexts'
 import type { SearchResult } from '../types'
 import { renderComponent, renderString } from '../utils'
@@ -19,7 +26,6 @@ import { Input } from './input'
 
 type SearchProps = {
   className?: string
-  overlayClassName?: string
   value: string
   onChange: (newValue: string) => void
   onActive?: () => void
@@ -30,7 +36,6 @@ type SearchProps = {
 
 export function Search({
   className,
-  overlayClassName,
   value,
   onChange,
   onActive,
@@ -43,6 +48,7 @@ export function Search({
   const router = useRouter()
   const [focused, setFocused] = useState(false)
   const mounted = useMounted()
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const icon = mounted && (
     <kbd
@@ -75,9 +81,6 @@ export function Search({
   const handleFocus = useCallback<FocusEventHandler>(
     event => {
       const isFocus = event.type === 'focus'
-      const htmlStyle = document.documentElement.style
-      // Fixes page scroll jump https://github.com/shuding/nextra/issues/2840
-      htmlStyle.scrollPaddingTop = isFocus ? '0' : 'var(--nextra-navbar-height)'
       if (isFocus) onActive?.()
       setFocused(isFocus)
     },
@@ -91,9 +94,10 @@ export function Search({
     emitted: false
   })
   const handleChange = useCallback(
-    (e: SyntheticEvent<HTMLInputElement>) => {
+    (event: SyntheticEvent<HTMLInputElement>) => {
       if (!compositionStateRef.current.compositioning) {
-        onChange(e.currentTarget.value)
+        const { value } = event.currentTarget
+        onChange(value)
         compositionStateRef.current.emitted = true
         return
       }
@@ -118,22 +122,35 @@ export function Search({
   )
 
   const handleSelect = useCallback(
-    (route: string) => {
-      if (route) {
-        router.push(route)
+    async (searchResult: SearchResult | null) => {
+      if (searchResult) {
+        // Calling before navigation so selector `html:not(:has(*:focus))` in styles.css will work,
+        // and we'll have padding top since input is not focused
+        inputRef.current?.blur()
+        await router.push(searchResult.route)
+        // Clear input after navigation completes
         setMenu(false)
+        onChange('')
       }
     },
     [router, setMenu]
   )
 
+  // const [selected, setSelected] = useState<SearchResult | null>(null)
+  //
+  // useEffect(() => {
+  //   setSelected(results[0] || null)
+  // }, [results])
+
   return (
     <Combobox
       as="div"
+      // value={selected}
       onChange={handleSelect}
       className={cn('nextra-search _relative md:_w-64', className)}
     >
       <ComboboxInput
+        ref={inputRef}
         as={Input}
         autoComplete="off"
         value={value}
@@ -148,10 +165,14 @@ export function Search({
       />
       <ComboboxOptions
         transition
+        anchor={{ to: 'top end', gap: 10, padding: 16 }}
         className={cn(
-          '_transition-opacity data-[closed]:_opacity-0 data-[open]:_opacity-100',
-          'nextra-search-results nextra-scrollbar empty:_invisible',
-          overlayClassName
+          'nextra-search-results nextra-scrollbar',
+          error || loading || !results.length
+            ? '_h-[100px]'
+            : 'md:_h-[min(calc(100vh-5rem),400px)]',
+          '_w-[--input-width] md:_w-[576px]',
+          'empty:_invisible'
         )}
       >
         {error ? (
@@ -165,13 +186,13 @@ export function Search({
             {renderComponent(themeConfig.search.loading)}
           </span>
         ) : results.length ? (
-          results.map(({ route, prefix, children, id }) => (
-            <Fragment key={id}>
-              {prefix}
+          results.map(searchResult => (
+            <Fragment key={searchResult.id}>
+              {searchResult.prefix}
               <ComboboxOption
                 as={NextLink}
-                value={route}
-                href={route}
+                value={searchResult}
+                href={searchResult.route}
                 className={cn(
                   '_mx-2.5 _break-words _rounded-md',
                   'contrast-more:_border',
@@ -180,12 +201,12 @@ export function Search({
                   '_block _scroll-m-12 _px-2.5 _py-2'
                 )}
               >
-                {children}
+                {searchResult.children}
               </ComboboxOption>
             </Fragment>
           ))
         ) : (
-          renderComponent(themeConfig.search.emptyResult)
+          value && renderComponent(themeConfig.search.emptyResult)
         )}
       </ComboboxOptions>
     </Combobox>

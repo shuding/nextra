@@ -272,7 +272,6 @@ export function Flexsearch({
       onChange={handleChange}
       onActive={preload}
       className={className}
-      overlayClassName="_w-screen _min-h-[100px] _max-w-[min(calc(100vw-2rem),calc(100%+20rem))]"
       results={results}
     />
   )

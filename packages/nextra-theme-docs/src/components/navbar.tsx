@@ -64,22 +64,19 @@ function NavbarMenu({
         )}
       >
         {entries.map(([key, item]) => (
-          <_MenuItem key={key}>
-            {({ focus }) => (
-              <Anchor
-                href={item.href || routes[key]?.route || menu.route + '/' + key}
-                className={cn(
-                  '_relative _w-full _select-none _whitespace-nowrap hover:_text-gray-900 dark:hover:_text-gray-100 _inline-block',
-                  '_py-1.5 _transition-colors ltr:_pl-3 ltr:_pr-9 rtl:_pr-3 rtl:_pl-9',
-                  focus
-                    ? '_text-gray-900 dark:_text-gray-100'
-                    : '_text-gray-600 dark:_text-gray-400'
-                )}
-                newWindow={item.newWindow}
-              >
-                {item.title || key}
-              </Anchor>
+          <_MenuItem
+            key={key}
+            as={Anchor}
+            href={item.href || routes[key]?.route || menu.route + '/' + key}
+            className={cn(
+              '_relative _w-full _select-none _whitespace-nowrap hover:_text-gray-900 dark:hover:_text-gray-100 _inline-block',
+              '_py-1.5 _transition-colors ltr:_pl-3 ltr:_pr-9 rtl:_pr-3 rtl:_pl-9',
+              'data-[focus]:_text-gray-900 data-[focus]:dark:_text-gray-100',
+              '_text-gray-600 dark:_text-gray-400'
             )}
+            newWindow={item.newWindow}
+          >
+            {item.title || key}
           </_MenuItem>
         ))}
       </MenuItems>
