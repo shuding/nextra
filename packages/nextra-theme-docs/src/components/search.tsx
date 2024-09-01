@@ -175,7 +175,7 @@ export function Search({
                 className={cn(
                   '_mx-2.5 _break-words _rounded-md',
                   'contrast-more:_border',
-                  'data-[focus]:_ring data-[focus]:_bg-primary-500/10 data-[focus]:_text-primary-600 data-[focus]:contrast-more:_border-primary-500',
+                  'data-[focus]:_ring data-[focus]:_bg-primary-500/10 data-[focus]:!_text-primary-600 data-[focus]:contrast-more:_border-primary-500',
                   '_text-gray-800 contrast-more:_border-transparent dark:_text-gray-300',
                   '_block _scroll-m-12 _px-2.5 _py-2'
                 )}
