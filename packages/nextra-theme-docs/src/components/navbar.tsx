@@ -59,7 +59,7 @@ function NavbarMenu({
       <MenuItems
         transition
         className={cn(
-          '_transition-opacity data-[closed]:_opacity-0 data-[open]:_opacity-100',
+          'nextra-scrollbar _transition-opacity data-[closed]:_opacity-0 data-[open]:_opacity-100',
           '_border _border-black/5 dark:_border-white/20',
           '_backdrop-blur-lg _bg-[rgb(var(--nextra-bg),.8)]',
           '_z-20 _h-64 _rounded-md _py-1 _text-sm _shadow-lg'
@@ -72,7 +72,7 @@ function NavbarMenu({
             as={Anchor}
             href={item.href || routes[key]?.route || menu.route + '/' + key}
             className={cn(
-              'block hover:_text-gray-900 dark:hover:_text-gray-100',
+              '_block hover:_text-gray-900 dark:hover:_text-gray-100',
               '_py-1.5 _transition-colors ltr:_pl-3 ltr:_pr-9 rtl:_pr-3 rtl:_pl-9',
               'data-[focus]:_text-gray-900 data-[focus]:dark:_text-gray-100',
               '_text-gray-600 dark:_text-gray-400'
