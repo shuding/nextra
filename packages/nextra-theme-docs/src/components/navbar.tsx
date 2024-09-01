@@ -46,7 +46,7 @@ function NavbarMenu({
       : Object.entries(items || {})
 
   return (
-    <Menu as="div" className="_relative">
+    <Menu>
       <MenuButton
         className={cn(
           classes.link,
@@ -59,27 +59,27 @@ function NavbarMenu({
       <MenuItems
         transition
         className={cn(
-          '_transition-opacity data-[closed]:_opacity-0 data-[open]:_opacity-100',
-          '_absolute _right-0 _z-20 _mt-1 _max-h-64 _min-w-full _overflow-auto _rounded-md _ring-1 _ring-black/5 _bg-white _py-1 _text-sm _shadow-lg dark:_ring-white/20 dark:_bg-neutral-800'
+          'nextra-scrollbar _transition-opacity data-[closed]:_opacity-0 data-[open]:_opacity-100',
+          '_border _border-black/5 dark:_border-white/20',
+          '_backdrop-blur-lg _bg-[rgb(var(--nextra-bg),.8)]',
+          '_z-20 _h-64 _rounded-md _py-1 _text-sm _shadow-lg'
         )}
+        anchor={{ to: 'top end', gap: 10, padding: 16 }}
       >
         {entries.map(([key, item]) => (
-          <_MenuItem key={key}>
-            {({ focus }) => (
-              <Anchor
-                href={item.href || routes[key]?.route || menu.route + '/' + key}
-                className={cn(
-                  '_relative _w-full _select-none _whitespace-nowrap hover:_text-gray-900 dark:hover:_text-gray-100 _inline-block',
-                  '_py-1.5 _transition-colors ltr:_pl-3 ltr:_pr-9 rtl:_pr-3 rtl:_pl-9',
-                  focus
-                    ? '_text-gray-900 dark:_text-gray-100'
-                    : '_text-gray-600 dark:_text-gray-400'
-                )}
-                newWindow={item.newWindow}
-              >
-                {item.title || key}
-              </Anchor>
+          <_MenuItem
+            key={key}
+            as={Anchor}
+            href={item.href || routes[key]?.route || menu.route + '/' + key}
+            className={cn(
+              '_block hover:_text-gray-900 dark:hover:_text-gray-100',
+              '_py-1.5 _transition-colors ltr:_pl-3 ltr:_pr-9 rtl:_pr-3 rtl:_pl-9',
+              'data-[focus]:_text-gray-900 data-[focus]:dark:_text-gray-100',
+              '_text-gray-600 dark:_text-gray-400'
             )}
+            newWindow={item.newWindow}
+          >
+            {item.title || key}
           </_MenuItem>
         ))}
       </MenuItems>
