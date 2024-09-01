@@ -30,6 +30,7 @@
     "@typescript-eslint/parser": "8.0.0",
     "eslint": "9.8.0",
     "eslint-config-prettier": "9.1.0",
+    "eslint-plugin-deprecation": "3.0.0",
     "eslint-plugin-import": "2.29.1",
     "eslint-plugin-react": "7.35.0",
     "eslint-plugin-react-hooks": "5.1.0-rc-14a4699f-20240725",
@@ -54,7 +55,8 @@
     },
     "patchedDependencies": {
       "@changesets/assemble-release-plan@6.0.3": "patches/@changesets__assemble-release-plan@6.0.3.patch",
-      "tsup@8.2.4": "patches/tsup.patch"
+      "tsup@8.2.4": "patches/tsup.patch",
+      "eslint-plugin-deprecation@3.0.0": "patches/eslint-plugin-deprecation@3.0.0.patch"
     }
   }
 }

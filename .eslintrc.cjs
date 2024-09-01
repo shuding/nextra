@@ -121,6 +121,7 @@ module.exports = {
     {
       files: '**/*.{ts,tsx,cts,mts}',
       extends: [
+        'plugin:deprecation/recommended'
         // TODO: fix errors
         // 'plugin:@typescript-eslint/recommended-requiring-type-checking'
       ],
