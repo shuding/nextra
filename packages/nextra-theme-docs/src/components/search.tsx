@@ -231,18 +231,16 @@ export function Search({
       const htmlStyle = document.documentElement.style
       // Fixes page scroll jump https://github.com/shuding/nextra/issues/2840
       htmlStyle.scrollPaddingTop = isFocus ? '0' : 'var(--nextra-navbar-height)'
-      if (isFocus) onActive?.()
+      if (isFocus) {
+        onActive?.()
+        if (results.length > 0) {
+          setShow(true)
+        }
+      }
       setFocused(isFocus)
     },
-    [onActive]
+    [onActive, results]
   )
-
-  // reopen the search result list if needed
-  useEffect(() => {
-    if (!focused || results.length === 0 || value.length === 0) return
-    setShow(true)
-    setActive(0)
-  }, [focused, results, value])
 
   // To handle CJK language users, refer to the following approach: https://github.com/SukkaW/foxact/commit/fe17304b410cddc4803d4fdbebf3cd5ecb070618
   // An explicit explanation can be found here: https://github.com/SukkaW/foxact/blob/2b54157187d33ef873c1ab4a9b8700dfdb2e7288/docs/src/pages/use-composition-input.mdx
