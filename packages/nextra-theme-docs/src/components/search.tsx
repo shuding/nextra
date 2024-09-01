@@ -86,6 +86,9 @@ export function Search({
   }, [])
 
   const clearValue = useCallback(() => {
+    if (input.current) {
+      input.current.value = ''
+    }
     onChangeProp('')
   }, [onChangeProp])
   const finishSearch = useCallback(() => {
@@ -103,7 +106,7 @@ export function Search({
     []
   )
 
-  const scrollOptionIntoViewInNeeded = useCallback(
+  const scrollOptionIntoViewIfNeeded = useCallback(
     (optionEl: HTMLAnchorElement) => {
       if (!ulRef.current) return
       const ulRect = ulRef.current.getBoundingClientRect()
@@ -138,7 +141,7 @@ export function Search({
             if (!el) return
             e.preventDefault()
             handleActive({ currentTarget: el })
-            scrollOptionIntoViewInNeeded(el)
+            scrollOptionIntoViewIfNeeded(el)
           }
           break
         }
@@ -154,7 +157,7 @@ export function Search({
             )
             if (!el) return
             handleActive({ currentTarget: el })
-            scrollOptionIntoViewInNeeded(el)
+            scrollOptionIntoViewIfNeeded(el)
           }
           break
         }
@@ -179,7 +182,7 @@ export function Search({
       router,
       finishSearch,
       handleActive,
-      scrollOptionIntoViewInNeeded
+      scrollOptionIntoViewIfNeeded
     ]
   )
 
