@@ -10,15 +10,8 @@ import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 import { useMounted } from 'nextra/hooks'
 import { InformationCircleIcon, SpinnerIcon } from 'nextra/icons'
-import {
-  FocusEventHandler,
-  Fragment,
-  ReactElement,
-  SyntheticEvent,
-  useCallback,
-  useRef,
-  useState
-} from 'react'
+import type { FocusEventHandler, ReactElement, SyntheticEvent } from 'react'
+import { Fragment, useCallback, useRef, useState } from 'react'
 import { useMenu, useThemeConfig } from '../contexts'
 import type { SearchResult } from '../types'
 import { renderComponent, renderString } from '../utils'
@@ -133,7 +126,7 @@ export function Search({
         onChange('')
       }
     },
-    [router, setMenu]
+    [router, setMenu, onChange]
   )
 
   // const [selected, setSelected] = useState<SearchResult | null>(null)
