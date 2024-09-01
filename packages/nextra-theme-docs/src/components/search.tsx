@@ -133,21 +133,6 @@ export function Search({
     [onChange]
   )
 
-  const handleCompositionStart = useCallback(() => {
-    compositionStateRef.current.compositioning = true
-    compositionStateRef.current.emitted = false
-  }, [])
-
-  const handleCompositionEnd = useCallback(
-    (e: SyntheticEvent<HTMLInputElement>) => {
-      compositionStateRef.current.compositioning = false
-      if (!compositionStateRef.current.emitted) {
-        handleChange(e)
-      }
-    },
-    [handleChange]
-  )
-
   const handleSelect = useCallback(
     async (searchResult: SearchResult | null) => {
       if (!searchResult) return
@@ -180,8 +165,6 @@ export function Search({
         as={Input}
         autoComplete="off"
         value={value}
-        onCompositionStart={handleCompositionStart}
-        onCompositionEnd={handleCompositionEnd}
         onChange={handleChange}
         onFocus={handleFocus}
         onBlur={handleFocus}
