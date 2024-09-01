@@ -123,7 +123,7 @@
     "@napi-rs/simple-git": "^0.1.9",
     "@shikijs/twoslash": "^1.0.0",
     "@theguild/remark-mermaid": "^0.1.1",
-    "@theguild/remark-npm2yarn": "0.3.0",
+    "@theguild/remark-npm2yarn": "0.3.2",
     "better-react-mathjax": "^2.0.3",
     "clsx": "^2.0.0",
     "estree-util-to-js": "^2.0.0",
