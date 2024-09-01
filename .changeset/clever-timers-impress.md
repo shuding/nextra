@@ -3,4 +3,4 @@
 'nextra': patch
 ---
 
-migrate to headless v2
+migrate to `@headlessui/react` v2
