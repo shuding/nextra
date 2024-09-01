@@ -96,9 +96,29 @@ export function Search({
   }, [clearValue, setMenu])
 
   const handleActive = useCallback(
-    (e: { currentTarget: { dataset: DOMStringMap } }) => {
-      const { index } = e.currentTarget.dataset
-      setActive(Number(index))
+    (e: { currentTarget: HTMLAnchorElement }) => {
+      const option = e.currentTarget
+      setActive(Number(option.dataset.index))
+    },
+    []
+  )
+
+  const scrollOptionIntoViewInNeeded = useCallback(
+    (optionEl: HTMLAnchorElement) => {
+      if (!ulRef.current) return
+      const ulRect = ulRef.current.getBoundingClientRect()
+      const optionRect = optionEl.getBoundingClientRect()
+
+      const isInView =
+        optionRect.top >= ulRect.top &&
+        optionRect.bottom - ulRect.top <= ulRect.height
+      if (isInView) return
+
+      const index = Number(optionEl.dataset.index)
+      ulRef.current.scrollTo({
+        behavior: 'smooth',
+        top: index * optionRect.height
+      })
     },
     []
   )
@@ -110,28 +130,31 @@ export function Search({
 
       switch (e.key) {
         case 'ArrowDown': {
+          if (results.length === 0) return
           if (active + 1 < results.length) {
             const el = ulRef.current?.querySelector<HTMLAnchorElement>(
               `li:nth-of-type(${active + 2}) > a`
             )
-            if (el) {
-              e.preventDefault()
-              handleActive({ currentTarget: el })
-              el.focus()
-            }
+            if (!el) return
+            e.preventDefault()
+            handleActive({ currentTarget: el })
+            scrollOptionIntoViewInNeeded(el)
           }
           break
         }
         case 'ArrowUp': {
+          if (results.length > 0) {
+            // prevent the text-field cursor jump to beginning
+            e.preventDefault()
+          }
+
           if (active - 1 >= 0) {
             const el = ulRef.current?.querySelector<HTMLAnchorElement>(
               `li:nth-of-type(${active}) > a`
             )
-            if (el) {
-              e.preventDefault()
-              handleActive({ currentTarget: el })
-              el.focus()
-            }
+            if (!el) return
+            handleActive({ currentTarget: el })
+            scrollOptionIntoViewInNeeded(el)
           }
           break
         }
@@ -150,7 +173,14 @@ export function Search({
         }
       }
     },
-    [active, results, router, finishSearch, handleActive]
+    [
+      active,
+      results,
+      router,
+      finishSearch,
+      handleActive,
+      scrollOptionIntoViewInNeeded
+    ]
   )
 
   const mounted = useMounted()
@@ -206,6 +236,13 @@ export function Search({
     },
     [onActive]
   )
+
+  // reopen the search result list if needed
+  useEffect(() => {
+    if (!focused || results.length === 0 || value.length === 0) return
+    setShow(true)
+    setActive(0)
+  }, [focused, results, value])
 
   // To handle CJK language users, refer to the following approach: https://github.com/SukkaW/foxact/commit/fe17304b410cddc4803d4fdbebf3cd5ecb070618
   // An explicit explanation can be found here: https://github.com/SukkaW/foxact/blob/2b54157187d33ef873c1ab4a9b8700dfdb2e7288/docs/src/pages/use-composition-input.mdx
@@ -309,7 +346,6 @@ export function Search({
                     onFocus={handleActive}
                     onMouseMove={handleActive}
                     onClick={finishSearch}
-                    onKeyDown={handleKeyDown}
                   >
                     {children}
                   </NextLink>
