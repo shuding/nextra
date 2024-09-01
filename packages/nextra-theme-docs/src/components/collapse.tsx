@@ -38,7 +38,7 @@ export function Collapse({
     } else {
       container.style.height = `${inner.clientHeight}px`
     }
-
+    container.style.overflow = isOpen ? '' : 'hidden'
     if (isOpen) {
       animationRef.current = window.setTimeout(() => {
         // should be style property in kebab-case, not css class name
@@ -62,7 +62,7 @@ export function Collapse({
   return (
     <div
       ref={containerRef}
-      className="_transform-gpu _overflow-hidden _transition-all _ease-in-out motion-reduce:_transition-none"
+      className="_transform-gpu _transition-all _ease-in-out motion-reduce:_transition-none"
       style={initialOpen.current || horizontal ? undefined : { height: 0 }}
     >
       <div

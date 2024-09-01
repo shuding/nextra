@@ -216,7 +216,7 @@ export function Search({
   const handleChange = useCallback(
     (e: ChangeEvent<HTMLInputElement> | CompositionEvent<HTMLInputElement>) => {
       if (!compositionStateRef.current.compositioning) {
-        const { value } = e.target as HTMLInputElement
+        const { value } = e.currentTarget
         onChangeProp(value)
         setShow(Boolean(value))
         compositionStateRef.current.emitted = true

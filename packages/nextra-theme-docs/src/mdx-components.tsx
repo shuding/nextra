@@ -369,10 +369,7 @@ const DEFAULT_COMPONENTS: MDXComponents = {
           <nav className={classes.toc} aria-label="table of contents" />
         )
       ) : (
-        <nav
-          className={cn(classes.toc, '_px-4')}
-          aria-label="table of contents"
-        >
+        <nav className={classes.toc} aria-label="table of contents">
           {renderComponent(themeConfig.toc.component, {
             toc: themeConfig.toc.float ? toc : [],
             filePath: config.filePath

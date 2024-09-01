@@ -191,7 +191,7 @@ const config: DocsThemeConfig = {
   },
   toc: {
     extraContent: (
-      <img alt="placeholder cat" src="https://placekitten.com/g/300/200" />
+      <img alt="placeholder cat" src="https://placecats.com/300/200" />
     ),
     float: true
   }

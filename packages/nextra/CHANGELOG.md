@@ -1,5 +1,11 @@
 # nextra
 
+## 3.0.0-alpha.35
+
+### Patch Changes
+
+- f662237: avoid focus-visible style being cut off by overflow-hidden
+
 ## 3.0.0-alpha.34
 
 ### Patch Changes
