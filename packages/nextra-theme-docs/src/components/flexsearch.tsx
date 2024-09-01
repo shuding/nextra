@@ -154,7 +154,10 @@ export function Flexsearch({
   const [search, setSearch] = useState('')
 
   const doSearch = (search: string) => {
-    if (!search) return
+    if (!search) {
+      setResults([])
+      return
+    }
     const [pageIndex, sectionIndex] = indexes[locale]
 
     // Show the results for the top 5 pages

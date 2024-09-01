@@ -64,9 +64,11 @@ export function ConfigProvider({
     setMenu(false)
   }, [asPath])
 
+  const value = useMemo(() => ({ menu, setMenu }), [menu])
+
   return (
     <ConfigContext.Provider value={extendedConfig}>
-      <MenuProvider value={{ menu, setMenu }}>{children}</MenuProvider>
+      <MenuProvider value={value}>{children}</MenuProvider>
     </ConfigContext.Provider>
   )
 }

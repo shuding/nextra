@@ -353,13 +353,6 @@ export function Sidebar({
   const sidebarRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const mounted = useMounted()
-  useEffect(() => {
-    if (menu) {
-      document.body.classList.add('_overflow-hidden', 'md:_overflow-auto')
-    } else {
-      document.body.classList.remove('_overflow-hidden', 'md:_overflow-auto')
-    }
-  }, [menu])
 
   useEffect(() => {
     const activeElement = sidebarRef.current?.querySelector('li.active')
