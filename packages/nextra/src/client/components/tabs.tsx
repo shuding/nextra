@@ -85,33 +85,25 @@ function Tabs_({
       selectedIndex={selectedIndex}
       defaultIndex={defaultIndex}
       onChange={handleChange}
-      className="nextra-scrollbar _overflow-x-auto"
       tabIndex={-1} // disables focus in Firefox
     >
-      <TabList className="_mt-4 _flex _w-max _min-w-full _gap-2 _border-b _border-gray-200 _pb-px dark:_border-neutral-800">
-        {items.map((item, index) => {
-          const disabled = isTabObjectItem(item) && item.disabled
-          return (
-            <HeadlessTab
-              key={index}
-              disabled={disabled}
-              className={({ selected }) =>
-                cn(
-                  '_ring-inset',
-                  '_rounded-t _p-2 _font-medium _leading-5 _transition-colors',
-                  '_-mb-0.5 _select-none _border-b-2',
-                  selected
-                    ? '_border-primary-500 _text-primary-600'
-                    : '_border-transparent _text-gray-600 hover:_border-gray-200 hover:_text-black dark:_text-gray-200 dark:hover:_border-neutral-800 dark:hover:_text-white',
-                  disabled &&
-                    '_pointer-events-none _text-gray-400 dark:_text-neutral-600'
-                )
-              }
-            >
-              {isTabObjectItem(item) ? item.label : item}
-            </HeadlessTab>
-          )
-        })}
+      <TabList className="nextra-scrollbar _overflow-x-auto _overscroll-x-contain _mt-4 _flex _w-full _gap-2 _border-b _border-gray-200 _pb-px dark:_border-neutral-800">
+        {items.map((item, index) => (
+          <HeadlessTab
+            key={index}
+            disabled={isTabObjectItem(item) && item.disabled}
+            className={cn(
+              '_ring-inset',
+              '_rounded-t _p-2 _font-medium _leading-5 _transition-colors',
+              '_-mb-0.5 _select-none _border-b-2',
+              'data-[selected]:_border-primary-500 data-[selected]:_text-primary-600',
+              '_border-transparent _text-gray-600 hover:_border-gray-200 hover:_text-black dark:_text-gray-200 dark:hover:_border-neutral-800 dark:hover:_text-white',
+              'disabled:_pointer-events-none disabled:_text-gray-400 disabled:dark:_text-neutral-600'
+            )}
+          >
+            {isTabObjectItem(item) ? item.label : item}
+          </HeadlessTab>
+        ))}
       </TabList>
       <TabPanels>{children}</TabPanels>
     </TabGroup>

@@ -42,10 +42,7 @@ export function Select({
         {selected.name}
         <ListboxOptions
           transition
-          anchor={{
-            to: 'top start',
-            gap: 10
-          }}
+          anchor={{ to: 'top start', gap: 10 }}
           className="_transition-opacity data-[closed]:_opacity-0 data-[open]:_opacity-100 _min-w-[--button-width] _z-20 _max-h-64 _rounded-md _border _border-black/5 _backdrop-blur-lg _bg-[rgb(var(--nextra-bg),.8)] _py-1 _text-sm _shadow-lg dark:_border-white/20"
         >
           {options.map(option => (

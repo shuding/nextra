@@ -62,7 +62,9 @@ function NavbarMenu({
           'nextra-scrollbar _transition-opacity data-[closed]:_opacity-0 data-[open]:_opacity-100',
           '_border _border-black/5 dark:_border-white/20',
           '_backdrop-blur-lg _bg-[rgb(var(--nextra-bg),.8)]',
-          '_z-20 _h-64 _rounded-md _py-1 _text-sm _shadow-lg'
+          '_z-20 _rounded-md _py-1 _text-sm _shadow-lg',
+          // headlessui adds max-height as style, use !important to override
+          '!_max-h-[min(calc(100vh-5rem),256px)]'
         )}
         anchor={{ to: 'top end', gap: 10, padding: 16 }}
       >
