@@ -234,6 +234,7 @@ export function Search({
       if (isFocus) {
         onActive?.()
         if (results.length > 0) {
+          setActive(0)
           setShow(true)
         }
       }
