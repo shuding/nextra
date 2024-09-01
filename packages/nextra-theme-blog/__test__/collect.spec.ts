@@ -6,7 +6,7 @@ import {
   config,
   indexOpts,
   postsOpts
-} from './__fixture__/pageMap'
+} from './__fixture__/page-map'
 
 vi.mock('next/router', () => ({
   useRouter: vi.fn()

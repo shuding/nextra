@@ -17,8 +17,6 @@ declare module 'next/dist/compiled/webpack/webpack.js' {
 }
 
 declare module '*.svg' {
-  import type { ComponentPropsWithRef, ReactElement } from 'react'
-  export const ReactComponent: (
-    _props: ComponentPropsWithRef<'svg'>
-  ) => ReactElement
+  import type { FC, SVGProps } from 'react'
+  export const ReactComponent: FC<SVGProps<SVGSVGElement>>
 }

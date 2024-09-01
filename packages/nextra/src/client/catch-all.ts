@@ -17,9 +17,9 @@ export function createCatchAllMeta(
 ): DynamicMeta {
   const metaMap: DynamicMeta = appendSlashForFolders(customMeta)
 
-  const paths = filePaths
-    .filter(filePath => MARKDOWN_EXTENSION_REGEX.test(filePath))
-    .map(filePath => filePath.replace(MARKDOWN_EXTENSION_REGEX, '').split('/'))
+  const paths = filePaths.map(filePath =>
+    filePath.replace(MARKDOWN_EXTENSION_REGEX, '').split('/')
+  )
 
   for (const path of paths) {
     addToMap(metaMap, path)

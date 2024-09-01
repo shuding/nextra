@@ -30,7 +30,7 @@ export function RemoteContent({
    * An object mapping names to React components.
    * The key used will be the name accessible to MDX.
    *
-   * For example: `{ ComponentName: Component }` will be accessible in the MDX as `<ComponentName/>`.
+   * @example `{ ComponentName: Component }` will be accessible in the MDX as `<ComponentName/>`.
    */
   components?: MDXComponents
   /**
@@ -45,7 +45,7 @@ export function RemoteContent({
     )
   }
 
-  const { default: MDXContent } = evaluate(compiledSource, scope)
+  const MDXContent = evaluate(compiledSource, scope).default
 
   return <MDXContent components={components} />
 }

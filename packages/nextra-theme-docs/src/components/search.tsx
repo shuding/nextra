@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 import { useMounted } from 'nextra/hooks'
 import { InformationCircleIcon, SpinnerIcon } from 'nextra/icons'
 import type {
+  ChangeEvent,
   CompositionEvent,
   FocusEventHandler,
   KeyboardEvent,
@@ -34,7 +35,7 @@ export function Search({
   className,
   overlayClassName,
   value,
-  onChange,
+  onChange: onChangeProp,
   onActive,
   loading,
   error,
@@ -48,8 +49,6 @@ export function Search({
   const input = useRef<HTMLInputElement>(null)
   const ulRef = useRef<HTMLUListElement>(null)
   const [focused, setFocused] = useState(false)
-  //  Trigger the search after the Input is complete for languages like Chinese
-  const [composition, setComposition] = useState(true)
 
   useEffect(() => {
     setActive(0)
@@ -86,12 +85,15 @@ export function Search({
     }
   }, [])
 
+  const clearValue = useCallback(() => {
+    onChangeProp('')
+  }, [onChangeProp])
   const finishSearch = useCallback(() => {
     input.current?.blur()
-    onChange('')
+    clearValue()
     setShow(false)
     setMenu(false)
-  }, [onChange, setMenu])
+  }, [clearValue, setMenu])
 
   const handleActive = useCallback(
     (e: { currentTarget: { dataset: DOMStringMap } }) => {
@@ -103,6 +105,9 @@ export function Search({
 
   const handleKeyDown = useCallback(
     <T,>(e: KeyboardEvent<T>) => {
+      // skip the character selection process in the IME for CJK language users.
+      if (e.nativeEvent.isComposing) return
+
       switch (e.key) {
         case 'ArrowDown': {
           if (active + 1 < results.length) {
@@ -132,7 +137,7 @@ export function Search({
         }
         case 'Enter': {
           const result = results[active]
-          if (result && composition) {
+          if (result) {
             void router.push(result.route)
             finishSearch()
           }
@@ -145,7 +150,7 @@ export function Search({
         }
       }
     },
-    [active, results, router, finishSearch, handleActive, composition]
+    [active, results, router, finishSearch, handleActive]
   )
 
   const mounted = useMounted()
@@ -173,9 +178,7 @@ export function Search({
             : '_pointer-events-none max-sm:_hidden'
         )}
         title={value ? 'Clear' : undefined}
-        onClick={() => {
-          onChange('')
-        }}
+        onClick={clearValue}
       >
         {value && focused
           ? 'ESC'
@@ -190,12 +193,6 @@ export function Search({
       </kbd>
     </Transition>
   )
-  const handleComposition = useCallback(
-    (e: CompositionEvent<HTMLInputElement>) => {
-      setComposition(e.type === 'compositionend')
-    },
-    []
-  )
 
   const handleFocus = useCallback<FocusEventHandler>(
     event => {
@@ -209,6 +206,41 @@ export function Search({
     [onActive]
   )
 
+  // To handle CJK language users, refer to the following approach: https://github.com/SukkaW/foxact/commit/fe17304b410cddc4803d4fdbebf3cd5ecb070618
+  // An explicit explanation can be found here: https://github.com/SukkaW/foxact/blob/2b54157187d33ef873c1ab4a9b8700dfdb2e7288/docs/src/pages/use-composition-input.mdx
+  const compositionStateRef = useRef({
+    compositioning: false,
+    emitted: false
+  })
+  const handleChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement> | CompositionEvent<HTMLInputElement>) => {
+      if (!compositionStateRef.current.compositioning) {
+        const { value } = e.currentTarget
+        onChangeProp(value)
+        setShow(Boolean(value))
+        compositionStateRef.current.emitted = true
+        return
+      }
+      compositionStateRef.current.emitted = false
+    },
+    [onChangeProp]
+  )
+
+  const handleCompositionStart = useCallback(() => {
+    compositionStateRef.current.compositioning = true
+    compositionStateRef.current.emitted = false
+  }, [])
+
+  const handleCompositionEnd = useCallback(
+    (e: CompositionEvent<HTMLInputElement>) => {
+      compositionStateRef.current.compositioning = false
+      if (!compositionStateRef.current.emitted) {
+        handleChange(e)
+      }
+    },
+    [handleChange]
+  )
+
   return (
     <div className={cn('nextra-search _relative md:_w-64', className)}>
       {renderList && (
@@ -217,16 +249,11 @@ export function Search({
 
       <Input
         ref={input}
-        value={value}
-        onChange={e => {
-          const { value } = e.target
-          onChange(value)
-          setShow(Boolean(value))
-        }}
+        onCompositionStart={handleCompositionStart}
+        onCompositionEnd={handleCompositionEnd}
+        onChange={handleChange}
         onFocus={handleFocus}
         onBlur={handleFocus}
-        onCompositionStart={handleComposition}
-        onCompositionEnd={handleComposition}
         type="search"
         placeholder={renderString(themeConfig.search.placeholder)}
         onKeyDown={handleKeyDown}

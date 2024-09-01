@@ -1,9 +1,4 @@
-import type {
-  CallExpression,
-  FunctionDeclaration,
-  Program,
-  ReturnStatement
-} from 'estree'
+import type { CallExpression, FunctionDeclaration, Program } from 'estree'
 import type { JsxAttribute } from 'estree-util-to-js/lib/jsx'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
@@ -45,7 +40,7 @@ export const recmaRewriteJsx: Plugin<[], Program> =
 
     const returnStatement = createMdxContent.body.body.find(
       o => o.type === 'ReturnStatement'
-    ) as ReturnStatement
+    )!
 
     const { argument } = returnStatement as any
 

@@ -93,10 +93,13 @@ export type Nextra = (
 
 export type ThemeConfig = any | null
 
-export type NextraThemeLayoutProps<F = FrontMatter> = {
-  pageOpts: PageOpts<F>
+export type NextraThemeLayoutProps<
+  TFrontMatter = FrontMatter,
+  TThemeConfig = ThemeConfig
+> = {
+  pageOpts: PageOpts<TFrontMatter>
   pageProps: any
-  themeConfig: ThemeConfig
+  themeConfig: TThemeConfig
   children: ReactNode
 }
 

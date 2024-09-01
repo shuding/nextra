@@ -1,5 +1,94 @@
 # nextra-theme-docs
 
+## 3.0.0-alpha.35
+
+### Patch Changes
+
+- 0b4d43b: Avoid the sidebar collapse having unintended animations when
+  `sidebar.autoCollapse` is set to `true`.
+- 452e5bd: Add `<Playground />` component
+
+  https://nextra-v2-9x7fp6hti-shud.vercel.app/docs/guide/advanced/playground
+
+- f662237: avoid focus-visible style being cut off by overflow-hidden
+- Updated dependencies [f662237]
+  - nextra@3.0.0-alpha.35
+
+## 3.0.0-alpha.34
+
+### Patch Changes
+
+- 8c99baf: enhance search input to better support CJK language users
+- 8ffe2fe: remove focus-visible polyfill
+- 1a634cd: remove explicit `ZodError` assertion
+- Updated dependencies [1a634cd]
+  - nextra@3.0.0-alpha.34
+
+## 3.0.0-alpha.33
+
+### Patch Changes
+
+- 6945f38: fix not rendered default `<meta name="description" />` and
+  `<meta property="og:description" />`
+- 7bb18e3: Add a generic for `themeConfig` in `NextraThemeLayoutProps` to
+  improve type inference.
+- Updated dependencies [7bb18e3]
+  - nextra@3.0.0-alpha.33
+
+## 3.0.0-alpha.32
+
+### Patch Changes
+
+- 73239c4: To ensure consistent horizontal padding, set the default language as
+  plaintext for code blocks. This prevents any loss of formatting for code
+  blocks without a specified language.
+- 150184b: attach heading anchor `id` attribute to heading (like Pagefind do)
+  and fix heading anchor styles when `theme.typesetting: 'article'` is set
+- 9df7f58: Fix nav-links not highlighting on hover in dark mode
+- 3c6193d: Remove unnecessary `sortPages` from `server/utils.ts`
+- 799174f: fixed react warning
+  `Warning: React has detected a change in the order of Hooks called by Body`
+  when `themeConfig.main` options is used
+- Updated dependencies [73239c4]
+- Updated dependencies [799174f]
+- Updated dependencies [150184b]
+- Updated dependencies [3c6193d]
+  - nextra@3.0.0-alpha.32
+
+## 3.0.0-alpha.31
+
+### Patch Changes
+
+- Updated dependencies [d1e3e9a]
+  - nextra@3.0.0-alpha.31
+
+## 3.0.0-alpha.30
+
+### Patch Changes
+
+- Updated dependencies [7615b62]
+  - nextra@3.0.0-alpha.30
+
+## 3.0.0-alpha.29
+
+### Patch Changes
+
+- Updated dependencies [fef635e]
+  - nextra@3.0.0-alpha.29
+
+## 3.0.0-alpha.28
+
+### Patch Changes
+
+- a8c2196: use dynamic import for loading `mermaid`
+- 363b85f: add `flex-shrink: 0` for indent in `FileTree` for `<Ident />` and svg
+  icons in `<Folder />` and `<File />`
+- 363b85f: fix `RangeError: Maximum call stack size exceeded` in `findSummary`
+  when `child.props.children` is `undefined`
+- Updated dependencies [a8c2196]
+- Updated dependencies [363b85f]
+  - nextra@3.0.0-alpha.28
+
 ## 3.0.0-alpha.27
 
 ### Patch Changes

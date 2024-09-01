@@ -1,5 +1,5 @@
-import type { ComponentProps, ReactElement } from 'react'
+import type { FC, SVGProps } from 'react'
 
-declare const ReactComponent: (props: ComponentProps<'svg'>) => ReactElement
+declare const ReactComponent: FC<SVGProps<SVGElement>>
 
 export { ReactComponent }

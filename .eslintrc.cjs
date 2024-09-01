@@ -26,6 +26,10 @@ module.exports = {
       ],
       plugins: ['import', 'unicorn', 'sonarjs'],
       rules: {
+        'no-extra-boolean-cast': [
+          'error',
+          { enforceForInnerExpressions: true }
+        ],
         'prefer-object-has-own': 'error',
         'logical-assignment-operators': [
           'error',
@@ -64,6 +68,7 @@ module.exports = {
         'sonarjs/no-unused-collection': 'error',
         'unicorn/catch-error-name': 'error',
         'unicorn/prefer-optional-catch-binding': 'error',
+        'unicorn/filename-case': 'error',
         // todo: enable
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-non-null-assertion': 'off',
@@ -77,8 +82,8 @@ module.exports = {
       extends: [
         'plugin:react/recommended',
         'plugin:react/jsx-runtime',
-        'plugin:react-hooks/recommended',
-        'plugin:@next/next/recommended'
+        'plugin:react-hooks/recommended'
+        // 'plugin:@next/next/recommended'
       ],
       rules: {
         'react/prop-types': 'off',
@@ -121,12 +126,7 @@ module.exports = {
         // 'plugin:@typescript-eslint/recommended-requiring-type-checking'
       ],
       parserOptions: {
-        project: [
-          'examples/*/tsconfig.json',
-          'packages/*/tsconfig.json',
-          'docs/tsconfig.json',
-          'tsconfig.eslint.json'
-        ]
+        projectService: true
       },
       rules: {
         '@typescript-eslint/no-unnecessary-type-assertion': 'error',
@@ -170,7 +170,7 @@ module.exports = {
       settings: {
         tailwindcss: {
           config: 'packages/nextra-theme-blog/tailwind.config.ts',
-          whitelist: ['subheading-', 'post-item', 'post-item-more']
+          whitelist: ['subheading-']
         }
       }
     },

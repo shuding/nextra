@@ -30,7 +30,21 @@ export default defineConfig([
       const jsxRuntimeTo = path.join(CWD, 'dist', 'client', 'jsx-runtime.cjs')
 
       await fs.copyFile(jsxRuntimeFrom, jsxRuntimeTo)
-    }
+    },
+    plugins: [
+      {
+        // Strip `node:` prefix from imports because
+        // Next.js only polyfills `path` and not `node:path` for browser
+        name: 'strip-node-colon',
+        renderChunk(code) {
+          const replaced = code.replaceAll(
+            / from "node:(?<moduleName>.*?)";/g,
+            matched => matched.replace('node:', '')
+          )
+          return { code: replaced }
+        }
+      }
+    ]
   },
   {
     name: 'nextra/icons',

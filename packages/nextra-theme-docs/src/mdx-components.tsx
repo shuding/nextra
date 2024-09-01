@@ -63,6 +63,7 @@ const createHeading = (
 
     return (
       <Tag
+        id={id}
         className={
           // can be added by footnotes
           className === 'sr-only'
@@ -84,7 +85,6 @@ const createHeading = (
         {id && (
           <a
             href={`#${id}`}
-            id={id}
             className="subheading-anchor"
             aria-label="Permalink for this section"
             ref={obRef}
@@ -132,7 +132,7 @@ function Details({
             })
             return
           }
-          if (child.type !== Details) {
+          if (child.type !== Details && child.props.children) {
             ;[summary, child] = findSummary(child.props.children)
           }
         }
@@ -260,7 +260,11 @@ function Body({ children }: { children: ReactNode }): ReactElement {
     </>
   )
 
-  const body = themeConfig.main?.({ children: content }) || content
+  const body = themeConfig.main ? (
+    <themeConfig.main>{content}</themeConfig.main>
+  ) : (
+    content
+  )
 
   if (themeContext.layout === 'full') {
     return (
@@ -365,10 +369,7 @@ const DEFAULT_COMPONENTS: MDXComponents = {
           <nav className={classes.toc} aria-label="table of contents" />
         )
       ) : (
-        <nav
-          className={cn(classes.toc, '_px-4')}
-          aria-label="table of contents"
-        >
+        <nav className={classes.toc} aria-label="table of contents">
           {renderComponent(themeConfig.toc.component, {
             toc: themeConfig.toc.float ? toc : [],
             filePath: config.filePath

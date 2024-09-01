@@ -9,7 +9,7 @@ import cn from 'clsx'
 import type { ComponentProps, ReactElement, ReactNode } from 'react'
 import { useCallback, useEffect, useState } from 'react'
 
-type TabItem = string | ReactNode
+type TabItem = string | ReactElement
 
 type TabObjectItem = {
   label: TabItem
@@ -20,7 +20,7 @@ function isTabObjectItem(item: unknown): item is TabObjectItem {
   return !!item && typeof item === 'object' && 'label' in item
 }
 
-function _Tabs({
+function Tabs_({
   items,
   selectedIndex: _selectedIndex,
   defaultIndex = 0,
@@ -85,9 +85,10 @@ function _Tabs({
       selectedIndex={selectedIndex}
       defaultIndex={defaultIndex}
       onChange={handleChange}
-      className="nextra-scrollbar _overflow-x-auto _overflow-y-hidden _overscroll-x-contain"
+      className="nextra-scrollbar _overflow-x-auto"
+      // tabIndex={-1} // disables focus in Firefox
     >
-      <TabList className="_mt-4 _flex _w-max _min-w-full _border-b _border-gray-200 _pb-px dark:_border-neutral-800">
+      <TabList className="_mt-4 _flex _w-max _min-w-full _gap-2 _border-b _border-gray-200 _pb-px dark:_border-neutral-800">
         {items.map((item, index) => {
           const disabled = isTabObjectItem(item) && item.disabled
           return (
@@ -96,7 +97,8 @@ function _Tabs({
               disabled={disabled}
               className={({ selected }) =>
                 cn(
-                  '_mr-2 _rounded-t _p-2 _font-medium _leading-5 _transition-colors',
+                  '_ring-inset',
+                  '_rounded-t _p-2 _font-medium _leading-5 _transition-colors',
                   '_-mb-0.5 _select-none _border-b-2',
                   selected
                     ? '_border-primary-500 _text-primary-600'
@@ -123,10 +125,10 @@ function Tab({
   ...props
 }: Omit<ComponentProps<typeof TabPanel>, 'static'>): ReactElement {
   return (
-    <TabPanel {...props} unmount={unmount} className="_rounded _pt-6">
+    <TabPanel {...props} unmount={unmount} className="_rounded _mt-6">
       {children}
     </TabPanel>
   )
 }
 
-export const Tabs = Object.assign(_Tabs, { displayName: 'Tabs', Tab })
+export const Tabs = Object.assign(Tabs_, { displayName: 'Tabs', Tab })
