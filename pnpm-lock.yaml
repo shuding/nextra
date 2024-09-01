@@ -246,11 +246,11 @@ importers:
         specifier: ^1.0.0
         version: 1.1.2(typescript@5.5.4)
       '@theguild/remark-mermaid':
-        specifier: ^0.1.1
-        version: 0.1.1(react@18.3.1)
+        specifier: 0.1.2
+        version: 0.1.2(react@18.3.1)
       '@theguild/remark-npm2yarn':
-        specifier: 0.3.0
-        version: 0.3.0
+        specifier: 0.3.2
+        version: 0.3.2
       better-react-mathjax:
         specifier: ^2.0.3
         version: 2.0.3(react@18.3.1)
@@ -4956,8 +4956,8 @@ packages:
       react-dom: 18.3.1(react@18.3.1)
     dev: true
 
-  /@theguild/remark-mermaid@0.1.1(react@18.3.1):
-    resolution: {integrity: sha512-1RoIQgz/nu3CjtRaLPx0b2HJr4lFd6cSCaGcb2Zpve+pRusNKQ/lQDDFjRlZOxUd0MZZLTupu76YxcEOS8OrZA==}
+  /@theguild/remark-mermaid@0.1.2(react@18.3.1):
+    resolution: {integrity: sha512-CB1n996M3JqR/9yAOchdOtfmtvDASCUlg/M4wJ/dmZmEpLNlBko8V31Nszo5Uz9+xaO6NrYcjEXA9i/PxzI1xQ==}
     peerDependencies:
       react: ^18.2.0
     dependencies:
@@ -4966,10 +4966,10 @@ packages:
       unist-util-visit: 5.0.0
     dev: false
 
-  /@theguild/remark-npm2yarn@0.3.0:
-    resolution: {integrity: sha512-Fofw+9airYgjBd9G6PiHHCrptjyUybQ50JH9/5o9LCH54kggJ7stpCofzHjICB8L7VQbQ1Gwu23P/3CMVY1R4Q==}
+  /@theguild/remark-npm2yarn@0.3.2:
+    resolution: {integrity: sha512-H9T/GOuS/+4H7AY1cfD5DJIIIcGIIw1zMCB8OeTgXk7azJULsnuOurZ/CR54rvuTD+Krx0MVQccaUCvCWfP+vw==}
     dependencies:
-      npm-to-yarn: 2.1.0
+      npm-to-yarn: 3.0.0
       unist-util-visit: 5.0.0
     dev: false
 
@@ -10480,8 +10480,8 @@ packages:
       path-key: 4.0.0
     dev: true
 
-  /npm-to-yarn@2.1.0:
-    resolution: {integrity: sha512-2C1IgJLdJngq1bSER7K7CGFszRr9s2rijEwvENPEgI0eK9xlD3tNwDc0UJnRj7FIT2aydWm72jB88uVswAhXHA==}
+  /npm-to-yarn@3.0.0:
+    resolution: {integrity: sha512-76YnmsbfrYp0tMsWxM0RNX0Vs+x8JxpJGu6B/jDn4lW8+laiTcKmKi9MeMh4UikO4RkJ1oqURoDy9bXJmMXS6A==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: false
 
@@ -13550,8 +13550,8 @@ packages:
       '@mdx-js/react': 3.0.1(@types/react@18.3.5)(react@18.3.1)
       '@napi-rs/simple-git': 0.1.9
       '@shikijs/twoslash': 1.1.2(typescript@5.5.4)
-      '@theguild/remark-mermaid': 0.1.1(react@18.3.1)
-      '@theguild/remark-npm2yarn': 0.3.0
+      '@theguild/remark-mermaid': 0.1.2(react@18.3.1)
+      '@theguild/remark-npm2yarn': 0.3.2
       better-react-mathjax: 2.0.3(react@18.3.1)
       clsx: 2.1.1
       estree-util-to-js: 2.0.0
