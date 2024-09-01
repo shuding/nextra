@@ -13,6 +13,9 @@ patchedDependencies:
   '@changesets/assemble-release-plan@6.0.3':
     hash: flghvvl4hmd7h2txv2irzrelwq
     path: patches/@changesets__assemble-release-plan@6.0.3.patch
+  eslint-plugin-deprecation@3.0.0:
+    hash: lc7tasx5o5q2nd7db4ciaguh2a
+    path: patches/eslint-plugin-deprecation@3.0.0.patch
   tsup@8.2.4:
     hash: lm5dngj54e7vpltieovf2eenaa
     path: patches/tsup.patch
@@ -47,7 +50,7 @@ importers:
         version: 9.1.0(eslint@9.8.0)
       eslint-plugin-deprecation:
         specifier: 3.0.0
-        version: 3.0.0(eslint@9.8.0)(typescript@5.5.4)
+        version: 3.0.0(patch_hash=lc7tasx5o5q2nd7db4ciaguh2a)(eslint@9.8.0)(typescript@5.5.4)
       eslint-plugin-import:
         specifier: 2.29.1
         version: 2.29.1(@typescript-eslint/parser@8.0.0)(eslint@9.8.0)
@@ -7587,7 +7590,7 @@ packages:
       - supports-color
     dev: true
 
-  /eslint-plugin-deprecation@3.0.0(eslint@9.8.0)(typescript@5.5.4):
+  /eslint-plugin-deprecation@3.0.0(patch_hash=lc7tasx5o5q2nd7db4ciaguh2a)(eslint@9.8.0)(typescript@5.5.4):
     resolution: {integrity: sha512-JuVLdNg/uf0Adjg2tpTyYoYaMbwQNn/c78P1HcccokvhtRphgnRjZDKmhlxbxYptppex03zO76f97DD/yQHv7A==}
     peerDependencies:
       eslint: ^8.0.0
@@ -7601,6 +7604,7 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+    patched: true
 
   /eslint-plugin-import@2.29.1(@typescript-eslint/parser@8.0.0)(eslint@9.8.0):
     resolution: {integrity: sha512-BbPC0cuExzhiMo4Ff1BTVwHpjjv28C5R+btTOGaCRC7UEz801up0JadwkeSk5Ued6TG34uaczuVuH6qyy5YUxw==}

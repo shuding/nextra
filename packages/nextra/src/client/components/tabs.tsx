@@ -86,7 +86,7 @@ function Tabs_({
       defaultIndex={defaultIndex}
       onChange={handleChange}
       className="nextra-scrollbar _overflow-x-auto"
-      // tabIndex={-1} // disables focus in Firefox
+      tabIndex={-1} // disables focus in Firefox
     >
       <TabList className="_mt-4 _flex _w-max _min-w-full _gap-2 _border-b _border-gray-200 _pb-px dark:_border-neutral-800">
         {items.map((item, index) => {

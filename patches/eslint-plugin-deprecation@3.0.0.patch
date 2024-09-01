@@ -1,0 +1,43 @@
+diff --git a/dist/rules/deprecation.js b/dist/rules/deprecation.js
+index 35ba448f4c4407794f4d4999bf2287350667e089..5525ef8774ff3b52b525b9edafdb2de8d0561bf7 100644
+--- a/dist/rules/deprecation.js
++++ b/dist/rules/deprecation.js
+@@ -62,8 +62,7 @@ function createRuleForIdentifier(context) {
+             return;
+         }
+         // - Inside an import
+-        const isInsideImport = context
+-            .getAncestors()
++        const isInsideImport = context.sourceCode.getAncestors(id)
+             .some((anc) => anc.type.includes('Import'));
+         if (isInsideImport) {
+             return;
+@@ -82,8 +81,8 @@ function createRuleForIdentifier(context) {
+         }
+     };
+ }
+-function getParent(context) {
+-    const ancestors = context.getAncestors();
++function getParent(context, id) {
++    const ancestors = context.sourceCode.getAncestors(id)
+     return ancestors.length > 0 ? ancestors[ancestors.length - 1] : undefined;
+ }
+ // Unfortunately need to keep some state because identifiers like foo in
+@@ -91,7 +90,7 @@ function getParent(context) {
+ let lastProcessedDuplicateName;
+ function isDeclaration(id, context) {
+     var _a, _b;
+-    const parent = getParent(context);
++    const parent = getParent(context, id);
+     switch (parent === null || parent === void 0 ? void 0 : parent.type) {
+         case 'TSEnumDeclaration':
+         case 'TSInterfaceDeclaration':
+@@ -216,7 +215,7 @@ function getSymbol(id, services, tc) {
+     return symbol;
+ }
+ function getCallExpression(context, id) {
+-    const ancestors = context.getAncestors();
++    const ancestors = context.sourceCode.getAncestors(id)
+     let callee = id;
+     let parent = ancestors.length > 0 ? ancestors[ancestors.length - 1] : undefined;
+     if (parent && parent.type === 'MemberExpression' && parent.property === id) {

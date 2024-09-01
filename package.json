@@ -55,7 +55,8 @@
     },
     "patchedDependencies": {
       "@changesets/assemble-release-plan@6.0.3": "patches/@changesets__assemble-release-plan@6.0.3.patch",
-      "tsup@8.2.4": "patches/tsup.patch"
+      "tsup@8.2.4": "patches/tsup.patch",
+      "eslint-plugin-deprecation@3.0.0": "patches/eslint-plugin-deprecation@3.0.0.patch"
     }
   }
 }
