@@ -10,8 +10,13 @@ import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 import { useMounted } from 'nextra/hooks'
 import { InformationCircleIcon, SpinnerIcon } from 'nextra/icons'
-import type { FocusEventHandler, ReactElement, SyntheticEvent } from 'react'
-import { Fragment, useCallback, useRef, useState } from 'react'
+import type {
+  FocusEventHandler,
+  KeyboardEvent,
+  ReactElement,
+  SyntheticEvent
+} from 'react'
+import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
 import { useMenu, useThemeConfig } from '../contexts'
 import type { SearchResult } from '../types'
 import { renderComponent, renderString } from '../utils'
@@ -26,6 +31,8 @@ type SearchProps = {
   error?: boolean
   results: SearchResult[]
 }
+
+const INPUTS = new Set(['input', 'select', 'button', 'textarea'])
 
 export function Search({
   className,
@@ -43,25 +50,47 @@ export function Search({
   const mounted = useMounted()
   const inputRef = useRef<HTMLInputElement>(null)
 
-  const icon = mounted && (
+  useEffect(() => {
+    function down(event: globalThis.KeyboardEvent) {
+      const input = inputRef.current
+      const activeElement = document.activeElement as HTMLElement
+      const tagName = activeElement?.tagName.toLowerCase()
+      if (
+        !input ||
+        !tagName ||
+        INPUTS.has(tagName) ||
+        activeElement?.isContentEditable
+      )
+        return
+      if (
+        event.key === '/' ||
+        (event.key === 'k' &&
+          (event.metaKey /* for Mac */ || /* for non-Mac */ event.ctrlKey))
+      ) {
+        event.preventDefault()
+        // prevent to scroll to top
+        input.focus({ preventScroll: true })
+      }
+    }
+
+    window.addEventListener('keydown', down)
+    return () => {
+      window.removeEventListener('keydown', down)
+    }
+  }, [])
+
+  const icon = mounted && !focused && (
     <kbd
       className={cn(
         '_absolute _my-1.5 _select-none ltr:_right-1.5 rtl:_left-1.5',
-        '_h-5 _rounded _bg-white _px-1.5 _font-mono _text-[10px] _font-medium _text-gray-500',
+        '_h-5 _rounded _bg-white _px-1.5 _font-mono _text-[11px] _font-medium _text-gray-500',
         '_border dark:_border-gray-100/20 dark:_bg-black/50',
         'contrast-more:_border-current contrast-more:_text-current contrast-more:dark:_border-current',
         '_items-center _gap-1 _flex',
-        value
-          ? '_z-20 _cursor-pointer hover:_opacity-70'
-          : '_pointer-events-none max-sm:_hidden'
+        'max-sm:_hidden'
       )}
-      aria-label={value ? 'Cancel' : undefined}
-      title={value ? 'Cancel' : undefined}
-      onClick={() => onChange('')}
     >
-      {value && focused ? (
-        'ESC'
-      ) : navigator.userAgent.includes('Macintosh') ? (
+      {navigator.userAgent.includes('Macintosh') ? (
         <>
           <span className="_text-xs">⌘</span>K
         </>
@@ -70,6 +99,11 @@ export function Search({
       )}
     </kbd>
   )
+
+  const handleKeyDown = useCallback(<T,>(event: KeyboardEvent<T>) => {
+    // skip the character selection process in the IME for CJK language users.
+    if (event.nativeEvent.isComposing) return
+  }, [])
 
   const handleFocus = useCallback<FocusEventHandler>(
     event => {
@@ -116,15 +150,14 @@ export function Search({
 
   const handleSelect = useCallback(
     async (searchResult: SearchResult | null) => {
-      if (searchResult) {
-        // Calling before navigation so selector `html:not(:has(*:focus))` in styles.css will work,
-        // and we'll have padding top since input is not focused
-        inputRef.current?.blur()
-        await router.push(searchResult.route)
-        // Clear input after navigation completes
-        setMenu(false)
-        onChange('')
-      }
+      if (!searchResult) return
+      // Calling before navigation so selector `html:not(:has(*:focus))` in styles.css will work,
+      // and we'll have padding top since input is not focused
+      inputRef.current?.blur()
+      await router.push(searchResult.route)
+      // Clear input after navigation completes
+      setMenu(false)
+      onChange('')
     },
     [router, setMenu, onChange]
   )
@@ -152,6 +185,7 @@ export function Search({
         onChange={handleChange}
         onFocus={handleFocus}
         onBlur={handleFocus}
+        onKeyDown={handleKeyDown}
         type="search"
         placeholder={renderString(themeConfig.search.placeholder)}
         suffix={icon}
@@ -160,10 +194,11 @@ export function Search({
         transition
         anchor={{ to: 'top end', gap: 10, padding: 16 }}
         className={cn(
-          'nextra-search-results nextra-scrollbar',
+          'nextra-search-results nextra-scrollbar max-md:_h-full',
           error || loading || !results.length
-            ? '_h-[100px]'
-            : 'md:_h-[min(calc(100vh-5rem),400px)]',
+            ? 'md:_h-[100px]'
+            : // headlessui adds max-height as style, use !important to override
+              'md:!_max-h-[min(calc(100vh-5rem),400px)]',
           '_w-[--input-width] md:_w-[576px]',
           'empty:_invisible'
         )}
