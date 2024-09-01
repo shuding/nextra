@@ -10,12 +10,7 @@ import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 import { useMounted } from 'nextra/hooks'
 import { InformationCircleIcon, SpinnerIcon } from 'nextra/icons'
-import type {
-  FocusEventHandler,
-  KeyboardEvent,
-  ReactElement,
-  SyntheticEvent
-} from 'react'
+import type { FocusEventHandler, ReactElement, SyntheticEvent } from 'react'
 import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
 import { useMenu, useThemeConfig } from '../contexts'
 import type { SearchResult } from '../types'
@@ -100,11 +95,6 @@ export function Search({
     </kbd>
   )
 
-  const handleKeyDown = useCallback(<T,>(event: KeyboardEvent<T>) => {
-    // skip the character selection process in the IME for CJK language users.
-    if (event.nativeEvent.isComposing) return
-  }, [])
-
   const handleFocus = useCallback<FocusEventHandler>(
     event => {
       const isFocus = event.type === 'focus'
@@ -157,7 +147,6 @@ export function Search({
         onChange={handleChange}
         onFocus={handleFocus}
         onBlur={handleFocus}
-        onKeyDown={handleKeyDown}
         type="search"
         placeholder={renderString(themeConfig.search.placeholder)}
         suffix={icon}
