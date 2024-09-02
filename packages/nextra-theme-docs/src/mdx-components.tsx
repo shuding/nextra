@@ -183,7 +183,7 @@ function Summary({
           '_size-4 _shrink-0 _mx-1.5',
           'rtl:_rotate-180 [[data-expanded]>summary:first-child>&]:_rotate-90 _transition'
         )}
-        pathClassName="_stroke-[3px]"
+        strokeWidth="3"
       />
     </summary>
   )

@@ -488,7 +488,12 @@ export function Sidebar({
                   setToggleAnimation(true)
                 }}
               >
-                <ExpandIcon isOpen={showSidebar} />
+                <ExpandIcon
+                  className={cn(
+                    '_h-3',
+                    !showSidebar && 'first:*:_origin-[35%] first:*:_rotate-180'
+                  )}
+                />
               </button>
             )}
           </div>
