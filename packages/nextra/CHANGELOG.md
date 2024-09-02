@@ -1,5 +1,11 @@
 # nextra
 
+## 3.0.0-alpha.36
+
+### Patch Changes
+
+- 2b9b95b: migrate to `@headlessui/react` v2
+
 ## 3.0.0-alpha.35
 
 ### Patch Changes
