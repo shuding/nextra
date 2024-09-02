@@ -123,10 +123,7 @@ export function Navbar({ items }: NavBarProps): ReactElement {
             return (
               <NavbarMenu key={menu.title} menu={menu}>
                 {menu.title}
-                <ArrowRightIcon
-                  height="14"
-                  className="*:_origin-center *:_transition-transform *:_rotate-90"
-                />
+                <ArrowRightIcon className="_h-3.5 *:_origin-center *:_transition-transform *:_rotate-90" />
               </NavbarMenu>
             )
           }
