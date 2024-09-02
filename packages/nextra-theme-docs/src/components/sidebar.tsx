@@ -180,10 +180,12 @@ function FolderImpl({ item, anchors, onFocus }: FolderProps): ReactElement {
       >
         {item.title}
         <ArrowRightIcon
-          className="_h-[18px] _min-w-[18px] _rounded-sm _p-0.5 hover:_bg-gray-800/5 dark:hover:_bg-gray-100/5"
-          pathClassName={cn(
-            '_origin-center _transition-transform rtl:_-rotate-180',
-            open && 'ltr:_rotate-90 rtl:_rotate-[-270deg]'
+          height="18"
+          className={cn(
+            '_shrink-0',
+            '_rounded-sm _p-0.5 hover:_bg-gray-800/5 dark:hover:_bg-gray-100/5',
+            '*:_origin-center *:_transition-transform *:rtl:_-rotate-180',
+            open && '*:ltr:_rotate-90 *:rtl:_rotate-[-270deg]'
           )}
         />
       </ComponentToUse>
@@ -488,7 +490,12 @@ export function Sidebar({
                   setToggleAnimation(true)
                 }}
               >
-                <ExpandIcon isOpen={showSidebar} />
+                <ExpandIcon
+                  className={cn(
+                    '_h-3',
+                    !showSidebar && 'first:*:_origin-[35%] first:*:_rotate-180'
+                  )}
+                />
               </button>
             )}
           </div>
