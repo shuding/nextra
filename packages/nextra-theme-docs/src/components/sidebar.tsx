@@ -182,6 +182,7 @@ function FolderImpl({ item, anchors, onFocus }: FolderProps): ReactElement {
         <ArrowRightIcon
           height="18"
           className={cn(
+            '_shrink-0',
             '_rounded-sm _p-0.5 hover:_bg-gray-800/5 dark:hover:_bg-gray-100/5',
             '*:_origin-center *:_transition-transform *:rtl:_-rotate-180',
             open && '*:ltr:_rotate-90 *:rtl:_rotate-[-270deg]'
