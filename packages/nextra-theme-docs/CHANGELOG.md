@@ -1,5 +1,15 @@
 # nextra-theme-docs
 
+## 3.0.0-alpha.36
+
+### Patch Changes
+
+- 34e25cd: migrate search to `@headlessui/react` Combobox
+- 57f3963: Remove intersection-observer polyfill
+- 2b9b95b: migrate to `@headlessui/react` v2
+- Updated dependencies [2b9b95b]
+  - nextra@3.0.0-alpha.36
+
 ## 3.0.0-alpha.35
 
 ### Patch Changes
