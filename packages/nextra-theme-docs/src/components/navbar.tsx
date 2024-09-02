@@ -51,7 +51,7 @@ function NavbarMenu({
         className={cn(
           classes.link,
           classes.inactive,
-          'max-md:_hidden _items-center _whitespace-nowrap _rounded _flex _gap-1'
+          'max-md:_hidden _items-center _whitespace-nowrap _rounded _flex _gap-1.5'
         )}
       >
         {children}
@@ -124,8 +124,8 @@ export function Navbar({ items }: NavBarProps): ReactElement {
               <NavbarMenu key={menu.title} menu={menu}>
                 {menu.title}
                 <ArrowRightIcon
-                  className="_h-[18px] _min-w-[18px] _rounded-sm _p-0.5"
-                  pathClassName="_origin-center _transition-transform _rotate-90"
+                  height="14"
+                  className="*:_origin-center *:_transition-transform *:_rotate-90"
                 />
               </NavbarMenu>
             )

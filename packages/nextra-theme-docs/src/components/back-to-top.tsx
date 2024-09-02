@@ -35,7 +35,10 @@ export function BackToTop({
       )}
     >
       Scroll to top
-      <ArrowRightIcon className="_-rotate-90 _size-4 _border _rounded-full _border-current" />
+      <ArrowRightIcon
+        height="16"
+        className="_-rotate-90 _border _rounded-full _border-current"
+      />
     </button>
   )
 }
