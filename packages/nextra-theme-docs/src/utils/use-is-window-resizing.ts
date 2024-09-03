@@ -11,6 +11,8 @@ export function useIsWindowResizing() {
         innerState.current = true
         setIsWindowResizing(true)
       }
+
+      clearTimeout(resizeTimer)
       resizeTimer = setTimeout(() => {
         innerState.current = false
         setIsWindowResizing(false)
