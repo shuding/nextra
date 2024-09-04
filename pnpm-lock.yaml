@@ -238,7 +238,7 @@ importers:
     dependencies:
       '@headlessui/react':
         specifier: ^2.1.2
-        version: 2.1.4(react-dom@18.3.1)(react@18.3.1)
+        version: 2.1.5(react-dom@18.3.1)(react@18.3.1)
       '@mdx-js/mdx':
         specifier: ^3.0.0
         version: 3.0.1
@@ -441,7 +441,7 @@ importers:
     dependencies:
       '@headlessui/react':
         specifier: ^2.1.2
-        version: 2.1.4(react-dom@18.3.1)(react@18.3.1)
+        version: 2.1.5(react-dom@18.3.1)(react@18.3.1)
       '@popperjs/core':
         specifier: ^2.11.8
         version: 2.11.8
@@ -3749,8 +3749,8 @@ packages:
       react-dom: 18.3.1(react@18.3.1)
     dev: false
 
-  /@headlessui/react@2.1.4(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-tqxvLFJ2Cx0FWfHKSR0ENM3oa+ATvpGZR5OUswtMNRA7KbkNr4sE+oYM7HQS7zqaIoTu7OVBeQV/JO3pnez9JQ==}
+  /@headlessui/react@2.1.5(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-m3vzqwMTyDbgaNiSXQdrw8R4tRdnxVHHm4G/ZGS0TP6T8blEj3Ib1/zIJBzlvTXpBjTpd1DsUnRTonHyONMjSQ==}
     engines: {node: '>=10'}
     peerDependencies:
       react: ^18
@@ -3759,7 +3759,7 @@ packages:
       '@floating-ui/react': 0.26.23(react-dom@18.3.1)(react@18.3.1)
       '@react-aria/focus': 3.18.2(react@18.3.1)
       '@react-aria/interactions': 3.22.2(react@18.3.1)
-      '@tanstack/react-virtual': 3.10.6(react-dom@18.3.1)(react@18.3.1)
+      '@tanstack/react-virtual': 3.10.7(react-dom@18.3.1)(react@18.3.1)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
     dev: false
@@ -5059,8 +5059,23 @@ packages:
       react-dom: 18.3.1(react@18.3.1)
     dev: false
 
+  /@tanstack/react-virtual@3.10.7(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-yeP+M0G8D+15ZFPivpuQ5hoM4Fa/PzERBx8P8EGcfEsXX3JOb9G9UUrqc47ZXAxvK+YqzM9T5qlJUYUFOwCZJw==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@tanstack/virtual-core': 3.10.7
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+    dev: false
+
   /@tanstack/virtual-core@3.10.6:
     resolution: {integrity: sha512-1giLc4dzgEKLMx5pgKjL6HlG5fjZMgCjzlKAlpr7yoUtetVPELgER1NtephAI910nMwfPTHNyWKSFmJdHkz2Cw==}
+    dev: false
+
+  /@tanstack/virtual-core@3.10.7:
+    resolution: {integrity: sha512-ND5dfsU0n9F4gROzwNNDJmg6y8n9pI8YWxtgbfJ5UcNn7Hx+MxEXtXcQ189tS7sh8pmCObgz2qSiyRKTZxT4dg==}
     dev: false
 
   /@testing-library/dom@10.4.0:
