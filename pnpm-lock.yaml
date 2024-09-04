@@ -107,7 +107,7 @@ importers:
         version: 2.1.1
       framer-motion:
         specifier: ^11.0.0
-        version: 11.3.22(react-dom@18.3.1)(react@18.3.1)
+        version: 11.5.0(react-dom@18.3.1)(react@18.3.1)
       next:
         specifier: 14.2.5
         version: 14.2.5(@babel/core@7.24.9)(react-dom@18.3.1)(react@18.3.1)
@@ -8267,8 +8267,8 @@ packages:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
     dev: true
 
-  /framer-motion@11.3.22(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-NS9TnPOJhkUrKKe7sl9zAMmQlzm70bwzJ6/gs/DkYP3kCqc0wO350CEqiEcBuVjhyqVNnDf33SkenzByi8x8Gg==}
+  /framer-motion@11.5.0(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-Br0sk5vVf4/dCwK+K7keLzE67ZSoQO7OeAVSQRY72mA4GEjPYJgedAaRzXHkq/ilB87Z1YiJLjhvk5+U4Kz8Yg==}
     peerDependencies:
       '@emotion/is-prop-valid': '*'
       react: ^18.0.0
@@ -8283,7 +8283,7 @@ packages:
     dependencies:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
-      tslib: 2.6.3
+      tslib: 2.7.0
     dev: false
 
   /fs-extra@11.1.0:
@@ -12754,10 +12754,6 @@ packages:
   /tslib@1.14.1:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
     dev: true
-
-  /tslib@2.6.3:
-    resolution: {integrity: sha512-xNvxJEOUiWPGhUuUdQgAJPKOOJfGnIyKySOc09XkKsgdUV/3E2zvwZYdejjmRgPCgcym1juLH3226yA7sEFJKQ==}
-    dev: false
 
   /tslib@2.7.0:
     resolution: {integrity: sha512-gLXCKdN1/j47AiHiOkJN69hJmcbGTHI0ImLmbYLHykhgeN0jVGola9yVjFgzCUklsZQMW55o+dW7IXv3RCXDzA==}
