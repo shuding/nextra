@@ -184,21 +184,21 @@ function FolderImpl({ item, anchors, onFocus }: FolderProps): ReactElement {
           className={cn(
             '_shrink-0',
             '_rounded-sm _p-0.5 hover:_bg-gray-800/5 dark:hover:_bg-gray-100/5',
-            '*:_origin-center *:_transition-transform *:rtl:_-rotate-180',
+            'motion-reduce:*:_transition-none *:_origin-center *:_transition-transform *:rtl:_-rotate-180',
             open && '*:ltr:_rotate-90 *:rtl:_rotate-[-270deg]'
           )}
         />
       </ComponentToUse>
-      <Collapse className="_pt-1" isOpen={open}>
-        {Array.isArray(item.children) && (
+      {Array.isArray(item.children) && (
+        <Collapse isOpen={open}>
           <Menu
-            className={cn(classes.border, 'ltr:_ml-3 rtl:_mr-3')}
+            className={cn(classes.border, '_pt-1 ltr:_ml-3 rtl:_mr-3')}
             directories={item.children}
             base={item.route}
             anchors={anchors}
           />
-        )}
-      </Collapse>
+        </Collapse>
+      )}
     </li>
   )
 }
