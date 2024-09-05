@@ -352,12 +352,12 @@ export function Sidebar({
   const [showToggleAnimation, setToggleAnimation] = useState(false)
 
   const anchors = useMemo(() => toc.filter(v => v.depth === 2), [toc])
-  const sidebarRef = useRef<HTMLDivElement>(null)
-  const containerRef = useRef<HTMLDivElement>(null)
+  const sidebarRef = useRef<HTMLDivElement>(null!)
+  const containerRef = useRef<HTMLDivElement>(null!)
   const mounted = useMounted()
 
   useEffect(() => {
-    const activeElement = sidebarRef.current?.querySelector('li.active')
+    const activeElement = sidebarRef.current.querySelector('li.active')
 
     if (activeElement && (window.innerWidth > 767 || menu)) {
       const scroll = () => {
