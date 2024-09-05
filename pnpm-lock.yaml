@@ -250,7 +250,7 @@ importers:
         version: 0.1.19
       '@shikijs/twoslash':
         specifier: ^1.0.0
-        version: 1.16.1(typescript@5.5.4)
+        version: 1.16.2(typescript@5.5.4)
       '@theguild/remark-mermaid':
         specifier: ^0.1.2
         version: 0.1.2(react@18.3.1)
@@ -292,7 +292,7 @@ importers:
         version: 7.0.1
       rehype-pretty-code:
         specifier: 0.14.0
-        version: 0.14.0(shiki@1.16.1)
+        version: 0.14.0(shiki@1.16.2)
       rehype-raw:
         specifier: ^7.0.0
         version: 7.0.0
@@ -313,7 +313,7 @@ importers:
         version: 3.0.2
       shiki:
         specifier: ^1.0.0
-        version: 1.16.1
+        version: 1.16.2
       slash:
         specifier: ^5.1.0
         version: 5.1.0
@@ -3156,7 +3156,7 @@ packages:
       '@babel/parser': 7.25.6
       '@babel/template': 7.25.0
       '@babel/types': 7.25.6
-      debug: 4.3.5
+      debug: 4.3.6
       globals: 11.12.0
     transitivePeerDependencies:
       - supports-color
@@ -4693,8 +4693,8 @@ packages:
     resolution: {integrity: sha512-ERVzNQz88ZkDqUpWeC57Kp+Kmx5RjqeDBR1M8AGWGom4yrkITiTfXCGmjchlDSw12MhDTuPYR4HVFW8uT61RaQ==}
     dev: false
 
-  /@shikijs/core@1.16.1:
-    resolution: {integrity: sha512-aI0hBtw+a6KsJp2jcD4YuQqKpeCbURMZbhHVozDknJpm+KJqeMRkEnfBC8BaKE/5XC+uofPgCLsa/TkTk0Ba0w==}
+  /@shikijs/core@1.16.2:
+    resolution: {integrity: sha512-XSVH5OZCvE4WLMgdoBqfPMYmGHGmCC3OgZhw0S7KcSi2XKZ+5oHGe71GFnTljgdOxvxx5WrRks6QoTLKrl1eAA==}
     dependencies:
       '@shikijs/vscode-textmate': 9.2.0
       '@types/hast': 3.0.4
@@ -4710,10 +4710,10 @@ packages:
       - typescript
     dev: false
 
-  /@shikijs/twoslash@1.16.1(typescript@5.5.4):
-    resolution: {integrity: sha512-//zj64hG+JmgBizgbwUO7gLQRClHfAhND1taq5K5gcfMk1J2XJ3OGAvWKEuSpKEaIk5qmrM4CVVgo68GBseABg==}
+  /@shikijs/twoslash@1.16.2(typescript@5.5.4):
+    resolution: {integrity: sha512-WzlCd7KnyfhBvGYb7tAbrxK1a9Rn2tQvAyv36RcggT418O3K5JRygiYAtf11qQjV1Q25TicczaosjPUVStFW0A==}
     dependencies:
-      '@shikijs/core': 1.16.1
+      '@shikijs/core': 1.16.2
       twoslash: 0.2.10(typescript@5.5.4)
     transitivePeerDependencies:
       - supports-color
@@ -11632,7 +11632,7 @@ packages:
       unist-util-visit: 5.0.0
     dev: false
 
-  /rehype-pretty-code@0.14.0(shiki@1.16.1):
+  /rehype-pretty-code@0.14.0(shiki@1.16.2):
     resolution: {integrity: sha512-hBeKF/Wkkf3zyUS8lal9RCUuhypDWLQc+h9UrP9Pav25FUm/AQAVh4m5gdvJxh4Oz+U+xKvdsV01p1LdvsZTiQ==}
     engines: {node: '>=18'}
     peerDependencies:
@@ -11642,7 +11642,7 @@ packages:
       hast-util-to-string: 3.0.0
       parse-numeric-range: 1.3.0
       rehype-parse: 9.0.0
-      shiki: 1.16.1
+      shiki: 1.16.2
       unified: 11.0.5
       unist-util-visit: 5.0.0
     dev: false
@@ -12104,10 +12104,10 @@ packages:
       '@shikijs/core': 1.1.2
     dev: false
 
-  /shiki@1.16.1:
-    resolution: {integrity: sha512-tCJIMaxDVB1mEIJ5TvfZU7kCPB5eo9fli5+21Olc/bmyv+w8kye3JOp+LZRmGkAyT71hrkefQhTiY+o9mBikRQ==}
+  /shiki@1.16.2:
+    resolution: {integrity: sha512-gSym0hZf5a1U0iDPsdoOAZbvoi+e0c6c3NKAi03FoSLTm7oG20tum29+gk0wzzivOasn3loxfGUPT+jZXIUbWg==}
     dependencies:
-      '@shikijs/core': 1.16.1
+      '@shikijs/core': 1.16.2
       '@shikijs/vscode-textmate': 9.2.0
       '@types/hast': 3.0.4
     dev: false
