@@ -2,26 +2,24 @@ import { useEffect, useRef, useState } from 'react'
 
 export function useIsWindowResizing() {
   const [isWindowResizing, setIsWindowResizing] = useState(false)
-  const innerState = useRef(false)
+  const resizeTimerRef = useRef<ReturnType<typeof setTimeout>>()
 
   useEffect(() => {
-    let resizeTimer: ReturnType<typeof setTimeout>
     const handleResize = () => {
-      if (innerState.current === false) {
-        innerState.current = true
+      if (!resizeTimerRef.current) {
         setIsWindowResizing(true)
       }
 
-      clearTimeout(resizeTimer)
-      resizeTimer = setTimeout(() => {
-        innerState.current = false
+      clearTimeout(resizeTimerRef.current)
+      resizeTimerRef.current = setTimeout(() => {
+        resizeTimerRef.current = undefined
         setIsWindowResizing(false)
       }, 200)
     }
-    window.addEventListener('resize', handleResize)
+    window.addEventListener('resize', handleResize, { passive: true })
 
     return () => {
-      clearTimeout(resizeTimer)
+      clearTimeout(resizeTimerRef.current)
       window.removeEventListener('resize', handleResize)
     }
   }, [])
