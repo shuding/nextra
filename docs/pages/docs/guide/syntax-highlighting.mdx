@@ -1,5 +1,6 @@
 import { OptionTable } from 'components/table'
 import { Callout } from 'nextra/components'
+import { useEffect, useRef } from 'react'
 
 # Syntax Highlighting
 
@@ -195,54 +196,44 @@ Since syntax highlighting is done at build time, you can’t use dynamic content
 in your code blocks. However, since MDX is very powerful there is a workaround
 via client JS. For example:
 
-import { useEffect, useRef } from 'react'
-
 export function DynamicCode({ children }) {
-  const ref = useRef()
+  const ref = useRef(null)
   const tokenRef = useRef()
   // Find the corresponding token from the DOM
   useEffect(() => {
-    const token = [...ref.current.querySelectorAll('code span')].find(
-      el => el.innerText === '1'
-    )
-    tokenRef.current = token
+    tokenRef.current = [
+      ...ref.current.querySelectorAll('code > span > span')
+    ].find(el => el.textContent === '1')
   }, [])
   return (
     <>
-      <div ref={ref} style={{ marginTop: '1.5rem' }}>
+      <div ref={ref} className="mt-6">
         {children}
       </div>
-      <a
-        onClick={() => {
-          tokenRef.current.innerText =
-            (parseInt(tokenRef.current.innerText) || 0) + 1
-        }}
-        style={{
-          cursor: 'pointer',
-          userSelect: 'none'
-        }}
-      >
-        Increase the number
-      </a>
-      <a
-        onClick={() => {
-          tokenRef.current.innerText = '1 + 1'
-        }}
-        style={{
-          marginLeft: '.5rem',
-          cursor: 'pointer',
-          userSelect: 'none'
-        }}
-      >
-        Change to `1 + 1`
-      </a>
+      <div className="flex _text-primary-600 _underline _decoration-from-font [text-underline-position:from-font] mt-3 gap-3 justify-center">
+        <button
+          onClick={() => {
+            const prev = tokenRef.current.textContent
+            tokenRef.current.textContent = +prev + 1
+          }}
+        >
+          Increase the number
+        </button>
+        <button
+          onClick={() => {
+            tokenRef.current.textContent = '1 + 1'
+          }}
+        >
+          Change to `1 + 1`
+        </button>
+      </div>
     </>
   )
 }
 
 <DynamicCode>
-```js copy=false filename="dynamic_code.js"
-function hello () {
+```js copy=false filename="dynamic-code.js"
+function hello() {
   const x = 2 + 3
   console.log(1)
 }
