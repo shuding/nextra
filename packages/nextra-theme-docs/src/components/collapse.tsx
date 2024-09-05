@@ -16,6 +16,7 @@ export function Collapse({
   closeDuration?: number
 }): ReactElement {
   const containerRef = useRef<HTMLDivElement>(null!)
+  const initialOpen = useRef(isOpen)
   const animationRef = useRef(0)
   const initialRender = useRef(true)
   useEffect(() => {
@@ -66,6 +67,7 @@ export function Collapse({
         isOpen ? '_opacity-100' : ['_opacity-0', '_overflow-hidden']
       )}
       style={{
+        ...(initialOpen.current || horizontal ? undefined : { height: 0 }),
         transitionDuration: (isOpen ? openDuration : closeDuration) + 'ms'
       }}
     >
