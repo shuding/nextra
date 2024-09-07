@@ -90,6 +90,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
       })
     }
   },
+  focusRing: true,
   footer: {
     component: Footer,
     content: `MIT ${new Date().getFullYear()} © Nextra.`

@@ -92,6 +92,7 @@ const config: DocsThemeConfig = {
       )}`
     }
   },
+  focusRing: false,
   footer: {
     content: function useText() {
       const { locale } = useRouter()

@@ -6,6 +6,7 @@
 @import 'nextra/styles/scrollbar.css';
 @import 'nextra/styles/steps.css';
 @import 'nextra/styles/cards.css';
+@import 'nextra/styles/focus-ring.css';
 @import './hamburger.css';
 @import './typesetting-article.css';
 
@@ -25,22 +26,6 @@ html:not(:has(*:focus)) {
 
 body {
   @apply _w-full dark:_text-gray-100;
-}
-
-a,
-summary,
-button,
-input,
-[tabindex]:not([tabindex='-1']) {
-  &:focus-visible {
-    @apply _outline-none;
-    @apply _ring-2 _ring-primary-200 _ring-offset-1 _ring-offset-primary-300 dark:_ring-primary-800 dark:_ring-offset-primary-700;
-  }
-}
-
-a,
-summary {
-  @apply _rounded;
 }
 
 .nextra-content {

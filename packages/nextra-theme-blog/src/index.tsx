@@ -1,3 +1,4 @@
+import cn from 'clsx'
 import { ThemeProvider } from 'next-themes'
 import Head from 'next/head'
 import type { NextraThemeLayoutProps } from 'nextra'
@@ -65,7 +66,10 @@ export default function NextraLayout({
       </Head>
       <BlogProvider value={{ config, opts: pageOpts }}>
         <article
-          className="_container _prose max-md:_prose-sm dark:_prose-invert"
+          className={cn(
+            '_container _prose max-md:_prose-sm dark:_prose-invert',
+            themeConfig.focusRing && 'nextra-focus-ring'
+          )}
           dir="ltr"
         >
           <HeadingContext.Provider value={ref}>

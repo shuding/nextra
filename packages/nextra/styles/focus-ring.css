@@ -1,0 +1,17 @@
+.nextra-focus-ring:where(
+    :not([class~='not-nextra-focus-ring'], [class~='not-nextra-focus-ring'] *)
+  ) {
+  a,
+  summary,
+  button,
+  input,
+  [tabindex]:not([tabindex='-1']) {
+    &:focus-visible {
+      @apply _outline-none;
+      @apply _ring-2 _ring-primary-200 _ring-offset-1 _ring-offset-primary-300 dark:_ring-primary-800 dark:_ring-offset-primary-700;
+    }
+    &:focus-visible:where(a, summary) {
+      @apply _rounded;
+    }
+  }
+}

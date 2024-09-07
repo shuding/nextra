@@ -8,6 +8,7 @@ export interface NextraBlogTheme {
   components?: MDXComponents
   darkMode?: boolean
   dateFormatter?: (date: Date) => string
+  focusRing?: boolean
   footer?: ReactNode
   head?: ({
     meta,
