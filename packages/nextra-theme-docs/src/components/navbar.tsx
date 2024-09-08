@@ -59,6 +59,7 @@ function NavbarMenu({
       <MenuItems
         transition
         className={cn(
+          'motion-reduce:_transition-none',
           'nextra-scrollbar _transition-opacity data-[closed]:_opacity-0 data-[open]:_opacity-100',
           '_border _border-black/5 dark:_border-white/20',
           '_backdrop-blur-lg _bg-[rgb(var(--nextra-bg),.8)]',

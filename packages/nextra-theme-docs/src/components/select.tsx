@@ -40,32 +40,32 @@ export function Select({
         )}
       >
         {selected.name}
-        <ListboxOptions
-          transition
-          anchor={{ to: 'top start', gap: 10 }}
-          className="_transition-opacity data-[closed]:_opacity-0 data-[open]:_opacity-100 _min-w-[--button-width] _z-20 _max-h-64 _rounded-md _border _border-black/5 _backdrop-blur-lg _bg-[rgb(var(--nextra-bg),.8)] _py-1 _text-sm _shadow-lg dark:_border-white/20"
-        >
-          {options.map(option => (
-            <ListboxOption
-              key={option.key}
-              value={option}
-              className={cn(
-                'data-[focus]:_bg-primary-50 data-[focus]:_text-primary-600 data-[focus]:dark:_bg-primary-500/10',
-                '_text-gray-800 dark:_text-gray-100',
-                '_relative _cursor-pointer _whitespace-nowrap _py-1.5',
-                '_transition-colors ltr:_pl-3 ltr:_pr-9 rtl:_pr-3 rtl:_pl-9'
-              )}
-            >
-              {option.name}
-              {option.key === selected.key && (
-                <span className="_absolute _inset-y-0 _flex _items-center ltr:_right-3 rtl:_left-3">
-                  <CheckIcon />
-                </span>
-              )}
-            </ListboxOption>
-          ))}
-        </ListboxOptions>
       </ListboxButton>
+      <ListboxOptions
+        as="ul"
+        transition
+        anchor={{ to: 'top start', gap: 10 }}
+        className="motion-reduce:_transition-none _transition-opacity data-[closed]:_opacity-0 data-[open]:_opacity-100 _min-w-[--button-width] _z-20 _max-h-64 _rounded-md _border _border-black/5 _backdrop-blur-lg _bg-[rgb(var(--nextra-bg),.8)] _py-1 _text-sm _shadow-lg dark:_border-white/20"
+      >
+        {options.map(option => (
+          <ListboxOption
+            key={option.key}
+            value={option}
+            as="li"
+            className={cn(
+              'data-[focus]:_bg-primary-50 data-[focus]:_text-primary-600 data-[focus]:dark:_bg-primary-500/10',
+              '_text-gray-800 dark:_text-gray-100',
+              '_cursor-pointer _whitespace-nowrap _py-1.5 _px-3',
+              '_transition-colors',
+              option.key === selected.key &&
+                '_flex _items-center _justify-between _gap-3'
+            )}
+          >
+            {option.name}
+            {option.key === selected.key && <CheckIcon />}
+          </ListboxOption>
+        ))}
+      </ListboxOptions>
     </Listbox>
   )
 }

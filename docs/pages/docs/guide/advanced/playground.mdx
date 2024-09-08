@@ -46,7 +46,7 @@ Z --> G
   const initialRender = useRef(false)
 
   useEffect(() => {
-    if (!initialRender.current && spanRef.current) {
+    if (!initialRender.current) {
       initialRender.current = true
       spanRef.current.textContent = rawMdx
     }

@@ -100,14 +100,25 @@ function Details({
   className,
   ...props
 }: ComponentProps<'details'>): ReactElement {
-  const [isOpen, setIsOpen] = useState(!!open)
+  const [isOpen, setIsOpen] = useState(() => !!open)
   // To animate the close animation we have to delay the DOM node state here.
   const [delayedOpenState, setDelayedOpenState] = useState(isOpen)
+  const animationRef = useRef(0)
 
   useEffect(() => {
+    const animation = animationRef.current
+    if (animation) {
+      clearTimeout(animation)
+      animationRef.current = 0
+    }
     if (!isOpen) {
-      const timeout = setTimeout(() => setDelayedOpenState(isOpen), 500)
-      return () => clearTimeout(timeout)
+      animationRef.current = window.setTimeout(
+        () => setDelayedOpenState(isOpen),
+        300
+      )
+      return () => {
+        clearTimeout(animationRef.current)
+      }
     }
     setDelayedOpenState(true)
   }, [isOpen])
@@ -148,10 +159,13 @@ function Details({
     <details
       className={cn(
         '[&:not(:first-child)]:_mt-4 _rounded _border _border-gray-200 _bg-white _p-2 _shadow-sm dark:_border-neutral-800 dark:_bg-neutral-900',
+        '_overflow-hidden',
         className
       )}
       {...props}
-      open={delayedOpenState}
+      // `isOpen ||` fix issue on mobile devices while clicking on details, open attribute is still
+      // false, and we can't calculate child.clientHeight
+      open={isOpen || delayedOpenState}
       data-expanded={isOpen ? '' : undefined}
     >
       {summaryElement}
@@ -180,7 +194,7 @@ function Summary({
       <ArrowRightIcon
         className={cn(
           '_order-first', // if prettier formats `summary` it will have unexpected margin-top
-          '_h-4 _shrink-0 _mx-1.5',
+          '_h-4 _shrink-0 _mx-1.5 motion-reduce:_transition-none',
           'rtl:_rotate-180 [[data-expanded]>summary:first-child>&]:_rotate-90 _transition'
         )}
         strokeWidth="3"

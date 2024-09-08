@@ -192,5 +192,5 @@ body,
   @apply _z-20 _rounded-xl _py-2.5 _shadow-xl;
   @apply contrast-more:_border contrast-more:_border-gray-900 contrast-more:dark:_border-gray-50;
   @apply _backdrop-blur-lg _bg-[rgb(var(--nextra-bg),.8)];
-  @apply _transition-opacity data-[closed]:_opacity-0 data-[open]:_opacity-100;
+  @apply motion-reduce:_transition-none _transition-opacity data-[closed]:_opacity-0 data-[open]:_opacity-100;
 }
