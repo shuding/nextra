@@ -1,3 +1,4 @@
+import { Button } from '@headlessui/react'
 import cn from 'clsx'
 import { ArrowRightIcon } from 'nextra/icons'
 import type { ComponentProps, ReactElement } from 'react'
@@ -25,17 +26,23 @@ export function BackToTop({
   hidden: boolean
 }): ReactElement {
   return (
-    <button
+    <Button
       aria-hidden="true"
       onClick={scrollToTop}
       disabled={hidden}
-      className={cn(
-        '_flex _items-center _gap-1.5 _transition _opacity-100 disabled:_opacity-0',
-        className
-      )}
+      className={({ disabled }) =>
+        cn(
+          '_flex _items-center _gap-1.5 _transition',
+          disabled ? '_opacity-0' : '_opacity-100',
+          className
+        )
+      }
     >
       Scroll to top
-      <ArrowRightIcon className="_h-4 _-rotate-90 _border _rounded-full _border-current" />
-    </button>
+      <ArrowRightIcon
+        height="16"
+        className="_-rotate-90 _border _rounded-full _border-current"
+      />
+    </Button>
   )
 }

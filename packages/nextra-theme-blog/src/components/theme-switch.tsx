@@ -19,14 +19,14 @@ export function ThemeSwitch() {
   return (
     <button
       aria-label="Toggle Dark Mode"
-      className="_cursor-pointer _p-2 _text-current"
+      className="_p-2"
       tabIndex={0}
       onClick={toggleTheme}
       onKeyDown={e => {
         if (e.key === 'Enter') toggleTheme()
       }}
     >
-      <IconToUse />
+      <IconToUse height="14" />
     </button>
   )
 }

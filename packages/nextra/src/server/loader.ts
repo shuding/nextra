@@ -115,12 +115,6 @@ export async function loader(
     useCachedCompiler: true,
     isPageImport
   })
-
-  // Imported as a normal component, no need to add the layout.
-  if (!isPageImport) {
-    return `${result}
-export default MDXLayout`
-  }
   if (searchIndexKey) {
     // Store all the things in buildInfo.
     const { buildInfo } = this._module as any
@@ -132,6 +126,11 @@ export default MDXLayout`
         route
       })
     }
+  }
+  // Imported as a normal component, no need to add the layout.
+  if (!isPageImport) {
+    return `${result}
+export default MDXLayout`
   }
 
   let timestamp: PageOpts['timestamp']

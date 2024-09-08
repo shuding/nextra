@@ -1,8 +1,10 @@
 'use client'
 
+import { Button } from '@headlessui/react'
 import cn from 'clsx'
 import { usePathname } from 'next/navigation'
 import type { Heading } from 'nextra'
+import { renderComponent } from 'nextra/components'
 import { useFSRoute } from 'nextra/hooks'
 import { ArrowRightIcon, ExpandIcon } from 'nextra/icons'
 import type { Item, MenuItem, PageItem } from 'nextra/normalize-pages'
@@ -24,7 +26,6 @@ import {
   useMenu,
   useThemeConfig
 } from '../contexts'
-import { renderComponent } from '../utils'
 import { Anchor } from './anchor'
 import { Collapse } from './collapse'
 import { LocaleSwitch } from './locale-switch'
@@ -34,7 +35,7 @@ const TreeState: Record<string, boolean> = Object.create(null)
 
 const FocusedItemContext = createContext('')
 FocusedItemContext.displayName = 'FocusedItem'
-const OnFocusItemContext = createContext<(route: string) => void>(() => {})
+const OnFocusItemContext = createContext<(route: string) => void>(null!)
 OnFocusItemContext.displayName = 'OnFocusItem'
 const FolderLevelContext = createContext(0)
 FolderLevelContext.displayName = 'FolderLevel'
@@ -81,8 +82,8 @@ const classes = {
   ),
   bottomMenu: cn(
     'nextra-sidebar-footer _sticky _bottom-0',
-    '_flex _items-center _gap-2 _mx-4 _py-4',
-    '_mx-3 _px-1', // to hide focused sidebar links
+    '_flex _items-center _gap-2 _py-4',
+    '_mx-3 _px-1' // to hide focused sidebar links
   )
 }
 
@@ -367,7 +368,7 @@ export function MobileNav() {
   }, [pathname, setMenu])
 
   const anchors = useMemo(() => (toc || []).filter(v => v.depth === 2), [toc])
-  const sidebarRef = useRef<HTMLDivElement>(null)
+  const sidebarRef = useRef<HTMLDivElement>(null!)
 
   useEffect(() => {
     const activeElement = sidebarRef.current.querySelector('li.active')
@@ -377,7 +378,7 @@ export function MobileNav() {
         block: 'center',
         inline: 'center',
         scrollMode: 'always',
-        boundary: sidebarRef.current!.parentNode as HTMLDivElement
+        boundary: sidebarRef.current.parentNode as HTMLElement
       })
     }
   }, [menu])
@@ -446,7 +447,7 @@ export function Sidebar({ toc }: { toc: Heading[] }): ReactElement {
   const { docsDirectories, activeThemeContext } = normalizePagesResult
   const includePlaceholder = activeThemeContext.layout === 'default'
 
-  const [focused, setFocused] = useState<null | string>(null)
+  const [focused, setFocused] = useState('')
   const [showSidebar, setSidebar] = useState(true)
   const [showToggleAnimation, setToggleAnimation] = useState(false)
 
@@ -530,13 +531,20 @@ export function Sidebar({ toc }: { toc: Heading[] }): ReactElement {
             {themeConfig.darkMode && (
               <ThemeSwitch
                 lite={!showSidebar || hasI18n}
-                className={hasI18n ? '' : '_grow'}
+                className={!showSidebar || hasI18n ? '' : '_grow'}
               />
             )}
             {themeConfig.sidebar.toggleButton && (
-              <button
+              <Button
                 title={showSidebar ? 'Hide sidebar' : 'Show sidebar'}
-                className="max-md:_hidden _h-7 _rounded-md _transition-colors _text-gray-600 dark:_text-gray-400 _px-2 hover:_bg-gray-100 hover:_text-gray-900 dark:hover:_bg-primary-100/5 dark:hover:_text-gray-50"
+                className={({ hover }) =>
+                  cn(
+                    'max-md:_hidden _h-7 _rounded-md _transition _px-2',
+                    hover
+                      ? '_bg-gray-100 _text-gray-900 dark:_bg-primary-100/5 dark:_text-gray-50'
+                      : '_text-gray-600 dark:_text-gray-400'
+                  )
+                }
                 onClick={() => {
                   setSidebar(!showSidebar)
                   setToggleAnimation(true)
@@ -548,7 +556,7 @@ export function Sidebar({ toc }: { toc: Heading[] }): ReactElement {
                     !showSidebar && 'first:*:_origin-[35%] first:*:_rotate-180'
                   )}
                 />
-              </button>
+              </Button>
             )}
           </div>
         )}

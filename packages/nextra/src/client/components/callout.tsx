@@ -28,7 +28,7 @@ const classes: Record<CalloutType, string> = {
 
 type CalloutProps = {
   type?: CalloutType
-  emoji?: string | ReactNode
+  emoji?: string | ReactElement
   children: ReactNode
 }
 

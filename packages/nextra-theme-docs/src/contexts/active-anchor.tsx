@@ -13,12 +13,12 @@ type ActiveAnchor = Record<
   }
 >
 
-const ActiveAnchorContext = createContext<ActiveAnchor>({})
+const ActiveAnchorContext = createContext<ActiveAnchor>(null!)
 ActiveAnchorContext.displayName = 'ActiveAnchor'
 
 const SetActiveAnchorContext = createContext<
   Dispatch<SetStateAction<ActiveAnchor>>
->(v => v)
+>(null!)
 SetActiveAnchorContext.displayName = 'SetActiveAnchor'
 
 const IntersectionObserverContext = createContext<IntersectionObserver | null>(

@@ -2,7 +2,6 @@
 import { SwrIcon, VercelIcon } from '@app/_icons'
 import type { Metadata } from 'next'
 import {
-  Banner,
   Footer,
   Head,
   Layout,
@@ -10,6 +9,7 @@ import {
   Navbar,
   SkipNavLink
 } from 'nextra-theme-docs'
+import { Banner } from 'nextra/components'
 import { getDictionary, getDirection } from '../_dictionaries/get-dictionary'
 import './styles.css'
 import '../_components/features.css'
@@ -70,6 +70,7 @@ export default async function RootLayout({ children, params: { lang } }) {
         }}
       />
       <body>
+        <Banner storageKey="swr-2">SWR 2.0 is out! Read more →</Banner>
         <SkipNavLink />
         <Layout
           themeConfig={{
@@ -88,7 +89,7 @@ export default async function RootLayout({ children, params: { lang } }) {
               extraContent: (
                 <img
                   alt="placeholder cat"
-                  src="https://placekitten.com/g/300/200"
+                  src="https://placecats.com/300/200"
                 />
               )
             },
@@ -104,9 +105,6 @@ export default async function RootLayout({ children, params: { lang } }) {
             }
           }}
           pageMap={pageMap}
-          banner={
-            <Banner storageKey="swr-2">SWR 2.0 is out! Read more →</Banner>
-          }
           navbar={
             <Navbar
               logo={

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
-import { Banner, Footer, Head, Layout, Navbar } from 'nextra-theme-docs'
+import { Footer, Head, Layout, Navbar } from 'nextra-theme-docs'
+import { Banner } from 'nextra/components'
 import type { ReactNode } from 'react'
 import './globals.css'
 import { NextraLogo, VercelLogo } from '@components/icons'
@@ -60,6 +61,11 @@ export default async function RootLayout({
     <html lang="en" dir="ltr">
       <Head />
       <body>
+        <Banner storageKey="4.0-release">
+          <a href="https://nextra.site" target="_blank" rel="noreferrer">
+            🎉 Nextra 4.0 is released. Read more →
+          </a>
+        </Banner>
         <Layout
           pageMap={pageMap}
           themeConfig={{
@@ -72,13 +78,6 @@ export default async function RootLayout({
               defaultMenuCollapseLevel: 1
             }
           }}
-          banner={
-            <Banner storageKey="4.0-release">
-              <a href="https://nextra.site" target="_blank" rel="noreferrer">
-                🎉 Nextra 4.0 is released. Read more →
-              </a>
-            </Banner>
-          }
           navbar={
             <Navbar
               logo={<NextraLogo className="nextra-logo h-5" />}
@@ -88,7 +87,7 @@ export default async function RootLayout({
           footer={
             <Footer className="flex-col items-center sm:items-start">
               <a
-                className="flex items-center gap-1 text-current"
+                className="flex items-center gap-1"
                 target="_blank"
                 rel="noreferrer"
                 title="vercel.com homepage"

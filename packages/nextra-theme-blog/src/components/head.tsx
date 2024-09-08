@@ -21,7 +21,7 @@ export function Head({
     <head>
       {children}
       <style>
-        {`:root{--nextra-bg:${bgColor.light};}.dark{--nextra-bg:${bgColor.dark};}`}
+        {`:root{--nextra-banner-height:2.5rem;--nextra-bg:${bgColor.light};}.dark{--nextra-bg:${bgColor.dark};}`}
       </style>
     </head>
   )

@@ -1,9 +1,11 @@
+'use client'
+
 import { useEffect, useState } from 'react'
 import type { ReactElement } from 'react'
 import { CrossCircledIcon } from '../icons/index.js'
 import type { MDXComponents } from '../mdx.js'
 import { Code } from './code.js'
-import { Pre } from './pre.js'
+import { Pre } from './pre/index.js'
 import { evaluate } from './remote-content.js'
 
 export function Playground({
@@ -58,7 +60,7 @@ export function Playground({
       <div className="[&_svg]:_text-red-500">
         <Pre
           data-filename="Could not compile code"
-          icon={CrossCircledIcon}
+          icon={<CrossCircledIcon className="_h-4 _shrink-0" />}
           className="_whitespace-pre-wrap"
         >
           <Code>

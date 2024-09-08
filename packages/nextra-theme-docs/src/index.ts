@@ -1,3 +1,5 @@
+import './style.css'
+
 export { useTheme } from 'next-themes'
 export { useThemeConfig, useConfig, useMenu } from './contexts'
 export { useMDXComponents, Link, H1 } from './mdx-components'
@@ -12,7 +14,5 @@ export {
   ThemeSwitch,
   LocaleSwitch,
   Head,
-  Banner,
-  Flexsearch as Search,
   Footer
 } from './components'

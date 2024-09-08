@@ -6,7 +6,7 @@ export async function getPosts() {
   return pageMap
     .find(item => item.route === '/posts')
     .children.filter(post => !post.frontMatter.draft && post.name !== 'index')
-    .sort((a, b) => b.frontMatter.date - a.frontMatter.date)
+    .sort((a, b) => new Date(b.frontMatter.date) - new Date(a.frontMatter.date))
 }
 
 export async function getTags() {

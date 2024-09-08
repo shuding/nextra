@@ -1,4 +1,4 @@
-import type { ComponentPropsWithRef, FC, ReactElement } from 'react'
+import type { FC, ReactElement, SVGProps } from 'react'
 import {
   CPPIcon,
   CsharpIcon,
@@ -16,10 +16,7 @@ import {
 } from '../icons/index.js'
 import type { PreProps } from './pre/index.js'
 
-export const LanguageToIcon: Record<
-  string,
-  FC<ComponentPropsWithRef<'svg'>>
-> = {
+export const LanguageToIcon: Record<string, FC<SVGProps<SVGSVGElement>>> = {
   js: JavaScriptIcon,
   jsx: JavaScriptIcon,
   ts: TypeScriptIcon,
@@ -53,7 +50,7 @@ export const withIcons =
 
     return (
       <Component
-        icon={Icon && <Icon className="_h-4 _w-auto _shrink-0" />}
+        icon={Icon && <Icon className="_h-4 _shrink-0" />}
         {...props}
       />
     )

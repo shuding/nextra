@@ -1,8 +1,13 @@
-import { Mermaid, Playground, Code, Pre, Tabs } from 'nextra/components'
-import { useRef, useCallback, useState, useEffect } from 'react'
+'use client'
+
+import { useMDXComponents } from 'nextra-theme-docs'
+import { Code, Mermaid, Playground, Pre, Tabs } from 'nextra/components'
+import { MdxIcon } from 'nextra/icons'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 export function Demo() {
-  const [rawMdx, setRawMdx] = useState(`Playground components allow you to write Nextra compatible MDX that renders only on the client. It's modeled after the functionality found in [MDX Playground](https://mdxjs.com/playground).
+  const [rawMdx, setRawMdx] =
+    useState(`Playground components allow you to write Nextra compatible MDX that renders only on the client. It's modeled after the functionality found in [MDX Playground](https://mdxjs.com/playground).
 
 In some instances where remote loading MDX is not an option, this may work as a great alternative.
 
@@ -42,7 +47,7 @@ Z --> G
     setRawMdx(e.currentTarget.textContent ?? '')
   }, [])
 
-  const spanRef = useRef(null)
+  const spanRef = useRef<HTMLSpanElement>(null!)
   const initialRender = useRef(false)
 
   useEffect(() => {
@@ -50,11 +55,11 @@ Z --> G
       initialRender.current = true
       spanRef.current.textContent = rawMdx
     }
-  }, []);
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps -- only on mount
 
   return (
     <div className="grid grid-cols-2 gap-2 mt-6">
-      <Pre data-filename="MDX" icon={MdxIcon}>
+      <Pre data-filename="MDX" icon={<MdxIcon className="_h-4 _shrink-0" />}>
         <Code>
           <span
             ref={spanRef}
@@ -73,36 +78,9 @@ Z --> G
             </div>
           }
           source={rawMdx}
-          components={{ Mermaid, $Tabs: Tabs }}
+          components={useMDXComponents({ Mermaid, $Tabs: Tabs })}
         />
       </div>
     </div>
   )
 }
-
-# Playground
-
-<Demo />
-
-## Usage
-
-```mdx filename="Basic Usage"
-import { Playground } from 'nextra/components'
-
-# Playground
-
-Below is a playground component. It mixes into the rest of your MDX perfectly.
-
-<Playground source="## Hello world" />
-```
-
-You may also specify a fallback component like so:
-
-```mdx filename="Usage with Fallback"
-import { Playground } from 'nextra/components'
-
-<Playground
-  source="## Hello world"
-  fallback={<div>Loading playground...</div>}
-/>
-```

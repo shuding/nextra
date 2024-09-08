@@ -5,10 +5,7 @@ import { usePathname } from 'next/navigation'
 import type { ReactElement, ReactNode } from 'react'
 
 type NavbarProps = {
-  navs?: {
-    name: string
-    url: string
-  }[]
+  navs?: { name: string; url: string }[]
   children?: ReactNode
 }
 

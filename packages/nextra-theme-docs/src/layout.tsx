@@ -1,15 +1,15 @@
 import { ThemeProvider } from 'next-themes'
 import type { NextraThemeLayoutProps } from 'nextra'
+import { Search } from 'nextra/components'
 import type { ComponentProps, ReactElement, ReactNode } from 'react'
 import { isValidElement } from 'react'
-import { Flexsearch, Footer, MobileNav, Navbar } from './components'
+import { Footer, MobileNav, Navbar } from './components'
 import {
   ActiveAnchorProvider,
   ConfigProvider,
   ThemeConfigProvider
 } from './contexts'
 import type { DocsThemeConfig } from './contexts/theme-config'
-import './style.css'
 
 const DEFAULT_THEME: DocsThemeConfig = {
   darkMode: true,
@@ -23,7 +23,7 @@ const DEFAULT_THEME: DocsThemeConfig = {
   },
   i18n: [],
   navigation: true,
-  search: <Flexsearch />,
+  search: <Search />,
   sidebar: {
     defaultMenuCollapseLevel: 2,
     toggleButton: true
@@ -61,12 +61,10 @@ export function Layout({
   children,
   themeConfig,
   pageMap,
-  banner,
   nextThemes,
   footer = <Footer>MIT {new Date().getFullYear()} © Nextra.</Footer>,
   navbar = <Navbar />
 }: NextraThemeLayoutProps & {
-  banner?: ReactNode
   nextThemes?: ThemeProviderProps
   footer?: ReactNode
   navbar?: ReactNode
@@ -86,7 +84,6 @@ export function Layout({
   }
   return (
     <ThemeConfigProvider value={extendedThemeConfig}>
-      {banner}
       <ThemeProvider
         attribute="class"
         disableTransitionOnChange

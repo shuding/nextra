@@ -1,4 +1,5 @@
 /* eslint-env node */
+/* eslint-disable react-hooks/rules-of-hooks -- false positive, useMDXComponents/useTOC are not react hooks */
 
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
@@ -13,7 +14,6 @@ export async function generateStaticParams() {
   const ru = await import('.next/static/chunks/nextra-page-map-ru.mjs')
 
   return Object.entries({ en, es, ru }).flatMap(
-    // @ts-expect-error fixme, i don't remember where is lost RouteToFilepath after rebase, need to check my git history
     ([lang, { RouteToFilepath }]) => {
       return Object.keys(RouteToFilepath).map(mdxPath => ({
         lang,

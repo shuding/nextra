@@ -42,7 +42,7 @@ export function ClientWrapper({
         <nav className={classes.toc} aria-label="table of contents" />
       )
     ) : (
-      <nav className={cn(classes.toc, '_px-4')} aria-label="table of contents">
+      <nav className={classes.toc} aria-label="table of contents">
         <TOC
           toc={themeConfig.toc.float ? toc : []}
           filePath={props.filePath}

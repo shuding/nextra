@@ -2,19 +2,13 @@ import fs from 'fs/promises'
 import path from 'node:path'
 import svgr from 'esbuild-plugin-svgr'
 import { defineConfig } from 'tsup'
+import { defaultEntry } from '../nextra-theme-docs/tsup.config.js'
 import { CWD } from './src/server/constants.js'
 
 export default defineConfig([
   {
     name: 'nextra',
-    entry: [
-      'src/**/*.{ts,tsx}',
-      '!src/**/*.d.ts',
-      '!src/types.ts',
-      '!src/client/icons',
-      '!**/__tests__',
-      '!**/*.{test,spec}.{ts,tsx}'
-    ],
+    entry: [...defaultEntry, '!src/types.ts', '!src/client/icons'],
     target: 'es2020',
     format: 'esm',
     dts: true,

@@ -1,39 +1,21 @@
 import cn from 'clsx'
 import type { ReactElement } from 'react'
-import { Indent } from './folder.js'
+import { FileIcon } from '../../icons/index.js'
 
-type FileProps = {
-  name: string
-  label?: ReactElement
+export type FileProps = {
+  name: ReactElement
   active?: boolean
 }
 
-export const File = ({ label, name, active }: FileProps) => (
+export const File = ({ name, active }: FileProps) => (
   <li
     className={cn(
-      '_flex _list-none',
-      active && '_text-primary-600 contrast-more:_underline'
+      '_flex _items-center _gap-1 _break-all',
+      active && '_text-primary-600'
     )}
   >
-    <span className="_flex _items-center _py-1">
-      <Indent />
-      <svg
-        width="1em"
-        height="1em"
-        viewBox="0 0 24 24"
-        // Text can shrink icon
-        className="_shrink-0"
-      >
-        <path
-          fill="none"
-          stroke="currentColor"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          d="M9 12h6m-6 4h6m2 5H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5.586a1 1 0 0 1 .707.293l5.414 5.414a1 1 0 0 1 .293.707V19a2 2 0 0 1-2 2Z"
-        />
-      </svg>
-      <span className="_ms-1">{label ?? name}</span>
-    </span>
+    {/* Text can shrink icon */}
+    <FileIcon height="14 " className="_shrink-0" />
+    {name}
   </li>
 )

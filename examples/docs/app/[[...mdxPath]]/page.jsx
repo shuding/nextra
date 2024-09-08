@@ -1,4 +1,5 @@
 /* eslint-env node */
+/* eslint-disable react-hooks/rules-of-hooks -- false positive, useMDXComponents/useTOC are not react hooks */
 
 import { notFound } from 'next/navigation'
 import { useMDXComponents } from 'nextra-theme-docs'

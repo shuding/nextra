@@ -1,10 +1,10 @@
 if (typeof window !== 'undefined') {
-  let resizeTimer: any
+  let timer = 0
 
-  const addResizingClass = () => {
+  function addResizingClass() {
     document.body.classList.add('resizing')
-    clearTimeout(resizeTimer)
-    resizeTimer = setTimeout(() => {
+    clearTimeout(timer)
+    timer = window.setTimeout(() => {
       document.body.classList.remove('resizing')
     }, 200)
   }

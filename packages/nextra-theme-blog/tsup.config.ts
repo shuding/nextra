@@ -1,17 +1,12 @@
 import { defineConfig } from 'tsup'
+import { defaultEntry } from '../nextra-theme-docs/tsup.config'
 
-export default defineConfig([
-  {
-    name: 'nextra-theme-blog/css',
-    entry: ['src/style.css']
-  },
-  {
-    name: 'nextra-theme-blog',
-    entry: ['src/**/*.{ts,tsx}'],
-    external: ['nextra'],
-    format: 'esm',
-    dts: true,
-    outExtension: () => ({ js: '.js' }),
-    bundle: false
-  }
-])
+export default defineConfig({
+  name: 'nextra-theme-blog',
+  entry: [...defaultEntry, 'src/style.css', '!src/types.ts'],
+  external: ['nextra'],
+  format: 'esm',
+  dts: true,
+  outExtension: () => ({ js: '.js' }),
+  bundle: false
+})

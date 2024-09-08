@@ -1,23 +1,25 @@
 .nextra-hamburger svg {
+  --animation: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+
   g {
     @apply _origin-center;
-    transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: var(--animation);
   }
   path {
     opacity: 1;
     transition:
-      transform 0.2s cubic-bezier(0.25, 1, 0.5, 1) 0.2s,
+      var(--animation) 0.2s,
       opacity 0.2s ease 0.2s;
   }
 
   &.open {
     path {
       transition:
-        transform 0.2s cubic-bezier(0.25, 1, 0.5, 1),
+        var(--animation),
         opacity 0s ease 0.2s;
     }
     g {
-      transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1) 0.2s;
+      transition: var(--animation) 0.2s;
     }
   }
 

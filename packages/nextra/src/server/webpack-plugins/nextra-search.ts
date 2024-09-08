@@ -23,7 +23,7 @@ export class NextraSearchPlugin {
           stage: webpack.Compilation.PROCESS_ASSETS_STAGE_ADDITIONS
         },
         assets => {
-          const indexFiles: Record<string, SearchData> = {}
+          const indexFiles: Record<string, SearchData> = Object.create(null)
 
           for (const entry of compilation.entries.values()) {
             const entryDependency = entry.dependencies?.[0]

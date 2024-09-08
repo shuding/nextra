@@ -1,3 +1,5 @@
+import './style.css'
+
 export { useMDXComponents } from './mdx-components'
 export {
   PostCard,
@@ -7,5 +9,5 @@ export {
   Footer,
   Head
 } from './components'
-export * from './types'
+export type * from './types'
 export { useTheme } from 'next-themes'

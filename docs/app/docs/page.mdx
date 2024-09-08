@@ -36,9 +36,7 @@ project. If you have a question that isn't answered here, please
 export function FAQBox({ title, children }) {
   return (
     <details open className="!rounded-lg !bg-neutral-50 dark:!bg-neutral-800">
-      <summary>
-        <strong className="text-lg">{title}</strong>
-      </summary>
+      <summary className="text-lg font-bold">{title}</summary>
       <div className="p-2">{children}</div>
     </details>
   )

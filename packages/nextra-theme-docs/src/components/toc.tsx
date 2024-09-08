@@ -2,11 +2,11 @@
 
 import cn from 'clsx'
 import type { Heading } from 'nextra'
+import { renderComponent } from 'nextra/components'
 import type { ReactElement } from 'react'
 import { useEffect, useRef } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import { useActiveAnchor, useThemeConfig } from '../contexts'
-import { renderComponent } from '../utils'
 import { Anchor } from './anchor'
 import { BackToTop } from './back-to-top'
 
@@ -25,7 +25,7 @@ const linkClassName = cn(
 
 export function TOC({ toc, filePath, pageTitle }: TOCProps): ReactElement {
   const activeAnchor = useActiveAnchor()
-  const tocRef = useRef<HTMLDivElement>(null)
+  const tocRef = useRef<HTMLUListElement>(null!)
   const themeConfig = useThemeConfig()
 
   const hasHeadings = toc.length > 0
@@ -51,7 +51,7 @@ export function TOC({ toc, filePath, pageTitle }: TOCProps): ReactElement {
         block: 'center',
         inline: 'center',
         scrollMode: 'always',
-        boundary: tocRef.current!.parentElement
+        boundary: tocRef.current.parentElement
       })
     }
   }, [activeSlug])

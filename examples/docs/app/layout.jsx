@@ -1,5 +1,6 @@
 /* eslint-env node */
-import { Banner, Head, Layout, Navbar } from 'nextra-theme-docs'
+import { Head, Layout, Navbar } from 'nextra-theme-docs'
+import { Banner } from 'nextra/components'
 
 export const { viewport } = Head
 
@@ -32,6 +33,7 @@ export default async function RootLayout({ children }) {
     <html lang="en" dir="ltr">
       <Head faviconGlyph="✦" />
       <body>
+        <Banner storageKey="Nextra 2">Nextra 2 Alpha</Banner>
         <Layout
           themeConfig={{
             editLink: {
@@ -44,7 +46,6 @@ export default async function RootLayout({ children }) {
             }
           }}
           pageMap={pageMap}
-          banner={<Banner storageKey="Nextra 2">Nextra 2 Alpha</Banner>}
           navbar={
             <Navbar
               // Next.js discord server

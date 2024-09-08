@@ -1,5 +1,5 @@
 /** @type {import('postcss').Postcss} */
-module.exports = {
+export default {
   plugins: {
     'postcss-import': {},
     'tailwindcss/nesting': {},

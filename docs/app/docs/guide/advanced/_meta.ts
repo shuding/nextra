@@ -5,5 +5,10 @@ export default {
   latex: '',
   table: '',
   typescript: '',
-  remote: ''
+  remote: '',
+  playground: {
+    theme: {
+      layout: 'full'
+    }
+  }
 }

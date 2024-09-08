@@ -1,5 +1,5 @@
 import escapeStringRegexp from 'escape-string-regexp'
-import type { ReactElement, ReactNode } from 'react'
+import type { ReactElement } from 'react'
 import { memo } from 'react'
 
 type MatchArgs = {
@@ -19,7 +19,7 @@ export const HighlightMatches = memo<MatchArgs>(function HighlightMatches({
   const regexp = new RegExp(escapedSearch.replaceAll(/\s+/g, '|'), 'ig')
   let result
   let index = 0
-  const content: (string | ReactNode)[] = []
+  const content: (string | ReactElement)[] = []
 
   while ((result = regexp.exec(value))) {
     if (result.index === regexp.lastIndex) {

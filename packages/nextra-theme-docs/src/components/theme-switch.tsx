@@ -39,7 +39,7 @@ export function ThemeSwitch({
         key: theme,
         name: (
           <span className="_flex _items-center _gap-2 _capitalize">
-            <IconToUse />
+            <IconToUse height="12" />
             <span className={lite ? 'md:_hidden' : ''}>
               {mounted ? options[theme as keyof typeof options] : options.light}
             </span>

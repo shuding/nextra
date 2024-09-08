@@ -1,3 +1,4 @@
+/* eslint-env node */
 const TAILWIND_CONFIG = {
   extends: ['plugin:tailwindcss/recommended'],
   rules: {
@@ -255,12 +256,7 @@ module.exports = {
       }
     },
     {
-      files: [
-        'prettier.config.js',
-        'postcss.config.{js,cjs}',
-        'next.config.js',
-        '.eslintrc.cjs'
-      ],
+      files: ['next.config.js'],
       env: {
         node: true
       }

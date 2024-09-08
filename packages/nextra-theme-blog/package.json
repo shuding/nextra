@@ -30,10 +30,9 @@
   "scripts": {
     "build": "tsup",
     "clean": "rimraf ./dist",
-    "dev": "tsup --watch",
+    "dev": "tsup --watch . --watch ../nextra/src --watch ../nextra/styles",
     "prepublishOnly": "pnpm build",
     "test": "vitest run",
-    "types": "tsup --dts-only",
     "types:check": "tsc --noEmit"
   },
   "peerDependencies": {

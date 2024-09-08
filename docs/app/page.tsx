@@ -20,7 +20,7 @@ export default function IndexPage() {
     <div className="home-content">
       <div className="content-container">
         <h1 className="headline">
-          Make beautiful websites <br className="sm:block hidden" />
+          Make beautiful websites <br className="max-sm:hidden" />
           with Next.js & MDX
         </h1>
         <p className="subtitle">
@@ -124,19 +124,10 @@ export default function IndexPage() {
             <Feature
               index={4}
               centered
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                backgroundImage: 'url(/assets/gradient-bg.jpeg)',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                color: '#fff'
-              }}
+              className="text-white bg-[url(/assets/gradient-bg.jpeg)] bg-center bg-cover flex flex-col items-center justify-center"
               href="/docs/guide/markdown"
             >
-              <MdxIcon className="w-4/6 h-auto [filter:drop-shadow(0_2px_10px_rgba(0,0,0,.1))]" />
+              <MdxIcon className="w-4/6 [filter:drop-shadow(0_2px_10px_rgba(0,0,0,.1))]" />
               <p style={{ textShadow: '0 2px 4px rgb(0 0 0 / 20%)' }}>
                 <Link
                   href="https://mdxjs.com/blog/v3"
@@ -152,12 +143,7 @@ export default function IndexPage() {
             <Feature
               index={5}
               centered
-              className="feat-darkmode"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}
+              className="feat-darkmode flex items-center justify-center"
             >
               <MotionDiv
                 animate={{
@@ -177,7 +163,6 @@ export default function IndexPage() {
                 transition={{
                   backgroundPosition: {
                     times: [0, 0.5, 0.5, 1],
-                    type: 'spring',
                     repeat: Infinity,
                     duration: 10,
                     delay: 1
@@ -208,7 +193,6 @@ export default function IndexPage() {
                 transition={{
                   color: {
                     times: [0.25, 0.35, 0.7, 0.8],
-                    type: 'spring',
                     repeat: Infinity,
                     duration: 10,
                     delay: 1
@@ -230,21 +214,20 @@ export default function IndexPage() {
               id="search-card"
               href="/docs/docs-theme/theme-configuration#search"
             >
-              <div style={{ zIndex: 2 }}>
-                <h3>
-                  Full-text search, <br />
-                  zero-config needed
-                </h3>
-                <p>
-                  Nextra indexes your content automatically at build-time and
-                  performs incredibly fast full-text search via{' '}
-                  <Link href="https://github.com/nextapps-de/flexsearch">
-                    FlexSearch
-                  </Link>
-                  .
-                </p>
-              </div>
-              <div className="absolute size-full inset-0 hidden sm:block bg-[linear-gradient(to_right,white_250px,_transparent)] dark:bg-[linear-gradient(to_right,#202020_250px,_transparent)] z-[1]" />
+              <h3>
+                Full-text search,
+                <br />
+                zero-config needed
+              </h3>
+              <p className="z-[2]">
+                Nextra indexes your content automatically at build-time and
+                performs incredibly fast full-text search via{' '}
+                <Link href="https://github.com/nextapps-de/flexsearch">
+                  FlexSearch
+                </Link>
+                .
+              </p>
+              <div className="absolute size-full inset-0 max-sm:hidden bg-[linear-gradient(to_right,white_250px,_transparent)] dark:bg-[linear-gradient(to_right,#202020_250px,_transparent)] z-[1]" />
               <video
                 autoPlay
                 loop

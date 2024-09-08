@@ -1,5 +1,7 @@
 'use client'
 
+import { Button } from '@headlessui/react'
+import cn from 'clsx'
 import type { ReactElement, ReactNode } from 'react'
 
 export function CloseBannerButton({
@@ -10,13 +12,14 @@ export function CloseBannerButton({
   children: ReactNode
 }): ReactElement {
   return (
-    <button
-      type="button"
+    <Button
       aria-label="Dismiss banner"
-      className="_w-8 _h-8 _opacity-80 hover:_opacity-100"
+      className={({ hover }) =>
+        cn('_p-2 _transition', hover ? '_opacity-100' : '_opacity-80')
+      }
       onClick={() => {
         try {
-          localStorage.setItem(storageKey, '0')
+          localStorage.setItem(storageKey, '1')
         } catch {
           /* ignore */
         }
@@ -24,6 +27,6 @@ export function CloseBannerButton({
       }}
     >
       {children}
-    </button>
+    </Button>
   )
 }

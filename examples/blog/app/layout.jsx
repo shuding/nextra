@@ -1,4 +1,5 @@
 import { Footer, Head, Layout, Navbar, ThemeSwitch } from 'nextra-theme-blog'
+import { Banner, Search } from 'nextra/components'
 import 'nextra-theme-blog/style.css'
 
 export const metadata = {
@@ -15,6 +16,12 @@ export default async function RootLayout({ children }) {
         }}
       />
       <body>
+        <Banner storageKey="4.0-release">
+          <a href="https://nextra.site" target="_blank" rel="noreferrer">
+            🎉 Nextra 4.0 is released. Read more →
+          </a>
+        </Banner>
+
         <Layout>
           <Navbar
             navs={[
@@ -22,6 +29,7 @@ export default async function RootLayout({ children }) {
               { url: '/posts', name: 'Posts' }
             ]}
           >
+            <Search />
             <ThemeSwitch />
           </Navbar>
 

@@ -1,77 +1,49 @@
 'use client'
 
-import { createContext, memo, useCallback, useContext, useState } from 'react'
-import type { ReactElement, ReactNode } from 'react'
+import { Button } from '@headlessui/react'
+import cn from 'clsx'
+import { memo, useCallback, useState } from 'react'
+import type { ReactNode } from 'react'
+import { FolderIcon, FolderOpenIcon } from '../../icons/index.js'
+import type { FileProps } from './file.js'
 
-const ctx = createContext(0)
-
-function useIndent() {
-  return useContext(ctx)
-}
-
-type FolderProps = {
-  name: string
-  label?: ReactElement
+type FolderProps = FileProps & {
   open?: boolean
   defaultOpen?: boolean
-  onToggle?: (open: boolean) => void
   children: ReactNode
 }
 
-export function Indent(): ReactElement[] {
-  const length = useIndent()
-  return Array.from({ length }, (_, index) => (
-    // Text can shrink indent
-    <span className="_w-5 _shrink-0" key={index} />
-  ))
-}
-
 export const Folder = memo<FolderProps>(
-  ({ label, name, open, children, defaultOpen = false, onToggle }) => {
-    const indent = useIndent()
+  ({ name, open, children, defaultOpen = false, active }) => {
     const [isOpen, setIsOpen] = useState(defaultOpen)
 
     const toggle = useCallback(() => {
-      onToggle?.(!isOpen)
-      setIsOpen(!isOpen)
-    }, [isOpen, onToggle])
+      setIsOpen(v => !v)
+    }, [])
 
     const isFolderOpen = open === undefined ? isOpen : open
 
+    const ComponentToUse = isFolderOpen ? FolderOpenIcon : FolderIcon
+
     return (
-      <li className="_flex _list-none _flex-col">
-        <button
+      <li className="_flex _flex-col _gap-1">
+        <Button
           onClick={toggle}
-          title={name}
-          className="_flex _items-center _py-1 hover:_opacity-60"
+          className={({ hover }) =>
+            cn(
+              '_flex _items-center _gap-1 _break-all _transition',
+              '_text-left', // override browser default
+              hover && '_opacity-60',
+              active && '_text-primary-600'
+            )
+          }
         >
-          <Indent />
-          <svg
-            width="1em"
-            height="1em"
-            viewBox="0 0 24 24"
-            // Text can shrink icon
-            className="_shrink-0"
-          >
-            <path
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d={
-                isFolderOpen
-                  ? 'M5 19a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4l2 2h4a2 2 0 0 1 2 2v1M5 19h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2Z'
-                  : 'M3 7v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-6l-2-2H5a2 2 0 0 0-2 2Z'
-              }
-            />
-          </svg>
-          <span className="_ms-1">{label ?? name}</span>
-        </button>
+          {/* Text can shrink icon */}
+          <ComponentToUse height="14" className="_shrink-0" />
+          {name}
+        </Button>
         {isFolderOpen && (
-          <ul>
-            <ctx.Provider value={indent + 1}>{children}</ctx.Provider>
-          </ul>
+          <ul className="_flex _flex-col _gap-2 _ps-4">{children}</ul>
         )}
       </li>
     )

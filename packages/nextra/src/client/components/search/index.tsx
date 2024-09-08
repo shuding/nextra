@@ -1,13 +1,11 @@
 'use client'
 
-import cn from 'clsx'
 import type { Document } from 'flexsearch'
-import type { SearchData } from 'nextra'
 import type { ReactElement, ReactNode } from 'react'
 import { useCallback, useState } from 'react'
-import type { SearchResult } from '../../types'
-import { HighlightMatches } from './highlight-matches'
-import { Search } from './search'
+import type { SearchData } from '../../../types.js'
+import type { SearchResult } from './search.js'
+import { Search } from './search.js'
 
 type SectionIndex = Document<
   {
@@ -30,18 +28,15 @@ type PageIndex = Document<
   ['title']
 >
 
-type Result = {
+type Result = Omit<SearchResult, 'id'> & {
   _page_rk: number
   _section_rk: number
-  route: string
-  prefix: ReactNode
-  children: ReactNode
 }
 
 // This can be global for better caching.
 const indexes: {
   [locale: string]: [PageIndex, SectionIndex]
-} = {}
+} = Object.create(null)
 
 // Caches promises that load the index
 const loadIndexesPromises = new Map<string, Promise<void>>()
@@ -147,13 +142,14 @@ export type FlexsearchProps = {
   errorText?: string
   loading?: ReactNode
   placeholder?: string
+  className?: string
 }
 
 export function Flexsearch(props: FlexsearchProps): ReactElement {
   const locale = 'en-US'
   const basePath = ''
   const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState(false)
+  const [hasError, setHasError] = useState(false)
   const [results, setResults] = useState<SearchResult[]>([])
   const [search, setSearch] = useState('')
 
@@ -203,28 +199,9 @@ export function Flexsearch(props: FlexsearchProps): ReactElement {
           _page_rk: i,
           _section_rk: j,
           route: url,
-          prefix: isFirstItemOfPage && (
-            <div
-              className={cn(
-                '_mx-2.5 _mb-2 [&:not(:first-child)]:_mt-6 _select-none _border-b _border-black/10 _px-2.5 _pb-1.5 _text-xs _font-semibold _uppercase _text-gray-500 dark:_border-white/20 dark:_text-gray-300',
-                'contrast-more:_border-gray-600 contrast-more:_text-gray-900 contrast-more:dark:_border-gray-50 contrast-more:dark:_text-gray-50'
-              )}
-            >
-              {result.doc.title}
-            </div>
-          ),
-          children: (
-            <>
-              <div className="_text-base _font-semibold _leading-5">
-                <HighlightMatches match={search} value={title} />
-              </div>
-              {content && (
-                <div className="excerpt _mt-1 _text-sm _leading-[1.35rem] _text-gray-600 dark:_text-gray-400 contrast-more:dark:_text-gray-50">
-                  <HighlightMatches match={search} value={content} />
-                </div>
-              )}
-            </>
-          )
+          prefix: isFirstItemOfPage ? result.doc.title : undefined,
+          title,
+          content
         })
         isFirstItemOfPage = false
       }
@@ -242,39 +219,36 @@ export function Flexsearch(props: FlexsearchProps): ReactElement {
           }
           return a._page_rk - b._page_rk
         })
-        .map(res => ({
-          id: `${res._page_rk}_${res._section_rk}`,
-          route: res.route,
-          prefix: res.prefix,
-          children: res.children
+        .map(({ _page_rk: pageRank, _section_rk: sectionRank, ...res }) => ({
+          id: `${pageRank}_${sectionRank}`,
+          ...res
         }))
     )
   }
 
-  const preload = useCallback(async () => {
-    if (indexes[locale]) return
-    setIsLoading(true)
-    try {
-      await loadIndexes(basePath, locale)
-    } catch {
-      setError(true)
-    }
-    setIsLoading(false)
-  }, [locale, basePath])
-
-  const handleChange = (value: string) => {
-    setSearch(value)
-    if (isLoading) return
-    doSearch(value)
-  }
+  const handleChange = useCallback(
+    async (value: string) => {
+      setSearch(value)
+      if (!indexes[locale]) {
+        setIsLoading(true)
+        try {
+          await loadIndexes(basePath, locale)
+        } catch {
+          setHasError(true)
+        }
+        setIsLoading(false)
+      }
+      doSearch(value)
+    },
+    [locale, basePath]
+  )
 
   return (
     <Search
       isLoading={isLoading}
-      error={error}
+      error={hasError}
       value={search}
       onChange={handleChange}
-      onActive={preload}
       results={results}
       {...props}
     />
