@@ -65,6 +65,7 @@ export const mathJaxOptionsSchema = z
      */
     config: z.custom<MathJax3Config>()
   })
+  // eslint-disable-next-line deprecation/deprecation -- fixme
   .deepPartial()
   .optional()
 
@@ -107,6 +108,7 @@ export const nextraConfigSchema = z
     }),
     mdxBaseDir: z.string().optional()
   })
+  // eslint-disable-next-line deprecation/deprecation -- fixme
   .deepPartial()
 
 export const pageThemeSchema = z.strictObject({
@@ -156,6 +158,7 @@ const itemSchema = linkItemSchema
     title: titleSchema,
     type: z.enum(['page', 'doc'])
   })
+  // eslint-disable-next-line deprecation/deprecation -- fixme
   .deepPartial()
 
 export const metaSchema = z

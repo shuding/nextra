@@ -28,7 +28,7 @@ export function Breadcrumb({
         return (
           <Fragment key={item.route + item.name}>
             {index > 0 && (
-              <ArrowRightIcon className="_w-3.5 _shrink-0 rtl:_rotate-180" />
+              <ArrowRightIcon className="_h-3.5 _shrink-0 rtl:_rotate-180" />
             )}
             <ComponentToUse
               className={cn(

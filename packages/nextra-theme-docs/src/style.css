@@ -10,12 +10,17 @@
 @import '../css/typesetting-article.css';
 
 html {
-  @apply _antialiased _text-base _scroll-pt-[--nextra-navbar-height];
+  @apply _antialiased _text-base;
   font-feature-settings:
     'rlig' 1,
     'calt' 1,
     'ss01' 1;
   -webkit-tap-highlight-color: transparent;
+}
+
+/* adding `:not` with `:has` otherwise page jumps while focusing or while tapping in input https://github.com/shuding/nextra/issues/2840 */
+html:not(:has(*:focus)) {
+  @apply _scroll-pt-[--nextra-navbar-height];
 }
 
 body {
@@ -184,12 +189,10 @@ body,
 
 .nextra-search-results {
   @apply _border _border-gray-200 _text-gray-100 dark:_border-neutral-800;
-  @apply _absolute _top-full _z-20 _mt-2 _overflow-auto _overscroll-contain _rounded-xl _py-2.5 _shadow-xl;
-  @apply _max-h-[min(calc(50vh-11rem-env(safe-area-inset-bottom)),400px)];
-  @apply md:_max-h-[min(calc(100vh-5rem-env(safe-area-inset-bottom)),400px)];
-  @apply _inset-x-0 md:_start-auto;
+  @apply _z-20 _rounded-xl _py-2.5 _shadow-xl;
   @apply contrast-more:_border contrast-more:_border-gray-900 contrast-more:dark:_border-gray-50;
   @apply _backdrop-blur-lg _bg-[rgb(var(--nextra-bg),.8)];
+  @apply motion-reduce:_transition-none _transition-opacity data-[closed]:_opacity-0 data-[open]:_opacity-100;
 }
 
 .nextra-skip-nav {

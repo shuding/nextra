@@ -17,7 +17,6 @@
   },
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.5.4",
-    "intersection-observer": "^0.10.0",
     "markdown-to-jsx": "^6.11.4",
     "negotiator": "^0.6.3",
     "next": "^14.2.5",

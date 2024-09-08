@@ -30,10 +30,11 @@
     "@typescript-eslint/parser": "8.0.0",
     "eslint": "9.8.0",
     "eslint-config-prettier": "9.1.0",
+    "eslint-plugin-deprecation": "3.0.0",
     "eslint-plugin-import": "2.29.1",
     "eslint-plugin-react": "7.35.0",
     "eslint-plugin-react-hooks": "5.1.0-rc-14a4699f-20240725",
-    "eslint-plugin-sonarjs": "^1.0.4-alpha.1",
+    "eslint-plugin-sonarjs": "^2.0.0",
     "eslint-plugin-tailwindcss": "3.17.3",
     "eslint-plugin-typescript-sort-keys": "3.2.0",
     "eslint-plugin-unicorn": "55.0.0",
@@ -41,21 +42,21 @@
     "prettier-plugin-pkg": "0.18.1",
     "prettier-plugin-tailwindcss": "0.6.5",
     "rimraf": "6.0.1",
-    "tsup": "8.1.0",
+    "tsup": "8.2.4",
     "tsx": "^4.7.0",
-    "turbo": "2.0.12",
+    "turbo": "2.1.1",
     "typescript": "5.5.4"
   },
   "pnpm": {
     "overrides": {
       "vite": "5.4.2",
-      "esbuild": "0.23.0",
-      "next": "14.1.4"
+      "esbuild": "0.23.1",
+      "next": "14.2.5"
     },
     "patchedDependencies": {
       "@changesets/assemble-release-plan@6.0.3": "patches/@changesets__assemble-release-plan@6.0.3.patch",
-      "tsup@8.1.0": "patches/tsup@8.0.1.patch",
-      "next@14.1.4": "patches/next@13.5.6.patch"
+      "tsup@8.2.4": "patches/tsup.patch",
+      "eslint-plugin-deprecation@3.0.0": "patches/eslint-plugin-deprecation@3.0.0.patch"
     }
   }
 }

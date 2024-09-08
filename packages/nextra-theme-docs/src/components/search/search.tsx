@@ -1,19 +1,18 @@
 'use client'
 
-import { Transition } from '@headlessui/react'
+import {
+  Combobox,
+  ComboboxInput,
+  ComboboxOption,
+  ComboboxOptions
+} from '@headlessui/react'
 import cn from 'clsx'
 // eslint-disable-next-line no-restricted-imports -- since we don't need newWindow prop
 import NextLink from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useMounted } from 'nextra/hooks'
 import { InformationCircleIcon, SpinnerIcon } from 'nextra/icons'
-import type {
-  ChangeEvent,
-  CompositionEvent,
-  FocusEventHandler,
-  KeyboardEvent,
-  ReactElement
-} from 'react'
+import type { FocusEventHandler, ReactElement, SyntheticEvent } from 'react'
 import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
 import { useMenu } from '../../contexts'
 import type { SearchResult } from '../../types'
@@ -23,7 +22,6 @@ import type { FlexsearchProps } from './index'
 
 type SearchProps = FlexsearchProps & {
   className?: string
-  overlayClassName?: string
   value: string
   onChange: (newValue: string) => void
   onActive?: () => void
@@ -32,13 +30,12 @@ type SearchProps = FlexsearchProps & {
   results: SearchResult[]
 }
 
-const INPUTS = ['input', 'select', 'button', 'textarea']
+const INPUTS = new Set(['input', 'select', 'button', 'textarea'])
 
 export function Search({
   className,
-  overlayClassName,
   value,
-  onChange: onChangeProp,
+  onChange,
   onActive,
   isLoading,
   error,
@@ -59,33 +56,29 @@ export function Search({
   const input = useRef<HTMLInputElement>(null)
   const ulRef = useRef<HTMLUListElement>(null)
   const [focused, setFocused] = useState(false)
+  const mounted = useMounted()
+  const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
-    setActive(0)
-  }, [value])
-
-  useEffect(() => {
-    const down = (e: globalThis.KeyboardEvent): void => {
+    function down(event: globalThis.KeyboardEvent) {
+      const input = inputRef.current
       const activeElement = document.activeElement as HTMLElement
       const tagName = activeElement?.tagName.toLowerCase()
       if (
-        !input.current ||
+        !input ||
         !tagName ||
-        INPUTS.includes(tagName) ||
+        INPUTS.has(tagName) ||
         activeElement?.isContentEditable
       )
         return
       if (
-        e.key === '/' ||
-        (e.key === 'k' &&
-          (e.metaKey /* for Mac */ || /* for non-Mac */ e.ctrlKey))
+        event.key === '/' ||
+        (event.key === 'k' &&
+          (event.metaKey /* for Mac */ || /* for non-Mac */ event.ctrlKey))
       ) {
-        e.preventDefault()
+        event.preventDefault()
         // prevent to scroll to top
-        input.current.focus({ preventScroll: true })
-      } else if (e.key === 'Escape') {
-        setShow(false)
-        input.current.blur()
+        input.focus({ preventScroll: true })
       }
     }
 
@@ -95,242 +88,130 @@ export function Search({
     }
   }, [])
 
-  const clearValue = useCallback(() => {
-    onChangeProp('')
-  }, [onChangeProp])
-  const finishSearch = useCallback(() => {
-    input.current?.blur()
-    clearValue()
-    setShow(false)
-    setMenu(false)
-  }, [clearValue, setMenu])
-
-  const handleActive = useCallback(
-    (e: { currentTarget: { dataset: DOMStringMap } }) => {
-      const { index } = e.currentTarget.dataset
-      setActive(Number(index))
-    },
-    []
-  )
-
-  const handleKeyDown = useCallback(
-    <T,>(e: KeyboardEvent<T>) => {
-      // skip the character selection process in the IME for CJK language users.
-      if (e.nativeEvent.isComposing) return
-
-      switch (e.key) {
-        case 'ArrowDown': {
-          if (active + 1 < results.length) {
-            const el = ulRef.current?.querySelector<HTMLAnchorElement>(
-              `li:nth-of-type(${active + 2}) > a`
-            )
-            if (el) {
-              e.preventDefault()
-              handleActive({ currentTarget: el })
-              el.focus()
-            }
-          }
-          break
-        }
-        case 'ArrowUp': {
-          if (active - 1 >= 0) {
-            const el = ulRef.current?.querySelector<HTMLAnchorElement>(
-              `li:nth-of-type(${active}) > a`
-            )
-            if (el) {
-              e.preventDefault()
-              handleActive({ currentTarget: el })
-              el.focus()
-            }
-          }
-          break
-        }
-        case 'Enter': {
-          const result = results[active]
-          if (result) {
-            void router.push(result.route)
-            finishSearch()
-          }
-          break
-        }
-        case 'Escape': {
-          setShow(false)
-          input.current?.blur()
-          break
-        }
-      }
-    },
-    [active, results, router, finishSearch, handleActive]
-  )
-
-  const mounted = useMounted()
-  const renderList = show && Boolean(value)
-
-  const icon = (
-    <Transition
-      show={mounted && (!show || Boolean(value))}
-      as={Fragment}
-      enter="_transition-opacity"
-      enterFrom="_opacity-0"
-      enterTo="_opacity-100"
-      leave="_transition-opacity"
-      leaveFrom="_opacity-100"
-      leaveTo="_opacity-0"
+  const icon = mounted && !focused && (
+    <kbd
+      className={cn(
+        '_absolute _my-1.5 _select-none _end-1.5',
+        '_h-5 _rounded _bg-white _px-1.5 _font-mono _text-[11px] _font-medium _text-gray-500',
+        '_border dark:_border-gray-100/20 dark:_bg-black/50',
+        'contrast-more:_border-current contrast-more:_text-current contrast-more:dark:_border-current',
+        '_items-center _gap-1 _flex',
+        'max-sm:_hidden'
+      )}
     >
-      <kbd
-        className={cn(
-          '_absolute _my-1.5 _select-none _end-1.5',
-          '_h-5 _rounded _bg-white _px-1.5 _font-mono _text-[10px] _font-medium _text-gray-500',
-          '_border dark:_border-gray-100/20 dark:_bg-black/50',
-          'contrast-more:_border-current contrast-more:_text-current contrast-more:dark:_border-current',
-          '_items-center _gap-1 _transition-opacity _flex',
-          value
-            ? '_z-20 _cursor-pointer hover:_opacity-70'
-            : '_pointer-events-none max-sm:_hidden'
-        )}
-        title={value ? 'Clear' : undefined}
-        onClick={clearValue}
-      >
-        {value && focused
-          ? 'ESC'
-          : mounted &&
-            (navigator.userAgent.includes('Macintosh') ? (
-              <>
-                <span className="_text-xs">⌘</span>K
-              </>
-            ) : (
-              'CTRL K'
-            ))}
-      </kbd>
-    </Transition>
+      {navigator.userAgent.includes('Mac') ? (
+        <>
+          <span className="_text-xs">⌘</span>K
+        </>
+      ) : (
+        'CTRL K'
+      )}
+    </kbd>
   )
 
   const handleFocus = useCallback<FocusEventHandler>(
     event => {
       const isFocus = event.type === 'focus'
-      const htmlStyle = document.documentElement.style
-      // Fixes page scroll jump https://github.com/shuding/nextra/issues/2840
-      htmlStyle.scrollPaddingTop = isFocus ? '0' : 'var(--nextra-navbar-height)'
       if (isFocus) onActive?.()
       setFocused(isFocus)
     },
     [onActive]
   )
 
-  // To handle CJK language users, refer to the following approach: https://github.com/SukkaW/foxact/commit/fe17304b410cddc4803d4fdbebf3cd5ecb070618
-  // An explicit explanation can be found here: https://github.com/SukkaW/foxact/blob/2b54157187d33ef873c1ab4a9b8700dfdb2e7288/docs/src/pages/use-composition-input.mdx
-  const compositionStateRef = useRef({
-    compositioning: false,
-    emitted: false
-  })
   const handleChange = useCallback(
-    (e: ChangeEvent<HTMLInputElement> | CompositionEvent<HTMLInputElement>) => {
-      if (!compositionStateRef.current.compositioning) {
-        const { value } = e.target as HTMLInputElement
-        onChangeProp(value)
-        setShow(Boolean(value))
-        compositionStateRef.current.emitted = true
-        return
-      }
-      compositionStateRef.current.emitted = false
+    (event: SyntheticEvent<HTMLInputElement>) => {
+      const { value } = event.currentTarget
+      onChange(value)
     },
-    [onChangeProp]
+    [onChange]
   )
 
-  const handleCompositionStart = useCallback(() => {
-    compositionStateRef.current.compositioning = true
-    compositionStateRef.current.emitted = false
-  }, [])
-
-  const handleCompositionEnd = useCallback(
-    (e: CompositionEvent<HTMLInputElement>) => {
-      compositionStateRef.current.compositioning = false
-      if (!compositionStateRef.current.emitted) {
-        handleChange(e)
-      }
+  const handleSelect = useCallback(
+    async (searchResult: SearchResult | null) => {
+      if (!searchResult) return
+      // Calling before navigation so selector `html:not(:has(*:focus))` in styles.css will work,
+      // and we'll have padding top since input is not focused
+      inputRef.current?.blur()
+      await router.push(searchResult.route)
+      // Clear input after navigation completes
+      setMenu(false)
+      onChange('')
     },
-    [handleChange]
+    [router, setMenu, onChange]
   )
+
+  // const [selected, setSelected] = useState<SearchResult | null>(null)
+  //
+  // useEffect(() => {
+  //   setSelected(results[0] || null)
+  // }, [results])
 
   return (
-    <div className={cn('nextra-search _relative md:_w-64', className)}>
-      {renderList && (
-        <div className="_fixed _inset-0 _z-10" onClick={() => setShow(false)} />
-      )}
-
-      <Input
-        ref={input}
-        onCompositionStart={handleCompositionStart}
-        onCompositionEnd={handleCompositionEnd}
+    <Combobox
+      as="div"
+      // value={selected}
+      onChange={handleSelect}
+      className={cn('nextra-search _relative md:_w-64', className)}
+    >
+      <ComboboxInput
+        ref={inputRef}
+        as={Input}
+        autoComplete="off"
+        value={value}
         onChange={handleChange}
         onFocus={handleFocus}
         onBlur={handleFocus}
         type="search"
         placeholder={placeholder}
-        onKeyDown={handleKeyDown}
         suffix={icon}
       />
-
-      <Transition
-        show={renderList}
-        // Transition.Child is required here, otherwise popup will be still present in DOM after focus out
-        as={Transition.Child}
-        leave="_transition-opacity _duration-100"
-        leaveFrom="_opacity-100"
-        leaveTo="_opacity-0"
+      <ComboboxOptions
+        transition
+        anchor={{ to: 'top end', gap: 10, padding: 16 }}
+        className={cn(
+          'nextra-search-results nextra-scrollbar max-md:_h-full',
+          error || loading || !results.length
+            ? 'md:_h-[100px]'
+            : // headlessui adds max-height as style, use !important to override
+              'md:!_max-h-[min(calc(100vh-5rem),400px)]',
+          '_w-[--input-width] md:_w-[576px]',
+          'empty:_invisible'
+        )}
       >
-        <ul
-          className={cn(
-            'nextra-search-results nextra-scrollbar',
-            overlayClassName
-          )}
-          ref={ulRef}
-          style={{
-            transition: 'max-height .2s ease' // don't work with tailwindcss
-          }}
-        >
-          {error ? (
-            <span className="_flex _select-none _justify-center _gap-2 _p-8 _text-center _text-sm _text-red-500">
-              <InformationCircleIcon className="_size-5" />
-              {errorText}
-            </span>
-          ) : isLoading ? (
-            <span className="_flex _select-none _justify-center _gap-2 _p-8 _text-center _text-sm _text-gray-400">
-              <SpinnerIcon className="_size-5 _animate-spin" />
-              {renderComponent(loading)}
-            </span>
-          ) : results.length > 0 ? (
-            results.map(({ route, prefix, children, id }, i) => (
-              <Fragment key={id}>
-                {prefix}
-                <li
-                  className={cn(
-                    '_mx-2.5 _break-words _rounded-md',
-                    'contrast-more:_border',
-                    i === active
-                      ? '_bg-primary-500/10 _text-primary-600 contrast-more:_border-primary-500'
-                      : '_text-gray-800 contrast-more:_border-transparent dark:_text-gray-300'
-                  )}
-                >
-                  <NextLink
-                    className="_block _scroll-m-12 _px-2.5 _py-2"
-                    href={route}
-                    data-index={i}
-                    onFocus={handleActive}
-                    onMouseMove={handleActive}
-                    onClick={finishSearch}
-                    onKeyDown={handleKeyDown}
-                  >
-                    {children}
-                  </NextLink>
-                </li>
-              </Fragment>
-            ))
-          ) : (
-            renderComponent(emptyResult)
-          )}
-        </ul>
-      </Transition>
-    </div>
+        {error ? (
+          <span className="_flex _select-none _justify-center _gap-2 _p-8 _text-center _text-sm _text-red-500">
+            <InformationCircleIcon className="_size-5" />
+            {errorText}
+          </span>
+        ) : isLoading ? (
+          <span className="_flex _select-none _justify-center _gap-2 _p-8 _text-center _text-sm _text-gray-400">
+            <SpinnerIcon className="_size-5 _animate-spin" />
+            {renderComponent(loading)}
+          </span>
+        ) : results.length ? (
+          results.map(searchResult => (
+            <Fragment key={searchResult.id}>
+              {searchResult.prefix}
+              <ComboboxOption
+                as={NextLink}
+                value={searchResult}
+                href={searchResult.route}
+                className={cn(
+                  '_mx-2.5 _break-words _rounded-md',
+                  'contrast-more:_border',
+                  'data-[focus]:_ring data-[focus]:_bg-primary-500/10 data-[focus]:!_text-primary-600 data-[focus]:contrast-more:_border-primary-500',
+                  '_text-gray-800 contrast-more:_border-transparent dark:_text-gray-300',
+                  '_block _scroll-m-12 _px-2.5 _py-2'
+                )}
+              >
+                {searchResult.children}
+              </ComboboxOption>
+            </Fragment>
+          ))
+        ) : (
+          value && renderComponent(emptyResult)
+        )}
+      </ComboboxOptions>
+    </Combobox>
   )
 }

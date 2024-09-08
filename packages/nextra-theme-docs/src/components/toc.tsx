@@ -43,9 +43,7 @@ export function TOC({ toc, filePath, pageTitle }: TOCProps): ReactElement {
 
   useEffect(() => {
     if (!activeSlug) return
-    const anchor = tocRef.current!.children[1]?.querySelector(
-      `a[href="#${activeSlug}"]`
-    )
+    const anchor = tocRef.current?.querySelector(`a[href="#${activeSlug}"]`)
 
     if (anchor) {
       scrollIntoView(anchor, {
@@ -53,7 +51,7 @@ export function TOC({ toc, filePath, pageTitle }: TOCProps): ReactElement {
         block: 'center',
         inline: 'center',
         scrollMode: 'always',
-        boundary: tocRef.current
+        boundary: tocRef.current!.parentElement
       })
     }
   }, [activeSlug])
@@ -61,17 +59,16 @@ export function TOC({ toc, filePath, pageTitle }: TOCProps): ReactElement {
   return (
     <div
       className={cn(
-        'nextra-scrollbar _sticky _top-16 _overflow-y-auto _pt-6 _text-sm [hyphens:auto]',
-        '_max-h-[calc(100vh-var(--nextra-navbar-height)-env(safe-area-inset-bottom))] _-me-4 _pe-4'
+        'nextra-scrollbar _sticky _top-16 _overflow-y-auto _px-4 _pt-6 _text-sm [hyphens:auto]',
+        '_max-h-[calc(100vh-var(--nextra-navbar-height)-env(safe-area-inset-bottom))] _-me-4'
       )}
-      ref={tocRef}
     >
       {hasHeadings && (
         <>
           <p className="_mb-4 _font-semibold _tracking-tight">
             {renderComponent(themeConfig.toc.title)}
           </p>
-          <ul>
+          <ul ref={tocRef}>
             {toc.map(({ id, value, depth }) => (
               <li className="_my-2 _scroll-my-6 _scroll-py-6" key={id}>
                 <a
@@ -79,16 +76,16 @@ export function TOC({ toc, filePath, pageTitle }: TOCProps): ReactElement {
                   className={cn(
                     {
                       2: '_font-semibold',
-                      3: '_ps-4',
-                      4: '_ps-8',
-                      5: '_ps-12',
-                      6: '_ps-16'
+                      3: '_ms-4',
+                      4: '_ms-8',
+                      5: '_ms-12',
+                      6: '_ms-16'
                     }[depth],
-                    '_inline-block _transition-colors _subpixel-antialiased',
+                    '_block _transition-colors _subpixel-antialiased',
                     activeAnchor[id]?.isActive
                       ? '_text-primary-600 contrast-more:!_text-primary-600'
                       : '_text-gray-500 hover:_text-gray-900 dark:_text-gray-400 dark:hover:_text-gray-300',
-                    'contrast-more:_text-gray-900 contrast-more:_underline contrast-more:dark:_text-gray-50 _w-full _break-words'
+                    'contrast-more:_text-gray-900 contrast-more:_underline contrast-more:dark:_text-gray-50 _break-words'
                   )}
                 >
                   {value}
@@ -103,7 +100,8 @@ export function TOC({ toc, filePath, pageTitle }: TOCProps): ReactElement {
         <div
           className={cn(
             hasHeadings && 'nextra-toc-footer _mt-8 _pt-8',
-            '_sticky _bottom-0 _flex _flex-col _items-start _gap-2 _pb-8'
+            '_sticky _bottom-0 _flex _flex-col _items-start _gap-2 _pb-8',
+            '_-mx-1 _px-1' // to hide focused toc links
           )}
         >
           {themeConfig.feedback.content ? (

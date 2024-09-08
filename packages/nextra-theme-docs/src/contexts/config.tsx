@@ -5,7 +5,7 @@ import type { Heading, PageMapItem } from 'nextra'
 import { useFSRoute } from 'nextra/hooks'
 import { normalizePages } from 'nextra/normalize-pages'
 import type { ReactElement, ReactNode } from 'react'
-import { createContext, useContext, useMemo, useState } from 'react'
+import { createContext, useContext, useMemo, useState, useEffect } from 'react'
 import { MenuProvider } from './menu'
 
 type Config = {
@@ -58,9 +58,16 @@ export function ConfigProvider({
     setTOC
   }
 
+  useEffect(() => {
+    // Lock background scroll when menu is opened
+    document.body.classList.toggle('_overflow-hidden', menu)
+  }, [menu])
+
+  const value = useMemo(() => ({ menu, setMenu }), [menu])
+
   return (
     <ConfigContext.Provider value={extendedConfig}>
-      <MenuProvider value={{ menu, setMenu }}>
+      <MenuProvider value={value}>
         {activeThemeContext.navbar && navbar}
         {children}
         {activeThemeContext.footer && footer}

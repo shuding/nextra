@@ -158,7 +158,10 @@ export function Flexsearch(props: FlexsearchProps): ReactElement {
   const [search, setSearch] = useState('')
 
   const doSearch = (search: string) => {
-    if (!search) return
+    if (!search) {
+      setResults([])
+      return
+    }
     const [pageIndex, sectionIndex] = indexes[locale]
 
     // Show the results for the top 5 pages
@@ -272,7 +275,6 @@ export function Flexsearch(props: FlexsearchProps): ReactElement {
       value={search}
       onChange={handleChange}
       onActive={preload}
-      overlayClassName="_w-screen _min-h-[100px] _max-w-[min(calc(100vw-2rem),calc(100%+20rem))]"
       results={results}
       {...props}
     />

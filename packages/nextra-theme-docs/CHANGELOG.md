@@ -1,5 +1,29 @@
 # nextra-theme-docs
 
+## 3.0.0-alpha.36
+
+### Patch Changes
+
+- 34e25cd: migrate search to `@headlessui/react` Combobox
+- 57f3963: Remove intersection-observer polyfill
+- 2b9b95b: migrate to `@headlessui/react` v2
+- Updated dependencies [2b9b95b]
+  - nextra@3.0.0-alpha.36
+
+## 3.0.0-alpha.35
+
+### Patch Changes
+
+- 0b4d43b: Avoid the sidebar collapse having unintended animations when
+  `sidebar.autoCollapse` is set to `true`.
+- 452e5bd: Add `<Playground />` component
+
+  https://nextra-v2-9x7fp6hti-shud.vercel.app/docs/guide/advanced/playground
+
+- f662237: avoid focus-visible style being cut off by overflow-hidden
+- Updated dependencies [f662237]
+  - nextra@3.0.0-alpha.35
+
 ## 3.0.0-alpha.34
 
 ### Patch Changes
