@@ -1,5 +1,14 @@
 # nextra-theme-blog
 
+## 3.0.0-alpha.37
+
+### Patch Changes
+
+- 2a3e3e7: Fix first list item in `<FileTree>` not within permitted parent
+  elements
+- Updated dependencies [2a3e3e7]
+  - nextra@3.0.0-alpha.37
+
 ## 3.0.0-alpha.36
 
 ### Patch Changes
