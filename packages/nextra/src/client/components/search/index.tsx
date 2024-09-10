@@ -19,8 +19,15 @@ export function Flexsearch(props: FlexsearchProps): ReactElement {
   const [results, setResults] = useState<SearchResult[]>([])
   const [search, setSearch] = useState('')
 
-  async function handleSearch(newValue: string) {
-    setSearch(newValue)
+  async function handleSearch(value: string) {
+    setSearch(value)
+
+    if (!value) {
+      setResults([])
+      setError(null)
+      return
+    }
+
     if (!window.pagefind) {
       setIsLoading(true)
       setError(null)
@@ -29,13 +36,17 @@ export function Flexsearch(props: FlexsearchProps): ReactElement {
           // @ts-expect-error pagefind.js generated after build
           /* webpackIgnore: true */ './pagefind/pagefind.js'
         )
+        await window.pagefind.options({
+          baseUrl: '/'
+          // ... more search options
+        })
       } catch (error) {
         setError(error as Error)
         setIsLoading(false)
         return
       }
     }
-    const { results } = await window.pagefind.search(newValue)
+    const { results } = await window.pagefind.search(value)
     setResults(results)
     setIsLoading(false)
   }

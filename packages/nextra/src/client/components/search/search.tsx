@@ -230,13 +230,11 @@ function Result({ result }: { result: SearchResult }) {
       .data()
       .then(newData => ({
         ...newData,
-        sub_results: newData.sub_results.map(r => ({
-          ...r,
-          url: r.url
-            .replace('/_next/static/chunks/app', '')
-            .replace(/\.html$/, '')
-            .replace(/\.html#/, '#')
-        }))
+        sub_results: newData.sub_results.map(r => {
+          const url = r.url.replace(/\.html$/, '').replace(/\.html#/, '#')
+
+          return { ...r, url }
+        })
       }))
       .then(setData)
   }, [result])
