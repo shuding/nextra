@@ -10,6 +10,7 @@
     "clean": "rimraf .next .turbo",
     "debug": "NODE_OPTIONS='--inspect' next dev",
     "dev": "next",
+    "postbuild": "pagefind --site .next/server/pages --output-path .next/static/chunks/pages/pagefind",
     "prebuild": "node nextra-remote-filepaths/fetch.js",
     "predev": "pnpm prebuild",
     "start": "next start",
