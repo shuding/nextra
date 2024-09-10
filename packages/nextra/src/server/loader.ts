@@ -48,7 +48,6 @@ export async function loader(
     isPageImport = false,
     isPageMapImport,
     defaultShowCopyCode,
-    search,
     staticImage,
     readingTime: _readingTime,
     latex,
@@ -93,8 +92,6 @@ export async function loader(
     result,
     title,
     frontMatter,
-    structurizedData,
-    searchIndexKey,
     readingTime
   } = await compileMdx(source, {
     mdxOptions: {
@@ -106,27 +103,12 @@ export async function loader(
     readingTime: _readingTime,
     defaultShowCopyCode,
     staticImage,
-    search,
     latex,
     codeHighlight,
-    route,
-    locale,
     filePath: mdxPath,
     useCachedCompiler: true,
     isPageImport
   })
-  if (searchIndexKey) {
-    // Store all the things in buildInfo.
-    const { buildInfo } = this._module as any
-    buildInfo.nextraSearch = {
-      indexKey: searchIndexKey,
-      ...(frontMatter.searchable !== false && {
-        title,
-        data: structurizedData,
-        route
-      })
-    }
-  }
   // Imported as a normal component, no need to add the layout.
   if (!isPageImport) {
     return `${result}
