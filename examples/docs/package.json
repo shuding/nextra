@@ -5,6 +5,7 @@
   "scripts": {
     "build": "next build",
     "clean": "rimraf .next .turbo",
+    "postbuild": "pagefind --site .next/server/app --output-path .next/static/chunks/app/pagefind",
     "dev": "next",
     "start": "next start"
   },
