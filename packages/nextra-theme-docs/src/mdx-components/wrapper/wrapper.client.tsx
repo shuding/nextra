@@ -91,6 +91,7 @@ export function ClientWrapper({
   const mainEl =
     themeContext.layout === 'full' ? (
       <article
+        data-pagefind-body
         className={cn(
           classes.main,
           'nextra-content _pl-[max(env(safe-area-inset-left),1.5rem)] _pr-[max(env(safe-area-inset-right),1.5rem)]'
@@ -107,7 +108,10 @@ export function ClientWrapper({
             'nextra-body-typesetting-article'
         )}
       >
-        <main className="_w-full _min-w-0 _max-w-6xl _px-6 _pt-4 md:_px-12">
+        <main
+          data-pagefind-body
+          className="_w-full _min-w-0 _max-w-6xl _px-6 _pt-4 md:_px-12"
+        >
           {activeType !== 'page' && themeContext.breadcrumb && (
             <Breadcrumb activePath={activePath} />
           )}
