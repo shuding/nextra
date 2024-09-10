@@ -18,11 +18,22 @@ import { HighlightMatches } from './highlight-matches.js'
 import type { FlexsearchProps } from './index.js'
 
 export type SearchResult = {
+  data: () => Promise<PagefindResult>
   id: string
-  prefix?: string
-  title: string
-  content?: string
-  route: string
+}
+
+type PagefindResult = {
+  excerpt: string
+  meta: {
+    title: string
+  }
+  raw_url: string
+  sub_results: {
+    excerpt: string
+    title: string
+    url: string
+  }[]
+  url: string
 }
 
 type SearchProps = FlexsearchProps & {
