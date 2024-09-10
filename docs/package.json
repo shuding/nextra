@@ -6,7 +6,7 @@
   "scripts": {
     "build": "next build",
     "dev": "next",
-    "postbuild": "pagefind --site .next/server/pages --output-path .next/static/chunks/pages/pagefind",
+    "postbuild": "pagefind --site .next/server/app --output-path .next/static/chunks/app/pagefind",
     "start": "next start"
   },
   "dependencies": {
