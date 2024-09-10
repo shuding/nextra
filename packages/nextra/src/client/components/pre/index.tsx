@@ -28,7 +28,9 @@ export function Pre({
   )
 
   return (
-    <div className="nextra-code _relative [&:not(:first-child)]:_mt-6">
+    <div
+      data-pagefind-ignore="all"
+      className="nextra-code _relative [&:not(:first-child)]:_mt-6">
       {filename && (
         <div
           className={cn(
