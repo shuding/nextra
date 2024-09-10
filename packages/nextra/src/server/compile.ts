@@ -15,17 +15,8 @@ import remarkMath from 'remark-math'
 import remarkReadingTime from 'remark-reading-time'
 import remarkSmartypants from 'remark-smartypants'
 import type { Pluggable, Plugin } from 'unified'
-import type {
-  FrontMatter,
-  LoaderOptions,
-  ReadingTime,
-  StructurizedData
-} from '../types'
-import {
-  CWD,
-  DEFAULT_LOCALE,
-  MARKDOWN_URL_EXTENSION_REGEX
-} from './constants.js'
+import type { FrontMatter, LoaderOptions, ReadingTime } from '../types'
+import { CWD, MARKDOWN_URL_EXTENSION_REGEX } from './constants.js'
 import {
   recmaRewriteFunctionBody,
   recmaRewriteJsx
@@ -45,8 +36,7 @@ import {
   remarkMdxFrontMatter,
   remarkMdxTitle,
   remarkRemoveImports,
-  remarkStaticImage,
-  remarkStructurize
+  remarkStaticImage
 } from './remark-plugins/index.js'
 import { logger, truthy } from './utils.js'
 
@@ -65,15 +55,12 @@ const clonedRemarkLinkRewrite = remarkLinkRewrite.bind(null)
 type CompileMdxOptions = Pick<
   LoaderOptions,
   | 'staticImage'
-  | 'search'
   | 'defaultShowCopyCode'
   | 'readingTime'
   | 'latex'
   | 'codeHighlight'
 > & {
   mdxOptions?: MdxOptions
-  route?: string
-  locale?: string
   filePath?: string
   useCachedCompiler?: boolean
   isPageImport?: boolean
@@ -83,13 +70,10 @@ export async function compileMdx(
   source: string,
   {
     staticImage,
-    search,
     readingTime,
     latex,
     codeHighlight,
     defaultShowCopyCode,
-    route = '',
-    locale,
     mdxOptions = {},
     filePath = '',
     useCachedCompiler,
@@ -111,20 +95,6 @@ export async function compileMdx(
     _format === 'detect' ? (filePath.endsWith('.mdx') ? 'mdx' : 'md') : _format
 
   const fileCompatible = filePath ? { value: source, path: filePath } : source
-
-  let searchIndexKey: string | null = null
-  if (typeof search === 'object') {
-    if (search.indexKey) {
-      searchIndexKey = search.indexKey(filePath, route, locale)
-      if (searchIndexKey === '') {
-        searchIndexKey = locale || DEFAULT_LOCALE
-      }
-    } else {
-      searchIndexKey = locale || DEFAULT_LOCALE
-    }
-  } else if (search) {
-    searchIndexKey = locale || DEFAULT_LOCALE
-  }
 
   // https://github.com/shuding/nextra/issues/1303
   const isFileOutsideCWD =
@@ -149,12 +119,11 @@ export async function compileMdx(
 
     const data = vFile.data as {
       readingTime?: ReadingTime
-      structurizedData: StructurizedData
       title?: string
       frontMatter: FrontMatter
     }
 
-    const { readingTime, structurizedData, title, frontMatter } = data
+    const { readingTime, title, frontMatter } = data
     // https://github.com/shuding/nextra/issues/1032
     const result = String(vFile).replaceAll('__esModule', '_\\_esModule')
 
@@ -173,7 +142,6 @@ export async function compileMdx(
       result,
       title,
       ...(readingTime && { readingTime }),
-      ...(searchIndexKey !== null && { searchIndexKey, structurizedData }),
       frontMatter
     }
   } catch (error) {
@@ -213,8 +181,6 @@ export async function compileMdx(
         remarkCustomHeadingId,
         remarkMdxTitle,
         [remarkHeadings, { isRemoteContent }] satisfies Pluggable,
-        // structurize should be before `remarkHeadings` because we attach #id attribute to heading node
-        search && ([remarkStructurize, search] satisfies Pluggable),
         staticImage && remarkStaticImage,
         readingTime && remarkReadingTime,
         latex && remarkMath,
