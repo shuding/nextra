@@ -3,7 +3,7 @@ name: Next.js Bundle Analysis
 on:
   pull_request:
   push:
-    branches: [main, v3, v4-v2]
+    branches: [main, v4-v2]
   workflow_dispatch:
 
 permissions:
