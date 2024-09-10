@@ -31,7 +31,7 @@ function Tree({ children }: { children: ReactNode }): ReactElement {
         '_not-prose' // for nextra-theme-blog
       )}
     >
-      <ul className="_inline-block _rounded-lg _border _px-4 _py-2 dark:_border-neutral-800">
+      <ul className="_inline-block _rounded-lg _border _px-4 _py-2 _border-neutral-200/70 contrast-more:_border-neutral-400 dark:_border-primary-100/10 contrast-more:dark:_border-neutral-400">
         {children}
       </ul>
     </div>
