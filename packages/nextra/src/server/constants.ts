@@ -20,9 +20,7 @@ export const IS_PRODUCTION = process.env.NODE_ENV === 'production'
 
 export const DEFAULT_CONFIG = {
   staticImage: true,
-  search: {
-    codeblocks: true
-  },
+  search: true,
   codeHighlight: true
 } satisfies Partial<NextraConfig>
 

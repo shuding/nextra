@@ -10,6 +10,7 @@ export type PreProps = ComponentProps<'pre'> & {
   'data-copy'?: ''
   'data-language'?: string
   'data-word-wrap'?: ''
+  'data-pagefind-ignore'?: string
   icon?: ReactNode
 }
 
@@ -20,6 +21,7 @@ export function Pre({
   'data-copy': copy,
   'data-language': _language,
   'data-word-wrap': hasWordWrap,
+  'data-pagefind-ignore': pagefindIgnore,
   icon,
   ...props
 }: PreProps): ReactElement {
@@ -29,7 +31,7 @@ export function Pre({
 
   return (
     <div
-      data-pagefind-ignore="all"
+      data-pagefind-ignore={pagefindIgnore}
       className="nextra-code _relative [&:not(:first-child)]:_mt-6"
     >
       {filename && (

@@ -55,6 +55,7 @@ const clonedRemarkLinkRewrite = remarkLinkRewrite.bind(null)
 type CompileMdxOptions = Pick<
   LoaderOptions,
   | 'staticImage'
+  | 'search'
   | 'defaultShowCopyCode'
   | 'readingTime'
   | 'latex'
@@ -70,6 +71,7 @@ export async function compileMdx(
   source: string,
   {
     staticImage,
+    search,
     readingTime,
     latex,
     codeHighlight,
@@ -233,7 +235,7 @@ export async function compileMdx(
                   ...rehypePrettyCodeOptions
                 }
               ] as any,
-              rehypeAttachCodeMeta
+              [rehypeAttachCodeMeta, { search }]
             ]),
         [rehypeExtractTocContent, { isRemoteContent }]
       ].filter(truthy),

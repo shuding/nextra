@@ -12,7 +12,6 @@ import type {
 export interface LoaderOptions extends NextraConfig {
   isPageImport?: boolean
   isPageMapImport?: boolean
-  locales: string[]
 }
 
 export interface Folder<FileType = PageMapItem> {
