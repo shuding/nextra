@@ -10,7 +10,7 @@ import {
 } from './constants.js'
 import { nextraConfigSchema } from './schemas.js'
 import { logger } from './utils.js'
-import { NextraPlugin, NextraSearchPlugin } from './webpack-plugins/index.js'
+import { NextraPlugin } from './webpack-plugins/index.js'
 
 const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
 
@@ -72,10 +72,6 @@ const nextra: Nextra = nextraConfig => {
               // transformPageMap: nextraConfig.transformPageMap
             })
           )
-
-          if (loaderOptions.search) {
-            config.plugins.push(new NextraSearchPlugin())
-          }
         }
 
         // Fixes https://github.com/vercel/next.js/issues/55872

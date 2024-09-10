@@ -10,7 +10,7 @@ import cn from 'clsx'
 import NextLink from 'next/link'
 import { useRouter } from 'next/navigation'
 import type { FocusEventHandler, ReactElement, SyntheticEvent } from 'react'
-import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useMounted } from '../../hooks/index.js'
 import { InformationCircleIcon, SpinnerIcon } from '../../icons/index.js'
 import { renderComponent } from '../render.js'
@@ -39,7 +39,7 @@ type SearchProps = FlexsearchProps & {
   value: string
   onChange: (newValue: string) => void
   isLoading?: boolean
-  error?: boolean
+  error: Error | null
   results: SearchResult[]
 }
 
@@ -130,12 +130,12 @@ export function Search({
   )
 
   const handleSelect = useCallback(
-    async (searchResult: SearchResult | null) => {
+    async (searchResult: PagefindResult | null) => {
       if (!searchResult) return
       // Calling before navigation so selector `html:not(:has(*:focus))` in styles.css will work,
       // and we'll have padding top since input is not focused
       inputRef.current?.blur()
-      await router.push(searchResult.route)
+      await router.push(searchResult.url)
       // Clear input after navigation completes
       onChange('')
     },
@@ -199,56 +199,20 @@ export function Search({
         }
       >
         {error ? (
-          <span className="_flex _select-none _justify-center _gap-2 _p-8 _text-center _text-sm _text-red-500">
-            <InformationCircleIcon className="_size-5" />
+          <div className="_h-full _flex _items-center _justify-center _gap-2 _px-8 _text-sm _text-red-500">
+            <InformationCircleIcon height="20" className="_shrink-0" />
             {errorText}
-          </span>
+            <br />
+            {error.constructor.name}: {error.message}
+          </div>
         ) : isLoading ? (
-          <span className="_flex _select-none _justify-center _gap-2 _p-8 _text-center _text-sm _text-gray-400">
-            <SpinnerIcon className="_size-5 _animate-spin" />
+          <div className="_h-full _flex _items-center _justify-center _gap-2 _px-8 _text-sm _text-gray-400">
+            <SpinnerIcon height="20" className="_shrink-0 _animate-spin" />
             {renderComponent(loading)}
-          </span>
+          </div>
         ) : results.length ? (
           results.map(searchResult => (
-            <Fragment key={searchResult.id}>
-              {searchResult.prefix && (
-                <div
-                  className={cn(
-                    '_mx-2.5 _mb-2 [&:not(:first-child)]:_mt-6 _select-none _border-b _border-black/10 _px-2.5 _pb-1.5 _text-xs _font-semibold _uppercase _text-gray-500 dark:_border-white/20 dark:_text-gray-300',
-                    'contrast-more:_border-gray-600 contrast-more:_text-gray-900 contrast-more:dark:_border-gray-50 contrast-more:dark:_text-gray-50'
-                  )}
-                >
-                  {searchResult.prefix}
-                </div>
-              )}
-              <ComboboxOption
-                as={NextLink}
-                value={searchResult}
-                href={searchResult.route}
-                className={({ focus }) =>
-                  cn(
-                    '_mx-2.5 _break-words _rounded-md',
-                    'contrast-more:_border',
-                    focus
-                      ? '_text-primary-600 contrast-more:_border-current _bg-primary-500/10 _ring'
-                      : '_text-gray-800 dark:_text-gray-300 contrast-more:_border-transparent',
-                    '_block _scroll-m-12 _px-2.5 _py-2'
-                  )
-                }
-              >
-                <div className="_text-base _font-semibold _leading-5">
-                  <HighlightMatches match={value} value={searchResult.title} />
-                </div>
-                {searchResult.content && (
-                  <div className="_mt-1 _text-sm _leading-[1.35rem] _text-gray-600 dark:_text-gray-400 contrast-more:dark:_text-gray-50">
-                    <HighlightMatches
-                      match={value}
-                      value={searchResult.content}
-                    />
-                  </div>
-                )}
-              </ComboboxOption>
-            </Fragment>
+            <Result key={searchResult.id} result={searchResult} />
           ))
         ) : (
           value && renderComponent(emptyResult)
@@ -258,25 +222,23 @@ export function Search({
   )
 }
 
-function Result({
-  result,
-  index: i,
-  active,
-  onActive,
-  onClick,
-  onKeyDown
-}: {
-  result: SearchResult
-  index: number
-  active: number
-  onActive: (event: { currentTarget: { dataset: DOMStringMap } }) => void
-  onClick: () => void
-  onKeyDown: <T>(event: KeyboardEvent<T>) => void
-}) {
+function Result({ result }: { result: SearchResult }) {
   const [data, setData] = useState<PagefindResult | null>(null)
 
   useEffect(() => {
-    result.data().then(setData)
+    result
+      .data()
+      .then(newData => ({
+        ...newData,
+        sub_results: newData.sub_results.map(r => ({
+          ...r,
+          url: r.url
+            .replace('/_next/static/chunks/app', '')
+            .replace(/\.html$/, '')
+            .replace(/\.html#/, '#')
+        }))
+      }))
+      .then(setData)
   }, [result])
 
   if (!data) return null
@@ -285,43 +247,40 @@ function Result({
     <>
       <div
         className={cn(
-          '_mx-2.5 _mb-2 _mt-6 _select-none _border-b _border-black/10 _px-2.5 _pb-1.5 _text-xs _font-semibold _uppercase _text-gray-500 first:_mt-0 dark:_border-white/20 dark:_text-gray-300',
+          '_mx-2.5 _mb-2 [&:not(:first-child)]:_mt-6 _select-none _border-b _border-black/10 _px-2.5 _pb-1.5 _text-xs _font-semibold _uppercase _text-gray-500 dark:_border-white/20 dark:_text-gray-300',
           'contrast-more:_border-gray-600 contrast-more:_text-gray-900 contrast-more:dark:_border-gray-50 contrast-more:dark:_text-gray-50'
         )}
       >
         {data.meta.title}
       </div>
       {data.sub_results.map(subResult => (
-        <li
+        <ComboboxOption
           key={subResult.url}
-          className={cn(
-            '_mx-2.5 _break-words _rounded-md',
-            'contrast-more:_border',
-            i === active
-              ? '_bg-primary-500/10 _text-primary-600 contrast-more:_border-primary-500'
-              : '_text-gray-800 contrast-more:_border-transparent dark:_text-gray-300'
-          )}
+          as={NextLink}
+          value={subResult}
+          href={subResult.url}
+          className={({ focus }) =>
+            cn(
+              '_mx-2.5 _break-words _rounded-md',
+              'contrast-more:_border',
+              focus
+                ? '_text-primary-600 contrast-more:_border-current _bg-primary-500/10 _ring'
+                : '_text-gray-800 dark:_text-gray-300 contrast-more:_border-transparent',
+              '_block _scroll-m-12 _px-2.5 _py-2'
+            )
+          }
         >
-          <NextLink
-            className="_block _scroll-m-12 _px-2.5 _py-2 [&_mark]:_text-primary-600 [&_mark]:_bg-transparent"
-            href={subResult.url
-              .replace('/_next/static/chunks/pages', '')
-              .replace(/\.html#/, '#')}
-            data-index={i}
-            onFocus={onActive}
-            onMouseMove={onActive}
-            onClick={onClick}
-            onKeyDown={onKeyDown}
-          >
-            <div className="_text-base _font-semibold _leading-5">
-              {subResult.title}
-            </div>
-            <div
-              className="excerpt _mt-1 _text-sm _leading-[1.35rem] _text-gray-600 dark:_text-gray-400 contrast-more:dark:_text-gray-50"
-              dangerouslySetInnerHTML={{ __html: subResult.excerpt }}
-            />
-          </NextLink>
-        </li>
+          <div className="_text-base _font-semibold _leading-5">
+            {subResult.title}
+          </div>
+          <div
+            className={cn(
+              '_mt-1 _text-sm _leading-[1.35rem] _text-gray-600 dark:_text-gray-400 contrast-more:dark:_text-gray-50',
+              '[&_mark]:_bg-primary-600/80 [&_mark]:_text-white'
+            )}
+            dangerouslySetInnerHTML={{ __html: subResult.excerpt }}
+          />
+        </ComboboxOption>
       ))}
     </>
   )
