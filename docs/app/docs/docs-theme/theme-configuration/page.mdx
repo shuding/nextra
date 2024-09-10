@@ -27,11 +27,36 @@ Detailed information for each option is listed below.
 Set the repository URL of the documentation. It’s used to generate the
 “[Edit this page](#edit-link)” link and the “[Feedback](#feedback-link)” link.
 
-<OptionTable
-  options={[
-    ['docsRepositoryBase', 'string', 'URL of the documentation repository.']
-  ]}
-/>
+<style jsx global>{`
+  table {
+    width: 100%;
+    display: table !important;
+    font-size: 0.875rem;
+  }
+  th {
+    text-align: left;
+  }
+  tr {
+    background: unset !important;
+  }
+  th:nth-child(1):before {
+    content: 'Option';
+  }
+  th:nth-child(2):before {
+    content: 'Type';
+  }
+  th:nth-child(3):before {
+    content: 'Description';
+  }
+  td:nth-child(1) {
+    color: rgb(139 92 246);
+    font-weight: bold;
+  }
+`}</style>
+
+|                    |          |                                      |
+| ------------------ | -------- | ------------------------------------ |
+| docsRepositoryBase | `string` | URL of the documentation repository. |
 
 #### Specify a Path
 
@@ -52,17 +77,9 @@ Then Nextra will automatically generate the correct file path for all pages.
 Configure the `<head>` tags of the website. You can add meta tags, title,
 favicon, etc.
 
-<OptionTable
-  options={[
-    [
-      'head',
-      'React.ReactNode | React.FC',
-      <>
-        Component that renders the <code>{'<head>'}</code> content.
-      </>
-    ]
-  ]}
-/>
+|      |                                |                                                |
+| ---- | ------------------------------ | ---------------------------------------------- |
+| head | `React.ReactNode \|  React.FC` | Component that renders the `<head />` content. |
 
 #### Static Head Tags
 
@@ -119,45 +136,20 @@ for more information about the `useConfig` hook and the `frontMatter` object.
 
 Customize the theme behavior of the website.
 
-<OptionTable
-  options={[
-    ['darkMode', 'boolean', 'Show or hide the dark mode toggle button.'],
-    [
-      'nextThemes',
-      'object',
-      <>
-        Configuration for the{' '}
-        <a
-          href="https://github.com/pacocoursey/next-themes#themeprovider"
-          target="_blank"
-        >
-          next-themes
-        </a>{' '}
-        package.
-      </>
-    ]
-  ]}
-/>
+|            |           |                                                                                                        |
+| ---------- | --------- | ------------------------------------------------------------------------------------------------------ |
+| darkMode   | `boolean` | Show or hide the dark mode toggle button.                                                              |
+| nextThemes | `object`  | Configuration for the [next-themes](https://github.com/pacocoursey/next-themes#themeprovider) package. |
 
 ### Theme Color
 
 You can adjust the theme color of the website by setting primary hue and
 saturation values for light and dark themes.
 
-<OptionTable
-  options={[
-    [
-      'color.hue',
-      'number | { dark: number; light: number }',
-      'The hue of the primary theme color.'
-    ],
-    [
-      'color.saturation',
-      'number | { dark: number; light: number }',
-      'The saturation of the primary theme color.'
-    ]
-  ]}
-/>
+|                  |                                             |                                            |
+| ---------------- | ------------------------------------------- | ------------------------------------------ |
+| color.hue        | `number \| { dark: number; light: number }` | The hue of the primary theme color.        |
+| color.saturation | `number \| { dark: number; light: number }` | The saturation of the primary theme color. |
 
 Try it out for this website:
 
