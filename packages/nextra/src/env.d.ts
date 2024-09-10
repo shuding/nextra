@@ -10,6 +10,13 @@ declare module 'title' {
 declare namespace globalThis {
   import type { PageMapItem } from './types'
   var __nextra_resolvePageMap: Record<string, () => Promise<PageMapItem[]>>
+
+  import type { SearchResult } from './types'
+  var pagefind: {
+    search: (query: string) => Promise<{
+      results: SearchResult[]
+    }>
+  }
 }
 
 declare module 'next/dist/compiled/webpack/webpack.js' {
