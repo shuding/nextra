@@ -32,7 +32,7 @@ export const searchSchema = z.boolean().or(
      * Whether to index code blocks
      * @default true
      */
-    codeblocks: z.boolean(),
+    codeblocks: z.boolean()
   })
 )
 

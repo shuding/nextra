@@ -88,12 +88,7 @@ export async function loader(
       .replace(MARKDOWN_EXTENSION_REGEX, '')
       .replace(/\/page$/, '')
       .replace(/^app\//, '')
-  const {
-    result,
-    title,
-    frontMatter,
-    readingTime
-  } = await compileMdx(source, {
+  const { result, title, frontMatter, readingTime } = await compileMdx(source, {
     mdxOptions: {
       ...mdxOptions,
       jsx: true,

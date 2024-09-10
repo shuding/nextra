@@ -122,4 +122,3 @@ export type NextraInternalGlobal = typeof globalThis & {
 }
 
 export type DynamicMetaDescriptor = Record<string, () => any>
-
