@@ -133,7 +133,6 @@
     "@theguild/remark-npm2yarn": "^0.3.2",
     "better-react-mathjax": "^2.0.3",
     "clsx": "^2.1.0",
-    "escape-string-regexp": "^5.0.0",
     "estree-util-to-js": "^2.0.0",
     "estree-util-value-to-estree": "^3.0.1",
     "fast-glob": "^3.3.2",
