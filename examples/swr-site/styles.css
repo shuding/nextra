@@ -1,3 +1,4 @@
+@import 'nextra-theme-docs' layer(nextra-base);
 @tailwind utilities;
 
 .dark .invert-on-dark {

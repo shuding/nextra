@@ -106,7 +106,8 @@ export const nextraConfigSchema = z
       recmaPlugins: z.custom<ProcessorOptions['recmaPlugins']>(),
       format: z.enum(['detect', 'mdx', 'md']),
       rehypePrettyCodeOptions: z.custom<RehypePrettyCodeOptions>()
-    })
+    }),
+    autoImportThemeStyle: z.boolean()
   })
   // eslint-disable-next-line deprecation/deprecation -- fixme
   .deepPartial()

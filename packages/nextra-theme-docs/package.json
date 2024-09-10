@@ -66,5 +66,6 @@
   },
   "sideEffects": [
     "./src/polyfill.ts"
-  ]
+  ],
+  "style": "./dist/style.css"
 }
