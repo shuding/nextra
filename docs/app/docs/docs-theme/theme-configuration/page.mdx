@@ -366,25 +366,15 @@ Customize the entire navbar component.
 
 ## Sidebar
 
-<OptionTable
-  options={[
-    [
-      'sidebar.defaultMenuCollapseLevel',
-      'number',
-      'Specifies the folder level at which the menu on the left is collapsed by default. Defaults to 2.'
-    ],
-    [
-      'sidebar.autoCollapse',
-      'boolean',
-      'If true, automatically collapse inactive folders above defaultMenuCollapseLevel.'
-    ],
-    [
-      'sidebar.toggleButton',
-      'boolean',
-      'Hide/show sidebar toggle button. Defaults to `false`.'
-    ]
-  ]}
-/>
+<Table>
+
+|                                  |           |                                                                                                  |
+| -------------------------------- | --------- | ------------------------------------------------------------------------------------------------ |
+| sidebar.defaultMenuCollapseLevel | `number`  | Specifies the folder level at which the menu on the left is collapsed by default. Defaults to 2. |
+| sidebar.autoCollapse             | `boolean` | If true, automatically collapse inactive folders above `defaultMenuCollapseLevel`.               |
+| sidebar.toggleButton             | `boolean` | Hide/show sidebar toggle button. Defaults to `false`.                                            |
+
+</Table>
 
 ### Menu Collapse Level
 
@@ -431,34 +421,38 @@ Provide custom [MDX components](https://mdxjs.com/table-of-components/) to
 render the content. For example, you can use a custom `pre` component to render
 code blocks.
 
-<OptionTable
-  options={[
-    ['components', 'Record<string, React.FC>', 'Custom MDX components.']
-  ]}
-/>
+<Table>
+
+|            |                            |                        |
+| ---------- | -------------------------- | ---------------------- |
+| components | `Record<string, React.FC>` | Custom MDX components. |
+
+</Table>
 
 ### Writing Direction
 
 The default writing direction of the website.
 
-<OptionTable
-  options={[['direction', '"ltr" | "rtl"', 'Default writing direction.']]}
-/>
+<Table>
+
+|           |                  |                            |
+| --------- | ---------------- | -------------------------- |
+| direction | `"ltr" \| "rtl"` | Default writing direction. |
+
+</Table>
 
 ### Main Content
 
 Render top and/or bottom content of main area of the page. It can be used to
 render a comment section, a newsletter form, or any other type of content.
 
-<OptionTable
-  options={[
-    [
-      'main',
-      'React.FC<{ children: React.ReactNode }>',
-      'Component of main content.'
-    ]
-  ]}
-/>
+<Table>
+
+|      |                                           |                            |
+| ---- | ----------------------------------------- | -------------------------- |
+| main | `React.FC<{ children: React.ReactNode }>` | Component of main content. |
+
+</Table>
 
 ## TOC Sidebar
 
@@ -467,27 +461,17 @@ render a comment section, a newsletter form, or any other type of content.
 Show a table of contents on the right side of the page. It’s useful for
 navigating between headings.
 
-<OptionTable
-  options={[
-    [
-      'toc.component',
-      'React.ReactNode | React.FC<TOCProps>',
-      'Custom renderer of the TOC.'
-    ],
-    [
-      'toc.extraContent',
-      'React.ReactNode | React.FC',
-      'Display extra content below the TOC content.'
-    ],
-    ['toc.float', 'boolean', 'Float the TOC next to the content.'],
-    [
-      'toc.title',
-      'React.ReactNode | React.FC',
-      'Title of the TOC sidebar. By default it’s “On This Page”.'
-    ],
-    ['toc.backToTop', 'boolean', 'Add `Scroll to top` link.']
-  ]}
-/>
+<Table>
+
+|                  |                                         |                                                           |
+| ---------------- | --------------------------------------- | --------------------------------------------------------- |
+| toc.component    | `React.ReactNode \| React.FC<TOCProps>` | Custom renderer of the TOC.                               |
+| toc.extraContent | `React.ReactNode \| React.FC`           | Display extra content below the TOC content.              |
+| toc.float        | `boolean`                               | Float the TOC next to the content.                        |
+| toc.title        | `React.ReactNode \| React.FC`           | Title of the TOC sidebar. By default it’s “On This Page”. |
+| toc.backToTop    | `boolean`                               | Add `Scroll to top` link.                                 |
+
+</Table>
 
 #### Floating TOC
 
@@ -500,24 +484,14 @@ disabled, the TOC will be displayed directly on the page sidebar.
 Show an “Edit this page” link on the page that points to the file URL on GitHub
 (or other places).
 
-<OptionTable
-  options={[
-    [
-      'editLink.content',
-      'React.ReactNode | React.FC',
-      'Content of the edit link.'
-    ],
-    [
-      'editLink.component',
-      `React.FC<{
-  children: React.ReactNode
-  className?: string
-  filePath?: string
-}> | null`,
-      'Customized edit link component.'
-    ]
-  ]}
-/>
+<Table>
+
+|                    |                                                                                          |                                 |
+| ------------------ | ---------------------------------------------------------------------------------------- | ------------------------------- |
+| editLink.content   | `React.ReactNode \| React.FC`                                                            | Content of the edit link.       |
+| editLink.component | `React.FC<{ children: React.ReactNode; className?: string; filePath?: string }> \| null` | Customized edit link component. |
+
+</Table>
 
 <Callout type="info">
   To disable it, you can set `editLink.component` to `null`.
@@ -530,25 +504,15 @@ documentation. By default, it’s a link that points to the issue creation form 
 the docs repository, with the current website title prefilled:
 [example](https://github.com/shuding/nextra/issues/new?title=Feedback%20for%20%E2%80%9CTheme%20Configuration%E2%80%9D&labels=feedback).
 
-<OptionTable
-  options={[
-    [
-      'feedback.content',
-      'React.ReactNode | React.FC',
-      'Content of the feedback button.'
-    ],
-    [
-      'feedback.labels',
-      'string',
-      'Labels that can be added to the new created GitHub issue.'
-    ],
-    [
-      'feedback.useLink',
-      '() => string',
-      'Custom link, by default, will open an issue in the repository set in `docsRepositoryBase`.'
-    ]
-  ]}
-/>
+<Table>
+
+|                  |                               |                                                                                            |
+| ---------------- | ----------------------------- | ------------------------------------------------------------------------------------------ |
+| feedback.content | `React.ReactNode \| React.FC` | Content of the feedback button.                                                            |
+| feedback.labels  | `string`                      | Labels that can be added to the new created GitHub issue.                                  |
+| feedback.useLink | `() => string`                | Custom link, by default, will open an issue in the repository set in `docsRepositoryBase`. |
+
+</Table>
 
 <Callout type="info">
   To disable it, you can set `feedback.content` to `null`.
@@ -561,13 +525,6 @@ the docs repository, with the current website title prefilled:
 Show previous and next page links on the bottom of the content. It’s useful for
 navigating between pages.
 
-<OptionTable
-  options={[
-    ['navigation', 'boolean | object', 'Enable or disable navigation link.'],
-    ['navigation.prev', 'boolean', 'Enable or disable the previous page link.'],
-    ['navigation.next', 'boolean', 'Enable or disable the next page link.']
-  ]}
-/>
 <Table>
 
 |                 |                     |                                           |
