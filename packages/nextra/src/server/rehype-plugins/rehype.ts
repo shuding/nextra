@@ -3,7 +3,7 @@ import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
 import { bundledLanguages, getHighlighter } from 'shiki'
 import type { Plugin } from 'unified'
 import { SKIP, visit } from 'unist-util-visit'
-import { NextraConfig } from '../../types'
+import type { NextraConfig } from '../../types.js'
 
 type PreElement = Element & {
   __filename?: string
@@ -112,11 +112,11 @@ export const rehypeAttachCodeMeta: Plugin<
             preEl.properties['data-pagefind-ignore'] = 'all'
           }
           return SKIP
-        } else {
-          // remove class="line"
-          // @ts-expect-error fixme
-          delete node.children[0].properties.className
         }
+
+        // remove class="line"
+        // @ts-expect-error fixme
+        delete node.children[0].properties.className
       }
     )
   }
