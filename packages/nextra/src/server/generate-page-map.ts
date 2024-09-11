@@ -26,6 +26,7 @@ export async function getFilepaths({
     ],
     { cwd }
   )
+  console.log('result', result)
   const relativePaths = result.map(r => path.relative(dir, r))
   return relativePaths
 }
