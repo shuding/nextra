@@ -1,5 +1,12 @@
 # nextra-theme-blog
 
+## 3.0.0-alpha.38
+
+### Patch Changes
+
+- Updated dependencies [ccaf3d4]
+  - nextra@3.0.0-alpha.38
+
 ## 3.0.0-alpha.37
 
 ### Patch Changes
