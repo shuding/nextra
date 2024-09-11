@@ -1,5 +1,6 @@
 import path from 'path'
 import fg from 'fast-glob'
+import slash from 'slash'
 import type { Folder, MdxFile } from '../types'
 
 type Params = {
@@ -16,7 +17,7 @@ export async function getFilepaths({
   if (!_dir) {
     throw new Error('`dir` is required')
   }
-  const dir = fg.convertPathToPattern(_dir)
+  const dir = slash(_dir)
   const result = await fg(
     [
       `${dir}/**/${isAppDir ? 'page.{js,jsx,jsx,tsx,md,mdx}' : '*.{md,mdx}'}`,
@@ -25,7 +26,7 @@ export async function getFilepaths({
     { cwd }
   )
   console.log({ result })
-  const relativePaths = result.map(r => path.relative(dir, r))
+  const relativePaths = result.map(r => slash(path.relative(dir, r)))
   console.log({ relativePaths })
   return relativePaths
 }
