@@ -9,7 +9,7 @@ type Params = {
 }
 
 export async function getFilepaths({
-  _dir,
+  dir: _dir,
   cwd,
   isAppDir
 }: Params): Promise<string[]> {
