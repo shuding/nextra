@@ -1,7 +1,15 @@
 {
   $schema: 'https://docs.renovatebot.com/renovate-schema.json',
   extends: ['config:base'],
+  schedule: ['every weekend'],
   packageRules: [
+    {
+      matchPackageNames: [
+        'eslint-plugin-react-hooks',
+        'eslint-plugin-tailwindcss'
+      ],
+      enabled: false
+    },
     {
       groupName: 'lint',
       matchPackageNames: [
@@ -12,8 +20,8 @@
         'eslint-config-prettier',
         'eslint-plugin-import',
         'eslint-plugin-react',
-        'eslint-plugin-react-hooks',
-        'eslint-plugin-tailwindcss',
+        // 'eslint-plugin-react-hooks',
+        // 'eslint-plugin-tailwindcss',
         'eslint-plugin-typescript-sort-keys',
         'eslint-plugin-unicorn',
         'prettier',

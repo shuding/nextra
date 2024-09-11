@@ -3,10 +3,11 @@ import type { Heading } from 'nextra'
 import { useFSRoute, useMounted } from 'nextra/hooks'
 import { ArrowRightIcon, ExpandIcon } from 'nextra/icons'
 import type { Item, MenuItem, PageItem } from 'nextra/normalize-pages'
-import type { ReactElement } from 'react'
+import type { FocusEventHandler, ReactElement } from 'react'
 import {
   createContext,
   memo,
+  useCallback,
   useContext,
   useEffect,
   useMemo,
@@ -22,11 +23,9 @@ import { LocaleSwitch } from './locale-switch'
 
 const TreeState: Record<string, boolean> = Object.create(null)
 
-const FocusedItemContext = createContext<null | string>(null)
+const FocusedItemContext = createContext('')
 FocusedItemContext.displayName = 'FocusedItem'
-const OnFocusItemContext = createContext<null | ((item: string | null) => any)>(
-  null
-)
+const OnFocusItemContext = createContext<(route: string) => void>(() => {})
 OnFocusItemContext.displayName = 'OnFocusItem'
 const FolderLevelContext = createContext(0)
 FolderLevelContext.displayName = 'FolderLevel'
@@ -66,16 +65,17 @@ const classes = {
 type FolderProps = {
   item: PageItem | MenuItem | Item
   anchors: Heading[]
+  onFocus: FocusEventHandler
 }
 
-function FolderImpl({ item, anchors }: FolderProps): ReactElement {
+function FolderImpl({ item, anchors, onFocus }: FolderProps): ReactElement {
   const routeOriginal = useFSRoute()
   const [route] = routeOriginal.split('#')
   const active = [route, route + '/'].includes(item.route + '/')
   const activeRouteInside = active || route.startsWith(item.route + '/')
 
   const focusedRoute = useContext(FocusedItemContext)
-  const focusedRouteInside = !!focusedRoute?.startsWith(item.route + '/')
+  const focusedRouteInside = focusedRoute.startsWith(item.route + '/')
   const level = useContext(FolderLevelContext)
 
   const { setMenu } = useMenu()
@@ -95,21 +95,25 @@ function FolderImpl({ item, anchors }: FolderProps): ReactElement {
   const rerender = useState({})[1]
 
   useEffect(() => {
-    const updateTreeState = () => {
+    function updateTreeState() {
       if (activeRouteInside || focusedRouteInside) {
         TreeState[item.route] = true
       }
     }
-    const updateAndPruneTreeState = () => {
+
+    function updateAndPruneTreeState() {
       if (activeRouteInside && focusedRouteInside) {
         TreeState[item.route] = true
       } else {
         delete TreeState[item.route]
       }
     }
-    themeConfig.sidebar.autoCollapse
-      ? updateAndPruneTreeState()
-      : updateTreeState()
+
+    if (themeConfig.sidebar.autoCollapse) {
+      updateAndPruneTreeState()
+    } else {
+      updateTreeState()
+    }
   }, [
     activeRouteInside,
     focusedRouteInside,
@@ -143,6 +147,7 @@ function FolderImpl({ item, anchors }: FolderProps): ReactElement {
     <li className={cn({ open, active })}>
       <ComponentToUse
         href={isLink ? item.route : undefined}
+        data-href={isLink ? undefined : item.route}
         className={cn(
           '_items-center _justify-between _gap-2',
           !isLink && '_text-left _w-full',
@@ -171,26 +176,29 @@ function FolderImpl({ item, anchors }: FolderProps): ReactElement {
           TreeState[item.route] = !open
           rerender({})
         }}
+        onFocus={onFocus}
       >
         {item.title}
         <ArrowRightIcon
-          className="_h-[18px] _min-w-[18px] _rounded-sm _p-0.5 hover:_bg-gray-800/5 dark:hover:_bg-gray-100/5"
-          pathClassName={cn(
-            '_origin-center _transition-transform rtl:_-rotate-180',
-            open && 'ltr:_rotate-90 rtl:_rotate-[-270deg]'
+          height="18"
+          className={cn(
+            '_shrink-0',
+            '_rounded-sm _p-0.5 hover:_bg-gray-800/5 dark:hover:_bg-gray-100/5',
+            'motion-reduce:*:_transition-none *:_origin-center *:_transition-transform *:rtl:_-rotate-180',
+            open && '*:ltr:_rotate-90 *:rtl:_rotate-[-270deg]'
           )}
         />
       </ComponentToUse>
-      <Collapse className="ltr:_pr-0 rtl:_pl-0 _pt-1" isOpen={open}>
-        {Array.isArray(item.children) ? (
+      {Array.isArray(item.children) && (
+        <Collapse isOpen={open}>
           <Menu
-            className={cn(classes.border, 'ltr:_ml-3 rtl:_mr-3')}
+            className={cn(classes.border, '_pt-1 ltr:_ml-3 rtl:_mr-3')}
             directories={item.children}
             base={item.route}
             anchors={anchors}
           />
-        ) : null}
-      </Collapse>
+        </Collapse>
+      )}
     </li>
   )
 }
@@ -216,13 +224,14 @@ function Separator({ title }: { title: string }): ReactElement {
 
 function File({
   item,
-  anchors
+  anchors,
+  onFocus
 }: {
   item: PageItem | Item
   anchors: Heading[]
+  onFocus: FocusEventHandler
 }): ReactElement {
   const route = useFSRoute()
-  const onFocus = useContext(OnFocusItemContext)
 
   // It is possible that the item doesn't have any route - for example an external link.
   const active = item.route && [route, route + '/'].includes(item.route + '/')
@@ -242,12 +251,7 @@ function File({
         onClick={() => {
           setMenu(false)
         }}
-        onFocus={() => {
-          onFocus?.(item.route)
-        }}
-        onBlur={() => {
-          onFocus?.(null)
-        }}
+        onFocus={onFocus}
       >
         {item.title}
       </Anchor>
@@ -290,18 +294,39 @@ function Menu({
   className,
   onlyCurrentDocs
 }: MenuProps): ReactElement {
+  const onFocus = useContext(OnFocusItemContext)
+
+  const handleFocus: FocusEventHandler = useCallback(
+    event => {
+      const route =
+        event.target.getAttribute('href') ||
+        event.target.getAttribute('data-href') ||
+        ''
+      onFocus(route)
+    },
+    [onFocus]
+  )
+
   return (
     <ul className={cn(classes.list, className)}>
-      {directories.map(item =>
-        !onlyCurrentDocs || item.isUnderCurrentDocsTree ? (
+      {directories.map(item => {
+        if (onlyCurrentDocs && !item.isUnderCurrentDocsTree) return
+
+        const ComponentToUse =
           item.type === 'menu' ||
-          (item.children && (item.children.length || !item.withIndexPage)) ? (
-            <Folder key={item.name} item={item} anchors={anchors} />
-          ) : (
-            <File key={item.name} item={item} anchors={anchors} />
-          )
-        ) : null
-      )}
+          (item.children && (item.children.length || !item.withIndexPage))
+            ? Folder
+            : File
+
+        return (
+          <ComponentToUse
+            key={item.name}
+            item={item}
+            anchors={anchors}
+            onFocus={handleFocus}
+          />
+        )
+      })}
     </ul>
   )
 }
@@ -322,24 +347,17 @@ export function Sidebar({
   includePlaceholder
 }: SideBarProps): ReactElement {
   const { menu, setMenu } = useMenu()
-  const [focused, setFocused] = useState<null | string>(null)
+  const [focused, setFocused] = useState('')
   const [showSidebar, setSidebar] = useState(true)
   const [showToggleAnimation, setToggleAnimation] = useState(false)
 
   const anchors = useMemo(() => toc.filter(v => v.depth === 2), [toc])
-  const sidebarRef = useRef<HTMLDivElement>(null)
-  const containerRef = useRef<HTMLDivElement>(null)
+  const sidebarRef = useRef<HTMLDivElement>(null!)
+  const containerRef = useRef<HTMLDivElement>(null!)
   const mounted = useMounted()
-  useEffect(() => {
-    if (menu) {
-      document.body.classList.add('_overflow-hidden', 'md:_overflow-auto')
-    } else {
-      document.body.classList.remove('_overflow-hidden', 'md:_overflow-auto')
-    }
-  }, [menu])
 
   useEffect(() => {
-    const activeElement = sidebarRef.current?.querySelector('li.active')
+    const activeElement = sidebarRef.current.querySelector('li.active')
 
     if (activeElement && (window.innerWidth > 767 || menu)) {
       const scroll = () => {
@@ -398,14 +416,10 @@ export function Sidebar({
           </div>
         )}
         <FocusedItemContext.Provider value={focused}>
-          <OnFocusItemContext.Provider
-            value={item => {
-              setFocused(item)
-            }}
-          >
+          <OnFocusItemContext.Provider value={setFocused}>
             <div
               className={cn(
-                '_overflow-y-auto _overflow-x-hidden',
+                '_overflow-y-auto',
                 '_p-4 _grow md:_h-[calc(100vh-var(--nextra-navbar-height)-var(--nextra-menu-height))]',
                 showSidebar ? 'nextra-scrollbar' : 'no-scrollbar'
               )}
@@ -442,7 +456,8 @@ export function Sidebar({
           <div
             className={cn(
               'nextra-sidebar-footer _sticky _bottom-0',
-              '_flex _items-center _gap-2 _mx-4 _py-4',
+              '_flex _items-center _gap-2 _py-4',
+              '_mx-3 _px-1', // to hide focused sidebar links
               showSidebar
                 ? hasI18n && '_justify-end'
                 : '_py-4 _flex-wrap _justify-center'
@@ -475,7 +490,12 @@ export function Sidebar({
                   setToggleAnimation(true)
                 }}
               >
-                <ExpandIcon isOpen={showSidebar} />
+                <ExpandIcon
+                  className={cn(
+                    '_h-3',
+                    !showSidebar && 'first:*:_origin-[35%] first:*:_rotate-180'
+                  )}
+                />
               </button>
             )}
           </div>

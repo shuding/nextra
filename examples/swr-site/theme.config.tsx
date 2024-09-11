@@ -191,8 +191,7 @@ const config: DocsThemeConfig = {
   },
   toc: {
     extraContent: (
-      // eslint-disable-next-line @next/next/no-img-element -- ignore since url is external and dynamic
-      <img alt="placeholder cat" src="https://placekitten.com/g/300/200" />
+      <img alt="placeholder cat" src="https://placecats.com/300/200" />
     ),
     float: true
   }

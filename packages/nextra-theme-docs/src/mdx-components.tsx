@@ -63,6 +63,7 @@ const createHeading = (
 
     return (
       <Tag
+        id={id}
         className={
           // can be added by footnotes
           className === 'sr-only'
@@ -84,7 +85,6 @@ const createHeading = (
         {id && (
           <a
             href={`#${id}`}
-            id={id}
             className="subheading-anchor"
             aria-label="Permalink for this section"
             ref={obRef}
@@ -100,14 +100,25 @@ function Details({
   className,
   ...props
 }: ComponentProps<'details'>): ReactElement {
-  const [isOpen, setIsOpen] = useState(!!open)
+  const [isOpen, setIsOpen] = useState(() => !!open)
   // To animate the close animation we have to delay the DOM node state here.
   const [delayedOpenState, setDelayedOpenState] = useState(isOpen)
+  const animationRef = useRef(0)
 
   useEffect(() => {
+    const animation = animationRef.current
+    if (animation) {
+      clearTimeout(animation)
+      animationRef.current = 0
+    }
     if (!isOpen) {
-      const timeout = setTimeout(() => setDelayedOpenState(isOpen), 500)
-      return () => clearTimeout(timeout)
+      animationRef.current = window.setTimeout(
+        () => setDelayedOpenState(isOpen),
+        300
+      )
+      return () => {
+        clearTimeout(animationRef.current)
+      }
     }
     setDelayedOpenState(true)
   }, [isOpen])
@@ -132,7 +143,7 @@ function Details({
             })
             return
           }
-          if (child.type !== Details) {
+          if (child.type !== Details && child.props.children) {
             ;[summary, child] = findSummary(child.props.children)
           }
         }
@@ -148,10 +159,13 @@ function Details({
     <details
       className={cn(
         '[&:not(:first-child)]:_mt-4 _rounded _border _border-gray-200 _bg-white _p-2 _shadow-sm dark:_border-neutral-800 dark:_bg-neutral-900',
+        '_overflow-hidden',
         className
       )}
       {...props}
-      open={delayedOpenState}
+      // `isOpen ||` fix issue on mobile devices while clicking on details, open attribute is still
+      // false, and we can't calculate child.clientHeight
+      open={isOpen || delayedOpenState}
       data-expanded={isOpen ? '' : undefined}
     >
       {summaryElement}
@@ -180,10 +194,10 @@ function Summary({
       <ArrowRightIcon
         className={cn(
           '_order-first', // if prettier formats `summary` it will have unexpected margin-top
-          '_size-4 _shrink-0 _mx-1.5',
+          '_h-4 _shrink-0 _mx-1.5 motion-reduce:_transition-none',
           'rtl:_rotate-180 [[data-expanded]>summary:first-child>&]:_rotate-90 _transition'
         )}
-        pathClassName="_stroke-[3px]"
+        strokeWidth="3"
       />
     </summary>
   )
@@ -260,7 +274,11 @@ function Body({ children }: { children: ReactNode }): ReactElement {
     </>
   )
 
-  const body = themeConfig.main?.({ children: content }) || content
+  const body = themeConfig.main ? (
+    <themeConfig.main>{content}</themeConfig.main>
+  ) : (
+    content
+  )
 
   if (themeContext.layout === 'full') {
     return (
@@ -365,10 +383,7 @@ const DEFAULT_COMPONENTS: MDXComponents = {
           <nav className={classes.toc} aria-label="table of contents" />
         )
       ) : (
-        <nav
-          className={cn(classes.toc, '_px-4')}
-          aria-label="table of contents"
-        >
+        <nav className={classes.toc} aria-label="table of contents">
           {renderComponent(themeConfig.toc.component, {
             toc: themeConfig.toc.float ? toc : [],
             filePath: config.filePath

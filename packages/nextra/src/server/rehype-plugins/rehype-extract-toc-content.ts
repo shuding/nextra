@@ -1,5 +1,5 @@
 import type { JsxAttribute } from 'estree-util-to-js/lib/jsx'
-import type { Element } from 'hast'
+import type { Element, Root } from 'hast'
 import { toEstree } from 'hast-util-to-estree'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
@@ -9,7 +9,7 @@ import { createAstObject } from '../utils.js'
 
 export const rehypeExtractTocContent: Plugin<
   [{ isRemoteContent?: boolean }],
-  any
+  Root
 > =
   ({
     // todo rethink this
@@ -104,7 +104,7 @@ export const rehypeExtractTocContent: Plugin<
           ]
         }
       }
-    })
+    } as any)
 
     file.data.toc = toc
   }

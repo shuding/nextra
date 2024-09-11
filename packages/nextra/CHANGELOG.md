@@ -1,5 +1,88 @@
 # nextra
 
+## 3.0.0-alpha.38
+
+### Patch Changes
+
+- ccaf3d4: Add the `autoImportThemeStyle` option to the Nextra configuration.
+  This allows users to import the official Nextra theme CSS into a specific
+  cascade layer.
+
+## 3.0.0-alpha.37
+
+### Patch Changes
+
+- 2a3e3e7: Fix first list item in `<FileTree>` not within permitted parent
+  elements
+
+## 3.0.0-alpha.36
+
+### Patch Changes
+
+- 2b9b95b: migrate to `@headlessui/react` v2
+
+## 3.0.0-alpha.35
+
+### Patch Changes
+
+- f662237: avoid focus-visible style being cut off by overflow-hidden
+
+## 3.0.0-alpha.34
+
+### Patch Changes
+
+- 1a634cd: remove explicit `ZodError` assertion
+
+## 3.0.0-alpha.33
+
+### Patch Changes
+
+- 7bb18e3: Add a generic for `themeConfig` in `NextraThemeLayoutProps` to
+  improve type inference.
+
+## 3.0.0-alpha.32
+
+### Patch Changes
+
+- 73239c4: To ensure consistent horizontal padding, set the default language as
+  plaintext for code blocks. This prevents any loss of formatting for code
+  blocks without a specified language.
+- 799174f: fixed creating `pageMap` items for folders with dots
+
+  remove requirement of passing `filePaths` with `.md`/`.mdx` extensions for
+  `createCatchAllMeta` function
+
+- 150184b: attach heading anchor `id` attribute to heading (like Pagefind do)
+  and fix heading anchor styles when `theme.typesetting: 'article'` is set
+- 3c6193d: Remove unnecessary `sortPages` from `server/utils.ts`
+
+## 3.0.0-alpha.31
+
+### Patch Changes
+
+- d1e3e9a: handle case when meta object was added in `transformPageMap`
+
+## 3.0.0-alpha.30
+
+### Patch Changes
+
+- 7615b62: fix `useRouter` in `nextra/hooks`, use `asPath` instead `route`
+  because locale can be dynamic `/[locale]`
+
+## 3.0.0-alpha.29
+
+### Patch Changes
+
+- fef635e: ignore loading pageMap for dynamic locale `/[locale]`
+
+## 3.0.0-alpha.28
+
+### Patch Changes
+
+- a8c2196: use dynamic import for loading `mermaid`
+- 363b85f: add `flex-shrink: 0` for indent in `FileTree` for `<Ident />` and svg
+  icons in `<Folder />` and `<File />`
+
 ## 3.0.0-alpha.27
 
 ### Patch Changes

@@ -92,7 +92,11 @@ async function collectFiles({
         return
       }
 
-      const fileRoute = normalizePageRoute(route, name)
+      const fileRoute = normalizePageRoute(
+        route,
+        // Directory could have dot, e.g. graphql-eslint-3.14
+        isDirectory ? name + ext : name
+      )
 
       if (isDirectory) {
         if (fileRoute === '/api') return
@@ -196,8 +200,10 @@ function convertPageMapToAst(pageMap: PageMapItem[]): ArrayExpression {
       })
     }
     return createAstObject({
-      // @ts-expect-error -- item.data is string
-      data: { type: 'Identifier', name: item.data }
+      data:
+        typeof item.data === 'string'
+          ? { type: 'Identifier', name: item.data }
+          : valueToEstree(item.data)
     })
   })
 

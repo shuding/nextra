@@ -13,3 +13,4 @@ out/
 
 tsup.config.bundled*
 tsconfig.tsbuildinfo
+pagefind/

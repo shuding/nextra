@@ -64,7 +64,8 @@ export async function loader(
     codeHighlight,
     transform,
     mdxOptions,
-    locales
+    locales,
+    autoImportThemeStyle
   } = this.getOptions()
 
   const mdxPath = this._module?.resourceResolveData
@@ -106,7 +107,7 @@ export const getStaticProps = () => ({ notFound: true })`
 
   const cssImports = `
 ${latex ? "import 'katex/dist/katex.min.css'" : ''}
-${OFFICIAL_THEMES.includes(theme) ? `import '${theme}/style.css'` : ''}`
+${OFFICIAL_THEMES.includes(theme) && autoImportThemeStyle ? `import '${theme}/style.css'` : ''}`
 
   if (currentPath.includes('/pages/_app.')) {
     isAppFileFromNodeModules = currentPath.includes('/node_modules/')
@@ -211,8 +212,12 @@ export default MDXLayout`
   const stringifiedPageOpts = JSON.stringify(pageOpts).slice(0, -1)
   const pageMapPath = path.join(CHUNKS_DIR, `nextra-page-map-${locale}.mjs`)
 
+  const pageMap = locale.startsWith('[')
+    ? 'const pageMap = []'
+    : `import { pageMap } from '${slash(pageMapPath)}'`
+
   const rawJs = `import { HOC_MDXWrapper } from 'nextra/setup-page'
-import { pageMap } from '${slash(pageMapPath)}'
+${pageMap}
 ${isAppFileFromNodeModules ? cssImports : ''}
 ${finalResult}
 

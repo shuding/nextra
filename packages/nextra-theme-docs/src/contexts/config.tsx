@@ -64,9 +64,16 @@ export function ConfigProvider({
     setMenu(false)
   }, [asPath])
 
+  useEffect(() => {
+    // Lock background scroll when menu is opened
+    document.body.classList.toggle('_overflow-hidden', menu)
+  }, [menu])
+
+  const value = useMemo(() => ({ menu, setMenu }), [menu])
+
   return (
     <ConfigContext.Provider value={extendedConfig}>
-      <MenuProvider value={{ menu, setMenu }}>{children}</MenuProvider>
+      <MenuProvider value={value}>{children}</MenuProvider>
     </ConfigContext.Provider>
   )
 }
