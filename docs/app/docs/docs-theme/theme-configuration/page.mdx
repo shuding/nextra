@@ -47,9 +47,9 @@ export function Table({ children }) {
 
 <Table>
 
-|                    |          |                                      |
-| ------------------ | -------- | ------------------------------------ |
-| docsRepositoryBase | `string` | URL of the documentation repository. |
+|                    |          |                                     |
+| ------------------ | -------- | ----------------------------------- |
+| docsRepositoryBase | `string` | URL of the documentation repository |
 
 </Table>
 
@@ -74,9 +74,9 @@ favicon, etc.
 
 <Table>
 
-|      |                                |                                                |
-| ---- | ------------------------------ | ---------------------------------------------- |
-| head | `React.ReactNode \|  React.FC` | Component that renders the `<head />` content. |
+|      |                                |                                               |
+| ---- | ------------------------------ | --------------------------------------------- |
+| head | `React.ReactNode \|  React.FC` | Component that renders the `<head />` content |
 
 </Table>
 
@@ -137,10 +137,10 @@ Customize the theme behavior of the website.
 
 <Table>
 
-|            |           |                                                                                                        |
-| ---------- | --------- | ------------------------------------------------------------------------------------------------------ |
-| darkMode   | `boolean` | Show or hide the dark mode toggle button.                                                              |
-| nextThemes | `object`  | Configuration for the [next-themes](https://github.com/pacocoursey/next-themes#themeprovider) package. |
+|            |           |                                                                                                       |
+| ---------- | --------- | ----------------------------------------------------------------------------------------------------- |
+| darkMode   | `boolean` | Show or hide the dark mode toggle button                                                              |
+| nextThemes | `object`  | Configuration for the [next-themes](https://github.com/pacocoursey/next-themes#themeprovider) package |
 
 </Table>
 
@@ -151,10 +151,10 @@ saturation values for light and dark themes.
 
 <Table>
 
-|                  |                                             |                                            |
-| ---------------- | ------------------------------------------- | ------------------------------------------ |
-| color.hue        | `number \| { dark: number; light: number }` | The hue of the primary theme color.        |
-| color.saturation | `number \| { dark: number; light: number }` | The saturation of the primary theme color. |
+|                  |                                             |                                           |
+| ---------------- | ------------------------------------------- | ----------------------------------------- |
+| color.hue        | `number \| { dark: number; light: number }` | The hue of the primary theme color        |
+| color.saturation | `number \| { dark: number; light: number }` | The saturation of the primary theme color |
 
 </Table>
 
@@ -173,10 +173,10 @@ function component.
 
 <Table>
 
-|          |                               |                      |
-| -------- | ----------------------------- | -------------------- |
-| logo     | `React.ReactNode \| React.FC` | Logo of the website. |
-| logoLink | `boolean \| string`           | Link of the logo.    |
+|          |                               |                     |
+| -------- | ----------------------------- | ------------------- |
+| logo     | `React.ReactNode \| React.FC` | Logo of the website |
+| logoLink | `boolean \| string`           | Link of the logo    |
 
 </Table>
 
@@ -210,16 +210,14 @@ export default {
 Show a button that links to your project’s homepage on the navbar. By default,
 it links to Nextra’s GitHub repository.
 
-<OptionTable
-  options={[
-    ['project.link', 'string', 'URL of the project homepage.'],
-    [
-      'project.icon',
-      'React.ReactNode | React.FC',
-      'Icon or element of the project link.'
-    ]
-  ]}
-/>
+<Table>
+
+|              |                               |                                     |
+| ------------ | ----------------------------- | ----------------------------------- |
+| project.link | `string`                      | URL of the project homepage         |
+| project.icon | `React.ReactNode \| React.FC` | Icon or element of the project link |
+
+</Table>
 
 You can configure `project.link` and `project.icon` to customize the project
 link, for example make it link to your GitLab repository:
@@ -251,10 +249,10 @@ navbar.
 
 <Table>
 
-|           |                               |                                   |
-| --------- | ----------------------------- | --------------------------------- |
-| chat.link | `string`                      | URL of the chat link.             |
-| chat.icon | `React.ReactNode \| React.FC` | Icon or element of the chat link. |
+|           |                               |                                  |
+| --------- | ----------------------------- | -------------------------------- |
+| chat.link | `string`                      | URL of the chat link             |
+| chat.icon | `React.ReactNode \| React.FC` | Icon or element of the chat link |
 
 </Table>
 
@@ -305,11 +303,11 @@ notice.
 
 <Table>
 
-|                      |                               |                                                          |
-| -------------------- | ----------------------------- | -------------------------------------------------------- |
-| `banner.dismissible` | `boolean`                     | Closable banner or not.                                  |
-| `banner.key`         | `string`                      | Storage key to keep the banner state (dismissed or not). |
-| `banner.content`     | `React.ReactNode \| React.FC` | Content of the banner.                                   |
+|                      |                               |                                                         |
+| -------------------- | ----------------------------- | ------------------------------------------------------- |
+| `banner.dismissible` | `boolean`                     | Closable banner or not                                  |
+| `banner.key`         | `string`                      | Storage key to keep the banner state (dismissed or not) |
+| `banner.content`     | `React.ReactNode \| React.FC` | Content of the banner                                   |
 
 </Table>
 
@@ -347,10 +345,10 @@ Customize the entire navbar component.
 
 <Table>
 
-|                     |                                            |                                        |
-| ------------------- | ------------------------------------------ | -------------------------------------- |
-| navbar.component    | `React.ReactNode \| React.FC<NavBarProps>` | Navbar component.                      |
-| navbar.extraContent | `React.ReactNode \| React.FC`              | Display extra content after last icon. |
+|                     |                                            |                                       |
+| ------------------- | ------------------------------------------ | ------------------------------------- |
+| navbar.component    | `React.ReactNode \| React.FC<NavBarProps>` | Navbar component                      |
+| navbar.extraContent | `React.ReactNode \| React.FC`              | Display extra content after last icon |
 
 </Table>
 
@@ -358,11 +356,11 @@ Customize the entire navbar component.
 
 <Table>
 
-|                                  |           |                                                                                                  |
-| -------------------------------- | --------- | ------------------------------------------------------------------------------------------------ |
-| sidebar.defaultMenuCollapseLevel | `number`  | Specifies the folder level at which the menu on the left is collapsed by default. Defaults to 2. |
-| sidebar.autoCollapse             | `boolean` | If true, automatically collapse inactive folders above `defaultMenuCollapseLevel`.               |
-| sidebar.toggleButton             | `boolean` | Hide/show sidebar toggle button. Defaults to `false`.                                            |
+|                                  |           |                                                                                                 |
+| -------------------------------- | --------- | ----------------------------------------------------------------------------------------------- |
+| sidebar.defaultMenuCollapseLevel | `number`  | Specifies the folder level at which the menu on the left is collapsed by default. Defaults to 2 |
+| sidebar.autoCollapse             | `boolean` | If true, automatically collapse inactive folders above `defaultMenuCollapseLevel`               |
+| sidebar.toggleButton             | `boolean` | Hide/show sidebar toggle button. Defaults to `false`                                            |
 
 </Table>
 
@@ -413,9 +411,9 @@ code blocks.
 
 <Table>
 
-|            |                            |                        |
-| ---------- | -------------------------- | ---------------------- |
-| components | `Record<string, React.FC>` | Custom MDX components. |
+|            |                            |                       |
+| ---------- | -------------------------- | --------------------- |
+| components | `Record<string, React.FC>` | Custom MDX components |
 
 </Table>
 
@@ -425,9 +423,9 @@ The default writing direction of the website.
 
 <Table>
 
-|           |                  |                            |
-| --------- | ---------------- | -------------------------- |
-| direction | `"ltr" \| "rtl"` | Default writing direction. |
+|           |                  |                           |
+| --------- | ---------------- | ------------------------- |
+| direction | `"ltr" \| "rtl"` | Default writing direction |
 
 </Table>
 
@@ -438,9 +436,9 @@ render a comment section, a newsletter form, or any other type of content.
 
 <Table>
 
-|      |                                           |                            |
-| ---- | ----------------------------------------- | -------------------------- |
-| main | `React.FC<{ children: React.ReactNode }>` | Component of main content. |
+|      |                                           |                           |
+| ---- | ----------------------------------------- | ------------------------- |
+| main | `React.FC<{ children: React.ReactNode }>` | Component of main content |
 
 </Table>
 
@@ -453,13 +451,13 @@ navigating between headings.
 
 <Table>
 
-|                  |                                         |                                                           |
-| ---------------- | --------------------------------------- | --------------------------------------------------------- |
-| toc.component    | `React.ReactNode \| React.FC<TOCProps>` | Custom renderer of the TOC.                               |
-| toc.extraContent | `React.ReactNode \| React.FC`           | Display extra content below the TOC content.              |
-| toc.float        | `boolean`                               | Float the TOC next to the content.                        |
-| toc.title        | `React.ReactNode \| React.FC`           | Title of the TOC sidebar. By default it’s “On This Page”. |
-| toc.backToTop    | `boolean`                               | Add `Scroll to top` link.                                 |
+|                  |                                         |                                                          |
+| ---------------- | --------------------------------------- | -------------------------------------------------------- |
+| toc.component    | `React.ReactNode \| React.FC<TOCProps>` | Custom renderer of the TOC                               |
+| toc.extraContent | `React.ReactNode \| React.FC`           | Display extra content below the TOC content              |
+| toc.float        | `boolean`                               | Float the TOC next to the content                        |
+| toc.title        | `React.ReactNode \| React.FC`           | Title of the TOC sidebar. By default it’s “On This Page” |
+| toc.backToTop    | `boolean`                               | Add `Scroll to top` link                                 |
 
 </Table>
 
@@ -476,10 +474,10 @@ Show an “Edit this page” link on the page that points to the file URL on Git
 
 <Table>
 
-|                    |                                                                                          |                                 |
-| ------------------ | ---------------------------------------------------------------------------------------- | ------------------------------- |
-| editLink.content   | `React.ReactNode \| React.FC`                                                            | Content of the edit link.       |
-| editLink.component | `React.FC<{ children: React.ReactNode; className?: string; filePath?: string }> \| null` | Customized edit link component. |
+|                    |                                                                                          |                                |
+| ------------------ | ---------------------------------------------------------------------------------------- | ------------------------------ |
+| editLink.content   | `React.ReactNode \| React.FC`                                                            | Content of the edit link       |
+| editLink.component | `React.FC<{ children: React.ReactNode; className?: string; filePath?: string }> \| null` | Customized edit link component |
 
 </Table>
 
@@ -496,11 +494,11 @@ the docs repository, with the current website title prefilled:
 
 <Table>
 
-|                  |                               |                                                                                            |
-| ---------------- | ----------------------------- | ------------------------------------------------------------------------------------------ |
-| feedback.content | `React.ReactNode \| React.FC` | Content of the feedback button.                                                            |
-| feedback.labels  | `string`                      | Labels that can be added to the new created GitHub issue.                                  |
-| feedback.useLink | `() => string`                | Custom link, by default, will open an issue in the repository set in `docsRepositoryBase`. |
+|                  |                               |                                                                                           |
+| ---------------- | ----------------------------- | ----------------------------------------------------------------------------------------- |
+| feedback.content | `React.ReactNode \| React.FC` | Content of the feedback button                                                            |
+| feedback.labels  | `string`                      | Labels that can be added to the new created GitHub issue                                  |
+| feedback.useLink | `() => string`                | Custom link, by default, will open an issue in the repository set in `docsRepositoryBase` |
 
 </Table>
 
@@ -517,11 +515,11 @@ navigating between pages.
 
 <Table>
 
-|                 |                     |                                           |
-| --------------- | ------------------- | ----------------------------------------- |
-| navigation      | `boolean \| object` | Enable or disable navigation link.        |
-| navigation.prev | `boolean`           | Enable or disable the previous page link. |
-| navigation.next | `boolean`           | Enable or disable the next page link.     |
+|                 |                     |                                          |
+| --------------- | ------------------- | ---------------------------------------- |
+| navigation      | `boolean \| object` | Enable or disable navigation link        |
+| navigation.prev | `boolean`           | Enable or disable the previous page link |
+| navigation.next | `boolean`           | Enable or disable the next page link     |
 
 </Table>
 
@@ -547,9 +545,9 @@ of the content.
 
 <Table>
 
-|              |                                                    |                                            |
-| ------------ | -------------------------------------------------- | ------------------------------------------ |
-| gitTimestamp | `React.ReactNode \| React.FC<{ timestamp: Date }>` | Component to render the last updated info. |
+|              |                                                    |                                           |
+| ------------ | -------------------------------------------------- | ----------------------------------------- |
+| gitTimestamp | `React.ReactNode \| React.FC<{ timestamp: Date }>` | Component to render the last updated info |
 
 </Table>
 
@@ -560,10 +558,10 @@ default footer, or fully customize it with a custom component.
 
 <Table>
 
-|                  |                                                  |                                  |
-| ---------------- | ------------------------------------------------ | -------------------------------- |
-| footer.content   | `React.ReactNode \| React.FC`                    | Content of the footer component. |
-| footer.component | `React.ReactNode \| React.FC<{ menu: boolean }>` | Customized footer component.     |
+|                  |                                                  |                                 |
+| ---------------- | ------------------------------------------------ | ------------------------------- |
+| footer.content   | `React.ReactNode \| React.FC`                    | Content of the footer component |
+| footer.component | `React.ReactNode \| React.FC<{ menu: boolean }>` | Customized footer component     |
 
 </Table>
 
@@ -592,10 +590,10 @@ export default {
 
 <Table>
 
-|                        |                                                                             |                                       |
-| ---------------------- | --------------------------------------------------------------------------- | ------------------------------------- |
-| themeSwitch.component  | `React.ReactNode \|`<br/>`React.FC<{ lite?: boolean, className?: string }>` | Component to render the theme switch. |
-| themeSwitch.useOptions | `ThemeOptions \| () => ThemeOptions`                                        | Options in the theme switch.          |
+|                        |                                                                             |                                      |
+| ---------------------- | --------------------------------------------------------------------------- | ------------------------------------ |
+| themeSwitch.component  | `React.ReactNode \|`<br/>`React.FC<{ lite?: boolean, className?: string }>` | Component to render the theme switch |
+| themeSwitch.useOptions | `ThemeOptions \| () => ThemeOptions`                                        | Options in the theme switch          |
 
 </Table>
 
@@ -628,8 +626,8 @@ favicon of the website simply by using an emoji or character.
 
 <Table>
 
-|              |          |                                  |
-| ------------ | -------- | -------------------------------- |
-| faviconGlyph | `string` | The glyph to use as the favicon. |
+|              |          |                                 |
+| ------------ | -------- | ------------------------------- |
+| faviconGlyph | `string` | The glyph to use as the favicon |
 
 </Table>
