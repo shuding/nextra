@@ -3,11 +3,7 @@ import type { Metadata, NextConfig } from 'next'
 import type { FC, ReactNode } from 'react'
 import type { z } from 'zod'
 import type { NEXTRA_INTERNAL } from './constants.js'
-import type {
-  mathJaxOptionsSchema,
-  nextraConfigSchema,
-  searchSchema
-} from './server/schemas'
+import type { mathJaxOptionsSchema, nextraConfigSchema } from './server/schemas'
 
 export interface LoaderOptions extends NextraConfig {
   isPageImport?: boolean
@@ -76,8 +72,6 @@ export type ReadingTime = {
   time: number
   words: number
 }
-
-export type Search = z.infer<typeof searchSchema>
 
 export type NextraConfig = z.infer<typeof nextraConfigSchema>
 

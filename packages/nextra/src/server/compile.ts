@@ -80,7 +80,7 @@ export async function compileMdx(
     filePath = '',
     useCachedCompiler,
     isPageImport = true
-  }: CompileMdxOptions = {}
+  }: Partial<CompileMdxOptions> = {}
 ) {
   const {
     jsx = false,
@@ -91,7 +91,7 @@ export async function compileMdx(
     rehypePlugins,
     recmaPlugins,
     rehypePrettyCodeOptions
-  }: MdxOptions = mdxOptions
+  } = mdxOptions
 
   const format =
     _format === 'detect' ? (filePath.endsWith('.mdx') ? 'mdx' : 'md') : _format
