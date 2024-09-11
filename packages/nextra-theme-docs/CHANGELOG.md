@@ -13,6 +13,16 @@
 - Updated dependencies [99f34d3]
   - nextra@4.0.0-app-router.0
 
+## 3.0.0-alpha.38
+
+### Patch Changes
+
+- ccaf3d4: Add the `autoImportThemeStyle` option to the Nextra configuration.
+  This allows users to import the official Nextra theme CSS into a specific
+  cascade layer.
+- Updated dependencies [ccaf3d4]
+  - nextra@3.0.0-alpha.38
+
 ## 3.0.0-alpha.37
 
 ### Patch Changes
