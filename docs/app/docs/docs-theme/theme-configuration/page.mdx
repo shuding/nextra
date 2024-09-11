@@ -1,7 +1,8 @@
 import { Screenshot } from 'components/screenshot'
-import { OptionTable } from 'components/table'
 import { Callout } from 'nextra/components'
+import logoImage from 'public/assets/docs/logo.png'
 import sidebarTitleComponentImage from 'public/assets/docs/sidebar-customized.png'
+import { Hue, Saturation } from './_slider'
 
 # Theme Configuration
 
@@ -27,36 +28,30 @@ Detailed information for each option is listed below.
 Set the repository URL of the documentation. It’s used to generate the
 “[Edit this page](#edit-link)” link and the “[Feedback](#feedback-link)” link.
 
-<style jsx global>{`
-  table {
-    width: 100%;
-    display: table !important;
-    font-size: 0.875rem;
-  }
-  th {
-    text-align: left;
-  }
-  tr {
-    background: unset !important;
-  }
-  th:nth-child(1):before {
-    content: 'Option';
-  }
-  th:nth-child(2):before {
-    content: 'Type';
-  }
-  th:nth-child(3):before {
-    content: 'Description';
-  }
-  td:nth-child(1) {
-    color: rgb(139 92 246);
-    font-weight: bold;
-  }
-`}</style>
+export function Table({ children }) {
+  return (
+    <table className="w-full !table text-sm">
+      <thead>
+        <tr>
+          <th align="left">Option</th>
+          <th align="left">Type</th>
+          <th align="left">Description</th>
+        </tr>
+      </thead>
+      <tbody className="first:[&_td]:font-semibold first:[&_td]:text-violet-600 first:[&_td]:dark:text-violet-500 [&_tr]:!bg-transparent">
+        {children.props.children[1].props.children}
+      </tbody>
+    </table>
+  )
+}
+
+<Table>
 
 |                    |          |                                      |
 | ------------------ | -------- | ------------------------------------ |
 | docsRepositoryBase | `string` | URL of the documentation repository. |
+
+</Table>
 
 #### Specify a Path
 
@@ -77,9 +72,13 @@ Then Nextra will automatically generate the correct file path for all pages.
 Configure the `<head>` tags of the website. You can add meta tags, title,
 favicon, etc.
 
+<Table>
+
 |      |                                |                                                |
 | ---- | ------------------------------ | ---------------------------------------------- |
 | head | `React.ReactNode \|  React.FC` | Component that renders the `<head />` content. |
+
+</Table>
 
 #### Static Head Tags
 
@@ -136,24 +135,30 @@ for more information about the `useConfig` hook and the `frontMatter` object.
 
 Customize the theme behavior of the website.
 
+<Table>
+
 |            |           |                                                                                                        |
 | ---------- | --------- | ------------------------------------------------------------------------------------------------------ |
 | darkMode   | `boolean` | Show or hide the dark mode toggle button.                                                              |
 | nextThemes | `object`  | Configuration for the [next-themes](https://github.com/pacocoursey/next-themes#themeprovider) package. |
+
+</Table>
 
 ### Theme Color
 
 You can adjust the theme color of the website by setting primary hue and
 saturation values for light and dark themes.
 
+<Table>
+
 |                  |                                             |                                            |
 | ---------------- | ------------------------------------------- | ------------------------------------------ |
 | color.hue        | `number \| { dark: number; light: number }` | The hue of the primary theme color.        |
 | color.saturation | `number \| { dark: number; light: number }` | The saturation of the primary theme color. |
 
-Try it out for this website:
+</Table>
 
-import { Hue, Saturation } from './_slider'
+Try it out for this website:
 
 | Hue     | Saturation     |
 | ------- | -------------- |
@@ -166,14 +171,14 @@ import { Hue, Saturation } from './_slider'
 The logo of the website rendered on the navbar. It can be a React node or a
 function component.
 
-<OptionTable
-  options={[
-    ['logo', 'React.ReactNode | React.FC', 'Logo of the website.'],
-    ['logoLink', 'boolean | string', 'Link of the logo.']
-  ]}
-/>
+<Table>
 
-import logoImage from 'public/assets/docs/logo.png'
+|          |                               |                      |
+| -------- | ----------------------------- | -------------------- |
+| logo     | `React.ReactNode \| React.FC` | Logo of the website. |
+| logoLink | `boolean \| string`           | Link of the logo.    |
+
+</Table>
 
 <Screenshot src={logoImage} alt="Customized Logo" />
 
@@ -244,16 +249,14 @@ If `icon` is missing, it will be a
 Show a button that links to your project’s forum or other social media on the
 navbar.
 
-<OptionTable
-  options={[
-    ['chat.link', 'string', 'URL of the chat link.'],
-    [
-      'chat.icon',
-      'React.ReactNode | React.FC',
-      'Icon or element of the chat link.'
-    ]
-  ]}
-/>
+<Table>
+
+|           |                               |                                   |
+| --------- | ----------------------------- | --------------------------------- |
+| chat.link | `string`                      | URL of the chat link.             |
+| chat.icon | `React.ReactNode \| React.FC` | Icon or element of the chat link. |
+
+</Table>
 
 You can configure `chat.link` and `chat.icon` to customize the chat link, for
 example make it link to your Twitter account:
@@ -283,39 +286,32 @@ to learn how to add custom menus or links to the navbar.
 
 ### Search
 
-<OptionTable
-  options={[
-    [
-      'search.component',
-      `React.ReactNode | React.FC<{
-  className?: string
-  directories: Item[]
-}>`,
-      ''
-    ],
-    ['search.emptyResult', 'React.ReactNode | React.FC', 'Not found text'],
-    ['search.loading', 'React.ReactNode | React.FC', 'Loading text'],
-    ['search.error', 'string | (() => string)', 'Error text'],
-    ['search.placeholder', 'string | (() => string)', 'Placeholder text']
-  ]}
-/>
+<Table>
+
+|                    |                                                                                  |                  |
+| ------------------ | -------------------------------------------------------------------------------- | ---------------- |
+| search.component   | `React.ReactNode \|`<br/>`React.FC<{ className?: string; directories: Item[] }>` |                  |
+| search.emptyResult | `React.ReactNode \| React.FC`                                                    | Not found text   |
+| search.loading     | `React.ReactNode \| React.FC`                                                    | Loading text     |
+| search.error       | `string \| (() => string)`                                                       | Error text       |
+| search.placeholder | `string \| (() => string)`                                                       | Placeholder text |
+
+</Table>
 
 ### Banner
 
 Show a banner on the top of the website. It can be used to show a warning or a
 notice.
 
-<OptionTable
-  options={[
-    ['banner.dismissible', 'boolean', 'Closable banner or not.'],
-    [
-      'banner.key',
-      'string',
-      'Storage key to keep the banner state (dismissed or not).'
-    ],
-    ['banner.content', 'React.ReactNode | React.FC', 'Content of the banner.']
-  ]}
-/>
+<Table>
+
+|                      |                               |                                                          |
+| -------------------- | ----------------------------- | -------------------------------------------------------- |
+| `banner.dismissible` | `boolean`                     | Closable banner or not.                                  |
+| `banner.key`         | `string`                      | Storage key to keep the banner state (dismissed or not). |
+| `banner.content`     | `React.ReactNode \| React.FC` | Content of the banner.                                   |
+
+</Table>
 
 #### Banner key
 
@@ -349,20 +345,14 @@ export default {
 
 Customize the entire navbar component.
 
-<OptionTable
-  options={[
-    [
-      'navbar.component',
-      'React.ReactNode | React.FC<NavBarProps>',
-      'Navbar component.'
-    ],
-    [
-      'navbar.extraContent',
-      'React.ReactNode | React.FC',
-      'Display extra content after last icon.'
-    ]
-  ]}
-/>
+<Table>
+
+|                     |                                            |                                        |
+| ------------------- | ------------------------------------------ | -------------------------------------- |
+| navbar.component    | `React.ReactNode \| React.FC<NavBarProps>` | Navbar component.                      |
+| navbar.extraContent | `React.ReactNode \| React.FC`              | Display extra content after last icon. |
+
+</Table>
 
 ## Sidebar
 
