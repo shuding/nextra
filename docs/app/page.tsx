@@ -222,8 +222,8 @@ export default function IndexPage() {
               <p className="z-[2]">
                 Nextra indexes your content automatically at build-time and
                 performs incredibly fast full-text search via{' '}
-                <Link href="https://github.com/nextapps-de/flexsearch">
-                  FlexSearch
+                <Link href="https://github.com/cloudcannon/pagefind">
+                  Pagefind
                 </Link>
                 .
               </p>

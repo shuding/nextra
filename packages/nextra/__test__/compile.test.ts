@@ -480,7 +480,8 @@ describe('Code block', () => {
   describe('Filename', () => {
     it('attach with "codeHighlight: true" by default', async () => {
       const { result } = await compileMdx('```text filename="test.js"\n```', {
-        mdxOptions
+        mdxOptions,
+        search: true
       })
       expect(result).toMatch(
         '<_components.pre tabIndex="0" data-language="text" data-word-wrap="" data-filename="test.js">'
@@ -525,7 +526,8 @@ describe('Code block', () => {
         it('attach with "copy"', async () => {
           const { result } = await compileMdx('```js copy\n```', {
             mdxOptions,
-            codeHighlight
+            codeHighlight,
+            search: true
           })
           expect(result).toMatch('data-word-wrap="" data-copy="">')
         })
@@ -534,7 +536,8 @@ describe('Code block', () => {
           const { result } = await compileMdx('```js\n```', {
             mdxOptions,
             defaultShowCopyCode: true,
-            codeHighlight
+            codeHighlight,
+            search: true
           })
           expect(result).toMatch('data-word-wrap="" data-copy="">')
         })

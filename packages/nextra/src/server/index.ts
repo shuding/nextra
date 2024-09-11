@@ -3,26 +3,25 @@ import { sep } from 'node:path'
 import { fromZodError } from 'zod-validation-error'
 import type { Nextra } from '../types'
 import {
-  DEFAULT_CONFIG,
   DEFAULT_LOCALES,
   MARKDOWN_EXTENSION_REGEX,
   MARKDOWN_EXTENSIONS
 } from './constants.js'
 import { nextraConfigSchema } from './schemas.js'
 import { logger } from './utils.js'
-import { NextraPlugin, NextraSearchPlugin } from './webpack-plugins/index.js'
+import { NextraPlugin } from './webpack-plugins/index.js'
 
 const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
 
 const AGNOSTIC_PAGE_MAP_PATH = `.next${sep}static${sep}chunks${sep}nextra-page-map`
 
 const nextra: Nextra = nextraConfig => {
-  const { error } = nextraConfigSchema.safeParse(nextraConfig)
+  const { error, data: loaderOptions } =
+    nextraConfigSchema.safeParse(nextraConfig)
   if (error) {
     logger.error('Error validating nextraConfig')
     throw fromZodError(error)
   }
-
   return function withNextra(nextConfig = {}) {
     const hasI18n = !!nextConfig.i18n?.locales
 
@@ -30,13 +29,6 @@ const nextra: Nextra = nextraConfig => {
       logger.info(
         'You have Next.js i18n enabled, read here https://nextjs.org/docs/advanced-features/i18n-routing for the docs.'
       )
-    }
-    const locales = nextConfig.i18n?.locales || DEFAULT_LOCALES
-
-    const loaderOptions = {
-      ...DEFAULT_CONFIG,
-      ...nextraConfig,
-      locales
     }
 
     // const optimizedImports = new Set(
@@ -67,15 +59,11 @@ const nextra: Nextra = nextraConfig => {
           config.plugins ||= []
           config.plugins.push(
             new NextraPlugin({
-              locales,
+              locales: nextConfig.i18n?.locales || DEFAULT_LOCALES,
               mdxBaseDir: loaderOptions.mdxBaseDir
               // transformPageMap: nextraConfig.transformPageMap
             })
           )
-
-          if (loaderOptions.search) {
-            config.plugins.push(new NextraSearchPlugin())
-          }
         }
 
         // Fixes https://github.com/vercel/next.js/issues/55872
@@ -115,10 +103,7 @@ const nextra: Nextra = nextraConfig => {
               request === null,
             use: [
               options.defaultLoaders.babel,
-              {
-                loader: 'nextra/loader',
-                options: loaderOptions
-              }
+              { loader: 'nextra/loader', options: loaderOptions }
             ]
           },
           {

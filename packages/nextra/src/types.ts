@@ -3,16 +3,11 @@ import type { Metadata, NextConfig } from 'next'
 import type { FC, ReactNode } from 'react'
 import type { z } from 'zod'
 import type { NEXTRA_INTERNAL } from './constants.js'
-import type {
-  mathJaxOptionsSchema,
-  nextraConfigSchema,
-  searchSchema
-} from './server/schemas'
+import type { mathJaxOptionsSchema, nextraConfigSchema } from './server/schemas'
 
 export interface LoaderOptions extends NextraConfig {
   isPageImport?: boolean
   isPageMapImport?: boolean
-  locales: string[]
 }
 
 export interface Folder<FileType = PageMapItem> {
@@ -78,8 +73,6 @@ export type ReadingTime = {
   words: number
 }
 
-export type Search = z.infer<typeof searchSchema>
-
 export type NextraConfig = z.infer<typeof nextraConfigSchema>
 
 export type MathJaxOptions = z.infer<typeof mathJaxOptionsSchema>
@@ -122,12 +115,3 @@ export type NextraInternalGlobal = typeof globalThis & {
 }
 
 export type DynamicMetaDescriptor = Record<string, () => any>
-
-export type StructurizedData = Record<string, string>
-
-export type SearchData = {
-  [route: string]: {
-    title: string
-    data: StructurizedData
-  }
-}

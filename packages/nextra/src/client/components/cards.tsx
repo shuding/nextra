@@ -19,12 +19,6 @@ const classes = {
   )
 }
 
-const arrowEl = (
-  <span className="_transition-transform _duration-75 group-hover:_translate-x-[2px]">
-    →
-  </span>
-)
-
 function Card({
   children,
   title,
@@ -48,7 +42,11 @@ function Card({
       image: true
     }
 )) {
-  const animatedArrow = arrow ? arrowEl : null
+  const animatedArrow = arrow && (
+    <span className="_transition-transform _duration-75 group-hover:_translate-x-[2px]">
+      →
+    </span>
+  )
 
   if (image) {
     return (

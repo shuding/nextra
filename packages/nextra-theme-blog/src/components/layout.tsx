@@ -6,7 +6,11 @@ export function Footer({
 }: {
   children?: ReactNode
 }): ReactElement {
-  return <small className="_mt-32 _block">{children}</small>
+  return (
+    <small className="_mt-32 _block" data-pagefind-ignore="all">
+      {children}
+    </small>
+  )
 }
 
 export function Layout({ children }: { children: ReactNode }): ReactElement {
@@ -15,6 +19,7 @@ export function Layout({ children }: { children: ReactNode }): ReactElement {
       <article
         className="_container _px-4 _prose max-md:_prose-sm dark:_prose-invert"
         dir="ltr"
+        data-pagefind-body
       >
         {children}
       </article>

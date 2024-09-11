@@ -4,7 +4,6 @@
  */
 import path from 'path'
 import type { Property } from 'estree'
-import type { NextraConfig } from '../types'
 
 export { MARKDOWN_EXTENSION_REGEX, DEFAULT_LOCALE } from '../constants.js'
 
@@ -17,14 +16,6 @@ export const CHUNKS_DIR = path.join(CWD, '.next', 'static', 'chunks')
 export const MARKDOWN_URL_EXTENSION_REGEX = /\.mdx?(?:(?=[#?])|$)/
 
 export const IS_PRODUCTION = process.env.NODE_ENV === 'production'
-
-export const DEFAULT_CONFIG = {
-  staticImage: true,
-  search: {
-    codeblocks: true
-  },
-  codeHighlight: true
-} satisfies Partial<NextraConfig>
 
 export const META_REGEX = /_meta\.[jt]sx?$/
 

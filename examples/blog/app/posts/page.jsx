@@ -14,7 +14,7 @@ export default async function PostsPage() {
   }, Object.create(null))
 
   return (
-    <>
+    <div data-pagefind-ignore="all">
       <h1>{metadata.title}</h1>
       <div
         className="_not-prose"
@@ -29,6 +29,6 @@ export default async function PostsPage() {
       {(await getPosts()).map(post => (
         <PostCard key={post.route} post={post} />
       ))}
-    </>
+    </div>
   )
 }

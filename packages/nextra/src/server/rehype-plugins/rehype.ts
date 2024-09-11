@@ -2,7 +2,8 @@ import type { Element, Root } from 'hast'
 import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
 import { bundledLanguages, getHighlighter } from 'shiki'
 import type { Plugin } from 'unified'
-import { visit } from 'unist-util-visit'
+import { SKIP, visit } from 'unist-util-visit'
+import type { NextraConfig } from '../../types.js'
 
 type PreElement = Element & {
   __filename?: string
@@ -55,7 +56,7 @@ export const rehypeParseCodeMeta: Plugin<
       node.__filename = meta.match(CODE_BLOCK_FILENAME_REGEX)?.[1]
       node.properties['data-filename'] = node.__filename
 
-      node.__hasWordWrap = meta.includes('word-wrap=false') ? false : true
+      node.__hasWordWrap = !meta.includes('word-wrap=false')
       if (node.__hasWordWrap) {
         node.properties['data-word-wrap'] = ''
       }
@@ -70,54 +71,53 @@ export const rehypeParseCodeMeta: Plugin<
     })
   }
 
-export const rehypeAttachCodeMeta: Plugin<[], Root> = () => ast => {
-  visit(
-    ast as any,
-    [{ tagName: 'figure' }, { tagName: 'span' }],
-    (node: Element) => {
-      const isRehypePrettyCode =
-        'data-rehype-pretty-code-figure' in node.properties
-      if (!isRehypePrettyCode) return
+export const rehypeAttachCodeMeta: Plugin<
+  [{ search: NextraConfig['search'] }],
+  Root
+> = ({ search }) => {
+  const parseCodeblocks =
+    typeof search === 'object' ? search.codeblocks : search
 
-      // remove <figure data-rehype-pretty-code-figure /> element that wraps <pre /> element
-      // because we'll wrap with our own <div />
-      const preEl: PreElement = Object.assign(node, node.children[0])
-      delete preEl.properties['data-theme']
+  return ast => {
+    visit(
+      ast as any,
+      [{ tagName: 'figure' }, { tagName: 'span' }],
+      (node: Element) => {
+        const isRehypePrettyCode =
+          'data-rehype-pretty-code-figure' in node.properties
 
-      if (preEl.tagName === 'pre') {
-        const [codeEl] = preEl.children as Element[]
-        delete codeEl.properties['data-theme']
-        delete codeEl.properties['data-language']
+        if (!isRehypePrettyCode) return
 
-        if (preEl.__hasWordWrap) {
-          preEl.properties['data-word-wrap'] = ''
+        // remove <figure data-rehype-pretty-code-figure /> element that wraps <pre /> element
+        // because we'll wrap with our own <div />
+        const preEl: PreElement = Object.assign(node, node.children[0])
+        delete preEl.properties['data-theme']
+
+        if (preEl.tagName === 'pre') {
+          const [codeEl] = preEl.children as Element[]
+          delete codeEl.properties['data-theme']
+          delete codeEl.properties['data-language']
+
+          if (preEl.__hasWordWrap) {
+            preEl.properties['data-word-wrap'] = ''
+          }
+
+          if (preEl.__filename) {
+            preEl.properties['data-filename'] = preEl.__filename
+          }
+          if (preEl.__hasCopyCode) {
+            preEl.properties['data-copy'] = ''
+          }
+          if (!parseCodeblocks) {
+            preEl.properties['data-pagefind-ignore'] = 'all'
+          }
+          return SKIP
         }
 
-        if (preEl.__filename) {
-          preEl.properties['data-filename'] = preEl.__filename
-        }
-        if (preEl.__hasCopyCode) {
-          preEl.properties['data-copy'] = ''
-        }
-        // @ts-expect-error fixme
-        if (preEl.type === 'mdxJsxFlowElement') {
-          if (node.properties.className === undefined)
-            delete node.properties.className
-          if (node.properties.style === undefined) delete node.properties.style
-          // @ts-expect-error fixme
-          preEl.attributes.push(
-            ...Object.entries(node.properties).map(([name, value]) => ({
-              type: 'mdxJsxAttribute',
-              name,
-              value: Array.isArray(value) ? value.join(' ') : value
-            }))
-          )
-        }
-      } else {
         // remove class="line"
         // @ts-expect-error fixme
         delete node.children[0].properties.className
       }
-    }
-  )
+    )
+  }
 }

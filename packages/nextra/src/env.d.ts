@@ -8,12 +8,13 @@ declare module 'title' {
 }
 
 declare namespace globalThis {
-  import type { PageMapItem } from './types'
-  var __nextra_resolvePageMap: Record<string, () => Promise<PageMapItem[]>>
-}
+  import type { PageMapItem, SearchResult } from './types'
 
-declare module 'next/dist/compiled/webpack/webpack.js' {
-  export { default as webpack, sources } from 'webpack'
+  var __nextra_resolvePageMap: Record<string, () => Promise<PageMapItem[]>>
+  var pagefind: {
+    search: (query: string) => Promise<{ results: SearchResult[] }>
+    options: (opts: Record<string, unknown>) => Promise<void>
+  }
 }
 
 declare module '*.svg' {

@@ -9,9 +9,6 @@ const withNextra = nextra({
     providerImportSource: 'nextra-theme-docs'
   },
   latex: true,
-  search: {
-    codeblocks: false
-  },
   defaultShowCopyCode: true
 })
 

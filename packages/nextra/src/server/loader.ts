@@ -54,8 +54,7 @@ export async function loader(
     latex,
     codeHighlight,
     transform,
-    mdxOptions,
-    locales
+    mdxOptions
   } = this.getOptions()
 
   const mdxPath = this._module?.resourceResolveData
@@ -79,24 +78,13 @@ export async function loader(
 
   const relativePath = slash(path.relative(APP_DIR, mdxPath))
 
-  let locale = locales[0] === '' ? '' : relativePath.split('/')[0]
-  // In case when partial document is placed outside `pages` directory
-  if (locale === '..') locale = ''
-
   const route =
     '/' +
     relativePath
       .replace(MARKDOWN_EXTENSION_REGEX, '')
       .replace(/\/page$/, '')
       .replace(/^app\//, '')
-  const {
-    result,
-    title,
-    frontMatter,
-    structurizedData,
-    searchIndexKey,
-    readingTime
-  } = await compileMdx(source, {
+  const { result, readingTime } = await compileMdx(source, {
     mdxOptions: {
       ...mdxOptions,
       jsx: true,
@@ -109,24 +97,10 @@ export async function loader(
     search,
     latex,
     codeHighlight,
-    route,
-    locale,
     filePath: mdxPath,
     useCachedCompiler: true,
     isPageImport
   })
-  if (searchIndexKey) {
-    // Store all the things in buildInfo.
-    const { buildInfo } = this._module as any
-    buildInfo.nextraSearch = {
-      indexKey: searchIndexKey,
-      ...(frontMatter.searchable !== false && {
-        title,
-        data: structurizedData,
-        route
-      })
-    }
-  }
   // Imported as a normal component, no need to add the layout.
   if (!isPageImport) {
     return `${result}

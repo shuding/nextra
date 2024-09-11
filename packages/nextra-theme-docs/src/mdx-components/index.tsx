@@ -72,9 +72,12 @@ export function useMDXComponents(components?: any) {
         />
       </summary>
     ),
-    table: props => (
+    table: ({ className, ...props }) => (
       <Table
-        className="nextra-scrollbar [&:not(:first-child)]:_mt-6 _p-0"
+        className={cn(
+          'nextra-scrollbar [&:not(:first-child)]:_mt-6 _p-0',
+          className
+        )}
         {...props}
       />
     ),

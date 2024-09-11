@@ -26,27 +26,6 @@ export const reactNode = [
   { message: 'Must be React.ReactNode or React.FC' }
 ] as const
 
-export const searchSchema = z.boolean().or(
-  z.strictObject({
-    /**
-     * Whether to index code blocks
-     * @default true
-     */
-    codeblocks: z.boolean(),
-    /**
-     * A filter function to filter out files from indexing, and return the
-     * index file key, or null to skip indexing.
-     * A site can have multiple indexes, by default they're separated by
-     * locales as multiple index files.
-     */
-    indexKey: z
-      .custom<
-        (filepath: string, route: string, locale?: string) => null | string
-      >()
-      .optional()
-  })
-)
-
 type Transform = (
   result: string,
   options: {
@@ -67,49 +46,61 @@ export const mathJaxOptionsSchema = z
   })
   // eslint-disable-next-line deprecation/deprecation -- fixme
   .deepPartial()
-  .optional()
 
-export const nextraConfigSchema = z
-  .strictObject({
-    defaultShowCopyCode: z.boolean(),
-    search: searchSchema,
-    staticImage: z.boolean(),
-    readingTime: z.boolean(),
-    latex: z.union([
+export const nextraConfigSchema = z.strictObject({
+  defaultShowCopyCode: z.boolean().optional(),
+  search: z
+    .union([
+      z.boolean(),
+      z.strictObject({
+        /**
+         * Whether to index code blocks
+         */
+        codeblocks: z.boolean()
+      })
+    ])
+    .default({
+      codeblocks: false
+    }),
+  staticImage: z.boolean().default(true),
+  readingTime: z.boolean().optional(),
+  latex: z
+    .union([
       z.boolean(),
       z.strictObject({
         renderer: z.literal('mathjax'),
-        options: mathJaxOptionsSchema
+        options: mathJaxOptionsSchema.optional()
       }),
       z.strictObject({
         renderer: z.literal('katex'),
         options: z.custom<RehypeKatexOptions>()
       })
-    ]),
-    codeHighlight: z.boolean(),
-    /**
-     * A function to modify the code of compiled MDX pages.
-     * @experimental
-     */
-    transform: z.custom<Transform>(),
-    /**
-     * A function to modify the `pageMap` passed to theme layouts.
-     * @experimental
-     */
-    transformPageMap:
-      z.custom<(pageMap: PageMapItem[], locale: string) => PageMapItem[]>(),
-    mdxOptions: z.strictObject({
-      providerImportSource: z.string(),
+    ])
+    .optional(),
+  codeHighlight: z.boolean().default(true),
+  /**
+   * A function to modify the code of compiled MDX pages.
+   * @experimental
+   */
+  transform: z.custom<Transform>(),
+  /**
+   * A function to modify the `pageMap` passed to theme layouts.
+   * @experimental
+   */
+  transformPageMap:
+    z.custom<(pageMap: PageMapItem[], locale: string) => PageMapItem[]>(),
+  mdxOptions: z
+    .strictObject({
+      providerImportSource: z.string().optional(),
       rehypePlugins: z.custom<ProcessorOptions['rehypePlugins']>(),
       remarkPlugins: z.custom<ProcessorOptions['remarkPlugins']>(),
       recmaPlugins: z.custom<ProcessorOptions['recmaPlugins']>(),
-      format: z.enum(['detect', 'mdx', 'md']),
-      rehypePrettyCodeOptions: z.custom<RehypePrettyCodeOptions>()
-    }),
-    mdxBaseDir: z.string().optional()
-  })
-  // eslint-disable-next-line deprecation/deprecation -- fixme
-  .deepPartial()
+      format: z.enum(['detect', 'mdx', 'md']).optional(),
+      rehypePrettyCodeOptions: z.custom<RehypePrettyCodeOptions>().optional()
+    })
+    .optional(),
+  mdxBaseDir: z.string().optional()
+})
 
 export const pageThemeSchema = z.strictObject({
   breadcrumb: z.boolean(),
