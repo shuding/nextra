@@ -10,7 +10,7 @@
     "clean": "rimraf .next .turbo",
     "debug": "NODE_OPTIONS='--inspect' next dev",
     "dev": "next",
-    "postbuild": "pagefind --site .next/server/app --output-path .next/static/chunks/app/[lang]/pagefind",
+    "postbuild": "pagefind --site .next/server/app --output-path .next/static/chunks/pagefind",
     "prebuild": "node nextra-remote-filepaths/fetch.js",
     "predev": "pnpm prebuild",
     "start": "next start",
@@ -40,10 +40,5 @@
     "autoprefixer": "^10.4.16",
     "postcss": "^8.4.33",
     "tailwindcss": "^3.4.1"
-  },
-  "nextBundleAnalysis": {
-    "budget": 358400,
-    "budgetPercentIncreaseRed": 20,
-    "showDetails": true
   }
 }

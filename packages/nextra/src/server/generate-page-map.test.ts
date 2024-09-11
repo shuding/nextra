@@ -17,6 +17,7 @@ describe('generatePageMapFromFilepaths()', () => {
         "posts/(with-comments)/aaron-swartz-a-programmable-web/page.mdx",
         "posts/(with-comments)/code-blocks/page.mdx",
         "posts/(with-comments)/draft/page.mdx",
+        "posts/(with-comments)/lists/page.mdx",
         "posts/(with-comments)/nextra-components/page.mdx",
         "posts/(with-comments)/table/page.mdx",
         "posts/page.jsx",
@@ -52,6 +53,11 @@ describe('generatePageMapFromFilepaths()', () => {
               "__pagePath": "posts/page.jsx",
               "name": "index",
               "route": "/posts",
+            },
+            {
+              "__pagePath": "posts/(with-comments)/lists/page.mdx",
+              "name": "lists",
+              "route": "/posts/lists",
             },
             {
               "__pagePath": "posts/(with-comments)/nextra-components/page.mdx",
@@ -108,6 +114,7 @@ describe('generatePageMapFromFilepaths()', () => {
         "docs/guide/advanced/mermaid/page.mdx",
         "docs/guide/advanced/npm2yarn/page.mdx",
         "docs/guide/advanced/page.mdx",
+        "docs/guide/advanced/playground/page.mdx",
         "docs/guide/advanced/remote/page.mdx",
         "docs/guide/advanced/table/page.mdx",
         "docs/guide/advanced/tailwind-css/page.mdx",
@@ -126,6 +133,7 @@ describe('generatePageMapFromFilepaths()', () => {
         "docs/guide/markdown/page.mdx",
         "docs/guide/organize-files/page.mdx",
         "docs/guide/page.mdx",
+        "docs/guide/search/page.mdx",
         "docs/guide/ssg/page.mdx",
         "docs/guide/syntax-highlighting/page.mdx",
         "docs/guide/twoslash/page.mdx",
@@ -245,6 +253,11 @@ describe('generatePageMapFromFilepaths()', () => {
                         "route": "/docs/guide/advanced/npm2yarn",
                       },
                       {
+                        "__pagePath": "docs/guide/advanced/playground/page.mdx",
+                        "name": "playground",
+                        "route": "/docs/guide/advanced/playground",
+                      },
+                      {
                         "__pagePath": "docs/guide/advanced/remote/page.mdx",
                         "name": "remote",
                         "route": "/docs/guide/advanced/remote",
@@ -344,6 +357,11 @@ describe('generatePageMapFromFilepaths()', () => {
                     "__pagePath": "docs/guide/organize-files/page.mdx",
                     "name": "organize-files",
                     "route": "/docs/guide/organize-files",
+                  },
+                  {
+                    "__pagePath": "docs/guide/search/page.mdx",
+                    "name": "search",
+                    "route": "/docs/guide/search",
                   },
                   {
                     "__pagePath": "docs/guide/ssg/page.mdx",

@@ -69,7 +69,7 @@ export const nextraConfigSchema = z.strictObject({
       z.boolean(),
       z.strictObject({
         renderer: z.literal('mathjax'),
-        options: mathJaxOptionsSchema
+        options: mathJaxOptionsSchema.optional()
       }),
       z.strictObject({
         renderer: z.literal('katex'),

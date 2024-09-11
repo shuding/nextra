@@ -13,7 +13,10 @@ export function Navbar({ navs, children }: NavbarProps): ReactElement {
   const pathname = usePathname()
 
   return (
-    <header className="_mb-8 _flex _items-center _gap-3 _justify-end">
+    <header
+      className="_mb-8 _flex _items-center _gap-3 _justify-end"
+      data-pagefind-ignore="all"
+    >
       {navs?.map(nav =>
         nav.url === pathname ? (
           <span
