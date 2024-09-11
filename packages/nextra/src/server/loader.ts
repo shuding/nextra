@@ -64,7 +64,8 @@ export async function loader(
     codeHighlight,
     transform,
     mdxOptions,
-    locales
+    locales,
+    autoImportThemeStyle
   } = this.getOptions()
 
   const mdxPath = this._module?.resourceResolveData
@@ -106,7 +107,7 @@ export const getStaticProps = () => ({ notFound: true })`
 
   const cssImports = `
 ${latex ? "import 'katex/dist/katex.min.css'" : ''}
-${OFFICIAL_THEMES.includes(theme) ? `import '${theme}/style.css'` : ''}`
+${OFFICIAL_THEMES.includes(theme) && autoImportThemeStyle ? `import '${theme}/style.css'` : ''}`
 
   if (currentPath.includes('/pages/_app.')) {
     isAppFileFromNodeModules = currentPath.includes('/node_modules/')
