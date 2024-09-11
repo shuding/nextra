@@ -17,10 +17,6 @@ declare namespace globalThis {
   }
 }
 
-declare module 'next/dist/compiled/webpack/webpack.js' {
-  export { default as webpack, sources } from 'webpack'
-}
-
 declare module '*.svg' {
   import type { FC, SVGProps } from 'react'
   export const ReactComponent: FC<SVGProps<SVGSVGElement>>
