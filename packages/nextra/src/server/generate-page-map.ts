@@ -9,25 +9,24 @@ type Params = {
 }
 
 export async function getFilepaths({
-  dir,
+  _dir,
   cwd,
   isAppDir
 }: Params): Promise<string[]> {
-  if (!dir) {
+  if (!_dir) {
     throw new Error('`dir` is required')
   }
+  const dir = fg.convertPathToPattern(_dir)
   const result = await fg(
     [
-      path.join(
-        dir,
-        isAppDir ? '**/page.{js,jsx,jsx,tsx,md,mdx}' : '**/*.{md,mdx}'
-      ),
-      path.join(dir, '**/_meta.{js,jsx,ts,tsx}')
+      `${dir}/**/${isAppDir ? 'page.{js,jsx,jsx,tsx,md,mdx}' : '*.{md,mdx}'}`,
+      `${dir}/**/_meta.{js,jsx,ts,tsx}`
     ],
     { cwd }
   )
-  console.log('result', result)
+  console.log({ result })
   const relativePaths = result.map(r => path.relative(dir, r))
+  console.log({ relativePaths })
   return relativePaths
 }
 
