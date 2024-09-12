@@ -33,9 +33,9 @@ export const remarkStaticImage: Plugin<[], Root> = () => ast => {
     let url = decodeURI(
       node.type === 'image'
         ? node.url
-        : definitionNodes.find(
+        : (definitionNodes.find(
             definition => definition.identifier === node.identifier
-          )?.url ?? ''
+          )?.url ?? '')
     )
 
     if (!url) {

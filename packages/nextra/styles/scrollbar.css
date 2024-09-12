@@ -4,7 +4,7 @@
 
   scrollbar-gutter: stable;
   &::-webkit-scrollbar {
-    @apply _w-3 _h-3;
+    @apply _size-3;
   }
   &::-webkit-scrollbar-track {
     @apply _bg-transparent;

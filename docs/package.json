@@ -9,15 +9,15 @@
     "start": "next start"
   },
   "dependencies": {
-    "@vercel/og": "^0.5.0",
+    "@vercel/og": "^0.6.0",
     "clsx": "^2.0.0",
-    "framer-motion": "^10.0.0",
-    "next": "^13.5.6",
+    "framer-motion": "^11.0.0",
+    "next": "^14.2.5",
     "nextra": "workspace:*",
     "nextra-theme-docs": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "sharp": "^0.32.6"
+    "sharp": "^0.33.0"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.0.1",

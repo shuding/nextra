@@ -1,4 +1,9 @@
-import { Menu, Transition } from '@headlessui/react'
+import {
+  MenuItem as _MenuItem,
+  Menu,
+  MenuButton,
+  MenuItems
+} from '@headlessui/react'
 import cn from 'clsx'
 // eslint-disable-next-line no-restricted-imports -- since we don't need newWindow prop
 import NextLink from 'next/link'
@@ -41,43 +46,46 @@ function NavbarMenu({
       : Object.entries(items || {})
 
   return (
-    <Menu as="div" className="_relative">
-      <Menu.Button
+    <Menu>
+      <MenuButton
         className={cn(
           classes.link,
           classes.inactive,
-          'max-md:_hidden _items-center _whitespace-nowrap _rounded _flex _gap-1'
+          'max-md:_hidden _items-center _whitespace-nowrap _rounded _flex _gap-1.5'
         )}
       >
         {children}
-      </Menu.Button>
-      <Transition
-        leave="_transition-opacity"
-        leaveFrom="_opacity-100"
-        leaveTo="_opacity-0"
-        as={Menu.Items}
-        className="_absolute _right-0 _z-20 _mt-1 _max-h-64 _min-w-full _overflow-auto _rounded-md _ring-1 _ring-black/5 _bg-white _py-1 _text-sm _shadow-lg dark:_ring-white/20 dark:_bg-neutral-800"
+      </MenuButton>
+      <MenuItems
+        transition
+        className={cn(
+          'motion-reduce:_transition-none',
+          'nextra-scrollbar _transition-opacity data-[closed]:_opacity-0 data-[open]:_opacity-100',
+          '_border _border-black/5 dark:_border-white/20',
+          '_backdrop-blur-lg _bg-[rgb(var(--nextra-bg),.8)]',
+          '_z-20 _rounded-md _py-1 _text-sm _shadow-lg',
+          // headlessui adds max-height as style, use !important to override
+          '!_max-h-[min(calc(100vh-5rem),256px)]'
+        )}
+        anchor={{ to: 'top end', gap: 10, padding: 16 }}
       >
         {entries.map(([key, item]) => (
-          <Menu.Item key={key}>
-            {({ active }) => (
-              <Anchor
-                href={item.href || routes[key]?.route || menu.route + '/' + key}
-                className={cn(
-                  '_relative _w-full _select-none _whitespace-nowrap hover:_text-gray-900 dark:hover:_text-gray-100 _inline-block',
-                  '_py-1.5 _transition-colors ltr:_pl-3 ltr:_pr-9 rtl:_pr-3 rtl:_pl-9',
-                  active
-                    ? '_text-gray-900 dark:_text-gray-100'
-                    : '_text-gray-600 dark:_text-gray-400'
-                )}
-                newWindow={item.newWindow}
-              >
-                {item.title || key}
-              </Anchor>
+          <_MenuItem
+            key={key}
+            as={Anchor}
+            href={item.href || routes[key]?.route || menu.route + '/' + key}
+            className={cn(
+              '_block hover:_text-gray-900 dark:hover:_text-gray-100',
+              '_py-1.5 _transition-colors ltr:_pl-3 ltr:_pr-9 rtl:_pr-3 rtl:_pl-9',
+              'data-[focus]:_text-gray-900 data-[focus]:dark:_text-gray-100',
+              '_text-gray-600 dark:_text-gray-400'
             )}
-          </Menu.Item>
+            newWindow={item.newWindow}
+          >
+            {item.title || key}
+          </_MenuItem>
         ))}
-      </Transition>
+      </MenuItems>
     </Menu>
   )
 }
@@ -116,10 +124,7 @@ export function Navbar({ items }: NavBarProps): ReactElement {
             return (
               <NavbarMenu key={menu.title} menu={menu}>
                 {menu.title}
-                <ArrowRightIcon
-                  className="_h-[18px] _min-w-[18px] _rounded-sm _p-0.5"
-                  pathClassName="_origin-center _transition-transform _rotate-90"
-                />
+                <ArrowRightIcon className="_h-3.5 *:_origin-center *:_transition-transform *:_rotate-90" />
               </NavbarMenu>
             )
           }

@@ -60,10 +60,16 @@ function NextraLayout({
 
   let { pageOpts, useTOC, Content } = pageContext
 
-  for (const { route, children } of __nextra_pageMap) {
-    const paths = route.split('/').slice(locale ? 2 : 1)
-    const folder = findFolder(pageOpts.pageMap, paths)
-    folder.children = children
+  const isDynamicLocale = route.startsWith('/[')
+
+  if (isDynamicLocale) {
+    pageOpts.pageMap = __nextra_pageMap
+  } else {
+    for (const { route, children } of __nextra_pageMap) {
+      const paths = route.split('/').slice(locale ? 2 : 1)
+      const folder = findFolder(pageOpts.pageMap, paths)
+      folder.children = children
+    }
   }
 
   if (__nextra_dynamic_opts) {

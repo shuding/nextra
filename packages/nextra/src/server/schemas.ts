@@ -66,6 +66,7 @@ export const mathJaxOptionsSchema = z
      */
     config: z.custom<MathJax3Config>()
   })
+  // eslint-disable-next-line deprecation/deprecation -- fixme
   .deepPartial()
   .optional()
 
@@ -105,8 +106,10 @@ export const nextraConfigSchema = z
       recmaPlugins: z.custom<ProcessorOptions['recmaPlugins']>(),
       format: z.enum(['detect', 'mdx', 'md']),
       rehypePrettyCodeOptions: z.custom<RehypePrettyCodeOptions>()
-    })
+    }),
+    autoImportThemeStyle: z.boolean()
   })
+  // eslint-disable-next-line deprecation/deprecation -- fixme
   .deepPartial()
   .extend({ theme: z.string() })
 
@@ -159,6 +162,7 @@ const itemSchema = linkItemSchema
     title: titleSchema,
     type: z.enum(['page', 'doc'])
   })
+  // eslint-disable-next-line deprecation/deprecation -- fixme
   .deepPartial()
 
 export const metaSchema = z

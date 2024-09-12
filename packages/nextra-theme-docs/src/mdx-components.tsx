@@ -63,6 +63,7 @@ const createHeading = (
 
     return (
       <Tag
+        id={id}
         className={
           // can be added by footnotes
           className === 'sr-only'
@@ -84,7 +85,6 @@ const createHeading = (
         {id && (
           <a
             href={`#${id}`}
-            id={id}
             className="subheading-anchor"
             aria-label="Permalink for this section"
             ref={obRef}
@@ -97,71 +97,107 @@ const createHeading = (
 function Details({
   children,
   open,
+  className,
   ...props
 }: ComponentProps<'details'>): ReactElement {
-  const [openState, setOpen] = useState(!!open)
+  const [isOpen, setIsOpen] = useState(() => !!open)
   // To animate the close animation we have to delay the DOM node state here.
-  const [delayedOpenState, setDelayedOpenState] = useState(openState)
+  const [delayedOpenState, setDelayedOpenState] = useState(isOpen)
+  const animationRef = useRef(0)
 
   useEffect(() => {
-    if (!openState) {
-      const timeout = setTimeout(() => setDelayedOpenState(openState), 500)
-      return () => clearTimeout(timeout)
+    const animation = animationRef.current
+    if (animation) {
+      clearTimeout(animation)
+      animationRef.current = 0
+    }
+    if (!isOpen) {
+      animationRef.current = window.setTimeout(
+        () => setDelayedOpenState(isOpen),
+        300
+      )
+      return () => {
+        clearTimeout(animationRef.current)
+      }
     }
     setDelayedOpenState(true)
-  }, [openState])
+  }, [isOpen])
 
-  const [summary, restChildren] = useMemo(() => {
-    let summary: ReactElement | undefined
-    const restChildren = Children.map(children, child => {
-      const isSummary =
-        child &&
-        typeof child === 'object' &&
-        'type' in child &&
-        child.type === Summary
+  const [summaryElement, restChildren] = useMemo(
+    function findSummary(list = children): [summary: ReactNode, ReactNode] {
+      let summary: ReactNode
 
-      if (!isSummary) return child
-
-      summary ||= cloneElement(child, {
-        onClick(event: MouseEvent) {
-          event.preventDefault()
-          setOpen(v => !v)
+      const rest = Children.map(list, child => {
+        if (
+          !summary && // Add onClick only for first summary
+          child &&
+          typeof child === 'object' &&
+          'type' in child
+        ) {
+          if (child.type === Summary) {
+            summary = cloneElement(child, {
+              onClick(event: MouseEvent) {
+                event.preventDefault()
+                setIsOpen(v => !v)
+              }
+            })
+            return
+          }
+          if (child.type !== Details && child.props.children) {
+            ;[summary, child] = findSummary(child.props.children)
+          }
         }
+        return child
       })
-    })
-    return [summary, restChildren]
-  }, [children])
+
+      return [summary, rest]
+    },
+    [children]
+  )
 
   return (
     <details
-      className="_my-4 _rounded _border _border-gray-200 _bg-white _p-2 _shadow-sm first:_mt-0 dark:_border-neutral-800 dark:_bg-neutral-900"
+      className={cn(
+        '[&:not(:first-child)]:_mt-4 _rounded _border _border-gray-200 _bg-white _p-2 _shadow-sm dark:_border-neutral-800 dark:_bg-neutral-900',
+        '_overflow-hidden',
+        className
+      )}
       {...props}
-      open={delayedOpenState}
-      data-expanded={openState ? '' : undefined}
+      // `isOpen ||` fix issue on mobile devices while clicking on details, open attribute is still
+      // false, and we can't calculate child.clientHeight
+      open={isOpen || delayedOpenState}
+      data-expanded={isOpen ? '' : undefined}
     >
-      {summary}
-      <Collapse isOpen={openState}>{restChildren}</Collapse>
+      {summaryElement}
+      <Collapse isOpen={isOpen}>{restChildren}</Collapse>
     </details>
   )
 }
 
 function Summary({
   children,
+  className,
   ...props
 }: ComponentProps<'summary'>): ReactElement {
   return (
     <summary
-      className="_flex _items-center _cursor-pointer _p-1 _transition-colors hover:_bg-gray-100 dark:hover:_bg-neutral-800"
+      className={cn(
+        '_flex _items-center _cursor-pointer _p-1 _transition-colors hover:_bg-gray-100 dark:hover:_bg-neutral-800',
+        // display: flex removes whitespace when `<summary />` contains text with other elements, like `foo <strong>bar</strong>`
+        '_whitespace-pre-wrap',
+        '_select-none',
+        className
+      )}
       {...props}
     >
       {children}
       <ArrowRightIcon
         className={cn(
           '_order-first', // if prettier formats `summary` it will have unexpected margin-top
-          '_size-4 _shrink-0 _mx-1.5',
-          'rtl:_rotate-180 [[data-expanded]>summary>&]:_rotate-90 _transition'
+          '_h-4 _shrink-0 _mx-1.5 motion-reduce:_transition-none',
+          'rtl:_rotate-180 [[data-expanded]>summary:first-child>&]:_rotate-90 _transition'
         )}
-        pathClassName="_stroke-[3px]"
+        strokeWidth="3"
       />
     </summary>
   )
@@ -238,7 +274,11 @@ function Body({ children }: { children: ReactNode }): ReactElement {
     </>
   )
 
-  const body = themeConfig.main?.({ children: content }) || content
+  const body = themeConfig.main ? (
+    <themeConfig.main>{content}</themeConfig.main>
+  ) : (
+    content
+  )
 
   if (themeContext.layout === 'full') {
     return (
@@ -281,13 +321,13 @@ const DEFAULT_COMPONENTS: MDXComponents = {
   ),
   ul: props => (
     <ul
-      className="_mt-6 _list-disc first:_mt-0 ltr:_ml-6 rtl:_mr-6"
+      className="[:is(ol,ul)_&]:_my-3 [&:not(:first-child)]:_mt-6 _list-disc ltr:_ml-6 rtl:_mr-6"
       {...props}
     />
   ),
   ol: props => (
     <ol
-      className="_mt-6 _list-decimal first:_mt-0 ltr:_ml-6 rtl:_mr-6"
+      className="[:is(ol,ul)_&]:_my-3 [&:not(:first-child)]:_mt-6 _list-decimal ltr:_ml-6 rtl:_mr-6"
       {...props}
     />
   ),
@@ -295,8 +335,8 @@ const DEFAULT_COMPONENTS: MDXComponents = {
   blockquote: props => (
     <blockquote
       className={cn(
-        '_mt-6 _border-gray-300 _italic _text-gray-700 dark:_border-gray-700 dark:_text-gray-400',
-        'first:_mt-0 ltr:_border-l-2 ltr:_pl-6 rtl:_border-r-2 rtl:_pr-6'
+        '[&:not(:first-child)]:_mt-6 _border-gray-300 _italic _text-gray-700 dark:_border-gray-700 dark:_text-gray-400',
+        'ltr:_border-l-2 ltr:_pl-6 rtl:_border-r-2 rtl:_pr-6'
       )}
       {...props}
     />
@@ -309,9 +349,14 @@ const DEFAULT_COMPONENTS: MDXComponents = {
   ),
   a: Link,
   table: props => (
-    <Table className="nextra-scrollbar _mt-6 _p-0 first:_mt-0" {...props} />
+    <Table
+      className="nextra-scrollbar [&:not(:first-child)]:_mt-6 _p-0"
+      {...props}
+    />
   ),
-  p: props => <p className="_mt-6 _leading-7 first:_mt-0" {...props} />,
+  p: props => (
+    <p className="[&:not(:first-child)]:_mt-6 _leading-7" {...props} />
+  ),
   tr: Tr,
   th: Th,
   td: Td,
@@ -338,10 +383,7 @@ const DEFAULT_COMPONENTS: MDXComponents = {
           <nav className={classes.toc} aria-label="table of contents" />
         )
       ) : (
-        <nav
-          className={cn(classes.toc, '_px-4')}
-          aria-label="table of contents"
-        >
+        <nav className={classes.toc} aria-label="table of contents">
           {renderComponent(themeConfig.toc.component, {
             toc: themeConfig.toc.float ? toc : [],
             filePath: config.filePath

@@ -410,8 +410,7 @@ export function normalizePages({
         docsDirectories.push(item)
     }
   }
-
-  return {
+  const result = {
     activeType,
     activeIndex,
     activeThemeContext,
@@ -422,4 +421,6 @@ export function normalizePages({
     flatDocsDirectories,
     topLevelNavbarItems
   }
+
+  return result
 }

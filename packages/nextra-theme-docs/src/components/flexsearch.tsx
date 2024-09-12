@@ -154,7 +154,10 @@ export function Flexsearch({
   const [search, setSearch] = useState('')
 
   const doSearch = (search: string) => {
-    if (!search) return
+    if (!search) {
+      setResults([])
+      return
+    }
     const [pageIndex, sectionIndex] = indexes[locale]
 
     // Show the results for the top 5 pages
@@ -199,7 +202,7 @@ export function Flexsearch({
           prefix: isFirstItemOfPage && (
             <div
               className={cn(
-                '_mx-2.5 _mb-2 _mt-6 _select-none _border-b _border-black/10 _px-2.5 _pb-1.5 _text-xs _font-semibold _uppercase _text-gray-500 first:_mt-0 dark:_border-white/20 dark:_text-gray-300',
+                '_mx-2.5 _mb-2 [&:not(:first-child)]:_mt-6 _select-none _border-b _border-black/10 _px-2.5 _pb-1.5 _text-xs _font-semibold _uppercase _text-gray-500 dark:_border-white/20 dark:_text-gray-300',
                 'contrast-more:_border-gray-600 contrast-more:_text-gray-900 contrast-more:dark:_border-gray-50 contrast-more:dark:_text-gray-50'
               )}
             >
@@ -244,35 +247,20 @@ export function Flexsearch({
     )
   }
 
-  const preload = useCallback(
-    async (active: boolean) => {
-      if (active && !indexes[locale]) {
-        setLoading(true)
-        try {
-          await loadIndexes(basePath, locale)
-        } catch (e) {
-          setError(true)
-        }
-        setLoading(false)
-      }
-    },
-    [locale, basePath]
-  )
+  const preload = useCallback(async () => {
+    if (indexes[locale]) return
+    setLoading(true)
+    try {
+      await loadIndexes(basePath, locale)
+    } catch {
+      setError(true)
+    }
+    setLoading(false)
+  }, [locale, basePath])
 
-  const handleChange = async (value: string) => {
+  const handleChange = (value: string) => {
     setSearch(value)
-    if (loading) {
-      return
-    }
-    if (!indexes[locale]) {
-      setLoading(true)
-      try {
-        await loadIndexes(basePath, locale)
-      } catch (e) {
-        setError(true)
-      }
-      setLoading(false)
-    }
+    if (loading) return
     doSearch(value)
   }
 
@@ -284,7 +272,6 @@ export function Flexsearch({
       onChange={handleChange}
       onActive={preload}
       className={className}
-      overlayClassName="_w-screen _min-h-[100px] _max-w-[min(calc(100vw-2rem),calc(100%+20rem))]"
       results={results}
     />
   )
