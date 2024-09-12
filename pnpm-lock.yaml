@@ -241,7 +241,7 @@ importers:
     dependencies:
       '@headlessui/react':
         specifier: ^2.1.2
-        version: 2.1.7(react-dom@18.3.1)(react@18.3.1)
+        version: 2.1.8(react-dom@18.3.1)(react@18.3.1)
       '@mdx-js/mdx':
         specifier: ^3.0.0
         version: 3.0.1
@@ -444,7 +444,7 @@ importers:
     dependencies:
       '@headlessui/react':
         specifier: ^2.1.2
-        version: 2.1.7(react-dom@18.3.1)(react@18.3.1)
+        version: 2.1.8(react-dom@18.3.1)(react@18.3.1)
       '@popperjs/core':
         specifier: ^2.11.8
         version: 2.11.8
@@ -3745,8 +3745,8 @@ packages:
       react-dom: 18.3.1(react@18.3.1)
     dev: false
 
-  /@headlessui/react@2.1.7(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-3mZkkpFK2lK0Xvl9LcdgyN+mQQQ/bZU7lLhy63isqZ+OaYug7DQGTSPQd/TM0nUayvk+8pHSiaYuSRw/mTHUTg==}
+  /@headlessui/react@2.1.8(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-uajqVkAcVG/wHwG9Fh5PFMcFpf2VxM4vNRNKxRjuK009kePVur8LkuuygHfIE+2uZ7z7GnlTtYsyUe6glPpTLg==}
     engines: {node: '>=10'}
     peerDependencies:
       react: ^18
