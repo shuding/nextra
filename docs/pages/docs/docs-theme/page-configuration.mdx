@@ -20,8 +20,8 @@ import menuImage from 'public/assets/docs/menu.png'
 ## Pages
 
 The title and order of a page shown in the sidebar should be configured in the
-`_meta.js` file as key-value pairs. For example, if you have the following
-file structure:
+`_meta.js` file as key-value pairs. For example, if you have the following file
+structure:
 
 <FileTree>
   <FileTree.Folder name="pages" defaultOpen>
@@ -36,15 +36,15 @@ You can define how the pages are shown in the sidebar via the `_meta.js` file:
 
 ```js filename="_meta.js"
 export default {
-  "index": "My Homepage",
-  "contact": "Contact Us",
-  "about": "About Us"
+  index: 'My Homepage',
+  contact: 'Contact Us',
+  about: 'About Us'
 }
 ```
 
 <Callout>
-  If any routes are not listed in the `_meta.js` file, they will be appended
-  to the end of the sidebar and sorted alphabetically, and the title will be
+  If any routes are not listed in the `_meta.js` file, they will be appended to
+  the end of the sidebar and sorted alphabetically, and the title will be
   formatted with [Title](https://title.sh).
 </Callout>
 
@@ -71,10 +71,10 @@ pages and folders:
 
 ```js filename="pages/_meta.js"
 export default {
-  "index": "My Homepage",
-  "contact": "Contact Us",
-  "fruits": "Delicious Fruits",
-  "about": "About Us"
+  index: 'My Homepage',
+  contact: 'Contact Us',
+  fruits: 'Delicious Fruits',
+  about: 'About Us'
 }
 ```
 
@@ -83,8 +83,8 @@ same folder:
 
 ```js filename="pages/fruits/_meta.js"
 export default {
-  "apple": "Apple",
-  "banana": "Banana"
+  apple: 'Apple',
+  banana: 'Banana'
 }
 ```
 
@@ -124,13 +124,13 @@ You can add external links to the sidebar by adding an item with `href` in
 
 ```js filename="pages/_meta.js" {6-9}
 export default {
-  "index": "My Homepage",
-  "contact": "Contact Us",
-  "fruits": "Delicious Fruits",
-  "about": "About Us",
-  "github_link": {
-    "title": "Nextra",
-    "href": "https://github.com/shuding/nextra"
+  index: 'My Homepage',
+  contact: 'Contact Us',
+  fruits: 'Delicious Fruits',
+  about: 'About Us',
+  github_link: {
+    title: 'Nextra',
+    href: 'https://github.com/shuding/nextra'
   }
 }
 ```
@@ -139,14 +139,14 @@ To always open the link in a new tab, enable the `"newWindow": true` option:
 
 ```js filename="pages/_meta.js" {9}
 export default {
-  "index": "My Homepage",
-  "contact": "Contact Us",
-  "fruits": "Delicious Fruits",
-  "about": "About Us",
-  "github_link": {
-    "title": "Nextra",
-    "href": "https://github.com/shuding/nextra",
-    "newWindow": true
+  index: 'My Homepage',
+  contact: 'Contact Us',
+  fruits: 'Delicious Fruits',
+  about: 'About Us',
+  github_link: {
+    title: 'Nextra',
+    href: 'https://github.com/shuding/nextra',
+    newWindow: true
   }
 }
 ```
@@ -163,11 +163,11 @@ configuration:
 
 ```js filename="pages/_meta.js" {4}
 export default {
-  "index": "My Homepage",
-  "contact": {
-    "display": "hidden"
+  index: 'My Homepage',
+  contact: {
+    display: 'hidden'
   },
-  "about": "About Us"
+  about: 'About Us'
 }
 ```
 
@@ -203,26 +203,26 @@ project:
   </FileTree.Folder>
 </FileTree>
 
-In your top-level `_meta.js` file, you can set everything as a page, instead
-of a normal sidebar item:
+In your top-level `_meta.js` file, you can set everything as a page, instead of
+a normal sidebar item:
 
 ```js filename="pages/_meta.js"
 export default {
-  "index": {
-    "title": "Home",
-    "type": "page"
+  index: {
+    title: 'Home',
+    type: 'page'
   },
-  "frameworks": {
-    "title": "Frameworks",
-    "type": "page"
+  frameworks: {
+    title: 'Frameworks',
+    type: 'page'
   },
-  "fruits": {
-    "title": "Fruits",
-    "type": "page"
+  fruits: {
+    title: 'Fruits',
+    type: 'page'
   },
-  "about": {
-    "title": "About",
-    "type": "page"
+  about: {
+    title: 'About',
+    type: 'page'
   }
 }
 ```
@@ -253,17 +253,17 @@ option:
 
 ```js filename="pages/_meta.js"
 export default {
-  "company": {
-    "title": "Company",
-    "type": "menu",
-    "items": {
-      "about": {
-        "title": "About",
-        "href": "/about"
+  company: {
+    title: 'Company',
+    type: 'menu',
+    items: {
+      about: {
+        title: 'About',
+        href: '/about'
       },
-      "contact": {
-        "title": "Contact Us",
-        "href": "mailto:hi@example.com"
+      contact: {
+        title: 'Contact Us',
+        href: 'mailto:hi@example.com'
       }
     }
   }
@@ -277,19 +277,19 @@ links in the navbar too:
 
 ```js filename="pages/_meta.js"
 export default {
-  "index": {
-    "title": "Home",
-    "type": "page"
+  index: {
+    title: 'Home',
+    type: 'page'
   },
-  "about": {
-    "title": "About",
-    "type": "page"
+  about: {
+    title: 'About',
+    type: 'page'
   },
-  "contact": {
-    "title": "Contact Us",
-    "type": "page",
-    "href": "https://example.com/contact",
-    "newWindow": true
+  contact: {
+    title: 'Contact Us',
+    type: 'page',
+    href: 'https://example.com/contact',
+    newWindow: true
   }
 }
 ```
@@ -302,13 +302,13 @@ key to define the fallback configuration for all items in this folder:
 
 ```js filename="pages/_meta.js" {2-4}
 export default {
-  "*": {
-    "type": "page"
+  '*': {
+    type: 'page'
   },
-  "index": "Home",
-  "frameworks": "Frameworks",
-  "fruits": "Fruits",
-  "about": "About"
+  index: 'Home',
+  frameworks: 'Frameworks',
+  fruits: 'Fruits',
+  about: 'About'
 }
 ```
 
@@ -321,16 +321,17 @@ separator line between items in the sidebar:
 
 ```js filename="_meta.js"
 export default {
-  "index": "My Homepage",
-  "---": {
-    "type": "separator"
+  index: 'My Homepage',
+  '---': {
+    type: 'separator'
   },
-  "contact": "Contact Us"
+  contact: 'Contact Us'
 }
 ```
 
 <Callout type="info">
-  Use JSX elements to change the look of titles and separator lines in the sidebar.
+  Use JSX elements to change the look of titles and separator lines in the
+  sidebar.
 </Callout>
 
 ## Advanced
@@ -342,14 +343,14 @@ example, you can disable or enable specific components for specific pages:
 
 ```js filename="pages/_meta.js"
 export default {
-  "index": {
-    "title": "Home",
-    "theme": {
-      "breadcrumb": false,
-      "footer": true,
-      "sidebar": false,
-      "toc": true,
-      "pagination": false
+  index: {
+    title: 'Home',
+    theme: {
+      breadcrumb: false,
+      footer: true,
+      sidebar: false,
+      toc: true,
+      pagination: false
     }
   }
 }
@@ -370,10 +371,10 @@ let Nextra to not inject any styles to the content:
 
 ```js filename="pages/_meta.js" {5}
 export default {
-  "index": {
-    "title": "Home",
-    "theme": {
-      "layout": "raw"
+  index: {
+    title: 'Home',
+    theme: {
+      layout: 'raw'
     }
   }
 }
@@ -386,10 +387,10 @@ keep all the other styles. You can use the `"full"` layout to do that:
 
 ```js filename="pages/_meta.js" {5}
 export default {
-  "index": {
-    "title": "Home",
-    "theme": {
-      "layout": "full"
+  index: {
+    title: 'Home',
+    theme: {
+      layout: 'full'
     }
   }
 }
@@ -406,10 +407,10 @@ the `"article"` typesetting to make it look like an elegant article page:
 
 ```js filename="pages/_meta.js" {5}
 export default {
-  "about": {
-    "title": "About Us",
-    "theme": {
-      "typesetting": "article"
+  about: {
+    title: 'About Us',
+    theme: {
+      typesetting: 'article'
     }
   }
 }
