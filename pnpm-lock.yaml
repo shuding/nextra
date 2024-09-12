@@ -86,10 +86,10 @@ importers:
         version: 6.0.1
       tsup:
         specifier: 8.2.4
-        version: 8.2.4(patch_hash=lm5dngj54e7vpltieovf2eenaa)(tsx@4.19.0)(typescript@5.6.2)
+        version: 8.2.4(patch_hash=lm5dngj54e7vpltieovf2eenaa)(tsx@4.19.1)(typescript@5.6.2)
       tsx:
         specifier: ^4.7.0
-        version: 4.19.0
+        version: 4.19.1
       turbo:
         specifier: 2.1.1
         version: 2.1.1
@@ -417,7 +417,7 @@ importers:
         version: 8.4.45
       postcss-cli:
         specifier: ^11.0.0
-        version: 11.0.0(postcss@8.4.45)(tsx@4.19.0)
+        version: 11.0.0(postcss@8.4.45)(tsx@4.19.1)
       postcss-import:
         specifier: ^16.0.0
         version: 16.1.0(postcss@8.4.45)
@@ -499,7 +499,7 @@ importers:
         version: 8.4.45
       postcss-cli:
         specifier: ^11.0.0
-        version: 11.0.0(postcss@8.4.45)(tsx@4.19.0)
+        version: 11.0.0(postcss@8.4.45)(tsx@4.19.1)
       postcss-import:
         specifier: ^16.0.0
         version: 16.1.0(postcss@8.4.45)
@@ -8423,8 +8423,8 @@ packages:
       get-intrinsic: 1.2.4
     dev: true
 
-  /get-tsconfig@4.7.6:
-    resolution: {integrity: sha512-ZAqrLlu18NbDdRaHq+AKXzAmqIUPswPWKUchfytdAjiRFnCe5ojG2bstg6mRiZabkKfCoL/e98pbBELIV/YCeA==}
+  /get-tsconfig@4.8.0:
+    resolution: {integrity: sha512-Pgba6TExTZ0FJAn1qkJAjIeKoDJ3CsI2ChuLohJnZl/tTU8MVrq3b+2t5UOPfRa4RMsorClBjJALkJUMjG1PAw==}
     dependencies:
       resolve-pkg-maps: 1.0.0
     dev: true
@@ -11104,7 +11104,7 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /postcss-cli@11.0.0(postcss@8.4.45)(tsx@4.19.0):
+  /postcss-cli@11.0.0(postcss@8.4.45)(tsx@4.19.1):
     resolution: {integrity: sha512-xMITAI7M0u1yolVcXJ9XTZiO9aO49mcoKQy6pCDFdMh9kGqhzLVpWxeD/32M/QBmkhcGypZFFOLNLmIW4Pg4RA==}
     engines: {node: '>=18'}
     hasBin: true
@@ -11118,7 +11118,7 @@ packages:
       globby: 14.0.2
       picocolors: 1.0.1
       postcss: 8.4.45
-      postcss-load-config: 5.1.0(postcss@8.4.45)(tsx@4.19.0)
+      postcss-load-config: 5.1.0(postcss@8.4.45)(tsx@4.19.1)
       postcss-reporter: 7.0.5(postcss@8.4.45)
       pretty-hrtime: 1.0.3
       read-cache: 1.0.0
@@ -11191,7 +11191,7 @@ packages:
       yaml: 2.5.1
     dev: true
 
-  /postcss-load-config@5.1.0(postcss@8.4.45)(tsx@4.19.0):
+  /postcss-load-config@5.1.0(postcss@8.4.45)(tsx@4.19.1):
     resolution: {integrity: sha512-G5AJ+IX0aD0dygOE0yFZQ/huFFMSNneyfp0e3/bT05a8OfPC5FUoZRPfGijUdGOJNMewJiwzcHJXFafFzeKFVA==}
     engines: {node: '>= 18'}
     peerDependencies:
@@ -11208,11 +11208,11 @@ packages:
     dependencies:
       lilconfig: 3.1.2
       postcss: 8.4.45
-      tsx: 4.19.0
+      tsx: 4.19.1
       yaml: 2.5.1
     dev: true
 
-  /postcss-load-config@6.0.1(tsx@4.19.0):
+  /postcss-load-config@6.0.1(tsx@4.19.1):
     resolution: {integrity: sha512-oPtTM4oerL+UXmx+93ytZVN82RrlY/wPUV8IeDxFrzIjXOLF1pN+EmKPLbubvKHT2HC20xXsCAH2Z+CKV6Oz/g==}
     engines: {node: '>= 18'}
     peerDependencies:
@@ -11231,7 +11231,7 @@ packages:
         optional: true
     dependencies:
       lilconfig: 3.1.2
-      tsx: 4.19.0
+      tsx: 4.19.1
     dev: true
 
   /postcss-nested@5.0.6(postcss@8.4.45):
@@ -12833,7 +12833,7 @@ packages:
   /tslib@2.7.0:
     resolution: {integrity: sha512-gLXCKdN1/j47AiHiOkJN69hJmcbGTHI0ImLmbYLHykhgeN0jVGola9yVjFgzCUklsZQMW55o+dW7IXv3RCXDzA==}
 
-  /tsup@8.2.4(patch_hash=lm5dngj54e7vpltieovf2eenaa)(tsx@4.19.0)(typescript@5.6.2):
+  /tsup@8.2.4(patch_hash=lm5dngj54e7vpltieovf2eenaa)(tsx@4.19.1)(typescript@5.6.2):
     resolution: {integrity: sha512-akpCPePnBnC/CXgRrcy72ZSntgIEUa1jN0oJbbvpALWKNOz1B7aM+UVDWGRGIO/T/PZugAESWDJUAb5FD48o8Q==}
     engines: {node: '>=18'}
     hasBin: true
@@ -12862,7 +12862,7 @@ packages:
       globby: 11.1.0
       joycon: 3.1.1
       picocolors: 1.0.1
-      postcss-load-config: 6.0.1(tsx@4.19.0)
+      postcss-load-config: 6.0.1(tsx@4.19.1)
       resolve-from: 5.0.0
       rollup: 4.21.1
       source-map: 0.8.0-beta.0
@@ -12887,13 +12887,13 @@ packages:
       typescript: 5.6.2
     dev: true
 
-  /tsx@4.19.0:
-    resolution: {integrity: sha512-bV30kM7bsLZKZIOCHeMNVMJ32/LuJzLVajkQI/qf92J2Qr08ueLQvW00PUZGiuLPP760UINwupgUj8qrSCPUKg==}
+  /tsx@4.19.1:
+    resolution: {integrity: sha512-0flMz1lh74BR4wOvBjuh9olbnwqCPc35OOlfyzHba0Dc+QNUeWX/Gq2YTbnwcWPO3BMd8fkzRVrHcsR+a7z7rA==}
     engines: {node: '>=18.0.0'}
     hasBin: true
     dependencies:
       esbuild: 0.23.1
-      get-tsconfig: 4.7.6
+      get-tsconfig: 4.8.0
     optionalDependencies:
       fsevents: 2.3.3
     dev: true
