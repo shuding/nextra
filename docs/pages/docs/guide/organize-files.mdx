@@ -94,7 +94,7 @@ It tells Nextra the order of each page, and the correct title.
   - You can use ESLint's built-in rule sort keys with a `/* eslint sort-keys: error */` comment to sort your sidebar items alphabetically.
 </Callout>
 
-Alternatively, you can do it with `title` and have other configurations in there as well:
+Alternatively, you can do it with `title` property and have other configurations in there as well:
 
 ```js filename="pages/_meta.js"
 export default {
@@ -109,7 +109,7 @@ export default {
 
 <Callout type="warning">
   If you are using [next-sitemap](https://github.com/iamvishnusankar/next-sitemap),
-  you will probably need to add the `['*/_meta']` exclude to your `next-sitemap.config.js`
+  you will probably need to add `exclude: ['*/_meta']` to your `next-sitemap.config.js`
   file, as it is tricky to exclude `_meta` files from the build.
 </Callout>
 
