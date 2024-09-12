@@ -1,5 +1,11 @@
 # nextra
 
+## 4.0.0-app-router.1
+
+### Major Changes
+
+- 26851b5: migrate search from Flexsearch to Pagefind
+
 ## 4.0.0-app-router.0
 
 ### Major Changes
