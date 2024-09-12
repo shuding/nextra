@@ -11,15 +11,9 @@ import NextLink from 'next/link'
 import { useRouter } from 'next/navigation'
 import type { FocusEventHandler, ReactElement, SyntheticEvent } from 'react'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { useMounted } from '../../hooks/index.js'
-import { InformationCircleIcon, SpinnerIcon } from '../../icons/index.js'
-import { renderComponent } from '../render.js'
-import type { FlexsearchProps } from './index.js'
-
-export type SearchResult = {
-  data: () => Promise<PagefindResult>
-  id: string
-}
+import { useMounted } from '../hooks/index.js'
+import { InformationCircleIcon, SpinnerIcon } from '../icons/index.js'
+import { renderComponent } from './render.js'
 
 type PagefindResult = {
   excerpt: string
@@ -35,23 +29,18 @@ type PagefindResult = {
   url: string
 }
 
-type SearchProps = FlexsearchProps & {
-  value: string
-  onChange: (newValue: string) => void
-  isLoading?: boolean
-  error: Error | null
-  results: SearchResult[]
+type SearchProps = {
+  emptyResult?: ReactElement | string
+  errorText?: ReactElement | string
+  loading?: ReactElement | string
+  placeholder?: string
+  className?: string
 }
 
 const INPUTS = new Set(['input', 'select', 'button', 'textarea'])
 
 export function Search({
   className,
-  value,
-  onChange,
-  isLoading,
-  error,
-  results,
   emptyResult = (
     <span className="_block _select-none _p-8 _text-center _text-sm _text-gray-400">
       No results found.
@@ -61,6 +50,54 @@ export function Search({
   loading = 'Loading…',
   placeholder = 'Search documentation…'
 }: SearchProps): ReactElement {
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<Error | null>(null)
+  const [results, setResults] = useState<PagefindResult[]>([])
+  const [search, setSearch] = useState('')
+
+  const onChange = useCallback(async (value: string) => {
+    setSearch(value)
+
+    if (!value) {
+      setResults([])
+      setError(null)
+      return
+    }
+
+    if (!window.pagefind) {
+      setIsLoading(true)
+      setError(null)
+      try {
+        window.pagefind = await import(
+          // @ts-expect-error pagefind.js generated after build
+          /* webpackIgnore: true */ './pagefind/pagefind.js'
+        )
+        await window.pagefind.options({
+          baseUrl: '/'
+          // ... more search options
+        })
+      } catch (error) {
+        setError(error as Error)
+        setIsLoading(false)
+        return
+      }
+    }
+    const { results } = await window.pagefind.search<PagefindResult>(value)
+    const data = await Promise.all(results.map(o => o.data()))
+
+    setResults(
+      data.map(newData => ({
+        ...newData,
+        sub_results: newData.sub_results.map(r => {
+          const url = r.url.replace(/\.html$/, '').replace(/\.html#/, '#')
+
+          return { ...r, url }
+        })
+      }))
+    )
+    setIsLoading(false)
+  }, [])
+
   const router = useRouter()
   const [focused, setFocused] = useState(false)
   const mounted = useMounted()
@@ -172,7 +209,7 @@ export function Search({
           onChange={handleChange}
           onFocus={handleFocus}
           onBlur={handleFocus}
-          value={value}
+          value={search}
           placeholder={placeholder}
         />
         {icon}
@@ -212,35 +249,17 @@ export function Search({
           </div>
         ) : results.length ? (
           results.map(searchResult => (
-            <Result key={searchResult.id} result={searchResult} />
+            <Result key={searchResult.url} data={searchResult} />
           ))
         ) : (
-          value && renderComponent(emptyResult)
+          search && renderComponent(emptyResult)
         )}
       </ComboboxOptions>
     </Combobox>
   )
 }
 
-function Result({ result }: { result: SearchResult }) {
-  const [data, setData] = useState<PagefindResult | null>(null)
-
-  useEffect(() => {
-    result
-      .data()
-      .then(newData => ({
-        ...newData,
-        sub_results: newData.sub_results.map(r => {
-          const url = r.url.replace(/\.html$/, '').replace(/\.html#/, '#')
-
-          return { ...r, url }
-        })
-      }))
-      .then(setData)
-  }, [result])
-
-  if (!data) return null
-
+function Result({ data }: { data: PagefindResult }) {
   return (
     <>
       <div

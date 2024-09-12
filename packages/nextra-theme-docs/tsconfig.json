@@ -13,5 +13,6 @@
     "lib": ["ESNext", "DOM"],
     "types": ["vitest/globals"],
     "resolveJsonModule": true
-  }
+  },
+  "exclude": ["dist"]
 }
