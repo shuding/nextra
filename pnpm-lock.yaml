@@ -405,7 +405,7 @@ importers:
         version: 18.3.0
       concurrently:
         specifier: ^9.0.0
-        version: 9.0.0
+        version: 9.0.1
       next:
         specifier: 14.2.5
         version: 14.2.5(@babel/core@7.24.3)(react-dom@18.3.1)(react@18.3.1)
@@ -484,7 +484,7 @@ importers:
         version: 4.3.1(vite@5.4.2)
       concurrently:
         specifier: ^9.0.0
-        version: 9.0.0
+        version: 9.0.1
       jsdom:
         specifier: ^25.0.0
         version: 25.0.0
@@ -6649,8 +6649,8 @@ packages:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
     dev: true
 
-  /concurrently@9.0.0:
-    resolution: {integrity: sha512-iAxbsDeUkn8E/4+QalT7T3WvlyTfmsoez+19lbbcsxZdOEMfBukd8LA30KYez2UR5xkKFzbcqXIZy5RisCbaxw==}
+  /concurrently@9.0.1:
+    resolution: {integrity: sha512-wYKvCd/f54sTXJMSfV6Ln/B8UrfLBKOYa+lzc6CHay3Qek+LorVSBdMVfyewFhRbH0Rbabsk4D+3PL/VjQ5gzg==}
     engines: {node: '>=18'}
     hasBin: true
     dependencies:
