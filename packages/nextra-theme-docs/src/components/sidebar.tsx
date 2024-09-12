@@ -392,7 +392,7 @@ export function Sidebar({
         className={cn(
           'motion-reduce:_transition-none [transition:background-color_1.5s_ease]',
           menu
-            ? 'max-md:_fixed max-md:_inset-0 max-md:_z-10 max-md:_bg-black/80 max-md:dark:_bg-black/60'
+            ? 'max-md:_fixed _inset-0 _z-10 _bg-black/80 dark:_bg-black/60'
             : '_bg-transparent'
         )}
         onClick={() => setMenu(false)}
