@@ -1,3 +1,4 @@
+.nextra-steps h2,
 .nextra-steps h3 {
   counter-increment: var(--counter-id);
 
