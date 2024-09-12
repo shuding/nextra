@@ -2,4 +2,4 @@
 'nextra-theme-docs': major
 ---
 
-remove `<MatchSorterSearch />`
+remove `<MatchSorterSearch>`

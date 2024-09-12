@@ -5,4 +5,4 @@
 
 update next-themes
 
-fix wrong numbering for nested `<Steps />`
+fix wrong numbering for nested `<Steps>`

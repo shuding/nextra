@@ -4,5 +4,5 @@
 'nextra': patch
 ---
 
-add `flex-shrink: 0` for indent in `FileTree` for `<Ident />` and svg icons in `<Folder />`
-and `<File />`
+add `flex-shrink: 0` for indent in `FileTree` for `<Ident>` and svg icons in `<Folder>`
+and `<File>`

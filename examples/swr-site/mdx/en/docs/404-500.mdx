@@ -28,14 +28,16 @@ notFoundLabels?: string
 
 ## Customize Layout
 
-```json filename="meta.json"
-"404": {
-  "type": "page"
-},
-"500": {
-  "type":"page",
-  "theme": {
-    "layout": "full"
+```js filename="_meta.js"
+export default {
+  404: {
+    type: 'page'
+  },
+  500: {
+    type: 'page',
+    theme: {
+      layout: 'full'
+    }
   }
 }
 ```

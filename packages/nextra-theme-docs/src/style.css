@@ -79,15 +79,6 @@ summary {
   }
 }
 
-@media (prefers-reduced-motion: reduce) and (max-width: 767px) {
-  article:before,
-  .nextra-sidebar-container,
-  .nextra-sidebar-container.open,
-  body.resizing .nextra-sidebar-container {
-    @apply _transition-none;
-  }
-}
-
 /* Content Typography */
 summary::-webkit-details-marker {
   @apply _hidden;

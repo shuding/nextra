@@ -4,4 +4,4 @@
 'nextra': patch
 ---
 
-use `overflow-x-auto` instead `overflow-x-scroll` for `<Table />`
+use `overflow-x-auto` instead `overflow-x-scroll` for `<Table>`

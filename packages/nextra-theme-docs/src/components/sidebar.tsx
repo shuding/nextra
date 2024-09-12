@@ -72,7 +72,7 @@ const classes = {
   ),
   aside: cn(
     'nextra-sidebar-container _flex _flex-col',
-    'md:_top-16 md:_shrink-0 motion-reduce:_transform-none',
+    'md:_top-16 md:_shrink-0 motion-reduce:_transform-none [.resizing_&]:_transition-none',
     '_transform-gpu _transition-all _ease-in-out',
     'print:_hidden'
   ),
@@ -392,10 +392,8 @@ export function MobileNav() {
     <>
       <div
         className={cn(
-          'motion-reduce:_transition-none [transition:background-color_1.5s_ease]',
-          menu
-            ? '_fixed _inset-0 _z-10 _bg-black/80 dark:_bg-black/60'
-            : '_bg-transparent'
+          '[transition:background-color_1.5s_ease] max-md:_fixed _inset-0 _z-10',
+          menu ? '_bg-black/80 dark:_bg-black/60' : '_bg-transparent'
         )}
       />
       <aside
