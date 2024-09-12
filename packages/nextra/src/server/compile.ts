@@ -200,7 +200,7 @@ export async function compileMdx(
       rehypePlugins: [
         ...(rehypePlugins || []),
         format === 'md' && [
-          // To render <details /> and <summary /> correctly
+          // To render `<details>` and `<summary>` correctly
           rehypeRaw,
           // fix Error: Cannot compile `mdxjsEsm` node for npm2yarn and mermaid
           {
