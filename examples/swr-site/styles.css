@@ -1,4 +1,5 @@
-@import 'nextra-theme-docs/dist/style.css' layer(nextra-base);
+@layer nextra, my-base;
+@import 'nextra-theme-docs/dist/style.css' layer(nextra);
 
 @tailwind utilities;
 
@@ -6,17 +7,19 @@
   filter: invert(1) brightness(1.8);
 }
 
-body {
-  --bg-dot-color: #d1d1d1;
+@layer my-base {
+  body {
+    --bg-dot-color: #d1d1d1;
 
-  .dark & {
-    --bg-dot-color: #313131;
+    .dark & {
+      --bg-dot-color: #313131;
+    }
+
+    background:
+      linear-gradient(to bottom, transparent, rgb(var(--nextra-bg)) 300px),
+      fixed 0 0 / 20px 20px
+        radial-gradient(var(--bg-dot-color) 1px, transparent 0),
+      fixed 10px 10px / 20px 20px
+        radial-gradient(var(--bg-dot-color) 1px, transparent 0);
   }
-
-  background:
-    linear-gradient(to bottom, transparent, rgb(var(--nextra-bg)) 300px),
-    fixed 0 0 / 20px 20px
-      radial-gradient(var(--bg-dot-color) 1px, transparent 0),
-    fixed 10px 10px / 20px 20px
-      radial-gradient(var(--bg-dot-color) 1px, transparent 0);
 }
