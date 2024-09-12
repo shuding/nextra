@@ -25,13 +25,19 @@ export async function getStaticProps() {
 # Cards Component
 
 ## Example
+
+A built-in component to embed a link in a card with an icon.
+
 ${mdx}
 
 ## Usage
 
+First, import the \`Card\` and \`Cards\` components. Then, import the icons that you
+want to use. To create a set of cards, follow the example below.
+
 ~~~mdx filename="MDX"
 import { Cards } from 'nextra/components'
-import { CardsIcon, OneIcon, WarningIcon } from '../../icons'
+import { CardsIcon, OneIcon, WarningIcon } from '../path/with/your/icons'
 ${mdx}
 ~~~`)
   return { props }
