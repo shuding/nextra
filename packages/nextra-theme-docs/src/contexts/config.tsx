@@ -69,6 +69,23 @@ export function ConfigProvider({
     document.body.classList.toggle('_overflow-hidden', menu)
   }, [menu])
 
+  useEffect(() => {
+    let resizeTimer: number
+
+    function addResizingClass() {
+      document.body.classList.add('resizing')
+      clearTimeout(resizeTimer)
+      resizeTimer = window.setTimeout(() => {
+        document.body.classList.remove('resizing')
+      }, 200)
+    }
+
+    window.addEventListener('resize', addResizingClass)
+    return () => {
+      window.removeEventListener('resize', addResizingClass)
+    }
+  }, [])
+
   const value = useMemo(() => ({ menu, setMenu }), [menu])
 
   return (

@@ -16,7 +16,7 @@ import {
 } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import { useActiveAnchor, useMenu, useThemeConfig } from '../contexts'
-import { renderComponent, useIsWindowResizing } from '../utils'
+import { renderComponent } from '../utils'
 import { Anchor } from './anchor'
 import { Collapse } from './collapse'
 import { LocaleSwitch } from './locale-switch'
@@ -381,7 +381,6 @@ export function Sidebar({
   const hasI18n = themeConfig.i18n.length > 0
   const hasMenu =
     themeConfig.darkMode || hasI18n || themeConfig.sidebar.toggleButton
-  const isWindowResizing = useIsWindowResizing()
 
   return (
     <>
@@ -390,10 +389,8 @@ export function Sidebar({
       )}
       <div
         className={cn(
-          'motion-reduce:_transition-none [transition:background-color_1.5s_ease]',
-          menu
-            ? 'max-md:_fixed _inset-0 _z-10 _bg-black/80 dark:_bg-black/60'
-            : '_bg-transparent'
+          '[transition:background-color_1.5s_ease] max-md:_fixed _inset-0 _z-10',
+          menu ? '_bg-black/80 dark:_bg-black/60' : '_bg-transparent'
         )}
         onClick={() => setMenu(false)}
       />
@@ -401,14 +398,14 @@ export function Sidebar({
         className={cn(
           'nextra-sidebar-container _flex _flex-col',
           'md:_top-16 md:_shrink-0 motion-reduce:_transform-none motion-reduce:_transition-none',
+          '[.resizing_&]:_transition-none',
           '_transform-gpu _transition-all _ease-in-out',
           'print:_hidden',
           showSidebar ? 'md:_w-64' : 'md:_w-20',
           asPopover ? 'md:_hidden' : 'md:_sticky md:_self-start',
           menu
             ? 'max-md:[transform:translate3d(0,0,0)]'
-            : 'max-md:[transform:translate3d(0,-100%,0)]',
-          isWindowResizing && 'max-md:_transition-none _transition-none'
+            : 'max-md:[transform:translate3d(0,-100%,0)]'
         )}
         ref={containerRef}
       >
