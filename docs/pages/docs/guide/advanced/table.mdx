@@ -4,7 +4,7 @@ import { Callout, Steps } from 'nextra/components'
 
 ## GFM syntax
 
-In markdown is preferable write table via
+In Markdown, it is preferable to write tables via
 [GFM syntax](https://github.github.com/gfm/#tables-extension-).
 
 ```mdx filename="Markdown"
@@ -82,7 +82,7 @@ you'll get the following result:
 
 ### How to Write
 
-Want to render dynamic table? You can use embedded JavaScript expressions into
+Want to render a dynamic table? You can use embedded JavaScript expressions into
 your table for it:
 
 ```mdx filename="Markdown"
@@ -130,7 +130,7 @@ will be rendered as:
 </table>
 
 <Callout type="warning">
-  Confused by unstyled elements? We explain below 👇, why it's happens.
+  Confused by unstyled elements? We explain below 👇 why it happens.
 </Callout>
 
 ### Unexpected Result
@@ -153,10 +153,10 @@ escape hatch_ that we can name like:
 
 > please only transform markdown tags, not literal HTML tags
 
-Table header looks unstyled since not replaced with Nextra's MDX components
-`<tr />{:jsx}`, `<th />{:jsx}` and `<td />{:jsx}`, for the same reason
-`<table />{:jsx}` literal is not replaced and doesn't have default margin-top
-aka `mt-6`.
+Table header looks unstyled since it has not been replaced with Nextra's MDX
+components `<tr />{:jsx}`, `<th />{:jsx}` and `<td />{:jsx}`, for the same
+reason `<table />{:jsx}` literal is not replaced and doesn't have default
+margin-top aka `mt-6`.
 
 ### Ways to Fix It
 

@@ -3,6 +3,8 @@ import { Card, Cards } from 'nextra/components'
 
 # Cards Component
 
+A built-in component to embed a link in a card with an icon.
+
 ## Example
 
 <Cards>
@@ -17,10 +19,13 @@ import { Card, Cards } from 'nextra/components'
 
 ## Usage
 
+First, import the `Card` and `Cards` components. Then, import the icons that you
+want to use. To create a set of cards, follow the example below.
+
 {/* prettier-ignore */}
 ```mdx filename="Markdown"
 import { Cards, Card } from 'nextra/components'
-import { CardsIcon, OneIcon, WarningIcon } from '../../icons'
+import { CardsIcon, OneIcon, WarningIcon } from '../path/with/your/icons'
 
 <Cards>
   <Card icon={<WarningIcon />} title="Callout" href="/docs/guide/built-ins/callout" />
