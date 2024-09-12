@@ -27,7 +27,8 @@ export const DEFAULT_CONFIG = {
   search: {
     codeblocks: true
   },
-  codeHighlight: true
+  codeHighlight: true,
+  autoImportThemeStyle: true
 } satisfies Partial<NextraConfig>
 
 export const OFFICIAL_THEMES = ['nextra-theme-docs', 'nextra-theme-blog']

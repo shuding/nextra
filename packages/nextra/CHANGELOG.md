@@ -1,5 +1,20 @@
 # nextra
 
+## 3.0.0-alpha.38
+
+### Patch Changes
+
+- ccaf3d4: Add the `autoImportThemeStyle` option to the Nextra configuration.
+  This allows users to import the official Nextra theme CSS into a specific
+  cascade layer.
+
+## 3.0.0-alpha.37
+
+### Patch Changes
+
+- 2a3e3e7: Fix first list item in `<FileTree>` not within permitted parent
+  elements
+
 ## 3.0.0-alpha.36
 
 ### Patch Changes

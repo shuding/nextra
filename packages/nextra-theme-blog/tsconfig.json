@@ -12,5 +12,6 @@
     "moduleResolution": "Node",
     "types": ["vitest/globals"],
     "resolveJsonModule": true
-  }
+  },
+  "exclude": ["dist"]
 }
