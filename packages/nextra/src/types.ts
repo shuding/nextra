@@ -83,9 +83,9 @@ export type Nextra = (
 
 export type ThemeConfig = any | null
 
-export type NextraThemeLayoutProps = {
+export type NextraThemeLayoutProps<TThemeConfig = ThemeConfig> = {
   pageMap: PageMapItem[]
-  themeConfig: ThemeConfig
+  themeConfig: TThemeConfig
   children: ReactNode
 }
 

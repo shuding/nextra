@@ -5,7 +5,7 @@ import { ArrowRightIcon } from 'nextra/icons'
 import type { Item } from 'nextra/normalize-pages'
 import type { ReactElement } from 'react'
 import { useThemeConfig } from '../contexts'
-import type { DocsThemeConfig } from '../contexts/theme-config'
+import type { ThemeConfigProps } from '../layout'
 
 interface NavLinkProps {
   currentIndex: number
@@ -28,7 +28,7 @@ export function Pagination({
 }: NavLinkProps): ReactElement | null {
   const themeConfig = useThemeConfig()
   const nav = themeConfig.navigation
-  const navigation: Exclude<DocsThemeConfig['navigation'], boolean> =
+  const navigation: Exclude<ThemeConfigProps['navigation'], boolean> =
     typeof nav === 'boolean' ? { prev: nav, next: nav } : nav
   let prev = navigation.prev && flatDocsDirectories[currentIndex - 1]
   let next = navigation.next && flatDocsDirectories[currentIndex + 1]

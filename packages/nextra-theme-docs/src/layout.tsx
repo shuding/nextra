@@ -3,82 +3,105 @@ import type { NextraThemeLayoutProps } from 'nextra'
 import { Search } from 'nextra/components'
 import type { ComponentProps, ReactElement, ReactNode } from 'react'
 import { Children, isValidElement } from 'react'
+import { z } from 'zod'
+import { fromZodError } from 'zod-validation-error'
 import { Footer, MobileNav, Navbar } from './components'
 import {
   ActiveAnchorProvider,
   ConfigProvider,
   ThemeConfigProvider
 } from './contexts'
-import type { DocsThemeConfig } from './contexts/theme-config'
 
-const DEFAULT_THEME: DocsThemeConfig = {
-  darkMode: true,
-  docsRepositoryBase: 'https://github.com/shuding/nextra',
-  editLink: {
-    content: 'Edit this page'
-  },
-  feedback: {
-    content: 'Question? Give us feedback →',
-    labels: 'feedback'
-  },
-  i18n: [],
-  navigation: true,
-  search: <Search />,
-  sidebar: {
-    defaultMenuCollapseLevel: 2,
-    toggleButton: true
-  },
-  themeSwitch: {
-    options: {
-      dark: 'Dark',
-      light: 'Light',
-      system: 'System'
-    }
-  },
-  toc: {
-    backToTop: true,
-    float: true,
-    title: 'On This Page'
-  }
-}
+const element = z.custom<ReactElement>(isValidElement, {
+  message: 'Must be React.ReactElement'
+})
 
-const DEEP_OBJECT_KEYS = Object.entries(DEFAULT_THEME)
-  .map(([key, value]) => {
-    const isObject =
-      value &&
-      typeof value === 'object' &&
-      !Array.isArray(value) &&
-      !isValidElement(value)
-    if (isObject) {
-      return key
-    }
-  })
-  .filter(Boolean)
+const stringOrElement = z.union([z.string(), element])
+
+const theme = z.strictObject({
+  pageMap: z.array(z.any({})),
+  darkMode: z.boolean().default(true),
+  docsRepositoryBase: z
+    .string()
+    .startsWith('https://')
+    .default('https://github.com/shuding/nextra'),
+  editLink: z
+    .strictObject({
+      content: stringOrElement.default('Edit this page')
+    })
+    .default({}),
+  feedback: z
+    .strictObject({
+      labels: z.string().default('feedback'),
+      content: stringOrElement.default('Question? Give us feedback →')
+    })
+    .default({}),
+  navigation: z
+    .union([
+      z.boolean(),
+      z.strictObject({
+        next: z.boolean(),
+        prev: z.boolean()
+      })
+    ])
+    .default(true)
+    .transform(v => ({ prev: v, next: v })),
+  i18n: z
+    .array(
+      z.strictObject({
+        direction: z.enum(['ltr', 'rtl']).optional(),
+        locale: z.string(),
+        name: z.string()
+      })
+    )
+    .default([]),
+  search: element.default(<Search />),
+  sidebar: z
+    .strictObject({
+      autoCollapse: z.boolean().optional(),
+      defaultMenuCollapseLevel: z.number().min(1).int().default(2),
+      toggleButton: z.boolean().default(true)
+    })
+    .default({}),
+  toc: z
+    .strictObject({
+      backToTop: z.boolean().default(true),
+      extraContent: stringOrElement.optional(),
+      float: z.boolean().default(true),
+      title: stringOrElement.default('On This Page')
+    })
+    .default({}),
+  themeSwitch: z
+    .strictObject({
+      options: z
+        .strictObject({
+          light: z.string().default('Light'),
+          dark: z.string().default('Dark'),
+          system: z.string().default('System')
+        })
+        .default({})
+    })
+    .default({}),
+  nextThemes: z
+    .strictObject({
+      attribute: z.string().default('class'),
+      disableTransitionOnChange: z.boolean().default(true),
+      defaultTheme: z.string().default('system'),
+      storageKey: z.string().default('theme')
+    })
+    .default({})
+})
+
+export type ThemeConfigProps = z.infer<typeof theme>
 
 type ThemeProviderProps = Omit<ComponentProps<typeof ThemeProvider>, 'children'>
 
 export function Layout({
   children,
-  themeConfig,
-  pageMap,
-  nextThemes
-}: NextraThemeLayoutProps & {
+  ...themeConfig
+}: NextraThemeLayoutProps<ThemeConfigProps> & {
   nextThemes?: ThemeProviderProps
 }): ReactElement {
-  const extendedThemeConfig = {
-    ...DEFAULT_THEME,
-    ...(themeConfig &&
-      Object.fromEntries(
-        Object.entries(themeConfig).map(([key, value]) => [
-          key,
-          value && typeof value === 'object' && DEEP_OBJECT_KEYS.includes(key)
-            ? // @ts-expect-error -- key has always object value
-              { ...DEFAULT_THEME[key], ...value }
-            : value
-        ])
-      ))
-  }
-
   const { footer, navbar, restChildren } = Children.toArray(children).reduce<{
     footer: ReactNode
     navbar: ReactNode
@@ -108,16 +131,15 @@ export function Layout({
     }
   )
 
+  const { data, error } = theme.safeParse(themeConfig)
+  if (error) {
+    throw fromZodError(error)
+  }
+
   return (
-    <ThemeConfigProvider value={extendedThemeConfig}>
-      <ThemeProvider
-        attribute="class"
-        disableTransitionOnChange
-        defaultTheme="system"
-        storageKey="theme"
-        {...nextThemes}
-      >
-        <ConfigProvider pageMap={pageMap} footer={footer} navbar={navbar}>
+    <ThemeConfigProvider value={data}>
+      <ThemeProvider {...data.nextThemes}>
+        <ConfigProvider pageMap={data.pageMap} footer={footer} navbar={navbar}>
           <ActiveAnchorProvider>
             <MobileNav />
             {restChildren}
