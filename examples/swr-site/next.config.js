@@ -4,20 +4,6 @@ import nextra from 'nextra'
 
 const withNextra = nextra({
   defaultShowCopyCode: true,
-  transform(content, { route }) {
-    if (route.startsWith('/en/docs/advanced/dynamic-markdown-import')) {
-      return `
-${content}
-export function getStaticProps() {
-  return {
-    props: {
-      foo: 'from nextra config'
-    }
-  }
-}`
-    }
-    return content
-  },
   transformPageMap(pageMap, locale) {
     if (locale === 'en') {
       pageMap = [

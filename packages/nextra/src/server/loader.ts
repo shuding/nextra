@@ -53,7 +53,6 @@ export async function loader(
     readingTime: _readingTime,
     latex,
     codeHighlight,
-    transform,
     mdxOptions
   } = this.getOptions()
 
@@ -76,14 +75,6 @@ export async function loader(
     })
   }
 
-  const relativePath = slash(path.relative(APP_DIR, mdxPath))
-
-  const route =
-    '/' +
-    relativePath
-      .replace(MARKDOWN_EXTENSION_REGEX, '')
-      .replace(/\/page$/, '')
-      .replace(/^app\//, '')
   const { result, readingTime } = await compileMdx(source, {
     mdxOptions: {
       ...mdxOptions,
@@ -124,10 +115,9 @@ export default MDXLayout`
     timestamp,
     readingTime
   }
-  const finalResult = transform ? await transform(result, { route }) : result
   const rawJs = `
 import { HOC_MDXWrapper } from 'nextra/setup-page'
-${finalResult}
+${result}
 
 export default HOC_MDXWrapper(MDXLayout, _provideComponents, useTOC, ${JSON.stringify(
     restProps
