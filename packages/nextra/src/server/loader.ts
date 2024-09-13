@@ -4,8 +4,7 @@ import type { LoaderContext } from 'webpack'
 import type { LoaderOptions, PageOpts } from '../types'
 import { compileMetadata } from './compile-metadata.js'
 import { compileMdx } from './compile.js'
-import { CWD, IS_PRODUCTION, MARKDOWN_EXTENSION_REGEX } from './constants.js'
-import { APP_DIR } from './file-system.js'
+import { CWD, IS_PRODUCTION } from './constants.js'
 import { logger } from './utils.js'
 
 const initGitRepo = (async () => {
@@ -53,37 +52,25 @@ export async function loader(
     readingTime: _readingTime,
     latex,
     codeHighlight,
-    transform,
     mdxOptions
   } = this.getOptions()
 
-  const mdxPath = this._module?.resourceResolveData
+  const resolveData = this._module?.resourceResolveData
+
+  const mdxPath = resolveData
     ? // to make it work with symlinks, resolve the mdx path based on the relative path
       /*
        * `context.rootContext` could include path chunk of
        * `context._module.resourceResolveData.relativePath` use
        * `context._module.resourceResolveData.descriptionFileRoot` instead
        */
-      path.join(
-        this._module.resourceResolveData.descriptionFileRoot,
-        this._module.resourceResolveData.relativePath
-      )
+      path.join(resolveData.descriptionFileRoot, resolveData.relativePath)
     : this.resourcePath
 
   if (!IS_PRODUCTION && isPageMapImport) {
-    return compileMetadata(source, {
-      filePath: mdxPath
-    })
+    return compileMetadata(source, { filePath: mdxPath })
   }
 
-  const relativePath = slash(path.relative(APP_DIR, mdxPath))
-
-  const route =
-    '/' +
-    relativePath
-      .replace(MARKDOWN_EXTENSION_REGEX, '')
-      .replace(/\/page$/, '')
-      .replace(/^app\//, '')
   const { result, readingTime } = await compileMdx(source, {
     mdxOptions: {
       ...mdxOptions,
@@ -124,10 +111,9 @@ export default MDXLayout`
     timestamp,
     readingTime
   }
-  const finalResult = transform ? await transform(result, { route }) : result
   const rawJs = `
 import { HOC_MDXWrapper } from 'nextra/setup-page'
-${finalResult}
+${result}
 
 export default HOC_MDXWrapper(MDXLayout, _provideComponents, useTOC, ${JSON.stringify(
     restProps

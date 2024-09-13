@@ -1,37 +1,9 @@
 import type { ProcessorOptions } from '@mdx-js/mdx'
 import type { MathJax3Config } from 'better-react-mathjax'
-import { isValidElement } from 'react'
 import type { Options as RehypeKatexOptions } from 'rehype-katex'
 import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
 import { z } from 'zod'
 import type { PageMapItem } from '../types'
-
-function isFunction(value: unknown): boolean {
-  return typeof value === 'function'
-}
-
-export const fc = [isFunction, { message: 'Must be React.FC' }] as const
-
-function isReactNode(value: unknown): boolean {
-  return (
-    value == null ||
-    typeof value === 'string' ||
-    isFunction(value) ||
-    isValidElement(value as any)
-  )
-}
-
-export const reactNode = [
-  isReactNode,
-  { message: 'Must be React.ReactNode or React.FC' }
-] as const
-
-type Transform = (
-  result: string,
-  options: {
-    route: string
-  }
-) => string | Promise<string>
 
 export const mathJaxOptionsSchema = z
   .strictObject({
@@ -78,11 +50,6 @@ export const nextraConfigSchema = z.strictObject({
     ])
     .optional(),
   codeHighlight: z.boolean().default(true),
-  /**
-   * A function to modify the code of compiled MDX pages.
-   * @experimental
-   */
-  transform: z.custom<Transform>(),
   /**
    * A function to modify the `pageMap` passed to theme layouts.
    * @experimental

@@ -73,41 +73,24 @@ export default async function RootLayout({ children, params: { lang } }) {
         <Banner storageKey="swr-2">SWR 2.0 is out! Read more →</Banner>
         <SkipNavLink />
         <Layout
-          themeConfig={{
-            docsRepositoryBase:
-              'https://github.com/shuding/nextra/blob/core/examples/swr-site',
-            i18n: [
-              { locale: 'en', name: 'English' },
-              { direction: 'rtl', locale: 'es', name: 'Español RTL' },
-              { locale: 'ru', name: 'Русский' }
-            ],
-            sidebar: {
-              defaultMenuCollapseLevel: 1,
-              autoCollapse: true
-            },
-            toc: {
-              extraContent: (
-                <img
-                  alt="placeholder cat"
-                  src="https://placecats.com/300/200"
-                />
-              )
-            },
-            editLink: {
-              content: dictionary.editPage
-            },
-            feedback: {
-              // useLink(title) {
-              //   return `https://google.com/search?q=${encodeURIComponent(
-              //     `Feedback for ${title}`
-              //   )}`
-              // }
-            }
+          docsRepositoryBase="https://github.com/shuding/nextra/blob/core/examples/swr-site"
+          i18n={[
+            { locale: 'en', name: 'English' },
+            { direction: 'rtl', locale: 'es', name: 'Español RTL' },
+            { locale: 'ru', name: 'Русский' }
+          ]}
+          sidebar={{
+            defaultMenuCollapseLevel: 1,
+            autoCollapse: true
           }}
+          toc={{
+            extraContent: (
+              <img alt="placeholder cat" src="https://placecats.com/300/200" />
+            )
+          }}
+          editLink={{ content: dictionary.editPage }}
           pageMap={pageMap}
-          nextThemes={{
-            defaultTheme: 'dark'
-          }}
+          nextThemes={{ defaultTheme: 'dark' }}
         >
           <Navbar
             logo={

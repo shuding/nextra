@@ -35,16 +35,9 @@ export default async function RootLayout({ children }) {
       <body>
         <Banner storageKey="Nextra 2">Nextra 2 Alpha</Banner>
         <Layout
-          themeConfig={{
-            editLink: {
-              content: 'Edit this page on GitHub'
-            },
-            docsRepositoryBase:
-              'https://github.com/shuding/nextra/blob/core/examples/docs',
-            sidebar: {
-              defaultMenuCollapseLevel: 1
-            }
-          }}
+          editLink={{ content: 'Edit this page on GitHub' }}
+          docsRepositoryBase="https://github.com/shuding/nextra/blob/core/examples/docs"
+          sidebar={{ defaultMenuCollapseLevel: 1 }}
           pageMap={pageMap}
         >
           <Navbar

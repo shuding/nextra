@@ -7,6 +7,7 @@ import type { ReactElement } from 'react'
 import { useEffect, useRef } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import { useActiveAnchor, useThemeConfig } from '../contexts'
+import { getGitIssueUrl, useGitEditUrl } from '../utils'
 import { Anchor } from './anchor'
 import { BackToTop } from './back-to-top'
 
@@ -31,7 +32,7 @@ export function TOC({ toc, filePath, pageTitle }: TOCProps): ReactElement {
   const hasHeadings = toc.length > 0
   const hasMetaInfo = Boolean(
     themeConfig.feedback.content ||
-      themeConfig.editLink.component ||
+      themeConfig.editLink.content ||
       themeConfig.toc.extraContent ||
       themeConfig.toc.backToTop
   )
@@ -55,6 +56,13 @@ export function TOC({ toc, filePath, pageTitle }: TOCProps): ReactElement {
       })
     }
   }, [activeSlug])
+
+  const editUrl = useGitEditUrl(filePath)
+  const gitIssueUrl = getGitIssueUrl({
+    labels: themeConfig.feedback.labels,
+    repository: themeConfig.docsRepositoryBase,
+    title: `Feedback for “${pageTitle}”`
+  })
 
   return (
     <div
@@ -104,21 +112,17 @@ export function TOC({ toc, filePath, pageTitle }: TOCProps): ReactElement {
             '_-mx-1 _px-1' // to hide focused toc links
           )}
         >
-          {themeConfig.feedback.content ? (
-            <Anchor
-              className={linkClassName}
-              href={themeConfig.feedback.useLink?.(pageTitle)}
-              newWindow
-            >
+          {themeConfig.feedback.content && (
+            <Anchor className={linkClassName} href={gitIssueUrl} newWindow>
               {renderComponent(themeConfig.feedback.content)}
             </Anchor>
-          ) : null}
+          )}
 
-          {renderComponent(themeConfig.editLink.component, {
-            filePath,
-            className: linkClassName,
-            children: renderComponent(themeConfig.editLink.content)
-          })}
+          {themeConfig.editLink.content && (
+            <Anchor className={linkClassName} href={editUrl}>
+              {renderComponent(themeConfig.editLink.content)}
+            </Anchor>
+          )}
 
           {renderComponent(themeConfig.toc.extraContent)}
 
