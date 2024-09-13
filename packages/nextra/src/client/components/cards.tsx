@@ -1,6 +1,11 @@
 import cn from 'clsx'
 import NextLink from 'next/link'
-import type { ComponentProps, CSSProperties, ReactNode } from 'react'
+import type {
+  ComponentProps,
+  CSSProperties,
+  ReactElement,
+  ReactNode
+} from 'react'
 
 const classes = {
   cards: cn(
@@ -16,41 +21,26 @@ const classes = {
   ),
   title: cn(
     '_flex _font-semibold _items-start _gap-2 _p-4 _text-gray-700 hover:_text-gray-900'
-  )
+  ),
+  arrow:
+    'after:_content-["→"] after:_transition-transform after:_duration-75 after:group-hover:_translate-x-0.5'
 }
-
-const arrowEl = (
-  <span className="_transition-transform _duration-75 group-hover:_translate-x-[2px]">
-    →
-  </span>
-)
 
 function Card({
   children,
   title,
   icon,
-  image,
   arrow,
   href,
   ...props
 }: {
   title: string
-  icon: ReactNode
+  icon?: ReactElement
   arrow?: boolean
   href: string
-} & (
-  | {
-      children?: never
-      image?: false
-    }
-  | {
-      children: ReactNode
-      image: true
-    }
-)) {
-  const animatedArrow = arrow ? arrowEl : null
-
-  if (image) {
+  children?: ReactNode
+}) {
+  if (children) {
     return (
       <NextLink
         href={href}
@@ -64,14 +54,12 @@ function Card({
         <span
           className={cn(
             classes.title,
-            'dark:_text-gray-300 dark:hover:_text-gray-100'
+            'dark:_text-gray-300 dark:hover:_text-gray-100',
+            arrow && classes.arrow
           )}
         >
           {icon}
-          <span className="_flex _gap-1">
-            {title}
-            {animatedArrow}
-          </span>
+          {title}
         </span>
       </NextLink>
     )
@@ -89,12 +77,12 @@ function Card({
       <span
         className={cn(
           classes.title,
-          'dark:_text-neutral-200 dark:hover:_text-neutral-50 _flex _items-center'
+          'dark:_text-neutral-200 dark:hover:_text-neutral-50',
+          arrow && classes.arrow
         )}
       >
         {icon}
         {title}
-        {animatedArrow}
       </span>
     </NextLink>
   )
