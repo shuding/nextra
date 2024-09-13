@@ -93,7 +93,7 @@ const theme = z.strictObject({
     .default({})
 })
 
-export type ThemeConfigProps = {} & z.infer<typeof theme>
+export type ThemeConfigProps = z.infer<typeof theme>
 
 type Props = Partial<
   Omit<ThemeConfigProps, 'sidebar' | 'nextThemes' | 'toc'>
