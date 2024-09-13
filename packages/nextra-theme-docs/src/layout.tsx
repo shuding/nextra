@@ -1,7 +1,7 @@
+/* eslint sort-keys: error */
 import { ThemeProvider } from 'next-themes'
-import type { NextraThemeLayoutProps } from 'nextra'
 import { Search } from 'nextra/components'
-import type { ComponentProps, ReactElement, ReactNode } from 'react'
+import type { ReactElement, ReactNode } from 'react'
 import { Children, isValidElement } from 'react'
 import { z } from 'zod'
 import { fromZodError } from 'zod-validation-error'
@@ -19,7 +19,6 @@ const element = z.custom<ReactElement>(isValidElement, {
 const stringOrElement = z.union([z.string(), element])
 
 const theme = z.strictObject({
-  pageMap: z.array(z.any({})),
   darkMode: z.boolean().default(true),
   docsRepositoryBase: z
     .string()
@@ -32,20 +31,11 @@ const theme = z.strictObject({
     .default({}),
   feedback: z
     .strictObject({
-      labels: z.string().default('feedback'),
-      content: stringOrElement.default('Question? Give us feedback →')
+      content: stringOrElement.default('Question? Give us feedback →'),
+      labels: z.string().default('feedback')
     })
     .default({}),
-  navigation: z
-    .union([
-      z.boolean(),
-      z.strictObject({
-        next: z.boolean(),
-        prev: z.boolean()
-      })
-    ])
-    .default(true)
-    .transform(v => ({ prev: v, next: v })),
+  gitTimestamp: z.boolean().optional(),
   i18n: z
     .array(
       z.strictObject({
@@ -55,12 +45,42 @@ const theme = z.strictObject({
       })
     )
     .default([]),
+  navigation: z
+    .union([
+      z.boolean(),
+      z.strictObject({
+        next: z.boolean(),
+        prev: z.boolean()
+      })
+    ])
+    .default(true)
+    .transform(v => (typeof v === 'boolean' ? { next: v, prev: v } : v)),
+  nextThemes: z
+    .strictObject({
+      attribute: z.string().default('class'),
+      defaultTheme: z.string().default('system'),
+      disableTransitionOnChange: z.boolean().default(true),
+      storageKey: z.string().default('theme')
+    })
+    .default({}),
+  pageMap: z.array(z.any({})),
   search: element.default(<Search />),
   sidebar: z
     .strictObject({
       autoCollapse: z.boolean().optional(),
       defaultMenuCollapseLevel: z.number().min(1).int().default(2),
       toggleButton: z.boolean().default(true)
+    })
+    .default({}),
+  themeSwitch: z
+    .strictObject({
+      options: z
+        .strictObject({
+          dark: z.string().default('Dark'),
+          light: z.string().default('Light'),
+          system: z.string().default('System')
+        })
+        .default({})
     })
     .default({}),
   toc: z
@@ -70,42 +90,37 @@ const theme = z.strictObject({
       float: z.boolean().default(true),
       title: stringOrElement.default('On This Page')
     })
-    .default({}),
-  themeSwitch: z
-    .strictObject({
-      options: z
-        .strictObject({
-          light: z.string().default('Light'),
-          dark: z.string().default('Dark'),
-          system: z.string().default('System')
-        })
-        .default({})
-    })
-    .default({}),
-  nextThemes: z
-    .strictObject({
-      attribute: z.string().default('class'),
-      disableTransitionOnChange: z.boolean().default(true),
-      defaultTheme: z.string().default('system'),
-      storageKey: z.string().default('theme')
-    })
-    .default({}),
-  gitTimestamp: z.boolean().optional()
+    .default({})
 })
 
-export type ThemeConfigProps = z.infer<typeof theme>
+export type ThemeConfigProps = {} & z.infer<typeof theme>
 
-type ThemeProviderProps = Omit<ComponentProps<typeof ThemeProvider>, 'children'>
+type Props = Omit<
+  ThemeConfigProps,
+  | 'sidebar'
+  | 'nextThemes'
+  | 'toc'
+  | 'search'
+  | 'darkMode'
+  | 'feedback'
+  | 'navigation'
+  | 'themeSwitch'
+> & {
+  sidebar?: Partial<ThemeConfigProps['sidebar']>
+  nextThemes?: Partial<ThemeConfigProps['nextThemes']>
+  toc?: Partial<ThemeConfigProps['toc']>
+  search?: ThemeConfigProps['search']
+  darkMode?: ThemeConfigProps['darkMode']
+  feedback?: ThemeConfigProps['feedback']
+  navigation?: ThemeConfigProps['navigation']
+  themeSwitch?: ThemeConfigProps['themeSwitch']
+  children: ReactNode
+}
 
-export function Layout({
-  children,
-  ...themeConfig
-}: NextraThemeLayoutProps<ThemeConfigProps> & {
-  nextThemes?: ThemeProviderProps
-}): ReactElement {
+export function Layout({ children, ...themeConfig }: Props): ReactElement {
   const { footer, navbar, restChildren } = Children.toArray(children).reduce<{
-    footer: ReactNode
-    navbar: ReactNode
+    footer: ReactElement
+    navbar: ReactElement
     restChildren: ReactElement[]
   }>(
     (acc, child) => {
