@@ -15,8 +15,10 @@ const classes = {
     '_transition-all _duration-200 hover:_border-gray-300'
   ),
   title: cn(
-    '_flex _font-semibold _items-start _gap-2 _p-4 _text-gray-700 hover:_text-gray-900'
-  )
+    '_flex _gap-1 _font-semibold _items-start _gap-2 _p-4 _text-gray-700 hover:_text-gray-900'
+  ),
+  arrow:
+    'after:_content-["_→"] after:_transition-transform after:_duration-75 after:group-hover:_translate-x-0.5'
 }
 
 function Card({
@@ -42,12 +44,6 @@ function Card({
       image: true
     }
 )) {
-  const animatedArrow = arrow && (
-    <span className="_transition-transform _duration-75 group-hover:_translate-x-[2px]">
-      →
-    </span>
-  )
-
   if (image) {
     return (
       <NextLink
@@ -62,14 +58,12 @@ function Card({
         <span
           className={cn(
             classes.title,
-            'dark:_text-gray-300 dark:hover:_text-gray-100'
+            'dark:_text-gray-300 dark:hover:_text-gray-100',
+            arrow && classes.arrow
           )}
         >
           {icon}
-          <span className="_flex _gap-1">
-            {title}
-            {animatedArrow}
-          </span>
+          {title}
         </span>
       </NextLink>
     )
@@ -87,12 +81,12 @@ function Card({
       <span
         className={cn(
           classes.title,
-          'dark:_text-neutral-200 dark:hover:_text-neutral-50 _flex _items-center'
+          'dark:_text-neutral-200 dark:hover:_text-neutral-50',
+          arrow && classes.arrow
         )}
       >
         {icon}
         {title}
-        {animatedArrow}
       </span>
     </NextLink>
   )
