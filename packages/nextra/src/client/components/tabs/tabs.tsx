@@ -1,3 +1,5 @@
+'use client'
+
 import {
   Tab as HeadlessTab,
   TabGroup,
@@ -20,7 +22,7 @@ function isTabObjectItem(item: unknown): item is TabObjectItem {
   return !!item && typeof item === 'object' && 'label' in item
 }
 
-function Tabs_({
+export function Tabs({
   items,
   selectedIndex: _selectedIndex,
   defaultIndex = 0,
@@ -97,14 +99,25 @@ function Tabs_({
           <HeadlessTab
             key={index}
             disabled={isTabObjectItem(item) && item.disabled}
-            className={cn(
-              '_ring-inset',
-              '_rounded-t _p-2 _font-medium _leading-5 _transition-colors',
-              '_-mb-0.5 _select-none _border-b-2',
-              'data-[selected]:!_border-current data-[selected]:!_text-primary-600',
-              '_border-transparent _text-gray-600 hover:_border-gray-200 hover:_text-black dark:_text-gray-200 dark:hover:_border-neutral-800 dark:hover:_text-white',
-              'disabled:_pointer-events-none disabled:_text-gray-400 disabled:dark:_text-neutral-600'
-            )}
+            className={({ selected, disabled, hover }) =>
+              cn(
+                '_ring-inset',
+                '_rounded-t _p-2 _font-medium _leading-5 _transition-colors',
+                '_-mb-0.5 _select-none _border-b-2',
+                selected
+                  ? '_border-current'
+                  : hover
+                    ? '_border-gray-200 dark:_border-neutral-800'
+                    : '_border-transparent',
+                selected
+                  ? '_text-primary-600'
+                  : disabled
+                    ? '_text-gray-400 dark:_text-neutral-600 _pointer-events-none'
+                    : hover
+                      ? '_text-black dark:_text-white'
+                      : '_text-gray-600 dark:_text-gray-200'
+              )
+            }
           >
             {isTabObjectItem(item) ? item.label : item}
           </HeadlessTab>
@@ -115,7 +128,7 @@ function Tabs_({
   )
 }
 
-function Tab({
+export function Tab({
   children,
   // For SEO display all the Panel in the DOM and set `display: none;` for those that are not selected
   unmount = false,
@@ -127,5 +140,3 @@ function Tab({
     </TabPanel>
   )
 }
-
-export const Tabs = Object.assign(Tabs_, { displayName: 'Tabs', Tab })
