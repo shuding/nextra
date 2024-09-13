@@ -34,7 +34,7 @@ function Card({
       {children}
       <span
         className={cn(
-          '_flex _font-semibold _items-start _gap-2 _p-4 _text-gray-700 hover:_text-gray-900',
+          '_flex _font-semibold _items-center _gap-2 _p-4 _text-gray-700 hover:_text-gray-900',
           arrow &&
             'after:_content-["→"] after:_transition-transform after:_duration-75 after:group-hover:_translate-x-0.5',
           children
