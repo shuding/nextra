@@ -4,8 +4,7 @@ import type { LoaderContext } from 'webpack'
 import type { LoaderOptions, PageOpts } from '../types'
 import { compileMetadata } from './compile-metadata.js'
 import { compileMdx } from './compile.js'
-import { CWD, IS_PRODUCTION, MARKDOWN_EXTENSION_REGEX } from './constants.js'
-import { APP_DIR } from './file-system.js'
+import { CWD, IS_PRODUCTION } from './constants.js'
 import { logger } from './utils.js'
 
 const initGitRepo = (async () => {
@@ -56,23 +55,20 @@ export async function loader(
     mdxOptions
   } = this.getOptions()
 
-  const mdxPath = this._module?.resourceResolveData
+  const resolveData = this._module?.resourceResolveData
+
+  const mdxPath = resolveData
     ? // to make it work with symlinks, resolve the mdx path based on the relative path
       /*
        * `context.rootContext` could include path chunk of
        * `context._module.resourceResolveData.relativePath` use
        * `context._module.resourceResolveData.descriptionFileRoot` instead
        */
-      path.join(
-        this._module.resourceResolveData.descriptionFileRoot,
-        this._module.resourceResolveData.relativePath
-      )
+      path.join(resolveData.descriptionFileRoot, resolveData.relativePath)
     : this.resourcePath
 
   if (!IS_PRODUCTION && isPageMapImport) {
-    return compileMetadata(source, {
-      filePath: mdxPath
-    })
+    return compileMetadata(source, { filePath: mdxPath })
   }
 
   const { result, readingTime } = await compileMdx(source, {
