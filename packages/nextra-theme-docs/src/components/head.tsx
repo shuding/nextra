@@ -1,59 +1,80 @@
 import type { ReactElement, ReactNode } from 'react'
+import { z } from 'zod'
+import { fromZodError } from 'zod-validation-error'
 
-type Color =
-  | number
-  | {
-      dark: number
-      light: number
+const darkLightSchema = z
+  .union([
+    z.number(),
+    z.strictObject({
+      dark: z.number(),
+      light: z.number()
+    })
+  ])
+  .transform(v => (typeof v === 'number' ? { dark: v, light: v } : v))
+
+function hexToRgb(hex: `#${string}`) {
+  const bigint = parseInt(hex.slice(1), 16)
+  const r = (bigint >> 16) & 255
+  const g = (bigint >> 8) & 255
+  const b = bigint & 255
+  return `${r},${g},${b}`
+}
+
+const colorSchema = z
+  .union([
+    z.string().startsWith('#'),
+    z.string().startsWith('rgb('),
+    z.string().regex(/^\d{1,3},\d{1,3},\d{1,3}$/)
+  ])
+  .transform(value => {
+    if (value.startsWith('#')) {
+      return hexToRgb(value as `#${string}`)
     }
+    const groups = value.match(/^rgb\((?<rgb>.*?)\)$/)?.groups
+    if (groups) {
+      return groups.rgb.replaceAll(' ', '')
+    }
+    return value
+  })
 
-const defaultColor = {
-  hue: { dark: 204, light: 212 },
-  saturation: 100
-}
+const headSchema = z.strictObject({
+  color: z
+    .strictObject({
+      hue: darkLightSchema.default({ dark: 204, light: 212 }),
+      saturation: darkLightSchema.default(100)
+    })
+    .default({}),
+  faviconGlyph: z.string().optional(),
+  backgroundColor: z
+    .strictObject({
+      dark: colorSchema.default('rgb(17,17,17)'),
+      light: colorSchema.default('rgb(250,250,250)')
+    })
+    .default({})
+})
 
-const defaultBackgroundColor = {
-  dark: '17,17,17',
-  light: '250,250,250'
-}
-
-type HeadProps = {
+type HeadProps = Partial<z.infer<typeof headSchema>> & {
   children?: ReactNode
-  color?: {
-    hue: Color
-    saturation: Color
-  }
-  faviconGlyph?: string
-  backgroundColor?: {
-    dark: string
-    light: string
-  }
 }
 
-export function Head({
-  children,
-  color = defaultColor,
-  faviconGlyph,
-  backgroundColor: bgColor = defaultBackgroundColor
-}: HeadProps): ReactElement {
-  const { hue, saturation } = color
-  const { dark: darkHue, light: lightHue } =
-    typeof hue === 'number' ? { dark: hue, light: hue } : hue
-  const { dark: darkSaturation, light: lightSaturation } =
-    typeof saturation === 'number'
-      ? { dark: saturation, light: saturation }
-      : saturation
+export function Head({ children, ...props }: HeadProps): ReactElement {
+  const { data, error } = headSchema.safeParse(props)
+  if (error) {
+    throw fromZodError(error)
+  }
+
+  const { color, backgroundColor, faviconGlyph } = data
 
   return (
     <head>
       {children}
-      <style>{`:root{--nextra-primary-hue:${lightHue}deg;--nextra-primary-saturation:${lightSaturation}%;--nextra-navbar-height:4rem;--nextra-menu-height:3.75rem;--nextra-banner-height:2.5rem;--nextra-bg:${bgColor.light};}.dark{--nextra-primary-hue:${darkHue}deg;--nextra-primary-saturation:${darkSaturation}%;--nextra-bg:${bgColor.dark};}`}</style>
-      {faviconGlyph ? (
+      <style>{`:root{--nextra-primary-hue:${color.hue.light}deg;--nextra-primary-saturation:${color.saturation.light}%;--nextra-navbar-height:4rem;--nextra-menu-height:3.75rem;--nextra-banner-height:2.5rem;--nextra-bg:${backgroundColor.light};}.dark{--nextra-primary-hue:${color.hue.dark}deg;--nextra-primary-saturation:${color.saturation.dark}%;--nextra-bg:${backgroundColor.dark};}`}</style>
+      {faviconGlyph && (
         <link
           rel="icon"
           href={`data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text x='50' y='.9em' font-size='90' text-anchor='middle'>${faviconGlyph}</text><style>text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";fill:black}@media(prefers-color-scheme:dark){text{fill:white}}</style></svg>`}
         />
-      ) : null}
+      )}
     </head>
   )
 }

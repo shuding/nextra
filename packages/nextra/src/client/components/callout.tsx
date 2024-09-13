@@ -50,6 +50,7 @@ export function Callout({
         style={{
           fontFamily: '"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
         }}
+        data-pagefind-ignore="all"
       >
         {emoji}
       </div>
