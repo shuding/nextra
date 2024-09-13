@@ -2,7 +2,7 @@
 
 /* eslint sort-keys: error */
 import type { ReactElement, ReactNode } from 'react'
-import { createContext, useContext, useRef } from 'react'
+import { createContext, useContext } from 'react'
 import type { ThemeConfigProps } from '../layout'
 
 const ThemeConfigContext = createContext<ThemeConfigProps>(null!)

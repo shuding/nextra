@@ -89,7 +89,8 @@ const theme = z.strictObject({
       defaultTheme: z.string().default('system'),
       storageKey: z.string().default('theme')
     })
-    .default({})
+    .default({}),
+  gitTimestamp: z.boolean().optional()
 })
 
 export type ThemeConfigProps = z.infer<typeof theme>
