@@ -2,7 +2,7 @@ import { ThemeProvider } from 'next-themes'
 import type { NextraThemeLayoutProps } from 'nextra'
 import { Search } from 'nextra/components'
 import type { ComponentProps, ReactElement, ReactNode } from 'react'
-import { isValidElement } from 'react'
+import { Children, isValidElement } from 'react'
 import { Footer, MobileNav, Navbar } from './components'
 import {
   ActiveAnchorProvider,
@@ -61,13 +61,9 @@ export function Layout({
   children,
   themeConfig,
   pageMap,
-  nextThemes,
-  footer = <Footer>MIT {new Date().getFullYear()} © Nextra.</Footer>,
-  navbar = <Navbar />
+  nextThemes
 }: NextraThemeLayoutProps & {
   nextThemes?: ThemeProviderProps
-  footer?: ReactNode
-  navbar?: ReactNode
 }): ReactElement {
   const extendedThemeConfig = {
     ...DEFAULT_THEME,
@@ -82,6 +78,36 @@ export function Layout({
         ])
       ))
   }
+
+  const { footer, navbar, restChildren } = Children.toArray(children).reduce<{
+    footer: ReactNode
+    navbar: ReactNode
+    restChildren: ReactElement[]
+  }>(
+    (acc, child) => {
+      if (
+        child &&
+        typeof child === 'object' &&
+        'type' in child &&
+        typeof child.type === 'function'
+      ) {
+        if (child.type === Footer) {
+          acc.footer = child
+        } else if (child.type === Navbar) {
+          acc.navbar = child
+        } else {
+          acc.restChildren.push(child)
+        }
+      }
+      return acc
+    },
+    {
+      footer: <Footer>MIT {new Date().getFullYear()} © Nextra.</Footer>,
+      navbar: <Navbar />,
+      restChildren: []
+    }
+  )
+
   return (
     <ThemeConfigProvider value={extendedThemeConfig}>
       <ThemeProvider
@@ -94,7 +120,7 @@ export function Layout({
         <ConfigProvider pageMap={pageMap} footer={footer} navbar={navbar}>
           <ActiveAnchorProvider>
             <MobileNav />
-            {children}
+            {restChildren}
           </ActiveAnchorProvider>
         </ConfigProvider>
       </ThemeProvider>

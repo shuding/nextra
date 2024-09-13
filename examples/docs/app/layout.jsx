@@ -46,13 +46,11 @@ export default async function RootLayout({ children }) {
             }
           }}
           pageMap={pageMap}
-          navbar={
-            <Navbar
-              // Next.js discord server
-              chatLink="https://discord.gg/hEM84NMkRv"
-            />
-          }
         >
+          <Navbar
+            // Next.js discord server
+            chatLink="https://discord.gg/hEM84NMkRv"
+          />
           {children}
         </Layout>
       </body>

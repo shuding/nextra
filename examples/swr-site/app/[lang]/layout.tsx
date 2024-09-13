@@ -105,42 +105,38 @@ export default async function RootLayout({ children, params: { lang } }) {
             }
           }}
           pageMap={pageMap}
-          navbar={
-            <Navbar
-              logo={
-                <>
-                  <SwrIcon className="h-3" />
-                  <span
-                    className="max-md:hidden select-none font-extrabold ms-2"
-                    title={`SWR: ${dictionary.logo.title}`}
-                  >
-                    SWR
-                  </span>
-                </>
-              }
-              projectLink="https://github.com/vercel/swr"
-              chatLink="https://discord.com"
-            >
-              <LocaleSwitch className="[&>span>span]:hidden" />
-            </Navbar>
-          }
-          footer={
-            <Footer>
-              <a
-                rel="noreferrer"
-                target="_blank"
-                className="flex items-center gap-2 font-semibold"
-                href={dictionary.link.vercel}
-              >
-                {dictionary.poweredBy} <VercelIcon />
-              </a>
-            </Footer>
-          }
           nextThemes={{
             defaultTheme: 'dark'
           }}
         >
+          <Navbar
+            logo={
+              <>
+                <SwrIcon className="h-3" />
+                <span
+                  className="max-md:hidden select-none font-extrabold ms-2"
+                  title={`SWR: ${dictionary.logo.title}`}
+                >
+                  SWR
+                </span>
+              </>
+            }
+            projectLink="https://github.com/vercel/swr"
+            chatLink="https://discord.com"
+          >
+            <LocaleSwitch className="[&>span>span]:hidden" />
+          </Navbar>
           {children}
+          <Footer>
+            <a
+              rel="noreferrer"
+              target="_blank"
+              className="flex items-center gap-2 font-semibold"
+              href={dictionary.link.vercel}
+            >
+              {dictionary.poweredBy} <VercelIcon />
+            </a>
+          </Footer>
         </Layout>
       </body>
     </html>

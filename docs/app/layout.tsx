@@ -78,31 +78,27 @@ export default async function RootLayout({
               defaultMenuCollapseLevel: 1
             }
           }}
-          navbar={
-            <Navbar
-              logo={<NextraLogo className="nextra-logo h-5" />}
-              projectLink="https://github.com/shuding/nextra"
-            />
-          }
-          footer={
-            <Footer className="flex-col items-center sm:items-start">
-              <a
-                className="flex items-center gap-1"
-                target="_blank"
-                rel="noreferrer"
-                title="vercel.com homepage"
-                href="https://vercel.com?utm_source=nextra.site"
-              >
-                <span>Powered by</span>
-                <VercelLogo height="20" />
-              </a>
-              <p className="mt-6 text-xs">
-                © {new Date().getFullYear()} The Nextra Project.
-              </p>
-            </Footer>
-          }
         >
+          <Navbar
+            logo={<NextraLogo className="nextra-logo h-5" />}
+            projectLink="https://github.com/shuding/nextra"
+          />
           {children}
+          <Footer className="flex-col items-center sm:items-start">
+            <a
+              className="flex items-center gap-1"
+              target="_blank"
+              rel="noreferrer"
+              title="vercel.com homepage"
+              href="https://vercel.com?utm_source=nextra.site"
+            >
+              <span>Powered by</span>
+              <VercelLogo height="20" />
+            </a>
+            <p className="mt-6 text-xs">
+              © {new Date().getFullYear()} The Nextra Project.
+            </p>
+          </Footer>
         </Layout>
       </body>
     </html>
