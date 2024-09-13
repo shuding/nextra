@@ -1,6 +1,11 @@
 import cn from 'clsx'
 import NextLink from 'next/link'
-import type { ComponentProps, CSSProperties, ReactNode } from 'react'
+import type {
+  ComponentProps,
+  CSSProperties,
+  ReactElement,
+  ReactNode
+} from 'react'
 
 const classes = {
   cards: cn(
@@ -15,36 +20,27 @@ const classes = {
     '_transition-all _duration-200 hover:_border-gray-300'
   ),
   title: cn(
-    '_flex _gap-1 _font-semibold _items-start _gap-2 _p-4 _text-gray-700 hover:_text-gray-900'
+    '_flex _font-semibold _items-start _gap-2 _p-4 _text-gray-700 hover:_text-gray-900'
   ),
   arrow:
-    'after:_content-["_→"] after:_transition-transform after:_duration-75 after:group-hover:_translate-x-0.5'
+    'after:_content-["→"] after:_transition-transform after:_duration-75 after:group-hover:_translate-x-0.5'
 }
 
 function Card({
   children,
   title,
   icon,
-  image,
   arrow,
   href,
   ...props
 }: {
   title: string
-  icon: ReactNode
+  icon?: ReactElement
   arrow?: boolean
   href: string
-} & (
-  | {
-      children?: never
-      image?: false
-    }
-  | {
-      children: ReactNode
-      image: true
-    }
-)) {
-  if (image) {
+  children?: ReactNode
+}) {
+  if (children) {
     return (
       <NextLink
         href={href}
