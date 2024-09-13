@@ -65,8 +65,8 @@ export default async function RootLayout({ children, params: { lang } }) {
     >
       <Head
         backgroundColor={{
-          dark: '15,23,42',
-          light: '254,252,232'
+          dark: 'rgb(15,23,42)',
+          light: 'rgb(254, 252, 232)'
         }}
       />
       <body>
