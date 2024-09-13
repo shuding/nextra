@@ -95,25 +95,12 @@ const theme = z.strictObject({
 
 export type ThemeConfigProps = {} & z.infer<typeof theme>
 
-type Props = Omit<
-  ThemeConfigProps,
-  | 'sidebar'
-  | 'nextThemes'
-  | 'toc'
-  | 'search'
-  | 'darkMode'
-  | 'feedback'
-  | 'navigation'
-  | 'themeSwitch'
+type Props = Partial<
+  Omit<ThemeConfigProps, 'sidebar' | 'nextThemes' | 'toc'>
 > & {
   sidebar?: Partial<ThemeConfigProps['sidebar']>
   nextThemes?: Partial<ThemeConfigProps['nextThemes']>
   toc?: Partial<ThemeConfigProps['toc']>
-  search?: ThemeConfigProps['search']
-  darkMode?: ThemeConfigProps['darkMode']
-  feedback?: ThemeConfigProps['feedback']
-  navigation?: ThemeConfigProps['navigation']
-  themeSwitch?: ThemeConfigProps['themeSwitch']
   children: ReactNode
 }
 
