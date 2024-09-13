@@ -88,13 +88,9 @@ export default async function RootLayout({ children, params: { lang } }) {
               <img alt="placeholder cat" src="https://placecats.com/300/200" />
             )
           }}
-          editLink={{
-            content: dictionary.editPage
-          }}
+          editLink={{ content: dictionary.editPage }}
           pageMap={pageMap}
-          nextThemes={{
-            defaultTheme: 'dark'
-          }}
+          nextThemes={{ defaultTheme: 'dark' }}
         >
           <Navbar
             logo={

@@ -69,12 +69,8 @@ export default async function RootLayout({
         <Layout
           pageMap={pageMap}
           docsRepositoryBase="https://github.com/shuding/nextra/tree/main/docs"
-          editLink={{
-            content: 'Edit this page on GitHub →'
-          }}
-          sidebar={{
-            defaultMenuCollapseLevel: 1
-          }}
+          editLink={{ content: 'Edit this page on GitHub →' }}
+          sidebar={{ defaultMenuCollapseLevel: 1 }}
         >
           <Navbar
             logo={<NextraLogo className="nextra-logo h-5" />}
