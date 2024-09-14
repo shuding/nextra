@@ -68,7 +68,9 @@ const Folder = memo<FolderProps>(
         <Button
           onClick={toggle}
           title={name}
-          className="_inline-flex _items-center _py-1 hover:_opacity-60"
+          className={({ hover }) =>
+            cn('_inline-flex _items-center _py-1', hover && '_opacity-60')
+          }
         >
           <Ident />
           <svg

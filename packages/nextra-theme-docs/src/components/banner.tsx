@@ -43,7 +43,7 @@ export function Banner(): ReactElement | null {
               document.body.classList.add('nextra-banner-hidden')
             }}
           >
-            <XIcon className="_mx-auto _h-4 _w-4" />
+            <XIcon height="16" />
           </Button>
         )}
       </div>
