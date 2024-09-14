@@ -1,7 +1,7 @@
 import cn from 'clsx'
 import { createContext, memo, useCallback, useContext, useState } from 'react'
 import type { ReactElement, ReactNode } from 'react'
-import { Button } from './button'
+import { Button } from './button.js'
 
 const ctx = createContext(0)
 

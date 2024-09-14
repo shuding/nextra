@@ -1,4 +1,5 @@
-import { ButtonProps, Button as HeadlessButton } from '@headlessui/react'
+import { Button as HeadlessButton } from '@headlessui/react'
+import type { ButtonProps } from '@headlessui/react'
 import cn from 'clsx'
 import type { ReactElement } from 'react'
 

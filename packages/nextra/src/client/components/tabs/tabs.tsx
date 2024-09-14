@@ -5,9 +5,9 @@ import {
   TabGroup,
   TabList,
   TabPanel,
-  TabPanelProps,
   TabPanels
 } from '@headlessui/react'
+import type { TabPanelProps } from '@headlessui/react'
 import cn from 'clsx'
 import type { ReactElement, ReactNode } from 'react'
 import { useCallback, useEffect, useState } from 'react'
