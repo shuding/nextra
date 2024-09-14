@@ -99,7 +99,7 @@ const config: DocsThemeConfig = {
         <a
           rel="noreferrer"
           target="_blank"
-          className="flex items-center gap-2 font-semibold"
+          className="nextra-focus flex items-center gap-2 font-semibold"
           href={FOOTER_LINK[locale!]}
         >
           {FOOTER_LINK_TEXT[locale!]}
