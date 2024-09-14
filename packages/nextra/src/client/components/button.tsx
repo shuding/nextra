@@ -1,5 +1,6 @@
+import { Button as HeadlessButton } from '@headlessui/react'
 import cn from 'clsx'
-import type { ComponentProps, ReactElement } from 'react'
+import type { ComponentPropsWithoutRef, ReactElement } from 'react'
 
 export const classes = {
   border: cn(
@@ -12,17 +13,20 @@ export function Button({
   children,
   className,
   ...props
-}: ComponentProps<'button'>): ReactElement {
+}: ComponentPropsWithoutRef<'button'>): ReactElement {
   return (
-    <button
-      className={cn(
-        '_transition _rounded-md _p-1.5',
-        classes.border,
-        className
-      )}
+    <HeadlessButton
+      className={({ focus }) =>
+        cn(
+          focus && 'nextra-focusable',
+          '_transition _rounded-md _p-1.5',
+          classes.border,
+          className
+        )
+      }
       {...props}
     >
       {children}
-    </button>
+    </HeadlessButton>
   )
 }
