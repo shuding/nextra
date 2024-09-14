@@ -1,4 +1,5 @@
 import cn from 'clsx'
+import { Button } from 'nextra/components'
 import { XIcon } from 'nextra/icons'
 import type { ReactElement } from 'react'
 import { useThemeConfig } from '../contexts'
@@ -28,10 +29,11 @@ export function Banner(): ReactElement | null {
           {renderComponent(banner.content)}
         </div>
         {banner.dismissible && (
-          <button
-            type="button"
+          <Button
             aria-label="Dismiss banner"
-            className="_w-8 _h-8 _opacity-80 hover:_opacity-100"
+            className={({ hover }) =>
+              cn('_p-2', hover ? '_opacity-100' : '_opacity-80')
+            }
             onClick={() => {
               try {
                 localStorage.setItem(banner.key, '0')
@@ -42,7 +44,7 @@ export function Banner(): ReactElement | null {
             }}
           >
             <XIcon className="_mx-auto _h-4 _w-4" />
-          </button>
+          </Button>
         )}
       </div>
     </>
