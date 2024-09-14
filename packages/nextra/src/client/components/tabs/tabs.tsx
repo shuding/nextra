@@ -5,10 +5,11 @@ import {
   TabGroup,
   TabList,
   TabPanel,
+  TabPanelProps,
   TabPanels
 } from '@headlessui/react'
 import cn from 'clsx'
-import type { ComponentProps, ReactElement, ReactNode } from 'react'
+import type { ReactElement, ReactNode } from 'react'
 import { useCallback, useEffect, useState } from 'react'
 
 type TabItem = string | ReactElement
@@ -99,9 +100,9 @@ export function Tabs({
           <HeadlessTab
             key={index}
             disabled={isTabObjectItem(item) && item.disabled}
-            className={({ selected, disabled, hover }) =>
+            className={({ selected, disabled, hover, focus }) =>
               cn(
-                '_ring-inset',
+                focus && 'nextra-focusable _ring-inset',
                 '_rounded-t _p-2 _font-medium _leading-5 _transition-colors',
                 '_-mb-0.5 _select-none _border-b-2',
                 selected
@@ -133,9 +134,15 @@ export function Tab({
   // For SEO display all the Panel in the DOM and set `display: none;` for those that are not selected
   unmount = false,
   ...props
-}: Omit<ComponentProps<typeof TabPanel>, 'static'>): ReactElement {
+}: TabPanelProps): ReactElement {
   return (
-    <TabPanel {...props} unmount={unmount} className="_rounded _mt-6">
+    <TabPanel
+      {...props}
+      unmount={unmount}
+      className={({ focus }) =>
+        cn('_rounded _mt-6', focus && 'nextra-focusable')
+      }
+    >
       {children}
     </TabPanel>
   )
