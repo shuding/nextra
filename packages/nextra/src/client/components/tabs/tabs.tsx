@@ -93,7 +93,8 @@ export function Tabs({
       <TabList
         className={cn(
           'nextra-scrollbar _overflow-x-auto _overscroll-x-contain _overflow-y-hidden',
-          '_mt-4 _flex _w-full _gap-2 _border-b _border-gray-200 _pb-px dark:_border-neutral-800'
+          '_mt-4 _flex _w-full _gap-2 _border-b _border-gray-200 _pb-px dark:_border-neutral-800',
+          'nextra-focus'
         )}
       >
         {items.map((item, index) => (
@@ -103,6 +104,7 @@ export function Tabs({
             className={({ selected, disabled, hover, focus }) =>
               cn(
                 focus && 'nextra-focusable _ring-inset',
+                '_whitespace-nowrap',
                 '_rounded-t _p-2 _font-medium _leading-5 _transition-colors',
                 '_-mb-0.5 _select-none _border-b-2',
                 selected
