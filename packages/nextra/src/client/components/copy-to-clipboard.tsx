@@ -3,12 +3,12 @@ import { useCallback, useEffect, useState } from 'react'
 import { CheckIcon, CopyIcon } from '../icons/index.js'
 import { Button } from './button.js'
 
-export const CopyToClipboard = ({
+export function CopyToClipboard({
   getValue,
   ...props
-}: {
+}: ComponentProps<typeof Button> & {
   getValue: () => string
-} & ComponentProps<'button'>): ReactElement => {
+}): ReactElement {
   const [isCopied, setCopied] = useState(false)
 
   useEffect(() => {
