@@ -29,7 +29,6 @@ export function BackToTop({
       aria-hidden="true"
       onClick={scrollToTop}
       disabled={hidden}
-      variant="default"
       className={({ disabled }) =>
         cn(
           '_flex _items-center _gap-1.5',
