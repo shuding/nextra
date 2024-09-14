@@ -85,7 +85,7 @@ export function Search({
         'max-sm:_hidden'
       )}
     >
-      {navigator.userAgent.includes('Macintosh') ? (
+      {navigator.userAgent.includes('Mac') ? (
         <>
           <span className="_text-xs">⌘</span>K
         </>

@@ -1,5 +1,28 @@
 # nextra-theme-docs
 
+## 3.0.0-alpha.38
+
+### Patch Changes
+
+- ccaf3d4: Add the `autoImportThemeStyle` option to the Nextra configuration.
+  This allows users to import the official Nextra theme CSS into a specific
+  cascade layer.
+- Updated dependencies [ccaf3d4]
+  - nextra@3.0.0-alpha.38
+
+## 3.0.0-alpha.37
+
+### Patch Changes
+
+- 2a3e3e7: Fix first list item in `<FileTree>` not within permitted parent
+  elements
+- 829c417: - fix overflow when clicking on `<details>` with open state
+
+  - fix animation on mobile when clicking on `<details>` with open state
+
+- Updated dependencies [2a3e3e7]
+  - nextra@3.0.0-alpha.37
+
 ## 3.0.0-alpha.36
 
 ### Patch Changes

@@ -184,21 +184,21 @@ function FolderImpl({ item, anchors, onFocus }: FolderProps): ReactElement {
           className={cn(
             '_shrink-0',
             '_rounded-sm _p-0.5 hover:_bg-gray-800/5 dark:hover:_bg-gray-100/5',
-            '*:_origin-center *:_transition-transform *:rtl:_-rotate-180',
+            'motion-reduce:*:_transition-none *:_origin-center *:_transition-transform *:rtl:_-rotate-180',
             open && '*:ltr:_rotate-90 *:rtl:_rotate-[-270deg]'
           )}
         />
       </ComponentToUse>
-      <Collapse className="_pt-1" isOpen={open}>
-        {Array.isArray(item.children) && (
+      {Array.isArray(item.children) && (
+        <Collapse isOpen={open}>
           <Menu
-            className={cn(classes.border, 'ltr:_ml-3 rtl:_mr-3')}
+            className={cn(classes.border, '_pt-1 ltr:_ml-3 rtl:_mr-3')}
             directories={item.children}
             base={item.route}
             anchors={anchors}
           />
-        )}
-      </Collapse>
+        </Collapse>
+      )}
     </li>
   )
 }
@@ -352,12 +352,12 @@ export function Sidebar({
   const [showToggleAnimation, setToggleAnimation] = useState(false)
 
   const anchors = useMemo(() => toc.filter(v => v.depth === 2), [toc])
-  const sidebarRef = useRef<HTMLDivElement>(null)
-  const containerRef = useRef<HTMLDivElement>(null)
+  const sidebarRef = useRef<HTMLDivElement>(null!)
+  const containerRef = useRef<HTMLDivElement>(null!)
   const mounted = useMounted()
 
   useEffect(() => {
-    const activeElement = sidebarRef.current?.querySelector('li.active')
+    const activeElement = sidebarRef.current.querySelector('li.active')
 
     if (activeElement && (window.innerWidth > 767 || menu)) {
       const scroll = () => {
@@ -389,17 +389,16 @@ export function Sidebar({
       )}
       <div
         className={cn(
-          'motion-reduce:_transition-none [transition:background-color_1.5s_ease]',
-          menu
-            ? '_fixed _inset-0 _z-10 _bg-black/80 dark:_bg-black/60'
-            : '_bg-transparent'
+          '[transition:background-color_1.5s_ease] max-md:_fixed _inset-0 _z-10',
+          menu ? '_bg-black/80 dark:_bg-black/60' : '_bg-transparent'
         )}
         onClick={() => setMenu(false)}
       />
       <aside
         className={cn(
           'nextra-sidebar-container _flex _flex-col',
-          'md:_top-16 md:_shrink-0 motion-reduce:_transform-none',
+          'md:_top-16 md:_shrink-0 motion-reduce:_transform-none motion-reduce:_transition-none',
+          '[.resizing_&]:_transition-none',
           '_transform-gpu _transition-all _ease-in-out',
           'print:_hidden',
           showSidebar ? 'md:_w-64' : 'md:_w-20',

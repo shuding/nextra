@@ -32,7 +32,8 @@ export function getStaticProps() {
     }
     return pageMap
   },
-  latex: true
+  latex: true,
+  autoImportThemeStyle: false
 })
 
 const withBundleAnalyzer = bundleAnalyzer({

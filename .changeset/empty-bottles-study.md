@@ -4,4 +4,4 @@
 'nextra': patch
 ---
 
-use `overflow-x-auto` instead `overflow-x-scroll` for `<Table>`
+Fix first list item in `<FileTree>` not within permitted parent elements

@@ -1,4 +1,3 @@
-import './polyfill'
 import { ThemeProvider } from 'next-themes'
 import type { NextraThemeLayoutProps } from 'nextra'
 import { useRouter } from 'nextra/hooks'

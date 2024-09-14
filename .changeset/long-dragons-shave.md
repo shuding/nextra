@@ -4,4 +4,4 @@
 'nextra': minor
 ---
 
-Make the `<Tab />` component be crawlable and indexable by search engines by default
+Make the `<Tab>` component be crawlable and indexable by search engines by default
