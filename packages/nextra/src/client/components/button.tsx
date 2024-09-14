@@ -21,6 +21,7 @@ export function Button({
     <HeadlessButton
       className={args =>
         cn(
+          '_transition',
           args.focus && 'nextra-focusable',
           variant === 'outline' && [classes.border, '_rounded-md _p-1.5'],
           typeof className === 'function' ? className(args) : className
