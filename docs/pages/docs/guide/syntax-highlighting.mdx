@@ -214,6 +214,7 @@ export function DynamicCode({ children }) {
       </div>
       <div className="flex mt-3 gap-3 justify-center text-sm">
         <Button
+          variant="outline"
           onClick={() => {
             const prev = tokenRef.current.textContent
             tokenRef.current.textContent = (+prev || 0) + 1
@@ -222,6 +223,7 @@ export function DynamicCode({ children }) {
           Increase the number
         </Button>
         <Button
+          variant="outline"
           onClick={() => {
             tokenRef.current.textContent = '1 + 1'
           }}
@@ -234,12 +236,12 @@ export function DynamicCode({ children }) {
 }
 
 <DynamicCode>
-```js copy=false filename="dynamic-code.js"
-function hello() {
+  ```js copy=false filename="dynamic-code.js"
+  function hello() {
   const x = 2 + 3
   console.log(1)
 }
-```
+  ```
 </DynamicCode>
 
 This workaround has a limitation that updated content won't be re-highlighted.
