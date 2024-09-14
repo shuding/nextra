@@ -482,9 +482,6 @@ importers:
       '@vitejs/plugin-react':
         specifier: ^4.1.0
         version: 4.3.1(vite@5.4.2)
-      concurrently:
-        specifier: ^9.0.0
-        version: 9.0.1
       jsdom:
         specifier: ^25.0.0
         version: 25.0.0
@@ -497,9 +494,6 @@ importers:
       postcss:
         specifier: ^8.4.33
         version: 8.4.45
-      postcss-cli:
-        specifier: ^11.0.0
-        version: 11.0.0(postcss@8.4.45)(tsx@4.19.1)
       postcss-import:
         specifier: ^16.0.0
         version: 16.1.0(postcss@8.4.45)

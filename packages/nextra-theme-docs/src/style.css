@@ -6,8 +6,8 @@
 @import 'nextra/styles/scrollbar.css';
 @import 'nextra/styles/steps.css';
 @import 'nextra/styles/cards.css';
-@import './hamburger.css';
-@import './typesetting-article.css';
+@import '../css/hamburger.css';
+@import '../css/typesetting-article.css';
 
 html {
   @apply _antialiased _text-base;
