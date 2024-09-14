@@ -12,15 +12,17 @@ export const classes = {
 export function Button({
   children,
   className,
+  variant = 'outline',
   ...props
-}: ComponentPropsWithoutRef<'button'>): ReactElement {
+}: ComponentPropsWithoutRef<'button'> & {
+  variant?: 'outline' | 'default'
+}): ReactElement {
   return (
     <HeadlessButton
       className={({ focus }) =>
         cn(
           focus && 'nextra-focusable',
-          '_transition _rounded-md _p-1.5',
-          classes.border,
+          variant === 'outline' && [classes.border, '_rounded-md _p-1.5'],
           className
         )
       }
