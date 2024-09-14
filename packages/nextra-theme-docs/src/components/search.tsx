@@ -15,7 +15,6 @@ import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
 import { useMenu, useThemeConfig } from '../contexts'
 import type { SearchResult } from '../types'
 import { renderComponent, renderString } from '../utils'
-import { Input } from './input'
 
 type SearchProps = {
   className?: string
