@@ -1,38 +1,33 @@
-// eslint-disable-next-line no-restricted-imports -- only in this file we determine either we include <a /> as child of <NextLink />
 import cn from 'clsx'
+// eslint-disable-next-line no-restricted-imports -- only in this file we determine either we include <a /> as child of <NextLink />
 import NextLink from 'next/link'
 import type { ComponentProps, ReactElement } from 'react'
 import { forwardRef } from 'react'
 
-export type AnchorProps = Omit<ComponentProps<'a'>, 'ref'> & {
+export type AnchorProps = ComponentProps<'a'> & {
   newWindow?: boolean
 }
 
 export const Anchor = forwardRef<HTMLAnchorElement, AnchorProps>(
   (
-    { href = '', children, newWindow, className: _className, ...props },
+    { href = '', children, newWindow, ...props },
     // ref is used in <NavbarMenu />
     forwardedRef
   ): ReactElement => {
-    const className = cn('nextra-focus', _className)
-    if (newWindow) {
-      return (
-        <a
-          ref={forwardedRef}
-          href={href}
-          target="_blank"
-          rel="noreferrer"
-          {...props}
-          className={className}
-        >
-          {children}
-        </a>
-      )
-    }
+    const ComponentToUse = newWindow ? 'a' : NextLink
     return (
-      <NextLink ref={forwardedRef} href={href} {...props} className={className}>
+      <ComponentToUse
+        {...props}
+        className={cn('nextra-focus', props.className)}
+        ref={forwardedRef}
+        href={href}
+        {...(newWindow && {
+          target: '_blank',
+          rel: 'noreferrer'
+        })}
+      >
         {children}
-      </NextLink>
+      </ComponentToUse>
     )
   }
 )
