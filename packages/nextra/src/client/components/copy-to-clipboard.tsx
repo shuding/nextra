@@ -37,7 +37,12 @@ export const CopyToClipboard = ({
   const IconToUse = isCopied ? CheckIcon : CopyIcon
 
   return (
-    <Button onClick={handleClick} title="Copy code" {...props}>
+    <Button
+      onClick={handleClick}
+      title="Copy code"
+      variant="outline"
+      {...props}
+    >
       <IconToUse height="16" className="nextra-copy-icon" />
     </Button>
   )

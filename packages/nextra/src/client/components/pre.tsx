@@ -85,6 +85,7 @@ export function Pre({
             onClick={toggleWordWrap}
             className="md:_hidden"
             title="Toggle word wrap"
+            variant="outline"
           >
             <WordWrapIcon height="16" />
           </Button>

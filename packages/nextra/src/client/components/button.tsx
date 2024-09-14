@@ -12,7 +12,7 @@ export const classes = {
 export function Button({
   children,
   className,
-  variant = 'outline',
+  variant = 'default',
   ...props
 }: ButtonProps & {
   variant?: 'outline' | 'default'
