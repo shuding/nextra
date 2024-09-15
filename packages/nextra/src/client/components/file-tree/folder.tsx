@@ -1,10 +1,10 @@
 'use client'
 
 import cn from 'clsx'
-import { Button } from '../button.js'
 import { memo, useCallback, useState } from 'react'
 import type { ReactNode } from 'react'
 import { FolderIcon, FolderOpenIcon } from '../../icons/index.js'
+import { Button } from '../button.js'
 import type { FileProps } from './file.js'
 
 type FolderProps = FileProps & {

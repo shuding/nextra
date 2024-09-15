@@ -1,8 +1,8 @@
 'use client'
 
 import cn from 'clsx'
-import { Button } from '../button.js'
 import type { ReactElement, ReactNode } from 'react'
+import { Button } from '../button.js'
 
 export function CloseBannerButton({
   storageKey,
