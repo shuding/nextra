@@ -190,7 +190,6 @@ export function Navbar({ items }: NavBarProps): ReactElement {
 
         <Button
           aria-label="Menu"
-          variant="default"
           className={({ active }) =>
             cn(
               'nextra-hamburger _rounded md:_hidden',
