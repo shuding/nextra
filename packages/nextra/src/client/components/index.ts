@@ -1,5 +1,6 @@
 export { FileTree } from './file-tree/index.js'
 export { Tabs } from './tabs/index.js'
+export { Button } from './button.js'
 export { Callout } from './callout.js'
 export { Cards } from './cards.js'
 export { Code } from './code.js'

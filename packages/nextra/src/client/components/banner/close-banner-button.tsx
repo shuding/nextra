@@ -1,7 +1,7 @@
 'use client'
 
 import cn from 'clsx'
-import { Button } from 'nextra/components'
+import { Button } from '../button.js'
 import type { ReactElement, ReactNode } from 'react'
 
 export function CloseBannerButton({

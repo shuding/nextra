@@ -1,7 +1,7 @@
 'use client'
 
 import cn from 'clsx'
-import { Button } from 'nextra/components'
+import { Button } from '../button.js'
 import { memo, useCallback, useState } from 'react'
 import type { ReactNode } from 'react'
 import { FolderIcon, FolderOpenIcon } from '../../icons/index.js'
