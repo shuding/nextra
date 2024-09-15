@@ -64,7 +64,7 @@ const createHeading = (
         {id && (
           <a
             href={`#${id}`}
-            className="subheading-anchor"
+            className="nextra-focus subheading-anchor"
             aria-label="Permalink for this section"
             ref={obRef}
           />

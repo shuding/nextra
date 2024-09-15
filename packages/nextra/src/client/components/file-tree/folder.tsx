@@ -1,7 +1,7 @@
 'use client'
 
-import { Button } from '@headlessui/react'
 import cn from 'clsx'
+import { Button } from 'nextra/components'
 import { memo, useCallback, useState } from 'react'
 import type { ReactNode } from 'react'
 import { FolderIcon, FolderOpenIcon } from '../../icons/index.js'
@@ -31,7 +31,7 @@ export const Folder = memo<FolderProps>(
           onClick={toggle}
           className={({ hover }) =>
             cn(
-              '_flex _items-center _gap-1 _break-all _transition',
+              '_flex _items-center _gap-1 _break-all',
               '_text-left', // override browser default
               hover && '_opacity-60',
               active && '_text-primary-600'

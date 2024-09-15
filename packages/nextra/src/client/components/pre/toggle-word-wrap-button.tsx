@@ -23,6 +23,7 @@ export function ToggleWordWrapButton({
       onClick={toggleWordWrap}
       className="md:_hidden"
       title="Toggle word wrap"
+      variant="outline"
     >
       {children}
     </Button>

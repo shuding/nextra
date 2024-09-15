@@ -198,7 +198,9 @@ export function Search({
               '_rounded-lg _px-3 _py-2 _transition-colors',
               '_w-full md:_w-64',
               '_text-base _leading-tight md:_text-sm',
-              focus ? '_bg-transparent' : '_bg-black/[.05] dark:_bg-gray-50/10',
+              focus
+                ? '_bg-transparent nextra-focusable'
+                : '_bg-black/[.05] dark:_bg-gray-50/10',
               'placeholder:_text-gray-500 dark:placeholder:_text-gray-400',
               'contrast-more:_border contrast-more:_border-current',
               '[&::-webkit-search-cancel-button]:_appearance-none'
@@ -281,7 +283,7 @@ function Result({ data }: { data: PagefindResult }) {
               '_mx-2.5 _break-words _rounded-md',
               'contrast-more:_border',
               focus
-                ? '_text-primary-600 contrast-more:_border-current _bg-primary-500/10 _ring'
+                ? '_text-primary-600 contrast-more:_border-current _bg-primary-500/10'
                 : '_text-gray-800 dark:_text-gray-300 contrast-more:_border-transparent',
               '_block _scroll-m-12 _px-2.5 _py-2'
             )

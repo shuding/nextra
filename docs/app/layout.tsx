@@ -79,7 +79,7 @@ export default async function RootLayout({
           {children}
           <Footer className="flex-col items-center sm:items-start">
             <a
-              className="flex items-center gap-1"
+              className="nextra-focus flex items-center gap-1"
               target="_blank"
               rel="noreferrer"
               title="vercel.com homepage"

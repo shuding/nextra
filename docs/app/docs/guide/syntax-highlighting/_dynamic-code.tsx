@@ -1,5 +1,6 @@
 'use client'
 
+import { Button } from 'nextra/components'
 import { useEffect, useRef } from 'react'
 
 export function DynamicCode({ children }) {
@@ -17,23 +18,25 @@ export function DynamicCode({ children }) {
       <div ref={ref} className="_mt-6">
         {children}
       </div>
-      <div className="flex _text-primary-600 _underline _decoration-from-font [text-underline-position:from-font] mt-3 gap-3 justify-center">
-        <button
+      <div className="flex mt-3 gap-3 justify-center text-sm">
+        <Button
+          variant="outline"
           onClick={() => {
             const token = tokenRef.current!
             const prev = token.textContent!
-            token.textContent = String(+prev + 1)
+            token.textContent = String((+prev || 0) + 1)
           }}
         >
           Increase the number
-        </button>
-        <button
+        </Button>
+        <Button
+          variant="outline"
           onClick={() => {
             tokenRef.current!.textContent = '1 + 1'
           }}
         >
           Change to `1 + 1`
-        </button>
+        </Button>
       </div>
     </>
   )

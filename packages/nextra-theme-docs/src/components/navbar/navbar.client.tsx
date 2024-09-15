@@ -2,12 +2,12 @@
 
 import {
   MenuItem as _MenuItem,
-  Button,
   Menu,
   MenuButton,
   MenuItems
 } from '@headlessui/react'
 import cn from 'clsx'
+import { Button } from 'nextra/components'
 import { useFSRoute } from 'nextra/hooks'
 import { ArrowRightIcon, MenuIcon } from 'nextra/icons'
 import type { MenuItem, PageItem } from 'nextra/normalize-pages'
@@ -44,11 +44,14 @@ function NavbarMenu({
   return (
     <Menu>
       <MenuButton
-        className={cn(
-          classes.link,
-          classes.inactive,
-          'max-md:_hidden _items-center _whitespace-nowrap _rounded _flex _gap-1.5'
-        )}
+        className={({ focus }) =>
+          cn(
+            classes.link,
+            classes.inactive,
+            'max-md:_hidden _items-center _whitespace-nowrap _rounded _flex _gap-1.5',
+            focus && 'nextra-focusable'
+          )
+        }
       >
         {children}
       </MenuButton>
@@ -57,6 +60,7 @@ function NavbarMenu({
         className={({ open }) =>
           cn(
             'motion-reduce:_transition-none',
+            'nextra-focus',
             open ? '_opacity-100' : '_opacity-0',
             'nextra-scrollbar _transition-opacity',
             '_border _border-black/5 dark:_border-white/20',
@@ -161,7 +165,10 @@ export function ClientNavbar({
       <Button
         aria-label="Menu"
         className={({ active }) =>
-          cn('nextra-hamburger md:_hidden', active && '_bg-gray-400/20')
+          cn(
+            'nextra-hamburger _rounded md:_hidden',
+            active && '_bg-gray-400/20'
+          )
         }
         onClick={() => setMenu(prev => !prev)}
       >

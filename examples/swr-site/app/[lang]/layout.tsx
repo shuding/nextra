@@ -114,7 +114,7 @@ export default async function RootLayout({ children, params: { lang } }) {
             <a
               rel="noreferrer"
               target="_blank"
-              className="flex items-center gap-2 font-semibold"
+              className="nextra-focus flex items-center gap-2 font-semibold"
               href={dictionary.link.vercel}
             >
               {dictionary.poweredBy} <VercelIcon />

@@ -1,7 +1,7 @@
 'use client'
 
-import { Button } from '@headlessui/react'
 import cn from 'clsx'
+import { Button } from 'nextra/components'
 import type { ReactElement, ReactNode } from 'react'
 
 export function CloseBannerButton({
@@ -15,7 +15,7 @@ export function CloseBannerButton({
     <Button
       aria-label="Dismiss banner"
       className={({ hover }) =>
-        cn('_p-2 _transition', hover ? '_opacity-100' : '_opacity-80')
+        cn('_p-2', hover ? '_opacity-100' : '_opacity-80')
       }
       onClick={() => {
         try {
