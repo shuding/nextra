@@ -65,7 +65,8 @@ function NavbarMenu({
         className={({ open }) =>
           cn(
             'motion-reduce:_transition-none',
-            open ? '_opacity-100 nextra-focusable' : '_opacity-0',
+            'nextra-focus',
+            open ? '_opacity-100' : '_opacity-0',
             'nextra-scrollbar _transition-opacity',
             '_border _border-black/5 dark:_border-white/20',
             '_backdrop-blur-lg _bg-[rgb(var(--nextra-bg),.8)]',
