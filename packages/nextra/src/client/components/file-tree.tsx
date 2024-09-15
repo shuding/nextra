@@ -1,6 +1,7 @@
 import cn from 'clsx'
 import { createContext, memo, useCallback, useContext, useState } from 'react'
 import type { ReactElement, ReactNode } from 'react'
+import { Button } from './button.js'
 
 const ctx = createContext(0)
 
@@ -64,10 +65,12 @@ const Folder = memo<FolderProps>(
 
     return (
       <li className="_flex _list-none _flex-col">
-        <button
+        <Button
           onClick={toggle}
           title={name}
-          className="_inline-flex _cursor-pointer _items-center _py-1 hover:_opacity-60"
+          className={({ hover }) =>
+            cn('_inline-flex _items-center _py-1', hover && '_opacity-60')
+          }
         >
           <Ident />
           <svg
@@ -91,7 +94,7 @@ const Folder = memo<FolderProps>(
             />
           </svg>
           <span className="_ml-1">{label ?? name}</span>
-        </button>
+        </Button>
         {isFolderOpen && (
           <ul>
             <ctx.Provider value={indent + 1}>{children}</ctx.Provider>
