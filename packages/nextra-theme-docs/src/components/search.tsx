@@ -147,11 +147,12 @@ export function Search({
           spellCheck={false}
           className={({ focus }) =>
             cn(
-              'nextra-focus',
               '_rounded-lg _px-3 _py-2 _transition-colors',
               '_w-full md:_w-64',
               '_text-base _leading-tight md:_text-sm',
-              focus ? '_bg-transparent' : '_bg-black/[.05] dark:_bg-gray-50/10',
+              focus
+                ? '_bg-transparent nextra-focusable'
+                : '_bg-black/[.05] dark:_bg-gray-50/10',
               'placeholder:_text-gray-500 dark:placeholder:_text-gray-400',
               'contrast-more:_border contrast-more:_border-current',
               '[&::-webkit-search-cancel-button]:_appearance-none'
@@ -206,13 +207,16 @@ export function Search({
                 as={NextLink}
                 value={searchResult}
                 href={searchResult.route}
-                className={cn(
-                  '_mx-2.5 _break-words _rounded-md',
-                  'contrast-more:_border',
-                  'data-[focus]:_ring data-[focus]:_bg-primary-500/10 data-[focus]:!_text-primary-600 data-[focus]:contrast-more:_border-primary-500',
-                  '_text-gray-800 contrast-more:_border-transparent dark:_text-gray-300',
-                  '_block _scroll-m-12 _px-2.5 _py-2'
-                )}
+                className={({ focus }) =>
+                  cn(
+                    '_mx-2.5 _break-words _rounded-md',
+                    'contrast-more:_border',
+                    focus
+                      ? '_text-primary-600 contrast-more:_border-current _bg-primary-500/10'
+                      : '_text-gray-800 dark:_text-gray-300 contrast-more:_border-transparent',
+                    '_block _scroll-m-12 _px-2.5 _py-2'
+                  )
+                }
               >
                 {searchResult.children}
               </ComboboxOption>
