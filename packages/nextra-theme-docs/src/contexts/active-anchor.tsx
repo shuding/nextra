@@ -11,12 +11,12 @@ type ActiveAnchor = Record<
   }
 >
 
-const ActiveAnchorContext = createContext<ActiveAnchor>({})
+const ActiveAnchorContext = createContext<ActiveAnchor>(null!)
 ActiveAnchorContext.displayName = 'ActiveAnchor'
 
 const SetActiveAnchorContext = createContext<
   Dispatch<SetStateAction<ActiveAnchor>>
->(v => v)
+>(null!)
 SetActiveAnchorContext.displayName = 'SetActiveAnchor'
 
 const IntersectionObserverContext = createContext<IntersectionObserver | null>(
@@ -41,14 +41,12 @@ export const ActiveAnchorProvider = ({
   children: ReactNode
 }): ReactElement => {
   const [activeAnchor, setActiveAnchor] = useState<ActiveAnchor>({})
-  const observerRef = useRef<IntersectionObserver | null>(null)
+  const observerRef = useRef<IntersectionObserver>(null!)
 
   useEffect(() => {
-    if (observerRef.current) return
-    const nextraContentEl = document.querySelector<HTMLElement>('.nextra-content')
-    const rootMarginTop = nextraContentEl
-      ? `${0 - nextraContentEl.offsetTop}px`
-      : '0px'
+    const navbarHeight = getComputedStyle(document.body).getPropertyValue(
+      '--nextra-navbar-height'
+    )
     observerRef.current = new IntersectionObserver(
       entries => {
         setActiveAnchor(f => {
@@ -96,14 +94,13 @@ export const ActiveAnchorProvider = ({
         })
       },
       {
-        rootMargin: `${rootMarginTop} 0px -50%`,
+        rootMargin: `-${navbarHeight} 0px -50%`,
         threshold: [0, 1]
       }
     )
 
     return () => {
-      observerRef.current?.disconnect()
-      observerRef.current = null
+      observerRef.current.disconnect()
     }
   }, [])
   return (
