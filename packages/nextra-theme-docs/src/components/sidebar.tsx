@@ -1,5 +1,6 @@
 import cn from 'clsx'
 import type { Heading } from 'nextra'
+import { Button } from 'nextra/components'
 import { useFSRoute, useMounted } from 'nextra/hooks'
 import { ArrowRightIcon, ExpandIcon } from 'nextra/icons'
 import type { Item, MenuItem, PageItem } from 'nextra/normalize-pages'
@@ -42,7 +43,7 @@ const Folder = memo(function FolderInner(props: FolderProps) {
 const classes = {
   link: cn(
     '_flex _rounded _px-2 _py-1.5 _text-sm _transition-colors [word-break:break-word]',
-    '_cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] contrast-more:_border'
+    '_cursor-pointer contrast-more:_border'
   ),
   inactive: cn(
     '_text-gray-500 hover:_bg-gray-100 hover:_text-gray-900',
@@ -141,7 +142,7 @@ function FolderImpl({ item, anchors, onFocus }: FolderProps): ReactElement {
 
   const isLink = 'withIndexPage' in item && item.withIndexPage
   // use button when link don't have href because it impacts on SEO
-  const ComponentToUse = isLink ? Anchor : 'button'
+  const ComponentToUse = isLink ? Anchor : Button
 
   return (
     <li className={cn({ open, active })}>
@@ -481,21 +482,28 @@ export function Sidebar({
               </div>
             )}
             {themeConfig.sidebar.toggleButton && (
-              <button
+              <Button
                 title={showSidebar ? 'Hide sidebar' : 'Show sidebar'}
-                className="max-md:_hidden _h-7 _rounded-md _transition-colors _text-gray-600 dark:_text-gray-400 _px-2 hover:_bg-gray-100 hover:_text-gray-900 dark:hover:_bg-primary-100/5 dark:hover:_text-gray-50"
+                className={({ hover }) =>
+                  cn(
+                    'max-md:_hidden _rounded-md _p-2',
+                    hover
+                      ? '_bg-gray-100 _text-gray-900 dark:_bg-primary-100/5 dark:_text-gray-50'
+                      : '_text-gray-600 dark:_text-gray-400'
+                  )
+                }
                 onClick={() => {
                   setSidebar(!showSidebar)
                   setToggleAnimation(true)
                 }}
               >
                 <ExpandIcon
+                  height="12"
                   className={cn(
-                    '_h-3',
                     !showSidebar && 'first:*:_origin-[35%] first:*:_rotate-180'
                   )}
                 />
-              </button>
+              </Button>
             )}
           </div>
         )}

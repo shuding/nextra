@@ -106,9 +106,9 @@ const config: DocsThemeConfig = {
       <div className="flex w-full flex-col items-center sm:items-start">
         <div>
           <a
-            className="flex items-center gap-1 text-current"
+            className="nextra-focus flex items-center gap-1 text-current"
             target="_blank"
-            rel="noopener noreferrer"
+            rel="noreferrer"
             title="vercel.com homepage"
             href="https://vercel.com?utm_source=nextra.site"
           >

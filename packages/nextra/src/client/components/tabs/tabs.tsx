@@ -1,3 +1,5 @@
+'use client'
+
 import {
   Tab as HeadlessTab,
   TabGroup,
@@ -5,8 +7,9 @@ import {
   TabPanel,
   TabPanels
 } from '@headlessui/react'
+import type { TabPanelProps } from '@headlessui/react'
 import cn from 'clsx'
-import type { ComponentProps, ReactElement, ReactNode } from 'react'
+import type { ReactElement, ReactNode } from 'react'
 import { useCallback, useEffect, useState } from 'react'
 
 type TabItem = string | ReactElement
@@ -20,7 +23,7 @@ function isTabObjectItem(item: unknown): item is TabObjectItem {
   return !!item && typeof item === 'object' && 'label' in item
 }
 
-function Tabs_({
+export function Tabs({
   items,
   selectedIndex: _selectedIndex,
   defaultIndex = 0,
@@ -90,21 +93,34 @@ function Tabs_({
       <TabList
         className={cn(
           'nextra-scrollbar _overflow-x-auto _overscroll-x-contain _overflow-y-hidden',
-          '_mt-4 _flex _w-full _gap-2 _border-b _border-gray-200 _pb-px dark:_border-neutral-800'
+          '_mt-4 _flex _w-full _gap-2 _border-b _border-gray-200 _pb-px dark:_border-neutral-800',
+          'nextra-focus'
         )}
       >
         {items.map((item, index) => (
           <HeadlessTab
             key={index}
             disabled={isTabObjectItem(item) && item.disabled}
-            className={cn(
-              '_ring-inset',
-              '_rounded-t _p-2 _font-medium _leading-5 _transition-colors',
-              '_-mb-0.5 _select-none _border-b-2',
-              'data-[selected]:!_border-current data-[selected]:!_text-primary-600',
-              '_border-transparent _text-gray-600 hover:_border-gray-200 hover:_text-black dark:_text-gray-200 dark:hover:_border-neutral-800 dark:hover:_text-white',
-              'disabled:_pointer-events-none disabled:_text-gray-400 disabled:dark:_text-neutral-600'
-            )}
+            className={({ selected, disabled, hover, focus }) =>
+              cn(
+                focus && 'nextra-focusable _ring-inset',
+                '_whitespace-nowrap',
+                '_rounded-t _p-2 _font-medium _leading-5 _transition-colors',
+                '_-mb-0.5 _select-none _border-b-2',
+                selected
+                  ? '_border-current'
+                  : hover
+                    ? '_border-gray-200 dark:_border-neutral-800'
+                    : '_border-transparent',
+                selected
+                  ? '_text-primary-600'
+                  : disabled
+                    ? '_text-gray-400 dark:_text-neutral-600 _pointer-events-none'
+                    : hover
+                      ? '_text-black dark:_text-white'
+                      : '_text-gray-600 dark:_text-gray-200'
+              )
+            }
           >
             {isTabObjectItem(item) ? item.label : item}
           </HeadlessTab>
@@ -115,17 +131,21 @@ function Tabs_({
   )
 }
 
-function Tab({
+export function Tab({
   children,
   // For SEO display all the Panel in the DOM and set `display: none;` for those that are not selected
   unmount = false,
   ...props
-}: Omit<ComponentProps<typeof TabPanel>, 'static'>): ReactElement {
+}: TabPanelProps): ReactElement {
   return (
-    <TabPanel {...props} unmount={unmount} className="_rounded _mt-6">
+    <TabPanel
+      {...props}
+      unmount={unmount}
+      className={({ focus }) =>
+        cn('_rounded _mt-6', focus && 'nextra-focusable')
+      }
+    >
       {children}
     </TabPanel>
   )
 }
-
-export const Tabs = Object.assign(Tabs_, { displayName: 'Tabs', Tab })

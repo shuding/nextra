@@ -7,6 +7,7 @@ import {
 import cn from 'clsx'
 // eslint-disable-next-line no-restricted-imports -- since we don't need newWindow prop
 import NextLink from 'next/link'
+import { Button } from 'nextra/components'
 import { useFSRoute } from 'nextra/hooks'
 import { ArrowRightIcon, MenuIcon } from 'nextra/icons'
 import type { MenuItem, PageItem } from 'nextra/normalize-pages'
@@ -48,25 +49,32 @@ function NavbarMenu({
   return (
     <Menu>
       <MenuButton
-        className={cn(
-          classes.link,
-          classes.inactive,
-          'max-md:_hidden _items-center _whitespace-nowrap _rounded _flex _gap-1.5'
-        )}
+        className={({ focus }) =>
+          cn(
+            classes.link,
+            classes.inactive,
+            'max-md:_hidden _items-center _whitespace-nowrap _rounded _flex _gap-1.5',
+            focus && 'nextra-focusable'
+          )
+        }
       >
         {children}
       </MenuButton>
       <MenuItems
         transition
-        className={cn(
-          'motion-reduce:_transition-none',
-          'nextra-scrollbar _transition-opacity data-[closed]:_opacity-0 data-[open]:_opacity-100',
-          '_border _border-black/5 dark:_border-white/20',
-          '_backdrop-blur-lg _bg-[rgb(var(--nextra-bg),.8)]',
-          '_z-20 _rounded-md _py-1 _text-sm _shadow-lg',
-          // headlessui adds max-height as style, use !important to override
-          '!_max-h-[min(calc(100vh-5rem),256px)]'
-        )}
+        className={({ open }) =>
+          cn(
+            'motion-reduce:_transition-none',
+            'nextra-focus',
+            open ? '_opacity-100' : '_opacity-0',
+            'nextra-scrollbar _transition-opacity',
+            '_border _border-black/5 dark:_border-white/20',
+            '_backdrop-blur-lg _bg-[rgb(var(--nextra-bg),.8)]',
+            '_z-20 _rounded-md _py-1 _text-sm _shadow-lg',
+            // headlessui adds max-height as style, use !important to override
+            '!_max-h-[min(calc(100vh-5rem),256px)]'
+          )
+        }
         anchor={{ to: 'top end', gap: 10, padding: 16 }}
       >
         {entries.map(([key, item]) => (
@@ -74,12 +82,15 @@ function NavbarMenu({
             key={key}
             as={Anchor}
             href={item.href || routes[key]?.route || menu.route + '/' + key}
-            className={cn(
-              '_block hover:_text-gray-900 dark:hover:_text-gray-100',
-              '_py-1.5 _transition-colors ltr:_pl-3 ltr:_pr-9 rtl:_pr-3 rtl:_pl-9',
-              'data-[focus]:_text-gray-900 data-[focus]:dark:_text-gray-100',
-              '_text-gray-600 dark:_text-gray-400'
-            )}
+            className={({ focus }) =>
+              cn(
+                '_block',
+                '_py-1.5 _transition-colors ltr:_pl-3 ltr:_pr-9 rtl:_pr-3 rtl:_pl-9',
+                focus
+                  ? '_text-gray-900 dark:_text-gray-100'
+                  : '_text-gray-600 dark:_text-gray-400'
+              )
+            }
             newWindow={item.newWindow}
           >
             {item.title || key}
@@ -107,7 +118,7 @@ export function Navbar({ items }: NavBarProps): ReactElement {
                 ? themeConfig.logoLink
                 : '/'
             }
-            className="_flex _items-center hover:_opacity-75 ltr:_mr-auto rtl:_ml-auto"
+            className="nextra-focus _flex _items-center hover:_opacity-75 ltr:_mr-auto rtl:_ml-auto"
           >
             {renderComponent(themeConfig.logo)}
           </NextLink>
@@ -177,14 +188,18 @@ export function Navbar({ items }: NavBarProps): ReactElement {
 
         {renderComponent(themeConfig.navbar.extraContent)}
 
-        <button
-          type="button"
+        <Button
           aria-label="Menu"
-          className="nextra-hamburger _rounded active:_bg-gray-400/20 md:_hidden"
+          className={({ active }) =>
+            cn(
+              'nextra-hamburger _rounded md:_hidden',
+              active && '_bg-gray-400/20'
+            )
+          }
           onClick={() => setMenu(!menu)}
         >
           <MenuIcon className={cn({ open: menu })} />
-        </button>
+        </Button>
       </nav>
     </div>
   )

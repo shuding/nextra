@@ -38,11 +38,16 @@ export function Feature({
       {...props}
     >
       {children}
-      {href ? (
-        <Link className={styles.link} href={href} target="_blank">
-          <ArrowRightIcon width="1.5em" />
+      {href && (
+        <Link
+          className={cn('nextra-focus', styles.link)}
+          href={href}
+          target="_blank"
+          rel="noreferrer"
+        >
+          <ArrowRightIcon height="24" />
         </Link>
-      ) : null}
+      )}
     </motion.div>
   )
 }

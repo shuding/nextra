@@ -44,14 +44,13 @@ const createHeading = (
     const obRef = useRef<HTMLAnchorElement>(null)
 
     useEffect(() => {
-      if (!id) return
       const heading = obRef.current
-      if (!heading) return
+      if (!id || !observer || !heading) return
+      observer.observe(heading)
       slugs.set(heading, [id, (context.index += 1)])
-      observer?.observe(heading)
 
       return () => {
-        observer?.disconnect()
+        observer.disconnect()
         slugs.delete(heading)
         setActiveAnchor(f => {
           const ret = { ...f }
@@ -88,7 +87,7 @@ const createHeading = (
         {id && (
           <a
             href={`#${id}`}
-            className="subheading-anchor"
+            className="nextra-focus subheading-anchor"
             aria-label="Permalink for this section"
             ref={obRef}
           />
@@ -185,6 +184,7 @@ function Summary({
   return (
     <summary
       className={cn(
+        'nextra-focus',
         '_flex _items-center _cursor-pointer _p-1 _transition-colors hover:_bg-gray-100 dark:hover:_bg-neutral-800',
         // display: flex removes whitespace when `<summary>` contains text with other elements, like `foo <strong>bar</strong>`
         '_whitespace-pre-wrap',

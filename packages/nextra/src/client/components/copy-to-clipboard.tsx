@@ -3,12 +3,12 @@ import { useCallback, useEffect, useState } from 'react'
 import { CheckIcon, CopyIcon } from '../icons/index.js'
 import { Button } from './button.js'
 
-export const CopyToClipboard = ({
+export function CopyToClipboard({
   getValue,
   ...props
-}: {
+}: ComponentProps<typeof Button> & {
   getValue: () => string
-} & ComponentProps<'button'>): ReactElement => {
+}): ReactElement {
   const [isCopied, setCopied] = useState(false)
 
   useEffect(() => {
@@ -22,9 +22,7 @@ export const CopyToClipboard = ({
     }
   }, [isCopied])
 
-  const handleClick = useCallback<
-    NonNullable<ComponentProps<'button'>['onClick']>
-  >(async () => {
+  const handleClick = useCallback(async () => {
     setCopied(true)
     if (!navigator?.clipboard) {
       console.error('Access to clipboard rejected!')
@@ -39,8 +37,13 @@ export const CopyToClipboard = ({
   const IconToUse = isCopied ? CheckIcon : CopyIcon
 
   return (
-    <Button onClick={handleClick} title="Copy code" tabIndex={0} {...props}>
-      <IconToUse className="nextra-copy-icon _pointer-events-none _h-4 _w-4" />
+    <Button
+      onClick={handleClick}
+      title="Copy code"
+      variant="outline"
+      {...props}
+    >
+      <IconToUse height="16" className="nextra-copy-icon" />
     </Button>
   )
 }

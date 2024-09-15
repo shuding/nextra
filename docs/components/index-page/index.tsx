@@ -382,7 +382,7 @@ export const IndexPage = () => (
               }}
             >
               <Link href="https://mdxjs.com/blog/v2" className="text-current">
-                MDX 2
+                MDX 3
               </Link>{' '}
               lets you use Components inside Markdown,{' '}
               <br className="hide-medium" />
@@ -417,7 +417,6 @@ export const IndexPage = () => (
               transition={{
                 backgroundPosition: {
                   times: [0, 0.5, 0.5, 1],
-                  type: 'spring',
                   repeat: Infinity,
                   duration: 10,
                   delay: 1
@@ -448,7 +447,6 @@ export const IndexPage = () => (
               transition={{
                 color: {
                   times: [0.25, 0.35, 0.7, 0.8],
-                  type: 'spring',
                   repeat: Infinity,
                   duration: 10,
                   delay: 1
@@ -490,7 +488,7 @@ export const IndexPage = () => (
               loop
               muted
               playsInline
-              className="dark:hidden block"
+              className="nextra-focus dark:hidden block"
             >
               <source src="/assets/search.mp4" type="video/mp4" />
             </video>
@@ -499,7 +497,7 @@ export const IndexPage = () => (
               loop
               muted
               playsInline
-              className="dark:block hidden -translate-x-4"
+              className="nextra-focus dark:block hidden -translate-x-4"
             >
               <source src="/assets/search-dark.mp4" type="video/mp4" />
             </video>
