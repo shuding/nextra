@@ -5,6 +5,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import type { Heading } from 'nextra'
 import { useMDXComponents } from 'nextra-theme-docs'
+import dynamic from 'next/dynamic'
 import type { MDXComponents } from 'nextra/mdx'
 import type { FC } from 'react'
 
@@ -37,24 +38,36 @@ type PageProps = {
   }
 }
 
+import GettingStarted from '../../../mdx/en/docs/getting-started.mdx'
+
+// const load = {
+//   'getting-started': dynamic(() => import('../../../mdx/en/docs/getting-started.mdx'))
+// }
+
 export default async function Page(pageProps: PageProps) {
   const { mdxPath, lang } = pageProps.params
+  // const go = {
+  //   'getting-started': () => import( )
+  // }
+  // const GettingStarted = await load['getting-started']
+  console.log(GettingStarted)
+  return <GettingStarted />
 
-  const {
-    default: MDXContent,
-    useTOC,
-    metadata,
-    title,
-    ..._props
-  } = await loadPage(lang, mdxPath)
-
-  const { wrapper: Wrapper } = useMDXComponents()
-
-  return (
-    <Wrapper toc={useTOC()} metadata={metadata} title={title}>
-      <MDXContent {...pageProps} />
-    </Wrapper>
-  )
+  // const {
+  //   default: MDXContent,
+  //   useTOC,
+  //   metadata,
+  //   title,
+  //   ..._props
+  // } = await loadPage(lang, mdxPath)
+  //
+  // const { wrapper: Wrapper } = useMDXComponents()
+  //
+  // return (
+  //   <Wrapper toc={useTOC()} metadata={metadata} title={title}>
+  //     <MDXContent {...pageProps} />
+  //   </Wrapper>
+  // )
 }
 
 async function loadPage(

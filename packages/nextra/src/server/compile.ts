@@ -264,8 +264,8 @@ export async function compileMdx(
             !!mdxContentArgument &&
             mdxContentArgument.openingElement.name.name === 'MDXLayout'
 
-          // const localExports = new Set(['title', 'frontMatter' /* 'useTOC' */])
-
+          // const localExports = new Set(['title', 'metadata','useTOC', 'myVar', 'Test'])
+          //
           // for (const node of ast.body) {
           //   if (node.type === 'ExportNamedDeclaration') {
           //     let varName: string
@@ -282,9 +282,9 @@ export async function compileMdx(
           //       throw new Error(`\`${declaration.type}\` unsupported.`)
           //     }
           //
-          //     // if (localExports.has(varName)) {
-          //     //   Object.assign(node, node.declaration)
-          //     // }
+          //     if (localExports.has(varName)) {
+          //       Object.assign(node, node.declaration)
+          //     }
           //   }
           // }
         }) satisfies Plugin<[], Program>,

@@ -88,6 +88,8 @@ export async function loader(
     useCachedCompiler: true,
     isPageImport
   })
+  console.log('Adding addContextDependency', path.join(process.cwd(), 'mdx'))
+  this.addContextDependency(path.join(process.cwd(), 'mdx'))
   // Imported as a normal component, no need to add the layout.
   if (!isPageImport) {
     return `${result}
