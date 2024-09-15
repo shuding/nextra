@@ -44,14 +44,13 @@ const createHeading = (
     const obRef = useRef<HTMLAnchorElement>(null)
 
     useEffect(() => {
-      if (!id) return
       const heading = obRef.current
-      if (!heading) return
+      if (!id || !observer || !heading) return
+      observer.observe(heading)
       slugs.set(heading, [id, (context.index += 1)])
-      observer?.observe(heading)
 
       return () => {
-        observer?.disconnect()
+        observer.disconnect()
         slugs.delete(heading)
         setActiveAnchor(f => {
           const ret = { ...f }
