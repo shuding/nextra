@@ -17,8 +17,6 @@ import { getGitIssueUrl, useGitEditUrl } from './utils'
 
 export const DEFAULT_LOCALE = 'en-US'
 
-export const IS_BROWSER = typeof window !== 'undefined'
-
 export type DocsThemeConfig = z.infer<typeof themeSchema>
 export type PartialDocsThemeConfig = z.infer<typeof publicThemeSchema>
 

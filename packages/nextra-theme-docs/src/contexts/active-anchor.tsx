@@ -1,6 +1,5 @@
 import type { Dispatch, ReactElement, ReactNode, SetStateAction } from 'react'
-import { createContext, useContext, useRef, useState } from 'react'
-import { IS_BROWSER } from '../constants'
+import { createContext, useContext, useEffect, useRef, useState } from 'react'
 
 type ActiveAnchor = Record<
   string,
@@ -43,7 +42,13 @@ export const ActiveAnchorProvider = ({
 }): ReactElement => {
   const [activeAnchor, setActiveAnchor] = useState<ActiveAnchor>({})
   const observerRef = useRef<IntersectionObserver | null>(null)
-  if (IS_BROWSER && !observerRef.current) {
+
+  useEffect(() => {
+    if (observerRef.current) return
+    const nextraContentEl = document.querySelector<HTMLElement>('.nextra-content')
+    const rootMarginTop = nextraContentEl
+      ? `${0 - nextraContentEl.offsetTop}px`
+      : 0
     observerRef.current = new IntersectionObserver(
       entries => {
         setActiveAnchor(f => {
@@ -91,11 +96,16 @@ export const ActiveAnchorProvider = ({
         })
       },
       {
-        rootMargin: '0px 0px -50%',
+        rootMargin: `${rootMarginTop} 0px -50%`,
         threshold: [0, 1]
       }
     )
-  }
+
+    return () => {
+      observerRef.current?.disconnect()
+      observerRef.current = null
+    }
+  }, [])
   return (
     <ActiveAnchorContext.Provider value={activeAnchor}>
       <SetActiveAnchorContext.Provider value={setActiveAnchor}>
