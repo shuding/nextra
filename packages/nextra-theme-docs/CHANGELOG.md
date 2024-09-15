@@ -24,6 +24,27 @@
 - Updated dependencies [99f34d3]
   - nextra@4.0.0-app-router.0
 
+## 3.0.0-alpha.39
+
+### Major Changes
+
+- 47b125d: fix global style conflicts for
+  `<a>`/`<button>`/`<summary>`/`<input>`/`[tabindex]:not([tabindex='-1']`
+- ba30c6c: use render props for className with `selected`, `disabled` and
+  `hover` state for `<Tab>`
+- 2872606: remove `image` prop from `<Card>` component, image will be showed
+  based on truthiness `children` prop now
+
+  set `icon` as optional prop
+
+### Patch Changes
+
+- f255696: Improve styles for reduced motion preferences
+- Updated dependencies [47b125d]
+- Updated dependencies [ba30c6c]
+- Updated dependencies [2872606]
+  - nextra@3.0.0-alpha.39
+
 ## 3.0.0-alpha.38
 
 ### Patch Changes

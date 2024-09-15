@@ -14,6 +14,19 @@
   Router, something may be broken, check
   https://github.com/shuding/nextra/tree/v4-v2/examples for the migration guide
 
+## 3.0.0-alpha.39
+
+### Major Changes
+
+- 47b125d: fix global style conflicts for
+  `<a>`/`<button>`/`<summary>`/`<input>`/`[tabindex]:not([tabindex='-1']`
+- ba30c6c: use render props for className with `selected`, `disabled` and
+  `hover` state for `<Tab>`
+- 2872606: remove `image` prop from `<Card>` component, image will be showed
+  based on truthiness `children` prop now
+
+  set `icon` as optional prop
+
 ## 3.0.0-alpha.38
 
 ### Patch Changes

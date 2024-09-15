@@ -28,7 +28,7 @@ export function CopyToClipboard(props: ComponentProps<'button'>): ReactElement {
       return
     }
     try {
-      const container = (event.target as any).parentNode.parentNode
+      const container = event.currentTarget.parentNode!.parentNode!
       const content = container.querySelector('pre code')?.textContent || ''
       await navigator.clipboard.writeText(content)
     } catch {
@@ -39,8 +39,13 @@ export function CopyToClipboard(props: ComponentProps<'button'>): ReactElement {
   const IconToUse = isCopied ? CheckIcon : CopyIcon
 
   return (
-    <Button onClick={handleClick} title="Copy code" tabIndex={0} {...props}>
-      <IconToUse className="nextra-copy-icon _pointer-events-none _size-4" />
+    <Button
+      onClick={handleClick}
+      title="Copy code"
+      variant="outline"
+      {...props}
+    >
+      <IconToUse height="16" className="nextra-copy-icon" />
     </Button>
   )
 }

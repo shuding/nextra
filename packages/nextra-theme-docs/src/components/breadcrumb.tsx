@@ -31,7 +31,10 @@ export function Breadcrumb({
         return (
           <Fragment key={item.route + item.name}>
             {index > 0 && (
-              <ArrowRightIcon className="_h-3.5 _shrink-0 rtl:_rotate-180" />
+              <ArrowRightIcon
+                height="14"
+                className="_shrink-0 rtl:_rotate-180"
+              />
             )}
             <ComponentToUse
               className={cn(
@@ -39,7 +42,8 @@ export function Breadcrumb({
                 isLast
                   ? '_font-medium _text-gray-700 contrast-more:_font-bold contrast-more:_text-current dark:_text-gray-100 contrast-more:dark:_text-current'
                   : '_min-w-6 _overflow-hidden _text-ellipsis',
-                href && 'hover:_text-gray-900 dark:hover:_text-gray-100'
+                href &&
+                  'nextra-focus _ring-inset hover:_text-gray-900 dark:hover:_text-gray-100'
               )}
               title={item.title}
               {...(href && ({ href } as any))}

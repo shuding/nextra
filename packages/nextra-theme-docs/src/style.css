@@ -27,20 +27,14 @@ body {
   @apply _w-full dark:_text-gray-100;
 }
 
-a,
-summary,
-button,
-input,
-[tabindex]:not([tabindex='-1']) {
-  &:focus-visible {
-    @apply _outline-none;
-    @apply _ring-2 _ring-primary-200 _ring-offset-1 _ring-offset-primary-300 dark:_ring-primary-800 dark:_ring-offset-primary-700;
-  }
+.nextra-focusable,
+.nextra-focus:focus-visible {
+  @apply _ring-2 _ring-primary-200 _ring-offset-1 _ring-offset-primary-300 dark:_ring-primary-800 dark:_ring-offset-primary-700;
 }
 
-a,
-summary {
-  @apply _rounded;
+.nextra-focusable,
+.nextra-focus {
+  @apply focus-visible:_outline-none;
 }
 
 .nextra-content {
@@ -65,23 +59,21 @@ summary {
     .nextra-sidebar-container {
       @apply _pt-[6.5rem];
     }
+
     &.nextra-nav-container {
       @apply _top-10 md:_top-0;
     }
   }
+
   .nextra-banner-hidden {
     .nextra-banner-container ~ div .nextra-sidebar-container {
       @apply _pt-16;
     }
+
     .nextra-nav-container {
       @apply !_top-0;
     }
   }
-}
-
-/* Content Typography */
-summary::-webkit-details-marker {
-  @apply _hidden;
 }
 
 @media (min-width: 768px) {
@@ -94,6 +86,7 @@ summary::-webkit-details-marker {
 
 .contains-task-list {
   @apply _mt-6;
+
   input[type='checkbox'] {
     @apply _me-1;
   }
@@ -104,6 +97,7 @@ summary::-webkit-details-marker {
     opacity: 0;
     animation: nextra-fadein 1s ease 0.2s forwards;
   }
+
   [data-toggle-animation='hide'] button {
     opacity: 0;
     animation: nextra-fadein2 1s ease 0.2s forwards;
@@ -138,6 +132,7 @@ body,
 .nextra-sidebar-footer {
   @apply _bg-[rgb(var(--nextra-bg))];
 }
+
 .nextra-sidebar-container {
   @apply max-md:_bg-[rgb(var(--nextra-bg))];
 }

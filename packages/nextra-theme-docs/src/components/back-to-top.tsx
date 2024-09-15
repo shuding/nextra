@@ -1,14 +1,13 @@
-import { Button } from '@headlessui/react'
 import cn from 'clsx'
+import { Button } from 'nextra/components'
 import { ArrowRightIcon } from 'nextra/icons'
 import type { ComponentProps, ReactElement } from 'react'
 
 const SCROLL_TO_OPTIONS = { top: 0, behavior: 'smooth' } as const
 
 const scrollToTop: ComponentProps<'button'>['onClick'] = event => {
-  const buttonElement = event.target as HTMLButtonElement
-  const tocElement = buttonElement.parentElement!
-    .parentElement as HTMLDivElement
+  const buttonElement = event.currentTarget
+  const tocElement = buttonElement.parentElement!.parentElement!
 
   window.scrollTo(SCROLL_TO_OPTIONS)
   tocElement.scrollTo(SCROLL_TO_OPTIONS)
@@ -32,7 +31,7 @@ export function BackToTop({
       disabled={hidden}
       className={({ disabled }) =>
         cn(
-          '_flex _items-center _gap-1.5 _transition',
+          '_flex _items-center _gap-1.5',
           disabled ? '_opacity-0' : '_opacity-100',
           className
         )

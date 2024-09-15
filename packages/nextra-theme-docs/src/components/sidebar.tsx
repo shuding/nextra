@@ -1,9 +1,9 @@
 'use client'
 
-import { Button } from '@headlessui/react'
 import cn from 'clsx'
 import { usePathname } from 'next/navigation'
 import type { Heading } from 'nextra'
+import { Button } from 'nextra/components'
 import { renderComponent } from 'nextra/components'
 import { useFSRoute } from 'nextra/hooks'
 import { ArrowRightIcon, ExpandIcon } from 'nextra/icons'
@@ -52,7 +52,7 @@ const Folder = memo(function FolderInner(props: FolderProps) {
 const classes = {
   link: cn(
     '_flex _rounded _px-2 _py-1.5 _text-sm _transition-colors [word-break:break-word]',
-    '_cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] contrast-more:_border'
+    '_cursor-pointer contrast-more:_border'
   ),
   inactive: cn(
     '_text-gray-500 hover:_bg-gray-100 hover:_text-gray-900',
@@ -165,7 +165,7 @@ function FolderImpl({ item, anchors, onFocus }: FolderProps): ReactElement {
 
   const isLink = 'withIndexPage' in item && item.withIndexPage
   // use button when link don't have href because it impacts on SEO
-  const ComponentToUse = isLink ? Anchor : 'button'
+  const ComponentToUse = isLink ? Anchor : Button
 
   return (
     <li className={cn({ open, active })}>
@@ -537,7 +537,7 @@ export function Sidebar({ toc }: { toc: Heading[] }): ReactElement {
                 title={showSidebar ? 'Hide sidebar' : 'Show sidebar'}
                 className={({ hover }) =>
                   cn(
-                    'max-md:_hidden _h-7 _rounded-md _transition _px-2',
+                    'max-md:_hidden _rounded-md _p-2',
                     hover
                       ? '_bg-gray-100 _text-gray-900 dark:_bg-primary-100/5 dark:_text-gray-50'
                       : '_text-gray-600 dark:_text-gray-400'
@@ -549,8 +549,8 @@ export function Sidebar({ toc }: { toc: Heading[] }): ReactElement {
                 }}
               >
                 <ExpandIcon
+                  height="12"
                   className={cn(
-                    '_h-3',
                     !showSidebar && 'first:*:_origin-[35%] first:*:_rotate-180'
                   )}
                 />
