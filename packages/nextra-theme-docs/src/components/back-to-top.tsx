@@ -26,7 +26,7 @@ export function BackToTop({
 }): ReactElement {
   return (
     <Button
-      aria-hidden="true"
+      aria-hidden={hidden ? 'true' : undefined}
       onClick={scrollToTop}
       disabled={hidden}
       className={({ disabled }) =>
