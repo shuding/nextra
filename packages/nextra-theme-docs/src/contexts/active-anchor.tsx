@@ -48,7 +48,7 @@ export const ActiveAnchorProvider = ({
     const nextraContentEl = document.querySelector<HTMLElement>('.nextra-content')
     const rootMarginTop = nextraContentEl
       ? `${0 - nextraContentEl.offsetTop}px`
-      : 0
+      : '0px'
     observerRef.current = new IntersectionObserver(
       entries => {
         setActiveAnchor(f => {
