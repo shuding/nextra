@@ -6,10 +6,6 @@ import type { ComponentProps, ReactNode } from 'react'
 import { Breadcrumb, Pagination, TOC } from '../../components'
 import { useConfig, useThemeConfig } from '../../contexts'
 
-const classes = {
-  toc: cn('nextra-toc _order-last max-xl:_hidden _w-64 _shrink-0 print:_hidden')
-}
-
 export function ClientWrapper({
   toc,
   children,
@@ -28,23 +24,6 @@ export function ClientWrapper({
     flatDocsDirectories,
     activeIndex
   } = normalizePagesResult
-
-  const tocEl =
-    activeType === 'page' ||
-    !themeContext.toc ||
-    themeContext.layout !== 'default' ? (
-      themeContext.layout !== 'full' && (
-        <nav className={classes.toc} aria-label="table of contents" />
-      )
-    ) : (
-      <nav className={classes.toc} aria-label="table of contents">
-        <TOC
-          toc={themeConfig.toc.float ? toc : []}
-          filePath={props.filePath}
-          pageTitle={props.title}
-        />
-      </nav>
-    )
 
   const date =
     themeContext.timestamp && themeConfig.gitTimestamp && props.timestamp
@@ -72,10 +51,22 @@ export function ClientWrapper({
 
   return (
     <>
-      {tocEl}
+      {themeContext.layout !== 'full' && (
+        <nav
+          className="nextra-toc _order-last max-xl:_hidden _w-64 _shrink-0 print:_hidden"
+          aria-label="table of contents"
+        >
+          {activeType !== 'page' && themeContext.toc && (
+            <TOC
+              toc={themeConfig.toc.float ? toc : []}
+              filePath={props.filePath}
+              pageTitle={props.title}
+            />
+          )}
+        </nav>
+      )}
       {skipNavContent}
       <article
-        data-pagefind-body={(metadata as any).searchable !== false || undefined}
         className={cn(
           '_w-full _break-words _min-h-[calc(100vh-var(--nextra-navbar-height))]',
           '_text-slate-700 dark:_text-slate-200 _pb-8 _px-6 _pt-4 md:_px-12',
@@ -87,7 +78,13 @@ export function ClientWrapper({
         {activeType !== 'page' && themeContext.breadcrumb && (
           <Breadcrumb activePath={activePath} />
         )}
-        {children}
+        <main
+          data-pagefind-body={
+            (metadata as any).searchable !== false || undefined
+          }
+        >
+          {children}
+        </main>
         {gitTimestampEl}
         {activeType !== 'page' && themeContext.pagination && (
           <Pagination
