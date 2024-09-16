@@ -23,11 +23,10 @@ const createHeading = (
     const obRef = useRef<HTMLAnchorElement>(null)
 
     useEffect(() => {
-      if (!id) return
       const heading = obRef.current
-      if (!heading || !observer) return
-      slugs.set(heading, [id, (context.index += 1)])
+      if (!id || !observer || !heading) return
       observer.observe(heading)
+      slugs.set(heading, [id, (context.index += 1)])
 
       return () => {
         observer.disconnect()
