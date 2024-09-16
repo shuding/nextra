@@ -67,7 +67,7 @@ export function TOC({ toc, filePath, pageTitle }: TOCProps): ReactElement {
   return (
     <div
       className={cn(
-        'nextra-scrollbar _sticky _top-16 _overflow-y-auto _px-4 _pt-6 _text-sm [hyphens:auto]',
+        'nextra-scrollbar _sticky _top-[--nextra-navbar-height] _overflow-y-auto _px-4 _pt-6 _text-sm [hyphens:auto]',
         '_max-h-[calc(100vh-var(--nextra-navbar-height)-env(safe-area-inset-bottom))] _-me-4'
       )}
     >

@@ -19,7 +19,7 @@ const useActiveAnchorStore = create<{
   activeAnchor: ActiveAnchor
   slugs: WeakMap<any, any>
   actions: {
-    setActiveAnchor: Dispatch<SetStateAction<ActiveAnchor>>
+    setActiveAnchor: Dispatch<(prevState: ActiveAnchor) => ActiveAnchor>
   }
 }>((set, get) => ({
   get observer() {
@@ -92,10 +92,7 @@ const useActiveAnchorStore = create<{
   actions: {
     setActiveAnchor(activeAnchor) {
       set(state => ({
-        activeAnchor:
-          typeof activeAnchor === 'function'
-            ? activeAnchor(state.activeAnchor)
-            : activeAnchor
+        activeAnchor: activeAnchor(state.activeAnchor)
       }))
     }
   }

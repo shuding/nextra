@@ -9,13 +9,11 @@
 @import '../css/hamburger.css';
 @import '../css/typesetting-article.css';
 
-:root {
+html {
   --nextra-navbar-height: 64px;
   --nextra-menu-height: 3.75rem;
   --nextra-banner-height: 2.5rem;
-}
 
-html {
   @apply _antialiased _text-base;
   font-feature-settings:
     'rlig' 1,

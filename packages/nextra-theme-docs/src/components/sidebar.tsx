@@ -72,7 +72,7 @@ const classes = {
   ),
   aside: cn(
     'nextra-sidebar-container _flex _flex-col',
-    'md:_top-16 md:_shrink-0 motion-reduce:_transform-none [.resizing_&]:_transition-none',
+    'md:_top-[--nextra-navbar-height] md:_shrink-0 motion-reduce:_transform-none [.resizing_&]:_transition-none',
     '_transform-gpu _transition-all _ease-in-out',
     'print:_hidden'
   ),
