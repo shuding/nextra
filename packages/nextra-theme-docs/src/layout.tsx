@@ -6,11 +6,7 @@ import { Children, isValidElement } from 'react'
 import { z } from 'zod'
 import { fromZodError } from 'zod-validation-error'
 import { Footer, MobileNav, Navbar } from './components'
-import {
-  ActiveAnchorProvider,
-  ConfigProvider,
-  ThemeConfigProvider
-} from './contexts'
+import { ConfigProvider, ThemeConfigProvider } from './contexts'
 
 const element = z.custom<ReactElement>(isValidElement, {
   message: 'Must be React.ReactElement'
@@ -143,10 +139,8 @@ export function Layout({ children, ...themeConfig }: Props): ReactElement {
     <ThemeConfigProvider value={data}>
       <ThemeProvider {...data.nextThemes}>
         <ConfigProvider pageMap={data.pageMap} footer={footer} navbar={navbar}>
-          <ActiveAnchorProvider>
-            <MobileNav />
-            {restChildren}
-          </ActiveAnchorProvider>
+          <MobileNav />
+          {restChildren}
         </ConfigProvider>
       </ThemeProvider>
     </ThemeConfigProvider>

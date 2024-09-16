@@ -171,7 +171,7 @@ export function ClientNavbar({
             active && '_bg-gray-400/20'
           )
         }
-        onClick={() => setMenu(!menu)}
+        onClick={() => setMenu(prev => !prev)}
       >
         <MenuIcon height="24" className={cn({ open: menu })} />
       </Button>
