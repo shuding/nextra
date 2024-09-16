@@ -1,7 +1,7 @@
 'use client'
 
+import { usePathname } from 'next/navigation'
 import type { Heading, PageMapItem } from 'nextra'
-import { useFSRoute } from 'nextra/hooks'
 import { normalizePages } from 'nextra/normalize-pages'
 import type { ReactElement, ReactNode } from 'react'
 import { createContext, useContext, useEffect, useState } from 'react'
@@ -36,6 +36,16 @@ export const useConfig = () =>
 
 export const useConfigActions = () => useConfigStore(state => state.actions)
 
+function getStore(list: PageMapItem[], route: string) {
+  const normalizePagesResult = normalizePages({ list, route })
+  const { activeThemeContext, activeType } = normalizePagesResult
+
+  return {
+    normalizePagesResult,
+    hideSidebar: !activeThemeContext.sidebar || activeType === 'page'
+  }
+}
+
 export function ConfigProvider({
   children,
   pageMap,
@@ -47,18 +57,11 @@ export function ConfigProvider({
   footer: ReactNode
   navbar: ReactNode
 }): ReactElement {
-  const fsPath = useFSRoute()
+  const pathname = usePathname()
 
-  const [store] = useState(() => {
-    const normalizePagesResult = normalizePages({
-      list: pageMap,
-      route: fsPath
-    })
-    const { activeThemeContext, activeType } = normalizePagesResult
-
-    return createStore<Config>(set => ({
-      hideSidebar: !activeThemeContext.sidebar || activeType === 'page',
-      normalizePagesResult,
+  const [store] = useState(() =>
+    createStore<Config>(set => ({
+      ...getStore(pageMap, pathname),
       toc: [],
       actions: {
         setTOC(toc) {
@@ -66,7 +69,11 @@ export function ConfigProvider({
         }
       }
     }))
-  })
+  )
+
+  useEffect(() => {
+    store.setState(getStore(pageMap, pathname))
+  }, [pageMap, pathname])
 
   useEffect(() => {
     let resizeTimer: number
