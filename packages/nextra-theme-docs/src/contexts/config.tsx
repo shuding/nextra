@@ -4,26 +4,37 @@ import type { Heading, PageMapItem } from 'nextra'
 import { useFSRoute } from 'nextra/hooks'
 import { normalizePages } from 'nextra/normalize-pages'
 import type { ReactElement, ReactNode } from 'react'
-import { createContext, useContext, useEffect, useMemo, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
+import { createStore, StoreApi, useStore } from 'zustand'
+import { shallow } from 'zustand/shallow'
 
 type Config = {
   hideSidebar: boolean
   normalizePagesResult: ReturnType<typeof normalizePages>
   toc: Heading[]
-  setTOC: (toc: Heading[]) => void
+  actions: {
+    setTOC: (toc: Heading[]) => void
+  }
 }
 
-const ConfigContext = createContext<Config>({
-  hideSidebar: false,
-  normalizePagesResult: {} as ReturnType<typeof normalizePages>,
-  toc: [],
-  setTOC: () => {}
-})
-ConfigContext.displayName = 'Config'
+const ConfigContext = createContext<StoreApi<Config> | null>(null)
 
-export function useConfig() {
-  return useContext(ConfigContext)
+function useConfigStore<T>(selector: (state: Config) => T) {
+  const store = useContext(ConfigContext)
+  if (!store) {
+    throw new Error('Missing ConfigContext.Provider')
+  }
+  return useStore(store, selector, shallow)
 }
+
+export const useConfig = () =>
+  useConfigStore(state => ({
+    hideSidebar: state.hideSidebar,
+    normalizePagesResult: state.normalizePagesResult,
+    toc: state.toc
+  }))
+
+export const useConfigActions = () => useConfigStore(state => state.actions)
 
 export function ConfigProvider({
   children,
@@ -38,22 +49,24 @@ export function ConfigProvider({
 }): ReactElement {
   const fsPath = useFSRoute()
 
-  const normalizePagesResult = useMemo(
-    () => normalizePages({ list: pageMap, route: fsPath }),
-    [pageMap, fsPath]
-  )
+  const [store] = useState(() => {
+    const normalizePagesResult = normalizePages({
+      list: pageMap,
+      route: fsPath
+    })
+    const { activeThemeContext, activeType } = normalizePagesResult
 
-  const { activeType, activeThemeContext } = normalizePagesResult
-  const hideSidebar = !activeThemeContext.sidebar || activeType === 'page'
-
-  const [toc, setTOC] = useState<Heading[]>([])
-
-  const extendedConfig: Config = {
-    hideSidebar,
-    normalizePagesResult,
-    toc,
-    setTOC
-  }
+    return createStore<Config>(set => ({
+      hideSidebar: !activeThemeContext.sidebar || activeType === 'page',
+      normalizePagesResult,
+      toc: [],
+      actions: {
+        setTOC(toc) {
+          set({ toc })
+        }
+      }
+    }))
+  })
 
   useEffect(() => {
     let resizeTimer: number
@@ -72,8 +85,10 @@ export function ConfigProvider({
     }
   }, [])
 
+  const { activeThemeContext } = store.getState().normalizePagesResult
+
   return (
-    <ConfigContext.Provider value={extendedConfig}>
+    <ConfigContext.Provider value={store}>
       {activeThemeContext.navbar && navbar}
       {children}
       {activeThemeContext.footer && footer}
