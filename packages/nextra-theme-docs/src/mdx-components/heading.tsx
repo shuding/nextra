@@ -3,8 +3,7 @@
 import cn from 'clsx'
 import type { ComponentProps, ReactElement } from 'react'
 import { useEffect, useRef } from 'react'
-import { useSetActiveAnchor } from '../contexts'
-import { useIntersectionObserver, useSlugs } from '../contexts/active-anchor'
+import { useActiveAnchor, useActiveAnchorActions } from '../contexts'
 
 // Anchor links
 const createHeading = (
@@ -17,9 +16,8 @@ const createHeading = (
     className,
     ...props
   }: ComponentProps<'h2'>): ReactElement {
-    const setActiveAnchor = useSetActiveAnchor()
-    const slugs = useSlugs()
-    const observer = useIntersectionObserver()
+    const { setActiveAnchor } = useActiveAnchorActions()
+    const { slugs, observer } = useActiveAnchor()
     const obRef = useRef<HTMLAnchorElement>(null)
 
     useEffect(() => {
@@ -37,7 +35,7 @@ const createHeading = (
           return ret
         })
       }
-    }, [id, slugs, observer, setActiveAnchor])
+    }, [id, slugs, observer])
 
     return (
       <Tag

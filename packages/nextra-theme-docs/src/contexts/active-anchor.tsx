@@ -1,7 +1,8 @@
 'use client'
 
-import type { Dispatch, ReactElement, ReactNode, SetStateAction } from 'react'
-import { createContext, useContext, useEffect, useRef, useState } from 'react'
+import type { Dispatch, SetStateAction } from 'react'
+import { create } from 'zustand'
+import { shallow } from 'zustand/shallow'
 
 type ActiveAnchor = Record<
   string,
@@ -13,43 +14,29 @@ type ActiveAnchor = Record<
   }
 >
 
-const ActiveAnchorContext = createContext<ActiveAnchor>(null!)
-ActiveAnchorContext.displayName = 'ActiveAnchor'
-
-const SetActiveAnchorContext = createContext<
-  Dispatch<SetStateAction<ActiveAnchor>>
->(null!)
-SetActiveAnchorContext.displayName = 'SetActiveAnchor'
-
-const IntersectionObserverContext = createContext<IntersectionObserver | null>(
-  null
-)
-IntersectionObserverContext.displayName = 'IntersectionObserver'
-const slugs = new WeakMap()
-const SlugsContext = createContext<WeakMap<any, any>>(slugs)
-SlugsContext.displayName = 'Slugs'
-// Separate the state as 2 contexts here to avoid
-// re-renders of the content triggered by the state update.
-export const useActiveAnchor = () => useContext(ActiveAnchorContext)
-export const useSetActiveAnchor = () => useContext(SetActiveAnchorContext)
-
-export const useIntersectionObserver = () =>
-  useContext(IntersectionObserverContext)
-export const useSlugs = () => useContext(SlugsContext)
-
-export const ActiveAnchorProvider = ({
-  children
-}: {
-  children: ReactNode
-}): ReactElement => {
-  const [activeAnchor, setActiveAnchor] = useState<ActiveAnchor>({})
-  const observerRef = useRef<IntersectionObserver>(null!)
-
-  useEffect(() => {
+const useActiveAnchorStore = create<{
+  observer: null | IntersectionObserver
+  activeAnchor: ActiveAnchor
+  slugs: WeakMap<any, any>
+  actions: {
+    setActiveAnchor: Dispatch<SetStateAction<ActiveAnchor>>
+  }
+}>((set, get) => ({
+  get observer() {
+    if (typeof window === 'undefined') {
+      return null
+    }
+    // console.log(useActiveAnchorStore())
     const navbarHeight = getComputedStyle(document.body).getPropertyValue(
       '--nextra-navbar-height'
     )
-    observerRef.current = new IntersectionObserver(
+
+    const {
+      actions: { setActiveAnchor },
+      slugs
+    } = get()
+
+    return new IntersectionObserver(
       entries => {
         setActiveAnchor(f => {
           const ret = { ...f }
@@ -100,20 +87,29 @@ export const ActiveAnchorProvider = ({
         threshold: [0, 1]
       }
     )
-
-    return () => {
-      observerRef.current.disconnect()
+  },
+  activeAnchor: {},
+  slugs: new WeakMap(),
+  actions: {
+    setActiveAnchor(activeAnchor) {
+      set(
+        typeof activeAnchor === 'function'
+          ? state => ({ activeAnchor: activeAnchor(state.activeAnchor) })
+          : { activeAnchor }
+      )
     }
-  }, [])
-  return (
-    <ActiveAnchorContext.Provider value={activeAnchor}>
-      <SetActiveAnchorContext.Provider value={setActiveAnchor}>
-        <SlugsContext.Provider value={slugs}>
-          <IntersectionObserverContext.Provider value={observerRef.current}>
-            {children}
-          </IntersectionObserverContext.Provider>
-        </SlugsContext.Provider>
-      </SetActiveAnchorContext.Provider>
-    </ActiveAnchorContext.Provider>
+  }
+}))
+
+export const useActiveAnchor = () =>
+  useActiveAnchorStore(
+    state => ({
+      activeAnchor: state.activeAnchor,
+      observer: state.observer,
+      slugs: state.slugs
+    }),
+    shallow
   )
-}
+
+export const useActiveAnchorActions = () =>
+  useActiveAnchorStore(state => state.actions)
