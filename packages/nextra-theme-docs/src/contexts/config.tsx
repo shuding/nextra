@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation'
 import type { PageMapItem } from 'nextra'
 import { normalizePages } from 'nextra/normalize-pages'
 import type { ReactElement, ReactNode } from 'react'
-import { createContext, useContext, useEffect, useState } from 'react'
+import { Children, createContext, useContext, useEffect, useState } from 'react'
 import { createStore, StoreApi, useStore } from 'zustand'
 import { shallow } from 'zustand/shallow'
 
@@ -29,8 +29,6 @@ export const useConfig = () =>
     normalizePagesResult: state.normalizePagesResult
   }))
 
-export const useConfigActions = () => useConfigStore(state => state.actions)
-
 function getStore(list: PageMapItem[], route: string) {
   const normalizePagesResult = normalizePages({ list, route })
   const { activeThemeContext, activeType } = normalizePagesResult
@@ -43,14 +41,10 @@ function getStore(list: PageMapItem[], route: string) {
 
 export function ConfigProvider({
   children,
-  pageMap,
-  footer,
-  navbar
+  pageMap
 }: {
   children: ReactNode
   pageMap: PageMapItem[]
-  footer: ReactNode
-  navbar: ReactNode
 }): ReactElement {
   const pathname = usePathname()
 
@@ -81,11 +75,26 @@ export function ConfigProvider({
 
   const { activeThemeContext } = store.getState().normalizePagesResult
 
+  const newChildren = Children.map(children, child => {
+    if (
+      child &&
+      typeof child === 'object' &&
+      'type' in child &&
+      '_owner' in child &&
+      child._owner
+    ) {
+      const ownerType = (child._owner as any).name
+      if (ownerType === 'Footer') {
+        return activeThemeContext.footer && child
+      }
+      if (ownerType === 'Navbar') {
+        return activeThemeContext.navbar && child
+      }
+    }
+    return child
+  })
+
   return (
-    <ConfigContext.Provider value={store}>
-      {activeThemeContext.navbar && navbar}
-      {children}
-      {activeThemeContext.footer && footer}
-    </ConfigContext.Provider>
+    <ConfigContext.Provider value={store}>{newChildren}</ConfigContext.Provider>
   )
 }
