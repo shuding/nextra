@@ -337,7 +337,7 @@ importers:
         version: 3.23.8
       zod-validation-error:
         specifier: ^3.0.0
-        version: 3.3.1(zod@3.23.8)
+        version: 3.4.0(zod@3.23.8)
     devDependencies:
       '@svgr/babel-plugin-remove-jsx-attribute':
         specifier: ^8.0.0
@@ -13887,8 +13887,8 @@ packages:
       zod: 3.22.3
     dev: false
 
-  /zod-validation-error@3.3.1(zod@3.23.8):
-    resolution: {integrity: sha512-uFzCZz7FQis256dqw4AhPQgD6f3pzNca/Zh62RNELavlumQB3nDIUFbF5JQfFLcMbO1s02Q7Xg/gpcOBlEnYZA==}
+  /zod-validation-error@3.4.0(zod@3.23.8):
+    resolution: {integrity: sha512-ZOPR9SVY6Pb2qqO5XHt+MkkTRxGXb4EVtnjc9JpXUOtUB1T9Ru7mZOT361AN3MsetVe7R0a1KZshJDZdgp9miQ==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       zod: ^3.18.0
