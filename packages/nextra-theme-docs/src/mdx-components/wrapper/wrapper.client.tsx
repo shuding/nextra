@@ -10,9 +10,6 @@ const classes = {
   toc: cn(
     'nextra-toc _order-last max-xl:_hidden _w-64 _shrink-0 print:_hidden'
   ),
-  main: cn(
-    '_w-full _break-words _min-h-[calc(100vh-var(--nextra-navbar-height))]'
-  )
 }
 
 export function ClientWrapper({
@@ -93,37 +90,23 @@ export function ClientWrapper({
       ? null
       : { 'data-pagefind-body': true }
 
-  const mainEl =
-    themeContext.layout === 'full' ? (
-      <article
-        {...searchProps}
-        className={cn(
-          classes.main,
-          'nextra-content _pl-[max(env(safe-area-inset-left),1.5rem)] _pr-[max(env(safe-area-inset-right),1.5rem)]'
-        )}
-      >
-        {content}
-      </article>
-    ) : (
-      <article
-        className={cn(
-          classes.main,
-          'nextra-content _flex _min-w-0 _justify-center _pb-8 _pr-[calc(env(safe-area-inset-right)-1.5rem)]',
-          themeContext.typesetting === 'article' &&
-            'nextra-body-typesetting-article'
-        )}
-      >
-        <main
-          {...searchProps}
-          className="_w-full _min-w-0 _max-w-6xl _px-6 _pt-4 md:_px-12"
-        >
-          {activeType !== 'page' && themeContext.breadcrumb && (
-            <Breadcrumb activePath={activePath} />
-          )}
-          {content}
-        </main>
-      </article>
-    )
+  const mainEl = (
+    <article
+      {...searchProps}
+      className={cn(
+        '_break-words _min-h-[calc(100vh-var(--nextra-navbar-height))]',
+        '_text-slate-700 dark:_text-slate-200 _pb-8 _px-6 _pt-4 md:_px-12',
+        themeContext.layout !== 'full' && '_max-w-6xl',
+        themeContext.typesetting === 'article' &&
+          'nextra-body-typesetting-article'
+      )}
+    >
+      {activeType !== 'page' && themeContext.breadcrumb && (
+        <Breadcrumb activePath={activePath} />
+      )}
+      {content}
+    </article>
+  )
 
   return (
     <>

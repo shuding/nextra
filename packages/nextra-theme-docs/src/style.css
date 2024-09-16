@@ -41,10 +41,6 @@ body {
   @apply focus-visible:_outline-none;
 }
 
-.nextra-content {
-  @apply _text-slate-700 dark:_text-slate-200;
-}
-
 @media (max-width: 767px) {
   .nextra-sidebar-container {
     @apply _fixed _pt-[calc(var(--nextra-navbar-height))] _top-0 _w-full _bottom-0 _z-[15] _overscroll-contain;
