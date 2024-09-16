@@ -7,9 +7,7 @@ import { Breadcrumb, Pagination, TOC } from '../../components'
 import { useConfig, useThemeConfig } from '../../contexts'
 
 const classes = {
-  toc: cn(
-    'nextra-toc _order-last max-xl:_hidden _w-64 _shrink-0 print:_hidden'
-  ),
+  toc: cn('nextra-toc _order-last max-xl:_hidden _w-64 _shrink-0 print:_hidden')
 }
 
 export function ClientWrapper({
@@ -72,47 +70,32 @@ export function ClientWrapper({
     <div className="_mt-16" />
   )
 
-  const content = (
-    <>
-      {children}
-      {gitTimestampEl}
-      {activeType !== 'page' && themeContext.pagination && (
-        <Pagination
-          flatDocsDirectories={flatDocsDirectories}
-          currentIndex={activeIndex}
-        />
-      )}
-    </>
-  )
-
-  const searchProps =
-    (metadata as any).searchable === false
-      ? null
-      : { 'data-pagefind-body': true }
-
-  const mainEl = (
-    <article
-      {...searchProps}
-      className={cn(
-        '_break-words _min-h-[calc(100vh-var(--nextra-navbar-height))]',
-        '_text-slate-700 dark:_text-slate-200 _pb-8 _px-6 _pt-4 md:_px-12',
-        themeContext.layout !== 'full' && '_max-w-6xl',
-        themeContext.typesetting === 'article' &&
-          'nextra-body-typesetting-article'
-      )}
-    >
-      {activeType !== 'page' && themeContext.breadcrumb && (
-        <Breadcrumb activePath={activePath} />
-      )}
-      {content}
-    </article>
-  )
-
   return (
     <>
       {tocEl}
       {skipNavContent}
-      {mainEl}
+      <article
+        data-pagefind-body={(metadata as any).searchable !== false || undefined}
+        className={cn(
+          '_w-full _break-words _min-h-[calc(100vh-var(--nextra-navbar-height))]',
+          '_text-slate-700 dark:_text-slate-200 _pb-8 _px-6 _pt-4 md:_px-12',
+          themeContext.layout !== 'full' && '_max-w-6xl',
+          themeContext.typesetting === 'article' &&
+            'nextra-body-typesetting-article'
+        )}
+      >
+        {activeType !== 'page' && themeContext.breadcrumb && (
+          <Breadcrumb activePath={activePath} />
+        )}
+        {children}
+        {gitTimestampEl}
+        {activeType !== 'page' && themeContext.pagination && (
+          <Pagination
+            flatDocsDirectories={flatDocsDirectories}
+            currentIndex={activeIndex}
+          />
+        )}
+      </article>
     </>
   )
 }
