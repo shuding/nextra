@@ -26,7 +26,6 @@ const useActiveAnchorStore = create<{
     if (typeof window === 'undefined') {
       return null
     }
-    // console.log(useActiveAnchorStore())
     const navbarHeight = getComputedStyle(document.body).getPropertyValue(
       '--nextra-navbar-height'
     )
@@ -92,11 +91,12 @@ const useActiveAnchorStore = create<{
   slugs: new WeakMap(),
   actions: {
     setActiveAnchor(activeAnchor) {
-      set(
-        typeof activeAnchor === 'function'
-          ? state => ({ activeAnchor: activeAnchor(state.activeAnchor) })
-          : { activeAnchor }
-      )
+      set(state => ({
+        activeAnchor:
+          typeof activeAnchor === 'function'
+            ? activeAnchor(state.activeAnchor)
+            : activeAnchor
+      }))
     }
   }
 }))

@@ -11,19 +11,13 @@ const useMenuStore = create<{
 }>(set => ({
   hasMenu: false,
   actions: {
-    setMenu(hasMenu) {
-      if (typeof hasMenu === 'function') {
-        set(state => {
-          const menu = hasMenu(state.hasMenu)
-          // Lock background scroll when menu is opened
-          document.body.classList.toggle('_overflow-hidden', menu)
-          return { hasMenu: menu }
-        })
-      } else {
+    setMenu(menu) {
+      set(state => {
+        const hasMenu = typeof menu === 'function' ? menu(state.hasMenu) : menu
         // Lock background scroll when menu is opened
         document.body.classList.toggle('_overflow-hidden', hasMenu)
-        set({ hasMenu })
-      }
+        return { hasMenu }
+      })
     }
   }
 }))
