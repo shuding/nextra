@@ -23,6 +23,7 @@ import {
   useActiveAnchor,
   useConfig,
   useMenu,
+  useMenuActions,
   useThemeConfig
 } from '../contexts'
 import { Anchor } from './anchor'
@@ -258,7 +259,7 @@ function File({
   // It is possible that the item doesn't have any route - for example an external link.
   const active = item.route && [route, route + '/'].includes(item.route + '/')
   const activeAnchor = useActiveAnchor()
-  const { setMenu } = useMenu()
+  const { setMenu } = useMenuActions()
 
   if (item.type === 'separator') {
     return <Separator title={item.title} />
@@ -358,13 +359,14 @@ export function MobileNav() {
     toc
   } = useConfig()
 
-  const { menu, setMenu } = useMenu()
+  const menu = useMenu()
+  const { setMenu } = useMenuActions()
 
   const pathname = usePathname()
 
   useEffect(() => {
     setMenu(false)
-  }, [pathname, setMenu])
+  }, [pathname])
 
   const anchors = useMemo(() => (toc || []).filter(v => v.depth === 2), [toc])
   const sidebarRef = useRef<HTMLDivElement>(null!)

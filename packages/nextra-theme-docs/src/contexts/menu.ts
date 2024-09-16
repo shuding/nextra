@@ -1,18 +1,24 @@
 'use client'
 
-import type { Dispatch, SetStateAction } from 'react'
-import { createContext, useContext } from 'react'
+import { create } from 'zustand'
 
-interface Menu {
-  menu: boolean
-  setMenu: Dispatch<SetStateAction<boolean>>
-}
+const useMenuStore = create<{
+  hasMenu: boolean
+  actions: {
+    setMenu: (menu: boolean) => void
+  }
+}>(set => ({
+  hasMenu: false,
+  actions: {
+    setMenu(menu) {
+      // Lock background scroll when menu is opened
+      document.body.classList.toggle('_overflow-hidden', menu)
 
-const MenuContext = createContext<Menu>({
-  menu: false,
-  setMenu: () => false
-})
-MenuContext.displayName = 'Menu'
-export const useMenu = () => useContext(MenuContext)
+      set({ hasMenu: menu })
+    }
+  }
+}))
 
-export const MenuProvider = MenuContext.Provider
+export const useMenu = () => useMenuStore(state => state.hasMenu)
+
+export const useMenuActions = () => useMenuStore(state => state.actions)

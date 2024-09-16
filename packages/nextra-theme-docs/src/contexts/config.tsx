@@ -5,7 +5,6 @@ import { useFSRoute } from 'nextra/hooks'
 import { normalizePages } from 'nextra/normalize-pages'
 import type { ReactElement, ReactNode } from 'react'
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
-import { MenuProvider } from './menu'
 
 type Config = {
   hideSidebar: boolean
@@ -37,7 +36,6 @@ export function ConfigProvider({
   footer: ReactNode
   navbar: ReactNode
 }): ReactElement {
-  const [menu, setMenu] = useState(false)
   const fsPath = useFSRoute()
 
   const normalizePagesResult = useMemo(
@@ -58,11 +56,6 @@ export function ConfigProvider({
   }
 
   useEffect(() => {
-    // Lock background scroll when menu is opened
-    document.body.classList.toggle('_overflow-hidden', menu)
-  }, [menu])
-
-  useEffect(() => {
     let resizeTimer: number
 
     function addResizingClass() {
@@ -79,15 +72,11 @@ export function ConfigProvider({
     }
   }, [])
 
-  const value = useMemo(() => ({ menu, setMenu }), [menu])
-
   return (
     <ConfigContext.Provider value={extendedConfig}>
-      <MenuProvider value={value}>
-        {activeThemeContext.navbar && navbar}
-        {children}
-        {activeThemeContext.footer && footer}
-      </MenuProvider>
+      {activeThemeContext.navbar && navbar}
+      {children}
+      {activeThemeContext.footer && footer}
     </ConfigContext.Provider>
   )
 }

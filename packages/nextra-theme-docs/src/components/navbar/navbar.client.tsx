@@ -12,7 +12,7 @@ import { useFSRoute } from 'nextra/hooks'
 import { ArrowRightIcon, MenuIcon } from 'nextra/icons'
 import type { MenuItem, PageItem } from 'nextra/normalize-pages'
 import type { ReactElement, ReactNode } from 'react'
-import { useConfig, useMenu, useThemeConfig } from '../../contexts'
+import { useConfig, useMenu, useThemeConfig, useMenuActions } from '../../contexts'
 import { Anchor } from '../anchor'
 
 const classes = {
@@ -111,7 +111,8 @@ export function ClientNavbar({
   const themeConfig = useThemeConfig()
 
   const activeRoute = useFSRoute()
-  const { menu, setMenu } = useMenu()
+  const menu = useMenu()
+  const { setMenu } = useMenuActions()
 
   return (
     <>
@@ -170,7 +171,7 @@ export function ClientNavbar({
             active && '_bg-gray-400/20'
           )
         }
-        onClick={() => setMenu(prev => !prev)}
+        onClick={() => setMenu(!menu)}
       >
         <MenuIcon height="24" className={cn({ open: menu })} />
       </Button>

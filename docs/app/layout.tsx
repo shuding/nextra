@@ -58,7 +58,7 @@ export default async function RootLayout({
   const { pageMap } = await import('.next/static/chunks/nextra-page-map-.mjs')
 
   return (
-    <html lang="en" dir="ltr">
+    <html lang="en" dir="ltr" suppressHydrationWarning>
       <Head />
       <body>
         <Banner storageKey="4.0-release">
