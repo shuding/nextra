@@ -353,10 +353,9 @@ function Menu({
   )
 }
 
-export function MobileNav() {
+export function MobileNav({ toc }: SidebarProps) {
   const {
-    normalizePagesResult: { directories },
-    toc
+    normalizePagesResult: { directories }
   } = useConfig()
 
   const menu = useMenu()
@@ -441,7 +440,11 @@ export function MobileNav() {
   )
 }
 
-export function Sidebar({ toc }: { toc: Heading[] }): ReactElement {
+type SidebarProps = {
+  toc: Heading[]
+}
+
+export function Sidebar({ toc }: SidebarProps): ReactElement {
   const { normalizePagesResult, hideSidebar: asPopover } = useConfig()
   const { docsDirectories, activeThemeContext } = normalizePagesResult
   const includePlaceholder = activeThemeContext.layout === 'default'
