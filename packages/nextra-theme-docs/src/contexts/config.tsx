@@ -1,7 +1,7 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import type { Heading, PageMapItem } from 'nextra'
+import type { PageMapItem } from 'nextra'
 import { normalizePages } from 'nextra/normalize-pages'
 import type { ReactElement, ReactNode } from 'react'
 import { createContext, useContext, useEffect, useState } from 'react'
@@ -11,10 +11,6 @@ import { shallow } from 'zustand/shallow'
 type Config = {
   hideSidebar: boolean
   normalizePagesResult: ReturnType<typeof normalizePages>
-  toc: Heading[]
-  actions: {
-    setTOC: (toc: Heading[]) => void
-  }
 }
 
 const ConfigContext = createContext<StoreApi<Config> | null>(null)
@@ -30,8 +26,7 @@ function useConfigStore<T>(selector: (state: Config) => T) {
 export const useConfig = () =>
   useConfigStore(state => ({
     hideSidebar: state.hideSidebar,
-    normalizePagesResult: state.normalizePagesResult,
-    toc: state.toc
+    normalizePagesResult: state.normalizePagesResult
   }))
 
 export const useConfigActions = () => useConfigStore(state => state.actions)
@@ -60,15 +55,7 @@ export function ConfigProvider({
   const pathname = usePathname()
 
   const [store] = useState(() =>
-    createStore<Config>(set => ({
-      ...getStore(pageMap, pathname),
-      toc: [],
-      actions: {
-        setTOC(toc) {
-          set({ toc })
-        }
-      }
-    }))
+    createStore<Config>(() => getStore(pageMap, pathname))
   )
 
   useEffect(() => {

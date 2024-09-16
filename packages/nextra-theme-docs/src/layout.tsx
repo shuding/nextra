@@ -139,7 +139,6 @@ export function Layout({ children, ...themeConfig }: Props): ReactElement {
     <ThemeConfigProvider value={data}>
       <ThemeProvider {...data.nextThemes}>
         <ConfigProvider pageMap={data.pageMap} footer={footer} navbar={navbar}>
-          <MobileNav />
           {restChildren}
         </ConfigProvider>
       </ThemeProvider>
