@@ -88,7 +88,7 @@ const useActiveAnchorStore = create<{
       }
     )
   },
-  activeAnchor: {},
+  activeAnchor: Object.create(null),
   slugs: new WeakMap(),
   actions: {
     setActiveAnchor(activeAnchor) {
