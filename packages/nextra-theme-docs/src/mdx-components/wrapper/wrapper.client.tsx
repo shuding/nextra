@@ -5,7 +5,7 @@ import type { MDXWrapper } from 'nextra'
 import type { ComponentProps, ReactNode } from 'react'
 import { useEffect } from 'react'
 import { Breadcrumb, Pagination, Sidebar, TOC } from '../../components'
-import { useConfig, useThemeConfig } from '../../contexts'
+import { useConfig, useThemeConfig, useConfigActions } from '../../contexts'
 
 const classes = {
   toc: cn(
@@ -25,7 +25,8 @@ export function ClientWrapper({
 }: ComponentProps<MDXWrapper> & {
   skipNavContent: ReactNode
 }) {
-  const { normalizePagesResult, setTOC } = useConfig()
+  const { setTOC } = useConfigActions()
+  const { normalizePagesResult } = useConfig()
   const themeConfig = useThemeConfig()
   const {
     activeType,
@@ -129,7 +130,7 @@ export function ClientWrapper({
   useEffect(() => {
     // I didn't find other way to pass toc to src/layout
     setTOC(toc)
-  }, [setTOC, toc])
+  }, [toc])
 
   return (
     <>
