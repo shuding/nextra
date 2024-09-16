@@ -1,7 +1,97 @@
 # TypeScript
 
-import { Callout } from 'nextra/components'
+Nextra is built with TypeScript and provides excellent TypeScript support out of
+the box. This guide will help you leverage TypeScript in your Nextra project.
 
-<Callout emoji="🚨">
-  This page is a stub. Help us expand it by contributing!
-</Callout>
+## Getting Started
+
+To use TypeScript in your Nextra project, you need to:
+
+1. Install TypeScript and related dependencies:
+
+```bash
+npm install typescript @types/react @types/node
+```
+
+2. Create a `tsconfig.json` file in the root of your project:
+
+```json
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve"
+  },
+  "include": ["next-env.d.ts", "/.ts", "/.tsx"],
+  "exclude": ["node_modules"]
+}
+```
+
+This configuration is based on the `tsconfig.json` file found in the Nextra docs
+project.
+
+## Type Definitions
+
+Nextra provides type definitions for its components and configurations. You can
+leverage these types in your `theme.config.tsx` file:
+
+```tsx
+import type { DocsThemeConfig } from 'nextra-theme-docs'
+
+const config: DocsThemeConfig = {
+  // Your theme configuration
+}
+export default config
+```
+
+3. When working with MDX compilation, Nextra uses TypeScript to define plugin
+   types and options:
+
+```tsx
+import type { ProcessorOptions } from '@mdx-js/mdx'
+import type { Root } from 'mdast'
+import type { Plugin } from 'unified'
+
+// ... plugin implementations
+```
+
+## TypeScript in MDX
+
+You can use TypeScript in your MDX files by adding the `tsx` language identifier
+to your code blocks:
+
+```tsx
+const MyComponent = () => {
+  return <div>Hello, World!</div>
+}
+```
+
+4. For theme development, Nextra provides type definitions for theme
+   configurations. For example, in the docs theme:
+
+```tsx
+import type { DocsThemeConfig } from 'nextra-theme-docs'
+
+const config: DocsThemeConfig = {
+  // Your theme configuration
+}
+export default config
+```
+
+5. Nextra uses TypeScript to ensure type safety when working with configuration
+options, page maps, and other data structures throughout the project.
+
+By leveraging TypeScript in your Nextra project, you can catch errors early,
+improve code quality, and enhance the developer experience with better
+autocompletion and type inference.
