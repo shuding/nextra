@@ -70,10 +70,7 @@ const createHeading = (
             : cn(
                 '_font-semibold _tracking-tight _text-slate-900 dark:_text-slate-100',
                 {
-                  h2: cn(
-                    '_mt-10 _border-b _pb-1 _text-3xl _border-neutral-200/70 contrast-more:_border-neutral-400 dark:_border-primary-100/10 contrast-more:dark:_border-neutral-400',
-                    '[.nextra-steps_&]:_mt-8 [.nextra-steps_&]:_border-none [.nextra-steps_&]:_pb-0 [.nextra-steps_&]:_text-2xl'
-                  ),
+                  h2: '_mt-10 _border-b _pb-1 _text-3xl _border-neutral-200/70 contrast-more:_border-neutral-400 dark:_border-primary-100/10 contrast-more:dark:_border-neutral-400',
                   h3: '_mt-8 _text-2xl',
                   h4: '_mt-8 _text-xl',
                   h5: '_mt-8 _text-lg',
