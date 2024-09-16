@@ -3,7 +3,7 @@ import { removeLinks } from 'nextra/remove-links'
 import { MobileNav, Sidebar, SkipNavContent } from '../../components'
 import { ClientWrapper } from './wrapper.client'
 
-export const Wrapper: MDXWrapper = ({ toc, children, ...restProps }) => {
+export const Wrapper: MDXWrapper = ({ toc, children, ...props }) => {
   return (
     <div className="_mx-auto _flex _max-w-[90rem]">
       <Sidebar toc={toc} />
@@ -16,10 +16,16 @@ export const Wrapper: MDXWrapper = ({ toc, children, ...restProps }) => {
           ...item,
           value: removeLinks(item.value)
         }))}
-        skipNavContent={<SkipNavContent />}
-        {...restProps}
+        {...props}
       >
-        {children}
+        <SkipNavContent />
+        <main
+          data-pagefind-body={
+            (props.metadata as any).searchable !== false || undefined
+          }
+        >
+          {children}
+        </main>
       </ClientWrapper>
     </div>
   )

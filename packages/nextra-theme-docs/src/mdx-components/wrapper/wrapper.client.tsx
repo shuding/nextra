@@ -2,19 +2,10 @@
 
 import cn from 'clsx'
 import type { MDXWrapper } from 'nextra'
-import type { ComponentProps, ReactNode } from 'react'
 import { Breadcrumb, Pagination, TOC } from '../../components'
 import { useConfig, useThemeConfig } from '../../contexts'
 
-export function ClientWrapper({
-  toc,
-  children,
-  skipNavContent,
-  metadata,
-  ...props
-}: ComponentProps<MDXWrapper> & {
-  skipNavContent: ReactNode
-}) {
+export const ClientWrapper: MDXWrapper = ({ toc, children, ...props }) => {
   const { normalizePagesResult } = useConfig()
   const themeConfig = useThemeConfig()
   const {
@@ -65,10 +56,9 @@ export function ClientWrapper({
           )}
         </nav>
       )}
-      {skipNavContent}
       <article
         className={cn(
-          '_w-full _break-words _min-h-[calc(100vh-var(--nextra-navbar-height))]',
+          '_w-full _min-w-0 _break-words _min-h-[calc(100vh-var(--nextra-navbar-height))]',
           '_text-slate-700 dark:_text-slate-200 _pb-8 _px-6 _pt-4 md:_px-12',
           themeContext.layout !== 'full' && '_max-w-6xl',
           themeContext.typesetting === 'article' &&
@@ -78,13 +68,7 @@ export function ClientWrapper({
         {activeType !== 'page' && themeContext.breadcrumb && (
           <Breadcrumb activePath={activePath} />
         )}
-        <main
-          data-pagefind-body={
-            (metadata as any).searchable !== false || undefined
-          }
-        >
-          {children}
-        </main>
+        {children}
         {gitTimestampEl}
         {activeType !== 'page' && themeContext.pagination && (
           <Pagination

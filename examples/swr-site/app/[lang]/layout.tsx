@@ -1,14 +1,7 @@
 /* eslint-env node */
 import { SwrIcon, VercelIcon } from '@app/_icons'
 import type { Metadata } from 'next'
-import {
-  Footer,
-  Head,
-  Layout,
-  LocaleSwitch,
-  Navbar,
-  SkipNavLink
-} from 'nextra-theme-docs'
+import { Footer, Head, Layout, LocaleSwitch, Navbar } from 'nextra-theme-docs'
 import { Banner } from 'nextra/components'
 import { getDictionary, getDirection } from '../_dictionaries/get-dictionary'
 import './styles.css'
@@ -70,8 +63,6 @@ export default async function RootLayout({ children, params: { lang } }) {
         }}
       />
       <body>
-        <Banner storageKey="swr-2">SWR 2.0 is out! Read more →</Banner>
-        <SkipNavLink />
         <Layout
           docsRepositoryBase="https://github.com/shuding/nextra/blob/core/examples/swr-site"
           i18n={[
@@ -92,6 +83,7 @@ export default async function RootLayout({ children, params: { lang } }) {
           pageMap={pageMap}
           nextThemes={{ defaultTheme: 'dark' }}
         >
+          <Banner storageKey="swr-2">SWR 2.0 is out! Read more →</Banner>
           <Navbar
             logo={
               <>

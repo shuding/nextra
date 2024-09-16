@@ -5,7 +5,7 @@ import type { ReactElement, ReactNode } from 'react'
 import { Children, isValidElement } from 'react'
 import { z } from 'zod'
 import { fromZodError } from 'zod-validation-error'
-import { Footer, Navbar } from './components'
+import { Footer, Navbar, SkipNavLink } from './components'
 import { ConfigProvider, ThemeConfigProvider } from './contexts'
 
 const element = z.custom<ReactElement>(isValidElement, {
@@ -104,7 +104,6 @@ const hasTypeOf = (child: unknown, ComponentOf: Function) =>
   child &&
   typeof child === 'object' &&
   'type' in child &&
-  typeof child.type === 'function' &&
   child.type === ComponentOf
 
 export function Layout({ children, ...themeConfig }: Props): ReactElement {
@@ -125,7 +124,10 @@ export function Layout({ children, ...themeConfig }: Props): ReactElement {
   return (
     <ThemeConfigProvider value={data}>
       <ThemeProvider {...data.nextThemes}>
-        <ConfigProvider pageMap={data.pageMap}>{newChildren}</ConfigProvider>
+        <ConfigProvider pageMap={data.pageMap}>
+          <SkipNavLink />
+          {newChildren}
+        </ConfigProvider>
       </ThemeProvider>
     </ThemeConfigProvider>
   )

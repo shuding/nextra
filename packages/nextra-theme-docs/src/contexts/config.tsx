@@ -2,6 +2,7 @@
 
 import { usePathname } from 'next/navigation'
 import type { PageMapItem } from 'nextra'
+import { useFSRoute } from 'nextra/hooks'
 import { normalizePages } from 'nextra/normalize-pages'
 import type { ReactElement, ReactNode } from 'react'
 import { Children, createContext, useContext, useEffect, useState } from 'react'
@@ -46,7 +47,7 @@ export function ConfigProvider({
   children: ReactNode
   pageMap: PageMapItem[]
 }): ReactElement {
-  const pathname = usePathname()
+  const pathname = useFSRoute()
 
   const [store] = useState(() =>
     createStore<Config>(() => getStore(pageMap, pathname))
