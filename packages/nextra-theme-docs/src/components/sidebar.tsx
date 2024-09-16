@@ -258,7 +258,7 @@ function File({
 
   // It is possible that the item doesn't have any route - for example an external link.
   const active = item.route && [route, route + '/'].includes(item.route + '/')
-  const activeAnchor = useActiveAnchor()
+  const { activeAnchor } = useActiveAnchor()
   const { setMenu } = useMenuActions()
 
   if (item.type === 'separator') {
