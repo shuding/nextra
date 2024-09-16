@@ -68,7 +68,7 @@ export function Head({ children, ...props }: HeadProps): ReactElement {
   return (
     <head>
       {children}
-      <style>{`:root{--nextra-primary-hue:${color.hue.light}deg;--nextra-primary-saturation:${color.saturation.light}%;--nextra-navbar-height:64px;--nextra-menu-height:3.75rem;--nextra-banner-height:2.5rem;--nextra-bg:${backgroundColor.light};}.dark{--nextra-primary-hue:${color.hue.dark}deg;--nextra-primary-saturation:${color.saturation.dark}%;--nextra-bg:${backgroundColor.dark};}`}</style>
+      <style>{`:root{--nextra-primary-hue:${color.hue.light}deg;--nextra-primary-saturation:${color.saturation.light}%;--nextra-bg:${backgroundColor.light};}.dark{--nextra-primary-hue:${color.hue.dark}deg;--nextra-primary-saturation:${color.saturation.dark}%;--nextra-bg:${backgroundColor.dark};}`}</style>
       {faviconGlyph && (
         <link
           rel="icon"

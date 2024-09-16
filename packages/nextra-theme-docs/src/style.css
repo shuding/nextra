@@ -9,6 +9,12 @@
 @import '../css/hamburger.css';
 @import '../css/typesetting-article.css';
 
+:root {
+  --nextra-navbar-height: 64px;
+  --nextra-menu-height: 3.75rem;
+  --nextra-banner-height: 2.5rem;
+}
+
 html {
   @apply _antialiased _text-base;
   font-feature-settings:
@@ -155,6 +161,7 @@ body,
 
 .nextra-skip-nav {
   @apply _sr-only;
+
   &:focus {
     @apply _not-sr-only _fixed _z-50 _m-3 _ms-4 _h-[calc(var(--nextra-navbar-height)-1.5rem)] _rounded-lg _border _px-3 _py-2 _align-middle _text-sm _font-bold;
     @apply _text-gray-900 dark:_text-gray-100;
