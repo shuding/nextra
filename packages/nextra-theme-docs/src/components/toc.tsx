@@ -25,7 +25,7 @@ const linkClassName = cn(
 )
 
 export function TOC({ toc, filePath, pageTitle }: TOCProps): ReactElement {
-  const { activeSlug } = useActiveAnchor()
+  const activeSlug = useActiveAnchor()
   const tocRef = useRef<HTMLUListElement>(null!)
   const themeConfig = useThemeConfig()
 

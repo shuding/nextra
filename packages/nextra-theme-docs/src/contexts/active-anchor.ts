@@ -1,6 +1,5 @@
 import type { Dispatch } from 'react'
-import { shallow } from 'zustand/shallow'
-import { createWithEqualityFn } from 'zustand/traditional'
+import { create } from 'zustand'
 
 type ActiveAnchor = Record<
   string,
@@ -11,86 +10,72 @@ type ActiveAnchor = Record<
   }
 >
 
-const useActiveAnchorStore = createWithEqualityFn<{
+const useActiveAnchorStore = create<{
   observer: null | IntersectionObserver
-  activeAnchor: ActiveAnchor
   activeSlug: string
   actions: {
-    setActiveAnchor: Dispatch<(prevState: ActiveAnchor) => ActiveAnchor>
+    observeAnchor: (el: HTMLAnchorElement) => Dispatch<void>
   }
-}>((set, get) => ({
-  get observer() {
-    if (typeof window === 'undefined') {
-      return null
+}>((set, get) => {
+  const callback: IntersectionObserverCallback = entries => {
+    const ret: ActiveAnchor = Object.create(null)
+    for (const [index, entry] of entries.entries()) {
+      if (!entry.rootBounds) continue
+
+      const slug = (entry.target as HTMLAnchorElement).hash.slice(1)
+
+      const aboveHalfViewport =
+        entry.boundingClientRect.y + entry.boundingClientRect.height <=
+        entry.rootBounds.y + entry.rootBounds.height
+
+      ret[slug] = {
+        index,
+        aboveHalfViewport,
+        insideHalfViewport: entry.intersectionRatio > 0
+      }
     }
 
-    const callback: IntersectionObserverCallback = entries => {
-      const ret = { ...get().activeAnchor }
+    let [activeSlug] = Object.keys(ret)
+    let smallestIndexInViewport = Infinity
+    let largestIndexAboveViewport = -1
 
-      for (const [index, entry] of entries.entries()) {
-        if (!entry.rootBounds) continue
+    for (const [slug, entry] of Object.entries(ret)) {
+      const idx = entry.index
+      if (entry.aboveHalfViewport && idx > largestIndexAboveViewport) {
+        largestIndexAboveViewport = idx
+        activeSlug = slug
+      } else if (entry.insideHalfViewport && idx < smallestIndexInViewport) {
+        smallestIndexInViewport = idx
+        activeSlug = slug
+      }
+    }
+    set({ activeSlug })
+    return ret
+  }
 
-        const slug = (entry.target as HTMLAnchorElement).hash.slice(1)
-
-        const aboveHalfViewport =
-          entry.boundingClientRect.y + entry.boundingClientRect.height <=
-          entry.rootBounds.y + entry.rootBounds.height
-
-        ret[slug] = {
-          // Use initial index, since entries array will be changed after mount
-          index: ret[slug]?.index ?? index,
-          aboveHalfViewport,
-          insideHalfViewport: entry.intersectionRatio > 0
+  return {
+    observer:
+      typeof window === 'undefined'
+        ? null
+        : new IntersectionObserver(callback, {
+            rootMargin: `-${document.querySelector('article')!.offsetTop}px 0px -50%`,
+            threshold: [0, 1]
+          }),
+    activeSlug: '',
+    actions: {
+      observeAnchor(anchorElement) {
+        const { observer } = get()
+        observer!.observe(anchorElement)
+        return () => {
+          observer!.disconnect()
         }
       }
-
-      let [activeSlug] = Object.keys(ret)
-      let smallestIndexInViewport = Infinity
-      let largestIndexAboveViewport = -1
-
-      for (const [slug, entry] of Object.entries(ret)) {
-        const idx = entry.index
-        if (entry.aboveHalfViewport && idx > largestIndexAboveViewport) {
-          largestIndexAboveViewport = idx
-          activeSlug = slug
-        } else if (entry.insideHalfViewport && idx < smallestIndexInViewport) {
-          smallestIndexInViewport = idx
-          activeSlug = slug
-        }
-      }
-      set({ activeSlug })
-      return ret
-    }
-
-    const navbarHeight = getComputedStyle(document.body).getPropertyValue(
-      '--nextra-navbar-height'
-    )
-
-    return new IntersectionObserver(callback, {
-      rootMargin: `-${navbarHeight} 0px -50%`,
-      threshold: [0, 1]
-    })
-  },
-  activeAnchor: Object.create(null),
-  activeSlug: '',
-  slugs: new WeakMap(),
-  actions: {
-    setActiveAnchor(fn) {
-      set(state => ({
-        activeAnchor: fn(state.activeAnchor)
-      }))
     }
   }
-}))
+})
 
 export const useActiveAnchor = () =>
-  useActiveAnchorStore(
-    state => ({
-      observer: state.observer,
-      activeSlug: state.activeSlug
-    }),
-    shallow
-  )
+  useActiveAnchorStore(state => state.activeSlug)
 
 export const useActiveAnchorActions = () =>
   useActiveAnchorStore(state => state.actions)

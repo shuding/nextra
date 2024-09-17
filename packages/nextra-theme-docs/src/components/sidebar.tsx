@@ -235,7 +235,7 @@ function File({
   const route = useFSRoute()
   // It is possible that the item doesn't have any route - for example an external link.
   const active = item.route && [route, route + '/'].includes(item.route + '/')
-  const { activeSlug } = useActiveAnchor()
+  const activeSlug = useActiveAnchor()
   const { setMenu } = useMenuActions()
 
   if (item.type === 'separator') {
