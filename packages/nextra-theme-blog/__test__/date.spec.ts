@@ -1,6 +1,9 @@
 import { describe, expect, it } from 'vitest'
 import { isValidDate } from '../src/mdx-components'
 
+// Fixes Error: Failed to resolve import "./pagefind/pagefind.js" from "../nextra/dist/client/components/search.js". Does the file exist?
+vi.mock('../../nextra/dist/client/components/search.js', async () => ({}))
+
 describe('date', () => {
   describe('isValidDate()', () => {
     it('should be valid', () => {
