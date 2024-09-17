@@ -2,7 +2,11 @@ import { FileTree } from 'nextra/components'
 
 # File Tree Component
 
+A built-in component to visually represent a file tree.
+
 ## Example
+
+Click the folder to test the dynamic functionality of the file tree.
 
 <FileTree>
   <FileTree.Folder name="pages" defaultOpen>
@@ -18,6 +22,10 @@ import { FileTree } from 'nextra/components'
 </FileTree>
 
 ## Usage
+
+Create the file tree structure by nesting `<FileTree.Folder>` and
+`<FileTree.File>` components within a `<FileTree>`. Name each file or folder
+with the `name` attribute. Use `defaultOpen` to set the folder to open on load.
 
 ```mdx filename="Markdown"
 import { FileTree } from 'nextra/components'
