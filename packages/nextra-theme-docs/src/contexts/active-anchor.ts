@@ -51,18 +51,19 @@ const useActiveAnchorStore = createWithEqualityFn<{
         let largestIndexAboveViewport = -1
 
         for (const [slug, entry] of Object.entries(ret)) {
+          const idx = entry.index
           if (
             smallestIndexInViewport === Infinity &&
             entry.aboveHalfViewport &&
-            entry.index > largestIndexAboveViewport
+            idx > largestIndexAboveViewport
           ) {
-            largestIndexAboveViewport = entry.index
+            largestIndexAboveViewport = idx
             activeSlug = slug
           } else if (
             entry.insideHalfViewport &&
-            entry.index < smallestIndexInViewport
+            idx < smallestIndexInViewport
           ) {
-            smallestIndexInViewport = entry.index
+            smallestIndexInViewport = idx
             activeSlug = slug
           }
         }
