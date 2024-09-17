@@ -1,5 +1,11 @@
 # nextra
 
+## 3.0.0-alpha.40
+
+### Patch Changes
+
+- 982862f: Support for `h2` and `h4` Markdown headings with the Steps component.
+
 ## 3.0.0-alpha.39
 
 ### Major Changes
