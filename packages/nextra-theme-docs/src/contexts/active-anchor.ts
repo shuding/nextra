@@ -64,7 +64,8 @@ const useActiveAnchorStore = create<{
       typeof window === 'undefined'
         ? null!
         : new IntersectionObserver(callback, {
-            rootMargin: `-${document.querySelector('article')!.offsetTop}px 0px -50%`,
+            // Can be null if error is thrown from app somewhere
+            rootMargin: `-${document.querySelector('article')?.offsetTop ?? 0}px 0px -50%`,
             threshold: [0, 1]
           }),
     activeSlug: '',
