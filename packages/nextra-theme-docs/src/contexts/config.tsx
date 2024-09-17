@@ -5,9 +5,10 @@ import { useFSRoute } from 'nextra/hooks'
 import { normalizePages } from 'nextra/normalize-pages'
 import type { ReactElement, ReactNode } from 'react'
 import { Children, createContext, useContext, useEffect, useState } from 'react'
-import { createStore, useStore } from 'zustand'
+import { createStore } from 'zustand'
 import type { StoreApi } from 'zustand'
 import { shallow } from 'zustand/shallow'
+import { useStoreWithEqualityFn } from 'zustand/traditional'
 
 type Config = {
   hideSidebar: boolean
@@ -21,7 +22,7 @@ function useConfigStore<T>(selector: (state: Config) => T) {
   if (!store) {
     throw new Error('Missing ConfigContext.Provider')
   }
-  return useStore(store, selector, shallow)
+  return useStoreWithEqualityFn(store, selector, shallow)
 }
 
 export const useConfig = () =>
@@ -55,7 +56,7 @@ export function ConfigProvider({
 
   useEffect(() => {
     store.setState(getStore(pageMap, pathname))
-  }, [pageMap, pathname])
+  }, [store, pageMap, pathname])
 
   useEffect(() => {
     let resizeTimer: number

@@ -1,6 +1,6 @@
 import type { Dispatch } from 'react'
-import { create } from 'zustand'
 import { shallow } from 'zustand/shallow'
+import { createWithEqualityFn } from 'zustand/traditional'
 
 type ActiveAnchor = Record<
   string,
@@ -12,7 +12,7 @@ type ActiveAnchor = Record<
   }
 >
 
-const useActiveAnchorStore = create<{
+const useActiveAnchorStore = createWithEqualityFn<{
   observer: null | IntersectionObserver
   activeAnchor: ActiveAnchor
   slugs: WeakMap<Element, [slug: string, index: number]>
