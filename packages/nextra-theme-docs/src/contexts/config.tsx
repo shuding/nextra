@@ -5,7 +5,8 @@ import { useFSRoute } from 'nextra/hooks'
 import { normalizePages } from 'nextra/normalize-pages'
 import type { ReactElement, ReactNode } from 'react'
 import { Children, createContext, useContext, useEffect, useState } from 'react'
-import { createStore, StoreApi, useStore } from 'zustand'
+import { createStore, useStore } from 'zustand'
+import type { StoreApi } from 'zustand'
 import { shallow } from 'zustand/shallow'
 
 type Config = {

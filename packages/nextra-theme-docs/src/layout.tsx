@@ -1,7 +1,7 @@
 /* eslint sort-keys: error */
 import { ThemeProvider } from 'next-themes'
 import { Search } from 'nextra/components'
-import type { ReactElement, ReactNode } from 'react'
+import type { FC, ReactElement, ReactNode } from 'react'
 import { Children, isValidElement } from 'react'
 import { z } from 'zod'
 import { fromZodError } from 'zod-validation-error'
@@ -100,7 +100,7 @@ type Props = Partial<
   children: ReactNode
 }
 
-const hasTypeOf = (child: unknown, ComponentOf: Function) =>
+const hasTypeOf = (child: unknown, ComponentOf: FC) =>
   child &&
   typeof child === 'object' &&
   'type' in child &&

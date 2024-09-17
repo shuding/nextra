@@ -35,7 +35,7 @@ const createHeading = (
           return ret
         })
       }
-    }, [id, slugs, observer])
+    }, [id, slugs, observer, setActiveAnchor])
 
     return (
       <Tag

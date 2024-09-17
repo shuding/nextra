@@ -304,7 +304,7 @@ function Menu({
       event.target.getAttribute('data-href') ||
       ''
     setFocused(route)
-  }, [])
+  }, [setFocused])
 
   return (
     <ul className={cn(classes.list, className)}>
@@ -343,7 +343,7 @@ export function MobileNav({ toc }: SidebarProps) {
 
   useEffect(() => {
     setMenu(false)
-  }, [pathname])
+  }, [pathname, setMenu])
 
   const anchors = useMemo(() => (toc || []).filter(v => v.depth === 2), [toc])
   const sidebarRef = useRef<HTMLDivElement>(null!)
@@ -428,7 +428,6 @@ export function Sidebar({ toc }: SidebarProps): ReactElement {
   const { docsDirectories, activeThemeContext } = normalizePagesResult
   const includePlaceholder = activeThemeContext.layout === 'default'
 
-  const [focused, setFocused] = useState('')
   const [showSidebar, setSidebar] = useState(true)
   const [showToggleAnimation, setToggleAnimation] = useState(false)
 
