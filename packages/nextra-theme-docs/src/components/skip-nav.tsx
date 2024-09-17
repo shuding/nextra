@@ -26,46 +26,25 @@
  * Source: https://github.com/reach/reach-ui/blob/43f450db7bcb25a743121fe31355f2294065a049/LICENSE
  */
 import type { ComponentProps, ReactElement } from 'react'
-import { forwardRef } from 'react'
 
 const DEFAULT_ID = 'nextra-skip-nav'
-const DEFAULT_LABEL = 'Skip to content'
+const DEFAULT_LABEL = 'Skip to Content'
 
-type SkipNavLinkProps = Omit<
-  ComponentProps<'a'>,
-  'ref' | 'href' | 'children'
-> & {
-  label?: string
-}
-
-export const SkipNavLink = forwardRef<HTMLAnchorElement, SkipNavLinkProps>(
-  (
-    {
-      // Give the option to the user to pass a falsy other than undefined to remove the default styles
-      className = 'nextra-skip-nav',
-      id,
-      label = DEFAULT_LABEL,
-      ...props
-    },
-    forwardedRef
-  ): ReactElement => (
-    <a
-      {...props}
-      ref={forwardedRef}
-      href={`#${id || DEFAULT_ID}`}
-      className={className}
-    >
-      {label}
-    </a>
-  )
+export const SkipNavLink = ({
+  // Give the option to the user to pass a falsy other than undefined to remove the default styles
+  className = 'nextra-skip-nav',
+  id = DEFAULT_ID,
+  children = DEFAULT_LABEL,
+  ...props
+}: Omit<ComponentProps<'a'>, 'href'>): ReactElement => (
+  <a {...props} href={`#${id}`} className={className}>
+    {children}
+  </a>
 )
-SkipNavLink.displayName = 'SkipNavLink'
 
-type SkipNavContentProps = Omit<ComponentProps<'div'>, 'ref' | 'children'>
-
-export const SkipNavContent = forwardRef<HTMLDivElement, SkipNavContentProps>(
-  ({ id, ...props }, forwardedRef): ReactElement => (
-    <div {...props} ref={forwardedRef} id={id || DEFAULT_ID} />
-  )
+export const SkipNavContent = ({
+  id = DEFAULT_ID,
+  ...props
+}: Omit<ComponentProps<'div'>, 'children'>): ReactElement => (
+  <div {...props} id={id} />
 )
-SkipNavContent.displayName = 'SkipNavContent'
