@@ -298,13 +298,16 @@ function Menu({
 }: MenuProps): ReactElement {
   const { setFocused } = useFocusedRouteActions()
 
-  const handleFocus: FocusEventHandler = useCallback(event => {
-    const route =
-      event.target.getAttribute('href') ||
-      event.target.getAttribute('data-href') ||
-      ''
-    setFocused(route)
-  }, [setFocused])
+  const handleFocus: FocusEventHandler = useCallback(
+    event => {
+      const route =
+        event.target.getAttribute('href') ||
+        event.target.getAttribute('data-href') ||
+        ''
+      setFocused(route)
+    },
+    [setFocused]
+  )
 
   return (
     <ul className={cn(classes.list, className)}>
