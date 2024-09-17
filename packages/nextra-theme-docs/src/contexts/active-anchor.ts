@@ -87,9 +87,9 @@ const useActiveAnchorStore = createWithEqualityFn<{
   activeAnchor: Object.create(null),
   slugs: new WeakMap(),
   actions: {
-    setActiveAnchor(activeAnchor) {
+    setActiveAnchor(fn) {
       set(state => ({
-        activeAnchor: activeAnchor(state.activeAnchor)
+        activeAnchor: fn(state.activeAnchor)
       }))
     }
   }

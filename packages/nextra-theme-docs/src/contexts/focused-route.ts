@@ -9,11 +9,11 @@ const useFocusedRouteStore = create<{
 }>(set => ({
   focused: '',
   actions: {
-    setFocused(focused) {
+    setFocused(fn) {
       set(state =>
-        typeof focused === 'function'
-          ? { focused: focused(state.focused) }
-          : { focused }
+        typeof fn === 'function'
+          ? { focused: fn(state.focused) }
+          : { focused: fn }
       )
     }
   }

@@ -9,9 +9,9 @@ const useMenuStore = create<{
 }>(set => ({
   hasMenu: false,
   actions: {
-    setMenu(menu) {
+    setMenu(fn) {
       set(state => {
-        const hasMenu = typeof menu === 'function' ? menu(state.hasMenu) : menu
+        const hasMenu = typeof fn === 'function' ? fn(state.hasMenu) : fn
         // Lock background scroll when menu is opened
         document.body.classList.toggle('_overflow-hidden', hasMenu)
         return { hasMenu }
