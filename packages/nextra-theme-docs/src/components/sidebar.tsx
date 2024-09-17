@@ -8,16 +8,7 @@ import { useFSRoute } from 'nextra/hooks'
 import { ArrowRightIcon, ExpandIcon } from 'nextra/icons'
 import type { Item, MenuItem, PageItem } from 'nextra/normalize-pages'
 import type { FocusEventHandler, ReactElement } from 'react'
-import {
-  createContext,
-  memo,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-  useState
-} from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import {
   useActiveAnchor,
@@ -34,18 +25,6 @@ import { LocaleSwitch } from './locale-switch'
 import { ThemeSwitch } from './theme-switch'
 
 const TreeState: Record<string, boolean> = Object.create(null)
-
-const FolderLevelContext = createContext(0)
-FolderLevelContext.displayName = 'FolderLevel'
-
-const Folder = memo(function FolderInner(props: FolderProps) {
-  const level = useContext(FolderLevelContext)
-  return (
-    <FolderLevelContext.Provider value={level + 1}>
-      <FolderImpl {...props} />
-    </FolderLevelContext.Provider>
-  )
-})
 
 const classes = {
   link: cn(
@@ -89,9 +68,10 @@ type FolderProps = {
   item: PageItem | MenuItem | Item
   anchors: Heading[]
   onFocus: FocusEventHandler
+  level: number
 }
 
-function FolderImpl({ item, anchors, onFocus }: FolderProps): ReactElement {
+function Folder({ item, anchors, onFocus, level }: FolderProps): ReactElement {
   const routeOriginal = useFSRoute()
   const [route] = routeOriginal.split('#')
   const active = [route, route + '/'].includes(item.route + '/')
@@ -99,7 +79,6 @@ function FolderImpl({ item, anchors, onFocus }: FolderProps): ReactElement {
 
   const focusedRoute = useFocusedRoute()
   const focusedRouteInside = focusedRoute.startsWith(item.route + '/')
-  const level = useContext(FolderLevelContext)
 
   const { theme } = item as Item
   const themeConfig = useThemeConfig()
@@ -217,6 +196,7 @@ function FolderImpl({ item, anchors, onFocus }: FolderProps): ReactElement {
             directories={item.children}
             base={item.route}
             anchors={anchors}
+            level={level}
           />
         </Collapse>
       )}
@@ -306,13 +286,15 @@ interface MenuProps {
   base?: string
   className?: string
   onlyCurrentDocs?: boolean
+  level: number
 }
 
 function Menu({
   directories,
   anchors,
   className,
-  onlyCurrentDocs
+  onlyCurrentDocs,
+  level
 }: MenuProps): ReactElement {
   const { setFocused } = useFocusedRouteActions()
 
@@ -341,6 +323,7 @@ function Menu({
             item={item}
             anchors={anchors}
             onFocus={handleFocus}
+            level={level + 1}
           />
         )
       })}
@@ -413,6 +396,7 @@ export function MobileNav({ toc }: SidebarProps) {
             directories={directories}
             // Always show the anchor links on mobile (`md`).
             anchors={anchors}
+            level={0}
           />
         </div>
 
@@ -500,6 +484,7 @@ export function Sidebar({ toc }: SidebarProps): ReactElement {
                 // the sidebar when `floatTOC` is enabled.
                 anchors={themeConfig.toc.float ? [] : anchors}
                 onlyCurrentDocs
+                level={0}
               />
             </Collapse>
           )}

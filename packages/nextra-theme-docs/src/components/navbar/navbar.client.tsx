@@ -12,7 +12,12 @@ import { useFSRoute } from 'nextra/hooks'
 import { ArrowRightIcon, MenuIcon } from 'nextra/icons'
 import type { MenuItem, PageItem } from 'nextra/normalize-pages'
 import type { ReactElement, ReactNode } from 'react'
-import { useConfig, useMenu, useThemeConfig, useMenuActions } from '../../contexts'
+import {
+  useConfig,
+  useMenu,
+  useMenuActions,
+  useThemeConfig
+} from '../../contexts'
 import { Anchor } from '../anchor'
 
 const classes = {
