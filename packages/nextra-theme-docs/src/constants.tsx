@@ -40,10 +40,6 @@ const PLACEHOLDER_LOCALES: Record<string, string> = {
 }
 
 export const DEFAULT_THEME: DocsThemeConfig = {
-  backgroundColor: {
-    dark: '17,17,17',
-    light: '250,250,250'
-  },
   backToTop: {
     content: function BackToTopContent() {
       const themeConfig = useThemeConfig()
@@ -55,13 +51,17 @@ export const DEFAULT_THEME: DocsThemeConfig = {
         </>
       )
     },
-    text: 'Scroll to top',
     icon: (
       <ArrowRightIcon
         height="16"
         className="_-rotate-90 _border _rounded-full _border-current"
       />
-    )
+    ),
+    text: 'Scroll to top'
+  },
+  backgroundColor: {
+    dark: '17,17,17',
+    light: '250,250,250'
   },
   banner: {
     dismissible: true,
