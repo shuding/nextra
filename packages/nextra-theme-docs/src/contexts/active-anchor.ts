@@ -51,29 +51,31 @@ const useActiveAnchorStore = createWithEqualityFn<{
             }
           }
 
-          let activeSlug = ''
+          let [activeSlug] = Object.keys(ret)
           let smallestIndexInViewport = Infinity
           let largestIndexAboveViewport = -1
-          for (const s in ret) {
-            ret[s].isActive = false
-            if (
-              ret[s].insideHalfViewport &&
-              ret[s].index < smallestIndexInViewport
-            ) {
-              smallestIndexInViewport = ret[s].index
-              activeSlug = s
-            }
+
+          for (const [slug, entry] of Object.entries(ret)) {
+            delete entry.isActive
             if (
               smallestIndexInViewport === Infinity &&
-              ret[s].aboveHalfViewport &&
-              ret[s].index > largestIndexAboveViewport
+              entry.aboveHalfViewport &&
+              entry.index > largestIndexAboveViewport
             ) {
-              largestIndexAboveViewport = ret[s].index
-              activeSlug = s
+              largestIndexAboveViewport = entry.index
+              activeSlug = slug
+            } else if (
+              entry.insideHalfViewport &&
+              entry.index < smallestIndexInViewport
+            ) {
+              smallestIndexInViewport = entry.index
+              activeSlug = slug
             }
           }
 
-          if (ret[activeSlug]) ret[activeSlug].isActive = true
+          if (activeSlug) {
+            ret[activeSlug].isActive = true
+          }
           return ret
         })
       },
