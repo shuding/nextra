@@ -8,7 +8,11 @@ export const HeadingAnchor: FC<{ id: string }> = ({ id }) => {
   const { observeAnchor } = useActiveAnchorActions()
   const anchorRef = useRef<HTMLAnchorElement>(null!)
 
-  useEffect(() => observeAnchor(anchorRef.current), [])
+  useEffect(
+    () => observeAnchor(anchorRef.current),
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- only on mount
+    []
+  )
 
   return (
     <a

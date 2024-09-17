@@ -11,14 +11,16 @@ type ActiveAnchor = Record<
 >
 
 const useActiveAnchorStore = create<{
-  observer: null | IntersectionObserver
+  observer: IntersectionObserver
   activeSlug: string
+  activeAnchor: ActiveAnchor
   actions: {
     observeAnchor: (el: HTMLAnchorElement) => Dispatch<void>
   }
 }>((set, get) => {
   const callback: IntersectionObserverCallback = entries => {
-    const ret: ActiveAnchor = Object.create(null)
+    const ret: ActiveAnchor = { ...get().activeAnchor }
+
     for (const [index, entry] of entries.entries()) {
       if (!entry.rootBounds) continue
 
@@ -29,45 +31,51 @@ const useActiveAnchorStore = create<{
         entry.rootBounds.y + entry.rootBounds.height
 
       ret[slug] = {
-        index,
+        // Use initial index, since entries array will be changed after mount
+        index: ret[slug]?.index ?? index,
         aboveHalfViewport,
         insideHalfViewport: entry.intersectionRatio > 0
       }
     }
 
-    let [activeSlug] = Object.keys(ret)
+    let activeSlug = ''
     let smallestIndexInViewport = Infinity
     let largestIndexAboveViewport = -1
-
     for (const [slug, entry] of Object.entries(ret)) {
-      const idx = entry.index
-      if (entry.aboveHalfViewport && idx > largestIndexAboveViewport) {
-        largestIndexAboveViewport = idx
+      if (entry.insideHalfViewport && entry.index < smallestIndexInViewport) {
+        smallestIndexInViewport = entry.index
         activeSlug = slug
-      } else if (entry.insideHalfViewport && idx < smallestIndexInViewport) {
-        smallestIndexInViewport = idx
+      }
+      if (
+        smallestIndexInViewport === Infinity &&
+        entry.aboveHalfViewport &&
+        entry.index > largestIndexAboveViewport
+      ) {
+        largestIndexAboveViewport = entry.index
         activeSlug = slug
       }
     }
-    set({ activeSlug })
-    return ret
+
+    set({ activeSlug, activeAnchor: ret })
   }
 
   return {
     observer:
       typeof window === 'undefined'
-        ? null
+        ? null!
         : new IntersectionObserver(callback, {
             rootMargin: `-${document.querySelector('article')!.offsetTop}px 0px -50%`,
             threshold: [0, 1]
           }),
     activeSlug: '',
+    activeAnchor: Object.create(null),
     actions: {
       observeAnchor(anchorElement) {
         const { observer } = get()
-        observer!.observe(anchorElement)
+        observer.observe(anchorElement)
         return () => {
-          observer!.disconnect()
+          set({ activeAnchor: Object.create(null) })
+          observer.disconnect()
         }
       }
     }
