@@ -10,6 +10,6 @@ export function useFSRoute() {
     const filtered = defaultLocale
       ? '/' + pathname.split('/').slice(2).join('/')
       : pathname
-    return filtered.replace(/\/$/, '')
+    return filtered.replace(/\/$/, '') || '/'
   }, [pathname])
 }
