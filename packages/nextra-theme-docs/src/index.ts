@@ -9,8 +9,6 @@ export {
   Collapse,
   NotFoundPage,
   Navbar,
-  SkipNavContent,
-  SkipNavLink,
   ThemeSwitch,
   LocaleSwitch,
   Head,

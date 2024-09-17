@@ -22,6 +22,8 @@ import scrollIntoView from 'scroll-into-view-if-needed'
 import {
   useActiveAnchor,
   useConfig,
+  useFocusedRoute,
+  useFocusedRouteActions,
   useMenu,
   useMenuActions,
   useThemeConfig
@@ -33,10 +35,6 @@ import { ThemeSwitch } from './theme-switch'
 
 const TreeState: Record<string, boolean> = Object.create(null)
 
-const FocusedItemContext = createContext('')
-FocusedItemContext.displayName = 'FocusedItem'
-const OnFocusItemContext = createContext<(route: string) => void>(null!)
-OnFocusItemContext.displayName = 'OnFocusItem'
 const FolderLevelContext = createContext(0)
 FolderLevelContext.displayName = 'FolderLevel'
 
@@ -99,7 +97,7 @@ function FolderImpl({ item, anchors, onFocus }: FolderProps): ReactElement {
   const active = [route, route + '/'].includes(item.route + '/')
   const activeRouteInside = active || route.startsWith(item.route + '/')
 
-  const focusedRoute = useContext(FocusedItemContext)
+  const focusedRoute = useFocusedRoute()
   const focusedRouteInside = focusedRoute.startsWith(item.route + '/')
   const level = useContext(FolderLevelContext)
 
@@ -316,18 +314,15 @@ function Menu({
   className,
   onlyCurrentDocs
 }: MenuProps): ReactElement {
-  const onFocus = useContext(OnFocusItemContext)
+  const { setFocused } = useFocusedRouteActions()
 
-  const handleFocus: FocusEventHandler = useCallback(
-    event => {
-      const route =
-        event.target.getAttribute('href') ||
-        event.target.getAttribute('data-href') ||
-        ''
-      onFocus(route)
-    },
-    [onFocus]
-  )
+  const handleFocus: FocusEventHandler = useCallback(event => {
+    const route =
+      event.target.getAttribute('href') ||
+      event.target.getAttribute('data-href') ||
+      ''
+    setFocused(route)
+  }, [])
 
   return (
     <ul className={cn(classes.list, className)}>
@@ -487,32 +482,28 @@ export function Sidebar({ toc }: SidebarProps): ReactElement {
           asPopover ? 'md:_hidden' : 'md:_sticky md:_self-start'
         )}
       >
-        <FocusedItemContext.Provider value={focused}>
-          <OnFocusItemContext.Provider value={setFocused}>
-            <div
-              className={cn(
-                classes.wrapper,
-                showSidebar ? 'nextra-scrollbar' : 'no-scrollbar'
-              )}
-              ref={sidebarRef}
-            >
-              {/* without asPopover check <Collapse />'s inner.clientWidth on `layout: "raw"` will be 0 and element will not have width on initial loading */}
-              {(!asPopover || !showSidebar) && (
-                <Collapse isOpen={showSidebar} horizontal>
-                  <Menu
-                    className="nextra-menu-desktop"
-                    // The sidebar menu, shows only the docs directories.
-                    directories={docsDirectories}
-                    // When the viewport size is larger than `md`, hide the anchors in
-                    // the sidebar when `floatTOC` is enabled.
-                    anchors={themeConfig.toc.float ? [] : anchors}
-                    onlyCurrentDocs
-                  />
-                </Collapse>
-              )}
-            </div>
-          </OnFocusItemContext.Provider>
-        </FocusedItemContext.Provider>
+        <div
+          className={cn(
+            classes.wrapper,
+            showSidebar ? 'nextra-scrollbar' : 'no-scrollbar'
+          )}
+          ref={sidebarRef}
+        >
+          {/* without asPopover check <Collapse />'s inner.clientWidth on `layout: "raw"` will be 0 and element will not have width on initial loading */}
+          {(!asPopover || !showSidebar) && (
+            <Collapse isOpen={showSidebar} horizontal>
+              <Menu
+                className="nextra-menu-desktop"
+                // The sidebar menu, shows only the docs directories.
+                directories={docsDirectories}
+                // When the viewport size is larger than `md`, hide the anchors in
+                // the sidebar when `floatTOC` is enabled.
+                anchors={themeConfig.toc.float ? [] : anchors}
+                onlyCurrentDocs
+              />
+            </Collapse>
+          )}
+        </div>
 
         {hasMenu && (
           <div

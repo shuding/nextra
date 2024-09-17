@@ -60,7 +60,6 @@ export const ClientWrapper: MDXWrapper = ({ toc, children, ...props }) => {
         className={cn(
           '_w-full _min-w-0 _break-words _min-h-[calc(100vh-var(--nextra-navbar-height))]',
           '_text-slate-700 dark:_text-slate-200 _pb-8 _px-6 _pt-4 md:_px-12',
-          themeContext.layout !== 'full' && '_max-w-6xl',
           themeContext.typesetting === 'article' &&
             'nextra-body-typesetting-article'
         )}

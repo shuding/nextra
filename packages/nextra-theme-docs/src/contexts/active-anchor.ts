@@ -1,6 +1,4 @@
-'use client'
-
-import type { Dispatch, SetStateAction } from 'react'
+import type { Dispatch } from 'react'
 import { create } from 'zustand'
 import { shallow } from 'zustand/shallow'
 
@@ -17,7 +15,7 @@ type ActiveAnchor = Record<
 const useActiveAnchorStore = create<{
   observer: null | IntersectionObserver
   activeAnchor: ActiveAnchor
-  slugs: WeakMap<any, any>
+  slugs: WeakMap<Element, [slug: string, index: number]>
   actions: {
     setActiveAnchor: Dispatch<(prevState: ActiveAnchor) => ActiveAnchor>
   }
@@ -41,16 +39,15 @@ const useActiveAnchorStore = create<{
           const ret = { ...f }
 
           for (const entry of entries) {
-            if (entry?.rootBounds && slugs.has(entry.target)) {
-              const [slug, index] = slugs.get(entry.target)
+            if (entry.rootBounds && slugs.has(entry.target)) {
+              const [slug, index] = slugs.get(entry.target)!
               const aboveHalfViewport =
                 entry.boundingClientRect.y + entry.boundingClientRect.height <=
                 entry.rootBounds.y + entry.rootBounds.height
-              const insideHalfViewport = entry.intersectionRatio > 0
               ret[slug] = {
                 index,
                 aboveHalfViewport,
-                insideHalfViewport
+                insideHalfViewport: entry.intersectionRatio > 0
               }
             }
           }
