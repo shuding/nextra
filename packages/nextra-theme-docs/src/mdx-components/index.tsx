@@ -4,12 +4,9 @@ import { ArrowRightIcon } from 'nextra/icons'
 import type { MDXComponents } from 'nextra/mdx'
 import { DEFAULT_COMPONENTS } from 'nextra/mdx'
 import { Details } from './details'
-import { H1 } from './h1'
-import { H2, H3, H4, H5, H6 } from './heading'
+import { H1, H2, H3, H4, H5, H6 } from './heading'
 import { Link } from './link'
 import { Wrapper } from './wrapper'
-
-export { Link, H1 }
 
 /* eslint sort-keys: error */
 export function useMDXComponents(components?: any) {
