@@ -15,7 +15,6 @@ type ActiveAnchor = Record<
 const useActiveAnchorStore = createWithEqualityFn<{
   observer: null | IntersectionObserver
   activeAnchor: ActiveAnchor
-  slugs: WeakMap<Element, [slug: string, index: number]>
   actions: {
     setActiveAnchor: Dispatch<(prevState: ActiveAnchor) => ActiveAnchor>
   }
@@ -28,27 +27,27 @@ const useActiveAnchorStore = createWithEqualityFn<{
       '--nextra-navbar-height'
     )
 
-    const {
-      actions: { setActiveAnchor },
-      slugs
-    } = get()
+    const { setActiveAnchor } = get().actions
 
     return new IntersectionObserver(
       entries => {
         setActiveAnchor(f => {
           const ret = { ...f }
 
-          for (const entry of entries) {
-            if (entry.rootBounds && slugs.has(entry.target)) {
-              const [slug, index] = slugs.get(entry.target)!
-              const aboveHalfViewport =
-                entry.boundingClientRect.y + entry.boundingClientRect.height <=
-                entry.rootBounds.y + entry.rootBounds.height
-              ret[slug] = {
-                index,
-                aboveHalfViewport,
-                insideHalfViewport: entry.intersectionRatio > 0
-              }
+          for (const [index, entry] of entries.entries()) {
+            if (!entry.rootBounds) continue
+
+            const slug = (entry.target as HTMLAnchorElement).hash.slice(1)
+
+            const aboveHalfViewport =
+              entry.boundingClientRect.y + entry.boundingClientRect.height <=
+              entry.rootBounds.y + entry.rootBounds.height
+
+            ret[slug] = {
+              // Use initial index, since entries array will be changed after mount
+              index: ret[slug]?.index ?? index,
+              aboveHalfViewport,
+              insideHalfViewport: entry.intersectionRatio > 0
             }
           }
 
@@ -99,8 +98,7 @@ export const useActiveAnchor = () =>
   useActiveAnchorStore(
     state => ({
       activeAnchor: state.activeAnchor,
-      observer: state.observer,
-      slugs: state.slugs
+      observer: state.observer
     }),
     shallow
   )

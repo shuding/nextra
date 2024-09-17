@@ -6,10 +6,7 @@ import { useEffect, useRef } from 'react'
 import { useActiveAnchor, useActiveAnchorActions } from '../contexts'
 
 // Anchor links
-const createHeading = (
-  Tag: `h${2 | 3 | 4 | 5 | 6}`,
-  context: { index: number }
-) =>
+const createHeading = (Tag: `h${2 | 3 | 4 | 5 | 6}`) =>
   function Heading({
     children,
     id,
@@ -17,25 +14,23 @@ const createHeading = (
     ...props
   }: ComponentProps<'h2'>): ReactElement {
     const { setActiveAnchor } = useActiveAnchorActions()
-    const { slugs, observer } = useActiveAnchor()
+    const { observer } = useActiveAnchor()
     const obRef = useRef<HTMLAnchorElement>(null)
 
     useEffect(() => {
-      const heading = obRef.current
-      if (!id || !observer || !heading) return
-      observer.observe(heading)
-      slugs.set(heading, [id, (context.index += 1)])
+      const anchor = obRef.current
+      if (!id || !observer || !anchor) return
+      observer.observe(anchor)
 
       return () => {
         observer.disconnect()
-        slugs.delete(heading)
         setActiveAnchor(f => {
           const ret = { ...f }
           delete ret[id]
           return ret
         })
       }
-    }, [id, slugs, observer, setActiveAnchor])
+    }, [id, observer, setActiveAnchor])
 
     return (
       <Tag
@@ -70,10 +65,8 @@ const createHeading = (
     )
   }
 
-const context = { index: 0 }
-
-export const H2 = createHeading('h2', context)
-export const H3 = createHeading('h3', context)
-export const H4 = createHeading('h4', context)
-export const H5 = createHeading('h5', context)
-export const H6 = createHeading('h6', context)
+export const H2 = createHeading('h2')
+export const H3 = createHeading('h3')
+export const H4 = createHeading('h4')
+export const H5 = createHeading('h5')
+export const H6 = createHeading('h6')
