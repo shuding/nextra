@@ -1,11 +1,7 @@
-'use client'
-
 import cn from 'clsx'
 import type { ComponentProps, ReactElement } from 'react'
-import { useEffect, useRef } from 'react'
-import { useActiveAnchor, useActiveAnchorActions } from '../contexts'
+import { HeadingAnchor } from './heading-anchor'
 
-// Anchor links
 const createHeading = (Tag: `h${2 | 3 | 4 | 5 | 6}`) =>
   function Heading({
     children,
@@ -13,25 +9,6 @@ const createHeading = (Tag: `h${2 | 3 | 4 | 5 | 6}`) =>
     className,
     ...props
   }: ComponentProps<'h2'>): ReactElement {
-    const { setActiveAnchor } = useActiveAnchorActions()
-    const { observer } = useActiveAnchor()
-    const obRef = useRef<HTMLAnchorElement>(null)
-
-    useEffect(() => {
-      const anchor = obRef.current
-      if (!id || !observer || !anchor) return
-      observer.observe(anchor)
-
-      return () => {
-        observer.disconnect()
-        setActiveAnchor(f => {
-          const ret = { ...f }
-          delete ret[id]
-          return ret
-        })
-      }
-    }, [id, observer, setActiveAnchor])
-
     return (
       <Tag
         id={id}
@@ -53,14 +30,7 @@ const createHeading = (Tag: `h${2 | 3 | 4 | 5 | 6}`) =>
         {...props}
       >
         {children}
-        {id && (
-          <a
-            href={`#${id}`}
-            className="nextra-focus subheading-anchor"
-            aria-label="Permalink for this section"
-            ref={obRef}
-          />
-        )}
+        {id && <HeadingAnchor id={id} />}
       </Tag>
     )
   }
