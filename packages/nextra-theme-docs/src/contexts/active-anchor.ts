@@ -23,53 +23,43 @@ const useActiveAnchorStore = createWithEqualityFn<{
     if (typeof window === 'undefined') {
       return null
     }
-    const { setActiveAnchor } = get().actions
 
     const callback: IntersectionObserverCallback = entries => {
-      setActiveAnchor(f => {
-        const ret = { ...f }
+      const ret = { ...get().activeAnchor }
 
-        for (const [index, entry] of entries.entries()) {
-          if (!entry.rootBounds) continue
+      for (const [index, entry] of entries.entries()) {
+        if (!entry.rootBounds) continue
 
-          const slug = (entry.target as HTMLAnchorElement).hash.slice(1)
+        const slug = (entry.target as HTMLAnchorElement).hash.slice(1)
 
-          const aboveHalfViewport =
-            entry.boundingClientRect.y + entry.boundingClientRect.height <=
-            entry.rootBounds.y + entry.rootBounds.height
+        const aboveHalfViewport =
+          entry.boundingClientRect.y + entry.boundingClientRect.height <=
+          entry.rootBounds.y + entry.rootBounds.height
 
-          ret[slug] = {
-            // Use initial index, since entries array will be changed after mount
-            index: ret[slug]?.index ?? index,
-            aboveHalfViewport,
-            insideHalfViewport: entry.intersectionRatio > 0
-          }
+        ret[slug] = {
+          // Use initial index, since entries array will be changed after mount
+          index: ret[slug]?.index ?? index,
+          aboveHalfViewport,
+          insideHalfViewport: entry.intersectionRatio > 0
         }
+      }
 
-        let [activeSlug] = Object.keys(ret)
-        let smallestIndexInViewport = Infinity
-        let largestIndexAboveViewport = -1
+      let [activeSlug] = Object.keys(ret)
+      let smallestIndexInViewport = Infinity
+      let largestIndexAboveViewport = -1
 
-        for (const [slug, entry] of Object.entries(ret)) {
-          const idx = entry.index
-          if (
-            smallestIndexInViewport === Infinity &&
-            entry.aboveHalfViewport &&
-            idx > largestIndexAboveViewport
-          ) {
-            largestIndexAboveViewport = idx
-            activeSlug = slug
-          } else if (
-            entry.insideHalfViewport &&
-            idx < smallestIndexInViewport
-          ) {
-            smallestIndexInViewport = idx
-            activeSlug = slug
-          }
+      for (const [slug, entry] of Object.entries(ret)) {
+        const idx = entry.index
+        if (entry.aboveHalfViewport && idx > largestIndexAboveViewport) {
+          largestIndexAboveViewport = idx
+          activeSlug = slug
+        } else if (entry.insideHalfViewport && idx < smallestIndexInViewport) {
+          smallestIndexInViewport = idx
+          activeSlug = slug
         }
-        set({ activeSlug })
-        return ret
-      })
+      }
+      set({ activeSlug })
+      return ret
     }
 
     const navbarHeight = getComputedStyle(document.body).getPropertyValue(
