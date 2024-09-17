@@ -1,4 +1,4 @@
-import type { Dispatch, SetStateAction } from 'react'
+import type { Dispatch } from 'react'
 import { create } from 'zustand'
 
 const useFocusedRouteStore = create<{
