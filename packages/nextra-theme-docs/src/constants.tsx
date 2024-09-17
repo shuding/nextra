@@ -1,6 +1,6 @@
 /* eslint sort-keys: error */
-import { useRouter } from 'next/router'
-import { DiscordIcon, GitHubIcon } from 'nextra/icons'
+import { useRouter } from 'nextra/hooks'
+import { ArrowRightIcon, DiscordIcon, GitHubIcon } from 'nextra/icons'
 import { isValidElement } from 'react'
 import type { z } from 'zod'
 import {
@@ -13,7 +13,12 @@ import {
 } from './components'
 import { useConfig, useThemeConfig } from './contexts'
 import type { publicThemeSchema, themeSchema } from './schemas'
-import { getGitIssueUrl, useGitEditUrl } from './utils'
+import {
+  getGitIssueUrl,
+  renderComponent,
+  renderString,
+  useGitEditUrl
+} from './utils'
 
 export const DEFAULT_LOCALE = 'en-US'
 
@@ -38,6 +43,25 @@ export const DEFAULT_THEME: DocsThemeConfig = {
   backgroundColor: {
     dark: '17,17,17',
     light: '250,250,250'
+  },
+  backToTop: {
+    content: function BackToTopContent() {
+      const themeConfig = useThemeConfig()
+      const { locale = '' } = useRouter()
+      return (
+        <>
+          {renderString(themeConfig.backToTop.text, locale)}
+          {renderComponent(themeConfig.backToTop.icon)}
+        </>
+      )
+    },
+    text: 'Scroll to top',
+    icon: (
+      <ArrowRightIcon
+        height="16"
+        className="_-rotate-90 _border _rounded-full _border-current"
+      />
+    )
   },
   banner: {
     dismissible: true,
@@ -194,7 +218,6 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     }
   },
   toc: {
-    backToTop: true,
     component: TOC,
     float: true,
     title: 'On This Page'

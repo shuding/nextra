@@ -27,6 +27,14 @@ export const themeSchema = /* @__PURE__ */ (() =>
       dismissible: z.boolean(),
       key: z.string()
     }),
+    backToTop: z.strictObject({
+      content: z.custom<ReactNode | FC>(...reactNode).optional(),
+      text: z
+        .string()
+        .or(z.function().args(z.string()).returns(z.string()))
+        .optional(),
+      icon: z.custom<ReactNode | FC>(...reactNode).optional()
+    }),
     backgroundColor: z.strictObject({
       dark: z.string(),
       light: z.string()
@@ -126,7 +134,6 @@ export const themeSchema = /* @__PURE__ */ (() =>
       )
     }),
     toc: z.strictObject({
-      backToTop: z.boolean(),
       component: z.custom<ReactNode | FC<TOCProps>>(...reactNode),
       extraContent: z.custom<ReactNode | FC>(...reactNode),
       float: z.boolean(),

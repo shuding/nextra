@@ -62,6 +62,18 @@ const FOOTER_LINK_TEXT = {
 }
 
 const config: DocsThemeConfig = {
+  backToTop: {
+    text: (locale: string) => {
+      switch (locale) {
+        case 'ru':
+          return 'Перейти наверх'
+        case 'es':
+          return 'Desplazarse hacia arriba'
+        default:
+          return 'Scroll to top'
+      }
+    }
+  },
   backgroundColor: {
     dark: '15,23,42',
     light: '254,252,232'
