@@ -233,10 +233,9 @@ function File({
   onFocus: FocusEventHandler
 }): ReactElement {
   const route = useFSRoute()
-
   // It is possible that the item doesn't have any route - for example an external link.
   const active = item.route && [route, route + '/'].includes(item.route + '/')
-  const { activeAnchor } = useActiveAnchor()
+  const { activeSlug } = useActiveAnchor()
   const { setMenu } = useMenuActions()
 
   if (item.type === 'separator') {
@@ -266,7 +265,7 @@ function File({
                 className={cn(
                   classes.link,
                   '_flex _gap-2 before:_opacity-25 before:_content-["#"]',
-                  activeAnchor[id]?.isActive ? classes.active : classes.inactive
+                  id === activeSlug ? classes.active : classes.inactive
                 )}
                 onClick={handleClick}
               >

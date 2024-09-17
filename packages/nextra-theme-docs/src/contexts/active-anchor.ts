@@ -5,9 +5,8 @@ import { createWithEqualityFn } from 'zustand/traditional'
 type ActiveAnchor = Record<
   string,
   {
-    isActive?: boolean
-    aboveHalfViewport: boolean
     index: number
+    aboveHalfViewport: boolean
     insideHalfViewport: boolean
   }
 >
@@ -15,6 +14,7 @@ type ActiveAnchor = Record<
 const useActiveAnchorStore = createWithEqualityFn<{
   observer: null | IntersectionObserver
   activeAnchor: ActiveAnchor
+  activeSlug: string,
   actions: {
     setActiveAnchor: Dispatch<(prevState: ActiveAnchor) => ActiveAnchor>
   }
@@ -56,7 +56,6 @@ const useActiveAnchorStore = createWithEqualityFn<{
           let largestIndexAboveViewport = -1
 
           for (const [slug, entry] of Object.entries(ret)) {
-            delete entry.isActive
             if (
               smallestIndexInViewport === Infinity &&
               entry.aboveHalfViewport &&
@@ -72,10 +71,7 @@ const useActiveAnchorStore = createWithEqualityFn<{
               activeSlug = slug
             }
           }
-
-          if (activeSlug) {
-            ret[activeSlug].isActive = true
-          }
+          set({ activeSlug })
           return ret
         })
       },
@@ -86,6 +82,7 @@ const useActiveAnchorStore = createWithEqualityFn<{
     )
   },
   activeAnchor: Object.create(null),
+  activeSlug: '',
   slugs: new WeakMap(),
   actions: {
     setActiveAnchor(fn) {
@@ -99,8 +96,8 @@ const useActiveAnchorStore = createWithEqualityFn<{
 export const useActiveAnchor = () =>
   useActiveAnchorStore(
     state => ({
-      activeAnchor: state.activeAnchor,
-      observer: state.observer
+      observer: state.observer,
+      activeSlug: state.activeSlug
     }),
     shallow
   )
