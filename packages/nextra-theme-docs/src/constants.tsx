@@ -191,14 +191,17 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     loading: function useLoading() {
       const { locale, defaultLocale = DEFAULT_LOCALE } = useRouter()
       const text =
-        (locale && LOADING_LOCALES[locale]) || LOADING_LOCALES[defaultLocale]
-      return <>{text}…</>
+        (locale && LOADING_LOCALES[locale]) ||
+        LOADING_LOCALES[defaultLocale] ||
+        LOADING_LOCALES[DEFAULT_LOCALE]
+      return `${text}…`
     },
     placeholder: function usePlaceholder() {
       const { locale, defaultLocale = DEFAULT_LOCALE } = useRouter()
       const text =
         (locale && PLACEHOLDER_LOCALES[locale]) ||
-        PLACEHOLDER_LOCALES[defaultLocale]
+        PLACEHOLDER_LOCALES[defaultLocale] ||
+        PLACEHOLDER_LOCALES[DEFAULT_LOCALE]
       return `${text}…`
     }
   },
