@@ -7,12 +7,11 @@ import { useActiveAnchor, useActiveAnchorActions } from '../contexts'
 export const HeadingAnchor: FC<{ id: string }> = ({ id }) => {
   const { setActiveAnchor } = useActiveAnchorActions()
   const { observer } = useActiveAnchor()
-  const anchorRef = useRef<HTMLAnchorElement>(null)
+  const anchorRef = useRef<HTMLAnchorElement>(null!)
 
   useEffect(() => {
-    const anchor = anchorRef.current
-    if (!id || !observer || !anchor) return
-    observer.observe(anchor)
+    if (!observer) return
+    observer.observe(anchorRef.current)
 
     return () => {
       observer.disconnect()
@@ -22,7 +21,7 @@ export const HeadingAnchor: FC<{ id: string }> = ({ id }) => {
         return ret
       })
     }
-  }, [id, observer, setActiveAnchor])
+  }, [observer, setActiveAnchor])
 
   return (
     <a
