@@ -12,6 +12,5 @@ export {
   Navbar,
   ThemeSwitch,
   LocaleSwitch,
-  Head,
   Footer
 } from './components'
