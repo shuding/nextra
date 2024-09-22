@@ -1,5 +1,11 @@
 # nextra
 
+## 3.0.0-alpha.41
+
+### Patch Changes
+
+- 237c345: Make React 18 as minimal requirement
+
 ## 3.0.0-alpha.40
 
 ### Patch Changes

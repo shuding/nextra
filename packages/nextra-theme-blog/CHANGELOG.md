@@ -1,5 +1,13 @@
 # nextra-theme-blog
 
+## 3.0.0-alpha.41
+
+### Patch Changes
+
+- 237c345: Make React 18 as minimal requirement
+- Updated dependencies [237c345]
+  - nextra@3.0.0-alpha.41
+
 ## 3.0.0-alpha.40
 
 ### Patch Changes
