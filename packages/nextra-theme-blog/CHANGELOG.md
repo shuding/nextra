@@ -1,5 +1,21 @@
 # nextra-theme-blog
 
+## 4.0.0-app-router.2
+
+### Major Changes
+
+- 8ef0f58: move `<Head>` component in `nextra/components`
+
+### Minor Changes
+
+- 8ef0f58: add `nextThemes` prop in `<Layout>` component
+
+### Patch Changes
+
+- Updated dependencies [215aa08]
+- Updated dependencies [8ef0f58]
+  - nextra@4.0.0-app-router.2
+
 ## 4.0.0-app-router.1
 
 ### Major Changes

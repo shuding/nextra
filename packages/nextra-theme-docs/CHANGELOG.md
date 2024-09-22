@@ -1,5 +1,35 @@
 # nextra-theme-docs
 
+## 4.0.0-app-router.2
+
+### Major Changes
+
+- 215aa08: fix focusing on first search result item
+- 1c83931: remove `navbar` and `footer` props, pass `<Navbar>` and `<Footer>` as
+  children of `<Layout>`
+- 724f851: migrate from react context to zustand
+- 8ef0f58: move `<Head>` component in `nextra/components`
+- ee4a467: remove `feedback.useLink` and `editLink.component` option, remove
+  `themeConfig` prop on `<Layout>` component
+
+  change `gitTimestamp` option to boolean
+
+  remove `nextraCofig.transform` option
+
+- 62f1553: support `<Head>`'s `backgroundColor.dark/light` props colors in
+  `rgb(...,...,...)` and `#RRGGBB` formats
+
+### Minor Changes
+
+- 8f90ed5: refactor `useMenuActions` to `setMenu`, `useFocusedRouteActions` to
+  `setFocusedRoute`
+
+### Patch Changes
+
+- Updated dependencies [215aa08]
+- Updated dependencies [8ef0f58]
+  - nextra@4.0.0-app-router.2
+
 ## 4.0.0-app-router.1
 
 ### Major Changes
