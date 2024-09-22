@@ -1,4 +1,5 @@
 import { ThemeProvider } from 'next-themes'
+import type { ThemeProviderProps } from 'next-themes/dist/types'
 import type { ReactElement, ReactNode } from 'react'
 
 export function Footer({
@@ -13,9 +14,20 @@ export function Footer({
   )
 }
 
-export function Layout({ children }: { children: ReactNode }): ReactElement {
+export function Layout({
+  children,
+  nextThemes
+}: {
+  children: ReactNode
+  nextThemes: Omit<ThemeProviderProps, 'children'>
+}): ReactElement {
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="system"
+      enableSystem
+      {...nextThemes}
+    >
       <article
         className="_container _px-4 _prose max-md:_prose-sm dark:_prose-invert"
         dir="ltr"

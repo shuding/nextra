@@ -1,5 +1,5 @@
-import { Footer, Head, Layout, Navbar, ThemeSwitch } from 'nextra-theme-blog'
-import { Banner, Search } from 'nextra/components'
+import { Footer, Layout, Navbar, ThemeSwitch } from 'nextra-theme-blog'
+import { Banner, Head, Search } from 'nextra/components'
 import 'nextra-theme-blog/style.css'
 
 export const metadata = {
@@ -9,12 +9,7 @@ export const metadata = {
 export default async function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <Head
-        backgroundColor={{
-          dark: '15,23,42',
-          light: '254,252,232'
-        }}
-      />
+      <Head backgroundColor={{ dark: '#0f172a', light: '#fefce8' }} />
       <body>
         <Banner storageKey="4.0-release">
           <a href="https://nextra.site" target="_blank" rel="noreferrer">

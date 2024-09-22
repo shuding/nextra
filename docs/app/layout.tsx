@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next'
-import { Footer, Head, Layout, Navbar } from 'nextra-theme-docs'
-import { Banner } from 'nextra/components'
+import { Footer, Layout, Navbar } from 'nextra-theme-docs'
+import { Banner, Head } from 'nextra/components'
 import type { ReactNode } from 'react'
 import './globals.css'
 import { NextraLogo, VercelLogo } from '@components/icons'

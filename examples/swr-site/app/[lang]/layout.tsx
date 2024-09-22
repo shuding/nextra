@@ -1,8 +1,8 @@
 /* eslint-env node */
 import { SwrIcon, VercelIcon } from '@app/_icons'
 import type { Metadata } from 'next'
-import { Footer, Head, Layout, LocaleSwitch, Navbar } from 'nextra-theme-docs'
-import { Banner } from 'nextra/components'
+import { Footer, Layout, LocaleSwitch, Navbar } from 'nextra-theme-docs'
+import { Banner, Head } from 'nextra/components'
 import { getDictionary, getDirection } from '../_dictionaries/get-dictionary'
 import './styles.css'
 import '../_components/features.css'
