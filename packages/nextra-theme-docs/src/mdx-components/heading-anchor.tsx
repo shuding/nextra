@@ -2,17 +2,37 @@
 
 import { useEffect, useRef } from 'react'
 import type { FC } from 'react'
-import { useActiveAnchorActions } from '../stores'
+import { setActiveSlug } from '../stores'
+
+const cb: IntersectionObserverCallback = entries => {
+  const entry = entries.find(entry => entry.isIntersecting)
+
+  if (entry) {
+    const slug = (entry.target as HTMLAnchorElement).hash.slice(1)
+    setActiveSlug(slug)
+  }
+}
+
+const observer: IntersectionObserver =
+  typeof window === 'undefined'
+    ? null!
+    : new IntersectionObserver(cb, {
+        rootMargin: `-${getComputedStyle(document.body).getPropertyValue(
+          '--nextra-navbar-height'
+        )} 0% -80%`,
+        threshold: [0, 1]
+      })
 
 export const HeadingAnchor: FC<{ id: string }> = ({ id }) => {
-  const { observeAnchor } = useActiveAnchorActions()
   const anchorRef = useRef<HTMLAnchorElement>(null!)
 
-  useEffect(
-    () => observeAnchor(anchorRef.current),
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- only on mount
-    []
-  )
+  useEffect(() => {
+    const el = anchorRef.current
+    observer.observe(el)
+    return () => {
+      observer.unobserve(el)
+    }
+  }, [])
 
   return (
     <a

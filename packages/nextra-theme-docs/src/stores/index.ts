@@ -1,4 +1,4 @@
-export { useActiveAnchor, useActiveAnchorActions } from './active-anchor'
+export { useActiveAnchor, setActiveSlug } from './active-anchor'
 export { useConfig, ConfigProvider } from './config'
 export { useFocusedRoute, useFocusedRouteActions } from './focused-route'
 export { useMenu, useMenuActions } from './menu'
