@@ -1,5 +1,12 @@
 # nextra
 
+## 4.0.0-app-router.2
+
+### Major Changes
+
+- 215aa08: fix focusing on first search result item
+- 8ef0f58: move `<Head>` component in `nextra/components`
+
 ## 4.0.0-app-router.1
 
 ### Major Changes
