@@ -19,8 +19,7 @@ const observer: IntersectionObserver =
     : new IntersectionObserver(cb, {
         rootMargin: `-${getComputedStyle(document.body).getPropertyValue(
           '--nextra-navbar-height'
-        )} 0% -80%`,
-        threshold: [0, 1]
+        )} 0% -80%`
       })
 
 export const HeadingAnchor: FC<{ id: string }> = ({ id }) => {
