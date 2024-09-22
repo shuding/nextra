@@ -14,11 +14,10 @@ const observer: IntersectionObserver =
   typeof window === 'undefined'
     ? null!
     : new IntersectionObserver(cb, {
-        // root: document.querySelector('.nextra-toc + article'),
-        // Can be null if error is thrown from app somewhere
         rootMargin: `-${getComputedStyle(document.body).getPropertyValue(
           '--nextra-navbar-height'
-        )} 0% -80%`
+        )} 0% -80%`,
+        threshold: [0, 1]
       })
 
 const useActiveAnchorStore = create<{
