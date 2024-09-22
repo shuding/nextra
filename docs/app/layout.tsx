@@ -58,20 +58,25 @@ export default async function RootLayout({
   const { pageMap } = await import('.next/static/chunks/nextra-page-map-.mjs')
 
   return (
-    <html lang="en" dir="ltr">
+    <html lang="en" dir="ltr" suppressHydrationWarning>
       <Head />
       <body>
-        <Banner storageKey="4.0-release">
-          <a href="https://nextra.site" target="_blank" rel="noreferrer">
-            🎉 Nextra 4.0 is released. Read more →
-          </a>
-        </Banner>
         <Layout
           pageMap={pageMap}
           docsRepositoryBase="https://github.com/shuding/nextra/tree/main/docs"
           editLink={{ content: 'Edit this page on GitHub →' }}
           sidebar={{ defaultMenuCollapseLevel: 1 }}
         >
+          <Banner storageKey="4.0-release">
+            <a
+              href="https://nextra.site"
+              target="_blank"
+              rel="noreferrer"
+              className="nextra-focus"
+            >
+              🎉 Nextra 4.0 is released. Read more →
+            </a>
+          </Banner>
           <Navbar
             logo={<NextraLogo className="nextra-logo h-5" />}
             projectLink="https://github.com/shuding/nextra"

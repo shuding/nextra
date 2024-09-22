@@ -1,6 +1,6 @@
 'use client'
 
-import { useConfig, useThemeConfig } from '../../contexts'
+import { useConfig, useThemeConfig } from '../../stores'
 import { LocaleSwitch } from '../locale-switch'
 import { ThemeSwitch } from '../theme-switch'
 

@@ -1,16 +1,12 @@
 /* eslint sort-keys: error */
 import { ThemeProvider } from 'next-themes'
 import { Search } from 'nextra/components'
-import type { ReactElement, ReactNode } from 'react'
+import type { FC, ReactElement, ReactNode } from 'react'
 import { Children, isValidElement } from 'react'
 import { z } from 'zod'
 import { fromZodError } from 'zod-validation-error'
-import { Footer, MobileNav, Navbar } from './components'
-import {
-  ActiveAnchorProvider,
-  ConfigProvider,
-  ThemeConfigProvider
-} from './contexts'
+import { Footer, Navbar, SkipNavLink } from './components'
+import { ConfigProvider, ThemeConfigProvider } from './stores'
 
 const element = z.custom<ReactElement>(isValidElement, {
   message: 'Must be React.ReactElement'
@@ -104,49 +100,33 @@ type Props = Partial<
   children: ReactNode
 }
 
-export function Layout({ children, ...themeConfig }: Props): ReactElement {
-  const { footer, navbar, restChildren } = Children.toArray(children).reduce<{
-    footer: ReactElement
-    navbar: ReactElement
-    restChildren: ReactElement[]
-  }>(
-    (acc, child) => {
-      if (
-        child &&
-        typeof child === 'object' &&
-        'type' in child &&
-        typeof child.type === 'function'
-      ) {
-        if (child.type === Footer) {
-          acc.footer = child
-        } else if (child.type === Navbar) {
-          acc.navbar = child
-        } else {
-          acc.restChildren.push(child)
-        }
-      }
-      return acc
-    },
-    {
-      footer: <Footer>MIT {new Date().getFullYear()} © Nextra.</Footer>,
-      navbar: <Navbar />,
-      restChildren: []
-    }
-  )
+const hasTypeOf = (child: unknown, ComponentOf: FC) =>
+  child &&
+  typeof child === 'object' &&
+  'type' in child &&
+  child.type === ComponentOf
 
+export function Layout({ children, ...themeConfig }: Props): ReactElement {
   const { data, error } = theme.safeParse(themeConfig)
   if (error) {
     throw fromZodError(error)
   }
 
+  const newChildren = Children.toArray(children)
+
+  if (!newChildren.some(child => hasTypeOf(child, Navbar))) {
+    newChildren.unshift(<Navbar />)
+  }
+  if (!newChildren.some(child => hasTypeOf(child, Footer))) {
+    newChildren.push(<Footer>MIT {new Date().getFullYear()} © Nextra.</Footer>)
+  }
+
   return (
     <ThemeConfigProvider value={data}>
       <ThemeProvider {...data.nextThemes}>
-        <ConfigProvider pageMap={data.pageMap} footer={footer} navbar={navbar}>
-          <ActiveAnchorProvider>
-            <MobileNav />
-            {restChildren}
-          </ActiveAnchorProvider>
+        <ConfigProvider pageMap={data.pageMap}>
+          <SkipNavLink />
+          {newChildren}
         </ConfigProvider>
       </ThemeProvider>
     </ThemeConfigProvider>

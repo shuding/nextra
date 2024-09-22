@@ -4,7 +4,7 @@ import { useTheme } from 'next-themes'
 import { useMounted } from 'nextra/hooks'
 import { MoonIcon, SunIcon } from 'nextra/icons'
 import type { ReactElement } from 'react'
-import { useThemeConfig } from '../contexts'
+import { useThemeConfig } from '../stores'
 import { Select } from './select'
 
 type ThemeSwitchProps = {

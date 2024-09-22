@@ -8,7 +8,7 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <Head
         backgroundColor={{
           dark: '15,23,42',

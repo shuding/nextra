@@ -3,10 +3,10 @@ import { useMemo } from 'react'
 
 const defaultLocale = process.env.NEXTRA_DEFAULT_LOCALE
 
-export const useFSRoute = () => {
+export function useFSRoute() {
   const pathname = usePathname()
 
-  const result = useMemo(
+  return useMemo(
     () =>
       (defaultLocale ? '/' + pathname.split('/').slice(2).join('/') : pathname)
         .replace(/\.html$/, '')
@@ -14,6 +14,4 @@ export const useFSRoute = () => {
         .replace(/\/$/, '') || '/',
     [pathname]
   )
-
-  return result
 }

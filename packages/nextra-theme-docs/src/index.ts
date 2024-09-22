@@ -1,16 +1,15 @@
 import './style.css'
 
 export { useTheme } from 'next-themes'
-export { useThemeConfig, useConfig, useMenu } from './contexts'
-export { useMDXComponents, Link, H1 } from './mdx-components'
+export { useThemeConfig, useConfig, useMenu } from './stores'
+export { useMDXComponents } from './mdx-components'
+export { Link } from './mdx-components/link'
 export { Layout } from './layout'
 export {
   Bleed,
   Collapse,
   NotFoundPage,
   Navbar,
-  SkipNavContent,
-  SkipNavLink,
   ThemeSwitch,
   LocaleSwitch,
   Head,

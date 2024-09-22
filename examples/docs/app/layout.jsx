@@ -30,16 +30,16 @@ export default async function RootLayout({ children }) {
   )
 
   return (
-    <html lang="en" dir="ltr">
+    <html lang="en" dir="ltr" suppressHydrationWarning>
       <Head faviconGlyph="✦" />
       <body>
-        <Banner storageKey="Nextra 2">Nextra 2 Alpha</Banner>
         <Layout
           editLink={{ content: 'Edit this page on GitHub' }}
           docsRepositoryBase="https://github.com/shuding/nextra/blob/core/examples/docs"
           sidebar={{ defaultMenuCollapseLevel: 1 }}
           pageMap={pageMap}
         >
+          <Banner storageKey="Nextra 2">Nextra 2 Alpha</Banner>
           <Navbar
             // Next.js discord server
             chatLink="https://discord.gg/hEM84NMkRv"

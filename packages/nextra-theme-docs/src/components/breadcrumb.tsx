@@ -12,10 +12,7 @@ export function Breadcrumb({
   activePath: Item[]
 }): ReactElement {
   return (
-    <div
-      data-pagefind-ignore="all"
-      className="nextra-breadcrumb _mt-1.5 _flex _items-center _gap-1 _overflow-hidden _text-sm _text-gray-500 dark:_text-gray-400 contrast-more:_text-current"
-    >
+    <div className="nextra-breadcrumb _mt-1.5 _flex _items-center _gap-1 _overflow-hidden _text-sm _text-gray-500 dark:_text-gray-400 contrast-more:_text-current">
       {activePath.map((item, index) => {
         const isLast = index === activePath.length - 1
         const href = isLast

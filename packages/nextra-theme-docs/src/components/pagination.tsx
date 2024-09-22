@@ -4,7 +4,7 @@ import NextLink from 'next/link'
 import { ArrowRightIcon } from 'nextra/icons'
 import type { Item } from 'nextra/normalize-pages'
 import type { ReactElement } from 'react'
-import { useThemeConfig } from '../contexts'
+import { useThemeConfig } from '../stores'
 
 interface NavLinkProps {
   currentIndex: number

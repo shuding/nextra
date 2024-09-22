@@ -6,7 +6,7 @@ import { renderComponent } from 'nextra/components'
 import type { ReactElement } from 'react'
 import { useEffect, useRef } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
-import { useActiveAnchor, useThemeConfig } from '../contexts'
+import { useActiveAnchor, useThemeConfig } from '../stores'
 import { getGitIssueUrl, useGitEditUrl } from '../utils'
 import { Anchor } from './anchor'
 import { BackToTop } from './back-to-top'
@@ -25,7 +25,7 @@ const linkClassName = cn(
 )
 
 export function TOC({ toc, filePath, pageTitle }: TOCProps): ReactElement {
-  const activeAnchor = useActiveAnchor()
+  const activeSlug = useActiveAnchor()
   const tocRef = useRef<HTMLUListElement>(null!)
   const themeConfig = useThemeConfig()
 
@@ -37,9 +37,6 @@ export function TOC({ toc, filePath, pageTitle }: TOCProps): ReactElement {
       themeConfig.toc.backToTop
   )
 
-  const activeSlug = Object.entries(activeAnchor).find(
-    ([, { isActive }]) => isActive
-  )?.[0]
   const activeIndex = toc.findIndex(({ id }) => id === activeSlug)
 
   useEffect(() => {
@@ -67,7 +64,7 @@ export function TOC({ toc, filePath, pageTitle }: TOCProps): ReactElement {
   return (
     <div
       className={cn(
-        'nextra-scrollbar _sticky _top-16 _overflow-y-auto _px-4 _pt-6 _text-sm [hyphens:auto]',
+        'nextra-scrollbar _sticky _top-[--nextra-navbar-height] _overflow-y-auto _px-4 _pt-6 _text-sm [hyphens:auto]',
         '_max-h-[calc(100vh-var(--nextra-navbar-height)-env(safe-area-inset-bottom))] _-me-4'
       )}
     >
@@ -91,7 +88,7 @@ export function TOC({ toc, filePath, pageTitle }: TOCProps): ReactElement {
                       6: '_ms-16'
                     }[depth],
                     '_block _transition-colors _subpixel-antialiased',
-                    activeAnchor[id]?.isActive
+                    id === activeSlug
                       ? '_text-primary-600 contrast-more:!_text-primary-600'
                       : '_text-gray-500 hover:_text-gray-900 dark:_text-gray-400 dark:hover:_text-gray-300',
                     'contrast-more:_text-gray-900 contrast-more:_underline contrast-more:dark:_text-gray-50 _break-words'

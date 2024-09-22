@@ -264,7 +264,7 @@ export async function compileMdx(
             !!mdxContentArgument &&
             mdxContentArgument.openingElement.name.name === 'MDXLayout'
 
-          // const localExports = new Set(['title', 'metadata','useTOC', 'myVar', 'Test'])
+          // const localExports = new Set(['title', 'metadata', 'useTOC'])
           //
           // for (const node of ast.body) {
           //   if (node.type === 'ExportNamedDeclaration') {

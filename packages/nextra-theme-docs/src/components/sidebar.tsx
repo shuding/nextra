@@ -8,45 +8,23 @@ import { useFSRoute } from 'nextra/hooks'
 import { ArrowRightIcon, ExpandIcon } from 'nextra/icons'
 import type { Item, MenuItem, PageItem } from 'nextra/normalize-pages'
 import type { FocusEventHandler, ReactElement } from 'react'
-import {
-  createContext,
-  memo,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-  useState
-} from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import {
   useActiveAnchor,
   useConfig,
+  useFocusedRoute,
+  useFocusedRouteActions,
   useMenu,
+  useMenuActions,
   useThemeConfig
-} from '../contexts'
+} from '../stores'
 import { Anchor } from './anchor'
 import { Collapse } from './collapse'
 import { LocaleSwitch } from './locale-switch'
 import { ThemeSwitch } from './theme-switch'
 
 const TreeState: Record<string, boolean> = Object.create(null)
-
-const FocusedItemContext = createContext('')
-FocusedItemContext.displayName = 'FocusedItem'
-const OnFocusItemContext = createContext<(route: string) => void>(null!)
-OnFocusItemContext.displayName = 'OnFocusItem'
-const FolderLevelContext = createContext(0)
-FolderLevelContext.displayName = 'FolderLevel'
-
-const Folder = memo(function FolderInner(props: FolderProps) {
-  const level = useContext(FolderLevelContext)
-  return (
-    <FolderLevelContext.Provider value={level + 1}>
-      <FolderImpl {...props} />
-    </FolderLevelContext.Provider>
-  )
-})
 
 const classes = {
   link: cn(
@@ -71,7 +49,7 @@ const classes = {
   ),
   aside: cn(
     'nextra-sidebar-container _flex _flex-col',
-    'md:_top-16 md:_shrink-0 motion-reduce:_transform-none [.resizing_&]:_transition-none',
+    'md:_top-[--nextra-navbar-height] md:_shrink-0 motion-reduce:_transform-none [.resizing_&]:_transition-none',
     '_transform-gpu _transition-all _ease-in-out',
     'print:_hidden'
   ),
@@ -90,17 +68,17 @@ type FolderProps = {
   item: PageItem | MenuItem | Item
   anchors: Heading[]
   onFocus: FocusEventHandler
+  level: number
 }
 
-function FolderImpl({ item, anchors, onFocus }: FolderProps): ReactElement {
+function Folder({ item, anchors, onFocus, level }: FolderProps): ReactElement {
   const routeOriginal = useFSRoute()
   const [route] = routeOriginal.split('#')
   const active = [route, route + '/'].includes(item.route + '/')
   const activeRouteInside = active || route.startsWith(item.route + '/')
 
-  const focusedRoute = useContext(FocusedItemContext)
+  const focusedRoute = useFocusedRoute()
   const focusedRouteInside = focusedRoute.startsWith(item.route + '/')
-  const level = useContext(FolderLevelContext)
 
   const { theme } = item as Item
   const themeConfig = useThemeConfig()
@@ -218,6 +196,7 @@ function FolderImpl({ item, anchors, onFocus }: FolderProps): ReactElement {
             directories={item.children}
             base={item.route}
             anchors={anchors}
+            level={level}
           />
         </Collapse>
       )}
@@ -254,11 +233,10 @@ function File({
   onFocus: FocusEventHandler
 }): ReactElement {
   const route = useFSRoute()
-
   // It is possible that the item doesn't have any route - for example an external link.
   const active = item.route && [route, route + '/'].includes(item.route + '/')
-  const activeAnchor = useActiveAnchor()
-  const { setMenu } = useMenu()
+  const activeSlug = useActiveAnchor()
+  const { setMenu } = useMenuActions()
 
   if (item.type === 'separator') {
     return <Separator title={item.title} />
@@ -287,7 +265,7 @@ function File({
                 className={cn(
                   classes.link,
                   '_flex _gap-2 before:_opacity-25 before:_content-["#"]',
-                  activeAnchor[id]?.isActive ? classes.active : classes.inactive
+                  id === activeSlug ? classes.active : classes.inactive
                 )}
                 onClick={handleClick}
               >
@@ -307,15 +285,17 @@ interface MenuProps {
   base?: string
   className?: string
   onlyCurrentDocs?: boolean
+  level: number
 }
 
 function Menu({
   directories,
   anchors,
   className,
-  onlyCurrentDocs
+  onlyCurrentDocs,
+  level
 }: MenuProps): ReactElement {
-  const onFocus = useContext(OnFocusItemContext)
+  const { setFocused } = useFocusedRouteActions()
 
   const handleFocus: FocusEventHandler = useCallback(
     event => {
@@ -323,9 +303,9 @@ function Menu({
         event.target.getAttribute('href') ||
         event.target.getAttribute('data-href') ||
         ''
-      onFocus(route)
+      setFocused(route)
     },
-    [onFocus]
+    [setFocused]
   )
 
   return (
@@ -345,6 +325,7 @@ function Menu({
             item={item}
             anchors={anchors}
             onFocus={handleFocus}
+            level={level + 1}
           />
         )
       })}
@@ -352,13 +333,13 @@ function Menu({
   )
 }
 
-export function MobileNav() {
+export function MobileNav({ toc }: SidebarProps) {
   const {
-    normalizePagesResult: { directories },
-    toc
+    normalizePagesResult: { directories }
   } = useConfig()
 
-  const { menu, setMenu } = useMenu()
+  const menu = useMenu()
+  const { setMenu } = useMenuActions()
 
   const pathname = usePathname()
 
@@ -417,6 +398,7 @@ export function MobileNav() {
             directories={directories}
             // Always show the anchor links on mobile (`md`).
             anchors={anchors}
+            level={0}
           />
         </div>
 
@@ -439,12 +421,15 @@ export function MobileNav() {
   )
 }
 
-export function Sidebar({ toc }: { toc: Heading[] }): ReactElement {
+type SidebarProps = {
+  toc: Heading[]
+}
+
+export function Sidebar({ toc }: SidebarProps): ReactElement {
   const { normalizePagesResult, hideSidebar: asPopover } = useConfig()
   const { docsDirectories, activeThemeContext } = normalizePagesResult
   const includePlaceholder = activeThemeContext.layout === 'default'
 
-  const [focused, setFocused] = useState('')
   const [showSidebar, setSidebar] = useState(true)
   const [showToggleAnimation, setToggleAnimation] = useState(false)
 
@@ -482,32 +467,29 @@ export function Sidebar({ toc }: { toc: Heading[] }): ReactElement {
           asPopover ? 'md:_hidden' : 'md:_sticky md:_self-start'
         )}
       >
-        <FocusedItemContext.Provider value={focused}>
-          <OnFocusItemContext.Provider value={setFocused}>
-            <div
-              className={cn(
-                classes.wrapper,
-                showSidebar ? 'nextra-scrollbar' : 'no-scrollbar'
-              )}
-              ref={sidebarRef}
-            >
-              {/* without asPopover check <Collapse />'s inner.clientWidth on `layout: "raw"` will be 0 and element will not have width on initial loading */}
-              {(!asPopover || !showSidebar) && (
-                <Collapse isOpen={showSidebar} horizontal>
-                  <Menu
-                    className="nextra-menu-desktop"
-                    // The sidebar menu, shows only the docs directories.
-                    directories={docsDirectories}
-                    // When the viewport size is larger than `md`, hide the anchors in
-                    // the sidebar when `floatTOC` is enabled.
-                    anchors={themeConfig.toc.float ? [] : anchors}
-                    onlyCurrentDocs
-                  />
-                </Collapse>
-              )}
-            </div>
-          </OnFocusItemContext.Provider>
-        </FocusedItemContext.Provider>
+        <div
+          className={cn(
+            classes.wrapper,
+            showSidebar ? 'nextra-scrollbar' : 'no-scrollbar'
+          )}
+          ref={sidebarRef}
+        >
+          {/* without asPopover check <Collapse />'s inner.clientWidth on `layout: "raw"` will be 0 and element will not have width on initial loading */}
+          {(!asPopover || !showSidebar) && (
+            <Collapse isOpen={showSidebar} horizontal>
+              <Menu
+                className="nextra-menu-desktop"
+                // The sidebar menu, shows only the docs directories.
+                directories={docsDirectories}
+                // When the viewport size is larger than `md`, hide the anchors in
+                // the sidebar when `floatTOC` is enabled.
+                anchors={themeConfig.toc.float ? [] : anchors}
+                onlyCurrentDocs
+                level={0}
+              />
+            </Collapse>
+          )}
+        </div>
 
         {hasMenu && (
           <div
