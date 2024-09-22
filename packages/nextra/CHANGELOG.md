@@ -14,6 +14,12 @@
   Router, something may be broken, check
   https://github.com/shuding/nextra/tree/v4-v2/examples for the migration guide
 
+## 3.0.0-alpha.40
+
+### Patch Changes
+
+- 982862f: Support for `h2` and `h4` Markdown headings with the Steps component.
+
 ## 3.0.0-alpha.39
 
 ### Major Changes

@@ -24,6 +24,17 @@
 - Updated dependencies [99f34d3]
   - nextra@4.0.0-app-router.0
 
+## 3.0.0-alpha.40
+
+### Patch Changes
+
+- bf963cd: Remove the aria-hidden attribute from scroll-to-top button when it is
+  visible
+- cee94a6: Consider the navbar height when setting the root margin for the
+  active anchor intersection observer
+- Updated dependencies [982862f]
+  - nextra@3.0.0-alpha.40
+
 ## 3.0.0-alpha.39
 
 ### Major Changes
