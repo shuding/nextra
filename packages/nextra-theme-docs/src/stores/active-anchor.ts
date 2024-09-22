@@ -2,8 +2,7 @@ import type { Dispatch } from 'react'
 import { create } from 'zustand'
 
 const cb: IntersectionObserverCallback = entries => {
-  const entry = entries.find(entry => entry.isIntersecting)
-  console.log(entries)
+  const entry = entries.find(entry => entry.isIntersecting) || entries[0]
   const activeSlug = entry
     ? (entry.target as HTMLAnchorElement).hash.slice(1)
     : ''
@@ -17,8 +16,9 @@ const observer: IntersectionObserver =
     : new IntersectionObserver(cb, {
         // root: document.querySelector('.nextra-toc + article'),
         // Can be null if error is thrown from app somewhere
-        rootMargin: `-${document.querySelector('article')?.offsetTop ?? 0}px 0px -80%`,
-        threshold: [0, 1]
+        rootMargin: `-${getComputedStyle(document.body).getPropertyValue(
+          '--nextra-navbar-height'
+        )} 0% -80%`
       })
 
 const useActiveAnchorStore = create<{
