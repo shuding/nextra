@@ -36,7 +36,7 @@
     }
   },
   "devDependencies": {
-    "@next/bundle-analyzer": "^13.4.19",
+    "@next/bundle-analyzer": "^14.2.13",
     "autoprefixer": "^10.4.16",
     "postcss": "^8.4.33",
     "postcss-import": "^16.0.0",
