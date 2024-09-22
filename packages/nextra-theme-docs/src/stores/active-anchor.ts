@@ -2,12 +2,12 @@ import type { Dispatch } from 'react'
 import { create } from 'zustand'
 
 const cb: IntersectionObserverCallback = entries => {
-  const entry = entries.find(entry => entry.isIntersecting) || entries[0]
-  const activeSlug = entry
-    ? (entry.target as HTMLAnchorElement).hash.slice(1)
-    : ''
+  const entry = entries.find(entry => entry.isIntersecting)
 
-  useActiveAnchorStore.setState({ activeSlug })
+  if (entry) {
+    const slug = (entry.target as HTMLAnchorElement).hash.slice(1)
+    useActiveAnchorStore.setState({ activeSlug: slug })
+  }
 }
 
 const observer: IntersectionObserver =
