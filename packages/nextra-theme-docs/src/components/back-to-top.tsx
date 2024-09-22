@@ -26,7 +26,8 @@ export function BackToTop({
 }): ReactElement {
   return (
     <Button
-      aria-hidden="true"
+      // elements with `aria-hidden: true` must not be focusable or contain focusable elements
+      aria-hidden={hidden ? 'true' : undefined}
       onClick={scrollToTop}
       disabled={hidden}
       className={({ disabled }) =>
