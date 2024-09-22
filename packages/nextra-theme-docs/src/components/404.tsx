@@ -3,9 +3,9 @@
 import { usePathname } from 'next/navigation'
 import { useMounted } from 'nextra/hooks'
 import type { ReactElement, ReactNode } from 'react'
-import { useThemeConfig } from '../contexts'
 import { H1 } from '../mdx-components/heading'
 import { Link } from '../mdx-components/link'
+import { useThemeConfig } from '../stores'
 import { getGitIssueUrl } from '../utils'
 
 type NotFoundPageProps = {

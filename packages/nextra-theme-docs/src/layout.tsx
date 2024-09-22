@@ -6,7 +6,7 @@ import { Children, isValidElement } from 'react'
 import { z } from 'zod'
 import { fromZodError } from 'zod-validation-error'
 import { Footer, Navbar, SkipNavLink } from './components'
-import { ConfigProvider, ThemeConfigProvider } from './contexts'
+import { ConfigProvider, ThemeConfigProvider } from './stores'
 
 const element = z.custom<ReactElement>(isValidElement, {
   message: 'Must be React.ReactElement'

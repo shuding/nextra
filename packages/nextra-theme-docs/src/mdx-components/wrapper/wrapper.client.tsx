@@ -3,7 +3,7 @@
 import cn from 'clsx'
 import type { MDXWrapper } from 'nextra'
 import { Breadcrumb, Pagination, TOC } from '../../components'
-import { useConfig, useThemeConfig } from '../../contexts'
+import { useConfig, useThemeConfig } from '../../stores'
 
 export const ClientWrapper: MDXWrapper = ({ toc, children, ...props }) => {
   const { normalizePagesResult } = useConfig()

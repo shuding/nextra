@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react'
 import type { FC } from 'react'
-import { useActiveAnchorActions } from '../contexts'
+import { useActiveAnchorActions } from '../stores'
 
 export const HeadingAnchor: FC<{ id: string }> = ({ id }) => {
   const { observeAnchor } = useActiveAnchorActions()

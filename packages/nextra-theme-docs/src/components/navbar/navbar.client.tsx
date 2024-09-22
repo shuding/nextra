@@ -17,7 +17,7 @@ import {
   useMenu,
   useMenuActions,
   useThemeConfig
-} from '../../contexts'
+} from '../../stores'
 import { Anchor } from '../anchor'
 
 const classes = {

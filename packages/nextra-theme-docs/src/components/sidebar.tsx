@@ -18,7 +18,7 @@ import {
   useMenu,
   useMenuActions,
   useThemeConfig
-} from '../contexts'
+} from '../stores'
 import { Anchor } from './anchor'
 import { Collapse } from './collapse'
 import { LocaleSwitch } from './locale-switch'

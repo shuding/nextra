@@ -1,4 +1,4 @@
-import { useThemeConfig } from '../contexts'
+import { useThemeConfig } from '../stores'
 import { gitUrlParse } from './git-url-parse'
 
 export function useGitEditUrl(filePath = ''): string {
