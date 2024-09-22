@@ -9,7 +9,7 @@ const cb: IntersectionObserverCallback = entries => {
 
   if (entry) {
     const slug = (entry.target as HTMLAnchorElement).hash.slice(1)
-    setActiveSlug(slug)
+    setActiveSlug(decodeURI(slug))
   }
 }
 
