@@ -1,6 +1,6 @@
 /* eslint-env node */
-import { Head, Layout, Navbar } from 'nextra-theme-docs'
-import { Banner } from 'nextra/components'
+import { Layout, Navbar } from 'nextra-theme-docs'
+import { Banner, Head } from 'nextra/components'
 
 export const { viewport } = Head
 
