@@ -3,7 +3,13 @@ import { create } from 'zustand'
 
 const cb: IntersectionObserverCallback = entries => {
   const entry = entries.find(entry => entry.isIntersecting)
-
+  console.log(
+    entries.map(
+      entry =>
+        `${entry.isIntersecting}_${(entry.target as HTMLAnchorElement).hash.slice(1)}`
+    ),
+    entries.filter(entry => entry.isIntersecting)
+  )
   if (entry) {
     const slug = (entry.target as HTMLAnchorElement).hash.slice(1)
     useActiveAnchorStore.setState({ activeSlug: slug })
