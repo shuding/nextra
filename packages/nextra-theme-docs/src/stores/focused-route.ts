@@ -3,20 +3,13 @@ import { create } from 'zustand'
 
 const useFocusedRouteStore = create<{
   focused: string
-  actions: {
-    setFocused: Dispatch<string>
-  }
-}>(set => ({
-  focused: '',
-  actions: {
-    setFocused(focused) {
-      set({ focused })
-    }
-  }
+}>(() => ({
+  focused: ''
 }))
 
 export const useFocusedRoute = () =>
   useFocusedRouteStore(state => state.focused)
 
-export const useFocusedRouteActions = () =>
-  useFocusedRouteStore(state => state.actions)
+export const setFocusedRoute: Dispatch<string> = focused => {
+  useFocusedRouteStore.setState({ focused })
+}

@@ -1,3 +1,4 @@
+import type { Dispatch } from 'react'
 import { create } from 'zustand'
 
 const useActiveAnchorStore = create<{
@@ -9,6 +10,6 @@ const useActiveAnchorStore = create<{
 export const useActiveAnchor = () =>
   useActiveAnchorStore(state => state.activeSlug)
 
-export function setActiveSlug(activeSlug: string) {
+export const setActiveSlug: Dispatch<string> = (activeSlug: string) => {
   useActiveAnchorStore.setState({ activeSlug })
 }

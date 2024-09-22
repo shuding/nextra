@@ -8,15 +8,15 @@ import { useFSRoute } from 'nextra/hooks'
 import { ArrowRightIcon, ExpandIcon } from 'nextra/icons'
 import type { Item, MenuItem, PageItem } from 'nextra/normalize-pages'
 import type { FocusEventHandler, ReactElement } from 'react'
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import {
+  setFocusedRoute,
+  setMenu,
   useActiveAnchor,
   useConfig,
   useFocusedRoute,
-  useFocusedRouteActions,
   useMenu,
-  useMenuActions,
   useThemeConfig
 } from '../stores'
 import { Anchor } from './anchor'
@@ -223,6 +223,10 @@ function Separator({ title }: { title: string }): ReactElement {
   )
 }
 
+const handleClick = () => {
+  setMenu(false)
+}
+
 function File({
   item,
   anchors,
@@ -236,14 +240,9 @@ function File({
   // It is possible that the item doesn't have any route - for example an external link.
   const active = item.route && [route, route + '/'].includes(item.route + '/')
   const activeSlug = useActiveAnchor()
-  const { setMenu } = useMenuActions()
 
   if (item.type === 'separator') {
     return <Separator title={item.title} />
-  }
-
-  const handleClick = () => {
-    setMenu(false)
   }
 
   return (
@@ -288,6 +287,14 @@ interface MenuProps {
   level: number
 }
 
+const handleFocus: FocusEventHandler = event => {
+  const route =
+    event.target.getAttribute('href') ||
+    event.target.getAttribute('data-href') ||
+    ''
+  setFocusedRoute(route)
+}
+
 function Menu({
   directories,
   anchors,
@@ -295,19 +302,6 @@ function Menu({
   onlyCurrentDocs,
   level
 }: MenuProps): ReactElement {
-  const { setFocused } = useFocusedRouteActions()
-
-  const handleFocus: FocusEventHandler = useCallback(
-    event => {
-      const route =
-        event.target.getAttribute('href') ||
-        event.target.getAttribute('data-href') ||
-        ''
-      setFocused(route)
-    },
-    [setFocused]
-  )
-
   return (
     <ul className={cn(classes.list, className)}>
       {directories.map(item => {
@@ -334,18 +328,14 @@ function Menu({
 }
 
 export function MobileNav({ toc }: SidebarProps) {
-  const {
-    normalizePagesResult: { directories }
-  } = useConfig()
+  const { directories } = useConfig().normalizePagesResult
 
   const menu = useMenu()
-  const { setMenu } = useMenuActions()
-
   const pathname = usePathname()
 
   useEffect(() => {
     setMenu(false)
-  }, [pathname, setMenu])
+  }, [pathname])
 
   const anchors = useMemo(() => (toc || []).filter(v => v.depth === 2), [toc])
   const sidebarRef = useRef<HTMLDivElement>(null!)

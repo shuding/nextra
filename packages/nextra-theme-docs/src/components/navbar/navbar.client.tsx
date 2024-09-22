@@ -12,12 +12,7 @@ import { useFSRoute } from 'nextra/hooks'
 import { ArrowRightIcon, MenuIcon } from 'nextra/icons'
 import type { MenuItem, PageItem } from 'nextra/normalize-pages'
 import type { ReactElement, ReactNode } from 'react'
-import {
-  useConfig,
-  useMenu,
-  useMenuActions,
-  useThemeConfig
-} from '../../stores'
+import { setMenu, useConfig, useMenu, useThemeConfig } from '../../stores'
 import { Anchor } from '../anchor'
 
 const classes = {
@@ -117,7 +112,6 @@ export function ClientNavbar({
 
   const activeRoute = useFSRoute()
   const menu = useMenu()
-  const { setMenu } = useMenuActions()
 
   return (
     <>
