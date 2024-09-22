@@ -110,6 +110,7 @@ describe('generatePageMapFromFilepaths()', () => {
         "docs/docs-theme/theme-configuration/page.mdx",
         "docs/guide/_meta.ts",
         "docs/guide/advanced/_meta.ts",
+        "docs/guide/advanced/customize-the-cascade-layers/page.mdx",
         "docs/guide/advanced/latex/page.mdx",
         "docs/guide/advanced/mermaid/page.mdx",
         "docs/guide/advanced/npm2yarn/page.mdx",
@@ -232,6 +233,11 @@ describe('generatePageMapFromFilepaths()', () => {
                 "children": [
                   {
                     "children": [
+                      {
+                        "__pagePath": "docs/guide/advanced/customize-the-cascade-layers/page.mdx",
+                        "name": "customize-the-cascade-layers",
+                        "route": "/docs/guide/advanced/customize-the-cascade-layers",
+                      },
                       {
                         "__pagePath": "docs/guide/advanced/page.mdx",
                         "name": "index",
