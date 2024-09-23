@@ -12,7 +12,7 @@ import {
 } from 'nextra/components'
 import type { UseMDXComponents } from 'nextra/mdx'
 import { DEFAULT_COMPONENTS } from 'nextra/mdx'
-import type { ComponentProps, ReactElement } from 'react'
+import type { ComponentProps, FC } from 'react'
 import { Meta } from './components/meta'
 
 const DATE_REGEX = /^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2})?(:\d{2}\.\d{3}Z)?$/
@@ -21,13 +21,10 @@ const DATE_REGEX_WITH_SLASH = /^\d{4}\/\d{1,2}\/\d{1,2}( \d{1,2}:\d{1,2})?$/
 export const isValidDate = (date: string): boolean =>
   DATE_REGEX.test(date) || DATE_REGEX_WITH_SLASH.test(date)
 
-const createHeading = (Tag: `h${2 | 3 | 4 | 5 | 6}`) =>
-  function HeadingLink({
-    children,
-    id,
-    className,
-    ...props
-  }: ComponentProps<'h2'>): ReactElement {
+const createHeading = (
+  Tag: `h${2 | 3 | 4 | 5 | 6}`
+): FC<ComponentProps<'h2'>> =>
+  function HeadingLink({ children, id, className, ...props }) {
     return (
       <Tag
         id={id}
