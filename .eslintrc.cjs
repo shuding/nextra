@@ -173,7 +173,6 @@ module.exports = {
       settings: {
         tailwindcss: {
           config: 'packages/nextra-theme-blog/tailwind.config.ts',
-          whitelist: ['subheading-']
         }
       },
       rules: {

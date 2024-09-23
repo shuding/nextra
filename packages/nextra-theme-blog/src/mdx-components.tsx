@@ -11,56 +11,46 @@ const DATE_REGEX_WITH_SLASH = /^\d{4}\/\d{1,2}\/\d{1,2}( \d{1,2}:\d{1,2})?$/
 export const isValidDate = (date: string): boolean =>
   DATE_REGEX.test(date) || DATE_REGEX_WITH_SLASH.test(date)
 
-function HeadingLink({
-  tag: Tag,
-  children,
-  id,
-  className,
-  ...props
-}: ComponentProps<'h2'> & { tag: `h${2 | 3 | 4 | 5 | 6}` }): ReactElement {
-  return (
-    <Tag
-      id={id}
-      className={
+const createHeading = (Tag: `h${2 | 3 | 4 | 5 | 6}`) =>
+  function HeadingLink({
+    children,
+    id,
+    className,
+    ...props
+  }: ComponentProps<'h2'>): ReactElement {
+    return (
+      <Tag
+        id={id}
         // can be added by footnotes
-        className === 'sr-only' ? '_sr-only' : `subheading-${Tag}`
-      }
-      {...props}
-    >
-      {children}
-      {id && (
-        <a
-          href={`#${id}`}
-          className="_not-prose subheading-anchor"
-          aria-label="Permalink for this section"
-        />
-      )}
-    </Tag>
-  )
-}
+        className={className === 'sr-only' ? '_sr-only' : ''}
+        {...props}
+      >
+        {children}
+        {id && (
+          <a
+            href={`#${id}`}
+            className="_not-prose subheading-anchor"
+            aria-label="Permalink for this section"
+          />
+        )}
+      </Tag>
+    )
+  }
 
 const EXTERNAL_HREF_REGEX = /^https?:\/\//
 
 export const useMDXComponents: UseMDXComponents = components => ({
   ...DEFAULT_COMPONENTS,
-  h2: props => <HeadingLink tag="h2" {...props} />,
-  h3: props => <HeadingLink tag="h3" {...props} />,
-  h4: props => <HeadingLink tag="h4" {...props} />,
-  h5: props => <HeadingLink tag="h5" {...props} />,
-  h6: props => <HeadingLink tag="h6" {...props} />,
-  a({ children, href = '', ...props }) {
+  h2: createHeading('h2'),
+  h3: createHeading('h3'),
+  h4: createHeading('h4'),
+  h5: createHeading('h5'),
+  h6: createHeading('h6'),
+  a({ href = '', ...props }) {
     if (EXTERNAL_HREF_REGEX.test(href)) {
-      return (
-        <a href={href} target="_blank" rel="noreferrer" {...props}>
-          {children}
-        </a>
-      )
+      return <a href={href} target="_blank" rel="noreferrer" {...props} />
     }
-    return (
-      <Link href={href} {...props}>
-        {children}
-      </Link>
-    )
+    return <Link href={href} {...props} />
   },
   pre: Pre,
   tr: Tr,
