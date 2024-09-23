@@ -4,7 +4,7 @@ import { HeadingAnchor } from './heading-anchor'
 
 const createHeading = (
   Tag: `h${1 | 2 | 3 | 4 | 5 | 6}`
-): FC<ComponentProps<'h1'>> =>
+): FC<ComponentProps<typeof Tag>> =>
   function Heading({ children, id, className, ...props }) {
     const _class = // can be added by footnotes
       className === 'sr-only'

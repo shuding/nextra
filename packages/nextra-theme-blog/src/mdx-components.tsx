@@ -21,10 +21,13 @@ const DATE_REGEX_WITH_SLASH = /^\d{4}\/\d{1,2}\/\d{1,2}( \d{1,2}:\d{1,2})?$/
 export const isValidDate = (date: string): boolean =>
   DATE_REGEX.test(date) || DATE_REGEX_WITH_SLASH.test(date)
 
-const createHeading = (
-  Tag: `h${2 | 3 | 4 | 5 | 6}`
-): FC<ComponentProps<'h2'>> =>
-  function HeadingLink({ children, id, className, ...props }) {
+const createHeading = (Tag: `h${2 | 3 | 4 | 5 | 6}`) =>
+  function HeadingLink({
+    children,
+    id,
+    className,
+    ...props
+  }: ComponentProps<typeof Tag>) {
     return (
       <Tag
         id={id}
