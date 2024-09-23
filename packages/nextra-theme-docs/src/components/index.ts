@@ -1,7 +1,6 @@
 export { Anchor } from './anchor'
 export { Bleed } from './bleed'
 export { Breadcrumb } from './breadcrumb'
-export { Collapse } from './collapse'
 export { Footer } from './footer'
 export { LocaleSwitch } from './locale-switch'
 export { Pagination } from './pagination'

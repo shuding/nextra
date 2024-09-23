@@ -20,7 +20,7 @@ import {
   useThemeConfig
 } from '../stores'
 import { Anchor } from './anchor'
-import { Collapse } from './collapse'
+import { Collapse } from 'nextra/components'
 import { LocaleSwitch } from './locale-switch'
 import { ThemeSwitch } from './theme-switch'
 
