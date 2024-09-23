@@ -1,6 +1,6 @@
 import type { Heading as MDASTHeading } from 'mdast'
 import type { Metadata, NextConfig } from 'next'
-import type { FC, ReactNode } from 'react'
+import type { FC, ReactElement, ReactNode } from 'react'
 import type { z } from 'zod'
 import type { NEXTRA_INTERNAL } from './constants.js'
 import type { mathJaxOptionsSchema, nextraConfigSchema } from './server/schemas'
@@ -54,7 +54,7 @@ export type Page = (MdxFile | Folder<Page>) & {
 
 export type Heading = {
   depth: Exclude<MDASTHeading['depth'], 1>
-  value: string
+  value: string | ReactElement
   id: string
 }
 
