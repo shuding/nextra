@@ -17,7 +17,8 @@ import {
   useConfig,
   useFocusedRoute,
   useMenu,
-  useThemeConfig
+  useThemeConfig,
+  useToc
 } from '../stores'
 import { Anchor } from './anchor'
 import { LocaleSwitch } from './locale-switch'
@@ -326,8 +327,9 @@ function Menu({
   )
 }
 
-export function MobileNav({ toc }: SidebarProps) {
+export function MobileNav() {
   const { directories } = useConfig().normalizePagesResult
+  const toc = useToc()
 
   const menu = useMenu()
   const pathname = usePathname()

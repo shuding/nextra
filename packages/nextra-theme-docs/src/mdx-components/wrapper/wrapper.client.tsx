@@ -2,8 +2,9 @@
 
 import cn from 'clsx'
 import type { MDXWrapper } from 'nextra'
+import { useEffect } from 'react'
 import { Breadcrumb, Pagination, TOC } from '../../components'
-import { useConfig, useThemeConfig } from '../../stores'
+import { setToc, useConfig, useThemeConfig } from '../../stores'
 
 export const ClientWrapper: MDXWrapper = ({ toc, children, ...props }) => {
   const { normalizePagesResult } = useConfig()
@@ -40,6 +41,11 @@ export const ClientWrapper: MDXWrapper = ({ toc, children, ...props }) => {
   ) : (
     <div className="_mt-16" />
   )
+  // we can't update store in server component so doing it in client component
+  useEffect(() => {
+    setToc(toc)
+  }, [toc])
+
   return (
     <>
       {themeContext.layout !== 'full' && (

@@ -55,24 +55,12 @@ body {
     }
   }
 
-  .nextra-banner-container {
-    ~ div .nextra-sidebar-container {
-      @apply _pt-[6.5rem];
-    }
-
-    ~ .nextra-nav-container {
-      @apply _top-10 md:_top-0;
-    }
+  body:not(.nextra-banner-hidden) .nextra-banner-container ~ .nextra-nav-container {
+    @apply _top-10;
   }
-
-  .nextra-banner-hidden {
-    .nextra-banner-container ~ div .nextra-sidebar-container {
-      @apply _pt-[--nextra-navbar-height];
-    }
-
-    .nextra-nav-container {
-      @apply !_top-0;
-    }
+  
+  body:not(.nextra-banner-hidden) .nextra-sidebar-container:has(~ * ~ .nextra-banner-container) {
+    @apply _pt-[6.5rem];
   }
 }
 

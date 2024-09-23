@@ -5,7 +5,7 @@ import type { FC, ReactElement, ReactNode } from 'react'
 import { Children, isValidElement } from 'react'
 import { z } from 'zod'
 import { fromZodError } from 'zod-validation-error'
-import { Footer, Navbar, SkipNavLink } from './components'
+import { Footer, MobileNav, Navbar, SkipNavLink } from './components'
 import { ConfigProvider, ThemeConfigProvider } from './stores'
 
 const element = z.custom<ReactElement>(isValidElement, {
@@ -125,6 +125,8 @@ export function Layout({ children, ...themeConfig }: Props): ReactElement {
     <ThemeConfigProvider value={data}>
       <ThemeProvider {...data.nextThemes}>
         <ConfigProvider pageMap={data.pageMap}>
+          {/* MobileNav should be here, otherwise for non mdx pages will be not rendered */}
+          <MobileNav />
           <SkipNavLink />
           {newChildren}
         </ConfigProvider>
