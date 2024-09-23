@@ -96,17 +96,11 @@ function NavbarMenu({
   )
 }
 
-export type NavbarProps = {
-  children?: ReactNode
-  project?: ReactNode
-  chat?: ReactNode
-}
-
 export function ClientNavbar({
-  children,
-  project,
-  chat
-}: NavbarProps): ReactElement {
+  children
+}: {
+  children?: ReactNode
+}): ReactElement {
   const items = useConfig().normalizePagesResult.topLevelNavbarItems
   const themeConfig = useThemeConfig()
 
@@ -156,9 +150,6 @@ export function ClientNavbar({
         )
       })}
       <div className="max-md:_hidden">{themeConfig.search}</div>
-
-      {project}
-      {chat}
 
       {children}
 

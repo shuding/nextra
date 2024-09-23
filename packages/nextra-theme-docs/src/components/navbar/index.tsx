@@ -41,17 +41,6 @@ export function Navbar({
     </>
   )
 }: NavbarProps): ReactElement {
-  const project = projectLink ? (
-    <Anchor href={projectLink} newWindow>
-      {projectIcon}
-    </Anchor>
-  ) : null
-  const chat = chatLink ? (
-    <Anchor href={chatLink} newWindow>
-      {chatIcon}
-    </Anchor>
-  ) : null
-
   return (
     <header className="nextra-nav-container _sticky _top-0 _z-20 _w-full _bg-transparent print:_hidden">
       <div className="nextra-nav-container-blur" />
@@ -66,7 +55,17 @@ export function Navbar({
         ) : (
           <div className="_flex _items-center _me-auto">{logo}</div>
         )}
-        <ClientNavbar project={project} chat={chat}>
+        <ClientNavbar>
+          {projectLink && (
+            <Anchor href={projectLink} newWindow>
+              {projectIcon}
+            </Anchor>
+          )}
+          {chatLink && (
+            <Anchor href={chatLink} newWindow>
+              {chatIcon}
+            </Anchor>
+          )}
           {children}
         </ClientNavbar>
       </nav>
