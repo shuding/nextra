@@ -1,6 +1,7 @@
 'use client'
 
 import { useTheme } from 'next-themes'
+import { Button } from 'nextra/components'
 import { useMounted } from 'nextra/hooks'
 import { MoonIcon, SunIcon } from 'nextra/icons'
 
@@ -17,16 +18,12 @@ export function ThemeSwitch() {
   const IconToUse = mounted && isDark ? MoonIcon : SunIcon
 
   return (
-    <button
+    <Button
       aria-label="Toggle Dark Mode"
       className="_p-2"
-      tabIndex={0}
       onClick={toggleTheme}
-      onKeyDown={e => {
-        if (e.key === 'Enter') toggleTheme()
-      }}
     >
       <IconToUse height="14" />
-    </button>
+    </Button>
   )
 }
