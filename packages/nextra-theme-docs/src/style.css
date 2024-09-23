@@ -92,18 +92,6 @@ body {
   }
 }
 
-.nextra-sidebar-container {
-  [data-toggle-animation='show'] button {
-    opacity: 0;
-    animation: nextra-fadein 1s ease 0.2s forwards;
-  }
-
-  [data-toggle-animation='hide'] button {
-    opacity: 0;
-    animation: nextra-fadein2 1s ease 0.2s forwards;
-  }
-}
-
 .footnotes a[data-footnote-backref] {
   font-family: initial;
 }

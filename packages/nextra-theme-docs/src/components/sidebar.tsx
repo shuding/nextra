@@ -416,14 +416,13 @@ type SidebarProps = {
 
 export function Sidebar({ toc }: SidebarProps): ReactElement {
   const { normalizePagesResult, hideSidebar: asPopover } = useConfig()
-  const { docsDirectories, activeThemeContext } = normalizePagesResult
-  const includePlaceholder = activeThemeContext.layout === 'default'
-
   const [showSidebar, setSidebar] = useState(true)
   const [showToggleAnimation, setToggleAnimation] = useState(false)
-
-  const anchors = useMemo(() => toc.filter(v => v.depth === 2), [toc])
   const sidebarRef = useRef<HTMLDivElement>(null)
+  const anchors = useMemo(() => toc.filter(v => v.depth === 2), [toc])
+
+  const { docsDirectories, activeThemeContext } = normalizePagesResult
+  const includePlaceholder = activeThemeContext.layout === 'default'
 
   useEffect(() => {
     const activeElement = sidebarRef.current?.querySelector('li.active')
@@ -486,11 +485,14 @@ export function Sidebar({ toc }: SidebarProps): ReactElement {
               classes.bottomMenu,
               showSidebar
                 ? [hasI18n && '_justify-end', '_border-t']
-                : '_py-4 _flex-wrap _justify-center'
+                : '_py-4 _flex-wrap _justify-center',
+              showToggleAnimation && [
+                '[&_button]:_opacity-0',
+                showSidebar
+                  ? '[&_button]:_animate-[nextra-fadein_1s_ease_.2s_forwards]'
+                  : '[&_button]:_animate-[nextra-fadein2_1s_ease_.2s_forwards]'
+              ]
             )}
-            data-toggle-animation={
-              showToggleAnimation ? (showSidebar ? 'show' : 'hide') : 'off'
-            }
           >
             <LocaleSwitch
               lite={!showSidebar}
@@ -514,7 +516,7 @@ export function Sidebar({ toc }: SidebarProps): ReactElement {
                   )
                 }
                 onClick={() => {
-                  setSidebar(!showSidebar)
+                  setSidebar(prev => !prev)
                   setToggleAnimation(true)
                 }}
               >
