@@ -4,6 +4,7 @@ import { Footer, Layout, Navbar } from 'nextra-theme-docs'
 import { Banner, Head } from 'nextra/components'
 import type { ReactNode } from 'react'
 import './globals.css'
+import cn from 'clsx'
 
 export const viewport: Viewport = Head.viewport
 
@@ -78,7 +79,15 @@ export default async function RootLayout({
             </a>
           </Banner>
           <Navbar
-            logo={<NextraLogo height="20" className="nextra-logo" />}
+            logo={
+              <NextraLogo
+                height="20"
+                className={cn(
+                  '[mask-position:0] [mask-size:400%] [mask-image:linear-gradient(60deg,#000_25%,rgba(0,0,0,.2)_50%,#000_75%)]',
+                  'hover:[mask-position:100%] hover:[transition:mask-position_1s_ease]'
+                )}
+              />
+            }
             projectLink="https://github.com/shuding/nextra"
           />
           {children}
