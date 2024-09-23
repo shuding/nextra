@@ -11,9 +11,9 @@ export const Wrapper: MDXWrapper = ({ toc, children, ...props }) => {
   }))
   return (
     <div className="_mx-auto _flex _max-w-[90rem]">
-      <Sidebar toc={toc} />
-
       <MobileNav toc={toc} />
+
+      <Sidebar toc={toc} />
 
       <ClientWrapper toc={toc} {...props}>
         <SkipNavContent />

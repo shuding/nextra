@@ -43,7 +43,7 @@ body {
 
 @media (max-width: 767px) {
   .nextra-sidebar-container {
-    @apply _fixed _pt-[calc(var(--nextra-navbar-height))] _top-0 _w-full _bottom-0 _z-[15] _overscroll-contain;
+    @apply _fixed _pt-[--nextra-navbar-height] _top-0 _w-full _bottom-0 _z-[15] _overscroll-contain;
     transition: transform 0.8s cubic-bezier(0.52, 0.16, 0.04, 1);
     will-change: transform, opacity;
     contain: layout style;
@@ -55,19 +55,19 @@ body {
     }
   }
 
-  .nextra-banner-container ~ header {
-    .nextra-sidebar-container {
+  .nextra-banner-container {
+    ~ div .nextra-sidebar-container {
       @apply _pt-[6.5rem];
     }
 
-    &.nextra-nav-container {
+    ~ .nextra-nav-container {
       @apply _top-10 md:_top-0;
     }
   }
 
   .nextra-banner-hidden {
     .nextra-banner-container ~ div .nextra-sidebar-container {
-      @apply _pt-16;
+      @apply _pt-[--nextra-navbar-height];
     }
 
     .nextra-nav-container {
