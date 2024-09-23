@@ -58,6 +58,7 @@ export function Pre({
           'contrast-more:_ring-gray-900 contrast-more:dark:_ring-gray-50',
           'contrast-more:_contrast-150',
           filename ? '_rounded-b-md' : '_rounded-md',
+          '_not-prose', // for nextra-theme-blog
           className
         )}
         {...props}

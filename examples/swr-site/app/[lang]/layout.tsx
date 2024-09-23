@@ -3,12 +3,12 @@ import { SwrIcon, VercelIcon } from '@app/_icons'
 import type { Metadata } from 'next'
 import { Footer, Layout, LocaleSwitch, Navbar } from 'nextra-theme-docs'
 import { Banner, Head } from 'nextra/components'
-import { getDictionary, getDirection } from '../_dictionaries/get-dictionary'
-import './styles.css'
-import '../_components/features.css'
 import { normalizePageMap } from 'nextra/page-map'
+import { getDictionary, getDirection } from '../_dictionaries/get-dictionary'
 import { pageMap as graphqlEslintPageMap } from './remote/graphql-eslint/[[...slug]]/page'
 import { pageMap as graphqlYogaPageMap } from './remote/graphql-yoga/[[...slug]]/page'
+import './styles.css'
+import '../_components/features.css'
 
 export const { viewport } = Head
 

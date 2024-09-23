@@ -1,9 +1,10 @@
 'use client'
 
-import { usePathname, useRouter } from 'next/navigation'
+import { useTransitionRouter } from 'next-view-transitions'
+import { usePathname } from 'next/navigation'
 
 export function GoBack() {
-  const router = useRouter()
+  const router = useTransitionRouter()
   const pathname = usePathname()
 
   const isNestedPage = pathname.length > 1 && pathname.split('/').length > 1

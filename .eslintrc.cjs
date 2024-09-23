@@ -162,10 +162,7 @@ module.exports = {
         ...TAILWIND_CONFIG.rules,
         'no-restricted-imports': [
           'error',
-          {
-            name: 'next/link',
-            message: 'Use local <Anchor /> instead'
-          }
+          { name: 'next/link', message: 'Use `<Anchor>` instead' }
         ]
       }
     },
@@ -178,6 +175,22 @@ module.exports = {
           config: 'packages/nextra-theme-blog/tailwind.config.ts',
           whitelist: ['subheading-']
         }
+      },
+      rules: {
+        ...TAILWIND_CONFIG.rules,
+        'no-restricted-imports': [
+          'error',
+          {
+            name: 'next/link',
+            message: 'Use `<Link>` from `next-view-transitions` instead'
+          },
+          {
+            name: 'next/navigation',
+            importNames: ['useRouter'],
+            message:
+              'Use `useTransitionRouter` from `next-view-transitions` instead'
+          }
+        ]
       }
     },
     // ⚙️ nextra

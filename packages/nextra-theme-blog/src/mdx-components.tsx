@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { Link } from 'next-view-transitions'
 import { Code, Pre, Table, Td, Th, Tr } from 'nextra/components'
 import type { UseMDXComponents } from 'nextra/mdx'
 import { DEFAULT_COMPONENTS } from 'nextra/mdx'
@@ -39,7 +39,7 @@ function HeadingLink({
   )
 }
 
-const EXTERNAL_HREF_REGEX = /https?:\/\//
+const EXTERNAL_HREF_REGEX = /^https?:\/\//
 
 export const useMDXComponents: UseMDXComponents = components => ({
   ...DEFAULT_COMPONENTS,
@@ -62,15 +62,11 @@ export const useMDXComponents: UseMDXComponents = components => ({
       </Link>
     )
   },
-  pre: ({ children, ...props }) => (
-    <Pre className="_not-prose" {...props}>
-      {children}
-    </Pre>
-  ),
+  pre: Pre,
   tr: Tr,
   th: Th,
   td: Td,
-  table: props => <Table className="_not-prose" {...props} />,
+  table: Table,
   code: Code,
   wrapper({ children, metadata, title }) {
     if (metadata.date && !isValidDate(metadata.date)) {

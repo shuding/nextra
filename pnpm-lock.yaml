@@ -164,7 +164,7 @@ importers:
         version: file:packages/nextra(@types/react@18.3.8)(next@14.2.13)(react-dom@18.3.1)(react@18.3.1)(typescript@5.6.2)
       nextra-theme-blog:
         specifier: workspace:*
-        version: file:packages/nextra-theme-blog(next@14.2.13)(nextra@4.0.0-app-router.1)(react-dom@18.3.1)(react@18.3.1)
+        version: file:packages/nextra-theme-blog(next@14.2.13)(nextra@4.0.0-app-router.2)(react-dom@18.3.1)(react@18.3.1)
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -187,7 +187,7 @@ importers:
         version: file:packages/nextra(@types/react@18.3.8)(next@14.2.13)(react-dom@18.3.1)(react@18.3.1)(typescript@5.6.2)
       nextra-theme-docs:
         specifier: workspace:*
-        version: file:packages/nextra-theme-docs(@types/react@18.3.8)(next@14.2.13)(nextra@4.0.0-app-router.1)(react-dom@18.3.1)(react@18.3.1)
+        version: file:packages/nextra-theme-docs(@types/react@18.3.8)(next@14.2.13)(nextra@4.0.0-app-router.2)(react-dom@18.3.1)(react@18.3.1)
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -219,7 +219,7 @@ importers:
         version: file:packages/nextra(@types/react@18.3.8)(next@14.2.13)(react-dom@18.3.1)(react@18.3.1)(typescript@5.6.2)
       nextra-theme-docs:
         specifier: workspace:*
-        version: file:packages/nextra-theme-docs(@types/react@18.3.8)(next@14.2.13)(nextra@4.0.0-app-router.1)(react-dom@18.3.1)(react@18.3.1)
+        version: file:packages/nextra-theme-docs(@types/react@18.3.8)(next@14.2.13)(nextra@4.0.0-app-router.2)(react-dom@18.3.1)(react@18.3.1)
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -407,6 +407,9 @@ importers:
       next-themes:
         specifier: ^0.3.0
         version: 0.3.0(react-dom@18.3.1)(react@18.3.1)
+      next-view-transitions:
+        specifier: ^0.3.0
+        version: 0.3.2(next@14.2.13)(react-dom@18.3.1)(react@18.3.1)
     devDependencies:
       '@tailwindcss/nesting':
         specifier: ^0.0.0-insiders.565cd3e
@@ -10501,6 +10504,18 @@ packages:
       react-dom: 18.3.1(react@18.3.1)
     dev: false
 
+  /next-view-transitions@0.3.2(next@14.2.13)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-77QRvHjKDQHBDbe/qTVh/p9zbx2AWUFvlmLpHZQtc+q0/a+QWn5fejU9TqrJdrHvwuc9rzqL6K5xpkRtyjQajw==}
+    peerDependencies:
+      next: 14.2.13
+      react: 18.3.1
+      react-dom: 18.3.1
+    dependencies:
+      next: 14.2.13(patch_hash=ih2n7uyu6sqdsauhnxm6ovrrua)(@babel/core@7.24.3)(react-dom@18.3.1)(react@18.3.1)
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+    dev: false
+
   /next@14.2.13(patch_hash=ih2n7uyu6sqdsauhnxm6ovrrua)(@babel/core@7.24.3)(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-BseY9YNw8QJSwLYD7hlZzl6QVDoSFHL/URN5K64kVEVpCsSOWeyjbIGK+dZUaRViHTaMQX8aqmnn0PHBbGZezg==}
     engines: {node: '>=18.17.0'}
@@ -13682,7 +13697,7 @@ packages:
       - typescript
     dev: false
 
-  file:packages/nextra-theme-blog(next@14.2.13)(nextra@4.0.0-app-router.1)(react-dom@18.3.1)(react@18.3.1):
+  file:packages/nextra-theme-blog(next@14.2.13)(nextra@4.0.0-app-router.2)(react-dom@18.3.1)(react@18.3.1):
     resolution: {directory: packages/nextra-theme-blog, type: directory}
     id: file:packages/nextra-theme-blog
     name: nextra-theme-blog
@@ -13698,12 +13713,13 @@ packages:
     dependencies:
       next: 14.2.13(patch_hash=ih2n7uyu6sqdsauhnxm6ovrrua)(@babel/core@7.24.3)(react-dom@18.3.1)(react@18.3.1)
       next-themes: 0.3.0(react-dom@18.3.1)(react@18.3.1)
+      next-view-transitions: 0.3.2(next@14.2.13)(react-dom@18.3.1)(react@18.3.1)
       nextra: file:packages/nextra(@types/react@18.3.8)(next@14.2.13)(react-dom@18.3.1)(react@18.3.1)(typescript@5.6.2)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
     dev: false
 
-  file:packages/nextra-theme-docs(@types/react@18.3.8)(next@14.2.13)(nextra@4.0.0-app-router.1)(react-dom@18.3.1)(react@18.3.1):
+  file:packages/nextra-theme-docs(@types/react@18.3.8)(next@14.2.13)(nextra@4.0.0-app-router.2)(react-dom@18.3.1)(react@18.3.1):
     resolution: {directory: packages/nextra-theme-docs, type: directory}
     id: file:packages/nextra-theme-docs
     name: nextra-theme-docs
