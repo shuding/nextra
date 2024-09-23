@@ -10,6 +10,6 @@ const useActiveAnchorStore = create<{
 export const useActiveAnchor = () =>
   useActiveAnchorStore(state => state.activeSlug)
 
-export const setActiveSlug: Dispatch<string> = (activeSlug) => {
+export const setActiveSlug: Dispatch<string> = activeSlug => {
   useActiveAnchorStore.setState({ activeSlug })
 }

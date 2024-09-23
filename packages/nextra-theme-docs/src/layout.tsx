@@ -1,11 +1,11 @@
 /* eslint sort-keys: error */
 import { ThemeProvider } from 'next-themes'
-import { Search } from 'nextra/components'
+import { Search, SkipNavLink } from 'nextra/components'
 import type { FC, ReactElement, ReactNode } from 'react'
 import { Children, isValidElement } from 'react'
 import { z } from 'zod'
 import { fromZodError } from 'zod-validation-error'
-import { Footer, MobileNav, Navbar, SkipNavLink } from './components'
+import { Footer, MobileNav, Navbar } from './components'
 import { ConfigProvider, ThemeConfigProvider } from './stores'
 
 const element = z.custom<ReactElement>(isValidElement, {

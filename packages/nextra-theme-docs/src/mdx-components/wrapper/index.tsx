@@ -1,6 +1,7 @@
 import type { MDXWrapper } from 'nextra'
+import { SkipNavContent } from 'nextra/components'
 import { removeLinks } from 'nextra/remove-links'
-import { Sidebar, SkipNavContent } from '../../components'
+import { Sidebar } from '../../components'
 import { ClientWrapper } from './wrapper.client'
 
 export const Wrapper: MDXWrapper = ({ toc, children, ...props }) => {
