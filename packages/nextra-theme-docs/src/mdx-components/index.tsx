@@ -1,8 +1,17 @@
 import cn from 'clsx'
-import { Code, Pre, Table, Td, Th, Tr, withIcons } from 'nextra/components'
+import {
+  Code,
+  Details,
+  Pre,
+  Summary,
+  Table,
+  Td,
+  Th,
+  Tr,
+  withIcons
+} from 'nextra/components'
 import type { MDXComponents } from 'nextra/mdx'
 import { DEFAULT_COMPONENTS } from 'nextra/mdx'
-import { Details, Summary } from 'nextra/components'
 import { H1, H2, H3, H4, H5, H6 } from './heading'
 import { Link } from './link'
 import { Wrapper } from './wrapper'

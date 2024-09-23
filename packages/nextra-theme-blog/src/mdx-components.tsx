@@ -1,5 +1,15 @@
 import { Link } from 'next-view-transitions'
-import { Code, Pre, Table, Td, Th, Tr } from 'nextra/components'
+import {
+  Code,
+  Details,
+  Pre,
+  Summary,
+  Table,
+  Td,
+  Th,
+  Tr,
+  withIcons
+} from 'nextra/components'
 import type { UseMDXComponents } from 'nextra/mdx'
 import { DEFAULT_COMPONENTS } from 'nextra/mdx'
 import type { ComponentProps, ReactElement } from 'react'
@@ -39,25 +49,28 @@ const createHeading = (Tag: `h${2 | 3 | 4 | 5 | 6}`) =>
 
 const EXTERNAL_HREF_REGEX = /^https?:\/\//
 
+/* eslint sort-keys: error */
 export const useMDXComponents: UseMDXComponents = components => ({
   ...DEFAULT_COMPONENTS,
-  h2: createHeading('h2'),
-  h3: createHeading('h3'),
-  h4: createHeading('h4'),
-  h5: createHeading('h5'),
-  h6: createHeading('h6'),
   a({ href = '', ...props }) {
     if (EXTERNAL_HREF_REGEX.test(href)) {
       return <a href={href} target="_blank" rel="noreferrer" {...props} />
     }
     return <Link href={href} {...props} />
   },
-  pre: Pre,
-  tr: Tr,
-  th: Th,
-  td: Td,
-  table: Table,
   code: Code,
+  details: Details,
+  h2: createHeading('h2'),
+  h3: createHeading('h3'),
+  h4: createHeading('h4'),
+  h5: createHeading('h5'),
+  h6: createHeading('h6'),
+  pre: withIcons(Pre),
+  table: Table,
+  td: Td,
+  th: Th,
+  tr: Tr,
+  summary: Summary,
   wrapper({ children, metadata, title }) {
     if (metadata.date && !isValidDate(metadata.date)) {
       throw new Error(

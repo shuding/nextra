@@ -50,7 +50,7 @@ export const withIcons =
 
     return (
       <Component
-        icon={Icon && <Icon className="_h-4 _shrink-0" />}
+        icon={Icon && <Icon height="16" className="_shrink-0" />}
         {...props}
       />
     )

@@ -1,5 +1,5 @@
 import cn from 'clsx'
-import { ComponentProps } from 'react'
+import type { ComponentProps } from 'react'
 import { ArrowRightIcon } from '../icons/index.js'
 
 export function Summary({
@@ -21,9 +21,10 @@ export function Summary({
     >
       {children}
       <ArrowRightIcon
+        height="16"
         className={cn(
           '_order-first', // if prettier formats `summary` it will have unexpected margin-top
-          '_h-4 _shrink-0 _mx-1.5 motion-reduce:_transition-none',
+          '_shrink-0 _mx-1.5 motion-reduce:_transition-none',
           'rtl:_rotate-180 [[data-expanded]>summary:first-child>&]:_rotate-90 _transition'
         )}
         strokeWidth="3"
