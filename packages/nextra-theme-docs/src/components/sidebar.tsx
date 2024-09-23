@@ -487,10 +487,10 @@ export function Sidebar({ toc }: SidebarProps): ReactElement {
                 ? [hasI18n && '_justify-end', '_border-t']
                 : '_py-4 _flex-wrap _justify-center',
               showToggleAnimation && [
-                '[&_button]:_opacity-0',
+                '*:_opacity-0',
                 showSidebar
-                  ? '[&_button]:_animate-[nextra-fadein_1s_ease_.2s_forwards]'
-                  : '[&_button]:_animate-[nextra-fadein2_1s_ease_.2s_forwards]'
+                  ? '*:_animate-[nextra-fadein_1s_ease_.2s_forwards]'
+                  : '*:_animate-[nextra-fadein2_1s_ease_.2s_forwards]'
               ]
             )}
           >
