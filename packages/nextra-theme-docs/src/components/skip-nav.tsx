@@ -32,7 +32,7 @@ const DEFAULT_LABEL = 'Skip to Content'
 
 export const SkipNavLink = ({
   // Give the option to the user to pass a falsy other than undefined to remove the default styles
-  className = 'nextra-skip-nav',
+  className = 'nextra-focus nextra-skip-nav',
   id = DEFAULT_ID,
   children = DEFAULT_LABEL,
   ...props
