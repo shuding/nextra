@@ -10,7 +10,7 @@ import {
   useRef,
   useState
 } from 'react'
-import { Collapse } from '../components'
+import { Collapse } from '../components/collapse.js'
 
 export function Details({
   children,
