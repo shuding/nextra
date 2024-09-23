@@ -47,7 +47,7 @@ export const ClientWrapper: MDXWrapper = ({ toc, children, ...props }) => {
           className="nextra-toc _order-last max-xl:_hidden _w-64 _shrink-0 print:_hidden"
           aria-label="table of contents"
         >
-          {activeType !== 'page' && themeContext.toc && (
+          {themeContext.toc && activeType !== 'page' && (
             <TOC
               toc={themeConfig.toc.float ? toc : []}
               filePath={props.filePath}
@@ -64,12 +64,12 @@ export const ClientWrapper: MDXWrapper = ({ toc, children, ...props }) => {
             'nextra-body-typesetting-article'
         )}
       >
-        {activeType !== 'page' && themeContext.breadcrumb && (
+        {themeContext.breadcrumb && activeType !== 'page' && (
           <Breadcrumb activePath={activePath} />
         )}
         {children}
         {gitTimestampEl}
-        {activeType !== 'page' && themeContext.pagination && (
+        {themeContext.pagination && activeType !== 'page' && (
           <Pagination
             flatDocsDirectories={flatDocsDirectories}
             currentIndex={activeIndex}

@@ -31,7 +31,7 @@ const theme = z.strictObject({
       labels: z.string().default('feedback')
     })
     .default({}),
-  gitTimestamp: z.boolean().optional(),
+  gitTimestamp: z.boolean().default(true),
   i18n: z
     .array(
       z.strictObject({
