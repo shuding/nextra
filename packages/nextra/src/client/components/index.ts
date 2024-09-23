@@ -1,6 +1,7 @@
 export { Banner } from './banner/index.js'
 export { FileTree } from './file-tree/index.js'
 export { Tabs } from './tabs/index.js'
+export { Bleed } from './bleed.js'
 export { Button } from './button.js'
 export { Callout } from './callout.js'
 export { Cards } from './cards.js'

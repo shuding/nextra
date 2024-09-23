@@ -6,10 +6,10 @@ tags: [web development]
 author: Tristan Dubbeld
 ---
 
-import { Callout, Cards, FileTree, Steps, Tabs } from 'nextra/components'
+import { Bleed, Callout, Cards, FileTree, Steps, Tabs } from 'nextra/components'
 import { CopyIcon, GitHubIcon, MenuIcon } from 'nextra/icons'
 
-## Callout
+## `<Callout>`
 
 ### Default
 
@@ -31,7 +31,7 @@ import { CopyIcon, GitHubIcon, MenuIcon } from 'nextra/icons'
 
 <Callout emoji="🚀">This is a callout with a custom emoji.</Callout>
 
-## Steps
+## `<Steps>`
 
 <Steps>
 
@@ -71,7 +71,7 @@ Contents for step 2.
 
 </Steps>
 
-## Tabs
+## `<Tabs>`
 
 {/* prettier-ignore */}
 <Tabs items={['pnpm', 'npm', 'yarn']}>
@@ -80,7 +80,7 @@ Contents for step 2.
   <Tabs.Tab>**Yarn** is a software packaging system.</Tabs.Tab>
 </Tabs>
 
-## FileTree
+## `<FileTree>`
 
 <FileTree>
   <FileTree.Folder name="pages" defaultOpen>
@@ -105,7 +105,7 @@ Contents for step 2.
   </FileTree.Folder>
 </FileTree>
 
-## Cards
+## `<Cards>`
 
 <Cards num={2}>
   <Cards.Card arrow title="Documentation theme" href="/docs/docs-theme/start">
@@ -122,6 +122,8 @@ Contents for step 2.
   <Cards.Card icon={<MenuIcon />} title="Steps" href="/baz" />
 </Cards>
 
+## `<details>` and `<summary>`
+
 <details>
   <summary>Summary</summary>
   Details
@@ -130,6 +132,12 @@ Contents for step 2.
     Details 2
   </details>
 </details>
+
+## `<Bleed>`
+
+<Bleed>
+  <>![](/img.jpeg)</>
+</Bleed>
 
 [^1]: With custom emoji
 

@@ -66,11 +66,11 @@ export const useMDXComponents: UseMDXComponents = components => ({
   h5: createHeading('h5'),
   h6: createHeading('h6'),
   pre: withIcons(Pre),
+  summary: Summary,
   table: Table,
   td: Td,
   th: Th,
   tr: Tr,
-  summary: Summary,
   wrapper({ children, metadata, title }) {
     if (metadata.date && !isValidDate(metadata.date)) {
       throw new Error(

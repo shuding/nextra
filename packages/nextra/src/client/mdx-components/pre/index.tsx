@@ -1,7 +1,7 @@
 import cn from 'clsx'
 import type { ComponentProps, ReactElement, ReactNode } from 'react'
-import { WordWrapIcon } from '../../icons/index.js'
 import { classes } from '../../components/button.js'
+import { WordWrapIcon } from '../../icons/index.js'
 import { CopyToClipboard } from './copy-to-clipboard.js'
 import { ToggleWordWrapButton } from './toggle-word-wrap-button.js'
 

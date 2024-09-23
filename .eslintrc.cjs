@@ -152,7 +152,6 @@ module.exports = {
           callees: ['cn'],
           whitelist: [
             'nextra-breadcrumb',
-            'nextra-bleed',
             'nextra-menu-desktop',
             'nextra-menu-mobile'
           ]
@@ -172,7 +171,7 @@ module.exports = {
       files: 'packages/nextra-theme-blog/**',
       settings: {
         tailwindcss: {
-          config: 'packages/nextra-theme-blog/tailwind.config.ts',
+          config: 'packages/nextra-theme-blog/tailwind.config.ts'
         }
       },
       rules: {
@@ -200,7 +199,7 @@ module.exports = {
         tailwindcss: {
           config: 'packages/nextra-theme-docs/tailwind.config.ts',
           callees: ['cn'],
-          whitelist: ['nextra-code', 'nextra-filetree']
+          whitelist: ['nextra-code', 'nextra-filetree', 'nextra-bleed']
         }
       },
       rules: {

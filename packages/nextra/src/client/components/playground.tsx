@@ -3,9 +3,9 @@
 import { useEffect, useState } from 'react'
 import type { ReactElement } from 'react'
 import { CrossCircledIcon } from '../icons/index.js'
-import type { MDXComponents } from '../mdx.js'
 import { Code } from '../mdx-components/code.js'
 import { Pre } from '../mdx-components/pre/index.js'
+import type { MDXComponents } from '../mdx.js'
 import { evaluate } from './remote-content.js'
 
 export function Playground({

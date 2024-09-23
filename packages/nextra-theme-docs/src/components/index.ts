@@ -1,5 +1,4 @@
 export { Anchor } from './anchor'
-export { Bleed } from './bleed'
 export { Breadcrumb } from './breadcrumb'
 export { Footer } from './footer'
 export { LocaleSwitch } from './locale-switch'
