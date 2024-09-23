@@ -32,8 +32,13 @@ export default withNextra({
       permanent: true
     },
     {
-      source: '/docs/docs-theme/built-ins/:slug(callout|steps|tabs)',
+      source: '/docs/docs-theme/built-ins/:slug(callout|steps|tabs|bleed)',
       destination: '/docs/guide/built-ins/:slug',
+      permanent: true
+    },
+    {
+      source: '/docs/docs-theme/built-ins',
+      destination: '/docs/guide/built-ins',
       permanent: true
     }
   ],
