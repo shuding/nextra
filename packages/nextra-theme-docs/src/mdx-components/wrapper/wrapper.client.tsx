@@ -17,15 +17,16 @@ export const ClientWrapper: MDXWrapper = ({ toc, children, ...props }) => {
   } = normalizePagesResult
 
   const date =
-    themeContext.timestamp && themeConfig.gitTimestamp && props.timestamp
-      ? new Date(props.timestamp)
-      : null
+    themeContext.timestamp &&
+    themeConfig.gitTimestamp &&
+    props.timestamp &&
+    new Date(props.timestamp)
 
   const gitTimestampEl = date ? (
     <div
       // Because a user's time zone may be different from the server page
       suppressHydrationWarning
-      className="_mt-12 _mb-8 _block _text-xs _text-gray-500 ltr:_text-right rtl:_text-left dark:_text-gray-400"
+      className="_mt-12 _mb-8 _text-xs _text-gray-500 _text-end dark:_text-gray-400"
     >
       Last updated on{' '}
       <time dateTime={date.toISOString()}>
@@ -39,7 +40,6 @@ export const ClientWrapper: MDXWrapper = ({ toc, children, ...props }) => {
   ) : (
     <div className="_mt-16" />
   )
-
   return (
     <>
       {themeContext.layout !== 'full' && (
