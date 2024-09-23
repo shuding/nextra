@@ -131,12 +131,3 @@ body,
   @apply contrast-more:_shadow-none contrast-more:_border-neutral-400 contrast-more:dark:_border-neutral-400;
   @apply _shadow-[0_-12px_16px_rgb(var(--nextra-bg))];
 }
-
-.nextra-skip-nav {
-  @apply _sr-only;
-
-  &:focus-visible {
-    @apply _not-sr-only _fixed _z-50 _my-3 _mx-4 _rounded-lg _px-3 _py-2 _text-sm _font-bold;
-    @apply _bg-[rgb(var(--nextra-bg))] _border _border-current;
-  }
-}
