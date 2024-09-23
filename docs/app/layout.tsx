@@ -1,9 +1,9 @@
+import { NextraLogo, VercelLogo } from '@components/icons'
 import type { Metadata, Viewport } from 'next'
 import { Footer, Layout, Navbar } from 'nextra-theme-docs'
 import { Banner, Head } from 'nextra/components'
 import type { ReactNode } from 'react'
 import './globals.css'
-import { NextraLogo, VercelLogo } from '@components/icons'
 
 export const viewport: Viewport = Head.viewport
 
@@ -78,11 +78,11 @@ export default async function RootLayout({
             </a>
           </Banner>
           <Navbar
-            logo={<NextraLogo className="nextra-logo h-5" />}
+            logo={<NextraLogo height="20" className="nextra-logo" />}
             projectLink="https://github.com/shuding/nextra"
           />
           {children}
-          <Footer className="flex-col items-center sm:items-start">
+          <Footer className="flex-col items-center md:items-start">
             <a
               className="nextra-focus flex items-center gap-1"
               target="_blank"
@@ -90,7 +90,7 @@ export default async function RootLayout({
               title="vercel.com homepage"
               href="https://vercel.com?utm_source=nextra.site"
             >
-              <span>Powered by</span>
+              Powered by
               <VercelLogo height="20" />
             </a>
             <p className="mt-6 text-xs">
