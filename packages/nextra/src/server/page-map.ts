@@ -317,15 +317,6 @@ export async function collectPageMap({
   //     ]
   //   })
 
-  //     footer = `
-  // import { resolvePageMap } from 'nextra/page-map-dynamic'
-  //
-  // if (typeof window === 'undefined') {
-  //   globalThis.__nextra_resolvePageMap ||= Object.create(null)
-  //   globalThis.__nextra_resolvePageMap['${locale}'] = resolvePageMap('${locale}', dynamicMetaModules)
-  // }`
-  //   }
-
   const result = toJs({
     type: 'Program',
     sourceType: 'module',

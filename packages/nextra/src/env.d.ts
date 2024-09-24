@@ -8,9 +8,6 @@ declare module 'title' {
 }
 
 declare namespace globalThis {
-  import type { PageMapItem } from './types'
-
-  var __nextra_resolvePageMap: Record<string, () => Promise<PageMapItem[]>>
   var pagefind: {
     search: <T>(query: string) => Promise<{
       results: {
