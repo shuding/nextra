@@ -64,10 +64,6 @@ export default withNextra({
     return config
   },
   experimental: {
-    optimizePackageImports: [
-      '@components/icons',
-      'nextra/components',
-      'nextra/hooks'
-    ]
+    optimizePackageImports: ['@components/icons', 'nextra/components']
   }
 })
