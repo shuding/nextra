@@ -27,19 +27,9 @@ export function Navbar({
     </>
   ),
   projectLink,
-  projectIcon = (
-    <>
-      <GitHubIcon />
-      <span className="_sr-only">GitHub</span>
-    </>
-  ),
+  projectIcon = <GitHubIcon height="24" />,
   chatLink,
-  chatIcon = (
-    <>
-      <DiscordIcon />
-      <span className="_sr-only">Discord</span>
-    </>
-  )
+  chatIcon = <DiscordIcon width="24" />
 }: NavbarProps): ReactElement {
   return (
     <header className="nextra-nav-container _sticky _top-0 _z-20 _w-full _bg-transparent print:_hidden">
