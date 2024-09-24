@@ -5,7 +5,8 @@ import type { ReactElement } from 'react'
 import { CrossCircledIcon } from '../icons/index.js'
 import { Code } from '../mdx-components/code.js'
 import { Pre } from '../mdx-components/pre/index.js'
-import { RemoteContent, RemoteContentProps } from './remote-content.js'
+import { RemoteContent } from './remote-content.js'
+import type { RemoteContentProps } from './remote-content.js'
 
 export function Playground({
   source,
