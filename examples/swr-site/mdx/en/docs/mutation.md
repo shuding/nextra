@@ -7,7 +7,7 @@ a revalidation message globally to other SWR hooks<sup>\*</sup> using the same
 key by calling `mutate(key)`.
 
 This example shows how to automatically refetch the login info (e.g. inside
-`<Profile/>`) when the user clicks the “Logout” button.
+`<Profile>`) when the user clicks the “Logout” button.
 
 ```jsx
 import useSWR, { useSWRConfig } from 'swr'

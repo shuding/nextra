@@ -128,7 +128,7 @@ export const rehypeBetterReactMathjax: Plugin<
     ast.children = [
       ...mdxjsEsmNodes,
       ...(isRemoteContent ? [] : [MATHJAX_IMPORTS]),
-      // Wrap everything in a `<MathJaxContext />` component.
+      // Wrap everything in a `<MathJaxContext>` component.
       wrapInMathJaxContext(rest, options)
     ] as any
   }
