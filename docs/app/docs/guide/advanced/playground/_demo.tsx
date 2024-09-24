@@ -59,7 +59,10 @@ Z --> G
 
   return (
     <div className="grid grid-cols-2 gap-2 mt-6">
-      <Pre data-filename="MDX" icon={<MdxIcon className="_h-4 _shrink-0" />}>
+      <Pre
+        data-filename="MDX"
+        icon={<MdxIcon height="16" className="_shrink-0" />}
+      >
         <Code>
           <span
             ref={spanRef}

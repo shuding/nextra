@@ -88,7 +88,7 @@ export default async function RootLayout({ children, params: { lang } }) {
           <Navbar
             logo={
               <>
-                <SwrIcon className="h-3" />
+                <SwrIcon height="12" />
                 <span
                   className="max-md:hidden select-none font-extrabold ms-2"
                   title={`SWR: ${dictionary.logo.title}`}

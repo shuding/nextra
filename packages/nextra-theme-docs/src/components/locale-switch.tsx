@@ -42,7 +42,7 @@ export function LocaleSwitch({
         key: selected?.locale || '',
         name: (
           <span className="_flex _items-center _gap-2">
-            <GlobeIcon />
+            <GlobeIcon height="12" />
             <span className={lite ? '_hidden' : ''}>{selected?.name}</span>
           </span>
         )
