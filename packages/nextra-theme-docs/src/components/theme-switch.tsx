@@ -1,11 +1,11 @@
 'use client'
 
 import { useTheme } from 'next-themes'
+import { Select } from 'nextra/components'
 import { useMounted } from 'nextra/hooks'
 import { MoonIcon, SunIcon } from 'nextra/icons'
 import type { ReactElement } from 'react'
 import { useThemeConfig } from '../stores'
-import { Select } from './select'
 
 type ThemeSwitchProps = {
   lite?: boolean

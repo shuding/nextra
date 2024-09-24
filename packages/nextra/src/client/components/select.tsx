@@ -7,8 +7,8 @@ import {
   ListboxOptions
 } from '@headlessui/react'
 import cn from 'clsx'
-import { CheckIcon } from 'nextra/icons'
 import type { ReactElement } from 'react'
+import { CheckIcon } from '../icons/index.js'
 
 interface MenuOption {
   key: string

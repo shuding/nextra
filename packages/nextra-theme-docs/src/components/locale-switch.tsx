@@ -2,10 +2,10 @@
 
 import { addBasePath } from 'next/dist/client/add-base-path'
 import { usePathname } from 'next/navigation'
+import { Select } from 'nextra/components'
 import { GlobeIcon } from 'nextra/icons'
 import type { ReactElement } from 'react'
 import { useThemeConfig } from '../stores'
-import { Select } from './select'
 
 const ONE_YEAR = 365 * 24 * 60 * 60 * 1000
 
