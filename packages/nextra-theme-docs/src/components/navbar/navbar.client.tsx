@@ -152,7 +152,9 @@ export function ClientNavbar({
           </Anchor>
         )
       })}
-      <div className="max-md:_hidden">{themeConfig.search}</div>
+      {themeConfig.search && (
+        <div className="max-md:_hidden">{themeConfig.search}</div>
+      )}
 
       {children}
 
