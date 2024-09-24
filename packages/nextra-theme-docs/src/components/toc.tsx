@@ -2,7 +2,6 @@
 
 import cn from 'clsx'
 import type { Heading } from 'nextra'
-import { renderComponent } from 'nextra/components'
 import type { ReactElement } from 'react'
 import { useEffect, useRef } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
@@ -71,7 +70,7 @@ export function TOC({ toc, filePath, pageTitle }: TOCProps): ReactElement {
       {hasHeadings && (
         <>
           <p className="_mb-4 _font-semibold _tracking-tight">
-            {renderComponent(themeConfig.toc.title)}
+            {themeConfig.toc.title}
           </p>
           <ul ref={tocRef}>
             {toc.map(({ id, value, depth }) => (
@@ -112,17 +111,17 @@ export function TOC({ toc, filePath, pageTitle }: TOCProps): ReactElement {
         >
           {themeConfig.feedback.content && (
             <Anchor className={linkClassName} href={gitIssueUrl} newWindow>
-              {renderComponent(themeConfig.feedback.content)}
+              {themeConfig.feedback.content}
             </Anchor>
           )}
 
           {themeConfig.editLink.content && (
             <Anchor className={linkClassName} href={editUrl}>
-              {renderComponent(themeConfig.editLink.content)}
+              {themeConfig.editLink.content}
             </Anchor>
           )}
 
-          {renderComponent(themeConfig.toc.extraContent)}
+          {themeConfig.toc.extraContent}
 
           {themeConfig.toc.backToTop && (
             <BackToTop className={linkClassName} hidden={activeIndex < 2} />

@@ -3,7 +3,7 @@
 import cn from 'clsx'
 import { usePathname } from 'next/navigation'
 import type { Heading } from 'nextra'
-import { Button, Collapse, renderComponent } from 'nextra/components'
+import { Button, Collapse } from 'nextra/components'
 import { useFSRoute } from 'nextra/hooks'
 import { ArrowRightIcon, ExpandIcon } from 'nextra/icons'
 import type { Item, MenuItem, PageItem } from 'nextra/normalize-pages'
@@ -214,9 +214,7 @@ function Separator({ title }: { title: string }): ReactElement {
           : '_my-4'
       )}
     >
-      {title ? (
-        renderComponent(title)
-      ) : (
+      {title || (
         <hr className="_mx-2 _border-t _border-gray-200 dark:_border-primary-100/10" />
       )}
     </li>

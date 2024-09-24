@@ -13,7 +13,6 @@ import type { FocusEventHandler, ReactElement, SyntheticEvent } from 'react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useMounted } from '../hooks/index.js'
 import { InformationCircleIcon, SpinnerIcon } from '../icons/index.js'
-import { renderComponent } from './render.js'
 
 type PagefindResult = {
   excerpt: string
@@ -247,14 +246,14 @@ export function Search({
         ) : isLoading ? (
           <div className="_h-full _flex _items-center _justify-center _gap-2 _px-8 _text-sm _text-gray-400">
             <SpinnerIcon height="20" className="_shrink-0 _animate-spin" />
-            {renderComponent(loading)}
+            {loading}
           </div>
         ) : results.length ? (
           results.map(searchResult => (
             <Result key={searchResult.url} data={searchResult} />
           ))
         ) : (
-          search && renderComponent(emptyResult)
+          search && emptyResult
         )}
       </ComboboxOptions>
     </Combobox>

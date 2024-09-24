@@ -1,7 +1,6 @@
 import cn from 'clsx'
 import type { ReactElement, ReactNode } from 'react'
 import { XIcon } from '../../icons/index.js'
-import { renderComponent } from '../render.js'
 import { CloseBannerButton } from './close-banner-button.js'
 
 export function Banner({
@@ -29,7 +28,7 @@ export function Banner({
     >
       <script dangerouslySetInnerHTML={{ __html: hideBannerScript }} />
       <div className="_w-full _whitespace-nowrap _overflow-x-auto _text-center _font-medium _text-sm">
-        {renderComponent(children)}
+        {children}
       </div>
       {dismissible && (
         <CloseBannerButton storageKey={storageKey}>
