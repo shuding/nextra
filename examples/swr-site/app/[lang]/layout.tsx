@@ -110,7 +110,7 @@ export default async function RootLayout({ children, params: { lang } }) {
               className="nextra-focus flex items-center gap-2 font-semibold"
               href={dictionary.link.vercel}
             >
-              {dictionary.poweredBy} <VercelIcon />
+              {dictionary.poweredBy} <VercelIcon height="20" />
             </a>
           </Footer>
         </Layout>

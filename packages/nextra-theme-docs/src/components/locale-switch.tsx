@@ -7,7 +7,7 @@ import { GlobeIcon } from 'nextra/icons'
 import type { ReactElement } from 'react'
 import { useThemeConfig } from '../stores'
 
-const ONE_YEAR = 365 * 24 * 60 * 60 * 1000
+const ONE_YEAR = 365 * 24 * 60 * 60 * 1_000
 
 interface LocaleSwitchProps {
   lite?: boolean
@@ -20,9 +20,9 @@ export function LocaleSwitch({
 }: LocaleSwitchProps): ReactElement | null {
   const { i18n } = useThemeConfig()
   const pathname = usePathname()
-  const locale = pathname.split('/')[1]
   if (!i18n.length) return null
 
+  const locale = pathname.split('/')[1]
   const selected = i18n.find(l => locale === l.locale)
   return (
     <Select
@@ -33,17 +33,16 @@ export function LocaleSwitch({
         document.cookie = `NEXT_LOCALE=${
           option.key
         }; expires=${date.toUTCString()}; path=/`
-        const href = addBasePath(
+        location.href = addBasePath(
           pathname.replace(`/${locale}`, `/${option.key}`)
         )
-        location.href = href
       }}
       selected={{
         key: selected?.locale || '',
         name: (
           <span className="_flex _items-center _gap-2">
             <GlobeIcon height="12" />
-            <span className={lite ? '_hidden' : ''}>{selected?.name}</span>
+            {!lite && selected?.name}
           </span>
         )
       }}

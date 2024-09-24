@@ -41,7 +41,7 @@ export const ClientWrapper: MDXWrapper = ({ toc, children, ...props }) => {
   ) : (
     <div className="_mt-16" />
   )
-  // we can't update store in server component so doing it in client component
+  // We can't update store in server component so doing it in client component
   useEffect(() => {
     setToc(toc)
   }, [toc])
