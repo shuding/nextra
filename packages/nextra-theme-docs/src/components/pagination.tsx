@@ -18,7 +18,7 @@ const classes = {
     'contrast-more:_text-gray-700 contrast-more:dark:_text-gray-100',
     '_flex _max-w-[50%] _items-center _gap-1 _py-4 _text-base _font-medium _transition-colors [word-break:break-word] md:_text-lg'
   ),
-  icon: cn('_inline _h-5 _shrink-0')
+  icon: cn('_inline _shrink-0')
 }
 
 export function Pagination({
@@ -49,7 +49,10 @@ export function Pagination({
           title={prev.title}
           className={cn(classes.link, '_pe-4')}
         >
-          <ArrowRightIcon className={cn(classes.icon, 'ltr:_rotate-180')} />
+          <ArrowRightIcon
+            height="20"
+            className={cn(classes.icon, 'ltr:_rotate-180')}
+          />
           {prev.title}
         </NextLink>
       )}
@@ -63,7 +66,10 @@ export function Pagination({
           )}
         >
           {next.title}
-          <ArrowRightIcon className={cn(classes.icon, 'rtl:_rotate-180')} />
+          <ArrowRightIcon
+            height="20"
+            className={cn(classes.icon, 'rtl:_rotate-180')}
+          />
         </NextLink>
       )}
     </div>

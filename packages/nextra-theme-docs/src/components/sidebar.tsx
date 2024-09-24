@@ -411,11 +411,7 @@ export function MobileNav() {
   )
 }
 
-type SidebarProps = {
-  toc: Heading[]
-}
-
-export function Sidebar({ toc }: SidebarProps): ReactElement {
+export function Sidebar({ toc }: { toc: Heading[] }): ReactElement {
   const { normalizePagesResult, hideSidebar } = useConfig()
   const [showSidebar, setSidebar] = useState(true)
   const [showToggleAnimation, setToggleAnimation] = useState(false)
