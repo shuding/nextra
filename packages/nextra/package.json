@@ -32,10 +32,6 @@
       "import": "./dist/server/fetch-filepaths-from-github.js",
       "types": "./dist/server/fetch-filepaths-from-github.d.ts"
     },
-    "./page-map-dynamic": {
-      "import": "./dist/server/page-map-dynamic.js",
-      "types": "./dist/server/page-map-dynamic.d.ts"
-    },
     "./page-map": {
       "import": "./dist/server/page-map.js",
       "types": "./dist/server/page-map.d.ts"
