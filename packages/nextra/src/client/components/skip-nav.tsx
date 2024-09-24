@@ -27,7 +27,8 @@
  *
  * Source: https://github.com/reach/reach-ui/blob/43f450db7bcb25a743121fe31355f2294065a049/LICENSE
  */
-import { Button, ButtonProps } from '@headlessui/react'
+import { Button } from '@headlessui/react'
+import type { ButtonProps } from '@headlessui/react'
 import cn from 'clsx'
 import type { ComponentProps, FC } from 'react'
 

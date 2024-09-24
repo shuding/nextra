@@ -12,7 +12,7 @@ import {
 } from 'nextra/components'
 import type { UseMDXComponents } from 'nextra/mdx'
 import { DEFAULT_COMPONENTS } from 'nextra/mdx'
-import type { ComponentProps, FC } from 'react'
+import type { ComponentProps } from 'react'
 import { Meta } from './components/meta'
 
 const DATE_REGEX = /^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2})?(:\d{2}\.\d{3}Z)?$/
