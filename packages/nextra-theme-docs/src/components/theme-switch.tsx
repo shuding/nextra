@@ -16,13 +16,12 @@ export function ThemeSwitch({
   lite,
   className
 }: ThemeSwitchProps): ReactElement {
-  const { setTheme, resolvedTheme, theme = '' } = useTheme()
+  const { setTheme, resolvedTheme, theme = 'light' } = useTheme()
   const mounted = useMounted()
   const config = useThemeConfig()
 
   const IconToUse = mounted && resolvedTheme === 'dark' ? MoonIcon : SunIcon
   const { options } = config.themeSwitch
-
   return (
     <Select
       className={className}
@@ -41,7 +40,7 @@ export function ThemeSwitch({
           <span className="_flex _items-center _gap-2 _capitalize">
             <IconToUse height="12" />
             <span className={lite ? 'md:_hidden' : ''}>
-              {mounted ? options[theme as keyof typeof options] : options.light}
+              {options[theme as keyof typeof options]}
             </span>
           </span>
         )

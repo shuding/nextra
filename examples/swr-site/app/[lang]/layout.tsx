@@ -100,7 +100,7 @@ export default async function RootLayout({ children, params: { lang } }) {
             projectLink="https://github.com/vercel/swr"
             chatLink="https://discord.com"
           >
-            <LocaleSwitch className="[&>span>span]:hidden" />
+            <LocaleSwitch />
           </Navbar>
           {children}
           <Footer>
