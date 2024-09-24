@@ -24,13 +24,13 @@
     & > path {
       opacity: 0;
     }
-    
+
     g {
       transition: var(--animation) 0.2s;
-      
+
       &:nth-of-type(1) {
         @apply _rotate-45;
-        
+
         path {
           transform: translate3d(0, 6px, 0);
         }
