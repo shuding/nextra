@@ -23,31 +23,24 @@ export function LocaleSwitch({
   if (!i18n.length) return null
 
   const locale = pathname.split('/')[1]
-  const selected = i18n.find(l => locale === l.locale)
   return (
     <Select
       title="Change language"
       className={className}
-      onChange={option => {
+      onChange={lang => {
         const date = new Date(Date.now() + ONE_YEAR)
-        document.cookie = `NEXT_LOCALE=${
-          option.key
-        }; expires=${date.toUTCString()}; path=/`
-        location.href = addBasePath(
-          pathname.replace(`/${locale}`, `/${option.key}`)
-        )
+        document.cookie = `NEXT_LOCALE=${lang}; expires=${date.toUTCString()}; path=/`
+        location.href = addBasePath(pathname.replace(`/${locale}`, `/${lang}`))
       }}
-      selected={{
-        key: selected?.locale || '',
-        name: (
-          <span className="_flex _items-center _gap-2">
-            <GlobeIcon height="12" />
-            {!lite && selected?.name}
-          </span>
-        )
-      }}
+      value={locale}
+      selectedOption={
+        <span className="_flex _items-center _gap-2">
+          <GlobeIcon height="12" />
+          {!lite && i18n.find(l => locale === l.locale)?.name}
+        </span>
+      }
       options={i18n.map(l => ({
-        key: l.locale,
+        id: l.locale,
         name: l.name
       }))}
     />

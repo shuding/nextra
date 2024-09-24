@@ -7,17 +7,19 @@ import {
   ListboxOptions
 } from '@headlessui/react'
 import cn from 'clsx'
-import type { ReactElement } from 'react'
+import type { Dispatch, ReactElement, ReactNode } from 'react'
+import { Fragment } from 'react'
 import { CheckIcon } from '../icons/index.js'
 
 interface MenuOption {
-  key: string
-  name: ReactElement | string
+  id: string
+  name: string
 }
 
 interface MenuProps {
-  selected: MenuOption
-  onChange: (option: MenuOption) => void
+  selectedOption: ReactNode
+  value: string
+  onChange: Dispatch<string>
   options: MenuOption[]
   title?: string
   className?: string
@@ -25,13 +27,14 @@ interface MenuProps {
 
 export function Select({
   options,
-  selected,
   onChange,
+  selectedOption,
+  value,
   title,
   className
 }: MenuProps): ReactElement {
   return (
-    <Listbox value={selected} onChange={onChange}>
+    <Listbox value={value} onChange={onChange}>
       <ListboxButton
         title={title}
         className={({ hover, open, focus }) =>
@@ -47,7 +50,7 @@ export function Select({
           )
         }
       >
-        {selected.name}
+        {selectedOption}
       </ListboxButton>
       <ListboxOptions
         as="ul"
@@ -62,24 +65,22 @@ export function Select({
         }
       >
         {options.map(option => (
-          <ListboxOption
-            key={option.key}
-            value={option}
-            as="li"
-            className={({ focus }) =>
-              cn(
-                focus
-                  ? '_bg-primary-50 _text-primary-600 dark:_bg-primary-500/10'
-                  : '_text-gray-800 dark:_text-gray-100',
-                '_cursor-pointer _whitespace-nowrap _py-1.5 _px-3',
-                '_transition-colors',
-                option.key === selected.key &&
-                  '_flex _items-center _justify-between _gap-3'
-              )
-            }
-          >
-            {option.name}
-            {option.key === selected.key && <CheckIcon height="16" />}
+          <ListboxOption key={option.id} value={option.id} as={Fragment}>
+            {({ selected, focus }) => (
+              <li
+                className={cn(
+                  focus
+                    ? '_bg-primary-50 _text-primary-600 dark:_bg-primary-500/10'
+                    : '_text-gray-800 dark:_text-gray-100',
+                  '_cursor-pointer _whitespace-nowrap _py-1.5 _px-3',
+                  '_transition-colors',
+                  selected && '_flex _items-center _justify-between _gap-3'
+                )}
+              >
+                {option.name}
+                {selected && <CheckIcon height="16" />}
+              </li>
+            )}
           </ListboxOption>
         ))}
       </ListboxOptions>

@@ -16,40 +16,32 @@ export function ThemeSwitch({
   lite,
   className
 }: ThemeSwitchProps): ReactElement | null {
-  const { setTheme, resolvedTheme, theme = 'light' } = useTheme()
+  const { setTheme, resolvedTheme, theme } = useTheme()
   const mounted = useMounted()
   const config = useThemeConfig()
-
-  const IconToUse = mounted && resolvedTheme === 'dark' ? MoonIcon : SunIcon
-  const { options } = config.themeSwitch
-
   if (!config.darkMode) {
     return null
   }
-
+  const IconToUse = mounted && resolvedTheme === 'dark' ? MoonIcon : SunIcon
+  const { options } = config.themeSwitch
+  const id = mounted ? (theme as keyof typeof options) : 'light'
   return (
     <Select
       className={className}
       title="Change theme"
       options={[
-        { key: 'light', name: options.light },
-        { key: 'dark', name: options.dark },
-        { key: 'system', name: options.system }
+        { id: 'light', name: options.light },
+        { id: 'dark', name: options.dark },
+        { id: 'system', name: options.system }
       ]}
-      onChange={option => {
-        setTheme(option.key)
-      }}
-      selected={{
-        key: theme,
-        name: (
-          <span className="_flex _items-center _gap-2 _capitalize">
-            <IconToUse height="12" />
-            <span className={lite ? 'md:_hidden' : ''}>
-              {options[theme as keyof typeof options]}
-            </span>
-          </span>
-        )
-      }}
+      onChange={setTheme}
+      value={id}
+      selectedOption={
+        <span className="_flex _items-center _gap-2 _capitalize">
+          <IconToUse height="12" />
+          <span className={lite ? 'md:_hidden' : ''}>{options[id]}</span>
+        </span>
+      }
     />
   )
 }

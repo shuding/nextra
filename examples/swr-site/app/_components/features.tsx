@@ -59,7 +59,7 @@ export async function Features({
           }
         ].map(({ name, icon: Icon }) => (
           <li key={name} className="feature">
-            <Icon />
+            <Icon height="24" />
             <h4>{name}</h4>
           </li>
         ))}
