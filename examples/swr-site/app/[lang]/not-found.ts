@@ -1,3 +1,1 @@
-import { NotFoundPage } from 'nextra-theme-docs'
-
-export default NotFoundPage
+export { NotFoundPage as default } from 'nextra-theme-docs'
