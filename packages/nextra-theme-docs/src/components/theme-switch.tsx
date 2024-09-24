@@ -15,13 +15,18 @@ type ThemeSwitchProps = {
 export function ThemeSwitch({
   lite,
   className
-}: ThemeSwitchProps): ReactElement {
+}: ThemeSwitchProps): ReactElement | null {
   const { setTheme, resolvedTheme, theme = 'light' } = useTheme()
   const mounted = useMounted()
   const config = useThemeConfig()
 
   const IconToUse = mounted && resolvedTheme === 'dark' ? MoonIcon : SunIcon
   const { options } = config.themeSwitch
+
+  if (!config.darkMode) {
+    return null
+  }
+
   return (
     <Select
       className={className}

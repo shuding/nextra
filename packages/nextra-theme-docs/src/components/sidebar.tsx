@@ -155,12 +155,12 @@ function Folder({ item, anchors, onFocus, level }: FolderProps): ReactElement {
           classes.link,
           active ? classes.active : classes.inactive
         )}
-        onClick={e => {
+        onClick={event => {
           const clickedToggleIcon = ['svg', 'path'].includes(
-            (e.target as HTMLElement).tagName.toLowerCase()
+            event.currentTarget.tagName.toLowerCase()
           )
           if (clickedToggleIcon) {
-            e.preventDefault()
+            event.preventDefault()
           }
           if (isLink) {
             // If it's focused, we toggle it. Otherwise, always open it.
@@ -371,9 +371,10 @@ export function MobileNav() {
         className={cn(
           'md:_hidden',
           classes.aside,
+          '_bg-[rgb(var(--nextra-bg))]',
           menu
-            ? 'max-md:[transform:translate3d(0,0,0)]'
-            : 'max-md:[transform:translate3d(0,-100%,0)]'
+            ? '[transform:translate3d(0,0,0)]'
+            : '[transform:translate3d(0,-100%,0)]'
         )}
       >
         {themeConfig.search && (
@@ -402,9 +403,7 @@ export function MobileNav() {
             )}
           >
             <LocaleSwitch className="_grow" />
-            {themeConfig.darkMode && (
-              <ThemeSwitch lite={hasI18n} className={hasI18n ? '' : '_grow'} />
-            )}
+            <ThemeSwitch lite={hasI18n} className={hasI18n ? '' : '_grow'} />
           </div>
         )}
       </aside>
@@ -417,7 +416,7 @@ type SidebarProps = {
 }
 
 export function Sidebar({ toc }: SidebarProps): ReactElement {
-  const { normalizePagesResult, hideSidebar: asPopover } = useConfig()
+  const { normalizePagesResult, hideSidebar } = useConfig()
   const [showSidebar, setSidebar] = useState(true)
   const [showToggleAnimation, setToggleAnimation] = useState(false)
   const sidebarRef = useRef<HTMLDivElement>(null)
@@ -446,7 +445,7 @@ export function Sidebar({ toc }: SidebarProps): ReactElement {
 
   return (
     <>
-      {includePlaceholder && asPopover && (
+      {includePlaceholder && hideSidebar && (
         <div className="max-xl:_hidden _h-0 _w-64 _shrink-0" />
       )}
       <aside
@@ -454,7 +453,7 @@ export function Sidebar({ toc }: SidebarProps): ReactElement {
           'max-md:_hidden',
           classes.aside,
           showSidebar ? 'md:_w-64' : 'md:_w-20',
-          asPopover ? 'md:_hidden' : 'md:_sticky md:_self-start'
+          hideSidebar ? 'md:_hidden' : 'md:_sticky md:_self-start'
         )}
       >
         <div
@@ -465,7 +464,7 @@ export function Sidebar({ toc }: SidebarProps): ReactElement {
           ref={sidebarRef}
         >
           {/* without asPopover check <Collapse />'s inner.clientWidth on `layout: "raw"` will be 0 and element will not have width on initial loading */}
-          {(!asPopover || !showSidebar) && (
+          {(!hideSidebar || !showSidebar) && (
             <Collapse isOpen={showSidebar} horizontal>
               <Menu
                 className="nextra-menu-desktop"
@@ -500,12 +499,10 @@ export function Sidebar({ toc }: SidebarProps): ReactElement {
               lite={!showSidebar}
               className={showSidebar ? '_grow' : 'max-md:_grow'}
             />
-            {themeConfig.darkMode && (
-              <ThemeSwitch
-                lite={!showSidebar || hasI18n}
-                className={!showSidebar || hasI18n ? '' : '_grow'}
-              />
-            )}
+            <ThemeSwitch
+              lite={!showSidebar || hasI18n}
+              className={!showSidebar || hasI18n ? '' : '_grow'}
+            />
             {themeConfig.sidebar.toggleButton && (
               <Button
                 title={showSidebar ? 'Hide sidebar' : 'Show sidebar'}
