@@ -2,10 +2,7 @@ import { jsxRuntime } from '../jsx-runtime.cjs'
 import type { MDXComponents } from '../mdx.js'
 import { useMDXComponents } from '../mdx.js'
 
-export function evaluate(
-  compiledSource: string,
-  scope: Record<string, unknown> = {}
-) {
+function evaluate(compiledSource: string, scope: Record<string, unknown> = {}) {
   // if we're ready to render, we can assemble the component tree and let React do its thing
   // first we set up the scope which has to include the mdx custom
   // create element function as well as any components we're using
@@ -21,11 +18,7 @@ export function evaluate(
   return hydrateFn({ useMDXComponents, ...jsxRuntime }, ...values)
 }
 
-export function RemoteContent({
-  scope,
-  components,
-  compiledSource
-}: {
+export type RemoteContentProps = {
   /**
    * An object mapping names to React components.
    * The key used will be the name accessible to MDX.
@@ -38,7 +31,13 @@ export function RemoteContent({
    */
   scope?: Record<string, unknown>
   compiledSource: string
-}) {
+}
+
+export function RemoteContent({
+  scope,
+  components,
+  compiledSource
+}: RemoteContentProps) {
   const MDXContent = evaluate(compiledSource, scope).default
 
   return <MDXContent components={components} />
