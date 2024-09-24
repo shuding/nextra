@@ -10,7 +10,7 @@ import { getGitIssueUrl, useGitEditUrl } from '../utils'
 import { Anchor } from './anchor'
 import { BackToTop } from './back-to-top'
 
-export type TOCProps = {
+type TOCProps = {
   toc: Heading[]
   filePath: string
   pageTitle: string
