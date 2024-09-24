@@ -1,3 +1,5 @@
+'use client'
+
 /**
  * The code included in this file is inspired by https://github.com/reach/reach-ui/blob/43f450db7bcb25a743121fe31355f2294065a049/packages/skip-nav/src/reach-skip-nav.tsx which is part of the @reach/skip-nav library.
  *
@@ -25,36 +27,35 @@
  *
  * Source: https://github.com/reach/reach-ui/blob/43f450db7bcb25a743121fe31355f2294065a049/LICENSE
  */
+import { Button, ButtonProps } from '@headlessui/react'
 import cn from 'clsx'
-import type { ComponentProps, ReactElement } from 'react'
+import type { ComponentProps, FC } from 'react'
 
 const DEFAULT_ID = 'nextra-skip-nav'
 const DEFAULT_LABEL = 'Skip to Content'
 
-export const SkipNavLink = ({
+export const SkipNavLink: FC = ({
   // Give the option to the user to pass a falsy other than undefined to remove the default styles
   className,
   id = DEFAULT_ID,
-  children = DEFAULT_LABEL,
-  ...props
-}: Omit<ComponentProps<'a'>, 'href'>): ReactElement => (
-  <a
-    {...props}
+  children = DEFAULT_LABEL
+}: Pick<ButtonProps, 'className' | 'id' | 'children'>) => (
+  <Button
+    as="a"
     href={`#${id}`}
-    className={cn(
-      'nextra-focus nextra-skip-nav _sr-only',
-      'focus-visible:_not-sr-only focus-visible:_fixed focus-visible:_z-50 focus-visible:_my-3 focus-visible:_mx-4 focus-visible:_rounded-lg focus-visible:_px-3 focus-visible:_py-2 focus-visible:_text-sm focus-visible:_font-bold',
-      'focus-visible:_bg-[rgb(var(--nextra-bg))] focus-visible:_border focus-visible:_border-current',
-      className
-    )}
+    className={({ focus }) =>
+      cn(
+        'nextra-skip-nav _sr-only',
+        focus &&
+          'nextra-focusable _not-sr-only _fixed _z-50 _my-3 _mx-4 _rounded-lg _px-3 _py-2 _text-sm _font-bold _bg-[rgb(var(--nextra-bg))] _border _border-current',
+        className
+      )
+    }
   >
     {children}
-  </a>
+  </Button>
 )
 
-export const SkipNavContent = ({
-  id = DEFAULT_ID,
-  ...props
-}: Omit<ComponentProps<'div'>, 'children'>): ReactElement => (
-  <div {...props} id={id} />
-)
+export const SkipNavContent: FC<Pick<ComponentProps<'div'>, 'id'>> = ({
+  id = DEFAULT_ID
+}) => <div id={id} />
