@@ -59,11 +59,12 @@ export type Heading = {
 }
 
 export type PageOpts = {
-  filePath: string
-  timestamp?: number
-  readingTime?: ReadingTime
   title: string
-  metadata: Metadata
+  metadata: Metadata & {
+    filePath: string
+    timestamp?: number
+    readingTime?: ReadingTime
+  }
 }
 
 export type ReadingTime = {

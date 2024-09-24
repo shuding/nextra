@@ -6,7 +6,12 @@ import { useEffect } from 'react'
 import { Breadcrumb, Pagination, TOC } from '../../components'
 import { setToc, useConfig, useThemeConfig } from '../../stores'
 
-export const ClientWrapper: MDXWrapper = ({ toc, children, ...props }) => {
+export const ClientWrapper: MDXWrapper = ({
+  toc,
+  children,
+  metadata,
+  title
+}) => {
   const { normalizePagesResult } = useConfig()
   const themeConfig = useThemeConfig()
   const {
@@ -20,8 +25,8 @@ export const ClientWrapper: MDXWrapper = ({ toc, children, ...props }) => {
   const date =
     themeContext.timestamp &&
     themeConfig.gitTimestamp &&
-    props.timestamp &&
-    new Date(props.timestamp)
+    metadata.timestamp &&
+    new Date(metadata.timestamp)
 
   const gitTimestampEl = date ? (
     <div
@@ -56,8 +61,8 @@ export const ClientWrapper: MDXWrapper = ({ toc, children, ...props }) => {
           {themeContext.toc && activeType !== 'page' && (
             <TOC
               toc={themeConfig.toc.float ? toc : []}
-              filePath={props.filePath}
-              pageTitle={props.title}
+              filePath={metadata.filePath}
+              pageTitle={title}
             />
           )}
         </nav>

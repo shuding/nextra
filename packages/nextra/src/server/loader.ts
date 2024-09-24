@@ -88,13 +88,8 @@ export async function loader(
     useCachedCompiler: true,
     isPageImport
   })
-  // Imported as a normal component, no need to add the layout.
-  if (!isPageImport) {
-    return `${result}
-export default MDXLayout`
-  }
 
-  let timestamp: PageOpts['timestamp']
+  let timestamp: PageOpts['metadata']['timestamp']
   const { repository, gitRoot } = await initGitRepo
   if (repository && gitRoot) {
     try {
@@ -106,17 +101,29 @@ export default MDXLayout`
     }
   }
 
-  const restProps: Partial<PageOpts> = {
+  const restProps: PageOpts['metadata'] = {
     filePath: slash(path.relative(CWD, mdxPath)),
     timestamp,
     readingTime
+  }
+  const enhancedMetadata = `Object.assign(metadata, ${JSON.stringify(restProps)})`
+
+  // Imported as a normal component, no need to add the layout.
+  if (!isPageImport) {
+    return `${result}   
+${enhancedMetadata}
+export default MDXLayout`
   }
   const rawJs = `
 import { HOC_MDXWrapper } from 'nextra/setup-page'
 ${result}
 
-export default HOC_MDXWrapper(MDXLayout, _provideComponents, useTOC, ${JSON.stringify(
-    restProps
-  ).slice(0, -1)},metadata,title})`
+${enhancedMetadata}
+export default HOC_MDXWrapper(
+  MDXLayout,
+  _provideComponents,
+  useTOC,
+  {metadata, title}
+)`
   return rawJs
 }

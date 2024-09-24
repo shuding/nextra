@@ -6,7 +6,7 @@ import type { ReactElement } from 'react'
 import { useEffect, useRef } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import { useActiveAnchor, useThemeConfig } from '../stores'
-import { getGitIssueUrl, useGitEditUrl } from '../utils'
+import { getGitIssueUrl, gitUrlParse } from '../utils'
 import { Anchor } from './anchor'
 import { BackToTop } from './back-to-top'
 
@@ -52,13 +52,6 @@ export function TOC({ toc, filePath, pageTitle }: TOCProps): ReactElement {
       })
     }
   }, [activeSlug])
-
-  const editUrl = useGitEditUrl(filePath)
-  const gitIssueUrl = getGitIssueUrl({
-    labels: themeConfig.feedback.labels,
-    repository: themeConfig.docsRepositoryBase,
-    title: `Feedback for “${pageTitle}”`
-  })
 
   return (
     <div
@@ -110,13 +103,24 @@ export function TOC({ toc, filePath, pageTitle }: TOCProps): ReactElement {
           )}
         >
           {themeConfig.feedback.content && (
-            <Anchor className={linkClassName} href={gitIssueUrl} newWindow>
+            <Anchor
+              className={linkClassName}
+              href={getGitIssueUrl({
+                labels: themeConfig.feedback.labels,
+                repository: themeConfig.docsRepositoryBase,
+                title: `Feedback for “${pageTitle}”`
+              })}
+              newWindow
+            >
               {themeConfig.feedback.content}
             </Anchor>
           )}
 
           {themeConfig.editLink.content && (
-            <Anchor className={linkClassName} href={editUrl}>
+            <Anchor
+              className={linkClassName}
+              href={`${gitUrlParse(themeConfig.docsRepositoryBase).href}/${filePath}`}
+            >
               {themeConfig.editLink.content}
             </Anchor>
           )}
