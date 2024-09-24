@@ -101,9 +101,9 @@ export function Tabs({
           <HeadlessTab
             key={index}
             disabled={isTabObjectItem(item) && item.disabled}
-            className={({ selected, disabled, hover, focus }) =>
+            className={({ selected, disabled, hover }) =>
               cn(
-                focus && 'nextra-focusable _ring-inset',
+                'nextra-focus focus:_ring-inset',
                 '_whitespace-nowrap',
                 '_rounded-t _p-2 _font-medium _leading-5 _transition-colors',
                 '_-mb-0.5 _select-none _border-b-2',

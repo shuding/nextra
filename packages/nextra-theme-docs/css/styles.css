@@ -30,6 +30,9 @@ body {
 .nextra-focusable,
 .nextra-focus:focus-visible {
   @apply _ring-2 _ring-primary-200 _ring-offset-1 _ring-offset-primary-300 dark:_ring-primary-800 dark:_ring-offset-primary-700;
+  &:is(a, summary) {
+    @apply _rounded;
+  }
 }
 
 .nextra-focusable,
