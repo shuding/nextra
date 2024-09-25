@@ -3,6 +3,8 @@ import type { ReactElement, ReactNode } from 'react'
 import { XIcon } from '../../icons/index.js'
 import { CloseBannerButton } from './close-banner-button.js'
 
+const CLASS_NAME = 'nextra-banner'
+
 export function Banner({
   children,
   dismissible = true,
@@ -15,14 +17,16 @@ export function Banner({
   if (!children) {
     return null
   }
-  const hideBannerScript = `try{document.querySelector('.nextra-banner').classList.toggle('_hidden',localStorage.getItem(${JSON.stringify(storageKey)}))}catch(e){}`
+  const hideBannerScript = `try{document.querySelector('.${CLASS_NAME}').classList.toggle('_hidden',localStorage.getItem(${JSON.stringify(storageKey)}))}catch(e){}`
 
   return (
     <div
+      // Because we update class in `<script>`
       suppressHydrationWarning
       style={{ height: 'var(--nextra-banner-height)' }}
       className={cn(
-        'nextra-banner max-md:_sticky _top-0 _z-20 _flex _items-center',
+        CLASS_NAME,
+        'max-md:_sticky _top-0 _z-20 _flex _items-center',
         '_text-slate-50 dark:_text-white _bg-neutral-900 dark:_bg-[linear-gradient(1deg,#383838,#212121)]',
         '_px-2 print:_hidden'
       )}
