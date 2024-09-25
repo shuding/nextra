@@ -125,7 +125,10 @@ export function Layout({ children, ...themeConfig }: Props): ReactElement {
     <ThemeConfigProvider value={data}>
       <ThemeProvider {...data.nextThemes}>
         <ConfigProvider pageMap={data.pageMap}>
-          {/* MobileNav should be here, otherwise for non mdx pages will be not rendered */}
+          {/*
+           * MobileNav should be in layout and not in mdx wrapper, otherwise for non mdx pages will
+           * be not rendered
+           */}
           <MobileNav />
           <SkipNavLink />
           {newChildren}
