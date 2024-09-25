@@ -336,7 +336,7 @@ export function MobileNav() {
     setMenu(false)
   }, [pathname])
 
-  const anchors = useMemo(() => (toc || []).filter(v => v.depth === 2), [toc])
+  const anchors = useMemo(() => toc.filter(v => v.depth === 2), [toc])
   const sidebarRef = useRef<HTMLDivElement>(null!)
 
   useEffect(() => {
