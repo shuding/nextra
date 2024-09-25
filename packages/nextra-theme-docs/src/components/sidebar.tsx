@@ -503,7 +503,7 @@ export function Sidebar({ toc }: { toc: Heading[] }): ReactElement {
                 title={showSidebar ? 'Hide sidebar' : 'Show sidebar'}
                 className={({ hover }) =>
                   cn(
-                    'max-md:_hidden _rounded-md _p-2',
+                    '_rounded-md _p-2',
                     hover
                       ? '_bg-gray-100 _text-gray-900 dark:_bg-primary-100/5 dark:_text-gray-50'
                       : '_text-gray-600 dark:_text-gray-400'
