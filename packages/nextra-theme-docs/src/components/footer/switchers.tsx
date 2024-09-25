@@ -1,21 +1,14 @@
 'use client'
 
+import { ReactNode } from 'react'
 import { useConfig, useThemeConfig } from '../../stores'
-import { LocaleSwitch } from '../locale-switch'
-import { ThemeSwitch } from '../theme-switch'
 
-export function Switchers() {
+export function Switchers({ children }: { children: ReactNode }) {
   const { hideSidebar } = useConfig()
   const { i18n, darkMode } = useThemeConfig()
 
   if (!hideSidebar || (!darkMode && !i18n.length)) {
     return null
   }
-
-  return (
-    <div className="_mx-auto _flex _max-w-[90rem] _gap-2 _py-2 _px-4">
-      <LocaleSwitch />
-      <ThemeSwitch />
-    </div>
-  )
+  return children
 }
