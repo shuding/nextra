@@ -49,7 +49,7 @@ const classes = {
   ),
   aside: cn(
     'nextra-sidebar-container _flex _flex-col',
-    'md:_top-[--nextra-navbar-height] md:_shrink-0 motion-reduce:_transform-none [.resizing_&]:_transition-none',
+    'motion-reduce:_transform-none [.resizing_&]:_transition-none',
     '_transform-gpu _transition-all _ease-in-out',
     'print:_hidden'
   ),
@@ -369,6 +369,7 @@ export function MobileNav() {
         className={cn(
           'md:_hidden',
           classes.aside,
+          String.raw`[&:has(~*~.nextra-banner:not(.\_hidden))]:_pt-[6.5rem]`,
           '_bg-[rgb(var(--nextra-bg))]',
           menu
             ? '[transform:translate3d(0,0,0)]'
@@ -446,8 +447,9 @@ export function Sidebar({ toc }: { toc: Heading[] }): ReactElement {
         className={cn(
           'max-md:_hidden',
           classes.aside,
-          showSidebar ? 'md:_w-64' : 'md:_w-20',
-          hideSidebar ? 'md:_hidden' : 'md:_sticky md:_self-start'
+          '_top-[--nextra-navbar-height] _shrink-0',
+          showSidebar ? '_w-64' : '_w-20',
+          hideSidebar ? '_hidden' : '_sticky _self-start'
         )}
       >
         <div

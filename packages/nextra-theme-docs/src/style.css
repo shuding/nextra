@@ -54,17 +54,6 @@ body {
         linear-gradient(to left, #000 10px, transparent 10px);
     }
   }
-
-  body:not(.nextra-banner-hidden)
-    .nextra-banner-container
-    ~ .nextra-nav-container {
-    @apply _top-10;
-  }
-
-  body:not(.nextra-banner-hidden)
-    .nextra-sidebar-container:has(~ * ~ .nextra-banner-container) {
-    @apply _pt-[6.5rem];
-  }
 }
 
 @media (min-width: 768px) {

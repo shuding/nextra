@@ -1,5 +1,7 @@
+'use client'
+
 import { Button as HeadlessButton } from '@headlessui/react'
-import type { ButtonProps } from '@headlessui/react'
+import type { ButtonProps as HeadlessButtonProps } from '@headlessui/react'
 import cn from 'clsx'
 import type { ReactElement } from 'react'
 
@@ -10,14 +12,16 @@ export const classes = {
   )
 }
 
+export type ButtonProps = HeadlessButtonProps & {
+  variant?: 'outline' | 'default'
+}
+
 export function Button({
   children,
   className,
   variant = 'default',
   ...props
-}: ButtonProps & {
-  variant?: 'outline' | 'default'
-}): ReactElement {
+}: ButtonProps): ReactElement {
   return (
     <HeadlessButton
       className={args =>
