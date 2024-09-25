@@ -354,8 +354,7 @@ export function MobileNav() {
 
   const themeConfig = useThemeConfig()
   const hasI18n = themeConfig.i18n.length > 0
-  const hasMenu =
-    themeConfig.darkMode || hasI18n || themeConfig.sidebar.toggleButton
+  const hasMenu = themeConfig.darkMode || hasI18n
 
   return (
     <>
@@ -377,7 +376,7 @@ export function MobileNav() {
         )}
       >
         {themeConfig.search && (
-          <div className="_px-4 _pt-4 md:_hidden">{themeConfig.search}</div>
+          <div className="_px-4 _pt-4">{themeConfig.search}</div>
         )}
         <div
           className={cn(classes.wrapper, 'nextra-scrollbar')}
