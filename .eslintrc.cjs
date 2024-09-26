@@ -156,7 +156,8 @@ module.exports = {
             'nextra-sidebar',
             'nextra-breadcrumb',
             'nextra-menu-desktop',
-            'nextra-menu-mobile'
+            'nextra-menu-mobile',
+            'nextra-toc'
           ]
         }
       },
@@ -202,7 +203,12 @@ module.exports = {
         tailwindcss: {
           config: 'packages/nextra-theme-docs/tailwind.config.ts',
           callees: ['cn'],
-          whitelist: ['nextra-code', 'nextra-filetree', 'nextra-bleed']
+          whitelist: [
+            'nextra-code',
+            'nextra-filetree',
+            'nextra-bleed',
+            'nextra-skip-nav'
+          ]
         }
       },
       rules: {
