@@ -35,13 +35,13 @@ export function Navbar({
   return (
     <header
       className={cn(
-        'nextra-nav _sticky _top-0 _z-20 _w-full _bg-transparent print:_hidden',
+        'nextra-navbar _sticky _top-0 _z-20 _w-full _bg-transparent print:_hidden',
         String.raw`max-md:[.nextra-banner:not(.\_hidden)~&]:_top-10`
       )}
     >
       <div
         className={cn(
-          'nextra-nav-blur',
+          'nextra-navbar-blur',
           '_pointer-events-none _absolute _z-[-1] _size-full',
           '_shadow-[0_2px_4px_rgba(0,0,0,.02),0_1px_0_rgba(0,0,0,.06)]',
           'dark:_shadow-[0_-1px_0_rgba(255,255,255,.1)_inset]',
