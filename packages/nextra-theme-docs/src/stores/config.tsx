@@ -34,10 +34,12 @@ export const useConfig = () =>
 function getStore(list: PageMapItem[], route: string) {
   const normalizePagesResult = normalizePages({ list, route })
   const { activeThemeContext, activeType } = normalizePagesResult
-
   return {
     normalizePagesResult,
-    hideSidebar: !activeThemeContext.sidebar || activeType === 'page'
+    hideSidebar:
+      !activeThemeContext.sidebar ||
+      activeType === 'page' ||
+      activeType === undefined /* non mdx pages */
   }
 }
 
