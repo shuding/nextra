@@ -60,7 +60,7 @@ export function Select({
           cn(
             'focus-visible:nextra-focus',
             open ? '_opacity-100' : '_opacity-0',
-            'motion-reduce:_transition-none _transition-opacity _min-w-[--button-width] _z-20 _max-h-64 _rounded-md _border _border-black/5 _backdrop-blur-lg _bg-[rgb(var(--nextra-bg),.8)] _py-1 _text-sm _shadow-lg dark:_border-white/20'
+            'motion-reduce:_transition-none _transition-opacity _min-w-[--button-width] _z-20 _max-h-64 _rounded-md _border _border-black/5 _backdrop-blur-md _bg-[rgba(var(--nextra-bg),.7)] _py-1 _text-sm _shadow-lg dark:_border-white/20'
           )
         }
       >

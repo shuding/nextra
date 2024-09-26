@@ -33,29 +33,6 @@ html {
   }
 }
 
-@media (max-width: 767px) {
-  .nextra-sidebar-container {
-    @apply _fixed _pt-[--nextra-navbar-height] _top-0 _w-full _bottom-0 _z-[15] _overscroll-contain;
-    transition: transform 0.8s cubic-bezier(0.52, 0.16, 0.04, 1);
-    will-change: transform, opacity;
-    contain: layout style;
-    backface-visibility: hidden;
-
-    & > .nextra-scrollbar {
-      mask-image: linear-gradient(to bottom, transparent, #000 20px),
-        linear-gradient(to left, #000 10px, transparent 10px);
-    }
-  }
-}
-
-@media (min-width: 768px) {
-  .nextra-toc > .div,
-  .nextra-sidebar-container {
-    mask-image: linear-gradient(to bottom, transparent, #000 20px),
-      linear-gradient(to left, #000 10px, transparent 10px);
-  }
-}
-
 .contains-task-list {
   @apply _mt-6;
 
@@ -87,7 +64,6 @@ html {
 }
 
 body,
-.nextra-nav-container-blur,
 .nextra-toc-footer,
 .nextra-sidebar-footer {
   @apply _bg-[rgb(var(--nextra-bg))];

@@ -48,7 +48,7 @@ const classes = {
     '_ps-3 before:_start-0'
   ),
   aside: cn(
-    'nextra-sidebar-container _flex _flex-col',
+    'nextra-sidebar _flex _flex-col',
     'motion-reduce:_transform-none [.resizing_&]:_transition-none',
     '_transform-gpu _transition-all _ease-in-out',
     'print:_hidden'
@@ -366,9 +366,12 @@ export function MobileNav() {
       />
       <aside
         className={cn(
-          'md:_hidden',
           classes.aside,
-          String.raw`[&:has(~*~.nextra-banner:not(.\_hidden))]:_pt-[6.5rem]`,
+          '_fixed _top-[--nextra-navbar-height] _w-full _bottom-0 _z-10 _overscroll-contain',
+          '_transition-transform _duration-700 _ease-[cubic-bezier(.52,.16,.04,1)] _will-change-[transform,opacity]',
+          '[contain:layout_style]',
+          'md:_hidden',
+          String.raw`[&:has(~*~.nextra-banner:not(.\_hidden))]:_pt-[--nextra-banner-height]`,
           '_bg-[rgb(var(--nextra-bg))]',
           menu
             ? '[transform:translate3d(0,0,0)]'
@@ -444,8 +447,8 @@ export function Sidebar({ toc }: { toc: Heading[] }): ReactElement {
       )}
       <aside
         className={cn(
-          'max-md:_hidden',
           classes.aside,
+          'max-md:_hidden',
           '_top-[--nextra-navbar-height] _shrink-0',
           showSidebar ? '_w-64' : '_w-20',
           hideSidebar ? '_hidden' : '_sticky _self-start'

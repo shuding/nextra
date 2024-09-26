@@ -3,11 +3,14 @@
   path {
     @apply motion-reduce:!_transition-none;
   }
+
   --animation: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
 
   g {
-    @apply _origin-center _transition-[--animation];
+    @apply _origin-center;
+    transition: var(--animation);
   }
+
   path {
     opacity: 1;
     transition:
@@ -21,6 +24,7 @@
         var(--animation),
         opacity 0s ease 0.2s;
     }
+
     & > path {
       opacity: 0;
     }
@@ -29,14 +33,16 @@
       transition: var(--animation) 0.2s;
 
       &:nth-of-type(1) {
-        @apply _rotate-45;
+        transform: rotate(45deg);
 
         path {
           transform: translate3d(0, 6px, 0);
         }
       }
+
       &:nth-of-type(2) {
-        @apply _-rotate-45;
+        transform: rotate(-45deg);
+
         path {
           transform: translate3d(0, -6px, 0);
         }

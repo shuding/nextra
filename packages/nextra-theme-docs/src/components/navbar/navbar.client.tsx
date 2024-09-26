@@ -66,7 +66,7 @@ function NavbarMenu({
             open ? '_opacity-100' : '_opacity-0',
             'nextra-scrollbar _transition-opacity motion-reduce:_transition-none',
             '_border _border-black/5 dark:_border-white/20',
-            '_backdrop-blur-lg _bg-[rgb(var(--nextra-bg),.8)]',
+            '_backdrop-blur-md _bg-[rgba(var(--nextra-bg),.7)]',
             '_z-20 _rounded-md _py-1 _text-sm _shadow-lg',
             // headlessui adds max-height as style, use !important to override
             '!_max-h-[min(calc(100vh-5rem),256px)]'
