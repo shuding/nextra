@@ -17,7 +17,7 @@ import { Anchor } from '../anchor'
 
 const classes = {
   link: cn(
-    '_text-sm contrast-more:_text-gray-700 contrast-more:dark:_text-gray-100'
+    '_text-sm contrast-more:_text-gray-700 contrast-more:dark:_text-gray-100 max-md:_hidden _whitespace-nowrap'
   ),
   inactive: cn(
     '_text-gray-600 hover:_text-gray-800 dark:_text-gray-400 dark:hover:_text-gray-200'
@@ -47,7 +47,7 @@ function NavbarMenu({
           cn(
             classes.link,
             classes.inactive,
-            'max-md:_hidden _items-center _whitespace-nowrap _flex _gap-1.5',
+            '_items-center _flex _gap-1.5',
             focus && 'nextra-focusable'
           )
         }
@@ -141,7 +141,6 @@ export function ClientNavbar({
             key={href}
             className={cn(
               classes.link,
-              'max-md:_hidden _whitespace-nowrap',
               !isActive || page.newWindow
                 ? classes.inactive
                 : '_font-medium _subpixel-antialiased'
