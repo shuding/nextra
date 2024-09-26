@@ -16,7 +16,7 @@ import {
 } from '../icons/index.js'
 import type { PreProps } from '../mdx-components/pre/index.js'
 
-export const LanguageToIcon: Record<string, FC<SVGProps<SVGSVGElement>>> = {
+const LanguageToIcon: Record<string, FC<SVGProps<SVGSVGElement>>> = {
   js: JavaScriptIcon,
   jsx: JavaScriptIcon,
   ts: TypeScriptIcon,
@@ -46,7 +46,7 @@ export const withIcons =
   // eslint-disable-next-line react/display-name -- HOC
   (props: PreProps): ReactElement => {
     const language = props['data-language']
-    const Icon = language ? LanguageToIcon[language] : null
+    const Icon = language && LanguageToIcon[language]
 
     return (
       <Component
