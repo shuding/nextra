@@ -233,7 +233,7 @@ export default function IndexPage() {
                 loop
                 muted
                 playsInline
-                className="nextra-focus dark:hidden block"
+                className="focus-visible:nextra-focus dark:hidden block"
               >
                 <source src="/assets/search.mp4" type="video/mp4" />
               </video>
@@ -242,7 +242,7 @@ export default function IndexPage() {
                 loop
                 muted
                 playsInline
-                className="nextra-focus dark:block hidden -translate-x-4"
+                className="focus-visible:nextra-focus dark:block hidden -translate-x-4"
               >
                 <source src="/assets/search-dark.mp4" type="video/mp4" />
               </video>

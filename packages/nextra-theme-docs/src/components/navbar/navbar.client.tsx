@@ -48,7 +48,7 @@ function NavbarMenu({
             classes.link,
             classes.inactive,
             '_items-center _flex _gap-1.5',
-            focus && 'nextra-focusable'
+            focus && 'nextra-focus'
           )
         }
       >
@@ -62,7 +62,7 @@ function NavbarMenu({
         transition
         className={({ open }) =>
           cn(
-            'nextra-focus',
+            'focus-visible:nextra-focus',
             open ? '_opacity-100' : '_opacity-0',
             'nextra-scrollbar _transition-opacity motion-reduce:_transition-none',
             '_border _border-black/5 dark:_border-white/20',

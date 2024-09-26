@@ -94,7 +94,7 @@ export function Tabs({
         className={cn(
           'nextra-scrollbar _overflow-x-auto _overscroll-x-contain _overflow-y-hidden',
           '_mt-4 _flex _w-full _gap-2 _border-b _border-gray-200 _pb-px dark:_border-neutral-800',
-          'nextra-focus'
+          'focus-visible:nextra-focus'
         )}
       >
         {items.map((item, index) => (
@@ -103,7 +103,7 @@ export function Tabs({
             disabled={isTabObjectItem(item) && item.disabled}
             className={({ selected, disabled, hover, focus }) =>
               cn(
-                focus && 'nextra-focusable _ring-inset',
+                focus && 'nextra-focus _ring-inset',
                 '_whitespace-nowrap',
                 '_rounded-t _p-2 _font-medium _leading-5 _transition-colors',
                 '_-mb-0.5 _select-none _border-b-2',
@@ -142,7 +142,7 @@ export function Tab({
       {...props}
       unmount={unmount}
       className={({ focus }) =>
-        cn('_rounded _mt-6', focus && 'nextra-focusable')
+        cn('_rounded _mt-6', focus && 'nextra-focus')
       }
     >
       {children}

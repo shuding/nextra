@@ -20,25 +20,17 @@ html {
     'calt' 1,
     'ss01' 1;
   -webkit-tap-highlight-color: transparent;
+
+  &:not(:has(*:focus)) {
+    /* adding `:not` with `:has` otherwise page jumps while focusing or while tapping in input https://github.com/shuding/nextra/issues/2840 */
+    @apply _scroll-pt-[--nextra-navbar-height];
+  }
 }
 
-/* adding `:not` with `:has` otherwise page jumps while focusing or while tapping in input https://github.com/shuding/nextra/issues/2840 */
-html:not(:has(*:focus)) {
-  @apply _scroll-pt-[--nextra-navbar-height];
-}
-
-body {
-  @apply _w-full dark:_text-gray-100;
-}
-
-.nextra-focusable,
-.nextra-focus:focus-visible {
-  @apply _ring-2 _ring-primary-200 _ring-offset-1 _ring-offset-primary-300 dark:_ring-primary-800 dark:_ring-offset-primary-700;
-}
-
-.nextra-focusable,
-.nextra-focus {
-  @apply focus-visible:_outline-none;
+@layer components {
+  .nextra-focus {
+    @apply focus-visible:_outline-none _ring-2 _ring-primary-200 _ring-offset-1 _ring-offset-primary-300 dark:_ring-primary-800 dark:_ring-offset-primary-700;
+  }
 }
 
 @media (max-width: 767px) {

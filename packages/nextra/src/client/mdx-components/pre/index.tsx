@@ -51,7 +51,7 @@ export function Pre({
       )}
       <pre
         className={cn(
-          'nextra-focus',
+          'focus-visible:nextra-focus',
           '_overflow-x-auto _subpixel-antialiased _text-[.9em]',
           '_bg-white dark:_bg-black _py-4',
           '_ring-1 _ring-inset _ring-gray-300 dark:_ring-neutral-700',

@@ -71,7 +71,7 @@ export function TOC({ toc, filePath, pageTitle }: TOCProps): ReactElement {
                 <a
                   href={`#${id}`}
                   className={cn(
-                    'nextra-focus',
+                    'focus-visible:nextra-focus',
                     {
                       2: '_font-semibold',
                       3: '_ms-4',

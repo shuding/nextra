@@ -13,7 +13,7 @@ interface NavLinkProps {
 
 const classes = {
   link: cn(
-    'nextra-focus _text-gray-600 dark:_text-gray-400',
+    'focus-visible:nextra-focus _text-gray-600 dark:_text-gray-400',
     'hover:_text-gray-800 dark:hover:_text-gray-200',
     'contrast-more:_text-gray-700 contrast-more:dark:_text-gray-100',
     '_flex _max-w-[50%] _items-center _gap-1 _py-4 _text-base _font-medium _transition-colors [word-break:break-word] md:_text-lg'

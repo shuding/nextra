@@ -57,7 +57,7 @@ export function Navbar({
         {logoLink ? (
           <NextLink
             href={typeof logoLink === 'string' ? logoLink : '/'}
-            className="nextra-focus _flex _items-center hover:_opacity-75 _me-auto"
+            className="focus-visible:nextra-focus _flex _items-center hover:_opacity-75 _me-auto"
           >
             {logo}
           </NextLink>

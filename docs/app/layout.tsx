@@ -73,7 +73,7 @@ export default async function RootLayout({
               href="https://nextra.site"
               target="_blank"
               rel="noreferrer"
-              className="nextra-focus"
+              className="focus-visible:nextra-focus"
             >
               🎉 Nextra 4.0 is released. Read more →
             </a>
@@ -93,7 +93,7 @@ export default async function RootLayout({
           {children}
           <Footer className="flex-col items-center md:items-start">
             <a
-              className="nextra-focus flex items-center gap-1"
+              className="focus-visible:nextra-focus flex items-center gap-1"
               target="_blank"
               rel="noreferrer"
               title="vercel.com homepage"

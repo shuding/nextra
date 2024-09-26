@@ -1,5 +1,3 @@
-'use client'
-
 import { Button as HeadlessButton } from '@headlessui/react'
 import type { ButtonProps as HeadlessButtonProps } from '@headlessui/react'
 import cn from 'clsx'
@@ -27,7 +25,7 @@ export function Button({
       className={args =>
         cn(
           '_transition',
-          args.focus && 'nextra-focusable',
+          args.focus && 'nextra-focus',
           variant === 'outline' && [classes.border, '_rounded-md _p-1.5'],
           typeof className === 'function' ? className(args) : className
         )

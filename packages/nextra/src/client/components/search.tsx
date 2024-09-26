@@ -198,7 +198,7 @@ export function Search({
               '_w-full md:_w-64',
               '_text-base _leading-tight md:_text-sm',
               focus
-                ? '_bg-transparent nextra-focusable'
+                ? '_bg-transparent nextra-focus'
                 : '_bg-black/[.05] dark:_bg-gray-50/10',
               'placeholder:_text-gray-500 dark:placeholder:_text-gray-400',
               'contrast-more:_border contrast-more:_border-current',

@@ -45,7 +45,7 @@ export function Select({
               : hover
                 ? '_bg-gray-100 _text-gray-900 dark:_bg-primary-100/5 dark:_text-gray-50'
                 : '_text-gray-600 dark:_text-gray-400',
-            focus && 'nextra-focusable',
+            focus && 'nextra-focus',
             className
           )
         }
@@ -58,7 +58,7 @@ export function Select({
         anchor={{ to: 'top start', gap: 10 }}
         className={({ open }) =>
           cn(
-            'nextra-focus',
+            'focus-visible:nextra-focus',
             open ? '_opacity-100' : '_opacity-0',
             'motion-reduce:_transition-none _transition-opacity _min-w-[--button-width] _z-20 _max-h-64 _rounded-md _border _border-black/5 _backdrop-blur-lg _bg-[rgb(var(--nextra-bg),.8)] _py-1 _text-sm _shadow-lg dark:_border-white/20'
           )
