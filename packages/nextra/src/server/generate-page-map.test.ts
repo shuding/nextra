@@ -102,8 +102,6 @@ describe('generatePageMapFromFilepaths()', () => {
         "docs/custom-theme/page.mdx",
         "docs/docs-theme/_meta.ts",
         "docs/docs-theme/api/use-config/page.mdx",
-        "docs/docs-theme/built-ins/bleed/page.mdx",
-        "docs/docs-theme/built-ins/page.mdx",
         "docs/docs-theme/page-configuration/page.mdx",
         "docs/docs-theme/page.mdx",
         "docs/docs-theme/start/page.mdx",
@@ -119,8 +117,10 @@ describe('generatePageMapFromFilepaths()', () => {
         "docs/guide/advanced/remote/page.mdx",
         "docs/guide/advanced/table/page.mdx",
         "docs/guide/advanced/tailwind-css/page.mdx",
+        "docs/guide/advanced/twoslash/page.mdx",
         "docs/guide/advanced/typescript/page.mdx",
         "docs/guide/built-ins/_meta.ts",
+        "docs/guide/built-ins/bleed/page.mdx",
         "docs/guide/built-ins/callout/page.mdx",
         "docs/guide/built-ins/cards/page.mdx",
         "docs/guide/built-ins/filetree/page.mdx",
@@ -137,7 +137,6 @@ describe('generatePageMapFromFilepaths()', () => {
         "docs/guide/search/page.mdx",
         "docs/guide/ssg/page.mdx",
         "docs/guide/syntax-highlighting/page.mdx",
-        "docs/guide/twoslash/page.mdx",
         "docs/page.mdx",
         "page.tsx",
         "showcase/page.mdx",
@@ -185,22 +184,6 @@ describe('generatePageMapFromFilepaths()', () => {
                     ],
                     "name": "api",
                     "route": "/docs/docs-theme/api",
-                  },
-                  {
-                    "children": [
-                      {
-                        "__pagePath": "docs/docs-theme/built-ins/bleed/page.mdx",
-                        "name": "bleed",
-                        "route": "/docs/docs-theme/built-ins/bleed",
-                      },
-                      {
-                        "__pagePath": "docs/docs-theme/built-ins/page.mdx",
-                        "name": "index",
-                        "route": "/docs/docs-theme/built-ins",
-                      },
-                    ],
-                    "name": "built-ins",
-                    "route": "/docs/docs-theme/built-ins",
                   },
                   {
                     "__pagePath": "docs/docs-theme/page.mdx",
@@ -279,6 +262,11 @@ describe('generatePageMapFromFilepaths()', () => {
                         "route": "/docs/guide/advanced/tailwind-css",
                       },
                       {
+                        "__pagePath": "docs/guide/advanced/twoslash/page.mdx",
+                        "name": "twoslash",
+                        "route": "/docs/guide/advanced/twoslash",
+                      },
+                      {
                         "__pagePath": "docs/guide/advanced/typescript/page.mdx",
                         "name": "typescript",
                         "route": "/docs/guide/advanced/typescript",
@@ -292,6 +280,11 @@ describe('generatePageMapFromFilepaths()', () => {
                   },
                   {
                     "children": [
+                      {
+                        "__pagePath": "docs/guide/built-ins/bleed/page.mdx",
+                        "name": "bleed",
+                        "route": "/docs/guide/built-ins/bleed",
+                      },
                       {
                         "__pagePath": "docs/guide/built-ins/callout/page.mdx",
                         "name": "callout",
@@ -378,11 +371,6 @@ describe('generatePageMapFromFilepaths()', () => {
                     "__pagePath": "docs/guide/syntax-highlighting/page.mdx",
                     "name": "syntax-highlighting",
                     "route": "/docs/guide/syntax-highlighting",
-                  },
-                  {
-                    "__pagePath": "docs/guide/twoslash/page.mdx",
-                    "name": "twoslash",
-                    "route": "/docs/guide/twoslash",
                   },
                   {
                     "__metaPath": "docs/guide/_meta.ts",
