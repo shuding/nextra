@@ -141,9 +141,7 @@ export function Tab({
     <TabPanel
       {...props}
       unmount={unmount}
-      className={({ focus }) =>
-        cn('_rounded _mt-6', focus && 'nextra-focus')
-      }
+      className={({ focus }) => cn('_rounded _mt-6', focus && 'nextra-focus')}
     >
       {children}
     </TabPanel>
