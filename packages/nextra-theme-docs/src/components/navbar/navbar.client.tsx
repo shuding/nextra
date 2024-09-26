@@ -48,7 +48,7 @@ function NavbarMenu({
           cn(
             classes.link,
             classes.inactive,
-            'max-md:_hidden _items-center _whitespace-nowrap _rounded _flex _gap-1.5',
+            'max-md:_hidden _items-center _whitespace-nowrap _flex _gap-1.5',
             focus && 'nextra-focusable'
           )
         }
