@@ -53,6 +53,10 @@ function NavbarMenu({
         }
       >
         {children}
+        <ArrowRightIcon
+          height="14"
+          className="*:_origin-center *:_transition-transform *:_rotate-90"
+        />
       </MenuButton>
       <MenuItems
         transition
@@ -116,10 +120,6 @@ export function ClientNavbar({
           return (
             <NavbarMenu key={menu.title} menu={menu}>
               {menu.title}
-              <ArrowRightIcon
-                height="14"
-                className="*:_origin-center *:_transition-transform *:_rotate-90"
-              />
             </NavbarMenu>
           )
         }
