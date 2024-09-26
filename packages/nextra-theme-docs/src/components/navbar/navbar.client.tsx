@@ -19,7 +19,6 @@ const classes = {
   link: cn(
     '_text-sm contrast-more:_text-gray-700 contrast-more:dark:_text-gray-100'
   ),
-  active: cn('_font-medium _subpixel-antialiased'),
   inactive: cn(
     '_text-gray-600 hover:_text-gray-800 dark:_text-gray-400 dark:hover:_text-gray-200'
   )
@@ -143,7 +142,9 @@ export function ClientNavbar({
             className={cn(
               classes.link,
               'max-md:_hidden _whitespace-nowrap',
-              !isActive || page.newWindow ? classes.inactive : classes.active
+              !isActive || page.newWindow
+                ? classes.inactive
+                : '_font-medium _subpixel-antialiased'
             )}
             newWindow={page.newWindow}
             aria-current={!page.newWindow && isActive}
