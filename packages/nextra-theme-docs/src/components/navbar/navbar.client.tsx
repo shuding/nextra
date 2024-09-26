@@ -99,6 +99,8 @@ function NavbarMenu({
   )
 }
 
+const isMenu = (page: any): page is MenuItem => page.type === 'menu'
+
 export function ClientNavbar({
   children
 }: {
@@ -112,18 +114,15 @@ export function ClientNavbar({
 
   return (
     <>
-      {items.map(pageOrMenu => {
-        if (pageOrMenu.display === 'hidden') return null
-
-        if (pageOrMenu.type === 'menu') {
-          const menu = pageOrMenu as MenuItem
+      {items.map(page => {
+        if (page.display === 'hidden') return
+        if (isMenu(page)) {
           return (
-            <NavbarMenu key={menu.title} menu={menu}>
-              {menu.title}
+            <NavbarMenu key={page.title} menu={page}>
+              {page.title}
             </NavbarMenu>
           )
         }
-        const page = pageOrMenu as PageItem
         let href = page.href || page.route || '#'
 
         // If it's a directory
