@@ -108,7 +108,7 @@ export function Tabs({
                 '_rounded-t _p-2 _font-medium _leading-5 _transition-colors',
                 '_-mb-0.5 _select-none _border-b-2',
                 selected
-                  ? '_border-current'
+                  ? '_border-current _outline-none'
                   : hover
                     ? '_border-gray-200 dark:_border-neutral-800'
                     : '_border-transparent',
