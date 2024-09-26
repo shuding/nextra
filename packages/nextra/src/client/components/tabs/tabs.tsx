@@ -104,6 +104,7 @@ export function Tabs({
             className={({ selected, disabled, hover, focus }) =>
               cn(
                 focus && 'nextra-focusable _ring-inset',
+                selected && '_outline-none',
                 '_whitespace-nowrap',
                 '_rounded-t _p-2 _font-medium _leading-5 _transition-colors',
                 '_-mb-0.5 _select-none _border-b-2',
