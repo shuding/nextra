@@ -151,6 +151,9 @@ module.exports = {
           config: 'packages/nextra-theme-docs/tailwind.config.ts',
           callees: ['cn'],
           whitelist: [
+            'nextra-navbar',
+            'nextra-navbar-blur',
+            'nextra-sidebar',
             'nextra-breadcrumb',
             'nextra-menu-desktop',
             'nextra-menu-mobile'
