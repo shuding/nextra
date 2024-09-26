@@ -224,7 +224,7 @@ export function Search({
             '_border _border-gray-200 _text-gray-100 dark:_border-neutral-800',
             '_z-20 _rounded-xl _py-2.5 _shadow-xl',
             'contrast-more:_border contrast-more:_border-gray-900 contrast-more:dark:_border-gray-50',
-            '_backdrop-blur-lg _bg-[rgb(var(--nextra-bg),.8)]',
+            '_backdrop-blur-md _bg-[rgba(var(--nextra-bg),.7)]',
             'motion-reduce:_transition-none _transition-opacity',
             open ? '_opacity-100' : '_opacity-0',
             error || isLoading || !results.length
