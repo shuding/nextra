@@ -82,8 +82,7 @@ function NavbarMenu({
             href={item.href || routes[key]?.route || menu.route + '/' + key}
             className={({ focus }) =>
               cn(
-                '_block',
-                '_py-1.5 _transition-colors _ps-3 _pe-9',
+                '_block _py-1.5 _transition-colors _ps-3 _pe-9',
                 focus
                   ? '_text-gray-900 dark:_text-gray-100'
                   : '_text-gray-600 dark:_text-gray-400'
