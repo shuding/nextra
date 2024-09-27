@@ -10,5 +10,6 @@ export {
   Navbar,
   ThemeSwitch,
   LocaleSwitch,
+  LastUpdated,
   Footer
 } from './components'

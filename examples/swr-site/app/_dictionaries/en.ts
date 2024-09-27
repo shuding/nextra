@@ -1,5 +1,6 @@
 export default {
   backToTop: 'Scroll to top',
+  lastUpdated: 'Last updated on',
   logo: {
     title: 'React Hooks for Data Fetching'
   },

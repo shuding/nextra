@@ -5,7 +5,7 @@ import type { FC, ReactElement, ReactNode } from 'react'
 import { Children, isValidElement } from 'react'
 import { z } from 'zod'
 import { fromZodError } from 'zod-validation-error'
-import { Footer, MobileNav, Navbar } from './components'
+import { Footer, LastUpdated, MobileNav, Navbar } from './components'
 import { ConfigProvider, ThemeConfigProvider } from './stores'
 
 const element = z.custom<ReactElement>(isValidElement, {
@@ -20,18 +20,14 @@ const theme = z.strictObject({
     .string()
     .startsWith('https://')
     .default('https://github.com/shuding/nextra'),
-  editLink: z
-    .strictObject({
-      content: stringOrElement.default('Edit this page')
-    })
-    .default({}),
+  editLink: stringOrElement.default('Edit this page'),
   feedback: z
     .strictObject({
       content: stringOrElement.default('Question? Give us feedback →'),
       labels: z.string().default('feedback')
     })
     .default({}),
-  gitTimestamp: z.boolean().default(true),
+  lastUpdated: element.default(<LastUpdated />),
   i18n: z
     .array(
       z.strictObject({
