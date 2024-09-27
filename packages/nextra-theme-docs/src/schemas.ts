@@ -126,7 +126,7 @@ export const themeSchema = /* @__PURE__ */ (() =>
       )
     }),
     toc: z.strictObject({
-      backToTop: z.boolean(),
+      backToTop: z.custom<ReactNode | FC>(...reactNode),
       component: z.custom<ReactNode | FC<TOCProps>>(...reactNode),
       extraContent: z.custom<ReactNode | FC>(...reactNode),
       float: z.boolean(),

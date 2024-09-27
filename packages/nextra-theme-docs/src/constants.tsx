@@ -1,5 +1,5 @@
 /* eslint sort-keys: error */
-import { useRouter } from 'next/router'
+import { useRouter } from 'nextra/hooks'
 import { DiscordIcon, GitHubIcon } from 'nextra/icons'
 import { isValidElement } from 'react'
 import type { z } from 'zod'
@@ -19,20 +19,6 @@ export const DEFAULT_LOCALE = 'en-US'
 
 export type DocsThemeConfig = z.infer<typeof themeSchema>
 export type PartialDocsThemeConfig = z.infer<typeof publicThemeSchema>
-
-const LOADING_LOCALES: Record<string, string> = {
-  'en-US': 'Loading',
-  fr: 'Сhargement',
-  ru: 'Загрузка',
-  'zh-CN': '正在加载'
-}
-
-const PLACEHOLDER_LOCALES: Record<string, string> = {
-  'en-US': 'Search documentation',
-  fr: 'Rechercher documents',
-  ru: 'Поиск документации',
-  'zh-CN': '搜索文档'
-}
 
 export const DEFAULT_THEME: DocsThemeConfig = {
   backgroundColor: {
@@ -164,19 +150,8 @@ export const DEFAULT_THEME: DocsThemeConfig = {
       </span>
     ),
     error: 'Failed to load search index.',
-    loading: function useLoading() {
-      const { locale, defaultLocale = DEFAULT_LOCALE } = useRouter()
-      const text =
-        (locale && LOADING_LOCALES[locale]) || LOADING_LOCALES[defaultLocale]
-      return <>{text}…</>
-    },
-    placeholder: function usePlaceholder() {
-      const { locale, defaultLocale = DEFAULT_LOCALE } = useRouter()
-      const text =
-        (locale && PLACEHOLDER_LOCALES[locale]) ||
-        PLACEHOLDER_LOCALES[defaultLocale]
-      return `${text}…`
-    }
+    loading: 'Loading…',
+    placeholder: 'Search documentation…'
   },
   sidebar: {
     defaultMenuCollapseLevel: 2,
@@ -184,17 +159,10 @@ export const DEFAULT_THEME: DocsThemeConfig = {
   },
   themeSwitch: {
     component: ThemeSwitch,
-    useOptions() {
-      const { locale } = useRouter()
-
-      if (locale === 'zh-CN') {
-        return { dark: '深色主题', light: '浅色主题', system: '系统默认' }
-      }
-      return { dark: 'Dark', light: 'Light', system: 'System' }
-    }
+    useOptions: { dark: 'Dark', light: 'Light', system: 'System' }
   },
   toc: {
-    backToTop: true,
+    backToTop: 'Scroll to top',
     component: TOC,
     float: true,
     title: 'On This Page'

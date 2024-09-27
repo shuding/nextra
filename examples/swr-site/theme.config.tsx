@@ -190,6 +190,14 @@ const config: DocsThemeConfig = {
     toggleButton: true
   },
   toc: {
+    backToTop: function BackToTop() {
+      const { locale } = useRouter()
+      return {
+        en: 'Scroll to top',
+        es: 'Desplazarse hacia arriba',
+        ru: 'Перейти наверх'
+      }[locale!]
+    },
     extraContent: (
       <img alt="placeholder cat" src="https://placecats.com/300/200" />
     ),
