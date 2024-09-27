@@ -13,12 +13,7 @@ import {
 } from './components'
 import { useConfig, useThemeConfig } from './contexts'
 import type { publicThemeSchema, themeSchema } from './schemas'
-import {
-  getGitIssueUrl,
-  renderComponent,
-  renderString,
-  useGitEditUrl
-} from './utils'
+import { getGitIssueUrl, useGitEditUrl } from './utils'
 
 export const DEFAULT_LOCALE = 'en-US'
 

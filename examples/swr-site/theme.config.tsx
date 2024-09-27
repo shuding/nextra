@@ -190,12 +190,12 @@ const config: DocsThemeConfig = {
     toggleButton: true
   },
   toc: {
-    backToTop() {
+    backToTop: function BackToTop() {
       const { locale } = useRouter()
       return {
-        ru: 'Перейти наверх',
+        en: 'Scroll to top',
         es: 'Desplazarse hacia arriba',
-        en: 'Scroll to top'
+        ru: 'Перейти наверх',
       }[locale!]
     },
     extraContent: (
