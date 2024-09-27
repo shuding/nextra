@@ -1,5 +1,20 @@
 # nextra-theme-docs
 
+## 3.0.0-alpha.42
+
+### Minor Changes
+
+- 1a97327: keep `loading`, `placeholder` and `themeSwitch.useOptions` default
+  theme options only for `en` lang
+
+### Patch Changes
+
+- ca51306: Enhance focus ring style consistency.
+- 1a97327: Update the `backToTop` option in the docs theme configuration to
+  support i18n
+- Updated dependencies [ca51306]
+  - nextra@3.0.0-alpha.42
+
 ## 3.0.0-alpha.41
 
 ### Patch Changes
