@@ -195,7 +195,7 @@ const config: DocsThemeConfig = {
       return {
         en: 'Scroll to top',
         es: 'Desplazarse hacia arriba',
-        ru: 'Перейти наверх',
+        ru: 'Перейти наверх'
       }[locale!]
     },
     extraContent: (
