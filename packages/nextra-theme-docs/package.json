@@ -1,6 +1,6 @@
 {
   "name": "nextra-theme-docs",
-  "version": "3.0.0-alpha.40",
+  "version": "3.0.0-alpha.41",
   "description": "A Nextra theme for documentation sites.",
   "repository": "https://github.com/shuding/nextra",
   "author": "Shu Ding <g@shud.in>",
@@ -32,12 +32,11 @@
   "peerDependencies": {
     "next": ">=13",
     "nextra": "workspace:*",
-    "react": ">=16.13.1",
-    "react-dom": ">=16.13.1"
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
   },
   "dependencies": {
     "@headlessui/react": "^2.1.2",
-    "@popperjs/core": "^2.11.8",
     "clsx": "^2.0.0",
     "escape-string-regexp": "^5.0.0",
     "flexsearch": "^0.7.43",
