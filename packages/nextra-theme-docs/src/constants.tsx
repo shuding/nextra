@@ -1,6 +1,6 @@
 /* eslint sort-keys: error */
 import { useRouter } from 'nextra/hooks'
-import { ArrowRightIcon, DiscordIcon, GitHubIcon } from 'nextra/icons'
+import { DiscordIcon, GitHubIcon } from 'nextra/icons'
 import { isValidElement } from 'react'
 import type { z } from 'zod'
 import {
@@ -26,24 +26,6 @@ export type DocsThemeConfig = z.infer<typeof themeSchema>
 export type PartialDocsThemeConfig = z.infer<typeof publicThemeSchema>
 
 export const DEFAULT_THEME: DocsThemeConfig = {
-  backToTop: {
-    content: function BackToTopContent() {
-      const themeConfig = useThemeConfig()
-      return (
-        <>
-          {renderString(themeConfig.backToTop.text)}
-          {renderComponent(themeConfig.backToTop.icon)}
-        </>
-      )
-    },
-    icon: (
-      <ArrowRightIcon
-        height="16"
-        className="_-rotate-90 _border _rounded-full _border-current"
-      />
-    ),
-    text: 'Scroll to top'
-  },
   backgroundColor: {
     dark: '17,17,17',
     light: '250,250,250'
@@ -185,6 +167,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     useOptions: { dark: 'Dark', light: 'Light', system: 'System' }
   },
   toc: {
+    backToTop: 'Scroll to top',
     component: TOC,
     float: true,
     title: 'On This Page'

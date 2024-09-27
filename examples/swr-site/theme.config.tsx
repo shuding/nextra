@@ -62,18 +62,6 @@ const FOOTER_LINK_TEXT = {
 }
 
 const config: DocsThemeConfig = {
-  backToTop: {
-    text: (locale: string) => {
-      switch (locale) {
-        case 'ru':
-          return 'Перейти наверх'
-        case 'es':
-          return 'Desplazarse hacia arriba'
-        default:
-          return 'Scroll to top'
-      }
-    }
-  },
   backgroundColor: {
     dark: '15,23,42',
     light: '254,252,232'
@@ -202,6 +190,14 @@ const config: DocsThemeConfig = {
     toggleButton: true
   },
   toc: {
+    backToTop() {
+      const { locale } = useRouter()
+      return {
+        ru: 'Перейти наверх',
+        es: 'Desplazarse hacia arriba',
+        en: 'Scroll to top'
+      }[locale!]
+    },
     extraContent: (
       <img alt="placeholder cat" src="https://placecats.com/300/200" />
     ),

@@ -31,7 +31,7 @@ export function TOC({ toc, filePath }: TOCProps): ReactElement {
     themeConfig.feedback.content ||
       themeConfig.editLink.component ||
       themeConfig.toc.extraContent ||
-      themeConfig.backToTop.content
+      themeConfig.toc.backToTop
   )
 
   const activeSlug = Object.entries(activeAnchor).find(
@@ -121,9 +121,9 @@ export function TOC({ toc, filePath }: TOCProps): ReactElement {
 
           {renderComponent(themeConfig.toc.extraContent)}
 
-          {themeConfig.backToTop.content && (
+          {themeConfig.toc.backToTop && (
             <BackToTop className={linkClassName} hidden={activeIndex < 2}>
-              {renderComponent(themeConfig.backToTop.content)}
+              {renderComponent(themeConfig.toc.backToTop)}
             </BackToTop>
           )}
         </div>

@@ -1,5 +1,6 @@
 import cn from 'clsx'
 import { Button } from 'nextra/components'
+import { ArrowRightIcon } from 'nextra/icons'
 import type { ComponentProps, ReactElement, ReactNode } from 'react'
 
 const SCROLL_TO_OPTIONS = { top: 0, behavior: 'smooth' } as const
@@ -22,7 +23,7 @@ export function BackToTop({
   hidden
 }: {
   children: ReactNode
-  className: string
+  className?: string
   hidden: boolean
 }): ReactElement {
   return (
@@ -40,6 +41,10 @@ export function BackToTop({
       }
     >
       {children}
+      <ArrowRightIcon
+        height="16"
+        className="_-rotate-90 _border _rounded-full _border-current"
+      />
     </Button>
   )
 }
