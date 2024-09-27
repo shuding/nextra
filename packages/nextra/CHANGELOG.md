@@ -21,6 +21,12 @@
   Router, something may be broken, check
   https://github.com/shuding/nextra/tree/v4-v2/examples for the migration guide
 
+## 3.0.0-alpha.42
+
+### Patch Changes
+
+- ca51306: Enhance focus ring style consistency.
+
 ## 3.0.0-alpha.41
 
 ### Patch Changes
