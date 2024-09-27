@@ -1,9 +1,10 @@
+import { NextraLogo, VercelLogo } from '@components/icons'
 import type { Metadata, Viewport } from 'next'
 import { Footer, Layout, Navbar } from 'nextra-theme-docs'
 import { Banner, Head } from 'nextra/components'
 import type { ReactNode } from 'react'
 import './globals.css'
-import { NextraLogo, VercelLogo } from '@components/icons'
+import cn from 'clsx'
 
 export const viewport: Viewport = Head.viewport
 
@@ -72,25 +73,33 @@ export default async function RootLayout({
               href="https://nextra.site"
               target="_blank"
               rel="noreferrer"
-              className="nextra-focus"
+              className="focus-visible:nextra-focus"
             >
               🎉 Nextra 4.0 is released. Read more →
             </a>
           </Banner>
           <Navbar
-            logo={<NextraLogo className="nextra-logo h-5" />}
+            logo={
+              <NextraLogo
+                height="20"
+                className={cn(
+                  '[mask-position:0] [mask-size:400%] [mask-image:linear-gradient(60deg,#000_25%,rgba(0,0,0,.2)_50%,#000_75%)]',
+                  'hover:[mask-position:100%] hover:[transition:mask-position_1s_ease]'
+                )}
+              />
+            }
             projectLink="https://github.com/shuding/nextra"
           />
           {children}
-          <Footer className="flex-col items-center sm:items-start">
+          <Footer className="flex-col items-center md:items-start">
             <a
-              className="nextra-focus flex items-center gap-1"
+              className="focus-visible:nextra-focus flex items-center gap-1"
               target="_blank"
               rel="noreferrer"
               title="vercel.com homepage"
               href="https://vercel.com?utm_source=nextra.site"
             >
-              <span>Powered by</span>
+              Powered by
               <VercelLogo height="20" />
             </a>
             <p className="mt-6 text-xs">

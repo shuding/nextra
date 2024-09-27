@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { Link } from 'next-view-transitions'
 import type { ReactElement, ReactNode } from 'react'
 import type { BlogMetadata } from '../types'
 import { GoBack } from './go-back'

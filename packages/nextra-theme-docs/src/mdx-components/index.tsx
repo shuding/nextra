@@ -1,9 +1,17 @@
 import cn from 'clsx'
-import { Code, Pre, Table, Td, Th, Tr, withIcons } from 'nextra/components'
-import { ArrowRightIcon } from 'nextra/icons'
+import {
+  Code,
+  Details,
+  Pre,
+  Summary,
+  Table,
+  Td,
+  Th,
+  Tr,
+  withIcons
+} from 'nextra/components'
 import type { MDXComponents } from 'nextra/mdx'
 import { DEFAULT_COMPONENTS } from 'nextra/mdx'
-import { Details } from './details'
 import { H1, H2, H3, H4, H5, H6 } from './heading'
 import { Link } from './link'
 import { Wrapper } from './wrapper'
@@ -47,29 +55,7 @@ export function useMDXComponents(components?: any) {
       <p className="[&:not(:first-child)]:_mt-6 _leading-7" {...props} />
     ),
     pre: withIcons(Pre),
-    summary: ({ children, className, ...props }) => (
-      <summary
-        className={cn(
-          'nextra-focus',
-          '_flex _items-center _cursor-pointer _p-1 _transition-colors hover:_bg-gray-100 dark:hover:_bg-neutral-800',
-          // display: flex removes whitespace when `<summary>` contains text with other elements, like `foo <strong>bar</strong>`
-          '_whitespace-pre-wrap',
-          '_select-none',
-          className
-        )}
-        {...props}
-      >
-        {children}
-        <ArrowRightIcon
-          className={cn(
-            '_order-first', // if prettier formats `summary` it will have unexpected margin-top
-            '_h-4 _shrink-0 _mx-1.5 motion-reduce:_transition-none',
-            'rtl:_rotate-180 [[data-expanded]>summary:first-child>&]:_rotate-90 _transition'
-          )}
-          strokeWidth="3"
-        />
-      </summary>
-    ),
+    summary: Summary,
     table: ({ className, ...props }) => (
       <Table
         className={cn(

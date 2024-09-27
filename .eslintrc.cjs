@@ -151,10 +151,13 @@ module.exports = {
           config: 'packages/nextra-theme-docs/tailwind.config.ts',
           callees: ['cn'],
           whitelist: [
+            'nextra-navbar',
+            'nextra-navbar-blur',
+            'nextra-sidebar',
             'nextra-breadcrumb',
-            'nextra-bleed',
             'nextra-menu-desktop',
-            'nextra-menu-mobile'
+            'nextra-menu-mobile',
+            'nextra-toc'
           ]
         }
       },
@@ -162,10 +165,7 @@ module.exports = {
         ...TAILWIND_CONFIG.rules,
         'no-restricted-imports': [
           'error',
-          {
-            name: 'next/link',
-            message: 'Use local <Anchor /> instead'
-          }
+          { name: 'next/link', message: 'Use `<Anchor>` instead' }
         ]
       }
     },
@@ -175,9 +175,24 @@ module.exports = {
       files: 'packages/nextra-theme-blog/**',
       settings: {
         tailwindcss: {
-          config: 'packages/nextra-theme-blog/tailwind.config.ts',
-          whitelist: ['subheading-']
+          config: 'packages/nextra-theme-blog/tailwind.config.ts'
         }
+      },
+      rules: {
+        ...TAILWIND_CONFIG.rules,
+        'no-restricted-imports': [
+          'error',
+          {
+            name: 'next/link',
+            message: 'Use `<Link>` from `next-view-transitions` instead'
+          },
+          {
+            name: 'next/navigation',
+            importNames: ['useRouter'],
+            message:
+              'Use `useTransitionRouter` from `next-view-transitions` instead'
+          }
+        ]
       }
     },
     // ⚙️ nextra
@@ -188,7 +203,12 @@ module.exports = {
         tailwindcss: {
           config: 'packages/nextra-theme-docs/tailwind.config.ts',
           callees: ['cn'],
-          whitelist: ['nextra-code', 'nextra-filetree']
+          whitelist: [
+            'nextra-code',
+            'nextra-filetree',
+            'nextra-bleed',
+            'nextra-skip-nav'
+          ]
         }
       },
       rules: {

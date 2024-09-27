@@ -40,7 +40,7 @@ export function Feature({
       {children}
       {href && (
         <Link
-          className={cn('nextra-focus', styles.link)}
+          className={cn('focus-visible:nextra-focus', styles.link)}
           href={href}
           target="_blank"
           rel="noreferrer"

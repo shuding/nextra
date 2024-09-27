@@ -1,5 +1,5 @@
 import { Button as HeadlessButton } from '@headlessui/react'
-import type { ButtonProps } from '@headlessui/react'
+import type { ButtonProps as HeadlessButtonProps } from '@headlessui/react'
 import cn from 'clsx'
 import type { ReactElement } from 'react'
 
@@ -10,20 +10,22 @@ export const classes = {
   )
 }
 
+export type ButtonProps = HeadlessButtonProps & {
+  variant?: 'outline' | 'default'
+}
+
 export function Button({
   children,
   className,
   variant = 'default',
   ...props
-}: ButtonProps & {
-  variant?: 'outline' | 'default'
-}): ReactElement {
+}: ButtonProps): ReactElement {
   return (
     <HeadlessButton
       className={args =>
         cn(
           '_transition',
-          args.focus && 'nextra-focusable',
+          args.focus && 'nextra-focus',
           variant === 'outline' && [classes.border, '_rounded-md _p-1.5'],
           typeof className === 'function' ? className(args) : className
         )

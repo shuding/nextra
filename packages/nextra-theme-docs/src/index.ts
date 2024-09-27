@@ -6,8 +6,6 @@ export { useMDXComponents } from './mdx-components'
 export { Link } from './mdx-components/link'
 export { Layout } from './layout'
 export {
-  Bleed,
-  Collapse,
   NotFoundPage,
   Navbar,
   ThemeSwitch,

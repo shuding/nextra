@@ -17,13 +17,13 @@ export function CloseBannerButton({
       className={({ hover }) =>
         cn('_p-2', hover ? '_opacity-100' : '_opacity-80')
       }
-      onClick={() => {
+      onClick={event => {
+        event.currentTarget.parentElement!.classList.add('_hidden')
         try {
           localStorage.setItem(storageKey, '1')
         } catch {
           /* ignore */
         }
-        document.body.classList.add('nextra-banner-hidden')
       }}
     >
       {children}

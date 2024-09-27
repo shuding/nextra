@@ -1,7 +1,7 @@
 'use client'
 
 import type { ReactElement, ReactNode } from 'react'
-import { Button } from '../button.js'
+import { Button } from '../../components/button.js'
 
 function toggleWordWrap() {
   const htmlDataset = document.documentElement.dataset

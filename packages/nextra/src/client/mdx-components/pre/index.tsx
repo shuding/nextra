@@ -1,7 +1,7 @@
 import cn from 'clsx'
 import type { ComponentProps, ReactElement, ReactNode } from 'react'
+import { classes } from '../../components/button.js'
 import { WordWrapIcon } from '../../icons/index.js'
-import { classes } from '../button.js'
 import { CopyToClipboard } from './copy-to-clipboard.js'
 import { ToggleWordWrapButton } from './toggle-word-wrap-button.js'
 
@@ -51,13 +51,14 @@ export function Pre({
       )}
       <pre
         className={cn(
-          'nextra-focus',
+          'focus-visible:nextra-focus',
           '_overflow-x-auto _subpixel-antialiased _text-[.9em]',
           '_bg-white dark:_bg-black _py-4',
           '_ring-1 _ring-inset _ring-gray-300 dark:_ring-neutral-700',
           'contrast-more:_ring-gray-900 contrast-more:dark:_ring-gray-50',
           'contrast-more:_contrast-150',
           filename ? '_rounded-b-md' : '_rounded-md',
+          '_not-prose', // for nextra-theme-blog
           className
         )}
         {...props}

@@ -48,10 +48,6 @@ const cachedCompilerForFormat: Record<
 type MdxOptions = LoaderOptions['mdxOptions'] &
   Pick<ProcessorOptions, 'jsx' | 'outputFormat'>
 
-// @ts-expect-error -- Without bind is unable to use `remarkLinkRewrite` with `buildDynamicMDX`
-// because we already use `remarkLinkRewrite` function to remove .mdx? extensions
-const clonedRemarkLinkRewrite = remarkLinkRewrite.bind(null)
-
 type CompileMdxOptions = Pick<
   LoaderOptions,
   | 'staticImage'
@@ -188,7 +184,7 @@ export async function compileMdx(
         latex && remarkMath,
         // Remove the markdown file extension from links
         [
-          clonedRemarkLinkRewrite,
+          remarkLinkRewrite,
           {
             pattern: MARKDOWN_URL_EXTENSION_REGEX,
             replace: '',

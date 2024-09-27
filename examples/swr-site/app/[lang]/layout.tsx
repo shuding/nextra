@@ -3,12 +3,12 @@ import { SwrIcon, VercelIcon } from '@app/_icons'
 import type { Metadata } from 'next'
 import { Footer, Layout, LocaleSwitch, Navbar } from 'nextra-theme-docs'
 import { Banner, Head } from 'nextra/components'
-import { getDictionary, getDirection } from '../_dictionaries/get-dictionary'
-import './styles.css'
-import '../_components/features.css'
 import { normalizePageMap } from 'nextra/page-map'
+import { getDictionary, getDirection } from '../_dictionaries/get-dictionary'
 import { pageMap as graphqlEslintPageMap } from './remote/graphql-eslint/[[...slug]]/page'
 import { pageMap as graphqlYogaPageMap } from './remote/graphql-yoga/[[...slug]]/page'
+import './styles.css'
+import '../_components/features.css'
 
 export const { viewport } = Head
 
@@ -88,7 +88,7 @@ export default async function RootLayout({ children, params: { lang } }) {
           <Navbar
             logo={
               <>
-                <SwrIcon className="h-3" />
+                <SwrIcon height="12" />
                 <span
                   className="max-md:hidden select-none font-extrabold ms-2"
                   title={`SWR: ${dictionary.logo.title}`}
@@ -100,17 +100,17 @@ export default async function RootLayout({ children, params: { lang } }) {
             projectLink="https://github.com/vercel/swr"
             chatLink="https://discord.com"
           >
-            <LocaleSwitch className="[&>span>span]:hidden" />
+            <LocaleSwitch />
           </Navbar>
           {children}
           <Footer>
             <a
               rel="noreferrer"
               target="_blank"
-              className="nextra-focus flex items-center gap-2 font-semibold"
+              className="focus-visible:nextra-focus flex items-center gap-2 font-semibold"
               href={dictionary.link.vercel}
             >
-              {dictionary.poweredBy} <VercelIcon />
+              {dictionary.poweredBy} <VercelIcon height="20" />
             </a>
           </Footer>
         </Layout>

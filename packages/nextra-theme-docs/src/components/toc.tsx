@@ -2,16 +2,15 @@
 
 import cn from 'clsx'
 import type { Heading } from 'nextra'
-import { renderComponent } from 'nextra/components'
 import type { ReactElement } from 'react'
 import { useEffect, useRef } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import { useActiveAnchor, useThemeConfig } from '../stores'
-import { getGitIssueUrl, useGitEditUrl } from '../utils'
+import { getGitIssueUrl, gitUrlParse } from '../utils'
 import { Anchor } from './anchor'
 import { BackToTop } from './back-to-top'
 
-export type TOCProps = {
+type TOCProps = {
   toc: Heading[]
   filePath: string
   pageTitle: string
@@ -54,13 +53,6 @@ export function TOC({ toc, filePath, pageTitle }: TOCProps): ReactElement {
     }
   }, [activeSlug])
 
-  const editUrl = useGitEditUrl(filePath)
-  const gitIssueUrl = getGitIssueUrl({
-    labels: themeConfig.feedback.labels,
-    repository: themeConfig.docsRepositoryBase,
-    title: `Feedback for “${pageTitle}”`
-  })
-
   return (
     <div
       className={cn(
@@ -71,7 +63,7 @@ export function TOC({ toc, filePath, pageTitle }: TOCProps): ReactElement {
       {hasHeadings && (
         <>
           <p className="_mb-4 _font-semibold _tracking-tight">
-            {renderComponent(themeConfig.toc.title)}
+            {themeConfig.toc.title}
           </p>
           <ul ref={tocRef}>
             {toc.map(({ id, value, depth }) => (
@@ -79,7 +71,7 @@ export function TOC({ toc, filePath, pageTitle }: TOCProps): ReactElement {
                 <a
                   href={`#${id}`}
                   className={cn(
-                    'nextra-focus',
+                    'focus-visible:nextra-focus',
                     {
                       2: '_font-semibold',
                       3: '_ms-4',
@@ -111,18 +103,29 @@ export function TOC({ toc, filePath, pageTitle }: TOCProps): ReactElement {
           )}
         >
           {themeConfig.feedback.content && (
-            <Anchor className={linkClassName} href={gitIssueUrl} newWindow>
-              {renderComponent(themeConfig.feedback.content)}
+            <Anchor
+              className={linkClassName}
+              href={getGitIssueUrl({
+                labels: themeConfig.feedback.labels,
+                repository: themeConfig.docsRepositoryBase,
+                title: `Feedback for “${pageTitle}”`
+              })}
+              newWindow
+            >
+              {themeConfig.feedback.content}
             </Anchor>
           )}
 
           {themeConfig.editLink.content && (
-            <Anchor className={linkClassName} href={editUrl}>
-              {renderComponent(themeConfig.editLink.content)}
+            <Anchor
+              className={linkClassName}
+              href={`${gitUrlParse(themeConfig.docsRepositoryBase).href}/${filePath}`}
+            >
+              {themeConfig.editLink.content}
             </Anchor>
           )}
 
-          {renderComponent(themeConfig.toc.extraContent)}
+          {themeConfig.toc.extraContent}
 
           {themeConfig.toc.backToTop && (
             <BackToTop className={linkClassName} hidden={activeIndex < 2} />

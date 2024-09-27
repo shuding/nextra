@@ -13,7 +13,6 @@ import type { FocusEventHandler, ReactElement, SyntheticEvent } from 'react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useMounted } from '../hooks/index.js'
 import { InformationCircleIcon, SpinnerIcon } from '../icons/index.js'
-import { renderComponent } from './render.js'
 
 type PagefindResult = {
   excerpt: string
@@ -199,7 +198,7 @@ export function Search({
               '_w-full md:_w-64',
               '_text-base _leading-tight md:_text-sm',
               focus
-                ? '_bg-transparent nextra-focusable'
+                ? '_bg-transparent nextra-focus'
                 : '_bg-black/[.05] dark:_bg-gray-50/10',
               'placeholder:_text-gray-500 dark:placeholder:_text-gray-400',
               'contrast-more:_border contrast-more:_border-current',
@@ -225,7 +224,7 @@ export function Search({
             '_border _border-gray-200 _text-gray-100 dark:_border-neutral-800',
             '_z-20 _rounded-xl _py-2.5 _shadow-xl',
             'contrast-more:_border contrast-more:_border-gray-900 contrast-more:dark:_border-gray-50',
-            '_backdrop-blur-lg _bg-[rgb(var(--nextra-bg),.8)]',
+            '_backdrop-blur-md _bg-[rgba(var(--nextra-bg),.7)]',
             'motion-reduce:_transition-none _transition-opacity',
             open ? '_opacity-100' : '_opacity-0',
             error || isLoading || !results.length
@@ -247,14 +246,14 @@ export function Search({
         ) : isLoading ? (
           <div className="_h-full _flex _items-center _justify-center _gap-2 _px-8 _text-sm _text-gray-400">
             <SpinnerIcon height="20" className="_shrink-0 _animate-spin" />
-            {renderComponent(loading)}
+            {loading}
           </div>
         ) : results.length ? (
           results.map(searchResult => (
             <Result key={searchResult.url} data={searchResult} />
           ))
         ) : (
-          search && renderComponent(emptyResult)
+          search && emptyResult
         )}
       </ComboboxOptions>
     </Combobox>

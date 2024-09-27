@@ -7,7 +7,7 @@ a revalidation message globally to other SWR hooks<sup>\*</sup> using the same
 key by calling `mutate(key)`.
 
 Este ejemplo muestra cómo recuperar automáticamente la información de login (por
-ejemplo, dentro de `<Profile/>`) cuando el usuario hace clic en el botón
+ejemplo, dentro de `<Profile>`) cuando el usuario hace clic en el botón
 "Logout".
 
 ```jsx

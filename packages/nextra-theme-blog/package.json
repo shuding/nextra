@@ -48,7 +48,8 @@
     }
   },
   "dependencies": {
-    "next-themes": "^0.3.0"
+    "next-themes": "^0.3.0",
+    "next-view-transitions": "^0.3.0"
   },
   "devDependencies": {
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",

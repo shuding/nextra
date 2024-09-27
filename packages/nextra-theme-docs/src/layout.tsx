@@ -1,11 +1,11 @@
 /* eslint sort-keys: error */
 import { ThemeProvider } from 'next-themes'
-import { Search } from 'nextra/components'
+import { Search, SkipNavLink } from 'nextra/components'
 import type { FC, ReactElement, ReactNode } from 'react'
 import { Children, isValidElement } from 'react'
 import { z } from 'zod'
 import { fromZodError } from 'zod-validation-error'
-import { Footer, Navbar, SkipNavLink } from './components'
+import { Footer, MobileNav, Navbar } from './components'
 import { ConfigProvider, ThemeConfigProvider } from './stores'
 
 const element = z.custom<ReactElement>(isValidElement, {
@@ -31,7 +31,7 @@ const theme = z.strictObject({
       labels: z.string().default('feedback')
     })
     .default({}),
-  gitTimestamp: z.boolean().optional(),
+  gitTimestamp: z.boolean().default(true),
   i18n: z
     .array(
       z.strictObject({
@@ -125,6 +125,11 @@ export function Layout({ children, ...themeConfig }: Props): ReactElement {
     <ThemeConfigProvider value={data}>
       <ThemeProvider {...data.nextThemes}>
         <ConfigProvider pageMap={data.pageMap}>
+          {/*
+           * MobileNav should be in layout and not in mdx wrapper, otherwise for non mdx pages will
+           * be not rendered
+           */}
+          <MobileNav />
           <SkipNavLink />
           {newChildren}
         </ConfigProvider>

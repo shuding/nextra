@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react'
 import type { FC } from 'react'
 import { setActiveSlug } from '../stores'
 
-const cb: IntersectionObserverCallback = entries => {
+const callback: IntersectionObserverCallback = entries => {
   const entry = entries.find(entry => entry.isIntersecting)
 
   if (entry) {
@@ -16,10 +16,14 @@ const cb: IntersectionObserverCallback = entries => {
 const observer: IntersectionObserver =
   typeof window === 'undefined'
     ? null!
-    : new IntersectionObserver(cb, {
-        rootMargin: `-${getComputedStyle(document.body).getPropertyValue(
-          '--nextra-navbar-height'
-        )} 0% -80%`
+    : new IntersectionObserver(callback, {
+        rootMargin: `-${
+          getComputedStyle(document.body).getPropertyValue(
+            '--nextra-navbar-height'
+          ) ||
+          // can be '' on 404 page
+          '0%'
+        } 0% -80%`
       })
 
 export const HeadingAnchor: FC<{ id: string }> = ({ id }) => {
@@ -36,7 +40,7 @@ export const HeadingAnchor: FC<{ id: string }> = ({ id }) => {
   return (
     <a
       href={`#${id}`}
-      className="nextra-focus subheading-anchor"
+      className="focus-visible:nextra-focus subheading-anchor"
       aria-label="Permalink for this section"
       ref={anchorRef}
     />

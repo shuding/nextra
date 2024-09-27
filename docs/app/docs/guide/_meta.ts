@@ -8,7 +8,6 @@ export default {
   i18n: '',
   'custom-css': '',
   search: '',
-  twoslash: '',
-  advanced: '',
-  'built-ins': ''
+  'built-ins': '',
+  advanced: ''
 }

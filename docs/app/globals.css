@@ -40,21 +40,3 @@ code.text-\[\.9em\] {
     display: none;
   }
 }
-
-.nextra-logo {
-  mask-image: linear-gradient(
-    60deg,
-    black 25%,
-    rgba(0, 0, 0, 0.2) 50%,
-    black 75%
-  );
-  mask-size: 400%;
-  mask-position: 0;
-}
-
-.nextra-logo:hover {
-  mask-position: 100%;
-  transition:
-    mask-position 1s ease,
-    -webkit-mask-position 1s ease;
-}

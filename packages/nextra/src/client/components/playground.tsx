@@ -3,16 +3,16 @@
 import { useEffect, useState } from 'react'
 import type { ReactElement } from 'react'
 import { CrossCircledIcon } from '../icons/index.js'
-import type { MDXComponents } from '../mdx.js'
-import { Code } from './code.js'
-import { Pre } from './pre/index.js'
-import { evaluate } from './remote-content.js'
+import { Code } from '../mdx-components/code.js'
+import { Pre } from '../mdx-components/pre/index.js'
+import { RemoteContent } from './remote-content.js'
+import type { RemoteContentProps } from './remote-content.js'
 
 export function Playground({
   source,
-  scope,
+  fallback = null,
   components,
-  fallback = null
+  scope
 }: {
   /**
    * String with source MDX
@@ -21,21 +21,10 @@ export function Playground({
    */
   source: string
   /**
-   * An object mapping names to React components.
-   * The key used will be the name accessible to MDX.
-   *
-   * @example `{ ComponentName: Component }` will be accessible in the MDX as `<ComponentName/>`.
-   */
-  components?: MDXComponents
-  /**
-   * Pass-through variables for use in the MDX content
-   */
-  scope?: Record<string, unknown>
-  /**
    * Fallback component for loading
    */
   fallback?: ReactElement | null
-}) {
+} & Pick<RemoteContentProps, 'components' | 'scope'>) {
   const [compiledSource, setCompiledSource] = useState('')
   const [error, setError] = useState<unknown>()
 
@@ -60,7 +49,7 @@ export function Playground({
       <div className="[&_svg]:_text-red-500">
         <Pre
           data-filename="Could not compile code"
-          icon={<CrossCircledIcon className="_h-4 _shrink-0" />}
+          icon={<CrossCircledIcon height="16" className="_shrink-0" />}
           className="_whitespace-pre-wrap"
         >
           <Code>
@@ -76,8 +65,13 @@ export function Playground({
   }
 
   if (compiledSource) {
-    const MDXContent = evaluate(compiledSource, scope).default
-    return <MDXContent components={components} />
+    return (
+      <RemoteContent
+        scope={scope}
+        components={components}
+        compiledSource={compiledSource}
+      />
+    )
   }
 
   return fallback

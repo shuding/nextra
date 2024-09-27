@@ -10,16 +10,15 @@ import cn from 'clsx'
 import { Button } from 'nextra/components'
 import { useFSRoute } from 'nextra/hooks'
 import { ArrowRightIcon, MenuIcon } from 'nextra/icons'
-import type { MenuItem, PageItem } from 'nextra/normalize-pages'
+import type { MenuItem } from 'nextra/normalize-pages'
 import type { ReactElement, ReactNode } from 'react'
 import { setMenu, useConfig, useMenu, useThemeConfig } from '../../stores'
 import { Anchor } from '../anchor'
 
 const classes = {
   link: cn(
-    '_text-sm contrast-more:_text-gray-700 contrast-more:dark:_text-gray-100'
+    '_text-sm contrast-more:_text-gray-700 contrast-more:dark:_text-gray-100 max-md:_hidden _whitespace-nowrap'
   ),
-  active: cn('_font-medium _subpixel-antialiased'),
   inactive: cn(
     '_text-gray-600 hover:_text-gray-800 dark:_text-gray-400 dark:hover:_text-gray-200'
   )
@@ -48,23 +47,26 @@ function NavbarMenu({
           cn(
             classes.link,
             classes.inactive,
-            'max-md:_hidden _items-center _whitespace-nowrap _rounded _flex _gap-1.5',
-            focus && 'nextra-focusable'
+            '_items-center _flex _gap-1.5',
+            focus && 'nextra-focus'
           )
         }
       >
         {children}
+        <ArrowRightIcon
+          height="14"
+          className="*:_origin-center *:_transition-transform *:_rotate-90"
+        />
       </MenuButton>
       <MenuItems
         transition
         className={({ open }) =>
           cn(
-            'motion-reduce:_transition-none',
-            'nextra-focus',
+            'focus-visible:nextra-focus',
             open ? '_opacity-100' : '_opacity-0',
-            'nextra-scrollbar _transition-opacity',
+            'nextra-scrollbar _transition-opacity motion-reduce:_transition-none',
             '_border _border-black/5 dark:_border-white/20',
-            '_backdrop-blur-lg _bg-[rgb(var(--nextra-bg),.8)]',
+            '_backdrop-blur-md _bg-[rgba(var(--nextra-bg),.7)]',
             '_z-20 _rounded-md _py-1 _text-sm _shadow-lg',
             // headlessui adds max-height as style, use !important to override
             '!_max-h-[min(calc(100vh-5rem),256px)]'
@@ -79,8 +81,7 @@ function NavbarMenu({
             href={item.href || routes[key]?.route || menu.route + '/' + key}
             className={({ focus }) =>
               cn(
-                '_block',
-                '_py-1.5 _transition-colors _ps-3 _pe-9',
+                '_block _py-1.5 _transition-colors _ps-3 _pe-9',
                 focus
                   ? '_text-gray-900 dark:_text-gray-100'
                   : '_text-gray-600 dark:_text-gray-400'
@@ -96,17 +97,13 @@ function NavbarMenu({
   )
 }
 
-export type NavbarProps = {
-  children?: ReactNode
-  project?: ReactNode
-  chat?: ReactNode
-}
+const isMenu = (page: any): page is MenuItem => page.type === 'menu'
 
 export function ClientNavbar({
-  children,
-  project,
-  chat
-}: NavbarProps): ReactElement {
+  children
+}: {
+  children?: ReactNode
+}): ReactElement {
   const items = useConfig().normalizePagesResult.topLevelNavbarItems
   const themeConfig = useThemeConfig()
 
@@ -115,19 +112,15 @@ export function ClientNavbar({
 
   return (
     <>
-      {items.map(pageOrMenu => {
-        if (pageOrMenu.display === 'hidden') return null
-
-        if (pageOrMenu.type === 'menu') {
-          const menu = pageOrMenu as MenuItem
+      {items.map(page => {
+        if (page.display === 'hidden') return
+        if (isMenu(page)) {
           return (
-            <NavbarMenu key={menu.title} menu={menu}>
-              {menu.title}
-              <ArrowRightIcon className="_h-3.5 *:_origin-center *:_transition-transform *:_rotate-90" />
+            <NavbarMenu key={page.title} menu={page}>
+              {page.title}
             </NavbarMenu>
           )
         }
-        const page = pageOrMenu as PageItem
         let href = page.href || page.route || '#'
 
         // If it's a directory
@@ -145,8 +138,9 @@ export function ClientNavbar({
             key={href}
             className={cn(
               classes.link,
-              'max-md:_hidden _whitespace-nowrap',
-              !isActive || page.newWindow ? classes.inactive : classes.active
+              !isActive || page.newWindow
+                ? classes.inactive
+                : '_font-medium _subpixel-antialiased'
             )}
             newWindow={page.newWindow}
             aria-current={!page.newWindow && isActive}
@@ -155,10 +149,9 @@ export function ClientNavbar({
           </Anchor>
         )
       })}
-      <div className="max-md:_hidden">{themeConfig.search}</div>
-
-      {project}
-      {chat}
+      {themeConfig.search && (
+        <div className="max-md:_hidden">{themeConfig.search}</div>
+      )}
 
       {children}
 

@@ -16,10 +16,6 @@
       "import": "./dist/client/components/index.js",
       "types": "./dist/client/components/index.d.ts"
     },
-    "./remark-plugins": {
-      "import": "./dist/server/remark-plugins/index.js",
-      "types": "./dist/server/remark-plugins/index.d.ts"
-    },
     "./hooks": {
       "import": "./dist/client/hooks/index.js",
       "types": "./dist/client/hooks/index.d.ts"
@@ -32,21 +28,9 @@
       "import": "./dist/server/compile.js",
       "types": "./dist/server/compile.d.ts"
     },
-    "./remote": {
-      "import": "./dist/server/remote.js",
-      "types": "./dist/server/remote.d.ts"
-    },
-    "./schemas": {
-      "import": "./dist/server/schemas.js",
-      "types": "./dist/server/schemas.d.ts"
-    },
     "./fetch-filepaths-from-github": {
       "import": "./dist/server/fetch-filepaths-from-github.js",
       "types": "./dist/server/fetch-filepaths-from-github.d.ts"
-    },
-    "./page-map-dynamic": {
-      "import": "./dist/server/page-map-dynamic.js",
-      "types": "./dist/server/page-map-dynamic.d.ts"
     },
     "./page-map": {
       "import": "./dist/server/page-map.js",
@@ -66,17 +50,8 @@
       "compile": [
         "./dist/server/compile.d.ts"
       ],
-      "remark-plugins": [
-        "./dist/server/remark-plugins/index.d.ts"
-      ],
-      "remote": [
-        "./dist/server/remote.d.ts"
-      ],
       "fetch-filepaths-from-github": [
         "./dist/server/fetch-filepaths-from-github.d.ts"
-      ],
-      "schemas": [
-        "./dist/server/schemas.d.ts"
       ],
       "catch-all": [
         "./dist/client/catch-all.d.ts"

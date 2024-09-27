@@ -13,8 +13,8 @@ export default {
   prefix: '_',
   content: [
     './src/**/*.tsx',
-    '../nextra/src/client/icons/*.{tsx,svg}',
-    '../nextra/src/client/components/**/*.tsx'
+    '../nextra/src/client/icons/*.svg',
+    '../nextra/src/client/{components,mdx-components}/**/*.tsx'
   ],
   theme: {
     screens: {

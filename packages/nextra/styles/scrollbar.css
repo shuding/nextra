@@ -18,12 +18,6 @@
     background-clip: content-box;
     @apply _shadow-neutral-500/20 hover:_shadow-neutral-500/40;
   }
-
-  @media (max-width: 767px) {
-    .nextra-container & {
-      scrollbar-gutter: auto;
-    }
-  }
 }
 
 /* Hide scrollbar */

@@ -2,10 +2,16 @@
 
 import cn from 'clsx'
 import type { MDXWrapper } from 'nextra'
+import { useEffect } from 'react'
 import { Breadcrumb, Pagination, TOC } from '../../components'
-import { useConfig, useThemeConfig } from '../../stores'
+import { setToc, useConfig, useThemeConfig } from '../../stores'
 
-export const ClientWrapper: MDXWrapper = ({ toc, children, ...props }) => {
+export const ClientWrapper: MDXWrapper = ({
+  toc,
+  children,
+  metadata,
+  title
+}) => {
   const { normalizePagesResult } = useConfig()
   const themeConfig = useThemeConfig()
   const {
@@ -17,15 +23,16 @@ export const ClientWrapper: MDXWrapper = ({ toc, children, ...props }) => {
   } = normalizePagesResult
 
   const date =
-    themeContext.timestamp && themeConfig.gitTimestamp && props.timestamp
-      ? new Date(props.timestamp)
-      : null
+    themeContext.timestamp &&
+    themeConfig.gitTimestamp &&
+    metadata.timestamp &&
+    new Date(metadata.timestamp)
 
   const gitTimestampEl = date ? (
     <div
       // Because a user's time zone may be different from the server page
       suppressHydrationWarning
-      className="_mt-12 _mb-8 _block _text-xs _text-gray-500 ltr:_text-right rtl:_text-left dark:_text-gray-400"
+      className="_mt-12 _mb-8 _text-xs _text-gray-500 _text-end dark:_text-gray-400"
     >
       Last updated on{' '}
       <time dateTime={date.toISOString()}>
@@ -39,6 +46,10 @@ export const ClientWrapper: MDXWrapper = ({ toc, children, ...props }) => {
   ) : (
     <div className="_mt-16" />
   )
+  // We can't update store in server component so doing it in client component
+  useEffect(() => {
+    setToc(toc)
+  }, [toc])
 
   return (
     <>
@@ -47,11 +58,11 @@ export const ClientWrapper: MDXWrapper = ({ toc, children, ...props }) => {
           className="nextra-toc _order-last max-xl:_hidden _w-64 _shrink-0 print:_hidden"
           aria-label="table of contents"
         >
-          {activeType !== 'page' && themeContext.toc && (
+          {themeContext.toc && activeType !== 'page' && (
             <TOC
               toc={themeConfig.toc.float ? toc : []}
-              filePath={props.filePath}
-              pageTitle={props.title}
+              filePath={metadata.filePath}
+              pageTitle={title}
             />
           )}
         </nav>
@@ -64,12 +75,12 @@ export const ClientWrapper: MDXWrapper = ({ toc, children, ...props }) => {
             'nextra-body-typesetting-article'
         )}
       >
-        {activeType !== 'page' && themeContext.breadcrumb && (
+        {themeContext.breadcrumb && activeType !== 'page' && (
           <Breadcrumb activePath={activePath} />
         )}
         {children}
         {gitTimestampEl}
-        {activeType !== 'page' && themeContext.pagination && (
+        {themeContext.pagination && activeType !== 'page' && (
           <Pagination
             flatDocsDirectories={flatDocsDirectories}
             currentIndex={activeIndex}

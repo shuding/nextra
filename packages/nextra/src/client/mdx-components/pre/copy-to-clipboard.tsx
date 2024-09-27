@@ -2,8 +2,8 @@
 
 import type { ComponentProps, ReactElement } from 'react'
 import { useCallback, useEffect, useState } from 'react'
+import { Button } from '../../components/button.js'
 import { CheckIcon, CopyIcon } from '../../icons/index.js'
-import { Button } from '../button.js'
 
 export function CopyToClipboard(props: ComponentProps<'button'>): ReactElement {
   const [isCopied, setCopied] = useState(false)

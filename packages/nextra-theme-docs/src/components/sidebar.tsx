@@ -3,7 +3,7 @@
 import cn from 'clsx'
 import { usePathname } from 'next/navigation'
 import type { Heading } from 'nextra'
-import { Button, renderComponent } from 'nextra/components'
+import { Button, Collapse } from 'nextra/components'
 import { useFSRoute } from 'nextra/hooks'
 import { ArrowRightIcon, ExpandIcon } from 'nextra/icons'
 import type { Item, MenuItem, PageItem } from 'nextra/normalize-pages'
@@ -17,10 +17,10 @@ import {
   useConfig,
   useFocusedRoute,
   useMenu,
-  useThemeConfig
+  useThemeConfig,
+  useToc
 } from '../stores'
 import { Anchor } from './anchor'
-import { Collapse } from './collapse'
 import { LocaleSwitch } from './locale-switch'
 import { ThemeSwitch } from './theme-switch'
 
@@ -48,8 +48,8 @@ const classes = {
     '_ps-3 before:_start-0'
   ),
   aside: cn(
-    'nextra-sidebar-container _flex _flex-col',
-    'md:_top-[--nextra-navbar-height] md:_shrink-0 motion-reduce:_transform-none [.resizing_&]:_transition-none',
+    'nextra-sidebar _flex _flex-col',
+    'motion-reduce:_transform-none [.resizing_&]:_transition-none',
     '_transform-gpu _transition-all _ease-in-out',
     'print:_hidden'
   ),
@@ -155,12 +155,12 @@ function Folder({ item, anchors, onFocus, level }: FolderProps): ReactElement {
           classes.link,
           active ? classes.active : classes.inactive
         )}
-        onClick={e => {
+        onClick={event => {
           const clickedToggleIcon = ['svg', 'path'].includes(
-            (e.target as HTMLElement).tagName.toLowerCase()
+            event.currentTarget.tagName.toLowerCase()
           )
           if (clickedToggleIcon) {
-            e.preventDefault()
+            event.preventDefault()
           }
           if (isLink) {
             // If it's focused, we toggle it. Otherwise, always open it.
@@ -214,9 +214,7 @@ function Separator({ title }: { title: string }): ReactElement {
           : '_my-4'
       )}
     >
-      {title ? (
-        renderComponent(title)
-      ) : (
+      {title || (
         <hr className="_mx-2 _border-t _border-gray-200 dark:_border-primary-100/10" />
       )}
     </li>
@@ -327,8 +325,9 @@ function Menu({
   )
 }
 
-export function MobileNav({ toc }: SidebarProps) {
+export function MobileNav() {
   const { directories } = useConfig().normalizePagesResult
+  const toc = useToc()
 
   const menu = useMenu()
   const pathname = usePathname()
@@ -337,7 +336,7 @@ export function MobileNav({ toc }: SidebarProps) {
     setMenu(false)
   }, [pathname])
 
-  const anchors = useMemo(() => (toc || []).filter(v => v.depth === 2), [toc])
+  const anchors = useMemo(() => toc.filter(v => v.depth === 2), [toc])
   const sidebarRef = useRef<HTMLDivElement>(null!)
 
   useEffect(() => {
@@ -355,8 +354,7 @@ export function MobileNav({ toc }: SidebarProps) {
 
   const themeConfig = useThemeConfig()
   const hasI18n = themeConfig.i18n.length > 0
-  const hasMenu =
-    themeConfig.darkMode || hasI18n || themeConfig.sidebar.toggleButton
+  const hasMenu = themeConfig.darkMode || hasI18n
 
   return (
     <>
@@ -368,15 +366,20 @@ export function MobileNav({ toc }: SidebarProps) {
       />
       <aside
         className={cn(
-          'md:_hidden',
           classes.aside,
+          '_fixed _top-[--nextra-navbar-height] _w-full _bottom-0 _z-10 _overscroll-contain',
+          '_transition-transform _duration-700 _ease-[cubic-bezier(.52,.16,.04,1)] _will-change-[transform,opacity]',
+          '[contain:layout_style]',
+          'md:_hidden',
+          String.raw`[&:has(~*~.nextra-banner:not(.\_hidden))]:_pt-[--nextra-banner-height]`,
+          '_bg-[rgb(var(--nextra-bg))]',
           menu
-            ? 'max-md:[transform:translate3d(0,0,0)]'
-            : 'max-md:[transform:translate3d(0,-100%,0)]'
+            ? '[transform:translate3d(0,0,0)]'
+            : '[transform:translate3d(0,-100%,0)]'
         )}
       >
         {themeConfig.search && (
-          <div className="_px-4 _pt-4 md:_hidden">{themeConfig.search}</div>
+          <div className="_px-4 _pt-4">{themeConfig.search}</div>
         )}
         <div
           className={cn(classes.wrapper, 'nextra-scrollbar')}
@@ -401,9 +404,7 @@ export function MobileNav({ toc }: SidebarProps) {
             )}
           >
             <LocaleSwitch className="_grow" />
-            {themeConfig.darkMode && (
-              <ThemeSwitch lite={hasI18n} className={hasI18n ? '' : '_grow'} />
-            )}
+            <ThemeSwitch lite={hasI18n} className={hasI18n ? '' : '_grow'} />
           </div>
         )}
       </aside>
@@ -411,20 +412,15 @@ export function MobileNav({ toc }: SidebarProps) {
   )
 }
 
-type SidebarProps = {
-  toc: Heading[]
-}
-
-export function Sidebar({ toc }: SidebarProps): ReactElement {
-  const { normalizePagesResult, hideSidebar: asPopover } = useConfig()
-  const { docsDirectories, activeThemeContext } = normalizePagesResult
-  const includePlaceholder = activeThemeContext.layout === 'default'
-
+export function Sidebar({ toc }: { toc: Heading[] }): ReactElement {
+  const { normalizePagesResult, hideSidebar } = useConfig()
   const [showSidebar, setSidebar] = useState(true)
   const [showToggleAnimation, setToggleAnimation] = useState(false)
-
-  const anchors = useMemo(() => toc.filter(v => v.depth === 2), [toc])
   const sidebarRef = useRef<HTMLDivElement>(null)
+  const anchors = useMemo(() => toc.filter(v => v.depth === 2), [toc])
+
+  const { docsDirectories, activeThemeContext } = normalizePagesResult
+  const includePlaceholder = activeThemeContext.layout === 'default'
 
   useEffect(() => {
     const activeElement = sidebarRef.current?.querySelector('li.active')
@@ -446,15 +442,16 @@ export function Sidebar({ toc }: SidebarProps): ReactElement {
 
   return (
     <>
-      {includePlaceholder && asPopover && (
+      {includePlaceholder && hideSidebar && (
         <div className="max-xl:_hidden _h-0 _w-64 _shrink-0" />
       )}
       <aside
         className={cn(
-          'max-md:_hidden',
           classes.aside,
-          showSidebar ? 'md:_w-64' : 'md:_w-20',
-          asPopover ? 'md:_hidden' : 'md:_sticky md:_self-start'
+          'max-md:_hidden',
+          '_top-[--nextra-navbar-height] _shrink-0',
+          showSidebar ? '_w-64' : '_w-20',
+          hideSidebar ? '_hidden' : '_sticky _self-start'
         )}
       >
         <div
@@ -465,7 +462,7 @@ export function Sidebar({ toc }: SidebarProps): ReactElement {
           ref={sidebarRef}
         >
           {/* without asPopover check <Collapse />'s inner.clientWidth on `layout: "raw"` will be 0 and element will not have width on initial loading */}
-          {(!asPopover || !showSidebar) && (
+          {(!hideSidebar || !showSidebar) && (
             <Collapse isOpen={showSidebar} horizontal>
               <Menu
                 className="nextra-menu-desktop"
@@ -487,35 +484,36 @@ export function Sidebar({ toc }: SidebarProps): ReactElement {
               classes.bottomMenu,
               showSidebar
                 ? [hasI18n && '_justify-end', '_border-t']
-                : '_py-4 _flex-wrap _justify-center'
+                : '_py-4 _flex-wrap _justify-center',
+              showToggleAnimation && [
+                '*:_opacity-0',
+                showSidebar
+                  ? '*:_animate-[nextra-fadein_1s_ease_.2s_forwards]'
+                  : '*:_animate-[nextra-fadein2_1s_ease_.2s_forwards]'
+              ]
             )}
-            data-toggle-animation={
-              showToggleAnimation ? (showSidebar ? 'show' : 'hide') : 'off'
-            }
           >
             <LocaleSwitch
               lite={!showSidebar}
               className={showSidebar ? '_grow' : 'max-md:_grow'}
             />
-            {themeConfig.darkMode && (
-              <ThemeSwitch
-                lite={!showSidebar || hasI18n}
-                className={!showSidebar || hasI18n ? '' : '_grow'}
-              />
-            )}
+            <ThemeSwitch
+              lite={!showSidebar || hasI18n}
+              className={!showSidebar || hasI18n ? '' : '_grow'}
+            />
             {themeConfig.sidebar.toggleButton && (
               <Button
                 title={showSidebar ? 'Hide sidebar' : 'Show sidebar'}
                 className={({ hover }) =>
                   cn(
-                    'max-md:_hidden _rounded-md _p-2',
+                    '_rounded-md _p-2',
                     hover
                       ? '_bg-gray-100 _text-gray-900 dark:_bg-primary-100/5 dark:_text-gray-50'
                       : '_text-gray-600 dark:_text-gray-400'
                   )
                 }
                 onClick={() => {
-                  setSidebar(!showSidebar)
+                  setSidebar(prev => !prev)
                   setToggleAnimation(true)
                 }}
               >

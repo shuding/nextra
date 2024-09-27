@@ -23,8 +23,7 @@ export default async function Page({ params: { mdxPath } }) {
     default: MDXContent,
     useTOC,
     metadata,
-    title,
-    ..._props
+    title
   } = await loadPage(mdxPath)
 
   const { wrapper: Wrapper } = useMDXComponents()
