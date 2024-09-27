@@ -1,6 +1,7 @@
 import type { Dictionary } from './i18n-config'
 
 export default {
+  backToTop: 'Перейти наверх',
   logo: {
     title: 'React хуки для выборки данных'
   },

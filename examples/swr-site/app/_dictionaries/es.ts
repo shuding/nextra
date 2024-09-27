@@ -1,6 +1,7 @@
 import type { Dictionary } from './i18n-config'
 
 export default {
+  backToTop: 'Desplazarse hacia arriba',
   logo: {
     title: 'Biblioteca React Hooks para la obtención de datos'
   },

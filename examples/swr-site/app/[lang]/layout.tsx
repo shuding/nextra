@@ -76,6 +76,7 @@ export default async function RootLayout({ children, params: { lang } }) {
             autoCollapse: true
           }}
           toc={{
+            backToTop: dictionary.backToTop,
             extraContent: (
               <img alt="placeholder cat" src="https://placecats.com/300/200" />
             )

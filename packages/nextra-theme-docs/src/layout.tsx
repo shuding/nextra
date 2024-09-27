@@ -81,7 +81,7 @@ const theme = z.strictObject({
     .default({}),
   toc: z
     .strictObject({
-      backToTop: z.boolean().default(true),
+      backToTop: stringOrElement.default('Scroll to top'),
       extraContent: stringOrElement.optional(),
       float: z.boolean().default(true),
       title: stringOrElement.default('On This Page')
