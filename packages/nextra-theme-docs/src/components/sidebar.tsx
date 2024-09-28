@@ -390,8 +390,10 @@ export function Sidebar({
       )}
       <div
         className={cn(
-          '[transition:background-color_1.5s_ease] max-md:_fixed _inset-0 _z-10',
-          menu ? '_bg-black/80 dark:_bg-black/60' : '_bg-transparent'
+          '[transition:background-color_1.5s_ease]',
+          menu
+            ? 'max-md:_bg-black/80 max-md:dark:_bg-black/60 _fixed _inset-0 _z-10'
+            : '_bg-transparent'
         )}
         onClick={() => setMenu(false)}
       />
