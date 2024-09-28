@@ -12,7 +12,7 @@ export default function traverse(
   }
 
   for (const item of pageMap) {
-    if (item.kind === 'Folder') {
+    if ('children' in item) {
       const matched = traverse(item.children, matcher)
       if (matched) {
         return matched

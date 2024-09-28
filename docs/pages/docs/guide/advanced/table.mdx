@@ -4,10 +4,10 @@ import { Callout, Steps } from 'nextra/components'
 
 ## GFM syntax
 
-In markdown is preferable write table via
+In Markdown, it is preferable to write tables via
 [GFM syntax](https://github.github.com/gfm/#tables-extension-).
 
-```mdx filename="Markdown"
+```mdx filename="MDX"
 | left   | center | right |
 | :----- | :----: | ----: |
 | foo    |  bar   |   baz |
@@ -25,7 +25,7 @@ will be rendered as:
 
 If you try to render the following literal `<table />{:jsx}` element:
 
-```mdx filename="Markdown"
+```mdx filename="MDX"
 <table>
   <thead>
     <tr>
@@ -82,10 +82,10 @@ you'll get the following result:
 
 ### How to Write
 
-Want to render dynamic table? You can use embedded JavaScript expressions into
+Want to render a dynamic table? You can use embedded JavaScript expressions into
 your table for it:
 
-```mdx filename="Markdown"
+```mdx filename="MDX"
 <table>
   <thead>
     <tr>
@@ -130,7 +130,7 @@ will be rendered as:
 </table>
 
 <Callout type="warning">
-  Confused by unstyled elements? We explain below 👇, why it's happens.
+  Confused by unstyled elements? We explain below 👇 why it happens.
 </Callout>
 
 ### Unexpected Result
@@ -153,10 +153,10 @@ escape hatch_ that we can name like:
 
 > please only transform markdown tags, not literal HTML tags
 
-Table header looks unstyled since not replaced with Nextra's MDX components
-`<tr />{:jsx}`, `<th />{:jsx}` and `<td />{:jsx}`, for the same reason
-`<table />{:jsx}` literal is not replaced and doesn't have default margin-top
-aka `mt-6`.
+Table header looks unstyled since it has not been replaced with Nextra's MDX
+components `<tr />{:jsx}`, `<th />{:jsx}` and `<td />{:jsx}`, for the same
+reason `<table />{:jsx}` literal is not replaced and doesn't have default
+margin-top aka `mt-6`.
 
 ### Ways to Fix It
 
@@ -164,7 +164,8 @@ aka `mt-6`.
 
 Just wrap your table with curly braces `{` and `}`, e.g.
 
-```text filename="Markdown"
+{/* prettier-ignore */}
+```mdx filename="MDX"
 {<table>
   ...
 </table>}

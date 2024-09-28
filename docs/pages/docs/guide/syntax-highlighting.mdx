@@ -1,13 +1,14 @@
 import { OptionTable } from 'components/table'
 import { Callout } from 'nextra/components'
+import { useEffect, useRef } from 'react'
 
 # Syntax Highlighting
 
-Nextra uses [Shiki](https://shiki.matsu.io) to do syntax highlighting at build
+Nextra uses [Shiki](https://shiki.style) to do syntax highlighting at build
 time. It's very reliable and performant. For example, adding this in your
 Markdown file:
 
-````md filename="Markdown"
+````md copy=false filename="Markdown"
 ```js
 console.log('hello, world')
 ```
@@ -15,7 +16,7 @@ console.log('hello, world')
 
 Results in:
 
-```js
+```js copy=false
 console.log('hello, world')
 ```
 
@@ -26,7 +27,7 @@ console.log('hello, world')
 Inlined syntax highlighting like `let x = 1{:jsx}` is also supported via the
 `{:}` syntax:
 
-```md filename="Markdown"
+```md copy=false filename="Markdown"
 Inlined syntax highlighting is also supported `let x = 1{:jsx}` via:
 ```
 
@@ -35,7 +36,7 @@ Inlined syntax highlighting is also supported `let x = 1{:jsx}` via:
 You can highlight specific lines of code by adding a `{}` attribute to the code
 block:
 
-````md filename="Markdown"
+````md copy=false filename="Markdown"
 ```js {1,4-5}
 import { useState } from 'react'
 
@@ -48,7 +49,7 @@ function Counter() {
 
 Result:
 
-```js {1,4-5}
+```js copy=false {1,4-5}
 import { useState } from 'react'
 
 function Counter() {
@@ -62,7 +63,7 @@ function Counter() {
 You can highlight specific substrings of code by adding a `//` attribute to the
 code block:
 
-````md filename="Markdown"
+````md copy=false filename="Markdown"
 ```js /useState/
 import { useState } from 'react'
 
@@ -73,7 +74,7 @@ function Counter() {
 ```
 ````
 
-```js /useState/
+```js copy=false /useState/
 import { useState } from 'react'
 
 function Counter() {
@@ -90,7 +91,7 @@ number it: `/str/1`, or multiple: `/str/1-3`, `/str/1,3`.
 By adding a `copy` attribute, a copy button will be added to the code block when
 the user hovers over it:
 
-````md filename="Markdown"
+````md copy=false filename="Markdown"
 ```js copy
 console.log('hello, world')
 ```
@@ -102,16 +103,18 @@ Renders:
 console.log('hello, world')
 ```
 
-You can enable this feature globally by setting `defaultShowCopyCode: true` in
-your Nextra configuration (`next.config.js` file). Once it's enabled globally,
-you can disable it via the `copy=false` attribute.
+<Callout type="info">
+  You can enable this feature globally by setting `defaultShowCopyCode: true` in
+  your Nextra configuration (`next.config.mjs` file). Once it's enabled
+  globally, you can disable it via the `copy=false` attribute.
+</Callout>
 
 ### Line Numbers
 
 You can add line numbers to your code blocks by adding a `showLineNumbers`
 attribute:
 
-````md filename="Markdown"
+````md copy=false filename="Markdown"
 ```js showLineNumbers
 import { useState } from 'react'
 
@@ -124,7 +127,7 @@ function Counter() {
 
 Renders:
 
-```js showLineNumbers
+```js copy=false showLineNumbers
 import { useState } from 'react'
 
 function Counter() {
@@ -138,7 +141,7 @@ function Counter() {
 You can add a filename or a title to your code blocks by adding a `filename`
 attribute:
 
-````md filename="Markdown"
+````md copy=false filename="Markdown"
 ```js filename="example.js"
 console.log('hello, world')
 ```
@@ -146,7 +149,7 @@ console.log('hello, world')
 
 Renders:
 
-```js filename="example.js"
+```js copy=false filename="example.js"
 console.log('hello, world')
 ```
 
@@ -154,7 +157,7 @@ console.log('hello, world')
 
 You can highlight ANSI escape codes:
 
-````md filename="Markdown"
+````md copy=false filename="Markdown"
 ```ansi
 [0m [0;32m✓[0m [0;2msrc/[0mindex[0;2m.test.ts (1)[0m
   [0;2m Test Files [0m [0;1;32m1 passed[0;98m (1)[0m
@@ -168,7 +171,7 @@ You can highlight ANSI escape codes:
 
 Renders:
 
-```ansi
+```ansi copy=false
 [0m [0;32m✓[0m [0;2msrc/[0mindex[0;2m.test.ts (1)[0m
   [0;2m Test Files [0m [0;1;32m1 passed[0;98m (1)[0m
   [0;2m      Tests [0m [0;1;32m1 passed[0;98m (1)[0m
@@ -183,41 +186,9 @@ Renders:
 Check [this list](https://github.com/shikijs/shiki/blob/main/docs/languages.md)
 for all supported languages.
 
-## Customize the Theme
+{/* ## Customize the Theme */}
 
-Nextra uses CSS variables to define the colors for tokens. You can inject a
-[global CSS](https://nextjs.org/docs/basic-features/built-in-css-support#adding-a-global-stylesheet)
-to customize them under light/dark themes. For example this is the default
-tokens and you can override any of these:
-
-```css filename="styles.css"
-:root {
-  --shiki-color-text: #414141;
-  --shiki-color-background: transparent;
-  --shiki-token-constant: #1976d2;
-  --shiki-token-string: #22863a;
-  --shiki-token-comment: #aaa;
-  --shiki-token-keyword: #d32f2f;
-  --shiki-token-parameter: #ff9800;
-  --shiki-token-function: #6f42c1;
-  --shiki-token-string-expression: #22863a;
-  --shiki-token-punctuation: #212121;
-  --shiki-token-link: #22863a;
-}
-
-.dark {
-  --shiki-color-text: #d1d1d1;
-  --shiki-token-constant: #79b8ff;
-  --shiki-token-string: #ffab70;
-  --shiki-token-comment: #6b737c;
-  --shiki-token-keyword: #f97583;
-  --shiki-token-parameter: #ff9800;
-  --shiki-token-function: #b392f0;
-  --shiki-token-string-expression: #4bb74a;
-  --shiki-token-punctuation: #bbb;
-  --shiki-token-link: #ffab70;
-}
-```
+{/* Nextra uses CSS variables to define the colors for tokens. */}
 
 ## With Dynamic Content
 
@@ -225,56 +196,48 @@ Since syntax highlighting is done at build time, you can’t use dynamic content
 in your code blocks. However, since MDX is very powerful there is a workaround
 via client JS. For example:
 
-import { useEffect, useRef } from 'react'
+import { Button } from 'nextra/components'
 
 export function DynamicCode({ children }) {
-  const ref = useRef()
+  const ref = useRef(null)
   const tokenRef = useRef()
   // Find the corresponding token from the DOM
   useEffect(() => {
-    if (ref.current) {
-      const token = [...ref.current.querySelectorAll('code span')].find(
-        el => el.innerText === '1'
-      )
-      tokenRef.current = token
-    }
+    tokenRef.current = [
+      ...ref.current.querySelectorAll('code > span > span')
+    ].find(el => el.textContent === '1')
   }, [])
   return (
     <>
-      <div ref={ref} style={{ marginTop: '1.5rem' }}>
+      <div ref={ref} className="mt-6">
         {children}
       </div>
-      <a
-        onClick={() => {
-          tokenRef.current.innerText =
-            (parseInt(tokenRef.current.innerText) || 0) + 1
-        }}
-        style={{
-          cursor: 'pointer',
-          userSelect: 'none'
-        }}
-      >
-        Increase the number
-      </a>
-      <a
-        onClick={() => {
-          tokenRef.current.innerText = '1 + 1'
-        }}
-        style={{
-          marginLeft: '.5rem',
-          cursor: 'pointer',
-          userSelect: 'none'
-        }}
-      >
-        Change to `1 + 1`
-      </a>
+      <div className="flex mt-3 gap-3 justify-center text-sm">
+        <Button
+          variant="outline"
+          onClick={() => {
+            const prev = tokenRef.current.textContent
+            tokenRef.current.textContent = (+prev || 0) + 1
+          }}
+        >
+          Increase the number
+        </Button>
+        <Button
+          variant="outline"
+          onClick={() => {
+            tokenRef.current.textContent = '1 + 1'
+          }}
+        >
+          Change to `1 + 1`
+        </Button>
+      </div>
     </>
   )
 }
 
 <DynamicCode>
-```js filename="dynamic_code.js"
-function hello () {
+```js copy=false filename="dynamic-code.js"
+function hello() {
   const x = 2 + 3
   console.log(1)
 }
@@ -293,7 +256,7 @@ to see how it works.
 
 You can opt out of syntax highlighting for using one of your own. You can
 disable syntax highlighting globally by setting `codeHighlight: false` in your
-Nextra configuration (`next.config.js` file).
+Nextra configuration (`next.config.mjs` file).
 
 <OptionTable
   options={[
@@ -313,9 +276,9 @@ for syntax highlighting with custom language grammars.
 
 You can provide these grammars by overriding the `getHighlighter` function in
 `mdxOptions.rehypePrettyCodeOptions` option in your Nextra config inside
-`next.config.js`:
+`next.config.mjs`:
 
-```js filename="next.config.js" {13-18}
+```js copy=false filename="next.config.mjs" {13-18}
 import { BUNDLED_LANGUAGES } from 'shiki'
 
 nextra({
@@ -346,7 +309,7 @@ nextra({
 Within `mdxOptions.rehypePrettyCodeOptions` you may also provide custom themes
 instead of [relying on CSS Variables](/docs/guide/syntax-highlighting):
 
-```js filename="next.config.js" {4}
+```js copy=false filename="next.config.mjs" {4}
 nextra({
   // ... other options
   mdxOptions: {
@@ -360,15 +323,20 @@ nextra({
 })
 ```
 
-### Multiple Themes
+### Multiple Themes (Dark and Light Mode)
 
-Nextra currently doesn't support specifying multiple themes. Because Shiki
-renders multiple code blocks for every theme and tags them with an attribute
-`data-theme`, e.g. `data-theme="dark"`.
+Pass your themes to `theme`, where the keys represent the color mode:
 
-<Callout type="info">
-  However, in the future, multiple themes will be supported. You can track the
-  progress in shikiji (newly fork of Shiki)
-  https://github.com/antfu/shikiji#multiple-themes that already supports
-  multiple themes without rendering multiple code blocks.
-</Callout>
+```js copy=false filename="next.config.mjs" {5-8}
+nextra({
+  // ...
+  mdxOptions: {
+    rehypePrettyCodeOptions: {
+      theme: {
+        dark: 'nord',
+        light: 'min-light'
+      }
+    }
+  }
+})
+```
