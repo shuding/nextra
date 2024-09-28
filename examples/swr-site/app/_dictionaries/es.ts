@@ -1,6 +1,9 @@
 import type { Dictionary } from './i18n-config'
 
 export default {
+  dark: 'Oscuro',
+  light: 'Luz',
+  system: 'Sistema',
   backToTop: 'Desplazarse hacia arriba',
   lastUpdated: 'Última actualización el',
   logo: {
