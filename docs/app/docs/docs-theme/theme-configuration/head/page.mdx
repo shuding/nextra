@@ -21,17 +21,25 @@ favicon, etc.
 
 ## Static Head Tags
 
-If you have only static head tags, it’s easy to directly put them in `head`. For
+If you have only static head tags, it’s easy to directly put them in `Head`. For
 example:
 
-```jsx
-export default {
-  head: (
-    <>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta property="og:title" content="Nextra" />
-      <meta property="og:description" content="The next site builder" />
-    </>
+```jsx filename="app/layout.jsx"
+import { Layout } from 'my-nextra-theme'
+import { Head } from 'nextra/components'
+
+export default function MyLayout({ children, ...props }) {
+  return (
+    <html lang="en">
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta property="og:title" content="Nextra" />
+        <meta property="og:description" content="The next site builder" />
+      </Head>
+      <body>
+        <Layout>{children}</Layout>
+      </body>
+    </html>
   )
 }
 ```
