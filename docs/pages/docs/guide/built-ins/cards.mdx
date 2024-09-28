@@ -2,6 +2,11 @@ import { CardsIcon, OneIcon, WarningIcon, BoxIcon } from '@components/icons'
 import { Cards, RemoteContent } from 'nextra/components'
 import { buildDynamicMDX } from 'nextra/remote'
 
+# Cards Component
+
+A built-in component that allows you to display content in a visually appealing card format. It
+includes options for adding an icon, title, link and an image to related content.
+
 export async function getStaticProps() {
   const mdx2 = `<Cards.Card
   icon={<BoxIcon />}
@@ -28,11 +33,6 @@ export async function getStaticProps() {
   />
 </Cards>`
   const props = await buildDynamicMDX(`
-# Cards Component
-
-A built-in component that allows you to display content in a visually appealing card format. It
-includes options for adding an icon, title, link and an image to related content.
-
 ## Grouped Cards
 
 ### Example
@@ -69,10 +69,7 @@ ${mdx2}
 
 ~~~mdx filename="MDX"
 ${mdx2}
-~~~
-
-
-`)
+~~~`)
   return { props }
 }
 
