@@ -54,3 +54,19 @@ Contents for step 1.
 Contents for step 2.
 </Steps>
 ```
+
+### Excluding Headings from Table of Contents
+
+To exclude the headings from the `<Steps>` component (or any other headings) to
+appear in the Table of Contents, replace the Markdown headings `### ...` with
+`<h3>` HTML element wrapped in curly braces.
+
+{/* prettier-ignore */}
+```diff
+<Steps>
+- ### Step 1
++ {<h3>Step 1</h3>}
+
+Contents for step 1.
+</Steps>
+```
