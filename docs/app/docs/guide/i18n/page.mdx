@@ -2,14 +2,16 @@ import { Callout, Steps } from 'nextra/components'
 
 # Next.js I18n
 
-<Callout emoji="⚠️">This feature is only available in the docs theme.</Callout>
+<Callout emoji="⚠️">
+  This feature is only available in `nextra-theme-docs`.
+</Callout>
 
 Nextra supports
 [Next.js Internationalized Routing](https://nextjs.org/docs/advanced-features/i18n-routing)
 out of the box. These docs explain how to configure and use it.
 
 <Steps>
-### Add I18n Config
+## Add I18n Config
 
 To add multi-language pages to your Nextra application, you need to config
 `i18n` in `next.config.mjs` first:
@@ -24,39 +26,30 @@ const withNextra = nextra({
 
 export default withNextra({
   i18n: {
-    locales: ['en-US', 'zh-CN', 'de-DE'],
-    defaultLocale: 'en-US'
+    locales: ['en', 'zh', 'de'],
+    defaultLocale: 'en'
   }
 })
 ```
 
-### Add Locale to Filenames
+<Callout type="info">
+  **Note**: You can use any format of [UTS Locale
+  Identifiers](https://www.unicode.org/reports/tr35/tr35-59/tr35.html#Identifiers)
+  for defining your locales in the `next.config` file, e.g. language with region
+  format `en-US` (English as spoken in the United States).
+</Callout>
 
-Then, add the locale codes to your file extensions (required for the default
-locale too):
+## Configure the Docs Theme
 
-```plaintext
-/pages
-  _meta.en-US.json
-  _meta.zh-CN.json
-  _meta.de-DE.json
-  index.en-US.md
-  index.zh-CN.md
-  index.de-DE.md
-  ...
-```
-
-### Configure the Docs Theme
-
-Finally, add the `i18n` option to your `theme.config.jsx` to configure the
-language dropdown:
+Add the `i18n` option to your `theme.config.jsx` to configure the language
+dropdown:
 
 ```js filename="theme.config.jsx"
 i18n: [
-  { locale: 'en-US', name: 'English' },
-  { locale: 'zh-CN', name: '中文' },
-  { locale: 'de-DE', name: 'Deutsch' },
-  { locale: 'ar-SA', name: 'العربية', direction: 'rtl' }
+  { locale: 'en', name: 'English' },
+  { locale: 'zh', name: '中文' },
+  { locale: 'de', name: 'Deutsch' },
+  { locale: 'ar', name: 'العربية', direction: 'rtl' }
 ]
 ```
 

@@ -1,5 +1,26 @@
 # nextra-theme-blog
 
+## 4.0.0-app-router.3
+
+### Major Changes
+
+- 1e77fab: move `<Collapse>`, `<Details>`, `<Summary>`, `<SkipNavContent>`,
+  `SkipNavLink`, `<Select>` and `<Bleed>` from `nextra-theme-docs` to
+  `nextra/components`
+
+### Minor Changes
+
+- 1e77fab: use `next-view-transitions` for transition in `nextra-theme-blog`
+
+### Patch Changes
+
+- 1e77fab: fix edit on github and last updated at for catch all routes
+- Updated dependencies [1e77fab]
+- Updated dependencies [1e77fab]
+- Updated dependencies [1e77fab]
+- Updated dependencies [1e77fab]
+  - nextra@4.0.0-app-router.3
+
 ## 4.0.0-app-router.2
 
 ### Major Changes
@@ -39,6 +60,167 @@
 
 - Updated dependencies [99f34d3]
   - nextra@4.0.0-app-router.0
+
+## 3.0.0
+
+### Major Changes
+
+- c2ad837: update to MDX3
+- 16ab7f7: - remove `legacyBehavior` from `NextLink`
+
+  - remove `config.cusdis`. Instead, now you need to pass cusdis options as
+    props in `Cusdis` component
+
+- 148278c: rename tailwind prefix `nx-` to `_` to reduce bundle size
+- 919fe97: set `"peerDependencies.next": ">=13"`
+- ba30c6c: use render props for className with `selected`, `disabled` and
+  `hover` state for `<Tab>`
+- d7d8a3e: new styles for code blocks aka in next.js
+- 2872606: remove `image` prop from `<Card>` component, image will be showed
+  based on truthiness `children` prop now
+
+  set `icon` as optional prop
+
+- 128e195: fix React warning, remove PageOpts.toc, use `toc` prop from
+  `components.wrapper`
+- 191e6c4: - use `shikiji` instead of `shiki`
+
+  - rename `useSSG` to `useData`
+
+- c7f03e5: rename `pageOpts.headings` to `toc`
+
+### Minor Changes
+
+- 6ec3241: Add Terraform/Move icon https://github.com/shuding/nextra/pull/2811
+  https://github.com/shuding/nextra/pull/2808
+- 5a63701: add icons for following languages:
+
+  - GraphQL (`graphql`)
+  - C++ (`c++`, `cpp`)
+  - C# (`csharp`, `c#`, `cs`)
+  - Python (`python`, `py`)
+
+  allow disallow mobile word wrap button in code blocks with `word-wrap=false`
+  meta data setting
+
+- 6ec3241: Make the `<Tab>` component be crawlable and indexable by search
+  engines by default
+- 3043826: add shikiji twoslash
+
+  Demo feature:
+  https://nextra-v2-na3obnhub-shuding1.vercel.app/docs/guide/twoslash-support
+
+- 440ff42: add MathJax support
+
+### Patch Changes
+
+- 73239c4: To ensure consistent horizontal padding, set the default language as
+  plaintext for code blocks. This prevents any loss of formatting for code
+  blocks without a specified language.
+- 2a3e3e7: Fix first list item in `<FileTree>` not within permitted parent
+  elements
+- cb24790: fix broken `export default` statement in mdx files
+- 7e57ddb: Avoid skipping the heading level in the posts layout, removes
+  `.post-item` and `.post-item-more` classes
+- a8c2196: use dynamic import for loading `mermaid`
+- 0b5cc9d: make nextra compatible with windows
+- 1a634cd: remove explicit `ZodError` assertion
+- ad108ff: use `overflow-x-auto` instead `overflow-x-scroll` for `<Table>`
+- 4f0f6b2: Omit `...{:type}` inline code annotations from search index #2922
+- 150184b: attach heading anchor `id` attribute to heading (like Pagefind do)
+  and fix heading anchor styles when `theme.typesetting: 'article'` is set
+- 7bb18e3: Add a generic for `themeConfig` in `NextraThemeLayoutProps` to
+  improve type inference.
+- 9f55bd1: update rehype-pretty-code/shikiji to latest
+- a90b90f: Switch to the dark theme provided by `@tailwindcss/typography` in
+  theme-blog.
+- 49a9627: fix theme-blog heading styles in post layout
+- 3c6193d: Remove unnecessary `sortPages` from `server/utils.ts`
+- 363b85f: add `flex-shrink: 0` for indent in `FileTree` for `<Ident>` and svg
+  icons in `<Folder>` and `<File>`
+- 237c345: Make React 18 as minimal requirement
+- a95e745: Fix the line highlighting background-color does not extend to the
+  full width of the code block when a scrollbar appears with line numbers.
+- Updated dependencies [e7e8e84]
+- Updated dependencies [7188278]
+- Updated dependencies [d1e3e9a]
+- Updated dependencies [73239c4]
+- Updated dependencies [2b9b95b]
+- Updated dependencies [023d37b]
+- Updated dependencies [0fe55db]
+- Updated dependencies [50a52fd]
+- Updated dependencies [c2ad837]
+- Updated dependencies [2a3e3e7]
+- Updated dependencies [a3b67ae]
+- Updated dependencies [1a36469]
+- Updated dependencies [799174f]
+- Updated dependencies [98f439c]
+- Updated dependencies [6ec3241]
+- Updated dependencies [148278c]
+- Updated dependencies [c7f03e5]
+- Updated dependencies [3644e1c]
+- Updated dependencies [919fe97]
+- Updated dependencies [cb24790]
+- Updated dependencies [47b125d]
+- Updated dependencies [982862f]
+- Updated dependencies [a8c2196]
+- Updated dependencies [ba30c6c]
+- Updated dependencies [0b5cc9d]
+- Updated dependencies [5a63701]
+- Updated dependencies [60ec68c]
+- Updated dependencies [d7d8a3e]
+- Updated dependencies [fe5061b]
+- Updated dependencies [2872606]
+- Updated dependencies [a52a869]
+- Updated dependencies [6ec3241]
+- Updated dependencies [1a634cd]
+- Updated dependencies [63ca28b]
+- Updated dependencies [ad108ff]
+- Updated dependencies [ad4823d]
+- Updated dependencies [4f0f6b2]
+- Updated dependencies [1f3e7cd]
+- Updated dependencies [ab07609]
+- Updated dependencies [2f3be33]
+- Updated dependencies [90c129e]
+- Updated dependencies [f71e660]
+- Updated dependencies [150184b]
+- Updated dependencies [66cce1d]
+- Updated dependencies [c74ae90]
+- Updated dependencies [7615b62]
+- Updated dependencies [6070b02]
+- Updated dependencies [7bb18e3]
+- Updated dependencies [b9f88e3]
+- Updated dependencies [8efbb45]
+- Updated dependencies [6f4c83a]
+- Updated dependencies [d8a406b]
+- Updated dependencies [9f55bd1]
+- Updated dependencies [4e55c06]
+- Updated dependencies [128e195]
+- Updated dependencies [8bce16d]
+- Updated dependencies [ccaf3d4]
+- Updated dependencies [3043826]
+- Updated dependencies [2630461]
+- Updated dependencies [576cb6f]
+- Updated dependencies [217f708]
+- Updated dependencies [57bc0e2]
+- Updated dependencies [ca51306]
+- Updated dependencies [f662237]
+- Updated dependencies [3c6193d]
+- Updated dependencies [1f3e7cd]
+- Updated dependencies [198dbcc]
+- Updated dependencies [363b85f]
+- Updated dependencies [fef635e]
+- Updated dependencies [6070b02]
+- Updated dependencies [237c345]
+- Updated dependencies [191e6c4]
+- Updated dependencies [440ff42]
+- Updated dependencies [7faa096]
+- Updated dependencies [9099c35]
+- Updated dependencies [98f439c]
+- Updated dependencies [a95e745]
+- Updated dependencies [80e11e0]
+- Updated dependencies [c7f03e5]
+  - nextra@3.0.0
 
 ## 3.0.0-alpha.42
 
