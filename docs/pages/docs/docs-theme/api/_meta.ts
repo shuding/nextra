@@ -1,3 +1,4 @@
 export default {
-  'use-config': 'useConfig'
+  'use-config': 'useConfig',
+  'use-theme-config': 'useThemeConfig'
 }
