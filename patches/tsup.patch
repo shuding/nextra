@@ -1,5 +1,5 @@
 diff --git a/dist/rollup.js b/dist/rollup.js
-index 8c514b6e014a4cda52f4b2538659418861049229..dddccb73c38a2a44b68d18097f6437e433152e6e 100644
+index 96ad0411859ce813a3da5d36e12fb681a1b4bf33..fe97781fec8de03bb1cb77a71ae021f203fa449b 100644
 --- a/dist/rollup.js
 +++ b/dist/rollup.js
 @@ -8392,6 +8392,10 @@ var getRollupConfig = async (options) => {
