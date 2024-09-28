@@ -170,19 +170,6 @@ the docs repository, with the current website title prefilled:
   To disable it, you can set `feedback.content` to `null`.
 </Callout>
 
-## Last Updated Date
-
-Show the last updated date of each page. It’s useful for showing the freshness
-of the content.
-
-<Table>
-
-|             |                              |                                           |
-| ----------- | ---------------------------- | ----------------------------------------- |
-| lastUpdated | `React.FC<{ date: Date }>()` | Component to render the last updated info |
-
-</Table>
-
 ## I18n
 
 Options to configure the language dropdown for
@@ -194,6 +181,19 @@ Options to configure the language dropdown for
 | ------------------- | -------- | ------------------------------------------------------ |
 | i18n[number].locale | `string` | Locale from `i18n.locales` field in `next.config` file |
 | i18n[number].name   | `string` | Locale name in dropdown                                |
+
+</Table>
+
+## Last Updated Date
+
+Show the last updated date of each page. It’s useful for showing the freshness
+of the content.
+
+<Table>
+
+|             |                              |                                           |
+| ----------- | ---------------------------- | ----------------------------------------- |
+| lastUpdated | `React.FC<{ date: Date }>()` | Component to render the last updated info |
 
 </Table>
 
