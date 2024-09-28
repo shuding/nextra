@@ -301,12 +301,12 @@ navigating between headings.
 
 <Table>
 
-|                  |                                         |                                                          |
-| ---------------- | --------------------------------------- | -------------------------------------------------------- |
-| toc.backToTop    | `React.ReactNode \| React.FC`           | Text of `Scroll to top` button                           |
-| toc.extraContent | `React.ReactNode \| React.FC`           | Display extra content below the TOC content              |
-| toc.float        | `boolean`                               | Float the TOC next to the content                        |
-| toc.title        | `React.ReactNode \| React.FC`           | Title of the TOC sidebar. By default it’s “On This Page” |
+|                  |                                       |                                                               |
+| ---------------- | ------------------------------------- | ------------------------------------------------------------- |
+| toc.backToTop    | `string \| ReactElement \| null{:ts}` | Text of back to top button. Default: `"Scroll to top"{:json}` |
+| toc.extraContent | `string \| ReactElement \| null{:ts}` | Display extra content below the TOC content                   |
+| toc.float        | `boolean{:ts}`                        | Float the TOC next to the content. Default: `true{:json}`     |
+| toc.title        | `string \| ReactElement \| null{:ts}` | Title of the TOC sidebar. Default: `"On This Page"{:json}`    |
 
 </Table>
 
