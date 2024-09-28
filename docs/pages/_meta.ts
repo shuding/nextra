@@ -26,6 +26,17 @@ export default {
       typesetting: 'article'
     }
   },
+  version: {
+    type: 'menu',
+    title: 'Version',
+    items: {
+      2: {
+        title: 'Nextra v2 Docs ↗',
+        href: 'https://nextra-v2-oe0zrpzjp-shud.vercel.app',
+        newWindow: true
+      }
+    }
+  },
   '404': {
     type: 'page',
     theme: {

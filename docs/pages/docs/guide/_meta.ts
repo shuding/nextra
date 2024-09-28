@@ -7,7 +7,8 @@ export default {
   ssg: 'Next.js SSG',
   i18n: 'Next.js I18n',
   'custom-css': '',
+  'static-exports': '',
   search: '',
-  advanced: '',
-  'built-ins': 'Built-ins'
+  'built-ins': 'Built-ins Components',
+  advanced: ''
 }

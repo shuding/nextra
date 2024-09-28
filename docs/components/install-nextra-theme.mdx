@@ -1,0 +1,30 @@
+import { Callout } from 'nextra/components'
+
+Add the following scripts in `package.json`:
+
+```json filename="package.json"
+"scripts": {
+  "dev": "next",
+  "build": "next build",
+  "start": "next start"
+},
+```
+
+You can start the server in development mode with the following command
+according to your package manager:
+
+```sh npm2yarn
+npm run dev
+```
+
+or in production mode:
+
+```sh npm2yarn
+npm run build
+npm run start
+```
+
+<Callout>
+  If you're not familiar with Next.js, note that development mode is
+  significantly slower since Next.js compiles every page you navigate to.
+</Callout>

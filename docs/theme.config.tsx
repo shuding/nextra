@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import type { DocsThemeConfig } from 'nextra-theme-docs'
-import { useConfig } from 'nextra-theme-docs'
+import { Link, useConfig } from 'nextra-theme-docs'
 
 const logo = (
   <svg
@@ -41,6 +41,19 @@ const logo = (
 )
 
 const config: DocsThemeConfig = {
+  banner: {
+    key: '3.0-release',
+    content: (
+      <div className='before:content-["🎉_"]'>
+        <Link
+          href="https://the-guild.dev/blog/nextra-3"
+          className='after:content-["_→"]'
+        >
+          Nextra 3.0 is released. Read more
+        </Link>
+      </div>
+    )
+  },
   project: {
     link: 'https://github.com/shuding/nextra'
   },
