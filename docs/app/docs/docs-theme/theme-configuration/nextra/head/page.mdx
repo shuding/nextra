@@ -3,8 +3,7 @@ import { Hue, Saturation } from './_slider'
 
 # `Head`
 
-Configure the `<head>` tags of the website. You can add meta tags, title,
-favicon, etc.
+Configure the `<head>` tags, primary color, background color and favicon glyph of the website.
 
 <Table>
 
@@ -21,10 +20,9 @@ favicon, etc.
 
 ## Static Head Tags
 
-If you have only static head tags, it’s easy to directly put them in `Head`. For
-example:
+If you have static head tags, they should be put as `children` in `Head`. For example:
 
-```jsx filename="app/layout.jsx"
+```jsx filename="app/layout.jsx" {8}
 import { Layout } from 'my-nextra-theme'
 import { Head } from 'nextra/components'
 
@@ -33,8 +31,6 @@ export default function MyLayout({ children, ...props }) {
     <html lang="en">
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta property="og:title" content="Nextra" />
-        <meta property="og:description" content="The next site builder" />
       </Head>
       <body>
         <Layout>{children}</Layout>
@@ -46,36 +42,19 @@ export default function MyLayout({ children, ...props }) {
 
 ## Dynamic Tags Based on Page
 
-You can also use a _function component_ as `head` to dynamically generate the
-head tags based on the current page’s front matter. For example:
+You can dynamically generate the head tags based on the current page’s front matter. For example:
 
-```jsx
-import { useRouter } from 'next/router'
-import { useConfig } from 'nextra-theme-docs'
-
-export default {
-  head() {
-    const { asPath, defaultLocale, locale } = useRouter()
-    const { frontMatter } = useConfig()
-    const url =
-      'https://my-app.com' +
-      (defaultLocale === locale ? asPath : `/${locale}${asPath}`)
-
-    return (
-      <>
-        <meta property="og:url" content={url} />
-        <meta property="og:title" content={frontMatter.title || 'Nextra'} />
-        <meta
-          property="og:description"
-          content={frontMatter.description || 'The next site builder'}
-        />
-      </>
-    )
+```jsx filename="[[...mdxPath]]/page.jsx"
+export async function generateMetadata({ params: { mdxPath } }) {
+  const { metadata } = await loadPage(mdxPath)
+  return {
+    title: metadata.title || 'Nextra',
+    description: metadata.description || 'The next site builder'
   }
 }
 ```
 
-You can refer to the [`useConfig`](/docs/docs-theme/api/use-config) API section
+You can refer to the [`useConfig`](/docs/docs-theme/api) API section
 for more information about the `useConfig` hook and the `frontMatter` object.
 
 ## Theme Color
