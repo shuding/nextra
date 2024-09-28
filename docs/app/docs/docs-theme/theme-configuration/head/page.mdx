@@ -1,4 +1,5 @@
 import { Table } from '../page.mdx'
+import { Hue, Saturation } from './_slider'
 
 # `Head`
 
@@ -63,3 +64,38 @@ export default {
 
 You can refer to the [`useConfig`](/docs/docs-theme/api/use-config) API section
 for more information about the `useConfig` hook and the `frontMatter` object.
+
+## Theme Color
+
+You can adjust the theme color of the website by setting primary hue and
+saturation values for light and dark themes.
+
+<Table>
+
+  |                       |                                             |                                           |
+  | --------------------- | ------------------------------------------- | ----------------------------------------- |
+  | color.hue             | `number \| { dark: number; light: number }` | The hue of the primary theme color        |
+  | color.saturation      | `number \| { dark: number; light: number }` | The saturation of the primary theme color |
+  | backgroundColor.dark  | `string` in format `RRR,GGG,BBB`            | Background color for light theme          |
+  | backgroundColor.light | `string` in format `RRR,GGG,BBB`            | Background color for dark theme           |
+
+</Table>
+
+Try it out for this website:
+
+| Hue     | Saturation     |
+| ------- | -------------- |
+| <Hue /> | <Saturation /> |
+
+## Favicon Glyph
+
+This isn’t supported by all browsers, but it’s a nice way to customize the
+favicon of the website simply by using an emoji or character.
+
+<Table>
+
+  |              |          |                                 |
+  | ------------ | -------- | ------------------------------- |
+  | faviconGlyph | `string` | The glyph to use as the favicon |
+
+</Table>

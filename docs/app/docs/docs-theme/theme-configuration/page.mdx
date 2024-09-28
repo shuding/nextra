@@ -5,7 +5,6 @@ export const metadata = {
 import { Screenshot } from 'components/screenshot'
 import { Callout } from 'nextra/components'
 import sidebarTitleComponentImage from 'public/assets/docs/sidebar-customized.png'
-import { Hue, Saturation } from './_slider'
 
 # Theme Configuration
 
@@ -82,28 +81,6 @@ Customize the theme behavior of the website.
 | nextThemes | `object`  | Configuration for the [next-themes](https://github.com/pacocoursey/next-themes#themeprovider) package |
 
 </Table>
-
-### Theme Color
-
-You can adjust the theme color of the website by setting primary hue and
-saturation values for light and dark themes.
-
-<Table>
-
-|                       |                                             |                                           |
-| --------------------- | ------------------------------------------- | ----------------------------------------- |
-| color.hue             | `number \| { dark: number; light: number }` | The hue of the primary theme color        |
-| color.saturation      | `number \| { dark: number; light: number }` | The saturation of the primary theme color |
-| backgroundColor.dark  | `string` in format `RRR,GGG,BBB`            | Background color for light theme          |
-| backgroundColor.light | `string` in format `RRR,GGG,BBB`            | Background color for dark theme           |
-
-</Table>
-
-Try it out for this website:
-
-| Hue     | Saturation     |
-| ------- | -------------- |
-| <Hue /> | <Saturation /> |
 
 ## Sidebar
 
@@ -360,15 +337,3 @@ Options to configure the language dropdown for
 
 </Table>
 
-## Favicon Glyph
-
-This isn’t supported by all browsers, but it’s a nice way to customize the
-favicon of the website simply by using an emoji or character.
-
-<Table>
-
-|              |          |                                 |
-| ------------ | -------- | ------------------------------- |
-| faviconGlyph | `string` | The glyph to use as the favicon |
-
-</Table>
