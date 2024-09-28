@@ -19,7 +19,7 @@ patchedDependencies:
     hash: lc7tasx5o5q2nd7db4ciaguh2a
     path: patches/eslint-plugin-deprecation@3.0.0.patch
   eslint-plugin-tailwindcss:
-    hash: u2tz73rldybdwobmehqll2enku
+    hash: quqasx3lkw2fskc7xdiwuschla
     path: patches/eslint-plugin-tailwindcss.patch
   next@14.2.13:
     hash: ih2n7uyu6sqdsauhnxm6ovrrua
@@ -73,7 +73,7 @@ importers:
         version: 2.0.2(@typescript-eslint/parser@8.7.0(eslint@9.11.1(jiti@1.21.6))(typescript@5.6.2))(eslint@9.11.1(jiti@1.21.6))
       eslint-plugin-tailwindcss:
         specifier: 3.17.3
-        version: 3.17.3(patch_hash=u2tz73rldybdwobmehqll2enku)(tailwindcss@3.4.13)
+        version: 3.17.3(patch_hash=quqasx3lkw2fskc7xdiwuschla)(tailwindcss@3.4.13)
       eslint-plugin-typescript-sort-keys:
         specifier: 3.2.0
         version: 3.2.0(@typescript-eslint/parser@8.7.0(eslint@9.11.1(jiti@1.21.6))(typescript@5.6.2))(eslint@9.11.1(jiti@1.21.6))(typescript@5.6.2)
@@ -11156,7 +11156,7 @@ snapshots:
       - eslint-import-resolver-webpack
       - supports-color
 
-  eslint-plugin-tailwindcss@3.17.3(patch_hash=u2tz73rldybdwobmehqll2enku)(tailwindcss@3.4.13):
+  eslint-plugin-tailwindcss@3.17.3(patch_hash=quqasx3lkw2fskc7xdiwuschla)(tailwindcss@3.4.13):
     dependencies:
       fast-glob: 3.3.2
       postcss: 8.4.47
