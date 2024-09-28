@@ -7,10 +7,10 @@ default footer, or fully customize it with a custom component.
 
 <Table>
 
-|           |                  |                       |
-| --------- | ---------------- | --------------------- |
+|           |                  |                                                                                           |
+| --------- | ---------------- | ----------------------------------------------------------------------------------------- |
 | children  | `ReactNode{:ts}` | Content of the footer.<br/>Default: `"MIT ${new Date().getFullYear()} © Nextra."{:json}` |
-| className | `string{:ts}`    | CSS class name        |
+| className | `string{:ts}`    | CSS class name                                                                            |
 
 </Table>
 
@@ -20,12 +20,12 @@ You can add some simple content, such as copyright information to the default
 footer:
 
 ```jsx filename="app/layout.jsx"
-import { Layout, Footer } from 'nextra-theme-docs'
+import { Footer, Layout } from 'nextra-theme-docs'
 
 export default function MyLayout({ children, ...props }) {
   return (
     <Layout>
-{children}
+      {children}
       <Footer>
         MIT {new Date().getFullYear()} ©{' '}
         <a href="https://nextra.site" target="_blank">
