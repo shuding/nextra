@@ -4,56 +4,56 @@ import { useEffect, useRef } from 'react'
 
 export function Collapse({
   children,
-  className,
   isOpen,
-  horizontal = false
+  horizontal = false,
+  openDuration = 500,
+  closeDuration = 300
 }: {
   children: ReactNode
-  className?: string
   isOpen: boolean
   horizontal?: boolean
+  openDuration?: number
+  closeDuration?: number
 }): ReactElement {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const innerRef = useRef<HTMLDivElement>(null)
-  const animationRef = useRef(0)
+  const containerRef = useRef<HTMLDivElement>(null!)
   const initialOpen = useRef(isOpen)
+  const animationRef = useRef(0)
   const initialRender = useRef(true)
-
   useEffect(() => {
-    const container = containerRef.current
-    const inner = innerRef.current
     const animation = animationRef.current
+    const container = containerRef.current
     if (animation) {
       clearTimeout(animation)
+      animationRef.current = 0
     }
-    if (initialRender.current || !container || !inner) return
 
-    container.classList.toggle('nx-duration-500', !isOpen)
-    container.classList.toggle('nx-duration-300', isOpen)
+    if (initialRender.current) {
+      return
+    }
+    const child = container.children[0] as HTMLDivElement
 
     if (horizontal) {
       // save initial width to avoid word wrapping when container width will be changed
-      inner.style.width = `${inner.clientWidth}px`
-      container.style.width = `${inner.clientWidth}px`
+      child.style.width = `${child.clientWidth}px`
+      container.style.width = `${child.clientWidth}px`
     } else {
-      container.style.height = `${inner.clientHeight}px`
+      container.style.height = `${child.clientHeight}px`
     }
-
     if (isOpen) {
       animationRef.current = window.setTimeout(() => {
-        // should be style property in kebab-case, not css class name
+        // should be style property in kebab-case, not CSS class name
         container.style.removeProperty('height')
-      }, 300)
+      }, openDuration)
     } else {
       setTimeout(() => {
         if (horizontal) {
-          container.style.width = '0px'
+          container.style.width = '0'
         } else {
-          container.style.height = '0px'
+          container.style.height = '0'
         }
-      }, 0)
+      })
     }
-  }, [horizontal, isOpen])
+  }, [horizontal, isOpen, openDuration])
 
   useEffect(() => {
     initialRender.current = false
@@ -62,19 +62,16 @@ export function Collapse({
   return (
     <div
       ref={containerRef}
-      className="nx-transform-gpu nx-overflow-hidden nx-transition-all nx-ease-in-out motion-reduce:nx-transition-none"
-      style={initialOpen.current || horizontal ? undefined : { height: 0 }}
+      className={cn(
+        '_transform-gpu _transition-all _ease-in-out motion-reduce:_transition-none',
+        isOpen ? '_opacity-100' : ['_opacity-0', '_overflow-hidden']
+      )}
+      style={{
+        ...(initialOpen.current || horizontal ? undefined : { height: 0 }),
+        transitionDuration: (isOpen ? openDuration : closeDuration) + 'ms'
+      }}
     >
-      <div
-        ref={innerRef}
-        className={cn(
-          'nx-transition-opacity nx-duration-500 nx-ease-in-out motion-reduce:nx-transition-none',
-          isOpen ? 'nx-opacity-100' : 'nx-opacity-0',
-          className
-        )}
-      >
-        {children}
-      </div>
+      <div>{children}</div>
     </div>
   )
 }

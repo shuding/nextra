@@ -1,9 +1,10 @@
 import cn from 'clsx'
+// eslint-disable-next-line no-restricted-imports -- since we don't need newWindow prop
+import NextLink from 'next/link'
 import { ArrowRightIcon } from 'nextra/icons'
 import type { Item } from 'nextra/normalize-pages'
 import type { ReactElement } from 'react'
 import { Fragment } from 'react'
-import { Anchor } from './anchor'
 
 export function Breadcrumb({
   activePath
@@ -11,33 +12,41 @@ export function Breadcrumb({
   activePath: Item[]
 }): ReactElement {
   return (
-    <div className="nextra-breadcrumb nx-mt-1.5 nx-flex nx-items-center nx-gap-1 nx-overflow-hidden nx-text-sm nx-text-gray-500 dark:nx-text-gray-400 contrast-more:nx-text-current">
+    <div className="nextra-breadcrumb _mt-1.5 _flex _items-center _gap-1 _overflow-hidden _text-sm _text-gray-500 dark:_text-gray-400 contrast-more:_text-current">
       {activePath.map((item, index) => {
-        const isLink = !item.children || item.withIndexPage
-        const isActive = index === activePath.length - 1
+        const isLast = index === activePath.length - 1
+        const href = isLast
+          ? ''
+          : item.withIndexPage
+            ? item.route
+            : item.children![0].route === activePath.at(index + 1)?.route
+              ? ''
+              : item.children![0].route
+
+        const ComponentToUse = href ? NextLink : 'span'
 
         return (
           <Fragment key={item.route + item.name}>
-            {index > 0 && <ArrowRightIcon className="nx-w-3.5 nx-shrink-0" />}
-            <div
+            {index > 0 && (
+              <ArrowRightIcon
+                height="14"
+                className="_shrink-0 rtl:_rotate-180"
+              />
+            )}
+            <ComponentToUse
               className={cn(
-                'nx-whitespace-nowrap nx-transition-colors',
-                isActive
-                  ? 'nx-font-medium nx-text-gray-700 contrast-more:nx-font-bold contrast-more:nx-text-current dark:nx-text-gray-100 contrast-more:dark:nx-text-current'
-                  : [
-                      'nx-min-w-[24px] nx-overflow-hidden nx-text-ellipsis',
-                      isLink &&
-                        'hover:nx-text-gray-900 dark:hover:nx-text-gray-100'
-                    ]
+                '_whitespace-nowrap _transition-colors',
+                isLast
+                  ? '_font-medium _text-gray-700 contrast-more:_font-bold contrast-more:_text-current dark:_text-gray-100 contrast-more:dark:_text-current'
+                  : '_min-w-6 _overflow-hidden _text-ellipsis',
+                href &&
+                  'nextra-focus _ring-inset hover:_text-gray-900 dark:hover:_text-gray-100'
               )}
               title={item.title}
+              {...(href && ({ href } as any))}
             >
-              {isLink && !isActive ? (
-                <Anchor href={item.route}>{item.title}</Anchor>
-              ) : (
-                item.title
-              )}
-            </div>
+              {item.title}
+            </ComponentToUse>
           </Fragment>
         )
       })}

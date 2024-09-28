@@ -62,7 +62,8 @@
   .feature:hover .link {
     opacity: 1;
   }
-  .feature .link:hover {
+  .feature .link:hover,
+  .link:focus {
     transform: scale(1.05);
     color: rgba(255, 255, 255, 1);
     background-color: rgba(64, 64, 64, 0.39);

@@ -1,0 +1,39 @@
+import { Callout, RemoteContent, Tabs } from 'nextra/components'
+import { buildDynamicMDX, buildDynamicMeta } from 'nextra/remote'
+import json from '../../../../nextra-remote-filepaths/graphql-yoga.json'
+
+export async function getStaticProps({ params }) {
+  const { user, repo, branch, docsPath, filePaths } = json
+  const path = params.slug?.join('/') ?? 'index'
+  const foundPath = filePaths.find(
+    filePath => filePath.replace(/\.mdx?/, '') === path
+  )
+  const url = `https://raw.githubusercontent.com/${user}/${repo}/${branch}/${docsPath}${foundPath}`
+  const response = await fetch(url)
+  const data = await response.text()
+  const { __nextra_pageMap } = await buildDynamicMeta('en')
+  return {
+    props: {
+      __nextra_pageMap,
+      ...(await buildDynamicMDX(data, {
+        defaultShowCopyCode: true
+      }))
+    }
+  }
+}
+
+export const getStaticPaths = () => ({
+  fallback: 'blocking',
+  paths: json.filePaths.map(filePath => ({
+    params: { slug: filePath.replace(/\.mdx?$/, '').split('/') }
+  }))
+})
+
+<RemoteContent
+  components={{
+    Callout,
+    PackageCmd: () => null,
+    Tab: Tabs.Tab,
+    Tabs
+  }}
+/>

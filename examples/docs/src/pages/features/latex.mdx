@@ -2,12 +2,16 @@
 
 Nextra uses [KaTeX](https://katex.org/) to render LaTeX expressions directly in
 MDX. To enable LaTeX support, you must add the following to your
-`next.config.js`:
+`next.config.mjs`:
 
-```js filename="next.config.js"
-module.exports = require('nextra')({
+```js filename="next.config.mjs"
+import nextra from 'nextra'
+
+const withNextra = nextra({
   latex: true
 })
+
+export default withNextra()
 ```
 
 Using LaTeX within MDX is as simple as wrapping your expression in `$$` or `$`.
