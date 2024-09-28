@@ -1,4 +1,4 @@
-import { Card, Cards } from 'nextra-theme-docs'
+import { Cards } from 'nextra/components'
 
 # Cards Component
 
@@ -7,7 +7,7 @@ The Cards component is a built-in feature in the Docs Theme that allows you to d
 ## Example
 
 <Cards>
-  <Card
+  <Cards.Card
     icon={
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -26,8 +26,8 @@ The Cards component is a built-in feature in the Docs Theme that allows you to d
     }
     title="Example 1"
     href=""
-  ></Card>
-   <Card
+  ></Cards.Card>
+   <Cards.Card
     icon={
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -46,8 +46,8 @@ The Cards component is a built-in feature in the Docs Theme that allows you to d
     }
     title="Example 2"
     href=""
-  ></Card>
-  <Card
+  ></Cards.Card>
+  <Cards.Card
     icon={
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -66,7 +66,7 @@ The Cards component is a built-in feature in the Docs Theme that allows you to d
     }
     title="Example 3"
     href=""
-  ></Card>
+  ></Cards.Card>
 </Cards>
 
 
@@ -77,10 +77,10 @@ Add the Card and Cards components to your page. The Card component is used to cr
 
 
 ```mdx
-import { Card, Cards } from 'nextra-theme-docs'
+import { Cards } from 'nextra/components'
 
 <Cards>
-  <Card
+  <Cards.Card
     icon={
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -100,11 +100,11 @@ import { Card, Cards } from 'nextra-theme-docs'
     title="Cards Example"
     href="/examplepage"
   ></Card>
-   
+</Cards>
 ```
 
 <Cards>
-  <Card
+  <Cards.Card
     icon={
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -123,12 +123,12 @@ import { Card, Cards } from 'nextra-theme-docs'
     }
     title=" Cards Example "
     href=""
-  ></Card>
-  
+  ></Cards.Card>
+
 </Cards>
 A Card not wrapped in a Cards component will not be grouped with other cards. This can be useful if you want to display a single card in a different format than the rest of the cards on the page.
 <br></br>
-  <Card
+  <Cards.Card
     icon={
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -147,4 +147,4 @@ A Card not wrapped in a Cards component will not be grouped with other cards. Th
     }
     title="Example of card not in cards component"
     href=""
-  ></Card>
+  ></Cards.Card>
