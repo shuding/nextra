@@ -4,8 +4,8 @@ export const metadata = {
 
 import { Screenshot } from 'components/screenshot'
 import { Callout } from 'nextra/components'
-import sidebarTitleComponentImage from 'public/assets/docs/sidebar-customized.png'
 import navigationImage from 'public/assets/docs/navigation.png'
+import sidebarTitleComponentImage from 'public/assets/docs/sidebar-customized.png'
 
 # Layout
 
@@ -170,6 +170,33 @@ the docs repository, with the current website title prefilled:
   To disable it, you can set `feedback.content` to `null`.
 </Callout>
 
+## Last Updated Date
+
+Show the last updated date of each page. It’s useful for showing the freshness
+of the content.
+
+<Table>
+
+|             |                              |                                           |
+| ----------- | ---------------------------- | ----------------------------------------- |
+| lastUpdated | `React.FC<{ date: Date }>()` | Component to render the last updated info |
+
+</Table>
+
+## I18n
+
+Options to configure the language dropdown for
+[the i18n docs website](/docs/guide/i18n).
+
+<Table>
+
+|                     |          |                                                        |
+| ------------------- | -------- | ------------------------------------------------------ |
+| i18n[number].locale | `string` | Locale from `i18n.locales` field in `next.config` file |
+| i18n[number].name   | `string` | Locale name in dropdown                                |
+
+</Table>
+
 ## Navigation
 
 Show previous and next page links on the bottom of the content. It’s useful for
@@ -197,33 +224,6 @@ export default {
 ```
 
 The above is also equivalent to `navigation: true`.
-
-## Last Updated Date
-
-Show the last updated date of each page. It’s useful for showing the freshness
-of the content.
-
-<Table>
-
-|             |                              |                                           |
-| ----------- | ---------------------------- | ----------------------------------------- |
-| lastUpdated | `React.FC<{ date: Date }>()` | Component to render the last updated info |
-
-</Table>
-
-## I18n
-
-Options to configure the language dropdown for
-[the i18n docs website](/docs/guide/i18n).
-
-<Table>
-
-|                     |          |                                                        |
-| ------------------- | -------- | ------------------------------------------------------ |
-| i18n[number].locale | `string` | Locale from `i18n.locales` field in `next.config` file |
-| i18n[number].name   | `string` | Locale name in dropdown                                |
-
-</Table>
 
 ## Page Map [!TODO]
 
