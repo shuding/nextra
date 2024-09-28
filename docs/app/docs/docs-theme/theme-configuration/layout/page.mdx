@@ -5,6 +5,7 @@ export const metadata = {
 import { Screenshot } from 'components/screenshot'
 import { Callout } from 'nextra/components'
 import sidebarTitleComponentImage from 'public/assets/docs/sidebar-customized.png'
+import navigationImage from 'public/assets/docs/navigation.png'
 
 # Layout
 
@@ -169,9 +170,7 @@ the docs repository, with the current website title prefilled:
   To disable it, you can set `feedback.content` to `null`.
 </Callout>
 
-## End of Page
-
-### Navigation
+## Navigation
 
 Show previous and next page links on the bottom of the content. It’s useful for
 navigating between pages.
@@ -186,8 +185,6 @@ navigating between pages.
 
 </Table>
 
-import navigationImage from 'public/assets/docs/navigation.png'
-
 <Screenshot src={navigationImage} alt="Navigation" full />
 
 ```jsx
@@ -201,7 +198,7 @@ export default {
 
 The above is also equivalent to `navigation: true`.
 
-### Last Updated Date
+## Last Updated Date
 
 Show the last updated date of each page. It’s useful for showing the freshness
 of the content.
