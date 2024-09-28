@@ -30,7 +30,6 @@ const theme = z.strictObject({
   i18n: z
     .array(
       z.strictObject({
-        direction: z.enum(['ltr', 'rtl']).optional(),
         locale: z.string(),
         name: z.string()
       })

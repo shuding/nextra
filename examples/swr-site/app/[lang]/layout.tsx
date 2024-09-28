@@ -74,7 +74,7 @@ export default async function RootLayout({ children, params: { lang } }) {
           docsRepositoryBase="https://github.com/shuding/nextra/blob/core/examples/swr-site"
           i18n={[
             { locale: 'en', name: 'English' },
-            { direction: 'rtl', locale: 'es', name: 'Español RTL' },
+            { locale: 'es', name: 'Español RTL' },
             { locale: 'ru', name: 'Русский' }
           ]}
           sidebar={{

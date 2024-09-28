@@ -63,7 +63,7 @@ export function Table({ children }) {
 
 If the documentation is inside a monorepo, a subfolder, or a different branch of
 the repository, you can simply set the `docsRepositoryBase` to the root path of
-the `pages/` folder of your docs. For example:
+the `app/` folder of your docs. For example:
 
 ```jsx filename="app/layout.jsx"
 <Layout docsRepositoryBase="https://github.com/shuding/nextra/tree/main/docs">
@@ -81,7 +81,7 @@ Customize the theme behavior of the website.
 
 |            |                |                                                                                                                                                                                                                                 |
 | ---------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| darkMode   | `boolean{:ts}` | Show or hide the dark mode toggle button. Default: `"true"{:json}`                                                                                                                                                              |
+| darkMode   | `boolean{:ts}` | Show or hide the dark mode select button. Default: `"true"{:json}`                                                                                                                                                              |
 | nextThemes | `object{:ts}`  | Configuration for the [next-themes](https://github.com/pacocoursey/next-themes#themeprovider) package.<br/>Default: `{ attribute: 'class', defaultTheme: 'system', disableTransitionOnChange: true, storageKey: 'theme' }{:ts}` |
 
 </Table>
@@ -144,7 +144,6 @@ Options to configure the language dropdown for
 
 |                        |                       |                                                        |
 | ---------------------- | --------------------- | ------------------------------------------------------ |
-| i18n[number].direction | `"ltr" \| "rtl"{:ts}` | Writing direction of locale                            |
 | i18n[number].locale    | `string{:ts}`         | Locale from `i18n.locales` field in `next.config` file |
 | i18n[number].name      | `string{:ts}`         | Locale name in dropdown                                |
 
