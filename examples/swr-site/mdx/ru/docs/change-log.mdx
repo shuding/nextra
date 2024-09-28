@@ -1,27 +1,9 @@
 import Markdown from 'markdown-to-jsx'
-<<<<<<<< HEAD:examples/swr-site/mdx/ru/docs/change-log.mdx
 
 export async function ReleasesRenderer() {
   const releases = await fetch(
     `https://api.github.com/repos/vercel/swr/releases`
   ).then(res => res.json())
-========
-import { useData } from 'nextra/hooks'
-
-export const getStaticProps = () => {
-  return (
-    fetch(`https://api.github.com/repos/vercel/swr/releases`)
-      .then(res => res.json())
-      // мы показываем здесь крайние 5 релизов
-      .then(releases => ({
-        props: { ssg: Array.isArray(releases) ? releases.slice(0, 5) : [] }
-      }))
-  )
-}
-
-export const ReleasesRenderer = () => {
-  const releases = useData()
->>>>>>>> main:examples/swr-site/mdx/en/ru/docs/change-log.mdx
   return (
     <Markdown>
       {releases
