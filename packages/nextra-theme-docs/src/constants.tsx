@@ -122,6 +122,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     </>
   ),
   logoLink: true,
+  menuItems: {},
   navbar: {
     component: Navbar
   },

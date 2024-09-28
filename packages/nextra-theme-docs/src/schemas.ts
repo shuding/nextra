@@ -67,6 +67,10 @@ export const themeSchema = /* @__PURE__ */ (() =>
     logo: z.custom<ReactNode | FC>(...reactNode),
     logoLink: z.boolean().or(z.string()),
     main: z.custom<FC<{ children: ReactNode }>>(...fc).optional(),
+    menuItems: z.strictObject({
+      // eslint-disable-next-line no-restricted-syntax
+      visibilityCheck: z.function().args(z.object({}).partial()).optional()
+    }),
     navbar: z.strictObject({
       component: z.custom<ReactNode | FC<NavBarProps>>(...reactNode),
       extraContent: z.custom<ReactNode | FC>(...reactNode).optional()
