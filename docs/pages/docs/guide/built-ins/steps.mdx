@@ -55,19 +55,19 @@ Contents for step 2.
 </Steps>
 ```
 
-If you want to exclude the steps (or any other headings) from the table of contents, replace the markdown h3 headings with `{<h3>Title</h3>}`.
+### Excluding headings from Table of Contents
+
+To exclude the headings from the `<Steps>` component (or any other headings) to appear in the Table of
+Contents, replace the Markdown headings `### ...` with `<h3>` HTML element wrapped in curly braces.
 
 {/* prettier-ignore */}
-```mdx
-import { Steps } from 'nextra/components'
-
+```diff
 <Steps>
-{<h3>Step 1</h3>}
+- ### Step 1
++ {<h3>Step 1</h3>}
 
 Contents for step 1.
-
-{<h3>Step 2</h3>}
-
-Contents for step 2.
 </Steps>
 ```
+
+
