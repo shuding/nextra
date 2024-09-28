@@ -151,10 +151,12 @@ saturation values for light and dark themes.
 
 <Table>
 
-|                  |                                             |                                           |
-| ---------------- | ------------------------------------------- | ----------------------------------------- |
-| color.hue        | `number \| { dark: number; light: number }` | The hue of the primary theme color        |
-| color.saturation | `number \| { dark: number; light: number }` | The saturation of the primary theme color |
+|                       |                                             |                                           |
+| --------------------- | ------------------------------------------- | ----------------------------------------- |
+| color.hue             | `number \| { dark: number; light: number }` | The hue of the primary theme color        |
+| color.saturation      | `number \| { dark: number; light: number }` | The saturation of the primary theme color |
+| backgroundColor.dark  | `string` in format `RRR,GGG,BBB`            | Background color for light theme          |
+| backgroundColor.light | `string` in format `RRR,GGG,BBB`            | Background color for dark theme           |
 
 </Table>
 
@@ -615,9 +617,16 @@ export default {
 }
 ```
 
-## Error Pages
+## 404 - Not Found page
 
-### 404 - Not Found
+<Table>
+
+|         |                   |                                                |
+| ------- | ----------------- | ---------------------------------------------- |
+| content | `ReactNode \| FC` | Default: `Submit an issue about broken link →` |
+| labels  | `string`          | Default: `bug`                                 |
+
+</Table>
 
 ## Favicon Glyph
 

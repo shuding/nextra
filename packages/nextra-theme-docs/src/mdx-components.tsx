@@ -350,8 +350,11 @@ const DEFAULT_COMPONENTS: MDXComponents = {
   a: Link,
   table: props => (
     <Table
-      className="nextra-scrollbar [&:not(:first-child)]:_mt-6 _p-0"
       {...props}
+      className={cn(
+        'nextra-scrollbar [&:not(:first-child)]:_mt-6 _p-0',
+        props.className
+      )}
     />
   ),
   p: props => (
