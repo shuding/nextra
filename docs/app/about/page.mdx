@@ -1,3 +1,5 @@
+import { Cards } from 'nextra/components'
+
 export const metadata = {
   sidebarTitle: 'About'
 }
@@ -54,6 +56,13 @@ The Nextra project and themes are licensed under the MIT license.
 
 ## Sponsors
 
-<div className="grid sm:grid-cols-2">
-  [![Sponsors](../showcase/_logos/speakeasy.png)](https://speakeasyapi.dev/docs?utm_source=nextra.site&utm_campaign=nextra&utm_content=logolink)
-</div>
+<Cards num={2}>
+  <Cards.Card
+    title="Speakeasy"
+    href="https://speakeasyapi.dev/docs?utm_source=nextra.site&utm_campaign=nextra&utm_content=logolink"
+    target="_blank"
+    arrow
+  >
+    <>![Speakeasy](../showcase/_logos/speakeasy.png)</>
+  </Cards.Card>
+</Cards>

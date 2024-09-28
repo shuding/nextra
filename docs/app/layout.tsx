@@ -1,6 +1,6 @@
 import { NextraLogo, VercelLogo } from '@components/icons'
 import type { Metadata, Viewport } from 'next'
-import { Footer, Layout, Navbar } from 'nextra-theme-docs'
+import { Footer, Layout, Navbar, Link } from 'nextra-theme-docs'
 import { Banner, Head } from 'nextra/components'
 import type { ReactNode } from 'react'
 import './globals.css'
@@ -68,20 +68,20 @@ export default async function RootLayout({
           editLink={{ content: 'Edit this page on GitHub →' }}
           sidebar={{ defaultMenuCollapseLevel: 1 }}
         >
-          <Banner storageKey="4.0-release">
-            <a
-              href="https://nextra.site"
-              target="_blank"
-              rel="noreferrer"
-              className="focus-visible:nextra-focus"
-            >
-              🎉 Nextra 4.0 is released. Read more →
-            </a>
+          <Banner storageKey='4.0-release'>
+            <div className='before:content-["🎉_"]'>
+              <Link
+                href='https://the-guild.dev/blog/nextra-3'
+                className='after:content-["_→"]'
+              >
+                Nextra 3.0 is released. Read more
+              </Link>
+            </div>
           </Banner>
           <Navbar
             logo={
               <NextraLogo
-                height="20"
+                height='20'
                 className={cn(
                   '[mask-position:0] [mask-size:400%] [mask-image:linear-gradient(60deg,#000_25%,rgba(0,0,0,.2)_50%,#000_75%)]',
                   'hover:[mask-position:100%] hover:[transition:mask-position_1s_ease]'

@@ -37,6 +37,11 @@ export default withNextra({
       permanent: true
     },
     {
+      source: '/docs/docs-theme/api/use-config',
+      destination: '/docs/docs-theme/api',
+      permanent: true
+    },
+    {
       source: '/docs/docs-theme/built-ins',
       destination: '/docs/guide/built-ins',
       permanent: true

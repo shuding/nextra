@@ -7,7 +7,8 @@ export default {
   ssg: '',
   i18n: '',
   'custom-css': '',
+  'static-exports': '',
   search: '',
-  'built-ins': '',
+  'built-ins': 'Built-ins Components',
   advanced: ''
 }

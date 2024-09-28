@@ -1,0 +1,50 @@
+import { Steps } from 'nextra/components'
+
+# Static Exports
+
+Export your pages statically, and deploy with [Nginx](https://nginx.org),
+[GitHub Pages](https://pages.github.com) and more.
+
+## Getting Started
+
+<Steps>
+
+### Configuration
+
+```js filename="next.config.mjs"
+import nextra from 'nextra'
+
+/**
+ * @type {import('next').NextConfig}
+ */
+const nextConfig = {
+  output: 'export',
+  images: {
+    unoptimized: true // mandatory, otherwise won't export
+  }
+  // Optional: Change the output directory `out` -> `dist`
+  // distDir: "build"
+}
+const withNextra = nextra({
+  theme: 'nextra-theme-docs',
+  themeConfig: './theme.config.tsx'
+})
+
+export default withNextra(nextConfig)
+```
+
+### Building
+
+Run the `build` command according to your package manager:
+
+```sh npm2yarn
+npm run build
+```
+
+By default, static export will be stored in `out` directory in the root of your
+project.
+
+For more in detail documentation for static export visit
+[Next.js docs](https://nextjs.org/docs/pages/building-your-application/deploying/static-exports).
+
+</Steps>
