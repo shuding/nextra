@@ -1,8 +1,8 @@
 diff --git a/dist/changesets-assemble-release-plan.cjs.js b/dist/changesets-assemble-release-plan.cjs.js
-index 60427457c887f2d72168fecec83d79088c68e3a4..07565f3336140470e8ea0d7c1a9b09586f8e946e 100644
+index 4f7b5e5b37bb05874a5c1d8e583e29d4a9593ecf..118d3eaaa2e0615b6813f48fe2618bfebd82a5ca 100644
 --- a/dist/changesets-assemble-release-plan.cjs.js
 +++ b/dist/changesets-assemble-release-plan.cjs.js
-@@ -299,7 +299,7 @@ function shouldBumpMajor({
+@@ -347,7 +347,7 @@ function shouldBumpMajor({
    // we check if it is a peerDependency because if it is, our dependent bump type might need to be major.
    return depType === "peerDependencies" && nextRelease.type !== "none" && nextRelease.type !== "patch" && ( // 1. If onlyUpdatePeerDependentsWhenOutOfRange set to true, bump major if the version is leaving the range.
    // 2. If onlyUpdatePeerDependentsWhenOutOfRange set to false, bump major regardless whether or not the version is leaving the range.
@@ -11,7 +11,7 @@ index 60427457c887f2d72168fecec83d79088c68e3a4..07565f3336140470e8ea0d7c1a9b0958
    !releases.has(dependent) || releases.has(dependent) && releases.get(dependent).type !== "major");
  }
  
-@@ -396,7 +396,7 @@ function matchFixedConstraint(releases, packagesByName, config) {
+@@ -444,7 +444,7 @@ function matchFixedConstraint(releases, packagesByName, config) {
  
  function getPreVersion(version) {
    let parsed = semverParse__default["default"](version);
