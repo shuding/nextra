@@ -1,7 +1,7 @@
-import { Table } from '../page.mdx'
 import { Screenshot } from 'components/screenshot'
 import logoImage from 'public/assets/docs/logo.png'
 import projectLinkImage from 'public/assets/docs/project-link.png'
+import { Table } from '../page.mdx'
 
 # `Navbar`
 
@@ -12,10 +12,10 @@ function component.
 
 <Table>
 
-  |          |                               |                     |
-  | -------- | ----------------------------- | ------------------- |
-  | logo     | `React.ReactNode \| React.FC` | Logo of the website |
-  | logoLink | `boolean \| string`           | Link of the logo    |
+|          |                               |                     |
+| -------- | ----------------------------- | ------------------- |
+| logo     | `React.ReactNode \| React.FC` | Logo of the website |
+| logoLink | `boolean \| string`           | Link of the logo    |
 
 </Table>
 
@@ -51,10 +51,10 @@ it links to Nextra’s GitHub repository.
 
 <Table>
 
-  |              |                               |                                     |
-  | ------------ | ----------------------------- | ----------------------------------- |
-  | project.link | `string`                      | URL of the project homepage         |
-  | project.icon | `React.ReactNode \| React.FC` | Icon or element of the project link |
+|              |                               |                                     |
+| ------------ | ----------------------------- | ----------------------------------- |
+| project.link | `string`                      | URL of the project homepage         |
+| project.icon | `React.ReactNode \| React.FC` | Icon or element of the project link |
 
 </Table>
 
@@ -86,10 +86,10 @@ navbar.
 
 <Table>
 
-  |           |                               |                                  |
-  | --------- | ----------------------------- | -------------------------------- |
-  | chat.link | `string`                      | URL of the chat link             |
-  | chat.icon | `React.ReactNode \| React.FC` | Icon or element of the chat link |
+|           |                               |                                  |
+| --------- | ----------------------------- | -------------------------------- |
+| chat.link | `string`                      | URL of the chat link             |
+| chat.icon | `React.ReactNode \| React.FC` | Icon or element of the chat link |
 
 </Table>
 
@@ -123,13 +123,13 @@ to learn how to add custom menus or links to the navbar.
 
 <Table>
 
-  |                    |                                                                                  |                  |
-  | ------------------ | -------------------------------------------------------------------------------- | ---------------- |
-  | search.component   | `React.ReactNode \|`<br/>`React.FC<{ className?: string; directories: Item[] }>` |                  |
-  | search.emptyResult | `React.ReactNode \| React.FC`                                                    | Not found text   |
-  | search.loading     | `React.ReactNode \| React.FC`                                                    | Loading text     |
-  | search.error       | `string \| (() => string)`                                                       | Error text       |
-  | search.placeholder | `string \| (() => string)`                                                       | Placeholder text |
+|                    |                                                                                  |                  |
+| ------------------ | -------------------------------------------------------------------------------- | ---------------- |
+| search.component   | `React.ReactNode \|`<br/>`React.FC<{ className?: string; directories: Item[] }>` |                  |
+| search.emptyResult | `React.ReactNode \| React.FC`                                                    | Not found text   |
+| search.loading     | `React.ReactNode \| React.FC`                                                    | Loading text     |
+| search.error       | `string \| (() => string)`                                                       | Error text       |
+| search.placeholder | `string \| (() => string)`                                                       | Placeholder text |
 
 </Table>
 
@@ -139,9 +139,9 @@ Customize the entire navbar component.
 
 <Table>
 
-  |                     |                                            |                                       |
-  | ------------------- | ------------------------------------------ | ------------------------------------- |
-  | navbar.component    | `React.ReactNode \| React.FC<NavBarProps>` | Navbar component                      |
-  | navbar.extraContent | `React.ReactNode \| React.FC`              | Display extra content after last icon |
+|                     |                                            |                                       |
+| ------------------- | ------------------------------------------ | ------------------------------------- |
+| navbar.component    | `React.ReactNode \| React.FC<NavBarProps>` | Navbar component                      |
+| navbar.extraContent | `React.ReactNode \| React.FC`              | Display extra content after last icon |
 
 </Table>
