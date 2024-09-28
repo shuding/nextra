@@ -11,6 +11,23 @@ document removed theme config options
 - `themeSwitch.useOptions`
 - `search.component`
 - `feedback.useLink`
+- `banner.dismissible`
+- `banner.key`        
+- `banner.content`
+- `footer.content` 
+- `footer.component`
+- `head`
+- `navbar.component`
+- `navbar.extraContent`
+- `project.link`
+- `project.icon`
+- `chat.link`
+- `chat.icon`
+- `search.emptyResult`
+- `search.loading`
+- `search.errorText`
+- `search.placeholder`
+- `search.className`
 
 refactor `themeSwitch.useOptions` to `themeSwitch` option
 
