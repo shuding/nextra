@@ -3,6 +3,11 @@ import { Cards, RemoteContent } from 'nextra/components'
 import { buildDynamicMDX } from 'nextra/remote'
 
 export async function getStaticProps() {
+  const mdx2 = `<Cards.Card
+  icon={<WarningIcon />}
+  title="Callout"
+  href="/docs/guide/built-ins/callout"
+/>`
   const mdx = `
 <Cards>
   <Cards.Card
@@ -32,14 +37,38 @@ ${mdx}
 
 ## Usage
 
-First, import the \`Card\` and \`Cards\` components. Then, import the icons that you
-want to use. To create a set of cards, follow the example below.
+Import the \`<Cards>\` component to your page, which includes the \`<Card>\` component.
+
+Then, _optionally_ import the icons that you want to use. To create a set of cards, follow the example
+below where the \`<Cards.Card>\` component is used to create a card and the \`<Cards>\` component is used
+to group multiple cards together.
 
 ~~~mdx filename="MDX"
 import { Cards } from 'nextra/components'
 import { CardsIcon, OneIcon, WarningIcon } from '../path/with/your/icons'
 ${mdx}
-~~~`)
+~~~
+
+### Single Card
+
+A \`<Card>\` not wrapped in a \`<Cards>\` component will not be grouped with other cards.
+This can be useful if you want to display a single card in a different format
+than the rest of the cards on the page.
+
+#### Example
+
+<br/>
+
+${mdx2}
+
+#### Usage
+
+~~~mdx filename="MDX"
+${mdx2}
+~~~
+
+
+`)
   return { props }
 }
 
