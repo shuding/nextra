@@ -1,5 +1,5 @@
 import { FileIcon, NewsletterIcon } from '@components/icons'
-import { Card, Cards, FileTree } from 'nextra/components'
+import { Callout, Cards, FileTree } from 'nextra/components'
 
 # Organize Files
 
@@ -50,69 +50,91 @@ The resolved page map will be (note that all names were sorted alphabetically):
 ]
 ```
 
-And the global page map will be bundled to each page by Nextra. Then, configured
-theme will render the actual UI with that page map.
+And the global page map will be imported to each page by Nextra. Then,
+configured theme will render the actual UI with that page map.
 
-## `_meta.json`
+## `_meta.js`
 
 It's very common to customize each page's title, rather than just relying on
 filenames. Having a page titled "Index" lacks clarity. It is preferable to
 assign a meaningful title that accurately represents the content, such as
 "Home".
 
-That’s where `_meta.json` comes in. You can have an `_meta.json` file in each
+That’s where `_meta.js` files comes in. You can have an `_meta.js` file in each
 directory, and it will be used to override the default configuration of each
 page:
 
 <FileTree>
   <FileTree.Folder name="pages" defaultOpen>
-    <FileTree.File name="_meta.json" />
+    <FileTree.File name="_meta.js" />
     <FileTree.File name="contact.md" />
     <FileTree.File name="index.mdx" />
     <FileTree.Folder name="about" defaultOpen>
-      <FileTree.File name="_meta.json" />
+      <FileTree.File name="_meta.js" />
       <FileTree.File name="legal.md" />
       <FileTree.File name="index.mdx" />
     </FileTree.Folder>
   </FileTree.Folder>
 </FileTree>
 
-And you can put this in your `pages/_meta.json` file:
+<Callout>
+  It's also possible to use the `.jsx`, `.ts`, `.tsx` extensions for `_meta`
+  files (e.g. `_meta.ts`)
+</Callout>
 
-```json filename="pages/_meta.json"
-{
-  "index": "My Homepage",
-  "contact": "Contact Us",
-  "about": "About Us"
+For example, you can put this in your `pages/_meta.js` file:
+
+```js filename="pages/_meta.js"
+export default {
+  index: 'My Homepage',
+  contact: 'Contact Us',
+  about: 'About Us'
 }
 ```
 
-It tells Nextra the order of each page, and the correct title. Alternatively,
-you can do it with `title` and have other configurations in there as well:
+It tells Nextra the order of each page, and the correct title.
 
-```json filename="pages/_meta.json"
-{
-  "index": "My Homepage",
-  "contact": "Contact Us",
-  "about": {
-    "title": "About Us",
-    "...extra configurations...": "..."
+Alternatively, you can do it with `title` property and have other configurations
+in there as well:
+
+```js filename="pages/_meta.js"
+export default {
+  index: 'My Homepage',
+  contact: 'Contact Us',
+  about: {
+    title: 'About Us'
+    // ... extra configurations
   }
 }
 ```
+
+<Callout>
+  You can use ESLint's built-in rule sort keys with a `/* eslint sort-keys:
+  error */` comment to sort your sidebar items alphabetically.
+</Callout>
+
+<Callout type="warning">
+  If you are using
+  [next-sitemap](https://github.com/iamvishnusankar/next-sitemap), you will
+  probably need to add `exclude: ['*/_meta']` to your `next-sitemap.config.js`
+  file, as it is tricky to exclude `_meta` files from the build.
+</Callout>
 
 The extra configurations are passed to the **theme** as additional information.
 Check the corresponding pages for more information:
 
 <Cards>
-  <Card
+  <Cards.Card
     icon={<NewsletterIcon />}
-    title="Docs Theme →"
+    title="Docs Theme"
     href="/docs/docs-theme/page-configuration"
+    arrow
   />
-  <Card
+  <Cards.Card
     icon={<FileIcon />}
-    title="Blog Theme →"
+    title="Blog Theme"
     href="/docs/blog-theme/start"
+    arrow
   />
+  <Cards.Card title="Custom Theme" href="/docs/custom-theme" arrow />
 </Cards>

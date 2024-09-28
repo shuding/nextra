@@ -1,6 +1,7 @@
 {
+  "name": "nextra-monorepo",
   "private": true,
-  "packageManager": "pnpm@8.15.8",
+  "packageManager": "pnpm@8.15.9",
   "scripts": {
     "build": "turbo run build:tailwind build --filter=./packages/\\*",
     "build:all": "turbo run build:tailwind build",
@@ -12,7 +13,7 @@
     "dev:theme-blog": "turbo run dev --filter=example-blog... --filter=!docs",
     "dev:theme-docs": "turbo run dev --filter=swr-site... --filter=!docs",
     "dev:website": "turbo run dev --filter=docs...",
-    "lint": "eslint --cache --ignore-path .gitignore --max-warnings 0 .",
+    "lint": "ESLINT_USE_FLAT_CONFIG=false eslint --cache --ignore-path .gitignore --max-warnings 0 .",
     "lint:prettier": "prettier --cache --check --ignore-path .gitignore --ignore-path .prettierignore .",
     "prettier": "pnpm lint:prettier --write",
     "release": "changeset publish",
@@ -21,39 +22,41 @@
     "version": "changeset version"
   },
   "devDependencies": {
-    "@changesets/cli": "2.26.2",
-    "@edge-runtime/vm": "3.1.0",
-    "@ianvs/prettier-plugin-sort-imports": "4.1.1",
-    "@next/eslint-plugin-next": "14.0.4",
-    "@typescript-eslint/eslint-plugin": "6.19.0",
-    "@typescript-eslint/parser": "6.19.0",
-    "eslint": "8.56.0",
+    "@changesets/cli": "2.27.7",
+    "@ianvs/prettier-plugin-sort-imports": "4.3.1",
+    "@next/eslint-plugin-next": "14.2.13",
+    "@rollup/plugin-alias": "^5.0.0",
+    "@typescript-eslint/eslint-plugin": "8.6.0",
+    "@typescript-eslint/parser": "8.6.0",
+    "eslint": "9.11.0",
     "eslint-config-prettier": "9.1.0",
-    "eslint-plugin-import": "2.29.1",
-    "eslint-plugin-react": "7.33.2",
-    "eslint-plugin-react-hooks": "4.6.0",
-    "eslint-plugin-tailwindcss": "3.14.0",
-    "eslint-plugin-typescript-sort-keys": "3.1.0",
-    "eslint-plugin-unicorn": "50.0.1",
-    "prettier": "3.0.3",
-    "prettier-plugin-pkg": "0.18.0",
-    "prettier-plugin-tailwindcss": "0.5.11",
-    "rimraf": "5.0.5",
-    "tsup": "7.2.0",
-    "turbo": "1.12.4",
-    "typescript": "5.3.3"
+    "eslint-plugin-deprecation": "3.0.0",
+    "eslint-plugin-import": "2.30.0",
+    "eslint-plugin-react": "7.36.1",
+    "eslint-plugin-react-hooks": "5.1.0-rc-14a4699f-20240725",
+    "eslint-plugin-sonarjs": "^2.0.0",
+    "eslint-plugin-tailwindcss": "3.17.3",
+    "eslint-plugin-typescript-sort-keys": "3.2.0",
+    "eslint-plugin-unicorn": "55.0.0",
+    "prettier": "3.3.3",
+    "prettier-plugin-pkg": "0.18.1",
+    "prettier-plugin-tailwindcss": "0.6.6",
+    "rimraf": "6.0.1",
+    "tsup": "8.2.4",
+    "tsx": "^4.7.0",
+    "turbo": "2.1.2",
+    "typescript": "5.6.2"
   },
   "pnpm": {
     "overrides": {
-      "vitest": "^0.29.8",
-      "react": "^18.2.0",
-      "react-dom": "^18.2.0",
-      "@mdx-js/react": "^2.3.0",
-      "next-themes": "^0.2.1",
-      "next": "13.5.6"
+      "vite": "5.4.8",
+      "esbuild": "0.24.0",
+      "next": "14.2.13"
     },
     "patchedDependencies": {
-      "@changesets/assemble-release-plan@5.2.4": "patches/@changesets__assemble-release-plan@5.2.4.patch"
+      "@changesets/assemble-release-plan@6.0.3": "patches/@changesets__assemble-release-plan@6.0.3.patch",
+      "tsup@8.2.4": "patches/tsup.patch",
+      "eslint-plugin-deprecation@3.0.0": "patches/eslint-plugin-deprecation@3.0.0.patch"
     }
   }
 }

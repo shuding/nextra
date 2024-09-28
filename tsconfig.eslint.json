@@ -5,6 +5,6 @@
     // ensure that nobody can accidentally use this config for a build
     "noEmit": true
   },
-  "include": ["examples/swr-site/theme.config.tsx"],
+  "include": [],
   "exclude": []
 }

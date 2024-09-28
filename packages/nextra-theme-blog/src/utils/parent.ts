@@ -1,11 +1,13 @@
+import { useRouter } from 'next/router'
 import type { Folder, MdxFile } from 'nextra'
 import type { LayoutProps } from '../types'
 import traverse from './traverse'
 
-export const getParent = ({ opts }: LayoutProps) => {
+export function getParent({ opts }: LayoutProps) {
   let back: string | null = null
   const parentPages: (MdxFile | Folder)[] = []
-  const { route } = opts
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { route } = useRouter()
 
   traverse(opts.pageMap, page => {
     if (

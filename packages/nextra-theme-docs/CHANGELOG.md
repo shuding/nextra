@@ -1,5 +1,871 @@
 # nextra-theme-docs
 
+## 3.0.0
+
+### Major Changes
+
+- e7e8e84: show react components, variable interpolation and latex in toc
+- c7f03e5: remove `toc.headingComponent`
+- ea1a736: remove `next-seo` and `useNextSeoProps`, use `head` option instead
+- c2ad837: update to MDX3
+- 148278c: rename tailwind prefix `nx-` to `_` to reduce bundle size
+- 919fe97: set `"peerDependencies.next": ">=13"`
+- 47b125d: fix global style conflicts for
+  `<a>`/`<button>`/`<summary>`/`<input>`/`[tabindex]:not([tabindex='-1']`
+- ba30c6c: use render props for className with `selected`, `disabled` and
+  `hover` state for `<Tab>`
+- d7d8a3e: new styles for code blocks aka in next.js
+- 2872606: remove `image` prop from `<Card>` component, image will be showed
+  based on truthiness `children` prop now
+
+  set `icon` as optional prop
+
+- 63ca28b: Remove support of "\_meta.json", use "\_meta.{js,jsx,ts,tsx}"
+  instead.
+- ebe652d: remove `sidebar.titleComponent`, use JSX for styling separators and
+  titles
+- eca7535: - remove `Steps`, `Callout`, `Tabs`, `Tab`, `Cards`, `Card`,
+  `FileTree` exports, export them now from `nextra/components`
+
+  - remove `useMDXComponents` export, export it now from `nextra/mdx`
+  - set by default `sidebar.toggleButton` to true
+
+- 128e195: fix React warning, remove PageOpts.toc, use `toc` prop from
+  `components.wrapper`
+- 63ca28b: remove `config.serverSideError`
+- f2dd18d: - rename theme config options
+
+  `i18n.text` → `i18n.name`
+
+  `banner.text` → `banner.content`
+
+  `editLink.text` → `editLink.content`
+
+  `footer.text` → `footer.content`
+
+- 198dbcc: use toc with JSX elements for remote content
+- 191e6c4: - use `shikiji` instead of `shiki`
+
+  - rename `useSSG` to `useData`
+
+- 6eb3118: rename `primaryHue` and `primarySaturation` theme options to
+  `color.hue` and `color.saturation`
+- c7f03e5: rename `pageOpts.headings` to `toc`
+- 8c1b9d5: remove `<MatchSorterSearch>`
+
+### Minor Changes
+
+- eb943d0: add `theme.topContent` and `theme.bottomContent`
+- 0fe55db: add `import { useRouter } from 'nextra/hooks'` for fetching `locale`
+  and `defaultLocale`
+- c77485e: set default `head` option as `null`
+- 1dcb91a: export `useThemeConfig`
+- 6ec3241: Add Terraform/Move icon https://github.com/shuding/nextra/pull/2811
+  https://github.com/shuding/nextra/pull/2808
+- 5a63701: add icons for following languages:
+
+  - GraphQL (`graphql`)
+  - C++ (`c++`, `cpp`)
+  - C# (`csharp`, `c#`, `cs`)
+  - Python (`python`, `py`)
+
+  allow disallow mobile word wrap button in code blocks with `word-wrap=false`
+  meta data setting
+
+- a52a869: add `frontmatter.sidebarTitle` support for setting page label in
+  sidebar via frontmatter
+- 6ec3241: Make the `<Tab>` component be crawlable and indexable by search
+  engines by default
+- b47880d: export `useMenu` hook
+- b776b16: add `backgroundColor.light` and `backgroundColor.dark` theme options
+- 6070b02: rename `frontmatter.sidebar_label` to `frontmatter.sidebarTitle`
+- 3043826: add shikiji twoslash
+
+  Demo feature:
+  https://nextra-v2-na3obnhub-shuding1.vercel.app/docs/guide/twoslash-support
+
+- 6070b02: move `removeLinks` function from `nextra-theme-docs` to
+  `nextra/remove-links`
+- 962cea6: allow `items: Map` for `type: 'menu'` since object can't guaranty the
+  insertion order
+- 440ff42: add MathJax support
+- 1a97327: keep `loading`, `placeholder` and `themeSwitch.useOptions` default
+  theme options only for `en` lang
+
+### Patch Changes
+
+- b045cc3: fix invisible mobile menu after click on hamburger
+- eeb4c4c: enable `outline: 'none'` only for `:focus-visible` state, to fix
+  double ring in Firefox
+- 376b895: fixes case when setting `disabled: true` on the scroll to top button
+  prevents scrolling to most top
+
+  scroll to most top in toc element too
+
+- 34e25cd: migrate search to `@headlessui/react` Combobox
+- 73239c4: To ensure consistent horizontal padding, set the default language as
+  plaintext for code blocks. This prevents any loss of formatting for code
+  blocks without a specified language.
+- 57f3963: Remove intersection-observer polyfill
+- 2b9b95b: migrate to `@headlessui/react` v2
+- 7457d6b: remove `git-url-parse` to keep bundle smaller
+- 2a3e3e7: Fix first list item in `<FileTree>` not within permitted parent
+  elements
+- 6070b02: load `flexsearch` dynamically to reduce bundle size
+- 0b4d43b: Avoid the sidebar collapse having unintended animations when
+  `sidebar.autoCollapse` is set to `true`.
+- 31c2ee7: fix `removeLinks` when input node is link
+- bf963cd: Remove the aria-hidden attribute from scroll-to-top button when it is
+  visible
+- 829c417: - fix overflow when clicking on `<details>` with open state
+
+  - fix animation on mobile when clicking on `<details>` with open state
+
+- cb24790: fix broken `export default` statement in mdx files
+- de56507: fix vertical margin for nested ordered `<ol>` and unordered `<ul>`
+  lists
+- 8c99baf: enhance search input to better support CJK language users
+- a8c2196: use dynamic import for loading `mermaid`
+- 0b5cc9d: make nextra compatible with windows
+- 7b0b7e9: fix page scroll jump while entering characters in the search input
+- 45471df: fix “Scroll to top” is not supposed to be interactable when it is
+  hidden.
+
+  `display:children` doesn't collapse breadcrumbs
+
+  hide external links from pagination
+
+  remove xmlns attribute from icons
+
+- 8ffe2fe: remove focus-visible polyfill
+- fe5061b: fix for remote docs
+- 6945f38: fix not rendered default `<meta name="description" />` and
+  `<meta property="og:description" />`
+- 1a634cd: remove explicit `ZodError` assertion
+- ad108ff: use `overflow-x-auto` instead `overflow-x-scroll` for `<Table>`
+- 4f0f6b2: Omit `...{:type}` inline code annotations from search index #2922
+- 150184b: attach heading anchor `id` attribute to heading (like Pagefind do)
+  and fix heading anchor styles when `theme.typesetting: 'article'` is set
+- 80c9764: ensure zod is removed from production build with `/* @__PURE__ */`
+  comments
+- 9df7f58: Fix nav-links not highlighting on hover in dark mode
+- 7bb18e3: Add a generic for `themeConfig` in `NextraThemeLayoutProps` to
+  improve type inference.
+- 9b41180: `backToTop` is hidden when enabled but when `toc.extraContent`,
+  `feedback.content` and `editLink.component` are falsy
+- 6f4c83a: fix unclickable links in TOC
+
+  allow passing `recmaPlugins` in `mdxOptions`
+
+- f255696: Improve styles for reduced motion preferences
+- 9f55bd1: update rehype-pretty-code/shikiji to latest
+- d21634d: export `getComponents`
+- 452e5bd: Add `<Playground>` component
+
+  https://nextra-v2-9x7fp6hti-shud.vercel.app/docs/guide/advanced/playground
+
+- e95faa1: - fixed `<summary>` lost whitespaces when there is some HTML element
+  inside
+
+  - fixed hydration errors and `<summary>` was not rendered when `<details>`
+    text content follows directly after `<summary>` element
+
+- ccaf3d4: Add the `autoImportThemeStyle` option to the Nextra configuration.
+  This allows users to import the official Nextra theme CSS into a specific
+  cascade layer.
+- cee94a6: Consider the navbar height when setting the root margin for the
+  active anchor intersection observer
+- 2630461: fix
+  `TypeError: undefined is not iterable (cannot read property Symbol(Symbol.iterator))`
+  on dev environment when `frontMatter.searchable: false`
+- 217f708: update next-themes
+
+  fix wrong numbering for nested `<Steps>`
+
+- ca51306: Enhance focus ring style consistency.
+- f662237: avoid focus-visible style being cut off by overflow-hidden
+- 3c6193d: Remove unnecessary `sortPages` from `server/utils.ts`
+- 1a97327: Update the `backToTop` option in the docs theme configuration to
+  support i18n
+- 799174f: fixed react warning
+  `Warning: React has detected a change in the order of Hooks called by Body`
+  when `themeConfig.main` options is used
+- 363b85f: add `flex-shrink: 0` for indent in `FileTree` for `<Ident>` and svg
+  icons in `<Folder>` and `<File>`
+- 237c345: Make React 18 as minimal requirement
+- eb943d0: hardcode flexsearch version to 0.7.31, because package is broken on
+  0.7.41
+- ad108ff: fix `<Bleed>` overflows incorrectly in firefox
+- 4fb2452: fix invisible mobile menu when `layout: "raw"` is specified in \_meta
+  file
+- 7faa096: fix visible hidden pages on mobile which set up with
+  `display: 'hidden'`
+- 315ca82: remove possible links in toc elements
+- a95e745: Fix the line highlighting background-color does not extend to the
+  full width of the code block when a scrollbar appears with line numbers.
+- 363b85f: fix `RangeError: Maximum call stack size exceeded` in `findSummary`
+  when `child.props.children` is `undefined`
+- Updated dependencies [e7e8e84]
+- Updated dependencies [7188278]
+- Updated dependencies [d1e3e9a]
+- Updated dependencies [73239c4]
+- Updated dependencies [2b9b95b]
+- Updated dependencies [023d37b]
+- Updated dependencies [0fe55db]
+- Updated dependencies [50a52fd]
+- Updated dependencies [c2ad837]
+- Updated dependencies [2a3e3e7]
+- Updated dependencies [a3b67ae]
+- Updated dependencies [1a36469]
+- Updated dependencies [799174f]
+- Updated dependencies [98f439c]
+- Updated dependencies [6ec3241]
+- Updated dependencies [148278c]
+- Updated dependencies [c7f03e5]
+- Updated dependencies [3644e1c]
+- Updated dependencies [919fe97]
+- Updated dependencies [cb24790]
+- Updated dependencies [47b125d]
+- Updated dependencies [982862f]
+- Updated dependencies [a8c2196]
+- Updated dependencies [ba30c6c]
+- Updated dependencies [0b5cc9d]
+- Updated dependencies [5a63701]
+- Updated dependencies [60ec68c]
+- Updated dependencies [d7d8a3e]
+- Updated dependencies [fe5061b]
+- Updated dependencies [2872606]
+- Updated dependencies [a52a869]
+- Updated dependencies [6ec3241]
+- Updated dependencies [1a634cd]
+- Updated dependencies [63ca28b]
+- Updated dependencies [ad108ff]
+- Updated dependencies [ad4823d]
+- Updated dependencies [4f0f6b2]
+- Updated dependencies [1f3e7cd]
+- Updated dependencies [ab07609]
+- Updated dependencies [2f3be33]
+- Updated dependencies [90c129e]
+- Updated dependencies [f71e660]
+- Updated dependencies [150184b]
+- Updated dependencies [66cce1d]
+- Updated dependencies [c74ae90]
+- Updated dependencies [7615b62]
+- Updated dependencies [6070b02]
+- Updated dependencies [7bb18e3]
+- Updated dependencies [b9f88e3]
+- Updated dependencies [8efbb45]
+- Updated dependencies [6f4c83a]
+- Updated dependencies [d8a406b]
+- Updated dependencies [9f55bd1]
+- Updated dependencies [4e55c06]
+- Updated dependencies [128e195]
+- Updated dependencies [8bce16d]
+- Updated dependencies [ccaf3d4]
+- Updated dependencies [3043826]
+- Updated dependencies [2630461]
+- Updated dependencies [576cb6f]
+- Updated dependencies [217f708]
+- Updated dependencies [57bc0e2]
+- Updated dependencies [ca51306]
+- Updated dependencies [f662237]
+- Updated dependencies [3c6193d]
+- Updated dependencies [1f3e7cd]
+- Updated dependencies [198dbcc]
+- Updated dependencies [363b85f]
+- Updated dependencies [fef635e]
+- Updated dependencies [6070b02]
+- Updated dependencies [237c345]
+- Updated dependencies [191e6c4]
+- Updated dependencies [440ff42]
+- Updated dependencies [7faa096]
+- Updated dependencies [9099c35]
+- Updated dependencies [98f439c]
+- Updated dependencies [a95e745]
+- Updated dependencies [80e11e0]
+- Updated dependencies [c7f03e5]
+  - nextra@3.0.0
+
+## 3.0.0-alpha.42
+
+### Minor Changes
+
+- 1a97327: keep `loading`, `placeholder` and `themeSwitch.useOptions` default
+  theme options only for `en` lang
+
+### Patch Changes
+
+- ca51306: Enhance focus ring style consistency.
+- 1a97327: Update the `backToTop` option in the docs theme configuration to
+  support i18n
+- Updated dependencies [ca51306]
+  - nextra@3.0.0-alpha.42
+
+## 3.0.0-alpha.41
+
+### Patch Changes
+
+- 237c345: Make React 18 as minimal requirement
+- Updated dependencies [237c345]
+  - nextra@3.0.0-alpha.41
+
+## 3.0.0-alpha.40
+
+### Patch Changes
+
+- bf963cd: Remove the aria-hidden attribute from scroll-to-top button when it is
+  visible
+- cee94a6: Consider the navbar height when setting the root margin for the
+  active anchor intersection observer
+- Updated dependencies [982862f]
+  - nextra@3.0.0-alpha.40
+
+## 3.0.0-alpha.39
+
+### Major Changes
+
+- 47b125d: fix global style conflicts for
+  `<a>`/`<button>`/`<summary>`/`<input>`/`[tabindex]:not([tabindex='-1']`
+- ba30c6c: use render props for className with `selected`, `disabled` and
+  `hover` state for `<Tab>`
+- 2872606: remove `image` prop from `<Card>` component, image will be showed
+  based on truthiness `children` prop now
+
+  set `icon` as optional prop
+
+### Patch Changes
+
+- f255696: Improve styles for reduced motion preferences
+- Updated dependencies [47b125d]
+- Updated dependencies [ba30c6c]
+- Updated dependencies [2872606]
+  - nextra@3.0.0-alpha.39
+
+## 3.0.0-alpha.38
+
+### Patch Changes
+
+- ccaf3d4: Add the `autoImportThemeStyle` option to the Nextra configuration.
+  This allows users to import the official Nextra theme CSS into a specific
+  cascade layer.
+- Updated dependencies [ccaf3d4]
+  - nextra@3.0.0-alpha.38
+
+## 3.0.0-alpha.37
+
+### Patch Changes
+
+- 2a3e3e7: Fix first list item in `<FileTree>` not within permitted parent
+  elements
+- 829c417: - fix overflow when clicking on `<details>` with open state
+
+  - fix animation on mobile when clicking on `<details>` with open state
+
+- Updated dependencies [2a3e3e7]
+  - nextra@3.0.0-alpha.37
+
+## 3.0.0-alpha.36
+
+### Patch Changes
+
+- 34e25cd: migrate search to `@headlessui/react` Combobox
+- 57f3963: Remove intersection-observer polyfill
+- 2b9b95b: migrate to `@headlessui/react` v2
+- Updated dependencies [2b9b95b]
+  - nextra@3.0.0-alpha.36
+
+## 3.0.0-alpha.35
+
+### Patch Changes
+
+- 0b4d43b: Avoid the sidebar collapse having unintended animations when
+  `sidebar.autoCollapse` is set to `true`.
+- 452e5bd: Add `<Playground />` component
+
+  https://nextra-v2-9x7fp6hti-shud.vercel.app/docs/guide/advanced/playground
+
+- f662237: avoid focus-visible style being cut off by overflow-hidden
+- Updated dependencies [f662237]
+  - nextra@3.0.0-alpha.35
+
+## 3.0.0-alpha.34
+
+### Patch Changes
+
+- 8c99baf: enhance search input to better support CJK language users
+- 8ffe2fe: remove focus-visible polyfill
+- 1a634cd: remove explicit `ZodError` assertion
+- Updated dependencies [1a634cd]
+  - nextra@3.0.0-alpha.34
+
+## 3.0.0-alpha.33
+
+### Patch Changes
+
+- 6945f38: fix not rendered default `<meta name="description" />` and
+  `<meta property="og:description" />`
+- 7bb18e3: Add a generic for `themeConfig` in `NextraThemeLayoutProps` to
+  improve type inference.
+- Updated dependencies [7bb18e3]
+  - nextra@3.0.0-alpha.33
+
+## 3.0.0-alpha.32
+
+### Patch Changes
+
+- 73239c4: To ensure consistent horizontal padding, set the default language as
+  plaintext for code blocks. This prevents any loss of formatting for code
+  blocks without a specified language.
+- 150184b: attach heading anchor `id` attribute to heading (like Pagefind do)
+  and fix heading anchor styles when `theme.typesetting: 'article'` is set
+- 9df7f58: Fix nav-links not highlighting on hover in dark mode
+- 3c6193d: Remove unnecessary `sortPages` from `server/utils.ts`
+- 799174f: fixed react warning
+  `Warning: React has detected a change in the order of Hooks called by Body`
+  when `themeConfig.main` options is used
+- Updated dependencies [73239c4]
+- Updated dependencies [799174f]
+- Updated dependencies [150184b]
+- Updated dependencies [3c6193d]
+  - nextra@3.0.0-alpha.32
+
+## 3.0.0-alpha.31
+
+### Patch Changes
+
+- Updated dependencies [d1e3e9a]
+  - nextra@3.0.0-alpha.31
+
+## 3.0.0-alpha.30
+
+### Patch Changes
+
+- Updated dependencies [7615b62]
+  - nextra@3.0.0-alpha.30
+
+## 3.0.0-alpha.29
+
+### Patch Changes
+
+- Updated dependencies [fef635e]
+  - nextra@3.0.0-alpha.29
+
+## 3.0.0-alpha.28
+
+### Patch Changes
+
+- a8c2196: use dynamic import for loading `mermaid`
+- 363b85f: add `flex-shrink: 0` for indent in `FileTree` for `<Ident />` and svg
+  icons in `<Folder />` and `<File />`
+- 363b85f: fix `RangeError: Maximum call stack size exceeded` in `findSummary`
+  when `child.props.children` is `undefined`
+- Updated dependencies [a8c2196]
+- Updated dependencies [363b85f]
+  - nextra@3.0.0-alpha.28
+
+## 3.0.0-alpha.27
+
+### Patch Changes
+
+- 4f0f6b27: Omit `...{:type}` inline code annotations from search index #2922
+- e95faa16: - fixed `<summary />` lost whitespaces when there is some HTML
+  element inside
+
+  - fixed hydration errors and `<summary />` was not rendered when `<details />`
+    text content follows directly after `<summary />` element
+
+- a95e7454: Fix the line highlighting background-color does not extend to the
+  full width of the code block when a scrollbar appears with line numbers.
+- Updated dependencies [4f0f6b27]
+- Updated dependencies [a95e7454]
+  - nextra@3.0.0-alpha.27
+
+## 3.0.0-alpha.26
+
+### Patch Changes
+
+- 376b8954: fixes case when setting `disabled: true` on the scroll to top button
+  prevents scrolling to most top
+
+  scroll to most top in toc element too
+
+- 7b0b7e98: fix page scroll jump while entering characters in the search input
+  - nextra@3.0.0-alpha.26
+
+## 3.0.0-alpha.25
+
+### Patch Changes
+
+- de565078: fix vertical margin for nested ordered `<ol />` and unordered
+  `<ul />` lists
+  - nextra@3.0.0-alpha.25
+
+## 3.0.0-alpha.24
+
+### Patch Changes
+
+- 6f4c83a8: fix unclickable links in TOC
+
+  allow passing `recmaPlugins` in `mdxOptions`
+
+- Updated dependencies [6f4c83a8]
+  - nextra@3.0.0-alpha.24
+
+## 3.0.0-alpha.23
+
+### Minor Changes
+
+- 6ec3241c: Add Terraform/Move icon https://github.com/shuding/nextra/pull/2811
+  https://github.com/shuding/nextra/pull/2808
+- 6ec3241c: Make the `<Tab />` component be crawlable and indexable by search
+  engines by default
+- b47880d5: export `useMenu` hook
+
+### Patch Changes
+
+- ad108ff7: use `overflow-x-auto` instead `overflow-x-scroll` for `<Table />`
+- 217f7082: update next-themes
+
+  fix wrong numbering for nested `<Steps />`
+
+- ad108ff7: fix `<Bleed />` overflows incorrectly in firefox
+- Updated dependencies [6ec3241c]
+- Updated dependencies [6ec3241c]
+- Updated dependencies [ad108ff7]
+- Updated dependencies [217f7082]
+  - nextra@3.0.0-alpha.23
+
+## 3.0.0-alpha.22
+
+### Patch Changes
+
+- eeb4c4cd: enable `outline: 'none'` only for `:focus-visible` state, to fix
+  double ring in Firefox
+- 9b411804: `backToTop` is hidden when enabled but when `toc.extraContent`,
+  `feedback.content` and `editLink.component` are falsy
+- 2630461c: fix
+  `TypeError: undefined is not iterable (cannot read property Symbol(Symbol.iterator))`
+  on dev environment when `frontMatter.searchable: false`
+- Updated dependencies [2630461c]
+  - nextra@3.0.0-alpha.22
+
+## 3.0.0-alpha.21
+
+### Minor Changes
+
+- 962cea6b: allow `items: Map` for `type: 'menu'` since object can't guaranty
+  the insertion order
+
+### Patch Changes
+
+- nextra@3.0.0-alpha.21
+
+## 3.0.0-alpha.20
+
+### Minor Changes
+
+- b776b162: add `backgroundColor.light` and `backgroundColor.dark` theme options
+
+### Patch Changes
+
+- nextra@3.0.0-alpha.20
+
+## 3.0.0-alpha.19
+
+### Patch Changes
+
+- d21634d5: export `getComponents`
+  - nextra@3.0.0-alpha.19
+
+## 3.0.0-alpha.18
+
+### Patch Changes
+
+- Updated dependencies [98f439ca]
+- Updated dependencies [f71e660e]
+- Updated dependencies [98f439ca]
+  - nextra@3.0.0-alpha.18
+
+## 3.0.0-alpha.17
+
+### Minor Changes
+
+- 30438264: add shikiji twoslash
+
+  Demo feature:
+  https://nextra-v2-na3obnhub-shuding1.vercel.app/docs/guide/twoslash-support
+
+### Patch Changes
+
+- 9f55bd1f: update rehype-pretty-code/shikiji to latest
+- Updated dependencies [9f55bd1f]
+- Updated dependencies [30438264]
+  - nextra@3.0.0-alpha.17
+
+## 3.0.0-alpha.16
+
+### Minor Changes
+
+- 5a637010: add icons for following languages:
+
+  - GraphQL (`graphql`)
+  - C++ (`c++`, `cpp`)
+  - C# (`csharp`, `c#`, `cs`)
+  - Python (`python`, `py`)
+
+  allow disallow mobile word wrap button in code blocks with `word-wrap=false`
+  meta data setting
+
+### Patch Changes
+
+- Updated dependencies [5a637010]
+- Updated dependencies [90c129e6]
+  - nextra@3.0.0-alpha.16
+
+## 3.0.0-alpha.15
+
+### Patch Changes
+
+- Updated dependencies [1a364694]
+  - nextra@3.0.0-alpha.15
+
+## 3.0.0-alpha.14
+
+### Patch Changes
+
+- 45471df5: fix “Scroll to top” is not supposed to be interactable when it is
+  hidden.
+
+  `display:children` doesn't collapse breadcrumbs
+
+  hide external links from pagination
+
+  remove xmlns attribute from icons
+
+  - nextra@3.0.0-alpha.14
+
+## 3.0.0-alpha.13
+
+### Minor Changes
+
+- 6070b025: rename `frontmatter.sidebar_label` to `frontmatter.sidebarTitle`
+- 6070b025: move `removeLinks` function from `nextra-theme-docs` to
+  `nextra/remove-links`
+
+### Patch Changes
+
+- 6070b025: load `flexsearch` dynamically to reduce bundle size
+- Updated dependencies [60ec68c4]
+- Updated dependencies [c74ae90a]
+- Updated dependencies [6070b025]
+- Updated dependencies [8bce16d3]
+- Updated dependencies [6070b025]
+  - nextra@3.0.0-alpha.13
+
+## 3.0.0-alpha.12
+
+### Patch Changes
+
+- Updated dependencies [3644e1c2]
+- Updated dependencies [57bc0e2a]
+  - nextra@3.0.0-alpha.12
+
+## 3.0.0-alpha.11
+
+### Major Changes
+
+- c2ad837d: update to MDX3
+
+### Minor Changes
+
+- eb943d00: add `theme.topContent` and `theme.bottomContent`
+
+### Patch Changes
+
+- eb943d00: hardcode flexsearch version to 0.7.31, because package is broken on
+  0.7.41
+- Updated dependencies [c2ad837d]
+  - nextra@3.0.0-alpha.11
+
+## 3.0.0-alpha.10
+
+### Patch Changes
+
+- Updated dependencies [9099c354]
+  - nextra@3.0.0-alpha.10
+
+## 3.0.0-alpha.9
+
+### Patch Changes
+
+- Updated dependencies [8efbb45c]
+- Updated dependencies [80e11e04]
+  - nextra@3.0.0-alpha.9
+
+## 3.0.0-alpha.8
+
+### Minor Changes
+
+- 440ff42d: add MathJax support
+
+### Patch Changes
+
+- Updated dependencies [440ff42d]
+  - nextra@3.0.0-alpha.8
+
+## 3.0.0-alpha.7
+
+### Patch Changes
+
+- 0b5cc9d5: make nextra compatible with windows
+- Updated dependencies [0b5cc9d5]
+  - nextra@3.0.0-alpha.7
+
+## 3.0.0-alpha.6
+
+### Patch Changes
+
+- 31c2ee70: fix `removeLinks` when input node is link
+- 03da778a: fix `*` theme settings for dynamic routes when route is not exist in
+  page map
+- Updated dependencies [03da778a]
+  - nextra@3.0.0-alpha.6
+
+## 3.0.0-alpha.5
+
+### Patch Changes
+
+- 315ca826: remove possible links in toc elements
+- Updated dependencies [a3b67aea]
+  - nextra@3.0.0-alpha.5
+
+## 3.0.0-alpha.4
+
+### Minor Changes
+
+- 1dcb91a0: export `useThemeConfig`
+
+### Patch Changes
+
+- 4fb24524: fix invisible mobile menu when `layout: "raw"` is specified in
+  \_meta file
+- 7faa0968: fix visible hidden pages on mobile which set up with
+  `display: 'hidden'`
+- Updated dependencies [7faa0968]
+  - nextra@3.0.0-alpha.4
+
+## 3.0.0-alpha.3
+
+### Patch Changes
+
+- fe5061b7: fix for remote docs
+- Updated dependencies [fe5061b7]
+  - nextra@3.0.0-alpha.3
+
+## 3.0.0-alpha.2
+
+### Patch Changes
+
+- b045cc3e: fix invisible mobile menu after click on hamburger
+- cb247901: fix broken `export default` statement in mdx files
+- Updated dependencies [cb247901]
+  - nextra@3.0.0-alpha.2
+
+## 3.0.0-alpha.1
+
+### Major Changes
+
+- e7e8e849: show react components, variable interpolation and latex in toc
+- c7f03e54: remove `toc.headingComponent`
+- ea1a7362: remove `next-seo` and `useNextSeoProps`, use `head` option instead
+- 148278ce: rename tailwind prefix `nx-` to `_` to reduce bundle size
+- d7d8a3eb: new styles for code blocks aka in next.js
+- 63ca28be: Remove support of "\_meta.json", use "\_meta.{js,jsx,ts,tsx}"
+  instead.
+- ebe652db: remove `sidebar.titleComponent`, use JSX for styling separators and
+  titles
+- 128e195f: fix React warning, remove PageOpts.toc, use `toc` prop from
+  `components.wrapper`
+- 63ca28be: remove `config.serverSideError`
+- 198dbcca: use toc with JSX elements for remote content
+- 191e6c41: - use `shikiji` instead of `shiki`
+
+  - rename `useSSG` to `useData`
+
+- 6eb3118f: rename `primaryHue` and `primarySaturation` theme options to
+  `color.hue` and `color.saturation`
+- c7f03e54: rename `pageOpts.headings` to `toc`
+
+### Minor Changes
+
+- c77485ec: set default `head` option as `null`
+- a52a869e: add `frontmatter.sidebar_label` support for setting page label in
+  sidebar via frontmatter
+
+### Patch Changes
+
+- 7457d6b6: remove `git-url-parse` to keep bundle smaller
+- Updated dependencies [e7e8e849]
+- Updated dependencies [71882780]
+- Updated dependencies [023d37b1]
+- Updated dependencies [148278ce]
+- Updated dependencies [c7f03e54]
+- Updated dependencies [d7d8a3eb]
+- Updated dependencies [a52a869e]
+- Updated dependencies [63ca28be]
+- Updated dependencies [1f3e7cd4]
+- Updated dependencies [b9f88e34]
+- Updated dependencies [4e55c064]
+- Updated dependencies [128e195f]
+- Updated dependencies [1f3e7cd4]
+- Updated dependencies [198dbcca]
+- Updated dependencies [191e6c41]
+- Updated dependencies [c7f03e54]
+  - nextra@3.0.0-alpha.1
+
+## 3.0.0-alpha.0
+
+### Major Changes
+
+- 919fe977: set `"peerDependencies.next": ">=13"`
+- eca75354: - remove `Steps`, `Callout`, `Tabs`, `Tab`, `Cards`, `Card`,
+  `FileTree` exports, export them now from `nextra/components`
+
+  - remove `useMDXComponents` export, export it now from `nextra/mdx`
+  - set by default `sidebar.toggleButton` to true
+
+- f2dd18d2: - rename theme config options
+
+  `i18n.text` → `i18n.name`
+
+  `banner.text` → `banner.content`
+
+  `editLink.text` → `editLink.content`
+
+  `footer.text` → `footer.content`
+
+- 8c1b9d53: remove `<MatchSorterSearch />`
+
+### Minor Changes
+
+- 0fe55db2: add `import { useRouter } from 'nextra/hooks'` for fetching `locale`
+  and `defaultLocale`
+
+### Patch Changes
+
+- 80c9764b: ensure zod is removed from production build with `/* @__PURE__ */`
+  comments
+- Updated dependencies [0fe55db2]
+- Updated dependencies [50a52fd1]
+- Updated dependencies [919fe977]
+- Updated dependencies [ad4823d9]
+- Updated dependencies [ab07609c]
+- Updated dependencies [2f3be336]
+- Updated dependencies [66cce1d1]
+- Updated dependencies [d8a406b4]
+- Updated dependencies [576cb6f1]
+  - nextra@3.0.0-alpha.0
+
 ## 2.13.4
 
 ### Patch Changes

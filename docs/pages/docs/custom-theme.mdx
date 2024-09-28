@@ -21,15 +21,15 @@ First, you need to tell Nextra to use your custom theme file instead of official
 ones. In your Next.js config, you can pass the path to your theme file to the
 Nextra plugin:
 
-```js {2} filename="next.config.js"
-const withNextra = require('nextra')({
-  theme: './theme.tsx',
+```js {4} filename="next.config.mjs"
+import nextra from 'nextra'
+
+const withNextra = nextra({
+  theme: './theme.tsx'
 })
 
-module.exports = withNextra({
-  // Other Next.js configurations
-  ...
-})
+// If you have other Next.js configurations, you can pass them as the parameter:
+// export default withNextra({ /* other next.js config */ })
 ```
 
 ### Create a Basic Theme
@@ -54,7 +54,7 @@ It accepts a `children` prop, which is the MDX content of the current page, and
 wraps some other elements around the content. After creating the theme, you can
 simply add a MDX file as `pages/index.mdx` and see the result:
 
-import customThemeImage from '../../public/assets/docs/custom-theme.png'
+import customThemeImage from 'public/assets/docs/custom-theme.png'
 
 <Screenshot src={customThemeImage} alt="Custom theme" />
 
@@ -72,31 +72,40 @@ information.
 For example, let’s implement these features:
 
 - Render the page title in `<title>`
-- Show a simple table of contents
+- Show a simple Table of Contents via MDX `<Wrapper>` component
 - Add a meta tag for `og:image` via the front matter
 
 ```tsx filename="theme.tsx" /pageOpts/
 import Head from 'next/head'
 import type { NextraThemeLayoutProps } from 'nextra'
+import { MDXProvider } from 'nextra/mdx'
 
 export default function Layout({ children, pageOpts }: NextraThemeLayoutProps) {
-  const { title, frontMatter, headings } = pageOpts
+  const { title, frontMatter } = pageOpts
 
   return (
-    <div>
+    <>
       <Head>
         <title>{title}</title>
         <meta name="og:image" content={frontMatter.image} />
       </Head>
+      <MDXProvider components={{ wrapper: MyWrapper }}>{children}</MDXProvider>
+    </>
+  )
+}
+
+function MyWrapper({ children, toc }) {
+  return (
+    <>
       <h1>My Theme</h1>
       Table of Contents:
       <ul>
-        {headings.map(heading => (
+        {toc.map(heading => (
           <li key={heading.value}>{heading.value}</li>
         ))}
       </ul>
       <div style={{ border: '1px solid' }}>{children}</div>
-    </div>
+    </>
   )
 }
 ```
@@ -121,14 +130,13 @@ export default function Layout({ children, pageOpts }: NextraThemeLayoutProps) {
     <div>
       <h1>My Theme</h1>
       {pageMap.map(item => {
-        if (item.kind === 'MdxPage') {
+        if ('route' in item && !('children' in item)) {
           return (
             <Link key={item.name} href={item.route}>
               {item.route}
             </Link>
           )
         }
-        return null
       })}
       <div style={{ border: '1px solid' }}>{children}</div>
     </div>
@@ -137,7 +145,7 @@ export default function Layout({ children, pageOpts }: NextraThemeLayoutProps) {
 ```
 
 There are other item kinds such as `Folder` (for directories) and `Meta` (for
-`_meta.json` files). All the items are typed so you can easily know the
+`_meta.js` files). All the items are typed so you can easily know the
 properties.
 
 </Steps>

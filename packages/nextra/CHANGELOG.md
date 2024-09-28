@@ -1,5 +1,591 @@
 # nextra
 
+## 3.0.0
+
+### Major Changes
+
+- e7e8e84: show react components, variable interpolation and latex in toc
+- 7188278: - insert `frontMatter` as export node via custom remark plugin
+
+  - remove `frontMatter.mdxOptions` support
+
+- 023d37b: add `"type": "module"` to `nextra` package
+- 50a52fd: - ❌ remove `_app.mdx`, use `_app.{js,jsx}` or `_app.{ts,tsx}` for
+  TypeScript projects instead
+
+  - ❌ remove Nextra middleware `nextra/locales`
+  - ❌ remove `parseFileName` from `nextra/utils`
+  - ❌ remove `nextra/filter-route-locale`
+  - ❌ remove `resolvePageMap` and `pageMapCache` from `nextra/page-map`
+  - ❌ remove `__nextraPageOptions.pageNextRoute`
+  - ❌ remove `pageOpts.route` and `pageOpts.newNextLinkBehavior`
+  - ❌ remove `LoaderOptions.defaultLocale`
+  - ❌ remove `__nextra_internal__.context[route].themeConfig`
+  - ✅ add `nextra/fetch-filepaths-from-github`
+  - save `pageMap` to `.next/static/chunks/nextra-page-map-{locale}.mjs`
+  - save `fileMap` to `.next/static/chunks/nextra-file-map.mjs`
+
+- c2ad837: update to MDX3
+- 148278c: rename tailwind prefix `nx-` to `_` to reduce bundle size
+- 919fe97: set `"peerDependencies.next": ">=13"`
+- 47b125d: fix global style conflicts for
+  `<a>`/`<button>`/`<summary>`/`<input>`/`[tabindex]:not([tabindex='-1']`
+- ba30c6c: use render props for className with `selected`, `disabled` and
+  `hover` state for `<Tab>`
+- d7d8a3e: new styles for code blocks aka in next.js
+- 2872606: remove `image` prop from `<Card>` component, image will be showed
+  based on truthiness `children` prop now
+
+  set `icon` as optional prop
+
+- 63ca28b: Remove support of "\_meta.json", use "\_meta.{js,jsx,ts,tsx}"
+  instead.
+- ad4823d: add zod validation for nextraConfig
+- ab07609: remove `locale` and `defaultLocale` from `normalizePages`
+- 2f3be33: - set `"engines.node": ">=18"`
+
+  - remove `Tab` export, use `Tabs.Tab` instead
+  - remove `Card` export, use `Cards.Card` instead
+  - disallow import md/mdx files that are outside the working directory, use
+    symlinks instead
+
+- 66cce1d: **BREAKING** bundle to ESM only
+
+  > ⚠️⚠️⚠️ use `next.config.mjs` or `next.config.js` with `"type": "module"`
+
+- b9f88e3: - remove `use-internals.ts`
+
+  - remove `layout.tsx`, move directly to `setup-page.tsx`
+  - remove `kind: 'Meta' | 'Folder' | 'MdxPage'` to keep page map smaller
+
+- 128e195: fix React warning, remove PageOpts.toc, use `toc` prop from
+  `components.wrapper`
+- 576cb6f: - rename `nextraConfig.flexsearch` to `nextraConfig.search`
+- 1f3e7cd: - remove `__nextraPageOptions.hot`
+
+  - remove `__nextraPageOptions.pageOptsChecksum`
+  - remove `__nextra_internal__.refreshListeners` (no longer needed since we
+    insert toc as esm node in remark plugin)
+  - remove `hashFnv32a`
+
+- 198dbcc: use toc with JSX elements for remote content
+- 191e6c4: - use `shikiji` instead of `shiki`
+
+  - rename `useSSG` to `useData`
+
+- c7f03e5: rename `pageOpts.headings` to `toc`
+
+### Minor Changes
+
+- 0fe55db: add `import { useRouter } from 'nextra/hooks'` for fetching `locale`
+  and `defaultLocale`
+- 6ec3241: Add Terraform/Move icon https://github.com/shuding/nextra/pull/2811
+  https://github.com/shuding/nextra/pull/2808
+- c7f03e5: should not add virtual `_meta` file if missing
+- 3644e1c: add `remark-smartypants`
+- 5a63701: add icons for following languages:
+
+  - GraphQL (`graphql`)
+  - C++ (`c++`, `cpp`)
+  - C# (`csharp`, `c#`, `cs`)
+  - Python (`python`, `py`)
+
+  allow disallow mobile word wrap button in code blocks with `word-wrap=false`
+  meta data setting
+
+- 60ec68c: improvements for remarkStaticImage:
+
+  - import same image only once
+  - support importing images by markdown image definitions
+
+- a52a869: add `frontmatter.sidebarTitle` support for setting page label in
+  sidebar via frontmatter
+- 6ec3241: Make the `<Tab>` component be crawlable and indexable by search
+  engines by default
+- f71e660: change to shiki again
+- 6070b02: rename `frontmatter.sidebar_label` to `frontmatter.sidebarTitle`
+- 4e55c06: add support for `_meta.{js,jsx,ts,tsx}` with JSX support
+- 8bce16d: replace `transformPageOpts` nextra option by `transformPageMap`
+- 3043826: add shikiji twoslash
+
+  Demo feature:
+  https://nextra-v2-na3obnhub-shuding1.vercel.app/docs/guide/twoslash-support
+
+- 6070b02: move `removeLinks` function from `nextra-theme-docs` to
+  `nextra/remove-links`
+- 440ff42: add MathJax support
+
+### Patch Changes
+
+- d1e3e9a: handle case when meta object was added in `transformPageMap`
+- 73239c4: To ensure consistent horizontal padding, set the default language as
+  plaintext for code blocks. This prevents any loss of formatting for code
+  blocks without a specified language.
+- 2b9b95b: migrate to `@headlessui/react` v2
+- 2a3e3e7: Fix first list item in `<FileTree>` not within permitted parent
+  elements
+- a3b67ae: `_meta` should return
+  `export const getStaticProps = () => ({ notFound: true })` for static exports,
+  instead of page without contain
+- 1a36469: add `frontMatter.sidebarTitle` only if `frontMatter.title` is empty
+- 799174f: fixed creating `pageMap` items for folders with dots
+
+  remove requirement of passing `filePaths` with `.md`/`.mdx` extensions for
+  `createCatchAllMeta` function
+
+- 98f439c: export `evaluate` function for remote content
+- cb24790: fix broken `export default` statement in mdx files
+- 982862f: Support for `h2` and `h4` Markdown headings with the Steps component.
+- a8c2196: use dynamic import for loading `mermaid`
+- 0b5cc9d: make nextra compatible with windows
+- fe5061b: fix for remote docs
+- 1a634cd: remove explicit `ZodError` assertion
+- ad108ff: use `overflow-x-auto` instead `overflow-x-scroll` for `<Table>`
+- 4f0f6b2: Omit `...{:type}` inline code annotations from search index #2922
+- 1f3e7cd: fix `pageProps` for NextraLayout
+- 90c129e: children in Card component is required only if the image prop is true
+- 150184b: attach heading anchor `id` attribute to heading (like Pagefind do)
+  and fix heading anchor styles when `theme.typesetting: 'article'` is set
+- c74ae90: Fix TypeError: \_jsx is not a function for remote content on
+  development environment
+- 7615b62: fix `useRouter` in `nextra/hooks`, use `asPath` instead `route`
+  because locale can be dynamic `/[locale]`
+- 7bb18e3: Add a generic for `themeConfig` in `NextraThemeLayoutProps` to
+  improve type inference.
+- 8efbb45: remove `nextra/data` export, move `useData` to `nextra/hooks`,
+  `RemoteContent` to `nextra/components`
+- 6f4c83a: fix unclickable links in TOC
+
+  allow passing `recmaPlugins` in `mdxOptions`
+
+- d8a406b: add `"sideEffects": false` for better tree-shaking
+- 9f55bd1: update rehype-pretty-code/shikiji to latest
+- ccaf3d4: Add the `autoImportThemeStyle` option to the Nextra configuration.
+  This allows users to import the official Nextra theme CSS into a specific
+  cascade layer.
+- 2630461: fix
+  `TypeError: undefined is not iterable (cannot read property Symbol(Symbol.iterator))`
+  on dev environment when `frontMatter.searchable: false`
+- 217f708: update next-themes
+
+  fix wrong numbering for nested `<Steps>`
+
+- 57bc0e2: fix reload of nextra layout on route change, reported by sound.xyz
+- ca51306: Enhance focus ring style consistency.
+- f662237: avoid focus-visible style being cut off by overflow-hidden
+- 3c6193d: Remove unnecessary `sortPages` from `server/utils.ts`
+- 363b85f: add `flex-shrink: 0` for indent in `FileTree` for `<Ident>` and svg
+  icons in `<Folder>` and `<File>`
+- fef635e: ignore loading pageMap for dynamic locale `/[locale]`
+- 237c345: Make React 18 as minimal requirement
+- 7faa096: fix visible hidden pages on mobile which set up with
+  `display: 'hidden'`
+- 9099c35: remove `nextra/mdx-plugins`, add `nextra/remark-plugins`
+- 98f439c: add rust icon
+- a95e745: Fix the line highlighting background-color does not extend to the
+  full width of the code block when a scrollbar appears with line numbers.
+- 80e11e0: move `resolvePageMap` to `nextra/page-map-dynamic`
+
+## 3.0.0-alpha.42
+
+### Patch Changes
+
+- ca51306: Enhance focus ring style consistency.
+
+## 3.0.0-alpha.41
+
+### Patch Changes
+
+- 237c345: Make React 18 as minimal requirement
+
+## 3.0.0-alpha.40
+
+### Patch Changes
+
+- 982862f: Support for `h2` and `h4` Markdown headings with the Steps component.
+
+## 3.0.0-alpha.39
+
+### Major Changes
+
+- 47b125d: fix global style conflicts for
+  `<a>`/`<button>`/`<summary>`/`<input>`/`[tabindex]:not([tabindex='-1']`
+- ba30c6c: use render props for className with `selected`, `disabled` and
+  `hover` state for `<Tab>`
+- 2872606: remove `image` prop from `<Card>` component, image will be showed
+  based on truthiness `children` prop now
+
+  set `icon` as optional prop
+
+## 3.0.0-alpha.38
+
+### Patch Changes
+
+- ccaf3d4: Add the `autoImportThemeStyle` option to the Nextra configuration.
+  This allows users to import the official Nextra theme CSS into a specific
+  cascade layer.
+
+## 3.0.0-alpha.37
+
+### Patch Changes
+
+- 2a3e3e7: Fix first list item in `<FileTree>` not within permitted parent
+  elements
+
+## 3.0.0-alpha.36
+
+### Patch Changes
+
+- 2b9b95b: migrate to `@headlessui/react` v2
+
+## 3.0.0-alpha.35
+
+### Patch Changes
+
+- f662237: avoid focus-visible style being cut off by overflow-hidden
+
+## 3.0.0-alpha.34
+
+### Patch Changes
+
+- 1a634cd: remove explicit `ZodError` assertion
+
+## 3.0.0-alpha.33
+
+### Patch Changes
+
+- 7bb18e3: Add a generic for `themeConfig` in `NextraThemeLayoutProps` to
+  improve type inference.
+
+## 3.0.0-alpha.32
+
+### Patch Changes
+
+- 73239c4: To ensure consistent horizontal padding, set the default language as
+  plaintext for code blocks. This prevents any loss of formatting for code
+  blocks without a specified language.
+- 799174f: fixed creating `pageMap` items for folders with dots
+
+  remove requirement of passing `filePaths` with `.md`/`.mdx` extensions for
+  `createCatchAllMeta` function
+
+- 150184b: attach heading anchor `id` attribute to heading (like Pagefind do)
+  and fix heading anchor styles when `theme.typesetting: 'article'` is set
+- 3c6193d: Remove unnecessary `sortPages` from `server/utils.ts`
+
+## 3.0.0-alpha.31
+
+### Patch Changes
+
+- d1e3e9a: handle case when meta object was added in `transformPageMap`
+
+## 3.0.0-alpha.30
+
+### Patch Changes
+
+- 7615b62: fix `useRouter` in `nextra/hooks`, use `asPath` instead `route`
+  because locale can be dynamic `/[locale]`
+
+## 3.0.0-alpha.29
+
+### Patch Changes
+
+- fef635e: ignore loading pageMap for dynamic locale `/[locale]`
+
+## 3.0.0-alpha.28
+
+### Patch Changes
+
+- a8c2196: use dynamic import for loading `mermaid`
+- 363b85f: add `flex-shrink: 0` for indent in `FileTree` for `<Ident />` and svg
+  icons in `<Folder />` and `<File />`
+
+## 3.0.0-alpha.27
+
+### Patch Changes
+
+- 4f0f6b27: Omit `...{:type}` inline code annotations from search index #2922
+- a95e7454: Fix the line highlighting background-color does not extend to the
+  full width of the code block when a scrollbar appears with line numbers.
+
+## 3.0.0-alpha.26
+
+## 3.0.0-alpha.25
+
+## 3.0.0-alpha.24
+
+### Patch Changes
+
+- 6f4c83a8: fix unclickable links in TOC
+
+  allow passing `recmaPlugins` in `mdxOptions`
+
+## 3.0.0-alpha.23
+
+### Minor Changes
+
+- 6ec3241c: Add Terraform/Move icon https://github.com/shuding/nextra/pull/2811
+  https://github.com/shuding/nextra/pull/2808
+- 6ec3241c: Make the `<Tab />` component be crawlable and indexable by search
+  engines by default
+
+### Patch Changes
+
+- ad108ff7: use `overflow-x-auto` instead `overflow-x-scroll` for `<Table />`
+- 217f7082: update next-themes
+
+  fix wrong numbering for nested `<Steps />`
+
+## 3.0.0-alpha.22
+
+### Patch Changes
+
+- 2630461c: fix
+  `TypeError: undefined is not iterable (cannot read property Symbol(Symbol.iterator))`
+  on dev environment when `frontMatter.searchable: false`
+
+## 3.0.0-alpha.21
+
+## 3.0.0-alpha.20
+
+## 3.0.0-alpha.19
+
+## 3.0.0-alpha.18
+
+### Minor Changes
+
+- f71e660e: change to shiki again
+
+### Patch Changes
+
+- 98f439ca: export `evaluate` function for remote content
+- 98f439ca: add rust icon
+
+## 3.0.0-alpha.17
+
+### Minor Changes
+
+- 30438264: add shikiji twoslash
+
+  Demo feature:
+  https://nextra-v2-na3obnhub-shuding1.vercel.app/docs/guide/twoslash-support
+
+### Patch Changes
+
+- 9f55bd1f: update rehype-pretty-code/shikiji to latest
+
+## 3.0.0-alpha.16
+
+### Minor Changes
+
+- 5a637010: add icons for following languages:
+
+  - GraphQL (`graphql`)
+  - C++ (`c++`, `cpp`)
+  - C# (`csharp`, `c#`, `cs`)
+  - Python (`python`, `py`)
+
+  allow disallow mobile word wrap button in code blocks with `word-wrap=false`
+  meta data setting
+
+### Patch Changes
+
+- 90c129e6: children in Card component is required only if the image prop is
+  true
+
+## 3.0.0-alpha.15
+
+### Patch Changes
+
+- 1a364694: add `frontMatter.sidebarTitle` only if `frontMatter.title` is empty
+
+## 3.0.0-alpha.14
+
+## 3.0.0-alpha.13
+
+### Minor Changes
+
+- 60ec68c4: improvements for remarkStaticImage:
+
+  - import same image only once
+  - support importing images by markdown image definitions
+
+- 6070b025: rename `frontmatter.sidebar_label` to `frontmatter.sidebarTitle`
+- 8bce16d3: replace `transformPageOpts` nextra option by `transformPageMap`
+- 6070b025: move `removeLinks` function from `nextra-theme-docs` to
+  `nextra/remove-links`
+
+### Patch Changes
+
+- c74ae90a: Fix TypeError: \_jsx is not a function for remote content on
+  development environment
+
+## 3.0.0-alpha.12
+
+### Minor Changes
+
+- 3644e1c2: add `remark-smartypants`
+
+### Patch Changes
+
+- 57bc0e2a: fix reload of nextra layout on route change, reported by sound.xyz
+
+## 3.0.0-alpha.11
+
+### Major Changes
+
+- c2ad837d: update to MDX3
+
+## 3.0.0-alpha.10
+
+### Patch Changes
+
+- 9099c354: remove `nextra/mdx-plugins`, add `nextra/remark-plugins`
+
+## 3.0.0-alpha.9
+
+### Patch Changes
+
+- 8efbb45c: remove `nextra/data` export, move `useData` to `nextra/hooks`,
+  `RemoteContent` to `nextra/components`
+- 80e11e04: move `resolvePageMap` to `nextra/page-map-dynamic`
+
+## 3.0.0-alpha.8
+
+### Minor Changes
+
+- 440ff42d: add MathJax support
+
+## 3.0.0-alpha.7
+
+### Patch Changes
+
+- 0b5cc9d5: make nextra compatible with windows
+
+## 3.0.0-alpha.6
+
+### Patch Changes
+
+- 03da778a: fix `*` theme settings for dynamic routes when route is not exist in
+  page map
+
+## 3.0.0-alpha.5
+
+### Patch Changes
+
+- a3b67aea: `_meta` should return
+  `export const getStaticProps = () => ({ notFound: true })` for static exports,
+  instead of page without contain
+
+## 3.0.0-alpha.4
+
+### Patch Changes
+
+- 7faa0968: fix visible hidden pages on mobile which set up with
+  `display: 'hidden'`
+
+## 3.0.0-alpha.3
+
+### Patch Changes
+
+- fe5061b7: fix for remote docs
+
+## 3.0.0-alpha.2
+
+### Patch Changes
+
+- cb247901: fix broken `export default` statement in mdx files
+
+## 3.0.0-alpha.1
+
+### Major Changes
+
+- e7e8e849: show react components, variable interpolation and latex in toc
+- 71882780: - insert `frontMatter` as export node via custom remark plugin
+
+  - remove `frontMatter.mdxOptions` support
+
+- 023d37b1: add `"type": "module"` to `nextra` package
+- 148278ce: rename tailwind prefix `nx-` to `_` to reduce bundle size
+- d7d8a3eb: new styles for code blocks aka in next.js
+- 63ca28be: Remove support of "\_meta.json", use "\_meta.{js,jsx,ts,tsx}"
+  instead.
+- b9f88e34: - remove `use-internals.ts`
+
+  - remove `layout.tsx`, move directly to `setup-page.tsx`
+  - remove `kind: 'Meta' | 'Folder' | 'MdxPage'` to keep page map smaller
+
+- 128e195f: fix React warning, remove PageOpts.toc, use `toc` prop from
+  `components.wrapper`
+- 1f3e7cd4: - remove `__nextraPageOptions.hot`
+
+  - remove `__nextraPageOptions.pageOptsChecksum`
+  - remove `__nextra_internal__.refreshListeners` (no longer needed since we
+    insert toc as esm node in remark plugin)
+  - remove `hashFnv32a`
+
+- 198dbcca: use toc with JSX elements for remote content
+- 191e6c41: - use `shikiji` instead of `shiki`
+
+  - rename `useSSG` to `useData`
+
+- c7f03e54: rename `pageOpts.headings` to `toc`
+
+### Minor Changes
+
+- c7f03e54: should not add virtual `_meta` file if missing
+- a52a869e: add `frontmatter.sidebar_label` support for setting page label in
+  sidebar via frontmatter
+- 4e55c064: add support for `_meta.{js,jsx,ts,tsx}` with JSX support
+
+### Patch Changes
+
+- 1f3e7cd4: fix `pageProps` for NextraLayout
+
+## 3.0.0-alpha.0
+
+### Major Changes
+
+- 50a52fd1: - ❌ remove `_app.mdx`, use `_app.{js,jsx}` or `_app.{ts,tsx}` for
+  TypeScript projects instead
+
+  - ❌ remove Nextra middleware `nextra/locales`
+  - ❌ remove `parseFileName` from `nextra/utils`
+  - ❌ remove `nextra/filter-route-locale`
+  - ❌ remove `resolvePageMap` and `pageMapCache` from `nextra/page-map`
+  - ❌ remove `__nextraPageOptions.pageNextRoute`
+  - ❌ remove `pageOpts.route` and `pageOpts.newNextLinkBehavior`
+  - ❌ remove `LoaderOptions.defaultLocale`
+  - ❌ remove `__nextra_internal__.context[route].themeConfig`
+  - ✅ add `nextra/fetch-filepaths-from-github`
+  - save `pageMap` to `.next/static/chunks/nextra-page-map-{locale}.mjs`
+  - save `fileMap` to `.next/static/chunks/nextra-file-map.mjs`
+
+- 919fe977: set `"peerDependencies.next": ">=13"`
+- ad4823d9: add zod validation for nextraConfig
+- ab07609c: remove `locale` and `defaultLocale` from `normalizePages`
+- 2f3be336: - set `"engines.node": ">=18"`
+
+  - remove `Tab` export, use `Tabs.Tab` instead
+  - remove `Card` export, use `Cards.Card` instead
+  - disallow import md/mdx files that are outside the working directory, use
+    symlinks instead
+
+- 66cce1d1: **BREAKING** bundle to ESM only
+
+  > ⚠️⚠️⚠️ use `next.config.mjs` or `next.config.js` with `"type": "module"`
+
+- 576cb6f1: - rename `nextraConfig.flexsearch` to `nextraConfig.search`
+
+### Minor Changes
+
+- 0fe55db2: add `import { useRouter } from 'nextra/hooks'` for fetching `locale`
+  and `defaultLocale`
+
+### Patch Changes
+
+- d8a406b4: add `"sideEffects": false` for better tree-shaking
+
 ## 2.13.4
 
 ## 2.13.3

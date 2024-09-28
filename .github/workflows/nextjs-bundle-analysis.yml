@@ -24,14 +24,15 @@ jobs:
         with:
           access_token: ${{ github.token }}
 
-      - uses: actions/checkout@v4
+      - name: Checkout Main
+        uses: actions/checkout@v4
 
       - uses: pnpm/action-setup@v4
 
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version-file: .node-version
           cache: pnpm
 
       - name: Install Dependencies
@@ -66,7 +67,7 @@ jobs:
           path: ${{ matrix.package }}/.next/analyze/__bundle_analysis.json
 
       - name: Download Base Branch Bundle Stats
-        uses: dawidd6/action-download-artifact@v3
+        uses: dawidd6/action-download-artifact@v6
         if: success() && github.event.number
         with:
           name: bundle-${{ matrix.package == 'docs' && 'docs' || 'swr-site' }}
