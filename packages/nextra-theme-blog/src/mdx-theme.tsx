@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { Code, Pre, Table, Td, Th, Tr } from 'nextra/components'
-import { MDXProvider } from 'nextra/mdx'
-import type { Components } from 'nextra/mdx'
+import type { MDXComponents } from 'nextra/mdx'
 import type { ComponentProps, ReactElement, ReactNode, RefObject } from 'react'
 import {
   createContext,
@@ -13,9 +12,8 @@ import {
 import { createPortal } from 'react-dom'
 import { useBlogContext } from './blog-context'
 
-export const HeadingContext = createContext<
-  RefObject<HTMLHeadingElement | null>
->(createRef())
+export const HeadingContext =
+  createContext<RefObject<HTMLHeadingElement | null>>(createRef())
 
 const H1 = ({ children }: { children?: ReactNode }): ReactElement => {
   const ref = useContext(HeadingContext)
@@ -38,11 +36,10 @@ function HeadingLink({
 }: ComponentProps<'h2'> & { tag: `h${2 | 3 | 4 | 5 | 6}` }): ReactElement {
   return (
     <Tag
+      id={id}
       className={
         // can be added by footnotes
-        className === 'sr-only'
-          ? 'nx-sr-only'
-          : `nx-not-prose subheading-${Tag}`
+        className === 'sr-only' ? '_sr-only' : `subheading-${Tag}`
       }
       {...props}
     >
@@ -50,8 +47,7 @@ function HeadingLink({
       {id && (
         <a
           href={`#${id}`}
-          id={id}
-          className="subheading-anchor"
+          className="_not-prose subheading-anchor"
           aria-label="Permalink for this section"
         />
       )}
@@ -66,45 +62,32 @@ const A = ({ children, href = '', ...props }: ComponentProps<'a'>) => {
     return (
       <a href={href} target="_blank" rel="noreferrer" {...props}>
         {children}
-        <span className="nx-sr-only nx-select-none"> (opens in a new tab)</span>
       </a>
     )
   }
   return (
-    <Link href={href} passHref legacyBehavior>
-      <a {...props}>{children}</a>
+    <Link href={href} {...props}>
+      {children}
     </Link>
   )
 }
 
-const useComponents = (): Components => {
-  const { config } = useBlogContext()
-  return {
-    h1: H1,
-    h2: props => <HeadingLink tag="h2" {...props} />,
-    h3: props => <HeadingLink tag="h3" {...props} />,
-    h4: props => <HeadingLink tag="h4" {...props} />,
-    h5: props => <HeadingLink tag="h5" {...props} />,
-    h6: props => <HeadingLink tag="h6" {...props} />,
-    a: A,
-    pre: ({ children, ...props }) => (
-      <div className="nx-not-prose">
-        <Pre {...props}>{children}</Pre>
-      </div>
-    ),
-    tr: Tr,
-    th: Th,
-    td: Td,
-    table: props => <Table className="nx-not-prose" {...props} />,
-    code: Code,
-    ...config.components
-  }
-}
-
-export const MDXTheme = ({
-  children
-}: {
-  children: ReactNode
-}): ReactElement => {
-  return <MDXProvider components={useComponents()}>{children}</MDXProvider>
+export const components: MDXComponents = {
+  h1: H1,
+  h2: props => <HeadingLink tag="h2" {...props} />,
+  h3: props => <HeadingLink tag="h3" {...props} />,
+  h4: props => <HeadingLink tag="h4" {...props} />,
+  h5: props => <HeadingLink tag="h5" {...props} />,
+  h6: props => <HeadingLink tag="h6" {...props} />,
+  a: A,
+  pre: ({ children, ...props }) => (
+    <Pre className="_not-prose" {...props}>
+      {children}
+    </Pre>
+  ),
+  tr: Tr,
+  th: Th,
+  td: Td,
+  table: props => <Table className="_not-prose" {...props} />,
+  code: Code
 }

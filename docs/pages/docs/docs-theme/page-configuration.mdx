@@ -1,50 +1,50 @@
 # Page Configuration
 
 In Nextra, the site and page structure can be configured via the co-located
-`_meta.json` files. In the docs theme, there are some extra options available to
+`_meta.js` files. In the docs theme, there are some extra options available to
 customize it further.
 
 Those configurations affect the overall layout of the theme, especially the
 navigation bar and the sidebar.
 
 import { Screenshot } from 'components/screenshot'
-import Video from 'components/video'
+import { Video } from 'components/video'
 import { Callout, FileTree } from 'nextra/components'
-import menuImage from '../../../public/assets/docs/menu.png'
+import menuImage from 'public/assets/docs/menu.png'
 
 <Callout>
-  Read more about Nextra's `_meta.json` files
-  [here](/docs/guide/organize-files).
+  Read more about Nextra's `_meta.js` files
+  [here](/docs/guide/organize-files#_metajs).
 </Callout>
 
 ## Pages
 
 The title and order of a page shown in the sidebar should be configured in the
-`_meta.json` file as key-value pairs. For example, if you have the following
-file structure:
+`_meta.js` file as key-value pairs. For example, if you have the following file
+structure:
 
 <FileTree>
   <FileTree.Folder name="pages" defaultOpen>
-    <FileTree.File name="_meta.json" />
+    <FileTree.File name="_meta.js" />
     <FileTree.File name="about.mdx" />
     <FileTree.File name="contact.mdx" />
     <FileTree.File name="index.mdx" />
   </FileTree.Folder>
 </FileTree>
 
-You can define how the pages are shown in the sidebar via the `_meta.json` file:
+You can define how the pages are shown in the sidebar via the `_meta.js` file:
 
-```json filename="_meta.json"
-{
-  "index": "My Homepage",
-  "contact": "Contact Us",
-  "about": "About Us"
+```js filename="_meta.js"
+export default {
+  index: 'My Homepage',
+  contact: 'Contact Us',
+  about: 'About Us'
 }
 ```
 
 <Callout>
-  If any routes are not listed in the `_meta.json` file, they will be appended
-  to the end of the sidebar and sorted alphabetically, and the title will be
+  If any routes are not listed in the `_meta.js` file, they will be appended to
+  the end of the sidebar and sorted alphabetically, and the title will be
   formatted with [Title](https://title.sh).
 </Callout>
 
@@ -55,41 +55,41 @@ Folders can be configured in the same way as pages. For example:
 <FileTree>
   <FileTree.Folder name="pages" defaultOpen>
     <FileTree.Folder name="fruits" defaultOpen>
-      <FileTree.File name="_meta.json" />
+      <FileTree.File name="_meta.js" />
       <FileTree.File name="apple.mdx" />
       <FileTree.File name="banana.mdx" />
     </FileTree.Folder>
-    <FileTree.File name="_meta.json" />
+    <FileTree.File name="_meta.js" />
     <FileTree.File name="about.mdx" />
     <FileTree.File name="contact.mdx" />
     <FileTree.File name="index.mdx" />
   </FileTree.Folder>
 </FileTree>
 
-The top-level `_meta.json` file contains the meta information for the top-level
+The top-level `_meta.js` file contains the meta information for the top-level
 pages and folders:
 
-```json filename="pages/_meta.json"
-{
-  "index": "My Homepage",
-  "contact": "Contact Us",
-  "fruits": "Delicious Fruits",
-  "about": "About Us"
+```js filename="pages/_meta.js"
+export default {
+  index: 'My Homepage',
+  contact: 'Contact Us',
+  fruits: 'Delicious Fruits',
+  about: 'About Us'
 }
 ```
 
-And the nested `_meta.json` file contains the meta information for pages in the
+And the nested `_meta.js` file contains the meta information for pages in the
 same folder:
 
-```json filename="pages/fruits/_meta.json"
-{
-  "apple": "Apple",
-  "banana": "Banana"
+```js filename="pages/fruits/_meta.js"
+export default {
+  apple: 'Apple',
+  banana: 'Banana'
 }
 ```
 
 This way, information for pages are grouped together in directories. You can
-move directories around without having to change the `_meta.json` file.
+move directories around without having to change the `_meta.js` file.
 
 ### Folders with Index Page
 
@@ -101,11 +101,11 @@ pages:
 <FileTree>
   <FileTree.Folder name="pages" defaultOpen>
     <FileTree.Folder name="fruits" defaultOpen>
-      <FileTree.File name="_meta.json" />
+      <FileTree.File name="_meta.js" />
       <FileTree.File name="apple.mdx" />
       <FileTree.File name="banana.mdx" />
     </FileTree.Folder>
-    <FileTree.File name="_meta.json" />
+    <FileTree.File name="_meta.js" />
     <FileTree.File name="about.mdx" />
     <FileTree.File name="contact.mdx" />
     <FileTree.File name="fruits.mdx" active />
@@ -113,40 +113,40 @@ pages:
   </FileTree.Folder>
 </FileTree>
 
-Then Nextra knows that the `fruits` key in `_meta.json` defines a folder with an
+Then Nextra knows that the `fruits` key in `_meta.js` defines a folder with an
 index page. If you click that folder in the sidebar, it will open the folder and
 show you the `fruits.mdx` page at the same time.
 
 ## External Links
 
 You can add external links to the sidebar by adding an item with `href` in
-`_meta.json`:
+`_meta.js`:
 
-```json filename="pages/_meta.json" {6-9}
-{
-  "index": "My Homepage",
-  "contact": "Contact Us",
-  "fruits": "Delicious Fruits",
-  "about": "About Us",
-  "github_link": {
-    "title": "Nextra",
-    "href": "https://github.com/shuding/nextra"
+```js filename="pages/_meta.js" {6-9}
+export default {
+  index: 'My Homepage',
+  contact: 'Contact Us',
+  fruits: 'Delicious Fruits',
+  about: 'About Us',
+  github_link: {
+    title: 'Nextra',
+    href: 'https://github.com/shuding/nextra'
   }
 }
 ```
 
 To always open the link in a new tab, enable the `"newWindow": true` option:
 
-```json filename="pages/_meta.json" {9}
-{
-  "index": "My Homepage",
-  "contact": "Contact Us",
-  "fruits": "Delicious Fruits",
-  "about": "About Us",
-  "github_link": {
-    "title": "Nextra",
-    "href": "https://github.com/shuding/nextra",
-    "newWindow": true
+```js filename="pages/_meta.js" {9}
+export default {
+  index: 'My Homepage',
+  contact: 'Contact Us',
+  fruits: 'Delicious Fruits',
+  about: 'About Us',
+  github_link: {
+    title: 'Nextra',
+    href: 'https://github.com/shuding/nextra',
+    newWindow: true
   }
 }
 ```
@@ -161,13 +161,13 @@ By default, all MDX routes in the filesystem will be shown on the sidebar. But
 you can hide a specific pages or folders by using the `"display": "hidden"`
 configuration:
 
-```json filename="pages/_meta.json" {4}
-{
-  "index": "My Homepage",
-  "contact": {
-    "display": "hidden"
+```js filename="pages/_meta.js" {4}
+export default {
+  index: 'My Homepage',
+  contact: {
+    display: 'hidden'
   },
-  "about": "About Us"
+  about: 'About Us'
 }
 ```
 
@@ -197,32 +197,32 @@ project:
       <FileTree.File name="apple.mdx" />
       <FileTree.File name="banana.mdx" />
     </FileTree.Folder>
-    <FileTree.File name="_meta.json" />
+    <FileTree.File name="_meta.js" />
     <FileTree.File name="about.mdx" />
     <FileTree.File name="index.mdx" />
   </FileTree.Folder>
 </FileTree>
 
-In your top-level `_meta.json` file, you can set everything as a page, instead
-of a normal sidebar item:
+In your top-level `_meta.js` file, you can set everything as a page, instead of
+a normal sidebar item:
 
-```json filename="pages/_meta.json"
-{
-  "index": {
-    "title": "Home",
-    "type": "page"
+```js filename="pages/_meta.js"
+export default {
+  index: {
+    title: 'Home',
+    type: 'page'
   },
-  "frameworks": {
-    "title": "Frameworks",
-    "type": "page"
+  frameworks: {
+    title: 'Frameworks',
+    type: 'page'
   },
-  "fruits": {
-    "title": "Fruits",
-    "type": "page"
+  fruits: {
+    title: 'Fruits',
+    type: 'page'
   },
-  "about": {
-    "title": "About",
-    "type": "page"
+  about: {
+    title: 'About',
+    type: 'page'
   }
 }
 ```
@@ -233,7 +233,7 @@ And it will look like this:
 
 <div className="mt-4 text-center text-sm">
   [Live example on StackBlitz
-  ↗](https://stackblitz.com/edit/nextra-2-docs-eszspq?file=pages%2F_meta.json)
+  ↗](https://stackblitz.com/edit/nextra-2-docs-eszspq?file=pages%2F_meta.js)
 </div>
 
 You can also hide links like `Home` from the navbar with the
@@ -248,22 +248,22 @@ option:
 
 <div className="mt-8 text-center text-sm">
   [Live example on StackBlitz
-  ↗](https://stackblitz.com/edit/nextra-2-docs-2qopvp?file=pages%2F_meta.json)
+  ↗](https://stackblitz.com/edit/nextra-2-docs-2qopvp?file=pages%2F_meta.js)
 </div>
 
-```json filename="pages/_meta.json"
-{
-  "company": {
-    "title": "Company",
-    "type": "menu",
-    "items": {
-      "about": {
-        "title": "About",
-        "href": "/about"
+```js filename="pages/_meta.js"
+export default {
+  company: {
+    title: 'Company',
+    type: 'menu',
+    items: {
+      about: {
+        title: 'About',
+        href: '/about'
       },
-      "contact": {
-        "title": "Contact Us",
-        "href": "mailto:hi@example.com"
+      contact: {
+        title: 'Contact Us',
+        href: 'mailto:hi@example.com'
       }
     }
   }
@@ -275,21 +275,21 @@ option:
 Same as the [External Links](#external-links) option, you can have external
 links in the navbar too:
 
-```json filename="pages/_meta.json"
-{
-  "index": {
-    "title": "Home",
-    "type": "page"
+```js filename="pages/_meta.js"
+export default {
+  index: {
+    title: 'Home',
+    type: 'page'
   },
-  "about": {
-    "title": "About",
-    "type": "page"
+  about: {
+    title: 'About',
+    type: 'page'
   },
-  "contact": {
-    "title": "Contact Us",
-    "type": "page",
-    "href": "https://example.com/contact",
-    "newWindow": true
+  contact: {
+    title: 'Contact Us',
+    type: 'page',
+    href: 'https://example.com/contact',
+    newWindow: true
   }
 }
 ```
@@ -300,15 +300,15 @@ In the [Sub Docs](#sub-docs) example above, we have to define the
 `"type": "page"` option for every page. To make it easier, you can use the `"*"`
 key to define the fallback configuration for all items in this folder:
 
-```json filename="pages/_meta.json" {2-4}
-{
-  "*": {
-    "type": "page"
+```js filename="pages/_meta.js" {2-4}
+export default {
+  '*': {
+    type: 'page'
   },
-  "index": "Home",
-  "frameworks": "Frameworks",
-  "fruits": "Fruits",
-  "about": "About"
+  index: 'Home',
+  frameworks: 'Frameworks',
+  fruits: 'Fruits',
+  about: 'About'
 }
 ```
 
@@ -319,20 +319,18 @@ They are equivalent where all items have `"type": "page"` set.
 You can use a "placeholder" item with `"type": "separator"` to create a
 separator line between items in the sidebar:
 
-```json filename="_meta.json"
-{
-  "index": "My Homepage",
-  "---": {
-    "type": "separator"
+```js filename="_meta.js"
+export default {
+  index: 'My Homepage',
+  '---': {
+    type: 'separator'
   },
-  "contact": "Contact Us"
+  contact: 'Contact Us'
 }
 ```
 
-<Callout>
-  Together with the
-  [`sidebar.titleComponent`](/docs/docs-theme/theme-configuration#sidebar) theme
-  option, you can customize the look of titles and separator lines in the
+<Callout type="info">
+  Use JSX elements to change the look of titles and separator lines in the
   sidebar.
 </Callout>
 
@@ -343,16 +341,16 @@ separator line between items in the sidebar:
 You can configure the theme for each page using the `"theme"` option. For
 example, you can disable or enable specific components for specific pages:
 
-```json filename="pages/_meta.json"
-{
-  "index": {
-    "title": "Home",
-    "theme": {
-      "breadcrumb": false,
-      "footer": true,
-      "sidebar": false,
-      "toc": true,
-      "pagination": false
+```js filename="pages/_meta.js"
+export default {
+  index: {
+    title: 'Home',
+    theme: {
+      breadcrumb: false,
+      footer: true,
+      sidebar: false,
+      toc: true,
+      pagination: false
     }
   }
 }
@@ -371,12 +369,12 @@ By default, Nextra renders the MDX content (such as `h1`, `h2`, `h3` etc.) with
 themed components, inside a content container. You can use the `"raw"` layout to
 let Nextra to not inject any styles to the content:
 
-```json filename="pages/_meta.json" {5}
-{
-  "index": {
-    "title": "Home",
-    "theme": {
-      "layout": "raw"
+```js filename="pages/_meta.js" {5}
+export default {
+  index: {
+    title: 'Home',
+    theme: {
+      layout: 'raw'
     }
   }
 }
@@ -387,12 +385,12 @@ let Nextra to not inject any styles to the content:
 You might want to render some page with the full container width and height, but
 keep all the other styles. You can use the `"full"` layout to do that:
 
-```json filename="pages/_meta.json" {5}
-{
-  "index": {
-    "title": "Home",
-    "theme": {
-      "layout": "full"
+```js filename="pages/_meta.js" {5}
+export default {
+  index: {
+    title: 'Home',
+    theme: {
+      layout: 'full'
     }
   }
 }
@@ -407,12 +405,12 @@ heading styles and components like `li` and `code`. There are `"default"` and
 The default one is suitable for most cases like documentation, but you can use
 the `"article"` typesetting to make it look like an elegant article page:
 
-```json filename="pages/_meta.json" {5}
-{
-  "about": {
-    "title": "About Us",
-    "theme": {
-      "typesetting": "article"
+```js filename="pages/_meta.js" {5}
+export default {
+  about: {
+    title: 'About Us',
+    theme: {
+      typesetting: 'article'
     }
   }
 }
@@ -420,5 +418,5 @@ the `"article"` typesetting to make it look like an elegant article page:
 
 <div className="mt-4 text-center text-sm">
   [Live example on StackBlitz
-  ↗](https://stackblitz.com/edit/nextra-2-docs-hg77h3?file=pages%2F_meta.json,pages%2Findex.mdx)
+  ↗](https://stackblitz.com/edit/nextra-2-docs-hg77h3?file=pages%2F_meta.js,pages%2Findex.mdx)
 </div>
