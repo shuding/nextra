@@ -72,6 +72,13 @@
 - Updated dependencies [99f34d3]
   - nextra@4.0.0-app-router.0
 
+## 3.0.1
+
+### Patch Changes
+
+- d9d0820: fix unclickable links on mobile
+  - nextra@3.0.1
+
 ## 3.0.0
 
 ### Major Changes
