@@ -16,7 +16,7 @@ import {
 } from '../icons/index.js'
 import type { PreProps } from '../mdx-components/pre/index.js'
 
-const LanguageToIcon: Record<string, FC<SVGProps<SVGSVGElement>>> = {
+const LanguageToIcon: Record<string, FC<SVGProps<SVGElement>>> = {
   js: JavaScriptIcon,
   jsx: JavaScriptIcon,
   ts: TypeScriptIcon,

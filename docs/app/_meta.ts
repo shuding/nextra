@@ -24,7 +24,12 @@ export default {
     type: 'menu',
     title: 'Version',
     items: {
-      2: {
+      _3: {
+        title: 'Nextra v3 Docs ↗',
+        href: 'https://nextra-v2-pyibc76cq-shud.vercel.app',
+        newWindow: true
+      },
+      _2: {
         title: 'Nextra v2 Docs ↗',
         href: 'https://nextra-v2-oe0zrpzjp-shud.vercel.app',
         newWindow: true

@@ -31,15 +31,9 @@ function NavbarMenu({
   menu: MenuItem
   children: ReactNode
 }): ReactElement {
-  const { items } = menu
   const routes = Object.fromEntries(
     (menu.children || []).map(route => [route.name, route])
   )
-  const entries =
-    items instanceof Map
-      ? Array.from(items.entries())
-      : Object.entries(items || {})
-
   return (
     <Menu>
       <MenuButton
@@ -74,7 +68,7 @@ function NavbarMenu({
         }
         anchor={{ to: 'top end', gap: 10, padding: 16 }}
       >
-        {entries.map(([key, item]) => (
+        {Object.entries(menu.items || {}).map(([key, item]) => (
           <_MenuItem
             key={key}
             as={Anchor}
