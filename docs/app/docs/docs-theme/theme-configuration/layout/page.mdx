@@ -69,10 +69,10 @@ If the documentation is inside a monorepo, a subfolder, or a different branch of
 the repository, you can simply set the `docsRepositoryBase` to the root path of
 the `pages/` folder of your docs. For example:
 
-```js
-export default {
-  docsRepositoryBase: 'https://github.com/shuding/nextra/tree/main/docs'
-}
+```jsx filename="app/layout.jsx"
+<Layout docsRepositoryBase="https://github.com/shuding/nextra/tree/main/docs">
+  {children}
+</Layout>
 ```
 
 Then Nextra will automatically generate the correct file path for all pages.
@@ -184,13 +184,15 @@ navigating between pages.
 
 <Screenshot src={navigationImage} alt="Navigation" full />
 
-```jsx
-export default {
-  navigation: {
+```jsx filename="app/layout.jsx"
+<Layout
+  navigation={{
     prev: true,
     next: true
-  }
-}
+  }}
+>
+  {children}
+</Layout>
 ```
 
 The above is also equivalent to `navigation: true{:js}`.
@@ -260,18 +262,16 @@ export default {
 
 You are able to customize the option names for localization or other purposes:
 
-```jsx
-export default {
-  themeSwitch: {
-    useOptions() {
-      return {
-        light: 'Light',
-        dark: 'Dark',
-        system: 'System'
-      }
-    }
-  }
-}
+```jsx filename="app/layout.jsx"
+<Layout
+  themeSwitch={{
+    dark: 'Темный',
+    light: 'Светлый',
+    system: 'Системный'
+  }}
+>
+  {children}
+</Layout>
 ```
 
 ## Table of Contents (TOC) Sidebar
