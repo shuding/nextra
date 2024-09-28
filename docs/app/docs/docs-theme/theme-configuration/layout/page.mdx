@@ -166,7 +166,7 @@ of the content.
 
 |             |                              |                                           |
 | ----------- | ---------------------------- | ----------------------------------------- |
-| lastUpdated | `React.FC<{ date: Date }>()` | Component to render the last updated info |
+| lastUpdated | `React.FC<{ date: Date }>()` | Component to render the last updated info.<br/>Default: `<LastUpdated />{:js}` |
 
 </Table>
 
@@ -179,9 +179,9 @@ navigating between pages.
 
 |                 |                     |                                          |
 | --------------- | ------------------- | ---------------------------------------- |
-| navigation      | `boolean \| object` | Enable or disable navigation link        |
-| navigation.prev | `boolean`           | Enable or disable the previous page link |
-| navigation.next | `boolean`           | Enable or disable the next page link     |
+| navigation      | `boolean \| object{:ts}` | Enable or disable navigation link. Default: `true{:json}`         |
+| navigation.prev | `boolean{:ts}`           | Enable or disable the previous page link |
+| navigation.next | `boolean{:ts}`           | Enable or disable the next page link     |
 
 </Table>
 
@@ -196,7 +196,7 @@ export default {
 }
 ```
 
-The above is also equivalent to `navigation: true`.
+The above is also equivalent to `navigation: true{:js}`.
 
 ## Page Map [!TODO]
 
