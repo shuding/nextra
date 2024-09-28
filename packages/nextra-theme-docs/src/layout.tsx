@@ -27,7 +27,6 @@ const theme = z.strictObject({
       labels: z.string().default('feedback')
     })
     .default({}),
-  lastUpdated: element.default(<LastUpdated />),
   i18n: z
     .array(
       z.strictObject({
@@ -37,6 +36,7 @@ const theme = z.strictObject({
       })
     )
     .default([]),
+  lastUpdated: element.default(<LastUpdated />),
   navigation: z
     .union([
       z.boolean(),

@@ -101,7 +101,7 @@ describe('generatePageMapFromFilepaths()', () => {
         "docs/blog-theme/start/page.mdx",
         "docs/custom-theme/page.mdx",
         "docs/docs-theme/_meta.ts",
-        "docs/docs-theme/api/use-config/page.mdx",
+        "docs/docs-theme/api/page.mdx",
         "docs/docs-theme/page-configuration/page.mdx",
         "docs/docs-theme/page.mdx",
         "docs/docs-theme/start/page.mdx",
@@ -136,6 +136,7 @@ describe('generatePageMapFromFilepaths()', () => {
         "docs/guide/page.mdx",
         "docs/guide/search/page.mdx",
         "docs/guide/ssg/page.mdx",
+        "docs/guide/static-exports/page.mdx",
         "docs/guide/syntax-highlighting/page.mdx",
         "docs/page.mdx",
         "page.tsx",
@@ -175,13 +176,7 @@ describe('generatePageMapFromFilepaths()', () => {
               {
                 "children": [
                   {
-                    "children": [
-                      {
-                        "__pagePath": "docs/docs-theme/api/use-config/page.mdx",
-                        "name": "use-config",
-                        "route": "/docs/docs-theme/api/use-config",
-                      },
-                    ],
+                    "__pagePath": "docs/docs-theme/api/page.mdx",
                     "name": "api",
                     "route": "/docs/docs-theme/api",
                   },
@@ -366,6 +361,11 @@ describe('generatePageMapFromFilepaths()', () => {
                     "__pagePath": "docs/guide/ssg/page.mdx",
                     "name": "ssg",
                     "route": "/docs/guide/ssg",
+                  },
+                  {
+                    "__pagePath": "docs/guide/static-exports/page.mdx",
+                    "name": "static-exports",
+                    "route": "/docs/guide/static-exports",
                   },
                   {
                     "__pagePath": "docs/guide/syntax-highlighting/page.mdx",

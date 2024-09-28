@@ -1,7 +1,7 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import { FC, ReactNode } from 'react'
+import type { FC, ReactNode } from 'react'
 import { useThemeConfig } from '../stores'
 
 export const LastUpdated: FC<{
