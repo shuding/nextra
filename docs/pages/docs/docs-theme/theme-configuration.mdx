@@ -617,7 +617,9 @@ export default {
 }
 ```
 
-## 404 - Not Found page
+## Not Found Page
+
+Options to configure report of broken link on not found page.
 
 <Table>
 
@@ -625,6 +627,20 @@ export default {
 | ------- | ----------------- | ---------------------------------------------- |
 | content | `ReactNode \| FC` | Default: `Submit an issue about broken link →` |
 | labels  | `string`          | Default: `bug`                                 |
+
+</Table>
+
+## I18n
+
+Options to configure the language dropdown for
+[the i18n docs website](/docs/guide/i18n).
+
+<Table>
+
+|                     |          |                                                        |
+| ------------------- | -------- | ------------------------------------------------------ |
+| i18n[number].locale | `string` | Locale from `i18n.locales` field in `next.config` file |
+| i18n[number].name   | `string` | Locale name in dropdown                                |
 
 </Table>
 
