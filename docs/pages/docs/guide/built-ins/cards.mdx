@@ -1,12 +1,13 @@
-import { CardsIcon, OneIcon, WarningIcon } from '@components/icons'
+import { CardsIcon, OneIcon, WarningIcon, BoxIcon } from '@components/icons'
 import { Cards, RemoteContent } from 'nextra/components'
 import { buildDynamicMDX } from 'nextra/remote'
 
 export async function getStaticProps() {
   const mdx2 = `<Cards.Card
-  icon={<WarningIcon />}
-  title="Callout"
-  href="/docs/guide/built-ins/callout"
+  icon={<BoxIcon />}
+  title="About Nextra"
+  href="/about"
+  arrow
 />`
   const mdx = `
 <Cards>
@@ -29,19 +30,22 @@ export async function getStaticProps() {
   const props = await buildDynamicMDX(`
 # Cards Component
 
-## Example
+A built-in component that allows you to display content in a visually appealing card format. It
+includes options for adding an icon, title, link and an image to related content.
 
-A built-in component to embed a link in a card with an icon.
+## Grouped Cards
+
+### Example
 
 ${mdx}
 
-## Usage
+### Usage
 
 Import the \`<Cards>\` component to your page, which includes the \`<Card>\` component.
 
-Then, _optionally_ import the icons that you want to use. To create a set of cards, follow the example
-below where the \`<Cards.Card>\` component is used to create a card and the \`<Cards>\` component is used
-to group multiple cards together.
+Then, _optionally_ import the icons that you want to use. To create a set of cards, follow the
+example below where the \`<Cards.Card>\` component is used to create a card and the \`<Cards>\`
+component is used to group multiple cards together.
 
 ~~~mdx filename="MDX"
 import { Cards } from 'nextra/components'
@@ -49,19 +53,19 @@ import { CardsIcon, OneIcon, WarningIcon } from '../path/with/your/icons'
 ${mdx}
 ~~~
 
-### Single Card
+## Single Card
 
-A \`<Card>\` not wrapped in a \`<Cards>\` component will not be grouped with other cards.
-This can be useful if you want to display a single card in a different format
-than the rest of the cards on the page.
+A \`<Card>\` not wrapped in a \`<Cards>\` component will not be grouped with other cards. This can
+be useful if you want to display a single card in a different format than the other cards on the
+page.
 
-#### Example
+### Example
 
 <br/>
 
 ${mdx2}
 
-#### Usage
+### Usage
 
 ~~~mdx filename="MDX"
 ${mdx2}
@@ -72,4 +76,4 @@ ${mdx2}
   return { props }
 }
 
-<RemoteContent components={{ Cards, CardsIcon, OneIcon, WarningIcon }} />
+<RemoteContent components={{ Cards, CardsIcon, OneIcon, WarningIcon, BoxIcon }} />
