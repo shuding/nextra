@@ -72,22 +72,31 @@ information.
 For example, let’s implement these features:
 
 - Render the page title in `<title>`
-- Show a simple table of contents
+- Show a simple Table of Contents via MDX `<Wrapper>` component
 - Add a meta tag for `og:image` via the front matter
 
 ```tsx filename="theme.tsx" /pageOpts/
 import Head from 'next/head'
+import { MDXProvider } from 'nextra/mdx'
 import type { NextraThemeLayoutProps } from 'nextra'
 
 export default function Layout({ children, pageOpts }: NextraThemeLayoutProps) {
-  const { title, frontMatter, toc } = pageOpts
+  const { title, frontMatter } = pageOpts
 
   return (
-    <div>
+    <>
       <Head>
         <title>{title}</title>
         <meta name="og:image" content={frontMatter.image} />
       </Head>
+      <MDXProvider components={{ wrapper: MyWrapper }}>{children}</MDXProvider>
+    </>
+  )
+}
+
+function MyWrapper({ children, toc }) {
+  return (
+    <>
       <h1>My Theme</h1>
       Table of Contents:
       <ul>
@@ -96,7 +105,7 @@ export default function Layout({ children, pageOpts }: NextraThemeLayoutProps) {
         ))}
       </ul>
       <div style={{ border: '1px solid' }}>{children}</div>
-    </div>
+    </>
   )
 }
 ```
@@ -121,14 +130,13 @@ export default function Layout({ children, pageOpts }: NextraThemeLayoutProps) {
     <div>
       <h1>My Theme</h1>
       {pageMap.map(item => {
-        if (item.kind === 'MdxPage') {
+        if ('route' in item && !('children' in item)) {
           return (
             <Link key={item.name} href={item.route}>
               {item.route}
             </Link>
           )
         }
-        return null
       })}
       <div style={{ border: '1px solid' }}>{children}</div>
     </div>
