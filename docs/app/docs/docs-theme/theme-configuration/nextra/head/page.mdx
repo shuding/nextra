@@ -1,5 +1,5 @@
 import { Table } from '../../nextra-theme-docs/layout/page.mdx'
-import { Hue, Saturation } from './_slider'
+import { Hue, Saturation, BackgroundColor } from './_slider'
 
 # `Head`
 
@@ -44,7 +44,27 @@ export default function MyLayout({ children, ...props }) {
 
 You can dynamically generate the head tags based on the current page’s front matter. For example:
 
-```jsx filename="[[...mdxPath]]/page.jsx"
+### via Markdown front matter
+
+```mdx filename="my-page/page.mdx"
+---
+title: My title
+description: My description
+---
+```
+
+### via exporting `metadata` object
+
+```mdx filename="my-page/page.mdx"
+export const metadata = {
+  title: 'My title',
+  description: 'My description'
+}
+```
+
+### in [dynamic routes with Catch-all segment](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes#catch-all-segments)
+
+```jsx filename="app/[[...mdxPath]]/page.jsx"
 export async function generateMetadata({ params: { mdxPath } }) {
   const { metadata } = await loadPage(mdxPath)
   return {
@@ -62,9 +82,9 @@ for more information about the `useConfig` hook and the `frontMatter` object.
 You can adjust the theme color of the website by setting primary hue and
 saturation values for light and dark themes. Try it out for this website:
 
-| Hue     | Saturation     |
-| ------- | -------------- |
-| <Hue /> | <Saturation /> |
+| Hue     | Saturation     | Background Color |
+| ------- | -------------- | -- |
+| <Hue /> | <Saturation /> | <BackgroundColor/> |
 
 ## Favicon Glyph
 
