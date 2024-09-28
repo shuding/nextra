@@ -1,8 +1,8 @@
 import { Callout, Steps } from 'nextra/components'
+import InstallNextraTheme from '@components/install-nextra-theme.mdx'
+import ReadeToGo from '@components/ready-to-go.mdx'
 
 # Get Started
-
-<Callout type="warning">Docs for this theme is under construction.</Callout>
 
 <Callout>
   An example of the blog theme can be found [here](https://demo.vercel.blog),
@@ -32,24 +32,7 @@ npm i next react react-dom nextra nextra-theme-blog
   install `nextra` and `nextra-theme-blog` as the add-ons.
 </Callout>
 
-Add the following scripts in `package.json`:
-
-```json filename="package.json"
-"scripts": {
-  "dev": "next",
-  "build": "next build",
-  "start": "next start"
-},
-```
-
-You can either start the server with, for example if you use npm, `npm run dev`,
-which will run in development mode or `npm run build && npm run start` for
-production mode.
-
-<Callout>
-  If you're not familiar with Next.js, note that development mode is
-  significantly slower since Next.js compiles every page you navigate to.
-</Callout>
+<InstallNextraTheme/>
 
 ### Add Next.js Config
 
@@ -102,9 +85,6 @@ export default {
 }
 ```
 
-### Ready to Go!
-
-Now, you can run the `next` or `next dev` command specified in `package.json` to
-start developing the project! 🎉
+<ReadeToGo/>
 
 </Steps>
