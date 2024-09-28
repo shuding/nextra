@@ -1,7 +1,3 @@
-export const metadata = {
-  asIndexPage: true
-}
-
 import { Screenshot } from 'components/screenshot'
 import { Callout } from 'nextra/components'
 import navigationImage from 'public/assets/docs/navigation.png'
@@ -9,10 +5,10 @@ import sidebarTitleComponentImage from 'public/assets/docs/sidebar-customized.pn
 
 # `Layout`
 
-The theme is configured with the `<Layout>` component. You should pass `props`
-with your config options, for example:
+The theme is configured with the `<Layout>` component. You should pass your
+config options as Layout's `props`, for example:
 
-```jsx filename="app/layout.jsx"
+```jsx filename="app/layout.jsx" {8-9}
 import { Layout } from 'nextra-theme-docs'
 
 export default function MyLayout({ children, ...props }) {
@@ -21,7 +17,7 @@ export default function MyLayout({ children, ...props }) {
       <body>
         <Layout
           logo={<b>Project</b>}
-          project={{ link: 'https://github.com/shuding/nextra' }}
+          docsRepositoryBase="https://github.com/shuding/nextra/tree/main/docs"
         >
           {children}
         </Layout>
