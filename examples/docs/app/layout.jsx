@@ -34,7 +34,7 @@ export default async function RootLayout({ children }) {
       <Head faviconGlyph="✦" />
       <body>
         <Layout
-          editLink={{ content: 'Edit this page on GitHub' }}
+          editLink="Edit this page on GitHub"
           docsRepositoryBase="https://github.com/shuding/nextra/blob/core/examples/docs"
           sidebar={{ defaultMenuCollapseLevel: 1 }}
           pageMap={pageMap}
