@@ -368,41 +368,6 @@ of the content.
 
 </Table>
 
-## Footer
-
-The footer area of the website. You can either specify some content for the
-default footer, or fully customize it with a custom component.
-
-<Table>
-
-|                  |                                                  |                                 |
-| ---------------- | ------------------------------------------------ | ------------------------------- |
-| footer.content   | `React.ReactNode \| React.FC`                    | Content of the footer component |
-| footer.component | `React.ReactNode \| React.FC<{ menu: boolean }>` | Customized footer component     |
-
-</Table>
-
-### Copyright Information
-
-You can add some simple content, such as copyright information to the default
-footer:
-
-```jsx
-export default {
-  footer: {
-    text: (
-      <span>
-        MIT {new Date().getFullYear()} ©{' '}
-        <a href="https://nextra.site" target="_blank">
-          Nextra
-        </a>
-        .
-      </span>
-    )
-  }
-}
-```
-
 ## Theme Switch
 
 <Table>
