@@ -31,7 +31,7 @@ export function TOC({ toc, filePath, pageTitle }: TOCProps): ReactElement {
   const hasHeadings = toc.length > 0
   const hasMetaInfo = Boolean(
     themeConfig.feedback.content ||
-      themeConfig.editLink.content ||
+      themeConfig.editLink ||
       themeConfig.toc.extraContent ||
       themeConfig.toc.backToTop
   )
@@ -116,12 +116,12 @@ export function TOC({ toc, filePath, pageTitle }: TOCProps): ReactElement {
             </Anchor>
           )}
 
-          {themeConfig.editLink.content && (
+          {themeConfig.editLink && (
             <Anchor
               className={linkClassName}
               href={`${gitUrlParse(themeConfig.docsRepositoryBase).href}/${filePath}`}
             >
-              {themeConfig.editLink.content}
+              {themeConfig.editLink}
             </Anchor>
           )}
 

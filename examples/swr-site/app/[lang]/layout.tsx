@@ -1,7 +1,13 @@
 /* eslint-env node */
 import { SwrIcon, VercelIcon } from '@app/_icons'
 import type { Metadata } from 'next'
-import { Footer, Layout, LocaleSwitch, Navbar } from 'nextra-theme-docs'
+import {
+  Footer,
+  LastUpdated,
+  Layout,
+  LocaleSwitch,
+  Navbar
+} from 'nextra-theme-docs'
 import { Banner, Head } from 'nextra/components'
 import { normalizePageMap } from 'nextra/page-map'
 import { getDictionary, getDirection } from '../_dictionaries/get-dictionary'
@@ -81,9 +87,10 @@ export default async function RootLayout({ children, params: { lang } }) {
               <img alt="placeholder cat" src="https://placecats.com/300/200" />
             )
           }}
-          editLink={{ content: dictionary.editPage }}
+          editLink={dictionary.editPage}
           pageMap={pageMap}
           nextThemes={{ defaultTheme: 'dark' }}
+          lastUpdated={<LastUpdated>{dictionary.lastUpdated}</LastUpdated>}
         >
           <Banner storageKey="swr-2">SWR 2.0 is out! Read more →</Banner>
           <Navbar

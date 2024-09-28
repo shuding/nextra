@@ -2,6 +2,7 @@ import type { Dictionary } from './i18n-config'
 
 export default {
   backToTop: 'Перейти наверх',
+  lastUpdated: 'Последнее обновление',
   logo: {
     title: 'React хуки для выборки данных'
   },
