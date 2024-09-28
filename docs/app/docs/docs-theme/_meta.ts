@@ -1,5 +1,5 @@
 export default {
   start: '',
   'page-configuration': '',
-  'theme-configuration': ''
+  'theme-configuration': 'Components'
 }
