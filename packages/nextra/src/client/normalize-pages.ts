@@ -18,6 +18,7 @@ const DEFAULT_PAGE_THEME: PageTheme = {
   sidebar: true,
   timestamp: true,
   toc: true,
+  topLevelLink: true,
   typesetting: 'default'
 }
 
@@ -343,14 +344,16 @@ export function normalizePages({
           pageItem.children.push(...normalizedChildren.directories)
           docsDirectories.push(...normalizedChildren.docsDirectories)
 
-          // If it's a page with children inside, we inject itself as a page too.
-          if (normalizedChildren.flatDirectories.length) {
-            pageItem.firstChildRoute = findFirstRoute(
-              normalizedChildren.flatDirectories
-            )
-            topLevelNavbarItems.push(pageItem)
-          } else if (pageItem.withIndexPage) {
-            topLevelNavbarItems.push(pageItem)
+          if (extendedMeta.theme?.topLevelLink) {
+            // If it's a page with children inside, we inject itself as a page too.
+            if (normalizedChildren.flatDirectories.length) {
+              pageItem.firstChildRoute = findFirstRoute(
+                normalizedChildren.flatDirectories
+              )
+              topLevelNavbarItems.push(pageItem)
+            } else if (pageItem.withIndexPage) {
+              topLevelNavbarItems.push(pageItem)
+            }
           }
 
           break
@@ -374,7 +377,9 @@ export function normalizePages({
       switch (type) {
         case 'page':
         case 'menu':
-          topLevelNavbarItems.push(pageItem)
+          if (extendedMeta.theme?.topLevelLink) {
+            topLevelNavbarItems.push(pageItem)
+          }
           break
         case 'doc': {
           const withHrefProp = 'href' in item
