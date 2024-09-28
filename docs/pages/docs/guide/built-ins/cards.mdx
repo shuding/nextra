@@ -1,0 +1,46 @@
+import { CardsIcon, OneIcon, WarningIcon } from '@components/icons'
+import { Cards, RemoteContent } from 'nextra/components'
+import { buildDynamicMDX } from 'nextra/remote'
+
+export async function getStaticProps() {
+  const mdx = `
+<Cards>
+  <Cards.Card
+    icon={<WarningIcon />}
+    title="Callout"
+    href="/docs/guide/built-ins/callout"
+  />
+  <Cards.Card
+    icon={<CardsIcon />}
+    title="Tabs"
+    href="/docs/guide/built-ins/tabs"
+  />
+  <Cards.Card
+    icon={<OneIcon />}
+    title="Steps"
+    href="/docs/guide/built-ins/steps"
+  />
+</Cards>`
+  const props = await buildDynamicMDX(`
+# Cards Component
+
+## Example
+
+A built-in component to embed a link in a card with an icon.
+
+${mdx}
+
+## Usage
+
+First, import the \`Card\` and \`Cards\` components. Then, import the icons that you
+want to use. To create a set of cards, follow the example below.
+
+~~~mdx filename="MDX"
+import { Cards } from 'nextra/components'
+import { CardsIcon, OneIcon, WarningIcon } from '../path/with/your/icons'
+${mdx}
+~~~`)
+  return { props }
+}
+
+<RemoteContent components={{ Cards, CardsIcon, OneIcon, WarningIcon }} />

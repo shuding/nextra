@@ -1,6 +1,6 @@
 import { useTheme } from 'next-themes'
-import { MoonIcon, SunIcon } from 'nextra/icons'
 import { useMounted } from 'nextra/hooks'
+import { MoonIcon, SunIcon } from 'nextra/icons'
 
 export default function ThemeSwitch() {
   const { setTheme, resolvedTheme } = useTheme()
@@ -16,7 +16,7 @@ export default function ThemeSwitch() {
     <span
       role="button"
       aria-label="Toggle Dark Mode"
-      className="nx-cursor-pointer nx-p-2 nx-text-current"
+      className="_cursor-pointer _p-2 _text-current"
       tabIndex={0}
       onClick={toggleTheme}
       onKeyDown={e => {

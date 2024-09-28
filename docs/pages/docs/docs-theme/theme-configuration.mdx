@@ -1,27 +1,31 @@
 import { Screenshot } from 'components/screenshot'
+import { OptionTable } from 'components/table'
+import { Callout } from 'nextra/components'
+import sidebarTitleComponentImage from 'public/assets/docs/sidebar-customized.png'
 
 # Theme Configuration
 
-The theme is configured with the [theme.config.jsx](/docs/docs-theme/start#create-docs-theme-config) file. It should export an object that contains your configurations, for example:
+The theme is configured with the
+[theme.config.jsx](/docs/docs-theme/start#create-docs-theme-config) file. It
+should export an object that contains your configurations, for example:
 
 ```jsx filename="theme.config.jsx"
 export default {
   project: {
     link: 'https://github.com/shuding/nextra'
   },
-  logo: <strong>Project</strong>
+  logo: <b>Project</b>
 }
 ```
 
 Detailed information for each option is listed below.
 
-import { OptionTable } from 'components/table'
-
 ## Global
 
 ### Docs Repository
 
-Set the repository URL of the documentation. It’s used to generate the “[Edit this page](#edit-link)” link and the “[Feedback](#feedback-link)” link.
+Set the repository URL of the documentation. It’s used to generate the
+“[Edit this page](#edit-link)” link and the “[Feedback](#feedback-link)” link.
 
 <OptionTable
   options={[
@@ -31,68 +35,22 @@ Set the repository URL of the documentation. It’s used to generate the “[Edi
 
 #### Specify a Path
 
-If the documentation is inside a monorepo, a subfolder, or a different branch of the repository, you can simply set the `docsRepositoryBase` to the root path of the `pages/` folder of your docs. For example:
+If the documentation is inside a monorepo, a subfolder, or a different branch of
+the repository, you can simply set the `docsRepositoryBase` to the root path of
+the `pages/` folder of your docs. For example:
 
 ```js
 export default {
-  docsRepositoryBase: 'https://github.com/shuding/nextra/blob/main/docs/pages'
+  docsRepositoryBase: 'https://github.com/shuding/nextra/tree/main/docs'
 }
 ```
 
 Then Nextra will automatically generate the correct file path for all pages.
 
-### SEO Options
-
-You can configure SEO related settings via the `useNextSeoProps` option. The `useNextSeoProps` function returns the props that will be passed to the [Next SEO](https://github.com/garmeeh/next-seo#add-seo-to-page) component.
-
-It is also a hook, so you can use APIs like `useRouter` inside to return values conditionally.
-
-<OptionTable
-  options={[
-    [
-      'useNextSeoProps',
-      '() => NextSeoProps',
-      'A React hook function that returns options for Next SEO.'
-    ]
-  ]}
-/>
-
-For example, we can have all pages rendering the same suffix for `<title>`:
-
-import titleSuffixImage from '../../../public/assets/docs/title-suffix.png'
-
-<Screenshot src={titleSuffixImage} alt="Title suffix" />
-
-```js
-export default {
-  useNextSeoProps() {
-    return {
-      titleTemplate: '%s – SWR'
-    }
-  }
-}
-```
-
-The `%s` is a [placeholder](https://github.com/garmeeh/next-seo#title-template) that will be replaced by the page title.
-
-You can also return it conditionally to avoid adding the suffix to the homepage:
-
-```js
-export default {
-  useNextSeoProps() {
-    const { asPath } = useRouter()
-    if (asPath !== '/') {
-      return {
-        titleTemplate: '%s – SWR'
-      }
-    }
-  }
-}
-```
-
 ### Head Tags
 
-Configure the `<head>` tags of the website. You can add meta tags, title, favicon, etc.
+Configure the `<head>` tags of the website. You can add meta tags, title,
+favicon, etc.
 
 <OptionTable
   options={[
@@ -106,9 +64,10 @@ Configure the `<head>` tags of the website. You can add meta tags, title, favico
   ]}
 />
 
-#### Static head tags
+#### Static Head Tags
 
-If you have only static head tags, it’s easy to directly put them in `head`. For example:
+If you have only static head tags, it’s easy to directly put them in `head`. For
+example:
 
 ```jsx
 export default {
@@ -122,9 +81,10 @@ export default {
 }
 ```
 
-#### Dynamic tags based on page
+#### Dynamic Tags Based on Page
 
-You can also use a _function component_ as `head` to dynamically generate the head tags based on the current page’s front matter. For example:
+You can also use a _function component_ as `head` to dynamically generate the
+head tags based on the current page’s front matter. For example:
 
 ```jsx
 import { useRouter } from 'next/router'
@@ -152,7 +112,8 @@ export default {
 }
 ```
 
-You can refer to the [`useConfig`](/docs/docs-theme/api/use-config) API section for more information about the `useConfig` hook and the `frontMatter` object.
+You can refer to the [`useConfig`](/docs/docs-theme/api/use-config) API section
+for more information about the `useConfig` hook and the `frontMatter` object.
 
 ### Dark Mode and Themes
 
@@ -180,43 +141,76 @@ Customize the theme behavior of the website.
 
 ### Theme Color
 
-You can adjust the theme color of the website by setting a primary hue value to dark or light themes.
+You can adjust the theme color of the website by setting primary hue and
+saturation values for light and dark themes.
 
 <OptionTable
   options={[
     [
-      'primaryHue',
+      'color.hue',
       'number | { dark: number; light: number }',
       'The hue of the primary theme color.'
+    ],
+    [
+      'color.saturation',
+      'number | { dark: number; light: number }',
+      'The saturation of the primary theme color.'
     ]
   ]}
 />
 
 Try it out for this website:
 
-<div className="mt-4 flex h-6 items-center gap-2">
-  <input
-    type="range"
-    min="0"
-    max="360"
-    step="1"
-    onChange={e => {
-      const hue = e.target.value
-      document.documentElement.style.setProperty(
-        '--nextra-primary-hue',
-        hue + 'deg'
-      )
-      document.getElementById('test-theme-hue').innerText = hue
-    }}
-  />
-  <code id="test-theme-hue" className="text-sm text-gray-500"></code>
-</div>
+| Hue   | Saturation   |
+| ----- | ------------ |
+| {hue} | {saturation} |
+
+export const hue = (
+  <div className="flex h-6 items-center gap-2">
+    <input
+      type="range"
+      min="0"
+      max="360"
+      step="1"
+      onChange={e => {
+        const value = `${e.target.value}deg`
+        e.target.nextSibling.textContent = value
+        document.documentElement.style.setProperty(
+          '--nextra-primary-hue',
+          value
+        )
+      }}
+    />
+    <label className="text-sm text-gray-500 w-14" />
+  </div>
+)
+
+export const saturation = (
+  <div className="flex h-6 items-center gap-2">
+    <input
+      type="range"
+      min="0"
+      max="100"
+      step="1"
+      onChange={e => {
+        const value = `${e.target.value}%`
+        e.target.nextSibling.textContent = value
+        document.documentElement.style.setProperty(
+          '--nextra-primary-saturation',
+          value
+        )
+      }}
+    />
+    <label className="text-sm text-gray-500 w-14" />
+  </div>
+)
 
 ## Navbar
 
 ### Logo
 
-The logo of the website rendered on the navbar. It can be a React node or a function component.
+The logo of the website rendered on the navbar. It can be a React node or a
+function component.
 
 <OptionTable
   options={[
@@ -225,14 +219,13 @@ The logo of the website rendered on the navbar. It can be a React node or a func
   ]}
 />
 
-import logoImage from '../../../public/assets/docs/logo.png'
+import logoImage from 'public/assets/docs/logo.png'
 
 <Screenshot src={logoImage} alt="Customized Logo" />
 
 <div className="mt-8 text-center text-sm">
   [Live example on StackBlitz
   ↗](https://stackblitz.com/edit/nextra-2-docs-yrlccm?file=theme.config.jsx)
-  <span className="sr-only"> (opens in a new tab)</span>
 </div>
 
 ```jsx
@@ -255,7 +248,8 @@ export default {
 
 ### Project Link
 
-Show a button that links to your project’s homepage on the navbar. By default, it links to Nextra’s GitHub repository.
+Show a button that links to your project’s homepage on the navbar. By default,
+it links to Nextra’s GitHub repository.
 
 <OptionTable
   options={[
@@ -268,9 +262,10 @@ Show a button that links to your project’s homepage on the navbar. By default,
   ]}
 />
 
-You can configure `project.link` and `project.icon` to customize the project link, for example make it link to your GitLab repository:
+You can configure `project.link` and `project.icon` to customize the project
+link, for example make it link to your GitLab repository:
 
-import projectLinkImage from '../../../public/assets/docs/project-link.png'
+import projectLinkImage from 'public/assets/docs/project-link.png'
 
 <Screenshot src={projectLinkImage} alt="Project link" full />
 
@@ -290,11 +285,13 @@ export default {
 }
 ```
 
-If `icon` is missing, it will be a [GitHub icon](https://primer.style/octicons/mark-github-16) by default.
+If `icon` is missing, it will be a
+[GitHub icon](https://primer.style/octicons/mark-github-16) by default.
 
 ### Chat Link
 
-Show a button that links to your project’s forum or other social media on the navbar.
+Show a button that links to your project’s forum or other social media on the
+navbar.
 
 <OptionTable
   options={[
@@ -307,7 +304,8 @@ Show a button that links to your project’s forum or other social media on the 
   ]}
 />
 
-You can configure `chat.link` and `chat.icon` to customize the chat link, for example make it link to your Twitter account:
+You can configure `chat.link` and `chat.icon` to customize the chat link, for
+example make it link to your Twitter account:
 
 ```jsx
 export default {
@@ -329,7 +327,8 @@ If `icon` is missing, it will be a Discord icon by default.
 
 ### Menu and Custom Links
 
-Check out [Page Configuration](/docs/docs-theme/page-configuration#navbar-items) to learn how to add custom menus or links to the navbar.
+Check out [Page Configuration](/docs/docs-theme/page-configuration#navbar-items)
+to learn how to add custom menus or links to the navbar.
 
 ### Search
 
@@ -352,7 +351,8 @@ Check out [Page Configuration](/docs/docs-theme/page-configuration#navbar-items)
 
 ### Banner
 
-Show a dismissible banner on the top of the website. It can be used to show a warning or a notice.
+Show a banner on the top of the website. It can be used to show a warning or a
+notice.
 
 <OptionTable
   options={[
@@ -362,17 +362,22 @@ Show a dismissible banner on the top of the website. It can be used to show a wa
       'string',
       'Storage key to keep the banner state (dismissed or not).'
     ],
-    ['banner.text', 'React.ReactNode | React.FC', 'Text of the banner.']
+    ['banner.content', 'React.ReactNode | React.FC', 'Content of the banner.']
   ]}
 />
 
 #### Banner key
 
-A banner can be dismissed. By default `banner.key` will be `"nextra-banner"` and it’s used by [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) to keep the banner state (dismissed or not) on the client.
+A banner can be dismissed. By default `banner.key` will be `"nextra-banner"` and
+it’s used by
+[localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
+to keep the banner state (dismissed or not) on the client.
 
-If you have updated your banner text, you should change the key to make sure the banner is shown again. The best practice is to always use a descriptive key for the current text, for example:
+If you have updated your banner text, you should change the key to make sure the
+banner is shown again. The best practice is to always use a descriptive key for
+the current text, for example:
 
-import bannerImage from '../../../public/assets/docs/banner.png'
+import bannerImage from 'public/assets/docs/banner.png'
 
 <Screenshot src={bannerImage} alt="Banner" />
 
@@ -418,13 +423,9 @@ Customize the entire navbar component.
       'Specifies the folder level at which the menu on the left is collapsed by default. Defaults to 2.'
     ],
     [
-      'sidebar.titleComponent',
-      `React.ReactNode | React.FC<{
-  type: string;
-  title: string;
-  route: string;
-}>`,
-      'Custom renderer for sidebar titles.'
+      'sidebar.autoCollapse',
+      'boolean',
+      'If true, automatically collapse inactive folders above defaultMenuCollapseLevel.'
     ],
     [
       'sidebar.toggleButton',
@@ -436,64 +437,48 @@ Customize the entire navbar component.
 
 ### Menu Collapse Level
 
-By default, the sidebar menu is collapsed at level `2`. You can change it by setting `sidebar.defaultMenuCollapseLevel` to a different number. For example, when set to `1`, every folder will be collapsed by default and when set to `Infinity`, all nested folders will be expanded by default.
+By default, the sidebar menu is collapsed at level `2`. You can change it by
+setting `sidebar.defaultMenuCollapseLevel` to a different number. For example,
+when set to `1`, every folder will be collapsed by default and when set to
+`Infinity`, all nested folders will be expanded by default.
 
-### Customize sidebar content
+If `sidebar.autoCollapse` is set to `true`, then all folders that do not contain
+an active/focused route will automatically collapse up to the level set by
+`sidebar.defaultMenuCollapseLevel`. e.g. if `defaultMenuCollapseLevel` is `2`,
+then top-level folders will not auto-collapse.
 
-Together with the [Separators](/docs/docs-theme/page-configuration#separators) item, you can customize how the sidebar content is rendered by using the `sidebar.titleComponent` option:
+### Customize Sidebar Content
 
-import { Tab, Tabs } from 'nextra-theme-docs'
+Together with the [Separators](/docs/docs-theme/page-configuration#separators)
+item, you can customize how the sidebar content is rendered by using JSX
+elements:
 
-import sidebarTitleComponentImage from '../../../public/assets/docs/sidebar-customized.png'
+```jsx filename="_meta.jsx" {5-10}
+export default {
+  index: 'Intro',
+  '--': {
+    type: 'separator',
+    title: (
+      <div className="flex items-center gap-2">
+        <MyLogo />
+        {children}
+      </div>
+    )
+  },
+  frameworks: 'JS Frameworks & Libs',
+  about: 'About'
+}
+```
 
 <Screenshot src={sidebarTitleComponentImage} alt="Customized Sidebar" />
-
-<div className="mt-8 text-center text-sm">
-  [Live example on StackBlitz
-  ↗](https://stackblitz.com/edit/nextra-2-docs-8xbfk3?file=pages%2F_meta.json,theme.config.jsx)
-  <span className="sr-only"> (opens in a new tab)</span>
-</div>
-
-<Tabs items={['theme.config.jsx', 'pages/_meta.json']}>
-  <Tab>
-    ```jsx
-    export default {
-      sidebar: {
-        titleComponent({ title, type }) {
-          if (type === 'separator') {
-            return (
-              <div style={{ background: 'cyan', textAlign: 'center' }}>{title}</div>
-            )
-          }
-          if (title === 'About') {
-            return <>❓ {title}</>
-          }
-          return <>👉 {title}</>
-        }
-      }
-    }
-    ```
-  </Tab>
-  <Tab>
-    ```json
-    {
-      "index": "Intro",
-      "--": {
-        "type": "separator",
-        "title": "A Separator"
-      },
-      "frameworks": "JS Frameworks & Libs",
-      "about": "About"
-    }
-    ```
-  </Tab>
-</Tabs>
 
 ## Content
 
 ### MDX Components
 
-Provide custom [MDX components](https://mdxjs.com/table-of-components/) to render the content. For example, you can use a custom `pre` component to render code blocks.
+Provide custom [MDX components](https://mdxjs.com/table-of-components/) to
+render the content. For example, you can use a custom `pre` component to render
+code blocks.
 
 <OptionTable
   options={[
@@ -511,7 +496,8 @@ The default writing direction of the website.
 
 ### Main Content
 
-Render top and/or bottom content of main area of the page. It can be used to render a comment section, a newsletter form, or any other type of content.
+Render top and/or bottom content of main area of the page. It can be used to
+render a comment section, a newsletter form, or any other type of content.
 
 <OptionTable
   options={[
@@ -527,7 +513,8 @@ Render top and/or bottom content of main area of the page. It can be used to ren
 
 ### Table of Contents
 
-Show a table of contents on the right side of the page. It’s useful for navigating between headings.
+Show a table of contents on the right side of the page. It’s useful for
+navigating between headings.
 
 <OptionTable
   options={[
@@ -548,27 +535,30 @@ Show a table of contents on the right side of the page. It’s useful for naviga
       'Title of the TOC sidebar. By default it’s “On This Page”.'
     ],
     [
-      'toc.headingComponent',
-      'React.FC<{ id: string, children: string }>',
-      'Custom renderer of TOC headings.'
+      'toc.backToTop',
+      'React.ReactNode | React.FC',
+      'Text of `Scroll to top` button.'
     ]
   ]}
 />
 
 #### Floating TOC
 
-`toc.float` is enabled by default. When enabled, the TOC will be displayed on the right side of the page and it will be sticky when scrolling. If it’s disabled, the TOC will be displayed directly on the page sidebar.
+`toc.float` is enabled by default. When enabled, the TOC will be displayed on
+the right side of the page and it will be sticky when scrolling. If it’s
+disabled, the TOC will be displayed directly on the page sidebar.
 
 ### Edit Link
 
-Show an “Edit this page” link on the page that points to the file URL on GitHub (or other places).
+Show an “Edit this page” link on the page that points to the file URL on GitHub
+(or other places).
 
 <OptionTable
   options={[
     [
-      'editLink.text',
+      'editLink.content',
       'React.ReactNode | React.FC',
-      'Content of the default edit link.'
+      'Content of the edit link.'
     ],
     [
       'editLink.component',
@@ -576,15 +566,22 @@ Show an “Edit this page” link on the page that points to the file URL on Git
   children: React.ReactNode
   className?: string
   filePath?: string
-}>`,
+}> | null`,
       'Customized edit link component.'
     ]
   ]}
 />
 
+<Callout type="info">
+  To disable it, you can set `editLink.component` to `null`.
+</Callout>
+
 ### Feedback Link
 
-The built-in feedback link provides a way for users to submit feedback about the documentation. By default, it’s a link that points to the issue creation form of the docs repository, with the current website title prefilled: [example](https://github.com/shuding/nextra/issues/new?title=Feedback%20for%20%E2%80%9CTheme%20Configuration%E2%80%9D&labels=feedback).
+The built-in feedback link provides a way for users to submit feedback about the
+documentation. By default, it’s a link that points to the issue creation form of
+the docs repository, with the current website title prefilled:
+[example](https://github.com/shuding/nextra/issues/new?title=Feedback%20for%20%E2%80%9CTheme%20Configuration%E2%80%9D&labels=feedback).
 
 <OptionTable
   options={[
@@ -606,13 +603,16 @@ The built-in feedback link provides a way for users to submit feedback about the
   ]}
 />
 
-To disable it, you can set `feedback.content` to `null`.
+<Callout type="info">
+  To disable it, you can set `feedback.content` to `null`.
+</Callout>
 
 ## End of Page
 
 ### Navigation
 
-Show previous and next page links on the bottom of the content. It’s useful for navigating between pages.
+Show previous and next page links on the bottom of the content. It’s useful for
+navigating between pages.
 
 <OptionTable
   options={[
@@ -622,7 +622,7 @@ Show previous and next page links on the bottom of the content. It’s useful fo
   ]}
 />
 
-import navigationImage from '../../../public/assets/docs/navigation.png'
+import navigationImage from 'public/assets/docs/navigation.png'
 
 <Screenshot src={navigationImage} alt="Navigation" full />
 
@@ -639,7 +639,8 @@ The above is also equivalent to `navigation: true`.
 
 ### Last Updated Date
 
-Show the last updated date of each page. It’s useful for showing the freshness of the content.
+Show the last updated date of each page. It’s useful for showing the freshness
+of the content.
 
 <OptionTable
   options={[
@@ -653,14 +654,15 @@ Show the last updated date of each page. It’s useful for showing the freshness
 
 ## Footer
 
-The footer area of the website. You can either specify some content for the default footer, or fully customize it with a custom component.
+The footer area of the website. You can either specify some content for the
+default footer, or fully customize it with a custom component.
 
 <OptionTable
   options={[
     [
-      'footer.text',
+      'footer.content',
       'React.ReactNode | React.FC',
-      'Content of the default footer component.'
+      'Content of the footer component.'
     ],
     [
       'footer.component',
@@ -670,9 +672,10 @@ The footer area of the website. You can either specify some content for the defa
   ]}
 />
 
-### Copyright information
+### Copyright Information
 
-You can add some simple content, such as copyright information to the default footer:
+You can add some simple content, such as copyright information to the default
+footer:
 
 ```jsx
 export default {
@@ -729,11 +732,10 @@ export default {
 
 ### 404 - Not Found
 
-### 500 - Internal Server Error
+## Favicon Glyph
 
-## Favicon Glyph (Experimental)
-
-This isn’t supported by all browsers, but it’s a nice way to customize the favicon of the website simply by using an emoji or character.
+This isn’t supported by all browsers, but it’s a nice way to customize the
+favicon of the website simply by using an emoji or character.
 
 <OptionTable
   options={[['faviconGlyph', `string`, 'The glyph to use as the favicon.']]}

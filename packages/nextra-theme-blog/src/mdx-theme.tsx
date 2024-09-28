@@ -1,21 +1,19 @@
-import type { RefObject, ComponentProps, ReactElement, ReactNode } from 'react'
+import Link from 'next/link'
+import { Code, Pre, Table, Td, Th, Tr } from 'nextra/components'
+import type { MDXComponents } from 'nextra/mdx'
+import type { ComponentProps, ReactElement, ReactNode, RefObject } from 'react'
 import {
-  createRef,
   createContext,
+  createRef,
   useContext,
   useEffect,
   useState
 } from 'react'
-import { MDXProvider } from 'nextra/mdx'
-import Link from 'next/link'
 import { createPortal } from 'react-dom'
-import { Code, Pre, Table, Td, Th, Tr } from 'nextra/components'
 import { useBlogContext } from './blog-context'
-import type { Components } from 'nextra/mdx'
 
-export const HeadingContext = createContext<
-  RefObject<HTMLHeadingElement | null>
->(createRef())
+export const HeadingContext =
+  createContext<RefObject<HTMLHeadingElement | null>>(createRef())
 
 const H1 = ({ children }: { children?: ReactNode }): ReactElement => {
   const ref = useContext(HeadingContext)
@@ -33,67 +31,63 @@ function HeadingLink({
   tag: Tag,
   children,
   id,
+  className,
   ...props
 }: ComponentProps<'h2'> & { tag: `h${2 | 3 | 4 | 5 | 6}` }): ReactElement {
   return (
-    <Tag className={`subheading-${Tag}`} {...props}>
+    <Tag
+      id={id}
+      className={
+        // can be added by footnotes
+        className === 'sr-only' ? '_sr-only' : `subheading-${Tag}`
+      }
+      {...props}
+    >
       {children}
-      <span className="nx-absolute -nx-mt-7" id={id} />
-      <a
-        href={id && `#${id}`}
-        className="subheading-anchor"
-        aria-label="Permalink for this section"
-      />
+      {id && (
+        <a
+          href={`#${id}`}
+          className="_not-prose subheading-anchor"
+          aria-label="Permalink for this section"
+        />
+      )}
     </Tag>
   )
 }
 
-const A = ({ children, ...props }: ComponentProps<'a'>) => {
-  const isExternal =
-    props.href?.startsWith('https://') || props.href?.startsWith('http://')
-  if (isExternal) {
+const EXTERNAL_HREF_REGEX = /https?:\/\//
+
+const A = ({ children, href = '', ...props }: ComponentProps<'a'>) => {
+  if (EXTERNAL_HREF_REGEX.test(href)) {
     return (
-      <a target="_blank" rel="noreferrer" {...props}>
+      <a href={href} target="_blank" rel="noreferrer" {...props}>
         {children}
-        <span className="nx-sr-only"> (opens in a new tab)</span>
       </a>
     )
   }
-  return props.href ? (
-    <Link href={props.href} passHref legacyBehavior>
-      <a {...props}>{children}</a>
+  return (
+    <Link href={href} {...props}>
+      {children}
     </Link>
-  ) : null
+  )
 }
 
-const useComponents = (): Components => {
-  const { config } = useBlogContext()
-  return {
-    h1: H1,
-    h2: props => <HeadingLink tag="h2" {...props} />,
-    h3: props => <HeadingLink tag="h3" {...props} />,
-    h4: props => <HeadingLink tag="h4" {...props} />,
-    h5: props => <HeadingLink tag="h5" {...props} />,
-    h6: props => <HeadingLink tag="h6" {...props} />,
-    a: A,
-    pre: ({ children, ...props }) => (
-      <div className="nx-not-prose">
-        <Pre {...props}>{children}</Pre>
-      </div>
-    ),
-    tr: Tr,
-    th: Th,
-    td: Td,
-    table: props => <Table className="nx-not-prose" {...props} />,
-    code: Code,
-    ...config.components
-  }
-}
-
-export const MDXTheme = ({
-  children
-}: {
-  children: ReactNode
-}): ReactElement => {
-  return <MDXProvider components={useComponents()}>{children}</MDXProvider>
+export const components: MDXComponents = {
+  h1: H1,
+  h2: props => <HeadingLink tag="h2" {...props} />,
+  h3: props => <HeadingLink tag="h3" {...props} />,
+  h4: props => <HeadingLink tag="h4" {...props} />,
+  h5: props => <HeadingLink tag="h5" {...props} />,
+  h6: props => <HeadingLink tag="h6" {...props} />,
+  a: A,
+  pre: ({ children, ...props }) => (
+    <Pre className="_not-prose" {...props}>
+      {children}
+    </Pre>
+  ),
+  tr: Tr,
+  th: Th,
+  td: Td,
+  table: props => <Table className="_not-prose" {...props} />,
+  code: Code
 }

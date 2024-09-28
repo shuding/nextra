@@ -1,22 +1,20 @@
 {
   "name": "example-blog",
-  "private": true,
-  "main": "index.js",
+  "type": "module",
   "license": "MIT",
+  "private": true,
   "scripts": {
-    "dev": "next",
     "build": "next build",
-    "start": "next start",
-    "debug": "NODE_OPTIONS='--inspect' next dev",
-    "vercel-build": "yarn workspace nextra run build && yarn workspace nextra-theme-docs run build && yarn build",
-    "clean": "rimraf .next .turbo"
+    "clean": "rimraf .next .turbo",
+    "dev": "next",
+    "start": "next start"
   },
   "dependencies": {
-    "react": "*",
-    "react-dom": "*",
-    "next": ">=13",
+    "next": "^14.2.5",
     "nextra": "workspace:*",
-    "nextra-theme-blog": "workspace:*"
+    "nextra-theme-blog": "workspace:*",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "dependenciesMeta": {
     "nextra": {

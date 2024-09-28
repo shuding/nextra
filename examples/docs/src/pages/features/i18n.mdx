@@ -1,4 +1,4 @@
-import { Callout } from 'nextra-theme-docs'
+import { Callout } from 'nextra/components'
 
 # Next.js I18n
 
@@ -6,14 +6,22 @@ import { Callout } from 'nextra-theme-docs'
   This feature is only available in the docs theme.
 </Callout>
 
-Nextra supports [Next.js Internationalized Routing](https://nextjs.org/docs/advanced-features/i18n-routing) out of the box.
+Nextra supports
+[Next.js Internationalized Routing](https://nextjs.org/docs/advanced-features/i18n-routing)
+out of the box.
 
-To add multi-language pages to your Nextra application, just need to config `i18n` in `next.config.js`:
+To add multi-language pages to your Nextra application, just need to config
+`i18n` in `next.config.mjs`:
 
-```js filename="next.config.js"
-const withNextra = require('nextra')('nextra-theme-docs', './theme.config.js')
+```js filename="next.config.mjs"
+import nextra from 'nextra'
 
-module.exports = withNextra({
+const withNextra = nextra({
+  theme: 'nextra-theme-docs',
+  themeConfig: './theme.config.js'
+})
+
+export default withNextra({
   i18n: {
     locales: ['en', 'zh', 'de'],
     defaultLocale: 'en'
@@ -21,7 +29,8 @@ module.exports = withNextra({
 })
 ```
 
-Then, add the locale codes to your file extensions (required for the default locale too):
+Then, add the locale codes to your file extensions (required for the default
+locale too):
 
 ```text
 /pages
@@ -34,7 +43,8 @@ Then, add the locale codes to your file extensions (required for the default loc
   ...
 ```
 
-Finally, add the `i18n` option to your `theme.config.js` to configure the language dropdown:
+Finally, add the `i18n` option to your `theme.config.js` to configure the
+language dropdown:
 
 ```jsx filename="theme.config.js"
 i18n: [

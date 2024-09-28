@@ -1,0 +1,41 @@
+import {
+  CardsIcon,
+  FolderTreeIcon,
+  IdCardIcon,
+  OneIcon,
+  WarningIcon
+} from '@components/icons'
+import { Cards } from 'nextra/components'
+
+# Built-ins
+
+Nextra includes a couple of built-in components that you can use to better style
+your content:
+
+<Cards>
+  <Cards.Card
+    icon={<WarningIcon />}
+    title="Callout"
+    href="/docs/guide/built-ins/callout"
+  />
+  <Cards.Card
+    icon={<CardsIcon />}
+    title="Tabs"
+    href="/docs/guide/built-ins/tabs"
+  />
+  <Cards.Card
+    icon={<IdCardIcon />}
+    title="Cards"
+    href="/docs/guide/built-ins/cards"
+  />
+  <Cards.Card
+    icon={<OneIcon />}
+    title="Steps"
+    href="/docs/guide/built-ins/steps"
+  />
+  <Cards.Card
+    icon={<FolderTreeIcon className="size-5" />}
+    title="FileTree"
+    href="/docs/guide/built-ins/filetree"
+  />
+</Cards>

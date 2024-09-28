@@ -1,16 +1,12 @@
-.next/
-out/
-dist/
 pnpm-lock.yaml
 .changeset/*.md
-packages/nextra-theme-blog/style.css
-packages/nextra-theme-docs/style.css
+generated-page-map.js
 
-# bellow files are broken since prettier doesn't support MDX2
-examples/swr-site/pages/remote/graphql-eslint/\[\[...slug\]\].mdx
-docs/pages/docs/blog-theme/start.mdx
-docs/pages/docs/docs-theme/start.mdx
-examples/docs/src/pages/themes/docs/index.mdx
-examples/docs/src/pages/get-started.mdx
-examples/swr-site/pages/blog.en-US.mdx
-docs/pages/docs/guide/latex.mdx
+docs/pages/docs/guide/advanced/latex.mdx
+
+examples/swr-site/nextra-remote-filepaths/*.json
+examples/swr-site/pages/en/remote/graphql-eslint/_meta.ts
+examples/swr-site/pages/en/remote/graphql-yoga/_meta.ts
+
+docs/pages/docs/guide/built-ins/cards.mdx
+docs/pages/docs/guide/advanced/playground.mdx

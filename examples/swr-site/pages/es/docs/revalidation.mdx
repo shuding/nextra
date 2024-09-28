@@ -1,0 +1,105 @@
+import Video from '@components/video'
+import { Bleed } from 'nextra-theme-docs'
+import { Callout } from 'nextra/components'
+
+# Revalidación Automática
+
+<Callout>
+  Si quiere revalidar manualmente los datos, compruebe
+  [mutation](/docs/mutation).
+</Callout>
+
+## Revalidar on focus
+
+Al reenfocar una pagina o cambiar entre tabs, SWR revalida automáticamente los
+datos.
+
+Esto puede ser útil para sincronizar inmediatamente a el último estado. Esto es
+útil para refrescar los datos en escenarios como stale mobile tabs, o laptops
+que están **suspendida**.
+
+<Bleed>
+  <Video
+    src="https://raw.githubusercontent.com/vercel/swr-site/master/.github/videos/focus-revalidate.mp4"
+    caption="Vídeo: uso de la revalidación focus para sincronizar automáticamente el estado login entre páginas."
+    ratio={307 / 768}
+  />
+</Bleed>
+
+Esta caracteristica está activada por defecto. Puede desactivarla mediante de la
+opción [`revalidateOnFocus`](/docs/options).
+
+## Revalidar on interval
+
+En muchos casos, los datos cambian debido a los múltiples dispositivos, los
+múltiples usuarios, los múltiples tabs. ¿Cómo podemos con el tiempo actualizar
+los datos en pantalla?
+
+SWR le dará la opción de recuperar los datos automáticamente. Es
+**inteligente**, lo que significa que el refetching sólo se producirá si el
+componente asociado al hook está **en la pantalla**.
+
+<Bleed>
+  <Video
+    src="https://raw.githubusercontent.com/vercel/swr-site/master/.github/videos/refetch-interval.mp4"
+    caption="Vídeo: cuando un usuario realiza un cambio, ambas sesiones acabarán por mostrar los mismo datos."
+    ratio={307 / 768}
+  />
+</Bleed>
+
+Puede activarlo estableciendo un valor de [`refreshInterval`](/docs/options).
+
+```js
+useSWR('/api/todos', fetcher, { refreshInterval: 1000 })
+```
+
+También hay opciones como `refreshWhenHidden` y `refreshWhenOffline`. Ambas
+están deshabilitadas por defecto, para que SWR no recupere la información cuando
+la página web no esté en pantalla o no haya conexión de red.
+
+## Revalidar on reconnect
+
+También es útil revalidar cuando el usuario vuelve a estar conectado. Este
+escenario se da con frecuencia cuando el usuario desbloquea su ordenador, pero
+en ese mismo momento no está conectado a Internet.
+
+Para asegurarse de que los datos están siempre actualizados, SWR revalida
+automáticamente cuando la red se recupera.
+
+Esta función está activada por defecto. Puede desactivarla mediante la opción
+[`revalidateOnReconnect`](/docs/options).
+
+## Disable Automatic Revalidations
+
+If the resource is **immutable**, that will never change if we revalidate again,
+we can disable all kinds of automatic revalidations for it.
+
+Since version 1.0, SWR provides a helper hook `useSWRImmutable` to mark the
+resource as immutable:
+
+```js
+import useSWRImmutable from 'swr/immutable'
+
+// ...
+useSWRImmutable(key, fetcher, options)
+```
+
+It has the same API interface as the normal `useSWR` hook. You can also do the
+same thing by disable the following revalidation options:
+
+```js
+useSWR(key, fetcher, {
+  revalidateIfStale: false,
+  revalidateOnFocus: false,
+  revalidateOnReconnect: false
+})
+
+// equivalent to
+useSWRImmutable(key, fetcher)
+```
+
+The `revalidateIfStale` controls if SWR should revalidate when it mounts and
+there is stale data.
+
+These 2 hooks above do the **exact same** thing. Once the data is cached, they
+will never request it again.

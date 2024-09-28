@@ -1,4 +1,4 @@
-// Vitest Snapshot v1
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`context > getAllPages() > should work 1`] = `
 [
@@ -962,7 +962,6 @@ exports[`context > getAllPages() > should work 1`] = `
     "meta": {
       "theme": {
         "breadcrumb": false,
-        "footer": true,
         "sidebar": false,
         "toc": true,
         "typesetting": "article",
@@ -982,7 +981,6 @@ exports[`context > getAllPages() > should work 1`] = `
     "meta": {
       "theme": {
         "breadcrumb": false,
-        "footer": true,
         "sidebar": false,
         "toc": true,
         "typesetting": "article",
@@ -992,6 +990,28 @@ exports[`context > getAllPages() > should work 1`] = `
     },
     "name": "blog",
     "route": "/blog",
+  },
+  {
+    "kind": "MdxPage",
+    "locale": "ru",
+    "meta": {
+      "theme": {
+        "breadcrumb": false,
+        "sidebar": false,
+        "toc": true,
+        "typesetting": "article",
+      },
+      "title": "Blog",
+      "type": "page",
+    },
+    "name": "blog",
+    "route": "/blog",
+  },
+  {
+    "kind": "MdxPage",
+    "locale": "en-US",
+    "name": "foo",
+    "route": "/foo",
   },
   {
     "frontMatter": {

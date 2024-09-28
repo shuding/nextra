@@ -1,23 +1,16 @@
-import type { ReactElement } from 'react'
-
-import { SunIcon, MoonIcon } from 'nextra/icons'
-import { useMounted } from 'nextra/hooks'
 import { useTheme } from 'next-themes'
-
+import { useMounted } from 'nextra/hooks'
+import { MoonIcon, SunIcon } from 'nextra/icons'
+import type { ReactElement } from 'react'
+import type { z } from 'zod'
+import { useThemeConfig } from '../contexts'
+import type { themeOptionsSchema } from '../schemas'
 import { Select } from './select'
-import { useConfig } from '../contexts'
-import { z } from 'zod'
 
 type ThemeSwitchProps = {
   lite?: boolean
   className?: string
 }
-
-export const themeOptionsSchema = z.strictObject({
-  light: z.string(),
-  dark: z.string(),
-  system: z.string()
-})
 
 type ThemeOptions = z.infer<typeof themeOptionsSchema>
 
@@ -27,7 +20,7 @@ export function ThemeSwitch({
 }: ThemeSwitchProps): ReactElement {
   const { setTheme, resolvedTheme, theme = '' } = useTheme()
   const mounted = useMounted()
-  const config = useConfig().themeSwitch
+  const config = useThemeConfig().themeSwitch
 
   const IconToUse = mounted && resolvedTheme === 'dark' ? MoonIcon : SunIcon
   const options: ThemeOptions =
@@ -50,9 +43,9 @@ export function ThemeSwitch({
       selected={{
         key: theme,
         name: (
-          <div className="nx-flex nx-items-center nx-gap-2 nx-capitalize">
+          <div className="_flex _items-center _gap-2 _capitalize">
             <IconToUse />
-            <span className={lite ? 'md:nx-hidden' : ''}>
+            <span className={lite ? 'md:_hidden' : ''}>
               {mounted ? options[theme as keyof typeof options] : options.light}
             </span>
           </div>

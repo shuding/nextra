@@ -1,5 +1,5 @@
 import type { Dispatch, SetStateAction } from 'react'
-import { useContext, createContext } from 'react'
+import { createContext, useContext } from 'react'
 
 interface Menu {
   menu: boolean
@@ -10,7 +10,7 @@ const MenuContext = createContext<Menu>({
   menu: false,
   setMenu: () => false
 })
-
+MenuContext.displayName = 'Menu'
 export const useMenu = () => useContext(MenuContext)
 
 export const MenuProvider = MenuContext.Provider

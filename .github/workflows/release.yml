@@ -2,8 +2,7 @@ name: Release
 
 on:
   push:
-    branches:
-      - main
+    branches: [main, v3]
 
 jobs:
   release:
@@ -12,17 +11,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout Main
+        uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v2.2.4
-        with:
-          version: 8
+      - uses: pnpm/action-setup@v4
 
       - name: Install Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
-          cache: 'pnpm'
+          node-version-file: .node-version
+          cache: pnpm
 
       - name: Install Dependencies
         run: pnpm i
@@ -34,13 +32,13 @@ jobs:
         run: pnpm build
 
       - name: Type Check
-        run: pnpm run types:check
+        run: pnpm types:check
 
       - name: Create Release Pull Request or Publish to npm
         uses: changesets/action@v1
         with:
-          publish: pnpm run release
-          version: pnpm run version
+          publish: pnpm release
+          version: pnpm run version # should be `pnpm run`
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

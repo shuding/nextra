@@ -3,5 +3,20 @@ module.exports = {
   singleQuote: true,
   trailingComma: 'none',
   arrowParens: 'avoid',
-  plugins: [require('prettier-plugin-tailwindcss')]
+  plugins: [
+    'prettier-plugin-tailwindcss',
+    // for sort fields in package.json
+    'prettier-plugin-pkg',
+    // for sorting imports
+    '@ianvs/prettier-plugin-sort-imports'
+  ],
+  overrides: [
+    {
+      files: '*.svg',
+      options: {
+        parser: 'html'
+      }
+    }
+  ],
+  proseWrap: 'always' // printWidth line breaks in md/mdx
 }

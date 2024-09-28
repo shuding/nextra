@@ -1,13 +1,14 @@
 # Get Started
 
-import { Callout } from 'nextra-theme-docs'
+import { Callout } from 'nextra/components'
 
 <Callout>
   An example of the blog theme can be found
   [here](https://github.com/vercel-solutions/nextjs-portfolio-starter).
 </Callout>
 
-Similar to the docs theme, you can install the blog theme with the following commands:
+Similar to the docs theme, you can install the blog theme with the following
+commands:
 
 ### Configurations
 
@@ -15,15 +16,18 @@ Similar to the docs theme, you can install the blog theme with the following com
 
 2. Install the blog theme: `yarn add nextra-theme-blog`
 
-3. Create the following Next.js config and theme config under the root directory:
+3. Create the following Next.js config and theme config under the root
+   directory:
 
-```js filename="next.config.js"
-const withNextra = require('nextra')({
+```js filename="next.config.mjs"
+import nextra from 'nextra'
+
+const withNextra = nextra({
   theme: 'nextra-theme-blog',
   themeConfig: './theme.config.js'
   // optional: add `staticImage: true` to enable Nextra's auto image import
 })
-module.exports = withNextra()
+export default withNextra()
 ```
 
 ```jsx filename="theme.config.js"

@@ -1,0 +1,15 @@
+import { NotFoundPage } from 'nextra-theme-docs'
+import { useRouter } from 'nextra/hooks'
+
+export function Page() {
+  const { locale } = useRouter()
+  const text = {
+    en: 'This page could not be found',
+    ru: 'Эта страница не может быть найдена',
+    es: 'Esta pagina no se pudo encontrar'
+  }
+  return <h1>404 - {text[locale] || text.en}</h1>
+}
+
+<Page />
+<NotFoundPage />
