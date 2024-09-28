@@ -90,9 +90,7 @@ Customize the theme behavior of the website.
 
 </Table>
 
-## Content
-
-### MDX Components
+## MDX Components [!TODO]
 
 Provide custom [MDX components](https://mdxjs.com/table-of-components/) to
 render the content. For example, you can use a custom `pre` component to render
@@ -103,31 +101,6 @@ code blocks.
 |            |                            |                       |
 | ---------- | -------------------------- | --------------------- |
 | components | `Record<string, React.FC>` | Custom MDX components |
-
-</Table>
-
-### Writing Direction
-
-The default writing direction of the website.
-
-<Table>
-
-|           |                  |                           |
-| --------- | ---------------- | ------------------------- |
-| direction | `"ltr" \| "rtl"` | Default writing direction |
-
-</Table>
-
-### Main Content
-
-Render top and/or bottom content of main area of the page. It can be used to
-render a comment section, a newsletter form, or any other type of content.
-
-<Table>
-
-|      |                                           |                           |
-| ---- | ----------------------------------------- | ------------------------- |
-| main | `React.FC<{ children: React.ReactNode }>` | Component of main content |
 
 </Table>
 
