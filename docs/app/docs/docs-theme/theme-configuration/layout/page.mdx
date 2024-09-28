@@ -111,16 +111,13 @@ Show an “Edit this page” link on the page that points to the file URL on Git
 
 <Table>
 
-|                    |                                                                                          |                                |
-| ------------------ | ---------------------------------------------------------------------------------------- | ------------------------------ |
-| editLink.content   | `React.ReactNode \| React.FC`                                                            | Content of the edit link       |
-| editLink.component | `React.FC<{ children: React.ReactNode; className?: string; filePath?: string }> \| null` | Customized edit link component |
+|          |                                       |                                                              |
+| -------- | ------------------------------------- | ------------------------------------------------------------ |
+| editLink | `string \| ReactElement \| null{:ts}` | Content of the edit link. Default: `"Edit this page"{:json}` |
 
 </Table>
 
-<Callout type="info">
-  To disable it, you can set `editLink` to `null`.
-</Callout>
+<Callout type="info">To disable it, you can set `editLink` to `null`.</Callout>
 
 ## Feedback Link
 
