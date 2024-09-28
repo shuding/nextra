@@ -8,16 +8,25 @@ import sidebarTitleComponentImage from 'public/assets/docs/sidebar-customized.pn
 
 # Layout
 
-The theme is configured with the
-[theme.config.jsx](/docs/docs-theme/start#create-docs-theme-config) file. It
-should export an object that contains your configurations, for example:
+The theme is configured with the `<Layout>` component. You should pass `props`
+with your config options, for example:
 
-```jsx filename="theme.config.jsx"
-export default {
-  project: {
-    link: 'https://github.com/shuding/nextra'
-  },
-  logo: <b>Project</b>
+```jsx filename="app/layout.jsx"
+import { Layout } from 'nextra-theme-docs'
+
+export default function MyLayout({ children, ...props }) {
+  return (
+    <html lang="en">
+      <body>
+        <Layout
+          logo={<b>Project</b>}
+          project={{ link: 'https://github.com/shuding/nextra' }}
+        >
+          {children}
+        </Layout>
+      </body>
+    </html>
+  )
 }
 ```
 
