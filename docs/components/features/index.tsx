@@ -2,7 +2,7 @@ import { ArrowRightIcon } from '@components/icons'
 import cn from 'clsx'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import type { ReactNode } from 'react'
+import type { ComponentProps, ReactNode } from 'react'
 import styles from './style.module.css'
 
 export function Feature({
@@ -14,7 +14,14 @@ export function Feature({
   href,
   index,
   ...props
-}) {
+}: {
+  large?: boolean
+  centered?: boolean
+  children: ReactNode
+  lightOnly?: boolean
+  href?: string
+  index: number
+} & ComponentProps<typeof motion.div>) {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -31,11 +38,16 @@ export function Feature({
       {...props}
     >
       {children}
-      {href ? (
-        <Link className={styles.link} href={href} target="_blank">
-          <ArrowRightIcon width="1.5em" />
+      {href && (
+        <Link
+          className={cn('nextra-focus', styles.link)}
+          href={href}
+          target="_blank"
+          rel="noreferrer"
+        >
+          <ArrowRightIcon height="24" />
         </Link>
-      ) : null}
+      )}
     </motion.div>
   )
 }

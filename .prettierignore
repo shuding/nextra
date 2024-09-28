@@ -1,10 +1,12 @@
 pnpm-lock.yaml
 .changeset/*.md
+generated-page-map.js
 
-# process.env assignement should be first
-packages/nextra/__test__/locale-with-base-path.test.ts
-
-# bellow files are broken since prettier doesn't support MDX2
-examples/swr-site/pages/remote/graphql-eslint/\[\[...slug\]\].mdx
-examples/swr-site/pages/blog.en-US.mdx
 docs/pages/docs/guide/advanced/latex.mdx
+
+examples/swr-site/nextra-remote-filepaths/*.json
+examples/swr-site/pages/en/remote/graphql-eslint/_meta.ts
+examples/swr-site/pages/en/remote/graphql-yoga/_meta.ts
+
+docs/pages/docs/guide/built-ins/cards.mdx
+docs/pages/docs/guide/advanced/playground.mdx
