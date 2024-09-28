@@ -71,7 +71,7 @@ export function BackgroundColor() {
         onChange={e => {
           const { value } = e.target
           e.target.nextSibling!.textContent = value
-          document.body.style.setProperty(
+          document.documentElement.style.setProperty(
             '--nextra-bg',
             hexToRgb(value as `#${string}`)
           )

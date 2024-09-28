@@ -1,9 +1,10 @@
 import { Table } from '../../nextra-theme-docs/layout/page.mdx'
-import { Hue, Saturation, BackgroundColor } from './_slider'
+import { BackgroundColor, Hue, Saturation } from './_slider'
 
 # `Head`
 
-Configure the `<head>` tags, primary color, background color and favicon glyph of the website.
+Configure the `<head>` tags, primary color, background color and favicon glyph
+of the website.
 
 <Table>
 
@@ -20,7 +21,8 @@ Configure the `<head>` tags, primary color, background color and favicon glyph o
 
 ## Static Head Tags
 
-If you have static head tags, they should be put as `children` in `Head`. For example:
+If you have static head tags, they should be put as `children` in `Head`. For
+example:
 
 ```jsx filename="app/layout.jsx" {8}
 import { Layout } from 'my-nextra-theme'
@@ -42,7 +44,8 @@ export default function MyLayout({ children, ...props }) {
 
 ## Dynamic Tags Based on Page
 
-You can dynamically generate the head tags based on the current page’s front matter. For example:
+You can dynamically generate the head tags based on the current page’s front
+matter. For example:
 
 ### via Markdown front matter
 
@@ -74,16 +77,16 @@ export async function generateMetadata({ params: { mdxPath } }) {
 }
 ```
 
-You can refer to the [`useConfig`](/docs/docs-theme/api) API section
-for more information about the `useConfig` hook and the `frontMatter` object.
+You can refer to the [`useConfig`](/docs/docs-theme/api) API section for more
+information about the `useConfig` hook and the `frontMatter` object.
 
 ## Theme Color
 
 You can adjust the theme color of the website by setting primary hue and
 saturation values for light and dark themes. Try it out for this website:
 
-| Hue     | Saturation     | Background Color |
-| ------- | -------------- | -- |
+| Hue     | Saturation     | Background Color   |
+| ------- | -------------- | ------------------ |
 | <Hue /> | <Saturation /> | <BackgroundColor/> |
 
 ## Favicon Glyph
