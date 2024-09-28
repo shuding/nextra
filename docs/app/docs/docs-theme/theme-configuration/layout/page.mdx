@@ -204,13 +204,13 @@ The above is also equivalent to `navigation: true`.
 
 <Table>
 
-|                    |                                                                                  |                  |
-| ------------------ | -------------------------------------------------------------------------------- | ---------------- |
-| search.component   | `React.ReactNode \|`<br/>`React.FC<{ className?: string; directories: Item[] }>` |                  |
-| search.emptyResult | `React.ReactNode \| React.FC`                                                    | Not found text   |
-| search.loading     | `React.ReactNode \| React.FC`                                                    | Loading text     |
-| search.error       | `string \| (() => string)`                                                       | Error text       |
-| search.placeholder | `string \| (() => string)`                                                       | Placeholder text |
+|                    |                               |                                                              |
+| ------------------ | ----------------------------- | ------------------------------------------------------------ |
+| search.emptyResult | `string \| ReactElement{:ts}` | Not found text. Default: `"No results found."{:json}`        |
+| search.loading     | `string \| ReactElement{:ts}` | Loading text. Default: `"Loading…"{:json}`                   |
+| search.errorText   | `string \| ReactElement{:ts}` | Error text. Default: `"Failed to load search index."{:json}` |
+| search.placeholder | `string{:ts}`                 | Placeholder text. Default: `"Search documentation…"{:json}`  |
+| search.className   | `string{:ts}`                 | CSS class name                                               |
 
 </Table>
 
@@ -218,11 +218,11 @@ The above is also equivalent to `navigation: true`.
 
 <Table>
 
-|                                  |           |                                                                                                 |
-| -------------------------------- | --------- | ----------------------------------------------------------------------------------------------- |
-| sidebar.autoCollapse             | `boolean{:ts}` | If true, automatically collapse inactive folders above `defaultMenuCollapseLevel`               |
+|                                  |                |                                                                                                       |
+| -------------------------------- | -------------- | ----------------------------------------------------------------------------------------------------- |
+| sidebar.autoCollapse             | `boolean{:ts}` | If true, automatically collapse inactive folders above `defaultMenuCollapseLevel`                     |
 | sidebar.defaultMenuCollapseLevel | `number{:ts}`  | Specifies the folder level at which the menu on the left is collapsed by default. Default: `2{:json}` |
-| sidebar.toggleButton             | `boolean{:ts}` | Hide/show sidebar toggle button. Default: `true{:json}`                                            |
+| sidebar.toggleButton             | `boolean{:ts}` | Hide/show sidebar toggle button. Default: `true{:json}`                                               |
 
 </Table>
 
