@@ -94,7 +94,7 @@ export default async function RootLayout({ children, params: { lang } }) {
           themeSwitch={{
             dark: dictionary.dark,
             light: dictionary.light,
-            system: dictionary.system,
+            system: dictionary.system
           }}
         >
           <Banner storageKey="swr-2">SWR 2.0 is out! Read more →</Banner>
