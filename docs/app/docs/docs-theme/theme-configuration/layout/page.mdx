@@ -119,7 +119,7 @@ Show an “Edit this page” link on the page that points to the file URL on Git
 </Table>
 
 <Callout type="info">
-  To disable it, you can set `editLink.component` to `null`.
+  To disable it, you can set `editLink` to `null`.
 </Callout>
 
 ## Feedback Link
@@ -131,11 +131,10 @@ the docs repository, with the current website title prefilled:
 
 <Table>
 
-|                  |                               |                                                                                           |
-| ---------------- | ----------------------------- | ----------------------------------------------------------------------------------------- |
-| feedback.content | `React.ReactNode \| React.FC` | Content of the feedback button                                                            |
-| feedback.labels  | `string`                      | Labels that can be added to the new created GitHub issue                                  |
-| feedback.useLink | `() => string`                | Custom link, by default, will open an issue in the repository set in `docsRepositoryBase` |
+|                  |                                       |                                                                                            |
+| ---------------- | ------------------------------------- | ------------------------------------------------------------------------------------------ |
+| feedback.content | `string \| ReactElement \| null{:ts}` | Content of the feedback button.<br/>Default: `"Question? Give us feedback →"{:json}`       |
+| feedback.labels  | `string{:ts}`                         | Labels that can be added to the new created GitHub issue.<br/>Default: `"feedback"{:json}` |
 
 </Table>
 
@@ -152,7 +151,7 @@ Options to configure the language dropdown for
 
 |                        |                       |                                                        |
 | ---------------------- | --------------------- | ------------------------------------------------------ |
-| i18n[number].direction | `"ltr" \| "rtl"{:ts}` | Writing direction of locale                                    |
+| i18n[number].direction | `"ltr" \| "rtl"{:ts}` | Writing direction of locale                            |
 | i18n[number].locale    | `string{:ts}`         | Locale from `i18n.locales` field in `next.config` file |
 | i18n[number].name      | `string{:ts}`         | Locale name in dropdown                                |
 
