@@ -57,9 +57,9 @@ export function Table({ children }) {
 
 <Table>
 
-|                    |          |                                     |
-| ------------------ | -------- | ----------------------------------- |
-| docsRepositoryBase | `string` | URL of the documentation repository |
+|                    |               |                                                                                                |
+| ------------------ | ------------- | ---------------------------------------------------------------------------------------------- |
+| docsRepositoryBase | `string{:ts}` | URL of the documentation repository.<br/>Default: `"https://github.com/shuding/nextra"{:json}` |
 
 </Table>
 
@@ -161,9 +161,9 @@ of the content.
 
 <Table>
 
-|             |                              |                                                                                |
-| ----------- | ---------------------------- | ------------------------------------------------------------------------------ |
-| lastUpdated | `React.FC<{ date: Date }>()` | Component to render the last updated info.<br/>Default: `<LastUpdated />{:js}` |
+|             |                             |                                                                                |
+| ----------- | --------------------------- | ------------------------------------------------------------------------------ |
+| lastUpdated | `ReactElement \| null{:ts}` | Component to render the last updated info.<br/>Default: `<LastUpdated />{:js}` |
 
 </Table>
 
