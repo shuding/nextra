@@ -66,13 +66,9 @@ const theme = z.strictObject({
     .default({}),
   themeSwitch: z
     .strictObject({
-      options: z
-        .strictObject({
-          dark: z.string().default('Dark'),
-          light: z.string().default('Light'),
-          system: z.string().default('System')
-        })
-        .default({})
+      dark: z.string().default('Dark'),
+      light: z.string().default('Light'),
+      system: z.string().default('System')
     })
     .default({}),
   toc: z
