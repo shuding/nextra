@@ -5,26 +5,24 @@ import { Table } from '../layout/page.mdx'
 
 # `Navbar`
 
+<Table>
+
+|             |                          |                                                                         |
+| ----------- | ------------------------ | ----------------------------------------------------------------------- |
+| logo        | `ReactNode{:ts}`         | Logo of the website. Default: `"Nextra - The Next Docs Builder"{:json}` |
+| logoLink    | `boolean \| string{:ts}` | Link of the logo. Default: `true{:json}`                                |
+| projectLink | `string{:ts}`            | URL of the project homepage                                             |
+| projectIcon | `ReactNode{:ts}`         | Icon of the project link. Default: ` <GitHubIcon height="24" />{:ts}`   |
+| chatLink    | `string{:ts}`            | URL of the chat link                                                    |
+| chatIcon    | `ReactNode{:ts}`         | Icon of the chat link. Default: `<DiscordIcon width="24" />{:ts}`       |
+| children    | `ReactNode{:ts}`         | Extra content after last icon                                           |
+
+</Table>
+
 ## Logo
 
 The logo of the website rendered on the navbar. It can be a React node or a
 function component.
-
-<Table>
-
-|                     |                                                 |                                       |
-| ------------------- | ----------------------------------------------- | ------------------------------------- |
-| children            | `ReactNode{:ts}`                                | Extra content after last icon         |
-| logo                | `React.ReactNode \| React.FC{:ts}`              | Logo of the website                   |
-| logoLink            | `boolean \| string{:ts}`                        | Link of the logo                      |
-| project.link        | `string{:ts}`                                   | URL of the project homepage           |
-| project.icon        | `React.ReactNode \| React.FC{:ts}`              | Icon or element of the project link   |
-| chat.link           | `string{:ts}`                                   | URL of the chat link                  |
-| chat.icon           | `React.ReactNode \| React.FC`                   | Icon or element of the chat link      |
-| navbar.component    | `React.ReactNode \| React.FC<NavBarProps>{:ts}` | Navbar component                      |
-| navbar.extraContent | `React.ReactNode \| React.FC`                   | Display extra content after last icon |
-
-</Table>
 
 <Screenshot src={logoImage} alt="Customized Logo" />
 
@@ -107,4 +105,3 @@ If `icon` is missing, it will be a Discord icon by default.
 
 Check out [Page Configuration](/docs/docs-theme/page-configuration#navbar-items)
 to learn how to add custom menus or links to the navbar.
-
