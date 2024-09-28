@@ -2,32 +2,31 @@ name: Test
 
 on:
   pull_request:
-    branches: [main]
+    branches: [main, v3]
 
 jobs:
   test:
     name: Test (${{matrix.os}})
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        node-version: [18]
         os: [ubuntu-latest, windows-latest]
 
     steps:
       - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.11.0
+        uses: styfle/cancel-workflow-action@0.12.1
         with:
           access_token: ${{ github.token }}
 
-      - name: Checkout Master
-        uses: actions/checkout@v3
+      - name: Checkout Main
+        uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v2.4.0
+      - uses: pnpm/action-setup@v4
 
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - name: Use Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version-file: .node-version
           cache: pnpm
 
       - name: Install Dependencies

@@ -33,13 +33,15 @@ npm i nextra-theme-docs
 
 ### Create the following Next.js config and theme config under the root directory
 
-```js filename="next.config.js"
-const withNextra = require('nextra')({
+```js filename="next.config.mjs"
+import nextra from 'nextra'
+
+const withNextra = nextra({
   theme: 'nextra-theme-blog',
   themeConfig: './theme.config.js'
   // optional: add `staticImage: true` to enable Nextra's auto image import
 })
-module.exports = withNextra()
+export default withNextra()
 ```
 
 ### Create a `theme.config.js` file for the docs theme
@@ -96,8 +98,8 @@ export default {
 <span id="sidebar-and-anchor-links" />
 <Callout>
   Any `.md` or `.mdx` file will turn into a doc page and be displayed in
-  sidebar. You can also create a `meta.json` file to customize the page order
-  and title. <br /> Check the source code: https://github.com/shuding/nextra for
+  sidebar. You can also create a `_meta.js` file to customize the page order and
+  title. <br /> Check the source code: https://github.com/shuding/nextra for
   more information.
 </Callout>
 
@@ -106,5 +108,7 @@ You can also use [`<style jsx>`](https://nextjs.org/docs/basic-features/built-in
 </Callout>
 
 [^1]: Install Next.js, Nextra and React.
+
 [^2]: Install the docs theme.
+
 [^3]: To start.
