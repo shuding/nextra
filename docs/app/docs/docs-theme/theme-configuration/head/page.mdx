@@ -7,9 +7,9 @@ favicon, etc.
 
 <Table>
 
-  |      |                                |                                             |
-  | ---- | ------------------------------ | ------------------------------------------- |
-  | head | `React.ReactNode \|  React.FC` | Component that renders the `<head>` content |
+|      |                                |                                             |
+| ---- | ------------------------------ | ------------------------------------------- |
+| head | `React.ReactNode \|  React.FC` | Component that renders the `<head>` content |
 
 </Table>
 
@@ -20,13 +20,13 @@ example:
 
 ```jsx
 export default {
-head: (
-<>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta property="og:title" content="Nextra" />
-  <meta property="og:description" content="The next site builder" />
-</>
-)
+  head: (
+    <>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta property="og:title" content="Nextra" />
+      <meta property="og:description" content="The next site builder" />
+    </>
+  )
 }
 ```
 
@@ -40,27 +40,26 @@ import { useRouter } from 'next/router'
 import { useConfig } from 'nextra-theme-docs'
 
 export default {
-head() {
-  const { asPath, defaultLocale, locale } = useRouter()
-  const { frontMatter } = useConfig()
-  const url =
-    'https://my-app.com' +
-    (defaultLocale === locale ? asPath : `/${locale}${asPath}`)
+  head() {
+    const { asPath, defaultLocale, locale } = useRouter()
+    const { frontMatter } = useConfig()
+    const url =
+      'https://my-app.com' +
+      (defaultLocale === locale ? asPath : `/${locale}${asPath}`)
 
-  return (
-    <>
-      <meta property="og:url" content={url} />
-      <meta property="og:title" content={frontMatter.title || 'Nextra'} />
-      <meta
-        property="og:description"
-        content={frontMatter.description || 'The next site builder'}
-      />
-    </>
-  )
-}
+    return (
+      <>
+        <meta property="og:url" content={url} />
+        <meta property="og:title" content={frontMatter.title || 'Nextra'} />
+        <meta
+          property="og:description"
+          content={frontMatter.description || 'The next site builder'}
+        />
+      </>
+    )
+  }
 }
 ```
 
 You can refer to the [`useConfig`](/docs/docs-theme/api/use-config) API section
 for more information about the `useConfig` hook and the `frontMatter` object.
-
