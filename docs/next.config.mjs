@@ -31,6 +31,11 @@ export default withNextra({
       source: '/docs/docs-theme/built-ins/:slug(callout|steps|tabs)',
       destination: '/docs/guide/built-ins/:slug',
       permanent: true
+    },
+    {
+      source: '/docs/docs-theme/api/use-config',
+      destination: '/docs/docs-theme/api',
+      permanent: true
     }
   ],
   webpack(config) {
