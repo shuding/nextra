@@ -2,7 +2,7 @@
 
 import cn from 'clsx'
 import type { MDXWrapper } from 'nextra'
-import { useEffect } from 'react'
+import { cloneElement, useEffect } from 'react'
 import { Breadcrumb, Pagination, TOC } from '../../components'
 import { setToc, useConfig, useThemeConfig } from '../../stores'
 
@@ -23,29 +23,8 @@ export const ClientWrapper: MDXWrapper = ({
   } = normalizePagesResult
 
   const date =
-    themeContext.timestamp &&
-    themeConfig.gitTimestamp &&
-    metadata.timestamp &&
-    new Date(metadata.timestamp)
+    themeContext.timestamp && themeConfig.lastUpdated && metadata.timestamp
 
-  const gitTimestampEl = date ? (
-    <div
-      // Because a user's time zone may be different from the server page
-      suppressHydrationWarning
-      className="_mt-12 _mb-8 _text-xs _text-gray-500 _text-end dark:_text-gray-400"
-    >
-      Last updated on{' '}
-      <time dateTime={date.toISOString()}>
-        {date.toLocaleDateString('en', {
-          day: 'numeric',
-          month: 'long',
-          year: 'numeric'
-        })}
-      </time>
-    </div>
-  ) : (
-    <div className="_mt-16" />
-  )
   // We can't update store in server component so doing it in client component
   useEffect(() => {
     setToc(toc)
@@ -79,7 +58,13 @@ export const ClientWrapper: MDXWrapper = ({
           <Breadcrumb activePath={activePath} />
         )}
         {children}
-        {gitTimestampEl}
+        {date ? (
+          <div className="_mt-12 _mb-8 _text-xs _text-gray-500 _text-end dark:_text-gray-400">
+            {cloneElement(themeConfig.lastUpdated, { date: new Date(date) })}
+          </div>
+        ) : (
+          <div className="_mt-16" />
+        )}
         {themeContext.pagination && activeType !== 'page' && (
           <Pagination
             flatDocsDirectories={flatDocsDirectories}

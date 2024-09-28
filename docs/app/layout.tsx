@@ -65,7 +65,7 @@ export default async function RootLayout({
         <Layout
           pageMap={pageMap}
           docsRepositoryBase="https://github.com/shuding/nextra/tree/main/docs"
-          editLink={{ content: 'Edit this page on GitHub →' }}
+          editLink="Edit this page on GitHub →"
           sidebar={{ defaultMenuCollapseLevel: 1 }}
         >
           <Banner storageKey="4.0-release">
@@ -74,7 +74,7 @@ export default async function RootLayout({
                 href="https://the-guild.dev/blog/nextra-3"
                 className='after:content-["_→"]'
               >
-                Nextra 3.0 is released. Read more
+                Nextra 4.0 is released. Read more
               </Link>
             </div>
           </Banner>
