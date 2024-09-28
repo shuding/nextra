@@ -9,11 +9,11 @@ notice.
 
 <Table>
 
-|               |                  |                                                                                            |
-| ------------- | ---------------- | ------------------------------------------------------------------------------------------ |
-| `dismissible` | `boolean{:ts}`   | Closable banner or not. Default: `"true"{:json}`                                           |
-| `key`         | `string{:ts}`    | Storage key to keep the banner state (dismissed or not). Default: `"nextra-banner"{:json}` |
-| `children`    | `ReactNode{:ts}` | Content of the banner                                                                      |
+|               |                  |                                                                         |
+| ------------- | ---------------- | ----------------------------------------------------------------------- |
+| `dismissible` | `boolean{:ts}`   | Closable banner or not. Default: `"true"{:json}`                        |
+| `key`         | `string{:ts}`    | Storage key to keep the banner state. Default: `"nextra-banner"{:json}` |
+| `children`    | `ReactNode{:ts}` | Content of the banner                                                   |
 
 </Table>
 
@@ -21,7 +21,7 @@ notice.
 
 A banner can be dismissed. By default, it’s used by
 [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
-to keep the banner state (dismissed or not) on the client.
+to keep the banner state on the client.
 
 If you have updated your banner text, you should change the key to make sure the
 banner is shown again. The best practice is to always use a descriptive key for
