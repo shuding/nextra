@@ -50,7 +50,7 @@ The resolved page map will be (note that all names were sorted alphabetically):
 ]
 ```
 
-And the global page map will be bundled to each page by Nextra. Then, configured
+And the global page map will be imported to each page by Nextra. Then, configured
 theme will render the actual UI with that page map.
 
 ## `_meta.js`
@@ -60,7 +60,7 @@ filenames. Having a page titled "Index" lacks clarity. It is preferable to
 assign a meaningful title that accurately represents the content, such as
 "Home".
 
-That’s where `_meta.js` comes in. You can have an `_meta.js` file in each
+That’s where `_meta.js` files comes in. You can have an `_meta.js` file in each
 directory, and it will be used to override the default configuration of each
 page:
 
@@ -77,6 +77,11 @@ page:
   </FileTree.Folder>
 </FileTree>
 
+<Callout>
+  It's also possible to use the `.jsx`, `.ts`, `.tsx` extensions for `_meta` files
+  (e.g. `_meta.ts`)
+</Callout>
+
 For example, you can put this in your `pages/_meta.js` file:
 
 ```js filename="pages/_meta.js"
@@ -89,14 +94,6 @@ export default {
 
 It tells Nextra the order of each page, and the correct title.
 
-<Callout type="info">
-  - It's also possible to use the `jsx,ts,tsx` extensions for `_meta` files
-  (e.g. `_meta.ts`).
-  - You can use ESLint's built-in rule sort keys with a `/*
-  eslint sort-keys: error */` comment to sort your sidebar items alphabetically.
-
-</Callout>
-
 Alternatively, you can do it with `title` property and have other configurations
 in there as well:
 
@@ -105,11 +102,16 @@ export default {
   index: 'My Homepage',
   contact: 'Contact Us',
   about: {
-    title: 'About Us',
-    '...extra configurations...': '...'
+    title: 'About Us'
+    // ... extra configurations
   }
 }
 ```
+
+<Callout>
+  You can use ESLint's built-in rule sort keys with a `/*
+  eslint sort-keys: error */` comment to sort your sidebar items alphabetically.
+</Callout>
 
 <Callout type="warning">
   If you are using
@@ -124,12 +126,19 @@ Check the corresponding pages for more information:
 <Cards>
   <Cards.Card
     icon={<NewsletterIcon />}
-    title="Docs Theme →"
+    title="Docs Theme"
     href="/docs/docs-theme/page-configuration"
+    arrow
   />
   <Cards.Card
     icon={<FileIcon />}
-    title="Blog Theme →"
+    title="Blog Theme"
     href="/docs/blog-theme/start"
+    arrow
+  />
+  <Cards.Card
+    title="Custom Theme"
+    href="/docs/custom-theme"
+    arrow
   />
 </Cards>
