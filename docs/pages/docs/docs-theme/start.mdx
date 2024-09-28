@@ -1,11 +1,10 @@
-import { BoxIcon, GearIcon, RowsIcon } from '@components/icons'
-import { Callout, Cards, Steps } from 'nextra/components'
+import { Callout, Steps } from 'nextra/components'
 
 # Docs Theme
 
 Nextra Docs Theme is a theme that includes almost everything you need to build a
 modern documentation website. It includes a top navigation bar, a search bar, a
-pages sidebar, a TOC sidebar, and other built-in components.
+pages sidebar, a Table of Contents (TOC), and other built-in components.
 
 This website itself is built with the Nextra Docs Theme.
 
@@ -62,9 +61,19 @@ Add the following scripts in `package.json`:
 },
 ```
 
-You can either start the server with, for example if you use npm, `npm run dev`,
-which will run in development mode or `npm run build && npm run start` for
-production mode.
+You can start the server in development mode with the following command according to your package manager:
+
+```sh npm2yarn
+npm run dev
+```
+
+or in production mode:
+
+```sh npm2yarn
+npm run build
+npm run start
+```
+
 
 <Callout>
   If you're not familiar with Next.js, note that development mode is
@@ -121,28 +130,14 @@ Now, you can create your first MDX page as `pages/index.mdx`:
 Hello, world!
 ```
 
-And run the `next` or `next dev` command specified in `package.json`to start
-developing the project! 🎉
+And run the `dev` command specified in `package.json` to start developing the
+project! 🎉
+
+```sh npm2yarn
+npm run dev
+```
 
 </Steps>
 
 Next, check out the next section to learn about organizing the documentation
 structure and configuring the website theme:
-
-<Cards>
-  <Cards.Card
-    icon={<RowsIcon />}
-    title="Page Structure"
-    href="/docs/docs-theme/page-configuration"
-  />
-  <Cards.Card
-    icon={<GearIcon />}
-    title="Theme Configuration"
-    href="/docs/docs-theme/theme-configuration"
-  />
-  <Cards.Card
-    icon={<BoxIcon />}
-    title="Built-in Components"
-    href="/docs/docs-theme/built-ins"
-  />
-</Cards>

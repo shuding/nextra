@@ -77,8 +77,8 @@ For example, let’s implement these features:
 
 ```tsx filename="theme.tsx" /pageOpts/
 import Head from 'next/head'
-import { MDXProvider } from 'nextra/mdx'
 import type { NextraThemeLayoutProps } from 'nextra'
+import { MDXProvider } from 'nextra/mdx'
 
 export default function Layout({ children, pageOpts }: NextraThemeLayoutProps) {
   const { title, frontMatter } = pageOpts
