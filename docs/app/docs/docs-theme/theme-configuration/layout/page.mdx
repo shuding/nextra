@@ -83,10 +83,10 @@ Customize the theme behavior of the website.
 
 <Table>
 
-|            |           |                                                                                                       |
-| ---------- | --------- | ----------------------------------------------------------------------------------------------------- |
-| darkMode   | `boolean` | Show or hide the dark mode toggle button                                                              |
-| nextThemes | `object`  | Configuration for the [next-themes](https://github.com/pacocoursey/next-themes#themeprovider) package |
+|            |                |                                                                                                                                                                                                                                 |
+| ---------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| darkMode   | `boolean{:ts}` | Show or hide the dark mode toggle button. Default: `"true"{:json}`                                                                                                                                                              |
+| nextThemes | `object{:ts}`  | Configuration for the [next-themes](https://github.com/pacocoursey/next-themes#themeprovider) package.<br/>Default: `{ attribute: 'class', defaultTheme: 'system', disableTransitionOnChange: true, storageKey: 'theme' }{:ts}` |
 
 </Table>
 
@@ -264,9 +264,9 @@ export default {
 
 <Table>
 
-|             |                                                       |                             |
-| ----------- | ----------------------------------------------------- | --------------------------- |
-| themeSwitch | `{ light: string; dark: string; light: string }{:ts}` | Options in the theme switch |
+|             |                                                        |                                                                                                     |
+| ----------- | ------------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
+| themeSwitch | `{ light: string; dark: string; system: string }{:ts}` | Options in the theme switch.<br/>Default: `{ light: 'Light', dark: 'Dark', system: 'System' }{:ts}` |
 
 </Table>
 
