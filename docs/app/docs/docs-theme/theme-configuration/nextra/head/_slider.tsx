@@ -77,7 +77,7 @@ export function BackgroundColor() {
           )
         }}
       />
-      <label className="text-sm text-gray-500 w-18" />
+      <label className="text-sm text-gray-500 w-20" />
     </div>
   )
 }

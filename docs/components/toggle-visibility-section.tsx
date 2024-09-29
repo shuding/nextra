@@ -1,7 +1,7 @@
 import { useMDXComponents } from 'nextra-theme-docs'
 import { compileMdx } from 'nextra/compile'
 import { RemoteContent } from 'nextra/components'
-import { FC } from 'react'
+import type { FC } from 'react'
 
 export const ToggleVisibilitySection: FC<{
   element: string
@@ -21,6 +21,7 @@ export default {
 }
 \`\`\``)
   return (
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     <RemoteContent compiledSource={result} components={useMDXComponents()} />
   )
 }

@@ -1,5 +1,5 @@
 import { useMDXComponents } from 'nextra-theme-docs'
-import { FC, ReactNode } from 'react'
+import type { FC, ReactNode } from 'react'
 
 export const Table: FC<{ children: ReactNode }> = ({ children }) => {
   const { table: Table, tr: Tr, th: Th } = useMDXComponents()
