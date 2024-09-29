@@ -1,9 +1,9 @@
 import { Screenshot } from 'components/screenshot'
+import { Table } from 'components/table'
+import { ToggleVisibilitySection } from 'components/toggle-visibility-section'
 import { Callout } from 'nextra/components'
 import navigationImage from 'public/assets/docs/navigation.png'
 import sidebarTitleComponentImage from 'public/assets/docs/sidebar-customized.png'
-import { Table } from 'components/table'
-import { ToggleVisibilitySection } from 'components/toggle-visibility-section'
 
 # `Layout`
 
@@ -149,7 +149,7 @@ of the content.
 
 </Table>
 
-<ToggleVisibilitySection element="last update date" property='timestamp' />
+<ToggleVisibilitySection element="last update date" property="timestamp" />
 
 ## Navigation
 
@@ -181,7 +181,7 @@ navigating between pages.
 
 The above is also equivalent to `navigation: true{:js}`.
 
-<ToggleVisibilitySection element="navigation" property='pagination' />
+<ToggleVisibilitySection element="navigation" property="pagination" />
 
 ## Page Map [!TODO]
 
@@ -236,7 +236,7 @@ export default {
 
 <Screenshot src={sidebarTitleComponentImage} alt="Customized Sidebar" />
 
-<ToggleVisibilitySection element="`<Sidebar>`" property='sidebar' />
+<ToggleVisibilitySection element="`<Sidebar>`" property="sidebar" />
 
 ## Theme Switch
 
@@ -284,4 +284,4 @@ navigating between headings.
 the right side of the page and it will be sticky when scrolling. If it’s
 disabled, the TOC will be displayed directly on the page sidebar.
 
-<ToggleVisibilitySection element="`<TOC>`" property='toc' />
+<ToggleVisibilitySection element="`<TOC>`" property="toc" />
