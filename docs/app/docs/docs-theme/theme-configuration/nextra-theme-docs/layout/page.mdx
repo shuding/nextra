@@ -2,6 +2,7 @@ import { Screenshot } from 'components/screenshot'
 import { Callout } from 'nextra/components'
 import navigationImage from 'public/assets/docs/navigation.png'
 import sidebarTitleComponentImage from 'public/assets/docs/sidebar-customized.png'
+import { Table } from 'components/table'
 
 # `Layout`
 
@@ -33,23 +34,6 @@ Detailed information for each option is listed below.
 
 Set the repository URL of the documentation. It’s used to generate the
 “[Edit this page](#edit-link)” link and the “[Feedback](#feedback-link)” link.
-
-export function Table({ children }) {
-  return (
-    <table className="w-full !table text-sm">
-      <thead>
-        <tr>
-          <th align="left">Option</th>
-          <th align="left">Type</th>
-          <th align="left">Description</th>
-        </tr>
-      </thead>
-      <tbody className="break-words first:[&_td]:font-semibold first:[&_td]:text-violet-600 first:[&_td]:dark:text-violet-500 [&_tr]:!bg-transparent">
-        {children.props.children[1].props.children}
-      </tbody>
-    </table>
-  )
-}
 
 <Table>
 
@@ -142,10 +126,10 @@ Options to configure the language dropdown for
 
 <Table>
 
-|                        |                       |                                                        |
-| ---------------------- | --------------------- | ------------------------------------------------------ |
-| i18n[number].locale    | `string{:ts}`         | Locale from `i18n.locales` field in `next.config` file |
-| i18n[number].name      | `string{:ts}`         | Locale name in dropdown                                |
+|                     |               |                                                        |
+| ------------------- | ------------- | ------------------------------------------------------ |
+| i18n[number].locale | `string{:ts}` | Locale from `i18n.locales` field in `next.config` file |
+| i18n[number].name   | `string{:ts}` | Locale name in dropdown                                |
 
 </Table>
 

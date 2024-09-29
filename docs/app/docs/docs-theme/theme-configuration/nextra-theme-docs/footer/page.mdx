@@ -1,4 +1,5 @@
-import { Table } from '../layout/page.mdx'
+import { Table } from 'components/table'
+import { ToggleVisibilitySection } from 'components/toggle-visibility-section'
 
 # `Footer`
 
@@ -38,17 +39,4 @@ export default function MyLayout({ children, ...props }) {
 }
 ```
 
-### Toggle Visibility
-
-You can toggle visibility of the `<Footer>` on the specific pages by setting
-`theme.footer` property in the `_meta.js` file:
-
-```js filename="_meta.js"
-export default {
-  'my-page': {
-    theme: {
-      footer: false // Hide footer on this page
-    }
-  }
-}
-```
+<ToggleVisibilitySection element="`<Footer>`" property="footer" />
