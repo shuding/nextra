@@ -1,5 +1,5 @@
 import cn from 'clsx'
-import { FC, ReactNode } from 'react'
+import type { FC, ReactNode } from 'react'
 
 export const Screenshot: FC<{ children: ReactNode; full?: boolean }> = ({
   full,
