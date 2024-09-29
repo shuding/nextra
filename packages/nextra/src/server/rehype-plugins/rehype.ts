@@ -50,13 +50,12 @@ export const rehypeParseCodeMeta: Plugin<
   ast => {
     visit(ast, { tagName: 'pre' }, (node: PreElement) => {
       const [codeEl] = node.children as Element[]
-      // @ts-expect-error fixme
       const { meta = '' } = codeEl.data || {}
 
-      node.__filename = meta.match(CODE_BLOCK_FILENAME_REGEX)?.[1]
+      node.__filename = meta!.match(CODE_BLOCK_FILENAME_REGEX)?.[1]
       node.properties['data-filename'] = node.__filename
 
-      node.__hasWordWrap = !meta.includes('word-wrap=false')
+      node.__hasWordWrap = !meta!.includes('word-wrap=false')
       if (node.__hasWordWrap) {
         node.properties['data-word-wrap'] = ''
       }
