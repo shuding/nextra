@@ -3,6 +3,7 @@ import { Callout } from 'nextra/components'
 import navigationImage from 'public/assets/docs/navigation.png'
 import sidebarTitleComponentImage from 'public/assets/docs/sidebar-customized.png'
 import { Table } from 'components/table'
+import { ToggleVisibilitySection } from 'components/toggle-visibility-section'
 
 # `Layout`
 
@@ -70,6 +71,7 @@ Customize the theme behavior of the website.
 
 </Table>
 
+{/*
 ## MDX Components [!TODO]
 
 Provide custom [MDX components](https://mdxjs.com/table-of-components/) to
@@ -83,6 +85,7 @@ code blocks.
 | components | `Record<string, React.FC>` | Custom MDX components |
 
 </Table>
+*/}
 
 ## Edit Link
 
@@ -146,6 +149,8 @@ of the content.
 
 </Table>
 
+<ToggleVisibilitySection element="last update date" property='timestamp' />
+
 ## Navigation
 
 Show previous and next page links on the bottom of the content. It’s useful for
@@ -175,6 +180,8 @@ navigating between pages.
 ```
 
 The above is also equivalent to `navigation: true{:js}`.
+
+<ToggleVisibilitySection element="navigation" property='pagination' />
 
 ## Page Map [!TODO]
 
@@ -229,6 +236,8 @@ export default {
 
 <Screenshot src={sidebarTitleComponentImage} alt="Customized Sidebar" />
 
+<ToggleVisibilitySection element="`<Sidebar>`" property='sidebar' />
+
 ## Theme Switch
 
 <Table>
@@ -274,3 +283,5 @@ navigating between headings.
 `toc.float` is enabled by default. When enabled, the TOC will be displayed on
 the right side of the page and it will be sticky when scrolling. If it’s
 disabled, the TOC will be displayed directly on the page sidebar.
+
+<ToggleVisibilitySection element="`<TOC>`" property='toc' />

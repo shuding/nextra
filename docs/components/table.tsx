@@ -1,18 +1,20 @@
+import { useMDXComponents } from 'nextra-theme-docs'
 import { FC, ReactNode } from 'react'
 
 export const Table: FC<{ children: ReactNode }> = ({ children }) => {
+  const { table: Table, tr: Tr, th: Th } = useMDXComponents()
   return (
-    <table className="w-full !table text-sm">
+    <Table className="w-full !table text-sm">
       <thead>
-        <tr>
-          <th align="left">Option</th>
-          <th align="left">Type</th>
-          <th align="left">Description</th>
-        </tr>
+        <Tr>
+          <Th align="left">Option</Th>
+          <Th align="left">Type</Th>
+          <Th align="left">Description</Th>
+        </Tr>
       </thead>
       <tbody className="break-words first:[&_td]:font-semibold first:[&_td]:text-violet-600 first:[&_td]:dark:text-violet-500 [&_tr]:!bg-transparent">
         {(children as any).props.children[1].props.children}
       </tbody>
-    </table>
+    </Table>
   )
 }
