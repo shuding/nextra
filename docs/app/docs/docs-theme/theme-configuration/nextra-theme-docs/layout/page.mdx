@@ -2,8 +2,6 @@ import { Screenshot } from 'components/screenshot'
 import { Table } from 'components/table'
 import { ToggleVisibilitySection } from 'components/toggle-visibility-section'
 import { Callout } from 'nextra/components'
-import navigationImage from 'public/assets/docs/navigation.png'
-import sidebarTitleComponentImage from 'public/assets/docs/sidebar-customized.png'
 
 # `Layout`
 
@@ -164,7 +162,9 @@ navigating between pages.
 
 </Table>
 
-<Screenshot src={navigationImage} alt="Navigation" full />
+<Screenshot>
+  <>![Navigation](/assets/docs/navigation.png)</>
+</Screenshot>
 
 ```jsx filename="app/layout.jsx"
 <Layout
@@ -232,7 +232,9 @@ export default {
 }
 ```
 
-<Screenshot src={sidebarTitleComponentImage} alt="Customized Sidebar" />
+<Screenshot>
+<>![Customized Sidebar](/assets/docs/sidebar-customized.png)</>
+</Screenshot>
 
 <ToggleVisibilitySection element="`<Sidebar>`" property="sidebar" />
 
