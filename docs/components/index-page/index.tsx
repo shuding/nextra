@@ -381,7 +381,7 @@ export const IndexPage = () => (
                 textShadow: '0 2px 4px rgb(0 0 0 / 20%)'
               }}
             >
-              <Link href="https://mdxjs.com/blog/v2" className="text-current">
+              <Link href="https://mdxjs.com/blog/v3" className="text-current">
                 MDX 3
               </Link>{' '}
               lets you use Components inside Markdown,{' '}
