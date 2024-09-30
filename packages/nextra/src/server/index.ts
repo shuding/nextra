@@ -1,5 +1,5 @@
 /* eslint-env node */
-import { sep } from 'node:path'
+import { join, sep } from 'node:path'
 import type { NextConfig } from 'next'
 import { fromZodError } from 'zod-validation-error'
 import type { Nextra } from '../types'
@@ -121,17 +121,20 @@ const nextra: Nextra = nextraConfig => {
             )
           }
         }
-        const appAlias = config.resolve.alias['private-next-pages/_app']
+        config.resolve.alias = { ...config.resolve.alias }
+        const { alias } = config.resolve
+
+        const appAlias = alias['private-next-pages/_app']
+        const appESM = 'next/dist/esm/pages/_app'
         if (appAlias) {
-          config.resolve.alias = {
-            ...config.resolve.alias,
-            'private-next-pages/_app': [
-              // Cut last element which points to CJS _app file
-              ...appAlias.slice(0, -1),
-              // Resolves ESM _app file instead CJS, so we could import `theme.config` via `import` statement
-              'next/dist/esm/pages/_app.js'
-            ]
-          }
+          alias['private-next-pages/_app'] = [
+            // Cut last element which points to CJS _app file
+            ...appAlias.slice(0, -1),
+            // Resolves ESM _app file instead CJS, so we could import `theme.config` via `import` statement
+            appESM
+          ]
+        } else {
+          alias[join(alias.next, 'dist', 'pages', '_app')] = appESM
         }
         const rules = config.module.rules as RuleSetRule[]
 
