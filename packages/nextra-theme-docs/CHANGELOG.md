@@ -1,5 +1,51 @@
 # nextra-theme-docs
 
+## 4.0.0-app-router.4
+
+### Major Changes
+
+- 17e6da5: remove `i18n.direction` option
+- 0faa569: replace `gitTimestamp` option with `lastUpdated`
+
+  replace `editLink.content` option with `editLink`
+
+- 17e6da5: document removed theme config options
+
+  - `main`
+  - `direction`
+  - `toc.component`
+  - `themeSwitch.component`
+  - `themeSwitch.useOptions`
+  - `search.component`
+  - `feedback.useLink`
+  - `banner.dismissible`
+  - `banner.key`
+  - `banner.content`
+  - `footer.content`
+  - `footer.component`
+  - `head`
+  - `navbar.component`
+  - `navbar.extraContent`
+  - `project.link`
+  - `project.icon`
+  - `chat.link`
+  - `chat.icon`
+  - `search.emptyResult`
+  - `search.loading`
+  - `search.errorText`
+  - `search.placeholder`
+  - `search.className`
+
+  refactor `themeSwitch.useOptions` to `themeSwitch` option
+
+  refactor `editLink.content` to `editLink` option
+
+  rename Search prop `error` to `errorText`
+
+### Patch Changes
+
+- nextra@4.0.0-app-router.4
+
 ## 4.0.0-app-router.3
 
 ### Major Changes
