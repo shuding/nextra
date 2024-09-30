@@ -72,6 +72,15 @@
 - Updated dependencies [99f34d3]
   - nextra@4.0.0-app-router.0
 
+## 3.0.2
+
+### Patch Changes
+
+- 991b69a: handle empty `item.route` in `<FolderImpl` in `<Sidebar>` for
+  `item.type: 'menu'`
+- Updated dependencies [b6341f7]
+  - nextra@3.0.2
+
 ## 3.0.1
 
 ### Patch Changes
