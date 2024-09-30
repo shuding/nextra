@@ -1,5 +1,7 @@
 # nextra
 
+## 4.0.0-app-router.4
+
 ## 4.0.0-app-router.3
 
 ### Major Changes
