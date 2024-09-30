@@ -207,7 +207,7 @@ useSWR(['/api/user', { id: '73' }], fetcher, { use: [serialize] })
 <SWRConfig value={{ use: [serialize] }}>
 ```
 
-You don’t need to worry that object might change between renders. It’s always
+You don't need to worry that object might change between renders. It's always
 serialized to the same string, and the fetcher will still receive those object
 arguments.
 

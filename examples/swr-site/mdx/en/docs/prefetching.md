@@ -2,7 +2,7 @@
 
 ## Top-Level Page Data
 
-There’re many ways to prefetch the data for SWR. For top level requests,
+There're many ways to prefetch the data for SWR. For top level requests,
 [`rel="preload"`](https://developer.mozilla.org/en-US/docs/Web/HTML/Preloading_content)
 is highly recommended:
 
@@ -10,7 +10,7 @@ is highly recommended:
 <link rel="preload" href="/api/data" as="fetch" crossorigin="anonymous" />
 ```
 
-Just put it inside your HTML `<head>`. It’s easy, fast and native.
+Just put it inside your HTML `<head>`. It's easy, fast and native.
 
 It will prefetch the data when the HTML loads, even before JavaScript starts to
 download. All your incoming fetch requests with the same URL will reuse the

@@ -7,7 +7,7 @@ a revalidation message globally to other SWR hooks<sup>\*</sup> using the same
 key by calling `mutate(key)`.
 
 This example shows how to automatically refetch the login info (e.g. inside
-`<Profile>`) when the user clicks the “Logout” button.
+`<Profile>`) when the user clicks the "Logout" button.
 
 ```jsx
 import useSWR, { useSWRConfig } from 'swr'
@@ -81,9 +81,9 @@ Clicking the button in the example above will locally update the client data,
 send a POST request to modify the remote data and try to fetch the latest one
 (revalidate).
 
-But many POST APIs will just return the updated data directly, so we don’t need
-to revalidate again. Here’s an example showing the “local mutate - request -
-update” usage:
+But many POST APIs will just return the updated data directly, so we don't need
+to revalidate again. Here's an example showing the "local mutate - request -
+update" usage:
 
 ```jsx
 mutate('/api/user', newUser, false) // use `false` to mutate without revalidation
