@@ -72,8 +72,10 @@ type FolderProps = {
 function FolderImpl({ item, anchors, onFocus }: FolderProps): ReactElement {
   const routeOriginal = useFSRoute()
   const [route] = routeOriginal.split('#')
-  const active = [route, route + '/'].includes(item.route + '/')
-  const activeRouteInside = active || route.startsWith(item.route + '/')
+  const hasRoute = !!item.route // for item.type === 'menu' will be ''
+  const active = hasRoute && [route, route + '/'].includes(item.route + '/')
+  const activeRouteInside =
+    active || (hasRoute && route.startsWith(item.route + '/'))
 
   const focusedRoute = useContext(FocusedItemContext)
   const focusedRouteInside = focusedRoute.startsWith(item.route + '/')
@@ -130,7 +132,6 @@ function FolderImpl({ item, anchors, onFocus }: FolderProps): ReactElement {
     item.children = Object.entries(menu.items || {}).map(([key, item]) => {
       const route = routes[key] || {
         name: key,
-        ...('locale' in menu && { locale: menu.locale }),
         route: menu.route + '/' + key
       }
       return {
