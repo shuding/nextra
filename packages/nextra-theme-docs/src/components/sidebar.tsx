@@ -72,8 +72,10 @@ type FolderProps = {
 function FolderImpl({ item, anchors, onFocus }: FolderProps): ReactElement {
   const routeOriginal = useFSRoute()
   const [route] = routeOriginal.split('#')
-  const active = [route, route + '/'].includes(item.route + '/')
-  const activeRouteInside = active || route.startsWith(item.route + '/')
+  const active = !!item.route && [route, route + '/'].includes(item.route + '/')
+  const activeRouteInside =
+    active ||
+    (route !== '/' && item.route !== '' && route.startsWith(item.route + '/'))
 
   const focusedRoute = useContext(FocusedItemContext)
   const focusedRouteInside = focusedRoute.startsWith(item.route + '/')
