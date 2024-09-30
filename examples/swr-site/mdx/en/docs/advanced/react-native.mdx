@@ -7,10 +7,10 @@ import { Callout } from 'nextra/components'
 </Callout>
 
 Unlike React running inside the browsers, React Native has a very different user
-experience. For example there is no “tab focus”, switching from the background
-to the app is considered as a “focus” instead. To customize these behaviors, you
+experience. For example there is no "tab focus", switching from the background
+to the app is considered as a "focus" instead. To customize these behaviors, you
 can replace the default browser `focus` and `online` events listeners with React
-Native’s app state detection and other native ported API, and configure SWR to
+Native's app state detection and other native ported API, and configure SWR to
 use them.
 
 ## Example
@@ -22,7 +22,7 @@ You can wrap your app under `SWRConfig` and preconfig all configurations there
 ```jsx
 <SWRConfig
   value={{
-    /* ... */
+    // ...
   }}
 >
   <App>

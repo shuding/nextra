@@ -87,7 +87,7 @@ export const TagName = () => {
   return tag || null
 }
 
-# Posts Tagged with “<TagName/>”
+# Posts Tagged with "<TagName/>"
     `,
       { mdxOptions }
     )

@@ -10,7 +10,6 @@ navigation bar and the sidebar.
 import { Screenshot } from 'components/screenshot'
 import { Video } from 'components/video'
 import { Callout, FileTree } from 'nextra/components'
-import menuImage from 'public/assets/docs/menu.png'
 
 <Callout>
   Read more about Nextra's `_meta.js` files
@@ -244,7 +243,9 @@ You can also hide links like `Home` from the navbar with the
 You can also add menus to the navbar using `"type": "menu"` and the `"items"`
 option:
 
-<Screenshot src={menuImage} alt="Navbar menu" />
+<Screenshot>
+  <>![Navbar menu](/assets/docs/menu.png)</>
+</Screenshot>
 
 <div className="mt-8 text-center text-sm">
   [Live example on StackBlitz

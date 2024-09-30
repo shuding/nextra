@@ -61,9 +61,9 @@ exports[`Process heading > dynamic-h1 1`] = `
   "result": "/*@jsxRuntime automatic*/
 /*@jsxImportSource react*/
 import { useMDXComponents as _provideComponents } from 'nextra/mdx'
-export const title = 'Posts Tagged with “”'
+export const title = 'Posts Tagged with ""'
 export const metadata = {
-  title: 'Posts Tagged with “”'
+  title: 'Posts Tagged with ""'
 }
 import { useRouter } from 'next/router'
 export const TagName = () => {
@@ -81,14 +81,14 @@ function MDXLayout(props) {
   }
   return (
     <_components.h1>
-      {'Posts Tagged with “'}
+      {'Posts Tagged with "'}
       <TagName />
-      {'”'}
+      {'"'}
     </_components.h1>
   )
 }
 ",
-  "title": "Posts Tagged with “”",
+  "title": "Posts Tagged with """,
 }
 `;
 

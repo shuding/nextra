@@ -74,7 +74,7 @@ export default async function RootLayout({ children, params: { lang } }) {
           docsRepositoryBase="https://github.com/shuding/nextra/blob/core/examples/swr-site"
           i18n={[
             { locale: 'en', name: 'English' },
-            { direction: 'rtl', locale: 'es', name: 'Español RTL' },
+            { locale: 'es', name: 'Español RTL' },
             { locale: 'ru', name: 'Русский' }
           ]}
           sidebar={{
@@ -91,6 +91,11 @@ export default async function RootLayout({ children, params: { lang } }) {
           pageMap={pageMap}
           nextThemes={{ defaultTheme: 'dark' }}
           lastUpdated={<LastUpdated>{dictionary.lastUpdated}</LastUpdated>}
+          themeSwitch={{
+            dark: dictionary.dark,
+            light: dictionary.light,
+            system: dictionary.system
+          }}
         >
           <Banner storageKey="swr-2">SWR 2.0 is out! Read more →</Banner>
           <Navbar

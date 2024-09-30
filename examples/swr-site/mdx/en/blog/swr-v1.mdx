@@ -22,7 +22,7 @@ Almost 2 years ago we
 tiny data-fetching React library that people love. Today we are reaching another
 milestone: the 1.0 version of SWR!
 
-## What’s New
+## What's New
 
 ### Smaller Size
 
@@ -37,7 +37,7 @@ existing features**:
 There are many reasons to make the library lightweight: your application will
 have a smaller bundle, a leaner runtime, and a smaller `node_modules` directory.
 
-We’ve also improved the bundling of the package, and it now supports path
+We've also improved the bundling of the package, and it now supports path
 imports:
 
 ```js
@@ -50,18 +50,25 @@ application.
 
 ### Fallback Data
 
-In 1.0, there’s a new `fallback` option that you can provide any pre-fetched
+In 1.0, there's a new `fallback` option that you can provide any pre-fetched
 data as the initial value of all SWR hooks with specific keys:
 
 ```jsx
-<SWRConfig value={{
-  fallback: {
-    '/api/user': { name: 'Bob', ... },
-    '/api/items': ...,
-    ...
-  }
-}}>
-  <App/>
+<SWRConfig
+  value={{
+    fallback: {
+      '/api/user': {
+        name: 'Bob'
+        // ...
+      },
+      '/api/items': {
+        // ...
+      }
+      // ...
+    }
+  }}
+>
+  <App />
 </SWRConfig>
 ```
 
@@ -167,7 +174,7 @@ Since 0.x, we've made hundreds of small improvements and bugfixes. SWR now has
 
 Thanks to our
 [contributors](https://github.com/vercel/swr-site/graphs/contributors) and
-Nextra’s [i18n feature](https://nextra.site/docs/guide/i18n), we now offer SWR
+Nextra's [i18n feature](https://nextra.site/docs/guide/i18n), we now offer SWR
 documentation in six different languages:
 
 - [English](https://swr.vercel.app)
@@ -286,7 +293,7 @@ be aware of the following changes:
 
 Read the full Changelog [on GitHub](https://github.com/vercel/swr/releases).
 
-## What’s Next
+## What's Next
 
 In future releases, we will keep improving the library while maintaining the
 stability. We are also aiming to embrace future React versions, as several new

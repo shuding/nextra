@@ -207,7 +207,7 @@
 - a8c2196: use dynamic import for loading `mermaid`
 - 0b5cc9d: make nextra compatible with windows
 - 7b0b7e9: fix page scroll jump while entering characters in the search input
-- 45471df: fix “Scroll to top” is not supposed to be interactable when it is
+- 45471df: fix "Scroll to top" is not supposed to be interactable when it is
   hidden.
 
   `display:children` doesn't collapse breadcrumbs
@@ -712,7 +712,7 @@
 
 ### Patch Changes
 
-- 45471df5: fix “Scroll to top” is not supposed to be interactable when it is
+- 45471df5: fix "Scroll to top" is not supposed to be interactable when it is
   hidden.
 
   `display:children` doesn't collapse breadcrumbs
