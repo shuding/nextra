@@ -1,4 +1,6 @@
 /* eslint-env node */
+import fs from 'node:fs'
+import { createRequire } from 'node:module'
 import { join, sep } from 'node:path'
 import type { NextConfig } from 'next'
 import { fromZodError } from 'zod-validation-error'
@@ -19,6 +21,8 @@ import { NextraPlugin, NextraSearchPlugin } from './webpack-plugins/index.js'
 const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
 
 const AGNOSTIC_PAGE_MAP_PATH = `.next${sep}static${sep}chunks${sep}nextra-page-map`
+
+const require = createRequire(import.meta.url)
 
 const nextra: Nextra = nextraConfig => {
   const { error } = nextraConfigSchema.safeParse(nextraConfig)
@@ -136,7 +140,13 @@ const nextra: Nextra = nextraConfig => {
         } else {
           alias[join(alias.next, 'dist', 'pages', '_app')] = appESM
         }
+        // alias[require.resolve('@typescript/vfs')] = require.resolve('@typescript/vfs/dist/vfs.esm.patched.js')
+        // alias[require.resolve('@typescript/vfs/dist/vfs.cjs.development.js')] = require.resolve('@typescript/vfs/dist/vfs.cjs.development.patched.js')
+        // alias[require.resolve('@typescript/vfs/dist/vfs.cjs.production.min.js')] = require.resolve('@typescript/vfs/dist/vfs.cjs.production.min.patched.js')
+        // alias[require.resolve('@typescript/vfs/dist/vfs.esm.js')] = require.resolve('@typescript/vfs/dist/vfs.esm.patched.js')
         const rules = config.module.rules as RuleSetRule[]
+
+        patchTypeScriptVfs()
 
         if (IMPORT_FRONTMATTER) {
           rules.push({
@@ -226,3 +236,30 @@ type RuleSetRule = {
 export default nextra
 
 export type * from '../types'
+
+let isTsVfsPatched = false
+
+function patchTypeScriptVfs(): void {
+  if (isTsVfsPatched) return
+  const tsVfs = require.resolve('@typescript/vfs')
+  const tsVfsDir = join(tsVfs, '..')
+
+  const paths = {
+    dev: join(tsVfsDir, 'vfs.cjs.development.js'),
+    prod: join(tsVfsDir, 'vfs.cjs.production.min.js'),
+    esm: join(tsVfsDir, 'vfs.esm.js')
+  }
+
+  for (const filePath of Object.values(paths)) {
+    const sourceCode = fs.readFileSync(filePath, 'utf8')
+    if (sourceCode.includes('String.fromCharCode')) {
+      fs.writeFileSync(
+        filePath, //.replace(/\.js$/, '.patched.js'),
+        sourceCode
+          .replace(/String\.fromCharCode\(112, ?97, ?116, ?104\)/, '"path"')
+          .replace(/String\.fromCharCode\(102, ?115\)/, '"fs"')
+      )
+    }
+  }
+  isTsVfsPatched = true
+}
