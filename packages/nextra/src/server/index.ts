@@ -1,5 +1,4 @@
 /* eslint-env node */
-import { createRequire } from 'node:module'
 import { sep } from 'node:path'
 import type { NextConfig } from 'next'
 import { fromZodError } from 'zod-validation-error'
@@ -18,8 +17,6 @@ import { logger } from './utils.js'
 import { NextraPlugin, NextraSearchPlugin } from './webpack-plugins/index.js'
 
 const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
-
-const require = createRequire(import.meta.url)
 
 const AGNOSTIC_PAGE_MAP_PATH = `.next${sep}static${sep}chunks${sep}nextra-page-map`
 
@@ -125,13 +122,14 @@ const nextra: Nextra = nextraConfig => {
           }
         }
 
-        const defaultESMAppPath = require.resolve('next/dist/esm/pages/_app.js')
-        const defaultCJSAppPath = require.resolve('next/dist/pages/_app.js')
-
         config.resolve.alias = {
           ...config.resolve.alias,
-          // Resolves ESM _app file instead cjs, so we could import theme.config via `import` statement
-          [defaultCJSAppPath]: defaultESMAppPath
+          'private-next-pages/_app': [
+            // Cut last element which points to CJS _app file
+            ...config.resolve.alias['private-next-pages/_app'].slice(0, -1),
+            // Resolves ESM _app file instead CJS, so we could import `theme.config` via `import` statement
+            'next/dist/esm/pages/_app.js'
+          ]
         }
         const rules = config.module.rules as RuleSetRule[]
 
