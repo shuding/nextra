@@ -121,15 +121,17 @@ const nextra: Nextra = nextraConfig => {
             )
           }
         }
-
-        config.resolve.alias = {
-          ...config.resolve.alias,
-          'private-next-pages/_app': [
-            // Cut last element which points to CJS _app file
-            ...config.resolve.alias['private-next-pages/_app'].slice(0, -1),
-            // Resolves ESM _app file instead CJS, so we could import `theme.config` via `import` statement
-            'next/dist/esm/pages/_app.js'
-          ]
+        const appAlias = config.resolve.alias['private-next-pages/_app']
+        if (appAlias) {
+          config.resolve.alias = {
+            ...config.resolve.alias,
+            'private-next-pages/_app': [
+              // Cut last element which points to CJS _app file
+              ...appAlias.slice(0, -1),
+              // Resolves ESM _app file instead CJS, so we could import `theme.config` via `import` statement
+              'next/dist/esm/pages/_app.js'
+            ]
+          }
         }
         const rules = config.module.rules as RuleSetRule[]
 
