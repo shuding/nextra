@@ -54,14 +54,21 @@ In 1.0, there's a new `fallback` option that you can provide any pre-fetched
 data as the initial value of all SWR hooks with specific keys:
 
 ```jsx
-<SWRConfig value={{
-  fallback: {
-    '/api/user': { name: 'Bob', ... },
-    '/api/items': ...,
-    ...
-  }
-}}>
-  <App/>
+<SWRConfig
+  value={{
+    fallback: {
+      '/api/user': {
+        name: 'Bob'
+        // ...
+      },
+      '/api/items': {
+        // ...
+      }
+      // ...
+    }
+  }}
+>
+  <App />
 </SWRConfig>
 ```
 
