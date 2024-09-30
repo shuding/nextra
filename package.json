@@ -55,8 +55,8 @@
       "next": "14.2.13",
       "react": "18.3.1",
       "react-dom": "18.3.1",
-      "@shikijs/twoslash": "1.21.0",
-      "shiki": "1.21.0"
+      "@shikijs/twoslash": "1.17.7",
+      "shiki": "1.17.7"
     },
     "patchedDependencies": {
       "eslint-plugin-deprecation@3.0.0": "patches/eslint-plugin-deprecation@3.0.0.patch",
