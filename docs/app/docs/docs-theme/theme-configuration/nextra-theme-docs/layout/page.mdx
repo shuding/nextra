@@ -46,7 +46,7 @@ Set the repository URL of the documentation. It’s used to generate the
 
 If the documentation is inside a monorepo, a subfolder, or a different branch of
 the repository, you can simply set the `docsRepositoryBase` to the root path of
-the `app/` folder of your docs. For example:
+the `app/` (App Router) folder of your docs. For example:
 
 ```jsx filename="app/layout.jsx"
 <Layout docsRepositoryBase="https://github.com/shuding/nextra/tree/main/docs">
@@ -85,7 +85,7 @@ code blocks.
 
 ## Edit Link
 
-Show an “Edit this page” link on the page that points to the file URL on GitHub
+Show an "Edit this page" link on the page that points to the file URL on GitHub
 (or other places).
 
 <Table>
@@ -101,7 +101,7 @@ Show an “Edit this page” link on the page that points to the file URL on Git
 ## Feedback Link
 
 The built-in feedback link provides a way for users to submit feedback about the
-documentation. By default, it’s a link that points to the issue creation form of
+documentation. By default, it's a link that points to the issue creation form of
 the docs repository, with the current website title prefilled:
 [example](https://github.com/shuding/nextra/issues/new?title=Feedback%20for%20%E2%80%9CTheme%20Configuration%E2%80%9D&labels=feedback).
 
@@ -134,7 +134,7 @@ Options to configure the language dropdown for
 
 ## Last Updated Date
 
-Show the last updated date of each page. It’s useful for showing the freshness
+Show the last updated date of a page. It's useful for showing the freshness
 of the content.
 
 <Table>
@@ -149,7 +149,7 @@ of the content.
 
 ## Navigation
 
-Show previous and next page links on the bottom of the content. It’s useful for
+Show previous and next page links on the bottom of the content. It's useful for
 navigating between pages.
 
 <Table>
@@ -264,7 +264,7 @@ You are able to customize the option names for localization or other purposes:
 
 ## Table of Contents (TOC) Sidebar
 
-Show a table of contents on the right side of the page. It’s useful for
+Show a table of contents on the right side of the page. It's useful for
 navigating between headings.
 
 <Table>
@@ -280,8 +280,8 @@ navigating between headings.
 
 ### Floating TOC
 
-`toc.float` is enabled by default. When enabled, the TOC will be displayed on
-the right side of the page and it will be sticky when scrolling. If it’s
-disabled, the TOC will be displayed directly on the page sidebar.
+When enabled, the TOC will be displayed on the right side of the page, and it
+will be sticky when scrolling. If it's disabled, the TOC will be displayed
+directly on the page sidebar.
 
 <ToggleVisibilitySection element="`<TOC>`" property="toc" />
